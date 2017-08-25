@@ -303,7 +303,7 @@ function admin_user_users(&$engine, &$module)
 					$engine->remove_watches				($user_space, true);
 					$engine->remove_ratings				($user_space, true);
 					$engine->remove_comments			($user_space, true, true); // dontkeep
-					$engine->remove_files				($user_space, true);
+					$engine->remove_files_perpage		($user_space, true);
 					$engine->remove_revisions			($user_space, true);
 
 					$engine->db->sql_query(

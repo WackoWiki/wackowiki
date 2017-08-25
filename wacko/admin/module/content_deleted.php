@@ -32,18 +32,13 @@ $type = (isset($_GET['type']) && $_GET['type'] ? $_GET['type'] : OBJECT_PAGE);
 
 if ($type == OBJECT_PAGE)
 {
-	// clear specific page revisions
+	// clear specific page, revisions and attached files
 	if (isset($_GET['remove']))
 	{
 		$page_id = (int) $_GET['remove'];
-		$engine->db->sql_query(
-			"DELETE FROM " . $engine->db->table_prefix . "revision " .
-			"WHERE page_id = '" . $page_id . "' ");
 
-		$engine->db->sql_query(
-			"DELETE FROM " . $engine->db->table_prefix . "page " .
-			"WHERE page_id = '" . $page_id . "' " .
-				"AND deleted = '1'");
+		$engine->delete_pages([$page_id]);
+		#$engine->remove_files_perpage($tag, false, true);
 
 		$engine->db->sql_query(
 			"DELETE FROM " . $engine->db->table_prefix . "file " .

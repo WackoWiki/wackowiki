@@ -7224,19 +7224,6 @@ class Wacko
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}
 
-	function restore_files_perpage($page_id)
-	{
-		if (!$page_id)
-		{
-			return false;
-		}
-
-		$this->db->sql_query(
-			"UPDATE " . $this->db->table_prefix . "file SET " .
-				"deleted	= '0' " .
-			"WHERE page_id = '" . (int) $page_id . "'");
-	}
-
 	function restore_file($file_id)
 	{
 		if (!$file_id)
@@ -7248,6 +7235,19 @@ class Wacko
 			"UPDATE " . $this->db->table_prefix . "file SET " .
 				"deleted	= '0' " .
 			"WHERE file_id = '" . (int) $file_id . "'");
+	}
+
+	function restore_files_perpage($page_id)
+	{
+		if (!$page_id)
+		{
+			return false;
+		}
+
+		$this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "file SET " .
+				"deleted	= '0' " .
+			"WHERE page_id = '" . (int) $page_id . "'");
 	}
 
 	// ADDITIONAL METHODS
