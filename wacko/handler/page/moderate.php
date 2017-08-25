@@ -42,7 +42,7 @@ function moderate_delete_page(&$engine, $tag)
 	$engine->remove_ratings($tag);
 	$engine->remove_page_categories($tag);
 	$engine->remove_comments($tag);
-	$engine->remove_files($tag);
+	$engine->remove_files_perpage($tag);
 	$engine->remove_page($engine->get_page_id($tag));
 
 	return true;
