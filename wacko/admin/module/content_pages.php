@@ -37,26 +37,11 @@ function admin_content_pages(&$engine, &$module)
 		$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'])));
 	}
 
-	if (isset($_POST['update']) || isset($_GET['tag_mod']))
+	if (isset($_POST['update']))
 	{
-		$_tag_mod	= isset($_POST['tag_mod']) ? $_POST['tag_mod'] : (isset($_GET['tag_mod']) ? $_GET['tag_mod'] : '');
 		$_lang		= isset($_POST['level']) ? $_POST['level'] : (isset($_GET['level']) ? $_GET['level'] : '');
 
-		// level filtering
-		switch ($_tag_mod)
-		{
-			case 'not_lower':
-				$mod = '<=';
-				break;
-			case 'not_higher':
-				$mod = '>=';
-				break;
-			case 'equal':
-				$mod = '=';
-				break;
-		}
-
-		$where = "WHERE p.page_lang $mod " . $engine->db->q($_lang) . " ";
+		$where = "WHERE p.page_lang " . $engine->db->q($_lang) . " ";
 	}
 
 	// set time ordering
@@ -134,12 +119,10 @@ function admin_content_pages(&$engine, &$module)
 
 	$_order					= isset($_GET['order'])		? $_GET['order']		: '';
 	$_lang					= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
-	$_tag_mod				= isset($_GET['tag_mod'])	? $_GET['tag_mod']	: (isset($_POST['tag_mod'])	? $_POST['tag_mod']	: '');
 	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : [];
-	$tag_pagination		= !empty($_lang)		? ['level' => (int) $_lang] : [];
-	$tag_mod_pagination	= !empty($_tag_mod)		? ['tag_mod' => (int) $_tag_mod] : [];
+	$tag_pagination			= !empty($_lang)		? ['level' => (int) $_lang] : [];
 
-	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination + $tag_pagination + $tag_mod_pagination, '', 'admin.php');
+	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination + $tag_pagination, '', 'admin.php');
 
 	$pages = $engine->db->load_all(
 		"SELECT p.*, length(body) as page_size, u.* " .
@@ -154,13 +137,6 @@ function admin_content_pages(&$engine, &$module)
 ?>
 		<div>
 			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br />
-			<?php echo $engine->_t('LogLevel'); ?>
-
-			<select name="tag_mod">
-				<option value="not_lower"<?php echo ( !isset($_POST['tag_mod']) || (isset($_POST['tag_mod']) && $_POST['tag_mod'] == 'not_lower') ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelNotLower'); ?></option>
-				<option value="not_higher"<?php echo ( isset($_POST['tag_mod']) && $_POST['tag_mod'] == 'not_higher' ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelNotHigher'); ?></option>
-				<option value="equal"<?php echo ( isset($_POST['tag_mod']) && $_POST['tag_mod'] == 'equal' ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelEqual'); ?></option>
-			</select>
 
 <?php
 		// FIXME: add a common function for this?
@@ -187,7 +163,6 @@ function admin_content_pages(&$engine, &$module)
 
 		echo "</select>\n";
 ?>
-
 			<input type="submit" name="update" id="submit" value="update" />
 			<input type="submit" name="reset" id="submit" value="reset" />
 		</div>
@@ -208,32 +183,6 @@ function admin_content_pages(&$engine, &$module)
 	{
 		foreach ($pages as $row)
 		{
-			// level highlighting
-			/* if ($row['level'] == 1)
-			{
-				$row['level'] = '<strong class="red">' . $engine->_t('LogLevel1') . '</strong>';
-			}
-			else if ($row['level'] == 2)
-			{
-				$row['level'] = '<span class="red">' . $engine->_t('LogLevel2') . '</span>';
-			}
-			else if ($row['level'] == 3)
-			{
-				$row['level'] = '<strong>' . $engine->_t('LogLevel3') . '</strong>';
-			}
-			else if ($row['level'] == 4)
-			{
-				$row['level'] = $engine->_t('LogLevel' . $row['level']);
-			}
-			else if ($row['level'] == 5)
-			{
-				$row['level'] = '<small>' . $engine->_t('LogLevel' . $row['level']) . '</small>';
-			}
-			else if ($row['level'] > 5)
-			{
-				$row['level'] = '<small class="grey">' . $engine->_t('LogLevel' . $row['level']) . '</small>';
-			}
- */
 			// tz offset
 			$time_tz = $engine->sql2precisetime($row['modified']);
 
