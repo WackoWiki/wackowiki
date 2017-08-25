@@ -27,41 +27,74 @@ function admin_content_deleted(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br />
 <?php
+
+$type = (isset($_GET['type']) && $_GET['type'] ? $_GET['type'] : OBJECT_PAGE);
+
+if ($type == OBJECT_PAGE)
+{
 	// clear specific page revisions
 	if (isset($_GET['remove']))
 	{
-		$id = (int) $_GET['remove'];
+		$page_id = (int) $_GET['remove'];
 		$engine->db->sql_query(
 			"DELETE FROM " . $engine->db->table_prefix . "revision " .
-			"WHERE page_id = '" . $id . "' ");
+			"WHERE page_id = '" . $page_id . "' ");
 
 		$engine->db->sql_query(
 			"DELETE FROM " . $engine->db->table_prefix . "page " .
-			"WHERE page_id = '" . $id . "' " .
+			"WHERE page_id = '" . $page_id . "' " .
 				"AND deleted = '1'");
 
 		$engine->db->sql_query(
 			"DELETE FROM " . $engine->db->table_prefix . "file " .
-			"WHERE page_id = '" . $id . "'");
+			"WHERE page_id = '" . $page_id . "'");
 	}
 
-	// restore specific page revisions
+	// restore a specific page
 	if (isset($_GET['restore']))
 	{
 		$id = (int) $_GET['restore'];
 		$engine->restore_page($id);
-		$engine->restore_file($id);
+		$engine->restore_files_perpage($id);
 	}
+}
+else if ($type == OBJECT_FILE)
+{
+	if (isset($_GET['remove']))
+	{
+		$file_id = (int) $_GET['remove'];
+
+		$engine->remove_file($file_id, true);
+	}
+
+	// restore specific file
+	if (isset($_GET['restore']))
+	{
+		$file_id = (int) $_GET['restore'];
+		$engine->restore_file($file_id);
+	}
+}
 
 ?>
 	<p>
-		List of removed pages and copies which were in the table revision.
-		Finally remove or restore the pages from the database by clicking on the link <em>Remove</em>
+		List of removed pages and files.
+		Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
 		or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)
 	</p>
 <?php
 
-	if (isset($_GET['type']) && $_GET['type'] == OBJECT_FILE)
+	$filter_type =
+		'<p class="right">' .
+		($type == OBJECT_PAGE
+			? '<span class="active">' . $engine->_t('UsersPages') . '</span>'
+			: '<a href="' . $engine->href() . '&amp;type=' . OBJECT_PAGE . '">' . $engine->_t('UsersPages') . '</a>' ) .
+		($type == OBJECT_FILE
+			? ' | <span class="active">' . $engine->_t('Files') . '</span>'
+			: ' | <a href="' . $engine->href() . '&amp;type=' . OBJECT_FILE . '">' . $engine->_t('Files') . '</a>') .
+		'</p>';
+
+
+	if ($type == OBJECT_FILE)
 	{
 		list($files, $pagination) = $engine->load_deleted_files(50, false);
 	}
@@ -70,13 +103,17 @@ function admin_content_deleted(&$engine, &$module)
 		list($pages, $pagination) = $engine->load_deleted_pages(50, false);
 	}
 
+	echo $filter_type;
+
 	if (isset($pages))
 	{
 		$engine->print_pagination($pagination);
 
 		echo '<table>';
 
-		$curday = '';
+		$_type	= '&amp;type=' . OBJECT_PAGE;
+		$curday	= '';
+
 		foreach ($pages as $page)
 		{
 			// day header
@@ -93,13 +130,15 @@ function admin_content_deleted(&$engine, &$module)
 				$curday = $day;
 			}
 
+
+
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $page['page_id'] . '">' . $engine->_t('RemoveButton') . '</a> ]'.
-						' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $page['page_id'] . '">' . $engine->_t('ArchiveButton') . '</a> ]'.
-						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $page['page_id'] . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $page['page_id'] . $_type . '">' . $engine->_t('RemoveButton') . '</a> ]'.
+						# ' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $page['page_id'] . $_type . '">' . $engine->_t('ArchiveButton') . '</a> ]'.
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $page['page_id'] . $_type . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0, $page['title']) .
 					'</td>' .
 				"</tr>\n";
@@ -115,7 +154,9 @@ function admin_content_deleted(&$engine, &$module)
 
 		echo '<table>';
 
-		$curday = '';
+		$_type	= '&amp;type=' . OBJECT_FILE;
+		$curday	= '';
+
 		foreach ($files as $file)
 		{
 			// day header
@@ -136,10 +177,11 @@ function admin_content_deleted(&$engine, &$module)
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $file['file_id'] . '">' . $engine->_t('RemoveButton') . '</a> ]'.
-						' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $file['file_id'] . '">' . $engine->_t('ArchiveButton') . '</a> ]'.
-						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $file['file_id'] . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
-						$engine->compose_link_to_page($file['file_name'], 'revisions', '', 0, $file['file_description']) .
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $file['file_id'] . $_type . '">' . $engine->_t('RemoveButton') . '</a> ]'.
+						# ' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $file['file_id'] . $_type . '">' . $engine->_t('ArchiveButton') . '</a> ]'.
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $file['file_id'] . $_type . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
+						'<span title="' . $file['file_description'] . '">' . $file['file_name'] . '</span>' .
+						#$engine->shorten_string($file['file_name']))
 					'</td>' .
 				"</tr>\n";
 		}
@@ -150,7 +192,14 @@ function admin_content_deleted(&$engine, &$module)
 	}
 	else
 	{
-		echo '<br /><p>' . $engine->_t('NoDeletedPages') . '</p>';
+		if ($type == OBJECT_PAGE)
+		{
+			echo '<br /><p>' . $engine->_t('NoDeletedPages') . '</p>';
+		}
+		else if ($type == OBJECT_FILE)
+		{
+			echo '<br /><p>' . $engine->_t('NoDeletedFiles') . '</p>';
+		}
 	}
 }
 

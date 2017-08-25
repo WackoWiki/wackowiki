@@ -460,64 +460,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 						&& ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($file['user_id'] == $this->get_user_id()))
 				{
-					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
-
-					// store a copy in ...
-					if ($this->db->store_deleted_pages && !$dontkeep)
-					{
-						// TODO: moved to backup folder
-						/*foreach ($files as $file)
-						{
-							// remove from FS
-							$file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
-									$page['page_id'] . '@' . $file['file_name']);
-
-							@unlink($file_name);
-						}*/
-
-						// flag record as deleted in DB
-						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "file SET " .
-								"deleted	= '1' " .
-							"WHERE file_id = '" . $file['file_id'] . "'");
-					}
-					else
-					{	// remove from DB
-						$this->db->sql_query(
-							"DELETE FROM " . $this->db->table_prefix . "file " .
-							"WHERE file_id = '" . $file['file_id'] . "'" );
-
-						// update user uploads count
-						$this->db->sql_query(
-							"UPDATE " . $this->db->user_table . " SET " .
-								"total_uploads = total_uploads - 1 " .
-							"WHERE user_id = '" . $file['user_id'] . "' " .
-							"LIMIT 1");
-
-						$message .= $this->_t('FileRemovedFromDB') . '<br />';
-
-						// remove from FS
-						$real_filename = ($file['page_id']
-							? UPLOAD_PER_PAGE_DIR . '/@' . $file['page_id'] . '@'
-							: UPLOAD_GLOBAL_DIR . '/') .
-							$file['file_name'];
-
-						if (@unlink($real_filename))
-						{
-							clearstatcache();
-
-							$message .= $this->_t('FileRemovedFromFS');
-						}
-						else
-						{
-							$this->set_message($this->_t('FileRemovedFromFSError'), 'error');
-						}
-					}
-
-					if ($message)
-					{
-						$this->set_message($message, 'success');
-					}
+					$this->remove_file($file['file_id'], $dontkeep);
 
 					// log event
 					$this->log(1, Ut::perc_replace($this->_t('LogRemovedFile', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));

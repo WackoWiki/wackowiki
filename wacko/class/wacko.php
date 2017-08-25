@@ -6829,8 +6829,11 @@ class Wacko
 
 		foreach ($pages as $id)
 		{
-			$remove[] = "'" . $id . "'";
-			unset($this->page_id_cache[@$rev[$id]]);
+			if (is_int($id))
+			{
+				$remove[] = "'" . $id . "'";
+				unset($this->page_id_cache[@$rev[$id]]);
+			}
 		}
 
 		$remove = implode(', ', $remove);
@@ -6866,8 +6869,7 @@ class Wacko
 					"modified	= UTC_TIMESTAMP(), " .
 					"ip			= '" . $this->get_user_ip() . "', " .
 					"deleted	= '1', " .
-					// "edit_note	= '" . $this->get_user_ip() . "', " . // removed
-					"user_id	= '" . $this->get_user_id() . "' " .
+					"user_id	= '" . (int) $this->get_user_id() . "' " .
 				"WHERE page_id	= '" . (int) $page_id . "' " .
 				"LIMIT 1");
 		}
@@ -6989,7 +6991,7 @@ class Wacko
 		{
 			$this->db->sql_query(
 				"DELETE FROM " . $this->db->table_prefix . "rating " .
-				"WHERE page_id = '{$page['page_id']}'");
+				"WHERE page_id = '" . (int) $page['page_id'] . "'");
 		}
 
 		return true;
@@ -7068,7 +7070,8 @@ class Wacko
 					: "") );
 	}
 
-	function remove_files($tag, $cluster = false, $dontkeep = 0)
+	// removes files attached to a page
+	function remove_files_perpage($tag, $cluster = false, $dontkeep = 0)
 	{
 		if (!$tag)
 		{
@@ -7089,19 +7092,15 @@ class Wacko
 			$files = $this->db->load_all(
 				"SELECT file_id, file_name " .
 				"FROM " . $this->db->table_prefix . "file " .
-				"WHERE page_id = '" . $page['page_id'] . "'");
+				"WHERE page_id = '" . (int) $page['page_id'] . "'");
 
 			// store a copy in ...
 			if ($this->db->store_deleted_pages && !$dontkeep)
 			{
-				// TODO: moved to backup folder
+				// TODO: moved file to backup folder
 				foreach ($files as $file)
 				{
-					// remove from FS
-					/* $file_name = Ut::join_path(UPLOAD_PER_PAGE_DIR, '@'.
-							$page['page_id'] . '@' . $file['file_name']);
-
-					@unlink($file_name); */
+					// moved file to backup folder
 
 					// remove category assigments
 					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
@@ -7111,7 +7110,7 @@ class Wacko
 				$this->db->sql_query(
 					"UPDATE " . $this->db->table_prefix . "file SET " .
 						"deleted	= '1' " .
-					"WHERE page_id = '" . $page['page_id'] . "'");
+					"WHERE page_id = '" . (int) $page['page_id'] . "'");
 			}
 			else
 			{
@@ -7132,7 +7131,80 @@ class Wacko
 				// remove from DB
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "file " .
-					"WHERE page_id = '" . $page['page_id'] . "'");
+					"WHERE page_id = '" . (int) $page['page_id'] . "'");
+			}
+		}
+
+		return true;
+	}
+
+	function remove_file($file_id, $dontkeep = 0)
+	{
+		$message = '';
+
+		if (!$file_id)
+		{
+			return false;
+		}
+
+		// get filenames
+		$file = $this->db->load_single(
+			"SELECT file_id, page_id, user_id, file_name " .
+			"FROM " . $this->db->table_prefix . "file " .
+			"WHERE file_id = '" . (int) $file_id . "'");
+
+		if ($this->db->store_deleted_pages && !$dontkeep)
+		{
+			// TODO: moved file to backup folder
+
+			// flag record as deleted in DB
+			$this->db->sql_query(
+				"UPDATE " . $this->db->table_prefix . "file SET " .
+					"deleted	= '1' " .
+				"WHERE file_id = '" . (int) $file['file_id'] . "'");
+
+			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+		}
+		else
+		{
+			// remove from FS
+			$file_name = ($file['page_id']
+				? UPLOAD_PER_PAGE_DIR . '/@' . $file['page_id'] . '@'
+				: UPLOAD_GLOBAL_DIR . '/') .
+				$file['file_name'];
+
+			if (@unlink($file_name))
+			{
+				clearstatcache();
+
+				$message .= $this->_t('FileRemovedFromFS') . '<br />';
+			}
+			else
+			{
+				$this->set_message($this->_t('FileRemovedFromFSError'), 'error');
+			}
+
+			// remove category assigments
+			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+
+			// update user uploads count
+			// TODO: create function user_upload_count($user_id, $count)
+			$this->db->sql_query(
+				"UPDATE " . $this->db->user_table . " SET " .
+					"total_uploads = total_uploads - 1 " .
+				"WHERE user_id = '" . $file['user_id'] . "' " .
+				"LIMIT 1");
+
+			$message .= $this->_t('FileRemovedFromDB') . '<br />';
+
+			// remove from DB
+			$this->db->sql_query(
+				"DELETE FROM " . $this->db->table_prefix . "file " .
+				"WHERE file_id = '" . (int) $file['file_id'] . "'");
+
+			if ($message)
+			{
+				$this->set_message($message, 'success');
 			}
 		}
 
@@ -7152,7 +7224,7 @@ class Wacko
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}
 
-	function restore_file($page_id)
+	function restore_files_perpage($page_id)
 	{
 		if (!$page_id)
 		{
@@ -7163,6 +7235,19 @@ class Wacko
 			"UPDATE " . $this->db->table_prefix . "file SET " .
 				"deleted	= '0' " .
 			"WHERE page_id = '" . (int) $page_id . "'");
+	}
+
+	function restore_file($file_id)
+	{
+		if (!$file_id)
+		{
+			return false;
+		}
+
+		$this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "file SET " .
+				"deleted	= '0' " .
+			"WHERE file_id = '" . (int) $file_id . "'");
 	}
 
 	// ADDITIONAL METHODS

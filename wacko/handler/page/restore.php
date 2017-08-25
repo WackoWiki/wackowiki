@@ -18,7 +18,7 @@ if ($this->db->store_deleted_pages && $this->is_admin() && $this->page['deleted'
 		$message .= $this->_t('PageRestored');
 	}
 
-	if ($this->restore_file($page_id))
+	if ($this->restore_files_perpage($page_id))
 	{
 		$message .= $this->_t('LocalFilesRestored');
 	}

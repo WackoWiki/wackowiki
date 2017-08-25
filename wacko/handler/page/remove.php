@@ -83,7 +83,7 @@ if ($this->is_admin()
 				$message .= '<li>' . $this->_t('CommentsRemoved') . "</li>\n";
 			}
 
-			if ($this->remove_files($this->tag, false, $dontkeep))
+			if ($this->remove_files_perpage($this->tag, false, $dontkeep))
 			{
 				$message .= '<li>' . $this->_t('FilesRemoved') . "</li>\n";
 			}
