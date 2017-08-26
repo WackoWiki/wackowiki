@@ -93,6 +93,7 @@ $upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',			$alter_file_r5_1_3,			
 
 // page
 $upgrade['5.1.0'][]		= [$lang['AlterTable'],		'page',				$alter_page_r5_1_0,			$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'page',				$alter_page_r5_1_1,			$lang['ErrorAlteringTable']];
 
 $upgrade['5.1.0'][]		= [$lang['UpdateTable'],	'page',				$update_page_r5_1_0,		$lang['ErrorUpdatingTable']];
 
