@@ -46,7 +46,7 @@ if ($this->has_access('read'))
 
 			if ($this->is_admin())
 			{
-				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
+				$message = $this->_t('PageDeletedInfo');
 				$message .= '<br /><br />';
 				$message .= $this->form_open('restore_page', ['page_method' => 'restore']);
 				$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '" />';

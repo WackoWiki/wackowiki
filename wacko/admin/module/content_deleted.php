@@ -170,7 +170,7 @@ else if ($type == OBJECT_FILE)
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $file['file_id'] . $_type . '">' . $engine->_t('RemoveButton') . '</a> ]' .
 						# ' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $file['file_id'] . $_type . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
-						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $file['file_id'] . $_type . '">' . $engine->_t('RestoreButton') . '</a> ]</small>' .
+						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $file['file_id'] . $_type . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
 						'<span title="' . $file['file_description'] . '">' . $file['file_name'] . '</span>' .
 						#$engine->shorten_string($file['file_name']))
 					'</td>' .
