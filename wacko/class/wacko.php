@@ -6829,11 +6829,8 @@ class Wacko
 
 		foreach ($pages as $id)
 		{
-			if (is_int($id))
-			{
-				$remove[] = "'" . $id . "'";
-				unset($this->page_id_cache[@$rev[$id]]);
-			}
+			$remove[] = "'" . $id . "'";
+			unset($this->page_id_cache[@$rev[$id]]);
 		}
 
 		$remove = implode(', ', $remove);
