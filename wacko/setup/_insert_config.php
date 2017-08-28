@@ -21,7 +21,7 @@ if (!isset($config['rewrite_mode']))
 	$config['rewrite_mode'] = 0;
 }
 
-if (empty($config['noreply_email']))
+if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
 {
 	$config_db['noreply_email'] = $config['admin_email'];
 }
