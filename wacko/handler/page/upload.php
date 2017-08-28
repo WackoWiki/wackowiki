@@ -256,7 +256,7 @@ if (isset($_POST['upload']) & $can_upload)
 						$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
 						$uploaded_dt	= $this->db->date();
 
-						// TODO: replace option: keep old data if new entry is empty
+						// replace option: keep old data if new entry is empty
 						$description	= substr($_POST['file_description'], 0, 250);
 						$description	= $clean_text((string) $description);
 						# $caption		= $clean_text((string) $_POST['caption']);
@@ -269,7 +269,9 @@ if (isset($_POST['upload']) & $can_upload)
 									"user_id			= '" . $user['user_id'] . "'," .
 									#"file_name			= " . $this->db->q(file_name) . ", " .
 									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
-									"file_description	= " . $this->db->q($description) . ", " .
+									(!empty($description)
+										? "file_description	= " . $this->db->q($description) . ", "
+										: "") .
 									# "caption			= " . $this->db->q($caption) . ", " .
 									"file_size			= '" . (int) $file_size . "'," .
 									"picture_w			= '" . (int) $size[0] . "'," .
