@@ -88,4 +88,4 @@ define('HTML_FILTERING',				null);				// safehtml, htmlpurifier
 define('ACTION4DIFF',					'anchor, toc');		//allowed actions in DIFF
 
 define('PHP_MIN_VERSION',				'5.6.0');			//minimum required PHP version
-define('PHP_ERROR_REPORTING',			6);					// PHP error reporting: 0 - off, 6 - all
+define('PHP_ERROR_REPORTING',			0);					// PHP error reporting: 0 - off, 6 - all
