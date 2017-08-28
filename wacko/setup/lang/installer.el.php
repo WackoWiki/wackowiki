@@ -9,6 +9,21 @@ $lang = [
 'LangName' => 'Greek',
 
 /*
+   Config Defaults
+*/
+'ConfigDefaults'	=> [
+	// pages
+	'category_page'		=> 'Category',
+	'groups_page'		=> 'Groups',
+	'users_page'		=> 'Users',
+
+	// time
+	#'date_format'					=> 'd.m.Y',
+	#'time_format'					=> 'H:i',
+	#'time_format_seconds'			=> 'H:i:s',
+],
+
+/*
    Generic Page Text
 */
 'Title' => 'Εγκατάσταση WackoWiki',

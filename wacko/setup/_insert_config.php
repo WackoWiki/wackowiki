@@ -26,6 +26,9 @@ if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
 	$config['noreply_email'] = $config['admin_email'];
 }
 
+// check for language related default values
+$config = array_merge($config, $lang['ConfigDefaults']);
+
 // inserting secondary config values
 $config_db['abuse_email']					= $config['admin_email'];
 $config_db['acl_lock']						= $config['acl_lock'];
