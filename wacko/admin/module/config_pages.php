@@ -235,7 +235,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="category_page"><strong>Tag :</strong><br />
 				<small>Page with a list of tagged pages (action <code>{{tag}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->db->tag_page, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo htmlspecialchars($engine->db->tag_page, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

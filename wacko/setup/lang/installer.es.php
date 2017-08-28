@@ -9,6 +9,21 @@ $lang = [
 'LangName' => 'Español',
 
 /*
+   Config Defaults
+*/
+'ConfigDefaults'	=> [
+	// pages
+	'category_page'		=> 'Categoría',
+	'groups_page'		=> 'Grupos',
+	'users_page'		=> 'Usuarios',
+
+	// time
+	#'date_format'					=> 'd.m.Y',
+	#'time_format'					=> 'H:i',
+	#'time_format_seconds'			=> 'H:i:s',
+],
+
+/*
    Generic Page Text
 */
 'Title' => 'Instalación WackoWiki',

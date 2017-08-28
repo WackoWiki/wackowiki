@@ -18,9 +18,9 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page('Category',		'Kategorie',	'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page('Groups',		'Gruppen',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page('Users',		'Benutzer',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],		'Kategorie',	'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],			'Gruppen',		'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],			'Benutzer',		'{{users}}',			$page_lang, 'Admins', false, false);
 }
 
 insert_page('LetzteAenderungen',	'Letzte Änderungen',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Änderungen');
