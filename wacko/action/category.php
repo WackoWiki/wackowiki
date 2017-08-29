@@ -14,7 +14,8 @@ $category_link = function ($word, $category_id, $type_id, $filter = [], $list)
 					? '<span rel="tag" class="tag">'
 					: '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">')
 				: '') .
-			htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
+			# htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
+			$word['category'] .
 			($list
 				? ($selected
 					? '</span>'
@@ -42,23 +43,21 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 	$sort = 'abc';
 }
 if (!isset($nomark))		$nomark = '';
-$type_id = isset($_GET['type_id']) ? (int) $_GET['type_id'] : OBJECT_PAGE;
-$filter = [];
+$type_id	= isset($_GET['type_id']) ? (int) $_GET['type_id'] : OBJECT_PAGE;
+$filter		= [];
 
 $root = $this->unwrap_link($root);
-
-//echo '<br />';
 
 if ($list && ($ids || isset($_GET['category_id'])))
 {
 	if ($ids)
 	{
-		$category_ids = preg_replace('/[^\d, ]/', '', $ids);
-		$filter = implode(',', $ids);
+		$category_ids	= preg_replace('/[^\d, ]/', '', $ids);
+		$filter			= implode(',', $ids);
 	}
 	else
 	{
-		$category_ids = (int) $_GET['category_id'];
+		$category_ids	= (int) $_GET['category_id'];
 
 		if (is_array($category_ids))
 		{
@@ -71,7 +70,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	}
 
 	if ($_words = $this->db->load_all(
-		"SELECT category " .
+		"SELECT category, category_lang " .
 		"FROM " . $this->db->table_prefix . "category " .
 		"WHERE category_id IN (" . $this->db->q($category_ids) . ")", true));
 
@@ -81,6 +80,12 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		{
 			foreach ($_words as $word)
 			{
+				// do unicode entities
+				if ($this->page['page_lang'] != $word['category_lang'])
+				{
+					$word['category'] = $this->do_unicode_entities($word['category'], $word['category_lang']);
+				}
+
 				$words[] = $word['category'];
 			}
 
@@ -99,20 +104,22 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		$order = 'created DESC';
 	}
 
+	// get category assignments
 	if ($pages = $this->db->load_all(
-		"SELECT p.page_id, p.tag, p.title, p.created " .
+		"SELECT p.page_id, p.tag, p.title, p.created, p.page_lang " .
 		"FROM " . $this->db->table_prefix . "category_assignment AS k " .
 			"INNER JOIN " . $this->db->table_prefix . "page AS p ON (k.object_id = p.page_id) " .
 		"WHERE k.category_id IN (" . $this->db->q($category_ids) . ") " .
 			"AND k.object_type_id = 1 " .
 			"AND p.deleted <> '1' " .
 			(($root && $type_id = OBJECT_PAGE)
-				? "AND (p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . ") "
+				? "AND (p.tag = " . $this->db->q($root) . " " .
+					"OR p.tag LIKE " . $this->db->q($root . '/%') . ") "
 				: '') .
 		"ORDER BY p.{$order} ", true))
 	{
 		if ($_words = $this->db->load_all(
-			"SELECT category " .
+			"SELECT category, category_lang " .
 			"FROM " . $this->db->table_prefix . "category " .
 			"WHERE category_id IN (" . $this->db->q($category_ids) . ")", true))
 		{
@@ -129,9 +136,18 @@ if ($list && ($ids || isset($_GET['category_id'])))
 				}
 				else
 				{
-					echo '<li>' . ($sort == 'date' ? '<small>('.date('d/m/Y', strtotime($page['created'])) . ')</small> ' : '') . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1) . "</li>\n";
+					// do unicode entities
+					if ($this->page['page_lang'] != $page['page_lang'])
+					{
+						$page['title'] = $this->do_unicode_entities($page['title'], $page['page_lang']);
+					}
+
+					echo '<li>' . ($sort == 'date' ? '<small>(' . date('d/m/Y', strtotime($page['created'])) . ')</small> ' : '') . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1) . "</li>\n";
 				}
 			}
+
+			// take recent lang
+			$lang = $page['page_lang'];
 
 			echo '</ol>';
 		}
@@ -171,6 +187,12 @@ if (!$ids)
 		foreach ($categories as $category_id => $word)
 		{
 			$spacer = '&nbsp;&nbsp;&nbsp;';
+
+			// do unicode entities
+			if ($this->page['page_lang'] != $lang)
+			{
+				$word['category'] = $this->do_unicode_entities($word['category'], $lang);
+			}
 
 			echo '<li> ' . $category_link($word, $category_id, $type_id, $filter, $list);
 
