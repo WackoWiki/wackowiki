@@ -47,7 +47,7 @@ class PreFormatter
 		}
 		else if ($thing == '::+::')
 		{
-			return date($this->db->date_format . ' ' . $this->db->time_format);
+			return date($wacko->db->date_format . ' ' . $wacko->db->time_format);
 		}
 		else if (  preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches)
 				|| preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches))
