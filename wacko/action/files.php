@@ -189,23 +189,26 @@ if ($can_view)
 
 		foreach ($files as $file)
 		{
-			if ($all
-				&& (!$this->has_access('read', $file['page_id'])
-					|| !$this->is_admin()
-					|| !$this->is_owner($file['page_id'])))
-			{
-				continue;
-			}
-
-			// use absolute path
+			// check for local file
 			if ($file['page_id'])
 			{
+				// skip if user has no access rights for page
+				if ($all
+					&& !($this->has_access('read', $file['page_id'])
+						|| $this->is_admin()
+						|| $this->is_owner($file['page_id'])))
+				{
+					continue;
+				}
+
+				// absolute file path: file:/path/
 				$path2	= $path1 . ($this->slim_url($file['tag'])) . '/';
 				$page	= $file['tag'];
 				$url	= $this->href('file', trim($file['supertag'], '/'), ['get' => $file['file_name']]);
 			}
 			else
 			{
+				// global file
 				$path2	= $path1;
 				$url	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
