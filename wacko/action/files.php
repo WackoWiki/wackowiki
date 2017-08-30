@@ -189,6 +189,14 @@ if ($can_view)
 
 		foreach ($files as $file)
 		{
+			if ($all
+				&& (!$this->has_access('read', $file['page_id'])
+					|| !$this->is_admin()
+					|| !$this->is_owner($file['page_id'])))
+			{
+				continue;
+			}
+
 			// use absolute path
 			if ($file['page_id'])
 			{
