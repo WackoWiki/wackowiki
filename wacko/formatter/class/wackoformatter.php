@@ -186,7 +186,7 @@ class WackoFormatter
 			#"<!--.*-->|" .
 			//? (?...?)
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|" .
-			// bracket links [[Tag Description]] or ((Tag Description))
+			// bracket links [[tag description]] or ((tag description))
 			($this->object->db->disable_bracketslinks == 1
 				? ''
 				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|" .
@@ -905,7 +905,7 @@ class WackoFormatter
 
 					if (preg_match('/^\*+$/', $url))
 					{
-						$aname	= 'ftn'.strlen($url);
+						$aname	= 'ftn' . strlen($url);
 
 						if (!$text)
 						{
@@ -937,7 +937,7 @@ class WackoFormatter
 
 					if (preg_match('/^\*+$/', $anchor))
 					{
-						$ahref	= 'ftn'.strlen($anchor);
+						$ahref	= 'ftn' . strlen($anchor);
 					}
 					else if (preg_match('/^\d+$/', $anchor))
 					{
@@ -1032,17 +1032,18 @@ class WackoFormatter
 
 				if ($url[0] == '(')
 				{
-					$url	= substr($url, 1);
+					$url	 = substr($url, 1);
 					$result	.= '(';
 				}
 
 				if ($url[0] == '[')
 				{
-					$url	= substr($url, 1);
+					$url	 = substr($url, 1);
 					$result	.= '[';
 				}
 
 				$img		= preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/', '', $img);
+
 				return $result . $wacko->pre_link($url, $img, 1, 1);
 			}
 			else
@@ -1146,7 +1147,7 @@ class WackoFormatter
 
 			if ($li && !preg_match('/'.str_replace(')', '\)', $opener) . '$/', $result))
 			{
-				$result .= '</li><li'.($start ? ' value="' . $start . '"' : '') . '>';
+				$result .= '</li><li' . ($start ? ' value="' . $start . '"' : '') . '>';
 			}
 
 			return $result;

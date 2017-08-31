@@ -28,7 +28,7 @@ if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= '';
 if (!isset($all))		$all		= '';
 if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
-if (!isset($owner))		$owner 		= '';
+if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
 if (!isset($ppage))		$ppage		= '';
 if (!isset($legend))	$legend		= '';
