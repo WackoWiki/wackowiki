@@ -163,13 +163,13 @@ class Email
 			$send_ok = true;
 		}
 
-		catch (phpmailerException $e)
+		catch (Exception $e)
 		{
 			echo $e->errorMessage(); //Pretty error messages from PHPMailer
 			$send_ok = false;
 		}
 
-		catch (Exception $e)
+		catch (\Exception $e)
 		{
 			echo $e->getMessage(); //Boring error messages from anything else!
 			$send_ok = false;
