@@ -7959,6 +7959,47 @@ class Wacko
 		}
 	}
 
+	/**
+	 * show select for available languages
+	 *
+	 * @param string $name name for select
+	 * @param string $lang current language
+	 * @param bool $label display label
+	 */
+	function show_select_lang($name, $lang, $label = false)
+	{
+		$out		= '';
+		$langs		= [];
+		$languages	= '';
+
+		if ($label)
+		{
+			$out .= '<label for="' . $name . '">' . $this->_t('YourLanguage') . ' </label>';
+		}
+
+		$out .= '<select id="' . $name . '" name="' . $name . '">';
+
+		$languages = $this->_t('LanguageArray');
+
+		if ($this->db->multilanguage)
+		{
+			$langs = $this->available_languages();
+		}
+		else
+		{
+			$langs = [$this->db->language];
+		}
+
+		foreach ($langs as $_lang)
+		{
+			$out .= '<option value="' . $_lang . '" '.($lang == $_lang ? 'selected ' : '') . '>' . $languages[$_lang] . ' (' . $_lang.")</option>\n";
+		}
+
+		$out .= "</select>\n";
+
+		return $out;
+	}
+
 	function binary_multiples($size, $prefix = true, $short = true, $rounded = false, $suffix = true)
 	{
 		if (is_numeric($size))

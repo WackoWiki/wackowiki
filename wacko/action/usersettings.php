@@ -522,32 +522,11 @@ else if (($user = $this->get_user()))
 			<label for="user_lang"><?php echo $this->_t('YourLanguage');?></label>
 		</th>
 		<td>
-			<select id="user_lang" name="user_lang">
 <?php
-
-	$languages = $this->_t('LanguageArray');
-
-	if ($this->db->multilanguage)
-	{
-		$langs = $this->available_languages();
-	}
-	else
-	{
-		$langs = [$this->db->language];
-	}
-
-	foreach ($langs as $lang)
-	{
-		echo '<option value="' . $lang . '"' .
-			($user['user_lang'] == $lang
-				? ' selected '
-				: (!isset($user['user_lang']) && $this->db->language == $lang
-					? ' selected'
-					: '')
-			) . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
-	}
+			$user_lang = $user['user_lang'] ? $user['user_lang'] : $this->db->language;
+			echo $this->show_select_lang('user_lang', $user_lang, false);
 ?>
-			</select>
+
 		</td>
 	</tr>
 	<tr>
