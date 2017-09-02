@@ -253,12 +253,6 @@ if ($_user_id)
 
 		echo '<table class="lined">';
 		echo '<tr><th>' . $this->_t('BookmarkNumber') . '</th><th>' . $this->_t('BookmarkTitle') . '</th><th>' . $this->_t('BookmarkPage') . '</th><th>' . $this->_t('BookmarkMark') . '</th><!--<th>Display</th>-->';
-
-		if ($system)
-		{
-			echo '<th>Lang</th>';
-		}
-
 		echo '</tr>';
 
 		foreach ($_menu as $menu_item)
@@ -268,7 +262,7 @@ if ($_user_id)
 					<input type="number" min="0" name="pos_' . $menu_item['menu_id'] . '" size="2" style="width: 40px;" value="' . $menu_item['menu_position'] . '" />
 				</td>
 				<td>
-					<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" />
+					<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" placeholder="' . $menu_item['title'] . '" />
 				</td>
 				<td>
 					<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '" /> -->
@@ -276,16 +270,7 @@ if ($_user_id)
 				</td>
 				<td class="t_center">
 					<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '" />
-				</td>
-				<!--<td>
-
-			'.(!empty($menu_item['menu_title']) ? $menu_item['menu_title'] : $menu_item['title']) . '
-			</td>-->';
-
-			if ($system)
-			{
-				echo '<td>' . (!empty($menu_item['menu_lang']) ? $menu_item['menu_lang'] : '') . "</td>\n";
-			}
+				</td>';
 
 			echo "</tr>\n";
 		}
