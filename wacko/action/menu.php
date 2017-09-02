@@ -59,6 +59,7 @@ if ($this->is_admin() && $system == true)
 	$default_menu	= true;
 
 	$menu_lang = ($this->db->multilanguage? @$_REQUEST['menu_lang'] : '');
+
 	if (!$this->known_language($menu_lang))
 	{
 		//language doesn't have any language files so use the admin set language instead
@@ -244,27 +245,7 @@ if ($_user_id)
 
 		if ($default_menu === true)
 		{
-			echo '<label for="menu_lang">' . $this->_t('YourLanguage') . ' </label>';
-			// FIXME: add a common function for this?
-			echo '<select id="menu_lang" name="menu_lang">';
-
-			$languages = $this->_t('LanguageArray');
-
-			if ($this->db->multilanguage)
-			{
-				$langs = $this->available_languages();
-			}
-			else
-			{
-				$langs = [$this->db->language];
-			}
-
-			foreach ($langs as $lang)
-			{
-				echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
-			}
-
-			echo "</select>\n";
+			echo $this->show_select_lang('menu_lang', $menu_lang, true);
 
 			echo '<input type="submit" name="update" id="submit" value="update" />';
 			echo '<br /><br />';
@@ -331,26 +312,7 @@ if ($_user_id)
 
 	if ($default_menu === true)
 	{
-		// FIXME: add a common function for this?
-		echo '<select id="lang_new" name="lang_new">';
-
-		$languages = $this->_t('LanguageArray');
-
-		if ($this->db->multilanguage)
-		{
-			$langs = $this->available_languages();
-		}
-		else
-		{
-			$langs = [$this->db->language];
-		}
-
-		foreach ($langs as $lang)
-		{
-			echo '<option value="' . $lang . '" '.($menu_lang == $lang ? 'selected ' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
-		}
-
-		echo "</select>\n";
+		echo $this->show_select_lang('lang_new', $menu_lang, false);
 	}
 
 	echo  '<input type="submit" name="add_menu_item" value="' . $this->_t('CreatePageButton') . '" />';

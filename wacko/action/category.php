@@ -38,6 +38,10 @@ if (!isset($list))			$list		= 1;
 if (!isset($type_id))		$type_id	= OBJECT_PAGE;
 if (!isset($ids))			$ids		= '';
 if (!isset($lang))			$lang		= $this->page['page_lang'];
+if (isset($_REQUEST['category_lang']))
+{
+	$lang = ($this->db->multilanguage? @$_REQUEST['category_lang'] : $lang);
+}
 if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 {
 	$sort = 'abc';
@@ -169,6 +173,17 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 if (!$ids)
 {
+	// select category language
+	if ($this->db->multilanguage)
+	{
+		echo $this->form_open('category_lang');
+		echo '<p class="t_right">';
+		echo $this->show_select_lang('category_lang', $lang, false);
+		echo '<input type="submit" name="update" id="submit" value="update" />';
+		echo '</p>';
+		echo $this->form_close();
+	}
+
 	// header
 	if (!$nomark)
 	{
