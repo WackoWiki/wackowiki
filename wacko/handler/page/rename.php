@@ -142,6 +142,11 @@ if ($registered
 			echo $this->action('backlinks', ['nomark' => 0]);
 			?>
 <br />
+			<?php
+			// show sub-pages
+			echo $this->action('tree', ['depth' => 3]);
+			?>
+<br />
 <br />
 <input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RenameButton'); ?>" /> &nbsp;
 <a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
