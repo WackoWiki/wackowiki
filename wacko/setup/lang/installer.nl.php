@@ -65,8 +65,8 @@ $lang = [
    Site Config Page
 */
 'site-config' => 'Site Configuratie',
-'Name' => 'Uw WackoWiki\'s naam',
-'NameDesc' => 'De naam van uw WackoWiki site. Dit is meestal een WikiName met de volgende syntax -> SomethingLikeThis. <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'SiteName' => 'Uw WackoWiki\'s naam',
+'SiteNameDesc' => 'De naam van uw Wiki site.',
 'Home' => 'Home pagina',
 'HomeDesc' => 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomeDefault' => 'HomePage',
