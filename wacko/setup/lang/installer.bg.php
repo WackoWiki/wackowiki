@@ -65,8 +65,8 @@ $lang = [
    Site Config Page
 */
 'site-config' => 'Настройки на сайта',
-'Name' => 'Посочете името на УакоУики',
-'NameDesc' => 'Име на вашия WackoWiki. Трябва да е от типа УикиИме и изглежда ПримерноЕтоТака. <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'SiteName' => 'Посочете името на УакоУики',
+'SiteNameDesc' => 'Име на вашия Wiki.',
 'Home' => 'Главна страница',
 'HomeDesc' => 'Главна страница на WackoWiki.  Трябва да е  с <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">УикиИме</a>.',
 'HomeDefault' => 'HomePage',

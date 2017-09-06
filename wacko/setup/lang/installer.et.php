@@ -65,8 +65,8 @@ $lang = [
    Site Config Page
 */
 'site-config' => 'Site konfiguratsioon',
-'Name' => 'Sinu WikiNimi',
-'NameDesc' => 'Sinu WikiNimi. Tavaliselt see näeb valja NaguMidagiSellist või EesnimiPerekonnanimi. <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'SiteName' => 'Sinu WikiNimi',
+'SiteNameDesc' => 'Sinu WikiNimi.',
 'Home' => 'KoduLeht',
 'HomeDesc' => 'Sinu WackoWiki kodulehe nimi. Peaks ka olema <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiNimi</a>.',
 'HomeDefault' => 'KoduLeht',
