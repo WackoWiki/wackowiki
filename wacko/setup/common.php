@@ -60,7 +60,7 @@ function output_image($ok)
 // site config
 function available_languages()
 {
-	$lang_list	= '';
+	$lang_list	= [];
 
 	if ($handle = opendir('lang'))
 	{
