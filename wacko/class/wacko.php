@@ -1373,9 +1373,9 @@ class Wacko
 
 	function cache_links()
 	{
-		$pages		= '';
+		$pages		= [];
 		$page_id	= [];
-		$acl		= '';
+		$acl		= [];
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
 
@@ -4639,7 +4639,7 @@ class Wacko
 	}
 
 	// wrapper for the next method
-	function format($text, $formatter = 'wiki', $options = '')
+	function format($text, $formatter = 'wiki', $options = [])
 	{
 		return $this->_format($text, $formatter, $options);
 	}
