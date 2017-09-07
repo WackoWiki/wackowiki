@@ -383,14 +383,14 @@ class Wacko
 	function get_time_interval($text, $strip = false)
 	{
 		$ago = time() - $text;
-		$res = 0 . $this->_t('MinutesAgo');
+		$out = 0 . $this->_t('MinutesAgo');
 
 		foreach ($this->time_intervals as $val => $name)
 		{
 			if ($ago >= $val)
 			{
 				$interval	= ($ago - $ago % $val) / $val;
-				$res		= Ut::perc_replace($this->_t($name . ($interval == 1 ? '' : 's') . 'Ago'), $interval);
+				$out		= Ut::perc_replace($this->_t($name . ($interval == 1 ? '' : 's') . 'Ago'), $interval);
 
 				break;
 			}
@@ -399,10 +399,10 @@ class Wacko
 		if ($strip)
 		{
 			// STS: hack! need to patch language files...
-			$res = substr($res, 0, strrpos($res, ' '));
+			$out = substr($res, 0, strrpos($res, ' '));
 		}
 
-		return $res;
+		return $out;
 	}
 
 	// LANG FUNCTIONS
@@ -7317,7 +7317,7 @@ class Wacko
 		$unlike_login	= $this->db->pwd_unlike_login;
 		$char_classes	= $this->db->pwd_char_classes;
 		$min_chars		= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
-		$res			= '';
+		$out			= '';
 
 		$l = strlen($login);
 		$p = strlen($pwd);
@@ -7347,13 +7347,13 @@ class Wacko
 
 		if ($error)
 		{
-			$res .= $this->_t('PwdCplxEquals') . ' ';
+			$out .= $this->_t('PwdCplxEquals') . ' ';
 		}
 
 		// check password length
 		if ($p < $min_chars)
 		{
-			$res .= $this->_t('PwdCplxShort') . ' ';
+			$out .= $this->_t('PwdCplxShort') . ' ';
 		}
 
 		// check character classes requirements
@@ -7390,10 +7390,10 @@ class Wacko
 		}
 		if ($error)
 		{
-			$res .= $this->_t('PwdCplxWeak') . ' ';
+			$out .= $this->_t('PwdCplxWeak') . ' ';
 		}
 
-		return $res;
+		return $out;
 	}
 
 	function show_password_complexity()
@@ -7705,7 +7705,7 @@ class Wacko
 
 	function get_categories($object_id, $type_id = null, $method = '', $tag = '', $params = [], $cache = true)
 	{
-		$_category		= '';
+		$out			= '';
 		$category_id	= (int) @$_GET['category_id'];
 
 		if ($categories	= $this->load_categories($object_id, $type_id, $cache))
@@ -7714,20 +7714,20 @@ class Wacko
 			{
 				if ($id > 0)
 				{
-					$_category .= ', ';
+					$out .= ', ';
 				}
 
 				if ($category_id == $category['category_id']) // TODO: might be an array!
 				{
-					$_category .= '<span class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</span>';
+					$out .= '<span class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</span>';
 				}
 				else
 				{
-					$_category .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+					$out .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
 				}
 			}
 
-			return $_category;
+			return $out;
 		}
 		else
 		{
@@ -7989,7 +7989,7 @@ class Wacko
 	{
 		$out		= '';
 		$langs		= [];
-		$languages	= '';
+		$languages	= [];
 
 		if ($label)
 		{
