@@ -54,9 +54,9 @@ if ($config['is_update'] == false)
    <div class="fake_hr_seperator">
       <hr />
    </div>
-   <label class="label_top" for="root_page"><?php echo $lang['Home'];?></label>
-   <p class="notop"><?php echo $lang['HomeDesc'];?></p>
-   <input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php isset ( $lang['HomeDefault'] ) ? print $lang['HomeDefault'] : print $config['root_page'] ; ?>" class="text_input" />
+   <label class="label_top" for="root_page"><?php echo $lang['HomePage'];?></label>
+   <p class="notop"><?php echo $lang['HomePageDesc'];?></p>
+   <input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php isset ( $lang['HomePageDefault'] ) ? print $lang['HomePageDefault'] : print $config['root_page'] ; ?>" class="text_input" />
    <br />
 <?php
 }

@@ -69,9 +69,9 @@ $lang = [
 'SiteName' => 'Όνομα του WackoWiki',
 'SiteNameDesc' => 'Παρακαλώ εισάγεται ένα όνομα για το Wiki site σας, αυτό πρέπει να είναι
 της μορφής <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
-'Home' => 'Αρχική Σελίδα',
-'HomeDesc' => 'Πληκτρολογήστε το όνομα που θέλετε να έχει η αρχική σελίδα σας, αυτή θα είναι η προκαθορισμένη σελίδα που θα βλέπουν οι χρήστες όταν επισκέπτονται το site σας και θα πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
-'HomeDefault' => 'HomePage',
+'HomePage' => 'Αρχική Σελίδα',
+'HomePageDesc' => 'Πληκτρολογήστε το όνομα που θέλετε να έχει η αρχική σελίδα σας, αυτή θα είναι η προκαθορισμένη σελίδα που θα βλέπουν οι χρήστες όταν επισκέπτονται το site σας και θα πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'HomePageDefault' => 'HomePage',
 'MultiLang' => 'Πολυγλωσσική Υποστήριξη',
 'MultiLangDesc' => 'Η πολυγλωσσική υποστήριξη σας επιτρέπει να έχετε σελίδες με διαφορετικές γλωσσικές ρυθμίσεις μέσα σε μία μόνη εγκατάσταση. Εάν αυτή η επιλογή είναι ενεργοποιημένη, τότε το πρόγραμμα εγκατάστασης θα δημιουργήσει αρχικές σελίδες για όλες τις διαθέσιμες γλώσσες στην διανομή.',
 'AllowedLang' => 'Allowed Languages',
