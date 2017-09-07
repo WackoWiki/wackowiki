@@ -34,7 +34,9 @@ $wacko_all_resource = [
 	'Tpl.email'			=> '<a href="{url}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
 	'Tpl.jabber'		=> '<a href="{url}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
 	'Tpl.file'			=> '<a href="{url}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
+
 	'Tpl.localfile'		=> '<a href="{url}" title="{title}" class="{class}">{icon}{text}</a>',
+	'Tpl.localimage'	=> '<a href="{url}" title="{title}" class="{class}">{text}</a>',
 	'Tpl.wlocalfile'	=> '<span class="missingpage" title="{title}">{text}</span>',
 	'Tpl.lan'			=> '<a href="{url}" {target} title="{title}" class="{class}">{icon}{text}</a>',
 
