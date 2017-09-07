@@ -46,9 +46,9 @@ function admin_system_statistics(&$engine, &$module)
 		</tr>
 <?php
 	$results	= $engine->db->load_all("SHOW TABLE STATUS FROM `{$engine->db->database_database}`", true);
-	$tdata		= '';
-	$tindex		= '';
-	$tfrag		= '';
+	$tdata		= 0;
+	$tindex		= 0;
+	$tfrag		= 0;
 
 	foreach ($results as $table)
 	{
@@ -93,8 +93,8 @@ function admin_system_statistics(&$engine, &$module)
 <?php
 	clearstatcache();
 
-	$tfiles = '';
-	$tsize = '';
+	$tfiles	= 0;
+	$tsize	= 0;
 
 	foreach ($directories as $dir)
 	{

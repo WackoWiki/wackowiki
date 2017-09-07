@@ -48,7 +48,7 @@ function admin_db_restore(&$engine, &$module)
 				<h1><?php echo $module['title']; ?></h1>
 				<br />
 <?php
-	$logs			= '';
+	$logs			= [];
 	$ikeys			= '';
 	$ifiles			= '';
 	$dir			= UPLOAD_BACKUP_DIR . '/';
