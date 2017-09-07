@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 
 if (!isset($max)) $max = '';
 if (!isset($noxml)) $noxml = '';
-if (!isset($printed)) $printed = '';
+if (!isset($printed)) $printed = [];
 
 if (!$max || $max > 100) $max = 100;
 
