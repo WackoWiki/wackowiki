@@ -1056,7 +1056,7 @@ class Wacko
 	*/
 	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
-		$page = '';
+		$page = [];
 
 		if ($deleted)
 		{
@@ -1764,7 +1764,7 @@ class Wacko
 	function load_deleted_files($limit = 50, $cache = true)
 	{
 		$deleted	= [];
-		$pagination	= '';
+		$pagination	= [];
 
 		$count_deleted = $this->db->load_single(
 			"SELECT COUNT(file_id) AS n " .
@@ -1792,7 +1792,7 @@ class Wacko
 	function load_deleted_pages($limit = 50, $cache = true)
 	{
 		$deleted	= [];
-		$pagination	= '';
+		$pagination	= [];
 
 		$count_deleted = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
