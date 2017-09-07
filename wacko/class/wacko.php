@@ -3201,7 +3201,7 @@ class Wacko
 	* @param string $anchor_link Optional HTTP anchor-fragment
 	* @return string full Href link
 	*/
-	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1)
+	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1, $meta_direct = true)
 	{
 		// TODO: add case for audio and video file <audio> / <video>
 		$class		= '';
@@ -3532,6 +3532,11 @@ class Wacko
 										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . ' />';
 								$tpl	= 'localfile';
 								$icon	= '';
+
+								if (! $meta_direct)
+								{
+									return $text;
+								}
 							}
 							else
 							{
@@ -3551,6 +3556,11 @@ class Wacko
 										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . ' />';
 								$tpl	= 'localimage';
 								$icon	= '';
+
+								if (! $meta_direct)
+								{
+									return $text;
+								}
 							}
 							else
 							{

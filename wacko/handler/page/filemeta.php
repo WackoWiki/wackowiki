@@ -267,10 +267,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 					// show image
 					if ($file['picture_w'] || $file['file_ext'] == 'svg')
-					{ ?>
-						<span><?php echo '<a href="' . $url . '">' . $this->link($path . $file['file_name']) . '</a>'; ?></span>
-						<?php
-					} ?>
+					{
+						echo '<span><a href="' . $url . '">' . $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false) . '</a></span>';
+					}
+?>
 
 					<table class="upload tbl_fixed">
 						<tr>
