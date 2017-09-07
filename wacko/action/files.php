@@ -19,6 +19,7 @@ if (!defined('IN_WACKO'))
 
 // TODO:
 // - add option to select all files: all=1 (?)
+// - add option to select used files -> file_link table & page_id
 // - add option to filter by tags
 
 $page_id = '';

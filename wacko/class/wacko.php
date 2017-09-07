@@ -187,8 +187,8 @@ class Wacko
 	* not file in FS
 	*
 	* @param string $file_name File name
-	* @param string $unwrapped_tag Optional. Unwrapped supertag. If
-	* not set, then check if file exists in global space
+	* @param integer $page_id Optional. If not set,
+	*  then check if file exists in global space
 	* @param boolean $deleted
 	*
 	* @return array File description array
@@ -3458,7 +3458,7 @@ class Wacko
 
 				//unwrap tag (check !/, ../ cases)
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
-				$page_id	= $this->get_page_id($page_tag); // TODO: supertag won't match tag! in cache
+				$page_id	= $this->get_page_id($page_tag); // // TODO: supertag won't match tag! neither in page_id_cache nor the query itself!
 
 				if ($file_data = $this->check_file_record($file_name, $page_id))
 				{
@@ -3521,14 +3521,17 @@ class Wacko
 						}
 
 						// direct file access
+						// TODO: option: direct else link to filemeta page
 						if ($_global == true)
 						{
 
 							if (!$text)
 							{
-								$text = $title;
-								return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize . ' />';
+								$url	= $this->href('filemeta', trim($page_tag, '/'), ['show', 'file_id' => $file_data['file_id']]);
+								$text	= '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
+										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . ' />';
+								$tpl	= 'localfile';
+								$icon	= '';
 							}
 							else
 							{
@@ -3543,9 +3546,11 @@ class Wacko
 							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
 							if (!$text)
 							{
-								$text = $title;
-								return '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . $scale . $resize . ' />';
+								$url	= $this->href('filemeta', trim($page_tag, '/'), ['show', 'file_id' => $file_data['file_id']]);
+								$text	= '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" '.
+										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . ' />';
+								$tpl	= 'localimage';
+								$icon	= '';
 							}
 							else
 							{
