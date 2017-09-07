@@ -3199,6 +3199,8 @@ class Wacko
 	* @param boolean $safe If false, then sanitize $text, else no.
 	* @param string $link_lang
 	* @param string $anchor_link Optional HTTP anchor-fragment
+	* @param boolean $meta_direct Redirects local files to local filemeta handler if TRUE
+	*
 	* @return string full Href link
 	*/
 	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1, $meta_direct = true)
@@ -3206,7 +3208,9 @@ class Wacko
 		// TODO: add case for audio and video file <audio> / <video>
 		$class		= '';
 		$icon		= '';
+		$audio_link	= false;
 		$img_link	= false;
+		$video_link	= false;
 		$lang		= '';
 		$matches	= [];
 		$url		= '';
@@ -7932,9 +7936,9 @@ class Wacko
 	//	false	- if list was empty
 	function save_categories_list($object_id, $type_id, $dryrun = 0)
 	{
-		$set	= '';
-		$ids	= '';
-		$values	= '';
+		$set	= [];
+		$ids	= [];
+		$values	= [];
 
 		// what's selected
 		foreach ($_POST as $key => $val)
