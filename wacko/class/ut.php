@@ -416,7 +416,7 @@ class Ut
 	}
 
 	// checks if the parameter is an empty string or a string containing only whitespace
-	function is_blank($str)
+	static function is_blank($str)
 	{
 		return ctype_space($str) || $str === '';
 	}

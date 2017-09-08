@@ -399,7 +399,7 @@ class Wacko
 		if ($strip)
 		{
 			// STS: hack! need to patch language files...
-			$out = substr($res, 0, strrpos($res, ' '));
+			$out = substr($out, 0, strrpos($out, ' '));
 		}
 
 		return $out;
@@ -7447,7 +7447,7 @@ class Wacko
 		// allow array parameter expansion
 		if (is_array($_name))
 		{
-			extract($parameter, EXTR_IF_EXISTS);
+			extract($params, EXTR_IF_EXISTS);
 		}
 		else
 		{
