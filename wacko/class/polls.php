@@ -215,11 +215,9 @@ class Polls
 		}
 		else
 		{
-			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll' . $poll_id.'_form']) .
-					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>' .
-					'<a id="poll' . $poll_id . '_form"></a>' .
+			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll-results' . $poll_id.'_form']) .
 					'<input type="hidden" name="poll" value="' . $poll_id . '" />' .
-					'<table class="formation">' . "\n" .
+					'<table id="poll-vote' . $poll_id . '_form" class="formation">' . "\n" .
 					'<tr><th colspan="2" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
 
 			foreach ($vars as $var)
@@ -270,9 +268,7 @@ class Polls
 		else
 		{
 			$poll	= $this->engine->form_open() .
-					'<a id="p'.date('dm', strtotime($header['start'])) . '"></a>' .
-					'<a id="poll' . $poll_id . '_form"></a>' .
-					'<table class="formation">' .
+					'<table id="poll-results' . $poll_id . '_form" class="formation">' .
 					'<tr><th colspan="3" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
 
 			foreach ($vars as $var)
