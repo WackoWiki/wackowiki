@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 // Action parameters:
-// moderation=["true"|"false"]	Run action in moderation context.
-//								Default: "false"
+// moderation=['true'|'false']	Run action in moderation context.
+//								Default: 'false'
 // edit_id=[id]					Edit/moderate given poll. Only
 //								useful with "moderation='true'" .
 //								Default: null
@@ -20,6 +20,7 @@ $mode_file	= '';
 $topic		= '';
 $plural		= '';
 $startmod	= '';
+$vars		= [];
 
 // create polls object
 $polls_obj = new Polls($this);
@@ -41,7 +42,8 @@ if ($moderation === true)
 		$header			= $polls_obj->get_poll_title($edit_id);
 		$vars			= $polls_obj->get_poll_vars($edit_id);
 		$topic			= $header['text'];
-		$user			= $header['user_name'];
+		$user_id		= $header['user_id'];
+		$user_name		= $header['user_name'];
 		$plural			= $header['plural'];
 	}
 
@@ -62,8 +64,8 @@ if ($admin)
 {
 	if ($moderation === true)
 	{
-		if (isset($_POST['moderation']))	$edit_id	= $_POST['moderation'];
-		if (isset($_POST['user']))			$user		= $_POST['user'];
+		if (isset($_POST['moderation']))	$edit_id	= (int) $_POST['moderation'];
+		if (isset($_POST['user_id']))		$user_id	= (int) $_POST['user_id'];
 	}
 
 	if (isset($_POST['startmod']))			$startmod	= $_POST['startmod'];
@@ -95,7 +97,7 @@ if (isset($_POST['submit_poll']))
 
 	foreach ($_POST as $key => $value)
 	{
-		if		($key == 'user')		$user		= str_replace($strip, '', $value);
+		if		($key == 'user_id')		$user_id	= str_replace($strip, '', $value);
 		else if ($key == 'plural')		$plural		= str_replace($strip, '', $value);
 		else if ($key == 'startmod')	$startmod	= str_replace($strip, '', $value);
 		else if ($key == 'topic')		$topic		= str_replace($strip, '', $value);
@@ -128,8 +130,6 @@ if (isset($_POST['submit_poll']))
 		{
 			$user_id	= $this->get_user_id();
 		}
-
-		#if (!$user)		$user		= $this->get_user_ip();
 
 		if (!isset($edit_id))
 		{
@@ -173,20 +173,17 @@ if (isset($_POST['submit_poll']))
 			$stop_mod = true;
 		}
 
+		$user = $this->get_user_name();
+
 		// notify wiki owner & log event
 		if ($this->db->enable_email == true && $user != $this->db->admin_name && $moderation !== true)
 		{
-			$subject =	$this->db->site_name . '. ' . $this->_t('PollsNotifySubj');
-			$body	 =	$this->_t('EmailHello') .
-						$this->db->admin_name . ".\n\n" .
-						str_replace('%1', $user, $this->_t('PollsNotifyBody')) . "\n" .
-						$this->href('', 'admin.php') . "\n\n" .
-						$this->_t('EmailGoodbye') . "\n" .
-						$this->db->site_name . "\n" .
-						$this->db->base_url;
+			$subject =	$this->_t('PollsNotifySubj');
+			$body	 =	str_replace('%1', $user, $this->_t('PollsNotifyBody')) . "\n" .
+						$this->href('', 'admin.php') . "\n\n";
 
-			$email = new Email($this);
-			$email->send_mail($this->db->admin_email, $subject, $body);
+			#$this->send_user_email('System', $subject, $body);
+
 			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollCreated', $this->db->language)));
 		}
 		else if ($moderation === true)
@@ -254,11 +251,11 @@ else if ($stop_mod !== true)
 	echo $this->form_open('add_poll', ['page_method' => $mode_file, 'href_param' => '#pollsadd_form']);
 	echo ($moderation === true ? '<input type="hidden" name="mode" value="' . $mode . '" />' .
 		'<input type="hidden" name="moderation" value="' . $edit_id . '" />' .
-		'<input type="hidden" name="user" value="' . $user . '" />' : '');
+		'<input type="hidden" name="user_id" value="' . $user_id . '" />' : '');
 	echo '<a id="pollsadd_form"></a><table class="formation">';
 	echo '<tr>';
 		echo '<th>' . $this->_t('PollsTopic') . ':</th>';
-		echo '<th class="t_left"><input type="text" name="topic" size="70" maxlength="250" value="' . $topic . '" style="font-weight:normal;" /></th>';
+		echo '<td class="t_left"><input type="text" name="topic" size="70" maxlength="250" value="' . $topic . '" /></td>';
 	echo '</tr>';
 
 	// fill out survey answers

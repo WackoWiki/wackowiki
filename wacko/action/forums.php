@@ -34,8 +34,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// parse subforums list if any
 	if (!empty($pages))
 	{
-		$pages = explode(',', $pages);
-		$pages = array_map('trim', $pages);
+		$_subforum = explode(',', $pages);
+		$subforum = array_map('trim', $_subforum);
 	}
 
 	// make query
@@ -45,13 +45,13 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'comment' AND a.list = '' ";
 
-	if (!isset($pages))
+	if (!isset($subforum))
 	{
 		$sql .= "AND p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " ";
 	}
 	else
 	{
-		foreach ($pages as $num => $page)
+		foreach ($subforum as $num => $page)
 		{
 			if ($num <> 0)
 			{
