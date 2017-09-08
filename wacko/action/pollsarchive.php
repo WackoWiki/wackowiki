@@ -96,7 +96,7 @@ if (!$nomark)
 	{
 		if ($item == $year)
 		{
-			echo $item.' ';
+			echo $item . ' ';
 		}
 		else
 		{

@@ -10,9 +10,9 @@ if (!defined('IN_WACKO'))
 //					Default: null
 // results=[1|0]	Return poll results instead of voting form.
 //					Default: 0
-// align=["h"|"v"]	Orientation of surveys table: horizontal
+// align=['h'|'v']	Orientation of surveys table: horizontal
 //					or vertical.
-//					Default: "h"
+//					Default: 'h'
 
 $align		= '';
 $results	= '';
@@ -74,8 +74,8 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 }
 else if (isset($_POST['results']) && isset($_POST['poll']))
 {
-	$vote = (int) $_POST['poll'];
-	$results = 1;
+	$vote		= (int) $_POST['poll'];
+	$results	= 1;
 }
 
 // print survey forms/results

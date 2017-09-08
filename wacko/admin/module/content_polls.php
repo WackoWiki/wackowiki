@@ -103,7 +103,7 @@ function admin_content_polls(&$engine, &$module)
 		// edit/moderate new survey
 		else if (isset($_POST['edit']) && $_POST['id'])
 		{
-			$edit_id		= $_POST['id'];
+			$edit_id		= (int) $_POST['id'];
 			$header			= $polls_obj->get_poll_title($edit_id);
 
 			if (!$header['start'] && !$header['end'])
@@ -295,7 +295,7 @@ function admin_content_polls(&$engine, &$module)
 				else
 				{
 					echo '<a href="' . rawurldecode($engine->href('', $mode_file.'&amp;year=' . $item)) . '">' . $item . '</a> ';
-				};
+				}
 			}
 		}
 

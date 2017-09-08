@@ -2431,7 +2431,7 @@ class Wacko
 		if ($user === 'System')
 		{
 			$user = [
-				'user_name'		=> $this->db->email_from,
+				'user_name'		=> $this->db->admin_name,
 				'email'			=> $this->db->admin_email,
 				'user_lang'		=> $this->db->language
 			];
