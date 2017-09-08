@@ -124,9 +124,9 @@ function admin_content_polls(&$engine, &$module)
 	if ($admin === true && isset($install) === false)
 	{
 		// show poll results
-		if (isset($_GET['poll']) && $_GET['results'] == 1)
+		if (isset($_GET['poll_id']) && $_GET['results'] == 1)
 		{
-			echo $polls_obj->show_poll_results($_GET['poll']);
+			echo $polls_obj->show_poll_results($_GET['poll_id']);
 		}
 
 		// poll remove confirmation dialog
@@ -174,7 +174,7 @@ function admin_content_polls(&$engine, &$module)
 						<input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
 					echo '<td style="width:95%;">
 							<a href="' .
-							rawurldecode($engine->href('', $mode_file.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">' .
+							rawurldecode($engine->href('', $mode_file.'&amp;poll_id=' . $row['poll_id'] . '&amp;results=1')) . '">' .
 							date('d/m', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
 					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], time()) . '</td>';
@@ -263,7 +263,7 @@ function admin_content_polls(&$engine, &$module)
 				echo '<tr class="lined">';
 					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
 					echo '<td style="width:95%;"><a href="' .
-						rawurldecode($engine->href('', $mode_file.'&amp;year=' . $year.'&amp;poll=' . $row['poll_id'] . '&amp;results=1')) . '">' .
+						rawurldecode($engine->href('', $mode_file.'&amp;year=' . $year.'&amp;poll_id=' . $row['poll_id'] . '&amp;results=1')) . '">' .
 						date('d/m/y', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
 					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], $row['end']) . '</td>';

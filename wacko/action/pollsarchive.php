@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 // Action parameters:
 // nomark=[1|0]			Show legend and fieldset frame.
 //						Default: 0
-// style=["ul","br"]	List markup style.
-//						Default: "ul"
+// style=['ul','br']	List markup style.
+//						Default: 'ul'
 
 // create polls object
 $polls_obj = new Polls($this);
@@ -21,9 +21,9 @@ if (!isset($_GET['year']))	$year	= date('Y');
 else						$year	= (int) $_GET['year'];
 
 // print results
-if (isset($_GET['poll']) && (isset($_GET['results']) && $_GET['results'] == 1))
+if (isset($_GET['poll_id']) && (isset($_GET['results']) && $_GET['results'] == 1))
 {
-	echo $polls_obj->show_poll_results((int) $_GET['poll']);
+	echo $polls_obj->show_poll_results((int) $_GET['poll_id']);
 	echo '<br />';
 }
 
@@ -67,7 +67,7 @@ if (!$nomark)
 
 			echo ($style == 'ul' ? '<li>' : '');
 			echo '<a href="' .
-				$this->href('', '', ['year' => $year, 'poll' => $row['poll_id'], 'results' => 1]) . '">' .
+				$this->href('', '', ['year' => $year, 'poll_id' => $row['poll_id'], 'results' => 1, '#' => 'poll-results' . $row['poll_id'] . '_form']) . '">' .
 				$date . ' (#' . $row['poll_id'] . '): ' . $row['text'] . '</a>';
 			echo ($style == 'br' ? '<br />' : '');
 			echo ($style == 'ul' ? '</li>' : '');
