@@ -47,6 +47,8 @@ $text = str_replace('||#',		'"', $text);
 $text = str_replace('#|',		'"', $text);
 $text = str_replace('|#',		'"', $text);
 $text = str_replace('||',		'',  $text);
+$text = str_replace('*|',		'',  $text);
+$text = str_replace('|*',		'',  $text);
 
 // Cut headlines h1
 $text = preg_replace('/==.+?==[\s]*/', '', $text);
