@@ -148,10 +148,10 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 					echo '<li>' . ($sort == 'date' ? '<small>(' . date('d/m/Y', strtotime($page['created'])) . ')</small> ' : '') . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1) . "</li>\n";
 				}
-			}
 
-			// take recent lang
-			$lang = $page['page_lang'];
+				// take recent lang
+				$lang = $page['page_lang'];
+			}
 
 			echo '</ol>';
 		}

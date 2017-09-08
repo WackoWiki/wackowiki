@@ -178,7 +178,7 @@ if ($can_view)
 
 	if ($results)
 	{
-		echo '<table class="' . $style . '" >';
+		echo '<table class="' . $style . '" >' . "\n";
 
 		/* echo '<colgroup>
 			<col span="1">
@@ -244,7 +244,8 @@ if ($can_view)
 
 			if ($picture && ($file['picture_w'] || $file['file_ext'] == 'svg'))
 			{
-				$link		= '<a href="' . $url . '">' . $link . '</a>';
+				// now done in link funtion
+				#$link		= '<a href="' . $url . '">' . $link . '</a>';
 			}
 
 			if (!in_array($file_ext, ['gif', 'jpg', 'png', 'svg']))
@@ -272,8 +273,8 @@ if ($can_view)
 			$href_edit		= $this->href('filemeta', $page, ['edit', 'file_id' => $file_id]);
 			$href_remove	= $this->href('filemeta', $page, ['remove', 'file_id' => $file_id]);
 
-			echo '<tr>' .
-					'<td class="file-">' . $link . '</td>';
+			echo '<tr>' . "\n" .
+					'<td class="file-">' . $link . '</td>' . "\n";
 
 			if ($picture)
 			{
@@ -293,18 +294,19 @@ if ($can_view)
 					$file_size . '<br /><br />' .
 					$this->user_link($file['user_name'], '', true, false) . '<br />' .
 					$this->get_time_formatted($dt) . '<br /><br />' .
-					$this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter);
-				'</td>';
+					$this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter) .
+
+					'</td>' . "\n";
 			}
 			else
 			{
 				echo '<td class="desc-">' . $desc . '</td>' .
 					'<td class="size-">
 						<span class="size2-">' . $file_size . ', ' . $hits . '</span>&nbsp;'.
-					'</td>' .
+					'</td>' . "\n" .
 					'<td class="dt-">' .
 						'<span class="dt2-">' . $this->get_time_formatted($dt) . '</span>&nbsp;'.
-					'</td>';
+					'</td>' . "\n";
 			}
 
 			echo '<td class="tool-">' .
@@ -317,13 +319,13 @@ if ($can_view)
 					'</span>' .
 				 '</td>' . "\n";
 
-			echo '</tr>';
+			echo '</tr>' . "\n";
 
 			unset($link);
 			unset($desc);
 		}
 
-		echo '</table>';
+		echo '</table>' . "\n";
 	}
 	else
 	{
