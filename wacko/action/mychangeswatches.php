@@ -50,6 +50,7 @@ if ($user_id = $this->get_user_id())
 					"AND user_id = '" . (int) $user_id . "'");
 		}
 
+		$this->db->invalidate_sql_cache();
 		$this->http->redirect($this->href('', '', $profile + ['mode' => 'mychangeswatches', '#' => 'list']));
 	}
 
