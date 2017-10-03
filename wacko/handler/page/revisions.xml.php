@@ -29,7 +29,7 @@ echo '<language>' . $this->page['page_lang'] . '</language>' . "\n";
 if ($this->has_access('read') && !$this->hide_revisions)
 {
 	// load revisions for this page except minor edits
-	if (($revisions = $this->load_revisions($this->page['page_id'], 1)))
+	if (list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], 1))
 	{
 		$max				= 10;
 
