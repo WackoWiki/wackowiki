@@ -1528,10 +1528,27 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
+	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0, $limit = 100)
 	{
 		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
 					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
+
+		// count pages
+		$count_revisions = $this->db->load_single(
+			"SELECT COUNT(p.revision_id) AS n " .
+			"FROM " . $this->db->table_prefix . "revision p " .
+				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
+			"WHERE p.page_id = '" . (int) $page_id . "' " .
+				($hide_minor_edit
+					? "AND p.minor_edit = '0' "
+					: "") .
+				(!$show_deleted
+					? "AND p.deleted <> '1' "
+					: "")
+			);
+
+		$pagination = $this->pagination($count_revisions['n'], $limit);
 
 		$revisions = $this->db->load_all(
 			"SELECT p.revision_id, " . $page_meta . " " .
@@ -1545,9 +1562,10 @@ class Wacko
 				(!$show_deleted
 					? "AND p.deleted <> '1' "
 					: "") .
-			"ORDER BY p.modified DESC");
+			"ORDER BY p.modified DESC " .
+			$pagination['limit'], true);
 
-		if ($revisions)
+		if ($revisions && !$pagination['offset'])
 		{
 			if (($cur = $this->db->load_single(
 				"SELECT 0 AS revision_id, " . $page_meta . " " .
@@ -1567,7 +1585,7 @@ class Wacko
 				array_unshift($revisions, $cur);
 			}
 		}
-		else
+		else if (!$revisions)
 		{
 			$revisions = $this->db->load_all(
 				"SELECT 0 AS revision_id, " . $page_meta . " " .
@@ -1582,13 +1600,13 @@ class Wacko
 				"LIMIT 1");
 		}
 
-		return $revisions;
+		return [$revisions, $pagination];
 	}
 
 	function count_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
 	{
 		$count = $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
+			"SELECT COUNT(revision_id) AS n " .
 			"FROM " . $this->db->table_prefix . "revision " .
 			"WHERE page_id = '" . (int) $page_id . "' " .
 				($hide_minor_edit
@@ -1656,7 +1674,7 @@ class Wacko
 
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
-		if (($pages = $this->db->load_all(
+		if ($pages = $this->db->load_all(
 		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
 		"FROM " . $this->db->table_prefix . "page p " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -1680,7 +1698,7 @@ class Wacko
 				: "") .
 			"AND r2.revision_id IS NULL " .
 		"ORDER BY p.modified DESC " .
-		$pagination['limit'], true)))
+		$pagination['limit'], true))
 		{
 			foreach ($pages as $page)
 			{
@@ -3393,7 +3411,7 @@ class Wacko
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
 		{
 			// this is a uploaded file
-			// TODO: add file link tracking
+			// TODO: check file link tracking
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$_file_name		= $matches[2];
 			$arr			= explode('/', $_file_name);

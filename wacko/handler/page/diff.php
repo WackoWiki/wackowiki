@@ -80,7 +80,7 @@ if ($page_a && $page_b
 	&& $this->has_access('read', $page_a['page_id']))
 {
 	// TODO: $hide_minor_edit
-	$revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
+	list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
 
 	$revisions_menu = function ($rev, $page) use ($revisions, $diffmode, $a, $b)
 	{

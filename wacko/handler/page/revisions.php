@@ -40,7 +40,7 @@ if ($this->page['deleted'])
 if ($this->has_access('read'))
 {
 	// load revisions for this page
-	if (($revisions = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $show_deleted)))
+	if (list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $show_deleted))
 	{
 		$this->context[++$this->current_context] = '';
 
@@ -76,23 +76,12 @@ if ($this->has_access('read'))
 					: '<a href="' . $this->href('revisions', '', ['minor_edit' => 1]) . '">' . $this->_t('MinorEditHide') . '</a>');
 		}
 
-		echo "</p>\n" . '<ul class="revisions">' . "\n";
+		echo "</p>\n";
 
-		if (@$_GET['show'] == 'all')
-		{
-			$max = 0;
-		}
-		else if (($user))
-		{
-			$max = $user['list_count'];
-		}
-		else
-		{
-			$max = $this->db->list_count;
-		}
+		$this->print_pagination($pagination);
 
-		$c					= 0;
-		$revision_count		= count($revisions);
+		echo '<ul class="revisions">' . "\n";
+
 		$diff_class			= '';
 		$this->parent_size	= 0;
 
@@ -124,12 +113,12 @@ if ($this->has_access('read'))
 
 			echo '<li>';
 			echo '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
-			echo '<input type="radio" name="a" value="' . (!$c ? '-1' : $page['revision_id']) . '" '.($c == 0 ? 'checked' : '') . ' />';
+			echo '<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 0 ? 'checked' : '') . ' />';
 			echo $place_holder.
-						'<input type="radio" name="b" value="' . (!$c ? '-1' : $page['revision_id']) . '" '.($c == 1 ? 'checked' : '') . ' />';
+						'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 1 ? 'checked' : '') . ' />';
 			echo $place_holder . '&nbsp;
 						<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
-			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; — (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
+			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; &mdash; (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
 			echo $place_holder."&nbsp;" . $this->_t('By') . " " .
 						$this->user_link($page['user_name'], '', true, false) . ' ';
 			echo $edit_note;
@@ -152,19 +141,11 @@ if ($this->has_access('read'))
 			}
 
 			echo "</li>\n";
-
-			if (++$c >= $max && $max)
-			{
-				break;
-			}
 		}
 
 		echo "</ul>\n<br />\n";
 
-		if ($max && $revision_count > $max)
-		{
-			echo  '<a href="' . $this->href('revisions', '', ['show' => 'all']) . '">' . $this->_t('RevisionsShowAll') . "</a><br /><br />\n";
-		}
+		$this->print_pagination($pagination);
 
 		echo '<a href="' . $this->href() . '" class="btn_link">' .
 				'<input type="button" value="' . $this->_t('CancelDifferencesButton') . '" />' .
