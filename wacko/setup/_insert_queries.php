@@ -75,10 +75,9 @@ $insert_records[]		= [$lang['InstallingReviewerGroup'],		$insert_reviewer_group,
 
 // UPGRADE
 // update tables
-//		$value[0] - message
+//		$value[0] - query type
 //		$value[1] - table name
 //		$value[2] - SQL query
-//		$value[3] - error message
 
 // 5.1.0 ############
 // cache
