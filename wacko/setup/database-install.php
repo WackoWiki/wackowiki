@@ -10,6 +10,33 @@ $create_table			= [];
 $insert_records			= [];
 $upgrade				= [];
 
+$upgrade_msg = [
+	'alter' => [
+		'ok'		=> $lang['AlterTable'],
+		'error'		=> $lang['ErrorAlteringTable']
+	],
+
+	'update' => [
+		'ok'		=> $lang['UpdateTable'],
+		'error'		=> $lang['ErrorUpdatingTable']
+	],
+
+	'delete' => [
+		'ok'		=> $lang['DeletingTable'],
+		'error'		=> $lang['ErrorDeletingTable']
+	],
+
+	'create' => [
+		'ok'		=> $lang['CreatingTable'],
+		'error'		=> $lang['ErrorCreatingTable']
+	],
+
+	'rename' => [
+		'ok'		=> $lang['RenameTable'],
+		'error'		=> $lang['ErrorRenamingTable']
+	]
+];
+
 $db_version				= "SELECT VERSION() as mysql_version";
 
 require_once 'setup/_insert_default.php';
@@ -170,7 +197,7 @@ switch ($config['database_driver'])
 
 							foreach ($upgrade[$to_version] as $value)
 							{
-								test(str_replace('%1', $value[1], $value[0]), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $value[3]));
+								test(str_replace('%1', $value[1], $upgrade_msg[$value[0]]['ok']), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $upgrade_msg[$value[3]]['error']));
 							}
 
 							echo "            </ol>\n";
@@ -313,7 +340,7 @@ switch ($config['database_driver'])
 
 							foreach ($upgrade[$to_version] as $value)
 							{
-								test_pdo(str_replace('%1', $value[1], $value[0]), $value[2], str_replace('%1', $value[1], $value[3]));
+								test_pdo(str_replace('%1', $value[1], $upgrade_msg[$value[0]]['ok']), $value[2], str_replace('%1', $value[1], $upgrade_msg[$value[3]]['error']));
 							}
 
 							echo "            </ol>\n";
