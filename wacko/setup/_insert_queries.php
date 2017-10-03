@@ -82,156 +82,156 @@ $insert_records[]		= [$lang['InstallingReviewerGroup'],		$insert_reviewer_group,
 
 // 5.1.0 ############
 // cache
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'cache',			$alter_cache_r5_1_0,		$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'cache',			$alter_cache_r5_1_1,		$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= ['alter',		'cache',			$alter_cache_r5_1_0];
+$upgrade['5.1.0'][]		= ['alter',		'cache',			$alter_cache_r5_1_1];
 
 // file (see 5.4.0)
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',			$alter_file_r5_1_0,			$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',			$alter_file_r5_1_1,			$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',			$alter_file_r5_1_2,			$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'upload',			$alter_file_r5_1_3,			$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_0];
+$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_1];
+$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_2];
+$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_3];
 
 // page
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'page',				$alter_page_r5_1_0,			$lang['ErrorAlteringTable']];
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'page',				$alter_page_r5_1_1,			$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= ['alter',		'page',				$alter_page_r5_1_0];
+$upgrade['5.1.0'][]		= ['alter',		'page',				$alter_page_r5_1_1];
 
-$upgrade['5.1.0'][]		= [$lang['UpdateTable'],	'page',				$update_page_r5_1_0,		$lang['ErrorUpdatingTable']];
+$upgrade['5.1.0'][]		= ['update',	'page',				$update_page_r5_1_0];
 
 // page link
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'link',				$alter_page_link_r5_1_0,	$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= ['alter',		'link',				$alter_page_link_r5_1_0];
 
 // revision
-$upgrade['5.1.0'][]		= [$lang['AlterTable'],		'revision',			$alter_revision_r5_1_0,		$lang['ErrorAlteringTable']];
+$upgrade['5.1.0'][]		= ['alter',		'revision',			$alter_revision_r5_1_0];
 
 // 5.4.0 ############
 
 // auth_token
-$upgrade['5.5.rc'][]	= [$lang['DeletingTable'],	'auth_token',		$table_auth_token_drop,		$lang['ErrorDeletingTable']];
+$upgrade['5.5.rc'][]	= ['delete',	'auth_token',		$table_auth_token_drop];
 
-$upgrade['5.5.rc'][]	= [$lang['CreatingTable'],	'auth_token',		$table_auth_token_r5_4_0,	$lang['ErrorCreatingTable']];
+$upgrade['5.5.rc'][]	= ['create',	'auth_token',		$table_auth_token_r5_4_0];
 
 // cache
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'cache',			$alter_cache_r5_4_0,		$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'cache',			$alter_cache_r5_4_1,		$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'cache',			$alter_cache_r5_4_0];
+$upgrade['5.4.0'][]		= ['alter',		'cache',			$alter_cache_r5_4_1];
 
 // category
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'category',			$alter_category_r5_4_0,		$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'category',			$alter_category_r5_4_1,		$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'category',			$alter_category_r5_4_2,		$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'category',			$alter_category_r5_4_0];
+$upgrade['5.4.0'][]		= ['alter',		'category',			$alter_category_r5_4_1];
+$upgrade['5.4.0'][]		= ['alter',		'category',			$alter_category_r5_4_2];
 
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category',			$alter_category_r5_4_3,		$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc2'][]	= ['alter',		'category',			$alter_category_r5_4_3];
 
 // category assignment
-$upgrade['5.5.rc2'][]	= [$lang['RenameTable'],	'category_page',	$rename_category_assignment_r5_4_0,		$lang['ErrorRenamingTable']];
+$upgrade['5.5.rc2'][]	= ['rename',	'category_page',	$rename_category_assignment_r5_4_0];
 
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_0,	$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_1,	$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_2,	$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_3,	$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'category_assignment',	$alter_category_assignment_r5_4_4,	$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_0];
+$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_1];
+$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_2];
+$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_3];
+$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_4];
 
-$upgrade['5.5.rc2'][]	= [$lang['UpdateTable'],	'category_assignment',	$update_category_assignment_r5_4_0,	$lang['ErrorUpdatingTable']];
+$upgrade['5.5.rc2'][]	= ['update',	'category_assignment',	$update_category_assignment_r5_4_0];
 
 // config
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',			$update_config_r5_4_0,		$lang['ErrorUpdatingTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',			$update_config_r5_4_1,		$lang['ErrorUpdatingTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',			$update_config_r5_4_2,		$lang['ErrorUpdatingTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',			$update_config_r5_4_3,		$lang['ErrorUpdatingTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'config',			$update_config_r5_4_4,		$lang['ErrorUpdatingTable']];
+$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_0];
+$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_1];
+$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_2];
+$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_3];
+$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_4];
 
 // file
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'upload',			$alter_file_r5_4_0,			$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'upload',			$alter_file_r5_4_0];
 
-$upgrade['5.5.rc2'][]	= [$lang['RenameTable'],	'file',				$rename_file_r5_4_0,		$lang['ErrorRenamingTable']];
+$upgrade['5.5.rc2'][]	= ['rename',	'file',				$rename_file_r5_4_0];
 
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_1,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_2,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_3,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_4,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_5,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'file',				$alter_file_r5_4_6,			$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_1];
+$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_2];
+$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_3];
+$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_4];
+$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_5];
+$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_6];
 
-$upgrade['5.5.rc2'][]	= [$lang['UpdateTable'],	'file',				$update_file_r5_4_0,		$lang['ErrorUpdatingTable']];
+$upgrade['5.5.rc2'][]	= ['update',	'file',				$update_file_r5_4_0];
 
 // file link
-$upgrade['5.4.0'][]		= [$lang['CreatingTable'],	'file_link',		$table_file_link_r5_4_0,	$lang['ErrorCreatingTable']];
+$upgrade['5.4.0'][]		= ['create',	'file_link',		$table_file_link_r5_4_0];
 
 //menu
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'menu',				$alter_menu_r5_4_0,			$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'menu',				$alter_menu_r5_4_1,			$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_0];
+$upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_1];
 
 // page
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'page',				$alter_page_r5_4_0,			$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'page',				$update_page_r5_4_0,		$lang['ErrorUpdatingTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'page',				$update_page_r5_4_1,		$lang['ErrorUpdatingTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'page',				$update_page_r5_4_2,		$lang['ErrorUpdatingTable']];
+$upgrade['5.4.0'][]		= ['alter',		'page',				$alter_page_r5_4_0];
+$upgrade['5.4.0'][]		= ['update',	'page',				$update_page_r5_4_0];
+$upgrade['5.4.0'][]		= ['update',	'page',				$update_page_r5_4_1];
+$upgrade['5.4.0'][]		= ['update',	'page',				$update_page_r5_4_2];
 
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'page',				$alter_page_r5_4_1,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'page',				$alter_page_r5_4_2,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'page',				$alter_page_r5_4_3,			$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc'][]	= ['alter',		'page',				$alter_page_r5_4_1];
+$upgrade['5.5.rc'][]	= ['alter',		'page',				$alter_page_r5_4_2];
+$upgrade['5.5.rc'][]	= ['alter',		'page',				$alter_page_r5_4_3];
 
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'page',				$alter_page_r5_4_4,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['UpdateTable'],	'page',				$update_page_r5_4_3,		$lang['ErrorUpdatingTable']];
-$upgrade['5.5.rc2'][]	= [$lang['UpdateTable'],	'page',				$update_page_r5_4_4,		$lang['ErrorUpdatingTable']];
+$upgrade['5.5.rc2'][]	= ['alter',		'page',				$alter_page_r5_4_4];
+$upgrade['5.5.rc2'][]	= ['update',	'page',				$update_page_r5_4_3];
+$upgrade['5.5.rc2'][]	= ['update',	'page',				$update_page_r5_4_4];
 
 // page link
-$upgrade['5.5.rc2'][]	= [$lang['RenameTable'],	'page_link',		$rename_page_link_r5_4_0,	$lang['ErrorRenamingTable']];
+$upgrade['5.5.rc2'][]	= ['rename',	'page_link',		$rename_page_link_r5_4_0];
 
 
 // referrer
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'referrer',			$alter_referrer_r5_4_0,		$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'referrer',			$alter_referrer_r5_4_0];
 
 // revision
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'revision',			$alter_revision_r5_4_0,		$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'revision',			$update_revision_r5_4_0,	$lang['ErrorUpdatingTable']];
+$upgrade['5.4.0'][]		= ['alter',		'revision',			$alter_revision_r5_4_0];
+$upgrade['5.4.0'][]		= ['update',	'revision',			$update_revision_r5_4_0];
 
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'revision',			$alter_revision_r5_4_1,		$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'revision',			$alter_revision_r5_4_2,		$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'revision',			$alter_revision_r5_4_3,		$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'revision',			$alter_revision_r5_4_4,		$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_1];
+$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_2];
+$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_3];
+$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_4];
 
-$upgrade['5.5.rc2'][]	= [$lang['AlterTable'],		'revision',			$alter_revision_r5_4_5,		$lang['ErrorAlteringTable']];
-$upgrade['5.5.rc2'][]	= [$lang['UpdateTable'],	'revision',			$update_revision_r5_4_1,	$lang['ErrorUpdatingTable']];
+$upgrade['5.5.rc2'][]	= ['alter',		'revision',			$alter_revision_r5_4_5];
+$upgrade['5.5.rc2'][]	= ['update',	'revision',			$update_revision_r5_4_1];
 
 // tag
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'tag',				$alter_tag_r5_4_0,			$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'tag',				$alter_tag_r5_4_0];
 
 // user
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user',				$alter_user_r5_4_0,			$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user',				$alter_user_r5_4_2,			$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user',				$alter_user_r5_4_3,			$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'user',				$alter_user_r5_4_0];
+$upgrade['5.4.0'][]		= ['alter',		'user',				$alter_user_r5_4_2];
+$upgrade['5.4.0'][]		= ['alter',		'user',				$alter_user_r5_4_3];
 
-$upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user',				$alter_user_r5_4_4,			$lang['ErrorAlteringTable']];
-$upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user',				$alter_user_r5_4_5,			$lang['ErrorAlteringTable']];
+$upgrade['5.5.beta'][]	= ['alter',		'user',				$alter_user_r5_4_4];
+$upgrade['5.5.beta'][]	= ['alter',		'user',				$alter_user_r5_4_5];
 
 // user setting
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_0,	$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_1,	$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_2,	$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_3,	$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_4,	$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_0];
+$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_1];
+$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_2];
+$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_3];
+$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_4];
 
-$upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_5,	$lang['ErrorAlteringTable']];
-$upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_6,	$lang['ErrorAlteringTable']];
-$upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_7,	$lang['ErrorAlteringTable']];
+$upgrade['5.5.beta'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_5];
+$upgrade['5.5.beta'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_6];
+$upgrade['5.5.beta'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_7];
 
-$upgrade['5.5.rc'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_8,	$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_8];
 
-$upgrade['5.5.rc3'][]	= [$lang['AlterTable'],		'user_setting',		$alter_user_setting_r5_4_9,	$lang['ErrorAlteringTable']];
+$upgrade['5.5.rc3'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_9];
 
-$upgrade['5.5.rc3'][]	= [$lang['UpdateTable'],	'user_setting',		$update_user_setting_r5_4_0,	$lang['ErrorUpdatingTable']];
+$upgrade['5.5.rc3'][]	= ['update',	'user_setting',		$update_user_setting_r5_4_0];
 
 // Make sure these are in order!
-$upgrade['5.4.0'][]		= [$lang['UpdateTable'],	'user',				$update_user_r5_4_0,		$lang['ErrorUpdatingTable']];
+$upgrade['5.4.0'][]		= ['update',	'user',				$update_user_r5_4_0];
 
 // usergroup
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'usergroup',		$alter_usergroup_r5_4_0,	$lang['ErrorAlteringTable']];
-$upgrade['5.4.0'][]		= [$lang['AlterTable'],		'usergroup',		$alter_usergroup_r5_4_1,	$lang['ErrorAlteringTable']];
+$upgrade['5.4.0'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_4_0];
+$upgrade['5.4.0'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_4_1];
 
 // usergroup
-$upgrade['5.4.0'][]		= [$lang['CreatingTable'],	'word',				$table_word_r5_4_0,			$lang['ErrorCreatingTable']];
+$upgrade['5.4.0'][]		= ['create',	'word',				$table_word_r5_4_0];
 
 // watch
-$upgrade['5.5.beta'][]	= [$lang['AlterTable'],		'watch',			$alter_watch_r5_4_0,		$lang['ErrorAlteringTable']];
+$upgrade['5.5.beta'][]	= ['alter',		'watch',			$alter_watch_r5_4_0];
 
 ?>
