@@ -86,7 +86,7 @@ if ($this->is_admin())
 				$owner		= Ut::untag($item, 'author');
 				$owner_id	= $this->get_user_id($owner);
 				$body		= str_replace(']]&gt;', ']]>', Ut::untag($item, 'description'));
-				$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+				$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 				$body_r = $this->save_page($tag, $title, $body, '');
 				$this->set_page_owner($page_id, $owner_id);

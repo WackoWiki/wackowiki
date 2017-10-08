@@ -10,7 +10,7 @@ header("Content-Type: text/html; charset=" . $this->get_charset());
 <!DOCTYPE html>
 <html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
-	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . ' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method . ')' : '');?></title>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . ' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method . ')' : '');?></title>
 <?php
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex == 1 || $this->page['noindex'] == 1)
@@ -18,8 +18,8 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
 }
 ?>
-	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
-	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" />
+	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" />
+	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" />
 	<meta name="language" content="<?php echo $this->page['page_lang'] ?>" />
 	<meta charset="<?php echo $this->get_charset(); ?>" />
 
@@ -31,7 +31,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 	<link rel="icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
 	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>"/>
 	<?php if ($this->db->policy_page) {?>
-	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
+	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
 	<?php } ?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />

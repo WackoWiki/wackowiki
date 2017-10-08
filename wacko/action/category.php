@@ -14,7 +14,7 @@ $category_link = function ($word, $category_id, $type_id, $filter = [], $list)
 					? '<span rel="tag" class="tag">'
 					: '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">')
 				: '') .
-			# htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) .
+			# htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
 			$word['category'] .
 			($list
 				? ($selected

@@ -3158,7 +3158,7 @@ class Wacko
 			$text = $this->add_spaces($tag);
 		}
 
-		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 		if ($track && $this->link_tracking())
 		{
 			$this->track_link_to($tag, LINK_PAGE);
@@ -7737,11 +7737,11 @@ class Wacko
 
 				if ($category_id == $category['category_id']) // TODO: might be an array!
 				{
-					$out .= '<span class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</span>';
+					$out .= '<span class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</span>';
 				}
 				else
 				{
-					$out .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+					$out .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a>';
 				}
 			}
 
@@ -7762,7 +7762,7 @@ class Wacko
 		$categories = [];
 
 		if ($_categories = $this->db->load_all(
-			"SELECT category_id, parent_id, category " .
+			"SELECT category_id, parent_id, category_lang, category " .
 			"FROM " . $this->db->table_prefix . "category " .
 			"WHERE category_lang = " . $this->db->q($lang) . " " .
 			"ORDER BY parent_id ASC, category ASC", $cache))
@@ -7798,6 +7798,7 @@ class Wacko
 			{
 				$categories[$word['category_id']] = [
 					'parent_id'	=> $word['parent_id'],
+					'lang'		=> $word['category_lang'],
 					'category'	=> $word['category'],
 					'n'			=> (isset($counts[$word['category_id']]) ? $counts[$word['category_id']] : ''),
 				];
@@ -7864,16 +7865,28 @@ class Wacko
 
 			foreach ($categories as $category_id => $word)
 			{
+				// do unicode entities
+				if ($this->page['page_lang'] != $word['lang'])
+				{
+					$word['category'] = $this->do_unicode_entities($word['category'], $word['lang']);
+				}
+
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
 							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '"/>'
 							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '/> ' . "\n\t") .
-						'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</strong></label>' . "\n";
+						'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</strong></label>' . "\n";
 
 				if (isset($word['child']) && $word['child'] == true)
 				{
 					foreach ($word['child'] as $category_id => $word)
 					{
+						// do unicode entities
+						if ($this->page['page_lang'] != $word['lang'])
+						{
+							$word['category'] = $this->do_unicode_entities($word['category'], $word['lang']);
+						}
+
 						if ($i++ < 1)
 						{
 							$out .= "\t<ul>\n";
@@ -7883,7 +7896,7 @@ class Wacko
 									($can_edit
 										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '"/>' . "\n\t\t\t"
 										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '/>' . "\n\t\t\t") .
-									'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</label>' . "\n\t\t" .
+									'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</label>' . "\n\t\t" .
 								'</li>' . "\n";
 					}
 				}

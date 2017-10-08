@@ -17,7 +17,7 @@ diff -ur ../../../../can/php-diff-master/lib/Diff/Renderer/Html/Array.php ./Diff
  	private function htmlSafe($string)
  	{
 -		return htmlspecialchars($string, ENT_NOQUOTES, 'UTF-8');
-+		return htmlspecialchars($string, ENT_NOQUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET);
++		return htmlspecialchars($string, ENT_NOQUOTES | ENT_HTML5, HTML_ENTITIES_CHARSET);
  	}
  }
 diff -ur ../../../../can/php-diff-master/lib/Diff/Renderer/Html/Inline.php ./Diff/Renderer/Html/Inline.php

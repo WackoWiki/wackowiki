@@ -171,7 +171,7 @@ if ($page_a && $page_b
 			echo "<br />\n" . '<strong>' . $this->_t('SimpleDiffAdditions') . '</strong>' . "<br />\n\n";
 			echo '<div class="additions">';
 			echo $source
-					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
+					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML5, $charset), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
 			echo "</div>\n";
 		}
@@ -181,7 +181,7 @@ if ($page_a && $page_b
 			echo "<br />\n\n" . '<strong>' . $this->_t('SimpleDiffDeletions') . '</strong>' . "<br />\n\n";
 			echo '<div class="deletions">';
 			echo $source
-					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML401, $charset), 70, "\n", 1) . '</pre>'
+					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML5, $charset), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
 			echo "</div>\n";
 		}
@@ -332,7 +332,7 @@ if ($page_a && $page_b
 			}
 
 			echo '<pre>';
-			echo htmlspecialchars($diff->render($renderer), ENT_NOQUOTES | ENT_HTML401, HTML_ENTITIES_CHARSET);
+			echo htmlspecialchars($diff->render($renderer), ENT_NOQUOTES | ENT_HTML5, HTML_ENTITIES_CHARSET);
 			echo '</pre>';
 		}
 

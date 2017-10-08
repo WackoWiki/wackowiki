@@ -20,7 +20,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	if (!($user = $this->load_user($profile)))
 	{
 		$tpl->not_found = Ut::perc_replace($this->_t('UsersNotFound'),
-			$this->href(), htmlspecialchars($profile, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET));
+			$this->href(), htmlspecialchars($profile, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET));
 	}
 	else if (!$user['enabled'])
 	{

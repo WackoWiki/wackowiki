@@ -121,7 +121,7 @@ function admin_system_log(&$engine, &$module)
 		( $where ? $where : 'WHERE level <= ' . (int) $level . ' ' ));
 
 	$_order					= isset($_GET['order'])		? $_GET['order']		: '';
-	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : [];
+	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 	$_level					= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
 	$level_pagination		= !empty($_level)		? ['level' => (int) $_level] : [];
 	$_level_mod				= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');

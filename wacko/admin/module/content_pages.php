@@ -119,7 +119,7 @@ function admin_content_pages(&$engine, &$module)
 
 	$_order					= isset($_GET['order'])		? $_GET['order']		: '';
 	$_lang					= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
-	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : [];
+	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 	$tag_pagination			= !empty($_lang)		? ['level' => (int) $_lang] : [];
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination + $tag_pagination, '', 'admin.php');

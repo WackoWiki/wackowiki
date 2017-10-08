@@ -57,7 +57,7 @@ if ($this->has_access('read'))
 
 		echo "\t\t<item>\n";
 		echo "\t\t\t<guid>" . rtrim($tag, '/') . "</guid>\n";
-		echo "\t\t\t<title>" . htmlspecialchars($page['title'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</title>\n";
+		echo "\t\t\t<title>" . htmlspecialchars($page['title'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</title>\n";
 		echo "\t\t\t<link>" . $this->db->base_url . $page['supertag'] . "</link>\n";
 		echo "\t\t\t<description><![CDATA[" . str_replace(']]>', ']]&gt;', $page['body']) . "]]></description>\n";
 		echo "\t\t\t<author>" . $page['owner_id'] . "</author>\n";

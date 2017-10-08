@@ -133,7 +133,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				}
 			}
 
-			$forum['description'] = htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+			$forum['description'] = htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 			if ($this->page['page_lang'] != $forum['page_lang'])
 			{
