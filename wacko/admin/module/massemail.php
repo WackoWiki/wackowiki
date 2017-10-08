@@ -148,7 +148,7 @@ $mail_body = '';
 			{
 				foreach ($available_groups as $group)
 				{
-					echo '<option value="' . $group['group_id'] . '">' . htmlspecialchars($group['group_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . "</option>\n";
+					echo '<option value="' . $group['group_id'] . '">' . htmlspecialchars($group['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</option>\n";
 				}
 			}
 
@@ -161,13 +161,13 @@ $mail_body = '';
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				</td>
 				<td>
-					<input type="text" name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200"  required />
+					<input type="text" name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200"  required />
 				</td></tr>
 
 			<tr class="hl_setting">
 				<td class="label"><label for="mail_body"><strong>Your message:</strong><br />
 					<small>Please note that you may enter only plain text. All markup will be removed before sending.</small></label></td>
-				<td><textarea style="width:200px; height:100px;" id="mail_body" name="mail_body"  required><?php echo htmlspecialchars($mail_body, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="width:200px; height:100px;" id="mail_body" name="mail_body"  required><?php echo htmlspecialchars($mail_body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

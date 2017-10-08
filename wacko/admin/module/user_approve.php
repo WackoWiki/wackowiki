@@ -42,7 +42,7 @@ function admin_user_approve(&$engine, &$module)
 	// simple and rude input sanitization
 	foreach ($_POST as $key => $val)
 	{
-		$_POST[$key] = htmlspecialchars($val, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+		$_POST[$key] = htmlspecialchars($val, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 	}
 
 	// IDs PROCESSING (COMMON PROCEDURES)
@@ -254,7 +254,7 @@ function admin_user_approve(&$engine, &$module)
 			);
 
 		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
-		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET)] : [];
+		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination  + ['account_status' => (int) @$_GET['account_status']], '', 'admin.php');
 
@@ -294,7 +294,7 @@ function admin_user_approve(&$engine, &$module)
 		$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
 							'<input type="hidden" name="mode" value="' . $module['mode'] . '" />' .  // required to pass mode module via GET
 							$engine->_t('UsersSearch') . ': </td><td>' .
-							'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) : '') . '" /> '.
+							'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '') . '" /> '.
 							'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '" /> '.
 							$engine->form_close();
 		$filter_status =	'<p class="right">' .

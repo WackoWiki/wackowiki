@@ -25,7 +25,7 @@ if (isset($this->categories))
 {
 	foreach ($this->categories[$type_id] as $category_id => $category)
 	{
-		$_category = '<a href="' . $this->href('', $page, ['category_id' => $category_id, 'type_id' => $type_id]) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '</a>';
+		$_category = '<a href="' . $this->href('', $page, ['category_id' => $category_id, 'type_id' => $type_id]) . '" class="tag" rel="tag">' . htmlspecialchars($category, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a>';
 
 		if ($list)
 		{

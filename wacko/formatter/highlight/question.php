@@ -1,6 +1,8 @@
 <?php
 
 // question box
-echo "<div class=\"quest\">";
+echo "<table class=\"inf\">";
+echo "<tr><td class=\"sign\">?</td><td class=\"text\">";
 include Ut::join_path(FORMATTER_DIR, 'wiki.php');
-echo "</div>";
+echo "</td></tr>";
+echo "</table>";

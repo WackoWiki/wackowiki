@@ -67,8 +67,6 @@ function admin_config_email(&$engine, &$module)
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
-
-
 	echo $engine->form_open('email');
 ?>
 		<input type="hidden" name="action" value="update" />
@@ -115,7 +113,7 @@ function admin_config_email(&$engine, &$module)
 					<small><?php echo $engine->_t('FromEmailNameInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->db->email_from, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="100" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->db->email_from, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -124,7 +122,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="noreply_email"><strong><?php echo $engine->_t('NoReplyEmail'); ?>:</strong><br />
 				<small><?php echo $engine->_t('NoReplyEmailInfo'); ?></small></label></td>
-				<td><input type="email" maxlength="100" id="noreply_email" name="noreply_email" value="<?php echo htmlspecialchars($engine->db->noreply_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" id="noreply_email" name="noreply_email" value="<?php echo htmlspecialchars($engine->db->noreply_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -132,7 +130,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="admin_email"><strong><?php echo $engine->_t('AdminEmail'); ?>:</strong><br />
 				<small><?php echo $engine->_t('AdminEmailInfo'); ?></small></label></td>
-				<td><input type="email" maxlength="100" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->db->admin_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->db->admin_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -140,7 +138,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="abuse_email"><strong><?php echo $engine->_t('AbuseEmail'); ?>:</strong><br />
 				<small><?php echo $engine->_t('AbuseEmailInfo'); ?></small></label></td>
-				<td><input type="email" maxlength="100" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -160,7 +158,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?>:</strong><br />
 				<small><?php echo $engine->_t('SmtpServerInfo'); ?></small></label></td>
-				<td><input type="text" maxlength="50" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->db->smtp_host, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->db->smtp_host, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -203,7 +201,7 @@ function admin_config_email(&$engine, &$module)
 				<td class="label"><label for="smtp_username"><strong><?php echo $engine->_t('SmtpUsername'); ?>:</strong><br />
 				<small><?php echo $engine->_t('SmtpUsernameInfo'); ?></small></label></td>
 				<td>
-					<input type="text" maxlength="255" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->db->smtp_username, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="255" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->db->smtp_username, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr class="lined">
@@ -213,7 +211,7 @@ function admin_config_email(&$engine, &$module)
 				<td class="label"><label for="smtp_password"><strong><?php echo $engine->_t('SmtpPassword'); ?>:</strong><br />
 				<small><?php echo $engine->_t('SmtpPasswordInfo'); ?></small></label></td>
 				<td>
-					<input type="password" maxlength="255" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->db->smtp_password, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="password" maxlength="255" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->db->smtp_password, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 

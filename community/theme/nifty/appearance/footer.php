@@ -21,7 +21,7 @@
 		<div id="credits">
 		<?php
 		// comment this out for not showing website policy link at the bottom of your pages
-		if ($this->db->policy_page) echo '<a href="' . htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) . '">' . $this->_t('StandardTerms') . '</a><br />';
+		if ($this->db->policy_page) echo '<a href="' . htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . $this->_t('StandardTerms') . '</a><br />';
 
 		if ($this->get_user())
 		{

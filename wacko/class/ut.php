@@ -341,7 +341,7 @@ class Ut
 
 	static function html($string, $double_encode = true)
 	{
-		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET, $double_encode);
+		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET, $double_encode);
 	}
 
 	static function serialize($data, $options = 0)

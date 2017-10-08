@@ -155,7 +155,7 @@ $xhtml_tags = [
 	'xmp'
 	];
 
-	$source = htmlspecialchars($text, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+	$source = htmlspecialchars($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 	$source = preg_replace_callback(
 			'/&lt;!--(.*?)--&gt;/s',

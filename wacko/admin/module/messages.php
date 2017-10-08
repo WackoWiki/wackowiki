@@ -56,7 +56,7 @@ function admin_messages(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="system_message"><strong>System message:</strong><br />
 					<small>Your text here</small></label></td>
-				<td><textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>

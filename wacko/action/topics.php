@@ -187,7 +187,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 								|| ($topic['owner_name'] != $user['user_name']
 									&& $topic['created'] > $user['last_mark']) ));
 
-				$topic['description'] = htmlspecialchars($topic['description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);
+				$topic['description'] = htmlspecialchars($topic['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 				if ($this->page['page_lang'] != $topic['page_lang'])
 				{

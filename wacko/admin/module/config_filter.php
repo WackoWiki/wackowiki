@@ -87,7 +87,7 @@ function admin_config_filter(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="phrase_list"><strong>Word list:</strong><br />
 					<small>Word or phrase <code>fragment</code> to be blacklisted (one per line)</small></label></td>
-				<td><textarea style="width:400px; height:400px;" id="phrase_list" name="phrase_list"><?php echo htmlspecialchars($phrases, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="width:400px; height:400px;" id="phrase_list" name="phrase_list"><?php echo htmlspecialchars($phrases, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 
 		</table>

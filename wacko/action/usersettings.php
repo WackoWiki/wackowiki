@@ -486,7 +486,7 @@ else if (($user = $this->get_user()))
 			<label for="real_name"><?php echo $this->_t('RealName');?></label>
 		</th>
 		<td>
-			<input type="text" id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" maxlength="80"/>
+			<input type="text" id="real_name" name="real_name" value="<?php echo htmlentities($user['real_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ?>" size="40" maxlength="80"/>
 		</td>
 	</tr>
 	<tr>
@@ -502,7 +502,7 @@ else if (($user = $this->get_user()))
 			<label for="email"><?php echo $this->_t('EmailAddress');?></label>
 		</th>
 		<td>
-			<input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
+			<input type="email" id="email" name="email" value="<?php echo htmlentities($user['email'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ?>" size="40" />&nbsp;
 <?php echo !$user['email_confirm']
 		? '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('EmailConfirmed') . '" title="' . $this->_t('EmailConfirmed') . '" class="btn-tick"/>'
 		: '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('EmailConfirm') . '" title="' . $this->_t('EmailConfirm') . '" class="btn-warning"/>' ?>

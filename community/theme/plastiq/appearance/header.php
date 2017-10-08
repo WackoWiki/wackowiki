@@ -13,8 +13,8 @@
 				<tr>
 					<td>
 						<div id="title" style="padding-top:5px;">
-							<h1><a href="<?php echo $this->href('', $this->db->root_page); ?>"><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></a></h1>
-							<h2><a href="<?php echo $this->href('', $this->db->root_page); ?>"><?php echo htmlspecialchars($this->db->site_desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></a></h2>
+							<h1><a href="<?php echo $this->href('', $this->db->root_page); ?>"><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?></a></h1>
+							<h2><a href="<?php echo $this->href('', $this->db->root_page); ?>"><?php echo htmlspecialchars($this->db->site_desc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?></a></h2>
 						</div>
 					</td>
 					<td style="vertical-align:top;">

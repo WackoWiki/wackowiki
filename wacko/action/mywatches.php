@@ -41,7 +41,7 @@ if ($user_id = $this->get_user_id())
 		$pagination = $this->pagination($count['n'], $max, 'p', $profile + ['mode' => 'mywatches', 'unwatched' => 1, '#' => 'list']);
 
 		echo $this->_t('UnwatchedPages') . ' (<a href="' .
-			$this->href('', '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET), '#' => 'list']) . '">' .
+			$this->href('', '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list']) . '">' .
 			$this->_t('ViewWatchedPages') . '</a>) . <br /><br />';
 
 		if ($pages = $this->db->load_all(

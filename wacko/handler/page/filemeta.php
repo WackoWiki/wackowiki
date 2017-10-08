@@ -55,7 +55,7 @@ $clean_text = function ($string)
 	$string = $this->format($string, 'pre_wacko');
 	#$string = $this->format($string, 'wacko'); //
 	$string = $this->format($string, 'safehtml'); //
-	#$string = htmlspecialchars($string, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET, $this->get_charset()); // breaks html unicode chars
+	#$string = htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET, $this->get_charset()); // breaks html unicode chars
 
 	return $string;
 };
@@ -376,11 +376,11 @@ $this->ensure_page(true); // TODO: upload for forums?
 					<table class="upload">
 						<tr>
 							<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-							<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo htmlspecialchars($file['file_description'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?>"/></td>
+							<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo htmlspecialchars($file['file_description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>"/></td>
 						</tr>
 						<tr>
 							<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
-							<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo htmlspecialchars($file['caption'], ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET); ?></textarea></td>
+							<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo htmlspecialchars($file['caption'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?></textarea></td>
 						</tr>
 							<tr>
 						<th scope="row">
