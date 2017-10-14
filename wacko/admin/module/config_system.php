@@ -158,7 +158,7 @@ function admin_config_system(&$engine, &$module)
 				<small>Set this value if your proxy server sends the client IP in a header
 				 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
 				 addresses, only the last one (the left-most) will be used.</small></label></td>
-				<td><input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -171,7 +171,7 @@ function admin_config_system(&$engine, &$module)
 				 these, that is the request reaches the web server from one of your
 				 reverse proxies. Otherwise, the client could directly connect to
 				 your web server spoofing the X-Forwarded-For headers.</small></label></td>
-				<td><input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr>
 				<th colspan="2">
