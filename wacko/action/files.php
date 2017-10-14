@@ -216,7 +216,7 @@ if ($can_view)
 
 			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
-			$dt			= $file['uploaded_dt'];
+			$dt			= $this->get_time_formatted($file['uploaded_dt']);
 			$desc		= $this->format($file['file_description'], 'typografica' );
 
 			if ($this->page['page_lang'] != $file['file_lang'])
@@ -293,7 +293,7 @@ if ($can_view)
 
 					$file_size . '<br /><br />' .
 					$this->user_link($file['user_name'], '', true, false) . '<br />' .
-					$this->get_time_formatted($dt) . '<br /><br />' .
+					$dt . '<br /><br />' .
 					$this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter) .
 
 					'</td>' . "\n";
@@ -305,7 +305,7 @@ if ($can_view)
 						<span class="size2-">' . $file_size . ', ' . $hits . '</span>&nbsp;'.
 					'</td>' . "\n" .
 					'<td class="dt-">' .
-						'<span class="dt2-">' . $this->get_time_formatted($dt) . '</span>&nbsp;'.
+						'<span class="dt2-">' . $dt . '</span>&nbsp;'.
 					'</td>' . "\n";
 			}
 

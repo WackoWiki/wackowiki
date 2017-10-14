@@ -179,7 +179,7 @@ $wacko_config_defaults = [
 	'standard_handlers'				=> 'addcomment|admin\.php|attachments|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch|wordprocessor',
 
 	'upload'						=> 'admins',
-	'upload_images_only'			=> 0,
+	'upload_images_only'			=> 1,
 	'upload_max_size'				=> 512000,
 	'upload_quota'					=> 0,
 	'upload_quota_per_user'			=> 104857600,
