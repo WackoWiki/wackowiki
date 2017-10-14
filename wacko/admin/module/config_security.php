@@ -266,7 +266,7 @@ function admin_config_security(&$engine, &$module)
 					<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.</small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->db->tls_proxy, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->db->tls_proxy, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr class="hl_setting">

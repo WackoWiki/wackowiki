@@ -107,7 +107,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="site_name"><strong>Site Name:</strong><br />
 					<small>The title of this site, appears on browser title, theme header, email-notification, etc.</small></label></td>
-				<td><input type="text" maxlength="255" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->db->site_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -115,7 +115,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="site_desc"><strong>Site Description:</strong><br />
 					<small>Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.</small></label></td>
-				<td><input type="text" maxlength="255" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->db->site_desc, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->db->site_desc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -123,7 +123,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="meta_description"><strong>Description of the document by default:</strong><br />
 					<small>The text used by default for meta-tags <code>description</code> (maximum of 255 characters).</small></label></td>
-				<td><textarea style="width:200px; height:100px;" id="meta_description" name="meta_description"><?php echo htmlspecialchars($engine->db->meta_description, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="width:200px; height:100px;" id="meta_description" name="meta_description"><?php echo htmlspecialchars($engine->db->meta_description, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -131,7 +131,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="meta_keywords"><strong>Keywords page default:</strong><br />
 					<small>Key words used by default for meta-tags <code>keywords</code> (maximum of 255 characters).</small></label></td>
-				<td><textarea style="width:200px; height:100px;" id="meta_keywords" name="meta_keywords"><?php echo htmlspecialchars($engine->db->meta_keywords, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td><textarea style="width:200px; height:100px;" id="meta_keywords" name="meta_keywords"><?php echo htmlspecialchars($engine->db->meta_keywords, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -140,7 +140,7 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label"><label for="admin_name"><strong>Admin of Site:</strong><br />
 					<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label></td>
 				<td>
-					<input type="text" maxlength="25" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->db->admin_name, ENT_COMPAT | ENT_HTML401, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="25" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->db->admin_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
 				</td>
 			</tr>
 			<tr>
