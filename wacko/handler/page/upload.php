@@ -64,10 +64,10 @@ if (isset($_POST['upload']) & $can_upload)
 			// 1. check out $data
 			#$ext = pathinfo($filename, PATHINFO_EXTENSION);
 			$src		= $_FILES['file']['tmp_name'];
-			$mime_type = mime_content_type($src);
+			$mime_type	= mime_content_type($src);
 
-			$_data	= explode('.', $_FILES['file']['name']);
-			$ext	= $_data[count($_data) - 1];
+			$_data		= explode('.', $_FILES['file']['name']);
+			$ext		= $_data[count($_data) - 1];
 			unset($_data[count($_data) - 1]);
 
 			// TODO: filter against banned and then allowed file extentions / mime type
