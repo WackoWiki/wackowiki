@@ -600,7 +600,7 @@ function put_table(&$engine, $pack)
 // $mode - sql instruction to be used (i.e. INSERT or REPLACE)
 function put_data(&$engine, $pack, $table, $mode)
 {
-	$point		= '';
+	$point		= 0;
 
 	// open table dump file with read access
 	$file_name	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $table . BACKUP_FILE_DUMP_SUFFIX);
@@ -676,7 +676,9 @@ function put_data(&$engine, $pack, $table, $mode)
 // decompress files and restore them into the filesystem
 function put_files(&$engine, $pack, $dir, $keep = false)
 {
-	$total	= [];
+	$total		= [];
+	$total[0]	= 0;
+	$total[1]	= 0;
 
 	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
 

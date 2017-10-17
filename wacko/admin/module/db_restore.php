@@ -334,7 +334,9 @@ function admin_db_restore(&$engine, &$module)
 					'(homonymic files ' . ($ifiles === true ? 'skip' : 'substitute' ) . '):</strong>' . "\n\n";
 
 				// run
-				$overall = [];
+				$overall		= [];
+				$overall[0]		= 0;
+				$overall[1]		= 0;
 
 				foreach ($list as $dir)
 				{
