@@ -325,16 +325,24 @@ class Http
 			{
 				// default
 				case 1:
-					header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src *;");
+					$file_name	= 'csp_defaults.conf';
 					break;
 
 				// custom
 				case 2:
-					$csp_config = file_get_contents(CONFIG_DIR . '/csp_custom.conf');
-					$csp_custom = str_replace(["\r", "\n", "\t"], '', $csp_config);
-					// TODO: cache?
-					header($csp_custom);
+					$file_name	= 'csp_custom.conf';
 					break;
+			}
+
+			// TODO: cache, validate, strip possible comments, move to additional function
+			//		throw error if
+			if ($this->db->csp)
+			{
+				$file_path	= Ut::join_path(CONFIG_DIR, $file_name);
+				$csp_config = file_get_contents($file_path);
+				$csp_header = str_replace(["\r", "\n", "\t"], '', $csp_config);
+
+				header($csp_header);
 			}
 
 			if ($this->tls_session)
