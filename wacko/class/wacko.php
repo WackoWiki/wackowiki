@@ -2611,7 +2611,7 @@ class Wacko
 	function notify_moderator($page_id, $user_id, $subject, $body)
 	{
 		// subscribe & notify moderators
-		if (is_array($this->db->groups['Moderator']))
+		if (isset($this->db->groups['Moderator']) && is_array($this->db->groups['Moderator']))
 		{
 			$members = $this->db->load_all(
 				"SELECT m.user_id, u.user_name, u.email, s.user_lang, u.email_confirm, u.enabled, s.send_watchmail " .
