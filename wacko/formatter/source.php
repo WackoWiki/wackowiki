@@ -10,7 +10,7 @@ extract(array_merge(['default' => 'wacko', 'source' => $this->tag, 'copy_button'
 $div_id = Ut::random_token(10);
 echo '<!--notypo-->';
 
-// copy to clipboard is implemented only for MSIE for now
+// copy to clipboard
 if ($copy_button)
 {
 	$this->add_html_head('<script type="text/javascript" src="' . $this->db->base_url . 'js/clipboard.min.js" async onload="new Clipboard(\'.clipb\')"></script>' . "\n");
