@@ -36,18 +36,18 @@ leave it as is for the memories
 
 <form action="[' href ']" method="post" name="clone_page" >
 	[' csrf: clone_page ']
-	<input type="text" name="clone_name" size="40" maxlength="250"/>
+	<input type="text" name="clone_name" size="40" maxlength="250">
 	[' e editNote ']
 	[' doCluster ']
 	<br><br>
 	<input type="submit" name="submit" value="[' _t: CloneButton ']">
 	&nbsp;
-	<a href="[' show ']" class="btn_link"><input type="button" value="[' _t: EditCancelButton | replace "\n" " " ']"/></a>
+	<a href="[' show ']" class="btn_link"><input type="button" value="[' _t: EditCancelButton | replace "\n" " " ']"></a>
 </form>
 [ ====================================== editNote =================================== ]
 <br>
 <label for="edit_note">[' _t: EditNote ']</label><br>
-<input type="text" id="edit_note" maxlength="200" value="[' note |e ']" size="60" name="edit_note"/>
+<input type="text" id="edit_note" maxlength="200" value="[' note |e ']" size="60" name="edit_note">
 [ ====================================== doCluster =================================== ]
 <br><br>
 <input type="checkbox" id="massclone" name="massclone">

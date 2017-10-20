@@ -35,7 +35,7 @@
 					<span class="nobr Tune">
 						[ ' account ' ]
 						|
-						<a onclick="return confirm('[ ' _t: LogoutAreYouSure ' ]');" href="[ ' logout ']">[ ' _t: LogoutLink ' ]</a>
+						<a id="logout-confirm" data-logout-confirm="[ ' _t: LogoutAreYouSure ' ]" href="[ ' logout ']">[ ' _t: LogoutLink ' ]</a>
 					</span>
 				) </small>
 			=]
@@ -66,7 +66,7 @@
 	=]
 	[= dropmenu _ =
 		<li class="dropdown">
-			<a href="#" id="menu-more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-menu"/></a>
+			<a href="#" id="menu-more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-menu"></a>
 			<ul class="dropdown_menu">
 				['' menu menuList '']
 			</ul>
@@ -75,14 +75,14 @@
 	[= addmark _ =
 		<li>
 			<a href="[ ' href ' ]">
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="+" title="[ ' _t: AddToBookmarks ' ]" class="btn-addbookmark"/>
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="+" title="[ ' _t: AddToBookmarks ' ]" class="btn-addbookmark">
 			</a>
 		</li>
 	=]
 	[= removemark _ =
 		<li>
 			<a href="[ ' href ' ]">
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: RemoveFromBookmarks ' ]" class="btn-removebookmark"/>
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: RemoveFromBookmarks ' ]" class="btn-removebookmark">
 			</a>
 		</li>
 	=]
@@ -121,7 +121,7 @@
 			<span class="search nobr">
 				<label for="phrase">[ ' _t: SearchText ' ]</label>
 				<input type="search" name="phrase" id="phrase" size="20">
-				<input type="submit" class="submitinput" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]"/>
+				<input type="submit" class="submitinput" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]">
 			</span>
 		</form>
 	</div>
