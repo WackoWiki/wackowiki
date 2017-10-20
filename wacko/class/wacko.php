@@ -7613,9 +7613,9 @@ class Wacko
 			$out .= $inline ? '' : "<br>\n";
 			$out .= '<img src="' . $this->db->base_url . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
-			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"/></a>' . "<br>\n";
+			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n";
 			// $out .= $inline ? '' : "<br>\n";
-			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6"/>';
+			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6">';
 			$out .= $inline ? '' : "<br>\n";
 		}
 
@@ -7873,8 +7873,8 @@ class Wacko
 
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
-							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '"/>'
-							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '/> ' . "\n\t") .
+							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '">'
+							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '> ' . "\n\t") .
 						'<label for="category' . $category_id . '"><strong>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</strong></label>' . "\n";
 
 				if (isset($word['child']) && $word['child'] == true)
@@ -7894,8 +7894,8 @@ class Wacko
 
 						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
 									($can_edit
-										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '"/>' . "\n\t\t\t"
-										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '/>' . "\n\t\t\t") .
+										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '">' . "\n\t\t\t"
+										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
 									'<label for="category' . $category_id . '">' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</label>' . "\n\t\t" .
 								'</li>' . "\n";
 					}
@@ -7932,7 +7932,7 @@ class Wacko
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '"> ' .
-						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a>' . "<br>\n" .
+						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}

@@ -695,7 +695,7 @@ function bb2_options(&$engine)
 				<label for="logging_verbose">Verbose</label>
 			</td>
 			<td>
-				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked <?php } ?>/>
+				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
 
@@ -704,7 +704,7 @@ function bb2_options(&$engine)
 				<label for="logging_normal">Normal (recommended)</label>
 			</td>
 			<td>
-				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked <?php } ?>/>
+				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
 
@@ -713,7 +713,7 @@ function bb2_options(&$engine)
 				<label for="logging_false">Do not log (not recommended)</label>
 			</td>
 			<td>
-				<input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked <?php } ?>/>
+				<input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
 
@@ -740,7 +740,7 @@ function bb2_options(&$engine)
 				required for OpenID; increases spam received</label>
 			</td>
 			<td>
-				<input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked <?php } ?>/>
+				<input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
 
@@ -800,7 +800,7 @@ function bb2_options(&$engine)
 				Select this option if you believe Bad Behavior's site security cookie is not exempt from the 2012 EU cookie regulation. <a href="http://bad-behavior.ioerror.us/2012/05/04/eu-cookie-requirement-disclosure/" rel="noreferrer">More info</a></label>
 			</td>
 			<td>
-				<input type="checkbox" id="eu_cookie" name="eu_cookie" value="true" <?php if ($settings['eu_cookie']) { ?>checked <?php } ?>/>
+				<input type="checkbox" id="eu_cookie" name="eu_cookie" value="true" <?php if ($settings['eu_cookie']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
 
@@ -826,7 +826,7 @@ function bb2_options(&$engine)
 				<label for="reverse_proxy">Enable Reverse Proxy</label>
 			</td>
 			<td>
-				<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="true" <?php if ($settings['reverse_proxy']) { ?>checked <?php } ?>/>
+				<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="true" <?php if ($settings['reverse_proxy']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
 		<tr class="lined">

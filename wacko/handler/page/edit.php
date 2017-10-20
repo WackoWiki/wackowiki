@@ -252,18 +252,18 @@ if ($this->has_access('read')
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
-		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '"/>' . "\n" .
-					'<input type="hidden" name="tag"		value="' . $this->tag . '"/>' . "\n" .
-					'<input type="hidden" name="add"		value="1"/>' . "\n";
+		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '">' . "\n" .
+					'<input type="hidden" name="tag"		value="' . $this->tag . '">' . "\n" .
+					'<input type="hidden" name="add"		value="1">' . "\n";
 	}
 
 	echo $output;
 
 	$output			=	'';
 	$preview		=	'';
-	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="' . $this->_t('EditStoreButton') . '"/>&nbsp;' .
-						'<input type="submit" class="OkBtn_Top" name="preview" value="' . $this->_t('EditPreviewButton') . '"/>&nbsp;' .
-						'<a href="' . $this->href() . '" class="btn_link"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '"/></a>' . "\n";
+	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="' . $this->_t('EditStoreButton') . '">&nbsp;' .
+						'<input type="submit" class="OkBtn_Top" name="preview" value="' . $this->_t('EditPreviewButton') . '">&nbsp;' .
+						'<a href="' . $this->href() . '" class="btn_link"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '"></a>' . "\n";
 
 	// preview?
 	if (isset($_POST['preview']))
@@ -358,7 +358,7 @@ if ($this->has_access('read')
 		{
 			$output .= '<label for="edit_note">' . $this->_t('EditNote') . ':</label><br>';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
-			$output .= '<input type="text" id="edit_note" maxlength="200" value="' . htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" name="edit_note"/>';
+			$output .= '<input type="text" id="edit_note" maxlength="200" value="' . htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" name="edit_note">';
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br>";
 		}
 
@@ -367,7 +367,7 @@ if ($this->has_access('read')
 			// minor edit
 			if ($this->page && $this->db->minor_edit != 0)
 			{
-				$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
+				$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit">';
 				$output .= '<label for="minor_edit">' . $this->_t('EditMinor') . '</label>';
 				$output .= '<br>' . "\n";
 			}
@@ -379,7 +379,7 @@ if ($this->has_access('read')
 			// reviewed
 			if ($this->page && $this->db->review != 0 && $this->is_reviewer())
 			{
-				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed"/>';
+				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed">';
 				$output .= '<label for="reviewed">' . $this->_t('Reviewed') . '</label>';
 				$output .= '<br>' . "\n";
 			}

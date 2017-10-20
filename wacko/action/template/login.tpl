@@ -8,7 +8,7 @@
 			<div class="cssform">
 				<h3>[ ' _t: Hello ' ], [ ' link ' ]!</h3>
 				<p>
-					<a href="[ ' logout ' ]" class="btn_link"><input type="button" class="CancelBtn" value="[ ' _t: LogoutButton ' ]"/></a>
+					<a href="[ ' logout ' ]" class="btn_link"><input type="button" class="CancelBtn" value="[ ' _t: LogoutButton ' ]"></a>
 				</p>
 				<p>
 					[ ' account ' ] | <a href="[ ' cookies ' ]">[ ' _t: ClearCookies ' ]</a>
@@ -36,7 +36,7 @@
 				<input type="text" id="email" name="email" class="verify">
 			</p>
 			<p>
-				<input type="checkbox" id="persistent" name="persistent" tabindex="3"/>
+				<input type="checkbox" id="persistent" name="persistent" tabindex="3">
 				<label for="persistent">[ ' _t: PersistentCookie ' ]</label>
 			</p>
 			[= show _ =
