@@ -31,7 +31,7 @@ if ($this->is_admin())
 				{
 					if ($curday)
 					{
-						echo "</ul>\n<br /></li>\n";
+						echo "</ul>\n<br></li>\n";
 					}
 
 					echo '<li><strong>' . $day . ":</strong>\n" .
@@ -56,7 +56,7 @@ if ($this->is_admin())
 							'<small>' . $time . '</small>  &mdash; ' .
 							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .
 							'<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' .
-									$this->_t('CommentDeleted') . '" alt="[deleted]" class="btn-delete"/> ' .
+									$this->_t('CommentDeleted') . '" alt="[deleted]" class="btn-delete"> ' .
 							$this->compose_link_to_page($page['tag'], '', '', 0) .
 						'</span>' .
 						' . . . . . . . . . . . . . . . . <small>' .

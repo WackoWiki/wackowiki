@@ -25,7 +25,7 @@ $wacko_translation = [
 	'RegistrationPage'			=> 'Registrering',
 	'SiteRegistered'			=> 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br />If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
 	'NameTooShort'				=> 'Brugernavn er for kort, et minimum på %2 tegn er påkrævet.',
 	'NameTooLong'				=> 'Brugernavn er for langt, et maksimum på %2 tegn er tilladt.',
 	'NameAlphanumOnly'			=> 'Brugernavn skal være mellem %1 og %2 tegn langt og brug kun alfanumeriske tegn.',
@@ -79,7 +79,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
 	'WelcomeBack'				=> 'Welcome back, %1',
-	'LoginAttemtsExceeded'		=> 'Du har overskredet antallet af tilladte loginforsøg.<br />Oven i at skulle angive dit brugernavn og dit kodeord igen skal du nu bekræfte billedet du ser herunder.',
+	'LoginAttemtsExceeded'		=> 'Du har overskredet antallet af tilladte loginforsøg.<br>Oven i at skulle angive dit brugernavn og dit kodeord igen skal du nu bekræfte billedet du ser herunder.',
 
 	// session notice
 	'SessionTerminatedDue'		=> 'Session terminated due to %1',
@@ -291,7 +291,7 @@ $wacko_translation = [
 	'MinorEditShow'				=> 'Vis mindre ændring',
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
-	'OverwriteAlert'			=> 'OVERSKRIVNING ADVARSEL: Denne side blev ændret af en anden mens du redigerede den.<br />Kopier venligst dine ændringer, og rediger forfra.',
+	'OverwriteAlert'			=> 'OVERSKRIVNING ADVARSEL: Denne side blev ændret af en anden mens du redigerede den.<br>Kopier venligst dine ændringer, og rediger forfra.',
 	'WriteAccessDenied'			=> 'Du har ikke tilladelse til at skrive denne side.',
 	'EmptyPage'					=> 'Page body was empty - ikke gemt!',
 	'EmptyComment'				=> 'Hov, den er tom - ikke gemt!',
@@ -458,7 +458,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Vælg sprog',
 	'ShowSpaces'				=> 'Vis mellemrum i WikiNavne',
 	'WrongPage4Redirect'		=> 'Hov, den kan vi ikke finde',
-	'ReallyDelete'				=> 'Er du sikker på at du vil SLETTE siden?<br />Der er ingen fortrydelsesret!<br /><br />ADVARSEL: Alle versioner af siden slettes.',
+	'ReallyDelete'				=> 'Er du sikker på at du vil SLETTE siden?<br>Der er ingen fortrydelsesret!<br><br>ADVARSEL: Alle versioner af siden slettes.',
 	'RemoveButton'				=> 'Ja, slet!',
 	'RestoreButton'				=> 'Restore',
 	'ArchiveButton'				=> 'Arkiv',
@@ -580,7 +580,7 @@ $wacko_translation = [
 	'ForgotPassword'			=> 'Glemt password?',
 	'SendButton'				=> 'Send',
 	'UserNotFound'				=> 'Ingen bruger med disse oplysninger.',
-	'NotConfirmedEmail'			=> 'Din mailadresse er ikke bekræftet.<br />Vi kan derfor ikke sende dig en mail.',
+	'NotConfirmedEmail'			=> 'Din mailadresse er ikke bekræftet.<br>Vi kan derfor ikke sende dig en mail.',
 	'EmailForgotSubject'		=> 'Password opdatering for ',
 	'EmailForgotMessage'		=> 'Dette er en reminder om password for %1.' . "\n" . 'Dit brugerlogin: %2'."\n\n" . 'Følg dette link: ' . "\n" . '%3'."\n\n" . '',
 	'CodeWasSent'				=> 'Password instruktioner sendt til din mail.',
@@ -1002,7 +1002,7 @@ $wacko_translation = [
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
 	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
-	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br />Usually this should not happen, so let the incident site administrator.<br />As a precaution, issue has been preserved in its original form.',
+	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum

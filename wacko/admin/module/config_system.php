@@ -25,11 +25,11 @@ function admin_config_system(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 			Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.
 	</p>
-	<br />
+	<br>
 <?php
 	// update settings
 
@@ -56,7 +56,7 @@ function admin_config_system(&$engine, &$module)
 
 	echo $engine->form_open('system');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -66,7 +66,7 @@ function admin_config_system(&$engine, &$module)
 				<th colspan="2">Debug mode</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="debug_mode"><strong>Debug mode:</strong><br />
+				<td class="label"><label for="debug_mode"><strong>Debug mode:</strong><br>
 				<small>Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.</small></label></td>
 				<td>
 					<select id="debug_mode" name="debug">
@@ -81,61 +81,61 @@ function admin_config_system(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="debug_sql_threshold"><strong>Threshold performance RDBMS:</strong><br />
+				<td class="label"><label for="debug_sql_threshold"><strong>Threshold performance RDBMS:</strong><br>
 				<small>In the detailed debug mode to record only the queries take longer than the number of seconds.</small></label></td>
-				<td><input type="number" min="0" maxlength="10" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo (int) $engine->db->debug_sql_threshold;?>" /></td>
+				<td><input type="number" min="0" maxlength="10" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo (int) $engine->db->debug_sql_threshold;?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="debug_admin_only"><strong>Closed diagnosis:</strong><br />
+				<td class="label"><label for="debug_admin_only"><strong>Closed diagnosis:</strong><br>
 				<small>Show debug data of the program (and DBMS) only for the administrator.</small></label></td>
-				<td><input type="checkbox" id="debug_admin_only" name="debug_admin_only" value="1"<?php echo ($engine->db->debug_admin_only ? ' checked' : '');?> /></td>
+				<td><input type="checkbox" id="debug_admin_only" name="debug_admin_only" value="1"<?php echo ($engine->db->debug_admin_only ? ' checked' : '');?>></td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Caching Options
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="cache"><strong>Cache rendered pages:</strong><br />
+				<td class="label"><label for="cache"><strong>Cache rendered pages:</strong><br>
 				<small>Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.</small></label></td>
-				<td><input type="checkbox" id="cache" name="cache" value="1"<?php echo ($engine->db->cache ? ' checked' : '');?> /></td>
+				<td><input type="checkbox" id="cache" name="cache" value="1"<?php echo ($engine->db->cache ? ' checked' : '');?>></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="cache_ttl"><strong>Term relevance cached pages:</strong><br />
+				<td class="label"><label for="cache_ttl"><strong>Term relevance cached pages:</strong><br>
 				<small>Cache pages no more than a specified number of seconds.</small></label></td>
-				<td><input type="number" min="0" maxlength="5" id="cache_ttl" name="cache_ttl" value="<?php echo (int) $engine->db->cache_ttl;?>" /></td>
+				<td><input type="number" min="0" maxlength="5" id="cache_ttl" name="cache_ttl" value="<?php echo (int) $engine->db->cache_ttl;?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="cache_sql"><strong>Cache DBMS queries:</strong><br />
+				<td class="label"><label for="cache_sql"><strong>Cache DBMS queries:</strong><br>
 				<small>Maintain a local cache the results of certain resource-SQL-queries.</small></label></td>
-				<td><input type="checkbox" id="cache_sql" name="cache_sql" value="1"<?php echo ($engine->db->cache_sql ? ' checked' : '');?> /></td>
+				<td><input type="checkbox" id="cache_sql" name="cache_sql" value="1"<?php echo ($engine->db->cache_sql ? ' checked' : '');?>></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="cache_sql_ttl"><strong>Term relevance Cache Database:</strong><br />
+				<td class="label"><label for="cache_sql_ttl"><strong>Term relevance Cache Database:</strong><br>
 				<small>Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.</small></label></td>
-				<td><input type="number" min="0" maxlength="5" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo (int) $engine->db->cache_sql_ttl;?>" /></td>
+				<td><input type="number" min="0" maxlength="5" id="cache_sql_ttl" name="cache_sql_ttl" value="<?php echo (int) $engine->db->cache_sql_ttl;?>"></td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Reverse Proxy
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="reverse_proxy"><strong>Use Reverse proxy:</strong><br />
+				<td class="label"><label for="reverse_proxy"><strong>Use Reverse proxy:</strong><br>
 				<small>Enable this setting to determine the correct IP address of the remote
 				 client by examining information stored in the X-Forwarded-For headers.
 				 X-Forwarded-For headers are a standard mechanism for identifying client
@@ -148,48 +148,48 @@ function admin_config_system(&$engine, &$module)
 				 logging, statistics and access management systems; if you are unsure
 				 about this setting, do not have a reverse proxy, or WackoWiki operates in
 				 a shared hosting environment, this setting should remain disabled.</small></label></td>
-				<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ($engine->db->reverse_proxy == 1 ? ' checked' : '');?> /></td>
+				<td><input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ($engine->db->reverse_proxy == 1 ? ' checked' : '');?>></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="reverse_proxy_header"><strong>Reverse proxy header:</strong><br />
+				<td class="label"><label for="reverse_proxy_header"><strong>Reverse proxy header:</strong><br>
 				<small>Set this value if your proxy server sends the client IP in a header
 				 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
 				 addresses, only the last one (the left-most) will be used.</small></label></td>
-				<td><input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="reverse_proxy_addresses"><strong>reverse_proxy accepts an array of IP addresses:</strong><br />
+				<td class="label"><label for="reverse_proxy_addresses"><strong>reverse_proxy accepts an array of IP addresses:</strong><br>
 				<small>Each element of this array is the IP address of any of your reverse
 				 proxies. Filling this array WackoWiki will trust the information stored
 				 in the X-Forwarded-For headers only if Remote IP address is one of
 				 these, that is the request reaches the web server from one of your
 				 reverse proxies. Otherwise, the client could directly connect to
 				 your web server spoofing the X-Forwarded-For headers.</small></label></td>
-				<td><input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Miscellaneous
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="rewrite_mode"><strong>Use <code>mod_rewrite</code>:</strong><br />
-				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br />
+				<td class="label"><label for="rewrite_mode"><strong>Use <code>mod_rewrite</code>:</strong><br>
+				<small>If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
 				<span class="cite">The value might be overwritten by the Settings class, despite you turn it off, if HTTP_MOD_REWRITE is on.</span></small></label></td>
-				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1" <?php echo ($engine->db->rewrite_mode == 1 ? ' checked' : '');?> /></td>
+				<td><input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1" <?php echo ($engine->db->rewrite_mode == 1 ? ' checked' : '');?>></td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

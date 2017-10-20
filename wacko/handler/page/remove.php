@@ -15,7 +15,7 @@ if (!$this->page)
 }
 
 $title = $this->page['comment_on_id']?  'RemoveComment' : 'RemovePage';
-echo '<h3>' . $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
+echo '<h3>' . $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br>\n";
 
 // check user permissions to delete
 if ($this->is_admin()
@@ -194,14 +194,14 @@ if ($this->is_admin()
 				$this->get_time_formatted($this->page['created'])));
 		}
 
-		$message .= "<br />" . $this->_t('ThisActionHavenotUndo') . "<br />\n";
+		$message .= "<br>" . $this->_t('ThisActionHavenotUndo') . "<br>\n";
 
 		$this->show_message($message, 'success');
 
 		// return to commented page
 		if ($comment_on_id)
 		{
-			echo '<br />' . $this->compose_link_to_page($this->get_page_tag($comment_on_id) . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'), 0);
+			echo '<br>' . $this->compose_link_to_page($this->get_page_tag($comment_on_id) . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'), 0);
 		}
 	}
 	else
@@ -220,7 +220,7 @@ if ($this->is_admin()
 
 			echo '<div class="comment-title"><h2>' . $this->page['title'] . '</h2></div>';
 			echo htmlspecialchars($desc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
-			echo '</div><br />';
+			echo '</div><br>';
 
 			$message = $this->_t('ReallyDeleteComment');
 		}
@@ -231,7 +231,7 @@ if ($this->is_admin()
 
 		// show backlinks
 		echo $this->action('backlinks', ['nomark' => 0]);
-		echo '<br />';
+		echo '<br>';
 
 		$this->show_message($message, 'warning');
 
@@ -242,29 +242,29 @@ if ($this->is_admin()
 		{
 			if (!$comment_on_id)
 			{
-				echo '<input type="checkbox" id="removecluster" name="cluster" />';
-				echo '<label for="removecluster">' . $this->_t('RemoveCluster') . '</label><br />';
+				echo '<input type="checkbox" id="removecluster" name="cluster">';
+				echo '<label for="removecluster">' . $this->_t('RemoveCluster') . '</label><br>';
 
 				if ($this->db->store_deleted_pages)
 				{
-					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep') . '</label><br />';
+					echo '<input type="checkbox" id="dontkeep" name="dontkeep">';
+					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep') . '</label><br>';
 				}
 			}
 			else
 			{
 				if ($this->db->store_deleted_pages)
 				{
-					echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepComment') . '</label><br />';
+					echo '<input type="checkbox" id="dontkeep" name="dontkeep">';
+					echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepComment') . '</label><br>';
 				}
 			}
 		}
 ?>
-		<br />
-		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />&nbsp;
-		<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
-		<br />
+		<br>
+		<input type="submit" class="OkBtn" id="submit" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>">&nbsp;
+		<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" id="button" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"></a>
+		<br>
 <?php
 		echo $this->form_close();
 	}

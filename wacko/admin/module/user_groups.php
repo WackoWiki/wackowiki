@@ -37,11 +37,11 @@ function admin_user_groups(&$engine, &$module)
 */
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.
 	</p>
-	<br />
+	<br>
 <?php
 
 	/////////////////////////////////////////////
@@ -117,7 +117,7 @@ function admin_user_groups(&$engine, &$module)
 
 				echo $engine->form_open('add_group_member');
 
-				echo '<input type="hidden" name="group_id" value="' . $group_id . '" />' .
+				echo '<input type="hidden" name="group_id" value="' . $group_id . '">' .
 				'<table class="formation">' .
 					'<tr>
 						<td>
@@ -140,13 +140,13 @@ function admin_user_groups(&$engine, &$module)
 					</tr>' .
 					'<tr>
 						<td>
-							<br />
-							<input type="submit" id="submit" name="add_member" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
+							<br>
+							<input type="submit" id="submit" name="add_member" value="' . $engine->_t('GroupsSaveButton') . '"> '.
+							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
 						'</td>
 					</tr>' .
 				'</table>
-				<br />';
+				<br>';
 
 				echo $engine->form_close();
 			}
@@ -162,18 +162,18 @@ function admin_user_groups(&$engine, &$module)
 				{
 					echo $engine->form_open('remove_group_member');
 
-					echo '<input type="hidden" name="group_id" value="' . $group_id . '" />' .
-						'<input type="hidden" name="member_id" value="' . htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" />' . "\n" .
+					echo '<input type="hidden" name="group_id" value="' . $group_id . '">' .
+						'<input type="hidden" name="member_id" value="' . htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
 					'<table class="formation">' .
 						'<tr>
 							<td>
 								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>' . htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-								'<input type="submit" id="submit" name="remove_member" value="yes" /> '.
-								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
-								'<br /><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
+								'<input type="submit" id="submit" name="remove_member" value="yes"> '.
+								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
+								'<br><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
-					'</table><br />';
+					'</table><br>';
 
 					echo $engine->form_close();
 				}
@@ -280,7 +280,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
 						</td>' .
 						'<td>
-							<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100" />
+							<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100">
 						</td>
 					</tr>' .
 					'<tr>
@@ -288,7 +288,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="description">' . $engine->_t('GroupsDescription') . '</label>
 						</td>' .
 						'<td>
-							<input type="text" id="description" name="description" value="' . ( isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="50" maxlength="100" />
+							<input type="text" id="description" name="description" value="' . ( isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="50" maxlength="100">
 						</td>
 					</tr>' .
 					'<tr>
@@ -315,7 +315,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 						</td>' .
 						'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked' : '') . ' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( !isset($_POST['open']) ? ' checked' : '') . '>
 						</td>
 					</tr>' .
 					'<tr>
@@ -323,18 +323,18 @@ function admin_user_groups(&$engine, &$module)
 							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 		 				</td>' .
 						'<td>
-		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked' : '') . ' />
+		 					<input type="checkbox" id="active" name="active" value="1" '. ( !isset($_POST['active']) ? ' checked' : '') . '>
 		 				</td>
 					</tr>' .
 					'<tr>
 						<td>
-		 					<br />
-		 					<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
+		 					<br>
+		 					<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '"> '.
+							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
 						'</td>
 					</tr>' .
 				'</table>
-				<br />';
+				<br>';
 
 			echo $engine->form_close();
 		}
@@ -349,19 +349,19 @@ function admin_user_groups(&$engine, &$module)
 			{
 				echo $engine->form_open('edit_group');
 
-				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" />' . "\n" .
+				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
 					'<table class="formation">' .
 					'<tr><td>
 						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\' in</label>
 					</td>' .
 					'<td>
-						<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100" />
+						<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100">
 					</td></tr>' .
 					'<tr><td>
 							<label for="new_description">' . $engine->_t('GroupsDescription') . '</label>
 					</td>' .
 					'<td>
-						<input type="text" id="new_description" name="new_description" value="' . ( isset($_POST['new_description']) ? htmlspecialchars($_POST['new_description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100" />
+						<input type="text" id="new_description" name="new_description" value="' . ( isset($_POST['new_description']) ? htmlspecialchars($_POST['new_description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100">
 					</td></tr>' .
 					'<tr><td>
 						<label for="moderator_id">' . $engine->_t('GroupsModerator') . '</label>
@@ -384,21 +384,21 @@ function admin_user_groups(&$engine, &$module)
 							<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 					</td>' .
 					'<td>
-							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '') . ' />
+							<input type="checkbox" id="open" name="open" value="1" '. ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '') . '>
 					</td></tr>' .
 					'<tr><td>
 							<label for="active">' . $engine->_t('GroupsActive') . '</label>
 					</td>' .
 					'<td>
-							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '') . ' />
+							<input type="checkbox" id="active" name="active" value="1" '. ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '') . '>
 					</td></tr>' .
 					'<tr><td>
-						<br />
-						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '" /> '.
-						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>' .
-						'<br /><small>' . $engine->_t('GroupsRenameInfo') . '</small>' .
+						<br>
+						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '"> '.
+						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
+						'<br><small>' . $engine->_t('GroupsRenameInfo') . '</small>' .
 					'</td></tr>' .
-					'</table><br />';
+					'</table><br>';
 
 				echo $engine->form_close();
 			}
@@ -414,18 +414,18 @@ function admin_user_groups(&$engine, &$module)
 			{
 				echo $engine->form_open('delete_group');
 
-				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" />' . "\n" .
+				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
 					'<table class="formation">' .
 						'<tr>
 							<td>
 								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-								'<input type="submit" id="submit" name="delete" value="yes" /> '.
-								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
-								'<br /><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
+								'<input type="submit" id="submit" name="delete" value="yes"> '.
+								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
+								'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
 					'</table>
-					<br />';
+					<br>';
 
 				echo $engine->form_close();
 			}
@@ -460,7 +460,7 @@ function admin_user_groups(&$engine, &$module)
 
 		echo $engine->form_open('get_group');
 ?>
-		<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+		<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
 
 		<table class="formation listcenter">
 			<tr>
@@ -473,7 +473,7 @@ function admin_user_groups(&$engine, &$module)
 		{
 			echo '<tr class="lined">' . "\n" .
 					'<td>
-						<input type="radio" name="change_member" value="' . $member['user_id'] . '" /></td>' .
+						<input type="radio" name="change_member" value="' . $member['user_id'] . '"></td>' .
 					'<td>' . $member['user_id'] . '</td>' .
 					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users&amp;user_id=' . $member['user_id'] . '">' . $member['user_name'] . '</a></strong></td>' .
 				'</tr>';
@@ -486,9 +486,9 @@ function admin_user_groups(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		echo '<br /><input type="submit" id="button" name="add_member" value="' . $engine->_t('GroupsAddButton') . '" /> ';
-		echo '<input type="submit" id="button" name="remove_member" value="' . $engine->_t('GroupsRemoveButton') . '" /> ';
-		echo '<a href="' . $engine->href() . '" class="btn_link"><input type="button" value="' . $engine->_t('GroupsCancelButton') . '" /></a>';
+		echo '<br><input type="submit" id="button" name="add_member" value="' . $engine->_t('GroupsAddButton') . '"> ';
+		echo '<input type="submit" id="button" name="remove_member" value="' . $engine->_t('GroupsRemoveButton') . '"> ';
+		echo '<a href="' . $engine->href() . '" class="btn_link"><input type="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>';
 
 		echo $engine->form_close();
 	}
@@ -582,9 +582,9 @@ function admin_user_groups(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons =	'<br /><input type="submit" id="button" name="create" value="' . $engine->_t('GroupsAddButton') . '" /> '.
-							'<input type="submit" id="button" name="edit" value="' . $engine->_t('GroupsEditButton') . '" /> '.
-							'<input type="submit" id="button" name="delete" value="' . $engine->_t('GroupsRemoveButton') . '" /> ';
+		$control_buttons =	'<br><input type="submit" id="button" name="create" value="' . $engine->_t('GroupsAddButton') . '"> '.
+							'<input type="submit" id="button" name="edit" value="' . $engine->_t('GroupsEditButton') . '"> '.
+							'<input type="submit" id="button" name="delete" value="' . $engine->_t('GroupsRemoveButton') . '"> ';
 
 		echo $control_buttons;
 
@@ -609,7 +609,7 @@ function admin_user_groups(&$engine, &$module)
 			{
 				echo '<tr class="lined">' . "\n" .
 						'<td>
-							<input type="radio" name="change" value="' . $row['group_id'] . '" /></td>' .
+							<input type="radio" name="change" value="' . $row['group_id'] . '"></td>' .
 						'<td>' . $row['group_id'] . '</td>' .
 						'<td class="t_left" style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;group_id=' . $row['group_id'] . '">' . $row['group_name'] . '</a></strong></td>' .
 						'<td>' . $row['description'] . '</td>' .
@@ -623,7 +623,7 @@ function admin_user_groups(&$engine, &$module)
 		}
 		else
 		{
-			echo '<tr><td colspan="5"><br /><em>No groups that meet the criteria</em></td></tr>';
+			echo '<tr><td colspan="5"><br><em>No groups that meet the criteria</em></td></tr>';
 		}
 ?>
 		</table>

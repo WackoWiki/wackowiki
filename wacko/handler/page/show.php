@@ -47,16 +47,16 @@ if ($this->has_access('read'))
 			if ($this->is_admin())
 			{
 				$message = $this->_t('PageDeletedInfo');
-				$message .= '<br /><br />';
+				$message .= '<br><br>';
 				$message .= $this->form_open('restore_page', ['page_method' => 'restore']);
-				$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '" />';
-				$message .= '<input type="submit" value="' . $this->_t('RestoreButton') . '" />';
+				$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '">';
+				$message .= '<input type="submit" value="' . $this->_t('RestoreButton') . '">';
 				$message .= $this->form_close();
 			}
 			else
 			{
 				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
-				$message .= '<br />';
+				$message .= '<br>';
 			}
 
 			$this->show_message($message, 'warning');
@@ -91,12 +91,12 @@ if ($this->has_access('read'))
 				}
 				else
 				{
-					$message .= '<br /><br />';
+					$message .= '<br><br>';
 					$message .= $this->form_open('edit_revision', ['page_method' => 'edit']);
-					$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '" />';
-					$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '" />';
-					$message .= '<input type="hidden" name="body" value="' . htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" />';
-					$message .= '<input type="submit" value="' . $this->_t('ReEditOldRevision') . '" />';
+					$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '">';
+					$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '">';
+					$message .= '<input type="hidden" name="body" value="' . htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">';
+					$message .= '<input type="submit" value="' . $this->_t('ReEditOldRevision') . '">';
 					$message .= '<a href="' . $this->href() . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"/></a>';
 					$message .= $this->form_close();
 				}

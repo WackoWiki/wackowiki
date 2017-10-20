@@ -25,7 +25,7 @@ $text = preg_replace("#<#s","&lt;", $text );
 $text = preg_replace("#>#s","&gt;", $text );
 $text = preg_replace("#\n#s","\002", $text );    // newline
 $text = preg_replace("#\s#s","&nbsp;", $text );  // spaces
-$text = preg_replace("#\002#s","<br />\n", $text );    // newline
+$text = preg_replace("#\002#s","<br>\n", $text );    // newline
 
 // Highlighting
 

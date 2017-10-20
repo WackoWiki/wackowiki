@@ -25,7 +25,7 @@ function admin_content_menu(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	echo $engine->action('menu', ['system' => 1]);
 }

@@ -25,11 +25,11 @@ function admin_config_appearance(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		<?php echo $engine->_t('AppearanceSettingsInfo');?>
 	</p>
-	<br />
+	<br>
 <?php
 	$remove_file = function ($file, $update_config = true) use ($engine)
 	{
@@ -220,7 +220,7 @@ function admin_config_appearance(&$engine, &$module)
 	echo $engine->form_open('basic', ['form_more' => ' enctype="multipart/form-data" ']);
 
 	?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -228,22 +228,22 @@ function admin_config_appearance(&$engine, &$module)
 			</colgroup>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Logo
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="logo"><strong>Site Logo:</strong><br />
+				<td class="label"><label for="logo"><strong>Site Logo:</strong><br>
 					<small>Your logo will appear at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.</small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
 				{?>
-					<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_logo); ?>" alt="" height="<?php echo $engine->db->logo_height; ?>" width="<?php echo $engine->db->logo_width; ?>"><br />
+					<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_logo); ?>" alt="" height="<?php echo $engine->db->logo_height; ?>" width="<?php echo $engine->db->logo_width; ?>"><br>
 					<input type="submit" id="remove_logo" name="remove_logo" value="<?php echo $engine->_t('Remove'); ?>">
 				<?php }
 					// SVG format is intentionally excluded ?>
-					<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, image/gif, image/jpeg, image/png" />
+					<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, image/gif, image/jpeg, image/png">
 				</td>
 			</tr>
 			<?php
@@ -255,14 +255,14 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo_width"><strong>Logo dimensions:</strong><br />
+					<label for="logo_width"><strong>Logo dimensions:</strong><br>
 					<small>Width and height of the displayed Logo.</small></label>
 				</td>
 				<td>
 				<?php	// TODO: add option to reset dimentions to default image size
 						// + option to 'readonly / disable' input fields
 				?>
-					<input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>" />&nbsp;&times;&nbsp;<input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height;?>" /> pix
+					<input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>">&nbsp;&times;&nbsp;<input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height;?>"> pix
 				</td>
 			</tr>
 			<?php } ?>
@@ -270,7 +270,7 @@ function admin_config_appearance(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="logo_display"><strong>Logo display mode:</strong><br />
+				<td class="label"><label for="logo_display"><strong>Logo display mode:</strong><br>
 					<small>Defines the apearence of the Logo. Default is off.</small></label></td>
 				<td>
 					<select id="logo_display" name="logo_display" style="width: 200px;">
@@ -282,31 +282,31 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Favicon
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="logo"><strong>Site Favicon:</strong><br />
+				<td class="label"><label for="logo"><strong>Site Favicon:</strong><br>
 					<small>Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers.</small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)
 				{?>
-					<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_favicon); ?>" alt="Site Favicon"><br />
+					<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_favicon); ?>" alt="Site Favicon"><br>
 					<input type="submit" id="remove_favicon" name="remove_favicon" value="<?php echo $engine->_t('Remove'); ?>">
 				<?php }?>
-					<input type="file" name="favicon" id="favicon_upload" accept=".gif, .ico, .jpg, .png, .svg, image/gif, image/x-icon, image/jpeg, image/png, image/svg+xml" />
+					<input type="file" name="favicon" id="favicon_upload" accept=".gif, .ico, .jpg, .png, .svg, image/gif, image/x-icon, image/jpeg, image/png, image/svg+xml">
 				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Layout
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="theme"><strong>Theme:</strong><br />
+				<td class="label"><label for="theme"><strong>Theme:</strong><br>
 					<small>Template design the site uses by default.</small></label></td>
 				<td>
 					<select id="theme" name="theme">
@@ -325,7 +325,7 @@ function admin_config_appearance(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for=""><strong>Allowed Themes:</strong><br />
+				<td class="label"><label for=""><strong>Allowed Themes:</strong><br>
 					<small>Select the allowed themes, which the user can choose, otherwise all available themes are allowed.</small></label></td>
 				<td>
 				<?php
@@ -344,7 +344,7 @@ function admin_config_appearance(&$engine, &$module)
 
 					foreach ($themes as $n => $theme)
 					{
-						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" '. (in_array($theme, $theme_list) ? ' checked' : ''). ' />' . "\n\t\t\t" .
+						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" '. (in_array($theme, $theme_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
 								'<label for="theme_' . $n . '">' . $themes[$n] . '</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
@@ -362,18 +362,18 @@ function admin_config_appearance(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Themes per page:</strong><br />
+				<td class="label"><strong>Themes per page:</strong><br>
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?> /><label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked' : '');?> /><label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?>><label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked' : '');?>><label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

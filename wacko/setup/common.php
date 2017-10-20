@@ -38,7 +38,7 @@ function write_config_hidden_nodes($skip_values)
 				$value = implode(',', $value);
 			}
 
-			echo '   <input type="hidden" name="config[' . $key . ']" value="' . $value . '" />' . "\n";
+			echo '   <input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
 		}
 	}
 }
@@ -53,7 +53,7 @@ function output_image($ok)
 {
 	global $lang;
 
-	return '<img src="' . my_location() . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross '.($ok ? 'tick' : 'cross') . '" />';
+	return '<img src="' . my_location() . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross '.($ok ? 'tick' : 'cross') . '">';
 }
 
 // TODO: refactor -> same function as in wacko class
@@ -97,7 +97,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	{
 		if ($error_text)
 		{
-			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . " <br />";
+			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . " <br>";
 
 			if ($config['database_driver'] == 'mysqli_legacy')
 			{

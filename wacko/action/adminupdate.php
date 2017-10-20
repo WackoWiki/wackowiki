@@ -29,7 +29,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="build_user_stats" value="<?php echo $this->_t('CategoriesSaveButton');?>" />
+			<input type="submit" name="build_user_stats" value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
 			echo $this->form_close();
 		}
@@ -102,7 +102,7 @@ if ($this->is_admin())
 
 			$this->log(1, 'Synchronized user statistics');
 
-			echo	'<p><em>User Statistics synchronized.</em></p><br />';
+			echo	'<p><em>User Statistics synchronized.</em></p><br>';
 
 		}
 	}
@@ -120,7 +120,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="set_title"  value="<?php echo $this->_t('CategoriesSaveButton');?>" />
+			<input type="submit" name="set_title"  value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
 			echo $this->form_close();
 		}
@@ -161,7 +161,7 @@ if ($this->is_admin())
 				$this->set_language($this->user_lang);
 
 				echo "</table>";
-				echo "<br />Titles set";
+				echo "<br>Titles set";
 			}
 			else
 			{
@@ -182,7 +182,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="set_depth"  value="<?php echo $this->_t('CategoriesSaveButton');?>" />
+			<input type="submit" name="set_depth"  value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
 			echo $this->form_close();
 		}
@@ -213,7 +213,7 @@ if ($this->is_admin())
 				}
 
 				echo "</table>";
-				echo "<br />Depth set";
+				echo "<br>Depth set";
 			}
 			else
 			{
@@ -234,7 +234,7 @@ if ($this->is_admin())
 		{
 			echo $this->form_open();
 			?>
-			<input type="submit" name="set_version_id" value="<?php echo $this->_t('CategoriesSaveButton');?>" />
+			<input type="submit" name="set_version_id" value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
 			echo $this->form_close();
 		}
@@ -274,7 +274,7 @@ if ($this->is_admin())
 				}
 
 				echo "</table>";
-				echo "<br />Version_id set in revisions";
+				echo "<br>Version_id set in revisions";
 			}
 			else
 			{
@@ -298,7 +298,7 @@ if ($this->is_admin())
 			echo "<h3>7. Migrates acls to new scheme:</h3>";
 			echo $this->form_open();
 			?>
-			<input type="submit" name="migrate_acls" value="<?php echo $this->_t('CategoriesSaveButton');?>" />
+			<input type="submit" name="migrate_acls" value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
 			echo $this->form_close();
 		}
@@ -314,7 +314,7 @@ if ($this->is_admin())
 
 			foreach ($_acls as $_acl)
 			{
-				echo $_acl['privilege'] . '<br />';
+				echo $_acl['privilege'] . '<br>';
 				// get object_right_id (e.g. 'write' -> 1, 'read' -> 2)
 				$_object_right_id = $this->db->load_single(
 					"SELECT object_right_id " .
@@ -372,7 +372,7 @@ if ($this->is_admin())
 							$deny = 0;
 						}
 
-						echo $privilege . '<br />';
+						echo $privilege . '<br>';
 						// is group?
 						// 1. default groups
 						// 1.1 Everybody
@@ -477,7 +477,7 @@ if ($this->is_admin())
 				}
 			}
 
-			echo '<br />' . $old_acl_count . ' acl and ' . $privilege_count . ' privilege settings inserted.';
+			echo '<br>' . $old_acl_count . ' acl and ' . $privilege_count . ' privilege settings inserted.';
 		}
 	*/
 }

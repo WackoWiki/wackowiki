@@ -10,23 +10,23 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 <body>
 
 	<?php echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
-<input type="hidden" name="action" value="login" />
+<input type="hidden" name="action" value="login">
 
 <div class="header">
 <div class="user"><?php if ($this->get_user()) { ?> <span class="nobr"><?php echo $this->_t('YouAre'); ?>
 <img
 	src="<?php echo $this->db->theme_url ?>icon/user.png"
 	width="12" height="12" style="vertical-align: baseline;"
-	alt="" /><?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?></span><br />
+	alt=""><?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?></span><br>
 <span class="small">( <span class="nobr Tune"><?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
 | <a
 	onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
 	href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span>
 )</span> <?php } else { ?> <span class="nobr"><input type="hidden"
-	name="goback" value="<?php echo $this->slim_url($this->tag);?>" /><strong><?php echo $this->_t('LoginWelcome') ?>:&nbsp;</strong><input
-	type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->_t('LoginPassword') ?>:&nbsp;<input
-	type="password" name="password" class="login" size="8" />&nbsp;<input
-	type="submit" value="Ok" /></span> <?php } ?></div>
+	name="goback" value="<?php echo $this->slim_url($this->tag);?>"><strong><?php echo $this->_t('LoginWelcome') ?>:&nbsp;</strong><input
+	type="text" name="name" size="18" class="login">&nbsp;<?php echo $this->_t('LoginPassword') ?>:&nbsp;<input
+	type="password" name="password" class="login" size="8">&nbsp;<input
+	type="submit" value="Ok"></span> <?php } ?></div>
 <div class="title"><?php echo $this->db->site_name ?>: <?php echo (isset($this->page['title']) ? $this->page['title'] : $this->get_page_path()); ?>
 </div>
 </div>
@@ -66,14 +66,14 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
 				. 'icon/bookmark1.png" alt="+" title="' .
-				$this->_t('AddToBookmarks')  . '"/></a></li>';
+				$this->_t('AddToBookmarks')  . '"></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
 				. 'icon/bookmark2.png" alt="-" title="' .
-				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
+				$this->_t('RemoveFromBookmarks')  . '"></a></li>';
 		}
 	}
 	echo "\n</ol></div>"; ?><br style="clear: both;"></div>

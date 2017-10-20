@@ -25,11 +25,11 @@ function admin_config_email(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		<?php echo $engine->_t('EmaiSettingsInfo'); ?>
 	</p>
-	<br />
+	<br>
 <?php
 
 	// send test email
@@ -69,7 +69,7 @@ function admin_config_email(&$engine, &$module)
 
 	echo $engine->form_open('email');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -80,12 +80,12 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="enable_email"><strong><?php echo $engine->_t('EnableEmail'); ?>:</strong><br />
+					<label for="enable_email"><strong><?php echo $engine->_t('EnableEmail'); ?>:</strong><br>
 					<small><?php echo $engine->_t('EnableEmailInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked' : '');?> /><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked' : '');?> /><label for="enable_email_off"><?php echo $engine->_t('Disabled'); ?></label>
+					<input type="radio" id="enable_email_on" name="enable_email" value="1"<?php echo ($engine->db->enable_email == 1 ? ' checked' : '');?>><label for="enable_email_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="enable_email_off" name="enable_email" value="0"<?php echo ($engine->db->enable_email == 0 ? ' checked' : '');?>><label for="enable_email_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -93,8 +93,8 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="phpmailer_method"><strong><?php echo $engine->_t('EmailFunctionName'); ?>:</strong><br />
-					<small><?php echo $engine->_t('EmailFunctionNameInfo'); ?><br />
+					<label for="phpmailer_method"><strong><?php echo $engine->_t('EmailFunctionName'); ?>:</strong><br>
+					<small><?php echo $engine->_t('EmailFunctionNameInfo'); ?><br>
 					<?php echo $engine->_t('UseSmtpInfo'); ?></small></label></td>
 				<td>
 					<select id="phpmailer_method" name="phpmailer_method">
@@ -109,70 +109,70 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="email_from"><strong><?php echo $engine->_t('FromEmailName'); ?>:</strong><br />
+					<label for="email_from"><strong><?php echo $engine->_t('FromEmailName'); ?>:</strong><br>
 					<small><?php echo $engine->_t('FromEmailNameInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->db->email_from, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="100" id="email_from" name="email_from" value="<?php echo htmlspecialchars($engine->db->email_from, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="noreply_email"><strong><?php echo $engine->_t('NoReplyEmail'); ?>:</strong><br />
+				<td class="label"><label for="noreply_email"><strong><?php echo $engine->_t('NoReplyEmail'); ?>:</strong><br>
 				<small><?php echo $engine->_t('NoReplyEmailInfo'); ?></small></label></td>
-				<td><input type="email" maxlength="100" id="noreply_email" name="noreply_email" value="<?php echo htmlspecialchars($engine->db->noreply_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" id="noreply_email" name="noreply_email" value="<?php echo htmlspecialchars($engine->db->noreply_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="admin_email"><strong><?php echo $engine->_t('AdminEmail'); ?>:</strong><br />
+				<td class="label"><label for="admin_email"><strong><?php echo $engine->_t('AdminEmail'); ?>:</strong><br>
 				<small><?php echo $engine->_t('AdminEmailInfo'); ?></small></label></td>
-				<td><input type="email" maxlength="100" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->db->admin_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" id="admin_email" name="admin_email" value="<?php echo htmlspecialchars($engine->db->admin_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="abuse_email"><strong><?php echo $engine->_t('AbuseEmail'); ?>:</strong><br />
+				<td class="label"><label for="abuse_email"><strong><?php echo $engine->_t('AbuseEmail'); ?>:</strong><br>
 				<small><?php echo $engine->_t('AbuseEmailInfo'); ?></small></label></td>
-				<td><input type="email" maxlength="100" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="email" maxlength="100" id="abuse_email" name="abuse_email" value="<?php echo htmlspecialchars($engine->db->abuse_email, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="send_test_email"><strong><?php echo $engine->_t('SendTestEmail'); ?>:</strong><br />
+				<td class="label"><label for="send_test_email"><strong><?php echo $engine->_t('SendTestEmail'); ?>:</strong><br>
 				<small><?php echo $engine->_t('SendTestEmailInfo'); ?></small></label></td>
 				<td><input type="submit" id="send_test_email" name="send_test_email" value="<?php echo $engine->_t('SendTestEmail'); ?>"></td>
 			</tr>
 
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					<?php echo $engine->_t('SmtpSettings'); ?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?>:</strong><br />
+				<td class="label"><label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?>:</strong><br>
 				<small><?php echo $engine->_t('SmtpServerInfo'); ?></small></label></td>
-				<td><input type="text" maxlength="50" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->db->smtp_host, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="50" id="smtp_host" name="smtp_host" value="<?php echo htmlspecialchars($engine->db->smtp_host, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="smtp_port"><strong><?php echo $engine->_t('SmtpPort'); ?>:</strong><br />
+				<td class="label"><label for="smtp_port"><strong><?php echo $engine->_t('SmtpPort'); ?>:</strong><br>
 				<small><?php echo $engine->_t('SmtpPortInfo'); ?></small></label></td>
-				<td><input type="number" min="0" maxlength="5" id="smtp_port" name="smtp_port" value="<?php echo (int) $engine->db->smtp_port;?>" /></td>
+				<td><input type="number" min="0" maxlength="5" id="smtp_port" name="smtp_port" value="<?php echo (int) $engine->db->smtp_port;?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="smtp_connection_mode"><strong><?php echo $engine->_t('SmtpConnectionMode'); ?>:</strong><br />
+				<td class="label"><label for="smtp_connection_mode"><strong><?php echo $engine->_t('SmtpConnectionMode'); ?>:</strong><br>
 				<small><?php echo $engine->_t('SmtpConnectionModeInfo'); ?>.</small></label></td>
 				<td><select id="smtp_connection_mode" name="smtp_connection_mode">
 						<option value="" <?php echo ((string) $engine->db->smtp_connection_mode === '' ? ' selected' : '');?>><?php echo $engine->_t('None'); ?>none</option>
@@ -186,40 +186,40 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="smtp_auto_tls"><strong><?php echo $engine->_t('SmtpAutoTls'); ?>:</strong><br />
+					<label for="smtp_auto_tls"><strong><?php echo $engine->_t('SmtpAutoTls'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SmtpAutoTlsInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="smtp_auto_tls_on" name="smtp_auto_tls" value="1" <?php echo ($engine->db->smtp_auto_tls == 1 ? ' checked' : '');?> /><label for="smtp_auto_tls_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="smtp_auto_tls_off" name="smtp_auto_tls" value="0" <?php echo ($engine->db->smtp_auto_tls == 0 ? ' checked' : '');?> /><label for="smtp_auto_tls_off"><?php echo $engine->_t('Disabled'); ?></label>
+					<input type="radio" id="smtp_auto_tls_on" name="smtp_auto_tls" value="1" <?php echo ($engine->db->smtp_auto_tls == 1 ? ' checked' : '');?>><label for="smtp_auto_tls_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="smtp_auto_tls_off" name="smtp_auto_tls" value="0" <?php echo ($engine->db->smtp_auto_tls == 0 ? ' checked' : '');?>><label for="smtp_auto_tls_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="smtp_username"><strong><?php echo $engine->_t('SmtpUsername'); ?>:</strong><br />
+				<td class="label"><label for="smtp_username"><strong><?php echo $engine->_t('SmtpUsername'); ?>:</strong><br>
 				<small><?php echo $engine->_t('SmtpUsernameInfo'); ?></small></label></td>
 				<td>
-					<input type="text" maxlength="255" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->db->smtp_username, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="255" id="smtp_username" name="smtp_username" value="<?php echo htmlspecialchars($engine->db->smtp_username, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="smtp_password"><strong><?php echo $engine->_t('SmtpPassword'); ?>:</strong><br />
+				<td class="label"><label for="smtp_password"><strong><?php echo $engine->_t('SmtpPassword'); ?>:</strong><br>
 				<small><?php echo $engine->_t('SmtpPasswordInfo'); ?></small></label></td>
 				<td>
-					<input type="password" maxlength="255" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->db->smtp_password, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
+					<input type="password" maxlength="255" id="smtp_password" name="smtp_password" value="<?php echo htmlspecialchars($engine->db->smtp_password, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
 			</tr>
 
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

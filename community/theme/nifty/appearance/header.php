@@ -15,30 +15,30 @@ header("Content-Type: text/html; charset=" . $this->get_charset());
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex == 1 || $this->page['noindex'] == 1)
 {
-	echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+	echo "	<meta name=\"robots\" content=\"noindex, nofollow\">\n";
 }
 ?>
-	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" />
-	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" />
-	<meta name="language" content="<?php echo $this->page['page_lang'] ?>" />
-	<meta charset="<?php echo $this->get_charset(); ?>" />
+	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>">
+	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>">
+	<meta name="language" content="<?php echo $this->page['page_lang'] ?>">
+	<meta charset="<?php echo $this->get_charset(); ?>">
 
-	<link rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/default.css" />
+	<link rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/default.css">
 	<?php if ($this->db->allow_x11colors) {?>
-	<link rel="stylesheet" href="<?php echo Ut::join_path(THEME_DIR, "_common/X11colors.css"); ?>" />
+	<link rel="stylesheet" href="<?php echo Ut::join_path(THEME_DIR, "_common/X11colors.css"); ?>">
 	<?php } ?>
-	<link media="print" rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css" />
-	<link rel="icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
+	<link media="print" rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css">
+	<link rel="icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>"/>
 	<?php if ($this->db->policy_page) {?>
-	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" title="Copyright" />
+	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" title="Copyright">
 	<?php } ?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
 	<?php if ($this->db->news_cluster) {?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('NewsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('NewsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
 	<?php } ?>
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>">
 <?php
 // JS files.
 // default.js contains common procedures and should be included everywhere
@@ -107,7 +107,7 @@ if ($doubleclick == true)
 
 							// compose link with icon to bookmarks list
 							// TODO: add BookmarkTip to translation
-							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark-dark.svg\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a>";
+							echo "<a class=\"bookmark\"><img class=\"bookmark-icon\" src=\"" . $this->db->theme_url."icon/bookmark-dark.svg\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\"></a>";
 
 							// display bookmarks text
 							# " . $this->_t('Bookmarks') . "
@@ -138,16 +138,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=1') . "\"><img title=\"" . $this->_t('RemoveFromBookmarks') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=1') . "\"><img title=\"" . $this->_t('RemoveFromBookmarks') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\"></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=1') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=1') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'icon/spacer.png"></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
+							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '"></div>';
 						}
 						echo "\n";
 
@@ -162,7 +162,7 @@ if ($doubleclick == true)
 					if ($this->get_user())
 					{
 						// compose user identity icon with link to user page
-						echo "<a href=\"" . $this->db->base_url.$this->db->users_page . '/' . $this->get_user_name() . "\"><img src=\"" . $this->db->theme_url."icon/user_white.svg\" title=\"" . $this->_t('YouAre').$this->get_user_name() . "\" alt=\"" . $this->_t('YouAre').$this->get_user_name() . "\" /></a>\n";
+						echo "<a href=\"" . $this->db->base_url.$this->db->users_page . '/' . $this->get_user_name() . "\"><img src=\"" . $this->db->theme_url."icon/user_white.svg\" title=\"" . $this->_t('YouAre').$this->get_user_name() . "\" alt=\"" . $this->_t('YouAre').$this->get_user_name() . "\"></a>\n";
 						?>
 						<span class="nobr">
 						<?php
@@ -175,14 +175,14 @@ if ($doubleclick == true)
 						(
 						<?php
 						// compose user account settings icon with link to account settings page
-						echo "<a href=\"" . $this->db->base_url.$this->_t('AccountLink') . "\"><img src=\"" . $this->db->theme_url."icon/account_settings_white.png\" title=\"" . $this->_t('AccountTip') . "\" alt=\"" . $this->_t('AccountTip') . "\" /></a>\n";
+						echo "<a href=\"" . $this->db->base_url.$this->_t('AccountLink') . "\"><img src=\"" . $this->db->theme_url."icon/account_settings_white.png\" title=\"" . $this->_t('AccountTip') . "\" alt=\"" . $this->_t('AccountTip') . "\"></a>\n";
 						// display link to user settings page
 						echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0);
 						// display logout icon and link
 						?>
 						 |
 						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
-							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo "<img src=\"" . $this->db->theme_url."icon/logout.png\" title=\"" . $this->_t('LogoutButton') . "\" alt=\"" . $this->_t('LogoutButton') . "\" />"; ?>
+							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo "<img src=\"" . $this->db->theme_url."icon/logout.png\" title=\"" . $this->_t('LogoutButton') . "\" alt=\"" . $this->_t('LogoutButton') . "\">"; ?>
 						</a>
 						<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
 							href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?>
@@ -247,7 +247,7 @@ if ($doubleclick == true)
 	<div class="breadcrumbs">
 	<?php
 	// display a home icon, clickable if its not the root page
-	echo ($this->page['tag'] == $this->db->root_page ? "<img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home.svg\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" />\n" : "<a href=\"" . $this->db->base_url."\"><img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home.svg\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\" /></a>");
+	echo ($this->page['tag'] == $this->db->root_page ? "<img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home.svg\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\">\n" : "<a href=\"" . $this->db->base_url."\"><img class=\"home-icon\" src=\"" . $this->db->theme_url."icon/home.svg\" title=\"" . $this->db->root_page."\" alt=\"" . $this->db->root_page."\"></a>");
 	echo " &gt; ";
 	// show breadcrumbs
 	echo "<span class=\"breadcrumb\">" . $this->get_page_path($titles = false, $separator = ' &gt; ', $linking = true) . "</span>";
@@ -269,8 +269,8 @@ if ($doubleclick == true)
 		// searchbar
 		?>
 		<span class="search nobr"><label for="phrase"><?php echo $this->_t('SearchText'); ?></label>
-		<input type="search" name="phrase" id="phrase" size="15" />
-		<input type="submit" id="search-submit-button" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" alt="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>" />
+		<input type="search" name="phrase" id="phrase" size="15">
+		<input type="submit" id="search-submit-button" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" alt="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>">
 		</span>
 		<?php
 		// search form close
@@ -399,16 +399,16 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=yes') . "\"><img title=\"" . $this->_t('RemoveFromBookmarks') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\" /></a></div>";
+								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=yes') . "\"><img title=\"" . $this->_t('RemoveFromBookmarks') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\"></a></div>";
 							}
 							else
 							{
-								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" /></a></div>';
+								echo '<div class="bookmark_add"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'icon/spacer.png"></a></div>';
 							}
 						}
 						else
 						{
-							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
+							echo '<div class="bookmark_add"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('CantAddBookmarks') . '"></div>';
 						}
 						echo "\n";
 
@@ -472,7 +472,7 @@ if ($doubleclick == true)
 						{
 							// TODO: add translation TocTip and TocText
 							// compose image to indicate a toc-list
-							echo "<a class=\"toc-icon\"><img src=\"" . $this->db->theme_url."icon/toc-ordered.svg\" title=\"" . $this->_t('MetaToc') . "\" alt=\"" . $this->_t('MetaToc') . "\" /></a>\n";
+							echo "<a class=\"toc-icon\"><img src=\"" . $this->db->theme_url."icon/toc-ordered.svg\" title=\"" . $this->_t('MetaToc') . "\" alt=\"" . $this->_t('MetaToc') . "\"></a>\n";
 
 							// display the page toc list, numerated (?), without labels and markup
 							// toc numerated does not work as intended
@@ -503,7 +503,7 @@ if ($doubleclick == true)
 					// display a "back-to-page" button/icon next to the page tag/title
 					if ($this->method !== 'show')
 					{
-						echo "<a href=\"" . $this->db->base_url.$this->tag."\"><img src=\"" . $this->db->theme_url."icon/show-back.svg\" title=\"" . $this->_t('ShowTip') . "\" alt=\"" . $this->_t('ShowText') . "\" /></a>";
+						echo "<a href=\"" . $this->db->base_url.$this->tag."\"><img src=\"" . $this->db->theme_url."icon/show-back.svg\" title=\"" . $this->_t('ShowTip') . "\" alt=\"" . $this->_t('ShowText') . "\"></a>";
 					}
 					?>
 				</div>
@@ -533,12 +533,12 @@ if ($doubleclick == true)
 								if ($display_option == 2)
 									{
 										// img + text
-										$tab = "<li class=\"$method active\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" />" . $title . "</li>\n";
+										$tab = "<li class=\"$method active\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\">" . $title . "</li>\n";
 									}
 								else if ($display_option == 1)
 								{
 									// img only
-									$tab = "<li class=\"$method active\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" /></li>\n";
+									$tab = "<li class=\"$method active\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\"></li>\n";
 								}
 							}
 							else
@@ -556,12 +556,12 @@ if ($doubleclick == true)
 								if ($display_option == 2)
 								{
 									// img and text
-									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" />" . $title . "</a></li>\n";
+									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\">" . $title . "</a></li>\n";
 								}
 								else if ($display_option == 1)
 								{
 									// img only
-									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\" /></a></li>\n";
+									$tab = "<li class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$accesskey\"><img src=\"" . $engine->db->theme_url."icon/$image_name\" alt=\"$title\"></a></li>\n";
 								}
 							}
 							else
@@ -612,7 +612,7 @@ if ($doubleclick == true)
 					// show more tab
 					// TODO: add translation to all theme translations ... $this->_t('PageHandlerMoreTip')
 					// display more icon with descriptive text
-					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"" . $this->db->theme_url."icon/more.png\" title=\"" . $this->_t('PageHandlerMoreTip') . "\" alt=\"" . $this->_t('PageHandlerMoreTip') . "\" /> more</a> \n";
+					# echo "<li class='sublist'><a href='#' id='more-icon'><img src=\"" . $this->db->theme_url."icon/more.png\" title=\"" . $this->_t('PageHandlerMoreTip') . "\" alt=\"" . $this->_t('PageHandlerMoreTip') . "\"> more</a> \n";
 					// display 'more' text that shows a list with page handlers on hover
 					echo "<li class='sublist'><a href='#' id='more'>" . $this->_t('PageHandlerMoreTip') . "</a> \n\t";
 						echo "<ul class='sublist'>\n\t";

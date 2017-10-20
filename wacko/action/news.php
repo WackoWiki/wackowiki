@@ -210,7 +210,7 @@ if (!empty($this->db->news_cluster))
 	// displaying XML icon
 	if (!(int) $noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br />\n";
+		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br>\n";
 	}
 
 	// displaying articles
@@ -239,17 +239,17 @@ if (!empty($this->db->news_cluster))
 	}
 	else
 	{
-		echo '<br /><br />' . $this->_t('NewsNotAvailable');
+		echo '<br><br>' . $this->_t('NewsNotAvailable');
 	}
 
 	if ($access)
 	{
 		echo $this->form_open('add_topic');
 		?>
-		<br /><a id="newtopic"></a><br />
+		<br><a id="newtopic"></a><br>
 		<label for="newstitle"><?php echo $this->_t('NewsName'); ?>:</label>
-		<input type="text" id="newstitle" name="title" size="50" maxlength="250" value="" />
-		<input type="submit" id="submit" value="<?php echo $this->_t('NewsSubmit'); ?>" />
+		<input type="text" id="newstitle" name="title" size="50" maxlength="250" value="">
+		<input type="submit" id="submit" value="<?php echo $this->_t('NewsSubmit'); ?>">
 
 		<?php echo $this->form_close();
 	}

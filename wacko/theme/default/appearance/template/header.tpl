@@ -117,10 +117,10 @@
 	<div id="search_box">
 		<form action="[ ' search ' ]" method="get" name="search">
 			['' // search | hide_page '']
-			['' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1" />' 1 1 '']
+			['' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 '']
 			<span class="search nobr">
 				<label for="phrase">[ ' _t: SearchText ' ]</label>
-				<input type="search" name="phrase" id="phrase" size="20" />
+				<input type="search" name="phrase" id="phrase" size="20">
 				<input type="submit" class="submitinput" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]"/>
 			</span>
 		</form>
@@ -132,7 +132,7 @@
 [ === #------------------------------ === ]
 <nav class="breadcrumb">
 	['' breadcrumbs '']
-	['' // echo '<br />' . $this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8); '']
+	['' // echo '<br>' . $this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8); '']
 </nav>
 </header>
 [ === #------------------------------ === ]
@@ -148,5 +148,5 @@
 [ === TabTitle === ]
 ['' im TabImage ''] ['' title '']
 [ === TabImage === ]
-<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title ' ]" />
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title ' ]">
 

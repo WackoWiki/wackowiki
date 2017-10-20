@@ -343,7 +343,7 @@ class WackoFormatter
 		// escaped text
 		else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
 		{
-			return '<!--escaped--><!--notypo-->' . str_replace("\n", '<br />', htmlspecialchars($matches[1], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . '<!--/notypo--><!--escaped-->';
+			return '<!--escaped--><!--notypo-->' . str_replace("\n", '<br>', htmlspecialchars($matches[1], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . '<!--/notypo--><!--escaped-->';
 		}
 		// code text
 		else if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
@@ -551,7 +551,7 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br />\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$i])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$i])));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -565,7 +565,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br />\n", '', '<th class="userhead" colspan="' . ($this->cols-$count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead" colspan="' . ($this->cols-$count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -579,7 +579,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br />\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -618,7 +618,7 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br />\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$i])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$i])));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -633,7 +633,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br />\n", '', '<td class="usercell" colspan="' . ($this->cols-$count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell" colspan="' . ($this->cols-$count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -647,7 +647,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br />\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -742,7 +742,7 @@ class WackoFormatter
 				substr($url, -4) == '.svg' ||
 				substr($url, -5) == '.jpeg')
 			{
-				return '<img src="' . $matches[1] . '" />' . $matches[2];
+				return '<img src="' . $matches[1] . '">' . $matches[2];
 			}
 			// shorten url name if too long
 			else if (strlen($url) > 55)
@@ -855,12 +855,12 @@ class WackoFormatter
 		{
 			$this->br = 0;
 
-			return "<hr />";
+			return "<hr>";
 		}
 		// forced line breaks
 		else if (preg_match('/^---\n?\s*$/', $thing, $matches))
 		{
-			return "<br />\n";
+			return "<br>\n";
 		}
 		// strike
 		else if (preg_match('/^--((\S.*?\S)|(\S))--$/s', $thing, $matches))    //NB: wrong
@@ -1055,7 +1055,7 @@ class WackoFormatter
 		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|[0-9]{1,3})[\.\)](\#[0-9]{1,3})?)?(\n|$)/s', $thing, $matches))
 		{
 			// new line
-			$result .= ($this->br ? "<br />\n" : "\n");
+			$result .= ($this->br ? "<br>\n" : "\n");
 
 			//intable or not?
 			if ($this->intable)
@@ -1164,7 +1164,7 @@ class WackoFormatter
 				$this->br = 0;
 			}
 
-			$result .= $this->br ? "<br />\n" : "\n";
+			$result .= $this->br ? "<br>\n" : "\n";
 
 			$this->br = 1;
 

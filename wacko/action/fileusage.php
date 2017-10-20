@@ -44,7 +44,7 @@ if ($file_id)
 
 					if (strpos($_link, 'span class="missingpage"') === false)
 					{
-						echo ($_link . "<br />\n");
+						echo ($_link . "<br>\n");
 					}
 				}
 			}

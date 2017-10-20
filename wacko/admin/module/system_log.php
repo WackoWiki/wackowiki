@@ -141,7 +141,7 @@ function admin_system_log(&$engine, &$module)
 
 ?>
 		<div>
-			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br />
+			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br>
 			<?php echo $engine->_t('LogLevel'); ?>
 			<select name="level_mod">
 				<option value="1"<?php	echo (!isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 1) ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelNotLower'); ?></option>
@@ -157,8 +157,8 @@ function admin_system_log(&$engine, &$module)
 ?>
 			</select>
 
-			<input type="submit" name="update" id="submit" value="<?php echo $engine->_t('FormUpdate');?>" />
-			<input type="submit" name="reset" id="submit" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" name="update" id="submit" value="<?php echo $engine->_t('FormUpdate');?>">
+			<input type="submit" name="reset" id="submit" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 		$engine->print_pagination($pagination);
@@ -211,7 +211,7 @@ function admin_system_log(&$engine, &$module)
 					'<td class="t_center a_top" style="padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' .
 					'<td class="a_top">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
 					'<td class="t_center a_top"><small>' .
-						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br />' .
+						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br>' .
 						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
 					'</small></td>' .
 				'</tr>';
@@ -219,7 +219,7 @@ function admin_system_log(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5" class="t_center"><br /><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
+		echo '<tr><td colspan="5" class="t_center"><br><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
 	}
 ?>
 		</table>

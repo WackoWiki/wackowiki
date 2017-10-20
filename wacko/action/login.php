@@ -46,7 +46,7 @@ if (($user = $this->get_user()))
 		$message .= $this->_t('LastVisit') .
 			' <code>' .
 			$this->get_time_formatted($user['last_visit']) .
-			'</code>' . "<br />\n";
+			'</code>' . "<br>\n";
 	}
 
 	// show IP address restriction for user session
@@ -54,7 +54,7 @@ if (($user = $this->get_user()))
 		($user['validate_ip']? $this->_t('BindSessionIpOn') . ' ' : '') .
 		'<code>' .
 		($user['validate_ip']? $user['ip'] : 'Off') .
-		'</code>' . "<br />\n";
+		'</code>' . "<br>\n";
 
 	// show traffic protection
 	if ($this->db->tls || $this->db->tls_proxy)
@@ -62,7 +62,7 @@ if (($user = $this->get_user()))
 		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
 			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : 'no') .
-			'</code>' . "<br />\n";
+			'</code>' . "<br>\n";
 	}
 
 	if (!empty($message))

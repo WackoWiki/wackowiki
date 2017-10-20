@@ -34,9 +34,9 @@ $this->ensure_page(true); // TODO: upload for forums?
 					'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
 					'<li class="active">' . $this->_t('AttachmentsGlobal') . '</li>' .
 					'<li><a href="' . $this->href('attachments', '', ['files' => 'all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
-				"</ul><br /><br />\n";
+				"</ul><br><br>\n";
 
-			echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'global']]) . '<br />';
+			echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'global']]) . '<br>';
 		}
 		else if (isset($_GET['files']) && $_GET['files'] == 'all')
 		{
@@ -45,9 +45,9 @@ $this->ensure_page(true); // TODO: upload for forums?
 					'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
 					'<li><a href="' . $this->href('attachments', '', ['files' => 'global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
 					'<li class="active">' . $this->_t('AttachmentsAll') . '</li>' .
-				"</ul><br /><br />\n";
+				"</ul><br><br>\n";
 
-			echo $this->action('files', ['all' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'all']]) . '<br />';
+			echo $this->action('files', ['all' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'all']]) . '<br>';
 		}
 		else
 		{
@@ -56,12 +56,12 @@ $this->ensure_page(true); // TODO: upload for forums?
 					'<li class="active">' . $this->_t('AttachmentsToPage') . '</li>' .
 					'<li><a href="' . $this->href('attachments', '', ['files' => 'global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
 					'<li><a href="' . $this->href('attachments', '', ['files' => 'all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
-				"</ul><br /><br />\n";
+				"</ul><br><br>\n";
 
-			echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments']) . '<br />';
+			echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments']) . '<br>';
 		}
 
-		echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";
+		echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '"></a>' . "\n";
 	}
 
 #}

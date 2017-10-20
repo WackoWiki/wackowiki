@@ -32,11 +32,11 @@ function admin_config_filter(&$engine, &$module)
 	*/
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		Words that will be automatically censored on your Wiki.
 	</p>
-	<br />
+	<br>
 <?php
 	$file_name = Ut::join_path(CONFIG_DIR, 'antispam.conf');
 	// update settings
@@ -62,7 +62,7 @@ function admin_config_filter(&$engine, &$module)
 
 	echo $engine->form_open('filter');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -73,28 +73,28 @@ function admin_config_filter(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="spam_filter"><strong>SPAM Filter:</strong><br />
+					<label for="spam_filter"><strong>SPAM Filter:</strong><br>
 					<small>Enabling SPAM Filter</small></label>
 				</td>
 				<td>
-					<input type="radio" id="spam_filter_on" name="spam_filter" value="1"<?php echo ($engine->db->spam_filter == 1 ? ' checked' : '');?> /><label for="spam_filter_on"><?php echo $engine->_t('Enabled'); ?></label>
-					<input type="radio" id="spam_filter_off" name="spam_filter" value="0"<?php echo ($engine->db->spam_filter == 0 ? ' checked' : '');?> /><label for="spam_filter_off"><?php echo $engine->_t('Disabled'); ?></label>
+					<input type="radio" id="spam_filter_on" name="spam_filter" value="1"<?php echo ($engine->db->spam_filter == 1 ? ' checked' : '');?>><label for="spam_filter_on"><?php echo $engine->_t('Enabled'); ?></label>
+					<input type="radio" id="spam_filter_off" name="spam_filter" value="0"<?php echo ($engine->db->spam_filter == 0 ? ' checked' : '');?>><label for="spam_filter_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="phrase_list"><strong>Word list:</strong><br />
+				<td class="label"><label for="phrase_list"><strong>Word list:</strong><br>
 					<small>Word or phrase <code>fragment</code> to be blacklisted (one per line)</small></label></td>
 				<td><textarea style="width:400px; height:400px;" id="phrase_list" name="phrase_list"><?php echo htmlspecialchars($phrases, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

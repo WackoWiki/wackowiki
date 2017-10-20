@@ -52,41 +52,41 @@ if (@$_POST['_action'] === 'purge_data')
 		$message .= '<li>' . $this->_t('PageCachePurged') . "</li>\n";
 	}
 
-	$message .= '</ol><br />';
+	$message .= '</ol><br>';
 	$message .= $this->_t('ThisActionHavenotUndo') . "\n";
 
 	$this->show_message($message, 'success');
 }
 else
 {
-	echo '<div class="warning">' . $this->_t('ReallyPurge') . '</div><br />';
+	echo '<div class="warning">' . $this->_t('ReallyPurge') . '</div><br>';
 	echo $this->form_open('purge_data', ['page_method' => 'purge']);
 ?>
 
-	<strong><?php echo $this->_t('SelectPurgeOptions') ?></strong><br />
-	<input type="checkbox" id="purgecomments" name="comments" />
-	<label for="purgecomments"><?php echo $this->_t('PurgeComments') ?></label><br />
-	<input type="checkbox" id="purgefiles" name="files" />
-	<label for="purgefiles"><?php echo $this->_t('PurgeFiles') ?></label><br />
+	<strong><?php echo $this->_t('SelectPurgeOptions') ?></strong><br>
+	<input type="checkbox" id="purgecomments" name="comments">
+	<label for="purgecomments"><?php echo $this->_t('PurgeComments') ?></label><br>
+	<input type="checkbox" id="purgefiles" name="files">
+	<label for="purgefiles"><?php echo $this->_t('PurgeFiles') ?></label><br>
 <?php
 	if ($this->is_admin())
 	{
 ?>
-		<input type="checkbox" id="purgerevisions" name="revisions" />
-		<label for="purgerevisions"><?php echo $this->_t('PurgeRevisions') ?></label><br />
+		<input type="checkbox" id="purgerevisions" name="revisions">
+		<label for="purgerevisions"><?php echo $this->_t('PurgeRevisions') ?></label><br>
 <?php
 		if ($this->db->store_deleted_pages)
 		{
-			echo '<br />';
-			echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-			echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep') . '</label><br />';
+			echo '<br>';
+			echo '<input type="checkbox" id="dontkeep" name="dontkeep">';
+			echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep') . '</label><br>';
 		}
 	}
 ?>
-	<br />
-	<input type="submit" id="submit" name="submit" value="<?php echo $this->_t('PurgeButton'); ?>" />
-	<a href="<?php echo $this->href('properties');?>" class="btn_link"><input type="button" id="button" value="<?php echo $this->_t('EditCancelButton'); ?>" /></a>
-	<br />
+	<br>
+	<input type="submit" id="submit" name="submit" value="<?php echo $this->_t('PurgeButton'); ?>">
+	<a href="<?php echo $this->href('properties');?>" class="btn_link"><input type="button" id="button" value="<?php echo $this->_t('EditCancelButton'); ?>"></a>
+	<br>
 
 <?php	echo $this->form_close();
 }

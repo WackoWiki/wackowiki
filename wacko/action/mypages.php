@@ -28,9 +28,9 @@ if (($user_id = $this->get_user_id()))
 	if (@$_GET['bydate'] || $bydate)
 	{
 		echo '<strong>' . $this->_t('ListOwnedPages2') . '</strong>';
-		echo '<br />[<a href="' . $this->href('', '', $by('')) . '">' .
+		echo '<br>[<a href="' . $this->href('', '', $by('')) . '">' .
 			$this->_t('OrderABC') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">' .
-			$this->_t('OrderChange') . "</a>] <br /><br />\n";
+			$this->_t('OrderChange') . "</a>] <br><br>\n";
 
 		$count	= $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
@@ -61,7 +61,7 @@ if (($user_id = $this->get_user_id()))
 				{
 					if ($current_day)
 					{
-						echo "</ul>\n<br /></li>\n";
+						echo "</ul>\n<br></li>\n";
 					}
 
 					echo '<li><strong>' . $day . ":</strong><ul>\n";
@@ -96,10 +96,10 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
 
 		echo '<strong>' . $this->_t('ListOwnedPages3') . '</strong>';
-		echo '<br />[<a href="' .
+		echo '<br>[<a href="' .
 			$this->href('', '', $by('')) . '">' . $this->_t('OrderABC') .
 			'</a>] [<a href="' . $this->href('', '', $by('date')) . '">' .
-			$this->_t('OrderDate') . "</a>]<br /><br />\n";
+			$this->_t('OrderDate') . "</a>]<br><br>\n";
 
 		if ($pages = $this->db->load_all(
 			"SELECT p.tag, p.title, p.modified " .
@@ -125,7 +125,7 @@ if (($user_id = $this->get_user_id()))
 				{
 					if ($current_day)
 					{
-						echo "</ul>\n<br /></li>\n";
+						echo "</ul>\n<br></li>\n";
 					}
 
 					echo "<li><strong>$day:</strong><ul>\n";
@@ -159,9 +159,9 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
 		echo '<strong>' . $this->_t('ListOwnedPages') . '</strong>';
-		echo '<br />[<a href="' . $this->href('', '', $by('date')) . '">' .
+		echo '<br>[<a href="' . $this->href('', '', $by('date')) . '">' .
 			$this->_t('OrderDate') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">' .
-			$this->_t('OrderChange') . "</a>] <br /><br />\n";
+			$this->_t('OrderChange') . "</a>] <br><br>\n";
 
 		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified " .
@@ -187,7 +187,7 @@ if (($user_id = $this->get_user_id()))
 				{
 					if ($cur_char)
 					{
-						echo "</ul>\n<br /></li>\n";
+						echo "</ul>\n<br></li>\n";
 					}
 
 					echo '<li><strong>' . $first_char . "</strong><ul>\n";

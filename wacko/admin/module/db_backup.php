@@ -61,7 +61,7 @@ function admin_db_backup(&$engine, &$module)
 	}
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	if (isset($_POST['start']))
 	{
@@ -197,7 +197,7 @@ function admin_db_backup(&$engine, &$module)
 	{
 		if (!is_writable(UPLOAD_BACKUP_DIR . '/'))
 		{
-			echo output_image($engine, false) . '<strong class="red">The '. UPLOAD_BACKUP_DIR . '/' . ' directory is not writable.</strong>' . "<br />\n";
+			echo output_image($engine, false) . '<strong class="red">The '. UPLOAD_BACKUP_DIR . '/' . ' directory is not writable.</strong>' . "<br>\n";
 		}
 		else
 		{
@@ -205,7 +205,7 @@ function admin_db_backup(&$engine, &$module)
 		<p>
 			<?php echo $engine->_t('BackupSettings'); ?>
 		</p>
-		<br />
+		<br>
 
 <?php
 		echo $engine->form_open('backup');
@@ -213,7 +213,7 @@ function admin_db_backup(&$engine, &$module)
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
 					<th class="t_right"><?php echo $engine->_t('BackupCluster'); ?>:</th>
-					<th colspan="2"><input type="text" name="root" size="30" value="" /></th>
+					<th colspan="2"><input type="text" name="root" size="30" value=""></th>
 				</tr>
 				<tr>
 					<th><?php echo $engine->_t('BackupTable'); ?></th>
@@ -233,10 +233,10 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr class="hl_setting">' .
 						'<td class="label"><strong>' . $table['name'] . '</strong></td>' .
 						'<td class="t_center">&nbsp;&nbsp;
-							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . ' />
+							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . '>
 						</td>' .
 						'<td class="t_center">
-							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked' : '') . ' />
+							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked' : '') . '>
 						</td>' .
 					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
@@ -261,14 +261,14 @@ function admin_db_backup(&$engine, &$module)
 				echo '<tr>' .
 						'<td colspan="2" class="label"><strong>' . $dir . '</strong></td>' .
 						'<td class="t_center">&nbsp;&nbsp;
-							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . ' />
+							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . '>
 						</td>' .
 					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
 			}
 ?>
 				</table>
-				<input type="submit" name="start" id="submit" value="backup" />
+				<input type="submit" name="start" id="submit" value="backup">
 <?php
 			echo $engine->form_close();
 		}

@@ -65,12 +65,12 @@ first really BIG template written
 		=]
 		[= pm _ =
 			[ ' // contact form ' ]
-			<br />
+			<br>
 			<form action="[ ' href ' ]" method="post" name="personal_message">
 				[' csrf: personal_message ']
-				<input type="hidden" name="profile" value="[ ' username |e attr ' ]" />
+				<input type="hidden" name="profile" value="[ ' username |e attr ' ]">
 				[= ref _ =
-					<input type="hidden" name="ref" value="[ ' ref | e attr ' ]" />
+					<input type="hidden" name="ref" value="[ ' ref | e attr ' ]">
 				=]
 				<table class="formation">
 					[= disabled _ =
@@ -80,7 +80,7 @@ first really BIG template written
 						<tr>
 							<td class="label nowrap" style="width:50px;">[ ' _t: UsersIntercomSubject ' ]:</td>
 							<td>
-								<input type="text" name="mail_subject" value="[ ' subj |e attr ' ]" size="60" maxlength="200" />
+								<input type="text" name="mail_subject" value="[ ' subj |e attr ' ]" size="60" maxlength="200">
 								[= ref _ =
 									&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
 								=]
@@ -90,7 +90,7 @@ first really BIG template written
 							<td colspan="2"><textarea name="mail_body" cols="80" rows="15">[ ' body |e ' ]</textarea></td>
 						</tr>
 						<tr>
-							<td><input type="submit" id="submit" name="send_pm" value="[ ' _t: UsersIntercomSend ' ]" /></td>
+							<td><input type="submit" id="submit" name="send_pm" value="[ ' _t: UsersIntercomSend ' ]"></td>
 						</tr>
 						<tr>
 							<td colspan="2">
@@ -105,12 +105,12 @@ first really BIG template written
 
 	<h2 id="pages">[ ' _t: UsersPages ' ]</h2>
 	<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages |e ' ]
-		&nbsp;&nbsp;&nbsp; [ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions |e ' ]</small></div><br />
+		&nbsp;&nbsp;&nbsp; [ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions |e ' ]</small></div><br>
 
 	[ ''' nopages UsersNA2 ''' ]
 	[= pages _ =
 		<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
-		['' pagination '']<br />
+		['' pagination '']<br>
 		<ul class="ul_list lined">
 			[= li _ =
 				<li><small>[ ' created | time_formatted ' ]</small>  &mdash; [ ' link ' ]</li>
@@ -126,7 +126,7 @@ first really BIG template written
 		<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ]: [ ' n |e ' ]</small></div>
 		[ ''' none UsersNA2 ''' ]
 		[= c _ =
-			[ ''' pagination ''' ]<br />
+			[ ''' pagination ''' ]<br>
 			<ul class="ul_list lined">
 				[= li _ =
 					<li><small>[ ' created | time_formatted ' ]</small> &mdash; [ ' link ' ]</li>
@@ -141,7 +141,7 @@ first really BIG template written
 			<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ]: [ ' n |e ' ]</small></div>
 			[ ''' none UsersNA2 ''' ]
 			[= u2 _ =
-				[ ''' pagination ''' ]<br />
+				[ ''' pagination ''' ]<br>
 				<ul class="ul_list lined">
 					[= li _ =
 						<li>
@@ -170,14 +170,14 @@ first really BIG template written
 [= UserList =]
 	[= groups _ =
 		<h2 id="pages">[ ' members |e ' ] [ ' _t: GroupsMembers ' ]</h2>
-		<br />
+		<br>
 	=]
 	[= form _ =
 		['' // user filter form '']
 		<form action="[ ' href ' ]" method="get" name="search_user">
 			[ ' href | hide_page ' ]
 			[= hid _ =
-				<input type="hidden" name="[ ' param |e attr ' ]" value="[ ' value |e attr ' ]" />
+				<input type="hidden" name="[ ' param |e attr ' ]" value="[ ' value |e attr ' ]">
 			=]
 			<table class="formation">
 				<tr>
@@ -185,12 +185,12 @@ first really BIG template written
 						[ ' _t: UsersSearch ' ]:
 					</td>
 					<td>
-						<input type="search" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" /> ['' '']
-						<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]" /> ['' '']
-						['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile" /> '']
+						<input type="search" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]"> ['' '']
+						<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]"> ['' '']
+						['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile"> '']
 					</td>
 				</tr>
-			</table><br />
+			</table><br>
 		</form>
 	=]
 	['' pagination '']

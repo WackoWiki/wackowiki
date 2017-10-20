@@ -25,7 +25,7 @@ function admin_maint_resync(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	if (isset($_REQUEST['start']))
 	{
@@ -227,7 +227,7 @@ function admin_maint_resync(&$engine, &$module)
 			{
 				foreach ($pages as $n => $page)
 				{
-					echo (($i * $limit) + $n + 1) . '. ' . $page['tag'] . "<br />\n";
+					echo (($i * $limit) + $n + 1) . '. ' . $page['tag'] . "<br>\n";
 
 					// recompile if necessary
 					if ($page['body_r'] == '')
@@ -256,41 +256,41 @@ function admin_maint_resync(&$engine, &$module)
 	<h2>User statistics</h2>
 	<p>
 		User statistics (number of comments and pages owned)
-		in some situations it may differ from actual data. <br />This operation
+		in some situations it may differ from actual data. <br>This operation
 		allows updating statistics on current actual data of the database.
 	</p>
 
 <?php
 	echo $engine->form_open('usersupdate');
 ?>
-		<input type="hidden" name="action" value="userstats" />
-		<input type="submit" name="start" id="submit" value="synchronize" />
+		<input type="hidden" name="action" value="userstats">
+		<input type="submit" name="start" id="submit" value="synchronize">
 <?php	echo $engine->form_close();?>
 
 	<h2>Page statistics</h2>
 	<p>
 		Page statistics (number of comments and revisions)
-		in some situations may differ from actual data. <br />This operation
+		in some situations may differ from actual data. <br>This operation
 		allows updating statistics on current actual data of the database.
 	</p>
 <?php
 	echo $engine->form_open('pageupdate');
 ?>
-		<input type="hidden" name="action" value="pagestats" />
-		<input type="submit" name="start" id="submit" value="synchronize" />
+		<input type="hidden" name="action" value="pagestats">
+		<input type="submit" name="start" id="submit" value="synchronize">
 <?php		echo $engine->form_close();?>
 
 	<h2>Feeds</h2>
 	<p>
 		In the case of direct editing of pages in the database, the content of RSS-feeds are not
-		reflect the changes made. <br />This function synchronizes the RSS-channels
+		reflect the changes made. <br>This function synchronizes the RSS-channels
 		with the current state of the database.
 	</p>
 <?php
 	echo $engine->form_open('feedupdate');
 ?>
-		<input type="hidden" name="action" value="rssfeeds" />
-		<input type="submit" name="start" id="submit" value="synchronize" />
+		<input type="hidden" name="action" value="rssfeeds">
+		<input type="submit" name="start" id="submit" value="synchronize">
 <?php		echo $engine->form_close();?>
 
 <?php
@@ -298,15 +298,15 @@ if ($engine->db->xml_sitemap)
 { ?>
 	<h2>XML-Sitemap</h2>
 	<p>
-		This function synchronizes the XML-Sitemap with the current state of the database.<br />
+		This function synchronizes the XML-Sitemap with the current state of the database.<br>
 		Period <strong><?php echo $engine->db->xml_sitemap_time; ?></strong> days.
 		Last written <?php echo date('Y-m-d H:i:s', $engine->db->maint_last_xml_sitemap); ?>
 	</p>
 <?php
 	echo $engine->form_open('sitemap_update');
 ?>
-		<input type="hidden" name="action" value="xml_sitemap" />
-		<input type="submit" name="start" id="submit" value="synchronize" />
+		<input type="hidden" name="action" value="xml_sitemap">
+		<input type="submit" name="start" id="submit" value="synchronize">
 <?php		echo $engine->form_close();
 }?>
 
@@ -319,8 +319,8 @@ if ($engine->db->xml_sitemap)
 <?php
 	echo $engine->form_open('linksupdate');
 ?>
-		<input type="hidden" name="action" value="wikilinks" />
-		<input type="submit" name="start" id="submit" value="synchronize" />
+		<input type="hidden" name="action" value="wikilinks">
+		<input type="submit" name="start" id="submit" value="synchronize">
 <?php
 	echo $engine->form_close();
 }

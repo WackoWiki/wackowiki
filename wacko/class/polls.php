@@ -216,7 +216,7 @@ class Polls
 		else
 		{
 			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll-results' . $poll_id.'_form']) .
-					'<input type="hidden" name="poll" value="' . $poll_id . '" />' .
+					'<input type="hidden" name="poll" value="' . $poll_id . '">' .
 					'<table id="poll-vote' . $poll_id . '_form" class="formation">' . "\n" .
 					'<tr><th colspan="2" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
 
@@ -224,17 +224,17 @@ class Polls
 			{
 				$poll	.= '<tr class="lined"><td class="label">' .
 							($header['plural'] == 1
-								? '<input type="checkbox" id="' . $var['v_id'] . '" name="' . $var['v_id'] . '" value="1" />'
-								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '" />') .
+								? '<input type="checkbox" id="' . $var['v_id'] . '" name="' . $var['v_id'] . '" value="1">'
+								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '">') .
 							'</td>' .
 						'<td class="t_left" style="width:95%;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>' . "\n";
 			}
 
 			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
-						'<br />' . $this->engine->_t('PollsAdded') . ': ' . (!$header['user_id'] ? $user_name : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user_name]) . '">' . $user_name . '</a>') . '</small></td></tr>' .
+						'<br>' . $this->engine->_t('PollsAdded') . ': ' . (!$header['user_id'] ? $user_name : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user_name]) . '">' . $user_name . '</a>') . '</small></td></tr>' .
 					'<tr><td colspan="2" class="nowrap">' .
-					'<input type="submit" name="vote" id="submit" value="' . $this->engine->_t('PollsSubmit') . '" /> '.
-					'<input type="submit" name="results" id="submit" value="' . $this->engine->_t('PollsResults') . '" />' .
+					'<input type="submit" name="vote" id="submit" value="' . $this->engine->_t('PollsSubmit') . '"> '.
+					'<input type="submit" name="results" id="submit" value="' . $this->engine->_t('PollsResults') . '">' .
 					'</tr></td>' .
 					'</table>' .
 					$this->engine->form_close();
@@ -280,9 +280,9 @@ class Polls
 			}
 
 			$poll	.= '<tr><td colspan="3"><small>' . $this->engine->_t('PollsTotalVotes') . ': ' . $voters.
-						'<br />' . ($header['end'] ? $this->engine->_t('PollsLasted') :
+						'<br>' . ($header['end'] ? $this->engine->_t('PollsLasted') :
 							$this->engine->_t('PollsLasts')) . ': ' . $duration.
-						'<br />' . $this->engine->_t('PollsAdded') . ': ' . (!$header['user_name'] ? $user_name : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user_name]) . '">' . $user_name . '</a>') . '</small></td></tr>' .
+						'<br>' . $this->engine->_t('PollsAdded') . ': ' . (!$header['user_name'] ? $user_name : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user_name]) . '">' . $user_name . '</a>') . '</small></td></tr>' .
 					'</table>' .
 					$this->engine->form_close();
 		}

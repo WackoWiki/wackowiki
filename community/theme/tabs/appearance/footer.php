@@ -32,7 +32,7 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 	$bonus2 = $bonus=="2a"?"del":"";
 
 	echo '<table ><tr>';
-	echo "<td><img src='" . $engine->db->theme_url."icon/tabr$selected" . $bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='" . $engine->db->theme_url."icon/tabr$selected" . $bonus2.".png' width='$xsize' align='top' height='$ysize' alt=''></td>";
 
 	if (!$selected)
 	{
@@ -45,15 +45,15 @@ function echo_tab( $link, $hint, $text, $selected = false, $bonus = "" )
 
 	echo "<div class='TabText'>" . $text . "</div>";
 	echo "</td>";
-	echo "<td><img src='" . $engine->db->theme_url."icon/tabl$selected" . $bonus2.".png' width='$xsize' align='top' height='$ysize' alt='' /></td>";
+	echo "<td><img src='" . $engine->db->theme_url."icon/tabl$selected" . $bonus2.".png' width='$xsize' align='top' height='$ysize' alt=''></td>";
 	echo '</tr></table>';
 	echo "</div>";
 }
 
 ?>
 <div class="Footer">
-<img src="<?php echo $this->db->base_url;?>image/spacer.png" width="5" height="1" alt="" align="left" />
-<img src="<?php echo $this->db->base_url;?>image/spacer.png" width="5" height="1" alt="" align="right" />
+<img src="<?php echo $this->db->base_url;?>image/spacer.png" width="5" height="1" alt="" align="left">
+<img src="<?php echo $this->db->base_url;?>image/spacer.png" width="5" height="1" alt="" align="right">
 <?php
 
 // if this page exists
@@ -110,7 +110,7 @@ if ($this->page)
 			echo_tab(
 			$this->href('remove'),
 			$this->_t('DeleteTip'),
-			'<img src="' . $this->db->theme_url . 'icon/del'.($this->method != 'remove' ? '' : '_') . '.png" width="14" height="15" alt="" />' . $this->_t('DeleteText'),
+			'<img src="' . $this->db->theme_url . 'icon/del'.($this->method != 'remove' ? '' : '_') . '.png" width="14" height="15" alt="">' . $this->_t('DeleteText'),
 			$this->method != 'remove',
 			"2a"
 			);

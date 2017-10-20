@@ -35,7 +35,7 @@ if ($this->can_upload() === true)
 		echo '<div class="content">' .
 				 '<div id="drop-files" ondragover="return false">' .
 					'<form id="frm">' .
-						'<input type="file" id="uploadbtn" multiple />' .
+						'<input type="file" id="uploadbtn" multiple>' .
 					$this->form_close() .
 				'</div>' .
 

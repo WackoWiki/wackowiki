@@ -7,7 +7,7 @@
 <body>
 <table style="width:100%;">
 	<tr>
-		<td style="width:50; height:64; background-image:url(<?php echo $this->db->theme_url ?>images/back_top_1.png);"><img src="<?php echo $this->db->theme_url ?>images/spacer.png" width="50" height="1" /></td>
+		<td style="width:50; height:64; background-image:url(<?php echo $this->db->theme_url ?>images/back_top_1.png);"><img src="<?php echo $this->db->theme_url ?>images/spacer.png" width="50" height="1"></td>
 		<td style="background-image:url(<?php echo $this->db->theme_url ?>images/back_top_3.png); background-repeat:repeat-x;">
 			<table style="width:100%; background-image:url(<?php echo $this->db->theme_url ?>images/back_top_2.png); background-repeat:no-repeat;">
 				<tr>
@@ -24,12 +24,12 @@ $user = '';
 
 if ($user = $this->get_user())
 {
-	echo 'id: ' . $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) . ' &nbsp; <a href="' . $this->href('', $this->_t('AccountLink')) . '" title="' . $this->_t('AccountTip') . '">' . $this->_t('AccountText') . '</a> &nbsp; <a href="' . $this->href('', $this->_t('LoginPage')) . '" title="' . $this->_t('SessionTip') . '">' . $this->_t('Session') . '</a> &nbsp; <a onclick="return confirm(\'' . $this->_t('LogoutAreYouSure') . '\');" href="' . $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag)) . '" title="' . $this->_t('LogoutButton') . '">' . $this->_t('LogoutLink') . '</a><br />';
+	echo 'id: ' . $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) . ' &nbsp; <a href="' . $this->href('', $this->_t('AccountLink')) . '" title="' . $this->_t('AccountTip') . '">' . $this->_t('AccountText') . '</a> &nbsp; <a href="' . $this->href('', $this->_t('LoginPage')) . '" title="' . $this->_t('SessionTip') . '">' . $this->_t('Session') . '</a> &nbsp; <a onclick="return confirm(\'' . $this->_t('LogoutAreYouSure') . '\');" href="' . $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag)) . '" title="' . $this->_t('LogoutButton') . '">' . $this->_t('LogoutLink') . '</a><br>';
 }
 else
 {
 ?>
-	id: <em><?php echo $this->_t('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->_t('LoginPage')); ?>" title="log and log in"><?php echo $this->_t('LoginPage'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->_t('RegistrationPage')); ?>" title="log in"><?php echo $this->_t('RegistrationPage'); ?></a><br />
+	id: <em><?php echo $this->_t('Guest') ;?></em> &nbsp; <a href="<?php echo $this->href('', $this->_t('LoginPage')); ?>" title="log and log in"><?php echo $this->_t('LoginPage'); ?></a> &nbsp; <a href="<?php echo $this->href('', $this->_t('RegistrationPage')); ?>" title="log in"><?php echo $this->_t('RegistrationPage'); ?></a><br>
 <?php
 }
 echo "\n";
@@ -40,8 +40,8 @@ echo "\n";
 				</tr>
 			</table>
 		</td>
-		<td style="width:25; background-image:url(<?php echo $this->db->theme_url ?>images/back_top_4.png);"><img src="<?php echo $this->db->theme_url ?>images/spacer.png" width="25" height="1" /></td>
-		<td style="width:25; background-image:url(<?php echo $this->db->theme_url ?>images/back_top_5.png);"><img src="<?php echo $this->db->theme_url ?>images/spacer.png" width="25" height="1" /></td>
+		<td style="width:25; background-image:url(<?php echo $this->db->theme_url ?>images/back_top_4.png);"><img src="<?php echo $this->db->theme_url ?>images/spacer.png" width="25" height="1"></td>
+		<td style="width:25; background-image:url(<?php echo $this->db->theme_url ?>images/back_top_5.png);"><img src="<?php echo $this->db->theme_url ?>images/spacer.png" width="25" height="1"></td>
 	</tr>
 	<tr>
 		<td style="height:315; vertical-align:top; background-image:url(<?php echo $this->db->theme_url ?>images/back_left_2.png); background-repeat:repeat-y;"><div style="background-image:url(<?php echo $this->db->theme_url ?>images/back_left_1.png); background-repeat:no-repeat; height:311px;"></div></td>
@@ -91,16 +91,16 @@ echo "\n";
 	{
 		if (in_array($this->tag, $this->get_menu_links()))
 		{
-			echo '<div class="bookmark_out"><a href="' . $this->href('', '', 'removebookmark=yes') . '" title="' . $this->_t('RemoveFromBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png" /></a></div>';
+			echo '<div class="bookmark_out"><a href="' . $this->href('', '', 'removebookmark=yes') . '" title="' . $this->_t('RemoveFromBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png"></a></div>';
 		}
 		else
 		{
-			echo '<div class="bookmark_in"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png" /></a></div>';
+			echo '<div class="bookmark_in"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png"></a></div>';
 		}
 	}
 	else
 	{
-		echo '<div class="bookmark_in"><img src="' . $this->db->theme_url . 'images/spacer.png" title="' . $this->_t('CantAddBookmarks') . '" /></div>';
+		echo '<div class="bookmark_in"><img src="' . $this->db->theme_url . 'images/spacer.png" title="' . $this->_t('CantAddBookmarks') . '"></div>';
 	}
 	echo "\n";
 
@@ -311,11 +311,11 @@ echo "\n";
 
 		if ($active)
 		{
-			$tab = "<div class=\"$method\"><img src=\"" . $engine->db->theme_url."images/spacer.png\" alt=\"$title\" /></div>\n";
+			$tab = "<div class=\"$method\"><img src=\"" . $engine->db->theme_url."images/spacer.png\" alt=\"$title\"></div>\n";
 		}
 		else
 		{
-			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"" . $engine->db->theme_url."images/spacer.png\" alt=\"$title\" /></a></div>\n";
+			$tab = "<div class=\"$method\"><a href=\"$link\" title=\"$hint\" accesskey=\"$bonus\"><img src=\"" . $engine->db->theme_url."images/spacer.png\" alt=\"$title\"></a></div>\n";
 		}
 
 		return $tab;

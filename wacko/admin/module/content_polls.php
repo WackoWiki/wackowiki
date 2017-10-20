@@ -28,7 +28,7 @@ function admin_content_polls(&$engine, &$module)
 
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	// create polls object
 	$polls_obj = new Polls($engine);
@@ -134,13 +134,13 @@ function admin_content_polls(&$engine, &$module)
 		{
 			echo $engine->form_open('polls');
 
-			echo '<input type="hidden" name="delete" value="' . $remove_id . '" />';
+			echo '<input type="hidden" name="delete" value="' . $remove_id . '">';
 			echo '<table class="formation">';
 			echo '<tr><th>' . $engine->_t('PollsConfirmDelete') . '</th></tr>';
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>' .
-					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '" /> '.
-					'<a href="' . rawurldecode($engine->href('', $mode_file, $mode_http)) . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '" /></a>' .
+					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '"> '.
+					'<a href="' . rawurldecode($engine->href('', $mode_file, $mode_http)) . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '"></a>' .
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();
@@ -171,7 +171,7 @@ function admin_content_polls(&$engine, &$module)
 			{
 				echo '<tr class="lined">';
 					echo '<td class="label">
-						<input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
+						<input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;">
 							<a href="' .
 							rawurldecode($engine->href('', $mode_file.'&amp;poll_id=' . $row['poll_id'] . '&amp;results=1')) . '">' .
@@ -182,9 +182,9 @@ function admin_content_polls(&$engine, &$module)
 			}
 
 			echo '<tr><td colspan="4">' .
-					'<input type="submit" name="stop" id="submit" value="' . $engine->_t('PollsStop') . '" /> '.
-					'<input type="submit" name="reset" id="submit" value="' . $engine->_t('PollsReset') . '" /> '.
-					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '" />' .
+					'<input type="submit" name="stop" id="submit" value="' . $engine->_t('PollsStop') . '"> '.
+					'<input type="submit" name="reset" id="submit" value="' . $engine->_t('PollsReset') . '"> '.
+					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '">' .
 				'</td></tr>';
 		}
 
@@ -210,7 +210,7 @@ function admin_content_polls(&$engine, &$module)
 			foreach ($list as $row)
 			{
 				echo '<tr>';
-					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
+					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:80%;">' . $row['text'] . '</td>';
 					echo '<td class="a_top">' . $row['user_name'] . '</td>';
 				echo '</tr>';
@@ -231,9 +231,9 @@ function admin_content_polls(&$engine, &$module)
 			}
 
 			echo '<tr><td colspan="3">' .
-					'<input type="submit" name="activate" id="submit" value="' . $engine->_t('PollsActivate') . '" /> '.
-					'<input type="submit" name="edit" id="submit" value="' . $engine->_t('PollsEdit') . '" /> '.
-					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '" />' .
+					'<input type="submit" name="activate" id="submit" value="' . $engine->_t('PollsActivate') . '"> '.
+					'<input type="submit" name="edit" id="submit" value="' . $engine->_t('PollsEdit') . '"> '.
+					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '">' .
 				'</td></tr>';
 		}
 
@@ -261,7 +261,7 @@ function admin_content_polls(&$engine, &$module)
 			foreach ($list as $row)
 			{
 				echo '<tr class="lined">';
-					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '" /></td>';
+					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;"><a href="' .
 						rawurldecode($engine->href('', $mode_file.'&amp;year=' . $year.'&amp;poll_id=' . $row['poll_id'] . '&amp;results=1')) . '">' .
 						date('d/m/y', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
@@ -305,7 +305,7 @@ function admin_content_polls(&$engine, &$module)
 		if (!empty($list))
 		{
 			echo '<tr><td colspan="4">' .
-					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '" />' .
+					'<input type="submit" name="remove" id="submit" value="' . $engine->_t('PollsRemove') . '">' .
 				'</td></tr>';
 		}
 

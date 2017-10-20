@@ -40,7 +40,7 @@ if ($this->has_access('read'))
 		// Convert everything that doesn't need regexps
 		$data = str_replace(
 		[
-			"<br />\n",						// Strip newlines
+			"<br>\n",						// Strip newlines
 			'&nbsp;',						// Blanks to blanks for easier handling
 			'<strong>',						// Bold
 			'</strong>',

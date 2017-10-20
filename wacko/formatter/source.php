@@ -46,10 +46,10 @@ switch ($default)
 		break;
 
 	case 'rawhtml':
-		echo str_replace("\n", '<br />', Ut::html($text));
+		echo str_replace("\n", '<br>', Ut::html($text));
 
 		// about the source
-		echo "\n\n<br /><br /><hr />\n\n<p>" .
+		echo "\n\n<br><br><hr>\n\n<p>" .
 			$this->_t('SourceFrom') .
 				$this->link($source, '', $this->_t('SourceFromLink')) .
 				"</p>";
@@ -59,7 +59,7 @@ switch ($default)
 		echo Ut::html($text);
 
 		// about the source
-		echo "\n\n<hr />\n" . $this->_t('SourceFrom') . $this->href($source);
+		echo "\n\n<hr>\n" . $this->_t('SourceFrom') . $this->href($source);
 		break;
 }
 

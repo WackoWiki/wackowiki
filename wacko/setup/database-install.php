@@ -87,7 +87,7 @@ switch ($config['database_driver'])
 			 */
 
 			echo "         </ul>\n";
-			echo "         <br />\n";
+			echo "         <br>\n";
 
 			$fatal_error = true;
 		}
@@ -98,7 +98,7 @@ switch ($config['database_driver'])
 			 */
 
 			echo "         </ul>\n";
-			echo "         <br />\n";
+			echo "         <br>\n";
 
 			$fatal_error = true;
 		}
@@ -121,7 +121,7 @@ switch ($config['database_driver'])
 			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
 
 			echo "         </ul>\n";
-			echo "         <br />\n";
+			echo "         <br>\n";
 
 			// Check if database version matches engine and switch to MyISAM if necessary
 			if ($result	= mysqli_query($dblink, $db_version))
@@ -157,7 +157,7 @@ switch ($config['database_driver'])
 
 				echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
 				echo "         </ol>\n";
-				echo "         <br />\n";
+				echo "         <br>\n";
 
 				$version = 0;
 			}
@@ -205,7 +205,7 @@ switch ($config['database_driver'])
 					}
 				}
 
-				echo "         <br />\n";
+				echo "         <br>\n";
 				echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
 				echo "         <ul>\n";
 
@@ -266,7 +266,7 @@ switch ($config['database_driver'])
 		$dblink->query("SET SESSION sql_mode='$sql_modes'");
 
 		echo "         </ul>\n";
-		echo "         <br />\n";
+		echo "         <br>\n";
 
 		if (!$fatal_error)
 		{
@@ -300,7 +300,7 @@ switch ($config['database_driver'])
 
 				echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
 				echo "         </ol>\n";
-				echo "         <br />\n";
+				echo "         <br>\n";
 
 				$version = 0;
 			}
@@ -348,7 +348,7 @@ switch ($config['database_driver'])
 					}
 				}
 
-				echo "         <br />\n";
+				echo "         <br>\n";
 				echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
 				echo "         <ul>\n";
 
@@ -374,15 +374,15 @@ if (!$fatal_error)
 <?php
 	write_config_hidden_nodes(['DeleteTables' => '']);
 ?>
-	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
+	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
 </form>
 <?php
 }
 else
 {
 ?>
-<input type="submit" value="<?php echo $lang['Back'];?>" class="next" onclick="history.go(-1);" />
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
+<input type="submit" value="<?php echo $lang['Back'];?>" class="next" onclick="history.go(-1);">
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
 <?php
 }
 ?>

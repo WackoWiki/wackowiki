@@ -42,7 +42,7 @@ if ($user_id = $this->get_user_id())
 
 		echo $this->_t('UnwatchedPages') . ' (<a href="' .
 			$this->href('', '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list']) . '">' .
-			$this->_t('ViewWatchedPages') . '</a>) . <br /><br />';
+			$this->_t('ViewWatchedPages') . '</a>) . <br><br>';
 
 		if ($pages = $this->db->load_all(
 			"SELECT p.tag AS pagetag, p.page_id AS page_id " .
@@ -71,15 +71,15 @@ if ($user_id = $this->get_user_id())
 					{
 						if ($current_char)
 						{
-							echo "<br />\n";
+							echo "<br>\n";
 						}
 
-						echo '<strong>' . $first_char . "</strong><br />\n";
+						echo '<strong>' . $first_char . "</strong><br>\n";
 						$current_char = $first_char;
 					}
 
 					echo '<a href="' . $this->href('', '', $profile + $p + ['mode' => 'mywatches', 'unwatched' => 1, 'setwatch' => $page['page_id'], '#' => 'list']) . '" class="watch-on">' .
-						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('SetWatch') . '" alt="' . $this->_t('SetWatch') . '"  />' . '</a> ' . $this->compose_link_to_page($page['pagetag'], '', '', 0) . "<br />\n";
+						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('SetWatch') . '" alt="' . $this->_t('SetWatch') . '" >' . '</a> ' . $this->compose_link_to_page($page['pagetag'], '', '', 0) . "<br>\n";
 				}
 			}
 
@@ -101,7 +101,7 @@ if ($user_id = $this->get_user_id())
 
 		echo $this->_t('WatchedPages') . ' (<a href="' .
 			$this->href('', '', $profile + ['mode' => 'mywatches', 'unwatched' => 1, '#' => 'list']) . '">' .
-			$this->_t('ViewUnwatchedPages') . '</a>).<br /><br />';
+			$this->_t('ViewUnwatchedPages') . '</a>).<br><br>';
 
 		if ($pages = $this->db->load_all(
 			"SELECT w.page_id, p.tag AS tag " .
@@ -127,15 +127,15 @@ if ($user_id = $this->get_user_id())
 					{
 						if ($current_char)
 						{
-							echo "<br />\n";
+							echo "<br>\n";
 						}
 
-						echo '<strong>' . $first_char . "</strong><br />\n";
+						echo '<strong>' . $first_char . "</strong><br>\n";
 						$current_char = $first_char;
 					}
 
 					echo '<a href="' . $this->href('', '', $profile + $p + ['mode' => 'mywatches', 'unwatch' => $page['page_id'], '#' => 'list']) . '" class="watch-off">' .
-						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('RemoveWatch') . '" alt="' . $this->_t('RemoveWatch') . '" />' . '</a> ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "<br />\n";
+						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('RemoveWatch') . '" alt="' . $this->_t('RemoveWatch') . '">' . '</a> ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "<br>\n";
 
 				}
 			}

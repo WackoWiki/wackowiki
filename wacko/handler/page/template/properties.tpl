@@ -5,7 +5,7 @@
 			<li><a href="[ ' href: properties ' ]">[ ' _t: UserSettingsGeneral ' ]</a></li>
 			<li class="active">[ ' _t: UserSettingsExtended ' ]</li>
 		</ul>
-		<br /><br />
+		<br><br>
 		[= x _ =
 			<div class="page_settings">
 			<form action="[ ' href: properties ' ]" method="post" name="extended_properties">
@@ -106,7 +106,7 @@
 			<li class="active">[ ' _t: UserSettingsGeneral ' ]</li>
 			<li><a href="[ ' href: properties extended ' ]">[ ' _t: UserSettingsExtended ' ]</a></li>
 		</ul>
-		<br /><br />
+		<br><br>
 		<div class="page_settings">
 		[= f GenOwner =
 			<form action="[ ' href: properties ' ]" method="post" name="general_properties">
@@ -122,7 +122,7 @@
 								<label for="title">[ ' _t: MetaTitle ' ]</label>
 							</th>
 							<td>
-								<input type="text" id="title" name="title" value="[ ' page.title |e ' ]" size="60" maxlength="250" />
+								<input type="text" id="title" name="title" value="[ ' page.title |e ' ]" size="60" maxlength="250">
 							</td>
 						</tr>
 						<tr>
@@ -132,7 +132,7 @@
 							<td>
 								<textarea id="keywords" name="keywords" rows="4" cols="51" maxlength="250">[ ' page.keywords |e ' ]</textarea>
 								[= categories _ =
-									<br />
+									<br>
 									['' html '']
 								=]
 							</td>
@@ -151,7 +151,7 @@
 									<label for="menu_tag">[ ' _t: SetMenuLabel ' ]</label>
 								</th>
 								<td>
-									<input type="text" id="menu_tag" name="menu_tag" value="[ ' page.menu_tag ' ]" size="60" maxlength="100" />
+									<input type="text" id="menu_tag" name="menu_tag" value="[ ' page.menu_tag ' ]" size="60" maxlength="100">
 								</td>
 							</tr>
 							<tr>
@@ -267,7 +267,7 @@
 				</tr>
 			=]
 		</table>
-		<br />
+		<br>
 
 		<ul class="page_handler">
 			<li class="m-edit"><a href="[ ' href: edit ' ]">[ ' i Icon ' ][ ' _t: SettingsEdit' ]</a></li>

@@ -5,7 +5,7 @@ leave it as is for the memories
 
 [ ====================================== main =================================== ]
 <h3>[''' _t: ClonePage '''] [''' headLink ''']</h3>
-<br />
+<br>
 [' // massLog ']
 [' form ']
 
@@ -29,7 +29,7 @@ leave it as is for the memories
 [ ====================================== log2 =================================== ]
 <li>['' message // message contains url '']</li>
 [ ====================================== logHead =================================== ]
-[' to |e ']: <br />
+[' to |e ']: <br>
 
 [ ====================================== form =================================== ]
 [' _t: CloneName ']
@@ -39,16 +39,16 @@ leave it as is for the memories
 	<input type="text" name="clone_name" size="40" maxlength="250"/>
 	[' e editNote ']
 	[' doCluster ']
-	<br /><br />
-	<input type="submit" name="submit" value="[' _t: CloneButton ']" />
+	<br><br>
+	<input type="submit" name="submit" value="[' _t: CloneButton ']">
 	&nbsp;
 	<a href="[' show ']" class="btn_link"><input type="button" value="[' _t: EditCancelButton | replace "\n" " " ']"/></a>
 </form>
 [ ====================================== editNote =================================== ]
-<br />
-<label for="edit_note">[' _t: EditNote ']</label><br />
+<br>
+<label for="edit_note">[' _t: EditNote ']</label><br>
 <input type="text" id="edit_note" maxlength="200" value="[' note |e ']" size="60" name="edit_note"/>
 [ ====================================== doCluster =================================== ]
-<br /><br />
-<input type="checkbox" id="massclone" name="massclone" />
+<br><br>
+<input type="checkbox" id="massclone" name="massclone">
 <label for="massclone">[' _t: MassClone ']</label>

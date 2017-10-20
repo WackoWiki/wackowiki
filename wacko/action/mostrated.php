@@ -48,7 +48,7 @@ if (isset($top))
 	echo "</div>\n";
 }
 
-if (isset($top, $bottom)) echo '<br />';
+if (isset($top, $bottom)) echo '<br>';
 
 // max negative rating
 if (isset($bottom))

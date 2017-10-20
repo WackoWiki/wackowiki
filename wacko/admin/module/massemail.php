@@ -25,11 +25,11 @@ function admin_massemail(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		Here you can email a message to either all of your users or all users of a specific group having the option to receive mass emails enabled. To achieve this an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. The default setting is to only include 20 recipients in such an email, for more recipients more emails will be sent. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time, you will be notified when the script has completed.
 	</p>
-	<br />
+	<br>
 <?php
 $mail_body = '';
 
@@ -110,7 +110,7 @@ $mail_body = '';
 
 	echo $engine->form_open('massemail');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -157,15 +157,15 @@ $mail_body = '';
 				</td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong><?php echo $engine->_t('UsersIntercomSubject'); ?>:</strong><br />
+				<td class="label"><strong><?php echo $engine->_t('UsersIntercomSubject'); ?>:</strong><br>
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				</td>
 				<td>
-					<input type="text" name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200"  required />
+					<input type="text" name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200"  required>
 				</td></tr>
 
 			<tr class="hl_setting">
-				<td class="label"><label for="mail_body"><strong>Your message:</strong><br />
+				<td class="label"><label for="mail_body"><strong>Your message:</strong><br>
 					<small>Please note that you may enter only plain text. All markup will be removed before sending.</small></label></td>
 				<td><textarea style="width:200px; height:100px;" id="mail_body" name="mail_body"  required><?php echo htmlspecialchars($mail_body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
@@ -173,7 +173,7 @@ $mail_body = '';
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="language"><strong>Default language:</strong><br />
+				<td class="label"><label for="language"><strong>Default language:</strong><br>
 					<small>Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.</small></label></td>
 				<td>
 					<select id="language" name="language">
@@ -190,10 +190,10 @@ $mail_body = '';
 				</td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="send" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="send">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

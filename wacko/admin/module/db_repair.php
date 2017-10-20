@@ -32,7 +32,7 @@ function admin_db_repair(&$engine, &$module)
 	$tables			= & $module['vars'][0];
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	if (isset($_POST['repair']))
 	{
@@ -71,7 +71,7 @@ function admin_db_repair(&$engine, &$module)
 				}
 				else
 				{
-					$message = '<li>' . 'Failed to repair the %1 table. <br />Error: %2';
+					$message = '<li>' . 'Failed to repair the %1 table. <br>Error: %2';
 
 					echo str_replace('%1', '<code>' . $table['name'] . '</code>',
 							str_replace('%2', '<code>' . $check['Msg_text'] . '</code>',
@@ -106,7 +106,7 @@ function admin_db_repair(&$engine, &$module)
 					}
 					else
 					{
-						$message = '<li>' . 'Failed to optimize the %1 table. <br />Error: ' . '<code>' . $check['Msg_text'] . '</code>' . '</li>';
+						$message = '<li>' . 'Failed to optimize the %1 table. <br>Error: ' . '<code>' . $check['Msg_text'] . '</code>' . '</li>';
 						echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
 					}
 				}
@@ -131,7 +131,7 @@ function admin_db_repair(&$engine, &$module)
 		}
 		else
 		{
-			echo '<br /><p>' . 'Repairs complete' . '</p>';
+			echo '<br><p>' . 'Repairs complete' . '</p>';
 		}
 	}
 	else
@@ -142,20 +142,20 @@ function admin_db_repair(&$engine, &$module)
 
 		echo $engine->form_open('repair');
 		?>
-		<br />
-		<input type="hidden" name="action" value="1" />
-		<input type="submit" name="repair" id="submit" value="Repair Database" />
+		<br>
+		<input type="hidden" name="action" value="1">
+		<input type="submit" name="repair" id="submit" value="Repair Database">
 		<?php	echo $engine->form_close();?>
-		<br />
+		<br>
 
 		<h2>Repair and Optimize Database</h2>
 		<p><?php echo 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.' ; ?></p>
-		<br />
+		<br>
 		<?php
 		echo $engine->form_open('repair');
 		?>
-		<input type="hidden" name="action" value="2" />
-		<input type="submit" name="repair" id="submit" value="Repair and Optimize Database" />
+		<input type="hidden" name="action" value="2">
+		<input type="submit" name="repair" id="submit" value="Repair and Optimize Database">
 		<?php	echo $engine->form_close();
 	}
 }

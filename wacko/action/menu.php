@@ -241,14 +241,14 @@ if ($_user_id)
 		// user is logged in; display config form
 		echo $this->form_open('edit_bookmarks');
 
-		echo '<input type="hidden" name="_user_menu" value="yes" />';
+		echo '<input type="hidden" name="_user_menu" value="yes">';
 
 		if ($default_menu === true)
 		{
 			echo $this->show_select_lang('menu_lang', $menu_lang, true);
 
-			echo '<input type="submit" name="update" id="submit" value="update" />';
-			echo '<br /><br />';
+			echo '<input type="submit" name="update" id="submit" value="update">';
+			echo '<br><br>';
 		}
 
 		echo '<table class="lined">';
@@ -259,17 +259,17 @@ if ($_user_id)
 		{
 			echo '<tr>
 				<td >
-					<input type="number" min="0" name="pos_' . $menu_item['menu_id'] . '" size="2" style="width: 40px;" value="' . $menu_item['menu_position'] . '" />
+					<input type="number" min="0" name="pos_' . $menu_item['menu_id'] . '" size="2" style="width: 40px;" value="' . $menu_item['menu_position'] . '">
 				</td>
 				<td>
-					<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" placeholder="' . $menu_item['title'] . '" />
+					<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" placeholder="' . $menu_item['title'] . '">
 				</td>
 				<td>
-					<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '" /> -->
+					<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '"> -->
 					<label for="menu_item' . $menu_item['menu_id'] . '" title="' . $menu_item['title'] . '">&raquo; ' . $menu_item['tag'] . '</label>
 				</td>
 				<td class="t_center">
-					<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '" />
+					<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '">
 				</td>';
 
 			echo "</tr>\n";
@@ -277,9 +277,9 @@ if ($_user_id)
 
 		echo '<tfoot>';
 		echo "<tr>\n" . '<td colspan="3">' . "\n";
-		echo '<input type="submit" name="update_menu" value="' . $this->_t('BookmarkSaveChanges') . '" />';
+		echo '<input type="submit" name="update_menu" value="' . $this->_t('BookmarkSaveChanges') . '">';
 		echo '</td><td>';
-		echo '<input type="submit" name="delete_menu_item" value="' . $this->_t('BookmarkDeleteSelected') . '" />';
+		echo '<input type="submit" name="delete_menu_item" value="' . $this->_t('BookmarkDeleteSelected') . '">';
 		echo "</td>\n</tr>\n";
 		echo '</tfoot>';
 		echo '</table>';
@@ -290,17 +290,17 @@ if ($_user_id)
 	}
 
 	echo $this->form_open('add_bookmark');
-	echo '<input type="hidden" name="_user_menu" value="yes" />';
-	echo '<br /><br />';
-	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br />' .
-		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255" /> ';
+	echo '<input type="hidden" name="_user_menu" value="yes">';
+	echo '<br><br>';
+	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br>' .
+		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255"> ';
 
 	if ($default_menu === true)
 	{
 		echo $this->show_select_lang('lang_new', $menu_lang, false);
 	}
 
-	echo  '<input type="submit" name="add_menu_item" value="' . $this->_t('CreatePageButton') . '" />';
+	echo  '<input type="submit" name="add_menu_item" value="' . $this->_t('CreatePageButton') . '">';
 
 	echo $this->form_close();
 }

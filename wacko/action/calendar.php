@@ -170,7 +170,7 @@ echo "<tr>";
 
 
 
-#echo "_range:" . $_range . "<br />";
+#echo "_range:" . $_range . "<br>";
 #echo "month:" . $month;
 
 for ($month; $month <= $_range; $month++)

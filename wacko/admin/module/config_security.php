@@ -25,11 +25,11 @@ function admin_config_security(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.
 	</p>
-	<br />
+	<br>
 <?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -75,7 +75,7 @@ function admin_config_security(&$engine, &$module)
 
 	echo $engine->form_open('security');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -86,11 +86,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="allow_registration"><strong>Register online:</strong><br />
+					<label for="allow_registration"><strong>Register online:</strong><br>
 					<small>Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="allow_registration" name="allow_registration" value="1"<?php echo ($engine->db->allow_registration ? ' checked' : '');?> />
+					<input type="checkbox" id="allow_registration" name="allow_registration" value="1"<?php echo ($engine->db->allow_registration ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -98,12 +98,12 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="approve_new_user"><strong>Approve new users:</strong><br />
+					<label for="approve_new_user"><strong>Approve new users:</strong><br>
 					<small>Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="approve_new_user_on" name="approve_new_user" value="1"<?php echo ($engine->db->approve_new_user == 1 ? ' checked' : '');?> /><label for="approve_new_user_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="approve_new_user_off" name="approve_new_user" value="0"<?php echo ($engine->db->approve_new_user == 0 ? ' checked' : '');?> /><label for="approve_new_user_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="approve_new_user_on" name="approve_new_user" value="1"<?php echo ($engine->db->approve_new_user == 1 ? ' checked' : '');?>><label for="approve_new_user_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="approve_new_user_off" name="approve_new_user" value="0"<?php echo ($engine->db->approve_new_user == 0 ? ' checked' : '');?>><label for="approve_new_user_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -111,11 +111,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="allow_persistent_cookie"><strong>Persistent cookies:</strong><br />
+					<label for="allow_persistent_cookie"><strong>Persistent cookies:</strong><br>
 					<small>Allow persistent cookies.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="allow_persistent_cookie" name="allow_persistent_cookie" value="1"<?php echo ($engine->db->allow_persistent_cookie ? ' checked' : '');?> />
+					<input type="checkbox" id="allow_persistent_cookie" name="allow_persistent_cookie" value="1"<?php echo ($engine->db->allow_persistent_cookie ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -123,11 +123,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="antidupe"><strong>Anti-clone:</strong><br />
+					<label for="antidupe"><strong>Anti-clone:</strong><br>
 					<small>Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ($engine->db->antidupe ? ' checked' : '');?> />
+					<input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ($engine->db->antidupe ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -135,11 +135,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="disable_wikiname"><strong>Disable WikiName:</strong><br />
+					<label for="disable_wikiname"><strong>Disable WikiName:</strong><br>
 					<small>Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="disable_wikiname" name="disable_wikiname" value="1"<?php echo ($engine->db->disable_wikiname ? ' checked' : '');?> />
+					<input type="checkbox" id="disable_wikiname" name="disable_wikiname" value="1"<?php echo ($engine->db->disable_wikiname ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -147,11 +147,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="allow_email_reuse"><strong>Allow email address re-use:</strong><br />
+					<label for="allow_email_reuse"><strong>Allow email address re-use:</strong><br>
 					<small>Different users can register with the same e-mail address.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ($engine->db->allow_email_reuse ? ' checked' : '');?> />
+					<input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ($engine->db->allow_email_reuse ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -159,27 +159,27 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="username_chars_min"><strong>Username length:</strong><br />
+					<label for="username_chars_min"><strong>Username length:</strong><br>
 					<small>Minimum and maximum number of characters in usernames.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="3" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>" /> Min&nbsp;&nbsp;<input type="number" min="0" maxlength="3" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>" /> Max
+					<input type="number" min="0" maxlength="3" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>"> Min&nbsp;&nbsp;<input type="number" min="0" maxlength="3" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>"> Max
 				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					CAPTCHA
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="enable_captcha"><strong>Enable Captcha:</strong><br />
+					<label for="enable_captcha"><strong>Enable Captcha:</strong><br>
 					<small>If enabled, Captcha will be shown in the following cases and if a security threshold is reached.</small></label>
 				</td>
 				<td>
-					<input type="radio" id="enable_captcha_on" name="enable_captcha" value="1"<?php echo ($engine->db->enable_captcha == 1 ? ' checked' : '');?> /><label for="enable_captcha_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="enable_captcha_off" name="enable_captcha" value="0"<?php echo ($engine->db->enable_captcha == 0 ? ' checked' : '');?> /><label for="enable_captcha_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="enable_captcha_on" name="enable_captcha" value="1"<?php echo ($engine->db->enable_captcha == 1 ? ' checked' : '');?>><label for="enable_captcha_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="enable_captcha_off" name="enable_captcha" value="0"<?php echo ($engine->db->enable_captcha == 0 ? ' checked' : '');?>><label for="enable_captcha_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -187,11 +187,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="captcha_new_comment"><strong>New comment:</strong><br />
+					<label for="captcha_new_comment"><strong>New comment:</strong><br>
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_new_comment" name="captcha_new_comment" value="1"<?php echo ($engine->db->captcha_new_comment ? ' checked' : '');?> />
+					<input type="checkbox" id="captcha_new_comment" name="captcha_new_comment" value="1"<?php echo ($engine->db->captcha_new_comment ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -199,11 +199,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="captcha_new_page"><strong>New page:</strong><br />
+					<label for="captcha_new_page"><strong>New page:</strong><br>
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_new_page" name="captcha_new_page" value="1"<?php echo ($engine->db->captcha_new_page ? ' checked' : '');?> />
+					<input type="checkbox" id="captcha_new_page" name="captcha_new_page" value="1"<?php echo ($engine->db->captcha_new_page ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -211,11 +211,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="captcha_edit_page"><strong>Edit page:</strong><br />
+					<label for="captcha_edit_page"><strong>Edit page:</strong><br>
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_edit_page" name="captcha_edit_page" value="1"<?php echo ($engine->db->captcha_edit_page ? ' checked' : '');?> />
+					<input type="checkbox" id="captcha_edit_page" name="captcha_edit_page" value="1"<?php echo ($engine->db->captcha_edit_page ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -223,26 +223,26 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="captcha_registration"><strong>Registration:</strong><br />
+					<label for="captcha_registration"><strong>Registration:</strong><br>
 					<small>As a measure of protection against spam publications require unregistered users a single solution of the test before registering.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="captcha_registration" name="captcha_registration" value="1"<?php echo ($engine->db->captcha_registration ? ' checked' : '');?> />
+					<input type="checkbox" id="captcha_registration" name="captcha_registration" value="1"<?php echo ($engine->db->captcha_registration ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					TLS Settings
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="tls"><strong>TLS-Connection:</strong><br />
+					<label for="tls"><strong>TLS-Connection:</strong><br>
 					<small>Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server , otherwise you will lose access to the admin panel!</span></small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="tls" name="tls" value="1"<?php echo ($engine->db->tls ? ' checked' : '');?> />
+					<input type="checkbox" id="tls" name="tls" value="1"<?php echo ($engine->db->tls ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -250,11 +250,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="tls_implicit"><strong>Forced TLS:</strong><br />
+					<label for="tls_implicit"><strong>Forced TLS:</strong><br>
 					<small>Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="tls_implicit" name="tls_implicit" value="1"<?php echo ($engine->db->tls_implicit ? ' checked' : '');?> />
+					<input type="checkbox" id="tls_implicit" name="tls_implicit" value="1"<?php echo ($engine->db->tls_implicit ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -262,27 +262,27 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="tls_proxy"><strong>TLS Proxy:</strong><br />
+					<label for="tls_proxy"><strong>TLS Proxy:</strong><br>
 					<small>Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.</small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->db->tls_proxy, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" />
+					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->db->tls_proxy, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
-					<br />
+					<br>
 					HTTP Security Headers
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="enable_security_headers"><strong>Enable Security Headers:</strong><br />
-					<small>Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br />CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br />Disabling Content Security Policy is a security risk !</small></label>
+					<label for="enable_security_headers"><strong>Enable Security Headers:</strong><br>
+					<small>Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !</small></label>
 				</td>
 				<td>
-					<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ($engine->db->enable_security_headers == 1 ? ' checked' : '');?> /><label for="security_headers_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ($engine->db->enable_security_headers == 0 ? ' checked' : '');?> /><label for="security_headers_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="security_headers_on" name="enable_security_headers" value="1"<?php echo ($engine->db->enable_security_headers == 1 ? ' checked' : '');?>><label for="security_headers_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="security_headers_off" name="enable_security_headers" value="0"<?php echo ($engine->db->enable_security_headers == 0 ? ' checked' : '');?>><label for="security_headers_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -290,7 +290,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="csp"><strong>Content-Security-Policy (CSP):</strong><br />
+					<label for="csp"><strong>Content-Security-Policy (CSP):</strong><br>
 					<small>Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.</small></label>
 				</td>
 				<td>
@@ -303,17 +303,17 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Persistence of user passwords
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="pwd_min_chars"><strong>Minimum password length:</strong><br />
-					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br />The use of passphrases instead of passwords is encouraged.</small></label>
+					<label for="pwd_min_chars"><strong>Minimum password length:</strong><br>
+					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.</small></label>
 				</td>
 				<td>
-					<input type="number" min="10" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>" />
+					<input type="number" min="10" maxlength="3" id="pwd_min_chars" name="pwd_min_chars" value="<?php echo (int) $engine->db->pwd_min_chars;?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -321,11 +321,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="pwd_admin_min_chars"><strong>Minimum Admin password length:</strong><br />
-					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br />The use of passphrases instead of passwords is encouraged.</small></label>
+					<label for="pwd_admin_min_chars"><strong>Minimum Admin password length:</strong><br>
+					<small>Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.</small></label>
 				</td>
 				<td>
-					<input type="number" min="15" maxlength="3" id="pwd_admin_min_chars" name="pwd_admin_min_chars" value="<?php echo (int) $engine->db->pwd_admin_min_chars;?>" />
+					<input type="number" min="15" maxlength="3" id="pwd_admin_min_chars" name="pwd_admin_min_chars" value="<?php echo (int) $engine->db->pwd_admin_min_chars;?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -361,17 +361,17 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Login
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="max_login_attempts"><strong>Maximum number of login attempts per username:</strong><br />
+					<label for="max_login_attempts"><strong>Maximum number of login attempts per username:</strong><br>
 					<small>The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="max_login_attempts" name="max_login_attempts" value="<?php echo (int) $engine->db->max_login_attempts;?>" />
+					<input type="number" min="0" maxlength="4" id="max_login_attempts" name="max_login_attempts" value="<?php echo (int) $engine->db->max_login_attempts;?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -379,22 +379,22 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="ip_login_limit_max"><strong>Maximum number of login attempts per IP address:</strong><br />
+					<label for="ip_login_limit_max"><strong>Maximum number of login attempts per IP address:</strong><br>
 					<small>The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo (int) $engine->db->ip_login_limit_max;?>" />
+					<input type="number" min="0" maxlength="4" id="ip_login_limit_max" name="ip_login_limit_max" value="<?php echo (int) $engine->db->ip_login_limit_max;?>">
 				</td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Log settings
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="log_level"><strong>Using logging:</strong><br />
+					<label for="log_level"><strong>Using logging:</strong><br>
 					<small>The minimum priority of the events recorded in the log.</small></label>
 				</td>
 				<td>
@@ -415,7 +415,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="log_default_show"><strong>Display Log Mode:</strong><br />
+					<label for="log_default_show"><strong>Display Log Mode:</strong><br>
 					<small>The minimum priority events displayed in the log by default.</small></label>
 				</td>
 				<td>
@@ -435,41 +435,41 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="log_purge_time"><strong>Storage time of Log:</strong><br />
+					<label for="log_purge_time"><strong>Storage time of Log:</strong><br>
 					<small>Remove event log over a given number of days.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>" />
+					<input type="number" min="0" maxlength="4" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>">
 				</td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
-					<br />
+					<br>
 					Forms
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="form_token_time"><strong>Maximum time to submit forms:</strong><br />
-					<small>The time a user has to submit a form (in seconds).<br /> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.</small></label>
+					<label for="form_token_time"><strong>Maximum time to submit forms:</strong><br>
+					<small>The time a user has to submit a form (in seconds).<br> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="form_token_time" name="form_token_time" value="<?php echo (int) $engine->db->form_token_time;?>" />
+					<input type="number" min="0" maxlength="4" id="form_token_time" name="form_token_time" value="<?php echo (int) $engine->db->form_token_time;?>">
 				</td>
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
-					<br />
+					<br>
 					Miscellaneous
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="session_length"><strong>Term login cookie:</strong><br />
+					<label for="session_length"><strong>Term login cookie:</strong><br>
 					<small>The lifetime of the user cookie login by default (in days).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="session_length" name="session_length" value="<?php echo (int) $engine->db->session_length;?>" />
+					<input type="number" min="0" maxlength="4" id="session_length" name="session_length" value="<?php echo (int) $engine->db->session_length;?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -477,11 +477,11 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="comment_delay"><strong>Anti-flood for comments:</strong><br />
+					<label for="comment_delay"><strong>Anti-flood for comments:</strong><br>
 					<small>The minimum delay between the publication of the new user comments (in seconds).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="comment_delay" name="comment_delay" value="<?php echo (int) $engine->db->comment_delay;?>" />
+					<input type="number" min="0" maxlength="4" id="comment_delay" name="comment_delay" value="<?php echo (int) $engine->db->comment_delay;?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -489,18 +489,18 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="intercom_delay"><strong>Anti-flood for personal communications:</strong><br />
+					<label for="intercom_delay"><strong>Anti-flood for personal communications:</strong><br>
 					<small>The minimum delay between sending a private message user connection (in seconds).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="intercom_delay" name="intercom_delay" value="<?php echo (int) $engine->db->intercom_delay;?>" />
+					<input type="number" min="0" maxlength="4" id="intercom_delay" name="intercom_delay" value="<?php echo (int) $engine->db->intercom_delay;?>">
 				</td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

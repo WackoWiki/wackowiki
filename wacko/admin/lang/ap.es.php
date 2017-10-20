@@ -320,16 +320,16 @@ $ap_translation = [
 	'SendTestEmailInfo'			=> 'Esto enviará un correo electrónico de prueba a la dirección definida en su cuenta.',
 	'TestEmailSubject'			=> 'El Wiki está configurado correctamente para enviar emails',
 	'TestEmailBody'				=> 'Si recibió este email su Wiki está configurado correctamente para enviar emails.',
-	'TestEmailMessage'			=> 'El correo electrónico de prueba ha sido enviado.<br />Si no lo recibes, por favor revisa tú configuración de mensajes de correo electrónico.',
+	'TestEmailMessage'			=> 'El correo electrónico de prueba ha sido enviado.<br>Si no lo recibes, por favor revisa tú configuración de mensajes de correo electrónico.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Habilita automáticamente encriptación si el servidor publica encriptación TLS (luego de conectar al servidor), aunque no se haya configurado el modo de conexión para <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Método de autentificación para SMTP',
 	'SmtpConnectionModeInfo'	=> 'Solo usado si se configura usuario/contraseña, pregúntele a su ISP si no está seguro de cual método usar.',
 	'SmtpPassword'				=> 'Contraseña SMTP',
-	'SmtpPasswordInfo'			=> 'Introduzca una contraseña solo si su servidor SMTP lo requiere.<br /><em><strong>ADVERTENCIA:</strong> Esta contraseña será guardada como texto plano en la base de datos y será visible para cualquiera que tenga acceso a la misma o que pueda ver esta página de configuración.</em>',
+	'SmtpPasswordInfo'			=> 'Introduzca una contraseña solo si su servidor SMTP lo requiere.<br><em><strong>ADVERTENCIA:</strong> Esta contraseña será guardada como texto plano en la base de datos y será visible para cualquiera que tenga acceso a la misma o que pueda ver esta página de configuración.</em>',
 	'SmtpPort'					=> 'Puerto servidor SMTP',
-	'SmtpPortInfo'				=> 'Cámbielo solo si sabe que su servidor SMTP está en un puerto diferente. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpPortInfo'				=> 'Cámbielo solo si sabe que su servidor SMTP está en un puerto diferente. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
 	'SmtpServer'				=> 'Dirección servidor SMTP',
 	'SmtpServerInfo'			=> 'Ten en cuenta que debes proporcionar el protocolo que utiliza tu servidor. Si estás utilizando SSL, tiene que ser <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'Configuración SMTP',
@@ -384,15 +384,15 @@ $ap_translation = [
 	'BackupTable'				=> 'Tabla',
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Archivos',
-	'BackupSettings'			=> 'Indique el esquema de backup deseado.<br />' .
-									'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br />' .
-									'<br />' .
+	'BackupSettings'			=> 'Indique el esquema de backup deseado.<br>' .
+									'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br>' .
+									'<br>' .
 									'<strong>Atención</strong>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, '.
 									'igual al realizar backup de solamente la estructura de tabla sin guardar los datos. '.
 									'Para realizar la conversión completa de las tablas al formato de backup debe realizar <em> el backup completo de base de datos (estructura y datos) sin especificar el cluster</em>.',
-	'BackupCompleted'			=> 'Backup y archivación terminado.<br />' .
-									'Archivo del backup guardado en subdirectorio %1 en <code>files/backup</code>.<br />' .
-									'Use FTP para descargarlo (mantenga la estructura de diretorios y nombres de archivos al copiar).<br />' .
+	'BackupCompleted'			=> 'Backup y archivación terminado.<br>' .
+									'Archivo del backup guardado en subdirectorio %1 en <code>files/backup</code>.<br>' .
+									'Use FTP para descargarlo (mantenga la estructura de diretorios y nombres de archivos al copiar).<br>' .
 									'Para restaurar una copia del backup o remover un paquete, ingrese en <a href="?mode=db_restore">Restaurar base de datos</a>.',
 	'LogSavedBackup'			=> 'Guardado backup de base de datos ##%1##',
 
@@ -409,9 +409,9 @@ $ap_translation = [
 									'Por lo tanto habrá registros duplicados durante el proceso de restauración. '.
 									'En el modo normal todos se reemplazarán por los registros desde el backup (usando la instrucción SQL <code>REPLACE</code>), '.
 									'pero si se marca esta casilla, se omiten todos los duplicados (se mantienen los registros actuales), '.
-									'y solamente se agregan en la tabla registros con claves nuevas (instrucción SQL <code>INSERT IGNORE</code>).<br />' .
-									'<strong>Observación</strong>: Al restaurar el backup completo del sitio esta opción se ignora.<br />' .
-									'<br />' .
+									'y solamente se agregan en la tabla registros con claves nuevas (instrucción SQL <code>INSERT IGNORE</code>).<br>' .
+									'<strong>Observación</strong>: Al restaurar el backup completo del sitio esta opción se ignora.<br>' .
+									'<br>' .
 									'** Si el backup contiene los archivos de usuario (global y por página, archivos cache, etc.), '.
 									'en modo normal serán sustituidos al rastaurar con igual nombre y en la misma ubicación de directorio. '.
 									'Esta opción permite guardar los archivos actuales y restaurar de un backup solamente los archivos nuevos (que faltan en el servidor).',

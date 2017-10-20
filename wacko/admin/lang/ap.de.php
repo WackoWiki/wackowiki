@@ -320,7 +320,7 @@ $ap_translation = [
 	'SendTestEmailInfo'			=> 'Sendet eine Test-Mail an die in deinem Benutzerkonto hinterlegte Adresse.',
 	'TestEmailSubject'			=> 'Dein Wiki ist für den E-Mail-Versand richtig konfiguriert',
 	'TestEmailBody'				=> 'Wenn du diese Nachricht erhältst, ist deine Wiki richtig für den E-Mail-Versand konfiguriert.',
-	'TestEmailMessage'			=> 'Die Test-Mail wurde gesendet.<br />Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Konfiguration.',
+	'TestEmailMessage'			=> 'Die Test-Mail wurde gesendet.<br>Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Konfiguration.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
@@ -329,7 +329,7 @@ $ap_translation = [
 	'SmtpPassword'				=> 'SMTP-Passwort',
 	'SmtpPasswordInfo'			=> 'Gib nur ein Passwort ein, wenn dein SMTP-Server dies erfordert. <em><strong>WARNUNG:</strong> Dieses Passwort wird im Klartext in der Datenbank gespeichert und ist daher für jeden einsehbar, der Zugriff auf die Datenbank oder diese Konfigurationsseite hat.</em>',
 	'SmtpPort'					=> 'SMTP-Server-Port',
-	'SmtpPortInfo'				=> 'Ändere diese Einstellung nur, wenn du weißt, dass dein SMTP-Server einen anderen Port nutzt. <br />(default: <code>tls</code> auf Port 587 (oder möglicherweise 25) und <code>ssl</code> auf Port 465)',
+	'SmtpPortInfo'				=> 'Ändere diese Einstellung nur, wenn du weißt, dass dein SMTP-Server einen anderen Port nutzt. <br>(default: <code>tls</code> auf Port 587 (oder möglicherweise 25) und <code>ssl</code> auf Port 465)',
 	'SmtpServer'				=> 'SMTP-Server-Adresse',
 	'SmtpServerInfo'			=> 'Beachte, dass du das Protokoll angeben musst, das dein Server verwendet. Wird SSL verwendet, musst du <code>ssl://mail.example.com</code> angeben.',
 	'SmtpSettings'				=> 'SMTP-Einstellungen',
@@ -384,15 +384,15 @@ $ap_translation = [
 	'BackupTable'				=> 'Tabelle',
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Dateien',
-	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br />' .
-									'Der Stammcluster wirkt sich nicht auf die Sicherung der globalen Dateisicherung und der Cache-Dateien aus (die Auswahl wird immer vollständig gespeichert).<br />' .
-									'<br />' .
+	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br>' .
+									'Der Stammcluster wirkt sich nicht auf die Sicherung der globalen Dateisicherung und der Cache-Dateien aus (die Auswahl wird immer vollständig gespeichert).<br>' .
+									'<br>' .
 									'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, '.
 									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. '.
 									'Um eine vollständige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
-	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br />' .
-									'Die Sicherungspaketdateien wurden im %1 benannten Unterverzeichnis unter <code>files/backup</code> abgelegt.<br />' .
-									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br />' .
+	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br>' .
+									'Die Sicherungspaketdateien wurden im %1 benannten Unterverzeichnis unter <code>files/backup</code> abgelegt.<br>' .
+									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 
@@ -409,9 +409,9 @@ $ap_translation = [
 									'Somit werden während des Wiederherstellungsvorgangs doppelte Datensätze auftreten. '.
 									'Im normalen Modus werden alle Dateien durch die Datensätze ersetzt (mit SQL-Anweisung <code>REPLACE</code>), '.
 									'aber wenn dieses Kontrollkästchen aktiviert ist, werden alle Duplikate übersprungen (die aktuellen Werte der Datensätze werden beibehalten), '.
-									'und nur die Datensätze mit neuem Schlüssel werden in die Tabelle aufgenommen (SQL-Anweisung <code>INSERT IGNORE</code>).<br />' .
-									'<strong>Hinweis</strong>: Wenn Sie eine vollständige Sicherung der Site wiederherstellen, hat diese Option keinen Zweck.<br />' .
-									'<br />' .
+									'und nur die Datensätze mit neuem Schlüssel werden in die Tabelle aufgenommen (SQL-Anweisung <code>INSERT IGNORE</code>).<br>' .
+									'<strong>Hinweis</strong>: Wenn Sie eine vollständige Sicherung der Site wiederherstellen, hat diese Option keinen Zweck.<br>' .
+									'<br>' .
 									'** Wenn die Sicherung die Benutzerdateien (global und perpage, Cache-Dateien usw.) enthält, '.
 									'ersetzen sie im normalen Modus die vorhandenen Dateien mit denselben Namen und werden beim Wiederherstellen in demselben Verzeichnis abgelegt. '.
 									'Mit dieser Option kann man die aktuellen Kopien der Dateien speichern und aus einer Sicherung nur neue Dateien (fehlt auf dem Server) wiederherstellen.',

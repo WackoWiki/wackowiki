@@ -44,7 +44,7 @@ if ($b < 0) $b = 0;
 
 if ($a == $b)
 {
-	echo "<br />\n" . $this->_t('NoDifferences');
+	echo "<br>\n" . $this->_t('NoDifferences');
 	return;
 }
 
@@ -129,7 +129,7 @@ if ($page_a && $page_b
 		//'<a href="' . $this->href('', '', ($a > 0 ? ['revision_id' => $page_a['revision_id']] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
 		//'<a href="' . $this->href('', '', ($b > 0 ? ['revision_id' => $page_b['revision_id']] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
 		$this->compose_link_to_page($this->tag, '', '', 0)) . "</div>\n";
-	echo "<br />\n<br />\n";
+	echo "<br>\n<br>\n";
 
 	// print navigation
 	echo '<ul class="menu">';
@@ -168,7 +168,7 @@ if ($page_a && $page_b
 		if ($added)
 		{
 			// remove blank lines
-			echo "<br />\n" . '<strong>' . $this->_t('SimpleDiffAdditions') . '</strong>' . "<br />\n\n";
+			echo "<br>\n" . '<strong>' . $this->_t('SimpleDiffAdditions') . '</strong>' . "<br>\n\n";
 			echo '<div class="additions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $added), ENT_COMPAT | ENT_HTML5, $charset), 70, "\n", 1) . '</pre>'
@@ -178,7 +178,7 @@ if ($page_a && $page_b
 
 		if ($deleted)
 		{
-			echo "<br />\n\n" . '<strong>' . $this->_t('SimpleDiffDeletions') . '</strong>' . "<br />\n\n";
+			echo "<br>\n\n" . '<strong>' . $this->_t('SimpleDiffDeletions') . '</strong>' . "<br>\n\n";
 			echo '<div class="deletions">';
 			echo $source
 					? '<pre>' . wordwrap(htmlentities(implode("\n", $deleted), ENT_COMPAT | ENT_HTML5, $charset), 70, "\n", 1) . '</pre>'
@@ -188,7 +188,7 @@ if ($page_a && $page_b
 
 		if (!$added && !$deleted)
 		{
-			echo "<br />\n" . $this->_t('NoDifferences');
+			echo "<br>\n" . $this->_t('NoDifferences');
 		}
 
 		break;
@@ -286,7 +286,7 @@ if ($page_a && $page_b
 		$side_b->copy_until_ordinal($count_total_right, $output);
 		$side_b->copy_whitespace($output);
 
-		echo '<br /><br />';
+		echo '<br><br>';
 		echo $this->format($output, 'wiki', ['diff' => true]);
 		break;
 
@@ -299,7 +299,7 @@ if ($page_a && $page_b
 		// using nice lib/php-diff library..
 		$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
 
-		echo '<br /><br />';
+		echo '<br><br>';
 
 		if (!$diff->getGroupedOpcodes())
 		{

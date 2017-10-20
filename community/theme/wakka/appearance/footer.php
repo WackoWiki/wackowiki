@@ -33,14 +33,14 @@ if ($this->page)
 			// Add page link
 			(($this->method == 'new')
 				? ""
-				: print("<li><a href=\"" . $this->href('new') . "\"><img src=\"" . $this->db->theme_url."icon/add_page.png\" title=\"" . $this->_t('CreateNewPageTip') . "\" alt=\"" . $this->_t('CreateNewPageTip') . "\" /></a></li>\n")
+				: print("<li><a href=\"" . $this->href('new') . "\"><img src=\"" . $this->db->theme_url."icon/add_page.png\" title=\"" . $this->_t('CreateNewPageTip') . "\" alt=\"" . $this->_t('CreateNewPageTip') . "\"></a></li>\n")
 			);
 
 			// Rename link
-			print("<li><a href=\"" . $this->href('rename') . "\"><img src=\"" . $this->db->theme_url."icon/rename.png\" title=\"" . $this->_t('RenameText') . "\" alt=\"" . $this->_t('RenameText') . "\" /></a></li>\n");
+			print("<li><a href=\"" . $this->href('rename') . "\"><img src=\"" . $this->db->theme_url."icon/rename.png\" title=\"" . $this->_t('RenameText') . "\" alt=\"" . $this->_t('RenameText') . "\"></a></li>\n");
 
 			// Remove link (shows only for page owner if allowed)
-			if (!$this->db->remove_onlyadmins) print("<li><a href=\"" . $this->href('remove') . "\"><img src=\"" . $this->db->theme_url."icon/delete_page.png\" title=\"" . $this->_t('DeleteTip') . "\" alt=\"" . $this->_t('DeleteText') . "\" /></a></li>\n");
+			if (!$this->db->remove_onlyadmins) print("<li><a href=\"" . $this->href('remove') . "\"><img src=\"" . $this->db->theme_url."icon/delete_page.png\" title=\"" . $this->_t('DeleteTip') . "\" alt=\"" . $this->_t('DeleteText') . "\"></a></li>\n");
 
 			//Edit ACLs link
 			print("<li><a href=\"" . $this->href('permissions') . "\"" . (($this->method=='edit')?" onclick=\"return window.confirm('" . $this->_t('EditACLConfirm') . "');\"":"") . ">" . $this->_t('ACLText') . "</a></li>\n");
@@ -68,19 +68,19 @@ if ($this->page)
 			// Add page link
 			(($this->method == 'new')
 				? ""
-				: print("<li><a href=\"" . $this->href('new') . "\"><img src=\"" . $this->db->theme_url."icon/add_page.png\" title=\"" . $this->_t('CreateNewPageTip') . "\" alt=\"" . $this->_t('CreateNewPageTip') . "\" /></a></li>\n")
+				: print("<li><a href=\"" . $this->href('new') . "\"><img src=\"" . $this->db->theme_url."icon/add_page.png\" title=\"" . $this->_t('CreateNewPageTip') . "\" alt=\"" . $this->_t('CreateNewPageTip') . "\"></a></li>\n")
 			);
 		}
 
 		// Rename link
 		if ($this->check_acl($this->get_user_name(),$this->db->rename_globalacl) && !$this->is_owner())
 		{
-			print("<li><a href=\"" . $this->href('rename') . "\"><img src=\"" . $this->db->theme_url."icon/rename.png\" title=\"" . $this->_t('RenameText') . "\" alt=\"" . $this->_t('RenameText') . "\" /></a></li>\n");
+			print("<li><a href=\"" . $this->href('rename') . "\"><img src=\"" . $this->db->theme_url."icon/rename.png\" title=\"" . $this->_t('RenameText') . "\" alt=\"" . $this->_t('RenameText') . "\"></a></li>\n");
 		}
 		// Remove link (shows only for Admins)
 		if ($this->is_admin() && !$this->is_owner())
 		{
-			print("<li><a href=\"" . $this->href('remove') . "\"><img src=\"" . $this->db->theme_url."icon/delete_page.png\" title=\"" . $this->_t('DeleteTip') . "\" alt=\"" . $this->_t('DeleteText') . "\" /></a></li>\n");
+			print("<li><a href=\"" . $this->href('remove') . "\"><img src=\"" . $this->db->theme_url."icon/delete_page.png\" title=\"" . $this->_t('DeleteTip') . "\" alt=\"" . $this->_t('DeleteText') . "\"></a></li>\n");
 
 			// Edit ACLs link (shows also for Admins)
 			print("<li><a href=\"" . $this->href('permissions') . "\"" . (($this->method=='edit')?" onclick=\"return window.confirm('" . $this->_t('EditACLConfirm') . "');\"":"") . ">" . $this->_t('ACLText') . "</a></li>\n");
@@ -92,17 +92,17 @@ if ($this->page)
 			print("<li><a href=\"" . $this->href('properties'). "\"" . (($this->method=='edit')?" onclick=\"return window.confirm('" . $this->_t('EditPropertiesConfirm') . "');\"":"") . ">" . $this->_t('PropertiesText') . "</a></li>\n");
 
 			// referrers icon
-			print("<li><a href=\"" . $this->href('referrers') . "\"><img src=\"" . $this->db->theme_url."icon/referrer.png\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\" /></a></li>\n");
+			print("<li><a href=\"" . $this->href('referrers') . "\"><img src=\"" . $this->db->theme_url."icon/referrer.png\" title=\"" . $this->_t('ReferrersTip') . "\" alt=\"" . $this->_t('ReferrersText') . "\"></a></li>\n");
 		}
 
 		if ($this->get_user())
 		{
 			// Watch/Unwatch icon
-			echo ($this->is_watched === true ? "<li><a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/unwatch.png\" title=\"" . $this->_t('RemoveWatch') . "\" alt=\"" . $this->_t('RemoveWatch') . "\"  /></a></li>\n" : "<li><a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/watch.png\" title=\"" . $this->_t('SetWatch') . "\" alt=\"" . $this->_t('SetWatch') . "\" /></a></li>\n");
+			echo ($this->is_watched === true ? "<li><a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/unwatch.png\" title=\"" . $this->_t('RemoveWatch') . "\" alt=\"" . $this->_t('RemoveWatch') . "\" ></a></li>\n" : "<li><a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/watch.png\" title=\"" . $this->_t('SetWatch') . "\" alt=\"" . $this->_t('SetWatch') . "\"></a></li>\n");
 		}
 
 		// Print icon
-		echo"<li><a href=\"" . $this->href('print') . "\"><img src=\"" . $this->db->theme_url."icon/print.png\" title=\"" . $this->_t('PrintVersion') . "\" alt=\"" . $this->_t('PrintVersion') . "\" /></a></li>\n";
+		echo"<li><a href=\"" . $this->href('print') . "\"><img src=\"" . $this->db->theme_url."icon/print.png\" title=\"" . $this->_t('PrintVersion') . "\" alt=\"" . $this->_t('PrintVersion') . "\"></a></li>\n";
 	}
 }
 

@@ -25,11 +25,11 @@ if ($this->is_admin())
 	{
 		if (isset($_POST['_to']))
 		{
-			echo 'Pls. provide an cluster you want to import to, no relative addressing.<br /><br />';
+			echo 'Pls. provide an cluster you want to import to, no relative addressing.<br><br>';
 		}
 		else
 		{
-			echo 'Attention: overwrites the same pages in the cluster<br /><br />';
+			echo 'Attention: overwrites the same pages in the cluster<br><br>';
 		}
 		// show FORM
 		// STS rawurldecode!? good ganja! why?
@@ -38,14 +38,14 @@ if ($this->is_admin())
 		<div class="cssform">
 			<p>
 				<label for="importto"><?php echo $this->_t('ImportTo'); ?>:</label>
-				<input type="text" id="importto" name="_to" size="40" value="" />
+				<input type="text" id="importto" name="_to" size="40" value="">
 			</p>
 			<p>
 				<label for="importwhat"><?php echo $this->_t('ImportWhat'); ?>:</label>
-				<input type="file" id="importwhat" name="_import" />
+				<input type="file" id="importwhat" name="_import">
 			</p>
 			<p>
-				<input type="submit" value="<?php echo $this->_t('ImportButtonText'); ?>" />
+				<input type="submit" value="<?php echo $this->_t('ImportButtonText'); ?>">
 			</p>
 		</div>
 		<?php
@@ -62,7 +62,7 @@ if ($this->is_admin())
 				echo '<pre>';
 				print_r($_FILES);
 				print_r($_POST);
-				die('</pre><br />IMPORT failed');
+				die('</pre><br>IMPORT failed');
 			}
 
 			// check for false and empty strings
@@ -104,11 +104,11 @@ if ($this->is_admin())
 				$pages[] = $tag;
 			}
 
-			echo '<em>' . Ut::perc_replace($this->_t('ImportSuccess'), $t) . '</em><br />';
+			echo '<em>' . Ut::perc_replace($this->_t('ImportSuccess'), $t) . '</em><br>';
 
 			foreach ($pages as $page)
 			{
-				echo $this->link('/' . $page, '', '', '', 0) . '<br />';
+				echo $this->link('/' . $page, '', '', '', 0) . '<br>';
 			}
 		}
 		else
@@ -116,7 +116,7 @@ if ($this->is_admin())
 			echo '<pre>';
 			print_r($_FILES);
 			print_r($_POST);
-			die('</pre><br />IMPORT failed');
+			die('</pre><br>IMPORT failed');
 		}
 	}
 }

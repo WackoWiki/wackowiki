@@ -27,11 +27,11 @@ if ($this->can_upload(true) === true)
 	// displaying
 	echo $this->form_open('upload', ['page_method' => 'upload', 'form_more' => ' enctype="multipart/form-data" ']);
 
-	echo '<input type="hidden" name="upload" value="1" />';
+	echo '<input type="hidden" name="upload" value="1">';
 
 	if ($maxsize)
 	{
-		echo '<input type="hidden" name="maxsize" value="' . floor(1 * $maxsize) . '" />';
+		echo '<input type="hidden" name="maxsize" value="' . floor(1 * $maxsize) . '">';
 	}
 
 	// if you have no write access and you are not admin, you can upload only "global" file
@@ -66,10 +66,10 @@ if ($this->can_upload(true) === true)
 	<tr>
 		<td>
 			<label for="file_upload"><?php echo $this->_t('UploadFor');?>:&nbsp;</label>
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>" />
+			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>">
 		</td>
 		<td class="nowrap">
-			<input type="file" name="file" id="file_upload" <?php echo $accecpt;?>/>&nbsp;(<?php echo $this->_t('UploadMax') . $this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
+			<input type="file" name="file" id="file_upload" <?php echo $accecpt;?>>&nbsp;(<?php echo $this->_t('UploadMax') . $this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
 		</td>
 	</tr>
 	<?php
@@ -79,8 +79,8 @@ if ($this->can_upload(true) === true)
 		<td>&nbsp;</td>
 		<td>
 			<div>
-				<input type="radio" name="_to" disabled checked value="global" id="upload_global_disabled" />
-				<input type="hidden" name="to" value="global" /> <?php echo $this->_t('UploadGlobalText'); ?>
+				<input type="radio" name="_to" disabled checked value="global" id="upload_global_disabled">
+				<input type="hidden" name="to" value="global"> <?php echo $this->_t('UploadGlobalText'); ?>
 			</div>
 		</td>
 	</tr>
@@ -92,11 +92,11 @@ if ($this->can_upload(true) === true)
 		<td>&nbsp;</td>
 		<td>
 			<div>
-				<input type="radio" name="to" value="global" id="upload_global" />
+				<input type="radio" name="to" value="global" id="upload_global">
 				<label for="upload_global"><?php echo $this->_t('UploadGlobalText'); ?></label>
 			</div>
 			<div>
-				<input type="radio" name="to" value="here" checked id="upload_to_page" />
+				<input type="radio" name="to" value="here" checked id="upload_to_page">
 				<label for="upload_to_page"><?php echo $this->_t('UploadHereText'); ?></label>
 			</div>
 		</td>
@@ -108,7 +108,7 @@ if ($this->can_upload(true) === true)
 			<label for="upload_dest_file">' . $this->_t('UploadAsName') . ':&nbsp;</label>
 		</td>
 		<td>
-			<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value=""/>
+			<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value="">
 		</td>
 	</tr>'; */
 
@@ -119,7 +119,7 @@ if ($this->can_upload(true) === true)
 			<label for="upload_desc"><?php echo $this->_t('FileDesc');?>:&nbsp;</label>
 		</td>
 		<td>
-			<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250"/>
+			<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250">
 		</td>
 	</tr>
 	<?php } ?>
@@ -127,7 +127,7 @@ if ($this->can_upload(true) === true)
 		<td class="t_right">
 		</td>
 		<td>
-			<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1" />
+			<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1">
 			<label for="upload_overwrite"><?php echo $this->_t('UploadOverwrite');?></label>
 		</td>
 	</tr>
@@ -135,7 +135,7 @@ if ($this->can_upload(true) === true)
 		<td>&nbsp;</td>
 		<td>
 			<div style="padding-top: 5px;">
-				<input type="submit" value="<?php echo $this->_t('UploadButton'); ?>" />
+				<input type="submit" value="<?php echo $this->_t('UploadButton'); ?>">
 			</div>
 		</td>
 	</tr>

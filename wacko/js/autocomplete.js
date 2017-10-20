@@ -39,7 +39,7 @@ AutoComplete.prototype.addButton = function ()
 		+ ' onclick="document.getElementById(' + '\'' + we.id + '\')._owner.autocomplete.insertFound();return false;' + '" '
 		+ ' title="Insert Autocomplete">Autocomplete'
 		+ '</div>'
-		+ (isIE ? '<div style="display:none;" class="autocomplete-inplace" id="' + this.id + '_inplace"><hr /></div>' : '')
+		+ (isIE ? '<div style="display:none;" class="autocomplete-inplace" id="' + this.id + '_inplace"><hr></div>' : '')
 		+ '</li>'
 		+ '<li id="' + this.id + '_reset" style="display:none;"><div style="font:12px Arial; padding: 3px 3px 4px 4px;" '
 		+ 'onmouseover=\'this.className="btn-hover";\' '
@@ -92,7 +92,7 @@ AutoComplete.prototype.redrawInplace = function ()
 		var div = '<div id=\'' + this.wikiedit.id + '_item_' + i + '\'' +
 			' onmouseover=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.selectInplace(' + '"' + i + '"' + ');\' ' +
 			' onclick=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.insertFound(' + '"' + pattern + '"' + ');\'>' +
-			'<img align=right src=\'' + this.wikiedit.imagesPath + 'spacer.png\' />' + pattern + '&nbsp;&nbsp;</div>';
+			'<img align=right src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '&nbsp;&nbsp;</div>';
 		contents += div;
 	}
 	
@@ -361,6 +361,9 @@ AutoComplete.prototype.checkPattern = function (pattern, magic_button_mode)
 };
 
 // strict linking found pattern if it is not a wikilink itself
+/**
+ * @return {string}
+ */
 AutoComplete.prototype.StrictLink = function (pattern)
 {
 	if (this.strict_linking_mode) return pattern;

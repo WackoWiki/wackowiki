@@ -233,13 +233,13 @@ if (!empty($blog_cluster))
 			$feed_tag = 'blog' . $this->page['page_id'];
 		}
 
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/' . $feed_tag . '_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br />\n";
+		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/' . $feed_tag . '_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br>\n";
 	}
 
 	echo '<div style="width:100%;">
 			<p>' . ($access? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic') . '</a></small></strong>' : '') . '</p>';
 	$this->print_pagination($pagination);
-	echo '<br style="clear:both;" />
+	echo '<br style="clear:both;">
 		</div>' . "\n";
 
 	// displaying articles
@@ -265,20 +265,20 @@ if (!empty($blog_cluster))
 	}
 	else
 	{
-		echo '<br /><br />' . $this->_t('NewsNotAvailable');
+		echo '<br><br>' . $this->_t('NewsNotAvailable');
 	}
 
 	if ($access)
 	{
 		echo $this->form_open('add_topic');
 		?>
-		<br /><a id="newtopic"></a><br />
+		<br><a id="newtopic"></a><br>
 				<table class="formation">
 			<tr>
 				<td class="label"><label for="posttitle"><?php echo $this->_t('ForumTopicName'); ?>:</label></td>
 				<td>
-					<input type="text" id="posttitle" name="title" size="50" maxlength="250" value="" />
-					<input type="submit" id="submit" value="<?php echo $this->_t('ForumTopicSubmit'); ?>" />
+					<input type="text" id="posttitle" name="title" size="50" maxlength="250" value="">
+					<input type="submit" id="submit" value="<?php echo $this->_t('ForumTopicSubmit'); ?>">
 				</td>
 			</tr>
 		</table>

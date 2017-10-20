@@ -195,9 +195,9 @@ if ($upload_allowed)
 <?php
 echo $this->form_open('set_permissions', ['page_method' => 'permissions']);
 
-echo '<input type="checkbox" id="massacls" name="massacls" />';
+echo '<input type="checkbox" id="massacls" name="massacls">';
 echo '<label for="massacls">' . $this->_t('AclForEntireCluster') . '</label>'; ?>
-<br />
+<br>
 <div class="cssform">
 <p>
 	<label for="read_acl"><strong><?php echo $this->_t('ACLRead'); ?></strong></label>
@@ -241,7 +241,7 @@ if ($upload_allowed)
 	</select>
 </p>
 <p>
-	<input type="submit" class="OkBtn" id="submit" value="<?php echo $this->_t('ACLStoreButton'); ?>" accesskey="s" /> &nbsp;
+	<input type="submit" class="OkBtn" id="submit" value="<?php echo $this->_t('ACLStoreButton'); ?>" accesskey="s"> &nbsp;
 	<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" id="button" value="<?php echo $this->_t('ACLCancelButton'); ?>"/></a>
 </p>
 </div>

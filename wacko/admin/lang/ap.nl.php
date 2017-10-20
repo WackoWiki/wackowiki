@@ -320,16 +320,16 @@ $ap_translation = [
 	'SendTestEmailInfo'			=> 'Deze optie verstuurt een test-e-mail naar het e-mailadres dat is opgegeven bij je accountinstellingen.',
 	'TestEmailSubject'			=> 'Wiki is correct geconfigureerd om e-mails te versturen',
 	'TestEmailBody'				=> 'Als je deze e-mail hebt ontvangen, is je wiki correct geconfigureerd om e-mails te versturen.',
-	'TestEmailMessage'			=> 'De test-e-mail is verzonden.<br />Controleer je e-mailconfiguratie als je de test e-mail niet hebt ontvangen.',
+	'TestEmailMessage'			=> 'De test-e-mail is verzonden.<br>Controleer je e-mailconfiguratie als je de test e-mail niet hebt ontvangen.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Authenticatiemethode voor SMTP',
 	'SmtpConnectionModeInfo'	=> 'Alleen gebruiken als een gebruikersnaam/wachtwoord ingesteld is, vraag je provider als je niet zeker bent welke methode je moet gebruiken.',
 	'SmtpPassword'				=> 'SMTP-wachtwoord',
-	'SmtpPasswordInfo'			=> 'Alleen een wachtwoord invoeren als je SMTP-server dit vereist.<br /><em><strong>Waarschuwing:</strong> Dit wachtwoord zal opgeslagen worden als platte tekst in de database, zichtbaar voor iedereen die toegang heeft tot je database of die dit configuratiepagina kan bekijken.</em>',
+	'SmtpPasswordInfo'			=> 'Alleen een wachtwoord invoeren als je SMTP-server dit vereist.<br><em><strong>Waarschuwing:</strong> Dit wachtwoord zal opgeslagen worden als platte tekst in de database, zichtbaar voor iedereen die toegang heeft tot je database of die dit configuratiepagina kan bekijken.</em>',
 	'SmtpPort'					=> 'SMTP-serverpoort',
-	'SmtpPortInfo'				=> 'Verander dit alleen als je weet dat je SMTP-server op een andere poort draait. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpPortInfo'				=> 'Verander dit alleen als je weet dat je SMTP-server op een andere poort draait. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
 	'SmtpServer'				=> 'SMTP-serveradres',
 	'SmtpServerInfo'			=> 'Let op dat je het gebruikte protocol ook opgeeft. Indien je SSL gebruikt, dan is dit <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'SMTP-instellingen',
@@ -384,15 +384,15 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Files',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br />' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />' .
-									'<br />' .
+	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
+									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
+									'<br>' .
 									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
 									'same when backing up only table structure without saving the data. '.
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
-	'BackupCompleted'			=> 'Backing up and archiving completed.<br />' .
-									'Backup package files stored in the %1 named sub-directory of <code>files/backup</code> directory.<br />' .
-									'To download it use FTP (maintain the directory structure and file names when copying).<br />' .
+	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
+									'Backup package files stored in the %1 named sub-directory of <code>files/backup</code> directory.<br>' .
+									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
 									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 
@@ -409,9 +409,9 @@ $ap_translation = [
 									'Thus, during the recovery process duplicate records will occur. '.
 									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), '.
 									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), '.
-									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br />' .
-									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br />' .
-									'<br />' .
+									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br>' .
+									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br>' .
+									'<br>' .
 									'** If the backup contains the user files (global and perpage, cache files, etc.), '.
 									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. '.
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',

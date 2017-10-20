@@ -74,10 +74,10 @@ if ($user = $this->get_user())
 
 				sort($allowed_groups);
 
-				$group_members = implode('<br />', $allowed_groups);
+				$group_members = implode('<br>', $allowed_groups);
 
 				// Print out the usergroup name and then a list of the users under it
-				echo '<strong>' . $this->group_link($group_name, '', true, false) . '</strong>:<br />' . str_replace("\n","<br />",$group_members) . '<br />';
+				echo '<strong>' . $this->group_link($group_name, '', true, false) . '</strong>:<br>' . str_replace("\n","<br>",$group_members) . '<br>';
 				echo '</td>';
 
 				$i++;

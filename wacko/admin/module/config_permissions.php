@@ -25,11 +25,11 @@ function admin_config_permissions(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		Parameters responsible for Access control and permissions.
 	</p>
-	<br />
+	<br>
 <?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -56,7 +56,7 @@ function admin_config_permissions(&$engine, &$module)
 
 	echo $engine->form_open('permissions');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -64,13 +64,13 @@ function admin_config_permissions(&$engine, &$module)
 			</colgroup>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Rights and privileges
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_read_acl"><strong>Read rights by default:</strong><br />
+					<label for="default_read_acl"><strong>Read rights by default:</strong><br>
 					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label>
 				</td>
 				<td>
@@ -82,7 +82,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_write_acl"><strong>Write rights by default:</strong><br />
+					<label for="default_write_acl"><strong>Write rights by default:</strong><br>
 					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label>
 				</td>
 				<td>
@@ -94,7 +94,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_comment_acl"><strong>Comment rights by default:</strong><br />
+					<label for="default_comment_acl"><strong>Comment rights by default:</strong><br>
 					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label>
 				</td>
 				<td>
@@ -106,7 +106,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_create_acl"><strong>Create rights of a sub page by default:</strong><br />
+					<label for="default_create_acl"><strong>Create rights of a sub page by default:</strong><br>
 					<small>Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.</small></label>
 				</td>
 				<td>
@@ -118,7 +118,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_upload_acl"><strong>Upload rights by default:</strong><br />
+					<label for="default_upload_acl"><strong>Upload rights by default:</strong><br>
 					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label>
 				</td>
 				<td>
@@ -130,7 +130,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="rename_globalacl"><strong>Global rename right:</strong><br />
+					<label for="rename_globalacl"><strong>Global rename right:</strong><br>
 					<small>List for admission to the possibility of free rename (move) pages.</small></label>
 				</td>
 				<td>
@@ -139,18 +139,18 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
-					<br />
+					<br>
 					Miscellaneous
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="acl_lock"><strong>Lock all ACL to read only:</strong><br />
-					<small><span class="cite">Overwrites the acl settings for all pages to read only.</span></small><br />
+					<label for="acl_lock"><strong>Lock all ACL to read only:</strong><br>
+					<small><span class="cite">Overwrites the acl settings for all pages to read only.</span></small><br>
 					This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.</label>
 				</td>
 				<td>
-					<input type="checkbox" id="acl_lock" name="acl_lock" value="1"<?php echo ($engine->db->acl_lock ? ' checked' : '');?> />
+					<input type="checkbox" id="acl_lock" name="acl_lock" value="1"<?php echo ($engine->db->acl_lock ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -158,11 +158,11 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="hide_locked"><strong>Hide inaccessible pages:</strong><br />
+					<label for="hide_locked"><strong>Hide inaccessible pages:</strong><br>
 					<small>If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="hide_locked" name="hide_locked" value="1"<?php echo ($engine->db->hide_locked ? ' checked' : '');?> />
+					<input type="checkbox" id="hide_locked" name="hide_locked" value="1"<?php echo ($engine->db->hide_locked ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -170,11 +170,11 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="remove_onlyadmins"><strong>Only administrators can delete pages:</strong><br />
+					<label for="remove_onlyadmins"><strong>Only administrators can delete pages:</strong><br>
 					<small>Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="remove_onlyadmins" name="remove_onlyadmins" value="1"<?php echo ($engine->db->remove_onlyadmins ? ' checked' : '');?> />
+					<input type="checkbox" id="remove_onlyadmins" name="remove_onlyadmins" value="1"<?php echo ($engine->db->remove_onlyadmins ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -182,11 +182,11 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="owners_can_remove_comments"><strong>Owners of pages can delete comments:</strong><br />
+					<label for="owners_can_remove_comments"><strong>Owners of pages can delete comments:</strong><br>
 					<small>Allow page owners to moderate comments on their pages.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="owners_can_remove_comments" name="owners_can_remove_comments" value="1"<?php echo ($engine->db->owners_can_remove_comments ? ' checked' : '');?> />
+					<input type="checkbox" id="owners_can_remove_comments" name="owners_can_remove_comments" value="1"<?php echo ($engine->db->owners_can_remove_comments ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -194,11 +194,11 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="owners_can_change_categories"><strong>Owners can edit page categories:</strong><br />
+					<label for="owners_can_change_categories"><strong>Owners can edit page categories:</strong><br>
 					<small>Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.</small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ($engine->db->owners_can_change_categories ? ' checked' : '');?> />
+					<input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ($engine->db->owners_can_change_categories ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -206,18 +206,18 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="moders_can_edit"><strong>Term human moderation:</strong><br />
+					<label for="moders_can_edit"><strong>Term human moderation:</strong><br>
 					<small>Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).</small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="4" id="moders_can_edit" name="moders_can_edit" value="<?php echo (int) $engine->db->moders_can_edit;?>" />
+					<input type="number" min="0" maxlength="4" id="moders_can_edit" name="moders_can_edit" value="<?php echo (int) $engine->db->moders_can_edit;?>">
 				</td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

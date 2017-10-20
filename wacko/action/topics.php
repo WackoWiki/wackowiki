@@ -197,13 +197,13 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				// load related categories
 				$_category = $this->get_categories($topic['page_id'], OBJECT_PAGE);
-				$_category = !empty($_category) ? '<br />' . /* $this->_t('Category') . ': '. */$_category : '';
+				$_category = !empty($_category) ? '<br>' . /* $this->_t('Category') . ': '. */$_category : '';
 
 				// print
 				echo '<tbody><tr class="topic">' .
 						'<td>' .
 						($user && !$this->has_access('comment', $topic['page_id'])
-							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
+							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
 							: '' ) .
 						($updated
 							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[' . $this->_t('ForumUpdated') . ']</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
@@ -212,7 +212,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						'</td>' .
 						'<td class="t_center nowrap">' .
 							'<small title="' . ($admin ? $topic['ip'] : '') . '">' .
-								'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br />' .
+								'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br>' .
 								'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;'.
 							'</small>' .
 						'</td>' .
@@ -224,7 +224,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				if ($comment)
 				{
 					echo '<small' . ($updated ? ' style="font-weight:600;"' : '' ) . ' title="' . ($admin ? $comment['ip'] : '') . '">' .
-						$this->user_link($comment['user_name']) . '<br />' .
+						$this->user_link($comment['user_name']) . '<br>' .
 						'<a href="' . $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]) . '">' . $this->get_time_formatted($comment['created']) . '</a></small>';
 				}
 				else
@@ -253,15 +253,15 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	{
 		echo $this->form_open('add_topic');
 		?>
-		<br />
+		<br>
 		<table id="newtopic" class="formation">
 			<tr>
 				<td class="label">
 					<label for="topictitle"><?php echo $this->_t('ForumTopicName'); ?>:</label>
 				</td>
 				<td>
-					<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="" />
-					<input type="submit" id="submit" value="<?php echo $this->_t('ForumTopicSubmit'); ?>" />
+					<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="">
+					<input type="submit" id="submit" value="<?php echo $this->_t('ForumTopicSubmit'); ?>">
 				</td>
 			</tr>
 		</table>

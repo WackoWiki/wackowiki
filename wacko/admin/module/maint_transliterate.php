@@ -25,7 +25,7 @@ function admin_maint_transliterate(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	if (isset($_REQUEST['start']))
 	{
@@ -64,12 +64,12 @@ function admin_maint_transliterate(&$engine, &$module)
 				<ol>
 					<li value="1"><del>Transliterate field <code>to_supertag</code> in table `page_link`</del>.</li>
 				</ol>
-				<br />
+				<br>
 <?php
 				echo $engine->form_open('sysupdate');
 ?>
-					<input type="hidden" name="step" value="2" />
-					<input type="submit" name="start" id="submit" value="continue" />
+					<input type="hidden" name="step" value="2">
+					<input type="submit" name="start" id="submit" value="continue">
 <?php
 				echo $engine->form_close();
 			}
@@ -98,12 +98,12 @@ function admin_maint_transliterate(&$engine, &$module)
 				<ol>
 					<li value="2"><del>Transliterate field <code>supertag</code> in table `page`</del>.</li>
 				</ol>
-				<br />
+				<br>
 <?php
 				echo $engine->form_open('sysupdate');
 ?>
-					<input type="hidden" name="step" value="3" />
-					<input type="submit" name="start" id="submit" value="continue" />
+					<input type="hidden" name="step" value="3">
+					<input type="submit" name="start" id="submit" value="continue">
 <?php
 				echo $engine->form_close();
 			}
@@ -132,12 +132,12 @@ function admin_maint_transliterate(&$engine, &$module)
 				<ol>
 					<li value="3"><del>Transliterate field <code>supertag</code> in table `revision`</del>.</li>
 				</ol>
-				<br />
+				<br>
 				<p>The update procedure is completed.</p>
 <?php
 				#echo $engine->form_open('sysupdate');
-				#echo '<input type="hidden" name="step" value="4" />';
-				#echo '<input type="submit" name="start" id="submit" value="continue" />';
+				#echo '<input type="hidden" name="step" value="4">';
+				#echo '<input type="submit" name="start" id="submit" value="continue">';
 				#echo $engine->form_close();
 			}
 		}
@@ -150,12 +150,12 @@ function admin_maint_transliterate(&$engine, &$module)
 			<li>Transliterate field <code>supertag</code> in table `page`.</li>
 			<li>Transliterate field <code>supertag</code> in table `revision`.</li>
 		</ol>
-		<br />
+		<br>
 <?php
 		echo $engine->form_open('sysupdate');
 ?>
-			<input type="hidden" name="step" value="1" />
-			<input type="submit" name="start" id="submit" value="Start" />
+			<input type="hidden" name="step" value="1">
+			<input type="submit" name="start" id="submit" value="Start">
 <?php
 		echo $engine->form_close();
 	}

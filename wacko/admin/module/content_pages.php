@@ -27,7 +27,7 @@ function admin_content_pages(&$engine, &$module)
 	$error = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 
 	TODO: filter pages: page_lang, hits, last_commented, owner, user, published, drafts, with no title, with no description, with no keywords, by date modified, category, theme, acls, approved, size ...
 
@@ -136,7 +136,7 @@ function admin_content_pages(&$engine, &$module)
 
 ?>
 		<div>
-			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br />
+			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br>
 
 <?php
 		// FIXME: add a common function for this?
@@ -163,8 +163,8 @@ function admin_content_pages(&$engine, &$module)
 
 		echo "</select>\n";
 ?>
-			<input type="submit" name="update" id="submit" value="update" />
-			<input type="submit" name="reset" id="submit" value="reset" />
+			<input type="submit" name="update" id="submit" value="update">
+			<input type="submit" name="reset" id="submit" value="reset">
 		</div>
 <?php
 		$engine->print_pagination($pagination);
@@ -194,14 +194,14 @@ function admin_content_pages(&$engine, &$module)
 					'<td class="a_top">' . $engine->binary_multiples($row['page_size'], false, true, true) . '</td>' .
 					'<td class="t_center a_top"><small>' .
 						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' .
-						'<br />' . '<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
+						'<br>' . '<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
 					'</small></td>' .
 				'</tr>';
 		}
 	}
 	else
 	{
-		echo '<tr><td colspan="5" class="t_center"><br /><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
+		echo '<tr><td colspan="5" class="t_center"><br><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
 	}
 ?>
 		</table>

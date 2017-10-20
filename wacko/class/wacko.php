@@ -50,7 +50,7 @@ class Wacko
 		'before'	=> [
 						'_before'	=> '',
 						'_after'	=> '',
-						'before'	=> '<span class="pmark">[##]</span><br />',
+						'before'	=> '<span class="pmark">[##]</span><br>',
 						'after'		=> ''],
 		'after'		=> [
 						'_before'	=> '',
@@ -3359,7 +3359,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize . ' />';
+				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize . '>';
 			}
 			else
 			{
@@ -3423,7 +3423,7 @@ class Wacko
 
 			if (count($arr) == 1) // case 1 -> file:some.zip
 			{
-				#echo '####1: file:some.zip<br />';
+				#echo '####1: file:some.zip<br>';
 				$file_name = $_file_name;
 
 				if ($file_data = $this->check_file_record($file_name, 0))
@@ -3440,7 +3440,7 @@ class Wacko
 			}
 			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - global only file
 			{
-				#echo '####2: file:/some.zip <br />' . $arr[1] . '####<br />';
+				#echo '####2: file:/some.zip <br>' . $arr[1] . '####<br>';
 				$file_name = $arr[1];
 
 				if ($file_data = $this->check_file_record($file_name, 0))
@@ -3466,7 +3466,7 @@ class Wacko
 					$url				= '';
 				}
 
-				#echo '####3: local file <br />';
+				#echo '####3: local file <br>';
 				$_global	= false;
 				$file_name	= $arr[count($arr) - 1];
 
@@ -3516,7 +3516,7 @@ class Wacko
 			// try to find in global / local storage and return if success
 			if (is_array($file_data))
 			{
-				#echo '---------------------------<br />';
+				#echo '---------------------------<br>';
 				// check 403 here!
 				if ($_global == true || $file_access == true)
 				{
@@ -3551,7 +3551,7 @@ class Wacko
 							{
 								$url	= $this->href('filemeta', trim($page_tag, '/'), ['show', 'file_id' => $file_data['file_id']]);
 								$text	= '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . ' />';
+										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
 								$tpl	= 'localfile';
 								$icon	= '';
 
@@ -3570,12 +3570,12 @@ class Wacko
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '" />';
+							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '">';
 							if (!$text)
 							{
 								$url	= $this->href('filemeta', trim($page_tag, '/'), ['show', 'file_id' => $file_data['file_id']]);
 								$text	= '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" '.
-										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . ' />';
+										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
 								$tpl	= 'localimage';
 								$icon	= '';
 
@@ -3811,7 +3811,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . ' />';
+				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . '>';
 			}
 
 			if ($text)
@@ -3963,7 +3963,7 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . ' />';
+				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . '>';
 			}
 
 			$res			= $this->_t('Tpl.' . $tpl);
@@ -4425,7 +4425,7 @@ class Wacko
 
 		if (!($this->db->rewrite_mode || $this->db->ap_mode))
 		{
-			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . "\" />\n";
+			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . "\">\n";
 		}
 
 		// add form token
@@ -4439,8 +4439,8 @@ class Wacko
 				// STS remove -1 from setup
 
 			$result .=
-				'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
-				'<input type="hidden" name="_action" value="' . $form_name . '" />' . "\n";
+				'<input type="hidden" name="_nonce" value="' . $nonce . '">' . "\n" .
+				'<input type="hidden" name="_action" value="' . $form_name . '">' . "\n";
 		}
 
 		return $result;
@@ -4550,8 +4550,8 @@ class Wacko
 								// STS remove -1 from setup
 
 							return
-								'<input type="hidden" name="_nonce" value="' . $nonce . '" />' . "\n" .
-								'<input type="hidden" name="_action" value="' . $action . '" />' . "\n";
+								'<input type="hidden" name="_nonce" value="' . $nonce . '">' . "\n" .
+								'<input type="hidden" name="_action" value="' . $action . '">' . "\n";
 						});
 					$tpl->setEncoding($this->charset);
 					$tpl->filter('time_formatted',
@@ -4565,7 +4565,7 @@ class Wacko
 							// for generating method GET forms
 							if (preg_match('#\?page=([^&]+)#', $value, $match))
 							{
-								return '<input type="hidden" name="page" value="' . $match[1] . '" />';
+								return '<input type="hidden" name="page" value="' . $match[1] . '">';
 							}
 						});
 					$tpl->filter('_t', function ($str) { return $this->_t($str); });
@@ -7211,7 +7211,7 @@ class Wacko
 			{
 				clearstatcache();
 
-				$message .= $this->_t('FileRemovedFromFS') . '<br />';
+				$message .= $this->_t('FileRemovedFromFS') . '<br>';
 			}
 			else
 			{
@@ -7229,7 +7229,7 @@ class Wacko
 				"WHERE user_id = '" . $file['user_id'] . "' " .
 				"LIMIT 1");
 
-			$message .= $this->_t('FileRemovedFromDB') . '<br />';
+			$message .= $this->_t('FileRemovedFromDB') . '<br>';
 
 			// remove from DB
 			$this->db->sql_query(
@@ -7438,7 +7438,7 @@ class Wacko
 			$pwd_cplx_text .= '. ' . $this->_t('PwdCplxDesc5');
 		}
 
-		return '<br /><small>' .
+		return '<br><small>' .
 			$this->_t('PwdCplxDesc1') .
 			Ut::perc_replace($this->_t('PwdCplxDesc2'), $min_chars) .
 			($this->db->pwd_unlike_login > 0
@@ -7595,7 +7595,7 @@ class Wacko
 
 	// show captcha form on a page. must be incorporated as an input
 	// form component in every page that uses captcha testing
-	//		$inline	= adds <br /> between elements
+	//		$inline	= adds <br> between elements
 	function show_captcha($inline = true)
 	{
 		$out = '';
@@ -7608,15 +7608,15 @@ class Wacko
 
 			$this->sess->freecap_shown = 1;
 
-			$out .= $inline ? '' : "<br />\n";
+			$out .= $inline ? '' : "<br>\n";
 			$out .= '<label for="captcha">' . $this->_t('Captcha') . ":</label>\n";
-			$out .= $inline ? '' : "<br />\n";
-			$out .= '<img src="' . $this->db->base_url . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '" />' . "\n";
+			$out .= $inline ? '' : "<br>\n";
+			$out .= '<img src="' . $this->db->base_url . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
-			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"/></a>' . "<br />\n";
-			// $out .= $inline ? '' : "<br />\n";
+			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"/></a>' . "<br>\n";
+			// $out .= $inline ? '' : "<br>\n";
 			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6"/>';
-			$out .= $inline ? '' : "<br />\n";
+			$out .= $inline ? '' : "<br>\n";
 		}
 
 		return $out;
@@ -7931,8 +7931,8 @@ class Wacko
 			// control buttons
 			if (!($can_edit || $this->method == 'edit'))
 			{
-				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '" /> ' .
-						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a>' . "<br />\n" .
+				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '"> ' .
+						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"/></a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}
@@ -7940,22 +7940,22 @@ class Wacko
 		{
 			// availability depends on the page language and your access rights
 			// additionally you need also the right to create new categories
-			$out .=  $this->_t('NoCategoriesForThisLang') . "<br /><br /><br />\n";
+			$out .=  $this->_t('NoCategoriesForThisLang') . "<br><br><br>\n";
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '" /></a>' . "\n";
+				$out .=  '<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "\n";
 			}
 		}
 
 		// edit control buttons
 		if ($can_edit || ! $this->method == 'edit')
 		{
-			$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '" /> ' .
-					'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '" /> ' .
-					'<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '" /> ' .
-					'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '" /> ' .
-					'<small><br />' . $this->_t('CategoriesEditInfo') . '</small>';
+			$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '"> ' .
+					'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '"> ' .
+					'<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '"> ' .
+					'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '"> ' .
+					'<small><br>' . $this->_t('CategoriesEditInfo') . '</small>';
 		}
 
 		return $out;

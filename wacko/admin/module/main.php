@@ -57,31 +57,31 @@ function admin_main(&$engine, &$module)
 	}
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	<p>
 		<?php echo $engine->_t('MainNote');?>
 	</p>
-	<br />
+	<br>
 	<table style="max-width:200px;" class="formation">
 <?php
 	echo $engine->form_open('lock', ['tag' => 'admin.php']);
 ?>
-		<input type="hidden" name="action" value="lock" />
+		<input type="hidden" name="action" value="lock">
 			<tr class="hl_setting">
 				<td class="label" style="white-space:nowrap;"><?php echo ($config->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
-				<td class="t_center"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>" /></td>
+				<td class="t_center"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>"></td>
 			</tr>
-	<br />
+	<br>
 <?php
 	echo $engine->form_close();
-	echo '<br />';
+	echo '<br>';
 	// $form_name = '', $page_method = '', $form_method = 'post', $form_token = false, $tag = '', $form_more = '', $href_param = ''
 	echo $engine->form_open('cache', ['tag' => 'admin.php']);
 ?>
-		<input type="hidden" name="action" value="cache" />
+		<input type="hidden" name="action" value="cache">
 			<tr class="hl_setting">
 				<td class="label nowrap"><?php echo $engine->_t('ClearCache');?></td>
-				<td class="t_center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '" />');?></td>
+				<td class="t_center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '">');?></td>
 			</tr>
 <?php
 	echo $engine->form_close();
@@ -89,12 +89,12 @@ function admin_main(&$engine, &$module)
 	echo $engine->form_open('purge_sessions', ['tag' => 'admin.php']);
 ?>
 		<form action="admin.php" method="post" name="">
-		<input type="hidden" name="mode" value="lock" />
-		<input type="hidden" name="action" value="purge_sessions" />
+		<input type="hidden" name="mode" value="lock">
+		<input type="hidden" name="action" value="purge_sessions">
 			<tr class="hl_setting">
 				<td class="label nowrap"><?php echo $engine->_t('PurgeSessionsTip');?>
-				<br /><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
-				<td class="t_center"><?php echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '" />');?></td>
+				<br><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
+				<td class="t_center"><?php echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '">');?></td>
 			</tr>
 		</table>
 <?php

@@ -72,14 +72,14 @@ else
 			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
 				. 'icon/bookmark1.png" alt="+" title="' .
-				$this->_t('AddToBookmarks')  . '"/></a></li>';
+				$this->_t('AddToBookmarks')  . '"></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
 				. 'icon/bookmark2.png" alt="-" title="' .
-				$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
+				$this->_t('RemoveFromBookmarks')  . '"></a></li>';
 		}
 	}
 	echo "\n</ol></div>";
@@ -92,7 +92,7 @@ echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('Tex
 // Searchbar
 ?>
 <span class="search nobr"><label for="phrase"><?php echo $this->_t('SearchText'); ?></label><input
-	type="search" name="phrase" id="phrase" size="20" /><input type="submit" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" alt="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>"/></span>
+	type="search" name="phrase" id="phrase" size="20"><input type="submit" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" alt="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>"></span>
 <?php
 
 // Search form close
