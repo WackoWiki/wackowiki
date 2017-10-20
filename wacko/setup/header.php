@@ -20,7 +20,7 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.' . $conf
 	$config['language'] = 'en';
 }
 
-$seperator =
+$separator =
 '	<div class="fake_hr_separator">
 		<hr />
 	</div>';
