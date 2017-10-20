@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 <script src="<?php echo $this->db->base_url;?>js/jquery.min.js"></script>
 <script src="<?php echo $this->db->base_url;?>js/lang/upload.<?php echo $this->user_lang;?>.js"></script>
 <script src="<?php echo $this->db->base_url;?>js/upload.js"></script>
-<link rel="stylesheet" href="<?php echo $this->db->theme_url;?>css/upload.css"/>
+<link rel="stylesheet" href="<?php echo $this->db->theme_url;?>css/upload.css">
 
 <?php
 
@@ -98,6 +98,9 @@ if ($this->can_upload() === true)
 			$file_name = $file_name . '.' . $extension;
 		}
 
+		$src		= $_FILES['file']['tmp_name'];
+		$mime_type	= mime_content_type($src);
+
 		#$encoding = 'windows-1251';
 		$encoding = $this->get_charset();
 
@@ -116,13 +119,13 @@ if ($this->can_upload() === true)
 		/* Assign the path to save the file on the basis of the user's choice. */
 		if($file_access == 'global')
 		{
-			$upload_dir		= $this->db->upload_path . '/';
+			$upload_dir		= UPLOAD_GLOBAL_DIR . '/';
 			$page_id_this	= 0;
 			$put_name_file	= $file_name;
 		}
 		else
 		{
-			$upload_dir		= $this->db->upload_path_per_page . '/';
+			$upload_dir		= UPLOAD_PER_PAGE_DIR . '/';
 			$page_id_this	= $this->page['page_id'];
 			$put_name_file	= '@' . $page_id_this. '@' . $file_name;
 		}
@@ -145,9 +148,11 @@ if ($this->can_upload() === true)
 						user_id,
 						file_lang,
 						uploaded_dt,
+						modified_dt,
 						file_description,
 						file_name,
 						file_ext,
+						mimetype,
 						file_size,
 						picture_h,
 						picture_w)
@@ -157,9 +162,11 @@ if ($this->can_upload() === true)
 						'$user_id_this',
 						'$language_this',
 						UTC_TIMESTAMP(),
+						UTC_TIMESTAMP(),
 						'$file_description',
 						'$file_name',
 						'$extension',
+						'$mime_type',
 						'$size_file',
 						'$height_image',
 						'$width_image')");

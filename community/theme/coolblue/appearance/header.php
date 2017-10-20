@@ -67,7 +67,7 @@ echo $this->form_close();
 	}
 	echo "\n</ol></div>";
 ?>
-  <hr> noshade="noshade">
+  <hr noshade="noshade">
   <?php
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user()) { ?>
@@ -100,7 +100,7 @@ echo $this->form_close();
 }
 // End if
 ?>
-  <hr> noshade="noshade">
+  <hr noshade="noshade">
   <br>
   <?php
 // If this page exists
@@ -150,7 +150,7 @@ echo ($this->is_watched === true ? "<a href=\"" . $this->href('watch') . "\">" .
 if ($this->is_admin()){
 	print("<a href=\"" . $this->href('remove') . "\">" . $this->_t('DeleteTip') . "</a>");
 }
-?><hr> noshade="noshade">
+?><hr noshade="noshade">
 <?php
 	// Revisions link
 	echo (( $this->db->hide_revisions == false || ($this->db->hide_revisions == 1 && $this->get_user()) || ($this->db->hide_revisions == 2 && $this->is_owner()) || $this->is_admin() )

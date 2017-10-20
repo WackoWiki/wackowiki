@@ -205,7 +205,7 @@ class Http
 					$head = substr($cached_page, 0, $head);
 
 					if (preg_match('#<html[^/>]*>#', $head) &&
-						preg_match('#<meta\s+charset="([^"]+)"\s*/>#', $head, $match))
+						preg_match('#<meta\s+charset="([^"]+)"\s*>#', $head, $match))
 					{
 						header('Content-Type: text/html; charset=' . $match[1]);
 					}

@@ -121,7 +121,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 									: "" . $this->get_time_formatted($this->page['modified']) . "\n"
 								);
 
-						echo "<hr> color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
+						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
 
 						if ($this->has_access('write')) {
 							echo "<a href=\"" . $this->href('edit') . "\" accesskey=\"E\" title=\"" . $this->_t('EditTip') . "\"><img src=\"" . $this->db->theme_url."icon/edit.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('EditText') . "</a>\n";
@@ -160,10 +160,10 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 							//print $this->format( '{{TOC}}' );
 
 							if ($this->is_owner()) {
-								echo "<hr> color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
+								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
 								print($this->_t('YouAreOwner'));
 							} else {
-								echo "<hr> color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
+								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
 								if ($owner = $this->get_page_owner()) {
 									print($this->_t('Owner') . ": " . $this->user_link($owner, $lang = '', true, false));
 								} else if (!$this->page['comment_on_id']) {
