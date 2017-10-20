@@ -64,16 +64,16 @@ echo '   <input type="hidden" name="password" value="' . (isset($_POST['password
 	if (!extension_loaded('mysqli') && !extension_loaded('pdo'))
 	{
 ?>
-   <p class="notop"><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
+	<p class="notop"><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
 <?php
 	}
 	else
 	{
 
 ?>
-   <h2><?php echo $lang['DBDriver'];?></h2>
-   <p class="notop"><?php echo $lang['DBDriverDesc']; ?></p>
-   <ul>
+	<h2><?php echo $lang['DBDriver'];?></h2>
+	<p class="notop"><?php echo $lang['DBDriverDesc']; ?></p>
+	<ul>
 <?php
 /*
  Each time a new database type is supported it needs to be added to this list
@@ -87,7 +87,7 @@ $drivers	= [];
 $drivers[]	= ['mysqli',	'mysqli_legacy',	'MySQLi (' . $lang['Recommended'] . ')'];
 $drivers[]	= ['pdo',		'mysql_pdo',		'PDO MySQL'];
 // $drivers[]	= ['pdo',		'pgsql',		'PDO PostgreSQL'];
-// $drivers[]	= ['pdo',		'sqlite3',		'PDO SQLite2'];
+// $drivers[]	= ['pdo',		'sqlite3',		'PDO SQLite3'];
 
 $detected = 0;
 
@@ -114,13 +114,11 @@ for ($count = 0; $count < count($drivers); $count++)
 	}
 }
 ?>
-   </ul>
-   <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <label class="label_top" for="database_charset"><?php echo $lang['DBCharset'];?></label>
-   <p class="notop"><?php echo $lang['DBCharsetDesc']; ?></p>
+	</ul>
+	<br />
+<?php echo $seperator; ?>
+	<label class="label_top" for="database_charset"><?php echo $lang['DBCharset'];?></label>
+	<p class="notop"><?php echo $lang['DBCharsetDesc']; ?></p>
 
 <?php
 /*
@@ -133,7 +131,7 @@ for ($count = 0; $count < count($drivers); $count++)
  */
 
 $charset	= [];
-# $charset[]	= ['utf8', 'utf8', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 5.5
+# $charset[]	= ['utf8', 'utf8', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
 $charset[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
 $charset[]	= ['latin1',	'latin1',	'cp1252 West European'];
 $charset[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European']; // not tested
@@ -142,7 +140,7 @@ $charset[]	= ['greek',		'greek',	'ISO 8859-7 Greek']; // not tested
 
 $detected = 0;
 
-echo '    <select id="database_charset" name="config[database_charset]">';
+echo '	<select id="database_charset" name="config[database_charset]" required>';
 
 // set default database charset to cp1251 Windows Cyrillic for Russian
 if ($config['is_update'] == false && $config['language'] == 'ru')
@@ -152,22 +150,20 @@ if ($config['is_update'] == false && $config['language'] == 'ru')
 
 for ($count = 0; $count < count($charset); $count++)
 {
-	echo '      <option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected' : '') . '>' . $charset[$count][2] . "</option>\n";
+	echo '		<option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected' : '') . '>' . $charset[$count][2] . "</option>\n";
 	$detected++;
 }
 
-echo "    </select>\n";
+echo "	</select>\n";
 ?>
-   <br />
-   <?php
+	<br />
+<?php
 if ($config['is_update'] == false)
 {?>
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <h2><?php echo $lang['DBEngine'];?></h2>
-   <p class="notop"><?php echo $lang['DBEngineDesc']; ?></p>
-   <ul>
+<?php echo $seperator; ?>
+	<h2><?php echo $lang['DBEngine'];?></h2>
+	<p class="notop"><?php echo $lang['DBEngineDesc']; ?></p>
+	<ul>
 <?php
 /*
  Each time a new database engine is supported it needs to be added to this list
@@ -192,70 +188,54 @@ for ($count = 0; $count < count($engines); $count++)
 	$detected++;
 }
 ?>
-   </ul>
-   <br />
-   <?php
+	</ul>
+	<br />
+<?php
 }
 else
 {
 	echo '<input type="hidden" value="' . $config['database_engine'] . '" name="config[database_engine]">';
 }
 ?>
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <label class="label_top" for="database_host"><?php echo $lang['DBHost'];?></label>
-   <p class="notop"><?php echo $lang['DBHostDesc']; ?></p>
-   <input type="text" maxlength="1000" id="database_host" name="config[database_host]" value="<?php echo $config['database_host'] ?>" class="text_input"/>
-   <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <label class="label_top" for="database_port"><?php echo $lang['DBPort'];?></label>
-   <p class="notop"><?php echo $lang['DBPortDesc']; ?></p>
-   <input type="text" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"/> <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <label class="label_top" for="database_database"><?php echo $lang['DB'];?></label>
-   <p class="notop"><?php echo $lang['DBDesc']; ?></p>
-   <input type="text" maxlength="64" id="database_database" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input"/>
-   <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <label class="label_top" for="database_user"><?php echo $lang['DBUser'];?></label>
-   <p class="notop"><?php echo $lang['DBUserDesc']; ?></p>
-   <input type="text" maxlength="50" id="database_user" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input"/>
-   <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <label class="label_top" for="database_password"><?php echo $lang['DBPassword'];?></label>
-   <p class="notop"><?php echo $lang['DBPasswordDesc']; ?></p>
-   <input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input" />
-   <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
-   <label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
-   <p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
-   <input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input"/>
-   <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
+<?php echo $seperator; ?>
+	<label class="label_top" for="database_host"><?php echo $lang['DBHost'];?></label>
+	<p class="notop"><?php echo $lang['DBHostDesc']; ?></p>
+	<input type="text" maxlength="1000" id="database_host" name="config[database_host]" value="<?php echo $config['database_host'] ?>" placeholder="localhost" class="text_input" required/>
+	<br />
+<?php echo $seperator; ?>
+	<label class="label_top" for="database_port"><?php echo $lang['DBPort'];?></label>
+	<p class="notop"><?php echo $lang['DBPortDesc']; ?></p>
+	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"/> <br />
+<?php echo $seperator; ?>
+	<label class="label_top" for="database_database"><?php echo $lang['DB'];?></label>
+	<p class="notop"><?php echo $lang['DBDesc']; ?></p>
+	<input type="text" maxlength="64" id="database_database" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input" required/>
+	<br />
+<?php echo $seperator; ?>
+	<label class="label_top" for="database_user"><?php echo $lang['DBUser'];?></label>
+	<p class="notop"><?php echo $lang['DBUserDesc']; ?></p>
+	<input type="text" maxlength="50" id="database_user" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input" required/>
+	<br />
+<?php echo $seperator; ?>
+	<label class="label_top" for="database_password"><?php echo $lang['DBPassword'];?></label>
+	<p class="notop"><?php echo $lang['DBPasswordDesc']; ?></p>
+	<input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input" />
+	<br />
+<?php echo $seperator; ?>
+	<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
+	<p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
+	<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input"/>
+	<br />
+<?php echo $seperator; ?>
 <?php
 if ($config['is_update'] == false)
 {?>
-   <h2><?php echo $lang['DeleteTables'];?></h2>
-   <p class="notop"><?php echo $lang['DeleteTablesDesc']; ?></p>
-   <label class="indented_label" for="wiki_delete_tables"><?php echo $lang['DeleteTables'];?></label>
-   <input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config['DeleteTables']) ? ' checked' : ''; ?> class="checkbox_input"/>
-   <br />
-   <div class="fake_hr_seperator">
-      <hr />
-   </div>
+	<h2><?php echo $lang['DeleteTables'];?></h2>
+	<p class="notop"><?php echo $lang['DeleteTablesDesc']; ?></p>
+	<label class="indented_label" for="wiki_delete_tables"><?php echo $lang['DeleteTables'];?></label>
+	<input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config['DeleteTables']) ? ' checked' : ''; ?> class="checkbox_input"/>
+	<br />
+<?php echo $seperator; ?>
 <?php
 }
 else
@@ -263,7 +243,7 @@ else
 	echo '<input type="hidden" value="off" name="config[DeleteTables]">';
 }
 ?>
-   <input type="submit" value="<?php echo $lang['Continue'];?>" class="next" onclick="return check();"/>
+	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" onclick="return check();"/>
 <?php
 	}
 ?>
