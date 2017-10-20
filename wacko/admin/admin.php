@@ -256,7 +256,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
-		<meta http-equiv="Content-Type" content="text/html; ">
+		<meta http-equiv="Content-Type" content="text/html;">
 		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" media="screen">
 		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">

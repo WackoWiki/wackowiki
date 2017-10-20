@@ -294,7 +294,7 @@ if ($page_a && $page_b
 	case 4:
 	case 5:
 	case 6:
-		$this->add_html_head('<link rel="stylesheet" href="' . $this->db->theme_url . 'css/diff.css" type="text/css"/>'); // STS
+		$this->add_html_head('<link rel="stylesheet" href="' . $this->db->theme_url . 'css/diff.css">'); // STS
 
 		// using nice lib/php-diff library..
 		$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
