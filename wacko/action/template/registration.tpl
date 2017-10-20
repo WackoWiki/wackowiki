@@ -21,32 +21,32 @@
 			=]
 			[ ' autocomplete ' ]
 			<p><label for="user_name">[ ' _t: UserName ' ]:</label>
-			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" autocomplete="off" required autofocus />
-			<br /><small>[ ' only ' ]</small></p>
+			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" autocomplete="off" required autofocus>
+			<br><small>[ ' only ' ]</small></p>
 
 			<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>
-			<input type="password" id="password" name="password" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' password | e attr ' ]" autocomplete="off" required />
+			<input type="password" id="password" name="password" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' password | e attr ' ]" autocomplete="off" required>
 			[''' complexity ''']
 			"</p>
 
 			<p><label for="conf_password">[ ' _t:'ConfirmPassword ' ]:</label>
-			<input type="password" id="conf_password" name="conf_password" size="24"  minlength="[ ' db: pwd_min_chars ' ]" value="[ ' confpassword | e attr ' ]" autocomplete="off" /></p>
+			<input type="password" id="conf_password" name="conf_password" size="24"  minlength="[ ' db: pwd_min_chars ' ]" value="[ ' confpassword | e attr ' ]" autocomplete="off"></p>
 
 			<p>
 			<label for="email">[ ' _t: Email ' ]:</label>
-			<input type="email" id="email" name="email" size="30" value="[ ' email | e attr ' ]" required />
+			<input type="email" id="email" name="email" size="30" value="[ ' email | e attr ' ]" required>
 			<small> <a title="[ ' _t: RegistrationEmailInfo ' ]">(?)</a></small></p>
 
 			[= policy _ =
 				<p>
 				<label for="terms_of_use">[ ' _t: TermsOfUse ' ]:</label>
-				<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1" />
-				<small> [ ' _t: AcceptTermsOfUse ' ] [ ' db: site_name |e ' ] <a href="[ ' href ' ]">[ ' _t: TermsOfUse ' ]</a><br /></small></p>
+				<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1">
+				<small> [ ' _t: AcceptTermsOfUse ' ] [ ' db: site_name |e ' ] <a href="[ ' href ' ]">[ ' _t: TermsOfUse ' ]</a><br></small></p>
 			=]
 			[= captcha _ =
 				<p>[ ' show ' ]</p>
 			=]
-			<p><input type="submit" class="OkBtn" value="[ ' _t: RegistrationButton ' ]" /></p>
+			<p><input type="submit" class="OkBtn" value="[ ' _t: RegistrationButton ' ]"></p>
 		</form>
 		</div>
 	=]

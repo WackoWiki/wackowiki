@@ -167,7 +167,7 @@ class Paragrafica
 		// wrap whole text in terminator pair
 		$what = $this->mark2 . $what . $this->mark1;
 
-		// 2bis. swap <t-><br /> -> <br /><t->
+		// 2bis. swap <t-><br> -> <br><t->
 		$what = preg_replace('!(' . $this->mark2 . ')((\s*<br[^>]*>)+)!si', '$2$1', $what);
 		// noneedin: > eliminating multiple breaks
 		$what = preg_replace('!((<br[^>]*>\s*)+)(' . $this->mark1 . ')!s', '$3', $what);

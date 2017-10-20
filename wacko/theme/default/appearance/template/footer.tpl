@@ -31,10 +31,10 @@
 </nav>
 <div id="credits">
 	[= by =
-		['' _t: PoweredBy ''] ['' home ''] ['' version '']['' patchlevel '']<br />
+		['' _t: PoweredBy ''] ['' home ''] ['' version '']['' patchlevel '']<br>
 	=]
 	[= policy =
-		<a href="['' url '']">['' _t: TermsOfUse '']</a><br />'
+		<a href="['' url '']">['' _t: TermsOfUse '']</a><br>'
 	=]
 </div>
 </footer>

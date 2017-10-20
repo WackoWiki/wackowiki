@@ -24,7 +24,7 @@ else						$year	= (int) $_GET['year'];
 if (isset($_GET['poll_id']) && (isset($_GET['results']) && $_GET['results'] == 1))
 {
 	echo $polls_obj->show_poll_results((int) $_GET['poll_id']);
-	echo '<br />';
+	echo '<br>';
 }
 
 // make list
@@ -69,7 +69,7 @@ if (!$nomark)
 			echo '<a href="' .
 				$this->href('', '', ['year' => $year, 'poll_id' => $row['poll_id'], 'results' => 1, '#' => 'poll-results' . $row['poll_id'] . '_form']) . '">' .
 				$date . ' (#' . $row['poll_id'] . '): ' . $row['text'] . '</a>';
-			echo ($style == 'br' ? '<br />' : '');
+			echo ($style == 'br' ? '<br>' : '');
 			echo ($style == 'ul' ? '</li>' : '');
 		}
 
@@ -77,11 +77,11 @@ if (!$nomark)
 	}
 	else // empty list
 	{
-		echo '<em>' . $this->_t('PollsEmptyList') . '</em><br />';
+		echo '<em>' . $this->_t('PollsEmptyList') . '</em><br>';
 	}
 
 	// pagination
-	echo '<br /><small><strong>' . $this->_t('PollsShow') . ':</strong> ';
+	echo '<br><small><strong>' . $this->_t('PollsShow') . ':</strong> ';
 
 	if ($year == 0)
 	{

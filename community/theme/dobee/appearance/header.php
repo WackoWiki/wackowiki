@@ -15,7 +15,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		<td class="searchArea" style="text-align:right; vertical-align:bottom;"><?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('TextSearchPage')]); ?>
 		<input type="search" name="phrase"
 			style="border: none; border-bottom: 1px solid #FFFFFF; padding: 0; margin: 0; background-color: #FFFFFF;"
-			size="21" /> <?php echo $this->form_close(); ?></td>
+			size="21"> <?php echo $this->form_close(); ?></td>
 	</tr>
 </table>
 
@@ -33,7 +33,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 							 style="width:100%">
 							<tr>
 								<td class="titleLeft"><img
-									src="<?php echo $this->db->theme_url ?>images/1x1.png" width="14" /></td>
+									src="<?php echo $this->db->theme_url ?>images/1x1.png" width="14"></td>
 								<td class="titleText" style="width:100%"><?php echo $this->_t('YourBookmarks'); ?>
 								</td>
 							</tr>
@@ -77,14 +77,14 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 								echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 									 . '"><img src="' .  $this->db->theme_url
 									. 'icon/bookmark1.png" alt="+" title="' .
-									$this->_t('AddToBookmarks')  . '"/></a></li>';
+									$this->_t('AddToBookmarks')  . '"></a></li>';
 							}
 							else
 							{
 								echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 									 . '"><img src="' .  $this->db->theme_url
 									. 'icon/bookmark2.png" alt="-" title="' .
-									$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
+									$this->_t('RemoveFromBookmarks')  . '"></a></li>';
 							}
 						}
 						echo "\n</ol></div>";
@@ -105,7 +105,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 							<tr>
 								<td class="titleLeft"><img
 									src="<?php echo $this->db->theme_url ?>images/1x1.png"
-									width="14" /></td>
+									width="14"></td>
 								<td class="titleText" style="width:100%"><?php echo $this->_t('ThisPage'); ?>
 								</td>
 							</tr>
@@ -121,13 +121,13 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 									: "" . $this->get_time_formatted($this->page['modified']) . "\n"
 								);
 
-						echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
+						echo "<hr> color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
 
 						if ($this->has_access('write')) {
 							echo "<a href=\"" . $this->href('edit') . "\" accesskey=\"E\" title=\"" . $this->_t('EditTip') . "\"><img src=\"" . $this->db->theme_url."icon/edit.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('EditText') . "</a>\n";
 
 						}
-						echo '<br />';
+						echo '<br>';
 						if ($this->page['modified']) {
 							echo "<a href=\"" . $this->href('revisions') . "\" title=\"" . $this->_t('RevisionTip') . "\"><img src=\"" . $this->db->theme_url."icon/vers.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('SettingsRevisions') . "</a>\n";
 						}
@@ -135,35 +135,35 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 						if ($this->page) {
 							// if owner is current user
 							if ($this->is_owner()) {
-								echo '<br />';
+								echo '<br>';
 								print(" <a href=\"" . $this->href('rename') . "\"><img src=\"" . $this->db->theme_url."icon/ren.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('RenameText') . "</a>");
-								echo '<br />';
+								echo '<br>';
 								print("<a href=\"" . $this->href('permissions') . "\"" . (($this->method=='edit')?" onclick=\"return window.confirm('" . $this->_t('EditACLConfirm') . "');\"":"") . "\"><img src=\"" . $this->db->theme_url."icon/access.png\""."style=\"vertical-align: middle\"".">" . $this->_t('ACLText') . "</a>");
 							}
 
 							if ($this->check_acl($this->get_user_name(),$this->db->rename_globalacl) && !$this->is_owner()) {
-								echo '<br />';
+								echo '<br>';
 								print(" <a href=\"" . $this->href('rename') . "\">" . $this->_t('RenameText') . "</a>");
 							}
 
 							if ($this->is_admin()) {
-								echo '<br />';
+								echo '<br>';
 								print(" <a href=\"" . $this->href('remove') . "\"><img src=\"" . $this->db->theme_url."icon/delete.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('DeleteText') . "</a>");
 							}
 
-							echo '<br />';
+							echo '<br>';
 							print("<a href=\"" . $this->href('properties'). "\"" . (($this->method=='edit')?" onclick=\"return window.confirm('" . $this->_t('EditACLConfirm') . "');\"":"") . "\"><img src=\"" . $this->db->theme_url."icon/prop.png\""."style=\"vertical-align: middle\"".">" . $this->_t('SettingsText') . "</a>");
 
-							echo '<br />';
+							echo '<br>';
 							print "<a href=\"" . $this->href('export.xml') . "\" title=\"" . $this->_t('RevisionXMLTip') . "\"><img src=\"" . $this->db->theme_url."icon/1xml.png\""."style=\"vertical-align: middle\""."\">" . $this->_t('ExportToXML') . "</a>\n";
 
 							//print $this->format( '{{TOC}}' );
 
 							if ($this->is_owner()) {
-								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
+								echo "<hr> color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
 								print($this->_t('YouAreOwner'));
 							} else {
-								echo "<hr color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\" />";
+								echo "<hr> color=\"#CCCCCC\" noshade=\"noshade\" size=\"1\">";
 								if ($owner = $this->get_page_owner()) {
 									print($this->_t('Owner') . ": " . $this->user_link($owner, $lang = '', true, false));
 								} else if (!$this->page['comment_on_id']) {
@@ -180,18 +180,18 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 		</table>
 		</td>
 		<td><!-- wrapper --> <?php echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
-		<input type="hidden" name="action" value="login" />
+		<input type="hidden" name="action" value="login">
 
 		<div class="header"><?php echo ($this->is_watched === true
-		? "<a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/unwatch.png\" title=\"" . $this->_t('RemoveWatch') . "\" alt=\"" . $this->_t('RemoveWatch') . "\" /></a>"
-		: "<a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/watch.png\" title=\"" . $this->_t('SetWatch') . "\" alt=\"" . $this->_t('SetWatch') . "\" /></a>" ) ?>
-		| <?php echo "<a href=\"" . $this->href('print') . "\"><img src=\"" . $this->db->theme_url."icon/print.png\" title=\"" . $this->_t('PrintVersion') . "\" alt=\"" . $this->_t('PrintVersion') . "\" /></a>";?>
+		? "<a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/unwatch.png\" title=\"" . $this->_t('RemoveWatch') . "\" alt=\"" . $this->_t('RemoveWatch') . "\"></a>"
+		: "<a href=\"" . $this->href('watch') . "\"><img src=\"" . $this->db->theme_url."icon/watch.png\" title=\"" . $this->_t('SetWatch') . "\" alt=\"" . $this->_t('SetWatch') . "\"></a>" ) ?>
+		| <?php echo "<a href=\"" . $this->href('print') . "\"><img src=\"" . $this->db->theme_url."icon/print.png\" title=\"" . $this->_t('PrintVersion') . "\" alt=\"" . $this->_t('PrintVersion') . "\"></a>";?>
 		| <?php
 		if ($this->get_user()) { ?> <span class="nobr"> <?php echo $this->_t('YouAre'); ?>
 		<img
 			src="<?php echo $this->db->theme_url ?>icon/user.png"
 			alt="" width="16" height="16"
-			style="text-align:middle; vertical-align: baseline;" /> <?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?>
+			style="text-align:middle; vertical-align: baseline;"> <?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?>
 		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
 		| <a
 			onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
@@ -199,10 +199,10 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 			<?php echo $this->_t('LogoutLink'); ?> </a> </span> ) </small>
 
 			<?php } else { ?> <span class="nobr"> <input type="hidden"
-			name="goback" value="<?php echo $this->slim_url($this->tag);?>" /> <strong><?php echo $this->_t('LoginWelcome') ?>:&nbsp;</strong>
-		<input type="text" name="name" size="18" class="login" />&nbsp;<?php echo $this->_t('LoginPassword') ?>:&nbsp;<input
-			type="password" name="password" class="login" size="8" />&nbsp;<input
-			type="submit" value="Ok" /> </span> <?php } ?></div>
+			name="goback" value="<?php echo $this->slim_url($this->tag);?>"> <strong><?php echo $this->_t('LoginWelcome') ?>:&nbsp;</strong>
+		<input type="text" name="name" size="18" class="login">&nbsp;<?php echo $this->_t('LoginPassword') ?>:&nbsp;<input
+			type="password" name="password" class="login" size="8">&nbsp;<input
+			type="submit" value="Ok"> </span> <?php } ?></div>
 
 			<?php echo $this->form_close(); ?>
 <?php

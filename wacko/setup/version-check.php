@@ -99,7 +99,7 @@ write_config_hidden_nodes(['none' => '']);
 
 
 	// If the cache directory is writable then we can enable caching as default
-	echo '            <input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '" />' . "\n";
+	echo '            <input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
 
 	$file_permissions_result =	   is_writable(CACHE_CONFIG_DIR)
 								&& is_writable(CACHE_FEED_DIR)
@@ -143,21 +143,21 @@ write_config_hidden_nodes(['none' => '']);
 		?>
 <p><?php echo $lang['Ready'];?></p>
 <p><?php echo $lang['NotePermissions'];?></p>
-<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
+<input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
 <?php
 	}
 	else if (!$php_version_result)
 	{
 ?>
 <p><?php echo $lang['ErrorMinPHPVersion']; ?></p>
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
 <?php
 	}
 	else if (!$database_result)
 	{
 ?>
 <p><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
 <?php
 	}
 	else if (!$file_permissions_result)
@@ -165,8 +165,8 @@ write_config_hidden_nodes(['none' => '']);
 ?>
 <p><?php echo $lang['NotePermissions']; ?></p>
 <p><?php echo $lang['ErrorPermissions']; ?></p>
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );" />
-<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" />
+<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
+<input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
 <?php
 	}
 ?>

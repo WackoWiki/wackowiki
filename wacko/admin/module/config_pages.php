@@ -25,7 +25,7 @@ function admin_config_pages(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -66,7 +66,7 @@ function admin_config_pages(&$engine, &$module)
 
 	echo $engine->form_open('pages');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -76,61 +76,61 @@ function admin_config_pages(&$engine, &$module)
 				<th colspan="2">General Options</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="list_count"><strong>Number of items per list:</strong><br />
+				<td class="label"><label for="list_count"><strong>Number of items per list:</strong><br>
 				<small>Number of items displayed on each list for guest or as default value for new users.</small></label></td>
-				<td><input type="number" min="0" maxlength="3" id="list_count" name="list_count" value="<?php echo (int) $engine->db->list_count;?>" /></td>
+				<td><input type="number" min="0" maxlength="3" id="list_count" name="list_count" value="<?php echo (int) $engine->db->list_count;?>"></td>
 			</tr>
 			<tr>
 				<th colspan="2">Options Forum</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="forum_cluster"><strong>Cluster Forum:</strong><br />
+				<td class="label"><label for="forum_cluster"><strong>Cluster Forum:</strong><br>
 				<small>Address of the index (main) page of the forum.</small></label></td>
-				<td><input type="text" maxlength="255" id="forum_cluster" name="forum_cluster" value="<?php echo htmlspecialchars($engine->db->forum_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="forum_cluster" name="forum_cluster" value="<?php echo htmlspecialchars($engine->db->forum_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="forum_topics"><strong>Number of topics per page:</strong><br />
+				<td class="label"><label for="forum_topics"><strong>Number of topics per page:</strong><br>
 				<small>Number of topics displayed on each page of the list in the forum sections.</small></label></td>
-				<td><input type="number" min="0" maxlength="3" id="forum_topics" name="forum_topics" value="<?php echo (int) $engine->db->forum_topics;?>" /></td>
+				<td><input type="number" min="0" maxlength="3" id="forum_topics" name="forum_topics" value="<?php echo (int) $engine->db->forum_topics;?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="comments_count"><strong>Number of comments per page:</strong><br />
+				<td class="label"><label for="comments_count"><strong>Number of comments per page:</strong><br>
 				<small>Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.</small></label></td>
-				<td><input type="number" min="0" maxlength="3" id="comments_count" name="comments_count" value="<?php echo (int) $engine->db->comments_count;?>" /></td>
+				<td><input type="number" min="0" maxlength="3" id="comments_count" name="comments_count" value="<?php echo (int) $engine->db->comments_count;?>"></td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Section News
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="news_cluster"><strong>Cluster of the News:</strong><br />
+				<td class="label"><label for="news_cluster"><strong>Cluster of the News:</strong><br>
 				<small>Root cluster news section.</small></label></td>
-				<td><input type="text" maxlength="255" id="news_cluster" name="news_cluster" value="<?php echo htmlspecialchars($engine->db->news_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="news_cluster" name="news_cluster" value="<?php echo htmlspecialchars($engine->db->news_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="news_levels"><strong>Depth of news pages from the root cluster:</strong><br />
+				<td class="label"><label for="news_levels"><strong>Depth of news pages from the root cluster:</strong><br>
 				<small>Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)</small></label></td>
-				<td><input type="text" maxlength="255" id="news_levels" name="news_levels" value="<?php echo htmlspecialchars($engine->db->news_levels, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="news_levels" name="news_levels" value="<?php echo htmlspecialchars($engine->db->news_levels, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					License
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="license"><strong>Default license:</strong><br />
+				<td class="label"><label for="license"><strong>Default license:</strong><br>
 				<small>Under which license should your content be released.</small></label></td>
 				<td>
 					<select id="license" name="license">
@@ -156,164 +156,164 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr>
 				<th colspan="2">
-					<br />
+					<br>
 					Service pages
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="root_page"><strong>Home page:</strong><br />
+				<td class="label"><label for="root_page"><strong>Home page:</strong><br>
 				<small>Tag your main page, opens automatically when a user visits your site.</small></label></td>
-				<td><input type="text" maxlength="255" id="root_page" name="root_page" value="<?php echo htmlspecialchars($engine->db->root_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="root_page" name="root_page" value="<?php echo htmlspecialchars($engine->db->root_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="policy_page"><strong>Policies and Regulations:</strong><br />
+				<td class="label"><label for="policy_page"><strong>Policies and Regulations:</strong><br>
 				<small>The page with the rules of the site.</small></label></td>
-				<td><input type="text" maxlength="255" id="policy_page" name="policy_page" value="<?php echo htmlspecialchars($engine->db->policy_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="policy_page" name="policy_page" value="<?php echo htmlspecialchars($engine->db->policy_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="search_page"><strong>Search:</strong><br />
+				<td class="label"><label for="search_page"><strong>Search:</strong><br>
 				<small>Page with the search form (action <code>{{search}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="search_page" name="search_page" value="<?php echo htmlspecialchars($engine->db->search_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="search_page" name="search_page" value="<?php echo htmlspecialchars($engine->db->search_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="registration_page"><strong>Register on our site:</strong><br />
+				<td class="label"><label for="registration_page"><strong>Register on our site:</strong><br>
 				<small>Page new user registration (action <code>{{registration}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="registration_page" name="registration_page" value="<?php echo htmlspecialchars($engine->db->registration_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="registration_page" name="registration_page" value="<?php echo htmlspecialchars($engine->db->registration_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="login_page"><strong>User login:</strong><br />
+				<td class="label"><label for="login_page"><strong>User login:</strong><br>
 				<small>Login page on the site (action <code>{{login}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="login_page" name="login_page" value="<?php echo htmlspecialchars($engine->db->login_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="login_page" name="login_page" value="<?php echo htmlspecialchars($engine->db->login_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="settings_page"><strong>Profile Settings:</strong><br />
+				<td class="label"><label for="settings_page"><strong>Profile Settings:</strong><br>
 				<small>Page customize the user profile (action <code>{{usersettings}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="settings_page" name="settings_page" value="<?php echo htmlspecialchars($engine->db->settings_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="settings_page" name="settings_page" value="<?php echo htmlspecialchars($engine->db->settings_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="password_page"><strong>Change Password:</strong><br />
+				<td class="label"><label for="password_page"><strong>Change Password:</strong><br>
 				<small>Page with a form to change / query user password (action <code>{{changepassword}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="password_page" name="password_page" value="<?php echo htmlspecialchars($engine->db->password_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="password_page" name="password_page" value="<?php echo htmlspecialchars($engine->db->password_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="users_page"><strong>User list:</strong><br />
+				<td class="label"><label for="users_page"><strong>User list:</strong><br>
 				<small>Page with a list of registered users (action <code>{{users}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->db->users_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->db->users_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="category_page"><strong>Category :</strong><br />
+				<td class="label"><label for="category_page"><strong>Category :</strong><br>
 				<small>Page with a list of categorized pages (action <code>{{category}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->db->category_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->db->category_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="category_page"><strong>Tag :</strong><br />
+				<td class="label"><label for="category_page"><strong>Tag :</strong><br>
 				<small>Page with a list of tagged pages (action <code>{{tag}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo htmlspecialchars($engine->db->tag_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo htmlspecialchars($engine->db->tag_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="groups_page"><strong>Groups:</strong><br />
+				<td class="label"><label for="groups_page"><strong>Groups:</strong><br>
 				<small>Page with a list of working groups (action <code>{{usergroups}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="groups_page" name="groups_page" value="<?php echo htmlspecialchars($engine->db->groups_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="groups_page" name="groups_page" value="<?php echo htmlspecialchars($engine->db->groups_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="changes_page"><strong>Recent changes:</strong><br />
+				<td class="label"><label for="changes_page"><strong>Recent changes:</strong><br>
 				<small>Page with a list of the last modified pages (action <code>{{changes}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="changes_page" name="changes_page" value="<?php echo htmlspecialchars($engine->db->changes_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="changes_page" name="changes_page" value="<?php echo htmlspecialchars($engine->db->changes_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="comments_page"><strong>Recent comments:</strong><br />
+				<td class="label"><label for="comments_page"><strong>Recent comments:</strong><br>
 				<small>Page with a list of recent comment on the page (action <code>{{commented}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="comments_page" name="comments_page" value="<?php echo htmlspecialchars($engine->db->comments_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="comments_page" name="comments_page" value="<?php echo htmlspecialchars($engine->db->comments_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="removals_page"><strong>Deleted pages:</strong><br />
+				<td class="label"><label for="removals_page"><strong>Deleted pages:</strong><br>
 				<small>Page with a list of recently deleted pages (action <code>{{deleted}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="removals_page" name="removals_page" value="<?php echo htmlspecialchars($engine->db->removals_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="removals_page" name="removals_page" value="<?php echo htmlspecialchars($engine->db->removals_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="wanted_page"><strong>Wanted pages:</strong><br />
+				<td class="label"><label for="wanted_page"><strong>Wanted pages:</strong><br>
 				<small>Page with a list of missing pages that are referenced (action <code>{{wanted}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="wanted_page" name="wanted_page" value="<?php echo htmlspecialchars($engine->db->wanted_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="wanted_page" name="wanted_page" value="<?php echo htmlspecialchars($engine->db->wanted_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="orphaned_page"><strong>Orphaned pages:</strong><br />
+				<td class="label"><label for="orphaned_page"><strong>Orphaned pages:</strong><br>
 				<small>Page with a list of existing pages are not related links with the rest (action <code>{{orphaned}}</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="orphaned_page" name="orphaned_page" value="<?php echo htmlspecialchars($engine->db->orphaned_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="orphaned_page" name="orphaned_page" value="<?php echo htmlspecialchars($engine->db->orphaned_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="todo_page"><strong>ToDo:</strong><br />
+				<td class="label"><label for="todo_page"><strong>ToDo:</strong><br>
 				<small>Page with a list of To Do (constructed with the help of <code>{{backlinks}}</code> and makro <code>::*::</code>).</small></label></td>
-				<td><input type="text" maxlength="255" id="todo_page" name="todo_page" value="<?php echo htmlspecialchars($engine->db->todo_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="todo_page" name="todo_page" value="<?php echo htmlspecialchars($engine->db->todo_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="sandbox"><strong>Sandbox:</strong><br />
+				<td class="label"><label for="sandbox"><strong>Sandbox:</strong><br>
 				<small>Page where users can be trained in the use of wiki-markup.</small></label></td>
-				<td><input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo htmlspecialchars($engine->db->sandbox, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo htmlspecialchars($engine->db->sandbox, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="wiki_docs"><strong>Wiki documentation:</strong><br />
+				<td class="label"><label for="wiki_docs"><strong>Wiki documentation:</strong><br>
 				<small>Section of the documentation for using the tool site.</small></label></td>
-				<td><input type="text" maxlength="255" id="wiki_docs" name="wiki_docs" value="<?php echo htmlspecialchars($engine->db->wiki_docs, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>" /></td>
+				<td><input type="text" maxlength="255" id="wiki_docs" name="wiki_docs" value="<?php echo htmlspecialchars($engine->db->wiki_docs, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>"></td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

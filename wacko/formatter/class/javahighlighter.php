@@ -224,7 +224,7 @@ class JavaHighlighter{
 	function dump($var,$name){
 		//  echo "<pre>$name = \n";
 		//  print_r($var);
-		//  echo "</pre><br />";
+		//  echo "</pre><br>";
 	}
 	function trace($msg){
 		error_log("$msg");

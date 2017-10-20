@@ -55,7 +55,7 @@ if (@$_GET['action'] === 'logout')
 // recovery password
 if (!$engine->db->recovery_password)
 {
-	echo '<strong>' . $engine->_t('NoRecoceryPassword') . '</strong><br />';
+	echo '<strong>' . $engine->_t('NoRecoceryPassword') . '</strong><br>';
 	echo $engine->_t('NoRecoceryPasswordTip');
 
 	die();
@@ -124,9 +124,9 @@ if (!isset($engine->sess->ap_created))
 <html>
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
-		<meta name="robots" content="noindex, nofollow, noarchive" />
-		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen" />
-		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
+		<meta name="robots" content="noindex, nofollow, noarchive">
+		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen">
+		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 	</head>
 
 	<body>
@@ -135,9 +135,9 @@ if (!isset($engine->sess->ap_created))
 		$engine->output_messages();
 ?>
 		<div id="loginbox">
-			<strong><?php echo $engine->_t('Authorization'); ?></strong><br />
+			<strong><?php echo $engine->_t('Authorization'); ?></strong><br>
 			<?php echo $engine->_t('AuthorizationTip'); ?>
-			<br /><br />
+			<br><br>
 			<?php
 			echo $engine->form_open('emergency', ['tag' => 'admin.php']);
 			?>
@@ -145,8 +145,8 @@ if (!isset($engine->sess->ap_created))
 				<?php
 				echo $engine->form_autocomplete_off();
 				?>
-				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" autofocus/>
-				<input type="submit" id="submit" value="<?php echo $engine->_t('LoginButton'); ?>" />
+				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" autofocus>
+				<input type="submit" id="submit" value="<?php echo $engine->_t('LoginButton'); ?>">
 			</form>
 		</div>
 	</body>
@@ -255,11 +255,11 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 <html>
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
-		<meta name="robots" content="noindex, nofollow, noarchive" />
-		<meta http-equiv="Content-Type" content="text/html; "/>
-		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" media="screen" />
-		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen" />
-		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon" />
+		<meta name="robots" content="noindex, nofollow, noarchive">
+		<meta http-equiv="Content-Type" content="text/html; ">
+		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" media="screen">
+		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen">
+		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 	</head>
 
 	<body>
@@ -291,7 +291,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 					?>
 				</span>
 			</div>
-			<br style="clear: right;" />
+			<br style="clear: right;">
 			<div id="sections">
 				<?php
 				echo '<a href="' . rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>';
@@ -350,7 +350,7 @@ if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 	}
 	else
 	{
-		echo '<br /><br /><em>' . Ut::perc_replace($engine->_t('ErrorLoadingModule'), '<code>' . $_REQUEST['mode'] . '.php</code>') . '</em>';
+		echo '<br><br><em>' . Ut::perc_replace($engine->_t('ErrorLoadingModule'), '<code>' . $_REQUEST['mode'] . '.php</code>') . '</em>';
 	}
 }
 else if (!($_GET && $_POST))
@@ -365,7 +365,7 @@ else if (!($_GET && $_POST))
 
 ?>
 
-<br />
+<br>
 <!-- end page output -->
 	</div>
 </main>

@@ -26,11 +26,11 @@ else
 	{
 		$strings	= preg_replace('/\{\{[^\}]+\}\}/', '', $phrase_page['body']);
 		$strings	= $this->format($strings);
-		$splitexpr	= '|<br />|';
+		$splitexpr	= '|<br>|';
 
 		if ($use_empty_string)
 		{
-			$splitexpr = '|<br />[\n\r ]*<br />|';
+			$splitexpr = '|<br>[\n\r ]*<br>|';
 		}
 
 		$lines = preg_split($splitexpr, $strings);

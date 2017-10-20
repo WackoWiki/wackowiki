@@ -25,7 +25,7 @@ $wacko_translation = [
 	'RegistrationPage'			=> 'Registratie',
 	'SiteRegistered'			=> 'You have successfully registered on the site ',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br />If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
 	'NameTooShort'				=> 'Gebruikersnaam is te kort, een minimum van %2 tekens is vereist.',
 	'NameTooLong'				=> 'Gebruikersnaam is te lang, een maximum van %2 tekens is toegestaan.',
 	'NameAlphanumOnly'			=> 'Gebruikersnaam moet tussen %1 en %2 tekens lang zijn. Gebruik hierbij alleen letters en cijfers.',
@@ -79,7 +79,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
 	'WelcomeBack'				=> 'Welkom terug, %1',
-	'LoginAttemtsExceeded'		=> 'Je overschreed het maximum aantal pogingen om in te loggen.<br />Naast je gebruikersnaam en wachtwoord, moet je nu ook de code op de afbeelding opgeven.',
+	'LoginAttemtsExceeded'		=> 'Je overschreed het maximum aantal pogingen om in te loggen.<br>Naast je gebruikersnaam en wachtwoord, moet je nu ook de code op de afbeelding opgeven.',
 
 	// session notice
 	'SessionTerminatedDue'		=> 'Session terminated due to %1',
@@ -291,7 +291,7 @@ $wacko_translation = [
 	'MinorEditShow'				=> 'Show minor edit',
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
-	'OverwriteAlert'			=> 'OVERSCHRIJF-WAARSCHUWING: Deze pagina is gewijzigd door iemand anders terwijl u deze aan het wijzigen was.<br />Maak een kopie van uw wijzigingen en bewerk de pagina opnieuw.',
+	'OverwriteAlert'			=> 'OVERSCHRIJF-WAARSCHUWING: Deze pagina is gewijzigd door iemand anders terwijl u deze aan het wijzigen was.<br>Maak een kopie van uw wijzigingen en bewerk de pagina opnieuw.',
 	'WriteAccessDenied'			=> 'U heeft geen schrijf rechten op deze pagina.',
 	'EmptyPage'					=> 'Page was leeg en is dus niet bewaard!',
 	'EmptyComment'				=> 'Reactietekst was leeg en is dus niet bewaard!',
@@ -458,7 +458,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Selecteer taal',
 	'ShowSpaces'				=> 'Toon spaties in WikiNames',
 	'WrongPage4Redirect'		=> 'Kan niet doorlinken, pagina bestaat niet.',
-	'ReallyDelete'				=> 'Weet u zeker dat u deze pagina wilt verwijderen?<br />Deze handeling kan niet ongedaan worden gemaakt!<br /><br />WAARSCHUWING: Verwijderen van deze pagina betekent dat u alle revisies, reacties, bijlagen, ACL\'s (rechten) en verwijzigen van deze pagina ook verwijderd.',
+	'ReallyDelete'				=> 'Weet u zeker dat u deze pagina wilt verwijderen?<br>Deze handeling kan niet ongedaan worden gemaakt!<br><br>WAARSCHUWING: Verwijderen van deze pagina betekent dat u alle revisies, reacties, bijlagen, ACL\'s (rechten) en verwijzigen van deze pagina ook verwijderd.',
 	'RemoveButton'				=> 'Ja, verwijder!',
 	'RestoreButton'				=> 'Herstellen',
 	'ArchiveButton'				=> 'Archief',
@@ -821,7 +821,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'De naam die u gekozen heeft is niet geldig',
 	'PleaseLogin'				=> '((Settings Hier inloggen))',
 	'Bookmarks'					=> 'Bookmarks',
-	'ReallyDeleteComment'		=> 'Weet u zeker dat u deze reactie wilt verwijderen?<br />Deze handeling kan niet ongedaan gemaakt worden!',
+	'ReallyDeleteComment'		=> 'Weet u zeker dat u deze reactie wilt verwijderen?<br>Deze handeling kan niet ongedaan gemaakt worden!',
 	'ForgotLink'				=> '((/Paswoord Wachtwoord vergeten?))',
 	'RegistrationClosed'		=> 'Registratie is hier niet mogelijk. Neem contact op met de beheerder.',
 	'ACLForCluster'				=> 'ACL\'s (rechten) voor de GEHELE cluster %1',
@@ -1002,7 +1002,7 @@ $wacko_translation = [
 	'ModerateTopicUnlocked'		=> 'Topic successfully unlocked.',
 	'ModerateCommentsDeleted'	=> 'Selected comments removed successfully.',
 	'ModerateCommentsSplited'	=> 'Selected comments successfully separated in a new topic.',
-	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br />Usually this should not happen, so let the incident site administrator.<br />As a precaution, issue has been preserved in its original form.',
+	'ModerateCommentsSplitFailed'	=> 'Note: For some reason to separate the selected comments to a new topic failed.<br>Usually this should not happen, so let the incident site administrator.<br>As a precaution, issue has been preserved in its original form.',
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum

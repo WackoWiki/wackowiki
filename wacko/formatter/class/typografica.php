@@ -14,8 +14,8 @@ class Typografica
 	var $p_prefix	= '<p class="typo">';
 	var $p_postfix	= '</p>';
 	var $asoft		= true;
-	var $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="" />'; // <->
-	var $indent2	= 'image/spacer.png" width=50 height=1 border=0 alt="" />'; // <-->
+	var $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
+	var $indent2	= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
 	var $fixed_size	= 80; // maximum width
 	var $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/si'; // regex to be ignored
 	var $de_nobr	= true;

@@ -7,9 +7,9 @@
 		</div>
 	=]
 	[''' body ''']
-	<br />
+	<br>
 	[= c Comments =
-		<br />
+		<br>
 		<section id="comments">
 			<header class="header-comments">
 				[' _t: Comments ']
@@ -19,20 +19,20 @@
 					<span class="comment-info">
 						<strong>&#8212; [ ' user ' ]</strong> ([ ' created | time_formatted ' ][ ' edit CmtEdited ' ])&nbsp;&nbsp;&nbsp;
 					</span>
-					<br />
+					<br>
 					['' body '']
 				</article>
 			=]
 		</section>
 	=]
 	[= n NumeratedLinks =
-		<br />
+		<br>
 		<section id="links">
 			<header class="linksheader">
 				[ ' _t: Links ' ]
 			</header>
 			[= link _ =
-				[ ' delim | default '<br /><br />' ' ]
+				[ ' delim | default '<br><br>' ' ]
 				<span class="reflink"><sup>[ ' n ' ]</sup>[ ' l ' ]</span>
 			=]
 		</section>

@@ -288,7 +288,7 @@ if ($this->has_access('read')
 
 
 		$output .= $preview;
-		$output .= "</section><br />\n";
+		$output .= "</section><br>\n";
 
 		echo $output;
 
@@ -319,47 +319,47 @@ if ($this->has_access('read')
 
 	echo $form_buttons;
 ?>
-	<br />
+	<br>
 	<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
 <?php
 	// comment title
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
-		$output .= '<br />' . "\n";
-		$output .= '<label for="comment_title">' . $this->_t('AddCommentTitle') . '</label><br />';
-		$output .= '<input type="text" id="comment_title" maxlength="250" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" name="title" />';
-		$output .= '<br />' . "\n";
+		$output .= '<br>' . "\n";
+		$output .= '<label for="comment_title">' . $this->_t('AddCommentTitle') . '</label><br>';
+		$output .= '<input type="text" id="comment_title" maxlength="250" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" name="title">';
+		$output .= '<br>' . "\n";
 	}
 	else if (!$this->page || $this->is_owner() || $this->is_admin())
 	{
 		// edit page title
-		$output .= '<br />' . "\n";
-		$output .= '<label for="page_title">' . $this->_t('MetaTitle') . ':</label><br />';
-		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" />';
-		$output .= '<br />' . "\n";
+		$output .= '<br>' . "\n";
+		$output .= '<label for="page_title">' . $this->_t('MetaTitle') . ':</label><br>';
+		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60">';
+		$output .= '<br>' . "\n";
 	}
 	else
 	{
 		// show page title
-		$output .= '<br />' . "\n";
+		$output .= '<br>' . "\n";
 		$output .= '<h1>' . $this->page['title'] . '</h1>';
-		#$output .= '<br />' . "\n";
+		#$output .= '<br>' . "\n";
 	}
 
-	$output .= '<input type="hidden" name="previous" value="' . htmlspecialchars($previous, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" /><br />' . "\n";
+	$output .= '<input type="hidden" name="previous" value="' . htmlspecialchars($previous, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"><br>' . "\n";
 	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
 	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</textarea>\n";
-	$output .= '<br />' . "\n";
+	$output .= '<br>' . "\n";
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
 	{
 		// edit note
 		if ($this->db->edit_summary != 0)
 		{
-			$output .= '<label for="edit_note">' . $this->_t('EditNote') . ':</label><br />';
+			$output .= '<label for="edit_note">' . $this->_t('EditNote') . ':</label><br>';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
 			$output .= '<input type="text" id="edit_note" maxlength="200" value="' . htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" name="edit_note"/>';
-			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br />";
+			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br>";
 		}
 
 		if ($user)
@@ -369,11 +369,11 @@ if ($this->has_access('read')
 			{
 				$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit"/>';
 				$output .= '<label for="minor_edit">' . $this->_t('EditMinor') . '</label>';
-				$output .= '<br />' . "\n";
+				$output .= '<br>' . "\n";
 			}
 			else
 			{
-				$output .= '<br />' . "\n";
+				$output .= '<br>' . "\n";
 			}
 
 			// reviewed
@@ -381,30 +381,30 @@ if ($this->has_access('read')
 			{
 				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed"/>';
 				$output .= '<label for="reviewed">' . $this->_t('Reviewed') . '</label>';
-				$output .= '<br />' . "\n";
+				$output .= '<br>' . "\n";
 			}
 
 			// publish anonymously
 			if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 			{
-				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '"' . ( $this->get_user_setting('noid_pubs') == 1 ? ' checked' : '' ) . ' />';
+				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '"' . ( $this->get_user_setting('noid_pubs') == 1 ? ' checked' : '' ) . '>';
 				$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . '</label>';
-				$output .= '<br />' . "\n";
+				$output .= '<br>' . "\n";
 			}
 
 			// watch a page
 			if ($this->page && !$this->is_watched)
 			{
-				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? ' checked' : '' ) . ' />';
+				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? ' checked' : '' ) . '>';
 				$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . '</label>';
-				$output .= '<br />' . "\n";
+				$output .= '<br>' . "\n";
 			}
 		}
 	}
 
 	if (!$this->page && $words = $this->get_categories_list($this->page_lang, true))
 	{
-		$output .= '<br />' . $this->_t('Categories') . ':' . "\n" .
+		$output .= '<br>' . $this->_t('Categories') . ':' . "\n" .
 					$this->show_category_form('', OBJECT_PAGE, $this->page_lang, false);
 
 
@@ -436,7 +436,7 @@ if ($this->has_access('read')
 ?>
 		wE.init('postText', 'WikiEdit', 'edname-w', '<?php echo $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';?>');
 	</script>
-	<br />
+	<br>
 
 <?php
 	echo $form_buttons;

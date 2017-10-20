@@ -46,7 +46,7 @@ function admin_db_restore(&$engine, &$module)
 	$directories	= & $module['vars'][1];
 ?>
 				<h1><?php echo $module['title']; ?></h1>
-				<br />
+				<br>
 <?php
 	$logs			= [];
 	$ikeys			= '';
@@ -102,10 +102,10 @@ function admin_db_restore(&$engine, &$module)
 							<table>
 								<tr>' .
 									'<td class="label a_middle" style="width:10px;">' .
-									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '/>
+									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '>
 									#</td>' .
 									#'<td style="width:10px;">' .
-									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
+									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 									'</td>
 									<th class="t_left nowrap">' .
 										date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
@@ -148,11 +148,11 @@ function admin_db_restore(&$engine, &$module)
 						{
 							if (in_array($table['name'], $list))
 							{
-								echo '<strong>' . $table['name'] . '</strong><br />';
+								echo '<strong>' . $table['name'] . '</strong><br>';
 							}
 							else
 							{
-								echo '<em class="grey">' . $table['name'] . '</em><br />';
+								echo '<em class="grey">' . $table['name'] . '</em><br>';
 							}
 						}
 
@@ -166,11 +166,11 @@ function admin_db_restore(&$engine, &$module)
 						{
 							if (in_array($table['name'], $list))
 							{
-								echo '<strong>' . $table['name'] . '</strong><br />';
+								echo '<strong>' . $table['name'] . '</strong><br>';
 							}
 							else
 							{
-								echo '<em class="grey">' . $table['name'] . '</em><br />';
+								echo '<em class="grey">' . $table['name'] . '</em><br>';
 							}
 						}
 
@@ -186,11 +186,11 @@ function admin_db_restore(&$engine, &$module)
 
 							if (in_array($directory, $list))
 							{
-								echo '<strong>' . $directory . '</strong><br />';
+								echo '<strong>' . $directory . '</strong><br>';
 							}
 							else
 							{
-								echo '<em class="grey">' . $directory . '</em><br />';
+								echo '<em class="grey">' . $directory . '</em><br>';
 							}
 						}
 
@@ -202,24 +202,24 @@ function admin_db_restore(&$engine, &$module)
 					// end dir check
 						'<tr>
 							<td colspan="2">
-								<strong>' . $engine->_t('RestoreOptions') . ':</strong><br />
-								<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1" />
-								<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeys') . ' *</small></label><br />
-								<input type="checkbox" id="ignore_files" name="ignore_files" value="1" />
-								<label for="ignore_files"><small>' . $engine->_t('IgnoreSameFiles') . ' **</small></label><br />
+								<strong>' . $engine->_t('RestoreOptions') . ':</strong><br>
+								<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1">
+								<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeys') . ' *</small></label><br>
+								<input type="checkbox" id="ignore_files" name="ignore_files" value="1">
+								<label for="ignore_files"><small>' . $engine->_t('IgnoreSameFiles') . ' **</small></label><br>
 							</td>
 						</tr>' .
 					'</table>
-				<br />';
+				<br>';
 
-				echo	'<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" />' . "\n" .
-						'<input type="hidden" name="start" value="true" />' . "\n" .
+				echo	'<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
+						'<input type="hidden" name="start" value="true">' . "\n" .
 						'<label for="">' . $engine->_t('ConfirmDbRestore') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-						'<input type="submit" id="submit" name="restore" value="yes" /> '.
-						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
-						'<br /><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
+						'<input type="submit" id="submit" name="restore" value="yes"> '.
+						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
+						'<br><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
 
-				echo '<br /><br />
+				echo '<br><br>
 						<p><small>' .
 							$engine->_t('RestoreOptionsInfo') .
 						'</small></p>';
@@ -376,7 +376,7 @@ function admin_db_restore(&$engine, &$module)
 ?>
 			<div class="code">
 				<pre><?php echo $results; ?></pre>
-			</div><br />
+			</div><br>
 <?php
 			$engine->log(1, 'Restored backup of a database ' . $pack);
 		}
@@ -391,14 +391,14 @@ function admin_db_restore(&$engine, &$module)
 		{
 			echo $engine->form_open('delete_backup');
 
-			echo '<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" />' . "\n" .
+			echo '<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
 				'<div class="warning">' .
 					'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-					'<input type="submit" id="submit" name="delete" value="yes" /> '.
-					'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no" /></a>' .
-					'<br /><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
+					'<input type="submit" id="submit" name="delete" value="yes"> '.
+					'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
+					'<br><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
 				'</div>
-				<br />';
+				<br>';
 
 			echo $engine->form_close();
 		}
@@ -423,19 +423,19 @@ function admin_db_restore(&$engine, &$module)
 <?php
 		if (!is_executable(UPLOAD_BACKUP_DIR . '/'))
 		{
-			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR . '/')), -4) . "<br />\n";
-			echo output_image($engine, false) . '<strong class="red">The '.UPLOAD_BACKUP_DIR . '/' . ' directory is not executable.</strong>' .  "<br />\n";
+			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR . '/')), -4) . "<br>\n";
+			echo output_image($engine, false) . '<strong class="red">The '.UPLOAD_BACKUP_DIR . '/' . ' directory is not executable.</strong>' .  "<br>\n";
 		}
 		else
 		{
 			// SHOW backups
 		?>
-				<br />
+				<br>
 <?php
 				echo $engine->form_open('restore');
 
-				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore" />' .
-									'<input type="submit" name="remove" id="submit" value="remove" />';
+				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore">' .
+									'<input type="submit" name="remove" id="submit" value="remove">';
 
 			#$dir = UPLOAD_BACKUP_DIR . '/';
 
@@ -481,10 +481,10 @@ function admin_db_restore(&$engine, &$module)
 								<table>
 									<tr>' .
 										'<td class="label a_middle" style="width:10px;">' .
-										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '/>
+										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '>
 										#</td>' .
 										#'<td style="width:10px;">' .
-											'<input type="radio" name="backup_id" value="' . $log['pack'] . '" />' .
+											'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 										'</td>
 										<th class="t_left nowrap">' .
 											date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
@@ -505,7 +505,7 @@ function admin_db_restore(&$engine, &$module)
 									<tr>
 										<td></td>
 										<td>
-											<br /><a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>
+											<br><a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>
 										</td>
 									</tr>
 								</table>' .
@@ -533,11 +533,11 @@ function admin_db_restore(&$engine, &$module)
 							{
 								if (in_array($table['name'], $list))
 								{
-									echo '<strong>' . $table['name'] . '</strong><br />';
+									echo '<strong>' . $table['name'] . '</strong><br>';
 								}
 								else
 								{
-									echo '<em class="grey">' . $table['name'] . '</em><br />';
+									echo '<em class="grey">' . $table['name'] . '</em><br>';
 								}
 							}
 
@@ -551,11 +551,11 @@ function admin_db_restore(&$engine, &$module)
 							{
 								if (in_array($table['name'], $list))
 								{
-									echo '<strong>' . $table['name'] . '</strong><br />';
+									echo '<strong>' . $table['name'] . '</strong><br>';
 								}
 								else
 								{
-									echo '<em class="grey">' . $table['name'] . '</em><br />';
+									echo '<em class="grey">' . $table['name'] . '</em><br>';
 								}
 							}
 
@@ -571,11 +571,11 @@ function admin_db_restore(&$engine, &$module)
 
 								if (in_array($directory, $list))
 								{
-									echo '<strong>' . $directory . '</strong><br />';
+									echo '<strong>' . $directory . '</strong><br>';
 								}
 								else
 								{
-									echo '<em class="grey">' . $directory . '</em><br />';
+									echo '<em class="grey">' . $directory . '</em><br>';
 								}
 							}
 

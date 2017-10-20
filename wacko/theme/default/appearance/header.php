@@ -186,7 +186,7 @@ else
 	$tpl->enter('droptab_tab_');
 
 	// display more icon and text
-	//  '<li class="sublist"><a href="#" id="more-icon"><img src="' . $this->db->theme_url . 'icon/more.png" title="' . $this->_t('PageHandlerMoreTip') . '" alt="' . $this->_t('PageHandlerMoreTip') . '" /> ' . $this->_t('PageHandlerMoreTip') . "</a> \n";
+	//  '<li class="sublist"><a href="#" id="more-icon"><img src="' . $this->db->theme_url . 'icon/more.png" title="' . $this->_t('PageHandlerMoreTip') . '" alt="' . $this->_t('PageHandlerMoreTip') . '"> ' . $this->_t('PageHandlerMoreTip') . "</a> \n";
 	// only display 'more' text that shows handler list on hover
 
 	// print tab
@@ -286,7 +286,7 @@ $tpl->leave();
 
 $tpl->search		= $this->href('', $this->_t('SearchPage'));
 $tpl->breadcrumbs	= $this->get_page_path($titles = false, ' &gt; ', true, true);
-// '<br />' . $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
+// '<br>' . $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
 
 if (!isset($this->sess->php_version))
 {

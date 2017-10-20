@@ -27,7 +27,7 @@ function admin_content_comments(&$engine, &$module)
 	$error = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 
 
 <?php

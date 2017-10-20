@@ -192,12 +192,12 @@ if ($can_view)
 		$position			= 0;
 
 		// debug info
-		#echo 'imgCount: ' . $img_count . '<br />';
-		#echo 'totalTime: ' . $total_time . '<br />';
-		#echo 'slideRatio: ' . $slide_ratio . '<br />';
-		#echo 'moveRatio: ' . $move_ratio . '<br />';
-		#echo 'basePercentage: ' . $base_percentage . '<br />';
-		#echo 'totalTime: ' . $total_time . '<br />';
+		#echo 'imgCount: ' . $img_count . '<br>';
+		#echo 'totalTime: ' . $total_time . '<br>';
+		#echo 'slideRatio: ' . $slide_ratio . '<br>';
+		#echo 'moveRatio: ' . $move_ratio . '<br>';
+		#echo 'basePercentage: ' . $base_percentage . '<br>';
+		#echo 'totalTime: ' . $total_time . '<br>';
 		?>
 
 		<style>

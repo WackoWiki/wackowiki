@@ -58,7 +58,7 @@ write_config_hidden_nodes([
 	'table_prefix'		=> '']
 );
 
-echo '   <input type="hidden" name="password" value="' . (isset($_POST['password']) ? $_POST['password'] : '') . '" />' . "\n";
+echo '   <input type="hidden" name="password" value="' . (isset($_POST['password']) ? $_POST['password'] : '') . '">' . "\n";
 
 	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
 	if (!extension_loaded('mysqli') && !extension_loaded('pdo'))
@@ -115,7 +115,7 @@ for ($count = 0; $count < count($drivers); $count++)
 }
 ?>
 	</ul>
-	<br />
+	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="database_charset"><?php echo $lang['DBCharset'];?></label>
 	<p class="notop"><?php echo $lang['DBCharsetDesc']; ?></p>
@@ -156,7 +156,7 @@ for ($count = 0; $count < count($charset); $count++)
 
 echo "	</select>\n";
 ?>
-	<br />
+	<br>
 <?php
 if ($config['is_update'] == false)
 {?>
@@ -189,7 +189,7 @@ for ($count = 0; $count < count($engines); $count++)
 }
 ?>
 	</ul>
-	<br />
+	<br>
 <?php
 }
 else
@@ -201,31 +201,31 @@ else
 	<label class="label_top" for="database_host"><?php echo $lang['DBHost'];?></label>
 	<p class="notop"><?php echo $lang['DBHostDesc']; ?></p>
 	<input type="text" maxlength="1000" id="database_host" name="config[database_host]" value="<?php echo $config['database_host'] ?>" placeholder="localhost" class="text_input" required/>
-	<br />
+	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="database_port"><?php echo $lang['DBPort'];?></label>
 	<p class="notop"><?php echo $lang['DBPortDesc']; ?></p>
-	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"/> <br />
+	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"/> <br>
 <?php echo $separator; ?>
 	<label class="label_top" for="database_database"><?php echo $lang['DB'];?></label>
 	<p class="notop"><?php echo $lang['DBDesc']; ?></p>
 	<input type="text" maxlength="64" id="database_database" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input" required/>
-	<br />
+	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="database_user"><?php echo $lang['DBUser'];?></label>
 	<p class="notop"><?php echo $lang['DBUserDesc']; ?></p>
 	<input type="text" maxlength="50" id="database_user" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input" required/>
-	<br />
+	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="database_password"><?php echo $lang['DBPassword'];?></label>
 	<p class="notop"><?php echo $lang['DBPasswordDesc']; ?></p>
-	<input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input" />
-	<br />
+	<input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input">
+	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
 	<p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
 	<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input"/>
-	<br />
+	<br>
 <?php echo $separator; ?>
 <?php
 if ($config['is_update'] == false)
@@ -234,7 +234,7 @@ if ($config['is_update'] == false)
 	<p class="notop"><?php echo $lang['DeleteTablesDesc']; ?></p>
 	<label class="indented_label" for="wiki_delete_tables"><?php echo $lang['DeleteTables'];?></label>
 	<input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config['DeleteTables']) ? ' checked' : ''; ?> class="checkbox_input"/>
-	<br />
+	<br>
 <?php echo $separator; ?>
 <?php
 }

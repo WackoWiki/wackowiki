@@ -7,8 +7,8 @@ if (!defined('IN_WACKO'))
 
 if ($text == '') return;
 
-// remove tags <br />
-$text = str_replace('<br />', '', $text);
+// remove tags <br>
+$text = str_replace('<br>', '', $text);
 
 // remove diff type navigation
 $text = preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $text);

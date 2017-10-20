@@ -30,7 +30,7 @@ if ($mode == 'global')
 	echo '<ul class="menu">
 			<li><a href="' . $this->href('referrers_sites') . '">' . $this->_t('ViewReferrersPage') . '</a></li>
 			<li class="active">' . $this->_t('ViewReferrersGlobal') . "</li>
-		</ul><br /><br />\n";
+		</ul><br><br>\n";
 }
 else
 {
@@ -38,7 +38,7 @@ else
 	echo '<ul class="menu">
 			<li class="active">' . $this->_t('ViewReferrersPage') . '</li>
 			<li><a href="' . $this->href('referrers_sites', '', ['o' => 'global']) . '">' .  $this->_t('ViewReferrersGlobal') . "</a></li>
-		</ul><br /><br />\n";
+		</ul><br><br>\n";
 }
 
 $href = $this->href('referrers', '', ['o' => $mode]);
@@ -58,7 +58,7 @@ else
 	$referrers = $this->load_referrers($this->page['page_id']);
 }
 
-echo '<strong>' . $title . "</strong><br /><br />\n";
+echo '<strong>' . $title . "</strong><br><br>\n";
 
 if ($referrers)
 {
@@ -99,5 +99,5 @@ if ($referrers)
 }
 else
 {
-	echo $this->_t('NoneReferrers') . "<br />\n";
+	echo $this->_t('NoneReferrers') . "<br>\n";
 }

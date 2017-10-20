@@ -13,7 +13,7 @@
 				=]
 		=]
 		</ul>
-		<br /><br />
+		<br><br>
 	=]
 	[= nopages _ =
 		[ ' _t: NoPagesFound ' ]

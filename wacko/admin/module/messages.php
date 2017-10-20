@@ -25,7 +25,7 @@ function admin_messages(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -44,7 +44,7 @@ function admin_messages(&$engine, &$module)
 
 	echo $engine->form_open('messages');
 ?>
-		<input type="hidden" name="action" value="update" />
+		<input type="hidden" name="action" value="update">
 		<table class="formation">
 			<colgroup>
 				<col span="1" style="width:50%;">
@@ -54,7 +54,7 @@ function admin_messages(&$engine, &$module)
 				<th colspan="2">System message</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="system_message"><strong>System message:</strong><br />
+				<td class="label"><label for="system_message"><strong>System message:</strong><br>
 					<small>Your text here</small></label></td>
 				<td><textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
@@ -62,7 +62,7 @@ function admin_messages(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="system_message_type"><strong>Type:</strong><br />
+				<td class="label"><label for="system_message_type"><strong>Type:</strong><br>
 					<small>Message type (CSS).</small></label></td>
 				<td>
 					<select id="system_message_type" name="system_message_type">
@@ -84,19 +84,19 @@ function admin_messages(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Enable system message:</strong><br />
+				<td class="label"><strong>Enable system message:</strong><br>
 					<small>Show system message.</small></td>
 				<td>
-					<input type="radio" id="sys_message_on" name="enable_system_message" value="1"<?php echo ($engine->db->enable_system_message == 1 ? ' checked' : '');?> /><label for="sys_message_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="sys_message_off" name="enable_system_message" value="0"<?php echo ($engine->db->enable_system_message == 0 ? ' checked' : '');?> /><label for="sys_message_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="sys_message_on" name="enable_system_message" value="1"<?php echo ($engine->db->enable_system_message == 1 ? ' checked' : '');?>><label for="sys_message_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="sys_message_off" name="enable_system_message" value="0"<?php echo ($engine->db->enable_system_message == 0 ? ' checked' : '');?>><label for="sys_message_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 
 		</table>
-		<br />
+		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>" />
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>" />
+			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php
 	echo $engine->form_close();

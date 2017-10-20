@@ -370,13 +370,13 @@ if (isset($_POST['upload']) & $can_upload)
 	{
 		if ($this->db->upload_quota_per_user > 0)
 		{
-			$error = $this->_t('UploadMaxFileQuota') . '. <br />' .
+			$error = $this->_t('UploadMaxFileQuota') . '. <br>' .
 					 $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) . ' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
 		}
 
 		if ($this->db->upload_quota > 0)
 		{
-			$error .= '<br />' . $this->_t('UploadMaxFileQuota') . '. <br />' .
+			$error .= '<br>' . $this->_t('UploadMaxFileQuota') . '. <br>' .
 					  $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($files['used_quota'], false, true, true) . ' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota), true, true, true);
 		}
 	}
@@ -399,14 +399,14 @@ else
 
 	if ($can_upload)
 	{
-		echo $this->action('upload', []) . '<br />';
+		echo $this->action('upload', []) . '<br>';
 	}
 	else
 	{
 		$this->set_message($this->_t('UploadForbidden'));
 	}
 
-	echo "<br /><br />\n";
-	echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";
+	echo "<br><br>\n";
+	echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '"></a>' . "\n";
 
 }

@@ -25,9 +25,9 @@ function admin_system_info(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
-	Version informations:<br />
-	<br />
+	<br>
+	Version informations:<br>
+	<br>
 	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 		<tr>
 			<th style="width:120px;">Parameter</th>

@@ -373,7 +373,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 		foreach ($list as &$p)
 		{
-			$p = '<p>' . str_replace("\n", "<br />\n", $p) . '</p>';
+			$p = '<p>' . str_replace("\n", "<br>\n", $p) . '</p>';
 		}
 
 		return implode("\n\n", $list);

@@ -32,10 +32,10 @@ function admin_system_statistics(&$engine, &$module)
 	$directories	= & $module['vars'][1];
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
-	<br />
-	Database Statistics:<br />
-	<br />
+	<br>
+	<br>
+	Database Statistics:<br>
+	<br>
 	<table style="max-width:500px;" class="formation">
 		<tr>
 			<th style="width:50px;">Table</th>
@@ -81,9 +81,9 @@ function admin_system_statistics(&$engine, &$module)
 			<td><strong><?php echo $engine->binary_multiples($tfrag, false, true, true); ?></strong></td>
 		</tr>
 	</table>
-	<br />
-	File system Statistics:<br />
-	<br />
+	<br>
+	File system Statistics:<br>
+	<br>
 	<table style="max-width:300px;" class="formation">
 		<tr>
 			<th style="">Folder</th>

@@ -33,14 +33,14 @@
 					<form action="[ ' href ' ]" method="get" name="search_group">
 						[ ' href | hide_page ' ]
 						[ ' _t: GroupsSearch ' ]: ['' // </td><td> ??? '']
-						<input type="search" name="group" maxchars="40" size="40" value="[ ' group |e attr ' ]" /> ['' '']
-						<input type="submit" id="submit" value="[ ' _t: GroupsFilter ' ]" /> ['' '']
-						<input type="submit" id="button" value="[ ' _t: GroupsOpenProfile ' ]" name="gotoprofile" />
+						<input type="search" name="group" maxchars="40" size="40" value="[ ' group |e attr ' ]"> ['' '']
+						<input type="submit" id="submit" value="[ ' _t: GroupsFilter ' ]"> ['' '']
+						<input type="submit" id="button" value="[ ' _t: GroupsOpenProfile ' ]" name="gotoprofile">
 					</form>
 				</td>
 			</tr>
 		</table>
-		<br />
+		<br>
 		<table class="lined nowrap" style="width:100%; padding-right:20px;">
 			['' pagination '']
 			<tr>

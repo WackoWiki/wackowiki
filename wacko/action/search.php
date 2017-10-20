@@ -129,7 +129,7 @@ $get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanu
 			{
 				if ($result)
 				{
-					$result .= "<br/>\n";
+					$result .= "<br>\n";
 				}
 			}
 		}
@@ -139,7 +139,7 @@ $get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanu
 			{
 				if ($result)
 				{
-					$result .= "<br/>\n";
+					$result .= "<br>\n";
 				}
 			}
 

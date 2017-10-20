@@ -38,7 +38,7 @@ if (($pages = $this->load_pages_linking_to($tag)))
 
 				if (strpos($_link, 'span class="missingpage"') === false)
 				{
-					echo $_link . "<br />\n";
+					echo $_link . "<br>\n";
 				}
 			}
 		}

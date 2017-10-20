@@ -25,7 +25,7 @@ function admin_content_deleted(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 
 $type = (isset($_GET['type']) && $_GET['type'] ? $_GET['type'] : OBJECT_PAGE);
@@ -119,7 +119,7 @@ else if ($type == OBJECT_FILE)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br /><strong>' . date($engine->db->date_format, strtotime($day)) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . date($engine->db->date_format, strtotime($day)) . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
@@ -160,7 +160,7 @@ else if ($type == OBJECT_FILE)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br /><strong>' . date($engine->db->date_format, strtotime($day)) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . date($engine->db->date_format, strtotime($day)) . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
@@ -185,11 +185,11 @@ else if ($type == OBJECT_FILE)
 	{
 		if ($type == OBJECT_PAGE)
 		{
-			echo '<br /><p>' . $engine->_t('NoDeletedPages') . '</p>';
+			echo '<br><p>' . $engine->_t('NoDeletedPages') . '</p>';
 		}
 		else if ($type == OBJECT_FILE)
 		{
-			echo '<br /><p>' . $engine->_t('NoDeletedFiles') . '</p>';
+			echo '<br><p>' . $engine->_t('NoDeletedFiles') . '</p>';
 		}
 	}
 }

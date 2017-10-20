@@ -320,7 +320,7 @@ $ap_translation = [
 	'SendTestEmailInfo'			=> 'Αυτό θα αποστείλει ένα δοκιμαστικό μήνυμα ηλεκτρονικού ταχυδρομείου στη διεύθυνση που ορίστηκε στο λογαριασμό σας.',
 	'TestEmailSubject'			=> 'Το WackoWiki είναι σωστά ρυθμισμένο για την αποστολή μηνυμάτων ηλεκτρονικού ταχυδρομείου',
 	'TestEmailBody'				=> 'Αν λάβατε αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου, το WackoWiki είναι σωστά ρυθμισμένο για την αποστολή μηνυμάτων ηλεκτρονικού ταχυδρομείου.',
-	'TestEmailMessage'			=> 'Το δοκιμαστικό μήνυμα ηλεκτρονικού ταχυδρομείου στάλθηκε.<br />Αν δεν το λάβατε, παρακαλούμε ελέγξτε τις ρυθμίσεις του ηλεκτρονικού ταχυδρομείου.',
+	'TestEmailMessage'			=> 'Το δοκιμαστικό μήνυμα ηλεκτρονικού ταχυδρομείου στάλθηκε.<br>Αν δεν το λάβατε, παρακαλούμε ελέγξτε τις ρυθμίσεις του ηλεκτρονικού ταχυδρομείου.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
@@ -329,7 +329,7 @@ $ap_translation = [
 	'SmtpPassword'				=> 'Κωδικός πρόσβασης SMTP',
 	'SmtpPasswordInfo'			=> 'Εισάγετε ένα κωδικό πρόσβασης μόνο εάν ο διακομιστής SMTP το απαιτεί. <em><strong>ΠΡΟΕΙΔΟΠΟΙΗΣΗ:</strong> Αυτός ο κωδικός πρόσβασης θα αποθηκευτεί σαν απλό κείμενο στη βάση δεδομένων, ορατός σε όποιον μπορεί να έχει πρόσβαση στη βάση δεδομένων σας ή που μπορεί να προβάλει αυτή τη σελίδα ρυθμίσεων.</em>',
 	'SmtpPort'					=> 'Θύρα διακομιστή SMTP',
-	'SmtpPortInfo'				=> 'Αλλάξτε το μόνο εάν γνωρίζετε ότι ο διακομιστής SMTP είναι σε μια διαφορετική θύρα. <br />(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpPortInfo'				=> 'Αλλάξτε το μόνο εάν γνωρίζετε ότι ο διακομιστής SMTP είναι σε μια διαφορετική θύρα. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
 	'SmtpServer'				=> 'Διεύθυνση διακομιστή SMTP',
 	'SmtpServerInfo'			=> 'Σημει΄ψστε ότι πρέπει να περέχετε και το πρωτόκολλο που χρησιμοποιεί ο διακομιστής σας. Αν χρησιμοποιείται SSL, πρέπει να το γράψετε <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'Ρυθμίσεις SMTP',
@@ -384,15 +384,15 @@ $ap_translation = [
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Files',
-	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br />' .
-									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br />' .
-									'<br />' .
+	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
+									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
+									'<br>' .
 									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
 									'same when backing up only table structure without saving the data. '.
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
-	'BackupCompleted'			=> 'Backing up and archiving completed.<br />' .
-									'Backup package files stored in the %1 named sub-directory of <code>files/backup</code> directory.<br />' .
-									'To download it use FTP (maintain the directory structure and file names when copying).<br />' .
+	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
+									'Backup package files stored in the %1 named sub-directory of <code>files/backup</code> directory.<br>' .
+									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
 									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 
@@ -409,9 +409,9 @@ $ap_translation = [
 									'Thus, during the recovery process duplicate records will occur. '.
 									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), '.
 									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), '.
-									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br />' .
-									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br />' .
-									'<br />' .
+									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br>' .
+									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br>' .
+									'<br>' .
 									'** If the backup contains the user files (global and perpage, cache files, etc.), '.
 									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. '.
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',

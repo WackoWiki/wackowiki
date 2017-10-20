@@ -85,7 +85,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					// file revisions here
 					'<li><a href="' . $this->href('filemeta', '', ['label', 'file_id' => $file['file_id']]) . '">' . $this->_t('FileLabel') . '</a></li>' .
 					'<li class="active">' . $this->_t('FileRemove') . '</li>' .
-				"</ul><br />\n";
+				"</ul><br>\n";
 
 		if (count($file) > 0)
 		{
@@ -139,22 +139,22 @@ $this->ensure_page(true); // TODO: upload for forums?
 			$this->show_message($this->_t('FileRemoveConfirm'), 'warning');
 			?>
 
-			<br />
-			<input type="hidden" name="remove" value=""/>
-			<input type="hidden" name="file_id" value="<?php echo $file['file_id'];?>" />
+			<br>
+			<input type="hidden" name="remove" value="">
+			<input type="hidden" name="file_id" value="<?php echo $file['file_id'];?>">
 			<?php
 			if ($this->db->store_deleted_pages && $this->is_admin())
 			{
-				echo '<input type="checkbox" id="dontkeep" name="dontkeep" />';
-				echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepFile') . '</label><br />';
-				echo '<br />';
+				echo '<input type="checkbox" id="dontkeep" name="dontkeep">';
+				echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepFile') . '</label><br>';
+				echo '<br>';
 			}
 			?>
-			<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>" />
+			<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>">
 			&nbsp;
-			<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
-			<br />
-			<br />
+			<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"></a>
+			<br>
+			<br>
 			</div>
 <?php
 				echo $this->form_close();
@@ -187,7 +187,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 				// file revisions here
 				'<li class="active">' . $this->_t('FileLabel') . '</li>' .
 				'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id' => $file['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>' .
-			 "</ul><br />\n";
+			 "</ul><br>\n";
 
 		if (count($file) > 0)
 		{
@@ -212,8 +212,8 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 				echo $this->form_open('store_categories', ['page_method' => 'filemeta']);
 				echo $this->show_category_form($file['file_id'], OBJECT_FILE, $file['file_lang'], false);
-				echo '<input type="hidden" name="label" value="" />';
-				echo '<input type="hidden" name="file_id" value="' . $file['file_id'] . '" />';
+				echo '<input type="hidden" name="label" value="">';
+				echo '<input type="hidden" name="file_id" value="' . $file['file_id'] . '">';
 				echo $this->form_close();
 			}
 		}
@@ -257,7 +257,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 									'<li><a href="' . $this->href('filemeta', '', ['label', 'file_id' => $file['file_id']]) . '">' . $this->_t('FileLabel') . '</a></li>' .
 									'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id' => $file['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>'
 								: '') .
-						"</ul><br />\n";
+						"</ul><br>\n";
 
 				if ($this->has_access('read', $file['page_id']))
 				{
@@ -332,13 +332,13 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 				</table>
 
-				<br />
+				<br>
 
 			<?php
 
-				echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '" /></a>' . "\n";?>
-					<br />
-					<br />
+				echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '"></a>' . "\n";?>
+					<br>
+					<br>
 					</div>
 <?php
 				}
@@ -362,7 +362,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 							// file revisions here
 							'<li><a href="' . $this->href('filemeta', '', ['label', 'file_id' => $file['file_id']]) . '">' . $this->_t('FileLabel') . '</a></li>' .
 							'<li><a href="' . $this->href('filemeta', '', ['remove', 'file_id' => $file['file_id']]) . '">' . $this->_t('FileRemove') . '</a></li>' .
-						"</ul><br />\n";
+						"</ul><br>\n";
 
 					// !!!!! patch link to not show pictures when not needed
 					$path2 = str_replace('file:/', '_file:/', $path);
@@ -376,7 +376,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					<table class="upload">
 						<tr>
 							<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-							<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo htmlspecialchars($file['file_description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>"/></td>
+							<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo htmlspecialchars($file['file_description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>"></td>
 						</tr>
 						<tr>
 							<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
@@ -416,15 +416,15 @@ $this->ensure_page(true); // TODO: upload for forums?
 						</td>
 					</tr>
 					</table>
-					<br />
+					<br>
 
-					<input type="hidden" name="edit" value="<?php echo $_GET['edit']?>" />
-					<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>" />
-					<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>" />
+					<input type="hidden" name="edit" value="<?php echo $_GET['edit']?>">
+					<input type="hidden" name="file_id" value="<?php echo $_GET['file_id']?>">
+					<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>">
 					&nbsp;
-					<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"/></a>
-					<br />
-					<br />
+					<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"></a>
+					<br>
+					<br>
 					</div>
 <?php
 					echo $this->form_close();
@@ -521,7 +521,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 						"WHERE file_id = '" . $file['file_id'] . "' " .
 						"LIMIT 1");
 
-					$message .= $this->_t('FileEditedMeta') . "<br />";
+					$message .= $this->_t('FileEditedMeta') . "<br>";
 
 					if ($message)
 					{

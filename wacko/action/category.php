@@ -157,17 +157,17 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		}
 		else
 		{
-			echo '<em>' . $this->_t('CategoryNotExists') . '</em><br />';
+			echo '<em>' . $this->_t('CategoryNotExists') . '</em><br>';
 		}
 	}
 	else
 	{
-		echo '<em>' . $this->_t('CategoryEmpty') . '</em><br />';
+		echo '<em>' . $this->_t('CategoryEmpty') . '</em><br>';
 	}
 
 	if ($nomark != 2)
 	{
-		echo '</div><br />';
+		echo '</div><br>';
 	}
 }
 
@@ -179,7 +179,7 @@ if (!$ids)
 		echo $this->form_open('category_lang');
 		echo '<p class="t_right">';
 		echo $this->show_select_lang('category_lang', $lang, false);
-		echo '<input type="submit" name="update" id="submit" value="update" />';
+		echo '<input type="submit" name="update" id="submit" value="update">';
 		echo '</p>';
 		echo $this->form_close();
 	}

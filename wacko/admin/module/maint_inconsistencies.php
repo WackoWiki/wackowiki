@@ -25,7 +25,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 {
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 <?php
 
 	/////////////////////////////////////////////
@@ -285,7 +285,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			<p>
 
 			</p>
-			<br />
+			<br>
 <?php
 		}
 	}
@@ -531,17 +531,17 @@ function admin_maint_inconsistencies(&$engine, &$module)
 ?>
 
 	<p>
-	show / count mismatches / inconsistencies<br />
-	delete records<br />
-	assign records to new user / value<br />
+	show / count mismatches / inconsistencies<br>
+	delete records<br>
+	assign records to new user / value<br>
 	</p>
-	<br />
+	<br>
 <?php
 	echo $engine->form_open('usersupdate');
 ?>
-		<input type="hidden" name="action" value="check_inconsistencies" />
-		<input type="submit" name="check" id="submit" value="check" />
-		<input type="submit" name="solve" id="submit" value="solve" />
+		<input type="hidden" name="action" value="check_inconsistencies">
+		<input type="submit" name="check" id="submit" value="check">
+		<input type="submit" name="solve" id="submit" value="solve">
 <?php
 	echo $engine->form_close();
 }

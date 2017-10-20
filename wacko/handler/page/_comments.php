@@ -129,13 +129,13 @@ if ($this->has_access('read'))
 					|| ($this->db->owners_can_remove_comments && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					$handler_button .= '<a href="' . $this->href('remove', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" style="float: right; padding: 2px;" class="btn-delete"/></a>';
+					$handler_button .= '<a href="' . $this->href('remove', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" style="float: right; padding: 2px;" class="btn-delete"></a>';
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					$handler_button .= '<a href="' . $this->href('edit', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('EditCommentTip') . '" alt="' . $this->_t('EditComment') . '" style="float: right; padding: 2px;" class="btn-edit"/></a>';
+					$handler_button .= '<a href="' . $this->href('edit', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('EditCommentTip') . '" alt="' . $this->_t('EditComment') . '" style="float: right; padding: 2px;" class="btn-edit"></a>';
 				}
 
 				if (!empty($handler_button))
@@ -213,7 +213,7 @@ if ($this->has_access('read'))
 			echo '<div class="commentform" id="commentform">' . "\n";
 
 			echo $this->form_open('add_comment', ['page_method' => 'addcomment']);
-			echo '<input type="hidden" name="parent_id" value="' . $parent_id . '" />' . "\n";
+			echo '<input type="hidden" name="parent_id" value="' . $parent_id . '">' . "\n";
 
 			// preview
 			if (!empty($preview))
@@ -228,7 +228,7 @@ if ($this->has_access('read'))
 							'<h2>' . $title . '</h2>' .
 						'</header>' . "\n" .
 						'<p>' . $preview . '</p>' .
-						"</div>\n</div><br />\n";
+						"</div>\n</div><br>\n";
 			}
 
 			// load WikiEdit
@@ -239,10 +239,10 @@ if ($this->has_access('read'))
 			?>
 				<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
 
-				<label for="addcomment_title"><?php echo $this->_t('AddCommentTitle');?></label><br />
-				<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="<?php if (isset($title)) echo $title; ?>" /><br />
-				<br />
-				<label for="addcomment"><?php echo $this->_t('AddComment');?></label><br />
+				<label for="addcomment_title"><?php echo $this->_t('AddCommentTitle');?></label><br>
+				<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="<?php if (isset($title)) echo $title; ?>"><br>
+				<br>
+				<label for="addcomment"><?php echo $this->_t('AddComment');?></label><br>
 				<textarea id="addcomment" name="body" rows="6" cols="7"><?php if (isset($this->sess->freecap_old_comment)) echo $this->sess->freecap_old_comment; ?><?php if (isset($payload)) echo htmlspecialchars($payload, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ?></textarea>
 
 			<?php
@@ -253,20 +253,20 @@ if ($this->has_access('read'))
 				// publish anonymously
 				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" ' . ($this->get_user_setting('noid_pubs') == 1 ? 'checked' : '' ) . "/>\n";
+					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" ' . ($this->get_user_setting('noid_pubs') == 1 ? 'checked' : '' ) . ">\n";
 					$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . "</label>\n";
-					$output .= '<br />';
+					$output .= '<br>';
 				}
 
 				// watch a page
 				if ($this->page && !$this->is_watched)
 				{
-					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? 'checked' : '' ) . " />\n";
+					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? 'checked' : '' ) . ">\n";
 					$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . "</label>\n";
-					$output .= '<br />';
+					$output .= '<br>';
 				}
 
-				echo '<br />' . $output;
+				echo '<br>' . $output;
 			}
 
 			if ($this->db->captcha_new_comment)
@@ -293,9 +293,9 @@ if ($this->has_access('read'))
 			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';?>');
 			</script>
 
-			<br />
-			<input type="submit" name="save" value="<?php echo $this->_t('AddCommentButton'); ?>" accesskey="s" />
-			<input type="submit" name="preview" value="<?php echo $this->_t('EditPreviewButton'); ?>" />
+			<br>
+			<input type="submit" name="save" value="<?php echo $this->_t('AddCommentButton'); ?>" accesskey="s">
+			<input type="submit" name="preview" value="<?php echo $this->_t('EditPreviewButton'); ?>">
 			<?php echo $this->form_close();
 
 			echo "</div>\n";

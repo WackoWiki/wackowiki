@@ -4,9 +4,9 @@
 <head>
 	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . " : " . (isset($this->page['title']) ? $this->page['title'] : $this->tag); ?></title>
 	<?php // do not index alternative print pages
-	echo "<meta name=\"robots\" content=\"noindex, nofollow\" />\n";?>
-	<meta charset="<?php echo $this->get_charset(); ?>" />
-	<link rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css" />
+	echo "<meta name=\"robots\" content=\"noindex, nofollow\">\n";?>
+	<meta charset="<?php echo $this->get_charset(); ?>">
+	<link rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css">
 </head>
 
 <body>

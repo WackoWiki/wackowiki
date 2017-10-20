@@ -22,7 +22,7 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.' . $conf
 
 $separator =
 '	<div class="fake_hr_separator">
-		<hr />
+		<hr>
 	</div>';
 
 global $lang;
@@ -36,11 +36,11 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
 	<head>
-		<meta charset="<?php echo $lang['Charset']; ?>" />
+		<meta charset="<?php echo $lang['Charset']; ?>">
 		<title><?php echo $lang['Title'] . ': ' . WACKO_VERSION . ' - ' . $lang[$install_action]; ?></title>
-		<meta name="robots" content="noindex, nofollow, noarchive" />
-		<link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css" />
-		<link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon" />
+		<meta name="robots" content="noindex, nofollow, noarchive">
+		<link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css">
+		<link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon">
 	</head>
 	<body>
 		<div class="installer">
@@ -59,5 +59,5 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 				<li class="<?php echo $install_action == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang['write-config']; ?></li>
 			</ul>
 			<div class="fake_hr">
-			<hr />
+			<hr>
 		</div>

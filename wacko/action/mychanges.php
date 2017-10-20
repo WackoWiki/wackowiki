@@ -28,7 +28,7 @@ if (($user_id = $this->get_user_id()))
 	{
 		echo $this->_t('MyChangesTitle2') .
 			' [<a href="' . $this->href('', '', $by('date')) . '">' .
-			$this->_t('OrderChange') . "</a>].</strong><br /><br />\n";
+			$this->_t('OrderChange') . "</a>].</strong><br><br>\n";
 
 		$count	= $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
@@ -64,7 +64,7 @@ if (($user_id = $this->get_user_id()))
 				{
 					if ($cur_char)
 					{
-						echo "</ul>\n<br /></li>\n";
+						echo "</ul>\n<br></li>\n";
 					}
 
 					echo '<li><strong>' . $first_char . "</strong><ul>\n";
@@ -121,7 +121,7 @@ if (($user_id = $this->get_user_id()))
 				{
 					if ($cur_day)
 					{
-						echo "</ul>\n<br /></li>\n";
+						echo "</ul>\n<br></li>\n";
 					}
 
 					echo '<li><strong>' . $day . ":</strong><ul>\n";

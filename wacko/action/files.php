@@ -283,17 +283,17 @@ if ($can_view)
 				$param_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global'])) ? ['files' => $_GET['files']] : [];
 
 				echo '<td class="desc-">' .
-					'<strong>' . $this->shorten_string($file['file_name'], $file_name_maxlen) . '</strong><br /><br />' .
-					$desc . '<br /><br />' .
+					'<strong>' . $this->shorten_string($file['file_name'], $file_name_maxlen) . '</strong><br><br>' .
+					$desc . '<br><br>' .
 
 					($file['picture_w']
-						? $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px<br />'
-						: $hits . '<br />'
+						? $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px<br>'
+						: $hits . '<br>'
 					) .
 
-					$file_size . '<br /><br />' .
-					$this->user_link($file['user_name'], '', true, false) . '<br />' .
-					$dt . '<br /><br />' .
+					$file_size . '<br><br>' .
+					$this->user_link($file['user_name'], '', true, false) . '<br>' .
+					$dt . '<br><br>' .
 					$this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter) .
 
 					'</td>' . "\n";
@@ -329,7 +329,7 @@ if ($can_view)
 	}
 	else
 	{
-		echo '<em>' . $this->_t('NoAttachments') . '</em><br /><br />';
+		echo '<em>' . $this->_t('NoAttachments') . '</em><br><br>';
 	}
 
 	unset($files);

@@ -149,12 +149,12 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			echo '<tbody><tr>' .
 					'<td class="a_top">' .
 						( $this->has_access('read', $forum['page_id'], GUEST) === false
-							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked"/>'
+							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
 							: '' ) .
 						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
 							? '<strong class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</strong> '
 							: '' ) .
-						'<strong>' . $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang) . '</strong><br />' .
+						'<strong>' . $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang) . '</strong><br>' .
 						'<small>' . $forum['description'] . '</small>' .
 					'</td>' .
 					'<td class="t_center">&nbsp;' . $topics['total'] . '&nbsp;&nbsp;</td>' .
@@ -171,7 +171,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						$comment['topic_title'] = $this->do_unicode_entities($comment['topic_title'], $comment['topic_lang']);
 					}
 
-					echo '<small><a href="' . $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'] . '">' . $comment['topic_title'] . '</a><br />' .
+					echo '<small><a href="' . $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'] . '">' . $comment['topic_title'] . '</a><br>' .
 						$this->user_link($comment['user_name']) .
 						' (' . $this->get_time_formatted($comment['created']) . ')</small>';
 				}
@@ -182,7 +182,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						$comment['title']= $this->do_unicode_entities($comment['title'], $comment['page_lang']);
 					}
 
-					echo '<small><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . '</a><br />' .
+					echo '<small><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . '</a><br>' .
 						$this->user_link($comment['user_name']) .
 						' (' . $this->get_time_formatted($comment['created']) . ')</small>';
 				}
@@ -199,7 +199,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	echo '</tbody></table>' . "\n";
-	echo '<br />' . "\n";
+	echo '<br>' . "\n";
 
 	// mark all forums read
 	if ($user == true)
@@ -207,7 +207,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
 	}
 
-	echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span><br />' . "\n";
+	echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"></a></span><br>' . "\n";
 }
 
 ?>

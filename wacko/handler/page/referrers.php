@@ -9,7 +9,7 @@ $this->ensure_page(true); // allow forums
 
 $show_backlinks = function ()
 {
-	echo '<strong>' . $this->_t('ReferringPages') . ":</strong><br /><br />\n";
+	echo '<strong>' . $this->_t('ReferringPages') . ":</strong><br><br>\n";
 
 	// show backlinks
 	if (($pages = $this->load_pages_linking_to($this->tag)))
@@ -48,7 +48,7 @@ if (
 	|| ($this->db->enable_referrers == 1 && !$this->get_user())
 	|| ($this->db->enable_referrers == 2 && !$this->is_admin()))
 {
-	echo "<br /><br />\n";
+	echo "<br><br>\n";
 	$show_backlinks();
 	return;
 }
@@ -161,7 +161,7 @@ foreach ($modes as $text => $i)
 	echo '</li>';
 }
 
-echo "</ul><br /><br />\n";
+echo "</ul><br><br>\n";
 
 // in default mode we show intra-wiki backlinks before external referrers
 if (!$mode)
@@ -170,7 +170,7 @@ if (!$mode)
 }
 
 // referrers header
-echo '<strong>' . $title . "</strong><br /><br />\n";
+echo '<strong>' . $title . "</strong><br><br>\n";
 
 $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $spacer)
 {
@@ -222,7 +222,7 @@ $referrers = $this->db->load_all($query);
 
 if (!$referrers)
 {
-	echo $this->_t('NoneReferrers') . "<br /><br />\n" ;
+	echo $this->_t('NoneReferrers') . "<br><br>\n" ;
 	return;
 }
 
@@ -248,7 +248,7 @@ if ($mode == 'perpage')
 				$print_ref($ref2['referrer'], $ref2['num'], 'list_count');
 			}
 
-			echo "</ul>\n<br /></li>\n";
+			echo "</ul>\n<br></li>\n";
 		}
 	}
 }
@@ -266,7 +266,7 @@ else if ($mode == 'bytime')
 			{
 				if ($curday)
 				{
-					echo "</ul>\n<br /></li>\n";
+					echo "</ul>\n<br></li>\n";
 				}
 
 				echo '<li><strong>' . $day . "</strong>\n" .

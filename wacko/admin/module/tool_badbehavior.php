@@ -324,7 +324,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 
 			echo '<tr id="request-' . $result['log_id'] . '" class="lined">' . "\n";
 
-			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '" /></td>' . "\n";
+			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '"></td>' . "\n";
 
 			$httpbl	= bb2_httpbl_lookup($result['ip']);
 
@@ -453,14 +453,14 @@ function bb2_whitelist(&$engine)
 	<table class="formation">
 		<tr>
 			<th colspan="2">
-				<br />
+				<br>
 				Whitelist
 			</th>
 		</tr>
 
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="whitelists_ip"><strong>IP Address:</strong><br />
+				<label for="whitelists_ip"><strong>IP Address:</strong><br>
 				<small>IP address or CIDR format address ranges to be whitelisted (one per line)</small></label>
 			</td>
 			<td>
@@ -472,7 +472,7 @@ function bb2_whitelist(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="whitelists_url"><strong>URL:</strong><br />
+				<label for="whitelists_url"><strong>URL:</strong><br>
 				<small>URL fragments beginning with the / after your web site hostname (one per line)</small></label>
 			</td>
 			<td>
@@ -484,7 +484,7 @@ function bb2_whitelist(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="whitelists_useragent"><strong>User Agent:</strong><br />
+				<label for="whitelists_useragent"><strong>User Agent:</strong><br>
 				<small>User agent strings to be whitelisted (one per line)</small></label>
 			</td>
 			<td>
@@ -492,8 +492,8 @@ function bb2_whitelist(&$engine)
 			</td>
 		</tr>
 	</table>
-	<br />
-	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
+	<br>
+	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;"></div>
 
 <?php
 	echo $engine->form_close();
@@ -666,7 +666,7 @@ function bb2_options(&$engine)
 <?php
 	echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
 ?>
-	<input type="hidden" name="action" value="bb2_options" />
+	<input type="hidden" name="action" value="bb2_options">
 	<p class="right">See also: <a href="<?php echo $engine->href() . "&amp;setting=bb2_summary" ?>">Summary</a> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_manage"; ?>">Log</a> | <span class="active">Settings</span> | <a href="<?php echo $engine->href() . "&amp;setting=bb2_whitelist" ?>">Whitelist</a></p>
 
 	<table class="formation">
@@ -675,17 +675,17 @@ function bb2_options(&$engine)
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><strong>Enable Bad Behavior:</strong><br />
+			<td class="label"><strong>Enable Bad Behavior:</strong><br>
 				<small>All other settings can be changed in the config folder <code>bb_settings.conf</code>.</small></td>
 			<td>
-				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
+				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
 			</td>
 		</tr>
 
 		<tr>
 			<th colspan="2">
-				<br />
+				<br>
 				Logging HTTP request
 			</th>
 		</tr>
@@ -719,14 +719,14 @@ function bb2_options(&$engine)
 
 		<tr>
 			<th colspan="2">
-				<br />
+				<br>
 				Security
 			</th>
 		</tr>
 
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="strict_checking"><strong>Strict checking</strong><br />
+				<label for="strict_checking"><strong>Strict checking</strong><br>
 				blocks more spam but may block some people</label>
 			</td>
 			<td><input type="checkbox" id="strict_checking" name="strict" value="true" <?php if ($settings['strict']) { ?>checked <?php } ?>/></td>
@@ -736,7 +736,7 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="offsite_forms"><strong>Allow form postings from other web sites</strong><br />
+				<label for="offsite_forms"><strong>Allow form postings from other web sites</strong><br>
 				required for OpenID; increases spam received</label>
 			</td>
 			<td>
@@ -746,14 +746,14 @@ function bb2_options(&$engine)
 
 		<tr>
 			<th colspan="2">
-				<br />
+				<br>
 				http:BL
 			</th>
 		</tr>
 		<tr class="hl_setting">
 			<td colspan="2">
 				<p>To use Bad Behavior's http:BL features you must have an <a href="http://www.projecthoneypot.org/httpbl_configure.php?rf=24694" rel="noreferrer">http:BL Access Key</a>.</p>
-				<br />
+				<br>
 			</td>
 		</tr>
 		<tr class="hl_setting">
@@ -761,7 +761,7 @@ function bb2_options(&$engine)
 				<label for="httpbl_key">http:BL Access Key</label>
 			</td>
 			<td>
-				<input type="text" size="12" maxlength="12" id="httpbl_key" name="httpbl_key" value="<?php echo $settings['httpbl_key']; ?>" />
+				<input type="text" size="12" maxlength="12" id="httpbl_key" name="httpbl_key" value="<?php echo $settings['httpbl_key']; ?>">
 			</td>
 		</tr>
 		<tr class="lined">
@@ -772,7 +772,7 @@ function bb2_options(&$engine)
 				<label for="httpbl_threat">Minimum Threat Level (25 is recommended)</label>
 			</td>
 			<td>
-				<input type="text" size="3" maxlength="3" id="httpbl_threat" name="httpbl_threat" value="<?php echo intval($settings['httpbl_threat']); ?>" />
+				<input type="text" size="3" maxlength="3" id="httpbl_threat" name="httpbl_threat" value="<?php echo intval($settings['httpbl_threat']); ?>">
 			</td>
 		</tr>
 		<tr class="lined">
@@ -783,20 +783,20 @@ function bb2_options(&$engine)
 				<label for="httpbl_maxage">Maximum Age of Data (30 is recommended)</label>
 			</td>
 			<td>
-				<input type="text" size="3" maxlength="3" id="httpbl_maxage" name="httpbl_maxage" value="<?php echo intval($settings['httpbl_maxage']); ?>" />
+				<input type="text" size="3" maxlength="3" id="httpbl_maxage" name="httpbl_maxage" value="<?php echo intval($settings['httpbl_maxage']); ?>">
 			</td>
 		</tr>
 
 		<tr>
 			<th colspan="2">
-				<br />
+				<br>
 				European Union Cookie
 			</th>
 		</tr>
 
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="eu_cookie"><strong>EU cookie handling</strong><br />
+				<label for="eu_cookie"><strong>EU cookie handling</strong><br>
 				Select this option if you believe Bad Behavior's site security cookie is not exempt from the 2012 EU cookie regulation. <a href="http://bad-behavior.ioerror.us/2012/05/04/eu-cookie-requirement-disclosure/" rel="noreferrer">More info</a></label>
 			</td>
 			<td>
@@ -806,7 +806,7 @@ function bb2_options(&$engine)
 
 		<tr>
 			<th colspan="2">
-				<br />
+				<br>
 				Reverse Proxy/Load Balancer
 			</th>
 		</tr>
@@ -816,7 +816,7 @@ function bb2_options(&$engine)
 					If you are using Bad Behavior behind a reverse proxy, load balancer, HTTP accelerator, content cache or similar technology, enable the Reverse Proxy option.
 					<p>If you have a chain of two or more reverse proxies between your server and the public Internet, you must specify <em>all</em> of the IP address ranges (in CIDR format) of all of your proxy servers, load balancers, etc. Otherwise, Bad Behavior may be unable to determine the client's true IP address.</p>
 					<p>In addition, your reverse proxy servers must set the IP address of the Internet client from which they received the request in an HTTP header. If you don't specify a header, <code><a href="http://en.wikipedia.org/wiki/X-Forwarded-For" rel="noreferrer">X-Forwarded-For</a></code> will be used. Most proxy servers already support X-Forwarded-For and you would then only need to ensure that it is enabled on your proxy servers. Some other header names in common use include <code>X-Real-Ip</code> (nginx) and <code>Cf-Connecting-Ip</code> (CloudFlare).</p>
-					<br />
+					<br>
 				</div>
 			</td>
 		</tr>
@@ -837,7 +837,7 @@ function bb2_options(&$engine)
 				<label for="reverse_proxy_header">Header containing Internet clients' IP address</label>
 			</td>
 			<td>
-				<input type="text" size="32" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo $settings['reverse_proxy_header']; ?>" />
+				<input type="text" size="32" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo $settings['reverse_proxy_header']; ?>">
 			</td>
 		</tr>
 		<tr class="lined">
@@ -852,8 +852,8 @@ function bb2_options(&$engine)
 			</td>
 		</tr>
 	</table>
-	<br />
-	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;" /></div>
+	<br>
+	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;"></div>
 <?php
 	echo $engine->form_close();
 ?>
@@ -889,7 +889,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 
 ?>
 	<h1><?php echo $module['title']; ?></h1>
-	<br />
+	<br>
 	Detects and blocks unwanted Web accesses, deny automated spambots access
 	<p>For more information please visit the <a href="http://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a> homepage.</p>
 
@@ -918,8 +918,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 	{
 		echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
 ?>
-		<br />
-		<input type="hidden" name="action" value="bb2_options" />
+		<br>
+		<input type="hidden" name="action" value="bb2_options">
 
 		<table class="formation">
 			<colgroup>
@@ -929,18 +929,18 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 			<tbody>
 				<tr class="hl_setting">
 					<th scope="row" class="label">
-						<strong>Enable Bad Behavior:</strong><br />
+						<strong>Enable Bad Behavior:</strong><br>
 						<small>All other settings can be changed in the config folder.</small>
 					</th>
 					<td>
-						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-						<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo (!$engine->db->ext_bad_behavior ? ' checked' : '');?> /><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
+						<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo (!$engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-		<br />
-		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?> &raquo;" /></div>
+		<br>
+		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?> &raquo;"></div>
 <?php
 		echo $engine->form_close();
 	}

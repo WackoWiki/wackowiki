@@ -15,7 +15,7 @@ if ($user_id = $this->get_user_id())
 
 	echo $this->_t('MyChangesWatches') .
 		' (<a href="' . $this->href('', '', $profile + ['mode' => 'mychangeswatches', 'reset' => 1, '#' => 'list']) . '">' .
-		$this->_t('ResetChangesWatches') . '</a>).<br /><br />';
+		$this->_t('ResetChangesWatches') . '</a>).<br><br>';
 
 	$count	= $this->db->load_single(
 			"SELECT COUNT(p.page_id) AS n " .
@@ -61,7 +61,7 @@ if ($user_id = $this->get_user_id())
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
 				echo '<small>(' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), 0, $this->_t('History')) .
-					')</small> ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "<br />\n";
+					')</small> ' . $this->compose_link_to_page($page['tag'], '', '', 0) . "<br>\n";
 			}
 		}
 

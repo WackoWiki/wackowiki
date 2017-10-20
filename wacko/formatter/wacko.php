@@ -33,10 +33,10 @@ for ($i = 0; $i < count($wtexts); $i++)
 			((isset($texts[2 * $i + 1])) ? $texts[2 * $i + 1] : '');
 }
 
-$text	= str_replace("\177" . "<br />\n", '', $text);
+$text	= str_replace("\177" . "<br>\n", '', $text);
 $text	= str_replace("\177" . "", '', $text);
 
-// we're cutting the last <br />
+// we're cutting the last <br>
 $text	= preg_replace('/<br \/>$/', '', $text);
 
 // close all open tables
@@ -64,14 +64,14 @@ if (!empty($parser->auto_fn['content']))
 	}
 
 	// write the footnotes
-	$text .=	'<br /><br />' .
+	$text .=	'<br><br>' .
 				'<div class="layout-box" id="footnotes">
 					<p><span>' . $this->_t('Footnotes') . ":</span></p>\n" .
 					"<dl>\n" .
 						$footnotes.
 					"</dl>\n" .
 				'</div>' .
-				'<br />';
+				'<br>';
 
 	$parser->auto_fn['content'] = '';
 }

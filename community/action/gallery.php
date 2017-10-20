@@ -254,10 +254,10 @@ if ($can_view)
 			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
 
 			$figcaption = '<br><figcaption>' .
-					'<span>' . $file_description . '</span> ' . '<br />' .
-					#$file['user'] . '<br />' .
-					#$file['picture_w'] . 'x' . $file['picture_h'] . '<br />' .
-					#$file['hits'] . '<br />' .  // we do exclude images from hit cout atm -> see file handler
+					'<span>' . $file_description . '</span> ' . '<br>' .
+					#$file['user'] . '<br>' .
+					#$file['picture_w'] . 'x' . $file['picture_h'] . '<br>' .
+					#$file['hits'] . '<br>' .  // we do exclude images from hit cout atm -> see file handler
 				"</figcaption>\n";
 
 			if (!file_exists($tnb_path))
@@ -353,7 +353,7 @@ if ($can_view)
 
 			if ($cur == 0)
 			{
-				echo ($table ? '</tr>' : '<br />');
+				echo ($table ? '</tr>' : '<br>');
 			}
 			else
 			{
@@ -408,7 +408,7 @@ if ($can_view)
 				echo $this->link($path . $file['file_name']);
 			}
 
-			echo '<br /><br />';
+			echo '<br><br>';
 			echo '<a href="' . $this->href('', $this->tag, '') . '">&lt;' . $this->_t('Back') . '</a>';
 		}
 

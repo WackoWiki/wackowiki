@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page();
 
-echo '<h3>' . $this->_t('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br />\n";
+echo '<h3>' . $this->_t('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br>\n";
 
 if ($user = $this->get_user())
 {
@@ -115,9 +115,9 @@ if ($registered
 			echo $this->form_open('rename_page', ['page_method' => 'rename']);
 
 			?>
-			<input type="text" maxlength="250" name="newname" value="<?php echo $this->tag;?>" size="60" />
-<br />
-<br />
+			<input type="text" maxlength="250" name="newname" value="<?php echo $this->tag;?>" size="60">
+<br>
+<br>
 			<?php
 			echo '<input type="checkbox" id="redirect" name="redirect" ';
 
@@ -126,32 +126,32 @@ if ($registered
 				echo 'checked';
 			};
 
-			echo ' /><label for="redirect"> ' . $this->_t('NeedRedirect') . '</label>'; ?>
-<br />
+			echo '><label for="redirect"> ' . $this->_t('NeedRedirect') . '</label>'; ?>
+<br>
 			<?php
 			if ($this->check_acl($user_name, $this->db->rename_globalacl))
 			{
-				echo '<input type="checkbox" id="massrename" name="massrename" />';
+				echo '<input type="checkbox" id="massrename" name="massrename">';
 				echo '<label for="massrename"> ' . $this->_t('MassRename') . '</label>';
 			}
 			?>
-<br />
-<br />
+<br>
+<br>
 			<?php
 			// show backlinks
 			echo $this->action('backlinks', ['nomark' => 0]);
 			?>
-<br />
+<br>
 			<?php
 			// show sub-pages
 			echo $this->action('tree', ['depth' => 3]);
 			?>
-<br />
-<br />
-<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RenameButton'); ?>" /> &nbsp;
-<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"/></a>
-<br />
-<br />
+<br>
+<br>
+<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RenameButton'); ?>"> &nbsp;
+<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"></a>
+<br>
+<br>
 			<?php echo $this->form_close();
 		}
 	}

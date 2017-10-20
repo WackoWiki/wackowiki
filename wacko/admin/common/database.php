@@ -557,7 +557,7 @@ function get_files(&$engine, $pack, $dir, $root)
 				else
 				{
 					// Show warning
-					$error .= 'Can\'t read <code>' . $dir . '/' . $file_name . '</code>.<br />';
+					$error .= 'Can\'t read <code>' . $dir . '/' . $file_name . '</code>.<br>';
 				}
 			}
 		}
@@ -752,5 +752,5 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 // draws a tick or cross next to a result
 function output_image(&$engine, $ok)
 {
-	return '<img src="' . $engine->db->base_url . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? 'OK' : 'Problem') . '" title="' . ($ok ? 'OK' : 'Problem') . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '" />' . ' ';
+	return '<img src="' . $engine->db->base_url . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? 'OK' : 'Problem') . '" title="' . ($ok ? 'OK' : 'Problem') . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">' . ' ';
 }

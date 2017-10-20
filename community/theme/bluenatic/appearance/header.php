@@ -12,23 +12,23 @@ header('Content-Type: text/html; charset=' . $this->get_charset());
 ?>
 <html lang="<?php echo $this->page['page_lang'] ?>">
 <head>
-	<meta name="author" content="Theme for WackoWiki by Robert Vaeth" />
-	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>" />
-	<meta name="description" content="<?php echo $this->get_description(); ?>" />
-	<meta charset="<?php echo $this->get_charset(); ?>" />
-	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/default.css" media="screen" />
-	<?php if ($this->db->allow_x11colors) {?><link rel="stylesheet" href="<?php echo Ut::join_path(THEME_DIR, "_common/X11colors.css"); ?>" /><?php } ?>
-	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/page.css" media="screen" />
-	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/wacko.css" media="screen" />
-	<link rel="icon" type="image/x-icon" href="<?php echo $this->db->theme_url; ?>icon/icon.png" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml" />
-	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>" />
+	<meta name="author" content="Theme for WackoWiki by Robert Vaeth">
+	<meta name="keywords" content="<?php echo $this->get_keywords(); ?>">
+	<meta name="description" content="<?php echo $this->get_description(); ?>">
+	<meta charset="<?php echo $this->get_charset(); ?>">
+	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/default.css" media="screen">
+	<?php if ($this->db->allow_x11colors) {?><link rel="stylesheet" href="<?php echo Ut::join_path(THEME_DIR, "_common/X11colors.css"); ?>"><?php } ?>
+	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/page.css" media="screen">
+	<link rel="stylesheet" href="<?php echo $this->db->theme_url; ?>css/wacko.css" media="screen">
+	<link rel="icon" type="image/x-icon" href="<?php echo $this->db->theme_url; ?>icon/icon.png">
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>">
 	<?php
 	// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 	if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex == 1 || $this->page['noindex'] == 1)
 	{
-		echo "	<meta name=\"robots\" content=\"noindex, nofollow\" />\n";
+		echo "	<meta name=\"robots\" content=\"noindex, nofollow\">\n";
 	}
 	?>
 	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . " : " . (isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method . ')' : ''); ?></title>
@@ -78,7 +78,7 @@ else if($this->has_access('write'))
 		<div id="header">
 			<?php // Insert search form ?>
 			<?php echo $this->form_open('search', ['form_method' => 'get', 'tag' => $this->_t('SearchPage')]); ?>
-			<input type="search" name="phrase" size="15" value="<?php echo $this->_t('SearchButtonText'); ?>" class="search" />
+			<input type="search" name="phrase" size="15" value="<?php echo $this->_t('SearchButtonText'); ?>" class="search">
 			<?php echo $this->form_close(); ?>
 
 			<?php // Print wackoname and wackopath (and the magic 3 dots) ?>
@@ -122,14 +122,14 @@ else if($this->has_access('write'))
 							echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 								 . '"><img src="' .  $this->db->theme_url
 								. 'icon/bookmark-remove.png" alt="+" title="' .
-								$this->_t('AddToBookmarks')  . '"/></a></li>';
+								$this->_t('AddToBookmarks')  . '"></a></li>';
 						}
 						else
 						{
 							echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 								 . '"><img src="' .  $this->db->theme_url
 								. 'icon/bookmark-add.png" alt="-" title="' .
-								$this->_t('RemoveFromBookmarks')  . '"/></a></li>';
+								$this->_t('RemoveFromBookmarks')  . '"></a></li>';
 						}
 					}*/
 
@@ -150,28 +150,28 @@ else if($this->has_access('write'))
 			<?php // Show edit button only if user has privileges ?>
 			<?php if($this->has_access('write')) { ?>
 			<a href="<?php echo $this->href('edit'); ?>" accesskey="E">
-				<img src="<?php echo $this->db->theme_url; ?>images/qa-edit.png" alt="<?php echo $this->_t('EditTip'); ?>" title="<?php echo $this->_t('EditTip'); ?>" />
+				<img src="<?php echo $this->db->theme_url; ?>images/qa-edit.png" alt="<?php echo $this->_t('EditTip'); ?>" title="<?php echo $this->_t('EditTip'); ?>">
 			</a>&nbsp;&nbsp;&nbsp;
 			<?php } ?>
 			<?php // Show ACL button only if user has privileges (or is admin) and if the page exists ?>
 			<?php if($this->page) if($this->is_owner() || $this->is_admin()) { ?>
 			<a href="<?php echo $this->href('permissions'); ?>">
-				<img src="<?php echo $this->db->theme_url; ?>images/qa-acl.png" alt="<?php echo $this->_t('ACLText'); ?>" title="<?php echo $this->_t('ACLText'); ?>" />
+				<img src="<?php echo $this->db->theme_url; ?>images/qa-acl.png" alt="<?php echo $this->_t('ACLText'); ?>" title="<?php echo $this->_t('ACLText'); ?>">
 			</a>
 			<?php } ?>
 			<a href="<?php echo $this->href('print'); ?>">
-				<img src="<?php echo $this->db->theme_url; ?>images/qa-print.png" alt="<?php echo $this->_t('PrintVersion'); ?>" title="<?php echo $this->_t('PrintVersion'); ?>" />
+				<img src="<?php echo $this->db->theme_url; ?>images/qa-print.png" alt="<?php echo $this->_t('PrintVersion'); ?>" title="<?php echo $this->_t('PrintVersion'); ?>">
 			</a>
 			<?php } else { ?>
 			<div class="loginbox">
 				<?php echo $this->form_open('login', ['tag' => $this->_t('LoginPage')]); ?>
-				<input type="hidden" name="action" value="login" />
-				<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag); ?>" />
+				<input type="hidden" name="action" value="login">
+				<input type="hidden" name="goback" value="<?php echo $this->slim_url($this->tag); ?>">
 				<?php echo $this->_t('LoginWelcome'); ?>
-				<input type="text" name="name" size="15" class="login" />
+				<input type="text" name="name" size="15" class="login">
 				<?php echo $this->_t('LoginPassword'); ?>
-				<input type="password" name="password" size="10" class="login" />
-				<input type="image" src="<?php echo $this->db->theme_url; ?>icon/login.png" alt="<?php echo $this->_t('LoginWelcome'); ?>" class="login" />
+				<input type="password" name="password" size="10" class="login">
+				<input type="image" src="<?php echo $this->db->theme_url; ?>icon/login.png" alt="<?php echo $this->_t('LoginWelcome'); ?>" class="login">
 				<?php echo $this->form_close(); ?>
 			</div>
 			<?php } ?>

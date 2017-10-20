@@ -46,7 +46,7 @@ if ($this->has_access('read'))
 
 		echo $this->form_open('diff_versions', ['page_method' => 'diff', 'form_method' => 'get']);
 		echo "<p>\n";
-		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '" />';
+		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '">';
 
 		$user			= $this->get_user();
 		$default_mode	= $user['diff_mode'] ?: $this->db->default_diff_mode;
@@ -57,21 +57,21 @@ if ($this->has_access('read'))
 		{
 			echo $place_holder .
 				'<input type="radio" id="' . 'diff_mode_' . $mode . '" name="diffmode" value="' . $mode . '"' .
-				($mode == $default_mode? ' checked' : '') . ' />' .
+				($mode == $default_mode? ' checked' : '') . '>' .
 				'<label for="' . 'diff_mode_' . $mode . '">' . $diff_modes[$mode] . '</label>';
 		}
 
 		echo $place_holder.
 			'<a href="' . $this->href('revisions.xml') . '"><img src="' .
 			$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
-			'" alt="XML" class="btn-feed"/></a>';
+			'" alt="XML" class="btn-feed"></a>';
 
 		if ($this->db->minor_edit)
 		{
 			// STS: ?!..
 			// filter minor edits
 			echo '<input name="minor_edit" value="' . $hide_minor_edit . '" type="hidden">' . "\n";
-			echo '<br />' . ($hide_minor_edit
+			echo '<br>' . ($hide_minor_edit
 					? '<a href="' . $this->href('revisions', '', ['minor_edit' => 0]) . '">' . $this->_t('MinorEditShow') . '</a>'
 					: '<a href="' . $this->href('revisions', '', ['minor_edit' => 1]) . '">' . $this->_t('MinorEditHide') . '</a>');
 		}
@@ -113,9 +113,9 @@ if ($this->has_access('read'))
 
 			echo '<li>';
 			echo '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
-			echo '<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 0 ? 'checked' : '') . ' />';
+			echo '<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 0 ? 'checked' : '') . '>';
 			echo $place_holder.
-						'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 1 ? 'checked' : '') . ' />';
+						'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 1 ? 'checked' : '') . '>';
 			echo $place_holder . '&nbsp;
 						<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
 			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; &mdash; (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
@@ -143,12 +143,12 @@ if ($this->has_access('read'))
 			echo "</li>\n";
 		}
 
-		echo "</ul>\n<br />\n";
+		echo "</ul>\n<br>\n";
 
 		$this->print_pagination($pagination);
 
 		echo '<a href="' . $this->href() . '" class="btn_link">' .
-				'<input type="button" value="' . $this->_t('CancelDifferencesButton') . '" />' .
+				'<input type="button" value="' . $this->_t('CancelDifferencesButton') . '">' .
 			 '</a>' . "\n";
 
 		echo $this->form_close() . "\n";

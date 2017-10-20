@@ -53,7 +53,7 @@ else
 			$add[$i] = $this->format($this->format($str, 'wacko'), 'post_wacko');
 		}
 
-		$output[] = implode('<br />', $add);
+		$output[] = implode('<br>', $add);
 	}
 
 	// search and process co-authors
@@ -155,7 +155,7 @@ else
 				$all_authors[] = $guest_authors;
 			}
 
-			$output[] = implode('<br />', $all_authors);
+			$output[] = implode('<br>', $all_authors);
 		}
 	}
 
@@ -178,10 +178,10 @@ else
 		{
 			$icons = '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $licenses[$license][1] . '" title="' . $licenses[$license][1] . '" class="license-' . $license . '">';
 			// constant license
-			$license = '<br />' . $this->_t('DistributedUnder') . '<br />' .
+			$license = '<br>' . $this->_t('DistributedUnder') . '<br>' .
 
 			// TODO: rel="license"
-			$this->link($licenses[$license][0], '', $licenses[$license][1]) . '<br />' .
+			$this->link($licenses[$license][0], '', $licenses[$license][1]) . '<br>' .
 			'<a rel="license" href="' . $licenses[$license][0] . '">' . $icons . '</a>';
 		}
 		else
@@ -196,7 +196,7 @@ else
 	// print results
 	if ($output)
 	{
-		echo implode('<br />', $output);
+		echo implode('<br>', $output);
 	}
 }
 
