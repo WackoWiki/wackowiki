@@ -182,7 +182,7 @@ if (!empty($this->db->news_cluster))
 	}
 
 	// start output
-	echo '<section class="news">';
+	echo '<section class="news">' . "\n";
 
 	if ($title == 1)
 	{
