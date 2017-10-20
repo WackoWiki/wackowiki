@@ -86,33 +86,33 @@ function bb2_httpbl_lookup(&$engine, $ip)
 				}
 				else
 				{
-					$d .= "Search engine ${ip[2]}<br/>\n";
+					$d .= "Search engine ${ip[2]}<br>\n";
 				}
 			}
 
 			if ($ip[3] & 1)
 			{
-				$d .= "Suspicious<br/>\n";
+				$d .= "Suspicious<br>\n";
 			}
 
 			if ($ip[3] & 2)
 			{
-				$d .= "Harvester<br/>\n";
+				$d .= "Harvester<br>\n";
 			}
 
 			if ($ip[3] & 4)
 			{
-				$d .= "Comment Spammer<br/>\n";
+				$d .= "Comment Spammer<br>\n";
 			}
 
 			if ($ip[3] & 7)
 			{
-				$d .= "Threat level ${ip[2]}<br/>\n";
+				$d .= "Threat level ${ip[2]}<br>\n";
 			}
 
 			if ($ip[3] > 0)
 			{
-				$d .= "Age ${ip[1]} days<br/>\n";
+				$d .= "Age ${ip[1]} days<br>\n";
 			}
 		}
 	}
@@ -190,7 +190,7 @@ function bb2_summary(&$engine)
 			{
 				echo '<tr id="request-' . '' . '" class="lined">' . "\n";
 				echo '<td class="label">' . $result['n'] . "</td>\n";
-				#echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . "</td>\n";
+				#echo "<td>" . str_replace("\n", "<br>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . "</td>\n";
 
 				if ($argument == 'status_key')
 				{
@@ -286,7 +286,7 @@ function bb2_manage(&$engine)
 
 <div class="alignleft">
 <?php if ($count['n'] < $totalcount['n']): ?>
-Displaying <strong><?php echo $count['n']; ?></strong> of <strong><?php echo $totalcount['n']; ?></strong> records filtered by:<br/>
+Displaying <strong><?php echo $count['n']; ?></strong> of <strong><?php echo $totalcount['n']; ?></strong> records filtered by:<br>
 <?php if (isset($_GET['status_key'])	&& $_GET['status_key'])		echo 'Status [<a href="?mode=badbehavior&amp;setting=bb2_manage' . '' . '">X</a>] '; ?>
 <?php if (isset($_GET['blocked'])		&& $_GET['blocked'])		echo 'Blocked [<a href="?mode=badbehavior&amp;setting=bb2_manage' . '' . '">X</a>] '; ?>
 <?php if (isset($_GET['permitted'])		&& $_GET['permitted'])		echo 'Permitted [<a href="?mode=badbehavior&amp;setting=bb2_manage' . '' . '">X</a>] '; ?>
@@ -294,7 +294,7 @@ Displaying <strong><?php echo $count['n']; ?></strong> of <strong><?php echo $to
 <?php if (isset($_GET['user_agent'])	&& $_GET['user_agent'])		echo 'User Agent [<a href="?mode=badbehavior&amp;setting=bb2_manage' . '' . '">X</a>] '; ?>
 <?php if (isset($_GET['request_method']) && $_GET['request_method']) echo 'GET/POST [<a href="?mode=badbehavior&amp;setting=bb2_manage' . '' . '">X</a>] '; ?>
 <?php else: ?>
-Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
+Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 <?php endif; ?>
 <?php if (!isset($_GET['status_key']) && !isset($_GET['blocked'])) { ?><a href="<?php echo $engine->href() . '&amp;setting=bb2_manage&amp;blocked=true'; ?>">Show Blocked</a> <?php } ?>
 <?php if (!isset($_GET['status_key']) && !isset($_GET['permitted'])) { ?><a href="<?php echo $engine->href() . '&amp;setting=bb2_manage&amp;permitted=true'; ?>">Show Permitted</a> <?php } ?>
@@ -347,25 +347,25 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 			}
 			else
 			{
-				$host .= "<br/>\n";
+				$host .= "<br>\n";
 			}
 
 			$time_tz = $engine->sql2precisetime($result['date']);
 
 			echo "<td>" .
-					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;ip=' . $result['ip'] . "\">" . $result['ip'] . "</a><br/>" .
-					"$host<br/>\n" .
-					$time_tz . "<br/><br/>" .
+					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;ip=' . $result['ip'] . "\">" . $result['ip'] . "</a><br>" .
+					"$host<br>\n" .
+					$time_tz . "<br><br>" .
 					"<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;status_key=' . $result['status_key'] . "\" title=\"" .'[' . $status_key['response'] . '] ' . $status_key['explanation']. "\">" . $status_key['log'] . "</a>\n";
 
 			if ($httpbl)
 			{
-				echo "<br/><br/><a href=\"http://www.projecthoneypot.org/ip_{$result['ip']}\">http:BL</a>:<br/>$httpbl\n";
+				echo "<br><br><a href=\"http://www.projecthoneypot.org/ip_{$result['ip']}\">http:BL</a>:<br>$httpbl\n";
 			}
 
 			echo "</td>\n";
 
-			$headers = str_replace("\n", "<br/>\n", htmlspecialchars($result['http_headers'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET));
+			$headers = str_replace("\n", "<br>\n", htmlspecialchars($result['http_headers'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET));
 
 			if (@strpos($headers, $result['user_agent']) !== FALSE)
 			{
@@ -378,7 +378,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br/>
 			}
 
 			echo "<td>" . $headers . "</td>\n";
-			echo "<td>" . str_replace("\n", "<br/>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . "</td>\n";
+			echo "<td>" . str_replace("\n", "<br>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . "</td>\n";
 			echo "</tr>\n";
 		}
 	}
