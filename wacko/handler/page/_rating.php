@@ -29,7 +29,7 @@ if ($this->db->footer_rating != 0 && ($this->db->footer_rating != 2 || $this->ge
 if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )
 {
 	// display rating section
-	echo '<section id="section-rating">';
+	echo '<section id="section-rating">' . "\n";
 
 	// display rating header
 	echo '<header id="header-rating">';

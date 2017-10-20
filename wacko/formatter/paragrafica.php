@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 //     <p id="p1249-1" class="auto">
 //     <hX id="h1249-1" class="heading">
 
-// this formatter WISELY replace <BR>s with paragraphs.
+// this formatter WISELY replace <br>s with paragraphs.
 
 // we got pure HTML on input.
 $para	= new Paragrafica($this);

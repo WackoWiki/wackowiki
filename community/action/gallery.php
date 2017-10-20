@@ -65,7 +65,7 @@ require_once 'lib/phpthumb/GD.php';
 <script src="<?php echo $this->db->base_url;?>js/jquery-3.1.1.min.js"></script>
 <!-- Add fancyBox -->
 <script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.js"></script>
-<link rel="stylesheet" media="screen" href="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.css"/>
+<link rel="stylesheet" media="screen" href="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.css">
 
 <?php
 

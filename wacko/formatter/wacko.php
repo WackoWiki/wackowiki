@@ -37,7 +37,7 @@ $text	= str_replace("\177" . "<br>\n", '', $text);
 $text	= str_replace("\177" . "", '', $text);
 
 // we're cutting the last <br>
-$text	= preg_replace('/<br \/>$/', '', $text);
+$text	= preg_replace('/<br>$/', '', $text);
 
 // close all open tables
 $opens	= preg_match_all('/<table/', $text, $matches);

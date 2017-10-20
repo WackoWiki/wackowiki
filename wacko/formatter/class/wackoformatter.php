@@ -774,8 +774,8 @@ class WackoFormatter
 			$matches[0] = str_replace(']>', '<!--escaped--></blockquote><!--escaped-->', $matches[0]);
 
 			$result = preg_replace_callback($this->LONGREGEXP, $callback, $matches[0]);
-			$result = preg_replace('/^(<br \/>)+/i', '', $result );
-			$result = preg_replace('/(<br \/>)+$/i', '', $result );
+			$result = preg_replace('/^(<br>)+/i', '', $result );
+			$result = preg_replace('/(<br>)+$/i', '', $result );
 
 			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
 			if (preg_match('/<\/ul>[\s\r\t\n]*$/i', $result))

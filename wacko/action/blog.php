@@ -193,7 +193,7 @@ if (!empty($blog_cluster))
 	}
 
 	// start output
-	echo '<section class="news">';
+	echo '<section class="news">' . "\n";
 
 	if ($title == 1)
 	{

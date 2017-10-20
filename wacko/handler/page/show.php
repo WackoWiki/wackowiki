@@ -155,7 +155,7 @@ if ($this->has_access('read'))
 				 "</header>\n";
 		}
 
-		echo '<section id="section-content">';
+		echo '<section id="section-content">' . "\n";
 
 		// display page body
 		echo $data;

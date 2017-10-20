@@ -328,8 +328,8 @@ if ($this->has_access('read'))
 		if (!empty($show_comments))
 		{
 			// display comments section
-			echo '<section id="section-comments">';
-			echo '<header id="header-comments">';
+			echo '<section id="section-comments">' . "\n";
+			echo '<header id="header-comments">' . "\n";
 			echo '<h1><a href="' . $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']) . '" title="' . $this->_t('ShowComments') . '">' . $show_comments . '</a></h1>';
 			echo '</header>' . "\n";
 			echo "</section>\n";
