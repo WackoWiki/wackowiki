@@ -111,7 +111,7 @@ hr {
 	margin: 0;
 }
 
-.fake_hr_seperator {
+.fake_hr_separator {
 	clear: both;
 	height: 1px;
 	border-top: 1px dashed #ddd;

@@ -20,6 +20,11 @@ if (!isset($config['language']) || !@file_exists('setup/lang/installer.' . $conf
 	$config['language'] = 'en';
 }
 
+$seperator =
+'	<div class="fake_hr_separator">
+		<hr />
+	</div>';
+
 global $lang;
 require_once 'setup/lang/installer.' . $config['language'] . '.php';
 
