@@ -13,25 +13,39 @@ if (!isset($max))		$max = null;
 if (!isset($bychange))	$bychange = '';
 $cur_char		= '';
 
-$by = function ($by) use ($profile)
+$profile = ($profile? ['profile' => $profile] : []);
+$mod_selector	= 's';
+
+$by = function ($by) use ($profile, $mod_selector)
 {
 	// TODO: mode is optional $_GET['mode']
-	$profile = ($profile? ['profile' => $profile] : []);
 
-	return $profile + ['mode' => 'mypages', 'by' . $by => 1, '#' => 'list'];
+	return $profile + ['mode' => 'mypages', $mod_selector => $by, '#' => 'list'];
 };
+
+// navigation
+
+$tabs	= [
+			''			=> 'OrderABC',
+			'bydate'	=> 'OrderDate',
+			'bychange'	=> 'OrderChange',
+		];
+$mode	= @$_GET[$mod_selector];
+
+if (!array_key_exists($mode, $tabs))
+{
+	$mode = '';
+}
 
 if (($user_id = $this->get_user_id()))
 {
+	// print navigation
+	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list'], $mod_selector);
+
 	$prefix		= $this->db->table_prefix;
 
-	if (@$_GET['bydate'] || $bydate)
+	if ($mode == 'bydate' || $bydate)
 	{
-		echo '<strong>' . $this->_t('ListOwnedPages2') . '</strong>';
-		echo '<br>[<a href="' . $this->href('', '', $by('')) . '">' .
-			$this->_t('OrderABC') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">' .
-			$this->_t('OrderChange') . "</a>] <br><br>\n";
-
 		$count	= $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
@@ -81,7 +95,7 @@ if (($user_id = $this->get_user_id()))
 			echo $this->_t('NoPagesFound');
 		}
 	}
-	else if ((isset($_GET['bychange']) && $_GET['bychange'] == 1) || $bychange == 1)
+	else if ($mode == 'bychange' || $bychange == 1)
 	{
 		$count	= $this->db->load_single(
 			"SELECT COUNT( DISTINCT p.tag ) AS n " .
@@ -94,12 +108,6 @@ if (($user_id = $this->get_user_id()))
 				"AND r.comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
-
-		echo '<strong>' . $this->_t('ListOwnedPages3') . '</strong>';
-		echo '<br>[<a href="' .
-			$this->href('', '', $by('')) . '">' . $this->_t('OrderABC') .
-			'</a>] [<a href="' . $this->href('', '', $by('date')) . '">' .
-			$this->_t('OrderDate') . "</a>]<br><br>\n";
 
 		if ($pages = $this->db->load_all(
 			"SELECT p.tag, p.title, p.modified " .
@@ -157,11 +165,6 @@ if (($user_id = $this->get_user_id()))
 				"AND comment_on_id = '0'", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
-
-		echo '<strong>' . $this->_t('ListOwnedPages') . '</strong>';
-		echo '<br>[<a href="' . $this->href('', '', $by('date')) . '">' .
-			$this->_t('OrderDate') . '</a>] [<a href="' . $this->href('', '', $by('change')) . '">' .
-			$this->_t('OrderChange') . "</a>] <br><br>\n";
 
 		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified " .

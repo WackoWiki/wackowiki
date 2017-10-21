@@ -27,37 +27,35 @@ $this->ensure_page(true); // TODO: upload for forums?
 					: '') .
 			"</ul>\n";
 
-		if (isset($_GET['files']) && $_GET['files'] == 'global')
-		{
-			echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsGlobal') . '</h3>';
-			echo '<ul class="menu">' .
-					'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
-					'<li class="active">' . $this->_t('AttachmentsGlobal') . '</li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files' => 'all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
-				"</ul><br><br>\n";
+		// navigation
+		$mod_selector	= 'files';
+		$tabs	= [
+					''			=> 'AttachmentsToPage',
+					'global'	=> 'AttachmentsGlobal',
+					'all'		=> 'AttachmentsAll',
+				];
+		$mode	= @$_GET[$mod_selector];
 
+		if (!array_key_exists($mode, $tabs))
+		{
+			$mode = '';
+		}
+
+		// print tabs
+		echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t($tabs[$mode]) . '</h3>';
+		echo $this->tab_menu($tabs, $mode, 'attachments', [], $mod_selector);
+		echo "<br><br>\n";
+
+		if ($mode == 'global')
+		{
 			echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'global']]) . '<br>';
 		}
-		else if (isset($_GET['files']) && $_GET['files'] == 'all')
+		else if ($mode == 'all')
 		{
-			echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsAll') . '</h3>';
-			echo '<ul class="menu">' .
-					'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('AttachmentsToPage') . '</a></li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files' => 'global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
-					'<li class="active">' . $this->_t('AttachmentsAll') . '</li>' .
-				"</ul><br><br>\n";
-
 			echo $this->action('files', ['all' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'all']]) . '<br>';
 		}
 		else
 		{
-			echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t('AttachmentsToPage') . '</h3>';
-			echo '<ul class="menu">' .
-					'<li class="active">' . $this->_t('AttachmentsToPage') . '</li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files' => 'global']) . '">' . $this->_t('AttachmentsGlobal') . '</a></li>' .
-					'<li><a href="' . $this->href('attachments', '', ['files' => 'all']) . '">' . $this->_t('AttachmentsAll') . '</a></li>' .
-				"</ul><br><br>\n";
-
 			echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments']) . '<br>';
 		}
 

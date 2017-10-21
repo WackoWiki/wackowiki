@@ -12,24 +12,36 @@ if (!isset($bydate))	$bydate = '';
 if (!isset($profile))	$profile = ''; // user action
 if (!isset($max))		$max = null;
 
-$by = function ($by) use ($profile)
+$profile = ($profile? ['profile' => $profile] : []);
+$mod_selector	= 's';
+
+$by = function ($by) use ($profile, $mod_selector)
 {
 	// TODO: mode is optional $_GET['mode']
-	$profile = ($profile? ['profile' => $profile] : []);
 
-	return $profile + ['mode' => 'mychanges', 'by' . $by => 1, '#' => 'list'];
+	return $profile + ['mode' => 'mychanges', $mod_selector => $by, '#' => 'list'];
 };
 
 if (($user_id = $this->get_user_id()))
 {
+	$tabs	= [
+				''			=> 'OrderChange',
+				'byname'	=> 'OrderABC',
+			];
+	$mode	= @$_GET[$mod_selector];
+
+	if (!array_key_exists($mode, $tabs))
+	{
+		$mode = '';
+	}
+
+	// print navigation
+	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list'], $mod_selector);
+
 	$prefix		= $this->db->table_prefix;
 
-	if (@$_GET['byname'])
+	if ($mode == 'byname')
 	{
-		echo $this->_t('MyChangesTitle2') .
-			' [<a href="' . $this->href('', '', $by('date')) . '">' .
-			$this->_t('OrderChange') . "</a>].</strong><br><br>\n";
-
 		$count	= $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
@@ -87,11 +99,6 @@ if (($user_id = $this->get_user_id()))
 	}
 	else
 	{
-		echo '<ul class="menu">' . "\n" .
-				'<li class="active">' . $this->_t('MyChangesTitle1') . "</li>\n" .
-				'<li>' . " [<a href=\"" . $this->href('', '', $by('name')) . "\">" . $this->_t('OrderABC') . "</a>]" . "</li>\n" .
-			"</ul>\n";
-
 		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n " .
 			"FROM {$prefix}page " .
