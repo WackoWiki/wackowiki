@@ -269,9 +269,9 @@ if ($can_view)
 				$operation_mode = 0;
 			}
 
-			$href_info		= $this->href('filemeta', $page, ['show', 'file_id' => $file_id]);
-			$href_edit		= $this->href('filemeta', $page, ['edit', 'file_id' => $file_id]);
-			$href_remove	= $this->href('filemeta', $page, ['remove', 'file_id' => $file_id]);
+			$href_info		= $this->href('filemeta', $page, ['m' => 'show', 'file_id' => $file_id]);
+			$href_edit		= $this->href('filemeta', $page, ['m' => 'edit', 'file_id' => $file_id]);
+			$href_remove	= $this->href('filemeta', $page, ['m' => 'remove', 'file_id' => $file_id]);
 
 			echo '<tr>' . "\n" .
 					'<td class="file-">' . $link . '</td>' . "\n";

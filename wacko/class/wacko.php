@@ -7721,6 +7721,54 @@ class Wacko
 				"message	= " . $this->db->q($message) . " ");
 	}
 
+	/**
+	 * creates tab menu
+	 *
+	 * @param array $tabs
+	 * @param string $active
+	 * @param string $handler
+	 * @param array $params
+	 * @param string $mod_selector
+	 * @return string|boolean
+	 */
+	function tab_menu($tabs, $active, $handler = '', $params = [], $mod_selector = 'm')
+	{
+		if ($tabs)
+		{
+			$out  = '';
+			$out .= '<ul class="menu">' . "\n";
+
+			foreach ($tabs as $i => $text)
+			{
+				if ($active != $i)
+				{
+					$out .= '<li><a href="' . $this->href($handler, '', $params + ($i? [$mod_selector => $i] : [])) . '">';
+				}
+				else
+				{
+					$out .= '<li class="active">';
+				}
+
+				$out .= $this->_t($text);
+
+				if ($active != $i)
+				{
+					$out .= '</a>';
+				}
+
+				$out .= "</li>\n";
+			}
+
+			$out .= "</ul>\n";
+
+			return $out;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function get_categories($object_id, $type_id = null, $method = '', $tag = '', $params = [], $cache = true)
 	{
 		$out			= '';

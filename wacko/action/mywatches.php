@@ -7,13 +7,26 @@ if (!defined('IN_WACKO'))
 
 if ($user_id = $this->get_user_id())
 {
-	if (!isset($profile))	$profile = ''; // user action
-	if (!isset($max))		$max = null;
-	if (!isset($current_char)) $current_char = '';
+	if (!isset($profile))		$profile = ''; // user action
+	if (!isset($max))			$max = null;
+	if (!isset($current_char))	$current_char = '';
 
-	$profile = ($profile? ['profile' => $profile] : []);
+	$profile		= ($profile? ['profile' => $profile] : []);
+	$mod_selector	= 's';
 
-	$p = isset($_GET['p']) ? ['p' => (int) $_GET['p']] : [];
+	$p				= isset($_GET['p']) ? ['p' => (int) $_GET['p']] : [];
+
+	// navigation
+	$tabs	= [
+				''			=> 'ViewWatchedPages',
+				'unwatched'	=> 'ViewUnwatchedPages',
+			];
+	$mode	= @$_GET[$mod_selector];
+
+	if (!array_key_exists($mode, $tabs))
+	{
+		$mode = '';
+	}
 
 	if (@$_GET['unwatch'])
 	{
@@ -24,9 +37,12 @@ if ($user_id = $this->get_user_id())
 		$this->set_watch($user_id, (int) $_GET['setwatch']);
 	}
 
+	// print tabs
+	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list'], $mod_selector);
+
 	$prefix		= $this->db->table_prefix;
 
-	if (@$_GET['unwatched'])
+	if ($mode == 'unwatched')
 	{
 		$count	= $this->db->load_single(
 			"SELECT COUNT(p.page_id) AS n " .
@@ -38,11 +54,9 @@ if ($user_id = $this->get_user_id())
 				"AND p.deleted <> '1' " .
 				"AND w.user_id IS NULL", true);
 
-		$pagination = $this->pagination($count['n'], $max, 'p', $profile + ['mode' => 'mywatches', 'unwatched' => 1, '#' => 'list']);
+		$pagination = $this->pagination($count['n'], $max, 'p', $profile + ['mode' => 'mywatches', $mod_selector => 'unwatched', '#' => 'list']);
 
-		echo $this->_t('UnwatchedPages') . ' (<a href="' .
-			$this->href('', '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list']) . '">' .
-			$this->_t('ViewWatchedPages') . '</a>) . <br><br>';
+		echo $this->_t('UnwatchedPages') . '<br><br>';
 
 		if ($pages = $this->db->load_all(
 			"SELECT p.tag AS pagetag, p.page_id AS page_id " .
@@ -99,9 +113,7 @@ if ($user_id = $this->get_user_id())
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $profile + ['mode' => 'mywatches', '#' => 'list']);
 
-		echo $this->_t('WatchedPages') . ' (<a href="' .
-			$this->href('', '', $profile + ['mode' => 'mywatches', 'unwatched' => 1, '#' => 'list']) . '">' .
-			$this->_t('ViewUnwatchedPages') . '</a>).<br><br>';
+		echo $this->_t('WatchedPages') . '<br><br>';
 
 		if ($pages = $this->db->load_all(
 			"SELECT w.page_id, p.tag AS tag " .

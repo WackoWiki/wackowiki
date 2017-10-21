@@ -56,13 +56,15 @@ if (
 // set up for main show
 $url_maxlen = 80;
 $spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;';
-$modes		=  ['ViewReferrersPage'		=> '',
-				'ViewReferrersPerPage'	=> 'perpage',
-				'ViewReferrersByTime'	=> 'bytime',
-				'ViewReferrersGlobal'	=> 'global'];
+$modes		= [
+				''			=> 'ViewReferrersPage',
+				'perpage'	=> 'ViewReferrersPerPage',
+				'bytime'	=> 'ViewReferrersByTime',
+				'global'	=> 'ViewReferrersGlobal'
+			];
 $mode		= @$_GET['o'];
 
-if (!in_array($mode, $modes))
+if (!array_key_exists($mode, $modes))
 {
 	$mode = '';
 }
@@ -127,7 +129,7 @@ else
 // TODO: rewrite with template
 echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ';
 
-foreach ($modes as $text => $i)
+foreach ($modes as $i => $text)
 {
 	if ($mode == $i)
 	{
@@ -138,9 +140,10 @@ foreach ($modes as $text => $i)
 echo "</h3>\n";
 
 // print navigation
+// TODO: use $this->tab_menu() fuction
 echo '<ul class="menu">';
 
-foreach ($modes as $text => $i)
+foreach ($modes as $i => $text)
 {
 	if ($mode != $i)
 	{
