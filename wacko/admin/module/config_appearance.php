@@ -233,7 +233,8 @@ function admin_config_appearance(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="logo"><strong>Site Logo:</strong><br>
+				<td class="label">
+					<label for="logo"><strong>Site Logo:</strong><br>
 					<small>Your logo will appear at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.</small></label>
 				</td>
 				<td>
@@ -270,8 +271,10 @@ function admin_config_appearance(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="logo_display"><strong>Logo display mode:</strong><br>
-					<small>Defines the apearence of the Logo. Default is off.</small></label></td>
+				<td class="label">
+					<label for="logo_display"><strong>Logo display mode:</strong><br>
+					<small>Defines the apearence of the Logo. Default is off.</small></label>
+				</td>
 				<td>
 					<select id="logo_display" name="logo_display" style="width: 200px;">
 						<option value="0" <?php echo ($engine->db->logo_display  == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoOff');?></option>
@@ -287,7 +290,8 @@ function admin_config_appearance(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="logo"><strong>Site Favicon:</strong><br>
+				<td class="label">
+					<label for="logo"><strong>Site Favicon:</strong><br>
 					<small>Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers.</small></label>
 				</td>
 				<td>
@@ -306,8 +310,10 @@ function admin_config_appearance(&$engine, &$module)
 				</th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="theme"><strong>Theme:</strong><br>
-					<small>Template design the site uses by default.</small></label></td>
+				<td class="label">
+					<label for="theme"><strong>Theme:</strong><br>
+					<small>Template design the site uses by default.</small></label>
+				</td>
 				<td>
 					<select id="theme" name="theme">
 					<?php
@@ -325,8 +331,10 @@ function admin_config_appearance(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for=""><strong>Allowed Themes:</strong><br>
-					<small>Select the allowed themes, which the user can choose, otherwise all available themes are allowed.</small></label></td>
+				<td class="label">
+					<label for=""><strong>Allowed Themes:</strong><br>
+					<small>Select the allowed themes, which the user can choose, otherwise all available themes are allowed.</small></label>
+				</td>
 				<td>
 				<?php
 					if (isset($engine->db->allow_themes))
@@ -362,11 +370,15 @@ function admin_config_appearance(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Themes per page:</strong><br>
-					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
+				<td class="label">
+					<strong>Themes per page:</strong><br>
+					<small>Allow themes per page, which the page owner can choose via page properties.</small>
+				</td>
 				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?>><label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked' : '');?>><label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?>>
+					<label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked' : '');?>>
+					<label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 		</table>
