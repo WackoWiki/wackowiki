@@ -1321,8 +1321,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		echo '<table>' .
 				'<tr class="lined">' .
 					'<td colspan="2">' .
-						'<input type="submit" name="topic_delete" id="submit" value="' . $this->_t('ModerateDeleteTopic') . '"> '.
-						'<input type="submit" name="topic_move" id="submit" value="' . $this->_t('ModerateMove') . '"> '.
+						'<input type="submit" name="topic_delete" id="delete-submit" value="' . $this->_t('ModerateDeleteTopic') . '"> '.
+						'<input type="submit" name="topic_move" id="move-submit" value="' . $this->_t('ModerateMove') . '"> '.
 						($forum_cluster === true
 							? '<input type="submit" name="topic_rename" id="submit" value="' . $this->_t('ModerateRename') . '"> '
 							: ''

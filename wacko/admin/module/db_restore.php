@@ -434,8 +434,8 @@ function admin_db_restore(&$engine, &$module)
 <?php
 				echo $engine->form_open('restore');
 
-				$control_buttons =	'<input type="submit" name="restore" id="submit" value="restore">' .
-									'<input type="submit" name="remove" id="submit" value="remove">';
+				$control_buttons =	'<input type="submit" name="restore" id="restore-submit" value="restore">' .
+									'<input type="submit" name="remove" id="remove-submit" value="remove">';
 
 			#$dir = UPLOAD_BACKUP_DIR . '/';
 

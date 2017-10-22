@@ -460,7 +460,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>' .
 				'<tr>
 					<td>
-						<label for="user_lang">' . $engine->_t('ChooseTheme') . '</label>
+						<label for="theme">' . $engine->_t('ChooseTheme') . '</label>
 					</td>
 					<td>
 						<select id="theme" name="theme">' .
@@ -818,10 +818,10 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons =	'<br><input type="submit" id="button" name="create" value="' . $engine->_t('GroupsAddButton') . '"> '.
-							'<input type="submit" id="button" name="edit" value="' . $engine->_t('UserEditButton') . '"> '.
-							#'<input type="submit" id="button" name="approve" value="' . $engine->_t('Approve') . '"> '.
-							'<input type="submit" id="button" name="remove" value="' . $engine->_t('GroupsRemoveButton') . '"> '.
+		$control_buttons =	'<br><input type="submit" id="create-button" name="create" value="' . $engine->_t('GroupsAddButton') . '"> '.
+							'<input type="submit" id="edit-button" name="edit" value="' . $engine->_t('UserEditButton') . '"> '.
+							#'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> '.
+							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('GroupsRemoveButton') . '"> '.
 							'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 							'<br>' . "\n" .
 								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> '.
