@@ -319,8 +319,8 @@ function admin_user_approve(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		$control_buttons =	'<br>' .
-							'<input type="submit" id="button" name="approve" value="' . $engine->_t('Approve') . '"> '.
-							'<input type="submit" id="button" name="remove" value="' . $engine->_t('Deny') . '"> '.
+							'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> '.
+							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> '.
 							'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 							'<br>' . "\n" .
 								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> '.
