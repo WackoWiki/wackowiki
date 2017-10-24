@@ -26,15 +26,15 @@ $page_id = '';
 
 if (!isset($nomark))	$nomark		= '';
 if (!isset($order))		$order		= '';
-if (!isset($global))	$global		= '';
-if (!isset($all))		$all		= '';
-if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
+if (!isset($global))	$global		= '';	// global attachments
+if (!isset($all))		$all		= '';	// all attachments
+if (!isset($tag))		$tag		= '';	// FIXME: $tag == $page
 if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
 if (!isset($ppage))		$ppage		= '';
 if (!isset($legend))	$legend		= '';
-if (!isset($method))	$method		= ''; // for use in page handler
-if (!isset($params))	$params		= null; //for $_GET parameters to be passed with the page link
+if (!isset($method))	$method		= '';	// for use in page handler
+if (!isset($params))	$params		= null;	//for $_GET parameters to be passed with the page link
 if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
 if (!isset($picture))	$picture	= null;

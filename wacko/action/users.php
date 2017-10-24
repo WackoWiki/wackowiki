@@ -407,7 +407,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 								$tpl->u_prof_up_u_u2_li_t		= $upload['uploaded_dt'];
 								# $tpl->u_prof_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
-								$tpl->u_prof_up_u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+								$tpl->u_prof_up_u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
 								$tpl->u_prof_up_u_u2_li_onpage	= $on_page;
 								$tpl->u_prof_up_u_u2_li_descr	= $file_description;
 							}
