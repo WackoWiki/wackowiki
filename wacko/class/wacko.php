@@ -1006,10 +1006,6 @@ class Wacko
 		{
 			$meta_keywords = $this->page['keywords'];
 		}
-		else if ($this->db->meta_keywords)
-		{
-			$meta_keywords = $this->db->meta_keywords;
-		}
 
 		// add assigned categories
 		if (isset($this->categories[OBJECT_PAGE]))

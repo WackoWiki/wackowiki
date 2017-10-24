@@ -35,11 +35,11 @@ function admin_config_notifications(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['enable_email_notification']	= (int) $_POST['enable_email_notification'];
-		$config['notify_minor_edit']			= (int) $_POST['notify_minor_edit'];
+		$config['notify_minor_edit']			= (int) ($_POST['notify_minor_edit'] ?? 0);
 		$config['notify_page']					= (int) $_POST['notify_page'];
 		$config['notify_comment']				= (int) $_POST['notify_comment'];
 		$config['notify_upload']				= (int) $_POST['notify_upload'];
-		$config['notify_new_user_account']		= (int) $_POST['notify_new_user_account'];
+		$config['notify_new_user_account']		= (int) ($_POST['notify_new_user_account'] ?? 0);
 
 		$engine->config->_set($config);
 
