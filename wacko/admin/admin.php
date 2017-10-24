@@ -284,9 +284,9 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
 						'&nbsp;&nbsp;' .
 						$engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')) .
-						'&nbsp;&nbsp' .
+						'&nbsp;&nbsp;' .
 						($db->is_locked() ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
-						'&nbsp;&nbsp' .
+						'&nbsp;&nbsp;' .
 						$engine->_t('ApVersion') . ' ' . $engine->db->wacko_version;
 					?>
 				</span>

@@ -235,7 +235,7 @@ function admin_config_appearance(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="logo"><strong>Site Logo:</strong><br>
-					<small>Your logo will appear at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.</small></label>
+					<small>Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.</small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
@@ -292,7 +292,7 @@ function admin_config_appearance(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="logo"><strong>Site Favicon:</strong><br>
-					<small>Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers.</small></label>
+					<small>Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.</small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)

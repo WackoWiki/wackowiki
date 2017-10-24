@@ -1033,10 +1033,6 @@ class Wacko
 		{
 			$meta_description = $this->page['description'];
 		}
-		else if ($this->db->meta_description)
-		{
-			$meta_description = $this->db->meta_description;
-		}
 
 		return $meta_description;
 	}
