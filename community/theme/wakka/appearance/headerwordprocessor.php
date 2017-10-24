@@ -9,8 +9,6 @@ header('Content-Type: text/html; charset=' . $this->get_charset());
 <?php // do not index alternative print pages
 echo "<meta name=\"robots\" content=\"noindex, nofollow\">\n";?>
 <meta charset=<?php echo $this->get_charset(); ?>">
-<meta name="keywords" content="<?php echo $this->db->meta_keywords ?>">
-<meta name="description" content="<?php echo $this->db->meta_description ?>">
 <link rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/wordprocessor.css">
 </head>
 
