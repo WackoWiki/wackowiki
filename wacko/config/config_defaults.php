@@ -200,9 +200,6 @@ $wacko_config_defaults = [
 	'news_cluster'					=> '',
 	'news_levels'					=> '',
 
-	'meta_description'				=> '',
-	'meta_keywords'					=> '',
-
 	'noindex'						=> 0,
 
 	'xml_sitemap'					=> 0,
