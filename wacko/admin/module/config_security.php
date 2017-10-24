@@ -302,6 +302,39 @@ function admin_config_security(&$engine, &$module)
 				</td>
 			</tr>
 			<tr>
+				<?php
+				if ($engine->db->csp)
+				{
+					switch ($engine->db->csp)
+					{
+						// default
+						case 1:
+							$file_name	= 'csp_defaults.conf';
+							break;
+
+						// custom
+						case 2:
+							$file_name	= 'csp_custom.conf';
+							break;
+					}
+
+					$file_path	= Ut::join_path(CONFIG_DIR, $file_name);
+					$csp_header	= file_get_contents($file_path);
+
+					?>
+				<th colspan="2">
+					CSP header <?php echo $file_name; ?>
+				</th>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<textarea style="width:100%; minheight:200px;" id="csp_header" name="csp_header"><?php echo htmlspecialchars($csp_header, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
+				</td>
+			</tr>
+			<?php
+				} // close CSP file display
+			?>
+			<tr>
 				<th colspan="2">
 					<br>
 					Persistence of user passwords
