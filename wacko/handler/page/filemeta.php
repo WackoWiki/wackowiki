@@ -90,7 +90,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 	if (!array_key_exists($mode, $tabs))
 	{
-		$mode = '';
+		$mode = 'show';
 	}
 
 	// print tabs
@@ -467,7 +467,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 			$this->log(4, 'Updated page categories [[/' . $this->tag . ' ' . $this->page['title'] . ']]');
 			$this->set_message($this->_t('CategoriesUpdated'), 'success');
-			$this->http->redirect($this->href('filemeta', '', ['label', 'file_id' => (int) $file['file_id']]));
+			$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
 		}
 		else if (isset($_POST['edit']))
 		{
@@ -507,7 +507,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 					// log event
 					$this->log(4, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
 					$this->db->invalidate_sql_cache();
-					$this->http->redirect($this->href('filemeta', '', ['show', 'file_id' => (int) $file['file_id']]));
+					$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
 				}
 				else
 				{

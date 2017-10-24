@@ -3541,7 +3541,7 @@ class Wacko
 
 							if (!$text)
 							{
-								$url	= $this->href('filemeta', trim($page_tag, '/'), ['show', 'file_id' => $file_data['file_id']]);
+								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 								$text	= '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
 										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
 								$tpl	= 'localfile';
@@ -3565,7 +3565,7 @@ class Wacko
 							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '">';
 							if (!$text)
 							{
-								$url	= $this->href('filemeta', trim($page_tag, '/'), ['show', 'file_id' => $file_data['file_id']]);
+								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 								$text	= '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" '.
 										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
 								$tpl	= 'localimage';
