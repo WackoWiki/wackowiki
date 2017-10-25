@@ -57,32 +57,33 @@ function admin_config_basic(&$engine, &$module)
 			$config['diff_modes'] = '0,1,2,3,4,5,6';
 		}
 
-		$config['footer_comments']			= (int) $_POST['footer_comments'];
-		$config['footer_files']				= (int) $_POST['footer_files'];
-		$config['footer_rating']			= (int) $_POST['footer_rating'];
-		$config['footer_tags']				= (int) $_POST['footer_tags'];
-		$config['hide_revisions']			= (int) $_POST['hide_revisions'];
-		$config['hide_toc']					= (int) $_POST['hide_toc'];
-		$config['hide_index']				= (int) $_POST['hide_index'];
-		$config['tree_level']				= (int) $_POST['tree_level'];
-		$config['menu_items']				= (int) $_POST['menu_items'];
-		$config['edit_summary']				= (int) $_POST['edit_summary'];
-		$config['minor_edit']				= (int) $_POST['minor_edit'];
-		$config['review']					= (int) $_POST['review'];
-		$config['publish_anonymously']		= (int) $_POST['publish_anonymously'];
-		$config['disable_autosubscribe']	= (int) $_POST['disable_autosubscribe'];
-		$config['default_rename_redirect']	= (int) ($_POST['default_rename_redirect'] ?? 0);
-		$config['store_deleted_pages']		= (int) ($_POST['store_deleted_pages'] ?? 0);
-		$config['keep_deleted_time']		= (int) $_POST['keep_deleted_time'];
-		$config['pages_purge_time']			= (int) $_POST['pages_purge_time'];
-		$config['referrers_purge_time']		= (int) $_POST['referrers_purge_time'];
-		$config['noindex']					= (int) ($_POST['noindex'] ?? 0);
-		$config['xml_sitemap']				= (int) ($_POST['xml_sitemap'] ?? 0);
-		$config['xml_sitemap_time']			= (int) $_POST['xml_sitemap_time'];
-		$config['enable_feeds']				= (int) ($_POST['enable_feeds'] ?? 0);
-		$config['enable_referrers']			= (int) $_POST['enable_referrers'];
-		$config['enable_comments']			= (int) $_POST['enable_comments'];
-		$config['sorting_comments']			= (int) $_POST['sorting_comments'];
+		$config['footer_comments']				= (int) $_POST['footer_comments'];
+		$config['footer_files']					= (int) $_POST['footer_files'];
+		$config['footer_rating']				= (int) $_POST['footer_rating'];
+		$config['footer_tags']					= (int) $_POST['footer_tags'];
+		$config['hide_revisions']				= (int) $_POST['hide_revisions'];
+		$config['hide_toc']						= (int) $_POST['hide_toc'];
+		$config['hide_index']					= (int) $_POST['hide_index'];
+		$config['tree_level']					= (int) $_POST['tree_level'];
+		$config['menu_items']					= (int) $_POST['menu_items'];
+		$config['edit_summary']					= (int) $_POST['edit_summary'];
+		$config['minor_edit']					= (int) $_POST['minor_edit'];
+		$config['review']						= (int) $_POST['review'];
+		$config['publish_anonymously']			= (int) $_POST['publish_anonymously'];
+		$config['disable_autosubscribe']		= (int) $_POST['disable_autosubscribe'];
+		$config['default_rename_redirect']		= (int) ($_POST['default_rename_redirect'] ?? 0);
+		$config['store_deleted_pages']			= (int) ($_POST['store_deleted_pages'] ?? 0);
+		$config['keep_deleted_time']			= (int) $_POST['keep_deleted_time'];
+		$config['pages_purge_time']				= (int) $_POST['pages_purge_time'];
+		$config['referrers_purge_time']			= (int) $_POST['referrers_purge_time'];
+		$config['noindex']						= (int) ($_POST['noindex'] ?? 0);
+		$config['xml_sitemap']					= (int) ($_POST['xml_sitemap'] ?? 0);
+		$config['xml_sitemap_time']				= (int) $_POST['xml_sitemap_time'];
+		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
+		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
+		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
+		$config['enable_comments']				= (int) $_POST['enable_comments'];
+		$config['sorting_comments']				= (int) $_POST['sorting_comments'];
 
 		$engine->config->_set($config);
 
@@ -466,7 +467,6 @@ function admin_config_basic(&$engine, &$module)
 						$diff_mode_list= [];
 					}
 
-
 					$n = 1;
 
 					echo "<table>\n\t<tr>\n";
@@ -630,6 +630,20 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo (int) $engine->db->referrers_purge_time;?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<strong>Enable attachments handler:</strong><br>
+					<small>Allows to show the attachments handler.</small>
+				</td>
+				<td>
+					<input type="radio" id="attachments_handler_on" name="attachments_handler" value="1"<?php echo ($engine->db->attachments_handler == 1 ? ' checked' : '');?>><label for="attachments_handler_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="attachments_handler_guest" name="attachments_handler" value="2"<?php echo ($engine->db->attachments_handler == 2 ? ' checked' : '');?>><label for="attachments_handler_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="attachments_handler_off" name="attachments_handler" value="0"<?php echo ($engine->db->attachments_handler == 0 ? ' checked' : '');?>><label for="attachments_handler_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">

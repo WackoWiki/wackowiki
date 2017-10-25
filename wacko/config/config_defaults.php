@@ -269,6 +269,7 @@ $wacko_config_defaults = [
 	'log_purge_time'				=> 0,
 
 	'enable_referrers'				=> 0,
+	'attachments_handler'			=> 2,
 	'referrers_purge_time'			=> 1,
 	'pages_purge_time'				=> 0,
 	'keep_deleted_time'				=> 0,
