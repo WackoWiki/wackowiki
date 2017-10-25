@@ -18,7 +18,10 @@ $this->ensure_page(true); // TODO: upload for forums?
 #{
 
 	// show attachments for current page
-	if ($this->has_access('read'))
+	if ($this->has_access('read')
+			&& ((	$this->db->attachments_handler == 2 && $this->get_user())
+				||	$this->db->attachments_handler == 1)
+	)
 	{
 		echo '<ul class="menu">' .
 				#'<li class="active">' . $this->_t('Attachments') . '</li>' .
