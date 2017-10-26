@@ -3209,7 +3209,7 @@ class Wacko
 	* @param boolean $safe If false, then sanitize $text, else no.
 	* @param string $link_lang
 	* @param string $anchor_link Optional HTTP anchor-fragment
-	* @param boolean $meta_direct Redirects local files to local filemeta handler if TRUE
+	* @param boolean $meta_direct Links attached files to filemeta handler if TRUE
 	*
 	* @return string full Href link
 	*/
@@ -3547,7 +3547,8 @@ class Wacko
 								$tpl	= 'localfile';
 								$icon	= '';
 
-								if (! $meta_direct)
+								// disables linking also for print handler, first and foremost to prevent those links showing up in numerating_links
+								if (! $meta_direct || (isset($this->method) && $this->method == 'print'))
 								{
 									return $text;
 								}
@@ -3571,7 +3572,8 @@ class Wacko
 								$tpl	= 'localimage';
 								$icon	= '';
 
-								if (! $meta_direct)
+								// disables linking also for print handler, first and foremost to prevent those links showing up in numerating_links
+								if (! $meta_direct || (isset($this->method) && $this->method == 'print'))
 								{
 									return $text;
 								}

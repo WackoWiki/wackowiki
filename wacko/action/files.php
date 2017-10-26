@@ -248,7 +248,7 @@ if ($can_view)
 				#$link		= '<a href="' . $url . '">' . $link . '</a>';
 			}
 
-			if (!in_array($file_ext, ['gif', 'jpg', 'png', 'svg']))
+			if (!in_array($file_ext, ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp']))
 			{
 				$hits	= $file['hits'] . ' ' . $this->_t('SettingsHits');
 			}
