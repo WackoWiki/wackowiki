@@ -65,7 +65,7 @@ a {
 }
 
 a img {
-	display: none;
+	/* display: none; */
 }
 
 /* Hide all buttons */

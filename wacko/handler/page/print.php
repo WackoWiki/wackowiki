@@ -9,7 +9,7 @@ $this->ensure_page();
 
 if (!$this->has_access('read'))
 {
-	$this->set_message($this->_t('ReadAccessDenied'), 'error');
+	// redirect to show handler
 	$this->show_must_go_on();
 }
 
@@ -32,8 +32,8 @@ if ((($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate
 $data = $this->format($this->page['body'], 'wacko');
 
 // display page
-$data = $this->format($data, 'post_wacko', ['bad' => 'good']);
-$tpl->body = $this->numerate_toc($data); //  numerate toc if needed
+$data		= $this->format($data, 'post_wacko', ['bad' => 'good']);
+$tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
 
 // display comments
 if ((@$this->sess->show_comments[$this->page['page_id']] || $this->forum))
