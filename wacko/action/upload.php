@@ -59,7 +59,7 @@ if ($this->can_upload(true) === true)
 	// https://www.w3.org/TR/html5/forms.html#attr-input-accept
 	if ($this->db->upload_images_only)
 	{
-		$accecpt = 'accept=".gif,.jpg,.png,.svg,image/gif,image/jpeg,image/png,image/svg+xml"';
+		$accecpt = 'accept=".gif,.jpg,.png,.svg,.webp,image/gif,image/jpeg,image/png,image/svg+xml,image/webp"';
 	}
 ?>
 <table >
