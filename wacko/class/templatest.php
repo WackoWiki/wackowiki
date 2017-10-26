@@ -133,7 +133,7 @@ class Templatest
 				{
 					$text = Ut::serialize($store);
 					file_put_contents($cachefile, $text);
-					chmod($cachefile, 0640);
+					chmod($cachefile, SAFE_CHMOD);
 				}
 
 				// cache to factory
