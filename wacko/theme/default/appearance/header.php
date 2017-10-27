@@ -208,9 +208,9 @@ else
 	}
 
 	// remove tab
-	if (($this->is_admin()
+	if ($this->is_admin()
 		|| (!$this->db->remove_onlyadmins
-			&& ($this->forum ? $this->is_owner() && (int) $this->page['comments'] == 0 : $this->is_owner()))))
+			&& ($this->forum ? $this->is_owner() && (int) $this->page['comments'] == 0 : $this->is_owner())))
 	{
 		$echo_tab('remove', 'DeleteTip', 'DeleteText', 2, '', '');
 	}
@@ -271,7 +271,9 @@ else
 	}
 
 	// attachments tab
-	if (!$this->forum && $readable)
+	if (!$this->forum && $readable
+		&& ((	$this->db->attachments_handler == 2 && $logged_in)
+			||	$this->db->attachments_handler == 1))
 	{
 		$echo_tab('attachments', 'FilesTip', 'FilesText', 2, '', 'f');
 	}

@@ -771,6 +771,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Manused',
+	'Attachment'				=> 'Manus',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -811,6 +812,7 @@ $wacko_translation = [
 	'Files1'					=> 'Siin lehel on üks fail.',
 	'FilesN'					=> 'Siin lehel on %1 faili.',
 	'Files'						=> 'Failid',
+	'File'						=> 'Fail',
 	'ShowFiles'					=> 'Näita faile/vormi',
 	'HideFiles'					=> 'Varja failid/vorm',
 	'DoShowFiles'				=> 'Näita vaikimisi failide nimekirja',

@@ -24,13 +24,13 @@ $this->ensure_page(true); // TODO: upload for forums?
 	)
 	{
 		echo '<ul class="menu">' .
-				#'<li class="active">' . $this->_t('Attachments') . '</li>' .
+				#'<li class="active">' . $this->_t('File') . '</li>' .
 				($can_upload
 					? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
 					: '') .
 			"</ul>\n";
 
-		// navigation
+		// tab navigation
 		$mod_selector	= 'files';
 		$tabs	= [
 					''			=> 'AttachmentsToPage',

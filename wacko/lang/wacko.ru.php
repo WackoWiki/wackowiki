@@ -774,6 +774,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Приложенные файлы',
+	'Attachment'				=> 'Attachment',
 	'AttachmentsToPage'			=> 'для страницы',
 	'AttachmentsPerPage'		=> 'только читателям данной страницы',
 	'AttachmentsByTime'			=> 'по времени',
@@ -814,6 +815,7 @@ $wacko_translation = [
 	'Files1'					=> 'Один файл.',
 	'FilesN'					=> 'Много файлов (%1).',
 	'Files'						=> 'Файлы',
+	'File'						=> 'Файл',
 	'ShowFiles'					=> 'Показать файлы/форму',
 	'HideFiles'					=> 'Скрыть файлы/форму',
 	'DoShowFiles'				=> 'По умолчанию список файлов для страницы отображется',

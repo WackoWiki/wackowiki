@@ -771,6 +771,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Attachments',
+	'Attachment'				=> 'Attachment',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -811,6 +812,7 @@ $wacko_translation = [
 	'Files1'					=> 'E&eacute;n bestand op deze pagina.',
 	'FilesN'					=> '%1 bestanden op deze pagina.',
 	'Files'						=> 'Bestanden',
+	'File'						=> 'Bestand',
 	'ShowFiles'					=> 'Toon bestanden',
 	'HideFiles'					=> 'Verberg bestanden',
 	'DoShowFiles'				=> 'Altijd bestandslijst tonen',
