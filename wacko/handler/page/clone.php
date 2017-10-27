@@ -144,3 +144,4 @@ if ($this->db->edit_summary)
 }
 
 $tpl->form_show = $this->href();
+$tpl->form_placeholder = $this->tag;
