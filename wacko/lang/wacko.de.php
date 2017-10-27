@@ -773,6 +773,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Anhänge',
+	'Attachment'				=> 'Anhang',
 	'AttachmentsToPage'			=> 'zur Seite',
 	'AttachmentsPerPage'		=> 'nach Seite',
 	'AttachmentsByTime'			=> 'nach Zeit',
@@ -799,7 +800,7 @@ $wacko_translation = [
 	'FileAdded'					=> 'Hinzugefügt',
 	'FileModified'				=> 'Geändert',
 	'FileSize'					=> 'Größe',
-	'FileDimension'				=> 'Dimension',
+	'FileDimension'				=> 'Maße',
 	'MimeType'					=> 'MIME-Typ',
 	'FileName'					=> 'Name',
 	'FileCaption'				=> 'Bildunterschrift',
@@ -813,6 +814,7 @@ $wacko_translation = [
 	'Files1'					=> 'Dateien (1)',
 	'FilesN'					=> 'Dateien (%1)',
 	'Files'						=> 'Dateien',
+	'File'						=> 'Datei',
 	'ShowFiles'					=> 'Zeige Dateien',
 	'HideFiles'					=> 'Verberge Dateien',
 	'DoShowFiles'				=> 'Zeige Dateiliste',

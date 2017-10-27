@@ -771,6 +771,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Za³±czniki',
+	'Attachment'				=> 'Attachment',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -811,6 +812,7 @@ $wacko_translation = [
 	'Files1'					=> 'Jest jeden plik na tej stronie.',
 	'FilesN'					=> 'Liczba plików na tej stronie: %1.',
 	'Files'						=> 'Pliki',
+	'File'						=> 'Plik',
 	'ShowFiles'					=> 'Wy¶wietl pliki/formularz',
 	'HideFiles'					=> 'Schowaj pliki/formularz',
 	'DoShowFiles'				=> 'Domy¶lnie poka¿ listê plików',

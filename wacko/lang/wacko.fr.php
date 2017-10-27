@@ -772,6 +772,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Attachments',
+	'Attachment'				=> 'Attachment',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -812,6 +813,7 @@ $wacko_translation = [
 	'Files1'					=> 'Un seul fichier est joint à cette page.',
 	'FilesN'					=> '%1 fichiers sont joints à cette page.',
 	'Files'						=> 'Fichiers',
+	'File'						=> 'Fichier',
 	'ShowFiles'					=> 'Montrer les fichiers joints/le formulaire pour en joindre',
 	'HideFiles'					=> 'Cacher les fichiers/le formulaire',
 	'DoShowFiles'				=> 'Montrer la liste des fichiers par défaut',

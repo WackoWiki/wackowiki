@@ -27,7 +27,10 @@ $get_file = function ($file_id)
 $meta_navigation = function ($can_upload)
 {
 	return '<ul class="menu">' .
-			'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
+			(( $this->db->attachments_handler == 2 && $this->get_user())
+			|| $this->db->attachments_handler == 1
+				? '<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>'
+				: '') .
 			($can_upload
 				? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
 				: '') .
@@ -71,7 +74,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 	$file = $get_file((int) @$_GET['file_id']);
 
 	$mod_selector	= 'm';
-	// navigation
+	// tab navigation
 	$tabs['show']	= 'FileViewProperties';
 
 	if ($this->is_admin()
@@ -95,7 +98,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 
 	// print tabs
 	echo $meta_navigation($can_upload);
-	echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t($tabs[$mode]) . '</h3>';
+	echo '<h3>' . $this->_t('File') . ' &raquo; ' . $this->_t($tabs[$mode]) . '</h3>';
 	echo $this->tab_menu($tabs, $mode, 'filemeta', ['file_id' => $file['file_id']], $mod_selector);
 	echo "<br>\n";
 

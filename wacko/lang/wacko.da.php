@@ -771,6 +771,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Attachments',
+	'Attachment'				=> 'Attachment',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -810,7 +811,8 @@ $wacko_translation = [
 	'Files0'					=> 'Der er ingen filer tilknyttet denne side.',
 	'Files1'					=> 'Der er en fil tilknyttet denne side.',
 	'FilesN'					=> 'Der er %1 filer tilknyttet denne side.',
-	'Files'					=> 'Filer',
+	'Files'						=> 'Filer',
+	'File'						=> 'Fil',
 	'ShowFiles'					=> 'Vis filer',
 	'HideFiles'					=> 'Skjul filer',
 	'DoShowFiles'				=> 'Vis altid filer',

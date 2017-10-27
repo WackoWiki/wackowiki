@@ -771,6 +771,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Attachments',
+	'Attachment'				=> 'Attachment',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -811,6 +812,7 @@ $wacko_translation = [
 	'Files1'					=> 'Един файл.',
 	'FilesN'					=> 'Има (%1) файла.',
 	'Files'						=> 'Файлове',
+	'File'						=> 'Файла',
 	'ShowFiles'					=> 'Покажи файловете/формата',
 	'HideFiles'					=> 'Скрий файловете/формата',
 	'DoShowFiles'				=> 'Покажи списъка на файловете по подразбиране',
