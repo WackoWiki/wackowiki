@@ -36,7 +36,7 @@ leave it as is for the memories
 
 <form action="[' href ']" method="post" name="clone_page" >
 	[' csrf: clone_page ']
-	<input type="text" name="clone_name" size="40" maxlength="250">
+	<input type="text" name="clone_name" size="40" maxlength="250" placeholder="[' placeholder ']">
 	[' e editNote ']
 	[' doCluster ']
 	<br><br>
