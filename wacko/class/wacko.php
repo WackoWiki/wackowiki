@@ -1522,12 +1522,13 @@ class Wacko
 	// STANDARD QUERIES
 	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0, $limit = 100)
 	{
+		$revisions	= [];
+		$pagination	= [];
+
 		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
 					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
-		// count pages
-		$count_revisions = $this->db->load_single(
-			"SELECT COUNT(p.revision_id) AS n " .
+		$selector =
 			"FROM " . $this->db->table_prefix . "revision p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
@@ -1537,23 +1538,19 @@ class Wacko
 					: "") .
 				(!$show_deleted
 					? "AND p.deleted <> '1' "
-					: "")
+					: "");
+
+		// count pages
+		$count_revisions = $this->db->load_single(
+			"SELECT COUNT(p.revision_id) AS n " .
+			$selector
 			);
 
 		$pagination = $this->pagination($count_revisions['n'], $limit);
 
 		$revisions = $this->db->load_all(
 			"SELECT p.revision_id, " . $page_meta . " " .
-			"FROM " . $this->db->table_prefix . "revision p " .
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
-			"WHERE p.page_id = '" . (int) $page_id . "' " .
-				($hide_minor_edit
-					? "AND p.minor_edit = '0' "
-					: "") .
-				(!$show_deleted
-					? "AND p.deleted <> '1' "
-					: "") .
+			$selector .
 			"ORDER BY p.modified DESC " .
 			$pagination['limit'], true);
 
@@ -1641,11 +1638,14 @@ class Wacko
 
 	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
 	{
-		// count pages
-		$count_pages = $this->db->load_single(
-			"SELECT COUNT(p.page_id) AS n " .
+		$pages		= [];
+		$pagination	= [];
+
+		$selector =
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "revision r1 ON (p.page_id = r1.page_id) " .
+				"LEFT JOIN " . $this->db->table_prefix . "revision r2 ON (p.page_id = r2.page_id AND r1.revision_id < r2.revision_id) " .
 			"WHERE p.comment_on_id = '0' " .
 				($from
 					? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
@@ -1661,34 +1661,20 @@ class Wacko
 					: "") .
 				(!$default_pages
 					? "AND (u.account_type = '0' OR p.user_id = '0') "
-					: "")
+					: "") .
+				"AND r2.revision_id IS NULL ";
+
+		// count pages
+		$count_pages = $this->db->load_single(
+			"SELECT COUNT(p.page_id) AS n " .
+			$selector
 			);
 
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
 		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
-		"FROM " . $this->db->table_prefix . "page p " .
-			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "revision r1 ON (p.page_id = r1.page_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "revision r2 ON (p.page_id = r2.page_id AND r1.revision_id < r2.revision_id) " .
-		"WHERE p.comment_on_id = '0' " .
-			($from
-				? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
-				: "") .
-			($tag
-				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-				: "") .
-			($minor_edit
-				? "AND p.minor_edit = '0' "
-				: "") .
-			(!$deleted
-				? "AND p.deleted <> '1' "
-				: "") .
-			(!$default_pages
-				? "AND (u.account_type = '0' OR p.user_id = '0') "
-				: "") .
-			"AND r2.revision_id IS NULL " .
+		$selector .
 		"ORDER BY p.modified DESC " .
 		$pagination['limit'], true))
 		{
@@ -1723,7 +1709,8 @@ class Wacko
 	// used for comment feed
 	function load_comment($limit = 100, $tag = '', $deleted = 0)
 	{
-		$limit = $this->get_list_count($limit);
+		$pages	= [];
+		$limit	= $this->get_list_count($limit);
 
 		if ($pages = $this->db->load_all(
 		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
