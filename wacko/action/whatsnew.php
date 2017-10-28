@@ -208,7 +208,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				echo '<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('NewCommentAdded') . '" alt="[comment]" class="btn-comment"> '.'' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang) . ' ' . $this->_t('To') . ' ' . $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
 			}
 			// new page
-			else if ($page['created'] == $page['modified'])
+			else if ($page['created'] == $page['date'])
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
 				echo '<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('NewPageCreated') . '" alt="[new]" class="btn-add_page"> '.'' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
