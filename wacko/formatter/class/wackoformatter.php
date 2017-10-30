@@ -407,8 +407,11 @@ class WackoFormatter
 				$formatter = 'code';
 			}
 
-			$res = $wacko->_format(trim($code), 'highlight/' . $formatter, $params);
+			$res = $wacko->_format($code, 'highlight/' . $formatter, $params);
+			//XXX: disabled trim code, whitespace (or other characters) might be intentional in code examples
+			#$res = $wacko->_format(trim($code), 'highlight/' . $formatter, $params);
 
+			// add wrapper
 			if (isset($params['wrapper']) && ($params['wrapper'] != 'none'))
 			{
 				$wrapper			= 'wrapper_' . $params['wrapper'];
