@@ -407,8 +407,12 @@ class WackoFormatter
 				$formatter = 'code';
 			}
 
+			// TODO: Trim empty, whitespace only lines at the beginning
+			$code = ltrim($code, "\n\r\0");
+			$code = rtrim($code);
+
 			$res = $wacko->_format($code, 'highlight/' . $formatter, $params);
-			//XXX: disabled trim code, whitespace (or other characters) might be intentional in code examples
+			// XXX: disabled trim code, whitespace (or other characters) might be intentional in code examples
 			#$res = $wacko->_format(trim($code), 'highlight/' . $formatter, $params);
 
 			// add wrapper
