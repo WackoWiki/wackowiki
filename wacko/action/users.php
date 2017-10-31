@@ -9,6 +9,7 @@ if (!defined('IN_WACKO'))
 $max		= (int) @$max;
 $group_id	= (int) @$group_id;
 $logged_in	= $this->get_user();
+$tab_mode	= @$_GET['mode'];
 
 // display user profile
 if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private message can POST here
@@ -28,54 +29,81 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	}
 	else
 	{
-		$profile		= ['profile' => $user['user_name']];
-		$default_tab	= true;
-		$tpl->u_user	= $user;
-		$tpl->u_href	= $this->href();
+		$profile			= ['profile' => $user['user_name']];
+		$default_tab		= false;
+		$tpl->u_username	= $user['user_name'];
+		$tpl->u_href		= $this->href();
+
+		if ($tab_mode == '')
+		{
+			$default_tab	= true;
+		}
 
 		// profile navigation
 		if ($user['user_id'] == $this->get_user_id())
 		{
-			// TODO: disable link for active tab
-			$tpl->u_tab_href0 = $this->href('', '', $profile);
-			$tpl->u_tab_href1 = $this->href('', '', $profile + ['mode' => 'mypages']);
-			$tpl->u_tab_href2 = $this->href('', '', $profile + ['mode' => 'mychanges']);
-			$tpl->u_tab_href3 = $this->href('', '', $profile + ['mode' => 'mywatches']);
-			$tpl->u_tab_href4 = $this->href('', '', $profile + ['mode' => 'mychangeswatches']);
+			// [0] - tab link
+			// [1] - tab item text
+			// [2] - tab heading
+			// [3] - action
+			$tabs = [
+				''					=>	[$this->href('', '', $profile),
+										'UsersProfile',
+										'UsersProfile',
+										''
+				],
+				'mypages'			=>	[$this->href('', '', $profile + ['mode' => 'mypages']),
+										'UsersPages',
+										'ListMyPages',
+										'mypages'
+				],
+				'mychanges'			=>	[$this->href('', '', $profile + ['mode' => 'mychanges']),
+										'UsersChanges',
+										'ListMyChanges',
+										'mychanges'
+				],
+				'mywatches'			=>	[$this->href('', '', $profile + ['mode' => 'mywatches']),
+										'UsersSubscription',
+										'ListMyWatches',
+										'mywatches'
+				],
+				'mychangeswatches'	=>	[$this->href('', '', $profile + ['mode' => 'mychangeswatches']),
+										'UsersWatches',
+										'ListMyChangesWatches',
+										'mychangeswatches'
+				],
+			];
 
+			foreach ($tabs as $k => $tab)
+			{
+				$tpl->u_tab_li_commit = true;
 
-			if (isset($_GET['mode']) && $_GET['mode'] == 'mypages')
-			{
-				$tpl->u_tab_heading		= $this->_t('ListMyPages');
-				$tpl->u_tab_action		= $this->action('mypages', $profile);
-				$default_tab			= false;
-			}
-			else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
-			{
-				$tpl->u_tab_heading		= $this->_t('ListMyWatches');
-				$tpl->u_tab_action		= $this->action('mywatches', $profile);
-				$default_tab			= false;
-			}
-			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychangeswatches')
-			{
-				$tpl->u_tab_heading		= $this->_t('ListMyChangesWatches');
-				$tpl->u_tab_action		= $this->action('mychangeswatches', $profile);
-				$default_tab			= false;
-			}
-			else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
-			{
-				$tpl->u_tab_heading		= $this->_t('ListMyChanges');
-				$tpl->u_tab_action		= $this->action('mychanges', $profile);
-				$default_tab			= false;
-			}
-			else
-			{
-				$tpl->u_tab_heading		= $this->_t('UsersProfile');
+				if ($k == $tab_mode)
+				{
+					$tpl->u_tab_li_active_item	= $this->_t($tab[1]);
+					$tpl->u_tab_heading			= $this->_t($tab[2]);
+
+					if ($tab[3])
+					{
+						$tpl->u_tab_action		= $this->action($tab[3], $profile);
+					}
+				}
+				else
+				{
+					$tpl->u_tab_li_href_item	= [$tab[0], $this->_t($tab[1])];
+				}
 			}
 		}
+		else
+		{
+			$tpl->u_tab_heading = $this->_t('UsersProfile');
+		}
 
+		// user profile
 		if ($default_tab == true)
 		{
+			$tpl->u_prof_user	= $user;
+
 			// usergroups
 			if (is_array($this->db->aliases))
 			{
@@ -247,8 +275,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// user-owned pages
 			if ($user['total_pages'])
 			{
-				$sort_name = (isset($_GET['sort']) && $_GET['sort'] == 'name');
-				$pagination = $this->pagination($user['total_pages'], 10, 'd',
+				$sort_name	= (isset($_GET['sort']) && $_GET['sort'] == 'name');
+				$pagination	= $this->pagination($user['total_pages'], 10, 'd',
 					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
 				$pages = $this->db->load_all(

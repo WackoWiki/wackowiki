@@ -13,16 +13,21 @@ first really BIG template written
 [ === // USERPROFILE ---------------------------------------------------------------------------------- === ]
 
 [= Profile =]
-	<h1>[ ' user.user_name |e ' ]</h1>
+	<h1>[ ' username |e ' ]</h1>
 	<small><a href="[ ' href ' ]">&laquo; [ ' _t: UsersList ' ]</a></small>
-	
+
 	[= tab _ =
+		
 		<ul class="menu" id="list">
-			<li><a href="[ ' href0 ' ]">[ ' _t: UsersProfile ' ]</a></li>
-			<li><a href="[ ' href1 ' ]">[ ' _t: UsersPages ' ]</a></li>
-			<li><a href="[ ' href2 ' ]">[ ' _t: UsersChanges ' ]</a></li>
-			<li><a href="[ ' href3 ' ]">[ ' _t: UsersSubscription ' ]</a></li>
-			<li><a href="[ ' href4 ' ]">[ ' _t: UsersWatches ' ]</a></li>
+			[= li _ =
+				['' commit | void  // alternation hack '']
+				[= href _ =
+					<li><a href="[ ' item.0 ' ]">[ ' item.1 ' ]</a></li>
+				=]
+				[= active _ =
+					<li class="active">[ ' item ' ]</li>
+				=]
+			=]
 		</ul>
 
 		<h2>[ ' heading ' ]</h2>
@@ -31,132 +36,132 @@ first really BIG template written
 
 	[= prof _ =
 
-	<table class="userprofile lined">
-		<tr>
-			<th scope="row">[ ' _t: RealName ' ]</th>
-			<td>[ ' user.real_name |e ' ]</td>
-		</tr>
-		<tr>
-			<th scope="row">[ ' _t: UsersSignupDate ' ]</th>
-			<td>[ ' user.signup_time | time_formatted ' ]</td>
-		</tr>
-		<tr>
-			<th scope="row">[ ' _t: UsersLastSession ' ]</th>
-			<td>[ ''' last lastSession ''' ]</td>
-		</tr>
-		<tr>
-			<th scope="row">[ ' _t: UserSpace ' ]</th>
-			[= userPage =
-				<td><a href="[ ' href ' ]">[ ' text |e ' ]</a></td>
-			=]
-		</tr>
-		<tr>
-			<th scope="row"><a href="[ ' groupsPage ' ]">[ ' _t: UsersGroupMembership ' ]</a></th>
-			[= userGroups =
-				<td>[ ' list ' ][ ' na UsersNA2 ' ]</td>
-			=]
-		</tr>
-	</table>
-
-	[= pm _ =
-		<h2>[ ' _t: UsersContact ' ]</h2>
-		[= not _ =
-			<table class="formation"><tr><td colspan="2" class="t_center"><em>[ ' _t: UsersPMNotLoggedIn ' ]</em></td></tr></table>
-		=]
-		[= pm _ =
-			[ ' // contact form ' ]
-			<br>
-			<form action="[ ' href ' ]" method="post" name="personal_message">
-				[' csrf: personal_message ']
-				<input type="hidden" name="profile" value="[ ' username |e attr ' ]">
-				[= ref _ =
-					<input type="hidden" name="ref" value="[ ' ref | e attr ' ]">
+		<table class="userprofile lined">
+			<tr>
+				<th scope="row">[ ' _t: RealName ' ]</th>
+				<td>[ ' user.real_name |e ' ]</td>
+			</tr>
+			<tr>
+				<th scope="row">[ ' _t: UsersSignupDate ' ]</th>
+				<td>[ ' user.signup_time | time_formatted ' ]</td>
+			</tr>
+			<tr>
+				<th scope="row">[ ' _t: UsersLastSession ' ]</th>
+				<td>[ ''' last lastSession ''' ]</td>
+			</tr>
+			<tr>
+				<th scope="row">[ ' _t: UserSpace ' ]</th>
+				[= userPage =
+					<td><a href="[ ' href ' ]">[ ' text |e ' ]</a></td>
 				=]
-				<table class="formation">
-					[= disabled _ =
-						<tr><td colspan="2" class="t_center"><strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong></td></tr>
-					=]
-					[= ic _ =
-						<tr>
-							<td class="label nowrap" style="width:50px;">[ ' _t: UsersIntercomSubject ' ]:</td>
-							<td>
-								<input type="text" name="mail_subject" value="[ ' subj |e attr ' ]" size="60" maxlength="200">
-								[= ref _ =
-									&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
-								=]
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2"><textarea name="mail_body" cols="80" rows="15">[ ' body |e ' ]</textarea></td>
-						</tr>
-						<tr>
-							<td><input type="submit" id="submit" name="send_pm" value="[ ' _t: UsersIntercomSend ' ]"></td>
-						</tr>
-						<tr>
-							<td colspan="2">
-								<small>[ ' _t: UsersIntercomDesc ' ]</small>
-							</td>
-						</tr>
-					=]
-				</table>
-			</form>
-		=]
-	=]
+			</tr>
+			<tr>
+				<th scope="row"><a href="[ ' groupsPage ' ]">[ ' _t: UsersGroupMembership ' ]</a></th>
+				[= userGroups =
+					<td>[ ' list ' ][ ' na UsersNA2 ' ]</td>
+				=]
+			</tr>
+		</table>
 
-	<h2 id="pages">[ ' _t: UsersPages ' ]</h2>
-	<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages |e ' ]
-		&nbsp;&nbsp;&nbsp; [ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions |e ' ]</small></div><br>
-
-	[ ''' nopages UsersNA2 ''' ]
-	[= pages _ =
-		<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
-		['' pagination '']<br>
-		<ul class="ul_list lined">
-			[= li _ =
-				<li><small>[ ' created | time_formatted ' ]</small>  &mdash; [ ' link ' ]</li>
+		[= pm _ =
+			<h2>[ ' _t: UsersContact ' ]</h2>
+			[= not _ =
+				<table class="formation"><tr><td colspan="2" class="t_center"><em>[ ' _t: UsersPMNotLoggedIn ' ]</em></td></tr></table>
 			=]
-		</ul>
-	=]
+			[= pm _ =
+				[ ' // contact form ' ]
+				<br>
+				<form action="[ ' href ' ]" method="post" name="personal_message">
+					[' csrf: personal_message ']
+					<input type="hidden" name="profile" value="[ ' username |e attr ' ]">
+					[= ref _ =
+						<input type="hidden" name="ref" value="[ ' ref | e attr ' ]">
+					=]
+					<table class="formation">
+						[= disabled _ =
+							<tr><td colspan="2" class="t_center"><strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong></td></tr>
+						=]
+						[= ic _ =
+							<tr>
+								<td class="label nowrap" style="width:50px;">[ ' _t: UsersIntercomSubject ' ]:</td>
+								<td>
+									<input type="text" name="mail_subject" value="[ ' subj |e attr ' ]" size="60" maxlength="200">
+									[= ref _ =
+										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
+									=]
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><textarea name="mail_body" cols="80" rows="15">[ ' body |e ' ]</textarea></td>
+							</tr>
+							<tr>
+								<td><input type="submit" id="submit" name="send_pm" value="[ ' _t: UsersIntercomSend ' ]"></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<small>[ ' _t: UsersIntercomDesc ' ]</small>
+								</td>
+							</tr>
+						=]
+					</table>
+				</form>
+			=]
+		=]
 
-	<h2 id="comments">[ ' _t: UsersComments ' ]</h2>
-	[= cmtdisabled =
-		[ ' _t: CommentsDisabled ' ]
-	=]
-	[= cmt _ =
-		<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ]: [ ' n |e ' ]</small></div>
-		[ ''' none UsersNA2 ''' ]
-		[= c _ =
-			[ ''' pagination ''' ]<br>
+		<h2 id="pages">[ ' _t: UsersPages ' ]</h2>
+		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages |e ' ]
+			&nbsp;&nbsp;&nbsp; [ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions |e ' ]</small></div><br>
+
+		[ ''' nopages UsersNA2 ''' ]
+		[= pages _ =
+			<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
+			['' pagination '']<br>
 			<ul class="ul_list lined">
 				[= li _ =
-					<li><small>[ ' created | time_formatted ' ]</small> &mdash; [ ' link ' ]</li>
+					<li><small>[ ' created | time_formatted ' ]</small>  &mdash; [ ' link ' ]</li>
 				=]
 			</ul>
 		=]
-	=]
 
-	[= up _ =
-		<h2 id="uploads">[ ' _t: UsersUploads ' ]</h2>
-		[= u _ =
-			<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ]: [ ' n |e ' ]</small></div>
+		<h2 id="comments">[ ' _t: UsersComments ' ]</h2>
+		[= cmtdisabled =
+			[ ' _t: CommentsDisabled ' ]
+		=]
+		[= cmt _ =
+			<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ]: [ ' n |e ' ]</small></div>
 			[ ''' none UsersNA2 ''' ]
-			[= u2 _ =
+			[= c _ =
 				[ ''' pagination ''' ]<br>
 				<ul class="ul_list lined">
 					[= li _ =
-						<li>
-							<small>[ ' t | time_formatted ' ]</small>
-							&mdash; [ ' link ' ]
-							. . . . . . . . . . . . . . . .
-							[ ' onpage ' ]</span>['' // TODO refactor! '']
-							[ ' descr ' ]
-						</li>
+						<li><small>[ ' created | time_formatted ' ]</small> &mdash; [ ' link ' ]</li>
 					=]
 				</ul>
 			=]
 		=]
+
+		[= up _ =
+			<h2 id="uploads">[ ' _t: UsersUploads ' ]</h2>
+			[= u _ =
+				<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ]: [ ' n |e ' ]</small></div>
+				[ ''' none UsersNA2 ''' ]
+				[= u2 _ =
+					[ ''' pagination ''' ]<br>
+					<ul class="ul_list lined">
+						[= li _ =
+							<li>
+								<small>[ ' t | time_formatted ' ]</small>
+								&mdash; [ ' link ' ]
+								. . . . . . . . . . . . . . . .
+								[ ' onpage ' ]</span>['' // TODO refactor! '']
+								[ ' descr ' ]
+							</li>
+						=]
+					</ul>
+				=]
+			=]
+		=]
 	=]
-=]
 
 [ === userPagesByDate === ]
 <a href="[ ' href ' ]#pages">[ ' _t: UsersDocsSortDate ' ]</a>
@@ -194,9 +199,9 @@ first really BIG template written
 		</form>
 	=]
 	['' pagination '']
-	<table class="lined nowrap" style="width:100%; padding-right:20px;border-spacing: 3px;border-collapse: separate;">
+	<table class="lined nowrap" style="width: 100%; padding-right: 20px;border-spacing: 3px;border-collapse: separate;">
 		<colgroup>
-			<col span="1" style="padding-left:5px;">
+			<col span="1" style="padding-left: 5px;">
 			<col span="1">
 			<col span="1">
 			<col span="1">
@@ -213,7 +218,7 @@ first really BIG template written
 		</thead>
 		<tbody>
 		[= none _ =
-			<tr><td colspan="5" class="t_center" style="padding:10px;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
+			<tr><td colspan="5" class="t_center" style="padding: 10px;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
 		=]
 		[= u _ =
 			<tr>
