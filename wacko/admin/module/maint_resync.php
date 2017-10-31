@@ -40,7 +40,7 @@ function admin_maint_resync(&$engine, &$module)
 				"GROUP BY p.owner_id");
 
 			// missing pages (case: total_pages = 0)
-			$users2 =  $engine->db->load_all(
+			$users2 = $engine->db->load_all(
 				"SELECT
 					u.user_id, '0' as n
 				FROM
@@ -64,38 +64,51 @@ function admin_maint_resync(&$engine, &$module)
 
 			// total comments posted
 			$users = $engine->db->load_all(
-				"SELECT p.user_id, COUNT(p.tag) AS n " .
-				"FROM " . $engine->db->table_prefix . "page AS p, {$engine->db->user_table} AS u " .
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' " .
-				"AND p.deleted <> '1' " .
-				"GROUP BY p.user_id " .
+				"SELECT user_id, n
+				FROM (
+					SELECT p.owner_id as user_id, COUNT(p.tag) AS n
+					FROM " . $engine->db->table_prefix . "page AS p, {$engine->db->user_table} AS u
+					WHERE p.owner_id = u.user_id
+						AND p.comment_on_id <> '0'
+						AND p.deleted <> '1'
+					GROUP BY p.owner_id " .
 
-			// missing comments (case: total_comments = 0)
-			"UNION ALL " .
+					// missing comments (case: total_comments = 0)
+					"UNION ALL
 
-				"SELECT
-					u.user_id, '0' as n
-				FROM
-					" . $engine->db->table_prefix . "user u
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.user_id = p.owner_id)
-				WHERE
-					(u.total_comments <> '0'
-					AND
-					p.owner_id IS NULL
-					OR
-					(p.owner_id = u.user_id AND p.comment_on_id = '0' " .
-					"AND p.deleted <> '1' ))
+					SELECT u.user_id, '0' as n
+					FROM " . $engine->db->table_prefix . "user u
+						LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.user_id = p.owner_id)
+					WHERE (u.total_comments <> '0'
+						AND p.owner_id IS NULL
+						OR (p.owner_id = u.user_id
+							AND p.comment_on_id = '0'
+							AND p.deleted <> '1'))
+					GROUP BY u.user_id
+				) results
+				ORDER BY n DESC");
 
-				");
-
-			$users = array_unique($users, SORT_REGULAR);
+			$key_array = [];
+			#Ut::debug_print_r($users);
 
 			foreach ($users as $user)
 			{
+				// take only first record
+				if (!in_array($user['user_id'], $key_array))
+				{
+					$key_array[]					= $user['user_id'];
+					$comments[$user['user_id']]		= $user['n'];
+				}
+			}
+
+			#Ut::debug_print_r($comments);
+
+			foreach ($comments as $k => $n)
+			{
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->user_table} " .
-					"SET total_comments = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['user_id'] . "' " .
+					"SET total_comments = " . (int) $n . " " .
+					"WHERE user_id = '" . (int) $k . "' " .
 					"LIMIT 1");
 			}
 
@@ -111,7 +124,7 @@ function admin_maint_resync(&$engine, &$module)
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->user_table} " .
 					"SET total_revisions = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['user_id'] . "' " .
+					"WHERE user_id = '" . (int) $user['user_id'] . "' " .
 					"LIMIT 1");
 			}
 
@@ -128,7 +141,7 @@ function admin_maint_resync(&$engine, &$module)
 				$engine->db->sql_query(
 					"UPDATE {$engine->db->user_table} " .
 					"SET total_uploads = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['user_id'] . "' " .
+					"WHERE user_id = '" . (int) $user['user_id'] . "' " .
 					"LIMIT 1");
 			}
 
@@ -151,8 +164,7 @@ function admin_maint_resync(&$engine, &$module)
 					SELECT p.page_id, '0' AS n
 					FROM " . $engine->db->table_prefix . "page AS c
 					RIGHT JOIN " . $engine->db->table_prefix . "page AS p ON c.comment_on_id = p.page_id
-					WHERE c.comment_on_id IS NULL
-					");
+					WHERE c.comment_on_id IS NULL");
 
 			foreach ($comments as $comment)
 			{
