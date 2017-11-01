@@ -91,22 +91,22 @@ $drivers[]	= ['pdo',		'mysql_pdo',		'PDO MySQL'];
 
 $detected = 0;
 
-for ($count = 0; $count < count($drivers); $count++)
+foreach ($drivers as $k => $driver)
 {
-	if (extension_loaded($drivers[$count][0]))
+	if (extension_loaded($driver[0]))
 	{
 		if ($config['is_update'] == false)
 		{
-			echo '      <li>
-							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($detected == 0 ? 'checked' : '') . '>
-							<label for="db_driver_' . $drivers[$count][0] . '">' . $drivers[$count][2] . "</label>
+			echo '		<li>
+							<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" '.($detected == 0 ? 'checked' : '') . '>
+							<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
 						</li>\n";
 		}
 		else
 		{
-			echo '      <li>
-							<input type="radio" id="db_driver_' . $drivers[$count][0] . '" name="config[database_driver]" value="' . $drivers[$count][1] . '" '.($config['database_driver'] == $drivers[$count][1] ? 'checked' : '') . '>
-							<label for="db_driver_' . $drivers[$count][0] . '">' . $drivers[$count][2] . "</label>
+			echo '		<li>
+							<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" '.($config['database_driver'] == $driver[1] ? 'checked' : '') . '>
+							<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
 						</li>\n";
 		}
 
@@ -130,15 +130,12 @@ for ($count = 0; $count < count($drivers); $count++)
  [2]   :  the name to display in the list here
  */
 
-$charset	= [];
-# $charset[]	= ['utf8', 'utf8', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
-$charset[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
-$charset[]	= ['latin1',	'latin1',	'cp1252 West European'];
-$charset[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European']; // not tested
-$charset[]	= ['greek',		'greek',	'ISO 8859-7 Greek']; // not tested
-
-
-$detected = 0;
+$charsets	= [];
+# $charsets[]	= ['utf8', 'utf8', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
+$charsets[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
+$charsets[]	= ['latin1',	'latin1',	'cp1252 West European'];			// default
+$charsets[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European'];		// not tested
+$charsets[]	= ['greek',		'greek',	'ISO 8859-7 Greek'];				// not tested
 
 echo '	<select id="database_charset" name="config[database_charset]" required>';
 
@@ -148,10 +145,9 @@ if ($config['is_update'] == false && $config['language'] == 'ru')
 	$config['database_charset'] = 'cp1251';
 }
 
-for ($count = 0; $count < count($charset); $count++)
+foreach ($charsets as $charset)
 {
-	echo '		<option value="' . $charset[$count][1] . '" '.($config['database_charset'] == $charset[$count][1] ? 'selected' : '') . '>' . $charset[$count][2] . "</option>\n";
-	$detected++;
+	echo '		<option value="' . $charset[1] . '" '.($config['database_charset'] == $charset[1] ? 'selected' : '') . '>' . $charset[2] . "</option>\n";
 }
 
 echo "	</select>\n";
@@ -159,34 +155,32 @@ echo "	</select>\n";
 	<br>
 <?php
 if ($config['is_update'] == false)
-{?>
-<?php echo $separator; ?>
+{
+	echo $separator;
+	?>
 	<h2><?php echo $lang['DBEngine'];?></h2>
 	<p class="notop"><?php echo $lang['DBEngineDesc']; ?></p>
 	<ul>
-<?php
-/*
- Each time a new database engine is supported it needs to be added to this list
+	<?php
+	/*
+	 Each time a new database engine is supported it needs to be added to this list
 
- [0]   :  database engine name
- [1]   :  database engine name to be stored in the config file
- [2]   :  the name to display in the list here
- */
+	 [0]   :  database engine name
+	 [1]   :  database engine name to be stored in the config file
+	 [2]   :  the name to display in the list here
+	 */
 
-$engines	= [];
-$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB / XtraDB (' . $lang['Recommended'] . ')'];
-$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
+	$engines	= [];
+	$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB / XtraDB (' . $lang['Recommended'] . ')'];	// default
+	$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
 
-$detected = 0;
-
-for ($count = 0; $count < count($engines); $count++)
-{
-	echo '      <li>
-					<input type="radio" id="db_engine_' . $engines[$count][0] . '" name="config[database_engine]" value="' . $engines[$count][1] . '" '.($detected == 0 ? 'checked' : '') . '>
-					<label for="db_engine_' . $engines[$count][0] . '">' . $engines[$count][2] . "</label>
-				</li>\n";
-	$detected++;
-}
+	foreach ($engines as $k => $engine)
+	{
+		echo '		<li>
+						<input type="radio" id="db_engine_' . $engine[0] . '" name="config[database_engine]" value="' . $engine[1] . '" '.($k == 0 ? 'checked' : '') . '>
+						<label for="db_engine_' . $engine[0] . '">' . $engine[2] . "</label>
+					</li>\n";
+	}
 ?>
 	</ul>
 	<br>
@@ -235,8 +229,7 @@ if ($config['is_update'] == false)
 	<label class="indented_label" for="wiki_delete_tables"><?php echo $lang['DeleteTables'];?></label>
 	<input type="checkbox" id="wiki_delete_tables" name="config[DeleteTables]" <?php echo isset($config['DeleteTables']) ? ' checked' : ''; ?> class="checkbox_input">
 	<br>
-<?php echo $separator; ?>
-<?php
+	<?php echo $separator;
 }
 else
 {

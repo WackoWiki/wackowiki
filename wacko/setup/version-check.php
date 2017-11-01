@@ -32,8 +32,6 @@ write_config_hidden_nodes(['none' => '']);
 	} ?>
 </p>
 	<?php
-	// TODO: check for mb_string, iconv, bcmath, pcre, pcre utf-8, ctype, gd, JSON, SPL extension
-	// https://secure.php.net/manual/en/function.extension-loaded.php
 
 	/*
 	 Check which database extensions are installed and what versions of the db are there
@@ -79,57 +77,85 @@ write_config_hidden_nodes(['none' => '']);
 </ul>
 	<?php
 	/*
+	 Check for required PHP Extensions
+	 */
+
+	// TODO: check for mb_string, iconv, bcmath, pcre, pcre utf-8, ctype, gd, JSON, SPL extension
+	//		- Case 'PCRE has not been compiled with Unicode property support.'
+	$php_extension = [
+		'bcmath',
+		'ctype',
+		'gd',
+		'iconv',
+		'json',
+		'mbstring',
+		'openssl',
+		'pcre',
+		'spl',
+	];
+	?>
+<h2><?php echo $lang['PHPExtensions']; ?></h2>
+<ul>
+	<?php
+	foreach ($php_extension as $extension)
+	{
+		$result = extension_loaded($extension);
+
+		if (!$result)
+		{
+			$php_extension_result = false;
+		}
+
+		echo "\t<li>" . $extension . ' ', output_image($result), "</li>\n";
+	}
+	?>
+</ul>
+	<?php
+	/*
 	 Check file permissions
 	 */
 
-	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
-	@chmod (CACHE_CONFIG_DIR, 0777);
-	@chmod (CACHE_FEED_DIR, 0777);
-	@chmod (CACHE_PAGE_DIR, 0777);
-	@chmod (CACHE_SQL_DIR, 0777);
-	@chmod (CACHE_TEMPLATE_DIR, 0777);
-	@chmod (CONFIG_FILE, 0777);
-	@chmod (SITE_LOCK, 0660);
-	@chmod (AP_LOCK, 0660);
-	@chmod (UPLOAD_BACKUP_DIR, 0777);
-	@chmod (UPLOAD_GLOBAL_DIR, 0777);
-	@chmod (UPLOAD_PER_PAGE_DIR, 0777);
-	@chmod (XML_DIR, 0777);
-	@chmod (SITEMAP_XML, 0777);
+	// [0] - directory, file
+	// [1] - permissions (octal integer, precede the number with a 0 (zero)!)
+	$file_permission = [
+		[CACHE_CONFIG_DIR,		0777],
+		[CACHE_FEED_DIR,		0777],
+		[CACHE_PAGE_DIR,		0777],
+		[CACHE_SQL_DIR,			0777],
+		[CACHE_TEMPLATE_DIR,	0777],
+		[CONFIG_FILE,			0777],
+		[SITE_LOCK,				0660],
+		[AP_LOCK,				0660],
+		[UPLOAD_BACKUP_DIR,		0777],
+		[UPLOAD_GLOBAL_DIR,		0777],
+		[UPLOAD_PER_PAGE_DIR,	0777],
+		[XML_DIR,				0777],
+		[SITEMAP_XML,			0777],
+	];
 
+	$file_permissions_result = true;
 
 	// If the cache directory is writable then we can enable caching as default
 	echo '            <input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
-
-	$file_permissions_result =	   is_writable(CACHE_CONFIG_DIR)
-								&& is_writable(CACHE_FEED_DIR)
-								&& is_writable(CACHE_PAGE_DIR)
-								&& is_writable(CACHE_SQL_DIR)
-								&& is_writable(CACHE_TEMPLATE_DIR)
-								&& is_writable(CONFIG_FILE)
-								&& is_writable(SITE_LOCK)
-								&& is_writable(AP_LOCK)
-								&& is_writable(UPLOAD_BACKUP_DIR)
-								&& is_writable(UPLOAD_GLOBAL_DIR)
-								&& is_writable(UPLOAD_PER_PAGE_DIR)
-								&& is_writable(XML_DIR)
-								&& is_writable(SITEMAP_XML);
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
-	<li><?php echo CACHE_CONFIG_DIR		. '   ' . output_image(is_writable(CACHE_CONFIG_DIR)); ?></li>
-	<li><?php echo CACHE_FEED_DIR		. '   ' . output_image(is_writable(CACHE_FEED_DIR)); ?></li>
-	<li><?php echo CACHE_PAGE_DIR		. '   ' . output_image(is_writable(CACHE_PAGE_DIR)); ?></li>
-	<li><?php echo CACHE_SQL_DIR		. '   ' . output_image(is_writable(CACHE_SQL_DIR)); ?></li>
-	<li><?php echo CACHE_TEMPLATE_DIR	. '   ' . output_image(is_writable(CACHE_TEMPLATE_DIR)); ?></li>
-	<li><?php echo CONFIG_FILE			. '   ' . output_image(is_writable(CONFIG_FILE)); ?></li>
-	<li><?php echo SITE_LOCK			. '   ' . output_image(is_writable(SITE_LOCK)); ?></li>
-	<li><?php echo AP_LOCK				. '   ' . output_image(is_writable(AP_LOCK)); ?></li>
-	<li><?php echo UPLOAD_BACKUP_DIR	. '   ' . output_image(is_writable(UPLOAD_BACKUP_DIR)); ?></li>
-	<li><?php echo UPLOAD_GLOBAL_DIR	. '   ' . output_image(is_writable(UPLOAD_GLOBAL_DIR)); ?></li>
-	<li><?php echo UPLOAD_PER_PAGE_DIR	. '   ' . output_image(is_writable(UPLOAD_PER_PAGE_DIR)); ?></li>
-	<li><?php echo XML_DIR				. '   ' . output_image(is_writable(XML_DIR)); ?></li>
-	<li><?php echo SITEMAP_XML			. '   ' . output_image(is_writable(SITEMAP_XML)); ?></li>
+	<?php
+	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
+	foreach ($file_permission as $permission)
+	{
+		@chmod ($permission[0], $permission[1]);
+		$result = is_writable($permission[0]);
+
+		if (!$result)
+		{
+			$file_permissions_result = false;
+			# echo "\t<li>" . 'File permissions: <code>' . decoct(fileperms($permission[0])) . "</code></li>\n";
+		}
+
+		echo "\t<li>" . $permission[0] . '   ' . output_image($result) . "</li>\n";
+	}
+	?>
 </ul>
 	<?php
 	/*
@@ -163,8 +189,8 @@ write_config_hidden_nodes(['none' => '']);
 	else if (!$file_permissions_result)
 	{
 ?>
-<p><?php echo $lang['NotePermissions']; ?></p>
-<p><?php echo $lang['ErrorPermissions']; ?></p>
+<p class="warning"><?php echo $lang['NotePermissions']; ?></p>
+<p class="security"><?php echo $lang['ErrorPermissions']; ?></p>
 <input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
 <input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
 <?php

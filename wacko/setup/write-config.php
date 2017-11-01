@@ -43,9 +43,9 @@ $config_code  = "<?php\n// config.php " . $lang['WrittenAt'].strftime("%c") . "\
 $config_code .= array_to_str($config_file) . "\n?>";
 
 // try to write configuration file
-echo "         <h2>" . $lang['FinalStep'] . "</h2>\n";
-echo "         <ul>\n";
-echo "            <li>" . $lang['Writing'] . " - ";
+echo "		<h2>" . $lang['FinalStep'] . "</h2>\n";
+echo "		<ul>\n";
+echo "			<li>" . $lang['Writing'] . " - ";
 
 $perm_changed	= true;
 $file_name		= CONFIG_FILE;
@@ -62,7 +62,7 @@ if (is_writable($file_name))
 
 		echo output_image(true) . "</li>\n";
 
-		echo "            <li>" . $lang['RemovingWritePrivilege'] . "   ".output_image($perm_changed) . "</li>\n";
+		echo "			<li>" . $lang['RemovingWritePrivilege'] . "   " . output_image($perm_changed) . "</li>\n";
 	}
 	else
 	{
@@ -77,7 +77,7 @@ else
 	echo output_image(false) . "</li>\n";
 }
 
-echo "         </ul>\n";
+echo "		</ul>\n";
 
 // purge old cache files
 Ut::purge_directory(CACHE_PAGE_DIR);
@@ -85,22 +85,22 @@ Ut::purge_directory(CACHE_SQL_DIR);
 Ut::purge_directory(CACHE_CONFIG_DIR);
 Ut::purge_directory(CACHE_TEMPLATE_DIR);
 
-echo "         <h2>" . $lang['SecurityConsiderations'] . "</h2>\n";
-echo "         <ul class=\"security\">\n";
+echo "		<h2>" . $lang['SecurityConsiderations'] . "</h2>\n";
+echo "		<ul class=\"security\">\n";
 
 if (!$perm_changed)
 {
-	echo "            <li>" . $lang['SecurityRisk'] . "</li>\n";
+	echo "			<li>" . $lang['SecurityRisk'] . "</li>\n";
 }
 
-echo "            <li>" . $lang['RemoveSetupDirectory'] . "</li>\n";
+echo "			<li>" . $lang['RemoveSetupDirectory'] . "</li>\n";
 
 if ($write_file == false)
 {
-	echo "            <li>" . $lang['ErrorGivePrivileges'] . "</li>\n";
+	echo "			<li>" . $lang['ErrorGivePrivileges'] . "</li>\n";
 }
 
-echo "         </ul>\n";
+echo "		</ul>\n";
 
 ?>
 <form action="<?php echo my_location() ?>?installAction=write-config" method="post">
@@ -110,8 +110,8 @@ echo "         </ul>\n";
 	// If there was a problem then show the "Try Again" button.
 	if ($write_file == true)
 	{
-		echo "         <h2>" . $lang['InstallationComplete'] . "</h2>\n";
-		echo "         <p>" . str_replace('%1', $config['base_url'], $lang['ThatsAll']) . "</p>\n";
+		echo "		<h2>" . $lang['InstallationComplete'] . "</h2>\n";
+		echo "		<p>" . str_replace('%1', $config['base_url'], $lang['ThatsAll']) . "</p>\n";
 	}
 	else
 	{
@@ -122,7 +122,7 @@ echo "         </ul>\n";
 	<?php
 	if ($write_file == false)
 	{
-		echo '         <div id="config_code" class="config_code"><pre>' . htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</pre></div>\n";
+		echo '		<div id="config_code" class="config_code"><pre>' . htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</pre></div>\n";
 	}
 	?>
 <br>
