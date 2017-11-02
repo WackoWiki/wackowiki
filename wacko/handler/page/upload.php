@@ -130,8 +130,6 @@ if (isset($_POST['upload']) & $can_upload)
 			// here would be place for translit
 			$t_name = $this->format($name, 'translit');
 
-
-
 			// 1.5. +write @page_id@ to name
 			if (isset($_POST['to']) && $_POST['to'] != 'global')
 			{
@@ -255,6 +253,7 @@ if (isset($_POST['upload']) & $can_upload)
 
 						$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
 						$uploaded_dt	= $this->db->date();
+						$page_id		= $is_global ? 0 : $this->page['page_id'];
 
 						// replace option: keep old data if new entry is empty
 						$description	= substr($_POST['file_description'], 0, 250);
@@ -265,7 +264,7 @@ if (isset($_POST['upload']) & $can_upload)
 						{
 							$this->db->sql_query(
 								"UPDATE " . $this->db->table_prefix . "file SET " .
-									#"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', " .
+									#"page_id			= '" . (int) $page_id . "', " .
 									"user_id			= '" . $user['user_id'] . "'," .
 									#"file_name			= " . $this->db->q(file_name) . ", " .
 									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
@@ -292,7 +291,7 @@ if (isset($_POST['upload']) & $can_upload)
 							// 5. insert line into DB
 							$this->db->sql_query(
 								"INSERT INTO " . $this->db->table_prefix . "file SET " .
-									"page_id			= '" . ($is_global ? "0" : $this->page['page_id']) . "', " .
+									"page_id			= '" . (int) $page_id . "', " .
 									"user_id			= '" . $user['user_id'] . "'," .
 									"file_name			= " . $this->db->q($file_name) . ", " .
 									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
@@ -321,7 +320,7 @@ if (isset($_POST['upload']) & $can_upload)
 							"LIMIT 1");
 
 						$this->set_message($this->_t('UploadDone'), 'success');
-						$this->notify_upload($this->page['page_id'], $this->page['tag'], $file_name, $user['user_id'], $user['user_name'], $replace);
+						$this->notify_upload($page_id, $file['file_id'], $this->page['tag'], $file_name, $user['user_id'], $user['user_name'], $replace);
 
 						// log event
 						if ($is_global)
