@@ -2569,22 +2569,22 @@ class Wacko
 		$body[]		=	'NewPageCreatedBody';
 		$body[]		=	$user_name;
 		$body[]		=	$title;
-		$body[]		=	$tag;
+		$body[]		=	$this->href('', $tag);
 
-		$this->	notify_moderator($page_id, $user_id, $subject, $body);
+		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
 
-	function notify_upload($page_id, $tag, $file_name, $user_id, $user_name, $replace)
+	function notify_upload($page_id, $file_id, $tag, $file_name, $user_id, $user_name, $replace)
 	{
 		$subject[]	=	'FileUploadedSubj';
 		$subject[]	=	$file_name;
 
 		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
 		$body[]		=	$user_name;
-		$body[]		=	$file_name;
-		$body[]		=	$page_id? $tag : $this->_t('UploadGlobal'); // TODO: to page / global
+		$body[]		=	$file_name;	#$page_id? $tag : $this->_t('UploadGlobal'); // TODO: to page / global
+		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]);
 
-		$this->	notify_moderator($page_id, $user_id, $subject, $body);
+		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
 
 	function notify_moderator($page_id, $user_id, $subject, $body)
@@ -2612,8 +2612,8 @@ class Wacko
 
 						$_body		=	# $this->_t('EmailModerator') . ".\n\n" .
 										Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n\n" .
-										"'$body[2]'\n" .
-										$this->href('', $body[3]) . "\n\n";
+										"'" . $body[2] . "'" . "\n" .
+										$body[3] . "\n\n";
 
 						$this->send_user_email($user, $_subject, $_body);
 
@@ -3525,7 +3525,6 @@ class Wacko
 						// TODO: option: direct else link to filemeta page
 						if ($_global == true)
 						{
-
 							if (!$text)
 							{
 								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
