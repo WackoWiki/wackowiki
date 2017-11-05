@@ -19,7 +19,7 @@ if (!defined('IN_WACKO'))
 
 // TODO:
 // - add option to select all files: all=1 (?)
-// - add option to select used files -> file_link table & page_id
+// - add option to select used files -> file_link table & page_id -> DONE
 // - add option to filter by tags
 
 $page_id = '';
@@ -28,6 +28,7 @@ if (!isset($nomark))	$nomark		= '';
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= '';	// global attachments
 if (!isset($all))		$all		= '';	// all attachments
+if (!isset($linked))	$linked		= '';	// file link in page
 if (!isset($tag))		$tag		= '';	// FIXME: $tag == $page
 if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
@@ -47,6 +48,7 @@ $file_name_maxlen	= 80;
 // filter categories
 $type_id			= isset($_GET['type_id']) ? (int) $_GET['type_id'] : $type_id;
 $category_id		= (int) @$_GET['category_id'];
+$file_link			= (int) $linked;
 
 
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
@@ -108,8 +110,11 @@ if ($can_view)
 		($category_id
 			? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = f.file_id) "
 			: "") . " " .
+		($file_link
+			? "INNER JOIN " . $this->db->table_prefix . "file_link AS l ON (f.file_id = l.file_id) "
+			: "") . " " .
 			"WHERE ".
-		($all
+		($all || $file_link
 			? "f.page_id IS NOT NULL "
 			: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
 			) . " " .
@@ -124,6 +129,11 @@ if ($can_view)
 	{
 		$selector .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
 					 "AND k.object_type_id = " . OBJECT_FILE . " ";
+	}
+
+	if ($file_link)
+	{
+		$selector .= "AND l.page_id = " . $filepage['page_id'] . " ";
 	}
 
 	$count = $this->db->load_single(
