@@ -777,6 +777,7 @@ $wacko_translation = [
 	'AttachmentsByTime'			=> 'by time',
 	'AttachmentsGlobal'			=> 'global',
 	'AttachmentsAll'			=> 'all',
+	'AttachmentsLinked'			=> 'used',
 
 	'FileViewProperties'		=> 'View',
 	'FileViewPropertiesTip'		=> 'View the metadata of this file',
