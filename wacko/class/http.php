@@ -224,7 +224,7 @@ class Http
 
 				if (strpos($this->method, '.xml') === false)
 				{
-					echo '</body></html>';
+					echo "</body>\n</html>";
 				}
 
 				$this->gzip();
