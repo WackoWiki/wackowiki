@@ -43,6 +43,7 @@ class Wacko
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
 	var $page_lang		 		= null;
+	var $html_foot				= '';
 	var $html_head				= '';
 	var $hide_article_header	= false;
 	var $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
@@ -8187,6 +8188,12 @@ class Wacko
 	function add_html_head($text)
 	{
 		$this->html_head .= $text;
+	}
+
+	// to use by actions to add some above </body> e.g. to adding custom JS
+	function add_html_foot($text)
+	{
+		$this->html_foot .= $text;
 	}
 
 	// HANDLER HELPERS
