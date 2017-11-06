@@ -72,3 +72,6 @@ if ($this->db->policy_page)
 {
 	$tpl->policy_url = $this->href('', $this->db->policy_page);
 }
+
+// load scripts
+$tpl->f_additions = $this->html_foot;

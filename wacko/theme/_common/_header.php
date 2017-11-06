@@ -20,13 +20,12 @@ $tpl->h_norobots = ($this->method != 'show' || $this->db->noindex || !$this->pag
 
 if ($this->has_access('read'))
 {
-	$tpl->h_page_keywords = $this->get_keywords();
-	$tpl->h_page_description = $this->get_description();
+	$tpl->h_page_keywords		= $this->get_keywords();
+	$tpl->h_page_description	= $this->get_description();
 }
 
 if ($this->db->allow_x11colors)
 {
-	// TODO: $tpl-> ???
 	$tpl_h_x11_colors = $this->db->base_url . Ut::join_path(THEME_DIR, "_common/X11colors.css");
 }
 
@@ -64,8 +63,8 @@ if ($this->db->enable_feeds)
 
 	if (!$this->hide_revisions)
 	{
-		$tpl->h_rss_revisions_tag = $this->tag;
-		$tpl->h_rss_revisions_href = $this->href('revisions.xml');
+		$tpl->h_rss_revisions_tag	= $this->tag;
+		$tpl->h_rss_revisions_href	= $this->href('revisions.xml');
 	}
 }
 
