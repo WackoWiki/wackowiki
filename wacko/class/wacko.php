@@ -2583,7 +2583,7 @@ class Wacko
 		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
 		$body[]		=	$user_name;
 		$body[]		=	$file_name;	#$page_id? $tag : $this->_t('UploadGlobal'); // TODO: to page / global
-		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]);
+		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id]);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
