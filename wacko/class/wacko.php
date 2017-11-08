@@ -1128,7 +1128,7 @@ class Wacko
 		// load page
 		if ($metadata_only)
 		{
-			$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, '.
+			$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
 						'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
 						'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 			$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
@@ -1249,7 +1249,8 @@ class Wacko
 			if (isset($this->page_cache['page_id'][$page_id]))
 			{
 				if (isset($this->page_cache['page_id'][$page_id]['mdonly'])
-					&& ($this->page_cache['page_id'][$page_id]['mdonly'] == 0 || $metadata_only == $this->page_cache['page_id'][$page_id]['mdonly']))
+					&& (   $this->page_cache['page_id'][$page_id]['mdonly'] == 0
+						|| $this->page_cache['page_id'][$page_id]['mdonly'] == $metadata_only))
 				{
 					return $this->page_cache['page_id'][$page_id];
 				}
@@ -1263,7 +1264,8 @@ class Wacko
 		{
 			if (isset($this->page_cache['supertag'][$supertag]))
 			{
-				if ($this->page_cache['supertag'][$supertag]['mdonly'] == 0 || $metadata_only == $this->page_cache['supertag'][$supertag]['mdonly'])
+				if (   $this->page_cache['supertag'][$supertag]['mdonly'] == 0
+					|| $this->page_cache['supertag'][$supertag]['mdonly'] == $metadata_only)
 				{
 					return $this->page_cache['supertag'][$supertag];
 				}
@@ -2582,7 +2584,7 @@ class Wacko
 
 		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
 		$body[]		=	$user_name;
-		$body[]		=	$file_name;	#$page_id? $tag : $this->_t('UploadGlobal'); // TODO: to page / global
+		$body[]		=	$file_name . "\n" . $page_id? $tag : $this->_t('UploadGlobal');
 		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id]);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
