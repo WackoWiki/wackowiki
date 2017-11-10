@@ -91,8 +91,7 @@ if (!isset($letters)
 	}
 }
 
-$count = $this->db->load_single(
-	"SELECT COUNT(page_id) AS n " .
+$selector =
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = '0' " .
 		"AND deleted = '0' " .
@@ -108,38 +107,49 @@ $count = $this->db->load_single(
 					? "title "
 					: "tag ") .
 				"LIKE " . $this->db->q($letter . '%') . " "
-			: "")
+			: "");
+
+$count = $this->db->load_single(
+	"SELECT COUNT(page_id) AS n " .
+	$selector
 	, true);
 
 $pagination = $this->pagination($count['n'], $max, 'p', ($letter !== ''? ['letter' => $letter] : []));
 
 // collect data for index
-$pages_to_display = [];
+$pages_to_display	= [];
+$page_ids			= [];
 
 if (($pages = $this->db->load_all(
-	"SELECT page_id, tag, title, page_lang " .
-	"FROM " . $this->db->table_prefix . "page " .
-	"WHERE comment_on_id = '0' " .
-		"AND deleted = '0' " .
-		($page
-			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-			: "") .
-		($lang
-			? "AND page_lang = " . $this->db->q($lang) . " "
-			: "") .
-		($letter !== ''
-			? "AND " .
-				($title
-					? "title "
-					: "tag ") .
-				"LIKE " . $this->db->q($letter . '%') . " "
-			: "") .
+	"SELECT page_id, tag, supertag, title, page_lang " .
+	$selector .
 	"ORDER BY " .
 		($title
 			? "title ASC "
 			: "tag ASC ") .
 	$pagination['limit'], true)))
 {
+	foreach ($pages as $page)
+	{
+		$page_ids[] = $page['page_id'];
+		// cache page_id for for has_access validation in link function
+		$this->page_id_cache[$page['tag']] = $page['page_id'];
+		$this->cache_page($page, 0, 1);
+	}
+
+	if ($read_acls = $this->db->load_all(
+		"SELECT a.page_id, a.privilege, a.list " .
+		"FROM " . $this->db->table_prefix . "acl a " .
+		"WHERE a.page_id IN ( " . implode(', ', $page_ids) . " ) " .
+			"AND a.privilege = 'read' " .
+		"ORDER BY a.page_id"))
+	{
+		foreach ($read_acls as $read_acl)
+		{
+			$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
+		}
+	}
+
 	foreach ($pages as $page)
 	{
 		if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
@@ -154,7 +164,6 @@ if (($pages = $this->db->load_all(
 				$pages_to_display[$page['page_id']] = $page;
 			}
 		}
-
 	}
 }
 
