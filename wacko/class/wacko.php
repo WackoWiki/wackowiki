@@ -1100,7 +1100,7 @@ class Wacko
 		return $page;
 	}
 
-	function _load_page($tag, $page_id = 0, $revision_id = '', $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
+	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
 		$supertag		= '';
 		$cached_page	= '';
@@ -1126,28 +1126,28 @@ class Wacko
 		}
 
 		// load page
-		if ($metadata_only)
-		{
-			$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
-						'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
-						'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
-			$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
-						'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, '.
-						'p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
-		}
-		else
-		{
-			$what_p =	'p.*, u.user_name, o.user_name AS owner_name';
-			$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, '.
-						'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.reviewed_time, '.
-						'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, '.
-						'p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, '.
-						's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, '.
-						'u.user_name, o.user_name AS owner_name';
-		}
-
 		if (!$page)
 		{
+			if ($metadata_only)
+			{
+				$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, ' .
+							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
+							'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, ' .
+							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
+							'p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
+			}
+			else
+			{
+				$what_p =	'p.*, u.user_name, o.user_name AS owner_name';
+				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, ' .
+							'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.reviewed_time, ' .
+							'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, ' .
+							'p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, ' .
+							's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, ' .
+							'u.user_name, o.user_name AS owner_name';
+			}
+
 			if ($supertagged || $page_id)
 			{
 				$page = $this->db->load_single(
@@ -1369,7 +1369,7 @@ class Wacko
 	function cache_links()
 	{
 		$pages		= [];
-		$page_id	= [];
+		$page_ids	= [];
 		$acl		= [];
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
@@ -1425,8 +1425,6 @@ class Wacko
 		$pages[]	= $this->_t('SearchPage');
 		$pages[]	= $this->tag;
 
-		#$pages[]	= $this->tag;
-
 		$pages		= array_unique($pages);
 		$spages_str	= '';
 
@@ -1452,7 +1450,7 @@ class Wacko
 				$this->cache_page($link, 0, 1);
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
 				$exists[]	= $link['supertag'];
-				$page_id[]	= $link['page_id'];
+				$page_ids[]	= $link['page_id'];
 			}
 		}
 
@@ -1463,26 +1461,11 @@ class Wacko
 			if (isset($pages[array_search($notexist, $spages)]))
 			{
 				$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
-				#$this->cache_acl($this->get_page_id($notexist), 'read', 1, $acl);
 			}
 		}
 
-		$page_ids	= implode(', ', $page_id);
-
-		// hack to avoid multiple queries to get non-read privileges
-		if ($acls = $this->db->load_all(
-			"SELECT page_id, privilege, list " .
-			"FROM " . $this->db->table_prefix . "acl " .
-			"WHERE page_id IN (" . $page_ids . ") " .
-			#	"AND privilege = 'read'" .
-			"", true))
-		{
-			foreach ($acls as $acl)
-			{
-				#$this->cache_acl($acl['page_id'], 'read', 1, $acl);
-				$this->cache_acl($acl['page_id'], $acl['privilege'], 1, $acl);
-			}
-		}
+		// cache acls to avoid multiple queries to get non-read privileges
+		$this->preload_acl($page_ids, '');
 	}
 
 	function set_page($page)
@@ -1684,26 +1667,10 @@ class Wacko
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, 0, 1);
+				$page_ids[]	= $page['page_id'];
 			}
 
-			if (($read_acls = $this->db->load_all(
-			"SELECT a.page_id, a.privilege, a.list " .
-			"FROM " . $this->db->table_prefix . "acl a " .
-				"INNER JOIN " . $this->db->table_prefix . "page p ON (a.page_id = p.page_id) " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND a.page_id = p.page_id " .
-				($tag
-					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-					: '') .
-				"AND a.privilege = 'read' " .
-			"ORDER BY modified DESC " .
-			"LIMIT {$pagination['perpage']}", true)))
-			{
-				foreach ($read_acls as $read_acl)
-				{
-					$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
-				}
-			}
+			$this->preload_acl($page_ids);
 
 			return [$pages, $pagination];
 		}
@@ -1736,26 +1703,10 @@ class Wacko
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, 0, 1);
+				$page_ids[]	= $page['page_id'];
 			}
 
-			if ($read_acls = $this->db->load_all(
-			"SELECT a.page_id, a.privilege, a.list " .
-			"FROM " . $this->db->table_prefix . "acl a " .
-				"INNER JOIN " . $this->db->table_prefix . "page p ON (a.page_id = p.page_id) " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND a.page_id = p.page_id " .
-					($tag
-						? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-						: "") .
-				"AND a.privilege = 'read' " .
-			"ORDER BY created DESC " .
-			"LIMIT {$limit}"))
-			{
-				foreach ($read_acls as $read_acl)
-				{
-					$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
-				}
-			}
+			$this->preload_acl($page_ids);
 
 			return $pages;
 		}
@@ -5456,6 +5407,37 @@ class Wacko
 	}
 
 	/**
+	 * loads related privileges at once in obj-cache
+	 *
+	 * @param array $page_ids
+	 * @param string $privilege
+	 */
+	function preload_acl($page_ids, $privilege = 'read')
+	{
+		$default_privileges	= ['read', 'write', 'create', 'upload', 'comment'];
+
+		if (! in_array($privilege, $default_privileges))
+		{
+			$privilege = null;
+		}
+
+		if ($acls = $this->db->load_all(
+			"SELECT page_id, privilege, list " .
+			"FROM " . $this->db->table_prefix . "acl " .
+			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) " .
+				($privilege
+					? "AND privilege = " . $this->db->q($privilege) . " "
+					: "")
+			, true))
+		{
+			foreach ($acls as $acl)
+			{
+				$this->cache_acl($acl['page_id'], $acl['privilege'], 1, $acl);
+			}
+		}
+	}
+
+	/**
 	* Load ACL
 	*
 	* @param int $page_id
@@ -5467,7 +5449,6 @@ class Wacko
 	*
 	* @return array $acl Access control list
 	*/
-	// TODO: add bulk option -> load entire page related privileges at once in obj-cache
 	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = '')
 	{
 		$acl = '';
@@ -5563,7 +5544,7 @@ class Wacko
 			$user_name = strtolower($this->get_user_name());
 		}
 
-		if (!($page_id = trim($page_id)))
+		if (!($page_id = (int) $page_id))
 		{
 			$page_id = @$this->page['page_id'];
 		}
