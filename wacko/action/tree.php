@@ -91,17 +91,7 @@ if ($pages = $this->db->load_all(
 		}
 
 		// cache acls
-		if ($acls = $this->db->load_all(
-			"SELECT page_id, privilege, list " .
-			"FROM " . $this->db->table_prefix . "acl " .
-			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) " .
-				"AND privilege = 'read'", true))
-		{
-			foreach ($acls as $acl)
-			{
-				$this->cache_acl($acl['page_id'], 'read', 1, $acl);
-			}
-		}
+		$this->preload_acl($page_ids);
 
 		// header
 		if ($root)

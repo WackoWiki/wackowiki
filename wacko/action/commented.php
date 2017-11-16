@@ -32,24 +32,29 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 	if ($ids)
 	{
 		$pagination = $this->pagination(count($ids), $limit);
+		$page_ids	= [];
 
 		foreach ($ids as &$id)
 		{
+			$page_ids[]	= $id['page_id'];
 			$id = "'" . (int) $id['page_id'] . "'";
 		}
 
 		// load complete comments
 		$comments = $this->db->load_all(
-			"SELECT b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id, b.supertag,
+			"SELECT a.page_id, a.tag, a.supertag, b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id,
 				a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id,
 				u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time " .
 			"FROM " . $this->db->table_prefix . "page a " .
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (a.owner_id = o.user_id) " .
-			"WHERE a.page_id IN ( ".implode(', ', $ids) . " ) " .
+			"WHERE a.page_id IN ( " . implode(', ', $ids) . " ) " .
 			"ORDER BY comment_time DESC " .
 			$pagination['limit']);
+
+		// cache acls
+		$this->preload_acl($page_ids);
 	}
 
 	return [$comments, $pagination];
@@ -97,6 +102,9 @@ if ($this->user_allowed_comments())
 			$curday = '';
 			foreach ($pages as $page)
 			{
+				$this->cache_page($page, 0, 1);
+				$this->page_id_cache[$page['tag']] = $page['page_id'];
+
 				if ($this->db->hide_locked)
 				{
 					$access = $this->has_access('read', $page['comment_on_id']);

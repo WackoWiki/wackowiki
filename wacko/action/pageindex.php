@@ -131,24 +131,14 @@ if (($pages = $this->db->load_all(
 {
 	foreach ($pages as $page)
 	{
-		$page_ids[] = $page['page_id'];
+		$page_ids[] = (int) $page['page_id'];
 		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$page['tag']] = $page['page_id'];
 		$this->cache_page($page, 0, 1);
 	}
 
-	if ($read_acls = $this->db->load_all(
-		"SELECT a.page_id, a.privilege, a.list " .
-		"FROM " . $this->db->table_prefix . "acl a " .
-		"WHERE a.page_id IN ( " . implode(', ', $page_ids) . " ) " .
-			"AND a.privilege = 'read' " .
-		"ORDER BY a.page_id"))
-	{
-		foreach ($read_acls as $read_acl)
-		{
-			$this->cache_acl($read_acl['page_id'], 'read', 1, $read_acl);
-		}
-	}
+	// cache acls
+	$this->preload_acl($page_ids);
 
 	foreach ($pages as $page)
 	{
