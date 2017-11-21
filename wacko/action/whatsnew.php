@@ -26,7 +26,7 @@ if (isset($_GET['markread']) && $user == true)
 
 // loading new pages/comments
 $pages1 = $this->db->load_all(
-	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 1 AS ctype, p.deleted " .
+	"SELECT p.page_id, p.tag, p.supertag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 1 AS ctype, p.deleted " .
 	"FROM " . $this->db->table_prefix . "page p " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -36,7 +36,7 @@ $pages1 = $this->db->load_all(
 
 // loading revisions
 $pages2 = $this->db->load_all(
-	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 1 AS ctype, p.deleted " .
+	"SELECT p.page_id, p.tag, p.supertag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 1 AS ctype, p.deleted " .
 	"FROM " . $this->db->table_prefix . "page p " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -48,7 +48,7 @@ $pages2 = $this->db->load_all(
 
 // loading uloads
 $files = $this->db->load_all(
-	"SELECT f.page_id, c.tag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, 0 as comment_on_id, f.hits as ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 2 AS ctype, f.deleted " .
+	"SELECT f.page_id, c.tag, c.supertag, f.uploaded_dt as created, f.uploaded_dt as modified, f.file_name as title, f.file_id as comment_on_id, f.hits as ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag as comment_on_page, c.title as title_on_page, user_name, 2 AS ctype, f.deleted " .
 	"FROM " . $this->db->table_prefix . "file f " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (f.page_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
@@ -82,11 +82,47 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	$curday = '';
 
+	//
+	foreach ($pages as $page)
+	{
+		if ($page['ctype'] == 2)
+		{
+			$file_ids[] = $page['comment_on_id'];
+		}
+		else
+		{
+			$page_ids[] = $page['page_id'];
+
+			// cache page_id for for has_access validation in link function
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+			$this->cache_page($page, 0, 1);
+		}
+	}
+
+	if ($files = $this->db->load_all(
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, p.supertag, u.user_name " .
+		"FROM " . $this->db->table_prefix . "file f " .
+			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"WHERE f.file_id IN ( " . implode(', ', $file_ids) . " ) " .
+		" "))
+	{
+		foreach ($files as $file)
+		{
+			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
+		}
+	}
+
+	// cache acls
+	$this->preload_acl($page_ids);
+
 	foreach ($pages as $page)
 	{
 		if ($this->db->hide_locked)
 		{
-			$access = ($page['comment_on_id'] ? $this->has_access('read', $page['comment_on_id']) : $this->has_access('read', $page['page_id']));
+			$access = ($page['comment_on_id'] && $page['ctype'] != 2
+					? $this->has_access('read', $page['comment_on_id'])
+					: $this->has_access('read', $page['page_id']));
 		}
 		else
 		{
