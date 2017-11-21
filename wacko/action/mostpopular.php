@@ -11,11 +11,11 @@ if (!defined('IN_WACKO'))
  All arguments are optional, the "dontrecurse" argument is only used when the "for" argument is used and even then it's still optional
 
  {{mostpopular
- [max=50] // maximum number of pages to retrieve
- [for|page="PageName"] // page name to start from in the page hierarchy
- [title=1] // shows the page title
- [nomark=1] // makes it possible to hide frame around
- [dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "for" page
+	[max=50] // maximum number of pages to retrieve
+	[for|page="PageName"] // page name to start from in the page hierarchy
+	[title=1] // shows the page title
+	[nomark=1] // makes it possible to hide frame around
+	[dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "for" page
  }}
  */
 
@@ -69,8 +69,8 @@ else
 		$pages = $this->db->load_all(
 			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits " .
 			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
-			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
 			"WHERE a.tag <> " . $this->db->q($page) . " " .
 				"AND a.tag = c.tag " .
 				"AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 " .
