@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
  Page Index Action
  {{pageindex
-	[page="Cluster"]		// show page index only for a certain cluster
+	[page="Cluster"]	// show page index only for a certain cluster
 	[max=50]			// number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
 	[letter="a"]		// only display pages whose name starts with this letter
 	[title=1]			// takes title inplace of tag
@@ -28,7 +28,7 @@ $tag		= $page; // use tag from here on
 $title		= (int) $title;
 $_alnum		= '/' . $this->language['ALPHANUM'] . '/S';
 
-$get_letter = function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
+$get_letter	= function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {
 	$ch = strtoupper(substr($ch, 0, 1));
 
@@ -121,7 +121,7 @@ $pages_to_display	= [];
 $page_ids			= [];
 
 if (($pages = $this->db->load_all(
-	"SELECT page_id, tag, supertag, title, page_lang " .
+	"SELECT page_id, owner_id, tag, supertag, title, page_lang " .
 	$selector .
 	"ORDER BY " .
 		($title

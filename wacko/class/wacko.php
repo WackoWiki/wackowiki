@@ -5265,7 +5265,7 @@ class Wacko
 	}
 
 	// returns true if logged in user is owner of current page, or page specified in $tag
-	function is_owner($page_id = '')
+	function is_owner($page_id = null)
 	{
 		// check if user is logged in
 		if (!$this->get_user())
@@ -5274,7 +5274,7 @@ class Wacko
 		}
 
 		// set default tag
-		if (!($page_id = trim($page_id)))
+		if (!$page_id)
 		{
 			$page_id = $this->page['page_id'];
 		}
@@ -5316,7 +5316,7 @@ class Wacko
 
 	function get_page_owner_id($page_id = '', $revision_id = '')
 	{
-		if (!($page_id = trim($page_id)))
+		if (!$page_id)
 		{
 			if (!$revision_id)
 			{
