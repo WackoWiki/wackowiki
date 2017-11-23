@@ -311,6 +311,16 @@ if (isset($_POST['upload']) & $can_upload)
 									"total_uploads = total_uploads + 1 " .
 								"WHERE user_id = '" . $user['user_id'] . "' " .
 								"LIMIT 1");
+
+							if (!$is_global)
+							{
+								// update page uploads count
+								$this->db->sql_query(
+									"UPDATE " . $this->db->table_prefix . "page SET " .
+										"files = files + 1 " .
+									"WHERE page_id = '" . $page_id . "' " .
+									"LIMIT 1");
+							}
 						}
 
 						$file = $this->db->load_single(

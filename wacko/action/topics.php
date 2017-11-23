@@ -142,7 +142,6 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	foreach ($topics as $result)
 	{
 		$page_ids[]	= $result['page_id'];
-		#$this->page_id_cache[$result['tag']] = $result['page_id'];
 	}
 
 	// cache acls and categories

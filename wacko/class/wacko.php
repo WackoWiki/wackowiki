@@ -1579,7 +1579,7 @@ class Wacko
 		return [$revisions, $pagination];
 	}
 
-	function count_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0)
+	function count_revisions($page_id, $hide_minor_edit = 0, $deleted = 0)
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(revision_id) AS n " .
@@ -1588,7 +1588,7 @@ class Wacko
 				($hide_minor_edit
 					? "AND minor_edit = '0' "
 					: "") .
-				(!$show_deleted
+				(!$deleted
 					? "AND deleted <> '1' "
 					: "") .
 			"LIMIT 1");
@@ -1774,13 +1774,10 @@ class Wacko
 	{
 		if (isset($this->category_cache[$object_id][$type_id]))
 		{
-			#echo $object_id . " category_cache TRUE <br>";
-			#Ut::debug_print_r($this->category_cache[$object_id][$type_id]);
 			return $this->category_cache[$object_id][$type_id];
 		}
 		else
 		{
-			#echo $object_id . " category_cache FALSE <br>";
 			$categories = $this->db->load_all(
 				"SELECT c.category_id, c.category " .
 				"FROM " . $this->db->table_prefix . "category c " .
@@ -1795,8 +1792,17 @@ class Wacko
 		}
 	}
 
-	function preload_categories($object_ids, $type_id = OBJECT_PAGE, $cache = false)
+	/**
+	 * loads related categories at once in obj-cache
+	 *
+	 * @param array $object_ids
+	 * @param integer $type_id
+	 * @param boolean $cache
+	 */
+	function preload_categories($object_ids, $type_id = OBJECT_PAGE, $cache = true)
 	{
+		$cache_ids = [];
+
 		if ($categories = $this->db->load_all(
 			"SELECT ca.object_id, ca.object_type_id, c.category_id, c.category " .
 			"FROM " . $this->db->table_prefix . "category c " .
@@ -2314,6 +2320,12 @@ class Wacko
 				"page_lang		= " . $this->db->q($page['page_lang']) . ", " .
 				"keywords		= " . $this->db->q($page['keywords']) . ", " .
 				"description	= " . $this->db->q($page['description']));
+
+		$this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "page SET " .
+				"revisions = revisions + 1 " .
+			"WHERE page_id = '" . (int) $page['page_id'] . "' " .
+			"LIMIT 1");
 
 		// update user statistics for revisions made
 		if ($user = $this->get_user())
@@ -5193,37 +5205,18 @@ class Wacko
 	// COMMENTS AND COUNTS
 
 	// recount all comments for a given page
-	function count_comments($comment_on_id, $deleted = 0)
+	function count_comments($page_id, $deleted = 0)
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(tag) AS n " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id = '" . (int) $comment_on_id . "' " .
+			"WHERE comment_on_id = '" . (int) $page_id . "' " .
 				($deleted != 1
 					? "AND deleted <> '1' "
 					: "") .
 			"LIMIT 1");
 
 		return (int) $count['n'];
-	}
-
-	// get current number of comments
-	function get_comments_count($page_id = '')
-	{
-		if ($this->page && $page_id == false)
-		{
-			return $this->page['comments'];
-		}
-		else
-		{
-			$count = $this->db->load_single(
-				"SELECT comments " .
-				"FROM " . $this->db->table_prefix . "page " .
-				"WHERE page_id = '" . (int) $page_id . "' " .
-				"LIMIT 1");
-
-			return (int) $count['comments'];
-		}
 	}
 
 	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0)

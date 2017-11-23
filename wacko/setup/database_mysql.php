@@ -158,6 +158,8 @@ $table_page = "CREATE TABLE {$pref}page (" .
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page'," .
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"comments INT(4) UNSIGNED NOT NULL DEFAULT '0'," .
+					"files INT(4) UNSIGNED NOT NULL DEFAULT '0'," .
+					"revisions INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"hits INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"theme VARCHAR(20) DEFAULT NULL," .
 					"page_lang VARCHAR(2) NOT NULL DEFAULT ''," .

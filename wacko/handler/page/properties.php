@@ -67,13 +67,6 @@ if ($_POST)
 }
 
 // load settings
-$revs = $this->db->load_single(
-	"SELECT COUNT(revision_id) AS total " .
-	"FROM " . $this->db->table_prefix . "revision " .
-	"WHERE page_id = '" . $this->page['page_id'] . "' " .
-	"GROUP BY tag " .
-	"LIMIT 1");
-
 $rating = $this->db->load_single(
 	"SELECT page_id, value, voters " .
 	"FROM " . $this->db->table_prefix . "rating " .
@@ -178,7 +171,7 @@ $tpl->page		= $this->page;
 $tpl->owner		= $this->user_link($this->page['owner_name'], '', true, false);
 $tpl->bodylen	= $this->binary_multiples($this->page['page_size'], false, true, true);
 $tpl->bodyrlen	= $this->binary_multiples(strlen($this->page['body_r']), false, true, true);
-$tpl->revs		= (int) $revs['total'];
+$tpl->revs		= $this->page['revisions'];
 
 if ($this->db->footer_rating)
 {

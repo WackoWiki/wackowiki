@@ -173,6 +173,12 @@ $upgrade['5.5.rc2'][]	= ['alter',		'page',				$alter_page_r5_4_4];
 $upgrade['5.5.rc2'][]	= ['update',	'page',				$update_page_r5_4_3];
 $upgrade['5.5.rc2'][]	= ['update',	'page',				$update_page_r5_4_4];
 
+$upgrade['5.5.0'][]		= ['alter',	'page',					$alter_page_r5_4_5];
+$upgrade['5.5.0'][]		= ['alter',	'page',					$alter_page_r5_4_6];
+
+$upgrade['5.5.0'][]		= ['update',	'page',				$update_page_r5_4_5];
+$upgrade['5.5.0'][]		= ['update',	'page',				$update_page_r5_4_6];
+
 // page link
 $upgrade['5.5.rc2'][]	= ['rename',	'page_link',		$rename_page_link_r5_4_0];
 
