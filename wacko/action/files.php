@@ -22,7 +22,8 @@ if (!defined('IN_WACKO'))
 // - add option to select used files -> file_link table & page_id -> DONE
 // - add option to filter by tags
 
-$page_id = '';
+$page_id	= '';
+$files		= [];
 
 if (!isset($nomark))	$nomark		= '';
 if (!isset($order))		$order		= '';
@@ -154,10 +155,13 @@ if ($can_view)
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);
 
-	if (!is_array($files))
+	foreach ($files as $file)
 	{
-		$files = [];
+		$object_ids[]	= $file['file_id'];
 	}
+
+	// cache categories
+	$this->preload_categories($object_ids, OBJECT_FILE);
 
 	// display
 	$info_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileViewProperties') . '" alt="' . $this->_t('FileViewProperties') . '" class="btn-info"/>';

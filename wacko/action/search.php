@@ -62,6 +62,16 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		"ORDER BY score DESC " .
 		$pagination['limit']);
 
+	foreach ($results as $result)
+	{
+		$page_ids[]	= $result['page_id'];
+		$this->page_id_cache[$result['tag']] = $result['page_id'];
+	}
+
+	// cache acls
+	$this->preload_acl($page_ids);
+	$this->preload_categories($page_ids);
+
 	return [$results, $pagination, $count['n']];
 };
 

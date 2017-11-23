@@ -24,6 +24,7 @@ class Wacko
 	var $hide_revisions			= false;
 	var $_acl					= [];
 	var $acl_cache				= [];
+	var $category_cache			= [];
 	var $page_id_cache			= [];
 	var $context				= [];		// page context, used for correct processing of inclusions
 	var $current_context		= 0;		// current context level
@@ -1344,7 +1345,7 @@ class Wacko
 	{
 		if ($page_id != 0)
 		{
-			if (isset( $this->wanted_cache['page_id'][$page_id] ))
+			if (isset($this->wanted_cache['page_id'][$page_id]))
 			{
 				return $this->wanted_cache['page_id'][$page_id];
 			}
@@ -1355,7 +1356,7 @@ class Wacko
 		}
 		else
 		{
-			if (isset( $this->wanted_cache['tag'][$this->language['code']][$tag] ))
+			if (isset($this->wanted_cache['tag'][$this->language['code']][$tag]))
 			{
 				return $this->wanted_cache['tag'][$this->language['code']][$tag];
 			}
@@ -1771,17 +1772,55 @@ class Wacko
 
 	function load_categories($object_id = 0, $type_id = 1, $cache = false)
 	{
-		$categories = $this->db->load_all(
-			"SELECT c.category_id, c.category " .
+		if (isset($this->category_cache[$object_id][$type_id]))
+		{
+			#echo $object_id . " category_cache TRUE <br>";
+			#Ut::debug_print_r($this->category_cache[$object_id][$type_id]);
+			return $this->category_cache[$object_id][$type_id];
+		}
+		else
+		{
+			#echo $object_id . " category_cache FALSE <br>";
+			$categories = $this->db->load_all(
+				"SELECT c.category_id, c.category " .
+				"FROM " . $this->db->table_prefix . "category c " .
+					"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
+				"WHERE ca.object_id  = '" . (int) $object_id . "' " .
+				($type_id != 0
+					? "AND ca.object_type_id = '" . (int) $type_id . "' "
+					: "AND ca.object_type_id = '" . (int) $type_id . "' " ) // TODO: explode array IN
+				, $cache);
+
+			return $categories;
+		}
+	}
+
+	function preload_categories($object_ids, $type_id = OBJECT_PAGE, $cache = false)
+	{
+		if ($categories = $this->db->load_all(
+			"SELECT ca.object_id, ca.object_type_id, c.category_id, c.category " .
 			"FROM " . $this->db->table_prefix . "category c " .
 				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
-			"WHERE ca.object_id  = '" . (int) $object_id . "' " .
+			"WHERE ca.object_id IN ( '" . implode("', '", $object_ids) . "' ) " .
 			($type_id != 0
 				? "AND ca.object_type_id = '" . (int) $type_id . "' "
 				: "AND ca.object_type_id = '" . (int) $type_id . "' " ) // TODO: explode array IN
-			, $cache);
+			, $cache))
+		{
+			foreach ($categories as $category)
+			{
+				$cache_ids[] = $category['object_id'];
+				$this->category_cache[$category['object_id']][$category['object_type_id']][] = $category;
+			}
+		}
 
-		return $categories;
+		$empty_results = array_diff($object_ids, $cache_ids);
+
+		foreach ($empty_results as $category_id)
+		{
+			// also add empty results
+			$this->category_cache[$category_id][$type_id] = [];
+		}
 	}
 
 	function bad_words($text)
@@ -7738,7 +7777,7 @@ class Wacko
 		$out			= '';
 		$category_id	= (int) @$_GET['category_id'];
 
-		if ($categories	= $this->load_categories($object_id, $type_id, $cache))
+		if ($categories = $this->load_categories($object_id, $type_id, $cache))
 		{
 			foreach ($categories as $id => $category)
 			{
