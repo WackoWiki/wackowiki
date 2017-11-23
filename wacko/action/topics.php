@@ -137,7 +137,17 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		$pagination['limit'];
 
 	// load topics data
-	$topics	= $this->db->load_all($sql);
+	$topics = $this->db->load_all($sql);
+
+	foreach ($topics as $result)
+	{
+		$page_ids[]	= $result['page_id'];
+		#$this->page_id_cache[$result['tag']] = $result['page_id'];
+	}
+
+	// cache acls and categories
+	$this->preload_acl($page_ids, '');
+	$this->preload_categories($page_ids);
 
 	//  display search
 	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">' . $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]) . '</div>' . "\n";
