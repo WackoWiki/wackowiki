@@ -291,10 +291,10 @@ $ap_translation = [
 
 
 	// Appearance settings
-	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
-	'LogoOff'					=> 'off',
-	'LogoOnly'					=> 'logo',
-	'LogoAndTitle'				=> 'logo and title',
+	'AppearanceSettingsInfo'	=> 'Aussehen der Webseite ändern',
+	'LogoOff'					=> 'Aus',
+	'LogoOnly'					=> 'Logo ein',
+	'LogoAndTitle'				=> 'Logo und Titel ein',
 
 
 	// Email settings
@@ -307,13 +307,13 @@ $ap_translation = [
 	'EnableEmail'				=> 'Aktiviere E-Mail',
 	'EnableEmailInfo'			=> 'Aktiviere E-Mail-Funktionalität',
 
-	'FromEmailName'				=> 'From Name',
-	'FromEmailNameInfo'			=> 'The sender name, part of <code>From:</code> header in emails for all the email-notification sent from the site.',
-	'NoReplyEmail'				=> 'No-reply address',
-	'NoReplyEmailInfo'			=> 'This address, e.g. <code>noreply@example.com</code>, will appear in the <code>From:</code> email address field of all your email-notifications sent from the site.',
-	'AdminEmail'				=> 'Email of the site owner',
-	'AdminEmailInfo'			=> 'This address is used for admin purposes, like new user notification.',
-	'AbuseEmail'				=> 'Email abuse service',
+	'FromEmailName'				=> 'Absender',
+	'FromEmailNameInfo'			=> 'Absender Name, in der Kopfzeile <code>Von:</code> in E-Mails für alle E-Mail-Benachrichtigungen, die von dieser Seite gesendet werden.',
+	'NoReplyEmail'				=> 'No-reply Adresse',
+	'NoReplyEmailInfo'			=> 'Diese Adresse, z.B. <code>noreply@example.com</code>, erscheint im Adressfeld<code>Von:</code> der Kopfzeile bei allen E-Mail Benachrichtigungen, die von dieser Seite gesendet werden.',
+	'AdminEmail'				=> 'E-Mail Adresse des Seiteninhabers',
+	'AdminEmailInfo'			=> 'Diese Adresse ist für Administrationszwecke, wie Benachrichtigung bei neuen Benutzern.',
+	'AbuseEmail'				=> 'Dienst bei E-Mail-Missbrauch',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
 	'SendTestEmail'				=> 'Test-Mail senden',
@@ -322,8 +322,8 @@ $ap_translation = [
 	'TestEmailBody'				=> 'Wenn du diese Nachricht erhältst, ist deine Wiki richtig für den E-Mail-Versand konfiguriert.',
 	'TestEmailMessage'			=> 'Die Test-Mail wurde gesendet.<br>Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Konfiguration.',
 
-	'SmtpAutoTls'				=> 'Opportunistic TLS',
-	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
+	'SmtpAutoTls'				=> 'STARTTLS',
+	'SmtpAutoTlsInfo'			=> 'Aktiviert Verschlüsselung automatisch, wenn der Server TLS Verschlüsselung anbietet (nach dem Aufbau der Serververbindung), sogar wenn <code>SMTPSecure</code> nicht eingeschaltet wurde.',
 	'SmtpConnectionMode'		=> 'Authentifizierungsmethode für SMTP',
 	'SmtpConnectionModeInfo'	=> 'Nur benötigt, wenn ein Benutzername/Passwort eingegeben ist. Frage deinen Webhosting-Provider, falls du nicht sicher bist, welche Methode du wählen sollst.',
 	'SmtpPassword'				=> 'SMTP-Passwort',
