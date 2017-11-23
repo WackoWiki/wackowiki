@@ -32,7 +32,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 }
 
 // pagination
-$pagination = $this->pagination($this->get_comments_count(), $this->db->comments_count, 'p', ['show_comments' => 1, '#' => 'header-comments']);
+$pagination = $this->pagination($this->page['comments'], $this->db->comments_count, 'p', ['show_comments' => 1, '#' => 'header-comments']);
 
 // comments form output begins
 if ($this->has_access('read'))

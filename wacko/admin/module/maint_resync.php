@@ -114,7 +114,7 @@ function admin_maint_resync(&$engine, &$module)
 
 			// total revisions made
 			$users = $engine->db->load_all(
-				"SELECT r.user_id, COUNT(r.tag) AS n " .
+				"SELECT r.user_id, COUNT(r.page_id) AS n " .
 				"FROM " . $engine->db->table_prefix . "revision AS r, {$engine->db->user_table} AS u " .
 				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' " .
 				"GROUP BY r.user_id");
@@ -173,6 +173,35 @@ function admin_maint_resync(&$engine, &$module)
 					"SET comments = " . (int) $comment['n'] . " " .
 					"WHERE page_id = '" . $comment['page_id'] . "' " .
 					"LIMIT 1");
+			}
+
+			$sql[] = "UPDATE " . $engine->db->table_prefix . "page SET
+						files		= 0,
+						revisions	= 0";
+			$sql[] = "UPDATE " . $engine->db->table_prefix . "page AS p,
+						(SELECT
+							page_id, COUNT(file_id) AS files
+						FROM
+							" . $engine->db->table_prefix . "file
+						WHERE
+							page_id <> 0 GROUP BY page_id) AS f
+					SET
+						p.files = f.files
+					WHERE
+						p.page_id = f.page_id";
+			$sql[] = "UPDATE " . $engine->db->table_prefix . "page AS p,
+						(SELECT
+							page_id, COUNT(page_id) AS revisions
+						FROM
+							" . $engine->db->table_prefix . "revision GROUP BY page_id) AS r
+					SET
+						p.revisions = r.revisions
+					WHERE
+						p.page_id = r.page_id";
+
+			foreach ($sql as $query)
+			{
+				$engine->db->sql_query($query);
 			}
 
 			$engine->log(1, 'Synchronized page statistics');

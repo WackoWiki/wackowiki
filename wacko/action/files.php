@@ -24,6 +24,7 @@ if (!defined('IN_WACKO'))
 
 $page_id	= '';
 $files		= [];
+$object_ids	= [];
 
 if (!isset($nomark))	$nomark		= '';
 if (!isset($order))		$order		= '';

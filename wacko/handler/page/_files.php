@@ -63,16 +63,9 @@ if ($this->has_access('read'))
 	}
 	else
 	{
-		// load files for this page
-		$files = $this->db->load_single(
-			"SELECT COUNT(file_id) AS count " .
-			"FROM " . $this->db->table_prefix . "file " .
-			"WHERE page_id = '" . $this->page['page_id'] . "' " .
-				"AND deleted <> '1' LIMIT 1");
-
 		$have_files = '';
 
-		switch ($c = $files['count'])
+		switch ($c = $this->page['files'])
 		{
 			case 0:
 				if ($this->get_user()
@@ -91,6 +84,7 @@ if ($this->has_access('read'))
 			default:
 				$have_files = Ut::perc_replace($this->_t('FilesN'), $c);
 		}
+
 		// show link to show files only if there is one or/and user has the right to add a new one
 		if ($have_files)
 		{

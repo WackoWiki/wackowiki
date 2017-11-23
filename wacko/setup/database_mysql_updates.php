@@ -96,6 +96,8 @@ $alter_page_r5_4_1 = "ALTER TABLE {$pref}page CHANGE title title VARCHAR(250) NO
 $alter_page_r5_4_2 = "ALTER TABLE {$pref}page ADD version_id INT(10) UNSIGNED NOT NULL DEFAULT '1' AFTER page_id";
 $alter_page_r5_4_3 = "ALTER TABLE {$pref}page CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
 $alter_page_r5_4_4 = "ALTER TABLE {$pref}page ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
+$alter_page_r5_4_5 = "ALTER TABLE {$pref}page ADD files INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER comments";
+$alter_page_r5_4_6 = "ALTER TABLE {$pref}page ADD revisions INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER files";
 
 $update_page_r5_1_0 = "UPDATE {$pref}page SET noindex = '0' WHERE noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
@@ -103,6 +105,9 @@ $update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_4_2 = "UPDATE {$pref}page AS p, (SELECT user_id FROM {$pref}user WHERE user_name = 'System') AS u SET p.noindex = '1' WHERE p.owner_id = u.user_id";
 $update_page_r5_4_3 = "UPDATE {$pref}page SET page_size = LENGTH(body)";
 $update_page_r5_4_4 = "UPDATE {$pref}page AS p, (SELECT page_id, MAX(version_id) AS version_id FROM {$pref}revision GROUP BY page_id) AS r SET p.version_id = r.version_id + 1 WHERE p.page_id = r.page_id";
+$update_page_r5_4_5 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(file_id) AS files FROM {$pref}file WHERE page_id <> 0 AND deleted <> '1' GROUP BY page_id) AS f SET p.files = f.files WHERE p.page_id = f.page_id";
+$update_page_r5_4_6 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(page_id) AS revisions FROM {$pref}revision WHERE deleted <> '1' GROUP BY page_id) AS r SET p.revisions = r.revisions WHERE p.page_id = r.page_id";
+
 
 // PAGE LINK
 $alter_page_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag(78))";
