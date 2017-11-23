@@ -425,7 +425,7 @@ $ap_translation = [
 
 	// User module
 	'UsersAdded'				=> 'Benutzer hinzugefügt',
-	'UsersDeleteInfo'			=> '[User delete Info here..]',
+	'UsersDeleteInfo'			=> '[Informationen an Benutzer zur Löschung hier..]',
 	'UserEditButton'			=> 'Bearbeiten',
 	'UserEnabled'				=> 'Aktiviert',
 	'UsersAddNew'				=> 'Füge einen neuen Benutzer hinzu',
