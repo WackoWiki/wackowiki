@@ -2060,7 +2060,9 @@ class Wacko
 						"parent_id		= '" . (int) $parent_id . "', " .
 						"created		= UTC_TIMESTAMP(), " .
 						"modified		= UTC_TIMESTAMP(), " .
-						"commented		= UTC_TIMESTAMP(), " .
+						(!$comment_on_id
+							? "commented		= UTC_TIMESTAMP(), "
+							: "") .
 						"depth			= '" . (int) $depth . "', " .
 						"owner_id		= '" . (int) $owner_id . "', " .
 						"user_id		= '" . (int) $user_id . "', " .
@@ -2078,7 +2080,7 @@ class Wacko
 								"reviewed_time	= UTC_TIMESTAMP(), " .
 								"reviewer_id	= '" . (int) $reviewer_id . "', "
 							:	"") .
-						"latest			= '1', " . // new page
+						"latest			= '1', " . // 1 - new page
 						"ip				= " . $this->db->q($ip) . ", " .
 						"page_lang		= " . $this->db->q($lang) . " " );
 
@@ -2189,7 +2191,7 @@ class Wacko
 									"reviewed_time	= UTC_TIMESTAMP(), " .
 									"reviewer_id	= '" . (int) $reviewer_id . "', "
 								:	"") .
-							"latest			= '2' " . // modified page
+							"latest			= '2' " . // 2 - modified page
 						"WHERE tag = " . $this->db->q($tag) . " " .
 						"LIMIT 1");
 
@@ -2279,7 +2281,7 @@ class Wacko
 				"reviewed		= '" . (int) $page['reviewed'] . "', " .
 				"reviewed_time	= " . $this->db->q($page['reviewed_time']) . ", " .
 				"reviewer_id	= '" . (int) $page['reviewer_id'] . "', " .
-				"latest			= '0', " . // old page
+				"latest			= '0', " . // 0 - old page
 				"ip				= " . $this->db->q($page['ip']) . ", " .
 				"handler		= " . $this->db->q($page['handler']) . ", " .
 				"comment_on_id	= '" . (int) $page['comment_on_id'] . "', " .
@@ -2415,6 +2417,7 @@ class Wacko
 				"SELECT created " .
 				"FROM " . $this->db->table_prefix . "page " .
 				"WHERE comment_on_id = '" . (int) $page_id . "' " .
+					"AND deleted <> 1 " .
 				"ORDER BY created DESC " .
 				"LIMIT 1");
 		}
@@ -2424,7 +2427,9 @@ class Wacko
 			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"comments	= '" . (int) $this->count_comments($page_id) . "', " .
 				"commented	= " . ($last_created
-									? $this->db->q($comment['created'])
+									? (isset($comment['created'])
+											? $this->db->q($comment['created'])
+											: "NULL")
 									: "UTC_TIMESTAMP()") . " " .
 			"WHERE page_id = '" . (int) $page_id . "' " .
 			"LIMIT 1");
@@ -6969,7 +6974,7 @@ class Wacko
 		if ($this->db->store_deleted_pages && !$dontkeep)
 		{
 			// unlink comment tag
-			$page['comment_on_id']	= 0;
+			$page['comment_on_id']	= 0; // XXX: obsolete
 
 			// saving original
 			$this->save_revision($page);
@@ -6989,28 +6994,43 @@ class Wacko
 			$this->delete_pages([$page_id]);
 		}
 
-		// update for removed comment correct comments count and date on commented page
+		// set correct comments count and date of last commented page
 		if ($comment_on_id)
 		{
-			$this->update_comments_count($comment_on_id);
+			$this->update_comments_count($comment_on_id, null, true);
 		}
 
 		return true;
 	}
 
-	function remove_revisions($tag, $cluster = false)
+	function remove_revisions($tag, $cluster = false, $dontkeep = 0)
 	{
 		if (!$tag)
 		{
 			return false;
 		}
 
-		return $this->db->sql_query(
-			"DELETE FROM " . $this->db->table_prefix . "revision " .
-			"WHERE tag = " . $this->db->q($tag) . " " .
-				($cluster
-					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
-					: "") );
+		if ($this->db->store_deleted_pages && !$dontkeep)
+		{
+			$this->db->sql_query(
+				"UPDATE " . $this->db->table_prefix . "revision SET " .
+					"deleted	= '1' " .
+				"WHERE tag = " . $this->db->q($tag) . " " .
+					($cluster === true
+						? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
+						: "") );
+		}
+		else
+		{
+			$this->db->sql_query(
+				"DELETE FROM " . $this->db->table_prefix . "revision " .
+				"WHERE tag = " . $this->db->q($tag) . " " .
+					($cluster
+						? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
+						: ""));
+		}
+
+		return true;
 	}
 
 	function remove_comments($tag, $cluster = false, $dontkeep = 0)
@@ -7039,7 +7059,7 @@ class Wacko
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"comments	= '0', " .
-				"commented	= created " .
+				"commented	= NULL " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
 				($cluster === true
 					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -7237,6 +7257,8 @@ class Wacko
 					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 
 					// TODO: update user uploads count
+					# - page_ids[]
+					# - user_ids[]
 				}
 
 				clearstatcache();

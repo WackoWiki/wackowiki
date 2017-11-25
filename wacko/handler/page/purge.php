@@ -41,7 +41,7 @@ if (@$_POST['_action'] === 'purge_data')
 
 	if (isset($_POST['revisions']) && $this->is_admin())
 	{
-		$this->remove_revisions($this->tag);
+		$this->remove_revisions($this->tag, false, $dontkeep);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllRevisions', SYSTEM_LANG), $title));
 		$message .= "<li>" . $this->_t('RevisionsPurged') . "</li>\n";
 	}
