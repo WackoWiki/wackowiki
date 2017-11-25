@@ -78,9 +78,13 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 	{
 		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentChangesXMLTip') . '" alt="XML" class="btn-feed"></a></span><br><br>' . "\n";
 	}
+
 	echo '<ul class="ul_list">' . "\n";
 
 	$curday = '';
+
+	$pagination	= $this->pagination(count($pages), @$max, 'n', ($mode? ['o' => $mode] : ''), '');
+	$pages		= array_slice($pages, $pagination['offset'], $pagination['perpage']);
 
 	//
 	foreach ($pages as $page)
@@ -115,6 +119,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	// cache acls
 	$this->preload_acl($page_ids);
+
+	$this->print_pagination($pagination);
 
 	foreach ($pages as $page)
 	{
@@ -261,6 +267,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 	}
 
 	echo "</ul>\n</li>\n</ul>\n";
+
+	$this->print_pagination($pagination);
 }
 
 ?>
