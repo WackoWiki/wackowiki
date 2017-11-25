@@ -306,21 +306,7 @@ if (isset($_POST['upload']) & $can_upload)
 									"modified_dt		= UTC_TIMESTAMP() ");
 
 							// update user uploads count
-							$this->db->sql_query(
-								"UPDATE " . $this->db->user_table . " SET " .
-									"total_uploads = total_uploads + 1 " .
-								"WHERE user_id = '" . $user['user_id'] . "' " .
-								"LIMIT 1");
-
-							if (!$is_global)
-							{
-								// update page uploads count
-								$this->db->sql_query(
-									"UPDATE " . $this->db->table_prefix . "page SET " .
-										"files = files + 1 " .
-									"WHERE page_id = '" . $page_id . "' " .
-									"LIMIT 1");
-							}
+							$this->update_files_count($page_id, $user['user_id']);
 						}
 
 						$file = $this->db->load_single(

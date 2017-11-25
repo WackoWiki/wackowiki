@@ -1156,9 +1156,10 @@ class Wacko
 					"FROM " . $this->db->table_prefix . "page p " .
 						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
 						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-					"WHERE " . ($page_id != 0
-						? "page_id  = '" . (int) $page_id . "' "
-						: "supertag = " . $this->db->q($supertag) . " ") .
+					"WHERE " .
+						($page_id != 0
+							? "page_id  = '" . (int) $page_id . "' "
+							: "supertag = " . $this->db->q($supertag) . " ") .
 						($deleted != 1
 							? "AND p.deleted <> '1' "
 							: "") .
@@ -1176,9 +1177,10 @@ class Wacko
 							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
 							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
-						"WHERE " . ($page_id != 0
-							? "p.page_id  = '" . (int) $page_id . "' "
-							: "p.supertag = " . $this->db->q($supertag) . " ") .
+						"WHERE " .
+							($page_id != 0
+								? "p.page_id  = '" . (int) $page_id . "' "
+								: "p.supertag = " . $this->db->q($supertag) . " ") .
 							($deleted != 1
 								? "AND p.deleted <> '1' "
 								: "") .
@@ -1577,23 +1579,6 @@ class Wacko
 		}
 
 		return [$revisions, $pagination];
-	}
-
-	function count_revisions($page_id, $hide_minor_edit = 0, $deleted = 0)
-	{
-		$count = $this->db->load_single(
-			"SELECT COUNT(revision_id) AS n " .
-			"FROM " . $this->db->table_prefix . "revision " .
-			"WHERE page_id = '" . (int) $page_id . "' " .
-				($hide_minor_edit
-					? "AND minor_edit = '0' "
-					: "") .
-				(!$deleted
-					? "AND deleted <> '1' "
-					: "") .
-			"LIMIT 1");
-
-		return $count? $count['n'] : 0;
 	}
 
 	function load_pages_linking_to($to_tag, $tag = '')
@@ -2008,7 +1993,7 @@ class Wacko
 					while (!empty($write_acl['default']) && $write_acl['default'] == 1)
 					{
 						$_root		= $root;
-						$root		= preg_replace( '/^(.*)\\/([^\\/]+)$/', '$1', $root );
+						$root		= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $root);
 
 						if ($root == $_root)
 						{
@@ -2088,7 +2073,7 @@ class Wacko
 						"edit_note		= " . $this->db->q($edit_note) . ", " .
 						"minor_edit		= '" . (int) $minor_edit . "', " .
 						"page_size		= '" . (int) strlen($body) . "', " .
-						(isset($reviewed)
+						($reviewed
 							?	"reviewed		= '" . (int) $reviewed . "', " .
 								"reviewed_time	= UTC_TIMESTAMP(), " .
 								"reviewer_id	= '" . (int) $reviewer_id . "', "
@@ -2119,33 +2104,14 @@ class Wacko
 					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag . ' ' . $title));
 				}
 
-				// TODO: move to additional function
 				// counters
 				if ($comment_on_id)
 				{
-					// updating comments count for commented page
-					$this->db->sql_query(
-						"UPDATE " . $this->db->table_prefix . "page SET " .
-							"comments	= '" . (int) $this->count_comments($comment_on_id) . "', " .
-							"commented	= UTC_TIMESTAMP() " .
-						"WHERE page_id = '" . (int) $comment_on_id . "' " .
-						"LIMIT 1");
-
-					// update user comments count
-					$this->db->sql_query(
-						"UPDATE " . $this->db->user_table . " SET " .
-							"total_comments = total_comments + 1 " .
-						"WHERE user_id = '" . (int) $owner_id . "' " .
-						"LIMIT 1");
+					$this->update_comments_count($comment_on_id, $owner_id);
 				}
 				else
 				{
-					// update user pages count
-					$this->db->sql_query(
-						"UPDATE " . $this->db->user_table . " SET " .
-							"total_pages = total_pages + 1 " .
-						"WHERE user_id = '" . (int) $owner_id . "' " .
-						"LIMIT 1");
+					$this->update_pages_count($owner_id);
 				}
 
 				// set watch
@@ -2194,7 +2160,7 @@ class Wacko
 				// only if page has been actually changed
 				if ($old_page['body'] != $body || $old_page['title'] != $title)
 				{
-					// Dont save revisions for comments.  Personally I think we should.
+					// Dont save revisions for comments. Personally I think we should.
 					if (!$old_page['comment_on_id'])
 					{
 						$this->save_revision($old_page);
@@ -2321,21 +2287,9 @@ class Wacko
 				"keywords		= " . $this->db->q($page['keywords']) . ", " .
 				"description	= " . $this->db->q($page['description']));
 
-		$this->db->sql_query(
-			"UPDATE " . $this->db->table_prefix . "page SET " .
-				"revisions = revisions + 1 " .
-			"WHERE page_id = '" . (int) $page['page_id'] . "' " .
-			"LIMIT 1");
-
 		// update user statistics for revisions made
-		if ($user = $this->get_user())
-		{
-			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
-					"total_revisions = total_revisions + 1 " .
-				"WHERE user_id = '" . $user['user_id'] . "' " .
-				"LIMIT 1");
-		}
+		$user = $this->get_user();
+		$this->update_revisions_count($page['page_id'], $user['user_id']);
 	}
 
 	function update_sitemap()
@@ -2366,6 +2320,168 @@ class Wacko
 			$xml->site_map();
 			$this->log(7, 'XML Sitemap generated');
 			$this->sess->xml_sitemap_update = 0;
+		}
+	}
+
+	// COUNTER
+	// recount all comments for a given page
+	function count_comments($page_id, $user_id = null, $deleted = 0)
+	{
+		$count = $this->db->load_single(
+			"SELECT COUNT(page_id) AS n " .
+			"FROM " . $this->db->table_prefix . "page " .
+			"WHERE comment_on_id <> '0' " . // dummy for AND
+				($page_id
+					? "AND comment_on_id = '" . (int) $page_id . "' "
+					: "") .
+				($user_id
+					? "AND owner_id = '" . (int) $user_id . "' "
+					: "") .
+				($deleted != 1
+					? "AND deleted <> '1' "
+					: "") .
+			"LIMIT 1");
+
+		return $count? $count['n'] : 0;
+	}
+
+	function count_files($page_id = null, $user_id = null, $deleted = 0)
+	{
+		$count = $this->db->load_single(
+			"SELECT COUNT(file_id) AS n " .
+			"FROM " . $this->db->table_prefix . "file " .
+			"WHERE page_id <> '0' " . // dummy for AND
+				($page_id
+					? "AND page_id = '" . (int) $page_id . "' "
+					: "") .
+				($user_id
+					? "AND user_id = '" . (int) $user_id . "' "
+					: "") .
+				(!$deleted
+					? "AND deleted <> '1' "
+					: "") .
+			"LIMIT 1");
+
+		return $count? $count['n'] : 0;
+	}
+
+	function count_pages($user_id = null, $deleted = 0)
+	{
+		$count = $this->db->load_single(
+			"SELECT COUNT(page_id) AS n " .
+			"FROM " . $this->db->table_prefix . "page " .
+			"WHERE comment_on_id = '0' " .
+				($user_id
+					? "AND owner_id = '" . (int) $user_id . "' "
+					: "") .
+				($deleted != 1
+					? "AND deleted <> '1' "
+					: "") .
+			"LIMIT 1");
+
+		return $count? $count['n'] : 0;
+	}
+
+	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = 0, $deleted = 0)
+	{
+		$count = $this->db->load_single(
+			"SELECT COUNT(revision_id) AS n " .
+			"FROM " . $this->db->table_prefix . "revision " .
+			"WHERE  page_id <> '0' " . // dummy for AND
+				($page_id
+					? "AND page_id = '" . (int) $page_id . "' "
+					: "") .
+				($user_id
+					? "AND user_id = '" . (int) $user_id . "' "
+					: "") .
+				($hide_minor_edit
+					? "AND minor_edit = '0' "
+					: "") .
+				(!$deleted
+					? "AND deleted <> '1' "
+					: "") .
+			"LIMIT 1");
+
+		return $count? $count['n'] : 0;
+	}
+
+	// COUNTER CACHES
+	function update_comments_count($page_id, $user_id, $last_created = false)
+	{
+		if ($last_created)
+		{
+			// load latest comment
+			$comment = $this->db->load_single(
+				"SELECT created " .
+				"FROM " . $this->db->table_prefix . "page " .
+				"WHERE comment_on_id = '" . (int) $page_id . "' " .
+				"ORDER BY created DESC " .
+				"LIMIT 1");
+		}
+
+		// update comments count and date on commented page
+		$this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "page SET " .
+				"comments	= '" . (int) $this->count_comments($page_id) . "', " .
+				"commented	= " . ($last_created
+									? $this->db->q($comment['created'])
+									: "UTC_TIMESTAMP()") . " " .
+			"WHERE page_id = '" . (int) $page_id . "' " .
+			"LIMIT 1");
+
+		// update user comments count
+		$this->db->sql_query(
+			"UPDATE " . $this->db->user_table . " SET " .
+				"total_comments = '" . (int) $this->count_comments(null, $user_id) . "' " .
+			"WHERE user_id = '" . (int) $user_id . "' " .
+			"LIMIT 1");
+	}
+
+	function update_files_count($page_id, $user_id)
+	{
+		// per page upload
+		if ($page_id)
+		{
+			// update page uploads count
+			$this->db->sql_query(
+				"UPDATE " . $this->db->table_prefix . "page SET " .
+					"files = '" . (int) $this->count_files($page_id) . "' " .
+				"WHERE page_id = '" . (int) $page_id . "' " .
+				"LIMIT 1");
+		}
+
+		// update user uploads count
+		$this->db->sql_query(
+			"UPDATE " . $this->db->user_table . " SET " .
+				"total_uploads = '" . (int) $this->count_files(null, $user_id) . "' " .
+			"WHERE user_id = '" . (int) $user_id . "' " .
+			"LIMIT 1");
+	}
+
+	function update_pages_count($user_id)
+	{
+		$this->db->sql_query(
+			"UPDATE " . $this->db->user_table . " SET " .
+				"total_pages = '" . (int) $this->count_pages($user_id) . "' " .
+			"WHERE user_id = '" . (int) $user_id . "' " .
+			"LIMIT 1");
+	}
+
+	function update_revisions_count($page_id, $user_id = null)
+	{
+		$this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "page SET " .
+				"revisions = '" . (int) $this->count_revisions($page_id) . "' " .
+			"WHERE page_id = '" . (int) $page_id . "' " .
+			"LIMIT 1");
+
+		if ($user_id)
+		{
+			$this->db->sql_query(
+				"UPDATE " . $this->db->user_table . " SET " .
+					"total_revisions = '" . (int) $this->count_revisions(null, $user_id) . "' " .
+				"WHERE user_id = '" . (int) $user_id . "' " .
+				"LIMIT 1");
 		}
 	}
 
@@ -4942,25 +5058,6 @@ class Wacko
 		}
 	}
 
-	// update comments count and date on commented page
-	function update_comments_count($comment_on_id)
-	{
-		// load latest comment
-		$comment = $this->db->load_single(
-			"SELECT created " .
-			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id = '" . (int) $comment_on_id . "' " .
-			"ORDER BY created DESC " .
-			"LIMIT 1");
-
-		$this->db->sql_query(
-			"UPDATE " . $this->db->table_prefix . "page SET " .
-				"comments	= '" . $this->count_comments($comment_on_id) . "', " .
-				"commented	= " . $this->db->q($comment['created']) . " " .
-			"WHERE page_id	= '" . (int) $comment_on_id . "' " .
-			"LIMIT 1");
-	}
-
 	function get_list_count($max)
 	{
 		$user_max = $this->get_user_setting('list_count');
@@ -5203,22 +5300,6 @@ class Wacko
 	}
 
 	// COMMENTS AND COUNTS
-
-	// recount all comments for a given page
-	function count_comments($page_id, $deleted = 0)
-	{
-		$count = $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
-			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id = '" . (int) $page_id . "' " .
-				($deleted != 1
-					? "AND deleted <> '1' "
-					: "") .
-			"LIMIT 1");
-
-		return (int) $count['n'];
-	}
-
 	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0)
 	{
 		// avoid results if $page_id is 0 (page does not exists)
@@ -6866,15 +6947,15 @@ class Wacko
 			unset($this->page_id_cache[@$rev[$id]]);
 		}
 
-		$remove = implode(', ', $remove);
+		$page_ids = implode(', ', $remove);
 
 		$this->db->sql_query(
 			"DELETE FROM " . $this->db->table_prefix . "page " .
-			"WHERE page_id IN ( " . $remove . " )");
+			"WHERE page_id IN ( " . $page_ids . " )");
 
 		$this->db->sql_query(
 			"DELETE FROM " . $this->db->table_prefix . "revision " .
-			"WHERE page_id IN ( " . $remove . " )");
+			"WHERE page_id IN ( " . $page_ids . " )");
 	}
 
 	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0)
@@ -7158,6 +7239,8 @@ class Wacko
 					// TODO: update user uploads count
 				}
 
+				clearstatcache();
+
 				// remove from DB
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "file " .
@@ -7217,13 +7300,8 @@ class Wacko
 			// remove category assigments
 			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 
-			// update user uploads count
-			// TODO: create function user_upload_count($user_id, $count)
-			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
-					"total_uploads = total_uploads - 1 " .
-				"WHERE user_id = '" . $file['user_id'] . "' " .
-				"LIMIT 1");
+			// update uploads count
+			$this->update_files_count($file['page_id'], $file['user_id']);
 
 			$message .= $this->_t('FileRemovedFromDB') . '<br>';
 
