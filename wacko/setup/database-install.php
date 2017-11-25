@@ -197,7 +197,7 @@ switch ($config['database_driver'])
 
 							foreach ($upgrade[$to_version] as $value)
 							{
-								test(str_replace('%1', $value[1], $upgrade_msg[$value[0]]['ok']), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $upgrade_msg[$value[3]]['error']));
+								test(str_replace('%1', $value[1], $upgrade_msg[$value[0]]['ok']), @mysqli_query($dblink, $value[2]), str_replace('%1', $value[1], $upgrade_msg[$value[0]]['error']));
 							}
 
 							echo "            </ol>\n";
@@ -340,7 +340,7 @@ switch ($config['database_driver'])
 
 							foreach ($upgrade[$to_version] as $value)
 							{
-								test_pdo(str_replace('%1', $value[1], $upgrade_msg[$value[0]]['ok']), $value[2], str_replace('%1', $value[1], $upgrade_msg[$value[3]]['error']));
+								test_pdo(str_replace('%1', $value[1], $upgrade_msg[$value[0]]['ok']), $value[2], str_replace('%1', $value[1], $upgrade_msg[$value[0]]['error']));
 							}
 
 							echo "            </ol>\n";

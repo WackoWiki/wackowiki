@@ -20,8 +20,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->http->invalidate_page($this->supertag);
 		}
 
-		$this->sess->body		= $body;
-		$this->sess->title		= $title;
+		$this->sess->body	= $body;
+		$this->sess->title	= $title;
 
 		$this->http->redirect($this->href('', '', ['show_comments' => 1, 'p' => 'last']));
 	}
@@ -48,7 +48,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	if ($this->page
 		&& (isset($_POST['watchpage']) && ($_POST['watchpage']))
 		&& ($_POST['noid_publication'] != $this->page['page_id'])
-		&& $user && !$this->is_watched)
+		&& $user
+		&& !$this->is_watched)
 	{
 		$this->set_watch($user['user_id'], $this->page['page_id']);
 	}
@@ -100,7 +101,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 		$message = $bad_words;
 		$this->set_message($message , 'error');
-		#$error = true;
 
 		$this->http->redirect($this->href('', '', ['show_comments' => 1, 'p' => 'last']));
 	}
@@ -108,6 +108,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	{
 		// captcha validation
 		unset($this->sess->freecap_old_comment);
+
 		if ($this->db->captcha_new_comment && !$this->validate_captcha())
 		{
 			$error = $this->_t('CaptchaFailed');
@@ -135,7 +136,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$comment_on_id = $this->page['page_id'];
 
 			// store new comment
-			$body_r	= $this->save_page('Comment' . $num, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id, $parent_id);
+			$body_r = $this->save_page('Comment' . $num, $title, $body, '', 0, 0, $comment_on_id, $parent_id);
 
 			// log event
 			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag . ' ' . $this->page['title']));
