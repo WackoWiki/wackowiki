@@ -89,8 +89,8 @@ if ($mode == 'perpage')
 {
 	$query =
 		"SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang " .
-		"FROM " . $px."referrer r " .
-			"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
+		"FROM " . $px . "referrer r " .
+			"LEFT JOIN " . $px . "page p ON ( p.page_id = r.page_id ) " .
 		"GROUP BY r.page_id " .
 		"ORDER BY num DESC";
 }
@@ -98,15 +98,15 @@ else if ($mode == 'bytime')
 {
 	$query =
 		"SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.page_lang " .
-		"FROM " . $px."referrer r " .
-			"LEFT JOIN " . $px."page p ON ( p.page_id = r.page_id ) " .
+		"FROM " . $px . "referrer r " .
+			"LEFT JOIN " . $px . "page p ON ( p.page_id = r.page_id ) " .
 		"ORDER BY r.referrer_time DESC";
 }
 else if ($mode == 'global')
 {
 	$query =
 		"SELECT referrer, COUNT(referrer) AS num " .
-		"FROM " . $px."referrer " .
+		"FROM " . $px . "referrer " .
 		"GROUP BY referrer " .
 		"ORDER BY num DESC";
 }
@@ -119,7 +119,7 @@ else
 
 	$query =
 		"SELECT referrer, COUNT(referrer) AS num " .
-		"FROM " . $px."referrer " .
+		"FROM " . $px . "referrer " .
 		"WHERE page_id = '" . (int) $this->page['page_id'] . "' " .
 		"GROUP BY referrer " .
 		"ORDER BY num DESC";
@@ -183,8 +183,8 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $space
 	echo '<li>';
 	echo '<span class="' . $vclass . '">' . $val . '</span>&nbsp;&nbsp;&nbsp;&nbsp;';
 	echo '<span class=""><a title="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
-		'" href="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
-		'" rel="nofollow noreferrer">' . htmlspecialchars($trunc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a></span>';
+		 '" href="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
+		 '" rel="nofollow noreferrer">' . htmlspecialchars($trunc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a></span>';
 
 	if ($link)
 	{
@@ -209,7 +209,7 @@ $check_ref = function ($ref)
 	{
 		// check current page lang for different charset to do_unicode_entities() against
 		// - page lang
-		$lang = ($this->page['page_lang'] != $ref['page_lang'])?  $ref['page_lang'] : '';
+		$lang = ($this->page['page_lang'] != $ref['page_lang'])? $ref['page_lang'] : '';
 
 		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$ref['tag']] = $page_id;

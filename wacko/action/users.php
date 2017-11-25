@@ -288,6 +288,16 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " " .
 					$pagination['limit']);
 
+				$page_ids = [];
+
+				foreach ($pages as $page)
+				{
+					$page_ids[]	= $page['page_id'];
+				}
+
+				// cache acls
+				$this->preload_acl($page_ids);
+
 				// sorting and pagination
 				if ($sort_name)
 				{
@@ -306,7 +316,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
 					{
 						// check current page lang for different charset to do_unicode_entities() against
-						$_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
+						$_lang = ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
 						// cache page_id for for has_access validation in link function
 						$this->page_id_cache[$page['tag']] = $page['page_id'];
@@ -341,6 +351,17 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							"AND p.deleted <> '1' " .
 						"ORDER BY c.created DESC " .
 						$pagination['limit']);
+
+					$page_ids = [];
+
+					foreach ($comments as $comment)
+					{
+						$page_ids[]	= $comment['comment_on_id'];	// page
+						$page_ids[]	= $comment['page_id'];			// comment
+					}
+
+					// cache acls
+					$this->preload_acl($page_ids);
 
 					// comments list itself
 					foreach ($comments as $comment)
@@ -391,6 +412,19 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							// "AND p.deleted <> '1' " .
 							"ORDER BY u.uploaded_dt DESC " .
 							$pagination['limit']);
+
+						$page_ids = [];
+
+						foreach ($uploads as $upload)
+						{
+							if ($upload['page_id'] && ! in_array($upload['page_id'], $page_ids))
+							{
+								$page_ids[]	= $upload['page_id'];
+							}
+						}
+
+						// cache acls
+						$this->preload_acl($page_ids);
 
 						// uploads list itself
 						foreach ($uploads as $upload)
