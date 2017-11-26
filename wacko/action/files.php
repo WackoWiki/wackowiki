@@ -159,6 +159,7 @@ if ($can_view)
 	foreach ($files as $file)
 	{
 		$object_ids[]	= $file['file_id'];
+		$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 	}
 
 	// cache categories
@@ -229,8 +230,6 @@ if ($can_view)
 				$url	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
 
-			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
-
 			$dt			= $this->get_time_formatted($file['uploaded_dt']);
 			$desc		= $this->format($file['file_description'], 'typografica' );
 
@@ -246,7 +245,7 @@ if ($can_view)
 
 			$file_id	= $file['file_id'];
 			$file_name	= $file['file_name'];
-			$shown_name = $this->shorten_string($file_name, $file_name_maxlen);
+			$shown_name	= $this->shorten_string($file_name, $file_name_maxlen);
 			$text		= ($picture
 							? ($file['picture_w'] || $file['file_ext'] == 'svg'
 								? ''

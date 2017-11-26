@@ -83,7 +83,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	$curday = '';
 
-	$pagination	= $this->pagination(count($pages), @$max, 'n', ($mode? ['o' => $mode] : ''), '');
+	$pagination	= $this->pagination(count($pages), @$max, 'n', '', '');
 	$pages		= array_slice($pages, $pagination['offset'], $pagination['perpage']);
 
 	//
@@ -113,7 +113,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 	{
 		foreach ($files as $file)
 		{
-			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
+			$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 		}
 	}
 

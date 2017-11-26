@@ -19,7 +19,8 @@ if (!empty($this->db->news_cluster))
 	if (!isset($title))	$title = 1;
 	if (!isset($noxml))	$noxml = 0;
 
-	$pages				= '';
+	$pages				= [];
+	$p_mode				= [];
 	$prefix				= $this->db->table_prefix;
 	$news_cluster		= $this->db->news_cluster;
 	$news_levels		= $this->db->news_levels;
@@ -77,109 +78,113 @@ if (!empty($this->db->news_cluster))
 			$this->http->redirect($this->href('edit', $news_cluster . '/' . $blog_cluster_structure . $name, '', 1));
 		}
 	}
+
 	// collect data
 	// heavy lifting here (watch out for REGEXPs!)
+	$select_count =
+		"SELECT COUNT(page_id) AS n " .
+			"FROM {$prefix}page ";
+
+	$select_mode =
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
+		"FROM {$prefix}page p " .
+			"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ";
+
+	$order_by_mode =
+		"ORDER BY p.created DESC ";
+
 	if ($mode == 'latest')
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
-			"FROM {$prefix}page " .
+		$p_mode = ['mode' => 'latest'];
+
+		$selector =
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND comment_on_id = '0'" .
-				"AND deleted <> '1' ", true);
+				"AND comment_on_id = 0 " .
+				"AND deleted <> 1 ";
 
-		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'latest']);
+		$sql_count	=
+			$select_count .
+			$selector;
 
-		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
-			"FROM {$prefix}page p " .
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND p.deleted <> '1' " .
-			"ORDER BY p.created DESC " .
-			$pagination['limit'], true);
+		$sql_mode	=
+			$select_mode .
+			$selector .
+			$order_by_mode .
+			$pagination['limit'];
 	}
 	else if ($mode == 'category')
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(p.tag) AS n " .
-			"FROM {$prefix}category_assignment c " .
-				"INNER JOIN {$prefix}page p ON (c.object_id = p.page_id) " .
-			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND c.category_id = '$category_id' " .
-				"AND c.object_type_id = 1 " .
-				"AND p.deleted <> '1' " .
-				"AND p.comment_on_id = '0'", true);
+		$p_mode = ['category' => $category_id];
 
-		$pagination = $this->pagination($count['n'], $max, 'p', ['category' => $category_id]);
+		$selector =
+				"INNER JOIN {$prefix}category_assignment c ON (c.object_id = p.page_id) " .
+			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
+				"AND c.category_id = " . (int) $category_id . " " .
+				"AND c.object_type_id = 1 " .
+				"AND p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 ";
+
+		$sql_count	=
+			$select_count .
+			$selector;
+
+		$sql_mode	=
+			$select_mode .
+			$selector .
+			$order_by_mode .
+			$pagination['limit'];
 
 		$category_title	= $this->db->load_single(
 			"SELECT category " .
 			"FROM {$prefix}category " .
-			"WHERE category_id = '$category_id' ", false);
-
-		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
-			"FROM {$prefix}page p " .
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
-				"INNER JOIN {$prefix}category_assignment c  ON (c.object_id = p.page_id) " .
-			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND c.category_id = '$category_id' " .
-				"AND c.object_type_id = 1 " .
-				"AND p.deleted <> '1' " .
-				"AND p.comment_on_id = '0' " .
-			"ORDER BY p.created DESC " .
-			$pagination['limit'], true);
+			"WHERE category_id = " . (int) $category_id . " ", false);
 	}
 	else if ($mode == 'week')
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
-			"FROM {$prefix}page " .
+		$p_mode = ['mode' => 'week'];
+
+		$selector =
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND deleted <> '1' " .
 				"AND created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
-				"AND comment_on_id = '0'", true);
+				"AND comment_on_id = 0 " .
+				"AND deleted <> 1 ";
 
-		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'week']);
+		$sql_count	=
+			$select_count .
+			$selector;
 
-		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
-			"FROM {$prefix}page p " .
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND p.deleted <> '1' " .
-				"AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
-			"ORDER BY p.created DESC " .
-			$pagination['limit'], true);
+		$sql_mode	=
+			$select_mode .
+			$selector .
+			$order_by_mode .
+			$pagination['limit'];
 	}
 	else if ($mode == 'from' && $date)
 	{
+		$p_mode = ['mode' => 'week'];
 		$date	= $this->db->date($date);
 
-		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
-			"FROM {$prefix}page " .
+		$selector =
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND deleted <> '1' " .
-				"AND created > '$date' " .
-				"AND comment_on_id = '0'", true);
+				"AND created > '" . $date . "' " .
+				"AND comment_on_id = 0 " .
+				"AND deleted <> 1 ";
 
-		$pagination = $this->pagination($count['n'], $max, 'p', ['mode' => 'week']);
+		$sql_count	=
+			$select_count .
+			$selector;
 
-		$pages	= $this->db->load_all(
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
-			"FROM {$prefix}page p " .
-				"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND p.deleted <> '1' " .
-				"AND p.created > '$date' " .
-			"ORDER BY p.created DESC " .
-			$pagination['limit'], true);
+		$sql_mode	=
+			$select_mode .
+			$selector .
+			$order_by_mode .
+			$pagination['limit'];
 	}
+
+	$count		= $this->db->load_single($sql_count, true);
+	$pages		= $this->db->load_all($sql_mode, true);
+
+	$pagination	= $this->pagination($count['n'], $max, 'p', $p_mode);
 
 	// start output
 	echo '<section class="news">' . "\n";
@@ -217,6 +222,17 @@ if (!empty($this->db->news_cluster))
 	if ($pages)
 	{
 		$this->print_pagination($pagination);
+
+		foreach ($pages as $page)
+		{
+			$page_ids[]	= $page['page_id'];
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+		}
+
+		// cache acls
+		$this->preload_acl($page_ids, null);
+		$this->preload_categories($page_ids);
+		$this->preload_links($page_ids);
 
 		foreach ($pages as $page)
 		{
