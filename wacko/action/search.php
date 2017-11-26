@@ -329,7 +329,8 @@ if (strlen($phrase) >= 3)
 
 	if ($pages)
 	{
-		$tpl->s_pagination_text = $pagination['text'];
+		$tpl->s_pagination_text	= $pagination['text'];
+		$tpl->s_ol_offset		= $pagination['offset'] + 1;
 
 		$tpl->enter('s_' . $style . '_l_');
 
