@@ -25,6 +25,7 @@ class Wacko
 	var $_acl					= [];
 	var $acl_cache				= [];
 	var $category_cache			= [];
+	var $file_cache				= [];
 	var $page_id_cache			= [];
 	var $context				= [];		// page context, used for correct processing of inclusions
 	var $current_context		= 0;		// current context level
@@ -197,7 +198,7 @@ class Wacko
 	*/
 	function check_file_record($file_name, $page_id = 0, $deleted = 0)
 	{
-		$file = &$this->files_cache[$page_id][$file_name];
+		$file = &$this->file_cache[$page_id][$file_name];
 
 		if (empty($file))
 		{
@@ -1369,91 +1370,128 @@ class Wacko
 		}
 	}
 
-	function cache_links()
+	function preload_links($page_ids, $default = false)
 	{
 		$pages		= [];
-		$page_ids	= [];
+		$p_ids		= [];
+		$p_ids		= $page_ids;
+		$file_ids	=  [];
+		$spages_str	= '';
 		$acl		= [];
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
 
+		// get file links
+		if ($f_links = $this->db->load_all(
+			"SELECT file_id " .
+			"FROM " . $this->db->table_prefix . "file_link " .
+			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' )"))
+		{
+			foreach ($f_links as $f_link)
+			{
+				$file_ids[] = $f_link['file_id'];
+			}
+		}
+
+		if ($files = $this->db->load_all(
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
+				"FROM " . $this->db->table_prefix . "file " .
+				"WHERE file_id IN ( '" . implode("', '", $file_ids) . "' ) " .
+					"AND deleted <> '1' "
+				, true))
+		{
+			foreach ($files as $file)
+			{
+				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+			}
+		}
+
 		// get page links
 		if ($links = $this->db->load_all(
-			"SELECT to_tag " .
+			"SELECT to_page_id " .
 			"FROM " . $this->db->table_prefix . "page_link " .
-			"WHERE from_page_id = '" . $this->page['page_id'] . "'"))
+			"WHERE from_page_id IN ( '" . implode("', '", $page_ids) . "' )"))
 		{
 			foreach ($links as $link)
 			{
-				$pages[] = $link['to_tag'];
+				$p_ids[] = $link['to_page_id'];
 			}
 		}
 
-		// get menu links
-		if ($menu_items = $this->db->load_all(
-			"SELECT DISTINCT p.tag " .
-			"FROM " . $this->db->table_prefix . "menu b " .
-				"LEFT JOIN " . $this->db->table_prefix . "page p ON (b.page_id = p.page_id) " .
-			"WHERE (b.user_id = '" . $this->get_user_id('System') . "' " .
-				($lang
-					? "AND b.menu_lang = " . $this->db->q($lang) . " "
-					: "") .
-					") " .
-				($user
-					? "OR (b.user_id = '" . $user['user_id'] . "' ) "
-					: "") .
-			"", true))
+		if ($default)
 		{
-			foreach ($menu_items as $item)
+			// get menu links
+			if ($menu_items = $this->db->load_all(
+				"SELECT DISTINCT page_id " .
+				"FROM " . $this->db->table_prefix . "menu " .
+				"WHERE (user_id = '" . $this->get_user_id('System') . "' " .
+					($lang
+						? "AND menu_lang = " . $this->db->q($lang) . " "
+						: "") .
+						") " .
+					($user
+						? "OR (user_id = '" . $user['user_id'] . "' ) "
+						: "") .
+				"", true))
 			{
-				$pages[] = $item['tag'];
+				foreach ($menu_items as $item)
+				{
+					$p_ids[] = $item['page_id'];
+				}
 			}
-		}
 
-		// get default links
-		if (isset($user['user_name']))
-		{
-			$pages[]	= $this->db->users_page . '/' . $user['user_name'];
-			$pages[]	= $this->_t('AccountLink');
-		}
-		else
-		{
-			$pages[]	= $this->_t('RegistrationPage');
-		}
-
-		$pages[]	= $this->db->root_page;
-		$pages[]	= $this->db->users_page;
-		$pages[]	= $this->db->policy_page;
-		$pages[]	= $this->_t('LoginPage');
-		$pages[]	= $this->_t('SearchPage');
-		$pages[]	= $this->tag;
-
-		$pages		= array_unique($pages);
-		$spages_str	= '';
-
-		foreach ($pages as $page)
-		{
-			if ($page != '')
+			// get default links
+			// TODO: parse into link table, page_id we want
+			if (isset($user['user_name']))
 			{
-				$_spages	= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
-				$spages[]	= $_spages;
-				$spages_str	.= $this->db->q($_spages) . ", ";
+				$pages[]	= $this->db->users_page . '/' . $user['user_name'];
+				$pages[]	= $this->_t('AccountLink');
 			}
+			else
+			{
+				$pages[]	= $this->_t('RegistrationPage');
+			}
+
+			$pages[]	= $this->db->root_page;
+			$pages[]	= $this->db->category_page;
+			$pages[]	= $this->db->users_page;
+			$pages[]	= $this->db->policy_page;
+			$pages[]	= $this->_t('LoginPage');
+			$pages[]	= $this->_t('SearchPage');
+			$pages[]	= $this->tag;
+
+			$pages		= array_unique($pages);
+
+			foreach ($pages as $page)
+			{
+				if ($page != '')
+				{
+					$_spages	= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
+					$spages[]	= $_spages;
+					$spages_str	.= $this->db->q($_spages) . ", ";
+				}
+			}
+
+			$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
 		}
 
-		$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
+		$p_ids		= array_unique($p_ids);
 
 		if ($links = $this->db->load_all(
-		"SELECT " . $this->page_meta . " " .
-		"FROM " . $this->db->table_prefix . "page " .
-		"WHERE supertag IN (" . $spages_str . ")", true))
+			"SELECT " . $this->page_meta . " " .
+			"FROM " . $this->db->table_prefix . "page " .
+			"WHERE page_id IN ( '" . implode("', '", $p_ids) . "' ) " .
+				($default
+					? "OR supertag IN (" . $spages_str . ")"
+					: "")
+			, true))
 		{
 			foreach ($links as $link)
 			{
 				$this->cache_page($link, 0, 1);
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
-				$exists[]	= $link['supertag'];
-				$page_ids[]	= $link['page_id'];
+				$exists[]		= $link['supertag'];
+				$_page_ids[]	= $link['page_id'];
 			}
 		}
 
@@ -1468,7 +1506,8 @@ class Wacko
 		}
 
 		// cache acls to avoid multiple queries to get non-read privileges
-		$this->preload_acl($page_ids, '');
+		$this->preload_acl($_page_ids, '');
+
 	}
 
 	function set_page($page)
@@ -6614,7 +6653,7 @@ class Wacko
 				$mod = '';
 			}
 
-			$this->cache_links();
+			$this->preload_links([$this->page['page_id']], true);
 			$this->current_context++;
 			$this->context[$this->current_context] = $this->tag;
 			$data = $this->method($this->method);
