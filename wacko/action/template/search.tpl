@@ -40,7 +40,7 @@
 			</ul>
 		=]
 		[= ol _ =
-			<ol id="search_results">
+			<ol id="search_results" start="[ ' offset ' ]">
 			[= l _ =
 				[ ' delim | void ' ]
 				<li>
