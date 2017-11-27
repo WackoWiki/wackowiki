@@ -38,6 +38,7 @@ $show_backlinks = function ()
 	{
 		echo $this->_t('NoReferringPages');
 	}
+
 	echo '<p></p>';
 };
 
@@ -194,6 +195,19 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $space
 	echo "</li>\n";
 };
 
+$preload_acl = function ($referrers)
+{
+	$page_ids	= [];
+
+	foreach ($referrers as $referrer)
+	{
+		$page_ids[]	= $referrer['page_id'];
+	}
+
+	$this->preload_acl($page_ids);
+	return $page_ids;
+};
+
 // check referrer permissions, and return link to referal wikipage, or '' if none available/accessible
 $check_ref = function ($ref)
 {
@@ -239,6 +253,9 @@ echo '<ul class="ul_list">' . "\n";
 
 if ($mode == 'perpage')
 {
+	$page_ids	= $preload_acl($referrers);
+	$referrers2	= $this->load_referrers($page_ids);
+
 	foreach ($referrers as $referrer)
 	{
 		if (($link = $check_ref($referrer)))
@@ -246,7 +263,13 @@ if ($mode == 'perpage')
 			echo '<li><strong>' . $link . '</strong> (' . $referrer['num'] . ')' .
 				 '<ul class="lined">' . "\n";
 
-			foreach ($this->load_referrers($referrer['page_id']) as $ref2)
+			// filter referrers for page
+			$ref_perpage = array_filter($referrers2, function ($var)
+			{
+				return ($var['page_id'] == $referrer['page_id']);
+			});
+
+			foreach ($ref_perpage as $ref2)
 			{
 				$print_ref($ref2['referrer'], $ref2['num'], 'list_count');
 			}
@@ -257,7 +280,8 @@ if ($mode == 'perpage')
 }
 else if ($mode == 'bytime')
 {
-	$curday = '';
+	$curday		= '';
+	$page_ids	= $preload_acl($referrers);
 
 	foreach ($referrers as $referrer)
 	{
