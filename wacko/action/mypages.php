@@ -50,8 +50,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
 			"WHERE owner_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0'", true);
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
@@ -59,8 +59,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT tag, title, created " .
 			"FROM {$prefix}page " .
 			"WHERE owner_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0' " .
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0 " .
 			"ORDER BY created DESC, tag ASC " .
 			$pagination['limit'], true))
 		{
@@ -103,9 +103,9 @@ if (($user_id = $this->get_user_id()))
 			"LEFT JOIN {$prefix}revision AS r " .
 				"ON (p.page_id = r.page_id " .
 					"AND p.owner_id = '" . (int) $user_id . "') " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.deleted <> '1' " .
-				"AND r.comment_on_id = '0'", true);
+			"WHERE p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 " .
+				"AND r.comment_on_id = 0", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
 
@@ -115,9 +115,9 @@ if (($user_id = $this->get_user_id()))
 			"LEFT JOIN {$prefix}revision AS r " .
 				"ON (p.page_id = r.page_id " .
 					"AND p.owner_id = '" . (int) $user_id . "') " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.deleted <> '1' " .
-				"AND r.comment_on_id = '0' " .
+			"WHERE p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 " .
+				"AND r.comment_on_id = 0 " .
 			"GROUP BY tag " .
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true))
@@ -161,8 +161,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT COUNT(tag) AS n " .
 			"FROM {$prefix}page " .
 			"WHERE owner_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0'", true);
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
@@ -170,8 +170,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT tag, title, modified " .
 			"FROM {$prefix}page " .
 			"WHERE owner_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0' " .
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0 " .
 			"ORDER BY tag ASC " .
 			$pagination['limit'], true)))
 		{

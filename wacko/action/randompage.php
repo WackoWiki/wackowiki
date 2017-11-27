@@ -23,7 +23,7 @@ $query = // "SELECT p.supertag " .
 				? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: ""
 			) .
-			"AND p.comment_on_id = '0' " .
+			"AND p.comment_on_id = 0 " .
 			"AND p.page_id <> '{$this->page['page_id']}' " .
 			"AND a.privilege = 'read' " .
 			"AND a.list = '*' " .

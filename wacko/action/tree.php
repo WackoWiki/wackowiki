@@ -43,9 +43,9 @@ if (!isset($legend)) $legend = '';
 if ($pages = $this->db->load_all(
 	"SELECT page_id, tag, supertag, title " .
 	"FROM " . $this->db->table_prefix . "page " .
-	"WHERE comment_on_id = '0' " .
+	"WHERE comment_on_id = 0 " .
 		"AND tag LIKE " . $this->db->q($_root . '/%') . " " .
-		"AND deleted <> '1' " .
+		"AND deleted <> 1 " .
 	"ORDER BY tag", true))
 {
 	// pick all subpages up to the desired depth level

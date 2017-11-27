@@ -113,7 +113,7 @@ function admin_user_approve(&$engine, &$module)
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = '" . (int) $user_id . "' " .
-				"AND u.account_type = '0' " .
+				"AND u.account_type = 0 " .
 			"LIMIT 1");
 	}
 
@@ -125,7 +125,7 @@ function admin_user_approve(&$engine, &$module)
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = '" . (int) $user_id . "' " .
-				"AND u.account_type = '0' " .
+				"AND u.account_type = 0 " .
 			"LIMIT 1");
 
 		if ($_GET['approve'] == 1)
@@ -171,7 +171,7 @@ function admin_user_approve(&$engine, &$module)
 						"SELECT u.user_name " .
 						"FROM " . $engine->db->table_prefix . "user u " .
 						"WHERE u.user_id = '" . $user_id . "' " .
-							"AND u.account_type = '0' " .
+							"AND u.account_type = 0 " .
 						"LIMIT 1");
 
 					$engine->show_message($engine->_t('UsersDeleted'));
@@ -213,7 +213,7 @@ function admin_user_approve(&$engine, &$module)
 		}
 		else
 		{
-			$where			= "WHERE u.account_status = '1' ";
+			$where			= "WHERE u.account_status = 1 ";
 		}
 
 		// set user_name ordering
@@ -264,7 +264,7 @@ function admin_user_approve(&$engine, &$module)
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			($where ? $where : '') .
 			($where ? 'AND ' : "WHERE ") .
-				"u.account_type = '0' " .
+				"u.account_type = 0 " .
 				"AND u.user_name <> '" . $engine->db->admin_name."' " .
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ) .
 			$pagination['limit']);
@@ -273,7 +273,7 @@ function admin_user_approve(&$engine, &$module)
 		$account_stati =  $engine->db->load_all(
 				"SELECT account_status, count(account_status) AS n
 				FROM " . $engine->db->table_prefix . "user
-				WHERE account_type = '0'
+				WHERE account_type = 0
 					AND user_name <> '" . $engine->db->admin_name."'
 				GROUP BY account_status");
 

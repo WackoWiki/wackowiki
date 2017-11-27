@@ -30,7 +30,7 @@ $pages1 = $this->db->load_all(
 	"FROM " . $this->db->table_prefix . "page p " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-	"WHERE (u.account_type = '0' OR p.user_id = '0') " .
+	"WHERE (u.account_type = 0 OR p.user_id = 0) " .
 	"ORDER BY p.created DESC " .
 	"LIMIT " . ($max * 2), true);
 
@@ -40,9 +40,9 @@ $pages2 = $this->db->load_all(
 	"FROM " . $this->db->table_prefix . "page p " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-	"WHERE p.comment_on_id = '0' " .
-		"AND p.deleted = '0' " .
-		"AND (u.account_type = '0' OR p.user_id = '0') " .
+	"WHERE p.comment_on_id = 0 " .
+		"AND p.deleted = 0 " .
+		"AND (u.account_type = 0 OR p.user_id = 0) " .
 	"ORDER BY modified DESC " .
 	"LIMIT " . ($max * 2), true);
 
@@ -52,8 +52,8 @@ $files = $this->db->load_all(
 	"FROM " . $this->db->table_prefix . "file f " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (f.page_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-	"WHERE u.account_type = '0' " .
-		"AND f.deleted = '0' " .
+	"WHERE u.account_type = 0 " .
+		"AND f.deleted = 0 " .
 	"ORDER BY f.uploaded_dt DESC " .
 	"LIMIT " . ($max * 2), true);
 

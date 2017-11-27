@@ -77,14 +77,14 @@ $pages1 = $this->db->load_all(
 	"SELECT page_id, tag, supertag " .
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE supertag LIKE " . $this->db->q($supertag1 . '%') . " " .
-		"AND comment_on_id = '0' " .
+		"AND comment_on_id = 0 " .
 	"ORDER BY supertag ASC LIMIT $limit");
 
 $pages2 = $this->db->load_all(
 	"SELECT page_id, tag, supertag " .
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE  supertag LIKE " . $this->db->q($supertag2 . '%') . " " .
-		"AND comment_on_id = '0' " .
+		"AND comment_on_id = 0 " .
 	"ORDER BY supertag ASC LIMIT $limit");
 
 // 3. stripping by rights

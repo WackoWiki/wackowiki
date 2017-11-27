@@ -18,11 +18,12 @@ if (!defined('IN_WACKO'))
  */
 
 // TODO:
-// - add option to select all files: all=1 (?)
+// - add option to select all files: all=1 (?) -> DONE
 // - add option to select used files -> file_link table & page_id -> DONE
-// - add option to filter by tags
+// - add option to filter by tags -> DONE
 
 $page_id	= '';
+$ppage		= '';
 $files		= [];
 $object_ids	= [];
 
@@ -34,7 +35,6 @@ if (!isset($linked))	$linked		= '';	// file link in page
 if (!isset($tag))		$tag		= '';	// FIXME: $tag == $page
 if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
-if (!isset($ppage))		$ppage		= '';
 if (!isset($legend))	$legend		= '';
 if (!isset($method))	$method		= '';	// for use in page handler
 if (!isset($params))	$params		= null;	//for $_GET parameters to be passed with the page link
@@ -124,7 +124,7 @@ if ($can_view)
 			? "AND u.user_name = " . $this->db->q($owner) . " "
 			: '') .
 		($deleted != 1
-			? "AND f.deleted <> '1' "
+			? "AND f.deleted <> 1 "
 			: "");
 
 	if ($category_id)
@@ -258,7 +258,7 @@ if ($can_view)
 
 			if ($picture && ($file['picture_w'] || $file['file_ext'] == 'svg'))
 			{
-				// now done in link funtion
+				// XXX: now done in link funtion
 				#$link		= '<a href="' . $url . '">' . $link . '</a>';
 			}
 
@@ -287,6 +287,7 @@ if ($can_view)
 			$href_edit		= $this->href('filemeta', $page, ['m' => 'edit', 'file_id' => $file_id]);
 			$href_remove	= $this->href('filemeta', $page, ['m' => 'remove', 'file_id' => $file_id]);
 
+			// display file
 			echo '<tr>' . "\n" .
 					'<td class="file-">' . $link . '</td>' . "\n";
 
@@ -296,6 +297,7 @@ if ($can_view)
 				$method_filter	= $this->method == 'show' ? '' : $this->method;
 				$param_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global'])) ? ['files' => $_GET['files']] : [];
 
+				// display picture meta data
 				echo '<td class="desc-">' .
 					'<strong>' . $this->shorten_string($file['file_name'], $file_name_maxlen) . '</strong><br><br>' .
 					$desc . '<br><br>' .
@@ -314,6 +316,7 @@ if ($can_view)
 			}
 			else
 			{
+				// display file meta data
 				echo '<td class="desc-">' . $desc . '</td>' .
 					'<td class="size-">
 						<span class="size2-">' . $file_size . ', ' . $hits . '</span>&nbsp;'.
@@ -323,13 +326,14 @@ if ($can_view)
 					'</td>' . "\n";
 			}
 
+			// display file tools
 			echo '<td class="tool-">' .
 					'<span class="dt2-">' .
 						'<a href="' . $href_info . '" class="tool2-">' . $info_icon . '</a>' .
 						($operation_mode
-						? '<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .
-						  '<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>'
-						: '') .
+							? '<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .
+							  '<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>'
+							: '') .
 					'</span>' .
 				 '</td>' . "\n";
 

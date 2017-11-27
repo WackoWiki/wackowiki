@@ -50,8 +50,8 @@ if ($user_id = $this->get_user_id())
 			"LEFT JOIN {$prefix}watch AS w " .
 				"ON (p.page_id = w.page_id " .
 					"AND w.user_id = '" . (int) $user_id . "') " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.deleted <> '1' " .
+			"WHERE p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 " .
 				"AND w.user_id IS NULL", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $profile + ['mode' => 'mywatches', $mod_selector => 'unwatched', '#' => 'list']);
@@ -64,8 +64,8 @@ if ($user_id = $this->get_user_id())
 			"LEFT JOIN {$prefix}watch AS w " .
 				"ON (p.page_id = w.page_id " .
 					"AND w.user_id = '" . (int) $user_id . "') " .
-			"WHERE p.comment_on_id = '0' " .
-				"AND p.deleted <> '1' " .
+			"WHERE p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 " .
 				"AND w.user_id IS NULL " .
 			"ORDER BY pagetag ASC " .
 			$pagination['limit']))

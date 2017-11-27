@@ -28,7 +28,7 @@ if ($this->has_access('read'))
 		"FROM " . $this->db->table_prefix . "page " .
 		"WHERE (supertag = " . $this->db->q($this->supertag) . " " .
 		" OR supertag LIKE " . $this->db->q($this->supertag . '/%') . ")" .
-		" AND comment_on_id = '0'");
+		" AND comment_on_id = 0");
 
 	foreach ($pages as $num => $page)
 	{

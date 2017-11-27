@@ -31,15 +31,15 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 				  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . ") "
 				: "") .
 			($scope
-				? "AND a.comment_on_id = '0' "
+				? "AND a.comment_on_id = 0 "
 				: "") .
 			($category_id
 				? "AND ca.category_id = " . (int) $category_id . " "
 				: "") .
 			(!$deleted
 				? ($tag
-						? "AND (a.deleted <> '1' OR b.deleted <> '1') "
-						: "AND a.deleted <> '1' ")
+						? "AND (a.deleted <> 1 OR b.deleted <> 1) "
+						: "AND a.deleted <> 1 ")
 				: "") .
 			" )";
 
@@ -94,15 +94,15 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 			  "OR b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . ") "
 			: "") .
 		($scope
-			? "AND a.comment_on_id = '0' "
+			? "AND a.comment_on_id = 0 "
 			: "") .
 		($category_id
 			? "AND ca.category_id = " . (int) $category_id . " "
 			: "") .
 		(!$deleted
 			? ($tag
-				? "AND (a.deleted <> '1' OR b.deleted <> '1') "
-				: "AND a.deleted <> '1' ")
+				? "AND (a.deleted <> 1 OR b.deleted <> 1) "
+				: "AND a.deleted <> 1 ")
 			: "");
 
 	$count = $this->db->load_single(

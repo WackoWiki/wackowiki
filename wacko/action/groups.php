@@ -104,7 +104,7 @@ else
 			"LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (m.group_id = g.group_id) " .
 		$where.
 		( $where ? 'AND ' : "WHERE ") .
-			"g.active = '1' " .
+			"g.active = 1 " .
 		"GROUP BY g.group_id " .
 		( $order ? $order : "ORDER BY members DESC " ) .
 		$pagination['limit']);

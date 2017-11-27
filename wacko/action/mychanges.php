@@ -46,8 +46,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0'", true);
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('name'));
 
@@ -55,8 +55,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT tag, title, modified " .
 			"FROM {$prefix}page " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0' " .
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0 " .
 			"ORDER BY tag ASC, modified DESC " .
 			$pagination['limit'], true))
 		{
@@ -103,8 +103,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT COUNT(tag) AS n " .
 			"FROM {$prefix}page " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0'", true);
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
@@ -112,8 +112,8 @@ if (($user_id = $this->get_user_id()))
 			"SELECT tag, title, modified, edit_note " .
 			"FROM {$prefix}page " .
 			"WHERE user_id = '" . (int) $user_id . "' " .
-				"AND deleted <> '1' " .
-				"AND comment_on_id = '0' " .
+				"AND deleted <> 1 " .
+				"AND comment_on_id = 0 " .
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true)))
 		{

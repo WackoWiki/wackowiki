@@ -22,9 +22,9 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 		"WHERE " .
 		($tag
 			?	"a2.page_id IS NULL AND b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
-			:	"a2.page_id IS NULL AND a.comment_on_id <> '0' ") .
+			:	"a2.page_id IS NULL AND a.comment_on_id <> 0 ") .
 		($deleted != 1
-			? "AND a.deleted <> '1' "
+			? "AND a.deleted <> 1 "
 			: "") .
 		"ORDER BY a.created DESC"
 		, true);
