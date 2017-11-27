@@ -4649,18 +4649,21 @@ class Wacko
 	* @param int $backdays
 	* @return array Array of (referer, num)
 	*/
-	function load_referrers($page_id = null)
+	function load_referrers($page_ids = null)
 	{
 		return $this->db->load_all(
 			"SELECT " .
-			(!isset($page_id)
-				? "referrer, count(referrer) AS num "
-				: "page_id, referrer, count(referrer) AS num ") .
+			(!is_null($page_ids)
+				? "page_id, referrer, count(referrer) AS num "
+				: "referrer, count(referrer) AS num ") .
 			"FROM " . $this->db->table_prefix . "referrer " .
-			(!is_null($page_id)
-				? "WHERE page_id = '" . (int) $page_id . "' "
+			(!is_null($page_ids)
+				? "WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) "
 				: "") .
-			"GROUP BY referrer " .
+			"GROUP BY " .
+				(!is_null($page_ids)
+				? "page_id, referrer " 
+				: "referrer ") .
 			"ORDER BY num DESC");
 	}
 
