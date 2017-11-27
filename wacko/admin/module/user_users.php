@@ -112,7 +112,7 @@ function admin_user_users(&$engine, &$module)
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = '" . (int) $user_id . "' " .
-				"AND u.account_type = '0' " .
+				"AND u.account_type = 0 " .
 			"LIMIT 1");
 	}
 
@@ -166,7 +166,7 @@ function admin_user_users(&$engine, &$module)
 					"notify_page		= '" . (int) $engine->db->notify_page."', " .
 					"notify_comment		= '" . (int) $engine->db->notify_comment."', " .
 					"sorting_comments	= '" . (int) $engine->db->sorting_comments."', " .
-					"send_watchmail		= '1'");
+					"send_watchmail		= 1");
 
 			// add user page
 			$engine->add_user_page($_POST['newname'], $_POST['user_lang']);
@@ -197,7 +197,7 @@ function admin_user_users(&$engine, &$module)
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = '" . (int) $user_id . "' " .
-			"AND u.account_type = '0' " .
+			"AND u.account_type = 0 " .
 			"LIMIT 1");
 
 		$engine->approve_user($user, $user['account_status']);
@@ -273,7 +273,7 @@ function admin_user_users(&$engine, &$module)
 						"SELECT u.user_name " .
 						"FROM " . $engine->db->table_prefix . "user u " .
 						"WHERE u.user_id = '" . $user_id . "' " .
-							"AND u.account_type = '0' " .
+							"AND u.account_type = 0 " .
 						"LIMIT 1");
 
 					$engine->db->sql_query(
@@ -406,7 +406,7 @@ function admin_user_users(&$engine, &$module)
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = '" . (int) $user_id . "' " .
-				"AND u.account_type = '0' " .
+				"AND u.account_type = 0 " .
 			"LIMIT 1"))
 		{
 			echo $engine->form_open('edit_user');
@@ -798,7 +798,7 @@ function admin_user_users(&$engine, &$module)
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			($where ? $where : '') .
 			($where ? 'AND ' : "WHERE ") .
-				"u.account_type = '0' " .
+				"u.account_type = 0 " .
 			($order ? $order : 'ORDER BY u.user_id DESC ') .
 			$pagination['limit']);
 

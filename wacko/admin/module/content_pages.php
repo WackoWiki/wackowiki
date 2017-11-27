@@ -108,14 +108,14 @@ function admin_content_pages(&$engine, &$module)
 	// set default level
 	if (!isset($level)) $level = $engine->db->log_default_show;
 	if (!isset($where)) $where = '';
-	else  $where .= "AND p.comment_on_id = '0' ";
+	else  $where .= "AND p.comment_on_id = 0 ";
 	if (!isset($order)) $order = '';
 
 	// collecting data
 	$count = $engine->db->load_single(
 		"SELECT COUNT(page_id) AS n " .
 		"FROM " . $engine->db->table_prefix . "page l " .
-		( $where ? $where : "WHERE comment_on_id = '0' " ));
+		( $where ? $where : "WHERE comment_on_id = 0 " ));
 
 	$_order					= isset($_GET['order'])		? $_GET['order']		: '';
 	$_lang					= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
@@ -128,7 +128,7 @@ function admin_content_pages(&$engine, &$module)
 		"SELECT p.*, length(body) as page_size, u.* " .
 		"FROM " . $engine->db->table_prefix . "page p " .
 			"LEFT JOIN " . $engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-		($where ? $where : "WHERE p.comment_on_id = '0' " ) .
+		($where ? $where : "WHERE p.comment_on_id = 0 " ) .
 		($order ? $order : 'ORDER BY p.page_id DESC ' ) .
 		$pagination['limit']);
 

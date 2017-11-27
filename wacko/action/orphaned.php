@@ -24,9 +24,9 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 				: "") .
 			"l.to_page_id IS NULL " .
 			($deleted != 1
-				? "AND p.deleted <> '1' "
+				? "AND p.deleted <> 1 "
 				: "") .
-			"AND p.comment_on_id = '0' "
+			"AND p.comment_on_id = 0 "
 		, true));
 
 	if ($count_pages)
@@ -47,9 +47,9 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 					: "") .
 				"l.to_page_id IS NULL " .
 				($deleted != 1
-					? "AND p.deleted <> '1' "
+					? "AND p.deleted <> 1 "
 					: "") .
-				"AND p.comment_on_id = '0' " .
+				"AND p.comment_on_id = 0 " .
 			"ORDER BY tag " .
 			$pagination['limit']);
 

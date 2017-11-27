@@ -85,7 +85,7 @@ $sql = "SELECT
 				: '' ) .
 		"WHERE c.category_lang = '{$lang}' " .
 			"AND ca.object_type_id = 1 " .
-			"AND p.deleted <> '1' " .
+			"AND p.deleted <> 1 " .
 			($root
 				? "AND ( p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) "
 				: '' ) .

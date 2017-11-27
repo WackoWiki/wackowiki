@@ -69,7 +69,7 @@ $mail_body = '';
 					INNER JOIN " . $engine->db->table_prefix . "user_setting us
 						ON u.user_id = us.user_id
 			WHERE
-				u.account_type = '0'
+				u.account_type = 0
 					AND (gm.group_id = '{$group_id}'
 						OR u.user_id IN ('{$user_ids}'))",
 				true);
@@ -103,7 +103,7 @@ $mail_body = '';
 	$available_groups = $engine->db->load_all(
 		"SELECT group_id, group_name " .
 		"FROM " . $engine->db->table_prefix . "usergroup " .
-		"WHERE active = '1' " .
+		"WHERE active = 1 " .
 		"ORDER BY BINARY group_name", true);
 
 	#Ut::debug_print_r($available_users);

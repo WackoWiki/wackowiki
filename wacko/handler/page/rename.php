@@ -182,7 +182,7 @@ function recursive_move(&$engine, $root, $new_root)
 		($owner_id
 			? " AND owner_id ='" . (int) $owner_id."'"
 			: "") .
-		" AND comment_on_id = '0'");
+		" AND comment_on_id = 0");
 
 	$message .= "<ol>\n";
 

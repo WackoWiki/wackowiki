@@ -100,7 +100,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			: "") . ", " .
 			$this->db->table_prefix . "acl AS a " .
 		"WHERE p.page_id = a.page_id " .
-			"AND p.deleted <> '1' " .
+			"AND p.deleted <> 1 " .
 			"AND a.privilege = 'create' AND a.list = '' " .
 			"AND p.tag LIKE {$this->db->q($this->tag . '/%')} ";
 
@@ -206,7 +206,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				// load related categories
 				$_category = $this->get_categories($topic['page_id'], OBJECT_PAGE);
-				$_category = !empty($_category) ? '<br>' . /* $this->_t('Category') . ': '. */$_category : '';
+				$_category = !empty($_category) ? '<br>' . $_category : '';
 
 				// print
 				echo '<tbody><tr class="topic">' .

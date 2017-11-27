@@ -208,7 +208,7 @@ class Wacko
 				"WHERE page_id = '" . (int) $page_id . "' " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
 					($deleted != 1
-						? "AND deleted <> '1' "
+						? "AND deleted <> 1 "
 						: "") .
 				"LIMIT 1");
 		}
@@ -1162,7 +1162,7 @@ class Wacko
 							? "page_id  = '" . (int) $page_id . "' "
 							: "supertag = " . $this->db->q($supertag) . " ") .
 						($deleted != 1
-							? "AND p.deleted <> '1' "
+							? "AND p.deleted <> 1 "
 							: "") .
 					"LIMIT 1");
 
@@ -1183,7 +1183,7 @@ class Wacko
 								? "p.page_id  = '" . (int) $page_id . "' "
 								: "p.supertag = " . $this->db->q($supertag) . " ") .
 							($deleted != 1
-								? "AND p.deleted <> '1' "
+								? "AND p.deleted <> 1 "
 								: "") .
 							"AND revision_id = '" . (int) $revision_id . "' " .
 						"LIMIT 1");
@@ -1200,7 +1200,7 @@ class Wacko
 						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"WHERE tag = " . $this->db->q($tag) . " " .
 						($deleted != 1
-							? "AND p.deleted <> '1' "
+							? "AND p.deleted <> 1 "
 							: "") .
 					"LIMIT 1");
 
@@ -1218,7 +1218,7 @@ class Wacko
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
 						"WHERE p.tag = " . $this->db->q($tag) . " " .
 							($deleted != 1
-								? "AND p.deleted <> '1' "
+								? "AND p.deleted <> 1 "
 								: "") .
 							"AND revision_id = '" . (int) $revision_id . "' " .
 						"LIMIT 1");
@@ -1397,7 +1397,7 @@ class Wacko
 				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE file_id IN ( '" . implode("', '", $file_ids) . "' ) " .
-					"AND deleted <> '1' "
+					"AND deleted <> 1 "
 				, true))
 		{
 			foreach ($files as $file)
@@ -1562,10 +1562,10 @@ class Wacko
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
 			"WHERE p.page_id = '" . (int) $page_id . "' " .
 				($hide_minor_edit
-					? "AND p.minor_edit = '0' "
+					? "AND p.minor_edit = 0 "
 					: "") .
 				(!$show_deleted
-					? "AND p.deleted <> '1' "
+					? "AND p.deleted <> 1 "
 					: "");
 
 		// count pages
@@ -1591,10 +1591,10 @@ class Wacko
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
 				"WHERE p.page_id = '" . (int) $page_id . "' " .
 					($hide_minor_edit
-						? "AND p.minor_edit = '0' "
+						? "AND p.minor_edit = 0 "
 						: "") .
 					(!$show_deleted
-						? "AND p.deleted <> '1' "
+						? "AND p.deleted <> 1 "
 						: "") .
 				"ORDER BY p.modified DESC " .
 				"LIMIT 1")))
@@ -1611,7 +1611,7 @@ class Wacko
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.reviewer_id = o.user_id) " .
 				"WHERE p.page_id = '" . (int) $page_id . "' " .
 					(!$show_deleted
-						? "AND p.deleted <> '1' "
+						? "AND p.deleted <> 1 "
 						: "") .
 				"ORDER BY p.modified DESC " .
 				"LIMIT 1");
@@ -1657,7 +1657,7 @@ class Wacko
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "revision r1 ON (p.page_id = r1.page_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "revision r2 ON (p.page_id = r2.page_id AND r1.revision_id < r2.revision_id) " .
-			"WHERE p.comment_on_id = '0' " .
+			"WHERE p.comment_on_id = 0 " .
 				($from
 					? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
 					: "") .
@@ -1665,13 +1665,13 @@ class Wacko
 					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 					: "") .
 				($minor_edit
-					? "AND p.minor_edit = '0' "
+					? "AND p.minor_edit = 0 "
 					: "") .
 				(!$deleted
-					? "AND p.deleted <> '1' "
+					? "AND p.deleted <> 1 "
 					: "") .
 				(!$default_pages
-					? "AND (u.account_type = '0' OR p.user_id = '0') "
+					? "AND (u.account_type = 0 OR p.user_id = 0) "
 					: "") .
 				"AND r2.revision_id IS NULL ";
 
@@ -1712,12 +1712,12 @@ class Wacko
 		"FROM " . $this->db->table_prefix . "page c " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (c.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
-		"WHERE c.comment_on_id <> '0' " .
+		"WHERE c.comment_on_id <> 0 " .
 			($tag
 				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "") .
 			(!$deleted
-				? "AND p.deleted <> '1' AND c.deleted <> '1' "
+				? "AND p.deleted <> 1 AND c.deleted <> 1 "
 				: "") .
 		"ORDER BY c.created DESC " .
 		"LIMIT " . $limit))
@@ -1745,7 +1745,7 @@ class Wacko
 		$count_deleted = $this->db->load_single(
 			"SELECT COUNT(file_id) AS n " .
 			"FROM " . $this->db->table_prefix . "file " .
-			"WHERE deleted = '1' LIMIT 1"
+			"WHERE deleted = 1 LIMIT 1"
 			, $cache);
 
 		if ($count_deleted['n'])
@@ -1757,7 +1757,7 @@ class Wacko
 						f.file_lang, f.caption, u.user_name " .
 				"FROM " . $this->db->table_prefix . "file f " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-				"WHERE f.deleted = '1' " .
+				"WHERE f.deleted = 1 " .
 				"ORDER BY f.modified_dt DESC, f.file_name ASC " .
 				$pagination['limit'], $cache);
 		}
@@ -1773,7 +1773,7 @@ class Wacko
 		$count_deleted = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE deleted = '1' LIMIT 1"
+			"WHERE deleted = 1 LIMIT 1"
 			, $cache);
 
 		if ($count_deleted['n'])
@@ -1786,7 +1786,7 @@ class Wacko
 						p.description, u.user_name " .
 				"FROM " . $this->db->table_prefix . "page p " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-				"WHERE p.deleted = '1' " .
+				"WHERE p.deleted = 1 " .
 				"ORDER BY p.modified DESC, p.tag ASC " .
 				$pagination['limit'], $cache);
 		}
@@ -2091,7 +2091,7 @@ class Wacko
 
 				$this->db->sql_query(
 					"INSERT INTO " . $this->db->table_prefix . "page SET " .
-						"version_id		= '1', " .
+						"version_id		= 1, " .
 						"comment_on_id	= '" . (int) $comment_on_id . "', " .
 						(!$comment_on_id
 							? "description = " . $this->db->q($desc) . ", "
@@ -2119,7 +2119,7 @@ class Wacko
 								"reviewed_time	= UTC_TIMESTAMP(), " .
 								"reviewer_id	= '" . (int) $reviewer_id . "', "
 							:	"") .
-						"latest			= '1', " . // 1 - new page
+						"latest			= 1, " . // 1 - new page
 						"ip				= " . $this->db->q($ip) . ", " .
 						"page_lang		= " . $this->db->q($lang) . " " );
 
@@ -2230,7 +2230,7 @@ class Wacko
 									"reviewed_time	= UTC_TIMESTAMP(), " .
 									"reviewer_id	= '" . (int) $reviewer_id . "', "
 								:	"") .
-							"latest			= '2' " . // 2 - modified page
+							"latest			= 2 " . // 2 - modified page
 						"WHERE tag = " . $this->db->q($tag) . " " .
 						"LIMIT 1");
 
@@ -2320,7 +2320,7 @@ class Wacko
 				"reviewed		= '" . (int) $page['reviewed'] . "', " .
 				"reviewed_time	= " . $this->db->q($page['reviewed_time']) . ", " .
 				"reviewer_id	= '" . (int) $page['reviewer_id'] . "', " .
-				"latest			= '0', " . // 0 - old page
+				"latest			= 0, " . // 0 - old page
 				"ip				= " . $this->db->q($page['ip']) . ", " .
 				"handler		= " . $this->db->q($page['handler']) . ", " .
 				"comment_on_id	= '" . (int) $page['comment_on_id'] . "', " .
@@ -2371,7 +2371,7 @@ class Wacko
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id <> '0' " . // dummy for AND
+			"WHERE comment_on_id <> 0 " . // dummy for AND
 				($page_id
 					? "AND comment_on_id = '" . (int) $page_id . "' "
 					: "") .
@@ -2379,7 +2379,7 @@ class Wacko
 					? "AND owner_id = '" . (int) $user_id . "' "
 					: "") .
 				($deleted != 1
-					? "AND deleted <> '1' "
+					? "AND deleted <> 1 "
 					: "") .
 			"LIMIT 1");
 
@@ -2391,7 +2391,7 @@ class Wacko
 		$count = $this->db->load_single(
 			"SELECT COUNT(file_id) AS n " .
 			"FROM " . $this->db->table_prefix . "file " .
-			"WHERE page_id <> '0' " . // dummy for AND
+			"WHERE page_id <> 0 " . // dummy for AND
 				($page_id
 					? "AND page_id = '" . (int) $page_id . "' "
 					: "") .
@@ -2399,7 +2399,7 @@ class Wacko
 					? "AND user_id = '" . (int) $user_id . "' "
 					: "") .
 				(!$deleted
-					? "AND deleted <> '1' "
+					? "AND deleted <> 1 "
 					: "") .
 			"LIMIT 1");
 
@@ -2411,12 +2411,12 @@ class Wacko
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id = '0' " .
+			"WHERE comment_on_id = 0 " .
 				($user_id
 					? "AND owner_id = '" . (int) $user_id . "' "
 					: "") .
 				($deleted != 1
-					? "AND deleted <> '1' "
+					? "AND deleted <> 1 "
 					: "") .
 			"LIMIT 1");
 
@@ -2428,7 +2428,7 @@ class Wacko
 		$count = $this->db->load_single(
 			"SELECT COUNT(revision_id) AS n " .
 			"FROM " . $this->db->table_prefix . "revision " .
-			"WHERE  page_id <> '0' " . // dummy for AND
+			"WHERE  page_id <> 0 " . // dummy for AND
 				($page_id
 					? "AND page_id = '" . (int) $page_id . "' "
 					: "") .
@@ -2436,10 +2436,10 @@ class Wacko
 					? "AND user_id = '" . (int) $user_id . "' "
 					: "") .
 				($hide_minor_edit
-					? "AND minor_edit = '0' "
+					? "AND minor_edit = 0 "
 					: "") .
 				(!$deleted
-					? "AND deleted <> '1' "
+					? "AND deleted <> 1 "
 					: "") .
 			"LIMIT 1");
 
@@ -2880,7 +2880,7 @@ class Wacko
 						{
 							$this->db->sql_query(
 								"UPDATE " . $this->db->table_prefix . "watch SET " .
-									"pending	= '1' " .
+									"pending	= 1 " .
 								"WHERE page_id = '" . (int) $comment_on_id . "' " .
 									"AND user_id = '" . $watcher['user_id'] . "'");
 						}
@@ -4662,7 +4662,7 @@ class Wacko
 				: "") .
 			"GROUP BY " .
 				(!is_null($page_ids)
-				? "page_id, referrer " 
+				? "page_id, referrer "
 				: "referrer ") .
 			"ORDER BY num DESC");
 	}
@@ -5032,7 +5032,7 @@ class Wacko
 			"WHERE " . ($user_id
 					? "u.user_id		= '" . (int) $user_id . "' "
 					: "u.user_name		= " . $this->db->q($user_name) . " ") .
-					"AND u.account_type = '0' " .
+					"AND u.account_type = 0 " .
 			"LIMIT 1");
 	}
 
@@ -5317,7 +5317,7 @@ class Wacko
 			"SELECT user_id, user_name " .
 			"FROM " . $this->db->user_table . " " .
 				($enabled
-					? "WHERE enabled = '1' "
+					? "WHERE enabled = 1 "
 					: "") .
 			"ORDER BY BINARY user_name");
 	}
@@ -5359,7 +5359,7 @@ class Wacko
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
 				"WHERE p.comment_on_id = '" . (int) $page_id . "' " .
 					($deleted != 1
-						? "AND p.deleted <> '1' "
+						? "AND p.deleted <> 1 "
 						: "") .
 				"ORDER BY p.created " .
 					($sort
@@ -7026,7 +7026,7 @@ class Wacko
 				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"modified	= UTC_TIMESTAMP(), " .
 					"ip			= '" . $this->get_user_ip() . "', " .
-					"deleted	= '1', " .
+					"deleted	= 1, " .
 					"user_id	= '" . (int) $this->get_user_id() . "' " .
 				"WHERE page_id	= '" . (int) $page_id . "' " .
 				"LIMIT 1");
@@ -7056,7 +7056,7 @@ class Wacko
 		{
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "revision SET " .
-					"deleted	= '1' " .
+					"deleted	= 1 " .
 				"WHERE tag = " . $this->db->q($tag) . " " .
 					($cluster === true
 						? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -7100,7 +7100,7 @@ class Wacko
 		// reset comments count
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "page SET " .
-				"comments	= '0', " .
+				"comments	= 0, " .
 				"commented	= NULL " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
 				($cluster === true
@@ -7282,7 +7282,7 @@ class Wacko
 				// flag record as deleted in DB
 				$this->db->sql_query(
 					"UPDATE " . $this->db->table_prefix . "file SET " .
-						"deleted	= '1' " .
+						"deleted	= 1 " .
 					"WHERE page_id = '" . (int) $page['page_id'] . "'");
 			}
 			else
@@ -7337,7 +7337,7 @@ class Wacko
 			// flag record as deleted in DB
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "file SET " .
-					"deleted	= '1' " .
+					"deleted	= 1 " .
 				"WHERE file_id = '" . (int) $file['file_id'] . "'");
 
 			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
@@ -7392,7 +7392,7 @@ class Wacko
 
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "page SET " .
-				"deleted	= '0' " .
+				"deleted	= 0 " .
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}
 
@@ -7405,7 +7405,7 @@ class Wacko
 
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "file SET " .
-				"deleted	= '0' " .
+				"deleted	= 0 " .
 			"WHERE file_id = '" . (int) $file_id . "'");
 	}
 
@@ -7418,7 +7418,7 @@ class Wacko
 
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "file SET " .
-				"deleted	= '0' " .
+				"deleted	= 0 " .
 			"WHERE page_id = '" . (int) $page_id . "'");
 	}
 
@@ -7968,7 +7968,7 @@ class Wacko
 					"AND	kp.object_type_id	= 1 " .
 					($root != ''
 						? "AND (p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) " .
-						  "AND p.deleted <> '1' "
+						  "AND p.deleted <> 1 "
 						: '') .
 				"GROUP BY kp.category_id", true))
 				{

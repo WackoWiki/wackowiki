@@ -45,7 +45,7 @@ $alter_category_assignment_r5_4_4 = "ALTER TABLE {$pref}category_assignment ADD 
 
 $rename_category_assignment_r5_4_0 = "RENAME TABLE {$pref}category_page TO {$pref}category_assignment";
 
-$update_category_assignment_r5_4_0 = "UPDATE {$pref}category_assignment SET object_type_id = '1' WHERE object_type_id IS NULL";
+$update_category_assignment_r5_4_0 = "UPDATE {$pref}category_assignment SET object_type_id = 1 WHERE object_type_id IS NULL";
 
 // CONFIG
 $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|wordprocessor' WHERE config_name = 'standard_handlers'";
@@ -99,14 +99,14 @@ $alter_page_r5_4_4 = "ALTER TABLE {$pref}page ADD page_size INT(10) UNSIGNED NOT
 $alter_page_r5_4_5 = "ALTER TABLE {$pref}page ADD files INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER comments";
 $alter_page_r5_4_6 = "ALTER TABLE {$pref}page ADD revisions INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER files";
 
-$update_page_r5_1_0 = "UPDATE {$pref}page SET noindex = '0' WHERE noindex IS NULL";
+$update_page_r5_1_0 = "UPDATE {$pref}page SET noindex = 0 WHERE noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_4_1 = "UPDATE {$pref}page SET body_r = ''";
-$update_page_r5_4_2 = "UPDATE {$pref}page AS p, (SELECT user_id FROM {$pref}user WHERE user_name = 'System') AS u SET p.noindex = '1' WHERE p.owner_id = u.user_id";
+$update_page_r5_4_2 = "UPDATE {$pref}page AS p, (SELECT user_id FROM {$pref}user WHERE user_name = 'System') AS u SET p.noindex = 1 WHERE p.owner_id = u.user_id";
 $update_page_r5_4_3 = "UPDATE {$pref}page SET page_size = LENGTH(body)";
 $update_page_r5_4_4 = "UPDATE {$pref}page AS p, (SELECT page_id, MAX(version_id) AS version_id FROM {$pref}revision GROUP BY page_id) AS r SET p.version_id = r.version_id + 1 WHERE p.page_id = r.page_id";
-$update_page_r5_4_5 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(file_id) AS files FROM {$pref}file WHERE page_id <> 0 AND deleted <> '1' GROUP BY page_id) AS f SET p.files = f.files WHERE p.page_id = f.page_id";
-$update_page_r5_4_6 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(page_id) AS revisions FROM {$pref}revision WHERE deleted <> '1' GROUP BY page_id) AS r SET p.revisions = r.revisions WHERE p.page_id = r.page_id";
+$update_page_r5_4_5 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(file_id) AS files FROM {$pref}file WHERE page_id <> 0 AND deleted <> 1 GROUP BY page_id) AS f SET p.files = f.files WHERE p.page_id = f.page_id";
+$update_page_r5_4_6 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(page_id) AS revisions FROM {$pref}revision WHERE deleted <> 1 GROUP BY page_id) AS r SET p.revisions = r.revisions WHERE p.page_id = r.page_id";
 
 
 // PAGE LINK

@@ -40,7 +40,7 @@ if ($this->is_admin())
 			$users = $this->db->load_all(
 				"SELECT p.owner_id, COUNT(p.tag) AS n " .
 				"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->user_table . " AS u " .
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' " .
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id = 0 " .
 				"GROUP BY p.owner_id");
 
 			foreach ($users as $user)
@@ -56,7 +56,7 @@ if ($this->is_admin())
 			$users = $this->db->load_all(
 				"SELECT p.user_id, COUNT(p.tag) AS n " .
 				"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->user_table . " AS u " .
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> '0' " .
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> 0 " .
 				"GROUP BY p.user_id");
 
 			foreach ($users as $user)
@@ -72,7 +72,7 @@ if ($this->is_admin())
 			$users = $this->db->load_all(
 				"SELECT r.user_id, COUNT(r.tag) AS n " .
 				"FROM " . $this->db->table_prefix . "revision AS r, " . $this->db->user_table . " AS u " .
-				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' " .
+				"WHERE r.owner_id = u.user_id AND r.comment_on_id = 0 " .
 				"GROUP BY r.user_id");
 
 			foreach ($users as $user)
@@ -191,7 +191,7 @@ if ($this->is_admin())
 			$pages = $this->db->load_all(
 				"SELECT page_id, tag " .
 				"FROM " . $this->db->table_prefix . "page " .
-				"WHERE comment_on_id = '0'");
+				"WHERE comment_on_id = 0");
 
 			if (!empty($pages))
 			{

@@ -41,7 +41,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// make query
 	$sql =	"SELECT p.page_id, p.tag, p.title, p.description, p.page_lang " .
 			"FROM " . $this->db->table_prefix . "page AS p, " .
-				"" . $this->db->table_prefix . "acl AS a " .
+					  $this->db->table_prefix . "acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'comment' AND a.list = '' ";
 
@@ -91,19 +91,12 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		// show only those forums where user has read access
 		if ($this->has_access('read', $forum['page_id']))
 		{
-			// count total topics
-			$topics = $this->db->load_single(
-				"SELECT count(a.page_id) as total " .
+			// count total topics and posts
+			$counter = $this->db->load_single(
+				"SELECT count(a.page_id) as topics_total, sum(a.comments) as posts_total " .
 				"FROM " . $this->db->table_prefix . "page a " .
 				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-					"AND a.deleted <> '1' ", true);
-
-			// count total posts
-			$posts = $this->db->load_single(
-				"SELECT sum(a.comments) as total " .
-				"FROM " . $this->db->table_prefix . "page a " .
-				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-					"AND a.deleted <> '1' ", true);
+					"AND a.deleted <> 1 ", true);
 
 			// load latest comment
 			$comments = $this->db->load_all(
@@ -113,7 +106,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					"LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
 				"WHERE b.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
 					"OR a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-					"AND a.deleted <> '1' " .
+					"AND a.deleted <> 1 " .
 				"ORDER BY a.created DESC ", true);
 
 			foreach ($comments as $_comment)
@@ -148,17 +141,17 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			// print <span class="icon"></span>
 			echo '<tbody><tr>' .
 					'<td class="a_top">' .
-						( $this->has_access('read', $forum['page_id'], GUEST) === false
+						($this->has_access('read', $forum['page_id'], GUEST) === false
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
-							: '' ) .
-						( $user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
+							: '') .
+						($user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
 							? '<strong class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</strong> '
-							: '' ) .
+							: '') .
 						'<strong>' . $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang) . '</strong><br>' .
 						'<small>' . $forum['description'] . '</small>' .
 					'</td>' .
-					'<td class="t_center">&nbsp;' . $topics['total'] . '&nbsp;&nbsp;</td>' .
-					'<td class="t_center">&nbsp;' . $posts['total'] . '&nbsp;&nbsp;</td>';
+					'<td class="t_center">&nbsp;' . $counter['topics_total'] . '&nbsp;&nbsp;</td>' .
+					'<td class="t_center">&nbsp;' . $counter['posts_total'] . '&nbsp;&nbsp;</td>';
 
 			if ($comment == true)
 			{
@@ -182,15 +175,17 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						$comment['title']= $this->do_unicode_entities($comment['title'], $comment['page_lang']);
 					}
 
-					echo '<small><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . '</a><br>' .
-						$this->user_link($comment['user_name']) .
-						' (' . $this->get_time_formatted($comment['created']) . ')</small>';
+					echo '<small>
+							<a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . '</a><br>' .
+							$this->user_link($comment['user_name']) .
+							' (' . $this->get_time_formatted($comment['created']) . ')
+						 </small>';
 				}
 			}
 			else
 			{
-				echo '<td>';
-				echo '<small><em>' . $this->_t('ForumNoComments') . '</em></small>';
+				echo '<td>' .
+					 '<small><em>' . $this->_t('ForumNoComments') . '</em></small>';
 			}
 
 			echo	'</td>' .

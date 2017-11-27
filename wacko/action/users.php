@@ -283,8 +283,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					"SELECT page_id, tag, title, created, page_lang " .
 					"FROM " . $this->db->table_prefix . "page " .
 					"WHERE owner_id = '" . $user['user_id'] . "' " .
-						"AND comment_on_id = '0' " .
-						"AND deleted <> '1' " .
+						"AND comment_on_id = 0 " .
+						"AND deleted <> 1 " .
 					"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " " .
 					$pagination['limit']);
 
@@ -346,9 +346,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						"FROM " . $this->db->table_prefix . "page c " .
 							"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
 						"WHERE c.owner_id = '" . $user['user_id'] . "' " .
-							"AND c.comment_on_id <> '0' " .
-							"AND c.deleted <> '1' " .
-							"AND p.deleted <> '1' " .
+							"AND c.comment_on_id <> 0 " .
+							"AND c.deleted <> 1 " .
+							"AND p.deleted <> 1 " .
 						"ORDER BY c.created DESC " .
 						$pagination['limit']);
 
@@ -408,8 +408,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							"FROM " . $this->db->table_prefix . "file u " .
 								"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
 							"WHERE u.user_id = '" . $user['user_id'] . "' " .
-								"AND u.deleted <> '1' " .
-							// "AND p.deleted <> '1' " .
+								"AND u.deleted <> 1 " .
+							// "AND p.deleted <> 1 " .
 							"ORDER BY u.uploaded_dt DESC " .
 							$pagination['limit']);
 
@@ -557,8 +557,8 @@ else
 
 	$sql_where =
 			($group_id? "LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (u.user_id = m.user_id) " : "") .
-		"WHERE u.account_type = '0' " .
-			"AND u.enabled = '1' " .
+		"WHERE u.account_type = 0 " .
+			"AND u.enabled = 1 " .
 			($group_id? "AND m.group_id = '$group_id' " : "") .
 			$sql_where;
 

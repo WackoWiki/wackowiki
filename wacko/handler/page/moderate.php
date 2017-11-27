@@ -1040,7 +1040,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							"SELECT page_id " .
 							"FROM " . $this->db->table_prefix . "page " .
 							"WHERE comment_on_id = '" . $first_comment['comment_on_id'] . "' " .
-								"AND comment_on_id <> '0' " .
+								"AND comment_on_id <> 0 " .
 								"AND created >= " . $this->db->q($first_comment['created']) . " " .
 							"ORDER BY created ASC");
 
@@ -1171,7 +1171,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
 			"WHERE comment_on_id = '{$this->page['page_id']}' " .
-				"AND p.deleted <> '1' " .
+				"AND p.deleted <> 1 " .
 			"ORDER BY created ASC " .
 			$pagination['limit'];
 

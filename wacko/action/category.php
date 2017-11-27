@@ -115,7 +115,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 			"INNER JOIN " . $this->db->table_prefix . "page AS p ON (k.object_id = p.page_id) " .
 		"WHERE k.category_id IN (" . $this->db->q($category_ids) . ") " .
 			"AND k.object_type_id = 1 " .
-			"AND p.deleted <> '1' " .
+			"AND p.deleted <> 1 " .
 			(($root && $type_id = OBJECT_PAGE)
 				? "AND (p.tag = " . $this->db->q($root) . " " .
 					"OR p.tag LIKE " . $this->db->q($root . '/%') . ") "

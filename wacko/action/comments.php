@@ -17,9 +17,9 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 		"WHERE " .
 		($tag
 			? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
-			: "a.comment_on_id <> '0' ") .
+			: "a.comment_on_id <> 0 ") .
 		(!$deleted
-			? "AND a.deleted <> '1' "
+			? "AND a.deleted <> 1 "
 			: "")
 		, true);
 
@@ -36,9 +36,9 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 			"WHERE " .
 			($tag
 				? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
-				: "a.comment_on_id <> '0' ") .
+				: "a.comment_on_id <> 0 ") .
 			($deleted != 1
-				? "AND a.deleted <> '1' "
+				? "AND a.deleted <> 1 "
 				: "") .
 			"ORDER BY a.modified DESC " .
 			$pagination['limit']);

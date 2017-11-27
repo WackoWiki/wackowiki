@@ -363,7 +363,7 @@ class Polls
 			"UPDATE " . $this->engine->db->table_prefix . "poll " .
 			"SET votes = '" . (int) $new_votes."' " .
 			"WHERE poll_id = '" . (int) $poll_id."' " .
-				"AND v_id = '0'");
+				"AND v_id = 0");
 
 		return true;
 	}

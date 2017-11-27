@@ -117,9 +117,9 @@ class Feed
 				"{$prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'read' AND a.list = '*' " .
-				"AND p.comment_on_id = '0' " .
-				"AND p.noindex <> '1' " .
-				"AND p.deleted <> '1' " .
+				"AND p.comment_on_id = 0 " .
+				"AND p.noindex <> 1 " .
+				"AND p.deleted <> 1 " .
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
 			"ORDER BY p.tag");
 
@@ -337,9 +337,9 @@ class Feed
 				"{$prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'read' AND a.list = '*' " .
-				"AND p.comment_on_id = '0' " .
-				"AND p.noindex <> '1' " .
-				"AND p.deleted <> '1' " .
+				"AND p.comment_on_id = 0 " .
+				"AND p.noindex <> 1 " .
+				"AND p.deleted <> 1 " .
 			"ORDER BY p.modified DESC, BINARY p.tag");
 
 		$xml = '<?xml version="1.0" encoding="utf-8"?>' . "\n";

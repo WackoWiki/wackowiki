@@ -35,8 +35,8 @@ function admin_maint_resync(&$engine, &$module)
 			$users1 = $engine->db->load_all(
 				"SELECT u.user_id, COUNT(p.tag) AS n " .
 				"FROM " . $engine->db->table_prefix . "page AS p, {$engine->db->user_table} AS u " .
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id = '0' " .
-				"AND p.deleted <> '1' " .
+				"WHERE p.owner_id = u.user_id AND p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 " .
 				"GROUP BY p.owner_id");
 
 			// missing pages (case: total_pages = 0)
@@ -47,7 +47,7 @@ function admin_maint_resync(&$engine, &$module)
 					" . $engine->db->table_prefix . "user u
 					LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.user_id = p.owner_id)
 				WHERE
-					u.total_pages <> '0'
+					u.total_pages <> 0
 				AND
 					p.owner_id IS NULL");
 
@@ -69,8 +69,8 @@ function admin_maint_resync(&$engine, &$module)
 					SELECT p.owner_id as user_id, COUNT(p.tag) AS n
 					FROM " . $engine->db->table_prefix . "page AS p, {$engine->db->user_table} AS u
 					WHERE p.owner_id = u.user_id
-						AND p.comment_on_id <> '0'
-						AND p.deleted <> '1'
+						AND p.comment_on_id <> 0
+						AND p.deleted <> 1
 					GROUP BY p.owner_id " .
 
 					// missing comments (case: total_comments = 0)
@@ -79,11 +79,11 @@ function admin_maint_resync(&$engine, &$module)
 					SELECT u.user_id, '0' as n
 					FROM " . $engine->db->table_prefix . "user u
 						LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.user_id = p.owner_id)
-					WHERE (u.total_comments <> '0'
+					WHERE (u.total_comments <> 0
 						AND p.owner_id IS NULL
 						OR (p.owner_id = u.user_id
-							AND p.comment_on_id = '0'
-							AND p.deleted <> '1'))
+							AND p.comment_on_id = 0
+							AND p.deleted <> 1))
 					GROUP BY u.user_id
 				) results
 				ORDER BY n DESC");
@@ -116,7 +116,7 @@ function admin_maint_resync(&$engine, &$module)
 			$users = $engine->db->load_all(
 				"SELECT r.user_id, COUNT(r.page_id) AS n " .
 				"FROM " . $engine->db->table_prefix . "revision AS r, {$engine->db->user_table} AS u " .
-				"WHERE r.owner_id = u.user_id AND r.comment_on_id = '0' " .
+				"WHERE r.owner_id = u.user_id AND r.comment_on_id = 0 " .
 				"GROUP BY r.user_id");
 
 			foreach ($users as $user)
@@ -133,7 +133,7 @@ function admin_maint_resync(&$engine, &$module)
 					"SELECT u.user_id, COUNT(f.file_id) AS n " .
 					"FROM " . $engine->db->table_prefix . "file f, {$engine->db->user_table} AS u " .
 					"WHERE f.user_id = u.user_id " .
-					"AND f.deleted <> '1' " .
+					"AND f.deleted <> 1 " .
 					"GROUP BY f.user_id");
 
 			foreach ($users as $user)
@@ -156,7 +156,7 @@ function admin_maint_resync(&$engine, &$module)
 					"SELECT p.page_id, COUNT( c.page_id ) AS n
 					FROM " . $engine->db->table_prefix . "page AS c
 					RIGHT JOIN " . $engine->db->table_prefix . "page AS p ON c.comment_on_id = p.page_id
-					WHERE c.deleted <> '1'
+					WHERE c.deleted <> 1
 					GROUP BY p.page_id
 
 					UNION ALL
