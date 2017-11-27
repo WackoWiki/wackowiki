@@ -31,118 +31,66 @@ function admin_maint_resync(&$engine, &$module)
 	{
 		if ($_REQUEST['action'] == 'userstats')
 		{
-			// total pages in ownership
-			$users1 = $engine->db->load_all(
-				"SELECT u.user_id, COUNT(p.tag) AS n " .
-				"FROM " . $engine->db->table_prefix . "page AS p, {$engine->db->user_table} AS u " .
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 " .
-				"GROUP BY p.owner_id");
+			// reset stats
+			$sql[] = "UPDATE " . $engine->db->user_table . " SET
+						total_comments	= 0,
+						total_uploads	= 0,
+						total_revisions	= 0,
+						total_pages		= 0";
 
-			// missing pages (case: total_pages = 0)
-			$users2 = $engine->db->load_all(
-				"SELECT
-					u.user_id, '0' as n
-				FROM
-					" . $engine->db->table_prefix . "user u
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.user_id = p.owner_id)
-				WHERE
-					u.total_pages <> 0
-				AND
-					p.owner_id IS NULL");
+			// set total comments posted
+			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+						(SELECT p.owner_id as user_id, COUNT(p.tag) AS n
+						FROM " . $engine->db->table_prefix . "page AS p,
+							{$engine->db->user_table} AS o
+						WHERE p.owner_id = o.user_id
+							AND p.comment_on_id <> 0
+							AND p.deleted <> 1
+						GROUP BY p.owner_id) AS s
+					SET
+						u.total_comments = s.n
+					WHERE u.user_id = s.user_id";
 
-			$users = array_merge($users1, $users2);
-
-			foreach ($users as $user)
-			{
-				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} " .
-					"SET total_pages = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['user_id'] . "' " .
-					"LIMIT 1");
-			}
-
-			// total comments posted
-			$users = $engine->db->load_all(
-				"SELECT user_id, n
-				FROM (
-					SELECT p.owner_id as user_id, COUNT(p.tag) AS n
-					FROM " . $engine->db->table_prefix . "page AS p, {$engine->db->user_table} AS u
-					WHERE p.owner_id = u.user_id
-						AND p.comment_on_id <> 0
-						AND p.deleted <> 1
-					GROUP BY p.owner_id " .
-
-					// missing comments (case: total_comments = 0)
-					"UNION ALL
-
-					SELECT u.user_id, '0' as n
-					FROM " . $engine->db->table_prefix . "user u
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.user_id = p.owner_id)
-					WHERE (u.total_comments <> 0
-						AND p.owner_id IS NULL
-						OR (p.owner_id = u.user_id
+			// set total pages in ownership
+			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+						(SELECT o.user_id, COUNT(p.tag) AS n
+						FROM " . $engine->db->table_prefix . "page AS p,
+							{$engine->db->user_table} AS o
+						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id = 0
-							AND p.deleted <> 1))
-					GROUP BY u.user_id
-				) results
-				ORDER BY n DESC");
+							AND p.deleted <> 1
+						GROUP BY p.owner_id) AS s
+					SET
+						u.total_pages = s.n
+					WHERE u.user_id = s.user_id";
 
-			$key_array = [];
-			#Ut::debug_print_r($users);
+			// set total revisions made
+			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+						(SELECT r.user_id, COUNT(r.page_id) AS n
+						FROM " . $engine->db->table_prefix . "revision AS r,
+							{$engine->db->user_table} AS o
+						WHERE r.owner_id = o.user_id
+							AND r.comment_on_id = 0
+						GROUP BY r.user_id) AS s
+					SET
+						u.total_revisions = s.n
+					WHERE u.user_id = s.user_id";
 
-			foreach ($users as $user)
+			// set total files uploaded
+			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+						(SELECT o.user_id, COUNT(f.file_id) AS n
+						FROM " . $engine->db->table_prefix . "file f,
+							{$engine->db->user_table} AS o
+						WHERE f.user_id = o.user_id
+							AND f.deleted <> 1
+						GROUP BY f.user_id) AS s
+					SET
+						u.total_uploads = s.n
+					WHERE u.user_id = s.user_id";
+
+			foreach ($sql as $query)
 			{
-				// take only first record
-				if (!in_array($user['user_id'], $key_array))
-				{
-					$key_array[]					= $user['user_id'];
-					$comments[$user['user_id']]		= $user['n'];
-				}
-			}
-
-			#Ut::debug_print_r($comments);
-
-			foreach ($comments as $k => $n)
-			{
-				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} " .
-					"SET total_comments = " . (int) $n . " " .
-					"WHERE user_id = '" . (int) $k . "' " .
-					"LIMIT 1");
-			}
-
-			// total revisions made
-			$users = $engine->db->load_all(
-				"SELECT r.user_id, COUNT(r.page_id) AS n " .
-				"FROM " . $engine->db->table_prefix . "revision AS r, {$engine->db->user_table} AS u " .
-				"WHERE r.owner_id = u.user_id AND r.comment_on_id = 0 " .
-				"GROUP BY r.user_id");
-
-			foreach ($users as $user)
-			{
-				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} " .
-					"SET total_revisions = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . (int) $user['user_id'] . "' " .
-					"LIMIT 1");
-			}
-
-			// total files uploaded
-			$users = $engine->db->load_all(
-					"SELECT u.user_id, COUNT(f.file_id) AS n " .
-					"FROM " . $engine->db->table_prefix . "file f, {$engine->db->user_table} AS u " .
-					"WHERE f.user_id = u.user_id " .
-					"AND f.deleted <> 1 " .
-					"GROUP BY f.user_id");
-
-			foreach ($users as $user)
-			{
-				$engine->db->sql_query(
-					"UPDATE {$engine->db->user_table} " .
-					"SET total_uploads = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . (int) $user['user_id'] . "' " .
-					"LIMIT 1");
+				$engine->db->sql_query($query);
 			}
 
 			$engine->log(1, 'Synchronized user statistics');
@@ -152,52 +100,38 @@ function admin_maint_resync(&$engine, &$module)
 		}
 		else if ($_REQUEST['action'] == 'pagestats')
 		{
-			$comments = $engine->db->load_all(
-					"SELECT p.page_id, COUNT( c.page_id ) AS n
-					FROM " . $engine->db->table_prefix . "page AS c
-					RIGHT JOIN " . $engine->db->table_prefix . "page AS p ON c.comment_on_id = p.page_id
-					WHERE c.deleted <> 1
-					GROUP BY p.page_id
-
-					UNION ALL
-
-					SELECT p.page_id, '0' AS n
-					FROM " . $engine->db->table_prefix . "page AS c
-					RIGHT JOIN " . $engine->db->table_prefix . "page AS p ON c.comment_on_id = p.page_id
-					WHERE c.comment_on_id IS NULL");
-
-			foreach ($comments as $comment)
-			{
-				$engine->db->sql_query(
-					"UPDATE " . $engine->db->table_prefix . "page " .
-					"SET comments = " . (int) $comment['n'] . " " .
-					"WHERE page_id = '" . $comment['page_id'] . "' " .
-					"LIMIT 1");
-			}
-
+			// reset stats
 			$sql[] = "UPDATE " . $engine->db->table_prefix . "page SET
+						comments	= 0,
 						files		= 0,
 						revisions	= 0";
+			// set comments
 			$sql[] = "UPDATE " . $engine->db->table_prefix . "page AS p,
-						(SELECT
-							page_id, COUNT(file_id) AS files
-						FROM
-							" . $engine->db->table_prefix . "file
-						WHERE
-							page_id <> 0 GROUP BY page_id) AS f
+						(SELECT e.page_id, COUNT( c.page_id ) AS n
+						FROM " . $engine->db->table_prefix . "page AS c
+							RIGHT JOIN " . $engine->db->table_prefix . "page AS e ON c.comment_on_id = e.page_id
+						WHERE c.deleted <> 1
+						GROUP BY e.page_id) AS s
+					SET
+						p.comments = s.n
+					WHERE p.page_id = s.page_id";
+			// set files
+			$sql[] = "UPDATE " . $engine->db->table_prefix . "page AS p,
+						(SELECT page_id, COUNT(file_id) AS files
+						FROM " . $engine->db->table_prefix . "file
+						WHERE page_id <> 0
+						GROUP BY page_id) AS f
 					SET
 						p.files = f.files
-					WHERE
-						p.page_id = f.page_id";
+					WHERE p.page_id = f.page_id";
+			// set revisions
 			$sql[] = "UPDATE " . $engine->db->table_prefix . "page AS p,
-						(SELECT
-							page_id, COUNT(page_id) AS revisions
-						FROM
-							" . $engine->db->table_prefix . "revision GROUP BY page_id) AS r
+						(SELECT page_id, COUNT(page_id) AS revisions
+						FROM " . $engine->db->table_prefix . "revision
+						GROUP BY page_id) AS r
 					SET
 						p.revisions = r.revisions
-					WHERE
-						p.page_id = r.page_id";
+					WHERE p.page_id = r.page_id";
 
 			foreach ($sql as $query)
 			{
