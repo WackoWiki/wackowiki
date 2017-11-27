@@ -250,6 +250,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					" . $engine->db->table_prefix . "page p
 					LEFT JOIN " . $engine->db->table_prefix . "user u ON (p.user_id = u.user_id)
 				WHERE
+					p.user_id <> 0 AND
 					u.user_id IS NULL");
 
 			$inconsistencies['3.2'] = ['page without valid user_id', count($page_user)];
