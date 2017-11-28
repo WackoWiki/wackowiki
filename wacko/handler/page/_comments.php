@@ -23,7 +23,7 @@ function handler_show_get_user_stats(&$engine, $user_id)
 			"total_revisions AS revisions, " .
 			"total_comments AS comments " .
 		"FROM {$engine->db->user_table} " .
-		"WHERE user_id = '" . (int) $user_id . "' " .
+		"WHERE user_id = " . (int) $user_id . " " .
 		"LIMIT 1");
 
 	$engine->cached_stats[$user_id] = $stats;
@@ -82,8 +82,8 @@ if ($this->has_access('read'))
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "watch " .
 				"SET comment_id = 0 " .
-				"WHERE page_id = '" . $this->page['page_id'] . "' " .
-					"AND user_id = '" . $user['user_id'] . "'");
+				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
+					"AND user_id = " . (int) $user['user_id'] . "");
 		}
 
 		// clear anonymous publication uncorrelator

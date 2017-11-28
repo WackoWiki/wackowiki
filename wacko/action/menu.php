@@ -30,9 +30,9 @@ if (!function_exists('load_user_menu'))
 			"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position " .
 			"FROM " . $engine->db->table_prefix . "menu m " .
 				"LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
-			"WHERE m.user_id = '" . (int) $user_id . "' " .
+			"WHERE m.user_id = " . (int) $user_id . " " .
 				($lang
-					? "AND m.menu_lang =  '" . $lang."' "
+					? "AND m.menu_lang =  " .$this->db->q($lang) . " "
 					: "") .
 			"ORDER BY m.menu_position", false);
 
@@ -117,9 +117,9 @@ if (isset($_POST['_user_menu']))
 		{
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "menu SET " .
-					"menu_position	= '" . $item['menu_position'] . "', " .
+					"menu_position	= " . (int) $item['menu_position'] . ", " .
 					"menu_title		= " . $this->db->q(substr(trim($_POST['title_' . $item['menu_id']]), 0, 250)) . " " .
-				"WHERE menu_id		= '" . $item['menu_id'] . "' " .
+				"WHERE menu_id		= " . (int) $item['menu_id'] . " " .
 				"LIMIT 1");
 		}
 	}
@@ -143,11 +143,11 @@ if (isset($_POST['_user_menu']))
 					if ($this->db->load_single(
 						"SELECT menu_id " .
 						"FROM " . $this->db->table_prefix . "menu " .
-						"WHERE user_id = '" . (int) $_user_id."' " .
+						"WHERE user_id = " . (int) $_user_id." " .
 							($default_menu === true
 									? "AND menu_lang = '" . $_user_lang."' "
 									: "") .
-							"AND page_id = '" . (int) $_page_id."' " .
+							"AND page_id = " . (int) $_page_id." " .
 						"LIMIT 1"))
 					{
 						$message .= $this->_t('BookmarkAlreadyExists');
@@ -158,7 +158,7 @@ if (isset($_POST['_user_menu']))
 						$_menu_position = $this->db->load_all(
 							"SELECT menu_id " .
 							"FROM " . $this->db->table_prefix . "menu " .
-							"WHERE user_id = '" . (int) $_user_id."' " .
+							"WHERE user_id = " . (int) $_user_id . " " .
 								($default_menu === true
 									? "AND menu_lang = '" . $_user_lang."' "
 									: "")
@@ -168,10 +168,10 @@ if (isset($_POST['_user_menu']))
 
 						$this->db->sql_query(
 							"INSERT INTO " . $this->db->table_prefix . "menu SET " .
-							"user_id			= '" . (int) $_user_id."', " .
-							"page_id			= '" . (int) $_page_id."', " .
+							"user_id			= " . (int) $_user_id . ", " .
+							"page_id			= " . (int) $_page_id.", " .
 							"menu_lang			= " . $this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)) . ", " .
-							"menu_position		= '" . (int)($_menu_item_count + 1) . "'");
+							"menu_position		= " . (int)($_menu_item_count + 1) . "");
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set
 					}

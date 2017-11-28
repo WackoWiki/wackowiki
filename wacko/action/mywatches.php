@@ -49,7 +49,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}page AS p " .
 			"LEFT JOIN {$prefix}watch AS w " .
 				"ON (p.page_id = w.page_id " .
-					"AND w.user_id = '" . (int) $user_id . "') " .
+					"AND w.user_id = " . (int) $user_id . ") " .
 			"WHERE p.comment_on_id = 0 " .
 				"AND p.deleted <> 1 " .
 				"AND w.user_id IS NULL", true);
@@ -63,7 +63,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}page AS p " .
 			"LEFT JOIN {$prefix}watch AS w " .
 				"ON (p.page_id = w.page_id " .
-					"AND w.user_id = '" . (int) $user_id . "') " .
+					"AND w.user_id = " . (int) $user_id . ") " .
 			"WHERE p.comment_on_id = 0 " .
 				"AND p.deleted <> 1 " .
 				"AND w.user_id IS NULL " .
@@ -109,7 +109,7 @@ if ($user_id = $this->get_user_id())
 		$count	= $this->db->load_single(
 			"SELECT COUNT( DISTINCT page_id ) as n " .
 			"FROM {$prefix}watch " .
-			"WHERE user_id = '" . (int) $user_id . "'", true);
+			"WHERE user_id = " . (int) $user_id . "", true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $profile + ['mode' => 'mywatches', '#' => 'list']);
 
@@ -120,7 +120,7 @@ if ($user_id = $this->get_user_id())
 			"FROM {$prefix}watch AS w " .
 			"LEFT JOIN {$prefix}page AS p " .
 				"ON (p.page_id = w.page_id) " .
-			"WHERE w.user_id = '" . (int) $user_id . "' " .
+			"WHERE w.user_id = " . (int) $user_id . " " .
 			"GROUP BY tag " .
 			$pagination['limit']))
 		{

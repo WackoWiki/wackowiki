@@ -57,7 +57,7 @@ $load_diff_page = function ($revision_id)
 			"SELECT r.page_id, r.revision_id, r.modified, r.body, r.page_lang, u.user_name " .
 			"FROM " . $this->db->table_prefix . "revision r " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
-			"WHERE r.revision_id = '" . (int) $revision_id."' " .
+			"WHERE r.revision_id = " . (int) $revision_id . " " .
 			"LIMIT 1");
 	}
 	else
@@ -66,7 +66,7 @@ $load_diff_page = function ($revision_id)
 			"SELECT p.page_id, 0 AS revision_id, p.modified, p.body, p.page_lang, u.user_name " .
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-			"WHERE p.page_id = '" . $this->get_page_id() . "' " .
+			"WHERE p.page_id = " . (int) $this->get_page_id() . " " .
 			"LIMIT 1");
 	}
 };

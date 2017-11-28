@@ -163,10 +163,10 @@ class Polls
 		// submitting title
 		$this->engine->sql_query(
 			"INSERT INTO " . $this->engine->db->table_prefix . "poll SET " .
-				"poll_id	= '" . (int) $poll_id."', " .
+				"poll_id	= " . (int) $poll_id . ", " .
 				"text		= " . $this->engine->db->q(rtrim($topic, '.')) . ", " .
-				"user_id	= '" . (int) $user_id . "', " .
-				"plural		= '" . (int) $plural . "', " .
+				"user_id	= " . (int) $user_id . ", " .
+				"plural		= " . (int) $plural . ", " .
 				"start		= " . ($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
 
 		// submitting variants
@@ -176,8 +176,8 @@ class Polls
 
 			$this->engine->sql_query(
 				"INSERT INTO " . $this->engine->db->table_prefix . "poll SET " .
-					"poll_id	= '" . (int) $poll_id . "', " .
-					"v_id		= '" . (int) $v_id . "', " .
+					"poll_id	= " . (int) $poll_id . ", " .
+					"v_id		= " . (int) $v_id . ", " .
 					"text		= " . $this->engine->db->q(rtrim($v_text, '.')) . " ");
 		}
 
@@ -349,9 +349,9 @@ class Polls
 					$new_votes = $var['votes'] + 1;
 					$this->engine->sql_query(
 						"UPDATE " . $this->engine->db->table_prefix . "poll " .
-						"SET votes = '" . (int) $new_votes."' " .
-						"WHERE poll_id = '" . (int) $poll_id."' " .
-							"AND v_id = '" . (int) $vote_id."'");
+						"SET votes = " . (int) $new_votes . " " .
+						"WHERE poll_id = " . (int) $poll_id . " " .
+							"AND v_id = " . (int) $vote_id . "");
 //					$total++;
 				}
 			}
@@ -361,8 +361,8 @@ class Polls
 
 		$this->engine->sql_query(
 			"UPDATE " . $this->engine->db->table_prefix . "poll " .
-			"SET votes = '" . (int) $new_votes."' " .
-			"WHERE poll_id = '" . (int) $poll_id."' " .
+			"SET votes = " . (int) $new_votes . " " .
+			"WHERE poll_id = " . (int) $poll_id . " " .
 				"AND v_id = 0");
 
 		return true;

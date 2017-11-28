@@ -95,7 +95,7 @@ function admin_content_pages(&$engine, &$module)
 	// filter by username or user ip
 	if (isset($_GET['user_id']))
 	{
-		$where = "WHERE p.user_id = '" . (int) $_GET['user_id'] . "' ";
+		$where = "WHERE p.user_id = " . (int) $_GET['user_id'] . " ";
 	}
 	else if (isset($_GET['ip']))
 	{

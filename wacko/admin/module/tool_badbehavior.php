@@ -335,7 +335,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 				$engine->db->sql_query(
 						"UPDATE " . $engine->db->table_prefix . "bad_behavior SET " .
 							"host		= " . $engine->db->q($host) . " " .
-						"WHERE log_id	= '" . (int) $result['log_id'] . "' " .
+						"WHERE log_id	= " . (int) $result['log_id'] . " " .
 						"LIMIT 1");
 			}
 

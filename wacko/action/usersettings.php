@@ -80,29 +80,29 @@ else if (($user = $this->get_user()))
 	if ($action == 'user_settings_extended')
 	{
 		$sql =
-		"doubleclick_edit	= '" . (int) isset($_POST['doubleclick_edit']) . "', " .
-		"show_comments		= '" . (int) isset($_POST['show_comments']) . "', " .
-		"show_spaces		= '" . (int) isset($_POST['show_spaces']) . "', " .
-		// "typografica		= '" . (int) isset($_POST['typografica']) . "', " .
-		"autocomplete		= '" . (int) isset($_POST['autocomplete']) . "', " .
-		"numerate_links		= '" . (int) isset($_POST['numerate_links']) . "', " .
-		"diff_mode			= '" . (int) $_POST['diff_mode'] . "', " .
-		"dont_redirect		= '" . (int) isset($_POST['dont_redirect']) . "', " .
-		"show_files			= '" . (int) isset($_POST['show_files']) . "', " .
-		"hide_lastsession	= '" . (int) isset($_POST['hide_lastsession']) . "', " .
-		"validate_ip		= '" . (int) isset($_POST['validate_ip']) . "', " .
-		"noid_pubs			= '" . (int) isset($_POST['noid_pubs']) . "', " .
-		"session_length		= '" . (int) @$_POST['session_length'] . "' "; // @ to normalize possible discrepancy
+		"doubleclick_edit	= " . (int) isset($_POST['doubleclick_edit']) . ", " .
+		"show_comments		= " . (int) isset($_POST['show_comments']) . ", " .
+		"show_spaces		= " . (int) isset($_POST['show_spaces']) . ", " .
+		// "typografica		= " . (int) isset($_POST['typografica']) . ", " .
+		"autocomplete		= " . (int) isset($_POST['autocomplete']) . ", " .
+		"numerate_links		= " . (int) isset($_POST['numerate_links']) . ", " .
+		"diff_mode			= " . (int) $_POST['diff_mode'] . ", " .
+		"dont_redirect		= " . (int) isset($_POST['dont_redirect']) . ", " .
+		"show_files			= " . (int) isset($_POST['show_files']) . ", " .
+		"hide_lastsession	= " . (int) isset($_POST['hide_lastsession']) . ", " .
+		"validate_ip		= " . (int) isset($_POST['validate_ip']) . ", " .
+		"noid_pubs			= " . (int) isset($_POST['noid_pubs']) . ", " .
+		"session_length		= " . (int) @$_POST['session_length'] . " "; // @ to normalize possible discrepancy
 	}
 	else if	($action == 'user_settings_notifications')
 	{
 		$sql =
-		"send_watchmail		= '" . (int) isset($_POST['send_watchmail']) . "', " .
-		"allow_intercom		= '" . (int) isset($_POST['allow_intercom']) . "', " .
-		"notify_minor_edit	= '" . (int) isset($_POST['notify_minor_edit']) . "', " .
-		"notify_page		= '" . (int) @$_POST['notify_page'] . "', ".		// @ to notify possible discrepancy
-		"notify_comment		= '" . (int) @$_POST['notify_comment'] . "', ".	// @ to notify possible discrepancy
-		"allow_massemail	= '" . (int) isset($_POST['allow_massemail']) . "' ";
+		"send_watchmail		= " . (int) isset($_POST['send_watchmail']) . ", " .
+		"allow_intercom		= " . (int) isset($_POST['allow_intercom']) . ", " .
+		"notify_minor_edit	= " . (int) isset($_POST['notify_minor_edit']) . ", " .
+		"notify_page		= " . (int) @$_POST['notify_page'] . ", ".		// @ to notify possible discrepancy
+		"notify_comment		= " . (int) @$_POST['notify_comment'] . ", ".	// @ to notify possible discrepancy
+		"allow_massemail	= " . (int) isset($_POST['allow_massemail']) . " ";
 	}
 	else if	($action == 'user_settings_general')
 	{
@@ -110,10 +110,10 @@ else if (($user = $this->get_user()))
 		"user_lang			= " . $this->db->q($_POST['user_lang']) . ", " .
 		"theme				= " . $this->db->q($_POST['theme']) . ", " .
 		"timezone			= '" . (float) $_POST['timezone'] . "', " .
-		"dst				= '" . (int) $_POST['dst'] . "', " .
-		"sorting_comments	= '" . (int) $_POST['sorting_comments'] . "', " .
-		"menu_items			= '" . (int) $_POST['menu_items'] . "', " .
-		"list_count			= '" . (int) $_POST['list_count'] . "' " ;
+		"dst				= " . (int) $_POST['dst'] . ", " .
+		"sorting_comments	= " . (int) $_POST['sorting_comments'] . ", " .
+		"menu_items			= " . (int) $_POST['menu_items'] . ", " .
+		"list_count			= " . (int) $_POST['list_count'] . " " ;
 	}
 	else
 	{
@@ -126,7 +126,7 @@ else if (($user = $this->get_user()))
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "user_setting SET " .
 				$sql.
-			"WHERE user_id = '" . (int) $user['user_id'] . "' " .
+			"WHERE user_id = " . (int) $user['user_id'] . " " .
 			"LIMIT 1");
 
 		// log event
@@ -454,7 +454,7 @@ else if (($user = $this->get_user()))
 		$code = $this->db->load_single(
 			"SELECT email_confirm " .
 			"FROM " . $this->db->user_table . " " .
-			"WHERE user_id = '" . (int) $user['user_id'] . "' " .
+			"WHERE user_id = " . (int) $user['user_id'] . " " .
 			"LIMIT 1");
 
 		echo '<h3>' . $this->_t('UserSettings') . ' &raquo; ' . $this->_t('UserSettingsGeneral') . "</h3>\n";

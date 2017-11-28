@@ -345,7 +345,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$upload = $engine->db->sql_query(
 				"UPDATE " . $engine->db->table_prefix . "file ul " .
 					"LEFT JOIN " . $engine->db->table_prefix . "user u ON (ul.user_id = u.user_id) " .
-				"SET ul.user_id		= '" . (int) $admin_id['user_id'] . "' " .
+				"SET ul.user_id		= " . (int) $admin_id['user_id'] . " " .
 				"WHERE
 					u.user_id IS NULL");
 

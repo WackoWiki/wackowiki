@@ -18,7 +18,7 @@ $get_file = function ($file_id)
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-		"WHERE f.file_id ='" . (int) $file_id . "' " .
+		"WHERE f.file_id = " . (int) $file_id . " " .
 		"LIMIT 1", true);
 
 	return $file;
@@ -497,7 +497,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 							"file_description	= " . $this->db->q($description) . ", " .
 							"caption			= " . $this->db->q($caption) . ", " .
 							"modified_dt		= UTC_TIMESTAMP() " .
-						"WHERE file_id = '" . $file['file_id'] . "' " .
+						"WHERE file_id = " . (int) $file['file_id'] . " " .
 						"LIMIT 1");
 
 					$message .= $this->_t('FileEditedMeta') . "<br>";

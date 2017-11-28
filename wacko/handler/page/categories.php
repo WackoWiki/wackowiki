@@ -51,7 +51,7 @@ if ($this->is_owner() || $this->is_admin())
 				$word = $this->db->load_single(
 					"SELECT category_id, parent_id, category " .
 					"FROM " . $this->db->table_prefix . "category " .
-					"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
+					"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 						"AND category_lang = " . $this->page['page_lang'] . " " .
 					"LIMIT 1");
 			}
@@ -99,7 +99,7 @@ if ($this->is_owner() || $this->is_admin())
 					"SELECT category_id " .
 					"FROM " . $this->db->table_prefix . "category " .
 					"WHERE category = " . $this->db->q($_POST['category']) . " " .
-						"AND category_id <> '" . (int) $_POST['category_id'] . "' " .
+						"AND category_id <> " . (int) $_POST['category_id'] . " " .
 					"LIMIT 1"))
 				{
 					$this->set_message($this->_t('CategoriesAlreadyExists'));
@@ -111,7 +111,7 @@ if ($this->is_owner() || $this->is_admin())
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "category SET " .
 							"category = " . $this->db->q($_POST['category']) . " " .
-						"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
+						"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 						"LIMIT 1");
 
 					$this->set_message($this->_t('CategoriesRenamed'), 'success');
@@ -129,7 +129,7 @@ if ($this->is_owner() || $this->is_admin())
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "category SET " .
 							"parent_id = 0 " .
-						"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
+						"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 						"LIMIT 1");
 
 					$this->set_message($this->_t('CategoriesUngrouped'), 'success');
@@ -140,21 +140,21 @@ if ($this->is_owner() || $this->is_admin())
 					$parent = $this->db->load_single(
 						"SELECT parent_id, category " .
 						"FROM " . $this->db->table_prefix . "category " .
-						"WHERE category_id = '" . (int) $_POST['parent_id'] . "' " .
+						"WHERE category_id = " . (int) $_POST['parent_id'] . " " .
 						"LIMIT 1");
 
 					if ($parent['parent_id'] == 0)
 					{
 						$this->db->sql_query(
 							"UPDATE " . $this->db->table_prefix . "category SET " .
-								"parent_id = '" . (int) $_POST['parent_id'] . "' " .
-							"WHERE category_id = '" . (int) $_POST['category_id'] . "' " .
+								"parent_id = " . (int) $_POST['parent_id'] . " " .
+							"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 							"LIMIT 1");
 
 						$this->db->sql_query(
 							"UPDATE " . $this->db->table_prefix . "category SET " .
 								"parent_id = 0 " .
-							"WHERE parent_id = '" . (int) $_POST['category_id'] . "'");
+							"WHERE parent_id = " . (int) $_POST['category_id'] . "");
 
 						$this->set_message($this->_t('CategoriesGrouped'), 'success');
 						$this->log(4, 'Category //' . $word['category'] . '// grouped with the word //' . $parent['category'] . '//');
@@ -172,16 +172,16 @@ if ($this->is_owner() || $this->is_admin())
 			{
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "category " .
-					"WHERE category_id = '" . (int) $_POST['category_id'] . "'");
+					"WHERE category_id = " . (int) $_POST['category_id'] . "");
 
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "category_assignment " .
-					"WHERE category_id = '" . (int) $_POST['category_id'] . "'");
+					"WHERE category_id = " . (int) $_POST['category_id'] . "");
 
 				$this->db->sql_query(
 					"UPDATE " . $this->db->table_prefix . "category SET " .
 						"parent_id = 0 " .
-					"WHERE parent_id = '" . (int) $_POST['category_id'] . "'");
+					"WHERE parent_id = " . (int) $_POST['category_id'] . "");
 
 				$this->set_message($this->_t('CategoriesDeleted'), 'success');
 				$this->log(4, 'Category //' . $word['category'] . '// removed from the database');
@@ -210,7 +210,7 @@ if ($this->is_owner() || $this->is_admin())
 					$word = $this->db->load_single(
 						"SELECT category_id, parent_id, category " .
 						"FROM " . $this->db->table_prefix . "category " .
-						"WHERE category_id = '" . (int) $_POST['change_id'] . "' " .
+						"WHERE category_id = " . (int) $_POST['change_id'] . " " .
 						"LIMIT 1");
 
 					$parent_id = ($word['parent_id'] == 0 ? $word['category_id'] : $parent_id = $word['parent_id']);
@@ -260,7 +260,7 @@ if ($this->is_owner() || $this->is_admin())
 				if ($word = $this->db->load_single(
 					"SELECT category
 					FROM " . $this->db->table_prefix . "category
-					WHERE category_id = '" . (int) $_POST['change_id'] . "'
+					WHERE category_id = " . (int) $_POST['change_id'] . "
 					LIMIT 1"))
 				{
 					echo $edit_header;
@@ -286,7 +286,7 @@ if ($this->is_owner() || $this->is_admin())
 				if ($word = $this->db->load_single(
 					"SELECT category_id, parent_id, category, category_lang
 					FROM " . $this->db->table_prefix . "category
-					WHERE category_id = '" . (int) $_POST['change_id'] . "'
+					WHERE category_id = " . (int) $_POST['change_id'] . "
 					LIMIT 1"))
 				{
 					$parents = $this->db->load_all(
@@ -294,7 +294,7 @@ if ($this->is_owner() || $this->is_admin())
 						"FROM " . $this->db->table_prefix . "category " .
 						"WHERE parent_id = 0 " .
 							"AND category_lang = " . $this->db->q($word['category_lang']) . " " .
-							"AND category_id <> '" . $word['category_id'] . "' " .
+							"AND category_id <> " . (int) $word['category_id'] . " " .
 						"ORDER BY category ASC");
 
 					foreach ($parents as $parent)
@@ -329,7 +329,7 @@ if ($this->is_owner() || $this->is_admin())
 				if ($word = $this->db->load_single(
 					"SELECT category
 					FROM " . $this->db->table_prefix . "category
-					WHERE category_id = '" . (int) $_POST['change_id'] . "'
+					WHERE category_id = " . (int) $_POST['change_id'] . "
 					LIMIT 1"))
 				{
 					echo $edit_header;

@@ -49,7 +49,7 @@ if (($user_id = $this->get_user_id()))
 		$count	= $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
-			"WHERE owner_id = '" . (int) $user_id . "' " .
+			"WHERE owner_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0", true);
 
@@ -58,7 +58,7 @@ if (($user_id = $this->get_user_id()))
 		if ($pages = $this->db->load_all(
 			"SELECT tag, title, created " .
 			"FROM {$prefix}page " .
-			"WHERE owner_id = '" . (int) $user_id . "' " .
+			"WHERE owner_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0 " .
 			"ORDER BY created DESC, tag ASC " .
@@ -102,7 +102,7 @@ if (($user_id = $this->get_user_id()))
 			"FROM {$prefix}page AS p " .
 			"LEFT JOIN {$prefix}revision AS r " .
 				"ON (p.page_id = r.page_id " .
-					"AND p.owner_id = '" . (int) $user_id . "') " .
+					"AND p.owner_id = " . (int) $user_id . ") " .
 			"WHERE p.comment_on_id = 0 " .
 				"AND p.deleted <> 1 " .
 				"AND r.comment_on_id = 0", true);
@@ -114,7 +114,7 @@ if (($user_id = $this->get_user_id()))
 			"FROM {$prefix}page AS p " .
 			"LEFT JOIN {$prefix}revision AS r " .
 				"ON (p.page_id = r.page_id " .
-					"AND p.owner_id = '" . (int) $user_id . "') " .
+					"AND p.owner_id = " . (int) $user_id . ") " .
 			"WHERE p.comment_on_id = 0 " .
 				"AND p.deleted <> 1 " .
 				"AND r.comment_on_id = 0 " .
@@ -160,7 +160,7 @@ if (($user_id = $this->get_user_id()))
 		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n " .
 			"FROM {$prefix}page " .
-			"WHERE owner_id = '" . (int) $user_id . "' " .
+			"WHERE owner_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0", true);
 
@@ -169,7 +169,7 @@ if (($user_id = $this->get_user_id()))
 		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified " .
 			"FROM {$prefix}page " .
-			"WHERE owner_id = '" . (int) $user_id . "' " .
+			"WHERE owner_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0 " .
 			"ORDER BY tag ASC " .

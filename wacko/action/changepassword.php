@@ -58,7 +58,7 @@ if (@$_POST['_action'] === 'change_password' && $user)
 				"UPDATE " . $this->db->user_table . " SET " .
 					"change_password	= '', " .
 					"password = " . $this->db->q($this->password_hash($user, $new_password)) . " " .
-				"WHERE user_id = '" . $user['user_id'] . "' " .
+				"WHERE user_id = " . (int) $user['user_id'] . " " .
 				"LIMIT 1");
 
 			$diag = $code? 'LogUserPasswordRecovered' : 'LogUserPasswordChanged';
@@ -106,7 +106,7 @@ if (@$_POST['_action'] === 'forgot_password')
 			"UPDATE " . $this->db->user_table . " SET " .
 				"lost_password_request_count = lost_password_request_count + 1, ". // value unused
 				"change_password = " . $this->db->q($code_hash) . " " .
-			"WHERE user_id = '" . (int) $user['user_id'] . "' " .
+			"WHERE user_id = " . (int) $user['user_id'] . " " .
 			"LIMIT 1");
 
 		// send code

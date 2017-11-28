@@ -23,20 +23,20 @@ if (@$_POST['_action'] === 'extended_properties')
 	$mode = 'extended';
 	$this->db->sql_query(
 		"UPDATE " . $this->db->table_prefix . "page SET " .
-			"footer_comments	= '" . (int) $_POST['footer_comments'] . "', " .
-			"footer_files		= '" . (int) $_POST['footer_files'] . "', " .
+			"footer_comments	= " . (int) $_POST['footer_comments'] . ", " .
+			"footer_files		= " . (int) $_POST['footer_files'] . ", " .
 			($this->db->footer_rating
-				? "footer_rating	= '" . (int) $_POST['footer_rating'] . "', "
+				? "footer_rating	= " . (int) $_POST['footer_rating'] . ", "
 				: "") .
-			"hide_toc			= '" . (int) $_POST['hide_toc'] . "', " .
-			"hide_index			= '" . (int) $_POST['hide_index'] . "', " .
-			"tree_level			= '" . (int) $_POST['tree_level'] . "', " .
+			"hide_toc			= " . (int) $_POST['hide_toc'] . ", " .
+			"hide_index			= " . (int) $_POST['hide_index'] . ", " .
+			"tree_level			= " . (int) $_POST['tree_level'] . ", " .
 			($this->is_admin()
-				?	"allow_rawhtml		= '" . (int) $_POST['allow_rawhtml'] . "', " .
-					"disable_safehtml	= '" . (int) $_POST['disable_safehtml'] . "', "
+				?	"allow_rawhtml		= " . (int) $_POST['allow_rawhtml'] . ", " .
+					"disable_safehtml	= " . (int) $_POST['disable_safehtml'] . ", "
 				:	"") .
-			"noindex			= '" . (int) $_POST['noindex'] . "' " .
-		"WHERE page_id = '" . $this->page['page_id'] . "' " .
+			"noindex			= " . (int) $_POST['noindex'] . " " .
+		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"LIMIT 1");
 }
 
@@ -52,7 +52,7 @@ if (@$_POST['_action'] === 'general_properties')
 			"title				= " . $this->db->q(trim($_POST['title'])) . ", " .
 			"keywords			= " . $this->db->q(trim($_POST['keywords'])) . ", " .
 			"description		= " . $this->db->q(trim($_POST['description'])) . " " .
-		"WHERE page_id = '" . $this->page['page_id'] . "' " .
+		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"LIMIT 1");
 }
 
