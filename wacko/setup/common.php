@@ -179,17 +179,17 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 {
 	global $config_global, $dblink_global, $lang_global;
 
-	$page_select			= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag='" . $tag."'";
+	$page_select			= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag='" . $tag . "'";
 	$owner_id				= "SELECT user_id FROM " . $config_global['table_prefix'] . "user WHERE user_name = 'System' LIMIT 1";
 
 	// user_id for user System
 	// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
-	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . $tag . "', '".translit($tag, $lang) . "', '" . $title . "' , '" . $body . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . $lang . "', 0, 0, 0, " . $noindex . ")";
+	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . $tag . "', '" . translit($tag, $lang) . "', '" . $title . "' , '" . $body . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . $lang . "', 0, 0, 0, " . $noindex . ")";
 
-	$page_id				= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag = '" . $tag."' LIMIT 1";
+	$page_id				= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag = '" . $tag . "' LIMIT 1";
 
 	$perm_read_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'read', '*')";
-	$perm_write_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'write', '" . $rights."')";
+	$perm_write_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'write', '" . $rights . "')";
 	$perm_comment_insert	= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'comment', '$')";
 	$perm_create_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'create', '$')";
 	$perm_upload_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'upload', '')";

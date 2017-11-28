@@ -1454,13 +1454,13 @@ class Wacko
 			if ($menu_items = $this->db->load_all(
 				"SELECT DISTINCT page_id " .
 				"FROM " . $this->db->table_prefix . "menu " .
-				"WHERE (user_id = '" . $this->get_user_id('System') . "' " .
+				"WHERE (user_id = " . (int) $this->get_user_id('System') . " " .
 					($lang
 						? "AND menu_lang = " . $this->db->q($lang) . " "
 						: "") .
 						") " .
 					($user
-						? "OR (user_id = '" . $user['user_id'] . "' ) "
+						? "OR (user_id = " . (int) $user['user_id'] . " ) "
 						: "") .
 				"", true))
 			{
@@ -4479,8 +4479,11 @@ class Wacko
 
 			foreach ($link_table as $dummy => $to_tag) // discard strtolowered index
 			{
-				$query .= "('" . (int) $from_page_id . "', '" . $this->get_page_id($to_tag) . "', " .
-							$this->db->q($to_tag) . ", " . $this->db->q($this->translit($to_tag)) . "),";
+				$query .= "(" .
+						(int) $from_page_id . ", " .
+						(int) $this->get_page_id($to_tag) . ", " .
+						$this->db->q($to_tag) . ", " .
+						$this->db->q($this->translit($to_tag)) . "),";
 			}
 
 			$this->db->sql_query(
@@ -4502,7 +4505,7 @@ class Wacko
 
 			foreach ($file_table as $file_id => $dummy) // index == value, BTW
 			{
-				$query .= "('" . (int) $from_page_id . "', '" . (int) $file_id . "'),";
+				$query .= "(" . (int) $from_page_id . ", " . (int) $file_id . "),";
 			}
 
 			$this->db->sql_query(
@@ -4919,7 +4922,7 @@ class Wacko
 				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"body_r		= " . $this->db->q($body_r) . ", " .
 					"body_toc	= " . $this->db->q($body_toc) . " " .
-				"WHERE page_id = '" . $page_id . "' " .
+				"WHERE page_id = " . (int) $page_id . " " .
 				"LIMIT 1");
 		}
 
@@ -5141,7 +5144,7 @@ class Wacko
 			return $this->db->sql_query(
 				"UPDATE " . $this->db->user_table . " SET " .
 					"last_mark = UTC_TIMESTAMP() " .
-				"WHERE user_id = '" . $user['user_id'] . "' " .
+				"WHERE user_id = " . (int) $user['user_id'] . " " .
 				"LIMIT 1");
 		}
 	}
@@ -5184,15 +5187,16 @@ class Wacko
 		$session_days	= ($user['session_length'] > 0) ? $user['session_length'] : $this->db->session_length;
 		$selector		= Ut::http64_encode(Ut::random_bytes(9));
 		$authenticator	= Ut::random_bytes(33);
+		$token_expires	= $this->db->date(time() + $session_days * DAYSECS);
 
 		$this->sess->set_cookie(AUTH_TOKEN, $selector . Ut::http64_encode($authenticator), $session_days);
 
 		$this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "auth_token SET " .
-				"selector			= '" . $selector . "', " .
-				"token				= '" . hash('sha256', $authenticator) . "', " .
+				"selector			= " . $this->db->q($selector) . ", " .
+				"token				= " . $this->db->q(hash('sha256', $authenticator)) . ", " .
 				"user_id			= " . (int) $user['user_id'] . ", " .
-				"token_expires		= '" . $this->db->date(time() + $session_days * DAYSECS) . "'"
+				"token_expires		= " . $this->db->q($token_expires) . ""
 			);
 	}
 

@@ -180,7 +180,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						"FROM " . $this->db->table_prefix . "page p " .
 							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-						"WHERE p.comment_on_id = '" . $topic['page_id'] . "' " .
+						"WHERE p.comment_on_id = " . (int) $topic['page_id'] . " " .
 						"ORDER BY p.created DESC " .
 						"LIMIT 1");
 				}

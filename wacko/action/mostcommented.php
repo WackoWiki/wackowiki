@@ -78,10 +78,10 @@ else
 			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
 			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-			"WHERE a.tag <> '" . $page."' " .
+			"WHERE a.tag <> " . $this->db->q($page) . " " .
 				"AND a.tag = c.tag " .
-				"AND INSTR(b.tag, '" . $page."') = 1 " .
-				"AND INSTR(c.tag, '" . $page."') = 1 " .
+				"AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 " .
+				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
 				"AND a.comments >= 1 " .
 			"ORDER BY a.comments DESC " .
 			"LIMIT {$max}");
@@ -94,7 +94,7 @@ else
 			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-			"WHERE a.tag <> '" . $page."' " .
+			"WHERE a.tag <> " . $this->db->q($page) . " " .
 				"AND a.tag = c.tag " .
 				"AND b.tag = " . $this->db->q($page) . " " .
 				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .

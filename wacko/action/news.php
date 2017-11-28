@@ -166,7 +166,7 @@ if (!empty($this->db->news_cluster))
 
 		$selector =
 			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND created > '" . $date . "' " .
+				"AND created > " . $this->db->q($date) . " " .
 				"AND comment_on_id = 0 " .
 				"AND deleted <> 1 ";
 

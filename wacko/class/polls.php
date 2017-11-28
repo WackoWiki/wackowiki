@@ -50,7 +50,7 @@ class Polls
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name " .
 			"FROM " . $this->engine->db->table_prefix . "poll p " .
 				"LEFT JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-			"WHERE p.poll_id = '" . $poll_id."' AND p.v_id = 0");
+			"WHERE p.poll_id = " . (int) $poll_id . " AND p.v_id = 0");
 
 		return $title;
 	}
@@ -62,7 +62,7 @@ class Polls
 		$vars = $this->engine->load_all(
 			"SELECT poll_id, v_id, text, votes " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
-			"WHERE poll_id = '" . $poll_id."' AND v_id <> 0 " .
+			"WHERE poll_id = " . (int) $poll_id . " AND v_id <> 0 " .
 			"ORDER BY " . ($votes == 1 ? "votes DESC, " : "") . "v_id ASC");
 
 		return $vars;
@@ -138,7 +138,7 @@ class Polls
 					"FROM " . $this->engine->db->table_prefix . "poll p " .
 						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"WHERE v_id = 0 AND start IS NOT NULL " .
-						"AND end IS NOT NULL AND YEAR(start) = '" . $year . "' " .
+						"AND end IS NOT NULL AND YEAR(start) = " . $this->engine->db->q($year) . " " .
 					"ORDER BY end DESC");
 				break;
 
@@ -190,7 +190,7 @@ class Polls
 		return $this->engine->sql_query(
 			"DELETE " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
-			"WHERE poll_id = '" . $poll_id."'");
+			"WHERE poll_id = " . (int) $poll_id . "");
 	}
 
 	// print voting form

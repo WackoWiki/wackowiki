@@ -170,7 +170,7 @@ function admin_user_approve(&$engine, &$module)
 					$user = $engine->db->load_single(
 						"SELECT u.user_name " .
 						"FROM " . $engine->db->table_prefix . "user u " .
-						"WHERE u.user_id = '" . $user_id . "' " .
+						"WHERE u.user_id = " . (int) $user_id . " " .
 							"AND u.account_type = 0 " .
 						"LIMIT 1");
 
@@ -250,7 +250,7 @@ function admin_user_approve(&$engine, &$module)
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			($where ? $where : '') .
 			($where ? 'AND ' : "WHERE ") .
-				"u.user_name <> '" . $engine->db->admin_name."' "
+				"u.user_name <> " . $engine->db->q($engine->db->admin_name) . " "
 			);
 
 		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
@@ -265,7 +265,7 @@ function admin_user_approve(&$engine, &$module)
 			($where ? $where : '') .
 			($where ? 'AND ' : "WHERE ") .
 				"u.account_type = 0 " .
-				"AND u.user_name <> '" . $engine->db->admin_name."' " .
+				"AND u.user_name <> " . $engine->db->q($engine->db->admin_name) . " " .
 			( $order ? $order : 'ORDER BY u.user_id DESC ' ) .
 			$pagination['limit']);
 
@@ -274,7 +274,7 @@ function admin_user_approve(&$engine, &$module)
 				"SELECT account_status, count(account_status) AS n
 				FROM " . $engine->db->table_prefix . "user
 				WHERE account_type = 0
-					AND user_name <> '" . $engine->db->admin_name."'
+					AND user_name <> " . $engine->db->q($engine->db->admin_name) . "
 				GROUP BY account_status");
 
 		// set default status count
