@@ -1370,41 +1370,48 @@ class Wacko
 		}
 	}
 
-	function preload_links($page_ids, $default = false)
+	function preload_file_links($page_ids)
 	{
-		$pages		= [];
-		$p_ids		= [];
-		$p_ids		= $page_ids;
 		$file_ids	=  [];
-		$spages_str	= '';
-		$acl		= [];
-		$user		= $this->get_user();
-		$lang		= $this->get_user_language();
 
 		// get file links
-		if ($f_links = $this->db->load_all(
+		if ($links = $this->db->load_all(
 			"SELECT file_id " .
 			"FROM " . $this->db->table_prefix . "file_link " .
 			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' )"))
 		{
-			foreach ($f_links as $f_link)
+			foreach ($links as $link)
 			{
-				$file_ids[] = $f_link['file_id'];
+				$file_ids[] = $link['file_id'];
 			}
 		}
 
+		// cache file data
 		if ($files = $this->db->load_all(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
-				"FROM " . $this->db->table_prefix . "file " .
-				"WHERE file_id IN ( '" . implode("', '", $file_ids) . "' ) " .
-					"AND deleted <> 1 "
-				, true))
+			"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
+			"FROM " . $this->db->table_prefix . "file " .
+			"WHERE file_id IN ( '" . implode("', '", $file_ids) . "' ) " .
+			"AND deleted <> 1 "
+			, true))
 		{
 			foreach ($files as $file)
 			{
 				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 			}
 		}
+	}
+
+	function preload_links($page_ids, $default = false)
+	{
+		$pages		= [];
+		$p_ids		= [];
+		$p_ids		= $page_ids;
+		$spages_str	= '';
+		$user		= $this->get_user();
+		$lang		= $this->get_user_language();
+
+		// cache file links
+		$this->preload_file_links($page_ids);
 
 		// get page links
 		if ($links = $this->db->load_all(
@@ -1477,6 +1484,7 @@ class Wacko
 
 		$p_ids		= array_unique($p_ids);
 
+		// cache page data
 		if ($links = $this->db->load_all(
 			"SELECT " . $this->page_meta . " " .
 			"FROM " . $this->db->table_prefix . "page " .
@@ -1888,7 +1896,7 @@ class Wacko
 	 * @param integer	$minor_edit		minor edit
 	 * @param integer	$reviewed
 	 * @param integer	$comment_on_id	commented page_id
-	 * @param integer	$parent_id		commented parent id
+	 * @param integer	$parent_id		page_id of related comment or parent page
 	 * @param string	$lang			page language
 	 * @param boolean	$mute			supress email reminders and xml rss recompilation
 	 * @param string	$user_name		attach guest pseudonym
@@ -2085,26 +2093,40 @@ class Wacko
 					$acl['upload']	= $this->db->default_upload_acl;
 				}
 
-				// determine the depth
-				$depth_array	= explode('/', $tag);
-				$depth			= count($depth_array);
+				if ($comment_on_id)
+				{
+					$depth = 1;
+				}
+				else
+				{
+					// determine the depth
+					$depth_array	= explode('/', $tag);
+					$depth			= count($depth_array);
+
+					// determine the page_id of the parent page
+					if (strstr($tag, '/'))
+					{
+						$parent_tag	= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
+						$parent_id	= $this->get_page_id($parent_tag);
+					}
+				}
 
 				$this->db->sql_query(
 					"INSERT INTO " . $this->db->table_prefix . "page SET " .
 						"version_id		= 1, " .
-						"comment_on_id	= '" . (int) $comment_on_id . "', " .
+						"comment_on_id	= " . (int) $comment_on_id . ", " .
 						(!$comment_on_id
 							? "description = " . $this->db->q($desc) . ", "
 							: "") .
-						"parent_id		= '" . (int) $parent_id . "', " .
+						"parent_id		= " . (int) $parent_id . ", " .
 						"created		= UTC_TIMESTAMP(), " .
 						"modified		= UTC_TIMESTAMP(), " .
 						(!$comment_on_id
 							? "commented		= UTC_TIMESTAMP(), "
 							: "") .
-						"depth			= '" . (int) $depth . "', " .
-						"owner_id		= '" . (int) $owner_id . "', " .
-						"user_id		= '" . (int) $user_id . "', " .
+						"depth			= " . (int) $depth . ", " .
+						"owner_id		= " . (int) $owner_id . ", " .
+						"user_id		= " . (int) $user_id . ", " .
 						"title			= " . $this->db->q($title) . ", " .
 						"tag			= " . $this->db->q($tag) . ", " .
 						"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
@@ -2112,8 +2134,8 @@ class Wacko
 						"body_r			= " . $this->db->q($body_r) . ", " .
 						"body_toc		= " . $this->db->q($body_toc) . ", " .
 						"edit_note		= " . $this->db->q($edit_note) . ", " .
-						"minor_edit		= '" . (int) $minor_edit . "', " .
-						"page_size		= '" . (int) strlen($body) . "', " .
+						"minor_edit		= " . (int) $minor_edit . ", " .
+						"page_size		= " . (int) strlen($body) . ", " .
 						($reviewed
 							?	"reviewed		= '" . (int) $reviewed . "', " .
 								"reviewed_time	= UTC_TIMESTAMP(), " .
@@ -2210,12 +2232,12 @@ class Wacko
 					// update current page copy
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "page SET " .
-							"version_id		= '" . (int)($old_page['version_id'] + 1) . "', " .
-							"comment_on_id	= '" . (int) $comment_on_id . "', " .
+							"version_id		= " . (int)($old_page['version_id'] + 1) . ", " .
+							"comment_on_id	= " . (int) $comment_on_id . ", " .
 							# "created		= " . $this->db->q($old_page['created']) . ", " .
 							"modified		= UTC_TIMESTAMP(), " .
-							"owner_id		= '" . (int) $owner_id . "', " .
-							"user_id		= '" . (int) $user_id . "', " .
+							"owner_id		= " . (int) $owner_id . "', " .
+							"user_id		= " . (int) $user_id . "', " .
 							"title			= " . $this->db->q($title) . ", " .
 							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc )) . ", " .
 							"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
@@ -2226,9 +2248,9 @@ class Wacko
 							"minor_edit		= '" . (int) $minor_edit . "', " .
 							"page_size		= '" . (int) strlen($body) . "', " .
 							(isset($reviewed)
-								?	"reviewed		= '" . (int) $reviewed . "', " .
+								?	"reviewed		= " . (int) $reviewed . ", " .
 									"reviewed_time	= UTC_TIMESTAMP(), " .
-									"reviewer_id	= '" . (int) $reviewer_id . "', "
+									"reviewer_id	= " . (int) $reviewer_id . ", "
 								:	"") .
 							"latest			= 2 " . // 2 - modified page
 						"WHERE tag = " . $this->db->q($tag) . " " .
@@ -2302,10 +2324,10 @@ class Wacko
 		// move revision
 		$this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "revision SET " .
-				"page_id		= '" . (int) $page['page_id'] . "', " .
-				"version_id		= '" . (int) $page['version_id'] . "', " .
-				"owner_id		= '" . (int) $page['owner_id'] . "', " .
-				"user_id		= '" . (int) $page['user_id'] . "', " .
+				"page_id		= " . (int) $page['page_id'] . ", " .
+				"version_id		= " . (int) $page['version_id'] . ", " .
+				"owner_id		= " . (int) $page['owner_id'] . ", " .
+				"user_id		= " . (int) $page['user_id'] . ", " .
 				"title			= " . $this->db->q($page['title']) . ", " .
 				"tag			= " . $this->db->q($page['tag']) . ", " .
 				"supertag		= " . $this->db->q($page['supertag']) . ", " .
@@ -2315,15 +2337,15 @@ class Wacko
 				"body_r			= '', ". // specify value for columns that don't have defaults
 				"formatting		= " . $this->db->q($page['formatting']) . ", " .
 				"edit_note		= " . $this->db->q($page['edit_note']) . ", " .
-				"minor_edit		= '" . (int) $page['minor_edit'] . "', " .
-				"page_size		= '" . (int) $page['page_size'] . "', " .
-				"reviewed		= '" . (int) $page['reviewed'] . "', " .
+				"minor_edit		= " . (int) $page['minor_edit'] . ", " .
+				"page_size		= " . (int) $page['page_size'] . ", " .
+				"reviewed		= " . (int) $page['reviewed'] . ", " .
 				"reviewed_time	= " . $this->db->q($page['reviewed_time']) . ", " .
-				"reviewer_id	= '" . (int) $page['reviewer_id'] . "', " .
+				"reviewer_id	= " . (int) $page['reviewer_id'] . ", " .
 				"latest			= 0, " . // 0 - old page
 				"ip				= " . $this->db->q($page['ip']) . ", " .
 				"handler		= " . $this->db->q($page['handler']) . ", " .
-				"comment_on_id	= '" . (int) $page['comment_on_id'] . "', " .
+				"comment_on_id	= " . (int) $page['comment_on_id'] . ", " .
 				"page_lang		= " . $this->db->q($page['page_lang']) . ", " .
 				"keywords		= " . $this->db->q($page['keywords']) . ", " .
 				"description	= " . $this->db->q($page['description']));
