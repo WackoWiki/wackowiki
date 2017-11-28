@@ -40,7 +40,7 @@ function admin_maint_transliterate(&$engine, &$module)
 			$i = 0;
 		}
 
-		// links
+		// page links
 		if ((int) $_REQUEST['step'] === 1)
 		{
 			if ($pages = $engine->db->load_all(

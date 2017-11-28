@@ -293,9 +293,46 @@ $ap_translation = [
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Aussehen der Webseite ändern',
 	'LogoOff'					=> 'Aus',
-	'LogoOnly'					=> 'Logo ein',
-	'LogoAndTitle'				=> 'Logo und Titel ein',
+	'LogoOnly'					=> 'Logo',
+	'LogoAndTitle'				=> 'Logo und Titel',
 
+	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+	'LogoSection'				=> 'Logo',
+	'SiteLogo'					=> 'Site Logo',
+	'SiteLogoInfo'				=> 'Das Logo wird normalerweise in der oberen linken Ecke der Anwendung angezeigt. Die maximale Größe beträgt 2 MiB. Optimale Abmessungen sind 255 Pixel breit und 55 Pixel hoch.',
+	'LogoDimensions'			=> 'Logo Maße',
+	'LogoDimensionsInfo'		=> 'Breite und Höhe des angezeigten Logos.',
+	'LogoDisplayMode'			=> 'Logo-Anzeigemodus',
+	'LogoDisplayModeInfo'		=> 'Bestimmt wie und ob das Logo angezeigt wird. Standard ist ausgeschaltet.',
+	'FaviconSection'			=> 'Favicon',
+	'SiteFavicon'				=> 'Site Favicon',
+	'SiteFaviconInfo'			=> 'Das Verknüpfungssymbol oder Favicon wird in der Adressleiste, den Registerkarten und den Lesezeichen der meisten Browser angezeigt. Dies überschreibt das Favicon deines Themas.',
+	'LayoutSection'				=> 'Layout',
+	'Theme'						=> 'Layout',
+	'ThemeInfo'					=> 'Layout, welches die Site standardmäßig verwendet.',
+	'ThemesAllowed'				=> 'Zulässige Layouts',
+	'ThemesAllowedInfo'			=> 'Wählen die zulässigen Layouts aus, die der Benutzer auswählen kann, andernfalls sind alle verfügbaren Layouts zulässig.',
+	'ThemesPerPage'				=> 'Layouts pro Seite',
+	'ThemesPerPageInfo'			=> 'Erlaube Layouts pro Seite, welche der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
+
+
+	// Resync settings
+	'UserStatsSynched'			=> 'Benutzerstatistiken wurden synchronisiert.',
+	'PageStatsSynched'			=> 'Seitenstatistiken wurden synchronisiert.',
+	'FeedsUpdated'				=> 'RSS-Feeds aktualisiert.',
+	'SiteMapCreated'			=> 'Die neue Version der Sitemap wurde erfolgreich erstellt.',
+	'WikiLinksRestored'			=> 'Wiki-Links wiederhergestellt.',
+
+	'UserStats'					=> 'Benutzerstatistik',
+	'UserStatsInfo'				=> 'Benutzerstatistiken (Anzahl der Kommentare, besessene Seiten, Revisionen und Dateien) können in einigen Situationen von den tatsächlichen Daten abweichen.<br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',
+	'PageStats'					=> 'Seitenstatistiken',
+	'PageStatsInfo'				=> 'Seitenstatistiken (Anzahl der Kommentare, Dateien und Revisionen) können in einigen Situationen von den tatsächlichen Daten abweichen. <br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',
+	'Feeds'						=> 'Feeds',
+	'FeedsInfo'					=> 'Im Falle der direkten Bearbeitung von Seiten in der Datenbank spiegelt der Inhalt von RSS-Feeds möglicherweise nicht die vorgenommenen Änderungen wider. <br> Diese Funktion synchronisiert die RSS-Kanäle mit dem aktuellen Zustand der Datenbank.',
+	'XmlSiteMap'				=> 'XML-Sitemap',
+	'XmlSiteMapInfo'			=> 'Diese Funktion synchronisiert die XML-Sitemap mit dem aktuellen Zustand der Datenbank.',
+	'WikiLinks'					=> 'Wiki-Links',
+	'WikiLinksInfo'				=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code> page_link </ code> und <code> file_link </ code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',
