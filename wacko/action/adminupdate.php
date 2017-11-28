@@ -16,98 +16,6 @@ if ($this->is_admin())
 	echo 'Recent Wacko version ' . $this->format('**!!(green)' . $this->db->wacko_version . '!!**', 'wacko');
 	echo '<h3>Routines for R5.x</h3>';
 
-
-	########################################################
-	##            UPDATE user statistics                  ##
-	########################################################
-
-	if ($this->is_admin())
-	{
-		echo "<h4>4. Update User statistics:</h4>";
-
-		if (!isset($_POST['build_user_stats']))
-		{
-			echo $this->form_open();
-			?>
-			<input type="submit" name="build_user_stats" value="<?php echo $this->_t('CategoriesSaveButton');?>">
-			<?php
-			echo $this->form_close();
-		}
-		// updates user statistics in 'user' table
-		else if (isset($_POST['build_user_stats']))
-		{
-			// total pages in ownership
-			$users = $this->db->load_all(
-				"SELECT p.owner_id, COUNT(p.tag) AS n " .
-				"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->user_table . " AS u " .
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id = 0 " .
-				"GROUP BY p.owner_id");
-
-			foreach ($users as $user)
-			{
-				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " " .
-					"SET total_pages = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['owner_id'] . "' " .
-					"LIMIT 1");
-			}
-
-			// total comments posted
-			$users = $this->db->load_all(
-				"SELECT p.user_id, COUNT(p.tag) AS n " .
-				"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->user_table . " AS u " .
-				"WHERE p.owner_id = u.user_id AND p.comment_on_id <> 0 " .
-				"GROUP BY p.user_id");
-
-			foreach ($users as $user)
-			{
-				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " " .
-					"SET total_comments = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['user_id'] . "' " .
-					"LIMIT 1");
-			}
-
-			// total revisions made
-			$users = $this->db->load_all(
-				"SELECT r.user_id, COUNT(r.tag) AS n " .
-				"FROM " . $this->db->table_prefix . "revision AS r, " . $this->db->user_table . " AS u " .
-				"WHERE r.owner_id = u.user_id AND r.comment_on_id = 0 " .
-				"GROUP BY r.user_id");
-
-			foreach ($users as $user)
-			{
-				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " " .
-					"SET total_revisions = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['user_id'] . "' " .
-					"LIMIT 1");
-			}
-
-			// total files uploaded
-			$users = $this->db->load_all(
-				"SELECT u.user_id, COUNT(f.file_id) AS n " .
-				"FROM " . $this->db->table_prefix . "file f, " . $this->db->user_table . " AS u " .
-				"WHERE f.user_id = u.user_id " .
-				"GROUP BY f.user_id");
-
-			foreach ($users as $user)
-			{
-				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " " .
-					"SET total_uploads = " . (int) $user['n'] . " " .
-					"WHERE user_id = '" . $user['user_id'] . "' " .
-					"LIMIT 1");
-			}
-
-			$this->log(1, 'Synchronized user statistics');
-
-			echo	'<p><em>User Statistics synchronized.</em></p><br>';
-
-		}
-	}
-
-
 	########################################################
 	##            Set page title based on tag             ##
 	########################################################
@@ -204,8 +112,8 @@ if ($this->is_admin())
 					$depth			= count( $_depth_array );
 
 					$this->db->sql_query(
-						"UPDATE " . $this->db->table_prefix . "page " .
-						"SET depth = '" . $depth."' " .
+						"UPDATE " . $this->db->table_prefix . "page SET " .
+							"depth = '" . $depth . "' " .
 						"WHERE page_id = '" . $page['page_id'] . "' " .
 						"LIMIT 1");
 
@@ -228,7 +136,7 @@ if ($this->is_admin())
 
 	if ($this->is_admin())
 	{
-		echo "<h4>8. Set version_id:</h4>";
+		echo "<h4>8. Set version_id for revisions:</h4>";
 
 		if (!isset($_POST['set_version_id']))
 		{
@@ -264,8 +172,8 @@ if ($this->is_admin())
 						$version_id = $t--;
 
 						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "revision " .
-							"SET version_id = '" . $version_id."' " .
+							"UPDATE " . $this->db->table_prefix . "revision SET " .
+								"version_id = '" . $version_id . "' " .
 							"WHERE revision_id = '" . $_revision['revision_id'] . "' " .
 							"LIMIT 1");
 
@@ -287,7 +195,7 @@ if ($this->is_admin())
 	##            MIGRATE ACLs to new scheme              ##
 	########################################################
 
-	# postponed -> R5.1
+	# postponed -> R7.1
 
 	// rename the old 'acl' table to 'acl_old' first
 	/*

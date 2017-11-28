@@ -69,6 +69,15 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// load subforums data
 	$forums	= $this->db->load_all($sql, true);
 
+	foreach ($forums as $forum)
+	{
+		$page_ids[]	= $forum['page_id'];
+		// cache page_id for for has_access validation in link function
+		$this->page_id_cache[$forum['tag']] = $forum['page_id'];
+	}
+
+	$this->preload_acl($page_ids);
+
 	// display list
 	echo '<table class="forum lined">' .
 			'<colgroup>' .
