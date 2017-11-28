@@ -230,13 +230,13 @@ function admin_config_appearance(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					<?php $engine->_t('LogoSection');?>
+					<?php echo $engine->_t('LogoSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo"><strong><?php $engine->_t('SiteLogo');?>:</strong><br>
-					<small><?php $engine->_t('SiteLogoInfo');?></small></label>
+					<label for="logo"><strong><?php echo $engine->_t('SiteLogo');?>:</strong><br>
+					<small><?php echo $engine->_t('SiteLogoInfo');?></small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
@@ -257,8 +257,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo_width"><strong><?php $engine->_t('LogoDimensions');?>:</strong><br>
-					<small><?php $engine->_t('LogoDimensionsInfo');?></small></label>
+					<label for="logo_width"><strong><?php echo $engine->_t('LogoDimensions');?>:</strong><br>
+					<small><?php echo $engine->_t('LogoDimensionsInfo');?></small></label>
 				</td>
 				<td>
 				<?php	// TODO: add option to reset dimentions to default image size
@@ -273,8 +273,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo_display"><strong><?php $engine->_t('LogoDisplayMode');?>:</strong><br>
-					<small><?php $engine->_t('LogoDisplayModeInfo');?></small></label>
+					<label for="logo_display"><strong><?php echo $engine->_t('LogoDisplayMode');?>:</strong><br>
+					<small><?php echo $engine->_t('LogoDisplayModeInfo');?></small></label>
 				</td>
 				<td>
 					<select id="logo_display" name="logo_display" style="width: 200px;">
@@ -287,13 +287,13 @@ function admin_config_appearance(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					<?php $engine->_t('FaviconSection');?>
+					<?php echo $engine->_t('FaviconSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo"><strong><?php $engine->_t('SiteFavicon');?>:</strong><br>
-					<small><?php $engine->_t('SiteFaviconInfo');?></small></label>
+					<label for="logo"><strong><?php echo $engine->_t('SiteFavicon');?>:</strong><br>
+					<small><?php echo $engine->_t('SiteFaviconInfo');?></small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)
@@ -307,13 +307,13 @@ function admin_config_appearance(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					<?php $engine->_t('');?>Layout
+					<?php echo $engine->_t('');?>Layout
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="theme"><strong><?php $engine->_t('Theme');?>:</strong><br>
-					<small><?php $engine->_t('ThemeInfo');?></small></label>
+					<label for="theme"><strong><?php echo $engine->_t('Theme');?>:</strong><br>
+					<small><?php echo $engine->_t('ThemeInfo');?></small></label>
 				</td>
 				<td>
 					<select id="theme" name="theme">
@@ -333,8 +333,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for=""><strong><?php $engine->_t('ThemesAllowed');?>:</strong><br>
-					<small><?php $engine->_t('ThemesAllowedInfo');?></small></label>
+					<label for=""><strong><?php echo $engine->_t('ThemesAllowed');?>:</strong><br>
+					<small><?php echo $engine->_t('ThemesAllowedInfo');?></small></label>
 				</td>
 				<td>
 				<?php
@@ -372,8 +372,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong><?php $engine->_t('ThemesPerPage');?>:</strong><br>
-					<small><?php $engine->_t('ThemesPerPageInfo');?></small>
+					<strong><?php echo $engine->_t('ThemesPerPage');?>:</strong><br>
+					<small><?php echo $engine->_t('ThemesPerPageInfo');?></small>
 				</td>
 				<td>
 					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?>>

@@ -229,8 +229,8 @@ function admin_maint_resync(&$engine, &$module)
 		}
 	}
 ?>
-	<h2><?php $engine->_t('UserStats');?></h2>
-	<p><?php $engine->_t('UserStatsInfo');?></p>
+	<h2><?php echo $engine->_t('UserStats');?></h2>
+	<p><?php echo $engine->_t('UserStatsInfo');?></p>
 
 <?php
 	echo $engine->form_open('usersupdate');
@@ -239,8 +239,8 @@ function admin_maint_resync(&$engine, &$module)
 		<input type="submit" name="start" id="submit" value="synchronize">
 <?php	echo $engine->form_close();?>
 
-	<h2><?php $engine->_t('PageStats');?></h2>
-	<p><?php $engine->_t('PageStatsInfo');?></p>
+	<h2><?php echo $engine->_t('PageStats');?></h2>
+	<p><?php echo $engine->_t('PageStatsInfo');?></p>
 <?php
 	echo $engine->form_open('pageupdate');
 ?>
@@ -248,8 +248,8 @@ function admin_maint_resync(&$engine, &$module)
 		<input type="submit" name="start" id="submit" value="synchronize">
 <?php		echo $engine->form_close();?>
 
-	<h2><?php $engine->_t('Feeds');?></h2>
-	<p><?php $engine->_t('FeedsInfo');?></p>
+	<h2><?php echo $engine->_t('Feeds');?></h2>
+	<p><?php echo $engine->_t('FeedsInfo');?></p>
 <?php
 	echo $engine->form_open('feedupdate');
 ?>
@@ -260,8 +260,8 @@ function admin_maint_resync(&$engine, &$module)
 <?php
 if ($engine->db->xml_sitemap)
 { ?>
-	<h2><?php $engine->_t('XmlSiteMap');?></h2>
-	<p><?php $engine->_t('XmlSiteMapInfo');?><br>
+	<h2><?php echo $engine->_t('XmlSiteMap');?></h2>
+	<p><?php echo $engine->_t('XmlSiteMapInfo');?><br>
 		Period <strong><?php echo $engine->db->xml_sitemap_time; ?></strong> days.
 		Last written <?php echo date('Y-m-d H:i:s', $engine->db->maint_last_xml_sitemap); ?>
 	</p>
@@ -273,8 +273,8 @@ if ($engine->db->xml_sitemap)
 <?php		echo $engine->form_close();
 }?>
 
-	<h2><?php $engine->_t('WikiLinks');?></h2>
-	<p><?php $engine->_t('WikiLinksInfo');?></p>
+	<h2><?php echo $engine->_t('WikiLinks');?></h2>
+	<p><?php echo $engine->_t('WikiLinksInfo');?></p>
 <?php
 	echo $engine->form_open('linksupdate');
 ?>
