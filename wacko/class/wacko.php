@@ -178,6 +178,29 @@ class Wacko
 		}
 	}
 
+	function get_parent_id($tag = '')
+	{
+		if (!$tag)
+		{
+			return $this->page['parent_id'];
+		}
+		else
+		{
+			// determine the page_id of the parent page
+			if (strstr($tag, '/'))
+			{
+				$parent_tag	= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
+				$parent_id	= $this->get_page_id($parent_tag);
+			}
+			else
+			{
+				$parent_id = 0;
+			}
+
+			return $parent_id;
+		}
+	}
+
 	function get_wacko_version()
 	{
 		return WACKO_VERSION;
@@ -2104,11 +2127,7 @@ class Wacko
 					$depth			= count($depth_array);
 
 					// determine the page_id of the parent page
-					if (strstr($tag, '/'))
-					{
-						$parent_tag	= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
-						$parent_id	= $this->get_page_id($parent_tag);
-					}
+					$parent_id	= $this->get_parent_id($tag);
 				}
 
 				$this->db->sql_query(
@@ -5677,15 +5696,12 @@ class Wacko
 						$tag = strtolower($new_tag);
 					}
 
-					if (strstr($tag, '/'))
+					if ($parent_id = $this->get_parent_id($tag))
 					{
-						$parent_tag = preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $tag);
-
 						// By letting it fetch defaults, it will automatically recurse
 						// up the tree of parent pages... fetching the ACL on the root
 						// page if necessary.
-						$parent_id	= $this->get_page_id($parent_tag);
-						$acl		= $this->load_acl($parent_id, $privilege, 1);
+						$acl = $this->load_acl($parent_id, $privilege, 1);
 					}
 
 					// if still no acl, use config defaults
