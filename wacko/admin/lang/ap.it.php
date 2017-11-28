@@ -336,6 +336,8 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Questo modulo viene usato quando si inviano email ai propri utenti dalla Board. Assicurati che l\'indirizzo email specificato sia valido; ogni messaggio respinto o non consegnato, verrà inviato a questo indirizzo. Se il tuo server non fornisce un servizio email (basato su PHP) puoi in alternativa inviare messaggi direttamente via SMTP. Questo richiede l\'indirizzo di un server appropriato (chiedi al tuo provider, se necessario). Non specificare nomi vecchi qui. Se il server richiede autenticazione (e solo se lo fa) inserisci nome utente e password.',
+	
+    'EmailSettingsUpdated'	    => 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'Nome funzione email',
 	'EmailFunctionNameInfo'		=> 'Funzione email usata per spedire mail attraverso PHP.',

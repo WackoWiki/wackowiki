@@ -336,7 +336,9 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Ces informations sont utilisées lors de l\'envoi de courriers électroniques à vos utilisateurs. Veuillez vous assurer que l\'adresse de courrier électronique spécifiée est correcte car les messages refusés ou échoués seront probablement retournés à cette adresse. Si votre hébergeur ne fournit aucun service d\'envoi de courriers électroniques en PHP par défaut, vous pouvez envoyer directement des messages en utilisant le protocole SMTP. Cela demande l\'adresse d\'un serveur approprié (si besoin, demandez cette information à votre hébergeur internet). Si le serveur exige une authentification (et seulement dans ce cas), saisissez le nom d\'utilisateur, le mot de passe et la méthode d\'authentification nécessaire.',
-
+	
+    'EmailSettingsUpdated'	    => 'Updated Email settings',
+        
 	'EmailFunctionName'			=> 'Nom de la fonction de la messagerie électronique',
 	'EmailFunctionNameInfo'		=> 'Le nom de la fonction PHP utilisée par la messagerie électronique afin d\'envoyer des courriels.',
 	'UseSmtpInfo'				=> 'Activez cette option si vous souhaitez envoyer les courriels par un serveur SMTP au lieu d\'utiliser la fonction locale de la messagerie électronique.',

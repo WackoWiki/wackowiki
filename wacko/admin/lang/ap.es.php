@@ -336,6 +336,8 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Esta información se usa cuando el Sitio envía emails a sus usuarios. Por favor verifique que la dirección de email ingresada sea válida, cualquier rebote se reenviará a esa dirección. Si su host no provee un servicio de email nativo (utilizable por PHP), entonces use directamente SMTP. Esto requiere la dirección de un servidor apropiado (pregúntele a su ISP de ser necesario). Si (si, y solo si) el servidor requiere autentificación complete el usuario y contraseña. Por favor observe que solo se ofrece autentificación básica, otro tipo de implementación no es posible actualmente.',
+	
+	'EmailSettingsUpdated'	    => 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'Nombre de la función email',
 	'EmailFunctionNameInfo'		=> 'La función empleada por PHP para enviar emails.',

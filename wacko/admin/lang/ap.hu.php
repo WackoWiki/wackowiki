@@ -336,6 +336,8 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Az alábbi információkat használja a fórum e-mailek küldésekor. Kérünk, gyõzõdj meg róla, hogy az e-mail cím, amit megadsz, helyes, mivel minden nem kézbesíthetõ levél erre a címre fog menni. Ha a tárhelyszolgáltatód nem biztosítja a natív (PHP alapú) e-mail küldést, használhatsz helyette SMTP-t. Ehhez szükség van egy megfelelõ szerver címére (ha szükséges, kérdezd meg a szolgáltatód). Ha (és csak ha) a szerver megköveteli az azonosítást, add meg a szükséges felhasználónevet, jelszót és azonosítási módot.',
+	
+	'EmailSettingsUpdated'	    => 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'E-mail függvény neve',
 	'EmailFunctionNameInfo'		=> 'A függvény neve, amivel e-mailt lehet küldeni PHP-n keresztül.',
