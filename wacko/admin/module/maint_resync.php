@@ -95,7 +95,7 @@ function admin_maint_resync(&$engine, &$module)
 
 			$engine->log(1, 'Synchronized user statistics');
 
-			$message = 'User Statistics synchronized.';
+			$message = $engine->_t('UserStatsSynched');
 			$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'pagestats')
@@ -140,7 +140,7 @@ function admin_maint_resync(&$engine, &$module)
 
 			$engine->log(1, 'Synchronized page statistics');
 
-			$message = 'Page Statistics synchronized.';
+			$message = $engine->_t('PageStatsSynched');
 			$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
@@ -157,7 +157,7 @@ function admin_maint_resync(&$engine, &$module)
 			$engine->log(1, 'Synchronized RSS feeds');
 			unset($xml);
 
-				$message = 'RSS-feeds updated.';
+				$message = $engine->_t('FeedsUpdated');
 				$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'xml_sitemap')
@@ -165,7 +165,7 @@ function admin_maint_resync(&$engine, &$module)
 			// update sitemap
 			$engine->write_sitemap(true, false);
 
-			$message = 'The new version of the site map created successfully.';
+			$message = $engine->_t('SiteMapCreated');
 			$engine->show_message($message, 'success');
 		}
 		else if ($_REQUEST['action'] == 'wikilinks')
@@ -193,7 +193,7 @@ function admin_maint_resync(&$engine, &$module)
 				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "file_link");
 			}
 
-			$engine->set_user_setting('dont_redirect', '1');
+			$engine->set_user_setting('dont_redirect', 1, 1);
 
 			if ($pages = $engine->db->load_all(
 			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id
@@ -218,22 +218,19 @@ function admin_maint_resync(&$engine, &$module)
 					$engine->current_context--;
 				}
 
+				// TODO: Fix or workaround, see notice above
 				#$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;action=wikilinks&amp;i='.(++$i))));
 			}
 			else
 			{
-				$message = 'Wiki-links restored.';
+				$message = $engine->_t('WikiLinksRestored');
 				$engine->show_message($message, 'success');
 			}
 		}
 	}
 ?>
-	<h2>User statistics</h2>
-	<p>
-		User statistics (number of comments and pages owned)
-		in some situations it may differ from actual data. <br>This operation
-		allows updating statistics on current actual data of the database.
-	</p>
+	<h2><?php $engine->_t('UserStats');?></h2>
+	<p><?php $engine->_t('UserStatsInfo');?></p>
 
 <?php
 	echo $engine->form_open('usersupdate');
@@ -242,12 +239,8 @@ function admin_maint_resync(&$engine, &$module)
 		<input type="submit" name="start" id="submit" value="synchronize">
 <?php	echo $engine->form_close();?>
 
-	<h2>Page statistics</h2>
-	<p>
-		Page statistics (number of comments and revisions)
-		in some situations may differ from actual data. <br>This operation
-		allows updating statistics on current actual data of the database.
-	</p>
+	<h2><?php $engine->_t('PageStats');?></h2>
+	<p><?php $engine->_t('PageStatsInfo');?></p>
 <?php
 	echo $engine->form_open('pageupdate');
 ?>
@@ -255,12 +248,8 @@ function admin_maint_resync(&$engine, &$module)
 		<input type="submit" name="start" id="submit" value="synchronize">
 <?php		echo $engine->form_close();?>
 
-	<h2>Feeds</h2>
-	<p>
-		In the case of direct editing of pages in the database, the content of RSS-feeds are not
-		reflect the changes made. <br>This function synchronizes the RSS-channels
-		with the current state of the database.
-	</p>
+	<h2><?php $engine->_t('Feeds');?></h2>
+	<p><?php $engine->_t('FeedsInfo');?></p>
 <?php
 	echo $engine->form_open('feedupdate');
 ?>
@@ -271,9 +260,8 @@ function admin_maint_resync(&$engine, &$module)
 <?php
 if ($engine->db->xml_sitemap)
 { ?>
-	<h2>XML-Sitemap</h2>
-	<p>
-		This function synchronizes the XML-Sitemap with the current state of the database.<br>
+	<h2><?php $engine->_t('XmlSiteMap');?></h2>
+	<p><?php $engine->_t('XmlSiteMapInfo');?><br>
 		Period <strong><?php echo $engine->db->xml_sitemap_time; ?></strong> days.
 		Last written <?php echo date('Y-m-d H:i:s', $engine->db->maint_last_xml_sitemap); ?>
 	</p>
@@ -285,12 +273,8 @@ if ($engine->db->xml_sitemap)
 <?php		echo $engine->form_close();
 }?>
 
-	<h2>Wiki-links</h2>
-	<p>
-		Performs re-rendering for all intrasite links and restores
-		the contents of the table 'page_link' and 'file_link' in the event of damage or relocation (this can take
-		considerable time) .
-	</p>
+	<h2><?php $engine->_t('WikiLinks');?></h2>
+	<p><?php $engine->_t('WikiLinksInfo');?></p>
 <?php
 	echo $engine->form_open('linksupdate');
 ?>

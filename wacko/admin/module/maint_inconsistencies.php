@@ -506,17 +506,17 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				{
 					echo '<tr class="hl_setting">' .
 							'<td class="label">' .
-							($value[1] >= 1
+								($value[1] >= 1
 									? '<strong>' . $value[0] . '</strong>'
 									: '<em class="grey">' . $value[0] . '</em>') .
-									'</td>' .
-									'<td> </td>' .
-									'<td>' .
-									($value[1] >= 1
-											? '<strong>' . $value[1] . '</strong>'
-											: '<em class="grey">' . $value[1] . '</em>') .
-											'</td>' .
-											'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
+							'</td>' .
+							'<td> </td>' .
+							'<td>' .
+								($value[1] >= 1
+									? '<strong>' . $value[1] . '</strong>'
+									: '<em class="grey">' . $value[1] . '</em>') .
+							'</td>' .
+						'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
 				}
 			}
 

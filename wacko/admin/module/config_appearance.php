@@ -213,7 +213,8 @@ function admin_config_appearance(&$engine, &$module)
 		$engine->config->_set($config);
 
 		$engine->log(1, 'Updated appearance settings');
-		$engine->set_message('Updated appearance settings', 'success');
+		$message = $engine->_t('AppearanceSettingsUpdated');
+		$engine->set_message($message, 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -229,13 +230,13 @@ function admin_config_appearance(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Logo
+					<?php $engine->_t('LogoSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo"><strong>Site Logo:</strong><br>
-					<small>Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.</small></label>
+					<label for="logo"><strong><?php $engine->_t('SiteLogo');?>:</strong><br>
+					<small><?php $engine->_t('SiteLogoInfo');?></small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
@@ -256,8 +257,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo_width"><strong>Logo dimensions:</strong><br>
-					<small>Width and height of the displayed Logo.</small></label>
+					<label for="logo_width"><strong><?php $engine->_t('LogoDimensions');?>:</strong><br>
+					<small><?php $engine->_t('LogoDimensionsInfo');?></small></label>
 				</td>
 				<td>
 				<?php	// TODO: add option to reset dimentions to default image size
@@ -272,8 +273,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo_display"><strong>Logo display mode:</strong><br>
-					<small>Defines the apearence of the Logo. Default is off.</small></label>
+					<label for="logo_display"><strong><?php $engine->_t('LogoDisplayMode');?>:</strong><br>
+					<small><?php $engine->_t('LogoDisplayModeInfo');?></small></label>
 				</td>
 				<td>
 					<select id="logo_display" name="logo_display" style="width: 200px;">
@@ -286,13 +287,13 @@ function admin_config_appearance(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Favicon
+					<?php $engine->_t('FaviconSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="logo"><strong>Site Favicon:</strong><br>
-					<small>Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.</small></label>
+					<label for="logo"><strong><?php $engine->_t('SiteFavicon');?>:</strong><br>
+					<small><?php $engine->_t('SiteFaviconInfo');?></small></label>
 				</td>
 				<td>
 				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)
@@ -306,13 +307,13 @@ function admin_config_appearance(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Layout
+					<?php $engine->_t('');?>Layout
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="theme"><strong>Theme:</strong><br>
-					<small>Template design the site uses by default.</small></label>
+					<label for="theme"><strong><?php $engine->_t('Theme');?>:</strong><br>
+					<small><?php $engine->_t('ThemeInfo');?></small></label>
 				</td>
 				<td>
 					<select id="theme" name="theme">
@@ -332,8 +333,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for=""><strong>Allowed Themes:</strong><br>
-					<small>Select the allowed themes, which the user can choose, otherwise all available themes are allowed.</small></label>
+					<label for=""><strong><?php $engine->_t('ThemesAllowed');?>:</strong><br>
+					<small><?php $engine->_t('ThemesAllowedInfo');?></small></label>
 				</td>
 				<td>
 				<?php
@@ -371,8 +372,8 @@ function admin_config_appearance(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Themes per page:</strong><br>
-					<small>Allow themes per page, which the page owner can choose via page properties.</small>
+					<strong><?php $engine->_t('ThemesPerPage');?>:</strong><br>
+					<small><?php $engine->_t('ThemesPerPageInfo');?></small>
 				</td>
 				<td>
 					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?>>

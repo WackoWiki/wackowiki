@@ -296,6 +296,43 @@ $ap_translation = [
 	'LogoOnly'					=> 'logo',
 	'LogoAndTitle'				=> 'logo and title',
 
+	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+	'LogoSection'				=> 'Logo',
+	'SiteLogo'					=> 'Site Logo',
+	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
+	'LogoDimensions'			=> 'Logo dimensions',
+	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
+	'LogoDisplayMode'			=> 'Logo display mode',
+	'LogoDisplayModeInfo'		=> 'Defines the apearence of the Logo. Default is off.',
+	'FaviconSection'			=> 'Favicon',
+	'SiteFavicon'				=> 'Site Favicon',
+	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
+	'LayoutSection'				=> 'Layout',
+	'Theme'						=> 'Theme',
+	'ThemeInfo'					=> 'Template design the site uses by default.',
+	'ThemesAllowed'				=> 'Allowed Themes',
+	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
+	'ThemesPerPage'				=> 'Themes per page',
+	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+
+
+	// Resync settings
+	'UserStatsSynched'			=> 'User Statistics synchronized.',
+	'PageStatsSynched'			=> 'Page Statistics synchronized.',
+	'FeedsUpdated'				=> 'RSS-feeds updated.',
+	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'WikiLinksRestored'			=> 'Wiki-links restored.',
+
+	'UserStats'					=> 'User Statistics',
+	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'PageStats'					=> 'Page statistics',
+	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'Feeds'						=> 'Feeds',
+	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
+	'XmlSiteMap'				=> 'XML-Sitemap',
+	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
+	'WikiLinks'					=> 'Wiki-links',
+	'WikiLinksInfo'				=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Questo modulo viene usato quando si inviano email ai propri utenti dalla Board. Assicurati che l\'indirizzo email specificato sia valido; ogni messaggio respinto o non consegnato, verrà inviato a questo indirizzo. Se il tuo server non fornisce un servizio email (basato su PHP) puoi in alternativa inviare messaggi direttamente via SMTP. Questo richiede l\'indirizzo di un server appropriato (chiedi al tuo provider, se necessario). Non specificare nomi vecchi qui. Se il server richiede autenticazione (e solo se lo fa) inserisci nome utente e password.',

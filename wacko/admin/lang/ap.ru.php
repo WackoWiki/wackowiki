@@ -296,6 +296,43 @@ $ap_translation = [
 	'LogoOnly'					=> 'логотип',
 	'LogoAndTitle'				=> 'логотип и заголовок',
 
+	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+	'LogoSection'				=> 'Logo',
+	'SiteLogo'					=> 'Site Logo',
+	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
+	'LogoDimensions'			=> 'Logo dimensions',
+	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
+	'LogoDisplayMode'			=> 'Logo display mode',
+	'LogoDisplayModeInfo'		=> 'Defines the apearence of the Logo. Default is off.',
+	'FaviconSection'			=> 'Favicon',
+	'SiteFavicon'				=> 'Site Favicon',
+	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
+	'LayoutSection'				=> 'Layout',
+	'Theme'						=> 'Theme',
+	'ThemeInfo'					=> 'Template design the site uses by default.',
+	'ThemesAllowed'				=> 'Allowed Themes',
+	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
+	'ThemesPerPage'				=> 'Themes per page',
+	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+
+
+	// Resync settings
+	'UserStatsSynched'			=> 'Статистика пользователей синхронизирована.',
+	'PageStatsSynched'			=> 'Page Statistics синхронизирована.',
+	'FeedsUpdated'				=> 'RSS-каналы обновлены.',
+	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'WikiLinksRestored'			=> 'Wiki-ссылки восстановлены.',
+
+	'UserStats'					=> 'Пользовательская статистика',
+	'UserStatsInfo'				=> 'Статистика пользователей (количество комментариев, страниц во владении, revisions и files) в некоторых ситуациях может расходиться с реальными данными. <br>Эта операция позволяет пересчетать статистику по текущим фактическим данным БД.',
+	'PageStats'					=> 'Page статистика',
+	'PageStatsInfo'				=> 'Page статистика (количество комментариев, files и revisions) в некоторых ситуациях может расходиться с реальными данными. <br>Эта операция позволяет пересчетать статистику по текущим фактическим данным БД.',
+	'Feeds'						=> 'RSS-каналы',
+	'FeedsInfo'					=> 'В случае прямой правки документов в базе данных, содержание RSS-фидов не отразит сделанных изменений. Данная функция синхронизирует RSS-каналы с текущим состоянием БД.',
+	'XmlSiteMap'				=> 'XML-Sitemap',
+	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
+	'WikiLinks'					=> 'Wiki-ссылки',
+	'WikiLinksInfo'				=> 'Выполняет повторный рендеринг всех внутрисайтовых ссылок и восстанавливает содержимое таблицы <code>page_link</code> и <code>file_link</code> в случае ее порчи или повреждений (может занять значительное время).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Эта информация используется для отправки конференцией email-сообщений пользователям. Удостоверьтесь в правильности указанных email-адресов, все возвращённые или не доставленные сообщения будут, вероятно, отправлены на них. Если ваш сервер не обеспечивает использование встроенной (в PHP) службы email, вы можете отправлять сообщения напрямую с использованием SMTP. Для этого необходим адрес подходящего сервера (если нужно, спросите об этом у провайдера). Если сервер требует аутентификации (и только в этом случае), введите необходимые имя, пароль и метод аутентификации.',
