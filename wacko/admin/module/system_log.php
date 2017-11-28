@@ -61,7 +61,7 @@ function admin_system_log(&$engine, &$module)
 				break;
 		}
 
-		$where = "WHERE l.level $mod '" . $_level."' ";
+		$where = "WHERE l.level $mod " . (int) $_level . " ";
 	}
 
 	// set time ordering

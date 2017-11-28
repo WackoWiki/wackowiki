@@ -75,9 +75,9 @@ if ($this->is_owner() || $this->is_admin())
 					$this->db->sql_query(
 						"INSERT INTO " . $this->db->table_prefix . "category SET " .
 							($_POST['category_id'] && $_POST['group'] == 1
-								? "parent_id = '". (int)($word['parent_id'] != 0
-									? $word['parent_id']
-									: $word['category_id'] ) . "', "
+								? "parent_id = " . ((int) $word['parent_id'] != 0
+									? (int) $word['parent_id']
+									: (int) $word['category_id'] ) . ", "
 								: ''
 							) .
 							"category_lang			= " . $this->db->q($this->page['page_lang']) . ", " .

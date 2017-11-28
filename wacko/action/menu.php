@@ -32,7 +32,7 @@ if (!function_exists('load_user_menu'))
 				"LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
 			"WHERE m.user_id = " . (int) $user_id . " " .
 				($lang
-					? "AND m.menu_lang =  " .$this->db->q($lang) . " "
+					? "AND m.menu_lang =  " . $this->db->q($lang) . " "
 					: "") .
 			"ORDER BY m.menu_position", false);
 
@@ -145,7 +145,7 @@ if (isset($_POST['_user_menu']))
 						"FROM " . $this->db->table_prefix . "menu " .
 						"WHERE user_id = " . (int) $_user_id." " .
 							($default_menu === true
-									? "AND menu_lang = '" . $_user_lang."' "
+									? "AND menu_lang = " . $this->db->q($_user_lang) . " "
 									: "") .
 							"AND page_id = " . (int) $_page_id." " .
 						"LIMIT 1"))
@@ -160,7 +160,7 @@ if (isset($_POST['_user_menu']))
 							"FROM " . $this->db->table_prefix . "menu " .
 							"WHERE user_id = " . (int) $_user_id . " " .
 								($default_menu === true
-									? "AND menu_lang = '" . $_user_lang."' "
+									? "AND menu_lang = " . $this->db->q($_user_lang) . " "
 									: "")
 								, false);
 

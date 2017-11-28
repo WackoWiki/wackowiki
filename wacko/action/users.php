@@ -282,7 +282,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$pages = $this->db->load_all(
 					"SELECT page_id, tag, title, created, page_lang " .
 					"FROM " . $this->db->table_prefix . "page " .
-					"WHERE owner_id = '" . $user['user_id'] . "' " .
+					"WHERE owner_id = " . (int) $user['user_id'] . " " .
 						"AND comment_on_id = 0 " .
 						"AND deleted <> 1 " .
 					"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " " .
@@ -345,7 +345,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
 						"FROM " . $this->db->table_prefix . "page c " .
 							"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
-						"WHERE c.owner_id = '" . $user['user_id'] . "' " .
+						"WHERE c.owner_id = " . (int) $user['user_id'] . " " .
 							"AND c.comment_on_id <> 0 " .
 							"AND c.deleted <> 1 " .
 							"AND p.deleted <> 1 " .
@@ -407,7 +407,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
 							"FROM " . $this->db->table_prefix . "file u " .
 								"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
-							"WHERE u.user_id = '" . $user['user_id'] . "' " .
+							"WHERE u.user_id = " . (int) $user['user_id'] . " " .
 								"AND u.deleted <> 1 " .
 							// "AND p.deleted <> 1 " .
 							"ORDER BY u.uploaded_dt DESC " .

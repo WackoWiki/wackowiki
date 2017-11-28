@@ -20,7 +20,7 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 				"OR l.to_supertag = p.supertag) " .
 		"WHERE " .
 			($tag
-				? "p.tag LIKE '" . $this->db->q($tag . '/%') . " AND "
+				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 				: "") .
 			"l.to_page_id IS NULL " .
 			($deleted != 1
