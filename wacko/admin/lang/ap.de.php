@@ -296,7 +296,7 @@ $ap_translation = [
 	'LogoOnly'					=> 'Logo',
 	'LogoAndTitle'				=> 'Logo und Titel',
 
-	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+	'AppearanceSettingsUpdated'	=> 'Aussehen der Webseite wurde aktualisiert.',
 	'LogoSection'				=> 'Logo',
 	'SiteLogo'					=> 'Site Logo',
 	'SiteLogoInfo'				=> 'Das Logo wird normalerweise in der oberen linken Ecke der Anwendung angezeigt. Die maximale Größe beträgt 2 MiB. Optimale Abmessungen sind 255 Pixel breit und 55 Pixel hoch.',
@@ -337,6 +337,8 @@ $ap_translation = [
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',
 
+	'EmailSettingsUpdated'	    => 'E-Mail Einstellungen wurden aktualisiert.',
+	
 	'EmailFunctionName'			=> 'Name der E-Mail-Funktion',
 	'EmailFunctionNameInfo'		=> 'Die PHP-Funktion, die genutzt wird, um E-Mails zu versenden.',
 	'UseSmtpInfo'				=> 'Wähle <code>SMTP</code> aus, wenn du E-Mails über einen SMTP-Server senden möchtest (oder musst), anstatt die PHP-eigene Mail-Funktion zu nutzen.',
@@ -345,13 +347,13 @@ $ap_translation = [
 	'EnableEmailInfo'			=> 'Aktiviere E-Mail-Funktionalität',
 
 	'FromEmailName'				=> 'Absender',
-	'FromEmailNameInfo'			=> 'Absender Name, in der Kopfzeile <code>Von:</code> in E-Mails für alle E-Mail-Benachrichtigungen, die von dieser Seite gesendet werden.',
+	'FromEmailNameInfo'			=> 'Absender Name, im Adressfeld <code>Von:</code> der Kopfzeile in E-Mails für alle E-Mail-Benachrichtigungen, die von dieser Seite gesendet werden.',
 	'NoReplyEmail'				=> 'No-reply Adresse',
-	'NoReplyEmailInfo'			=> 'Diese Adresse, z.B. <code>noreply@example.com</code>, erscheint im Adressfeld<code>Von:</code> der Kopfzeile bei allen E-Mail Benachrichtigungen, die von dieser Seite gesendet werden.',
+	'NoReplyEmailInfo'			=> 'Diese Adresse, z.B. <code>noreply@example.com</code>, erscheint im Adressfeld <code>Von:</code> der Kopfzeile bei allen E-Mail Benachrichtigungen, die von dieser Seite gesendet werden.',
 	'AdminEmail'				=> 'E-Mail Adresse des Seiteninhabers',
 	'AdminEmailInfo'			=> 'Diese Adresse ist für Administrationszwecke, wie Benachrichtigung bei neuen Benutzern.',
 	'AbuseEmail'				=> 'Dienst bei E-Mail-Missbrauch',
-	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
+	'AbuseEmailInfo'			=> 'Adresse für dringende Angelegenheiten: Registrierung einer verdächtigen E-Mail, usw. Kann mit der vorherigen übereinstimmen.',
 
 	'SendTestEmail'				=> 'Test-Mail senden',
 	'SendTestEmailInfo'			=> 'Sendet eine Test-Mail an die in deinem Benutzerkonto hinterlegte Adresse.',
@@ -380,8 +382,8 @@ $ap_translation = [
 	'UploadMaxFilesizeInfo'		=> 'Maximale Größe pro Datei. Die Dateigröße wird nur durch die PHP-Konfiguration beschränkt, wenn 0 als Wert eingestellt wird.',
 	'UploadQuota'				=> 'Maximales Kontingent für Dateianhänge',
 	'UploadQuotaInfo'			=> 'Maximaler für Dateianhänge verfügbarer Speicherplatz für das gesamte Wiki; 0 bedeutet unbegrenzt.',
-	'UploadQuotaUser'			=> 'Storage quota per user',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'UploadQuotaUser'			=> 'Speicherkontingent pro Benutzer',
+	'UploadQuotaUserInfo'		=> 'Beschränkung des Speicherkontingentes, der von einem Benutzer hochgeladen werden kann, wobei 0 unbegrenzt ist.',
 	'CheckMimetype'				=> 'Dateianhänge prüfen',
 	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
 
