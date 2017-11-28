@@ -336,6 +336,8 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Te informacje s± u¿ywane przez witrynê podczas wysy³ania e-maili do u¿ytkowników. Sprawd¼ czy podany adres e-mail jest wa¿nym adresem, poniewa¿ wszystkie zwrócone lub niedostarczone wiadomo¶ci bêd± prawdopodobnie odsy³ane na ten adres. Je¶li serwer nie udostêpnia natywnych (opartych na PHP) us³ug e-mail, mo¿na wysy³aæ wiadomo¶ci bezpo¶rednio, u¿ywaj±c protoko³u SMTP. Wymaga to adresu odpowiedniego serwera. Je¶li go nie znasz, zapytaj o niego swojego us³ugodawcê. Je¶li serwer wymaga uwierzytelnienia (i tylko, je¶li wymaga), wprowad¼ nazwê u¿ytkownika, has³o i metodê uwierzytelniania.',
+	
+    'EmailSettingsUpdated'	    => 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'Nazwa funkcji',
 	'EmailFunctionNameInfo'		=> 'Nazwa funkcji e-maila u¿ywana do wysy³ania maili przez PHP.',

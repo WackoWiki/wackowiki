@@ -336,6 +336,8 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Esta informação é usada quando o Fórum envia emails aos Utilizadores. Certifique-se que usa um email válido. Qualquer Mensagem incorreta não será entregue neste endereço. Se o seu serviço de hospedagem não oferece um serviço nativo de email baseado no PHP, pode enviar mensagens através de SMTP. É necessário um Servidor adequado, não especifique qualquer nome antigo aqui! Se o servidor requer autenticação, introduza os nomes e senhas necessários. tenha em atenção que apenas é usada a autenticação básica. Implementações de autenticações diferentes não estão disponíveis.',
+	
+    'EmailSettingsUpdated'	    => 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'Nome da Função de email',
 	'EmailFunctionNameInfo'		=> 'Função de email usada para enviar emails através do PHP.',

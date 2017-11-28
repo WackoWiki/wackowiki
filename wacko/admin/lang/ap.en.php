@@ -336,7 +336,9 @@ $ap_translation = [
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
-
+	
+	'EmailSettingsUpdated'	    => 'Updated Email settings',
+    
 	'EmailFunctionName'			=> 'Email function name',
 	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
 	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',

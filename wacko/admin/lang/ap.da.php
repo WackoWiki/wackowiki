@@ -337,6 +337,8 @@ $ap_translation = [
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Disse indstillinger anvendes af webstedet ved forsendelse af emails til tilmeldte brugere. Bemærk venligst at denne emailadresse skal være gyldig, da enhver tilbagesendt eller vildfaren email sandsynligvis vil blive returneret til denne emailaddresse. Hvis din vært ikke lader dig bruge den indbyggede (PHP-baserede) emailservice, kan du i stedet sende emails direkte igennem SMTP. Dette kræver adressen på en passende server (spørg om nødvendigt din vært). Hvis serveren kræver autentifikation (og kun hvis den gør) angives det nødvendige brugernavn, kodeord og autentifikationsmetoden.',
 
+    'EmailSettingsUpdated'	    => 'Updated Email settings',
+    
 	'EmailFunctionName'			=> 'Navn på emailfunktion',
 	'EmailFunctionNameInfo'		=> 'Navnet på den anvendte emailfunktion ved forsendelse af emails gennem PHP.',
 	'UseSmtpInfo'				=> 'Vælg <code>SMTP</code>, hvis du vil eller skal bruge en navngiven server til at sende email i stedet for boardets indbyggede emailfunktion.',
