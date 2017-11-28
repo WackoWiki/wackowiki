@@ -177,7 +177,7 @@ if (!empty($blog_cluster))
 
 		$selector =
 			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
-				"AND created > '" . $date . "' " .
+				"AND created > " . $this->db->q($date) . " " .
 				"AND comment_on_id = 0 " .
 				"AND deleted <> 1 ";
 

@@ -16,7 +16,7 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 			"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
 		"WHERE " .
 		($tag
-			? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
+			? "b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 			: "a.comment_on_id <> 0 ") .
 		(!$deleted
 			? "AND a.deleted <> 1 "
@@ -35,7 +35,7 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
 			"WHERE " .
 			($tag
-				? "b.supertag LIKE '" . $this->db->q($this->translit($tag) . '/%') . " "
+				? "b.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "a.comment_on_id <> 0 ") .
 			($deleted != 1
 				? "AND a.deleted <> 1 "

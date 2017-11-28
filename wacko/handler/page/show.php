@@ -15,7 +15,7 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 	$count = $this->db->load_single(
 		"SELECT COUNT(tag) AS n " .
 		"FROM " . $this->db->table_prefix . "page " .
-		"WHERE comment_on_id = '" . $this->page['comment_on_id'] . "' " .
+		"WHERE comment_on_id = " . (int) $this->page['comment_on_id'] . " " .
 			"AND created <= " . $this->db->q($this->page['created']) . " " .
 			"AND deleted <> 1 " .
 		"GROUP BY comment_on_id " .
@@ -111,7 +111,7 @@ if ($this->has_access('read'))
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"hits = hits + 1 " .
-				"WHERE page_id = '" . $this->page['page_id'] . "'");
+				"WHERE page_id = " . (int) $this->page['page_id'] . "");
 		}
 
 		$user			= $this->get_user();
@@ -123,8 +123,8 @@ if ($this->has_access('read'))
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "watch SET " .
 					"pending = 0 " .
-				"WHERE page_id = '" . $this->page['page_id'] . "' " .
-					"AND user_id = '" . $user['user_id'] . "'");
+				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
+					"AND user_id = " . (int) $user['user_id'] . "");
 		}
 
 		$this->set_language($this->page_lang);

@@ -22,8 +22,8 @@ if ($user_id = $this->get_user_id())
 			"FROM {$pref}page AS p, {$pref}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .
-				"AND w.user_id = '" . (int) $user_id . "' " .
-				"AND p.user_id <> '" . (int) $user_id . "' " .
+				"AND w.user_id = " . (int) $user_id . " " .
+				"AND p.user_id <> " . (int) $user_id . " " .
 			"GROUP BY p.tag ", true);
 
 	$pagination = $this->pagination($count['n'], $max, 'p', $profile);
@@ -33,8 +33,8 @@ if ($user_id = $this->get_user_id())
 			"FROM {$pref}page AS p, {$pref}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .
-				"AND w.user_id = '" . (int) $user_id . "' " .
-				"AND p.user_id <> '" . (int) $user_id . "' " .
+				"AND w.user_id = " . (int) $user_id . " " .
+				"AND p.user_id <> " . (int) $user_id . " " .
 			"GROUP BY p.tag " .
 			"ORDER BY p.modified DESC, p.tag ASC " .
 			$pagination['limit'], true);
@@ -47,7 +47,7 @@ if ($user_id = $this->get_user_id())
 				"UPDATE " . $this->db->table_prefix . "watch " .
 				"SET watch_time = UTC_TIMESTAMP() " .
 				"WHERE page_id = '" . $page['page_id'] . "' " .
-					"AND user_id = '" . (int) $user_id . "'");
+					"AND user_id = " . (int) $user_id . "");
 		}
 
 		$this->db->invalidate_sql_cache();

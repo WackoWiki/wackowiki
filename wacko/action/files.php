@@ -118,7 +118,7 @@ if ($can_view)
 			"WHERE ".
 		($all || $file_link
 			? "f.page_id IS NOT NULL "
-			: "f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' "
+			: "f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " "
 			) . " " .
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "

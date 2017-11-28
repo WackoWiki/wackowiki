@@ -41,7 +41,7 @@ if (isset($_POST['upload']) & $can_upload)
 	$user_files	= $this->db->load_single(
 		"SELECT SUM(file_size) AS used_user_quota " .
 		"FROM " . $this->db->table_prefix . "file " .
-		"WHERE user_id = '" . $user['user_id'] . "' " .
+		"WHERE user_id = " . (int) $user['user_id'] . " " .
 		"LIMIT 1");
 
 	// TODO: set used_quota in config table (?)
@@ -264,26 +264,26 @@ if (isset($_POST['upload']) & $can_upload)
 						{
 							$this->db->sql_query(
 								"UPDATE " . $this->db->table_prefix . "file SET " .
-									#"page_id			= '" . (int) $page_id . "', " .
-									"user_id			= '" . $user['user_id'] . "'," .
+									#"page_id			= " . (int) $page_id . ", " .
+									"user_id			= " . (int) $user['user_id'] . "," .
 									#"file_name			= " . $this->db->q(file_name) . ", " .
 									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
 									(!empty($description)
 										? "file_description	= " . $this->db->q($description) . ", "
 										: "") .
 									# "caption			= " . $this->db->q($caption) . ", " .
-									"file_size			= '" . (int) $file_size . "'," .
-									"picture_w			= '" . (int) $size[0] . "'," .
-									"picture_h			= '" . (int) $size[1] . "'," .
+									"file_size			= " . (int) $file_size . "," .
+									"picture_w			= " . (int) $size[0] . "," .
+									"picture_h			= " . (int) $size[1] . "," .
 									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
 									"uploaded_dt		= " . $this->db->q($uploaded_dt) . ", " .
 									"modified_dt		= UTC_TIMESTAMP() " .
 								"WHERE " .
 									(!$is_global
-										? "page_id		= '" . $this->page['page_id'] . "' AND "
+										? "page_id		= " . (int) $this->page['page_id'] . " AND "
 										: "" ) .
-									"file_name			= '" . $file_name . "' " .
+									"file_name			= " . $this->db->q($file_name) . " " .
 								"LIMIT 1");
 						}
 						else
@@ -291,15 +291,15 @@ if (isset($_POST['upload']) & $can_upload)
 							// 5. insert line into DB
 							$this->db->sql_query(
 								"INSERT INTO " . $this->db->table_prefix . "file SET " .
-									"page_id			= '" . (int) $page_id . "', " .
-									"user_id			= '" . $user['user_id'] . "'," .
+									"page_id			= " . (int) $page_id . ", " .
+									"user_id			= " . (int) $user['user_id'] . "," .
 									"file_name			= " . $this->db->q($file_name) . ", " .
 									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
 									"file_description	= " . $this->db->q($description) . ", " .
 									# "caption			= " . $this->db->q($caption) . ", " .
-									"file_size			= '" . (int) $file_size . "'," .
-									"picture_w			= '" . (int) $size[0] . "'," .
-									"picture_h			= '" . (int) $size[1] . "'," .
+									"file_size			= " . (int) $file_size . "," .
+									"picture_w			= " . (int) $size[0] . "," .
+									"picture_h			= " . (int) $size[1] . "," .
 									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
 									"uploaded_dt		= " . $this->db->q($uploaded_dt) . "," .

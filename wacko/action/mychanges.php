@@ -45,7 +45,7 @@ if (($user_id = $this->get_user_id()))
 		$count	= $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			"FROM {$prefix}page " .
-			"WHERE user_id = '" . (int) $user_id . "' " .
+			"WHERE user_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0", true);
 
@@ -54,7 +54,7 @@ if (($user_id = $this->get_user_id()))
 		if ($pages = $this->db->load_all(
 			"SELECT tag, title, modified " .
 			"FROM {$prefix}page " .
-			"WHERE user_id = '" . (int) $user_id . "' " .
+			"WHERE user_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0 " .
 			"ORDER BY tag ASC, modified DESC " .
@@ -102,7 +102,7 @@ if (($user_id = $this->get_user_id()))
 		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n " .
 			"FROM {$prefix}page " .
-			"WHERE user_id = '" . (int) $user_id . "' " .
+			"WHERE user_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0", true);
 
@@ -111,7 +111,7 @@ if (($user_id = $this->get_user_id()))
 		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified, edit_note " .
 			"FROM {$prefix}page " .
-			"WHERE user_id = '" . (int) $user_id . "' " .
+			"WHERE user_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
 				"AND comment_on_id = 0 " .
 			"ORDER BY modified DESC, tag ASC " .

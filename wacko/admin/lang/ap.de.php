@@ -311,7 +311,7 @@ $ap_translation = [
 	'Theme'						=> 'Layout',
 	'ThemeInfo'					=> 'Layout, welches die Site standardmäßig verwendet.',
 	'ThemesAllowed'				=> 'Zulässige Layouts',
-	'ThemesAllowedInfo'			=> 'Wählen die zulässigen Layouts aus, die der Benutzer auswählen kann, andernfalls sind alle verfügbaren Layouts zulässig.',
+	'ThemesAllowedInfo'			=> 'Wähle die zulässigen Layouts aus, die der Benutzer verwenden kann, andernfalls sind alle verfügbaren Layouts zulässig.',
 	'ThemesPerPage'				=> 'Layouts pro Seite',
 	'ThemesPerPageInfo'			=> 'Erlaube Layouts pro Seite, welche der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
 

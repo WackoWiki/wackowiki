@@ -28,7 +28,7 @@ if ($this->is_owner($page_id))
 		"SELECT u.user_name " .
 		"FROM " . $this->db->table_prefix . "watch w " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (w.user_id = u.user_id) " .
-		"WHERE w.page_id = '" . (int) $page_id . "' " .
+		"WHERE w.page_id = " . (int) $page_id . " " .
 		"ORDER BY u.user_name ASC");
 
 	if ($watchers)

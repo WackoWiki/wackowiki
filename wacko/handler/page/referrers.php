@@ -121,7 +121,7 @@ else
 	$query =
 		"SELECT referrer, COUNT(referrer) AS num " .
 		"FROM " . $px . "referrer " .
-		"WHERE page_id = '" . (int) $this->page['page_id'] . "' " .
+		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"GROUP BY referrer " .
 		"ORDER BY num DESC";
 }

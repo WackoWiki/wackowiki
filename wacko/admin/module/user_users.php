@@ -111,7 +111,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = '" . (int) $user_id . "' " .
+			"WHERE u.user_id = " . (int) $user_id . " " .
 				"AND u.account_type = 0 " .
 			"LIMIT 1");
 	}
@@ -143,7 +143,7 @@ function admin_user_users(&$engine, &$module)
 					"signup_time		= UTC_TIMESTAMP(), " .
 					"email			= " . $engine->db->q($_POST['email']) . ", " .
 					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .
-					"enabled		= '" . (int) $_POST['enabled'] . "', " .
+					"enabled		= " . (int) $_POST['enabled'] . ", " .
 					"user_name		= " . $engine->db->q($_POST['newname']) . " ");
 
 			// get new user_id
@@ -156,16 +156,16 @@ function admin_user_users(&$engine, &$module)
 			// INSERT user settings
 			$engine->db->sql_query(
 				"INSERT INTO " . $engine->db->table_prefix . "user_setting SET " .
-					"user_id			= '" . (int) $_user_id['user_id'] . "', " .
-					"typografica		= '" . (($engine->db->default_typografica == 1) ? 1 : 0) . "', " .
+					"user_id			= " . (int) $_user_id['user_id'] . ", " .
+					"typografica		= " . (($engine->db->default_typografica == 1) ? 1 : 0) . ", " .
 					"user_lang			= " . $engine->db->q(($_POST['user_lang'] ? $_POST['user_lang'] : $engine->db->language)) . ", " .
-					"list_count			= '" . (int) $engine->db->list_count."', " .
+					"list_count			= " . (int) $engine->db->list_count . ", " .
 					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
-					"diff_mode			= '" . (int) $engine->db->default_diff_mode . "', " .
-					"notify_minor_edit	= '" . (int) $engine->db->notify_minor_edit."', " .
-					"notify_page		= '" . (int) $engine->db->notify_page."', " .
-					"notify_comment		= '" . (int) $engine->db->notify_comment."', " .
-					"sorting_comments	= '" . (int) $engine->db->sorting_comments."', " .
+					"diff_mode			= " . (int) $engine->db->default_diff_mode . ", " .
+					"notify_minor_edit	= " . (int) $engine->db->notify_minor_edit . ", " .
+					"notify_page		= " . (int) $engine->db->notify_page . ", " .
+					"notify_comment		= " . (int) $engine->db->notify_comment . ", " .
+					"sorting_comments	= " . (int) $engine->db->sorting_comments . ", " .
 					"send_watchmail		= 1");
 
 			// add user page
@@ -196,7 +196,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = '" . (int) $user_id . "' " .
+			"WHERE u.user_id = " . (int) $user_id . " " .
 			"AND u.account_type = 0 " .
 			"LIMIT 1");
 
@@ -211,7 +211,7 @@ function admin_user_users(&$engine, &$module)
 		"SELECT user_id " .
 		"FROM " . $engine->db->table_prefix . "user " .
 		"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
-			"AND user_id <> " . $engine->db->q($_POST['user_id']) . " " .
+			"AND user_id <> " . (int) $engine->db->q($_POST['user_id']) . " " .
 		"LIMIT 1"))
 		{
 			$engine->set_message($engine->_t('UsersAlreadyExists'));
@@ -231,16 +231,16 @@ function admin_user_users(&$engine, &$module)
 					"user_name		= " . $engine->db->q($_POST['newname']) . ", " .
 					"email			= " . $engine->db->q($_POST['newemail']) . ", " .
 					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .
-					"enabled		= '" . (int) $_POST['enabled'] . "', " .
-					"account_status	= '" . (int) $_POST['account_status'] . "' " .
-				"WHERE user_id		= '" . (int) $_POST['user_id'] . "' " .
+					"enabled		= " . (int) $_POST['enabled'] . ", " .
+					"account_status	= " . (int) $_POST['account_status'] . " " .
+				"WHERE user_id		= " . (int) $_POST['user_id'] . " " .
 				"LIMIT 1");
 
 			$engine->db->sql_query(
 				"UPDATE " . $engine->db->table_prefix . "user_setting SET " .
 					"user_lang		= " . $engine->db->q($_POST['user_lang']) . ", " .
 					"theme			= " . $engine->db->q($_POST['theme']) . " " .
-				"WHERE user_id		= '" . (int) $_POST['user_id'] . "' " .
+				"WHERE user_id		= " . (int) $_POST['user_id'] . " " .
 				"LIMIT 1");
 
 			$engine->show_message($engine->_t('UsersUpdated'), 'success');
@@ -272,25 +272,25 @@ function admin_user_users(&$engine, &$module)
 					$user = $engine->db->load_single(
 						"SELECT u.user_name " .
 						"FROM " . $engine->db->table_prefix . "user u " .
-						"WHERE u.user_id = '" . $user_id . "' " .
+						"WHERE u.user_id = " . (int) $user_id . " " .
 							"AND u.account_type = 0 " .
 						"LIMIT 1");
 
 					$engine->db->sql_query(
 						"DELETE FROM " . $engine->db->table_prefix . "user " .
-						"WHERE user_id = '" . $user_id . "'");
+						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
 						"DELETE FROM " . $engine->db->table_prefix . "user_setting " .
-						"WHERE user_id = '" . $user_id . "'");
+						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
 						"DELETE FROM " . $engine->db->table_prefix . "usergroup_member " .
-						"WHERE user_id = '" . $user_id . "'");
+						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
 						"DELETE FROM " . $engine->db->table_prefix . "menu " .
-						"WHERE user_id = '" . $user_id . "'");
+						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
 						"DELETE FROM " . $engine->db->table_prefix . "watch " .
-						"WHERE user_id = '" . $user_id . "'");
+						"WHERE user_id = " . (int) $user_id . "");
 
 					// remove user space
 					$user_space = $engine->db->users_page . '/' . $user['user_name'];
@@ -310,7 +310,7 @@ function admin_user_users(&$engine, &$module)
 						"DELETE FROM " . $engine->db->table_prefix . "page " .
 						"WHERE tag = " . $engine->db->q($user_space) . " " .
 							"OR tag LIKE " . $engine->db->q($user_space . '/%') . " " .
-							#"AND owner_id = '" . (int) $_POST['user_id'] . "'" .
+							#"AND owner_id = " . (int) $_POST['user_id'] . "" .
 						"");
 
 					$engine->config->invalidate_config_cache();
@@ -405,7 +405,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_name, u.real_name, u.email, s.user_lang, s.theme, u.enabled, u.account_status " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			"WHERE u.user_id = '" . (int) $user_id . "' " .
+			"WHERE u.user_id = " . (int) $user_id . " " .
 				"AND u.account_type = 0 " .
 			"LIMIT 1"))
 		{
@@ -545,7 +545,7 @@ function admin_user_users(&$engine, &$module)
 				if ($user = $engine->db->load_single(
 					"SELECT user_name
 					FROM " . $engine->db->table_prefix . "user
-					WHERE user_id = '" . (int) $user_id . "'
+					WHERE user_id = " . (int) $user_id . "
 					LIMIT 1"))
 				{
 
@@ -767,7 +767,7 @@ function admin_user_users(&$engine, &$module)
 		// filter by account_status
 		if (isset($_GET['account_status']))
 		{
-			$where	= "WHERE u.account_status = '" . (int) $_GET['account_status'] . "' ";
+			$where	= "WHERE u.account_status = " . (int) $_GET['account_status'] . " ";
 		}
 		// filter by lang
 		if (isset($_GET['user_lang']))
