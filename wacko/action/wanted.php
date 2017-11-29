@@ -7,12 +7,11 @@ if (!defined('IN_WACKO'))
 
 $load_wanted = function ($for, $limit, $deleted = 0)
 {
-	$pagination	= '';
+	$pagination	= [];
 	$pref		= $this->db->table_prefix;
 
-	// count pages
-	if ($count_pages = $this->db->load_all(
-			"SELECT DISTINCT l.to_tag AS wanted_tag " .
+	$selector =
+		"SELECT DISTINCT l.to_tag AS wanted_tag " .
 			"FROM " . $pref . "page_link l " .
 				"LEFT JOIN " . $pref . "page p ON " .
 				"((l.to_tag = p.tag " .
@@ -22,26 +21,22 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 				($for
 					? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
 					: "") .
-				"p.tag is NULL GROUP BY wanted_tag "
+				"p.tag is NULL GROUP BY wanted_tag ";
+
+	// count pages
+	if ($count = $this->db->load_single(
+		"SELECT COUNT(*) AS n
+		FROM ( " .
+			$selector .
+		") AS src"
 		, true));
 
-	if ($count_pages)
+	if ($count)
 	{
-		$count		= count($count_pages);
-		$pagination = $this->pagination($count, $limit);
+		$pagination = $this->pagination($count['n'], $limit);
 
 		$wanted = $this->db->load_all(
-				"SELECT DISTINCT l.to_tag AS wanted_tag " .
-				"FROM " . $pref . "page_link l " .
-					"LEFT JOIN " . $pref . "page p ON " .
-					"((l.to_tag = p.tag " .
-						"AND l.to_supertag = '') " .
-						"OR l.to_supertag = p.supertag) " .
-				"WHERE " .
-					($for
-						? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
-						: "") .
-					"p.tag is NULL GROUP BY wanted_tag " .
+				$selector .
 				"ORDER BY wanted_tag ASC " .
 				$pagination['limit']);
 
@@ -98,13 +93,14 @@ else
 		{
 			$this->print_pagination($pagination);
 
-			echo "<ol>\n";
+			echo '<ol start="' . ($pagination['offset'] + 1) . '">' . "\n";
 
 			foreach ($pages as $page)
 			{
-				$page_parent = substr($page['wanted_tag'], 0, strrpos($page['wanted_tag'], '/'));
+				$page_parent	= substr($page['wanted_tag'], 0, strrpos($page['wanted_tag'], '/'));
+				$page_id_parent	= $this->get_page_id($page_parent);
 
-				if (!$this->db->hide_locked || $this->has_access('read', $page_parent))
+				if (!$this->db->hide_locked || $this->has_access('read', $page_id_parent))
 				{
 					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
@@ -113,7 +109,7 @@ else
 					{
 						foreach ($referring_pages as $referrer_page)
 						{
-							if (!$this->db->hide_locked || $this->has_access('read', $referrer_page['tag']))
+							if (!$this->db->hide_locked || $this->has_access('read', $referrer_page['page_id']))
 							{
 								$count++;
 							}
