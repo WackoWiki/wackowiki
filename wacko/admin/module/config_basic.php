@@ -101,13 +101,16 @@ function admin_config_basic(&$engine, &$module)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
-				<th colspan="2">Basic parameters</th>
+				<th colspan="2">
+				<br>
+					<?php echo $engine->_t('ConfigBasicSection');?>
+				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="site_name"><strong>Site Name:</strong><br>
-					<small>The title of this site, appears on browser title, theme header, email-notification, etc.</small></label>
-				</td>
+					<label for="site_name"><strong><?php echo $engine->_t('SiteName');?>:</strong><br>
+					<small><?php echo $engine->_t('SiteNameInfo');?></small></label>
+				</td>	
 				<td>
 					<input type="text" maxlength="255" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
@@ -117,8 +120,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="site_desc"><strong>Site Description:</strong><br>
-					<small>Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.</small></label>
+                    <label for="site_desc"><strong><?php echo $engine->_t('SiteDesc');?>:</strong><br>
+					<small><?php echo $engine->_t('SiteDescInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="site_desc" name="site_desc" value="<?php echo htmlspecialchars($engine->db->site_desc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -129,8 +132,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="admin_name"><strong>Admin of Site:</strong><br>
-					<small>User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.</small></label>
+				    <label for="admin_name"><strong><?php echo $engine->_t('AdminName');?>:</strong><br>
+					<small><?php echo $engine->_t('AdminNameInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="25" id="admin_name" name="admin_name" value="<?php echo htmlspecialchars($engine->db->admin_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -139,13 +142,13 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Language
+					<?php echo $engine->_t('LanguageSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="language"><strong>Default language:</strong><br>
-					<small>Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.</small></label>
+                    <label for="language"><strong><?php echo $engine->_t('DefaultLanguage');?>:</strong><br>
+					<small><?php echo $engine->_t('DefaultLanguageInfo');?></small></label>
 				</td>
 				<td>
 					<select id="language" name="language">
@@ -166,8 +169,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="multilanguage"><strong>Multilanguage support:</strong><br>
-					<small>Include a choice of language on the page by page basis.</small></label>
+                    <label for="multilanguage"><strong><?php echo $engine->_t('MultiLanguage');?>:</strong><br>
+					<small><?php echo $engine->_t('MultiLanguageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="multilanguage" name="multilanguage" value="1"<?php echo ($engine->db->multilanguage ? ' checked' : '');?>>
@@ -180,8 +183,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for=""><strong>Allowed languages:</strong><br>
-					<small>It is recomended to select only the set of languages you want to use, other wise all languages are selected.</small></label>
+				    <label for=""><strong><?php echo $engine->_t('AllowedLanguages');?>:</strong><br>
+					<small><?php echo $engine->_t('AllowedLanguagesInfo');?></small></label>
 				</td>
 				<td>
 				<?php
@@ -231,13 +234,13 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Comments
+					<?php echo $engine->_t('CommentSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Allow comments:</strong><br>
-					<small>Enable comments for guest or registered users only or disable them on the entire site.</small>
+                    <label for=""><strong><?php echo $engine->_t('AllowComment');?>:</strong><br>
+					<small><?php echo $engine->_t('AllowCommentInfo');?></small></label>				
 				</td>
 				<td>
 					<input type="radio" id="enable_comments_on" name="enable_comments" value="1" <?php echo ($engine->db->enable_comments == 1 ? ' checked' : '');?>><label for="enable_comments_on"><?php echo $engine->_t('On');?></label>
@@ -250,8 +253,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="sorting_comments"><strong>Sorting comments:</strong><br>
-					<small>Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.</small></label>
+                    <label for="sorting_comments"><strong><?php echo $engine->_t('SortingComments');?>:</strong><br>
+					<small><?php echo $engine->_t('SortingCommentsInfo');?></small></label>				
 				</td>
 				<td>
 					<select id="sorting_comments" name="sorting_comments">
@@ -263,13 +266,13 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Toolbar
+					<?php echo $engine->_t('ToolbarSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Comments panel:</strong><br>
-					<small>The default display of comments in the bottom of the page.</small>
+                    <label for=""><strong><?php echo $engine->_t('CommentsPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('CommentsPanelInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="radio" id="footer_comments_on" name="footer_comments" value="1"<?php echo ($engine->db->footer_comments == 1 ? ' checked' : '');?>><label for="footer_comments_on"><?php echo $engine->_t('On');?></label>
@@ -282,8 +285,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>File panel:</strong><br>
-					<small>The default display of attachments in the bottom of the page .</small>
+                    <label for=""><strong><?php echo $engine->_t('FilePanel');?>:</strong><br>
+					<small><?php echo $engine->_t('FilePanelInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="radio" id="footer_files_on" name="footer_files" value="1"<?php echo ($engine->db->footer_files == 1 ? ' checked' : '');?>><label for="footer_files_on"><?php echo $engine->_t('On');?></label>
@@ -296,8 +299,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Rating panel :</strong><br>
-					<small>The default display of the rating panel in the bottom of the page.</small>
+                    <label for=""><strong><?php echo $engine->_t('RatingPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('RatingPanelInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ($engine->db->footer_rating == 1 ? ' checked' : '');?>><label for="footer_rating_on"><?php echo $engine->_t('On');?></label>
@@ -310,8 +313,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Tags panel :</strong><br>
-					<small>The default display of the tags panel in the bottom of the page.</small>
+                    <label for=""><strong><?php echo $engine->_t('TagsPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('TagsPanelInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="radio" id="footer_tags_on" name="footer_tags" value="1"<?php echo ($engine->db->footer_tags == 1 ? ' checked' : '');?>><label for="footer_tags_on"><?php echo $engine->_t('On');?></label>
@@ -324,8 +327,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Hide Revisions:</strong><br>
-					<small>The default display of revisions of the page.</small>
+                    <label for=""><strong><?php echo $engine->_t('HideRevisions');?>:</strong><br>
+					<small><?php echo $engine->_t('HideRevisionsInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ($engine->db->hide_revisions == 2 ? ' checked' : '');?>><label for="hide_revisions_on"><?php echo $engine->_t('On');?></label>
@@ -338,8 +341,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Table of contents panel :</strong><br>
-					<small>The default display table of contents panel of a page (may need support in the templates).</small>
+                    <label for=""><strong><?php echo $engine->_t('TOC_Panel');?>:</strong><br>
+                    <small><?php echo $engine->_t('TOC_PanelInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="radio" id="hide_toc_on" name="hide_toc" value="0"<?php echo (!$engine->db->hide_toc ? ' checked' : '');?>><label for="hide_toc_on"><?php echo $engine->_t('On');?></label>
@@ -351,8 +354,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Sections panel :</strong><br>
-					<small>By default display the panel of adjacent pages (requires support in the templates).</small>
+                    <label for=""><strong><?php echo $engine->_t('SectionsPanel');?>:</strong><br>
+                    <small><?php echo $engine->_t('SectionsPanelInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="radio" id="hide_index_on" name="hide_index" value="0"<?php echo (!$engine->db->hide_index ? ' checked' : '');?>><label for="hide_index_on"><?php echo $engine->_t('On');?></label>
@@ -364,8 +367,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Displaying sections:</strong><br>
-					<small>When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).</small>
+                    <label for=""><strong><?php echo $engine->_t('DisplayingSections');?>:</strong><br>
+                    <small><?php echo $engine->_t('DisplayingSectionsInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="radio" id="full_index" name="tree_level" value="0"<?php echo ($engine->db->tree_level == 0 ? ' checked' : '');?>><label for="full_index"><?php echo $engine->_t('MetaIndexFull');?></label>
@@ -378,8 +381,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="menu_items"><strong>Menu items:</strong><br>
-					<small>Default number of shown menu items (may need support in the templates).</small></label>
+                    <label for="menu_items"><strong><?php echo $engine->_t('MenuItems');?>:</strong><br>
+                    <small><?php echo $engine->_t('MenuItemsInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="number" min="0" max="20" maxlength="4" id="menu_items" name="menu_items" value="<?php echo (int) $engine->db->menu_items;?>">
@@ -388,13 +391,13 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Feeds
+					<?php echo $engine->_t('FeedsSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="enable_feeds"><strong>Enable Feeds:</strong><br>
-					<small>Turns on or off RSS feeds for the entire wiki.</small></label>
+                    <label for="enable_feeds"><strong><?php echo $engine->_t('EnableFeeds');?>:</strong><br>
+                    <small><?php echo $engine->_t('EnableFeedsInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="checkbox" id="enable_feeds" name="enable_feeds" value="1"<?php echo ($engine->db->enable_feeds ? ' checked' : '');?>>
@@ -405,8 +408,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="xml_sitemap"><strong>XML Sitemap:</strong><br>
-					<small>Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.</small></label>
+                    <label for="xml_sitemap"><strong><?php echo $engine->_t('XML_Sitemap');?>:</strong><br>
+                    <small><?php echo $engine->_t('XML_SitemapInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ($engine->db->xml_sitemap ? ' checked' : '');?>>
@@ -417,8 +420,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="xml_sitemap_time"><strong>XML Sitemap generation time:</strong><br>
-					<small>Generate a Sitemaps only once in this number of days, zero means on every page change.</small></label>
+                    <label for="xml_sitemap_time"><strong><?php echo $engine->_t('XML_SitemapTime');?>:</strong><br>
+                    <small><?php echo $engine->_t('XML_SitemapTimeInfo');?></small></label>		
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo (int) $engine->db->xml_sitemap_time;?>">
@@ -427,13 +430,13 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Diff Modes
+                    <?php echo $engine->_t('DiffModeSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_diff_mode"><strong><?php echo $engine->_t('DefaultDiffMode');?>:</strong><br>
-					<small>Preselected diff mode.</small></label>
+					<label for="default_diff_mode"><strong><?php echo $engine->_t('DefaultDiffModeSetting');?>:</strong><br>
+					<small><?php echo $engine->_t('DefaultDiffModeSettingInfo');?></small></label>
 				</td>
 				<td>
 					<select id="default_diff_mode" name="default_diff_mode">
@@ -453,8 +456,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for=""><strong>Allowed Diff modes:</strong><br>
-					<small>It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.</small></label>
+                    <label for=""><strong><?php echo $engine->_t('AllowedDiffMode');?>:</strong><br>
+					<small><?php echo $engine->_t('AllowedDiffModeInfo');?></small></label>
 				</td>
 				<td>
 				<?php
@@ -492,13 +495,13 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Miscellaneous
+					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Edit summary:</strong><br>
-					<small>Shows change summary in the edit mode.</small>
+                    <label for=""><strong><?php echo $engine->_t('EditSummary');?>:</strong><br>
+					<small><?php echo $engine->_t('EditSummaryInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="edit_summary_on" name="edit_summary" value="1"<?php echo ($engine->db->edit_summary == 1 ? ' checked' : '');?>><label for="edit_summary_on"><?php echo $engine->_t('On');?></label>
@@ -511,8 +514,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Minor edit:</strong><br>
-					<small>Enables minor edit option in the edit mode.</small>
+                    <label for=""><strong><?php echo $engine->_t('MinorEdit');?>:</strong><br>
+					<small><?php echo $engine->_t('MinorEditInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="minor_edit_on" name="minor_edit" value="1"<?php echo ($engine->db->minor_edit ? ' checked' : '');?>><label for="minor_edit_on"><?php echo $engine->_t('On');?></label>
@@ -524,8 +527,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Review:</strong><br>
-					<small>Enables review option in the edit mode.</small>
+                    <label for=""><strong><?php echo $engine->_t('ReviewSettings');?>:</strong><br>
+					<small><?php echo $engine->_t('ReviewSettingsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="review_on" name="review" value="1"<?php echo ($engine->db->review ? ' checked' : '');?>><label for="review_on"><?php echo $engine->_t('On');?></label>
@@ -537,8 +540,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Autosubscribe:</strong><br>
-					<small>Automatically sign a new page in the owner's notice of its changes.</small>
+                    <label for=""><strong><?php echo $engine->_t('Autosubscribe');?>:</strong><br>
+					<small><?php echo $engine->_t('AutosubscribeInfo');?></small></label>				
 				</td>
 				<td>
 					<input type="radio" id="disable_autosubscribe_on" name="disable_autosubscribe" value="0"<?php echo (!$engine->db->disable_autosubscribe ? ' checked' : '');?>><label for="disable_autosubscribe_on"><?php echo $engine->_t('On');?></label>
@@ -550,8 +553,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Allow anonymous publishing:</strong><br>
-					<small>Allow users to published preferably anonymously (to hide the name).</small>
+                    <label for=""><strong><?php echo $engine->_t('PublishAnonymously');?>:</strong><br>
+					<small><?php echo $engine->_t('PublishAnonymouslyInfo');?></small></label>						
 				</td>
 				<td>
 					<input type="radio" id="publish_anonymously_on" name="publish_anonymously" value="1"<?php echo ($engine->db->publish_anonymously ? ' checked' : '');?>><label for="publish_anonymously_on"><?php echo $engine->_t('On');?></label>
@@ -563,8 +566,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_rename_redirect"><strong>When renaming put redirection:</strong><br>
-					<small>By default, propose to redirect the old address pereimenuemoy page.</small></label>
+                    <label for="default_rename_redirect"><strong><?php echo $engine->_t('DefaultRenameRedirect');?>:</strong><br>
+					<small><?php echo $engine->_t('DefaultRenameRedirectInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="checkbox" id="default_rename_redirect" name="default_rename_redirect" value="1"<?php echo ($engine->db->default_rename_redirect ? ' checked' : '');?>>
@@ -575,8 +578,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="store_deleted_pages"><strong>Keep deleted pages:</strong><br>
-					<small>When you delete a page (the comment) put her in a special section where she had some time (below) will be available for viewing and recovery.</small></label>
+                    <label for="store_deleted_pages"><strong><?php echo $engine->_t('StoreDeletedPages');?>:</strong><br>
+					<small><?php echo $engine->_t('StoreDeletedPagesInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="checkbox" id="store_deleted_pages" name="store_deleted_pages" value="1"<?php echo ($engine->db->store_deleted_pages ? ' checked' : '');?>>
@@ -587,8 +590,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="keep_deleted_time"><strong>Storage time of deleted pages:</strong><br>
-					<small>The period in days. It makes sense only if the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).</small></label>
+                    <label for="keep_deleted_time"><strong><?php echo $engine->_t('KeepDeletedTime');?>:</strong><br>
+					<small><?php echo $engine->_t('KeepDeletedTimeInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="keep_deleted_time" name="keep_deleted_time" value="<?php echo (int) $engine->db->keep_deleted_time;?>">
@@ -599,8 +602,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="pages_purge_time"><strong>Storage time of page revisions:</strong><br>
-					<small>Automatically delete the older edition of the number of days. If you enter zero, the old edition will not be removed.</small></label>
+				    <label for="pages_purge_time"><strong><?php echo $engine->_t('PagesPurgeTime');?>:</strong><br>
+					<small><?php echo $engine->_t('PagesPurgeTimeInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="pages_purge_time" name="pages_purge_time" value="<?php echo (int) $engine->db->pages_purge_time;?>">
@@ -611,8 +614,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Enable Referrers:</strong><br>
-					<small>Allows to store and show external referrers.</small>
+				    <label for=""><strong><?php echo $engine->_t('EnableReferrers');?>:</strong><br>
+					<small><?php echo $engine->_t('EnableReferrersInfo');?></small></label>					
 				</td>
 				<td>
 					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ($engine->db->enable_referrers == 1 ? ' checked' : '');?>><label for="enable_referrer_on"><?php echo $engine->_t('On');?></label>
@@ -625,8 +628,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="referrers_purge_time"><strong>Storage time of referrers:</strong><br>
-					<small>Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.</small></label>
+                    <label for="referrers_purge_time"><strong><?php echo $engine->_t('ReferrersPurgeTime');?>:</strong><br>
+					<small><?php echo $engine->_t('ReferrersPurgeTimeInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo (int) $engine->db->referrers_purge_time;?>">
@@ -637,8 +640,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<strong>Enable attachments handler:</strong><br>
-					<small>Allows to show the attachments handler.</small>
+                    <label for=""><strong><?php echo $engine->_t('AttachmentHandler');?>:</strong><br>
+					<small><?php echo $engine->_t('AttachmentsHandlerInfo');?></small></label>	
 				</td>
 				<td>
 					<input type="radio" id="attachments_handler_on" name="attachments_handler" value="1"<?php echo ($engine->db->attachments_handler == 1 ? ' checked' : '');?>><label for="attachments_handler_on"><?php echo $engine->_t('On');?></label>
@@ -651,8 +654,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="noindex"><strong>Block search engines (Search Engine Visibility):</strong><br>
-					<small>Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.</small></label>
+                    <label for="noindex"><strong><?php echo $engine->_t('SearchEngineVisibility');?>:</strong><br>
+					<small><?php echo $engine->_t('SearchEngineVisibilityInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="noindex" name="noindex" value="1"<?php echo ($engine->db->noindex ? ' checked' : '');?>>
