@@ -178,6 +178,22 @@ class Wacko
 		}
 	}
 
+	function get_page_depth($tag)
+	{
+		if (!$tag)
+		{
+			return $this->page['depth'];
+		}
+		else
+		{
+			// determine the page depth
+			$depth_array	= explode('/', $tag);
+			$page_depth		= count($depth_array);
+
+			return $page_depth;
+		}
+	}
+
 	function get_parent_id($tag = '')
 	{
 		if (!$tag)
@@ -1395,6 +1411,11 @@ class Wacko
 
 	function preload_file_links($page_ids)
 	{
+		if (empty($page_ids))
+		{
+			return;
+		}
+
 		$file_ids	=  [];
 
 		// get file links
@@ -1409,27 +1430,35 @@ class Wacko
 			}
 		}
 
-		// cache file data
-		if ($files = $this->db->load_all(
-			"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
-			"FROM " . $this->db->table_prefix . "file " .
-			"WHERE file_id IN ( '" . implode("', '", $file_ids) . "' ) " .
-			"AND deleted <> 1 "
-			, true))
+		if (!empty($file_ids))
 		{
-			foreach ($files as $file)
+			// get and cache file data
+			if ($files = $this->db->load_all(
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
+				"FROM " . $this->db->table_prefix . "file " .
+				"WHERE file_id IN ( '" . implode("', '", $file_ids) . "' ) " .
+				"AND deleted <> 1 "
+				, true))
 			{
-				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+				foreach ($files as $file)
+				{
+					$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+				}
 			}
 		}
 	}
 
 	function preload_links($page_ids, $default = false)
 	{
+		if (empty($page_ids))
+		{
+			return;
+		}
+
 		$pages		= [];
 		$p_ids		= [];
 		$p_ids		= $page_ids;
-		$spages_str	= '';
+		$spages_str	= [];
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
 
@@ -1438,13 +1467,18 @@ class Wacko
 
 		// get page links
 		if ($links = $this->db->load_all(
-			"SELECT to_page_id " .
+			"SELECT to_page_id, to_tag " .
 			"FROM " . $this->db->table_prefix . "page_link " .
 			"WHERE from_page_id IN ( '" . implode("', '", $page_ids) . "' )"))
 		{
 			foreach ($links as $link)
 			{
 				$p_ids[] = $link['to_page_id'];
+
+				if(!$link['to_page_id'])
+				{
+					$pages[] = $link['to_tag'];
+				}
 			}
 		}
 
@@ -1496,24 +1530,24 @@ class Wacko
 			{
 				if ($page != '')
 				{
-					$_spages	= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
-					$spages[]	= $_spages;
-					$spages_str	.= $this->db->q($_spages) . ", ";
+					$supertag		= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
+					$spages[]		= $supertag;
+					$spages_q[]		= $this->db->q($supertag);
 				}
 			}
-
-			$spages_str	= substr($spages_str, 0, strlen($spages_str) - 2);
 		}
 
 		$p_ids		= array_unique($p_ids);
 
+		#if (!empty($p_ids))
+		#{
 		// cache page data
 		if ($links = $this->db->load_all(
 			"SELECT " . $this->page_meta . " " .
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE page_id IN ( '" . implode("', '", $p_ids) . "' ) " .
 				($default
-					? "OR supertag IN (" . $spages_str . ")"
+					? "OR supertag IN ( " . implode(", ", $spages_q) . " ) "
 					: "")
 			, true))
 		{
@@ -1526,6 +1560,7 @@ class Wacko
 			}
 		}
 
+		// check for wanted pages
 		$notexists = @array_values(@array_diff($spages, $exists));
 
 		foreach ((array) $notexists as $notexist)
@@ -1654,7 +1689,7 @@ class Wacko
 	function load_pages_linking_to($to_tag, $tag = '')
 	{
 		return $this->db->load_all(
-			"SELECT p.page_id, p.tag AS tag, p.title " .
+			"SELECT p.page_id, p.tag, p.title " .
 			"FROM " . $this->db->table_prefix . "page_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) " .
 			"WHERE " . ($tag
@@ -1856,6 +1891,11 @@ class Wacko
 	 */
 	function preload_categories($object_ids, $type_id = OBJECT_PAGE, $cache = true)
 	{
+		if (empty($object_ids))
+		{
+			return;
+		}
+
 		$cache_ids = [];
 
 		if ($categories = $this->db->load_all(
@@ -2122,9 +2162,8 @@ class Wacko
 				}
 				else
 				{
-					// determine the depth
-					$depth_array	= explode('/', $tag);
-					$depth			= count($depth_array);
+					// determine the page depth
+					$depth = $this->get_page_depth($tag);
 
 					// determine the page_id of the parent page
 					$parent_id	= $this->get_parent_id($tag);
@@ -3886,7 +3925,7 @@ class Wacko
 			$untag			= $unwtag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/i';
-			$ptag			= $this->translit($unwtag);
+			$ptag			= $this->translit($unwtag); // TODO: multilingual & donotload
 			$handler		= null;
 
 			if (preg_match( $regex_handlers, '/' . $ptag . '/', $match ))
@@ -4488,7 +4527,10 @@ class Wacko
 
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->table_prefix . "page_link " .
-					"(from_page_id, to_page_id, to_tag, to_supertag) " .
+					"(	from_page_id,
+						to_page_id,
+						to_tag,
+						to_supertag) " .
 				"VALUES " . rtrim($query, ','));
 		}
 
@@ -4505,7 +4547,8 @@ class Wacko
 
 			foreach ($file_table as $file_id => $dummy) // index == value, BTW
 			{
-				$query .= "(" . (int) $from_page_id . ", " . (int) $file_id . "),";
+				$query .= "(	" . (int) $from_page_id . ",
+								" . (int) $file_id . "),";
 			}
 
 			$this->db->sql_query(
@@ -5619,6 +5662,11 @@ class Wacko
 	 */
 	function preload_acl($page_ids, $privilege = 'read')
 	{
+		if (empty($page_ids))
+		{
+			return;
+		}
+
 		$default_privileges	= ['read', 'write', 'create', 'upload', 'comment'];
 
 		if (! in_array($privilege, $default_privileges))
@@ -6985,9 +7033,11 @@ class Wacko
 			$new_supertag = $this->translit($new_tag);
 		}
 
-		// determine the depth
-		$_depth_array	= explode('/', $new_tag);
-		$new_depth		= count($_depth_array);
+		// determine the page depth
+		$new_depth = $this->get_page_depth($new_tag);
+
+		// determine the page_id of the parent page
+		$parent_id	= $this->get_parent_id($new_tag);
 
 		return
 			$this->db->sql_query(
@@ -7000,7 +7050,8 @@ class Wacko
 				"UPDATE " . $this->db->table_prefix . "page  SET " .
 					"tag		= " . $this->db->q($new_tag) . ", " .
 					"supertag	= " . $this->db->q($new_supertag) . ", " .
-					"depth		= " . $this->db->q($new_depth) . " " .
+					"parent_id	= " . (int) $parent_id . ", " .
+					"depth		= " . (int) $new_depth . " " .
 				"WHERE tag		= " . $this->db->q($tag) . " ");
 	}
 
