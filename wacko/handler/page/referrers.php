@@ -12,32 +12,7 @@ $show_backlinks = function ()
 	echo '<strong>' . $this->_t('ReferringPages') . ":</strong><br><br>\n";
 
 	// show backlinks
-	if (($pages = $this->load_pages_linking_to($this->tag)))
-	{
-		echo "<ol>\n";
-
-		$anchor = $this->translit($this->tag);
-
-		foreach ($pages as $page)
-		{
-			if ($page['tag'])
-			{
-				if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
-				{
-					// cache page_id for for has_access validation in link function
-					$this->page_id_cache[$page['tag']] = $page['page_id'];
-
-					echo '<li>' . $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['tag'], $page['title']) . "</li>\n";
-				}
-			}
-		}
-
-		echo "</ol>\n";
-	}
-	else
-	{
-		echo $this->_t('NoReferringPages');
-	}
+	echo $this->action('backlinks', ['nomark' => 1]);
 
 	echo '<p></p>';
 };
@@ -264,7 +239,7 @@ if ($mode == 'perpage')
 				 '<ul class="lined">' . "\n";
 
 			// filter referrers for page
-			$ref_perpage = array_filter($referrers2, function ($var)
+			$ref_perpage = array_filter($referrers2, function ($var) use ($referrer)
 			{
 				return ($var['page_id'] == $referrer['page_id']);
 			});
