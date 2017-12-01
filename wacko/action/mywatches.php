@@ -38,7 +38,7 @@ if ($user_id = $this->get_user_id())
 	}
 
 	// print tabs
-	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list'], $mod_selector);
+	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => htmlspecialchars(@$_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list'], $mod_selector);
 
 	$prefix		= $this->db->table_prefix;
 
@@ -92,7 +92,7 @@ if ($user_id = $this->get_user_id())
 						$current_char = $first_char;
 					}
 
-					echo '<a href="' . $this->href('', '', $profile + $p + ['mode' => 'mywatches', 'unwatched' => 1, 'setwatch' => $page['page_id'], '#' => 'list']) . '" class="watch-on">' .
+					echo '<a href="' . $this->href('', '', $profile + $p + ['mode' => 'mywatches', 's' => 'unwatched', 'setwatch' => $page['page_id'], '#' => 'list']) . '" class="watch-on">' .
 						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('SetWatch') . '" alt="' . $this->_t('SetWatch') . '" >' . '</a> ' . $this->compose_link_to_page($page['pagetag'], '', '', 0) . "<br>\n";
 				}
 			}

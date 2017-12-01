@@ -20,6 +20,7 @@ class Wacko
 	var $supertag;
 	var $forum					= false;
 	var $categories;
+	var $watch					= [];
 	var $is_watched				= false;
 	var $hide_revisions			= false;
 	var $_acl					= [];
@@ -2896,7 +2897,7 @@ class Wacko
 			$page = $this->db->load_single(
 				"SELECT revision_id " .
 				"FROM " . $this->db->table_prefix . "revision " .
-				"WHERE tag = " . $this->db->q($tag) . " " .
+				"WHERE page_id = " . (int) $page_id . " " .
 				"ORDER BY modified DESC " .
 				"LIMIT 1");
 
@@ -2958,11 +2959,7 @@ class Wacko
 						// ...and add one if so
 						if (!$watcher['pending'])
 						{
-							$this->db->sql_query(
-								"UPDATE " . $this->db->table_prefix . "watch SET " .
-									"pending	= 1 " .
-								"WHERE page_id = " . (int) $comment_on_id . " " .
-									"AND user_id = " . (int) $watcher['user_id'] . "");
+							$this->set_watch_pending($watcher['user_id'], $comment_on_id);
 						}
 						else
 						{
@@ -6061,7 +6058,7 @@ class Wacko
 	function is_watched($user_id, $page_id)
 	{
 		return $this->db->load_single(
-			"SELECT watch_id " .
+			"SELECT watch_id, comment_id, pending " .
 			"FROM " . $this->db->table_prefix . "watch " .
 			"WHERE user_id		= " . (int) $user_id . " " .
 				"AND page_id	= " . (int) $page_id . " " .
@@ -6089,6 +6086,24 @@ class Wacko
 			"DELETE FROM " . $this->db->table_prefix . "watch " .
 			"WHERE user_id		= " . (int) $user_id . " " .
 				"AND page_id	= " . (int) $page_id . "");
+	}
+
+	function clear_watch_pending($user_id, $page_id)
+	{
+		return $this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "watch SET " .
+				"pending = 0 " .
+			"WHERE page_id = " . (int) $page_id . " " .
+				"AND user_id = " . (int) $user_id . "");
+	}
+
+	function set_watch_pending($user_id, $page_id)
+	{
+		return $this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "watch SET " .
+				"pending	= 1 " .
+			"WHERE page_id = " . (int) $page_id . " " .
+				"AND user_id = " . (int) $user_id . "");
 	}
 
 	// REVIEW
@@ -6714,11 +6729,18 @@ class Wacko
 			header('Last-Modified: ' . Ut::http_date(strtotime($this->page['modified']) + 120));
 		}
 
+		$this->watch = $this->is_watched($user['user_id'], $this->page['page_id']);
+
 		// check page watching
-		$this->is_watched = ($user && $this->page && $this->is_watched($user['user_id'], $this->page['page_id']));
+		$this->is_watched =
+			($user
+			&& $this->page
+			&& $this->watch['watch_id']);
 
 		// check revision hideing (1 - guests, 2 - registered users)
-		$this->hide_revisions = ($this->page && !$this->is_admin()
+		$this->hide_revisions =
+			($this->page
+			&& !$this->is_admin()
 			&& (($this->db->hide_revisions == 1 && !$this->get_user())
 				|| ($this->db->hide_revisions == 2 && !$this->is_owner())));
 

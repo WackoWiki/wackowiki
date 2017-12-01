@@ -118,13 +118,9 @@ if ($this->has_access('read'))
 		$noid_protect	= $this->get_user_setting('noid_protect');
 
 		// clear new edits for watched page
-		if ($user && $this->page['latest'] != 0 && !$noid_protect)
+		if ($user && $this->page['latest'] != 0 && $this->watch['pending'] && !$noid_protect)
 		{
-			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "watch SET " .
-					"pending = 0 " .
-				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
-					"AND user_id = " . (int) $user['user_id'] . "");
+			$this->clear_watch_pending($user['user_id'], $this->page['page_id']);
 		}
 
 		$this->set_language($this->page_lang);

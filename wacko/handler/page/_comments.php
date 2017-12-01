@@ -77,11 +77,11 @@ if ($this->has_access('read'))
 		$noid_protect	= $this->get_user_setting('noid_protect');
 
 		// clear new comments for watched page
-		if ($user && $comments && !$noid_protect)
+		if ($user && $comments && $this->watch['comment_id'] && !$noid_protect)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "watch " .
-				"SET comment_id = 0 " .
+				"UPDATE " . $this->db->table_prefix . "watch SET " .
+					"comment_id = 0 " .
 				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 					"AND user_id = " . (int) $user['user_id'] . "");
 		}
