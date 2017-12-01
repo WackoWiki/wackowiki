@@ -458,7 +458,7 @@ function admin_db_restore(&$engine, &$module)
 
 				#Ut::debug_print_r($logs);
 
-				if (is_array($logs))
+				if (!empty($logs))
 				{
 					echo $control_buttons;
 	?>

@@ -32,7 +32,7 @@ if (!function_exists('load_user_menu'))
 				"LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
 			"WHERE m.user_id = " . (int) $user_id . " " .
 				($lang
-					? "AND m.menu_lang =  " . $this->db->q($lang) . " "
+					? "AND m.menu_lang =  " . $engine->db->q($lang) . " "
 					: "") .
 			"ORDER BY m.menu_position", false);
 

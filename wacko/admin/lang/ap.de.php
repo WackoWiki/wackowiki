@@ -408,7 +408,7 @@ $ap_translation = [
 	'XmlSiteMap'				=> 'XML-Sitemap',
 	'XmlSiteMapInfo'			=> 'Diese Funktion synchronisiert die XML-Sitemap mit dem aktuellen Zustand der Datenbank.',
 	'WikiLinks'					=> 'Wiki-Links',
-	'WikiLinksInfo'				=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code> page_link </ code> und <code> file_link </ code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
+	'WikiLinksInfo'				=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code> page_link </code> und <code> file_link </code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',
@@ -506,7 +506,7 @@ $ap_translation = [
 									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. '.
 									'Um eine vollständige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br>' .
-									'Die Sicherungspaketdateien wurden im %1 benannten Unterverzeichnis unter <code>files/backup</code> abgelegt.<br>' .
+									'Die Sicherungspaketdateien wurden im Unterverzeichnis %1 abgelegt.<br>' .
 									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
