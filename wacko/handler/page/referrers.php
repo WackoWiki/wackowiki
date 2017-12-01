@@ -30,15 +30,16 @@ if (
 }
 
 // set up for main show
-$url_maxlen = 80;
-$spacer		= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;';
-$modes		= [
-				''			=> 'ViewReferrersPage',
-				'perpage'	=> 'ViewReferrersPerPage',
-				'bytime'	=> 'ViewReferrersByTime',
-				'global'	=> 'ViewReferrersGlobal'
-			];
-$mode		= @$_GET['o'];
+$url_maxlen		= 80;
+$spacer			= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;';
+$mod_selector	= 'o';
+$modes			= [
+					''			=> 'ViewReferrersPage',
+					'perpage'	=> 'ViewReferrersPerPage',
+					'bytime'	=> 'ViewReferrersByTime',
+					'global'	=> 'ViewReferrersGlobal'
+				];
+$mode			= @$_GET[$mod_selector];
 
 if (!array_key_exists($mode, $modes))
 {
@@ -107,7 +108,7 @@ echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ';
 
 foreach ($modes as $i => $text)
 {
-	if ($mode == $i)
+	if ($tabs == $i)
 	{
 		echo $this->_t($text);
 	}
@@ -116,31 +117,7 @@ foreach ($modes as $i => $text)
 echo "</h3>\n";
 
 // print navigation
-// TODO: use $this->tab_menu() fuction
-echo '<ul class="menu">';
-
-foreach ($modes as $i => $text)
-{
-	if ($mode != $i)
-	{
-		echo '<li><a href="' . $this->href('referrers', '', ($i? ['o' => $i] : '')) . '">';
-	}
-	else
-	{
-		echo '<li class="active">';
-	}
-
-	echo $this->_t($text);
-
-	if ($mode != $i)
-	{
-		echo '</a>';
-	}
-
-	echo '</li>';
-}
-
-echo "</ul><br><br>\n";
+echo $this->tab_menu($modes, $mode, 'referrers', ['#' => 'list'], $mod_selector);
 
 // in default mode we show intra-wiki backlinks before external referrers
 if (!$mode)
