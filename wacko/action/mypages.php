@@ -13,7 +13,8 @@ if (!isset($max))		$max = null;
 if (!isset($bychange))	$bychange = '';
 $cur_char		= '';
 
-$profile = ($profile? ['profile' => $profile] : []);
+$profile		= ($profile? ['profile' => $profile] : []);
+$profile_mode	= htmlspecialchars(@$_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 $mod_selector	= 's';
 
 $by = function ($by) use ($profile, $mod_selector)
@@ -40,7 +41,7 @@ if (!array_key_exists($mode, $tabs))
 if (($user_id = $this->get_user_id()))
 {
 	// print navigation
-	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => htmlspecialchars($_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET), '#' => 'list'], $mod_selector);
+	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mod_selector);
 
 	$prefix		= $this->db->table_prefix;
 
