@@ -7,58 +7,46 @@ if (!defined('IN_WACKO'))
 
 if ($this->get_user_name())
 {
-	$output1 = #'<h3>' . $this->_t('UserPages') . "</h3>" .
-				'<ul class="menu" id="list">' . "\n";
-	$output2 = '<li><a href="' . $this->href('', '', ['mode' => 'mypages']) . '#list">' . $this->_t('ListMyPages') . "</a></li>\n";
-	$output3 = '<li><a href="' . $this->href('', '', ['mode' => 'mychanges']) . '#list">' . $this->_t('ListMyChanges') . "</a></li>\n";
-	$output4 = '<li><a href="' . $this->href('', '', ['mode' => 'mywatches']) . '#list">' . $this->_t('ListMyWatches') . "</a></li>";
-	$output5 = '<li><a href="' . $this->href('', '', ['mode' => 'mychangeswatches']) . '#list">' . $this->_t('ListMyChangesWatches') . "</a></li>\n";
-	$output6 = "</ul>\n";
+	#'mode' => htmlspecialchars(@$_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)
+	$mode_selector	= 'mode';
+	$mode			= @$_GET[$mode_selector];
 
-	if (isset($_GET['mode']) && $_GET['mode'] == 'mypages')
+	// navigation
+	$tabs	= [
+		''					=> 'UsersPages',
+		'mychanges'			=> 'UsersChanges',
+		'mywatches'			=> 'UsersSubscription',
+		'mychangeswatches'	=> 'UsersWatches',
+	];
+
+	if (!array_key_exists($mode, $tabs))
 	{
-		echo	$output1 .
-				'<li class="active">' . $this->_t('ListMyPages') . "</a></li>\n". #$output2 .
-				$output3 .
-				$output4 .
-				$output5 .
-				$output6;
-		echo	'<h3>' . $this->_t('ListMyPages') . "</h3>";
-		echo	$this->action('mypages');
+		$mode = '';
 	}
-	else if (isset($_GET['mode']) && $_GET['mode'] == 'mywatches')
-	{
-		echo	$output1 .
-				$output2 .
-				$output3 .
-				'<li class="active">' . $this->_t('ListMyWatches') . "</a></li>\n". #$output4 .
-				$output5 .
-				$output6;
-		echo	'<h3>' . $this->_t('ListMyWatches') . "</h3>";
-		echo	$this->action('mywatches');
-	}
-	else if (!isset($_GET['mode']) || $_GET['mode'] == 'mychangeswatches')
-	{
-		echo	$output1 .
-				$output2 .
-				$output3 .
-				$output4 .
-				'<li class="active">' . $this->_t('ListMyChangesWatches') . "</a></li>\n". #$output5 .
-				$output6;
-		echo	'<h3>' . $this->_t('ListMyChangesWatches') . "</h3>";
-		echo	$this->action('mychangeswatches');
-	}
-	else if (isset($_GET['mode']) && $_GET['mode'] == 'mychanges')
-	{
-		echo	$output1 .
-				$output2 .
-				'<li class="active">' . $this->_t('ListMyChanges') . "</a></li>\n". #$output3 .
-				$output4 .
-				$output5 .
-				$output6;
-		echo	'<h3>' . $this->_t('ListMyChanges') . "</h3>";
-		echo	$this->action('mychanges');
-	}
+
+	echo $this->tab_menu($tabs, $mode, '', [], $mode_selector);
+
+	// [0] - tab heading
+	// [1] - action
+	$action = [
+		''					=>	['ListMyPages',
+								'mypages'
+		],
+		'mychanges'			=>	['ListMyChanges',
+								'mychanges'
+		],
+		'mywatches'			=>	['ListMyWatches',
+								'mywatches'
+		],
+		'mychangeswatches'	=>	['ListMyChangesWatches',
+								'mychangeswatches'
+		],
+	];
+
+	echo '<h3>' . $this->_t($action[$mode][0]) . "</h3>";
+
+	echo $this->action($action[$mode][1]);
+
 }
 else
 {

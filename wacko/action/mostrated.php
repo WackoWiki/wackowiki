@@ -24,7 +24,7 @@ if (isset($top))
 		"WHERE p.page_id = r.page_id AND r.voters >= $min AND r.value > 0 " .
 		"GROUP BY p.tag " .
 		"ORDER BY ratio DESC, votes DESC " .
-		"LIMIT " . (int) $top);
+		"LIMIT " . (int) $top, true);
 
 	echo '<div class="layout-box"><p><span>' . $this->_t('RatingTopPages') . ":</span></p>\n";
 
@@ -60,7 +60,7 @@ if (isset($bottom))
 		"WHERE p.page_id = r.page_id AND r.voters >= $min AND r.value < 0 " .
 		"GROUP BY p.tag " .
 		"ORDER BY ratio DESC, votes DESC " .
-		"LIMIT " . (int) $bottom);
+		"LIMIT " . (int) $bottom, true);
 
 	echo '<div class="layout-box"><p><span>' . $this->_t('RatingBottomPages') . ":</span></p>\n";
 

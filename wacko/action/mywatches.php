@@ -13,16 +13,16 @@ if ($user_id = $this->get_user_id())
 
 	$profile		= ($profile? ['profile' => $profile] : []);
 	$profile_mode	= htmlspecialchars(@$_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
-	$mod_selector	= 's';
-
+	$mode_selector	= 's';
+	$mode			= @$_GET[$mode_selector];
 	$p				= isset($_GET['p']) ? ['p' => (int) $_GET['p']] : [];
+	$prefix			= $this->db->table_prefix;
 
 	// navigation
 	$tabs	= [
 				''			=> 'ViewWatchedPages',
 				'unwatched'	=> 'ViewUnwatchedPages',
 			];
-	$mode	= @$_GET[$mod_selector];
 
 	if (!array_key_exists($mode, $tabs))
 	{
@@ -38,15 +38,13 @@ if ($user_id = $this->get_user_id())
 		$this->set_watch($user_id, (int) $_GET['setwatch']);
 	}
 
-	$prefix		= $this->db->table_prefix;
-
 	if ($mode == 'unwatched')
 	{
 		$info			= $this->_t('UnwatchedPages');
 		$none			= $this->_t('NoUnwatchedPages');
 
 		$action_mode	= 'setwatch';
-		$tab_mode		= [$mod_selector => 'unwatched'];
+		$tab_mode		= [$mode_selector => 'unwatched'];
 
 		$icon_text		= $this->_t('SetWatch');
 		$icon_class		= 'watch-on';
@@ -95,7 +93,7 @@ if ($user_id = $this->get_user_id())
 	}
 
 	// print tabs
-	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mod_selector);
+	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mode_selector);
 	echo $info . '<br><br>';
 
 	$count		= $this->db->load_single($sql_count, true);
