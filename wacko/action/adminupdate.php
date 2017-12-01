@@ -49,7 +49,7 @@ if ($this->is_admin())
 					if ($this->known_language($lang))
 					{
 						$this->load_translation($lang);
-						$this->set_translation ($lang);
+						$this->set_translation($lang);
 						$this->set_page_lang($lang);
 						// tag to title
 						$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));

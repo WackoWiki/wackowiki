@@ -393,7 +393,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// show files only for registered users
 			if ($logged_in)
 			{
-				if ($this->db->upload == 1 || $this->is_admin())
+				if ($this->db->attachments_handler == 2 || $this->db->upload == 1 || $this->is_admin())
 				{
 					$tpl->u_prof_up_u_n = $user['total_uploads'];
 

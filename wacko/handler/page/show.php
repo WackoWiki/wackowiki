@@ -172,7 +172,7 @@ else
 	$message = $this->_t('ReadAccessDenied');
 	$this->show_message($message, 'info');
 
-// TODO: test, seems broken
+	// TODO: test, seems broken
 	if ($this->has_access('read', '', GUEST) === false)
 	{
 		$message = $this->_t('ReadAccessDeniedHintGuest');

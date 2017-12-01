@@ -108,7 +108,7 @@ echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ';
 
 foreach ($modes as $i => $text)
 {
-	if ($tabs == $i)
+	if ($mode == $i)
 	{
 		echo $this->_t($text);
 	}
@@ -117,7 +117,7 @@ foreach ($modes as $i => $text)
 echo "</h3>\n";
 
 // print navigation
-echo $this->tab_menu($modes, $mode, 'referrers', ['#' => 'list'], $mod_selector);
+echo $this->tab_menu($modes, $mode, 'referrers', [], $mod_selector);
 
 // in default mode we show intra-wiki backlinks before external referrers
 if (!$mode)
