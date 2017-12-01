@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 Random Page Action
 
  {{randompage
-  [page="PageName"] // page name to start from in the page hierarchy
+  [page="PageName"]		// page name to start from in the page hierarchy
   [test]				// show, don't redirect
  }}
  */
@@ -24,11 +24,10 @@ $query = // "SELECT p.supertag " .
 				: ""
 			) .
 			"AND p.comment_on_id = 0 " .
-			"AND p.page_id <> '{$this->page['page_id']}' " .
+			"AND p.page_id <> { (int) $this->page['page_id']} " .
 			"AND a.privilege = 'read' " .
 			"AND a.list = '*' " .
-			"AND p.page_id = a.`page_id` ";
-			// "AND p.body != '{{randompage}}' ". // very expensive
+			"AND p.page_id = a.page_id ";
 
 $count = $this->db->load_single(
 		"SELECT COUNT(p.supertag) AS n " .

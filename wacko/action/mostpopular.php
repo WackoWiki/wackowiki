@@ -8,14 +8,14 @@ if (!defined('IN_WACKO'))
 /*
  Most Popular Pages Action
 
- All arguments are optional, the "dontrecurse" argument is only used when the "for" argument is used and even then it's still optional
+ All arguments are optional, the "dontrecurse" argument is only used when the "page" argument is used and even then it's still optional
 
  {{mostpopular
 	[max=50] // maximum number of pages to retrieve
-	[for|page="PageName"] // page name to start from in the page hierarchy
+	[page="PageName"] // page name to start from in the page hierarchy
 	[title=1] // shows the page title
 	[nomark=1] // makes it possible to hide frame around
-	[dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "for" page
+	[dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "page" cluster
  }}
  */
 
@@ -23,10 +23,10 @@ if (!isset($for))			$for = ''; // depreciated
 if ($for)					$page = $for;
 
 if (!isset($page))			$page = '';
-if (!isset($nomark))		$nomark = '';
-if (!isset($max))			$max = '';
+if (!isset($nomark))		$nomark = 0;
+if (!isset($max))			$max = null;
 if (!isset($legend))		$legend = '';
-if (!isset($title))			$title = '';
+if (!isset($title))			$title = 0;
 if (!isset($dontrecurse))	$dontrecurse = false;
 
 if (!$max)				$max = 25;
@@ -46,62 +46,78 @@ else
 	$ppage		= '';
 }
 
-if (!$nomark)
-{
-	echo '<div class="layout-box"><p><span>' . $this->_t('MostPopularPages') . ": " . $this->link($ppage, '', $legend) . "</span></p>\n";
-}
-
 if (!$page)
 {
-	$pages = $this->db->load_all(
+	$selector =
+		"FROM " . $this->db->table_prefix . "page ";
+
+	$sql_count	=
+		"SELECT COUNT(page_id) AS n " .
+		$selector;
+
+	$sql	=
 		"SELECT page_id, tag, title, hits " .
-		"FROM " . $this->db->table_prefix . "page " .
-		"ORDER BY hits DESC " .
-		"LIMIT {$max}");
+		$selector .
+		"ORDER BY hits DESC ";
 }
 else
 {
 	$page = $this->unwrap_link($page);
 
-	if (!$dontrecurse || strtolower($dontrecurse) == 'false')
-	{
-		// We want to recurse and include all the sub pages of sub pages (and so on) in the listing
-		$pages = $this->db->load_all(
-			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits " .
-			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
-				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
-				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-			"WHERE a.tag <> " . $this->db->q($page) . " " .
-				"AND a.tag = c.tag " .
-				"AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 " .
-				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
-			"ORDER BY a.hits DESC " .
-			"LIMIT {$max}");
-	}
-	else
-	{
-		// The only pages we want to display are those directly under the selected page, not their kids and grandkids
-		$pages = $this->db->load_all(
-			"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits " .
-			"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
-				"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
-				"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-			"WHERE a.tag <> " . $this->db->q($page) . " " .
-				"AND a.tag = c.tag " .
-				"AND b.tag = " . $this->db->q($page) . " " .
-				"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
-			"ORDER BY a.hits DESC " .
-			"LIMIT {$max}");
-	}
+	// $recurse
+	//	true	- recurses and includes all the sub pages of sub pages (and so on) in the listing
+	//	false	- display only pages directly under the selected page, not their kids and grandkids
+	(!$dontrecurse || strtolower($dontrecurse) == 'false')
+		? $recurse = true
+		: $recurse = false;
+
+	$selector =
+		"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
+			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
+			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
+		"WHERE a.tag <> " . $this->db->q($page) . " " .
+			"AND a.tag = c.tag " .
+			($recurse
+				? "AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 "
+				: "AND b.tag = " . $this->db->q($page) . " ") .
+			"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 ";
+
+	$sql_count	=
+		"SELECT COUNT(DISTINCT a.page_id) AS n " .
+		$selector;
+
+	$sql	=
+		"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits " .
+		$selector .
+		"ORDER BY a.hits DESC ";
 }
 
-$num = 0;
+$count		= $this->db->load_single($sql_count, true);
+$pagination	= $this->pagination($count['n'], $max, 'm', []);
+$pages		= $this->db->load_all($sql . $pagination['limit'], true);
 
-echo "<table>";
+$num		= $pagination['offset'] ; // + 1
 
-foreach ($pages as $page)
+if (!empty($pages))
 {
-	if ($num < $max)
+	foreach ($pages as $page)
+	{
+		$page_ids[] = (int) $page['page_id'];
+		// cache page_id for for has_access validation in link function
+		$this->page_id_cache[$page['tag']] = $page['page_id'];
+	}
+
+	// cache acls
+	$this->preload_acl($page_ids);
+
+	if (!$nomark)
+	{
+		echo '<div class="layout-box"><p><span>' . $this->_t('MostPopularPages') . ": " . $this->link($ppage, '', $legend) . "</span></p>\n";
+	}
+
+	echo '<table class="">' . "\n";
+
+	foreach ($pages as $page)
 	{
 		if ($this->db->hide_locked)
 		{
@@ -126,18 +142,20 @@ foreach ($pages as $page)
 				$_link = $this->link('/' . $page['tag'], '', $page['tag']);
 			}
 
-			echo "<tr><td>&nbsp;&nbsp;" . $num.".&nbsp;" . $_link . "</td><td>" .
-				"</td><td>" .
+			echo "<tr><td>&nbsp;&nbsp;" . $num . ".</td><td>" . $_link . "</td>" .
+				"<td>&nbsp;&nbsp;</td><td>" .
 				number_format($page['hits'], 0, ',', '.') . "</td></tr>\n";
 		}
 	}
-}
 
-echo "</table>\n";
+	echo "</table>\n";
 
-if (!$nomark)
-{
-	echo "</div>\n";
+	$this->print_pagination($pagination);
+
+	if (!$nomark)
+	{
+		echo "</div>\n";
+	}
 }
 
 ?>
