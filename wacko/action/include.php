@@ -105,7 +105,7 @@ else
 			&& ($nomark != 1)
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
-			echo "\n" . $edit_link . "</section>\n";
+			echo "\n" . $edit_link . "\n</section>\n";
 		}
 	}
 }

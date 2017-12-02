@@ -83,7 +83,7 @@ $sql = "SELECT
 			($owner
 				? "INNER JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) "
 				: '' ) .
-		"WHERE c.category_lang = '{$lang}' " .
+		"WHERE c.category_lang = " . $this->db->q($lang) . " " .
 			"AND ca.object_type_id = 1 " .
 			"AND p.deleted <> 1 " .
 			($root

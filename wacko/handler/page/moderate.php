@@ -1158,7 +1158,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make counter query
 		$sql = "SELECT COUNT(page_id) AS n " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id = '{$this->page['page_id']}' " .
+			"WHERE comment_on_id = " . (int) $this->page['page_id'] . " " .
 			"LIMIT 1";
 
 		// count posts and make pagination
@@ -1170,7 +1170,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-			"WHERE comment_on_id = '{$this->page['page_id']}' " .
+			"WHERE comment_on_id = " . (int) $this->page['page_id'] . " " .
 				"AND p.deleted <> 1 " .
 			"ORDER BY created ASC " .
 			$pagination['limit'];
