@@ -329,7 +329,7 @@ class Wacko
 				"SELECT SUM(file_size) AS used_quota " .
 				"FROM " . $this->db->table_prefix . "file " .
 					($user_id
-						? "WHERE user_id = '{$user_id}' "
+						? "WHERE user_id = " . (int) $user_id . " "
 						: "") .
 				"LIMIT 1");
 
@@ -3239,13 +3239,14 @@ class Wacko
 	/**
 	* Returns the full URL for a page/method, including any additional URL-parameters and anchor
 	*
-	* @param string $method Optional Wacko method (default 'show' method added in run() function)
-	* @param string $tag Optional tag. Returns current-page tag if empty
-	* @param mixed $params Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
-	* @param boolean $addpage Optional
-	* @param string $anchor Optional HTTP anchor-fragment
-	* @param boolean $alter Optional uses slim_url and translit (turn off for e.g. addpage or hashid routing)
-	* @return string HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
+	* @param string $method		Optional Wacko method (default 'show' method added in run() function)
+	* @param string $tag		Optional tag. Returns current-page tag if empty
+	* @param mixed $params		Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
+	* @param boolean $addpage	Optional
+	* @param string $anchor		Optional HTTP anchor-fragment
+	* @param boolean $alter		Optional uses slim_url and translit (turn off for e.g. addpage or hashid routing)
+	*
+	* @return string			HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
 	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true)
 	{
