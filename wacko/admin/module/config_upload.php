@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Upload settings                                  ##
-########################################################
+##########################################################
+##	Upload settings										##
+##########################################################
 $_mode = 'config_upload';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Attachment settings
 	];
 
-########################################################
+##########################################################
 
 function admin_config_upload(&$engine, &$module)
 {
@@ -48,8 +48,8 @@ function admin_config_upload(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, 'Updated upload settings');
-		$engine->set_message('Updated upload settings', 'success');
+		$engine->log(1, $engine->_t('UploadSettingsUpdated'));
+		$engine->set_message($engine->_t('UploadSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -69,8 +69,8 @@ function admin_config_upload(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="upload"><strong>Right to the upload files:</strong><br>
-					<small><code>'admins'</code> means that only users belongig to admins group can upload the files. <code>'1'</code> means that uploading is opened to registered users. <code>'0'</code> means that upload disabled</small></label>
+					<label for="upload"><strong><?php echo $engine->_t('RightToUpload');?>:</strong><br>
+					<small><?php echo $engine->_t('RightToUploadInfo');?></small></label>
 				</td>
 				<td>
 					<select id="upload" name="upload">
@@ -85,8 +85,8 @@ function admin_config_upload(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="upload_images_only"><strong>Allow only upload of images:</strong><br>
-					<small>Allow only uploading of image files on the page.</small></label>
+					<label for="upload_images_only"><strong><?php echo $engine->_t('UploadOnlyImages');?>:</strong><br>
+					<small><?php echo $engine->_t('UploadOnlyImagesInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="upload_images_only" name="upload_images_only" value="1"<?php echo ($engine->db->upload_images_only ? ' checked' : '');?>>

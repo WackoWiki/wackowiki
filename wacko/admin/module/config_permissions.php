@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Permissions settings                             ##
-########################################################
+##########################################################
+##	Permissions settings								##
+##########################################################
 $_mode = 'config_permissions';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Permissions settings
 	];
 
-########################################################
+##########################################################
 
 function admin_config_permissions(&$engine, &$module)
 {
@@ -27,7 +27,7 @@ function admin_config_permissions(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
 	<p>
-		Parameters responsible for Access control and permissions.
+		<?php echo $engine->_t('PermissionsSettingsInfo');?>
 	</p>
 	<br>
 <?php
@@ -49,8 +49,8 @@ function admin_config_permissions(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!Updated security settings!!');
-		$engine->set_message('Updated security settings', 'success');
+		$engine->log(1, '!!' . $engine->_t('PermissionsSettingsUpdated') . '!!');
+		$engine->set_message($engine->_t('PermissionsSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -65,13 +65,13 @@ function admin_config_permissions(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Rights and privileges
+					<?php echo $engine->_t('PermissionsSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_read_acl"><strong>Read rights by default:</strong><br>
-					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label>
+					<label for="default_read_acl"><strong><?php echo $engine->_t('ReadRights');?>:</strong><br>
+					<small><?php echo $engine->_t('ReadRightsInfo');?></small></label>
 				</td>
 				<td>
 					<textarea style="width:200px; height:50px;" id="default_read_acl" name="default_read_acl"><?php echo htmlspecialchars($engine->db->default_read_acl, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
@@ -82,8 +82,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_write_acl"><strong>Write rights by default:</strong><br>
-					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label>
+					<label for="default_write_acl"><strong><?php echo $engine->_t('WriteRights');?>:</strong><br>
+					<small><?php echo $engine->_t('WriteRightsInfo');?></small></label>
 				</td>
 				<td>
 					<textarea style="width:200px; height:50px;" id="default_write_acl" name="default_write_acl"><?php echo htmlspecialchars($engine->db->default_write_acl, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
@@ -94,8 +94,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_comment_acl"><strong>Comment rights by default:</strong><br>
-					<small>Typically used for putting the root pages, and pages for which we can not determine the parental rights.</small></label>
+					<label for="default_comment_acl"><strong><?php echo $engine->_t('CommentRights');?>:</strong><br>
+					<small><?php echo $engine->_t('CommentRightsInfo');?></small></label>
 				</td>
 				<td>
 					<textarea style="width:200px; height:50px;" id="default_comment_acl" name="default_comment_acl"><?php echo htmlspecialchars($engine->db->default_comment_acl, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
@@ -106,8 +106,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_create_acl"><strong>Create rights of a sub page by default:</strong><br>
-					<small>Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.</small></label>
+					<label for="default_create_acl"><strong><?php echo $engine->_t('CreateRights');?>:</strong><br>
+					<small><?php echo $engine->_t('CreateRightsInfo');?></small></label>
 				</td>
 				<td>
 					<textarea style="width:200px; height:50px;" id="default_create_acl" name="default_create_acl"><?php echo htmlspecialchars($engine->db->default_create_acl, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
@@ -118,8 +118,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="default_upload_acl"><strong>Upload rights by default:</strong><br>
-					<small>Typically used for putting the root pages, and pages for which we can not determine parental rights.</small></label>
+					<label for="default_upload_acl"><strong><?php echo $engine->_t('UploadRights');?>:</strong><br>
+					<small><?php echo $engine->_t('UploadRightsInfo');?></small></label>
 				</td>
 				<td>
 					<textarea style="width:200px; height:50px;" id="default_upload_acl" name="default_upload_acl"><?php echo htmlspecialchars($engine->db->default_upload_acl, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
@@ -130,8 +130,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="rename_globalacl"><strong>Global rename right:</strong><br>
-					<small>List for admission to the possibility of free rename (move) pages.</small></label>
+					<label for="rename_globalacl"><strong><?php echo $engine->_t('RenameRights');?>:</strong><br>
+					<small><?php echo $engine->_t('RenameRightsInfo');?></small></label>
 				</td>
 				<td>
 					<textarea style="width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo htmlspecialchars($engine->db->rename_globalacl, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
@@ -140,14 +140,13 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="hl_setting">
 				<th colspan="2">
 					<br>
-					Miscellaneous
+					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="acl_lock"><strong>Lock all ACL to read only:</strong><br>
-					<small><span class="cite">Overwrites the acl settings for all pages to read only.</span></small><br>
-					This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.</label>
+					<label for="acl_lock"><strong><?php echo $engine->_t('LockAcl');?>:</strong><br>
+					<small><span class="cite"><?php echo $engine->_t('LockAclInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="acl_lock" name="acl_lock" value="1"<?php echo ($engine->db->acl_lock ? ' checked' : '');?>>
@@ -158,8 +157,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="hide_locked"><strong>Hide inaccessible pages:</strong><br>
-					<small>If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).</small></label>
+					<label for="hide_locked"><strong><?php echo $engine->_t('HideLocked');?>:</strong><br>
+					<small><?php echo $engine->_t('HideLockedInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="hide_locked" name="hide_locked" value="1"<?php echo ($engine->db->hide_locked ? ' checked' : '');?>>
@@ -170,8 +169,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="remove_onlyadmins"><strong>Only administrators can delete pages:</strong><br>
-					<small>Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.</small></label>
+					<label for="remove_onlyadmins"><strong><?php echo $engine->_t('RemoveOnlyAdmins');?>:</strong><br>
+					<small><?php echo $engine->_t('RemoveOnlyAdminsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="remove_onlyadmins" name="remove_onlyadmins" value="1"<?php echo ($engine->db->remove_onlyadmins ? ' checked' : '');?>>
@@ -182,8 +181,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="owners_can_remove_comments"><strong>Owners of pages can delete comments:</strong><br>
-					<small>Allow page owners to moderate comments on their pages.</small></label>
+					<label for="owners_can_remove_comments"><strong><?php echo $engine->_t('OwnersRemoveComments');?>:</strong><br>
+					<small><?php echo $engine->_t('OwnersRemoveCommentsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="owners_can_remove_comments" name="owners_can_remove_comments" value="1"<?php echo ($engine->db->owners_can_remove_comments ? ' checked' : '');?>>
@@ -194,8 +193,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="owners_can_change_categories"><strong>Owners can edit page categories:</strong><br>
-					<small>Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.</small></label>
+					<label for="owners_can_change_categories"><strong><?php echo $engine->_t('OwnersEditCategories');?>:</strong><br>
+					<small><?php echo $engine->_t('OwnersEditCategoriesInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ($engine->db->owners_can_change_categories ? ' checked' : '');?>>
@@ -206,8 +205,8 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="moders_can_edit"><strong>Term human moderation:</strong><br>
-					<small>Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).</small></label>
+					<label for="moders_can_edit"><strong><?php echo $engine->_t('TermHumanModeration');?>:</strong><br>
+					<small><?php echo $engine->_t('TermHumanModerationInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="moders_can_edit" name="moders_can_edit" value="<?php echo (int) $engine->db->moders_can_edit;?>">

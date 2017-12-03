@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Data Inconsistencies                             ##
-########################################################
+##########################################################
+##	Data Inconsistencies								##
+##########################################################
 $_mode = 'maint_inconsistencies';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Fixing Data Inconsistencies
 	];
 
-########################################################
+##########################################################
 
 function admin_maint_inconsistencies(&$engine, &$module)
 {

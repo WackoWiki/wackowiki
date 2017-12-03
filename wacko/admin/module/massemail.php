@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Messages settings                                ##
-########################################################
+##########################################################
+##	Messages settings									##
+##########################################################
 $_mode = 'massemail';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Mass email
 	];
 
-########################################################
+##########################################################
 
 function admin_massemail(&$engine, &$module)
 {
@@ -70,8 +70,8 @@ $mail_body = '';
 						ON u.user_id = us.user_id
 			WHERE
 				u.account_type = 0
-					AND (gm.group_id = '{$group_id}'
-						OR u.user_id IN ('{$user_ids}'))",
+					AND (gm.group_id = " . (int) $group_id . "
+						OR u.user_id IN (" . $user_ids . "))",
 				true);
 
 		if ($members)

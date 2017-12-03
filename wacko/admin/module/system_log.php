@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   System Log                                       ##
-########################################################
+##########################################################
+##	System Log											##
+##########################################################
 $_mode = 'system_log';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Log system events
 	];
 
-########################################################
+##########################################################
 
 function admin_system_log(&$engine, &$module)
 {
@@ -32,7 +32,7 @@ function admin_system_log(&$engine, &$module)
 		$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'])));
 	}
 
-	if (isset($_POST['action']) && $_POST['action'] == 'purge_log')
+	if (@$_POST['action'] == 'purge_log')
 	{
 		$sql = "TRUNCATE " . $engine->db->table_prefix . "log";
 		$engine->db->sql_query($sql);
@@ -44,8 +44,8 @@ function admin_system_log(&$engine, &$module)
 
 	if (isset($_POST['update']) || isset($_GET['level_mod']))
 	{
-		$_level_mod	= isset($_POST['level_mod'])	? (int) $_POST['level_mod']	: (isset($_GET['level_mod'])	? (int) $_GET['level_mod'] : '');
-		$_level		= isset($_POST['level'])		? (int) $_POST['level']		: (isset($_GET['level'])		? (int) $_GET['level'] : '');
+		$_level_mod	= (int) ($_POST['level_mod']	?? ($_GET['level_mod']	?? ''));
+		$_level		= (int) ($_POST['level']		?? ($_GET['level']		?? ''));
 
 		// level filtering
 		switch ($_level_mod)
@@ -61,16 +61,22 @@ function admin_system_log(&$engine, &$module)
 				break;
 		}
 
-		$where = "WHERE l.level $mod " . (int) $_level . " ";
+		$where = "WHERE l.level " . $mod . " " . (int) $_level . " ";
 	}
 
+	$_order			= (string)	($_GET['order']		?? '');
+	$_level			= (int)		($_GET['level']		?? ($_POST['level']		?? ''));
+	$_level_mod		= (int)		($_GET['level_mod']	?? ($_POST['level_mod']	?? ''));
+	$_ip			= (string)	($_GET['ip']		?? '');
+	$_user_id		= (int)		($_GET['user_id']	?? '');
+
 	// set time ordering
-	if (isset($_GET['order']) && $_GET['order'] == 'time_asc')
+	if ($_order == 'time_asc')
 	{
 		$order		= 'ORDER BY l.log_time ASC ';
 		$ordertime	= 'time_desc';
 	}
-	else if (isset($_GET['order']) && $_GET['order'] == 'time_desc')
+	else if ($_order == 'time_desc')
 	{
 		$order		= 'ORDER BY l.log_time DESC ';
 		$ordertime	= 'time_asc';
@@ -81,12 +87,12 @@ function admin_system_log(&$engine, &$module)
 	}
 
 	// set level ordering
-	if (isset($_GET['order']) && $_GET['order'] == 'level_asc')
+	if ($_order == 'level_asc')
 	{
 		$order		= 'ORDER BY l.level DESC ';		// we make level sorting
 		$orderlevel	= 'level_desc';					// in reverse orber because
 	}												// higher level is denoted
-	else if (isset($_GET['order']) && $_GET['order'] == 'level_desc')		// by lower value (e.g.
+	else if ($_order == 'level_desc')		// by lower value (e.g.
 	{												// 1 = critical, 2 = highest,
 		$order		= 'ORDER BY l.level ASC ';		// and so on)
 		$orderlevel	= 'level_asc';
@@ -97,13 +103,13 @@ function admin_system_log(&$engine, &$module)
 	}
 
 	// filter by username or user ip
-	if (isset($_GET['user_id']))
+	if ($_user_id)
 	{
-		$where = "WHERE l.user_id = " . (int) $_GET['user_id'] . " ";
+		$where = "WHERE l.user_id = " . (int) $_user_id . " ";
 	}
-	else if (isset($_GET['ip']))
+	else if ($_ip)
 	{
-		$where = "WHERE l.ip = " . $engine->db->q($_GET['ip']) . " ";
+		$where = "WHERE l.ip = " . $engine->db->q($_ip) . " ";
 	}
 
 	// entries to display
@@ -120,11 +126,8 @@ function admin_system_log(&$engine, &$module)
 		"FROM " . $engine->db->table_prefix . "log l " .
 		( $where ? $where : 'WHERE level <= ' . (int) $level . ' ' ));
 
-	$_order					= isset($_GET['order'])		? $_GET['order']		: '';
 	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
-	$_level					= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
 	$level_pagination		= !empty($_level)		? ['level' => (int) $_level] : [];
-	$_level_mod				= isset($_GET['level_mod'])	? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
 	$level_mod_pagination	= !empty($_level_mod)	? ['level_mod' => (int) $_level_mod] : [];
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination + $level_pagination + $level_mod_pagination, '', 'admin.php');
@@ -144,22 +147,35 @@ function admin_system_log(&$engine, &$module)
 			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br>
 			<?php echo $engine->_t('LogLevel'); ?>
 			<select name="level_mod">
-				<option value="1"<?php	echo (!isset($_POST['level_mod']) || (isset($_POST['level_mod']) && $_POST['level_mod'] == 1) ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelNotLower'); ?></option>
-				<option value="2"<?php	echo (isset($_POST['level_mod']) && $_POST['level_mod'] == 2 ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelNotHigher'); ?></option>
-				<option value="3"<?php	echo (isset($_POST['level_mod']) && $_POST['level_mod'] == 3 ? ' selected' : '' ); ?>><?php echo $engine->_t('LogLevelEqual'); ?></option>
+			<?php
+				$log_filters = $engine->_t('LogLevelFilters');
+
+				foreach ($log_filters as $mode => $log_filter)
+				{
+					$selected =
+						($mode === 1
+							? (!isset($_POST['level_mod']) || (int) @$_POST['level_mod'] == $mode)
+							: ((int) @$_POST['level_mod'] == $mode)
+					);
+
+					echo '<option value="' . $mode . '" ' . ( $selected ? ' selected' : '' ) . '>' . $log_filter . '</option>' . "\n";
+				}
+			?>
 			</select>
 			<select name="level">
-<?php
-	for ($i = 1; $i <= 7; $i++)
-	{
-		echo '<option value="' . $i . '"' . ( (!isset($_POST['level']) && $level == $i) || (isset($_POST['level']) && $_POST['level'] == $i) ? ' selected' : '' ) . '>' . strtolower($engine->_t('LogLevel' . $i)) . '</option>' . "\n";
-	}
-?>
+			<?php
+				$log_levels = $engine->_t('LogLevels');
+
+				foreach ($log_levels as $mode => $log_level)
+				{
+					echo '<option value="' . $mode . '" ' . ( (!isset($_POST['level']) && (int) $level == $mode) || ((int) @$_POST['level'] == $mode) ? ' selected' : '' ) . '>' . $mode . ': ' . $log_level . '</option>' . "\n";
+				}
+			?>
 			</select>
 
 			<input type="submit" name="update" id="submit" value="<?php echo $engine->_t('FormUpdate');?>">
 			<input type="submit" name="reset" id="submit" value="<?php echo $engine->_t('FormReset');?>">
-		</div>
+
 <?php
 		$engine->print_pagination($pagination);
 ?>
@@ -179,27 +195,27 @@ function admin_system_log(&$engine, &$module)
 			// level highlighting
 			if ($row['level'] == 1)
 			{
-				$row['level'] = '<strong class="red">' . $engine->_t('LogLevel1') . '</strong>';
+				$row['level'] = '<strong class="red">' . $engine->_t('LogLevels')[1] . '</strong>';
 			}
 			else if ($row['level'] == 2)
 			{
-				$row['level'] = '<span class="red">' . $engine->_t('LogLevel2') . '</span>';
+				$row['level'] = '<span class="red">' . $engine->_t('LogLevels')[2] . '</span>';
 			}
 			else if ($row['level'] == 3)
 			{
-				$row['level'] = '<strong>' . $engine->_t('LogLevel3') . '</strong>';
+				$row['level'] = '<strong>' . $engine->_t('LogLevels')[3] . '</strong>';
 			}
 			else if ($row['level'] == 4)
 			{
-				$row['level'] = $engine->_t('LogLevel' . $row['level']);
+				$row['level'] = $engine->_t('LogLevels')[$row['level']];
 			}
 			else if ($row['level'] == 5)
 			{
-				$row['level'] = '<small>' . $engine->_t('LogLevel' . $row['level']) . '</small>';
+				$row['level'] = '<small>' . $engine->_t('LogLevels')[$row['level']] . '</small>';
 			}
 			else if ($row['level'] > 5)
 			{
-				$row['level'] = '<small class="grey">' . $engine->_t('LogLevel' . $row['level']) . '</small>';
+				$row['level'] = '<small class="grey">' . $engine->_t('LogLevels')[$row['level']] . '</small>';
 			}
 
 			// tz offset

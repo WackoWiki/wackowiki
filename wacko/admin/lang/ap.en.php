@@ -60,7 +60,18 @@ $ap_translation = [
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
-	// MENU
+	'MiscellaneousSection'		=> 'Miscellaneous',
+	'MainSection'				=> 'General Options',
+
+	/**
+	 * AP MENU
+	 *
+	 *	'module_name'		=> [
+	 *		'name'		=> 'Module name',
+	 *		'title'		=> 'Module title',
+	 *	],
+	 */
+
 	// Config Basic module
 	'config_basic'		=> [
 		'name'		=> 'Basic',
@@ -271,16 +282,6 @@ $ap_translation = [
 		'title'		=> 'User management',
 	],
 
-	'LogFilterTip'				=> 'Filter events by criteria',
-	'LogLevel'					=> 'Level',
-	'LogLevelNotLower'			=> 'not less than',
-	'LogLevelNotHigher'			=> 'not higher than',
-	'LogLevelEqual'				=> 'equal',
-	'LogNoMatch'				=> 'No events that meet the criteria',
-	'LogDate'					=> 'Date',
-	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Username',
-
 	'PurgeSessions'				=> 'purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
@@ -295,18 +296,21 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
+
 	'LanguageSection'			=> 'Language',
 	'DefaultLanguage'			=> 'Default language',
 	'DefaultLanguageInfo'		=> 'Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.',
 	'MultiLanguage'				=> 'Multilanguage support',
-	'MultiLanguageInfo'			=> 'Include a choice of language on the page by page basis.',
+	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
 	'AllowedLanguagesInfo'		=> 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
+
 	'CommentSection'			=> 'Comments',
 	'AllowComments'				=> 'Allow comments',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel',
 	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
@@ -318,35 +322,36 @@ $ap_translation = [
 	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
 	'HideRevisions'				=> 'Hide Revisions',
 	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
-	'TOC_Panel'					=> 'Table of contents panel',
-	'TOC_PanelInfo'				=> 'The default display table of contents panel of a page (may need support in the templates).',
+	'TocPanel'					=> 'Table of contents panel',
+	'TocPanelInfo'				=> 'The default display table of contents panel of a page (may need support in the templates).',
 	'SectionsPanel'				=> 'Sections panel',
 	'SectionsPanelInfo'			=> 'By default display the panel of adjacent pages (requires support in the templates).',
 	'DisplayingSections'		=> 'Displaying sections',
 	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
 	'MenuItems'					=> 'Menu items',
 	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
+
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',
 	'EnableFeedsInfo'			=> 'Turns on or off RSS feeds for the entire wiki.',
-	'XML_Sitemap'				=> 'XML Sitemap',
-	'XML_SitemapInfo'			=> 'Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.',
-	'XML_SitemapTime'			=> 'XML Sitemap generation time',
-	'XML_SitemapTimeInfo'		=> 'Generate a Sitemaps only once in this number of days, zero means on every page change.',
+	'XmlSitemap'				=> 'XML Sitemap',
+	'XmlSitemapInfo'			=> 'Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.',
+	'XmlSitemapTime'			=> 'XML Sitemap generation time',
+	'XmlSitemapTimeInfo'		=> 'Generate a Sitemaps only once in this number of days, zero means on every page change.',
+
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
 	'AllowedDiffMode'			=> 'Allowed Diff modes',
 	'AllowedDiffModeInfo'		=> 'It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
-	'MiscellaneousSection'		=> 'Miscellaneous',
+
 	'EditSummary'				=> 'Edit summary',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Minor edit',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
-	'Autosubscribe'				=> 'Autosubscribe',
-	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
+
 	'PublishAnonymously'		=> 'Allow anonymous publishing',
 	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
 	'DefaultRenameRedirect'		=> 'When renaming put redirection',
@@ -368,11 +373,12 @@ $ap_translation = [
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
+	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+
 	'LogoOff'					=> 'off',
 	'LogoOnly'					=> 'logo',
 	'LogoAndTitle'				=> 'logo and title',
 
-	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
 	'LogoSection'				=> 'Logo',
 	'SiteLogo'					=> 'Site Logo',
 	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
@@ -391,6 +397,345 @@ $ap_translation = [
 	'ThemesPerPage'				=> 'Themes per page',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
 
+	// System settings
+	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'SystemSettingsUpdated'		=> 'Updated system settings',
+
+	'DebugModeSection'			=> 'Debug mode',
+	'DebugMode'					=> 'Debug mode',
+	'DebugModeInfo'				=> 'Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.',
+	'DebugModes'	=> [
+		'0'		=> 'debugging is off',
+		'1'		=> 'only the total execution time',
+		'2'		=> 'full-time',
+		'3'		=> 'full detail (DBMS, cache, etc.)',
+	],
+	'DebugSqlThreshold'			=> 'Threshold performance RDBMS',
+	'DebugSqlThresholdInfo'		=> 'In the detailed debug mode to record only the queries take longer than the number of seconds.',
+	'DebugAdminOnly'			=> 'Closed diagnosis',
+	'DebugAdminOnlyInfo'		=> 'Show debug data of the program (and DBMS) only for the administrator.',
+
+	'CachingSection'			=> 'Caching Options',
+	'Cache'						=> 'Cache rendered pages',
+	'CacheInfo'					=> 'Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.',
+	'CacheTtl'					=> 'Term relevance cached pages',
+	'CacheTtlInfo'				=> 'Cache pages no more than a specified number of seconds.',
+	'CacheSql'					=> 'Cache DBMS queries',
+	'CacheSqlInfo'				=> 'Maintain a local cache the results of certain resource-SQL-queries.',
+	'CacheSqlTtl'				=> 'Term relevance Cache Database',
+	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
+
+	'ReverseProxySection'		=> 'Reverse Proxy',
+	'ReverseProxy'				=> 'Use Reverse proxy',
+	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
+									 client by examining information stored in the X-Forwarded-For headers.
+									 X-Forwarded-For headers are a standard mechanism for identifying client
+									 systems connecting through a reverse proxy server, such as Squid or
+									 Pound. Reverse proxy servers are often used to enhance the performance
+									 of heavily visited sites and may also provide other site caching,
+									 security or encryption benefits. If this WackoWiki installation operates
+									 behind a reverse proxy, this setting should be enabled so that correct
+									 IP address information is captured in WackoWiki\'s session management,
+									 logging, statistics and access management systems; if you are unsure
+									 about this setting, do not have a reverse proxy, or WackoWiki operates in
+									 a shared hosting environment, this setting should remain disabled.',
+	'ReverseProxyHeader'		=> 'Reverse proxy header',
+	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
+									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
+									 addresses, only the last one (the left-most) will be used.',
+	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
+	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
+									 proxies. Filling this array WackoWiki will trust the information stored
+									 in the X-Forwarded-For headers only if Remote IP address is one of
+									 these, that is the request reaches the web server from one of your
+									 reverse proxies. Otherwise, the client could directly connect to
+									 your web server spoofing the X-Forwarded-For headers.',
+
+	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
+	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
+										<span class="cite">The value might be overwritten by the Settings class, despite you turn it off, if HTTP_MOD_REWRITE is on.',
+
+	// Permissions settings
+	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
+	'PermissionsSettingsUpdated'	=> 'Updated security settings',
+
+	'PermissionsSection'		=> 'Rights and privileges',
+	'ReadRights'				=> 'Read rights by default',
+	'ReadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
+	'WriteRights'				=> 'Write rights by default',
+	'WriteRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
+	'CommentRights'				=> 'Comment rights by default',
+	'CommentRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
+	'CreateRights'				=> 'Create rights of a sub page by default',
+	'CreateRightsInfo'			=> 'Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.',
+	'UploadRights'				=> 'Upload rights by default',
+	'UploadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
+	'RenameRights'				=> 'Global rename right',
+	'RenameRightsInfo'			=> 'List for admission to the possibility of free rename (move) pages.',
+
+	'LockAcl'					=> 'Lock all ACL to read only',
+	'LockAclInfo'				=> '<span class="cite">Overwrites the acl settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
+	'HideLocked'				=> 'Hide inaccessible pages',
+	'HideLockedInfo'			=> 'If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).',
+	'RemoveOnlyAdmins'			=> 'Only administrators can delete pages',
+	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.',
+	'OwnersRemoveComments'		=> 'Owners of pages can delete comments',
+	'OwnersRemoveCommentsInfo'	=> 'Allow page owners to moderate comments on their pages.',
+	'OwnersEditCategories'		=> 'Owners can edit page categories',
+	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
+	'TermHumanModeration'		=> 'Term human moderation',
+	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
+
+	// Security settings
+	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.',
+	'SecuritySettingsUpdated'	=> 'Updated security settings',
+
+	'AllowRegistration'			=> 'Register online',
+	'AllowRegistrationInfo'		=> 'Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.',
+	'ApproveNewUser'			=> 'Approve new users',
+	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
+	'PersistentCookies'			=> 'Persistent cookies',
+	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
+	'AntiDupe'					=> 'Anti-clone',
+	'AntiDupeInfo'				=> 'Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.',
+	'DisableWikiName'			=> 'Disable WikiName',
+	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
+	'AllowEmailReuse'			=> 'Allow email address re-use',
+	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'UsernameLength'			=> 'Username length',
+	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+
+	'CaptchaSection'			=> 'CAPTCHA',
+	'EnableCaptcha'				=> 'Enable Captcha',
+	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
+	'CaptchaComment'			=> 'New comment',
+	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
+	'CaptchaPage'				=> 'New page',
+	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
+	'CaptchaEdit'				=> 'Edit page',
+	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
+	'CaptchaRegistration'		=> 'Registration',
+	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
+
+	'TlsSection'				=> 'TLS Settings',
+	'TlsConnection'				=> 'TLS-Connection',
+	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server , otherwise you will lose access to the admin panel!</span>',
+	'TlsImplicit'				=> 'Forced TLS',
+	'TlsImplicitInfo'			=> 'Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.',
+	'TlsProxy'					=> 'TLS Proxy',
+	'TlsProxyInfo'				=> 'Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.',
+	'HttpSecurityHeaders'		=> 'HTTP Security Headers',
+	'EnableSecurityHeaders'		=> 'Enable Security Headers',
+	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',
+	'Csp'						=> 'Content-Security-Policy (CSP)',
+	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
+	'CspModes'	=> [
+		'0'		=> 'disabled',
+		'1'		=> 'strict',
+		'2'		=> 'custom',
+	],
+	'UserPasswordSection'		=> 'Persistence of user passwords',
+	'PwdMinChars'				=> 'Minimum password length',
+	'PwdMinCharsInfo'			=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'AdminPwdMinChars'			=> 'Minimum Admin password length',
+	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'PwdCharComplexity'			=> 'The required password complexity',
+	'PwdCharClasses'	=> [
+		'0'		=> 'not tested',
+		'1'		=> 'any letters + numbers',
+		'2'		=> 'uppercase and lowercase + numbers',
+		'3'		=> 'uppercase and lowercase + numbers + characters',
+	],
+	'PwdUnlikeLogin'			=> 'Additional complication',
+	'PwdUnlikes'	=> [
+		'0'		=> 'not tested',
+		'1'		=> 'password is not identical to the login',
+		'2'		=> 'password does not contain username',
+	],
+
+	'LoginSection'				=> 'Login',
+	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username',
+	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
+	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address',
+	'IpLoginLimitMaxInfo'		=> 'The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.',
+
+	'LogSection'				=> 'Log settings',
+	'LogLevel'					=> 'Using logging',
+	'LogLevelInfo'				=> 'The minimum priority of the events recorded in the log.',
+	'LogThresholds'	=> [
+		'0'		=> 'not keep a journal',
+		'1'		=> 'only the critical level',
+		'2'		=> 'from the highest level',
+		'3'		=> 'from high',
+		'4'		=> 'on average',
+		'5'		=> 'from low',
+		'6'		=> 'the minimum level',
+		'7'		=> 'record all',
+	],
+	'LogDefaultShow'			=> 'Display Log Mode',
+	'LogDefaultShowInfo'		=> 'The minimum priority events displayed in the log by default.',
+	'LogModes'	=> [
+		'1'		=> 'only the critical level',
+		'2'		=> 'from the highest level',
+		'3'		=> 'from high-level',
+		'4'		=> 'the average',
+		'5'		=> 'from a low',
+		'6'		=> 'from the minimum level',
+		'7'		=> 'show all',
+	],
+	'LogPurgeTime'				=> 'Storage time of Log',
+	'LogPurgeTimeInfo'			=> 'Remove event log over a given number of days.',
+
+	'FormsSection'				=> 'Forms',
+	'FormTokenTime'				=> 'Maximum time to submit forms',
+	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in seconds).<br> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.',
+
+	'SessionLength'				=> 'Term login cookie',
+	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
+	'CommentDelay'				=> 'Anti-flood for comments',
+	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in seconds).',
+	'IntercomDelay'				=> 'Anti-flood for personal communications',
+	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in seconds).',
+
+	//Formatter settings
+	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'FormatterSettingsUpdated'	=> 'Updated formatting settings',
+
+	'TextHandlerSection'		=> 'Text Handler ',
+	'Typografica'				=> 'Typographical Proofreader',
+	'TypograficaInfo'			=> 'Unsetting slightly speed up the process of adding comments and save the page.',
+	'Paragrafica'				=> 'Paragrafica markings',
+	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.',
+	'AllowRawhtml'				=> 'Global HTML Support',
+	'AllowRawhtmlInfo'			=> 'Use this option to open a potentially unsafe site.',
+	'SafeHtml'					=> 'Filtering HTML',
+	'SafeHtmlInfo'				=> 'Blocks dangerous HTML-conservation facilities. Turn off the filter to open the site when the support HTML <span class="underline">very</span> undesirable!',
+
+	'WackoFormatterSection'		=> 'Wiki Text Formatter (Wacko Formatter)',
+	'X11colors'					=> 'X11 Colors Usage',
+	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code> Unsetting slightly speed up the process of adding comments and save the page.',
+	'TikiLinks'					=> 'Disable Tikilinks',
+	'TikiLinksInfo'				=> 'Disables linking for <code>Double.CamelCaseWords</code>.',
+	'WikiLinks'					=> 'Disable Wikilinks',
+	'WikiLinksInfo'				=> 'Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page. This is useful when you work across different namespaces aks clusters. By default it is off.',
+	'BracketsLinks'				=> 'Disable bracketslinks',
+	'BracketsLinksInfo'			=> 'Disables <code>[[link]]</code> and <code>((link))</code> syntax.',
+	'Formatters'				=> 'Disable Formatters',
+	'FormattersInfo'			=> 'Disables <code>%%code%%</code> syntax, used for highlighters.',
+
+	'DateFormatsSection'		=> 'Date Formats',
+	'DateFormat'				=> 'The format of the date',
+	'DateFormatInfo'			=> '(day, month, year)',
+	'TimeFormat'				=> 'The format of time',
+	'TimeFormatInfo'			=> '(hour, minute)',
+	'TimeFormatSeconds'			=> 'The format of the exact time',
+	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
+	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
+	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
+	'Timezone'					=> 'Timezone',
+	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
+	'EnableDst'					=> 'Enable Summer Time/DST',
+	'EnableDstInfo'				=> '',
+
+	'LinkTarget'				=> 'Where external links open',
+	'LinkTargetInfo'			=> 'Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.',
+	'Noreferrer'				=> 'noreferrer',
+	'NoreferrerInfo'			=> 'Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.',
+	'Nofollow'					=> 'nofollow',
+	'NofollowInfo'				=> 'Instruct some search engines that the hyperlink should not influence the ranking of the link\'s target in the search engine\'s index. Adds <code>rel="nofollow"</code> to the link syntax.',
+	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
+	'UrlsUnderscoresInfo'		=> 'For example <code>http://[..]/WackoWiki</code> becames <code>http://[..]/Wacko_Wiki</code> with this option.',
+	'ShowSpaces'				=> 'Show spaces in WikiNames',
+	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> beeing displayed as <code>My Name</code> with this option.',
+	'NumerateLinks'				=> 'Numerate links in print view',
+	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
+	'YouareHereText'			=> 'Disable and visualize self-referencing links',
+	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
+
+	// Pages settings
+	'PagesSettingsInfo'			=> '',
+	'PagesSettingsUpdated'		=> 'Updated settings base pages',
+
+	'ListCount'					=> 'Number of items per list',
+	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+
+	'ForumSection'				=> 'Options Forum',
+	'ForumCluster'				=> 'Cluster Forum',
+	'ForumClusterInfo'			=> 'Address of the index (main) page of the forum.',
+	'ForumTopics'				=> 'Number of topics per page',
+	'ForumTopicsInfo'			=> 'Number of topics displayed on each page of the list in the forum sections.',
+	'CommentsCount'				=> 'Number of comments per page',
+	'CommentsCountInfo'			=> 'Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.',
+
+	'NewsSection'				=> 'Section News',
+	'NewsCluster'				=> 'Cluster for the News',
+	'NewsClusterInfo'			=> 'Root cluster for news section.',
+	'NewsLevels'				=> 'Depth of news pages from the root cluster',
+	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
+
+	'LicenseSection'			=> 'License',
+	'DefaultLicense'			=> 'Default license',
+	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
+
+	'ServicePagesSection'		=> 'Service pages',
+	'RootPage'					=> 'Home page',
+	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
+	'PolicyPage'				=> 'Policies and Regulations',
+	'PolicyPageinfo'			=> 'The page with the rules of the site.',
+	'SearchPage'				=> 'Search',
+	'SearchPageInfo'			=> 'Page with the search form (action <code>{{search}}</code>).',
+	'RegistrationPage'			=> 'Register on our site',
+	'RegistrationPageInfo'		=> 'Page new user registration (action <code>{{registration}}</code>).',
+	'LoginPage'					=> 'User login',
+	'LoginPageInfo'				=> 'Login page on the site (action <code>{{login}}</code>).',
+	'SettingsPage'				=> 'Profile Settings',
+	'SettingsPageInfo'			=> 'Page customize the user profile (action <code>{{usersettings}}</code>).',
+	'PasswordPage'				=> 'Change Password',
+	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action <code>{{changepassword}}</code>).',
+	'UsersPage'					=> 'User list',
+	'UsersPageInfo'				=> 'Page with a list of registered users (action <code>{{users}}</code>).',
+	'CategoryPage'				=> 'Category',
+	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action <code>{{category}}</code>).',
+	'TagPage'					=> 'Tag',
+	'TagPageInfo'				=> 'Page with a list of tagged pages (action <code>{{tag}}</code>).',
+	'GroupsPage'				=> 'Groups',
+	'GroupsPageInfo'			=> 'Page with a list of working groups (action <code>{{usergroups}}</code>).',
+	'ChangesPage'				=> 'Recent changes',
+	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action <code>{{changes}}</code>).',
+	'CommentsPage'				=> 'Recent comments',
+	'CommentsPageInfo'			=> 'Page with a list of recent comment on the page (action <code>{{commented}}</code>).',
+	'RemovalsPage'				=> 'Deleted pages',
+	'RemovalsPageInfo'			=> 'Page with a list of recently deleted pages (action <code>{{deleted}}</code>).',
+	'WantedPage'				=> 'Wanted pages',
+	'WantedPageInfo'			=> 'Page with a list of missing pages that are referenced (action <code>{{wanted}}</code>).',
+	'OrphanedPage'				=> 'Orphaned pages',
+	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action <code>{{orphaned}}</code>).',
+	'TodoPage'					=> 'ToDo',
+	'TodoPageInfo'				=> 'Page with a list of To Do (constructed with the help of <code>{{backlinks}}</code> and makro <code>::*::</code>).',
+	'SandboxPage'				=> 'Sandbox',
+	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
+	'WikiDocsPage'				=> 'Wiki documentation',
+	'WikiDocsPageInfo'			=> 'Section of the documentation for using the tool site.',
+
+
+	// Notification settings
+	'NotificationSettingsInfo'	=> 'Parameters for notifications of the platform.',
+	'NotificationSettingsUpdated'	=> 'Updated notification settings',
+
+	'EmailNotification'			=> 'Email Notification',
+	'EmailNotificationInfo'		=> 'Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that disabling email notifications has no effect on emails generated as part of the user signup process.',
+	'Autosubscribe'				=> 'Autosubscribe',
+	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
+
+	'NotificationSection'		=> 'Default user notification settings',
+	'NotifyPageEdit'			=> 'Notify page edit',
+	'NotifyPageEditInfo'		=> 'Pending - Sending a email notification only for the first change until the user visits the page again.',
+	'NotifyMinorEdit'			=> 'Notify minor edit',
+	'NotifyMinorEditInfo'		=> 'Sends notifications also for minor edits.',
+	'NotifyNewComment'			=> 'Notify new comment',
+	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
+	'NotifyUserAccount'			=> 'Notify new user account',
+	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the "signup form".',
 
 	// Resync settings
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
@@ -453,6 +798,12 @@ $ap_translation = [
 
 	// Upload settings
 	'UploadSettingsInfo'		=> 'Here you can configure the main settings for attachments and the associated special categories.',
+	'UploadSettingsUpdated'		=> 'Updated upload settings',
+
+	'RightToUpload'				=> 'Right to the upload files',
+	'RightToUploadInfo'			=> '<code>admins</code> means that only users belongig to admins group can upload the files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
+	'UploadOnlyImages'			=> 'Allow only upload of images',
+	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
 	'UploadMaxFilesize'			=> 'Maximum file size',
 	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
@@ -472,13 +823,26 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
 
 	// log module
-	'LogLevel1'					=> 'critical',
-	'LogLevel2'					=> 'highest',
-	'LogLevel3'					=> 'high',
-	'LogLevel4'					=> 'medium',
-	'LogLevel5'					=> 'low',
-	'LogLevel6'					=> 'lowest',
-	'LogLevel7'					=> 'debugging',
+	'LogFilterTip'				=> 'Filter events by criteria',
+	'LogLevel'					=> 'Level',
+	'LogLevelFilters'	=> [
+		'1'		=> 'not less than',
+		'2'		=> 'not higher than',
+		'3'		=> 'equal',
+	],
+	'LogNoMatch'				=> 'No events that meet the criteria',
+	'LogDate'					=> 'Date',
+	'LogEvent'					=> 'Event',
+	'LogUsername'				=> 'Username',
+	'LogLevels'	=> [
+		'1'		=> 'critical',
+		'2'		=> 'highest',
+		'3'		=> 'high',
+		'4'		=> 'medium',
+		'5'		=> 'low',
+		'6'		=> 'lowest',
+		'7'		=> 'debugging',
+	],
 
 	// Massemail module
 	'SendToGroup'				=> 'Send to group',

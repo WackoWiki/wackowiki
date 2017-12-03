@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Recently deleted pages controls                  ##
-########################################################
+##########################################################
+##	Recently deleted pages controls						##
+##########################################################
 $_mode = 'content_deleted';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Newly deleted content
 	];
 
-########################################################
+##########################################################
 
 function admin_content_deleted(&$engine, &$module)
 {
