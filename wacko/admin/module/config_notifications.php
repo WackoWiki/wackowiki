@@ -57,7 +57,7 @@ function admin_config_notifications(&$engine, &$module)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
-				<th colspan="2"><?php echo $engine->_t('BasicParametersSection');?></th>
+				<th colspan="2"><?php echo $engine->_t('MainSection');?></th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">

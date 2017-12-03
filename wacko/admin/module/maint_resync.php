@@ -273,8 +273,8 @@ if ($engine->db->xml_sitemap)
 <?php		echo $engine->form_close();
 }?>
 
-	<h2><?php echo $engine->_t('WikiLinks');?></h2>
-	<p><?php echo $engine->_t('WikiLinksInfo');?></p>
+	<h2><?php echo $engine->_t('WikiLinksResync');?></h2>
+	<p><?php echo $engine->_t('WikiLinksResyncInfo');?></p>
 <?php
 	echo $engine->form_open('linksupdate');
 ?>
