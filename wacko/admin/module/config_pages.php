@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Pages settings                                   ##
-########################################################
+##########################################################
+##	Pages settings										##
+##########################################################
 $_mode = 'config_pages';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Pages and site parameters
 	];
 
-########################################################
+##########################################################
 
 function admin_config_pages(&$engine, &$module)
 {
@@ -59,8 +59,8 @@ function admin_config_pages(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, 'Updated settings base pages');
-		$engine->set_message('Updated settings base pages', 'success');
+		$engine->log(1, $engine->_t('PagesSettingsUpdated'));
+		$engine->set_message($engine->_t('PagesSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -73,24 +73,24 @@ function admin_config_pages(&$engine, &$module)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
-				<th colspan="2">General Options</th>
+				<th colspan="2"><?php echo $engine->_t('MainSection');?></th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="list_count"><strong>Number of items per list:</strong><br>
-					<small>Number of items displayed on each list for guest or as default value for new users.</small></label>
+					<label for="list_count"><strong><?php echo $engine->_t('ListCount');?>:</strong><br>
+					<small><?php echo $engine->_t('ListCountInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="3" id="list_count" name="list_count" value="<?php echo (int) $engine->db->list_count;?>">
 				</td>
 			</tr>
 			<tr>
-				<th colspan="2">Options Forum</th>
+				<th colspan="2"><?php echo $engine->_t('ForumSection');?></th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="forum_cluster"><strong>Cluster Forum:</strong><br>
-					<small>Address of the index (main) page of the forum.</small></label>
+					<label for="forum_cluster"><strong><?php echo $engine->_t('ForumCluster');?>:</strong><br>
+					<small><?php echo $engine->_t('');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="forum_cluster" name="forum_cluster" value="<?php echo htmlspecialchars($engine->db->forum_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -101,8 +101,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="forum_topics"><strong>Number of topics per page:</strong><br>
-					<small>Number of topics displayed on each page of the list in the forum sections.</small></label>
+					<label for="forum_topics"><strong><?php echo $engine->_t('ForumTopics');?>:</strong><br>
+					<small><?php echo $engine->_t('ForumTopicsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="3" id="forum_topics" name="forum_topics" value="<?php echo (int) $engine->db->forum_topics;?>">
@@ -113,8 +113,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="comments_count"><strong>Number of comments per page:</strong><br>
-					<small>Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.</small></label>
+					<label for="comments_count"><strong><?php echo $engine->_t('CommentsCount');?>:</strong><br>
+					<small><?php echo $engine->_t('CommentsCountInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="3" id="comments_count" name="comments_count" value="<?php echo (int) $engine->db->comments_count;?>">
@@ -123,13 +123,13 @@ function admin_config_pages(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Section News
+					<?php echo $engine->_t('NewsSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="news_cluster"><strong>Cluster of the News:</strong><br>
-					<small>Root cluster news section.</small></label>
+					<label for="news_cluster"><strong><?php echo $engine->_t('NewsCluster');?>:</strong><br>
+					<small><?php echo $engine->_t('NewsClusterInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="news_cluster" name="news_cluster" value="<?php echo htmlspecialchars($engine->db->news_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -140,8 +140,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="news_levels"><strong>Depth of news pages from the root cluster:</strong><br>
-					<small>Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)</small></label>
+					<label for="news_levels"><strong><?php echo $engine->_t('NewsLevels');?>:</strong><br>
+					<small><?php echo $engine->_t('NewsLevelsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="news_levels" name="news_levels" value="<?php echo htmlspecialchars($engine->db->news_levels, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -150,13 +150,13 @@ function admin_config_pages(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					License
+					<?php echo $engine->_t('LicenseSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="license"><strong>Default license:</strong><br>
-					<small>Under which license should your content be released.</small></label>
+					<label for="license"><strong><?php echo $engine->_t('DefaultLicense');?>:</strong><br>
+					<small><?php echo $engine->_t('');?></small></label>
 				</td>
 				<td>
 					<select id="license" name="license">
@@ -183,13 +183,13 @@ function admin_config_pages(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					Service pages
+					<?php echo $engine->_t('ServicePagesSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="root_page"><strong>Home page:</strong><br>
-					<small>Tag your main page, opens automatically when a user visits your site.</small></label>
+					<label for="root_page"><strong><?php echo $engine->_t('RootPage');?>:</strong><br>
+					<small><?php echo $engine->_t('RootPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="root_page" name="root_page" value="<?php echo htmlspecialchars($engine->db->root_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -200,8 +200,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="policy_page"><strong>Policies and Regulations:</strong><br>
-					<small>The page with the rules of the site.</small></label>
+					<label for="policy_page"><strong><?php echo $engine->_t('PolicyPage');?>:</strong><br>
+					<small><?php echo $engine->_t('PolicyPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="policy_page" name="policy_page" value="<?php echo htmlspecialchars($engine->db->policy_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -212,8 +212,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="search_page"><strong>Search:</strong><br>
-					<small>Page with the search form (action <code>{{search}}</code>).</small></label>
+					<label for="search_page"><strong><?php echo $engine->_t('SearchPage');?>:</strong><br>
+					<small><?php echo $engine->_t('SearchPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="search_page" name="search_page" value="<?php echo htmlspecialchars($engine->db->search_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -224,8 +224,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="registration_page"><strong>Register on our site:</strong><br>
-					<small>Page new user registration (action <code>{{registration}}</code>).</small></label>
+					<label for="registration_page"><strong><?php echo $engine->_t('RegistrationPage');?>:</strong><br>
+					<small><?php echo $engine->_t('RegistrationPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="registration_page" name="registration_page" value="<?php echo htmlspecialchars($engine->db->registration_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -236,8 +236,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="login_page"><strong>User login:</strong><br>
-					<small>Login page on the site (action <code>{{login}}</code>).</small></label>
+					<label for="login_page"><strong><?php echo $engine->_t('LoginPage');?>:</strong><br>
+					<small><?php echo $engine->_t('LoginPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="login_page" name="login_page" value="<?php echo htmlspecialchars($engine->db->login_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -248,8 +248,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="settings_page"><strong>Profile Settings:</strong><br>
-					<small>Page customize the user profile (action <code>{{usersettings}}</code>).</small></label>
+					<label for="settings_page"><strong><?php echo $engine->_t('SettingsPage');?>:</strong><br>
+					<small><?php echo $engine->_t('SettingsPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="settings_page" name="settings_page" value="<?php echo htmlspecialchars($engine->db->settings_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -260,8 +260,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="password_page"><strong>Change Password:</strong><br>
-					<small>Page with a form to change / query user password (action <code>{{changepassword}}</code>).</small></label>
+					<label for="password_page"><strong><?php echo $engine->_t('PasswordPage');?>:</strong><br>
+					<small><?php echo $engine->_t('PasswordPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="password_page" name="password_page" value="<?php echo htmlspecialchars($engine->db->password_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -272,8 +272,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="users_page"><strong>User list:</strong><br>
-					<small>Page with a list of registered users (action <code>{{users}}</code>).</small></label>
+					<label for="users_page"><strong><?php echo $engine->_t('UsersPage');?>:</strong><br>
+					<small><?php echo $engine->_t('UsersPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->db->users_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -284,8 +284,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="category_page"><strong>Category :</strong><br>
-					<small>Page with a list of categorized pages (action <code>{{category}}</code>).</small></label>
+					<label for="category_page"><strong><?php echo $engine->_t('CategoryPage');?> :</strong><br>
+					<small><?php echo $engine->_t('CategoryPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->db->category_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -296,8 +296,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="category_page"><strong>Tag :</strong><br>
-					<small>Page with a list of tagged pages (action <code>{{tag}}</code>).</small></label>
+					<label for="tag_page"><strong><?php echo $engine->_t('TagPage');?> :</strong><br>
+					<small><?php echo $engine->_t('TagPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo htmlspecialchars($engine->db->tag_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -308,8 +308,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="groups_page"><strong>Groups:</strong><br>
-					<small>Page with a list of working groups (action <code>{{usergroups}}</code>).</small></label>
+					<label for="groups_page"><strong><?php echo $engine->_t('GroupsPage');?>:</strong><br>
+					<small><?php echo $engine->_t('GroupsPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="groups_page" name="groups_page" value="<?php echo htmlspecialchars($engine->db->groups_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -320,8 +320,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="changes_page"><strong>Recent changes:</strong><br>
-					<small>Page with a list of the last modified pages (action <code>{{changes}}</code>).</small></label>
+					<label for="changes_page"><strong><?php echo $engine->_t('ChangesPage');?>:</strong><br>
+					<small><?php echo $engine->_t('ChangesPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="changes_page" name="changes_page" value="<?php echo htmlspecialchars($engine->db->changes_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -332,8 +332,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="comments_page"><strong>Recent comments:</strong><br>
-					<small>Page with a list of recent comment on the page (action <code>{{commented}}</code>).</small></label>
+					<label for="comments_page"><strong><?php echo $engine->_t('CommentsPage');?>:</strong><br>
+					<small><?php echo $engine->_t('CommentsPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="comments_page" name="comments_page" value="<?php echo htmlspecialchars($engine->db->comments_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -344,8 +344,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="removals_page"><strong>Deleted pages:</strong><br>
-					<small>Page with a list of recently deleted pages (action <code>{{deleted}}</code>).</small></label>
+					<label for="removals_page"><strong><?php echo $engine->_t('RemovalsPage');?>:</strong><br>
+					<small><?php echo $engine->_t('RemovalsPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="removals_page" name="removals_page" value="<?php echo htmlspecialchars($engine->db->removals_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -356,8 +356,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="wanted_page"><strong>Wanted pages:</strong><br>
-					<small>Page with a list of missing pages that are referenced (action <code>{{wanted}}</code>).</small></label>
+					<label for="wanted_page"><strong><?php echo $engine->_t('WantedPage');?>:</strong><br>
+					<small><?php echo $engine->_t('WantedPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="wanted_page" name="wanted_page" value="<?php echo htmlspecialchars($engine->db->wanted_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -368,8 +368,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="orphaned_page"><strong>Orphaned pages:</strong><br>
-					<small>Page with a list of existing pages are not related links with the rest (action <code>{{orphaned}}</code>).</small></label>
+					<label for="orphaned_page"><strong><?php echo $engine->_t('OrphanedPage');?>:</strong><br>
+					<small><?php echo $engine->_t('OrphanedPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="orphaned_page" name="orphaned_page" value="<?php echo htmlspecialchars($engine->db->orphaned_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -380,8 +380,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="todo_page"><strong>ToDo:</strong><br>
-					<small>Page with a list of To Do (constructed with the help of <code>{{backlinks}}</code> and makro <code>::*::</code>).</small></label>
+					<label for="todo_page"><strong><?php echo $engine->_t('TodoPage');?>:</strong><br>
+					<small><?php echo $engine->_t('TodoPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="todo_page" name="todo_page" value="<?php echo htmlspecialchars($engine->db->todo_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -392,8 +392,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="sandbox"><strong>Sandbox:</strong><br>
-					<small>Page where users can be trained in the use of wiki-markup.</small></label>
+					<label for="sandbox"><strong><?php echo $engine->_t('SandboxPage');?>:</strong><br>
+					<small><?php echo $engine->_t('SandboxPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo htmlspecialchars($engine->db->sandbox, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
@@ -404,8 +404,8 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="wiki_docs"><strong>Wiki documentation:</strong><br>
-					<small>Section of the documentation for using the tool site.</small></label>
+					<label for="wiki_docs"><strong><?php echo $engine->_t('WikiDocsPage');?>:</strong><br>
+					<small><?php echo $engine->_t('WikiDocsPageInfo');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="wiki_docs" name="wiki_docs" value="<?php echo htmlspecialchars($engine->db->wiki_docs, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">

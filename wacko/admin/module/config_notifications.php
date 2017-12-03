@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Notifications settings                           ##
-########################################################
+##########################################################
+##	Notifications settings								##
+##########################################################
 $_mode = 'config_notifications';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Notifications settings
 	];
 
-########################################################
+##########################################################
 
 function admin_config_notifications(&$engine, &$module)
 {
@@ -27,7 +27,7 @@ function admin_config_notifications(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
 	<p>
-		Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.
+		<?php echo $engine->_t('NotificationSettingsInfo');?>
 	</p>
 	<br>
 <?php
@@ -43,8 +43,8 @@ function admin_config_notifications(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!Updated security settings!!');
-		$engine->set_message('Updated security settings', 'success');
+		$engine->log(1, '!!' . $engine->_t('NotificationSettingsUpdated')  . '!!');
+		$engine->set_message($engine->_t('NotificationSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -57,30 +57,41 @@ function admin_config_notifications(&$engine, &$module)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
-				<th colspan="2">Basic parameters</th>
+				<th colspan="2"><?php echo $engine->_t('BasicParametersSection');?></th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="enable_email_notification"><strong>Email Notification:</strong><br>
-					<small>Allow email notification. Set to ON to enable email notifications, OFF to disable them. Note that
-						disabling email notifications has no effect on emails generated as part
-						of the user signup process.</small></label>
+					<label for="enable_email_notification"><strong><?php echo $engine->_t('EmailNotification');?>:</strong><br>
+					<small><?php echo $engine->_t('EmailNotificationInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="enable_email_notification_on" name="enable_email_notification" value="1"<?php echo ($engine->db->enable_email_notification == 1 ? ' checked' : '');?>><label for="enable_email_notification_on"><?php echo $engine->_t('Enabled'); ?></label>
 					<input type="radio" id="enable_email_notification_off" name="enable_email_notification" value="0"<?php echo ($engine->db->enable_email_notification == 0 ? ' checked' : '');?>><label for="enable_email_notification_off"><?php echo $engine->_t('Disabled'); ?></label>
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for=""><strong><?php echo $engine->_t('Autosubscribe');?>:</strong><br>
+					<small><?php echo $engine->_t('AutosubscribeInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="disable_autosubscribe_on" name="disable_autosubscribe" value="0"<?php echo (!$engine->db->disable_autosubscribe ? ' checked' : '');?>><label for="disable_autosubscribe_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="disable_autosubscribe_off" name="disable_autosubscribe" value="1"<?php echo ($engine->db->disable_autosubscribe ? ' checked' : '');?>><label for="disable_autosubscribe_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
 			<tr>
 				<th colspan="2">
 					<br>
-					Default user notification settings
+					<?php echo $engine->_t('NotificationSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="notify_page"><strong>Notify page edit:</strong><br>
-					<small>Pending - Sending a email notification only for the first change until the user visits the page again.</small></label>
+					<label for="notify_page"><strong><?php echo $engine->_t('NotifyPageEdit');?>:</strong><br>
+					<small><?php echo $engine->_t('NotifyPageEditInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="notify_page0" name="notify_page" value="0"<?php echo ($engine->db->notify_page == 0 ? ' checked' : '');?>><label for="notify_page0"><?php echo $engine->_t('NotifyOff'); ?></label>
@@ -93,8 +104,8 @@ function admin_config_notifications(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="notify_minor_edit"><strong>Notify minor edit:</strong><br>
-					<small>Sends notifications also for minor edits.</small></label>
+					<label for="notify_minor_edit"><strong><?php echo $engine->_t('NotifyMinorEdit');?>:</strong><br>
+					<small><?php echo $engine->_t('NotifyMinorEditInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="notify_minor_edit" name="notify_minor_edit" value="1"<?php echo ($engine->db->notify_minor_edit ? ' checked' : '');?>>
@@ -105,8 +116,8 @@ function admin_config_notifications(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="notify_comment"><strong>Notify new comment:</strong><br>
-					<small>Pending - Sending a email notification only for the first comment until the user visits the page again.</small></label>
+					<label for="notify_comment"><strong><?php echo $engine->_t('NotifyNewComment');?>:</strong><br>
+					<small><?php echo $engine->_t('NotifyNewCommentInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="notify_comment0" name="notify_comment" value="0"<?php echo ($engine->db->notify_comment == 0 ? ' checked' : '');?>><label for="notify_comment0"><?php echo $engine->_t('NotifyOff'); ?></label>
@@ -117,13 +128,13 @@ function admin_config_notifications(&$engine, &$module)
 			<tr class="hl_setting">
 				<th colspan="2">
 					<br>
-					Miscellaneous
+					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="notify_new_user_account"><strong>Notify new user account:</strong><br>
-					<small>The Admin will to be notified when a new user has been created using the "signup form".</small></label>
+					<label for="notify_new_user_account"><strong><?php echo $engine->_t('NotifyUserAccount');?>:</strong><br>
+					<small><?php echo $engine->_t('NotifyUserAccountInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="notify_new_user_account" name="notify_new_user_account" value="1"<?php echo ($engine->db->notify_new_user_account ? ' checked' : '');?>>

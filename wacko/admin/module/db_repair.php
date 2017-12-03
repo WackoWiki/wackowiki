@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Database Repair and Optimization Script          ##
-########################################################
+##########################################################
+##	Database Repair and Optimization Script				##
+##########################################################
 $_mode = 'db_repair';
 
 $module[$_mode] = [
@@ -22,7 +22,7 @@ $module[$_mode] = [
 
 // TODO: to merge with db_optimize module
 
-########################################################
+##########################################################
 
 function admin_db_repair(&$engine, &$module)
 {

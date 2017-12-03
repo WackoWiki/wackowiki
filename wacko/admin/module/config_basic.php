@@ -5,9 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-########################################################
-##   Basic settings                                   ##
-########################################################
+##########################################################
+##	Basic settings										##
+##########################################################
 $_mode = 'config_basic';
 
 $module[$_mode] = [
@@ -19,7 +19,7 @@ $module[$_mode] = [
 		'title'	=> $engine->_t($_mode)['title'],	// Basic parameters
 	];
 
-########################################################
+##########################################################
 
 function admin_config_basic(&$engine, &$module)
 {
@@ -103,14 +103,14 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 				<br>
-					<?php echo $engine->_t('ConfigBasicSection');?>
+					<?php echo $engine->_t('MainSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="site_name"><strong><?php echo $engine->_t('SiteName');?>:</strong><br>
 					<small><?php echo $engine->_t('SiteNameInfo');?></small></label>
-				</td>	
+				</td>
 				<td>
 					<input type="text" maxlength="255" id="site_name" name="site_name" value="<?php echo htmlspecialchars($engine->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
@@ -120,7 +120,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="site_desc"><strong><?php echo $engine->_t('SiteDesc');?>:</strong><br>
+					<label for="site_desc"><strong><?php echo $engine->_t('SiteDesc');?>:</strong><br>
 					<small><?php echo $engine->_t('SiteDescInfo');?></small></label>
 				</td>
 				<td>
@@ -132,7 +132,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-				    <label for="admin_name"><strong><?php echo $engine->_t('AdminName');?>:</strong><br>
+					<label for="admin_name"><strong><?php echo $engine->_t('AdminName');?>:</strong><br>
 					<small><?php echo $engine->_t('AdminNameInfo');?></small></label>
 				</td>
 				<td>
@@ -147,14 +147,14 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="language"><strong><?php echo $engine->_t('DefaultLanguage');?>:</strong><br>
+					<label for="language"><strong><?php echo $engine->_t('DefaultLanguage');?>:</strong><br>
 					<small><?php echo $engine->_t('DefaultLanguageInfo');?></small></label>
 				</td>
 				<td>
 					<select id="language" name="language">
 					<?php
-						$languages = $engine->_t('LanguageArray');
-						$langs = $engine->available_languages();
+						$languages	= $engine->_t('LanguageArray');
+						$langs		= $engine->available_languages();
 
 						foreach ($langs as $lang)
 						{
@@ -169,7 +169,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="multilanguage"><strong><?php echo $engine->_t('MultiLanguage');?>:</strong><br>
+					<label for="multilanguage"><strong><?php echo $engine->_t('MultiLanguage');?>:</strong><br>
 					<small><?php echo $engine->_t('MultiLanguageInfo');?></small></label>
 				</td>
 				<td>
@@ -183,7 +183,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-				    <label for=""><strong><?php echo $engine->_t('AllowedLanguages');?>:</strong><br>
+					<label for=""><strong><?php echo $engine->_t('AllowedLanguages');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowedLanguagesInfo');?></small></label>
 				</td>
 				<td>
@@ -214,7 +214,8 @@ function admin_config_basic(&$engine, &$module)
 
 					foreach ($langs as $lang)
 					{
-						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allowed_languages[' . $n . ']" id="lang_' . $lang . '" value="' . $lang . '" '. (in_array($lang, $lang_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
+						echo	"\t\t<td>\n\t\t\t" .
+								'<input type="checkbox" name="allowed_languages[' . $n . ']" id="lang_' . $lang . '" value="' . $lang . '" '. (in_array($lang, $lang_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
 								'<label for="lang_' . $lang . '">' . $languages[$lang] . ' (' . $lang . ')</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
@@ -239,8 +240,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('AllowComment');?>:</strong><br>
-					<small><?php echo $engine->_t('AllowCommentInfo');?></small></label>				
+					<label for=""><strong><?php echo $engine->_t('AllowComments');?>:</strong><br>
+					<small><?php echo $engine->_t('AllowCommentsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="enable_comments_on" name="enable_comments" value="1" <?php echo ($engine->db->enable_comments == 1 ? ' checked' : '');?>><label for="enable_comments_on"><?php echo $engine->_t('On');?></label>
@@ -253,8 +254,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="sorting_comments"><strong><?php echo $engine->_t('SortingComments');?>:</strong><br>
-					<small><?php echo $engine->_t('SortingCommentsInfo');?></small></label>				
+					<label for="sorting_comments"><strong><?php echo $engine->_t('SortingComments');?>:</strong><br>
+					<small><?php echo $engine->_t('SortingCommentsInfo');?></small></label>
 				</td>
 				<td>
 					<select id="sorting_comments" name="sorting_comments">
@@ -271,8 +272,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('CommentsPanel');?>:</strong><br>
-					<small><?php echo $engine->_t('CommentsPanelInfo');?></small></label>					
+					<label for=""><strong><?php echo $engine->_t('CommentsPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('CommentsPanelInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="footer_comments_on" name="footer_comments" value="1"<?php echo ($engine->db->footer_comments == 1 ? ' checked' : '');?>><label for="footer_comments_on"><?php echo $engine->_t('On');?></label>
@@ -285,8 +286,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('FilePanel');?>:</strong><br>
-					<small><?php echo $engine->_t('FilePanelInfo');?></small></label>					
+					<label for=""><strong><?php echo $engine->_t('FilePanel');?>:</strong><br>
+					<small><?php echo $engine->_t('FilePanelInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="footer_files_on" name="footer_files" value="1"<?php echo ($engine->db->footer_files == 1 ? ' checked' : '');?>><label for="footer_files_on"><?php echo $engine->_t('On');?></label>
@@ -299,8 +300,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('RatingPanel');?>:</strong><br>
-					<small><?php echo $engine->_t('RatingPanelInfo');?></small></label>	
+					<label for=""><strong><?php echo $engine->_t('RatingPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('RatingPanelInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ($engine->db->footer_rating == 1 ? ' checked' : '');?>><label for="footer_rating_on"><?php echo $engine->_t('On');?></label>
@@ -313,8 +314,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('TagsPanel');?>:</strong><br>
-					<small><?php echo $engine->_t('TagsPanelInfo');?></small></label>					
+					<label for=""><strong><?php echo $engine->_t('TagsPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('TagsPanelInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="footer_tags_on" name="footer_tags" value="1"<?php echo ($engine->db->footer_tags == 1 ? ' checked' : '');?>><label for="footer_tags_on"><?php echo $engine->_t('On');?></label>
@@ -327,8 +328,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('HideRevisions');?>:</strong><br>
-					<small><?php echo $engine->_t('HideRevisionsInfo');?></small></label>	
+					<label for=""><strong><?php echo $engine->_t('HideRevisions');?>:</strong><br>
+					<small><?php echo $engine->_t('HideRevisionsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ($engine->db->hide_revisions == 2 ? ' checked' : '');?>><label for="hide_revisions_on"><?php echo $engine->_t('On');?></label>
@@ -341,8 +342,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('TOC_Panel');?>:</strong><br>
-                    <small><?php echo $engine->_t('TOC_PanelInfo');?></small></label>	
+					<label for=""><strong><?php echo $engine->_t('TocPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('TocPanelInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="hide_toc_on" name="hide_toc" value="0"<?php echo (!$engine->db->hide_toc ? ' checked' : '');?>><label for="hide_toc_on"><?php echo $engine->_t('On');?></label>
@@ -354,8 +355,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('SectionsPanel');?>:</strong><br>
-                    <small><?php echo $engine->_t('SectionsPanelInfo');?></small></label>	
+					<label for=""><strong><?php echo $engine->_t('SectionsPanel');?>:</strong><br>
+					<small><?php echo $engine->_t('SectionsPanelInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="hide_index_on" name="hide_index" value="0"<?php echo (!$engine->db->hide_index ? ' checked' : '');?>><label for="hide_index_on"><?php echo $engine->_t('On');?></label>
@@ -367,8 +368,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('DisplayingSections');?>:</strong><br>
-                    <small><?php echo $engine->_t('DisplayingSectionsInfo');?></small></label>	
+					<label for=""><strong><?php echo $engine->_t('DisplayingSections');?>:</strong><br>
+					<small><?php echo $engine->_t('DisplayingSectionsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="full_index" name="tree_level" value="0"<?php echo ($engine->db->tree_level == 0 ? ' checked' : '');?>><label for="full_index"><?php echo $engine->_t('MetaIndexFull');?></label>
@@ -381,8 +382,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="menu_items"><strong><?php echo $engine->_t('MenuItems');?>:</strong><br>
-                    <small><?php echo $engine->_t('MenuItemsInfo');?></small></label>	
+					<label for="menu_items"><strong><?php echo $engine->_t('MenuItems');?>:</strong><br>
+					<small><?php echo $engine->_t('MenuItemsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" max="20" maxlength="4" id="menu_items" name="menu_items" value="<?php echo (int) $engine->db->menu_items;?>">
@@ -396,8 +397,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="enable_feeds"><strong><?php echo $engine->_t('EnableFeeds');?>:</strong><br>
-                    <small><?php echo $engine->_t('EnableFeedsInfo');?></small></label>	
+					<label for="enable_feeds"><strong><?php echo $engine->_t('EnableFeeds');?>:</strong><br>
+					<small><?php echo $engine->_t('EnableFeedsInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="enable_feeds" name="enable_feeds" value="1"<?php echo ($engine->db->enable_feeds ? ' checked' : '');?>>
@@ -408,8 +409,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="xml_sitemap"><strong><?php echo $engine->_t('XML_Sitemap');?>:</strong><br>
-                    <small><?php echo $engine->_t('XML_SitemapInfo');?></small></label>					
+					<label for="xml_sitemap"><strong><?php echo $engine->_t('XmlSitemap');?>:</strong><br>
+					<small><?php echo $engine->_t('XmlSitemapInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ($engine->db->xml_sitemap ? ' checked' : '');?>>
@@ -420,8 +421,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="xml_sitemap_time"><strong><?php echo $engine->_t('XML_SitemapTime');?>:</strong><br>
-                    <small><?php echo $engine->_t('XML_SitemapTimeInfo');?></small></label>		
+					<label for="xml_sitemap_time"><strong><?php echo $engine->_t('XmlSitemapTime');?>:</strong><br>
+					<small><?php echo $engine->_t('XmlSitemapTimeInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="xml_sitemap_time" name="xml_sitemap_time" value="<?php echo (int) $engine->db->xml_sitemap_time;?>">
@@ -430,7 +431,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-                    <?php echo $engine->_t('DiffModeSection');?>
+					<?php echo $engine->_t('DiffModeSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
@@ -443,9 +444,9 @@ function admin_config_basic(&$engine, &$module)
 					<?php
 						$diff_modes = $engine->_t('DiffMode');
 
-						foreach ($engine->_t('DiffMode') as $mode => $diff_mode)
+						foreach ($diff_modes as $mode => $diff_mode)
 						{
-							echo '<option value="' . $mode . '" '.($engine->db->default_diff_mode == $mode ? 'selected' : '') . '>' . $diff_mode . ' (' . $mode . ')</option>';
+							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->default_diff_mode == $mode ? 'selected' : '') . '>' . $diff_mode . ' (' . $mode . ')</option>' . "\n";
 						}
 					?>
 					</select>
@@ -456,7 +457,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('AllowedDiffMode');?>:</strong><br>
+					<label for=""><strong><?php echo $engine->_t('AllowedDiffMode');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowedDiffModeInfo');?></small></label>
 				</td>
 				<td>
@@ -476,7 +477,8 @@ function admin_config_basic(&$engine, &$module)
 
 					foreach ($diff_modes as $mode => $diff_mode)
 					{
-						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="diff_modes[' . $n . ']" id="mode_' . $mode . '" value="' . $mode . '" '. (in_array($mode, $diff_mode_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
+						echo	"\t\t<td>\n\t\t\t" .
+								'<input type="checkbox" name="diff_modes[' . $n . ']" id="mode_' . $mode . '" value="' . $mode . '" '. (in_array($mode, $diff_mode_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
 								'<label for="mode_' . $mode . '">' . $diff_modes[$mode] . ' (' . $mode . ')</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
@@ -500,7 +502,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('EditSummary');?>:</strong><br>
+					<label for=""><strong><?php echo $engine->_t('EditSummary');?>:</strong><br>
 					<small><?php echo $engine->_t('EditSummaryInfo');?></small></label>
 				</td>
 				<td>
@@ -514,7 +516,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('MinorEdit');?>:</strong><br>
+					<label for=""><strong><?php echo $engine->_t('MinorEdit');?>:</strong><br>
 					<small><?php echo $engine->_t('MinorEditInfo');?></small></label>
 				</td>
 				<td>
@@ -527,7 +529,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('ReviewSettings');?>:</strong><br>
+					<label for=""><strong><?php echo $engine->_t('ReviewSettings');?>:</strong><br>
 					<small><?php echo $engine->_t('ReviewSettingsInfo');?></small></label>
 				</td>
 				<td>
@@ -540,21 +542,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('Autosubscribe');?>:</strong><br>
-					<small><?php echo $engine->_t('AutosubscribeInfo');?></small></label>				
-				</td>
-				<td>
-					<input type="radio" id="disable_autosubscribe_on" name="disable_autosubscribe" value="0"<?php echo (!$engine->db->disable_autosubscribe ? ' checked' : '');?>><label for="disable_autosubscribe_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="disable_autosubscribe_off" name="disable_autosubscribe" value="1"<?php echo ($engine->db->disable_autosubscribe ? ' checked' : '');?>><label for="disable_autosubscribe_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('PublishAnonymously');?>:</strong><br>
-					<small><?php echo $engine->_t('PublishAnonymouslyInfo');?></small></label>						
+					<label for=""><strong><?php echo $engine->_t('PublishAnonymously');?>:</strong><br>
+					<small><?php echo $engine->_t('PublishAnonymouslyInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="publish_anonymously_on" name="publish_anonymously" value="1"<?php echo ($engine->db->publish_anonymously ? ' checked' : '');?>><label for="publish_anonymously_on"><?php echo $engine->_t('On');?></label>
@@ -566,8 +555,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="default_rename_redirect"><strong><?php echo $engine->_t('DefaultRenameRedirect');?>:</strong><br>
-					<small><?php echo $engine->_t('DefaultRenameRedirectInfo');?></small></label>					
+					<label for="default_rename_redirect"><strong><?php echo $engine->_t('DefaultRenameRedirect');?>:</strong><br>
+					<small><?php echo $engine->_t('DefaultRenameRedirectInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="default_rename_redirect" name="default_rename_redirect" value="1"<?php echo ($engine->db->default_rename_redirect ? ' checked' : '');?>>
@@ -578,8 +567,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="store_deleted_pages"><strong><?php echo $engine->_t('StoreDeletedPages');?>:</strong><br>
-					<small><?php echo $engine->_t('StoreDeletedPagesInfo');?></small></label>					
+					<label for="store_deleted_pages"><strong><?php echo $engine->_t('StoreDeletedPages');?>:</strong><br>
+					<small><?php echo $engine->_t('StoreDeletedPagesInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="store_deleted_pages" name="store_deleted_pages" value="1"<?php echo ($engine->db->store_deleted_pages ? ' checked' : '');?>>
@@ -590,8 +579,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="keep_deleted_time"><strong><?php echo $engine->_t('KeepDeletedTime');?>:</strong><br>
-					<small><?php echo $engine->_t('KeepDeletedTimeInfo');?></small></label>					
+					<label for="keep_deleted_time"><strong><?php echo $engine->_t('KeepDeletedTime');?>:</strong><br>
+					<small><?php echo $engine->_t('KeepDeletedTimeInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="keep_deleted_time" name="keep_deleted_time" value="<?php echo (int) $engine->db->keep_deleted_time;?>">
@@ -602,8 +591,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-				    <label for="pages_purge_time"><strong><?php echo $engine->_t('PagesPurgeTime');?>:</strong><br>
-					<small><?php echo $engine->_t('PagesPurgeTimeInfo');?></small></label>	
+					<label for="pages_purge_time"><strong><?php echo $engine->_t('PagesPurgeTime');?>:</strong><br>
+					<small><?php echo $engine->_t('PagesPurgeTimeInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="pages_purge_time" name="pages_purge_time" value="<?php echo (int) $engine->db->pages_purge_time;?>">
@@ -614,8 +603,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-				    <label for=""><strong><?php echo $engine->_t('EnableReferrers');?>:</strong><br>
-					<small><?php echo $engine->_t('EnableReferrersInfo');?></small></label>					
+					<label for=""><strong><?php echo $engine->_t('EnableReferrers');?>:</strong><br>
+					<small><?php echo $engine->_t('EnableReferrersInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ($engine->db->enable_referrers == 1 ? ' checked' : '');?>><label for="enable_referrer_on"><?php echo $engine->_t('On');?></label>
@@ -628,8 +617,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="referrers_purge_time"><strong><?php echo $engine->_t('ReferrersPurgeTime');?>:</strong><br>
-					<small><?php echo $engine->_t('ReferrersPurgeTimeInfo');?></small></label>	
+					<label for="referrers_purge_time"><strong><?php echo $engine->_t('ReferrersPurgeTime');?>:</strong><br>
+					<small><?php echo $engine->_t('ReferrersPurgeTimeInfo');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo (int) $engine->db->referrers_purge_time;?>">
@@ -640,8 +629,8 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for=""><strong><?php echo $engine->_t('AttachmentHandler');?>:</strong><br>
-					<small><?php echo $engine->_t('AttachmentsHandlerInfo');?></small></label>	
+					<label for=""><strong><?php echo $engine->_t('AttachmentHandler');?>:</strong><br>
+					<small><?php echo $engine->_t('AttachmentsHandlerInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="attachments_handler_on" name="attachments_handler" value="1"<?php echo ($engine->db->attachments_handler == 1 ? ' checked' : '');?>><label for="attachments_handler_on"><?php echo $engine->_t('On');?></label>
@@ -654,7 +643,7 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-                    <label for="noindex"><strong><?php echo $engine->_t('SearchEngineVisibility');?>:</strong><br>
+					<label for="noindex"><strong><?php echo $engine->_t('SearchEngineVisibility');?>:</strong><br>
 					<small><?php echo $engine->_t('SearchEngineVisibilityInfo');?></small></label>
 				</td>
 				<td>
