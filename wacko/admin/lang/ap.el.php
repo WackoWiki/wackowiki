@@ -748,8 +748,8 @@ $ap_translation = [
 	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
 	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
-	'WikiLinks'					=> 'Wiki-links',
-	'WikiLinksInfo'				=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
+	'WikiLinksResync'			=> 'Wiki-links',
+	'WikiLinksResyncInfo'				=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Αυτές οι πληροφορίες χρησιμοποιούνται όταν το σύστημα συζητήσεων στέλνει μηνύματα ηλεκτρονικού ταχυδρομείου στα μέλη σας. Παρακαλώ βεβαιωθείτε ότι η διεύθυνση ηλεκτρονικού ταχυδρομείου που έχετε ορίσει είναι έγκυρη, όλα τα απαγορευμένα ή μη απεσταλμένα μηνύματα μηνύματα κατά πάσα πιθανότητα θα αποστέλλονται σε αυτή τη διεύθυνση. Εάν ο πάροχος φιλοξενίας σας δεν παρέχει μια μητρική (βασισμένη σε PHP) υπηρεσία ηλεκτρονικού ταχυδρομείου, μπορείτε αντί αυτού να στέλνετε μηνύματα απευθείας με χρήση του SMTP. Αυτό απαιτεί τη διεύθυνση ενός κατάλληλου διακομιστή (ρωτήστε τον πάροχο σας εάν είναι απαραίτητο). Εάν ο διακομιστής απαιτεί πιστοποίηση (και μόνο εάν το κάνει) εισάγετε τα απαιτούμενα όνομα χρήστη, κωδικό πρόσβασης και μέθοδο πιστοποίησης.',

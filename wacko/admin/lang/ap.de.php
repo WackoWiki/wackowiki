@@ -297,6 +297,7 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
 	'AdminName'					=> 'Administrator der Seite',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
+
 	'LanguageSection'			=> 'Sprache',
 	'DefaultLanguage'			=> 'Default Sprache',
 	'DefaultLanguageInfo'		=> 'Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.',
@@ -304,11 +305,13 @@ $ap_translation = [
 	'MultiLanguageInfo'			=> 'Include a choice of language on the page by page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
 	'AllowedLanguagesInfo'		=> 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
+
 	'CommentSection'			=> 'Kommentare',
-	'AllowComment'				=> 'Erlaube Kommentare',
-	'AllowCommentInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
-	'SortingComments'			=> 'Sorting comments',
+	'AllowComments'				=> 'Erlaube Kommentare',
+	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
+	'SortingComments'			=> 'Kommentare sortieren',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel',
 	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
@@ -328,6 +331,7 @@ $ap_translation = [
 	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
 	'MenuItems'					=> 'Menu items',
 	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
+
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',
 	'EnableFeedsInfo'			=> 'Turns on or off RSS feeds for the entire wiki.',
@@ -335,6 +339,7 @@ $ap_translation = [
 	'XmlSitemapInfo'			=> 'Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
 	'XmlSitemapTimeInfo'		=> 'Generate a Sitemaps only once in this number of days, zero means on every page change.',
+
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -347,6 +352,7 @@ $ap_translation = [
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
+
 	'PublishAnonymously'		=> 'Allow anonymous publishing',
 	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
 	'DefaultRenameRedirect'		=> 'When renaming put redirection',
@@ -748,8 +754,8 @@ $ap_translation = [
 	'FeedsInfo'					=> 'Im Falle der direkten Bearbeitung von Seiten in der Datenbank spiegelt der Inhalt der RSS-Feeds möglicherweise nicht die vorgenommenen Änderungen wider. <br> Diese Funktion synchronisiert die RSS-Kanäle mit dem aktuellen Zustand der Datenbank.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
 	'XmlSiteMapInfo'			=> 'Diese Funktion synchronisiert die XML-Sitemap mit dem aktuellen Zustand der Datenbank.',
-	'WikiLinks'					=> 'Wiki-Links',
-	'WikiLinksInfo'				=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code> page_link </code> und <code> file_link </code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
+	'WikiLinksResync'			=> 'Wiki-Links',
+	'WikiLinksResyncInfo'		=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code> page_link </code> und <code> file_link </code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',

@@ -297,6 +297,7 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Дополнение к заголовку сайта, отображаемое в шапках страниц.',
 	'AdminName'					=> 'Имя владельца сайта',
 	'AdminNameInfo'				=> 'Имя пользователя, отвечающего за общую поддержку сайта. Это имя не используется для определения прав доступа, но желательно, чтобы оно соответствовало имени главного администратора сайта.',
+
 	'LanguageSection'			=> 'Языковые настройки',
 	'DefaultLanguage'			=> 'Язык по умолчанию',
 	'DefaultLanguageInfo'		=> 'Определяет язык сообщений при отображении незарегистрированным гостям, а также параметры локали и правила транслитерации адресов страниц.',
@@ -304,11 +305,13 @@ $ap_translation = [
 	'MultiLanguageInfo'			=> 'Включить возможность выбора языка на постраничной основе.',
 	'AllowedLanguages'			=> 'Allowed languages',
 	'AllowedLanguagesInfo'		=> 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
+
 	'CommentSection'			=> 'Comments',
 	'AllowComments'				=> 'Allow comments',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+
 	'ToolbarSection'			=> 'Панели',
 	'CommentsPanel'				=> 'Панель комментариев',
 	'CommentsPanelInfo'			=> 'По умолчанию отображать в нижней части страниц панель комментариев.',
@@ -328,6 +331,7 @@ $ap_translation = [
 	'DisplayingSectionsInfo'	=> 'При включенной предыдущей опции, следует ли выводить только дочерние страницы (<em>нижние</em>), только соседние (<em>верхние</em>) или и те, и другие (<em>дерево</em>).',
 	'MenuItems'					=> 'Menu items',
 	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
+
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',
 	'EnableFeedsInfo'			=> 'Turns on or off RSS feeds for the entire wiki.',
@@ -335,6 +339,7 @@ $ap_translation = [
 	'XmlSitemapInfo'			=> 'Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
 	'XmlSitemapTimeInfo'		=> 'Generate a Sitemaps only once in this number of days, zero means on every page change.',
+
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -347,6 +352,7 @@ $ap_translation = [
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
+
 	'PublishAnonymously'		=> 'Allow anonymous publishing',
 	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
 	'DefaultRenameRedirect'		=> 'When renaming put redirection',
@@ -748,8 +754,8 @@ $ap_translation = [
 	'FeedsInfo'					=> 'В случае прямой правки документов в базе данных, содержание RSS-фидов не отразит сделанных изменений. Данная функция синхронизирует RSS-каналы с текущим состоянием БД.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
 	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
-	'WikiLinks'					=> 'Wiki-ссылки',
-	'WikiLinksInfo'				=> 'Выполняет повторный рендеринг всех внутрисайтовых ссылок и восстанавливает содержимое таблицы <code>page_link</code> и <code>file_link</code> в случае ее порчи или повреждений (может занять значительное время).',
+	'WikiLinksResync'			=> 'Wiki-ссылки',
+	'WikiLinksResyncInfo'		=> 'Выполняет повторный рендеринг всех внутрисайтовых ссылок и восстанавливает содержимое таблицы <code>page_link</code> и <code>file_link</code> в случае ее порчи или повреждений (может занять значительное время).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Эта информация используется для отправки конференцией email-сообщений пользователям. Удостоверьтесь в правильности указанных email-адресов, все возвращённые или не доставленные сообщения будут, вероятно, отправлены на них. Если ваш сервер не обеспечивает использование встроенной (в PHP) службы email, вы можете отправлять сообщения напрямую с использованием SMTP. Для этого необходим адрес подходящего сервера (если нужно, спросите об этом у провайдера). Если сервер требует аутентификации (и только в этом случае), введите необходимые имя, пароль и метод аутентификации.',
