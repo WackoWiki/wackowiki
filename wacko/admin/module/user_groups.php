@@ -48,6 +48,8 @@ function admin_user_groups(&$engine, &$module)
 	//   list change/update
 	/////////////////////////////////////////////
 
+	$_order		= $_GET['order'] ?? '';
+
 	// update groups list
 	if (isset($_POST['save']))
 	{
@@ -163,7 +165,7 @@ function admin_user_groups(&$engine, &$module)
 					echo $engine->form_open('remove_group_member');
 
 					echo '<input type="hidden" name="group_id" value="' . $group_id . '">' .
-						'<input type="hidden" name="member_id" value="' . htmlspecialchars($_POST['change_member'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
+						'<input type="hidden" name="member_id" value="' . (int) $_POST['change_member'] . '">' . "\n" .
 					'<table class="formation">' .
 						'<tr>
 							<td>
@@ -186,9 +188,10 @@ function admin_user_groups(&$engine, &$module)
 		{
 			// do we have identical names?
 			if ($engine->db->load_single(
-			"SELECT group_id FROM " . $engine->db->table_prefix . "usergroup " .
-			"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " " .
-			"LIMIT 1"))
+				"SELECT group_id " .
+				"FROM " . $engine->db->table_prefix . "usergroup " .
+				"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " " .
+				"LIMIT 1"))
 			{
 				$engine->show_message($engine->_t('GroupsAlreadyExists'));
 				$_POST['change'] = $_POST['group_id'];
@@ -216,9 +219,9 @@ function admin_user_groups(&$engine, &$module)
 		{
 			// do we have identical names?
 			if ($engine->db->load_single(
-			"SELECT group_id FROM " . $engine->db->table_prefix . "usergroup " .
-			"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " AND group_id <> " . (int) $_POST['group_id'] . " " .
-			"LIMIT 1"))
+				"SELECT group_id FROM " . $engine->db->table_prefix . "usergroup " .
+				"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " AND group_id <> " . (int) $_POST['group_id'] . " " .
+				"LIMIT 1"))
 			{
 				$engine->set_message($engine->_t('GroupsAlreadyExists'));
 				$_POST['change'] = $_POST['group_id'];
@@ -349,7 +352,7 @@ function admin_user_groups(&$engine, &$module)
 			{
 				echo $engine->form_open('edit_group');
 
-				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
+				echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
 					'<table class="formation">' .
 					'<tr><td>
 						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\' in</label>
@@ -414,7 +417,7 @@ function admin_user_groups(&$engine, &$module)
 			{
 				echo $engine->form_open('delete_group');
 
-				echo '<input type="hidden" name="group_id" value="' . htmlspecialchars($_POST['change'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
+				echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
 					'<table class="formation">' .
 						'<tr>
 							<td>
@@ -495,51 +498,51 @@ function admin_user_groups(&$engine, &$module)
 	else
 	{
 		// set created ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'created_asc')
+		if ($_order == 'created_asc')
 		{
-			$order		= 'ORDER BY g.created ASC ';
-			$created	= 'created_desc';
+			$order			= 'ORDER BY g.created ASC ';
+			$created		= 'created_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'created_desc')
+		else if ($_order == 'created_desc')
 		{
-			$order		= 'ORDER BY g.created DESC ';
-			$created	= 'created_asc';
+			$order			= 'ORDER BY g.created DESC ';
+			$created		= 'created_asc';
 		}
 		else
 		{
-			$created	= 'created_asc';
+			$created		= 'created_asc';
 		}
 
 		// set usergroup ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'group_asc')
+		if ($_order == 'group_asc')
 		{
-			$order		= 'ORDER BY g.group_name DESC ';
-			$ordergroup	= 'user_desc';
+			$order			= 'ORDER BY g.group_name DESC ';
+			$order_group	= 'user_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'group_desc')
+		else if ($_order == 'group_desc')
 		{
-			$order		= 'ORDER BY g.group_name ASC ';
-			$ordergroup	= 'group_asc';
+			$order			= 'ORDER BY g.group_name ASC ';
+			$order_group	= 'group_asc';
 		}
 		else
 		{
-			$ordergroup	= 'group_desc';
+			$order_group	= 'group_desc';
 		}
 
 		// set members ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'members_asc')
+		if ($_order == 'members_asc')
 		{
 			$order			= 'ORDER BY members DESC ';
-			$ordermembers	= 'user_desc';
+			$order_members	= 'user_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'members_desc')
+		else if ($_order == 'members_desc')
 		{
 			$order			= 'ORDER BY members ASC ';
-			$ordermembers	= 'members_asc';
+			$order_members	= 'members_asc';
 		}
 		else
 		{
-			$ordermembers	= 'members_desc';
+			$order_members	= 'members_desc';
 		}
 
 		// filter by lang
@@ -558,7 +561,6 @@ function admin_user_groups(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
 
@@ -594,10 +596,10 @@ function admin_user_groups(&$engine, &$module)
 			<tr>
 				<th style="width:5px;"></th>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordergroup; ?>">Group</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_group; ?>">Group</a></th>
 				<th>Description</th>
 				<th style="width:20px;">Moderator</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordermembers; ?>">Members</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_members; ?>">Members</a></th>
 				<th style="width:20px;">Open</th>
 				<th style="width:20px;">Active</th>
 				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $created; ?>">Created</a></th>

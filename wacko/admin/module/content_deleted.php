@@ -71,9 +71,7 @@ else if ($type == OBJECT_FILE)
 
 ?>
 	<p>
-		List of removed pages and files.
-		Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
-		or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)
+	<?php echo $engine->_t('DeletedObjectsInfo');?>
 	</p>
 <?php
 
@@ -99,7 +97,7 @@ else if ($type == OBJECT_FILE)
 
 	echo $filter_type;
 
-	if (isset($pages))
+	if (!empty($pages))
 	{
 		$engine->print_pagination($pagination);
 
@@ -140,7 +138,7 @@ else if ($type == OBJECT_FILE)
 
 		$engine->print_pagination($pagination);
 	}
-	else if ($files)
+	else if (!empty($files))
 	{
 		$engine->print_pagination($pagination);
 

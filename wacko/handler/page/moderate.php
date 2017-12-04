@@ -216,7 +216,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$engine->save_page($new_tag, $title, $page['body'], '', '', '', 0, '', '', true);
 
 	// set page context back
-	$engine->page = $old_page;
+	$engine->page	= $old_page;
 
 	$new_page_id	= $engine->get_page_id($new_tag);
 
@@ -334,7 +334,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			if (!in_array($id, $set) && !empty($id))
 			{
-				$set[] = $id;
+				$set[] = (int) $id;
 			}
 		}
 
@@ -346,7 +346,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	{
 		if ($key == 'id' && !in_array($val, $set) && !empty($val))
 		{
-			$set[] = $val;
+			$set[] = (int) $val;
 		}
 	}
 
@@ -361,7 +361,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			if ($key == 'id'  && !empty($val))
 			{
-				$set[] = $val;
+				$set[] = (int) $val;
 			}
 		}
 
@@ -385,7 +385,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	reset($set);
 	unset($n, $page_id);
 
-	// creting rss object
+	// creating rss object
 	$xml = new Feed($this);
 
 	////// BEGIN SUBFORUM MODERATION //////
@@ -488,7 +488,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= str_replace([' ', "\t"], '', $tag);
 
 				// check new tag existance
-				if ($old_tag != $this->tag . '/' . $tag && moderate_page_exists($this, $this->tag . '/' . $tag) === true)
+				if ($old_tag != $this->tag . '/' . $tag
+					&& moderate_page_exists($this, $this->tag . '/' . $tag) === true)
 				{
 					$error = $this->_t('ModerateRenameExists');
 				}
@@ -531,7 +532,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				moderate_merge_topics($this, $_POST['base'], $topics);
 				$this->log(3, Ut::perc_replace($this->_t('LogMergedPages', SYSTEM_LANG),
-							'##'.implode('##, ##', $topics) . '##', $_POST['base']));
+							'##' . implode('##, ##', $topics) . '##', $_POST['base']));
 
 				unset($accept_action, $topics);
 
@@ -576,9 +577,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		// make counter query
-		$sql = "SELECT COUNT(p.page_id) AS n " .
+		$sql =
+			"SELECT COUNT(p.page_id) AS n " .
 			"FROM " . $this->db->table_prefix . "page AS p, " .
-				"" . $this->db->table_prefix . "acl AS a " .
+					  $this->db->table_prefix . "acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'create' AND a.list = '' " .
 				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " " .
@@ -589,7 +591,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$pagination	= $this->pagination($count['n'], $limit, 'p', ['ids' => implode('-', $set)], 'moderate');
 
 		// make collector query
-		$sql = "SELECT p.page_id, p.tag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, u.user_name, o.user_name as owner_name " .
+		$sql =
+			"SELECT p.page_id, p.tag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page AS p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
@@ -620,7 +623,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . $this->_t('ModerateDeleteConfirm') . '</th></td>' .
+					'<tr><th>' . $this->_t('ModerateDeleteConfirm') . '</th></tr>' .
 					'<tr><td>' .
 						'<em>' . implode('<br>', $accept_text) . '</em><br>' .
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
@@ -639,7 +642,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$sections = $this->db->load_all(
 				"SELECT p.tag, p.title " .
 				"FROM " . $this->db->table_prefix . "page AS p, " .
-					$this->db->table_prefix . "acl AS a " .
+						  $this->db->table_prefix . "acl AS a " .
 				"WHERE p.page_id = a.page_id " .
 					"AND a.privilege = 'comment' AND a.list = '' " .
 					"AND p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " " .
@@ -652,7 +655,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . $this->_t('ModerateMovesConfirm') . '</th></td>' .
+					'<tr><th>' . $this->_t('ModerateMovesConfirm') . '</th></tr>' .
 					'<tr><td>' .
 						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
@@ -672,7 +675,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . $this->_t('ModerateRenameConfirm') . '</th></td>' .
+					'<tr><th>' . $this->_t('ModerateRenameConfirm') . '</th></tr>' .
 					'<tr><td>' .
 						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
@@ -702,13 +705,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			foreach ($options as $option)
 			{
-				$list .= '<option value="' . $option['topic'] . '">' . $option['accept_text'] . "</option>\n";
-				$accept_text[] = $option['accept_text'];
+				$list			.= '<option value="' . $option['topic'] . '">' . $option['accept_text'] . "</option>\n";
+				$accept_text[]	= $option['accept_text'];
 			}
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . $this->_t('ModerateMergeConfirm') . '</th></td>' .
+					'<tr><th>' . $this->_t('ModerateMergeConfirm') . '</th></tr>' .
 					'<tr><td>' .
 						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
@@ -743,7 +746,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '"> '.
 						($set
 							? '<input type="submit" name="reset" id="submit" value="' . $this->_t('ModerateReset') . '"> '.
-							  '&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set) . '</small>'
+							  '&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
 							: ''
 						) .
 					'</td>' .
@@ -1004,7 +1007,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				if ($forum_cluster === true)
 				{
 					// check new tag existance
-					if ($old_tag != $section . '/' . $tag && moderate_page_exists($this, $section . '/' . $tag) === true)
+					if ($old_tag != $section . '/' . $tag
+						&& moderate_page_exists($this, $section . '/' . $tag) === true)
 					{
 						$error = $this->_t('ModerateRenameExists');
 					}
@@ -1156,7 +1160,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		// make counter query
-		$sql = "SELECT COUNT(page_id) AS n " .
+		$sql =
+			"SELECT COUNT(page_id) AS n " .
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE comment_on_id = " . (int) $this->page['page_id'] . " " .
 			"LIMIT 1";
@@ -1166,7 +1171,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$pagination	= $this->pagination($count['n'], $limit, 'p', ['ids' => implode('-', $set)], 'moderate');
 
 		// make collector query
-		$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name " .
+		$sql =
+			"SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
@@ -1194,7 +1200,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . $this->_t('ModerateDeleteConfirm') . '</th></td>' .
+					'<tr><th>' . $this->_t('ModerateDeleteConfirm') . '</th></tr>' .
 					'<tr><td>' .
 						'<em>' . $accept_text . '</em><br>' .
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
@@ -1214,11 +1220,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$sections = $this->db->load_all(
 					"SELECT p.tag, p.title " .
 					"FROM " . $this->db->table_prefix . "page AS p, " .
-						"" . $this->db->table_prefix . "acl AS a " .
+							  $this->db->table_prefix . "acl AS a " .
 					"WHERE p.page_id = a.page_id " .
 						"AND a.privilege = 'comment' AND a.list = '' " .
-						"AND " .
-						"p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " " .
+						"AND p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " " .
 					"ORDER BY modified ASC", true);
 
 				foreach ($sections as $section)
@@ -1228,9 +1233,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 					'<table class="formation">' .
-						'<tr><th>' . $this->_t('ModerateMoveConfirm') . '</th></td>' .
+						'<tr><th>' . $this->_t('ModerateMoveConfirm') . '</th></tr>' .
 						'<tr><td>' .
-							($error == true
+						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
 							: '' ) .
 							'<em>' . $accept_text . '</em><br>' .
@@ -1247,11 +1252,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 					'<table class="formation">' .
-						'<tr><th>' . $this->_t('ModeratePgMoveConfirm') . '</th></td>' .
+						'<tr><th>' . $this->_t('ModeratePgMoveConfirm') . '</th></tr>' .
 						'<tr><td>' .
-							($error == true
-								? '<span class="cite"><strong>' . $error . '</strong></span><br>'
-								: '' ) .
+						($error == true
+							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
+							: '' ) .
 							'<em>' . $accept_text . '</em><br>' .
 							'<input type="text" name="cluster" size="50" maxlength="250"> ' .
 							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
@@ -1265,11 +1270,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . $this->_t('ModerateRenameConfirm') . '</th></td>' .
+					'<tr><th>' . $this->_t('ModerateRenameConfirm') . '</th></tr>' .
 					'<tr><td>' .
-						($error == true
-							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
-							: '' ) .
+					($error == true
+						? '<span class="cite"><strong>' . $error . '</strong></span><br>'
+						: '' ) .
 						'<input type="text" name="new_tag" size="50" maxlength="250" value="' . $this->page['title'] . '"> '.
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
 						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
@@ -1281,7 +1286,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . Ut::perc_replace($this->_t('ModerateComDelConfirm'), count($set), ( count($set) > 1 ? $this->_t('ModerateComments') : $this->_t('ModerateComment') )) . '</th></td>' .
+					'<tr><th>' . Ut::perc_replace($this->_t('ModerateComDelConfirm'), count($set), ( count($set) > 1 ? $this->_t('ModerateComments') : $this->_t('ModerateComment') )) . '</th></tr>' .
 					'<tr><td>' .
 						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
@@ -1296,7 +1301,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<input type="hidden" name="' . $accept_action . '" value="1">' .
 				'<table class="formation">' .
-					'<tr><th>' . ($forum_cluster === true ? $this->_t('ModerateSplitNewName') : $this->_t('ModerateSplitPageName') ) . '</th></td>' .
+					'<tr><th>' .
+						($forum_cluster === true
+							? $this->_t('ModerateSplitNewName')
+							: $this->_t('ModerateSplitPageName') ) .
+					'</th></tr>' .
 					'<tr><td>' .
 						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
@@ -1334,15 +1343,26 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							)
 							: ''
 						) .
-						(isset($this->db->moders_docs) ? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>' : '') .
+						(isset($this->db->moders_docs)
+							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
+							: '') .
 					'</td>' .
 				'</tr>' . "\n" .
 				'<tr class="formation">' .
-					'<th colspan="2">' . ($this->has_access('comment', $this->page['page_id'], GUEST) === false ? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">' : '' ) . $this->_t('ForumTopic') . '</th>' .
+					'<th colspan="2">' .
+						($this->has_access('comment', $this->page['page_id'], GUEST) === false
+							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
+							: '' ) .
+						$this->_t('ForumTopic') .
+					'</th>' .
 				'</tr>' . "\n" .
 				'<tr class="lined">' .
 					'<td colspan="2" style="padding-bottom:30px;">' .
-						'<strong><small>' . ($forum_cluster === false ? $this->user_link($this->page['owner_name'], '', true, false) : $this->user_link($this->page['user_name'], '', true, false)) . ' (' . $this->get_time_formatted($this->page['created']) . ')</small></strong>' .
+						'<strong><small>' .
+							($forum_cluster === false
+								? $this->user_link($this->page['owner_name'], '', true, false)
+								: $this->user_link($this->page['user_name'], '', true, false)) .
+							' (' . $this->get_time_formatted($this->page['created']) . ')</small></strong>' .
 						'<br>' . $body.
 					'</td>' .
 				'</tr>' . "\n";
