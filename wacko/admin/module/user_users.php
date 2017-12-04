@@ -101,8 +101,9 @@ function admin_user_users(&$engine, &$module)
 	//   list change/update processing
 	/////////////////////////////////////////////
 
-	#$user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : isset($_GET['user_id']) ? $_GET['user_id'] : '');
-	$user_id = (isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : '');
+	#$user_id = (int) ($_POST['user_id'] ?? ($_GET['user_id'] ?? ''));
+	$user_id	= (int) ($_REQUEST['user_id'] ?? '');
+	$_order		= $_GET['order'] ?? '';
 
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
@@ -141,10 +142,10 @@ function admin_user_users(&$engine, &$module)
 			$engine->db->sql_query(
 				"INSERT INTO " . $engine->db->table_prefix . "user SET " .
 					"signup_time		= UTC_TIMESTAMP(), " .
-					"email			= " . $engine->db->q($_POST['email']) . ", " .
-					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .
-					"enabled		= " . (int) $_POST['enabled'] . ", " .
-					"user_name		= " . $engine->db->q($_POST['newname']) . " ");
+					"email				= " . $engine->db->q($_POST['email']) . ", " .
+					"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
+					"enabled			= " . (int) $_POST['enabled'] . ", " .
+					"user_name			= " . $engine->db->q($_POST['newname']) . " ");
 
 			// get new user_id
 			$_user_id = $engine->db->load_single(
@@ -451,7 +452,7 @@ function admin_user_users(&$engine, &$module)
 						{
 							foreach ($langs as $lang)
 							{
-								echo '<option value="' . $lang . '" '.($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+								echo '<option value="' . $lang . '" ' . ($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
 							}
 						}
 
@@ -469,7 +470,7 @@ function admin_user_users(&$engine, &$module)
 
 						foreach ($themes as $theme)
 						{
-							echo '<option value="' . $theme . '" '.($user['theme'] == $theme ? 'selected' : '') . '>' . $theme . '</option>';
+							echo '<option value="' . $theme . '" ' . ($user['theme'] == $theme ? 'selected' : '') . '>' . $theme . '</option>';
 						}
 
 					echo '</select>
@@ -507,7 +508,7 @@ function admin_user_users(&$engine, &$module)
 				'<tr>
 					<td>
 						<br>
-						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '"> '.
+						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '"> ' .
 						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
 						'<br>
 						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
@@ -634,134 +635,134 @@ function admin_user_users(&$engine, &$module)
 		// defining WHERE and ORDER clauses
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
 		{
-			$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
+			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 		}
 		// set signuptime ordering
-		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
+		else if ($_order == 'signup_asc')
 		{
-			$order			= 'ORDER BY signup_time ASC ';
-			$signup_time	= 'signup_desc';
+			$order				= 'ORDER BY signup_time ASC ';
+			$signup_time		= 'signup_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'signup_desc')
+		else if ($_order == 'signup_desc')
 		{
-			$order			= 'ORDER BY signup_time DESC ';
-			$signup_time	= 'signup_asc';
+			$order				= 'ORDER BY signup_time DESC ';
+			$signup_time		= 'signup_asc';
 		}
 		else
 		{
-			$signup_time	= 'signup_asc';
+			$signup_time		= 'signup_asc';
 		}
 
 		// set last_visit ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'last_visit_asc')
+		if ($_order == 'last_visit_asc')
 		{
-			$order			= 'ORDER BY last_visit ASC ';
-			$last_visit		= 'last_visit_desc';
+			$order				= 'ORDER BY last_visit ASC ';
+			$last_visit			= 'last_visit_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'last_visit_desc')
+		else if ($_order == 'last_visit_desc')
 		{
-			$order			= 'ORDER BY last_visit DESC ';
-			$last_visit		= 'last_visit_asc';
+			$order				= 'ORDER BY last_visit DESC ';
+			$last_visit			= 'last_visit_asc';
 		}
 		else
 		{
-			$last_visit		= 'last_visit_asc';
+			$last_visit			= 'last_visit_asc';
 		}
 
 		// set total_pages ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'total_pages_asc')
+		if ($_order == 'total_pages_asc')
 		{
-			$order			= 'ORDER BY total_pages ASC ';
-			$orderpages		= 'total_pages_desc';
+			$order				= 'ORDER BY total_pages ASC ';
+			$order_pages		= 'total_pages_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'total_pages_desc')
+		else if ($_order == 'total_pages_desc')
 		{
-			$order			= 'ORDER BY total_pages DESC ';
-			$orderpages		= 'total_pages_asc';
+			$order				= 'ORDER BY total_pages DESC ';
+			$order_pages		= 'total_pages_asc';
 		}
 		else
 		{
-			$orderpages		= 'total_pages_asc';
+			$order_pages		= 'total_pages_asc';
 		}
 
 		// set total_comments ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'total_comments_asc')
+		if ($_order == 'total_comments_asc')
 		{
-			$order			= 'ORDER BY total_comments ASC ';
-			$ordercomments	= 'total_comments_desc';
+			$order				= 'ORDER BY total_comments ASC ';
+			$order_comments		= 'total_comments_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'total_comments_desc')
+		else if ($_order == 'total_comments_desc')
 		{
-			$order			= 'ORDER BY total_comments DESC ';
-			$ordercomments	= 'total_comments_asc';
+			$order				= 'ORDER BY total_comments DESC ';
+			$order_comments		= 'total_comments_asc';
 		}
 		else
 		{
-			$ordercomments	= 'total_comments_asc';
+			$order_comments	= 'total_comments_asc';
 		}
 
 		// set total_revisions ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'total_revisions_asc')
+		if ($_order == 'total_revisions_asc')
 		{
-			$order			= 'ORDER BY total_revisions ASC ';
-			$orderrevisions	= 'total_revisions_desc';
+			$order				= 'ORDER BY total_revisions ASC ';
+			$order_revisions	= 'total_revisions_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'total_revisions_desc')
+		else if ($_order == 'total_revisions_desc')
 		{
-			$order			= 'ORDER BY total_revisions DESC ';
-			$orderrevisions	= 'total_revisions_asc';
+			$order				= 'ORDER BY total_revisions DESC ';
+			$order_revisions	= 'total_revisions_asc';
 		}
 		else
 		{
-			$orderrevisions	= 'total_revisions_asc';
+			$order_revisions	= 'total_revisions_asc';
 		}
 
 		// set total_uploads ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'total_uploads_asc')
+		if ($_order == 'total_uploads_asc')
 		{
 			$order			= 'ORDER BY total_uploads ASC ';
-			$orderuploads	= 'total_uploads_desc';
+			$order_uploads	= 'total_uploads_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'total_uploads_desc')
+		else if ($_order == 'total_uploads_desc')
 		{
 			$order			= 'ORDER BY total_uploads DESC ';
-			$orderuploads	= 'total_uploads_asc';
+			$order_uploads	= 'total_uploads_asc';
 		}
 		else
 		{
-			$orderuploads	= 'total_uploads_asc';
+			$order_uploads	= 'total_uploads_asc';
 		}
 
 		// set user_name ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'user_asc')
+		if ($_order == 'user_asc')
 		{
 			$order			= 'ORDER BY user_name DESC ';
-			$orderuser		= 'user_desc';
+			$order_user		= 'user_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'user_desc')
+		else if ($_order == 'user_desc')
 		{
 			$order			= 'ORDER BY user_name ASC ';
-			$orderuser		= 'user_asc';
+			$order_user		= 'user_asc';
 		}
 		else
 		{
-			$orderuser		= 'user_desc';
+			$order_user		= 'user_desc';
 		}
 
 		// set real_name ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'name_asc')
+		if ($_order == 'name_asc')
 		{
 			$order			= 'ORDER BY real_name DESC ';
-			$ordername		= 'name_desc';
+			$order_name		= 'name_desc';
 		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'name_desc')
+		else if ($_order == 'name_desc')
 		{
 			$order			= 'ORDER BY real_name ASC ';
-			$ordername		= 'name_asc';
+			$order_name		= 'name_asc';
 		}
 		else
 		{
-			$ordername		= 'name_desc';
+			$order_name		= 'name_desc';
 		}
 
 		// filter by account_status
@@ -788,7 +789,6 @@ function admin_user_users(&$engine, &$module)
 			( $where ? $where : '' )
 			);
 
-		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
 
@@ -842,13 +842,13 @@ function admin_user_users(&$engine, &$module)
 				<th style="width:5px;"></th>
 				<th style="width:5px;"></th>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $orderuser; ?>">Username</a></th>
-				<!--<th style="width:150px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordername; ?>">Realname</a></th>-->
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_user; ?>">Username</a></th>
+				<!--<th style="width:150px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_name; ?>">Realname</a></th>-->
 				<th>Email</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $orderpages; ?>">Pages</a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordercomments; ?>">Comments</a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $orderrevisions; ?>">Revisions</a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $orderuploads; ?>">Uploads</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_pages; ?>">Pages</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_comments; ?>">Comments</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_revisions; ?>">Revisions</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_uploads; ?>">Uploads</a></th>
 				<th style="width:20px;">Language</th>
 				<th style="width:20px;">Enabled</th>
 				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>

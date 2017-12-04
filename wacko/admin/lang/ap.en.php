@@ -289,7 +289,7 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
 
 	// Basic settings
-	'ConfigBasicSection'		=> 'Basic parameters',
+
 	'SiteName'					=> 'Site Name',
 	'SiteNameInfo'				=> 'The title of this site, appears on browser title, theme header, email-notification, etc.',
 	'SiteDesc'					=> 'Site Description:',
@@ -357,7 +357,7 @@ $ap_translation = [
 	'DefaultRenameRedirect'		=> 'When renaming put redirection',
 	'DefaultRenameRedirectInfo'	=> 'By default, propose to redirect the old address pereimenuemoy page.',
 	'StoreDeletedPages'			=> 'Keep deleted pages',
-	'StoreDeletedPagesInfo'		=> 'When you delete a page (the comment) put her in a special section where she had some time (below) will be available for viewing and recovery.',
+	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file put her in a special section where she had some time (below) will be available for viewing and recovery.',
 	'KeepDeletedTime'			=> 'Storage time of deleted pages',
 	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only if the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).',
 	'PagesPurgeTime'			=> 'Storage time of page revisions',
@@ -822,7 +822,12 @@ $ap_translation = [
 	'MinThumbFilesize'			=> 'Minimum thumbnail file size',
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
 
-	// log module
+	// Deleted module
+	'DeletedObjectsInfo'		=> 'List of removed pages and files.
+									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
+									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+
+	// Log module
 	'LogFilterTip'				=> 'Filter events by criteria',
 	'LogLevel'					=> 'Level',
 	'LogLevelFilters'	=> [
