@@ -45,7 +45,7 @@ if (@$_POST['_action'] === 'general_properties')
 	$this->db->sql_query(
 		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"page_lang			= " . $this->db->q($_POST['page_lang']) . ", " .
-			"theme				= " . $this->db->q($_POST['theme']) ?? '') . ", " .
+			"theme				= " . ($this->db->q($_POST['theme']) ?? '') . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
 			# "menu_tag			= " . $this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . ", " .
 			# "show_menu_tag		= " . $this->db->q((int) $_POST['show_menu_tag']) . ", " .
@@ -59,7 +59,7 @@ if (@$_POST['_action'] === 'general_properties')
 if ($_POST)
 {
 	// log event
-	$this->log(4, Ut::perc_replace($this->_t('LogPageMetaUpdated', SYSTEM_LANG), $this->tag . ' ' . @$_POST['title']));
+	$this->log(4, Ut::perc_replace($this->_t('LogPageMetaUpdated', SYSTEM_LANG), $this->tag . ' ' . ($_POST['title'] ?? $this->page['title'])));
 
 	// reload page
 	$this->set_message($this->_t('MetaUpdated'), 'success');

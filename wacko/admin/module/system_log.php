@@ -155,10 +155,10 @@ function admin_system_log(&$engine, &$module)
 					$selected =
 						($mode === 1
 							? (!isset($_POST['level_mod']) || (int) @$_POST['level_mod'] == $mode)
-							: ((int) @$_POST['level_mod'] == $mode)
+							: ((int) ($_POST['level_mod'] ?? $_GET['level_mod'] ?? '') == $mode)
 					);
 
-					echo '<option value="' . $mode . '" ' . ( $selected ? ' selected' : '' ) . '>' . $log_filter . '</option>' . "\n";
+					echo '<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' . $log_filter . '</option>' . "\n";
 				}
 			?>
 			</select>
@@ -168,7 +168,11 @@ function admin_system_log(&$engine, &$module)
 
 				foreach ($log_levels as $mode => $log_level)
 				{
-					echo '<option value="' . $mode . '" ' . ( (!isset($_POST['level']) && (int) $level == $mode) || ((int) @$_POST['level'] == $mode) ? ' selected' : '' ) . '>' . $mode . ': ' . $log_level . '</option>' . "\n";
+					$selected =
+						(	!isset($_POST['level']) && (int) $level == $mode)
+						|| ((int) ($_POST['level'] ?? $_GET['level'] ?? '') == $mode);
+
+					echo '<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' . $mode . ': ' . $log_level . '</option>' . "\n";
 				}
 			?>
 			</select>
