@@ -2710,9 +2710,8 @@ class Wacko
 		$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n" .
 						$this->_t('EmailRegisteredLogin') . "\n\n";
 
-		$this->set_language($save, true);
-
 		$this->send_user_email($user, $subject, $body);
+		$this->set_language($save, true);
 	}
 
 	function notify_new_account($user)
@@ -2747,9 +2746,8 @@ class Wacko
 						$user['owned'] . "\n" .
 						$this->_t('PageOwnershipInfo') . "\n";
 
-		$this->set_language($save, true);
-
 		$this->send_user_email($user, $subject, $body);
+		$this->set_language($save, true);
 	}
 
 	function notify_user_signup($user)
