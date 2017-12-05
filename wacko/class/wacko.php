@@ -4054,7 +4054,7 @@ class Wacko
 			}
 
 			$page_path		= substr($untag, 0, strlen($untag) - strlen($page0));
-			$anchor			= isset($matches[2]) ? $matches[2] : '';
+			$anchor			= $matches[2] ?? '';
 			$tag			= $unwtag;
 
 			// track page link
@@ -4072,7 +4072,7 @@ class Wacko
 
 			if ($this_page)
 			{
-				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ? $anchor : '');
+				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ?: '');
 				$page_id	= $this->get_page_id($tag);
 
 				if ($this->db->hide_locked)
@@ -6655,7 +6655,7 @@ class Wacko
 			$this->tag		= $tag;
 			$this->supertag	= $this->translit($tag);
 
-			$revision_id	= isset($_GET['revision_id']) ? (int) $_GET['revision_id'] : '';
+			$revision_id	= (int) ($_GET['revision_id'] ?? '');
 
 			// show also $deleted = 1
 			if ($this->is_admin())
@@ -6822,7 +6822,7 @@ class Wacko
 			$_link = $link;
 		}
 
-		$page['body_toc']	= (isset($page['body_toc']) ? $page['body_toc'] : null);
+		$page['body_toc']	= $page['body_toc'] ?? null;
 		#$toc				= unserialize($page['body_toc']); //json_decode
 		$toc				= explode('<heading,row>', $page['body_toc']);
 
@@ -7763,7 +7763,7 @@ class Wacko
 				}
 
 				return '<a href="' . $this->href($method, $tag, $params, false, $anchor) . '"' . $attrs . '>' .
-						($body ? $body : $page) . '</a>';
+						($body ?: $page) . '</a>';
 			};
 
 			$make_list = function ($from, $to) use ($page, $pages, $make_link, $sep)
@@ -7970,7 +7970,7 @@ class Wacko
 		return $this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "log SET " .
 				"level		= " . (int) $level . ", " .
-				"user_id	= " . ($user_id ? (int) $user_id : 0 ) . ", " .
+				"user_id	= " . (int) ($user_id ?: 0) . ", " .
 				"ip			= " . $this->db->q($this->get_user_ip()) . ", " .
 				"message	= " . $this->db->q($message) . " ");
 	}

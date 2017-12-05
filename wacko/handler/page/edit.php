@@ -60,7 +60,7 @@ if ($this->has_access('read')
 
 	if (isset($_POST))
 	{
-		$_body	= isset($_POST['body']) ? $_POST['body'] : '';
+		$_body	= $_POST['body'] ?? '';
 
 		// watch page
 		if ($this->page && isset($_POST['watchpage']) && isset($_POST['noid_publication']) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && !$this->is_watched)
@@ -224,19 +224,17 @@ if ($this->has_access('read')
 	}
 
 	// fetch fields
-	$previous	= isset($_POST['previous'])	? $_POST['previous']	: $this->page['modified'];
-	$body		= isset($_POST['body'])		? $_POST['body']		: $this->page['body'];
+	$previous	= $_POST['previous']	?? $this->page['modified'];
+	$body		= $_POST['body']		?? $this->page['body'];
 	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
-	$title		= isset($_POST['title'])
-					? $_POST['title']
-					: (isset($this->page['title'])
-						? $this->page['title']
-						: (isset($this->sess->title)
+	$title		= $_POST['title']
+					?? $this->page['title']
+						?? (isset($this->sess->title)
 							? (empty($this->sess->title)
 								? $this->get_page_title($this->tag)
 								: $this->sess->title)
 							: $this->get_page_title($this->tag)
-						));
+						);
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];

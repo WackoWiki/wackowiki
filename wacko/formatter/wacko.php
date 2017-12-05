@@ -29,8 +29,8 @@ $text	= '';
 for ($i = 0; $i < count($wtexts); $i++)
 {
 	$text = $text .
-			((isset($wtexts[$i])) ? $wtexts[$i] : '') .
-			((isset($texts[2 * $i + 1])) ? $texts[2 * $i + 1] : '');
+			($wtexts[$i] ?? '') .
+			($texts[2 * $i + 1] ?? '');
 }
 
 $text	= str_replace("\177" . "<br>\n", '', $text);

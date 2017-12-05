@@ -47,7 +47,7 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 	$sort = 'abc';
 }
 if (!isset($nomark))		$nomark = '';
-$type_id	= isset($_GET['type_id']) ? (int) $_GET['type_id'] : OBJECT_PAGE;
+$type_id	= (int) ($_GET['type_id'] ?? OBJECT_PAGE);
 $filter		= [];
 
 $root = $this->unwrap_link($root);

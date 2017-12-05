@@ -114,7 +114,7 @@ function admin_db_restore(&$engine, &$module)
 								<tr>
 									<td></td>
 									<td>
-										' . (isset($log[6]) ? $log[6] : null) . '
+										' . ($log[6] ?? null) . '
 									</td>
 								</tr>
 								<tr>
@@ -160,7 +160,7 @@ function admin_db_restore(&$engine, &$module)
 						echo '</td>' . "\n" .
 							'<td>';
 
-						$list = explode(';', isset($log[4]) ? $log[4] : null);
+						$list = explode(';', $log[4] ?? null);
 
 						foreach ($tables as $table)
 						{
@@ -178,7 +178,7 @@ function admin_db_restore(&$engine, &$module)
 						echo '</td>' . "\n" .
 							'<td>';
 
-						$list = explode(';', isset($log[5]) ? $log[5] : null);
+						$list = explode(';', $log[5] ?? null);
 
 						foreach ($directories as $directory)
 						{
@@ -345,8 +345,8 @@ function admin_db_restore(&$engine, &$module)
 
 					$total		= put_files($engine, $pack, $dir, $keep);
 
-					$overall[0]	+= isset($total[0]) ? $total[0] : null;
-					$overall[1]	+= isset($total[1]) ? $total[1] : null;
+					$overall[0]	+= $total[0] ?? null;
+					$overall[1]	+= $total[1] ?? null;
 
 					$results .=
 						"\t\t" . 'File:    '.(int)array_sum($total) . "\n" .
@@ -493,7 +493,7 @@ function admin_db_restore(&$engine, &$module)
 									<tr>
 										<td></td>
 										<td>
-											'.(isset($log[6]) ? $log[6] : null) . '
+											' . ($log[6] ?? null) . '
 										</td>
 									</tr>
 									<tr>
@@ -545,7 +545,7 @@ function admin_db_restore(&$engine, &$module)
 							echo '</td>' . "\n" .
 								'<td>';
 
-							$list = explode(';', isset($log[4]) ? $log[4] : null);
+							$list = explode(';', $log[4] ?? null);
 
 							foreach ($tables as $table)
 							{
@@ -563,7 +563,7 @@ function admin_db_restore(&$engine, &$module)
 							echo '</td>' . "\n" .
 								'<td>';
 
-							$list = explode(';', isset($log[5]) ? $log[5] : null);
+							$list = explode(';', $log[5] ?? null);
 
 							foreach ($directories as $directory)
 							{

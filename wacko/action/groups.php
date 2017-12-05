@@ -106,7 +106,7 @@ else
 		( $where ? 'AND ' : "WHERE ") .
 			"g.active = 1 " .
 		"GROUP BY g.group_id " .
-		( $order ? $order : "ORDER BY members DESC " ) .
+		( $order ?: "ORDER BY members DESC " ) .
 		$pagination['limit']);
 
 	// usergroup filter form

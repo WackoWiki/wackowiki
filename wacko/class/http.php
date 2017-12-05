@@ -537,7 +537,7 @@ class Http
 		}
 
 		$ext = pathinfo($path, PATHINFO_EXTENSION);
-		return isset($types[$ext])? $types[$ext] : 'application/octet-stream';
+		return $types[$ext] ?? 'application/octet-stream';
 	}
 
 	public function sendfile($path, $filename = null)

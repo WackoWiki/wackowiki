@@ -28,7 +28,7 @@ function admin_content_deleted(&$engine, &$module)
 	<br>
 <?php
 
-$type = (isset($_GET['type']) && $_GET['type'] ? $_GET['type'] : OBJECT_PAGE);
+$type = (int) ($_GET['type'] ?? OBJECT_PAGE);
 
 if ($type == OBJECT_PAGE)
 {

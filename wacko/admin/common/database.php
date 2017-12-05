@@ -445,7 +445,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 
 	while (true == $data = $engine->db->load_all(
 	"SELECT * FROM $table " .
-	($where ? $where : '') .
+	($where ?: '') .
 	$order .
 	Ut::perc_replace($limit, $r)))
 	{

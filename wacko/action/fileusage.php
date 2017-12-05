@@ -13,10 +13,22 @@ if ($file_id)
 {
 	if ($pages = $this->load_file_usage($file_id))
 	{
+		foreach ($pages as $page)
+		{
+			$page_ids[] = (int) $page['page_id'];
+			// cache page_id for for has_access validation in link function
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+		}
+
+		// cache acls
+		$this->preload_acl($page_ids);
+
 		if (!$nomark)
 		{
 			echo '<div class="layout-box"><p><span>' . $this->_t('FileUsage') . ': '.'' . "</span></p>\n";
 		}
+
+		echo "<ol>\n";
 
 		foreach ($pages as $page)
 		{
@@ -44,11 +56,13 @@ if ($file_id)
 
 					if (strpos($_link, 'span class="missingpage"') === false)
 					{
-						echo ($_link . "<br>\n");
+						echo '<li>' . $_link . "</li>\n";
 					}
 				}
 			}
 		}
+
+	echo "</ol>\n";
 
 		if (!$nomark)
 		{

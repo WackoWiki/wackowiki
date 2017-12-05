@@ -112,10 +112,10 @@ class Diag
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "</li>\n";
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE chopped value: " . strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)) . "</li>\n";
 					echo "\t<li>User language set: " . (isset($user['user_lang']) ? 'true' : 'false') . "</li>\n";
-					echo "\t<li>User language value: " . (isset($user['user_lang']) ? $user['user_lang'] : '') . "</li>\n";
+					echo "\t<li>User language value: " . $user['user_lang'] ?? '' . "</li>\n";
 					echo "\t<li>Page language: " . $engine->page['page_lang']  . "</li>\n";
 					echo "\t<li>Config language: " . $config['language'] . "</li>\n";
-					echo "\t<li>User selected language: " . (isset($engine->user_lang) ? $engine->user_lang : '') . "</li>\n";
+					echo "\t<li>User selected language: " . $engine->user_lang ?? '' . "</li>\n";
 					echo "\t<li>Charset: " . $engine->get_charset() . "</li>\n";
 					echo "\t<li>HTML Entities Charset: " . HTML_ENTITIES_CHARSET . "</li>\n";
 					// echo "\t<li>Disable cache: " . ($engine->disable_cache === true ? 'true' : 'false') . "</li>\n";
@@ -154,7 +154,7 @@ class Diag
 					echo '<p class="debug">Session data</p>' . "\n<ul>\n";
 					echo "\t<li>session_id(): " . $engine->sess->id() . "</li>\n";
 					echo "\t<li>Base URL: " . $config['base_url'] . "</li>\n";
-					echo "\t<li>HTTPS: " . (isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : '') . "</li>\n";
+					echo "\t<li>HTTPS: " . $_SERVER['HTTPS'] ?? '' . "</li>\n";
 					echo "\t<li>IP-address: " . $engine->get_user_ip() . "</li>\n";
 					echo "\t<li>SERVER_PORT: " . $_SERVER['SERVER_PORT'] . "</li>\n";
 					echo "\t<li>TLS: " . (isset($config['tls']) ? 'on' : 'off') . "</li>\n";

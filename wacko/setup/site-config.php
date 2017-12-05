@@ -46,7 +46,7 @@ if ($config['is_update'] == false)
 <?php echo $separator; ?>
 	<label class="label_top" for="root_page"><?php echo $lang['HomePage'];?></label>
 	<p class="notop"><?php echo $lang['HomePageDesc'];?></p>
-	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo isset ( $lang['HomePageDefault'] ) ? $lang['HomePageDefault'] : $config['root_page'] ; ?>" class="text_input" required>
+	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo $lang['HomePageDefault'] ?? $config['root_page']; ?>" class="text_input" required>
 	<br>
 <?php
 }

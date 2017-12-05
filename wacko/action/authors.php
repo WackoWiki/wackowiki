@@ -30,7 +30,7 @@ print page and revisions' authors.
 
 if (!isset($add))		$add		= '';
 if (!isset($add_only))	$add_only	= 0;
-if (!isset($license))	$license	= (isset($this->db->license) ? $this->db->license : '');
+if (!isset($license))	$license	= $this->db->license ?? '';
 if (!isset($cluster))	$cluster	= '';
 
 echo '<small>';
