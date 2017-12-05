@@ -55,7 +55,7 @@ $menu_lang		= '';
 // get default menu items
 if ($this->is_admin() && $system == true)
 {
-	$_user_id		= $this->get_user_id('System');
+	$_user_id		= $this->db->system_user_id;
 	$default_menu	= true;
 
 	$menu_lang = ($this->db->multilanguage? @$_REQUEST['menu_lang'] : '');

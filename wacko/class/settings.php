@@ -67,6 +67,15 @@ class Settings extends Dbal implements ArrayAccess
 					$this->config[$row['config_name']] = $row['config_value'];
 				}
 
+				// retrieving system user ID from db
+				if (!($result = $this->load_single(
+					"SELECT user_id FROM {$this->table_prefix}user WHERE user_name = 'System' LIMIT 1")))
+				{
+					die("Error loading WackoWiki config data: User 'System' is missing in `user` table.");
+				}
+
+				$this->config['system_user_id'] = $result['user_id'];
+
 				// retrieving usergroups data from db
 				if (!($result = $this->load_all(
 						"SELECT
@@ -81,8 +90,8 @@ class Settings extends Dbal implements ArrayAccess
 					die("Error loading WackoWiki usergroups data: database `group` table is empty.");
 				}
 
-				$this->groups = [];
-				$ug = [];
+				$this->groups	= [];
+				$ug				= [];
 
 				foreach ($result as $row)
 				{
