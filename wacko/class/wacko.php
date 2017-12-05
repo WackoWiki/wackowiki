@@ -1489,7 +1489,7 @@ class Wacko
 			if ($menu_items = $this->db->load_all(
 				"SELECT DISTINCT page_id " .
 				"FROM " . $this->db->table_prefix . "menu " .
-				"WHERE (user_id = " . (int) $this->get_user_id('System') . " " .
+				"WHERE (user_id = " . (int) $this->db->system_user_id . " " .
 					($lang
 						? "AND menu_lang = " . $this->db->q($lang) . " "
 						: "") .
@@ -6138,7 +6138,7 @@ class Wacko
 			$lang = $this->get_user_language();
 		}
 
-		$user_id = $this->get_user_id('System');
+		$user_id = $this->db->system_user_id;
 		return $this->get_user_menu($user_id, $lang);
 	}
 
@@ -7012,8 +7012,7 @@ class Wacko
 
 		// default page title is just page's WikiName
 		return $title
-				? $title
-				: ($tag
+				?: ($tag
 					? $this->add_spaces_title(trim(substr($tag, strrpos($tag, '/')), '/'))
 					: $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/')));
 	}

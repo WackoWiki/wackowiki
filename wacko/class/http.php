@@ -338,9 +338,9 @@ class Http
 			//		throw error if
 			if ($this->db->csp)
 			{
-				$file_path	= Ut::join_path(CONFIG_DIR, $file_name);
-				$csp_config = file_get_contents($file_path);
-				$csp_header = str_replace(["\r", "\n", "\t"], '', $csp_config);
+				$file_path		= Ut::join_path(CONFIG_DIR, $file_name);
+				$csp_config		= file_get_contents($file_path);
+				$csp_header		= str_replace(["\r", "\n", "\t"], '', $csp_config);
 
 				header($csp_header);
 			}

@@ -18,7 +18,7 @@ $tag = isset($page)? $page : '';
 
 $query = // "SELECT p.supertag " .
 		"FROM ". $this->db->table_prefix . "page p, ". $this->db->table_prefix . "acl a " .
-		"WHERE p.owner_id != (SELECT user_id FROM ". $this->db->table_prefix . "user WHERE user_name = 'System' LIMIT 1) " .
+		"WHERE p.owner_id != " . (int) $this->db->system_user_id . " " .
 			($tag
 				? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: ""

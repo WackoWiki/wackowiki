@@ -12,12 +12,17 @@ if (!defined('IN_WACKO'))
 	[max=50]			// number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
 	[letter="a"]		// only display pages whose name starts with this letter
 	[title=1]			// takes title inplace of tag
+	[system=0|1]		// excludes system pages
 	[lang="ru"]			// show pages only in specified language
  }}
  */
+
+// TODO: add option to hide SYSTEM pages (Owner = SYSTEM)
+
 if (!isset($for))		$for = ''; // depreciated
 if ($for)				$page = $for;
 
+if (!isset($system))	$system = 0;
 if (!isset($page))		$page = '';
 if (!isset($title))		$title = '';
 if (!isset($letter))	$letter = '';
@@ -27,6 +32,12 @@ if (!isset($max))		$max = null;
 $tag		= $page; // use tag from here on
 $title		= (int) $title;
 $_alnum		= '/' . $this->language['ALPHANUM'] . '/S';
+
+$system == true
+	? $user_id		= $this->db->system_user_id
+	: $user_id		= null;
+
+
 
 $get_letter	= function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {
@@ -64,6 +75,9 @@ if (!isset($letters)
 			($page
 				? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
 				: "") .
+			($user_id
+				? "AND owner_id <> " . (int) $user_id . " "
+				: "") .
 			($lang
 				? "AND page_lang = " . $this->db->q($lang) . " "
 				: "") .
@@ -97,6 +111,9 @@ $selector =
 		"AND deleted = 0 " .
 		($page
 			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
+			: "") .
+		($user_id
+			? "AND owner_id <> " . (int) $user_id . " "
 			: "") .
 		($lang
 			? "AND page_lang = " . $this->db->q($lang) . " "
