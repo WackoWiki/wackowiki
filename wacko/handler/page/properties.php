@@ -59,7 +59,7 @@ if (@$_POST['_action'] === 'general_properties')
 if ($_POST)
 {
 	// log event
-	$this->log(4, Ut::perc_replace($this->_t('LogPageMetaUpdated', SYSTEM_LANG), $this->tag . ' ' . ($_POST['title'] ?? $this->page['title'])));
+	$this->log(4, Ut::perc_replace($this->_t('LogPagePropertiesUpdated', SYSTEM_LANG), $this->tag . ' ' . ($_POST['title'] ?? $this->page['title'])));
 
 	// reload page
 	$this->set_message($this->_t('MetaUpdated'), 'success');
