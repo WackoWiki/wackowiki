@@ -270,7 +270,7 @@ if (!isset($clean))		$clean		= false;
 
 
 $user			= $this->get_user();
-$category_id	= isset($_GET['category_id']) ? $_GET['category_id'] : 0;
+$category_id	= $_GET['category_id'] ?? 0;
 $mode			= ($topic || isset($_GET['topic']))? 'topic' : 'full';
 
 $filter = [
@@ -366,7 +366,7 @@ if (strlen($phrase) >= 3)
 						$preview	= $this->do_unicode_entities($preview, $_lang);
 					}
 
-					$tpl->l_link		= $this->link('/' . $page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang);
+					$tpl->l_link		= $this->link('/' . $page['tag'], '', $title ?? $page['tag'], '', '', '', $_lang);
 					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);

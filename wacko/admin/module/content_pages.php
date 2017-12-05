@@ -39,7 +39,7 @@ function admin_content_pages(&$engine, &$module)
 
 	if (isset($_POST['update']))
 	{
-		$_lang		= isset($_POST['level']) ? $_POST['level'] : (isset($_GET['level']) ? $_GET['level'] : '');
+		$_lang		= ($_POST['level'] ?? $_GET['level'] ?? '');
 
 		$where = "WHERE p.page_lang " . $engine->db->q($_lang) . " ";
 	}
@@ -115,12 +115,12 @@ function admin_content_pages(&$engine, &$module)
 	$count = $engine->db->load_single(
 		"SELECT COUNT(page_id) AS n " .
 		"FROM " . $engine->db->table_prefix . "page l " .
-		( $where ? $where : "WHERE comment_on_id = 0 " ));
+		( $where ?: "WHERE comment_on_id = 0 " ));
 
-	$_order					= isset($_GET['order'])		? $_GET['order']		: '';
-	$_lang					= isset($_GET['level'])		? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
-	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
-	$tag_pagination			= !empty($_lang)		? ['level' => (int) $_lang] : [];
+	$_order					= $_GET['order']	?? '';
+	$_lang					= $_GET['level']	?? ($_POST['level']		?? '');
+	$order_pagination		= !empty($_order)	? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
+	$tag_pagination			= !empty($_lang)	? ['level' => (int) $_lang] : [];
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination + $tag_pagination, '', 'admin.php');
 
@@ -128,8 +128,8 @@ function admin_content_pages(&$engine, &$module)
 		"SELECT p.*, length(body) as page_size, u.* " .
 		"FROM " . $engine->db->table_prefix . "page p " .
 			"LEFT JOIN " . $engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-		($where ? $where : "WHERE p.comment_on_id = 0 " ) .
-		($order ? $order : 'ORDER BY p.page_id DESC ' ) .
+		($where ?: "WHERE p.comment_on_id = 0 " ) .
+		($order ?: 'ORDER BY p.page_id DESC ' ) .
 		$pagination['limit']);
 
 	echo $engine->form_open('content_pages');

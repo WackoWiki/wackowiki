@@ -64,7 +64,7 @@ if (!isset($for))		$for	= ''; // depreciated
 if ($for)				$page = $for;
 
 if (!isset($page))		$page = '';
-if (!isset($root))		$root	= $this->unwrap_link(isset($page) ? $page : '');
+if (!isset($root))		$root	= $this->unwrap_link($page ?? '');
 if (!isset($title))		$title	= 0;
 if (!isset($noxml))		$noxml	= 0;
 if (!isset($max))		$max = null;

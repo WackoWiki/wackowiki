@@ -134,7 +134,7 @@ if (isset($_POST['_user_menu']))
 			if ($page = $this->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				$_page_id		= $this->get_page_id($new_tag);
-				$_user_lang		= (isset($_POST['lang_new']) ? $_POST['lang_new'] : $user['user_lang']);
+				$_user_lang		= $_POST['lang_new'] ?? $user['user_lang'];
 
 				// check existing page write access
 				if ($this->has_access('write', $_page_id)) // TODO: why we need write access here?

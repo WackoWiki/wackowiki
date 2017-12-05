@@ -45,7 +45,7 @@ if (@$_POST['_action'] === 'general_properties')
 	$this->db->sql_query(
 		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"page_lang			= " . $this->db->q($_POST['page_lang']) . ", " .
-			"theme				= " . $this->db->q((isset($_POST['theme']) ? $_POST['theme'] : '')) . ", " .
+			"theme				= " . $this->db->q($_POST['theme']) ?? '') . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
 			# "menu_tag			= " . $this->db->q(htmlspecialchars(trim($_POST['menu_tag']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . ", " .
 			# "show_menu_tag		= " . $this->db->q((int) $_POST['show_menu_tag']) . ", " .
@@ -128,9 +128,9 @@ else
 		}
 
 		/*
-			<input type="text" id="menu_tag" name="menu_tag" value="' . (isset($this->page['menu_tag']) ? $this->page['menu_tag'] : '') . '" size="60" maxlength="100">
+			<input type="text" id="menu_tag" name="menu_tag" value="' . ($this->page['menu_tag'] ?? '') . '" size="60" maxlength="100">
 			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" ' . ($this->page['show_menu_tag'] ? 'checked ' : '' ) . '/><label for="menu_tag_on">' . $this->_t('MetaOn') . "</label>" .
-			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" '.( !$this->page['show_menu_tag'] ? 'checked ' : '' ) . '/><label for="menu_tag_off">' . $this->_t('MetaOff') . "</label>" .
+			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" ' . ( !$this->page['show_menu_tag'] ? 'checked ' : '' ) . '/><label for="menu_tag_off">' . $this->_t('MetaOff') . "</label>" .
 		 */
 
 		$langs = $this->available_languages();

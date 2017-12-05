@@ -48,7 +48,7 @@ $order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
 
 // filter categories
-$type_id			= isset($_GET['type_id']) ? (int) $_GET['type_id'] : $type_id;
+$type_id			= (int) ($_GET['type_id'] ?? $type_id);
 $category_id		= (int) @$_GET['category_id'];
 $file_link			= (int) $linked;
 

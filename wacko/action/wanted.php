@@ -57,7 +57,7 @@ else
 	$root = $this->unwrap_link($root);
 }
 
-if ($linking_to = (isset($_GET['linking_to']) ? $_GET['linking_to'] : ''))
+if ($linking_to = $_GET['linking_to'] ?? '')
 {
 	if ($pages = $this->load_pages_linking_to($linking_to, $root))
 	{

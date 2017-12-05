@@ -729,7 +729,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
-			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((int) $_GET['p']) : '') . '">' . "\n";
+			'<input type="hidden" name="p" value="' . (int) ($_GET['p'] ?? '') . '">' . "\n";
 		echo '<table>' .
 				'<tr class="lined">' .
 					'<td colspan="5">' .
@@ -892,7 +892,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if (isset($_POST['accept']) && $forum_cluster === true)
 			{
 				$pos		= strrpos($this->tag, '/');
-				$section	= substr($this->tag, 0, ($pos ? $pos : null));
+				$section	= substr($this->tag, 0, ($pos ?: null));
 				$tag		= trim($_POST['new_tag'], " \t");
 				$title		= $tag;
 				$tag 		= ucwords($tag);
@@ -1326,7 +1326,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// print moderation controls...
 		echo '<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
-			'<input type="hidden" name="p" value="' . (isset($_GET['p']) ? ((int) $_GET['p']) : '') . '">' . "\n";
+			'<input type="hidden" name="p" value="' . (int) ($_GET['p'] ?? '') . '">' . "\n";
 		echo '<table>' .
 				'<tr class="lined">' .
 					'<td colspan="2">' .

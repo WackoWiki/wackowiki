@@ -159,7 +159,7 @@ function admin_user_users(&$engine, &$module)
 				"INSERT INTO " . $engine->db->table_prefix . "user_setting SET " .
 					"user_id			= " . (int) $_user_id['user_id'] . ", " .
 					"typografica		= " . (($engine->db->default_typografica == 1) ? 1 : 0) . ", " .
-					"user_lang			= " . $engine->db->q(($_POST['user_lang'] ? $_POST['user_lang'] : $engine->db->language)) . ", " .
+					"user_lang			= " . $engine->db->q(($_POST['user_lang'] ?: $engine->db->language)) . ", " .
 					"list_count			= " . (int) $engine->db->list_count . ", " .
 					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
 					"diff_mode			= " . (int) $engine->db->default_diff_mode . ", " .
@@ -179,7 +179,7 @@ function admin_user_users(&$engine, &$module)
 					'user_id'		=> $_user_id['user_id'],
 					'user_name'		=> $_POST['newname'],
 					'email'			=> $_POST['email'],
-					'user_lang'		=> $_POST['user_lang'] ? $_POST['user_lang'] : $engine->db->language
+					'user_lang'		=> $_POST['user_lang'] ?: $engine->db->language
 				];
 
 				$engine->notify_user_signup($new_user);
@@ -786,7 +786,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT COUNT(user_name) AS n " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			( $where ? $where : '' )
+			( $where ?: '' )
 			);
 
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
@@ -796,10 +796,10 @@ function admin_user_users(&$engine, &$module)
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			($where ? $where : '') .
+			($where ?: '') .
 			($where ? 'AND ' : "WHERE ") .
 				"u.account_type = 0 " .
-			($order ? $order : 'ORDER BY u.user_id DESC ') .
+			($order ?: 'ORDER BY u.user_id DESC ') .
 			$pagination['limit']);
 
 		// user filter form

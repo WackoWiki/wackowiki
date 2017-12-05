@@ -241,16 +241,16 @@ function bb2_manage(&$engine)
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n " .
 		"FROM " . $engine->db->table_prefix . "bad_behavior l " .
-		"WHERE 1=1 " .( $where ? $where : '' ));
+		"WHERE 1=1 " .( $where ?: '' ));
 
-	$key_pagination				= isset($_GET['status_key'])		? $_GET['status_key']	: '';
-	$blocked_pagination			= isset($_GET['blocked'])			? $_GET['blocked']		: '';
-	$permitted_pagination		= isset($_GET['permitted'])			? $_GET['permitted']	: '';
-	$ip_pagination				= isset($_GET['ip'])				? $_GET['ip']			: '';
-	$user_agent_pagination		= isset($_GET['user_agent'])		? $_GET['user_agent']	: '';
-	$request_method_pagination	= isset($_GET['request_method'])	? $_GET['request_method']	: '';
-	#$level_pagination			= isset($_GET['level'])				? $_GET['level']		: (isset($_POST['level'])		? $_POST['level']		: '');
-	#$level_mod_pagination		= isset($_GET['level_mod'])			? $_GET['level_mod']	: (isset($_POST['level_mod'])	? $_POST['level_mod']	: '');
+	$key_pagination				= ($_GET['status_key']		?? '');
+	$blocked_pagination			= ($_GET['blocked']			?? '');
+	$permitted_pagination		= ($_GET['permitted']		?? '');
+	$ip_pagination				= ($_GET['ip']				?? '');
+	$user_agent_pagination		= ($_GET['user_agent']		?? '');
+	$request_method_pagination	= ($_GET['request_method']	?? '');
+	#$level_pagination			= ($_GET['level']			?? $_POST['level']		?? '');
+	#$level_mod_pagination		= ($_GET['level_mod']		?? $_POST['level_mod']	?? '');
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'badbehavior', 'setting' => 'bb2_manage']
 								+ (!empty($blocked_pagination)			? ['blocked'		=> htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [])

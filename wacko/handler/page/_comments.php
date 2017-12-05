@@ -209,7 +209,7 @@ if ($this->has_access('read'))
 		// display comment form
 		if ($this->has_access('comment'))
 		{
-			$parent_id = (isset($_GET['parent_id']) && $_GET['parent_id'] ? (int) $_GET['parent_id'] : 0);
+			$parent_id = (int) ($_GET['parent_id'] ?? 0);
 			echo '<div class="commentform" id="commentform">' . "\n";
 
 			echo $this->form_open('add_comment', ['page_method' => 'addcomment']);

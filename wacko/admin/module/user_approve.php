@@ -102,8 +102,8 @@ function admin_user_approve(&$engine, &$module)
 	//   list change/update
 	/////////////////////////////////////////////
 
-	#$user_id = (isset($_POST['user_id']) ? $_POST['user_id'] : isset($_GET['user_id']) ? $_GET['user_id'] : '');
-	$user_id = (isset($_REQUEST['user_id']) ? $_REQUEST['user_id'] : '');
+	#$user_id = (int) ($_POST['user_id'] ?? $_GET['user_id'] ?? '');
+	$user_id = (int) ($_REQUEST['user_id'] ?? '');
 
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
@@ -248,12 +248,12 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT COUNT(user_name) AS n " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			($where ? $where : '') .
+			($where ?: '') .
 			($where ? 'AND ' : "WHERE ") .
 				"u.user_name <> " . $engine->db->q($engine->db->admin_name) . " "
 			);
 
-		$_order				= isset($_GET['order']) ? $_GET['order'] : '';
+		$_order				= ($_GET['order'] ?? '');
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination  + ['account_status' => (int) @$_GET['account_status']], '', 'admin.php');
@@ -262,11 +262,11 @@ function admin_user_approve(&$engine, &$module)
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
 			"FROM " . $engine->db->table_prefix . "user u " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			($where ? $where : '') .
+			($where ?: '') .
 			($where ? 'AND ' : "WHERE ") .
 				"u.account_type = 0 " .
 				"AND u.user_name <> " . $engine->db->q($engine->db->admin_name) . " " .
-			( $order ? $order : 'ORDER BY u.user_id DESC ' ) .
+			( $order ?: 'ORDER BY u.user_id DESC ' ) .
 			$pagination['limit']);
 
 		// count records by status

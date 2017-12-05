@@ -190,7 +190,7 @@ if ($pages = $this->db->load_all(
 				if ($this->tag == $page['tag'])
 				{
 					// do not link the page to itself
-					echo isset($page['title']) ? $page['title'] : $page['tag'];
+					echo $page['title'] ?? $page['tag'];
 					#echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, '', 0);
 				}
 				else

@@ -212,7 +212,7 @@ function admin_maint_resync(&$engine, &$module)
 					}
 
 					// rendering links
-					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_id'] : $page['tag']);
+					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ?: $page['tag']);
 					// TODO: update_link_table() breaks processing !!! (WHY?)
 					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;

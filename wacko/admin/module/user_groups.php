@@ -61,7 +61,7 @@ function admin_user_groups(&$engine, &$module)
 		// get group
 		if (isset($_GET['group_id']) || isset($_POST['add_member'])|| isset($_POST['remove_member']))
 		{
-			$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
+			$group_id = (int) ($_GET['group_id'] ?? $_POST['group_id'] ?? null);
 			$usergroup = $engine->db->load_single(
 				"SELECT group_name " .
 				"FROM " . $engine->db->table_prefix . "usergroup " .
@@ -445,7 +445,7 @@ function admin_user_groups(&$engine, &$module)
 	// get group
 	if (isset($_GET['group_id']) || isset($_POST['group_id']))
 	{
-		$group_id = (isset($_GET['group_id']) ? $_GET['group_id'] : $_POST['group_id']);
+		$group_id = (int) ($_GET['group_id'] ?? $_POST['group_id'] ?? null);
 		$usergroup = $engine->db->load_single(
 			"SELECT group_id, moderator_id, group_name " .
 			"FROM " . $engine->db->table_prefix . "usergroup " .
@@ -558,7 +558,7 @@ function admin_user_groups(&$engine, &$module)
 		$count = $engine->db->load_single(
 			"SELECT COUNT(group_name) AS n " .
 			"FROM " . $engine->db->table_prefix . "usergroup " .
-			( $where ? $where : '' )
+			( $where ?: '' )
 			);
 
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
@@ -569,9 +569,9 @@ function admin_user_groups(&$engine, &$module)
 			"FROM " . $engine->db->table_prefix . "usergroup g " .
 				"LEFT JOIN " . $engine->db->table_prefix . "user u ON (g.moderator_id = u.user_id) " .
 				"LEFT JOIN " . $engine->db->table_prefix . "usergroup_member m ON (m.group_id = g.group_id) " .
-			($where ? $where : '') .
+			($where ?: '') .
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name " .
-			($order ? $order : 'ORDER BY group_id DESC ') .
+			($order ?: 'ORDER BY group_id DESC ') .
 			$pagination['limit']);
 
 		/////////////////////////////////////////////

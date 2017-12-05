@@ -124,7 +124,7 @@ function admin_system_log(&$engine, &$module)
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n " .
 		"FROM " . $engine->db->table_prefix . "log l " .
-		( $where ? $where : 'WHERE level <= ' . (int) $level . ' ' ));
+		( $where ?: 'WHERE level <= ' . (int) $level . ' ' ));
 
 	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 	$level_pagination		= !empty($_level)		? ['level' => (int) $_level] : [];
@@ -136,8 +136,8 @@ function admin_system_log(&$engine, &$module)
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip " .
 		"FROM " . $engine->db->table_prefix . "log l " .
 			"LEFT JOIN " . $engine->db->table_prefix . "user u ON (l.user_id = u.user_id) " .
-		( $where ? $where : 'WHERE l.level <= ' . (int) $level . ' ' ) .
-		( $order ? $order : 'ORDER BY l.log_id DESC ' ) .
+		( $where ?: 'WHERE l.level <= ' . (int) $level . ' ' ) .
+		( $order ?: 'ORDER BY l.log_id DESC ' ) .
 		$pagination['limit']);
 
 	echo $engine->form_open('systemlog');

@@ -901,8 +901,8 @@ class WackoFormatter
 				|| preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $thing, $matches)
 				|| preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $thing, $matches))
 		{
-			$url	= isset($matches[1]) ? $matches[1] : '';
-			$text	= isset($matches[3]) ? $matches[3] : '';
+			$url	= $matches[1] ?? '';
+			$text	= $matches[3] ?? '';
 
 			if ($url)
 			{
@@ -1028,8 +1028,8 @@ class WackoFormatter
 		else if (  preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/', $thing, $matches)
 				|| preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/', $thing, $matches))
 		{
-			$url	= isset($matches[1]) ? $matches[1] : '';
-			$img	= isset($matches[3]) ? $matches[3] : '';
+			$url	= $matches[1] ?? '';
+			$img	= $matches[3] ?? '';
 
 			if ($url && $img)
 			{
@@ -1093,7 +1093,7 @@ class WackoFormatter
 			}
 
 			// find out which indent type we want
-			$new_indent_type = isset($matches[3][0]) ? $matches[3][0] : '';
+			$new_indent_type = $matches[3][0] ?? '';
 
 			if (!$new_indent_type)
 			{
