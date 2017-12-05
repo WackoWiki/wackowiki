@@ -1230,7 +1230,7 @@ $wacko_translation = [
 	'LogPageImported'			=> 'Imported page [[/%1]]',
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
 	'LogPageCreated'			=> 'Created new page [[/%1]]',
-	'LogPageMetaUpdated'		=> 'Updated page meta data [[/%1]]',  // 'meta data' => 'properties'?
+	'LogPagePropertiesUpdated'	=> 'Updated page properties [[/%1]]',
 	'LogPageOwnershipClaimed'	=> 'The user got ownership of the page [[/%1]]', // please correct
 	'LogPollCreated'			=> 'A new poll with ID %1',
 	'LogPollChanged'			=> 'Changed content of the poll with ID %1',
