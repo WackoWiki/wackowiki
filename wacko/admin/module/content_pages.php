@@ -41,7 +41,7 @@ function admin_content_pages(&$engine, &$module)
 	{
 		$_lang		= ($_POST['level'] ?? $_GET['level'] ?? '');
 
-		$where = "WHERE p.page_lang " . $engine->db->q($_lang) . " ";
+		$where = "WHERE p.page_lang = " . $engine->db->q($_lang) . " ";
 	}
 
 	// set time ordering
@@ -114,7 +114,7 @@ function admin_content_pages(&$engine, &$module)
 	// collecting data
 	$count = $engine->db->load_single(
 		"SELECT COUNT(page_id) AS n " .
-		"FROM " . $engine->db->table_prefix . "page l " .
+		"FROM " . $engine->db->table_prefix . "page p " .
 		( $where ?: "WHERE comment_on_id = 0 " ));
 
 	$_order					= $_GET['order']	?? '';

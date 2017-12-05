@@ -465,7 +465,7 @@ else
 		// save new list
 		$this->save_categories_list($file['file_id'], OBJECT_FILE);
 
-		$this->log(4, 'Updated page categories [[/' . $this->tag . ' ' . $this->page['title'] . ']]');
+		$this->log(4, 'Updated file categories [[/' . $this->tag . ' ' . $this->page['title'] . ']]');
 		$this->set_message($this->_t('CategoriesUpdated'), 'success');
 		$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
 	}
