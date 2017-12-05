@@ -32,7 +32,7 @@ if ($this->page && $this->has_access('read'))
 	}
 
 	// Show Owner of this page
-	if (($owner = $this->get_page_owner()))
+	if ($owner = $this->get_page_owner())
 	{
 		if ($owner == 'System')
 		{
@@ -62,9 +62,13 @@ if ($this->page && $this->has_access('read'))
 if ($this->get_user())
 {
 	$tpl->by_home = $this->link('WackoWiki:HomePage', '', 'WackoWiki');
+
 	// STS: no need to add to config_default, it's private -dev feature
-	# $tpl->by_version = $this->get_wacko_version();
-	# $tpl->by_patchlevel = @$this->db->wacko_patchlevel;
+	if ($this->is_admin())
+	{
+		$tpl->by_version	= $this->get_wacko_version();
+		$tpl->by_patchlevel	= @$this->db->wacko_patchlevel;
+	}
 }
 
 // comment this out for not showing website policy link at the bottom of your pages

@@ -43,6 +43,7 @@ if (@$_POST['_action'] === 'set_permissions')
 			$this->reload_me();
 		}
 
+		// assigned as system page, forward message to Admin
 		if ($new_owner['user_name'] === 'System')
 		{
 			$new_owner['email']		= $this->db->admin_email;
