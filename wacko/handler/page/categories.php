@@ -270,7 +270,7 @@ if ($this->is_owner() || $this->is_admin())
 							'<tr>' .
 								'<td>' .
 									'<label for="new_name">' . Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .
-									'<input type="text" name="category" id="new_name" value="' . (isset($_POST['category']) ? htmlspecialchars($_POST['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100"> '.
+									'<input type="text" name="category" id="new_name" value="' . htmlspecialchars(($_POST['category'] ?? $word['category']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100"> '.
 									'<input type="submit" name="rename" id="submit_new_name" value="' . $this->_t('CategoriesSaveButton') . '"> ' .
 									'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' .
 									'<br><small>' . $this->_t('CategoriesRenameInfo') . '</small>' .
