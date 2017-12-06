@@ -28,7 +28,7 @@ if (!defined('IN_WACKO'))
 //   * local image cache
 //   * feed_acl
 
-if (!isset($nomark))	$nomark	= '';
+if (!isset($nomark))	$nomark	= 0;
 if (!isset($title))		$title	= '';
 if (!isset($max))		$max	= 5;
 if (!isset($time))		$time	= 0;
@@ -36,7 +36,7 @@ if (!isset($time))		$time	= 0;
 // Include SimplePie
 include_once 'lib/SimplePie/autoloader.php';
 // see autoload.conf
-#include_once 'lib/SimplePie/simplepie.class.php';
+// include_once 'lib/SimplePie/simplepie.class.php';
 
 if (!$url)
 {
@@ -84,7 +84,6 @@ else
 	if (!$feed->get_title() && $counturlset == 1)
 	{
 		echo '<p><em>' . $this->_t('FeedError') . "</em></p>\n";
-		#break;
 	}
 	else
 	{
@@ -96,9 +95,9 @@ else
 			if (($max) && ($max > 0))
 			{
 				$last_items =
-					($max = 1
+					($max == 1
 						? $this->_t('FeedLastItem')
-						: perc_replace($this->_t('FeedLastItems'), $max));
+						: Ut::perc_replace($this->_t('FeedLastItems'), $max));
 			}
 
 			// make nice if $nomark == 1
