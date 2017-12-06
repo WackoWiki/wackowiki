@@ -1196,7 +1196,7 @@ class Wacko
 				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.reviewed_time, ' .
 							'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, ' .
-							'p.description, p.keywords, s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, ' .
+							'p.description, p.keywords, s.revisions , s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, ' .
 							's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, ' .
 							'u.user_name, o.user_name AS owner_name';
 			}
@@ -1870,7 +1870,7 @@ class Wacko
 		return [$deleted, $pagination];
 	}
 
-	function load_categories($object_id = 0, $type_id = 1, $cache = false)
+	function load_categories($object_id = 0, $type_id = OBJECT_PAGE, $cache = false)
 	{
 		if (isset($this->category_cache[$object_id][$type_id]))
 		{
@@ -8040,14 +8040,14 @@ class Wacko
 
 		if ($categories = $this->load_categories($object_id, $type_id, $cache))
 		{
-			foreach ($categories as $id => $category)
+			foreach ($categories as $n => $category)
 			{
 				if ($this->page['page_lang'] != $category['category_lang'])
 				{
 					$category['category']	= $this->do_unicode_entities($category['category'], $category['category_lang']);
 				}
 
-				if ($id > 0)
+				if ($n > 0)
 				{
 					$out .= ', ';
 				}

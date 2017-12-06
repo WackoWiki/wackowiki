@@ -907,6 +907,7 @@ $wacko_translation = [
 	'FeedError'					=> 'Невозможно загрузить или распознать новости',
 	'FeedSource'				=> 'Источник:',
 	'FeedLastItems'				=> 'Последних элементов: %1',
+	'FeedLastItem'				=> 'last item',
 
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML'		=> ' - последние изменения',

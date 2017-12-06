@@ -904,6 +904,7 @@ $wacko_translation = [
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
+	'FeedLastItem'				=> 'last item',
 
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML' => ' - Recent changes',
