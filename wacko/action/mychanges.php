@@ -43,21 +43,21 @@ if (($user_id = $this->get_user_id()))
 
 	if ($mode == 'byname')
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
+		$selector =
 			"FROM {$prefix}page " .
 			"WHERE user_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
-				"AND comment_on_id = 0", true);
+				"AND comment_on_id = 0 ";
 
-		$pagination = $this->pagination($count['n'], $max, 'p', $by('name'));
+		$count	= $this->db->load_single(
+			"SELECT COUNT(page_id) AS n " .
+			$selector, true);
+
+		$pagination = $this->pagination($count['n'], $max, 'p', $by('byname'));
 
 		if ($pages = $this->db->load_all(
 			"SELECT tag, title, modified " .
-			"FROM {$prefix}page " .
-			"WHERE user_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 " .
+			$selector .
 			"ORDER BY tag ASC, modified DESC " .
 			$pagination['limit'], true))
 		{
@@ -100,21 +100,21 @@ if (($user_id = $this->get_user_id()))
 	}
 	else
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
+		$selector =
 			"FROM {$prefix}page " .
 			"WHERE user_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
-				"AND comment_on_id = 0", true);
+				"AND comment_on_id = 0 ";
+
+		$count	= $this->db->load_single(
+			"SELECT COUNT(tag) AS n " .
+			$selector, true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified, edit_note " .
-			"FROM {$prefix}page " .
-			"WHERE user_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 " .
+			$selector .
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true)))
 		{

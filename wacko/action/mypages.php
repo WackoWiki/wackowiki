@@ -25,7 +25,6 @@ $by = function ($by) use ($profile, $mod_selector)
 };
 
 // navigation
-
 $tabs	= [
 			''			=> 'OrderABC',
 			'bydate'	=> 'OrderDate',
@@ -47,21 +46,21 @@ if (($user_id = $this->get_user_id()))
 
 	if ($mode == 'bydate' || $bydate)
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
+		$selector =
 			"FROM {$prefix}page " .
 			"WHERE owner_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
-				"AND comment_on_id = 0", true);
+				"AND comment_on_id = 0 ";
 
-		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
+		$count	= $this->db->load_single(
+			"SELECT COUNT(page_id) AS n " .
+			$selector, true);
+
+		$pagination = $this->pagination($count['n'], $max, 'p', $by('bydate'));
 
 		if ($pages = $this->db->load_all(
 			"SELECT tag, title, created " .
-			"FROM {$prefix}page " .
-			"WHERE owner_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 " .
+			$selector .
 			"ORDER BY created DESC, tag ASC " .
 			$pagination['limit'], true))
 		{
@@ -79,7 +78,7 @@ if (($user_id = $this->get_user_id()))
 						echo "</ul>\n<br></li>\n";
 					}
 
-					echo '<li><strong>' . $day . ":</strong><ul>\n";
+					echo '<li><strong>' . $day . ":</strong>\n" . "<ul>\n";
 					$current_day = $day;
 				}
 
@@ -98,27 +97,24 @@ if (($user_id = $this->get_user_id()))
 	}
 	else if ($mode == 'bychange' || $bychange == 1)
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT( DISTINCT p.tag ) AS n " .
+		$selector =
 			"FROM {$prefix}page AS p " .
 			"LEFT JOIN {$prefix}revision AS r " .
 				"ON (p.page_id = r.page_id " .
 					"AND p.owner_id = " . (int) $user_id . ") " .
 			"WHERE p.comment_on_id = 0 " .
 				"AND p.deleted <> 1 " .
-				"AND r.comment_on_id = 0", true);
+				"AND r.comment_on_id = 0 ";
 
-		$pagination = $this->pagination($count['n'], $max, 'p', $by('change'));
+		$count	= $this->db->load_single(
+			"SELECT COUNT( DISTINCT p.tag ) AS n " .
+			$selector, true);
+
+		$pagination = $this->pagination($count['n'], $max, 'p', $by('bychange'));
 
 		if ($pages = $this->db->load_all(
 			"SELECT p.tag, p.title, p.modified " .
-			"FROM {$prefix}page AS p " .
-			"LEFT JOIN {$prefix}revision AS r " .
-				"ON (p.page_id = r.page_id " .
-					"AND p.owner_id = " . (int) $user_id . ") " .
-			"WHERE p.comment_on_id = 0 " .
-				"AND p.deleted <> 1 " .
-				"AND r.comment_on_id = 0 " .
+			$selector .
 			"GROUP BY tag " .
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true))
@@ -158,21 +154,21 @@ if (($user_id = $this->get_user_id()))
 	}
 	else
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
+		$selector =
 			"FROM {$prefix}page " .
 			"WHERE owner_id = " . (int) $user_id . " " .
 				"AND deleted <> 1 " .
-				"AND comment_on_id = 0", true);
+				"AND comment_on_id = 0 ";
+
+		$count	= $this->db->load_single(
+			"SELECT COUNT(tag) AS n " .
+			$selector, true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
 		if (($pages = $this->db->load_all(
 			"SELECT tag, title, modified " .
-			"FROM {$prefix}page " .
-			"WHERE owner_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 " .
+			$selector .
 			"ORDER BY tag ASC " .
 			$pagination['limit'], true)))
 		{
