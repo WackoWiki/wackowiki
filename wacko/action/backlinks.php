@@ -19,7 +19,6 @@ if (($pages = $this->load_pages_linking_to($tag)))
 		$page_ids[] = (int) $page['page_id'];
 		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$page['tag']] = $page['page_id'];
-
 	}
 
 	// cache acls

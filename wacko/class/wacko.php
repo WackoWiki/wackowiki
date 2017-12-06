@@ -159,10 +159,12 @@ class Wacko
 		{
 			if (!isset($this->page_id_cache[$tag]))
 			{
+				$supertag = $this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
+
 				$page = $this->db->load_single(
 					"SELECT page_id " .
 					"FROM " . $this->db->table_prefix . "page " .
-					"WHERE tag = " . $this->db->q($tag) . " " .
+					"WHERE supertag = " . $this->db->q($supertag) . " " .
 					"LIMIT 1");
 
 				$page_id = $page['page_id'];
@@ -1465,6 +1467,7 @@ class Wacko
 			return;
 		}
 
+		$exists		= [];
 		$pages		= [];
 		$p_ids		= [];
 		$p_ids		= $page_ids;
@@ -1505,8 +1508,8 @@ class Wacko
 						") " .
 					($user
 						? "OR (user_id = " . (int) $user['user_id'] . " ) "
-						: "") .
-				"", true))
+						: "")
+				, true))
 			{
 				foreach ($menu_items as $item)
 				{
@@ -1547,10 +1550,8 @@ class Wacko
 			}
 		}
 
-		$p_ids		= array_unique($p_ids);
+		$p_ids	= array_unique($p_ids);
 
-		#if (!empty($p_ids))
-		#{
 		// cache page data
 		if ($links = $this->db->load_all(
 			"SELECT " . $this->page_meta . " " .
@@ -1583,7 +1584,6 @@ class Wacko
 
 		// cache acls to avoid multiple queries to get non-read privileges
 		$this->preload_acl($_page_ids, '');
-
 	}
 
 	function set_page($page)
@@ -3708,7 +3708,9 @@ class Wacko
 				}
 
 				//unwrap tag (check !/, ../ cases)
-				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
+				$uw_tag			= $this->unwrap_link($_page_tag);
+				$uw_supertag	= $this->translit($uw_tag);
+				$page_tag		= rtrim($uw_supertag, './');
 				// TODO: supertag won't match tag! neither in page_id_cache nor the query itself!
 				$page_id	= $this->get_page_id($page_tag);
 
