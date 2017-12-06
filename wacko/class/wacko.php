@@ -1879,7 +1879,7 @@ class Wacko
 		else
 		{
 			$categories = $this->db->load_all(
-				"SELECT c.category_id, c.category " .
+				"SELECT c.category_id, c.category, c.category_lang " .
 				"FROM " . $this->db->table_prefix . "category c " .
 					"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
 				"WHERE ca.object_id  = " . (int) $object_id . " " .
@@ -1909,7 +1909,7 @@ class Wacko
 		$cache_ids = [];
 
 		if ($categories = $this->db->load_all(
-			"SELECT ca.object_id, ca.object_type_id, c.category_id, c.category " .
+			"SELECT ca.object_id, ca.object_type_id, c.category_id, c.category, c.category_lang " .
 			"FROM " . $this->db->table_prefix . "category c " .
 				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
 			"WHERE ca.object_id IN ( '" . implode("', '", $object_ids) . "' ) " .
@@ -8042,6 +8042,11 @@ class Wacko
 		{
 			foreach ($categories as $id => $category)
 			{
+				if ($this->page['page_lang'] != $category['category_lang'])
+				{
+					$category['category']	= $this->do_unicode_entities($category['category'], $category['category_lang']);
+				}
+
 				if ($id > 0)
 				{
 					$out .= ', ';
@@ -8049,11 +8054,11 @@ class Wacko
 
 				if ($category_id == $category['category_id']) // TODO: might be an array!
 				{
-					$out .= '<span class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</span>';
+					$out .= '<span class="tag" rel="tag">' . $category['category'] . '</span>';
 				}
 				else
 				{
-					$out .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . htmlspecialchars($category['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a>';
+					$out .= '<a href="' . $this->href($method, $tag, ['category_id' => $category['category_id']] + $params) . '" class="tag" rel="tag">' . $category['category'] . '</a>';
 				}
 			}
 
