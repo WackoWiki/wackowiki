@@ -153,6 +153,7 @@ $preload_acl = function ($referrers)
 
 	foreach ($referrers as $referrer)
 	{
+		$this->cache_page($referrer, true);
 		$page_ids[]	= $referrer['page_id'];
 	}
 

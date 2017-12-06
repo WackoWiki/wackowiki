@@ -102,7 +102,7 @@ if ($this->user_allowed_comments())
 			$curday = '';
 			foreach ($pages as $page)
 			{
-				$this->cache_page($page, 0, 1);
+				$this->cache_page($page, true);
 				$this->page_id_cache[$page['tag']] = $page['page_id'];
 
 				if ($this->db->hide_locked)
