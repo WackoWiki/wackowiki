@@ -1699,7 +1699,7 @@ class Wacko
 	function load_pages_linking_to($to_tag, $tag = '')
 	{
 		return $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.title " .
+			"SELECT p.page_id, p.tag, p.title, p.page_lang " .
 			"FROM " . $this->db->table_prefix . "page_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) " .
 			"WHERE " . ($tag
