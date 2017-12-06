@@ -905,6 +905,7 @@ $wacko_translation = [
 	'FeedError'					=> 'Impossible de charger ou d&rsquo;analyser le flux',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
+	'FeedLastItem'				=> 'last item',
 
 	// XML / RSS autodiscovery
 	'RecentChangesTitleXML'		=> ' - Changements récents',

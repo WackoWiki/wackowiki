@@ -95,7 +95,10 @@ else
 		{
 			if (($max) && ($max > 0))
 			{
-				$last_items = Ut::perc_replace($this->_t('FeedLastItems'), $max);
+				$last_items =
+					($max = 1
+						? $this->_t('FeedLastItem')
+						: perc_replace($this->_t('FeedLastItems'), $max));
 			}
 
 			// make nice if $nomark == 1
@@ -126,20 +129,20 @@ else
 			{
 				if ($title != '' && $counturlset == 1)
 				{
-					echo '<p><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</strong>' . $last_items . "<span></p>\n";
+					echo '<p><span>' . $this->_t('FeedTitle') . ':<strong> ' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</strong> ' . $last_items . "<span></p>\n";
 				}
 
 				if ($title != '' && $counturlset > 1)
 				{
-					echo '<p><span>' . $this->_t('FeedTitle') . ': <strong>' . $title . '</strong>' . $last_items . "</span></p>\n";
+					echo '<p><span>' . $this->_t('FeedTitle') . ':<strong> ' . $title . '</strong> ' . $last_items . "</span></p>\n";
 				}
 				else if (!$title && $counturlset == 1)
 				{
-					echo '<p><span>' . $this->_t('FeedTitle') . ': <strong>' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</strong>' . $last_items . "</span></p>\n";
+					echo '<p><span>' . $this->_t('FeedTitle') . ':<strong> ' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</strong> ' . $last_items . "</span></p>\n";
 				}
 				else if (!$title && $counturlset > 1)
 				{
-					echo '<p><span><strong>' . $this->_t('FeedMulti') . '</strong>' . $last_items . "</span></p>\n";
+					echo '<p><span><strong>' . $this->_t('FeedMulti') . '</strong> ' . $last_items . "</span></p>\n";
 				}
 			}
 		}
