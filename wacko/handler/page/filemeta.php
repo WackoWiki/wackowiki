@@ -277,23 +277,23 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 						<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
 					</tr>
 <?php
-				// image dimension
-				if ($file['picture_w'])
-				{ ?>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileDimension'); ?>:</th>
-						<td><?php echo $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px'; ?></td>
-					</tr>
+					// image dimension
+					if ($file['picture_w'])
+					{ ?>
+						<tr>
+							<th scope="row"><?php echo $this->_t('FileDimension'); ?>:</th>
+							<td><?php echo $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px'; ?></td>
+						</tr>
 <?php
-				} ?>
-				<tr>
-					<th scope="row"><?php echo $this->_t('MimeType'); ?>:</th>
-					<td><?php echo '' . $file['mime_type'] . ''; ?></td>
-				</tr>
-				<tr>
-					<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-					<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
-				</tr>
+					} ?>
+					<tr>
+						<th scope="row"><?php echo $this->_t('MimeType'); ?>:</th>
+						<td><?php echo '' . $file['mime_type'] . ''; ?></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
+						<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
+					</tr>
 <?php
 				// image dimension
 				#if ($file['picture_w'])
@@ -316,8 +316,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 						<th scope="row"><?php echo $this->_t('Categories'); ?>:</th>
 						<td><?php echo $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']); ?></td>
 					</tr>
-
-			</table>
+				</table>
 
 			<br>
 
@@ -358,12 +357,12 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 						<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
 						<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo htmlspecialchars($file['caption'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?></textarea></td>
 					</tr>
-						<tr>
-					<th scope="row">
-						<label for="file_lang"><?php echo $this->_t('YourLanguage');?></label>
-					</th>
-					<td>
-						<select id="file_lang" name="file_lang">
+					<tr>
+						<th scope="row">
+							<label for="file_lang"><?php echo $this->_t('YourLanguage');?></label>
+						</th>
+						<td>
+							<select id="file_lang" name="file_lang">
 			<?php
 
 				$languages = $this->_t('LanguageArray');
@@ -379,18 +378,18 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 				foreach ($langs as $lang)
 				{
-					echo '<option value="' . $lang . '"' .
+					echo '<option value="' . $lang . '" ' .
 						($file['file_lang'] == $lang
-							? ' selected '
+							? 'selected'
 							: (!isset($file['file_lang']) && $this->db->language == $lang
-								? ' selected'
+								? 'selected'
 								: '')
 						) . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
 				}
 			?>
-						</select>
-					</td>
-				</tr>
+							</select>
+						</td>
+					</tr>
 				</table>
 				<br>
 

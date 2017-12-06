@@ -961,7 +961,7 @@ class Wacko
 	*
 	* @return string
 	*/
-	function translit($tag, $strtolow = TRANSLIT_LOWERCASE, $donotload = TRANSLIT_LOAD)
+	function translit($tag, $strtolow = TRANSLIT_LOWERCASE, $donotload = TRANSLIT_LOAD, $lang = null)
 	{
 		// Lookup transliteration result in the cache and return it if found
 		static $translit_cache;
@@ -981,19 +981,27 @@ class Wacko
 
 		if (!$donotload)
 		{
-			if ($page = $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
+			if (!$lang)
 			{
+				if ($page = $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
+				{
+					if (isset($page['page_lang']))
+					{
+						$lang = $page['page_lang'];
+					}
+					else
+					{
+						$lang = $this->db->language;
+					}
+				}
+			}
+
+			if ($lang)
+			{
+				// store old language setting
 				$_lang = $this->language['code'];
 
-				if (isset($page['page_lang']))
-				{
-					$lang = $page['page_lang'];
-				}
-				else
-				{
-					$lang = $this->db->language;
-				}
-
+				// set new language setting
 				$this->set_language($lang);
 			}
 		}
@@ -1028,6 +1036,7 @@ class Wacko
 			$tag = strtolower($tag);
 		}
 
+		// reset to original language setting
 		if ($_lang)
 		{
 			$this->set_language($_lang);
@@ -1210,7 +1219,7 @@ class Wacko
 
 				if ($revision_id)
 				{
-					$this->cache_page($page, $page_id, $metadata_only);
+					$this->cache_page($page, $metadata_only);
 
 					$page = $this->db->load_single(
 						"SELECT p.revision_id, " . $what_r . " " .
@@ -1248,7 +1257,7 @@ class Wacko
 
 				if ($revision_id)
 				{
-					$this->cache_page($page, $page_id, $metadata_only);
+					$this->cache_page($page, $metadata_only);
 
 					$page = $this->db->load_single(
 						"SELECT " . $what_r . " " .
@@ -1271,7 +1280,7 @@ class Wacko
 		// cache result
 		if (!$revision_id && !$cached_page)
 		{
-			$this->cache_page($page, $page_id, $metadata_only);
+			$this->cache_page($page, $metadata_only);
 		}
 
 		return $page;
@@ -1326,11 +1335,11 @@ class Wacko
 	*
 	* @param array $page Page data
 	* @param int $page_id
-	* @param boolean $metadataonly Marks that page contains metadata only (all atributes, excepts page body)
+	* @param boolean $metadata_only Marks that page contains metadata only (all atributes, excepts page body)
 	*/
-	function cache_page($page, $page_id = 0, $metadata_only = 0)
+	function cache_page($page, $metadata_only = false)
 	{
-		// cache for both cases (id + tag) to avoid roundtrips
+		// cache for both cases (page_id + tag) to avoid roundtrips
 		$this->page_cache['page_id'][$page['page_id']]				= $page;
 		$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
 
@@ -1554,7 +1563,7 @@ class Wacko
 		{
 			foreach ($links as $link)
 			{
-				$this->cache_page($link, 0, 1);
+				$this->cache_page($link, true);
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
 				$exists[]		= $link['supertag'];
 				$_page_ids[]	= $link['page_id'];
@@ -1758,7 +1767,7 @@ class Wacko
 		{
 			foreach ($pages as $page)
 			{
-				$this->cache_page($page, 0, 1);
+				$this->cache_page($page, true);
 				$page_ids[]	= $page['page_id'];
 			}
 
@@ -1794,7 +1803,7 @@ class Wacko
 
 			foreach ($pages as $page)
 			{
-				$this->cache_page($page, 0, 1);
+				$this->cache_page($page, true);
 				$page_ids[]	= $page['page_id'];
 			}
 
@@ -3700,7 +3709,8 @@ class Wacko
 
 				//unwrap tag (check !/, ../ cases)
 				$page_tag	= rtrim($this->translit($this->unwrap_link($_page_tag)), './');
-				$page_id	= $this->get_page_id($page_tag); // // TODO: supertag won't match tag! neither in page_id_cache nor the query itself!
+				// TODO: supertag won't match tag! neither in page_id_cache nor the query itself!
+				$page_id	= $this->get_page_id($page_tag);
 
 				if ($file_data = $this->check_file_record($file_name, $page_id))
 				{
@@ -3921,10 +3931,11 @@ class Wacko
 			$untag			= $unwtag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/i';
-			$ptag			= $this->translit($unwtag); // TODO: multilingual & donotload
+			// TODO: multilingual & donotload (TEST: passing $link_lang)
+			$ptag			= $this->translit($unwtag);
 			$handler		= null;
 
-			if (preg_match( $regex_handlers, '/' . $ptag . '/', $match ))
+			if (preg_match($regex_handlers, '/' . $ptag . '/', $match))
 			{
 				$handler	= $match[2];
 
