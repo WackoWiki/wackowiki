@@ -294,7 +294,7 @@ function admin_user_approve(&$engine, &$module)
 		$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
 							'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 							$engine->_t('UsersSearch') . ': </td><td>' .
-							'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '') . '"> '.
+							'<input type="search" name="user" maxchars="40" size="30" value="' . htmlspecialchars(($_GET['user'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"> '.
 							'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> '.
 							$engine->form_close();
 		$filter_status =	'<p class="right">' .

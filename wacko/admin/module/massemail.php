@@ -161,7 +161,7 @@ $mail_body = '';
 					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
 				</td>
 				<td>
-					<input type="text" name="mail_subject" value="<?php echo (isset($_POST['mail_subject']) ? htmlspecialchars($_POST['mail_subject'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : ""); ?>" size="60" maxlength="200"  required>
+					<input type="text" name="mail_subject" value="<?php echo htmlspecialchars(($_POST['mail_subject'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" size="60" maxlength="200"  required>
 				</td></tr>
 
 			<tr class="hl_setting">

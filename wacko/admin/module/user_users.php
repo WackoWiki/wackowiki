@@ -341,14 +341,14 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">' . $engine->_t('UserName') . '</label>' .
 					'</td>
 					<td>
-						<input type="text" id="newname" name="newname" value="' . ( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . htmlspecialchars(($_POST['newname'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
 					<td>
 						<label for="newrealname">' . $engine->_t('RealName') . '</label>' .
 					'<td>
-						<input type="text" id="newrealname" name="newrealname" value="' . ( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100">
+						<input type="text" id="newrealname" name="newrealname" value="' . htmlspecialchars(($_POST['newrealname'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -356,7 +356,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="email">' . $engine->_t('Email') . '</label>
 					</td>' .
 					'<td>
-						<input type="email" id="email" name="email" value="' . ( isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="50" maxlength="100">
+						<input type="email" id="email" name="email" value="' . htmlspecialchars(($_POST['email'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -419,7 +419,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">' . $engine->_t('UsersRename') . ' \'<code>' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\' in *</label>
 					</td>' .
 					'<td>
-						<input type="text" id="newname" name="newname" value="' . ( isset($_POST['newname']) ? htmlspecialchars($_POST['newname'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . htmlspecialchars(($_POST['newname'] ?? $user['user_name']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -427,7 +427,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newrealname">' . $engine->_t('RealName') . '</label> '.
 					'</td>
 					<td>
-						<input type="text" id="newrealname" name="newrealname" value="' . ( isset($_POST['newrealname']) ? htmlspecialchars($_POST['newrealname'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['real_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100">
+						<input type="text" id="newrealname" name="newrealname" value="' . htmlspecialchars(($_POST['newrealname'] ?? $user['real_name']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
 					</td>' .
 				'</tr>' .
 				'<tr>
@@ -435,7 +435,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newemail">' . $engine->_t('Email') . '</label> '.
 					'</td>
 					<td>
-						<input type="email" id="newemail" name="newemail" value="' . ( isset($_POST['newdescription']) ? htmlspecialchars($_POST['newemail'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($user['email'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100">
+						<input type="email" id="newemail" name="newemail" value="' . htmlspecialchars(($_POST['newemail'] ?? $user['email']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -806,7 +806,7 @@ function admin_user_users(&$engine, &$module)
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']) .
 					'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 					$engine->_t('UsersSearch') . ': </td><td>' .
-					'<input type="search" name="user" maxchars="40" size="30" value="' . (isset($_GET['user']) ? htmlspecialchars($_GET['user'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '') . '"> '.
+					'<input type="search" name="user" maxchars="40" size="30" value="' . htmlspecialchars(($_GET['user'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"> '.
 					'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> '.
 					$engine->form_close();
 

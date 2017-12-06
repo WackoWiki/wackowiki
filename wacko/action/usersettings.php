@@ -125,7 +125,7 @@ else if (($user = $this->get_user()))
 		// update user_setting table
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "user_setting SET " .
-				$sql.
+				$sql .
 			"WHERE user_id = " . (int) $user['user_id'] . " " .
 			"LIMIT 1");
 
