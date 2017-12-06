@@ -225,7 +225,7 @@ if ($this->is_owner() || $this->is_admin())
 								'<label for="new_category">' . $this->_t('CategoriesAdd') . '</label>' .
 							'</td>' .
 							'<td>' .
-								'<input type="text" name="category" id="new_category" value="' . (isset($_POST['category']) ? htmlspecialchars($_POST['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100">' .
+								'<input type="text" name="category" id="new_category" value="' . htmlspecialchars(($_POST['category'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">' .
 							'</td>' .
 						'</tr>' .
 						'<tr>' .

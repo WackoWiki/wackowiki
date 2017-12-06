@@ -283,7 +283,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
 						</td>' .
 						'<td>
-							<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="100">
+							<input type="text" id="new_group_name" name="new_group_name" value="' . htmlspecialchars($_POST['new_group_name'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
 						</td>
 					</tr>' .
 					'<tr>
@@ -291,7 +291,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="description">' . $engine->_t('GroupsDescription') . '</label>
 						</td>' .
 						'<td>
-							<input type="text" id="description" name="description" value="' . ( isset($_POST['description']) ? htmlspecialchars($_POST['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="50" maxlength="100">
+							<input type="text" id="description" name="description" value="' . htmlspecialchars(($_POST['description'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
 						</td>
 					</tr>' .
 					'<tr>
@@ -358,13 +358,13 @@ function admin_user_groups(&$engine, &$module)
 						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\' in</label>
 					</td>' .
 					'<td>
-						<input type="text" id="new_group_name" name="new_group_name" value="' . ( isset($_POST['new_group_name']) ? htmlspecialchars($_POST['new_group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="20" maxlength="100">
+						<input type="text" id="new_group_name" name="new_group_name" value="' . htmlspecialchars(($_POST['new_group_name'] ?? $usergroup['group_name']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
 					</td></tr>' .
 					'<tr><td>
 							<label for="new_description">' . $engine->_t('GroupsDescription') . '</label>
 					</td>' .
 					'<td>
-						<input type="text" id="new_description" name="new_description" value="' . ( isset($_POST['new_description']) ? htmlspecialchars($_POST['new_description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : htmlspecialchars($usergroup['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) ) . '" size="50" maxlength="100">
+						<input type="text" id="new_description" name="new_description" value="' . htmlspecialchars(($_POST['new_description'] ?? $usergroup['description']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
 					</td></tr>' .
 					'<tr><td>
 						<label for="moderator_id">' . $engine->_t('GroupsModerator') . '</label>

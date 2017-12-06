@@ -17,8 +17,6 @@ if (!defined('IN_WACKO'))
  }}
  */
 
-// TODO: add option to hide SYSTEM pages (Owner = SYSTEM)
-
 if (!isset($for))		$for = ''; // depreciated
 if ($for)				$page = $for;
 
@@ -51,7 +49,7 @@ $get_letter	= function ($ch) use (&$_alnum) // hope "it" will cache compiled reg
 	return $ch;
 };
 
-$letter = $get_letter(isset($_GET['letter'])? $_GET['letter'] : $letter);
+$letter = $get_letter($_GET['letter'] ?? $letter);
 
 // get letters of alphabet with existing pages, and cache them in _SESSION
 $letters = &$this->sess->pi_letters;
@@ -91,7 +89,7 @@ if (!isset($letters)
 
 	foreach ($pages as $_page)
 	{
-		if (($ch = $get_letter(($title)?  $_page['title'] : $_page['tag'])) !== '')
+		if (($ch = $get_letter($title? $_page['title'] : $_page['tag'])) !== '')
 		{
 			if (array_key_exists($ch, $letters))
 			{
@@ -213,7 +211,7 @@ $cur_char = false;
 foreach ($pages_to_display as $page)
 {
 	// do unicode entities
-	$page_lang	= ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
+	$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 	$ch			= $get_letter($title?  $page['title'] : $page['tag']);
 
 	if ($ch !== $cur_char)
