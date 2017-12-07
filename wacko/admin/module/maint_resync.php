@@ -236,7 +236,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('usersupdate');
 ?>
 		<input type="hidden" name="action" value="userstats">
-		<input type="submit" name="start" id="submit" value="synchronize">
+		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
 <?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('PageStats');?></h2>
@@ -245,7 +245,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('pageupdate');
 ?>
 		<input type="hidden" name="action" value="pagestats">
-		<input type="submit" name="start" id="submit" value="synchronize">
+		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
 <?php		echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('Feeds');?></h2>
@@ -254,7 +254,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('feedupdate');
 ?>
 		<input type="hidden" name="action" value="rssfeeds">
-		<input type="submit" name="start" id="submit" value="synchronize">
+		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
 <?php		echo $engine->form_close();?>
 
 <?php
@@ -269,7 +269,7 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_open('sitemap_update');
 ?>
 		<input type="hidden" name="action" value="xml_sitemap">
-		<input type="submit" name="start" id="submit" value="synchronize">
+		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
 <?php		echo $engine->form_close();
 }?>
 
@@ -279,7 +279,7 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_open('linksupdate');
 ?>
 		<input type="hidden" name="action" value="wikilinks">
-		<input type="submit" name="start" id="submit" value="synchronize">
+		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
 <?php
 	echo $engine->form_close();
 }

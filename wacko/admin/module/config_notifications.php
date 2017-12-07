@@ -35,6 +35,7 @@ function admin_config_notifications(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['enable_email_notification']	= (int) $_POST['enable_email_notification'];
+		$config['disable_autosubscribe']		= (int) $_POST['disable_autosubscribe'];
 		$config['notify_minor_edit']			= (int) ($_POST['notify_minor_edit'] ?? 0);
 		$config['notify_page']					= (int) $_POST['notify_page'];
 		$config['notify_comment']				= (int) $_POST['notify_comment'];

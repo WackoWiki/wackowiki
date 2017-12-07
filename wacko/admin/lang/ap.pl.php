@@ -735,6 +735,7 @@ $ap_translation = [
 
 
 	// Resync settings
+	'Synchronize'				=> 'synchronizowaæ',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
@@ -750,7 +751,7 @@ $ap_translation = [
 	'XmlSiteMap'				=> 'XML-Sitemap',
 	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
 	'WikiLinksResync'			=> 'Wiki-links',
-	'WikiLinksResyncInfo'				=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
+	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Te informacje s± u¿ywane przez witrynê podczas wysy³ania e-maili do u¿ytkowników. Sprawd¼ czy podany adres e-mail jest wa¿nym adresem, poniewa¿ wszystkie zwrócone lub niedostarczone wiadomo¶ci bêd± prawdopodobnie odsy³ane na ten adres. Je¶li serwer nie udostêpnia natywnych (opartych na PHP) us³ug e-mail, mo¿na wysy³aæ wiadomo¶ci bezpo¶rednio, u¿ywaj±c protoko³u SMTP. Wymaga to adresu odpowiedniego serwera. Je¶li go nie znasz, zapytaj o niego swojego us³ugodawcê. Je¶li serwer wymaga uwierzytelnienia (i tylko, je¶li wymaga), wprowad¼ nazwê u¿ytkownika, has³o i metodê uwierzytelniania.',
@@ -823,6 +824,42 @@ $ap_translation = [
 	'DeletedObjectsInfo'		=> 'List of removed pages and files.
 									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+
+	// Filter module
+	'FilterSettingsInfo'		=> 'Words that will be automatically censored on your Wiki.',
+	'FilterSettingsUpdated'		=> 'Updated spam filter settings',
+
+	'WordCensoringSection'		=> 'Word censoring',
+	'SPAMFilter'				=> 'SPAM Filter',
+	'SPAMFilterInfo'			=> 'Enabling SPAM Filter',
+	'WordList'					=> 'Word list',
+	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
+
+	// DB Convert module
+	'Convert'					=> 'convert',
+	'NoColumnsToConvert'		=> 'No columns to convert.',
+	'NoTablesToConvert'			=> 'No tables to convert.',
+
+	'LogConvertionDatabase'		=> 'Convertion database',
+	'ConvertionTablesOk'		=> 'Convertion of the selected tables successfully.',
+
+	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
+	'ConvertionColumnsOk'		=> 'Convertion of the selected columns successfully.',
+
+	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB/XtraDB',
+	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
+	'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
+
+	'DbVersion'					=> 'Requires at least MySQL 5.6.4, available version',
+	'DbEngineOk'				=> 'InnoDB/XtraDB is available.',
+	'DbEngineMissing'			=> 'InnoDB / XtraDB is not available.',
+	'EngineTable'				=> 'Table',
+	'EngineDefault'				=> 'Default',
+	'EngineColumn'				=> 'Column',
+	'EngineTyp'					=> 'Type',
+
+	'ConvertColumnsToStrict'	=> 'Converting Columns to SQL strict',
+	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.',
 
 	// Log module
 	'LogFilterTip'				=> 'Filter events by criteria',

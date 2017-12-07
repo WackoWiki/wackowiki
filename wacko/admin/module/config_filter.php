@@ -34,7 +34,7 @@ function admin_config_filter(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
 	<p>
-		Words that will be automatically censored on your Wiki.
+		<?php echo $engine->_t('FilterSettingsInfo');?>
 	</p>
 	<br>
 <?php
@@ -53,8 +53,8 @@ function admin_config_filter(&$engine, &$module)
 		file_put_contents($file_name, $phrase_list);
 		chmod($file_name, 0644);
 
-		$engine->log(1, '!!Updated spam filter settings!!');
-		$engine->set_message('Updated spam filter settings', 'success');
+		$engine->log(1, '!!' . $engine->_t('FilterSettingsUpdated') . '!!');
+		$engine->set_message($engine->_t('FilterSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -69,12 +69,12 @@ function admin_config_filter(&$engine, &$module)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
-				<th colspan="2">Word censoring</th>
+				<th colspan="2"><?php echo $engine->_t('WordCensoringSection');?></th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="spam_filter"><strong>SPAM Filter:</strong><br>
-					<small>Enabling SPAM Filter</small></label>
+					<label for="spam_filter"><strong><?php echo $engine->_t('SPAMFilter');?>:</strong><br>
+					<small><?php echo $engine->_t('SPAMFilterInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="spam_filter_on" name="spam_filter" value="1"<?php echo ($engine->db->spam_filter == 1 ? ' checked' : '');?>><label for="spam_filter_on"><?php echo $engine->_t('Enabled'); ?></label>
@@ -86,8 +86,8 @@ function admin_config_filter(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="phrase_list"><strong>Word list:</strong><br>
-					<small>Word or phrase <code>fragment</code> to be blacklisted (one per line)</small></label>
+					<label for="phrase_list"><strong><?php echo $engine->_t('WordList');?>:</strong><br>
+					<small><?php echo $engine->_t('WordListInfo');?></small></label>
 				</td>
 				<td>
 					<textarea style="width:400px; height:400px;" id="phrase_list" name="phrase_list"><?php echo htmlspecialchars($phrases, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>

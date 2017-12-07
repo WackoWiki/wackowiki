@@ -70,7 +70,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['minor_edit']					= (int) $_POST['minor_edit'];
 		$config['review']						= (int) $_POST['review'];
 		$config['publish_anonymously']			= (int) $_POST['publish_anonymously'];
-		$config['disable_autosubscribe']		= (int) $_POST['disable_autosubscribe'];
 		$config['default_rename_redirect']		= (int) ($_POST['default_rename_redirect'] ?? 0);
 		$config['store_deleted_pages']			= (int) ($_POST['store_deleted_pages'] ?? 0);
 		$config['keep_deleted_time']			= (int) $_POST['keep_deleted_time'];

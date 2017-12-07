@@ -740,6 +740,7 @@ $ap_translation = [
 
 
 	// Resync settings
+	'Synchronize'				=> 'синхронизировать',
 	'UserStatsSynched'			=> 'Статистика пользователей синхронизирована.',
 	'PageStatsSynched'			=> 'Page Statistics синхронизирована.',
 	'FeedsUpdated'				=> 'RSS-каналы обновлены.',
@@ -828,6 +829,42 @@ $ap_translation = [
 	'DeletedObjectsInfo'		=> 'Перечень удаленных документов и файлы, копии которых остались в таблице редакций.
 									Окончательно удалить или восстановить документ или файл из базы данных можно, нажав на ссылку <em>Удалить</em>
 									в соответствующей строке. (Будьте осторожны, подтверждение на удаление не запрашивается!)',
+
+	// Filter module
+	'FilterSettingsInfo'		=> 'Words that will be automatically censored on your Wiki.',
+	'FilterSettingsUpdated'		=> 'Updated spam filter settings',
+
+	'WordCensoringSection'		=> 'Word censoring',
+	'SPAMFilter'				=> 'SPAM Filter',
+	'SPAMFilterInfo'			=> 'Enabling SPAM Filter',
+	'WordList'					=> 'Word list',
+	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
+
+	// DB Convert module
+	'Convert'					=> 'convert',
+	'NoColumnsToConvert'		=> 'No columns to convert.',
+	'NoTablesToConvert'			=> 'No tables to convert.',
+
+	'LogConvertionDatabase'		=> 'Convertion database',
+	'ConvertionTablesOk'		=> 'Convertion of the selected tables successfully.',
+
+	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
+	'ConvertionColumnsOk'		=> 'Convertion of the selected columns successfully.',
+
+	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB/XtraDB',
+	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
+	'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
+
+	'DbVersion'					=> 'Requires at least MySQL 5.6.4, available version',
+	'DbEngineOk'				=> 'InnoDB/XtraDB is available.',
+	'DbEngineMissing'			=> 'InnoDB / XtraDB is not available.',
+	'EngineTable'				=> 'Table',
+	'EngineDefault'				=> 'Default',
+	'EngineColumn'				=> 'Column',
+	'EngineTyp'					=> 'Type',
+
+	'ConvertColumnsToStrict'	=> 'Converting Columns to SQL strict',
+	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.',
 
 	// Log module
 	'LogFilterTip'				=> 'Отфильтровать события по критериям',
