@@ -129,7 +129,7 @@ else if ($type == OBJECT_FILE)
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;remove=' . $page['page_id'] . $_type . '">' . $engine->_t('RemoveButton') . '</a> ]'.
 						# ' [ <a href="' . rawurldecode($engine->href()) . '&amp;archive=' . $page['page_id'] . $_type . '">' . $engine->_t('ArchiveButton') . '</a> ]'.
 						' [ <a href="' . rawurldecode($engine->href()) . '&amp;restore=' . $page['page_id'] . $_type . '">' . $engine->_t('RestoreButton') . '</a> ]</small> '.
-						$engine->compose_link_to_page($page['tag'], 'revisions', '', 0, $page['title']) .
+						$engine->compose_link_to_page($page['tag'], 'revisions', '', $page['title']) .
 					'</td>' .
 				"</tr>\n";
 		}

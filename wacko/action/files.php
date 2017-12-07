@@ -27,10 +27,10 @@ $ppage		= '';
 $files		= [];
 $object_ids	= [];
 
-if (!isset($nomark))	$nomark		= '';
+if (!isset($nomark))	$nomark		= 0;
 if (!isset($order))		$order		= '';
-if (!isset($global))	$global		= '';	// global attachments
-if (!isset($all))		$all		= '';	// all attachments
+if (!isset($global))	$global		= 0;	// global attachments
+if (!isset($all))		$all		= 0;	// all attachments
 if (!isset($linked))	$linked		= '';	// file link in page
 if (!isset($tag))		$tag		= '';	// FIXME: $tag == $page
 if (!isset($owner))		$owner		= '';

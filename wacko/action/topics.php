@@ -215,8 +215,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
 							: '' ) .
 						($updated
-							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[' . $this->_t('ForumUpdated') . ']</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
-							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title']) . '</strong>'
+							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[' . $this->_t('ForumUpdated') . ']</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title'], '', true) . '</strong>'
+							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title'], '', true) . '</strong>'
 						) .
 						'</td>' .
 						'<td class="t_center nowrap">' .

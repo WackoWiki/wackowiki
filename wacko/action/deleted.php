@@ -54,10 +54,10 @@ if ($this->is_admin())
 				echo '<li>' .
 						'<span>' .
 							'<small>' . $time . '</small>  &mdash; ' .
-							// $this->compose_link_to_page($page['tag'], 'revisions', '', 0) .
+							// $this->compose_link_to_page($page['tag'], 'revisions', '') .
 							'<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' .
 									$this->_t('CommentDeleted') . '" alt="[deleted]" class="btn-delete"> ' .
-							$this->compose_link_to_page($page['tag'], '', '', 0) .
+							$this->compose_link_to_page($page['tag'], '', '') .
 						'</span>' .
 						' . . . . . . . . . . . . . . . . <small>' .
 						$this->user_link($page['user_name'], '', true, false) .

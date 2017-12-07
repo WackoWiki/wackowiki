@@ -187,7 +187,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			$author			= $this->user_link($page['user_name'], '', true, false);
 			$viewed			= ( isset($user['last_mark']) && $user['last_mark'] && $page['user_name'] != $user['user_name'] && $page['date'] > $user['last_mark'] ? ' viewed' : '' );
 			$time_modified	= (!$this->hide_revisions && ($page['ctype'] != 2 || $page['comment_on_id'] === 0))
-								? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip'))
+								? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'))
 								: $time;
 
 			if (($edit_note = $page['edit_note']))

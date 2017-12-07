@@ -377,7 +377,7 @@ if ($this->is_owner() || $this->is_admin())
 		else
 		{
 			echo '<h3>' .
-					$this->_t('CategoriesFor') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) .
+					$this->_t('CategoriesFor') . ' ' . $this->compose_link_to_page($this->tag, '', '') .
 				"</h3>\n";
 			echo '<ul class="menu">
 					<li class="active">' . $this->_t('CategoriesAssign') . '</li>' .

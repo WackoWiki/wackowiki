@@ -43,7 +43,11 @@ if ($this->has_access('read')
 	// comment header?
 	if ($this->page['comment_on_id'])
 	{
-		$message = $this->_t('ThisIsCommentOn') . ' ' . $this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])) . ', ' . $this->_t('PostedBy') . ' ' . $this->user_link($this->page['user_name'], '', true, false) . ' ' . $this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
+		$message = $this->_t('ThisIsCommentOn') . ' ' .
+			$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), $this->get_page_tag($this->page['comment_on_id'])) . ', ' .
+			$this->_t('PostedBy') . ' ' .
+			$this->user_link($this->page['user_name'], '', true, false) . ' ' .
+			$this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
 		$this->show_message($message, 'comment-info');
 	}
 
@@ -63,7 +67,12 @@ if ($this->has_access('read')
 		$_body	= $_POST['body'] ?? '';
 
 		// watch page
-		if ($this->page && isset($_POST['watchpage']) && isset($_POST['noid_publication']) && ($_POST['noid_publication'] != $this->page['page_id']) && $user && !$this->is_watched)
+		if ($this->page
+			&& isset($_POST['watchpage'])
+			&& isset($_POST['noid_publication'])
+			&& ($_POST['noid_publication'] != $this->page['page_id'])
+			&& $user
+			&& !$this->is_watched)
 		{
 			$this->set_watch($user['user_id'], $this->page['page_id']);
 			$this->is_watched = true;
@@ -383,7 +392,8 @@ if ($this->has_access('read')
 			}
 
 			// publish anonymously
-			if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('write', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
+			if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('write', '', GUEST))
+				|| (!$this->page && $this->has_access('create', '', GUEST)))
 			{
 				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '"' . ( $this->get_user_setting('noid_pubs') == 1 ? ' checked' : '' ) . '>';
 				$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . '</label>';

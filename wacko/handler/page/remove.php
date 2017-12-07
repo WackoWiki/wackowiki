@@ -15,7 +15,7 @@ if (!$this->page)
 }
 
 $title = $this->page['comment_on_id']?  'RemoveComment' : 'RemovePage';
-echo '<h3>' . $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br>\n";
+echo '<h3>' . $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, '', '') . "</h3>\n<br>\n";
 
 // check user permissions to delete
 if ($this->is_admin()
@@ -201,7 +201,7 @@ if ($this->is_admin()
 		// return to commented page
 		if ($comment_on_id)
 		{
-			echo '<br>' . $this->compose_link_to_page($this->get_page_tag($comment_on_id) . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'), 0);
+			echo '<br>' . $this->compose_link_to_page($this->get_page_tag($comment_on_id) . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'));
 		}
 	}
 	else
@@ -212,7 +212,11 @@ if ($this->is_admin()
 			// TODO: add function for
 			echo '<div class="preview">';
 
-			$message = $this->_t('ThisIsCommentOn') . ' ' . $this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), 0, $this->get_page_tag($this->page['comment_on_id'])) . ', ' . $this->_t('PostedBy') . ' ' . $this->user_link($this->page['user_name'], '', true, false) . ' ' . $this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
+			$message = $this->_t('ThisIsCommentOn') . ' ' .
+				$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), $this->get_page_tag($this->page['comment_on_id'])) . ', ' .
+				$this->_t('PostedBy') . ' ' .
+				$this->user_link($this->page['user_name'], '', true, false) . ' ' .
+				$this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
 			$this->show_message($message, 'comment-info');
 
 			$desc = $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');

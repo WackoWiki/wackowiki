@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 if (!isset($page))		$page = '';
-if (!isset($nomark))	$nomark = '';
+if (!isset($nomark))	$nomark = 0;
 if (!isset($title))		$title = '';
 
 $tag = $page?  $this->unwrap_link($page) : $this->tag;

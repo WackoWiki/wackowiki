@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo '<h3>' . $this->_t('PurgePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n";
+echo '<h3>' . $this->_t('PurgePage') . ' ' . $this->compose_link_to_page($this->tag, '', '') . "</h3>\n";
 
 $this->ensure_page();
 

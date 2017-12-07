@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 	[page="Cluster"]	// show page index only for a certain cluster
 	[max=50]			// number of pages to show at one time, if there are more pages then this the next/prev buttons are shown
 	[letter="a"]		// only display pages whose name starts with this letter
-	[title=1]			// takes title inplace of tag
+	[title=0|1]			// takes title inplace of tag
 	[system=0|1]		// excludes system pages
 	[lang="ru"]			// show pages only in specified language
  }}
@@ -22,7 +22,7 @@ if ($for)				$page = $for;
 
 if (!isset($system))	$system = 0;
 if (!isset($page))		$page = '';
-if (!isset($title))		$title = '';
+if (!isset($title))		$title = 0;
 if (!isset($letter))	$letter = '';
 if (!isset($lang))		$lang = '';
 if (!isset($max))		$max = null;
@@ -55,9 +55,9 @@ $letter = $get_letter($_GET['letter'] ?? $letter);
 $letters = &$this->sess->pi_letters;
 
 if (!isset($letters)
-	|| $this->sess->pi_for != $page
-	|| $this->sess->pi_lang != $lang
-	|| $this->sess->pi_title != $title
+	|| $this->sess->pi_for		!= $page
+	|| $this->sess->pi_lang		!= $lang
+	|| $this->sess->pi_title	!= $title
 	|| time() > $this->sess->pi_time)
 {
 	$this->sess->pi_for		= $page;
@@ -103,6 +103,7 @@ if (!isset($letters)
 	}
 }
 
+// get index pages
 $selector =
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = 0 " .

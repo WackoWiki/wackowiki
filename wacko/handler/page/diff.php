@@ -128,7 +128,7 @@ if ($page_a && $page_b
 		$revisions_menu($b, $page_b),
 		//'<a href="' . $this->href('', '', ($a > 0 ? ['revision_id' => $page_a['revision_id']] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
 		//'<a href="' . $this->href('', '', ($b > 0 ? ['revision_id' => $page_b['revision_id']] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
-		$this->compose_link_to_page($this->tag, '', '', 0)) . "</div>\n";
+		$this->compose_link_to_page($this->tag, '', '')) . "</div>\n";
 	echo "<br>\n<br>\n";
 
 	// print navigation

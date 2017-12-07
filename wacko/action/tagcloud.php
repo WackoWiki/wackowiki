@@ -59,7 +59,7 @@ if (!function_exists('print_tag_cloud'))
 
 
 if (!isset($root))			$root	= '/';
-if (!isset($nomark))		$nomark = '';
+if (!isset($nomark))		$nomark = 0;
 if (!isset($lang))			$lang	= $this->page['page_lang'];
 if (!isset($owner))			$owner = '';
 if (!isset($sort) || !in_array($sort, ['abc', 'number']))

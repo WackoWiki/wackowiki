@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page();
 
-echo '<h3>' . $this->_t('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '', 0) . "</h3>\n<br>\n";
+echo '<h3>' . $this->_t('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '') . "</h3>\n<br>\n";
 
 if ($user = $this->get_user())
 {

@@ -16,7 +16,7 @@ if (!isset($root))		$root = '';
 if (!isset($date))		$date = @$_GET['date'];
 if (!isset($hide_minor_edit)) $hide_minor_edit = @$_GET['minor_edit'];
 if (!isset($noxml))		$noxml = 0;
-if (!isset($title))		$title = '';
+if (!isset($title))		$title = 0;
 if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
@@ -72,7 +72,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// review
 			if ($this->db->review && $this->is_reviewer() && !$page['reviewed'])
 			{
-				$review = '<span class="review">[' . $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'), 0) . ']</span>';
+				$review = '<span class="review">[' . $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review')) . ']</span>';
 			}
 
 			// do unicode entities
@@ -103,7 +103,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			// print entry
 			echo '<li class="lined' . $viewed . '"><span class="dt">' .
 			(!$this->hide_revisions
-				? $this->compose_link_to_page($page['tag'], 'revisions', $time, 0, $this->_t('RevisionTip')) . ' '
+				? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')) . ' '
 				: $time
 			) .
 			'</span> &mdash; '.

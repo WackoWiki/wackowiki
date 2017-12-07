@@ -71,7 +71,7 @@ if (($user = $this->get_user()))
 	}
 
 	$tpl->u_logout = $this->href('', '', 'action=logout');
-	$tpl->u_account = $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0);
+	$tpl->u_account = $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'));
 	$tpl->u_cookies = $this->href('', '', 'action=clearcookies');
 }
 else // login
