@@ -283,7 +283,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
 						</td>' .
 						'<td>
-							<input type="text" id="new_group_name" name="new_group_name" value="' . htmlspecialchars($_POST['new_group_name'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
+							<input type="text" id="new_group_name" name="new_group_name" value="' . htmlspecialchars(($_POST['new_group_name'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
 						</td>
 					</tr>' .
 					'<tr>
