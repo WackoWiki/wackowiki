@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$comment_on_id	= '';
+$comment_on_id	= 0;
 $message		= '';
 
 // obviously do not allow to remove non-existent pages
@@ -30,7 +30,8 @@ if ($this->is_admin()
 {
 	if ($this->page['comment_on_id'])
 	{
-		$comment_on_id = $this->page['comment_on_id'];
+		$comment_on_id	= $this->page['comment_on_id'];
+		$comment_on		= $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
 	}
 
 	if (@$_POST['_action'] === 'remove_page')
@@ -96,7 +97,7 @@ if ($this->is_admin()
 		}
 
 		// purge related page cache
-		if ($this->http->invalidate_page($comment_on_id ? $this->get_page_tag($comment_on_id) : $this->supertag))
+		if ($this->http->invalidate_page($comment_on_id ? $comment_on['supertag'] : $this->supertag))
 		{
 			$message .= '<li>' . $this->_t('PageCachePurged') . "</li>\n";
 		}
@@ -189,7 +190,7 @@ if ($this->is_admin()
 		else
 		{
 			$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
-				($this->get_page_tag($comment_on_id) . " " . $this->get_page_title('', $comment_on_id)),
+				($comment_on['tag'] . ' ' . $comment_on['title']),
 				$this->page['user_name'],
 				$this->get_time_formatted($this->page['created'])));
 		}
@@ -201,7 +202,7 @@ if ($this->is_admin()
 		// return to commented page
 		if ($comment_on_id)
 		{
-			echo '<br>' . $this->compose_link_to_page($this->get_page_tag($comment_on_id) . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'));
+			echo '<br>' . $this->compose_link_to_page($comment_on['tag'] . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'));
 		}
 	}
 	else
@@ -213,7 +214,7 @@ if ($this->is_admin()
 			echo '<div class="preview">';
 
 			$message = $this->_t('ThisIsCommentOn') . ' ' .
-				$this->compose_link_to_page($this->get_page_tag($this->page['comment_on_id']), '', $this->get_page_title('', $this->page['comment_on_id']), $this->get_page_tag($this->page['comment_on_id'])) . ', ' .
+				$this->compose_link_to_page($comment_on['tag'], '', $comment_on['title'], $comment_on['tag']) . ', ' .
 				$this->_t('PostedBy') . ' ' .
 				$this->user_link($this->page['user_name'], '', true, false) . ' ' .
 				$this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);

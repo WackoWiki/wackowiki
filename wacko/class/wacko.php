@@ -1100,7 +1100,7 @@ class Wacko
 	*
 	* @return array Loaded page
 	*/
-	function load_page($tag, $page_id = 0, $revision_id = '', $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
+	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
 		$page = [];
 
