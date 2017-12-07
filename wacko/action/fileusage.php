@@ -5,8 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($file_id))	$file_id = '';
-if (!isset($nomark))	$nomark = '';
+if (!isset($file_id))	$file_id = null;
+if (!isset($nomark))	$nomark = 0;
 if (!isset($title))		$title = '';
 
 if ($file_id)
@@ -15,6 +15,7 @@ if ($file_id)
 	{
 		foreach ($pages as $page)
 		{
+			$this->cache_page($page, true);
 			$page_ids[] = (int) $page['page_id'];
 			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];

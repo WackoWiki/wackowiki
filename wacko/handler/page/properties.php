@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page();
 
-$tpl->head = Ut::perc_replace($this->_t('PropertiesFor'), $this->compose_link_to_page($this->tag, '', '', 0));
+$tpl->head = Ut::perc_replace($this->_t('PropertiesFor'), $this->compose_link_to_page($this->tag, '', ''));
 
 // STS write? really?
 if (!($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id'])))

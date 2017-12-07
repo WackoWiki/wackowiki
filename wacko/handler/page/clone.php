@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$tpl->headLink = $this->compose_link_to_page($this->tag, '', '', 0);
+$tpl->headLink = $this->compose_link_to_page($this->tag, '', '');
 
 // ensure that's not forum or comment
 $this->ensure_page();
@@ -71,12 +71,12 @@ if (@$_POST['_action'] === 'clone_page')
 
 			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$log->err_a_error = Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($dst, '', '', 0));
+				$log->err_a_error = Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($dst, '', ''));
 			}
 			else if (!$this->has_access('read', $page['page_id']))
 			{
 				$this->set_message(
-					Ut::perc_replace($this->_t('CloneCannotRead'), $this->compose_link_to_page($src, '', '', 0)),
+					Ut::perc_replace($this->_t('CloneCannotRead'), $this->compose_link_to_page($src, '', '')),
 					'error');
 
 				if ($dst === $to)
@@ -88,7 +88,7 @@ if (@$_POST['_action'] === 'clone_page')
 			}
 			else if (!$this->has_access('create', '', '', 1, $dst))
 			{
-				$log->err_a_error = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', '', 0));
+				$log->err_a_error = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', ''));
 			}
 
 			$work[$src] = $dst;

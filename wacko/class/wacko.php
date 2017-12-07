@@ -3076,7 +3076,7 @@ class Wacko
 		else
 		{
 			$this->set_message(Ut::perc_replace($this->_t('EmailNotConfirmed'),
-				$this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), 0)), 'error');
+				$this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'))), 'error');
 		}
 	}
 
@@ -3380,7 +3380,7 @@ class Wacko
 	* @param string $params additional parameters. Optional, default is ''
 	* @return string
 	*/
-	function compose_link_to_page($tag, $method = '', $text = '', $track = 1, $title = '', $params = '')
+	function compose_link_to_page($tag, $method = '', $text = '', $title = '', $track = false, $params = '')
 	{
 		if (!$text)
 		{
@@ -4451,12 +4451,12 @@ class Wacko
 		{
 			if ($tag === $old_tag)
 			{
-				return Ut::perc_replace($this->_t('AlreadyNamed'), $this->compose_link_to_page($tag, '', '', 0));
+				return Ut::perc_replace($this->_t('AlreadyNamed'), $this->compose_link_to_page($tag, '', ''));
 			}
 
 			if ($this->supertag != $supertag && $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				return Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($tag, '', '', 0));
+				return Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($tag, '', ''));
 			}
 		}
 

@@ -138,7 +138,7 @@ if ($user_id = $this->get_user_id())
 					'<a href="' . $this->href('', '', $profile + $p + $tab_mode + ['mode' => 'mywatches', $action_mode => $page['page_id'], '#' => 'list']) . '" class="' . $icon_class . '">' .
 						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $icon_text . '" alt="' . $icon_text . '">' .
 					'</a> ' .
-					$this->compose_link_to_page($page['tag'], '', '', 0) . "<br>\n";
+					$this->compose_link_to_page($page['tag'], '', '') . "<br>\n";
 			}
 		}
 

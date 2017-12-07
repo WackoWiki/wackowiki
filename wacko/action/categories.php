@@ -16,7 +16,7 @@ if (!isset($list))		$list		= 0;
 if (!isset($type_id))	$type_id	= OBJECT_PAGE;
 if (!isset($label))		$label		= true;
 if (empty($page))		$page		= $this->db->category_page;
-if (!isset($nomark))	$nomark		= '';
+if (!isset($nomark))	$nomark		= 0;
 
 $output		= '';
 $i			= '';

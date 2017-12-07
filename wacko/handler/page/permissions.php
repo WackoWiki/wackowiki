@@ -192,7 +192,7 @@ if ($upload_allowed)
 
 // show form
 ?>
-<h3><?php echo Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', '', 0)); ?></h3>
+<h3><?php echo Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', '')); ?></h3>
 <?php
 echo $this->form_open('set_permissions', ['page_method' => 'permissions']);
 

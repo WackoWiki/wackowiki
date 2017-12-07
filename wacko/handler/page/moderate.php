@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 echo '<h3>';
-echo $this->_t('Moderation') . ' ' . ($this->forum === true ? $this->_t('Topics') : $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title'], 0);
-echo ($this->forum === true ? '<br>[' . $this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->_t('ModerateSection2'), 0) . ']' : '');
+echo $this->_t('Moderation') . ' ' . ($this->forum === true ? $this->_t('Topics') : $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
+echo ($this->forum === true ? '<br>[' . $this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->_t('ModerateSection2')) . ']' : '');
 echo "</h3>\n";
 
 // local functions
@@ -771,7 +771,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							($this->has_access('comment', $topic['page_id'], GUEST) === false
 								? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
 								: '' ) .
-								$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;', 0) . '</strong>' .
+								$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;') . '</strong>' .
 						'</td>' .
 						'<td class="t_center" ' . ($this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>' .
 						'<td class="t_center"><small>' . $topic['comments'] . '</small></td>' .
@@ -1401,7 +1401,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							<input type="checkbox" name="' . $comment['page_id'] . '" value="id"' . ( in_array($comment['page_id'], $set) ? ' checked' : '' ) . '>
 						</td>' .
 						'<td>
-							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;', 0).( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, ['profile' => $comment['owner_name']]) . '">' . $this->_t('ModerateUserProfile') . '</a>' : '' ) . '</small></strong>' .
+							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;').( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, ['profile' => $comment['owner_name']]) . '">' . $this->_t('ModerateUserProfile') . '</a>' : '' ) . '</small></strong>' .
 							'<br>' . $desc .
 						'</td>' .
 					'</tr>' . "\n";

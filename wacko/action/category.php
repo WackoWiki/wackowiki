@@ -46,7 +46,7 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 {
 	$sort = 'abc';
 }
-if (!isset($nomark))		$nomark = '';
+if (!isset($nomark))		$nomark = 0;
 $type_id	= (int) ($_GET['type_id'] ?? OBJECT_PAGE);
 $filter		= [];
 

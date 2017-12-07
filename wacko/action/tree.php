@@ -36,7 +36,7 @@ else
 	$depth	= (int) $depth;
 }
 
-if (!isset($nomark)) $nomark = '';
+if (!isset($nomark)) $nomark = 0;
 if (!isset($legend)) $legend = '';
 
 // collect pages

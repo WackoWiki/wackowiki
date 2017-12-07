@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // action/mygroups.php
 
-if (!isset($nomark)) $nomark = '';
+if (!isset($nomark)) $nomark = 0;
 
 if (!function_exists('MyGroups'))
 {

@@ -47,7 +47,7 @@
 					<li>[ ' link ' ]</li>
 				=]
 				[''// Show Help link
-					//  echo "<li>" . $this->compose_link_to_page($this->_t('HelpPage'), "", $this->_t('Help'), 0) . "</li>\n"; '']
+					//  echo "<li>" . $this->compose_link_to_page($this->_t('HelpPage'), '', $this->_t('Help')) . "</li>\n"; '']
 				</ul>
 			=]
 	</div>
