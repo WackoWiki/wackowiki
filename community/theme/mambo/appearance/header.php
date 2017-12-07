@@ -204,7 +204,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 			<small>
 				(
 				<span class="nobr Tune">
-					<?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?> |
+					<?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText')); ?> |
 					<a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>">
 						<?php echo $this->_t('LogoutLink'); ?>
 					</a>
