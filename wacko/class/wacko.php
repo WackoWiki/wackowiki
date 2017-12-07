@@ -1699,7 +1699,7 @@ class Wacko
 	function load_pages_linking_to($to_tag, $tag = '')
 	{
 		return $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
 			"FROM " . $this->db->table_prefix . "page_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) " .
 			"WHERE " . ($tag
@@ -1712,7 +1712,7 @@ class Wacko
 	function load_file_usage($file_id, $tag = '')
 	{
 		return $this->db->load_all(
-			"SELECT p.page_id, p.tag AS tag, p.title " .
+			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
 			"FROM " . $this->db->table_prefix . "file_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.page_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "file u ON (u.file_id = l.file_id) " .
