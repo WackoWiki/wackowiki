@@ -306,10 +306,10 @@ $ap_translation = [
 	'AllowedLanguages'			=> 'Allowed languages',
 	'AllowedLanguagesInfo'		=> 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 
-	'CommentSection'			=> 'Comments',
-	'AllowComments'				=> 'Allow comments',
+	'CommentSection'			=> 'Комментарии',
+	'AllowComments'				=> 'Разрешить комментарии',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
-	'SortingComments'			=> 'Sorting comments',
+	'SortingComments'			=> 'Сортировка комментариев',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
 
 	'ToolbarSection'			=> 'Панели',
@@ -338,7 +338,7 @@ $ap_translation = [
 	'XmlSitemap'				=> 'XML Sitemap',
 	'XmlSitemapInfo'			=> 'Create an XML file called "sitemap-wackowiki.xml" inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
-	'XmlSitemapTimeInfo'		=> 'Generate a Sitemaps only once in this number of days, zero means on every page change.',
+	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
 
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode',
@@ -355,8 +355,8 @@ $ap_translation = [
 
 	'PublishAnonymously'		=> 'Allow anonymous publishing',
 	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
-	'DefaultRenameRedirect'		=> 'When renaming put redirection',
-	'DefaultRenameRedirectInfo'	=> 'By default, propose to redirect the old address pereimenuemoy page.',
+	'DefaultRenameRedirect'		=> 'При переименовании ставить редирект',
+	'DefaultRenameRedirectInfo'	=> 'По умолчанию предлагать поставить редирект по старому адресу переименуемой страницы.',
 	'StoreDeletedPages'			=> 'Хранить удаленные страницы',
 	'StoreDeletedPagesInfo'		=> 'При удалении страницы (комментария) помещать ее в специальный раздел, где она еще некоторое время (указанное ниже) будет доступна для просмотра и восстановления.',
 	'KeepDeletedTime'			=> 'Срок хранения удаленных страниц',
@@ -458,7 +458,7 @@ $ap_translation = [
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
-	'PermissionsSettingsUpdated'	=> 'Updated security settings',
+	'PermissionsSettingsUpdated'	=> 'Updated permissions settings',
 
 	'PermissionsSection'		=> 'Допуски и привилегии',
 	'ReadRights'				=> 'Права чтения по умолчанию',
@@ -614,7 +614,7 @@ $ap_translation = [
 
 	'WackoFormatterSection'		=> 'Wiki Text Formatter (Wacko Formatter)',
 	'X11colors'					=> 'X11 Colors Usage',
-	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code> Unsetting slightly speed up the process of adding comments and save the page.',
+	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
 	'TikiLinks'					=> 'Disable Tikilinks',
 	'TikiLinksInfo'				=> 'Disables linking for <code>Double.CamelCaseWords</code>.',
 	'WikiLinks'					=> 'Disable Wikilinks',
@@ -633,7 +633,7 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(часы, минуты, секунды)',
 	'NameDateMacro'				=> 'Формат макроса <code>::@::</code>',
 	'NameDateMacroInfo'			=> '(имя, время), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Timezone',
+	'Timezone'					=> 'Часовой пояс',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
@@ -845,11 +845,11 @@ $ap_translation = [
 	'NoColumnsToConvert'		=> 'No columns to convert.',
 	'NoTablesToConvert'			=> 'No tables to convert.',
 
-	'LogConvertionDatabase'		=> 'Convertion database',
-	'ConvertionTablesOk'		=> 'Convertion of the selected tables successfully.',
+	'LogDatabaseConverted'		=> 'Database converted',
+	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
 
 	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
-	'ConvertionColumnsOk'		=> 'Convertion of the selected columns successfully.',
+	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB/XtraDB',
 	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
