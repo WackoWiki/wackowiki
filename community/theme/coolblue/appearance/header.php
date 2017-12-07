@@ -74,7 +74,7 @@ if ($this->get_user()) { ?>
   <?php echo $this->_t('YouAre') . " " . $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?><br>
   <small>
   <?php
-      echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
+      echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText')); ?>
   <br>
   <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></small>
   <?php

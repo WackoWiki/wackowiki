@@ -29,7 +29,7 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 	<?php } ?>
 	<link media="print" rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css">
 	<link rel="icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
-	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>"/>
+	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>">
 	<?php if ($this->db->policy_page) {?>
 	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" title="Copyright">
 	<?php } ?>
@@ -167,7 +167,7 @@ if ($doubleclick == true)
 						<span class="nobr">
 						<?php
 						// display link to user space at UserList cluster (distinct namespace later on)
-						echo $this->compose_link_to_page($this->db->users_page . '/' . $this->get_user_name(), "", $this->get_user_name(), 0);
+						echo $this->compose_link_to_page($this->db->users_page . '/' . $this->get_user_name(), "", $this->get_user_name());
 
 						// TODO: tag ( | ) properly so we can apply css rules
 						?>
@@ -177,7 +177,7 @@ if ($doubleclick == true)
 						// compose user account settings icon with link to account settings page
 						echo "<a href=\"" . $this->db->base_url.$this->_t('AccountLink') . "\"><img src=\"" . $this->db->theme_url."icon/account_settings_white.png\" title=\"" . $this->_t('AccountTip') . "\" alt=\"" . $this->_t('AccountTip') . "\"></a>\n";
 						// display link to user settings page
-						echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0);
+						echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'));
 						// display logout icon and link
 						?>
 						 |
@@ -194,9 +194,9 @@ if ($doubleclick == true)
 					else
 					{
 						// show register / login link
-						echo "<ul>\n<li>" . $this->compose_link_to_page($this->_t('LoginPage'), "", $this->_t('LoginPage'), 0, '', "goback=" . $this->slim_url($this->tag)) . "</li>\n";
-						echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('RegistrationPage'), 0) . "</li>\n";
-						// echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('Help'), 0) . "</li>\n";
+						echo "<ul>\n<li>" . $this->compose_link_to_page($this->_t('LoginPage'), "", $this->_t('LoginPage'), '', null, "goback=" . $this->slim_url($this->tag)) . "</li>\n";
+						echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('RegistrationPage')) . "</li>\n";
+						// echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), "", $this->_t('Help')) . "</li>\n";
 						echo "</ul>\n";
 					}
 					// End if

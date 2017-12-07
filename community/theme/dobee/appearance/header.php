@@ -192,7 +192,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 			src="<?php echo $this->db->theme_url ?>icon/user.png"
 			alt="" width="16" height="16"
 			style="text-align:middle; vertical-align: baseline;"> <?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?>
-		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
+		</span> <small> ( <span class="nobr Tune"> <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText')); ?>
 		| <a
 			onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');"
 			href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>">

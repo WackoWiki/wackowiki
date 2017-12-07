@@ -251,7 +251,7 @@ if ($can_view)
 				$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 			}
 
-			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '/>';
+			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
 			$figcaption = '<br><figcaption>' .
 					'<span>' . $file_description . '</span> ' . '<br>' .

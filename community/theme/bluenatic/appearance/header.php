@@ -139,7 +139,7 @@ else if($this->has_access('write'))
 			<?php if($user = $this->get_user()) { ?>
 			<div class="user">
 				<?php echo $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()); ?>
-				<small>( <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?> |
+				<small>( <?php echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText')); ?> |
 				<a href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a> )</small>
 			</div>
 			<?php } ?>

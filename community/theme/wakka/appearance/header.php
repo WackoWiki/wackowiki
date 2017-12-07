@@ -19,7 +19,7 @@ require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 // If user are logged, Wacko shows "You are UserName"
 if ($this->get_user())
 { ?> <span class="nobr"><?php echo $this->_t('YouAre') . " " . $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name()) ?></span><small> ( <span class="nobr Tune"><?php
-echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText'), 0); ?>
+echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('AccountText')); ?>
  | <a onclick="return confirm('<?php echo $this->_t('LogoutAreYouSure');?>');" href="<?php echo $this->href('', $this->_t('LoginPage'), 'action=logout&amp;goback=' . $this->slim_url($this->tag));?>"><?php echo $this->_t('LogoutLink'); ?></a></span>
 )</small>
 <?php
@@ -28,8 +28,8 @@ echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('Accoun
 else
 {
 	// Show Register / Login link
-	echo "<ul>\n<li>" . $this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), 0, '', 'goback=' . $this->slim_url($this->tag)) . "</li>\n";
-	echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'), 0) . "</li>\n</ul>";
+	echo "<ul>\n<li>" . $this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), '', null, 'goback=' . $this->slim_url($this->tag)) . "</li>\n";
+	echo "<li>" . $this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage')) . "</li>\n</ul>";
 }
 
 // End if
