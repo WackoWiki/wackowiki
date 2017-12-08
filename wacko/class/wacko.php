@@ -960,6 +960,10 @@ class Wacko
 		{
 			return $this->do_unicode_entities($string, $lang);
 		}
+		else
+		{
+			return $string;
+		}
 	}
 
 	// PAGES
