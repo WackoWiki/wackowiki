@@ -363,18 +363,24 @@ class Feed
 
 				$days_since_last_changed = (time() - strtotime($page['modified'])) / DAYSECS;
 
-				if ($days_since_last_changed < 30)
+				if ($days_since_last_changed < 15)
 				{
-					$xml .= '<changefreq>daily</changefreq>' . "\n";
+					$freq = 'daily';
+				}
+				else if ($days_since_last_changed < 30)
+				{
+					$freq = 'weekly';
 				}
 				else if ($days_since_last_changed < 60)
 				{
-					$xml .= '<changefreq>monthly</changefreq>' . "\n";
+					$freq = 'monthly';
 				}
 				else
 				{
-					$xml .= '<changefreq>yearly</changefreq>' . "\n";
+					$freq = 'yearly';
 				}
+
+				$xml .= '<changefreq>' . $freq . '</changefreq>' . "\n";
 
 				// The only thing I'm not sure about how to handle dynamically...
 				$xml .= '<priority>0.8</priority>' . "\n";
