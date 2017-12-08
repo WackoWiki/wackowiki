@@ -6663,20 +6663,23 @@ class Wacko
 			$tag = str_replace("'", '_', str_replace('\\', '', str_replace('_', '', $tag)));
 			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/', '', $tag);
 
-			$this->tag		= $tag;
-			$this->supertag	= $this->translit($tag);
-
 			$revision_id	= (int) ($_GET['revision_id'] ?? '');
 
 			// show also $deleted = 1
 			if ($this->is_admin())
 			{
-				$page		= $this->load_page($this->tag, 0, $revision_id, '', '', true);
+				$page		= $this->load_page($tag, 0, $revision_id, '', '', true);
 			}
 			else
 			{
-				$page		= $this->load_page($this->tag, 0, $revision_id);
+				$page		= $this->load_page($tag, 0, $revision_id);
 			}
+
+			$this->tag		= $tag;
+			$this->supertag =
+				(!$page
+					? $this->translit($tag)
+					: $page['supertag']);
 
 			// TODO: obsolete? Add description what it does
 			// creates dummy array
