@@ -46,9 +46,6 @@ if ($this->has_access('read'))
 		$sort_comment	= $this->db->sorting_comments;
 	}
 
-	// load comments for this page
-	$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->db->comments_count, $sort_comment);
-
 	// store comments display in session
 	if (!isset($this->sess->show_comments[$this->page['page_id']]))
 	{
@@ -75,6 +72,9 @@ if ($this->has_access('read'))
 		$admin			= $this->is_admin();
 		$moder			= $this->is_moderator();
 		$noid_protect	= $this->get_user_setting('noid_protect');
+
+		// load comments for this page
+		$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->db->comments_count, $sort_comment);
 
 		// clear new comments for watched page
 		if ($user && $comments && $this->watch['comment_id'] && !$noid_protect)
