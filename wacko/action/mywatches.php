@@ -63,7 +63,7 @@ if ($user_id = $this->get_user_id())
 			$selector;
 
 		$sql =
-			"SELECT p.tag, p.page_id " .
+			"SELECT p.page_id, p.tag, p.supertag, p.page_lang " .
 			$selector .
 			"ORDER BY p.tag ASC ";
 	}
@@ -81,10 +81,10 @@ if ($user_id = $this->get_user_id())
 		$sql_count	=
 			"SELECT COUNT( DISTINCT page_id ) as n " .
 			"FROM {$prefix}watch " .
-			"WHERE user_id = " . (int) $user_id . "";
+			"WHERE user_id = " . (int) $user_id . " ";
 
 		$sql =
-			"SELECT w.page_id, p.tag " .
+			"SELECT w.page_id, p.tag, p.supertag, p.page_lang " .
 			"FROM {$prefix}watch AS w " .
 			"LEFT JOIN {$prefix}page AS p " .
 				"ON (p.page_id = w.page_id) " .
@@ -104,6 +104,7 @@ if ($user_id = $this->get_user_id())
 	{
 		foreach ($pages as $page)
 		{
+			$this->cache_page($page, true);
 			$page_ids[] = (int) $page['page_id'];
 			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
@@ -134,11 +135,13 @@ if ($user_id = $this->get_user_id())
 					$current_char = $first_char;
 				}
 
+				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
+
 				echo
 					'<a href="' . $this->href('', '', $profile + $p + $tab_mode + ['mode' => 'mywatches', $action_mode => $page['page_id'], '#' => 'list']) . '" class="' . $icon_class . '">' .
 						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $icon_text . '" alt="' . $icon_text . '">' .
 					'</a> ' .
-					$this->compose_link_to_page($page['tag'], '', '') . "<br>\n";
+					$this->compose_link_to_page($page['supertag'], '', $text) . "<br>\n";
 			}
 		}
 

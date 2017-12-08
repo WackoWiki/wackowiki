@@ -168,10 +168,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				if ($comment['comment_on_id'] == true)
 				{
-					if ($this->page['page_lang'] != $comment['topic_lang'])
-					{
-						$comment['topic_title'] = $this->do_unicode_entities($comment['topic_title'], $comment['topic_lang']);
-					}
+					$comment['topic_title'] = $this->get_unicode_entities($comment['topic_title'], $comment['topic_lang']);
 
 					echo '<small><a href="' . $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'] . '">' . $comment['topic_title'] . '</a><br>' .
 						$this->user_link($comment['user_name']) .
@@ -179,10 +176,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				}
 				else
 				{
-					if ($this->page['page_lang'] != $comment['page_lang'])
-					{
-						$comment['title']= $this->do_unicode_entities($comment['title'], $comment['page_lang']);
-					}
+					$comment['title'] = $this->get_unicode_entities($comment['title'], $comment['page_lang']);
 
 					echo '<small>
 							<a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . '</a><br>' .

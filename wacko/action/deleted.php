@@ -42,11 +42,7 @@ if ($this->is_admin())
 				// do unicode entities
 				if (($edit_note = $page['edit_note']) !== '')
 				{
-					if ($this->page['page_lang'] != $page['page_lang'])
-					{
-						$edit_note = $this->do_unicode_entities($edit_note, $page['page_lang']);
-					}
-
+					$edit_note = $this->get_unicode_entities($edit_note, $page['page_lang']);
 					$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
 				}
 

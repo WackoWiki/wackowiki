@@ -24,14 +24,6 @@ $by = function ($by) use ($profile, $mod_selector)
 	return $profile + ['mode' => 'mychanges', $mod_selector => $by, '#' => 'list'];
 };
 
-$do_unicode_entities = function ($string, $lang)
-{
-	if ($this->page['page_lang'] != $lang)
-	{
-		return $this->do_unicode_entities($string, $lang);
-	}
-};
-
 if (($user_id = $this->get_user_id()))
 {
 	$tabs	= [
@@ -65,7 +57,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('byname'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT tag, title, modified, page_lang " .
+			"SELECT page_id, tag, supertag, title, modified, page_lang " .
 			$selector .
 			"ORDER BY tag ASC, modified DESC " .
 			$pagination['limit'], true))
@@ -75,6 +67,8 @@ if (($user_id = $this->get_user_id()))
 			$cur_char = '';
 			foreach ($pages as $page)
 			{
+				$this->cache_page($page, true);
+
 				$first_char = strtoupper($page['tag'][0]);
 
 				if (!preg_match('/' . $this->language['ALPHA'] . '/', $first_char))
@@ -93,11 +87,11 @@ if (($user_id = $this->get_user_id()))
 					$cur_char = $first_char;
 				}
 
-				$text = $do_unicode_entities($page['tag'], $page['page_lang']);
+				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
 
 				// print entry
 				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('RevisionTip')) .
-					' &mdash; ' . $this->compose_link_to_page($page['tag'], '', $text) . "</li>\n";
+					' &mdash; ' . $this->compose_link_to_page($page['supertag'], '', $text) . "</li>\n";
 			}
 
 			echo "</ul>\n</li>\n</ul>\n";
@@ -124,7 +118,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if (($pages = $this->db->load_all(
-			"SELECT tag, title, modified, edit_note, page_lang " .
+			"SELECT page_id, tag, supertag, title, modified, edit_note, page_lang " .
 			$selector .
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true)))
@@ -134,6 +128,8 @@ if (($user_id = $this->get_user_id()))
 			$cur_day = '';
 			foreach ($pages as $page)
 			{
+				$this->cache_page($page, true);
+
 				$this->sql2datetime($page['modified'], $day, $time);
 
 				if ($day != $cur_day)
@@ -152,11 +148,11 @@ if (($user_id = $this->get_user_id()))
 					$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
 				}
 
-				$text = $do_unicode_entities($page['tag'], $page['page_lang']);
+				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
 
 				// print entry
 				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')) .
-					" &mdash; " . $this->compose_link_to_page($page['tag'], '', $text) . $edit_note . "</li>\n";
+					" &mdash; " . $this->compose_link_to_page($page['supertag'], '', $text) . $edit_note . "</li>\n";
 			}
 
 			echo "</ul>\n</li>\n</ul>\n";

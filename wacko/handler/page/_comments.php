@@ -116,6 +116,8 @@ if ($this->has_access('read'))
 				#$i ++;
 				$handler_button = '';
 
+				$this->cache_page($comment, true);
+
 				echo '<li id="' . $comment['tag'] . '" class="comment">' . "\n";
 
 				// print comment
