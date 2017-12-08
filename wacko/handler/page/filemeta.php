@@ -39,12 +39,8 @@ $meta_navigation = function ($can_upload)
 
 $format_desc = function($text, $file_lang)
 {
-	$desc		= $this->format($text, 'typografica' );
-
-	if ($this->page['page_lang'] != $file_lang)
-	{
-		$desc	= $this->do_unicode_entities($text, $file_lang);
-	}
+	$desc	= $this->format($text, 'typografica' );
+	$desc	= $this->get_unicode_entities($text, $file_lang);
 
 	return $desc;
 };

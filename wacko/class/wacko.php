@@ -952,6 +952,16 @@ class Wacko
 		return $encoded_string;
 	}
 
+	// wrapper for do_unicode_entities()
+	// checks string language against page language
+	function get_unicode_entities($string, $lang)
+	{
+		if ($this->page['page_lang'] != $lang)
+		{
+			return $this->do_unicode_entities($string, $lang);
+		}
+	}
+
 	// PAGES
 
 	/**
@@ -1336,11 +1346,16 @@ class Wacko
 	* Put page in page cache.
 	*
 	* @param array $page Page data
-	* @param int $page_id
 	* @param boolean $metadata_only Marks that page contains metadata only (all atributes, excepts page body)
 	*/
 	function cache_page($page, $metadata_only = false)
 	{
+		// do not override the current page
+		if ($this->page['page_id'] == $page['page_id'] && $metadata_only)
+		{
+			return;
+		}
+
 		// cache for both cases (page_id + tag) to avoid roundtrips
 		$this->page_cache['page_id'][$page['page_id']]				= $page;
 		$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
@@ -1428,7 +1443,8 @@ class Wacko
 			return;
 		}
 
-		$file_ids	=  [];
+		$file_ids		=  [];
+		$file_page_ids	=  [];
 
 		// get file links
 		if ($links = $this->db->load_all(
@@ -1455,7 +1471,14 @@ class Wacko
 				foreach ($files as $file)
 				{
 					$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+
+					if ($file['page_id'])
+					{
+						$file_page_ids[] = $file['page_id'];
+					}
 				}
+
+				return $file_page_ids;
 			}
 		}
 	}
@@ -1470,13 +1493,20 @@ class Wacko
 		$exists		= [];
 		$pages		= [];
 		$p_ids		= [];
-		$p_ids		= $page_ids;
 		$spages_str	= [];
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
 
 		// cache file links
-		$this->preload_file_links($page_ids);
+		if ($file_page_ids = $this->preload_file_links($page_ids))
+		{
+			#$page_ids + $file_page_ids;
+			$p_ids	= array_merge($page_ids, $file_page_ids);
+		}
+		else
+		{
+			$p_ids	= $page_ids;
+		}
 
 		// get page links
 		if ($links = $this->db->load_all(
@@ -5450,7 +5480,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->db->load_all(
-				"SELECT p.page_id, parent_id, p.user_id, p.title, p.tag, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name " .
+				"SELECT p.page_id, parent_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name " .
 				"FROM " . $this->db->table_prefix . "page p " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
@@ -5521,7 +5551,13 @@ class Wacko
 		return false;
 	}
 
-	// returns true if logged in user is owner of current page, or page specified in $tag
+	/**
+	 * checks if user is owner of the current page, or a page specified via $page_id
+	 *
+	 * @param int $page_id
+	 *
+	 * @return boolean	returns true
+	 */
 	function is_owner($page_id = null)
 	{
 		// check if user is logged in
@@ -6664,16 +6700,10 @@ class Wacko
 			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/', '', $tag);
 
 			$revision_id	= (int) ($_GET['revision_id'] ?? '');
+			$deleted		= $this->is_admin();
 
-			// show also $deleted = 1
-			if ($this->is_admin())
-			{
-				$page		= $this->load_page($tag, 0, $revision_id, '', '', true);
-			}
-			else
-			{
-				$page		= $this->load_page($tag, 0, $revision_id);
-			}
+			// load page
+			$page			= $this->load_page($tag, 0, $revision_id, '', '', $deleted);
 
 			$this->tag		= $tag;
 			$this->supertag =
@@ -6759,7 +6789,7 @@ class Wacko
 		$this->hide_revisions =
 			($this->page
 			&& !$this->is_admin()
-			&& (($this->db->hide_revisions == 1 && !$this->get_user())
+			&& ((   $this->db->hide_revisions == 1 && !$this->get_user())
 				|| ($this->db->hide_revisions == 2 && !$this->is_owner())));
 
 		// forum page
@@ -8048,10 +8078,7 @@ class Wacko
 		{
 			foreach ($categories as $n => $category)
 			{
-				if ($this->page['page_lang'] != $category['category_lang'])
-				{
-					$category['category']	= $this->do_unicode_entities($category['category'], $category['category_lang']);
-				}
+				$category['category']	= $this->get_unicode_entities($category['category'], $category['category_lang']);
 
 				if ($n > 0)
 				{
@@ -8189,10 +8216,7 @@ class Wacko
 			foreach ($categories as $category_id => $word)
 			{
 				// do unicode entities
-				if ($this->page['page_lang'] != $word['lang'])
-				{
-					$word['category'] = $this->do_unicode_entities($word['category'], $word['lang']);
-				}
+				$word['category'] = $this->get_unicode_entities($word['category'], $word['lang']);
 
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
@@ -8205,10 +8229,7 @@ class Wacko
 					foreach ($word['child'] as $category_id => $word)
 					{
 						// do unicode entities
-						if ($this->page['page_lang'] != $word['lang'])
-						{
-							$word['category'] = $this->do_unicode_entities($word['category'], $word['lang']);
-						}
+						$word['category'] = $this->get_unicode_entities($word['category'], $word['lang']);
 
 						if ($i++ < 1)
 						{
