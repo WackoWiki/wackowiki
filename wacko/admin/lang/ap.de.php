@@ -412,7 +412,7 @@ $ap_translation = [
 		'3'		=> 'alle Details (DBMS, Cache, usw.)',
 	],
 	'DebugSqlThreshold'			=> 'Threshold performance RDBMS',
-	'DebugSqlThresholdInfo'		=> 'Im ausführlichen Debug-Modus werden nur die Abfragen aufgezeichnet, welche länger als die Anzahl der hier ausgewiesen Sekunden benötigen.',
+	'DebugSqlThresholdInfo'		=> 'Im ausführlichen Debug-Modus werden nur die Abfragen aufgezeichnet, welche länger benötigen als die Anzahl der hier ausgewiesen Sekunden.',
 	'DebugAdminOnly'			=> 'Geschlossene Diagnose',
 	'DebugAdminOnlyInfo'		=> 'Zeigt die Debug-Daten des Programms (und des DBMS) nur dem Administrator.',
 
@@ -851,7 +851,7 @@ $ap_translation = [
 	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
 
-	'ConvertTablesEngine'		=> 'Konvertieren von Tabellen von MyISAM zu InnoDB/XtraDB',
+	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB/XtraDB',
 	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
 	'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
 

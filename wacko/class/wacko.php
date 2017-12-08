@@ -6570,7 +6570,7 @@ class Wacko
 		$url	= explode('@@', $tag);
 		$tag	= trim($url[0]);
 		$lang	= trim(@$url[1]); // STS: unused! remove?
-		$user	= '';
+		$user	= [];
 
 		if (!$tag)
 		{
@@ -6741,7 +6741,10 @@ class Wacko
 			header('Last-Modified: ' . Ut::http_date(strtotime($this->page['modified']) + 120));
 		}
 
-		$this->watch = $this->is_watched($user['user_id'], $this->page['page_id']);
+		if ($user)
+		{
+			$this->watch = $this->is_watched($user['user_id'], $this->page['page_id']);
+		}
 
 		// check page watching
 		$this->is_watched =

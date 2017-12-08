@@ -32,12 +32,10 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 	if ($ids)
 	{
 		$pagination = $this->pagination(count($ids), $limit);
-		$page_ids	= [];
 
 		foreach ($ids as &$id)
 		{
-			$page_ids[]	= $id['page_id'];
-			$id = "'" . (int) $id['page_id'] . "'";
+			$id			= (int) $id['page_id'];
 		}
 
 		// load complete comments
@@ -52,9 +50,6 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 			"WHERE a.page_id IN ( " . implode(', ', $ids) . " ) " .
 			"ORDER BY comment_time DESC " .
 			$pagination['limit']);
-
-		// cache acls
-		$this->preload_acl($page_ids);
 	}
 
 	return [$comments, $pagination];
@@ -85,6 +80,16 @@ if ($this->user_allowed_comments())
 	{
 		if ($pages)
 		{
+			$page_ids	= [];
+
+			foreach ($pages as $page)
+			{
+				$page_ids[]	= $page['page_id'];
+				$page_ids[]	= $page['comment_on_id'];
+			}
+
+			$this->preload_acl($page_ids);
+
 			if ($user)
 			{
 				echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';

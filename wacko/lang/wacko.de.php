@@ -1202,7 +1202,7 @@ $wacko_translation = [
 	'FormatterNotFound'			=> 'Formatierer %1 nicht gefunden',
 
 	// log
-	'LogAdminLoginSuccess'		=> 'Erfolgreichen Anmeldung im Verwaltungs-Panel',
+	'LogAdminLoginSuccess'		=> 'Erfolgreiche Anmeldung im Verwaltungs-Panel',
 	'LogAdminLogout'			=> 'Abmeldung aus dem Verwaltungs-Panel',
 	'LogAdminLoginFailed'		=> '!!Gescheiterter Anmeldeversuch ins Verwaltungs-Panel!!',
 	'LogAdminLoginLocked'		=> 'Anmeldung ins Verwaltungs-Panel gesperrt',
@@ -1254,7 +1254,7 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Seite bearbeitet [[/%1]]',
 	'LogCommentEdited'			=> 'Kommentar bearbeitet [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Datei Metadaten für ##%2## von Seite [[/%1]] aktualisiert',
-	'ErrorMinPHPVersion'		=> 'Die PHP Version muss größer sein als <strong>' . PHP_MIN_VERSION.
+	'ErrorMinPHPVersion'		=> 'Die PHP Version muss größer sein als <strong>' . PHP_MIN_VERSION .
 									'</strong>, der Server scheint die Version <strong>' . PHP_VERSION . '</strong> zu nutzen.'.
 									'  Aktualisiere bitte PHP auf eine neuere Version, damit  WackoWiki ordnungsgemäß funtioniert.',
 
