@@ -174,8 +174,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					}
 
 					// compose headers
-					$headers = [];
-					$headers['Message-ID'] = "<$msg_id>";
+					$headers				= [];
+					$headers['Message-ID']	= "<$msg_id>";
 
 					if (($ref = @$_POST['ref']))
 					{
@@ -285,7 +285,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					"WHERE owner_id = " . (int) $user['user_id'] . " " .
 						"AND comment_on_id = 0 " .
 						"AND deleted <> 1 " .
-					"ORDER BY " . ($sort_name? 'tag ASC' : 'created DESC') . " " .
+					"ORDER BY " .
+						($sort_name
+							? 'tag ASC'
+							: 'created DESC') . " " .
 					$pagination['limit']);
 
 				$page_ids = [];
@@ -469,7 +472,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 								$tpl->u_prof_up_u_u2_li_t		= $upload['uploaded_dt'];
 								# $tpl->u_prof_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
-								$tpl->u_prof_up_u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+								$tpl->u_prof_up_u_u2_li_link	= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
 								$tpl->u_prof_up_u_u2_li_onpage	= $on_page;
 								$tpl->u_prof_up_u_u2_li_descr	= $file_description;
 							}
@@ -509,8 +512,8 @@ else
 			// NEVER BEEN HERE
 		}
 
-		$params['user'] = $_user;
-		$sql_where = "AND u.user_name LIKE " . $this->db->q('%' . $_user . '%') . " ";
+		$params['user']	= $_user;
+		$sql_where		= "AND u.user_name LIKE " . $this->db->q('%' . $_user . '%') . " ";
 	}
 
 	if (isset($_GET['profile']))
@@ -556,10 +559,14 @@ else
 	}
 
 	$sql_where =
-			($group_id? "LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (u.user_id = m.user_id) " : "") .
+			($group_id
+				? "LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (u.user_id = m.user_id) "
+				: "") .
 		"WHERE u.account_type = 0 " .
 			"AND u.enabled = 1 " .
-			($group_id? "AND m.group_id = '$group_id' " : "") .
+			($group_id
+				? "AND m.group_id = " . (int) $group_id . " "
+				: "") .
 			$sql_where;
 
 	$count = $this->db->load_single(
@@ -601,8 +608,8 @@ else
 	// change sorting order navigation bar
 	$sort_link = function ($sort, $text) use ($params, &$tpl)
 	{
-		$tpl->l_s_what = $this->_t($text);
-		$order = 'asc';
+		$tpl->l_s_what	= $this->_t($text);
+		$order			= 'asc';
 
 		if (@$params['sort'] == $sort)
 		{
@@ -623,16 +630,16 @@ else
 		$tpl->l_s_link = $this->href('', '', $params);
 	};
 
-	$sort_link('name', 'UsersName');
-	$sort_link('pages', 'UsersPages');
-	$sort_link('comments', 'UsersComments');
-	$sort_link('revisions', 'UsersRevisions');
+	$sort_link('name',		'UsersName');
+	$sort_link('pages',		'UsersPages');
+	$sort_link('comments',	'UsersComments');
+	$sort_link('revisions',	'UsersRevisions');
 
 	if ($logged_in)
 	{
-		$sort_link('uploads', 'UsersUploads');
-		$sort_link('signup', 'UsersSignup');
-		$sort_link('last_visit', 'UsersLastSession');
+		$sort_link('uploads',		'UsersUploads');
+		$sort_link('signup',		'UsersSignup');
+		$sort_link('last_visit',	'UsersLastSession');
 	}
 
 	// list entries

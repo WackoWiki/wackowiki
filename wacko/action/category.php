@@ -40,7 +40,11 @@ if (!isset($ids))			$ids		= '';
 if (!isset($lang))			$lang		= $this->page['page_lang'];
 if (isset($_REQUEST['category_lang']))
 {
-	$lang = ($this->db->multilanguage? @$_REQUEST['category_lang'] : $lang);
+	$lang = ($this->db->multilanguage
+			? ($this->known_language($_REQUEST['category_lang'])
+					? $_REQUEST['category_lang']
+					: '')
+			: $lang);
 }
 if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 {
@@ -140,7 +144,12 @@ if ($list && ($ids || isset($_GET['category_id'])))
 					// do unicode entities
 					$page['title'] = $this->get_unicode_entities($page['title'], $page['page_lang']);
 
-					echo '<li>' . ($sort == 'date' ? '<small>(' . date('d/m/Y', strtotime($page['created'])) . ')</small> ' : '') . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1) . "</li>\n";
+					echo '<li>' .
+							($sort == 'date'
+								? '<small>(' . date('d/m/Y', strtotime($page['created'])) . ')</small> '
+								: '') .
+							$this->link('/' . $page['tag'], '', $page['title'], '', 0, 1) .
+						"</li>\n";
 				}
 
 				// take recent lang

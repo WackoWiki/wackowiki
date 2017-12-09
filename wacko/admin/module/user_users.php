@@ -23,9 +23,10 @@ $module[$_mode] = [
 
 function admin_user_users(&$engine, &$module)
 {
-	$where = '';
-	$order = '';
-	$error = '';
+	$where		= '';
+	$order		= '';
+	$error		= '';
+	$prefix		= $engine->db->table_prefix;
 
 	#Ut::debug_print_r($_POST);
 	#Ut::debug_print_r($_REQUEST);
@@ -110,8 +111,8 @@ function admin_user_users(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = " . (int) $user_id . " " .
 				"AND u.account_type = 0 " .
 			"LIMIT 1");
@@ -122,10 +123,10 @@ function admin_user_users(&$engine, &$module)
 	{
 		// do we have identical names?
 		if ($engine->db->load_single(
-		"SELECT user_id " .
-		"FROM " . $engine->db->table_prefix . "user " .
-		"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
-		"LIMIT 1"))
+			"SELECT user_id " .
+			"FROM " . $prefix . "user " .
+			"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
+			"LIMIT 1"))
 		{
 			$engine->show_message($engine->_t('UsersAlreadyExists'));
 			#$_POST['change']	= $_POST['user_id'];
@@ -140,7 +141,7 @@ function admin_user_users(&$engine, &$module)
 		else
 		{
 			$engine->db->sql_query(
-				"INSERT INTO " . $engine->db->table_prefix . "user SET " .
+				"INSERT INTO " . $prefix . "user SET " .
 					"signup_time		= UTC_TIMESTAMP(), " .
 					"email				= " . $engine->db->q($_POST['email']) . ", " .
 					"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
@@ -150,13 +151,13 @@ function admin_user_users(&$engine, &$module)
 			// get new user_id
 			$_user_id = $engine->db->load_single(
 				"SELECT user_id " .
-				"FROM " . $engine->db->table_prefix . "user " .
+				"FROM " . $prefix . "user " .
 				"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
 				"LIMIT 1");
 
 			// INSERT user settings
 			$engine->db->sql_query(
-				"INSERT INTO " . $engine->db->table_prefix . "user_setting SET " .
+				"INSERT INTO " . $prefix . "user_setting SET " .
 					"user_id			= " . (int) $_user_id['user_id'] . ", " .
 					"typografica		= " . (($engine->db->default_typografica == 1) ? 1 : 0) . ", " .
 					"user_lang			= " . $engine->db->q(($_POST['user_lang'] ?: $engine->db->language)) . ", " .
@@ -195,8 +196,8 @@ function admin_user_users(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = " . (int) $user_id . " " .
 			"AND u.account_type = 0 " .
 			"LIMIT 1");
@@ -210,7 +211,7 @@ function admin_user_users(&$engine, &$module)
 		// do we have identical names?
 		if ($engine->db->load_single(
 		"SELECT user_id " .
-		"FROM " . $engine->db->table_prefix . "user " .
+		"FROM " . $prefix . "user " .
 		"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
 			"AND user_id <> " . (int) $engine->db->q($_POST['user_id']) . " " .
 		"LIMIT 1"))
@@ -228,7 +229,7 @@ function admin_user_users(&$engine, &$module)
 		else
 		{
 			$engine->db->sql_query(
-				"UPDATE " . $engine->db->table_prefix . "user SET " .
+				"UPDATE " . $prefix . "user SET " .
 					"user_name		= " . $engine->db->q($_POST['newname']) . ", " .
 					"email			= " . $engine->db->q($_POST['newemail']) . ", " .
 					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .
@@ -238,7 +239,7 @@ function admin_user_users(&$engine, &$module)
 				"LIMIT 1");
 
 			$engine->db->sql_query(
-				"UPDATE " . $engine->db->table_prefix . "user_setting SET " .
+				"UPDATE " . $prefix . "user_setting SET " .
 					"user_lang		= " . $engine->db->q($_POST['user_lang']) . ", " .
 					"theme			= " . $engine->db->q($_POST['theme']) . " " .
 				"WHERE user_id		= " . (int) $_POST['user_id'] . " " .
@@ -254,7 +255,7 @@ function admin_user_users(&$engine, &$module)
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{
-			$error = 'Please select at least one user via the Set button.';//$this->_t('ModerateMoveNotExists');
+			$error = $engine->_t('ModerateNoItemChosen'); // no user selected
 			$engine->show_message($error, 'error');
 		}
 			//(int) $_POST['user_id']
@@ -272,25 +273,25 @@ function admin_user_users(&$engine, &$module)
 				{
 					$user = $engine->db->load_single(
 						"SELECT u.user_name " .
-						"FROM " . $engine->db->table_prefix . "user u " .
+						"FROM " . $prefix . "user u " .
 						"WHERE u.user_id = " . (int) $user_id . " " .
 							"AND u.account_type = 0 " .
 						"LIMIT 1");
 
 					$engine->db->sql_query(
-						"DELETE FROM " . $engine->db->table_prefix . "user " .
+						"DELETE FROM " . $prefix . "user " .
 						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
-						"DELETE FROM " . $engine->db->table_prefix . "user_setting " .
+						"DELETE FROM " . $prefix . "user_setting " .
 						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
-						"DELETE FROM " . $engine->db->table_prefix . "usergroup_member " .
+						"DELETE FROM " . $prefix . "usergroup_member " .
 						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
-						"DELETE FROM " . $engine->db->table_prefix . "menu " .
+						"DELETE FROM " . $prefix . "menu " .
 						"WHERE user_id = " . (int) $user_id . "");
 					$engine->db->sql_query(
-						"DELETE FROM " . $engine->db->table_prefix . "watch " .
+						"DELETE FROM " . $prefix . "watch " .
 						"WHERE user_id = " . (int) $user_id . "");
 
 					// remove user space
@@ -308,7 +309,7 @@ function admin_user_users(&$engine, &$module)
 					$engine->remove_revisions			($user_space, true);
 
 					$engine->db->sql_query(
-						"DELETE FROM " . $engine->db->table_prefix . "page " .
+						"DELETE FROM " . $prefix . "page " .
 						"WHERE tag = " . $engine->db->q($user_space) . " " .
 							"OR tag LIKE " . $engine->db->q($user_space . '/%') . " " .
 							#"AND owner_id = " . (int) $_POST['user_id'] . "" .
@@ -404,8 +405,8 @@ function admin_user_users(&$engine, &$module)
 	{
 		if ($user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.user_lang, s.theme, u.enabled, u.account_status " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = " . (int) $user_id . " " .
 				"AND u.account_type = 0 " .
 			"LIMIT 1"))
@@ -545,7 +546,7 @@ function admin_user_users(&$engine, &$module)
 
 				if ($user = $engine->db->load_single(
 					"SELECT user_name
-					FROM " . $engine->db->table_prefix . "user
+					FROM " . $prefix . "user
 					WHERE user_id = " . (int) $user_id . "
 					LIMIT 1"))
 				{
@@ -584,7 +585,7 @@ function admin_user_users(&$engine, &$module)
 
 		echo $engine->form_open('get_user');
 		?>
-		<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+		<input type="hidden" name="user_id" value="<?php echo (int) $user_id; ?>">
 
 		<table class="formation">
 		<?php
@@ -768,7 +769,7 @@ function admin_user_users(&$engine, &$module)
 		// filter by account_status
 		if (isset($_GET['account_status']))
 		{
-			$where	= "WHERE u.account_status = " . (int) $_GET['account_status'] . " ";
+			$where			= "WHERE u.account_status = " . (int) $_GET['account_status'] . " ";
 		}
 		// filter by lang
 		if (isset($_GET['user_lang']))
@@ -784,9 +785,9 @@ function admin_user_users(&$engine, &$module)
 		// collecting data
 		$count = $engine->db->load_single(
 			"SELECT COUNT(user_name) AS n " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			( $where ?: '' )
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			($where ?: '')
 			);
 
 		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
@@ -794,10 +795,10 @@ function admin_user_users(&$engine, &$module)
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			($where ?: '') .
-			($where ? 'AND ' : "WHERE ") .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			($where ?: "") .
+			($where ? "AND " : "WHERE ") .
 				"u.account_type = 0 " .
 			($order ?: 'ORDER BY u.user_id DESC ') .
 			$pagination['limit']);
@@ -818,7 +819,8 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons =	'<br><input type="submit" id="create-button" name="create" value="' . $engine->_t('GroupsAddButton') . '"> '.
+		$control_buttons =	'<br>' .
+							'<input type="submit" id="create-button" name="create" value="' . $engine->_t('GroupsAddButton') . '"> '.
 							'<input type="submit" id="edit-button" name="edit" value="' . $engine->_t('UserEditButton') . '"> '.
 							#'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> '.
 							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('GroupsRemoveButton') . '"> '.
@@ -842,18 +844,18 @@ function admin_user_users(&$engine, &$module)
 				<th style="width:5px;"></th>
 				<th style="width:5px;"></th>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_user; ?>">Username</a></th>
-				<!--<th style="width:150px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_name; ?>">Realname</a></th>-->
-				<th>Email</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_pages; ?>">Pages</a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_comments; ?>">Comments</a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_revisions; ?>">Revisions</a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_uploads; ?>">Uploads</a></th>
-				<th style="width:20px;">Language</th>
-				<th style="width:20px;">Enabled</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_user; ?>"><?php echo $engine->_t('UsersName');?></a></th>
+				<!--<th style="width:150px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_name; ?>"><?php echo $engine->_t('RealName');?></a></th>-->
+				<th><?php echo $engine->_t('Email');?></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_pages; ?>"><?php echo $engine->_t('UsersPages');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_comments; ?>"><?php echo $engine->_t('UsersComments');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_revisions; ?>"><?php echo $engine->_t('UsersRevisions');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_uploads; ?>"><?php echo $engine->_t('UsersUploads');?></a></th>
+				<th style="width:20px;"><?php echo $engine->_t('UserLanguage');?></th>
+				<th style="width:20px;"><?php echo $engine->_t('Enabled');?></th>
 				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $signup_time; ?>">Signuptime</a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $last_visit; ?>">Last active</a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $signup_time; ?>"><?php echo $engine->_t('UsersSignup');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $last_visit; ?>"><?php echo $engine->_t('UsersLastSession');?></a></th>
 			</tr>
 <?php
 		if ($users)
@@ -885,7 +887,7 @@ function admin_user_users(&$engine, &$module)
 		}
 		else
 		{
-			echo '<tr><td colspan="5"><br><em>No users that meet the criteria</em></td></tr>';
+			echo '<tr><td colspan="5"><br><em>' . $engine->_t('UsersNoMatching') . '</em></td></tr>';
 		}
 ?>
 			</table>
