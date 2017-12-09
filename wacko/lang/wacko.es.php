@@ -1252,6 +1252,7 @@ $wacko_translation = [
 	'LogPageEdited'				=> 'Página modificada [[/%1]]',
 	'LogCommentEdited'			=> 'Comentario modificado [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Metadatos actualizados de ##%2## de página [[/%1]]',
+	'LogUpdatedFileCategories'	=> 'Updated file categories for ##%2## from page [[/%1]]',
 	'ErrorMinPHPVersion'		=> 'La versión de PHP debe ser mayor a <strong>' . PHP_MIN_VERSION.
 									'</strong>, el servidor utiliza aparentemente la versión <strong>' . PHP_VERSION . '</strong>.'.
 									'  Debería actualizar a una versión más reciente de PHP para que WackoWiki funcione correctamente.',

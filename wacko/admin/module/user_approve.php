@@ -183,8 +183,8 @@ function admin_user_approve(&$engine, &$module)
 			$set = [];
 		}
 	}
-#}
-	// manage approving and denying users
+
+	// manage, approving or denying users
 
 		// defining WHERE and ORDER clauses
 		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
@@ -331,8 +331,8 @@ function admin_user_approve(&$engine, &$module)
 										: ''
 								);
 
-		$approve_icon	= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve"/>';
-		$deny_icon		= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny"/>';
+		$approve_icon	= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
+		$deny_icon		= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny">';
 
 		# echo $control_buttons;
 		echo '<br>';
