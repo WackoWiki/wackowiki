@@ -11,6 +11,7 @@ if (!defined('IN_WACKO'))
 //	  find a way to unwrap table-structured SQL data array
 //	  into a tree-structured multilevel array)
 //	- split in functions and move into new class -> tagging for attachments
+//	- trim input string
 
 $selected	= '';
 $parent_id	= '';
@@ -26,6 +27,9 @@ if ($this->is_owner() || $this->is_admin())
 {
 	if (isset($_POST))
 	{
+		$_category				= trim($_POST['category']);
+		$_category_description	= trim($_POST['category_description']);
+
 		/////////////////////////////////////////////
 		//   list change/update
 		/////////////////////////////////////////////
@@ -59,11 +63,12 @@ if ($this->is_owner() || $this->is_admin())
 			// add item
 			if (isset($_POST['create']) && isset($_POST['category']))
 			{
-				// do we have identical names?
+				// do we have identical name for this language?
 				if ($this->db->load_single(
 					"SELECT category_id " .
 					"FROM " . $this->db->table_prefix . "category " .
-					"WHERE category = " . $this->db->q($_POST['category']) . " " .
+					"WHERE category = " . $this->db->q($_category) . " " .
+						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 					"LIMIT 1"))
 				{
 					$this->set_message($this->_t('CategoriesAlreadyExists'));
@@ -72,6 +77,7 @@ if ($this->is_owner() || $this->is_admin())
 				}
 				else
 				{
+					// save item
 					$this->db->sql_query(
 						"INSERT INTO " . $this->db->table_prefix . "category SET " .
 							($_POST['category_id'] && $_POST['group'] == 1
@@ -81,8 +87,8 @@ if ($this->is_owner() || $this->is_admin())
 								: ''
 							) .
 							"category_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
-							"category				= " . $this->db->q($_POST['category']) . ", " .
-							"category_description	= " . $this->db->q($_POST['category_description']) . " ");
+							"category				= " . $this->db->q($_category) . ", " .
+							"category_description	= " . $this->db->q($_category_description) . " ");
 
 					$this->set_message($this->_t('CategoriesAdded'), 'success');
 					$this->log(4, 'Created a new category //' . $_POST['category'] . '//');
@@ -94,11 +100,12 @@ if ($this->is_owner() || $this->is_admin())
 			// rename item
 			else if (isset($_POST['rename']) && isset($_POST['category']) && isset($_POST['category_id']))
 			{
-				// do we have identical names?
+				// do we have identical name for this language?
 				if ($this->db->load_single(
 					"SELECT category_id " .
 					"FROM " . $this->db->table_prefix . "category " .
-					"WHERE category = " . $this->db->q($_POST['category']) . " " .
+					"WHERE category = " . $this->db->q($_category) . " " .
+						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 						"AND category_id <> " . (int) $_POST['category_id'] . " " .
 					"LIMIT 1"))
 				{
@@ -110,7 +117,7 @@ if ($this->is_owner() || $this->is_admin())
 				{
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "category SET " .
-							"category = " . $this->db->q($_POST['category']) . " " .
+							"category = " . $this->db->q($_category) . " " .
 						"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 						"LIMIT 1");
 
@@ -225,7 +232,7 @@ if ($this->is_owner() || $this->is_admin())
 								'<label for="new_category">' . $this->_t('CategoriesAdd') . '</label>' .
 							'</td>' .
 							'<td>' .
-								'<input type="text" name="category" id="new_category" value="' . htmlspecialchars(($_POST['category'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">' .
+								'<input type="text" name="category" id="new_category" value="' . htmlspecialchars(($_POST['category'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="40" maxlength="100">' .
 							'</td>' .
 						'</tr>' .
 						'<tr>' .
@@ -270,7 +277,7 @@ if ($this->is_owner() || $this->is_admin())
 							'<tr>' .
 								'<td>' .
 									'<label for="new_name">' . Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .
-									'<input type="text" name="category" id="new_name" value="' . htmlspecialchars(($_POST['category'] ?? $word['category']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100"> '.
+									'<input type="text" name="category" id="new_name" value="' . htmlspecialchars(($_POST['category'] ?? $word['category']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="40" maxlength="100"> '.
 									'<input type="submit" name="rename" id="submit_new_name" value="' . $this->_t('CategoriesSaveButton') . '"> ' .
 									'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' .
 									'<br><small>' . $this->_t('CategoriesRenameInfo') . '</small>' .
