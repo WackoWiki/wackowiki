@@ -56,7 +56,9 @@ first really BIG template written
 				=]
 			</tr>
 			<tr>
-				<th scope="row"><a href="[ ' groupsPage ' ]">[ ' _t: UsersGroupMembership ' ]</a></th>
+				<th scope="row">
+					<a href="[ ' groupsPage ' ]">[ ' _t: UsersGroupMembership ' ]</a>
+				</th>
 				[= userGroups =
 					<td>[ ' list ' ][ ' na UsersNA2 ' ]</td>
 				=]
@@ -66,7 +68,13 @@ first really BIG template written
 		[= pm _ =
 			<h2>[ ' _t: UsersContact ' ]</h2>
 			[= not _ =
-				<table class="formation"><tr><td colspan="2" class="t_center"><em>[ ' _t: UsersPMNotLoggedIn ' ]</em></td></tr></table>
+				<table class="formation">
+					<tr>
+						<td colspan="2" class="t_center">
+							<em>[ ' _t: UsersPMNotLoggedIn ' ]</em>
+						</td>
+					</tr>
+				</table>
 			=]
 			[= pm _ =
 				[ ' // contact form ' ]
@@ -79,7 +87,11 @@ first really BIG template written
 					=]
 					<table class="formation">
 						[= disabled _ =
-							<tr><td colspan="2" class="t_center"><strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong></td></tr>
+							<tr>
+								<td colspan="2" class="t_center">
+									<strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong>
+								</td>
+							</tr>
 						=]
 						[= ic _ =
 							<tr>
@@ -92,10 +104,14 @@ first really BIG template written
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><textarea name="mail_body" cols="80" rows="15">[ ' body |e ' ]</textarea></td>
+								<td colspan="2">
+									<textarea name="mail_body" cols="80" rows="15">[ ' body |e ' ]</textarea>
+								</td>
 							</tr>
 							<tr>
-								<td><input type="submit" id="submit" name="send_pm" value="[ ' _t: UsersIntercomSend ' ]"></td>
+								<td>
+									<input type="submit" id="submit" name="send_pm" value="[ ' _t: UsersIntercomSend ' ]">
+								</td>
 							</tr>
 							<tr>
 								<td colspan="2">
@@ -218,7 +234,11 @@ first really BIG template written
 		</thead>
 		<tbody>
 		[= none _ =
-			<tr><td colspan="5" class="t_center" style="padding: 10px;"><small><em>[ ' _t: UsersNoMatching ' ]</em></small></td></tr>
+			<tr>
+				<td colspan="5" class="t_center" style="padding: 10px;">
+					<small><em>[ ' _t: UsersNoMatching ' ]</em></small>
+				</td>
+			</tr>
 		=]
 		[= u _ =
 			<tr>

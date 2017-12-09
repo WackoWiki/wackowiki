@@ -23,9 +23,10 @@ $module[$_mode] = [
 
 function admin_user_approve(&$engine, &$module)
 {
-	$where = '';
-	$order = '';
-	$error = '';
+	$where		= '';
+	$order		= '';
+	$error		= '';
+	$prefix		= $engine->db->table_prefix;
 
 	#Ut::debug_print_r($_POST);
 	#Ut::debug_print_r($_REQUEST);
@@ -110,8 +111,8 @@ function admin_user_approve(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = " . (int) $user_id . " " .
 				"AND u.account_type = 0 " .
 			"LIMIT 1");
@@ -122,8 +123,8 @@ function admin_user_approve(&$engine, &$module)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = " . (int) $user_id . " " .
 				"AND u.account_type = 0 " .
 			"LIMIT 1");
@@ -169,7 +170,7 @@ function admin_user_approve(&$engine, &$module)
 				{
 					$user = $engine->db->load_single(
 						"SELECT u.user_name " .
-						"FROM " . $engine->db->table_prefix . "user u " .
+						"FROM " . $prefix . "user u " .
 						"WHERE u.user_id = " . (int) $user_id . " " .
 							"AND u.account_type = 0 " .
 						"LIMIT 1");
@@ -246,36 +247,36 @@ function admin_user_approve(&$engine, &$module)
 		// collecting data
 		$count = $engine->db->load_single(
 			"SELECT COUNT(user_name) AS n " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			($where ?: '') .
 			($where ? 'AND ' : "WHERE ") .
 				"u.user_name <> " . $engine->db->q($engine->db->admin_name) . " "
 			);
 
 		$_order				= ($_GET['order'] ?? '');
-		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
+		$order_pagination	= !empty($_order) ? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
 
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination  + ['account_status' => (int) @$_GET['account_status']], '', 'admin.php');
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
-			"FROM " . $engine->db->table_prefix . "user u " .
-				"LEFT JOIN " . $engine->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"FROM " . $prefix . "user u " .
+				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			($where ?: '') .
-			($where ? 'AND ' : "WHERE ") .
+			($where ? "AND " : "WHERE ") .
 				"u.account_type = 0 " .
 				"AND u.user_name <> " . $engine->db->q($engine->db->admin_name) . " " .
-			( $order ?: 'ORDER BY u.user_id DESC ' ) .
+			($order ?: 'ORDER BY u.user_id DESC ') .
 			$pagination['limit']);
 
 		// count records by status
 		$account_stati =  $engine->db->load_all(
-				"SELECT account_status, count(account_status) AS n
-				FROM " . $engine->db->table_prefix . "user
-				WHERE account_type = 0
-					AND user_name <> " . $engine->db->q($engine->db->admin_name) . "
-				GROUP BY account_status");
+			"SELECT account_status, count(account_status) AS n
+			FROM " . $prefix . "user
+			WHERE account_type = 0
+				AND user_name <> " . $engine->db->q($engine->db->admin_name) . "
+			GROUP BY account_status");
 
 		// set default status count
 		$status_count['0'] = 0; // approved

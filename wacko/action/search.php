@@ -11,7 +11,8 @@ if (!defined('IN_WACKO'))
 
 $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 0)
 {
-	$category_id	=  null;
+	$category_id	= null;
+	$lang			= null;
 	extract($filter, EXTR_IF_EXISTS);
 
 	$selector =
@@ -32,6 +33,9 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 				: "") .
 			($scope
 				? "AND a.comment_on_id = 0 "
+				: "") .
+			($lang
+				? "AND a.page_lang = " . $this->db->q($lang) . " "
 				: "") .
 			($category_id
 				? "AND ca.category_id = " . (int) $category_id . " "
@@ -69,16 +73,19 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		$this->page_id_cache[$result['tag']] = $result['page_id'];
 	}
 
-	// cache acls
-	$this->preload_acl($page_ids);
-	$this->preload_categories($page_ids);
+	if (!empty($page_ids))
+	{
+		$this->preload_acl($page_ids);
+		$this->preload_categories($page_ids);
+	}
 
 	return [$results, $pagination, $count['n']];
 };
 
 $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 0)
 {
-	$category_id	=  null;
+	$category_id	= null;
+	$lang			= null;
 	extract($filter, EXTR_IF_EXISTS);
 
 	$selector =
@@ -96,6 +103,9 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 			: "") .
 		($scope
 			? "AND a.comment_on_id = 0 "
+			: "") .
+		($lang
+			? "AND a.page_lang = " . $this->db->q($lang) . " "
 			: "") .
 		($category_id
 			? "AND ca.category_id = " . (int) $category_id . " "
@@ -265,17 +275,23 @@ if (!isset($scope))		$scope		= '';
 if (!isset($nomark))	$nomark		= 0;
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
+if (!isset($lang))		$lang		= '';
 if (!isset($max))		$max		= null;
 if (!isset($clean))		$clean		= false;
 
-
+if ($lang && !$this->known_language($lang))
+{
+	$lang = '';
+	$this->set_message('The selected language is not available!');
+}
 
 $user			= $this->get_user();
 $category_id	= $_GET['category_id'] ?? 0;
 $mode			= ($topic || isset($_GET['topic']))? 'topic' : 'full';
 
 $filter = [
-	'category_id' => $category_id,
+	'category_id'	=> $category_id,
+	'lang'			=> $lang,
 ];
 
 if (!in_array($style, ['br', 'ul', 'ol', 'comma']))

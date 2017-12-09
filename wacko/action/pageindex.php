@@ -27,6 +27,12 @@ if (!isset($letter))	$letter = '';
 if (!isset($lang))		$lang = '';
 if (!isset($max))		$max = null;
 
+if ($lang && !$this->known_language($lang))
+{
+	$lang = '';
+	#$this->set_message('The selected language is not available!');
+}
+
 $tag		= $page; // use tag from here on
 $title		= (int) $title;
 $_alnum		= '/' . $this->language['ALPHANUM'] . '/S';

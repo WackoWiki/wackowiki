@@ -8390,7 +8390,7 @@ class Wacko
 
 		foreach ($langs as $_lang)
 		{
-			$out .= '<option value="' . $_lang . '" '.($lang == $_lang ? 'selected ' : '') . '>' . $languages[$_lang] . ' (' . $_lang.")</option>\n";
+			$out .= '<option value="' . $_lang . '" '.($lang == $_lang ? 'selected ' : '') . '>' . $languages[$_lang] . ' (' . $_lang . ")</option>\n";
 		}
 
 		$out .= "</select>\n";
