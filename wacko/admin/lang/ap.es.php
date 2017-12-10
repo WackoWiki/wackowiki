@@ -904,8 +904,8 @@ $ap_translation = [
 	'BackupSettings'			=> 'Indique el esquema de backup deseado.<br>' .
 									'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br>' .
 									'<br>' .
-									'<strong>Atención</strong>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, '.
-									'igual al realizar backup de solamente la estructura de tabla sin guardar los datos. '.
+									'<strong>Atención</strong>: Las tablas de este backup no serán reestructurados para evitar pérdida de información al especificar el cluster de root, ' .
+									'igual al realizar backup de solamente la estructura de tabla sin guardar los datos. ' .
 									'Para realizar la conversión completa de las tablas al formato de backup debe realizar <em> el backup completo de base de datos (estructura y datos) sin especificar el cluster</em>.',
 	'BackupCompleted'			=> 'Backup y archivación terminado.<br>' .
 									'Archivo del backup guardado en subdirectorio %1.<br>' .
@@ -921,16 +921,16 @@ $ap_translation = [
 	'BackupDelete'				=> 'Seguro que desea eliminar el backup',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Opciones adicionales de restaurar',
-	'RestoreOptionsInfo'		=> '* Antes de restaurar el <strong>cluster backup</strong>, '.
-									'no se destruyen las tablas de destino (para evitar pérdida de información de los cluster que no tienen backup). '.
-									'Por lo tanto habrá registros duplicados durante el proceso de restauración. '.
-									'En el modo normal todos se reemplazarán por los registros desde el backup (usando la instrucción SQL <code>REPLACE</code>), '.
-									'pero si se marca esta casilla, se omiten todos los duplicados (se mantienen los registros actuales), '.
+	'RestoreOptionsInfo'		=> '* Antes de restaurar el <strong>cluster backup</strong>, ' .
+									'no se destruyen las tablas de destino (para evitar pérdida de información de los cluster que no tienen backup). ' .
+									'Por lo tanto habrá registros duplicados durante el proceso de restauración. ' .
+									'En el modo normal todos se reemplazarán por los registros desde el backup (usando la instrucción SQL <code>REPLACE</code>), ' .
+									'pero si se marca esta casilla, se omiten todos los duplicados (se mantienen los registros actuales), ' .
 									'y solamente se agregan en la tabla registros con claves nuevas (instrucción SQL <code>INSERT IGNORE</code>).<br>' .
 									'<strong>Observación</strong>: Al restaurar el backup completo del sitio esta opción se ignora.<br>' .
 									'<br>' .
-									'** Si el backup contiene los archivos de usuario (global y por página, archivos cache, etc.), '.
-									'en modo normal serán sustituidos al rastaurar con igual nombre y en la misma ubicación de directorio. '.
+									'** Si el backup contiene los archivos de usuario (global y por página, archivos cache, etc.), ' .
+									'en modo normal serán sustituidos al rastaurar con igual nombre y en la misma ubicación de directorio. ' .
 									'Esta opción permite guardar los archivos actuales y restaurar de un backup solamente los archivos nuevos (que faltan en el servidor).',
 	'IgnoreDuplicatedKeys'		=> 'Ignorar claves duplicadas de tabla (no reemplazar)',
 	'IgnoreSameFiles'			=> 'Ignorar archivos iguales (no sobreescribir)',
@@ -939,6 +939,44 @@ $ap_translation = [
 	'BackupRestored'			=> 'Se restauró el backup, abajo se adjunta un reporte de resumen. Para eliminar este paquete de backup, presione',
 	'BackupRemoved'				=> 'Se eliminó con éxito el backup seleccionado.',
 	'LogRemovedBackup'			=> 'Backup de base de datos eliminado ##%1##',
+
+	'RestoreStarted'			=> 'Initiated Restoration',
+	'RestoreParameters'			=> 'Using parameters',
+	'IgnoreDublicatedKeys'		=> 'Ignore dublicated keys',
+	'IgnoreDublicatedFiles'		=> 'Ignore dublicated files',
+	'SavedCluster'				=> 'Saved cluster',
+	'DataProtection'			=> 'Data Protection - %1 omitted',
+	'AssumeDropTable'			=> 'Assume %1',
+	'RestoreTableStructure'		=> 'Restoring the structure of the table',
+	'RunSqlQueries'				=> 'Perform SQL-instructions',
+	'CompletedSqlQueries'		=> 'Completed. Processed instructions',
+	'NoTableStructure'			=> 'The structure of the tables was not saved - skip',
+	'RestoreRecords'			=> 'Restore the contents of tables',
+	'ProcessTablesDump'			=> 'Just download and process tables dump',
+	'Instruction'				=> 'Instruction',
+	'RestoredRecords'			=> 'records',
+	'RecordsRestoreDone'		=> 'Completed. Total entries',
+	'SkippedRecords'			=> 'Data not saved - skip',
+	'RestoringFiles'			=> 'Restoring files',
+	'DecompressAndStore'		=> 'Decompress and store the contents of directories',
+	'HomonymicFiles'			=> 'homonymic files',
+	'RestoreSkip'				=> 'skip',
+	'RestoreReplace'			=> 'replace',
+	'RestoreFile'				=> 'File',
+	'Restored'					=> 'restored',
+	'Skipped'					=> 'skipped',
+	'FileRestoreDone'			=> 'Completed. Total files',
+	'FilesAll'					=> 'all',
+	'SkipFiles'					=> 'Files are not stored - skip',
+	'RestoreDone'				=> 'RESTORATION COMPLETED',
+
+	'BackupCreationDate'		=> 'Creation Date',
+	'BackupPackageContents'		=> 'The contents of the package',
+	'BackupRestore'				=> 'restore',
+	'BackupRemove'				=> 'remove',
+	'RestoreYes'				=> 'yes',
+	'RestoreNo'					=> 'no',
+	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
 	'UsersAdded'				=> 'Usuario agregado',
@@ -992,6 +1030,20 @@ $ap_translation = [
 	'MembersRemoved'			=> 'Miembro eliminado del grupo.',
 	'MembersDeleteInfo'			=> '* Observación: El cambio afectará a todos los miembros asignados al grupo.',
 
+	// Statistics module
+	'DbStatSection'				=> 'Database Statistics',
+	'DbTable'					=> 'Table',
+	'DbRecords'					=> 'Records',
+	'DbSize'					=> 'Size',
+	'DbIndex'					=> 'Index',
+	'DbOverhead'				=> 'Overhead',
+	'DbTotal'					=> 'Total',
+
+	'FileStatSection'			=> 'File system Statistics',
+	'FileFolder'				=> 'Folder',
+	'FileFiles'					=> 'Files',
+	'FileSize'					=> 'Size',
+	'FileTotal'					=> 'Total',
 ];
 
 ?>

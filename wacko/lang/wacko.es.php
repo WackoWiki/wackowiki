@@ -571,9 +571,9 @@ $wacko_translation = [
 	'EmailConfirmed'			=> 'Email confirmado con éxito.',
 	'EmailNotConfirmed'			=> 'El Email no se ha podido confirmar. La causa puede ser un código de confirmación incorrecto o la dirección de email podrá ya estar confirmado. Puede verificar si la dirección de email ya fue confirmada, si se luguéa y entra en la página %1 para ver su estado.',
 	'EmailNotVerified'			=> 'Email no verificado!',
-	'EmailNotVerifiedDesc'		=> 'No podrá recibir notificaciones de cambios o de comentarios en páginas observadas, '.
-									'mensajes de otros usuarios, y tambien <strong>no podrá poder recuperar una contraseña olvidada</strong>, '.
-									'hasta que confirme su email, siguiendo el enlace en el email enviado. '.
+	'EmailNotVerifiedDesc'		=> 'No podrá recibir notificaciones de cambios o de comentarios en páginas observadas, ' .
+									'mensajes de otros usuarios, y tambien <strong>no podrá poder recuperar una contraseña olvidada</strong>, ' .
+									'hasta que confirme su email, siguiendo el enlace en el email enviado. ' .
 									'Si no recibe un email luego de registrarse, solicitelo de nuevo presionando ',
 
 	'ForgotPasswordHint'		=> 'Introduce tu login y e-mail,' . "\n" . ' y te enviaremos un e-mail con instrucciones.',
@@ -654,18 +654,18 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[iniciar nuevo tema]',
 	'UsersIntercomDisabled'		=> 'Perdón, no desea o no puede recibir mensajes privados.',
 	'UsersIntercomSend'			=> 'enviar',
-	'UsersIntercomDesc'			=> 'Observación: Mensaje privado enviado al email del destinatario '.
-								   'sin revelar su dirección de email. El recipiente podrá responderle usando '.
+	'UsersIntercomDesc'			=> 'Observación: Mensaje privado enviado al email del destinatario ' .
+								   'sin revelar su dirección de email. El recipiente podrá responderle usando ' .
 								   'un formulario similar en la página del perfil de usted. ',
 	'UsersPMOversized'			=> 'La longitud del mensaje excede el máximo permitido de %1 caracteres. Por favor acorte su mensaje y vuelva a enviar.',
 	'UsersPMFlooded'			=> 'El intervalo entre mensajes personales debe ser mayor de %1 segundos.',
 	'UsersPMSent'				=> 'Mensaje personal enviado exitosamente al usuario.',
 	'UsersPMPlnSent'			=> 'Mensaje personal enviado al usuario en texto plano.',
 	'UsersPMBody'				=> 'Este mensaje le fue enviado por el usuario %1.',
-	'UsersPMReply'				=> 'Para responder este email, presione el siguiente enlace (NO use el botón "Responder" en '.
+	'UsersPMReply'				=> 'Para responder este email, presione el siguiente enlace (NO use el botón "Responder" en ' .
 								   'su cliente de email):',
-	'PMAbuseInfo'				=> 'Observación: Si este mensaje es spam, tiene un contenido abusivo o viola '.
-								   'de alguna manera las reglas del sitio, por favor envíelo (usando el botón "Reenviar" '.
+	'PMAbuseInfo'				=> 'Observación: Si este mensaje es spam, tiene un contenido abusivo o viola ' .
+								   'de alguna manera las reglas del sitio, por favor envíelo (usando el botón "Reenviar" ' .
 								   'de su programa de email) a la dirección %1.',
 	'UsersPMNotLoggedIn'		=> 'No está registrado en el sistema y no puede enviar mensajes privados.',
 
@@ -1254,7 +1254,7 @@ $wacko_translation = [
 	'LogUpdatedFileMeta'		=> 'Metadatos actualizados de ##%2## de página [[/%1]]',
 	'LogUpdatedFileCategories'	=> 'Updated file categories for ##%2## from page [[/%1]]',
 	'ErrorMinPHPVersion'		=> 'La versión de PHP debe ser mayor a <strong>' . PHP_MIN_VERSION.
-									'</strong>, el servidor utiliza aparentemente la versión <strong>' . PHP_VERSION . '</strong>.'.
+									'</strong>, el servidor utiliza aparentemente la versión <strong>' . PHP_VERSION . '</strong>.' .
 									'  Debería actualizar a una versión más reciente de PHP para que WackoWiki funcione correctamente.',
 
 ];

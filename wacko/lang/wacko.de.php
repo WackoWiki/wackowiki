@@ -572,9 +572,9 @@ $wacko_translation = [
 	'EmailConfirmed'			=> 'E-Mail wurde erfolgreich bestätigt.',
 	'EmailNotConfirmed'			=> 'E-Mail konnte nicht bestätigt werden. Dies könnte an einen falschen Bestätigung-Code liegen oder die E-Mail-Adresse wurde möglicherweise bereits bestätigt. Du kannst prüfen ob die E-Mail bereits bestätigt wurde indem du dich anmeldst und deinen Status auf deiner %1 Seite einsiehst.',
 	'EmailNotVerified'			=> 'E-Mail wurde nicht bestätigt!',
-	'EmailNotVerifiedDesc'		=> 'Du erhälst keine Benachrichtigung über Änderungen oder Kommentare von beobachteten Seiten, '.
-									'Nachrichten von anderen Nutzern, ebenso wirst du nicht in der Lage sein <strong> ein vergessenes Passwort wieder herzustellen</strong>, '.
-									'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst. '.
+	'EmailNotVerifiedDesc'		=> 'Du erhälst keine Benachrichtigung über Änderungen oder Kommentare von beobachteten Seiten, ' .
+									'Nachrichten von anderen Nutzern, ebenso wirst du nicht in der Lage sein <strong> ein vergessenes Passwort wieder herzustellen</strong>, ' .
+									'bis deine E-Mail-Adresse bestätigt wurde, indem du den Link in der dir zugesendeten E-Mail folgst. ' .
 									'Wenn innerhalb weniger Tage nach der Registrierung du keine E-Mail erhalten hast, kannst du sie erneut anfragen, klicke dazu ',
 
 	'ForgotPasswordHint'		=> 'Benutzername und E-Mailadresse angeben,' . "\n" . 'du bekommst dann eine E-Mail mit weiteren Anweisungen.',
@@ -655,19 +655,19 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[Beginne ein neues Thema]',
 	'UsersIntercomDisabled'		=> 'Du möchtest oder kannst keine privaten Nachrichten empfangen.',
 	'UsersIntercomSend'			=> 'absenden',
-	'UsersIntercomDesc'			=> 'Hinweis: Senden von persönlichen Nachrichten an die E-Mail-Adresse des '.
-								   'Empfänger ohne Offenlegung deiner Adresse. Der Empfänger hat die Möglichkeit dir zu anworten, indem '.
+	'UsersIntercomDesc'			=> 'Hinweis: Senden von persönlichen Nachrichten an die E-Mail-Adresse des ' .
+								   'Empfänger ohne Offenlegung deiner Adresse. Der Empfänger hat die Möglichkeit dir zu anworten, indem ' .
 								   'er das gleiche Formular auf deiner Profilseite nutzt.',
 	'UsersPMOversized'			=> 'Die Länge der Nachricht überschreitet die maximal zulässigen %1 Zeichen. Bitte kürze deine Mitteilung und übermittle sie erneut.',
 	'UsersPMFlooded'			=> 'Der Abstand zwischen dem Senden von persönlichen Nachrichten sollte nicht kleiner sein als %1 Sekunden.',
 	'UsersPMSent'				=> 'Persönliche Nachricht wurde erfolgreich an den Nutzer gesendet.',
 	'UsersPMPlnSent'			=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',
 	'UsersPMBody'				=> 'Diese Nachricht wurde dir durch den Benutzer %1 geschickt.',
-	'UsersPMReply'				=> 'Um auf diese Email-Nachricht zu antworten, '.
-								   'klicke den folgenden Link (verwende nicht die Schaltfläche \'Antworten\' '.
+	'UsersPMReply'				=> 'Um auf diese Email-Nachricht zu antworten, ' .
+								   'klicke den folgenden Link (verwende nicht die Schaltfläche \'Antworten\' ' .
 								   'in deinem Mailprogramm):',
-	'PMAbuseInfo'				=> 'Hinweis: Falls diese Nachricht Spam enthält, beleidigt oder anderweitig gegen die Regeln der Seite verstößt, '.
-								   'dann sende sie bitte (unter Verwendung der Schaltfläche \'Weiterleiten\' '.
+	'PMAbuseInfo'				=> 'Hinweis: Falls diese Nachricht Spam enthält, beleidigt oder anderweitig gegen die Regeln der Seite verstößt, ' .
+								   'dann sende sie bitte (unter Verwendung der Schaltfläche \'Weiterleiten\' ' .
 								   'in deinem Mailprogramm) an diese Adresse %1.',
 	'UsersPMNotLoggedIn'		=> 'Du bist nicht im System angemeldet und kannst daher keine persönlichen Nachrichten an andere Nutzer übermitteln.',
 
@@ -1256,7 +1256,7 @@ $wacko_translation = [
 	'LogUpdatedFileMeta'		=> 'Datei Metadaten für ##%2## von Seite [[/%1]] aktualisiert',
 	'LogUpdatedFileCategories'	=> 'Datei Kategorien für ##%2## von Seite [[/%1]] aktualisiert',
 	'ErrorMinPHPVersion'		=> 'Die PHP Version muss größer sein als <strong>' . PHP_MIN_VERSION .
-									'</strong>, der Server scheint die Version <strong>' . PHP_VERSION . '</strong> zu nutzen.'.
+									'</strong>, der Server scheint die Version <strong>' . PHP_VERSION . '</strong> zu nutzen.' .
 									'  Aktualisiere bitte PHP auf eine neuere Version, damit  WackoWiki ordnungsgemäß funtioniert.',
 
 ];
