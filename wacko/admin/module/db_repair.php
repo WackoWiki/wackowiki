@@ -20,8 +20,6 @@ $module[$_mode] = [
 		'vars'	=> [&$tables, &$directories],
 	];
 
-// TODO: to merge with db_optimize module
-
 ##########################################################
 
 function admin_db_repair(&$engine, &$module)
@@ -46,10 +44,10 @@ function admin_db_repair(&$engine, &$module)
 		foreach ($tables as $table)
 		{
 			$check = $engine->db->load_single("CHECK TABLE {$table['name']}");
-			#$engine->db->sql_query($sql);
 
 			if ('OK' == $check['Msg_text'])
 			{
+				#$engine->_t('');
 				$message = '<li>' . 'The %1 table is okay.';
 				echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
 			}
@@ -62,7 +60,6 @@ function admin_db_repair(&$engine, &$module)
 								$message));
 
 				$check = $engine->db->load_single("REPAIR TABLE {$table['name']}");
-				#$engine->db->sql_query($sql);
 
 				if ('OK' == $check['Msg_text'])
 				{
@@ -87,7 +84,6 @@ function admin_db_repair(&$engine, &$module)
 				echo '<ul>';
 
 				$check = $engine->db->load_single("ANALYZE TABLE {$table['name']}");
-				#$engine->db->sql_query($sql);
 
 				if ('Table is already up to date' == $check['Msg_text'])
 				{
@@ -97,7 +93,6 @@ function admin_db_repair(&$engine, &$module)
 				else
 				{
 					$check = $engine->db->load_single("OPTIMIZE TABLE {$table['name']}");
-					#$engine->db->sql_query($sql);
 
 					if ('OK' == $check['Msg_text'] || 'Table is already up to date' == $check['Msg_text'])
 					{
