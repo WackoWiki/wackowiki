@@ -56,7 +56,7 @@ function admin_maint_transliterate(&$engine, &$module)
 						"WHERE to_tag = " . $engine->db->q($page['to_tag']) . " ");
 				}
 
-				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i='.(++$i))));
+				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i=' . (++$i))));
 			}
 			else
 			{
@@ -90,7 +90,7 @@ function admin_maint_transliterate(&$engine, &$module)
 						"WHERE page_id = " . (int) $page['page_id']) . "";
 				}
 
-				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i='.(++$i))));
+				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i=' . (++$i))));
 			}
 			else
 			{
@@ -124,7 +124,7 @@ function admin_maint_transliterate(&$engine, &$module)
 						"WHERE revision_id = " . (int) $page['revision_id']) . "";
 				}
 
-				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i='.(++$i))));
+				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i=' . (++$i))));
 			}
 			else
 			{

@@ -374,7 +374,7 @@ function admin_user_users(&$engine, &$module)
 				{
 					foreach ($langs as $lang)
 					{
-						echo '<option value="' . $lang . '" '.($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+						echo '<option value="' . $lang . '" ' . ($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
 					}
 				}
 
@@ -386,13 +386,13 @@ function admin_user_users(&$engine, &$module)
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 						</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" '. ( !isset($_POST['enabled']) ? ' checked' : '') . '>
+						<input type="checkbox" id="enabled" name="enabled" value="1" ' . ( !isset($_POST['enabled']) ? ' checked' : '') . '>
 					</td>
 				</tr>' .
 				'<tr>
 					<td>
 						<br>
-						<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '"> '.
+						<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '"> ' .
 						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
 					'</td>
 				</tr>' .
@@ -425,7 +425,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>' .
 				'<tr>
 					<td>
-						<label for="newrealname">' . $engine->_t('RealName') . '</label> '.
+						<label for="newrealname">' . $engine->_t('RealName') . '</label> ' .
 					'</td>
 					<td>
 						<input type="text" id="newrealname" name="newrealname" value="' . htmlspecialchars(($_POST['newrealname'] ?? $user['real_name']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
@@ -433,7 +433,7 @@ function admin_user_users(&$engine, &$module)
 				'</tr>' .
 				'<tr>
 					<td>
-						<label for="newemail">' . $engine->_t('Email') . '</label> '.
+						<label for="newemail">' . $engine->_t('Email') . '</label> ' .
 					'</td>
 					<td>
 						<input type="email" id="newemail" name="newemail" value="' . htmlspecialchars(($_POST['newemail'] ?? $user['email']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
@@ -482,7 +482,7 @@ function admin_user_users(&$engine, &$module)
 					<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 					</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" '. (isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . '>
+						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . '>
 					</td>
 				</tr>' .
 				'<tr>
@@ -496,7 +496,7 @@ function admin_user_users(&$engine, &$module)
 
 						foreach ($account_status as $offset => $status)
 						{
-							echo '<option value="' . $offset . '" '.
+							echo '<option value="' . $offset . '" ' .
 								(isset($user['account_status']) && $user['account_status'] == $offset
 									? 'selected '
 									: '') .
@@ -563,8 +563,8 @@ function admin_user_users(&$engine, &$module)
 				'<table class="formation">' .
 					'<tr>
 						<td>
-							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> '.
-							'<input type="submit" id="submit" name="delete" value="yes"> '.
+							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> ' .
+							'<input type="submit" id="submit" name="delete" value="yes"> ' .
 							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a><br>' .
 							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
@@ -807,8 +807,8 @@ function admin_user_users(&$engine, &$module)
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']) .
 					'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 					$engine->_t('UsersSearch') . ': </td><td>' .
-					'<input type="search" name="user" maxchars="40" size="30" value="' . htmlspecialchars(($_GET['user'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"> '.
-					'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> '.
+					'<input type="search" name="user" maxchars="40" size="30" value="' . htmlspecialchars(($_GET['user'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"> ' .
+					'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> ' .
 					$engine->form_close();
 
 		echo '<span style="float: right;">' . $search . '</span>';
@@ -820,16 +820,16 @@ function admin_user_users(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		$control_buttons =	'<br>' .
-							'<input type="submit" id="create-button" name="create" value="' . $engine->_t('GroupsAddButton') . '"> '.
-							'<input type="submit" id="edit-button" name="edit" value="' . $engine->_t('UserEditButton') . '"> '.
-							#'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> '.
-							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('GroupsRemoveButton') . '"> '.
+							'<input type="submit" id="create-button" name="create" value="' . $engine->_t('GroupsAddButton') . '"> ' .
+							'<input type="submit" id="edit-button" name="edit" value="' . $engine->_t('UserEditButton') . '"> ' .
+							#'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> ' .
+							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('GroupsRemoveButton') . '"> ' .
 							'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 							'<br>' . "\n" .
-								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> '.
+								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> ' .
 								($set
-										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> '.
-										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set) . '</small>'
+										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
+										'&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
 										: ''
 								);
 
@@ -864,7 +864,7 @@ function admin_user_users(&$engine, &$module)
 			{
 				echo '<tr class="lined">' . "\n" .
 						'<td class="label a_middle" style="width:10px;">
-							<input type="checkbox" name="' . $row['user_id'] . '" value="id" '.( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
+							<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
 						</td>' .
 						'<td>
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '">

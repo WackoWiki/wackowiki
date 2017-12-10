@@ -113,9 +113,9 @@ if ($this->has_access('read'))
 
 			echo '<li>';
 			echo '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
-			echo '<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 0 ? 'checked' : '') . '>';
+			echo '<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 0 ? 'checked' : '') . '>';
 			echo $place_holder.
-						'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" '.($num == 1 ? 'checked' : '') . '>';
+						'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 1 ? 'checked' : '') . '>';
 			echo $place_holder . '&nbsp;
 						<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
 			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; &mdash; (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";

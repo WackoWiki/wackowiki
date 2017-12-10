@@ -62,8 +62,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 	// sort by dates
 	$sort_dates = create_function(
 		'$a, $b',	// func params
-		'if ($a["date"] == $b["date"]) '.
-			'return 0;'.
+		'if ($a["date"] == $b["date"]) ' .
+			'return 0;' .
 		'return ($a["date"] < $b["date"] ? 1 : -1);');
 	usort($pages, $sort_dates);
 
@@ -219,8 +219,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 				if ($page['page_id']) // !$global
 				{
-					$path2		= '_file:/'.($this->slim_url($page['tag'])) . '/';
-					$on_page	= $this->_t('To') . ' '.
+					$path2		= '_file:/' . ($this->slim_url($page['tag'])) . '/';
+					$on_page	= $this->_t('To') . ' ' .
 						$this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_lang) .
 						' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0];
 				}
@@ -246,25 +246,25 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
 				}
 
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewCommentAdded') . '" alt="[deleted]" class="btn-delete"> '.'' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang) . ' ' . $this->_t('To') . ' ' . $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
+				echo '<img src="' . $icon . '" title="' . $this->_t('NewCommentAdded') . '" alt="[deleted]" class="btn-delete"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang) . ' ' . $this->_t('To') . ' ' . $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
 			}
 			// new comment
 			else if ($page['comment_on_id'])
 			{
 				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewCommentAdded') . '" alt="[comment]" class="btn-comment"> '.'' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang) . ' ' . $this->_t('To') . ' ' . $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
+				echo '<img src="' . $icon . '" title="' . $this->_t('NewCommentAdded') . '" alt="[comment]" class="btn-comment"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang) . ' ' . $this->_t('To') . ' ' . $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
 			}
 			// new page
 			else if ($page['created'] == $page['date'])
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewPageCreated') . '" alt="[new]" class="btn-add_page"> '.'' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
+				echo '<img src="' . $icon . '" title="' . $this->_t('NewPageCreated') . '" alt="[new]" class="btn-add_page"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
 			}
 			// new revision
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewRevisionAdded') . '" alt="[changed]" class="btn-edit"> '.'' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
+				echo '<img src="' . $icon . '" title="' . $this->_t('NewRevisionAdded') . '" alt="[changed]" class="btn-edit"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
 			}
 
 			echo "</li>\n";

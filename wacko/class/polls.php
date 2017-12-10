@@ -28,9 +28,9 @@ class Polls
 	function get_last_poll_id()
 	{
 		$poll_id = $this->engine->load_single(
-			'SELECT poll_id '.
-			'FROM ' . $this->engine->db->table_prefix . 'poll '.
-			'ORDER BY poll_id DESC '.
+			'SELECT poll_id ' .
+			'FROM ' . $this->engine->db->table_prefix . 'poll ' .
+			'ORDER BY poll_id DESC ' .
 			'LIMIT 1');
 
 		if ($poll_id['poll_id'] == false)
@@ -218,7 +218,7 @@ class Polls
 			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll-results' . $poll_id.'_form']) .
 					'<input type="hidden" name="poll" value="' . $poll_id . '">' .
 					'<table id="poll-vote' . $poll_id . '_form" class="formation">' . "\n" .
-					'<tr><th colspan="2" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
+					'<tr><th colspan="2" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#' . ((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
 
 			foreach ($vars as $var)
 			{
@@ -233,7 +233,7 @@ class Polls
 			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
 						'<br>' . $this->engine->_t('PollsAdded') . ': ' . (!$header['user_id'] ? $user_name : '<a href="' . $this->engine->href('', $this->engine->db->users_page, ['profile' => $user_name]) . '">' . $user_name . '</a>') . '</small></td></tr>' .
 					'<tr><td colspan="2" class="nowrap">' .
-					'<input type="submit" name="vote" id="vote-submit" value="' . $this->engine->_t('PollsSubmit') . '"> '.
+					'<input type="submit" name="vote" id="vote-submit" value="' . $this->engine->_t('PollsSubmit') . '"> ' .
 					'<input type="submit" name="results" id="results-submit" value="' . $this->engine->_t('PollsResults') . '">' .
 					'</tr></td>' .
 					'</table>' .
@@ -269,7 +269,7 @@ class Polls
 		{
 			$poll	= $this->engine->form_open() .
 					'<table id="poll-results' . $poll_id . '_form" class="formation">' .
-					'<tr><th colspan="3" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#'.((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
+					'<tr><th colspan="3" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#' . ((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
 
 			foreach ($vars as $var)
 			{

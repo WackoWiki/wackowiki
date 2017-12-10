@@ -180,7 +180,7 @@ $special_keyword2 = [
 			function ($matches) use ($options)
 			{
 				return
-				'<span style="color: ' . $options['color']['comment'] . ';">/*'.
+				'<span style="color: ' . $options['color']['comment'] . ';">/*' .
 				strip_tags($matches[1]) .
 				'*/</span>';
 			},

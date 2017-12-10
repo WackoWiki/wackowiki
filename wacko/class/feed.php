@@ -150,8 +150,8 @@ class Feed
 			// in tag names in reverse order
 			$sort_dates = create_function(
 				'$a, $b',	// func params
-				'if ($a["date"] == $b["date"]) '.
-					'return 0;'.
+				'if ($a["date"] == $b["date"]) ' .
+					'return 0;' .
 				'return ($a["date"] < $b["date"] ? 1 : -1);');
 			// sort pages array
 			usort($feed_pages, $sort_dates);
@@ -343,7 +343,7 @@ class Feed
 			"ORDER BY p.modified DESC, BINARY p.tag");
 
 		$xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
-		$xml .= '<?xml-stylesheet type="text/xsl" href="' . $this->engine->db->base_url . Ut::join_path(THEME_DIR, "_common/sitemap.xsl") . '"?>' . "\n";
+		$xml .= '<?xml-stylesheet type="text/xsl" href="' . $this->engine->db->base_url . Ut::join_path(THEME_DIR, '_common/sitemap.xsl') . '"?>' . "\n";
 		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
 		if ($pages)

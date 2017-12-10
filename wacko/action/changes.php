@@ -106,7 +106,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 				? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')) . ' '
 				: $time
 			) .
-			'</span> &mdash; '.
+			'</span> &mdash; ' .
 			($title == 1
 				? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
 				: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)

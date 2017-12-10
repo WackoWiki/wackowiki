@@ -77,7 +77,7 @@ function admin_config_system(&$engine, &$module)
 
 						foreach ($debug_modes as $mode => $debug_mode)
 						{
-							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->debug === $mode ? 'selected' : '') . '>' . $mode . ': '. $debug_mode . '</option>' . "\n";
+							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->debug === $mode ? 'selected' : '') . '>' . $mode . ': ' . $debug_mode . '</option>' . "\n";
 						}
 					?>
 					</select>

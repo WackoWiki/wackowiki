@@ -157,7 +157,7 @@ function admin_db_convert(&$engine, &$module)
 		if ($InnoDB_support['SUPPORT'] == 'YES' || 'DEFAULT')
 		{
 			$required_engine = true;
-			echo output_image($engine, true) . $engine->_t('DbEngineOk') . ' '. $InnoDB_support['SUPPORT']. "<br>\n";
+			echo output_image($engine, true) . $engine->_t('DbEngineOk') . ' ' . $InnoDB_support['SUPPORT'] . "<br>\n";
 		}
 		else
 		{

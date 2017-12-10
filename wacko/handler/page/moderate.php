@@ -664,7 +664,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<select name="section">' .
 							'<option selected></option>' .
 							$list .
-						'</select> '.
+						'</select> ' .
 						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
 						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
 					'</td></tr>' .
@@ -720,8 +720,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<select name="base">' .
 							'<option selected></option>' .
 							$list.
-						'</select> '.
-						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
+						'</select> ' .
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
 						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
 					'</td></tr>' .
 				'</table><br>' . "\n";
@@ -733,19 +733,19 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		echo '<table>' .
 				'<tr class="lined">' .
 					'<td colspan="5">' .
-						'<input type="submit" name="delete" id="submit_delete" value="' . $this->_t('ModerateDelete') . '"> '.
-						'<input type="submit" name="move" id="submit_move" value="' . $this->_t('ModerateMove') . '"> '.
-						'<input type="submit" name="rename" id="submit_rename" value="' . $this->_t('ModerateRename') . '"> '.
-						'<input type="submit" name="merge" id="submit_merge" value="' . $this->_t('ModerateMerge') . '"> '.
-						'<input type="submit" name="lock" id="submit_lock" value="' . $this->_t('ModerateLock') . '"> '.
-						'<input type="submit" name="unlock" id="submit_unlock" value="' . $this->_t('ModerateUnlock') . '"> '.
+						'<input type="submit" name="delete" id="submit_delete" value="' . $this->_t('ModerateDelete') . '"> ' .
+						'<input type="submit" name="move" id="submit_move" value="' . $this->_t('ModerateMove') . '"> ' .
+						'<input type="submit" name="rename" id="submit_rename" value="' . $this->_t('ModerateRename') . '"> ' .
+						'<input type="submit" name="merge" id="submit_merge" value="' . $this->_t('ModerateMerge') . '"> ' .
+						'<input type="submit" name="lock" id="submit_lock" value="' . $this->_t('ModerateLock') . '"> ' .
+						'<input type="submit" name="unlock" id="submit_unlock" value="' . $this->_t('ModerateUnlock') . '"> ' .
 						(isset($this->db->moders_docs)
 							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
 							: '') .
 						'<br>' . "\n" .
-						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '"> '.
+						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '"> ' .
 						($set
-							? '<input type="submit" name="reset" id="submit" value="' . $this->_t('ModerateReset') . '"> '.
+							? '<input type="submit" name="reset" id="submit" value="' . $this->_t('ModerateReset') . '"> ' .
 							  '&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
 							: ''
 						) .
@@ -1203,7 +1203,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<tr><th>' . $this->_t('ModerateDeleteConfirm') . '</th></tr>' .
 					'<tr><td>' .
 						'<em>' . $accept_text . '</em><br>' .
-						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
 						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
 					'</td></tr>' .
 				'</table><br>' . "\n";
@@ -1259,7 +1259,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: '' ) .
 							'<em>' . $accept_text . '</em><br>' .
 							'<input type="text" name="cluster" size="50" maxlength="250"> ' .
-							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
+							'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
 							'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
 						'</td></tr>' .
 					'</table><br>' . "\n";
@@ -1275,8 +1275,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					($error == true
 						? '<span class="cite"><strong>' . $error . '</strong></span><br>'
 						: '' ) .
-						'<input type="text" name="new_tag" size="50" maxlength="250" value="' . $this->page['title'] . '"> '.
-						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
+						'<input type="text" name="new_tag" size="50" maxlength="250" value="' . $this->page['title'] . '"> ' .
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
 						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
 					'</td></tr>' .
 				'</table><br>' . "\n";
@@ -1291,7 +1291,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
 							: '') .
-						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
 						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
 					'</td></tr>' .
 				'</table><br>' . "\n";
@@ -1310,14 +1310,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						($error == true
 							? '<span class="cite"><strong>' . $error . '</strong></span><br>'
 							: '') .
-						'<input type="text" name="new_tag" size="50" maxlength="250" value=""> '.
-						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> '.
+						'<input type="text" name="new_tag" size="50" maxlength="250" value=""> ' .
+						'<input type="submit" name="accept" id="submit" value="' . $this->_t('ModerateAccept') . '"> ' .
 						'<a href="' . $this->href('moderate') . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('ModerateDecline') . '"></a>' .
 						'<br>' .
 						'<small>' .
-						'<input type="radio" name="scheme" value="after" id="after" '.(isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked ' : '' ) . '> ' .
+						'<input type="radio" name="scheme" value="after" id="after" ' . (isset($_POST['scheme']) && $_POST['scheme'] != 'selected' ? 'checked ' : '' ) . '> ' .
 						'<label for="after">' . $this->_t('ModerateSplitAllAfter') . '</label><br>' .
-						'<input type="radio" name="scheme" value="selected" id="selected" '.(isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked ' : '' ) . '> ' .
+						'<input type="radio" name="scheme" value="selected" id="selected" ' . (isset($_POST['scheme']) && $_POST['scheme'] == 'selected' ? 'checked ' : '' ) . '> ' .
 						'<label for="selected">' . Ut::perc_replace($this->_t('ModerateSplitSelected'), count($set)) . '</label>' .
 						'</small>' .
 					'</td></tr>' .
@@ -1330,8 +1330,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		echo '<table>' .
 				'<tr class="lined">' .
 					'<td colspan="2">' .
-						'<input type="submit" name="topic_delete" id="delete-submit" value="' . $this->_t('ModerateDeleteTopic') . '"> '.
-						'<input type="submit" name="topic_move" id="move-submit" value="' . $this->_t('ModerateMove') . '"> '.
+						'<input type="submit" name="topic_delete" id="delete-submit" value="' . $this->_t('ModerateDeleteTopic') . '"> ' .
+						'<input type="submit" name="topic_move" id="move-submit" value="' . $this->_t('ModerateMove') . '"> ' .
 						($forum_cluster === true
 							? '<input type="submit" name="topic_rename" id="submit" value="' . $this->_t('ModerateRename') . '"> '
 							: ''
@@ -1371,16 +1371,16 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			echo '<tr class="lined">' .
 					'<td colspan="2">' .
-						'<input type="submit" name="posts_delete" id="submit_delete" value="' . $this->_t('ModerateDeletePosts') . '"> '.
-						'<input type="submit" name="posts_split" id="submit_split" value="' . $this->_t('ModerateSplit') . '"> '.
+						'<input type="submit" name="posts_delete" id="submit_delete" value="' . $this->_t('ModerateDeletePosts') . '"> ' .
+						'<input type="submit" name="posts_split" id="submit_split" value="' . $this->_t('ModerateSplit') . '"> ' .
 						(isset($this->db->moders_docs)
 							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
 							: '') .
 						'<br>' . "\n" .
-						'<input type="submit" name="set" id="submit_set" value="' . $this->_t('ModerateSet') . '"> '.
+						'<input type="submit" name="set" id="submit_set" value="' . $this->_t('ModerateSet') . '"> ' .
 						($set
-							? '<input type="submit" name="reset" id="submit_reset" value="' . $this->_t('ModerateReset') . '"> '.
-							  '&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set) . '</small>'
+							? '<input type="submit" name="reset" id="submit_reset" value="' . $this->_t('ModerateReset') . '"> ' .
+							  '&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
 							: ''
 						) .
 					'</td>' .

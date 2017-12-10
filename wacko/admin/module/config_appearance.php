@@ -322,7 +322,7 @@ function admin_config_appearance(&$engine, &$module)
 
 						foreach ($themes as $theme)
 						{
-							echo '<option value="' . $theme . '" '.($engine->db->theme == $theme ? 'selected' : '') . '>' . $theme . '</option>';
+							echo '<option value="' . $theme . '" ' . ($engine->db->theme == $theme ? 'selected' : '') . '>' . $theme . '</option>';
 						}
 					?>
 					</select>
@@ -353,7 +353,7 @@ function admin_config_appearance(&$engine, &$module)
 
 					foreach ($themes as $n => $theme)
 					{
-						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" '. (in_array($theme, $theme_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
+						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" ' . (in_array($theme, $theme_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
 								'<label for="theme_' . $n . '">' . $themes[$n] . '</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break

@@ -81,7 +81,7 @@ else
 
 				// show edit link
 				($this->has_access('write', $page_id)
-					? '&nbsp;&nbsp;::&nbsp;'.
+					? '&nbsp;&nbsp;::&nbsp;' .
 					  '<a href="' . $this->href('edit', $inc_page['tag']) . '">' . $this->_t('EditIcon') . '</a>'
 					: '') .
 

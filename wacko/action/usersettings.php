@@ -408,7 +408,7 @@ else if (($user = $this->get_user()))
 
 					foreach($diff_mode_list as $mode)
 					{
-						echo '<option value="' . $mode . '" '.($default_mode == $mode ? 'selected' : '') . '>' . $diff_modes[$mode] . '</option>';
+						echo '<option value="' . $mode . '" ' . ($default_mode == $mode ? 'selected' : '') . '>' . $diff_modes[$mode] . '</option>';
 					}
 					?>
 					</select>

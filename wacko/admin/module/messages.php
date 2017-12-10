@@ -71,7 +71,7 @@ function admin_messages(&$engine, &$module)
 
 						foreach ($typs as $type)
 						{
-							echo '<option value="' . $type . '" '.($engine->db->system_message_type == $type ? 'selected' : '') . '>' . $type . '</option>';
+							echo '<option value="' . $type . '" ' . ($engine->db->system_message_type == $type ? 'selected' : '') . '>' . $type . '</option>';
 						}
 
 						// add option: Position (header, footer, ..)

@@ -118,9 +118,9 @@ else
 			// okey, we've got data, it's time to sort it by working years
 			$sort = create_function(
 				'$a, $b',	// func params
-				'if ($a["total"] == $b["total"]) '.
-					'return ( $a["name"] < $b["name"] ? -1 : 1 ); '.
-				'else '.
+				'if ($a["total"] == $b["total"]) ' .
+					'return ( $a["name"] < $b["name"] ? -1 : 1 ); ' .
+				'else ' .
 					'return ( $a["total"] < $b["total"] ? 1 : -1 );');
 
 			usort($authors, $sort);

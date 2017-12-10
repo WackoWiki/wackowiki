@@ -139,7 +139,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><th>' . $engine->_t('PollsConfirmDelete') . '</th></tr>';
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>' .
-					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '"> '.
+					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '"> ' .
 					'<a href="' . rawurldecode($engine->href('', $mode_file, $mode_http)) . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '"></a>' .
 				'</td></tr>';
 			echo '</table>';
@@ -182,8 +182,8 @@ function admin_content_polls(&$engine, &$module)
 			}
 
 			echo '<tr><td colspan="4">' .
-					'<input type="submit" name="stop" id="stop-submit" value="' . $engine->_t('PollsStop') . '"> '.
-					'<input type="submit" name="reset" id="reset-submit" value="' . $engine->_t('PollsReset') . '"> '.
+					'<input type="submit" name="stop" id="stop-submit" value="' . $engine->_t('PollsStop') . '"> ' .
+					'<input type="submit" name="reset" id="reset-submit" value="' . $engine->_t('PollsReset') . '"> ' .
 					'<input type="submit" name="remove" id="remove-submit" value="' . $engine->_t('PollsRemove') . '">' .
 				'</td></tr>';
 		}
@@ -231,8 +231,8 @@ function admin_content_polls(&$engine, &$module)
 			}
 
 			echo '<tr><td colspan="3">' .
-					'<input type="submit" name="activate" id="activate-submit" value="' . $engine->_t('PollsActivate') . '"> '.
-					'<input type="submit" name="edit" id="edit-submit" value="' . $engine->_t('PollsEdit') . '"> '.
+					'<input type="submit" name="activate" id="activate-submit" value="' . $engine->_t('PollsActivate') . '"> ' .
+					'<input type="submit" name="edit" id="edit-submit" value="' . $engine->_t('PollsEdit') . '"> ' .
 					'<input type="submit" name="remove" id="remove-submit" value="' . $engine->_t('PollsRemove') . '">' .
 				'</td></tr>';
 		}
