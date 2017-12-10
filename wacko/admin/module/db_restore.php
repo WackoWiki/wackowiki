@@ -45,8 +45,8 @@ function admin_db_restore(&$engine, &$module)
 	$tables			= & $module['vars'][0];
 	$directories	= & $module['vars'][1];
 ?>
-				<h1><?php echo $module['title']; ?></h1>
-				<br>
+	<h1><?php echo $module['title']; ?></h1>
+	<br>
 <?php
 	$logs			= [];
 	$ikeys			= '';
@@ -102,7 +102,7 @@ function admin_db_restore(&$engine, &$module)
 							<table>
 								<tr>' .
 									'<td class="label a_middle" style="width:10px;">' .
-									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '>
+									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . (in_array($log['pack'], $set) ? ' checked' : '') . '>
 									#</td>' .
 									#'<td style="width:10px;">' .
 									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
@@ -214,9 +214,9 @@ function admin_db_restore(&$engine, &$module)
 
 				echo	'<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
 						'<input type="hidden" name="start" value="true">' . "\n" .
-						'<label for="">' . $engine->_t('ConfirmDbRestore') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-						'<input type="submit" id="submit" name="restore" value="yes"> '.
-						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
+						'<label for="">' . $engine->_t('ConfirmDbRestore') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> ' .
+						'<input type="submit" id="submit" name="restore" value="' . $engine->_t('RestoreYes') . '"> ' .
+						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
 						'<br><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
 
 				echo '<br><br>
@@ -234,7 +234,7 @@ function admin_db_restore(&$engine, &$module)
 
 			set_time_limit(3600);
 
-			# $dir	= UPLOAD_BACKUP_DIR . '/'; // XXX: see above
+			// $dir see above
 			$pack	= $_POST['backup_id'];
 
 			// set parameters
@@ -245,36 +245,39 @@ function admin_db_restore(&$engine, &$module)
 			$log = file(Ut::join_path($dir, $pack, BACKUP_FILE_LOG), FILE_IGNORE_NEW_LINES);
 
 			// start process logging
-			$results = '<strong>' . date('H:i:s') . ' - Initiated Backups' . "\n" .
+			$results = '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreStarted') . "\n" .
 				'================================================' . "\n" .
-				'Using parameters:' . "\n" .
-				"\t" . 'Ignore dublicated keys: ' . ($ikeys === true ? 'Yes' : 'No' ) . "\n" .
-				"\t" . 'Ignore dublicated files: ' . ($ifiles === true ? 'Yes' : 'No' ) . "\n\n" .
-				'Saved cluster: ' . ($log[2] == true ? $log[2] : 'No' ) . "\n" .
-				"\t" . ( $log[2] == true ? 'Data Protection - DROP TABLE omitted' : 'Assume DROP TABLE' ) . "\n" .
+				$engine->_t('RestoreParameters') . ':' . "\n" .
+				"\t" . $engine->_t('IgnoreDublicatedKeys') . ': ' . ($ikeys === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n" .
+				"\t" . $engine->_t('IgnoreDublicatedFiles') . ': ' . ($ifiles === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n\n" .
+				$engine->_t('SavedCluster') . ': ' . ($log[2] == true ? $log[2] : $engine->_t('RestoreNo')) . "\n" .
+				"\t" . Ut::perc_replace($engine->_t(
+					($log[2] == true
+						? 'DataProtection'
+						: 'AssumeDropTable'), SYSTEM_LANG), 'DROP TABLE') . "\n" .
 				'</strong>' . "\n\n";
 
 			// request structure restore
-			$results .= '<strong>' . date('H:i:s') . ' - Restoring the structure of the tables' . "\n" .
+			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreTableStructure') . "\n" .
 				'================================================</strong>' . "\n";
 
 			if ($log[3] == true)
 			{
-				$results .= '<strong>Perform SQL-instructions:</strong>' . "\n\n";
+				$results .= '<strong>' . $engine->_t('RunSqlQueries') . ':</strong>' . "\n\n";
 				$results .= file_get_contents($dir . $pack . '/' . BACKUP_FILE_STRUCTURE) . "\n\n";
 
 				// run
 				$total = put_table($engine, $pack);
 
-				$results .= '<strong>' . date('H:i:s') . ' - Completed. Processed instructions: ' . $total . '</strong>' . "\n\n\n";
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('CompletedSqlQueries') . ': ' . $total . '</strong>' . "\n\n\n";
 			}
 			else
 			{
-				$results .= '<strong>The structure of the tables are not saved - skip</strong>' . "\n\n\n";
+				$results .= '<strong>' . $engine->_t('NoTableStructure') . '</strong>' . "\n\n\n";
 			}
 
 			// request data restore
-			$results .= '<strong>' . date('H:i:s') . ' - Restore the contents of tables' . "\n" .
+			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreRecords') . "\n" .
 				'================================================</strong>' . "\n";
 
 			if ($log[4] == true)
@@ -286,8 +289,8 @@ function admin_db_restore(&$engine, &$module)
 				else if	($log[2] == true && $ikeys === true)	$mode = 'INSERT IGNORE';
 				else if	($log[2] == true && $ikeys == false)	$mode = 'REPLACE';
 
-				$results .= '<strong>Just download and process dump tables' . "\n" .
-					'(Instruction ' . $mode . '):</strong>' . "\n\n";
+				$results .= '<strong>' . $engine->_t('ProcessTablesDump') . "\n" .
+					'(' . $engine->_t('Instruction') . ' ' . $mode . '):</strong>' . "\n\n";
 
 				// run
 				$overall = 0;
@@ -308,18 +311,18 @@ function admin_db_restore(&$engine, &$module)
 					$total		= put_data($engine, $pack, $table, $mode);
 					$overall	+= $total;
 
-					$results .= "\t\t" . 'records:   ' . $total."\n\n";
+					$results .= "\t\t" . $engine->_t('RestoredRecords') . ':   ' . $total . "\n\n";
 				}
 
-				$results .= '<strong>' . date('H:i:s') . ' - Completed. Total entries: ' . $overall . '</strong>' . "\n\n\n";
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RecordsRestoreDone') . ': ' . $overall . '</strong>' . "\n\n\n";
 			}
 			else
 			{
-				$results .= '<strong>Data not saved - skip</strong>' . "\n\n\n";
+				$results .= '<strong>' . $engine->_t('SkippedRecords') . '</strong>' . "\n\n\n";
 			}
 
 			// request files restore
-			$results .= '<strong>' . date('H:i:s') . ' - Restoring files' . "\n" .
+			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoringFiles') . "\n" .
 				'================================================</strong>' . "\n";
 
 			if (isset($log[5]) && $log[5] == true)
@@ -330,8 +333,11 @@ function admin_db_restore(&$engine, &$module)
 				if ($ifiles === true)	$keep = 1;
 				else					$keep = 0;
 
-				$results .= '<strong>Decompress and store the contents of directories' . "\n" .
-					'(homonymic files ' . ($ifiles === true ? 'skip' : 'substitute' ) . '):</strong>' . "\n\n";
+				$results .= '<strong>' . $engine->_t('DecompressAndStore') . "\n" .
+					'(' . $engine->_t('HomonymicFiles') . ': ' .
+					($ifiles === true
+						? $engine->_t('RestoreSkip')
+						: $engine->_t('RestoreReplace') ) . '):</strong>' . "\n\n";
 
 				// run
 				$overall		= [];
@@ -340,7 +346,7 @@ function admin_db_restore(&$engine, &$module)
 
 				foreach ($list as $dir)
 				{
-					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $dir."\n" .
+					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $dir . "\n" .
 						"\t" . '==========================</strong>' . "\n";
 
 					$total		= put_files($engine, $pack, $dir, $keep);
@@ -349,26 +355,26 @@ function admin_db_restore(&$engine, &$module)
 					$overall[1]	+= $total[1] ?? null;
 
 					$results .=
-						"\t\t" . 'File:    '.(int)array_sum($total) . "\n" .
-						"\t\t" . 'recorded:  ' . (int) $total[0] . "\n" .
-						"\t\t" . 'skipped: ' . (int) $total[1] . "\n\n";
+						"\t\t" . $engine->_t('RestoreFile') . ': ' .	(int) array_sum($total) . "\n" .
+						"\t\t" . $engine->_t('Restored') . ': ' .		(int) $total[0] . "\n" .
+						"\t\t" . $engine->_t('Skipped') . ': ' .		(int) $total[1] . "\n\n";
 
 				}
 
-				$results .= '<strong>' . date('H:i:s') . ' - Completed. Total files:' . "\n" .
-					"\t" . 'all:     '.(int)array_sum($overall) . "\n" .
-					"\t" . 'recorded:  ' . (int) $overall[0] . "\n" .
-					"\t" . 'skipped: ' . (int) $overall[1] . "\n" .
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('FileRestoreDone') . ':' . "\n" .
+					"\t" . $engine->_t('FilesAll') . ': ' .	(int) array_sum($overall) . "\n" .
+					"\t" . $engine->_t('Restored') . ': ' .	(int) $overall[0] . "\n" .
+					"\t" . $engine->_t('Skipped') . ': ' .	(int) $overall[1] . "\n" .
 					'</strong>' . "\n\n";
 			}
 			else
 			{
-				$results .= '<strong>Files are not stored - skip</strong>' . "\n\n\n";
+				$results .= '<strong>' . $engine->_t('SkipFiles') . '</strong>' . "\n\n\n";
 			}
 
 			// finishing
 			$results .= '<strong>================================================' . "\n" .
-				date('H:i:s') . ' - RESTORATION COMPLETED</strong>';
+				date('H:i:s') . ' - ' . $engine->_t('RestoreDone') . '</strong>';
 
 			$message = $engine->_t('BackupRestored') .
 					' <a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($pack, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>.';
@@ -378,7 +384,7 @@ function admin_db_restore(&$engine, &$module)
 				<pre><?php echo $results; ?></pre>
 			</div><br>
 <?php
-			$engine->log(1, 'Restored backup of a database ' . $pack);
+			$engine->log(1, Ut::perc_replace($engine->_t('LogDbRestored', SYSTEM_LANG), $pack));
 		}
 	}
 	else
@@ -393,9 +399,9 @@ function admin_db_restore(&$engine, &$module)
 
 			echo '<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
 				'<div class="warning">' .
-					'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> '.
-					'<input type="submit" id="submit" name="delete" value="yes"> '.
-					'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
+					'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> ' .
+					'<input type="submit" id="submit" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
+					'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
 					'<br><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
 				'</div>
 				<br>';
@@ -424,18 +430,18 @@ function admin_db_restore(&$engine, &$module)
 		if (!is_executable(UPLOAD_BACKUP_DIR . '/'))
 		{
 			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR . '/')), -4) . "<br>\n";
-			echo output_image($engine, false) . '<strong class="red">The '.UPLOAD_BACKUP_DIR . '/' . ' directory is not executable.</strong>' .  "<br>\n";
+			echo output_image($engine, false) . '<strong class="red">The ' . UPLOAD_BACKUP_DIR . '/' . ' directory is not executable.</strong>' .  "<br>\n";
 		}
 		else
 		{
 			// SHOW backups
 		?>
-				<br>
+			<br>
 <?php
-				echo $engine->form_open('restore');
+			echo $engine->form_open('restore');
 
-				$control_buttons =	'<input type="submit" name="restore" id="restore-submit" value="restore">' .
-									'<input type="submit" name="remove" id="remove-submit" value="remove">';
+			$control_buttons =	'<input type="submit" name="restore" id="restore-submit" value="' . $engine->_t('BackupRestore') . '">' .
+								'<input type="submit" name="remove" id="remove-submit" value="' . $engine->_t('BackupRemove') . '">';
 
 			#$dir = UPLOAD_BACKUP_DIR . '/';
 
@@ -464,8 +470,8 @@ function admin_db_restore(&$engine, &$module)
 	?>
 					<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 						<tr>
-							<th>Creation Date</th>
-							<th>The contents of the package</th>
+							<th><?php echo $engine->_t('BackupCreationDate');?></th>
+							<th><?php echo $engine->_t('BackupPackageContents');?></th>
 						</tr>
 	<?php
 					// sort 'creation date' descending with custom numeric comparisons function
@@ -579,7 +585,7 @@ function admin_db_restore(&$engine, &$module)
 								}
 							}
 
-							echo	 "</td>\n" .
+							echo	"</td>\n" .
 								"</tr>\n</table>\n";
 
 						// close row

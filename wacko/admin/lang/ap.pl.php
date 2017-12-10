@@ -905,11 +905,11 @@ $ap_translation = [
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
-									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, '.
-									'same when backing up only table structure without saving the data. '.
+									'<strong>Attention</strong>: To avoid loss of information from the database when specifying the root cluster the tables from this backup will not be restructured, ' .
+									'same when backing up only table structure without saving the data. ' .
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
-									'Backup package files stored in the  sub-directory %1.<br>' .
+									'The Backup package files were stored in the following sub-directory %1.<br>' .
 									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
 									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
@@ -922,16 +922,16 @@ $ap_translation = [
 	'BackupDelete'				=> 'Are you sure you want to remove backup',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',
-	'RestoreOptionsInfo'		=> '* Before restoring the <strong>cluster backup</strong>, '.
-									'the target tables are not destroyed (to prevent loss of information from the clusters that have not been backed up). '.
-									'Thus, during the recovery process duplicate records will occur. '.
-									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), '.
-									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), '.
+	'RestoreOptionsInfo'		=> '* Before restoring the <strong>cluster backup</strong>, ' .
+									'the target tables are not deleted (to prevent loss of information from the clusters that have not been backed up). ' .
+									'Thus, during the recovery process duplicate records will occur. ' .
+									'In normal mode, all of them will be replaced by the records form backup (using SQL-instruction <code>REPLACE</code>), ' .
+									'but if this checkbox is checked, all duplicates are skipped (the current values of records will be kept), ' .
 									'and only the records with new keys are added to the table (SQL-instruction <code>INSERT IGNORE</code>).<br>' .
 									'<strong>Notice</strong>: When restore complete backup of the site, this option has no value.<br>' .
 									'<br>' .
-									'** If the backup contains the user files (global and perpage, cache files, etc.), '.
-									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. '.
+									'** If the backup contains the user files (global and perpage, cache files, etc.), ' .
+									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. ' .
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
 	'IgnoreSameFiles'			=> 'Ignore the same files (not overwrite)',
@@ -940,6 +940,44 @@ $ap_translation = [
 	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
 	'LogRemovedBackup'			=> 'Removed database backup ##%1##',
+
+	'RestoreStarted'			=> 'Initiated Restoration',
+	'RestoreParameters'			=> 'Using parameters',
+	'IgnoreDublicatedKeys'		=> 'Ignore dublicated keys',
+	'IgnoreDublicatedFiles'		=> 'Ignore dublicated files',
+	'SavedCluster'				=> 'Saved cluster',
+	'DataProtection'			=> 'Data Protection - %1 omitted',
+	'AssumeDropTable'			=> 'Assume %1',
+	'RestoreTableStructure'		=> 'Restoring the structure of the table',
+	'RunSqlQueries'				=> 'Perform SQL-instructions',
+	'CompletedSqlQueries'		=> 'Completed. Processed instructions',
+	'NoTableStructure'			=> 'The structure of the tables was not saved - skip',
+	'RestoreRecords'			=> 'Restore the contents of tables',
+	'ProcessTablesDump'			=> 'Just download and process tables dump',
+	'Instruction'				=> 'Instruction',
+	'RestoredRecords'			=> 'records',
+	'RecordsRestoreDone'		=> 'Completed. Total entries',
+	'SkippedRecords'			=> 'Data not saved - skip',
+	'RestoringFiles'			=> 'Restoring files',
+	'DecompressAndStore'		=> 'Decompress and store the contents of directories',
+	'HomonymicFiles'			=> 'homonymic files',
+	'RestoreSkip'				=> 'skip',
+	'RestoreReplace'			=> 'replace',
+	'RestoreFile'				=> 'File',
+	'Restored'					=> 'restored',
+	'Skipped'					=> 'skipped',
+	'FileRestoreDone'			=> 'Completed. Total files',
+	'FilesAll'					=> 'all',
+	'SkipFiles'					=> 'Files are not stored - skip',
+	'RestoreDone'				=> 'RESTORATION COMPLETED',
+
+	'BackupCreationDate'		=> 'Creation Date',
+	'BackupPackageContents'		=> 'The contents of the package',
+	'BackupRestore'				=> 'restore',
+	'BackupRemove'				=> 'remove',
+	'RestoreYes'				=> 'yes',
+	'RestoreNo'					=> 'no',
+	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
 	'UsersAdded'				=> 'User added',
@@ -993,6 +1031,20 @@ $ap_translation = [
 	'MembersRemoved'			=> 'The member was removed from the group.',
 	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 
+	// Statistics module
+	'DbStatSection'				=> 'Database Statistics',
+	'DbTable'					=> 'Table',
+	'DbRecords'					=> 'Records',
+	'DbSize'					=> 'Size',
+	'DbIndex'					=> 'Index',
+	'DbOverhead'				=> 'Overhead',
+	'DbTotal'					=> 'Total',
+
+	'FileStatSection'			=> 'File system Statistics',
+	'FileFolder'				=> 'Folder',
+	'FileFiles'					=> 'Files',
+	'FileSize'					=> 'Size',
+	'FileTotal'					=> 'Total',
 ];
 
 ?>

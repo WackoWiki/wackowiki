@@ -571,9 +571,9 @@ $wacko_translation = [
 	'EmailConfirmed'			=> 'Adresse de messagerie confirmée.',
 	'EmailNotConfirmed'			=> 'Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais cette adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.',
 	'EmailNotVerified'			=> 'Adresse courriel non vérifiée!',
-	'EmailNotVerifiedDesc'		=> 'Vous ne serez pas informé des modifications ou commentaires sur les pages que vous surveillez, des'.
-									'messages des autres utilisateurs et <strong>ne pourrez pas récupérer un mot des passe oublié</strong>, jusqu&rsquo;à'.
-									'confirmation de votre adresse de messagerie en suivant le lien contenu dans le courriel qui vous a été envoyé. '.
+	'EmailNotVerifiedDesc'		=> 'Vous ne serez pas informé des modifications ou commentaires sur les pages que vous surveillez, des' .
+									'messages des autres utilisateurs et <strong>ne pourrez pas récupérer un mot des passe oublié</strong>, jusqu&rsquo;à' .
+									'confirmation de votre adresse de messagerie en suivant le lien contenu dans le courriel qui vous a été envoyé. ' .
 									'Si, les jours suivant votre enregistrement vous n&rsquo;avez pas reçu ce courriel, demandez-le en cliquant ',
 
 	'ForgotPasswordHint'		=> 'Indiquez votre NomWiki et votre adresse de messagerie,' . "\n" . 'un courriel avec des instructions vous sera envoyé.',
@@ -654,19 +654,19 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[commencer un nouveau sujet]',
 	'UsersIntercomDisabled'		=> 'Désolé, vous ne souhaitez pas ou ne pouvez pas recevoir de messages privés.',
 	'UsersIntercomSend'			=> 'soumettre',
-	'UsersIntercomDesc'			=> 'Note: Envoi de messages personnel à l&rsquo;adresse courriel du destinataire '.
-								   'sans dévoiler votre adresse. Le destinataire pourra vous répondre en utilisant '.
+	'UsersIntercomDesc'			=> 'Note: Envoi de messages personnel à l&rsquo;adresse courriel du destinataire ' .
+								   'sans dévoiler votre adresse. Le destinataire pourra vous répondre en utilisant ' .
 								   'un formulaire similaire sur votre page de profil. ',
 	'UsersPMOversized'			=> 'The taille de votre message excède le maximum autorisé de %1 caractères. '. 'Merci de raccourcir votre le message et de le soumettre à nouveau.',
 	'UsersPMFlooded'			=> 'L&rsquo;intervalle séparant l&rsquo;envoi de messages personnels doit être d&rsquo;au moins %1 secondes.',
 	'UsersPMSent'				=> 'le message personnel a été transmis à l&rsquo;utilisateur.',
 	'UsersPMPlnSent'			=> 'Le message personnel a été transmis à l&rsquo;utilisateur en texte brut.',
 	'UsersPMBody'				=> 'Ce message vous a été envoyé par l&rsquo;utilisateur %1.',
-	'UsersPMReply'				=> 'Pour répondre à ce courriel, '.
-								   'cliquez sur le lien suivant (n&rsquo;utilisez pas  le bouton "répondre" de votre logiciel '.
+	'UsersPMReply'				=> 'Pour répondre à ce courriel, ' .
+								   'cliquez sur le lien suivant (n&rsquo;utilisez pas  le bouton "répondre" de votre logiciel ' .
 								   'de courriel):',
-	'PMAbuseInfo'				=> 'Note: Si ce message est du spam, a un contenu inacceptable ou viole autrement '.
-								   'les règles du site, merci de l&rsquo;envoyer (en utilisant le bouton Transmettre /'.
+	'PMAbuseInfo'				=> 'Note: Si ce message est du spam, a un contenu inacceptable ou viole autrement ' .
+								   'les règles du site, merci de l&rsquo;envoyer (en utilisant le bouton Transmettre /' .
 								   'de votre logiciel de courriel) à l&rsquo;adresse %1.',
 	'UsersPMNotLoggedIn'		=> 'Vous n&rsquo;êtes pas enregistré dans le système et ne pouvez envoyer de messages privés aux utilisateurs.',
 
@@ -1255,7 +1255,7 @@ $wacko_translation = [
 	'LogUpdatedFileMeta'		=> 'Mis à jour les métadonnées du fichier pour ##%2## à partir de la page [[/%1]]',
 	'LogUpdatedFileCategories'	=> 'Updated file categories for ##%2## from page [[/%1]]',
 	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.' .
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

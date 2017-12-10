@@ -571,9 +571,9 @@ $wacko_translation = [
 	'EmailConfirmed'			=> 'E-posti aadressi õigsus on kinnitust leidnud.',
 	'EmailNotConfirmed'			=> 'E-posti aadress ei leidnud kinnitust. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email not verified!',
-	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, '.
-									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, '.
-									'until your email-address was confirmed, by following the link in the email sent to you. '.
+	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
+									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
+									'until your email-address was confirmed, by following the link in the email sent to you. ' .
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
 	'ForgotPasswordHint'		=> 'Sisetage oma kasutajanimi ja e-posti aadress,' . "\n" . ' siis saadetakse sulle e-postiga instruktsioonid.',
@@ -654,18 +654,18 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive private messages.',
 	'UsersIntercomSend'			=> 'Sisesta',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address '.
-									'recipient without disclosing your address. The recipient will be able to respond to you, using '.
+	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
+									'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
 									'similar form on your profile page. ',
 	'UsersPMOversized'			=> 'The length of your message exceeds the maximum permissible to %1 characters. Please shorten your message and submit again.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'This message has been sent to you by the user %1.',
-	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply '.
+	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply ' .
 									'in mailer):',
-	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise '.
-									'violates the rules of the site, please send it (using the button Forward /'.
+	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
+									'violates the rules of the site, please send it (using the button Forward /' .
 									'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send private messages to users.',
 
@@ -1254,7 +1254,7 @@ $wacko_translation = [
 	'LogUpdatedFileMeta'		=> 'Updated file metadata for ##%2## from page [[/%1]]',
 	'LogUpdatedFileCategories'	=> 'Updated file categories for ##%2## from page [[/%1]]',
 	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION.
-									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.'.
+									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.' .
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 
 ];

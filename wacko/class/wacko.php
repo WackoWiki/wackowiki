@@ -3840,7 +3840,7 @@ class Wacko
 							if (!$text)
 							{
 								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
-								$text	= '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" '.
+								$text	= '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" ' .
 										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
 								$tpl	= 'localimage';
 								$icon	= '';
