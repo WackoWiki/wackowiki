@@ -175,7 +175,7 @@ class WackoFormatter
 		$this->object = &$object;
 
 		$this->LONGREGEXP =
-			'/('.
+			'/(' .
 			// escaped text
 			"<!--escaped-->.*?<!--escaped-->|" .
 			// escaped html <#...#>
@@ -767,12 +767,12 @@ class WackoFormatter
 		// lan path
 		else if (preg_match('/^\\\\\\\\([' . $wacko->language['ALPHANUM_P'] . '\\\!\.\-\_]+)$/', $thing, $matches))
 		{
-			return '<a href="file://///'.str_replace('\\', '/', $matches[1]) . '">\\\\' . $matches[1] . '</a>';
+			return '<a href="file://///' . str_replace('\\', '/', $matches[1]) . '">\\\\' . $matches[1] . '</a>';
 		}
 		// citated
 		else if (preg_match('/^\n[ \t]*(>+)(.*)$/s', $thing, $matches))
 		{
-			return '<div class="email'.strlen($matches[1]) . ' email-'.(strlen($matches[1]) % 2 ? 'odd' : 'even') . '">' . htmlspecialchars($matches[1], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET).preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]) . '</div>';
+			return '<div class="email' . strlen($matches[1]) . ' email-' . (strlen($matches[1]) % 2 ? 'odd' : 'even') . '">' . htmlspecialchars($matches[1], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET).preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]) . '</div>';
 		}
 		// blockquote
 		else if (preg_match('/^<\[(.*)\]>$/s', $thing, $matches))
@@ -1111,7 +1111,7 @@ class WackoFormatter
 			}
 			else
 			{
-				$opener		= '<ol type="' . $new_indent_type . '"><li'.
+				$opener		= '<ol type="' . $new_indent_type . '"><li' .
 							  ($start ? ' value="' . $start . '"' : '') . '>';
 				$closer		= '</li></ol>';
 				$new_type	= 1;
@@ -1153,7 +1153,7 @@ class WackoFormatter
 			$old_level	= $new_indent_level;
 			$old_type	= $new_type;
 
-			if ($li && !preg_match('/'.str_replace(')', '\)', $opener) . '$/', $result))
+			if ($li && !preg_match('/' . str_replace(')', '\)', $opener) . '$/', $result))
 			{
 				$result .= '</li><li' . ($start ? ' value="' . $start . '"' : '') . '>';
 			}

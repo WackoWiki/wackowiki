@@ -157,7 +157,7 @@ function admin_config_basic(&$engine, &$module)
 
 						foreach ($langs as $lang)
 						{
-							echo '<option value="' . $lang . '" '.($engine->db->language == $lang ? 'selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ')</option>';
+							echo '<option value="' . $lang . '" ' . ($engine->db->language == $lang ? 'selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ')</option>';
 						}
 					?>
 					</select>
@@ -214,7 +214,7 @@ function admin_config_basic(&$engine, &$module)
 					foreach ($langs as $lang)
 					{
 						echo	"\t\t<td>\n\t\t\t" .
-								'<input type="checkbox" name="allowed_languages[' . $n . ']" id="lang_' . $lang . '" value="' . $lang . '" '. (in_array($lang, $lang_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
+								'<input type="checkbox" name="allowed_languages[' . $n . ']" id="lang_' . $lang . '" value="' . $lang . '" ' . (in_array($lang, $lang_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
 								'<label for="lang_' . $lang . '">' . $languages[$lang] . ' (' . $lang . ')</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
@@ -477,7 +477,7 @@ function admin_config_basic(&$engine, &$module)
 					foreach ($diff_modes as $mode => $diff_mode)
 					{
 						echo	"\t\t<td>\n\t\t\t" .
-								'<input type="checkbox" name="diff_modes[' . $n . ']" id="mode_' . $mode . '" value="' . $mode . '" '. (in_array($mode, $diff_mode_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
+								'<input type="checkbox" name="diff_modes[' . $n . ']" id="mode_' . $mode . '" value="' . $mode . '" ' . (in_array($mode, $diff_mode_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
 								'<label for="mode_' . $mode . '">' . $diff_modes[$mode] . ' (' . $mode . ')</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break

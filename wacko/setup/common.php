@@ -14,7 +14,7 @@ function my_location()
 			|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443'))
 	)
 	{
-		$config['base_url'] =	str_replace('http://', 'https://'.($config['tls_proxy'] ? $config['tls_proxy'] . '/' : ''), $config['base_url']);
+		$config['base_url'] =	str_replace('http://', 'https://' . ($config['tls_proxy'] ? $config['tls_proxy'] . '/' : ''), $config['base_url']);
 	}
 
 	list($url, ) = explode('?', $config['base_url']);
@@ -53,7 +53,7 @@ function output_image($ok)
 {
 	global $lang;
 
-	return '<img src="' . my_location() . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross '.($ok ? 'tick' : 'cross') . '">';
+	return '<img src="' . my_location() . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
 }
 
 // TODO: refactor -> same function as in wacko class
@@ -151,7 +151,7 @@ function array_to_str ($arr, $name = '')
 		}
 		else
 		{
-			$entries .= "\t'" . $k . '\' => \''.str_replace("\n", "\\n", $v) . "',\n";
+			$entries .= "\t'" . $k . '\' => \'' . str_replace("\n", "\\n", $v) . "',\n";
 		}
 	}
 

@@ -78,8 +78,7 @@ else
 	{
 		echo '<div class="rating">';
 		echo '' . $this->_t('RatingTotal') . ': <strong>' . $results['ratio'] . '</strong>' .
-					 ' '.
-					 '' . $this->_t('RatingVoters') . ': <strong>' . $results['voters'] . '</strong>';
+				' ' . $this->_t('RatingVoters') . ': <strong>' . $results['voters'] . '</strong>';
 		echo '</div>';
 	}
 	else

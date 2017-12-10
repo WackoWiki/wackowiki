@@ -23,10 +23,11 @@ $module[$_mode] = [
 
 function admin_user_approve(&$engine, &$module)
 {
-	$where		= '';
-	$order		= '';
-	$error		= '';
-	$prefix		= $engine->db->table_prefix;
+	$where			= '';
+	$order			= '';
+	$signup_time	= '';
+	$error			= '';
+	$prefix			= $engine->db->table_prefix;
 
 	#Ut::debug_print_r($_POST);
 	#Ut::debug_print_r($_REQUEST);
@@ -295,19 +296,19 @@ function admin_user_approve(&$engine, &$module)
 		$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
 							'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 							$engine->_t('UsersSearch') . ': </td><td>' .
-							'<input type="search" name="user" maxchars="40" size="30" value="' . htmlspecialchars(($_GET['user'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"> '.
-							'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> '.
+							'<input type="search" name="user" maxchars="40" size="30" value="' . htmlspecialchars(($_GET['user'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"> ' .
+							'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> ' .
 							$engine->form_close();
 		$filter_status =	'<p class="right">' .
 							(isset($_GET['account_status']) && $_GET['account_status'] == 1 || !isset($_GET['account_status'])
 								? '<span class="active">' . $engine->_t('Pending') . '</span>'
-								: '<a href="' . $engine->href() . '&amp;account_status=1">' . $engine->_t('Pending') . '</a>' ) . ' (' . $status_count['1'] . ')'.
+								: '<a href="' . $engine->href() . '&amp;account_status=1">' . $engine->_t('Pending') . '</a>' ) . ' (' . $status_count['1'] . ')' .
 							(isset($_GET['account_status']) && $_GET['account_status'] == 0
 								? ' | <span class="active">' . $engine->_t('Approved') . '</span>'
-								: ' | <a href="' . $engine->href() . '&amp;account_status=0">' . $engine->_t('Approved') . '</a>') . ' (' . $status_count['0'] . ')'.
+								: ' | <a href="' . $engine->href() . '&amp;account_status=0">' . $engine->_t('Approved') . '</a>') . ' (' . $status_count['0'] . ')' .
 							(isset($_GET['account_status']) && $_GET['account_status'] == 2
 								? ' | <span class="active">' . $engine->_t('Denied') . '</span>'
-								: ' | <a href="' . $engine->href() . '&amp;account_status=2">' . $engine->_t('Denied') . '</a>') . ' (' . $status_count['2'] . ')'.
+								: ' | <a href="' . $engine->href() . '&amp;account_status=2">' . $engine->_t('Denied') . '</a>') . ' (' . $status_count['2'] . ')' .
 							'</p>';
 
 		echo '<span class="right">' . $search . '</span><br>';
@@ -320,14 +321,14 @@ function admin_user_approve(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		$control_buttons =	'<br>' .
-							'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> '.
-							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> '.
+							'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> ' .
+							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> ' .
 							'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 							'<br>' . "\n" .
-								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> '.
+								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> ' .
 								($set
-										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> '.
-										'&nbsp;&nbsp;&nbsp;<small>ids: '.implode(', ', $set) . '</small>'
+										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
+										'&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
 										: ''
 								);
 

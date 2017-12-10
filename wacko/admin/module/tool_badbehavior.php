@@ -38,18 +38,18 @@ function bb2_httpbl_lookup(&$engine, $ip)
 {
 	// NB: Many of these are defunct
 	$engines = [
-			1 => 'AltaVista',
-			2 => 'Teoma/Ask Crawler',
-			3 => 'Baidu Spide',
-			4 => 'Excite',
-			5 => 'Googlebot',
-			6 => 'Looksmart',
-			7 => 'Lycos',
-			8 => 'msnbot',
-			9 => 'Yahoo! Slurp',
-			10 => 'Twiceler',
-			11 => 'Infoseek',
-			12 => 'Minor Search Engine',
+		1 => 'AltaVista',
+		2 => 'Teoma/Ask Crawler',
+		3 => 'Baidu Spide',
+		4 => 'Excite',
+		5 => 'Googlebot',
+		6 => 'Looksmart',
+		7 => 'Lycos',
+		8 => 'msnbot',
+		9 => 'Yahoo! Slurp',
+		10 => 'Twiceler',
+		11 => 'Infoseek',
+		12 => 'Minor Search Engine',
 	];
 
 	$settings		= bb2_read_settings();
@@ -369,12 +369,12 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 
 			if (@strpos($headers, $result['user_agent']) !== FALSE)
 			{
-				$headers = substr_replace($headers, "<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;user_agent='.rawurlencode($result['user_agent_hash']) . "\">" . $result['user_agent'] . "</a>", strpos($headers, $result['user_agent']), strlen($result['user_agent']));
+				$headers = substr_replace($headers, "<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;user_agent=' . rawurlencode($result['user_agent_hash']) . "\">" . $result['user_agent'] . "</a>", strpos($headers, $result['user_agent']), strlen($result['user_agent']));
 			}
 
 			if (@strpos($headers, $result['request_method']) !== FALSE)
 			{
-				$headers = substr_replace($headers, "<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;request_method='.rawurlencode($result['request_method']) . "\">" . $result['request_method'] . "</a>", strpos($headers, $result['request_method']), strlen($result['request_method']));
+				$headers = substr_replace($headers, "<a href=\"" . '?mode=badbehavior&amp;setting=bb2_manage&amp;request_method=' . rawurlencode($result['request_method']) . "\">" . $result['request_method'] . "</a>", strpos($headers, $result['request_method']), strlen($result['request_method']));
 			}
 
 			echo "<td>" . $headers . "</td>\n";

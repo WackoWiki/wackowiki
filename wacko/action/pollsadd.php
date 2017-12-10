@@ -284,7 +284,7 @@ else if ($stop_mod !== true)
 		echo '</td>';
 	echo '</tr>';
 	echo '<tr><td colspan="2">' .
-		'<input type="checkbox" name="plural" id="plural" value="1"' . ($plural == 1 ? ' checked ' : ' ') . '> '.
+		'<input type="checkbox" name="plural" id="plural" value="1"' . ($plural == 1 ? ' checked ' : ' ') . '> ' .
 		'<label for="plural">' . $this->_t('PollsPlural') . '</label>' .
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
@@ -293,7 +293,7 @@ else if ($stop_mod !== true)
 		( $this->get_user() ? false : true );
 	// end captcha output
 		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"></a>' : '') .
-			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked ' : ' ') . '> '.
+			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked ' : ' ') . '> ' .
 			'<label for="startmod">' . $this->_t('PollsStartMod') . '</label>' : '') .
 			'</td></tr>';
 	echo '</table>';

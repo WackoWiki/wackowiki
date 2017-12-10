@@ -939,7 +939,7 @@ class Wacko
 					$this_pos++;
 				}
 
-				$encoded_letter = '&#'. $decimal_code . ';';
+				$encoded_letter = '&#' . $decimal_code . ';';
 			}
 			else
 			{
@@ -1663,7 +1663,7 @@ class Wacko
 		$revisions	= [];
 		$pagination	= [];
 
-		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, '.
+		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, ' .
 					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$selector =
@@ -3622,7 +3622,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" '.($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize . '>';
+				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" ' . ($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize . '>';
 			}
 			else
 			{
@@ -3815,7 +3815,7 @@ class Wacko
 							if (!$text)
 							{
 								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
-								$text	= '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" '.
+								$text	= '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" ' .
 										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
 								$tpl	= 'localfile';
 								$icon	= '';
@@ -3836,7 +3836,7 @@ class Wacko
 						{
 							// no direct file access for files per page
 							// the file handler checks the access rights
-							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" '.($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '">';
+							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" ' . ($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '">';
 							if (!$text)
 							{
 								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
@@ -3875,7 +3875,7 @@ class Wacko
 
 				if ($_global == true)
 				{
-					$title	= '404: /'.Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$title	= '404: /' . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
 				else
 				{
@@ -4737,7 +4737,7 @@ class Wacko
 			$this->set_message($this->_t('FormInvalid'), 'error');
 
 			// TODO diag or not?
-			// $this->log(1, '**!!' . 'Potential CSRF attack in progress detected.' . '!!**'.' [[/' . $this->page['tag'] . ']] ' . $form_name); # 'Invalid form token'
+			// $this->log(1, '**!!' . 'Potential CSRF attack in progress detected.' . '!!**' . ' [[/' . $this->page['tag'] . ']] ' . $form_name); # 'Invalid form token'
 
 			return false;
 		}
@@ -8390,7 +8390,7 @@ class Wacko
 
 		foreach ($langs as $_lang)
 		{
-			$out .= '<option value="' . $_lang . '" '.($lang == $_lang ? 'selected ' : '') . '>' . $languages[$_lang] . ' (' . $_lang . ")</option>\n";
+			$out .= '<option value="' . $_lang . '" ' . ($lang == $_lang ? 'selected ' : '') . '>' . $languages[$_lang] . ' (' . $_lang . ")</option>\n";
 		}
 
 		$out .= "</select>\n";

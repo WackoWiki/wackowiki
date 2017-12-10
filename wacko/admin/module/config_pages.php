@@ -170,7 +170,7 @@ function admin_config_pages(&$engine, &$module)
 							$license = substr($license, 0, 45 ) . '...';
 						}
 
-						echo '<option value="' . $offset . '" '.
+						echo '<option value="' . $offset . '" ' .
 							($engine->db->license == $offset
 								? 'selected '
 								: '') .

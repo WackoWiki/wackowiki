@@ -13,129 +13,130 @@ if (!defined('IN_WACKO'))
 // we really want this up to date
 if (!isset($tables, $directories))
 {
+	$prefix	= $engine->db->table_prefix;
 	$tables	= [
-			$engine->db->table_prefix . 'acl' => [
-				'name'	=> $engine->db->table_prefix . 'acl',
+			$prefix . 'acl' => [
+				'name'	=> $prefix . 'acl',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'auth_token' => [
-				'name'	=> $engine->db->table_prefix . 'auth_token',
+			$prefix . 'auth_token' => [
+				'name'	=> $prefix . 'auth_token',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'cache' => [
-				'name'	=> $engine->db->table_prefix . 'cache',
+			$prefix . 'cache' => [
+				'name'	=> $prefix . 'cache',
 				'where'	=> false,
 				'order'	=> 'cache_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'config' => [
-				'name'	=> $engine->db->table_prefix . 'config',
+			$prefix . 'config' => [
+				'name'	=> $prefix . 'config',
 				'where'	=> false,
 				'order'	=> 'config_id',
 				'limit'	=> 500
 			],
-			$engine->db->table_prefix . 'category' => [
-				'name'	=> $engine->db->table_prefix . 'category',
+			$prefix . 'category' => [
+				'name'	=> $prefix . 'category',
 				'where'	=> false,
 				'order'	=> 'category_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'category_assignment' => [
-				'name'	=> $engine->db->table_prefix . 'category_assignment',
+			$prefix . 'category_assignment' => [
+				'name'	=> $prefix . 'category_assignment',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'file' => [
-				'name'	=> $engine->db->table_prefix . 'file',
+			$prefix . 'file' => [
+				'name'	=> $prefix . 'file',
 				'where'	=> false,
 				'order'	=> 'file_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'file_link' => [
-				'name'	=> $engine->db->table_prefix . 'file_link',
+			$prefix . 'file_link' => [
+				'name'	=> $prefix . 'file_link',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'log' => [
-				'name'	=> $engine->db->table_prefix . 'log',
+			$prefix . 'log' => [
+				'name'	=> $prefix . 'log',
 				'where'	=> false,
 				'order'	=> 'log_time',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'menu' => [
-				'name'	=> $engine->db->table_prefix . 'menu',
+			$prefix . 'menu' => [
+				'name'	=> $prefix . 'menu',
 				'where'	=> false,
 				'order'	=> 'menu_id',
 				'limit' => 1000
 			],
-			$engine->db->table_prefix . 'page' => [
-				'name'	=> $engine->db->table_prefix . 'page',
+			$prefix . 'page' => [
+				'name'	=> $prefix . 'page',
 				'where'	=> true,
 				'order'	=> 'tag',
 				'limit'	=> 500
 			],
-			$engine->db->table_prefix . 'page_link' => [
-				'name'	=> $engine->db->table_prefix . 'page_link',
+			$prefix . 'page_link' => [
+				'name'	=> $prefix . 'page_link',
 				'where'	=> 'from_page_id',
 				'order'	=> 'from_page_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'poll' => [
-				'name'	=> $engine->db->table_prefix . 'poll',
+			$prefix . 'poll' => [
+				'name'	=> $prefix . 'poll',
 				'where'	=> false,
 				'order'	=> 'poll_id, v_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'rating' => [
-				'name'	=> $engine->db->table_prefix . 'rating',
+			$prefix . 'rating' => [
+				'name'	=> $prefix . 'rating',
 				'where'	=> false,
 				'order'	=> 'page_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'referrer' => [
-				'name'	=> $engine->db->table_prefix . 'referrer',
+			$prefix . 'referrer' => [
+				'name'	=> $prefix . 'referrer',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'revision' => [
-				'name'	=> $engine->db->table_prefix . 'revision',
+			$prefix . 'revision' => [
+				'name'	=> $prefix . 'revision',
 				'where'	=> 'revision_id',
 				'order'	=> 'revision_id',
 				'limit'	=> 500
 			],
-			$engine->db->table_prefix . 'user' => [
-				'name'	=> $engine->db->table_prefix . 'user',
+			$prefix . 'user' => [
+				'name'	=> $prefix . 'user',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'user_setting' => [
-				'name'	=> $engine->db->table_prefix . 'user_setting',
+			$prefix . 'user_setting' => [
+				'name'	=> $prefix . 'user_setting',
 				'where'	=> false,
 				'order'	=> 'user_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'usergroup' => [
-				'name'	=> $engine->db->table_prefix . 'usergroup',
+			$prefix . 'usergroup' => [
+				'name'	=> $prefix . 'usergroup',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'usergroup_member' => [
-				'name'	=> $engine->db->table_prefix . 'usergroup_member',
+			$prefix . 'usergroup_member' => [
+				'name'	=> $prefix . 'usergroup_member',
 				'where'	=> false,
 				'order'	=> 'group_id',
 				'limit'	=> 1000
 			],
-			$engine->db->table_prefix . 'watch' => [
-				'name'	=> $engine->db->table_prefix . 'watch',
+			$prefix . 'watch' => [
+				'name'	=> $prefix . 'watch',
 				'where'	=> 'page_id',
 				'order'	=> 'page_id',
 				'limit'	=> 1000
@@ -153,7 +154,7 @@ if (!isset($tables, $directories))
 }
 else
 {
-	die('Error in admin module "database.php": unable to register '.
+	die('Error in admin module "database.php": unable to register ' .
 		'common variables: already defined.');
 }
 
@@ -164,7 +165,7 @@ function ensure_dir($dir)
 		mkdir($dir);
 	}
 
-	chmod($dir, 0755);
+	@chmod($dir, 0755);
 }
 
 // set backup directory
@@ -683,7 +684,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack, $dir);
 
 	// restore files subdir or full path recursively if needed
-	$offset	= 0;
+	$offset		= 0;
 
 	while (($offlen = strpos($dir, '/', $offset)) !== false)
 	{

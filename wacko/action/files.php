@@ -188,7 +188,7 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
+		$title = $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
 		echo '<div class="layout-box"><p><span>' . $results . ' of ' . '' . $count['n'] . ' ' . $title . ": </span></p>\n";
 	}
 
@@ -315,10 +315,10 @@ if ($can_view)
 				// display file meta data
 				echo '<td class="desc-">' . $desc . '</td>' .
 					'<td class="size-">
-						<span class="size2-">' . $file_size . ', ' . $hits . '</span>&nbsp;'.
+						<span class="size2-">' . $file_size . ', ' . $hits . '</span>&nbsp;' .
 					'</td>' . "\n" .
 					'<td class="dt-">' .
-						'<span class="dt2-">' . $dt . '</span>&nbsp;'.
+						'<span class="dt2-">' . $dt . '</span>&nbsp;' .
 					'</td>' . "\n";
 			}
 

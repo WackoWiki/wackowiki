@@ -50,8 +50,8 @@ class GPG
 		$this->wrapper	= trim($this->engine->db->gpg_wrapper, '/');
 		$this->sid		= $engine->sess->id();
 		$this->sessdir	= $this->tempdir . '/' . $this->sid;
-		$this->stfile	= $this->sessdir . '/'.GPG_STATUS_NAME;
-		$this->srfile	= $this->sessdir . '/'.GPG_STDERR_NAME;
+		$this->stfile	= $this->sessdir . '/' . GPG_STATUS_NAME;
+		$this->srfile	= $this->sessdir . '/' . GPG_STDERR_NAME;
 
 		// creating user session directory
 		if (false === mkdir($this->sessdir))

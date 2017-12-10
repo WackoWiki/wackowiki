@@ -7,8 +7,8 @@ if (!defined('IN_WACKO'))
 
 $parser = new PostWacko($this, $options);
 
-$text = preg_replace_callback('/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--link:end-->|'.
-							  '<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->|'.
+$text = preg_replace_callback('/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--link:end-->|' .
+							  '<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->|' .
 							  '<!--action:begin-->[^\n]+?<!--action:end-->)/sm',
 
 [&$parser, 'postcallback'], $text);

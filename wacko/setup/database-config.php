@@ -98,14 +98,14 @@ foreach ($drivers as $k => $driver)
 		if ($config['is_update'] == false)
 		{
 			echo '		<li>
-							<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" '.($detected == 0 ? 'checked' : '') . '>
+							<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" ' . ($detected == 0 ? 'checked' : '') . '>
 							<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
 						</li>\n";
 		}
 		else
 		{
 			echo '		<li>
-							<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" '.($config['database_driver'] == $driver[1] ? 'checked' : '') . '>
+							<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" ' . ($config['database_driver'] == $driver[1] ? 'checked' : '') . '>
 							<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
 						</li>\n";
 		}
@@ -147,7 +147,7 @@ if ($config['is_update'] == false && $config['language'] == 'ru')
 
 foreach ($charsets as $charset)
 {
-	echo '		<option value="' . $charset[1] . '" '.($config['database_charset'] == $charset[1] ? 'selected' : '') . '>' . $charset[2] . "</option>\n";
+	echo '		<option value="' . $charset[1] . '" ' . ($config['database_charset'] == $charset[1] ? 'selected' : '') . '>' . $charset[2] . "</option>\n";
 }
 
 echo "	</select>\n";
@@ -177,7 +177,7 @@ if ($config['is_update'] == false)
 	foreach ($engines as $k => $engine)
 	{
 		echo '		<li>
-						<input type="radio" id="db_engine_' . $engine[0] . '" name="config[database_engine]" value="' . $engine[1] . '" '.($k == 0 ? 'checked' : '') . '>
+						<input type="radio" id="db_engine_' . $engine[0] . '" name="config[database_engine]" value="' . $engine[1] . '" ' . ($k == 0 ? 'checked' : '') . '>
 						<label for="db_engine_' . $engine[0] . '">' . $engine[2] . "</label>
 					</li>\n";
 	}

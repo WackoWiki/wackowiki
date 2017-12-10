@@ -86,7 +86,7 @@ if ($referrers)
 	foreach ($referrer_sites as $site => $site_count)
 	{
 		echo '<li>';
-		echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;'.
+		echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;' .
 			(($site !== $unknown)
 				? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">' .
 					htmlspecialchars($site, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a>'

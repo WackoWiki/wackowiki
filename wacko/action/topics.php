@@ -222,7 +222,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 						'<td class="t_center nowrap">' .
 							'<small title="' . ($admin ? $topic['ip'] : '') . '">' .
 								'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br>' .
-								'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;'.
+								'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;' .
 							'</small>' .
 						'</td>' .
 						'<td class="t_center"><small>' . $topic['comments'] . '</small></td>' .
@@ -244,7 +244,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				echo	'</td>' .
 					'</tr>' .
 					'<tr>' .
-						'<td colspan="6" class="description">' . $topic['description'] . ''.
+						'<td colspan="6" class="description">' . $topic['description'] . '' .
 						$_category . '</td>' .
 					'</tr></tbody>' . "\n";
 			}

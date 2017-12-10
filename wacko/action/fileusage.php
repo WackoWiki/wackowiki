@@ -26,7 +26,7 @@ if ($file_id)
 
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p><span>' . $this->_t('FileUsage') . ': '.'' . "</span></p>\n";
+			echo '<div class="layout-box"><p><span>' . $this->_t('FileUsage') . ': ' . "</span></p>\n";
 		}
 
 		echo "<ol>\n";

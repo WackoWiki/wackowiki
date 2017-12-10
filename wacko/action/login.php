@@ -50,7 +50,7 @@ if (($user = $this->get_user()))
 	}
 
 	// show IP address restriction for user session
-	$message .= $this->_t('BindSessionIp') . ' '.
+	$message .= $this->_t('BindSessionIp') . ' ' .
 		($user['validate_ip']? $this->_t('BindSessionIpOn') . ' ' : '') .
 		'<code>' .
 		($user['validate_ip']? $user['ip'] : 'Off') .
