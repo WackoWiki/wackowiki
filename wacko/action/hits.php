@@ -20,8 +20,8 @@ if (isset($page))
 	$rs = $this->db->load_single(
 		"SELECT hits " .
 		"FROM " . $this->db->table_prefix . "page " .
-		"WHERE tag = " . $this->db->q($tag) . " LIMIT 1"
-	);
+		"WHERE tag = " . $this->db->q($tag) . " " .
+		"LIMIT 1");
 
 	if (isset($rs['hits']))
 	{

@@ -7,8 +7,8 @@ if (!defined('IN_WACKO'))
 
 $load_commented = function ($tag, $limit, $deleted = 0)
 {
-	$comments	= '';
-	$pagination	= '';
+	$comments	= [];
+	$pagination	= [];
 
 	// going around the limitations of GROUP BY when used along with ORDER BY
 	// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
@@ -86,6 +86,8 @@ if ($this->user_allowed_comments())
 			{
 				$page_ids[]	= $page['page_id'];
 				$page_ids[]	= $page['comment_on_id'];
+				$this->cache_page($page, true);
+				$this->page_id_cache[$page['tag']] = $page['page_id'];
 			}
 
 			$this->preload_acl($page_ids);
@@ -107,9 +109,6 @@ if ($this->user_allowed_comments())
 			$curday = '';
 			foreach ($pages as $page)
 			{
-				$this->cache_page($page, true);
-				$this->page_id_cache[$page['tag']] = $page['page_id'];
-
 				if ($this->db->hide_locked)
 				{
 					$access = $this->has_access('read', $page['comment_on_id']);

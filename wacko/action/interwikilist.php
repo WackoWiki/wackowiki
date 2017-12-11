@@ -6,6 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $file = file_get_contents(Ut::join_path(CONFIG_DIR, 'interwiki.conf'));
-echo $this->format('%%' . $file.'%%');
+echo $this->format('%%' . $file . '%%');
 
 ?>

@@ -88,7 +88,7 @@ if ($this->is_admin())
 				$body		= str_replace(']]&gt;', ']]>', Ut::untag($item, 'description'));
 				$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
-				$body_r = $this->save_page($tag, $title, $body, '');
+				$body_r		= $this->save_page($tag, $title, $body, '');
 				$this->set_page_owner($page_id, $owner_id);
 				// now we render it internally in the context of imported
 				// page so we can write the updated link table
