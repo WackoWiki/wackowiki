@@ -87,7 +87,7 @@ function admin_maint_transliterate(&$engine, &$module)
 					$engine->db->sql_query(
 						"UPDATE " . $engine->db->table_prefix . "page SET " .
 							"supertag = " . $engine->db->q($engine->translit($page['tag'])) . " " .
-						"WHERE page_id = " . (int) $page['page_id']) . "";
+						"WHERE page_id = " . (int) $page['page_id']);
 				}
 
 				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i=' . (++$i))));
@@ -121,7 +121,7 @@ function admin_maint_transliterate(&$engine, &$module)
 					$engine->db->sql_query(
 						"UPDATE " . $engine->db->table_prefix . "revision SET " .
 							"supertag = " . $engine->db->q($engine->translit($page['tag'])) . " " .
-						"WHERE revision_id = " . (int) $page['revision_id']) . "";
+						"WHERE revision_id = " . (int) $page['revision_id']);
 				}
 
 				$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'] . '&amp;start=1&amp;step=' . $_REQUEST['step'] . '&amp;i=' . (++$i))));

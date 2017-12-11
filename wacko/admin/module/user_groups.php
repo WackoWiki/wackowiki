@@ -75,7 +75,7 @@ function admin_user_groups(&$engine, &$module)
 				$engine->db->sql_query(
 					"INSERT INTO " . $prefix . "usergroup_member SET " .
 						"group_id	= " . (int) $_POST['group_id'] . ", " .
-						"user_id	= " . (int) $_POST['new_member_id'] . "");
+						"user_id	= " . (int) $_POST['new_member_id']);
 
 					$engine->config->invalidate_config_cache();
 					$engine->show_message($engine->_t('MembersAdded'), 'success');
@@ -89,7 +89,7 @@ function admin_user_groups(&$engine, &$module)
 				$engine->db->sql_query(
 					"DELETE FROM " . $prefix . "usergroup_member " .
 					"WHERE group_id = " . (int) $_POST['group_id'] . " " .
-						"AND user_id = " . (int) $_POST['member_id'] . "");
+						"AND user_id = " . (int) $_POST['member_id']);
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('MembersRemoved'), 'success');
@@ -207,7 +207,7 @@ function admin_user_groups(&$engine, &$module)
 						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
 						"group_name		= " . $engine->db->q($_POST['new_group_name']) . ", " .
 						"open			= " . (int) $_POST['open'] . ", " .
-						"active			= " . (int) $_POST['active'] . "");
+						"active			= " . (int) $_POST['active']);
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('GroupsAdded'), 'success');
@@ -256,10 +256,10 @@ function admin_user_groups(&$engine, &$module)
 
 			$engine->db->sql_query(
 				"DELETE FROM " . $prefix . "usergroup " .
-				"WHERE group_id = " . (int) $_POST['group_id'] . "");
+				"WHERE group_id = " . (int) $_POST['group_id']);
 			$engine->db->sql_query(
 				"DELETE FROM " . $prefix . "usergroup_member " .
-				"WHERE group_id = " . (int) $_POST['group_id'] . "");
+				"WHERE group_id = " . (int) $_POST['group_id']);
 
 			$engine->config->invalidate_config_cache();
 			$engine->show_message($engine->_t('GroupsDeleted'), 'success');

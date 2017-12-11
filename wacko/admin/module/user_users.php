@@ -280,19 +280,19 @@ function admin_user_users(&$engine, &$module)
 
 					$engine->db->sql_query(
 						"DELETE FROM " . $prefix . "user " .
-						"WHERE user_id = " . (int) $user_id . "");
+						"WHERE user_id = " . (int) $user_id);
 					$engine->db->sql_query(
 						"DELETE FROM " . $prefix . "user_setting " .
-						"WHERE user_id = " . (int) $user_id . "");
+						"WHERE user_id = " . (int) $user_id);
 					$engine->db->sql_query(
 						"DELETE FROM " . $prefix . "usergroup_member " .
-						"WHERE user_id = " . (int) $user_id . "");
+						"WHERE user_id = " . (int) $user_id);
 					$engine->db->sql_query(
 						"DELETE FROM " . $prefix . "menu " .
-						"WHERE user_id = " . (int) $user_id . "");
+						"WHERE user_id = " . (int) $user_id);
 					$engine->db->sql_query(
 						"DELETE FROM " . $prefix . "watch " .
-						"WHERE user_id = " . (int) $user_id . "");
+						"WHERE user_id = " . (int) $user_id);
 
 					// remove user space
 					$user_space = $engine->db->users_page . '/' . $user['user_name'];
@@ -312,7 +312,7 @@ function admin_user_users(&$engine, &$module)
 						"DELETE FROM " . $prefix . "page " .
 						"WHERE tag = " . $engine->db->q($user_space) . " " .
 							"OR tag LIKE " . $engine->db->q($user_space . '/%') . " " .
-							#"AND owner_id = " . (int) $_POST['user_id'] . "" .
+							#"AND owner_id = " . (int) $_POST['user_id'] . " " .
 						"");
 
 					$engine->config->invalidate_config_cache();

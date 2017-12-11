@@ -2957,7 +2957,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "watch w " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (w.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (w.user_id = s.user_id) " .
-			"WHERE w.page_id = " . (int) $object_id . "");
+			"WHERE w.page_id = " . (int) $object_id);
 
 		foreach ($watchers as $watcher)
 		{
@@ -2975,7 +2975,7 @@ class Wacko
 								"UPDATE " . $this->db->table_prefix . "watch SET " .
 									"comment_id	= " . (int) $page_id . " " .
 								"WHERE page_id = " . (int) $comment_on_id . " " .
-									"AND user_id = " . (int) $watcher['user_id'] . "");
+									"AND user_id = " . (int) $watcher['user_id']);
 						}
 						else
 						{
@@ -4552,7 +4552,7 @@ class Wacko
 		$this->db->sql_query(
 			"DELETE " .
 			"FROM " . $this->db->table_prefix . "page_link " .
-			"WHERE from_page_id = " . (int) $from_page_id . "");
+			"WHERE from_page_id = " . (int) $from_page_id);
 
 		// page link
 		if ($link_table = @$this->linktable[LINK_PAGE])
@@ -4581,7 +4581,7 @@ class Wacko
 		$this->db->sql_query(
 			"DELETE " .
 			"FROM " . $this->db->table_prefix . "file_link " .
-			"WHERE page_id = " . (int) $from_page_id . "");
+			"WHERE page_id = " . (int) $from_page_id);
 
 		// file link
 		if ($file_table = @$this->linktable[LINK_FILE])
@@ -5282,7 +5282,7 @@ class Wacko
 				"selector			= " . $this->db->q($selector) . ", " .
 				"token				= " . $this->db->q(hash('sha256', $authenticator)) . ", " .
 				"user_id			= " . (int) $user['user_id'] . ", " .
-				"token_expires		= " . $this->db->q($token_expires) . ""
+				"token_expires		= " . $this->db->q($token_expires)
 			);
 	}
 
@@ -5314,7 +5314,7 @@ class Wacko
 				$this->db->sql_query(
 					"DELETE
 					FROM " . $this->db->table_prefix . "auth_token
-					WHERE auth_token_id = " . (int) $token['auth_token_id'] . "");
+					WHERE auth_token_id = " . (int) $token['auth_token_id']);
 
 				if (($user = $this->load_user(0, $token['user_id'])))
 				{
@@ -5336,7 +5336,7 @@ class Wacko
 		$this->db->sql_query(
 			"DELETE
 			FROM " . $this->db->table_prefix . "auth_token
-			WHERE user_id = " . (int) $user_id . "");
+			WHERE user_id = " . (int) $user_id);
 	}
 
 	// user logs in by explicitly providing password
@@ -6137,7 +6137,7 @@ class Wacko
 		return $this->db->sql_query(
 			"DELETE FROM " . $this->db->table_prefix . "watch " .
 			"WHERE user_id		= " . (int) $user_id . " " .
-				"AND page_id	= " . (int) $page_id . "");
+				"AND page_id	= " . (int) $page_id);
 	}
 
 	function clear_watch_pending($user_id, $page_id)
@@ -6146,7 +6146,7 @@ class Wacko
 			"UPDATE " . $this->db->table_prefix . "watch SET " .
 				"pending = 0 " .
 			"WHERE page_id = " . (int) $page_id . " " .
-				"AND user_id = " . (int) $user_id . "");
+				"AND user_id = " . (int) $user_id);
 	}
 
 	function set_watch_pending($user_id, $page_id)
@@ -6155,7 +6155,7 @@ class Wacko
 			"UPDATE " . $this->db->table_prefix . "watch SET " .
 				"pending	= 1 " .
 			"WHERE page_id = " . (int) $page_id . " " .
-				"AND user_id = " . (int) $user_id . "");
+				"AND user_id = " . (int) $user_id);
 	}
 
 	// REVIEW
@@ -6300,7 +6300,7 @@ class Wacko
 								"page_id			= " . (int) $menu_item[0] . ", " .
 								"menu_lang			= " . $this->db->q($menu_item[3]) . ", " .
 								"menu_title			= " . $this->db->q($menu_item[1]) . ", " .
-								"menu_position		= " . ++$position . "");
+								"menu_position		= " . ++$position);
 					}
 
 					$this->sess->menu_default = false;
@@ -6322,7 +6322,7 @@ class Wacko
 						"page_id			= " . (int) $this->page['page_id'] . ", " .
 						"menu_lang			= " . $this->db->q($lang) . ", " .
 						#"menu_title			= " . $this->db->q($title) . ", " .
-						"menu_position		= " . ++$position . "");
+						"menu_position		= " . ++$position);
 			}
 		}
 
@@ -6347,7 +6347,7 @@ class Wacko
 			$this->db->sql_query(
 				"DELETE FROM " . $this->db->table_prefix . "menu " .
 				"WHERE user_id = " . (int) $user['user_id'] . " " .
-					"AND page_id = " . (int) $this->page['page_id'] . "");
+					"AND page_id = " . (int) $this->page['page_id']);
 
 			if (!$menu_formatted)
 			{
@@ -7330,7 +7330,7 @@ class Wacko
 		{
 			$this->db->sql_query(
 				"DELETE FROM " . $this->db->table_prefix . "rating " .
-				"WHERE page_id = " . (int) $page['page_id'] . "");
+				"WHERE page_id = " . (int) $page['page_id']);
 		}
 
 		return true;
@@ -7386,7 +7386,7 @@ class Wacko
 			"DELETE k.* " .
 			"FROM " . $this->db->table_prefix . "category_assignment k " .
 			"WHERE k.object_id = " . (int) $object_id . " " .
-				"AND k.object_type_id = " . (int) $type_id . "");
+				"AND k.object_type_id = " . (int) $type_id);
 
 		return true;
 	}
@@ -7431,7 +7431,7 @@ class Wacko
 			$files = $this->db->load_all(
 				"SELECT file_id, file_name " .
 				"FROM " . $this->db->table_prefix . "file " .
-				"WHERE page_id = " . (int) $page['page_id'] . "");
+				"WHERE page_id = " . (int) $page['page_id']);
 
 			// store a copy in ...
 			if ($this->db->store_deleted_pages && !$dontkeep)
@@ -7449,7 +7449,7 @@ class Wacko
 				$this->db->sql_query(
 					"UPDATE " . $this->db->table_prefix . "file SET " .
 						"deleted	= 1 " .
-					"WHERE page_id = " . (int) $page['page_id'] . "");
+					"WHERE page_id = " . (int) $page['page_id']);
 			}
 			else
 			{
@@ -7464,7 +7464,7 @@ class Wacko
 					// remove category assigments
 					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 
-					// TODO: update user uploads count
+					// TODO: update user and page uploads count
 					# - page_ids[]
 					# - user_ids[]
 				}
@@ -7474,7 +7474,7 @@ class Wacko
 				// remove from DB
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "file " .
-					"WHERE page_id = " . (int) $page['page_id'] . "");
+					"WHERE page_id = " . (int) $page['page_id']);
 			}
 		}
 
@@ -7494,7 +7494,7 @@ class Wacko
 		$file = $this->db->load_single(
 			"SELECT file_id, page_id, user_id, file_name " .
 			"FROM " . $this->db->table_prefix . "file " .
-			"WHERE file_id = " . (int) $file_id . "");
+			"WHERE file_id = " . (int) $file_id);
 
 		if ($this->db->store_deleted_pages && !$dontkeep)
 		{
@@ -7504,7 +7504,8 @@ class Wacko
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "file SET " .
 					"deleted	= 1 " .
-				"WHERE file_id = " . (int) $file['file_id'] . "");
+				"WHERE file_id = " . (int) $file['file_id'] . " " .
+				"LIMIT 1");
 
 			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 		}
@@ -7538,7 +7539,7 @@ class Wacko
 			// remove from DB
 			$this->db->sql_query(
 				"DELETE FROM " . $this->db->table_prefix . "file " .
-				"WHERE file_id = " . (int) $file['file_id'] . "");
+				"WHERE file_id = " . (int) $file['file_id']);
 
 			if ($message)
 			{
@@ -7559,7 +7560,8 @@ class Wacko
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"deleted	= 0 " .
-			"WHERE page_id = " . (int) $page_id . "");
+			"WHERE page_id = " . (int) $page_id . " " .
+			"LIMIT 1");
 	}
 
 	function restore_file($file_id)
@@ -7572,7 +7574,8 @@ class Wacko
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "file SET " .
 				"deleted	= 0 " .
-			"WHERE file_id = " . (int) $file_id . "");
+			"WHERE file_id = " . (int) $file_id . " " .
+			"LIMIT 1");
 	}
 
 	function restore_files_perpage($page_id)
@@ -7585,7 +7588,7 @@ class Wacko
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "file SET " .
 				"deleted	= 0 " .
-			"WHERE page_id = " . (int) $page_id . "");
+			"WHERE page_id = " . (int) $page_id);
 	}
 
 	// ADDITIONAL METHODS
@@ -8191,7 +8194,7 @@ class Wacko
 				"SELECT category_id " .
 				"FROM " . $this->db->table_prefix . "category_assignment " .
 				"WHERE object_id = " . (int) $object_id . " " .
-					"AND object_type_id = " . (int) $type_id . "");
+					"AND object_type_id = " . (int) $type_id);
 		}
 
 		// exploding categories into array
