@@ -7429,7 +7429,7 @@ class Wacko
 		{
 			// get filenames
 			$files = $this->db->load_all(
-				"SELECT file_id, file_name " .
+				"SELECT file_id, page_id, user_id, file_name " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = " . (int) $page['page_id']);
 

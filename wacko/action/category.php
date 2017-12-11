@@ -42,8 +42,8 @@ if (isset($_REQUEST['category_lang']))
 {
 	$lang = ($this->db->multilanguage
 			? ($this->known_language($_REQUEST['category_lang'])
-					? $_REQUEST['category_lang']
-					: '')
+				? $_REQUEST['category_lang']
+				: '')
 			: $lang);
 }
 if (!isset($sort) || !in_array($sort, ['abc', 'date']))
