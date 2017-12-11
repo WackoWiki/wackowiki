@@ -296,6 +296,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				foreach ($pages as $page)
 				{
 					$page_ids[]	= $page['page_id'];
+					// cache page_id for for has_access validation in link function
+					$this->page_id_cache[$page['tag']] = $page['page_id'];
 				}
 
 				// cache acls
@@ -320,9 +322,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					{
 						// check current page lang for different charset to do_unicode_entities() against
 						$_lang = ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
-
-						// cache page_id for for has_access validation in link function
-						$this->page_id_cache[$page['tag']] = $page['page_id'];
 
 						$tpl->u_prof_pages_li_created	= $page['created'];
 						$tpl->u_prof_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
@@ -361,6 +360,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					{
 						$page_ids[]	= $comment['comment_on_id'];	// page
 						$page_ids[]	= $comment['page_id'];			// comment
+
+						// cache page_id for for has_access validation in link function
+						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 					}
 
 					// cache acls
@@ -373,9 +375,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						{
 							// check current page lang for different charset to do_unicode_entities() against
 							$_lang = ($this->page['page_lang'] != $comment['page_lang'])?  $comment['page_lang'] : '';
-
-							// cache page_id for for has_access validation in link function
-							$this->page_id_cache[$comment['tag']] = $comment['page_id'];
 
 							$tpl->u_prof_cmt_c_li_created	= $comment['created'];
 							$tpl->u_prof_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
@@ -423,6 +422,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 							if ($upload['page_id'] && ! in_array($upload['page_id'], $page_ids))
 							{
 								$page_ids[]	= $upload['page_id'];
+
+								// cache page_id for for has_access validation in link function
+								$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
 							}
 						}
 
@@ -454,9 +456,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 								// TODO needs to be redone, moving to tpl
 								if ($upload['page_id']) // !$global
 								{
-									// cache page_id for for has_access validation in link function
-									$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
-
 									$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
 									$on_tag		= $upload['file_on_page'];
 									$on_page	= $this->_t('To') . ' ' .

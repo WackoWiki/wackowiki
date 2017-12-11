@@ -103,6 +103,9 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 		}
 	}
 
+	// cache acls
+	$this->preload_acl($page_ids);
+
 	if ($files = $this->db->load_all(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, p.supertag, u.user_name " .
 		"FROM " . $this->db->table_prefix . "file f " .
@@ -116,9 +119,6 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 		}
 	}
-
-	// cache acls
-	$this->preload_acl($page_ids);
 
 	$this->print_pagination($pagination);
 
@@ -134,9 +134,6 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 		{
 			$access = true;
 		}
-
-		// cache page_id for for has_access validation in link function
-		$this->page_id_cache[$page['tag']] = $page['page_id'];
 
 		if (!isset($printed[$page['tag']]))
 		{

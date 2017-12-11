@@ -14,6 +14,17 @@ if ($this->is_admin())
 
 	if ($pages)
 	{
+		$page_ids	= [];
+
+		foreach ($pages as $page)
+		{
+			$page_ids[]	= $page['page_id'];
+			$this->cache_page($page, true);
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+		}
+
+		$this->preload_acl($page_ids);
+
 		$this->print_pagination($pagination);
 
 		$curday = '';
