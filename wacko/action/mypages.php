@@ -119,7 +119,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('bychange'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, p.tag, supertag, p.title, p.modified, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.supertag, p.title, p.modified, p.page_lang " .
 			$selector .
 			"GROUP BY tag " .
 			"ORDER BY modified DESC, tag ASC " .
