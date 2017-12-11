@@ -114,12 +114,14 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 	if ($category_id)
 	{
-		$selector .= "AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
-					 "AND k.object_type_id = " . OBJECT_PAGE . " ";
+		$selector .=
+			"AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
+			"AND k.object_type_id = " . OBJECT_PAGE . " ";
 	}
 
 	// make counter query
-	$sql = "SELECT COUNT(p.page_id) AS n " .
+	$sql =
+		"SELECT COUNT(p.page_id) AS n " .
 		"FROM " . $this->db->table_prefix . "page AS p, " .
 		$selector;
 
@@ -128,7 +130,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$pagination	= $this->pagination($count['n'], $this->db->forum_topics);
 
 	// make collector query
-	$sql = "SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
+	$sql = "SELECT p.page_id, p.tag, p.supertag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page AS p " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
@@ -139,14 +141,34 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// load topics data
 	$topics = $this->db->load_all($sql);
 
-	foreach ($topics as $result)
+	foreach ($topics as $page)
 	{
-		$page_ids[]	= $result['page_id'];
+		$page_ids[]	= $page['page_id'];
+		$this->cache_page($page, true);
 	}
 
 	// cache acls and categories
 	$this->preload_acl($page_ids, '');
 	$this->preload_categories($page_ids);
+
+	// load latest topic comment
+	$sql_comments =
+		"SELECT p.tag, p.ip, p.created, p.comment_on_id, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name " .
+		"FROM " . $this->db->table_prefix . "page p " .
+			"LEFT JOIN " . $this->db->table_prefix . "page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) " .
+			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+		"WHERE p.comment_on_id IN ( '" . implode("', '", $page_ids) . "' ) " .
+			"AND p2.page_id IS NULL " .
+			"AND p.comment_on_id <> 0 " .
+			"AND p.deleted <> 1";
+
+	$comments = $this->db->load_all($sql_comments);
+
+	foreach ($comments as $comment)
+	{
+		$topic_comments[$comment['comment_on_id']] = $comment;
+	}
 
 	//  display search
 	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">' . $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]) . '</div>' . "\n";
@@ -175,14 +197,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				// load latest comment
 				if ($topic['comments'] > 0)
 				{
-					$comment = $this->db->load_single(
-						"SELECT p.tag, p.ip, p.created, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name " .
-						"FROM " . $this->db->table_prefix . "page p " .
-							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-						"WHERE p.comment_on_id = " . (int) $topic['page_id'] . " " .
-						"ORDER BY p.created DESC " .
-						"LIMIT 1");
+					$comment = $topic_comments[$topic['page_id']];
 				}
 				else
 				{
