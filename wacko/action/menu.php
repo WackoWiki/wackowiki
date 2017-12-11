@@ -171,7 +171,7 @@ if (isset($_POST['_user_menu']))
 							"user_id			= " . (int) $_user_id . ", " .
 							"page_id			= " . (int) $_page_id.", " .
 							"menu_lang			= " . $this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)) . ", " .
-							"menu_position		= " . (int)($_menu_item_count + 1) . "");
+							"menu_position		= " . (int)($_menu_item_count + 1));
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set
 					}

@@ -130,7 +130,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$pagination	= $this->pagination($count['n'], $this->db->forum_topics);
 
 	// make collector query
-	$sql = "SELECT p.page_id, p.tag, p.supertag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
+	$sql =
+		"SELECT p.page_id, p.tag, p.supertag, p.title, p.user_id, p.owner_id, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page AS p " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .

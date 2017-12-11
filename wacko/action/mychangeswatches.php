@@ -47,7 +47,7 @@ if ($user_id = $this->get_user_id())
 				"UPDATE " . $this->db->table_prefix . "watch SET " .
 					"watch_time = UTC_TIMESTAMP() " .
 				"WHERE page_id = " . (int) $page['page_id'] . " " .
-					"AND user_id = " . (int) $user_id . "");
+					"AND user_id = " . (int) $user_id);
 		}
 
 		$this->db->invalidate_sql_cache();

@@ -161,7 +161,7 @@ if ($this->is_owner() || $this->is_admin())
 						$this->db->sql_query(
 							"UPDATE " . $this->db->table_prefix . "category SET " .
 								"parent_id = 0 " .
-							"WHERE parent_id = " . (int) $_POST['category_id'] . "");
+							"WHERE parent_id = " . (int) $_POST['category_id']);
 
 						$this->set_message($this->_t('CategoriesGrouped'), 'success');
 						$this->log(4, 'Category //' . $word['category'] . '// grouped with the word //' . $parent['category'] . '//');
@@ -179,16 +179,16 @@ if ($this->is_owner() || $this->is_admin())
 			{
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "category " .
-					"WHERE category_id = " . (int) $_POST['category_id'] . "");
+					"WHERE category_id = " . (int) $_POST['category_id']);
 
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "category_assignment " .
-					"WHERE category_id = " . (int) $_POST['category_id'] . "");
+					"WHERE category_id = " . (int) $_POST['category_id']);
 
 				$this->db->sql_query(
 					"UPDATE " . $this->db->table_prefix . "category SET " .
 						"parent_id = 0 " .
-					"WHERE parent_id = " . (int) $_POST['category_id'] . "");
+					"WHERE parent_id = " . (int) $_POST['category_id']);
 
 				$this->set_message($this->_t('CategoriesDeleted'), 'success');
 				$this->log(4, 'Category //' . $word['category'] . '// removed from the database');

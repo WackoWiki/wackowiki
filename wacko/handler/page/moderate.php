@@ -106,7 +106,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 			$engine->db->sql_query(
 				"UPDATE " . $engine->db->table_prefix . "page SET " .
 					"comment_on_id = " . (int) $base_id . " " .
-				"WHERE comment_on_id = " . (int) $topic_id . "");
+				"WHERE comment_on_id = " . (int) $topic_id);
 
 			// for the forum moderation only
 			if ($move_topics === true)
@@ -136,7 +136,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 						"owner_id		= " . (int) $page['owner_id'] . ", " .
 						"user_id		= " . (int) $page['user_id'] . ", " .
 						"ip				= " . $engine->db->q($page['ip']) . " " .
-					"WHERE tag = " . $engine->db->q('Comment' . $num) . "");
+					"WHERE tag = " . $engine->db->q('Comment' . $num));
 
 				// remove old page remnants
 				moderate_delete_page($engine, $topic);
@@ -157,7 +157,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$comments = $engine->db->load_all(
 		"SELECT page_id, tag, body_r " .
 		"FROM " . $engine->db->table_prefix . "page " .
-		"WHERE comment_on_id = " . (int) $base_id . "");
+		"WHERE comment_on_id = " . (int) $base_id);
 
 	foreach ($comments as $comment)
 	{
@@ -244,7 +244,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 			"owner_id		= " . (int) $page['owner_id'] . ", " .
 			"user_id		= " . (int) $page['user_id'] . ", " .
 			"ip				= " . $engine->db->q($page['ip']) . " " .
-		"WHERE page_id = " . (int) $new_page_id . "");
+		"WHERE page_id = " . (int) $new_page_id);
 
 	// move remaining comments to the new topic
 	foreach ($comment_ids as $comment_id)
@@ -252,7 +252,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 		$engine->db->sql_query(
 			"UPDATE " . $engine->db->table_prefix . "page SET " .
 				"comment_on_id = " . (int) $new_page_id . " " .
-			"WHERE page_id = " . (int) $comment_id . "");
+			"WHERE page_id = " . (int) $comment_id);
 
 		// saving acls
 		$engine->save_acl($comment_id, 'write',		$write_acl);

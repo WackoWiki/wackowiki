@@ -84,7 +84,7 @@ if (@$_POST['_action'] === 'set_permissions')
 			"SELECT page_id " .
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE comment_on_id = " . (int) $pid . " " .
-				"AND owner_id= " . (int) $uid . ""); // STS ?? for admin too?
+				"AND owner_id= " . (int) $uid); // STS ?? for admin too?
 
 		foreach ($comments as $comment)
 		{
@@ -147,7 +147,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				") " .
 			($this->is_admin()
 				? ""
-				: "AND owner_id = " . (int) $uid . ""));
+				: "AND owner_id = " . (int) $uid));
 
 		foreach ($pages as $page)
 		{

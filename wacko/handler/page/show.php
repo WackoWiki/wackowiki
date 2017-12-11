@@ -111,7 +111,8 @@ if ($this->has_access('read'))
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"hits = hits + 1 " .
-				"WHERE page_id = " . (int) $this->page['page_id'] . "");
+				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
+				"LIMIT 1");
 		}
 
 		$user			= $this->get_user();

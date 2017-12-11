@@ -190,7 +190,7 @@ class Polls
 		return $this->engine->sql_query(
 			"DELETE " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
-			"WHERE poll_id = " . (int) $poll_id . "");
+			"WHERE poll_id = " . (int) $poll_id);
 	}
 
 	// print voting form
@@ -351,7 +351,7 @@ class Polls
 						"UPDATE " . $this->engine->db->table_prefix . "poll " .
 						"SET votes = " . (int) $new_votes . " " .
 						"WHERE poll_id = " . (int) $poll_id . " " .
-							"AND v_id = " . (int) $vote_id . "");
+							"AND v_id = " . (int) $vote_id);
 //					$total++;
 				}
 			}
