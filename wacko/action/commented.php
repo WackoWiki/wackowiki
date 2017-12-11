@@ -135,12 +135,13 @@ if ($this->user_allowed_comments())
 
 					// do unicode entities
 					// page lang
-					$page_lang = ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
+					$page_lang		= ($this->page['page_lang'] != $page['page_lang'])?  $page['page_lang'] : '';
 
 					// comment lang
-					$comment_lang = ($this->page['page_lang'] != $page['comment_lang'])?  $page['comment_lang'] : '';
-
-					$viewed = ( $user['last_mark'] && $page['comment_user_name'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
+					$comment_lang	= ($this->page['page_lang'] != $page['comment_lang'])?  $page['comment_lang'] : '';
+					$viewed			= ($user['last_mark']
+										&& $page['comment_user_name'] != $user['user_name']
+										&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
 					// print entry
 					echo '<li ' . $viewed . '><span class="dt">' . $time . '</span> &mdash; ' .

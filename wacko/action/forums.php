@@ -39,7 +39,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	// make query
-	$sql =	"SELECT p.page_id, p.tag, p.title, p.description, p.page_lang " .
+	$sql =	"SELECT p.page_id, p.tag, p.supertag, p.title, p.description, p.page_lang " .
 			"FROM " . $this->db->table_prefix . "page AS p, " .
 					  $this->db->table_prefix . "acl AS a " .
 			"WHERE p.page_id = a.page_id " .
@@ -74,6 +74,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		$page_ids[]	= $forum['page_id'];
 		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$forum['tag']] = $forum['page_id'];
+		$this->cache_page($forum, true);
 	}
 
 	$this->preload_acl($page_ids);
@@ -109,7 +110,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 			// load latest comment
 			$comments = $this->db->load_all(
-				"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name " .
+				"SELECT a.page_id, a.tag, a.supertag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name " .
 				"FROM " . $this->db->table_prefix . "page a " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
@@ -134,6 +135,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					break;
 				}
 			}
+
+			$this->cache_page($comment, true);
 
 			$forum['description'] = htmlspecialchars($forum['description'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
