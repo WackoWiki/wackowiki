@@ -8269,9 +8269,8 @@ class Wacko
 					$out .= '<ul class="ul_list lined">' . "\n"; // hide_radio
 				}
 
-				$n++;
-
 				$i = 0;
+				$n++;
 			}
 
 			$out .= "</ul>\n";

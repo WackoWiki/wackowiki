@@ -11,7 +11,7 @@ if (!isset($bydate))	$bydate = '';
 if (!isset($profile))	$profile = ''; // user action
 if (!isset($max))		$max = null;
 if (!isset($bychange))	$bychange = '';
-$cur_char		= '';
+$current_char	= '';
 $title			= (int) $title;
 
 $profile		= ($profile? ['profile' => $profile] : []);
@@ -195,15 +195,15 @@ if (($user_id = $this->get_user_id()))
 					$first_char = '#';
 				}
 
-				if ($first_char != $cur_char)
+				if ($first_char != $current_char)
 				{
-					if ($cur_char)
+					if ($current_char)
 					{
 						echo "</ul>\n<br></li>\n";
 					}
 
 					echo '<li><strong>' . $first_char . "</strong><ul>\n";
-					$cur_char = $first_char;
+					$current_char = $first_char;
 				}
 
 				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
