@@ -9,6 +9,7 @@ if ($user_id = $this->get_user_id())
 {
 	if (!isset($profile))		$profile = ''; // user action
 	if (!isset($max))			$max = null;
+	if (!isset($title))			$title = 0;
 	if (!isset($current_char))	$current_char = '';
 
 	$profile		= ($profile? ['profile' => $profile] : []);
@@ -17,6 +18,7 @@ if ($user_id = $this->get_user_id())
 	$mode			= @$_GET[$mode_selector];
 	$p				= isset($_GET['p']) ? ['p' => (int) $_GET['p']] : [];
 	$prefix			= $this->db->table_prefix;
+	$title			= (int) $title;
 
 	// navigation
 	$tabs	= [
@@ -51,11 +53,12 @@ if ($user_id = $this->get_user_id())
 
 		$selector =
 			"FROM {$prefix}page AS p " .
-			"LEFT JOIN {$prefix}watch AS w " .
-				"ON (p.page_id = w.page_id " .
-					"AND w.user_id = " . (int) $user_id . ") " .
+				"LEFT JOIN {$prefix}watch AS w " .
+					"ON (p.page_id = w.page_id " .
+						"AND w.user_id = " . (int) $user_id . ") " .
 			"WHERE p.comment_on_id = 0 " .
 				"AND p.deleted <> 1 " .
+				"AND p.owner_id <> " . (int) $this->db->system_user_id . " " .
 				"AND w.user_id IS NULL ";
 
 		$sql_count	=
@@ -63,7 +66,7 @@ if ($user_id = $this->get_user_id())
 			$selector;
 
 		$sql =
-			"SELECT p.page_id, p.tag, p.supertag, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY p.tag ASC ";
 	}
@@ -78,17 +81,20 @@ if ($user_id = $this->get_user_id())
 		$icon_text		= $this->_t('RemoveWatch');
 		$icon_class		= 'watch-off';
 
+		$selector =
+			"WHERE w.user_id = " . (int) $user_id . " ";
+
 		$sql_count	=
-			"SELECT COUNT( DISTINCT page_id ) as n " .
-			"FROM {$prefix}watch " .
-			"WHERE user_id = " . (int) $user_id . " ";
+			"SELECT COUNT( DISTINCT w.page_id ) as n " .
+			"FROM {$prefix}watch w " .
+			$selector;
 
 		$sql =
-			"SELECT w.page_id, p.tag, p.supertag, p.page_lang " .
+			"SELECT w.page_id, p.tag, p.supertag, p.title, p.page_lang " .
 			"FROM {$prefix}watch AS w " .
-			"LEFT JOIN {$prefix}page AS p " .
-				"ON (p.page_id = w.page_id) " .
-			"WHERE w.user_id = " . (int) $user_id . " " .
+				"LEFT JOIN {$prefix}page AS p " .
+					"ON (p.page_id = w.page_id) " .
+			$selector .
 			"GROUP BY p.tag ";
 	}
 
@@ -113,6 +119,21 @@ if ($user_id = $this->get_user_id())
 		// cache acls
 		$this->preload_acl($page_ids);
 
+		$char_changed	= 0;
+		$char_display	= '';
+		$n				= 1;
+		$skip			= 0;
+
+		$r_count	= count($pages);
+		$total		= ceil($r_count / 3);
+
+		// table for columns
+		echo '<table class="category_browser">' . "\n";
+		echo "\t<tr>\n" . "\t\t<td>\n";
+
+		// start list
+		echo '<ul class="ul_list">' . "\n";
+
 		foreach ($pages as $page)
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
@@ -126,24 +147,67 @@ if ($user_id = $this->get_user_id())
 
 				if ($first_char != $current_char)
 				{
-					if ($current_char)
+					if ($current_char && !$skip)
 					{
-						echo "<br>\n";
+						echo "</ul>\n<br></li>\n";
 					}
 
-					echo '<strong>' . $first_char . "</strong><br>\n";
-					$current_char = $first_char;
+					echo $char_display = '<li><strong>' . $first_char . "</strong><ul>\n";
+
+					$char_show_again	= 0;
+					$char_changed		= 1;
+					$current_char		= $first_char;
+				}
+				else if ($char_show_again)
+				{
+					echo $char_display; # . '+';
+
+					$char_show_again	= 0;
+					$skip				= 0;
 				}
 
-				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
+				$text	= $this->get_unicode_entities($page['tag'], $page['page_lang']);
+				$title	= $this->get_unicode_entities($page['title'], $page['page_lang']);
 
 				echo
+				'<li>' .
 					'<a href="' . $this->href('', '', $profile + $p + $tab_mode + ['mode' => 'mywatches', $action_mode => $page['page_id'], '#' => 'list']) . '" class="' . $icon_class . '">' .
 						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $icon_text . '" alt="' . $icon_text . '">' .
 					'</a> ' .
-					$this->compose_link_to_page($page['supertag'], '', $text) . "<br>\n";
+					$this->compose_link_to_page($page['supertag'], '', $text, $title) .
+				"</li>\n";
 			}
+
+			if ($n < $r_count)
+			{
+				// modulus operator: every n loop add a break
+				if ($n % $total == 0)
+				{
+					echo "</ul>\n</li>\n</ul>\n";
+					echo "\t\t</td>\n\t\t<td>\n";
+					echo '<ul class="ul_list">' . "\n";
+
+					if ($char_changed)
+					{
+						$skip			= 1;
+					}
+					else
+					{
+						$skip			= 0;
+					}
+
+					$char_show_again	= 1;
+					$char_changed		= 0;
+				}
+			}
+
+			$n++;
 		}
+
+		// end list
+		echo "</ul>\n</li>\n</ul>\n";
+		// end table
+		echo "\t\t</td>\n\t</tr>\n</table>\n<br>\n";
 
 		$this->print_pagination($pagination);
 	}
