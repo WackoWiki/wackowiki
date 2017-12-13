@@ -290,27 +290,32 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Sitzungen erfolgreich enfernt.',
 
 	// Basic settings
-
 	'SiteName'					=> 'Name der Seite',
 	'SiteNameInfo'				=> 'Der Titel der Seite im HTML-Kopf, erscheint im Browser Titel, Theme Header, bei Email Benachrichtigung, etc.',
 	'SiteDesc'					=> 'Beschreibung der Seite',
 	'SiteDescInfo'				=> 'Ergänzung zum Titel der Website, die im Seitenkopf erscheint, um in wenigen Worten zu erklären, worum es in dieser Seite geht.',
 	'AdminName'					=> 'Administrator der Seite',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
+	// Wo/wann wird der Eintrag verwendet?
+	// Übersetzung Vorschlag 1: Der Name des Benutzers, der für die Unterstützung der gesamten Webseite verantwortlich ist. Dieser Name wird nicht verwendet, um Zugriffsrechte zu bestimmen, aber es ist wünschenswert, dass er dem Namen des Hauptadministrators der Webseite entspricht.
+	// Übersetzung Vorschlag 2: Benutzername, der für die allgemeine Unterstützung der Site verantwortlich ist. Dieser Name wird nicht zum Festlegen der Zugriffsrechte verwendet, es ist jedoch wünschenswert, den Namen des Hauptadministrators der Site zu übernehmen.
 
 	'LanguageSection'			=> 'Sprache',
 	'DefaultLanguage'			=> 'Standard Sprache',
 	'DefaultLanguageInfo'		=> 'Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.',
+	// Definiert die Nachrichtensprache, wenn nicht registrierte Gäste angezeigt werden, sowie lokale Einstellungen und Transliterationsregeln für Seitenadressen.
+	// Gibt die Sprache für die Zuordnung nicht registrierter Gäste sowie die Gebietsschemaeinstellungen und die Transliterationsregeln für die Adressen von Seiten an.
+
 	'MultiLanguage'				=> 'Unterstützung mehrerer Sprachen',
 	'MultiLanguageInfo'			=> 'Enthält eine Auswahl an Sprachen auf Seitenbasis.',
 	'AllowedLanguages'			=> 'Erlaubte Sprachen',
 	'AllowedLanguagesInfo'		=> 'Es wird empfohlen, nur die Sprachen auszuwählen, die man verwenden möchte. Andernfalls sind alle Sprachen ausgewählt.',
 
-	'CommentSection'			=> 'Kommentare',
-	'AllowComments'				=> 'Erlaube Kommentare',
-	'AllowCommentsInfo'			=> 'Aktiviere Kommentare für Gäste, registrierte Benutzer oder deaktivieren sie auf der gesamten Website.',
+    'CommentSection'			=> 'Kommentare',
+	'AllowComments'				=> 'Kommentare aktivieren',
+	'AllowCommentsInfo'			=> 'Aktivieren von Kommentaren für Gäste, registrierte Benutzer oder deaktivieren auf der gesamten Website.',
 	'SortingComments'			=> 'Kommentare sortieren',
-	'SortingCommentsInfo'		=> 'Ändert die Reihenfolge, in der die Seitenkommentare angezeigt werden, entweder mit dem neuesten oder dem ältesten Kommentar oben.',
+	'SortingCommentsInfo'		=> 'Ändern der Reihenfolge, in der die Seitenkommentare angezeigt werden, entweder mit dem neuesten oder dem ältesten Kommentar oben.',
 
 	'ToolbarSection'			=> 'Werkzeugleiste',
 	'CommentsPanel'				=> 'Kommentarleiste',
@@ -318,17 +323,27 @@ $ap_translation = [
 	'FilePanel'					=> 'Dateileiste',
 	'FilePanelInfo'				=> 'Die Standardanzeige von Anhängen im unteren Bereich der Seite.',
 	'RatingPanel'				=> 'Rating panel',
+	// Bewertungsfeld
+	// Bereich für Bewertungen
 	'RatingPanelInfo'			=> 'The default display of the rating panel in the bottom of the page.',
+	// Die Standardanzeige für das Bewertungsfeld im unteren Bereich der Seite.
 	'TagsPanel'					=> 'Tags panel',
+	// Tag-Liste
 	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
+	// Die Standardanzeige für die Tag-Liste im unteren Bereich der Seite.
 	'HideRevisions'				=> 'Revisionen ausblenden',
 	'HideRevisionsInfo'			=> 'Die Standardanzeige der Revisionen der Seite.',
 	'TocPanel'					=> 'Inhaltsverzeichnis',
 	'TocPanelInfo'				=> 'Die Standardanzeige für das Inhaltsverzeichnis-Fenster der Seite (setzt die Unterstützung durch das Layout vorraus).',
 	'SectionsPanel'				=> 'Bereichsanzeige',
+	// Bereichsanzeige aktivieren
 	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmäßig benachbarte Seiten an (setzt die Unterstützung durch das Layout vorraus).',
+	// Welche Aktion wird genau unterstützt? (Tree action wird im default theme nicht am Seitenende angezeigt).
 	'DisplayingSections'		=> 'Angezeigte Bereiche',
+
 	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>Baum</em>).',
+	// Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </ em>), nur benachbarte (<em> obere </ em>) oder beide (<em> Baum </ em>) ausgegeben. .
+
 	'MenuItems'					=> 'Menüpunkte',
 	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten Menüelemente (setzt die Unterstützung durch das Layout vorraus).',
 
@@ -337,6 +352,8 @@ $ap_translation = [
 	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
 	'XmlSitemap'				=> 'XML Sitemap',
 	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens "sitemap-wackowiki.xml" im XML-Ordner. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.',
+	// Erstellt XML-Dateien, die mit XML-Sitemaps kompatibel sind. Möglicherweise möchten Sie den Pfad ändern, um es in Ihrem Stammordner auszugeben, da dies eine der Voraussetzungen ist, d.h. Die XML-Datei befindet sich im Stammordner.
+
 	'XmlSitemapTime'			=> 'XML Sitemap Erstellungszeit',
 	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
 
@@ -346,18 +363,22 @@ $ap_translation = [
 	'AllowedDiffMode'			=> 'Zugelassene Diff-Modi',
 	'AllowedDiffModeInfo'		=> 'Es wird empfohlen, nur die Modi auszuwählen, welche man verwenden möchte. Andernfalls werden alle Diff-Modi ausgewählt.',
 
-	'EditSummary'				=> 'Edit summary',
-	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
+	'EditSummary'				=> 'Änderungszusammenfassung aktivieren',
+	'EditSummaryInfo'			=> 'Zeigt Kommentarfeld für die Zusammenfassung von Änderungen im Bearbeitungsmodus.',
 	'MinorEdit'					=> 'Kleine Änderung',
-	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
+	'MinorEditInfo'				=> 'Aktiviert die Option "Kleine Änderung" im Bearbeitungsmodus.',
 	'ReviewSettings'			=> 'Überprüfen',
+	// Welche Funktionalität wird unterstützt? (review handler?), In der Gruppenverwaltung muss "Reviewer" muss aktiviert sein.
 	'ReviewSettingsInfo'		=> 'Aktiviert die Überprüfungsoption im Bearbeitungsmodus.',
 
 	'PublishAnonymously'		=> 'Anonyme Veröffentlichung zulassen',
 	'PublishAnonymouslyInfo'	=> 'Erlaubt den Benutzern, vorzugsweise anonym zu veröffentlichen (um den Namen zu verbergen).',
 	'DefaultRenameRedirect'		=> 'Bei Umbenennung einer Seite eine Umleitung setzen',
 	'DefaultRenameRedirectInfo'	=> 'By default, offer to deliver a redirect to the old address of the page being renamed.',
-	'StoreDeletedPages'			=> 'Gelöschte Seiten behalten',
+    // Standardmäßig bieten Sie an, eine Umleitung an die alte Adresse der umzubenennenden Seite zu übermitteln.
+    // Standardmäßig erfolgt eine Umleitung an die alte Adresse der umbenannten Seite.
+
+    'StoreDeletedPages'			=> 'Gelöschte Seiten behalten',
 	'StoreDeletedPagesInfo'		=> 'Wenn eine Seite, einen Kommentar oder eine Datei gelöscht wird, steht diese noch in einen gesonderten Bereich für eine bestimmte Zeit (siehe nächster Punkt) zur die Wiederherstellung und Anzeige zur Verfügung.',
 	'KeepDeletedTime'			=> 'Aufbewahrungszeit für gelöschten Seiten',
 	'KeepDeletedTimeInfo'		=> 'Der Zeitraum in Tagen. Dies macht nur mit der vorherigen Option Sinn. Null bedeutet unbegrenzte Aufbewahrungszeit (in diesem Fall kann der Administrator diese manuell im Verwaltungs-Panel löschen).',
@@ -366,11 +387,13 @@ $ap_translation = [
 	'EnableReferrers'			=> 'Erlaube Referrer',
 	'EnableReferrersInfo'		=> 'Ermöglicht das Speichern und Anzeigen externer Verweise.',
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
-	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
-	'AttachmentHandler'			=> 'Enable attachments handler',
+	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, könnte zu einer hohen Auslastung der Datenbank führen.',
+    'AttachmentHandler'			=> 'Dateianhänge aktivieren',
+    // Dateianhänge aktivieren
 	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
+    // Erlaubt Dateianhänge zu zeigen. Vgl. 'FilePanel'
 	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
-	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
+	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. <br>Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Aussehen der Webseite ändern',
@@ -399,9 +422,8 @@ $ap_translation = [
 	'ThemesPerPageInfo'			=> 'Erlaube Layouts pro Seite, welche der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
-	'SystemSettingsUpdated'		=> 'Systemeinstellungen  aktualisiert',
-
+    'SystemSettingsInfo'		=> 'Systemeinstellungen der Webseite. <br><span class="cite">Verändere hier nichts, außer wenn Du sicher über die Folgen bist.</span></br>',
+    'SystemSettingsUpdated'		=> 'Systemeinstellungen  aktualisiert',
 	'DebugModeSection'			=> 'Debug-Modus',
 	'DebugMode'					=> 'Debug-Modus',
 	'DebugModeInfo'				=> 'An- und Abschaltung zur Ausgabe von Telemetriedaten über die Programmlaufzeit. Achtung: Der Modus für alle Details stellt höhere Anforderungen an den zugewiesenen Speicher, insbesondere bei ressourcenintensiven Vorgängen wie dem Sichern und Wiederherstellen der Datenbank.',
@@ -417,63 +439,78 @@ $ap_translation = [
 	'DebugAdminOnlyInfo'		=> 'Zeigt die Debug-Daten des Programms (und des DBMS) nur dem Administrator.',
 
 	'CachingSection'			=> 'Zwischenspeicher-Optionen',
-	'Cache'						=> 'Cache rendered pages',
-	'CacheInfo'					=> 'Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.',
-	'CacheTtl'					=> 'Zeitdauer für zwischenspeicherter Seiten',
+	'Cache'						=> 'Dargestellte Seiteninhalte zwischenspeichern',
+	'CacheInfo'					=> 'Dargestellte Seiteninhalte lokal zwischenspeichern, um nachfolgende Seitenaufrufe zu beschleunigen. Nur anwendbar für Gäste bzw. nicht registrierte Besucher.',
+    'CacheTtl'					=> 'Zeitdauer für zwischenspeicherter Seiten',
 	'CacheTtlInfo'				=> 'Speichere Seiten nicht länger als die angegebene Anzahl von Sekunden zwischen.',
 	'CacheSql'					=> 'Datenbank-Abfragen zwischenspeichern',
-	'CacheSqlInfo'				=> 'Maintain a local cache the results of certain resource-SQL-queries.',
+	'CacheSqlInfo'				=> 'Einen lokalen Zwischenspeicher mit Ergebnissen aus bestimmten Datenbankabfragen (resource-SQL-queries) behalten.',
 	'CacheSqlTtl'				=> 'Term relevance Cache Database',
-	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
-
+    //
+	'CacheSqlTtlInfo'			=> 'Speichere Ergebnisse der SQL-Abfragen nicht länger als die angegebene Anzahl von Sekunden zwischen. Einen Wert >1200 zu verwenden ist ungünstig.',
 	'ReverseProxySection'		=> 'Reverse Proxy',
+    // Reverse-Proxy
 	'ReverseProxy'				=> 'Use Reverse proxy',
-	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
-									 client by examining information stored in the X-Forwarded-For headers.
-									 X-Forwarded-For headers are a standard mechanism for identifying client
-									 systems connecting through a reverse proxy server, such as Squid or
-									 Pound. Reverse proxy servers are often used to enhance the performance
-									 of heavily visited sites and may also provide other site caching,
-									 security or encryption benefits. If this WackoWiki installation operates
-									 behind a reverse proxy, this setting should be enabled so that correct
-									 IP address information is captured in WackoWiki\'s session management,
-									 logging, statistics and access management systems; if you are unsure
-									 about this setting, do not have a reverse proxy, or WackoWiki operates in
-									 a shared hosting environment, this setting should remain disabled.',
+    // Nutzt Reverse-Proxy
+	'ReverseProxyInfo'			=> 'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
+                                     Clients zu ermitteln, indem Sie die in den X-Forwarded-For-Headern
+                                     gespeicherten Informationen untersuchen. X-Forwarded-For-Header sind ein
+                                     Standardmechanismus zum Identifizieren von Client-Systemen, die über einen
+                                     Reverse-Proxy-Server wie Squid oder Pound verbunden sind. Reverse-Proxy-Server
+                                     werden häufig verwendet, um die Leistung stark frequentierter Websites zu
+                                     verbessern, und bieten möglicherweise auch andere Vorteile für lokale
+                                     Zwischenspeicherung (Cache), Sicherheit oder Verschlüsselung.
+                                     Wenn diese WackoWiki-Installation hinter einem Reverse-Proxy ausgeführt wird,
+                                     sollte diese Einstellung aktiviert sein, damit die korrekten
+                                     IP-Adressinformationen in WackoWiki\'s Sitzungsmanagement-, Protokollierungs-,
+                                     Statistik- und Zugriffsverwaltungssystemen erfasst werden.
+                                     Wenn Sie sich bei dieser Einstellung nicht sicher sind, keinen Reverse-Proxy
+                                     haben oder WackoWiki in einer Shared-Hosting-Umgebung betreiben,
+                                     sollte diese Einstellung deaktiviert bleiben.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
+    // Reverse-Proxy-Header
+	'ReverseProxyHeaderInfo'	=> 'Setzen Sie diesen Wert nur, wenn Ihr Proxy-Server die Client-IP
+                                     nicht mit X-Forwarded-For-Header sendet. Der Header "X-Forwarded-For"
+                                     ist eine durch Komma + Leerzeichen getrennte Liste von IP-Adressen,
+                                     wobei nur der letzte (der linke) verwendet.',
+
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
+    //
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored
 									 in the X-Forwarded-For headers only if Remote IP address is one of
 									 these, that is the request reaches the web server from one of your
 									 reverse proxies. Otherwise, the client could directly connect to
 									 your web server spoofing the X-Forwarded-For headers.',
-
+    //
 	'RewriteMode'				=> 'Verwende <code>mod_rewrite</code>',
 	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktivieren sie, um "schöne" Seitenadressen zu erhalten.<br>
 									<span class="cite">The value might be overwritten by the Settings class, despite you turn it off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
+    // Einstellungen für Zugriffsteuerung und Berechtigungen
 	'PermissionsSettingsUpdated'	=> 'Berechtigungen aktualisiert',
-
 	'PermissionsSection'		=> 'Rechte und Privilegien',
 	'ReadRights'				=> 'Standard Lese-Rechte',
 	'ReadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
-	'WriteRights'				=> 'Standard Schreib-Rechte',
+    // Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.
+    // Wann werden diese Rechte gesetzt?
+    'WriteRights'				=> 'Standard Schreib-Rechte',
 	'WriteRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
-	'CommentRights'				=> 'Standard Kommentar-Rechte',
+    // Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.
+    'CommentRights'				=> 'Standard Kommentar-Rechte',
 	'CommentRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
-	'CreateRights'				=> 'Standard-Unterseitenerstellungsrechte',
+    // Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.
+    'CreateRights'				=> 'Standard-Unterseitenerstellungsrechte',
 	'CreateRightsInfo'			=> 'Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.',
-	'UploadRights'				=> 'Standard Hochlade-Rechte',
+    //
+    'UploadRights'				=> 'Standard Hochlade-Rechte',
 	'UploadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
-	'RenameRights'				=> 'Globale Berechtigung Seten umzubenennen',
+    //
+    'RenameRights'				=> 'Globale Berechtigung Seten umzubenennen',
 	'RenameRightsInfo'			=> 'List for admission to the possibility of free umbenennen (verschieben) von Seiten.',
-
+    //
 	'LockAcl'					=> 'Beschränke alle Berechtigungen auf Nur Lesen',
 	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
 	'HideLocked'				=> 'Nicht zugängliche Seiten ausblenden',
@@ -486,10 +523,12 @@ $ap_translation = [
 	'OwnersEditCategoriesInfo'	=> 'Erlaubt es den Seitenbesitzern die Kageorien-Liste, welche den Seiten zugewiesen ist, zu ändern (Wörter hinzufügen, umbenennen oder löschen)',
 	'TermHumanModeration'		=> 'Zeit zur Moderation',
 	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
+    //
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.',
-	'SecuritySettingsUpdated'	=> 'Sicherheitseinstellungen aktualisiert',
+	//
+    'SecuritySettingsUpdated'	=> 'Sicherheitseinstellungen aktualisiert',
 
 	'AllowRegistration'			=> 'Online registrieren',
 	'AllowRegistrationInfo'		=> 'Öffnen der Benutzerregistrierung. Das Deaktivieren der Option verhindert die freie Registrierung. Der Site-Administrator kann jedoch andere Benutzer registrieren.',
@@ -509,36 +548,55 @@ $ap_translation = [
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Aktiviere Captcha',
 	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
-	'CaptchaComment'			=> 'Neuer Kommentar',
+    //
+    'CaptchaComment'			=> 'Neuer Kommentar',
 	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
-	'CaptchaPage'				=> 'Neue Seite',
+    //
+    'CaptchaPage'				=> 'Neue Seite',
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
-	'CaptchaEdit'				=> 'Seite bearbeiten',
+    //
+    'CaptchaEdit'				=> 'Seite bearbeiten',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
-	'CaptchaRegistration'		=> 'Registrierung',
+	//
+    'CaptchaRegistration'		=> 'Registrierung',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
+    //
 
 	'TlsSection'				=> 'TLS Settings',
+    //
 	'TlsConnection'				=> 'TLS-Connection',
+    //
 	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server , otherwise you will lose access to the admin panel!</span>',
-	'TlsImplicit'				=> 'Forced TLS',
+	//
+    'TlsImplicit'				=> 'Forced TLS',
+    //
 	'TlsImplicitInfo'			=> 'Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.',
-	'TlsProxy'					=> 'TLS Proxy',
+	//
+    'TlsProxy'					=> 'TLS Proxy',
+    // TLS-Proxy
 	'TlsProxyInfo'				=> 'Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.',
-	'HttpSecurityHeaders'		=> 'HTTP Security Headers',
-	'EnableSecurityHeaders'		=> 'Enable Security Headers',
-	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',
-	'Csp'						=> 'Content-Security-Policy (CSP)',
-	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
-	'CspModes'	=> [
-		'0'		=> 'disabled',
-		'1'		=> 'strict',
-		'2'		=> 'custom',
+	//
+    'HttpSecurityHeaders'		=> 'HTTP Security Headers',
+	//
+    'EnableSecurityHeaders'		=> 'Enable Security Headers',
+	//
+    'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',
+	//
+    'Csp'						=> 'Content-Security-Policy (CSP)',
+	//
+    'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
+	//
+    'CspModes'	=> [
+		'0'		=> 'deaktiviert',
+		'1'		=> 'streng',
+		'2'		=> 'benutzerdefiniert',
 	],
 	'UserPasswordSection'		=> 'Persistence of user passwords',
+    //
 	'PwdMinChars'				=> 'Minimale Passwortlänge',
 	'PwdMinCharsInfo'			=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.',
-	'AdminPwdMinChars'			=> 'Minimale Admin Passwortlänge',
+	//
+    'AdminPwdMinChars'			=> 'Minimale Admin Passwortlänge',
 	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
 	'PwdCharComplexity'			=> 'Die erforderliche Kennwortkomplexität',
 	'PwdCharClasses'	=> [
@@ -557,8 +615,10 @@ $ap_translation = [
 	'LoginSection'				=> 'Anmeldung',
 	'MaxLoginAttempts'			=> 'Maximale Anzahl von Anmeldeversuchen pro Nutzername',
 	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
-	'IpLoginLimitMax'			=> 'Maximale Anzahl von Anmeldeversuchen pro IP-Adresse',
+	//
+    'IpLoginLimitMax'			=> 'Maximale Anzahl von Anmeldeversuchen pro IP-Adresse',
 	'IpLoginLimitMaxInfo'		=> 'The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.',
+    //
 
 	'LogSection'				=> 'Protokolleinstellungen',
 	'LogLevel'					=> 'Protokollierung verwenden',
@@ -574,6 +634,7 @@ $ap_translation = [
 		'7'		=> 'alles aufzeichnen',
 	],
 	'LogDefaultShow'			=> 'Angezeigter Log Modus',
+    //
 	'LogDefaultShowInfo'		=> 'The minimum priority events displayed in the log by default.',
 	'LogModes'	=> [
 		'1'		=> 'only the critical level',
@@ -592,20 +653,27 @@ $ap_translation = [
 	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in Sekunden).<br> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.',
 
 	'SessionLength'				=> 'Term login cookie',
+    //
 	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
+    //
 	'CommentDelay'				=> 'Anti-flood für Kommentare',
 	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in Sekunden).',
-	'IntercomDelay'				=> 'Anti-flood für persönliche Mitteilungen',
+	//
+    'IntercomDelay'				=> 'Anti-flood für persönliche Mitteilungen',
 	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in Sekunden).',
+    //
 
 	//Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
-	'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
+	//
+    'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
 
 	'TextHandlerSection'		=> 'Text Handler ',
+    //
 	'Typografica'				=> 'Typografischer Korrektor',
 	'TypograficaInfo'			=> 'Durch das Deaktivieren wird der Vorgang des Hinzufügens von Kommentaren und des Speicherns von Seiten geringfügig beschleunigt.',
 	'Paragrafica'				=> 'Paragrafica Markierungen',
+    //
 	'ParagraficaInfo'			=> 'Ähnlich wie bei der vorherigen Option, jedoch wird die Deaktivierung zu einer Fehlfunktion des automatischen Inhaltsverzeichnisses führen: <code>{{toc}}</code>.',
 	'AllowRawhtml'				=> 'Globale HTML-Unterstützung',
 	'AllowRawhtmlInfo'			=> 'Die Verwendung dieser Option für eine offene Site ist möglicherweise unsicher.',
@@ -652,15 +720,19 @@ $ap_translation = [
 	'NumerateLinksInfo'			=> 'Nummeriert und listet alle Links am Fuß der Seite in der Druckansicht mit dieser Option.',
 	'YouareHereText'			=> 'Deaktiviert und visualisiert selbstreferenzierende Links',
 	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
+    //
 
 	// Pages settings
 	'PagesSettingsInfo'			=> '',
 	'PagesSettingsUpdated'		=> 'Updated settings base pages',
+    //
 
 	'ListCount'					=> 'Anzahl der Datensätze pro Liste',
 	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+    //
 
 	'ForumSection'				=> 'Options Forum',
+    //
 	'ForumCluster'				=> 'Cluster Forum',
 	'ForumClusterInfo'			=> 'Adresse der Hauptseite des Forums.',
 	'ForumTopics'				=> 'Anzahl der Themen pro Seite',
@@ -679,16 +751,21 @@ $ap_translation = [
 	'DefaultLicenseInfo'		=> 'Unter welcher Lizenz sollen deine Inhalte veröffentlicht werden?',
 
 	'ServicePagesSection'		=> 'Service pages',
+    //
 	'RootPage'					=> 'Startseite',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
-	'PolicyPage'				=> 'Policies and Regulations',
+	//
+    'PolicyPage'				=> 'Policies and Regulations',
+    //
 	'PolicyPageinfo'			=> 'The page with the rules of the site.',
+    //
 	'SearchPage'				=> 'Suche',
 	'SearchPageInfo'			=> 'Seite mit dem Suchformular (Aktion <code>{{search}}</code>).',
 	'RegistrationPage'			=> 'Register on our site',
 	'RegistrationPageInfo'		=> 'Seite für neue Benutzerregistrierung (Aktion <code>{{registration}}</code>).',
 	'LoginPage'					=> 'Benutzer-Anmeldung',
 	'LoginPageInfo'				=> 'Login page on the site (Aktion <code>{{login}}</code>).',
+    //
 	'SettingsPage'				=> 'Benutzereinstellungen',
 	'SettingsPageInfo'			=> 'Seite zum Anpassen des Benutzerprofils (Aktion <code>{{usersettings}}</code>).',
 	'PasswordPage'				=> 'Passwort ändern',
@@ -699,6 +776,7 @@ $ap_translation = [
 	'CategoryPageInfo'			=> 'Seite mit einer Liste von kategorisierten Seiten (Aktion <code>{{category}}</code>).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (Aktion <code>{{tag}}</code>).',
+    //
 	'GroupsPage'				=> 'Gruppen',
 	'GroupsPageInfo'			=> 'Seite mit einer Liste von Arbeitsgruppen (Aktion <code>{{usergroups}}</code>).',
 	'ChangesPage'				=> 'Letzte Änderungen',
@@ -717,7 +795,7 @@ $ap_translation = [
 	'SandboxPageInfo'			=> 'Seite, auf der Benutzer die Verwendung des Wiki-Markups üben können.',
 	'WikiDocsPage'				=> 'Wiki-Dokumentation',
 	'WikiDocsPageInfo'			=> 'Section of the documentation for using the tool site.',
-
+    //
 
 	// Notification settings
 	'NotificationSettingsInfo'	=> 'Parameter für Benachrichtigungen des Systems.',
@@ -726,18 +804,22 @@ $ap_translation = [
 	'EmailNotification'			=> 'E-Mail-Benachrichtigung',
 	'EmailNotificationInfo'		=> 'E-Mail-Benachrichtigung zulassen. Wähle EIN, um E-Mail-Benachrichtigungen zu aktivieren, und AUS, um sie zu deaktivieren. Beachte, dass die Deaktivierung von E-Mail-Benachrichtigungen keine Auswirkungen auf E-Mails hat, die im Rahmen des Benutzeranmeldungsvorgangs generiert wurden.',
 	'Autosubscribe'				=> 'Autosubscribe',
+    //
 	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
+    //
 
 	'NotificationSection'		=> 'Standardeinstellungen für Benutzerbenachrichtigungen',
 	'NotifyPageEdit'			=> 'Seitenänderung mitteilen',
 	'NotifyPageEditInfo'		=> 'Pending - Sending a email notification only for the first change until the user visits the page again.',
-	'NotifyMinorEdit'			=> 'Kleine Änderung mitteilen',
+	//
+    'NotifyMinorEdit'			=> 'Kleine Änderung mitteilen',
 	'NotifyMinorEditInfo'		=> 'Sende Mitteilungen auch bei kleinen Änderungen.',
 	'NotifyNewComment'			=> 'Neuen Kommentar mitteilen',
 	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
-	'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
+	//
+    'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
 	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the "signup form".',
-
+    //
 
 	// Resync settings
 	'Synchronize'				=> 'Synchronisieren',
@@ -829,6 +911,7 @@ $ap_translation = [
 	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten und Dateien.
 									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+    //
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Wörter, die automatisch in deinem Wiki zensiert werden.',
@@ -849,11 +932,14 @@ $ap_translation = [
 	'ConversionTablesOk'		=> 'Konvertierung der ausgewählten Tabellen erfolgreich.',
 
 	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
+    //
 	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
 
 	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB/XtraDB',
 	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
-	'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
+	//
+    'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
+    //
 
 	'DbVersion'					=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
 	'DbEngineOk'				=> 'InnoDB/XtraDB ist verfügbar.',
@@ -865,6 +951,7 @@ $ap_translation = [
 
 	'ConvertColumnsToStrict'	=> 'Konvertiere Spalten für den SQL-Strikt-Modus',
 	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.',
+    //
 
 	// Log module
 	'LogFilterTip'				=> 'Filtere Ereignisse nach Kriterien',
@@ -959,6 +1046,7 @@ $ap_translation = [
 	'NoTableStructure'			=> 'Die Struktur der Tabellen wurde nicht gespeichert - überspringen',
 	'RestoreRecords'			=> 'Tabelleninhalte wiederherstellen',
 	'ProcessTablesDump'			=> 'Just download and process tables dump',
+    //
 	'Instruction'				=> 'Anweisung',
 	'RestoredRecords'			=> 'Datensätze',
 	'RecordsRestoreDone'		=> 'Abgeschlossen. Gesamtzahl der Datensätze',
