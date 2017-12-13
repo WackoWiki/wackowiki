@@ -64,7 +64,7 @@ function admin_config_email(&$engine, &$module)
 
 		$engine->log(1, '!!Updated email settings!!');
 		$message = $engine->_t('EmailSettingsUpdated');
-        $engine->set_message($message, 'success');
+		$engine->set_message($message, 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -77,7 +77,7 @@ function admin_config_email(&$engine, &$module)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
-				<th colspan="2">Basic parameters</th>
+				<th colspan="2"><?php echo $engine->_t('MainSection'); ?></th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
