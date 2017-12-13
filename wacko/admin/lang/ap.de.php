@@ -61,7 +61,7 @@ $ap_translation = [
 	'Admin'						=> 'Admin',
 
 	'MiscellaneousSection'		=> 'Sonstiges',
-	'MainSection'				=> 'Basic Parameters',
+	'MainSection'				=> 'Grundeinstellungen',
 
 	/**
 	 * AP MENU

@@ -225,7 +225,6 @@ else if ($mode == 'label' && isset($file))
 }
 else if (($mode == 'edit' || $mode == 'show') && isset($file))
 {
-
 	if (count($file) > 0)
 	{
 		if ($file['page_id'])
@@ -261,13 +260,16 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 						<td><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></td>
 					</tr>
 					<tr>
-						<th scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
-						<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
+						<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
+						<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
 					</tr>
 					<tr>
-						<th scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
-						<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
-						</tr>
+						<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
+						<td><?php echo $format_desc($file['caption'], $file['file_lang']); ?></td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+					</tr>
 					<tr>
 						<th scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
 						<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
@@ -287,19 +289,19 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 						<td><?php echo '' . $file['mime_type'] . ''; ?></td>
 					</tr>
 					<tr>
-						<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-						<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
+						<td colspan="2">&nbsp;</td>
 					</tr>
-<?php
-				// image dimension
-				#if ($file['picture_w'])
-				#{ ?>
 					<tr>
-						<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
-						<td><?php echo $format_desc($file['caption'], $file['file_lang']); ?></td>
+						<th scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
+						<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
 					</tr>
-<?php
-				#} ?>
+					<tr>
+						<th scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
+						<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+					</tr>
 					<tr>
 						<th scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
 						<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
@@ -358,32 +360,10 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 							<label for="file_lang"><?php echo $this->_t('YourLanguage');?></label>
 						</th>
 						<td>
-							<select id="file_lang" name="file_lang">
-			<?php
-
-				$languages = $this->_t('LanguageArray');
-
-				if ($this->db->multilanguage)
-				{
-					$langs = $this->available_languages();
-				}
-				else
-				{
-					$langs = [$this->db->language];
-				}
-
-				foreach ($langs as $lang)
-				{
-					echo '<option value="' . $lang . '" ' .
-						($file['file_lang'] == $lang
-							? 'selected'
-							: (!isset($file['file_lang']) && $this->db->language == $lang
-								? 'selected'
-								: '')
-						) . '>' . $languages[$lang] . ' (' . $lang . ")</option>\n";
-				}
-			?>
-							</select>
+						<?php
+							$file_lang = $file['file_lang'] ?: $this->db->language;
+							echo $this->show_select_lang('file_lang', $file_lang, false);
+						?>
 						</td>
 					</tr>
 				</table>
