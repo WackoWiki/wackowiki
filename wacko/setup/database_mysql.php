@@ -15,7 +15,7 @@ $table_acl = "CREATE TABLE {$pref}acl (" .
 					"privilege VARCHAR(10) NOT NULL DEFAULT ''," .
 					"list TEXT NOT NULL," .
 					// "updated TIMESTAMP NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP," .
-					"UNIQUE KEY idx_page_id (page_id,privilege)" .
+					"UNIQUE KEY idx_page_id (page_id, privilege)" .
 				") {$engine} COMMENT='' {$charset}";
 
 $table_auth_token = "CREATE TABLE {$pref}auth_token (" .

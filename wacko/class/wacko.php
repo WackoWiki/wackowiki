@@ -1616,8 +1616,10 @@ class Wacko
 			}
 		}
 
+		// cache only read acl
+		$this->preload_acl($_page_ids);
 		// cache acls to avoid multiple queries to get non-read privileges
-		$this->preload_acl($_page_ids, '');
+		$this->preload_acl([$this->page_id_cache[$this->tag]], '');
 	}
 
 	function set_page($page)
@@ -1664,7 +1666,7 @@ class Wacko
 		$pagination	= [];
 
 		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, ' .
-					 'p.page_size, p.reviewed, p.latest, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
+					 'p.page_size, p.reviewed, p.latest, p.deleted, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$selector =
 			"FROM " . $this->db->table_prefix . "revision p " .
@@ -2637,6 +2639,15 @@ class Wacko
 
 	function update_revisions_count($page_id, $user_id = null)
 	{
+		/** cases: incremental recount, total recount, purge (total + incremental)
+		 *
+		 * $revisions =
+		 *		'revisions + 1' or 'revisions - 1'
+		 *		(int) $this->count_revisions($page_id)
+		 *		0
+		 *
+		 */
+
 		$this->db->sql_query(
 			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"revisions = " . (int) $this->count_revisions($page_id) . " " .
@@ -2653,7 +2664,7 @@ class Wacko
 		}
 	}
 
-	function add_user_page($user_name, $user_lang = null)
+	function add_user_page($user_name, $user_lang = null, $mute = true)
 	{
 		if (!isset($user_lang))
 		{
@@ -2668,7 +2679,7 @@ class Wacko
 		// add user page
 		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
 		{
-			$this->save_page($tag, '', $user_page_template, $change_summary, '', '', '', '', $user_lang, '', $user_name, true);
+			$this->save_page($tag, '', $user_page_template, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
 		}
 	}
 
@@ -5671,9 +5682,9 @@ class Wacko
 	/**
 	* Get ACL for tag from cache
 	*
-	* @param int $page_id
-	* @param string $privilege ACL privilege: read, write, comment, create, upload
-	* @param boolean $use_defaults
+	* @param int		$page_id
+	* @param string 	$privilege ACL privilege: read, write, comment, create, upload
+	* @param boolean	$use_defaults
 	*
 	* @return array ACL
 	*/
@@ -7217,7 +7228,7 @@ class Wacko
 		{
 			return false;
 		}
-
+		#"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL " . (int) $days . " DAY)");
 		if ($this->db->store_deleted_pages && !$dontkeep)
 		{
 			$this->db->sql_query(
@@ -7397,7 +7408,7 @@ class Wacko
 		{
 			return false;
 		}
-
+		#"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL " . (int) $days . " DAY)");
 		return $this->db->sql_query(
 			"DELETE " .
 				"r.* " .
@@ -8377,7 +8388,7 @@ class Wacko
 			$out .= '<label for="' . $name . '">' . $this->_t('YourLanguage') . ' </label>';
 		}
 
-		$out .= '<select id="' . $name . '" name="' . $name . '">';
+		$out .= '<select id="' . $name . '" name="' . $name . '">' . "\n";
 
 		$languages = $this->_t('LanguageArray');
 
