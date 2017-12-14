@@ -291,21 +291,15 @@ $ap_translation = [
 
 	// Basic settings
 	'SiteName'					=> 'Name der Seite',
-	'SiteNameInfo'				=> 'Der Titel der Seite im HTML-Kopf, erscheint im Browser Titel, Theme Header, bei Email Benachrichtigung, etc.',
+	'SiteNameInfo'				=> 'Der Seitentitel (title-Element im HTML-Kopf) erscheint in der Titelleiste von Browserfenstern und den Registerkarten, im Theme Header, bei Email Benachrichtigung, etc.',
 	'SiteDesc'					=> 'Beschreibung der Seite',
 	'SiteDescInfo'				=> 'Ergänzung zum Titel der Website, die im Seitenkopf erscheint, um in wenigen Worten zu erklären, worum es in dieser Seite geht.',
 	'AdminName'					=> 'Administrator der Seite',
-	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
-	// Wo/wann wird der Eintrag verwendet?
-	// Übersetzung Vorschlag 1: Der Name des Benutzers, der für die Unterstützung der gesamten Webseite verantwortlich ist. Dieser Name wird nicht verwendet, um Zugriffsrechte zu bestimmen, aber es ist wünschenswert, dass er dem Namen des Hauptadministrators der Webseite entspricht.
-	// Übersetzung Vorschlag 2: Benutzername, der für die allgemeine Unterstützung der Site verantwortlich ist. Dieser Name wird nicht zum Festlegen der Zugriffsrechte verwendet, es ist jedoch wünschenswert, den Namen des Hauptadministrators der Site zu übernehmen.
+	'AdminNameInfo'				=> 'Benutzername, der insgesamt für die Webseite verantwortlich ist. Dieser Name wird nicht verwendet, um Zugriffsrechte zu bestimmen, aber es ist wünschenswert, dass er dem Namen des Hauptadministrators der Webseite entspricht.',
 
 	'LanguageSection'			=> 'Sprache',
 	'DefaultLanguage'			=> 'Standard Sprache',
-	'DefaultLanguageInfo'		=> 'Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.',
-	// Definiert die Nachrichtensprache, wenn nicht registrierte Gäste angezeigt werden, sowie lokale Einstellungen und Transliterationsregeln für Seitenadressen.
-	// Gibt die Sprache für die Zuordnung nicht registrierter Gäste sowie die Gebietsschemaeinstellungen und die Transliterationsregeln für die Adressen von Seiten an.
-
+	'DefaultLanguageInfo'		=> 'Definiert die Spracheinstellung für (nicht registrierte) Gäste sowie die Gebietsschemaeinstellungen und die Transliterationsregeln für Seitennamen.',
 	'MultiLanguage'				=> 'Unterstützung mehrerer Sprachen',
 	'MultiLanguageInfo'			=> 'Enthält eine Auswahl an Sprachen auf Seitenbasis.',
 	'AllowedLanguages'			=> 'Erlaubte Sprachen',
@@ -322,28 +316,21 @@ $ap_translation = [
 	'CommentsPanelInfo'			=> 'Die Standardanzeige von Kommentaren im unteren Bereich der Seite.',
 	'FilePanel'					=> 'Dateileiste',
 	'FilePanelInfo'				=> 'Die Standardanzeige von Anhängen im unteren Bereich der Seite.',
-	'RatingPanel'				=> 'Rating panel',
-	// Bewertungsfeld
-	// Bereich für Bewertungen
-	'RatingPanelInfo'			=> 'The default display of the rating panel in the bottom of the page.',
-	// Die Standardanzeige für das Bewertungsfeld im unteren Bereich der Seite.
-	'TagsPanel'					=> 'Tags panel',
-	// Tag-Liste
-	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
-	// Die Standardanzeige für die Tag-Liste im unteren Bereich der Seite.
-	'HideRevisions'				=> 'Revisionen ausblenden',
-	'HideRevisionsInfo'			=> 'Die Standardanzeige der Revisionen der Seite.',
+	'RatingPanel'				=> 'Bewertungsfunktion',
+	'RatingPanelInfo'			=> 'Die Standardanzeige für das Bewertungsfeld im unteren Bereich der Seite.',
+	'TagsPanel'					=> 'Schlagwortliste (Tags)',
+	'TagsPanelInfo'				=> 'Die Standardanzeige für Schlagworte im unteren Bereich der Seite.',
+	// Vergleiche: WackoWiki Administration: Inhalt > Kategorien (Tags etwa nicht hierarchisches Stichwortverzeichnis ; Kategorien etwa hierarchisches Inhaltsverzeichnis )
+	'HideRevisions'				=> 'Seitenversionen ausblenden',
+	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
 	'TocPanel'					=> 'Inhaltsverzeichnis',
 	'TocPanelInfo'				=> 'Die Standardanzeige für das Inhaltsverzeichnis-Fenster der Seite (setzt die Unterstützung durch das Layout vorraus).',
-	'SectionsPanel'				=> 'Bereichsanzeige',
-	// Bereichsanzeige aktivieren
-	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmäßig benachbarte Seiten an (setzt die Unterstützung durch das Layout vorraus).',
-	// Welche Aktion wird genau unterstützt? (Tree action wird im default theme nicht am Seitenende angezeigt).
+	'SectionsPanel'				=> 'Bereichsanzeige (Seitenbaum)',
+	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmäßig benachbarte Seiten im Namensraum an (setzt die Unterstützung durch das Layout voraus).',
+	// Tree action {{tree}} wird im default theme nicht am Seitenende angezeigt.
+
 	'DisplayingSections'		=> 'Angezeigte Bereiche',
-
-	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>Baum</em>).',
-	// Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </ em>), nur benachbarte (<em> obere </ em>) oder beide (<em> Baum </ em>) ausgegeben. .
-
+	'DisplayingSectionsInfo'	=> 'Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </ em>), nur benachbarte (<em> obere </ em>) oder beide (<em> Baum </ em>) ausgegeben.',
 	'MenuItems'					=> 'Menüpunkte',
 	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten Menüelemente (setzt die Unterstützung durch das Layout vorraus).',
 
@@ -351,9 +338,7 @@ $ap_translation = [
 	'EnableFeeds'				=> 'Aktiviere Feeds',
 	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
 	'XmlSitemap'				=> 'XML Sitemap',
-	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens "sitemap-wackowiki.xml" im XML-Ordner. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder.',
-	// Erstellt XML-Dateien, die mit XML-Sitemaps kompatibel sind. Möglicherweise möchten Sie den Pfad ändern, um es in Ihrem Stammordner auszugeben, da dies eine der Voraussetzungen ist, d.h. Die XML-Datei befindet sich im Stammordner.
-
+	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens "sitemap-wackowiki.xml". Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis der Installation gespeichert werden.',
 	'XmlSitemapTime'			=> 'XML Sitemap Erstellungszeit',
 	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
 
@@ -367,16 +352,13 @@ $ap_translation = [
 	'EditSummaryInfo'			=> 'Zeigt Kommentarfeld für die Zusammenfassung von Änderungen im Bearbeitungsmodus.',
 	'MinorEdit'					=> 'Kleine Änderung',
 	'MinorEditInfo'				=> 'Aktiviert die Option "Kleine Änderung" im Bearbeitungsmodus.',
-	'ReviewSettings'			=> 'Überprüfen',
-	// Welche Funktionalität wird unterstützt? (review handler?), In der Gruppenverwaltung muss "Reviewer" muss aktiviert sein.
-	'ReviewSettingsInfo'		=> 'Aktiviert die Überprüfungsoption im Bearbeitungsmodus.',
+	'ReviewSettings'			=> 'Änderungen überprüfen',
+	'ReviewSettingsInfo'		=> 'Aktiviert die Option Änderungen durch einen "Reviewer" zu prüfen. In der Gruppenverwaltung muss mindestens ein "Reviewer" zugeordnet sein (WackoWiki Administration: Nutzer > Gruppen > Reviewer > hinzufügen).',
 
 	'PublishAnonymously'		=> 'Anonyme Veröffentlichung zulassen',
 	'PublishAnonymouslyInfo'	=> 'Erlaubt den Benutzern, vorzugsweise anonym zu veröffentlichen (um den Namen zu verbergen).',
 	'DefaultRenameRedirect'		=> 'Bei Umbenennung einer Seite eine Umleitung setzen',
-	'DefaultRenameRedirectInfo'	=> 'By default, offer to deliver a redirect to the old address of the page being renamed.',
-	// Standardmäßig bieten Sie an, eine Umleitung an die alte Adresse der umzubenennenden Seite zu übermitteln.
-	// Standardmäßig erfolgt eine Umleitung an die alte Adresse der umbenannten Seite.
+	'DefaultRenameRedirectInfo'	=> 'Standardmäßig erfolgt eine Umleitung an die alte Adresse der umbenannten Seite.',
 
 	'StoreDeletedPages'			=> 'Gelöschte Seiten behalten',
 	'StoreDeletedPagesInfo'		=> 'Wenn eine Seite, einen Kommentar oder eine Datei gelöscht wird, steht diese noch in einen gesonderten Bereich für eine bestimmte Zeit (siehe nächster Punkt) zur die Wiederherstellung und Anzeige zur Verfügung.',
@@ -388,12 +370,11 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Ermöglicht das Speichern und Anzeigen externer Verweise.',
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
 	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, könnte zu einer hohen Auslastung der Datenbank führen.',
+
 	'AttachmentHandler'			=> 'Dateianhänge aktivieren',
-	// Dateianhänge aktivieren
-	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
-	// Erlaubt Dateianhänge zu zeigen. Vgl. 'FilePanel'
+	'AttachmentHandlerInfo'		=> 'Aktivieren von Dateianhängen für Gäste, registrierte Benutzer oder deaktivieren auf der gesamten Website.',
 	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
-	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. <br>Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
+	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Aussehen der Webseite ändern',
