@@ -23,9 +23,9 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
-if (!isset($nomark))	$nomark = '';
+if (!isset($nomark))	$nomark = 0;
 if (!isset($order))		$order = '';
-if (!isset($global))	$global = '';
+if (!isset($global))	$global = 0;
 if (!isset($tag))		$tag = ''; // FIXME: $tag == $page
 if (!isset($owner))		$owner = '';
 if (!isset($page))		$page = '';
@@ -34,7 +34,7 @@ if (!isset($legend))	$legend = '';
 if (!isset($deleted))	$deleted = 0;
 if (!isset($track))		$track = 0;
 if (!isset($picture))	$picture = '1';
-if (!isset($max))		$max = '';
+if (!isset($max))		$max = null;
 
 if ($max)
 {
@@ -86,8 +86,8 @@ if (!$global)
 	}
 	else
 	{
-		$page	= $this->unwrap_link($page);
-		$ppage	= '/' . $page;
+		$page		= $this->unwrap_link($page);
+		$ppage		= '/' . $page;
 
 		if ($_page_id = $this->get_page_id($page))
 		{
@@ -119,37 +119,30 @@ if ($can_view)
 		return;
 	}
 
-	$count = $this->db->load_all(
-		"SELECT f.file_id " .
+	$selector =
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' " .
-			"AND f.picture_w <> '0' " .
+		"WHERE f.page_id = " . ($global ? 0 : $filepage['page_id']) . " " .
+			"AND f.picture_w <> 0 " .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
 				: '') .
 			($deleted != 1
-				? "AND f.deleted <> '1' "
-				: ""), true);
+				? "AND f.deleted <> 1 "
+				: "");
 
-	$count		= count($count);
-	$pagination = $this->pagination($count, $limit, 'f');
+	$count = $this->db->load_single(
+		"SELECT COUNT(f.file_id) AS n " .
+		$selector, true);
+
+	$pagination = $this->pagination($count['n'], $limit, 'f');
 
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user, f.hits " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = '" . ($global ? 0 : $filepage['page_id']) . "' " .
-			"AND f.picture_w <> '0' " .
-			($owner
-				? "AND u.user_name = " . $this->db->q($owner) . " "
-				: '') . " " .
-			($deleted != 1
-			? "AND f.deleted <> '1' "
-					: "") .
+		$selector .
 		"ORDER BY f." . $order_by . " " .
-		"LIMIT {$pagination['offset']}, {$limit}");
+		"LIMIT {$pagination['offset']}, {$limit}", true);
 
 	if (!is_array($files))
 	{
@@ -170,7 +163,7 @@ if ($can_view)
 	if (!$nomark)
 	{
 		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ) . ' '.($page ? $this->link($ppage, '', $legend) : '');
-		#echo '<div class="layout-box"><p class="layout-box"><span>' . $title.": </span></p>\n";
+		#echo '<div class="layout-box"><p class="layout-box"><span>' . $title . ": </span></p>\n";
 	}
 
 	if ($factor = count($files))
@@ -181,7 +174,6 @@ if ($can_view)
 		$img_count			= $factor + 1;
 		// calculate the total length of the animation by multiplying the number of _actual_ images by the amount of time for both static display of each image and motion between them
 		$total_time			= ($time_on_slide + $time_between_slides) * ($img_count - 1);
-		#$_totalTime	= ($time_on_slide + $time_between_slides) * ($img_count);
 		// determine the percentage of time an individual image is held static during the animation
 		$slide_ratio		= ($time_on_slide / $total_time) * 100;
 		// determine the percentage of time for an individual movement
@@ -192,12 +184,12 @@ if ($can_view)
 		$position			= 0;
 
 		// debug info
-		#echo 'imgCount: ' . $img_count . '<br>';
-		#echo 'totalTime: ' . $total_time . '<br>';
-		#echo 'slideRatio: ' . $slide_ratio . '<br>';
-		#echo 'moveRatio: ' . $move_ratio . '<br>';
-		#echo 'basePercentage: ' . $base_percentage . '<br>';
-		#echo 'totalTime: ' . $total_time . '<br>';
+		#echo 'imgCount: '			. $img_count . '<br>';
+		#echo 'totalTime: '			. $total_time . '<br>';
+		#echo 'slideRatio: '		. $slide_ratio . '<br>';
+		#echo 'moveRatio: '			. $move_ratio . '<br>';
+		#echo 'basePercentage: '	. $base_percentage . '<br>';
+		#echo 'totalTime: '			. $total_time . '<br>';
 		?>
 
 		<style>

@@ -37,7 +37,7 @@ TODO: config settings
 - split local and global tumbs -> read access
 - generated thumbnails full-blown 32-bit PNGs (or at least 24-bit) resulting in a file size often larger than the original image
 - remove thumbs with file or page
-- load the JS with the header (theme/_common/_header.php), see flash action (to avoid multiple loads)
+- load the JS with the footer (theme/_common/_header.php), see flash action (to avoid multiple loads)
 - fall back if no JS or Image manipulation library is available or disabled
 
 */
@@ -49,7 +49,7 @@ $get_file = function ($file_id)
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-		"WHERE f.file_id ='" . (int) $file_id . "' " .
+		"WHERE f.file_id = " . (int) $file_id . " " .
 		"LIMIT 1", true);
 
 	return $file;
@@ -59,17 +59,14 @@ $get_file = function ($file_id)
 require_once 'lib/phpthumb/PHPThumb.php';
 require_once 'lib/phpthumb/GD.php';
 
-?>
-
-<!-- Add jQuery library -->
-<script src="<?php echo $this->db->base_url;?>js/jquery-3.1.1.min.js"></script>
-<!-- Add fancyBox -->
-<script src="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.js"></script>
-<link rel="stylesheet" media="screen" href="<?php echo $this->db->base_url;?>js/fancybox/jquery.fancybox.min.css">
-
-<?php
+// Add jQuery library
+$this->add_html_foot('<script src="' . $this->db->base_url . 'js/jquery-3.1.1.min.js"></script>' . "\n");
+// Add fancyBox
+$this->add_html_foot('<script src="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.js"></script>' . "\n");
+$this->add_html_head('<link rel="stylesheet" media="screen" href="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.css">' . "\n");
 
 // Loading parameters
+$files			= [];
 $thumb_prefix	= 'tn_';
 $imgclass		= '';
 $img_spacer		= '';
@@ -136,7 +133,6 @@ if (!$global)
 	}
 
 	$can_view	= $this->has_access('read', $page_id) || $this->is_admin() || $this->is_owner($page_id);
-	#$can_delete	= $this->is_admin() || $this->is_owner($page_id);
 }
 else
 {
@@ -161,37 +157,28 @@ if ($can_view)
 		return;
 	}
 
-	// load only image files -> AND f.picture_w <> '0'
-	$count = $this->db->load_all(
-		"SELECT f.file_id " .
+	$selector =
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
-			"AND f.picture_w <> '0' " .
+			"AND f.picture_w <> 0 " .
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "
-			: ''), true);
+			: '');
 
-	$count		= count($count);
-	$pagination = $this->pagination($count, $limit, $param_token);
+	// load only image files -> AND f.picture_w <> 0
+	$count = $this->db->load_single(
+		"SELECT COUNT(f.file_id) AS n " .
+		$selector, true);
+
+	$pagination = $this->pagination($count['n'], $limit, $param_token);
 
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.uploaded_dt, u.user_name AS user, f.hits " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
-			"AND f.picture_w <> '0' " .
-		($owner
-			? "AND u.user_name = " . $this->db->q($owner) . " "
-			: '') . " " .
+		$selector .
 		"ORDER BY f." . $order_by . " " .
-		"LIMIT {$pagination['offset']}, {$limit}");
-
-	if (!is_array($files))
-	{
-		$files = [];
-	}
+		"LIMIT {$pagination['offset']}, {$limit}", true);
 
 	// Making an gallery
 	$cur = 0;
@@ -251,7 +238,7 @@ if ($can_view)
 				$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 			}
 
-			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" '.($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
+			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
 			$figcaption = '<br><figcaption>' .
 					'<span>' . $file_description . '</span> ' . '<br>' .
