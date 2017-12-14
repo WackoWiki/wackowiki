@@ -427,12 +427,10 @@ $ap_translation = [
 	'CacheSql'					=> 'Datenbank-Abfragen zwischenspeichern',
 	'CacheSqlInfo'				=> 'Einen lokalen Zwischenspeicher mit Ergebnissen aus bestimmten Datenbankabfragen (resource-SQL-queries) behalten.',
 	'CacheSqlTtl'				=> 'Term relevance Cache Database',
-	//
+	// Übersetzung fehlt
 	'CacheSqlTtlInfo'			=> 'Speichere Ergebnisse der SQL-Abfragen nicht länger als die angegebene Anzahl von Sekunden zwischen. Einen Wert >1200 zu verwenden ist ungünstig.',
-	'ReverseProxySection'		=> 'Reverse Proxy',
-	// Reverse-Proxy
-	'ReverseProxy'				=> 'Use Reverse proxy',
-	// Nutzt Reverse-Proxy
+	'ReverseProxySection'		=> 'Reverse-Proxy',
+	'ReverseProxy'				=> 'Nutze Reverse-Proxy',
 	'ReverseProxyInfo'			=> 'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
 									 Clients zu ermitteln, indem Sie die in den X-Forwarded-For-Headern
 									 gespeicherten Informationen untersuchen. X-Forwarded-For-Header sind ein
@@ -448,63 +446,50 @@ $ap_translation = [
 									 Wenn Sie sich bei dieser Einstellung nicht sicher sind, keinen Reverse-Proxy
 									 haben oder WackoWiki in einer Shared-Hosting-Umgebung betreiben,
 									 sollte diese Einstellung deaktiviert bleiben.',
-	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	// Reverse-Proxy-Header
+	'ReverseProxyHeader'		=> 'Reverse-Proxy-Header',
 	'ReverseProxyHeaderInfo'	=> 'Setzen Sie diesen Wert nur, wenn Ihr Proxy-Server die Client-IP
 									 nicht mit X-Forwarded-For-Header sendet. Der Header "X-Forwarded-For"
 									 ist eine durch Komma + Leerzeichen getrennte Liste von IP-Adressen,
 									 wobei nur der letzte (der linke) verwendet.',
-
-	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
-	//
-	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
-									 proxies. Filling this array WackoWiki will trust the information stored
-									 in the X-Forwarded-For headers only if Remote IP address is one of
-									 these, that is the request reaches the web server from one of your
-									 reverse proxies. Otherwise, the client could directly connect to
-									 your web server spoofing the X-Forwarded-For headers.',
-	//
+	'ReverseProxyAddresses'		=> 'Reverse-Proxy IP-Adressliste',
+	'ReverseProxyAddressesInfo'	=> 'Jedes Element dieser Liste ist eine IP-Adresse eines zu verwendenden
+									 Reverse-Proxy. WackoWiki wird diesen, im X-Forwarded-For Header zu speichernden,
+									 Informationen nur vertrauen, wenn die Anfrage den Webserver über die
+									 entfernte IP-Adresse eines gelisteten Reverse-Proxies erreicht. Ansonsten könnte
+									 der Client sich direkt mit Deinem Webserver verbinden und den X-Forwarded-For Header täuschen.',
 	'RewriteMode'				=> 'Verwende <code>mod_rewrite</code>',
 	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktivieren sie, um "schöne" Seitenadressen zu erhalten.<br>
-									<span class="cite">The value might be overwritten by the Settings class, despite you turn it off, if HTTP_MOD_REWRITE is on.',
+									<span class="cite">Bei eingeschaltetem HTTP_MOD_REWRITE kann dieser Wert, bei Deaktivierung, durch WackoWiki /class/settings.php überschrieben werden.',
 
 	// Permissions settings
-	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
-	// Einstellungen für Zugriffsteuerung und Berechtigungen
+	'PermissionsSettingsInfo'		=> 'Einstellungen für Zugriffsteuerung und Berechtigungen.',
 	'PermissionsSettingsUpdated'	=> 'Berechtigungen aktualisiert',
 	'PermissionsSection'		=> 'Rechte und Privilegien',
 	'ReadRights'				=> 'Standard Lese-Rechte',
-	'ReadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
-	// Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.
+	'ReadRightsInfo'			=> 'Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.',
 	// Wann werden diese Rechte gesetzt?
 	'WriteRights'				=> 'Standard Schreib-Rechte',
-	'WriteRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
-	// Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.
+	'WriteRightsInfo'			=> 'Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.',
 	'CommentRights'				=> 'Standard Kommentar-Rechte',
-	'CommentRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
-	// Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.
+	'CommentRightsInfo'			=> 'Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.',
 	'CreateRights'				=> 'Standard-Unterseitenerstellungsrechte',
-	'CreateRightsInfo'			=> 'Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.',
-	//
+	'CreateRightsInfo'			=> 'Definiert die Rechte für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.',
 	'UploadRights'				=> 'Standard Hochlade-Rechte',
-	'UploadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
-	//
-	'RenameRights'				=> 'Globale Berechtigung Seten umzubenennen',
-	'RenameRightsInfo'			=> 'List for admission to the possibility of free umbenennen (verschieben) von Seiten.',
-	//
+	'UploadRightsInfo'			=> 'Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.',
+	'RenameRights'				=> 'Globale Berechtigung Seiten umzubenennen',
+	'RenameRightsInfo'			=> 'Liste von Benutzern mit Berechtigung, Seiten umzubenennen (zu verschieben).',
 	'LockAcl'					=> 'Beschränke alle Berechtigungen auf Nur Lesen',
 	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
 	'HideLocked'				=> 'Nicht zugängliche Seiten ausblenden',
 	'HideLockedInfo'			=> 'Wenn der Benutzer nicht berechtigt ist, eine Seite zu lesen, blenden sie in verschiedenen Seitenlisten aus (der im Text platzierte Link ist jedoch weiterhin sichtbar).',
 	'RemoveOnlyAdmins'			=> 'Nur Administratoren können Seiten löschen',
-	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.',
+	'RemoveOnlyAdminsInfo'		=> 'Verweigert allen Benutzern, außer Administratoren, Seiten zu löschen. Wird zuerst auf Besitzer normaler Seiten angewendet.',
 	'OwnersRemoveComments'		=> 'Seitenbesitzer können Kommentare löschen',
 	'OwnersRemoveCommentsInfo'	=> 'Ermöglicht es Seitenbesitzern, Kommentare auf ihren Seiten zu moderieren.',
 	'OwnersEditCategories'		=> 'Besitzer können Seitenkategorien bearbeiten',
 	'OwnersEditCategoriesInfo'	=> 'Erlaubt es den Seitenbesitzern die Kageorien-Liste, welche den Seiten zugewiesen ist, zu ändern (Wörter hinzufügen, umbenennen oder löschen)',
 	'TermHumanModeration'		=> 'Zeit zur Moderation',
-	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
-	//
+	'TermHumanModerationInfo'	=> 'Moderatoren können nur Kommentare bearbeiten, wenn sie mindestens vor dieser Anzahl von Tagen dazu freigeschaltet wurden (diese Einschränkung gilt nicht für den letzten Kommentar zum Thema)',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.',
