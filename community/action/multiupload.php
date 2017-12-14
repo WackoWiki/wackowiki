@@ -9,13 +9,10 @@ if (!defined('IN_WACKO'))
 // version 0.6.beta
 // https://wackowiki.org/doc/Dev/PatchesHacks/MultiUpload
 
-?>
-<script src="<?php echo $this->db->base_url;?>js/jquery.min.js"></script>
-<script src="<?php echo $this->db->base_url;?>js/lang/upload.<?php echo $this->user_lang;?>.js"></script>
-<script src="<?php echo $this->db->base_url;?>js/upload.js"></script>
-<link rel="stylesheet" href="<?php echo $this->db->theme_url;?>css/upload.css">
-
-<?php
+$this->add_html_foot('<script src="' . $this->db->base_url . 'js/jquery.min.js"></script>' . "\n");
+$this->add_html_foot('<script src="' . $this->db->base_url . 'js/lang/upload.' . $this->user_lang . '.js"></script>' . "\n");
+$this->add_html_foot('<script src="' . $this->db->base_url . 'js/upload.js"></script>' . "\n");
+$this->add_html_head('<link rel="stylesheet" href="' . $this->db->theme_url . 'css/upload.css">' . "\n");
 
 // TODO:
 // Content Security Policy: may prevent the loading of the preview tumbs as data:image/jpeg;base64,

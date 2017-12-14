@@ -52,6 +52,7 @@ if ($order == 'size_desc')	$order_by = "file_size DESC";
 if ($order == 'ext')		$order_by = "file_ext ASC";
 
 $width_settings			= '100%'; // 100%, 300px, etc.
+$files					= [];
 
 // default options for slider
 $time_on_slide			= 6;
@@ -143,11 +144,6 @@ if ($can_view)
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}", true);
-
-	if (!is_array($files))
-	{
-		$files = [];
-	}
 
 	// display
 
