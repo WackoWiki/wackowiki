@@ -299,9 +299,12 @@ div.action-content { padding: 10px 10px 25px 10px; }
 
 /* Fixed width text: SYNTAX ##monospace## */
 code {
-	color: #666600;
-	background: #ffffcc;
+	color: #666600; 
+		/* color: #c7254e; */
+	background: #ffffcc; 
+		/* background: #f9f2f4; */
 	padding: 1px 5px;
+		/* font-size: 90%; */
 	font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
 }
 
@@ -386,6 +389,10 @@ a.acl-customsec .icon {
 
 a[href $='.pdf'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/pdf.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.epub'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/epub.svg') no-repeat scroll left center;
 	padding-left: 17px;
 }
 a[href $='.txt'] .icon {

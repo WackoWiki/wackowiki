@@ -8525,6 +8525,7 @@ class Wacko
 	// to use by actions to add some above </body> e.g. to adding custom JS
 	function add_html_foot($text)
 	{
+		// TODO: check for already added items to avoid multiple loads
 		$this->html_foot .= $text;
 	}
 
