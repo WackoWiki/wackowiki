@@ -422,11 +422,11 @@ $ap_translation = [
 	'CachingSection'			=> 'Zwischenspeicher-Optionen',
 	'Cache'						=> 'Dargestellte Seiteninhalte zwischenspeichern',
 	'CacheInfo'					=> 'Dargestellte Seiteninhalte lokal zwischenspeichern, um nachfolgende Seitenaufrufe zu beschleunigen. Nur anwendbar für Gäste bzw. nicht registrierte Besucher.',
-	'CacheTtl'					=> 'Zeitdauer für zwischenspeicherter Seiten',
+	'CacheTtl'					=> 'Aufbewahrungsdauer zwischenspeicherter Seiten',
 	'CacheTtlInfo'				=> 'Speichere Seiten nicht länger als die angegebene Anzahl von Sekunden zwischen.',
-	'CacheSql'					=> 'Datenbank-Abfragen zwischenspeichern',
+	'CacheSql'					=> 'SQL-Abfragen zwischenspeichern',
 	'CacheSqlInfo'				=> 'Einen lokalen Zwischenspeicher mit Ergebnissen aus bestimmten Datenbankabfragen (resource-SQL-queries) behalten.',
-	'CacheSqlTtl'				=> 'Term relevance Cache Database',
+	'CacheSqlTtl'				=> 'Aufbewahrungsdauer zwischengespeicherter SQL-Abfragen',
 	// Übersetzung fehlt
 	'CacheSqlTtlInfo'			=> 'Speichere Ergebnisse der SQL-Abfragen nicht länger als die angegebene Anzahl von Sekunden zwischen. Einen Wert >1200 zu verwenden ist ungünstig.',
 	'ReverseProxySection'		=> 'Reverse-Proxy',
@@ -467,7 +467,6 @@ $ap_translation = [
 	'PermissionsSection'		=> 'Rechte und Privilegien',
 	'ReadRights'				=> 'Standard Lese-Rechte',
 	'ReadRightsInfo'			=> 'Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.',
-	// Wann werden diese Rechte gesetzt?
 	'WriteRights'				=> 'Standard Schreib-Rechte',
 	'WriteRightsInfo'			=> 'Wird verwendet für neu erstellte Themenbereiche und Seiten ohne (von Namensräumen/Oberverzeichnissen geerbte) verfügbare Rechte.',
 	'CommentRights'				=> 'Standard Kommentar-Rechte',
@@ -479,7 +478,7 @@ $ap_translation = [
 	'RenameRights'				=> 'Globale Berechtigung Seiten umzubenennen',
 	'RenameRightsInfo'			=> 'Liste von Benutzern mit Berechtigung, Seiten umzubenennen (zu verschieben).',
 	'LockAcl'					=> 'Beschränke alle Berechtigungen auf Nur Lesen',
-	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
+	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>Dies könnte nützlich sein, wenn ein Projekt beendet wurde oder aus Sicherheitsgründen die Bearbeitung von Seiten zeitweise ausgesetzt werden muss oder als Notfallmaßnahme.',
 	'HideLocked'				=> 'Nicht zugängliche Seiten ausblenden',
 	'HideLockedInfo'			=> 'Wenn der Benutzer nicht berechtigt ist, eine Seite zu lesen, blenden sie in verschiedenen Seitenlisten aus (der im Text platzierte Link ist jedoch weiterhin sichtbar).',
 	'RemoveOnlyAdmins'			=> 'Nur Administratoren können Seiten löschen',
@@ -492,8 +491,7 @@ $ap_translation = [
 	'TermHumanModerationInfo'	=> 'Moderatoren können nur Kommentare bearbeiten, wenn sie mindestens vor dieser Anzahl von Tagen dazu freigeschaltet wurden (diese Einschränkung gilt nicht für den letzten Kommentar zum Thema)',
 
 	// Security settings
-	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.',
-	//
+	'SecuritySettingsInfo'		=> 'Gesamte Sicherheitseinstellungen für die Platform, Benutzersicherheit und Sicherheitsteilsysteme.',
 	'SecuritySettingsUpdated'	=> 'Sicherheitseinstellungen aktualisiert',
 
 	'AllowRegistration'			=> 'Online registrieren',
@@ -502,68 +500,51 @@ $ap_translation = [
 	'ApproveNewUserInfo'		=> 'Ermöglicht Administratoren, Benutzer nach der Registrierung zuzulassen. Nur zugelassene Benutzer dürfen sich auf der Site anmelden.',
 	'PersistentCookies'			=> 'Dauerhafte Cookies',
 	'PersistentCookiesInfo'		=> 'Erlaube dauerhafte Cookies.',
+	// Namenskonventionen für Benutzernamen
 	'AntiDupe'					=> 'Anti-clone',
-	'AntiDupeInfo'				=> 'Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.',
+	'AntiDupeInfo'				=> 'Verweigern der Registrierung von Namen, die <span class = "underline">ähnlich</span> zu vorhanden Benutzernamen sind (Gäste können diese Namen auch nicht zum Unterschreiben von Kommentaren verwenden). Wenn die Option deaktiviert ist, nur bei <span class = "underline">identischen</span> Namen.',
 	'DisableWikiName'			=> 'Deaktiviere WikiName',
 	'DisableWikiNameInfo'		=> 'Deaktiviere die die obligatorische Verwendung von WikiNamen. Ermöglicht die Registrierung von Benutzern mit traditionellen Spitznamen, NameVorname ist nicht zwingend.',
 	'AllowEmailReuse'			=> 'Erlaubt die Wiederverwendung von E-Mail-Adressen',
 	'AllowEmailReuseInfo'		=> 'Verschiedene Benutzer können sich mit derselben E-Mail-Adresse registrieren.',
-	'UsernameLength'			=> 'Username length',
-	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+	'UsernameLength'			=> 'Länge von Benutzernamen',
+	'UsernameLengthInfo'		=> 'Mindestens erforderliche und maximal zulässige Zeichenanzahl in Benutzernamen.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Aktiviere Captcha',
-	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
-	//
+	'EnableCaptchaInfo'			=> 'Aktiviert eine Sicherheitsabfrage zum Schutz vor SPAM auf der gesamten Website.',
 	'CaptchaComment'			=> 'Neuer Kommentar',
-	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
-	//
+	'CaptchaCommentInfo'		=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Veröffentlichung von Kommentaren erforderlich.',
 	'CaptchaPage'				=> 'Neue Seite',
-	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
-	//
+	'CaptchaPageInfo'			=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Erstellung von neuen Seiten erforderlich.',
 	'CaptchaEdit'				=> 'Seite bearbeiten',
-	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
-	//
+	'CaptchaEditInfo'			=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Bearbeitung von Seiten erforderlich.',
 	'CaptchaRegistration'		=> 'Registrierung',
-	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
-	//
+	'CaptchaRegistrationInfo'	=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Registrierung  erforderlich.',
 
-	'TlsSection'				=> 'TLS Settings',
-	//
-	'TlsConnection'				=> 'TLS-Connection',
-	//
-	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server , otherwise you will lose access to the admin panel!</span>',
-	//
-	'TlsImplicit'				=> 'Forced TLS',
-	//
-	'TlsImplicitInfo'			=> 'Force client reconnection from HTTP to HTTPS. When this option the customer can view the site for open HTTP-channel.',
-	//
-	'TlsProxy'					=> 'TLS Proxy',
-	// TLS-Proxy
-	'TlsProxyInfo'				=> 'Uses the provided TLS Proxy inplace of TLS. E.g. https://<span class="cite">your-https-proxy.tld</span> without ending slash and without https://.',
-	//
-	'HttpSecurityHeaders'		=> 'HTTP Security Headers',
-	//
-	'EnableSecurityHeaders'		=> 'Enable Security Headers',
-	//
-	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',
-	//
+	'TlsSection'				=> 'TLS-Einstellungen',
+	'TlsConnection'				=> 'TLS-Verwendung',
+	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich! </ span>',
+	'TlsImplicit'				=> 'TLS erzwingen',
+	'TlsImplicitInfo'			=> 'Erzwingt erneute Verbindung des Clients von HTTP zu HTTPS.  Wenn die Option aktiviert ist, überträgt der Client die Webseite über einen verschlüsselten HTTPS-Kanal.',
+	'TlsProxy'					=> 'TLS-Proxy',
+	'TlsProxyInfo'				=> 'Verwendet diesen TLS-Proxy anstelle von TLS. z.B. https://<span class="cite">dein-https-proxy.tld</span> ohne Schrägstrich am Ende und ohne https://.',
+	'HttpSecurityHeaders'		=> 'HTTP-Security-Header',
+	'EnableSecurityHeaders'		=> 'Security-Header aktivieren',
+	'EnableSecurityHeadersinfo'	=> 'Aktiviert Security-Header (frame busting, clickjacking/XSS/CSRF-Schutz). <br> Diese Content Security Policy (CSP) kann in bestimmten Situationen (z. B. während der Entwicklung) oder bei Verwendung von Plugins, die auf extern gehostete Ressourcen wie Bilder oder Skripts angewiesen sind, Probleme verursachen. <br> Das Deaktivieren der CSP ist ein Sicherheitsrisiko!',
 	'Csp'						=> 'Content-Security-Policy (CSP)',
-	//
-	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
-	//
+	'CspInfo'					=> 'Zur Etablierung von Sicherheitsrichtlinien gegen schadhafte Inhalte gehört zu entscheiden, welche einzelnen Richtlinien geschaffen werden sollen, diese zu gestalten und festzuschreiben.',
 	'CspModes'	=> [
 		'0'		=> 'deaktiviert',
 		'1'		=> 'strikt',
 		'2'		=> 'benutzerdefiniert',
 	],
-	'UserPasswordSection'		=> 'Persistence of user passwords',
-	//
+	'UserPasswordSection'		=> 'Passwortschutz-Einstellungen',
 	'PwdMinChars'				=> 'Minimale Passwortlänge',
-	'PwdMinCharsInfo'			=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'PwdMinCharsInfo'			=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 12 bis 16 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
 	//
 	'AdminPwdMinChars'			=> 'Minimale Admin Passwortlänge',
-	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'AdminPwdMinCharsInfo'		=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 15 bis 20 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
 	'PwdCharComplexity'			=> 'Die erforderliche Kennwortkomplexität',
 	'PwdCharClasses'	=> [
 		'0'		=> 'ungeprüft',
@@ -580,35 +561,32 @@ $ap_translation = [
 
 	'LoginSection'				=> 'Anmeldung',
 	'MaxLoginAttempts'			=> 'Maximale Anzahl von Anmeldeversuchen pro Nutzername',
-	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
-	//
+	'MaxLoginAttemptsInfo'		=> 'Anzahl der zulässigen Login-Versuche je Benutzerkonto bevor der SPAM-Schutz ausgelöst wird. Wenn 0 eingetragen: kein SPAM-Schutz für die Anmeldung je Benutzer.',
 	'IpLoginLimitMax'			=> 'Maximale Anzahl von Anmeldeversuchen pro IP-Adresse',
-	'IpLoginLimitMaxInfo'		=> 'The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.',
-	//
+	'IpLoginLimitMaxInfo'		=> 'Anzahl der zulässigen Login-Versuche von einer einzelnen IP-Adresse aus, bevor der SPAM-Schutz ausgelöst wird. Wenn 0 eingetragen: kein SPAM-Schutz für die Anmeldung je IP-Adresse.',
 
 	'LogSection'				=> 'Protokolleinstellungen',
 	'LogLevel'					=> 'Protokollierung verwenden',
-	'LogLevelInfo'				=> 'Die Mindestpriorität der Ereignisse, die im Protokoll aufgezeichnet wurden.',
+	'LogLevelInfo'				=> 'Die Mindestpriorität für Ereignisse, die im Protokoll aufgezeichnet werden.',
 	'LogThresholds'	=> [
 		'0'		=> 'keine Protokollierung',
-		'1'		=> 'only the critical level',
-		'2'		=> 'from the highest level',
-		'3'		=> 'from high',
-		'4'		=> 'im Mittel',
-		'5'		=> 'from low',
-		'6'		=> 'the minimum level',
+		'1'		=> 'nur kritische Stufe',
+		'2'		=> 'höchste Stufe',
+		'3'		=> 'hoch',
+		'4'		=> 'mittel',
+		'5'		=> 'niedrig',
+		'6'		=> 'niedrigste Stufe',
 		'7'		=> 'alles aufzeichnen',
 	],
-	'LogDefaultShow'			=> 'Angezeigter Log Modus',
-	//
-	'LogDefaultShowInfo'		=> 'The minimum priority events displayed in the log by default.',
+	'LogDefaultShow'			=> 'Angezeigter Log-Modus',
+	'LogDefaultShowInfo'		=> 'Die Mindestpriorität für Ereignisse die standardmäßig im Log angezeigt werden .',
 	'LogModes'	=> [
-		'1'		=> 'only the critical level',
-		'2'		=> 'from the highest level',
-		'3'		=> 'from high-level',
-		'4'		=> 'the average',
-		'5'		=> 'from a low',
-		'6'		=> 'from the minimum level',
+		'1'		=> 'nur kritische Stufe',
+		'2'		=> 'höchste Stufe',
+		'3'		=> 'hohes Stufe',
+		'4'		=> 'mittel',
+		'5'		=> 'niedrig',
+		'6'		=> 'niedrigste Stufe',
 		'7'		=> 'zeige alle',
 	],
 	'LogPurgeTime'				=> 'Aufbewahrungszeit für das Ereignisprotokoll',
@@ -616,18 +594,14 @@ $ap_translation = [
 
 	'FormsSection'				=> 'Formulare',
 	'FormTokenTime'				=> 'Maximale Zeit für die Übermittlung von Formularen',
-	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in Sekunden).<br> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.',
+	'FormTokenTimeInfo'			=> 'Die Zeit, die ein Benutzer für das Senden eines Formulares hat (in Sekunden).<br> Verwende -1 zum Deaktivieren. Beachte: Ein Formular wird unabhängig von dieser Einstellung ungültig, wenn die Sitzung (Session) abläuft.',
 
-	'SessionLength'				=> 'Term login cookie',
-	//
-	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
-	//
+	'SessionLength'				=> 'Aufbewahrungsdauer Login-Cookie',
+	'SessionLengthInfo'			=> 'Die standardmäßige Lebensdauer des Login-Cookie von Benutzern (in Tagen).',
 	'CommentDelay'				=> 'Anti-flood für Kommentare',
-	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in Sekunden).',
-	//
+	'CommentDelayInfo'			=> 'Mindestwartezeit zwischen der Veröffentlichung von neuen Benutzerkommentaren (in Sekunden).',
 	'IntercomDelay'				=> 'Anti-flood für persönliche Mitteilungen',
-	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in Sekunden).',
-	//
+	'IntercomDelayInfo'			=> 'Mindestwartezeit zwischen dem Senden einer persönlicher Nachricht (in Sekunden).',
 
 	//Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
