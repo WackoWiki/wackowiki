@@ -279,7 +279,7 @@ class Http
 			$sess->cf_dbal_table_name = $this->db->table_prefix . 'sessions';
 		}
 
-		$sess->cf_secret			= $this->db->system_seed;
+		$sess->cf_secret			= $this->db->system_seed_hash;
 		$sess->cf_cookie_prefix		= $this->db->cookie_prefix;
 		$sess->cf_cookie_persistent	= ($this->db->allow_persistent_cookie? $this->db->session_length : false);
 		$sess->cf_cookie_path		= $this->db->cookie_path;

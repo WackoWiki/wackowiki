@@ -15,7 +15,7 @@ if (($code = (string) @$_REQUEST['secret_code']))
 	$user = $this->db->load_single(
 		"SELECT user_id, user_name " .
 		"FROM " . $this->db->user_table . " " .
-		"WHERE change_password = " . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed)) . " " .
+		"WHERE change_password = " . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed_hash)) . " " .
 		"LIMIT 1");
 
 	if (!$user)
@@ -99,7 +99,7 @@ if (@$_POST['_action'] === 'forgot_password')
 	else
 	{
 		$code		= Ut::random_token(21);
-		$code_hash	= hash_hmac('sha256', $code, $this->db->system_seed);
+		$code_hash	= hash_hmac('sha256', $code, $this->db->system_seed_hash);
 
 		// update table
 		$this->db->sql_query(
