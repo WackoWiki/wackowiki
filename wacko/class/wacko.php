@@ -3087,7 +3087,7 @@ class Wacko
 
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .
-				"email_confirm = " . $this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed)) . " " .
+				"email_confirm = " . $this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed_hash)) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
 
@@ -3096,7 +3096,7 @@ class Wacko
 
 	function user_email_confirm_check($code)
 	{
-		$hash = $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed));
+		$hash = $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed_hash));
 
 		if (($user = $this->db->load_single(
 			"SELECT user_name, email " .

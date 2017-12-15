@@ -48,7 +48,7 @@ class Settings extends Dbal implements ArrayAccess
 				die("WackoWiki fatal error: system_seed in config.php is empty or too short. Please, use 20+ *random* characters to define this variable.");
 			}
 
-			$this->system_seed = hash('sha1', $this->system_seed);
+			$this->system_seed_hash = hash('sha1', $this->system_seed);
 
 			if (!RECOVERY_MODE)
 			{
@@ -116,7 +116,7 @@ class Settings extends Dbal implements ArrayAccess
 					$prefix .= ucfirst(strtolower($part));
 				}
 
-				$prefix .= substr(base64_encode(hash('sha1', $this->base_url . $this->system_seed, true)), 1, 6);
+				$prefix .= substr(base64_encode(hash('sha1', $this->base_url . $this->system_seed_hash, true)), 1, 6);
 
 				$this->cookie_prefix	= preg_replace('/[^0-9a-z]+/i', '', $prefix);
 				$this->user_table		= $this->table_prefix . 'user';

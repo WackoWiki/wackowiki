@@ -66,7 +66,7 @@ if (@$_POST['_action'] === 'emergency')
 {
 	if (password_verify(
 			base64_encode(
-					hash('sha256', $engine->db->system_seed . $_POST['ap_password'], true)
+					hash('sha256', $engine->db->system_seed_hash . $_POST['ap_password'], true)
 					),
 				$engine->db->recovery_password
 			)
