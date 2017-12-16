@@ -448,7 +448,7 @@ $ap_translation = [
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
-										<span class="cite">The value might be overwritten by the Settings class, despite you turn it off, if HTTP_MOD_REWRITE is on.',
+										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless it is turn off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
@@ -979,6 +979,8 @@ $ap_translation = [
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
+	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',
+
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'UserEditButton'			=> 'Muuda',
@@ -1000,6 +1002,8 @@ $ap_translation = [
 	'NoMatchingUser'			=> 'No users that meet the criteria',
 
 	// Groups module
+	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
+
 	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'Description',
 	'GroupsModerator'			=> 'Moderator',
