@@ -39,7 +39,7 @@ function admin_user_groups(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
 	<p>
-		From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.
+		<?php echo $engine->_t('GroupsInfo');?>
 	</p>
 	<br>
 <?php

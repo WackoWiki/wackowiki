@@ -34,7 +34,7 @@ function admin_user_users(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
 	<p>
-		Here you can change your users information and certain specific options.
+		<?php echo $engine->_t('UsersInfo');?>
 	</p>
 	<br>
 <?php

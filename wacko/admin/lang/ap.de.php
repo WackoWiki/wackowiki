@@ -459,7 +459,7 @@ $ap_translation = [
 									 der Client sich direkt mit Deinem Webserver verbinden und den X-Forwarded-For Header täuschen.',
 	'RewriteMode'				=> 'Verwende <code>mod_rewrite</code>',
 	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktivieren sie, um "schöne" Seitenadressen zu erhalten.<br>
-									<span class="cite">Bei eingeschaltetem HTTP_MOD_REWRITE kann dieser Wert, bei Deaktivierung, durch WackoWiki /class/settings.php überschrieben werden.',
+									<span class="cite">Der Wert wird möglicherweise zur Laufzeit von der Settings-Klasse überschrieben, obwohl er deaktiviert ist, wenn HTTP_MOD_REWRITE aktiviert ist.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Einstellungen für Zugriffsteuerung und Berechtigungen.',
@@ -849,8 +849,8 @@ $ap_translation = [
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten und Dateien.
-									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
-									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
+									Um die Seiten und Dateien endgültig aus der Datenbank zu löschen oder wiederherzustellen klicke in der entsprechenden Zeile auf <em>Entfernen</em> oder <em>Wiederherstellen</em>.
+									(Achtung, keine Löschbestätigung ist erforderlich!)',
 	//
 
 	// Filter module
@@ -1013,6 +1013,8 @@ $ap_translation = [
 	'LogDbRestored'				=> 'Sicherung ##%1## der Datenbank wiederhergestellt.',
 
 	// User module
+	'UsersInfo'					=> 'Hier können Sie Ihre Benutzerinformationen und bestimmte spezifische Optionen ändern.',
+
 	'UsersAdded'				=> 'Benutzer hinzugefügt',
 	'UsersDeleteInfo'			=> '[Informationen an Benutzer zur Löschung hier..]',
 	'UserEditButton'			=> 'Bearbeiten',
@@ -1034,6 +1036,8 @@ $ap_translation = [
 	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfüllen.',
 
 	// Groups module
+	'GroupsInfo'				=> 'Von diesem Panel aus können Sie alle Ihre Benutzergruppen verwalten. Sie können vorhandene Gruppen löschen, erstellen und bearbeiten. Darüber hinaus können Sie Gruppenleiter auswählen, den Status der offenen / versteckten / geschlossenen Gruppen umschalten und den Gruppennamen und die Beschreibung festlegen.',
+
 	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',
 	'GroupsDescription'			=> 'Beschreibung',
 	'GroupsModerator'			=> 'Moderator',
