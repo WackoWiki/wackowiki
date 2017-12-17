@@ -129,6 +129,7 @@ write_config_hidden_nodes(['none' => '']);
 		[UPLOAD_BACKUP_DIR,		0777],
 		[UPLOAD_GLOBAL_DIR,		0777],
 		[UPLOAD_PER_PAGE_DIR,	0777],
+		[THUMB_DIR,				0777],
 		[XML_DIR,				0777],
 		[SITEMAP_XML,			0777],
 	];

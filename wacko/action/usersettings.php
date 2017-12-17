@@ -151,6 +151,7 @@ else if (($user = $this->get_user()))
 								$this->user_email_confirm($user['user_id'])) . "\n\n";
 
 			$user['email'] = $email;
+
 			$this->send_user_email($user, $subject, $body);
 			$this->set_language($save, true);
 
@@ -231,7 +232,6 @@ else if (($user = $this->get_user()))
 					<label for="send_watchmail"><?php echo $this->_t('SendWatchEmail');?></label>
 				</td>
 			</tr>
-
 		<tr>
 			<th>
 				<label for="notify_page"><?php echo $this->_t('NotifyPageEdit');?></label>
@@ -281,7 +281,6 @@ else if (($user = $this->get_user()))
 			</td>
 		</tr>
 	<?php	}?>
-
 		<tr>
 			<td>&nbsp;</td>
 			<td>
@@ -443,7 +442,6 @@ else if (($user = $this->get_user()))
 		</div>
 <?php
 		echo $this->form_close();
-
 	}
 	// GENERAL
 	else
@@ -512,10 +510,10 @@ else if (($user = $this->get_user()))
 			echo '<div class="hint"><strong class="cite">' .
 				$this->_t('EmailNotVerified') . '</strong><br>' .
 				'<small>' . $this->_t('EmailNotVerifiedDesc') .
-				'<strong><a href="' . $this->href('', '', ['resend_code' => 1]) . '">' . $this->_t('HereLink') . '</a></strong>.
-				</small></div>';
+				'<strong><a href="' . $this->href('', '', ['resend_code' => 1]) . '">' . $this->_t('HereLink') . '</a></strong>' .
+				'</small></div>';
 		}
-?></td>
+?>		</td>
 	</tr>
 	<tr>
 		<th scope="row">
@@ -523,10 +521,9 @@ else if (($user = $this->get_user()))
 		</th>
 		<td>
 <?php
-			$user_lang = $user['user_lang'] ? $user['user_lang'] : $this->db->language;
+			$user_lang = $user['user_lang'] ?: $this->db->language;
 			echo $this->show_select_lang('user_lang', $user_lang, false);
 ?>
-
 		</td>
 	</tr>
 	<tr>
@@ -535,7 +532,6 @@ else if (($user = $this->get_user()))
 		</th>
 		<td>
 			<select id="theme" name="theme">
-
 <?php
 	$themes = $this->available_themes();
 
@@ -545,7 +541,7 @@ else if (($user = $this->get_user()))
 			(isset($user['theme']) && $user['theme'] == $theme
 				? ' selected '
 				: ($this->db->theme == $theme
-					? ' selected'
+					? ' selected '
 					: '')
 			) . '>' . $theme . "</option>\n";
 	}
@@ -559,7 +555,6 @@ else if (($user = $this->get_user()))
 		</th>
 		<td>
 			<select id="timezone" name="timezone">
-
 <?php
 	$timezones = $this->_t('TzZoneArray');
 
@@ -572,9 +567,9 @@ else if (($user = $this->get_user()))
 
 		echo '<option value="' . $offset . '"' .
 			(isset($user['timezone']) && $user['timezone'] == $offset
-				? ' selected'
+				? ' selected '
 				: ($this->db->timezone == $offset && !isset($user['timezone'])
-					? ' selected'
+					? ' selected '
 					: '')
 			) . '>' . $timezone . "</option>\n";
 	}
@@ -599,8 +594,8 @@ else if (($user = $this->get_user()))
 		</th>
 		<td>
 			<select id="sorting_comments" name="sorting_comments">
-				<option value="0"<?php echo ($user['sorting_comments']  == 0  ? ' selected' : '');?>><?php echo $this->_t('SortCommentAsc');?></option>
-				<option value="1"<?php echo ($user['sorting_comments']  == 1  ? ' selected' : '');?>><?php echo $this->_t('SortCommentDesc');?></option>
+				<option value="0"<?php echo ($user['sorting_comments']  == 0 ? ' selected' : '');?>><?php echo $this->_t('SortCommentAsc');?></option>
+				<option value="1"<?php echo ($user['sorting_comments']  == 1 ? ' selected' : '');?>><?php echo $this->_t('SortCommentDesc');?></option>
 			</select>
 		</td>
 	</tr>
