@@ -16,8 +16,11 @@
 			<label for="purge_feeds_cache">[ ' _t: FeedCache ' ]</label><br>
 
 			<input type="checkbox" id="purge_templates_cache" name="template_cache">
-			<label for="purge_templates_cache">[ ' _t: TemplateCache ' ]</label><br><br>
+			<label for="purge_templates_cache">[ ' _t: TemplateCache ' ]</label><br>
 
+			<input type="checkbox" id="purge_thumb_cache" name="thumb_cache">
+			<label for="purge_thumb_cache">[ ' _t: ThumbCache ' ]</label><br><br>
+			
 			<input type="submit" name="clear_cache" value="[ ' _t: ClearCache ' ]">
 		</div>
 	</form>
@@ -39,3 +42,6 @@
 
 [ === template === ]
 ['' _t: TemplateCache ''] (['' n |e '']) ... ['' '']
+
+[ === tumbnail === ]
+['' _t: ThumbCache ''] (['' n |e '']) ... ['' '']

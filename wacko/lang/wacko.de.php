@@ -892,9 +892,10 @@ $wacko_translation = [
 	'CacheCleared'				=> 'Zwischenspeicher geleert.',
 	'ConfigCache'				=> 'Config Zwischenspeicher',
 	'FeedCache'					=> 'Feed Zwischenspeicher',
-	'PageCache'					=> 'Page Zwischenspeicher',
+	'PageCache'					=> 'Seiten Zwischenspeicher',
 	'SQLCache'					=> 'SQL Zwischenspeicher',
 	'TemplateCache'				=> 'Template Zwischenspeicher',
+	'ThumbCache'				=> 'Vorschaubild Zwischenspeicher',
 
 	// Flash
 	'FlashNoURL'				=> 'Bitte gib eine Flashdatei mit dem Parameter url an. (z.B. {{flash url="file:the_movie.swf"}} )',
