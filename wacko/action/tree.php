@@ -53,7 +53,7 @@ if ($pages = $this->db->load_all(
 	{
 		$max_level = substr_count($root, '/') + $depth;
 		reset($pages);
-		$_pages = '';
+		$_pages = [];
 
 		do
 		{

@@ -1115,7 +1115,7 @@ class Wacko
 	*/
 	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0)
 	{
-		$page = [];
+		$page = '';
 
 		if ($deleted)
 		{
@@ -1617,8 +1617,13 @@ class Wacko
 
 		// cache only read acl
 		$this->preload_acl($_page_ids);
-		// cache acls to avoid multiple queries to get non-read privileges
-		$this->preload_acl([$this->page_id_cache[$this->tag]], '');
+
+		// current page
+		if (isset($this->page_id_cache[$this->tag]))
+		{
+			// cache all acls to avoid multiple queries to get non-read privileges
+			$this->preload_acl([$this->page_id_cache[$this->tag]], '');
+		}
 	}
 
 	function set_page($page)
@@ -6723,7 +6728,7 @@ class Wacko
 			$this->supertag =
 				(!$page
 					? $this->translit($tag)
-					: $page['supertag']);
+					: $page['supertag']); // TODO: PHP Notice:  Undefined index: supertag
 
 			// TODO: obsolete? Add description what it does
 			// creates dummy array

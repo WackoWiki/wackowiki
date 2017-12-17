@@ -193,9 +193,9 @@ if (!empty($blog_cluster))
 	}
 
 	$count		= $this->db->load_single($sql_count, true);
-	$pages		= $this->db->load_all($sql_mode, true);
-
 	$pagination	= $this->pagination($count['n'], $max, 'p', $p_mode);
+
+	$pages		= $this->db->load_all($sql_mode, true);
 
 	// start output
 	echo '<section class="news">' . "\n";
