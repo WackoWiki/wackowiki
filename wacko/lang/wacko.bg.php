@@ -893,6 +893,7 @@ $wacko_translation = [
 	'PageCache'					=> 'Page cache',
 	'SQLCache'					=> 'SQL cache',
 	'TemplateCache'				=> 'Template cache',
+	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Flash
 	'FlashNoURL'				=> 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',
