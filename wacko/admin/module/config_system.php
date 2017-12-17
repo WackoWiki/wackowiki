@@ -196,6 +196,63 @@ function admin_config_system(&$engine, &$module)
 					<input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
 			</tr>
+						<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('LogSection');?>
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="log_level"><strong><?php echo $engine->_t('LogLevel');?>:</strong><br>
+					<small><?php echo $engine->_t('LogLevelInfo');?></small></label>
+				</td>
+				<td>
+					<select id="log_level" name="log_level">
+					<?php
+						$log_thresholds = $engine->_t('LogThresholds');
+
+						foreach ($log_thresholds as $mode => $log_threshold)
+						{
+							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->log_level === $mode ? 'selected' : '') . '>' . $mode . ': ' . $log_threshold . '</option>' . "\n";
+						}
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="log_default_show"><strong><?php echo $engine->_t('LogDefaultShow');?>:</strong><br>
+					<small><?php echo $engine->_t('LogDefaultShowInfo');?></small></label>
+				</td>
+				<td>
+					<select id="log_default_show" name="log_default_show">
+					<?php
+						$log_modes = $engine->_t('LogModes');
+
+						foreach ($log_modes as $mode => $log_mode)
+						{
+							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->log_default_show === $mode ? 'selected' : '') . '>' . $mode . ': ' . $log_mode . '</option>' . "\n";
+						}
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="log_purge_time"><strong><?php echo $engine->_t('LogPurgeTime');?>:</strong><br>
+					<small><?php echo $engine->_t('LogPurgeTimeInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" min="0" maxlength="4" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>">
+				</td>
+			</tr>
 			<tr>
 				<th colspan="2">
 					<br>
