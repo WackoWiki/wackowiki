@@ -35,6 +35,7 @@ TODO: config settings
 - thumbnails (boolean)
 
 - split local and global tumbs -> read access
+- add filter for categories cat="one,two"
 - generated thumbnails full-blown 32-bit PNGs (or at least 24-bit) resulting in a file size often larger than the original image
 - remove thumbs with file or page
 - load the JS with the footer (theme/_common/_header.php), see flash action (to avoid multiple loads)
@@ -60,10 +61,10 @@ require_once 'lib/phpthumb/PHPThumb.php';
 require_once 'lib/phpthumb/GD.php';
 
 // Add jQuery library
-$this->add_html_foot('<script src="' . $this->db->base_url . 'js/jquery-3.2.1.min.js"></script>' . "\n");
+$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/jquery-3.2.1.min.js"></script>');
 // Add fancyBox
-$this->add_html_foot('<script src="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.js"></script>' . "\n");
-$this->add_html_head('<link rel="stylesheet" media="screen" href="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.css">' . "\n");
+$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.js"></script>');
+$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.css">');
 
 // Loading parameters
 $files			= [];
@@ -214,12 +215,14 @@ if ($can_view)
 
 			if ($caption == 1)
 			{
-				$file_description	= $this->format($file['file_description'], 'typografica' );
+				$file_description	= $file['file_description'];
 			}
 			else if ($caption == 2)
 			{
-				$file_description	= $this->format($file['caption'], 'typografica' );
+				$file_description	= $file['caption'];
 			}
+
+			$file_description	= $this->format($file_description, 'typografica' );
 
 			if ($this->page['page_lang'] != $file['file_lang'])
 			{
@@ -240,7 +243,8 @@ if ($can_view)
 
 			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
-			$figcaption = '<br><figcaption>' .
+			$figcaption = '<br>' .
+				'<figcaption>' .
 					'<span>' . $file_description . '</span> ' . '<br>' .
 					#$file['user'] . '<br>' .
 					#$file['picture_w'] . 'x' . $file['picture_h'] . '<br>' .

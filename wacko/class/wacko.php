@@ -46,8 +46,7 @@ class Wacko
 	var $numerate_links			= null;
 	var $post_wacko_action		= null;
 	var $page_lang		 		= null;
-	var $html_foot				= '';
-	var $html_head				= '';
+	var $html_addition			= [];
 	var $hide_article_header	= false;
 	var $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
 	var $paragrafica_styles		= [
@@ -8516,17 +8515,19 @@ class Wacko
 		return '<span class="' . $diff_class . '">' . $size_delta . '</span>';
 	}
 
-	// to use by actions to add some inside <head> e.g. to adding custom css
-	function add_html_head($text)
+	// to use by actions to add some inside <head> or above </body>
+	//	e.g. to adding custom CSS or JS
+	function add_html($location, $text)
 	{
-		$this->html_head .= $text;
+		if (! in_array($text, $this->html_addition[$location] ?? []))
+		{
+			$this->html_addition[$location][] = $text;
+		}
 	}
 
-	// to use by actions to add some above </body> e.g. to adding custom JS
-	function add_html_foot($text)
+	function get_html_addition($location)
 	{
-		// TODO: check for already added items to avoid multiple loads
-		$this->html_foot .= $text;
+		return implode("\n", $this->html_addition[$location] ?? []);
 	}
 
 	// HANDLER HELPERS
