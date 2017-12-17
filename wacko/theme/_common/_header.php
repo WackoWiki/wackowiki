@@ -95,4 +95,4 @@ if ($doubleclick)
 	$tpl->h_doubleclick_href = $this->href('edit');
 }
 
-$tpl->h_additions = $this->html_head;
+$tpl->h_additions = $this->get_html_addition('header');

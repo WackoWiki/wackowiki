@@ -78,4 +78,4 @@ if ($this->db->policy_page)
 }
 
 // load scripts
-$tpl->f_additions = $this->html_foot;
+$tpl->f_additions = $this->get_html_addition('footer');
