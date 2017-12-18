@@ -326,7 +326,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 
 			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '"></td>' . "\n";
 
-			$httpbl	= bb2_httpbl_lookup($result['ip']);
+			$httpbl	= bb2_httpbl_lookup($engine, $result['ip']);
 
 			// avoid redundant lookups
 			if (empty($result['host']))
