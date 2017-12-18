@@ -224,7 +224,7 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 	 */
 	function reset()
 	{
-		$this->_output = '';
+		$this->_output = null;
 		if (isset($this->_options['numbers'])) {
 			$this->_numbers = (int)$this->_options['numbers'];
 			if ($this->_numbers != HL_NUMBERS_LI
