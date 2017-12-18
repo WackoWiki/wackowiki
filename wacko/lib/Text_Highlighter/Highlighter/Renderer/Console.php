@@ -139,7 +139,7 @@ class Text_Highlighter_Renderer_Console extends Text_Highlighter_Renderer
 		} else {
 			$this->_colors = $this->_defColors;
 		}
-		$this->_output = '';
+		$this->_output = null;
 	}
 
 
