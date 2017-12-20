@@ -403,7 +403,7 @@ $ap_translation = [
 	'ThemesPerPageInfo'			=> 'Erlaube Layouts pro Seite, welche der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Systemeinstellungen der Webseite. <br><span class="cite">Verändere hier nichts, außer wenn Du sicher über die Folgen bist.</span></br>',
+	'SystemSettingsInfo'		=> 'Systemeinstellungen der Webseite. Verändere hier nichts, außer wenn Du sicher über die Folgen bist.',
 	'SystemSettingsUpdated'		=> 'Systemeinstellungen  aktualisiert',
 	'DebugModeSection'			=> 'Debug-Modus',
 	'DebugMode'					=> 'Debug-Modus',

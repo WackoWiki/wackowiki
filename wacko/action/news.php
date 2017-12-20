@@ -109,8 +109,7 @@ if (!empty($this->db->news_cluster))
 		$sql_mode	=
 			$select_mode .
 			$selector .
-			$order_by_mode .
-			$pagination['limit'];
+			$order_by_mode;
 	}
 	else if ($mode == 'category')
 	{
@@ -131,8 +130,7 @@ if (!empty($this->db->news_cluster))
 		$sql_mode	=
 			$select_mode .
 			$selector .
-			$order_by_mode .
-			$pagination['limit'];
+			$order_by_mode;
 
 		$category_title	= $this->db->load_single(
 			"SELECT category " .
@@ -156,8 +154,7 @@ if (!empty($this->db->news_cluster))
 		$sql_mode	=
 			$select_mode .
 			$selector .
-			$order_by_mode .
-			$pagination['limit'];
+			$order_by_mode;
 	}
 	else if ($mode == 'from' && $date)
 	{
@@ -177,13 +174,12 @@ if (!empty($this->db->news_cluster))
 		$sql_mode	=
 			$select_mode .
 			$selector .
-			$order_by_mode .
-			$pagination['limit'];
+			$order_by_mode;
 	}
 
 	$count		= $this->db->load_single($sql_count, true);
 	$pagination	= $this->pagination($count['n'], $max, 'p', $p_mode);
-	$pages		= $this->db->load_all($sql_mode, true);
+	$pages		= $this->db->load_all($sql_mode . $pagination['limit'], true);
 
 
 
