@@ -52,14 +52,11 @@ $tag_pos = 1;
 // functions to call for random number generation
 // mt_rand produces 'better' random numbers
 // but if your server doesn't support it, it's fine to use rand instead
-$rand_func = function ($mi, $ma) {return Ut::rand($mi,$ma);};
+$rand_func = function ($mi, $ma) {return Ut::rand($mi, $ma);};
 $seed_func = 'mt_srand';
 
 // which type of hash to use?
 // possible values: "sha1", "md5", "crc32"
-// sha1 supported by PHP4.3.0+
-// md5 supported by PHP3+
-// crc32 supported by PHP4.0.1+
 $hash_func = 'sha1';
 // store in session so can validate in form processor
 $sess['hash_func'] = $hash_func;
@@ -269,7 +266,7 @@ else
 
 		$red = ImageColorAllocate($im, 255, 0, 0);
 		// depending on how rude you want to be :-)
-		//ImageString($im, 5, 0, 20, "bugger off you spamming bastards!", $red);
+		// ImageString($im, 5, 0, 20, "bugger off you spamming bastards!", $red);
 		ImageString($im, 5, 15, 20, 'service no longer available', $red);
 
 		send_image($im);
@@ -583,11 +580,11 @@ if ($bg_type != 0)
 		}
 
 		// for debug:
-		//send_image($temp_bg);
+		# send_image($temp_bg);
 	}
 
 	// for debug:
-	//send_image($im3);
+	# send_image($im3);
 
 	if ($morph_bg)
 	{
@@ -637,7 +634,7 @@ if ($bg_type != 0)
 	}
 }
 // for debug:
-//send_image($im3);
+# send_image($im3);
 
 
 
@@ -678,7 +675,7 @@ for($i = 0 ; $i < strlen($word); $i++)
 $font_pixelwidth = $font_widths[$j];
 
 // for debug:
-//send_image($im2);
+# send_image($im2);
 
 
 
@@ -708,11 +705,11 @@ for ($i = $word_start_x; $i < $word_pix_size; $i += $font_pixelwidth)
 	ImageCopy($im, $im2, $i, $y_pos, $i, 0, $font_pixelwidth, $height);
 
 	// for debug:
-	//ImageRectangle($im,$i,$y_pos+10,$i+$font_pixelwidth,$y_pos+70,$debug);
+	# ImageRectangle($im, $i, $y_pos + 10, $i + $font_pixelwidth, $y_pos + 70, $debug);
 }
 
 // for debug:
-//send_image($im);
+# send_image($im);
 
 ImageFilledRectangle($im2, 0, 0, $width, $height, $bg2);
 
@@ -740,13 +737,13 @@ for ($j = 0; $j < strlen($word); $j++)
 		ImageCopyMerge($im2, $im, $orig_x + $morph_x, $i + $y_pos, $orig_x, $i, $font_pixelwidth, $y_chunk, 100);
 
 		// for debug:
-		//ImageLine($im2, $orig_x+$morph_x, $i, $orig_x+$morph_x+1, $i+$y_chunk, $debug2);
-		//ImageLine($im2, $orig_x+$morph_x+$font_pixelwidth, $i, $orig_x+$morph_x+$font_pixelwidth+1, $i+$y_chunk, $debug2);
+		# ImageLine($im2, $orig_x + $morph_x, $i, $orig_x + $morph_x + 1, $i + $y_chunk, $debug2);
+		# ImageLine($im2, $orig_x + $morph_x + $font_pixelwidth, $i, $orig_x + $morph_x + $font_pixelwidth + 1, $i + $y_chunk, $debug2);
 	}
 }
 
 // for debug:
-//send_image($im2);
+# send_image($im2);
 
 ImageFilledRectangle($im, 0, 0, $width, $height, $bg);
 // now do the same on the y-axis
@@ -763,12 +760,12 @@ for ($i = 0; $i <= $width; $i += $x_chunk)
 	ImageCopy($im, $im2, $i, $y_pos, $i, 0, $x_chunk, $height);
 
 	// for debug:
-	//ImageLine($im,$i+$x_chunk,0,$i+$x_chunk,100,$debug);
-	//ImageLine($im,$i,$y_pos+25,$i+$x_chunk,$y_pos+25,$debug);
+	# ImageLine($im,$i+$x_chunk,0,$i+$x_chunk,100,$debug);
+	# ImageLine($im,$i,$y_pos+25,$i+$x_chunk,$y_pos+25,$debug);
 }
 
 // for debug:
-//send_image($im);
+# send_image($im);
 
 // blur edges:
 // doesn't really add any security, but looks a lot nicer, and renders text a little easier to read
@@ -777,7 +774,7 @@ for ($i = 0; $i <= $width; $i += $x_chunk)
 my_image_blur($im);
 
 // for debug:
-//send_image($im);
+# send_image($im);
 
 if ($output != 'jpg' && $bg_type == 0)
 {
@@ -824,7 +821,7 @@ if (is_array($site_tags))
 ImageCopyMerge($im2, $im, 0, 0, 0, 0, $width, $height, 80);
 ImageCopy($im, $im2, 0, 0, 0, 0, $width, $height);
 // for debug:
-//send_image($im);
+# send_image($im);
 
 
 
@@ -845,7 +842,7 @@ if ($bg_type != 0)
 		ImageFill($temp_im, 0, 0, $white);
 		ImageCopyMerge($im3, $temp_im, 0, 0, 0, 0, $width, $height, $bg_fade_pct);
 		// for debug:
-		//send_image($im3);
+		# send_image($im3);
 		ImageDestroy($temp_im);
 		$c_fade_pct = 50;
 	}
@@ -869,7 +866,7 @@ if ($bg_type != 0)
 	}
 }
 // for debug:
-//send_image($im);
+# send_image($im);
 
 
 //////////////////////////////////////////////////////
@@ -883,10 +880,10 @@ if ($bg_type != 0)
 // the least you could do is give me credit (or buy me stuff from amazon!)
 // but I understand that in professional environments, your boss might not like this tag
 // so that's cool.
-// $tag_str = "freeCap v1.41 - puremango.co.uk";
+// $tag_str = 'freeCap v1.41 - puremango.co.uk';
 $tag_str = '';
 // for debug:
-//$tag_str = "[".$word."]";
+# $tag_str = '[' . $word . ']';
 
 // ensure tag is right-aligned
 $tag_width = strlen($tag_str) * 6;
