@@ -42,6 +42,9 @@ function admin_config_system(&$engine, &$module)
 		$config['cache_ttl']				= (int) $_POST['cache_ttl'];
 		$config['cache_sql']				= (int) ($_POST['cache_sql'] ?? 0);
 		$config['cache_sql_ttl']			= (int) $_POST['cache_sql_ttl'];
+		$config['log_level']				= (int) $_POST['log_level'];
+		$config['log_default_show']			= (int) $_POST['log_default_show'];
+		$config['log_purge_time']			= (int) $_POST['log_purge_time'];
 		$config['rewrite_mode']				= (int) ($_POST['rewrite_mode'] ?? 0);
 		$config['reverse_proxy']			= (int) ($_POST['reverse_proxy'] ?? 0);
 		$config['reverse_proxy_header']		= (string) $_POST['reverse_proxy_header'];
@@ -160,45 +163,6 @@ function admin_config_system(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					<?php echo $engine->_t('ReverseProxySection');?>
-				</th>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="reverse_proxy"><strong><?php echo $engine->_t('ReverseProxy');?>:</strong><br>
-					<small><?php echo $engine->_t('ReverseProxyInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ($engine->db->reverse_proxy == 1 ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="reverse_proxy_header"><strong><?php echo $engine->_t('ReverseProxyHeader');?>:</strong><br>
-					<small><?php echo $engine->_t('ReverseProxyHeaderInfo');?></small></label>
-				</td>
-				<td>
-					<input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="reverse_proxy_addresses"><strong><?php echo $engine->_t('ReverseProxyAddresses');?>:</strong><br>
-					<small><?php echo $engine->_t('ReverseProxyAddressesInfo');?></small></label>
-				</td>
-				<td>
-					<input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
-				</td>
-			</tr>
-						<tr>
-				<th colspan="2">
-					<br>
 					<?php echo $engine->_t('LogSection');?>
 				</th>
 			</tr>
@@ -251,6 +215,45 @@ function admin_config_system(&$engine, &$module)
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>">
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('ReverseProxySection');?>
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="reverse_proxy"><strong><?php echo $engine->_t('ReverseProxy');?>:</strong><br>
+					<small><?php echo $engine->_t('ReverseProxyInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="1"<?php echo ($engine->db->reverse_proxy == 1 ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="reverse_proxy_header"><strong><?php echo $engine->_t('ReverseProxyHeader');?>:</strong><br>
+					<small><?php echo $engine->_t('ReverseProxyHeaderInfo');?></small></label>
+				</td>
+				<td>
+					<input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_header, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="reverse_proxy_addresses"><strong><?php echo $engine->_t('ReverseProxyAddresses');?>:</strong><br>
+					<small><?php echo $engine->_t('ReverseProxyAddressesInfo');?></small></label>
+				</td>
+				<td>
+					<input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo htmlspecialchars($engine->db->reverse_proxy_addresses, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
 				</td>
 			</tr>
 			<tr>

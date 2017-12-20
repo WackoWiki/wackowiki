@@ -34,27 +34,24 @@ function admin_config_security(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['allow_registration']			= (int) $_POST['allow_registration'];
+		$config['allow_registration']			= (int) ($_POST['allow_registration'] ?? 0);
 		$config['approve_new_user']				= (int) $_POST['approve_new_user'];
 		$config['enable_captcha']				= (int) $_POST['enable_captcha'];
-		$config['captcha_new_comment']			= (int) $_POST['captcha_new_comment'];
-		$config['captcha_new_page']				= (int) $_POST['captcha_new_page'];
-		$config['captcha_edit_page']			= (int) $_POST['captcha_edit_page'];
-		$config['captcha_registration']			= (int) $_POST['captcha_registration'];
-		$config['allow_persistent_cookie']		= (int) $_POST['allow_persistent_cookie'];
-		$config['antidupe']						= (int) $_POST['antidupe'];
-		$config['disable_wikiname']				= (int) $_POST['disable_wikiname'];
-		$config['allow_email_reuse']			= (int) $_POST['allow_email_reuse'];
-		$config['tls']							= (int) $_POST['tls'];
-		$config['tls_implicit']					= (int) $_POST['tls_implicit'];
+		$config['captcha_new_comment']			= (int) ($_POST['captcha_new_comment'] ?? 0);
+		$config['captcha_new_page']				= (int) ($_POST['captcha_new_page'] ?? 0);
+		$config['captcha_edit_page']			= (int) ($_POST['captcha_edit_page'] ?? 0);
+		$config['captcha_registration']			= (int) ($_POST['captcha_registration'] ?? 0);
+		$config['allow_persistent_cookie']		= (int) ($_POST['allow_persistent_cookie'] ?? 0);
+		$config['antidupe']						= (int) ($_POST['antidupe'] ?? 0);
+		$config['disable_wikiname']				= (int) ($_POST['disable_wikiname'] ?? 0);
+		$config['allow_email_reuse']			= (int) ($_POST['allow_email_reuse'] ?? 0);
+		$config['tls']							= (int) ($_POST['tls'] ?? 0);
+		$config['tls_implicit']					= (int) ($_POST['tls_implicit'] ?? 0);
 		$config['tls_proxy']					= trim((string) $_POST['tls_proxy']);
 		$config['pwd_admin_min_chars']			= (int) $_POST['pwd_admin_min_chars'];
 		$config['pwd_min_chars']				= (int) $_POST['pwd_min_chars'];
 		$config['pwd_char_classes']				= (int) $_POST['pwd_char_classes'];
 		$config['pwd_unlike_login']				= (int) $_POST['pwd_unlike_login'];
-		$config['log_level']					= (int) $_POST['log_level'];
-		$config['log_default_show']				= (int) $_POST['log_default_show'];
-		$config['log_purge_time']				= (int) $_POST['log_purge_time'];
 		$config['session_length']				= (int) $_POST['session_length'];
 		$config['comment_delay']				= (int) $_POST['comment_delay'];
 		$config['intercom_delay']				= (int) $_POST['intercom_delay'];
