@@ -63,6 +63,8 @@ $ap_translation = [
 	'MiscellaneousSection'		=> 'Sonstiges',
 	'MainSection'				=> 'Grundeinstellungen',
 
+	'DirNotWritable'			=> 'Das %1 Verzeichis ist nicht schreibbar.',
+
 	/**
 	 * AP MENU
 	 *
@@ -377,7 +379,7 @@ $ap_translation = [
 	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
 
 	// Appearance settings
-	'AppearanceSettingsInfo'	=> 'Aussehen der Webseite ändern',
+	'AppearanceSettingsInfo'	=> 'Die Darstellung der Webseite ändern',
 	'AppearanceSettingsUpdated'	=> 'Aussehen der Webseite wurde aktualisiert.',
 
 	'LogoOff'					=> 'Aus',
