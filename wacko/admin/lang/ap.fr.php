@@ -61,7 +61,9 @@ $ap_translation = [
 	'Admin'						=> 'Admin',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
-	'MainSection'	=> 'Basic Parameters',
+	'MainSection'				=> 'Basic Parameters',
+
+	'DirNotWritable'			=> 'The %1 directory is not writable.',
 
 	/**
 	 * AP MENU

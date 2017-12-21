@@ -154,6 +154,10 @@ function admin_config_appearance(&$engine, &$module)
 					$engine->set_message($error, 'error');
 				}
 			}
+			else
+			{
+				$engine->set_message(Ut::perc_replace($engine->_t('DirNotWritable'), '<code>' . IMAGE_DIR . '/' . '</code>'), 'error');
+			}
 		}
 		else
 		{
@@ -307,7 +311,7 @@ function admin_config_appearance(&$engine, &$module)
 			<tr>
 				<th colspan="2">
 					<br>
-					<?php echo $engine->_t('');?>Layout
+					<?php echo $engine->_t('LayoutSection');?>
 				</th>
 			</tr>
 			<tr class="hl_setting">
