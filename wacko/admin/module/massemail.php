@@ -27,11 +27,12 @@ function admin_massemail(&$engine, &$module)
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
 	<p>
-		Here you can email a message to either all of your users or all users of a specific group having the option to receive mass emails enabled. To achieve this an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. The default setting is to only include 20 recipients in such an email, for more recipients more emails will be sent. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time, you will be notified when the script has completed.
+		<?php echo $engine->_t('MassemailInfo');?>
 	</p>
 	<br>
-<?php
-$mail_body = '';
+	<?php
+	$mail_body	= '';
+	$error		= false;
 
 	// send massmail
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -49,9 +50,25 @@ $mail_body = '';
 			$user_ids		= implode(', ', $_user_id);
 		}
 
-		$mail_subject	= (string) $_POST['mail_subject'];
-		$mail_body		= (string) $_POST['mail_body'];
-		$language		= (string) $_POST['language'];
+		$mail_subject	= (string) $_POST['mail_subject'] ?? '';
+		$mail_body		= (string) $_POST['mail_body'] ?? '';
+		$language		= (string) $_POST['language'] ?? '';
+
+		if (empty($mail_subject))
+		{
+			$engine->set_message($engine->_t('NoEmailSubject'), 'error');
+			$error = true;
+		}
+		else if (empty($mail_body))
+		{
+			$engine->set_message($engine->_t('NoEmailMessage'), 'error');
+			$error = true;
+		}
+
+		if ($error)
+		{
+			$engine->http->redirect(rawurldecode($engine->href()));
+		}
 
 		$members = $engine->db->load_all(
 			"SELECT DISTINCT
@@ -87,12 +104,12 @@ $mail_body = '';
 					$subject	= $mail_subject;
 					$body		= $mail_body . "\n" .
 
-					$engine->send_user_mail($user, $subject, $body);
+					$engine->send_user_email($user, $subject, $body);
 				}
 			}
 
-			$engine->log(2, 'Messemail send: ' . $mail_subject . ' to group / user ' . $group_id);
-			$engine->set_message('Massemail send: ' . $mail_subject, 'success');
+			$engine->log(2, 'Massemail send: ' . $mail_subject . ' to group / user ' . $group_id);
+			$engine->set_message($engine->_t('MassemailSend') . ': ' . $mail_subject, 'success');
 
 			$engine->http->redirect(rawurldecode($engine->href()));
 		}
@@ -157,24 +174,25 @@ $mail_body = '';
 				</td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong><?php echo $engine->_t('UsersIntercomSubject'); ?>:</strong><br>
-					<small>Allow themes per page, which the page owner can choose via page properties.</small></td>
+				<td class="label"><strong><?php echo $engine->_t('MessageSubject'); ?>:</strong><br>
+					<small><?php echo $engine->_t('MessageSubjectInfo');?></small></td>
 				</td>
 				<td>
 					<input type="text" name="mail_subject" value="<?php echo htmlspecialchars(($_POST['mail_subject'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" size="60" maxlength="200"  required>
-				</td></tr>
+				</td>
+			</tr>
 
 			<tr class="hl_setting">
-				<td class="label"><label for="mail_body"><strong>Your message:</strong><br>
-					<small>Please note that you may enter only plain text. All markup will be removed before sending.</small></label></td>
+				<td class="label"><label for="mail_body"><strong><?php echo $engine->_t('YourMessage');?>:</strong><br>
+					<small><?php echo $engine->_t('YourMessageInfo');?></small></label></td>
 				<td><textarea style="width:200px; height:100px;" id="mail_body" name="mail_body"  required><?php echo htmlspecialchars($mail_body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="language"><strong>Default language:</strong><br>
-					<small>Specifies the language for mapping unregistered guests, as well as the locale settings and the rules of transliteration of addresses of pages.</small></label></td>
+				<td class="label"><label for="language"><strong><?php echo $engine->_t('MessageLanguage');?>:</strong><br>
+					<small><?php echo $engine->_t('MessageLanguageInfo');?></small></label></td>
 				<td>
 					<select id="language" name="language">
 <?php
@@ -192,7 +210,7 @@ $mail_body = '';
 		</table>
 		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="send">
+			<input type="submit" id="submit" value="<?php echo $engine->_t('SendMail');?>">
 			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
 		</div>
 <?php

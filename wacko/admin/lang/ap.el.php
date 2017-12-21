@@ -882,9 +882,38 @@ $ap_translation = [
 		'7'		=> 'debugging',
 	],
 
-	// Massemail
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	// Massemail module
+	'MassemailInfo'				=> 'Εδώ μπορείτε να στείλετε ένα μήνυμα είτε σε όλα τα μέλη σας είτε σε όλα τα μέλη μιας συγκεκριμένης ομάδας <strong>που έχουν την επιλογή να λαμβάνουν μαζικά μηνύματα ηλεκτρονικού ταχυδρομείου ενεργοποιημένη</strong>. Για να επιτευχθεί αυτό, ένα μήνυμα ηλεκτρονικού ταχυδρομείου θα αποσταλεί στη διεύθυνση ηλεκτρονικού ταχυδρομείου του διαχειριστή που παρέσχατε, με την οποία ένα τυφλό πιστό αντίγραφο θα αποσταλεί σε όλους τους παραλήπτες. Η προεπιλεγμένη ρύθμιση είναι να συμπεριλάβει μόνο 20 παραλήπτες σε ένα τέτοιο ηλεκτρονικό ταχυδρομείο, για περισσότερους παραλήπτες θα σταλούν περισσότερα μηνύματα ηλεκτρονικού ταχυδρομείου. Εάν στέλνετε ηλεκτρονικό ταχυδρομείο σε μια μεγάλη ομάδα ατόμων, παρακαλώ να είστε υπομονετικοί μετά την υποβολή και μη διακόψετε τη σελίδα κατά τη διάρκεια της αποστολής. Είναι φυσιολογικό για μια μαζική αποστολή μηνύματος ηλεκτρονικού ταχυδρομείου να πάρει πολύ χρόνο, θα ενημερωθείτε όταν το σενάριο έχει ολοκληρωθεί.',
+	'LogMassemail'				=> 'Messemail send %1 to group / user ',
+	'MassemailSend'				=> 'Massemail send',
+
+	'NoEmailMessage'			=> 'Πρέπει να εισάγετε κάποιο κείμενο.',
+	'NoEmailSubject'			=> 'Πρέπει να ορίσετε ένα θέμα για το μήνυμά σας.',
+
+	'MessageSubject'			=> 'Subject',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Your message',
+	'YourMessageInfo'			=> 'Σημειώστε ότι μπορείτε να γράψετε μόνο απλό κείμενο. Οτιδήποτε άλλο θα αφαιρεθεί πριν την αποστολή.',
+
+	'MessageLanguage'			=> 'Language',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Send',
+
+	'SendToGroup'				=> 'Αποστολή σε ομάδα',
+	'SendToUser'				=> 'Αποστολή σε μέλη',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'Updated system message',
+
+	'SysMsgSection'				=> 'System message',
+	'SysMsg'					=> 'System message',
+	'SysMsgInfo'				=> 'Your text here',
+
+	'SysMsgType'				=> 'Type',
+	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',

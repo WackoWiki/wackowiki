@@ -420,8 +420,8 @@ $ap_translation = [
 	'DebugAdminOnlyInfo'		=> 'Zeigt die Debug-Daten des Programms (und des DBMS) nur dem Administrator.',
 
 	'CachingSection'			=> 'Zwischenspeicher-Optionen',
-	'Cache'						=> 'Dargestellte Seiteninhalte zwischenspeichern',
-	'CacheInfo'					=> 'Dargestellte Seiteninhalte lokal zwischenspeichern, um nachfolgende Seitenaufrufe zu beschleunigen. Nur anwendbar für Gäste bzw. nicht registrierte Besucher.',
+	'Cache'						=> 'Gerenderte Seiten zwischenspeichern',
+	'CacheInfo'					=> 'Gerenderte Seiten zwischenspeichern, um nachfolgende Seitenaufrufe zu beschleunigen. Nur gültig für nicht angemeldete Nutzer.',
 	'CacheTtl'					=> 'Aufbewahrungsdauer zwischenspeicherter Seiten',
 	'CacheTtlInfo'				=> 'Speichere Seiten nicht länger als die angegebene Anzahl von Sekunden zwischen.',
 	'CacheSql'					=> 'SQL-Abfragen zwischenspeichern',
@@ -542,7 +542,7 @@ $ap_translation = [
 	'UserPasswordSection'		=> 'Passwortschutz-Einstellungen',
 	'PwdMinChars'				=> 'Minimale Passwortlänge',
 	'PwdMinCharsInfo'			=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 12 bis 16 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
-	//
+
 	'AdminPwdMinChars'			=> 'Minimale Admin Passwortlänge',
 	'AdminPwdMinCharsInfo'		=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 15 bis 20 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
 	'PwdCharComplexity'			=> 'Die erforderliche Kennwortkomplexität',
@@ -915,9 +915,38 @@ $ap_translation = [
 		'7'		=> 'debugging',
 	],
 
-	// Massemail
+	// Massemail module
+	'MassemailInfo'				=> 'Hier kannst du eine Nachricht per E-Mail an alle Mitglieder des Wikis oder einer spezifischen Gruppe senden, <strong>sofern diese den Erhalt von Informationen per E-Mail zugelassen haben</strong>. Dazu wird eine E-Mail an die festgelegte administrative E-Mail-Adresse verschickt und alle Empfänger als Blindkopie (BCC) hinzugefügt. Standardmäßig wird pro 20 Empfänger eine solche E-Mail versandt; bei mehreren Empfängern werden mehrere E-Mails versandt. Bitte habe nach dem Absenden Geduld, wenn du eine Nachricht an eine große Gruppe schickst und breche den Vorgang nicht ab. Bei einer Massen-E-Mail ist es normal, dass ihr Versand länger dauert. Du wirst benachrichtigt, sobald der Vorgang abgeschlossen wurde.',
+	'LogMassemail'				=> 'Rundmail gesendet %1 an Gruppe / Nutzer ',
+	'MassemailSend'				=> 'Rundmail gesendet',
+
+	'NoEmailMessage'			=> 'Du musst eine Nachricht angeben.',
+	'NoEmailSubject'			=> 'Du musst einen Betreff für die Nachricht angeben.',
+
+	'MessageSubject'			=> 'Betreff',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Deine Nachricht',
+	'YourMessageInfo'			=> 'Bitte beachte, dass du nur reinen Text verwenden kannst. Alle Auszeichnungen werden vor dem Versand entfernt.',
+
+	'MessageLanguage'			=> 'Sprache',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Senden',
+
 	'SendToGroup'				=> 'Sende an Nutzergruppe',
 	'SendToUser'				=> 'Sende an Nutzer',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'System-Mitteilung aktualisiert',
+
+	'SysMsgSection'				=> 'System-Mitteilung',
+	'SysMsg'					=> 'System-Mitteilung',
+	'SysMsgInfo'				=> 'Dein Text hier',
+
+	'SysMsgType'				=> 'Typ',
+	'SysMsgTypeInfo'			=> 'Mitteilungtyp (CSS).',
+	'EnableSysMsg'				=> 'Aktiviere System-Mitteilung',
+	'EnableSysMsgInfo'			=> 'Zeige System-Mitteilung.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Schalte neue Benutzer frei, damit sie sich auf der Seite anmelden können.',

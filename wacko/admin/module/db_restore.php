@@ -387,31 +387,29 @@ function admin_db_restore(&$engine, &$module)
 			$engine->log(1, Ut::perc_replace($engine->_t('LogDbRestored', SYSTEM_LANG), $pack));
 		}
 	}
+	// REMOVE backup
+	// confirm delete backup
+	else if ((isset($_POST['remove']) && isset($_POST['backup_id']))
+		||   (isset($_GET['remove']) && isset($_GET['backup_id'])))
+	{
+		echo $engine->form_open('delete_backup');
+
+		echo '<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
+			'<div class="warning">' .
+				'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> ' .
+				'<input type="submit" id="submit" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
+				'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
+				'<br><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
+			'</div>
+			<br>';
+
+		echo $engine->form_close();
+	}
 	else
 	{
-		// REMOVE backup
-
-		// confirm delete backup
-		if ((isset($_POST['remove']) && isset($_POST['backup_id']))
-		||  (isset($_GET['remove']) && isset($_GET['backup_id'])))
-		{
-			echo $engine->form_open('delete_backup');
-
-			echo '<input type="hidden" name="backup_id" value="' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . "\n" .
-				'<div class="warning">' .
-					'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . htmlspecialchars($backup_id, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> ' .
-					'<input type="submit" id="submit" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
-					'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
-					'<br><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
-				'</div>
-				<br>';
-
-			echo $engine->form_close();
-		}
-
 		// delete backup
 		if ((isset($_POST['delete']) && $_POST['backup_id'] == true)
-		||  (isset($_GET['delete'])  && $_GET['backup_id']  == true))
+			||   (isset($_GET['delete'])  && $_GET['backup_id']  == true))
 		{
 			if ($backup_id)
 			{
@@ -422,6 +420,8 @@ function admin_db_restore(&$engine, &$module)
 			$message = $engine->_t('BackupRemoved');
 			$engine->show_message($message, 'success');
 		}
+
+		// SHOW backups
 ?>
 				<p>
 					<?php echo $engine->_t('RestoreInfo'); ?>
