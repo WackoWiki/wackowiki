@@ -755,7 +755,7 @@ class Http
 
 		foreach (['x-gzip', 'gzip'] as $x)
 		{
-			if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], $x) !== false)
+			if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], $x) !== false)
 			{
 				$text = gzencode(ob_get_contents(), 4);
 				ob_end_clean();

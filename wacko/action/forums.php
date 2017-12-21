@@ -13,7 +13,8 @@ if (!defined('IN_WACKO'))
 //		if you define pages, it must be done for all subforums and topic pages
 
 // define variables
-$_pages = '';
+$_pages		= '';
+$comment	= null;
 
 // make sure that we're executing inside the forum cluster
 if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
