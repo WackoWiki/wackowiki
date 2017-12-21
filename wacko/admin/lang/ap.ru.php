@@ -888,9 +888,38 @@ $ap_translation = [
 		'7'		=> 'Отладочный',
 	],
 
-	// Massemail
+	// Massemail module
+	'MassemailInfo'				=> 'С помощью этой вики вы можете отправить электронное сообщение всем пользователям или пользователям определённой группы, <strong>имеющим включённую опцию получения электронных сообщений</strong>. Для достижения этого сообщение будет отправлено с электронного адреса администратора и будет снабжено скрытой копией для всех получателей. По умолчанию такое сообщение включает максимум 20 получателей. Если получателей больше, то будет отправлено несколько сообщений. Если вы отправляете сообщение большой группе людей, то это действие может занять некоторое время. Пожалуйста, будьте терпеливы и не останавливайте загрузку страницы после отправки сообщения. Вы будете уведомлены об успешном завершении отправки.',
+	'LogMassemail'				=> 'Messemail send %1 to group / user ',
+	'MassemailSend'				=> 'Massemail send',
+
+	'NoEmailMessage'			=> 'Необходимо ввести текст сообщения',
+	'NoEmailSubject'			=> 'Необходимо указать заголовок сообщения',
+
+	'MessageSubject'			=> 'Subject',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Текст сообщения',
+	'YourMessageInfo'			=> 'Можно использовать только обычный текст. Вся разметка будет удалена перед отправкой.',
+
+	'MessageLanguage'			=> 'Language',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Send',
+
 	'SendToGroup'				=> 'Послать группе',
 	'SendToUser'				=> 'Послать пользователю',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'Updated system message',
+
+	'SysMsgSection'				=> 'System message',
+	'SysMsg'					=> 'System message',
+	'SysMsgInfo'				=> 'Your text here',
+
+	'SysMsgType'				=> 'Type',
+	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Санкционировать новых пользователей.',

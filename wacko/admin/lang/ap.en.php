@@ -887,8 +887,37 @@ $ap_translation = [
 	],
 
 	// Massemail module
+	'MassemailInfo'				=> 'Here you can email a message to either all of your users or all users of a specific group having the option to receive mass emails enabled. To achieve this an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. The default setting is to only include 20 recipients in such an email, for more recipients more emails will be sent. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time, you will be notified when the script has completed.',
+	'LogMassemail'				=> 'Messemail send %1 to group / user ',
+	'MassemailSend'				=> 'Massemail send',
+
+	'NoEmailMessage'			=> 'You must enter a message.',
+	'NoEmailSubject'			=> 'You must specify a subject for your message.',
+
+	'MessageSubject'			=> 'Subject',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Your message',
+	'YourMessageInfo'			=> 'Please note that you may enter only plain text. All markup will be removed before sending.',
+
+	'MessageLanguage'			=> 'Language',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Send',
+
 	'SendToGroup'				=> 'Send to group',
 	'SendToUser'				=> 'Send to user',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'Updated system message',
+
+	'SysMsgSection'				=> 'System message',
+	'SysMsg'					=> 'System message',
+	'SysMsgInfo'				=> 'Your text here',
+
+	'SysMsgType'				=> 'Type',
+	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',

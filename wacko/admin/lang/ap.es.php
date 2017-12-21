@@ -882,9 +882,38 @@ $ap_translation = [
 		'7'		=> 'depuración',
 	],
 
-	// Massemail
+	// Massemail module
+	'MassemailInfo'				=> 'Desde aquí puedes enviar un email a todos los usuarios, o a los usuarios de un grupo específico. Para esto se enviará un email a la dirección administrativa proporcionada, con copia oculta a todos los receptores. Si el grupo de personas es muy grande, por favor se paciente después de pulsar en "Enviar" y no detengas el proceso por la mitad. Es normal que enviar un email masivo lleve algún tiempo, serás notificado cuando se complete el proceso',
+	'LogMassemail'				=> 'Messemail send %1 to group / user ',
+	'MassemailSend'				=> 'Massemail send',
+
+	'NoEmailMessage'			=> 'Tienes que introducir un mensaje.',
+	'NoEmailSubject'			=> 'Tienes que especificar un tema para su mensaje.',
+
+	'MessageSubject'			=> 'Subject',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Your message',
+	'YourMessageInfo'			=> 'Por favor, ten en cuenta que solo puede insertarse texto plano. Se eliminará cualquier código antes de enviar.',
+
+	'MessageLanguage'			=> 'Language',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Send',
+
 	'SendToGroup'				=> 'Enviar a grupo',
 	'SendToUser'				=> 'Enviar a usuario',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'Updated system message',
+
+	'SysMsgSection'				=> 'System message',
+	'SysMsg'					=> 'System message',
+	'SysMsgInfo'				=> 'Your text here',
+
+	'SysMsgType'				=> 'Type',
+	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Aprobar nuevos usuarios antes de permitir su login al sitio.',

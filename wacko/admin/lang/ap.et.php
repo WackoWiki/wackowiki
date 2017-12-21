@@ -882,9 +882,38 @@ $ap_translation = [
 		'7'		=> 'debugging',
 	],
 
-	// Massemail
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	// Massemail module
+	'MassemailInfo'				=> 'Sellel leheküljel saad saata e-kirja kõigile liikmetele või valitud grupile, <strong>millel on valikus lubatud mass e-kiri vastu võtta</strong>. Pimekoopia saadetakse ka administraatori e-posti aadressile. Kui üritad saata kirja väga paljudele liikmetele, siis ära lahku enne lehelt, kui skript on lõpetanud saatmise, sest saatmisega lähebki kaua aega.',
+	'LogMassemail'				=> 'Messemail send %1 to group / user ',
+	'MassemailSend'				=> 'Massemail send',
+
+	'NoEmailMessage'			=> 'Sa pead sisestama ka sõnumi.',
+	'NoEmailSubject'			=> 'Sa pead sisestama ka pealkirja.',
+
+	'MessageSubject'			=> 'Subject',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Your message',
+	'YourMessageInfo'			=> 'Sa võid sisestada ainult puhast teksti, kõik koodi märgistused eemaldatakse enne saatmist.',
+
+	'MessageLanguage'			=> 'Language',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Send',
+
+	'SendToGroup'				=> 'Saada grupile',
+	'SendToUser'				=> 'Saada kasutajatele',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'Updated system message',
+
+	'SysMsgSection'				=> 'System message',
+	'SysMsg'					=> 'System message',
+	'SysMsgInfo'				=> 'Your text here',
+
+	'SysMsgType'				=> 'Type',
+	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',

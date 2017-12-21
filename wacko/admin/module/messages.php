@@ -26,6 +26,10 @@ function admin_messages(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
+	<p>
+		<?php echo $engine->_t('SystemMessageInfo');?>
+	</p>
+	<br>
 <?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -37,8 +41,8 @@ function admin_messages(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, 'Updated system message');
-		$engine->set_message('Updated system message', 'success');
+		$engine->log(1, $engine->_t('SysMsgUpdated'));
+		$engine->set_message($engine->_t('SysMsgUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -51,19 +55,25 @@ function admin_messages(&$engine, &$module)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tr>
-				<th colspan="2">System message</th>
+				<th colspan="2"><?php echo $engine->_t('SysMsgSection');?></th>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="system_message"><strong>System message:</strong><br>
-					<small>Your text here</small></label></td>
-				<td><textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea></td>
+				<td class="label">
+					<label for="system_message"><strong><?php echo $engine->_t('SysMsg');?>:</strong><br>
+					<small><?php echo $engine->_t('SysMsgInfo');?></small></label>
+				</td>
+				<td>
+					<textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
+				</td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><label for="system_message_type"><strong>Type:</strong><br>
-					<small>Message type (CSS).</small></label></td>
+				<td class="label">
+					<label for="system_message_type"><strong><?php echo $engine->_t('SysMsgType');?>:</strong><br>
+					<small><?php echo $engine->_t('SysMsgTypeInfo');?></small></label>
+				</td>
 				<td>
 					<select id="system_message_type" name="system_message_type">
 <?php
@@ -74,6 +84,7 @@ function admin_messages(&$engine, &$module)
 							echo '<option value="' . $type . '" ' . ($engine->db->system_message_type == $type ? 'selected' : '') . '>' . $type . '</option>';
 						}
 
+						// TODO:
 						// add option: Position (header, footer, ..)
 						// add option: allow users to dissmis the message
 ?>
@@ -84,8 +95,9 @@ function admin_messages(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl_setting">
-				<td class="label"><strong>Enable system message:</strong><br>
-					<small>Show system message.</small></td>
+				<td class="label">
+					<strong><?php echo $engine->_t('EnableSysMsg');?>:</strong><br>
+					<small><?php echo $engine->_t('EnableSysMsgInfo');?></small></td>
 				<td>
 					<input type="radio" id="sys_message_on" name="enable_system_message" value="1"<?php echo ($engine->db->enable_system_message == 1 ? ' checked' : '');?>><label for="sys_message_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="sys_message_off" name="enable_system_message" value="0"<?php echo ($engine->db->enable_system_message == 0 ? ' checked' : '');?>><label for="sys_message_off"><?php echo $engine->_t('Off');?></label>
@@ -93,6 +105,7 @@ function admin_messages(&$engine, &$module)
 			</tr>
 
 		</table>
+
 		<br>
 		<div class="center">
 			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">

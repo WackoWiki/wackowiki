@@ -882,9 +882,38 @@ $ap_translation = [
 		'7'		=> 'debugging',
 	],
 
-	// Massemail
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	// Massemail module
+	'MassemailInfo'				=> 'Itt egy e-mailt küldhetsz az összes olyan felhasználónak vagy egy meghatározott csoport olyan tagjainak, <strong>akinek be van kapcsolva a csoport e-mail fogadása beállítása</strong>. Ez a következõ módon fog történni: a megadott adminisztrációs e-mail címre egy e-mail kerül kiküldésre, és a címzettek titkos másolatot kapnak ebbõl a levélbõl. Az alap beállítás szerint egy levélben csak 50 címzett fog szerepelni, több címzettnél több e-mail kerül kiküldésre. Ha sok embernek küldesz e-mailt, az ûrlap elküldése után, kérünk, légy türelmes, ne szakítsd meg az oldal töltését félúton. Teljesen normális, hogy a csoportos e-mail küldése hosszú ideig tart; amint a szkript befejezte futását, értesítve leszel.',
+	'LogMassemail'				=> 'Messemail send %1 to group / user ',
+	'MassemailSend'				=> 'Massemail send',
+
+	'NoEmailMessage'			=> 'Meg kell adnod az üzenetet.',
+	'NoEmailSubject'			=> 'Meg kell adnod az üzenet témáját.',
+
+	'MessageSubject'			=> 'Subject',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Your message',
+	'YourMessageInfo'			=> 'Kérjük, vedd figyelembe, csak sima szöveget adhatsz meg. Az elküldés elõtt minden kód eltávolításra kerül.',
+
+	'MessageLanguage'			=> 'Language',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Send',
+
+	'SendToGroup'				=> 'Címzett csoport',
+	'SendToUser'				=> 'Címzett felhasználók',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'Updated system message',
+
+	'SysMsgSection'				=> 'System message',
+	'SysMsg'					=> 'System message',
+	'SysMsgInfo'				=> 'Your text here',
+
+	'SysMsgType'				=> 'Type',
+	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',

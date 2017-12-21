@@ -883,9 +883,38 @@ $ap_translation = [
 		'7'		=> 'debugging',
 	],
 
-	// Massemail
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	// Massemail module
+	'MassemailInfo'				=> 'Tutaj mo¿esz wys³aæ wiadomo¶æ e-mail do wszystkich u¿ytkowników lub do wszystkich cz³onków konkretnej grupy, która ma w³±czon± <strong>funkcjê odbierania masowych wiadomo¶ci e-mail</strong>. Aby to osi±gn±æ e-mail zostanie wys³any na adres e-maila wykonawczego z ukryt± kopi± (odbiorca nie bêdzie widzia³ adresów innych odbiorców) wys³an± do wszystkich odbiorców. Domy¶lnie ustawionych jest 50 odbiorców. Wys³anie wiadomo¶ci do du¿ej liczby osób mo¿e potrwaæ d³u¿sz± chwilê. Zachowaj cierpliwo¶æ i nie przerywaj tej operacji. Po jej zakoñczeniu zostanie wy¶wietlone powiadomienie.',
+	'LogMassemail'				=> 'Messemail send %1 to group / user ',
+	'MassemailSend'				=> 'Massemail send',
+
+	'NoEmailMessage'			=> 'Nale¿y wprowadziæ tre¶æ wiadomo¶ci.',
+	'NoEmailSubject'			=> 'Nale¿y okre¶liæ temat wiadomo¶ci.',
+
+	'MessageSubject'			=> 'Subject',
+	'MessageSubjectInfo'		=> '',
+	'YourMessage'				=> 'Tre¶æ wiadomo¶ci',
+	'YourMessageInfo'			=> 'Tre¶æ wiadomo¶ci musi byæ wpisana zwyk³ym tekstem. Przed wys³aniem wiadomo¶ci wszystkie znaczniki zostan± usuniête.',
+
+	'MessageLanguage'			=> 'Language',
+	'MessageLanguageInfo'		=> '',
+	'SendMail'					=> 'Send',
+
+	'SendToGroup'				=> 'Wy¶lij do grupy',
+	'SendToUser'				=> 'Wy¶lij do u¿ytkowników',
+
+	// System message module
+	'SysMsgInfo'				=> '',
+	'SysMsgUpdated'				=> 'Updated system message',
+
+	'SysMsgSection'				=> 'System message',
+	'SysMsg'					=> 'System message',
+	'SysMsgInfo'				=> 'Your text here',
+
+	'SysMsgType'				=> 'Type',
+	'SysMsgTypeInfo'			=> 'Message type (CSS).',
+	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
