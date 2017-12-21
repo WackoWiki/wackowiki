@@ -48,7 +48,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		register_shutdown_function([$this, 'terminator'], getcwd());
 		parent::__construct([], parent::ARRAY_AS_PROPS);
 
-		$ua = $_SERVER['HTTP_USER_AGENT'];
+		$ua = $_SERVER['HTTP_USER_AGENT'] ?? null;
 
 		if (strpos($ua, 'Trident') !== false)
 		{

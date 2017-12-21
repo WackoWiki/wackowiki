@@ -56,11 +56,11 @@ if (!empty($parser->auto_fn['content']))
 {
 	$footnotes = '';
 
-	foreach ($parser->auto_fn['content'] as $footnote_no => $footnote)
+	foreach ($parser->auto_fn['content'] as $fn_no => $fn)
 	{
-		$footnote	 =	preg_replace_callback($parser->LONGREGEXP, [&$parser, 'wacko_callback'], $footnote);
-		$footnotes	.=	'<dt>[<a title="footnote ' . $footnote_no . ' ref" href="#footnote-' . $footnote_no . '-ref">' . $footnote_no . "</a>]</dt>\n" .
-							'<dd id="footnote-' . $footnote_no . '">' . $footnote . "</dd>\n";
+		$footnote	 =	preg_replace_callback($parser->LONGREGEXP, [&$parser, 'wacko_callback'], $fn);
+		$footnotes	.=	'<dt>[<a title="footnote ' . $fn_no . ' ref" href="#footnote-' . $fn_no . '-ref">' . $fn_no . "</a>]</dt>\n" .
+							'<dd id="footnote-' . $fn_no . '">' . $footnote . "</dd>\n";
 	}
 
 	// write the footnotes
@@ -73,7 +73,7 @@ if (!empty($parser->auto_fn['content']))
 				'</div>' .
 				'<br>';
 
-	$parser->auto_fn['content'] = '';
+	$parser->auto_fn['content'] = null;
 }
 
 echo $text;

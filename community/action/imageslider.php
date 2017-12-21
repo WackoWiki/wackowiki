@@ -336,7 +336,7 @@ if ($can_view)
 				?>
 				<figure>
 				<?php echo $link; ?>
-					<figcaption><?php echo $n . '/' . $count . ' ' . $desc; ?></figcaption>
+					<figcaption><?php echo $n . '/' . $count['n'] . ' ' . $desc; ?></figcaption>
 				</figure>
 	<?php
 			}
