@@ -28,6 +28,7 @@ if (!defined('IN_WACKO'))
 //   * local image cache
 //   * feed_acl
 
+if (!isset($url))		$url	= null;
 if (!isset($nomark))	$nomark	= 0;
 if (!isset($title))		$title	= '';
 if (!isset($max))		$max	= 5;
