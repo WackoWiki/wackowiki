@@ -63,7 +63,7 @@ $ap_translation = [
 	'MiscellaneousSection'		=> 'Sonstiges',
 	'MainSection'				=> 'Grundeinstellungen',
 
-	'DirNotWritable'			=> 'Das %1 Verzeichis ist nicht schreibbar.',
+	'DirNotWritable'			=> 'Das Verzeichis %1 ist nicht schreibbar.',
 
 	/**
 	 * AP MENU
@@ -416,7 +416,7 @@ $ap_translation = [
 		'2'		=> 'alle Zeiten',
 		'3'		=> 'alle Details (DBMS, Cache, usw.)',
 	],
-	'DebugSqlThreshold'			=> 'Threshold performance RDBMS',
+	'DebugSqlThreshold'			=> 'RDBMS Schwellenleistung',
 	'DebugSqlThresholdInfo'		=> 'Im ausführlichen Debug-Modus werden nur die Abfragen aufgezeichnet, welche länger benötigen als die Anzahl der hier ausgewiesen Sekunden.',
 	'DebugAdminOnly'			=> 'Geschlossene Diagnose',
 	'DebugAdminOnlyInfo'		=> 'Zeigt die Debug-Daten des Programms (und des DBMS) nur dem Administrator.',
@@ -644,7 +644,7 @@ $ap_translation = [
 	'NameDateMacro'				=> 'Das Format des <code>::@::</code> Makros',
 	'NameDateMacroInfo'			=> '(Name, Zeit), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Zeitzone',
-	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
+	'TimezoneInfo'				=> 'Zeitzone für die Anzeige von Zeiten für Benutzer, die nicht angemeldet sind (Gäste). Angemeldete Benutzer können ihre Zeitzone in ihren Benutzereinstellungen einstellen und ändern.',
 	'EnableDst'					=> 'Sommerzeit aktivieren',
 	'EnableDstInfo'				=> '',
 
@@ -653,7 +653,7 @@ $ap_translation = [
 	'Noreferrer'				=> 'noreferrer',
 	'NoreferrerInfo'			=> 'Setzt voraus, dass der Browser, wenn der Benutzer den Hyperlink folgt keine Referrer-Header sendet. Fügt <code>rel="noreferrer"</code> zum Link-Syntax hinzu.',
 	'Nofollow'					=> 'nofollow',
-	'NofollowInfo'				=> 'Instruct some search engines that the hyperlink should not influence the ranking of the link\'s target in the search engine\'s index. Adds <code>rel="nofollow"</code> to the link syntax.',
+	'NofollowInfo'				=> 'Weist Suchmaschinen an, daß die Hyperlinks sich nicht auf das Seiten-Ranking der Zielseite im Suchmaschinenindex auswirken sollen. Fügt <code>rel="nofollow"</code> zum Link-Syntax hinzu.',
 	'UrlsUnderscores'			=> 'Bildet Adressen (URLs) mit Unterstrichen',
 	'UrlsUnderscoresInfo'		=> 'Beispielsweise <code>http://[..]/WackoWiki</code> wird zu <code>http://[..]/Wacko_Wiki</code> mit dieser Option.',
 	'ShowSpaces'				=> 'Zeigt Leerzeichen in WikiNamen',
@@ -661,16 +661,16 @@ $ap_translation = [
 	'NumerateLinks'				=> 'Nummeriert die Links in der Druckansicht',
 	'NumerateLinksInfo'			=> 'Nummeriert und listet alle Links am Fuß der Seite in der Druckansicht mit dieser Option.',
 	'YouareHereText'			=> 'Deaktiviert und visualisiert selbstreferenzierende Links',
-	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
+	'YouareHereTextInfo'		=> 'Visualisiert Links zur selben Seite, bspw. <code>&lt;b&gt;####&lt;/b&gt;</code>, alle Links auf sich selbst werden nicht als Link, sondern als fetter Text dargestellt.',
 	//
 
 	// Pages settings
 	'PagesSettingsInfo'			=> '',
-	'PagesSettingsUpdated'		=> 'Updated settings base pages',
+	'PagesSettingsUpdated'		=> 'Einstellungen der Basisseiten aktualisiert',
 	//
 
 	'ListCount'					=> 'Anzahl der Datensätze pro Liste',
-	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
+	'ListCountInfo'				=> 'Anzahl der Zeilen, die in jeder Liste für Gäste angezeigt werden, oder als Standardwert für neue Benutzer.',
 	//
 
 	'ForumSection'				=> 'Options Forum',
@@ -695,18 +695,17 @@ $ap_translation = [
 	'ServicePagesSection'		=> 'Standardseiten',
 	//
 	'RootPage'					=> 'Startseite',
-	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
-	//
-	'PolicyPage'				=> 'Policies and Regulations',
-	//
-	'PolicyPageinfo'			=> 'The page with the rules of the site.',
-	//
+	'RootPageInfo'				=> 'Der Tag der Hauptseite, welcher automatisch aufgerufen wird, wenn ein Nutzer die Website besucht.',
+
+	'PolicyPage'				=> 'Nutzungsbedingungen',
+	'PolicyPageinfo'			=> 'Die Seite mit den Regeln der Website.',
+
 	'SearchPage'				=> 'Suche',
 	'SearchPageInfo'			=> 'Seite mit dem Suchformular (Aktion <code>{{search}}</code>).',
 	'RegistrationPage'			=> 'Register on our site',
 	'RegistrationPageInfo'		=> 'Seite für neue Benutzerregistrierung (Aktion <code>{{registration}}</code>).',
 	'LoginPage'					=> 'Benutzer-Anmeldung',
-	'LoginPageInfo'				=> 'Login page on the site (Aktion <code>{{login}}</code>).',
+	'LoginPageInfo'				=> 'Seite zur Anmeldung (Aktion <code>{{login}}</code>).',
 	//
 	'SettingsPage'				=> 'Benutzereinstellungen',
 	'SettingsPageInfo'			=> 'Seite zum Anpassen des Benutzerprofils (Aktion <code>{{usersettings}}</code>).',
@@ -731,7 +730,7 @@ $ap_translation = [
 	'WantedPageInfo'			=> 'Seite mit einer Liste der fehlenden Seiten, auf die verwiesen wird (Aktion <code>{{wanted}}</code>).',
 	'OrphanedPage'				=> 'Verwaiste Seiten',
 	'OrphanedPageInfo'			=> 'Seite mit einer Liste der vorhandenen Seiten welche von anderen Seiten nicht verlinkt wurden (Aktion <code>{{orphaned}}</code>).',
-	'TodoPage'					=> 'ToDo',
+	'TodoPage'					=> 'Aufgaben',
 	'TodoPageInfo'				=> 'Seite mit einer Liste von Aufgaben (erstellt mit Hilfe von <code>{{backlinks}}</code> und  dem Makro <code>::*::</code>).',
 	'SandboxPage'				=> 'Sandkasten',
 	'SandboxPageInfo'			=> 'Seite, auf der Benutzer die Verwendung des Wiki-Markups üben können.',
@@ -745,22 +744,22 @@ $ap_translation = [
 
 	'EmailNotification'			=> 'E-Mail-Benachrichtigung',
 	'EmailNotificationInfo'		=> 'E-Mail-Benachrichtigung zulassen. Wähle EIN, um E-Mail-Benachrichtigungen zu aktivieren, und AUS, um sie zu deaktivieren. Beachte, dass die Deaktivierung von E-Mail-Benachrichtigungen keine Auswirkungen auf E-Mails hat, die im Rahmen des Benutzeranmeldungsvorgangs generiert wurden.',
-	'Autosubscribe'				=> 'Autosubscribe',
+	'Autosubscribe'				=> 'Automatisch abonnieren',
 	//
 	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
 	//
 
 	'NotificationSection'		=> 'Benachrichtigungen',
 	'NotifyPageEdit'			=> 'Seitenänderung mitteilen',
-	'NotifyPageEditInfo'		=> 'Pending - Sending a email notification only for the first change until the user visits the page again.',
+	'NotifyPageEditInfo'		=> 'Ausstehend - Es wird nur für die erste Änderung einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
 	//
 	'NotifyMinorEdit'			=> 'Kleine Änderung mitteilen',
 	'NotifyMinorEditInfo'		=> 'Sende Mitteilungen auch bei kleinen Änderungen.',
 	'NotifyNewComment'			=> 'Neuen Kommentar mitteilen',
-	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
+	'NotifyNewCommentInfo'		=> 'Ausstehend - Es wird nur für den ersten Kommentar einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
 	//
 	'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
-	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the "signup form".',
+	'NotifyUserAccountInfo'		=> 'Der Administrator wird benachrichtigt, wenn ein neuer Benutzer über das Anmelde-Formular erstellt wurde.',
 	//
 
 	// Resync settings
@@ -788,7 +787,7 @@ $ap_translation = [
 	'EmailSettingsUpdated'		=> 'E-Mail Einstellungen wurden aktualisiert.',
 
 	'EmailFunctionName'			=> 'Name der E-Mail-Funktion',
-	'EmailFunctionNameInfo'		=> 'Die PHP-Funktion, die genutzt wird, um E-Mails zu versenden.',
+	'EmailFunctionNameInfo'		=> 'Die PHP-Funktion, welche genutzt wird, um E-Mails zu versenden.',
 	'UseSmtpInfo'				=> 'Wähle <code>SMTP</code> aus, wenn du E-Mails über einen SMTP-Server senden möchtest (oder musst), anstatt die PHP-eigene Mail-Funktion zu nutzen.',
 
 	'EnableEmail'				=> 'Aktiviere E-Mail',
@@ -852,7 +851,7 @@ $ap_translation = [
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten und Dateien.
 									Um die Seiten und Dateien endgültig aus der Datenbank zu löschen oder wiederherzustellen klicke in der entsprechenden Zeile auf <em>Entfernen</em> oder <em>Wiederherstellen</em>.
-									(Achtung, keine Löschbestätigung ist erforderlich!)',
+									(Achtung, es ist keine Löschbestätigung erforderlich!)',
 	//
 
 	// Filter module
@@ -873,14 +872,14 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Datenbank konvertiert',
 	'ConversionTablesOk'		=> 'Konvertierung der ausgewählten Tabellen erfolgreich.',
 
-	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
+	'LogColumsToStrict'			=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
 	//
 	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
 
 	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB/XtraDB',
-	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
+	'ConvertTablesEngineInfo'	=> 'Falls man über vorhandene Tabellen verfügt, die für eine bessere Zuverlässigkeit und Skalierbarkeit in InnoDB / XtraDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprünglich MyISAM, was früher der Standard war.',
 	//
-	'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
+	'ConvertTablesEngineHint'	=> '* XtraDB ist eine erweiterte Version der InnoDB-Speicher-Engine, die auf moderner Hardware besser skaliert werden kann, und enthält eine Vielzahl anderer Funktionen, die in Hochleistungsumgebungen nützlich sind. Sie ist vollständig abwärtskompatibel und identifiziert sich selbst MariaDB als "<code> ENGINE = InnoDB </ code>" (genau wie InnoDB) und kann daher als ein Drop-In-Ersatz für Standard-InnoDB verwendet werden.',
 	//
 
 	'DbVersion'					=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
@@ -892,7 +891,7 @@ $ap_translation = [
 	'EngineTyp'					=> 'Typ',
 
 	'ConvertColumnsToStrict'	=> 'Konvertiere Spalten für den SQL-Strikt-Modus',
-	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.',
+	'ConvertTablesStrictInfo'	=> 'Wenn man über vorhandene Tabellen verfügt, welche man konvertieren möchte, um dem strikten SQL-Modus zu entsprechen, verwende die folgende Routine.',
 	//
 
 	// Log module
