@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$place_holder	= '&nbsp;&nbsp;&nbsp;';
-
 // redirect to show method if hide_revisions is true
 if ($this->hide_revisions)
 {
@@ -32,9 +30,9 @@ $show_deleted = $this->is_admin();
 if ($this->page['deleted'])
 {
 	$this->show_message(
-			// $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->_t('PromptCreate')) : '').
-			'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
-			);
+		// $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->_t('PromptCreate')) : '').
+		'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
+		);
 }
 
 if ($this->has_access('read'))
@@ -44,10 +42,11 @@ if ($this->has_access('read'))
 	{
 		$this->context[++$this->current_context] = '';
 
-		echo $this->form_open('diff_versions', ['page_method' => 'diff', 'form_method' => 'get']);
-		echo "<p>\n";
-		echo '<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '">';
+		echo $this->form_open('diff_versions', ['page_method' => 'diff', 'form_method' => 'get']) .
+			"<p>\n" .
+				'<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '">';
 
+		$place_holder	= '&nbsp;&nbsp;&nbsp;';
 		$user			= $this->get_user();
 		$default_mode	= $user['diff_mode'] ?: $this->db->default_diff_mode;
 		$diff_modes		= $this->_t('DiffMode');
@@ -61,17 +60,19 @@ if ($this->has_access('read'))
 				'<label for="' . 'diff_mode_' . $mode . '">' . $diff_modes[$mode] . '</label>';
 		}
 
-		echo $place_holder.
-			'<a href="' . $this->href('revisions.xml') . '"><img src="' .
-			$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') .
-			'" alt="XML" class="btn-feed"></a>';
+		echo $place_holder .
+			'<a href="' . $this->href('revisions.xml') . '">' .
+				'<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') . '" alt="XML" class="btn-feed">' .
+			'</a>';
 
 		if ($this->db->minor_edit)
 		{
 			// STS: ?!..
 			// filter minor edits
-			echo '<input name="minor_edit" value="' . $hide_minor_edit . '" type="hidden">' . "\n";
-			echo '<br>' . ($hide_minor_edit
+			echo
+				'<input name="minor_edit" value="' . $hide_minor_edit . '" type="hidden">' . "\n" .
+				'<br>' .
+				($hide_minor_edit
 					? '<a href="' . $this->href('revisions', '', ['minor_edit' => 0]) . '">' . $this->_t('MinorEditShow') . '</a>'
 					: '<a href="' . $this->href('revisions', '', ['minor_edit' => 1]) . '">' . $this->_t('MinorEditHide') . '</a>');
 		}
@@ -99,30 +100,36 @@ if ($this->has_access('read'))
 
 		foreach ($revisions as $num => $page)
 		{
-			if ($page['edit_note'])
-			{
-				$edit_note = '<span class="editnote">[' . $page['edit_note'] . ']</span>';
-			}
-			else
-			{
-				$edit_note = '';
-			}
+			$edit_note =
+				$page['edit_note']
+					? '<span class="editnote">[' . $page['edit_note'] . ']</span>'
+					: '';
 
 			// page_size change
-			$size_delta = $this->rev_delta[$page['revision_id']];
+			$size_delta		= $this->rev_delta[$page['revision_id']];
 
-			echo '<li>';
-			echo '<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>';
-			echo '<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 0 ? 'checked' : '') . '>';
-			echo $place_holder.
-						'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 1 ? 'checked' : '') . '>';
-			echo $place_holder . '&nbsp;
-						<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>';
-			echo '<span style="display: inline-block; width:130px;">' . "&nbsp; &mdash; (" . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . "</span> ";
-			echo $place_holder."&nbsp;" . $this->_t('By') . " " .
-						$this->user_link($page['user_name'], '', true, false) . ' ';
-			echo $edit_note;
-			echo ' ' . ($page['minor_edit'] ? 'm' : '');
+			echo
+				'<li>' .
+					'<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>' .
+
+					'<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 0 ? 'checked' : '') . '>' .
+					$place_holder .
+					'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 1 ? 'checked' : '') . '>' .
+					$place_holder . '&nbsp;' .
+
+					($page['deleted'] ? '<del>' : '') .
+
+					'<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>' .
+					'<span style="display: inline-block; width:130px;">' . '&nbsp; &mdash; (' . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . '</span> ';
+
+					($page['deleted'] ? '</del>' : '') .
+
+					$place_holder . '&nbsp;' .
+					$this->_t('By') . ' ' .
+					$this->user_link($page['user_name'], '', true, false) . ' ' .
+
+					$edit_note . ' ' .
+					($page['minor_edit'] ? 'm' : '');
 
 			// review
 			if ($this->db->review)

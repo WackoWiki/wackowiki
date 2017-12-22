@@ -1,10 +1,10 @@
 /*
 ////////////////////////////////////////////////////////////////////////
 // WikiEdit                                                           //
-// v. 3.16                                                            //
+// v. 3.17                                                            //
 // supported: MZ1.4+, MSIE5+, Opera 8+                                //
 //                                                                    //
-// (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2016             //
+// (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2017             //
 //	 based on AutoIndent for textarea                                 //
 //	 (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003                  //
 // Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko	  //
@@ -721,7 +721,7 @@ WikiEdit.prototype.createLink = function (isAlt)
 
 WikiEdit.prototype.help = function ()
 {
-	s = '				WikiEdit 3.16 \n';
+	s = '				WikiEdit 3.17 \n';
 	s += '	(c) Roman Ivanov, WackoWiki Team 2003-2017	 \n';
 	s += '	https://wackowiki.org/doc/Dev/Projects/WikiEdit \n';
 	s += '\n';
