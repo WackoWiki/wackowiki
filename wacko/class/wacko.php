@@ -6666,12 +6666,15 @@ class Wacko
 		$this->set_language($this->user_lang, true);
 
 		// SEO
-		foreach ($this->search_engines as $engine)
+		if (isset($_SERVER['HTTP_USER_AGENT']))
 		{
-			if (stristr($_SERVER['HTTP_USER_AGENT'], $engine))
+			foreach ($this->search_engines as $engine)
 			{
-				$this->resource['OuterLink2']	= '';
-				$this->resource['OuterIcon']	= '';
+				if (stristr($_SERVER['HTTP_USER_AGENT'], $engine))
+				{
+					$this->resource['OuterLink2']	= '';
+					$this->resource['OuterIcon']	= '';
+				}
 			}
 		}
 
@@ -6738,6 +6741,7 @@ class Wacko
 			}
 		}
 
+		// create $this->page
 		$this->set_page($page); // the only call
 
 		if ($this->db->enable_referrers)
