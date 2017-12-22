@@ -142,6 +142,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// load topics data
 	$topics = $this->db->load_all($sql);
 
+	$page_ids = [];
+
 	foreach ($topics as $page)
 	{
 		$page_ids[]	= $page['page_id'];
