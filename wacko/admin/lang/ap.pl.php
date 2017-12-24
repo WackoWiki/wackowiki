@@ -942,7 +942,7 @@ $ap_translation = [
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
 									'The Backup package files were stored in the following sub-directory %1.<br>' .
 									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
-									'To restore a backup copy or remove a package, go to <a href="?mode=db_restore">Restore database</a>.',
+									'To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
 
 	// DB Restore module

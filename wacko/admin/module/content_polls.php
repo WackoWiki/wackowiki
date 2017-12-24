@@ -36,8 +36,8 @@ function admin_content_polls(&$engine, &$module)
 	// define context
 	$admin		= true; #$engine->is_admin();
 	$mode		= $module['mode'];
-	$mode_http	= ''; //'mode=' . $mode.'&amp;';
-	$mode_file	= 'admin.php?mode=' . $module['mode']; //$_SERVER['PHP_SELF']
+	$mode_http	= '';
+	$mode_file	= ['mode' => $module['mode']];
 
 	// processing input
 	if ($admin === true)
@@ -174,7 +174,7 @@ function admin_content_polls(&$engine, &$module)
 						<input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;">
 							<a href="' .
-							rawurldecode($engine->href('', $mode_file.'&amp;poll_id=' . $row['poll_id'] . '&amp;results=1')) . '">' .
+							rawurldecode($engine->href('', $mode_file + ['poll_id' => $row['poll_id'], 'results' => 1])) . '">' .
 							date('d/m', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
 					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], time()) . '</td>';
@@ -263,7 +263,7 @@ function admin_content_polls(&$engine, &$module)
 				echo '<tr class="lined">';
 					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;"><a href="' .
-						rawurldecode($engine->href('', $mode_file.'&amp;year=' . $year.'&amp;poll_id=' . $row['poll_id'] . '&amp;results=1')) . '">' .
+						rawurldecode($engine->href('', $mode_file + ['year' => $year, 'poll_id' => $row['poll_id'], 'results' => 1])) . '">' .
 						date('d/m/y', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
 					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], $row['end']) . '</td>';
@@ -281,7 +281,7 @@ function admin_content_polls(&$engine, &$module)
 		}
 		else
 		{
-			echo '<a href="' . rawurldecode($engine->href('', $mode_file.'&amp;year=0')) . '">' . $engine->_t('PollsAll') . '</a> ';
+			echo '<a href="' . rawurldecode($engine->href('', $mode_file + ['year' => 0])) . '">' . $engine->_t('PollsAll') . '</a> ';
 		}
 
 		if (!empty($years))
@@ -294,7 +294,7 @@ function admin_content_polls(&$engine, &$module)
 				}
 				else
 				{
-					echo '<a href="' . rawurldecode($engine->href('', $mode_file.'&amp;year=' . $item)) . '">' . $item . '</a> ';
+					echo '<a href="' . rawurldecode($engine->href('', $mode_file + ['year' => $item])) . '">' . $item . '</a> ';
 				}
 			}
 		}

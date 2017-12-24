@@ -29,7 +29,7 @@ function admin_system_log(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'])));
+		$engine->http->redirect(rawurldecode($engine->href('', '', 'mode=' . $module['mode'])));
 	}
 
 	if (@$_POST['action'] == 'purge_log')
@@ -186,8 +186,8 @@ function admin_system_log(&$engine, &$module)
 		<table class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $ordertime;  ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $orderlevel; ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $ordertime]); ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $orderlevel]); ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
 				<th><?php echo $engine->_t('LogEvent'); ?></th>
 				<th style="width:20px;"><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>
@@ -231,8 +231,8 @@ function admin_system_log(&$engine, &$module)
 					'<td class="t_center a_top" style="padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' .
 					'<td class="a_top">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
 					'<td class="t_center a_top"><small>' .
-						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br>' .
-						'<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
+						'<a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br>' .
+						'<a href="' . $engine->href('', '', ['ip' => $row['ip']]) . '">' . $row['ip'] . '</a>' .
 					'</small></td>' .
 				'</tr>';
 		}

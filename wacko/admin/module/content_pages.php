@@ -34,7 +34,7 @@ function admin_content_pages(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->http->redirect(rawurldecode($engine->href('', 'admin.php', 'mode=' . $module['mode'])));
+		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
 	}
 
 	if (isset($_POST['update']))
@@ -172,10 +172,10 @@ function admin_content_pages(&$engine, &$module)
 		<table class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'] . '&amp;order=' . $ordertime; ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'] . '&amp;order=' . $ordertag; ?>"><?php echo $engine->_t('MetaTag'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['mode' => $module['mode'], 'order' => $ordertime]);?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['mode' => $module['mode'], 'order' => $ordertag]);?>"><?php echo $engine->_t('MetaTag'); ?></a></th>
 				<th><?php echo $engine->_t('MetaTitle'); ?></th>
-				<th style="width:20px;"><a href="?mode=<?php echo $module['mode'] . '&amp;order=' . $ordersize; ?>"><?php echo $engine->_t('SettingsSize'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['mode' => $module['mode'], 'order' => $ordersize]);?>"><?php echo $engine->_t('SettingsSize'); ?></a></th>
 				<th style="width:20px;"><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>
 <?php
@@ -193,8 +193,8 @@ function admin_content_pages(&$engine, &$module)
 					'<td class="a_top">' . $row['title'] . '</td>' .
 					'<td class="a_top">' . $engine->binary_multiples($row['page_size'], false, true, true) . '</td>' .
 					'<td class="t_center a_top"><small>' .
-						'<a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' .
-						'<br>' . '<a href="' . $engine->href() . '&amp;ip=' . $row['ip'] . '">' . $row['ip'] . '</a>' .
+						'<a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' .
+						'<br>' . '<a href="' . $engine->href('', '', ['ip' => $row['ip']]) . '">' . $row['ip'] . '</a>' .
 					'</small></td>' .
 				'</tr>';
 		}

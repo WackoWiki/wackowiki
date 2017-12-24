@@ -3306,6 +3306,11 @@ class Wacko
 	*/
 	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true)
 	{
+		if ($this->db->ap_mode)
+		{
+			$tag = 'admin.php';
+		}
+
 		if (!is_array($params))
 		{
 			$params = $params? [$params] : [];
@@ -3320,7 +3325,7 @@ class Wacko
 		$href = $this->db->base_url;
 
 		// enable rewrite_mode in ap_mode to avoid href() appends '?page=' (why?)
-		if ($this->db->rewrite_mode || $this->db->ap_mode)
+		if ($this->db->rewrite_mode ) // || $this->db->ap_mode
 		{
 			$href .= $this->mini_href($method, $tag, $alter);
 		}
@@ -3346,8 +3351,8 @@ class Wacko
 				else if (($j = strpos($param, '#')) !== false)
 				{
 					// for some it is easier to bring in anchor in params
-					$anchor = substr($param, $j + 1);
-					$param = substr($param, 0, $j);
+					$anchor	= substr($param, $j + 1);
+					$param	= substr($param, 0, $j);
 				}
 			}
 
@@ -3378,6 +3383,7 @@ class Wacko
 			$tag = $this->tag;
 		}
 
+		// urls_underscores
 		if ($alter && !$this->db->ap_mode)
 		{
 			$tag = $this->slim_url($tag);
@@ -4707,13 +4713,20 @@ class Wacko
 			$form_token = ($form_method == 'post');
 		}
 
+		// new page it is
 		$add = (@$_GET['add'] || @$_POST['add']);
+
+		// AP module needs to be added
+		if ($this->db->ap_mode && isset($_GET['mode']))
+		{
+			$href_param = ['mode' => $_GET['mode']];
+		}
 
 		$result	= '<form action="' .
 			$this->href($page_method, $tag, $href_param, $add) . '" ' .
 			$form_more . ' method="' . $form_method . '" ' . ($form_name ? 'name="' . $form_name . '" ' : '') . ">\n";
 
-		if (!($this->db->rewrite_mode || $this->db->ap_mode))
+		if (!($this->db->rewrite_mode )) #|| $this->db->ap_mode
 		{
 			$result .= '<input type="hidden" name="page" value="' . $this->mini_href($page_method, $tag, $add) . "\">\n";
 		}

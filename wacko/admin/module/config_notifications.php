@@ -46,7 +46,7 @@ function admin_config_notifications(&$engine, &$module)
 
 		$engine->log(1, '!!' . $engine->_t('NotificationSettingsUpdated')  . '!!');
 		$engine->set_message($engine->_t('NotificationSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
 	}
 
 	echo $engine->form_open('notifications');

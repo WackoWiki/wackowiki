@@ -62,27 +62,30 @@ function admin_main(&$engine, &$module)
 		<?php echo $engine->_t('MainNote');?>
 	</p>
 	<br>
-	<table style="max-width:200px;" class="formation">
-<?php
+	<?php
 	echo $engine->form_open('lock', ['tag' => 'admin.php']);
-?>
-		<input type="hidden" name="action" value="lock">
-			<tr class="hl_setting">
-				<td class="label" style="white-space:nowrap;"><?php echo ($config->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
-				<td class="t_center"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>"></td>
-			</tr>
+	?>
+	<input type="hidden" name="action" value="lock">
+	<table style="max-width:200px;" class="formation">
+		<tr class="hl_setting">
+			<td class="label" style="white-space:nowrap;"><?php echo ($config->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
+			<td class="t_center"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>"></td>
+		</tr>
+	</table>
 	<br>
 <?php
 	echo $engine->form_close();
 	echo '<br>';
-	// $form_name = '', $page_method = '', $form_method = 'post', $form_token = false, $tag = '', $form_more = '', $href_param = ''
+	// $form_name = '', ['page_method' => '', 'form_method' => 'post', 'form_token' => false, 'tag' => '', 'form_more' => '', 'href_param' => '']
 	echo $engine->form_open('cache', ['tag' => 'admin.php']);
 ?>
-		<input type="hidden" name="action" value="cache">
-			<tr class="hl_setting">
-				<td class="label nowrap"><?php echo $engine->_t('ClearCache');?></td>
-				<td class="t_center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '">');?></td>
-			</tr>
+	<input type="hidden" name="action" value="cache">
+	<table style="max-width:200px;" class="formation">
+		<tr class="hl_setting">
+			<td class="label nowrap"><?php echo $engine->_t('ClearCache');?></td>
+			<td class="t_center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '">');?></td>
+		</tr>
+	</table>
 <?php
 	echo $engine->form_close();
 
@@ -91,6 +94,7 @@ function admin_main(&$engine, &$module)
 		<form action="admin.php" method="post" name="">
 		<input type="hidden" name="mode" value="lock">
 		<input type="hidden" name="action" value="purge_sessions">
+		<table style="max-width:200px;" class="formation">
 			<tr class="hl_setting">
 				<td class="label nowrap"><?php echo $engine->_t('PurgeSessionsTip');?>
 				<br><?php #echo $engine->_t('PurgeSessionsExplain');?></td>

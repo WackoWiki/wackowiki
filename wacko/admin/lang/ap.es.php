@@ -941,7 +941,7 @@ $ap_translation = [
 	'BackupCompleted'			=> 'Backup y archivación terminado.<br>' .
 									'Archivo del backup guardado en subdirectorio %1.<br>' .
 									'Use FTP para descargarlo (mantenga la estructura de diretorios y nombres de archivos al copiar).<br>' .
-									'Para restaurar una copia del backup o remover un paquete, ingrese en <a href="?mode=db_restore">Restaurar base de datos</a>.',
+									'Para restaurar una copia del backup o remover un paquete, ingrese en <a href="%2">Restaurar base de datos</a>.',
 	'LogSavedBackup'			=> 'Guardado backup de base de datos ##%1##',
 
 	// DB Restore module

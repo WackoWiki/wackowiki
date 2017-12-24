@@ -973,7 +973,7 @@ $ap_translation = [
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br>' .
 									'Die Sicherungspaketdateien wurden im Unterverzeichnis %1 abgelegt.<br>' .
 									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
-									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="?mode=db_restore">Datenbank wiederherstellen</a>.',
+									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 
 	// DB Restore module

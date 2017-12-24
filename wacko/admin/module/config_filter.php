@@ -55,7 +55,7 @@ function admin_config_filter(&$engine, &$module)
 
 		$engine->log(1, '!!' . $engine->_t('FilterSettingsUpdated') . '!!');
 		$engine->set_message($engine->_t('FilterSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
 	}
 
 	$phrases = file_get_contents($file_name);

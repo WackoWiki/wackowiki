@@ -193,7 +193,7 @@ $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'main' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
 				: "\n<ul>\n<li>") .
-			'<a href="admin.php" title="' . $module['main']['title'] . '">' . $module['main']['name'] . '</a>' .
+			'<a href="' . $engine->href() . '" title="' . $module['main']['title'] . '">' . $module['main']['name'] . '</a>' .
 			"</li>\n";
 
 $category = $module['main']['cat'];
@@ -229,7 +229,7 @@ foreach ($module as $row)
 				$menu .= '<li>';
 			}
 
-			$menu .= '<a href="?mode=' . $row['mode'] . '" title="' . $row['title'] . '">' . $row['name'] . '</a>';
+			$menu .= '<a href="' . $engine->href('', '', ['mode' => $row['mode']]) . '" title="' . $row['title'] . '">' . $row['name'] . '</a>';
 			$menu .= "</li>\n";
 		}
 		else
@@ -267,7 +267,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<div id="pane">
 			<div class="left"></div>
 			<div class="middle">
-				<a href="<?php echo rtrim($engine->db->base_url); ?>admin.php">
+				<a href="<?php echo $engine->href(); ?>">
 				<?php
 					# echo '<img src="' . rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
 				?>
@@ -295,7 +295,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 			<div id="sections">
 				<?php
 				echo '<a href="' . rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>';
-				echo '<a href="' . rtrim($engine->db->base_url) . 'admin.php?action=logout" title="' . $engine->_t('ApLogOutTip') . '">' . $engine->_t('ApLogOut') . '</a>';
+				echo '<a href="' . $engine->href('', '', ['action' => 'logout']) . '" title="' . $engine->_t('ApLogOutTip') . '">' . $engine->_t('ApLogOut') . '</a>';
 				?>
 			</div>
 		</div>
