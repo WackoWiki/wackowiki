@@ -3306,7 +3306,7 @@ class Wacko
 	*/
 	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true)
 	{
-		if ($this->db->ap_mode)
+		if ($this->db->ap_mode && !$tag)
 		{
 			$tag = 'admin.php';
 		}
