@@ -23,7 +23,7 @@ if (!defined('IN_WACKO'))
 if (!($engine->is_admin() || $db->is_locked() || RECOVERY_MODE))
 {
 	$http->secure_base_url();
-	$http->redirect($engine->href());
+	$http->redirect($engine->href('', $db->root_page));
 }
 
 // register locale resources
@@ -44,7 +44,7 @@ if (@$_GET['action'] === 'logout')
 	unset($engine->sess->ap_created);
 	$engine->log(1, $engine->_t('LogAdminLogout', SYSTEM_LANG));
 	$http->secure_base_url();
-	$http->redirect($engine->href());
+	$http->redirect($engine->href('', $db->root_page));
 	exit;
 }
 
