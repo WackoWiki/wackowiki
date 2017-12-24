@@ -377,7 +377,7 @@ function admin_db_restore(&$engine, &$module)
 				date('H:i:s') . ' - ' . $engine->_t('RestoreDone') . '</strong>';
 
 			$message = $engine->_t('BackupRestored') .
-					' <a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($pack, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>.';
+					' <a href="' . rawurldecode($engine->href('', '', ['remove' => 1, 'backup_id' => htmlspecialchars($pack, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)])) . '">' . $engine->_t('RemoveButton') . '</a>.';
 			$engine->show_message($message, 'success');
 ?>
 			<div class="code">
@@ -511,7 +511,7 @@ function admin_db_restore(&$engine, &$module)
 									<tr>
 										<td></td>
 										<td>
-											<br><a href="' . rawurldecode($engine->href()) . '&amp;remove=1&amp;backup_id=' . htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . $engine->_t('RemoveButton') . '</a>
+											<br><a href="' . rawurldecode($engine->href('', '', ['remove' => 1, 'backup_id' => htmlspecialchars($log['pack'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)])) . '">' . $engine->_t('RemoveButton') . '</a>
 										</td>
 									</tr>
 								</table>' .

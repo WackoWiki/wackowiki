@@ -50,7 +50,7 @@ function admin_config_upload(&$engine, &$module)
 
 		$engine->log(1, $engine->_t('UploadSettingsUpdated'));
 		$engine->set_message($engine->_t('UploadSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
 	}
 
 	echo $engine->form_open('upload');

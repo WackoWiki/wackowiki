@@ -844,18 +844,18 @@ function admin_user_users(&$engine, &$module)
 				<th style="width:5px;"></th>
 				<th style="width:5px;"></th>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_user; ?>"><?php echo $engine->_t('UsersName');?></a></th>
-				<!--<th style="width:150px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_name; ?>"><?php echo $engine->_t('RealName');?></a></th>-->
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_user]); ?>"><?php echo $engine->_t('UsersName');?></a></th>
+				<!--<th style="width:150px;"><a href="<?php echo $engine->href('', '', ['order' => $order_name]); ?>"><?php echo $engine->_t('RealName');?></a></th>-->
 				<th><?php echo $engine->_t('Email');?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_pages; ?>"><?php echo $engine->_t('UsersPages');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_comments; ?>"><?php echo $engine->_t('UsersComments');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_revisions; ?>"><?php echo $engine->_t('UsersRevisions');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $order_uploads; ?>"><?php echo $engine->_t('UsersUploads');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_pages]); ?>"><?php echo $engine->_t('UsersPages');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_comments]); ?>"><?php echo $engine->_t('UsersComments');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_revisions]); ?>"><?php echo $engine->_t('UsersRevisions');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_uploads]); ?>"><?php echo $engine->_t('UsersUploads');?></a></th>
 				<th style="width:20px;"><?php echo $engine->_t('UserLanguage');?></th>
 				<th style="width:20px;"><?php echo $engine->_t('Enabled');?></th>
 				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $signup_time; ?>"><?php echo $engine->_t('UsersSignup');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . '&amp;order=' . $last_visit; ?>"><?php echo $engine->_t('UsersLastSession');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $signup_time]); ?>"><?php echo $engine->_t('UsersSignup');?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $last_visit]); ?>"><?php echo $engine->_t('UsersLastSession');?></a></th>
 			</tr>
 <?php
 		if ($users)
@@ -870,16 +870,16 @@ function admin_user_users(&$engine, &$module)
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '">
 						</td>' .
 						'<td>' . $row['user_id'] . '</td>' .
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>' .
+						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
 						#'<td style="padding-left:5px; padding-right:5px;">' . $row['real_name'] . '</td>' .
 						'<td>' . $row['email'] . '</td>' .
 						'<td>' . $row['total_pages'] . '</td>' .
 						'<td>' . $row['total_comments'] . '</td>' .
 						'<td>' . $row['total_revisions'] . '</td>' .
 						'<td>' . $row['total_uploads'] . '</td>' .
-						'<td><small><a href="' . $engine->href() . '&amp;user_lang=' . $row['user_lang'] . '">' . $row['user_lang'] . '</a></small></td>' .
+						'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang']]) . '">' . $row['user_lang'] . '</a></small></td>' .
 						'<td>' . $row['enabled'] . '</td>' .
-						'<td><a href="' . $engine->href() . '&amp;account_status=' . $row['account_status'] . '">' . $status[$row['account_status']] . '</a></td>' .
+						'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
 						'<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>' .
 						'<td><small>' . $engine->get_time_formatted($row['last_visit']) . '</small></td>' .
 					'</tr>';

@@ -41,7 +41,7 @@ function admin_config_email(&$engine, &$module)
 		$engine->send_user_email('System', $subject, $body);
 
 		$engine->set_message($engine->_t('TestEmailMessage'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
 	}
 
 	// update settings
@@ -65,7 +65,7 @@ function admin_config_email(&$engine, &$module)
 		$engine->log(1, '!!Updated email settings!!');
 		$message = $engine->_t('EmailSettingsUpdated');
 		$engine->set_message($message, 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
 	}
 
 	echo $engine->form_open('email');

@@ -366,9 +366,9 @@ function admin_user_approve(&$engine, &$module)
 						#'</td>' .
 						#'<td>' .
 						#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
-						#'</td>' . <a href="?mode=db_restore">Restore database</a>
+						#'</td>' . <a href="' . $engine->href() . '&amp;mode=db_restore">Restore database</a>
 						'<td>' . $row['user_id'] . '</td>' .
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users' . '&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>' .
+						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;mode=user_users' . '&amp;user_id=' . $row['user_id'] . '">' . $row['user_name'] . '</a></strong></td>' .
 						'<td>' . $row['email'] . '</td>' .
 						'<td>' . $row['user_ip'] . '</td>' .
 						'<td><small><a href="' . $engine->href() . '&amp;user_lang=' . $row['user_lang'] . '">' . $row['user_lang'] . '</a></small></td>' .

@@ -480,7 +480,7 @@ function admin_user_groups(&$engine, &$module)
 					'<td>
 						<input type="radio" name="change_member" value="' . $member['user_id'] . '"></td>' .
 					'<td>' . $member['user_id'] . '</td>' .
-					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="?mode=user_users&amp;user_id=' . $member['user_id'] . '">' . $member['user_name'] . '</a></strong></td>' .
+					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href() . '&amp;mode=user_users&amp;user_id=' . $member['user_id'] . '">' . $member['user_name'] . '</a></strong></td>' .
 				'</tr>';
 		}
 			?>
