@@ -145,7 +145,7 @@ function admin_user_users(&$engine, &$module)
 					"signup_time		= UTC_TIMESTAMP(), " .
 					"email				= " . $engine->db->q($_POST['email']) . ", " .
 					"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
-					"enabled			= " . (int) $_POST['enabled'] . ", " .
+					"enabled			= " . (int) ($_POST['enabled'] ?? 0) . ", " .
 					"user_name			= " . $engine->db->q($_POST['newname']) . " ");
 
 			// get new user_id
@@ -233,7 +233,7 @@ function admin_user_users(&$engine, &$module)
 					"user_name		= " . $engine->db->q($_POST['newname']) . ", " .
 					"email			= " . $engine->db->q($_POST['newemail']) . ", " .
 					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .
-					"enabled		= " . (int) $_POST['enabled'] . ", " .
+					"enabled		= " . (int) ($_POST['enabled'] ?? 0) . ", " .
 					"account_status	= " . (int) $_POST['account_status'] . " " .
 				"WHERE user_id		= " . (int) $_POST['user_id'] . " " .
 				"LIMIT 1");
@@ -386,7 +386,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 						</td>' .
 					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" ' . ( !isset($_POST['enabled']) ? ' checked' : '') . '>
+						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (!isset($_POST['enabled']) ? ' checked' : '') . '>
 					</td>
 				</tr>' .
 				'<tr>

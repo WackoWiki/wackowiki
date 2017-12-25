@@ -32,7 +32,7 @@ function admin_main(&$engine, &$module)
 	{
 		$engine->config->lock();
 
-		$engine->http->redirect('admin.php');
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 	// clear cache
 	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
@@ -63,7 +63,7 @@ function admin_main(&$engine, &$module)
 	</p>
 	<br>
 	<?php
-	echo $engine->form_open('lock', ['tag' => 'admin.php']);
+	echo $engine->form_open('lock');
 	?>
 	<input type="hidden" name="action" value="lock">
 	<table style="max-width:200px;" class="formation">
@@ -77,7 +77,7 @@ function admin_main(&$engine, &$module)
 	echo $engine->form_close();
 	echo '<br>';
 	// $form_name = '', ['page_method' => '', 'form_method' => 'post', 'form_token' => false, 'tag' => '', 'form_more' => '', 'href_param' => '']
-	echo $engine->form_open('cache', ['tag' => 'admin.php']);
+	echo $engine->form_open('cache');
 ?>
 	<input type="hidden" name="action" value="cache">
 	<table style="max-width:200px;" class="formation">
@@ -89,9 +89,8 @@ function admin_main(&$engine, &$module)
 <?php
 	echo $engine->form_close();
 
-	echo $engine->form_open('purge_sessions', ['tag' => 'admin.php']);
+	echo $engine->form_open('purge_sessions');
 ?>
-		<form action="admin.php" method="post" name="">
 		<input type="hidden" name="mode" value="lock">
 		<input type="hidden" name="action" value="purge_sessions">
 		<table style="max-width:200px;" class="formation">

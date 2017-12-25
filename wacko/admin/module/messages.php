@@ -43,7 +43,7 @@ function admin_messages(&$engine, &$module)
 
 		$engine->log(1, $engine->_t('SysMsgUpdated'));
 		$engine->set_message($engine->_t('SysMsgUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('messages');
