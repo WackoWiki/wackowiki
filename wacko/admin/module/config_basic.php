@@ -88,7 +88,7 @@ function admin_config_basic(&$engine, &$module)
 
 		$engine->log(1, 'Updated basic settings');
 		$engine->set_message('Updated basic settings', 'success');
-		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('basic');

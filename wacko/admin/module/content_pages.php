@@ -34,7 +34,7 @@ function admin_content_pages(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	if (isset($_POST['update']))
@@ -172,10 +172,10 @@ function admin_content_pages(&$engine, &$module)
 		<table class="formation">
 			<tr>
 				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['mode' => $module['mode'], 'order' => $ordertime]);?>"><?php echo $engine->_t('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['mode' => $module['mode'], 'order' => $ordertag]);?>"><?php echo $engine->_t('MetaTag'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $ordertime]);?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $ordertag]);?>"><?php echo $engine->_t('MetaTag'); ?></a></th>
 				<th><?php echo $engine->_t('MetaTitle'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['mode' => $module['mode'], 'order' => $ordersize]);?>"><?php echo $engine->_t('SettingsSize'); ?></a></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $ordersize]);?>"><?php echo $engine->_t('SettingsSize'); ?></a></th>
 				<th style="width:20px;"><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>
 <?php

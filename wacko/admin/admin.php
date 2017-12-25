@@ -30,7 +30,7 @@ if (!($engine->is_admin() || $db->is_locked() || RECOVERY_MODE))
 $engine->set_language($db->language, true);
 
 // reconnect securely in tls mode
-$http->ensure_tls($db->base_url . 'admin.php');
+$http->ensure_tls($engine->href('', 'admin.php'));
 
 // clean _POST if no csrf token
 $engine->validate_post_token();
@@ -85,7 +85,7 @@ if (@$_POST['_action'] === 'emergency')
 
 		$engine->log(1, $engine->_t('LogAdminLoginSuccess', SYSTEM_LANG));
 		$http->secure_base_url();
-		$http->ensure_tls($db->base_url . 'admin.php');
+		$http->ensure_tls($engine->href('', 'admin.php'));
 	}
 	else
 	{
@@ -165,7 +165,8 @@ if (time() - $engine->sess->ap_last_activity > 900) // 1800
 	$engine->log(1, $engine->_t('LogAdminLogout', SYSTEM_LANG));
 
 	$engine->set_message($engine->_t('LoggedOutAuto'));
-	$engine->http->redirect('admin.php');
+	#$engine->http->redirect('admin.php');
+	$engine->http->redirect($engine->href('', 'admin.php'));
 }
 
 $engine->sess->ap_last_activity = time(); // update last activity time stamp
@@ -336,21 +337,24 @@ $engine->output_messages();
 
 if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 {
-	if (function_exists('admin_' . $_REQUEST['mode']) === true)
+	$mode = $_REQUEST['mode'];
+
+	if (function_exists('admin_' . $mode) === true)
 	{
 		// page context
-		$engine->tag = $engine->supertag = 'admin.php?mode=' . $_REQUEST['mode'];
+		$engine->module = $mode;
+		$engine->tag = $engine->supertag = 'admin.php' . ($db->rewrite_mode ? '?' : '&amp;') . 'mode=' . $mode;
 		$engine->context[++$engine->current_context] = $engine->tag;
 
 		// module run
-		$exec = 'admin_' . $_REQUEST['mode'];
-		$exec($engine, $module[$_REQUEST['mode']]);
+		$exec = 'admin_' . $mode;
+		$exec($engine, $module[$mode]);
 
 		$engine->current_context--;
 	}
 	else
 	{
-		echo '<br><br><em>' . Ut::perc_replace($engine->_t('ErrorLoadingModule'), '<code>' . $_REQUEST['mode'] . '.php</code>') . '</em>';
+		echo '<br><br><em>' . Ut::perc_replace($engine->_t('ErrorLoadingModule'), '<code>' . $mode . '.php</code>') . '</em>';
 	}
 }
 else if (!($_GET && $_POST))

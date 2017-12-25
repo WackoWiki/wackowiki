@@ -51,7 +51,7 @@ function admin_config_permissions(&$engine, &$module)
 
 		$engine->log(1, '!!' . $engine->_t('PermissionsSettingsUpdated') . '!!');
 		$engine->set_message($engine->_t('PermissionsSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode']])));
+		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
 	echo $engine->form_open('permissions');

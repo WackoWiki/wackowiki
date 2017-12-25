@@ -219,7 +219,7 @@ function admin_maint_resync(&$engine, &$module)
 				}
 
 				// TODO: Fix or workaround, see notice above
-				#$engine->http->redirect(rawurldecode($engine->href('', '', ['mode' => $module['mode'], 'start' => 1, 'action' => 'wikilinks', 'i' => (++$i)])));
+				#$engine->http->redirect(rawurldecode($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)])));
 			}
 			else
 			{

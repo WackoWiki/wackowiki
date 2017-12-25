@@ -59,16 +59,16 @@ function admin_user_groups(&$engine, &$module)
 	}
 	else
 	{
+		$group_id = (int) ($_GET['group_id'] ?? $_POST['group_id'] ?? null);
+		$usergroup = $engine->db->load_single(
+			"SELECT group_name " .
+			"FROM " . $prefix . "usergroup " .
+			"WHERE group_id = " . (int) $group_id . " " .
+			"LIMIT 1");
+
 		// get group
 		if (isset($_GET['group_id']) || isset($_POST['add_member'])|| isset($_POST['remove_member']))
 		{
-			$group_id = (int) ($_GET['group_id'] ?? $_POST['group_id'] ?? null);
-			$usergroup = $engine->db->load_single(
-				"SELECT group_name " .
-				"FROM " . $prefix . "usergroup " .
-				"WHERE group_id = " . (int) $group_id . " " .
-				"LIMIT 1");
-
 			// add member into group
 			if (isset($_POST['add_member']) && isset($_POST['new_member_id']))
 			{
@@ -112,7 +112,7 @@ function admin_user_groups(&$engine, &$module)
 				$available_users = $engine->db->load_all(
 					"SELECT user_id, user_name " .
 					"FROM " . $engine->db->user_table." " .
-					"WHERE user_id NOT IN ( " . $subqery_members." ) " .
+					"WHERE user_id NOT IN (" . $subqery_members.") " .
 						"AND account_type = 0 " .
 					"ORDER BY BINARY user_name");
 
@@ -206,8 +206,8 @@ function admin_user_groups(&$engine, &$module)
 						"description	= " . $engine->db->q($_POST['description']) . ", " .
 						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
 						"group_name		= " . $engine->db->q($_POST['new_group_name']) . ", " .
-						"open			= " . (int) $_POST['open'] . ", " .
-						"active			= " . (int) $_POST['active']);
+						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
+						"active			= " . (int) ($_POST['active'] ?? 0));
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('GroupsAdded'), 'success');
@@ -236,8 +236,8 @@ function admin_user_groups(&$engine, &$module)
 						"group_name		= " . $engine->db->q($_POST['new_group_name']) . ", " .
 						"description	= " . $engine->db->q($_POST['new_description']) . ", " .
 						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
-						"open			= " . (int) $_POST['open'] . ", " .
-						"active			= " . (int) $_POST['active'] . " " .
+						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
+						"active			= " . (int) ($_POST['active'] ?? 0) . " " .
 					"WHERE group_id = " . (int) $_POST['group_id'] . " " .
 					"LIMIT 1");
 
