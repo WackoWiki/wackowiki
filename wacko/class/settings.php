@@ -139,7 +139,7 @@ class Settings extends Dbal implements ArrayAccess
 		$this->rebase_url();
 
 		// if .htaccess tell us actual info on mod_rewrite status - use it
-		if (getenv('HTTP_MOD_ENV') === 'on')
+		if (getenv('HTTP_MOD_ENV') === 'on' && AUTO_REWRITE)
 		{
 			$this->rewrite_mode = (getenv('HTTP_MOD_REWRITE') === 'on');
 		}
