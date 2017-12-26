@@ -182,7 +182,7 @@ class Settings extends Dbal implements ArrayAccess
 
 	public function __get($i)
 	{
-		//return array_key_exists($i, $this->config)?  $this->config[$i] : null;
+		//return array_key_exists($i, $this->config)? $this->config[$i] : null;
 		return $this->config[$i];
 	}
 

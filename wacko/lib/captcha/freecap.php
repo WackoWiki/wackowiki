@@ -880,7 +880,7 @@ if ($bg_type != 0)
 // the least you could do is give me credit (or buy me stuff from amazon!)
 // but I understand that in professional environments, your boss might not like this tag
 // so that's cool.
-// $tag_str = 'freeCap v1.41 - puremango.co.uk';
+// $tag_str = 'freeCap v1.4.4 - puremango.co.uk';
 $tag_str = '';
 // for debug:
 # $tag_str = '[' . $word . ']';

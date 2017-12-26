@@ -5,7 +5,7 @@ The version and status of each is summarized below:
 directory			| project			| version	| status
 -----------------------------------------------------------------
 bad_behavior		| Bad Behavior		| 2.2.19	| patched: various, see repo
-captcha				| freeCap			| 1.4.1		| patched: various, see repo
+captcha				| freeCap			| 1.4.4		| patched: various, see repo
 htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo
 phpmailer			| PHPMailer			| 6.0		| patched: various, see repo
 phpthumb			| PhpThumb			| 2.1		| unpatched
