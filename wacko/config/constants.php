@@ -69,6 +69,7 @@ define('OBJECT_PAGE',					1);
 define('OBJECT_FILE',					2);
 
 define('RECOVERY_MODE',					0);					// restore database
+define('AUTO_REWRITE',					1);					// 0 - off, turns off auto rewrite for debugging
 
 define('SQL_MODE_STRICT',				'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY');
 define('SQL_MODE_PERMISSIVE',			'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER');
@@ -88,4 +89,5 @@ define('HTML_FILTERING',				null);				// safehtml, htmlpurifier
 define('ACTION4DIFF',					'anchor, toc');		// allowed actions in DIFF
 
 define('PHP_MIN_VERSION',				'7.0.0');			// minimum required PHP version
-define('PHP_ERROR_REPORTING',			0);					// PHP error reporting: 0 - off, 6 - all
+define('PHP_MAX_VERSION',				'7.1.0');			// maximum required PHP version
+define('PHP_ERROR_REPORTING',			6);					// PHP error reporting: 0 - off, 6 - all
