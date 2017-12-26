@@ -69,7 +69,9 @@ define('OBJECT_PAGE',					1);
 define('OBJECT_FILE',					2);
 
 define('RECOVERY_MODE',					0);					// restore database
-define('AUTO_REWRITE',					1);					// 0 - off, turns off auto rewrite for debugging
+define('AUTO_REWRITE',					0);					// 0 - off, turns off auto rewrite for debugging,
+															//		with mode_rewrite is still active on your webserver,
+															//		you're also required to deactivate the rules in the .htaccess file
 
 define('SQL_MODE_STRICT',				'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY');
 define('SQL_MODE_PERMISSIVE',			'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER');
