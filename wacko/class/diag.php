@@ -154,6 +154,9 @@ class Diag
 					echo '<p class="debug">Session data</p>' . "\n<ul>\n";
 					echo "\t<li>session_id(): " . $engine->sess->id() . "</li>\n";
 					echo "\t<li>Base URL: " . $config['base_url'] . "</li>\n";
+					echo "\t<li>Rewrite Mode: " . ($config['rewrite_mode'] ? 'on' : 'off') . "</li>\n";
+					echo "\t<li>HTTP_MOD_ENV: " . ((getenv('HTTP_MOD_ENV') === 'on') ? 'on' : 'off') . "</li>\n";
+					echo "\t<li>HTTP_MOD_REWRITE: " . ((getenv('HTTP_MOD_REWRITE') === 'on') ? 'on' : 'off') . "</li>\n";
 					echo "\t<li>HTTPS: " . ($_SERVER['HTTPS'] ?? 'off') . "</li>\n";
 					echo "\t<li>IP-address: " . $engine->get_user_ip() . "</li>\n";
 					echo "\t<li>SERVER_PORT: " . $_SERVER['SERVER_PORT'] . "</li>\n";
