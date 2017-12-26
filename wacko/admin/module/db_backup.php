@@ -217,8 +217,8 @@ function admin_db_backup(&$engine, &$module)
 				</tr>
 				<tr>
 					<th><?php echo $engine->_t('BackupTable'); ?></th>
-					<th>&nbsp;&nbsp;<a href="<?php echo $engine->href('', '');?><?php echo $getstr.( isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1' ); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
-					<th><a href="<?php echo $engine->href('', '');?><?php echo $getstr.( isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1' ); ?>"><?php echo $engine->_t('BackupData'); ?></a></th>
+					<th>&nbsp;&nbsp;<a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
+					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1'); ?>"><?php echo $engine->_t('BackupData'); ?></a></th>
 				</tr>
 <?php
 			foreach ($tables as $table)
@@ -244,7 +244,7 @@ function admin_db_backup(&$engine, &$module)
 ?>
 				<tr>
 					<th colspan="2"><?php echo $engine->_t('BackupFolder'); ?></th>
-					<th>&nbsp;&nbsp;<a href="<?php echo $engine->href('', '');?><?php echo $getstr.( isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1' ); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
+					<th>&nbsp;&nbsp;<a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
 				</tr>
 <?php
 			foreach ($directories as $dir)
