@@ -760,8 +760,8 @@ for ($i = 0; $i <= $width; $i += $x_chunk)
 	ImageCopy($im, $im2, $i, $y_pos, $i, 0, $x_chunk, $height);
 
 	// for debug:
-	# ImageLine($im,$i+$x_chunk,0,$i+$x_chunk,100,$debug);
-	# ImageLine($im,$i,$y_pos+25,$i+$x_chunk,$y_pos+25,$debug);
+	# ImageLine($im, $i + $x_chunk, 0, $i + $x_chunk, 100, $debug);
+	# ImageLine($im, $i, $y_pos + 25, $i + $x_chunk, $y_pos + 25, $debug);
 }
 
 // for debug:
