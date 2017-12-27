@@ -38,15 +38,15 @@ if (!defined('IN_WACKO'))
 // $site_tags[0] = "To avoid spam, please do NOT enter the text if";
 // $site_tags[1] = "this site is not example.com";
 // or more simply:
-// $site_tags[0] = "for use only on example.com";
+// $site_tags[0] = 'for use only on example.com';
 // reword or add lines as you please
 // or if you don't want any text:
 $site_tags = null;
 
 // where to write the above:
-// 0=top
-// 1=bottom
-// 2=both
+// 0 = top
+// 1 = bottom
+// 2 = both
 $tag_pos = 1;
 
 // functions to call for random number generation
@@ -56,23 +56,23 @@ $rand_func = function ($mi, $ma) {return Ut::rand($mi, $ma);};
 $seed_func = 'mt_srand';
 
 // which type of hash to use?
-// possible values: "sha1", "md5", "crc32"
+// possible values: 'sha1', 'md5', 'crc32'
 $hash_func = 'sha1';
 // store in session so can validate in form processor
 $sess['hash_func'] = $hash_func;
 
 // image type:
-// possible values: "jpg", "png", "gif"
+// possible values: 'jpg', 'png', 'gif'
 // jpg doesn't support transparency (transparent bg option ends up white)
 // png isn't supported by old browsers (see http://www.libpng.org/pub/png/pngstatus.html)
 // gif may not be supported by your GD Lib.
 $output = 'png';
 
-// 0=generate pseudo-random string, 1=use dictionary
+// 0 = generate pseudo-random string, 1 = use dictionary
 // dictionary is easier to recognise
 // - both for humans and computers, so use random string if you're paranoid.
 $use_dict = 1;
-// if your server is NOT set up to deny web access to files beginning ".ht"
+// if your server is NOT set up to deny web access to files beginning '.ht'
 // then you should ensure the dictionary file is kept outside the web directory
 // eg: if www.foo.com/index.html points to c:\website\www\index.html
 // then the dictionary should be placed in c:\website\dict.txt
@@ -266,7 +266,7 @@ else
 
 		$red = ImageColorAllocate($im, 255, 0, 0);
 		// depending on how rude you want to be :-)
-		// ImageString($im, 5, 0, 20, "bugger off you spamming bastards!", $red);
+		// ImageString($im, 5, 0, 20, 'bugger off you spamming bastards!', $red);
 		ImageString($im, 5, 15, 20, 'service no longer available', $red);
 
 		send_image($im);
@@ -322,7 +322,7 @@ function my_image_blur($im)
 	// anything higher than 3 makes it totally unreadable
 	// might be useful in a 'real' blur function, though (ie blurring pictures not text)
 	$distance = 1;
-	// use $distance=30 to have multiple copies of the word. not sure if this is useful.
+	// use $distance = 30 to have multiple copies of the word. not sure if this is useful.
 
 	// blur by merging with itself at different x/y offsets:
 	ImageCopyMerge($temp_im, $im, 0, 0, 0, $distance, $width, $height - $distance, 70);
