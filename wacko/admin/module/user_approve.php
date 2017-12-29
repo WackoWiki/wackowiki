@@ -137,7 +137,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->add_user_page($user['user_name'], $user['user_lang']);
 
 			$engine->show_message($engine->_t('RegistrationApproved'));
-			$engine->log(4, "User ##{$user['user_name']}## approved");
+			$engine->log(4, Ut::perc_replace($engine->_t('LogUserApproved', $user['user_name'])));
 		}
 		else if ($_GET['approve'] == 2)
 		{
@@ -145,7 +145,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->set_account_status($user_id, 2);
 
 			$engine->show_message($engine->_t('RegistrationDenied'));
-			$engine->log(4, "User ##{$user['user_name']}## blocked");
+			$engine->log(4, Ut::perc_replace($engine->_t('LogUserBlocked', $user['user_name'])));
 		}
 	}
 	// approve user
@@ -153,7 +153,7 @@ function admin_user_approve(&$engine, &$module)
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{
-			$error = 'Please select at least one user via the Set button.';//$this->_t('ModerateMoveNotExists');
+			$error = $this->_t('ApproveNotExists');
 			$engine->show_message($error);
 		}
 			//(int) $_POST['user_id']
@@ -177,7 +177,7 @@ function admin_user_approve(&$engine, &$module)
 						"LIMIT 1");
 
 					$engine->show_message($engine->_t('UsersDeleted'));
-					$engine->log(4, "User //'{$user['user_name']}'// removed from the database");
+					$engine->log(4, Ut::perc_replace($engine->_t('LogUserDeleted', $user['user_name'])));
 				}
 			}
 
@@ -327,9 +327,9 @@ function admin_user_approve(&$engine, &$module)
 							'<br>' . "\n" .
 								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> ' .
 								($set
-										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
-										'&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
-										: ''
+									? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
+									  '&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
+									: ''
 								);
 
 		$approve_icon	= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
