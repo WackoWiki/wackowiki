@@ -47,32 +47,21 @@ function admin_db_repair(&$engine, &$module)
 
 			if ('OK' == $check['Msg_text'])
 			{
-				#$engine->_t('');
-				$message = '<li>' . 'The %1 table is okay.';
-				echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
+				echo '<li>' . Ut::perc_replace($engine->_t('TableOk'), '<code>' . $table['name'] . '</code>') . '</li>';
 			}
 			else
 			{
-				$message = '<li>' . 'The %1 table is not okay. It is reporting the following error: %2. WackoWiki will attempt to repair this table&hellip;';
-
-				echo str_replace('%1', '<code>' . $table['name'] . '</code>',
-						str_replace('%2', '<code>' . $check['Msg_text'] . '</code>',
-								$message));
+				echo '<li>' . Ut::perc_replace($engine->_t('TableNotOk'), '<code>' . $table['name'] . '</code>', '<code>' . $check['Msg_text'] . '</code>') . '</li>';
 
 				$check = $engine->db->load_single("REPAIR TABLE {$table['name']}");
 
 				if ('OK' == $check['Msg_text'])
 				{
-					$message =  '<li>' . 'Successfully repaired the %1 table.';
-					echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
+					echo '<li>' . Ut::perc_replace($engine->_t('TableRepaired'), '<code>' . $table['name'] . '</code>') . '</li>';
 				}
 				else
 				{
-					$message = '<li>' . 'Failed to repair the %1 table. <br>Error: %2';
-
-					echo str_replace('%1', '<code>' . $table['name'] . '</code>',
-							str_replace('%2', '<code>' . $check['Msg_text'] . '</code>',
-									$message));
+					echo '<li>' . Ut::perc_replace($engine->_t('TableRepairFailed'), '<code>' . $table['name'] . '</code>', '<code>' . $check['Msg_text'] . '</code>') . '</li>';
 
 					$problems[$table]	= $check['Msg_text'];
 					$okay				= false;
@@ -87,8 +76,7 @@ function admin_db_repair(&$engine, &$module)
 
 				if ('Table is already up to date' == $check['Msg_text'])
 				{
-					$message = '<li>' . 'The %1 table is already optimized.' . '</li>';
-					echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
+					echo '<li>' . Ut::perc_replace($engine->_t('TableAlreadyOptimized'), '<code>' . $table['name'] . '</code>') . '</li>';
 				}
 				else
 				{
@@ -96,13 +84,11 @@ function admin_db_repair(&$engine, &$module)
 
 					if ('OK' == $check['Msg_text'] || 'Table is already up to date' == $check['Msg_text'])
 					{
-						$message = '<li>' . 'Successfully optimized the %1 table.' . '</li>';
-						echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
+						echo '<li>' . Ut::perc_replace($engine->_t('TableOptimized'), '<code>' . $table['name'] . '</code>') . '</li>';
 					}
 					else
 					{
-						$message = '<li>' . 'Failed to optimize the %1 table. <br>Error: ' . '<code>' . $check['Msg_text'] . '</code>' . '</li>';
-						echo str_replace('%1', '<code>' . $table['name'] . '</code>', $message);
+						echo '<li>' . Ut::perc_replace($engine->_t('TableOptimizeFailed'), '<code>' . $table['name'] . '</code>', '<code>' . $check['Msg_text'] . '</code>') . '</li>';
 					}
 				}
 
@@ -114,7 +100,7 @@ function admin_db_repair(&$engine, &$module)
 
 		if ($problems)
 		{
-			echo '<p>' . 'Some database problems could not be repaired.' . '</p>' .   '';
+			echo '<p>' . $engine->_t('TableNotRepaired') . '</p>' .   '';
 			$problem_output = '';
 
 			foreach ($problems as $table => $problem)
@@ -126,31 +112,31 @@ function admin_db_repair(&$engine, &$module)
 		}
 		else
 		{
-			echo '<br><p>' . 'Repairs complete' . '</p>';
+			echo '<br><p>' . $engine->_t('RepairsComplete') . '</p>';
 		}
 	}
 	else
 	{
-		echo '<h2>Repair Database</h2>';
+		echo '<h2>' . $engine->_t('DbRepairSection') . '</h2>';
 
-		echo '<p>' . 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.' . '</p>';
+		echo '<p>' . $engine->_t('DbOptimizeRepairInfo') . '</p>';
 
 		echo $engine->form_open('repair');
 		?>
 		<br>
 		<input type="hidden" name="action" value="1">
-		<input type="submit" name="repair" id="submit" value="Repair Database">
+		<input type="submit" name="repair" id="submit" value="<?php echo $engine->_t('DbRepair');?>">
 		<?php	echo $engine->form_close();?>
 		<br>
 
-		<h2>Repair and Optimize Database</h2>
-		<p><?php echo 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.' ; ?></p>
+		<h2><?php echo $engine->_t('DbOptimizeRepairSection');?></h2>
+		<p><?php echo $engine->_t('DbOptimizeRepairInfo'); ?></p>
 		<br>
 		<?php
 		echo $engine->form_open('repair');
 		?>
 		<input type="hidden" name="action" value="2">
-		<input type="submit" name="repair" id="submit" value="Repair and Optimize Database">
+		<input type="submit" name="repair" id="submit" value="<?php echo $engine->_t('DbOptimizeRepair');?>">
 		<?php	echo $engine->form_close();
 	}
 }

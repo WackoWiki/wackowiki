@@ -26,13 +26,13 @@ function admin_system_info(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
-	Version informations:<br>
+	<?php echo $engine->_t('SysInfo');?>:<br>
 	<br>
 	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 		<tr>
-			<th style="width:120px;">Parameter</th>
+			<th style="width:120px;"><?php echo $engine->_t('SysParameter');?></th>
 			<th class="t_left"></th>
-			<th class="t_left">Value</th>
+			<th class="t_left"><?php echo $engine->_t('SysValues');?></th>
 		</tr>
 <?php
 
@@ -53,11 +53,11 @@ function admin_system_info(&$engine, &$module)
 	// check if gzip compression is enabled // @extension_loaded('zlib')
 	if (function_exists('ob_gzhandler') || ini_get('zlib.output_compression'))
 	{
-		$gzip_compression = 'On';
+		$gzip_compression = $engine->_t('On');
 	}
 	else
 	{
-		$gzip_compression = 'Off';
+		$gzip_compression = $engine->_t('Off');
 	}
 
 	$memory = trim(str_replace('M', '', ini_get('memory_limit')));
@@ -71,27 +71,27 @@ function admin_system_info(&$engine, &$module)
 	$_php_ram = $memory;
 
 	// Sysinfo in array
-	$sysinfo['app_version']			= ['Wacko version', $engine->db->wacko_version];
-	$sysinfo['app_updated']			= ['Last update', $engine->db->maint_last_update];
-	$sysinfo['os']					= ['OS', PHP_OS . ' (' . @php_uname() . ')'];
-	$sysinfo['server_name']			= ['Server name', $_SERVER['SERVER_NAME']];
-	$sysinfo['server_software']		= ['Web server', $_SERVER['SERVER_SOFTWARE']];
-	$sysinfo['db_version']			= ['MariaDB / MySQL version', $db_version];
-	$sysinfo['sql_mode_global']		= ['SQL Modes Global', wordwrap($sql_mode_global, 80, "\n", true)];
-	$sysinfo['sql_mode_session']	= ['SQL Modes Session', wordwrap($sql_mode_session, 80, "\n", true)];
-	$sysinfo['php_version']			= ['PHP Version', PHP_VERSION];
-	$sysinfo['memory']				= ['Memory', $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true)];
-	$sysinfo['upload_max_filesize']	= ['Upload max filesize', $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
-	$sysinfo['post_max_size']		= ['Post max size', $engine->binary_multiples($post_max_size * 1024 * 1024, false, true, true)];
-	$sysinfo['max_execution_time']	= ['Max execution time', get_cfg_var('max_execution_time') . ' seconds'];
-	$sysinfo['session_save_path']	= ['Session path', get_cfg_var('session.save_path')];
-	$sysinfo['default_charset']		= ['PHP default charset', ini_get('default_charset')];
-	$sysinfo['gzip_compression']	= ['GZip compression', $gzip_compression];
-	$sysinfo['php_extensions']		= ['PHP extensions', implode(', ',get_loaded_extensions())];
+	$sysinfo['app_version']			= [$engine->_t('WackoVersion'), $engine->db->wacko_version];
+	$sysinfo['app_updated']			= [$engine->_t('LastWackoUpdate'), $engine->db->maint_last_update];
+	$sysinfo['os']					= [$engine->_t('ServerOS'), PHP_OS . ' (' . @php_uname() . ')'];
+	$sysinfo['server_name']			= [$engine->_t('ServerName'), $_SERVER['SERVER_NAME']];
+	$sysinfo['server_software']		= [$engine->_t('WebServer'), $_SERVER['SERVER_SOFTWARE']];
+	$sysinfo['db_version']			= [$engine->_t('DbVersion'), $db_version];
+	$sysinfo['sql_mode_global']		= [$engine->_t('SQLModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
+	$sysinfo['sql_mode_session']	= [$engine->_t('SQLModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
+	$sysinfo['php_version']			= [$engine->_t('PhpVersion'), PHP_VERSION];
+	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true)];
+	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadMaxFilesize'), $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
+	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->binary_multiples($post_max_size * 1024 * 1024, false, true, true)];
+	$sysinfo['max_execution_time']	= [$engine->_t('MaxExecutionTime'), get_cfg_var('max_execution_time') . ' seconds'];
+	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), get_cfg_var('session.save_path')];
+	$sysinfo['default_charset']		= [$engine->_t('PhpDefaultCharset'), ini_get('default_charset')];
+	$sysinfo['gzip_compression']	= [$engine->_t('GZipCompression'), $gzip_compression];
+	$sysinfo['php_extensions']		= [$engine->_t('PHPExtensions'), implode(', ',get_loaded_extensions())];
 
 	if ( function_exists( 'apache_get_modules' ) )
 	{
-		$sysinfo['apache_modules']		= ['Apache modules', implode(', ',apache_get_modules())];
+		$sysinfo['apache_modules']		= [$engine->_t('ApacheModules'), implode(', ',apache_get_modules())];
 	}
 
 	foreach ($sysinfo as $param => $value)
@@ -108,7 +108,8 @@ function admin_system_info(&$engine, &$module)
 
 <?php
 
-/*if ($action == 'phpinfo')
+/*
+if ($action == 'phpinfo')
 {
 	// output phpinfo
 

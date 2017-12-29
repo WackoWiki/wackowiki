@@ -284,7 +284,7 @@ $ap_translation = [
 		'title'		=> 'Nutzer-Verwaltung',
 	],
 
-
+	// Main module
 	'PurgeSessions'				=> 'entfernen',
 	'PurgeSessionsTip'			=> 'Entferne alle Sitzungen',
 	'PurgeSessionsConfirm'		=> 'Bist du dir sicher, daß du alle Sitzungen entfernen willst? Dies wird alle Nuzer abmelden.',
@@ -950,6 +950,14 @@ $ap_translation = [
 	'EnableSysMsgInfo'			=> 'Zeige System-Mitteilung.',
 
 	// User approval module
+	'ApproveNotExists'			=> 'Please select at least one user via the Set button.',
+
+	'LogUserApproved'			=> 'User ##%1## approved',
+	'LogUserBlocked'			=> 'User ##%1## blocked',
+	'LogUserDeleted'			=> 'User ##%1## removed from the database',
+	'LogUserCreated'			=> 'Created a new user ##%1##',
+	'LogUserUpdated'			=> 'Updated User ##%1##',
+
 	'UserApproveInfo'			=> 'Schalte neue Benutzer frei, damit sie sich auf der Seite anmelden können.',
 	'Approve'					=> 'Zulassen',
 	'Deny'						=> 'Ablehnen',
@@ -1068,6 +1076,13 @@ $ap_translation = [
 	// Groups module
 	'GroupsInfo'				=> 'Von diesem Panel aus können Sie alle Ihre Benutzergruppen verwalten. Sie können vorhandene Gruppen löschen, erstellen und bearbeiten. Darüber hinaus können Sie Gruppenleiter auswählen, den Status der offenen / versteckten / geschlossenen Gruppen umschalten und den Gruppennamen und die Beschreibung festlegen.',
 
+	'LogMembersUpdated'			=> 'Updated usergroup members',
+	'LogMemberAdded'			=> 'Added member ##%1## into group ##%2##',
+	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
+	'LogGroupCreated'			=> 'Created a new group ##%1##',
+	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',
+	'LogGroupRemoved'			=> 'Removed group ##%1##',
+
 	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',
 	'GroupsDescription'			=> 'Beschreibung',
 	'GroupsModerator'			=> 'Moderator',
@@ -1112,6 +1127,51 @@ $ap_translation = [
 	'FileFiles'					=> 'Dateien',
 	'FileSize'					=> 'Größe',
 	'FileTotal'					=> 'Gesamt',
+
+	// Sysinfo module
+	'SysInfo'					=> 'Version informations',
+	'SysParameter'				=> 'Parameter',
+	'SysValues'					=> 'Values',
+
+	'WackoVersion'				=> 'Wacko version',
+	'LastWackoUpdate'			=> 'Last update',
+	'ServerOS'					=> 'OS',
+	'ServerName'				=> 'Server name',
+	'WebServer'					=> 'Web server',
+	'DbVersion'					=> 'MariaDB / MySQL version',
+	'SQLModesGlobal'			=> 'SQL Modes Global',
+	'SQLModesSession'			=> 'SQL Modes Session',
+	'PhpVersion'				=> 'PHP Version',
+	'MemoryLimit'				=> 'Memory',
+	'UploadMaxFilesize'			=> 'Upload max filesize',
+	'PostMaxSize'				=> 'Post max size',
+	'MaxExecutionTime'			=> 'Max execution time',
+	'SessionPath'				=> 'Session path',
+	'PhpDefaultCharset'			=> 'PHP default charset',
+	'GZipCompression'			=> 'GZip compression',
+	'PHPExtensions'				=> 'PHP extensions',
+	'ApacheModules'				=> 'Apache modules',
+
+	// DB repair module
+	'DbRepairSection'			=> 'Repair Database',
+	'DbRepair'					=> 'Repair Database',
+	'DbRepairInfo'				=> 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.',
+
+	'DbOptimizeRepairSection'	=> 'Repair and Optimize Database',
+	'DbOptimizeRepair'			=> 'Repair and Optimize Database',
+	'DbOptimizeRepairInfo'		=> 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.',
+
+	'TableOk'					=> 'The %1 table is okay.',
+	'TableNotOk'				=> 'The %1 table is not okay. It is reporting the following error: %2. WackoWiki will attempt to repair this table&hellip;',
+	'TableRepaired'				=> 'Successfully repaired the %1 table.',
+	'TableRepairFailed'			=> 'Failed to repair the %1 table. <br>Error: %2',
+	'TableAlreadyOptimized'		=> 'The %1 table is already optimized.',
+	'TableOptimized'			=> 'Successfully optimized the %1 table.',
+	'TableOptimizeFailed'		=> 'Failed to optimize the %1 table. <br>Error: %2',
+	'TableNotRepaired'			=> 'Some database problems could not be repaired.',
+	'RepairsComplete'			=> 'Repairs complete',
+
+
 ];
 
 ?>
