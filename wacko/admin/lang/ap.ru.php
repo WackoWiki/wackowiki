@@ -1134,7 +1134,7 @@ $ap_translation = [
 	'DbOptimizeRepairInfo'		=> 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.',
 
 	'TableOk'					=> 'The %1 table is okay.',
-	'TableNotOk'				=> 'The %1 table is not okay. It is reporting the following error: %2. WackoWiki will attempt to repair this table&hellip;',
+	'TableNotOk'				=> 'The %1 table is not okay. It is reporting the following error: %2. This script will attempt to repair this table&hellip;',
 	'TableRepaired'				=> 'Successfully repaired the %1 table.',
 	'TableRepairFailed'			=> 'Failed to repair the %1 table. <br>Error: %2',
 	'TableAlreadyOptimized'		=> 'The %1 table is already optimized.',
@@ -1142,6 +1142,12 @@ $ap_translation = [
 	'TableOptimizeFailed'		=> 'Failed to optimize the %1 table. <br>Error: %2',
 	'TableNotRepaired'			=> 'Some database problems could not be repaired.',
 	'RepairsComplete'			=> 'Repairs complete',
+
+	// Transliterate module
+	'TranslitField'				=> 'Транслитерировать поле %1 в таблице  `%2`.',
+	'TranslitStart'				=> 'пуск',
+	'TranslitContinue'			=> 'продолжить',
+	'TranslitCompleted'			=> 'Процедура обновления завершена.',
 
 
 ];

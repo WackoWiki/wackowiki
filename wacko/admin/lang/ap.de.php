@@ -1129,12 +1129,12 @@ $ap_translation = [
 	'FileTotal'					=> 'Gesamt',
 
 	// Sysinfo module
-	'SysInfo'					=> 'Version informations',
+	'SysInfo'					=> 'Versionsinformationen',
 	'SysParameter'				=> 'Parameter',
-	'SysValues'					=> 'Values',
+	'SysValues'					=> 'Werte',
 
 	'WackoVersion'				=> 'Wacko version',
-	'LastWackoUpdate'			=> 'Last update',
+	'LastWackoUpdate'			=> 'Letzte Aktualisierung',
 	'ServerOS'					=> 'OS',
 	'ServerName'				=> 'Server name',
 	'WebServer'					=> 'Web server',
@@ -1149,27 +1149,33 @@ $ap_translation = [
 	'SessionPath'				=> 'Session path',
 	'PhpDefaultCharset'			=> 'PHP default charset',
 	'GZipCompression'			=> 'GZip compression',
-	'PHPExtensions'				=> 'PHP extensions',
-	'ApacheModules'				=> 'Apache modules',
+	'PHPExtensions'				=> 'PHP Erweiterungen',
+	'ApacheModules'				=> 'Apache Module',
 
 	// DB repair module
-	'DbRepairSection'			=> 'Repair Database',
-	'DbRepair'					=> 'Repair Database',
-	'DbRepairInfo'				=> 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.',
+	'DbRepairSection'			=> 'Datenbank reparieren',
+	'DbRepair'					=> 'Datenbank reparieren',
+	'DbRepairInfo'				=> 'Dieses Skript kann automatisch nach einigen häufigen Datenbankproblemen suchen und sie reparieren. Das Reparieren kann eine Weile dauern, seien Sie also bitte geduldig.',
 
-	'DbOptimizeRepairSection'	=> 'Repair and Optimize Database',
-	'DbOptimizeRepair'			=> 'Repair and Optimize Database',
-	'DbOptimizeRepairInfo'		=> 'This script can also attempt to optimize the database. This improves performance in some situations. Repairing and optimizing the database can take a long time and the database will be locked while optimizing.',
+	'DbOptimizeRepairSection'	=> 'Datenbank reparieren und optimieren',
+	'DbOptimizeRepair'			=> 'Datenbank reparieren und optimieren',
+	'DbOptimizeRepairInfo'		=> 'Dieses Skript kann auch versuchen, die Datenbank zu optimieren. Dies verbessert die Leistung in einigen Situationen. Das Reparieren und Optimieren der Datenbank kann sehr lange dauern und die Datenbank wird während der Optimierung gesperrt.',
 
-	'TableOk'					=> 'The %1 table is okay.',
-	'TableNotOk'				=> 'The %1 table is not okay. It is reporting the following error: %2. WackoWiki will attempt to repair this table&hellip;',
-	'TableRepaired'				=> 'Successfully repaired the %1 table.',
-	'TableRepairFailed'			=> 'Failed to repair the %1 table. <br>Error: %2',
-	'TableAlreadyOptimized'		=> 'The %1 table is already optimized.',
-	'TableOptimized'			=> 'Successfully optimized the %1 table.',
-	'TableOptimizeFailed'		=> 'Failed to optimize the %1 table. <br>Error: %2',
-	'TableNotRepaired'			=> 'Some database problems could not be repaired.',
-	'RepairsComplete'			=> 'Repairs complete',
+	'TableOk'					=> 'Die Tabelle %1 ist in Ordnung.',
+	'TableNotOk'				=> 'Die %1-Tabelle ist nicht in Ordnung. Es meldet den folgenden Fehler: %2. Dieses Skript wird versuchen, diese Tabelle zu reparieren&hellip;',
+	'TableRepaired'				=> 'Die %1-Tabelle wurde erfolgreich repariert.',
+	'TableRepairFailed'			=> 'Die %1-Tabelle konnte nicht repariert werden. <br>Fehler: %2',
+	'TableAlreadyOptimized'		=> 'Die Tabelle %1 ist bereits optimiert.',
+	'TableOptimized'			=> 'Die %1-Tabelle wurde erfolgreich optimiert.',
+	'TableOptimizeFailed'		=> 'Fehler beim Optimieren der %1-Tabelle. <br>Fehler: %2',
+	'TableNotRepaired'			=> 'Einige Datenbankprobleme konnten nicht repariert werden.',
+	'RepairsComplete'			=> 'Reparaturen abgeschlossen',
+
+	// Transliterate module
+	'TranslitField'				=> 'Transliteriere Feld %1 in der Tabelle `%2`.',
+	'TranslitStart'				=> 'Start',
+	'TranslitContinue'			=> 'Weiter',
+	'TranslitCompleted'			=> 'Der Update-Vorgang ist abgeschlossen.',
 
 
 ];

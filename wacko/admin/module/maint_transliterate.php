@@ -62,14 +62,14 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="1"><del>Transliterate field <code>to_supertag</code> in table `page_link`</del>.</li>
+					<li value="1"><del><?php echo Ut::perc_replace($engine->_t('TranslitField'), '<code>to_supertag</code>', 'page_link');?></del></li>
 				</ol>
 				<br>
 <?php
 				echo $engine->form_open('sysupdate');
 ?>
 					<input type="hidden" name="step" value="2">
-					<input type="submit" name="start" id="submit" value="continue">
+					<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('TranslitContinue');?>">
 <?php
 				echo $engine->form_close();
 			}
@@ -96,14 +96,14 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="2"><del>Transliterate field <code>supertag</code> in table `page`</del>.</li>
+					<li value="2"><del><?php echo Ut::perc_replace($engine->_t('TranslitField'), '<code>supertag</code>', 'page');?></del></li>
 				</ol>
 				<br>
 <?php
 				echo $engine->form_open('sysupdate');
 ?>
 					<input type="hidden" name="step" value="3">
-					<input type="submit" name="start" id="submit" value="continue">
+					<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('TranslitContinue');?>">
 <?php
 				echo $engine->form_close();
 			}
@@ -130,15 +130,11 @@ function admin_maint_transliterate(&$engine, &$module)
 			{
 ?>
 				<ol>
-					<li value="3"><del>Transliterate field <code>supertag</code> in table `revision`</del>.</li>
+					<li value="3"><del><?php echo Ut::perc_replace($engine->_t('TranslitField'), '<code>supertag</code>', 'revision');?></del></li>
 				</ol>
 				<br>
-				<p>The update procedure is completed.</p>
+				<p><?php echo $engine->_t('TranslitCompleted');?></p>
 <?php
-				#echo $engine->form_open('sysupdate');
-				#echo '<input type="hidden" name="step" value="4">';
-				#echo '<input type="submit" name="start" id="submit" value="continue">';
-				#echo $engine->form_close();
 			}
 		}
 	}
@@ -146,16 +142,16 @@ function admin_maint_transliterate(&$engine, &$module)
 	{
 ?>
 		<ol>
-			<li>Transliterate field <code>to_supertag</code> in table `page_link`.</li>
-			<li>Transliterate field <code>supertag</code> in table `page`.</li>
-			<li>Transliterate field <code>supertag</code> in table `revision`.</li>
+			<li><?php echo Ut::perc_replace($engine->_t('TranslitField'), '<code>to_supertag</code>', 'page_link');?></li>
+			<li><?php echo Ut::perc_replace($engine->_t('TranslitField'), '<code>supertag</code>', 'page');?></li>
+			<li><?php echo Ut::perc_replace($engine->_t('TranslitField'), '<code>supertag</code>', 'revision');?></li>
 		</ol>
 		<br>
 <?php
 		echo $engine->form_open('sysupdate');
 ?>
 			<input type="hidden" name="step" value="1">
-			<input type="submit" name="start" id="submit" value="Start">
+			<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('TranslitStart');?>">
 <?php
 		echo $engine->form_close();
 	}
