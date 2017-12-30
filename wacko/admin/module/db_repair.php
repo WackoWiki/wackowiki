@@ -119,7 +119,7 @@ function admin_db_repair(&$engine, &$module)
 	{
 		echo '<h2>' . $engine->_t('DbRepairSection') . '</h2>';
 
-		echo '<p>' . $engine->_t('DbOptimizeRepairInfo') . '</p>';
+		echo '<p>' . $engine->_t('DbRepairInfo') . '</p>';
 
 		echo $engine->form_open('repair');
 		?>
