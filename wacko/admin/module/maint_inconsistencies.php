@@ -23,6 +23,7 @@ $module[$_mode] = [
 
 function admin_maint_inconsistencies(&$engine, &$module)
 {
+	$prefix		= $engine->db->table_prefix;
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
@@ -48,8 +49,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					gm.*
 				FROM
-					" . $engine->db->table_prefix . "usergroup_member gm
-					LEFT JOIN " . $engine->db->table_prefix . "user u ON (gm.user_id = u.user_id)
+					" . $prefix . "usergroup_member gm
+					LEFT JOIN " . $prefix . "user u ON (gm.user_id = u.user_id)
 				WHERE
 					u.user_id IS NULL");
 
@@ -61,8 +62,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					m.menu_id
 				FROM
-					" . $engine->db->table_prefix . "menu m
-					LEFT JOIN " . $engine->db->table_prefix . "user u ON (m.user_id = u.user_id)
+					" . $prefix . "menu m
+					LEFT JOIN " . $prefix . "user u ON (m.user_id = u.user_id)
 				WHERE
 					u.user_id IS NULL");
 
@@ -74,8 +75,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					u.user_id
 				FROM
-					" . $engine->db->table_prefix . "file ul
-					LEFT JOIN " . $engine->db->table_prefix . "user u ON (ul.user_id = u.user_id)
+					" . $prefix . "file ul
+					LEFT JOIN " . $prefix . "user u ON (ul.user_id = u.user_id)
 				WHERE
 					u.user_id IS NULL");
 
@@ -87,8 +88,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					us.setting_id
 				FROM
-					" . $engine->db->table_prefix . "user_setting us
-					LEFT JOIN " . $engine->db->table_prefix . "user u ON (us.user_id = u.user_id)
+					" . $prefix . "user_setting us
+					LEFT JOIN " . $prefix . "user u ON (us.user_id = u.user_id)
 				WHERE
 					u.user_id IS NULL");
 
@@ -101,8 +102,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					w.watch_id
 				FROM
-					" . $engine->db->table_prefix . "watch w
-					LEFT JOIN " . $engine->db->table_prefix . "user u ON (w.user_id = u.user_id)
+					" . $prefix . "watch w
+					LEFT JOIN " . $prefix . "user u ON (w.user_id = u.user_id)
 				WHERE
 					u.user_id is NULL");
 
@@ -115,8 +116,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					a.*
 				FROM
-					" . $engine->db->table_prefix . "acl a
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (a.page_id = p.page_id)
+					" . $prefix . "acl a
+					LEFT JOIN " . $prefix . "page p ON (a.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -128,8 +129,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					ca.*
 				FROM
-					" . $engine->db->table_prefix . "category_assignment ca
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (ca.object_id = p.page_id)
+					" . $prefix . "category_assignment ca
+					LEFT JOIN " . $prefix . "page p ON (ca.object_id = p.page_id)
 				WHERE
 					ca.object_type_id = 1 AND
 					p.page_id IS NULL");
@@ -142,8 +143,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					l.link_id
 				FROM
-					" . $engine->db->table_prefix . "page_link l
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (l.from_page_id = p.page_id)
+					" . $prefix . "page_link l
+					LEFT JOIN " . $prefix . "page p ON (l.from_page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -155,8 +156,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					m.menu_id
 				FROM
-					" . $engine->db->table_prefix . "menu m
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id)
+					" . $prefix . "menu m
+					LEFT JOIN " . $prefix . "page p ON (m.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -168,8 +169,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					r.*
 				FROM
-					" . $engine->db->table_prefix . "rating r
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
+					" . $prefix . "rating r
+					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -181,8 +182,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					r.*
 				FROM
-					" . $engine->db->table_prefix . "referrer r
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
+					" . $prefix . "referrer r
+					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -194,8 +195,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					u.file_id
 				FROM
-					" . $engine->db->table_prefix . "file u
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.page_id = p.page_id)
+					" . $prefix . "file u
+					LEFT JOIN " . $prefix . "page p ON (u.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL AND
 					u.page_id NOT LIKE 0");
@@ -208,8 +209,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					w.watch_id
 				FROM
-					" . $engine->db->table_prefix . "watch w
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (w.page_id = p.page_id)
+					" . $prefix . "watch w
+					LEFT JOIN " . $prefix . "page p ON (w.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -221,8 +222,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					r.revision_id
 				FROM
-					" . $engine->db->table_prefix . "revision r
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
+					" . $prefix . "revision r
+					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -234,8 +235,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					gm.*
 				FROM
-					" . $engine->db->table_prefix . "usergroup_member gm
-					LEFT JOIN " . $engine->db->table_prefix . "usergroup g ON (gm.group_id = g.group_id)
+					" . $prefix . "usergroup_member gm
+					LEFT JOIN " . $prefix . "usergroup g ON (gm.group_id = g.group_id)
 				WHERE
 					g.group_id IS NULL");
 
@@ -247,8 +248,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"SELECT
 					p.page_id
 				FROM
-					" . $engine->db->table_prefix . "page p
-					LEFT JOIN " . $engine->db->table_prefix . "user u ON (p.user_id = u.user_id)
+					" . $prefix . "page p
+					LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id)
 				WHERE
 					p.user_id <> 0 AND
 					u.user_id IS NULL");
@@ -311,8 +312,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						gm.*
 					FROM
-			" . $engine->db->table_prefix . "usergroup_member gm
-						LEFT JOIN " . $engine->db->table_prefix . "user u ON (gm.user_id = u.user_id)
+			" . $prefix . "usergroup_member gm
+						LEFT JOIN " . $prefix . "user u ON (gm.user_id = u.user_id)
 					WHERE
 						u.user_id IS NULL");
 
@@ -328,8 +329,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						m.*
 					FROM
-						" . $engine->db->table_prefix . "menu m
-						LEFT JOIN " . $engine->db->table_prefix . "user u ON (m.user_id = u.user_id)
+						" . $prefix . "menu m
+						LEFT JOIN " . $prefix . "user u ON (m.user_id = u.user_id)
 					WHERE
 						u.user_id IS NULL");
 
@@ -338,13 +339,13 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			// 1.3. upload without user
 			$admin_id = $engine->db->load_single(
 				"SELECT user_id
-				FROM " . $engine->db->table_prefix . "user
+				FROM " . $prefix . "user
 				WHERE user_name = " . $engine->db->q($engine->db->admin_name) . "
 				LIMIT 1");
 
 			$upload = $engine->db->sql_query(
-				"UPDATE " . $engine->db->table_prefix . "file ul " .
-					"LEFT JOIN " . $engine->db->table_prefix . "user u ON (ul.user_id = u.user_id) " .
+				"UPDATE " . $prefix . "file ul " .
+					"LEFT JOIN " . $prefix . "user u ON (ul.user_id = u.user_id) " .
 				"SET ul.user_id		= " . (int) $admin_id['user_id'] . " " .
 				"WHERE
 					u.user_id IS NULL");
@@ -356,8 +357,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						us.*
 					FROM
-						" . $engine->db->table_prefix . "user_setting us
-						LEFT JOIN " . $engine->db->table_prefix . "user u ON (us.user_id = u.user_id)
+						" . $prefix . "user_setting us
+						LEFT JOIN " . $prefix . "user u ON (us.user_id = u.user_id)
 					WHERE
 						u.user_id IS NULL");
 
@@ -368,8 +369,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						w.*
 					FROM
-						" . $engine->db->table_prefix . "watch w
-						LEFT JOIN " . $engine->db->table_prefix . "user u ON (w.user_id = u.user_id)
+						" . $prefix . "watch w
+						LEFT JOIN " . $prefix . "user u ON (w.user_id = u.user_id)
 					WHERE
 						u.user_id is NULL");
 
@@ -381,8 +382,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						a.*
 					FROM
-						" . $engine->db->table_prefix . "acl a
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (a.page_id = p.page_id)
+						" . $prefix . "acl a
+						LEFT JOIN " . $prefix . "page p ON (a.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
 
@@ -393,8 +394,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						ca.*
 					FROM
-						" . $engine->db->table_prefix . "category_assignment ca
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (ca.object_id = p.page_id)
+						" . $prefix . "category_assignment ca
+						LEFT JOIN " . $prefix . "page p ON (ca.object_id = p.page_id)
 					WHERE
 						ca.object_type_id = 1 AND
 						p.page_id IS NULL");
@@ -406,8 +407,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						l.*
 					FROM
-						" . $engine->db->table_prefix . "page_link l
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (l.from_page_id = p.page_id)
+						" . $prefix . "page_link l
+						LEFT JOIN " . $prefix . "page p ON (l.from_page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
 
@@ -418,8 +419,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						m.*
 					FROM
-						" . $engine->db->table_prefix . "menu m
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id)
+						" . $prefix . "menu m
+						LEFT JOIN " . $prefix . "page p ON (m.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
 
@@ -430,8 +431,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						r.*
 					FROM
-						" . $engine->db->table_prefix . "rating r
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
+						" . $prefix . "rating r
+						LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
 					WHERE
 					p.page_id IS NULL");
 
@@ -442,8 +443,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						r.*
 					FROM
-						" . $engine->db->table_prefix . "referrer r
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
+						" . $prefix . "referrer r
+						LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
 
@@ -454,8 +455,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						u.*
 					FROM
-						" . $engine->db->table_prefix . "file u
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (u.page_id = p.page_id)
+						" . $prefix . "file u
+						LEFT JOIN " . $prefix . "page p ON (u.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL AND
 						u.page_id NOT LIKE 0");
@@ -467,8 +468,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						w.*
 					FROM
-						" . $engine->db->table_prefix . "watch w
-						LEFT JOIN " . $engine->db->table_prefix . "page p ON (w.page_id = p.page_id)
+						" . $prefix . "watch w
+						LEFT JOIN " . $prefix . "page p ON (w.page_id = p.page_id)
 					WHERE
 						p.page_id IS NULL");
 
@@ -479,8 +480,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"DELETE
 					r.*
 				FROM
-					" . $engine->db->table_prefix . "revision r
-					LEFT JOIN " . $engine->db->table_prefix . "page p ON (r.page_id = p.page_id)
+					" . $prefix . "revision r
+					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
 				WHERE
 					p.page_id IS NULL");
 
@@ -491,8 +492,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				"DELETE
 					gm.*
 				FROM
-					" . $engine->db->table_prefix . "usergroup_member gm
-					LEFT JOIN " . $engine->db->table_prefix . "usergroup g ON (gm.group_id = g.group_id)
+					" . $prefix . "usergroup_member gm
+					LEFT JOIN " . $prefix . "usergroup g ON (gm.group_id = g.group_id)
 				WHERE
 					g.group_id IS NULL");
 
