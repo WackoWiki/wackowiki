@@ -3402,7 +3402,7 @@ class Wacko
 		$tag = trim($tag, '/.');
 		// $tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
 
-		return $tag.($method ? '/' . $method : '');
+		return $tag . ($method ? '/' . $method : '');
 	}
 
 	/**
@@ -7957,7 +7957,8 @@ class Wacko
 			$out .= $inline ? '' : "<br>\n";
 			$out .= '<label for="captcha">' . $this->_t('Captcha') . ":</label>\n";
 			$out .= $inline ? '' : "<br>\n";
-			$out .= '<img src="' . $this->db->base_url . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
+			// href('', '.freecap') won't work, because mini_href() would strip DOT
+			$out .= '<img src="' . $this->db->base_url . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
 			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n";
 			// $out .= $inline ? '' : "<br>\n";
