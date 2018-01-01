@@ -3,7 +3,8 @@ var isIE = document.all && document.all.item;
 var isMZ = isDOM && (navigator.appName == 'Netscape');
 var isO = window.opera && isDOM;
 
-function undef(param) {
+function undef(param)
+{
 	return param;
 }
 
@@ -37,14 +38,23 @@ function all_init() // initialization everything
 }
 
 // freecap
-function new_freecap() {
-	thesrc = document.getElementById('freecap').src;
+function new_freecap()
+{
+	separator	= '?';
+	thesrc		= document.getElementById('freecap').src;
 
-	if (thesrc.indexOf('?') !== - 1) {
-		thesrc = thesrc.substring(0, thesrc.lastIndexOf('?'));
+	// routing with rewrite OFF
+	if (thesrc.indexOf('?page=') !== - 1)
+	{
+		separator	= '&';
+	}
+	
+	if (thesrc.indexOf('freecap' + separator) !== - 1)
+	{
+		thesrc		= thesrc.substring(0, thesrc.lastIndexOf(separator));
 	}
 
-	document.getElementById('freecap').src = thesrc + '?'
+	document.getElementById('freecap').src = thesrc + separator
 	+ Math.round(Math.random() * 100000);
 }
 
@@ -99,7 +109,8 @@ var root = window.addEventListener || window.attachEvent ? window : document.add
 var cf_modified = false;
 var WIN_CLOSE_MSG = '\nYou did not save changes. Are you sure you want to leave?\n';
 
-function set_modified(e, strict_e) {
+function set_modified(e, strict_e)
+{
 	if (window.event && !strict_e)
 		var el = window.event.srcElement;
 	else if (e != null)
@@ -114,26 +125,32 @@ function set_modified(e, strict_e) {
 	cf_modified = true;
 }
 
-function ignore_modified() {
+function ignore_modified() 
+{
 	if (typeof (root.onbeforeunload) != 'undefined') root.onbeforeunload = null;
 }
 
-function check_cf() {
+function check_cf()
+{
 	if (cf_modified) return WIN_CLOSE_MSG;
 }
 
-function crit_init() {
+function crit_init()
+{
 	if (undef() == root.onbeforeunload) root.onbeforeunload = check_cf;
 	else return;
+	
 	var thisformcf;
 
-	for (var i = 0; oCurrForm = document.forms[i]; i++) {
+	for (var i = 0; oCurrForm = document.forms[i]; i++)
+	{
 		if (oCurrForm.getAttribute('cf')) thisformcf = true;
 		else thisformcf = false;
 		
 		if (oCurrForm.getAttribute('nocf')) thisformcf = false;
 
-		for (var j = 0; oCurrFormElem = oCurrForm.elements[j]; j++) {
+		for (var j = 0; oCurrFormElem = oCurrForm.elements[j]; j++)
+		{
 			if (thisformcf || oCurrFormElem.getAttribute('cf'))
 
 			if (!oCurrFormElem.getAttribute('nocf'))
