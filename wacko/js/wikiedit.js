@@ -34,7 +34,8 @@ WikiEdit.prototype = new ProtoEdit();
 WikiEdit.prototype.constructor = WikiEdit;
 
 // initialisation
-WikiEdit.prototype.init = function (id, name, nameClass, imgPath) {
+WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
+{
 	if (!(isMZ || isIE || isO8)) return;
 	
 	this.mzBugFixed = true;
@@ -319,7 +320,8 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
 	return r;
 };
 
-WikiEdit.prototype.keyDown = function (e) {
+WikiEdit.prototype.keyDown = function (e)
+{
 	if (!this.enabled) return;
 	if (!e) var e = window.event;
 	var l,
@@ -369,7 +371,9 @@ WikiEdit.prototype.keyDown = function (e) {
 	{
 		tr = document.selection.createRange();
 		str = tr.text;
-	} else {
+	}
+	else
+	{
 		str = t.value.substr(t.selectionStart, t.selectionEnd - t.selectionStart);
 	}
 
