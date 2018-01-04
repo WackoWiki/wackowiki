@@ -1,6 +1,6 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
+	ReallySave :			"Wirklich speichern?",
 
 	// wikiedit.js
 	HelpAbout :				"Hilfe & Über",
@@ -19,6 +19,8 @@ lang = {
 	Underline :				"Unterstrichen (Strg+U)",
 	Strikethrough :			"Durchgestrichen (Strg+Umschalt+S)",
 	Code :					"Quelltext",
+	Superscript :			"Hochgestellt",
+	Subscript :				"Tiefgestellt",
 	List :					"Liste",
 	NumberedList :			"Nummerierte Liste",
 	Left :					"Linksbündig",

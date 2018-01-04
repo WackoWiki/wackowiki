@@ -86,6 +86,9 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 	this.addButton('strike', lang.Strikethrough, '\'--\',\'--\'');
 	this.addButton('code', lang.Code, "'##','##'");
 	this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
+	//this.addButton('superscript', lang.Superscript, "'^^','^^'");
+	//this.addButton('subscript', lang.Subscript, "'vv','vv'");
+	//this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');
 	this.addButton('ul', lang.List, '\'  * \',\'\',0,1,1');
 	this.addButton('ol', lang.NumberedList, '\'  1. \',\'\',0,1,1');
 	this.addButton('customhtml', '<li><div class="btn-separator"/></div></li>');

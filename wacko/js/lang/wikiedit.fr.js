@@ -19,6 +19,8 @@ lang = {
 	Underline :				"Underline",
 	Strikethrough :			"Strikethrough",
 	Code :					"Code",
+	Superscript :			"Superscript",
+	Subscript :				"Subscript",
 	List :					"List",
 	NumberedList :			"Numbered list",
 	Left :					"Left",

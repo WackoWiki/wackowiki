@@ -946,6 +946,12 @@ a:target {
 .toolbar li.we-strike img {
 	background: url('../../../image/wikiedit/strike.svg') no-repeat;
 }
+.toolbar li.we-superscript img {
+	background: url('../../../image/wikiedit/superscript.svg') no-repeat;
+}
+.toolbar li.we-subscript img {
+	background: url('../../../image/wikiedit/subscript.svg') no-repeat;
+}
 .toolbar li.we-ul img {
 	background: url('../../../image/wikiedit/ul.svg') no-repeat;
 }

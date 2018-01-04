@@ -19,6 +19,8 @@ lang = {
 	Underline :				"Подчеркнутый",
 	Strikethrough :			"Зачеркнутый",
 	Code :					"Моноширинный",
+	Superscript :			"Superscript",
+	Subscript :				"Subscript",
 	List :					"Маркированный список",
 	NumberedList :			"Нумерованный список",
 	Left :					"По левому краю",
