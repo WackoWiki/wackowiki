@@ -19,6 +19,8 @@ lang = {
 	Underline :				"Subrayado",
 	Strikethrough :			"Tachado",
 	Code :					"Codigo",
+	Superscript :			"Superscript",
+	Subscript :				"Subscript",
 	List :					"Lista",
 	NumberedList :			"Lista enumerada",
 	Left :					"Izquierda",
