@@ -13,7 +13,7 @@ if ($for)					$page	= $for;
 
 if (!isset($page))			$page	= '';
 
-if (isset($page))
+if ($page)
 {
 	$tag = $this->unwrap_link($page);
 
