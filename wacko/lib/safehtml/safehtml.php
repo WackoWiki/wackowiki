@@ -42,15 +42,6 @@ require_once(XML_HTMLSAX3 . 'HTMLSax3.php');
  * $parser = new HTML_Safe;
  * $result = $parser->parse($doc);
  * </pre>
- *
- * @category  HTML
- * @package   HTML_Safe
- * @author    Roman Ivanov <thingol@mail.ru>
- * @author    Miguel Vazquez Gocobachi <demrit@mx.gnu.org>
- * @copyright 2004-2009 Roman Ivanov, Miguel Vazquez Gocobachi
- * @license   http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version   Release: @package_version@
- * @link      http://pear.php.net/package/HTML_Safe
  */
 
 class SafeHTML

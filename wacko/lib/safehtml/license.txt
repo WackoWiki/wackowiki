@@ -1,3 +1,4 @@
+(c) Miguel Vazquez Gocobachi, WackoWiki Team, 2005-2017
 (c) Roman Ivanov, 2004-2005
 (c) Pixel-Apes ( http://pixel-apes.com/ ), 2004-2005
 (c) JetStyle   ( http://jetstyle.ru/    ), 2004-2005
