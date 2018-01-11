@@ -1,7 +1,7 @@
 SafeHTML
 --------
-Version 1.3.7.
-http://pixel-apes.com/safehtml/
+Version 1.3.10.
+https://wackowiki.org/doc/Dev/Projects/SafeHTML
 --------
 
 This parser strips down all potentially dangerous content within HTML:
@@ -16,9 +16,9 @@ This parser strips down all potentially dangerous content within HTML:
   * any other active content
 It also tries to convert code to XHTML valid, but htmltidy is far better solution for this task.
 
-If you found any bugs in this parser, please inform me -- ICQ:551593 or mailto:thingol@mail.ru
+If you found any bugs in this parser, please file an issue -- https://wackowiki.org/bugs/
 
-Please, subscribe to http://pixel-apes.com/safehtml/feed/rss feed in order to receive notices 
+Please, subscribe to https://wackowiki.org/doc/Dev/Projects/SafeHTML in order to receive notices 
 when SAFEHTML will be updated.
 
 -- Roman Ivanov.
@@ -30,6 +30,12 @@ when SAFEHTML will be updated.
 --------
 Version history:
 --------
+1.3.10.
+ * added HTML5 Block-level elements
+1.3.9.
+ * Replaced preg_replace() e modifier with preg_replace_callback
+1.3.8.
+ * UTF-7 XSS vulnerability fixed
 1.3.7.
  * Added 'dl' to the list of 'lists' tags.
  * Added 'callto' to the white list of protocols.
