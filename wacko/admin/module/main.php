@@ -34,17 +34,6 @@ function admin_main(&$engine, &$module)
 
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
-	// clear cache
-	else if (isset($_POST['action']) && $_POST['action'] == 'cache')
-	{
-		Ut::purge_directory(CACHE_PAGE_DIR);
-		$engine->db->sql_query("TRUNCATE " . $engine->db->table_prefix . "cache");
-
-		Ut::purge_directory(CACHE_SQL_DIR);
-		Ut::purge_directory(CACHE_CONFIG_DIR);
-		Ut::purge_directory(CACHE_FEED_DIR);
-		Ut::purge_directory(CACHE_TEMPLATE_DIR);
-	}
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
 	{
@@ -72,26 +61,12 @@ function admin_main(&$engine, &$module)
 			<td class="t_center"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>"></td>
 		</tr>
 	</table>
-	<br>
-<?php
-	echo $engine->form_close();
-	echo '<br>';
-	// $form_name = '', ['page_method' => '', 'form_method' => 'post', 'form_token' => false, 'tag' => '', 'form_more' => '', 'href_param' => '']
-	echo $engine->form_open('cache');
-?>
-	<input type="hidden" name="action" value="cache">
-	<table style="max-width:200px;" class="formation">
-		<tr class="hl_setting">
-			<td class="label nowrap"><?php echo $engine->_t('ClearCache');?></td>
-			<td class="t_center"><?php  echo (isset($_POST['action']) && $_POST['action'] == 'cache' ? $engine->_t('CacheCleared') : '<input type="submit" id="submit" value="' . $engine->_t('PurgeSessions') . '">');?></td>
-		</tr>
-	</table>
 <?php
 	echo $engine->form_close();
 
 	echo $engine->form_open('purge_sessions');
 ?>
-		<input type="hidden" name="mode" value="lock">
+		<input type="hidden" name="mode" value="main">
 		<input type="hidden" name="action" value="purge_sessions">
 		<table style="max-width:200px;" class="formation">
 			<tr class="hl_setting">
@@ -102,7 +77,7 @@ function admin_main(&$engine, &$module)
 		</table>
 <?php
 	echo $engine->form_close();
-	# echo $engine->action('admincache'); // TODO: solve redirect issue
+	echo $engine->action('admincache');
 
 }
 

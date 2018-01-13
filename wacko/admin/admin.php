@@ -165,7 +165,6 @@ if (time() - $engine->sess->ap_last_activity > 900) // 1800
 	$engine->log(1, $engine->_t('LogAdminLogout', SYSTEM_LANG));
 
 	$engine->set_message($engine->_t('LoggedOutAuto'));
-	#$engine->http->redirect('admin.php');
 	$engine->http->redirect($engine->href('', 'admin.php'));
 }
 
