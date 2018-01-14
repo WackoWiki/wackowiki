@@ -3454,7 +3454,7 @@ class Wacko
 		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 		if ($track && $this->link_tracking())
 		{
-			$this->track_link_to($tag, LINK_PAGE);
+			$this->track_link($tag, LINK_PAGE);
 		}
 
 		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text . '</a>';
@@ -3480,7 +3480,7 @@ class Wacko
 			if ($track && $this->link_tracking())
 			{
 				// it's a Wiki link!
-				$this->track_link_to($this->unwrap_link($tag), LINK_PAGE);
+				$this->track_link($this->unwrap_link($tag), LINK_PAGE);
 			}
 		}
 
@@ -3727,7 +3727,7 @@ class Wacko
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
 					{
-						$this->track_link_to($file_data['file_id'], LINK_FILE);
+						$this->track_link($file_data['file_id'], LINK_FILE);
 					}
 				}
 			}
@@ -3743,7 +3743,7 @@ class Wacko
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
 					{
-						$this->track_link_to($file_data['file_id'], LINK_FILE);
+						$this->track_link($file_data['file_id'], LINK_FILE);
 					}
 				}
 			}
@@ -3785,7 +3785,7 @@ class Wacko
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
 					{
-						$this->track_link_to($file_data['file_id'], LINK_FILE);
+						$this->track_link($file_data['file_id'], LINK_FILE);
 					}
 
 					if ($this->is_admin()
@@ -4135,7 +4135,7 @@ class Wacko
 			// track page link
 			if ($track)
 			{
-				$this->track_link_to($tag, LINK_PAGE);
+				$this->track_link($tag, LINK_PAGE);
 			}
 
 			// set a anchor once for link at the first appearance
@@ -4547,7 +4547,7 @@ class Wacko
 	* @param integer $link_type [LINK_PAGE|LINK_FILE]
 	*
 	*/
-	function track_link_to($tag, $link_type)
+	function track_link($tag, $link_type)
 	{
 		if (isset($this->linktable)) // no linktable? we are not tracking!
 		{
@@ -4644,7 +4644,7 @@ class Wacko
 			$this->start_link_tracking();
 			$this->format($body_r, 'post_wacko');
 			$this->stop_link_tracking();
-			$this->write_link_table($page_id);
+			$this->write_link_table($page_id); // the only call!
 			unset($this->linktable);
 		}
 	}
@@ -4949,7 +4949,7 @@ class Wacko
 	*
 	* @param string $action Action name
 	* @param array $params Action parameters
-	* @param boolean $force_link_lracking If value is TRUE then all links in acton  will be tracking in table Links.
+	* @param boolean $force_link_tracking If value is TRUE then all links in the action will be tracked in the links_* tables.
 	* Optional, default value is FALSE.
 	* @return string Result of action
 	*/
