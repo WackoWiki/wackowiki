@@ -19,7 +19,7 @@ if (!isset($track))			$track			= 0;
 
 if ($track && $this->link_tracking())
 {
-	$this->track_link_to($page, LINK_PAGE);
+	$this->track_link($page, LINK_PAGE);
 }
 
 if (in_array($page, $this->context))
