@@ -213,7 +213,7 @@ if ($this->has_access('read')
 						$this->page['page_id'] = $this->get_page_id($this->tag);
 					}
 
-					// now we render it internally so we can write the updated link table.
+					// now we render it internally so we can write the updated link tables.
 					$this->update_link_table($this->page['page_id'], $body_r);
 				}
 

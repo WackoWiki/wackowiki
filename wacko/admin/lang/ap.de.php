@@ -322,14 +322,13 @@ $ap_translation = [
 	'RatingPanelInfo'			=> 'Die Standardanzeige für das Bewertungsfeld im unteren Bereich der Seite.',
 	'TagsPanel'					=> 'Schlagwortliste (Tags)',
 	'TagsPanelInfo'				=> 'Die Standardanzeige für Schlagworte im unteren Bereich der Seite.',
-	// Vergleiche: WackoWiki Administration: Inhalt > Kategorien (Tags etwa nicht hierarchisches Stichwortverzeichnis ; Kategorien etwa hierarchisches Inhaltsverzeichnis )
+
 	'HideRevisions'				=> 'Seitenversionen ausblenden',
 	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
 	'TocPanel'					=> 'Inhaltsverzeichnis',
 	'TocPanelInfo'				=> 'Die Standardanzeige für das Inhaltsverzeichnis-Fenster der Seite (setzt die Unterstützung durch das Layout vorraus).',
 	'SectionsPanel'				=> 'Bereichsanzeige (Seitenbaum)',
 	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmäßig benachbarte Seiten im Namensraum an (setzt die Unterstützung durch das Layout voraus).',
-	// Tree action {{tree}} wird im default theme nicht am Seitenende angezeigt.
 
 	'DisplayingSections'		=> 'Angezeigte Bereiche',
 	'DisplayingSectionsInfo'	=> 'Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </ em>), nur benachbarte (<em> obere </ em>) oder beide (<em> Baum </ em>) ausgegeben.',
@@ -409,17 +408,17 @@ $ap_translation = [
 	'SystemSettingsUpdated'		=> 'Systemeinstellungen  aktualisiert',
 	'DebugModeSection'			=> 'Debug-Modus',
 	'DebugMode'					=> 'Debug-Modus',
-	'DebugModeInfo'				=> 'An- und Abschaltung zur Ausgabe von Telemetriedaten über die Programmlaufzeit. Achtung: Der Modus für alle Details stellt höhere Anforderungen an den zugewiesenen Speicher, insbesondere bei ressourcenintensiven Vorgängen wie dem Sichern und Wiederherstellen der Datenbank.',
+	'DebugModeInfo'				=> 'An- und Abschaltung der Ausgabe von Telemetriedaten über die Programmlaufzeit. Achtung: Der Modus für alle Details stellt höhere Anforderungen an den zugewiesenen Speicher, insbesondere bei ressourcenintensiven Vorgängen wie dem Sichern und Wiederherstellen der Datenbank.',
 	'DebugModes'	=> [
 		'0'		=> 'Debug-Modus ist deaktiviert',
 		'1'		=> 'nur die Gesamtausführungszeit',
 		'2'		=> 'alle Zeiten',
 		'3'		=> 'alle Details (DBMS, Cache, usw.)',
 	],
-	'DebugSqlThreshold'			=> 'RDBMS Schwellenleistung',
-	'DebugSqlThresholdInfo'		=> 'Im ausführlichen Debug-Modus werden nur die Abfragen aufgezeichnet, welche länger benötigen als die Anzahl der hier ausgewiesen Sekunden.',
+	'DebugSqlThreshold'			=> 'RDBMS Schwellenwert',
+	'DebugSqlThresholdInfo'		=> 'Im erweiterten Debug-Modus werden nur die Abfragen aufgezeichnet, welche die Anzahl der hier ausgewiesen Sekunden überschreiten.',
 	'DebugAdminOnly'			=> 'Geschlossene Diagnose',
-	'DebugAdminOnlyInfo'		=> 'Zeigt die Debug-Daten des Programms (und des DBMS) nur dem Administrator.',
+	'DebugAdminOnlyInfo'		=> 'Zeigt die Telemetriedaten der Anwendung (und des DBMS) nur dem Administrator.',
 
 	'CachingSection'			=> 'Zwischenspeicher-Optionen',
 	'Cache'						=> 'Gerenderte Seiten zwischenspeichern',
@@ -429,7 +428,6 @@ $ap_translation = [
 	'CacheSql'					=> 'SQL-Abfragen zwischenspeichern',
 	'CacheSqlInfo'				=> 'Einen lokalen Zwischenspeicher mit Ergebnissen aus bestimmten Datenbankabfragen (resource-SQL-queries) behalten.',
 	'CacheSqlTtl'				=> 'Aufbewahrungsdauer zwischengespeicherter SQL-Abfragen',
-	// Übersetzung fehlt
 	'CacheSqlTtlInfo'			=> 'Speichere Ergebnisse der SQL-Abfragen nicht länger als die angegebene Anzahl von Sekunden zwischen. Einen Wert >1200 zu verwenden ist ungünstig.',
 	'ReverseProxySection'		=> 'Reverse-Proxy',
 	'ReverseProxy'				=> 'Nutze Reverse-Proxy',
@@ -484,13 +482,13 @@ $ap_translation = [
 	'HideLocked'				=> 'Nicht zugängliche Seiten ausblenden',
 	'HideLockedInfo'			=> 'Wenn der Benutzer nicht berechtigt ist, eine Seite zu lesen, blenden sie in verschiedenen Seitenlisten aus (der im Text platzierte Link ist jedoch weiterhin sichtbar).',
 	'RemoveOnlyAdmins'			=> 'Nur Administratoren können Seiten löschen',
-	'RemoveOnlyAdminsInfo'		=> 'Verweigert allen Benutzern, außer Administratoren, Seiten zu löschen. Wird zuerst auf Besitzer normaler Seiten angewendet.',
+	'RemoveOnlyAdminsInfo'		=> 'Verbietet allen Benutzern, außer Administratoren, Seiten zu löschen. Wird zuerst auf Besitzer normaler Seiten angewendet.',
 	'OwnersRemoveComments'		=> 'Seitenbesitzer können Kommentare löschen',
 	'OwnersRemoveCommentsInfo'	=> 'Ermöglicht es Seitenbesitzern, Kommentare auf ihren Seiten zu moderieren.',
-	'OwnersEditCategories'		=> 'Besitzer können Seitenkategorien bearbeiten',
+	'OwnersEditCategories'		=> 'Seitenbesitzer können Seitenkategorien bearbeiten',
 	'OwnersEditCategoriesInfo'	=> 'Erlaubt es den Seitenbesitzern die Kageorien-Liste, welche den Seiten zugewiesen ist, zu ändern (Wörter hinzufügen, umbenennen oder löschen)',
 	'TermHumanModeration'		=> 'Zeit zur Moderation',
-	'TermHumanModerationInfo'	=> 'Moderatoren können nur Kommentare bearbeiten, wenn sie mindestens vor dieser Anzahl von Tagen dazu freigeschaltet wurden (diese Einschränkung gilt nicht für den letzten Kommentar zum Thema)',
+	'TermHumanModerationInfo'	=> 'Moderatoren können Kommentare nur innerhalb dieser Anzahl von Tagen nach deren Erstellung bearbeiten (diese Einschränkung gilt nicht für den letzten Kommentar zum Thema)',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Gesamte Sicherheitseinstellungen für die Platform, Benutzersicherheit und Sicherheitsteilsysteme.',
@@ -502,7 +500,7 @@ $ap_translation = [
 	'ApproveNewUserInfo'		=> 'Ermöglicht Administratoren, Benutzer nach der Registrierung zuzulassen. Nur zugelassene Benutzer dürfen sich auf der Site anmelden.',
 	'PersistentCookies'			=> 'Dauerhafte Cookies',
 	'PersistentCookiesInfo'		=> 'Erlaube dauerhafte Cookies.',
-	// Namenskonventionen für Benutzernamen
+
 	'AntiDupe'					=> 'Anti-clone',
 	'AntiDupeInfo'				=> 'Verweigern der Registrierung von Namen, die <span class = "underline">ähnlich</span> zu vorhanden Benutzernamen sind (Gäste können diese Namen auch nicht zum Unterschreiben von Kommentaren verwenden). Wenn die Option deaktiviert ist, nur bei <span class = "underline">identischen</span> Namen.',
 	'DisableWikiName'			=> 'Deaktiviere WikiName',
@@ -607,15 +605,12 @@ $ap_translation = [
 
 	//Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
-	//
 	'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
 
 	'TextHandlerSection'		=> 'Text Handler ',
-	//
 	'Typografica'				=> 'Typografischer Korrektor',
 	'TypograficaInfo'			=> 'Durch das Deaktivieren wird der Vorgang des Hinzufügens von Kommentaren und des Speicherns von Seiten geringfügig beschleunigt.',
 	'Paragrafica'				=> 'Paragrafica Markierungen',
-	//
 	'ParagraficaInfo'			=> 'Ähnlich wie bei der vorherigen Option, jedoch wird die Deaktivierung zu einer Fehlfunktion des automatischen Inhaltsverzeichnisses führen: <code>{{toc}}</code>.',
 	'AllowRawhtml'				=> 'Globale HTML-Unterstützung',
 	'AllowRawhtmlInfo'			=> 'Die Verwendung dieser Option für eine offene Site ist möglicherweise unsicher.',
@@ -662,19 +657,16 @@ $ap_translation = [
 	'NumerateLinksInfo'			=> 'Nummeriert und listet alle Links am Fuß der Seite in der Druckansicht mit dieser Option.',
 	'YouareHereText'			=> 'Deaktiviert und visualisiert selbstreferenzierende Links',
 	'YouareHereTextInfo'		=> 'Visualisiert Links zur selben Seite, bspw. <code>&lt;b&gt;####&lt;/b&gt;</code>, alle Links auf sich selbst werden nicht als Link, sondern als fetter Text dargestellt.',
-	//
 
 	// Pages settings
 	'PagesSettingsInfo'			=> '',
 	'PagesSettingsUpdated'		=> 'Einstellungen der Basisseiten aktualisiert',
-	//
 
 	'ListCount'					=> 'Anzahl der Datensätze pro Liste',
 	'ListCountInfo'				=> 'Anzahl der Zeilen, die in jeder Liste für Gäste angezeigt werden, oder als Standardwert für neue Benutzer.',
-	//
 
 	'ForumSection'				=> 'Options Forum',
-	//
+
 	'ForumCluster'				=> 'Cluster Forum',
 	'ForumClusterInfo'			=> 'Adresse der Hauptseite des Forums.',
 	'ForumTopics'				=> 'Anzahl der Themen pro Seite',
@@ -693,7 +685,7 @@ $ap_translation = [
 	'DefaultLicenseInfo'		=> 'Unter welcher Lizenz sollen deine Inhalte veröffentlicht werden?',
 
 	'ServicePagesSection'		=> 'Standardseiten',
-	//
+
 	'RootPage'					=> 'Startseite',
 	'RootPageInfo'				=> 'Der Tag der Hauptseite, welcher automatisch aufgerufen wird, wenn ein Nutzer die Website besucht.',
 
@@ -706,7 +698,7 @@ $ap_translation = [
 	'RegistrationPageInfo'		=> 'Seite für neue Benutzerregistrierung (Aktion <code>{{registration}}</code>).',
 	'LoginPage'					=> 'Benutzer-Anmeldung',
 	'LoginPageInfo'				=> 'Seite zur Anmeldung (Aktion <code>{{login}}</code>).',
-	//
+
 	'SettingsPage'				=> 'Benutzereinstellungen',
 	'SettingsPageInfo'			=> 'Seite zum Anpassen des Benutzerprofils (Aktion <code>{{usersettings}}</code>).',
 	'PasswordPage'				=> 'Passwort ändern',
@@ -717,7 +709,7 @@ $ap_translation = [
 	'CategoryPageInfo'			=> 'Seite mit einer Liste von kategorisierten Seiten (Aktion <code>{{category}}</code>).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (Aktion <code>{{tag}}</code>).',
-	//
+
 	'GroupsPage'				=> 'Gruppen',
 	'GroupsPageInfo'			=> 'Seite mit einer Liste von Arbeitsgruppen (Aktion <code>{{usergroups}}</code>).',
 	'ChangesPage'				=> 'Letzte Änderungen',
@@ -736,7 +728,6 @@ $ap_translation = [
 	'SandboxPageInfo'			=> 'Seite, auf der Benutzer die Verwendung des Wiki-Markups üben können.',
 	'WikiDocsPage'				=> 'Wiki-Dokumentation',
 	'WikiDocsPageInfo'			=> 'Section of the documentation for using the tool site.',
-	//
 
 	// Notification settings
 	'NotificationSettingsInfo'	=> 'Parameter für Benachrichtigungen des Systems.',
@@ -745,9 +736,7 @@ $ap_translation = [
 	'EmailNotification'			=> 'E-Mail-Benachrichtigung',
 	'EmailNotificationInfo'		=> 'E-Mail-Benachrichtigung zulassen. Wähle EIN, um E-Mail-Benachrichtigungen zu aktivieren, und AUS, um sie zu deaktivieren. Beachte, dass die Deaktivierung von E-Mail-Benachrichtigungen keine Auswirkungen auf E-Mails hat, die im Rahmen des Benutzeranmeldungsvorgangs generiert wurden.',
 	'Autosubscribe'				=> 'Automatisch abonnieren',
-	//
 	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
-	//
 
 	'NotificationSection'		=> 'Benachrichtigungen',
 	'NotifyPageEdit'			=> 'Seitenänderung mitteilen',
@@ -760,7 +749,6 @@ $ap_translation = [
 	//
 	'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
 	'NotifyUserAccountInfo'		=> 'Der Administrator wird benachrichtigt, wenn ein neuer Benutzer über das Anmelde-Formular erstellt wurde.',
-	//
 
 	// Resync settings
 	'Synchronize'				=> 'Synchronisieren',
@@ -823,8 +811,8 @@ $ap_translation = [
 	'SmtpUsernameInfo'			=> 'Gib nur einen Benutzernamen ein, wenn dein SMTP-Server dies erfordert.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Hier kannst du die Einstellungen für Dateianhänge und verknüpfte Spezialkategorien vornehmen.',
-	'UploadSettingsUpdated'		=> 'Updated upload settings',
+	'UploadSettingsInfo'		=> 'Hier können die Einstellungen für Dateianhänge und damit verknüpfte Kategorien angepasst werden.',
+	'UploadSettingsUpdated'		=> 'Einstellungen für Dateianhänge aktualisiert',
 
 	'RightToUpload'				=> 'Berechtigung Dateien hochzuladen',
 	'RightToUploadInfo'			=> '<code>admins</code> bedeutet nur Nutzer welche der Admins-Gruppe angehören, können Dateien hochladen. <code>1</code> bedeutet jeder registrierte Benutzer kann Dateien hochladen. <code>0</code> das Hochladen von Dateien ist nicht möglich.',
@@ -852,7 +840,6 @@ $ap_translation = [
 	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten und Dateien.
 									Um die Seiten und Dateien endgültig aus der Datenbank zu löschen oder wiederherzustellen klicke in der entsprechenden Zeile auf <em>Entfernen</em> oder <em>Wiederherstellen</em>.
 									(Achtung, es ist keine Löschbestätigung erforderlich!)',
-	//
 
 	// Filter module
 	'FilterSettingsInfo'		=> 'Wörter, die automatisch in deinem Wiki zensiert werden.',
@@ -873,14 +860,11 @@ $ap_translation = [
 	'ConversionTablesOk'		=> 'Konvertierung der ausgewählten Tabellen erfolgreich.',
 
 	'LogColumsToStrict'			=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
-	//
 	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
 
 	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB/XtraDB',
 	'ConvertTablesEngineInfo'	=> 'Falls man über vorhandene Tabellen verfügt, die für eine bessere Zuverlässigkeit und Skalierbarkeit in InnoDB / XtraDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprünglich MyISAM, was früher der Standard war.',
-	//
 	'ConvertTablesEngineHint'	=> '* XtraDB ist eine erweiterte Version der InnoDB-Speicher-Engine, die auf moderner Hardware besser skaliert werden kann, und enthält eine Vielzahl anderer Funktionen, die in Hochleistungsumgebungen nützlich sind. Sie ist vollständig abwärtskompatibel und identifiziert sich selbst MariaDB als "<code> ENGINE = InnoDB </ code>" (genau wie InnoDB) und kann daher als ein Drop-In-Ersatz für Standard-InnoDB verwendet werden.',
-	//
 
 	'DbVersion'					=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
 	'DbEngineOk'				=> 'InnoDB/XtraDB ist verfügbar.',
@@ -950,13 +934,13 @@ $ap_translation = [
 	'EnableSysMsgInfo'			=> 'Zeige System-Mitteilung.',
 
 	// User approval module
-	'ApproveNotExists'			=> 'Please select at least one user via the Set button.',
+	'ApproveNotExists'			=> 'Bitte wähle mindestens einen Benutzer über die Schaltfläche Setzen aus.',
 
-	'LogUserApproved'			=> 'User ##%1## approved',
-	'LogUserBlocked'			=> 'User ##%1## blocked',
-	'LogUserDeleted'			=> 'User ##%1## removed from the database',
-	'LogUserCreated'			=> 'Created a new user ##%1##',
-	'LogUserUpdated'			=> 'Updated User ##%1##',
+	'LogUserApproved'			=> 'Benutzer ##%1## zugelassen',
+	'LogUserBlocked'			=> 'Benutzer ##%1## gesperrt',
+	'LogUserDeleted'			=> 'Benutzer ##%1## aus der Datenbank entfernt',
+	'LogUserCreated'			=> 'Neuer Benutzer ##%1## erstellt',
+	'LogUserUpdated'			=> 'Benutzer ##%1## aktualisiert',
 
 	'UserApproveInfo'			=> 'Schalte neue Benutzer frei, damit sie sich auf der Seite anmelden können.',
 	'Approve'					=> 'Zulassen',
@@ -1024,7 +1008,7 @@ $ap_translation = [
 	'NoTableStructure'			=> 'Die Struktur der Tabellen wurde nicht gespeichert - überspringen',
 	'RestoreRecords'			=> 'Tabelleninhalte wiederherstellen',
 	'ProcessTablesDump'			=> 'Just download and process tables dump',
-	//
+
 	'Instruction'				=> 'Anweisung',
 	'RestoredRecords'			=> 'Datensätze',
 	'RecordsRestoreDone'		=> 'Abgeschlossen. Gesamtzahl der Datensätze',
@@ -1143,7 +1127,7 @@ $ap_translation = [
 	'SQLModesSession'			=> 'SQL Modes Session',
 	'PhpVersion'				=> 'PHP Version',
 	'MemoryLimit'				=> 'Memory',
-	'UploadMaxFilesize'			=> 'Upload max filesize',
+	'UploadFilesizeMax'			=> 'Upload max filesize',
 	'PostMaxSize'				=> 'Post max size',
 	'MaxExecutionTime'			=> 'Max execution time',
 	'SessionPath'				=> 'Session path',
