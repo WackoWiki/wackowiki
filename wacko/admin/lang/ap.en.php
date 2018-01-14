@@ -1115,7 +1115,7 @@ $ap_translation = [
 	'SQLModesSession'			=> 'SQL Modes Session',
 	'PhpVersion'				=> 'PHP Version',
 	'MemoryLimit'				=> 'Memory',
-	'UploadMaxFilesize'			=> 'Upload max filesize',
+	'UploadFilesizeMax'			=> 'Upload max filesize',
 	'PostMaxSize'				=> 'Post max size',
 	'MaxExecutionTime'			=> 'Max execution time',
 	'SessionPath'				=> 'Session path',
@@ -1148,6 +1148,18 @@ $ap_translation = [
 	'TranslitStart'				=> 'Start',
 	'TranslitContinue'			=> 'Continue',
 	'TranslitCompleted'			=> 'The update procedure is completed.',
+
+	// Bad Behavior module
+		'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+
+		'BbSummary'					=> 'Summary',
+		'BbLog'						=> 'Log',
+		'BbSettings'				=> 'Settings',
+		'BbWhitelist'				=> 'Whitelist',
+		''				=> '',
+		''				=> '',
+		''				=> '',
+		''				=> '',
 
 
 ];
