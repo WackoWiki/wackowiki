@@ -995,7 +995,7 @@ $ap_translation = [
 	'BackupRemoved'				=> 'Die ausgewählte Datensicherung wurde erfolgreich entfernt.',
 	'LogRemovedBackup'			=> 'Sicherungskopie gelöscht ##%1##',
 
-	'RestoreStarted'			=> 'Beginne Wiederherstellung der Datensicherung',
+	'RestoreStarted'			=> 'Beginne mit Wiederherstellung der Datensicherung',
 	'RestoreParameters'			=> 'Verwendete Parameter',
 	'IgnoreDublicatedKeys'		=> 'Ignoriere doppelte Schlüssel',
 	'IgnoreDublicatedFiles'		=> 'Ignoriere doppelte Dateien',
@@ -1007,7 +1007,7 @@ $ap_translation = [
 	'CompletedSqlQueries'		=> 'Abgeschlossen. Verarbeitete Anweisungen',
 	'NoTableStructure'			=> 'Die Struktur der Tabellen wurde nicht gespeichert - überspringen',
 	'RestoreRecords'			=> 'Tabelleninhalte wiederherstellen',
-	'ProcessTablesDump'			=> 'Just download and process tables dump',
+	'ProcessTablesDump'			=> 'Tabellen-Dump entpacken und verarbeiten',
 
 	'Instruction'				=> 'Anweisung',
 	'RestoredRecords'			=> 'Datensätze',
@@ -1060,12 +1060,12 @@ $ap_translation = [
 	// Groups module
 	'GroupsInfo'				=> 'Von diesem Panel aus können Sie alle Ihre Benutzergruppen verwalten. Sie können vorhandene Gruppen löschen, erstellen und bearbeiten. Darüber hinaus können Sie Gruppenleiter auswählen, den Status der offenen / versteckten / geschlossenen Gruppen umschalten und den Gruppennamen und die Beschreibung festlegen.',
 
-	'LogMembersUpdated'			=> 'Updated usergroup members',
-	'LogMemberAdded'			=> 'Added member ##%1## into group ##%2##',
-	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
-	'LogGroupCreated'			=> 'Created a new group ##%1##',
-	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',
-	'LogGroupRemoved'			=> 'Removed group ##%1##',
+	'LogMembersUpdated'			=> 'Gruppenmitglieder aktualisiert',
+	'LogMemberAdded'			=> 'Gruppenmitglied ##%1## zu Gruppe ##%2## hinzugefügt',
+	'LogMemberRemoved'			=> 'Gruppenmitglied ##%1## aus Gruppe ##%2## entfernt',
+	'LogGroupCreated'			=> 'Neue Gruppe ##%1## erstellt',
+	'LogGroupRenamed'			=> 'Gruppe ##%1## zu ##%2## umbenannt',
+	'LogGroupRemoved'			=> 'Gruppe ##%1## entfernt',
 
 	'GroupsMembersFor'			=> 'Mitglieder der Gruppe',
 	'GroupsDescription'			=> 'Beschreibung',

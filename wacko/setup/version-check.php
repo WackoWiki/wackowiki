@@ -137,7 +137,7 @@ write_config_hidden_nodes(['none' => '']);
 	$file_permissions_result = true;
 
 	// If the cache directory is writable then we can enable caching as default
-	echo '            <input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
+	echo '			<input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>
@@ -169,7 +169,7 @@ write_config_hidden_nodes(['none' => '']);
 	{
 		?>
 <p><?php echo $lang['Ready'];?></p>
-<p><?php echo $lang['NotePermissions'];?></p>
+<p><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>');?></p>
 <input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
 <?php
 	}
@@ -190,7 +190,7 @@ write_config_hidden_nodes(['none' => '']);
 	else if (!$file_permissions_result)
 	{
 ?>
-<p class="warning"><?php echo $lang['NotePermissions']; ?></p>
+<p class="warning"><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>'); ?></p>
 <p class="security"><?php echo $lang['ErrorPermissions']; ?></p>
 <input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
 <input type="submit" value="<?php echo $lang['Continue'];?>" class="next">

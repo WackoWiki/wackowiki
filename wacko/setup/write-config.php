@@ -90,14 +90,21 @@ echo "		<ul class=\"security\">\n";
 
 if (!$perm_changed)
 {
-	echo "			<li>" . $lang['SecurityRisk'] . "</li>\n";
+	echo "			<li>" . Ut::perc_replace($lang['SecurityRisk'],
+							'<code>' . CONFIG_FILE . '</code>',
+							'<code>chmod 644 ' . CONFIG_FILE . '</code>') .
+					"</li>\n";
 }
 
 echo "			<li>" . $lang['RemoveSetupDirectory'] . "</li>\n";
 
 if ($write_file == false)
 {
-	echo "			<li>" . $lang['ErrorGivePrivileges'] . "</li>\n";
+	echo "			<li>" . Ut::perc_replace($lang['ErrorGivePrivileges'],
+							'<code>' . CONFIG_FILE . '</code>',
+							'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod 666 ' . CONFIG_FILE . '</code>',
+							'<code>chmod 644 ' . CONFIG_FILE . '</code>') .
+					"</li>\n";
 }
 
 echo "		</ul>\n";
