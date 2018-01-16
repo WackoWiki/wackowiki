@@ -54,7 +54,7 @@ function admin_user_groups(&$engine, &$module)
 	// update groups list
 	if (isset($_POST['save']))
 	{
-		$this->log(4, $engine->_t('LogMembersUpdated'));
+		$this->log(4, $engine->_t('LogMembersUpdated', SYSTEM_LANG));
 		$this->set_message($this->_t('GroupsUpdated'));
 	}
 	else
@@ -79,7 +79,7 @@ function admin_user_groups(&$engine, &$module)
 
 					$engine->config->invalidate_config_cache();
 					$engine->show_message($engine->_t('MembersAdded'), 'success');
-					$engine->log(4, Ut::perc_replace($engine->_t('LogMemberAdded'), $_POST['new_member_id'], $usergroup['group_name']));
+					$engine->log(4, Ut::perc_replace($engine->_t('LogMemberAdded', SYSTEM_LANG), $_POST['new_member_id'], $usergroup['group_name']));
 					unset($_POST['add_member']);
 			}
 
@@ -93,7 +93,7 @@ function admin_user_groups(&$engine, &$module)
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('MembersRemoved'), 'success');
-				$engine->log(4, Ut::perc_replace($engine->_t('LogMemberRemoved'), $_POST['member_id'], $usergroup['group_name']));
+				$engine->log(4, Ut::perc_replace($engine->_t('LogMemberRemoved', SYSTEM_LANG), $_POST['member_id'], $usergroup['group_name']));
 			}
 
 			/////////////////////////////////////////////
@@ -211,7 +211,7 @@ function admin_user_groups(&$engine, &$module)
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('GroupsAdded'), 'success');
-				$engine->log(4, Ut::perc_replace($engine->_t('LogGroupCreated'), $_POST['new_group_name']));
+				$engine->log(4, Ut::perc_replace($engine->_t('LogGroupCreated', SYSTEM_LANG), $_POST['new_group_name']));
 				unset($_POST['create']);
 			}
 		}
@@ -242,7 +242,7 @@ function admin_user_groups(&$engine, &$module)
 					"LIMIT 1");
 
 				$engine->show_message($engine->_t('GroupsRenamed'));
-				$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRenamed'), $usergroup['group_name'], $_POST['new_group_name']));
+				$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRenamed', SYSTEM_LANG), $usergroup['group_name'], $_POST['new_group_name']));
 			}
 		}
 		// delete group
@@ -263,7 +263,7 @@ function admin_user_groups(&$engine, &$module)
 
 			$engine->config->invalidate_config_cache();
 			$engine->show_message($engine->_t('GroupsDeleted'), 'success');
-			$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRemoved'), $usergroup['group_name']));
+			$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRemoved', SYSTEM_LANG), $usergroup['group_name']));
 
 			unset($_GET['group_id']);
 			unset($_POST['group_id']);

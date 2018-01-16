@@ -52,7 +52,7 @@ function admin_config_system(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, $engine->_t('SystemSettingsUpdated'));
+		$engine->log(1, $engine->_t('SystemSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('SystemSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}

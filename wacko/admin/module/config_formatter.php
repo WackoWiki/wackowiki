@@ -60,7 +60,7 @@ function admin_config_formatter(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, $engine->_t('FormatterSettingsUpdated'));
+		$engine->log(1, $engine->_t('FormatterSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('FormatterSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}

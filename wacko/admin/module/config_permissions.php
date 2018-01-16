@@ -49,7 +49,7 @@ function admin_config_permissions(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!' . $engine->_t('PermissionsSettingsUpdated') . '!!');
+		$engine->log(1, '!!' . $engine->_t('PermissionsSettingsUpdated', SYSTEM_LANG) . '!!');
 		$engine->set_message($engine->_t('PermissionsSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}

@@ -60,7 +60,7 @@ function admin_content_polls(&$engine, &$module)
 		else if (isset($_POST['delete']) && $_POST['yes'])
 		{
 			$polls_obj->remove_poll($_POST['delete']);
-			$engine->log(1, str_replace('%1', (int) $_POST['delete'], $engine->_t('LogRemovedPoll', $engine->db->language)));
+			$engine->log(1, Ut::perc_replace($engine->_t('LogRemovedPoll', SYSTEM_LANG), (int) $_POST['delete']));
 		}
 		// stop current survey
 		else if (isset($_POST['stop']) && $_POST['id'])
@@ -71,7 +71,7 @@ function admin_content_polls(&$engine, &$module)
 				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0 " .
 				"LIMIT 1");
 
-			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollStopped', $engine->db->language)));
+			$engine->log(4, Ut::perc_replace($engine->_t('LogPollStopped', SYSTEM_LANG), (int) $_POST['id']));
 		}
 		// reset current survey
 		else if (isset($_POST['reset']) && $_POST['id'])
@@ -87,7 +87,7 @@ function admin_content_polls(&$engine, &$module)
 				"WHERE poll_id = " . (int) $_POST['id']);
 
 			#$xml->feed(); // update news feed
-			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollReset', $engine->db->language)));
+			$engine->log(4, Ut::perc_replace($engine->_t('LogPollReset', SYSTEM_LANG), (int) $_POST['id']));
 		}
 		// activate new survey
 		else if (isset($_POST['activate']) && $_POST['id'])
@@ -98,7 +98,7 @@ function admin_content_polls(&$engine, &$module)
 				"WHERE poll_id = " . (int) $_POST['id'] . " AND v_id = 0");
 
 			#$engine->$xml->feed(); // update news feed
-			$engine->log(4, str_replace('%1', (int) $_POST['id'], $engine->_t('LogPollStarted', $engine->db->language)));
+			$engine->log(4, Ut::perc_replace($engine->_t('LogPollStarted', SYSTEM_LANG), (int) $_POST['id']));
 		}
 		// edit/moderate new survey
 		else if (isset($_POST['edit']) && $_POST['id'])

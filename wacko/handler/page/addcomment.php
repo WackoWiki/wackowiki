@@ -89,7 +89,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->title			= $title;
 		$this->sess->comment_delay	= time();
 
-		$message = str_replace('%1', $this->db->comment_delay, $this->_t('CommentFlooded'));
+		$message = Ut::perc_replace($this->_t('CommentFlooded'), $this->db->comment_delay);
 		$this->set_message($message, 'error');
 		$this->http->redirect($this->href('', '', ['show_comments' => 1, 'p' => 'last']));
 	}

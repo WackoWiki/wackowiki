@@ -71,7 +71,7 @@ else if (($user = $this->get_user()))
 					"LIMIT 1");
 
 				// log event
-				// $this->log(6, str_replace('%1', $user['user_name'], $this->_t('LogUserSettingsUpdate', SYSTEM_LANG)));
+				// $this->log(6, Ut::perc_replace($this->_t('LogUserSettingsUpdate', SYSTEM_LANG), $user['user_name']));
 			}
 		}
 	}

@@ -41,7 +41,7 @@ function admin_messages(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, $engine->_t('SysMsgUpdated'));
+		$engine->log(1, $engine->_t('SysMsgUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('SysMsgUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}

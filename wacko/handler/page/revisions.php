@@ -30,7 +30,7 @@ $show_deleted = $this->is_admin();
 if ($this->page['deleted'])
 {
 	$this->show_message(
-		// $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  str_replace('%1', $this->href('edit', '', '', 1), $this->_t('PromptCreate')) : '').
+		// $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '').
 		'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
 		);
 }
