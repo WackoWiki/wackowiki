@@ -65,7 +65,7 @@ function admin_config_security(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!' . $engine->_t('SecuritySettingsUpdated') . '!!');
+		$engine->log(1, '!!' . $engine->_t('SecuritySettingsUpdated', SYSTEM_LANG) . '!!');
 		$engine->set_message($engine->_t('SecuritySettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}

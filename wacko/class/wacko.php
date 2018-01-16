@@ -2268,7 +2268,7 @@ class Wacko
 				if ($comment_on_id)
 				{
 					// see add_comment handler
-					// $this->log(5, str_replace('%2', $this->tag . ' ' . $this->page['title'], str_replace('%1', 'Comment' . $num, $this->_t('LogCommentPosted', SYSTEM_LANG))));
+					// $this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag . ' ' . $this->page['title']));
 				}
 				else
 				{

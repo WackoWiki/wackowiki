@@ -44,7 +44,7 @@ function admin_config_notifications(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!' . $engine->_t('NotificationSettingsUpdated')  . '!!');
+		$engine->log(1, '!!' . $engine->_t('NotificationSettingsUpdated', SYSTEM_LANG)  . '!!');
 		$engine->set_message($engine->_t('NotificationSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}

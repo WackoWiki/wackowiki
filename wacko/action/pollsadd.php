@@ -179,22 +179,22 @@ if (isset($_POST['submit_poll']))
 		if ($this->db->enable_email == true && $user != $this->db->admin_name && $moderation !== true)
 		{
 			$subject =	$this->_t('PollsNotifySubj');
-			$body	 =	str_replace('%1', $user, $this->_t('PollsNotifyBody')) . "\n" .
+			$body	 =	Ut::perc_replace($this->_t('PollsNotifyBody'), $user) . "\n" .
 						$this->href('', 'admin.php') . "\n\n";
 
 			#$this->send_user_email('System', $subject, $body);
 
-			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollCreated', $this->db->language)));
+			$this->log(4, Ut::perc_replace($this->_t('LogPollCreated', SYSTEM_LANG), $edit_id));
 		}
 		else if ($moderation === true)
 		{
-			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollChanged', $this->db->language)));
+			$this->log(4, Ut::perc_replace($this->_t('LogPollChanged', SYSTEM_LANG), $edit_id));
 		}
 
 		// log if we started a poll
 		if ($startmod == 1 && $admin)
 		{
-			$this->log(4, str_replace('%1', $edit_id, $this->_t('LogPollStarted', $this->db->language)));
+			$this->log(4, Ut::perc_replace($this->_t('LogPollStarted', SYSTEM_LANG), $edit_id));
 		}
 	}
 }

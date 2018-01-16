@@ -125,7 +125,7 @@ if ($this->has_access('read')
 			// check text length
 			#if ($textchars > $maxchars)
 			#{
-				#$message = str_replace('%1', $textchars - $maxchars, $this->_t('TextDBOversize')) . ' ';
+				#$message = Ut::perc_replace($this->_t('TextDBOversize'), $textchars - $maxchars) . ' ';
 				#$this->set_message($message , 'error');
 			#	$error = true;
 			#}

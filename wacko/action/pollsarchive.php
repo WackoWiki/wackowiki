@@ -46,7 +46,7 @@ if (!$nomark)
 	echo '<div class="layout-box"><p><span>' .
 			($year == 0
 				? $this->_t('PollsArchiveAll')
-				: str_replace('%1', $year, $this->_t('PollsArchiveYear'))
+				: Ut::perc_replace($this->_t('PollsArchiveYear'), $year)
 			) . "</span></p>\n";
 }
 

@@ -53,7 +53,7 @@ function admin_config_filter(&$engine, &$module)
 		file_put_contents($file_name, $phrase_list);
 		chmod($file_name, 0644);
 
-		$engine->log(1, '!!' . $engine->_t('FilterSettingsUpdated') . '!!');
+		$engine->log(1, '!!' . $engine->_t('FilterSettingsUpdated', SYSTEM_LANG) . '!!');
 		$engine->set_message($engine->_t('FilterSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
