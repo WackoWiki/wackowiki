@@ -369,7 +369,7 @@ switch ($config['database_driver'])
 if (!$fatal_error)
 {
 ?>
-<p><?php echo $lang['NextStep'];?></p>
+<p><?php echo Ut::perc_replace($lang['NextStep'], '<code>' . CONFIG_FILE . '</code>');?></p>
 <form action="<?php echo my_location(); ?>?installAction=write-config" method="post">
 <?php
 	write_config_hidden_nodes(['DeleteTables' => '']);
