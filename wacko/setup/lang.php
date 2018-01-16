@@ -19,14 +19,14 @@ if (array_key_exists('wacko_version', $config))
 	else
 	{
 		$config['is_update'] = '1';
-		echo '<p>' . preg_replace(['/%1/', '/%2/'], [$config['wacko_version'], WACKO_VERSION], $lang['UpgradeFromWacko']) . "</p>\n";
+		echo '<p>' . Ut::perc_replace($lang['UpgradeFromWacko'], $config['wacko_version'], WACKO_VERSION) . "</p>\n";
 		echo '<p class="warning">' . $lang['PleaseBackup'] . "</p>\n";
 	}
 }
 else
 {
 	$config['is_update'] = '0';
-	echo '<p>' . str_replace('%1', WACKO_VERSION, $lang['FreshInstall']) . "</p>\n";
+	echo '<p>' . Ut::perc_replace($lang['FreshInstall'],  WACKO_VERSION) . "</p>\n";
 }
 
 echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_update]">';
