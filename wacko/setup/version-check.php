@@ -169,7 +169,7 @@ write_config_hidden_nodes(['none' => '']);
 	{
 		?>
 <p><?php echo $lang['Ready'];?></p>
-<p><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>');?></p>
+<p class="warning"><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>');?></p>
 <input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
 <?php
 	}

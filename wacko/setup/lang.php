@@ -26,7 +26,7 @@ if (array_key_exists('wacko_version', $config))
 else
 {
 	$config['is_update'] = '0';
-	echo '<p>' . Ut::perc_replace($lang['FreshInstall'],  WACKO_VERSION) . "</p>\n";
+	echo '<p>' . Ut::perc_replace($lang['FreshInstall'], WACKO_VERSION) . "</p>\n";
 }
 
 echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_update]">';
