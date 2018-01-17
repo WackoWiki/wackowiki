@@ -45,7 +45,7 @@ $alter_category_assignment_r5_4_4 = "ALTER TABLE {$pref}category_assignment ADD 
 
 $rename_category_assignment_r5_4_0 = "RENAME TABLE {$pref}category_page TO {$pref}category_assignment";
 
-$update_category_assignment_r5_4_0 = "UPDATE {$pref}category_assignment SET object_type_id = 1 WHERE object_type_id IS NULL";
+$update_category_assignment_r5_4_0 = "UPDATE {$pref}category_assignment SET object_type_id = 1 WHERE object_type_id IS NULL OR object_type_id = 0";
 
 // CONFIG
 $update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|wordprocessor' WHERE config_name = 'standard_handlers'";
