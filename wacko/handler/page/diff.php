@@ -25,8 +25,8 @@ if (!defined('IN_WACKO'))
  *
  * TODO: make diff modes acceccible via config
  * - to change mode for cases above
- * - to offer only a subset
  * add navigation to move to next of previous diff
+ * add revision meta headers
 */
 
 if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
@@ -85,12 +85,12 @@ if ($page_a && $page_b
 	$revisions_menu = function ($rev, $page) use ($revisions, $diffmode, $a, $b)
 	{
 
-		$out = '<div class="diffdown">'; //<button class="diffbtn">';
+		$out = '<div class="diffdown">' . "\n"; //<button class="diffbtn">';
 		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : '')) . '">' .
-			$this->get_time_formatted($page['modified']) .
-			' <span class="dropdown_arrow">&#9660;</span></a>';
+				$this->get_time_formatted($page['modified']) .
+				' <span class="dropdown_arrow">&#9660;</span></a>' . "\n";
 		//$out .= '</button><div class="diffdown-content">';
-		$out .= '<div class="diffdown-content">';
+		$out .= '<div class="diffdown-content">' . "\n";
 
 		#$out .= '<!--nomail-->';
 
@@ -111,14 +111,14 @@ if ($page_a && $page_b
 			}
 
 			$out .= '<a href="' . $href . '">';
-			$out .= '<span style="display: inline-block; width:40px;">' . $r['version_id'] . '.</span>';
+			$out .= '<span>' . $r['version_id'] . '.</span>';
 			$out .= $this->get_time_formatted($r['modified']);
-			$out .= '</a>';
+			$out .= '</a>' . "\n";
 		}
 
 		#$out .= '<!--/nomail-->';
 
-		return $out . '</div></div>';
+		return $out . '</div></div>' . "\n";
 	};
 
 	// print header
@@ -142,8 +142,8 @@ if ($page_a && $page_b
 	foreach($diff_mode_list as $mode)
 	{
 		echo ($diffmode != $mode
-			?	'<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
-			:	'<li class="active">' . $diff_modes[$mode]) . '</li>';
+			? '<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
+			: '<li class="active">' . $diff_modes[$mode]) . '</li>';
 	}
 
 	echo "</ul>\n" .
