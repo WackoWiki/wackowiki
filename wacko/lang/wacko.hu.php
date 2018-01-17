@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Regisztráció',
 	'NewAccountAdminCreated'	=> '%1 felhasználó létrehozta a felhasználói fiókodat %2 felhasználónévvel. Hogy befejezd a regisztrációd, látogass el a következõ URL-re (figyelj hogy egyetlen sor legyen) és állítsd be a jelszavad:',
 	'NewAccountUsername'		=> 'Felhasználónév:',
+	'AccountLanguage'			=> 'Language:',
 	'NewAccountEmail'			=> 'E-mail cím:',
 	'NewAccountIP'				=> 'Távoli IP-cím:',
 	'NewAccountSignupInfo'		=> 'A következõ felhasználót hoztuk létre:',

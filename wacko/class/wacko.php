@@ -2782,7 +2782,7 @@ class Wacko
 		$subject	=	$this->_t('NewAccountSubject');
 		$body		=	$this->_t('NewAccountSignupInfo') . "\n\n" .
 						$this->_t('NewAccountUsername') . ' ' .	$user['user_name'] . "\n" .
-						$this->_t('RegistrationLang') . ' ' .	$user['user_lang'] . "\n" .
+						$this->_t('AccountLanguage') . ' ' .	$user['user_lang'] . "\n" .
 						$this->_t('NewAccountEmail') . ' ' .	$user['email'] . "\n" .
 						$this->_t('NewAccountIP') . ' ' .		$user['user_ip'] . "\n\n";
 

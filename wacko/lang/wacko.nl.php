@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Gebruikersregistratie',
 	'NewAccountAdminCreated'	=> 'De gebruiker %1 heeft een gebruiker voor u aangemaakt met de gebruikersnaam "%2". Bezoek de volgende verwijzing om uw eigen wachtwoord in te stellen en om uw registratie af te ronden. Zorg ervoor dat de URL op één regel wordt ingevoerd:',
 	'NewAccountUsername'		=> 'Gebruikersnaam:',
+	'AccountLanguage'			=> 'Language:',
 	'NewAccountEmail'			=> 'E-mailadres:',
 	'NewAccountIP'				=> 'IP-adres:',
 	'NewAccountSignupInfo'		=> 'De volgende gebruiker is aangemaakt:',

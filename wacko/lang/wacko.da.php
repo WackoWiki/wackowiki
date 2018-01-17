@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Kontoregistrering',
 	'NewAccountAdminCreated'	=> 'The user %1 has created an account for you with username "%2". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:',
 	'NewAccountUsername'		=> 'Brugernavn:',
+	'AccountLanguage'			=> 'Language:',
 	'NewAccountEmail'			=> 'E-mail:',
 	'NewAccountIP'				=> 'Fjern-IP-adresse:',
 	'NewAccountSignupInfo'		=> 'Følgende konto er blevet oprettet:',

@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Rejestracja konta',
 	'NewAccountAdminCreated'	=> 'U¿ytkownik %1 stworzy³ dla Ciebie konto %2. W celu zakoñczenia rejestracji, odwied¼ nastêpuj±cy adres URL (sprawd¼, czy ca³y adres jest wpisany w jednej linii) i ustaw w³asne has³o dostêpu',
 	'NewAccountUsername'		=> 'Nazwa u¿ytkownika:',
+	'AccountLanguage'			=> 'Language:',
 	'NewAccountEmail'			=> 'Email:',
 	'NewAccountIP'				=> 'Zdalny adres IP:',
 	'NewAccountSignupInfo'		=> 'Nastêpuj±ce konto zosta³o za³o¿one:',

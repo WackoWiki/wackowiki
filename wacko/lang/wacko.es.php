@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Registro de nueva cuenta',
 	'NewAccountAdminCreated'	=> 'El usuario %1 ha creado una cuenta para Ud. con el nombre de usuario "%2". Para completar el registro, visite la siguiente URL (Asegúrese de ingresarla como una única línea) y defina su propia contraseña de acceso:',
 	'NewAccountUsername'		=> 'Usuario:',
+	'AccountLanguage'			=> 'Language:',
 	'NewAccountEmail'			=> 'Correo electrónico:',
 	'NewAccountIP'				=> 'Dirección IP remota:',
 	'NewAccountSignupInfo'		=> 'La siguiente cuenta ha sido creada:',

@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Enregistrement de compte',
 	'NewAccountAdminCreated'	=> 'L&rsquo;utilisateur %1 vous a créé un compte avec le nom d&rsquo;utilisateur « %2 ». Pour terminer la création, visitez l&rsquo;URL suivante (soyez sûr qu&rsquo;elle soit entrée comme une seule ligne) et définissez votre mot de passe :',
 	'NewAccountUsername'		=> 'Utilisateur :',
+	'AccountLanguage'			=> 'Language:',
 	'NewAccountEmail'			=> 'Courriel :',
 	'NewAccountIP'				=> 'Adresse IP distante :',
 	'NewAccountSignupInfo'		=> 'Le compte suivant a été créé :',

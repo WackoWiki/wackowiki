@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Konto Registrierung',
 	'NewAccountAdminCreated'	=> 'Der Benutzer %1 hat für dich ein Konto mit dem Benutzernamen "%2" angelegt. Um die Registrierung abzuschließen, besuchen die folgende URL (stelle sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setze dein eigenes Zugangskennwort:',
 	'NewAccountUsername'		=> 'Benutzername:',
+	'AccountLanguage'			=> 'Sprache:',
 	'NewAccountEmail'			=> 'E-Mail:',
 	'NewAccountIP'				=> 'Von IP-Adresse:',
 	'NewAccountSignupInfo'		=> 'Das folgende Konto wurde angelegt:',
