@@ -35,6 +35,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Kasutajakonto registreerimine',
 	'NewAccountAdminCreated'	=> 'Kasutaja %1 tegi sulle konto kasutajanimega "%2". Et lõpetada sinu registreerimine, külasta järgmist veebiaadressi (jälgi, et see oleks sisestatud ühele reale) ja määra oma sisenemiseks parool:',
 	'NewAccountUsername'		=> 'Kasutaja:',
+	'AccountLanguage'			=> 'Language:',
 	'NewAccountEmail'			=> 'E-post:',
 	'NewAccountIP'				=> 'IP aadress:',
 	'NewAccountSignupInfo'		=> 'Loodud on järgmine kasutajakonto:',
