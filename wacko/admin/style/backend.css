@@ -136,6 +136,12 @@ input[type="checkbox"], input[type="radio"] {
 	margin-right: 10px;
 }
 
+/*
+input[type="text"], input[type="email"], input[type="password"] {
+	width: 80%;
+}
+*/
+
 /* hides dummy field for bots and autocomplete */
 input.verify { display: none; }
 
@@ -159,7 +165,7 @@ input.verify { display: none; }
 }
 
 .info {
-	font-style: italic;
+	/* font-style: italic; */
 	padding-top: 15px;
 }
 .error {
@@ -294,7 +300,7 @@ sup, sub {
 	padding: 10px 10px 10px 40px;
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
-	font-weight: bold;
+	font-weight: normal;
 }
 
 .notice {
