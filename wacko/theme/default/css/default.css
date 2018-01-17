@@ -1207,6 +1207,7 @@ a:target {
 
 /*Handlers --------------------------------------------------*/
 
+/* menu */
 
 #menu-user {
 	margin: 0 auto 0;
@@ -1592,6 +1593,17 @@ table.formation td {
 .inf .sign,
 .inf .text {
 	border-color: #BABFC7;
+}
+
+/* revisions */
+.rev-version {
+	display: inline-block;
+	width: 40px;
+}
+
+.rev-size {
+	display: inline-block; 
+	width: 130px;
 }
 
 .diff-zero {
@@ -2285,6 +2297,11 @@ table.forum td {
 }
 
 .diffdown-content a:hover {background-color: #f1f1f1;}
+
+.diffdown-content span {
+	display: inline-block; 
+	width: 40px;
+}
 
 .diffdown:hover .diffdown-content {
 	display: block;

@@ -29,10 +29,7 @@ $show_deleted = $this->is_admin();
 // get page_id for deleted but stored page
 if ($this->page['deleted'])
 {
-	$this->show_message(
-		// $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '').
-		'BACKUP of deleted page!' // TODO: localize and add description: to restore the page you ...
-		);
+	$this->show_message($this->_t('PageDeletedInfo'), 'info');
 }
 
 if ($this->has_access('read'))
@@ -110,7 +107,7 @@ if ($this->has_access('read'))
 
 			echo
 				'<li>' .
-					'<span style="display: inline-block; width:40px;">' . $page['version_id'] . '.</span>' .
+					'<span class="rev-version">' . $page['version_id'] . '.</span>' .
 
 					'<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 0 ? 'checked' : '') . '>' .
 					$place_holder .
@@ -120,7 +117,7 @@ if ($this->has_access('read'))
 					($page['deleted'] ? '<del>' : '') .
 
 					'<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>' .
-					'<span style="display: inline-block; width:130px;">' . '&nbsp; &mdash; (' . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . '</span> ';
+					'<span class="rev-size">' . '&nbsp; &mdash; (' . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . '</span>' .
 
 					($page['deleted'] ? '</del>' : '') .
 
