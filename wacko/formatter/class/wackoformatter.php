@@ -984,7 +984,7 @@ class WackoFormatter
 
 					if (!isset($this->auto_fn['content']))
 					{
-						$this->auto_fn['content'] = '';
+						$this->auto_fn['content'] = null;
 					}
 
 					$this->auto_fn['content'][$footnote_count] = trim($text);
