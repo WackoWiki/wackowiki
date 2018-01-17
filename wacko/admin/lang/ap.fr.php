@@ -450,7 +450,7 @@ $ap_translation = [
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
-										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless it is turn off, if HTTP_MOD_REWRITE is on.',
+										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
