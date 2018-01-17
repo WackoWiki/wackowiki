@@ -24,7 +24,7 @@ $query = // "SELECT p.supertag " .
 				: ""
 			) .
 			"AND p.comment_on_id = 0 " .
-			"AND p.page_id <> { (int) $this->page['page_id']} " .
+			"AND p.page_id <> " . (int) $this->page['page_id'] . " " .
 			"AND a.privilege = 'read' " .
 			"AND a.list = '*' " .
 			"AND p.page_id = a.page_id ";
