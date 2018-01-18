@@ -157,6 +157,7 @@ $config_db['pwd_admin_min_chars']			= $config['pwd_admin_min_chars'];
 $config_db['pwd_char_classes']				= $config['pwd_char_classes'];
 $config_db['pwd_min_chars']					= $config['pwd_min_chars'];
 $config_db['pwd_unlike_login']				= $config['pwd_unlike_login'];
+$config_db['referrer_policy']				= $config['referrer_policy'];
 $config_db['referrers_purge_time']			= $config['referrers_purge_time'];
 $config_db['remove_onlyadmins']				= $config['remove_onlyadmins'];
 $config_db['rename_globalacl']				= $config['rename_globalacl'];
@@ -207,7 +208,6 @@ $config_db['xml_sitemap']					= $config['xml_sitemap'];
 $config_db['xml_sitemap_time']				= $config['xml_sitemap_time'];
 $config_db['xml_sitemap_update']			= null;
 $config_db['youarehere_text']				= $config['youarehere_text'];
-#$config_db[''] = $config[''];
 
 foreach ($config_db as $key => $value)
 {

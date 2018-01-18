@@ -539,6 +539,20 @@ $ap_translation = [
 		'1'		=> 'strikt',
 		'2'		=> 'benutzerdefiniert',
 	],
+	'ReferrerPolicy'			=> 'Referrer Policy',
+	'ReferrerPolicyInfo'		=> 'Der Referrer-Policy-HTTP-Header bestimmt, welche Referrer-Informationen, die im Referer-Header gesendet werden, in die Anfragen aufgenommen werden sollen.',
+	'ReferrerPolicyModes'	=> [
+		'0'		=> '[off]',
+		'1'		=> 'no-referrer',
+		'2'		=> 'no-referrer-when-downgrade',
+		'3'		=> 'same-origin',
+		'4'		=> 'origin',
+		'5'		=> 'strict-origin',
+		'6'		=> 'origin-when-cross-origin',
+		'7'		=> 'strict-origin-when-cross-origin',
+		'8'		=> 'unsafe-url'
+	],
+
 	'UserPasswordSection'		=> 'Passwortschutz-Einstellungen',
 	'PwdMinChars'				=> 'Minimale Passwortlänge',
 	'PwdMinCharsInfo'			=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 12 bis 16 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
