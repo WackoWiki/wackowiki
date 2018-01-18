@@ -215,10 +215,9 @@ class Http
 
 				header('Last-Modified: ' . $gmt);
 				header('ETag: "' . $gmt . '"');
-				//header('Content-Type: text/xml');
+
 				//header('Content-Length: '.strlen($cached));
 				//header('Cache-Control: max-age=0');
-				//header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time()));
 
 				echo $cached_page;
 
@@ -315,6 +314,7 @@ class Http
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
 	//		Content-Security-Policy:
+	//		Referrer-Policy:
 	//		Strict-Transport-Security:
 	public function http_security_headers()
 	{
@@ -343,6 +343,24 @@ class Http
 				$csp_header		= str_replace(["\r", "\n", "\t"], '', $csp_config);
 
 				header($csp_header);
+			}
+
+			// https://www.w3.org/TR/referrer-policy/
+			if ($this->db->referrer_policy)
+			{
+				static $policy = [
+					0	=> '',
+					1	=> 'no-referrer',
+					2	=> 'no-referrer-when-downgrade',
+					3	=> 'same-origin',
+					4	=> 'origin',
+					5	=> 'strict-origin',
+					6	=> 'origin-when-cross-origin',
+					7	=> 'strict-origin-when-cross-origin',
+					8	=> 'unsafe-url'
+				];
+
+				header('Referrer-Policy: ' . $policy[$this->db->referrer_policy]);
 			}
 
 			if ($this->tls_session)

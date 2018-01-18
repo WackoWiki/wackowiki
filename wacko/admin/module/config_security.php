@@ -57,6 +57,7 @@ function admin_config_security(&$engine, &$module)
 		$config['intercom_delay']				= (int) $_POST['intercom_delay'];
 		$config['enable_security_headers']		= (int) $_POST['enable_security_headers'];
 		$config['csp']							= (int) $_POST['csp'];
+		$config['referrer_policy']				= (int) $_POST['referrer_policy'];
 		$config['max_login_attempts']			= (int) $_POST['max_login_attempts'];
 		$config['ip_login_limit_max']			= (int) $_POST['ip_login_limit_max'];
 		$config['username_chars_min']			= (int) $_POST['username_chars_min'];
@@ -336,6 +337,27 @@ function admin_config_security(&$engine, &$module)
 			<?php
 				} // close CSP file display
 			?>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="referrer_policy"><strong><?php echo $engine->_t('ReferrerPolicy');?>:</strong><br>
+					<small><?php echo $engine->_t('ReferrerPolicyInfo');?></small></label>
+				</td>
+				<td>
+					<select id="referrer_policy" name="referrer_policy">
+						<?php
+						$referrer_modes = $engine->_t('ReferrerPolicyModes');
+
+						foreach ($referrer_modes as $mode => $referrer_mode)
+						{
+							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->referrer_policy === $mode ? 'selected' : '') . '>' . $mode . ': ' . $referrer_mode . '</option>' . "\n";
+						}
+					?>
+					</select>
+				</td>
+			</tr>
 			<tr>
 				<th colspan="2">
 					<br>
