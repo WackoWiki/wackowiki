@@ -629,7 +629,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('AttachmentHandler');?>:</strong><br>
-					<small><?php echo $engine->_t('AttachmentsHandlerInfo');?></small></label>
+					<small><?php echo $engine->_t('AttachmentHandlerInfo');?></small></label>
 				</td>
 				<td>
 					<input type="radio" id="attachments_handler_on" name="attachments_handler" value="1"<?php echo ($engine->db->attachments_handler == 1 ? ' checked' : '');?>><label for="attachments_handler_on"><?php echo $engine->_t('On');?></label>
