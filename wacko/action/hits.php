@@ -12,6 +12,7 @@ if (!isset($for))			$for	= ''; // depreciated
 if ($for)					$page	= $for;
 
 if (!isset($page))			$page	= '';
+$result = 0;
 
 if ($page)
 {
@@ -25,10 +26,12 @@ if ($page)
 
 	if (isset($rs['hits']))
 	{
-		echo $rs['hits'];
+		$result = $rs['hits'];
 	}
 }
 else
 {
-	echo $this->page['hits'];
+	$result = $this->page['hits'];
 }
+
+echo number_format($result, 0, ',', '.');
