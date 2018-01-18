@@ -524,9 +524,9 @@ $ap_translation = [
 
 	'TlsSection'				=> 'TLS-Einstellungen',
 	'TlsConnection'				=> 'TLS-Verwendung',
-	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich! </ span>',
+	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich!</ span><br>Es legt auch fest, ob der Cookie Secure Flag gesetzt ist, der <code>secure</code> Flag definiert, ob Cookies nur über sichere Verbindungen geschickt werden sollen.',
 	'TlsImplicit'				=> 'TLS erzwingen',
-	'TlsImplicitInfo'			=> 'Erzwingt erneute Verbindung des Clients von HTTP zu HTTPS.  Wenn die Option aktiviert ist, überträgt der Client die Webseite über einen verschlüsselten HTTPS-Kanal.',
+	'TlsImplicitInfo'			=> 'Erzwingt erneute Verbindung des Clients von HTTP zu HTTPS. Wenn die Option deaktiviert ist, kann der Client die die Webseite über einen verschlüsselten HTTPS-Kanal übertragen.',
 	'TlsProxy'					=> 'TLS-Proxy',
 	'TlsProxyInfo'				=> 'Verwendet diesen TLS-Proxy anstelle von TLS. z.B. https://<span class="cite">dein-https-proxy.tld</span> ohne Schrägstrich am Ende und ohne https://.',
 	'HttpSecurityHeaders'		=> 'HTTP-Security-Header',
