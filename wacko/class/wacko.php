@@ -6662,7 +6662,12 @@ class Wacko
 		if ($this->get_user_setting('validate_ip') && $this->get_user_setting('ip') != $this->get_user_ip())
 		{
 			// TODO: set and load lang??
-			$this->log(1, '<strong><span class="cite">' . Ut::perc_replace($this->_t('LogUserIPSwitched', SYSTEM_LANG), $this->get_user_setting('user_name'), $this->get_user_setting('ip'), $this->get_user_ip()) . '</span></strong>');
+			$this->log(1, '<strong><span class="cite">' . Ut::perc_replace(
+					$this->_t('LogUserIPSwitched', SYSTEM_LANG),
+					'<code>' . $this->get_user_setting('user_name') . '</code>',
+					'<code>' . $this->get_user_setting('ip') . '</code>',
+					'<code>' . $this->get_user_ip() . '</code>'
+					) . '</span></strong>');
 			$this->log_user_out();
 			$this->login_page();
 		}
