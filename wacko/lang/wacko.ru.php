@@ -1258,7 +1258,24 @@ $wacko_translation = [
 	'LogCommentEdited'			=> 'Отредактирован комментарий [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Обновлены метаданные файла для ##%2## со страницы [[/%1]]',
 	'LogUpdatedFileCategories'	=> 'Обновлены категории файла для ##%2## со страницы [[/%1]]',
-	'ErrorMinPHPVersion'		=> 'WackoWiki требуется версия php не ниже <strong>' . PHP_MIN_VERSION.
+
+	'LogXmlSitemapGenerated'	=> 'XML Sitemap generated',
+	'LogReferrersPurged'		=> 'Maintenance: referrers purged',
+	'LogRevisionsPurged'		=> 'Maintenance: outdated pages revisions purged',
+	'LogDeletedPagesPurged'		=> 'Maintenance: deleted pages purged',
+	'LogSystemLogPurged'		=> 'Maintenance: system log purged',
+	'LogCachedPagesPurged'		=> 'Maintenance: cached pages purged',
+	'LogSqlCachePurged'			=> 'Maintenance: cached sql results purged',
+	'LogExpiredTokensPurged'	=> 'Maintenance: expired cookie_tokens purged',
+	'LogErrorSplitComments'		=> 'Error when separating comments from the topic [[/%1]] a new topic ##%2##: page was not created',
+	'LogCategoriesUpdated'		=> 'Updated page categories [[/%1]]',
+	'LogCategoryCreated'		=> 'Created a new category //%1//',
+	'LogCategoryRenamed'		=> 'Category ##%1## renamed to ##%2##',
+	'LogCategoryDebundled'		=> 'Category ##%1## debundled',
+	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
+	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
+
+	'ErrorMinPHPVersion'		=> 'WackoWiki требуется версия php не ниже <strong>' . PHP_MIN_VERSION .
 									'</strong>, на вашем же сервере используется <strong>' . PHP_VERSION . '</strong>.' .
 									'  Для корректной работы системы рекомендуется обновление версии php.',
 

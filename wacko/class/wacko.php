@@ -2490,7 +2490,7 @@ class Wacko
 
 			$xml = new Feed($this);
 			$xml->site_map();
-			$this->log(7, 'XML Sitemap generated');
+			$this->log(7, $this->_t('LogXmlSitemapGenerated', SYSTEM_LANG));
 			$this->sess->xml_sitemap_update = 0;
 		}
 	}
@@ -6530,7 +6530,7 @@ class Wacko
 				"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL " . (int) $days . " DAY)");
 
 			$update['maint_last_refs'] = $now + 1 * DAYSECS;
-			$this->log(7, 'Maintenance: referrers purged');
+			$this->log(7, $this->_t('LogReferrersPurged', SYSTEM_LANG));
 		}
 
 		// purge outdated pages revisions (once a week)
@@ -6542,7 +6542,7 @@ class Wacko
 				"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL " . (int) $days . " DAY)");
 
 			$update['maint_last_oldpages'] = $now + 7 * DAYSECS;
-			$this->log(7, 'Maintenance: outdated pages revisions purged');
+			$this->log(7, $this->_t('LogRevisionsPurged', SYSTEM_LANG));
 		}
 
 		// purge deleted pages (once per 3 days)
@@ -6565,7 +6565,7 @@ class Wacko
 			if ($remove)
 			{
 				$this->delete_pages($remove);
-				$this->log(7, 'Maintenance: deleted pages purged');
+				$this->log(7, $this->_t('LogDeletedPagesPurged', SYSTEM_LANG));
 			}
 
 			$update['maint_last_delpages'] = $now + 3 * DAYSECS;
@@ -6581,7 +6581,7 @@ class Wacko
 
 			$update['maint_last_log'] = $now + 3 * DAYSECS;
 
-			$this->log(7, 'Maintenance: system log purged');
+			$this->log(7, $this->_t('LogSystemLogPurged', SYSTEM_LANG));
 		}
 
 		// remove outdated pages cache, purge sql cache (once per hour)
@@ -6597,7 +6597,7 @@ class Wacko
 
 				if (Ut::purge_directory(CACHE_PAGE_DIR, $ttl))
 				{
-					$this->log(7, 'Maintenance: cached pages purged');
+					$this->log(7, $this->_t('LogCachedPagesPurged', SYSTEM_LANG));
 				}
 			}
 
@@ -6606,7 +6606,7 @@ class Wacko
 			{
 				if (Ut::purge_directory(CACHE_SQL_DIR, $ttl))
 				{
-					$this->log(7, 'Maintenance: cached sql results purged');
+					$this->log(7, $this->_t('LogSqlCachePurged', SYSTEM_LANG));
 				}
 			}
 
@@ -6621,7 +6621,7 @@ class Wacko
 				"WHERE token_expires < UTC_TIMESTAMP()");
 
 			$update['maint_last_session'] = $now + 3 * DAYSECS;
-			$this->log(7, 'Maintenance: expired cookie_tokens purged');
+			$this->log(7, $this->_t('LogExpiredTokensPurged', SYSTEM_LANG));
 		}
 
 		$this->db->_set($update);

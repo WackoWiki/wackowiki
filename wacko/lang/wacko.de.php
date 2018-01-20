@@ -1257,6 +1257,23 @@ $wacko_translation = [
 	'LogCommentEdited'			=> 'Kommentar bearbeitet [[/%1]]',
 	'LogUpdatedFileMeta'		=> 'Datei Metadaten für ##%2## von Seite [[/%1]] aktualisiert',
 	'LogUpdatedFileCategories'	=> 'Datei Kategorien für ##%2## von Seite [[/%1]] aktualisiert',
+
+	'LogXmlSitemapGenerated'	=> 'XML Seitenverzeichnis erstellt',
+	'LogReferrersPurged'		=> 'Wartung: Referrer gelöscht',
+	'LogRevisionsPurged'		=> 'Wartung: veraltete Seitenrevisionen gelöscht',
+	'LogDeletedPagesPurged'		=> 'Wartung: entfernte Seiten gelöscht',
+	'LogSystemLogPurged'		=> 'Wartung: Systemprotokoll gelöscht',
+	'LogCachedPagesPurged'		=> 'Wartung: Seiten-Cache gelöscht',
+	'LogSqlCachePurged'			=> 'Wartung: zwischengespeicherte SQL-Ergebnisse gelöscht',
+	'LogExpiredTokensPurged'	=> 'Wartung: abgelaufene Cookie-Token gelöscht',
+	'LogErrorSplitComments'		=> 'Fehler beim Trennen der Kommentare vom Thema [[/%1]], das neue Thema ##%2## konnte nicht erstellt werden',
+	'LogCategoriesUpdated'		=> 'Kategorien zur Seite [[/%1]] aktualisiert',
+	'LogCategoryCreated'		=> 'Neue Kategorie ##%1## erstellt',
+	'LogCategoryRenamed'		=> 'Kategorie ##%1## umbenannt zu ##%2##',
+	'LogCategoryDebundled'		=> 'Kategorie ##%1## entbündelt',
+	'LogCategoryGrouped'		=> 'Kategorie ##%1## mit Wort ##%2## gruppiert',
+	'LogCategoryRemoved'		=> 'Kategorie ##%1## aus der Datenbank entfernt',
+
 	'ErrorMinPHPVersion'		=> 'Die PHP Version muss größer sein als <strong>' . PHP_MIN_VERSION .
 									'</strong>, der Server scheint die Version <strong>' . PHP_VERSION . '</strong> zu nutzen.' .
 									'  Aktualisiere bitte PHP auf eine neuere Version, damit  WackoWiki ordnungsgemäß funtioniert.',
