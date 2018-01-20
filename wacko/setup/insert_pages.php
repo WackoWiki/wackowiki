@@ -8,15 +8,6 @@ $config_global	= $config;
 $dblink_global	= $dblink;
 $lang_global	= $lang;
 
-// TODO: mysqli / mysql pdo PDO: Add charset to the connection string, such as charset=utf8
-// indicate what character set the client will use to send SQL statements to the server
-switch ($config_global['database_driver'])
-{
-	case 'mysqli_legacy':
-		mysqli_set_charset($dblink, $config['database_charset']);
-		break;
-}
-
 // Inserting default pages
 $error_inserting_pages = false;
 

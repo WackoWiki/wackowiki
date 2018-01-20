@@ -108,6 +108,9 @@ switch ($config['database_driver'])
 			 The connection string and the database name are ok, proceed
 			 */
 
+			// set chatset
+			mysqli_set_charset($dblink, $config['database_charset']);
+
 			// set SESSION sql_mode
 			if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
 			{
