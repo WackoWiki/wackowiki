@@ -292,6 +292,9 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Сессии удалены.',
 
 	// Basic settings
+	'BasicSettingsInfo'			=> '',
+	'BasicSettingsUpdated'		=> 'Обновлены базовые параметры',
+	'LogBasicSettingsUpdated'	=> 'Обновлены базовые параметры',
 
 	'SiteName'					=> 'Название сайта',
 	'SiteNameInfo'				=> 'Заголовок, отображаемый на страницах сайта, в email-уведомлениях и т.д.',
@@ -762,6 +765,10 @@ $ap_translation = [
 	'FeedsUpdated'				=> 'RSS-каналы обновлены.',
 	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
 	'WikiLinksRestored'			=> 'Wiki-ссылки восстановлены.',
+
+	'LogUserStatsSynched'		=> 'Статистика пользователей синхронизирована.',
+	'LogPageStatsSynched'		=> 'Статистика страниц синхронизирована.',
+	'LogFeedsUpdated'			=> 'RSS-каналы обновлены.',
 
 	'UserStats'					=> 'Пользовательская статистика',
 	'UserStatsInfo'				=> 'Статистика пользователей (количество комментариев, страниц во владении, revisions и files) в некоторых ситуациях может расходиться с реальными данными. <br>Эта операция позволяет пересчетать статистику по текущим фактическим данным БД.',

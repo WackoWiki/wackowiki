@@ -1079,7 +1079,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						else
 						{
 							$this->set_message($this->_t('ModerateCommentsSplitFailed'), 'error');
-							$this->log(2, Ut::perc_replace($this->_t('LogErrorSplitComments'), $this->tag, $section . '/' . $tag));
+							$this->log(2, Ut::perc_replace($this->_t('LogErrorSplitComments', SYSTEM_LANG), $this->tag, $section . '/' . $tag));
 						}
 					}
 					else

@@ -93,10 +93,8 @@ function admin_maint_resync(&$engine, &$module)
 				$engine->db->sql_query($query);
 			}
 
-			$engine->log(1, 'Synchronized user statistics');
-
-			$message = $engine->_t('UserStatsSynched');
-			$engine->show_message($message, 'success');
+			$engine->log(1, $engine->_t('LogUserStatsSynched', SYSTEM_LANG));
+			$engine->show_message($engine->_t('UserStatsSynched'), 'success');
 		}
 		else if ($_REQUEST['action'] == 'pagestats')
 		{
@@ -138,7 +136,7 @@ function admin_maint_resync(&$engine, &$module)
 				$engine->db->sql_query($query);
 			}
 
-			$engine->log(1, 'Synchronized page statistics');
+			$engine->log(1, $engine->_t('LogPageStatsSynched', SYSTEM_LANG));
 
 			$message = $engine->_t('PageStatsSynched');
 			$engine->show_message($message, 'success');
@@ -154,19 +152,17 @@ function admin_maint_resync(&$engine, &$module)
 				$xml->feed();
 			}
 
-			$engine->log(1, 'Synchronized RSS feeds');
+			$engine->log(1, $engine->_t('LogFeedsUpdated', SYSTEM_LANG));
 			unset($xml);
 
-				$message = $engine->_t('FeedsUpdated');
-				$engine->show_message($message, 'success');
+			$engine->show_message($engine->_t('FeedsUpdated'), 'success');
 		}
 		else if ($_REQUEST['action'] == 'xml_sitemap')
 		{
 			// update sitemap
 			$engine->write_sitemap(true, false);
 
-			$message = $engine->_t('SiteMapCreated');
-			$engine->show_message($message, 'success');
+			$engine->show_message($engine->_t('SiteMapCreated'), 'success');
 		}
 		else if ($_REQUEST['action'] == 'wikilinks')
 		{
@@ -223,8 +219,7 @@ function admin_maint_resync(&$engine, &$module)
 			}
 			else
 			{
-				$message = $engine->_t('WikiLinksRestored');
-				$engine->show_message($message, 'success');
+				$engine->show_message($engine->_t('WikiLinksRestored'), 'success');
 			}
 		}
 	}

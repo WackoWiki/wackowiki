@@ -75,7 +75,7 @@ function admin_db_convert(&$engine, &$module)
 		{
 			$sql_log = implode(",\n", $sql_log);
 
-			$engine->log(1, $engine->_t('LogDatabaseConverted'));
+			$engine->log(1, $engine->_t('LogDatabaseConverted', SYSTEM_LANG));
 
 			$message = $engine->_t('ConversionTablesOk');
 			$engine->show_message($message, 'success');
@@ -109,7 +109,7 @@ function admin_db_convert(&$engine, &$module)
 		{
 			$sql_log = implode(",\n", $sql_log);
 
-			$engine->log(1, $engine->_t('LogColumsToStrict'));
+			$engine->log(1, $engine->_t('LogColumsToStrict', SYSTEM_LANG));
 
 			$message = $engine->_t('ConversionColumnsOk');
 			$engine->show_message($message, 'success');
