@@ -335,7 +335,7 @@ $ap_translation = [
 	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmäßig benachbarte Seiten im Namensraum an (setzt die Unterstützung durch das Layout voraus).',
 
 	'DisplayingSections'		=> 'Angezeigte Bereiche',
-	'DisplayingSectionsInfo'	=> 'Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </ em>), nur benachbarte (<em> obere </ em>) oder beide (<em> Baum </ em>) ausgegeben.',
+	'DisplayingSectionsInfo'	=> 'Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </em>), nur benachbarte (<em> obere </em>) oder beide (<em> Baum </em>) ausgegeben.',
 	'MenuItems'					=> 'Menüpunkte',
 	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten Menüelemente (setzt die Unterstützung durch das Layout vorraus).',
 
@@ -528,7 +528,7 @@ $ap_translation = [
 
 	'TlsSection'				=> 'TLS-Einstellungen',
 	'TlsConnection'				=> 'TLS-Verwendung',
-	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich!</ span><br>Es legt auch fest, ob der Cookie Secure Flag gesetzt ist, der <code>secure</code> Flag definiert, ob Cookies nur über sichere Verbindungen geschickt werden sollen.',
+	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich!</span><br>Es legt auch fest, ob der Cookie Secure Flag gesetzt ist, der <code>secure</code> Flag definiert, ob Cookies nur über sichere Verbindungen geschickt werden sollen.',
 	'TlsImplicit'				=> 'TLS erzwingen',
 	'TlsImplicitInfo'			=> 'Erzwingt erneute Verbindung des Clients von HTTP zu HTTPS. Wenn die Option deaktiviert ist, kann der Client die die Webseite über einen verschlüsselten HTTPS-Kanal übertragen.',
 	'TlsProxy'					=> 'TLS-Proxy',
@@ -886,7 +886,7 @@ $ap_translation = [
 
 	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB/XtraDB',
 	'ConvertTablesEngineInfo'	=> 'Falls man über vorhandene Tabellen verfügt, die für eine bessere Zuverlässigkeit und Skalierbarkeit in InnoDB / XtraDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprünglich MyISAM, was früher der Standard war.',
-	'ConvertTablesEngineHint'	=> '* XtraDB ist eine erweiterte Version der InnoDB-Speicher-Engine, die auf moderner Hardware besser skaliert werden kann, und enthält eine Vielzahl anderer Funktionen, die in Hochleistungsumgebungen nützlich sind. Sie ist vollständig abwärtskompatibel und identifiziert sich selbst MariaDB als "<code> ENGINE = InnoDB </ code>" (genau wie InnoDB) und kann daher als ein Drop-In-Ersatz für Standard-InnoDB verwendet werden.',
+	'ConvertTablesEngineHint'	=> '* XtraDB ist eine erweiterte Version der InnoDB-Speicher-Engine, die auf moderner Hardware besser skaliert werden kann, und enthält eine Vielzahl anderer Funktionen, die in Hochleistungsumgebungen nützlich sind. Sie ist vollständig abwärtskompatibel und identifiziert sich selbst MariaDB als "<code> ENGINE = InnoDB </code>" (genau wie InnoDB) und kann daher als ein Drop-In-Ersatz für Standard-InnoDB verwendet werden.',
 
 	'DbVersion'					=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
 	'DbEngineOk'				=> 'InnoDB/XtraDB ist verfügbar.',
