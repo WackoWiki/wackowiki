@@ -38,7 +38,7 @@ $wacko_config_defaults = [
 											: ''
 										) .
 										'/' . preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')) . '/' ,
-	'rewrite_mode'					=> ($found_rewrite_extension ? '1' : '0'),
+	'rewrite_mode'					=> ($found_rewrite_extension ? 1 : 0),
 	'tls'							=> 0,
 	'tls_implicit'					=> 0,
 	'tls_proxy'						=> '',
