@@ -182,7 +182,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$page_select			= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag='" . $tag . "'";
 	$owner_id				= "SELECT user_id FROM " . $config_global['table_prefix'] . "user WHERE user_name = 'System' LIMIT 1";
 
-	// user_id for user System
+	// user_id for user 'System'
 	// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
 	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . $tag . "', '" . translit($tag, $lang) . "', '" . $title . "' , '" . $body . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . $lang . "', 0, 0, 0, " . $noindex . ")";
 
