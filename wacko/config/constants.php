@@ -69,8 +69,8 @@ define('OBJECT_PAGE',					1);
 define('OBJECT_FILE',					2);
 
 define('RECOVERY_MODE',					0);					// restore database
-define('AUTO_REWRITE',					0);					// 0 - off, turns off auto rewrite for debugging,
-															//		with mode_rewrite is still active on your webserver,
+define('AUTO_REWRITE',					1);					// 0 - off, turns off auto rewrite for debugging,
+															//		with mode_rewrite still active on your webserver,
 															//		you're also required to deactivate the rules in the .htaccess file
 
 define('SQL_MODE_STRICT',				'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY');
@@ -82,7 +82,7 @@ define('TRANSLIT_LOAD',					0);
 define('TRANSLIT_DONTLOAD',				1);
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'5.5.1');
+define('WACKO_VERSION',					'5.5.2');
 define('HTML_ENTITIES_CHARSET',			'ISO-8859-1');		// ISO-8859-1, cp1251
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 
@@ -92,4 +92,4 @@ define('ACTION4DIFF',					'anchor, toc');		// allowed actions in DIFF
 
 define('PHP_MIN_VERSION',				'7.0.0');			// minimum required PHP version
 define('PHP_MAX_VERSION',				'7.1.0');			// maximum required PHP version
-define('PHP_ERROR_REPORTING',			6);					// PHP error reporting: 0 - off, 6 - all
+define('PHP_ERROR_REPORTING',			0);					// PHP error reporting: 0 - off, 6 - all
