@@ -19,7 +19,7 @@ if ($config['language'] == $page_lang)
 	}
 
 	insert_page($config['category_page'],	'Категории',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],			'Группы',			'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Группы',			'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],		'Пользователи',		'{{users}}',			$page_lang, 'Admins', false, false);
 }
 

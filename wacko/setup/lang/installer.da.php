@@ -199,7 +199,7 @@ $lang = [
 'ThatsAll' => 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!',
-'RemoveSetupDirectory' => 'You should delete the "setup" directory now that the installation process has been completed.',
+'RemoveSetupDirectory' => 'You should delete the <code>setup/</code> directory now that the installation process has been completed.',
 'ErrorGivePrivileges' => 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br>; don\'t forget to remove write access again later, i.e. %3.<br>If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'WrittenAt' => 'written at ',
