@@ -43,7 +43,7 @@ if ($this->is_owner() || $this->is_admin())
 			// save new list
 			$this->save_categories_list($this->page['page_id'], OBJECT_PAGE);
 
-			$this->log(4, Ut::perc_replace($this->_t('LogCategoriesUpdated'), $this->tag . ' ' . $this->page['title']));
+			$this->log(4, Ut::perc_replace($this->_t('LogCategoriesUpdated', SYSTEM_LANG), $this->tag . ' ' . $this->page['title']));
 			$this->set_message($this->_t('CategoriesUpdated'), 'success');
 			$this->http->redirect($this->href('properties'));
 		}
@@ -91,7 +91,7 @@ if ($this->is_owner() || $this->is_admin())
 							"category_description	= " . $this->db->q($_category_description) . " ");
 
 					$this->set_message($this->_t('CategoriesAdded'), 'success');
-					$this->log(4, Ut::perc_replace($this->_t('LogCategoryCreated'), $_POST['category']));
+					$this->log(4, Ut::perc_replace($this->_t('LogCategoryCreated', SYSTEM_LANG), $_POST['category']));
 					unset($_POST['create']);
 				}
 
@@ -122,7 +122,7 @@ if ($this->is_owner() || $this->is_admin())
 						"LIMIT 1");
 
 					$this->set_message($this->_t('CategoriesRenamed'), 'success');
-					$this->log(4, Ut::perc_replace($this->_t('LogCategoryRenamed'), $word['category'], $_POST['category']));
+					$this->log(4, Ut::perc_replace($this->_t('LogCategoryRenamed', SYSTEM_LANG), $word['category'], $_POST['category']));
 				}
 
 				$this->http->redirect($this->href('categories', '', 'edit'));
@@ -140,7 +140,7 @@ if ($this->is_owner() || $this->is_admin())
 						"LIMIT 1");
 
 					$this->set_message($this->_t('CategoriesUngrouped'), 'success');
-					$this->log(4, Ut::perc_replace($this->_t('LogCategoryDebundled'), $word['category']));
+					$this->log(4, Ut::perc_replace($this->_t('LogCategoryDebundled', SYSTEM_LANG), $word['category']));
 				}
 				else
 				{
@@ -164,7 +164,7 @@ if ($this->is_owner() || $this->is_admin())
 							"WHERE parent_id = " . (int) $_POST['category_id']);
 
 						$this->set_message($this->_t('CategoriesGrouped'), 'success');
-						$this->log(4, Ut::perc_replace($this->_t('LogCategoryGrouped'), $word['category'], $parent['category']));
+						$this->log(4, Ut::perc_replace($this->_t('LogCategoryGrouped', SYSTEM_LANG), $word['category'], $parent['category']));
 					}
 					else
 					{
@@ -191,7 +191,7 @@ if ($this->is_owner() || $this->is_admin())
 					"WHERE parent_id = " . (int) $_POST['category_id']);
 
 				$this->set_message($this->_t('CategoriesDeleted'), 'success');
-				$this->log(4, Ut::perc_replace($this->_t('LogCategoryRemoved'), $word['category']));
+				$this->log(4, Ut::perc_replace($this->_t('LogCategoryRemoved', SYSTEM_LANG), $word['category']));
 
 				$this->http->redirect($this->href('categories', '', 'edit'));
 			}

@@ -62,9 +62,8 @@ function admin_config_email(&$engine, &$module)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!Updated email settings!!');
-		$message = $engine->_t('EmailSettingsUpdated');
-		$engine->set_message($message, 'success');
+		$engine->log(1, '!!' . $engine->_t('EmailSettingsUpdated', SYSTEM_LANG) . '!!');
+		$engine->set_message($engine->_t('EmailSettingsUpdated'), 'success');
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 

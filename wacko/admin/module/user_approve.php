@@ -137,7 +137,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->add_user_page($user['user_name'], $user['user_lang']);
 
 			$engine->show_message($engine->_t('RegistrationApproved'));
-			$engine->log(4, Ut::perc_replace($engine->_t('LogUserApproved', $user['user_name'])));
+			$engine->log(4, Ut::perc_replace($engine->_t('LogUserApproved', SYSTEM_LANG), $user['user_name']));
 		}
 		else if ($_GET['approve'] == 2)
 		{
@@ -145,7 +145,7 @@ function admin_user_approve(&$engine, &$module)
 			$engine->set_account_status($user_id, 2);
 
 			$engine->show_message($engine->_t('RegistrationDenied'));
-			$engine->log(4, Ut::perc_replace($engine->_t('LogUserBlocked', $user['user_name'])));
+			$engine->log(4, Ut::perc_replace($engine->_t('LogUserBlocked', SYSTEM_LANG), $user['user_name']));
 		}
 	}
 	// approve user
@@ -177,7 +177,7 @@ function admin_user_approve(&$engine, &$module)
 						"LIMIT 1");
 
 					$engine->show_message($engine->_t('UsersDeleted'));
-					$engine->log(4, Ut::perc_replace($engine->_t('LogUserDeleted', $user['user_name'])));
+					$engine->log(4, Ut::perc_replace($engine->_t('LogUserDeleted', SYSTEM_LANG), $user['user_name']));
 				}
 			}
 

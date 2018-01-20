@@ -292,6 +292,10 @@ $ap_translation = [
 	'PurgeSessionsDone'			=> 'Sitzungen erfolgreich enfernt.',
 
 	// Basic settings
+	'BasicSettingsInfo'			=> '',
+	'BasicSettingsUpdated'		=> 'Grundeinstellungen aktualisiert',
+	'LogBasicSettingsUpdated'	=> 'Grundeinstellungen aktualisiert',
+
 	'SiteName'					=> 'Name der Seite',
 	'SiteNameInfo'				=> 'Der Seitentitel (title-Element im HTML-Kopf) erscheint in der Titelleiste von Browserfenstern und den Registerkarten, im Theme Header, bei Email Benachrichtigung, etc.',
 	'SiteDesc'					=> 'Beschreibung der Seite',
@@ -771,6 +775,10 @@ $ap_translation = [
 	'FeedsUpdated'				=> 'RSS-Feeds aktualisiert.',
 	'SiteMapCreated'			=> 'Die neue Version der Sitemap wurde erfolgreich erstellt.',
 	'WikiLinksRestored'			=> 'Wiki-Links wiederhergestellt.',
+
+	'LogUserStatsSynched'		=> 'Benutzerstatistiken synchronisiert',
+	'LogPageStatsSynched'		=> 'Seitenstatistiken synchronisiert',
+	'LogFeedsUpdated'			=> 'RSS-Feeds synchronisiert',
 
 	'UserStats'					=> 'Benutzerstatistik',
 	'UserStatsInfo'				=> 'Benutzerstatistiken (Anzahl der Kommentare, besessene Seiten, Revisionen und Dateien) können in einigen Situationen von den tatsächlichen Daten abweichen.<br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',
