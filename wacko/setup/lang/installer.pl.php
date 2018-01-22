@@ -12,6 +12,9 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
+	// site name
+	'site_name'			=> 'MyWikiSite',
+
 	// pages
 	'category_page'		=> 'Category',
 	'groups_page'		=> 'Groups',
@@ -123,7 +126,7 @@ $lang = [
 'DBEngine' => 'Engine',
 'DBEngineDesc' => 'The database engine you want to use. You must choose MyISAM engine if you do not have at least MariaDB 10 or MySql 5.6 (or greater) and InnoDB support available.',
 'DBHost' => 'Host',
-'DBHostDesc' => 'The host your database server is running on. Usually "localhost" (ie, the same machine your WackoWiki site is on).',
+'DBHostDesc' => 'The host your database server is running on. Usually "127.0.0.1" or "localhost" (ie, the same machine your WackoWiki site is on).',
 'DBPort' => 'Port (Optional)',
 'DBPortDesc' => 'The port number your database server is accessable through, leave it blank to use the default port number.',
 'DB' => 'Baza danych',

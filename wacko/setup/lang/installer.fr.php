@@ -12,6 +12,9 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
+	// site name
+	'site_name'			=> 'MyWikiSite',
+
 	// pages
 	'category_page'		=> 'Catégories',
 	'groups_page'		=> 'Groups',

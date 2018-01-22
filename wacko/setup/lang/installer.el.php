@@ -12,6 +12,9 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
+	// site name
+	'site_name'			=> 'MyWikiSite',
+
 	// pages
 	'category_page'		=> 'Category',
 	'groups_page'		=> 'Groups',
@@ -125,7 +128,7 @@ $lang = [
 'DBEngine' => 'Engine',
 'DBEngineDesc' => 'The database engine you want to use. You must choose MyISAM engine if you do not have at least MariaDB 10 or MySql 5.6 (or greater) and InnoDB support available.',
 'DBHost' => 'Διακομιστής',
-'DBHostDesc' => 'Το όνομα του διακομιστή βάσεων δεδομένων που τρέχει σε αυτό. Συνήθως είναι "localhost" (π.χ., το ίδιο όνομα που είναι το WackoWiki site σας).',
+'DBHostDesc' => 'Το όνομα του διακομιστή βάσεων δεδομένων που τρέχει σε αυτό. Συνήθως είναι "127.0.0.1" ή "localhost" (π.χ., το ίδιο όνομα που είναι το WackoWiki site σας).',
 'DBPort' => 'Πόρτα (Προαιρετικό)',
 'DBPortDesc' => 'Ο αριθμός της πόρτας του διακομιστή βάσεων δεδομένων σας αν είναι προσβάσιμος σε αυτή, αφήστε το κενό εάν χρησιμοποιείτε
 τον προκαθορισμένο αριθμό πόρτας.',

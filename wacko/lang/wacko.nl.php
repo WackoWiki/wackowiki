@@ -593,7 +593,7 @@ $wacko_translation = [
 	'NotOwnerAndViewWatchers'	=> 'U bent niet de eigenaar van deze pagina, en kunt de lijst van watchers dus niet bekijken.</em',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Genereer de wachtwoordhash voor uw recovery_password',
+	'GenerateRecoveryHash'		=> 'Genereer de wachtwoordhash voor uw <code>recovery_password</code>',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
