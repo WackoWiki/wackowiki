@@ -592,6 +592,9 @@ $wacko_translation = [
 	'NoWatchers'				=> 'Er zijn geen mensen die %1 in de gaten houden.',
 	'NotOwnerAndViewWatchers'	=> 'U bent niet de eigenaar van deze pagina, en kunt de lijst van watchers dus niet bekijken.</em',
 
+	// admin_recovery action
+	'GenerateRecoveryHash'		=> 'Genereer de wachtwoordhash voor uw recovery_password',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',

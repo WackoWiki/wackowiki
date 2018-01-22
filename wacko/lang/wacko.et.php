@@ -592,6 +592,9 @@ $wacko_translation = [
 	'NoWatchers'				=> 'Keegi ei jälgi %1',
 	'NotOwnerAndViewWatchers'	=> 'Sa ei ole selle lehe omanik ja seetõttu sa ei saa vaadata nimekirja inmestest kes seda lehte jälgivad.',
 
+	// admin_recovery action
+	'GenerateRecoveryHash'		=> 'Generate the password hash for your recovery_password',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',

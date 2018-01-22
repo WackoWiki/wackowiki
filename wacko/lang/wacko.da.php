@@ -592,6 +592,9 @@ $wacko_translation = [
 	'NoWatchers'				=> 'Ingen abonnenter til %1',
 	'NotOwnerAndViewWatchers'	=> 'Du har ikke adgang til denne information.',
 
+	// admin_recovery action
+	'GenerateRecoveryHash'		=> 'Generer kodeordets hash for dit recovery_password',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',
