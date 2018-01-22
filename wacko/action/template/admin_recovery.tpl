@@ -6,7 +6,7 @@
 		</div>
 	=]
 
-	<h2>[ ' _t: GenerateRecoveryHash ' ]Generate the password hash for your recovery_password</h2>
+	<h2>[ ' _t: GenerateRecoveryHash ' ]</h2>
 
 	<form action="[ ' href ' ]" method="post" name="generate_hash">
 		['' csrf: generate_hash '']
