@@ -592,6 +592,9 @@ $wacko_translation = [
 	'NoWatchers'				=> 'Não ninguém a acompanhar %1',
 	'NotOwnerAndViewWatchers'	=> 'Não sendo o dono desta página não pode ver a lista de que a acompanha.',
 
+	// admin_recovery action
+	'GenerateRecoveryHash'		=> 'Gere o hash de senha para sua recovery_password',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',

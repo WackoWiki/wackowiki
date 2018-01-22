@@ -595,6 +595,9 @@ $wacko_translation = [
 	'NoWatchers'				=> 'За страницей %1 никто не наблюдает',
 	'NotOwnerAndViewWatchers'	=> 'Вы не владеете страницей %1 и поэтому не можете получить список наблюдающих за ней',
 
+	// admin_recovery action
+	'GenerateRecoveryHash'		=> 'Создайте хэш пароля для вашего пароля recovery_password',
+
 	// mywatches action
 	'WatchedPages'				=> 'Список всех страниц, за изменениями которых вы следите',
 	'UnwatchedPages'			=> 'Список тех страниц, за которыми вы не наблюдаете',

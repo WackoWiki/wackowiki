@@ -592,6 +592,9 @@ $wacko_translation = [
 	'NoWatchers'				=> 'Personne ne surveille %1',
 	'NotOwnerAndViewWatchers'	=> 'N&rsquo;étant pas le propriétaire de cette page, vous ne pouvez pas voir la liste des utilisateurs qui la surveillent.',
 
+	// admin_recovery action
+	'GenerateRecoveryHash'		=> 'Générez le hachage de mot de passe pour votre mot de recovery_password',
+
 	// mywatches action
 	'WatchedPages'				=> 'Liste de toutes les pages que vous surveillez',
 	'UnwatchedPages'			=> 'Liste de toutes les pages que vous ne surveillez pas',
