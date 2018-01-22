@@ -12,6 +12,9 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
+	// site name
+	'site_name'			=> 'MyWikiSite',
+
 	// pages
 	'category_page'		=> 'Kategorie',
 	'groups_page'		=> 'Gruppen',
@@ -49,9 +52,9 @@ $lang = [
 'PHPVersion' => 'PHP Version',
 'PHPDetected' => 'Erkannt PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
-'ModRewriteInstalled' => 'Rewrite Extension (mod_rewrite) Installiert?',
+'ModRewriteInstalled' => 'Rewrite Erweiterung (mod_rewrite) Installiert?',
 'Database' => 'Datenbank',
-'PHPExtensions' => 'PHP Extensions',
+'PHPExtensions' => 'PHP Erweiterungen',
 'Permissions' => 'Berechtigungen',
 'ReadyToInstall' => 'Bereit zur Installation?',
 'Requirements' => 'Dein Server muss den folgenden Anforderungen entsprechen.',
@@ -123,7 +126,7 @@ $lang = [
 'DBEngine' => 'Engine',
 'DBEngineDesc' => 'Die Datenbank-Engine, die du verwenden möchtest. Es muss die MyISAM-Engine verwendet werden, wenn MariaDB 10 oder MySql 5.6 (oder größer) und InnoDB Unterstützung nicht verfügbar ist.',
 'DBHost' => 'Host',
-'DBHostDesc' => 'Der Server, auf dem deine Datenbank läuft. Normalerweise "localhost" (wenn dein WackoWiki auf dem gleichen Server ist) oder der Host deines Providers.',
+'DBHostDesc' => 'Der Server, auf dem deine Datenbank läuft. Normalerweise "127.0.0.1" oder "localhost" (wenn dein WackoWiki auf dem gleichen Server ist) oder der Host deines Providers.',
 'DBPort' => 'Port (Optional)',
 'DBPortDesc' => 'Die Port-Nummer über die dein Datenbankservers erreichbar ist, bei Verwendung der default Port Nummer leer lassen.',
 'DB' => 'Datenbank Name',

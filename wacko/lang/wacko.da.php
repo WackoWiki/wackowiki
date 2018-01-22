@@ -593,7 +593,7 @@ $wacko_translation = [
 	'NotOwnerAndViewWatchers'	=> 'Du har ikke adgang til denne information.',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Generer kodeordets hash for dit recovery_password',
+	'GenerateRecoveryHash'		=> 'Generer kodeordets hash for dit <code>recovery_password</code>',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',

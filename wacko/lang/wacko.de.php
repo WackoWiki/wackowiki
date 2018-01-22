@@ -594,7 +594,7 @@ $wacko_translation = [
 	'NotOwnerAndViewWatchers'	=> 'Du bist nicht der Besitzer dieser Seite und kannst die Liste der Beobachter nicht einsehen.',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Generiere den Passwort-Hash für dein recovery_password',
+	'GenerateRecoveryHash'		=> 'Generiere den Passwort-Hash für dein <code>recovery_password</code>',
 
 	// mywatches action
 	'WatchedPages'				=> 'Liste aller Seiten, die du auf Änderungen beobachtest',

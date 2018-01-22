@@ -593,7 +593,7 @@ $wacko_translation = [
 	'NotOwnerAndViewWatchers'	=> 'Sa ei ole selle lehe omanik ja seetõttu sa ei saa vaadata nimekirja inmestest kes seda lehte jälgivad.',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Generate the password hash for your recovery_password',
+	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
