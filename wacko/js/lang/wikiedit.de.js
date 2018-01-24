@@ -32,10 +32,10 @@ lang = {
 	CodeWrapper :			"Code Container",
 	HTML :					"HTML",
 	Action :				"Aktion",
-	Line :					"Line",
-	Signature :				"Signature",
+	Line :					"Linie",
+	Signature :				"Signatur",
 	Quote :					"Zitat",
-	MarkedText :			"Marked text",
+	MarkedText :			"Text markierten",
 	HighlightText :			"Text hervorheben",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
@@ -50,10 +50,10 @@ lang = {
 							' Strg+U - Unterstrichen\n'+
 							' Strg+Umschalt+S - Durchgestrichen\n'+
 							' Strg+Umschalt+1 .. 4 - Überschrift 1..4\n'+
-							' Alt+I or Ctrl+T - Einrücken\n'+
-							' Alt+U or Ctrl+Shift+T - Ausrücken\n'+
-							' Strg+J - Auszeichnen (!!)\n'+
-							' Strg+H - Auszeichnen (??)\n'+
+							' Alt+I oder Ctrl+T - Einrücken\n'+
+							' Alt+U oder Ctrl+Shift+T - Ausrücken\n'+
+							' Strg+J - Hervorheben (!!)\n'+
+							' Strg+H - Markieren (??)\n'+
 							' Alt+L - Link\n'+
 							' Strg+L - Link mit Beschreibung\n'+
 							' Strg+Umschalt+L - Ungeordnete Liste\n'+
