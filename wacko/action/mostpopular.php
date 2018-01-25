@@ -100,10 +100,10 @@ else
 				: "AND b.tag = " . $this->db->q($page) . " ") .
 			"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
 			($user_id
-				? "AND owner_id <> " . (int) $user_id . " "
+				? "AND a.owner_id <> " . (int) $user_id . " "
 				: "") .
 			($lang
-				? "AND page_lang = " . $this->db->q($lang) . " "
+				? "AND a.page_lang = " . $this->db->q($lang) . " "
 				: "");
 
 	$sql_count	=
@@ -129,6 +129,7 @@ if (!empty($pages))
 		$page_ids[] = (int) $page['page_id'];
 		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$page['tag']] = $page['page_id'];
+		$this->cache_page($page, true);
 	}
 
 	// cache acls
