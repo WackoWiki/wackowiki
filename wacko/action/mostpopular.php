@@ -11,19 +11,23 @@ if (!defined('IN_WACKO'))
  All arguments are optional, the "dontrecurse" argument is only used when the "page" argument is used and even then it's still optional
 
  {{mostpopular
-	[max=50] // maximum number of pages to retrieve
-	[page="PageName"] // page name to start from in the page hierarchy
-	[title=1] // shows the page title
-	[nomark=1] // makes it possible to hide frame around
-	[dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "page" cluster
+	[max=50]					// maximum number of pages to retrieve
+	[page="PageName"]			// page name to start from in the page hierarchy
+	[title=1]					// shows the page title
+	[nomark=1]					// makes it possible to hide frame around
+	[dontrecurse="true|false"]	// if set to true the list will only include pages that are direct children of the "page" cluster
+	[system=0|1]				// excludes system pages
+	[lang="ru"]					// show pages only in specified language
  }}
  */
 
 if (!isset($for))			$for = ''; // depreciated
 if ($for)					$page = $for;
 
+if (!isset($system))		$system = 1;
 if (!isset($page))			$page = '';
 if (!isset($nomark))		$nomark = 0;
+if (!isset($lang))			$lang = '';
 if (!isset($max))			$max = null;
 if (!isset($legend))		$legend = '';
 if (!isset($title))			$title = 0;
@@ -46,17 +50,29 @@ else
 	$ppage		= '';
 }
 
+$system == true
+	? $user_id		= $this->db->system_user_id
+	: $user_id		= null;
+
 if (!$page)
 {
 	$selector =
-		"FROM " . $this->db->table_prefix . "page ";
+		"FROM " . $this->db->table_prefix . "page " .
+		"WHERE  comment_on_id = 0 " .
+		"AND deleted = 0 " .
+		($user_id
+			? "AND owner_id <> " . (int) $user_id . " "
+			: "") .
+		($lang
+			? "AND page_lang = " . $this->db->q($lang) . " "
+			: "");
 
 	$sql_count	=
 		"SELECT COUNT(page_id) AS n " .
 		$selector;
 
 	$sql	=
-		"SELECT page_id, tag, title, hits " .
+		"SELECT page_id, tag, title, hits, page_lang " .
 		$selector .
 		"ORDER BY hits DESC ";
 }
@@ -75,19 +91,27 @@ else
 		"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
 			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-		"WHERE a.tag <> " . $this->db->q($page) . " " .
+		"WHERE a.comment_on_id = 0 " .
+			"AND a.deleted = 0 " .
+			"AND a.tag <> " . $this->db->q($page) . " " .
 			"AND a.tag = c.tag " .
 			($recurse
 				? "AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 "
 				: "AND b.tag = " . $this->db->q($page) . " ") .
-			"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 ";
+			"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
+			($user_id
+				? "AND owner_id <> " . (int) $user_id . " "
+				: "") .
+			($lang
+				? "AND page_lang = " . $this->db->q($lang) . " "
+				: "");
 
 	$sql_count	=
 		"SELECT COUNT(DISTINCT a.page_id) AS n " .
 		$selector;
 
 	$sql	=
-		"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits " .
+		"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits, a.page_lang " .
 		$selector .
 		"ORDER BY a.hits DESC ";
 }
@@ -133,13 +157,16 @@ if (!empty($pages))
 			// print entry
 			$num++;
 
+			// do unicode entities
+			$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
+
 			if ($title == 1)
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['title']);
+				$_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
 			}
 			else
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['tag']);
+				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
 			}
 
 			echo "<tr><td>&nbsp;&nbsp;" . $num . ".</td><td>" . $_link . "</td>" .

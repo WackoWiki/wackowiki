@@ -11,11 +11,12 @@ if (!defined('IN_WACKO'))
  All arguments are optional, the "dontrecurse" argument is only used when the "page" argument is used and even then it's still optional
 
  {{mostcommented
-	[max=50] // maximum number of pages to retrieve
-	[page="PageName"] // page name to start from in the page hierarchy
-	[title=1] // shows the page title
-	[nomark=1] // makes it possible to hide frame around
-	[dontrecurse="true|false"] // if set to true the list will only include pages that are direct children of the "page" cluster
+	[max=50]					// maximum number of pages to retrieve
+	[page="PageName"]			// page name to start from in the page hierarchy
+	[title=1]					// shows the page title
+	[nomark=1]					// makes it possible to hide frame around
+	[dontrecurse="true|false"]	// if set to true the list will only include pages that are direct children of the "page" cluster
+	[lang="ru"]					// show pages only in specified language
  }}
  */
 
@@ -62,14 +63,19 @@ if (!$page)
 {
 	$selector =
 		"FROM " . $this->db->table_prefix . "page " .
-		"WHERE comments >= 1 ";
+		"WHERE comments >= 1 " .
+			"AND comment_on_id = 0 " .
+			"AND deleted = 0 " .
+		($lang
+			? "AND page_lang = " . $this->db->q($lang) . " "
+			: "");
 
 	$sql_count	=
 		"SELECT COUNT(page_id) AS n " .
 		$selector;
 
 	$sql	=
-		"SELECT page_id, tag, title, comments " .
+		"SELECT page_id, tag, title, comments, page_lang " .
 		$selector .
 		"ORDER BY comments DESC ";
 }
@@ -94,14 +100,19 @@ else
 				? "AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 "
 				: "AND b.tag = " . $this->db->q($page) . " ") .
 			"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
-			"AND a.comments >= 1 ";
+			"AND a.comments >= 1 " .
+			"AND a.comment_on_id = 0 " .
+			"AND a.deleted = 0 " .
+			($lang
+				? "AND a.page_lang = " . $this->db->q($lang) . " "
+				: "");
 
 	$sql_count	=
 		"SELECT COUNT(DISTINCT a.page_id) AS n " .
 		$selector;
 
 	$sql	=
-		"SELECT DISTINCT a.page_id, a.tag, a.title, a.comments " .
+		"SELECT DISTINCT a.page_id, a.tag, a.title, a.comments, a.page_lang " .
 		$selector .
 		"ORDER BY a.comments DESC ";
 }
@@ -142,18 +153,21 @@ if (!empty($pages))
 			// print entry
 			$num++;
 
+			// do unicode entities
+			$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
+
 			if ($title == 1)
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['title']);
+				$_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
 			}
 			else
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['tag']);
+				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
 			}
 
-			echo "<tr><td>&nbsp;&nbsp;" . $num.".</td><td>" . $_link . "</td>" .
-				"<td>&nbsp;&nbsp;</td><td>" .
-				'<a href="' . $this->href('', $page['tag'], ['show_comments' => 1]) . '#header-comments">' . $page['comments'] . '</a></td></tr>' . "\n";
+			echo '<tr><td>&nbsp;&nbsp;' . $num . '.</td><td>' . $_link . "</td>" .
+				"<td>&nbsp;&nbsp;</td>\n<td>" .
+				'<a href="' . $this->href('', $page['tag'], ['show_comments' => 1]) . '#header-comments">' . number_format($page['comments'], 0, ',', '.') . '</a></td></tr>' . "\n";
 		}
 	}
 
