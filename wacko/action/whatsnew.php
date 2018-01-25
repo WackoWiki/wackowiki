@@ -5,11 +5,18 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO: per cluster, pagination, hard coded icons
+/*
+ What's New Action
+ Displays a list of all new, deleted, or changed pages, new attachments, and comments.
 
-if (!isset($max))		$max = '';
-if (!isset($noxml))		$noxml = '';
-if (!isset($printed))	$printed = [];
+ {{whatsnew}}
+
+ TODO: per cluster, RSS feed
+*/
+
+if (!isset($max))		$max		= null;
+if (!isset($noxml))		$noxml		= 0;
+if (!isset($printed))	$printed	= [];
 
 if (!$max || $max > 100) $max = 100;
 
