@@ -41,7 +41,7 @@ if (!isset($legend)) $legend = '';
 
 // collect pages
 if ($pages = $this->db->load_all(
-	"SELECT page_id, tag, supertag, title " .
+	"SELECT page_id, tag, supertag, title, page_lang " .
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = 0 " .
 		"AND tag LIKE " . $this->db->q($_root . '/%') . " " .
@@ -83,10 +83,9 @@ if ($pages = $this->db->load_all(
 		{
 			foreach ($links as $link)
 			{
-				$this->cache_page($link, true);
-
 				// cache page_id for for has_access validation in link function
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
+				$this->cache_page($link, true);
 			}
 		}
 
@@ -195,7 +194,10 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-					echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, '', 0);
+					// do unicode entities
+					$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
+
+					echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
 				}
 
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '</strong>';
