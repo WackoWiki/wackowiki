@@ -21,7 +21,7 @@ if ($page)			$root	= $page;
 if ($root == '/')	$root	= '';
 if ($root)			$root	= $this->unwrap_link($root);
 
-$_root		= $root; // without slash -> LIKE /%
+$cluster	= $root; // without slash -> LIKE /%
 $root		= $root . '/';
 
 if (!isset($depth)) $depth = '';
@@ -44,7 +44,9 @@ if ($pages = $this->db->load_all(
 	"SELECT page_id, tag, supertag, title, page_lang " .
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = 0 " .
-		"AND tag LIKE " . $this->db->q($_root . '/%') . " " .
+		($cluster
+			? "AND tag LIKE " . $this->db->q($cluster . '/%') . " "
+			: "") .
 		"AND deleted <> 1 " .
 	"ORDER BY tag", true))
 {
@@ -93,7 +95,7 @@ if ($pages = $this->db->load_all(
 		$this->preload_acl($page_ids);
 
 		// header
-		if ($root)
+		if ($cluster)
 		{
 			if (!$nomark)
 			{
@@ -103,8 +105,7 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-					$legend = $this->_t('TreeClusterTitle');
-					$legend = Ut::perc_replace($legend, $this->link('/' . $root, '', rtrim($root, '/'))) . ':';
+					$legend = Ut::perc_replace($this->_t('TreeClusterTitle'), $this->link('/' . $root, '', rtrim($root, '/'))) . ':';
 				}
 
 				echo '<nav class="layout-box"><p><span>' . $legend . "</span></p>\n";
@@ -235,18 +236,16 @@ if ($pages = $this->db->load_all(
 	else
 	{
 		// no results in given level $depth
-		$title_empty_tree = $this->_t('TreeEmptyLevels');
-		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
-		echo '<em>' . $title_empty_tree . '</em><br>';
+		$empty_tree = Ut::perc_replace($this->_t('TreeEmptyLevels'), $this->link('/' . $root, '', rtrim($root, '/')));
+		echo '<em>' . $empty_tree . '</em><br>';
 	}
 }
 else
 {
 	if (!$nomark)
 	{
-		$title_empty_tree = $this->_t('TreeEmpty');
-		$title_empty_tree = Ut::perc_replace($title_empty_tree, $this->link('/' . $root, '', rtrim($root, '/')));
-		echo '<em>' . $title_empty_tree . '</em><br>';
+		$empty_tree = Ut::perc_replace($this->_t('TreeEmpty'), $this->link('/' . $root, '', rtrim($root, '/')));
+		echo '<em>' . $empty_tree . '</em><br>';
 	}
 }
 
