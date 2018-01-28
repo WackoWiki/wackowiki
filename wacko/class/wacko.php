@@ -5519,7 +5519,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->db->load_all(
-				"SELECT p.page_id, parent_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name " .
+				"SELECT p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name " .
 				"FROM " . $this->db->table_prefix . "page p " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .

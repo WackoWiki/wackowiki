@@ -125,10 +125,10 @@ if ($this->has_access('read'))
 				echo '<article class="comment-text">' . "\n";
 
 				// show remove comment button
-				if ($this->is_admin() ||
-				(!$this->db->remove_onlyadmins
-					&& ($this->is_owner($comment['page_id'])
-					|| ($this->db->owners_can_remove_comments && $this->is_owner($this->page['page_id']))
+				if ($this->is_admin()
+					|| (!$this->db->remove_onlyadmins
+						&& ($this->is_owner($comment['page_id'])
+						|| ($this->db->owners_can_remove_comments && $this->is_owner($this->page['page_id']))
 				)))
 				{
 					$handler_button .= '<a href="' . $this->href('remove', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" style="float: right; padding: 2px;" class="btn-delete"></a>';
