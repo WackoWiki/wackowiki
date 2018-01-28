@@ -477,6 +477,7 @@ $wacko_translation = [
 	'TreeSiteTitle'				=>'Saitide puu',
 	'TreeEmpty'					=> '%1&nbsp;-el ei ole alamlehti',
 	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler
 	'ClonePage'					=> 'Clone page',

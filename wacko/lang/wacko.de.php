@@ -478,6 +478,7 @@ $wacko_translation = [
 	'TreeSiteTitle'				=> 'Baumansicht der Seite',
 	'TreeEmpty'					=> '%1&nbsp;hat keine Unterseiten',
 	'TreeEmptyLevels'			=> '%1&nbsp;hat keine Unterseiten für die angegebene Baumtiefe. Erhöhe den Wert für die Tiefe.',
+	'TreeTooBig'				=> 'zu viele Unterseiten',
 
 	// clone handler
 	'ClonePage'					=> 'Klone Seite',

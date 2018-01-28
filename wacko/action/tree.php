@@ -16,6 +16,7 @@ $limit	= 500;
 if (!isset($root) && !isset($page))
 					$root	= '/' . $this->page['tag'];
 if (!isset($page)) $page = '';
+if (!isset($root)) $root = '';
 if (!isset($title)) $title = 1;
 if ($page)			$root	= $page;
 if ($root == '/')	$root	= '';
