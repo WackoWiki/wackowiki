@@ -202,7 +202,7 @@ if ($this->is_admin()
 		// return to commented page
 		if ($comment_on_id)
 		{
-			echo '<br>' . $this->compose_link_to_page($comment_on['tag'] . '#header-comments', '', '&laquo; ' . $this->_t('ReturnToCommented'));
+			echo '<br>' . $this->compose_link_to_page($comment_on['tag'], '', '&laquo; ' . $this->_t('ReturnToCommented'), '', false, ['#' => 'header-comments']);
 		}
 	}
 	else
