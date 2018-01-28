@@ -477,6 +477,7 @@ $wacko_translation = [
 	'TreeSiteTitle'				=> 'Drzewo odno¶ników witryny',
 	'TreeEmpty'					=> '%1 nie zawiera podstron',
 	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler
 	'ClonePage'					=> 'Clone page',

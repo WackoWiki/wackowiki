@@ -478,6 +478,7 @@ $wacko_translation = [
 	'TreeSiteTitle'				=> 'Дерево сайта',
 	'TreeEmpty'					=> '%1&nbsp;не содержит подстраниц.',
 	'TreeEmptyLevels'			=> '%1&nbsp;не содержит подстраниц заданных уровней глубины. Увеличьте значение глубины.',
+	'TreeTooBig'				=> 'слишком много подстраниц',
 
 	// clone handler
 	'ClonePage'					=> 'Клонировать страницу',

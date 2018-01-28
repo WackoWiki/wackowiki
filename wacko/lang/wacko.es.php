@@ -477,6 +477,7 @@ $wacko_translation = [
 	'TreeSiteTitle'				=> 'Arbol de web',
 	'TreeEmpty'					=> '%1&nbsp;no tiene sub-páginas',
 	'TreeEmptyLevels'			=> '%1&nbsp;no tiene sub-páginas para el nivel indicado. Aumente el valor de nivel.',
+	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler
 	'ClonePage'					=> 'Clonar página',

@@ -477,6 +477,7 @@ $wacko_translation = [
 	'TreeSiteTitle'				=> 'Boom van alle pagina\'s',
 	'TreeEmpty'					=> '%1&nbsp;heeft geen subpagina\'s',
 	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler
 	'ClonePage'					=> 'Clone page',
