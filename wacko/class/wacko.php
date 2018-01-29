@@ -7055,14 +7055,22 @@ class Wacko
 		{
 			$link = '';
 
-			foreach (explode('/', $this->tag) as $step)
+			foreach (explode('/', $this->tag) as $n => $step)
 			{
+				# Diag::dbg('GOLD', $n, $step);
+
 				if ($link)
 				{
 					$link .= '/';
 				}
 
 				$link .= $step;
+
+				// skip if current page is home page
+				if ($root_page && $n < 1 && !strcasecmp($this->db->root_page, $step))
+				{
+					continue;
+				}
 
 				if ($result)
 				{
