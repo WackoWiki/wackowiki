@@ -5,22 +5,51 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// shows tree list
-// {{tree [page="tag"] [depth=3] [nomark=0] [legend=""]}}
-// use [page="/"] to get the entire root
+/*
+ shows tree list
+
+ {{tree
+	[page="tag"]
+	[depth=3]
+	[nomark=0]
+	[legend=""]
+	[system=0|1]		// excludes system pages
+	[lang="ru"]			// show pages only in specified language
+ }}
+
+ use [page="/"] to get the entire root
+
+ */
 
 // constants
 $limit	= 500;
 
 // input
 if (!isset($root) && !isset($page))
-					$root	= '/' . $this->page['tag'];
-if (!isset($page)) $page = '';
-if (!isset($root)) $root = '';
-if (!isset($title)) $title = 1;
-if ($page)			$root	= $page;
-if ($root == '/')	$root	= '';
-if ($root)			$root	= $this->unwrap_link($root);
+{
+	$root	= '/' . $this->page['tag'];
+}
+
+if (!isset($page))		$page = '';
+if (!isset($root))		$root = '';
+if (!isset($title))		$title = 1;
+if (!isset($system))	$system = 0;
+if (!isset($lang))		$lang = '';
+
+$system == true
+	? $user_id		= $this->db->system_user_id
+	: $user_id		= null;
+
+if ($lang && !$this->known_language($lang))
+{
+	$lang = '';
+	#$this->set_message('The selected language is not available!');
+}
+
+if ($page)				$root	= $page;
+if ($root == '/')		$root	= '';
+if ($root)				$root	= $this->unwrap_link($root);
+
 
 $cluster	= $root; // without slash -> LIKE /%
 $root		= $root . '/';
@@ -28,6 +57,7 @@ $root		= $root . '/';
 if (!isset($depth)) $depth = '';
 // TODO: set default depth level via config
 // TODO: show missing sublevels
+// TODO: add paging
 if (!$depth || $depth < 1)
 {
 	$depth	= 1;
@@ -47,6 +77,12 @@ if ($pages = $this->db->load_all(
 	"WHERE comment_on_id = 0 " .
 		($cluster
 			? "AND tag LIKE " . $this->db->q($cluster . '/%') . " "
+			: "") .
+		($user_id
+			? "AND owner_id <> " . (int) $user_id . " "
+			: "") .
+		($lang
+			? "AND page_lang = " . $this->db->q($lang) . " "
 			: "") .
 		"AND deleted <> 1 " .
 	"ORDER BY tag", true))
@@ -192,7 +228,6 @@ if ($pages = $this->db->load_all(
 				{
 					// do not link the page to itself
 					echo $page['title'] ?? $page['tag'];
-					#echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, '', 0);
 				}
 				else
 				{

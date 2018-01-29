@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 
 if (!empty($this->db->news_cluster))
 {
-	if (!isset($max))	$max = '';
+	if (!isset($max))	$max = 10;
 	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';
