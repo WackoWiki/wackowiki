@@ -119,7 +119,7 @@ $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_k
 	else
 	{
 		$tpl->enter('out_');
-		$tpl->method	= ($method == 'show' ? '.' : $this->href($method));
+		$tpl->method	= ($method == 'show' ? $this->href() : $this->href($method));
 		$tpl->hint		= $this->_t($hint);
 		$tpl->params	= $params;
 
@@ -173,7 +173,6 @@ else
 		// no revisions - nothing to show
 		$this->hide_revisions = -1;
 	}
-
 
 	// revisions tab
 	if (!$this->forum && $readable && !$this->hide_revisions)
@@ -294,7 +293,7 @@ $tpl->leave();
 
 $tpl->search		= $this->href('', $this->_t('SearchPage'));
 $tpl->breadcrumbs	= $this->get_page_path($titles = false, ' &gt; ', true, true);
-// '<br>' . $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
+// $tpl->usertrail	= $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
 
 if (!isset($this->sess->php_version))
 {
