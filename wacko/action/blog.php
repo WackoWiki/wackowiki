@@ -15,7 +15,7 @@ $blog_cluster	= $page;
 
 if (!empty($blog_cluster))
 {
-	if (!isset($max))	$max = '';
+	if (!isset($max))	$max = 10;
 	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';

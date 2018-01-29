@@ -20,12 +20,16 @@ if (!defined('IN_WACKO'))
 if (!isset($for))		$for = ''; // depreciated
 if ($for)				$page = $for;
 
-if (!isset($system))	$system = 0;
 if (!isset($page))		$page = '';
 if (!isset($title))		$title = 0;
 if (!isset($letter))	$letter = '';
+if (!isset($system))	$system = 0;
 if (!isset($lang))		$lang = '';
 if (!isset($max))		$max = null;
+
+$system == true
+	? $user_id		= $this->db->system_user_id
+	: $user_id		= null;
 
 if ($lang && !$this->known_language($lang))
 {
@@ -33,13 +37,11 @@ if ($lang && !$this->known_language($lang))
 	#$this->set_message('The selected language is not available!');
 }
 
+
+
 $tag		= $page; // use tag from here on
 $title		= (int) $title;
 $_alnum		= '/' . $this->language['ALPHANUM'] . '/S';
-
-$system == true
-	? $user_id		= $this->db->system_user_id
-	: $user_id		= null;
 
 
 
