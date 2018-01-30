@@ -30,7 +30,6 @@ if (isset($_GET['markread']) && $user)
 
 if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_minor_edit))
 {
-
 	if ($user)
 	{
 		echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
@@ -63,7 +62,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 					echo "</ul>\n<br></li>\n";
 				}
 
-				echo "<li><strong>" . $day . "</strong>\n<ul>\n";
+				echo '<li><strong>' . $day . "</strong>\n<ul>\n";
 				$curday = $day;
 			}
 
@@ -88,8 +87,9 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 				$edit_note = '<span class="editnote">[' . $edit_note . ']</span>';
 			}
 
-			if (isset($user['last_mark']) && $user['last_mark'] &&
-					$page['user_name'] != $user['user_name'] && $page['modified'] > $user['last_mark'])
+			if (isset($user['last_mark']) && $user['last_mark']
+				&& $page['user_name'] != $user['user_name']
+				&& $page['modified'] > $user['last_mark'])
 			{
 				$viewed = ' viewed';
 			}
@@ -98,7 +98,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
 
 			// page_size change
-			$size_delta			= $page['page_size'] - $page['parent_size'];
+			$size_delta = $page['page_size'] - $page['parent_size'];
 
 			// print entry
 			echo '<li class="lined' . $viewed . '"><span class="dt">' .

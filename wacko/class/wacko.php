@@ -1772,7 +1772,7 @@ class Wacko
 		$selector =
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-				"INNER JOIN " . $this->db->table_prefix . "revision r1 ON (p.page_id = r1.page_id) " .
+				"LEFT JOIN " . $this->db->table_prefix . "revision r1 ON (p.page_id = r1.page_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "revision r2 ON (p.page_id = r2.page_id AND r1.revision_id < r2.revision_id) " .
 			"WHERE p.comment_on_id = 0 " .
 				($from
