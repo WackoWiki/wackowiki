@@ -456,6 +456,14 @@ class Wacko
 		$this->resource = & $this->translations[$lang];
 	}
 
+	/**
+	 * sets language $this->language
+	 *
+	 * @param unknown $lang
+	 * @param boolean $set_translation
+	 *
+	 * @return string previous language for reset
+	 */
 	function set_language($lang, $set_translation = false)
 	{
 		$old_lang	= @$this->language['LANG'];
@@ -7502,6 +7510,8 @@ class Wacko
 					"UPDATE " . $this->db->table_prefix . "file SET " .
 						"deleted	= 1 " .
 					"WHERE page_id = " . (int) $page['page_id']);
+
+				$this->update_files_count($file['page_id'], 0);
 			}
 			else
 			{
@@ -7515,10 +7525,6 @@ class Wacko
 
 					// remove category assigments
 					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
-
-					// TODO: update user and page uploads count
-					# - page_ids[]
-					# - user_ids[]
 				}
 
 				clearstatcache();
@@ -7527,6 +7533,8 @@ class Wacko
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "file " .
 					"WHERE page_id = " . (int) $page['page_id']);
+
+				$this->update_files_count($file['page_id'], 0);
 			}
 		}
 
@@ -7558,8 +7566,6 @@ class Wacko
 					"deleted	= 1 " .
 				"WHERE file_id = " . (int) $file['file_id'] . " " .
 				"LIMIT 1");
-
-			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 		}
 		else
 		{
@@ -7580,12 +7586,6 @@ class Wacko
 				$this->set_message($this->_t('FileRemovedFromFSError'), 'error');
 			}
 
-			// remove category assigments
-			$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
-
-			// update uploads count
-			$this->update_files_count($file['page_id'], $file['user_id']);
-
 			$message .= $this->_t('FileRemovedFromDB') . '<br>';
 
 			// remove from DB
@@ -7598,6 +7598,9 @@ class Wacko
 				$this->set_message($message, 'success');
 			}
 		}
+
+		$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+		$this->update_files_count($file['page_id'], $file['user_id']);
 
 		return true;
 	}
