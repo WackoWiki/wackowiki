@@ -6,8 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // NB to minimize amount of diff modes provided for user in menus - you
-// can turn off some undesirables by setting text in lang/wacko.??.php
-// files for unwanted DiffMode# to ''
+// can turn off some undesirables by setting diff_modes in secondary config
 
 /*
  * DiffMode

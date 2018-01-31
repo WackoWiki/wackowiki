@@ -165,8 +165,8 @@ else
 
 	/*
 	 * too expensive query for every page call
-	 * TODO: add real revision count to page table or just check $this->page['version_id'] > 1
-	 *	- update if revisions were be purged manually or by time
+	 *	- adds now real revision count to page table or just check $this->page['version_id'] > 1
+	 *	- update revision count if revisions were be purged manually or by time
 	if (!$this->count_revisions($this->page['page_id'], 0, $this->is_admin()))*/
 	if (!$this->page['revisions'])
 	{
