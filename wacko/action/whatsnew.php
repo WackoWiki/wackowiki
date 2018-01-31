@@ -88,10 +88,12 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	echo '<ul class="ul_list">' . "\n";
 
-	$curday = '';
-
 	$pagination	= $this->pagination(count($pages), @$max, 'n', '', '');
 	$pages		= array_slice($pages, $pagination['offset'], $pagination['perpage']);
+
+	$curday		= '';
+	$file_ids	= [];
+	$page_ids	= [];
 
 	foreach ($pages as $page)
 	{
@@ -113,17 +115,20 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 	// cache acls
 	$this->preload_acl($page_ids);
 
-	if ($files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, p.supertag, u.user_name " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.file_id IN ( " . implode(', ', $file_ids) . " ) "
-		))
+	if (!empty($file_ids))
 	{
-		foreach ($files as $file)
+		if ($files = $this->db->load_all(
+			"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, p.supertag, u.user_name " .
+			"FROM " . $this->db->table_prefix . "file f " .
+				"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+			"WHERE f.file_id IN ( " . implode(', ', $file_ids) . " ) "
+			))
 		{
-			$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+			foreach ($files as $file)
+			{
+				$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+			}
 		}
 	}
 
