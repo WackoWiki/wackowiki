@@ -55,7 +55,7 @@ $pages2 = $this->db->load_all(
 
 // loading uloads
 $files = $this->db->load_all(
-	"SELECT f.page_id, c.tag, c.supertag, f.uploaded_dt AS created, f.uploaded_dt AS modified, f.file_name AS title, f.file_id AS comment_on_id, f.hits AS ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag as comment_on_page, c.title AS title_on_page, user_name, 2 AS ctype, f.deleted " .
+	"SELECT f.page_id, c.tag, c.supertag, f.uploaded_dt AS created, f.uploaded_dt AS modified, f.file_name AS title, f.file_id AS comment_on_id, f.hits AS ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, user_name, 2 AS ctype, f.deleted " .
 	"FROM " . $this->db->table_prefix . "file f " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (f.page_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
