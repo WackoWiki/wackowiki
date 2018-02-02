@@ -93,7 +93,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="forum_cluster" name="forum_cluster" value="<?php echo htmlspecialchars($engine->db->forum_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="forum_cluster" name="forum_cluster" value="<?php echo Ut::html($engine->db->forum_cluster);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -132,7 +132,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('NewsClusterInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="news_cluster" name="news_cluster" value="<?php echo htmlspecialchars($engine->db->news_cluster, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="news_cluster" name="news_cluster" value="<?php echo Ut::html($engine->db->news_cluster);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -144,7 +144,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('NewsLevelsInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="news_levels" name="news_levels" value="<?php echo htmlspecialchars($engine->db->news_levels, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="news_levels" name="news_levels" value="<?php echo Ut::html($engine->db->news_levels);?>">
 				</td>
 			</tr>
 			<tr>
@@ -192,7 +192,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('RootPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="root_page" name="root_page" value="<?php echo htmlspecialchars($engine->db->root_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="root_page" name="root_page" value="<?php echo Ut::html($engine->db->root_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -204,7 +204,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('PolicyPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="policy_page" name="policy_page" value="<?php echo htmlspecialchars($engine->db->policy_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="policy_page" name="policy_page" value="<?php echo Ut::html($engine->db->policy_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -216,7 +216,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('SearchPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="search_page" name="search_page" value="<?php echo htmlspecialchars($engine->db->search_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="search_page" name="search_page" value="<?php echo Ut::html($engine->db->search_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -228,7 +228,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('RegistrationPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="registration_page" name="registration_page" value="<?php echo htmlspecialchars($engine->db->registration_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="registration_page" name="registration_page" value="<?php echo Ut::html($engine->db->registration_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -240,7 +240,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('LoginPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="login_page" name="login_page" value="<?php echo htmlspecialchars($engine->db->login_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="login_page" name="login_page" value="<?php echo Ut::html($engine->db->login_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -252,7 +252,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('SettingsPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="settings_page" name="settings_page" value="<?php echo htmlspecialchars($engine->db->settings_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="settings_page" name="settings_page" value="<?php echo Ut::html($engine->db->settings_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -264,7 +264,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('PasswordPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="password_page" name="password_page" value="<?php echo htmlspecialchars($engine->db->password_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="password_page" name="password_page" value="<?php echo Ut::html($engine->db->password_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -276,7 +276,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('UsersPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="users_page" name="users_page" value="<?php echo htmlspecialchars($engine->db->users_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="users_page" name="users_page" value="<?php echo Ut::html($engine->db->users_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -288,7 +288,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('CategoryPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="category_page" name="category_page" value="<?php echo htmlspecialchars($engine->db->category_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="category_page" name="category_page" value="<?php echo Ut::html($engine->db->category_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -300,7 +300,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('TagPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo htmlspecialchars($engine->db->tag_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo Ut::html($engine->db->tag_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -312,7 +312,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('GroupsPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="groups_page" name="groups_page" value="<?php echo htmlspecialchars($engine->db->groups_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="groups_page" name="groups_page" value="<?php echo Ut::html($engine->db->groups_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -324,7 +324,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('ChangesPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="changes_page" name="changes_page" value="<?php echo htmlspecialchars($engine->db->changes_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="changes_page" name="changes_page" value="<?php echo Ut::html($engine->db->changes_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -336,7 +336,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('CommentsPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="comments_page" name="comments_page" value="<?php echo htmlspecialchars($engine->db->comments_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="comments_page" name="comments_page" value="<?php echo Ut::html($engine->db->comments_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -348,7 +348,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('RemovalsPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="removals_page" name="removals_page" value="<?php echo htmlspecialchars($engine->db->removals_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="removals_page" name="removals_page" value="<?php echo Ut::html($engine->db->removals_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -360,7 +360,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('WantedPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="wanted_page" name="wanted_page" value="<?php echo htmlspecialchars($engine->db->wanted_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="wanted_page" name="wanted_page" value="<?php echo Ut::html($engine->db->wanted_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -372,7 +372,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('OrphanedPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="orphaned_page" name="orphaned_page" value="<?php echo htmlspecialchars($engine->db->orphaned_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="orphaned_page" name="orphaned_page" value="<?php echo Ut::html($engine->db->orphaned_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -384,7 +384,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('TodoPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="todo_page" name="todo_page" value="<?php echo htmlspecialchars($engine->db->todo_page, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="todo_page" name="todo_page" value="<?php echo Ut::html($engine->db->todo_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -396,7 +396,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('SandboxPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo htmlspecialchars($engine->db->sandbox, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo Ut::html($engine->db->sandbox);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -408,7 +408,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('WikiDocsPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="wiki_docs" name="wiki_docs" value="<?php echo htmlspecialchars($engine->db->wiki_docs, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="255" id="wiki_docs" name="wiki_docs" value="<?php echo Ut::html($engine->db->wiki_docs);?>">
 				</td>
 			</tr>
 		</table>

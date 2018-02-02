@@ -2,7 +2,7 @@
 
 echo	'<!--notypo-->' .
 			'<pre class="code">' .
-				htmlspecialchars($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
+				Ut::html($text) .
 			'</pre>' .
 		'<!--/notypo-->';
 

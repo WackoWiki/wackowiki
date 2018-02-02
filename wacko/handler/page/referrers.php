@@ -135,9 +135,9 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $space
 
 	echo '<li>';
 	echo '<span class="' . $vclass . '">' . $val . '</span>&nbsp;&nbsp;&nbsp;&nbsp;';
-	echo '<span class=""><a title="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
-		 '" href="' . htmlspecialchars($ref, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
-		 '" rel="nofollow noreferrer">' . htmlspecialchars($trunc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a></span>';
+	echo '<span class=""><a title="' . Ut::html($ref) .
+		 '" href="' . Ut::html($ref) .
+		 '" rel="nofollow noreferrer">' . Ut::html($trunc) . '</a></span>';
 
 	if ($link)
 	{

@@ -264,7 +264,7 @@ function admin_config_security(&$engine, &$module)
 					<small><?php echo $engine->_t('TlsProxyInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo htmlspecialchars($engine->db->tls_proxy, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo Ut::html($engine->db->tls_proxy);?>">
 				</td>
 			</tr>
 			<tr class="hl_setting">
@@ -331,7 +331,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea style="width:100%; minheight:200px;" id="csp_header" name="csp_header"><?php echo htmlspecialchars($csp_header, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:100%; minheight:200px;" id="csp_header" name="csp_header"><?php echo Ut::html($csp_header);?></textarea>
 				</td>
 			</tr>
 			<?php

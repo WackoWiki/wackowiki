@@ -126,7 +126,7 @@ function admin_system_log(&$engine, &$module)
 		"FROM " . $engine->db->table_prefix . "log l " .
 		( $where ?: 'WHERE level <= ' . (int) $level . ' ' ));
 
-	$order_pagination		= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
+	$order_pagination		= !empty($_order)		? ['order' => Ut::html($_order)] : [];
 	$level_pagination		= !empty($_level)		? ['level' => (int) $_level] : [];
 	$level_mod_pagination	= !empty($_level_mod)	? ['level_mod' => (int) $_level_mod] : [];
 

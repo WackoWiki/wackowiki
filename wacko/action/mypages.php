@@ -15,7 +15,7 @@ $current_char	= '';
 $title			= (int) $title;
 
 $profile		= ($profile? ['profile' => $profile] : []);
-$profile_mode	= htmlspecialchars(@$_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+$profile_mode	= Ut::html(@$_GET['mode']);
 $mod_selector	= 's';
 
 $by = function ($by) use ($profile, $mod_selector)

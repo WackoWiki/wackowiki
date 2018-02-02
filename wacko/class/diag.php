@@ -252,8 +252,8 @@ EOD;
 			{
 				echo '<tr class="logtype' . (int) $one[1] . '">';
 				echo '<td>' . number_format($one[0] - WACKO_STARTED, 4) . '</td>';
-				echo '<td><code>' . htmlspecialchars($one[3], ENT_QUOTES | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code></td>';
-				echo '<td>' .  htmlspecialchars($one[2], ENT_QUOTES | ENT_HTML5, HTML_ENTITIES_CHARSET) .  '</td>';
+				echo '<td><code>' . Ut::html($one[3]) . '</code></td>';
+				echo '<td>' .  Ut::html($one[2]) .  '</td>';
 				echo '</tr>';
 			}
 

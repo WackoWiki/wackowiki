@@ -88,8 +88,8 @@ if ($referrers)
 		echo '<li>';
 		echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;' .
 			(($site !== $unknown)
-				? '<a href="http://' . htmlspecialchars($site, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" rel="nofollow noreferrer">' .
-					htmlspecialchars($site, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</a>'
+				? '<a href="http://' . Ut::html($site) . '" rel="nofollow noreferrer">' .
+					Ut::html($site) . '</a>'
 				: $site
 			);
 		echo "</li>\n";

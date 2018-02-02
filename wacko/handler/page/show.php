@@ -95,7 +95,7 @@ if ($this->has_access('read'))
 					$message .= $this->form_open('edit_revision', ['page_method' => 'edit']);
 					$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '">';
 					$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '">';
-					$message .= '<input type="hidden" name="body" value="' . htmlspecialchars($this->page['body'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">';
+					$message .= '<input type="hidden" name="body" value="' . Ut::html($this->page['body']) . '">';
 					$message .= '<input type="submit" value="' . $this->_t('ReEditOldRevision') . '">';
 					$message .= '<a href="' . $this->href() . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"></a>';
 					$message .= $this->form_close();

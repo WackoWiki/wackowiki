@@ -335,7 +335,7 @@ if ($this->has_access('read')
 	{
 		$output .= '<br>' . "\n";
 		$output .= '<label for="comment_title">' . $this->_t('AddCommentTitle') . '</label><br>';
-		$output .= '<input type="text" id="comment_title" maxlength="250" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" name="title">';
+		$output .= '<input type="text" id="comment_title" maxlength="250" value="' . Ut::html($title) . '" size="60" name="title">';
 		$output .= '<br>' . "\n";
 	}
 	else if (!$this->page || $this->is_owner() || $this->is_admin())
@@ -343,7 +343,7 @@ if ($this->has_access('read')
 		// edit page title
 		$output .= '<br>' . "\n";
 		$output .= '<label for="page_title">' . $this->_t('MetaTitle') . ':</label><br>';
-		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="' . htmlspecialchars($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60">';
+		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="' . Ut::html($title) . '" size="60">';
 		$output .= '<br>' . "\n";
 	}
 	else
@@ -354,9 +354,9 @@ if ($this->has_access('read')
 		#$output .= '<br>' . "\n";
 	}
 
-	$output .= '<input type="hidden" name="previous" value="' . htmlspecialchars($previous, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"><br>' . "\n";
+	$output .= '<input type="hidden" name="previous" value="' . Ut::html($previous) . '"><br>' . "\n";
 	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
-	$output .= htmlspecialchars($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</textarea>\n";
+	$output .= Ut::html($body) . "</textarea>\n";
 	$output .= '<br>' . "\n";
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
@@ -366,7 +366,7 @@ if ($this->has_access('read')
 		{
 			$output .= '<label for="edit_note">' . $this->_t('EditNote') . ':</label><br>';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
-			$output .= '<input type="text" id="edit_note" maxlength="200" value="' . htmlspecialchars($edit_note, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="60" name="edit_note">';
+			$output .= '<input type="text" id="edit_note" maxlength="200" value="' . Ut::html($edit_note) . '" size="60" name="edit_note">';
 			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br>";
 		}
 

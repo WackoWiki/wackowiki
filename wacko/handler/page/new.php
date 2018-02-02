@@ -78,7 +78,7 @@ echo '<label for="create_subpage">' . $this->_t('CreateSubPage') . ':</label><br
 if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
 	echo '<code>' . (strlen($this->tag) > 50 ? '...' . substr($this->tag, -50) : $this->tag) . '/</code>' .
-		'<input type="text" id="create_subpage" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 1 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '' ) . '" size="20" maxlength="255"> ' .
+		'<input type="text" id="create_subpage" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 1 ? Ut::html($new_tag) : '' ) . '" size="20" maxlength="255"> ' .
 		'<input type="submit" id="submit_subpage" value="' . $this->_t('CreatePageButton') . '">';
 }
 else
@@ -104,7 +104,7 @@ if (substr_count($this->tag, '/') > 0)
 			echo '<input type="hidden" name="option" value="2">';
 			echo '<label for="create_pageparentcluster">' . $this->_t('CreatePageParentCluster') . ':</label><br>';
 			echo '<code>' . (strlen($parent) > 50 ? '...' . substr($parent, -50) : $parent) . '/</code>' .
-				 '<input type="text" id="create_pageparentcluster" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 2 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '') . '" size="20" maxlength="255"> ' .
+				 '<input type="text" id="create_pageparentcluster" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 2 ? Ut::html($new_tag) : '') . '" size="20" maxlength="255"> ' .
 				 '<input type="submit" id="submit_pageparentcluster" value="' . $this->_t('CreatePageButton') . '">';
 			echo $this->form_close();
 		}
@@ -123,6 +123,6 @@ if (substr_count($this->tag, '/') > 0)
 echo $this->form_open('random_page', ['page_method' => 'new']);
 echo '<input type="hidden" name="option" value="3">';
 echo '<label for="create_randompage">' . $this->_t('CreateRandomPage') . ':</label><br>';
-echo '<input type="text" id="create_randompage" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 3 ? htmlspecialchars($new_tag, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) : '') . '" size="60" maxlength="255"> ' .
+echo '<input type="text" id="create_randompage" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 3 ? Ut::html($new_tag) : '') . '" size="60" maxlength="255"> ' .
 	 '<input type="submit" id="submit_randompage" value="' . $this->_t('CreatePageButton') . '">';
 echo $this->form_close();
