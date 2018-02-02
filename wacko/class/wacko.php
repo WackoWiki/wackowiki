@@ -22,6 +22,7 @@ class Wacko
 	var $forum					= false;
 	var $categories;
 	var $watch					= [];
+	var $notify_lang			= null;
 	var $is_watched				= false;
 	var $hide_revisions			= false;
 	var $_acl					= [];
@@ -459,12 +460,13 @@ class Wacko
 	/**
 	 * sets language $this->language
 	 *
-	 * @param unknown $lang
+	 * @param string $lang
 	 * @param boolean $set_translation
+	 * @param boolean $get_translation sets $this->notify_lang
 	 *
 	 * @return string previous language for reset
 	 */
-	function set_language($lang, $set_translation = false)
+	function set_language($lang, $set_translation = false, $get_translation = false)
 	{
 		$old_lang	= @$this->language['LANG'];
 
@@ -482,6 +484,9 @@ class Wacko
 		{
 			$this->set_translation($this->language['LANG']);
 		}
+
+		// substitutes $this->user_lang in _t() function
+		$this->notify_lang = $get_translation ? $lang : null;
 
 		return $old_lang;
 	}
@@ -724,7 +729,14 @@ class Wacko
 				$lang = $this->db->language;
 			}
 
-			if (!$lang && (isset($this->user_lang) && $this->user_lang != $this->page_lang))
+			if ($this->notify_lang)
+			{
+				Diag::dbg('GOLD', 'Message set:', $lang, $name, @$this->user_lang, @$this->page_lang);
+				$lang = $this->notify_lang;
+			}
+
+			if (!$lang
+				&& (isset($this->user_lang) && $this->user_lang != $this->page_lang))
 			{
 				$lang = $this->user_lang;
 			}
@@ -735,7 +747,7 @@ class Wacko
 
 				if (($text = @$this->translations[$lang][$name]))
 				{
-					if ($dounicode)
+					if ($dounicode && !$this->notify_lang)
 					{
 						if (is_array($text))
 						{
@@ -2734,6 +2746,7 @@ class Wacko
 
 	// NOTIFICATIONS
 	// TODO: move notification functions in own notification class
+	// $this->notify_lang sets language in _t() function for notifications
 
 	// user email wrapper
 	function send_user_email($user, $subject, $body, $xtra_headers = [])
@@ -2747,7 +2760,7 @@ class Wacko
 			];
 		}
 
-		$save = $this->set_language($user['user_lang'], true);
+		$save = $this->set_language($user['user_lang'], true, true);
 
 		$email_to	=	$user['email'];
 		$name_to	=	$user['user_name'];
@@ -2762,6 +2775,7 @@ class Wacko
 						$this->db->base_url;
 
 		$charset	=	$this->get_charset($user['user_lang']);
+		Diag::dbg('ORANGE', $user['user_name'], $user['user_lang'], $charset);
 
 		$this->set_language($save, true);
 
@@ -2771,7 +2785,7 @@ class Wacko
 
 	function notify_approved_account($user)
 	{
-		$save = $this->set_language($user['user_lang'], true);
+		$save = $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('RegistrationApproved');
 		$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n" .
@@ -2785,7 +2799,7 @@ class Wacko
 	{
 		/* TODO: set user language for email encoding */
 		$lang_admin	= $this->db->language;
-		$save		= $this->set_language($lang_admin, true);
+		$save		= $this->set_language($lang_admin, true, true);
 
 		$subject	=	$this->_t('NewAccountSubject');
 		$body		=	$this->_t('NewAccountSignupInfo') . "\n\n" .
@@ -2805,7 +2819,7 @@ class Wacko
 
 	function notify_new_owner($user)
 	{
-		$save = $this->set_language($user['user_lang'], true);
+		$save = $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('NewPageOwnership');
 		// STS TODO ou, pure shit message!
@@ -2819,7 +2833,7 @@ class Wacko
 
 	function notify_user_signup($user)
 	{
-		$save = $this->set_language($user['user_lang'], true);
+		$save = $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('EmailWelcome');
 		$body		=	Ut::perc_replace($this->_t('EmailRegistered'),
@@ -2836,7 +2850,7 @@ class Wacko
 
 	function notify_password_reset($user, $code)
 	{
-		$save = $this->set_language($user['user_lang'], true);
+		$save = $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('EmailForgotSubject');
 		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
@@ -2850,7 +2864,7 @@ class Wacko
 
 	function notify_pm($user, $subject, $body, $header, $msg_id)
 	{
-		$save = $this->set_language($user['user_lang'], true);
+		$save = $this->set_language($user['user_lang'], true, true);
 
 		$body		=	Ut::perc_replace($this->_t('UsersPMBody'),
 							$this->get_user_name()) . "\n\n" .
@@ -2917,7 +2931,7 @@ class Wacko
 				{
 					if ($this->db->enable_email && $this->db->enable_email_notification && $user['enabled'] && !$user['email_confirm'] && $user['send_watchmail'])
 					{
-						$save = $this->set_language($user['user_lang'], true);
+						$save = $this->set_language($user['user_lang'], true, true);
 
 						$_subject	=	$this->_t($subject[0]) . " '$subject[1]'";
 
@@ -2983,48 +2997,48 @@ class Wacko
 				"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (w.user_id = s.user_id) " .
 			"WHERE w.page_id = " . (int) $object_id);
 
-		foreach ($watchers as $watcher)
+		foreach ($watchers as $user)
 		{
-			if ($watcher['user_id'] != $user_id && $watcher['user_name'] != GUEST)
+			if ($user['user_id'] != $user_id && $user['user_name'] != GUEST)
 			{
 				if ($comment_on_id)
 				{
 					// assert that user has no comments pending...
-					if ($watcher['notify_comment'] > 1)
+					if ($user['notify_comment'] > 1)
 					{
 						// ...and add one if so
-						if (!$watcher['comment_id'])
+						if (!$user['comment_id'])
 						{
 							$this->db->sql_query(
 								"UPDATE " . $this->db->table_prefix . "watch SET " .
 									"comment_id	= " . (int) $page_id . " " .
 								"WHERE page_id = " . (int) $comment_on_id . " " .
-									"AND user_id = " . (int) $watcher['user_id']);
+									"AND user_id = " . (int) $user['user_id']);
 						}
 						else
 						{
 							continue;	// skip current watcher
 						}
 					}
-					else if (!$watcher['notify_comment'])
+					else if (!$user['notify_comment'])
 					{
 						continue;	// skip current watcher
 					}
 				}
 				else
 				{
-					if (($minor_edit && !$watcher['notify_minor_edit']) || !$watcher['notify_page'])
+					if (($minor_edit && !$user['notify_minor_edit']) || !$user['notify_page'])
 					{
 						continue;	// skip current watcher
 					}
 
 					// assert that user has no comments pending...
-					if ($watcher['notify_page'] > 1)
+					if ($user['notify_page'] > 1)
 					{
 						// ...and add one if so
-						if (!$watcher['pending'])
+						if (!$user['pending'])
 						{
-							$this->set_watch_pending($watcher['user_id'], $comment_on_id);
+							$this->set_watch_pending($user['user_id'], $comment_on_id);
 						}
 						else
 						{
@@ -3034,20 +3048,20 @@ class Wacko
 				}
 
 				// removes user from subscription if access writes were revoked
-				if (!$this->has_access('read', $object_id, $watcher['user_name']))
+				if (!$this->has_access('read', $object_id, $user['user_name']))
 				{
-					$this->clear_watch($watcher['user_id'], $object_id);
+					$this->clear_watch($user['user_id'], $object_id);
 					continue;
 				}
 
 				if ($this->db->enable_email
 					&& $this->db->enable_email_notification
-					&& $watcher['enabled']
-					&& !$watcher['email_confirm']
-					&& $watcher['send_watchmail'])
+					&& $user['enabled']
+					&& !$user['email_confirm']
+					&& $user['send_watchmail'])
 				{
-					$lang = $watcher['user_lang'];
-					$save = $this->set_language($lang, true);
+					$lang = $user['user_lang'];
+					$save = $this->set_language($lang, true, true);
 
 					$body = ($user_name == GUEST ? $this->_t('Guest') : $user_name);
 
@@ -3063,7 +3077,7 @@ class Wacko
 								$page_body . "\n\n" .
 								"----------------------------------------------------------------------\n\n";
 
-						if ($watcher['notify_comment'] == 2)
+						if ($user['notify_comment'] == 2)
 						{
 							$body .= $this->_t('FurtherPending') . "\n\n";
 						}
@@ -3080,13 +3094,13 @@ class Wacko
 								$this->format($diff, 'html2mail') . "\n\n" .
 								"======================================================================\n\n";
 
-						if ($watcher['notify_page'] == 2)
+						if ($user['notify_page'] == 2)
 						{
 							$body .= $this->_t('FurtherPending') . "\n\n";
 						}
 					}
 
-					$this->send_user_email($watcher, $subject, $body);
+					$this->send_user_email($user, $subject, $body);
 					$this->set_language($save, true);
 				}
 			}
@@ -6355,7 +6369,7 @@ class Wacko
 				$menu_formatted[]	= [
 										$this->page['page_id'],
 										($title? $title : $this->tag),
-										$this->format('((' . $this->tag . ($title? ' ' . $title : '').($lang? ' @@' . $lang : '') . '))', 'wacko'),
+										$this->format('((' . $this->tag . ($title? ' ' . $title : '') . ($lang? ' @@' . $lang : '') . '))', 'wacko'),
 										$lang,
 									];
 
@@ -8068,6 +8082,7 @@ class Wacko
 		}
 
 		// TODO: set default lang if !isset($this->language) -> forced logout -> missing format()
+		//		##value## -> <code>value</code>
 
 		$html			= $this->db->allow_rawhtml;
 		$this->db->allow_rawhtml = 0;
