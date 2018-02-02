@@ -339,9 +339,9 @@ class Ut
 		return $n;
 	}
 
-	static function html($string, $double_encode = true)
+	static function html($string, $double_encode = true, $charset = HTML_ENTITIES_CHARSET)
 	{
-		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET, $double_encode);
+		return htmlspecialchars($string, ENT_COMPAT | ENT_HTML5, $charset, $double_encode);
 	}
 
 	static function serialize($data, $options = 0)

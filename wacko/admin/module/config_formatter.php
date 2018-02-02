@@ -200,7 +200,7 @@ function admin_config_formatter(&$engine, &$module)
 					<small><?php echo $engine->_t('DateFormatInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="date_format" name="date_format" value="<?php echo htmlspecialchars($engine->db->date_format, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="50" id="date_format" name="date_format" value="<?php echo Ut::html($engine->db->date_format);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -212,7 +212,7 @@ function admin_config_formatter(&$engine, &$module)
 					<small><?php echo $engine->_t('TimeFormatInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="time_format" name="time_format" value="<?php echo htmlspecialchars($engine->db->time_format, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="50" id="time_format" name="time_format" value="<?php echo Ut::html($engine->db->time_format);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -224,7 +224,7 @@ function admin_config_formatter(&$engine, &$module)
 					<small><?php echo $engine->_t('TimeFormatSecondsinfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="time_format_seconds" name="time_format_seconds" value="<?php echo htmlspecialchars($engine->db->time_format_seconds, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="50" id="time_format_seconds" name="time_format_seconds" value="<?php echo Ut::html($engine->db->time_format_seconds);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -236,7 +236,7 @@ function admin_config_formatter(&$engine, &$module)
 					<small><?php echo $engine->_t('NameDateMacroInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="name_date_macro" name="name_date_macro" value="<?php echo htmlspecialchars($engine->db->name_date_macro, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="50" id="name_date_macro" name="name_date_macro" value="<?php echo Ut::html($engine->db->name_date_macro);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -366,7 +366,7 @@ function admin_config_formatter(&$engine, &$module)
 					<small><?php echo $engine->_t('YouareHereTextInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="enable_youarehere_text" name="youarehere_text" value="<?php echo htmlspecialchars($engine->db->youarehere_text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?>">
+					<input type="text" maxlength="50" id="enable_youarehere_text" name="youarehere_text" value="<?php echo Ut::html($engine->db->youarehere_text);?>">
 				</td>
 			</tr>
 		</table>

@@ -42,7 +42,7 @@ function admin_user_users(&$engine, &$module)
 	// simple and rude input sanitization
 	foreach ($_POST as $key => $val)
 	{
-		$_POST[$key] = htmlspecialchars($val, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+		$_POST[$key] = Ut::html($val);
 	}
 
 	// IDs PROCESSING (COMMON PROCEDURES)
@@ -342,14 +342,14 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">' . $engine->_t('UserName') . '</label>' .
 					'</td>
 					<td>
-						<input type="text" id="newname" name="newname" value="' . htmlspecialchars(($_POST['newname'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
 					<td>
 						<label for="newrealname">' . $engine->_t('RealName') . '</label>' .
 					'<td>
-						<input type="text" id="newrealname" name="newrealname" value="' . htmlspecialchars(($_POST['newrealname'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
+						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? '')) . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -357,7 +357,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="email">' . $engine->_t('Email') . '</label>
 					</td>' .
 					'<td>
-						<input type="email" id="email" name="email" value="' . htmlspecialchars(($_POST['email'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
+						<input type="email" id="email" name="email" value="' . Ut::html(($_POST['email'] ?? '')) . '" size="50" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -417,10 +417,10 @@ function admin_user_users(&$engine, &$module)
 				'<table class="formation">' .
 				'<tr>
 					<td>
-						<label for="newname">' . $engine->_t('UsersRename') . ' \'<code>' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\' in *</label>
+						<label for="newname">' . $engine->_t('UsersRename') . ' \'<code>' . Ut::html($user['user_name']) . '</code>\' in *</label>
 					</td>' .
 					'<td>
-						<input type="text" id="newname" name="newname" value="' . htmlspecialchars(($_POST['newname'] ?? $user['user_name']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? $user['user_name'])) . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -428,7 +428,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newrealname">' . $engine->_t('RealName') . '</label> ' .
 					'</td>
 					<td>
-						<input type="text" id="newrealname" name="newrealname" value="' . htmlspecialchars(($_POST['newrealname'] ?? $user['real_name']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
+						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? $user['real_name'])) . '" size="50" maxlength="100">
 					</td>' .
 				'</tr>' .
 				'<tr>
@@ -436,7 +436,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newemail">' . $engine->_t('Email') . '</label> ' .
 					'</td>
 					<td>
-						<input type="email" id="newemail" name="newemail" value="' . htmlspecialchars(($_POST['newemail'] ?? $user['email']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
+						<input type="email" id="newemail" name="newemail" value="' . Ut::html(($_POST['newemail'] ?? $user['email'])) . '" size="50" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -551,7 +551,7 @@ function admin_user_users(&$engine, &$module)
 					LIMIT 1"))
 				{
 
-					$users	.= '<code>' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>';
+					$users	.= '<code>' . Ut::html($user['user_name']) . '</code>';
 				}
 
 				$i++;
@@ -790,7 +790,7 @@ function admin_user_users(&$engine, &$module)
 			($where ?: '')
 			);
 
-		$order_pagination	= !empty($_order)		? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
+		$order_pagination	= !empty($_order)		? ['order' => Ut::html($_order)] : [];
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
 
 		$users = $engine->db->load_all(
@@ -807,7 +807,7 @@ function admin_user_users(&$engine, &$module)
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']) .
 					'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 					$engine->_t('UsersSearch') . ': </td><td>' .
-					'<input type="search" name="user" maxchars="40" size="30" value="' . htmlspecialchars(($_GET['user'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '"> ' .
+					'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(($_GET['user'] ?? '')) . '"> ' .
 					'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> ' .
 					$engine->form_close();
 

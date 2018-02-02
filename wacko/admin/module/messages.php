@@ -63,7 +63,7 @@ function admin_messages(&$engine, &$module)
 					<small><?php echo $engine->_t('SysMsgInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo htmlspecialchars($engine->db->system_message, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:200px; height:100px;" id="system_message" name="system_message"><?php echo Ut::html($engine->db->system_message);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">

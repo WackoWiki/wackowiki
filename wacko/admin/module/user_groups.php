@@ -134,7 +134,7 @@ function admin_user_groups(&$engine, &$module)
 						{
 							foreach ($available_users as $user)
 							{
-								echo '<option value="' . $user['user_id'] . '">' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</option>\n";
+								echo '<option value="' . $user['user_id'] . '">' . Ut::html($user['user_name']) . "</option>\n";
 							}
 						}
 
@@ -170,7 +170,7 @@ function admin_user_groups(&$engine, &$module)
 					'<table class="formation">' .
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>' . htmlspecialchars($member['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> ' .
+								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>' . Ut::html($member['user_name']) . '</code>\'?</label> ' .
 								'<input type="submit" id="submit" name="remove_member" value="yes"> ' .
 								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
 								'<br><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
@@ -285,7 +285,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
 						</td>' .
 						'<td>
-							<input type="text" id="new_group_name" name="new_group_name" value="' . htmlspecialchars(($_POST['new_group_name'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
+							<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? '')) . '" size="20" maxlength="100">
 						</td>
 					</tr>' .
 					'<tr>
@@ -293,7 +293,7 @@ function admin_user_groups(&$engine, &$module)
 							<label for="description">' . $engine->_t('GroupsDescription') . '</label>
 						</td>' .
 						'<td>
-							<input type="text" id="description" name="description" value="' . htmlspecialchars(($_POST['description'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
+							<input type="text" id="description" name="description" value="' . Ut::html(($_POST['description'] ?? '')) . '" size="50" maxlength="100">
 						</td>
 					</tr>' .
 					'<tr>
@@ -308,7 +308,7 @@ function admin_user_groups(&$engine, &$module)
 					{
 						foreach ($users as $user)
 						{
-							echo '<option value="' . $user['user_id'] . '">' . htmlspecialchars($user['user_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</option>\n";
+							echo '<option value="' . $user['user_id'] . '">' . Ut::html($user['user_name']) . "</option>\n";
 						}
 					}
 
@@ -357,16 +357,16 @@ function admin_user_groups(&$engine, &$module)
 				echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
 					'<table class="formation">' .
 					'<tr><td>
-						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\' in</label>
+						<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>' . Ut::html($usergroup['group_name']) . '</code>\' in</label>
 					</td>' .
 					'<td>
-						<input type="text" id="new_group_name" name="new_group_name" value="' . htmlspecialchars(($_POST['new_group_name'] ?? $usergroup['group_name']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="20" maxlength="100">
+						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? $usergroup['group_name'])) . '" size="20" maxlength="100">
 					</td></tr>' .
 					'<tr><td>
 							<label for="new_description">' . $engine->_t('GroupsDescription') . '</label>
 					</td>' .
 					'<td>
-						<input type="text" id="new_description" name="new_description" value="' . htmlspecialchars(($_POST['new_description'] ?? $usergroup['description']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="50" maxlength="100">
+						<input type="text" id="new_description" name="new_description" value="' . Ut::html(($_POST['new_description'] ?? $usergroup['description'])) . '" size="50" maxlength="100">
 					</td></tr>' .
 					'<tr><td>
 						<label for="moderator_id">' . $engine->_t('GroupsModerator') . '</label>
@@ -423,7 +423,7 @@ function admin_user_groups(&$engine, &$module)
 					'<table class="formation">' .
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>' . htmlspecialchars($usergroup['group_name'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>\'?</label> ' .
+								<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>' . Ut::html($usergroup['group_name']) . '</code>\'?</label> ' .
 								'<input type="submit" id="submit" name="delete" value="yes"> ' .
 								'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a>' .
 								'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
@@ -563,7 +563,7 @@ function admin_user_groups(&$engine, &$module)
 			"FROM " . $prefix . "usergroup " .
 			($where ?: ''));
 
-		$order_pagination	= !empty($_order) ? ['order' => htmlspecialchars($_order, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [];
+		$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
 
 		$groups = $engine->db->load_all(

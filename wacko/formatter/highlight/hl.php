@@ -19,6 +19,6 @@ if ($options['_default'])
 }
 else
 {
-	echo htmlspecialchars($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+	echo Ut::html($text);
 }
 ?>

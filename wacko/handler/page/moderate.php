@@ -319,7 +319,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	// simple and rude input sanitization
 	foreach ($_POST as $key => $val)
 	{
-		$_POST[$key] = htmlspecialchars($val, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+		$_POST[$key] = Ut::html($val);
 	}
 
 	// IDs PROCESSING (COMMON PROCEDURES)
@@ -840,7 +840,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						if (moderate_page_exists($this, $_POST['cluster']) === false)
 						{
-							$error = $this->_t('ModerateMoveNotExists') . ' <code>' . htmlspecialchars($_POST['cluster'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>';
+							$error = $this->_t('ModerateMoveNotExists') . ' <code>' . Ut::html($_POST['cluster']) . '</code>';
 						}
 					}
 					else if (!empty($_POST['section']))
@@ -1186,7 +1186,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
 		$body = (strlen($body) > 300 ? substr($body, 0, 300) . '[..]' : $body . ' [..]');
-		$body = htmlspecialchars($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+		$body = Ut::html($body);
 
 		// display list
 		echo $this->form_open('moderate_topic', ['page_method' => 'moderate']);
@@ -1394,7 +1394,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				$desc = $this->format($comment['body'], 'cleanwacko');
 				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300) . '[..]' : $desc . ' [..]');
-				$desc = htmlspecialchars($desc, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+				$desc = Ut::html($desc);
 
 				echo '<tr class="lined">' .
 						'<td class="label a_middle">

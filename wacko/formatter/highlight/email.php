@@ -1,6 +1,6 @@
 <?php
 
-$text = htmlspecialchars($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+$text = Ut::html($text);
 
 $text = preg_replace("/\b(https?|ftp|file|nntp|telnet):\/\/\S+/","<a href='\\0'>\\0</a>", $text);
 

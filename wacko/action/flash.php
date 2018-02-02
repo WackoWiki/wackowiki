@@ -38,7 +38,7 @@ extract([
 	'align'		=> '',
 ], EXTR_SKIP);
 
-$url = htmlspecialchars($url, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+$url = Ut::html($url);
 
 if (!$width)	$width	= 550;
 if (!$height)	$height	= 100;

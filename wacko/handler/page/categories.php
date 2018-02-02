@@ -232,7 +232,7 @@ if ($this->is_owner() || $this->is_admin())
 								'<label for="new_category">' . $this->_t('CategoriesAdd') . '</label>' .
 							'</td>' .
 							'<td>' .
-								'<input type="text" name="category" id="new_category" value="' . htmlspecialchars(($_POST['category'] ?? ''), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="40" maxlength="100">' .
+								'<input type="text" name="category" id="new_category" value="' . Ut::html(($_POST['category'] ?? '')) . '" size="40" maxlength="100">' .
 							'</td>' .
 						'</tr>' .
 						'<tr>' .
@@ -276,8 +276,8 @@ if ($this->is_owner() || $this->is_admin())
 					echo '<table class="formation">' .
 							'<tr>' .
 								'<td>' .
-									'<label for="new_name">' . Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .
-									'<input type="text" name="category" id="new_name" value="' . htmlspecialchars(($_POST['category'] ?? $word['category']), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '" size="40" maxlength="100"> ' .
+									'<label for="new_name">' . Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . Ut::html($word['category']) . '</code>') . '</label> ' .
+									'<input type="text" name="category" id="new_name" value="' . Ut::html(($_POST['category'] ?? $word['category'])) . '" size="40" maxlength="100"> ' .
 									'<input type="submit" name="rename" id="submit_new_name" value="' . $this->_t('CategoriesSaveButton') . '"> ' .
 									'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' .
 									'<br><small>' . $this->_t('CategoriesRenameInfo') . '</small>' .
@@ -306,7 +306,7 @@ if ($this->is_owner() || $this->is_admin())
 
 					foreach ($parents as $parent)
 					{
-						$options .= '<option value="' . $parent['category_id'] . '" ' . ($word['parent_id'] == $parent['category_id'] ? 'selected' : '') . '>' . htmlspecialchars($parent['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</option>\n";
+						$options .= '<option value="' . $parent['category_id'] . '" ' . ($word['parent_id'] == $parent['category_id'] ? 'selected' : '') . '>' . Ut::html($parent['category']) . "</option>\n";
 					}
 
 					echo $edit_header;
@@ -315,7 +315,7 @@ if ($this->is_owner() || $this->is_admin())
 						 '<table class="formation">' .
 							'<tr>' .
 								'<td>' .
-									'<label for="">' . Ut::perc_replace($this->_t('CategoriesGroup'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .
+									'<label for="">' . Ut::perc_replace($this->_t('CategoriesGroup'), '<code>' . Ut::html($word['category']) . '</code>') . '</label> ' .
 									'<select style="width:100px;" name="parent_id">' .
 										'<option value="0">[no group]</option>' .
 										$options .
@@ -345,7 +345,7 @@ if ($this->is_owner() || $this->is_admin())
 						'<table class="formation">' .
 							'<tr>' .
 								'<td>' .
-									'<label for="">' . Ut::perc_replace($this->_t('CategoriesDelete'), '<code>' . htmlspecialchars($word['category'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</code>') . '</label> ' .
+									'<label for="">' . Ut::perc_replace($this->_t('CategoriesDelete'), '<code>' . Ut::html($word['category']) . '</code>') . '</label> ' .
 									'<input type="submit" id="submit_delete" name="delete" value="' . $this->_t('DeleteText') . '"> ' .
 									'<a href="' . $this->href('categories') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' .
 									'<br><small>' . $this->_t('CategoriesDeleteInfo') . '</small>' .

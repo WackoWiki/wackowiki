@@ -192,7 +192,7 @@ function bb2_summary(&$engine)
 			{
 				echo '<tr id="request-' . '' . '" class="lined">' . "\n";
 				echo '<td class="label">' . $result['n'] . "</td>\n";
-				#echo '<td>' . str_replace("\n", "<br>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . "</td>\n";
+				#echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
 
 				if ($argument == 'status_key')
 				{
@@ -255,12 +255,12 @@ function bb2_manage(&$engine)
 	#$level_mod_pagination		= ($_GET['level_mod']		?? $_POST['level_mod']	?? '');
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'badbehavior', 'setting' => 'bb2_manage']
-								+ (!empty($blocked_pagination)			? ['blocked'		=> htmlspecialchars($blocked_pagination, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [])
-								+ (!empty($permitted_pagination)		? ['permitted'		=> htmlspecialchars($permitted_pagination, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [])
-								+ (!empty($key_pagination)				? ['status_key'		=> htmlspecialchars($key_pagination, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [])
-								+ (!empty($ip_pagination)				? ['ip'				=> htmlspecialchars($ip_pagination, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [])
-								+ (!empty($request_method_pagination)	? ['request_method'	=> htmlspecialchars($request_method_pagination, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : [])
-								+ (!empty($user_agent_pagination)		? ['user_agent'		=> htmlspecialchars($user_agent_pagination, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)] : []), '', 'admin.php');
+								+ (!empty($blocked_pagination)			? ['blocked'		=> Ut::html($blocked_pagination)] : [])
+								+ (!empty($permitted_pagination)		? ['permitted'		=> Ut::html($permitted_pagination)] : [])
+								+ (!empty($key_pagination)				? ['status_key'		=> Ut::html($key_pagination)] : [])
+								+ (!empty($ip_pagination)				? ['ip'				=> Ut::html($ip_pagination)] : [])
+								+ (!empty($request_method_pagination)	? ['request_method'	=> Ut::html($request_method_pagination)] : [])
+								+ (!empty($user_agent_pagination)		? ['user_agent'		=> Ut::html($user_agent_pagination)] : []), '', 'admin.php');
 
 	// Query the DB based on variables selected
 
@@ -368,7 +368,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 
 			echo "</td>\n";
 
-			$headers = str_replace("\n", "<br>\n", htmlspecialchars($result['http_headers'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET));
+			$headers = str_replace("\n", "<br>\n", Ut::html($result['http_headers']));
 
 			if (@strpos($headers, $result['user_agent']) !== FALSE)
 			{
@@ -381,7 +381,7 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 			}
 
 			echo '<td>' . $headers . "</td>\n";
-			echo '<td>' . str_replace("\n", "<br>\n", htmlspecialchars($result['request_entity'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET)) . "</td>\n";
+			echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
 			echo "</tr>\n";
 		}
 	}

@@ -12,9 +12,9 @@ if (!isset($title))	$title = '';
 if (isset($href))
 {
 	$text = str_replace('~', $href, $text);
-	$text = htmlspecialchars($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
-	$title = htmlspecialchars($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
-	$href = htmlspecialchars($href, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+	$text = Ut::html($text);
+	$title = Ut::html($title);
+	$href = Ut::html($href);
 
 	echo '<a id="' . $href . '" href="#' . $href . '" title="' . $title . '">' . $text . "</a>\n";
 }

@@ -13,7 +13,7 @@ if ($user_id = $this->get_user_id())
 	if (!isset($current_char))	$current_char = '';
 
 	$profile		= ($profile? ['profile' => $profile] : []);
-	$profile_mode	= htmlspecialchars(@$_GET['mode'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+	$profile_mode	= Ut::html(@$_GET['mode']);
 	$mode_selector	= 's';
 	$mode			= @$_GET[$mode_selector];
 	$p				= isset($_GET['p']) ? ['p' => (int) $_GET['p']] : [];

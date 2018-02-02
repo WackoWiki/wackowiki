@@ -90,7 +90,7 @@ function admin_config_filter(&$engine, &$module)
 					<small><?php echo $engine->_t('WordListInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:400px; height:400px;" id="phrase_list" name="phrase_list"><?php echo htmlspecialchars($phrases, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);?></textarea>
+					<textarea style="width:400px; height:400px;" id="phrase_list" name="phrase_list"><?php echo Ut::html($phrases);?></textarea>
 				</td>
 			</tr>
 
