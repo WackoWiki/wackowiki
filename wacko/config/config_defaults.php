@@ -98,6 +98,7 @@ $wacko_config_defaults = [
 	'hide_revisions'				=> 0,
 	'diff_modes'					=> '0,1,2,3,4,5',
 	'default_diff_mode'				=> 2,
+	'notify_diff_mode'				=> 2,
 
 	'hide_toc'						=> 0,
 	'hide_index'					=> 0,
@@ -138,6 +139,7 @@ $wacko_config_defaults = [
 	'policy_page'					=> '',
 	'license'						=> '',
 
+	// default pages
 	'wiki_docs'						=> '',
 	'moders_docs'					=> '',
 	'sandbox'						=> '',
