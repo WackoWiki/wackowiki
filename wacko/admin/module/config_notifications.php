@@ -36,6 +36,7 @@ function admin_config_notifications(&$engine, &$module)
 	{
 		$config['enable_email_notification']	= (int) $_POST['enable_email_notification'];
 		$config['disable_autosubscribe']		= (int) $_POST['disable_autosubscribe'];
+		$config['notify_diff_mode']				= (int) $_POST['notify_diff_mode'];
 		$config['notify_minor_edit']			= (int) ($_POST['notify_minor_edit'] ?? 0);
 		$config['notify_page']					= (int) $_POST['notify_page'];
 		$config['notify_comment']				= (int) $_POST['notify_comment'];
@@ -98,6 +99,41 @@ function admin_config_notifications(&$engine, &$module)
 					<input type="radio" id="notify_page0" name="notify_page" value="0"<?php echo ($engine->db->notify_page == 0 ? ' checked' : '');?>><label for="notify_page0"><?php echo $engine->_t('NotifyOff'); ?></label>
 					<input type="radio" id="notify_page1" name="notify_page" value="1"<?php echo ($engine->db->notify_page == 1 ? ' checked' : '');?>><label for="notify_page1"><?php echo $engine->_t('NotifyAlways'); ?></label>
 					<input type="radio" id="notify_page2" name="notify_page" value="2"<?php echo ($engine->db->notify_page == 2 ? ' checked' : '');?>><label for="notify_page2"><?php echo $engine->_t('NotifyPending'); ?></label>
+				</td>
+			</tr>
+						<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="default_diff_mode"><strong><?php echo $engine->_t('NotifyDiffMode');?>:</strong><br>
+					<small><?php echo $engine->_t('NotifyDiffModeInfo');?><br>(Content-Type: text/plain;)</small></label>
+				</td>
+				<td>
+					<select id="notify_diff_mode" name="notify_diff_mode">
+					<?php
+						/*
+						 * Choose only text/plain DiffModes for sending emails
+						 *
+						 * DiffMode
+						 *	0	Full diff
+						 *	2	Source			(text/plain)
+						 *	3	Side by side
+						 *	4	Inline
+						 *	5	Unified			(text/plain)
+						 *	6	Context			(text/plain)
+						 */
+						$diff_modes = $engine->_t('DiffMode');
+
+						foreach ($diff_modes as $mode => $diff_mode)
+						{
+							if (in_array($mode, [2, 5, 6]))
+							{
+								echo '<option value="' . $mode . '" ' . ( (int) $engine->db->notify_diff_mode == $mode ? 'selected' : '') . '>' . $diff_mode . ' (' . $mode . ')</option>' . "\n";
+							}
+						}
+					?>
+					</select>
 				</td>
 			</tr>
 			<tr class="lined">
