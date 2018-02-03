@@ -345,6 +345,8 @@ $ap_translation = [
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
 	'AllowedDiffMode'			=> 'Allowed Diff modes',
 	'AllowedDiffModeInfo'		=> 'It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
+	'NotifyDiffMode'			=> 'Notify diff mode',
+	'NotifyDiffModeInfo'		=> 'Diff mode used for Notifications in Email body.',
 
 	'EditSummary'				=> 'Edit summary',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',

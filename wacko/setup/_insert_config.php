@@ -140,6 +140,7 @@ $config_db['noindex']						= $config['noindex'];
 $config_db['noreferrer']					= $config['noreferrer'];
 $config_db['noreply_email']					= $config['noreply_email'];
 $config_db['notify_comment']				= $config['notify_comment'];
+$config_db['notify_diff_mode']				= $config['notify_diff_mode'];
 $config_db['notify_minor_edit']				= $config['notify_minor_edit'];
 $config_db['notify_new_user_account']		= $config['notify_new_user_account'];
 $config_db['notify_page']					= $config['notify_page'];

@@ -2982,7 +2982,7 @@ class Wacko
 
 			$_GET['a']			= -1;
 			$_GET['b']			= $page['revision_id'];
-			$_GET['diffmode']	= 2; // 2 - source diff
+			$_GET['diffmode']	= $this->db->notify_diff_mode;
 			$diff				= $this->method('diff');
 		}
 

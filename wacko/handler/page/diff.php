@@ -12,15 +12,15 @@ if (!defined('IN_WACKO'))
  * DiffMode
  *	0	Full diff
  *	1	Simple diff
- *	2	Source
+ *	2	Source			(text/plain)
  *	3	Side by side
  *	4	Inline
- *	5	Unified
- *	6	Context
+ *	5	Unified			(text/plain)
+ *	6	Context			(text/plain)
  *
  * default setting
  *	page/revisions.xml	=> 2
- *	notify_watcher()	=> 2
+ *	notify_watcher()	=> 2 (source -> text/plain)
  *
  * TODO: make diff modes acceccible via config
  * - to change mode for cases above
@@ -83,15 +83,12 @@ if ($page_a && $page_b
 
 	$revisions_menu = function ($rev, $page) use ($revisions, $diffmode, $a, $b)
 	{
-
 		$out = '<div class="diffdown">' . "\n"; //<button class="diffbtn">';
 		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : '')) . '">' .
 				$this->get_time_formatted($page['modified']) .
 				' <span class="dropdown_arrow">&#9660;</span></a>' . "\n";
 		//$out .= '</button><div class="diffdown-content">';
 		$out .= '<div class="diffdown-content">' . "\n";
-
-		#$out .= '<!--nomail-->';
 
 		foreach ($revisions as $r)
 		{
@@ -114,8 +111,6 @@ if ($page_a && $page_b
 			$out .= $this->get_time_formatted($r['modified']);
 			$out .= '</a>' . "\n";
 		}
-
-		#$out .= '<!--/nomail-->';
 
 		return $out . '</div></div>' . "\n";
 	};

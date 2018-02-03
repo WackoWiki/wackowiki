@@ -352,6 +352,8 @@ $ap_translation = [
 	'DefaultDiffModeSettingInfo'=> 'Vorausgewählter Diff-Modus.',
 	'AllowedDiffMode'			=> 'Zugelassene Diff-Modi',
 	'AllowedDiffModeInfo'		=> 'Es wird empfohlen, nur die Modi auszuwählen, welche man verwenden möchte. Andernfalls werden alle Diff-Modi ausgewählt.',
+	'NotifyDiffMode'			=> 'Diff-Modus für Benachrichtigungen',
+	'NotifyDiffModeInfo'		=> 'Diff-Modus für Benachrichtigungen im E-Mail-Textkörper.',
 
 	'EditSummary'				=> 'Änderungszusammenfassung aktivieren',
 	'EditSummaryInfo'			=> 'Zeigt Kommentarfeld für die Zusammenfassung von Änderungen im Bearbeitungsmodus.',

@@ -31,11 +31,11 @@ function admin_config_basic(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		#Ut::debug_print_r($_POST);
-		$config['site_name']				= (string) $_POST['site_name'];
-		$config['site_desc']				= (string) $_POST['site_desc'];
-		$config['admin_name']				= (string) $_POST['admin_name'];
-		$config['language']					= (string) $_POST['language'];
-		$config['multilanguage']			= (int) ($_POST['multilanguage'] ?? 0);
+		$config['site_name']					= (string) $_POST['site_name'];
+		$config['site_desc']					= (string) $_POST['site_desc'];
+		$config['admin_name']					= (string) $_POST['admin_name'];
+		$config['language']						= (string) $_POST['language'];
+		$config['multilanguage']				= (int) ($_POST['multilanguage'] ?? 0);
 
 		if (is_array($_POST['allowed_languages']))
 		{
@@ -46,7 +46,8 @@ function admin_config_basic(&$engine, &$module)
 			$config['allowed_languages'] = 0;
 		}
 
-		$config['default_diff_mode']		= (int) $_POST['default_diff_mode'];
+		$config['default_diff_mode']			= (int) $_POST['default_diff_mode'];
+		$config['notify_diff_mode']				= (int) $_POST['notify_diff_mode'];
 
 		if (is_array($_POST['diff_modes']))
 		{
@@ -491,6 +492,41 @@ function admin_config_basic(&$engine, &$module)
 
 					echo "\t</tr>\n</table>";
 					?>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="default_diff_mode"><strong><?php echo $engine->_t('NotifyDiffMode');?>:</strong><br>
+					<small><?php echo $engine->_t('NotifyDiffModeInfo');?><br>(<code>Content-Type: text/plain;</code>)</small></label>
+				</td>
+				<td>
+					<select id="notify_diff_mode" name="notify_diff_mode">
+					<?php
+						/*
+						 * Choose only text/plain DiffModes for sending emails
+						 *
+						 * DiffMode
+						 *	0	Full diff
+						 *  2	Source			(text/plain)
+						 *	3	Side by side
+						 *	4	Inline
+						 *	5	Unified			(text/plain)
+						 *	6	Context			(text/plain)
+						 */
+						$diff_modes = $engine->_t('DiffMode');
+
+						foreach ($diff_modes as $mode => $diff_mode)
+						{
+							if (in_array($mode, [2, 5, 6]))
+							{
+								echo '<option value="' . $mode . '" ' . ( (int) $engine->db->notify_diff_mode == $mode ? 'selected' : '') . '>' . $diff_mode . ' (' . $mode . ')</option>' . "\n";
+							}
+						}
+					?>
+					</select>
 				</td>
 			</tr>
 			<tr>
