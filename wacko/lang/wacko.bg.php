@@ -210,7 +210,7 @@ $wacko_translation = [
 	'PurgeFiles'				=> 'Remove all attached files',
 	'FilesPurged'				=> 'All attached files were removed.',
 	'PurgeRevisions'			=> 'Purge all revisions of the page',
-	'RevisionsPurged'			=> 'Revisions were perged.',
+	'RevisionsPurged'			=> 'Revisions were purged.',
 	'PurgeButton'				=> 'Purge',
 
 	// categories handler
@@ -717,7 +717,7 @@ $wacko_translation = [
 	'SettingsSizeTip'			=> 'source / compiled',
 	'SettingsCreated'			=> 'Created',
 	'SettingsCurrent'			=> 'Modified',
-	'SettingsTotalRevs'			=> 'Revsions',
+	'SettingsTotalRevs'			=> 'Revisions',
 	'SettingsTotalComs'			=> 'Comments',
 	'SettingsHits'				=> 'Views',
 	'SettingsRating'			=> 'Readers rating',
