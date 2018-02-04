@@ -16,9 +16,9 @@ $lang = [
 	'site_name'			=> 'MyWikiSite',
 
 	// pages
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
-	'users_page'		=> 'Users',
+	'category_page'		=> 'Kategori',
+	'groups_page'		=> 'Grupper',
+	'users_page'		=> 'Brugere',
 
 	// time
 	#'date_format'					=> 'd.m.Y',
@@ -38,7 +38,7 @@ $lang = [
 /*
    Language Selection Page
 */
-'lang' => 'Language Configuration',
+'lang' => 'Sprogkonfiguration',
 'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">5.0.x</code>.',
 'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>.  The next few pages will guide you through the upgrade process.',
 'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <code class="version">%1</code>.  The next few pages will guide you through the installation process.',
@@ -48,7 +48,7 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check' => 'System Requirements',
+'version-check' => 'Systemkrav',
 'PHPVersion' => 'PHP Version',
 'PHPDetected' => 'Detected PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
@@ -73,9 +73,9 @@ $lang = [
 'site-config' => 'Site Configuration',
 'SiteName' => 'WackoWiki Name',
 'SiteNameDesc' => 'Please enter the name of your Wiki site.',
-'HomePage' => 'Home Page',
+'HomePage' => 'Startside',
 'HomePageDesc' => 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
-'HomePageDefault' => 'HomePage',
+'HomePageDefault' => 'Startside',
 'MultiLang' => 'Multi Language Mode',
 'MultiLangDesc' => 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial pages for all languages available in distribution.',
 'AllowedLang' => 'Allowed Languages',
@@ -194,7 +194,7 @@ $lang = [
 /*
    Write Config Page
 */
-'write-config' => 'Write Config File',
+'write-config' => 'Skriv Config File',
 'FinalStep' => 'Final Step',
 'Writing' => 'Writing Configuration File',
 'RemovingWritePrivilege' => 'Removing Write Privilege',
