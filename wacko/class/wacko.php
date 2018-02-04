@@ -731,7 +731,7 @@ class Wacko
 
 			if ($this->notify_lang)
 			{
-				Diag::dbg('GOLD', 'Message set:', $lang, $name, @$this->user_lang, @$this->page_lang);
+				# Diag::dbg('GOLD', 'Message set:', $lang, $name, @$this->user_lang, @$this->page_lang, @$this->notify_lang);
 				$lang = $this->notify_lang;
 			}
 
@@ -2775,7 +2775,7 @@ class Wacko
 						$this->db->base_url;
 
 		$charset	=	$this->get_charset($user['user_lang']);
-		Diag::dbg('ORANGE', $user['user_name'], $user['user_lang'], $charset);
+		# Diag::dbg('ORANGE', $user['user_name'], $user['user_lang'], $charset);
 
 		$this->set_language($save, true);
 
