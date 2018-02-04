@@ -199,14 +199,21 @@ $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['
 $category = $module['main']['cat'];
 
 uasort($module,
-		create_function(
-			'$a, $b',
-			'if ((array) $a["order"] < (array) $b["order"])
-				return -1;
-			else if ((array) $a["order"] > (array) $b["order"])
-				return 1;
-			else
-				return 0;')
+	function($a, $b)
+	{
+		if ((array) $a['order'] < (array) $b['order'])
+		{
+			return -1;
+		}
+		else if ((array) $a['order'] > (array) $b['order'])
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 );
 
 foreach ($module as $row)
