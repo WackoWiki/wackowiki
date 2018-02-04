@@ -18,9 +18,9 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Category',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Users',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'Kategori',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Grupper',		'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'Brugere',		'{{users}}',			$page_lang, 'Admins', false, false);
 }
 
 insert_page('Opdateringer',		'Opdateringer',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Opdateringer');

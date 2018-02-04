@@ -11,7 +11,7 @@ $wacko_translation = [
 	'YouAre'					=> 'Du er ',
 	'AccountLink'				=> 'Indstillinger',
 	'AccountText'				=> 'Min konto',
-	'AccountTip'				=> 'Account Settings',
+	'AccountTip'				=> 'Bruger indstillinger',
 	'LogoutLink'				=> 'Log af',
 	'LogoutButton'				=> 'Log af',
 	'LogoutAreYouSure'			=> 'Er du sikker på, at du vil logge af?',
@@ -83,8 +83,8 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'Du har overskredet antallet af tilladte loginforsøg.<br>Oven i at skulle angive dit brugernavn og dit kodeord igen skal du nu bekræfte billedet du ser herunder.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Session terminated due to %1',
-	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+	'SessionTerminatedDue'		=> 'Session opsagt på grund af %1',
+	'IPAddressChanged'			=> 'IP-adresse ændret til %1 (var %2)',
 
 	// other
 	'Guest'						=> 'Gæst',
@@ -228,7 +228,7 @@ $wacko_translation = [
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
 	'CategoriesGrouped'			=> 'The category entered in the new group.',
 	'NoMultilevelGrouping'		=> 'Multilevel grouping categories is not possible.',
-	'CategoriesDeleted'			=> 'The category was deleted from the database and all pages.',
+	'CategoriesDeleted'			=> 'De kategorien var slettet fra databasen og alle sider.',
 	'CategoriesAdd'				=> 'Tilføj en ny kategori',
 	'CategoryDescription'		=> 'Beskrivelse',
 	'CategoriesAddGrouped'		=> 'Grupperet med den kategori',
@@ -239,7 +239,7 @@ $wacko_translation = [
 	'CategoriesGroupInfo'		=> '* Select [no group], to debundled the category.',
 	'CategoriesDelete'			=> 'Er du sikker på du vil fjerne kategori %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
+	'CategoriesStoreInfo'		=> 'For at tildele kategorier til en side markere afkrydsningsfelterne.',
 	'CategoriesStoreButton'		=> 'Gem Kategorier',
 	'CategoriesSaveButton'		=> 'Indsend',
 	'CategoriesCancelButton' 	=> 'Annuller',
@@ -247,12 +247,12 @@ $wacko_translation = [
 	'CategoriesRenameButton'	=> 'Omdøb',
 	'CategoriesGroupButton'		=> 'Gruppen',
 	'CategoriesRemoveButton'	=> 'Fjern',
-	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
+	'CategoriesEditInfo'		=> 'For at redigere kategorilisten vælg alternativknappen.',
 	'NoCategoriesForThisLang'	=> 'Kategorier for dette sprog er ikke angivet.',
 	'PagesCategory'				=> 'Sider kategori',
 	'CategoryNotExists'			=> 'Kategori eksisterer ikke.',
 	'CategoryEmpty'				=> 'Kategori tom.',
-	'NoCategorySelected'		=> 'No category selected.',
+	'NoCategorySelected'		=> 'Ingen kategori valgt.',
 	'TagCloud'					=> 'Ordsky',
 
 	// source handler
@@ -260,7 +260,7 @@ $wacko_translation = [
 	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
 	'SourceFrom'				=> 'original is located at: ',
 	'SourceFromLink'			=> 'reference',
-	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceCopyToClipboard'		=> 'Kopier til udklipsholder',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Grupper',
@@ -301,7 +301,7 @@ $wacko_translation = [
 	'CommentAdded'				=> 'Kommentar tilføjet.',
 	'YouAreNowTheOwner'			=> 'Du er nu ejer af denne side.',
 
-	'DefaultDiffMode'			=> 'Default diff mode',
+	'DefaultDiffMode'			=> 'Standard diff-tilstand',
 	'DiffMode'		=> [
 		'0'		=> 'Full diff',
 		'1'		=> 'Simple ændringer',
@@ -354,7 +354,7 @@ $wacko_translation = [
 	'CommentsRemoved'			=> 'Comments from page fjernet.',
 	'FilesRemoved'				=> 'Files from page fjernet.',
 	'PageRemoved'				=> 'Siden fjernet.',
-	'PageCachePurged'			=> 'Cache purged.',
+	'PageCachePurged'			=> 'Cache renset.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page fjernet.',
 	'ThisActionHavenotUndo'		=> 'Denne handling kan du ikke fortryde!',
@@ -467,7 +467,7 @@ $wacko_translation = [
 	'SomeoneCommented'			=> ' kommenterer en side du overvåger: ',
 	'AlertReferringPages'		=> 'Følgende sider henviser til denne',
 
-	'MarkRead'					=> 'Mark all as read',
+	'MarkRead'					=> 'Markér alle som læst',
 	'CurrentTime'				=> 'current time',
 	'Created'					=> 'oprettede',
 	'Modified'					=> 'ændret',
@@ -555,7 +555,7 @@ $wacko_translation = [
 	'SendWatchEmail'			=> 'Send notifikationsmail når nogen ændrer en side du overvåger.',
 	'AllowIntercom'				=> 'Jeg ønsker at modtage masse-emails afsendt fra administratorer',
 	'AllowMassemail'			=> 'Administrators can email me information',
-	'HideLastSession'			=> 'Hide last session',
+	'HideLastSession'			=> 'Skjul sidste session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'Denne side er flyttet. Du kan finde den på',
@@ -777,9 +777,9 @@ $wacko_translation = [
 	// attachments
 	'Attachments'				=> 'Vedhæftede filer',
 	'Attachment'				=> 'Vedhæftet fil',
-	'AttachmentsToPage'			=> 'to page',
-	'AttachmentsPerPage'		=> 'per page',
-	'AttachmentsByTime'			=> 'by time',
+	'AttachmentsToPage'			=> 'Til side',
+	'AttachmentsPerPage'		=> 'per side',
+	'AttachmentsByTime'			=> 'efter tid',
 	'AttachmentsGlobal'			=> 'global',
 	'AttachmentsAll'			=> 'alle',
 	'AttachmentsLinked'			=> 'brugt',
@@ -858,7 +858,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Opret henvisning hertil på den gamle side',
 
 	// pagination
-	'ToThePage'					=> 'To page',
+	'ToThePage'					=> 'Til side',
 	'Next'						=> 'Næste',
 	'Prev'						=> 'Forrige',
 	'NextAcr'					=> 'Næste',
@@ -1158,12 +1158,12 @@ $wacko_translation = [
 		'es' => 'spanish',
 	],
 
-	'AccountStatus'				=> 'Account status',
+	'AccountStatus'				=> 'Konto status',
 	'AccountStatusArray' => [
-		'0' => 'active',
-		'1' => 'pending',
-		'2' => 'blocked',
-		'3' => 'inactive',
+		'0' => 'aktiv',
+		'1' => 'afventer',
+		'2' => 'blokeret',
+		'3' => 'inaktiv',
 	],
 
 	'JustNow'		=> 'lige nu',
@@ -1201,9 +1201,9 @@ $wacko_translation = [
 	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
 
 	// loading error
-	'UnknownAction'				=> 'Unknown action',
-	'UnknownMethod'				=> 'Unknown method',
-	'FormatterNotFound'			=> 'Formatter %1 not found',
+	'UnknownAction'				=> 'Ukendt handling',
+	'UnknownMethod'				=> 'Ukendt metode',
+	'FormatterNotFound'			=> 'Formatter %1 blev ikke fundet',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
