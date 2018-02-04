@@ -2542,7 +2542,7 @@ class Wacko
 		$count = $this->db->load_single(
 			"SELECT COUNT(file_id) AS n " .
 			"FROM " . $this->db->table_prefix . "file " .
-			"WHERE page_id <> 0 " . // dummy for AND
+			"WHERE 1=1 " . // dummy for AND
 				($page_id
 					? "AND page_id = " . (int) $page_id . " "
 					: "") .
@@ -2579,7 +2579,7 @@ class Wacko
 		$count = $this->db->load_single(
 			"SELECT COUNT(revision_id) AS n " .
 			"FROM " . $this->db->table_prefix . "revision " .
-			"WHERE  page_id <> 0 " . // dummy for AND
+			"WHERE page_id <> 0 " . // dummy for AND
 				($page_id
 					? "AND page_id = " . (int) $page_id . " "
 					: "") .
