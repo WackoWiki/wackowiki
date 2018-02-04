@@ -67,11 +67,16 @@ $files = $this->db->load_all(
 if (($pages = array_merge($pages1, $pages2, $files)))
 {
 	// sort by dates
-	$sort_dates = create_function(
-		'$a, $b',	// func params
-		'if ($a["date"] == $b["date"]) ' .
-			'return 0;' .
-		'return ($a["date"] < $b["date"] ? 1 : -1);');
+	$sort_dates = function($a, $b)
+	{
+		if ($a['date'] == $b['date'])
+		{
+			return 0;
+		}
+
+		return ($a['date'] < $b['date'] ? 1 : -1);
+	};
+
 	usort($pages, $sort_dates);
 
 	$count	= 0;

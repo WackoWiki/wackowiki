@@ -148,11 +148,16 @@ class Feed
 
 			// sorting function: sorts by dates
 			// in tag names in reverse order
-			$sort_dates = create_function(
-				'$a, $b',	// func params
-				'if ($a["date"] == $b["date"]) ' .
-					'return 0;' .
-				'return ($a["date"] < $b["date"] ? 1 : -1);');
+			$sort_dates = function($a, $b)
+			{
+				if ($a['date'] == $b['date'])
+				{
+					return 0;
+				}
+
+				return ($a['date'] < $b['date'] ? 1 : -1);
+			};
+
 			// sort pages array
 			usort($feed_pages, $sort_dates);
 		}
