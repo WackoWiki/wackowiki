@@ -557,6 +557,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->save_acl($page_id, 'comment', '!*');
 			}
 
+			// purge SQL queries cache
+			$this->db->invalidate_sql_cache();
+
 			$set = [];
 			$this->set_message($this->_t('ModerateTopicsBlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
@@ -570,6 +573,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 				$this->save_acl($page_id, 'comment', $this->db->default_comment_acl);
 			}
+
+			// purge SQL queries cache
+			$this->db->invalidate_sql_cache();
 
 			$set = [];
 			$this->set_message($this->_t('ModerateTopicsUnlocked'), 'success');
@@ -596,7 +602,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"FROM " . $this->db->table_prefix . "page AS p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
-				"" . $this->db->table_prefix . "acl AS a " .
+				$this->db->table_prefix . "acl AS a " .
 			"WHERE p.page_id = a.page_id " .
 				"AND a.privilege = 'create' AND a.list = '' " .
 				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " " .
@@ -768,7 +774,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							<input type="checkbox" name="' . $topic['page_id'] . '" value="id" ' . (in_array($topic['page_id'], $set) ? ' checked' : '') . '>
 						</td>' .
 						'<td>' .
-							($this->has_access('comment', $topic['page_id'], GUEST) === false
+							($this->has_access('comment', $topic['page_id'], $this->db->default_comment_acl) === false
 								? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
 								: '' ) .
 								$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;') . '</strong>' .
@@ -929,6 +935,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
+
+			// purge SQL queries cache
+			$this->db->invalidate_sql_cache();
+
 			$this->log(2, Ut::perc_replace($this->_t('LogTopicLocked', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title']));
 			$this->set_message($this->_t('ModerateTopicBlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
@@ -937,6 +947,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['topic_unlock']) && $forum_cluster === true)
 		{
 			$this->save_acl($this->page['page_id'], 'comment', $this->db->default_comment_acl);
+
+			// purge SQL queries cache
+			$this->db->invalidate_sql_cache();
+
 			$this->log(2, Ut::perc_replace($this->_t('LogTopicUnlocked', SYSTEM_LANG), $this->page['tag'] . ' ' . $this->page['title']));
 			$this->set_message($this->_t('ModerateTopicUnlocked'), 'success');
 			$this->http->redirect($this->href('moderate'));
@@ -1337,7 +1351,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							: ''
 						) .
 						($forum_cluster === true
-							? ($this->has_access('comment', $this->page['page_id'], GUEST) === true
+							? ($this->has_access('comment', $this->page['page_id'], $this->db->default_comment_acl) === true
 								? '<input type="submit" name="topic_lock" id="submit" value="' . $this->_t('ModerateLock') . '"> '
 								: '<input type="submit" name="topic_unlock" id="submit" value="' . $this->_t('ModerateUnlock') . '"> '
 							)
@@ -1350,7 +1364,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</tr>' . "\n" .
 				'<tr class="formation">' .
 					'<th colspan="2">' .
-						($this->has_access('comment', $this->page['page_id'], GUEST) === false
+						($this->has_access('comment', $this->page['page_id'], $this->db->default_comment_acl) === false
 							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
 							: '' ) .
 						$this->_t('ForumTopic') .
@@ -1363,7 +1377,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								? $this->user_link($this->page['owner_name'], '', true, false)
 								: $this->user_link($this->page['user_name'], '', true, false)) .
 							' (' . $this->get_time_formatted($this->page['created']) . ')</small></strong>' .
-						'<br>' . $body.
+						'<br>' . $body .
 					'</td>' .
 				'</tr>' . "\n";
 
@@ -1398,10 +1412,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				echo '<tr class="lined">' .
 						'<td class="label a_middle">
-							<input type="checkbox" name="' . $comment['page_id'] . '" value="id"' . ( in_array($comment['page_id'], $set) ? ' checked' : '' ) . '>
+							<input type="checkbox" name="' . $comment['page_id'] . '" value="id"' . (in_array($comment['page_id'], $set) ? ' checked' : '') . '>
 						</td>' .
 						'<td>
-							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . $this->compose_link_to_page($comment['tag'], '', '&lt;#&gt;').( $comment['owner_id'] != 0 ? ' &nbsp;&nbsp; <a href="' . $this->href('', $this->db->users_page, ['profile' => $comment['owner_name']]) . '">' . $this->_t('ModerateUserProfile') . '</a>' : '' ) . '</small></strong>' .
+							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . '</small></strong>' . '<br>' .
+							'<br><strong>' . $this->compose_link_to_page($comment['tag'], '', $comment['title']) . '</strong>' .
 							'<br>' . $desc .
 						'</td>' .
 					'</tr>' . "\n";

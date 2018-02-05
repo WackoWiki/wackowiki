@@ -113,7 +113,6 @@ if ($this->has_access('read'))
 
 			foreach ($comments as $comment)
 			{
-				#$i ++;
 				$handler_button = '';
 
 				$this->cache_page($comment, true);
