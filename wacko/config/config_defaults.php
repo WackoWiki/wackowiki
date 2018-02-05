@@ -141,7 +141,6 @@ $wacko_config_defaults = [
 
 	// default pages
 	'wiki_docs'						=> '',
-	'moders_docs'					=> '',
 	'sandbox'						=> '',
 	'comments_page'					=> '',
 	'changes_page'					=> '',

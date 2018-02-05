@@ -5950,7 +5950,7 @@ class Wacko
 	/**
 	 *
 	 * @param string $user_name
-	 * @param unknown $acl_list
+	 * @param string $acl_list
 	 * @param boolean $copy_to_this_acl
 	 *
 	 * @return boolean

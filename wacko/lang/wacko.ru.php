@@ -1001,7 +1001,7 @@ $wacko_translation = [
 	'ModerateUserProfile'		=> 'профиль',
 	'ModerateNoItemChosen'		=> 'Пожалуйста выберите хотя бы один пункт с помощью кнопки "Устанвоить".',
 
-	'ModerateSection2'				=> 'модерировать раздел...',
+	'ModerateSection2'				=> 'модерировать раздел',
 	'ModerateTopicsDeleted'			=> 'Выбранные темы успешно удалены.',
 	'ModerateTopicsRelocated'		=> 'Выбранные темы успешно перемещены.',
 	'ModerateTopicsRenamed'			=> 'Тема успешно переименована.',
