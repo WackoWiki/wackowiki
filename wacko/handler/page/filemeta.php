@@ -123,6 +123,20 @@ if ($mode == 'remove' && isset($file))
 ?>
 		<table class="upload tbl_fixed">
 			<tr>
+				<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
+				<td><?php echo $file['file_description']; ?></td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
+				<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
+			</tr>
+			<tr>
+				<td colspan="2">&nbsp;</td>
+			</tr>
+			<tr>
 				<th scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
 				<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
 			</tr>
@@ -131,12 +145,7 @@ if ($mode == 'remove' && isset($file))
 				<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
 			</tr>
 			<tr>
-				<th scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
-				<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
-			</tr>
-			<tr>
-				<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-				<td><?php echo $file['file_description']; ?></td>
+				<td colspan="2">&nbsp;</td>
 			</tr>
 			<tr>
 				<th scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
@@ -261,7 +270,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					</tr>
 					<tr>
 						<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-						<td><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></td>
+						<td><strong><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></strong></td>
 					</tr>
 					<tr>
 						<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
