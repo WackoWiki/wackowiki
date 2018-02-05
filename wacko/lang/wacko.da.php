@@ -998,7 +998,7 @@ $wacko_translation = [
 	'ModerateUserProfile'		=> 'profil',
 	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
-	'ModerateSection2'			=> 'moderate section...',
+	'ModerateSection2'			=> 'moderate section',
 	'ModerateTopicsDeleted'		=> 'Selected topics successfully deleted.',
 	'ModerateTopicsRelocated'	=> 'Selected topics successfully relocated.',
 	'ModerateTopicsRenamed'		=> 'Emne med succes omdøbt.',

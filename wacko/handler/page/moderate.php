@@ -6,9 +6,9 @@ if (!defined('IN_WACKO'))
 }
 
 echo '<h3>';
-echo $this->_t('Moderation') . ' ' . ($this->forum === true ? $this->_t('Topics') : $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
-echo ($this->forum === true ? '<br>[' . $this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', $this->_t('ModerateSection2')) . ']' : '');
+echo $this->_t('Moderation') . ' ' . ($this->forum ? $this->_t('Topics') : $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
 echo "</h3>\n";
+echo ($this->forum ? $this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', '&laquo; ' . $this->_t('ModerateSection2')) . '<br><br>' : '');
 
 // local functions
 function moderate_page_exists(&$engine, $tag)
@@ -745,9 +745,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						'<input type="submit" name="merge" id="submit_merge" value="' . $this->_t('ModerateMerge') . '"> ' .
 						'<input type="submit" name="lock" id="submit_lock" value="' . $this->_t('ModerateLock') . '"> ' .
 						'<input type="submit" name="unlock" id="submit_unlock" value="' . $this->_t('ModerateUnlock') . '"> ' .
-						(isset($this->db->moders_docs)
-							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
-							: '') .
 						'<br>' . "\n" .
 						'<input type="submit" name="set" id="submit" value="' . $this->_t('ModerateSet') . '"> ' .
 						($set
@@ -1357,9 +1354,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							)
 							: ''
 						) .
-						(isset($this->db->moders_docs)
-							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
-							: '') .
 					'</td>' .
 				'</tr>' . "\n" .
 				'<tr class="formation">' .
@@ -1387,9 +1381,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					'<td colspan="2">' .
 						'<input type="submit" name="posts_delete" id="submit_delete" value="' . $this->_t('ModerateDeletePosts') . '"> ' .
 						'<input type="submit" name="posts_split" id="submit_split" value="' . $this->_t('ModerateSplit') . '"> ' .
-						(isset($this->db->moders_docs)
-							? '&nbsp;&nbsp;&nbsp;<a href="' . $this->href('', $this->db->moders_docs) . '">' . $this->_t('Help') . '...</a>'
-							: '') .
 						'<br>' . "\n" .
 						'<input type="submit" name="set" id="submit_set" value="' . $this->_t('ModerateSet') . '"> ' .
 						($set
