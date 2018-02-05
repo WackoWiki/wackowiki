@@ -4377,7 +4377,7 @@ class Wacko
 		}
 
 		// check current page lang for different charset to do_unicode_entities()
-		$text = ($this->page['page_lang'] != $account_lang)?  $this->do_unicode_entities($user_name, $account_lang) : $user_name;
+		$text = ($this->page['page_lang'] != $account_lang) ? $this->do_unicode_entities($user_name, $account_lang) : $user_name;
 		$icon = $add_icon?  '<span class="icon"></span>' : '';
 
 		if ($linking)
@@ -4399,7 +4399,7 @@ class Wacko
 		}
 
 		// check current page lang for different charset to do_unicode_entities()
-		$text = ($this->page['page_lang'] != $group_lang)?  $this->do_unicode_entities($group_name, $group_lang) : $group_name;
+		$text = ($this->page['page_lang'] != $group_lang) ? $this->do_unicode_entities($group_name, $group_lang) : $group_name;
 		$icon = $add_icon?  '<span class="icon"></span>' : '';
 
 		if ($linking)
@@ -4421,7 +4421,7 @@ class Wacko
 	*/
 	function add_spaces($text)
 	{
-		if (($user = $this->get_user())?  $user['show_spaces'] : $this->db->show_spaces)
+		if (($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces)
 		{
 			$text = $this->add_nbsps($text);
 		}
@@ -6740,7 +6740,7 @@ class Wacko
 					"AND version_id = " . (int) $ids[1] . " " .
 				"LIMIT 1");
 
-			$revision_id	= $revision_id?  $revision_id['revision_id'] : 0;
+			$revision_id	= $revision_id ? $revision_id['revision_id'] : 0;
 			$page			= $this->load_page('', $ids[0], $revision_id, '', '', $this->is_admin());
 
 			if ($page)
@@ -8361,7 +8361,7 @@ class Wacko
 		{
 			// availability depends on the page language and your access rights
 			// additionally you need also the right to create new categories
-			$out .=  $this->_t('NoCategoriesForThisLang') . "<br><br><br>\n";
+			$out .= $this->_t('NoCategoriesForThisLang') . "<br><br><br>\n";
 
 			if (!$this->method == 'edit')
 			{

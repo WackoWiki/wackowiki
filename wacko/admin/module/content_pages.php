@@ -108,7 +108,7 @@ function admin_content_pages(&$engine, &$module)
 	// set default level
 	if (!isset($level)) $level = $engine->db->log_default_show;
 	if (!isset($where)) $where = '';
-	else  $where .= "AND p.comment_on_id = 0 ";
+	else $where .= "AND p.comment_on_id = 0 ";
 	if (!isset($order)) $order = '';
 
 	// collecting data

@@ -58,7 +58,7 @@ function admin_db_restore(&$engine, &$module)
 
 	if (isset($_POST['backup_id']) && $_POST['backup_id'] == true)
 	{
-		$backup_id =  $_POST['backup_id'];
+		$backup_id = $_POST['backup_id'];
 	}
 	else if (isset($_GET['backup_id']) && $_GET['backup_id'] == true)
 	{

@@ -374,7 +374,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
 						{
 							// check current page lang for different charset to do_unicode_entities() against
-							$_lang = ($this->page['page_lang'] != $comment['page_lang'])?  $comment['page_lang'] : '';
+							$_lang = ($this->page['page_lang'] != $comment['page_lang']) ? $comment['page_lang'] : '';
 
 							$tpl->u_prof_cmt_c_li_created	= $comment['created'];
 							$tpl->u_prof_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
@@ -439,7 +439,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 								|| $this->has_access('read', $upload['page_id']))
 							{
 								// check current page lang for different charset to do_unicode_entities() against
-								$_lang = ($this->page['page_lang'] != $upload['file_lang'])?  $upload['file_lang'] : '';
+								$_lang = ($this->page['page_lang'] != $upload['file_lang']) ? $upload['file_lang'] : '';
 
 								if (($file_description = $upload['file_description']) !== '')
 								{
