@@ -598,7 +598,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make collector query
 		$sql =
-			"SELECT p.page_id, p.tag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, u.user_name, o.user_name as owner_name " .
+			"SELECT p.page_id, p.tag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page AS p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
@@ -766,6 +766,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			if ($this->has_access('read', $topic['page_id']))
 			{
+				if ($this->page['page_lang'] != $topic['page_lang'])
+				{
+					$topic['title']	= $this->do_unicode_entities($topic['title'], $topic['page_lang']);
+				}
+
 				echo '<tr class="lined">' .
 						'<td class="label a_middle">
 							<input type="checkbox" name="' . $topic['page_id'] . '" value="id" ' . (in_array($topic['page_id'], $set) ? ' checked' : '') . '>
@@ -1183,7 +1188,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make collector query
 		$sql =
-			"SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, created, u.user_name, o.user_name as owner_name " .
+			"SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
@@ -1196,7 +1201,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$comments = $this->db->load_all($sql);
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
-		$body = (strlen($body) > 300 ? substr($body, 0, 300) . '[..]' : $body . ' [..]');
+		$body = (strlen($body) > 300 ? substr($body, 0, 300) . '[..]' : $body);
 		$body = Ut::html($body);
 
 		// display list
@@ -1392,24 +1397,33 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				'</tr>' . "\n" .
 				'<tr class="formation">' .
 					'<th colspan="2">' . $this->_t('ForumComments') . '</th>' .
+					'<th>' . $this->_t('ForumAuthor') . '</th>' .
+					'<th>' . $this->_t('ForumCreated') . '</th>' .
 				'</tr>' . "\n";
 
 			// ...and comments list
 			foreach ($comments as $comment)
 			{
+				if ($this->page['page_lang'] != $comment['page_lang'])
+				{
+					#$comment['title']	= $this->do_unicode_entities($comment['title'], $comment['page_lang']);
+					#$comment['body']	= $this->do_unicode_entities($comment['body'], $comment['page_lang']);
+				}
+
 				$desc = $this->format($comment['body'], 'cleanwacko');
-				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300) . '[..]' : $desc . ' [..]');
+				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300) . '[..]' : $desc);
 				$desc = Ut::html($desc);
 
 				echo '<tr class="lined">' .
 						'<td class="label a_middle">
 							<input type="checkbox" name="' . $comment['page_id'] . '" value="id"' . (in_array($comment['page_id'], $set) ? ' checked' : '') . '>
 						</td>' .
-						'<td>
-							<strong><small>' . $this->user_link($comment['user_name'], '', true, false) . ' (' . $this->get_time_formatted($comment['created']) . ') &nbsp;&nbsp; ' . '</small></strong>' . '<br>' .
-							'<br><strong>' . $this->compose_link_to_page($comment['tag'], '', $comment['title']) . '</strong>' .
+						'<td>' .
+							'<strong>' . $this->compose_link_to_page($comment['tag'], '', $comment['title']) . '</strong>' .
 							'<br>' . $desc .
 						'</td>' .
+						'<td class="t_center" ' . ($this->is_admin() ? ' title="' . $comment['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($comment['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>' .
+						'<td class="t_center nowrap"><small>&nbsp;&nbsp;' . $this->get_time_formatted($comment['created']) . '</small></td>' .
 					'</tr>' . "\n";
 			}
 		}
