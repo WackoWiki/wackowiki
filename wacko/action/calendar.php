@@ -5,7 +5,13 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* {{calendar [year=2012|2013...] [month="1|2|..."] [highlight="today|1|2|..."] [daywidth="3"]}} */
+/* {{calendar
+		[year=2012|2013...]
+		[month="1|2|..."]
+		[highlight="today|1|2|..."]
+		[daywidth=3]
+  }}
+ */
 
 /* stylesheet parameters:
 	.calendar			(table container class)
@@ -16,10 +22,9 @@ if (!defined('IN_WACKO'))
 
 if (!isset($year))		$year		= '';
 if (!isset($month))		$month		= '';
-if (!isset($highlight))	$highlight	= '';
-if (!isset($daywidth))	$daywidth	= '';
 if (!isset($days))		$days		= '';
-
+if (!isset($daywidth))	$daywidth	= '';
+if (!isset($highlight))	$highlight	= 'today';
 
 $time			= time();
 $current_year	= date('Y', $time);
@@ -68,99 +73,99 @@ else
 	$_range = $range;
 }
 
-if (function_exists('generate_calendar') == false)
+$day_name_length = $daywidth;
+
+$generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, $month_href = NULL, $first_day = 0, $pn = [])
 {
-	function generate_calendar($year, $month, $days = [], $day_name_length = 3, $month_href = NULL, $first_day = 0, $pn = [])
+	$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
+	// remember that mktime will automatically correct if invalid dates are entered
+	// for instance, mktime(0,0,0,12,32,1997) will be the date for Jan 1, 1998
+	// this provides a built in "rounding" feature to generate_calendar()
+
+	$day_names = []; // generate all the day names according to the current locale
+
+	for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t += DAYSECS) // January 4, 1970 was a Sunday
 	{
-		$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
-		// remember that mktime will automatically correct if invalid dates are entered
-		// for instance, mktime(0,0,0,12,32,1997) will be the date for Jan 1, 1998
-		// this provides a built in "rounding" feature to generate_calendar()
+		$day_names[$n] = ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
+	}
 
-		$day_names = []; // generate all the day names according to the current locale
+	list ($month, $year, $month_name, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
-		for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t+=DAYSECS) // January 4, 1970 was a Sunday
+	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
+	$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '&nbsp;' . $year;  // note that some locales don't capitalize month and day names
+
+	// Begin calendar. Uses a real <caption>.
+	@list ($p, $pl) = each($pn);
+	@list ($n, $nl) = each($pn); // previous and next links, if applicable
+
+	if ($p)
+	{
+		$p = '<span class="calendar-prev">' . ($pl ? '<a href="' . Ut::html($pl) . '">' . $p . '</a>' : $p) . '</span>&nbsp;';
+	}
+
+	if ($n)
+	{
+		$n = '&nbsp;<span class="calendar-next">' . ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n) . '</span>';
+	}
+
+	$calendar = '<table class="calendar">' . "\n" .
+		'<caption class="calendar-month">' . $p . ($month_href ? '<a href="' . Ut::html($month_href) . '">' . $title . '</a>' : $title) . $n . "</caption>\n<tr>";
+
+	if ($day_name_length)
+	{
+		// if the day names should be shown ($day_name_length > 0)
+		// if day_name_length is >3, the full name of the day will be printed
+		foreach ($day_names as $d)
 		{
-			$day_names[$n] = ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
+			$calendar .= '<th abbr="' . htmlentities($d, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . htmlentities(($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</th>';
 		}
 
-		list ($month, $year, $month_name, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
+		$calendar .= "</tr>\n<tr>";
+	}
 
-		$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
-		$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '&nbsp;' . $year;  // note that some locales don't capitalize month and day names
+	if ($weekday > 0)
+	{
+		$calendar .= '<td colspan="' . $weekday . '">&nbsp;</td>'; // initial 'empty' days
+	}
 
-		// Begin calendar. Uses a real <caption>.
-		@list ($p, $pl) = each($pn);
-		@list ($n, $nl) = each($pn); // previous and next links, if applicable
-
-		if ($p)
+	for ($day = 1, $days_in_month = gmdate('t', $first_of_month); $day <= $days_in_month; $day++, $weekday++)
+	{
+		if ($weekday == 7)
 		{
-			$p = '<span class="calendar-prev">' . ($pl ? '<a href="' . Ut::html($pl) . '">' . $p . '</a>' : $p) . '</span>&nbsp;';
-		}
-
-		if ($n)
-		{
-			$n = '&nbsp;<span class="calendar-next">' . ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n) . '</span>';
-		}
-
-		$calendar = '<table class="calendar">' . "\n" .
-			'<caption class="calendar-month">' . $p.($month_href ? '<a href="' . Ut::html($month_href) . '">' . $title . '</a>' : $title) . $n . "</caption>\n<tr>";
-
-		if ($day_name_length)
-		{
-			// if the day names should be shown ($day_name_length > 0)
-			// if day_name_length is >3, the full name of the day will be printed
-			foreach ($day_names as $d)
-			{
-				$calendar .= '<th abbr="' . htmlentities($d, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . htmlentities(($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</th>';
-			}
-
+			$weekday   = 0; // start a new week
 			$calendar .= "</tr>\n<tr>";
 		}
 
-		if ($weekday > 0)
+		if (isset($days[$day]) and is_array($days[$day]))
 		{
-			$calendar .= '<td colspan="' . $weekday . '">&nbsp;</td>'; // initial 'empty' days
-		}
+			@list($link, $classes, $content) = $days[$day];
 
-		for ($day = 1, $days_in_month = gmdate('t', $first_of_month); $day <= $days_in_month; $day++, $weekday++)
-		{
-			if ($weekday == 7)
+			if (is_null($content))
 			{
-				$weekday   = 0; // start a new week
-				$calendar .= "</tr>\n<tr>";
+				$content = $day;
 			}
 
-			if (isset($days[$day]) and is_array($days[$day]))
-			{
-				@list($link, $classes, $content) = $days[$day];
-
-				if (is_null($content))
-				{
-					$content  = $day;
-				}
-
-				$calendar .= '<td' . ($classes ? ' class="' . Ut::html($classes) . '">' : '>') .
-					($link
-						? '<a href="' . Ut::html($link) . '">' . $content . '</a>'
-						: $content) . '</td>';
-			}
-			else
-			{
-				$calendar .= "<td>$day</td>";
-			}
+			$calendar .= '<td' . ($classes ? ' class="' . Ut::html($classes) . '">' : '>') .
+				($link
+					? '<a href="' . Ut::html($link) . '">' . $content . '</a>'
+					: $content) . '</td>';
 		}
-
-		if ($weekday != 7)
+		else
 		{
-			$calendar .= '<td colspan="' . (7-$weekday) . '">&nbsp;</td>'; // remaining "empty" days
+			$calendar .= "<td>$day</td>";
 		}
-
-		$calendar .= "</tr>\n</table>\n";
-
-		return $calendar;
 	}
-}
+
+	if ($weekday != 7)
+	{
+		$calendar .= '<td colspan="' . (7 - $weekday) . '">&nbsp;</td>'; // remaining "empty" days
+	}
+
+	$calendar .= "</tr>\n</table>\n";
+
+	return $calendar;
+};
+
 
 $oldlocale = setlocale(LC_TIME, NULL); // save current locale
 setlocale(LC_TIME, ['de_DE@euro', 'de_DE', 'deu_deu']);
@@ -176,7 +181,7 @@ echo "<tr>";
 for ($month; $month <= $_range; $month++)
 {
 		echo '<td class="a_top">';
-		echo generate_calendar($year, $month, $days, $daywidth);
+		echo $generate_calendar($year, $month, $days, $daywidth);
 
 		echo "</td>";
 
@@ -185,11 +190,12 @@ for ($month; $month <= $_range; $month++)
 			echo "</tr>\n<tr>";
 		}
 }
+
 echo "</tr>";
 echo "</table>";
 
 
-#echo generate_calendar($year, $month, $days, $daywidth);
+#echo $generate_calendar($year, $month, $days, $daywidth);
 
 setlocale(LC_TIME, $oldlocale);
 
