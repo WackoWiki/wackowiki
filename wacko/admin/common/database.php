@@ -292,7 +292,7 @@ function get_table(&$engine, $table, $drop = true)
 		// provide timestamp with CURRENT_TIMESTAMP without quotes
 		if (!empty($row['Default'])
 			&& (($row['Type'] == 'timestamp' && $row['Default'] == 'CURRENT_TIMESTAMP')
-				|| ($row['Type'] == 'tinyint' &&  $row['Default'] == 'NULL')))
+				|| ($row['Type'] == 'tinyint' && $row['Default'] == 'NULL')))
 		{
 			$schema_create .= ' DEFAULT ' . $row['Default'] . '';
 		}
@@ -652,7 +652,7 @@ function put_data(&$engine, $pack, $table, $mode)
 				}
 				else
 				{
-					$row[$j++] = $engine->db->q($cell); //( $cell == 'null' ? $cell :  $engine->db->q($cell) );
+					$row[$j++] = $engine->db->q($cell); //( $cell == 'null' ? $cell : $engine->db->q($cell) );
 				}
 			}
 
