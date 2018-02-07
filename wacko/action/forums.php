@@ -70,6 +70,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// load subforums data
 	$forums	= $this->db->load_all($sql, true);
 
+	$page_ids	= [];
+
 	foreach ($forums as $forum)
 	{
 		$page_ids[]	= $forum['page_id'];

@@ -582,14 +582,20 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$this->http->redirect($this->href('moderate'));
 		}
 
+		// GET TOPICS
+
+		$selector =
+			"WHERE p.page_id = a.page_id " .
+				"AND a.privilege = 'create' " .
+				"AND a.list = '' " .
+				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " ";
+
 		// make counter query
 		$sql =
 			"SELECT COUNT(p.page_id) AS n " .
 			"FROM " . $this->db->table_prefix . "page AS p, " .
 					  $this->db->table_prefix . "acl AS a " .
-			"WHERE p.page_id = a.page_id " .
-				"AND a.privilege = 'create' AND a.list = '' " .
-				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " " .
+			$selector .
 			"LIMIT 1";
 
 		// count topics and make pagination
@@ -598,14 +604,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make collector query
 		$sql =
-			"SELECT p.page_id, p.tag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
+			"SELECT p.page_id, p.tag, p.supertag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page AS p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
 				$this->db->table_prefix . "acl AS a " .
-			"WHERE p.page_id = a.page_id " .
-				"AND a.privilege = 'create' AND a.list = '' " .
-				"AND p.tag LIKE " . $this->db->q($this->tag . '/%') . " " .
+			$selector .
 			"ORDER BY commented DESC " .
 			$pagination['limit'];
 
@@ -613,6 +617,17 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// load topics data
 		$topics	= $this->db->load_all($sql);
+
+		$page_ids	= [];
+
+		foreach ($topics as $page)
+		{
+			$page_ids[]	= $page['page_id'];
+			$this->cache_page($page, true);
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+		}
+
+		$this->preload_acl($page_ids, ['read', 'comment']);
 
 		// display list
 		echo $this->form_open('moderate_subforum', ['page_method' => 'moderate']);
@@ -650,7 +665,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				"FROM " . $this->db->table_prefix . "page AS p, " .
 						  $this->db->table_prefix . "acl AS a " .
 				"WHERE p.page_id = a.page_id " .
-					"AND a.privilege = 'comment' AND a.list = '' " .
+					"AND a.privilege = 'comment' " .
+					"AND a.list = '' " .
 					"AND p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " " .
 				"ORDER BY modified ASC", true);
 
@@ -779,7 +795,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 							($this->has_access('comment', $topic['page_id'], $this->db->default_comment_acl) === false
 								? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
 								: '' ) .
-								$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;') . '</strong>' .
+							$this->compose_link_to_page($topic['tag'], 'moderate', $topic['title']) . ' <strong>' . $this->compose_link_to_page($topic['tag'], '', '&lt;#&gt;') . '</strong>' .
 						'</td>' .
 						'<td class="t_center" ' . ($this->is_admin() ? ' title="' . $topic['ip'] . '"' : '' ) . '><small>&nbsp;&nbsp;' . $this->user_link($topic['owner_name'], '', true, false) . '&nbsp;&nbsp;</small></td>' .
 						'<td class="t_center"><small>' . $topic['comments'] . '</small></td>' .
@@ -1175,11 +1191,17 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 
+		// GET POSTS
+
+		$selector =
+			"WHERE p.comment_on_id = " . (int) $this->page['page_id'] . " " .
+				"AND p.deleted <> 1 ";
+
 		// make counter query
 		$sql =
-			"SELECT COUNT(page_id) AS n " .
-			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id = " . (int) $this->page['page_id'] . " " .
+			"SELECT COUNT(p.page_id) AS n " .
+			"FROM " . $this->db->table_prefix . "page p " .
+			$selector .
 			"LIMIT 1";
 
 		// count posts and make pagination
@@ -1192,13 +1214,18 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-			"WHERE comment_on_id = " . (int) $this->page['page_id'] . " " .
-				"AND p.deleted <> 1 " .
+			$selector .
 			"ORDER BY created ASC " .
 			$pagination['limit'];
 
 		// load comments data
 		$comments = $this->db->load_all($sql);
+
+		foreach ($comments as $page)
+		{
+			$this->cache_page($page, true);
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+		}
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
 		$body = (strlen($body) > 300 ? substr($body, 0, 300) . '[..]' : $body);
@@ -1238,7 +1265,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					"FROM " . $this->db->table_prefix . "page AS p, " .
 							  $this->db->table_prefix . "acl AS a " .
 					"WHERE p.page_id = a.page_id " .
-						"AND a.privilege = 'comment' AND a.list = '' " .
+						"AND a.privilege = 'comment' " .
+						"AND a.list = '' " .
 						"AND p.tag LIKE " . $this->db->q($this->db->forum_cluster . '/%') . " " .
 					"ORDER BY modified ASC", true);
 

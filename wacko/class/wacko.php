@@ -1643,7 +1643,7 @@ class Wacko
 		if (isset($this->page_id_cache[$this->tag]))
 		{
 			// cache all acls to avoid multiple queries to get non-read privileges
-			$this->preload_acl([$this->page_id_cache[$this->tag]], '');
+			$this->preload_acl([$this->page_id_cache[$this->tag]], null);
 		}
 	}
 
@@ -5764,28 +5764,34 @@ class Wacko
 	 * loads related privileges at once in obj-cache
 	 *
 	 * @param array $page_ids
-	 * @param string $privilege
+	 * @param array $privileges
 	 */
-	function preload_acl($page_ids, $privilege = 'read')
+	function preload_acl($page_ids, $privileges = ['read'])
 	{
 		if (empty($page_ids))
 		{
 			return;
 		}
 
-		$default_privileges	= ['read', 'write', 'create', 'upload', 'comment'];
-
-		if (! in_array($privilege, $default_privileges))
+		if ($privileges)
 		{
-			$privilege = null;
+			$default_privileges	= ['read', 'write', 'create', 'upload', 'comment'];
+
+			foreach ($privileges as $privilege)
+			{
+				if (in_array($privilege, $default_privileges))
+				{
+					$q_privilege[]	= $this->db->q($privilege);
+				}
+			}
 		}
 
 		if ($acls = $this->db->load_all(
 			"SELECT page_id, privilege, list " .
 			"FROM " . $this->db->table_prefix . "acl " .
 			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) " .
-				($privilege
-					? "AND privilege = " . $this->db->q($privilege) . " "
+				($privileges
+					? "AND privilege IN ( " . implode(", ", $q_privilege) . " ) "
 					: "")
 			, true))
 		{
@@ -6863,8 +6869,11 @@ class Wacko
 				|| ($this->db->hide_revisions == 2 && !$this->is_owner())));
 
 		// forum page
-		$this->forum = !!(preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->tag) ||
-			($this->page['comment_on_id'] ? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->get_page_tag($this->page['comment_on_id'])) : ''));
+		$this->forum =
+			!! (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->tag)
+			|| ($this->page['comment_on_id']
+				? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->get_page_tag($this->page['comment_on_id']))
+				: ''));
 
 		// display page contents
 		if (preg_match('/(\.xml)$/', $this->method))

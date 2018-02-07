@@ -151,7 +151,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	// cache acls and categories
-	$this->preload_acl($page_ids, '');
+	$this->preload_acl($page_ids, ['read', 'comment']);
 	$this->preload_categories($page_ids);
 
 	// load latest topic comment

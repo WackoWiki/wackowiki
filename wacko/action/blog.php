@@ -254,7 +254,7 @@ if (!empty($blog_cluster))
 		}
 
 		// cache acls
-		$this->preload_acl($page_ids, null);
+		$this->preload_acl($page_ids, ['read', 'write']);
 		$this->preload_categories($page_ids);
 		$this->preload_links($page_ids);
 
