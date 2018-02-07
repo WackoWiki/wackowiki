@@ -1467,8 +1467,8 @@ class Wacko
 			return;
 		}
 
-		$file_ids		=  [];
-		$file_page_ids	=  [];
+		$file_ids		= [];
+		$file_page_ids	= [];
 
 		// get file links
 		if ($links = $this->db->load_all(
@@ -2114,7 +2114,7 @@ class Wacko
 			if (!$comment_on_id && $this->forum)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc . ' [..]');
+				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc);
 			}
 
 			// PreFormatter (macros and such)
