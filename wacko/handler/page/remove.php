@@ -221,7 +221,7 @@ if ($this->is_admin()
 			$this->show_message($message, 'comment-info');
 
 			$desc = $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');
-			$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc . ' [..]');
+			$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc);
 
 			echo '<div class="comment-title"><h2>' . $this->page['title'] . '</h2></div>';
 			echo Ut::html($desc);
