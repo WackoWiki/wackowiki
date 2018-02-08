@@ -27,7 +27,10 @@ if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
 }
 
 // check for language related default values
-$config = array_merge($config, $lang['ConfigDefaults']);
+if ($config['is_update'] == false)
+{
+	$config = array_merge($config, $lang['ConfigDefaults']);
+}
 
 // inserting secondary config values
 $config_db['abuse_email']					= $config['admin_email'];
