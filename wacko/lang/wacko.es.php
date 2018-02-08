@@ -256,6 +256,7 @@ $wacko_translation = [
 	'CategoryEmpty'				=> 'Categoría vacía.',
 	'NoCategorySelected'		=> 'Ninguna categoría seleccionada.',
 	'TagCloud'					=> 'Nube de palabras',
+	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 
 	// source handler
 	'SourceText'				=> 'Código fuente',

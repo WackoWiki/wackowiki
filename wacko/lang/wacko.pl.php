@@ -254,8 +254,9 @@ $wacko_translation = [
 	'PagesCategory'				=> 'Pages category',
 	'CategoryNotExists'			=> 'Category does not exist.',
 	'CategoryEmpty'				=> 'Category empty.',
-	'NoCategorySelected'			=> 'No category selected.',
+	'NoCategorySelected'		=> 'No category selected.',
 	'TagCloud'					=> 'Chmura znaczników',
+	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 
 	// source handler
 	'SourceText'				=> 'Source',

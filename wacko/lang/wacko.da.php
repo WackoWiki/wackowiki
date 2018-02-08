@@ -256,6 +256,7 @@ $wacko_translation = [
 	'CategoryEmpty'				=> 'Kategori tom.',
 	'NoCategorySelected'		=> 'Ingen kategori valgt.',
 	'TagCloud'					=> 'Ordsky',
+	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 
 	// source handler
 	'SourceText'				=> 'Source',
