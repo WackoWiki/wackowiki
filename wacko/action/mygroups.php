@@ -9,25 +9,23 @@ if (!defined('IN_WACKO'))
 
 if (!isset($nomark)) $nomark = 0;
 
-if (!function_exists('MyGroups'))
+$my_groups = function ($user_id, $groups)
 {
-	function my_groups(&$wacko, $user_id, $groups)
+	$my_groups_count = 0;
+
+	foreach ($groups as $group_name => $members)
 	{
-		$my_groups_count = 0;
-
-		foreach ($groups as $group_name => $members)
+		if (in_array ($user_id, $members))
 		{
-			if (in_array ($user_id, $members))
-			{
-				echo $wacko->group_link($group_name, '', true, false) . '<br>';
+			echo $this->group_link($group_name, '', true, false) . '<br>';
 
-				$my_groups_count++;
-			}
+			$my_groups_count++;
 		}
-
-		return $my_groups_count;
 	}
-}
+
+	return $my_groups_count;
+};
+
 
 if ($user = $this->get_user())
 {
@@ -36,7 +34,7 @@ if ($user = $this->get_user())
 		echo '<div class="layout-box"><p><span>' . $user['user_name'] . ": " . $this->_t('MyGroups') . "</span></p>\n";
 	}
 
-	$groups_count = my_groups($this, $user['user_id'], $this->db->groups);
+	$groups_count = $my_groups($user['user_id'], $this->db->groups);
 
 	if (!$nomark)
 	{
