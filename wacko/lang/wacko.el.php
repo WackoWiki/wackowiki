@@ -256,6 +256,7 @@ $wacko_translation = [
 	'CategoryEmpty'				=> 'Κατηγορία κενή.',
 	'NoCategorySelected'		=> 'Δεν έχει επιλεγεί καμμία κατηγορία.',
 	'TagCloud'					=> 'Σύννεφο ετικετών',
+	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 
 	// source handler
 	'SourceText'				=> 'Source',
