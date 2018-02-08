@@ -6,30 +6,30 @@ if (!defined('IN_WACKO'))
 }
 
 // get number of user's pages, revisions and comments
-function handler_show_get_user_stats(&$engine, $user_id)
+$handler_show_get_user_stats = function ($user_id)
 {
 	if ($user_id == 0)
 	{
 		return [];
 	}
-	else if (isset($engine->cached_stats[$user_id]))
+	else if (isset($this->cached_stats[$user_id]))
 	{
-		return $engine->cached_stats[$user_id];
+		return $this->cached_stats[$user_id];
 	}
 
-	$stats = $engine->db->load_single(
+	$stats = $this->db->load_single(
 		"SELECT user_name, " .
 			"total_pages AS pages, " .
 			"total_revisions AS revisions, " .
 			"total_comments AS comments " .
-		"FROM {$engine->db->user_table} " .
+		"FROM {$this->db->user_table} " .
 		"WHERE user_id = " . (int) $user_id . " " .
 		"LIMIT 1");
 
-	$engine->cached_stats[$user_id] = $stats;
+	$this->cached_stats[$user_id] = $stats;
 
 	return $stats;
-}
+};
 
 // pagination
 $pagination = $this->pagination($this->page['comments'], $this->db->comments_count, 'p', ['show_comments' => 1, '#' => 'header-comments']);
@@ -150,7 +150,7 @@ if ($this->has_access('read'))
 					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], false, true);
 				}
 
-				# $user_stats = handler_show_get_user_stats($this, $comment['user_id']);
+				# $user_stats = $handler_show_get_user_stats($comment['user_id']);
 
 				echo '<header class="comment-title">' . "\n" .
 						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . "</a></h2>\n" .

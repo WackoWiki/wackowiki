@@ -7,38 +7,32 @@ if (!defined('IN_WACKO'))
 
 // {{menu system=[0|1] redirect=''}}
 
-if (!function_exists('menu_sorting'))
+$menu_sorting = function ($a, $b)
 {
-	function menu_sorting ($a, $b)
+	if ($a['menu_position'] == $b['menu_position'])
 	{
-		if ($a['menu_position'] == $b['menu_position'])
-		{
-			return 0;
-		}
-
-		return ($a['menu_position'] < $b['menu_position'])
-			? -1
-			: 1;
+		return 0;
 	}
-}
 
-if (!function_exists('load_user_menu'))
+	return ($a['menu_position'] < $b['menu_position'])
+		? -1
+		: 1;
+};
+
+$load_user_menu = function ($user_id, $lang = '')
 {
-	function load_user_menu(&$engine, $user_id, $lang = '')
-	{
-		$_menu = $engine->load_all(
-			"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position " .
-			"FROM " . $engine->db->table_prefix . "menu m " .
-				"LEFT JOIN " . $engine->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
-			"WHERE m.user_id = " . (int) $user_id . " " .
-				($lang
-					? "AND m.menu_lang =  " . $engine->db->q($lang) . " "
-					: "") .
-			"ORDER BY m.menu_position", false);
+	$_menu = $this->load_all(
+		"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position " .
+		"FROM " . $this->db->table_prefix . "menu m " .
+			"LEFT JOIN " . $this->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
+		"WHERE m.user_id = " . (int) $user_id . " " .
+			($lang
+				? "AND m.menu_lang =  " . $this->db->q($lang) . " "
+				: "") .
+		"ORDER BY m.menu_position", false);
 
-		return $_menu;
-	}
-}
+	return $_menu;
+};
 
 if (!isset($redirect)) $redirect = 0; // required for usersettings action
 
@@ -77,7 +71,7 @@ else
 /// Processing of our special form
 if (isset($_POST['_user_menu']))
 {
-	$_menu		= load_user_menu($this, $_user_id, $menu_lang);
+	$_menu		= $load_user_menu($_user_id, $menu_lang);
 	$a			= $_menu;
 	$b			= [];
 
@@ -90,7 +84,7 @@ if (isset($_POST['_user_menu']))
 		$b[$k]['tag']			= $v['tag'];
 	}
 
-	$object->data['user_menu'] = &$b;
+	$object->data['user_menu'] = & $b;
 
 	if (isset($_POST['update_menu']))
 	{
@@ -105,7 +99,7 @@ if (isset($_POST['_user_menu']))
 			];
 		}
 
-		usort ($data, "menu_sorting");
+		usort ($data, $menu_sorting);
 
 		foreach ($data as $k => $item)
 		{
@@ -145,8 +139,8 @@ if (isset($_POST['_user_menu']))
 						"FROM " . $this->db->table_prefix . "menu " .
 						"WHERE user_id = " . (int) $_user_id." " .
 							($default_menu === true
-									? "AND menu_lang = " . $this->db->q($_user_lang) . " "
-									: "") .
+								? "AND menu_lang = " . $this->db->q($_user_lang) . " "
+								: "") .
 							"AND page_id = " . (int) $_page_id." " .
 						"LIMIT 1"))
 					{
@@ -232,7 +226,7 @@ if (isset($_POST['_user_menu']))
 
 if ($_user_id)
 {
-	$_menu = load_user_menu($this, $_user_id, $menu_lang);
+	$_menu = $load_user_menu($_user_id, $menu_lang);
 
 	if ($_menu)
 	{
