@@ -42,7 +42,7 @@
 			[= login _ =
 				[== // else shows Register / Login link ==]
 				<ul>
-				<li>[ ' link ' ]</li>
+					<li>[ ' link ' ]</li>
 				[= reg _ =
 					<li>[ ' link ' ]</li>
 				=]
@@ -132,7 +132,7 @@
 [ === #------------------------------ === ]
 <nav class="breadcrumb">
 	['' breadcrumbs '']
-	['' // echo '<br>' . $this->get_user_trail($titles = true, $separator = ' &gt; ', $linking = true, $size = 8); '']
+	['' // usertrail '']
 </nav>
 </header>
 [ === #------------------------------ === ]

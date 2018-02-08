@@ -47,7 +47,7 @@ else
 if (($logged_in = $this->get_user()))
 {
 	$tpl->uare_link		= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
-	$tpl->uare_account	= $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'));
+	$tpl->uare_account	= $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), $this->_t('AccountTip'));
 	$tpl->uare_logout	= $this->href('', $this->_t('LoginPage'), ['action' => 'logout']);
 }
 // else shows login's controls
@@ -60,8 +60,9 @@ else
 	{
 		$tpl->login_reg_link = $this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'));
 	}
+
 	// show help link
-	//  "<li>" . $this->compose_link_to_page($this->_t('HelpPage'), '', $this->_t('Help')) . "</li>\n";
+	# $tpl->login_help = $this->compose_link_to_page($this->_t('HelpPage'), '', $this->_t('Help'));
 }
 
 $max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
@@ -228,19 +229,19 @@ else
 	}
 
 	// moderation tab
-	if ($readable && $this->is_moderator())
+	if ($readable && ($this->is_moderator() || $this->is_admin()))
 	{
 		$echo_tab('moderate', 'ModerateTip', 'ModerateText', 2, '', 'm');
 	}
 
 	// permissions tab
-	if (!$this->forum && ($this->is_admin() || $this->is_owner()))
+	if (!$this->forum && ($this->is_owner() || $this->is_admin()))
 	{
 		$echo_tab('permissions', 'ACLTip', 'ACLText', 2, '', 'a');
 	}
 
 	// categories tab
-	if ($this->is_admin() || $this->is_owner())
+	if ($this->is_owner() || $this->is_admin())
 	{
 		$echo_tab('categories', 'CategoriesTip', 'CategoriesText', 2, '', 'c');
 	}
@@ -293,7 +294,7 @@ $tpl->leave();
 
 $tpl->search		= $this->href('', $this->_t('SearchPage'));
 $tpl->breadcrumbs	= $this->get_page_path($titles = false, ' &gt; ', true, true);
-// $tpl->usertrail	= $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
+# $tpl->usertrail	= $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
 
 if (!isset($this->sess->php_version))
 {
