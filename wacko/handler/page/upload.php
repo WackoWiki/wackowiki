@@ -386,9 +386,14 @@ else
 {
 	// 1.d UPLOAD FILES
 
-	echo '<ul class="menu">
-			<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
-		"</ul>\n";
+	// show navigation for attachments handler
+	if ((  $this->db->attachments_handler == 2 && $this->get_user())
+		|| $this->db->attachments_handler == 1)
+	{
+		echo '<ul class="menu">' .
+				'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
+			"</ul>\n";
+	}
 
 	echo '<h3>' . $this->_t('UploadFiles') . '</h3>';
 
