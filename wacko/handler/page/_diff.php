@@ -104,7 +104,7 @@ class Side
 				break;
 			}
 			$this->copy_word($out);
-			$out .="\n";
+			$out .= "\n";
 		}
 	}
 
@@ -175,7 +175,6 @@ class Side
 
 	function skip_word()
 	{
-
 		while (!$this->isend() && !($this->isspace($this->character)))
 		{
 			$this->nextchar();
@@ -186,7 +185,6 @@ class Side
 
 	function decode_directive_line()
 	{
-
 		$value = 0;
 		$state = 0;
 		$error = 0;
@@ -243,6 +241,7 @@ class Side
 		{
 			$this->nextchar();
 		}
+
 		if ($this->character == "\n")
 		$this->nextchar();
 
@@ -370,6 +369,7 @@ class _DiffEngine
 			break;
 			$this->xchanged[$skip] = $this->ychanged[$skip] = false;
 		}
+
 		// Skip trailing common lines.
 		$xi = $n_from; $yi = $n_to;
 		for ($endskip = 0; --$xi > $skip && --$yi > $skip; $endskip++)
@@ -889,7 +889,7 @@ class DiffFormatter
 
 	function _start_block($header)
 	{
-		echo $header."\n";
+		echo $header . "\n";
 	}
 
 }
