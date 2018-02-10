@@ -562,6 +562,7 @@ $wacko_translation = [
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'This page moved. You can find it at',
+	'RedirectedFrom'			=> 'Redirected from',
 	'CurrentPassword'			=> 'Current password',
 	'NewPassword'				=> 'New password',
 	'YouWantChangePassword'		=> 'Change password',
