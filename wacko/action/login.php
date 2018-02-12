@@ -35,8 +35,8 @@ if (@$_GET['action'] === 'logout')
 if (($user = $this->get_user()))
 {
 	// user is logged in; display logout form
-	$tpl->u_href = $this->href();
-	$tpl->u_link = $this->compose_link_to_page($this->db->users_page . '/' . $user['user_name'], '', $user['user_name']);
+	$tpl->u_href	= $this->href();
+	$tpl->u_link	= $this->compose_link_to_page($this->db->users_page . '/' . $user['user_name'], '', $user['user_name']);
 
 	$message = null;
 
@@ -70,9 +70,9 @@ if (($user = $this->get_user()))
 		$this->set_message($message);
 	}
 
-	$tpl->u_logout = $this->href('', '', 'action=logout');
-	$tpl->u_account = $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'));
-	$tpl->u_cookies = $this->href('', '', 'action=clearcookies');
+	$tpl->u_logout	= $this->href('', '', 'action=logout');
+	$tpl->u_account	= $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'));
+	$tpl->u_cookies	= $this->href('', '', 'action=clearcookies');
 }
 else // login
 {
@@ -84,8 +84,8 @@ else // login
 	{
 		++$logins;
 
-		$user_name = Ut::strip_spaces($_POST['user_name']);
-		$password = $_POST['password'];
+		$user_name	= Ut::strip_spaces($_POST['user_name']);
+		$password	= $_POST['password'];
 
 		if ($this->sess->login_captcha && !$this->validate_captcha())
 		{
@@ -121,6 +121,7 @@ else // login
 							"FROM " . $this->db->user_table . " " .
 							"WHERE user_name = " . $this->db->q($user_name) . " " .
 							"LIMIT 1");
+
 						$hash = hash('sha256', $user_name . $salt['salt'] . $password);
 					}
 
@@ -177,16 +178,18 @@ else // login
 	{
 		$this->log_user_delay();
 
-		if ($this->db->max_login_attempts && $logins > $this->db->max_login_attempts && ($cap = $this->show_captcha()))
+		if ($this->db->max_login_attempts && $logins > $this->db->max_login_attempts
+			&& ($cap = $this->show_captcha()))
 		{
-			$tpl->l_toomuch = true;
-			$tpl->l_show_captcha = $cap;
+			$tpl->l_toomuch			= true;
+			$tpl->l_show_captcha	= $cap;
+
 			$this->sess->login_captcha = 1;
 		}
 	}
 
-	$tpl->l_href = $this->href();
-	$tpl->l_username = @$this->sess->login_username;
+	$tpl->l_href		= $this->href();
+	$tpl->l_username	= @$this->sess->login_username;
 
 	if ($this->db->allow_registration)
 	{
