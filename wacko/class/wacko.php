@@ -3188,10 +3188,7 @@ class Wacko
 		if (($message = $this->db->system_message) && !$this->db->ap_mode)
 		{
 			// check current page lang for different charset to do_unicode_entities()
-			if (isset($this->page['page_lang']) && $this->page['page_lang'] != $this->db->language)
-			{
-				$message = $this->do_unicode_entities($message, $this->db->language);
-			}
+			$message = get_unicode_entities($message, $this->db->language);
 
 			array_unshift($messages, [$message, 'sysmessage ' . $this->db->system_message_type]);
 		}
