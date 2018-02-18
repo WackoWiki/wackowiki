@@ -4661,10 +4661,32 @@ class Wacko
 		{
 			$this->linktable = [];
 			$this->start_link_tracking();
+			$this->track_breadcrumbs($this->tag);
 			$this->format($body_r, 'post_wacko');
 			$this->stop_link_tracking();
 			$this->write_link_table($page_id); // the only call!
 			unset($this->linktable);
+		}
+	}
+
+	// track breadcrumbs for preload functions
+	function track_breadcrumbs($tag)
+	{
+		$page = '';
+
+		foreach (explode('/', $tag) as $n => $step)
+		{
+			if ($n > 0)
+			{
+				$page .= '/';
+			}
+
+			$page .= $step;
+
+			if ($page !== $tag)
+			{
+				$this->track_link($page, LINK_PAGE);
+			}
 		}
 	}
 
