@@ -920,8 +920,9 @@ $ap_translation = [
 
 	'NoEmailMessage'			=> 'Необходимо ввести текст сообщения',
 	'NoEmailSubject'			=> 'Необходимо указать заголовок сообщения',
+	'NoEmailRecipient'			=> 'Необходимо указать хотя бы одну группу пользователей или пользователей.',
 
-	'MessageSubject'			=> 'Subject',
+	'MessageSubject'			=> 'Предмет',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Текст сообщения',
 	'YourMessageInfo'			=> 'Можно использовать только обычный текст. Вся разметка будет удалена перед отправкой.',
@@ -930,8 +931,12 @@ $ap_translation = [
 	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
+	'NoUser'					=> 'нет пользователя',
+	'NoUserGroup'				=> 'нет группы пользователей',
+
 	'SendToGroup'				=> 'Послать группе',
 	'SendToUser'				=> 'Послать пользователю',
+	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
 	'SysMsgInfo'				=> '',

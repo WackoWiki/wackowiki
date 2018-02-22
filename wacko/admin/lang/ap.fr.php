@@ -914,6 +914,7 @@ $ap_translation = [
 
 	'NoEmailMessage'			=> 'Vous devez saisir un message.',
 	'NoEmailSubject'			=> 'Vous devez saisir le sujet de votre message.',
+	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
@@ -924,8 +925,12 @@ $ap_translation = [
 	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
+	'NoUser'					=> 'No user',
+	'NoUserGroup'				=> 'No user group',
+
 	'SendToGroup'				=> 'Envoyer à un groupe d\'utilisateurs',
 	'SendToUser'				=> 'Envoyer à des utilisateurs',
+	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
 	'SysMsgInfo'				=> '',
