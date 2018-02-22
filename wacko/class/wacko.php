@@ -5518,7 +5518,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function load_users($enabled = 1)
+	function load_users($enabled = true)
 	{
 		return $this->db->load_all(
 			"SELECT user_id, user_name " .

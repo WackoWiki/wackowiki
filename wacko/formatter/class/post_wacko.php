@@ -47,7 +47,7 @@ class PostWacko
 				return '';
 			}
 		}
-		// image link
+		// image links
 		else if (preg_match('/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/', $thing, $matches))
 		{
 			list (, $url, $img) = $matches;

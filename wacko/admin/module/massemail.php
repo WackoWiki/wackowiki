@@ -49,6 +49,10 @@ function admin_massemail(&$engine, &$module)
 
 			$user_ids		= implode(', ', $_user_id);
 		}
+		else
+		{
+			$engine->show_message($engine->_t('NoEmailRecipient'), 'error');
+		}
 
 		$mail_subject	= (string) ($_POST['mail_subject'] ?? '');
 		$mail_body		= (string) ($_POST['mail_body'] ?? '');
@@ -70,6 +74,9 @@ function admin_massemail(&$engine, &$module)
 			$engine->http->redirect(rawurldecode($engine->href()));
 		}
 
+		//  remove all markup before sending
+		$mail_body = strip_tags ($mail_body);
+
 		$members = $engine->db->load_all(
 			"SELECT DISTINCT
 				gm.user_id,
@@ -82,9 +89,9 @@ function admin_massemail(&$engine, &$module)
 			FROM
 				" . $engine->db->table_prefix . "user u
 					INNER JOIN " . $engine->db->table_prefix . "usergroup_member gm
-						ON u.user_id = gm.user_id
+						ON (u.user_id = gm.user_id)
 					INNER JOIN " . $engine->db->table_prefix . "user_setting us
-						ON u.user_id = us.user_id
+						ON (u.user_id = us.user_id)
 			WHERE
 				u.account_type = 0
 					AND (gm.group_id = " . (int) $group_id . "
@@ -113,6 +120,10 @@ function admin_massemail(&$engine, &$module)
 
 			$engine->http->redirect(rawurldecode($engine->href()));
 		}
+		else
+		{
+
+		}
 
 		// no results / members
 	}
@@ -135,13 +146,23 @@ function admin_massemail(&$engine, &$module)
 			</colgroup>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="user_id"><strong><?php echo $engine->_t('SendToUser'); ?></strong></label>
+				<label for="user_id"><strong><?php echo $engine->_t('SendToUser'); ?></strong><br>
+					<small><?php echo $engine->_t('SendToUserInfo');?></small></label>
 			</td>
 			<td>
 				<select id="nuser_id" name="user_id[]" multiple size="8">
-					<option value=""></option>
+					<option value="">[<?php echo $engine->_t('NoUser');?>]</option>
 <?php
-			if ($users = $engine->load_users())
+			$users = $engine->db->load_all(
+				"SELECT u.user_id, u.user_name, u.email_confirm, us.user_lang, us.allow_massemail " .
+				"FROM " . $engine->db->user_table . " u " .
+					"INNER JOIN " . $engine->db->table_prefix . "user_setting us ON (u.user_id = us.user_id) " .
+				"WHERE u.enabled = 1 " .
+					"AND u.email_confirm = '' " .
+					"AND us.allow_massemail <> 0 " .
+				"ORDER BY BINARY u.user_name");
+
+			if ($users)
 			{
 				foreach ($users as $user)
 				{
@@ -159,7 +180,7 @@ function admin_massemail(&$engine, &$module)
 			</td>' .
 			'<td>
 				<select id="group_id" name="group_id">
-					<option value=""></option>';
+					<option value="">[' . $engine->_t('NoUserGroup') . ']</option>';
 
 			if ($available_groups)
 			{
@@ -185,7 +206,7 @@ function admin_massemail(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label"><label for="mail_body"><strong><?php echo $engine->_t('YourMessage');?>:</strong><br>
 					<small><?php echo $engine->_t('YourMessageInfo');?></small></label></td>
-				<td><textarea style="width:200px; height:100px;" id="mail_body" name="mail_body"  required><?php echo Ut::html($mail_body);?></textarea></td>
+				<td><textarea style="width:500px; height:200px;" id="mail_body" name="mail_body" required><?php echo Ut::html($mail_body);?></textarea></td>
 			</tr>
 			<tr class="lined">
 				<td colspan="2"></td>
