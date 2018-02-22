@@ -239,6 +239,7 @@ $wacko_translation = [
 	'CategoriesRenameInfo'		=> '* Note: Change will affect all pages that are assigned to that category.',
 	'CategoriesGroup'			=> 'Group categories %1 with',
 	'CategoriesGroupInfo'		=> '* Select [no group], to debundled the category.',
+	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Per assegnare categorie a una pagina seleziona le caselle di controllo.',

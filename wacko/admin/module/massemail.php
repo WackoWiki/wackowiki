@@ -122,10 +122,8 @@ function admin_massemail(&$engine, &$module)
 		}
 		else
 		{
-
+			// no results / members
 		}
-
-		// no results / members
 	}
 
 	$available_groups = $engine->db->load_all(
