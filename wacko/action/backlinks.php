@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// {{backlinks [page="PageName"] [nomark=1] [title=0]}}
+
 if (!isset($page))		$page = '';
 if (!isset($nomark))	$nomark = 0;
 if (!isset($title))		$title = '';

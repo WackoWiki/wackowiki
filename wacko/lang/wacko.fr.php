@@ -239,6 +239,7 @@ $wacko_translation = [
 	'CategoriesRenameInfo'		=> '* Note: la modification affectera toutes les pages auxquelles ce mot clef est attaché.',
 	'CategoriesGroup'			=> 'Groupe de mots clefs %1 avec',
 	'CategoriesGroupInfo'		=> '* Choisissez [no group], pour dégrouper le mot clef.',
+	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Êtes-vous sûr de vouloir supprimer le mot clef %1?',
 	'CategoriesDeleteInfo'		=> '* Note: la modification affectera toutes les pages auxquelles ce mot clef est attaché. Si le mot a une sous-catégorie, ses membres ne seront pas effacés mais seulement dégroupés.',
 	'CategoriesStoreInfo'		=> 'Pour attacher des mots clefs à une page cochez-les.',
