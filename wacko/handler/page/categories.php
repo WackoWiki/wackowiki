@@ -316,7 +316,7 @@ if ($this->is_owner() || $this->is_admin())
 							'<tr>' .
 								'<td>' .
 									'<label for="">' . Ut::perc_replace($this->_t('CategoriesGroup'), '<code>' . Ut::html($word['category']) . '</code>') . '</label> ' .
-									'<select style="width:100px;" name="parent_id">' .
+									'<select name="parent_id">' .
 										'<option value="0">' . $this->_t('CategoriesNoGroup') . '</option>' .
 										$options .
 									'</select> ' .
