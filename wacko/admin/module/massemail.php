@@ -50,9 +50,9 @@ function admin_massemail(&$engine, &$module)
 			$user_ids		= implode(', ', $_user_id);
 		}
 
-		$mail_subject	= (string) $_POST['mail_subject'] ?? '';
-		$mail_body		= (string) $_POST['mail_body'] ?? '';
-		$language		= (string) $_POST['language'] ?? '';
+		$mail_subject	= (string) ($_POST['mail_subject'] ?? '');
+		$mail_body		= (string) ($_POST['mail_body'] ?? '');
+		$language		= (string) ($_POST['language'] ?? '');
 
 		if (empty($mail_subject))
 		{
@@ -88,7 +88,7 @@ function admin_massemail(&$engine, &$module)
 			WHERE
 				u.account_type = 0
 					AND (gm.group_id = " . (int) $group_id . "
-						OR u.user_id IN (" . $user_ids . "))",
+					OR u.user_id IN (" . $user_ids . "))",
 				true);
 
 		if ($members)
@@ -102,7 +102,7 @@ function admin_massemail(&$engine, &$module)
 					&& $user['allow_massemail'] != 0)
 				{
 					$subject	= $mail_subject;
-					$body		= $mail_body . "\n" .
+					$body		= $mail_body . "\n";
 
 					$engine->send_user_email($user, $subject, $body);
 				}
