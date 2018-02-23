@@ -68,6 +68,8 @@ $wacko_config_defaults = [
 	'notify_new_user_account'		=> 1,
 	'notify_upload'					=> 1,
 
+	'allow_massemail'				=> 0,
+
 	'limit_email_domain'			=> '',
 	'check_mx_record'				=> 0,
 	'validate_email'				=> 1,

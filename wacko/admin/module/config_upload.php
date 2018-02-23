@@ -39,8 +39,8 @@ function admin_config_upload(&$engine, &$module)
 	{
 		$config['upload']					= (string) $_POST['upload'];
 		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
-		$config['upload_max_size']			= (int) $_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']];
-		$config['upload_quota']				= (int) $_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']];
+		$config['upload_max_size']			= (int) ($_POST['upload_max_size'] * $binary_factor[$_POST['upload_max_size_factor']]);
+		$config['upload_quota']				= (int) ($_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']]);
 		$config['upload_quota_per_user']	= (int) $_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
 		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
 		$config['img_create_thumbnail']		= (int) $_POST['img_create_thumbnail'];

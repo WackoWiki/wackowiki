@@ -159,6 +159,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 					"notify_page		= " . (int) $this->db->notify_page . ", " .
 					"notify_comment		= " . (int) $this->db->notify_comment . ", " .
 					"sorting_comments	= " . (int) $this->db->sorting_comments . ", " .
+					"allow_massemail	= " . (int) $this->db->allow_massemail . ", " .
 					"send_watchmail		= 1");
 
 			// INSERT user menu items
