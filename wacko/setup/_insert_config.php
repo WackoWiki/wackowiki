@@ -38,6 +38,7 @@ $config_db['acl_lock']						= $config['acl_lock'];
 $config_db['admin_email']					= $config['admin_email'];
 $config_db['admin_name']					= $config['admin_name'];
 $config_db['allow_email_reuse']				= $config['allow_email_reuse'];
+$config_db['allow_intercom']				= $config['allow_intercom'];
 $config_db['allow_massemail']				= $config['allow_massemail'];
 $config_db['allow_persistent_cookie']		= $config['allow_persistent_cookie'];
 $config_db['allow_rawhtml']					= $config['allow_rawhtml'];

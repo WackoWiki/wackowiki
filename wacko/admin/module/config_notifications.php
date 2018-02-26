@@ -42,6 +42,8 @@ function admin_config_notifications(&$engine, &$module)
 		$config['notify_comment']				= (int) $_POST['notify_comment'];
 		$config['notify_upload']				= (int) $_POST['notify_upload'];
 		$config['notify_new_user_account']		= (int) ($_POST['notify_new_user_account'] ?? 0);
+		$config['allow_intercom']				= (int) $_POST['allow_intercom'];
+		$config['allow_massemail']				= (int) $_POST['allow_massemail'];
 
 		$engine->config->_set($config);
 
@@ -162,6 +164,32 @@ function admin_config_notifications(&$engine, &$module)
 					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ($engine->db->notify_comment == 2 ? ' checked' : '');?>><label for="notify_comment2"><?php echo $engine->_t('NotifyPending'); ?></label>
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="allow_intercom"><strong><?php echo $engine->_t('AllowIntercomDefault');?>:</strong><br>
+					<small><?php echo $engine->_t('AllowIntercom');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="allow_intercom_on" name="allow_intercom" value="0"<?php echo (!$engine->db->allow_intercom ? ' checked' : '');?>><label for="allow_intercom_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="allow_intercom_off" name="allow_intercom" value="1"<?php echo ($engine->db->allow_intercom ? ' checked' : '');?>><label for="allow_intercom_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="allow_massemail"><strong><?php echo $engine->_t('AllowMassemailDefault');?>:</strong><br>
+					<small><?php echo $engine->_t('AllowMassemailDefaultInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="allow_massemail_on" name="allow_massemail" value="0"<?php echo (!$engine->db->allow_massemail ? ' checked' : '');?>><label for="allow_massemail_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="allow_massemail_off" name="allow_massemail" value="1"<?php echo ($engine->db->allow_massemail ? ' checked' : '');?>><label for="allow_massemail_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
 			<tr class="hl_setting">
 				<th colspan="2">
 					<br>
@@ -176,9 +204,6 @@ function admin_config_notifications(&$engine, &$module)
 				<td>
 					<input type="checkbox" id="notify_new_user_account" name="notify_new_user_account" value="1"<?php echo ($engine->db->notify_new_user_account ? ' checked' : '');?>>
 				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
 			</tr>
 		</table>
 		<br>

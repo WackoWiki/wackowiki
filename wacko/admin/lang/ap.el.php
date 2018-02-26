@@ -750,9 +750,13 @@ $ap_translation = [
 	'NotifyMinorEditInfo'		=> 'Sends notifications also for minor edits.',
 	'NotifyNewComment'			=> 'Notify new comment',
 	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
+
 	'NotifyUserAccount'			=> 'Notify new user account',
 	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the "signup form".',
-
+	'AllowIntercomDefault'		=> 'Allow Intercom',
+	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
+	'AllowMassemailDefault'		=> 'Allow Massemail',
+	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
 
 	// Resync settings
 	'Synchronize'				=> 'συγχρονίζω',
