@@ -69,6 +69,7 @@ $wacko_config_defaults = [
 	'notify_upload'					=> 1,
 
 	'allow_massemail'				=> 0,
+	'allow_intercom'				=> 0,
 
 	'limit_email_domain'			=> '',
 	'check_mx_record'				=> 0,

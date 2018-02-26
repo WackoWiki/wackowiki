@@ -766,9 +766,13 @@ $ap_translation = [
 	'NotifyMinorEditInfo'		=> 'Sende Mitteilungen auch bei kleinen Änderungen.',
 	'NotifyNewComment'			=> 'Neuen Kommentar mitteilen',
 	'NotifyNewCommentInfo'		=> 'Ausstehend - Es wird nur für den ersten Kommentar einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
-	//
+
 	'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
 	'NotifyUserAccountInfo'		=> 'Der Administrator wird benachrichtigt, wenn ein neuer Benutzer über das Anmelde-Formular erstellt wurde.',
+	'AllowIntercomDefault'		=> 'Erlaube Intercom',
+	'AllowIntercomDefaultInfo'	=> 'Ermöglicht das Senden von persönlichen Nachrichten an die E-Mail-Adresse des Empfänger ohne Offenlegung seiner Adresse.',
+	'AllowMassemailDefault'		=> 'Erlaube Rundmail',
+	'AllowMassemailDefaultInfo'	=> 'Er sendet nur Nachrichten an die Benutzer, die den Administratoren das Senden von Informationen per E-Mail gestattet haben.',
 
 	// Resync settings
 	'Synchronize'				=> 'Synchronisieren',
