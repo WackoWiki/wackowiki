@@ -29,14 +29,13 @@ if ($this->has_access('read')
 
 	// tab navigation
 	$mod_selector	= 'files';
-	$tabs	= [
+	$tabs			= [
 				'linked'	=> 'AttachmentsLinked',
 				''			=> 'AttachmentsToPage',
 				'global'	=> 'AttachmentsGlobal',
 				'all'		=> 'AttachmentsAll',
-
 			];
-	$mode	= @$_GET[$mod_selector];
+	$mode			= @$_GET[$mod_selector];
 
 	if (!array_key_exists($mode, $tabs))
 	{
@@ -54,7 +53,7 @@ if ($this->has_access('read')
 	}
 	else if ($mode == 'all')
 	{
-		echo $this->action('files', ['all' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'all']]) . '<br>';
+		echo $this->action('files', ['all' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'all']]) . '<br>';
 	}
 	else if ($mode == 'linked')
 	{

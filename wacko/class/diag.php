@@ -19,7 +19,7 @@ class Diag
 
 		if ($config['debug'] >= 1 && strpos($http->method, '.xml') === false && $http->method != 'print' && $http->method != 'wordprocessor')
 		{
-			if (($config['debug_admin_only'] == true && $engine->is_admin() == true) || $config['debug_admin_only'] == false)
+			if (($config['debug_admin_only'] == true && $engine->is_admin()) || $config['debug_admin_only'] == false)
 			{
 				$overall_time = microtime(1) - WACKO_STARTED;
 
@@ -172,7 +172,13 @@ class Diag
 				{
 					Ut::debug_print_r($engine->sess->toArray());
 					Ut::debug_print_r($engine->context);
-					// Ut::debug_print_r($config);
+
+					if ($engine->is_admin())
+					{
+						// Ut::debug_print_r($_SERVER);
+						// Ut::debug_print_r($config);
+					}
+
 					// Ut::debug_print_r($engine->page);
 				}
 

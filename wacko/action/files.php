@@ -15,12 +15,11 @@ if (!defined('IN_WACKO'))
 		[picture=1]
 		[max=number]
 	}}
- */
+*/
 
 // TODO:
-// - add option to select all files: all=1 (?) -> DONE
-// - add option to select used files -> file_link table & page_id -> DONE
-// - add option to filter by tags -> DONE
+// - add option to filter by facets
+// - add file search
 
 $page_id	= '';
 $ppage		= '';
@@ -158,12 +157,20 @@ if ($can_view)
 
 	foreach ($files as $file)
 	{
+		if ($file['page_id'])
+		{
+			$page_ids[]		= $file['page_id'];
+			$this->page_id_cache[$file['supertag']] = $file['page_id'];
+		}
+
+		$this->cache_page($file, true);
+
 		$object_ids[]	= $file['file_id'];
 		$this->file_cache[$file['page_id']][$file['file_name']] = $file;
 	}
 
-	// cache categories
 	$this->preload_categories($object_ids, OBJECT_FILE);
+	$this->preload_acl($page_ids);
 
 	// display
 	$info_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileViewProperties') . '" alt="' . $this->_t('FileViewProperties') . '" class="btn-info"/>';
@@ -252,12 +259,6 @@ if ($can_view)
 
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
-			if ($picture && ($file['picture_w'] || $file['file_ext'] == 'svg'))
-			{
-				// XXX: now done in link funtion
-				#$link		= '<a href="' . $url . '">' . $link . '</a>';
-			}
-
 			if (!in_array($file_ext, ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp']))
 			{
 				$hits	= $file['hits'] . ' ' . $this->_t('SettingsHits');
@@ -291,7 +292,7 @@ if ($can_view)
 			{
 				// get context for filter
 				$method_filter	= $this->method == 'show' ? '' : $this->method;
-				$param_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global'])) ? ['files' => $_GET['files']] : [];
+				$param_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? ['files' => $_GET['files']] : [];
 
 				// display picture meta data
 				echo '<td class="desc-">' .
