@@ -125,8 +125,8 @@ first really BIG template written
 		=]
 
 		<h2 id="pages">[ ' _t: UsersPages ' ]</h2>
-		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages |e ' ]
-			&nbsp;&nbsp;&nbsp; [ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions |e ' ]</small></div><br>
+		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages | number 0 , . ' ]
+			&nbsp;&nbsp;&nbsp; [ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions | number 0 , . ' ]</small></div><br>
 
 		[ ''' nopages UsersNA2 ''' ]
 		[= pages _ =
@@ -144,7 +144,7 @@ first really BIG template written
 			[ ' _t: CommentsDisabled ' ]
 		=]
 		[= cmt _ =
-			<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ]: [ ' n |e ' ]</small></div>
+			<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ]: [ ' n | number 0 , . ' ]</small></div>
 			[ ''' none UsersNA2 ''' ]
 			[= c _ =
 				[ ''' pagination ''' ]<br>
@@ -159,7 +159,7 @@ first really BIG template written
 		[= up _ =
 			<h2 id="uploads">[ ' _t: UsersUploads ' ]</h2>
 			[= u _ =
-				<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ]: [ ' n |e ' ]</small></div>
+				<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ]: [ ' n | number 0 , . ' ]</small></div>
 				[ ''' none UsersNA2 ''' ]
 				[= u2 _ =
 					[ ''' pagination ''' ]<br>
@@ -243,11 +243,11 @@ first really BIG template written
 		[= u _ =
 			<tr>
 				<td style="padding-left:5px;">[ ' link ' ]</td>
-				<td class="t_center">[ ' user.total_pages |e ' ]</td>
-				<td class="t_center">[ ' user.total_comments |e ' ]</td>
-				<td class="t_center">[ ' user.total_revisions |e ' ]</td>
+				<td class="t_center">[ ' user.total_pages | number 0 , . ' ]</td>
+				<td class="t_center">[ ' user.total_comments | number 0 , . ' ]</td>
+				<td class="t_center">[ ' user.total_revisions | number 0 , . ' ]</td>
 				[= reg _ =
-					<td class="t_center">[ ' user.total_uploads |e ' ]</td>
+					<td class="t_center">[ ' user.total_uploads | number 0 , . ' ]</td>
 					<td class="t_center">[ ' user.signup_time | time_formatted ' ]</td>
 					<td class="t_center">[ ' sess lastSession ' ]</td>
 				=]
