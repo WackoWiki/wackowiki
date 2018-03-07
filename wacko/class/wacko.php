@@ -2852,7 +2852,7 @@ class Wacko
 	{
 		$save = $this->set_language($user['user_lang'], true, true);
 
-		$subject	=	$this->_t('EmailForgotSubject');
+		$subject	=	$this->_t('EmailForgotSubject') . ' ' . $user['user_name'];
 		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
 							$this->db->site_name,
 							$user['user_name'],
