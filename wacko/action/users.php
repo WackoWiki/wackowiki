@@ -558,9 +558,9 @@ else
 	}
 
 	$sql_where =
-			($group_id
-				? "LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (u.user_id = m.user_id) "
-				: "") .
+		($group_id
+			? "LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (u.user_id = m.user_id) "
+			: "") .
 		"WHERE u.account_type = 0 " .
 			"AND u.enabled = 1 " .
 			($group_id

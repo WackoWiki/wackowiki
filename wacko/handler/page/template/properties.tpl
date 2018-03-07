@@ -250,11 +250,11 @@
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsTotalRevs ' ]</th>
-				<td><a href="[ ' href: revisions ' ]" title="[ ' _t: RevisionTip ' ]">[ ' revs ' ]</a></td>
+				<td><a href="[ ' href: revisions ' ]" title="[ ' _t: RevisionTip ' ]">[ ' revs | number 0 , . ' ]</a></td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsTotalComs ' ]</th>
-				<td><a href="[ ' href: '' show_comments=1#header-comments ' ]" title="[ ' _t: ShowComments ' ]">[ ' page.comments |e ' ]</a></td>
+				<td><a href="[ ' href: '' show_comments=1#header-comments ' ]" title="[ ' _t: ShowComments ' ]">[ ' page.comments | number 0 , . ' ]</a></td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsHits ' ]</th>
