@@ -212,20 +212,20 @@ function admin_user_users(&$engine, &$module)
 	{
 		// do we have identical names?
 		if ($engine->db->load_single(
-		"SELECT user_id " .
-		"FROM " . $prefix . "user " .
-		"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
-			"AND user_id <> " . (int) $engine->db->q($_POST['user_id']) . " " .
-		"LIMIT 1"))
+			"SELECT user_id " .
+			"FROM " . $prefix . "user " .
+			"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
+				"AND user_id <> " . (int) $engine->db->q($_POST['user_id']) . " " .
+			"LIMIT 1"))
 		{
 			$engine->set_message($engine->_t('UsersAlreadyExists'));
-			$_POST['change']	= $_POST['user_id'];
+			$_POST['change']	= (int) $_POST['user_id'];
 			$_POST['edit']		= 1;
 		}
 		else if (!$engine->validate_email($_POST['newemail']))
 		{
 			$engine->show_message($engine->_t('NotAEmail'));
-			$_POST['change']	= $_POST['user_id'];
+			$_POST['change']	= (int) $_POST['user_id'];
 			$_POST['edit'] 		= 1;
 		}
 		else
@@ -776,7 +776,7 @@ function admin_user_users(&$engine, &$module)
 		// filter by lang
 		if (isset($_GET['user_lang']))
 		{
-			$where			= "WHERE p.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
+			$where			= "WHERE s.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
 		}
 
 		// entries to display

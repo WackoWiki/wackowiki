@@ -28,7 +28,8 @@ function admin_content_comments(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
-
+	Nothing here YET<br>
+	TODO: add module for comment management
 
 <?php
 

@@ -208,7 +208,6 @@ first really BIG template written
 					<td>
 						<input type="search" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]"> ['' '']
 						<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]"> ['' '']
-						['' // echo <input type="submit" id="button" value="_t('UsersOpenProfile') . '" name="gotoprofile"> '']
 					</td>
 				</tr>
 			</table><br>
