@@ -203,10 +203,10 @@ first really BIG template written
 			<table class="formation">
 				<tr>
 					<td class="label">
-						[ ' _t: UsersSearch ' ]:
+						<label for="search_user">[ ' _t: UsersSearch ' ]:</label>
 					</td>
 					<td>
-						<input type="search" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]"> ['' '']
+						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]"> ['' '']
 						<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]"> ['' '']
 					</td>
 				</tr>
