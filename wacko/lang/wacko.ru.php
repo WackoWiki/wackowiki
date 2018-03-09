@@ -808,6 +808,7 @@ $wacko_translation = [
 	'FileRemoveDenied'			=> 'Вам запрещено удалять этот файл',
 	'FileNotFound'				=> 'Файл не найден',
 
+	'FileSearch'				=> 'Find File',
 	'UploadBy'					=> 'Загружен',
 	'FileAdded'					=> 'Добавлен',
 	'FileModified'				=> 'Изменен',

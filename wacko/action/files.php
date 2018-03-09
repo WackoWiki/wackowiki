@@ -47,6 +47,7 @@ $order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
 
 // filter categories
+$phrase 			= (string) @$_GET['phrase'];
 $type_id			= (int) ($_GET['type_id'] ?? $type_id);
 $category_id		= (int) @$_GET['category_id'];
 $file_link			= (int) $linked;
@@ -119,6 +120,10 @@ if ($can_view)
 			? "f.page_id IS NOT NULL "
 			: "f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " "
 			) . " " .
+		($phrase
+			? "AND (f.file_name LIKE " . $this->db->q('%' . $phrase . '%') . " " .
+				"OR f.file_description LIKE " . $this->db->q('%' . $phrase . '%') . ") "
+			: '') .
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "
 			: '') .
@@ -154,6 +159,8 @@ if ($can_view)
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);
+
+	$page_ids			= [];
 
 	foreach ($files as $file)
 	{
@@ -192,6 +199,26 @@ if ($can_view)
 	$this->print_pagination($pagination);
 
 	$results = count($files);
+
+	// search
+	$files_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? $_GET['files'] : '';
+
+	echo $this->form_open('file_search', ['page_method' => 'attachments', 'form_method' => 'get']);
+
+	echo '<table class="formation">' .
+			'<tr>' .
+				'<td class="label">' .
+					'<label for="search_file">' . $this->_t('FileSearch') . ':</label>' .
+				'</td>' .
+				'<td>' .
+					'<input type="search" name="phrase" id="search_file" size="40" value="' . Ut::html(($_GET['phrase'] ?? '')) . '" />' .
+					'<input type="hidden" name="files" value="' . $files_filter . '">' .
+					'<input type="submit" value="' . $this->_t('SearchButtonText') . '" />' .
+				'</td>' .
+			'</tr>' .
+		'</table>';
+	echo '<br />';
+	echo $this->form_close();
 
 	if (!$nomark)
 	{
