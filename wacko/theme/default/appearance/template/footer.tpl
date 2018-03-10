@@ -34,7 +34,7 @@
 		['' _t: PoweredBy ''] ['' home ''] ['' version '']['' patchlevel '']<br>
 	=]
 	[= policy =
-		<a href="['' url '']">['' _t: TermsOfUse '']</a><br>'
+		<a href="['' url '']">['' _t: TermsOfUse '']</a><br>
 	=]
 </div>
 </footer>
