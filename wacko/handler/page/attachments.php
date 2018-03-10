@@ -49,19 +49,19 @@ if ($this->has_access('read')
 
 	if ($mode == 'global')
 	{
-		echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'global']]) . '<br>';
+		echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'global']]) . '<br>';
 	}
 	else if ($mode == 'all')
 	{
-		echo $this->action('files', ['all' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'all']]) . '<br>';
+		echo $this->action('files', ['all' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'all']]) . '<br>';
 	}
 	else if ($mode == 'linked')
 	{
-		echo $this->action('files', ['linked' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'params' => ['files' => 'linked']]) . '<br>';
+		echo $this->action('files', ['linked' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'linked']]) . '<br>';
 	}
 	else
 	{
-		echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments']) . '<br>';
+		echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1]) . '<br>';
 	}
 
 	echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '"></a>' . "\n";

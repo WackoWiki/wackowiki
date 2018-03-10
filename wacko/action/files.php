@@ -27,6 +27,7 @@ $files		= [];
 $object_ids	= [];
 
 if (!isset($nomark))	$nomark		= 0;
+if (!isset($form))		$form		= 0;	// show search form
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;	// global attachments
 if (!isset($all))		$all		= 0;	// all attachments
@@ -200,25 +201,28 @@ if ($can_view)
 
 	$results = count($files);
 
-	// search
-	$files_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? $_GET['files'] : '';
+	if ($results && $form)
+	{
+		// search
+		$files_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? $_GET['files'] : '';
 
-	echo $this->form_open('file_search', ['page_method' => 'attachments', 'form_method' => 'get']);
+		echo $this->form_open('file_search', ['page_method' => 'attachments', 'form_method' => 'get']);
 
-	echo '<table class="formation">' .
-			'<tr>' .
-				'<td class="label">' .
-					'<label for="search_file">' . $this->_t('FileSearch') . ':</label>' .
-				'</td>' .
-				'<td>' .
-					'<input type="search" name="phrase" id="search_file" size="40" value="' . Ut::html(($_GET['phrase'] ?? '')) . '" />' .
-					'<input type="hidden" name="files" value="' . $files_filter . '">' .
-					'<input type="submit" value="' . $this->_t('SearchButtonText') . '" />' .
-				'</td>' .
-			'</tr>' .
-		'</table>';
-	echo '<br />';
-	echo $this->form_close();
+		echo '<table class="formation">' .
+				'<tr>' .
+					'<td class="label">' .
+						'<label for="search_file">' . $this->_t('FileSearch') . ':</label>' .
+					'</td>' .
+					'<td>' .
+						'<input type="search" name="phrase" id="search_file" size="40" value="' . Ut::html(($_GET['phrase'] ?? '')) . '" />' .
+						'<input type="hidden" name="files" value="' . $files_filter . '">' .
+						'<input type="submit" value="' . $this->_t('SearchButtonText') . '" />' .
+					'</td>' .
+				'</tr>' .
+			'</table>';
+		echo '<br />';
+		echo $this->form_close();
+	}
 
 	if (!$nomark)
 	{
