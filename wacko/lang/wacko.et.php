@@ -805,7 +805,7 @@ $wacko_translation = [
 	'FileRemoveDenied'			=> 'Sul ei ole lubatud seda faili eemaldada',
 	'FileNotFound'				=> 'Faili ei leitud',
 
-	'FileSearch'				=> 'Find File',
+	'FileSearch'				=> 'Leia faili',
 	'UploadBy'					=> 'Uploaded by',
 	'FileAdded'					=> 'Added',
 	'FileModified'				=> 'Modified',

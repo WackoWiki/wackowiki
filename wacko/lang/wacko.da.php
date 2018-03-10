@@ -805,7 +805,7 @@ $wacko_translation = [
 	'FileRemoveDenied'			=> 'Du har ikke tilladelse til at slette filen',
 	'FileNotFound'				=> 'Ingen fil',
 
-	'FileSearch'				=> 'Find File',
+	'FileSearch'				=> 'Find fil',
 	'UploadBy'					=> 'Uploadet af',
 	'FileAdded'					=> 'Lagt',
 	'FileModified'				=> 'Ændret',
