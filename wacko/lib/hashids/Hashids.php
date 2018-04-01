@@ -9,13 +9,20 @@
  * file that was distributed with this source code.
  */
 
+# namespace Hashids;
+
+# use Hashids\Math\Bc;
+# use Hashids\Math\Gmp;
+# use RuntimeException;
+
 /**
  * This is the hashids class.
  *
  * @author Ivan Akimov <ivan@barreleye.com>
  * @author Vincent Klaiber <hello@vinkla.com>
+ * @author Johnson Page <jwpage@gmail.com>
  */
-class Hashids
+class Hashids implements HashidsInterface
 {
     /**
      * The seps divider.
@@ -37,6 +44,13 @@ class Hashids
      * @var string
      */
     protected $alphabet;
+
+    /**
+     * Shuffled alphabets, referenced by alphabet and salt.
+     *
+     * @var array
+     */
+    protected $shuffledAlphabets;
 
     /**
      * The seps string.
@@ -67,6 +81,13 @@ class Hashids
     protected $salt;
 
     /**
+     * The math class.
+     *
+     * @var \Hashids\Math\MathInterface
+     */
+    protected $math;
+
+    /**
      * Create a new hashids instance.
      *
      * @param string $salt
@@ -82,6 +103,7 @@ class Hashids
         $this->salt = $salt;
         $this->minHashLength = $minHashLength;
         $this->alphabet = implode('', array_unique(str_split($alphabet)));
+        $this->math = $this->getMathExtension();
 
         if (strlen($this->alphabet) < 16) {
             throw new HashidsException('Alphabet must contain at least 16 unique characters.');
@@ -123,14 +145,15 @@ class Hashids
     /**
      * Encode parameters to generate a hash.
      *
+     * @param mixed $numbers
+     *
      * @return string
      */
-    public function encode()
+    public function encode(...$numbers)
     {
         $ret = '';
-        $numbers = func_get_args();
 
-        if (func_num_args() == 1 && is_array(func_get_arg(0))) {
+        if (1 === count($numbers) && is_array($numbers[0])) {
             $numbers = $numbers[0];
         }
 
@@ -151,7 +174,7 @@ class Hashids
         $numbersHashInt = 0;
 
         foreach ($numbers as $i => $number) {
-            $numbersHashInt += Math::intval(Math::mod($number, ($i + 100)));
+            $numbersHashInt += $this->math->intval($this->math->mod($number, ($i + 100)));
         }
 
         $lottery = $ret = $alphabet[$numbersHashInt % strlen($alphabet)];
@@ -161,7 +184,7 @@ class Hashids
 
             if ($i + 1 < $numbersSize) {
                 $number %= (ord($last) + $i);
-                $sepsIndex = Math::intval(Math::mod($number, strlen($this->seps)));
+                $sepsIndex = $this->math->intval($this->math->mod($number, strlen($this->seps)));
                 $ret .= $this->seps[$sepsIndex];
             }
         }
@@ -230,10 +253,10 @@ class Hashids
             foreach ($hashArray as $subHash) {
                 $alphabet = $this->shuffle($alphabet, substr($lottery.$this->salt.$alphabet, 0, strlen($alphabet)));
                 $result = $this->unhash($subHash, $alphabet);
-                if (Math::comp($result, PHP_INT_MAX) <= 0) {
-                    $ret[] = Math::intval($result);
+                if ($this->math->greaterThan($result, PHP_INT_MAX)) {
+                    $ret[] = $this->math->strval($result);
                 } else {
-                    $ret[] = Math::strval($result);
+                    $ret[] = $this->math->intval($result);
                 }
             }
 
@@ -297,6 +320,12 @@ class Hashids
      */
     protected function shuffle($alphabet, $salt)
     {
+        $key = $alphabet.' '.$salt;
+
+        if (isset($this->shuffledAlphabets[$key])) {
+            return $this->shuffledAlphabets[$key];
+        }
+
         $saltLength = strlen($salt);
 
         if (!$saltLength) {
@@ -312,6 +341,8 @@ class Hashids
             $alphabet[$j] = $alphabet[$i];
             $alphabet[$i] = $temp;
         }
+
+        $this->shuffledAlphabets[$key] = $alphabet;
 
         return $alphabet;
     }
@@ -330,10 +361,10 @@ class Hashids
         $alphabetLength = strlen($alphabet);
 
         do {
-            $hash = $alphabet[Math::intval(Math::mod($input, $alphabetLength))].$hash;
+            $hash = $alphabet[$this->math->intval($this->math->mod($input, $alphabetLength))].$hash;
 
-            $input = Math::divide($input, $alphabetLength);
-        } while (Math::comp(0, $input) != 0);
+            $input = $this->math->divide($input, $alphabetLength);
+        } while ($this->math->greaterThan($input, 0));
 
         return $hash;
     }
@@ -357,11 +388,33 @@ class Hashids
 
             foreach ($inputChars as $char) {
                 $position = strpos($alphabet, $char);
-                $number = Math::multiply($number, $alphabetLength);
-                $number = Math::add($number, $position);
+                $number = $this->math->multiply($number, $alphabetLength);
+                $number = $this->math->add($number, $position);
             }
         }
 
         return $number;
+    }
+
+    /**
+     * Get BC Math or GMP extension.
+     *
+     * @codeCoverageIgnore
+     *
+     * @throws \RuntimeException
+     *
+     * @return \Hashids\Math\Bc|\Hashids\Math\Gmp
+     */
+    protected function getMathExtension()
+    {
+        if (extension_loaded('gmp')) {
+            return new Gmp();
+        }
+
+        if (extension_loaded('bcmath')) {
+            return new Bc();
+        }
+
+        throw new RuntimeException('Missing BC Math or GMP extension.');
     }
 }
