@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-#namespace Hashids\Math;
+# namespace Hashids\Math;
 
 /**
  * Interface for different math extensions.
