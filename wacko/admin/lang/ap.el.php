@@ -1083,7 +1083,7 @@ $ap_translation = [
 	'LogGroupRemoved'			=> 'Removed group ##%1##',
 
 	'GroupsMembersFor'			=> 'Members for Group',
-	'GroupsDescription'			=> 'Description',
+	'GroupsDescription'			=> 'Περιγραφή',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
 	'GroupsActive'				=> 'Active',
