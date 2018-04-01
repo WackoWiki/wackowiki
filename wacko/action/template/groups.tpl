@@ -35,7 +35,6 @@
 						[ ' _t: GroupsSearch ' ]: ['' // </td><td> ??? '']
 						<input type="search" name="group" maxchars="40" size="40" value="[ ' group |e attr ' ]"> ['' '']
 						<input type="submit" id="submit" value="[ ' _t: GroupsFilter ' ]"> ['' '']
-						<input type="submit" id="button" value="[ ' _t: GroupsOpenProfile ' ]" name="gotoprofile">
 					</form>
 				</td>
 			</tr>
