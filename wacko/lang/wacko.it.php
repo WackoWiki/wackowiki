@@ -273,6 +273,7 @@ $wacko_translation = [
 	'GroupsOpenProfile'			=> 'View Profile',
 	'GroupsName'				=> 'Gruppo',
 	'GroupsMembers'				=> 'Members',
+	'GroupsDescription'			=> 'Descrizione',
 	'GroupsCreated'				=> 'Creato',
 	'GroupsNotFound'			=> 'Group <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
 	'GroupsProfile'				=> 'Profilo',
