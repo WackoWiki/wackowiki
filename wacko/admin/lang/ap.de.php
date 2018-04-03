@@ -343,7 +343,7 @@ $ap_translation = [
 	'EnableFeeds'				=> 'Aktiviere Feeds',
 	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
 	'XmlSitemap'				=> 'XML Sitemap',
-	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens "sitemap-wackowiki.xml". Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis der Installation gespeichert werden.',
+	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis der Installation gespeichert werden.',
 	'XmlSitemapTime'			=> 'XML Sitemap Erstellungszeit',
 	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
 

@@ -409,7 +409,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="xml_sitemap"><strong><?php echo $engine->_t('XmlSitemap');?>:</strong><br>
-					<small><?php echo $engine->_t('XmlSitemapInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('XmlSitemapInfo'), '<code>' . SITEMAP_XML . '</code>');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ($engine->db->xml_sitemap ? ' checked' : '');?>>
