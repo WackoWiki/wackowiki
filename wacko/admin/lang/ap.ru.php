@@ -341,7 +341,7 @@ $ap_translation = [
 	'EnableFeeds'				=> 'Включить RSS-каналы',
 	'EnableFeedsInfo'			=> 'Включить или выключить RSS-каналы для сайта.',
 	'XmlSitemap'				=> 'XML Карта сайта (Sitemap)',
-	'XmlSitemapInfo'			=> 'Создавать карту сайта в файле "sitemap-wackowiki.xml" в папке xml.',
+	'XmlSitemapInfo'			=> 'Создавать карту сайта в файле %1 в папке xml.',
 	'XmlSitemapTime'			=> 'Периодичность создания XML карты сайта',
 	'XmlSitemapTimeInfo'		=> 'Периодичность создания XML карты сайта в днях. Ззначение 0 задает создание карты при каждом изменении страниц.',
 
