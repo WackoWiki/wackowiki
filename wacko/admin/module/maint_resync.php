@@ -257,8 +257,9 @@ if ($engine->db->xml_sitemap)
 { ?>
 	<h2><?php echo $engine->_t('XmlSiteMap');?></h2>
 	<p><?php echo $engine->_t('XmlSiteMapInfo');?><br>
-		Period <strong><?php echo $engine->db->xml_sitemap_time; ?></strong> days.
-		Last written <?php echo date('Y-m-d H:i:s', $engine->db->maint_last_xml_sitemap); ?>
+		<?php echo Ut::perc_replace($engine->_t('XmlSiteMapPeriod'),
+				'<strong>' . $engine->db->xml_sitemap_time . '</strong>',
+				'<a href="' . rtrim($engine->db->base_url) . SITEMAP_XML . '" title="' . $engine->_t('XmlSiteMapView') . '" target="_blank">' . date('Y-m-d H:i:s', $engine->db->maint_last_xml_sitemap) . '</a>'); ?>
 	</p>
 <?php
 	echo $engine->form_open('sitemap_update');

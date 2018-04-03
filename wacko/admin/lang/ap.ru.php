@@ -767,6 +767,8 @@ $ap_translation = [
 	'FeedsInfo'					=> 'В случае прямой правки документов в базе данных, содержание RSS-фидов не отразит сделанных изменений. Данная функция синхронизирует RSS-каналы с текущим состоянием БД.',
 	'XmlSiteMap'				=> 'XML-Sitemap карта сайта',
 	'XmlSiteMapInfo'			=> 'Синхронизирует карту сайта с текущм состоянием базы данных.',
+	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
+	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
 	'WikiLinksResync'			=> 'Wiki-ссылки',
 	'WikiLinksResyncInfo'		=> 'Выполняет повторный рендеринг всех внутрисайтовых ссылок и восстанавливает содержимое таблицы <code>page_link</code> и <code>file_link</code> в случае ее порчи или повреждений (может занять значительное время).',
 
@@ -1039,7 +1041,7 @@ $ap_translation = [
 
 	// User module
 	'UsersInfo'					=> 'На этой странице можно изменить данные пользователей и некоторые настройки.',
-	
+
 	'UsersAdded'				=> 'Пользователь добавлен',
 	'UsersDeleteInfo'			=> 'Удаление пользователя',
 	'UserEditButton'			=> 'Редактировать',
