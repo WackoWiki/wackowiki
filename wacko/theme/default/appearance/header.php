@@ -17,10 +17,6 @@ if ($this->db->site_logo && $this->db->logo_display >= 1)
 	$tpl->site_logo			= true;
 	$tpl->site_logo_path	= $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_logo);
 }
-else
-{
-	$tpl->site_logo			= false;
-}
 
 if ($this->db->logo_display == 0
 	|| $this->db->logo_display == 2
@@ -29,18 +25,11 @@ if ($this->db->logo_display == 0
 {
 	$tpl->site_title		= true;
 }
-else
-{
-	$tpl->site_title		= false;
-}
 
-if (@$this->page['tag'] == $this->db->root_page)
-{
-	$tpl->site_link			= false;
-}
-else
+if (@$this->page['tag'] !== $this->db->root_page)
 {
 	$tpl->site_link			= true;
+	$tpl->site_clink		= true;
 }
 
 // if user are logged, shows "You are UserName"

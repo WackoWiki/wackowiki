@@ -21,7 +21,8 @@
 				[= title _ =
 					<span>[ ' db: site_name |e ' ]</span>
 				=]
-				[= link _ =
+				[= clink _ =
+					[ ' nonstatic ' ]
 					</a>
 				=]
 			=]
@@ -46,8 +47,8 @@
 				[= reg _ =
 					<li>[ ' link ' ]</li>
 				=]
-				[''// Show Help link
-					//  echo "<li>" . $this->compose_link_to_page($this->_t('HelpPage'), '', $this->_t('Help')) . "</li>\n"; '']
+				[''// Show Help link '']
+					<li>[ ' help ' ]</li>
 				</ul>
 			=]
 	</div>
