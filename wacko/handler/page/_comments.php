@@ -49,17 +49,17 @@ if ($this->has_access('read'))
 	// store comments display in session
 	if (!isset($this->sess->show_comments[$this->page['page_id']]))
 	{
-		$this->sess->show_comments[$this->page['page_id']] = ($this->get_user_setting('show_comments') ? '1' : '0');
+		$this->sess->show_comments[$this->page['page_id']] = ($this->get_user_setting('show_comments') ? 1 : 0);
 	}
 
 	if (isset($_GET['show_comments']))
 	{
 		switch ($_GET['show_comments'])
 		{
-			case '0':
+			case 0:
 				$this->sess->show_comments[$this->page['page_id']] = 0;
 				break;
-			case '1':
+			case 1:
 				$this->sess->show_comments[$this->page['page_id']] = 1;
 				break;
 		}

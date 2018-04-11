@@ -33,7 +33,7 @@ if (!isset($ppage))		$ppage = '';
 if (!isset($legend))	$legend = '';
 if (!isset($deleted))	$deleted = 0;
 if (!isset($track))		$track = 0;
-if (!isset($picture))	$picture = '1';
+if (!isset($picture))	$picture = 1;
 if (!isset($max))		$max = null;
 
 if ($max)
