@@ -50,13 +50,13 @@ function admin_system_log(&$engine, &$module)
 		// level filtering
 		switch ($_level_mod)
 		{
-			case '1':
+			case 1:
 				$mod = '<=';	// not_lower
 				break;
-			case '2':
+			case 2:
 				$mod = '>=';	// not_higher
 				break;
-			case '3':
+			case 3:
 				$mod = '=';		// equal
 				break;
 		}
