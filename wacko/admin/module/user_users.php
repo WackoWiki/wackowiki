@@ -215,7 +215,7 @@ function admin_user_users(&$engine, &$module)
 			"SELECT user_id " .
 			"FROM " . $prefix . "user " .
 			"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
-				"AND user_id <> " . (int) $engine->db->q($_POST['user_id']) . " " .
+				"AND user_id <> " . (int) $_POST['user_id'] . " " .
 			"LIMIT 1"))
 		{
 			$engine->set_message($engine->_t('UsersAlreadyExists'));
