@@ -243,8 +243,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 								'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;' .
 							'</small>' .
 						'</td>' .
-						'<td class="t_center"><small>' . $topic['comments'] . '</small></td>' .
-						'<td class="t_center"><small>' . $topic['hits'] . '</small></td>' .
+						'<td class="t_center"><small>' . number_format($topic['comments'], 0, ',', '.') . '</small></td>' .
+						'<td class="t_center"><small>' . number_format($topic['hits'], 0, ',', '.') . '</small></td>' .
 						'<td>&nbsp;&nbsp;&nbsp;</td>' .
 						'<td class="t_center">';
 
