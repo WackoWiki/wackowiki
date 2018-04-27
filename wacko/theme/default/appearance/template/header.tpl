@@ -121,9 +121,9 @@
 			['' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 '']
 			<span class="search nobr">
 				<label for="phrase">[ ' _t: SearchText ' ]</label>
-				<input type="search" name="phrase" id="phrase" size="20">
-				<button type="submit" class="searchbutton" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]">
-					<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="Neues Captcha" class="btn-search">
+				<input type="search" name="phrase" id="phrase" size="20" placeholder="[ ' _t: SearchButtonText ' ]">
+				<button type="submit" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]">
+					<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButtonText ' ]" class="btn-search">
 				</button>
 			</span>
 		</form>
