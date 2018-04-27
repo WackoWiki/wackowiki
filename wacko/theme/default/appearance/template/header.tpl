@@ -122,7 +122,9 @@
 			<span class="search nobr">
 				<label for="phrase">[ ' _t: SearchText ' ]</label>
 				<input type="search" name="phrase" id="phrase" size="20">
-				<input type="submit" class="submitinput" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]">
+				<button type="submit" class="searchbutton" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]">
+					<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="Neues Captcha" class="btn-search">
+				</button>
 			</span>
 		</form>
 	</div>

@@ -649,6 +649,18 @@ fieldset {
 	margin: 0;
 }
 
+.searchbutton
+{
+	height: 30px;
+	padding: 1px 6px 4px;
+	border-width: 0px;
+	background-color: transparent;
+	margin-left: -30px;
+}
+.searchbutton img {
+	padding-bottom: 4px;
+}
+
 .logBtn {
 	height: 21px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -2000,6 +2012,13 @@ li.m-source img {
 }
 .btn-locked {
 	background: url('./../icon/locked.svg') no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
+.btn-search {
+	background: url('./../icon/search.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
