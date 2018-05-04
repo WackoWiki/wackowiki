@@ -56,13 +56,13 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		{
 			if ($num <> 0)
 			{
-				$_pages .= ', ';
+				$q_pages .= ', ';
 			}
 
-			$_pages	.= $this->db->q($page);
+			$q_pages	.= $this->db->q($page);
 		}
 
-		$sql .= "AND p.tag IN (" . $_pages . ") ";
+		$sql .= "AND p.tag IN (" . $q_pages . ") ";
 	}
 
 	$sql .= "ORDER BY p.created ASC";

@@ -1116,15 +1116,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 					else
 					{
-						$ids_str = '';
-
-						foreach ($comment_ids as $comment_id)
-						{
-							$ids_str .= "'" . (int) $comment_id . "', ";
-						}
-
-						$ids_str = substr($ids_str, 0, strlen($ids_str) - 2);
-
 						// update acl
 						// Give comments the same read rights as their parent page
 						$read_acl		= $this->load_acl($page_id, 'read');
@@ -1138,13 +1129,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$this->db->sql_query(
 							"UPDATE " . $this->db->table_prefix . "page SET " .
 								"comment_on_id = " . (int) $page_id . " " .
-							"WHERE page_id IN ( $ids_str )");
+							"WHERE page_id IN (" . $this->ids_string($comment_ids) . ")");
 
 						// update page_link table
 						$comments = $this->db->load_all(
 							"SELECT page_id, tag, body_r " .
 							"FROM " . $this->db->table_prefix . "page " .
-							"WHERE page_id IN ( $ids_str )");
+							"WHERE page_id IN (" . $this->ids_string($comment_ids) . ")");
 
 						foreach ($comments as $comment)
 						{

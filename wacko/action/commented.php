@@ -12,7 +12,7 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 
 	// going around the limitations of GROUP BY when used along with ORDER BY
 	// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html
-	$ids = $this->db->load_all(
+	$page_ids = $this->db->load_all(
 		"SELECT a.page_id " .
 		"FROM " . $this->db->table_prefix . "page a " .
 			"LEFT JOIN " . $this->db->table_prefix . "page a2 ON (a.comment_on_id = a2.comment_on_id AND a.created < a2.created) " .
@@ -29,14 +29,9 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 		"ORDER BY a.created DESC"
 		, true);
 
-	if ($ids)
+	if ($page_ids)
 	{
-		$pagination = $this->pagination(count($ids), $limit);
-
-		foreach ($ids as &$id)
-		{
-			$id			= (int) $id['page_id'];
-		}
+		$pagination = $this->pagination(count($page_ids), $limit);
 
 		// load complete comments
 		$comments = $this->db->load_all(
@@ -47,7 +42,7 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (a.owner_id = o.user_id) " .
-			"WHERE a.page_id IN ( " . implode(', ', $ids) . " ) " .
+			"WHERE a.page_id IN (" . $this->ids_string($page_ids) . ") " .
 			"ORDER BY comment_time DESC " .
 			$pagination['limit']);
 	}
