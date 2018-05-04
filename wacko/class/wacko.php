@@ -138,6 +138,15 @@ class Wacko
 		return $this->dblink->load_single($query, $docache);
 	}
 
+	function ids_string($ids)
+	{
+		// sanitize array alow only integer values
+		$ids_string = array_map( 'intval', $ids );
+
+		// implode the array to be used in a SQL statement
+		return implode(', ', $ids_string);
+	}
+
 	// MISC
 	function get_page_tag($page_id = 0)
 	{
@@ -1474,7 +1483,7 @@ class Wacko
 		if ($links = $this->db->load_all(
 			"SELECT file_id " .
 			"FROM " . $this->db->table_prefix . "file_link " .
-			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' )"))
+			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")"))
 		{
 			foreach ($links as $link)
 			{
@@ -1488,7 +1497,7 @@ class Wacko
 			if ($files = $this->db->load_all(
 				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
 				"FROM " . $this->db->table_prefix . "file " .
-				"WHERE file_id IN ( '" . implode("', '", $file_ids) . "' ) " .
+				"WHERE file_id IN (" . $this->ids_string($file_ids) . ") " .
 				"AND deleted <> 1 "
 				, true))
 			{
@@ -1536,7 +1545,7 @@ class Wacko
 		if ($links = $this->db->load_all(
 			"SELECT to_page_id, to_tag " .
 			"FROM " . $this->db->table_prefix . "page_link " .
-			"WHERE from_page_id IN ( '" . implode("', '", $page_ids) . "' )"))
+			"WHERE from_page_id IN (" . $this->ids_string($page_ids) . ")"))
 		{
 			foreach ($links as $link)
 			{
@@ -1599,7 +1608,7 @@ class Wacko
 				{
 					$supertag		= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
 					$spages[]		= $supertag;
-					$spages_q[]		= $this->db->q($supertag);
+					$q_spages[]		= $this->db->q($supertag);
 				}
 			}
 		}
@@ -1610,9 +1619,9 @@ class Wacko
 		if ($links = $this->db->load_all(
 			"SELECT " . $this->page_meta . " " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE page_id IN ( '" . implode("', '", $p_ids) . "' ) " .
+			"WHERE page_id IN (" . $this->ids_string($p_ids) . ") " .
 				($default
-					? "OR supertag IN ( " . implode(", ", $spages_q) . " ) "
+					? "OR supertag IN ( " . implode(", ", $q_spages) . " ) "
 					: "")
 			, true))
 		{
@@ -1973,7 +1982,7 @@ class Wacko
 			"SELECT ca.object_id, ca.object_type_id, c.category_id, c.category, c.category_lang " .
 			"FROM " . $this->db->table_prefix . "category c " .
 				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
-			"WHERE ca.object_id IN ( '" . implode("', '", $object_ids) . "' ) " .
+			"WHERE ca.object_id IN (" . $this->ids_string($object_ids) . ") " .
 			($type_id != 0
 				? "AND ca.object_type_id = " . (int) $type_id . " "
 				: "AND ca.object_type_id = " . (int) $type_id . " " ) // TODO: explode array IN
@@ -4864,7 +4873,7 @@ class Wacko
 				: "referrer, count(referrer) AS num ") .
 			"FROM " . $this->db->table_prefix . "referrer " .
 			(!is_null($page_ids)
-				? "WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) "
+				? "WHERE page_id IN (" . $this->ids_string($page_ids) . ") "
 				: "") .
 			"GROUP BY " .
 				(!is_null($page_ids)
@@ -5808,7 +5817,7 @@ class Wacko
 		if ($acls = $this->db->load_all(
 			"SELECT page_id, privilege, list " .
 			"FROM " . $this->db->table_prefix . "acl " .
-			"WHERE page_id IN ( '" . implode("', '", $page_ids) . "' ) " .
+			"WHERE page_id IN (" . $this->ids_string($page_ids) . ") " .
 				($privileges
 					? "AND privilege IN ( " . implode(", ", $q_privilege) . " ) "
 					: "")
@@ -7256,21 +7265,19 @@ class Wacko
 		$remove	= [];
 		$rev	= array_flip($this->page_id_cache);
 
-		foreach ($pages as $id)
+		foreach ($pages as $page_id)
 		{
-			$remove[] = "'" . $id . "'";
-			unset($this->page_id_cache[@$rev[$id]]);
+			$page_ids[] = (int) $page_id;
+			unset($this->page_id_cache[@$rev[$page_id]]);
 		}
-
-		$page_ids = implode(', ', $remove);
 
 		$this->db->sql_query(
 			"DELETE FROM " . $this->db->table_prefix . "page " .
-			"WHERE page_id IN ( " . $page_ids . " )");
+			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")");
 
 		$this->db->sql_query(
 			"DELETE FROM " . $this->db->table_prefix . "revision " .
-			"WHERE page_id IN ( " . $page_ids . " )");
+			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")");
 	}
 
 	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0)

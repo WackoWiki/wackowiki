@@ -115,7 +115,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	if ($category_id)
 	{
 		$selector .=
-			"AND k.category_id IN ( " . $this->db->q($category_id) . " ) " .
+			"AND k.category_id IN ( " . (int) $category_id) . " ) " .
 			"AND k.object_type_id = " . OBJECT_PAGE . " ";
 	}
 
@@ -161,7 +161,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			"LEFT JOIN " . $this->db->table_prefix . "page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-		"WHERE p.comment_on_id IN ( '" . implode("', '", $page_ids) . "' ) " .
+		"WHERE p.comment_on_id IN (" . $this->ids_string($page_ids) . ") " .
 			"AND p2.page_id IS NULL " .
 			"AND p.comment_on_id <> 0 " .
 			"AND p.deleted <> 1";

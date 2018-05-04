@@ -38,16 +38,14 @@ function admin_massemail(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$group_id		= (int) $_POST['group_id'];
-		$user_ids		= '';
+		$user_ids		= [];
 
 		if (isset($_POST['user_id']))
 		{
 			foreach ($_POST['user_id'] as $user_id)
 			{
-				$_user_id[] = (int) $user_id;
+				$user_ids[] = (int) $user_id;
 			}
-
-			$user_ids		= implode(', ', $_user_id);
 		}
 		else
 		{
@@ -95,7 +93,7 @@ function admin_massemail(&$engine, &$module)
 			WHERE
 				u.account_type = 0
 					AND (gm.group_id = " . (int) $group_id . "
-					OR u.user_id IN (" . $user_ids . "))",
+					OR u.user_id IN (" . $engine->ids_string($user_ids) . "))",
 				true);
 
 		if ($members)

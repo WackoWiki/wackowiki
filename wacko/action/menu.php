@@ -192,27 +192,22 @@ if (isset($_POST['_user_menu']))
 	}
 	else if (isset($_POST['delete_menu_item']))
 	{
-		$deletion = '';
+		$menu_ids = [];
 
 		foreach ($object->data['user_menu'] as $item)
 		{
 			if (isset($_POST['delete_' . $item['menu_id']]))
 			{
-				if ($deletion != '')
-				{
-					$deletion .= ', ';
-				}
-
-				$deletion .= $item['menu_id'];
+				$menu_ids[] = $item['menu_id'];
 			}
+		}
 
-			if ($deletion != '')
-			{
-				$this->db->sql_query(
-					"DELETE " .
-					"FROM " . $this->db->table_prefix . "menu " .
-					"WHERE menu_id IN (" . $deletion.")");
-			}
+		if (!empty($menu_ids))
+		{
+			$this->db->sql_query(
+				"DELETE " .
+				"FROM " . $this->db->table_prefix . "menu " .
+				"WHERE menu_id IN (" . $this->ids_string($menu_ids) . ")");
 		}
 	}
 

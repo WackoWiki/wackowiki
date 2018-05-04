@@ -902,11 +902,11 @@ $wacko_translation = [
 	// Cache
 	'ClearCache'				=> 'Zwischenspeicher leeren',
 	'CacheCleared'				=> 'Zwischenspeicher geleert.',
-	'ConfigCache'				=> 'Config Zwischenspeicher',
-	'FeedCache'					=> 'Feed Zwischenspeicher',
-	'PageCache'					=> 'Seiten Zwischenspeicher',
-	'SQLCache'					=> 'SQL Zwischenspeicher',
-	'TemplateCache'				=> 'Template Zwischenspeicher',
+	'ConfigCache'				=> 'Config-Zwischenspeicher',
+	'FeedCache'					=> 'Feed-Zwischenspeicher',
+	'PageCache'					=> 'Seiten-Zwischenspeicher',
+	'SQLCache'					=> 'SQL-Zwischenspeicher',
+	'TemplateCache'				=> 'Template-Zwischenspeicher',
 	'ThumbCache'				=> 'Vorschaubild Zwischenspeicher',
 
 	// Flash

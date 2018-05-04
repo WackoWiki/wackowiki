@@ -56,7 +56,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.title, a.tag, a.supertag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size,
+		"SELECT a.page_id, a.title, a.tag, a.supertag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, comments,
 			MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) AS score,
 			u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page a " .
@@ -125,7 +125,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.title, a.tag, a.supertag, a.created, a.modified, a.comment_on_id, a.page_lang, a.page_size,
+		"SELECT a.page_id, a.title, a.tag, a.supertag, a.created, a.modified, a.comment_on_id, a.page_lang, a.page_size, comments,
 			u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page a " .
 			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
@@ -387,6 +387,7 @@ if (strlen($phrase) >= 3)
 					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);
+					$tpl->l_comments_n	= $page['comments'];
 					$tpl->l_category	= $this->get_categories($page['page_id'], OBJECT_PAGE, '', '', ['phrase' => $phrase]);
 
 					if ($mode != 'topic')

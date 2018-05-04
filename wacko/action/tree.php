@@ -118,7 +118,7 @@ if ($pages = $this->db->load_all(
 		if ($links = $this->db->load_all(
 			"SELECT {$this->page_meta} " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE page_id IN ('" . implode("', '", $page_ids) . "')", true))
+			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")", true))
 		{
 			foreach ($links as $link)
 			{

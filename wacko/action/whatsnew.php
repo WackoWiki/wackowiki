@@ -127,7 +127,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			"FROM " . $this->db->table_prefix . "file f " .
 				"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-			"WHERE f.file_id IN ( " . implode(', ', $file_ids) . " ) "
+			"WHERE f.file_id IN (" . $this->ids_string($file_ids) . ") "
 			))
 		{
 			foreach ($files as $file)
