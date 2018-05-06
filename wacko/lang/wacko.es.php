@@ -25,7 +25,7 @@ $wacko_translation = [
 	'RegistrationButton'		=> 'Regístrate',
 	'RegistrationUserNameOwned'	=> 'Este nombre ya existe. Escoge otro por favor.',
 	'RegistrationPage'			=> 'Registrarse',
-	'SiteRegistered'			=> 'Se registró exitosamente en el sitio ',
+	'SiteRegistered'			=> 'Se registró exitosamente en el sitio %1.',
 	'RegistrationEmailInfo'		=> 'Una dirección de email válida. El sistema enviará todos los emails a esta dirección. No se mostrará la dirección publicamente y se utilizará solamente si desea establecer una nueva contraseña, o para recibir determinados noticias y notificaciones.',
 	'SiteEmailConfirm'			=> 'Por favor confirme su dirección de email seg´un las instrucciones enviados a Usted. <br>Tenga en cuenta que no le será posible obtener su contraseña sin verificar la dirección',
 	'NameTooShort'				=> 'El nombre de usuario es muy corto, se requiere un mínimo de %2 caracteres.',
@@ -45,6 +45,7 @@ $wacko_translation = [
 	'UserWaitingApproval'		=> 'Email enviado al administrador del sitio. el administrador va a revisar la información y aprobar o rechazar la solicitud.',
 	'UserRequiresApproval'		=> 'Para aprobar o rechazar acceso de este usuario a %1 entre al panel de administración.',
 	'UserApprovalInfo'			=> 'Al registrar se envia un email al administrador del sitio para su aprobación. Luego va a recibir un email con más instrucciones.',
+	'UserApprovalHint'			=> 'The successful activation of your account will be announced in a specific e-mail. Until then, a login is not possible.',
 
 	'UserApprovalPending'		=> 'Su cuenta todavía está pendiente de aprobar.',
 	'UserApprovalDenied'		=> 'Su cuenta fue bloqueada de este sitio.',

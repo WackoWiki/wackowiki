@@ -25,7 +25,7 @@ $wacko_translation = [
 	'RegistrationButton'		=> 'Enregistrez-moi !',
 	'RegistrationUserNameOwned'	=> 'Ce nom est déjà utilisé. Merci d&rsquo;en choisir un autre.',
 	'RegistrationPage'			=> 'Enregistrement',
-	'SiteRegistered'			=> 'Vous êtes bien enregistré sur le site ',
+	'SiteRegistered'			=> 'Vous êtes bien enregistré sur le site %1.',
 	'RegistrationEmailInfo'		=> 'Une adresse courriel valide. Tous les courriels émis par le système seront envoyés à cette adresse. Cette adresse courriel ne sera pas rendue publique et sera utilisée seulement si vous souhaitez recevoir un nouveau mot de passe ou recevoir certaines nouvelles ou notifications par courriel.',
 	'SiteEmailConfirm'			=> 'Merci de confirmer votre adresse courriel en suivant les instructions qui vous ont été envoyées. <br> Notez que sans vérification de cette adresse, vous ne pourrez pas récupérer votre mot de passe !',
 	'NameTooShort'				=> 'Le nom d&rsquo;utilisateur est trop court, un minimum de %2 caractères est obligatoire.',
@@ -45,6 +45,7 @@ $wacko_translation = [
 	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
 	'UserRequiresApproval'		=> 'To approve or deny this user access to %1 go to the admin panel.',
 	'UserApprovalInfo'			=> 'After you register, your request will be sent to the site administrator for approval. You will then receive an email with further instructions.',
+	'UserApprovalHint'			=> 'The successful activation of your account will be announced in a specific e-mail. Until then, a login is not possible.',
 
 	'UserApprovalPending'		=> 'Your account is still pending approval.',
 	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',

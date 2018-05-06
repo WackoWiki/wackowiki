@@ -197,9 +197,15 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// forward
 			$this->set_message(
-				$this->_t('SiteRegistered') .
-				'&laquo;' . $this->db->site_name . '&raquo;. <br><br>' .
+				Ut::perc_replace($this->_t('SiteRegistered'), '&laquo;' . $this->db->site_name . '&raquo;') .
+				'<br><br>' .
 				$this->_t('SiteEmailConfirm'));
+
+			if ($this->db->approve_new_user)
+			{
+				// notify the user that the account still needs approval
+				$this->set_message($this->_t('UserApprovalHint'), 'hint');
+			}
 
 			$this->context[++$this->current_context] = '';
 			$this->login_page();
