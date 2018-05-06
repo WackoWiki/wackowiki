@@ -25,7 +25,7 @@ $wacko_translation = [
 	'RegistrationButton'		=> 'Benutzer registrieren',
 	'RegistrationUserNameOwned'	=> 'Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.',
 	'RegistrationPage'			=> 'Registrierung',
-	'SiteRegistered'			=> 'Du hast dich erfolgreich auf der Website registriert ',
+	'SiteRegistered'			=> 'Du hast dich erfolgreich auf der Website %1 registriert.',
 	'RegistrationEmailInfo'		=> 'Eine gültige E-Mail-Adresse. Alle E-Mails der Website werden an diese Adresse gesendet werden. Die E-Mail-Adresse wird nicht veröffentlicht und wird nur verwendet, wenn ein neues Passwort anfordern wird oder wenn eingestellt wird, bestimmte Informationen oder Benachrichtigungen per E-Mail zu erhalten.',
 	'SiteEmailConfirm'			=> 'Bitte bestätige deine E-Mail-Adresse gemäß der dir zugesanden Anleitung. <br> Beachte, bei unbestätigter E-Mail-Adresse kann das vergessene Passwort nicht zurückgesetzt werden.',
 	'NameTooShort'				=> 'Der Benutzername ist zu kurz, es sind mindestens %2 Zeichen erforderlich.',
@@ -45,6 +45,7 @@ $wacko_translation = [
 	'UserWaitingApproval'		=> 'Eine E-Mail wurde an den Administrator gesendet. Der Administrator wird die angegebenen Informationen überprüfen, und die Anfrage für ein neues Konto zulassen oder ablehnen.',
 	'UserRequiresApproval'		=> 'Um den Benutzer für %1 zuzulassen oder abzulehnen gehe ins Admin-Panel.',
 	'UserApprovalInfo'			=> 'Nachdem du dich registriert hast, wird deine Registrierung zur Freischaltung an den Administrator der Seite geschickt. Du erhältst dann eine E-Mail mit weiteren Anweisungen.',
+	'UserApprovalHint'			=> 'Die erfolgreiche Freischaltung deines Kontos wird dir in einer gesonderten E-Mail mitgeteilt. Bis dahin ist eine Anmeldung nicht möglich.',
 
 	'UserApprovalPending'		=> 'Dein Konto ist noch nicht freigeschaltet.',
 	'UserApprovalDenied'		=> 'Dein Konto wurde der Zugriff auf diese Seite verweigert.',

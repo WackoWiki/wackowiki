@@ -343,7 +343,7 @@ $ap_translation = [
 	'EnableFeeds'				=> 'Aktiviere Feeds',
 	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
 	'XmlSitemap'				=> 'XML Sitemap',
-	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis der Installation gespeichert werden.',
+	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis des Servers gespeichert werden. Andererseits kann der Pfad zur Sitemap auch in der robots.txt-Datei im Stammverzeichnis wie folgt hinzufügt werden:',
 	'XmlSitemapTime'			=> 'XML Sitemap Erstellungszeit',
 	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
 
@@ -824,7 +824,7 @@ $ap_translation = [
 	'SendTestEmailInfo'			=> 'Sendet eine Test-Mail an die in deinem Benutzerkonto hinterlegte Adresse.',
 	'TestEmailSubject'			=> 'Dein Wiki ist für den E-Mail-Versand richtig konfiguriert',
 	'TestEmailBody'				=> 'Wenn du diese Nachricht erhältst, ist deine Wiki richtig für den E-Mail-Versand konfiguriert.',
-	'TestEmailMessage'			=> 'Die Test-Mail wurde gesendet.<br>Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Konfiguration.',
+	'TestEmailMessage'			=> 'Eine Test-E-Mail wurde gesendet.<br>Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Einstellungen.',
 
 	'SmtpAutoTls'				=> 'STARTTLS',
 	'SmtpAutoTlsInfo'			=> 'Aktiviert Verschlüsselung automatisch, wenn der Server TLS Verschlüsselung anbietet (nach dem Aufbau der Serververbindung), sogar wenn <code>SMTPSecure</code> nicht eingeschaltet wurde.',
