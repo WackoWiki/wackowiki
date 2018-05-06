@@ -13,6 +13,10 @@ if (!defined('IN_WACKO'))
 
 */
 
+// Import the PHPMailer class into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class Email
 {
 	// VARIABLES
@@ -163,7 +167,7 @@ class Email
 			$send_ok = true;
 		}
 
-		catch (\Exception $e)
+		catch (Exception $e)
 		{
 			echo $e->errorMessage(); //Pretty error messages from PHPMailer
 			$send_ok = false;
