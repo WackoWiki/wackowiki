@@ -121,7 +121,7 @@
 			['' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 '']
 			<span class="search nobr">
 				<label for="phrase">[ ' _t: SearchText ' ]</label>
-				<input type="search" name="phrase" id="phrase" size="20" placeholder="[ ' _t: SearchButtonText ' ]">
+				<input type="search" name="phrase" id="phrase" size="20" title="[ ' _t: SearchButtonText ' ]">
 				<button type="submit" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]">
 					<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButtonText ' ]" class="btn-search">
 				</button>
