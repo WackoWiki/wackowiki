@@ -134,7 +134,7 @@ if ($can_view)
 
 	if ($category_id)
 	{
-		$selector .= "AND k.category_id IN ( " . (int) $category_id) . " ) " .
+		$selector .= "AND k.category_id IN ( " . (int) $category_id . " ) " .
 					 "AND k.object_type_id = " . OBJECT_FILE . " ";
 	}
 
