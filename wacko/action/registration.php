@@ -37,6 +37,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 	$password		= $_POST['password'];
 	$conf_password	= $_POST['conf_password'];
 	$user_lang		= $_POST['user_lang'] ?? $this->db->language;
+	$user_lang		= $this->known_language($user_lang) ? $user_lang : $this->db->language;
 	$complexity		= $this->password_complexity($user_name, $password);
 
 	if (!$this->is_admin() && $this->db->captcha_registration && !$this->validate_captcha())
@@ -129,7 +130,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				"SET " .
 					"signup_time	= UTC_TIMESTAMP(), " .
 					"user_name		= " . $this->db->q($user_name) . ", " .
-					"account_lang	= " . $this->db->q($user_lang ?: $this->db->language) . ", " .
+					"account_lang	= " . $this->db->q($user_lang) . ", " .
 					"email			= " . $this->db->q($email) . ", " .
 					"password		= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", " .
 					"account_status	= " . (int) $account_status . ", " .
@@ -151,7 +152,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				"SET " .
 					"user_id			= " . (int) $user_id . ", " .
 					"typografica		= " . (($this->db->default_typografica == 1) ? 1 : 0) . ", " .
-					"user_lang			= " . $this->db->q($user_lang ?? $this->db->language) . ", " .
+					"user_lang			= " . $this->db->q($user_lang) . ", " .
 					"list_count			= " . (int) $this->db->list_count . ", " .
 					"theme				= " . $this->db->q($this->db->theme) . ", " .
 					"diff_mode			= " . (int) $this->db->default_diff_mode . ", " .
