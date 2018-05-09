@@ -115,7 +115,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	if ($category_id)
 	{
 		$selector .=
-			"AND k.category_id IN ( " . (int) $category_id) . " ) " .
+			"AND k.category_id IN ( " . (int) $category_id . " ) " .
 			"AND k.object_type_id = " . OBJECT_PAGE . " ";
 	}
 

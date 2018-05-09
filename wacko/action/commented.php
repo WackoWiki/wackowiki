@@ -31,6 +31,11 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 
 	if ($page_ids)
 	{
+		foreach ($page_ids as &$id)
+		{
+			$id = (int) $id['page_id'];
+		}
+
 		$pagination = $this->pagination(count($page_ids), $limit);
 
 		// load complete comments
