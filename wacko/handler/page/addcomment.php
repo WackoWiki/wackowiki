@@ -107,7 +107,10 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	else
 	{
 		// captcha validation
-		unset($this->sess->freecap_old_comment);
+		if (isset($this->sess->freecap_old_comment))
+		{
+			unset($this->sess->freecap_old_comment);
+		}
 
 		if ($this->db->captcha_new_comment && !$this->validate_captcha())
 		{

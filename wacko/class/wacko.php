@@ -138,6 +138,7 @@ class Wacko
 		return $this->dblink->load_single($query, $docache);
 	}
 
+	// TODO: throw error for nested arrays
 	function ids_string($ids)
 	{
 		// sanitize array alow only integer values
@@ -2132,7 +2133,7 @@ class Wacko
 			// making page body components
 			$paragrafica	= ($comment_on_id ? false : true);
 			$body_r			= $this->compile_body($body, $page_id, $paragrafica, false);
-			$body_toc		= $this->body_toc;
+			$body_toc		= $this->body_toc ?? null;
 
 			// review
 			if (isset($reviewed))
@@ -3528,7 +3529,7 @@ class Wacko
 	* Returns full <a href=".."> or <img ...> HTML for Tag
 	*
 	* @param string $tag Link content - may be Wacko tag, interwiki wikiname:page tag,
-	*	http/file/ftp/https/mailto/xmpp URL, [=] local or remote image-file for <img> link, or local or
+	*	http/file/ftp/https/mailto/xmpp URL, local or remote image-file for <img> link, or local or
 	*	remote doc-file; if pagetag is for an external link but not protocol is specified, http:// is prepended
 	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $text Optional text or image-file for HREF link (defaults to same as pagetag)
@@ -4087,7 +4088,7 @@ class Wacko
 			{
 				$_lang		= $this->language['code'];
 
-				if ($this_page['page_lang'])
+				if (isset($this_page['page_lang']))
 				{
 					$lang	= $this_page['page_lang'];
 				}
