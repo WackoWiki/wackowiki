@@ -9,10 +9,8 @@
 		[ ' _t: NoReferringPages ' ]
 	=]
 		<ol>
-			[= page _ =
-				[= l _ =
-					<li>[ ' link ' ]</li>
-				=]
+			[= l _ =
+				<li>[ ' link ' ]</li>
 			=]
 		</ol>
 	[= emark _ =

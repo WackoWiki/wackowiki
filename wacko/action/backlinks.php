@@ -42,16 +42,16 @@ if (($pages = $this->load_pages_linking_to($tag)))
 			{
 				if ($title)
 				{
-					$_link = $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['title']);
+					$link = $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['title']);
 				}
 				else
 				{
-					$_link = $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['tag'], $page['title']);
+					$link = $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['tag'], $page['title']);
 				}
 
-				if (strpos($_link, 'span class="missingpage"') === false)
+				if (strpos($link, 'span class="missingpage"') === false)
 				{
-					$tpl->page_l_link = $_link;
+					$tpl->l_link = $link;
 				}
 			}
 		}
