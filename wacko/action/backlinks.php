@@ -13,6 +13,12 @@ if (!isset($title))		$title = '';
 
 $tag = $page ? $this->unwrap_link($page) : $this->tag;
 
+if (!$nomark)
+{
+	$tpl->mark		= true;
+	$tpl->emark		= true;
+}
+
 if (($pages = $this->load_pages_linking_to($tag)))
 {
 	foreach ($pages as $page)
@@ -25,13 +31,6 @@ if (($pages = $this->load_pages_linking_to($tag)))
 
 	// cache acls
 	$this->preload_acl($page_ids);
-
-	if (!$nomark)
-	{
-		echo '<div class="layout-box"><p><span>' . $this->_t('ReferringPages') . ":</span></p>\n";
-	}
-
-	echo "<ol>\n";
 
 	$anchor = $this->translit($tag);
 
@@ -52,20 +51,13 @@ if (($pages = $this->load_pages_linking_to($tag)))
 
 				if (strpos($_link, 'span class="missingpage"') === false)
 				{
-					echo '<li>' . $_link . "</li>\n";
+					$tpl->page_l_link = $_link;
 				}
 			}
 		}
 	}
-
-	echo "</ol>\n";
-
-	if (!$nomark)
-	{
-		echo "</div>\n";
-	}
 }
 else
 {
-	echo $this->_t('NoReferringPages');
+	$tpl->nobacklinks = true;
 }
