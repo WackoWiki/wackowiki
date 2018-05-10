@@ -11,6 +11,12 @@ if (!isset($title))		$title = '';
 
 if ($file_id)
 {
+	if (!$nomark)
+	{
+		$tpl->mark		= true;
+		$tpl->emark		= true;
+	}
+
 	if ($pages = $this->load_file_usage($file_id))
 	{
 		foreach ($pages as $page)
@@ -23,13 +29,6 @@ if ($file_id)
 
 		// cache acls
 		$this->preload_acl($page_ids);
-
-		if (!$nomark)
-		{
-			echo '<div class="layout-box"><p><span>' . $this->_t('FileUsage') . ': ' . "</span></p>\n";
-		}
-
-		echo "<ol>\n";
 
 		foreach ($pages as $page)
 		{
@@ -48,31 +47,24 @@ if ($file_id)
 				{
 					if ($title == 1)
 					{
-						$_link = $this->link('/' . $page['tag'], '', $page['title']);
+						$link = $this->link('/' . $page['tag'], '', $page['title']);
 					}
 					else
 					{
-						$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title']);
+						$link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title']);
 					}
 
-					if (strpos($_link, 'span class="missingpage"') === false)
+					if (strpos($link, 'span class="missingpage"') === false)
 					{
-						echo '<li>' . $_link . "</li>\n";
+						$tpl->l_link = $link;
 					}
 				}
 			}
 		}
-
-	echo "</ol>\n";
-
-		if (!$nomark)
-		{
-			echo "</div>\n";
-		}
 	}
 	else
 	{
-		echo $this->_t('NoFileUsage');
+		$tpl->nobacklinks = true;
 	}
 }
 ?>

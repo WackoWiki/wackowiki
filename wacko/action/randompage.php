@@ -14,7 +14,7 @@ Random Page Action
  }}
  */
 
-$tag = isset($page)? $page : '';
+$tag = $page ?? '';
 
 $query = // "SELECT p.supertag " .
 		"FROM ". $this->db->table_prefix . "page p, ". $this->db->table_prefix . "acl a " .
