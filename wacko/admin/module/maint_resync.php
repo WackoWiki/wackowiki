@@ -175,7 +175,7 @@ function admin_maint_resync(&$engine, &$module)
 							- (Undefined property: Wacko::$charset) -> include_buffered()
 							- $tpl->setEncoding($this->charset);
 			*/
-			$limit = 3;
+			$limit = 500;
 
 			if (isset($_REQUEST['i']))
 			{
@@ -185,20 +185,25 @@ function admin_maint_resync(&$engine, &$module)
 			{
 				// truncate link tables
 				$i = 0;
-				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "page_link");
-				$engine->db->sql_query("DELETE FROM " . $engine->db->table_prefix . "file_link");
+				$engine->db->sql_query("TRUNCATE " . $engine->db->table_prefix . "page_link");
+				$engine->db->sql_query("TRUNCATE " . $engine->db->table_prefix . "file_link");
 			}
 
-			$engine->set_user_setting('dont_redirect', 1, 1);
+			// do not allow automatic redirection by action redirect
+			$engine->set_user_setting('dont_redirect', 1, 0);
 
 			if ($pages = $engine->db->load_all(
 			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id
 			FROM " . $engine->db->table_prefix . "page
+			WHERE owner_id <> " . (int) $engine->db->system_user_id . "
 			LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $n => $page)
 				{
-					echo (($i * $limit) + $n + 1) . '. ' . $page['tag'] . "<br>\n";
+					$record = (($i * $limit) + $n + 1);
+					echo $record . '. ' . $page['tag'] . "<br>\n";
+					// where it dies: last rendered page
+					Diag::dbg('GOLD', $record, $page['tag']);
 
 					// recompile if necessary
 					if ($page['body_r'] == '')
@@ -215,7 +220,8 @@ function admin_maint_resync(&$engine, &$module)
 				}
 
 				// TODO: Fix or workaround, see notice above
-				#$engine->http->redirect(rawurldecode($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)])));
+				#if ($i < 20)
+				$engine->http->redirect(rawurldecode($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)])));
 			}
 			else
 			{
