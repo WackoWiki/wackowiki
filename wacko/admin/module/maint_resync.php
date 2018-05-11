@@ -170,10 +170,12 @@ function admin_maint_resync(&$engine, &$module)
 						2) Browser will stop after 20 redirects with: ERR_TOO_MANY_REDIRECTS: There were too many redirects. -> load recent url again after error,
 							solution: stopp after after 15 redirects and provide a 'contine button
 							Chrome and Firefox out of the box is 20, Internet Explorer is 10
-						3) 5.5.rc3 update_link_table() breaks processing !!! (WHY?)
-							- fails with page having action using templates
+						3) if processing breaks see point 1
+							- fails with page having broken action using templates
 							- (Undefined property: Wacko::$charset) -> include_buffered()
 							- $tpl->setEncoding($this->charset);
+							- registration action?
+						4) add option to empty all body_r and body_toc first
 			*/
 			$limit = 500;
 
@@ -193,10 +195,10 @@ function admin_maint_resync(&$engine, &$module)
 			$engine->set_user_setting('dont_redirect', 1, 0);
 
 			if ($pages = $engine->db->load_all(
-			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id
-			FROM " . $engine->db->table_prefix . "page
-			WHERE owner_id <> " . (int) $engine->db->system_user_id . "
-			LIMIT " . ($i * $limit) . ", $limit"))
+			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id " .
+			"FROM " . $engine->db->table_prefix . "page " .
+			"WHERE owner_id <> " . (int) $engine->db->system_user_id . " " .
+			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $n => $page)
 				{
@@ -214,7 +216,7 @@ function admin_maint_resync(&$engine, &$module)
 
 					// rendering links
 					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ?: $page['tag']);
-					// TODO: update_link_table() breaks processing !!! (WHY?)
+					// TODO: update_link_table() may break processing !!! (WHY?)
 					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;
 				}
@@ -225,6 +227,7 @@ function admin_maint_resync(&$engine, &$module)
 			}
 			else
 			{
+				$engine->log(1, $engine->_t('LogPageBodySynched', SYSTEM_LANG));
 				$engine->show_message($engine->_t('WikiLinksRestored'), 'success');
 			}
 		}
