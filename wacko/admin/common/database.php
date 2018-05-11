@@ -47,8 +47,8 @@ if (!isset($tables, $directories))
 			],
 			$prefix . 'category_assignment' => [
 				'name'	=> $prefix . 'category_assignment',
-				'where'	=> 'page_id',
-				'order'	=> 'page_id',
+				'where'	=> 'assignment_id',
+				'order'	=> 'assignment_id',
 				'limit'	=> 1000
 			],
 			$prefix . 'file' => [
@@ -59,8 +59,8 @@ if (!isset($tables, $directories))
 			],
 			$prefix . 'file_link' => [
 				'name'	=> $prefix . 'file_link',
-				'where'	=> 'page_id',
-				'order'	=> 'page_id',
+				'where'	=> 'file_link_id',
+				'order'	=> 'file_link_id',
 				'limit'	=> 1000
 			],
 			$prefix . 'log' => [
