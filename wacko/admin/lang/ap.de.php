@@ -799,6 +799,8 @@ $ap_translation = [
 	'XmlSiteMapView'			=> 'Zeigt die Sitemap in einem neuen Fenster.',
 	'WikiLinksResync'			=> 'Wiki-Links',
 	'WikiLinksResyncInfo'		=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code>page_link</code> und <code>file_link</code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
+	'RecompilePage'				=> 'Alle Seiten neu kompilieren (extrem teuer)',
+	'ResyncOptions'				=> 'Zusätzliche Otionen',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',
@@ -1013,16 +1015,16 @@ $ap_translation = [
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Zusätzliche Otionen zur Daten-Wiederherstellung',
 	'RestoreOptionsInfo'		=> '* Vor dem Wiederherstellen der <strong>Cluster-Sicherung</strong>, ' .
-									'werden die Zieltabellen nicht zerstört (um den Verlust von Informationen aus den Clustern, die nicht gesichert wurden, zu verhindern).. ' .
+									'werden die Zieltabellen nicht gelöscht (um den Verlust von Informationen aus den Clustern, die nicht gesichert wurden, zu verhindern).. ' .
 									'Somit werden während des Wiederherstellungsvorgangs doppelte Datensätze auftreten. ' .
 									'Im normalen Modus werden alle Dateien durch die Datensätze ersetzt (mit SQL-Anweisung <code>REPLACE</code>), ' .
 									'aber wenn dieses Kontrollkästchen aktiviert ist, werden alle Duplikate übersprungen (die aktuellen Werte der Datensätze werden beibehalten), ' .
 									'und nur die Datensätze mit neuem Schlüssel werden in die Tabelle aufgenommen (SQL-Anweisung <code>INSERT IGNORE</code>).<br>' .
-									'<strong>Hinweis</strong>: Wenn Sie eine vollständige Sicherung der Site wiederherstellen, hat diese Option keinen Zweck.<br>' .
+									'<strong>Hinweis</strong>: Wenn eine vollständige Sicherung der Site wiederherstellt wird, hat diese Option keine Zweck.<br>' .
 									'<br>' .
 									'** Wenn die Sicherung die Benutzerdateien (global und perpage, Cache-Dateien usw.) enthält, ' .
 									'ersetzen sie im normalen Modus die vorhandenen Dateien mit denselben Namen und werden beim Wiederherstellen in demselben Verzeichnis abgelegt. ' .
-									'Mit dieser Option kann man die aktuellen Kopien der Dateien speichern und aus einer Sicherung nur neue Dateien (fehlt auf dem Server) wiederherstellen.',
+									'Mit dieser Option kann man die aktuellen Kopien der Dateien speichern und aus einer Sicherung nur neue Dateien (auf dem Server nicht vorhandene) wiederherstellen.',
 	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte Tabellenschlüssel (nicht ersetzen)',
 	'IgnoreSameFiles'			=> 'Ignoriere die gleichen Dateien (nicht überschreiben)',
 	'NoBackupsAvailable'		=> 'Keien Datensicherung verfügbar.',
