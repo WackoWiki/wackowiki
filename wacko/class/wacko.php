@@ -1614,7 +1614,8 @@ class Wacko
 			}
 		}
 
-		$p_ids	= array_unique($p_ids);
+		$p_ids		= array_unique($p_ids);
+		$_page_ids	= [];
 
 		// cache page data
 		if ($links = $this->db->load_all(
@@ -3198,7 +3199,7 @@ class Wacko
 		if (($message = $this->db->system_message) && !$this->db->ap_mode)
 		{
 			// check current page lang for different charset to do_unicode_entities()
-			$message = get_unicode_entities($message, $this->db->language);
+			$message = $this->get_unicode_entities($message, $this->db->language);
 
 			array_unshift($messages, [$message, 'sysmessage ' . $this->db->system_message_type]);
 		}
@@ -5096,6 +5097,8 @@ class Wacko
 					"body_toc	= " . $this->db->q($body_toc) . " " .
 				"WHERE page_id = " . (int) $page_id . " " .
 				"LIMIT 1");
+
+			#$page = $this->load_page(null, $page_id, null, LOAD_NOCACHE);
 		}
 
 		return $body_r;
