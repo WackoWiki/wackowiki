@@ -785,7 +785,7 @@ $ap_translation = [
 	'LogUserStatsSynched'		=> 'Benutzerstatistiken synchronisiert',
 	'LogPageStatsSynched'		=> 'Seitenstatistiken synchronisiert',
 	'LogFeedsUpdated'			=> 'RSS-Feeds synchronisiert',
-	'LogPageBodySynched'		=> 'Seitenkörper und Links repariertert',
+	'LogPageBodySynched'		=> 'Seitenkörper und Links repariert',
 
 	'UserStats'					=> 'Benutzerstatistik',
 	'UserStatsInfo'				=> 'Benutzerstatistiken (Anzahl der Kommentare, besessene Seiten, Revisionen und Dateien) können in einigen Situationen von den tatsächlichen Daten abweichen.<br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',

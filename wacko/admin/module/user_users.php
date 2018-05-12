@@ -636,7 +636,7 @@ function admin_user_users(&$engine, &$module)
 	else
 	{
 		// defining WHERE and ORDER clauses
-		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
+		if (!empty($_GET['user']) && strlen($_GET['user']) > 2)
 		{
 			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 		}
@@ -723,29 +723,29 @@ function admin_user_users(&$engine, &$module)
 		// set total_uploads ordering
 		if ($_order == 'total_uploads_asc')
 		{
-			$order			= 'ORDER BY total_uploads ASC ';
-			$order_uploads	= 'total_uploads_desc';
+			$order				= 'ORDER BY total_uploads ASC ';
+			$order_uploads		= 'total_uploads_desc';
 		}
 		else if ($_order == 'total_uploads_desc')
 		{
-			$order			= 'ORDER BY total_uploads DESC ';
-			$order_uploads	= 'total_uploads_asc';
+			$order				= 'ORDER BY total_uploads DESC ';
+			$order_uploads		= 'total_uploads_asc';
 		}
 		else
 		{
-			$order_uploads	= 'total_uploads_asc';
+			$order_uploads		= 'total_uploads_asc';
 		}
 
 		// set user_name ordering
 		if ($_order == 'user_asc')
 		{
-			$order			= 'ORDER BY user_name DESC ';
-			$order_user		= 'user_desc';
+			$order				= 'ORDER BY user_name DESC ';
+			$order_user			= 'user_desc';
 		}
 		else if ($_order == 'user_desc')
 		{
-			$order			= 'ORDER BY user_name ASC ';
-			$order_user		= 'user_asc';
+			$order				= 'ORDER BY user_name ASC ';
+			$order_user			= 'user_asc';
 		}
 		else
 		{
@@ -755,13 +755,13 @@ function admin_user_users(&$engine, &$module)
 		// set real_name ordering
 		if ($_order == 'name_asc')
 		{
-			$order			= 'ORDER BY real_name DESC ';
-			$order_name		= 'name_desc';
+			$order				= 'ORDER BY real_name DESC ';
+			$order_name			= 'name_desc';
 		}
 		else if ($_order == 'name_desc')
 		{
-			$order			= 'ORDER BY real_name ASC ';
-			$order_name		= 'name_asc';
+			$order				= 'ORDER BY real_name ASC ';
+			$order_name			= 'name_asc';
 		}
 		else
 		{
@@ -792,7 +792,7 @@ function admin_user_users(&$engine, &$module)
 			($where ?: '')
 			);
 
-		$order_pagination	= !empty($_order)		? ['order' => Ut::html($_order)] : [];
+		$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
 		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
 
 		$users = $engine->db->load_all(

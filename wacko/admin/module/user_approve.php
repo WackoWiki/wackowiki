@@ -107,6 +107,7 @@ function admin_user_approve(&$engine, &$module)
 	#$user_id		= (int) ($_POST['user_id'] ?? $_GET['user_id'] ?? '');
 	$user_id		= (int) ($_REQUEST['user_id'] ?? '');
 	$account_status	= (int) ($_GET['account_status'] ?? -1);
+	$_order			= $_GET['order'] ?? '';
 
 	// get user
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
@@ -188,220 +189,219 @@ function admin_user_approve(&$engine, &$module)
 
 	// manage, approving or denying users
 
-		// defining WHERE and ORDER clauses
-		if (isset($_GET['user']) && $_GET['user'] == true && strlen($_GET['user']) > 2)
-		{
-			$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
-		}
-		// set signuptime ordering
-		else if (isset($_GET['order']) && $_GET['order'] == 'signup_asc')
-		{
-			$order			= 'ORDER BY signup_time ASC ';
-			$signup_time	= 'signup_desc';
-		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'signup_desc')
-		{
-			$order			= 'ORDER BY signup_time DESC ';
-			$signup_time	= 'signup_asc';
-		}
-		else
-		{
-			$signup_time	= 'signup_asc';
-		}
-
-		// filter by account_status
-		if (isset($_GET['account_status']))
-		{
-			$where			= "WHERE u.account_status = " . (int) $_GET['account_status'] . " ";
-		}
-		else
-		{
-			$where			= "WHERE u.account_status = 1 ";
-		}
-
-		// set user_name ordering
-		if (isset($_GET['order']) && $_GET['order'] == 'user_asc')
-		{
-			$order			= 'ORDER BY user_name DESC ';
-			$orderuser		= 'user_desc';
-		}
-		else if (isset($_GET['order']) && $_GET['order'] == 'user_desc')
-		{
-			$order			= 'ORDER BY user_name ASC ';
-			$orderuser		= 'user_asc';
-		}
-		else
-		{
-			$orderuser		= 'user_desc';
-		}
-
-		// filter by lang
-		if (isset($_GET['user_lang']))
-		{
-			$where			= "WHERE s.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
-		}
-
-		// entries to display
-		$limit = 100;
-
-		$status = $engine->_t('AccountStatusArray');
-
-		// collecting data
-		$count = $engine->db->load_single(
-			"SELECT COUNT(user_name) AS n " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			($where ?: '') .
-			($where ? 'AND ' : "WHERE ") .
-				"u.user_name <> " . $engine->db->q($engine->db->admin_name) . " "
-			);
-
-		$_order				= ($_GET['order'] ?? '');
-		$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
-
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination  + ['account_status' => (int) @$_GET['account_status']], '', 'admin.php');
-
-		$users = $engine->db->load_all(
-			"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
-			"FROM " . $prefix . "user u " .
-				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
-			($where ?: '') .
-			($where ? "AND " : "WHERE ") .
-				"u.account_type = 0 " .
-				"AND u.user_name <> " . $engine->db->q($engine->db->admin_name) . " " .
-			($order ?: 'ORDER BY u.user_id DESC ') .
-			$pagination['limit']);
-
-		// count records by status
-		$account_stati = $engine->db->load_all(
-			"SELECT account_status, count(account_status) AS n
-			FROM " . $prefix . "user
-			WHERE account_type = 0
-				AND user_name <> " . $engine->db->q($engine->db->admin_name) . "
-			GROUP BY account_status");
-
-		// set default status count
-		$status_count['0'] = 0; // approved
-		$status_count['1'] = 0; // pending
-		$status_count['2'] = 0; // denied
-
-		foreach ($account_stati as $_status)
-		{
-			if ($_status['account_status'] < 3)
-			{
-				$status_count[$_status['account_status']] = $_status['n'];
-			}
-		}
-
-		// user filter form
-		$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
-							'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
-							$engine->_t('UsersSearch') . ': </td><td>' .
-							'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(($_GET['user'] ?? '')) . '"> ' .
-							'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> ' .
-							$engine->form_close();
-		$filter_status =	'<p class="right">' .
-							(($account_status == 1 || $account_status == -1)
-								? '<span class="active">' . $engine->_t('Pending') . '</span>'
-								: '<a href="' . $engine->href('', '', ['account_status' => 1]) . '">' . $engine->_t('Pending') . '</a>' ) . ' (' . $status_count['1'] . ')' .
-							($account_status === 0
-								? ' | <span class="active">' . $engine->_t('Approved') . '</span>'
-								: ' | <a href="' . $engine->href('', '', ['account_status' => 0]) . '">' . $engine->_t('Approved') . '</a>') . ' (' . $status_count['0'] . ')' .
-							($account_status == 2
-								? ' | <span class="active">' . $engine->_t('Denied') . '</span>'
-								: ' | <a href="' . $engine->href('', '', ['account_status' => 2]) . '">' . $engine->_t('Denied') . '</a>') . ' (' . $status_count['2'] . ')' .
-							'</p>';
-
-		echo '<span class="right">' . $search . '</span><br>';
-		echo $filter_status;
-
-		echo $engine->form_open('approve');
-
-		/////////////////////////////////////////////
-		//   control buttons
-		/////////////////////////////////////////////
-
-		$control_buttons =	'<br>' .
-							'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> ' .
-							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> ' .
-							'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
-							'<br>' . "\n" .
-								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> ' .
-								($set
-									? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
-									  '&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
-									: ''
-								);
-
-		$approve_icon	= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
-		$deny_icon		= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny">';
-
-		# echo $control_buttons;
-		echo '<br>';
-
-		$engine->print_pagination($pagination);
-?>
-		<table class="formation listcenter">
-			<tr>
-				<!--<th style="width:5px;"></th>-->
-				<!--<th style="width:5px;"></th>-->
-				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
-				<th><?php echo $engine->_t('UserEmail'); ?></th>
-				<th><?php echo $engine->_t('UserIP'); ?></th>
-				<th style="width:20px;"><?php echo $engine->_t('UserLanguage'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $signup_time, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
-				<th style="width:20px;"><?php echo $engine->_t('UserEnabled'); ?></th>
-				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
-				<th style="width:200px;"><?php echo $engine->_t('UserActions'); ?></th>
-			</tr>
-<?php
-		if ($users)
-		{
-			foreach ($users as $row)
-			{
-				echo '<tr class="lined">' . "\n" .
-						'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
-						#'<td class="label a_middle" style="width:10px;">' .
-						#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
-						#'</td>' .
-						#'<td>' .
-						#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
-						#'</td>' . <a href="' . $engine->href() . '&amp;mode=db_restore">Restore database</a>
-						'<td>' . $row['user_id'] . '</td>' .
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
-						'<td>' . $row['email'] . '</td>' .
-						'<td>' . $row['user_ip'] . '</td>' .
-						'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang'], 'account_status' => $account_status]) . '">' . $row['user_lang'] . '</a></small></td>' .
-						'<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>' .
-						'<td>' . $row['enabled'] . '</td>' .
-						'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
-						'<td>' .
-							(($account_status > 0) || $account_status == -1
-								? '<a href="' . $engine->href('', '', ['approve' => 1, 'user_id' => $row['user_id']]) . '">' . $approve_icon . '' . $engine->_t('Approve') . '</a>'
-								: '') .
-							(($account_status < 2) || $account_status == -1
-								? '<a href="' . $engine->href('', '', ['approve' => 2, 'user_id' => $row['user_id']]) . '">' . $deny_icon . '' . $engine->_t('Deny') . '</a>'
-								: '') .
-						'</td>' .
-					'</tr>';
-			}
-		}
-		else
-		{
-			echo '<tr><td colspan="5"><br><em>' . $engine->_t('NoMatchingUser') . '</em></td></tr>';
-		}
-?>
-			</table>
-<?php
-		$engine->print_pagination($pagination);
-
-		/////////////////////////////////////////////
-		//   control buttons
-		/////////////////////////////////////////////
-
-		# echo $control_buttons;
-		echo $engine->form_close();
+	// defining WHERE and ORDER clauses
+	if (!empty($_GET['user']) && strlen($_GET['user']) > 2)
+	{
+		$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 	}
+	// set signuptime ordering
+	else if ($_order == 'signup_asc')
+	{
+		$order			= 'ORDER BY signup_time ASC ';
+		$signup_time	= 'signup_desc';
+	}
+	else if ($_order == 'signup_desc')
+	{
+		$order			= 'ORDER BY signup_time DESC ';
+		$signup_time	= 'signup_asc';
+	}
+	else
+	{
+		$signup_time	= 'signup_asc';
+	}
+
+	// filter by account_status
+	if ($account_status != -1)
+	{
+		$where			= "WHERE u.account_status = " . (int) $account_status . " ";
+	}
+	else
+	{
+		$where			= "WHERE u.account_status = 1 ";
+	}
+
+	// set user_name ordering
+	if ($_order == 'user_asc')
+	{
+		$order			= 'ORDER BY user_name DESC ';
+		$order_user		= 'user_desc';
+	}
+	else if ($_order == 'user_desc')
+	{
+		$order			= 'ORDER BY user_name ASC ';
+		$order_user		= 'user_asc';
+	}
+	else
+	{
+		$order_user		= 'user_desc';
+	}
+
+	// filter by lang
+	if (isset($_GET['user_lang']))
+	{
+		$where			= "WHERE s.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
+	}
+
+	// entries to display
+	$limit = 100;
+
+	$status = $engine->_t('AccountStatusArray');
+
+	// collecting data
+	$count = $engine->db->load_single(
+		"SELECT COUNT(user_name) AS n " .
+		"FROM " . $prefix . "user u " .
+			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+		($where ?: '') .
+		($where ? 'AND ' : "WHERE ") .
+			"u.user_name <> " . $engine->db->q($engine->db->admin_name) . " "
+		);
+
+	$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
+
+	$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination  + ['account_status' => (int) $account_status], '', 'admin.php');
+
+	$users = $engine->db->load_all(
+		"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
+		"FROM " . $prefix . "user u " .
+			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
+		($where ?: '') .
+		($where ? "AND " : "WHERE ") .
+			"u.account_type = 0 " .
+			"AND u.user_name <> " . $engine->db->q($engine->db->admin_name) . " " .
+		($order ?: 'ORDER BY u.user_id DESC ') .
+		$pagination['limit']);
+
+	// count records by status
+	$account_stati = $engine->db->load_all(
+		"SELECT account_status, count(account_status) AS n
+		FROM " . $prefix . "user
+		WHERE account_type = 0
+			AND user_name <> " . $engine->db->q($engine->db->admin_name) . "
+		GROUP BY account_status");
+
+	// set default status count
+	$status_count['0'] = 0; // approved
+	$status_count['1'] = 0; // pending
+	$status_count['2'] = 0; // denied
+
+	foreach ($account_stati as $_status)
+	{
+		if ($_status['account_status'] < 3)
+		{
+			$status_count[$_status['account_status']] = $_status['n'];
+		}
+	}
+
+	// user filter form
+	$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
+						'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
+						$engine->_t('UsersSearch') . ': </td><td>' .
+						'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(($_GET['user'] ?? '')) . '"> ' .
+						'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> ' .
+						$engine->form_close();
+	$filter_status =	'<p class="right">' .
+						(($account_status == 1 || $account_status == -1)
+							? '<span class="active">' . $engine->_t('Pending') . '</span>'
+							: '<a href="' . $engine->href('', '', ['account_status' => 1]) . '">' . $engine->_t('Pending') . '</a>' ) . ' (' . $status_count['1'] . ')' .
+						($account_status === 0
+							? ' | <span class="active">' . $engine->_t('Approved') . '</span>'
+							: ' | <a href="' . $engine->href('', '', ['account_status' => 0]) . '">' . $engine->_t('Approved') . '</a>') . ' (' . $status_count['0'] . ')' .
+						($account_status == 2
+							? ' | <span class="active">' . $engine->_t('Denied') . '</span>'
+							: ' | <a href="' . $engine->href('', '', ['account_status' => 2]) . '">' . $engine->_t('Denied') . '</a>') . ' (' . $status_count['2'] . ')' .
+						'</p>';
+
+	echo '<span class="right">' . $search . '</span><br>';
+	echo $filter_status;
+
+	echo $engine->form_open('approve');
+
+	/////////////////////////////////////////////
+	//   control buttons
+	/////////////////////////////////////////////
+
+	$control_buttons =	'<br>' .
+						'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> ' .
+						'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> ' .
+						'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
+						'<br>' . "\n" .
+							'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> ' .
+							($set
+								? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
+								  '&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
+								: ''
+							);
+
+	$approve_icon	= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
+	$deny_icon		= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny">';
+
+	# echo $control_buttons;
+	echo '<br>';
+
+	$engine->print_pagination($pagination);
+?>
+	<table class="formation listcenter">
+		<tr>
+			<!--<th style="width:5px;"></th>-->
+			<!--<th style="width:5px;"></th>-->
+			<th style="width:5px;">ID</th>
+			<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
+			<th><?php echo $engine->_t('UserEmail'); ?></th>
+			<th><?php echo $engine->_t('UserIP'); ?></th>
+			<th style="width:20px;"><?php echo $engine->_t('UserLanguage'); ?></th>
+			<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $signup_time, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
+			<th style="width:20px;"><?php echo $engine->_t('UserEnabled'); ?></th>
+			<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
+			<th style="width:200px;"><?php echo $engine->_t('UserActions'); ?></th>
+		</tr>
+<?php
+	if ($users)
+	{
+		foreach ($users as $row)
+		{
+			echo '<tr class="lined">' . "\n" .
+					'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
+					#'<td class="label a_middle" style="width:10px;">' .
+					#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
+					#'</td>' .
+					#'<td>' .
+					#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
+					#'</td>' . <a href="' . $engine->href() . '&amp;mode=db_restore">Restore database</a>
+					'<td>' . $row['user_id'] . '</td>' .
+					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
+					'<td>' . $row['email'] . '</td>' .
+					'<td>' . $row['user_ip'] . '</td>' .
+					'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang'], 'account_status' => $account_status]) . '">' . $row['user_lang'] . '</a></small></td>' .
+					'<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>' .
+					'<td>' . $row['enabled'] . '</td>' .
+					'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
+					'<td>' .
+						(($account_status > 0) || $account_status == -1
+							? '<a href="' . $engine->href('', '', ['approve' => 1, 'user_id' => $row['user_id']]) . '">' . $approve_icon . '' . $engine->_t('Approve') . '</a>'
+							: '') .
+						(($account_status < 2) || $account_status == -1
+							? '<a href="' . $engine->href('', '', ['approve' => 2, 'user_id' => $row['user_id']]) . '">' . $deny_icon . '' . $engine->_t('Deny') . '</a>'
+							: '') .
+					'</td>' .
+				'</tr>';
+		}
+	}
+	else
+	{
+		echo '<tr><td colspan="5"><br><em>' . $engine->_t('NoMatchingUser') . '</em></td></tr>';
+	}
+?>
+		</table>
+<?php
+	$engine->print_pagination($pagination);
+
+	/////////////////////////////////////////////
+	//   control buttons
+	/////////////////////////////////////////////
+
+	# echo $control_buttons;
+	echo $engine->form_close();
+}
 
 ?>
