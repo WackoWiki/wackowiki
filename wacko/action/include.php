@@ -52,7 +52,7 @@ else
 	}
 	else
 	{
-		if ($inc_page['body_r'])
+		if (!empty($inc_page['body_r']))
 		{
 			$strings = $inc_page['body_r'];
 		}
