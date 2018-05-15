@@ -188,7 +188,7 @@ if ($page_a && $page_b
 		break;
 
 	case 0:
-		require_once Ut::join_path(HANDLER_DIR, 'page/_diff.php');
+		require_once 'lib/diff/diff.php';
 		// load pages
 
 		// extract text from bodies
