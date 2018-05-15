@@ -47,8 +47,10 @@
 				[= reg _ =
 					<li>[ ' link ' ]</li>
 				=]
-				[''// Show Help link '']
+				[== CommentedOut _ =
+					[''// Show Help link '']
 					<li>[ ' help ' ]</li>
+				==]
 				</ul>
 			=]
 	</div>
