@@ -387,7 +387,10 @@ if (strlen($phrase) >= 3)
 					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);
-					$tpl->l_comments_n	= $page['comments'];
+					if ($page['comments'])
+					{
+						$tpl->l_comments_n	= $page['comments'];
+					}
 					$tpl->l_category	= $this->get_categories($page['page_id'], OBJECT_PAGE, '', '', ['phrase' => $phrase]);
 
 					if ($mode != 'topic')

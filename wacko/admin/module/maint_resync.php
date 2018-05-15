@@ -172,10 +172,10 @@ function admin_maint_resync(&$engine, &$module)
 							solution: stopp after after 15 redirects and provide a 'contine button
 							Chrome and Firefox out of the box is 20, Internet Explorer is 10
 						3) if processing breaks see point 1
-							- fails with page having broken action using templates
+							- fails with page having a broken action using templates
 							- (Undefined property: Wacko::$charset) -> include_buffered()
 							- $tpl->setEncoding($this->charset);
-							- registration action?
+							- registration and changepassword action?
 			*/
 			$limit		= 500;
 			$recompile	= 0;
@@ -214,8 +214,8 @@ function admin_maint_resync(&$engine, &$module)
 				{
 					$record = (($i * $limit) + $n + 1);
 					echo $record . '. ' . $page['tag'] . "<br>\n";
-					// where it dies: last rendered page
-					Diag::dbg('GOLD', $record, $page['tag']);
+					// find last rendered page
+					# Diag::dbg('GOLD', $record, $page['tag']);
 
 					// recompile if necessary
 					if ($page['body_r'] == '')

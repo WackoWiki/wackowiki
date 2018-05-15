@@ -31,8 +31,13 @@
 					[= l SearchItem =
 						<h3 style="display: inline;">[ ' link ' ]</h3>[ ' count | enclose " (" ")" ' ]
 						<br>
-						<span class="search_meta">[ ' userlink ' ] [ ' mtime | time_formatted ' ] - [ ' psize ' ]</span>
+						<span class="search_meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ]
+						[= comments =
+							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
+						=]
+						</span>
 						[ ' preview | nl2br ' ]
+						
 						[ ' category ' ]
 					=]
 				</li>
@@ -70,3 +75,4 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
+
