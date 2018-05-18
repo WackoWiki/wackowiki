@@ -8,11 +8,6 @@ if (!defined('IN_WACKO'))
 // TODO: exclude service and system pages
 //		either by user 'SYSTEM' or better via service: namespace
 
-echo ADD_NO_DIV . '<div id="page" class="page">' . "\n";
-$include_tail = '</div>';
-
-echo '<h3>' . $this->_t('CreateNewPage') . "</h3>\n<br>\n";
-
 // process input
 if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 {
@@ -68,27 +63,17 @@ if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '/ '))
 	}
 }
 
-// show form
-
 // create a peer page
-echo $this->form_open('sub_page', ['page_method' => 'new']);
-echo '<input type="hidden" name="option" value="1">';
-echo '<label for="create_subpage">' . $this->_t('CreateSubPage') . ':</label><br>';
-
 if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
-	echo '<code>' . (strlen($this->tag) > 50 ? '...' . substr($this->tag, -50) : $this->tag) . '/</code>' .
-		'<input type="text" id="create_subpage" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 1 ? Ut::html($new_tag) : '' ) . '" size="20" maxlength="255"> ' .
-		'<input type="submit" id="submit_subpage" value="' . $this->_t('CreatePageButton') . '">';
+	$tpl->p_base	= (strlen($this->tag) > 50 ? '...' . substr($this->tag, -50) : $this->tag);
+	$tpl->p_tag		= (isset($_POST['option']) && $_POST['option'] === 1 ? Ut::html($new_tag) : '');
 }
 else
 {
 	$message = '<em>' . $this->_t('CreatePageDenied') . '</em>';
-	$this->show_message($message, 'info');
+	$tpl->p_message	= $this->show_message($message, 'info', false);
 }
-
-echo $this->form_close();
-echo '<br>';
 
 // create a child page. only inside a cluster
 if (substr_count($this->tag, '/') > 0)
@@ -100,29 +85,17 @@ if (substr_count($this->tag, '/') > 0)
 		// hide users cluster
 		if ($parent != $this->db->users_page)
 		{
-			echo $this->form_open('parent_cluster_page', ['page_method' => 'new']);
-			echo '<input type="hidden" name="option" value="2">';
-			echo '<label for="create_pageparentcluster">' . $this->_t('CreatePageParentCluster') . ':</label><br>';
-			echo '<code>' . (strlen($parent) > 50 ? '...' . substr($parent, -50) : $parent) . '/</code>' .
-				 '<input type="text" id="create_pageparentcluster" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 2 ? Ut::html($new_tag) : '') . '" size="20" maxlength="255"> ' .
-				 '<input type="submit" id="submit_pageparentcluster" value="' . $this->_t('CreatePageButton') . '">';
-			echo $this->form_close();
+			$tpl->c_base	= (strlen($parent) > 50 ? '...' . substr($parent, -50) : $parent);
+			$tpl->c_tag		= (isset($_POST['option']) && $_POST['option'] === 2 ? Ut::html($new_tag) : '');
 		}
 	}
 	else
 	{
 		$message = '<em>' . $this->_t('CreatePageDenied') . '</em>';
-		$this->show_message($message, 'info');
+		$tpl->c_message	= $this->show_message($message, 'info', false);
 	}
-
-
-	echo '<br>';
 }
 
-//
-echo $this->form_open('random_page', ['page_method' => 'new']);
-echo '<input type="hidden" name="option" value="3">';
-echo '<label for="create_randompage">' . $this->_t('CreateRandomPage') . ':</label><br>';
-echo '<input type="text" id="create_randompage" name="tag" value="' . (isset($_POST['option']) && $_POST['option'] === 3 ? Ut::html($new_tag) : '') . '" size="60" maxlength="255"> ' .
-	 '<input type="submit" id="submit_randompage" value="' . $this->_t('CreatePageButton') . '">';
-echo $this->form_close();
+// create a random page
+$tpl->tag;
+
