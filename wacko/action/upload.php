@@ -19,19 +19,12 @@ if (!isset($hide_description))	$hide_description = '';
 
 if ($global) $global = 'global';
 
-// we display a form to make an upload
-
 // check who u are, can u upload?
 if ($this->can_upload(true) === true)
 {
-	// displaying
-	echo $this->form_open('upload', ['page_method' => 'upload', 'form_more' => ' enctype="multipart/form-data" ']);
-
-	echo '<input type="hidden" name="upload" value="1">';
-
 	if ($maxsize)
 	{
-		echo '<input type="hidden" name="maxsize" value="' . floor(1 * $maxsize) . '">';
+		$tpl->u_s_maxsize = floor(1 * $maxsize);
 	}
 
 	// if you have no write access and you are not admin, you can upload only "global" file
@@ -53,99 +46,35 @@ if ($this->can_upload(true) === true)
 		}
 	}
 
-	$accecpt = '';
+	$tpl->u_maxfilesize = $maxfilesize;
 
 	// adds 'accept' attribute depending on config settings
 	// https://www.w3.org/TR/html5/forms.html#attr-input-accept
 	if ($this->db->upload_images_only)
 	{
-		$accecpt = 'accept=".gif,.jpg,.png,.svg,.webp,image/gif,image/jpeg,image/png,image/svg+xml,image/webp"';
+		$tpl->u_accecpt = 'accept=".gif,.jpg,.png,.svg,.webp,image/gif,image/jpeg,image/png,image/svg+xml,image/webp"';
 	}
-?>
-<table >
-	<tr>
-		<td>
-			<label for="file_upload"><?php echo $this->_t('UploadFor');?>:&nbsp;</label>
-			<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $maxfilesize;?>">
-		</td>
-		<td class="nowrap">
-			<input type="file" name="file" id="file_upload" <?php echo $accecpt;?>>&nbsp;(<?php echo $this->_t('UploadMax') . $this->binary_multiples(($this->db->upload_max_size), false, true, true);?>)
-		</td>
-	</tr>
-	<?php
+
+	$tpl->u_size = $this->binary_multiples($maxfilesize, false, true, true);
+
 	if ($global)
-	{ ?>
-	<tr>
-		<td>&nbsp;</td>
-		<td>
-			<div>
-				<input type="radio" name="_to" disabled checked value="global" id="upload_global_disabled">
-				<input type="hidden" name="to" value="global"> <?php echo $this->_t('UploadGlobalText'); ?>
-			</div>
-		</td>
-	</tr>
-	<?php
+	{
+		$tpl->u_global = true;
 	}
 	else
-	{ ?>
-	<tr>
-		<td>&nbsp;</td>
-		<td>
-			<div>
-				<input type="radio" name="to" value="global" id="upload_global">
-				<label for="upload_global"><?php echo $this->_t('UploadGlobalText'); ?></label>
-			</div>
-			<div>
-				<input type="radio" name="to" value="here" checked id="upload_to_page">
-				<label for="upload_to_page"><?php echo $this->_t('UploadHereText'); ?></label>
-			</div>
-		</td>
-	</tr>
-	<?php
+	{
+		$tpl->u_local = true;
 	}
-	/* echo '<tr>
-		<td class="t_right">
-			<label for="upload_dest_file">' . $this->_t('UploadAsName') . ':&nbsp;</label>
-		</td>
-		<td>
-			<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value="">
-		</td>
-	</tr>'; */
 
 	if (!$hide_description)
-	{ ?>
-	<tr>
-		<td class="t_right">
-			<label for="upload_desc"><?php echo $this->_t('FileDesc');?>:&nbsp;</label>
-		</td>
-		<td>
-			<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250">
-		</td>
-	</tr>
-	<?php } ?>
-	<tr>
-		<td class="t_right">
-		</td>
-		<td>
-			<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1">
-			<label for="upload_overwrite"><?php echo $this->_t('UploadOverwrite');?></label>
-		</td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td>
-			<div style="padding-top: 5px;">
-				<input type="submit" value="<?php echo $this->_t('UploadButton'); ?>">
-			</div>
-		</td>
-	</tr>
-</table>
-<?php
-	echo $this->form_close();
+	{
+		$tpl->u_desc = true;
+	}
 }
 else
 {
-	echo '<em>' . $this->_t('UploadForbidden') . '</em>';
+	$message		= '<em>' . $this->_t('UploadForbidden') . '</em>';
+	$tpl->message	= $this->show_message($message, 'info', false);
 }
 
 ?>

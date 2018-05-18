@@ -390,23 +390,16 @@ else
 	if ((  $this->db->attachments_handler == 2 && $this->get_user())
 		|| $this->db->attachments_handler == 1)
 	{
-		echo '<ul class="menu">' .
-				'<li><a href="' . $this->href('attachments', '', '') . '">' . $this->_t('Attachments') . '</a></li>' .
-			"</ul>\n";
+		$tpl->handler = true;
 	}
-
-	echo '<h3>' . $this->_t('UploadFiles') . '</h3>';
 
 	if ($can_upload)
 	{
-		echo $this->action('upload', []) . '<br>';
+		$tpl->upload = $this->action('upload', []);
 	}
 	else
 	{
 		$this->set_message($this->_t('UploadForbidden'));
 	}
-
-	echo "<br><br>\n";
-	echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '"></a>' . "\n";
 
 }
