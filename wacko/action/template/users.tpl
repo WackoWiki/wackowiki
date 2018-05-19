@@ -80,7 +80,7 @@ first really BIG template written
 				[ ' // contact form ' ]
 				<br>
 				<form action="[ ' href ' ]" method="post" name="personal_message">
-					[' csrf: personal_message ']
+					[ ' csrf: personal_message ' ]
 					<input type="hidden" name="profile" value="[ ' username |e attr ' ]">
 					[= ref _ =
 						<input type="hidden" name="ref" value="[ ' ref | e attr ' ]">
