@@ -19,7 +19,6 @@ if (!defined('IN_WACKO'))
 
 // TODO:
 // - add option to filter by facets
-// - add file search
 
 $page_id	= '';
 $ppage		= '';
@@ -180,11 +179,6 @@ if ($can_view)
 	$this->preload_categories($object_ids, OBJECT_FILE);
 	$this->preload_acl($page_ids);
 
-	// display
-	$info_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileViewProperties') . '" alt="' . $this->_t('FileViewProperties') . '" class="btn-info"/>';
-	$edit_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileEditProperties') . '" alt="' . $this->_t('FileEditProperties') . '" class="btn-edit"/>';
-	$del_icon	= '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('FileRemove') . '" alt="' . $this->_t('FileRemove') . '" class="btn-delete"/>';
-
 	if ($picture)
 	{
 		$path1 = 'file:/';
@@ -197,7 +191,7 @@ if ($can_view)
 		$style = 'upload';
 	}
 
-	$this->print_pagination($pagination);
+	$tpl->pagination_text = $pagination['text'];
 
 	$results = count($files);
 
@@ -206,34 +200,22 @@ if ($can_view)
 		// search
 		$files_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? $_GET['files'] : '';
 
-		echo $this->form_open('file_search', ['page_method' => 'attachments', 'form_method' => 'get']);
-
-		echo '<table class="formation">' .
-				'<tr>' .
-					'<td class="label">' .
-						'<label for="search_file">' . $this->_t('FileSearch') . ':</label>' .
-					'</td>' .
-					'<td>' .
-						'<input type="search" name="phrase" id="search_file" size="40" value="' . Ut::html(($_GET['phrase'] ?? '')) . '" />' .
-						'<input type="hidden" name="files" value="' . $files_filter . '">' .
-						'<input type="submit" value="' . $this->_t('SearchButtonText') . '" />' .
-					'</td>' .
-				'</tr>' .
-			'</table>';
-		echo '<br />';
-		echo $this->form_close();
+		$tpl->s_filter	= $files_filter;
+		$tpl->s_phrase	= Ut::html(($_GET['phrase'] ?? ''));
 	}
 
 	if (!$nomark)
 	{
-		$title = $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
-		echo '<div class="layout-box"><p><span>' . $results . ' of ' . '' . $count['n'] . ' ' . $title . ": </span></p>\n";
+		$tpl->mark		= true;
+		$tpl->emark		= true;
+		$title	= $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
+		$tpl->mark_results	= $results . ' of ' . '' . $count['n'] . ' ' . $title;
 	}
+
+	$tpl->style = $style;
 
 	if ($results)
 	{
-		echo '<table class="' . $style . '" >' . "\n";
-
 		/* echo '<colgroup>
 			<col span="1">
 			<col span="1">
@@ -299,25 +281,8 @@ if ($can_view)
 				$hits	= '';
 			}
 
-			if ($this->is_admin()
-				|| (!isset($is_global)
-					&& $this->get_page_owner_id($page_id) == $this->get_user_id())
-				|| $file['user_id'] == $this->get_user_id())
-			{
-				$operation_mode = 1;
-			}
-			else
-			{
-				$operation_mode = 0;
-			}
-
-			$href_info		= $this->href('filemeta', $page, ['m' => 'show', 'file_id' => $file_id]);
-			$href_edit		= $this->href('filemeta', $page, ['m' => 'edit', 'file_id' => $file_id]);
-			$href_remove	= $this->href('filemeta', $page, ['m' => 'remove', 'file_id' => $file_id]);
-
 			// display file
-			echo '<tr>' . "\n" .
-					'<td class="file-">' . $link . '</td>' . "\n";
+			$tpl->r_link = $link;
 
 			if ($picture)
 			{
@@ -326,68 +291,49 @@ if ($can_view)
 				$param_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? ['files' => $_GET['files']] : [];
 
 				// display picture meta data
-				echo '<td class="desc-">' .
-					'<strong>' . $this->shorten_string($file['file_name'], $file_name_maxlen) . '</strong><br><br>' .
-					$desc . '<br><br>' .
-
-					($file['picture_w']
-						? $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px<br>'
-						: $hits . '<br>'
-					) .
-
-					$file_size . '<br><br>' .
-					$this->user_link($file['user_name'], '', true, false) . '<br>' .
-					$dt . '<br><br>' .
-					$this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter) .
-
-					'</td>' . "\n";
+				#$tpl->r_p_file			= $file; // result array: [ ' file.file_id ' ]
+				$tpl->r_p_name			= $this->shorten_string($file['file_name'], $file_name_maxlen);
+				$tpl->r_p_desc			= $desc;
+				$tpl->r_p_meta			= ($file['picture_w']
+											? $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px'
+											: $hits);
+				$tpl->r_p_size			= $file_size;
+				$tpl->r_p_user			= $this->user_link($file['user_name'], '', true, false);
+				$tpl->r_p_dt			= $dt;
+				$tpl->r_p_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter);
 			}
 			else
 			{
 				// display file meta data
-				echo '<td class="desc-">' . $desc . '</td>' .
-					'<td class="size-">
-						<span class="size2-">' . $file_size . ', ' . $hits . '</span>&nbsp;' .
-					'</td>' . "\n" .
-					'<td class="dt-">' .
-						'<span class="dt2-">' . $dt . '</span>&nbsp;' .
-					'</td>' . "\n";
+				$tpl->r_g_desc			= $desc;
+				$tpl->r_g_meta			= $file_size . ', ' . $hits;
+				$tpl->r_g_dt			= $dt;
 			}
 
 			// display file tools
-			echo '<td class="tool-">' .
-					'<span class="dt2-">' .
-						'<a href="' . $href_info . '" class="tool2-">' . $info_icon . '</a>' .
-						($operation_mode
-							? '<a href="' . $href_edit . '" class="tool2-">' . $edit_icon . '</a>' .
-							  '<a href="' . $href_remove . '" class="tool2-">' . $del_icon . '</a>'
-							: '') .
-					'</span>' .
-				 '</td>' . "\n";
+			if ($this->is_admin()
+				|| (!isset($is_global)
+					&& $this->get_page_owner_id($page_id) == $this->get_user_id())
+				|| $file['user_id'] == $this->get_user_id())
+			{
+				$tpl->r_mode_edit		= $this->href('filemeta', $page, ['m' => 'edit', 'file_id' => $file_id]);
+				$tpl->r_mode_remove		= $this->href('filemeta', $page, ['m' => 'remove', 'file_id' => $file_id]);
+			}
 
-			echo '</tr>' . "\n";
+			$tpl->r_info		= $this->href('filemeta', $page, ['m' => 'show', 'file_id' => $file_id]);
 
 			unset($link);
 			unset($desc);
 		}
-
-		echo '</table>' . "\n";
 	}
 	else
 	{
-		echo '<em>' . $this->_t('NoAttachments') . '</em><br><br>';
+		$tpl->message = '<em>' . $this->_t('NoAttachments') . '</em><br><br>';
 	}
 
 	unset($files);
-
-	if (!$nomark)
-	{
-		echo "</div>\n";
-	}
-
-	$this->print_pagination($pagination);
 }
 else
 {
-	echo '<em>' . $this->_t('ActionDenied') . '</em>';
+	$tpl->message = '<em>' . $this->_t('ActionDenied') . '</em>';
 }
