@@ -764,17 +764,12 @@ td.file- {
 }
 
 .upload td.dt- .dt2-,
-.upload td.tool- .tool2-,
+.upload td.tool- .tool2- a,
 .upload td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
 	padding: 5px;
 	white-space: nowrap;
-}
-
-.upload td.tool- a.tool2-:hover,
-.upload td.tool- a.tool2-:active {
-	color: #ff0000;
 }
 
 .fileinfo {
