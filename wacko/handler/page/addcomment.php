@@ -107,6 +107,11 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	else
 	{
 		// captcha validation
+		if (isset($this->sess->freecap_old_title))
+		{
+			unset($this->sess->freecap_old_title);
+		}
+
 		if (isset($this->sess->freecap_old_comment))
 		{
 			unset($this->sess->freecap_old_comment);
@@ -116,7 +121,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		{
 			$error = $this->_t('CaptchaFailed');
 			$this->set_message($error, 'error');
-			$this->sess->freecap_old_comment = $body;
+			$this->sess->freecap_old_title		= $title;
+			$this->sess->freecap_old_comment	= $body;
 		}
 
 		// everything's okay
