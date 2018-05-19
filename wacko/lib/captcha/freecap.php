@@ -362,7 +362,7 @@ function send_image($pic)
 	// kill GD images (removes from memory)
 	ImageDestroy($im);
 	ImageDestroy($im2);
-	ImageDestroy($pic);
+	@ImageDestroy($pic);
 
 	if (!empty($im3))
 	{
