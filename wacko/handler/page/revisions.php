@@ -29,7 +29,7 @@ $show_deleted = $this->is_admin();
 // get page_id for deleted but stored page
 if ($this->page['deleted'])
 {
-	$this->show_message($this->_t('PageDeletedInfo'), 'info');
+	$tpl->message = $this->show_message($this->_t('PageDeletedInfo'), 'info', false);
 }
 
 if ($this->has_access('read'))
@@ -39,11 +39,6 @@ if ($this->has_access('read'))
 	{
 		$this->context[++$this->current_context] = '';
 
-		echo $this->form_open('diff_versions', ['page_method' => 'diff', 'form_method' => 'get']) .
-			"<p>\n" .
-				'<input type="submit" value="' . $this->_t('ShowDifferencesButton') . '">';
-
-		$place_holder	= '&nbsp;&nbsp;&nbsp;';
 		$user			= $this->get_user();
 		$default_mode	= $user['diff_mode'] ?: $this->db->default_diff_mode;
 		$diff_modes		= $this->_t('DiffMode');
@@ -51,34 +46,21 @@ if ($this->has_access('read'))
 
 		foreach($diff_mode_list as $mode)
 		{
-			echo $place_holder .
-				'<input type="radio" id="' . 'diff_mode_' . $mode . '" name="diffmode" value="' . $mode . '"' .
-				($mode == $default_mode? ' checked' : '') . '>' .
-				'<label for="' . 'diff_mode_' . $mode . '">' . $diff_modes[$mode] . '</label>';
+			$tpl->r_d_mode		= $mode;
+			$tpl->r_d_diffmode	= $diff_modes[$mode];
+			$tpl->r_d_checked	= $mode == $default_mode ? ' checked' : '';
 		}
-
-		echo $place_holder .
-			'<a href="' . $this->href('revisions.xml') . '">' .
-				'<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RevisionXMLTip') . '" alt="XML" class="btn-feed">' .
-			'</a>';
 
 		if ($this->db->minor_edit)
 		{
 			// STS: ?!..
 			// filter minor edits
-			echo
-				'<input name="minor_edit" value="' . $hide_minor_edit . '" type="hidden">' . "\n" .
-				'<br>' .
-				($hide_minor_edit
-					? '<a href="' . $this->href('revisions', '', ['minor_edit' => 0]) . '">' . $this->_t('MinorEditShow') . '</a>'
-					: '<a href="' . $this->href('revisions', '', ['minor_edit' => 1]) . '">' . $this->_t('MinorEditHide') . '</a>');
+			$tpl->r_m_minor		= $hide_minor_edit;
+			$tpl->r_m_href		= $this->href('revisions', '', ['minor_edit' => ($hide_minor_edit ? 0 : 1)]);
+			$tpl->r_m_text		= $hide_minor_edit ? $this->_t('MinorEditShow') : $this->_t('MinorEditHide');
 		}
 
-		echo "</p>\n";
-
-		$this->print_pagination($pagination);
-
-		echo '<ul class="revisions">' . "\n";
+		$tpl->r_pagination_text = $pagination['text'];
 
 		$diff_class			= '';
 		$this->parent_size	= 0;
@@ -95,72 +77,57 @@ if ($this->has_access('read'))
 			$this->rev_delta[$r['revision_id']] = $size_delta;
 		}
 
+		$tpl->enter('r_l_');
+
 		foreach ($revisions as $num => $page)
 		{
-			$edit_note =
-				$page['edit_note']
-					? '<span class="editnote">[' . $page['edit_note'] . ']</span>'
-					: '';
+			if ($page['deleted'])
+			{
+				$tpl->del	= true;
+				$tpl->edel	= true;
+			}
+
+			$tpl->value			= (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']);
+			$tpl->checkedA		= $num == 0 ? 'checked' : '';
+			$tpl->checkedB		= $num == 1 ? 'checked' : '';
 
 			// page_size change
-			$size_delta		= $this->rev_delta[$page['revision_id']];
+			$tpl->delta			= $this->delta_formatted($this->rev_delta[$page['revision_id']]);
+			$tpl->size			= $this->binary_multiples($page['page_size'], false, true, true);
+			$tpl->version		= $page['version_id'];
+			$tpl->href			= $this->href('show', '', ['revision_id' => $page['revision_id']]);
+			$tpl->modified		= $page['modified'];
 
-			echo
-				'<li>' .
-					'<span class="rev-version">' . $page['version_id'] . '.</span>' .
-
-					'<input type="radio" name="a" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 0 ? 'checked' : '') . '>' .
-					$place_holder .
-					'<input type="radio" name="b" value="' . (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']) . '" ' . ($num == 1 ? 'checked' : '') . '>' .
-					$place_holder . '&nbsp;' .
-
-					($page['deleted'] ? '<del>' : '') .
-
-					'<a href="' . $this->href('show', '', ['revision_id' => $page['revision_id']]) . '">' . $this->get_time_formatted($page['modified']) . '</a>' .
-					'<span class="rev-size">' . '&nbsp; &mdash; (' . $this->binary_multiples($page['page_size'], false, true, true) . ') ' . $this->delta_formatted($size_delta) . '</span>' .
-
-					($page['deleted'] ? '</del>' : '') .
-
-					$place_holder . '&nbsp;' .
-					$this->_t('By') . ' ' .
-					$this->user_link($page['user_name'], '', true, false) . ' ' .
-
-					$edit_note . ' ' .
-					($page['minor_edit'] ? 'm' : '');
+			$tpl->user			= $this->user_link($page['user_name'], '', true, false);
+			if ($page['edit_note'])
+			{
+				$tpl->n_note		= $page['edit_note'];
+			}
+			$tpl->minor			= ($page['minor_edit'] ? 'm' : '');
 
 			// review
 			if ($this->db->review)
 			{
 				if ($page['reviewed'])
 				{
-					echo '<span class="review">[' . $this->_t('ReviewedBy') . ' ' . $this->user_link($page['reviewer'], '', true, false) . ']</span>';
+					$tpl->r_x_user = $this->user_link($page['reviewer'], '', true, false);
 				}
 				else if ($this->is_reviewer())
 				{
 					if (!$num)
 					{
-						echo ' <span class="review">[' . $this->_t('Review') . ']</span>';
+						$tpl->r_review = true;
 					}
 				}
 			}
-
-			echo "</li>\n";
 		}
 
-		echo "</ul>\n<br>\n";
-
-		$this->print_pagination($pagination);
-
-		echo '<a href="' . $this->href() . '" class="btn_link">' .
-				'<input type="button" value="' . $this->_t('CancelDifferencesButton') . '">' .
-			 '</a>' . "\n";
-
-		echo $this->form_close() . "\n";
+		$tpl->leave();
 	}
 
 	$this->current_context--;
 }
 else
 {
-	$this->show_message($this->_t('ReadAccessDenied'), 'error');
+	$tpl->message = $this->show_message($this->_t('ReadAccessDenied'), 'error', false);
 }
