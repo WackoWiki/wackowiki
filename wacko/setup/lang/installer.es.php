@@ -20,6 +20,9 @@ $lang = [
 	'groups_page'		=> 'Grupos',
 	'users_page'		=> 'Usuarios',
 
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
+
 	// time
 	#'date_format'					=> 'd.m.Y',
 	#'time_format'					=> 'H:i',

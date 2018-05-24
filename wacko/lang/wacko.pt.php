@@ -133,8 +133,11 @@ $wacko_translation = [
 	'CommentEdited'				=> 'edited',
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',
+
+	'PrivacyPolicy'				=> 'Privacy Policy',
 	'TermsOfUse'				=> 'Terms of Use',
 	'AcceptTermsOfUse'			=> ' I accept',
+
 	'ShowComments'				=> 'Mostrar Comentários e Formulário',
 	'HideComments'				=> 'Fechar Comentários e Formulário',
 	'AddComment'				=> 'Anexar comentário a esta página:',

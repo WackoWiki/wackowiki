@@ -709,8 +709,11 @@ $ap_translation = [
 	'RootPage'					=> 'Startseite',
 	'RootPageInfo'				=> 'Der Tag der Hauptseite, welcher automatisch aufgerufen wird, wenn ein Nutzer die Website besucht.',
 
-	'PolicyPage'				=> 'Nutzungsbedingungen',
-	'PolicyPageinfo'			=> 'Die Seite mit den Regeln der Website.',
+	'PrivacyPage'				=> 'Datenschutzerklärung',
+	'PrivacyPageInfo'			=> 'Seite mit der Datenschutzerklärung der Website.',
+
+	'TermsPage'					=> 'Nutzungsbedingungen',
+	'TermsPageInfo'				=> 'Seite mit den Nutzungsbedingungen der Website.',
 
 	'SearchPage'				=> 'Suche',
 	'SearchPageInfo'			=> 'Seite mit dem Suchformular (Aktion <code>{{search}}</code>).',

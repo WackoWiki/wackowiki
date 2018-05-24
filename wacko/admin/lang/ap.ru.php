@@ -685,8 +685,13 @@ $ap_translation = [
 	'ServicePagesSection'		=> 'Служебные страницы',
 	'RootPage'					=> 'Главная страница',
 	'RootPageInfo'				=> 'Тэг главной страницы, автоматически открываемой, когда пользователь посещает сайт.',
-	'PolicyPage'				=> 'Политика и правила',
-	'PolicyPageinfo'			=> 'Страница с правилами сайта.',
+
+	'PrivacyPage'				=> 'Privacy Policy',
+	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
+
+	'TermsPage'					=> 'Политика и правила',
+	'TermsPageInfo'				=> 'Страница с правилами сайта.',
+
 	'SearchPage'				=> 'Поиск',
 	'SearchPageInfo'			=> 'Страница с формой поиска (действие <code>{{search}}</code>).',
 	'RegistrationPage'			=> 'Регистрация на сайте',

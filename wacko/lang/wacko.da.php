@@ -133,8 +133,11 @@ $wacko_translation = [
 	'CommentEdited'				=> 'redigeret',
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',
+
+	'PrivacyPolicy'				=> 'Privacy Policy',
 	'TermsOfUse'				=> 'Vilkår for brug',
 	'AcceptTermsOfUse'			=> ' I accept',
+
 	'ShowComments'				=> 'Vis kommentarer',
 	'HideComments'				=> 'Gem kommentarer',
 	'AddComment'				=> 'Skriv en kommentar til denne side:',

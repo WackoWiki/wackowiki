@@ -38,7 +38,7 @@ function admin_config_pages(&$engine, &$module)
 		$config['news_levels']			= (string) $_POST['news_levels'];
 		$config['license']				= (string) $_POST['license'];
 		$config['root_page']			= trim((string) $_POST['root_page'], '/');
-		$config['policy_page']			= trim((string) $_POST['policy_page'], '/');
+		$config['terms_page']			= trim((string) $_POST['terms_page'], '/');
 		$config['search_page']			= trim((string) $_POST['search_page'], '/');
 		$config['registration_page']	= trim((string) $_POST['registration_page'], '/');
 		$config['login_page']			= trim((string) $_POST['login_page'], '/');
@@ -200,11 +200,23 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="policy_page"><strong><?php echo $engine->_t('PolicyPage');?>:</strong><br>
-					<small><?php echo $engine->_t('PolicyPageInfo');?></small></label>
+					<label for="privacy_page"><strong><?php echo $engine->_t('PrivacyPage');?>:</strong><br>
+					<small><?php echo $engine->_t('PrivacyPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="policy_page" name="policy_page" value="<?php echo Ut::html($engine->db->policy_page);?>">
+					<input type="text" maxlength="255" id="privacy_page" name="privacy_page" value="<?php echo Ut::html($engine->db->privacy_page);?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="terms_page"><strong><?php echo $engine->_t('TermsPage');?>:</strong><br>
+					<small><?php echo $engine->_t('TermsPageInfo');?></small></label>
+				</td>
+				<td>
+					<input type="text" maxlength="255" id="terms_page" name="terms_page" value="<?php echo Ut::html($engine->db->terms_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">

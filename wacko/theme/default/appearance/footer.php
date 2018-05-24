@@ -71,10 +71,16 @@ if ($this->get_user())
 	}
 }
 
-// comment this out for not showing website policy link at the bottom of your pages
-if ($this->db->policy_page)
+// comment this out for not showing privacy link at the bottom of your pages
+if ($this->db->privacy_page)
 {
-	$tpl->policy_url = $this->href('', $this->db->policy_page);
+	$tpl->privacy_url = $this->href('', $this->db->privacy_page);
+}
+
+// comment this out for not showing website tos link at the bottom of your pages
+if ($this->db->terms_page)
+{
+	$tpl->terms_url = $this->href('', $this->db->terms_page);
 }
 
 // load scripts
