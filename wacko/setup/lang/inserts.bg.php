@@ -21,6 +21,11 @@ if ($config['language'] == $page_lang)
 	insert_page($config['category_page'],	'Category',		'{{category}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['groups_page'],		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],		'Users',		'{{users}}',			$page_lang, 'Admins', false, false);
+
+	insert_page($config['terms_page'],		'Terms',		'',			$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'Privacy',		'',			$page_lang, 'Admins', false, false);
+
+	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
 }
 
 insert_page('Каталог',			'Каталог',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Каталог');

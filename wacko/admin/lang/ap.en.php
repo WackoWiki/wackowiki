@@ -702,8 +702,13 @@ $ap_translation = [
 	'ServicePagesSection'		=> 'Service pages',
 	'RootPage'					=> 'Home page',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
-	'PolicyPage'				=> 'Policies and Regulations',
-	'PolicyPageinfo'			=> 'The page with the rules of the site.',
+
+	'PrivacyPage'				=> 'Privacy Policy',
+	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
+
+	'TermsPage'					=> 'Policies and Regulations',
+	'TermsPageInfo'				=> 'The page with the rules of the site.',
+
 	'SearchPage'				=> 'Search',
 	'SearchPageInfo'			=> 'Page with the search form (action <code>{{search}}</code>).',
 	'RegistrationPage'			=> 'Register on our site',
