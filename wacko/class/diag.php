@@ -158,7 +158,7 @@ class Diag
 					echo "\t<li>HTTP_MOD_ENV: " . ((getenv('HTTP_MOD_ENV') === 'on') ? 'on' : 'off') . "</li>\n";
 					echo "\t<li>HTTP_MOD_REWRITE: " . ((getenv('HTTP_MOD_REWRITE') === 'on') ? 'on' : 'off') . "</li>\n";
 					echo "\t<li>HTTPS: " . ($_SERVER['HTTPS'] ?? 'off') . "</li>\n";
-					echo "\t<li>IP-address: " . $engine->get_user_ip() . "</li>\n";
+					echo "\t<li>IP-address: " . $http->ip . "</li>\n";
 					echo "\t<li>SERVER_PORT: " . $_SERVER['SERVER_PORT'] . "</li>\n";
 					echo "\t<li>TLS: " . (isset($config['tls']) ? 'on' : 'off') . "</li>\n";
 					echo "\t<li>TLS Proxy: " . (!empty($config['tls_proxy']) ? $config['tls_proxy'] : 'false') . "</li>\n";

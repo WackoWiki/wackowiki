@@ -110,7 +110,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		// submitting input to DB
 		else
 		{
-			$user_ip			= $this->get_user_ip();
+			$user_ip			= $this->http->ip;
 
 			// set new user approval
 			if ($this->db->approve_new_user)

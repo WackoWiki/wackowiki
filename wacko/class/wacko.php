@@ -2054,7 +2054,7 @@ class Wacko
 		$desc = '';
 
 		// user data
-		$ip = $this->get_user_ip();
+		$ip = $this->http->ip;
 
 		if ($user_name == '')
 		{
@@ -2817,7 +2817,8 @@ class Wacko
 						$this->_t('NewAccountUsername') . ' ' .	$user['user_name'] . "\n" .
 						$this->_t('AccountLanguage') . ' ' .	$user['user_lang'] . "\n" .
 						$this->_t('NewAccountEmail') . ' ' .	$user['email'] . "\n" .
-						$this->_t('NewAccountIP') . ' ' .		$user['user_ip'] . "\n\n";
+						#$this->_t('NewAccountIP') . ' ' .		$user['user_ip'] .
+						"\n\n";
 
 		if ($this->db->approve_new_user)
 		{
@@ -5260,6 +5261,9 @@ class Wacko
 		return $this->get_user_setting('user_name');
 	}
 
+	/**
+	* @deprecated use http->ip instead
+	*/
 	function get_user_ip()
 	{
 		return $this->http->ip;
@@ -5276,7 +5280,7 @@ class Wacko
 	{
 		$this->sess->userprofile = $user;
 
-		$this->set_user_setting('ip', $this->get_user_ip());
+		$this->set_user_setting('ip', $this->http->ip);
 
 		$this->user_lang = $this->get_user_language();
 		$this->set_language($this->user_lang, true);
@@ -6719,14 +6723,14 @@ class Wacko
 		}
 
 		// check IP validity
-		if ($this->get_user_setting('validate_ip') && $this->get_user_setting('ip') != $this->get_user_ip())
+		if ($this->get_user_setting('validate_ip') && $this->get_user_setting('ip') != $this->http->ip)
 		{
 			// TODO: set and load lang??
 			$this->log(1, '<strong><span class="cite">' . Ut::perc_replace(
 					$this->_t('LogUserIPSwitched', SYSTEM_LANG),
 					'<code>' . $this->get_user_setting('user_name') . '</code>',
 					'<code>' . $this->get_user_setting('ip') . '</code>',
-					'<code>' . $this->get_user_ip() . '</code>'
+					'<code>' . $this->http->ip . '</code>'
 					) . '</span></strong>');
 			$this->log_user_out();
 			$this->login_page();
@@ -7304,7 +7308,7 @@ class Wacko
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"modified	= UTC_TIMESTAMP(), " .
-					"ip			= " . $this->db->q($this->get_user_ip()) . ", " .
+					"ip			= " . $this->db->q($this->http->ip) . ", " .
 					"deleted	= 1, " .
 					"user_id	= " . (int) $this->get_user_id() . " " .
 				"WHERE page_id	= " . (int) $page_id . " " .
@@ -8134,7 +8138,7 @@ class Wacko
 			"INSERT INTO " . $this->db->table_prefix . "log SET " .
 				"level		= " . (int) $level . ", " .
 				"user_id	= " . (int) ($user_id ?: 0) . ", " .
-				"ip			= " . $this->db->q($this->get_user_ip()) . ", " .
+				"ip			= " . $this->db->q($this->http->ip) . ", " .
 				"message	= " . $this->db->q($message) . " ");
 	}
 
