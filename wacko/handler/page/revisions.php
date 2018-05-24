@@ -114,7 +114,7 @@ if ($this->has_access('read'))
 				}
 				else if ($this->is_reviewer())
 				{
-					if (!$num)
+					if (!$num && !$pagination['offset'])
 					{
 						$tpl->r_review = true;
 					}
