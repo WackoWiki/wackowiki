@@ -2054,7 +2054,7 @@ class Wacko
 		$desc = '';
 
 		// user data
-		$ip = $this->http->ip;
+		$ip = $this->get_user_ip();
 
 		if ($user_name == '')
 		{
@@ -4855,7 +4855,7 @@ class Wacko
 						"INSERT INTO " . $this->db->table_prefix . "referrer SET " .
 							"page_id		= " . (int) $this->page['page_id'] . ", " .
 							"referrer		= " . $this->db->q($ref) . ", " .
-							"ip				= " . $this->db->q($this->http->ip) . ", " .
+							"ip				= " . $this->db->q($this->get_user_ip()) . ", " .
 							"user_agent		= " . $this->db->q($ua) . ", " .
 							"referrer_time	= UTC_TIMESTAMP()");
 				}
@@ -5263,12 +5263,17 @@ class Wacko
 		return $this->get_user_setting('user_name');
 	}
 
-	/**
-	* @deprecated use http->ip instead
-	*/
+	// anonymize user IP address
 	function get_user_ip()
 	{
-		return $this->http->ip;
+		if ($this->db->anonymize_ip)
+		{
+			return '0.0.0.0';
+		}
+		else
+		{
+			return $this->http->ip;
+		}
 	}
 
 	// extract user data from the session array
@@ -7311,7 +7316,7 @@ class Wacko
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"modified	= UTC_TIMESTAMP(), " .
-					"ip			= " . $this->db->q($this->http->ip) . ", " .
+					"ip			= " . $this->db->q($this->get_user_ip()) . ", " .
 					"deleted	= 1, " .
 					"user_id	= " . (int) $this->get_user_id() . " " .
 				"WHERE page_id	= " . (int) $page_id . " " .

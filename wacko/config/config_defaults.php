@@ -238,7 +238,8 @@ $wacko_config_defaults = [
 	'captcha_registration'			=> 1,
 
 	'max_login_attempts'			=> 3,
-	'ip_login_limit_max'			=> 50,
+	'ip_login_limit_max'			=> 50, // not in use
+	'anonymize_ip'					=> 0,
 
 	'ap_failed_login_count'			=> 0,
 	'ap_max_login_attempts'			=> 4,
@@ -274,6 +275,7 @@ $wacko_config_defaults = [
 
 	'enable_referrers'				=> 0,
 	'attachments_handler'			=> 2,
+
 	'referrers_purge_time'			=> 1,
 	'pages_purge_time'				=> 0,
 	'keep_deleted_time'				=> 0,

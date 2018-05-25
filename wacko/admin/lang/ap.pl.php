@@ -428,6 +428,10 @@ $ap_translation = [
 	'CacheSqlTtl'				=> 'Term relevance Cache Database',
 	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
 
+	'PrivacySection'			=> 'Privacy',
+	'AnonymizeIp'				=> 'Anonymize users IP addresses',
+	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
+
 	'ReverseProxySection'		=> 'Reverse Proxy',
 	'ReverseProxy'				=> 'Use Reverse proxy',
 	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote

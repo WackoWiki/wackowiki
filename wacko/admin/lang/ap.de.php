@@ -435,6 +435,11 @@ $ap_translation = [
 	'CacheSqlInfo'				=> 'Einen lokalen Zwischenspeicher mit Ergebnissen aus bestimmten Datenbankabfragen (resource-SQL-queries) behalten.',
 	'CacheSqlTtl'				=> 'Aufbewahrungsdauer zwischengespeicherter SQL-Abfragen',
 	'CacheSqlTtlInfo'			=> 'Speichere Ergebnisse der SQL-Abfragen nicht länger als die angegebene Anzahl von Sekunden zwischen. Einen Wert >1200 zu verwenden ist ungünstig.',
+
+	'PrivacySection'			=> 'Datenschutz',
+	'AnonymizeIp'				=> 'Anonymisiere Benutzer IP-Adressen',
+	'AnonymizeIpInfo'			=> 'Anonymisiert IP-Adressen wo möglich, wie Bearbeitung der Seite, Revisionen oder Referrers.',
+
 	'ReverseProxySection'		=> 'Reverse-Proxy',
 	'ReverseProxy'				=> 'Nutze Reverse-Proxy',
 	'ReverseProxyInfo'			=> 'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
