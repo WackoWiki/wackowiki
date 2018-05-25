@@ -45,6 +45,7 @@ function admin_config_system(&$engine, &$module)
 		$config['log_level']				= (int) $_POST['log_level'];
 		$config['log_default_show']			= (int) $_POST['log_default_show'];
 		$config['log_purge_time']			= (int) $_POST['log_purge_time'];
+		$config['anonymize_ip']				= (int) $_POST['anonymize_ip'];
 		$config['rewrite_mode']				= (int) ($_POST['rewrite_mode'] ?? 0);
 		$config['reverse_proxy']			= (int) ($_POST['reverse_proxy'] ?? 0);
 		$config['reverse_proxy_header']		= (string) $_POST['reverse_proxy_header'];
@@ -215,6 +216,25 @@ function admin_config_system(&$engine, &$module)
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="log_purge_time" name="log_purge_time" value="<?php echo (int) $engine->db->log_purge_time;?>">
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('PrivacySection');?>
+				</th>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="approve_new_user"><strong><?php echo $engine->_t('AnonymizeIp');?>:</strong><br>
+					<small><?php echo $engine->_t('AnonymizeIpInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="anonymize_ip_on" name="anonymize_ip" value="1"<?php echo ($engine->db->anonymize_ip == 1 ? ' checked' : '');?>><label for="anonymize_ip_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="anonymize_ip_off" name="anonymize_ip" value="0"<?php echo ($engine->db->anonymize_ip == 0 ? ' checked' : '');?>><label for="anonymize_ip_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
