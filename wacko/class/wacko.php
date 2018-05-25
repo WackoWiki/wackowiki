@@ -38,7 +38,7 @@ class Wacko
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
 	var $unicode_entities		= [];		// common unicode array
 	var $toc_context			= [];
-	var $search_engines			= ['bot', 'rambler', 'yandex', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'inktomi', 'spider'];
+	var $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
 	var $language				= null;
 	var $languages				= null;
 	var $translations			= null;
@@ -1394,7 +1394,7 @@ class Wacko
 		$this->page_cache['page_id'][$page['page_id']]				= $page;
 		$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
 
-		if (!$page['supertag'])
+		if (empty($page['supertag']))
 		{
 			$page['supertag'] = $this->translit($page['tag'], TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
 		}
@@ -4843,6 +4843,7 @@ class Wacko
 		{
 			$heads		= ['https://' . $this->db->tls_proxy . '/', 'https://', 'http://'];
 			$headless	= str_replace($heads, '', $ref);
+			$ua			= $_SERVER['HTTP_USER_AGENT'] ?? null;
 
 			if ($ref !== $headless) // if protocol known..
 			{
@@ -4855,6 +4856,7 @@ class Wacko
 							"page_id		= " . (int) $this->page['page_id'] . ", " .
 							"referrer		= " . $this->db->q($ref) . ", " .
 							"ip				= " . $this->db->q($this->http->ip) . ", " .
+							"user_agent		= " . $this->db->q($ua) . ", " .
 							"referrer_time	= UTC_TIMESTAMP()");
 				}
 			}
@@ -6757,6 +6759,7 @@ class Wacko
 		// SEO
 		if (isset($_SERVER['HTTP_USER_AGENT']))
 		{
+			# preg_match('/robot|spider|crawler|curl|^$/i', $_SERVER['HTTP_USER_AGENT']));
 			foreach ($this->search_engines as $engine)
 			{
 				if (stristr($_SERVER['HTTP_USER_AGENT'], $engine))
