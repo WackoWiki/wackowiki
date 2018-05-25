@@ -139,7 +139,7 @@ $wacko_config_defaults = [
 	'users_page'					=> 'Users',
 	'category_page'					=> 'Category',
 	'tag_page'						=> 'Tag',
-	'policy_page'					=> 'Terms',
+	'terms_page'					=> 'Terms',
 	'privacy_page'					=> 'Privacy',
 	'license'						=> '',
 
