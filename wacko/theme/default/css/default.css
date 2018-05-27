@@ -610,6 +610,16 @@ ol#comments {
 #credits a:active {
 	color: #FF0000;
 }
+#credits ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#credits li {
+	font-size: 11px;
+	margin-right: 20px;
+	float: left;
+}
 
 /* Included pages: SYNTAX {{include page="xyz"}} */
 .include-page {
