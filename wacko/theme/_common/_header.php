@@ -40,7 +40,7 @@ else
 
 if ($this->db->terms_page)
 {
-	$tpl->h_policy_href = $this->href('', $this->db->terms_page);
+	$tpl->h_license_href = $this->href('', $this->db->terms_page);
 }
 
 if ($this->db->license)

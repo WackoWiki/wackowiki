@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="[ ' db: theme_url ' ]css/print.css">
 		<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_url ' ]">
 		<link rel="shortcut icon" href="[ ' db: theme_url ' ]icon/favicon.ico" type="image/x-icon">
-		[= policy _ =
+		[= terms _ =
 			<link rel="license" href="[ ' url ' ]">
 		=]
 		<link rel="prev" href="[ ' href: ' ]">
