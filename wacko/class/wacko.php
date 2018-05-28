@@ -1593,10 +1593,13 @@ class Wacko
 				$pages[]	= $this->_t('RegistrationPage');
 			}
 
-			$pages[]	= $this->db->root_page;
 			$pages[]	= $this->db->category_page;
+			$pages[]	= $this->db->help_page;
+			$pages[]	= $this->db->privacy_page;
+			$pages[]	= $this->db->root_page;
 			$pages[]	= $this->db->users_page;
-			$pages[]	= $this->db->policy_page;
+			$pages[]	= $this->db->terms_page;
+
 			$pages[]	= $this->_t('LoginPage');
 			$pages[]	= $this->_t('SearchPage');
 			$pages[]	= $this->tag;

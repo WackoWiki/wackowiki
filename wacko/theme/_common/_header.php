@@ -38,14 +38,14 @@ else
 	$tpl->h_favicon = $this->db->theme_url . 'icon/favicon.ico';
 }
 
-if ($this->db->policy_page)
+if ($this->db->terms_page)
 {
-	$tpl->h_policy_href = $this->href('', $this->db->policy_page);
+	$tpl->h_policy_href = $this->href('', $this->db->terms_page);
 }
 
 if ($this->db->license)
 {
-	# $tpl->h_license_href = $this->href('', $this->db->policy_page);
+	# $tpl->h_license_href = $this->href('', $this->db->terms_page);
 }
 
 if ($this->db->enable_feeds)
