@@ -38,6 +38,7 @@ function admin_config_pages(&$engine, &$module)
 		$config['news_levels']			= (string) $_POST['news_levels'];
 		$config['license']				= (string) $_POST['license'];
 		$config['root_page']			= trim((string) $_POST['root_page'], '/');
+		$config['help_page']			= trim((string) $_POST['help_page'], '/');
 		$config['terms_page']			= trim((string) $_POST['terms_page'], '/');
 		$config['search_page']			= trim((string) $_POST['search_page'], '/');
 		$config['registration_page']	= trim((string) $_POST['registration_page'], '/');
@@ -55,7 +56,6 @@ function admin_config_pages(&$engine, &$module)
 		$config['orphaned_page']		= trim((string) $_POST['orphaned_page'], '/');
 		$config['todo_page']			= trim((string) $_POST['todo_page'], '/');
 		$config['sandbox']				= trim((string) $_POST['sandbox'], '/');
-		$config['help_page']			= trim((string) $_POST['help_page'], '/');
 
 		$engine->config->_set($config);
 
@@ -193,6 +193,18 @@ function admin_config_pages(&$engine, &$module)
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="root_page" name="root_page" value="<?php echo Ut::html($engine->db->root_page);?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="help_page"><strong><?php echo $engine->_t('HelpPage');?>:</strong><br>
+					<small><?php echo $engine->_t('HelpPageInfo');?></small></label>
+				</td>
+				<td>
+					<input type="text" maxlength="255" id="help_page" name="help_page" value="<?php echo Ut::html($engine->db->help_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -409,18 +421,6 @@ function admin_config_pages(&$engine, &$module)
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo Ut::html($engine->db->sandbox);?>">
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="help_page"><strong><?php echo $engine->_t('WikiDocsPage');?>:</strong><br>
-					<small><?php echo $engine->_t('WikiDocsPageInfo');?></small></label>
-				</td>
-				<td>
-					<input type="text" maxlength="255" id="help_page" name="help_page" value="<?php echo Ut::html($engine->db->help_page);?>">
 				</td>
 			</tr>
 		</table>

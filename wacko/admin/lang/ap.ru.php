@@ -728,8 +728,8 @@ $ap_translation = [
 	'TodoPageInfo'				=> 'Страница со списком To Do (строится с помощью действия <code>{{backlinks}}</code> и макросов <code>::*::</code>).',
 	'SandboxPage'				=> 'Песочница',
 	'SandboxPageInfo'			=> 'Страница, где пользователи могут потренироваться в использовании wiki-разметки.',
-	'WikiDocsPage'				=> 'Документация wiki',
-	'WikiDocsPageInfo'			=> 'Раздел документации по работе с инструментами сайта.',
+	'HelpPage'					=> 'Помощь',
+	'HelpPageInfo'				=> 'Раздел документации по работе с инструментами сайта.',
 
 
 	// Notification settings

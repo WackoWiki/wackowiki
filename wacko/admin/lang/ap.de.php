@@ -754,8 +754,8 @@ $ap_translation = [
 	'TodoPageInfo'				=> 'Seite mit einer Liste von Aufgaben (erstellt mit Hilfe von <code>{{backlinks}}</code> und  dem Makro <code>::*::</code>).',
 	'SandboxPage'				=> 'Sandkasten',
 	'SandboxPageInfo'			=> 'Seite, auf der Benutzer die Verwendung des Wiki-Markups üben können.',
-	'WikiDocsPage'				=> 'Wiki-Dokumentation',
-	'WikiDocsPageInfo'			=> 'Section of the documentation for using the tool site.',
+	'HelpPage'					=> 'Hilfe',
+	'HelpPageInfo'				=> 'Die Dokumentation zum Arbeiten mit den Website-Werkzeugen.',
 
 	// Notification settings
 	'NotificationSettingsInfo'	=> 'Parameter für Benachrichtigungen des Systems.',
