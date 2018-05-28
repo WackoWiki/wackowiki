@@ -22,7 +22,7 @@ _common include file for themes
 	<link media="print" rel="stylesheet" href="[ ' db: theme_url ' ]css/print.css">
 	<link rel="icon" href="[ ' favicon ' ]" type="image/x-icon">
 	<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_url ' ]">
-	[= policy _ =
+	[= license _ =
 		<link rel="license" href="[ ' href ' ]">
 	=]
 	[= rss _ =
