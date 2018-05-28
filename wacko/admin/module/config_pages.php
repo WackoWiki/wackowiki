@@ -55,7 +55,7 @@ function admin_config_pages(&$engine, &$module)
 		$config['orphaned_page']		= trim((string) $_POST['orphaned_page'], '/');
 		$config['todo_page']			= trim((string) $_POST['todo_page'], '/');
 		$config['sandbox']				= trim((string) $_POST['sandbox'], '/');
-		$config['wiki_docs']			= trim((string) $_POST['wiki_docs'], '/');
+		$config['help_page']			= trim((string) $_POST['help_page'], '/');
 
 		$engine->config->_set($config);
 
@@ -416,11 +416,11 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">
-					<label for="wiki_docs"><strong><?php echo $engine->_t('WikiDocsPage');?>:</strong><br>
+					<label for="help_page"><strong><?php echo $engine->_t('WikiDocsPage');?>:</strong><br>
 					<small><?php echo $engine->_t('WikiDocsPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="wiki_docs" name="wiki_docs" value="<?php echo Ut::html($engine->db->wiki_docs);?>">
+					<input type="text" maxlength="255" id="help_page" name="help_page" value="<?php echo Ut::html($engine->db->help_page);?>">
 				</td>
 			</tr>
 		</table>

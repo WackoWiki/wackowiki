@@ -254,9 +254,9 @@ else
 	$tpl->r_complexity		= $this->show_password_complexity();
 	$tpl->r_email			= $email;
 
-	if ($this->db->policy_page)
+	if ($this->db->terms_page)
 	{
-		// $tpl->r_policy_href = $this->href('', $this->db->policy_page);
+		# $tpl->r_terms_href = $this->href('', $this->db->terms_page);
 	}
 
 	if ($this->db->captcha_registration)

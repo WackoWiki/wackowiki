@@ -33,7 +33,13 @@
 	[= by =
 		['' _t: PoweredBy ''] ['' home ''] ['' version '']['' patchlevel '']<br>
 	=]
+	[= license =
+		['' text '']
+	=]
 	<ul>
+		[= help =
+			<li><a href="['' url '']">['' _t: Help '']</a></li>
+		=]
 		[= privacy =
 			<li><a href="['' url '']">['' _t: PrivacyPolicy '']</a></li>
 		=]
