@@ -739,8 +739,8 @@ $ap_translation = [
 	'TodoPageInfo'				=> 'Page with a list of To Do (constructed with the help of <code>{{backlinks}}</code> and makro <code>::*::</code>).',
 	'SandboxPage'				=> 'Sandbox',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
-	'WikiDocsPage'				=> 'Wiki documentation',
-	'WikiDocsPageInfo'			=> 'Section of the documentation for using the tool site.',
+	'HelpPage'					=> 'Abi',
+	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 
 
 	// Notification settings
