@@ -106,6 +106,7 @@ $config_db['form_token_time']				= $config['form_token_time'];
 $config_db['forum_cluster']					= $config['forum_cluster'];
 $config_db['forum_topics']					= $config['forum_topics'];
 $config_db['groups_page']					= $config['groups_page'];
+$config_db['help_page']						= $config['help_page'];
 $config_db['hide_index']					= $config['hide_index'];
 $config_db['hide_locked']					= $config['hide_locked'];
 $config_db['hide_revisions']				= $config['hide_revisions'];

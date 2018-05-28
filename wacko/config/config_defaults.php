@@ -144,7 +144,7 @@ $wacko_config_defaults = [
 	'license'						=> '',
 
 	// default pages
-	'wiki_docs'						=> '',
+	'help_page'						=> '',
 	'sandbox'						=> '',
 	'comments_page'					=> '',
 	'changes_page'					=> '',

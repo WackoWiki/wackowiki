@@ -37,7 +37,7 @@
 			<input type="email" id="email" name="email" size="30" value="[ ' email | e attr ' ]" required>
 			<small> <a title="[ ' _t: RegistrationEmailInfo ' ]">(?)</a></small></p>
 
-			[= policy _ =
+			[= terms _ =
 				<p>
 				<label for="terms_of_use">[ ' _t: TermsOfUse ' ]:</label>
 				<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1">
