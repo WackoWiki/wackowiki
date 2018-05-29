@@ -72,6 +72,14 @@ $table_config = "CREATE TABLE {$pref}config (" .
 					"UNIQUE KEY idx_config_name (config_name)" .
 				") {$engine} COMMENT='' {$charset}";
 
+$table_external_link = "CREATE TABLE {$pref}external_link (" .
+					"external_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"link TEXT NOT NULL," .
+					"PRIMARY KEY (external_link_id)," .
+					"KEY idx_page_id (page_id)" .
+					") {$engine} COMMENT='' {$charset}";
+
 $table_file = "CREATE TABLE {$pref}file (" .
 					"file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -80,6 +88,7 @@ $table_file = "CREATE TABLE {$pref}file (" .
 					"file_lang VARCHAR(2) NOT NULL DEFAULT ''," .
 					"file_description VARCHAR(250) NOT NULL DEFAULT ''," .
 					"caption TEXT NOT NULL," .
+					"license_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"uploaded_dt DATETIME NULL DEFAULT NULL," .
 					"modified_dt DATETIME NULL DEFAULT NULL," .
 					"file_size INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -150,6 +159,7 @@ $table_page = "CREATE TABLE {$pref}page (" .
 					"edit_note VARCHAR(200) NOT NULL DEFAULT ''," .
 					"minor_edit TINYINT(1) UNSIGNED DEFAULT '0'," .
 					"page_size INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"license_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
 					"reviewed_time DATETIME NULL DEFAULT NULL," .
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -422,6 +432,7 @@ $table_cache_drop				= "DROP TABLE IF EXISTS {$pref}cache";
 $table_config_drop				= "DROP TABLE IF EXISTS {$pref}config";
 $table_category_drop			= "DROP TABLE IF EXISTS {$pref}category";
 $table_category_assignment_drop	= "DROP TABLE IF EXISTS {$pref}category_assignment";
+$table_external_link_drop		= "DROP TABLE IF EXISTS {$pref}external_link";
 $table_file_drop				= "DROP TABLE IF EXISTS {$pref}file";
 $table_file_link_drop			= "DROP TABLE IF EXISTS {$pref}file_link";
 $table_log_drop					= "DROP TABLE IF EXISTS {$pref}log";

@@ -16,6 +16,7 @@ $delete_table[]			= ['usergroup',				$table_usergroup_drop];
 $delete_table[]			= ['usergroup_member',		$table_usergroup_member_drop];
 $delete_table[]			= ['category',				$table_category_drop];
 $delete_table[]			= ['category_assignment',	$table_category_assignment_drop];
+$delete_table[]			= ['external_link',			$table_external_link_drop];
 $delete_table[]			= ['file',					$table_file_drop];
 $delete_table[]			= ['file_link',				$table_file_link_drop];
 $delete_table[]			= ['log',					$table_log_drop];
@@ -45,6 +46,7 @@ $create_table[]			= ['usergroup',				$table_usergroup];
 $create_table[]			= ['usergroup_member',		$table_usergroup_member];
 $create_table[]			= ['category',				$table_category];
 $create_table[]			= ['category_assignment',	$table_category_assignment];
+$create_table[]			= ['external_link',			$table_external_link];
 $create_table[]			= ['file',					$table_file];
 $create_table[]			= ['file_link',				$table_file_link];
 $create_table[]			= ['log',					$table_log];
@@ -138,6 +140,9 @@ $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_2];
 $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_3];
 $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_4];
 
+// external link
+$upgrade['5.5.5'][]		= ['create',	'external_link',	$table_external_link_r5_4_0];
+
 // file
 $upgrade['5.4.0'][]		= ['alter',		'upload',			$alter_file_r5_4_0];
 
@@ -151,6 +156,8 @@ $upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_5];
 $upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_6];
 
 $upgrade['5.5.rc2'][]	= ['update',	'file',				$update_file_r5_4_0];
+
+$upgrade['5.5.5'][]		= ['alter',		'file',				$alter_file_r5_4_7];
 
 // file link
 $upgrade['5.4.0'][]		= ['create',	'file_link',		$table_file_link_r5_4_0];
@@ -179,9 +186,10 @@ $upgrade['5.5.0'][]		= ['alter',	'page',					$alter_page_r5_4_6];
 $upgrade['5.5.0'][]		= ['update',	'page',				$update_page_r5_4_5];
 $upgrade['5.5.0'][]		= ['update',	'page',				$update_page_r5_4_6];
 
+$upgrade['5.5.5'][]		= ['alter',	'page',					$alter_page_r5_4_7];
+
 // page link
 $upgrade['5.5.rc2'][]	= ['rename',	'page_link',		$rename_page_link_r5_4_0];
-
 
 // referrer
 $upgrade['5.4.0'][]		= ['alter',		'referrer',			$alter_referrer_r5_4_0];
