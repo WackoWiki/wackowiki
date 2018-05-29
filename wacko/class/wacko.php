@@ -3646,8 +3646,8 @@ class Wacko
 
 		if (preg_match('/^[\.\-' . $this->language['ALPHANUM_P'] . ']+\.(gif|jpg|jpe|jpeg|png|svg|webp)$/i', $text))
 		{
-			// ((image.png)) - loads only images from image/ folder
-			// XXX: odd behavior, user can't check or upload to image/ folder - how useful is this?
+			// ((image.png)) - loads images from image/ folder
+			// XXX: user can't check or upload to image/ folder - how useful is this?
 			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
 		}
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/i', preg_replace('/<\/?nobr>/', '', $text)))
@@ -4683,8 +4683,11 @@ class Wacko
 
 			foreach ($external_table as $dummy => $link) // discard strtolowered index
 			{
-				$query .= "(	" . (int) $from_page_id . ",
-								" . $this->db->q($link) . "),";
+				if (filter_var($link, FILTER_VALIDATE_URL))
+				{
+					$query .= "(	" . (int) $from_page_id . ",
+									" . $this->db->q($link) . "),";
+				}
 			}
 
 			$this->db->sql_query(
@@ -4875,7 +4878,6 @@ class Wacko
 		{
 			$heads		= ['https://' . $this->db->tls_proxy . '/', 'https://', 'http://'];
 			$headless	= str_replace($heads, '', $ref);
-			$ua			= $_SERVER['HTTP_USER_AGENT'] ?? null;
 
 			if ($ref !== $headless) // if protocol known..
 			{
@@ -4883,6 +4885,8 @@ class Wacko
 
 				if (strncasecmp($headless, $we, strlen($we))) // if not from ourselves..
 				{
+					$ua			= $_SERVER['HTTP_USER_AGENT'] ?? null;
+
 					$this->db->sql_query(
 						"INSERT INTO " . $this->db->table_prefix . "referrer SET " .
 							"page_id		= " . (int) $this->page['page_id'] . ", " .
