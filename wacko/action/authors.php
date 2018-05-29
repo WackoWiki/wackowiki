@@ -22,6 +22,7 @@ print page and revisions' authors.
 				- CC-Zero			(CreativeCommons-Zero / public domain)
 				- GNU-FDL			(GNU Free Documentation License)
 				- PD				(Public Domain)
+				- CR				(All Rights Reserved)
 	cluster	= consider all cluster subpages (if = 1) or current page only (0, default)
 
 	https://creativecommons.org/choose/
@@ -177,6 +178,7 @@ else
 			'CC-ZERO'		=> ['https://creativecommons.org/publicdomain/zero/1.0/',	$this->_t('LicenseArray')['CC-ZERO']],
 			'GNU-FDL'		=> ['https://www.gnu.org/licenses/fdl.html',				$this->_t('LicenseArray')['GNU-FDL']],
 			'PD'			=> ['https://creativecommons.org/publicdomain/mark/1.0/',	$this->_t('LicenseArray')['PD']],
+			'CR'			=> ['',														$this->_t('LicenseArray')['CR']],
 		];
 
 		if (isset($licenses[$license]))
