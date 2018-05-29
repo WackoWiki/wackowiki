@@ -690,8 +690,8 @@ $ap_translation = [
 	'RootPage'					=> 'Главная страница',
 	'RootPageInfo'				=> 'Тэг главной страницы, автоматически открываемой, когда пользователь посещает сайт.',
 
-	'PrivacyPage'				=> 'Privacy Policy',
-	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
+	'PrivacyPage'				=> 'Политика конфиденциальности',
+	'PrivacyPageInfo'			=> 'Страница с Политикой конфиденциальности сайта.',
 
 	'TermsPage'					=> 'Политика и правила',
 	'TermsPageInfo'				=> 'Страница с правилами сайта.',

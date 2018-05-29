@@ -693,7 +693,7 @@ $ap_translation = [
 	'NewsLevels'				=> 'Depth of news pages from the root cluster',
 	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
 
-	'LicenseSection'			=> 'License',
+	'LicenseSection'			=> 'Лиценза',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 

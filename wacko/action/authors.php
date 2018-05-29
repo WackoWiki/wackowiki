@@ -168,15 +168,15 @@ else
 	{
 		// license names and links to texts
 		$licenses = [
-			'CC-BY-ND'		=> ['https://creativecommons.org/licenses/by-nd/4.0/',		$this->_t('License')['CC-BY-ND']],
-			'CC-BY-NC-SA'	=> ['https://creativecommons.org/licenses/by-nc-sa/4.0/',	$this->_t('License')['CC-BY-NC-SA']],
-			'CC-BY-NC-ND'	=> ['https://creativecommons.org/licenses/by-nc-nd/4.0/',	$this->_t('License')['CC-BY-NC-ND']],
-			'CC-BY-SA'		=> ['https://creativecommons.org/licenses/by-sa/4.0/',		$this->_t('License')['CC-BY-SA']],
-			'CC-BY-NC'		=> ['https://creativecommons.org/licenses/by-nc/4.0/',		$this->_t('License')['CC-BY-NC']],
-			'CC-BY'			=> ['https://creativecommons.org/licenses/by/4.0/',			$this->_t('License')['CC-BY']],
-			'CC-ZERO'		=> ['https://creativecommons.org/publicdomain/zero/1.0/',	$this->_t('License')['CC-ZERO']],
-			'GNU-FDL'		=> ['https://www.gnu.org/licenses/fdl.html',				$this->_t('License')['GNU-FDL']],
-			'PD'			=> ['https://creativecommons.org/publicdomain/mark/1.0/',	$this->_t('License')['PD']],
+			'CC-BY-ND'		=> ['https://creativecommons.org/licenses/by-nd/4.0/',		$this->_t('LicenseArray')['CC-BY-ND']],
+			'CC-BY-NC-SA'	=> ['https://creativecommons.org/licenses/by-nc-sa/4.0/',	$this->_t('LicenseArray')['CC-BY-NC-SA']],
+			'CC-BY-NC-ND'	=> ['https://creativecommons.org/licenses/by-nc-nd/4.0/',	$this->_t('LicenseArray')['CC-BY-NC-ND']],
+			'CC-BY-SA'		=> ['https://creativecommons.org/licenses/by-sa/4.0/',		$this->_t('LicenseArray')['CC-BY-SA']],
+			'CC-BY-NC'		=> ['https://creativecommons.org/licenses/by-nc/4.0/',		$this->_t('LicenseArray')['CC-BY-NC']],
+			'CC-BY'			=> ['https://creativecommons.org/licenses/by/4.0/',			$this->_t('LicenseArray')['CC-BY']],
+			'CC-ZERO'		=> ['https://creativecommons.org/publicdomain/zero/1.0/',	$this->_t('LicenseArray')['CC-ZERO']],
+			'GNU-FDL'		=> ['https://www.gnu.org/licenses/fdl.html',				$this->_t('LicenseArray')['GNU-FDL']],
+			'PD'			=> ['https://creativecommons.org/publicdomain/mark/1.0/',	$this->_t('LicenseArray')['PD']],
 		];
 
 		if (isset($licenses[$license]))

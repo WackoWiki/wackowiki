@@ -156,12 +156,12 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="license"><strong><?php echo $engine->_t('DefaultLicense');?>:</strong><br>
-					<small><?php echo $engine->_t('');?></small></label>
+					<small><?php echo $engine->_t('DefaultLicenseInfo');?></small></label>
 				</td>
 				<td>
 					<select id="license" name="license">
 <?php
-					$licenses = $engine->_t('License');
+					$licenses = $engine->_t('LicenseArray');
 
 					foreach ($licenses as $offset => $license)
 					{

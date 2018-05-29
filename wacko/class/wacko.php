@@ -8517,6 +8517,40 @@ class Wacko
 		}
 	}
 
+	function show_select_license($name, $license, $label = false)
+	{
+		$out		= '';
+		$langs		= [];
+		$licenses	= [];
+
+		if ($label)
+		{
+			$out .= '<label for="' . $name . '">' . $this->_t('DefaultLicense') . ' </label>';
+		}
+
+		$out .= '<select id="license" name="license">' . "\n";
+
+		$licenses = $this->_t('LicenseArray');
+
+		foreach ($licenses as $offset => $_license)
+		{
+			if (strlen($_license) > 50)
+			{
+				$_license = substr($_license, 0, 45 ) . '...';
+			}
+
+			$out .= '<option value="' . $offset . '" ' .
+				($license == $offset
+					? 'selected '
+					: '') .
+				'>' . '[ ' . $offset . ' ] ' . $_license . "</option>\n";
+		}
+
+		$out .= "</select>\n";
+
+		return $out;
+	}
+
 	/**
 	 * show select for available languages
 	 *
