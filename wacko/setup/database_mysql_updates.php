@@ -57,10 +57,10 @@ $update_config_r5_4_4 = "UPDATE {$pref}config SET config_value = config_value * 
 
 // EXTERNAL LINK
 $table_external_link_r5_4_0 = "CREATE TABLE {$pref}external_link (" .
-					"external_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
+					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"link TEXT NOT NULL," .
-					"PRIMARY KEY (external_link_id)," .
+					"PRIMARY KEY (link_id)," .
 					"KEY idx_page_id (page_id)" .
 					") {$engine} COMMENT='' {$charset}";
 

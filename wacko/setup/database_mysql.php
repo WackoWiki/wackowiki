@@ -73,10 +73,10 @@ $table_config = "CREATE TABLE {$pref}config (" .
 				") {$engine} COMMENT='' {$charset}";
 
 $table_external_link = "CREATE TABLE {$pref}external_link (" .
-					"external_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
+					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"link TEXT NOT NULL," .
-					"PRIMARY KEY (external_link_id)," .
+					"PRIMARY KEY (link_id)," .
 					"KEY idx_page_id (page_id)" .
 					") {$engine} COMMENT='' {$charset}";
 

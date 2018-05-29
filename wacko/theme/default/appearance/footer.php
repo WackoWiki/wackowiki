@@ -75,7 +75,7 @@ if ($this->get_user())
 if ($this->db->license)
 {
 	#$tpl->license_text = $this->_t('License')[$this->db->license];
-	$tpl->license_text = $this->action('authors');
+	#$tpl->license_text = $this->action('authors');
 }
 
 // comment this out for not showing help link at the bottom of your pages

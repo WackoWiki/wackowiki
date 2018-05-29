@@ -3733,6 +3733,12 @@ class Wacko
 			{
 				$title	= $this->_t('OuterLink2');
 				$icon	= $this->_t('OuterIcon');
+
+				// tracking external link
+				if ($track)
+				{
+					$this->track_link($tag, LINK_EXTERNAL);
+				}
 			}
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
@@ -3843,7 +3849,7 @@ class Wacko
 				}
 			}
 
-			// try to find in global / local storage and return if success
+			// try to find file in global / local storage and return if success
 			if (is_array($file_data))
 			{
 				#echo '---------------------------<br>';
@@ -4661,6 +4667,29 @@ class Wacko
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->table_prefix . "file_link " .
 				"(page_id, file_id) " .
+				"VALUES " . rtrim($query, ','));
+		}
+
+		// delete page related old external links in table
+		$this->db->sql_query(
+			"DELETE " .
+			"FROM " . $this->db->table_prefix . "external_link " .
+			"WHERE page_id = " . (int) $from_page_id);
+
+		// external link
+		if ($external_table = @$this->linktable[LINK_EXTERNAL])
+		{
+			$query = '';
+
+			foreach ($external_table as $dummy => $link) // discard strtolowered index
+			{
+				$query .= "(	" . (int) $from_page_id . ",
+								" . $this->db->q($link) . "),";
+			}
+
+			$this->db->sql_query(
+				"INSERT INTO " . $this->db->table_prefix . "external_link " .
+				"(page_id, link) " .
 				"VALUES " . rtrim($query, ','));
 		}
 	}
