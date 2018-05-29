@@ -53,7 +53,16 @@ $update_config_r5_4_1 = "DELETE FROM {$pref}config WHERE config_name IN ('sessio
 $update_config_r5_4_2 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_max_size'";
 $update_config_r5_4_3 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_quota'";
 $update_config_r5_4_4 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_quota_per_user'";
-#$update_config_r5_4_5 = "UPDATE {$pref}config SET config_value = config_value 'policy_page' WHERE config_name = 'terms_page'";
+#$update_config_r5_4_5 = "UPDATE {$pref}config SET config_value = config_value 'terms_page' WHERE config_name = 'terms_page'";
+
+// EXTERNAL LINK
+$table_external_link_r5_4_0 = "CREATE TABLE {$pref}external_link (" .
+					"external_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
+					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
+					"link TEXT NOT NULL," .
+					"PRIMARY KEY (external_link_id)," .
+					"KEY idx_page_id (page_id)" .
+					") {$engine} COMMENT='' {$charset}";
 
 // FILE
 $alter_file_r5_1_0 = "ALTER TABLE {$pref}upload ADD INDEX idx_deleted (deleted)";
@@ -68,6 +77,7 @@ $alter_file_r5_4_3 = "ALTER TABLE {$pref}file CHANGE upload_lang file_lang VARCH
 $alter_file_r5_4_4 = "ALTER TABLE {$pref}file ADD mime_type VARCHAR(255) NOT NULL DEFAULT '' AFTER file_ext";
 $alter_file_r5_4_5 = "ALTER TABLE {$pref}file DROP INDEX idx_page_id, ADD UNIQUE idx_page_id (page_id, file_name)";
 $alter_file_r5_4_6 = "ALTER TABLE {$pref}file ADD modified_dt DATETIME NULL DEFAULT NULL AFTER uploaded_dt";
+$alter_file_r5_4_7 = "ALTER TABLE {$pref}file ADD license_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER caption";
 
 $rename_file_r5_4_0 = "RENAME TABLE {$pref}upload TO {$pref}file";
 
@@ -99,6 +109,7 @@ $alter_page_r5_4_3 = "ALTER TABLE {$pref}page CHANGE edit_note edit_note VARCHAR
 $alter_page_r5_4_4 = "ALTER TABLE {$pref}page ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
 $alter_page_r5_4_5 = "ALTER TABLE {$pref}page ADD files INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER comments";
 $alter_page_r5_4_6 = "ALTER TABLE {$pref}page ADD revisions INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER files";
+$alter_page_r5_4_7 = "ALTER TABLE {$pref}page ADD license_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_size";
 
 $update_page_r5_1_0 = "UPDATE {$pref}page SET noindex = 0 WHERE noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
