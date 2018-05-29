@@ -64,11 +64,12 @@ define('MENU_DEFAULT',					2);
 
 define('LINK_PAGE',						0);
 define('LINK_FILE',						1);
+define('LINK_EXTERNAL',					2);
 
 define('OBJECT_PAGE',					1);
 define('OBJECT_FILE',					2);
 
-define('RECOVERY_MODE',					0);					// restore database
+define('RECOVERY_MODE',					0);					// 1 - restore database
 define('AUTO_REWRITE',					1);					// 0 - off, turns off auto rewrite for debugging,
 															//		with mode_rewrite still active on your webserver,
 															//		you're also required to deactivate the rules in the .htaccess file

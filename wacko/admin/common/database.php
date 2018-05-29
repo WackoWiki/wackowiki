@@ -51,6 +51,12 @@ if (!isset($tables, $directories))
 				'order'	=> 'assignment_id',
 				'limit'	=> 1000
 			],
+			$prefix . 'external_link' => [
+				'name'	=> $prefix . 'external_link',
+				'where'	=> 'page_id',
+				'order'	=> 'page_id',
+				'limit'	=> 1000
+			],
 			$prefix . 'file' => [
 				'name'	=> $prefix . 'file',
 				'where'	=> false,
