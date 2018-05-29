@@ -891,15 +891,16 @@ $wacko_translation = [
 	'AnonymousUsers'			=> 'Anonymous users',
 	'License'					=> 'Αδεια',
 	'LicenseArray'				=> [
-		'CC-BY-ND'		=> 'CC Attribution-NoDerivatives.',
-		'CC-BY-NC-SA'	=> 'CC Attribution-NonCommercial-ShareAlike',
-		'CC-BY-NC-ND'	=> 'CC Attribution-NonCommercial-NoDerivatives',
-		'CC-BY-SA'		=> 'CC Attribution-ShareAlike',
-		'CC-BY-NC'		=> 'CC Attribution-NonCommercial',
-		'CC-BY'			=> 'CC Attribution',
-		'CC-ZERO'		=> 'CC CC0 1.0 Universal',
+		'CC-BY-ND'		=> 'Attribution-NoDerivatives.',
+		'CC-BY-NC-SA'	=> 'Attribution-NonCommercial-ShareAlike',
+		'CC-BY-NC-ND'	=> 'Attribution-NonCommercial-NoDerivatives',
+		'CC-BY-SA'		=> 'Attribution-ShareAlike',
+		'CC-BY-NC'		=> 'Attribution-NonCommercial',
+		'CC-BY'			=> 'Attribution',
+		'CC-ZERO'		=> 'CC0 1.0 Universal',
 		'GNU-FDL'		=> 'GNU Free Documentation License',
 		'PD'			=> 'Public Domain / Free Use',
+		'CR'			=> 'All Rights Reserved',
 	],
 
 	// Cache

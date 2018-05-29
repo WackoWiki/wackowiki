@@ -893,15 +893,16 @@ $wacko_translation = [
 	'AnonymousUsers'			=> 'Anonyme Benutzer',
 	'License'					=> 'Lizenz',
 	'LicenseArray'				=> [
-		'CC-BY-ND'		=> 'CC Namensnennung - Keine Bearbeitungen',
-		'CC-BY-NC-SA'	=> 'CC Namensnennung - Nicht kommerziell - Weitergabe unter gleichen Bedingungen',
-		'CC-BY-NC-ND'	=> 'CC Namensnennung - Nicht kommerziell - Keine Bearbeitungen',
-		'CC-BY-SA'		=> 'CC Namensnennung - Weitergabe unter gleichen Bedingungen',
-		'CC-BY-NC'		=> 'CC Namensnennung - Nicht kommerziell',
-		'CC-BY'			=> 'CC Namensnennung',
-		'CC-ZERO'		=> 'CC CC0 1.0 Universal',
+		'CC-BY-ND'		=> 'Namensnennung - Keine Bearbeitungen',
+		'CC-BY-NC-SA'	=> 'Namensnennung - Nicht kommerziell - Weitergabe unter gleichen Bedingungen',
+		'CC-BY-NC-ND'	=> 'Namensnennung - Nicht kommerziell - Keine Bearbeitungen',
+		'CC-BY-SA'		=> 'Namensnennung - Weitergabe unter gleichen Bedingungen',
+		'CC-BY-NC'		=> 'Namensnennung - Nicht kommerziell',
+		'CC-BY'			=> 'Namensnennung',
+		'CC-ZERO'		=> 'CC0 1.0 Universal',
 		'GNU-FDL'		=> 'GNU Free Documentation License',
 		'PD'			=> 'gemeinfrei',
+		'CR'			=> 'Alle Rechte vorbehalten',
 	],
 
 	// Cache
