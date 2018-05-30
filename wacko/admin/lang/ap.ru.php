@@ -686,6 +686,11 @@ $ap_translation = [
 	'DefaultLicense'			=> 'Лицензия по умолчанию',
 	'DefaultLicenseInfo'		=> 'Содержимое сайта будет публиковаться по условиям указанной лицензии.',
 
+	'EnableLicense'				=> 'Enable License',
+	'EnableLicenseInfo'			=> 'Enable to show license information.',
+	'LicensePerPage'			=> 'License per page',
+	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
+
 	'ServicePagesSection'		=> 'Служебные страницы',
 	'RootPage'					=> 'Главная страница',
 	'RootPageInfo'				=> 'Тэг главной страницы, автоматически открываемой, когда пользователь посещает сайт.',
