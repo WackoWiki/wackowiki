@@ -709,6 +709,11 @@ $ap_translation = [
 	'DefaultLicense'			=> 'Standard-Lizenz',
 	'DefaultLicenseInfo'		=> 'Unter welcher Lizenz sollen deine Inhalte veröffentlicht werden?',
 
+	'EnableLicense'				=> 'Aktiviere Lizenz',
+	'EnableLicenseInfo'			=> 'Aktivieren, um Lizenzinformationen anzuzeigen.',
+	'LicensePerPage'			=> 'Lizenz pro Seite',
+	'LicensePerPageInfo'		=> 'Erlaube Lizenz pro Seite, die der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
+
 	'ServicePagesSection'		=> 'Standardseiten',
 
 	'RootPage'					=> 'Startseite',

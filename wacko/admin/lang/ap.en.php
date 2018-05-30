@@ -702,6 +702,10 @@ $ap_translation = [
 	'LicenseSection'			=> 'License',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
+	'EnableLicense'				=> 'Enable License',
+	'EnableLicenseInfo'			=> 'Enable to show license information.',
+	'LicensePerPage'			=> 'License per page',
+	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
 	'ServicePagesSection'		=> 'Service pages',
 	'RootPage'					=> 'Home page',
