@@ -31,8 +31,17 @@ print page and revisions' authors.
 
 if (!isset($add))		$add		= '';
 if (!isset($add_only))	$add_only	= 0;
-if (!isset($license))	$license	= $this->db->license ?? '';
+if (!isset($license))	$license	= '';
+#if (!isset($license_id))	$license_id	= '';
 if (!isset($cluster))	$cluster	= '';
+
+// check for license_id
+if (empty($license) && !isset($license_id))
+{
+	#$license_id	= $this->page['license_id'] ?? $this->db->license ?? '';
+	$license_id	= $this->db->license ?? '';
+}
+
 
 echo '<small>';
 
@@ -60,18 +69,26 @@ else
 	// search and process co-authors
 	if ($this->page && !$add_only)
 	{
+		$prefix = $this->db->table_prefix;
+
 		// load overall authors data from revision and page table
 		if ($_authors = $this->db->load_all(
 		"(SELECT u.user_name AS name, YEAR(r.modified) AS year " .
-		"FROM " . $this->db->table_prefix . "revision r " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
-		"WHERE r.supertag = " . $this->db->q($this->supertag) . " " . ($cluster ? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '') .
+		"FROM " . $prefix . "revision r " .
+			"INNER JOIN " . $prefix . "user u ON (r.user_id = u.user_id) " .
+		"WHERE r.supertag = " . $this->db->q($this->supertag) . " " .
+			($cluster
+				? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " "
+				: '') .
 		"GROUP BY u.user_name, year ) " .
 		"UNION " .
-		"( SELECT u.user_name AS name, YEAR(p.modified) AS year " .
-		"FROM " . $this->db->table_prefix . "page p " .
-			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-		"WHERE p.supertag = " . $this->db->q($this->supertag) . " " . ($cluster ? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " " : '') .
+		"(SELECT u.user_name AS name, YEAR(p.modified) AS year " .
+		"FROM " . $prefix . "page p " .
+			"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
+		"WHERE p.supertag = " . $this->db->q($this->supertag) . " " .
+			($cluster
+				? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " "
+				: '') .
 		"GROUP BY u.user_name, year ) " .
 		"ORDER BY name ASC, year ASC", true))
 		{
@@ -83,9 +100,9 @@ else
 				{
 					// new entry
 					$authors[$author['name']] = [
-							'name' => $author['name'],
-							'years' => $author['year'],
-							'total' => 1
+						'name'	=> $author['name'],
+						'years'	=> $author['year'],
+						'total'	=> 1
 					];
 				}
 				else
@@ -165,39 +182,9 @@ else
 		}
 	}
 
-	if ($license)
+	if ($license || $license_id)
 	{
-		// license names and links to texts
-		$licenses = [
-			'CC-BY-ND'		=> ['https://creativecommons.org/licenses/by-nd/4.0/',		$this->_t('LicenseArray')['CC-BY-ND']],
-			'CC-BY-NC-SA'	=> ['https://creativecommons.org/licenses/by-nc-sa/4.0/',	$this->_t('LicenseArray')['CC-BY-NC-SA']],
-			'CC-BY-NC-ND'	=> ['https://creativecommons.org/licenses/by-nc-nd/4.0/',	$this->_t('LicenseArray')['CC-BY-NC-ND']],
-			'CC-BY-SA'		=> ['https://creativecommons.org/licenses/by-sa/4.0/',		$this->_t('LicenseArray')['CC-BY-SA']],
-			'CC-BY-NC'		=> ['https://creativecommons.org/licenses/by-nc/4.0/',		$this->_t('LicenseArray')['CC-BY-NC']],
-			'CC-BY'			=> ['https://creativecommons.org/licenses/by/4.0/',			$this->_t('LicenseArray')['CC-BY']],
-			'CC-ZERO'		=> ['https://creativecommons.org/publicdomain/zero/1.0/',	$this->_t('LicenseArray')['CC-ZERO']],
-			'GNU-FDL'		=> ['https://www.gnu.org/licenses/fdl.html',				$this->_t('LicenseArray')['GNU-FDL']],
-			'PD'			=> ['https://creativecommons.org/publicdomain/mark/1.0/',	$this->_t('LicenseArray')['PD']],
-			'CR'			=> ['',														$this->_t('LicenseArray')['CR']],
-		];
-
-		if (isset($licenses[$license]))
-		{
-			$icons = '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $licenses[$license][1] . '" title="' . $licenses[$license][1] . '" class="license-' . $license . '">';
-			// constant license
-			$license = '<br>' . $this->_t('DistributedUnder') . '<br>' .
-
-			// TODO: rel="license"
-			$this->link($licenses[$license][0], '', $licenses[$license][1]) . '<br>' .
-			'<a rel="license" href="' . $licenses[$license][0] . '">' . $icons . '</a>';
-		}
-		else
-		{
-			// free-form text
-			$license = $this->format($this->format($license, 'wacko'), 'post_wacko');
-		}
-
-		$output[] = $license;
+		$output[] = '<br>' . $this->action('license', ['license_id' => $license_id]);
 	}
 
 	// print results

@@ -4885,14 +4885,14 @@ class Wacko
 
 				if (strncasecmp($headless, $we, strlen($we))) // if not from ourselves..
 				{
-					$ua			= $_SERVER['HTTP_USER_AGENT'] ?? null;
+					$ua	= $_SERVER['HTTP_USER_AGENT'] ?? null;
 
 					$this->db->sql_query(
 						"INSERT INTO " . $this->db->table_prefix . "referrer SET " .
 							"page_id		= " . (int) $this->page['page_id'] . ", " .
 							"referrer		= " . $this->db->q($ref) . ", " .
-							"ip				= " . $this->db->q($this->get_user_ip()) . ", " .
-							"user_agent		= " . $this->db->q($ua) . ", " .
+							#"ip				= " . $this->db->q($this->get_user_ip()) . ", " .
+							#"user_agent		= " . $this->db->q($ua) . ", " .
 							"referrer_time	= UTC_TIMESTAMP()");
 				}
 			}
@@ -8532,18 +8532,18 @@ class Wacko
 
 		$licenses = $this->_t('LicenseArray');
 
-		foreach ($licenses as $offset => $_license)
+		foreach ($licenses as $offset => $text)
 		{
-			if (strlen($_license) > 50)
+			if (strlen($text) > 50)
 			{
-				$_license = substr($_license, 0, 45 ) . '...';
+				$text = substr($text, 0, 45 ) . '...';
 			}
 
 			$out .= '<option value="' . $offset . '" ' .
 				($license == $offset
 					? 'selected '
 					: '') .
-				'>' . '[ ' . $offset . ' ] ' . $_license . "</option>\n";
+				'>' . '[ ' . $this->_t('LicenseIds')[$offset][0] . ' ] ' . $text . "</option>\n";
 		}
 
 		$out .= "</select>\n";
