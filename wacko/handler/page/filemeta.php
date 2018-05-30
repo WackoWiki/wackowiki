@@ -14,7 +14,7 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
@@ -311,6 +311,20 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					<tr>
 						<td colspan="2">&nbsp;</td>
 					</tr>
+					<?php
+					if ($file['license_id'])
+					{
+					?>
+						<tr>
+							<th scope="row"><?php echo $this->_t('License'); ?>:</th>
+							<td><?php echo $this->action('license', ['license_id' => $file['license_id']]); ?></td>
+						</tr>
+						<tr>
+							<td colspan="2">&nbsp;</td>
+						</tr>
+					<?php
+					}
+					?>
 					<tr>
 						<th scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
 						<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
@@ -363,6 +377,17 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					<tr>
 						<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
 						<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo Ut::html($file['caption']); ?></textarea></td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="license"><?php echo $this->_t('License');?></label>
+						</th>
+						<td>
+						<?php
+							$file_license = $file['license_id'] ?? 0;
+							echo $this->show_select_license('file_license', $file_license, false);
+						?>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">
@@ -469,6 +494,7 @@ else
 				$description	= substr($_POST['file_description'], 0, 250);
 				$description	= $clean_text((string) $description);
 				$caption		= $clean_text((string) $_POST['caption']);
+				$license_id		= $_POST['license'] ?? 0;
 				$file_lang		= $_POST['file_lang'] ?? $file['file_lang'];
 
 				// update file metadata
@@ -477,6 +503,7 @@ else
 						"file_lang			= " . $this->db->q($file_lang) . ", " .
 						"file_description	= " . $this->db->q($description) . ", " .
 						"caption			= " . $this->db->q($caption) . ", " .
+						"license_id			= " . (int) $license_id . ", " .
 						"modified_dt		= UTC_TIMESTAMP() " .
 					"WHERE file_id = " . (int) $file['file_id'] . " " .
 					"LIMIT 1");
