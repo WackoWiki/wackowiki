@@ -32,20 +32,15 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 {
 	if ($user)
 	{
-		echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
+		$tpl->mark_href = $this->href('', '', ['markread' => 1]);
 	}
 
 	if (!$root && !(int) $noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/changes_' .
-			preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' .
-			$this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentChangesXMLTip') .
-			'" alt="XML" class="btn-feed"></a></span>' . "<br><br>\n";
+		$tpl->xml_href = $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 	}
 
-	$this->print_pagination($pagination);
-
-	echo '<ul class="ul_list">' . "\n";
+	$tpl->pagination_text = $pagination['text'];
 
 	$curday = '';
 
@@ -57,42 +52,13 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 			if ($day != $curday)
 			{
-				if ($curday)
-				{
-					echo "</ul>\n<br></li>\n";
-				}
-
-				echo '<li><strong>' . $day . "</strong>\n<ul>\n";
-				$curday = $day;
+				$tpl->page_day = $curday = $day;
 			}
 
 			$review = $viewed = '';
 
-			// review
-			if ($this->db->review && $this->is_reviewer() && !$page['reviewed'])
-			{
-				$review = '<span class="review">[' . $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review')) . ']</span>';
-			}
-
 			// do unicode entities
 			$page_lang = ($this->page['page_lang'] != $page['page_lang']) ? $page['page_lang'] : '';
-
-			if (($edit_note = $page['edit_note']))
-			{
-				if ($page_lang)
-				{
-					$edit_note = $this->do_unicode_entities($edit_note, $page_lang);
-				}
-
-				$edit_note = '<span class="editnote">[' . $edit_note . ']</span>';
-			}
-
-			if (isset($user['last_mark']) && $user['last_mark']
-				&& $page['user_name'] != $user['user_name']
-				&& $page['modified'] > $user['last_mark'])
-			{
-				$viewed = ' viewed';
-			}
 
 			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
@@ -101,31 +67,47 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			$size_delta = $page['page_size'] - $page['parent_size'];
 
 			// print entry
-			echo '<li class="lined' . $viewed . '"><span class="dt">' .
-			(!$this->hide_revisions
-				? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')) . ' '
-				: $time
-			) .
-			'</span> &mdash; ' .
-			($title == 1
-				? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
-				: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
-			) .
+			$tpl->page_l_revisions =
+				(!$this->hide_revisions
+					? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')) . ' '
+					: $time
+				);
+			$tpl->page_l_page =
+				($title == 1
+					? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
+					: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
+				);
 
-			' . . . . . . . . . . . . . . . . <small>' .
-			$this->user_link($page['user_name'], '', true, false) . ' ' .
-			$review . ' ' .
-			$edit_note .
-			# ' ' . $this->delta_formatted($size_delta) . // TODO: looks odd here
-			"</small></li>\n";
+			$tpl->page_l_user = $this->user_link($page['user_name'], '', true, false);
+
+			if (isset($user['last_mark']) && $user['last_mark']
+				&& $page['user_name'] != $user['user_name']
+				&& $page['modified'] > $user['last_mark'])
+			{
+				$tpl->page_l_viewed = ' viewed';
+			}
+
+			// review
+			if ($this->db->review && $this->is_reviewer() && !$page['reviewed'])
+			{
+				$tpl->page_l_review_href = $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'));
+			}
+
+			if (($edit_note = $page['edit_note']))
+			{
+				if ($page_lang)
+				{
+					$edit_note = $this->do_unicode_entities($edit_note, $page_lang);
+				}
+
+				$tpl->page_l_edit_note = $edit_note;
+			}
+
+			# $tpl->l_delta =  $this->delta_formatted($size_delta); // TODO: looks odd here
 		}
 	}
-
-	echo "</ul>\n</li>\n</ul>\n";
-
-	$this->print_pagination($pagination);
 }
 else
 {
-	echo $this->_t('NoPagesFound');
+	$tpl->nopages = true;
 }

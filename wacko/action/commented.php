@@ -94,17 +94,15 @@ if ($this->user_allowed_comments())
 
 			if ($user)
 			{
-				echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
+				$tpl->mark_href =  $this->href('', '', ['markread' => 1]);
 			}
 
 			if ($root == '' && !(int) $noxml)
 			{
-				echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"/></a></span><br><br>' . "\n";
+				$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 			}
 
-			$this->print_pagination($pagination);
-
-			echo '<ul class="ul_list">' . "\n";
+			$tpl->pagination_text = $pagination['text'];
 
 			$curday = '';
 			foreach ($pages as $page)
@@ -124,13 +122,7 @@ if ($this->user_allowed_comments())
 
 					if ($day != $curday)
 					{
-						if ($curday)
-						{
-							echo "</ul>\n<br></li>\n";
-						}
-
-						echo '<li><strong>' . $day . ":</strong>\n<ul>\n";
-						$curday = $day;
+						$tpl->page_day = $curday = $day;
 					}
 
 					// do unicode entities
@@ -139,33 +131,28 @@ if ($this->user_allowed_comments())
 
 					// comment lang
 					$comment_lang	= ($this->page['page_lang'] != $page['comment_lang'])? $page['comment_lang'] : '';
-					$viewed			= ($user['last_mark']
+					$tpl->page_l_viewed = ($user['last_mark']
 										&& $page['comment_user_name'] != $user['user_name']
 										&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
 					// print entry
-					echo '<li ' . $viewed . '><span class="dt">' . $time . '</span> &mdash; ' .
-					($title
+					$tpl->page_l_time = $time;
+					$tpl->page_l_page = ($title
 						? $this->link('/' . $page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
 						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
-					) .
-					' . . . . . . . . . . . . . . . . <small>' . $this->_t('LatestCommentBy') . ' ' .
-					$this->user_link($page['comment_owner_name'], '', true, false) .
-					"</small></li>\n";
+					);
+
+					$tpl->page_l_user = $this->user_link($page['comment_owner_name'], '', true, false);
 				}
 			}
-
-			echo "</ul>\n</li>\n</ul>\n";
-
-			$this->print_pagination($pagination);
 		}
 		else
 		{
-			echo $this->_t('NoRecentlyCommented');
+			$tpl->nopages = true;
 		}
 	}
 }
 else
 {
-	echo $this->_t('CommentsDisabled');
+	$tpl->message =  $this->_t('CommentsDisabled');
 }
