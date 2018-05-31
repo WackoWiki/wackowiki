@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 /*
 print page and revisions' authors.
-	{{authors [add="(c) 2009 Ivan Ivanov[;(c) 2010 John Smith[;...]]"] [license="CC-BY-NC-SA"] [cluster=0]}}
+	{{authors [add="(c) 2009 Ivan Ivanov[;(c) 2010 John Smith[;...]]"] [license="CC-BY-SA"] [cluster=0]}}
 	add		= semicolon-separated list of original authors (for reprinted work or such),
 			  or any appropriate text. wiki-formatting applies.
 			  note: every semicolon-separated block is printed on the new line
