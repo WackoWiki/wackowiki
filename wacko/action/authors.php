@@ -38,8 +38,9 @@ if (!isset($cluster))	$cluster	= '';
 // check for license_id
 if (empty($license) && !isset($license_id))
 {
-	#$license_id	= $this->page['license_id'] ?? $this->db->license ?? '';
-	$license_id	= $this->db->license ?? '';
+	$license_id	= $this->db->allow_license_per_page
+					? ($this->page['license_id'] ?: ($this->db->license ?? ''))
+					: ($this->db->license ?? '');
 }
 
 
@@ -184,7 +185,7 @@ else
 
 	if ($license || $license_id)
 	{
-		$output[] = '<br>' . $this->action('license', ['license_id' => $license_id]);
+		$output[] = '<br>' . $this->action('license', ['license_id' => $license_id, 'license' => $license, 'icon' => 1]);
 	}
 
 	// print results
