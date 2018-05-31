@@ -46,6 +46,7 @@ if (@$_POST['_action'] === 'general_properties')
 		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"page_lang			= " . $this->db->q($_POST['page_lang']) . ", " .
 			"theme				= " . ($this->db->q($_POST['theme']) ?? '') . ", " .
+			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
 			# "menu_tag			= " . $this->db->q(Ut::html(trim($_POST['menu_tag']))) . ", " .
 			# "show_menu_tag		= " . $this->db->q((int) $_POST['show_menu_tag']) . ", " .
@@ -156,6 +157,16 @@ else
 			{
 				$tpl->themes_o_theme	= $theme;
 				$tpl->themes_o_sel		= (int) (isset($this->page['theme']) && $this->page['theme'] == $theme);
+			}
+		}
+
+		if ($this->db->enable_license && $this->db->allow_license_per_page)
+		{
+			foreach ($this->_t('LicenseArray') as $offset => $license)
+			{
+				$tpl->licenses_o_license	= '[' . $this->_t('LicenseIds')[$offset][0] . '] ' . $license;
+				$tpl->licenses_o_id			= $offset;
+				$tpl->licenses_o_sel		= (int) (isset($this->page['license_id']) && $this->page['license_id'] == $offset);
 			}
 		}
 

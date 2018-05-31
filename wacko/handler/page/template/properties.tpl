@@ -192,6 +192,21 @@
 								</td>
 							</tr>
 						=]
+						[= licenses _ =
+							<tr>
+								<th scope="row">
+									<label for="license">[ ' _t: License ' ]</label>
+								</th>
+								<td>
+									<select id="license" name="license">
+										<option value="">--</option>
+										[= o _ =
+											<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' license | truncate 70' ]</option>
+										=]
+									</select>
+								</td>
+							</tr>
+						=]
 						<tr>
 							<th></th>
 							<td>

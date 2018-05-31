@@ -260,7 +260,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				// show image
 				if ($file['picture_w'] || $file['file_ext'] == 'svg')
 				{
-					echo '<span><a href="' . $url . '">' . $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false) . '</a></span>';
+					echo '<span class="show-image"><a href="' . $url . '">' . $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false) . '</a></span>';
 				}
 ?>
 				<table class="upload tbl_fixed">
@@ -317,7 +317,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					?>
 						<tr>
 							<th scope="row"><?php echo $this->_t('License'); ?>:</th>
-							<td><?php echo $this->action('license', ['license_id' => $file['license_id']]); ?></td>
+							<td><?php echo $this->action('license', ['license_id' => $file['license_id'], 'icon' => 1]); ?></td>
 						</tr>
 						<tr>
 							<td colspan="2">&nbsp;</td>

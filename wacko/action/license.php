@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 /*
 print page or file license.
-	{{license [license="CC-BY-SA"] license_id=[ID]}
+	{{license [license="CC-BY-SA"] [license_id=ID] [icon=0|1]}
 	license	= some free-form text (wiki-formatting applies) or one of predefined constants:
 				- CC-BY-ND			(CreativeCommons-Attribution-NoDerivatives)
 				- CC-BY-NC-SA		(CreativeCommons-Attribution-NonCommercial-ShareAlike)
@@ -20,12 +20,15 @@ print page or file license.
 				- PD				(Public Domain)
 				- CR				(All Rights Reserved)
 	license_id	= assigned db value
+	icon		= show license icons
 
 	https://creativecommons.org/choose/
 	https://en.wikipedia.org/wiki/Creative_Commons_license
+	https://creativecommons.org/about/downloads - icons
 */
 
 if (!isset($license))		$license	= '';
+if (!isset($icon))			$icon		= 0;
 #if (!isset($license_id))	$license_id	= '';
 
 // check for license_id
@@ -69,7 +72,11 @@ if ($license || $license_id)
 			$tpl->l_ea		= true;
 		}
 
-		$tpl->l_i_abbr	= $licenses[$license_id][0];
+		if ($icon)
+		{
+			$tpl->l_i_abbr	= $licenses[$license_id][0];
+		}
+
 		$tpl->l_text	= $text[$license_id];
 
 		// TODO: rel="license"
