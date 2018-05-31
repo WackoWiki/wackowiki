@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 /*
 print page or file license.
-	{{license [license="CC-BY-NC-SA"] license_id=[ID]}
+	{{license [license="CC-BY-SA"] license_id=[ID]}
 	license	= some free-form text (wiki-formatting applies) or one of predefined constants:
 				- CC-BY-ND			(CreativeCommons-Attribution-NoDerivatives)
 				- CC-BY-NC-SA		(CreativeCommons-Attribution-NonCommercial-ShareAlike)
@@ -29,9 +29,11 @@ if (!isset($license))		$license	= '';
 #if (!isset($license_id))	$license_id	= '';
 
 // check for license_id
-if (empty($license) && !isset($license_id))
+if (empty($license) && !isset($license_id) && $this->db->enable_license)
 {
-	$license_id	= $this->page['license_id'] ?? $this->db->license ?? '';
+	$license_id	= $this->db->allow_license_per_page
+					? ($this->page['license_id'] ?: ($this->db->license ?? ''))
+					: ($this->db->license ?? '');
 }
 
 if ($license || $license_id)
@@ -49,6 +51,8 @@ if ($license || $license_id)
 		'PD'			=> 9,
 		'CR'			=> 10,
 	];
+	// TODO:	wacko.all.php ($wacko_all_resource[]) is not available,
+	//			when page_lang != user_lang, why?
 	$licenses		= $this->_t('LicenseIds');
 	$text			= $this->_t('LicenseArray');
 
@@ -59,27 +63,22 @@ if ($license || $license_id)
 
 	if (isset($licenses[$license_id]))
 	{
-		$icons		= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $text[$license_id] . '" title="' . $text[$license_id] . '" class="license-' . $licenses[$license_id][0] . '">';
-		// constant license
-		$license	= $this->_t('DistributedUnder') . '<br>' .
+		if (!empty($licenses[$license_id][1]))
+		{
+			$tpl->l_a_href	= $licenses[$license_id][1];
+			$tpl->l_ea		= true;
+		}
+
+		$tpl->l_i_abbr	= $licenses[$license_id][0];
+		$tpl->l_text	= $text[$license_id];
 
 		// TODO: rel="license"
 		#$this->link($licenses[$license][1], '', $text[$license]) . '<br>' .
-		// TODO: add margin-left: 5px; to span
-		'<a rel="license" href="' . $licenses[$license_id][1] . '">' . $icons . '<span>' . $text[$license_id] . '</span></a>';
 	}
 	else
 	{
 		// free-form text
-		$license = $this->format($this->format($license, 'wacko'), 'post_wacko');
-	}
-
-	$output[] = $license;
-
-	// print results
-	if ($output)
-	{
-		echo implode('<br>', $output);
+		$tpl->l_text	= $this->format($this->format($license, 'wacko'), 'post_wacko');
 	}
 }
 

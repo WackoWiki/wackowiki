@@ -208,7 +208,7 @@ if ($can_view)
 	{
 		$tpl->mark		= true;
 		$tpl->emark		= true;
-		$title	= $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
+		$title			= $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
 		$tpl->mark_results	= $results . ' of ' . '' . $count['n'] . ' ' . $title;
 	}
 
