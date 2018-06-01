@@ -44,6 +44,8 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 	$curday = '';
 
+	$tpl->enter('page_');
+
 	foreach ($pages as $i => $page)
 	{
 		if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
@@ -52,7 +54,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 			if ($day != $curday)
 			{
-				$tpl->page_day = $curday = $day;
+				$tpl->day = $curday = $day;
 			}
 
 			$review = $viewed = '';
@@ -67,30 +69,30 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 			$size_delta = $page['page_size'] - $page['parent_size'];
 
 			// print entry
-			$tpl->page_l_revisions =
+			$tpl->l_revisions =
 				(!$this->hide_revisions
 					? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')) . ' '
 					: $time
 				);
-			$tpl->page_l_page =
+			$tpl->l_page =
 				($title == 1
 					? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
 					: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
 				);
 
-			$tpl->page_l_user = $this->user_link($page['user_name'], '', true, false);
+			$tpl->l_user = $this->user_link($page['user_name'], '', true, false);
 
 			if (isset($user['last_mark']) && $user['last_mark']
 				&& $page['user_name'] != $user['user_name']
 				&& $page['modified'] > $user['last_mark'])
 			{
-				$tpl->page_l_viewed = ' viewed';
+				$tpl->l_viewed = ' viewed';
 			}
 
 			// review
 			if ($this->db->review && $this->is_reviewer() && !$page['reviewed'])
 			{
-				$tpl->page_l_review_href = $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'));
+				$tpl->l_review_href = $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'));
 			}
 
 			if (($edit_note = $page['edit_note']))
@@ -100,12 +102,14 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 					$edit_note = $this->do_unicode_entities($edit_note, $page_lang);
 				}
 
-				$tpl->page_l_edit_note = $edit_note;
+				$tpl->l_edit_note = $edit_note;
 			}
 
 			# $tpl->l_delta =  $this->delta_formatted($size_delta); // TODO: looks odd here
 		}
 	}
+
+	$tpl->leave();
 }
 else
 {

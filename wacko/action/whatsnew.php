@@ -83,15 +83,13 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	if ($user == true)
 	{
-		echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
+		$tpl->mark_href = $this->href('', '', ['markread' => 1]);
 	}
 
 	if (!(int) $noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentChangesXMLTip') . '" alt="XML" class="btn-feed"></a></span><br><br>' . "\n";
+		$tpl->xml_href = $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 	}
-
-	echo '<ul class="ul_list">' . "\n";
 
 	$pagination	= $this->pagination(count($pages), @$max, 'n', '', '');
 	$pages		= array_slice($pages, $pagination['offset'], $pagination['perpage']);
@@ -137,7 +135,9 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 		}
 	}
 
-	$this->print_pagination($pagination);
+	$tpl->pagination_text = $pagination['text'];
+
+	$tpl->enter('page_');
 
 	foreach ($pages as $page)
 	{
@@ -166,13 +166,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			// day header
 			if ($day != $curday)
 			{
-				if ($curday)
-				{
-					echo "</ul>\n<br></li>\n";
-				}
-
-				echo '<li><strong>' . $day . "</strong>\n<ul>\n";
-				$curday = $day;
+				$tpl->day = $curday = $day;
 			}
 
 			// check current page lang for different charset to do_unicode_entities() against
@@ -197,17 +191,15 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			}
 
 			// print entry
-			$separator		= ' . . . . . . . . . . . . . . . . ';
-			$icon			= $this->db->theme_url . 'icon/spacer.png';
-			$author			= $this->user_link($page['user_name'], '', true, false);
-			$viewed			= (isset($user['last_mark']) && $user['last_mark']
-								&& $page['user_name'] != $user['user_name']
-								&& $page['date'] > $user['last_mark']
-									? ' viewed'
-									: '' );
-			$time_modified	= (!$this->hide_revisions && ($page['ctype'] != 2 || $page['comment_on_id'] === 0))
-								? $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip'))
-								: $this->compose_link_to_page($page['supertag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
+			$tpl->l_user		= $this->user_link($page['user_name'], '', true, false);
+			$tpl->l_viewed		= (isset($user['last_mark']) && $user['last_mark']
+									&& $page['user_name'] != $user['user_name']
+									&& $page['date'] > $user['last_mark']
+										? ' viewed'
+										: '' );
+			$tpl->l_revisions	= (!$this->hide_revisions && ($page['ctype'] != 2 || $page['comment_on_id'] === 0))
+									? $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip'))
+									: $this->compose_link_to_page($page['supertag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
 
 			if (($edit_note = $page['edit_note']))
 			{
@@ -220,11 +212,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					$edit_note = $this->do_unicode_entities($edit_note, $_cf_lang);
 				}
 
-				$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
+				$tpl->l_edit_note = $edit_note;
 			}
-
-			// time
-			echo '<li class="lined' . $viewed . '"><span class="dt">' . $time_modified . '&nbsp;&nbsp;</span>';
 
 			// new file
 			if ($page['ctype'] == 2)
@@ -233,20 +222,20 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 				if ($page['page_id']) // !$global
 				{
-					$path2		= '_file:/' . ($this->slim_url($page['tag'])) . '/';
-					$on_page	= $this->_t('To') . ' ' .
-						$this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_lang) .
-						' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0];
+					$path2				= '_file:/' . $this->slim_url($page['tag']) . '/';
+					$tpl->l_to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_lang);
+					$tpl->l_cluster		= $sub_tag[0];
 				}
 				else
 				{
-					$path2		= '_file:/';
-					$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
+					$path2				= '_file:/';
+					$tpl->l_cluster		= $this->_t('UploadGlobal');
 				}
 
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewFileAdded') . '" alt="[file]" class="btn-attachment"> ' .
-					$this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1, $_lang) . ' ' .
-					$on_page . $separator . $author . '</span>' . $edit_note;
+				$tpl->l_title	= $this->_t('NewFileAdded');
+				$tpl->l_alt		= 'file';
+				$tpl->l_class	= 'btn-attachment';
+				$tpl->l_link	= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1, $_lang);
 			}
 			// deleted
 			else if ($page['deleted'])
@@ -260,34 +249,49 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
 				}
 
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewCommentAdded') . '" alt="[deleted]" class="btn-delete"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang) . ' ' . $this->_t('To') . ' ' . $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
+				$tpl->l_title	= $this->_t('NewCommentAdded');
+				$tpl->l_alt		= 'deleted';
+				$tpl->l_class	= 'btn-delete';
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang);
+				$tpl->l_to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang);
+				$tpl->l_cluster	= $sub_tag[0];
 			}
 			// new comment
 			else if ($page['comment_on_id'])
 			{
 				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewCommentAdded') . '" alt="[comment]" class="btn-comment"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang) . ' ' . $this->_t('To') . ' ' . $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
+
+				$tpl->l_title	= $this->_t('NewCommentAdded');
+				$tpl->l_alt		= 'comment';
+				$tpl->l_class	= 'btn-comment';
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang);
+				$tpl->l_to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang);
+				$tpl->l_cluster	= $sub_tag[0];
 			}
 			// new page
 			else if ($page['created'] == $page['date'])
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewPageCreated') . '" alt="[new]" class="btn-add_page"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
+
+				$tpl->l_title	= $this->_t('NewPageCreated');
+				$tpl->l_alt		= 'new';
+				$tpl->l_class	= 'btn-add_page';
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
+				$tpl->l_cluster	= $sub_tag[0];
 			}
 			// new revision
 			else
 			{
 				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
-				echo '<img src="' . $icon . '" title="' . $this->_t('NewRevisionAdded') . '" alt="[changed]" class="btn-edit"> ' . $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang) . ' &nbsp;&nbsp;<span title="' . $this->_t("Cluster") . '">&rarr; ' . $sub_tag[0] . $separator . $author . '</span>' . $edit_note;
-			}
 
-			echo "</li>\n";
+				$tpl->l_title	= $this->_t('NewRevisionAdded');
+				$tpl->l_alt		= 'changed';
+				$tpl->l_class	= 'btn-edit';
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
+				$tpl->l_cluster	= $sub_tag[0];
+			}
 		}
 	}
 
-	echo "</ul>\n</li>\n</ul>\n";
-
-	$this->print_pagination($pagination);
+	$tpl->leave();
 }
-
-?>
