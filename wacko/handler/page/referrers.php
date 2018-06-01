@@ -7,14 +7,9 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page(true); // allow forums
 
-$show_backlinks = function ()
+$show_backlinks = function () use (&$tpl)
 {
-	echo '<strong>' . $this->_t('ReferringPages') . ":</strong><br><br>\n";
-
-	// show backlinks
-	echo $this->action('backlinks', ['nomark' => 1]);
-
-	echo '<p></p>';
+	$tpl->b_links = $this->action('backlinks', ['nomark' => 1]);
 };
 
 // fast lane: show backlinks for those who don't deserve further service ;)
@@ -24,14 +19,12 @@ if (
 	|| ($this->db->enable_referrers == 1 && !$this->get_user())
 	|| ($this->db->enable_referrers == 2 && !$this->is_admin()))
 {
-	echo "<br><br>\n";
 	$show_backlinks();
 	return;
 }
 
 // set up for main show
 $url_maxlen		= 80;
-$spacer			= '&nbsp;&nbsp;&rarr;&nbsp;&nbsp;';
 $mod_selector	= 'o';
 $modes			= [
 					''			=> 'ViewReferrersPage',
@@ -104,20 +97,17 @@ else
 
 // let's start: print header
 // TODO: rewrite with template
-echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ';
 
 foreach ($modes as $i => $text)
 {
 	if ($mode == $i)
 	{
-		echo $this->_t($text);
+		$tpl->header = $this->_t($text);
 	}
 }
 
-echo "</h3>\n";
-
 // print navigation
-echo $this->tab_menu($modes, $mode, 'referrers', [], $mod_selector);
+$tpl->menu = $this->tab_menu($modes, $mode, 'referrers', [], $mod_selector);
 
 // in default mode we show intra-wiki backlinks before external referrers
 if (!$mode)
@@ -126,25 +116,22 @@ if (!$mode)
 }
 
 // referrers header
-echo '<strong>' . $title . "</strong><br><br>\n";
+$tpl->title = $title;
 
-$print_ref = function ($ref, $val, $vclass, $link = '') use ($url_maxlen, $spacer)
+$print_ref = function ($ref, $val, $vclass, $link = '') use (&$tpl, $url_maxlen, $spacer)
 {
 	// shorten url name if too long
 	$trunc = $this->shorten_string($ref, $url_maxlen);
 
-	echo '<li>';
-	echo '<span class="' . $vclass . '">' . $val . '</span>&nbsp;&nbsp;&nbsp;&nbsp;';
-	echo '<span class=""><a title="' . Ut::html($ref) .
-		 '" href="' . Ut::html($ref) .
-		 '" rel="nofollow noreferrer">' . Ut::html($trunc) . '</a></span>';
+	$tpl->l_vclass	= $vclass;
+	$tpl->l_val		= $val;
+	$tpl->l_ref		= $ref;
+	$tpl->l_trunc		= $trunc;
 
 	if ($link)
 	{
-		echo $spacer . '<small>' . $link . '</small>';
+		$tpl->l_l_link = $link;
 	}
-
-	echo "</li>\n";
 };
 
 $preload_acl = function ($referrers)
@@ -192,7 +179,7 @@ $referrers = $this->db->load_all($query);
 
 if (!$referrers)
 {
-	echo $this->_t('NoneReferrers') . "<br><br>\n" ;
+	$tpl->none = true;
 	return;
 }
 
@@ -201,20 +188,21 @@ $referrers	= array_slice($referrers, $pagination['offset'], $pagination['perpage
 
 // main show!
 
-$this->print_pagination($pagination);
-echo '<ul class="ul_list">' . "\n";
+$tpl->pagination_text = $pagination['text'];
 
 if ($mode == 'perpage')
 {
 	$page_ids	= $preload_acl($referrers);
 	$referrers2	= $this->load_referrers($page_ids);
 
+	$tpl->enter('p_');
+
 	foreach ($referrers as $referrer)
 	{
 		if (($link = $check_ref($referrer)))
 		{
-			echo '<li><strong>' . $link . '</strong> (' . $referrer['num'] . ')' .
-				 '<ul class="lined">' . "\n";
+			$tpl->link	= $link;
+			$tpl->num	= $referrer['num'];
 
 			// filter referrers for page
 			$ref_perpage = array_filter($referrers2, function ($var) use ($referrer)
@@ -226,15 +214,17 @@ if ($mode == 'perpage')
 			{
 				$print_ref($ref2['referrer'], $ref2['num'], 'list_count');
 			}
-
-			echo "</ul>\n<br></li>\n";
 		}
 	}
+
+	$tpl->leave();
 }
 else if ($mode == 'bytime')
 {
 	$curday		= '';
 	$page_ids	= $preload_acl($referrers);
+
+	$tpl->enter('t_');
 
 	foreach ($referrers as $referrer)
 	{
@@ -244,30 +234,24 @@ else if ($mode == 'bytime')
 
 			if ($day != $curday)
 			{
-				if ($curday)
-				{
-					echo "</ul>\n<br></li>\n";
-				}
-
-				echo '<li><strong>' . $day . "</strong>\n" .
-					 '<ul class="lined">' . "\n";
-
-				$curday = $day;
+				$tpl->day = $curday = $day;
 			}
 
 			$print_ref($referrer['referrer'], $time, '', $link);
 		}
 	}
+
+	$tpl->leave();
 }
 else
 {
+	$tpl->enter('g_');
+
 	foreach ($referrers as $referrer)
 	{
 		$print_ref($referrer['referrer'], $referrer['num'], 'list_count');
 	}
+
+	$tpl->leave();
 }
-
-echo "</ul>\n";
-
-$this->print_pagination($pagination);
 
