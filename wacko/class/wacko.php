@@ -8529,7 +8529,7 @@ class Wacko
 		}
 
 		$out .= '<select id="license" name="license">' . "\n";
-
+		$out .= '<option value="">--</option>' . "\n";
 		$licenses = $this->_t('LicenseArray');
 
 		foreach ($licenses as $offset => $text)
