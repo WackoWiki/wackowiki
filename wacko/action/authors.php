@@ -183,6 +183,7 @@ else
 		}
 	}
 
+	// add a license
 	if ($license || $license_id)
 	{
 		$output[] = '<br>' . $this->action('license', ['license_id' => $license_id, 'license' => $license, 'icon' => 1]);

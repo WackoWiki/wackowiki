@@ -25,7 +25,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	$user = $this->get_user();
 
 	// process 'mark read' - reset session time
-	if (isset($_GET['markread']) && $user == true)
+	if (isset($_GET['markread']) && $user)
 	{
 		$this->update_last_mark($user);
 		$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
@@ -82,23 +82,9 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 	$this->preload_acl($page_ids);
 
-	// display list
-	echo '<table class="forum lined">' .
-			'<colgroup>' .
-				'<col span="1" style="width:60%;">' .
-				'<col span="1">' .
-				'<col span="1">' .
-				'<col span="1">' .
-			'</colgroup>' .
-			'</thead>' .
-				'<tr>' .
-					'<th>' . $this->_t('ForumSubforums') . '</th>' .
-					'<th>' . $this->_t('ForumTopics') . '</th>' .
-					'<th>' . $this->_t('ForumPosts') . '</th>' .
-					'<th>' . $this->_t('ForumLastComment') . '</th>' .
-				'</tr>' . "\n" .
-			'</thead>';
+	$tpl->enter('f_');
 
+	// display list
 	foreach ($forums as $forum)
 	{
 		// show only those forums where user has read access
@@ -153,65 +139,65 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				$_lang = '';
 			}
 
-			// print <span class="icon"></span>
-			echo '<tbody><tr>' .
-					'<td class="a_top">' .
-						($this->has_access('read', $forum['page_id'], GUEST) === false
-							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
-							: '') .
-						($user['last_mark'] == true && $comment['user_name'] != $user['user_name'] && $comment['created'] > $user['last_mark']
-							? '<strong class="cite" title="' . $this->_t('ForumNewPosts') . '">[updated]</strong> '
-							: '') .
-						'<strong>' . $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang) . '</strong><br>' .
-						'<small>' . $forum['description'] . '</small>' .
-					'</td>' .
-					'<td class="t_center">&nbsp;' . $counter['topics_total'] . '&nbsp;&nbsp;</td>' .
-					'<td class="t_center">&nbsp;' . $counter['posts_total'] . '&nbsp;&nbsp;</td>';
+			$tpl->counter = $counter; // array
 
-			if ($comment == true)
+			if ($this->has_access('read', $forum['page_id'], GUEST) === false)
 			{
-				echo '<td class="a_top">';
+				$tpl->closed	= true;
+			}
 
-				if ($comment['comment_on_id'] == true)
+			if ($user['last_mark'] == true
+				&& $comment['user_name'] != $user['user_name']
+				&& $comment['created'] > $user['last_mark'])
+			{
+				$tpl->updated	= true;
+			}
+
+			$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang);
+			$tpl->description	= $forum['description'];
+
+			if ($comment)
+			{
+				$tpl->enter('c_');
+
+				$tpl->comment	= $comment;
+				$tpl->user		= $this->user_link($comment['user_name']);
+
+				if ($comment['comment_on_id'])
 				{
 					$comment['topic_title'] = $this->get_unicode_entities($comment['topic_title'], $comment['topic_lang']);
 
-					echo '<small><a href="' . $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'] . '">' . $comment['topic_title'] . '</a><br>' .
-						$this->user_link($comment['user_name']) .
-						' (' . $this->get_time_formatted($comment['created']) . ')</small>';
+					$tpl->href	= $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'];
+					$tpl->title	= $comment['topic_title'];
 				}
 				else
 				{
 					$comment['title'] = $this->get_unicode_entities($comment['title'], $comment['page_lang']);
 
-					echo '<small>
-							<a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . '</a><br>' .
-							$this->user_link($comment['user_name']) .
-							' (' . $this->get_time_formatted($comment['created']) . ')
-						 </small>';
+					$tpl->href	= $this->href('', $comment['tag']);
+					$tpl->title	= $comment['title'];
 				}
+
+				$tpl->leave();
 			}
 			else
 			{
-				echo '<td>' .
-					 '<small><em>' . $this->_t('ForumNoComments') . '</em></small>';
+				$tpl->none = true;
 			}
-
-			echo	'</td>' .
-				'</tr>' . "\n";
 		}
 	}
 
-	echo '</tbody></table>' . "\n";
-	echo '<br>' . "\n";
+	$tpl->leave();
 
 	// mark all forums read
-	if ($user == true)
+	if ($user)
 	{
-		echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
+		$tpl->mark_href = $this->href('', '', ['markread' => 1]);
 	}
 
-	echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentCommentsXMLTip') . '" alt="XML" class="btn-feed"></a></span><br>' . "\n";
+	if (!(int) $noxml)
+	{
+		$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
+	}
 }
 
-?>

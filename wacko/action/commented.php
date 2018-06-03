@@ -105,6 +105,9 @@ if ($this->user_allowed_comments())
 			$tpl->pagination_text = $pagination['text'];
 
 			$curday = '';
+
+			$tpl->enter('page_');
+
 			foreach ($pages as $page)
 			{
 				if ($this->db->hide_locked)
@@ -122,7 +125,7 @@ if ($this->user_allowed_comments())
 
 					if ($day != $curday)
 					{
-						$tpl->page_day = $curday = $day;
+						$tpl->day = $curday = $day;
 					}
 
 					// do unicode entities
@@ -131,20 +134,22 @@ if ($this->user_allowed_comments())
 
 					// comment lang
 					$comment_lang	= ($this->page['page_lang'] != $page['comment_lang'])? $page['comment_lang'] : '';
-					$tpl->page_l_viewed = ($user['last_mark']
+					$tpl->l_viewed = ($user['last_mark']
 										&& $page['comment_user_name'] != $user['user_name']
 										&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
 					// print entry
-					$tpl->page_l_time = $time;
-					$tpl->page_l_page = ($title
+					$tpl->l_time = $time;
+					$tpl->l_page = ($title
 						? $this->link('/' . $page['comment_tag'], '', $page['page_title'], '', 0, 1, $page_lang, 0)
 						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0, $comment_lang)
 					);
 
-					$tpl->page_l_user = $this->user_link($page['comment_owner_name'], '', true, false);
+					$tpl->l_user = $this->user_link($page['comment_owner_name'], '', true, false);
 				}
 			}
+
+			$tpl->leave();
 		}
 		else
 		{
