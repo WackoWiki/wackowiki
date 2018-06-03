@@ -122,7 +122,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// make counter query
 	$sql =
 		"SELECT COUNT(p.page_id) AS n " .
-		"FROM " . $this->db->table_prefix . "page AS p, " .
+		"FROM " . $this->db->table_prefix . "page AS p " .
 		$selector;
 
 	// count topics and make pagination
@@ -174,24 +174,21 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	//  display search
-	echo '<div class="clearfix" style="float: right; margin-bottom: 10px;">' . $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]) . '</div>' . "\n";
+	$tpl->search = $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]);
 
 	if (!isset($_GET['phrase']))
 	{
-		// display list
-		echo '<div style="clear: both;">' .
-				'<p>' . ($create_access ? '<strong><small class="cite"><a href="#newtopic">' . $this->_t('ForumNewTopic') . '</a></small></strong>' : '') . '</p>';
-		$this->print_pagination($pagination);
-		echo "</div>\n";
+		$tpl->enter('t_');
 
-		echo '<table class="forum">' .
-				'<thead><tr>' .
-					'<th>' . $this->_t('ForumTopic') . '</th>' .
-					'<th>' . $this->_t('ForumAuthor') . '</th>' .
-					'<th>' . $this->_t('ForumReplies') . '</th>' .
-					'<th>' . $this->_t('ForumViews') . '</th>' .
-					'<th colspan="2">' . $this->_t('ForumLastComment') . '</th>' .
-				'</tr></thead>' . "\n";
+		// display list
+		if ($create_access)
+		{
+			$tpl->create = true;
+		}
+
+		$tpl->pagination_text = $pagination['text'];
+
+		$tpl->enter('r_');
 
 		foreach ($topics as $topic)
 		{
@@ -224,77 +221,58 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				// load related categories
 				$_category = $this->get_categories($topic['page_id'], OBJECT_PAGE);
-				$_category = !empty($_category) ? '<br>' . $_category : '';
+				$tpl->category = !empty($_category) ? '<br>' . $_category : '';
 
 				// print
-				echo '<tbody><tr class="topic">' .
-						'<td>' .
-						($user && !$this->has_access('comment', $topic['page_id'])
-							? '<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" class="btn-locked">'
-							: '' ) .
-						($updated
-							? '<strong><span class="cite" title="' . $this->_t('ForumNewPosts') . '">[' . $this->_t('ForumUpdated') . ']</span> ' . $this->compose_link_to_page($topic['tag'], '', $topic['title'], '', true) . '</strong>'
-							: '<strong>' . $this->compose_link_to_page($topic['tag'], '', $topic['title'], '', true) . '</strong>'
-						) .
-						'</td>' .
-						'<td class="t_center nowrap">' .
-							'<small title="' . ($admin ? $topic['ip'] : '') . '">' .
-								'&nbsp;&nbsp;' . $this->user_link($topic['owner_name']) . '&nbsp;&nbsp;<br>' .
-								'&nbsp;&nbsp;' . $this->get_time_formatted($topic['created']) . '&nbsp;&nbsp;' .
-							'</small>' .
-						'</td>' .
-						'<td class="t_center"><small>' . number_format($topic['comments'], 0, ',', '.') . '</small></td>' .
-						'<td class="t_center"><small>' . number_format($topic['hits'], 0, ',', '.') . '</small></td>' .
-						'<td>&nbsp;&nbsp;&nbsp;</td>' .
-						'<td class="t_center">';
+				if ($user && !$this->has_access('comment', $topic['page_id']))
+				{
+					$tpl->closed	= true;
+				}
+
+				if ($updated)
+				{
+					$tpl->updated	= true;
+				}
+
+				$tpl->topic		= $topic;
+				$tpl->title		= $this->compose_link_to_page($topic['tag'], '', $topic['title'], '', true);
+				$tpl->ip		= $admin ? $topic['ip'] : '';
+				$tpl->owner		= $this->user_link($topic['owner_name']);
 
 				if ($comment)
 				{
-					echo '<small' . ($updated ? ' style="font-weight:600;"' : '' ) . ' title="' . ($admin ? $comment['ip'] : '') . '">' .
-						$this->user_link($comment['user_name']) . '<br>' .
-						'<a href="' . $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]) . '">' . $this->get_time_formatted($comment['created']) . '</a></small>';
+					$tpl->enter('c_');
+
+					$tpl->style		= $updated ? ' style="font-weight:600;"' : '';
+					$tpl->ip		= $admin ? $comment['ip'] : '';
+					$tpl->user		= $this->user_link($comment['user_name']);
+					$tpl->href		= $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]);
+					$tpl->created	= $comment['created'];
+
+					$tpl->leave();
 				}
 				else
 				{
-					echo '<small><em>(' . $this->get_time_formatted($topic['created']) . ')</em></small>';
+					$tpl->none_created = $topic['created'];
 				}
-
-				echo	'</td>' .
-					'</tr>' .
-					'<tr>' .
-						'<td colspan="6" class="description">' . $topic['description'] . '' .
-						$_category . '</td>' .
-					'</tr></tbody>' . "\n";
 			}
 		}
 
-		echo '</table>' . "\n";
+		$tpl->leave();
 
-		echo '<div class="clearfix"><p>' . ($user ? '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>' : '') . '</p>';
-		$this->print_pagination($pagination);
-		echo "</div>\n";
+		// mark all topis read
+		if ($user)
+		{
+			$tpl->mark_href = $this->href('', '', ['markread' => 1]);
+		}
 	}
 
 	// display new topic form when applicable
 	if ($create_access)
 	{
-		echo $this->form_open('add_topic');
-		?>
-		<br>
-		<table id="newtopic" class="formation">
-			<tr>
-				<td class="label">
-					<label for="topictitle"><?php echo $this->_t('ForumTopicName'); ?>:</label>
-				</td>
-				<td>
-					<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="">
-					<input type="submit" id="submit" value="<?php echo $this->_t('ForumTopicSubmit'); ?>">
-				</td>
-			</tr>
-		</table>
-		<?php
-		echo $this->form_close();
+		$tpl->form_href = $this->href();
 	}
+
+	$tpl->leave();
 }
 
-?>
