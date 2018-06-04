@@ -7612,7 +7612,7 @@ class Wacko
 						"deleted	= 1 " .
 					"WHERE page_id = " . (int) $page['page_id']);
 
-				$this->update_files_count($file['page_id'], 0);
+				$this->update_files_count($page['page_id'], 0);
 			}
 			else
 			{
@@ -7635,7 +7635,7 @@ class Wacko
 					"DELETE FROM " . $this->db->table_prefix . "file " .
 					"WHERE page_id = " . (int) $page['page_id']);
 
-				$this->update_files_count($file['page_id'], 0);
+				$this->update_files_count($page['page_id'], 0);
 			}
 		}
 

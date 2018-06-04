@@ -5,7 +5,9 @@
 		<div class="success">
 			<strong><code>[ ' tag ' ]</code></strong>
 			<ol>
-				<li>[ ' notice ' ]</li>
+				[= l _ =
+					<li>[ ' notice ' ]</li>
+				=]
 			</ol><br>
 			[ ' _t: ActionHaveNoUndo ' ]
 			<br>

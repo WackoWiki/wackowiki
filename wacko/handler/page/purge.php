@@ -52,7 +52,7 @@ if (@$_POST['_action'] === 'purge_data')
 
 	foreach ($message as $notice)
 	{
-		$tpl->p_notice = $notice;
+		$tpl->p_l_notice = $notice;
 	}
 }
 else

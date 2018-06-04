@@ -3,7 +3,9 @@
 	[= p _ =
 		<div class="success">
 			<ol>
-				<li>[ ' notice ' ]</li>
+				[= l _ =
+					<li>[ ' notice ' ]</li>
+				=]
 			</ol><br>
 			[ ' _t: ActionHaveNoUndo ' ]
 		</div>
