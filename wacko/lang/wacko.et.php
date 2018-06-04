@@ -344,7 +344,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'by time',
 	'ViewReferrersGlobal'		=> 'globaalseid>',
 	'NoneReferrers'				=> 'Ei',
-	'NotOwnerAndCanDelete'		=> 'Sa ei ole selle lehe omanik, seega ei saa ka kustutada',
+	'NotOwnerCantDelete'		=> 'Sa ei ole selle lehe omanik, seega ei saa ka kustutada',
 
 	// remove
 	'RemovePage'				=> 'Remove page',
@@ -366,7 +366,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page eemaldatud.',
-	'ThisActionHavenotUndo'		=> 'See tegevus pole taastatav.',
+	'ActionHaveNoUndo'		=> 'See tegevus pole taastatav.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
@@ -513,7 +513,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'See leht nimetati juba selliseks: <strong>%1</strong>.',
 	'PageRenamed'				=> 'Leht on ümber nimetatud.',
 	'NewNameOfPage'				=> 'Selle lehe uus nimi: ',
-	'NotOwnerAndCantRename'		=> 'Sa ei ole selle lehe omanik, seetõttu ei saa sa seda ümber nimetada!',
+	'NotOwnerCantRename'		=> 'Sa ei ole selle lehe omanik, seetõttu ei saa sa seda ümber nimetada!',
 	'NeedRedirect'				=> 'Loo ümbersuunamine vanalt lehelt uuele lehele',
 	'RedirectCreated'			=> 'Lehel %1 loodi ümbersuunamine uuele lehele',
 

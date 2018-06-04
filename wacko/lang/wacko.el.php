@@ -344,7 +344,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'by time',
 	'ViewReferrersGlobal'		=> 'global',
 	'NoneReferrers'				=> 'Καμία',
-	'NotOwnerAndCanDelete'		=> 'Δεν είσαι ο ιδιοκτήτης αυτής της σελίδας και δεν μπορείς να την διαγράψεις',
+	'NotOwnerCantDelete'		=> 'Δεν είσαι ο ιδιοκτήτης αυτής της σελίδας και δεν μπορείς να την διαγράψεις',
 
 	// remove
 	'RemovePage'				=> 'Remove page',
@@ -366,7 +366,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page αφαιρέθηκαν.',
-	'ThisActionHavenotUndo'		=> 'Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.',
+	'ActionHaveNoUndo'		=> 'Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
@@ -513,7 +513,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'Η σελίδα έχει ήδη μετονομαστεί <strong>%1</strong>.',
 	'PageRenamed'				=> 'Η σελίδα μετονομάστηκε.',
 	'NewNameOfPage'				=> 'Νέο όνομα αυτής της σελίδας: ',
-	'NotOwnerAndCantRename'		=> 'Δεν είστε ο ιδιοκτήτης αυτής της σελίδα και λόγο αυτού δεν μπορείτε να την μετονομάστε',
+	'NotOwnerCantRename'		=> 'Δεν είστε ο ιδιοκτήτης αυτής της σελίδα και λόγο αυτού δεν μπορείτε να την μετονομάστε',
 	'NeedRedirect'				=> 'Δημιουργία συνδέσμου για την νέα σελίδα στην παλιά σελίδα',
 	'RedirectCreated'			=> 'Στην σελίδα %1 δημιουργήθηκε σύνδεσμος στην νέο σελίδα',
 

@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $this->ensure_page();
 
-echo '<h3>' . $this->_t('RenamePage') . ' ' . $this->compose_link_to_page($this->tag, '', '') . "</h3>\n<br>\n";
+$tpl->page = $this->compose_link_to_page($this->tag, '', '');
 
 if ($user = $this->get_user())
 {
@@ -112,54 +112,31 @@ if ($registered
 		}
 		else
 		{
-			echo $this->_t('NewName');
-			echo $this->form_open('rename_page', ['page_method' => 'rename']);
-
-			?>
-			<input type="text" maxlength="250" name="new_tag" value="<?php echo $this->tag;?>" size="60">
-<br>
-<br>
-			<?php
-			echo '<input type="checkbox" id="redirect" name="redirect" ';
+			// show rename form
+			$tpl->f_tag	= $this->tag;
 
 			if ($this->db->default_rename_redirect == 1)
 			{
-				echo 'checked';
-			};
+				$tpl->f_checked	= ' checked';
+			}
 
-			echo '><label for="redirect"> ' . $this->_t('NeedRedirect') . '</label>'; ?>
-<br>
-			<?php
 			if ($this->check_acl($user_name, $this->db->rename_globalacl))
 			{
-				echo '<input type="checkbox" id="massrename" name="massrename">';
-				echo '<label for="massrename"> ' . $this->_t('MassRename') . '</label>';
+				$tpl->f_global = true;
 			}
-			?>
-<br>
-<br>
-			<?php
+
 			// show backlinks
-			echo $this->action('backlinks', ['nomark' => 0]);
-			?>
-<br>
-			<?php
+			$tpl->f_backlinks	= $this->action('backlinks', ['nomark' => 0]);
+
 			// show sub-pages
-			echo $this->action('tree', ['depth' => 3]);
-			?>
-<br>
-<br>
-<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RenameButton'); ?>"> &nbsp;
-<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"></a>
-<br>
-<br>
-			<?php echo $this->form_close();
+			$tpl->f_tree 		= $this->action('tree', ['depth' => 3]);
+
 		}
 	}
 }
 else
 {
-	$this->show_message($this->_t('NotOwnerAndCantRename'), 'info');
+	$tpl->denied = true;
 }
 
 function recursive_move(&$engine, $root, $new_root)

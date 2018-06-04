@@ -345,7 +345,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'по времени',
 	'ViewReferrersGlobal'		=> 'Ссылки',
 	'NoneReferrers'				=> 'Нет',
-	'NotOwnerAndCanDelete'		=> 'Вы не владеете этой страницей и поэтому не можете удалить её',
+	'NotOwnerCantDelete'		=> 'Вы не владеете этой страницей и поэтому не можете удалить её',
 
 	// remove
 	'RemovePage'				=> 'Удалить страницу',
@@ -367,7 +367,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Кэш прочищен.',
 	'ClusterRemoved'			=> 'Все страницы кластера удалены.',
 	'RevisionsRemoved'			=> 'Версии страницы удалены.',
-	'ThisActionHavenotUndo'		=> 'Удаление нельзя отменить.',
+	'ActionHaveNoUndo'		=> 'Удаление нельзя отменить.',
 	'PageRestored'				=> 'Страница восстановлена.',
 	'LocalFilesRestored'		=> 'Локальные файлы восстановлены.',
 
@@ -514,7 +514,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'Эта страница уже называется <strong>%1</strong>.',
 	'PageRenamed'				=> 'Страница переименована.',
 	'NewNameOfPage'				=> 'Введите новое имя страницы: ',
-	'NotOwnerAndCantRename'		=> 'Вы не владеете этой страницей и поэтому не можете переименовать её',
+	'NotOwnerCantRename'		=> 'Вы не владеете этой страницей и поэтому не можете переименовать её',
 	'NeedRedirect'				=> 'Поставить на старой странице редирект на новую',
 	'RedirectCreated'			=> 'На странице %1 создано перенаправление на новую',
 

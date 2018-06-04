@@ -344,7 +344,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'efter tid',
 	'ViewReferrersGlobal'		=> 'alle',
 	'NoneReferrers'				=> 'Ingen',
-	'NotOwnerAndCanDelete'		=> 'Du ejer ikke denne side og kan ikke slette den.',
+	'NotOwnerCantDelete'		=> 'Du ejer ikke denne side og kan ikke slette den.',
 
 	// remove
 	'RemovePage'				=> 'Fjern side',
@@ -366,7 +366,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache renset.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page fjernet.',
-	'ThisActionHavenotUndo'		=> 'Denne handling kan du ikke fortryde!',
+	'ActionHaveNoUndo'		=> 'Denne handling kan du ikke fortryde!',
 	'PageRestored'				=> 'Side gendannet.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
@@ -513,7 +513,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'Siden hedder allerede <strong>%1</strong>.',
 	'PageRenamed'				=> 'Siden omdøbt.',
 	'NewNameOfPage'				=> 'Nyt navn til denne side: ',
-	'NotOwnerAndCantRename'		=> 'Du ejer ikke siden og kan ikke omdøbe den',
+	'NotOwnerCantRename'		=> 'Du ejer ikke siden og kan ikke omdøbe den',
 	'NeedRedirect'				=> 'Lav automatisk omstilling for siden',
 	'RedirectCreated'			=> 'Siden %1 omstiller den den nye',
 
