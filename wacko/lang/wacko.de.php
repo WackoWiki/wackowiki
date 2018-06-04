@@ -345,7 +345,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'nach Zeit',
 	'ViewReferrersGlobal'		=> 'global',
 	'NoneReferrers'				=> 'keine Verweise',
-	'NotOwnerAndCanDelete'		=> 'Du bist nicht der Besitzer dieser Seite und kannst sie deshalb nicht löschen.',
+	'NotOwnerCantDelete'		=> 'Du bist nicht der Besitzer dieser Seite und kannst sie deshalb nicht löschen.',
 
 	// remove
 	'RemovePage'				=> 'Seite löschen',
@@ -367,7 +367,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache bereinigt.',
 	'ClusterRemoved'			=> 'Alle Seiten des Cluster gelöscht.',
 	'RevisionsRemoved'			=> 'Revisionen gelöscht.',
-	'ThisActionHavenotUndo'		=> 'Diese Aktion kann nicht rückgängig gemacht werden.',
+	'ActionHaveNoUndo'		=> 'Diese Aktion kann nicht rückgängig gemacht werden.',
 	'PageRestored'				=> 'Seite wiederhergestellt.',
 	'LocalFilesRestored'		=> 'Angehängte Dateien wiederhergestellt.',
 
@@ -514,7 +514,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'Diese Seite heißt bereits <strong>%1</strong>.',
 	'PageRenamed'				=> 'Seite wurde umbenannt.',
 	'NewNameOfPage'				=> 'Neuer Name dieser Seite: ',
-	'NotOwnerAndCantRename'		=> 'Du bist nicht der Besitzer dieser Seite und kannst sie daher nicht umbenennen.',
+	'NotOwnerCantRename'		=> 'Du bist nicht der Besitzer dieser Seite und kannst sie daher nicht umbenennen.',
 	'NeedRedirect'				=> 'Weiterleitung von der alten zur neuen Seite einrichten.',
 	'RedirectCreated'			=> 'Weiterleitung von der Seite %1 zur neuen Seite eingerichtet.',
 

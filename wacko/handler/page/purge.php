@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo '<h3>' . $this->_t('PurgePage') . ' ' . $this->compose_link_to_page($this->tag, '', '') . "</h3>\n";
+$tpl->page = $this->compose_link_to_page($this->tag, '', '');
 
 $this->ensure_page();
 
@@ -16,27 +16,24 @@ if (!($this->is_owner() || $this->is_admin()))
 	$this->show_must_go_on();
 }
 
+// purge page
 if (@$_POST['_action'] === 'purge_data')
 {
-	$dontkeep = (isset($_POST['dontkeep']) && $this->is_admin());
-
-	// purge page
-	$message = "<ol>";
-
-	$title = $this->tag . ' ' . $this->page['title'];
+	$dontkeep	= (isset($_POST['dontkeep']) && $this->is_admin());
+	$title		= $this->tag . ' ' . $this->page['title'];
 
 	if (isset($_POST['comments']))
 	{
 		$this->remove_comments($this->tag, false, $dontkeep);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllComments', SYSTEM_LANG), $title));
-		$message .= "<li>" . $this->_t('CommentsPurged') . "</li>\n";
+		$message[] = $this->_t('CommentsPurged');
 	}
 
 	if (isset($_POST['files']))
 	{
 		$this->remove_files_perpage($this->tag, false, $dontkeep);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllFiles', SYSTEM_LANG), $title));
-		$message .= "<li>" . $this->_t('FilesPurged') . "</li>\n";
+		$message[] = $this->_t('FilesPurged');
 	}
 
 	if (isset($_POST['revisions']) && $this->is_admin())
@@ -44,50 +41,32 @@ if (@$_POST['_action'] === 'purge_data')
 		$this->remove_revisions($this->tag, false, $dontkeep);
 		$this->update_revisions_count($this->page['page_id']);
 		$this->log(1, Ut::perc_replace($this->_t('LogRemovedAllRevisions', SYSTEM_LANG), $title));
-		$message .= "<li>" . $this->_t('RevisionsPurged') . "</li>\n";
+		$message[] = $this->_t('RevisionsPurged');
 	}
 
 	// purge related page cache
 	if ($this->http->invalidate_page($this->supertag))
 	{
-		$message .= '<li>' . $this->_t('PageCachePurged') . "</li>\n";
+		$message[] = $this->_t('PageCachePurged');
 	}
 
-	$message .= '</ol><br>';
-	$message .= $this->_t('ThisActionHavenotUndo') . "\n";
-
-	$this->show_message($message, 'success');
+	foreach ($message as $notice)
+	{
+		$tpl->p_notice = $notice;
+	}
 }
 else
 {
-	echo '<div class="warning">' . $this->_t('ReallyPurge') . '</div><br>';
-	echo $this->form_open('purge_data', ['page_method' => 'purge']);
-?>
+	// show purge form
+	$tpl->f = true;
 
-	<strong><?php echo $this->_t('SelectPurgeOptions') ?></strong><br>
-	<input type="checkbox" id="purgecomments" name="comments">
-	<label for="purgecomments"><?php echo $this->_t('PurgeComments') ?></label><br>
-	<input type="checkbox" id="purgefiles" name="files">
-	<label for="purgefiles"><?php echo $this->_t('PurgeFiles') ?></label><br>
-<?php
 	if ($this->is_admin())
 	{
-?>
-		<input type="checkbox" id="purgerevisions" name="revisions">
-		<label for="purgerevisions"><?php echo $this->_t('PurgeRevisions') ?></label><br>
-<?php
+		$tpl->f_admin = true;
+
 		if ($this->db->store_deleted_pages)
 		{
-			echo '<br>';
-			echo '<input type="checkbox" id="dontkeep" name="dontkeep">';
-			echo '<label for="dontkeep">' . $this->_t('RemoveDontKeep') . '</label><br>';
+			$tpl->f_admin_dontkeep = true;
 		}
 	}
-?>
-	<br>
-	<input type="submit" id="submit" name="submit" value="<?php echo $this->_t('PurgeButton'); ?>">
-	<a href="<?php echo $this->href('properties');?>" class="btn_link"><input type="button" id="button" value="<?php echo $this->_t('EditCancelButton'); ?>"></a>
-	<br>
-
-<?php	echo $this->form_close();
 }

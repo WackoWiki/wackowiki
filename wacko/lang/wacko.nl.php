@@ -344,7 +344,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'door de tijd',
 	'ViewReferrersGlobal'		=> 'global',
 	'NoneReferrers'				=> 'None',
-	'NotOwnerAndCanDelete'		=> 'U ben niet de eigenaar van deze pagina en kunt deze niet verwijderen',
+	'NotOwnerCantDelete'		=> 'U ben niet de eigenaar van deze pagina en kunt deze niet verwijderen',
 
 	// remove
 	'RemovePage'				=> 'Remove page',
@@ -366,7 +366,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page zijn verwijderd.',
-	'ThisActionHavenotUndo'		=> 'Deze handeling kan niet ongedaan worden gemaakt.',
+	'ActionHaveNoUndo'		=> 'Deze handeling kan niet ongedaan worden gemaakt.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
@@ -513,7 +513,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'Deze pagina heeft al een naam: <strong>%1</strong>.',
 	'PageRenamed'				=> 'Pagina hernoemd.',
 	'NewNameOfPage'				=> 'Nieuwe naam van deze pagina: ',
-	'NotOwnerAndCantRename'		=> 'U bent niet de eigenaar van deze pagina en kunt deze niet verwijderen.',
+	'NotOwnerCantRename'		=> 'U bent niet de eigenaar van deze pagina en kunt deze niet verwijderen.',
 	'NeedRedirect'				=> 'Maak een verwijzing naar de nieuwe pagina vanaf de oude pagina',
 	'RedirectCreated'			=> 'In pagina %1 verwijzing naar de nieuwe pagina gemaakt.',
 

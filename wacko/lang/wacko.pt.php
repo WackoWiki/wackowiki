@@ -344,7 +344,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'por hora',
 	'ViewReferrersGlobal'		=> 'globais',
 	'NoneReferrers'				=> 'Nenhum',
-	'NotOwnerAndCanDelete'		=> 'Se não é o dono desta página não pode apagá-la',
+	'NotOwnerCantDelete'		=> 'Se não é o dono desta página não pode apagá-la',
 
 	// remove
 	'RemovePage'				=> 'Remove page',
@@ -366,7 +366,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page removidos.',
-	'ThisActionHavenotUndo'		=> 'Esta acção não pode ser anulada.',
+	'ActionHaveNoUndo'		=> 'Esta acção não pode ser anulada.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
@@ -513,7 +513,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'Página tem o nome <strong>%1</strong>.',
 	'PageRenamed'				=> 'Página renomeada.',
 	'NewNameOfPage'				=> 'Novo nome desta página: ',
-	'NotOwnerAndCantRename'		=> 'Não sendo dono desta página não pode renomeá-la',
+	'NotOwnerCantRename'		=> 'Não sendo dono desta página não pode renomeá-la',
 	'NeedRedirect'				=> 'Criar redirecionamento para nova página na página antiga',
 	'RedirectCreated'			=> 'Na página %1 criado redirecionamento para a nova página',
 

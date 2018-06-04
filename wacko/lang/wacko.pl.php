@@ -344,7 +344,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'przez czas',
 	'ViewReferrersGlobal'		=> 'witryny',
 	'NoneReferrers'				=> 'Brak',
-	'NotOwnerAndCanDelete'		=> 'Przepraszamy. Tê stronê mo¿e usun±æ tylko oryginalny autor.',
+	'NotOwnerCantDelete'		=> 'Przepraszamy. Tê stronê mo¿e usun±æ tylko oryginalny autor.',
 
 	// remove
 	'RemovePage'				=> 'Remove page',
@@ -366,7 +366,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page usuniête.',
-	'ThisActionHavenotUndo'		=> 'UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!',
+	'ActionHaveNoUndo'		=> 'UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
@@ -513,7 +513,7 @@ $wacko_translation = [
 	'AlreadyNamed'				=> 'Ta strona ju¿ ma nazwê <strong>%1</strong>.',
 	'PageRenamed'				=> 'Nazwa strony zosta³a zmieniona.',
 	'NewNameOfPage'				=> 'Strona bêdzie obecnie dostêpna pod nazw±: ',
-	'NotOwnerAndCantRename'		=> 'Przepraszamy. Tylko autor strony mo¿e zmieniæ jej nazwê.',
+	'NotOwnerCantRename'		=> 'Przepraszamy. Tylko autor strony mo¿e zmieniæ jej nazwê.',
 	'NeedRedirect'				=> 'Utwórz przekierowanie ze starej do nowej strony',
 	'RedirectCreated'			=> 'Na poprzedniej stronie %1 utworzono przekierowanie do nowej nazwy.',
 
