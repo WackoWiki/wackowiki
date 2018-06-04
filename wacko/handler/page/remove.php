@@ -193,7 +193,7 @@ if ($this->is_admin()
 
 		foreach ($message as $notice)
 		{
-			$tpl->r_notice = $notice;
+			$tpl->r_l_notice = $notice;
 		}
 
 		// return to commented page
