@@ -6788,7 +6788,7 @@ class Wacko
 
 		// user settings
 		// set user theme prior to user_lang to load theme lang files -> load_translation()
-		if (isset($user['theme']))
+		if (!empty($user['theme']))
 		{
 			$this->db->theme		= $user['theme'];
 			$this->db->theme_url	= $this->db->base_url . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
