@@ -134,7 +134,7 @@ $wacko_translation = [
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',
 
-	'PrivacyPolicy'				=> 'Privacy Policy',
+	'PrivacyPolicy'				=> 'Andmekaitse',
 	'TermsOfUse'				=> 'Terms of Use',
 	'AcceptTermsOfUse'			=> ' I accept',
 
@@ -144,7 +144,7 @@ $wacko_translation = [
 	'AddCommentTitle'			=> 'Title of the comment:',
 	'AddCommentButton'			=> 'Lisa kommentaar',
 	'HereLink'					=> 'here',
-	'PageHandlerMoreTip'		=> 'more',
+	'PageHandlerMoreTip'		=> 'rohkem',
 
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'DoesNotExists'				=> 'Seda lehte ei eksisteeri veel.',

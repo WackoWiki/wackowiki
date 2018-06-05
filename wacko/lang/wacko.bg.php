@@ -91,7 +91,7 @@ $wacko_translation = [
 
 	// other
 	'Guest'						=> 'Guest',
-	'Help'						=> 'Help',
+	'Help'						=> 'Помощ',
 	'TopicSearchText'			=> 'Търси само в заглавните',
 	'WordprocessorVersion'		=> 'Версия для Текстовый процессор',
 
@@ -134,14 +134,14 @@ $wacko_translation = [
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',
 
-	'PrivacyPolicy'				=> 'Privacy Policy',
-	'TermsOfUse'				=> 'Terms of Use',
+	'PrivacyPolicy'				=> 'Поверителност',
+	'TermsOfUse'				=> 'Условия за ползване',
 	'AcceptTermsOfUse'			=> ' I accept',
 
 	'ShowComments'				=> 'Покажи коментарите/формата',
 	'HideComments'				=> 'Скрий коментарите/формата',
 	'AddComment'				=> 'Добави комментар:',
-	'AddCommentTitle'			=> 'Title of the comment:',
+	'AddCommentTitle'			=> 'Заглавие на коментара:',
 	'AddCommentButton'			=> 'Насочи',
 	'HereLink'					=> 'тук',
 	'PageHandlerMoreTip'		=> 'повече',
@@ -366,7 +366,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page изтрити.',
-	'ActionHaveNoUndo'		=> 'Изтриването не може да се отмени.',
+	'ActionHaveNoUndo'			=> 'Изтриването не може да се отмени.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 

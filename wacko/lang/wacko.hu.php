@@ -91,7 +91,7 @@ $wacko_translation = [
 
 	// other
 	'Guest'						=> 'Vendég',
-	'Help'						=> 'Help',
+	'Help'						=> 'Segítség',
 	'TopicSearchText'			=> 'Search in titles only',
 	'WordprocessorVersion'		=> 'Word processor version',
 
@@ -134,8 +134,8 @@ $wacko_translation = [
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',
 
-	'PrivacyPolicy'				=> 'Privacy Policy',
-	'TermsOfUse'				=> 'Terms of Use',
+	'PrivacyPolicy'				=> 'Adatvédelmi irányelvek',
+	'TermsOfUse'				=> 'Felhasználási feltételek',
 	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of service of the site.',
 
 	'ShowComments'				=> 'Display comments / form',
