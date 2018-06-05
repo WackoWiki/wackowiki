@@ -786,7 +786,7 @@ td.file- {
 	overflow-wrap: break-word;
 }
 
-.fileinfo a img {
+.show-image a img {
 	border: 4px solid white;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 	margin: 10px 0;
@@ -796,11 +796,11 @@ td.file- {
 	width: 178px; */
 }
 
-.fileinfo a img:hover {
+.show-image a img:hover {
 	box-shadow: 0 0 10px 0 #93cee9;
 }
 
-.fileinfo a img:active {
+.show-image a img:active {
 	box-shadow: 0 0 10px 0 #3daee9;
 }
 
