@@ -425,4 +425,9 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		return (((int) $value)? ' checked ' : '');
 	}
+
+	function filter_select($value, $on)
+	{
+		return (($value == $on)? ' selected ' : '');
+	}
 }
