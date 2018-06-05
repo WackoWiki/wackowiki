@@ -288,7 +288,7 @@
 							<select id="timezone" name="timezone">
 								<option value="">--</option>
 								[= z _ =
-									<option value="[ ' offset ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' timezone ' ]</option>
+									<option value="[ ' offset ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' timezone | truncate 50 ' ]</option>
 								=]
 							</select>
 						</td>
@@ -394,4 +394,4 @@
 			</table>
 		</aside>
 	=]
-
+	<!--/notypo-->
