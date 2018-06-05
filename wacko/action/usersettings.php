@@ -335,8 +335,6 @@ else if (($user = $this->get_user()))
 
 		$tpl->logout		= $this->href('', '', ['action' => 'logout']);
 
-		//  echo $this->format_t('SeeListOfPages') . "<br>";
-
 		$percentage			= 0 . '%';
 		$upload_quota		= $this->upload_quota($user['user_id']);
 

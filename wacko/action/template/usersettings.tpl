@@ -369,7 +369,7 @@
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: UsersPages ' ]</th>
-					<td><a href="[ ' pages ' ]" title="[ ' _t: RevisionTip ' ]">[ ' user.total_pages | number 0 , . ' ]</a></td>
+					<td><a href="[ ' pages ' ]" title="[ ' _t: SeeListOfPages ' ]">[ ' user.total_pages | number 0 , . ' ]</a></td>
 				</tr>
 				[== CommentedOut _ =
 					<tr>
