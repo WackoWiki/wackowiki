@@ -180,10 +180,6 @@ else
 	$tpl->leave();
 	$tpl->enter('droptab_tab_');
 
-	// display more icon and text
-	//  '<li class="sublist"><a href="#" id="more-icon"><img src="' . $this->db->theme_url . 'icon/more.png" title="' . $this->_t('PageHandlerMoreTip') . '" alt="' . $this->_t('PageHandlerMoreTip') . '"> ' . $this->_t('PageHandlerMoreTip') . "</a> \n";
-	// only display 'more' text that shows handler list on hover
-
 	// print tab
 	if ($readable)
 	{
