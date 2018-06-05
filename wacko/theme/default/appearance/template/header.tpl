@@ -44,13 +44,9 @@
 				[== // else shows Register / Login link ==]
 				<ul>
 					<li>[ ' link ' ]</li>
-				[= reg _ =
-					<li>[ ' link ' ]</li>
-				=]
-				[== CommentedOut _ =
-					[''// Show Help link '']
-					<li>[ ' help ' ]</li>
-				==]
+					[= reg _ =
+						<li>[ ' link ' ]</li>
+					=]
 				</ul>
 			=]
 	</div>
@@ -123,9 +119,9 @@
 			['' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 '']
 			<span class="search nobr">
 				<label for="phrase">[ ' _t: SearchText ' ]</label>
-				<input type="search" name="phrase" id="phrase" size="20" title="[ ' _t: SearchButtonText ' ]">
-				<button type="submit" title="[ ' _t: SearchButtonText ' ]" value="[ ' _t: SearchButtonText ' ]">
-					<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButtonText ' ]" class="btn-search">
+				<input type="search" name="phrase" id="phrase" size="20" title="[ ' _t: SearchButton ' ]">
+				<button type="submit" title="[ ' _t: SearchButton ' ]" value="[ ' _t: SearchButton ' ]">
+					<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButton ' ]" class="btn-search">
 				</button>
 			</span>
 		</form>

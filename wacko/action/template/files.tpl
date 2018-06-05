@@ -12,7 +12,7 @@
 					</td>
 					<td>
 						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase |e attr ' ]">
-						<input type="submit" value="[ ' _t: SearchButtonText ' ]">
+						<input type="submit" value="[ ' _t: SearchButton ' ]">
 					</td>
 				</tr>
 			</table>

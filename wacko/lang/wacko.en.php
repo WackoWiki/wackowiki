@@ -109,7 +109,7 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Action is denied here.',
 	'TOCTitle'					=> 'Contents ',
-	'SearchButtonText'			=> 'Search',
+	'SearchButton'				=> 'Search',
 	'OuterLink2'				=> 'Outgoing link',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',

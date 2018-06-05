@@ -109,7 +109,7 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Η ενέργεια δεν επιτρέπετε εδώ.',
 	'TOCTitle'					=> 'Περιεχόμενα ',
-	'SearchButtonText'			=> 'Αναζήτηση',
+	'SearchButton'				=> 'Αναζήτηση',
 	'OuterLink2'				=> 'Εξωτερικός σύνδεσμος',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'Έγγραφο PDF',

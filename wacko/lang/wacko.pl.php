@@ -109,7 +109,7 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Ta czynno¶æ nie mo¿e zostaæ wykonana.',
 	'TOCTitle'					=> 'Spis tre¶ci dokumentu: ',
-	'SearchButtonText'			=> 'Znajd¼',
+	'SearchButton'				=> 'Znajd¼',
 	'OuterLink2'				=> 'Odno¶nik do zewnêtrznej witryny',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
