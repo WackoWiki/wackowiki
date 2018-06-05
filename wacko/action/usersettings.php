@@ -19,9 +19,6 @@ if (!array_key_exists($mode, $tabs))
 	$mode = '';
 }
 
-echo "<!--notypo-->\n";
-$include_tail = "<!--/notypo-->\n";
-
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
@@ -326,11 +323,6 @@ else if (($user = $this->get_user()))
 
 		foreach ($timezones as $offset => $timezone)
 		{
-			if (strlen($timezone) > 50)
-			{
-				$timezone = substr($timezone, 0, 45 ) . '...';
-			}
-
 			$tpl->z_timezone	= $timezone;
 			$tpl->z_sel			= (int) (isset($a_zone) && $a_zone == $offset);
 			$tpl->z_offset		= $offset;
