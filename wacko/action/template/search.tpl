@@ -4,7 +4,7 @@
 			[ ' href | hide_page ' ]
 			<label for="searchfor">[ ' _t: SearchFor ' ]:</label><br>
 			<input type="search" name="phrase" id="searchfor" size="40" value="[ ' phrase |e attr ' ]">
-			<input type="submit" value="[ ' _t: SearchButtonText ' ]"><br>
+			<input type="submit" value="[ ' _t: SearchButton ' ]"><br>
 			[= options _ =
 				<input type="checkbox" name="topic"[ ' topic | format ' checked' ' ] id="checkboxSearch">
 				<label for="checkboxSearch">[ ' _t: TopicSearchText ' ]</label>

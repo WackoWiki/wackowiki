@@ -49,9 +49,6 @@ else
 	{
 		$tpl->login_reg_link = $this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'));
 	}
-
-	// show help link
-	# $tpl->login_help = $this->compose_link_to_page($this->_t('HelpPage'), '', $this->_t('Help'));
 }
 
 $max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
