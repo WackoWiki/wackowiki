@@ -601,7 +601,7 @@ $wacko_translation = [
 
 	'Watchers'					=> '%1 vaatajate nimekiri ',
 	'NoWatchers'				=> 'Keegi ei jälgi %1',
-	'NotOwnerAndViewWatchers'	=> 'Sa ei ole selle lehe omanik ja seetõttu sa ei saa vaadata nimekirja inmestest kes seda lehte jälgivad.',
+	'NotOwnerToViewWatchers'	=> 'Sa ei ole selle lehe omanik ja seetõttu sa ei saa vaadata nimekirja inmestest kes seda lehte jälgivad.',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',

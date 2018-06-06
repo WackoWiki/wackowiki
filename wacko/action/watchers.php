@@ -31,43 +31,28 @@ if ($this->is_owner($page_id))
 		"WHERE w.page_id = " . (int) $page_id . " " .
 		"ORDER BY u.user_name ASC");
 
+	if (!$nomark)
+	{
+		$tpl->mark			= true;
+		$tpl->mark_title	= Ut::perc_replace($this->_t('Watchers'), $this->link('/' . $tag, '', $tag));
+		$tpl->emark			= true;
+	}
+
 	if ($watchers)
 	{
-		$title = Ut::perc_replace($this->_t('Watchers'), $this->link('/' . $tag, '', $tag));
-
-		if (!$nomark)
-		{
-			echo '<div class="layout-box"><p><span>' . $title . ":</span></p>\n";
-		}
-
-		echo '<ol class="">' . "\n";
-
 		foreach ($watchers as $watcher)
 		{
-			echo '<li>' . $this->user_link($watcher['user_name'], '', true, false) . "</li>\n";
-		}
-
-		echo "</ol>\n";
-
-		if (!$nomark)
-		{
-			echo "</div>\n";
+			$tpl->l_link = $this->user_link($watcher['user_name'], '', true, false);
 		}
 	}
 	else
 	{
-		if (!$nomark)
-		{
-			echo Ut::perc_replace($this->_t('NoWatchers'), $this->link('/' . $tag, '', $tag));
-		}
+		$tpl->none = Ut::perc_replace($this->_t('NoWatchers'), $this->link('/' . $tag, '', $tag));
 	}
 }
 else
 {
-	if (!$nomark)
-	{
-		echo Ut::perc_replace($this->_t('NotOwnerAndViewWatchers'), $this->link('/' . $tag, '', $tag));
-	}
+	$tpl->denied =  Ut::perc_replace($this->_t('NotOwnerToViewWatchers'), $this->link('/' . $tag, '', $tag));
 }
 
 ?>

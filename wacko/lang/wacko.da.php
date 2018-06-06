@@ -601,7 +601,7 @@ $wacko_translation = [
 
 	'Watchers'					=> 'Abonnenter til %1',
 	'NoWatchers'				=> 'Ingen abonnenter til %1',
-	'NotOwnerAndViewWatchers'	=> 'Du har ikke adgang til denne information.',
+	'NotOwnerToViewWatchers'	=> 'Du har ikke adgang til denne information.',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Generer kodeordets hash for dit <code>recovery_password</code>',

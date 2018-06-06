@@ -601,7 +601,7 @@ $wacko_translation = [
 
 	'Watchers'					=> 'List of watchers for %1',
 	'NoWatchers'				=> 'There are no watchers for %1',
-	'NotOwnerAndViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
+	'NotOwnerToViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Δημιουργήστε το hash κωδικού πρόσβασης για το <code>recovery_password</code>',

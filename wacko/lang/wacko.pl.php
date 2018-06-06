@@ -601,7 +601,7 @@ $wacko_translation = [
 
 	'Watchers'					=> 'Lista obserwatorów na %1',
 	'NoWatchers'				=> 'Nie ma obserwatorów na %1',
-	'NotOwnerAndViewWatchers'	=> 'Nie jeste¶ w³a¶cicielem tej strony i nie mo¿esz zobaczyæ listy jej obserwatorów.',
+	'NotOwnerToViewWatchers'	=> 'Nie jeste¶ w³a¶cicielem tej strony i nie mo¿esz zobaczyæ listy jej obserwatorów.',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Wygeneruj hash has³a dla has³a <code>recovery_password</code>',
