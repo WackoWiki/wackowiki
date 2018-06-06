@@ -54,7 +54,7 @@
 	[= xml =
 		<span class="desc_rss_feed">
 			<a href="[ ' href ' ]">
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: RecentCommentsXMLTip ' ]" alt="XML" class="btn-feed">
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: CommentsXMLTip ' ]" alt="XML" class="btn-feed">
 			</a>
 		</span>
 		<br><br>

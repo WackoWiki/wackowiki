@@ -233,7 +233,7 @@ if (!empty($blog_cluster))
 			$feed_tag = 'blog' . $this->page['page_id'];
 		}
 
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/' . $feed_tag . '_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br>\n";
+		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/' . $feed_tag . '_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('NewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br>\n";
 	}
 
 	echo '<div style="width:100%;">

@@ -16,7 +16,7 @@ echo '<link>' . $this->db->base_url . $this->tag . '</link>' . "\n";
 echo '<description>' . $this->_t('PageRevisionsXML') . $this->db->site_name . "/" . $this->tag . '</description>' . "\n";
 echo '<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
 echo '<image>' . "\n";
-echo '<title>' . $this->db->site_name . $this->_t('RecentCommentsTitleXML') . '</title>' . "\n";
+echo '<title>' . $this->db->site_name . $this->_t('CommentsTitleXML') . '</title>' . "\n";
 echo '<link>' . $this->db->base_url . '</link>' . "\n";
 echo '<url>' . $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_logo)  . '</url>' . "\n";
 echo '<width>' . $this->db->logo_width . '</width>' . "\n";

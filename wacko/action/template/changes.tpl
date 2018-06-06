@@ -1,12 +1,12 @@
 [ === main === ]
 	[ ' message ' ]
-	[= mark =
+	[= mark _ =
 		<small><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 	=]
 	[= xml =
 		<span class="desc_rss_feed">
 			<a href="[ ' href ' ]">
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: RecentChangesXMLTip ' ]" alt="XML" class="btn-feed">
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: ChangesXMLTip ' ]" alt="XML" class="btn-feed">
 			</a>
 		</span>
 		<br><br>
