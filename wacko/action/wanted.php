@@ -59,41 +59,37 @@ else
 
 if ($linking_to = $_GET['linking_to'] ?? '')
 {
+	$tpl->to_target = $this->link($linking_to);
+
 	if ($pages = $this->load_pages_linking_to($linking_to, $root))
 	{
-		echo $this->_t('PagesLinkingTo') . " " . $this->link($linking_to) . ":<br>\n";
-		echo "<ul>\n";
-
 		foreach ($pages as $page)
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				echo "<li>" . $this->link('/' . $page['tag'], '', '/' . $page['tag']) . "</li>\n";
+				$tpl->to_l_link = $this->link('/' . $page['tag'], '', '/' . $page['tag']);
 			}
 		}
-
-		echo "</ul>\n";
 	}
 	else
 	{
-		echo "<em>" . $this->_t('NoPageLinkingTo') . " " . $this->link($linking_to) . ".</em>";
+		$tpl->to_none = true;
 	}
 }
 else
 {
 	$for	= $root;
+	$user	= $this->get_user();
 
 	if (!isset($max))		$max = null;
-
-	$user	= $this->get_user();
 
 	if (list ($pages, $pagination) = $load_wanted($root, $max))
 	{
 		if (is_array($pages))
 		{
-			$this->print_pagination($pagination);
-
-			echo '<ol start="' . ($pagination['offset'] + 1) . '">' . "\n";
+			$tpl->enter('w_');
+			$tpl->pagination_text	= $pagination['text'];
+			$tpl->offset			= $pagination['offset'] + 1;
 
 			foreach ($pages as $page)
 			{
@@ -119,18 +115,18 @@ else
 					// If no pages are referring to the WantedPage it means the referrers are all locked so don't show the link at all
 					if ($count > 0)
 					{
-						echo '<li>' . $this->link('/' . $page['wanted_tag']) . ' (<a href="' . $this->href('', '', ['linking_to' => $page['wanted_tag']]) . '">' . $count . "</a>)</li>\n";
+						$tpl->l_link	= $this->link('/' . $page['wanted_tag']);
+						$tpl->l_href	= $this->href('', '', ['linking_to' => $page['wanted_tag']]);
+						$tpl->l_count	= $count;
 					}
 				}
 			}
 
-			echo "</ol>\n";
-
-			$this->print_pagination($pagination);
+			$tpl->leave();
 		}
 	}
 	else
 	{
-		echo $this->_t('NoWantedPages');
+		$tpl->none = true;
 	}
 }
