@@ -99,12 +99,14 @@ if ($user_id = $this->get_user_id())
 	}
 
 	// print tabs
-	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mode_selector);
-	echo $info . '<br><br>';
+	$tpl->tabs	= $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mode_selector);
+	$tpl->title	=  $info;
 
 	$count		= $this->db->load_single($sql_count, true);
 	$pagination	= $this->pagination($count['n'], $max, 'p', $profile + $tab_mode + ['mode' => 'mywatches', '#' => 'list']);
 	$pages		= $this->db->load_all($sql . $pagination['limit']);
+
+	$tpl->w_pagination_text = $pagination['text'];
 
 	if (!empty($pages))
 	{
@@ -123,16 +125,12 @@ if ($user_id = $this->get_user_id())
 		$char_display	= '';
 		$n				= 1;
 		$skip			= 0;
+		$break			= 1;
 
 		$r_count	= count($pages);
 		$total		= ceil($r_count / 3);
 
-		// table for columns
-		echo '<table class="category_browser">' . "\n";
-		echo "\t<tr>\n" . "\t\t<td>\n";
-
-		// start list
-		echo '<ul class="ul_list">' . "\n";
+		$tpl->enter('w_page_');
 
 		foreach ($pages as $page)
 		{
@@ -147,21 +145,22 @@ if ($user_id = $this->get_user_id())
 
 				if ($first_char != $current_char)
 				{
-					if ($current_char && !$skip)
+					if (!$break)
 					{
-						echo "</ul>\n<br></li>\n";
+						$tpl->e = true;
 					}
 
-					echo $char_display = '<li><strong>' . $first_char . "</strong><ul>\n";
+					$tpl->ch = $current_char = $first_char;
 
+					$break				= 0;
 					$char_show_again	= 0;
 					$char_changed		= 1;
-					$current_char		= $first_char;
 				}
 				else if ($char_show_again)
 				{
-					echo $char_display; # . '+';
+					$tpl->ch = $first_char; # . '+';
 
+					$break				= 0;
 					$char_show_again	= 0;
 					$skip				= 0;
 				}
@@ -169,13 +168,10 @@ if ($user_id = $this->get_user_id())
 				$text	= $this->get_unicode_entities($page['tag'], $page['page_lang']);
 				$title	= $this->get_unicode_entities($page['title'], $page['page_lang']);
 
-				echo
-				'<li>' .
-					'<a href="' . $this->href('', '', $profile + $p + $tab_mode + ['mode' => 'mywatches', $action_mode => $page['page_id'], '#' => 'list']) . '" class="' . $icon_class . '">' .
-						'<img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $icon_text . '" alt="' . $icon_text . '">' .
-					'</a> ' .
-					$this->compose_link_to_page($page['supertag'], '', $text, $title) .
-				"</li>\n";
+				$tpl->l_class	= $icon_class;
+				$tpl->l_title	= $icon_text;
+				$tpl->l_href	= $this->href('', '', $profile + $p + $tab_mode + ['mode' => 'mywatches', $action_mode => $page['page_id'], '#' => 'list']);
+				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text, $title);
 			}
 
 			if ($n < $r_count)
@@ -183,9 +179,7 @@ if ($user_id = $this->get_user_id())
 				// modulus operator: every n loop add a break
 				if ($n % $total == 0)
 				{
-					echo "</ul>\n</li>\n</ul>\n";
-					echo "\t\t</td>\n\t\t<td>\n";
-					echo '<ul class="ul_list">' . "\n";
+					$tpl->l_m = true;
 
 					if ($char_changed)
 					{
@@ -196,6 +190,7 @@ if ($user_id = $this->get_user_id())
 						$skip			= 0;
 					}
 
+					$break				= 1;
 					$char_show_again	= 1;
 					$char_changed		= 0;
 				}
@@ -204,19 +199,16 @@ if ($user_id = $this->get_user_id())
 			$n++;
 		}
 
-		// end list
-		echo "</ul>\n</li>\n</ul>\n";
-		// end table
-		echo "\t\t</td>\n\t</tr>\n</table>\n<br>\n";
+		$tpl->e = true;
 
-		$this->print_pagination($pagination);
+		$tpl->leave();
 	}
 	else
 	{
-		echo '<em>' . $none . '</em>';
+		$tpl->none_text = $none;
 	}
 }
 else
 {
-	echo '<em>' . $this->_t('NotLoggedInWatches') . '</em>';
+	$tpl->denied;
 }
