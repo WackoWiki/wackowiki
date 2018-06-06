@@ -601,7 +601,7 @@ $wacko_translation = [
 
 	'Watchers'					=> 'Списък на следящите %1',
 	'NoWatchers'				=> 'Страница %1 не е следена',
-	'NotOwnerAndViewWatchers'	=> 'Не сте собственик на %1 и не може да получите списък на хората, които я следят.',
+	'NotOwnerToViewWatchers'	=> 'Не сте собственик на %1 и не може да получите списък на хората, които я следят.',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',

@@ -601,7 +601,7 @@ $wacko_translation = [
 
 	'Watchers'					=> 'Watchers voor %1',
 	'NoWatchers'				=> 'Er zijn geen mensen die %1 in de gaten houden.',
-	'NotOwnerAndViewWatchers'	=> 'U bent niet de eigenaar van deze pagina, en kunt de lijst van watchers dus niet bekijken.</em',
+	'NotOwnerToViewWatchers'	=> 'U bent niet de eigenaar van deze pagina, en kunt de lijst van watchers dus niet bekijken.</em',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Genereer de wachtwoordhash voor uw <code>recovery_password</code>',
