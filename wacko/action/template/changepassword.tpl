@@ -40,6 +40,8 @@
 			<p>
 				<label for="user_name">[ ' format_t: UserName ' ]:</label>
 				<input type="text" id="user_name" name="user_name" size="25" maxlength="80"><br>
+			</p>
+			<p>
 				<label for="email">[ ' format_t: Email ' ]:</label>
 				<input type="text" id="email" name="email" size="24">
 			</p>
