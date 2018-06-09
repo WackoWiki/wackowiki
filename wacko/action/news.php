@@ -181,10 +181,7 @@ if (!empty($this->db->news_cluster))
 	$pagination	= $this->pagination($count['n'], $max, 'p', $p_mode);
 	$pages		= $this->db->load_all($sql_mode . $pagination['limit'], true);
 
-
-
 	// start output
-	echo '<section class="news">' . "\n";
 
 	if ($title == 1)
 	{
@@ -206,19 +203,20 @@ if (!empty($this->db->news_cluster))
 			$_title = $this->compose_link_to_page($this->db->news_cluster, '', $this->_t('News')) . $_category_title;
 		}
 
-		echo "<h1>" . $_title . "</h1>";
+		$tpl->n_title = $_title;
 	}
 
 	// displaying XML icon
 	if (!(int) $noxml)
 	{
-		echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('RecentNewsXMLTip') . '" alt="XML" class="btn-feed"/></a></span>' . "<br>\n";
+		$tpl->n_xml_href = $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 	}
 
 	// displaying articles
 	if ($pages)
 	{
-		$this->print_pagination($pagination);
+		// pagination
+		$tpl->n_pagination_text = $pagination['text'];
 
 		foreach ($pages as $page)
 		{
@@ -231,45 +229,37 @@ if (!empty($this->db->news_cluster))
 		$this->preload_categories($page_ids);
 		$this->preload_links($page_ids);
 
+		$tpl->enter('n_l_');
+
 		foreach ($pages as $page)
 		{
 			$_category = $this->get_categories($page['page_id'], OBJECT_PAGE);
 			$_category = !empty($_category) ? $this->_t('Category') . ': ' . $_category . ' | ' : '';
 
-			echo '<article class="newsarticle">';
-			echo '<h2 class="newstitle"><a href="' . $this->href('', $page['tag'], '') . '">' . $page['title'] . "</a></h2>\n";
-			echo '<div class="newsinfo"><span><time datetime="' . $this->page['created'] . '">' . $this->get_time_formatted($page['created']) . '</time> ' . $this->_t('By') . ' ' . $this->user_link($page['owner'], '', true, false) . "</span></div>\n";
-			echo '<div class="newscontent">' . $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1) . "</div>\n";
-			echo '<footer class="newsmeta">' . $_category." " . ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ' : '') . '  ' .
-				'<a href="' . $this->href('', $page['tag'], ['show_comments' => 1]) . '#header-comments" title="' . $this->_t('NewsDiscuss') . ' ' . $page['title'] . '">' . (int) $page['comments'] . ' ' . $this->_t('Comments') . ' &raquo; ' . "</a></footer>\n";
-			echo "</article>\n";
+			$tpl->page		= $page;
+			$tpl->href		= $this->href('', $page['tag'], '');
+			$tpl->user		= $this->user_link($page['owner'], '', true, false);
+			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1);
+			$tpl->category	= $_category;
+			$tpl->edit		= ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ' : '');
+			$tpl->comments	= $this->href('', $page['tag'], ['show_comments' => 1]);
 
 			unset ($_category);
 		}
 
-		// pagination
-		$this->print_pagination($pagination);
+		$tpl->leave();
 	}
 	else
 	{
-		echo '<br><br>' . $this->_t('NewsNotAvailable');
+		$tpl->n_nopages = true;
 	}
 
 	if ($access)
 	{
-		echo $this->form_open('add_topic');
-		?>
-		<br><a id="newtopic"></a><br>
-		<label for="newstitle"><?php echo $this->_t('NewsName'); ?>:</label>
-		<input type="text" id="newstitle" name="title" size="50" maxlength="250" value="">
-		<input type="submit" id="submit" value="<?php echo $this->_t('NewsSubmit'); ?>">
-
-		<?php echo $this->form_close();
+		$tpl->n_f_href = $this->href();
 	}
-
-	echo "</section>\n";
 }
 else
 {
-	echo $this->_t('NewsNoClusterDefined');
+	$tpl->nocluster = true;
 }
