@@ -60,7 +60,7 @@
 				</tr>
 				<tr>
 					<td colspan="6" class="description">
-						[ ' topic.description ' ]
+						[ ' topic.description | e ' ]
 						[ ' category ' ]
 					</td>
 				</tr>

@@ -26,7 +26,7 @@
 							<strong class="cite" title="[ ' _t: ForumNewPosts ' ]">[updated]</strong>
 						=]
 						<strong>[ ' link ' ]</strong><br>
-						<small>[ ' description ' ]</small>
+						<small>[ ' description | e ' ]</small>
 					</td>
 					<td class="t_center">&nbsp;[ ' counter.topics_total | number 0 , . ' ]&nbsp;&nbsp;</td>
 					<td class="t_center">&nbsp;[ ' counter.posts_total | number 0 , . ' ]&nbsp;&nbsp;</td>
