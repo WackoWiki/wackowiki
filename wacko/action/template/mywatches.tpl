@@ -17,8 +17,8 @@
 							<ul>
 								[= l _ =
 									<li>
-										<a href="[ ' href ' ]" class="[ ' class ' ]">
-											<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title ' ]" alt="[ ' title ' ]">
+										<a href="[ ' href ' ]" class="[ ' class |e ' ]">
+											<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title |e ' ]" alt="[ ' title |e ' ]">
 										</a>
 										[ ' link ' ]
 									</li>
