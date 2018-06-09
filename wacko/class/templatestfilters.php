@@ -430,4 +430,13 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		return (($value == $on)? ' selected ' : '');
 	}
+
+	function filter_pre($value)
+	{
+		// for pre and textarea
+		$this->pre = true;
+
+		return $value;
+	}
+
 }

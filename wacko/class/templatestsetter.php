@@ -11,6 +11,7 @@ class TemplatestSetter extends TemplatestFilters
 	protected $store;
 	protected $block;
 	protected $loc;
+	protected $pre;
 
 	function __construct(&$store)
 	{
@@ -73,7 +74,7 @@ class TemplatestSetter extends TemplatestFilters
 		// remove \0 \r \v
 		$text = Templatest::sanitize($text);
 
-		if ($this->block)
+		if ($this->block && !$this->pre)
 		{
 			// auto-indenting..
 			$prefix = !Ut::is_empty($prefix0)? $prefix0 : Templatest::compute_prefix($text);
@@ -114,15 +115,24 @@ class TemplatestSetter extends TemplatestFilters
 		}
 		else
 		{
-			// when doing inline substitution - all of \n is removed from the subject
-			$text = trim($text, "\n");
-
-			// all of whitespace spans with \n in them replaced by single space
-			for ($i = 0; ($nl = strpos($text, "\n", $i)) !== false; $i = $pre)
+			// skip for pre and texarea
+			if ($this->pre)
 			{
-				for ($pre = $nl; $pre > 0 && ctype_space($text[$pre - 1]); --$pre);
-				$post = $nl + strspn($text, " \t\n", $nl);
-				$text = substr_replace($text, ' ', $pre, $post - $pre);
+				// remove indenting
+				$text = trim($text, "\t\n");
+			}
+			else
+			{
+				// when doing inline substitution - all of \n is removed from the subject
+				$text = trim($text, "\n");
+
+				// all of whitespace spans with \n in them replaced by single space
+				for ($i = 0; ($nl = strpos($text, "\n", $i)) !== false; $i = $pre)
+				{
+					for ($pre = $nl; $pre > 0 && ctype_space($text[$pre - 1]); --$pre);
+					$post = $nl + strspn($text, " \t\n", $nl);
+					$text = substr_replace($text, ' ', $pre, $post - $pre);
+				}
 			}
 		}
 
