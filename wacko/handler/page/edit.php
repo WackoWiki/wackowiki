@@ -8,7 +8,6 @@ if (!defined('IN_WACKO'))
 $edit_note		= '';
 $error			= '';
 $minor_edit		= 0;
-$output			= '';
 $reviewed		= 0;
 $title			= '';
 
@@ -18,9 +17,6 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 	include dirname(__FILE__) . '/_autocomplete.php';
 	return;
 }
-
-echo ADD_NO_DIV . '<div id="page-edit">';
-$include_tail = '</div>';
 
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
@@ -49,7 +45,7 @@ if ($this->has_access('read')
 			$this->_t('PostedBy') . ' ' .
 			$this->user_link($this->page['user_name'], '', true, false) . ' ' .
 			$this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
-		$this->show_message($message, 'comment-info');
+		$tpl->message = $this->show_message($message, 'comment-info', false);
 	}
 
 	// TODO: add values to post in show handler
@@ -70,11 +66,11 @@ if ($this->has_access('read')
 		// watch page
 		if ($this->page
 			&& isset($_POST['watchpage'])
-			&& isset($_POST['noid_publication'])
-			&& ($_POST['noid_publication'] != $this->page['page_id'])
+			&& !isset($_POST['noid_publication'])
 			&& $user
 			&& !$this->is_watched)
 		{
+			#$this->set_message('watch page' , 'info');
 			$this->set_watch($user['user_id'], $this->page['page_id']);
 			$this->is_watched = true;
 		}
@@ -82,27 +78,10 @@ if ($this->has_access('read')
 		// only if saving:
 		if (isset($_POST['save']) && (isset($_POST['body']) && $_POST['body'] != ''))
 		{
-			if (isset($_POST['edit_note']))
-			{
-				$edit_note = trim($_POST['edit_note']);
-			}
-
-			if (isset($_POST['minor_edit']))
-			{
-				$minor_edit = (int) $_POST['minor_edit'];
-			}
-
-			if (isset($_POST['reviewed']))
-			{
-				$reviewed = (int) $_POST['reviewed'];
-			}
-
-			$title = $this->page['title'];
-
-			if (isset($_POST['title']))
-			{
-				$title = trim($_POST['title']);
-			}
+			$edit_note	= trim(	($_POST['edit_note']	?? ''));
+			$minor_edit	= (int)	($_POST['minor_edit']	?? 0);
+			$reviewed	= (int)	($_POST['reviewed']		?? 0);
+			$title		= trim(	($_POST['title']		?? $this->page['title']));
 
 			// check for reserved word
 			if ($result = $this->validate_reserved_words($this->tag))
@@ -123,12 +102,12 @@ if ($this->has_access('read')
 			}
 
 			// check text length
-			#if ($textchars > $maxchars)
-			#{
-				#$message = Ut::perc_replace($this->_t('TextDBOversize'), $textchars - $maxchars) . ' ';
-				#$this->set_message($message , 'error');
-			#	$error = true;
-			#}
+			/* if ($textchars > $maxchars)
+			{
+				$message = Ut::perc_replace($this->_t('TextDBOversize'), $textchars - $maxchars) . ' ';
+				$this->set_message($message , 'error');
+				$error = true;
+			} */
 
 			// check for edit note
 			if (($this->db->edit_summary == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
@@ -139,12 +118,12 @@ if ($this->has_access('read')
 			}
 
 			// check categories
-			#if (!$this->page && $this->get_categories_list($this->page_lang, true) && $this->save_categories_list($this->page['page_id'], OBJECT_PAGE, 1) !== true)
-			#{
-				#$message = 'Select at least one referring category (field) to the page. ';
-				#$this->set_message($message , 'error');
-			#	$error = true;
-			#}
+			/* if (!$this->page && $this->get_categories_list($this->page_lang, true) && $this->save_categories_list($this->page['page_id'], OBJECT_PAGE, 1) !== true)
+			{
+				$message = 'Select at least one referring category (field) to the page. ';
+				$this->set_message($message , 'error');
+				$error = true;
+			} */
 
 			// captcha validation
 			if (($this->page? $this->db->captcha_edit_page : $this->db->captcha_new_page)
@@ -247,8 +226,8 @@ if ($this->has_access('read')
 						);
 	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
-	if (isset($_POST['edit_note']))		$edit_note	= $_POST['edit_note'];
-	if (isset($_POST['minor_edit']))	$minor_edit	= $_POST['minor_edit'];
+	$edit_note	= (string)	($_POST['edit_note']	?? '');
+	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
 
 	// display form
 
@@ -256,53 +235,28 @@ if ($this->has_access('read')
 	// It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
 	// "You are going to leave this page, but there are some changes you made but not saved yet."
 	// Is used by this script to determine which changes it needs to monitor.
-	$output .= $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
+	#$output .= $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
-		$output .=	'<input type="hidden" name="page_lang"	value="' . $this->page_lang . '">' . "\n" .
-					'<input type="hidden" name="tag"		value="' . $this->tag . '">' . "\n" .
-					'<input type="hidden" name="add"		value="1">' . "\n";
+		$tpl->new_tag	= $this->tag;
+		$tpl->new_lang	= $this->page_lang;
 	}
 
-	echo $output;
-
-	$output			=	'';
 	$preview		=	'';
-	$form_buttons	=	'<input type="submit" class="OkBtn_Top" name="save" value="' . $this->_t('EditStoreButton') . '">&nbsp;' .
-						'<input type="submit" class="OkBtn_Top" name="preview" value="' . $this->_t('EditPreviewButton') . '">&nbsp;' .
-						'<a href="' . $this->href() . '" class="btn_link"><input type="button" class="CancelBtn_Top" value="' . $this->_t('EditCancelButton') . '"></a>' . "\n";
 
 	// preview?
 	if (isset($_POST['preview']))
 	{
-		echo $form_buttons;
-
 		$text_chars	= number_format(strlen($_body), 0, ',', '.');
 		$preview	= $this->format($body,		'pre_wacko');
 		$preview	= $this->format($preview,	'wacko');
 		$preview	= $this->format($preview,	'post_wacko');
 
-		$output = '<section class="preview"><p class="preview"><span>' . $this->_t('EditPreview') . ' (' . $text_chars . ' ' . $this->_t('Chars') . ")</span></p>\n";
-
-		if ($this->page['comment_on_id'] != 0)
-		{
-			$output .= '<header class="comment-title">' . "\n" . '<h2><a href="#">' . $title . "</a></h2>\n</header>\n";
-		}
-		else
-		{
-			$output .= '<h1>' . $this->page['title'] . '</h1>';
-		}
-
-
-		$output .= $preview;
-		$output .= "</section><br>\n";
-
-		echo $output;
-
-		// edit
-		$output = '';
-		#$title	= $_POST['title'];
+		$tpl->p_chars		= $text_chars;
+		$tpl->p_title		= $title;
+		$tpl->p_preview		= $preview;
+		$tpl->p_buttons		= true;
 	}
 
 	if (isset($this->sess->body) && $this->sess->body != '')
@@ -325,49 +279,41 @@ if ($this->has_access('read')
 		$title				= $this->page['title'];
 	}
 
-	echo $form_buttons;
-?>
-	<br>
-	<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
-<?php
-	// comment title
+	$tpl->buttons= true;
+
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
-		$output .= '<br>' . "\n";
-		$output .= '<label for="comment_title">' . $this->_t('AddCommentTitle') . '</label><br>';
-		$output .= '<input type="text" id="comment_title" maxlength="250" value="' . Ut::html($title) . '" size="60" name="title">';
-		$output .= '<br>' . "\n";
+		// comment title
+		$tpl->e_title = Ut::html($title);
+		$tpl->e_label = $this->_t('AddCommentTitle');
 	}
 	else if (!$this->page || $this->is_owner() || $this->is_admin())
 	{
 		// edit page title
-		$output .= '<br>' . "\n";
-		$output .= '<label for="page_title">' . $this->_t('MetaTitle') . ':</label><br>';
-		$output .= '<input type="text" maxlength="250" id="page_title" name="title" value="' . Ut::html($title) . '" size="60">';
-		$output .= '<br>' . "\n";
+		$tpl->e_title = Ut::html($title);
+		$tpl->e_label = $this->_t('MetaTitle');
 	}
 	else
 	{
 		// show page title
-		$output .= '<br>' . "\n";
-		$output .= '<h1>' . $this->page['title'] . '</h1>';
-		#$output .= '<br>' . "\n";
+		$tpl->r_title = $this->page['title'];
 	}
 
-	$output .= '<input type="hidden" name="previous" value="' . Ut::html($previous) . '"><br>' . "\n";
-	$output .= '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">';
-	$output .= Ut::html($body) . "</textarea>\n";
-	$output .= '<br>' . "\n";
+	$tpl->previous	= Ut::html($previous);
+
+	// \n gets eaten by assign() function in TemplatestSetter class, see line 117
+	$tpl->body		= $body; // Ut::html($body)
+
+	// only for \n issue testing
+	#echo '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">'. Ut::html($body) . "</textarea>\n";
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
 	{
 		// edit note
 		if ($this->db->edit_summary != 0)
 		{
-			$output .= '<label for="edit_note">' . $this->_t('EditNote') . ':</label><br>';
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
-			$output .= '<input type="text" id="edit_note" maxlength="200" value="' . Ut::html($edit_note) . '" size="60" name="edit_note">';
-			$output .= "&nbsp;&nbsp;&nbsp;"; // "<br>";
+			$tpl->n_note = Ut::html($edit_note);
 		}
 
 		if ($user)
@@ -375,83 +321,55 @@ if ($this->has_access('read')
 			// minor edit
 			if ($this->page && $this->db->minor_edit != 0)
 			{
-				$output .= '<input type="checkbox" id="minor_edit" value="1" name="minor_edit">';
-				$output .= '<label for="minor_edit">' . $this->_t('EditMinor') . '</label>';
-				$output .= '<br>' . "\n";
-			}
-			else
-			{
-				$output .= '<br>' . "\n";
+				$tpl->minor = true;
 			}
 
 			// reviewed
 			if ($this->page && $this->db->review != 0 && $this->is_reviewer())
 			{
-				$output .= '<input type="checkbox" id="reviewed" value="1" name="reviewed">';
-				$output .= '<label for="reviewed">' . $this->_t('Reviewed') . '</label>';
-				$output .= '<br>' . "\n";
+				$tpl->reviewed = true;
 			}
 
 			// publish anonymously
-			if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('write', '', GUEST))
+			if (($this->page
+					&& $this->db->publish_anonymously != 0
+					&& $this->has_access('write', '', GUEST))
 				|| (!$this->page && $this->has_access('create', '', GUEST)))
 			{
-				$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '"' . ( $this->get_user_setting('noid_pubs') == 1 ? ' checked' : '' ) . '>';
-				$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . '</label>';
-				$output .= '<br>' . "\n";
+				$tpl->a_pageid	= $this->page['page_id'];
+				$tpl->a_checked	= $this->get_user_setting('noid_pubs') == 1 ? ' checked' : '';
 			}
 
 			// watch a page
 			if ($this->page && !$this->is_watched)
 			{
-				$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? ' checked' : '' ) . '>';
-				$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . '</label>';
-				$output .= '<br>' . "\n";
+				$tpl->w_checked = $this->get_user_setting('send_watchmail') == 1 ? ' checked' : '';
 			}
 		}
 	}
 
 	if (!$this->page && $words = $this->get_categories_list($this->page_lang, true))
 	{
-		$output .= '<br>' . $this->_t('Categories') . ':' . "\n" .
-					$this->show_category_form('', OBJECT_PAGE, $this->page_lang, false);
-
-
+		$tpl->c_categories = $this->show_category_form('', OBJECT_PAGE, $this->page_lang, false);
 	}
-
-	echo $output;
 
 	if ($this->page? $this->db->captcha_edit_page : $this->db->captcha_new_page)
 	{
-		echo $this->show_captcha(false);
+		$tpl->captcha = $this->show_captcha(false);
 	}
 
-?>
-	<script>
-		wE = new WikiEdit();
-<?php
+	// WikiEdit
 	if ($user = $this->get_user())
 	{
 		if ($user['autocomplete'])
 		{
-?>
-			if (AutoComplete)
-			{
-				 wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" );
-			}
-<?php
+			$tpl->autocomplete = true;
 		}
 	}
-?>
-		wE.init('postText', 'WikiEdit', 'edname-w', '<?php echo $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';?>');
-	</script>
-	<br>
 
-<?php
-	echo $form_buttons;
-	echo $this->form_close();
+	$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 }
 else
 {
-	$this->show_message($this->_t('WriteAccessDenied'), 'error');
+	$tpl->message = $this->show_message($this->_t('WriteAccessDenied'), 'error', false);
 }

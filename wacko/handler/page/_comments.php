@@ -92,16 +92,11 @@ if ($this->has_access('read'))
 			$this->set_user_setting('noid_protect', false);
 		}
 
-		// display comments section
-		echo '<section id="section-comments">' . "\n";
+		$tpl->cp_s_pagination_text = $pagination['text'];
 
-		// display comments header
-		echo '<header id="header-comments">' . "\n";
-
-		$this->print_pagination($pagination);
-
-		echo '<h1><a href="' . $this->href('', '', ['show_comments' => 0]) . '" title="' . $this->_t('HideComments') . '">' . $this->_t('Comments') . '</a></h1>';
-		echo "</header>\n";
+		$tpl->cp_s_href		= $this->href('', '', ['show_comments' => 0]);
+		$tpl->cp_s_title	= $this->_t('HideComments');
+		$tpl->cp_s_text		= $this->_t('Comments');
 
 		// display comments themselves
 		if ($comments)
@@ -109,7 +104,7 @@ if ($this->has_access('read'))
 			// TODO: evaluate -> option / array to handle nested comments
 			// display relation as @link to an extra handler which filters / shows only the current tree
 
-			echo '<ol id="comments">' . "\n";
+			$tpl->enter('cp_s_ol_');
 
 			foreach ($comments as $comment)
 			{
@@ -117,11 +112,9 @@ if ($this->has_access('read'))
 
 				$this->cache_page($comment, true);
 
-				echo '<li id="' . $comment['tag'] . '" class="comment">' . "\n";
-
-				// print comment
-				// header
-				echo '<article class="comment-text">' . "\n";
+				$tpl->l_href	= $this->href('', $comment['tag']);
+				$tpl->l_tag		= $comment['tag'];
+				$tpl->l_title	= $comment['title'];
 
 				// show remove comment button
 				if ($this->is_admin()
@@ -130,18 +123,13 @@ if ($this->has_access('read'))
 						|| ($this->db->owners_can_remove_comments && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					$handler_button .= '<a href="' . $this->href('remove', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('DeleteCommentTip') . '" alt="' . $this->_t('DeleteText') . '" style="float: right; padding: 2px;" class="btn-delete"></a>';
+					$tpl->l_b_remove_href = $this->href('remove', $comment['tag']);
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					$handler_button .= '<a href="' . $this->href('edit', $comment['tag']) . '"><img src="' . $this->db->theme_url . 'icon/spacer.png" title="' . $this->_t('EditCommentTip') . '" alt="' . $this->_t('EditComment') . '" style="float: right; padding: 2px;" class="btn-edit"></a>';
-				}
-
-				if (!empty($handler_button))
-				{
-					echo '<nav>' . $handler_button . "</nav>\n";
+					$tpl->l_b_edit_href = $this->href('edit', $comment['tag']);
 				}
 
 				// recompile if necessary
@@ -152,27 +140,17 @@ if ($this->has_access('read'))
 
 				# $user_stats = $handler_show_get_user_stats($comment['user_id']);
 
-				echo '<header class="comment-title">' . "\n" .
-						'<h2><a href="' . $this->href('', $comment['tag']) . '">' . $comment['title'] . "</a></h2>\n" .
-					 "</header>\n";
+				$tpl->l_comment	= $this->format($comment['body_r'], 'post_wacko');
 
-				echo '<p>' . $this->format($comment['body_r'], 'post_wacko') . "</p>\n";
+				$tpl->l_owner	= $this->user_link($comment['owner_name']);
+				$tpl->l_created	= $comment['created'];
 
-				echo '<footer>' .
-						'<ul class="comment-info">' . "\n" .
-						"<li>" .
-							$this->user_link($comment['owner_name']) .
-						"</li>\n" .
-						'<li><time datetime="' . $comment['created'] . '">' . $this->get_time_formatted($comment['created']) . "</time></li>\n" .
-						($comment['modified'] != $comment['created']
-							? '<li><time datetime="' . $comment['modified'] . '">' . $this->get_time_formatted($comment['modified']) . "</time> " . $this->_t('CommentEdited') . "</li>\n"
-							: '') .
+				($comment['modified'] != $comment['created']
+							? $tpl->l_m_modified = $comment['modified']
+							: '');
 						/*($user_stats == true
-							? "<li>" . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . '&nbsp;&nbsp; ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . '&nbsp;&nbsp; ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
+							? '<li>' . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . '&nbsp;&nbsp; ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . '&nbsp;&nbsp; ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
 							: '') .*/
-					"</ul>\n" .
-					"</footer>\n";
-				echo "</article>\n";
 
 				// comment footer
 				/* echo '<div class="comment-tool">' . "\n";
@@ -202,19 +180,26 @@ if ($this->has_access('read'))
 				echo "</div>\n"; */
 			}
 
-			echo "</ol>\n";
+			$tpl->leave();
 		}
-
-		$this->print_pagination($pagination);
 
 		// display comment form
 		if ($this->has_access('comment'))
 		{
-			$parent_id = (int) ($_GET['parent_id'] ?? 0);
-			echo '<div class="commentform" id="commentform">' . "\n";
+			// invoke autocomplete if needed
+			if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
+			{
+				include dirname(__FILE__) . '/_autocomplete.php';
+				return;
+			}
 
-			echo $this->form_open('add_comment', ['page_method' => 'addcomment']);
-			echo '<input type="hidden" name="parent_id" value="' . $parent_id . '">' . "\n";
+			$tpl->enter('cp_s_f_');
+
+			$parent_id = (int) ($_GET['parent_id'] ?? 0);
+
+			// TODO: What about mode_rewrite off mode?
+			#echo $this->form_open('add_comment', ['page_method' => 'addcomment']);
+			$tpl->parent	= $parent_id;
 
 			// preview
 			if (!empty($preview))
@@ -223,87 +208,61 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'wacko');
 				$preview = $this->format($preview, 'post_wacko');
 
-				echo '<div id="preview" class="preview"><p class="preview"><span>' . $this->_t('EditPreviewSlim') . '</span></p>' . "\n" .
-						'<div class="comment-preview">' . "\n" .
-						'<header class="comment-title">' .
-							'<h2>' . $title . '</h2>' .
-						'</header>' . "\n" .
-						'<p>' . $preview . '</p>' .
-						"</div>\n</div><br>\n";
+				$tpl->p_title		= $title;
+				$tpl->p_preview		= $preview;
 			}
 
-			// load WikiEdit
-			echo '<script src="' . $this->db->base_url . 'js/protoedit.js"></script>' . "\n";
-			echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
-			echo '<script src="' . $this->db->base_url . 'js/wikiedit.js"></script>' . "\n";
-			echo '<script src="' . $this->db->base_url . 'js/autocomplete.js"></script>' . "\n";
-			?>
-				<noscript><div class="errorbox_js"><?php echo $this->_t('WikiEditInactiveJs'); ?></div></noscript>
+			// load WikiEdit TODO: load in theme footer!
+			#echo '<script src="' . $this->db->base_url . 'js/protoedit.js"></script>' . "\n";
+			#echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
+			#echo '<script src="' . $this->db->base_url . 'js/wikiedit.js"></script>' . "\n";
+			#echo '<script src="' . $this->db->base_url . 'js/autocomplete.js"></script>' . "\n";
+			$tpl->userlang	= $this->user_lang;
+			$tpl->title		= $this->sess->freecap_old_title
+								?? ($title
+									?? '');
 
-				<label for="addcomment_title"><?php echo $this->_t('AddCommentTitle');?></label><br>
-				<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="<?php if (isset($title)) echo $title; ?>"><br>
-				<br>
-				<label for="addcomment"><?php echo $this->_t('AddComment');?></label><br>
-				<textarea id="addcomment" name="body" rows="6" cols="7"><?php if (isset($this->sess->freecap_old_comment)) echo $this->sess->freecap_old_comment; ?><?php if (isset($payload)) echo Ut::html($payload) ?></textarea>
+			$tpl->payload	= $this->sess->freecap_old_comment
+								?? ($payload
+									?? '');
 
-			<?php
 			if ($user)
 			{
-				$output		= '';
-
 				// publish anonymously
-				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST)) || (!$this->page && $this->has_access('create', '', GUEST)))
+				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST))
+					|| (!$this->page && $this->has_access('create', '', GUEST)))
 				{
-					$output .= '<input type="checkbox" name="noid_publication" id="noid_publication" value="' . $this->page['page_id'] . '" ' . ($this->get_user_setting('noid_pubs') == 1 ? 'checked' : '' ) . ">\n";
-					$output .= '<label for="noid_publication">' . $this->_t('PostAnonymously') . "</label>\n";
-					$output .= '<br>';
+					$tpl->a_pageid	= $this->page['page_id'];
+					$tpl->a_checked	= $this->get_user_setting('noid_pubs') == 1 ? 'checked' : '';
 				}
 
 				// watch a page
 				if ($this->page && !$this->is_watched)
 				{
-					$output .= '<input type="checkbox" name="watchpage" id="watchpage" value="1"' . ( $this->get_user_setting('send_watchmail') == 1 ? 'checked' : '' ) . ">\n";
-					$output .= '<label for="watchpage">' . $this->_t('NotifyMe') . "</label>\n";
-					$output .= '<br>';
+					#$tpl->w_value	= 1;
+					$tpl->w_checked	= $this->get_user_setting('send_watchmail') == 1 ? 'checked' : '';
 				}
-
-				echo '<br>' . $output;
 			}
 
 			if ($this->db->captcha_new_comment)
 			{
-				echo $this->show_captcha(false);
+				$tpl->captcha = $this->show_captcha(false);
 			}
-			?>
 
-			<script>
-			wE = new WikiEdit();
-
-			<?php
+			// WikiEdit
 			if ($user = $this->get_user())
 			{
 				if ($user['autocomplete'])
 				{
-				?>
-					if (AutoComplete) { wEaC = new AutoComplete( wE, "<?php echo $this->href('edit');?>" ); }
-				<?php
+					$tpl->autocomplete = true;
 				}
 			}
-			?>
 
-			wE.init('addcomment','WikiEdit','edname-w','<?php echo $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';?>');
-			</script>
+			$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 
-			<br>
-			<input type="submit" name="save" value="<?php echo $this->_t('AddCommentButton'); ?>" accesskey="s">
-			<input type="submit" name="preview" value="<?php echo $this->_t('EditPreviewButton'); ?>">
-			<?php echo $this->form_close();
-
-			echo "</div>\n";
+			$tpl->leave();
 		}
 		// end comment form
-
-		echo "</section>\n";
 	}
 	else
 	{
@@ -328,12 +287,9 @@ if ($this->has_access('read'))
 		// show link to show comment only if there is one or/and user has the right to add a new one
 		if (!empty($show_comments))
 		{
-			// display comments section
-			echo '<section id="section-comments">' . "\n";
-			echo '<header id="header-comments">' . "\n";
-			echo '<h1><a href="' . $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']) . '" title="' . $this->_t('ShowComments') . '">' . $show_comments . '</a></h1>';
-			echo '</header>' . "\n";
-			echo "</section>\n";
+			$tpl->cp_s_href		= $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']);
+			$tpl->cp_s_title	= $this->_t('ShowComments');
+			$tpl->cp_s_text		= $show_comments;
 		}
 		else
 		{
