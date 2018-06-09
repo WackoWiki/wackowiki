@@ -191,61 +191,25 @@ if ($upload_allowed)
 }
 
 // show form
-?>
-<h3><?php echo Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', '')); ?></h3>
-<?php
-echo $this->form_open('set_permissions', ['page_method' => 'permissions']);
+$tpl->title = Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', ''));
 
-echo '<input type="checkbox" id="massacls" name="massacls">';
-echo '<label for="massacls">' . $this->_t('AclForEntireCluster') . '</label>'; ?>
-<br>
-<div class="cssform">
-<p>
-	<label for="read_acl"><strong><?php echo $this->_t('ACLRead'); ?></strong></label>
-	<textarea id="read_acl" name="read_acl" rows="4" cols="20"><?php echo $read_acl['list'] ?></textarea>
-</p>
-<p>
-	<label for="write_acl"><strong><?php echo $this->_t('ACLWrite'); ?></strong></label>
-	<textarea id="write_acl" name="write_acl" rows="4" cols="20"><?php echo $write_acl['list'] ?></textarea>
-</p>
-<p>
-	<label for="comment_acl"><strong><?php echo $this->_t('ACLComment'); ?></strong></label>
-	<textarea id="comment_acl" name="comment_acl" rows="4" cols="20"><?php echo $comment_acl['list'] ?></textarea>
-</p>
-<p>
-	<label for="create_acl"><strong><?php echo $this->_t('ACLCreate'); ?></strong></label>
-	<textarea id="create_acl" name="create_acl" rows="4" cols="20"><?php echo $create_acl['list'] ?></textarea>
-</p>
-<?php
+$tpl->read		= $read_acl['list'];
+$tpl->write		= $write_acl['list'];
+$tpl->comment	= $comment_acl['list'];
+$tpl->create	= $create_acl['list'];
+
 // check if upload is available for user
 if ($upload_allowed)
-{ ?>
-<p>
-	<label for="upload_acl"><strong><?php echo $this->_t('ACLUpload'); ?></strong></label>
-	<textarea id="upload_acl" name="upload_acl" rows="4" cols="20"><?php echo $upload_acl['list'] ?></textarea>
-</p>
-<?php } ?>
-<p>
-	<label for="new_owner_id"><strong><?php echo $this->_t('SetOwner'); ?></strong></label>
-	<select id="new_owner_id" name="new_owner_id">
-		<option value=""><?php echo $this->_t('OwnerDontChange'); ?></option>
-	<?php
-			if (($users = $this->load_users()))
-			{
-				// TODO and if there're TONS of users? maybe simple text entry, not menu?
-				foreach ($users as $user)
-				{
-					echo '<option value="' . $user['user_id'] . '">' . Ut::html($user['user_name']) . "</option>\n";
-				}
-			}
-	?>
-	</select>
-</p>
-<p>
-	<input type="submit" class="OkBtn" id="submit" value="<?php echo $this->_t('ACLStoreButton'); ?>" accesskey="s"> &nbsp;
-	<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" id="button" value="<?php echo $this->_t('ACLCancelButton'); ?>"/></a>
-</p>
-</div>
-<?php
+{
+	$tpl->u_upload = $upload_acl['list'];
+}
 
-echo $this->form_close();
+if (($users = $this->load_users()))
+{
+	// TODO and if there're TONS of users? maybe simple text entry, not menu?
+	foreach ($users as $user)
+	{
+		$tpl->l_user = $user;
+	}
+}
+
