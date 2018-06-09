@@ -5,8 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo ADD_NO_DIV . '<article id="page-show" class="page" data-dbclick1="page">' . "\n";
-$include_tail = '</article>';
+#$include_tail = '</article>';
 
 // redirect from comment page to the commented one
 if ($this->page['comment_on_id'] && !$this->page['deleted'])
@@ -36,7 +35,7 @@ if ($this->has_access('read'))
 		$this->http->status(404);
 
 		$message = $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
-		$this->show_message($message, 'notice');
+		$tpl->message = $this->show_message($message, 'notice');
 	}
 	else
 	{
@@ -59,7 +58,7 @@ if ($this->has_access('read'))
 				$message .= '<br>';
 			}
 
-			$this->show_message($message, 'warning');
+			$tpl->message = $this->show_message($message, 'warning', false);
 		}
 
 		// revision header
@@ -102,7 +101,7 @@ if ($this->has_access('read'))
 				}
 			}
 
-			$this->show_message($message, 'revisioninfo');
+			$tpl->message = $this->show_message($message, 'revisioninfo', false);
 		}
 
 		// count page hit (we don't count for page owner)
@@ -142,28 +141,15 @@ if ($this->has_access('read'))
 		// display page title (action & theme wacko.all options)
 		if (!$this->hide_article_header)
 		{
-			echo "<header>\n" .
-				 '<h1>';
-			echo isset($this->page['title']) && $this->has_access('read')
+			$tpl->h_title = isset($this->page['title']) && $this->has_access('read')
 				? $this->page['title']
 				: $this->get_page_path();
-
-			echo "</h1>\n" .
-				 "</header>\n";
 		}
 
-		echo '<section id="section-content">' . "\n";
-
 		// display page body
-		echo $data;
+		$tpl->data = $data;
 
 		$this->set_language($this->user_lang);
-
-		// edit via double click
-		echo '<script>var dbclick = "page";</script>' . "\n";
-
-		// end section-content
-		echo "</section>\n";
 	}
 }
 else
@@ -188,7 +174,7 @@ if ($this->forum
 {
 	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
 	{
-		echo '<nav class="category">' . $categories . "</nav>\n";
+		$tpl->p_category = $categories;
 	}
 }
 
@@ -196,7 +182,6 @@ if ($this->forum
 if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['comment_on_id'])
 {
 	// revoking payload
-
 	if (isset($this->sess->body))
 	{
 		$payload				= $this->sess->body;

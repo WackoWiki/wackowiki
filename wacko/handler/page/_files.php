@@ -32,19 +32,12 @@ if ($this->has_access('read'))
 	// display files!
 	if ($show_files)
 	{
-		// display files section
-		echo '<section id="section-files">' . "\n";
-
 		// display files header
-		?>
-		<header id="header-files">
-		<?php echo '<h1><a href="' . $this->href('', '', ['show_files' => 0]) . '" title="' . $this->_t('HideFiles') . '">' . $this->_t('Files') . '</a></h1>'; ?>
-		</header>
+		$tpl->fp_s_href		= $this->href('', '', ['show_files' => 0]);
+		$tpl->fp_s_title	= $this->_t('HideFiles');
+		$tpl->fp_s_text		= $this->_t('Files');
 
-		<?php
-		echo '<div class="files">' . "\n";
-		echo $this->action('files', ['nomark' => 1]);
-		echo '</div>';
+		$tpl->fp_s_f_files	= $this->action('files', ['nomark' => 1]);
 
 		// display form
 		if (isset($registered)
@@ -54,12 +47,8 @@ if ($this->has_access('read'))
 				)
 			)
 		{
-			echo '<div class="filesform">' . "\n";
-			echo $this->action('upload', ['nomark' => 1]);
-			echo '</div>' . "\n";
+			$tpl->fp_s_u_upload = $this->action('upload', ['nomark' => 1]);
 		}
-
-		echo "</section>\n";
 	}
 	else
 	{
@@ -89,11 +78,9 @@ if ($this->has_access('read'))
 		if ($have_files)
 		{
 			// display files section
-			echo '<section id="section-files">' . "\n";
-			echo '<header id="header-files">' . "\n";
-			echo '<h1><a href="' . $this->href('', '', ['show_files' =>1, '#' => 'header-files']) . '" title="' . $this->_t('ShowFiles') . '">' . $have_files . '</a></h1>';
-			echo '</header>' . "\n";
-			echo "</section>\n";
+			$tpl->fp_s_href		= $this->href('', '', ['show_files' =>1, '#' => 'header-files']);
+			$tpl->fp_s_title	= $this->_t('ShowFiles');
+			$tpl->fp_s_text		= $have_files;
 		}
 		else
 		{
