@@ -13,7 +13,7 @@
 				<section id="preview" class="preview">
 					<p class="preview"><span>[ ' _t: EditPreviewSlim ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
 					<h1>[ ' title ' ]</h1>
-					[ ' preview ' ]
+					[ ' preview | pre ' ]
 				</section>
 				<br>
 			=]
