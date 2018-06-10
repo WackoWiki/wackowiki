@@ -118,7 +118,7 @@ if (!$mode)
 // referrers header
 $tpl->title = $title;
 
-$print_ref = function ($ref, $val, $vclass, $link = '') use (&$tpl, $url_maxlen, $spacer)
+$print_ref = function ($ref, $val, $vclass, $link = '') use (&$tpl, $url_maxlen)
 {
 	// shorten url name if too long
 	$trunc = $this->shorten_string($ref, $url_maxlen);
@@ -126,7 +126,7 @@ $print_ref = function ($ref, $val, $vclass, $link = '') use (&$tpl, $url_maxlen,
 	$tpl->l_vclass	= $vclass;
 	$tpl->l_val		= $val;
 	$tpl->l_ref		= $ref;
-	$tpl->l_trunc		= $trunc;
+	$tpl->l_trunc	= $trunc;
 
 	if ($link)
 	{
