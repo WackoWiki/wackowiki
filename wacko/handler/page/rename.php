@@ -130,7 +130,6 @@ if ($registered
 
 			// show sub-pages
 			$tpl->f_tree 		= $this->action('tree', ['depth' => 3]);
-
 		}
 	}
 }
