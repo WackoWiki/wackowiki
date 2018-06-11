@@ -121,7 +121,7 @@ class Typografica
 
 		if ($this->skip_tags)
 		{
-			$re		=  '/<\/?[a-z0-9]+(' . // tag name
+			$re		= '/<\/?[a-z0-9]+(' . // tag name
 									'\s+(' . // repeatable statement: if only one delimiter and little body
 									'[a-z]+(' . // alpha-composed attribute, could be followed by equals character
 											'=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))' . //

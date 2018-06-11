@@ -29,15 +29,17 @@ if ($this->has_access('read'))
 		$user_name = GUEST;
 	}
 
+	$tpl->enter('fp_s_');
+
 	// display files!
 	if ($show_files)
 	{
 		// display files header
-		$tpl->fp_s_href		= $this->href('', '', ['show_files' => 0]);
-		$tpl->fp_s_title	= $this->_t('HideFiles');
-		$tpl->fp_s_text		= $this->_t('Files');
+		$tpl->href		= $this->href('', '', ['show_files' => 0]);
+		$tpl->title		= $this->_t('HideFiles');
+		$tpl->text		= $this->_t('Files');
 
-		$tpl->fp_s_f_files	= $this->action('files', ['nomark' => 1]);
+		$tpl->f_files	= $this->action('files', ['nomark' => 1]);
 
 		// display form
 		if (isset($registered)
@@ -47,7 +49,7 @@ if ($this->has_access('read'))
 				)
 			)
 		{
-			$tpl->fp_s_u_upload = $this->action('upload', ['nomark' => 1]);
+			$tpl->u_upload = $this->action('upload', ['nomark' => 1]);
 		}
 	}
 	else
@@ -78,9 +80,9 @@ if ($this->has_access('read'))
 		if ($have_files)
 		{
 			// display files section
-			$tpl->fp_s_href		= $this->href('', '', ['show_files' =>1, '#' => 'header-files']);
-			$tpl->fp_s_title	= $this->_t('ShowFiles');
-			$tpl->fp_s_text		= $have_files;
+			$tpl->href		= $this->href('', '', ['show_files' =>1, '#' => 'header-files']);
+			$tpl->title		= $this->_t('ShowFiles');
+			$tpl->text		= $have_files;
 		}
 		else
 		{
@@ -88,6 +90,8 @@ if ($this->has_access('read'))
 			// e.g. 'Log in or create an account to attach files to this page.'
 		}
 	}
+
+	$tpl->leave();
 }
 
 ?>

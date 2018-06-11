@@ -119,7 +119,7 @@ class TemplatestSetter extends TemplatestFilters
 			if ($this->pre)
 			{
 				// remove indenting
-				$text = trim($text, "\t\n");
+				$text = trim($text, "\t");
 			}
 			else
 			{

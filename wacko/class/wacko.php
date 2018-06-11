@@ -5525,8 +5525,8 @@ class Wacko
 				'max_session'	=> 'Timeout',
 				'max_idle'		=> 'Inactivity', // You have been logged out due to inactivity.
 				'ua'			=> 'UaChange',
-				'tls'			=> 'TlsChange',
-				'ip'			=> 'IpChange',
+				'tls'			=> 'TLSChange',
+				'ip'			=> 'IPChange',
 			];
 
 			$this->set_message($this->_t('Session' . $tr[$message], SYSTEM_LANG));
