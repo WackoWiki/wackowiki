@@ -86,9 +86,16 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten.<br>Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Sitzung ist wegen %1 abgelaufen.',
-									// Die Sitzung wurde wegen Inaktivität beendet.
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+
+	'SessionReplay'				=> 'Session terminated due to replay.',
+	'SessionObsolete'			=> 'Session is outdated.',
+	'SessionExpired'			=> 'Die Sitzung ist abgelaufen.',
+	'SessionTimeout'			=> 'Session terminated due to timeout.',
+	'SessionInactivity'			=> 'Die Sitzung wurde wegen Inaktivität beendet.',
+	'SessionUaChange'			=> 'Session terminated due to user agent change.',
+	'SessionTLSChange'			=> 'Session terminated due to TLS change.',
+	'SessionIPChange'			=> 'Session terminated due to IP change.',
 
 	// other
 	'Guest'						=> 'Gast',

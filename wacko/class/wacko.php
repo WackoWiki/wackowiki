@@ -402,7 +402,7 @@ class Wacko
 		return date($this->db->date_format . ' ' . $this->db->time_format_seconds, $local);
 	}
 
-	function get_time_formatted($text) // STS: rename to sql_time_formatted
+	function get_time_formatted($text, $relative = false) // STS: rename to sql_time_formatted
 	{
 		$local_time = $this->sql2localtime($text);
 
@@ -414,9 +414,7 @@ class Wacko
 		#setlocale(LC_TIME, 'ru_RU.UTF-8');
 		#return $this->try_utf_decode(strftime('%d. %B %Y' . ' ' . '%H.%M', $local_time));
 
-		$relative_time = 0;
-
-		if ($relative_time)
+		if ($relative)
 		{
 			return $this->get_time_interval($local_time);
 		}
@@ -3485,6 +3483,11 @@ class Wacko
 			$text = $this->add_spaces($tag);
 		}
 
+		if ($title)
+		{
+			$title = htmlentities($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+		}
+
 		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 		if ($track && $this->link_tracking())
 		{
@@ -5514,19 +5517,19 @@ class Wacko
 		}
 		else if ($message && @$this->sess->sticky_login)
 		{
-			// TODO make message readable
-			/*$tr = [
-				'replay' => 'replay',
-				'obsolete' => 'obsolete',
-				'reg_expire' => 'reg_expire',
-				'max_session' => 'max_session',
-				'max_idle' => 'max_idle', // You have been logged out due to inactivity.
-				'ua' => 'ua',
-				'tls' => 'tls',
-				'ip' => 'ip', // due your IP address changed.
-			];*/
+			//    Session terminated due to ...
+			$tr = [
+				'replay'		=> 'Replay',
+				'obsolete'		=> 'Obsolete',
+				'reg_expire'	=> 'Expired',
+				'max_session'	=> 'Timeout',
+				'max_idle'		=> 'Inactivity', // You have been logged out due to inactivity.
+				'ua'			=> 'UaChange',
+				'tls'			=> 'TlsChange',
+				'ip'			=> 'IpChange',
+			];
 
-			$this->set_message(Ut::perc_replace($this->_t('SessionTerminatedDue', SYSTEM_LANG), $message));
+			$this->set_message($this->_t('Session' . $tr[$message], SYSTEM_LANG));
 			$this->sess->sticky_login = 0;
 		}
 	}

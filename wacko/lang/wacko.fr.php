@@ -86,8 +86,16 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'Vous avez dépassé le nombre maximum de tentatives de connexions autorisées.<br>En plus de votre nom d&rsquo;utilisateur et de votre mot de passe, vous devez à présent saisir le code de confirmation visuelle que vous devriez voir ci-dessous.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Session terminated due to %1',
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+
+	'SessionReplay'				=> 'Session terminated due to replay.',
+	'SessionObsolete'			=> 'Session is outdated.',
+	'SessionExpired'			=> 'Session has expired.',
+	'SessionTimeout'			=> 'Session terminated due to timeout.',
+	'SessionInactivity'			=> 'Session terminated due to inactivity.',
+	'SessionUaChange'			=> 'Session terminated due to user agent change.',
+	'SessionTLSChange'			=> 'Session terminated due to TLS change.',
+	'SessionIPChange'			=> 'Session terminated due to IP change.',
 
 	// other
 	'Guest'						=> 'Invité',

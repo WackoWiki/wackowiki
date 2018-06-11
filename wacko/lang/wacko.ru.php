@@ -87,8 +87,16 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'Вы превысили максимально допустимое количество попыток входа.<br>Теперь, кроме имени и пароля, требуется ввести код подтверждения, показанный на картинке ниже.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Сессия прекращена по причине: %1',
 	'IPAddressChanged'			=> 'IP-адрес изменился на %1 (был %2)',
+
+	'SessionReplay'				=> 'Session terminated due to replay.',
+	'SessionObsolete'			=> 'Session is outdated.',
+	'SessionExpired'			=> 'Session has expired.',
+	'SessionTimeout'			=> 'Сессия прекращена по причине: timeout.',
+	'SessionInactivity'			=> 'Сессия прекращена по причине: inactivity.',
+	'SessionUaChange'			=> 'Сессия прекращена по причине: user agent change.',
+	'SessionTLSChange'			=> 'Сессия прекращена по причине: TLS change.',
+	'SessionIPChange'			=> 'Сессия прекращена по причине: IP change.',
 
 	// other
 	'Guest'						=> 'Гость',

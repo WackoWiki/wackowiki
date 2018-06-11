@@ -86,8 +86,16 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'Du har overskredet antallet af tilladte loginforsøg.<br>Oven i at skulle angive dit brugernavn og dit kodeord igen skal du nu bekræfte billedet du ser herunder.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Session opsagt på grund af %1',
 	'IPAddressChanged'			=> 'IP-adresse ændret til %1 (var %2)',
+
+	'SessionReplay'				=> 'Session terminated due to replay.',
+	'SessionObsolete'			=> 'Session is outdated.',
+	'SessionExpired'			=> 'Session has expired.',
+	'SessionTimeout'			=> 'Session terminated due to timeout.',
+	'SessionInactivity'			=> 'Session terminated due to inactivity.',
+	'SessionUaChange'			=> 'Session terminated due to user agent change.',
+	'SessionTLSChange'			=> 'Session terminated due to TLS change.',
+	'SessionIPChange'			=> 'Session terminated due to IP change.',
 
 	// other
 	'Guest'						=> 'Gæst',
