@@ -86,8 +86,16 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'Przekroczy³e¶/a¶ limit b³êdnych prób zalogowania.<br>Teraz, aby siê zalogowaæ, musisz dodatkowo przepisaæ kod z poni¿szego obrazka.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Session terminated due to %1',
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+
+	'SessionReplay'				=> 'Session terminated due to replay.',
+	'SessionObsolete'			=> 'Session is outdated.',
+	'SessionExpired'			=> 'Session has expired.',
+	'SessionTimeout'			=> 'Session terminated due to timeout.',
+	'SessionInactivity'			=> 'Session terminated due to inactivity.',
+	'SessionUaChange'			=> 'Session terminated due to user agent change.',
+	'SessionTLSChange'			=> 'Session terminated due to TLS change.',
+	'SessionIPChange'			=> 'Session terminated due to IP change.',
 
 	// other
 	'Guest'						=> 'Go¶æ',

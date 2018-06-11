@@ -86,8 +86,16 @@ $wacko_translation = [
 	'LoginAttemtsExceeded'		=> 'You exceeded the maximum allowed number of login attempts.<br>In addition to your username and password you now also have to solve the CAPTCHA below.',
 
 	// session notice
-	'SessionTerminatedDue'		=> 'Session terminated due to %1',
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+
+	'SessionReplay'				=> 'Session terminated due to replay.',
+	'SessionObsolete'			=> 'Session is outdated.',
+	'SessionExpired'			=> 'Session has expired.',
+	'SessionTimeout'			=> 'Session terminated due to timeout.',
+	'SessionInactivity'			=> 'Session terminated due to inactivity.',
+	'SessionUaChange'			=> 'Session terminated due to user agent change.',
+	'SessionTLSChange'			=> 'Session terminated due to TLS change.',
+	'SessionIPChange'			=> 'Session terminated due to IP change.',
 
 	// other
 	'Guest'						=> 'Vendég',
