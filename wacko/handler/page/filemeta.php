@@ -90,15 +90,15 @@ if (!array_key_exists($mode, $tabs))
 }
 
 // print tabs
-echo $meta_navigation($can_upload);
-echo '<h3>' . $this->_t('File') . ' &raquo; ' . $this->_t($tabs[$mode]) . '</h3>';
-echo $this->tab_menu($tabs, $mode, 'filemeta', ['file_id' => $file['file_id']], $mod_selector);
-echo "<br>\n";
+$tpl->navigation	= $meta_navigation($can_upload);
+$tpl->mode			= $this->_t($tabs[$mode]);
+$tpl->tabs			= $this->tab_menu($tabs, $mode, 'filemeta', ['file_id' => $file['file_id']], $mod_selector);
 
 // 1. SHOW FORMS
 if ($mode == 'remove' && isset($file))
 {
 	// 1.a REMOVE FILE CONFIRMATION
+	$tpl->enter('r_');
 
 	if (count($file) > 0)
 	{
@@ -116,70 +116,19 @@ if ($mode == 'remove' && isset($file))
 				$path = 'file:/';
 			}
 
-			echo $this->form_open('remove_file', ['page_method' => 'filemeta']);
-?>
-		<div class="fileinfo"><?php
-		echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
-?>
-		<table class="upload tbl_fixed">
-			<tr>
-				<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-				<td><?php echo $file['file_description']; ?></td>
-			</tr>
-			<tr>
-				<td colspan="2">&nbsp;</td>
-			</tr>
-			<tr>
-				<th scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
-				<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
-			</tr>
-			<tr>
-				<td colspan="2">&nbsp;</td>
-			</tr>
-			<tr>
-				<th scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
-				<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
-			</tr>
-			<tr>
-				<th scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
-				<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
-			</tr>
-			<tr>
-				<td colspan="2">&nbsp;</td>
-			</tr>
-			<tr>
-				<th scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
-				<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
-			</tr>
-			<tr>
-				<th scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
-				<td><?php echo $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]); ?></td>
-			</tr>
-		</table>
+			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
+			$tpl->file		= $file; // array -> [ ' file.field ' ]
+			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
+			$tpl->user		= $this->user_link($file['user_name'], '', true, false);
 
-		<?php
-		$this->show_message($this->_t('FileRemoveConfirm'), 'warning');
-		?>
+			$tpl->location	= $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal');
+			$tpl->fileusage	= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
+			$tpl->notice	= $this->show_message($this->_t('FileRemoveConfirm'), 'warning', false);
 
-		<br>
-		<input type="hidden" name="remove" value="">
-		<input type="hidden" name="file_id" value="<?php echo $file['file_id'];?>">
-		<?php
-		if ($this->db->store_deleted_pages && $this->is_admin())
-		{
-			echo '<input type="checkbox" id="dontkeep" name="dontkeep">';
-			echo '<label for="dontkeep">' . $this->_t('RemoveDontKeepFile') . '</label><br>';
-			echo '<br>';
-		}
-		?>
-		<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('RemoveButton'); ?>">
-		&nbsp;
-		<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n"," ",$this->_t('EditCancelButton')); ?>"></a>
-		<br>
-		<br>
-		</div>
-<?php
-			echo $this->form_close();
+			if ($this->db->store_deleted_pages && $this->is_admin())
+			{
+				$tpl->dontkeep = true;
+			}
 		}
 		else
 		{
@@ -188,15 +137,17 @@ if ($mode == 'remove' && isset($file))
 	}
 	else
 	{
-		$message = $this->_t('FileNotFound');
-		$this->show_message($message, 'info');
+		#$this->show_message($this->_t('FileNotFound'), 'info');
 	}
+
+	$tpl->leave();
 
 	return true;
 }
 else if ($mode == 'label' && isset($file))
 {
 	// 1.b LABEL FILE
+	$tpl->enter('l_');
 
 	if (count($file) > 0)
 	{
@@ -217,20 +168,17 @@ else if ($mode == 'label' && isset($file))
 			// !!!!! patch link to not show pictures when not needed
 			$path2 = str_replace('file:/', '_file:/', $path);
 
-			echo '<h4>' . $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
-
-			echo $this->form_open('store_categories', ['page_method' => 'filemeta']);
-			echo $this->show_category_form($file['file_id'], OBJECT_FILE, $file['file_lang'], false);
-			echo '<input type="hidden" name="label" value="">';
-			echo '<input type="hidden" name="file_id" value="' . $file['file_id'] . '">';
-			echo $this->form_close();
+			$tpl->link		= $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name']));
+			$tpl->category	= $this->show_category_form($file['file_id'], OBJECT_FILE, $file['file_lang'], false);
+			$tpl->fileid	= $file['file_id'];
 		}
 	}
 	else
 	{
-		$message = $this->_t('FileNotFound');
-		$this->show_message($message, 'info');
+		#$this->show_message($this->_t('FileNotFound'), 'info');
 	}
+
+	$tpl->leave();
 }
 else if (($mode == 'edit' || $mode == 'show') && isset($file))
 {
@@ -250,180 +198,83 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 		if ($mode == 'show')
 		{
 			// 1.c SHOW FILE PROPERTIES
+			$tpl->enter('s_');
 
 			if ($this->has_access('read', $file['page_id']))
 			{
-				echo '<div class="fileinfo">';
-
-				echo '<h4>' . $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
+				$tpl->link			= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
 
 				// show image
 				if ($file['picture_w'] || $file['file_ext'] == 'svg')
 				{
-					echo '<span class="show-image"><a href="' . $url . '">' . $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false) . '</a></span>';
+					$tpl->i_href		= $url;
+					$tpl->i_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false);
 				}
-?>
-				<table class="upload tbl_fixed">
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileSyntax'); ?>:</th>
-						<td><?php echo '<code>' . $path . $file['file_name'] . '</code>'; ?></td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-						<td><strong><?php echo $format_desc($file['file_description'], $file['file_lang']); ?></strong></td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
-						<td><?php echo $format_desc($file['caption'], $file['file_lang']); ?></td>
-					</tr>
-					<tr>
-						<td colspan="2">&nbsp;</td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileSize'); ?>:</th>
-						<td><?php echo '' . $this->binary_multiples($file['file_size'], false, true, true) . ''; ?></td>
-					</tr>
-<?php
-					// image dimension
-					if ($file['picture_w'])
-					{ ?>
-						<tr>
-							<th scope="row"><?php echo $this->_t('FileDimension'); ?>:</th>
-							<td><?php echo $file['picture_w'] . ' &times; ' . $file['picture_h'] . 'px'; ?></td>
-						</tr>
-<?php
-					} ?>
-					<tr>
-						<th scope="row"><?php echo $this->_t('MimeType'); ?>:</th>
-						<td><?php echo '' . $file['mime_type'] . ''; ?></td>
-					</tr>
-					<tr>
-						<td colspan="2">&nbsp;</td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('UploadBy'); ?>:</th>
-						<td><?php echo $this->user_link($file['user_name'], '', true, false); ?></td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileAdded'); ?>:</th>
-						<td><?php echo $this->get_time_formatted($file['uploaded_dt']); ?></td>
-					</tr>
-					<tr>
-						<td colspan="2">&nbsp;</td>
-					</tr>
-					<?php
-					if ($file['license_id'])
-					{
-					?>
-						<tr>
-							<th scope="row"><?php echo $this->_t('License'); ?>:</th>
-							<td><?php echo $this->action('license', ['license_id' => $file['license_id'], 'icon' => 1]); ?></td>
-						</tr>
-						<tr>
-							<td colspan="2">&nbsp;</td>
-						</tr>
-					<?php
-					}
-					?>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileAttachedTo'); ?>:</th>
-						<td><?php echo $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal'); ?></td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileUsage'); ?>:</th>
-						<td><?php echo $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]); ?></td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('Categories'); ?>:</th>
-						<td><?php echo $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']); ?></td>
-					</tr>
-				</table>
 
-			<br>
+				$tpl->syntax		= $path . $file['file_name'];
+				$tpl->desc			= $format_desc($file['file_description'], $file['file_lang']);
+				$tpl->caption		= $format_desc($file['caption'], $file['file_lang']);
+				$tpl->size			= $this->binary_multiples($file['file_size'], false, true, true);
 
-		<?php
+				// image dimension
+				if ($file['picture_w'])
+				{
+					$tpl->p_width	= $file['picture_w'];
+					$tpl->p_height	= $file['picture_h'];
+				}
 
-			echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '"></a>' . "\n";?>
-				<br>
-				<br>
-				</div>
-<?php
+				$tpl->mime			= $file['mime_type'];
+				$tpl->user			= $this->user_link($file['user_name'], '', true, false);
+				$tpl->time			= $this->get_time_formatted($file['uploaded_dt']);
+
+				if ($file['license_id'])
+				{
+					$tpl->l_license	= $this->action('license', ['license_id' => $file['license_id'], 'icon' => 1]);
+				}
+
+				$tpl->location		= $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal');
+				$tpl->fileusage		= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
+				$tpl->categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
 			}
 
+			$tpl->leave();
 		}
 		else if ($mode == 'edit')
 		{
+			// 1.d EDIT FILE PROPERTIES
+			$tpl->enter('e_');
+
 			if (   $this->is_admin()
 				|| ($file['page_id']
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-				// 1.d EDIT FILE PROPERTIES
-
 				// !!!!! patch link to not show pictures when not needed
 				$path2 = str_replace('file:/', '_file:/', $path);
 
-				echo $this->form_open('upload_file', ['page_method' => 'filemeta']);
-?>
-				<div class="fileinfo">
-				<?php
-				echo '<h4>' . $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
-				?>
-				<table class="upload">
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileDesc'); ?>:</th>
-						<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="<?php echo Ut::html($file['file_description']); ?>"></td>
-					</tr>
-					<tr>
-						<th scope="row"><?php echo $this->_t('FileCaption'); ?>:</th>
-						<td><textarea id="file_caption" name="caption" rows="6" cols="70"><?php echo Ut::html($file['caption']); ?></textarea></td>
-					</tr>
-					<tr>
-						<th scope="row">
-							<label for="license"><?php echo $this->_t('License');?></label>
-						</th>
-						<td>
-						<?php
-							$file_license = $file['license_id'] ?? 0;
-							echo $this->show_select_license('file_license', $file_license, false);
-						?>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">
-							<label for="file_lang"><?php echo $this->_t('YourLanguage');?></label>
-						</th>
-						<td>
-						<?php
-							$file_lang = $file['file_lang'] ?: $this->db->language;
-							echo $this->show_select_lang('file_lang', $file_lang, false);
-						?>
-						</td>
-					</tr>
-				</table>
-				<br>
+				$tpl->link			= $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
+				$tpl->desc			= $file['file_description'];
+				$tpl->caption		= Ut::html($file['caption']); // -> [ ' caption | pre ' ]
 
-				<input type="hidden" name="edit" value="<?php #echo $_GET['edit']; ?>">
-				<input type="hidden" name="file_id" value="<?php echo (int) $_GET['file_id']?>">
-				<input type="submit" class="OkBtn" name="submit" value="<?php echo $this->_t('EditStoreButton'); ?>">
-				&nbsp;
-				<a href="<?php echo $this->href();?>" class="btn_link"><input type="button" class="CancelBtn" value="<?php echo str_replace("\n", " ", $this->_t('EditCancelButton')); ?>"></a>
-				<br>
-				<br>
-				</div>
-<?php
-				echo $this->form_close();
+				$file_license	= $file['license_id'] ?? 0;
+				$tpl->license	= $this->show_select_license('file_license', $file_license, false);
+
+				$file_lang		= $file['file_lang'] ?: $this->db->language;
+				$tpl->lang		= $this->show_select_lang('file_lang', $file_lang, false);
+
+				$tpl->fileid	= (int) $_GET['file_id'];
 			}
 			else
 			{
 				$this->set_message($this->_t('FileEditDenied'));
 			}
 		}
+
+			$tpl->leave();
 	}
 	else
 	{
-		$message = $this->_t('FileNotFound');
-		$this->show_message($message, 'info');
+		$this->show_message($this->_t('FileNotFound'), 'info');
 	}
 
 	return true;
@@ -508,12 +359,7 @@ else
 					"WHERE file_id = " . (int) $file['file_id'] . " " .
 					"LIMIT 1");
 
-				$message .= $this->_t('FileEditedMeta') . "<br>";
-
-				if ($message)
-				{
-					$this->set_message($message, 'success');
-				}
+				$this->set_message($this->_t('FileEditedMeta'), 'success');
 
 				// log event
 				$this->log(4, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
@@ -532,8 +378,12 @@ else
 	}
 	else
 	{
+		$this->set_message($this->_t('FileNotFound'));
+
 		// 3. show attachments for current page
-		if ($this->has_access('read'))
+		if ($this->has_access('read')
+			&& ((	$this->db->attachments_handler == 2 && $this->get_user())
+				||	$this->db->attachments_handler == 1))
 		{
 			$this->http->redirect($this->href('attachments'));
 		}

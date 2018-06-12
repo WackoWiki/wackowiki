@@ -41,6 +41,8 @@ if ($this->has_access('read'))
 	$sort_comment = null;
 	$sort_comment = $this->get_user_setting('sorting_comments');
 
+	$tpl->enter('cp_s_');
+
 	if (!isset($sort_comment))
 	{
 		$sort_comment	= $this->db->sorting_comments;
@@ -92,11 +94,11 @@ if ($this->has_access('read'))
 			$this->set_user_setting('noid_protect', false);
 		}
 
-		$tpl->cp_s_pagination_text = $pagination['text'];
+		$tpl->pagination_text = $pagination['text'];
 
-		$tpl->cp_s_href		= $this->href('', '', ['show_comments' => 0]);
-		$tpl->cp_s_title	= $this->_t('HideComments');
-		$tpl->cp_s_text		= $this->_t('Comments');
+		$tpl->href		= $this->href('', '', ['show_comments' => 0]);
+		$tpl->title		= $this->_t('HideComments');
+		$tpl->text		= $this->_t('Comments');
 
 		// display comments themselves
 		if ($comments)
@@ -104,7 +106,7 @@ if ($this->has_access('read'))
 			// TODO: evaluate -> option / array to handle nested comments
 			// display relation as @link to an extra handler which filters / shows only the current tree
 
-			$tpl->enter('cp_s_ol_');
+			$tpl->enter('ol_');
 
 			foreach ($comments as $comment)
 			{
@@ -193,7 +195,7 @@ if ($this->has_access('read'))
 				return;
 			}
 
-			$tpl->enter('cp_s_f_');
+			$tpl->enter('f_');
 
 			$parent_id = (int) ($_GET['parent_id'] ?? 0);
 
@@ -287,9 +289,9 @@ if ($this->has_access('read'))
 		// show link to show comment only if there is one or/and user has the right to add a new one
 		if (!empty($show_comments))
 		{
-			$tpl->cp_s_href		= $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']);
-			$tpl->cp_s_title	= $this->_t('ShowComments');
-			$tpl->cp_s_text		= $show_comments;
+			$tpl->href		= $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']);
+			$tpl->title		= $this->_t('ShowComments');
+			$tpl->text		= $show_comments;
 		}
 		else
 		{
@@ -297,6 +299,8 @@ if ($this->has_access('read'))
 			// e.g. 'Log in or create an account to post a comment.'
 		}
 	}
+
+	$tpl->leave();
 }
 
 ?>
