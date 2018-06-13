@@ -67,8 +67,8 @@
 	[= l _ =
 		<h4>[ ' link ' ]</h4>
 		
-		<form action="[ ' href: filemeta ' ]" method="post" name="store_categories">
-			[ ' csrf: store_categories ' ]
+		<form action="[ ' href: filemeta ' ]" method="post" name="assign_categories">
+			[ ' csrf: assign_categories ' ]
 			[ ' category ' ]
 			<input type="hidden" name="label" value="">
 			<input type="hidden" name="file_id" value="[ ' fileid ' ]">
@@ -103,7 +103,7 @@
 				[= p _ =
 					<tr>
 						<th scope="row">[ ' _t: FileDimension ' ]:</th>
-						<td>[ ' width | number 0 , . ' ' ] &times; [ ' height | number 0 , . ' ' ]px</td>
+						<td>[ ' width | number 0 , . ' ' ] &times; [ ' height | number 0 , . ' ' ] px</td>
 					</tr>
 				=]
 				<tr>
