@@ -139,6 +139,8 @@ $wacko_config_defaults = [
 	'users_page'					=> 'Users',
 	'category_page'					=> 'Category',
 	'tag_page'						=> 'Tag',
+
+	'help_page'						=> 'Help',
 	'terms_page'					=> 'Terms',
 	'privacy_page'					=> 'Privacy',
 
@@ -147,7 +149,6 @@ $wacko_config_defaults = [
 	'allow_license_per_page'		=> 0,
 
 	// default pages
-	'help_page'						=> '',
 	'sandbox'						=> '',
 	'comments_page'					=> '',
 	'changes_page'					=> '',

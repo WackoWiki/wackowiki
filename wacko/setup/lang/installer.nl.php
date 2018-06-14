@@ -20,6 +20,7 @@ $lang = [
 	'groups_page'		=> 'Groups',
 	'users_page'		=> 'Users',
 
+	'help_page'			=> 'Hulp',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',
 
