@@ -69,6 +69,9 @@ else
 			&& ($nomark != 1)
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
+			$tpl->mark		= true;
+			$tpl->emark		= true;
+
 			// show page link
 			$tpl->nav_link = $this->link('/' . $inc_page['tag']);
 

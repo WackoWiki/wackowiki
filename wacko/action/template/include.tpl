@@ -3,11 +3,17 @@
 	[= none _ =
 		<em>[ ' _t: SourcePageDoesntExist ' ] ([ ' link ' ])</em>
 	=]
-	<section class="include-page">
+	[= mark =
+		[ ' nonstatic ' ]
+		<section class="include-page">
+	=]
 		[ ' nav ' ]
 		[ ' data | pre ' ]
 		[ ' nav ' ]
-	</section>
+	[= emark _ =
+		[ ' nonstatic ' ]
+		</section>
+	=]
 	<!--/include-->
 
 [ = nav = ]
