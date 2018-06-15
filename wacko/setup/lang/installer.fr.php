@@ -75,7 +75,7 @@ $lang = [
    Site Config Page
 */
 'site-config' => 'Configuration du site',
-'SiteName' => 'Nom WackoWiki',
+'SiteName' => 'Nom Wiki',
 'SiteNameDesc' => 'Choisissez le nom de votre site Wiki.',
 'HomePage' => 'Page d&rsquo;accueil',
 'HomePageDesc' => 'Choissez le nom de votre page d&rsquo;accueil. Ce doit être un <a href="https://wackowiki.org/doc/Doc/Francophone/NomWiki" title="Voir l&rsquo;aide" target="_blank">NomWiki</a>.',
@@ -85,7 +85,7 @@ $lang = [
 'AllowedLang' => 'Allowed Languages',
 'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Nom de l&rsquo;administrateur',
-'AdminDesc' => 'Indiquez le nom de l&rsquo;administrateur, ce doit être un <a href="https://wackowiki.org/doc/Doc/Francophone/NomWiki" title="Voir l&rsquo;aide" target="_blank">Nom Wiki</a> (e.g. WikiAdmin).',
+'AdminDesc' => 'Indiquez le nom de l&rsquo;administrateur, ce doit être un <a href="https://wackowiki.org/doc/Doc/Francophone/NomWiki" title="Voir l&rsquo;aide" target="_blank">Nom Wiki</a> (e.g. <code>WikiAdmin</code>).',
 'Password' => 'Mot de passe de l&rsquo;administrateur',
 'PasswordDesc' => 'Choisissez un mot de passe d&rsquo;au moins %1 caractères pour l&rsquo;administrateur.',
 'Password2' => 'Répétez le mot de passe :',
