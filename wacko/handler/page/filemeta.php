@@ -229,7 +229,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 				if ($file['license_id'])
 				{
-					$tpl->l_license	= $this->action('license', ['license_id' => $file['license_id'], 'icon' => 1]);
+					$tpl->l_license	= $this->action('license', ['license_id' => $file['license_id'], 'icon' => 1, 'intro' => 0]);
 				}
 
 				$tpl->location		= $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal');
