@@ -1,6 +1,8 @@
 [ === main === ]
 	[= l =
-		[ ' _t: DistributedUnder ' ]<br>
+		[= intro =
+			[ ' _t: DistributedUnder ' ]<br>
+		=]
 		[= a =
 			<a rel="license" href="[ ' href ' ]">
 		=]

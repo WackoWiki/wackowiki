@@ -21,12 +21,13 @@ print page or file license.
 				- CR				(All Rights Reserved)
 	license_id	= assigned db value
 	icon		= show license icons
+	intro		= show intro text
 
 	https://creativecommons.org/choose/
 	https://en.wikipedia.org/wiki/Creative_Commons_license
 	https://creativecommons.org/about/downloads - icons
 */
-
+if (!isset($intro))			$intro		= 1;
 if (!isset($license))		$license	= '';
 if (!isset($icon))			$icon		= 0;
 #if (!isset($license_id))	$license_id	= '';
@@ -59,6 +60,13 @@ if ($license || $license_id)
 	$licenses		= $this->_t('LicenseIds');
 	$text			= $this->_t('LicenseArray');
 
+	$tpl->enter('l_');
+
+	if ($intro)
+	{
+		$tpl->intro		= true;
+	}
+
 	if (empty($license_id))
 	{
 		$license_id	= $abbreviation[$license];
@@ -68,16 +76,16 @@ if ($license || $license_id)
 	{
 		if (!empty($licenses[$license_id][1]))
 		{
-			$tpl->l_a_href	= $licenses[$license_id][1];
-			$tpl->l_ea		= true;
+			$tpl->a_href	= $licenses[$license_id][1];
+			$tpl->ea		= true;
 		}
 
 		if ($icon)
 		{
-			$tpl->l_i_abbr	= $licenses[$license_id][0];
+			$tpl->i_abbr	= $licenses[$license_id][0];
 		}
 
-		$tpl->l_text	= $text[$license_id];
+		$tpl->text	= $text[$license_id];
 
 		// TODO: rel="license"
 		#$this->link($licenses[$license][1], '', $text[$license]) . '<br>' .
@@ -85,7 +93,9 @@ if ($license || $license_id)
 	else
 	{
 		// free-form text
-		$tpl->l_text	= $this->format($this->format($license, 'wacko'), 'post_wacko');
+		$tpl->text	= $this->format($this->format($license, 'wacko'), 'post_wacko');
 	}
+
+	$tpl->leave();
 }
 

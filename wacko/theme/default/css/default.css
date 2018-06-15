@@ -598,7 +598,7 @@ ol#comments {
 	font-size: 11px;
 	color: #AAAAAA;
 	text-align: right;
-	padding: 0 20px;
+	padding: 5px 20px 0;
 	float: left;
 	width: 100%;
 }
