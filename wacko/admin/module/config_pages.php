@@ -161,7 +161,7 @@ function admin_config_pages(&$engine, &$module)
 					<small><?php echo $engine->_t('EnableLicenseInfo');?></small>
 				</td>
 				<td>
-					<input type="radio" id="license_per_page_on" name="enable_license" value="1"<?php echo ($engine->db->enable_license == 1 ? ' checked' : '');?>>
+					<input type="radio" id="enable_license_on" name="enable_license" value="1"<?php echo ($engine->db->enable_license == 1 ? ' checked' : '');?>>
 					<label for="enable_license_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="enable_license_off" name="enable_license" value="0"<?php echo ($engine->db->enable_license == 0 ? ' checked' : '');?>>
 					<label for="enable_license_off"><?php echo $engine->_t('Off');?></label>
