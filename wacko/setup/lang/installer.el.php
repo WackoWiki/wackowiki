@@ -76,7 +76,7 @@ $lang = [
    Site Config Page
 */
 'site-config' => 'Παραμετροποίηση Site',
-'SiteName' => 'Όνομα του WackoWiki',
+'SiteName' => 'Όνομα του Wiki',
 'SiteNameDesc' => 'Παρακαλώ εισάγεται ένα όνομα για το Wiki site σας, αυτό πρέπει να είναι
 της μορφής <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePage' => 'Αρχική Σελίδα',
@@ -87,14 +87,14 @@ $lang = [
 'AllowedLang' => 'Allowed Languages',
 'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin' => 'Όνομα Διαχειριστή',
-'AdminDesc' => 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. WikiAdmin).',
+'AdminDesc' => 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'Password' => 'Συνθηματικό Διαχειριστή',
 'PasswordDesc' => 'Επέλεξε ένα συνθηματικό για τον διαχειριστή με τουλάχιστον %1 χαρακτήρες.',
 'Password2' => 'Επανέλαβε το συνθηματικό:',
 'Mail' => 'Ηλεκτρονική Διεύθυνση Διαχειριστή',
 'MailDesc' => 'Εισήγαγε την ηλεκτρονική διεύθυνση του διαχειριστή.',
 'Base' => 'Βασικό URL',
-'BaseDesc' => 'Το βασικό URL των WackoWiki sites σας. Τα ονόματα των σελίδων θα εξαρτώνται από αυτό, ώστε όταν θα χρησιμοποιείτε το mod_rewrite η διεύθυνση θα τελειώνει με μία κάθετο π.χ.</p><ul><li><strong><em>http://example.com/</em></strong></li><li><strong><em>http://example.com/wiki/</em></strong></li></ul>',
+'BaseDesc' => 'Το βασικό URL των WackoWiki sites σας. Τα ονόματα των σελίδων θα εξαρτώνται από αυτό, ώστε όταν θα χρησιμοποιείτε το mod_rewrite η διεύθυνση θα τελειώνει με μία κάθετο π.χ.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
 'Rewrite' => 'Κατάσταση Επανεγγραφής',
 'RewriteDesc' => 'Η κατάσταση επανεγγραφής θα ενεργοποιηθεί εάν χρησιμοποιείται το WackoWiki με την επανεγγραφή URL.',
 'Enabled' => 'Ενεργοποίηση:',
@@ -132,7 +132,7 @@ $lang = [
 'DBEngine' => 'Engine',
 'DBEngineDesc' => 'The database engine you want to use. You must choose MyISAM engine if you do not have at least MariaDB 10 or MySql 5.6 (or greater) and InnoDB support available.',
 'DBHost' => 'Διακομιστής',
-'DBHostDesc' => 'Το όνομα του διακομιστή βάσεων δεδομένων που τρέχει σε αυτό. Συνήθως είναι "127.0.0.1" ή "localhost" (π.χ., το ίδιο όνομα που είναι το WackoWiki site σας).',
+'DBHostDesc' => 'Το όνομα του διακομιστή βάσεων δεδομένων που τρέχει σε αυτό. Συνήθως είναι <code>127.0.0.1</code> ή <code>localhost</code> (π.χ., το ίδιο όνομα που είναι το WackoWiki site σας).',
 'DBPort' => 'Πόρτα (Προαιρετικό)',
 'DBPortDesc' => 'Ο αριθμός της πόρτας του διακομιστή βάσεων δεδομένων σας αν είναι προσβάσιμος σε αυτή, αφήστε το κενό εάν χρησιμοποιείτε
 τον προκαθορισμένο αριθμό πόρτας.',
