@@ -6,13 +6,13 @@
 		[= a =
 			<a rel="license" href="[ ' href ' ]">
 		=]
-			[= i =
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' text ' ]" title="[ ' text ' ]" class="license-[ ' abbr ' ]">
-			=]
-			[ ' // TODO: add margin-left: 5px; to span ' ]
-			<span>[ ' text ' ]</span>
+			[ '' i icon '' ]
+			<span title="[ ' text ' ]" class="license">[ ' meta ' ]</span>
 		[= ea =
 			[ ' nonstatic ' ]
 			</a>
 		=]
 	=]
+
+[ == icon == ]
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' abbr ' ]" title="[ ' text ' ]" class="license-[ ' abbr ' ]">

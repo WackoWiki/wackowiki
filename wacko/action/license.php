@@ -42,6 +42,18 @@ if (empty($license) && !isset($license_id) && $this->db->enable_license)
 
 if ($license || $license_id)
 {
+	$licenses = [
+		'1'		=> ['CC-BY-ND',		2,	'https://creativecommons.org/licenses/by-nd/4.0/'],
+		'2'		=> ['CC-BY-NC-SA',	2,	'https://creativecommons.org/licenses/by-nc-sa/4.0/'],
+		'3'		=> ['CC-BY-NC-ND',	2,	'https://creativecommons.org/licenses/by-nc-nd/4.0/'],
+		'4'		=> ['CC-BY-SA',		2,	'https://creativecommons.org/licenses/by-sa/4.0/'],
+		'5'		=> ['CC-BY-NC',		2,	'https://creativecommons.org/licenses/by-nc/4.0/'],
+		'6'		=> ['CC-BY',		2,	'https://creativecommons.org/licenses/by/4.0/'],
+		'7'		=> ['CC-ZERO',		1,	'https://creativecommons.org/publicdomain/zero/1.0/'],
+		'8'		=> ['GNU-FDL',		2,	'https://www.gnu.org/licenses/fdl.html'],
+		'9'		=> ['PD',			1,	'https://creativecommons.org/publicdomain/mark/1.0/'],
+		'10'	=> ['CR',			3,	''],
+	];
 	// license names and links to texts
 	$abbreviation = [
 		'CC-BY-ND'		=> 1,
@@ -57,8 +69,8 @@ if ($license || $license_id)
 	];
 	// TODO:	wacko.all.php ($wacko_all_resource[]) is not available,
 	//			when page_lang != user_lang, why?
-	$licenses		= $this->_t('LicenseIds');
-	$text			= $this->_t('LicenseArray');
+	$meta		= $this->_t('LicenseMeta');
+	$text		= $this->_t('LicenseArray');
 
 	$tpl->enter('l_');
 
@@ -74,18 +86,20 @@ if ($license || $license_id)
 
 	if (isset($licenses[$license_id]))
 	{
-		if (!empty($licenses[$license_id][1]))
+		if (!empty($licenses[$license_id][2]))
 		{
-			$tpl->a_href	= $licenses[$license_id][1];
+			$tpl->a_href	= $licenses[$license_id][2];
 			$tpl->ea		= true;
 		}
 
 		if ($icon)
 		{
 			$tpl->i_abbr	= $licenses[$license_id][0];
+			$tpl->i_text	= $text[$license_id];
 		}
 
 		$tpl->text	= $text[$license_id];
+		$tpl->meta	= $meta[$licenses[$license_id][1]];
 
 		// TODO: rel="license"
 		#$this->link($licenses[$license][1], '', $text[$license]) . '<br>' .
