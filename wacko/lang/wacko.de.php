@@ -911,6 +911,11 @@ $wacko_translation = [
 		'9'		=> 'gemeinfrei',
 		'10'	=> 'Alle Rechte vorbehalten',
 	],
+	'LicenseMeta'				=> [
+		'1'		=> 'Öffentliche Domäne',
+		'2'		=> 'Bestimmte Rechte vorbehalten',
+		'3'		=> 'Alle Rechte vorbehalten',
+	],
 
 	// Cache
 	'ClearCache'				=> 'Zwischenspeicher leeren',

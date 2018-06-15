@@ -910,6 +910,11 @@ $wacko_translation = [
 		'9'		=> 'Public Domain / Free Use',
 		'10'	=> 'All Rights Reserved',
 	],
+	'LicenseMeta'				=> [
+		'1'		=> 'Domínio público',
+		'2'		=> 'Alguns direitos reservados',
+		'3'		=> 'Todos os direitos reservados',
+	],
 
 	// Cache
 	'ClearCache'				=> 'Clear cache',
