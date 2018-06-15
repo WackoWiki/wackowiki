@@ -378,8 +378,8 @@ $ap_translation = [
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
 	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, könnte zu einer hohen Auslastung der Datenbank führen.',
 
-	'AttachmentHandler'			=> 'Dateianhänge aktivieren',
-	'AttachmentHandlerInfo'		=> 'Aktivieren von Dateianhängen für Gäste, registrierte Benutzer oder deaktivieren auf der gesamten Website.',
+	'AttachmentHandler'			=> 'Datei-Handler aktivieren',
+	'AttachmentHandlerInfo'		=> 'Erlaubt das Anzeigen des Datei-Handlers für Gäste oder registrierte Benutzer.',
 	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
 	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
 

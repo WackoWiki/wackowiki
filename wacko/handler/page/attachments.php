@@ -5,12 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$is_global		= '';
-$is_image		= '';
-$message		= '';
-$error			= '';
-$can_upload		= $this->can_upload();
-
 $this->ensure_page(true);
 
 
@@ -20,13 +14,6 @@ if ($this->has_access('read')
 			||	$this->db->attachments_handler == 1)
 )
 {
-	echo '<ul class="menu">' .
-			#'<li class="active">' . $this->_t('File') . '</li>' .
-			($can_upload
-				? '<li><a href="' . $this->href('upload', '', '') . '">' . $this->_t('UploadFile') . '</a></li>'
-				: '') .
-		"</ul>\n";
-
 	// tab navigation
 	$mod_selector	= 'files';
 	$tabs			= [
@@ -42,28 +29,30 @@ if ($this->has_access('read')
 		$mode = '';
 	}
 
-	// print tabs
-	echo '<h3>' . $this->_t('Attachments') . ' &raquo; ' . $this->_t($tabs[$mode]) . '</h3>';
-	echo $this->tab_menu($tabs, $mode, 'attachments', [], $mod_selector);
-	echo "<br><br>\n";
+	$tpl->enter('a_');
+
+	$tpl->upload	= $this->can_upload();
+	$tpl->header	= $this->_t($tabs[$mode]);
+	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', [], $mod_selector);
 
 	if ($mode == 'global')
 	{
-		echo $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'global']]) . '<br>';
+		$tpl->files	= $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'global']]);
 	}
 	else if ($mode == 'all')
 	{
-		echo $this->action('files', ['all' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'all']]) . '<br>';
+		$tpl->files	= $this->action('files', ['all' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'all']]);
 	}
 	else if ($mode == 'linked')
 	{
-		echo $this->action('files', ['linked' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'linked']]) . '<br>';
+		$tpl->files	= $this->action('files', ['linked' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'linked']]);
 	}
 	else
 	{
-		echo $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1]) . '<br>';
+		// to page
+		$tpl->files	= $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1]);
 	}
 
-	echo '<a href="' . $this->href() . '" class="btn_link"><input type="button" value="' . $this->_t('CancelDifferencesButton') . '"></a>' . "\n";
+	$tpl->leave();
 }
 

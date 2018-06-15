@@ -199,7 +199,8 @@ else
 <?php echo $separator; ?>
 	<label class="label_top" for="database_port"><?php echo $lang['DBPort'];?></label>
 	<p class="notop"><?php echo $lang['DBPortDesc']; ?></p>
-	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input"> <br>
+	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input">
+	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="database_database"><?php echo $lang['DB'];?></label>
 	<p class="notop"><?php echo $lang['DBDesc']; ?></p>

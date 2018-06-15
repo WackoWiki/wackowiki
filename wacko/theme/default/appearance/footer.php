@@ -76,24 +76,25 @@ if ($this->db->license)
 {
 	#$tpl->license_text = $this->_t('License')[$this->db->license];
 	#$tpl->license_text = $this->action('authors');
+	$tpl->license_text = $this->action('license', ['intro' => 0]);
 }
 
 // comment this out for not showing help link at the bottom of your pages
 if ($this->db->help_page)
 {
-	$tpl->help_url = $this->href('', $this->db->help_page);
+	$tpl->help_href = $this->href('', $this->db->help_page);
 }
 
 // comment this out for not showing privacy link at the bottom of your pages
 if ($this->db->privacy_page)
 {
-	$tpl->privacy_url = $this->href('', $this->db->privacy_page);
+	$tpl->privacy_href = $this->href('', $this->db->privacy_page);
 }
 
 // comment this out for not showing website tos link at the bottom of your pages
 if ($this->db->terms_page)
 {
-	$tpl->terms_url = $this->href('', $this->db->terms_page);
+	$tpl->terms_href = $this->href('', $this->db->terms_page);
 }
 
 // load scripts
