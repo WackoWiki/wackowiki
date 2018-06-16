@@ -76,24 +76,19 @@ if (list ($pages, $pagination) = $load_orphaned_pages($root, $max))
 		// cache acls
 		$this->preload_acl($page_ids);
 
-		$this->print_pagination($pagination);
-
-		echo '<ol start="' . ($pagination['offset'] + 1) . '">' . "\n";
+		$tpl->pagination_text	= $pagination['text'];
+		$tpl->offset			= ($pagination['offset'] + 1);
 
 		foreach ($pages as $page)
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				echo '<li>' . $this->link('/' . $page['tag'], '', '', '', 0) . "</li>\n";
+				$tpl->l_link = $this->link('/' . $page['tag'], '', '', '', 0);
 			}
 		}
-
-		echo "</ol>\n";
-
-		$this->print_pagination($pagination);
 	}
 }
 else
 {
-	echo $this->show_message($this->_t('NoOrphaned'));
+	$tpl->none = true;
 }
