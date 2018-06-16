@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('IN_WACKO'))
 {
 	exit;
@@ -7,17 +6,10 @@ if (!defined('IN_WACKO'))
 
 header('Content-type: text/xml');
 
-echo ADD_NO_DIV;
-echo "<?xml version=\"1.0\" encoding=\"" . $this->get_charset() . "\"?>\n";
-echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
-echo "\t<channel>\n";
-echo "\t\t<title>" . $this->tag . "</title>\n";
-echo "\t\t<link>" . $this->db->base_url . "</link>\n";
-echo "\t\t<description>" . $this->_t('ExportClusterXML') . $this->db->site_name . "/" . $this->tag . "</description>\n";
-echo "\t\t<lastBuildDate>" . date('r') . "</lastBuildDate>\n";
-echo "\t\t<language></language>\n";//!!!
-#echo "<docs>http://www.rssboard.org/rss-specification</docs>\n";
-#echo "\t\t<generator>WackoWiki " . WACKO_VERSION . "</generator>\n";//!!!
+$tpl->charset	= $this->get_charset();
+$tpl->tag		= $this->tag;
+$tpl->date		= date('r');
+$tpl->lang		= $this->page_lang;
 
 if ($this->has_access('read'))
 {
@@ -29,6 +21,8 @@ if ($this->has_access('read'))
 		"WHERE (supertag = " . $this->db->q($this->supertag) . " " .
 		" OR supertag LIKE " . $this->db->q($this->supertag . '/%') . ")" .
 		" AND comment_on_id = 0");
+
+	$tpl->enter('p_');
 
 	foreach ($pages as $num => $page)
 	{
@@ -55,24 +49,18 @@ if ($this->has_access('read'))
 			}
 		}
 
-		echo "\t\t<item>\n";
-		echo "\t\t\t<guid>" . rtrim($tag, '/') . "</guid>\n";
-		echo "\t\t\t<title>" . Ut::html($page['title']) . "</title>\n";
-		echo "\t\t\t<link>" . $this->db->base_url . $page['supertag'] . "</link>\n";
-		echo "\t\t\t<description><![CDATA[" . str_replace(']]>', ']]&gt;', $page['body']) . "]]></description>\n";
-		echo "\t\t\t<author>" . $page['owner_id'] . "</author>\n";
-		echo "\t\t\t<pubDate>".Ut::http_date(strtotime($page['created'])) . "</pubDate>\n";
-		echo "\t\t</item>\n";
+		$tpl->tag		= rtrim($tag, '/');
+		$tpl->title		= Ut::html($page['title']);
+		$tpl->supertag	= $page['supertag'];
+		$tpl->body		= str_replace(']]>', ']]&gt;', $page['body']);
+		$tpl->owner		= $page['owner_id'];
+		$tpl->date		= Ut::http_date(strtotime($page['created']));
 	}
+
+	$tpl->leave();
 }
 else
 {
-	echo "\t\t<item>\n";
-	echo "\t\t\t<title>Error</title>\n";
-	echo "\t\t\t<link>" . $this->href('show') . "</link>\n";
-	echo "\t\t\t<description>" . $this->_t('AccessDeniedXML') . "</description>\n";
-	echo "\t\t</item>\n";
+	$tpl->denied = true;
 }
 
-echo "\t</channel>\n";
-echo "</rss>\n";
