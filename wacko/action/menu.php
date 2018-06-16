@@ -226,70 +226,37 @@ if ($_user_id)
 	if ($_menu)
 	{
 		// echo "<h4>" . $this->_t('YourBookmarks') . "</h4>";
+		$tpl->enter('bm_');
 
 		// user is logged in; display config form
-		echo $this->form_open('edit_bookmarks');
-
-		echo '<input type="hidden" name="_user_menu" value="yes">';
 
 		if ($default_menu === true)
 		{
-			echo $this->show_select_lang('menu_lang', $menu_lang, true);
-
-			echo '<input type="submit" name="update" id="submit" value="update">';
-			echo '<br><br>';
+			$tpl->lang_select	= $this->show_select_lang('menu_lang', $menu_lang, true);
 		}
 
-		echo '<table class="lined">';
-		echo '<tr><th>' . $this->_t('BookmarkNumber') . '</th><th>' . $this->_t('BookmarkTitle') . '</th><th>' . $this->_t('BookmarkPage') . '</th><th>' . $this->_t('BookmarkMark') . '</th><!--<th>Display</th>-->';
-		echo '</tr>';
-
+		$tpl->enter('l_');
 		foreach ($_menu as $menu_item)
 		{
-			echo '<tr>
-				<td >
-					<input type="number" min="0" name="pos_' . $menu_item['menu_id'] . '" size="2" style="width: 40px;" value="' . $menu_item['menu_position'] . '">
-				</td>
-				<td>
-					<input type="text" maxlength="100" name="title_' . $menu_item['menu_id'] . '" size="40" value="' . $menu_item['menu_title'] . '" placeholder="' . $menu_item['title'] . '">
-				</td>
-				<td>
-					<!--<input type="radio" id="menu_item' . $menu_item['menu_id'] . '" name="change" value="' . $menu_item['menu_id'] . '"> -->
-					<label for="menu_item' . $menu_item['menu_id'] . '" title="' . $menu_item['title'] . '">&raquo; ' . $menu_item['tag'] . '</label>
-				</td>
-				<td class="t_center">
-					<input type="checkbox" id="menu_item' . $menu_item['menu_id'] . '" name="delete_' . $menu_item['menu_id'] . '">
-				</td>';
-
-			echo "</tr>\n";
+			$tpl->menuid	= $menu_item['menu_id'];
+			$tpl->position	= $menu_item['menu_position'];
+			$tpl->menutitle	= $menu_item['menu_title'];
+			$tpl->tag		= $menu_item['tag'];
+			$tpl->title		= $menu_item['title'];
 		}
 
-		echo '<tfoot>';
-		echo "<tr>\n" . '<td colspan="3">' . "\n";
-		echo '<input type="submit" name="update_menu" value="' . $this->_t('BookmarkSaveChanges') . '">';
-		echo '</td><td>';
-		echo '<input type="submit" name="delete_menu_item" value="' . $this->_t('BookmarkDeleteSelected') . '">';
-		echo "</td>\n</tr>\n";
-		echo '</tfoot>';
-		echo '</table>';
+		$tpl->leave(); // l_
+		$tpl->leave(); // bm_
 	}
 	else
 	{
-		echo $this->_t('BookmarkNone');
+		$tpl->none = true;
 	}
 
-	echo $this->form_open('add_bookmark');
-	echo '<input type="hidden" name="_user_menu" value="yes">';
-	echo '<br><br>';
-	echo '<label for="add_menu_item">' . $this->_t('BookmarksAddPage') . ':</label><br>' .
-		 '<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255"> ';
 
 	if ($default_menu === true)
 	{
-		echo $this->show_select_lang('lang_new', $menu_lang, false);
+		$tpl->lang_select = $this->show_select_lang('lang_new', $menu_lang, false);
 	}
 
-	echo  '<input type="submit" name="add_menu_item" value="' . $this->_t('CreatePageButton') . '">';
-
-	echo $this->form_close();
 }

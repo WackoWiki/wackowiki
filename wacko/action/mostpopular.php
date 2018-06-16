@@ -137,10 +137,12 @@ if (!empty($pages))
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p><span>' . $this->_t('MostPopularPages') . ": " . $this->link($ppage, '', $legend) . "</span></p>\n";
+		$tpl->mark		= true;
+		$tpl->emark		= true;
+		$tpl->legend	= $this->link($ppage, '', $legend);
 	}
 
-	echo '<table class="">' . "\n";
+	$tpl->pagination_text = $pagination['text'];
 
 	foreach ($pages as $page)
 	{
@@ -170,19 +172,10 @@ if (!empty($pages))
 				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
 			}
 
-			echo "<tr><td>&nbsp;&nbsp;" . $num . ".</td><td>" . $_link . "</td>" .
-				"<td>&nbsp;&nbsp;</td><td>" .
-				number_format($page['hits'], 0, ',', '.') . "</td></tr>\n";
+			$tpl->l_num		= $num;
+			$tpl->l_link	= $_link;
+			$tpl->l_hits	= $page['hits'];
 		}
-	}
-
-	echo "</table>\n";
-
-	$this->print_pagination($pagination);
-
-	if (!$nomark)
-	{
-		echo "</div>\n";
 	}
 }
 
