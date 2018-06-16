@@ -40,7 +40,7 @@ if ($this->has_access('read'))
 
 		// display page
 		$this->context[++$this->current_context] = $this->tag;
-		$text = preg_replace('/{{(tableofcontents|toc).*?}}/i', '', $this->page['body']);
+		$text = preg_replace('/{{(toc).*?}}/i', '', $this->page['body']);
 		$data = $this->format($text, 'wiki');
 
 		// Convert everything that doesn't need regexps
@@ -54,7 +54,7 @@ if ($this->has_access('read'))
 			'</em>',
 			'<small>',						// Small
 			'</small>',
-			'<code>',							// Monospaced
+			'<code>',						// Monospaced
 			'</code>',
 			'<li>',							// List item
 			'</li>',

@@ -43,7 +43,7 @@ if ($b < 0) $b = 0;
 
 if ($a == $b)
 {
-	echo "<br>\n" . $this->_t('NoDifferences');
+	$tpl->nodiff = true;
 	return;
 }
 
@@ -115,18 +115,15 @@ if ($page_a && $page_b
 		return $out . '</div></div>' . "\n";
 	};
 
+	$tpl->enter('diff_');
+
 	// print header
-	echo "<!--nomail-->\n";
-	echo Ut::perc_replace('<div class="diffinfo">' . $this->_t('Comparison'),
+	$tpl->diffinfo = Ut::perc_replace($this->_t('Comparison'),
 		$revisions_menu($a, $page_a),
 		$revisions_menu($b, $page_b),
 		//'<a href="' . $this->href('', '', ($a > 0 ? ['revision_id' => $page_a['revision_id']] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
 		//'<a href="' . $this->href('', '', ($b > 0 ? ['revision_id' => $page_b['revision_id']] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
-		$this->compose_link_to_page($this->tag, '', '')) . "</div>\n";
-	echo "<br>\n<br>\n";
-
-	// print navigation
-	echo '<ul class="menu">';
+		$this->compose_link_to_page($this->tag, '', ''));
 
 	$params = ['a' => $a, 'b' => $b];
 
@@ -135,205 +132,202 @@ if ($page_a && $page_b
 
 	foreach($diff_mode_list as $mode)
 	{
-		echo ($diffmode != $mode
-			? '<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
-			: '<li class="active">' . $diff_modes[$mode]) . '</li>';
+		$tpl->l_diffmode =
+			($diffmode != $mode
+				? '<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
+				: '<li class="active">' . $diff_modes[$mode]) . '</li>';
 	}
-
-	echo "</ul>\n" .
-		"<!--/nomail-->\n";
 
 	// do diffs
 	switch ($diffmode)
 	{
-	case 1:
-	case 2:
-		$source = ($diffmode == 2);
+		case 1:
+		case 2:
+			$source = ($diffmode == 2);
 
-		// This is a really cheap way to do it.
-		// prepare bodies
-		$body_a		= explode("\n", $page_b['body']);
-		$body_b		= explode("\n", $page_a['body']);
+			// This is a really cheap way to do it.
+			// prepare bodies
+			$body_a		= explode("\n", $page_b['body']);
+			$body_b		= explode("\n", $page_a['body']);
 
-		$added		= array_diff($body_a, $body_b);
-		$deleted	= array_diff($body_b, $body_a);
-		$charset	= $this->get_charset($page_a['page_lang']);
+			$added		= array_diff($body_a, $body_b);
+			$deleted	= array_diff($body_b, $body_a);
+			$charset	= $this->get_charset($page_a['page_lang']);
 
-		if ($added)
-		{
-			// remove blank lines
-			echo "<br>\n" . '<strong>' . $this->_t('SimpleDiffAdditions') . '</strong>' . "<br>\n\n";
-			echo '<div class="additions">';
-			echo $source
-					? '<pre>' . wordwrap(Ut::html(implode("\n", $added), true, $charset), 70, "\n", 1) . '</pre>'
-					: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
-			echo "</div>\n";
-		}
+			$tpl->enter('m2_');
 
-		if ($deleted)
-		{
-			echo "<br>\n\n" . '<strong>' . $this->_t('SimpleDiffDeletions') . '</strong>' . "<br>\n\n";
-			echo '<div class="deletions">';
-			echo $source
-					? '<pre>' . wordwrap(Ut::html(implode("\n", $deleted), true, $charset), 70, "\n", 1) . '</pre>'
-					: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
-			echo "</div>\n";
-		}
-
-		if (!$added && !$deleted)
-		{
-			echo "<br>\n" . $this->_t('NoDifferences');
-		}
-
-		break;
-
-	case 0:
-		require_once 'lib/diff/diff.php';
-		// load pages
-
-		// extract text from bodies
-		$text_a		= $page_a['body'];
-		$text_b		= $page_b['body'];
-
-		$side_a		= new Side($text_a);
-		$side_b		= new Side($text_b);
-
-		$body_a		= '';
-		$side_a->split_file_into_words($body_a);
-
-		$body_b		= '';
-		$side_b->split_file_into_words($body_b);
-
-		// diff on these two file
-		$diff		= new Diff2(explode("\n", $body_a), explode("\n", $body_b));
-
-		// format output
-		$fmt		= new DiffFormatter();
-
-		$side_o		= new Side($fmt->format($diff));
-
-		$resync_left	= 0;
-		$resync_right	= 0;
-
-		$count_total_right = $side_b->getposition();
-
-		$side_a->init();
-		$side_b->init();
-
-		while (1)
-		{
-			$side_o->skip_line();
-
-			if ($side_o->isend())
+			if ($added)
 			{
+				// remove blank lines
+				$tpl->added_diff = $source
+						? '<pre>' . wordwrap(Ut::html(implode("\n", $added), true, $charset), 70, "\n", 1) . '</pre>'
+						: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
+			}
+
+			if ($deleted)
+			{
+				$tpl->deleted_diff  = $source
+						? '<pre>' . wordwrap(Ut::html(implode("\n", $deleted), true, $charset), 70, "\n", 1) . '</pre>'
+						: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
+			}
+
+			if (!$added && !$deleted)
+			{
+				$tpl->nodiff = true;
+			}
+
+			$tpl->leave();
+
+			break;
+
+		case 0:
+			require_once 'lib/diff/diff.php';
+			// load pages
+
+			// extract text from bodies
+			$text_a		= $page_a['body'];
+			$text_b		= $page_b['body'];
+
+			$side_a		= new Side($text_a);
+			$side_b		= new Side($text_b);
+
+			$body_a		= '';
+			$side_a->split_file_into_words($body_a);
+
+			$body_b		= '';
+			$side_b->split_file_into_words($body_b);
+
+			// diff on these two file
+			$diff		= new Diff2(explode("\n", $body_a), explode("\n", $body_b));
+
+			// format output
+			$fmt		= new DiffFormatter();
+
+			$side_o		= new Side($fmt->format($diff));
+
+			$resync_left	= 0;
+			$resync_right	= 0;
+
+			$count_total_right = $side_b->getposition();
+
+			$side_a->init();
+			$side_b->init();
+
+			while (1)
+			{
+				$side_o->skip_line();
+
+				if ($side_o->isend())
+				{
+					break;
+				}
+
+				if ($side_o->decode_directive_line())
+				{
+					$argument	= $side_o->getargument();
+					$letter		= $side_o->getdirective();
+
+					switch ($letter)
+					{
+						case 'a':
+							$resync_left	= $argument[0];
+							$resync_right	= $argument[2] - 1;
+							break;
+
+						case 'd':
+							$resync_left	= $argument[0] - 1;
+							$resync_right	= $argument[2];
+							break;
+
+						case 'c':
+							$resync_left	= $argument[0] - 1;
+							$resync_right	= $argument[2] - 1;
+							break;
+					}
+
+					$side_a->skip_until_ordinal($resync_left);
+					$side_b->copy_until_ordinal($resync_right, $output);
+
+					if ($letter == 'd' || $letter == 'c')
+					{
+						// deleted word
+						$side_a->copy_whitespace($output);
+						$output .= '<!--markup:1:begin-->';
+						$side_a->copy_word($output);
+						$side_a->copy_until_ordinal($argument[1], $output);
+						$output .= '<!--markup:1:end-->';
+					}
+
+					if ($letter == 'a' || $letter == 'c')
+					{
+						// inserted word
+						$side_b->copy_whitespace($output);
+						$output .= '<!--markup:2:begin-->';
+						$side_b->copy_word($output);
+						$side_b->copy_until_ordinal($argument[3], $output);
+						$output .= '<!--markup:2:end-->';
+					}
+				}
+			}
+
+			$side_b->copy_until_ordinal($count_total_right, $output);
+			$side_b->copy_whitespace($output);
+
+			#echo '<br><br>';
+			$tpl->m0_diff = $this->format($output, 'wiki', ['diff' => true]);
+			break;
+
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/diff.css">'); // STS
+
+			// using nice lib/php-diff library..
+			$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
+
+			if (!$diff->getGroupedOpcodes())
+			{
+				$tpl->m6_nodiff = true;
 				break;
 			}
 
-			if ($side_o->decode_directive_line())
+			if ($diffmode == 3)
 			{
-				$argument	= $side_o->getargument();
-				$letter		= $side_o->getdirective();
-
-				switch ($letter)
-				{
-					case 'a':
-						$resync_left	= $argument[0];
-						$resync_right	= $argument[2] - 1;
-						break;
-
-					case 'd':
-						$resync_left	= $argument[0] - 1;
-						$resync_right	= $argument[2];
-						break;
-
-					case 'c':
-						$resync_left	= $argument[0] - 1;
-						$resync_right	= $argument[2] - 1;
-						break;
-				}
-
-				$side_a->skip_until_ordinal($resync_left);
-				$side_b->copy_until_ordinal($resync_right, $output);
-
-				if ($letter == 'd' || $letter == 'c')
-				{
-					// deleted word
-					$side_a->copy_whitespace($output);
-					$output .= '<!--markup:1:begin-->';
-					$side_a->copy_word($output);
-					$side_a->copy_until_ordinal($argument[1], $output);
-					$output .= '<!--markup:1:end-->';
-				}
-
-				if ($letter == 'a' || $letter == 'c')
-				{
-					// inserted word
-					$side_b->copy_whitespace($output);
-					$output .= '<!--markup:2:begin-->';
-					$side_b->copy_word($output);
-					$side_b->copy_until_ordinal($argument[3], $output);
-					$output .= '<!--markup:2:end-->';
-				}
+				$renderer = new Diff_Renderer_Html_SideBySide;
+				$renderer->thead = '';
+				$tpl->m6_diff = $diff->Render($renderer);
 			}
-		}
-
-		$side_b->copy_until_ordinal($count_total_right, $output);
-		$side_b->copy_whitespace($output);
-
-		echo '<br><br>';
-		echo $this->format($output, 'wiki', ['diff' => true]);
-		break;
-
-	case 3:
-	case 4:
-	case 5:
-	case 6:
-		$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/diff.css">'); // STS
-
-		// using nice lib/php-diff library..
-		$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
-
-		echo '<br><br>';
-
-		if (!$diff->getGroupedOpcodes())
-		{
-			echo $this->_t('NoDifferences');
-			break;
-		}
-
-		if ($diffmode == 3)
-		{
-			$renderer = new Diff_Renderer_Html_SideBySide;
-			$renderer->thead = '';
-			echo $diff->Render($renderer);
-		}
-		else if ($diffmode == 4)
-		{
-			$renderer = new Diff_Renderer_Html_Inline;
-			$renderer->thead = '';
-			echo $diff->render($renderer);
-		}
-		else
-		{
-			if ($diffmode == 5)
+			else if ($diffmode == 4)
 			{
-				// standard unified diff, useful for sending in emails or what
-				$renderer = new Diff_Renderer_Text_Unified;
+				$renderer = new Diff_Renderer_Html_Inline;
+				$renderer->thead = '';
+				$tpl->m6_diff = $diff->render($renderer);
 			}
 			else
 			{
-				$renderer = new Diff_Renderer_Text_Context;
+				if ($diffmode == 5)
+				{
+					// standard unified diff, useful for sending in emails or what
+					$renderer = new Diff_Renderer_Text_Unified;
+				}
+				else
+				{
+					$renderer = new Diff_Renderer_Text_Context;
+				}
+
+				$tpl->m6_diff =
+					'<pre>' .
+						htmlspecialchars($diff->render($renderer), ENT_NOQUOTES | ENT_HTML5, HTML_ENTITIES_CHARSET) .
+					'</pre>';
 			}
 
-			echo '<pre>';
-			echo Ut::html($diff->render($renderer), ENT_NOQUOTES | ENT_HTML5, HTML_ENTITIES_CHARSET);
-			echo '</pre>';
-		}
-
-		break;
+			break;
 	}
+
+	$tpl->leave();
 }
 else
 {
-	$this->show_message($this->_t('ReadAccessDenied'), 'info');
+	$tpl->denied = $this->show_message($this->_t('ReadAccessDenied'), 'info', false);
 }
