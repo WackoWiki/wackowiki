@@ -4,7 +4,7 @@
 			[= notused _ =
 				<li class="active">[ ' _t: File ' ]</li>
 			=]
-			[= u _ =
+			[= upload _ =
 				<li><a href="[ ' href: upload ' ]">[ ' _t: UploadFile ' ]</a></li>
 			=]
 		</ul>
