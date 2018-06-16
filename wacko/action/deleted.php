@@ -25,11 +25,11 @@ if ($this->is_admin())
 
 		$this->preload_acl($page_ids);
 
-		$this->print_pagination($pagination);
+		$tpl->pagination_text = $pagination['text'];
 
 		$curday = '';
 
-		echo '<ul class="ul_list">' . "\n";
+		$tpl->enter('page_');
 
 		foreach ($pages as $page)
 		{
@@ -40,48 +40,29 @@ if ($this->is_admin())
 				// day header
 				if ($day != $curday)
 				{
-					if ($curday)
-					{
-						echo "</ul>\n<br></li>\n";
-					}
-
-					echo '<li><strong>' . $day . ":</strong>\n" .
-						 '<ul class="lined">' . "\n";
-					$curday = $day;
+					$tpl->day = $curday = $day;
 				}
 
 				// do unicode entities
 				if (($edit_note = $page['edit_note']) !== '')
 				{
 					$edit_note = $this->get_unicode_entities($edit_note, $page['page_lang']);
-					$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
+					$tpl->l_n_text = $edit_note;
 				}
 
 				// print entry
-				echo '<li>' .
-						'<span>' .
-							'<small>' . $time . '</small>  &mdash; ' .
-							// $this->compose_link_to_page($page['tag'], 'revisions', '') .
-							'<img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' .
-									$this->_t('CommentDeleted') . '" alt="[deleted]" class="btn-delete"> ' .
-							$this->compose_link_to_page($page['tag'], '', '') .
-						'</span>' .
-						' . . . . . . . . . . . . . . . . <small>' .
-						$this->user_link($page['user_name'], '', true, false) .
-						$edit_note .
-						'</small>' .
-					"</li>\n";
+				$tpl->l_icon = true;
+				$tpl->l_time = $this->compose_link_to_page($page['tag'], 'revisions', $time);
+				$tpl->l_page = $this->compose_link_to_page($page['tag'], '', '');
+				$tpl->l_user = $this->user_link($page['user_name'], '', true, false);
 			}
 		}
 
-		echo "</ul>\n</li>\n</ul>";
-
-		$this->print_pagination($pagination);
+		$tpl->leave();
 	}
 	else
 	{
-		echo $this->_t('NoDeletedPages');
+		$tpl->nopages = true;
 	}
 }
 
-?>
