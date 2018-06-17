@@ -17,53 +17,57 @@ if ((  $this->db->enable_referrers == 0)
 	$this->show_must_go_on();
 }
 
-$mode = @$_GET['o'];
+$mod_selector	= 'o';
+$modes			= [
+					''			=> 'ViewReferrersPage',
+					'global'	=> 'ViewReferrersGlobal',
+				];
+$mode			= @$_GET[$mod_selector];
+
 if (!ctype_lower($mode))
 {
 	$mode = '';
 }
 
-// navigation
-if ($mode == 'global')
+// let's start: print header
+// TODO: rewrite with template
+
+foreach ($modes as $i => $text)
 {
-	echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersGlobal') . "</h3>\n";
-	echo '<ul class="menu">
-			<li><a href="' . $this->href('referrers_sites') . '">' . $this->_t('ViewReferrersPage') . '</a></li>
-			<li class="active">' . $this->_t('ViewReferrersGlobal') . "</li>
-		</ul><br><br>\n";
-}
-else
-{
-	echo '<h3>' . $this->_t('ReferrersText') . ' &raquo; ' . $this->_t('ViewReferrersPage') . "</h3>\n";
-	echo '<ul class="menu">
-			<li class="active">' . $this->_t('ViewReferrersPage') . '</li>
-			<li><a href="' . $this->href('referrers_sites', '', ['o' => 'global']) . '">' .  $this->_t('ViewReferrersGlobal') . "</a></li>
-		</ul><br><br>\n";
+	if ($mode == $i)
+	{
+		$tpl->header = $this->_t($text);
+	}
 }
 
+// print navigation
+$tpl->menu = $this->tab_menu($modes, $mode, 'referrers_sites', [], $mod_selector);
+
 $href = $this->href('referrers', '', ['o' => $mode]);
+
 if ($mode == 'global')
 {
-	$title		= Ut::perc_replace($this->_t('DomainsSitesPagesGlobal'), $href);
+	$tpl->title = Ut::perc_replace($this->_t('DomainsSitesPagesGlobal'), $href);
 	$referrers	= $this->load_referrers();
 }
 else
 {
-	$title = Ut::perc_replace($this->_t('DomainsSitesPages'),
+	$tpl->title = Ut::perc_replace($this->_t('DomainsSitesPages'),
 		$this->compose_link_to_page($this->tag),
 		(($i = $this->db->referrers_purge_time) == 0? '' :
-			($i == 1? $this->_t('Last24Hours') :
-			Ut::perc_replace($this->_t('LastDays'), $i))),
+			($i == 1
+				? $this->_t('Last24Hours')
+				: Ut::perc_replace($this->_t('LastDays'), $i))
+			),
 		$href);
-	$referrers = $this->load_referrers($this->page['page_id']);
+	$referrers = $this->load_referrers([$this->page['page_id']]);
 }
-
-echo '<strong>' . $title . "</strong><br><br>\n";
 
 if ($referrers)
 {
 	$referrer_sites = [];
 	$unknown = 'unknown';
+
 	foreach ($referrers as $ref)
 	{
 		$url = parse_url($ref['referrer']);
@@ -81,23 +85,17 @@ if ($referrers)
 
 	array_multisort($referrer_sites, SORT_DESC, SORT_NUMERIC);
 
-	echo '<ul class="ul_list lined">' . "\n";
-
 	foreach ($referrer_sites as $site => $site_count)
 	{
-		echo '<li>';
-		echo '<span class="list_count">' . $site_count . '</span>&nbsp;&nbsp;&nbsp;&nbsp;' .
-			(($site !== $unknown)
+		$tpl->l_count	= $site_count;
+		$tpl->l_site	= (($site !== $unknown)
 				? '<a href="http://' . Ut::html($site) . '" rel="nofollow noreferrer">' .
 					Ut::html($site) . '</a>'
 				: $site
 			);
-		echo "</li>\n";
 	}
-
-	echo "</ul>\n";
 }
 else
 {
-	echo $this->_t('NoneReferrers') . "<br>\n";
+	$tpl->none = true;
 }
