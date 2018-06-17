@@ -86,7 +86,7 @@ if ($this->has_access('read'))
 
 				if ($latest['deleted'] && $this->is_admin() == false)
 				{
-					$this->show_message($this->_t('PageDeletedInfo'), 'info');
+					$message .= $this->_t('PageDeletedInfo');
 				}
 				else
 				{

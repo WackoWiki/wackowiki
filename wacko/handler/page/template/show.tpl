@@ -1,6 +1,7 @@
 
 .include _files.tpl
 .include _comments.tpl
+.include _rating.tpl
 
 [ === main === ]
 	[ ' dummy | default * // ADD_NO_DIV ' ]<article id="page-show" class="page" data-dbclick1="page">
@@ -21,5 +22,6 @@
 
 		[''' fp FilePanel ''']
 		[''' cp CommentPanel ''']
+		[''' rp RatingPanel ''']
 
 	</article>

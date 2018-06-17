@@ -25,9 +25,8 @@ if (@$_POST['_action'] === 'extended_properties')
 		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"footer_comments	= " . (int) $_POST['footer_comments'] . ", " .
 			"footer_files		= " . (int) $_POST['footer_files'] . ", " .
-			($this->db->footer_rating
-				? "footer_rating	= " . (int) $_POST['footer_rating'] . ", "
-				: "") .
+			"footer_rating		= " . (int) $_POST['footer_rating'] . ", " .
+
 			"hide_toc			= " . (int) $_POST['hide_toc'] . ", " .
 			"hide_index			= " . (int) $_POST['hide_index'] . ", " .
 			"tree_level			= " . (int) $_POST['tree_level'] . ", " .
@@ -89,10 +88,10 @@ if (isset($_GET['extended']))
 		$tpl->comments	= (int) $this->db->footer_comments;
 		$tpl->files		= (int) $this->db->footer_files;
 
-		if ($this->db->footer_rating)
-		{
+		#if ($this->db->footer_rating)
+		#{
 			$tpl->r_rating = (int) $this->db->footer_rating;
-		}
+		#} #$tpl->r_rating= 1;
 
 		// hide_toc, hide_index, tree_level: used in custom theme menus
 		$tpl->hidetoc	= (int) $this->db->hide_toc;

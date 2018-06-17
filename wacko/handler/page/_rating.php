@@ -25,70 +25,71 @@ if ($this->db->footer_rating != 0 && ($this->db->footer_rating != 2 || $this->ge
 	}
 }
 
-// determine if user has rated this page
-if (handler_show_page_is_rated($this, $this->page['page_id']) === false && (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )
-{
-	// display rating section
-	echo '<section id="section-rating">' . "\n";
+// display rating section
+$tpl->enter('rp_s_');
 
+// determine if user has rated this page
+if (handler_show_page_is_rated($this, $this->page['page_id']) === false
+	&& (isset($_GET['show_rating']) && $_GET['show_rating'] != 1) )
+{
 	// display rating header
-	echo '<header id="header-rating">';
-	echo $this->_t('RatingHeader') . ' [<a href="' . $this->href('', '', ['show_rating' => 1]) . '#header-rating">' . $this->_t('RatingResults') . '</a>]';
-	echo "</header>\n";
+	$tpl->title		= $this->_t('RatingHeader');
+	$tpl->l_href	= $this->href('', '', ['show_rating' => 1, '#' => 'header-rating']);
+	$tpl->l_text	= $this->_t('RatingResults');
 
 	// display rating form
-	echo '<div class="rating">' . $this->form_open('rate', ['page_method' => 'rate']) . '';
-	echo '<input type="radio" id="minus3" name="value" value="-3"><label for="minus3">-3</label>' .
-		 '<input type="radio" id="minus2" name="value" value="-2"><label for="minus2">-2</label>' .
-		 '<input type="radio" id="minus1" name="value" value="-1"><label for="minus1">-1</label>' .
-		 '<input type="radio" id="plus0" name="value" value="0"><label for="plus0"> 0</label>' .
-		 '<input type="radio" id="plus1" name="value" value="1"><label for="plus1">+1</label>' .
-		 '<input type="radio" id="plus2" name="value" value="2"><label for="plus2">+2</label>' .
-		 '<input type="radio" id="plus3" name="value" value="3"><label for="plus3">+3</label>' .
-		 '<input type="submit" name="rate" id="submit" value="' . $this->_t('RatingSubmit') . '">';
-	echo '' . $this->form_close() . '</div>';
+	$votes = [
+		'-3'	=> 'minus3',
+		'-2'	=> 'minus2',
+		'-1'	=> 'minus1',
+		'0'		=> 'plus0',
+		'1'		=> 'plus1',
+		'2'		=> 'plus2',
+		'3'		=> 'plus3',
+	];
 
-	echo "</section>\n";
+	foreach ($votes as $offset => $vote)
+	{
+		$tpl->f_i_label	= $vote;
+		$tpl->f_i_value	= $offset;
+	}
 }
 else
 {
 	$results = $this->db->load_single(
-				"SELECT page_id, value, voters " .
-				"FROM " . $this->db->table_prefix . "rating " .
-				"WHERE page_id = {$this->page['page_id']} " .
-				"LIMIT 1");
+		"SELECT page_id, value, voters " .
+		"FROM " . $this->db->table_prefix . "rating " .
+		"WHERE page_id = {$this->page['page_id']} " .
+		"LIMIT 1");
 
 	if ($results['voters'] > 0)			$results['ratio'] = $results['value'] / $results['voters'];
 	if (is_float($results['ratio']))	$results['ratio'] = round($results['ratio'], 2);
 	if ($results['ratio'] > 0)			$results['ratio'] = '+' . $results['ratio'];
 
-	// display rating section
-	echo '<section id="section-rating">' . "\n";
-
 	// display rating header
-	echo '<header id="header-rating">' . "\n";
-	echo $this->_t('RatingHeaderResults') .
-	(handler_show_page_is_rated($this, $this->page['page_id']) === false
-	? ' [<a href="' . $this->href('', '', ['show_rating' => 0]) . '#header-rating">' . $this->_t('RatingForm') . '</a>]'
-	: '');
-	echo "</header>\n";
+	$tpl->title		= $this->_t('RatingHeaderResults');
+
+	if (handler_show_page_is_rated($this, $this->page['page_id']) === false)
+	{
+		$tpl->l_href		= $this->href('', '', ['show_rating' => 0, '#' => 'header-rating']);
+		$tpl->l_text		= $this->_t('RatingForm');
+	}
+
+	$tpl->enter('r_');
 
 	// display rating results
 	if (isset($results['ratio']))
 	{
-		echo '<div class="rating">';
-		echo '' . $this->_t('RatingTotal') . ': <strong>' . $results['ratio'] . '</strong>' .
-				' ' . $this->_t('RatingVoters') . ': <strong>' . $results['voters'] . '</strong>';
-		echo '</div>';
+		$tpl->rated_ratio	= $results['ratio'];
+		$tpl->rated_voters	= $results['voters'];
 	}
 	else
 	{
-		echo '<div class="rating">';
-		echo '<em>' . $this->_t('RatingNotRated') . '</em>';
-		echo '</div>';
+		$tpl->notrated	= true;
 	}
 
-	echo "</section>\n";
+	$tpl->leave();
 }
 
-?>
+$tpl->leave();
+
