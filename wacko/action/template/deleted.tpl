@@ -13,7 +13,6 @@
 							<span class="dt">[ ' time ' ]</span> &mdash; [ ' icon ' ][ ' page ' ]
 							 . . . . . . . . . . . . . . . . 
 							<small>
-								[ ' _t: LatestCommentBy ' ]
 								[ ' user ' ]
 								[= n _ =
 									<span class="editnote">[[ ' text ' ]]</span>
