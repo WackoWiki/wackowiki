@@ -91,7 +91,7 @@ if (isset($_GET['extended']))
 		#if ($this->db->footer_rating)
 		#{
 			$tpl->r_rating = (int) $this->db->footer_rating;
-		#} #$tpl->r_rating= 1;
+		#}
 
 		// hide_toc, hide_index, tree_level: used in custom theme menus
 		$tpl->hidetoc	= (int) $this->db->hide_toc;
