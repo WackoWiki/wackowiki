@@ -26,6 +26,8 @@ $by = function ($by) use ($profile, $mod_selector)
 
 if (($user_id = $this->get_user_id()))
 {
+	$tpl->enter('u_');
+
 	$tabs	= [
 				''			=> 'OrderChange',
 				'byname'	=> 'OrderABC',
@@ -38,7 +40,7 @@ if (($user_id = $this->get_user_id()))
 	}
 
 	// print navigation
-	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mod_selector);
+	$tpl->tabs	= $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mod_selector);
 
 	$prefix		= $this->db->table_prefix;
 
@@ -62,9 +64,12 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY tag ASC, modified DESC " .
 			$pagination['limit'], true))
 		{
-			echo '<ul class="ul_list">' . "\n";
+			$tpl->pagination_text = $pagination['text'];
 
 			$cur_char = '';
+
+			$tpl->enter('page_');
+
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, true);
@@ -78,29 +83,21 @@ if (($user_id = $this->get_user_id()))
 
 				if ($first_char !== $cur_char)
 				{
-					if ($cur_char)
-					{
-						echo "</ul>\n<br></li>\n";
-					}
-
-					echo '<li><strong>' . $first_char . "</strong>\n<ul>\n";
-					$cur_char = $first_char;
+					$tpl->char = $cur_char = $first_char;
 				}
 
 				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
 
 				// print entry
-				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('RevisionTip')) .
-					' &mdash; ' . $this->compose_link_to_page($page['supertag'], '', $text) . "</li>\n";
+				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
+				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('RevisionTip'));
 			}
 
-			echo "</ul>\n</li>\n</ul>\n";
-
-			$this->print_pagination($pagination);
+			$tpl->leave();
 		}
 		else
 		{
-			echo $this->_t('DidntEditAnyPage');
+			$tpl->nopages = true;
 		}
 	}
 	else
@@ -123,9 +120,12 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true)))
 		{
-			echo '<ul class="ul_list">' . "\n";
+			$tpl->pagination_text = $pagination['text'];
 
 			$cur_day = '';
+
+			$tpl->enter('page_');
+
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, true);
@@ -134,38 +134,32 @@ if (($user_id = $this->get_user_id()))
 
 				if ($day != $cur_day)
 				{
-					if ($cur_day)
-					{
-						echo "</ul>\n<br></li>\n";
-					}
-
-					echo '<li><strong>' . $day . ":</strong><ul>\n";
-					$cur_day = $day;
-				}
-
-				if (($edit_note = $page['edit_note']))
-				{
-					$edit_note = ' <span class="editnote">[' . $edit_note . ']</span>';
+					$tpl->day = $cur_day = $day;
 				}
 
 				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
 
 				// print entry
-				echo '<li>' . $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')) .
-					" &mdash; " . $this->compose_link_to_page($page['supertag'], '', $text) . $edit_note . "</li>\n";
+				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
+				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'));
+
+				if ($page['edit_note'])
+				{
+					$tpl->l_e_note	= $page['edit_note'];
+				}
 			}
 
-			echo "</ul>\n</li>\n</ul>\n";
-
-			$this->print_pagination($pagination);
+			$tpl->leave();
 		}
 		else
 		{
-			echo $this->_t('DidntEditAnyPage');
+			$tpl->nopages = true;
 		}
 	}
+
+	$tpl->leave();
 }
 else
 {
-	echo $this->_t('NotLoggedInThusEdited');
+	$tpl->guest	= true;
 }

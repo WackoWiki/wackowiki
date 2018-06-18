@@ -5,17 +5,19 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// TODO: add user and change notes
+
 if (!isset($profile))	$profile = ''; // user action
 if (!isset($max))		$max = null;
 
 if ($user_id = $this->get_user_id())
 {
+	$tpl->enter('user_');
+
 	$profile	= ($profile? ['profile' => $profile] : []);
 	$pref		= $this->db->table_prefix;
 
-	echo $this->_t('MyChangesWatches') .
-		' (<a href="' . $this->href('', '', $profile + ['mode' => 'mychangeswatches', 'reset' => 1, '#' => 'list']) . '">' .
-		$this->_t('ResetChangesWatches') . '</a>).<br><br>';
+	$tpl->href	= $this->href('', '', $profile + ['mode' => 'mychangeswatches', 'reset' => 1, '#' => 'list']);
 
 	$count	= $this->db->load_single(
 			"SELECT COUNT(p.page_id) AS n " .
@@ -29,7 +31,7 @@ if ($user_id = $this->get_user_id())
 	$pagination = $this->pagination($count['n'], $max, 'p', $profile);
 
 	$pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.modified, w.user_id " .
+			"SELECT p.page_id, p.tag, p.modified, p.page_lang, w.user_id " .
 			"FROM {$pref}page AS p, {$pref}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .
@@ -54,25 +56,29 @@ if ($user_id = $this->get_user_id())
 		$this->http->redirect($this->href('', '', $profile + ['mode' => 'mychangeswatches', '#' => 'list']));
 	}
 
+	$tpl->pagination_text = $pagination['text'];
+
 	if ($pages == true)
 	{
 		foreach ($pages as $page)
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				echo '<small>(' . $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('History')) .
-					')</small> ' . $this->compose_link_to_page($page['tag'], '', '') . "<br>\n";
+				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
+
+				$tpl->l_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('History'));
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
 			}
 		}
-
-		$this->print_pagination($pagination);
 	}
 	else
 	{
-		echo '<em>' . $this->_t('NoChangesWatches') . '</em>';
+		$tpl->none	= true;
 	}
+
+	$tpl->leave();
 }
 else
 {
-	echo '<em>' . $this->_t('NotLoggedInWatches') . '</em>';
+	$tpl->guest	= true;
 }
