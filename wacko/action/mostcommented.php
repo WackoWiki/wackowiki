@@ -54,11 +54,6 @@ else
 	$link		= '';
 }
 
-if (!$nomark)
-{
-	echo '<div class="layout-box"><p><span>' . $this->_t('MostCommentedPages') . ": " . $this->link($ppage, '', $legend) . "</span></p>\n";
-}
-
 if (!$page)
 {
 	$selector =
@@ -136,7 +131,14 @@ if (!empty($pages))
 	// cache acls
 	$this->preload_acl($page_ids);
 
-	echo '<table class="">' . "\n";
+	if (!$nomark)
+	{
+		$tpl->mark		= true;
+		$tpl->emark		= true;
+		$tpl->legend	= $this->link($ppage, '', $legend);
+	}
+
+	$tpl->pagination_text = $pagination['text'];
 
 	foreach ($pages as $page)
 	{
@@ -166,20 +168,11 @@ if (!empty($pages))
 				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
 			}
 
-			echo '<tr><td>&nbsp;&nbsp;' . $num . '.</td><td>' . $_link . "</td>" .
-				"<td>&nbsp;&nbsp;</td>\n<td>" .
-				'<a href="' . $this->href('', $page['tag'], ['show_comments' => 1]) . '#header-comments">' . number_format($page['comments'], 0, ',', '.') . '</a></td></tr>' . "\n";
+			$tpl->l_num			= $num;
+			$tpl->l_link		= $_link;
+			$tpl->l_comments	= $page['comments'];
+			$tpl->l_href		= $this->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments']);
 		}
 	}
-
-	echo "</table>\n";
-
-	$this->print_pagination($pagination);
 }
 
-if (!$nomark)
-{
-	echo "</div>\n";
-}
-
-?>
