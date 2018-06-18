@@ -32,7 +32,7 @@ if (!isset($url))		$url	= null;
 if (!isset($nomark))	$nomark	= 0;
 if (!isset($title))		$title	= '';
 if (!isset($max))		$max	= 5;
-if (!isset($time))		$time	= 0;
+if (!isset($time))		$time	= 1;
 
 // Include SimplePie
 include_once 'lib/SimplePie/autoloader.php';
@@ -41,7 +41,7 @@ include_once 'lib/SimplePie/autoloader.php';
 
 if (!$url)
 {
-	echo '<p><em>' . $this->_t('FeedNoURL') . "</em></p>\n";
+	$tpl->nourl = true;
 }
 else
 {
@@ -52,7 +52,7 @@ else
 		$urlset = $urlset[0];
 	}
 
-	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE;))
+	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE)
 	// Thus all configs will be same for all RSS-feeds
 	$feed = new SimplePie();
 	$feed->set_feed_url($urlset);
@@ -77,19 +77,19 @@ else
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box">' . "\n";
+		$tpl->mark		= true;
+		$tpl->emark		= true;
 	}
 
-	$counturlset = count($urlset);
+	$count_feeds = count($urlset);
 
-	if (!$feed->get_title() && $counturlset == 1)
+	if (!$feed->get_title() && $count_feeds == 1)
 	{
-		echo '<p><em>' . $this->_t('FeedError') . "</em></p>\n";
+		$tpl->error		= true;
 	}
 	else
 	{
-		$header_feed = 'h1';
-		$header_item = 'h2';
+		$class = ' class="feed_element_title"';
 
 		if ($title != 'no')
 		{
@@ -104,52 +104,70 @@ else
 			// make nice if $nomark == 1
 			if ($nomark)
 			{
-				if ($title != '' && $counturlset == 1)
+				$tpl->enter('nomark_');
+
+				$tpl->lastitems = $last_items;
+
+				if ($title != '' && $count_feeds == 1)
 				{
-					echo '<' . $header_feed . ' class="feed_element_title">' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</' . $header_feed . ">\n";
+					$tpl->header	= $this->link($feed->get_permalink(), '', $title, '', 0, 1);
+					$tpl->class		= $class;
 				}
-				if ($title != '' && $counturlset > 1)
+				if ($title != '' && $count_feeds > 1)
 				{
-					echo '<' . $header_feed . '>' . $title . '</' . $header_feed . ">\n";
+					$tpl->header	= $title;
 				}
-				else if (!$title && $counturlset == 1)
+				else if (!$title && $count_feeds == 1)
 				{
-					echo '<' . $header_feed . ' class="feed_element_title">' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</' . $header_feed . ">\n";
+					$tpl->header	= $this->link($feed->get_permalink(), '', $feed->get_title(), '', 0, 1);
+					$tpl->class		= $class;
 				}
-				else if (!$title && $counturlset > 1)
+				else if (!$title && $count_feeds > 1)
 				{
-					echo '<' . $header_feed . '>' . $this->_t('FeedMulti') . '</' . $header_feed . ">\n";
+					$tpl->header	= $this->_t('FeedMulti');
 				}
 
-				echo $last_items;
+				$tpl->leave();
+
 			}
 
 			// default
 			else
 			{
-				if ($title != '' && $counturlset == 1)
+				$tpl->enter('mark_');
+
+				$tpl->lastitems = $last_items;
+
+				if ($title != '' && $count_feeds == 1)
 				{
-					echo '<p><span>' . $this->_t('FeedTitle') . ':<strong> ' . $this->link($feed->get_permalink(), '', $title, '', 1, 1) . '</strong> ' . $last_items . "<span></p>\n";
+					$tpl->header	= $this->_t('FeedTitle');
+					$tpl->title		= $this->link($feed->get_permalink(), '', $title, '', 0, 1);
 				}
 
-				if ($title != '' && $counturlset > 1)
+				if ($title != '' && $count_feeds > 1)
 				{
-					echo '<p><span>' . $this->_t('FeedTitle') . ':<strong> ' . $title . '</strong> ' . $last_items . "</span></p>\n";
+					$tpl->header	= $this->_t('FeedTitle');
+					$tpl->title		= $title;
 				}
-				else if (!$title && $counturlset == 1)
+				else if (!$title && $count_feeds == 1)
 				{
-					echo '<p><span>' . $this->_t('FeedTitle') . ':<strong> ' . $this->link($feed->get_permalink(), '', $feed->get_title(), '', 1, 1) . '</strong> ' . $last_items . "</span></p>\n";
+					$tpl->header	= $this->_t('FeedTitle');
+					$tpl->title		= $this->link($feed->get_permalink(), '', $feed->get_title(), '', 0, 1);
 				}
-				else if (!$title && $counturlset > 1)
+				else if (!$title && $count_feeds > 1)
 				{
-					echo '<p><span><strong>' . $this->_t('FeedMulti') . '</strong> ' . $last_items . "</span></p>\n";
+					$tpl->header	= $this->_t('FeedMulti');
 				}
+
+				$tpl->leave();
 			}
 		}
 
 		$current = 1;
 
-		if ($counturlset > 1)
+		$tpl->enter('i_');
+
+		if ($count_feeds > 1)
 		{
 			foreach ($feed->get_items() as $item)
 			{
@@ -166,25 +184,24 @@ else
 					$date = 0;
 				}
 
-				echo '<article class="feed">';
-				echo '<' . $header_item;
-
 				if ($nomark)
 				{
-					echo ' class="feed_element_title"';
+					$tpl->class		= $class;
 				}
 
-				echo '>' . $this->link($item->get_permalink(), '', $item->get_title(), '', 1, 1) . '</' . $header_item . '>';
-				echo '<p class="note"><span>' . $this->_t('FeedSource') . ' ' . $this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 1, 1) . ' | ' . $item->get_date('d.m.Y g:i') . ' | ';
+				$tpl->link		= $this->link($item->get_permalink(), '', $item->get_title(), '', 0, 1);
+				#$tpl->m_link	= $this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 0, 1);
+				$tpl->m_href	= $xfeed->get_permalink();
+				$tpl->m_title	= $xfeed->get_title();
 
 				if (($time == 1) && ($date != 0))
 				{
-					echo $this->get_time_interval($date);
+					$tpl->t_date		= $item->get_date('d.m.Y G:i');
+					$tpl->t_utime		= $item->get_date('U');
+					$tpl->t_interval	= $this->get_time_interval($date);
 				}
 
-				echo "</span></p>\n";
-				echo '<div class="feed-content">' . $item->get_content() . "</div>\n";
-				echo "</article>\n";
+				$tpl->content = $item->get_content();
 
 				if (($max) && ($current == $max))
 				{
@@ -198,7 +215,7 @@ else
 		}
 		else
 		{
-			// Go through all of the items in the feed
+			// go through all of the items in the feed
 			foreach ($feed->get_items() as $item)
 			{
 				// get strings
@@ -215,28 +232,25 @@ else
 					$date = 0;
 				}
 
-				echo '<article class="feed">' . "\n";
-
 				// headline
-				echo '<' . $header_item . '>' . $this->link($href, '', $title, '', 1, 1) . '</' . $header_item . ">\n";
+				$tpl->link = $this->link($href, '', $title, '', 0, 1);
 
 				if (($time == 1) && ($date != 0))
 				{
-					echo '<p class="note"><span>' . $this->get_time_interval($date) . "</span></p>\n";
+					$tpl->t_date		= $item->get_date('d.m.Y G:i');
+					$tpl->t_utime		= $item->get_date('U');
+					$tpl->t_interval	= $this->get_time_interval($date);
 				}
 
-				echo '<div class="feed-content">' . $item->get_content() . "</div>\n";
+				$tpl->content = $item->get_content();
 
 				if ($enclosure = $item->get_enclosure())
 				{
 					if (!empty($enclosure->get_link()))
 					{
-						echo '<img src="' . $enclosure->get_link() . '">' . "\n";
+						$tpl->e_link = $enclosure->get_link();
 					}
 				}
-
-				// item-paragraph ending
-				echo "</article>\n";
 
 				if (($max) && ($current == $max))
 				{
@@ -248,11 +262,8 @@ else
 				}
 			}
 		}
-	}
 
-	if (!$nomark)
-	{
-		echo "</div>\n";
+		$tpl->leave();
 	}
 }
 ?>
