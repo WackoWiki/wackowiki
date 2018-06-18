@@ -40,8 +40,10 @@ if (!array_key_exists($mode, $tabs))
 
 if (($user_id = $this->get_user_id()))
 {
+	$tpl->enter('u_');
+
 	// print navigation
-	echo $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mod_selector);
+	$tpl->tabs	= $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mod_selector);
 
 	$prefix		= $this->db->table_prefix;
 
@@ -65,9 +67,12 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY created DESC, tag ASC " .
 			$pagination['limit'], true))
 		{
-			echo '<ul class="ul_list">' . "\n";
+			$tpl->pagination_text = $pagination['text'];
 
 			$current_day = '';
+
+			$tpl->enter('page_');
+
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, true);
@@ -76,29 +81,21 @@ if (($user_id = $this->get_user_id()))
 
 				if ($day != $current_day)
 				{
-					if ($current_day)
-					{
-						echo "</ul>\n<br></li>\n";
-					}
-
-					echo '<li><strong>' . $day . ":</strong>\n" . "<ul>\n";
-					$current_day = $day;
+					$tpl->day = $current_day = $day;
 				}
 
 				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
 
 				// print entry
-				echo '<li>' . $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip')) .
-					' &mdash; ' . $this->compose_link_to_page($page['supertag'], '', $text) . "</li>\n";
+				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
+				$tpl->l_t_time	= $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip'));
 			}
 
-			echo "</ul>\n</li>\n</ul>\n";
-
-			$this->print_pagination($pagination);
+			$tpl->leave();
 		}
 		else
 		{
-			echo $this->_t('NoPagesFound');
+			$tpl->nopages = true;
 		}
 	}
 	else if ($mode == 'bychange' || $bychange == 1)
@@ -125,9 +122,12 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true))
 		{
-			echo '<ul class="ul_list">' . "\n";
+			$tpl->pagination_text = $pagination['text'];
 
 			$current_day = '';
+
+			$tpl->enter('page_');
+
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, true);
@@ -136,30 +136,21 @@ if (($user_id = $this->get_user_id()))
 
 				if ($day != $current_day)
 				{
-					if ($current_day)
-					{
-						echo "</ul>\n<br></li>\n";
-					}
-
-					echo "<li><strong>$day:</strong><ul>\n";
-					$current_day = $day;
+					$tpl->day = $current_day = $day;
 				}
 
 				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
 
 				// print entry
-				echo '<li>' . $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip')) .
-					' &mdash; ' . $this->compose_link_to_page($page['supertag'], '', $text) . "</li>\n";
-
+				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
+				$tpl->l_t_time	= $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip'));
 			}
 
-			echo "</ul>\n</li>\n</ul>\n";
-
-			$this->print_pagination($pagination);
+			$tpl->leave();
 		}
 		else
 		{
-			echo $this->_t('NoPagesFound');
+			$tpl->nopages = true;
 		}
 	}
 	else
@@ -182,7 +173,9 @@ if (($user_id = $this->get_user_id()))
 			"ORDER BY tag ASC " .
 			$pagination['limit'], true)))
 		{
-			echo '<ul class="ul_list">' . "\n";
+			$tpl->pagination_text = $pagination['text'];
+
+			$tpl->enter('page_');
 
 			foreach ($pages as $page)
 			{
@@ -197,36 +190,31 @@ if (($user_id = $this->get_user_id()))
 
 				if ($first_char != $current_char)
 				{
-					if ($current_char)
-					{
-						echo "</ul>\n<br></li>\n";
-					}
-
-					echo '<li><strong>' . $first_char . "</strong><ul>\n";
-					$current_char = $first_char;
+					$tpl->char = $current_char = $first_char;
 				}
 
 				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
 
-				echo '<li>' . $this->compose_link_to_page($page['supertag'], '', $text) . "</li>\n";
+				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
 			}
 
-			echo "</ul>\n</li>\n</ul>\n";
-
-			$this->print_pagination($pagination);
+			$tpl->leave();
 		}
 		else
 		{
-			echo $this->_t('NoPagesFound');
+			$tpl->nopages = true;
 		}
 	}
 
+	// obsolete case
 	if ($pages == false)
 	{
-		echo $this->_t('YouDontOwn');
+		# echo $this->_t('YouDontOwn');
 	}
+
+	$tpl->leave();
 }
 else
 {
-	echo $this->_t('NotLoggedInThusOwned');
+	$tpl->guest	= true;
 }
