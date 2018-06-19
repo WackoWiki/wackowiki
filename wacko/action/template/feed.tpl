@@ -34,7 +34,10 @@
 				</p>
 			<div class="feed-content">[ ' content ' ]</div>
 			[= e _ =
-				<img src="[ ' link ' ]">
+				[ ' link ' ] ([ ' type ' ] [ ' size ' ])
+				[= image _ =
+					<img src="[ ' link ' ]">
+				=]
 			=]
 		</article>
 	=]
