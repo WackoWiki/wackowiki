@@ -21,7 +21,7 @@
 
 	[= i _ =
 		<article class="feed">
-			<h2>[ ' link ' ]</h2>
+			<h2[ ' class ' ]>[ ' link ' ]</h2>
 				<p class="note">
 					<span>
 						[= m _ =
@@ -34,8 +34,10 @@
 				</p>
 			<div class="feed-content">[ ' content ' ]</div>
 			[= e _ =
-				[ ' link ' ] ([ ' type ' ] [ ' size ' ])
-				[= image _ =
+				[= f _ =
+					[ ' link ' ] ([ ' type ' ] [ ' size ' ])
+				=]
+				[= img _ =
 					<img src="[ ' link ' ]">
 				=]
 			=]
