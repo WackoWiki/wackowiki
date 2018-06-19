@@ -49,8 +49,11 @@ if ($this->has_access('read')
 	}
 
 	// revision header
-	if ($this->page['latest'] == 0)
+	if ($this->page['latest'] == 0 && !!$this->page)
 	{
+		// add also hint:
+		// [en] You are editing an old revision of this page. If you publish it, any changes made since then will be removed. You may wish to edit the current revision instead.
+		// [de] Du bearbeitest nicht die aktuelle, sondern eine ältere Version dieser Seite. Wenn du speicherst, wird diese als aktuelle Version neu gespeichert. Eventuell später hinzugekommene Änderungen werden damit gelöscht.
 		$message = Ut::perc_replace($this->_t('Revision'),
 			$this->href(),
 			$this->tag,
