@@ -50,6 +50,11 @@ else
 	if (count($urlset) == 1)
 	{
 		$urlset = $urlset[0];
+		$count_feeds = 1;
+	}
+	else
+	{
+		$count_feeds = count($urlset);
 	}
 
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE)
@@ -80,8 +85,6 @@ else
 		$tpl->mark		= true;
 		$tpl->emark		= true;
 	}
-
-	$count_feeds = count($urlset);
 
 	if (!$feed->get_title() && $count_feeds == 1)
 	{
@@ -255,9 +258,9 @@ else
 						$e_href		= str_replace(' ', '%20', $enclosure->get_link());
 						$e_title	= basename(parse_url($enclosure->get_link(), PHP_URL_PATH));
 
-						$tpl->e_link = $this->link($e_href, '', $e_title, '', 0, 1);
-						$tpl->e_size = $enclosure->get_size();
-						$tpl->e_type = $enclosure->get_type();
+						$tpl->e_f_link = $this->link($e_href, '', $e_title, '', 0, 1);
+						$tpl->e_f_size = $enclosure->get_size();
+						$tpl->e_f_type = $enclosure->get_type();
 					}
 				}
 
