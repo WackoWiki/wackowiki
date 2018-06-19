@@ -246,9 +246,18 @@ else
 
 				if ($enclosure = $item->get_enclosure())
 				{
-					if (!empty($enclosure->get_link()))
+					if ($enclosure->get_link() && stristr($enclosure->get_type(), 'image/'))
 					{
-						$tpl->e_link = $enclosure->get_link();
+						$tpl->e_img_link = $enclosure->get_link();
+					}
+					else if (!empty($enclosure->get_link()))
+					{
+						$e_href		= str_replace(' ', '%20', $enclosure->get_link());
+						$e_title	= basename(parse_url($enclosure->get_link(), PHP_URL_PATH));
+
+						$tpl->e_link = $this->link($e_href, '', $e_title, '', 0, 1);
+						$tpl->e_size = $enclosure->get_size();
+						$tpl->e_type = $enclosure->get_type();
 					}
 				}
 
