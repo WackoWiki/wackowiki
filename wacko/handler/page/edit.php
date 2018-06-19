@@ -48,16 +48,16 @@ if ($this->has_access('read')
 		$tpl->message = $this->show_message($message, 'comment-info', false);
 	}
 
-	// TODO: add values to post in show handler
-	/* if ($this->page['latest'] == 0)
+	// revision header
+	if ($this->page['latest'] == 0)
 	{
 		$message = Ut::perc_replace($this->_t('Revision'),
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),
 			$this->user_link($this->page['user_name'], '', true, false));
-		$this->show_message($message, 'revisioninfo');
-	} */
+		$tpl->message = $this->show_message($message, 'revisioninfo', false);
+	}
 
 	if (isset($_POST))
 	{
@@ -235,7 +235,7 @@ if ($this->has_access('read')
 	// It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
 	// "You are going to leave this page, but there are some changes you made but not saved yet."
 	// Is used by this script to determine which changes it needs to monitor.
-	#$output .= $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
+	// e.g. $this->form_open('edit_page', ['page_method' => 'edit', 'form_more' => ' cf="true" ']);
 
 	if ((isset($_GET['add']) && $_GET['add'] == 1) || (isset($_POST['add']) && $_POST['add'] == 1))
 	{
@@ -301,10 +301,11 @@ if ($this->has_access('read')
 
 	$tpl->previous	= Ut::html($previous);
 
-	// \n gets eaten by assign() function in TemplatestSetter class, see line 117
+	// FIXME: \n gets eaten by assign() function in TemplatestSetter class, see line 117
+	// -> workaround: [ ' body | pre ' ]
 	$tpl->body		= $body; // Ut::html($body)
 
-	// only for \n issue testing
+	// XXX: only for \n issue testing
 	#echo '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">'. Ut::html($body) . "</textarea>\n";
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
