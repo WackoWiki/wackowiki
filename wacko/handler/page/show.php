@@ -35,30 +35,33 @@ if ($this->has_access('read'))
 		$this->http->status(404);
 
 		$message = $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
-		$tpl->message = $this->show_message($message, 'notice');
+		$tpl->n_message = $this->show_message($message, 'notice', false);
 	}
 	else
 	{
-		if ($this->page['deleted'])
+		if ($this->page['latest'] == 0)
+		{
+			// load also deleted pages
+			$latest = $this->load_page($this->tag, '', '', '', '', true);
+		}
+
+		if ($this->page['deleted'] || !empty($latest['deleted']))
 		{
 			$this->http->status(404);
 
 			if ($this->is_admin())
 			{
-				$message = $this->_t('PageDeletedInfo');
-				$message .= '<br><br>';
-				$message .= $this->form_open('restore_page', ['page_method' => 'restore']);
-				$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '">';
-				$message .= '<input type="submit" value="' . $this->_t('RestoreButton') . '">';
-				$message .= $this->form_close();
+				$tpl->restore			= true;
+				$tpl->restore_pageid	= $this->page['page_id'];
 			}
 			else
 			{
 				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
 				$message .= '<br>';
-			}
+				$tpl->n_message = $this->show_message($message, 'warning', false);
 
-			$tpl->message = $this->show_message($message, 'warning', false);
+				return;
+			}
 		}
 
 		// revision header
@@ -78,11 +81,6 @@ if ($this->has_access('read'))
 				{
 					$latest['modified'] = date('Y-m-d H:i:s');
 				}
-				else
-				{
-					// load also deleted pages
-					$latest = $this->load_page($this->tag, '', '', '', '', true);
-				}
 
 				if ($latest['deleted'] && $this->is_admin() == false)
 				{
@@ -90,17 +88,17 @@ if ($this->has_access('read'))
 				}
 				else
 				{
-					$message .= '<br><br>';
-					$message .= $this->form_open('edit_revision', ['page_method' => 'edit', 'href_param' => 'revision_id=' . (int) $this->page['revision_id']]);
-					$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '">';
-					#$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '">';
-					$message .= '<input type="submit" value="' . $this->_t('ReEditOldRevision') . '">';
-					$message .= '<a href="' . $this->href() . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"></a>';
-					$message .= $this->form_close();
+					// reedit form
+					$tpl->reedit_href		= $this->href('edit', '', ['revision_id' => (int) $this->page['revision_id']]);
+					$tpl->reedit_modified	= $latest['modified'];
+					$tpl->reedit_pageid		= $this->page['page_id'];
+					$tpl->reedit_message	= $message;
 				}
 			}
-
-			$tpl->message = $this->show_message($message, 'revisioninfo', false);
+			else
+			{
+				$tpl->n_message = $this->show_message($message, 'revisioninfo', false);
+			}
 		}
 
 		// count page hit (we don't count for page owner)
@@ -156,13 +154,13 @@ else
 	$this->http->status(403);
 
 	$message = $this->_t('ReadAccessDenied');
-	$tpl->message = $this->show_message($message, 'info', false);
+	$tpl->n_message = $this->show_message($message, 'info', false);
 
 	// TODO: test, seems broken
 	if ($this->has_access('read', '', GUEST) === false)
 	{
 		$message = $this->_t('ReadAccessDeniedHintGuest');
-		$tpl->hint = $this->show_message($message, 'hint', false);
+		$tpl->n_message = $this->show_message($message, 'hint', false);
 	}
 }
 
