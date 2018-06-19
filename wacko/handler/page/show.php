@@ -91,10 +91,9 @@ if ($this->has_access('read'))
 				else
 				{
 					$message .= '<br><br>';
-					$message .= $this->form_open('edit_revision', ['page_method' => 'edit']);
+					$message .= $this->form_open('edit_revision', ['page_method' => 'edit', 'href_param' => 'revision_id=' . (int) $this->page['revision_id']]);
 					$message .= '<input type="hidden" name="previous" value="' . $latest['modified'] . '">';
-					$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '">';
-					$message .= '<input type="hidden" name="body" value="' . Ut::html($this->page['body']) . '">';
+					#$message .= '<input type="hidden" name="id" value="' . $this->page['page_id'] . '">';
 					$message .= '<input type="submit" value="' . $this->_t('ReEditOldRevision') . '">';
 					$message .= '<a href="' . $this->href() . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('EditCancelButton') . '"></a>';
 					$message .= $this->form_close();
@@ -157,13 +156,13 @@ else
 	$this->http->status(403);
 
 	$message = $this->_t('ReadAccessDenied');
-	$this->show_message($message, 'info');
+	$tpl->message = $this->show_message($message, 'info', false);
 
 	// TODO: test, seems broken
 	if ($this->has_access('read', '', GUEST) === false)
 	{
 		$message = $this->_t('ReadAccessDeniedHintGuest');
-		$this->show_message($message, 'hint');
+		$tpl->hint = $this->show_message($message, 'hint', false);
 	}
 }
 
