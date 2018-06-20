@@ -317,16 +317,17 @@ $ap_translation = [
 	'SortingComments'			=> 'Kommentare sortieren',
 	'SortingCommentsInfo'		=> 'Ändern der Reihenfolge, in der die Seitenkommentare angezeigt werden, entweder mit dem neuesten oder dem ältesten Kommentar oben.',
 
-	'ToolbarSection'			=> 'Werkzeugleiste',
-	'CommentsPanel'				=> 'Kommentarleiste',
+	'ToolbarSection'			=> 'Werkzeugleisten',
+	'CommentsPanel'				=> 'Kommentare',
 	'CommentsPanelInfo'			=> 'Die Standardanzeige von Kommentaren im unteren Bereich der Seite.',
-	'FilePanel'					=> 'Dateileiste',
+	'FilePanel'					=> 'Dateien',
 	'FilePanelInfo'				=> 'Die Standardanzeige von Anhängen im unteren Bereich der Seite.',
-	'RatingPanel'				=> 'Bewertungsfunktion',
+	'RatingPanel'				=> 'Bewertung',
 	'RatingPanelInfo'			=> 'Die Standardanzeige für das Bewertungsfeld im unteren Bereich der Seite.',
-	'TagsPanel'					=> 'Schlagwortliste (Tags)',
+	'TagsPanel'					=> 'Schlagworte',
 	'TagsPanelInfo'				=> 'Die Standardanzeige für Schlagworte im unteren Bereich der Seite.',
 
+	'NavigationSection'			=> 'Navigation',
 	'HideRevisions'				=> 'Seitenversionen ausblenden',
 	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
 	'TocPanel'					=> 'Inhaltsverzeichnis',
@@ -355,15 +356,16 @@ $ap_translation = [
 	'NotifyDiffMode'			=> 'Diff-Modus für Benachrichtigungen',
 	'NotifyDiffModeInfo'		=> 'Diff-Modus für Benachrichtigungen im E-Mail-Textkörper.',
 
+	'EditingSection'			=> 'Bearbeitung',
 	'EditSummary'				=> 'Änderungszusammenfassung aktivieren',
 	'EditSummaryInfo'			=> 'Zeigt Kommentarfeld für die Zusammenfassung von Änderungen im Bearbeitungsmodus.',
 	'MinorEdit'					=> 'Kleine Änderung',
 	'MinorEditInfo'				=> 'Aktiviert die Option "Kleine Änderung" im Bearbeitungsmodus.',
 	'ReviewSettings'			=> 'Änderungen überprüfen',
 	'ReviewSettingsInfo'		=> 'Aktiviert die Option Änderungen durch einen "Reviewer" zu prüfen. In der Gruppenverwaltung muss mindestens ein "Reviewer" zugeordnet sein (WackoWiki Administration: Nutzer > Gruppen > Reviewer > hinzufügen).',
-
 	'PublishAnonymously'		=> 'Anonyme Veröffentlichung zulassen',
 	'PublishAnonymouslyInfo'	=> 'Erlaubt den Benutzern, vorzugsweise anonym zu veröffentlichen (um den Namen zu verbergen).',
+
 	'DefaultRenameRedirect'		=> 'Bei Umbenennung einer Seite eine Umleitung setzen',
 	'DefaultRenameRedirectInfo'	=> 'Standardmäßig erfolgt eine Umleitung an die alte Adresse der umbenannten Seite.',
 
