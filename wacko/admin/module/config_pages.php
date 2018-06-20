@@ -56,7 +56,6 @@ function admin_config_pages(&$engine, &$module)
 		$config['removals_page']			= trim((string) $_POST['removals_page'], '/');
 		$config['wanted_page']				= trim((string) $_POST['wanted_page'], '/');
 		$config['orphaned_page']			= trim((string) $_POST['orphaned_page'], '/');
-		$config['todo_page']				= trim((string) $_POST['todo_page'], '/');
 		$config['sandbox']					= trim((string) $_POST['sandbox'], '/');
 
 		$engine->config->_set($config);
@@ -414,18 +413,6 @@ function admin_config_pages(&$engine, &$module)
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="orphaned_page" name="orphaned_page" value="<?php echo Ut::html($engine->db->orphaned_page);?>">
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="todo_page"><strong><?php echo $engine->_t('TodoPage');?>:</strong><br>
-					<small><?php echo $engine->_t('TodoPageInfo');?></small></label>
-				</td>
-				<td>
-					<input type="text" maxlength="255" id="todo_page" name="todo_page" value="<?php echo Ut::html($engine->db->todo_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">

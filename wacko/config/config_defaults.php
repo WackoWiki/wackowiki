@@ -160,7 +160,6 @@ $wacko_config_defaults = [
 	'settings_page'					=> '',
 	'registration_page'				=> '',
 	'password_page'					=> '',
-	'todo_page'						=> '',
 
 	'default_write_acl'				=> '$',
 	'default_read_acl'				=> '*',
