@@ -326,6 +326,8 @@ $ap_translation = [
 	'RatingPanelInfo'			=> 'The default display of the rating panel in the bottom of the page.',
 	'TagsPanel'					=> 'Tags panel',
 	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
+
+	'NavigationSection'			=> 'Navigation',
 	'HideRevisions'				=> 'Hide Revisions',
 	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
 	'TocPanel'					=> 'Table of contents panel',
@@ -353,15 +355,16 @@ $ap_translation = [
 	'NotifyDiffMode'			=> 'Notify diff mode',
 	'NotifyDiffModeInfo'		=> 'Diff mode used for Notifications in Email body.',
 
+	'EditingSection'			=> 'Editing',
 	'EditSummary'				=> 'Edit summary',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Minor edit',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
-
 	'PublishAnonymously'		=> 'Allow anonymous publishing',
 	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
+
 	'DefaultRenameRedirect'		=> 'When renaming put redirection',
 	'DefaultRenameRedirectInfo'	=> 'By default, offer to deliver a redirect to the old address of the page being renamed.',
 	'StoreDeletedPages'			=> 'Keep deleted pages',

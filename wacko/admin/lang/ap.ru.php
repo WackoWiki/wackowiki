@@ -326,6 +326,8 @@ $ap_translation = [
 	'RatingPanelInfo'			=> 'По умолчанию отображать в нижней части страниц панель рейтинга документа.',
 	'TagsPanel'					=> 'Панель категорий',
 	'TagsPanelInfo'				=> 'По умолчанию отображать в нижней части страниц панель категорий.',
+
+	'NavigationSection'			=> 'Navigation',
 	'HideRevisions'				=> 'Показ версий',
 	'HideRevisionsInfo'			=> 'Показывать версии страниц.',
 	'TocPanel'					=> 'Панель оглавления',
@@ -354,15 +356,16 @@ $ap_translation = [
 	'NotifyDiffMode'			=> 'Режим сравнения для уведомлений',
 	'NotifyDiffModeInfo'		=> 'Режим сравнения для уведомлений отправляемых по Email.',
 
-	'EditSummary'				=> 'Edit summary',
+	'EditingSection'			=> 'Редактирование',
+	'EditSummary'				=> 'Описание изменений',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Незначительная правка',
 	'MinorEditInfo'				=> 'Разрешить обозначать незначительные правки.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
-
 	'PublishAnonymously'		=> 'Разрешить анонимную публикацию',
 	'PublishAnonymouslyInfo'	=> 'Включить опцию "Предпочитать анонимную публикацию (скрывать имя)" в профиле пользователя.',
+
 	'DefaultRenameRedirect'		=> 'При переименовании ставить редирект',
 	'DefaultRenameRedirectInfo'	=> 'По умолчанию предлагать поставить редирект по старому адресу переименуемой страницы.',
 	'StoreDeletedPages'			=> 'Хранить удаленные страницы',
