@@ -30,11 +30,11 @@
 				<br>
 				<h1>[ ' title ' ]</h1>
 			=]
-			
+
 			<input type="hidden" name="previous" value="[ ' previous ' ]"><br>
 			<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">[ ' body | pre ' ]</textarea>
 			<br>
-		
+
 			[= n _ =
 				<label for="edit_note">[ ' _t: EditNote ' ]:</label><br>
 				<input type="text" id="edit_note" maxlength="200" value="[ ' note |e ' ]" size="60" name="edit_note">
@@ -64,7 +64,7 @@
 				<br>[ ' _t: Categories ' ]: 
 				[ ' categories ' ]
 			=]
-			
+
 			[ ' captcha ' ]
 				<script>
 					wE = new WikiEdit();

@@ -48,9 +48,7 @@
 						</td>
 					=]
 				<td class="tool-">
-					<span class="dt2- tool2-">
-						[ ' i icon ' ]
-					</span>
+					<span class="dt2- tool2-">[ ' i icon ' ]</span>
 				</td>
 			</tr>
 		=]

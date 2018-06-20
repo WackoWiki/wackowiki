@@ -1062,6 +1062,8 @@ $wacko_translation = [
 	'ForumNewPosts'				=> 'поступили новые сообщения',
 	'ForumLocked'				=> 'раздел заблокирован',
 	'ForumUpdated'				=> 'Обновленный',
+	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
+	'ForumOutsideCluster'		=> 'Ensure that the <code>%1</code> action is located inside the forum cluster.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Пароль слишком короткий.',

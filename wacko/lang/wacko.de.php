@@ -1061,6 +1061,8 @@ $wacko_translation = [
 	'ForumNewPosts'				=> 'neuer Beitrag',
 	'ForumLocked'				=> 'Bereich gesperrt',
 	'ForumUpdated'				=> 'aktualisiert',
+	'ForumNoClusterDefined'		=> 'Kein Formum-Cluster definiert.',
+	'ForumOutsideCluster'		=> 'Die Aktion <code>%1</code> befindet sich nicht im Forum-Cluster.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Passwort ist zu kurz.',
