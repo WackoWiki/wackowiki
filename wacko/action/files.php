@@ -310,17 +310,25 @@ if ($can_view)
 				$tpl->r_g_dt			= $dt;
 			}
 
+			// icons ['handler' => ['title, class]]
+			$icons['show']		= ['FileViewProperties', 'info'];
+
 			// display file tools
 			if ($this->is_admin()
 				|| (!isset($is_global)
 					&& $this->get_page_owner_id($page_id) == $this->get_user_id())
 				|| $file['user_id'] == $this->get_user_id())
 			{
-				$tpl->r_mode_edit		= $this->href('filemeta', $page, ['m' => 'edit', 'file_id' => $file_id]);
-				$tpl->r_mode_remove		= $this->href('filemeta', $page, ['m' => 'remove', 'file_id' => $file_id]);
+				$icons['edit']		= ['FileEditProperties', 'edit'];
+				$icons['remove']	= ['FileRemove', 'delete'];
 			}
 
-			$tpl->r_info		= $this->href('filemeta', $page, ['m' => 'show', 'file_id' => $file_id]);
+			foreach ($icons as $handler => $icon)
+			{
+				$tpl->r_i_info		= $this->href('filemeta', $page, ['m' => $handler, 'file_id' => $file_id]);
+				$tpl->r_i_title		= $this->_t($icon[0]);
+				$tpl->r_i_class		= $icon[1];
+			}
 
 			unset($link);
 			unset($desc);

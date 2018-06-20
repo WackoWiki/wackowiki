@@ -49,11 +49,7 @@
 					=]
 				<td class="tool-">
 					<span class="dt2- tool2-">
-						<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: FileViewProperties ' ]" alt="[ ' _t: FileViewProperties ' ]" class="btn-info"></a>
-							[= mode =
-								<a href="[ ' edit ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: FileEditProperties ' ]" alt="[ ' _t: FileEditProperties ' ]" class="btn-edit"></a>
-								<a href="[ ' remove ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: FileRemove ' ]" alt="[ ' _t: FileRemove ' ]" class="btn-delete"></a>
-							=]
+						[ ' i icon ' ]
 					</span>
 				</td>
 			</tr>
@@ -67,3 +63,6 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
+
+[= icon =]
+<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title ' ]" alt="[ ' title ' ]" class="btn-[ ' class ' ]"></a>
