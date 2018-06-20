@@ -43,11 +43,11 @@ if (!$month)
 
 if ($highlight == 'today')
 {
-	$days = [$current_day => [NULL, NULL, '<span style="color: red; font-weight: bold;">' . $current_day . '</span>']];
+	$days = [$current_day => [null, null, '<span style="color: red; font-weight: bold;">' . $current_day . '</span>']];
 }
 else if ($highlight)
 {
-	$days = [$highlight => [NULL, NULL, '<span style="color: red; font-weight: bold;">' . $highlight . '</span>']];
+	$days = [$highlight => [null, null, '<span style="color: red; font-weight: bold;">' . $highlight . '</span>']];
 }
 
 if (!$daywidth)
@@ -75,7 +75,7 @@ else
 
 $day_name_length = $daywidth;
 
-$generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, $month_href = NULL, $first_day = 0, $pn = [])
+$generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, $month_href = null, $first_day = 0, $pn = [])
 {
 	$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
 	// remember that mktime will automatically correct if invalid dates are entered
@@ -114,7 +114,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	if ($day_name_length)
 	{
 		// if the day names should be shown ($day_name_length > 0)
-		// if day_name_length is >3, the full name of the day will be printed
+		// if day_name_length is > 3, the full name of the day will be printed
 		foreach ($day_names as $d)
 		{
 			$calendar .= '<th abbr="' . htmlentities($d, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . htmlentities(($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</th>';
@@ -167,36 +167,23 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 };
 
 
-$oldlocale = setlocale(LC_TIME, NULL); // save current locale
+$oldlocale = setlocale(LC_TIME, null); // save current locale
 setlocale(LC_TIME, ['de_DE@euro', 'de_DE', 'deu_deu']);
-
-echo '<table style="margin: auto;">';
-echo "<tr>";
-
-
 
 #echo "_range:" . $_range . "<br>";
 #echo "month:" . $month;
 
 for ($month; $month <= $_range; $month++)
 {
-		echo '<td class="a_top">';
-		echo $generate_calendar($year, $month, $days, $daywidth);
-
-		echo "</td>";
+		$tpl->m_month = $generate_calendar($year, $month, $days, $daywidth, null, 0, [3,2]);
 
 		if ($month % 3 == 0 and $month < $_range)
 		{
-			echo "</tr>\n<tr>";
+			$tpl->m_next = true;
 		}
 }
-
-echo "</tr>";
-echo "</table>";
-
 
 #echo $generate_calendar($year, $month, $days, $daywidth);
 
 setlocale(LC_TIME, $oldlocale);
 
-?>

@@ -66,6 +66,8 @@ if (list ($pages, $pagination) = $load_orphaned_pages($root, $max))
 {
 	if (is_array($pages))
 	{
+		$page_ids = [];
+
 		foreach ($pages as $page)
 		{
 			$page_ids[] = (int) $page['page_id'];
