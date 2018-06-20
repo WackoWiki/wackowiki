@@ -173,6 +173,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		$topic_comments[$comment['comment_on_id']] = $comment;
 	}
 
+	$tpl->enter('topics_');
+
 	//  display search
 	$tpl->search = $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]);
 
@@ -274,5 +276,17 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	$tpl->leave();
+
+	$tpl->leave(); // topics_
+}
+else
+{
+	// wrong placed show hint
+	$message	= (!$this->db->forum_cluster
+		? $this->_t('ForumNoClusterDefined')
+		: Ut::perc_replace($this->_t('ForumOutsideCluster'), 'topics')
+	);
+
+	$tpl->message	= $this->show_message($message,'info', false);
 }
 

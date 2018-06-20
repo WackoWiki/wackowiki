@@ -35,8 +35,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// parse subforums list if any
 	if (!empty($pages))
 	{
-		$_subforum = explode(',', $pages);
-		$subforum = array_map('trim', $_subforum);
+		$_subforum	= explode(',', $pages);
+		$subforum	= array_map('trim', $_subforum);
 	}
 
 	// make query
@@ -81,6 +81,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	}
 
 	$this->preload_acl($page_ids);
+
+	$tpl->enter('forum_');
 
 	$tpl->enter('f_');
 
@@ -199,5 +201,17 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	{
 		$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 	}
+
+	$tpl->leave(); // forum_
+}
+else
+{
+	// wrong placed show hint
+	$message	= (!$this->db->forum_cluster
+		? $this->_t('ForumNoClusterDefined')
+		: Ut::perc_replace($this->_t('ForumOutsideCluster'), 'forums')
+	);
+
+	$tpl->message	= $this->show_message($message,'info', false);
 }
 
