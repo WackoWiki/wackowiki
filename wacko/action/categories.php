@@ -18,62 +18,53 @@ if (!isset($label))		$label		= true;
 if (empty($page))		$page		= $this->db->category_page;
 if (!isset($nomark))	$nomark		= 0;
 
-$output		= '';
+#$category_id = (int) ($_GET['category_id'] ?? 0);
+
 $i			= '';
 
 if (isset($this->categories))
 {
-	foreach ($this->categories[$type_id] as $category_id => $category)
-	{
-		$_category = '<a href="' . $this->href('', $page, ['category_id' => $category_id, 'type_id' => $type_id]) . '" class="tag" rel="tag">' . Ut::html($category) . '</a>';
-
-		if ($list)
-		{
-			$output .= '<li>' . $_category . '</li>';
-		}
-		else
-		{
-			if ($i++ > 0)
-			{
-				$output .= ', ';
-			}
-
-			$output .= $_category;
-		}
-	}
-}
-
-if (!empty($_category))
-{
 	if ($list)
 	{
 		if (!$nomark)
 		{
-			echo '<div class="layout-box"><p><span>' . $this->_t('Categories') . ":</span></p>\n";
+			$tpl->o_mark	= true;
+			$tpl->emark		= true;
 		}
-
-		echo '<ol>';
 	}
 	else
 	{
+		if ($label)
+		{
+			$tpl->d_label	= true;
+		}
+
 		if (!$nomark)
 		{
-			echo '<div class="layout-box">' . "\n";
+			$tpl->d_mark	= true;
+			$tpl->emark		= true;
 		}
 	}
 
-	echo (!empty($_category) && (!$list && $label == true)
-			? $this->_t('Categories') . ': '
-			: '') .
-		$output;
-
-	if ($list)
+	foreach ($this->categories[$type_id] as $category_id => $category)
 	{
-		echo '</ol>';
-	}
+		$href	= $this->href('', $page, ['category_id' => $category_id, 'type_id' => $type_id]);
 
-	if (!$nomark)
-	{
-		echo "</div>\n";
+		if ($list)
+		{
+			$tpl->o_l_category	= $category;
+			$tpl->o_l_href		= $href;
+		}
+		else
+		{
+			$tpl->d_l_category	= $category;
+			$tpl->d_l_href		= $href;
+
+			if ($i++ > 0)
+			{
+				$tpl->d_l_delim		= ', ';
+			}
+		}
 	}
 }
+
