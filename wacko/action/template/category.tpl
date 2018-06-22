@@ -29,7 +29,7 @@
 				[ ' csrf: category_lang ' ]
 				<p class="t_right">
 					[ ' lang ' ]
-					<input type="submit" name="update" id="submit" value="update">
+					<input type="submit" name="update" id="submit" value="[ ' _t: UpdateButton ' ]">
 				</p>
 			</form>
 		=]

@@ -25,15 +25,15 @@ $category_link = function ($word, $category_id, $type_id, $filter = [], $list)
 				: '');
 };
 
-// settings:
-//	root		- where to start counting from (defaults to current tag)
+// {{category}}
+//	page		- where to start counting from (defaults to current tag)
 //	list		- make categories clickable links which display pages of a given category (1 (default) or 0)
 //	ids			- display pages which belong to these comma-separated categories ids (default none)
 //	lang		- categories language if necessary (defaults to current page lang)
 //	sort		- order pages alphabetically ('abc', default) or creation date ('date')
 //	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
 
-if (!isset($root))			$root		= '/';
+if (!isset($page))			$page		= '/';
 if (!isset($list))			$list		= 1;
 if (!isset($type_id))		$type_id	= OBJECT_PAGE;
 if (!isset($ids))			$ids		= '';
@@ -54,7 +54,7 @@ if (!isset($nomark))		$nomark = 0;
 $type_id	= (int) ($_GET['type_id'] ?? OBJECT_PAGE);
 $filter		= [];
 
-$root = $this->unwrap_link($root);
+$root = $this->unwrap_link($page);
 
 // show assigned objects
 if ($list && ($ids || isset($_GET['category_id'])))
@@ -192,15 +192,16 @@ if (!$ids)
 		if ($root)
 		{
 			$tpl->mark_link		= $this->link('/' . $root, '', '', '', 0);
-			$tpl->mark_cluster	= " of cluster ";
+			$tpl->mark_cluster	= $this->_t('CategoriesOfCluster');
 		}
 	}
 
 	// categories list
 	if ($categories = $this->get_categories_list($lang, true, $root))
 	{
-		$total	= ceil(count($categories) / 4); // TODO: without subcategories!
-		$n		= 1;
+		$filter[]	= (int) ($_GET['category_id'] ?? null);
+		$total		= ceil(count($categories) / 4); // TODO: without subcategories!
+		$n			= 1;
 
 		foreach ($categories as $category_id => $word)
 		{
