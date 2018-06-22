@@ -270,6 +270,8 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Δεν έχει επιλεγεί καμμία κατηγορία.',
 	'TagCloud'					=> 'Σύννεφο ετικετών',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
+	'UpdateButton'				=> 'Update',
+	'CategoriesOfCluster'		=> 'of cluster',
 
 	// source handler
 	'SourceText'				=> 'Source',

@@ -270,6 +270,8 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'No category selected.',
 	'TagCloud'					=> 'Tag Cloud',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
+	'UpdateButton'				=> 'Update',
+	'CategoriesOfCluster'		=> 'of cluster',
 
 	// source handler
 	'SourceText'				=> 'Source',
@@ -447,7 +449,7 @@ $wacko_translation = [
 	'RealName'					=> 'Real name',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Records per page',
-	'DoShowComments'				=> 'Show comments by default',
+	'DoShowComments'			=> 'Show comments by default',
 	'DoubleclickEditing'		=> 'Doubleclick Editing',
 	'UpdateSettingsButton'		=> 'Update Settings',
 

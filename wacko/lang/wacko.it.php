@@ -270,6 +270,8 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Nessuna categoria selezionata.',
 	'TagCloud'					=> 'Nuvola di tag',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
+	'UpdateButton'				=> 'Update',
+	'CategoriesOfCluster'		=> 'of cluster',
 
 	// source handler
 	'SourceText'				=> 'Source',

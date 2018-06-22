@@ -270,6 +270,8 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Ingen kategori valgt.',
 	'TagCloud'					=> 'Ordsky',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
+	'UpdateButton'				=> 'Update',
+	'CategoriesOfCluster'		=> 'of cluster',
 
 	// source handler
 	'SourceText'				=> 'Source',
