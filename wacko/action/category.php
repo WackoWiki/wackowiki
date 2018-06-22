@@ -56,8 +56,11 @@ $filter		= [];
 
 $root = $this->unwrap_link($root);
 
+// show assigned objects
 if ($list && ($ids || isset($_GET['category_id'])))
 {
+	$tpl->enter('r_');
+
 	if ($ids)
 	{
 		$category_ids[]	= preg_replace('/[^\d, ]/', '', $ids);
@@ -97,7 +100,9 @@ if ($list && ($ids || isset($_GET['category_id'])))
 			$words = strtolower(implode(', ', $words));
 		}
 
-		echo '<div class="layout-box"><p><span>' . $this->_t('PagesCategory') . ($words ? ' &laquo;<strong>' . $words . '</strong>&raquo;' : '' ) . ":</span></p>\n";
+		$tpl->mark			= true;
+		$tpl->mark_words	= $words;
+		$tpl->emark			= true;
 	}
 
 	if ($sort == 'abc')
@@ -128,8 +133,6 @@ if ($list && ($ids || isset($_GET['category_id'])))
 			"FROM " . $this->db->table_prefix . "category " .
 			"WHERE category_id IN (" . $this->ids_string($category_ids) . ")", true))
 		{
-			echo '<ol>';
-
 			foreach ($pages as $page)
 			{
 				// cache page_id for for has_access validation in link function
@@ -144,63 +147,60 @@ if ($list && ($ids || isset($_GET['category_id'])))
 					// do unicode entities
 					$page['title'] = $this->get_unicode_entities($page['title'], $page['page_lang']);
 
-					echo '<li>' .
-							($sort == 'date'
-								? '<small>(' . date('d/m/Y', strtotime($page['created'])) . ')</small> '
-								: '') .
-							$this->link('/' . $page['tag'], '', $page['title'], '', 0, 1) .
-						"</li>\n";
+					$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+
+					if ($sort == 'date')
+					{
+						$tpl->l_d_created = date('d/m/Y', strtotime($page['created']));
+					}
 				}
 
 				// take recent lang
 				$lang = $page['page_lang'];
 			}
-
-			echo '</ol>';
 		}
 		else
 		{
-			echo '<em>' . $this->_t('CategoryNotExists') . '</em><br>';
+			$tpl->message = '<em>' . $this->_t('CategoryNotExists') . '</em><br>';
 		}
 	}
 	else
 	{
-		echo '<em>' . $this->_t('CategoryEmpty') . '</em><br>';
+		$tpl->message = '<em>' . $this->_t('CategoryEmpty') . '</em><br>';
 	}
 
-	if ($nomark != 2)
-	{
-		echo '</div><br>';
-	}
+	$tpl->leave(); // r_
 }
 
+// show categories
 if (!$ids)
 {
+	$tpl->enter('c_');
+
 	// select category language
 	if ($this->db->multilanguage)
 	{
-		echo $this->form_open('category_lang');
-		echo '<p class="t_right">';
-		echo $this->show_select_lang('category_lang', $lang, false);
-		echo '<input type="submit" name="update" id="submit" value="update">';
-		echo '</p>';
-		echo $this->form_close();
+		$tpl->ml_lang	= $this->show_select_lang('category_lang', $lang, false);
 	}
 
 	// header
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p><span>' . $this->_t('Categories') . ($root ? " of cluster " . $this->link('/' . $root, '', '', '', 0) : '') . ":</span></p>\n";
+		$tpl->mark		= true;
+		$tpl->emark		= true;
+
+		if ($root)
+		{
+			$tpl->mark_link		= $this->link('/' . $root, '', '', '', 0);
+			$tpl->mark_cluster	= " of cluster ";
+		}
 	}
 
 	// categories list
 	if ($categories = $this->get_categories_list($lang, true, $root))
 	{
-		$total	= ceil(count($categories) / 4);
+		$total	= ceil(count($categories) / 4); // TODO: without subcategories!
 		$n		= 1;
-
-		echo '<table class="category_browser">' . "\n\t<tr>\n" . "\t\t<td>\n";
-		echo '<ul class="ul_list lined">' . "\n";
 
 		foreach ($categories as $category_id => $word)
 		{
@@ -209,48 +209,31 @@ if (!$ids)
 			// do unicode entities
 			$word['category'] = $this->get_unicode_entities($word['category'], $lang);
 
-			echo '<li> ' . $category_link($word, $category_id, $type_id, $filter, $list);
+			$tpl->l_link		= $category_link($word, $category_id, $type_id, $filter, $list);
 
 			if (isset($word['child']) && $word['child'] == true)
 			{
-				echo "\n<ul>\n";
 
 				foreach ($word['child'] as $category_id => $word)
 				{
-					echo '<li> ' . $category_link($word, $category_id, $type_id, $filter, $list) . "</li>\n";
+					$tpl->l_c_l_link	= $category_link($word, $category_id, $type_id, $filter, $list);
 				}
-
-				echo "</ul>\n</li>\n";
-			}
-			else
-			{
-				echo "</li>\n";
 			}
 
 			// modulus operator: every n loop add a break
 			if ($n % $total == 0)
 			{
-				echo "</ul>\n";
-				echo "\t\t</td>\n" .
-					 "\t\t<td>\n";
-				echo '<ul class="ul_list lined">' . "\n";
+				$tpl->l_next = true;
 			}
 
 			$n++;
 		}
-
-		echo "</ul>\n";
-		echo "\t\t</td>\n\t</tr>\n</table>\n";
 	}
 	else
 	{
-		echo '<em>' . $this->_t('NoCategoriesForThisLang') . '</em>';
+		$tpl->message = '<em>' . $this->_t('NoCategoriesForThisLang') . '</em>';
 	}
 
-	if (!$nomark)
-	{
-		echo "</div>\n";
-	}
+	$tpl->leave(); // c_
 }
 
-?>
