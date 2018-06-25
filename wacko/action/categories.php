@@ -6,10 +6,10 @@ if (!defined('IN_WACKO'))
 }
 
 // shows all categories assigned to an particular object (page, file)
-//	[one], [two], [tree]
+//	{{categories}} [one], [two], [tree]
 // list -
 // nomark -
-// path -
+// page -
 // label -
 
 if (!isset($list))		$list		= 0;
@@ -62,7 +62,7 @@ if (isset($this->categories))
 
 			if ($i++ > 0)
 			{
-				$tpl->d_l_delim		= ', ';
+				$tpl->d_l_delim	= ', ';
 			}
 		}
 	}
