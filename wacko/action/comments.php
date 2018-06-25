@@ -42,7 +42,6 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 
 		return [$comments, $pagination];
 	}
-
 };
 
 if (!isset($for))		$for	= ''; // depreciated
@@ -83,19 +82,19 @@ if ($this->user_allowed_comments())
 
 		if ($user)
 		{
-			echo '<small><a href="' . $this->href('', '', ['markread' => 1]) . '">' . $this->_t('MarkRead') . '</a></small>';
+			$tpl->mark_href =  $this->href('', '', ['markread' => 1]);
 		}
 
 		if ($root == '' && !(int) $noxml)
 		{
-			echo '<span class="desc_rss_feed"><a href="' . $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml"><img src="' . $this->db->theme_url . 'icon/spacer.png' . '" title="' . $this->_t('CommentsXMLTip') . '" alt="XML" class="btn-feed"></a></span>' . "<br><br>\n";
+			$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 		}
 
-		$this->print_pagination($pagination);
-
-		echo '<ul class="ul_list">' . "\n";
+		$tpl->pagination_text = $pagination['text'];
 
 		$curday = '';
+
+		$tpl->enter('page_');
 
 		foreach ($comments as $page)
 		{
@@ -105,43 +104,36 @@ if ($this->user_allowed_comments())
 
 				if ($day != $curday)
 				{
-					if ($curday)
-					{
-						echo "</ul>\n<br></li>\n";
-					}
-
-					echo "<li><strong>$day:</strong><ul>\n";
-					$curday = $day;
+					$tpl->day = $curday = $day;
 				}
 
-				$viewed = ( $user['last_mark'] == true && $page['comment_user'] != $user['user_name'] && $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '' );
+				$tpl->l_viewed	= ($user['last_mark'] == true
+									&& $page['comment_user'] != $user['user_name']
+									&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
 				// do unicode entities
 				// page lang
 				$page_lang = ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
 				// print entry
-				echo '<li ' . $viewed . '><span class="dt">' . $time . "</span> &mdash; " .
-				($title == 1
+				$tpl->l_time = $time;
+				$tpl->l_page = ($title == 1
 					? $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
-					: $this->link('/' . $page['tag'], '', $page['comment_on_tag'], $page['page_title'], 0, 1, $page_lang, 0)
-				) .
-				" . . . . . . . . . . . . . . . . <small>"./*$this->_t('LatestCommentBy').*/" " .
-				$this->user_link($page['comment_user'], '', true, false) .
-				"</small></li>\n";
+					: $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
+				);
+
+				$tpl->l_user = $this->user_link($page['comment_user'], '', true, false);
 			}
 		}
 
-		echo "</ul>\n</li>\n</ul>\n";
-
-		$this->print_pagination($pagination);
+		$tpl->leave();
 	}
 	else
 	{
-		echo $this->_t('NoRecentComments');
+		$tpl->nopages = true;
 	}
 }
 else
 {
-	echo $this->_t('CommentsDisabled');
+	$tpl->message =  $this->_t('CommentsDisabled');
 }
