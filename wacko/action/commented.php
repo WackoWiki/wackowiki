@@ -134,7 +134,7 @@ if ($this->user_allowed_comments())
 
 					// comment lang
 					$comment_lang	= ($this->page['page_lang'] != $page['comment_lang'])? $page['comment_lang'] : '';
-					$tpl->l_viewed = ($user['last_mark']
+					$tpl->l_viewed	= ($user['last_mark']
 										&& $page['comment_user_name'] != $user['user_name']
 										&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
