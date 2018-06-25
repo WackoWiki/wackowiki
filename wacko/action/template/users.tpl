@@ -17,7 +17,7 @@ first really BIG template written
 	<small><a href="[ ' href ' ]">&laquo; [ ' _t: UsersList ' ]</a></small>
 
 	[= tab _ =
-		
+
 		<ul class="menu" id="list">
 			[= li _ =
 				['' commit | void  // alternation hack '']

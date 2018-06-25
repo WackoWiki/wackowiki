@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-print page and revisions' authors.
+print page and revisions authors.
 	{{authors [add="(c) 2009 Ivan Ivanov[;(c) 2010 John Smith[;...]]"] [license="CC-BY-SA"] [cluster=0]}}
 	add		= semicolon-separated list of original authors (for reprinted work or such),
 			  or any appropriate text. wiki-formatting applies.
@@ -32,7 +32,7 @@ print page and revisions' authors.
 if (!isset($add))		$add		= '';
 if (!isset($add_only))	$add_only	= 0;
 if (!isset($license))	$license	= '';
-#if (!isset($license_id))	$license_id	= '';
+if (!isset($license_id))	$license_id	= null;
 if (!isset($cluster))	$cluster	= '';
 
 // check for license_id
@@ -43,13 +43,10 @@ if (empty($license) && !isset($license_id))
 					: ($this->db->license ?? '');
 }
 
-
-echo '<small>';
-
 if (!$this->page && !$add && !$license)
 {
 	// we don't have any input, displaying stub instead until the page is saved for the first time
-	echo '<em>' . $this->_t('AuthorsDisplayHint') . '</em>';
+	$tpl->hint = true;
 }
 else
 {
@@ -61,10 +58,8 @@ else
 
 		foreach ($add as $i => $str)
 		{
-			$add[$i] = $this->format($this->format($str, 'wacko'), 'post_wacko');
+			$output[$i] = $this->format($this->format($str, 'wacko'), 'post_wacko');
 		}
-
-		$output[] = implode('<br>', $add);
 	}
 
 	// search and process co-authors
@@ -179,23 +174,21 @@ else
 				$all_authors[] = $guest_authors;
 			}
 
-			$output[] = implode('<br>', $all_authors);
+			$output = $all_authors;
 		}
 	}
 
 	// add a license
 	if ($license || $license_id)
 	{
-		$output[] = '<br>' . $this->action('license', ['license_id' => $license_id, 'license' => $license, 'icon' => 1]);
+		$tpl->license_text = $this->action('license', ['license_id' => $license_id, 'license' => $license, 'icon' => 1]);
 	}
 
 	// print results
 	if ($output)
 	{
-		echo implode('<br>', $output);
+		$tpl->authors = implode('<br>', $output);
 	}
 }
-
-echo '</small>';
 
 ?>
