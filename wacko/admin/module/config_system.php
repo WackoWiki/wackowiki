@@ -224,9 +224,6 @@ function admin_config_system(&$engine, &$module)
 					<?php echo $engine->_t('PrivacySection');?>
 				</th>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
 			<tr class="hl_setting">
 				<td class="label">
 					<label for="approve_new_user"><strong><?php echo $engine->_t('AnonymizeIp');?>:</strong><br>
