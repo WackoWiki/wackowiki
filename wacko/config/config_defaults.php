@@ -173,7 +173,7 @@ $wacko_config_defaults = [
 	'remove_onlyadmins'				=> 0,
 	'owners_can_remove_comments'	=> 1,
 	'store_deleted_pages'			=> 1,
-	'default_rename_redirect'		=> 1,
+	'default_rename_redirect'		=> 0,
 
 	'publish_anonymously'			=> 0,
 
