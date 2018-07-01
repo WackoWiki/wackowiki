@@ -579,6 +579,7 @@ $wacko_translation = [
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'Преместено на адрес',
 	'RedirectedFrom'			=> 'Пренасочен от',
+	'RedirectedTo'				=> 'Пренасочен към',
 	'CurrentPassword'			=> 'Въведете текущата парола',
 	'NewPassword'				=> 'Нова парола',
 	'YouWantChangePassword'		=> 'Промяна на паролата',

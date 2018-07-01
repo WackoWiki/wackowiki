@@ -579,6 +579,7 @@ $wacko_translation = [
 	'ProfileAnonymousPub'		=> 'Publier de manière anonyme de préférence (masquer le nom)',
 	'PageMoved'					=> 'Cette page a été déplacée ou a changé de nom. Vous pouvez la trouverez ici&nbsp;: ',
 	'RedirectedFrom'			=> 'Redirigé depuis',
+	'RedirectedTo'				=> 'Redirigé vers',
 	'CurrentPassword'			=> 'Mot de passe actuel ',
 	'NewPassword'				=> 'Nouveau mot de passe (au moins 5 caractères) ',
 	'YouWantChangePassword'		=> 'Changement de mot de passe',

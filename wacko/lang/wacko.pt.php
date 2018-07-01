@@ -579,6 +579,7 @@ $wacko_translation = [
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'Esta página mudou de localização. Pode encontrá-la em',
 	'RedirectedFrom'			=> 'Redirecionado de',
+	'RedirectedTo'				=> 'Redirecionado para',
 	'CurrentPassword'			=> 'Password actual',
 	'NewPassword'				=> 'Nova password',
 	'YouWantChangePassword'		=> 'Alterar password',

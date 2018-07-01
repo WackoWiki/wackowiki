@@ -579,6 +579,7 @@ $wacko_translation = [
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'This page moved. You can find it at',
 	'RedirectedFrom'			=> 'Átirányítva innen',
+	'RedirectedTo'				=> 'Átirányítva a következõhöz',
 	'CurrentPassword'			=> 'Current password',
 	'NewPassword'				=> 'New password',
 	'YouWantChangePassword'		=> 'Change password',
