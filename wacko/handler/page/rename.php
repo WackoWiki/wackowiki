@@ -24,9 +24,9 @@ else
 $message = '';
 
 if ($registered
-&&
-($this->check_acl($user_name, $this->db->rename_globalacl)
-	|| $this->get_page_owner_id($this->page['page_id']) == $user_id)
+	&&
+	($this->check_acl($user_name, $this->db->rename_globalacl)
+		|| $this->get_page_owner_id($this->page['page_id']) == $user_id)
 )
 {
 	if (!$this->page)
@@ -39,6 +39,7 @@ if ($registered
 		{
 			$new_tag		= $_POST['new_tag'];
 			$new_supertag	= $this->translit($new_tag);
+			$old_supertag	= $this->page['supertag'];
 
 			if (($error = $this->sanitize_new_pagename($new_tag, $new_supertag, $this->tag)))
 			{
@@ -49,11 +50,10 @@ if ($registered
 			// rename
 			if (!isset($_POST['massrename']))
 			{
-
 				$message .= '<strong><code>' . $this->tag . "</code></strong>\n";
 				$message .= '<ol>';
 
-				// Rename page
+				// rename single page
 				$need_redirect = @$_POST['redirect'] == 'on';
 
 				if (!$need_redirect)
@@ -69,15 +69,19 @@ if ($registered
 					$message .= '<li>' . $this->_t('PageRenamed') . "</li>\n";
 				}
 
+				// unset object cache
+				$this->page_id_cache[$this->tag] = null;
+
 				$this->clear_cache_wanted_page($new_tag);
 				$this->clear_cache_wanted_page($new_supertag);
 
-				if ($need_redirect)
+				if ($need_redirect && ($old_supertag != $new_supertag))
 				{
 					$this->cache_wanted_page($this->tag);
 					$this->cache_wanted_page($this->supertag);
 
-					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_tag . '"}}', "-> $new_tag"))
+					// set redirect on original page
+					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_tag . '"}}', $this->_t('RedirectedTo') . ' ' . $new_tag))
 					{
 						$message .= '<li>' . Ut::perc_replace($this->_t('RedirectCreated'), $this->link($this->tag)) . "</li>\n";
 					}
@@ -96,7 +100,7 @@ if ($registered
 			}
 			else
 			{
-				//massrename
+				// massrename
 				$message .= '<p><strong>' . $this->_t('MassRenaming') . '</strong><p>';   //!!!
 				$message .= recursive_move($this, $this->tag, $new_tag);
 			}
@@ -200,7 +204,6 @@ function move(&$engine, $old_page, $new_tag)
 		{
 			$message .= '<li>' . $engine->_t('InvalidWikiName') . "</li>\n";
 		}
-		// if ($old_page['supertag'] == $new_supertag)
 		else if ($old_page['tag'] == $new_tag)
 		{
 			$message .= '<li>' . Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_tag)) . "</li>\n";
@@ -229,15 +232,18 @@ function move(&$engine, $old_page, $new_tag)
 					$message .= '<li>' . $engine->_t('PageRenamed') . "</li>\n";
 				}
 
+				// unset object cache for current page
+				$this->page_id_cache[$this->tag] = null;
+
 				$engine->clear_cache_wanted_page($new_tag);
 				$engine->clear_cache_wanted_page($new_supertag);
 
-				if ($need_redirect)
+				if ($need_redirect && ($old_page['supertag'] != $new_supertag))
 				{
 					$engine->cache_wanted_page($old_page['tag']);
 					$engine->cache_wanted_page($old_page['supertag']);
 
-					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_tag . '"}}', "-> $new_tag"))
+					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_tag . '"}}', $this->_t('RedirectedTo') . ' ' . $new_tag))
 					{
 						$message .= '<li>' . Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link($old_page['tag'])) . "</li>\n";
 					}
