@@ -51,7 +51,6 @@ $bb2_settings_defaults = [
 	'httpbl_threat'				=> '25',
 	'httpbl_maxage'				=> '30',
 	'offsite_forms'				=> false,
-	'eu_cookie'					=> false,
 	'reverse_proxy'				=> false,
 	'reverse_proxy_header'		=> 'X-Forwarded-For',
 	'reverse_proxy_addresses'	=> [],

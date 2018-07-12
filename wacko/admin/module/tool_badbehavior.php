@@ -518,7 +518,6 @@ function bb2_options(&$engine)
 		$config['httpbl_threat']				= (string) $_POST['httpbl_threat'];
 		$config['httpbl_maxage']				= (int) $_POST['httpbl_maxage'];
 		$config['offsite_forms']				= (string) $_POST['offsite_forms'];
-		$config['eu_cookie']					= (int) $_POST['eu_cookie'];
 		$config['reverse_proxy']				= (int) $_POST['reverse_proxy'];
 		$config['reverse_proxy_header']			= $_POST['reverse_proxy_header'];
 		$config['reverse_proxy_addresses']		= (string) $_POST['reverse_proxy_addresses'];
@@ -617,15 +616,6 @@ function bb2_options(&$engine)
 		else
 		{
 			$settings['offsite_forms'] = false;
-		}
-
-		if ($_POST['eu_cookie'])
-		{
-			$settings['eu_cookie'] = true;
-		}
-		else
-		{
-			$settings['eu_cookie'] = false;
 		}
 
 		if ($_POST['reverse_proxy'])
@@ -793,23 +783,6 @@ function bb2_options(&$engine)
 		<tr>
 			<th colspan="2">
 				<br>
-				European Union Cookie
-			</th>
-		</tr>
-
-		<tr class="hl_setting">
-			<td class="label">
-				<label for="eu_cookie"><strong>EU cookie handling</strong><br>
-				Select this option if you believe Bad Behavior's site security cookie is not exempt from the 2012 EU cookie regulation. <a href="http://bad-behavior.ioerror.us/2012/05/04/eu-cookie-requirement-disclosure/" rel="noreferrer">More info</a></label>
-			</td>
-			<td>
-				<input type="checkbox" id="eu_cookie" name="eu_cookie" value="true" <?php if ($settings['eu_cookie']) { ?>checked <?php } ?>>
-			</td>
-		</tr>
-
-		<tr>
-			<th colspan="2">
-				<br>
 				Reverse Proxy/Load Balancer
 			</th>
 		</tr>
@@ -823,7 +796,6 @@ function bb2_options(&$engine)
 				</div>
 			</td>
 		</tr>
-
 		<tr class="hl_setting">
 			<td class="label">
 				<label for="reverse_proxy">Enable Reverse Proxy</label>
