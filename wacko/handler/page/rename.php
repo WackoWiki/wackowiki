@@ -233,7 +233,7 @@ function move(&$engine, $old_page, $new_tag)
 				}
 
 				// unset object cache for current page
-				$this->page_id_cache[$this->tag] = null;
+				$engine->page_id_cache[$engine->tag] = null;
 
 				$engine->clear_cache_wanted_page($new_tag);
 				$engine->clear_cache_wanted_page($new_supertag);
