@@ -306,7 +306,7 @@ if ($can_view)
 			{
 				// display file meta data
 				$tpl->r_g_desc			= $desc;
-				$tpl->r_g_meta			= $file_size . ', ' . $hits;
+				$tpl->r_g_meta			= $file_size . ($hits ? ', ' . $hits : '');
 				$tpl->r_g_dt			= $dt;
 			}
 
