@@ -68,12 +68,6 @@ if ($this->db->enable_feeds)
 	}
 }
 
-// set Bad Behavior "screener" cookie for advanced protection
-if (!empty($this->db->ext_bad_behavior))
-{
-	$tpl->h_bb2 = bb2_insert_head();
-}
-
 if ($this->method == 'edit')
 {
 	$tpl->h_edit_lang = $this->user_lang;

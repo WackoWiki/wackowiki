@@ -200,14 +200,10 @@ function bb2_install() {
 	bb2_db_query(bb2_table_structure($settings['log_table']));
 }
 
-// Screener
-// Insert this into the <head> section of your HTML through a template call
-// or whatever is appropriate. This is optional we'll fall back to cookies
-// if you don't use it.
-function bb2_insert_head() {
+// Cute timer display
+function bb2_timer() {
 	global $bb2_timer_total;
-	global $bb2_javascript;
-	return "<!-- Bad Behavior " . BB2_VERSION . " run time: " . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n" . $bb2_javascript;
+	return "<!-- Bad Behavior " . BB2_VERSION . " run time: " . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n";
 }
 
 // Display stats? This is optional.
