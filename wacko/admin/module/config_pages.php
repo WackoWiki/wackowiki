@@ -41,6 +41,7 @@ function admin_config_pages(&$engine, &$module)
 		$config['allow_license_per_page']	= (int) $_POST['license_per_page'];
 		$config['root_page']				= trim((string) $_POST['root_page'], '/');
 		$config['help_page']				= trim((string) $_POST['help_page'], '/');
+		$config['privacy_page']				= trim((string) $_POST['privacy_page'], '/');
 		$config['terms_page']				= trim((string) $_POST['terms_page'], '/');
 		$config['search_page']				= trim((string) $_POST['search_page'], '/');
 		$config['registration_page']		= trim((string) $_POST['registration_page'], '/');
