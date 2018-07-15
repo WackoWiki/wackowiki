@@ -224,9 +224,11 @@ if ($this->has_access('read'))
 								?? ($title
 									?? '');
 
-			$tpl->payload	= $this->sess->freecap_old_comment
-								?? ($payload
-									?? '');
+			$tpl->payload	= Ut::html(
+								$this->sess->freecap_old_comment
+									?? ($payload
+										?? '')
+							);  // -> [ ' payload | pre ' ]
 
 			if ($user)
 			{
@@ -302,5 +304,3 @@ if ($this->has_access('read'))
 
 	$tpl->leave();
 }
-
-?>

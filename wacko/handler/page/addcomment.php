@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
-	$body		= str_replace("\r", '', trim($_POST['body']));
+	$body		= str_replace("\r", '', rtrim($_POST['body']));
 	$error		= '';
 	$title		= trim(@$_POST['title']);
 	$parent_id	= (int) @$_POST['parent_id'];

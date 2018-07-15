@@ -304,9 +304,9 @@ if ($this->has_access('read')
 
 	$tpl->previous	= Ut::html($previous);
 
-	// FIXME: \n gets eaten by assign() function in TemplatestSetter class, see line 117
+	// FIXME: \n gets stripped by assign() function in TemplatestSetter class, see line 117
 	// -> workaround: [ ' body | pre ' ]
-	$tpl->body		= $body; // Ut::html($body)
+	$tpl->body		= Ut::html($body);  // -> [ ' body | pre ' ]
 
 	// XXX: only for \n issue testing
 	#echo '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">'. Ut::html($body) . "</textarea>\n";
