@@ -20,7 +20,7 @@
 			<div class="preview">
 				[ ' meta ' ]
 				<div class="comment-title"><h2>[ ' title ' ]</h2></div>
-				[ ' text | truncate 250 ' ]
+				[ ' text | truncate 250 | e ' ]
 			</div><br>
 		=]
 		[ ' backlinks ' ]
