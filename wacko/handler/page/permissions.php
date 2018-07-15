@@ -79,7 +79,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		$this->log(2, Ut::perc_replace($this->_t('LogACLUpdated', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 
 		// Change permissions for all comments on this page
-		// TODO need to rethink/redo
+		// TODO: need to rethink/redo
 		$comments = $this->db->load_all(
 			"SELECT page_id " .
 			"FROM " . $this->db->table_prefix . "page " .
@@ -193,10 +193,10 @@ if ($upload_allowed)
 // show form
 $tpl->title = Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', ''));
 
-$tpl->read		= $read_acl['list'];
-$tpl->write		= $write_acl['list'];
-$tpl->comment	= $comment_acl['list'];
-$tpl->create	= $create_acl['list'];
+$tpl->read		= Ut::html($read_acl['list']);
+$tpl->write		= Ut::html($write_acl['list']);
+$tpl->comment	= Ut::html($comment_acl['list']);
+$tpl->create	= Ut::html($create_acl['list']);
 
 // check if upload is available for user
 if ($upload_allowed)
