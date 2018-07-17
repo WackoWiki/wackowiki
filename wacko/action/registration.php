@@ -6,14 +6,11 @@ if (!defined('IN_WACKO'))
 }
 
 $user_name		= '';
-$real_name		= '';
 $email			= '';
 $user_lang		= '';
 $password		= '';
 $conf_password	= '';
 $error			= '';
-$message		= '';
-$word_ok		= '';
 
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());

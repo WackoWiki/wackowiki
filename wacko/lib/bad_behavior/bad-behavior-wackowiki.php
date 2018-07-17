@@ -222,7 +222,8 @@ function bb2_timer()
 }
 
 // Display stats? This is optional.
-function bb2_insert_stats($force = false) {
+function bb2_insert_stats($force = false)
+{
 	$settings = bb2_read_settings();
 
 	if ($force || $settings['display_stats'])

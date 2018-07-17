@@ -197,15 +197,15 @@ function bb2_summary(&$engine)
 				if ($argument == 'status_key')
 				{
 					$status_key	= bb2_get_response($result['group_type']);
-					$link	= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;status_key=' . $result['group_type'] . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+					$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;status_key=' . $result['group_type'] . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
 				}
 				else if ($argument == 'request_uri')
 				{
-					$link	= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 				else
 				{
-					$link	= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
 				}
 
 				echo '<td>' . $link . "</td>\n";
@@ -230,14 +230,14 @@ function bb2_manage(&$engine)
 	$limit = 100;
 
 	// Get query variables desired by the user with input validation
-	if (isset($_GET['status_key']) && $_GET['status_key'])			$where .= "AND `status_key`			= " . $engine->db->q($_GET['status_key']) . " ";
-	if (isset($_GET['blocked']) && $_GET['blocked'])				$where .= "AND `status_key` 		!= '00000000' ";
-	else if (isset($_GET['permitted']) && $_GET['permitted'])		$where .= "AND `status_key`			= '00000000' ";
+	if (!empty($_GET['status_key']))			$where .= "AND `status_key`			= " . $engine->db->q($_GET['status_key']) . " ";
+	if (!empty($_GET['blocked']))				$where .= "AND `status_key` 		!= '00000000' ";
+	else if (!empty($_GET['permitted']))		$where .= "AND `status_key`			= '00000000' ";
 
-	if (isset($_GET['ip']) && $_GET['ip'])							$where .= "AND `ip` 				= " . $engine->db->q($_GET['ip']) . " ";
-	if (isset($_GET['user_agent']) && $_GET['user_agent'])			$where .= "AND `user_agent_hash`	= " . $engine->db->q($_GET['user_agent']) . " ";
-	if (isset($_GET['request_method']) && $_GET['request_method'])	$where .= "AND `request_method`		= " . $engine->db->q($_GET['request_method']) . " ";
-	if (isset($_GET['request_uri']) && $_GET['request_uri'])		$where .= "AND `request_uri_hash`	= " . $engine->db->q($_GET['request_uri']) . " ";
+	if (!empty($_GET['ip']))					$where .= "AND `ip` 				= " . $engine->db->q($_GET['ip']) . " ";
+	if (!empty($_GET['user_agent']))			$where .= "AND `user_agent_hash`	= " . $engine->db->q($_GET['user_agent']) . " ";
+	if (!empty($_GET['request_method']))		$where .= "AND `request_method`		= " . $engine->db->q($_GET['request_method']) . " ";
+	if (!empty($_GET['request_uri']))			$where .= "AND `request_uri_hash`	= " . $engine->db->q($_GET['request_uri']) . " ";
 
 	// collecting data
 	$count = $engine->db->load_single(
@@ -251,8 +251,6 @@ function bb2_manage(&$engine)
 	$ip_pagination				= ($_GET['ip']				?? '');
 	$user_agent_pagination		= ($_GET['user_agent']		?? '');
 	$request_method_pagination	= ($_GET['request_method']	?? '');
-	#$level_pagination			= ($_GET['level']			?? $_POST['level']		?? '');
-	#$level_mod_pagination		= ($_GET['level_mod']		?? $_POST['level_mod']	?? '');
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'badbehavior', 'setting' => 'bb2_manage']
 								+ (!empty($blocked_pagination)			? ['blocked'		=> Ut::html($blocked_pagination)] : [])
@@ -286,19 +284,21 @@ function bb2_manage(&$engine)
 
 	<p class="right">See also: <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_summary']); ?>">Summary</a> | <span class="active">Log</span> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_options']); ?>">Settings</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_whitelist']); ?>">Whitelist</a></p>
 
-
 <div class="alignleft">
 <?php if ($count['n'] < $totalcount['n']): ?>
 Displaying <strong><?php echo $count['n']; ?></strong> of <strong><?php echo $totalcount['n']; ?></strong> records filtered by:<br>
-<?php if (isset($_GET['status_key'])	&& $_GET['status_key'])		echo 'Status [<a href="' .		$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] '; ?>
-<?php if (isset($_GET['blocked'])		&& $_GET['blocked'])		echo 'Blocked [<a href="' .		$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] '; ?>
-<?php if (isset($_GET['permitted'])		&& $_GET['permitted'])		echo 'Permitted [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] '; ?>
-<?php if (isset($_GET['ip'])			&& $_GET['ip'])				echo 'IP [<a href="' .			$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] '; ?>
-<?php if (isset($_GET['user_agent'])	&& $_GET['user_agent'])		echo 'User Agent [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] '; ?>
-<?php if (isset($_GET['request_method']) && $_GET['request_method']) echo 'GET/POST [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] '; ?>
+<?php
+if (!empty($_GET['status_key']))		echo 'Status [<a href="' .		$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+if (!empty($_GET['blocked']))			echo 'Blocked [<a href="' .		$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+if (!empty($_GET['permitted']))			echo 'Permitted [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+if (!empty($_GET['ip']))				echo 'IP [<a href="' .			$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+if (!empty($_GET['user_agent']))		echo 'User Agent [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+if (!empty($_GET['request_method']))	echo 'GET/POST [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+?>
 <?php else: ?>
 Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
-<?php endif; ?>
+<?php
+endif; ?>
 <?php if (!isset($_GET['status_key']) && !isset($_GET['blocked'])) { ?><a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;blocked=true'; ?>">Show Blocked</a> <?php } ?>
 <?php if (!isset($_GET['status_key']) && !isset($_GET['permitted'])) { ?><a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;permitted=true'; ?>">Show Permitted</a> <?php } ?>
 </div>
@@ -326,7 +326,6 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 			$status_key = bb2_get_response($result['status_key']);
 
 			echo '<tr id="request-' . $result['log_id'] . '" class="lined">' . "\n";
-
 			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '"></td>' . "\n";
 
 			$httpbl	= bb2_httpbl_lookup($engine, $result['ip']);
@@ -336,10 +335,10 @@ Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
 			{
 				$host = @gethostbyaddr($result['ip']);
 				$engine->db->sql_query(
-						"UPDATE " . $engine->db->table_prefix . "bad_behavior SET " .
-							"host		= " . $engine->db->q($host) . " " .
-						"WHERE log_id	= " . (int) $result['log_id'] . " " .
-						"LIMIT 1");
+					"UPDATE " . $engine->db->table_prefix . "bad_behavior SET " .
+						"host		= " . $engine->db->q($host) . " " .
+					"WHERE log_id	= " . (int) $result['log_id'] . " " .
+					"LIMIT 1");
 			}
 
 			$host = $result['host'];
@@ -452,7 +451,6 @@ function bb2_whitelist(&$engine)
 	<p>Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.</p>
 	<p class="right">See also: <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_summary']); ?>">Summary</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']); ?>">Log</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_options']); ?>">Settings</a> | <span class="active">Whitelist</span></p>
 
-
 	<table class="formation">
 		<tr>
 			<th colspan="2">
@@ -460,7 +458,6 @@ function bb2_whitelist(&$engine)
 				Whitelist
 			</th>
 		</tr>
-
 		<tr class="hl_setting">
 			<td class="label">
 				<label for="whitelists_ip"><strong>IP Address:</strong><br>
@@ -663,7 +660,6 @@ function bb2_options(&$engine)
 	<p class="right">See also: <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_summary']); ?>">Summary</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']); ?>">Log</a> | <span class="active">Settings</span> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_whitelist']); ?>">Whitelist</a></p>
 
 	<table class="formation">
-
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
@@ -675,14 +671,12 @@ function bb2_options(&$engine)
 				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
 			</td>
 		</tr>
-
 		<tr>
 			<th colspan="2">
 				<br>
 				Logging HTTP request
 			</th>
 		</tr>
-
 		<tr class="hl_setting">
 			<td class="label">
 				<label for="logging_verbose">Verbose</label>
@@ -691,7 +685,6 @@ function bb2_options(&$engine)
 				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
-
 		<tr class="hl_setting">
 			<td class="label">
 				<label for="logging_normal">Normal (recommended)</label>
@@ -700,7 +693,6 @@ function bb2_options(&$engine)
 				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
-
 		<tr class="hl_setting">
 			<td class="label">
 				<label for="logging_false">Do not log (not recommended)</label>
@@ -709,14 +701,12 @@ function bb2_options(&$engine)
 				<input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
-
 		<tr>
 			<th colspan="2">
 				<br>
 				Security
 			</th>
 		</tr>
-
 		<tr class="hl_setting">
 			<td class="label">
 				<label for="strict_checking"><strong>Strict checking</strong><br>
@@ -736,7 +726,6 @@ function bb2_options(&$engine)
 				<input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
-
 		<tr>
 			<th colspan="2">
 				<br>
@@ -779,7 +768,6 @@ function bb2_options(&$engine)
 				<input type="text" size="3" maxlength="3" id="httpbl_maxage" name="httpbl_maxage" value="<?php echo intval($settings['httpbl_maxage']); ?>">
 			</td>
 		</tr>
-
 		<tr>
 			<th colspan="2">
 				<br>
