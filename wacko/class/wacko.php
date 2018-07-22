@@ -5788,23 +5788,26 @@ class Wacko
 
 	function save_acl($page_id, $privilege, $list)
 	{
-		if ($this->load_acl($page_id, $privilege, 0, 0, 0))
-		{
-			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "acl SET " .
-					"list = " . $this->db->q(trim(str_replace("\r", '', $list))) . " " .
-				"WHERE page_id = " . (int) $page_id . " " .
-					"AND privilege = " . $this->db->q($privilege) . " ");
-		}
-		else
-		{
-			// STS: maybe simply ON DUPLICATE KEY UPDATE?
-			$this->db->sql_query(
-				"INSERT INTO " . $this->db->table_prefix . "acl SET " .
-					"list		= " . $this->db->q(trim(str_replace("\r", '', $list))) . ", " .
-					"page_id	= " . (int) $page_id . ", " .
-					"privilege	= " . $this->db->q($privilege) . " ");
-		}
+		$list = trim(str_replace("\r", '', $list));
+
+		// validate
+
+
+		$this->db->sql_query('
+			INSERT INTO ' . $this->db->table_prefix . 'acl (
+				page_id,
+				privilege,
+				list
+			)
+			VALUES (
+				' . (int) $page_id . ',
+				' . $this->db->q($privilege) . ',
+				' . $this->db->q($list) . '
+			)
+			ON DUPLICATE KEY UPDATE
+				privilege	= VALUES(privilege),
+				list		= VALUES(list)
+		');
 	}
 
 	/**
@@ -6187,7 +6190,7 @@ class Wacko
 				}
 			}
 
-			$acl = join("\n", $list);
+			$acl = implode("\n", $list);
 		}
 
 		while ($replaced > 0);
