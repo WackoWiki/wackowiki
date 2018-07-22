@@ -233,6 +233,7 @@ if ($this->has_access('read')
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
 
 	// display form
+	$tpl->enter('f_');
 
 	// "cf" attribute: it is for so called "critical fields" in the form.
 	// It is used by some javascript code, which is launched onbeforeunload and shows a pop-up dialog
@@ -372,6 +373,8 @@ if ($this->has_access('read')
 	}
 
 	$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
+
+	$tpl->leave();
 }
 else
 {
