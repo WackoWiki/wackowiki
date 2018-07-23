@@ -38,6 +38,10 @@ if (isset($this->categories))
 		{
 			$tpl->d_label	= true;
 		}
+		else
+		{
+			$tpl->d_icon	= true;
+		}
 
 		if (!$nomark)
 		{
