@@ -2019,6 +2019,13 @@ li.m-source img {
 	width: 16px;
 	display: inline-block;
 }
+.btn-tag {
+	background: url('./../icon/tag.svg') no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
 
 .viewed {
 	font-weight: 600;
@@ -2278,6 +2285,10 @@ table.forum td {
 							44px;
 	height:	22px;
 	width:	66px;
+}
+
+span.license {
+	margin-left: 5px;
 }
 
 /* diff handler ------------- */
