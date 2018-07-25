@@ -300,7 +300,7 @@ class Http
 
 		if (isset($sess->saved_diag_log))
 		{
-			// recover old dbg messages sabed by self::redirect()
+			// recover old dbg messages saved by self::redirect()
 			Diag::$log = array_merge($sess->saved_diag_log, Diag::$log);
 		}
 
