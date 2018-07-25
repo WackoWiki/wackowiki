@@ -449,12 +449,12 @@ $ap_translation = [
 	'ReverseProxyAddresses'		=> 'Массив IP адресов обратного прокси',
 	'ReverseProxyAddressesInfo'	=> 'Каждый элемент этого массива является IP-адресом обратных прокси. WackoWiki будет доверять сохраненной в заголовках X-Forwarded-For информации только если удаленный IP-адрес является одним из массива и запрос доходит до веб-сервера с одного из ваших обратных прокси. В противном случае клиент может напрямую подключиться к вашему веб-серверу подделав заголовки X-Forwarded-For.',
 
-	'SessionSection'				=> 'Session handling',
-	'SessionStorage'				=> 'Session storage',
-	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
+	'SessionSection'				=> 'Управление сессией',
+	'SessionStorage'				=> 'Хранилище сессии',
+	'SessionStorageInfo'			=> 'Эта настройка определяет, где хранятся данные сессии. По умолчанию выбрано хранение сессии в файле или в базе данных.',
 	'SessionModes'	=> [
-		'1'		=> 'File',
-		'2'		=> 'Database',
+		'1'		=> 'Файл',
+		'2'		=> 'База данных',
 	],
 
 	'RewriteMode'					=> 'Использовать <code>mod_rewrite</code>',
