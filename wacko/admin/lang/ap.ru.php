@@ -449,6 +449,14 @@ $ap_translation = [
 	'ReverseProxyAddresses'		=> 'ћассив IP адресов обратного прокси',
 	'ReverseProxyAddressesInfo'	=> ' аждый элемент этого массива €вл€етс€ IP-адресом обратных прокси. WackoWiki будет довер€ть сохраненной в заголовках X-Forwarded-For информации только если удаленный IP-адрес €вл€етс€ одним из массива и запрос доходит до веб-сервера с одного из ваших обратных прокси. ¬ противном случае клиент может напр€мую подключитьс€ к вашему веб-серверу подделав заголовки X-Forwarded-For.',
 
+	'SessionSection'				=> 'Session handling',
+	'SessionStorage'				=> 'Session storage',
+	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
+	'SessionModes'	=> [
+		'1'		=> 'File',
+		'2'		=> 'Database',
+	],
+
 	'RewriteMode'					=> '»спользовать <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> '≈сли веб-сервер поддерживает данную функцию, включите, чтобы получить "красивые" адреса страниц.<br>
 										<span class="cite">«начение может быть переписано в положение ON независимо от того что установлено этой настройкой. —м. https://wackowiki.org/doc/Dev/Release/R55/UriRouter#h3176-4 URI Router',

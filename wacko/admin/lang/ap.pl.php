@@ -462,6 +462,14 @@ $ap_translation = [
 									 reverse proxies. Otherwise, the client could directly connect to
 									 your web server spoofing the X-Forwarded-For headers.',
 
+	'SessionSection'				=> 'Session handling',
+	'SessionStorage'				=> 'Session storage',
+	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
+	'SessionModes'	=> [
+		'1'		=> 'File',
+		'2'		=> 'Database',
+	],
+
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
 										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
