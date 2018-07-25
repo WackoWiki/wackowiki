@@ -267,7 +267,7 @@ class Http
 
 	public function session($route)
 	{
-		if (1) // STS TODO need config'ing
+		if ($this->db->session_store == 1)
 		{
 			$sess = new SessionFileStore;
 			$sess->cf_file_path = CACHE_SESSION_DIR;

@@ -21,6 +21,7 @@ $wacko_config_defaults = [
 	'database_charset'				=> 'latin1',
 	'database_engine'				=> 'InnoDB',
 
+	'session_store'					=> 1,
 	'sql_mode_strict'				=> 0,
 
 	'table_prefix'					=> 'wacko_',

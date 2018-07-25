@@ -21,8 +21,8 @@ $lang = [
 	'users_page'		=> 'Benutzer',
 
 	'help_page'			=> 'Hilfe',
-	'terms_page'		=> 'Nutzungsbedingungen',
-	'privacy_page'		=> 'Datenschutz',
+	#'terms_page'		=> 'Nutzungsbedingungen',
+	#'privacy_page'		=> 'Datenschutz',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

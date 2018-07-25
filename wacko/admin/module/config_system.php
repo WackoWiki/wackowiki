@@ -46,6 +46,7 @@ function admin_config_system(&$engine, &$module)
 		$config['log_default_show']			= (int) $_POST['log_default_show'];
 		$config['log_purge_time']			= (int) $_POST['log_purge_time'];
 		$config['anonymize_ip']				= (int) $_POST['anonymize_ip'];
+		$config['session_store']			= (int) $_POST['session_store'];
 		$config['rewrite_mode']				= (int) ($_POST['rewrite_mode'] ?? 0);
 		$config['reverse_proxy']			= (int) ($_POST['reverse_proxy'] ?? 0);
 		$config['reverse_proxy_header']		= (string) $_POST['reverse_proxy_header'];
@@ -273,6 +274,31 @@ function admin_config_system(&$engine, &$module)
 					<input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo Ut::html($engine->db->reverse_proxy_addresses);?>">
 				</td>
 			</tr>
+			<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('SessionSection');?>
+				</th>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="session_store"><strong><?php echo $engine->_t('SessionStorage');?>:</strong><br>
+					<small><?php echo $engine->_t('SessionStorageInfo');?></small></label>
+				</td>
+				<td>
+					<select id="session_store" name="session_store">
+					<?php
+						$store_modes = $engine->_t('SessionModes');
+
+						foreach ($store_modes as $mode => $store_mode)
+						{
+							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->session_store === $mode ? 'selected' : '') . '>' . $mode . ': ' . $store_mode . '</option>' . "\n";
+						}
+					?>
+					</select>
+				</td>
+			</tr>
+
 			<tr>
 				<th colspan="2">
 					<br>

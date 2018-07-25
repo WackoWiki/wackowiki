@@ -470,6 +470,15 @@ $ap_translation = [
 									 Informationen nur vertrauen, wenn die Anfrage den Webserver über die
 									 entfernte IP-Adresse eines gelisteten Reverse-Proxies erreicht. Ansonsten könnte
 									 der Client sich direkt mit Deinem Webserver verbinden und den X-Forwarded-For Header täuschen.',
+
+	'SessionSection'				=> 'Sitzungsbehandlung',
+	'SessionStorage'				=> 'Sitzungsspeicher',
+	'SessionStorageInfo'			=> 'Diese Option definiert, wo die Sitzungsdaten gespeichert werden. Standardmäßig ist entweder der Speicher für Datei- oder Datenbanksitzungen ausgewählt.',
+	'SessionModes'	=> [
+		'1'		=> 'Datei',
+		'2'		=> 'Datenbank',
+	],
+
 	'RewriteMode'				=> 'Verwende <code>mod_rewrite</code>',
 	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktivieren sie, um "schöne" Seitenadressen zu erhalten.<br>
 									<span class="cite">Der Wert wird möglicherweise zur Laufzeit von der Settings-Klasse überschrieben, obwohl er deaktiviert ist, wenn HTTP_MOD_REWRITE aktiviert ist.',
