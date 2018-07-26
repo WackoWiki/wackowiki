@@ -213,6 +213,7 @@ $wacko_translation = [
 	'ACLStoreButton'			=> 'Guardar ACLs',
 	'ACLCancelButton'			=> 'Cancelar',
 	'ACLAccessDenied'			=> 'No eres el propietario de esta página.',
+	'AclSyntaxError'			=> 'Access control list syntax error',
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',

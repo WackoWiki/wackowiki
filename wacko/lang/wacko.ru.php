@@ -214,6 +214,7 @@ $wacko_translation = [
 	'ACLStoreButton'			=> 'Сохранить',
 	'ACLCancelButton'			=> 'Отмена',
 	'ACLAccessDenied'			=> 'Вы не владелец этой страницы.',
+	'AclSyntaxError'			=> 'Контроль доступа синтаксическая ошибка списка',
 
 	// purge handler
 	'PurgePage'					=> 'Чистка документа',

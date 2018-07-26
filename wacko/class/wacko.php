@@ -5786,12 +5786,42 @@ class Wacko
 			"LIMIT 1");
 	}
 
+	// check for acl syntax errors
+	function validate_acl_syntax($list)
+	{
+		$error	= null;
+		$lines	= explode("\n", $list);
+
+		foreach ($lines as $line)
+		{
+			if (!( preg_match('/^([(\!)?' . $this->language['ALPHANUM_P'] . ']+)$/', $line)
+				|| preg_match('/^((\!)?[(\*|\$)])$/', $line)))
+			{
+				$error	.= '<code>' . $line . '</code><br>';
+			}
+		}
+
+		if ($error)
+		{
+			$this->set_message($this->_t('AclSyntaxError') . ': <br>' . $error, 'error');
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
 	function save_acl($page_id, $privilege, $list)
 	{
 		$list = trim(str_replace("\r", '', $list));
 
 		// validate
-
+		if (!$this->validate_acl_syntax($list))
+		{
+			#$this->reload_me();
+			return;
+		};
 
 		$this->db->sql_query('
 			INSERT INTO ' . $this->db->table_prefix . 'acl (
