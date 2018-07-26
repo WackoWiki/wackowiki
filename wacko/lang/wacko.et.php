@@ -213,6 +213,7 @@ $wacko_translation = [
 	'ACLStoreButton'			=> 'Salvesta KÕL',
 	'ACLCancelButton'			=> 'Loobun',
 	'ACLAccessDenied'			=> 'Sa ei ole selle lehe omanik.',
+	'AclSyntaxError'			=> 'Access control list syntax error',
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',

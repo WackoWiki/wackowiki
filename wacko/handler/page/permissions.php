@@ -117,6 +117,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				"WHERE user_id		= " . (int) $new_id." " .
 				"LIMIT 1");
 
+			// set new owner
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"owner_id = " . (int) $new_id . " " .

@@ -213,6 +213,7 @@ $wacko_translation = [
 	'ACLStoreButton'			=> 'Gem',
 	'ACLCancelButton'			=> 'Fortryd',
 	'ACLAccessDenied'			=> 'Du er ikke ejer af denne side.',
+	'AclSyntaxError'			=> 'Access control list syntax error',
 
 	// purge handler
 	'PurgePage'					=> 'Rens side',
