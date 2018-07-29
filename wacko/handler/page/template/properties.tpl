@@ -10,7 +10,7 @@
 			<div class="page_settings">
 			<form action="[ ' href: properties ' ]" method="post" name="extended_properties">
 				[' csrf: extended_properties ']
-				<table class="form_tbl lined">
+				<table class="form_tbl">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -224,7 +224,7 @@
 					<th scope="row">[ ' _t: MetaTitle ' ]</th>
 					<td>[ ' page.title |e ' ]</td>
 				</tr>
-				<tr>' . 
+				<tr>
 					<th scope="row">[ ' _t: MetaKeywords ' ]</th>
 					<td>[ ' page.keywords |e ' ]</td>
 				</tr>
@@ -264,8 +264,8 @@
 				<td title="[ ' _t: SettingsSizeTip ' ]">[ ' bodylen ' ] / [ ' bodyrlen ' ]</td>
 			</tr>
 			<tr>
-				<th scope="row">[ ' _t: SettingsTotalRevs ' ]</th>
-				<td><a href="[ ' href: revisions ' ]" title="[ ' _t: RevisionTip ' ]">[ ' revs | number 0 , . ' ]</a></td>
+				<th scope="row">[ ' _t: Version ' ]</th>
+				<td><a href="[ ' href: revisions ' ]" title="[ ' _t: RevisionTip ' ]">[ ' version | number 0 , . ' ]</a></td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: SettingsTotalComs ' ]</th>

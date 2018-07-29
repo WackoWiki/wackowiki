@@ -181,7 +181,7 @@ $tpl->page		= $this->page;
 $tpl->owner		= $this->user_link($this->page['owner_name'], '', true, false);
 $tpl->bodylen	= $this->binary_multiples($this->page['page_size'], false, true, true);
 $tpl->bodyrlen	= $this->binary_multiples(strlen($this->page['body_r']), false, true, true);
-$tpl->revs		= $this->page['revisions'];
+$tpl->version	= $this->page['version_id'];
 
 if ($this->db->footer_rating)
 {
