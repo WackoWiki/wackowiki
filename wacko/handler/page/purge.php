@@ -50,6 +50,9 @@ if (@$_POST['_action'] === 'purge_data')
 		$message[] = $this->_t('PageCachePurged');
 	}
 
+	// purge SQL queries cache
+	$this->db->invalidate_sql_cache();
+
 	foreach ($message as $notice)
 	{
 		$tpl->p_l_notice = $notice;
