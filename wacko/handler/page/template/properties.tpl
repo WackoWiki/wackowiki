@@ -10,7 +10,7 @@
 			<div class="page_settings">
 			<form action="[ ' href: properties ' ]" method="post" name="extended_properties">
 				[' csrf: extended_properties ']
-				<table class="form_tbl">
+				<table class="form_tbl lined">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
