@@ -138,8 +138,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$inconsistencies['2.2'] = ['category_assignment without page', count($category_assignment)];
 				// -> DELETE
 
-			// 2.3. link without page
-			$link = $engine->db->load_all(
+			// 2.3. page_link without page
+			$page_link = $engine->db->load_all(
 				"SELECT
 					l.link_id
 				FROM
@@ -148,7 +148,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					p.page_id IS NULL");
 
-			$inconsistencies['2.3'] = ['link without page', count($link)];
+			$inconsistencies['2.3'] = ['page_link without page', count($page_link)];
 				// -> DELETE
 
 			// 2.4. menu without page
@@ -229,6 +229,32 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 			$inconsistencies['2.9'] = ['revision without page', count($revision)];
 			// -> DELETE
+
+			// 2.10. external_link without page
+			$external_link = $engine->db->load_all(
+				"SELECT
+					l.link_id
+				FROM
+					" . $prefix . "external_link l
+					LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+				WHERE
+					p.page_id IS NULL");
+
+			$inconsistencies['2.10'] = ['external_link without page', count($external_link)];
+				// -> DELETE
+
+			// 2.11. file_link without page
+			$file_link = $engine->db->load_all(
+				"SELECT
+					l.link_id
+				FROM
+					" . $prefix . "file_link l
+					LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+				WHERE
+					p.page_id IS NULL");
+
+			$inconsistencies['2.11'] = ['file_link without page', count($file_link)];
+				// -> DELETE
 
 			// 3.1. usergroup_member without group
 			$usergroup_member2 = $engine->db->load_all(
@@ -312,7 +338,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					"DELETE
 						gm.*
 					FROM
-			" . $prefix . "usergroup_member gm
+						" . $prefix . "usergroup_member gm
 						LEFT JOIN " . $prefix . "user u ON (gm.user_id = u.user_id)
 					WHERE
 						u.user_id IS NULL");
@@ -402,8 +428,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 			$_solved['2.2'] = ['category_assignment without page', $engine->config->affected_rows];
 
-			// 2.3. link without page
-			$link = $engine->db->sql_query(
+			// 2.3. page_link without page
+			$page_link = $engine->db->sql_query(
 					"DELETE
 						l.*
 					FROM
@@ -412,7 +438,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					WHERE
 						p.page_id IS NULL");
 
-			$_solved['2.3'] = ['link without page', $engine->config->affected_rows];
+			$_solved['2.3'] = ['page_link without page', $engine->config->affected_rows];
 
 			// 2.4. menu without page
 			$menu2 = $engine->db->sql_query(
@@ -486,6 +512,30 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					p.page_id IS NULL");
 
 			$_solved['2.9'] = ['revision without page', $engine->config->affected_rows];
+
+			// 2.10. external_link without page
+			$external_link = $engine->db->sql_query(
+					"DELETE
+						l.*
+					FROM
+						" . $prefix . "external_link l
+						LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+					WHERE
+						p.page_id IS NULL");
+
+			$_solved['2.10'] = ['external_link without page', $engine->config->affected_rows];
+
+			// 2.11. file_link without page
+			$file_link = $engine->db->sql_query(
+					"DELETE
+						l.*
+					FROM
+						" . $prefix . "file_link l
+						LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
+					WHERE
+						p.page_id IS NULL");
+
+			$_solved['2.11'] = ['file_link without page', $engine->config->affected_rows];
 
 			// 3.1. usergroup_member without group
 			$usergroup_member2 = $engine->db->sql_query(

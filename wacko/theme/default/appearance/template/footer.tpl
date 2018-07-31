@@ -35,8 +35,9 @@
 	</nav>
 	<div id="credits">
 		[= by =
-			[ ' _t: PoweredBy ' ] [ ' home ' ] [ ' version ' ][ ' patchlevel ' ]<br>
+			[ ' _t: PoweredBy ' ] [ ' home ' ] [ ' version ' ][ ' patchlevel ' ]
 		=]
+		<br>
 		[= license =
 			<div id="license">
 				[ ' text ' ]

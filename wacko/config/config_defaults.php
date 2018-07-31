@@ -141,9 +141,9 @@ $wacko_config_defaults = [
 	'category_page'					=> 'Category',
 	'tag_page'						=> 'Tag',
 
-	'help_page'						=> 'Help',
-	'terms_page'					=> 'Terms',
-	'privacy_page'					=> 'Privacy',
+	'help_page'						=> '',	// Help
+	'terms_page'					=> '',	// Terms
+	'privacy_page'					=> '',	// Privacy
 
 	'license'						=> '',
 	'enable_license'				=> 0,
