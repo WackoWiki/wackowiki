@@ -7533,7 +7533,42 @@ class Wacko
 		return true;
 	}
 
+	// removes all associated page links
+	// TODO: use page_id reference for single delete (?)
 	function remove_links($tag, $cluster = false)
+	{
+		if (!$tag)
+		{
+			return false;
+		}
+
+		// external links
+		return $this->db->sql_query(
+			"DELETE l.* " .
+			"FROM " . $this->db->table_prefix . "external_link l " .
+				"LEFT JOIN " . $this->db->table_prefix . "page p " .
+					"ON (l.page_id = p.page_id) " .
+			"WHERE p.tag = " . $this->db->q($tag) . " " .
+				($cluster === true
+					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
+					: "") );
+
+		// file links
+		$this->remove_file_link($tag, $cluster);
+
+		// internal links
+		return $this->db->sql_query(
+			"DELETE l.* " .
+			"FROM " . $this->db->table_prefix . "page_link l " .
+				"LEFT JOIN " . $this->db->table_prefix . "page p " .
+					"ON (l.from_page_id = p.page_id) " .
+			"WHERE p.tag = " . $this->db->q($tag) . " " .
+				($cluster === true
+					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
+					: "") );
+	}
+
+	function remove_file_link($tag, $cluster = false)
 	{
 		if (!$tag)
 		{
@@ -7542,9 +7577,9 @@ class Wacko
 
 		return $this->db->sql_query(
 			"DELETE l.* " .
-			"FROM " . $this->db->table_prefix . "page_link l " .
+			"FROM " . $this->db->table_prefix . "file_link l " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p " .
-					"ON (l.from_page_id = p.page_id) " .
+					"ON (l.page_id = p.page_id) " .
 			"WHERE p.tag = " . $this->db->q($tag) . " " .
 				($cluster === true
 					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -7606,7 +7641,7 @@ class Wacko
 					: "") );
 	}
 
-	// removes files attached to a page
+	// removes all files attached to a page
 	function remove_files_perpage($tag, $cluster = false, $dontkeep = 0)
 	{
 		if (!$tag)
