@@ -27,6 +27,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
+	<p><?php echo $engine->_t('InconsistenciesInfo');?></p>
+	<br>
 <?php
 
 	/////////////////////////////////////////////
@@ -246,7 +248,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			// 2.11. file_link without page
 			$file_link = $engine->db->load_all(
 				"SELECT
-					l.link_id
+					l.file_link_id
 				FROM
 					" . $prefix . "file_link l
 					LEFT JOIN " . $prefix . "page p ON (l.page_id = p.page_id)
@@ -581,12 +583,6 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 	}
 ?>
-
-	<p>
-	show / count mismatches / inconsistencies<br>
-	delete records<br>
-	assign records to new user / value<br>
-	</p>
 	<br>
 <?php
 	echo $engine->form_open('usersupdate');

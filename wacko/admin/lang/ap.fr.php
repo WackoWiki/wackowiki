@@ -1199,6 +1199,9 @@ $ap_translation = [
 	'TableNotRepaired'			=> 'Some database problems could not be repaired.',
 	'RepairsComplete'			=> 'Repairs complete',
 
+	// Inconsistencies module
+	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
+
 	// Transliterate module
 	'TranslitField'				=> 'Transliterate field %1 in table `%2`.',
 	'TranslitStart'				=> 'Start',
