@@ -7554,7 +7554,7 @@ class Wacko
 					: "") );
 
 		// file links
-		$this->remove_file_link($tag, $cluster);
+		$this->remove_file_link(null, $tag, $cluster);
 
 		// internal links
 		return $this->db->sql_query(
@@ -7568,22 +7568,31 @@ class Wacko
 					: "") );
 	}
 
-	function remove_file_link($tag, $cluster = false)
+	function remove_file_link($file_id = null, $tag = null, $cluster = false)
 	{
-		if (!$tag)
+		if ($tag)
+		{
+			return $this->db->sql_query(
+				"DELETE l.* " .
+				"FROM " . $this->db->table_prefix . "file_link l " .
+					"LEFT JOIN " . $this->db->table_prefix . "page p " .
+						"ON (l.page_id = p.page_id) " .
+				"WHERE p.tag = " . $this->db->q($tag) . " " .
+					($cluster === true
+						? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
+						: "") );
+		}
+		else if ($file_id)
+		{
+			return $this->db->sql_query(
+				"DELETE l.* " .
+				"FROM " . $this->db->table_prefix . "file_link l " .
+				"WHERE l.file_id = " . (int) $file_id . " ");
+		}
+		else
 		{
 			return false;
 		}
-
-		return $this->db->sql_query(
-			"DELETE l.* " .
-			"FROM " . $this->db->table_prefix . "file_link l " .
-				"LEFT JOIN " . $this->db->table_prefix . "page p " .
-					"ON (l.page_id = p.page_id) " .
-			"WHERE p.tag = " . $this->db->q($tag) . " " .
-				($cluster === true
-					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
-					: "") );
 	}
 
 	function remove_page_categories($tag, $cluster = false)
@@ -7771,6 +7780,7 @@ class Wacko
 			}
 		}
 
+		$this->remove_file_link($file['file_id']);
 		$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 		$this->update_files_count($file['page_id'], $file['user_id']);
 
