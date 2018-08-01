@@ -7543,7 +7543,7 @@ class Wacko
 		}
 
 		// external links
-		return $this->db->sql_query(
+		$this->db->sql_query(
 			"DELETE l.* " .
 			"FROM " . $this->db->table_prefix . "external_link l " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p " .
@@ -7557,7 +7557,7 @@ class Wacko
 		$this->remove_file_link(null, $tag, $cluster);
 
 		// internal links
-		return $this->db->sql_query(
+		$this->db->sql_query(
 			"DELETE l.* " .
 			"FROM " . $this->db->table_prefix . "page_link l " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p " .
