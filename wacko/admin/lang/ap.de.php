@@ -1215,6 +1215,9 @@ $ap_translation = [
 	'TableNotRepaired'			=> 'Einige Datenbankprobleme konnten nicht repariert werden.',
 	'RepairsComplete'			=> 'Reparaturen abgeschlossen',
 
+	// Inconsistencies module
+	'InconsistenciesInfo'		=> 'Inkonsistenzen anzeigen und beheben, verwaiste Datensätze löschen oder einem neuen Benutzer / Wert zuweisen.',
+
 	// Transliterate module
 	'TranslitField'				=> 'Transliteriere Feld %1 in der Tabelle `%2`.',
 	'TranslitStart'				=> 'Start',
