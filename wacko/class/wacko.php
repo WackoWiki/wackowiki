@@ -5794,8 +5794,8 @@ class Wacko
 
 		foreach ($lines as $line)
 		{
-			if (!( preg_match('/^([(\!)?' . $this->language['ALPHANUM_P'] . ']+)$/', $line)
-				|| preg_match('/^((\!)?[(\*|\$)])$/', $line)))
+			if (!( preg_match('/^([(\!)?' . $this->language['ALPHANUM_P'] . ']*)$/', $line)
+				|| preg_match('/^((\!)?[(\*|\$)])$/', $line) ))
 			{
 				$error	.= '<code>' . $line . '</code><br>';
 			}
