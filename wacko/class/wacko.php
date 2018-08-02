@@ -3542,7 +3542,7 @@ class Wacko
 	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $text Optional text or image-file for HREF link (defaults to same as pagetag)
 	* @param string $title
-	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINKS table).
+	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINK table).
 	*	Optional, default is TRUE
 	* @param boolean $safe If false, then sanitize $text, else no.
 	* @param string $link_lang
@@ -3658,6 +3658,19 @@ class Wacko
 			$img_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
 		}
 
+		// TODO: match all external links for tracking: images, mail:, xampp:
+		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
+		{
+			if (!stristr($tag, $this->db->base_url))
+			{
+				// tracking external link
+				if ($track)
+				{
+					$this->track_link($tag, LINK_EXTERNAL);
+				}
+			}
+		} */
+
 		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
 		{
 			// this is a valid Email
@@ -3736,18 +3749,11 @@ class Wacko
 			{
 				$title	= $this->_t('OuterLink2');
 				$icon	= $this->_t('OuterIcon');
-
-				// tracking external link
-				if ($track)
-				{
-					$this->track_link($tag, LINK_EXTERNAL);
-				}
 			}
 		}
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
 		{
 			// this is a uploaded file
-			// TODO: check file link tracking
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$_file_name		= $matches[2];
 			$arr			= explode('/', $_file_name);
@@ -4374,7 +4380,7 @@ class Wacko
 
 	private function numerate_link($url)
 	{
-		// numerated wiki-links. initialize property as an array to make it work
+		// numerated wiki-links, initialize property as an array to make it work
 		if (is_array($this->numerate_links))
 		{
 			$refnum = &$this->numerate_links[$url];

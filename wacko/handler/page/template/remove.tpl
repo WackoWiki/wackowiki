@@ -51,7 +51,7 @@
 			</a>
 			<br>
 		</form>
-	
+
 	=]
 	[= denied _ =
 		<div class="error">
