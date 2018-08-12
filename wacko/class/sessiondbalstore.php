@@ -98,7 +98,6 @@ class SessionDbalStore extends Session
 			ON DUPLICATE KEY UPDATE
 				session_data = VALUES(session_data),
 				session_expire = VALUES(session_expire)
-
 		');
 
 		//$this->db->affected_rows - 2 on update, 1 on insert
