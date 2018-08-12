@@ -275,7 +275,7 @@ class Http
 		else
 		{
 			$sess = new SessionDbalStore($this->db);
-			$sess->cf_dbal_table_name = $this->db->table_prefix . 'sessions';
+			$sess->cf_dbal_table_name = $this->db->table_prefix . 'session';
 		}
 
 		$sess->cf_secret			= $this->db->system_seed_hash;
