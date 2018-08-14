@@ -78,6 +78,8 @@ function admin_config_appearance(&$engine, &$module)
 			return;
 		}
 
+		$error	= '';
+
 		// 1. check out $data
 		$_data	= explode('.', $_FILES[$file]['name']);
 		$ext	= $_data[count($_data) - 1];
@@ -105,6 +107,7 @@ function admin_config_appearance(&$engine, &$module)
 
 				$size			= [0, 0];
 				$size			= @getimagesize($_FILES[$file]['tmp_name']);
+
 
 				if ($file == 'logo')
 				{
@@ -224,173 +227,173 @@ function admin_config_appearance(&$engine, &$module)
 	echo $engine->form_open('basic', ['form_more' => ' enctype="multipart/form-data" ']);
 
 	?>
-		<input type="hidden" name="action" value="update">
-		<table class="formation">
-			<colgroup>
-				<col span="1" style="width: 50%;">
-				<col span="1" style="width: 50%;">
-			</colgroup>
-			<tr>
-				<th colspan="2">
-					<br>
-					<?php echo $engine->_t('LogoSection');?>
-				</th>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="logo"><strong><?php echo $engine->_t('SiteLogo');?>:</strong><br>
-					<small><?php echo $engine->_t('SiteLogoInfo');?></small></label>
-				</td>
-				<td>
-				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
-				{?>
-					<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_logo); ?>" alt="" height="<?php echo $engine->db->logo_height; ?>" width="<?php echo $engine->db->logo_width; ?>"><br>
-					<input type="submit" id="remove_logo" name="remove_logo" value="<?php echo $engine->_t('Remove'); ?>">
-				<?php }
-					// SVG format is intentionally excluded ?>
-					<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, .webp, image/gif, image/jpeg, image/png, image/webp">
-				</td>
-			</tr>
-			<?php
-			if ($engine->db->site_logo)
-			{
+	<input type="hidden" name="action" value="update">
+	<table class="formation">
+		<colgroup>
+			<col span="1" style="width: 50%;">
+			<col span="1" style="width: 50%;">
+		</colgroup>
+		<tr>
+			<th colspan="2">
+				<br>
+				<?php echo $engine->_t('LogoSection');?>
+			</th>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label">
+				<label for="logo"><strong><?php echo $engine->_t('SiteLogo');?>:</strong><br>
+				<small><?php echo $engine->_t('SiteLogoInfo');?></small></label>
+			</td>
+			<td>
+			<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
+			{?>
+				<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_logo); ?>" alt="" height="<?php echo $engine->db->logo_height; ?>" width="<?php echo $engine->db->logo_width; ?>"><br>
+				<input type="submit" id="remove_logo" name="remove_logo" value="<?php echo $engine->_t('Remove'); ?>">
+			<?php }
+				// SVG format is intentionally excluded ?>
+				<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, .webp, image/gif, image/jpeg, image/png, image/webp">
+			</td>
+		</tr>
+		<?php
+		if ($engine->db->site_logo)
+		{
+		?>
+		<tr class="lined">
+			<td colspan="2"></td>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label">
+				<label for="logo_width"><strong><?php echo $engine->_t('LogoDimensions');?>:</strong><br>
+				<small><?php echo $engine->_t('LogoDimensionsInfo');?></small></label>
+			</td>
+			<td>
+			<?php	// TODO: add option to reset dimentions to default image size
+					// + option to 'readonly / disable' input fields
 			?>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="logo_width"><strong><?php echo $engine->_t('LogoDimensions');?>:</strong><br>
-					<small><?php echo $engine->_t('LogoDimensionsInfo');?></small></label>
-				</td>
-				<td>
-				<?php	// TODO: add option to reset dimentions to default image size
-						// + option to 'readonly / disable' input fields
-				?>
-					<input type="number" min="16" max="500" maxlength="3" style="width: 50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>">&nbsp;&times;&nbsp;<input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height;?>"> pix
-				</td>
-			</tr>
-			<?php } ?>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="logo_display"><strong><?php echo $engine->_t('LogoDisplayMode');?>:</strong><br>
-					<small><?php echo $engine->_t('LogoDisplayModeInfo');?></small></label>
-				</td>
-				<td>
-					<select id="logo_display" name="logo_display" style="width: 200px;">
-						<option value="0" <?php echo ($engine->db->logo_display  == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoOff');?></option>
-						<option value="1" <?php echo ($engine->db->logo_display  == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoOnly');?></option>
-						<option value="2" <?php echo ($engine->db->logo_display  == 2  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoAndTitle');?></option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<br>
-					<?php echo $engine->_t('FaviconSection');?>
-				</th>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="logo"><strong><?php echo $engine->_t('SiteFavicon');?>:</strong><br>
-					<small><?php echo $engine->_t('SiteFaviconInfo');?></small></label>
-				</td>
-				<td>
-				<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)
-				{?>
-					<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_favicon); ?>" alt="Site Favicon"><br>
-					<input type="submit" id="remove_favicon" name="remove_favicon" value="<?php echo $engine->_t('Remove'); ?>">
-				<?php }?>
-					<input type="file" name="favicon" id="favicon_upload" accept=".gif, .ico, .jpg, .png, .svg, .webp, image/gif, image/x-icon, image/jpeg, image/png, image/svg+xml, image/webp">
-				</td>
-			</tr>
-			<tr>
-				<th colspan="2">
-					<br>
-					<?php echo $engine->_t('LayoutSection');?>
-				</th>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="theme"><strong><?php echo $engine->_t('Theme');?>:</strong><br>
-					<small><?php echo $engine->_t('ThemeInfo');?></small></label>
-				</td>
-				<td>
-					<select id="theme" name="theme">
-					<?php
-						$themes = $engine->available_themes();
-
-						foreach ($themes as $theme)
-						{
-							echo '<option value="' . $theme . '" ' . ($engine->db->theme == $theme ? 'selected' : '') . '>' . $theme . '</option>';
-						}
-					?>
-					</select>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for=""><strong><?php echo $engine->_t('ThemesAllowed');?>:</strong><br>
-					<small><?php echo $engine->_t('ThemesAllowedInfo');?></small></label>
-				</td>
-				<td>
+				<input type="number" min="16" max="500" maxlength="3" style="width: 50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>">&nbsp;&times;&nbsp;<input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height;?>"> pix
+			</td>
+		</tr>
+		<?php } ?>
+		<tr class="lined">
+			<td colspan="2"></td>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label">
+				<label for="logo_display"><strong><?php echo $engine->_t('LogoDisplayMode');?>:</strong><br>
+				<small><?php echo $engine->_t('LogoDisplayModeInfo');?></small></label>
+			</td>
+			<td>
+				<select id="logo_display" name="logo_display" style="width: 200px;">
+					<option value="0" <?php echo ($engine->db->logo_display  == 0  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoOff');?></option>
+					<option value="1" <?php echo ($engine->db->logo_display  == 1  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoOnly');?></option>
+					<option value="2" <?php echo ($engine->db->logo_display  == 2  ? ' selected' : ''); ?>><?php echo $engine->_t('LogoAndTitle');?></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2">
+				<br>
+				<?php echo $engine->_t('FaviconSection');?>
+			</th>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label">
+				<label for="logo"><strong><?php echo $engine->_t('SiteFavicon');?>:</strong><br>
+				<small><?php echo $engine->_t('SiteFaviconInfo');?></small></label>
+			</td>
+			<td>
+			<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)
+			{?>
+				<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_favicon); ?>" alt="Site Favicon"><br>
+				<input type="submit" id="remove_favicon" name="remove_favicon" value="<?php echo $engine->_t('Remove'); ?>">
+			<?php }?>
+				<input type="file" name="favicon" id="favicon_upload" accept=".gif, .ico, .jpg, .png, .svg, .webp, image/gif, image/x-icon, image/jpeg, image/png, image/svg+xml, image/webp">
+			</td>
+		</tr>
+		<tr>
+			<th colspan="2">
+				<br>
+				<?php echo $engine->_t('LayoutSection');?>
+			</th>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label">
+				<label for="theme"><strong><?php echo $engine->_t('Theme');?>:</strong><br>
+				<small><?php echo $engine->_t('ThemeInfo');?></small></label>
+			</td>
+			<td>
+				<select id="theme" name="theme">
 				<?php
-					if (isset($engine->db->allow_themes))
-					{
-						$theme_list = explode(',', $engine->db->allow_themes);
-					}
-					else
-					{
-						$theme_list= [];
-					}
-
 					$themes = $engine->available_themes();
 
-					echo "<table>\n\t<tr>\n";
-
-					foreach ($themes as $n => $theme)
+					foreach ($themes as $theme)
 					{
-						echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" ' . (in_array($theme, $theme_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
-								'<label for="theme_' . $n . '">' . $themes[$n] . '</label>' . "\n\t\t</td>\n";
-
-						// modulus operator: every third loop add a break
-						if ($n % 3 == 0)
-						{
-							echo "\t</tr>\n\t<tr>\n";
-						}
+						echo '<option value="' . $theme . '" ' . ($engine->db->theme == $theme ? 'selected' : '') . '>' . $theme . '</option>';
 					}
+				?>
+				</select>
+			</td>
+		</tr>
+		<tr class="lined">
+			<td colspan="2"></td>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label">
+				<label for=""><strong><?php echo $engine->_t('ThemesAllowed');?>:</strong><br>
+				<small><?php echo $engine->_t('ThemesAllowedInfo');?></small></label>
+			</td>
+			<td>
+			<?php
+				if (isset($engine->db->allow_themes))
+				{
+					$theme_list = explode(',', $engine->db->allow_themes);
+				}
+				else
+				{
+					$theme_list= [];
+				}
 
-					echo "\t</tr>\n</table>";
-					?>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<strong><?php echo $engine->_t('ThemesPerPage');?>:</strong><br>
-					<small><?php echo $engine->_t('ThemesPerPageInfo');?></small>
-				</td>
-				<td>
-					<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?>>
-					<label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked' : '');?>>
-					<label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-		</table>
-		<br>
-		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
-		</div>
+				$themes = $engine->available_themes();
+
+				echo "<table>\n\t<tr>\n";
+
+				foreach ($themes as $n => $theme)
+				{
+					echo	"\t\t<td>\n\t\t\t" . '<input type="checkbox" name="allow_themes[' . $n . ']" id="theme_' . $n . '" value="' . $theme . '" ' . (in_array($theme, $theme_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
+							'<label for="theme_' . $n . '">' . $themes[$n] . '</label>' . "\n\t\t</td>\n";
+
+					// modulus operator: every third loop add a break
+					if ($n % 3 == 0)
+					{
+						echo "\t</tr>\n\t<tr>\n";
+					}
+				}
+
+				echo "\t</tr>\n</table>";
+				?>
+			</td>
+		</tr>
+		<tr class="lined">
+			<td colspan="2"></td>
+		</tr>
+		<tr class="hl_setting">
+			<td class="label">
+				<strong><?php echo $engine->_t('ThemesPerPage');?>:</strong><br>
+				<small><?php echo $engine->_t('ThemesPerPageInfo');?></small>
+			</td>
+			<td>
+				<input type="radio" id="themes_per_page_on" name="themes_per_page" value="1"<?php echo ($engine->db->allow_themes_per_page == 1 ? ' checked' : '');?>>
+				<label for="themes_per_page_on"><?php echo $engine->_t('On');?></label>
+				<input type="radio" id="themes_per_page_off" name="themes_per_page" value="0"<?php echo ($engine->db->allow_themes_per_page == 0 ? ' checked' : '');?>>
+				<label for="themes_per_page_off"><?php echo $engine->_t('Off');?></label>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<div class="center">
+		<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
+		<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
+	</div>
 <?php
 	echo $engine->form_close();
 }

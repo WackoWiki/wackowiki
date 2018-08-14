@@ -131,7 +131,7 @@ foreach ($drivers as $k => $driver)
  */
 
 $charsets	= [];
-# $charsets[]	= ['utf8', 'utf8', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
+# $charsets[]	= ['utf8mb4', 'utf8mb4', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
 $charsets[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
 $charsets[]	= ['latin1',	'latin1',	'cp1252 West European'];			// default
 $charsets[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European'];		// not tested

@@ -10,7 +10,7 @@ $pref		= $config['table_prefix'];
 $charset	= 'DEFAULT CHARSET=' . $config['database_charset'];
 $engine		= 'ENGINE=' . $config['database_engine'];
 
-$table_acl = "CREATE TABLE {$pref}acl (" .
+$tbl_acl = "CREATE TABLE {$pref}acl (" .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"privilege VARCHAR(10) NOT NULL DEFAULT ''," .
 					"list TEXT NOT NULL," .
@@ -18,7 +18,7 @@ $table_acl = "CREATE TABLE {$pref}acl (" .
 					"UNIQUE KEY idx_page_id (page_id, privilege)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_auth_token = "CREATE TABLE {$pref}auth_token (" .
+$tbl_auth_token = "CREATE TABLE {$pref}auth_token (" .
 					"auth_token_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"selector CHAR(12) NOT NULL DEFAULT ''," .
 					"token CHAR(64) NOT NULL DEFAULT ''," .
@@ -29,7 +29,7 @@ $table_auth_token = "CREATE TABLE {$pref}auth_token (" .
 					"KEY idx_user_id (user_id)" .
 					") {$engine} COMMENT='' {$charset}";
 
-$table_cache = "CREATE TABLE {$pref}cache (" .
+$tbl_cache = "CREATE TABLE {$pref}cache (" .
 					"cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"name CHAR(40) NOT NULL DEFAULT ''," .
 					"method VARCHAR(20) NOT NULL DEFAULT ''," .
@@ -41,7 +41,7 @@ $table_cache = "CREATE TABLE {$pref}cache (" .
 					"KEY idx_cache_time (cache_time)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_category = "CREATE TABLE {$pref}category (" .
+$tbl_category = "CREATE TABLE {$pref}category (" .
 					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT 0," .
 					"category_lang VARCHAR(2) NOT NULL DEFAULT ''," .
@@ -51,7 +51,7 @@ $table_category = "CREATE TABLE {$pref}category (" .
 					"UNIQUE KEY idx_category (category_lang, category)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
+$tbl_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
 					"assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"category_id INT(10) unsigned NOT NULL DEFAULT 0," .
 					"object_type_id INT(10) unsigned NOT NULL DEFAULT 0," .
@@ -63,7 +63,7 @@ $table_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
 					"UNIQUE KEY idx_assignment (category_id, object_type_id, object_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_config = "CREATE TABLE {$pref}config (" .
+$tbl_config = "CREATE TABLE {$pref}config (" .
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"config_name VARCHAR(100) NOT NULL DEFAULT ''," .
 					"config_value TEXT," .
@@ -72,7 +72,7 @@ $table_config = "CREATE TABLE {$pref}config (" .
 					"UNIQUE KEY idx_config_name (config_name)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_external_link = "CREATE TABLE {$pref}external_link (" .
+$tbl_external_link = "CREATE TABLE {$pref}external_link (" .
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"link TEXT NOT NULL," .
@@ -80,7 +80,7 @@ $table_external_link = "CREATE TABLE {$pref}external_link (" .
 					"KEY idx_page_id (page_id)" .
 					") {$engine} COMMENT='' {$charset}";
 
-$table_file = "CREATE TABLE {$pref}file (" .
+$tbl_file = "CREATE TABLE {$pref}file (" .
 					"file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -105,7 +105,7 @@ $table_file = "CREATE TABLE {$pref}file (" .
 					"KEY idx_user_id (user_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_file_link = "CREATE TABLE {$pref}file_link (" .
+$tbl_file_link = "CREATE TABLE {$pref}file_link (" .
 					"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"file_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -114,7 +114,7 @@ $table_file_link = "CREATE TABLE {$pref}file_link (" .
 					"KEY idx_file_id (file_id)" .
 					") {$engine} COMMENT='' {$charset}";
 
-$table_log = "CREATE TABLE {$pref}log (" .
+$tbl_log = "CREATE TABLE {$pref}log (" .
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"log_time TIMESTAMP NOT NULL," .
 					"level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -128,7 +128,7 @@ $table_log = "CREATE TABLE {$pref}log (" .
 					"KEY idx_time (log_time)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_menu = "CREATE TABLE {$pref}menu (" .
+$tbl_menu = "CREATE TABLE {$pref}menu (" .
 					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -139,7 +139,7 @@ $table_menu = "CREATE TABLE {$pref}menu (" .
 					"UNIQUE KEY idx_user_id (user_id, page_id, menu_lang)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_page = "CREATE TABLE {$pref}page (" .
+$tbl_page = "CREATE TABLE {$pref}page (" .
 					"page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"version_id INT(10) UNSIGNED NOT NULL DEFAULT '1'," .
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -204,7 +204,7 @@ $table_page = "CREATE TABLE {$pref}page (" .
 					"KEY idx_title (title)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_page_link = "CREATE TABLE {$pref}page_link (" .
+$tbl_page_link = "CREATE TABLE {$pref}page_link (" .
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -216,7 +216,7 @@ $table_page_link = "CREATE TABLE {$pref}page_link (" .
 					"KEY idx_to (to_tag)" .
 					") {$engine} COMMENT='' {$charset}";
 
-$table_poll = "CREATE TABLE {$pref}poll (" .
+$tbl_poll = "CREATE TABLE {$pref}poll (" .
 					"poll_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"v_id TINYINT(3) UNSIGNED NOT NULL DEFAULT '0'," .
 					"text VARCHAR(255) NOT NULL DEFAULT ''," .
@@ -229,7 +229,7 @@ $table_poll = "CREATE TABLE {$pref}poll (" .
 					"KEY idx_time_frame (start, end)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_rating = "CREATE TABLE {$pref}rating (" .
+$tbl_rating = "CREATE TABLE {$pref}rating (" .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"value INT(11) NOT NULL DEFAULT '0'," .
 					"voters INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -238,7 +238,7 @@ $table_rating = "CREATE TABLE {$pref}rating (" .
 					"KEY idx_voters_rate (voters)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_referrer = "CREATE TABLE {$pref}referrer (" .
+$tbl_referrer = "CREATE TABLE {$pref}referrer (" .
 					"referrer_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"referrer VARCHAR(255) NOT NULL DEFAULT ''," .
@@ -250,7 +250,7 @@ $table_referrer = "CREATE TABLE {$pref}referrer (" .
 					"KEY idx_referrer_time (referrer_time)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_revision = "CREATE TABLE {$pref}revision (" .
+$tbl_revision = "CREATE TABLE {$pref}revision (" .
 					"revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"version_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -293,7 +293,7 @@ $table_revision = "CREATE TABLE {$pref}revision (" .
 					"KEY idx_comment_on_id (comment_on_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_tag = "CREATE TABLE {$pref}tag (" .
+$tbl_tag = "CREATE TABLE {$pref}tag (" .
 					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"tag_lang VARCHAR(2) NOT NULL DEFAULT ''," .
@@ -304,7 +304,7 @@ $table_tag = "CREATE TABLE {$pref}tag (" .
 					"KEY idx_tag_name (tag_name)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_tag_assignment = "CREATE TABLE {$pref}tag_assignment (" .
+$tbl_tag_assignment = "CREATE TABLE {$pref}tag_assignment (" .
 					"assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"tag_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -318,7 +318,7 @@ $table_tag_assignment = "CREATE TABLE {$pref}tag_assignment (" .
 					"UNIQUE KEY idx_assignment (tag_id, object_type_id, object_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_user = "CREATE TABLE {$pref}user (" .
+$tbl_user = "CREATE TABLE {$pref}user (" .
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"user_name VARCHAR(80) NOT NULL DEFAULT ''," .
 					"real_name VARCHAR(80) NOT NULL DEFAULT ''," .
@@ -350,7 +350,7 @@ $table_user = "CREATE TABLE {$pref}user (" .
 					"KEY idx_signup_time (signup_time)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_user_setting = "CREATE TABLE {$pref}user_setting (" .
+$tbl_user_setting = "CREATE TABLE {$pref}user_setting (" .
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"theme VARCHAR(20) DEFAULT NULL DEFAULT ''," .
@@ -384,7 +384,7 @@ $table_user_setting = "CREATE TABLE {$pref}user_setting (" .
 					"KEY idx_send_watchmail (send_watchmail)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_usergroup = "CREATE TABLE {$pref}usergroup (" .
+$tbl_usergroup = "CREATE TABLE {$pref}usergroup (" .
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"group_name VARCHAR(100) NOT NULL DEFAULT ''," .
 					"group_lang VARCHAR(2) NOT NULL DEFAULT ''," .
@@ -398,13 +398,13 @@ $table_usergroup = "CREATE TABLE {$pref}usergroup (" .
 					"UNIQUE KEY idx_name (group_name)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_usergroup_member = "CREATE TABLE {$pref}usergroup_member (" .
+$tbl_usergroup_member = "CREATE TABLE {$pref}usergroup_member (" .
 					"group_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"UNIQUE KEY idx_group_id (group_id, user_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_watch = "CREATE TABLE {$pref}watch (" .
+$tbl_watch = "CREATE TABLE {$pref}watch (" .
 					"watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -414,7 +414,7 @@ $table_watch = "CREATE TABLE {$pref}watch (" .
 					"PRIMARY KEY (watch_id)" .
 				") {$engine} COMMENT='' {$charset}";
 
-$table_word = "CREATE TABLE {$pref}word (" .
+$tbl_word = "CREATE TABLE {$pref}word (" .
 					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"word VARCHAR(255) NOT NULL DEFAULT ''," .
 					"replacement VARCHAR(255) NOT NULL DEFAULT ''," .
@@ -425,30 +425,30 @@ $table_word = "CREATE TABLE {$pref}word (" .
  Wacko Wiki MySQL Table Deletion Script
 */
 
-$table_acl_drop					= "DROP TABLE IF EXISTS {$pref}acl";
-$table_auth_token_drop			= "DROP TABLE IF EXISTS {$pref}auth_token";
-$table_menu_drop				= "DROP TABLE IF EXISTS {$pref}menu";
-$table_cache_drop				= "DROP TABLE IF EXISTS {$pref}cache";
-$table_config_drop				= "DROP TABLE IF EXISTS {$pref}config";
-$table_category_drop			= "DROP TABLE IF EXISTS {$pref}category";
-$table_category_assignment_drop	= "DROP TABLE IF EXISTS {$pref}category_assignment";
-$table_external_link_drop		= "DROP TABLE IF EXISTS {$pref}external_link";
-$table_file_drop				= "DROP TABLE IF EXISTS {$pref}file";
-$table_file_link_drop			= "DROP TABLE IF EXISTS {$pref}file_link";
-$table_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
-$table_page_drop				= "DROP TABLE IF EXISTS {$pref}page";
-$table_page_link_drop			= "DROP TABLE IF EXISTS {$pref}page_link";
-$table_poll_drop				= "DROP TABLE IF EXISTS {$pref}poll";
-$table_rating_drop				= "DROP TABLE IF EXISTS {$pref}rating";
-$table_referrer_drop			= "DROP TABLE IF EXISTS {$pref}referrer";
-$table_revision_drop			= "DROP TABLE IF EXISTS {$pref}revision";
-$table_tag_drop					= "DROP TABLE IF EXISTS {$pref}tag";
-$table_tag_assignment_drop		= "DROP TABLE IF EXISTS {$pref}tag_assignment";
-$table_user_drop				= "DROP TABLE IF EXISTS {$pref}user";
-$table_user_setting_drop		= "DROP TABLE IF EXISTS {$pref}user_setting";
-$table_usergroup_drop			= "DROP TABLE IF EXISTS {$pref}usergroup";
-$table_usergroup_member_drop	= "DROP TABLE IF EXISTS {$pref}usergroup_member";
-$table_watch_drop				= "DROP TABLE IF EXISTS {$pref}watch";
-$table_word_drop				= "DROP TABLE IF EXISTS {$pref}word";
+$tbl_acl_drop					= "DROP TABLE IF EXISTS {$pref}acl";
+$tbl_auth_token_drop			= "DROP TABLE IF EXISTS {$pref}auth_token";
+$tbl_menu_drop					= "DROP TABLE IF EXISTS {$pref}menu";
+$tbl_cache_drop					= "DROP TABLE IF EXISTS {$pref}cache";
+$tbl_config_drop				= "DROP TABLE IF EXISTS {$pref}config";
+$tbl_category_drop				= "DROP TABLE IF EXISTS {$pref}category";
+$tbl_category_assignment_drop	= "DROP TABLE IF EXISTS {$pref}category_assignment";
+$tbl_external_link_drop			= "DROP TABLE IF EXISTS {$pref}external_link";
+$tbl_file_drop					= "DROP TABLE IF EXISTS {$pref}file";
+$tbl_file_link_drop				= "DROP TABLE IF EXISTS {$pref}file_link";
+$tbl_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
+$tbl_page_drop					= "DROP TABLE IF EXISTS {$pref}page";
+$tbl_page_link_drop				= "DROP TABLE IF EXISTS {$pref}page_link";
+$tbl_poll_drop					= "DROP TABLE IF EXISTS {$pref}poll";
+$tbl_rating_drop				= "DROP TABLE IF EXISTS {$pref}rating";
+$tbl_referrer_drop				= "DROP TABLE IF EXISTS {$pref}referrer";
+$tbl_revision_drop				= "DROP TABLE IF EXISTS {$pref}revision";
+$tbl_tag_drop					= "DROP TABLE IF EXISTS {$pref}tag";
+$tbl_tag_assignment_drop		= "DROP TABLE IF EXISTS {$pref}tag_assignment";
+$tbl_user_drop					= "DROP TABLE IF EXISTS {$pref}user";
+$tbl_user_setting_drop			= "DROP TABLE IF EXISTS {$pref}user_setting";
+$tbl_usergroup_drop				= "DROP TABLE IF EXISTS {$pref}usergroup";
+$tbl_usergroup_member_drop		= "DROP TABLE IF EXISTS {$pref}usergroup_member";
+$tbl_watch_drop					= "DROP TABLE IF EXISTS {$pref}watch";
+$tbl_word_drop					= "DROP TABLE IF EXISTS {$pref}word";
 
 ?>
