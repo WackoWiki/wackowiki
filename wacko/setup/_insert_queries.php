@@ -7,61 +7,61 @@
 // delete_tables
 //		$value[0] - table name
 //		$value[1] - SQL query
-$delete_table[]			= ['acl',					$table_acl_drop];
-$delete_table[]			= ['auth_token',			$table_auth_token_drop];
-$delete_table[]			= ['menu',					$table_menu_drop];
-$delete_table[]			= ['cache',					$table_cache_drop];
-$delete_table[]			= ['config',				$table_config_drop];
-$delete_table[]			= ['usergroup',				$table_usergroup_drop];
-$delete_table[]			= ['usergroup_member',		$table_usergroup_member_drop];
-$delete_table[]			= ['category',				$table_category_drop];
-$delete_table[]			= ['category_assignment',	$table_category_assignment_drop];
-$delete_table[]			= ['external_link',			$table_external_link_drop];
-$delete_table[]			= ['file',					$table_file_drop];
-$delete_table[]			= ['file_link',				$table_file_link_drop];
-$delete_table[]			= ['log',					$table_log_drop];
-$delete_table[]			= ['page',					$table_page_drop];
-$delete_table[]			= ['page_link',				$table_page_link_drop];
-$delete_table[]			= ['poll',					$table_poll_drop];
-$delete_table[]			= ['rating',				$table_rating_drop];
-$delete_table[]			= ['referrer',				$table_referrer_drop];
-$delete_table[]			= ['revision',				$table_revision_drop];
-#$delete_table[]		= ['tag',					$table_tag_drop];
-#$delete_table[]		= ['tag_assignment',		$table_tag_assignment_drop];
-$delete_table[]			= ['user',					$table_user_drop];
-$delete_table[]			= ['user_setting',			$table_user_setting_drop];
-$delete_table[]			= ['watch',					$table_watch_drop];
-$delete_table[]			= ['word',					$table_word_drop];
+$delete_table[]			= ['acl',					$tbl_acl_drop];
+$delete_table[]			= ['auth_token',			$tbl_auth_token_drop];
+$delete_table[]			= ['menu',					$tbl_menu_drop];
+$delete_table[]			= ['cache',					$tbl_cache_drop];
+$delete_table[]			= ['config',				$tbl_config_drop];
+$delete_table[]			= ['usergroup',				$tbl_usergroup_drop];
+$delete_table[]			= ['usergroup_member',		$tbl_usergroup_member_drop];
+$delete_table[]			= ['category',				$tbl_category_drop];
+$delete_table[]			= ['category_assignment',	$tbl_category_assignment_drop];
+$delete_table[]			= ['external_link',			$tbl_external_link_drop];
+$delete_table[]			= ['file',					$tbl_file_drop];
+$delete_table[]			= ['file_link',				$tbl_file_link_drop];
+$delete_table[]			= ['log',					$tbl_log_drop];
+$delete_table[]			= ['page',					$tbl_page_drop];
+$delete_table[]			= ['page_link',				$tbl_page_link_drop];
+$delete_table[]			= ['poll',					$tbl_poll_drop];
+$delete_table[]			= ['rating',				$tbl_rating_drop];
+$delete_table[]			= ['referrer',				$tbl_referrer_drop];
+$delete_table[]			= ['revision',				$tbl_revision_drop];
+#$delete_table[]		= ['tag',					$tbl_tag_drop];
+#$delete_table[]		= ['tag_assignment',		$tbl_tag_assignment_drop];
+$delete_table[]			= ['user',					$tbl_user_drop];
+$delete_table[]			= ['user_setting',			$tbl_user_setting_drop];
+$delete_table[]			= ['watch',					$tbl_watch_drop];
+$delete_table[]			= ['word',					$tbl_word_drop];
 
 // INSTALL
 // create tables
 //		$value[0] - table name
 //		$value[1] - SQL query
-$create_table[]			= ['acl',					$table_acl];
-$create_table[]			= ['auth_token',			$table_auth_token];
-$create_table[]			= ['menu',					$table_menu];
-$create_table[]			= ['cache',					$table_cache];
-$create_table[]			= ['config',				$table_config];
-$create_table[]			= ['usergroup',				$table_usergroup];
-$create_table[]			= ['usergroup_member',		$table_usergroup_member];
-$create_table[]			= ['category',				$table_category];
-$create_table[]			= ['category_assignment',	$table_category_assignment];
-$create_table[]			= ['external_link',			$table_external_link];
-$create_table[]			= ['file',					$table_file];
-$create_table[]			= ['file_link',				$table_file_link];
-$create_table[]			= ['log',					$table_log];
-$create_table[]			= ['page',					$table_page];
-$create_table[]			= ['page_link',				$table_page_link];
-$create_table[]			= ['poll',					$table_poll];
-$create_table[]			= ['rating',				$table_rating];
-$create_table[]			= ['referrer',				$table_referrer];
-$create_table[]			= ['revision',				$table_revision];
-#$create_table[]		= ['tag',					$table_tag];
-#$create_table[]		= ['tag_assignment',		$table_tag_assignment];
-$create_table[]			= ['user',					$table_user];
-$create_table[]			= ['user_setting',			$table_user_setting];
-$create_table[]			= ['watch',					$table_watch];
-$create_table[]			= ['word',					$table_word];
+$create_table[]			= ['acl',					$tbl_acl];
+$create_table[]			= ['auth_token',			$tbl_auth_token];
+$create_table[]			= ['menu',					$tbl_menu];
+$create_table[]			= ['cache',					$tbl_cache];
+$create_table[]			= ['config',				$tbl_config];
+$create_table[]			= ['usergroup',				$tbl_usergroup];
+$create_table[]			= ['usergroup_member',		$tbl_usergroup_member];
+$create_table[]			= ['category',				$tbl_category];
+$create_table[]			= ['category_assignment',	$tbl_category_assignment];
+$create_table[]			= ['external_link',			$tbl_external_link];
+$create_table[]			= ['file',					$tbl_file];
+$create_table[]			= ['file_link',				$tbl_file_link];
+$create_table[]			= ['log',					$tbl_log];
+$create_table[]			= ['page',					$tbl_page];
+$create_table[]			= ['page_link',				$tbl_page_link];
+$create_table[]			= ['poll',					$tbl_poll];
+$create_table[]			= ['rating',				$tbl_rating];
+$create_table[]			= ['referrer',				$tbl_referrer];
+$create_table[]			= ['revision',				$tbl_revision];
+#$create_table[]		= ['tag',					$tbl_tag];
+#$create_table[]		= ['tag_assignment',		$tbl_tag_assignment];
+$create_table[]			= ['user',					$tbl_user];
+$create_table[]			= ['user_setting',			$tbl_user_setting];
+$create_table[]			= ['watch',					$tbl_watch];
+$create_table[]			= ['word',					$tbl_word];
 
 // insert_records
 //		$value[0] - table name
@@ -107,9 +107,9 @@ $upgrade['5.1.0'][]		= ['alter',		'revision',			$alter_revision_r5_1_0];
 // 5.4.0 ############
 
 // auth_token
-$upgrade['5.5.rc'][]	= ['delete',	'auth_token',		$table_auth_token_drop];
+$upgrade['5.5.rc'][]	= ['delete',	'auth_token',		$tbl_auth_token_drop];
 
-$upgrade['5.5.rc'][]	= ['create',	'auth_token',		$table_auth_token_r5_4_0];
+$upgrade['5.5.rc'][]	= ['create',	'auth_token',		$tbl_auth_token_r5_4_0];
 
 // cache
 $upgrade['5.4.0'][]		= ['alter',		'cache',			$alter_cache_r5_4_0];
@@ -141,7 +141,7 @@ $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_3];
 $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_4];
 
 // external link
-$upgrade['5.5.5'][]		= ['create',	'external_link',	$table_external_link_r5_4_0];
+$upgrade['5.5.5'][]		= ['create',	'external_link',	$tbl_external_link_r5_4_0];
 
 // file
 $upgrade['5.4.0'][]		= ['alter',		'upload',			$alter_file_r5_4_0];
@@ -160,7 +160,7 @@ $upgrade['5.5.rc2'][]	= ['update',	'file',				$update_file_r5_4_0];
 $upgrade['5.5.5'][]		= ['alter',		'file',				$alter_file_r5_4_7];
 
 // file link
-$upgrade['5.4.0'][]		= ['create',	'file_link',		$table_file_link_r5_4_0];
+$upgrade['5.4.0'][]		= ['create',	'file_link',		$tbl_file_link_r5_4_0];
 
 //menu
 $upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_0];
@@ -242,7 +242,7 @@ $upgrade['5.4.0'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_4_0];
 $upgrade['5.4.0'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_4_1];
 
 // usergroup
-$upgrade['5.4.0'][]		= ['create',	'word',				$table_word_r5_4_0];
+$upgrade['5.4.0'][]		= ['create',	'word',				$tbl_word_r5_4_0];
 
 // watch
 $upgrade['5.5.beta'][]	= ['alter',		'watch',			$alter_watch_r5_4_0];
