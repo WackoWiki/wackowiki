@@ -66,6 +66,7 @@ $lang = [
 'Problem' => 'Problema',
 'NotePHPExtensions' => '',
 'ErrorPHPExtensions' => 'Your PHP installation appears to be missing the noted PHP extensions which are required by WackoWiki.',
+'PCREwithoutUTF8' => 'PCRE no está compilado con soporte UTF-8.',
 'NotePermissions' => 'El instalador intentará guardar los datos de configuración en el archivo %1, ubicado en el directorio de WackoWiki. Para que pueda funcionar esto debe asegurarse que el servidor web tiene permiso de escritura para este archivo. Si no lo logra concederle, deberá editar el archivo manualmente (el instalador le dará indicaciones de como..).<br><br>Véa <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> por más detalles.',
 'ErrorPermissions' => 'Parece que el instalador no puede setear los permisos de archivos para el funcionamiento correcto de WackoWiki. Más adelante se le va a pedir de realizar los cambios de permisos necesarios manualmente en el servidor.',
 'ErrorMinPHPVersion' => 'La versión PHP debe ser mayor a <strong>' . PHP_MIN_VERSION . '</strong>, el servidor parece tener instalado una versión anterior. PHP se debe actualizar a una versión más nueva para que WackoWiki pueda funcionar correctamente.',
