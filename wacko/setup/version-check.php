@@ -80,8 +80,7 @@ write_config_hidden_nodes(['none' => '']);
 	 Check for required PHP Extensions
 	 */
 
-	// TODO: check for mb_string, iconv, bcmath, pcre, pcre utf-8, ctype, gd, JSON, SPL extension
-	//		- Case 'PCRE has not been compiled with Unicode property support.'
+	// check for mb_string, iconv, bcmath, pcre, ctype, gd, JSON, SPL extension
 	$php_extension = [
 		'bcmath',
 		'ctype',
@@ -106,8 +105,18 @@ write_config_hidden_nodes(['none' => '']);
 			$php_extension_result = false;
 		}
 
-		echo "\t<li>" . $extension . ' ', output_image($result), "</li>\n";
+		echo "\t<li>" . $extension . ' ' . output_image($result) . "</li>\n";
 	}
+
+	// Check whether PCRE has been compiled with UTF-8 support
+	/* $UTF8_ar = [];
+
+	if (1 != preg_match('/^.{1}$/u', "ñ", $UTF8_ar))
+	{
+		echo "\t<li>" . $lang['PCREwithoutUTF8'] . ' ' . output_image(false) . "</li>\n";
+	}
+
+	unset($UTF8_ar); */
 	?>
 </ul>
 	<?php
