@@ -80,14 +80,14 @@ class DbPDO implements DbInterface
 		// Got this from: http://www.gamedev.net/community/forums/topic.asp?topic_id=448909
 		// More reading: http://www.sitepoint.com/forums/showthread.php?t=337881
 		return strtr($string, [
-						"\x00" => '\x00',
-						"\n" => '\n',
-						"\r" => '\r',
-						'\\' => '\\\\',
-						"'" => "\'",
-						'"' => '\"',
-						"\x1a" => '\x1a'
-						]);
+			"\x00"	=> '\x00',
+			"\n"	=> '\n',
+			"\r"	=> '\r',
+			'\\'	=> '\\\\',
+			"'"		=> "\'",
+			'"'		=> '\"',
+			"\x1a"	=> '\x1a'
+		]);
 	}
 
 	function free_result($results)

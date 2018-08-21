@@ -18,7 +18,7 @@ class DbMysqli implements DbInterface
 
 		if (!$this->dblink)
 		{
-			die("Error loading WackoWiki DBAL: could not establish database connection.");
+			die('Error loading WackoWiki DBAL: could not establish database connection.');
 		}
 
 		if ($config->database_charset)
