@@ -94,7 +94,7 @@ write_config_hidden_nodes(['none' => '']);
 	];
 	?>
 <h2><?php echo $lang['PHPExtensions']; ?></h2>
-<ul>
+<ul class="column-3">
 	<?php
 	foreach ($php_extension as $extension)
 	{
