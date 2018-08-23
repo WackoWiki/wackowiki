@@ -240,6 +240,12 @@ ul.security li {
 	left: 43px;
 }
 
+.column-3 {
+	column-count: 3;
+	column-gap: 40px;
+	width: 400px;
+}
+
 .next {
 	position: relative;
 	left: 450px;
