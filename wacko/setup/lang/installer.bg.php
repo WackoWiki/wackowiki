@@ -99,7 +99,7 @@ $lang = [
 'Enabled' => 'Включен:',
 'ErrorAdminEmail' => 'Въведете истински адрес!',
 'ErrorAdminPasswordMismatch' => 'Паролата на администратора не съвпадна нещо!',
-'ErrorAdminPasswordShort' => 'The admin много е кратка, the minimum length is 9 characters!',
+'ErrorAdminPasswordShort' => 'The admin много е кратка, the minimum length is %1 characters!',
 'WarningRewriteMode' => 'ВНИМАНИЕ!\nНастройки базового URL и Rewrite-режима выглядят подозрительно. Обычно при включенном Rewrite не бывает знака ? в базовом URL, но у вас он есть.\n\nДля продолжения инсталляции с текущими настройками нажмите ОК.\nДля того, чтобы вернуться в форму и всё исправить, нажмите ОТМЕНА.\n\nЕсли вы решили идти дальше, помните, что такое сочетание часто является причиной неработоспособности после инсталляции.',
 'ModRewriteStatusUnknown' => 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
 
