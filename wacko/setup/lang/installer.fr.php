@@ -99,7 +99,7 @@ $lang = [
 'Enabled' => 'Activé ',
 'ErrorAdminEmail' => 'Vous avez indiqué une adresse de messagerie non conforme !',
 'ErrorAdminPasswordMismatch' => 'Les mots de passe ne coïncident pas !',
-'ErrorAdminPasswordShort' => 'Le mot de passe de l&rsquo;administrateur est trop court, il doit avoir au moins 9 caractères !',
+'ErrorAdminPasswordShort' => 'Le mot de passe de l&rsquo;administrateur est trop court, il doit avoir au moins %1 caractères !',
 'WarningRewriteMode' => 'ATTENTION!\nVotre URL de base comporte un point d&rsquo;interrogation alors que l&rsquo;extension "mod_rewrite") est activée, ceci nous semble incohérent.\n\nPour confirmer néanmoins ce réglage cliquez sur OK.\nPour revenir au formulaire et changer vos réglages cliquez sur CANCEL.\n\nSi vous vous apprêtez à confirmer ces réglages, veuillez noter que cela pourrait rendre problématique votre installation de WackoWiki.',
 'ModRewriteStatusUnknown' => 'L&rsquo;installeur ne peut pas confirmer que "mod_rewrite" soit activé, il est cependant possible qu&rsquo;il le soit.',
 

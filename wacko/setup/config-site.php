@@ -6,7 +6,7 @@
 
 			if (f.elements['password'].value.length < <?php echo $config['pwd_admin_min_chars'];?>)
 			{
-				alert('<?php echo $lang['ErrorAdminPasswordShort'];?>');
+				alert('<?php echo Ut::perc_replace($lang['ErrorAdminPasswordShort'], $config['pwd_admin_min_chars']);?>');
 				return false;
 			}
 
