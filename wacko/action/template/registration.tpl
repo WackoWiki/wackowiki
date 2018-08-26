@@ -9,7 +9,7 @@
 			<div class="hint">[ ' _t: UserApprovalInfo ' ]</div>
 		=]
 		<form action="[ ' form ' ]" method="post" name="register">
-			['' csrf:  register '']
+			[ ' csrf:  register ' ]
 			<h3>[ ' _t: RegistrationWelcome ' ]</h3>
 			[= multi _ =
 				<p><label for="user_lang">[ ' _t: RegistrationLang ' ]:</label>
