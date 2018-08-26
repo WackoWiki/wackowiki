@@ -214,6 +214,12 @@ $wacko_translation = [
 	'ACLCancelButton'			=> 'Cancel',
 	'ACLAccessDenied'			=> 'You are not the owner of this page.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
+	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
+									'<code>$</code> - only registered users<br>' .
+									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
+									'<code>[UserName]</code> - names of allowed users<br>' .
+									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
+									'<code>(an empty list)</code> - only the page owner has access',
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',
@@ -1008,9 +1014,9 @@ $wacko_translation = [
 	'ModerateAccept'			=> 'Accept',
 	'ModerateDecline'			=> 'Cancel',
 	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
-	'ModerateRenameConfirm'		=> 'Enter a new name for the selected page',
+	'ModerateRenameConfirm'		=> 'Enter a new title for the selected page',
 	'ModerateRenameExists'		=> 'Page same name already exists! Choose a different name.',
-	'ModerateRename1Only'		=> 'Note: renamed to be only the first page you chose!',
+	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',
 	'ModeratePgMoveConfirm'		=> 'Specify the name of the cluster, in which to place the page. To move a page to the root of the site, type &quot;/&quot;',

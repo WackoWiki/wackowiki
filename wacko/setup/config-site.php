@@ -105,7 +105,7 @@ foreach ($langs as $_lang)
 	{
 		echo "\t</tr>\n\t<tr>\n";
 	}
-	;
+
 	$n++;
 }
 
