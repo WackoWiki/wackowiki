@@ -239,7 +239,6 @@ if ($this->is_owner() || $this->is_admin())
 					$tpl->r_changeid	= (int) $_POST['change_id'];
 					$tpl->r_newname		= Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . Ut::html($word['category']) . '</code>');
 					$tpl->r_category	= ($_POST['category'] ?? $word['category']);
-
 				}
 			}
 			// (un)group item
