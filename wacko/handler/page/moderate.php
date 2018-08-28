@@ -1287,7 +1287,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			$tpl->enter('comments_');
 
-			#$tpl->set		= $set;
 			$tpl->set_ids	= implode(', ', $set);
 
 			$tpl->enter('n_');
