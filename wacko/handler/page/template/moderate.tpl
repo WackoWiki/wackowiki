@@ -5,13 +5,11 @@
 	[ ' moderate ' ]
 
 	[= subforum _ =
-
 		[''' pagination ''']
 		<form action="[ ' href: moderate ' ]" method="post" name="moderate_subforum">
 			[ ' csrf: moderate_subforum ' ]
 
 		[= delete _ =
-
 			<input type="hidden" name="[ ' action | e attr ' ]" value="1">
 			<table class="formation">
 				<tr><th>[ ' _t: ModerateDeleteConfirm ' ]</th></tr>
@@ -25,7 +23,6 @@
 			</table><br>
 		=]
 		[= move _ =
-
 			<input type="hidden" name="[ ' action | e attr ' ]" value="1">
 			<table class="formation">
 				<tr><th>[ ' _t: ModerateMovesConfirm ' ]</th></tr>
@@ -48,7 +45,6 @@
 			</table><br>
 		=]
 		[= rename _ =
-
 			<input type="hidden" name="[ ' action | e attr ' ]" value="1">
 			<table class="formation">
 				<tr><th>[ ' _t: ModerateRenameConfirm ' ]</th></tr>
@@ -70,7 +66,6 @@
 			</table><br>
 		=]
 		[= merge _ =
-
 			<input type="hidden" name="[ ' action | e attr ' ]" value="1">
 			<table class="formation">
 				<tr><th>[ ' _t: ModerateMergeConfirm ' ]</th></tr>
@@ -268,7 +263,6 @@
 					<input type="submit" name="topic_move" id="move-submit" value="[ ' _t: ModerateMove ' ]">
 					[= forum _ =
 						<input type="submit" name="topic_rename" id="submit" value="[ ' _t: ModerateRename ' ]">
-
 						[= unlocked _ =
 							<input type="submit" name="topic_lock" id="submit" value="[ ' _t: ModerateLock ' ]">
 						=]
