@@ -129,7 +129,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 			$this->cache_page($comment, true);
 
-			#$forum['description'] = Ut::html($forum['description']); -> [ ' description | e ' ]
+			$forum['description'] = Ut::html($forum['description']); // don't use [ ' description | e ' ]
 
 			if ($this->page['page_lang'] != $forum['page_lang'])
 			{
