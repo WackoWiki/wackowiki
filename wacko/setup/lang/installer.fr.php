@@ -37,7 +37,7 @@ $lang = [
 'Continue' => 'Continuer',
 'Back' => 'Revenir en arrière',
 'Recommended' => 'recommandée',
-'InvalidAction' => Action non valide',
+'InvalidAction' => 'Action non valide',
 
 /*
    Language Selection Page
