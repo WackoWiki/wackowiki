@@ -145,7 +145,7 @@ $lang = [
 'ErrorNoDbDriverDetected' => 'Es wurde kein Datenbanktreiber erkannt, bitte aktiviere entweder die mysql, mysqli oder pdo Erweiterung in deiner php.ini Datei.',
 'ErrorNoDbDriverSelected' => 'Es wurde kein Datenbanktreiber ausgewählt, bitte suche den passenden Treiber aus der Liste aus.',
 'DeleteTables' => 'Lösche bestehende Tabellen?',
-'DeleteTablesDesc' => 'ACHTUNG! Wenn du mit dieser Option fortfährst werden alle aktuellen Wiki-Daten aus deiner Datenbank gelöscht. Dies kann nicht rückgängig gemacht werden, es sei denn, du stellt die die Daten von Hand aus einem gesichert Backup wieder her.',
+'DeleteTablesDesc' => 'ACHTUNG! Wenn du mit dieser Option fortfährst, werden alle aktuellen Wiki-Daten aus deiner Datenbank gelöscht. Dies kann nicht rückgängig gemacht werden, es sei denn, du stellt die die Daten von Hand aus einem gesichert Backup wieder her.',
 'ConfirmTableDeletion' => 'Bist du sicher das du alle bestehenden Wiki-Tabellen löschen willst?',
 
 /*

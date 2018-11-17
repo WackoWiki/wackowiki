@@ -50,9 +50,9 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 				<li>&gt;</li>
 				<li class="<?php echo $install_action == 'version-check' ? 'current' : 'item'; ?>"><?php echo $lang['version-check']; ?></li>
 				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'site-config' ? 'current' : 'item'; ?>"><?php echo $lang['site-config']; ?></li>
+				<li class="<?php echo $install_action == 'config-site' ? 'current' : 'item'; ?>"><?php echo $lang['site-config']; ?></li>
 				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'database-config' ? 'current' : 'item'; ?>"><?php echo $lang['database-config']; ?></li>
+				<li class="<?php echo $install_action == 'config-database' ? 'current' : 'item'; ?>"><?php echo $lang['database-config']; ?></li>
 				<li>&gt;</li>
 				<li class="<?php echo $install_action == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang['database-install']; ?></li>
 				<li>&gt;</li>
