@@ -184,18 +184,18 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 	// user_id for user 'System'
 	// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
-	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . $tag . "', '" . translit($tag, $lang) . "', '" . $title . "' , '" . $body . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . $lang . "', 0, 0, 0, " . $noindex . ")";
+	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . _quote($tag) . "', '" . translit($tag, $lang) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
 
 	$page_id				= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag = '" . $tag . "' LIMIT 1";
 
-	$perm_read_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'read', '*')";
-	$perm_write_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'write', '" . $rights . "')";
-	$perm_comment_insert	= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'comment', '$')";
-	$perm_create_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'create', '$')";
-	$perm_upload_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'upload', '')";
+	$perm_read_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'read',		'*')";
+	$perm_write_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'write',		'" . $rights . "')";
+	$perm_comment_insert	= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'comment',	'$')";
+	$perm_create_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'create',		'$')";
+	$perm_upload_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'upload',		'')";
 
-	$default_menu_item		= "INSERT INTO " . $config_global['table_prefix'] . "menu (user_id, page_id, menu_lang, menu_title) VALUES ((" . $owner_id . "), (" . $page_id . "), '" . $lang . "', '" . $menu_title . "')";
-	#$site_menu_item		= "INSERT INTO " . $config_global['table_prefix'] . "menu (user_id, page_id, menu_lang, menu_title) VALUES ((" . $owner_id . "), (" . $page_id . "), '" . $lang . "', '" . $menu_title . "')";
+	$default_menu_item		= "INSERT INTO " . $config_global['table_prefix'] . "menu (user_id, page_id, menu_lang, menu_title) VALUES ((" . $owner_id . "), (" . $page_id . "), '" . _quote($lang) . "', '" . _quote($menu_title) . "')";
+	#$site_menu_item		= "INSERT INTO " . $config_global['table_prefix'] . "menu (user_id, page_id, menu_lang, menu_title) VALUES ((" . $owner_id . "), (" . $page_id . "), '" . _quote($lang) . "', '" . _quote($menu_title) . "')";
 
 	$insert_data[]			= [$page_insert,			$lang_global['ErrorInsertingPage']];
 	$insert_data[]			= [$perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']];
@@ -312,6 +312,39 @@ function translit($tag, $lang)
 	$tag = strtolower($tag);
 
 	return rtrim($tag, '/');
+}
+
+// TODO: refactor -> same function as in dbal class
+function _quote($string)
+{
+	global $config_global, $dblink_global;
+
+	switch ($config_global['database_driver'])
+	{
+		case 'mysqli_legacy':
+
+			return mysqli_real_escape_string($dblink_global, $string);
+
+		break;
+
+		default:
+		// return $dblink->quote($string);
+
+		// Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
+		// Got this from: http://www.gamedev.net/community/forums/topic.asp?topic_id=448909
+		// More reading: http://www.sitepoint.com/forums/showthread.php?t=337881
+		return strtr($string, [
+			"\x00"	=> '\x00',
+			"\n"	=> '\n',
+			"\r"	=> '\r',
+			'\\'	=> '\\\\',
+			"'"		=> "\'",
+			'"'		=> '\"',
+			"\x1a"	=> '\x1a'
+		]);
+
+		break;
+	}
 }
 
 ?>
