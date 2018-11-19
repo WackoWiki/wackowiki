@@ -6,6 +6,8 @@ if (!defined('IN_WACKO'))
 {
 	exit;
 }
+// Import the Hashids class into the global namespace
+use Hashids\Hashids;
 
 class UriRouter
 {

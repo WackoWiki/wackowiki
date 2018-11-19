@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-# namespace Hashids\Math;
+namespace Hashids\Math;
 
 /**
  * This is the Bc math class.
