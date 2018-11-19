@@ -7,6 +7,8 @@ if (!defined('IN_WACKO'))
 
 // {{hashid}}
 
+// Import the Hashids class into the global namespace
+use Hashids\Hashids;
 $hashids = new Hashids($this->db->hashid_seed);
 
 if (isset($this->page['version_id']))

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-# namespace Hashids;
+namespace Hashids;
 
-# use InvalidArgumentException;
+use InvalidArgumentException;
 
 /**
  * This is the hashids exception class.

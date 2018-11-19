@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-# namespace Hashids;
+namespace Hashids;
 
-# use Hashids\Math\Bc;
-# use Hashids\Math\Gmp;
-# use RuntimeException;
+use Hashids\Math\Bc;
+use Hashids\Math\Gmp;
+use RuntimeException;
 
 /**
  * This is the hashids class.
