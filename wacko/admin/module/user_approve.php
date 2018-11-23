@@ -155,7 +155,7 @@ function admin_user_approve(&$engine, &$module)
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{
-			$error = $this->_t('ApproveNotExists');
+			$error = $engine->_t('ApproveNotExists');
 			$engine->show_message($error);
 		}
 

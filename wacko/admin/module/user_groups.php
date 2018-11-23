@@ -54,8 +54,8 @@ function admin_user_groups(&$engine, &$module)
 	// update groups list
 	if (isset($_POST['save']))
 	{
-		$this->log(4, $engine->_t('LogMembersUpdated', SYSTEM_LANG));
-		$this->set_message($this->_t('GroupsUpdated'));
+		$engine->log(4, $engine->_t('LogMembersUpdated', SYSTEM_LANG));
+		$engine->set_message($engine->_t('GroupsUpdated'));
 	}
 	else
 	{

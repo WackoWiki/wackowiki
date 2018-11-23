@@ -195,6 +195,7 @@ $preview_text = function ($text, $limit, $tags = 0)
 	else
 	{
 		$counter = 0;
+		$return	= '';
 
 		for ($i = 0; $i <= strlen($text); $i++)
 		{
