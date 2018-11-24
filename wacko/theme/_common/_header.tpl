@@ -6,6 +6,7 @@ _common include file for themes
 <head>
 	<meta charset="[ ' charset ' ]">
 	<title>[ ' title |e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name |e ' ]</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	[= norobots _ =
 		['' nonstatic // dummy to make pattern non-static '']
 		<meta name="robots" content="noindex, nofollow">
@@ -35,6 +36,7 @@ _common include file for themes
 			<link rel="alternate" type="application/rss+xml" title="[ ' _t: RevisionsFeed ' ][ ' tag ' ]" href="[ ' href ' ]">
 		=]
 	=]
+	['' bb2 | '']
 	<script src="[ ' db: base_url ' ]js/default.js"></script>
 	[= edit _ =
 		['' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '']
