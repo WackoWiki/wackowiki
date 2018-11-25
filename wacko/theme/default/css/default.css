@@ -197,10 +197,10 @@ form input.submitinput {
 }
 
 
-#header-top,
-#header-top h1,
-#header-top a,
-#header-top a:visited {
+#header-site,
+#header-site h1,
+#header-site a,
+#header-site a:visited {
 	font-size: 24px;
 	font-weight: normal;
 	color: #444;
@@ -439,18 +439,18 @@ footer {
 	width: 100%;
 }
 
-.footerlist {
+.page-meta {
 	margin: 0 auto 0;
 	overflow: hidden;
 }
 
-.footerlist ul {
+.page-meta ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-.footerlist li {
+.page-meta li {
 	border-left: 1px dotted #ccc;
 	float: left;
 	line-height: 1.2em;
@@ -459,7 +459,7 @@ footer {
 	white-space: nowrap;
 }
 
-.footerlist ul li form {
+.page-meta ul li form {
 	display: inline;
 }
 
@@ -1293,7 +1293,7 @@ a:target {
 	display: none;
 }
 
-#header-top {
+#header-site {
 	margin: 0 auto 0;
 	overflow: hidden;
 	float: left;
@@ -1666,7 +1666,7 @@ table.formation td {
 	text-decoration: underline;
 }
 
-#handler {
+#page-handler {
 	/* clear:both; */
 	float: right;
 	margin: 0 auto;
@@ -1674,7 +1674,7 @@ table.formation td {
 	z-index: 1000;
 	position: relative;
 }
-#handler ul {
+#page-handler ul {
 	list-style: none outside none;
 	float: right;
 	position: relative;
@@ -1683,7 +1683,7 @@ table.formation td {
 }
 
 #menu-user ol li,
-#handler ul li {
+#page-handler ul li {
 	display: block;
 	float: left;
 	position: relative;
@@ -1693,25 +1693,25 @@ table.formation td {
 }
 
 #menu-user ol li a,
-#handler ul li a {
+#page-handler ul li a {
 	display:block;
 }
 
-#handler li.search{
+#page-handler li.search{
 	padding-bottom: 0;
 }
 
-#handler li:hover {
+#page-handler li:hover {
 	/* background-color: #FFFFFF; */
 }
 
-#handler li.active {
+#page-handler li.active {
 	border: 1px solid #AAAAAA;
 	border-bottom-width: 0;
 	background-color: #FCFCFC;
 }
 
-#handler ul ul li.active {
+#page-handler ul ul li.active {
 	border: 1px solid #AAAAAA;
 	border-right-color: #CCCCCC;
 	border-bottom: 0 #CCCCCC;
@@ -1720,7 +1720,7 @@ table.formation td {
 
 /* submenu items */
 #menu-user ol ul, 
-#handler ul ul {
+#page-handler ul ul {
 	display: none; /* Sub menus are hidden by default */
 	position: absolute;
 	background: none repeat scroll 0 0 white;
@@ -1733,7 +1733,7 @@ table.formation td {
 
 }
 #menu-user ol ul a,
-#handler ul ul a {
+#page-handler ul ul a {
 	background: none repeat scroll 0 0 transparent;
 }
 
@@ -1743,7 +1743,7 @@ table.formation td {
 }
 
 #menu-user ol ul li,
-#handler ul ul li {
+#page-handler ul ul li {
 	left:auto;  /*resets the left: on the parent li */
 	margin:0; /* Reset the 1px margin from the top menu */
 	clear:left;
@@ -1754,7 +1754,7 @@ table.formation td {
 }
 
 #menu-user ol ul li.active,
-#handler ul ul li.active {
+#page-handler ul ul li.active {
 	padding: 0;
 }
 
@@ -1762,10 +1762,10 @@ table.formation td {
 #menu-user ol li.active li a,
 #menu-user ol li:hover ul li a,
 #menu-user ol ul li.active span,
-#handler ul ul li a,
-#handler ul li.active li a,
-#handler ul li:hover ul li a,
-#handler ul ul li span {
+#page-handler ul ul li a,
+#page-handler ul li.active li a,
+#page-handler ul li:hover ul li a,
+#page-handler ul ul li span {
 	background: none repeat scroll 0 0 transparent;
 	display: block;
 	float: left;
@@ -1776,18 +1776,18 @@ table.formation td {
 	padding: 0.25em 20px 0.2em 0.5em;
 }
 
-#handler ul ul li.active {
+#page-handler ul ul li.active {
 	margin-left: -1px;
 }
 
 /* make the sub menus appear on hover */
 #menu-user ol li:hover ul,
-#handler ul li:hover ul {
+#page-handler ul li:hover ul {
 	display: block; /* Show the sub menus */
 	z-index: 20;
 }
 	
-#handler #more-icon {
+#page-handler #more-icon {
 }
 
 .page_handler{
@@ -1796,9 +1796,9 @@ table.formation td {
 
 .page_handler img,
 .page_handler a img,
-#handler img,
-#handler a img,
-#handler span img {
+#page-handler img,
+#page-handler a img,
+#page-handler span img {
 	border: medium none;
 	height: 16px;
 	width: 16px;

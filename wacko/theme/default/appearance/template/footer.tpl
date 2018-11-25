@@ -5,7 +5,7 @@
 </main>
 <footer>
 	<nav class="footer">
-		<div class="footerlist">
+		<div class="page-meta">
 			<ul>
 				[= edit =
 					<li><a href="[ ' href ' ]" accesskey="E" title="[ ' _t: EditTip ' ]">[ ' _t: EditText' ]</a></li>
