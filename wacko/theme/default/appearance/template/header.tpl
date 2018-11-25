@@ -9,7 +9,7 @@
 <div id="mainwrapper">
 <header>
 	<div id="header-main">
-		<div id="header-top">
+		<div id="header-site">
 			<h1>
 			[= site _ =
 				[= link _ =
@@ -88,7 +88,7 @@
 </ol>
 </div>
 [ === // control tabs menu === ]
-<div id="handler">
+<div id="page-handler">
 <ul class="submenu">
 
 	[= tab TabList =
