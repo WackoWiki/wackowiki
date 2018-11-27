@@ -57,6 +57,8 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'Dir wurde der Zugang zu %1 freigeschaltet.',
 	'UserDeniedInfo'			=> 'Der Zugang zu %1 wurde abgelehnt.',
 
+	'RegistrationThreshold'		=> 'Die Zeit zum Ausfüllen des Formulars sollte nicht %1 Sekunden unterschreiten.',
+
 	// login panel
 	'LoginWelcome'				=> 'Anmeldung',
 	'LoginWelcome2'				=> '((/Registrierung Benutzerkonto anlegen))',

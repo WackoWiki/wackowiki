@@ -11,7 +11,7 @@ $wacko_translation = [
 	'YouAre'					=> '',
 	'AccountLink'				=> 'Ustawienia',
 	'AccountText'				=> 'Moje konto',
-	'AccountTip'				=> 'Account Settings',
+	'AccountTip'				=> 'Ustawienia konta',
 	'AdminText'					=> 'Admin',
 	'AdminTip'					=> 'Administrative Panel',
 	'LogoutLink'				=> 'Wyloguj',
@@ -26,8 +26,8 @@ $wacko_translation = [
 	'RegistrationUserNameOwned'	=> 'Przepraszamy! Ta nazwa jest ju¿ zajêta. Prosimy o wybranie innej nazwy u¿ytkownika.',
 	'RegistrationPage'			=> 'Rejestracja',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
-	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'RegistrationEmailInfo'		=> 'Poprawny adres e-mail. Wszystkie wiadomo¶ci e-mail z systemu zostan± wys³ane na ten adres. Adres e-mail nie jest podawany do wiadomo¶ci publicznej i bêdzie u¿ywany tylko wtedy, gdy chcesz otrzymaæ nowe has³o lub chcesz otrzymywaæ pewne wiadomo¶ci lub powiadomienia przez e-mail.',
+	'SiteEmailConfirm'			=> 'Proszê potwierdziæ swój adres e-mail klikaj±c na link w wys³anych do Pañstwa instrukcjach. <br> Je¶li nie sprawdzisz swojego adresu e-mail, nie bêdziesz w stanie odzyskaæ ewentualnego zagubionego has³a. Ponadto nie bêdziesz informowany o ostatnich zmianach na stronie i komentarzach.',
 	'NameTooShort'				=> 'Login jest za krótkie, wymagane jest min. %2 znaków.',
 	'NameTooLong'				=> 'Login jest za d³ugie, wymagane jest maks. %2 znaków.',
 	'NameAlphanumOnly'			=> 'Login musi mieæ min. %1, a maks. %2 znaków i sk³adaæ siê tylko z liter alfabetu ³aciñskiego oraz cyfr.',
@@ -42,20 +42,22 @@ $wacko_translation = [
 	'NewAccountIP'				=> 'Zdalny adres IP:',
 	'NewAccountSignupInfo'		=> 'Nastêpuj±ce konto zosta³o za³o¿one:',
 
-	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
+	'UserWaitingApproval'		=> 'Wiadomo¶æ e-mail zosta³a wys³ana do administratora strony. Administrator zapozna siê z przes³anymi informacjami i zatwierdzi lub odrzuci Twoj± pro¶bê.',
 	'UserRequiresApproval'		=> 'To approve or deny this user access to %1 go to the admin panel.',
-	'UserApprovalInfo'			=> 'After you register, your request will be sent to the site administrator for approval. You will then receive an email with further instructions.',
-	'UserApprovalHint'			=> 'The successful activation of your account will be announced in a specific e-mail. Until then, a login is not possible.',
+	'UserApprovalInfo'			=> 'Po zarejestrowaniu siê, Twoja pro¶ba zostanie wys³ana do administratora strony do zatwierdzenia. Nastêpnie otrzymasz e-mail z dalszymi instrukcjami.',
+	'UserApprovalHint'			=> 'Pomy¶lna aktywacja konta zostanie og³oszona w specjalnym e-mailu. Do tego czasu logowanie nie jest mo¿liwe.',
 
-	'UserApprovalPending'		=> 'Your account is still pending approval.',
-	'UserApprovalDenied'		=> 'Your account has been denied access to this site.',
+	'UserApprovalPending'		=> 'Twoje konto nadal oczekuje na zatwierdzenie.',
+	'UserApprovalDenied'		=> 'Twoje konto nie ma dostêpu do tej strony.',
 
-	'RegistrationApproved'		=> 'Registration Approved',
-	'RegistrationDenied'		=> 'Registration Denied',
-	'PendingApproval'			=> 'Pending Approval',
+	'RegistrationApproved'		=> 'Zatwierdzona rejestracja',
+	'RegistrationDenied'		=> 'Odmowa rejestracji',
+	'PendingApproval'			=> 'Oczekuj±ce na zatwierdzenie',
 
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
+
+	'RegistrationThreshold'		=> 'Czas na wype³nienie formularza nie powinien byæ krótszy ni¿ %1 sekund.',
 
 	// login panel
 	'LoginWelcome'				=> 'Zaloguj siê',
@@ -81,7 +83,7 @@ $wacko_translation = [
 	'SessionEnds'				=> 'The current session ends',
 	'LastVisit'					=> 'Last visit was recorded',
 
-	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
+	'LoginIncorrect'			=> 'Wprowadzona nazwa u¿ytkownika lub has³o s± niewa¿ne.',
 	'WelcomeBack'				=> 'Welcome back, %1',
 	'LoginAttemtsExceeded'		=> 'Przekroczy³e¶/a¶ limit b³êdnych prób zalogowania.<br>Teraz, aby siê zalogowaæ, musisz dodatkowo przepisaæ kod z poni¿szego obrazka.',
 
@@ -160,7 +162,7 @@ $wacko_translation = [
 	'Revision'					=> 'To jest poprzednia wersja <a href="%1">%2</a> z %3.',
 	'ReadAccessDenied'			=> 'Przepraszamy! Nie masz dostêpu do tej strony.',
 	'ReadAccessDeniedHintGuest'	=> '',
-	'PageDeletedInfo'			=> 'This page has been deleted.',
+	'PageDeletedInfo'			=> 'Ta strona zosta³a usuniêta.',
 
 	'YouAreOwner'				=> 'Jeste¶ autorem tej strony.',
 	'Owner'						=> 'Autor',
@@ -229,13 +231,13 @@ $wacko_translation = [
 	'PurgeButton'				=> 'Purge',
 
 	// categories handler
-	'Categories'				=> 'Kategorie',
+	'Categories'				=> 'Kategoria',
 	'CategoriesAssign'			=> 'assign',
 	'CategoriesEdit'			=> 'edit',
 	'Category'					=> 'Kategoria',
 	'CategoriesFor'				=> 'Kategorie dla',
-	'CategoriesTip'				=> 'Edit categories',
-	'CategoriesText'			=> 'Kategorie',
+	'CategoriesTip'				=> 'Edytuj kategorie',
+	'CategoriesText'			=> 'Kategoria',
 	'CategoriesUpdated'			=> 'Categories updated',
 	'CategoriesAlreadyExists'	=> 'This category is already there.',
 	'CategoriesAdded'			=> 'Category added successfully.',
@@ -244,12 +246,12 @@ $wacko_translation = [
 	'CategoriesGrouped'			=> 'The category entered in the new group.',
 	'NoMultilevelGrouping'		=> 'Multilevel grouping categories is not possible.',
 	'CategoriesDeleted'			=> 'The category was deleted from the database and all pages.',
-	'CategoriesAdd'				=> 'Add a new category',
-	'CategoryDescription'		=> 'Description',
-	'CategoriesAddGrouped'		=> 'Grouped with the category',
+	'CategoriesAdd'				=> 'Dodaj now± kategoriê',
+	'CategoryDescription'		=> 'Opis',
+	'CategoriesAddGrouped'		=> 'Grupowane wed³ug kategorii',
 	'CategoriesAddGroupedNo'	=> 'No group.',
 	'CategoriesRename'			=> 'Rename the category %1 to',
-	'CategoriesRenameInfo'		=> '* Note: Change will affect all pages that are assigned to that category.',
+	'CategoriesRenameInfo'		=> '* Uwaga: Zmiana bêdzie mia³a wp³yw na wszystkie strony, które s± przypisane do tej kategorii.',
 	'CategoriesGroup'			=> 'Group categories %1 with',
 	'CategoriesGroupInfo'		=> '* Select [no group], to debundled the category.',
 	'CategoriesNoGroup'			=> '[no group]',
@@ -266,9 +268,9 @@ $wacko_translation = [
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
-	'CategoryNotExists'			=> 'Category does not exist.',
+	'CategoryNotExists'			=> 'Kategoria nie istnieje.',
 	'CategoryEmpty'				=> 'Category empty.',
-	'NoCategorySelected'		=> 'No category selected.',
+	'NoCategorySelected'		=> 'Nie wybrano ¿adnej kategorii.',
 	'TagCloud'					=> 'Chmura znaczników',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 	'UpdateButton'				=> 'Update',
@@ -282,7 +284,7 @@ $wacko_translation = [
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 
 	// Groups action
-	'GroupsSearch'				=> 'Find Groups',
+	'GroupsSearch'				=> 'Znajd¼ grupy',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
 	'GroupsFilter'				=> 'Search',
 	'GroupsOpenProfile'			=> 'View Profile',
@@ -310,7 +312,7 @@ $wacko_translation = [
 	'EditMinor'					=> 'Minor edit',
 	'MinorEditHide'				=> 'Hide minor edit',
 	'MinorEditShow'				=> 'Show minor edit',
-	'PostAnonymously'			=> 'Post anonymously without giving your name',
+	'PostAnonymously'			=> 'Publikuj anonimowo, nie podaj±c swojego nazwiska',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
 	'OverwriteAlert'			=> 'UWAGA STRONA NADPISANA: Podczas wprowadzania zmian, zawarto¶æ strony zosta³a zmodyfikowana przez kogo¶ innego.<br>Nale¿y skopiowaæ wprowadzone zmiany do innego programu i ponownie rozpocz±æ edycjê strony.',
 	'WriteAccessDenied'			=> 'Przepraszamy. Nie masz prawa zapisu na tej stronie.',
@@ -318,7 +320,7 @@ $wacko_translation = [
 	'EmptyComment'				=> 'Komentarz nie zosta³ zachowany, poniewa¿ nie wprowadzono jego tre¶ci.',
 	'CommentAccessDenied'		=> 'Przepraszamy! Nie mo¿esz komentowaæ tej strony.',
 	'CommentFlooded'			=> 'The interval between the publication of the messages shall not be less than %1 seconds.',
-	'CommentAdded'				=> 'Comment added.',
+	'CommentAdded'				=> 'Komentarz dodany.',
 	'YouAreNowTheOwner'			=> 'Nie jeste¶ autorem tej strony.',
 
 	'DefaultDiffMode'			=> 'Default diff mode',
@@ -358,8 +360,8 @@ $wacko_translation = [
 	'NotOwnerCantDelete'		=> 'Przepraszamy. Tê stronê mo¿e usun±æ tylko oryginalny autor.',
 
 	// remove
-	'RemovePage'				=> 'Remove page',
-	'RemoveComment'				=> 'Delete comment',
+	'RemovePage'				=> 'Usuñ stronê',
+	'RemoveComment'				=> 'Usuñ komentarz',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
@@ -378,7 +380,7 @@ $wacko_translation = [
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page usuniête.',
 	'ActionHaveNoUndo'		=> 'UWAGA: Ta czynno¶æ nie mo¿e zostaæ cofniêta!',
-	'PageRestored'				=> 'Page restored.',
+	'PageRestored'				=> 'Strona przywrócona.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Wersja do druku',
@@ -528,7 +530,7 @@ $wacko_translation = [
 	'NeedRedirect'				=> 'Utwórz przekierowanie ze starej do nowej strony',
 	'RedirectCreated'			=> 'Na poprzedniej stronie %1 utworzono przekierowanie do nowej nazwy.',
 
-	'UserSettings'				=> 'User settings',
+	'UserSettings'				=> 'Ustawienia u¿ytkownika',
 	'UserSettingsGeneral'		=> 'General',
 	'UserSettingsNotifications'	=> 'Powiadomienia',
 
@@ -553,9 +555,9 @@ $wacko_translation = [
 	'ChooseTheme'				=> 'Zmieñ schemat',
 
 	'CreatePage'				=> 'Utwórz stronê',
-	'CreateNewPage'				=> 'Create a new page',
+	'CreateNewPage'				=> 'Utwórz now± stronê',
 	'CreateNewPageText'			=> 'Create',
-	'CreateNewPageTip'			=> 'Create a new page.',
+	'CreateNewPageTip'			=> 'Utwórz now± stronê.',
 
 	'CreateRandomPage'			=> 'Create a random page',
 	'CreatePageButton'			=> 'Create',
@@ -740,7 +742,7 @@ $wacko_translation = [
 	'SettingsCreated'			=> 'Created',
 	'SettingsCurrent'			=> 'Modified',
 	'SettingsTotalRevs'			=> 'Revisions',
-	'SettingsTotalComs'			=> 'Comments',
+	'SettingsTotalComs'			=> 'Komentarze',
 	'SettingsHits'				=> 'Views',
 	'SettingsRating'			=> 'Readers rating',
 	'SettingsText'				=> 'Ustawienia',
@@ -758,7 +760,7 @@ $wacko_translation = [
 	'AclForEntireCluster'		=> 'for entire cluster',
 	'SettingsAttachments'		=> 'Attachments',
 	'SettingsUpload'			=> 'Wgraj plik',
-	'SettingsCategories'		=> 'Categories',
+	'SettingsCategories'		=> 'Kategorie',
 	'SettingsReferrers'			=> 'Odno¶niki',
 	'SettingsWatch'				=> 'Obserwacja',
 	'SettingsPrint'				=> 'Wersja do druku',
@@ -772,7 +774,7 @@ $wacko_translation = [
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
-	'UploadFiles'				=> 'Upload files',
+	'UploadFiles'				=> 'Prze¶lij pliki',
 	'UploadFor'					=> 'Plik wgrany',
 	'UploadButton'				=> 'Kontynuuj',
 	'UploadGlobalText'			=> 'do publicznego dostêpu',
@@ -784,7 +786,7 @@ $wacko_translation = [
 	'UploadForbidden'			=> 'Nie masz prawa na wgrywanie tutaj plików.',
 	'UploadNoFile'				=> 'Z jakiego¶ powodu nie by³o pliku w formularzu.',
 	'UploadMaxSizeReached'		=> 'Rozmiar pliku wykracza poza dozwolony limit!',
-	'UploadDirNotWritable'		=> 'File directory is not writable!',
+	'UploadDirNotWritable'		=> 'Katalog plików nie jest zapisywalny!',
 	'UploadNotAPicture'			=> 'Mo¿na wgrywaæ jedynie zdjêcia, a ty co próbujesz wgraæ?',
 	'UploadMaxFileQuota'		=> 'Osi±gn±³e¶ swój limit wgrywania, ten plik nie mo¿e zostaæ wgrany',
 	'UploadDone'				=> 'Plik wgrany pomy¶lnie',
@@ -961,10 +963,10 @@ $wacko_translation = [
 	'LastModification'			=> 'Last Modification',
 
 	// Captcha
-	'Captcha'					=> 'Please type the word you read in the image',
-	'CaptchaFailed'				=> 'You have entered the captcha word incorrectly. Prosimy spróbowaæ ponownie.',
-	'CaptchaReload'				=> 'New Captcha',
-	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
+	'Captcha'					=> 'Proszê wpisaæ s³owo, które czytasz na obrazku',
+	'CaptchaFailed'				=> 'Niepoprawnie wprowadzi³e¶ s³owo captcha. Prosimy spróbowaæ ponownie.',
+	'CaptchaReload'				=> 'Nowa Captcha',
+	'CaptchaReloadWarning'		=> 'Przepraszamy, nie mo¿na ponownie za³adowaæ captcha obrazu, trzeba bêdzie ponownie za³adowaæ stronê, aby to zrobiæ.',
 
 	// news
 	'News'						=> 'Aktualno¶ci',
@@ -1174,7 +1176,7 @@ $wacko_translation = [
 	],
 
 	'LanguageArray'	=> [
-		'bg' => 'bulgarian',
+		'bg' => 'bu³garski',
 		'da' => 'danish',
 		'nl' => 'dutch',
 		'el' => 'greek',
@@ -1185,14 +1187,14 @@ $wacko_translation = [
 		'hu' => 'hungarian',
 		'it' => 'italian',
 		'pl' => 'polish',
-		'pt' => 'portuguese',
+		'pt' => 'portugalski',
 		'ru' => 'russian',
 		'es' => 'spanish',
 	],
 
-	'AccountStatus'				=> 'Account status',
+	'AccountStatus'				=> 'Status konta',
 	'AccountStatusArray' => [
-		'0' => 'active',
+		'0' => 'aktywny',
 		'1' => 'pending',
 		'2' => 'blocked',
 		'3' => 'inactive',

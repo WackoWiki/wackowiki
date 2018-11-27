@@ -63,6 +63,7 @@ function admin_config_security(&$engine, &$module)
 		$config['username_chars_min']			= (int) $_POST['username_chars_min'];
 		$config['username_chars_max']			= (int) $_POST['username_chars_max'];
 		$config['form_token_time']				= (int) $_POST['form_token_time'];
+		$config['registration_delay']			= (int) $_POST['registration_delay'];
 
 		$engine->config->_set($config);
 
@@ -504,6 +505,18 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="intercom_delay" name="intercom_delay" value="<?php echo (int) $engine->db->intercom_delay;?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl_setting">
+				<td class="label">
+					<label for="intercom_delay"><strong><?php echo $engine->_t('RegistrationDelay');?>:</strong><br>
+					<small><?php echo $engine->_t('RegistrationDelayInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" min="0" maxlength="4" id="registration_delay" name="registration_delay" value="<?php echo (int) $engine->db->registration_delay;?>">
 				</td>
 			</tr>
 		</table>

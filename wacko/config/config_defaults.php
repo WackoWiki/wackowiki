@@ -17,8 +17,8 @@ $wacko_config_defaults = [
 	'database_database'				=> 'wacko',
 	'database_user'					=> '',
 	'database_password'				=> '',
-	'database_collation'			=> 0,
-	'database_charset'				=> 'latin1',
+	'database_collation'			=> 0,			// 'utf8mb4_general_ci'
+	'database_charset'				=> 'latin1',	// 'utf8mb4'
 	'database_engine'				=> 'InnoDB',
 
 	'session_store'					=> 1,
@@ -222,6 +222,8 @@ $wacko_config_defaults = [
 
 	'spam_filter'					=> 1,
 	'sorting_comments'				=> 0,
+
+	'registration_delay'			=> 10,
 	'comment_delay'					=> 30,
 	'intercom_delay'				=> 30,
 	'moders_can_edit'				=> 3,

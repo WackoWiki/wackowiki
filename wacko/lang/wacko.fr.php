@@ -57,6 +57,8 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'Votre accès à %1 a été autorisé.',
 	'UserDeniedInfo'			=> 'Votre accès à %1 a été refusé.',
 
+	'RegistrationThreshold'		=> 'Le temps nécessaire pour remplir le formulaire ne doit pas être inférieur à %1 secondes.',
+
 	// login panel
 	'LoginWelcome'				=> 'Connexion',
 	'LoginWelcome2'				=> '[[/Enregistrement Enregistrement]]',

@@ -628,6 +628,8 @@ $ap_translation = [
 	'CommentDelayInfo'			=> 'The minimum delay between the publication of the new user comments (in seconds).',
 	'IntercomDelay'				=> 'Anti-flood for personal communications',
 	'IntercomDelayInfo'			=> 'The minimum delay between sending a private message user connection (in seconds).',
+	'RegistrationDelay'			=> 'Time threshold for registering',
+	'RegistrationDelayInfo'		=> 'El umbral de tiempo mínimo para rellenar el formulario de registro para distinguir a los robots de los humanos (en segundos).',
 
 	//Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
