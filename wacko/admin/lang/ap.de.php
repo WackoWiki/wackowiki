@@ -638,6 +638,8 @@ $ap_translation = [
 	'CommentDelayInfo'			=> 'Mindestwartezeit zwischen der Veröffentlichung von neuen Benutzerkommentaren (in Sekunden).',
 	'IntercomDelay'				=> 'Anti-Flut für persönliche Mitteilungen',
 	'IntercomDelayInfo'			=> 'Mindestwartezeit zwischen dem Senden einer persönlicher Nachricht (in Sekunden).',
+	'RegistrationDelay'			=> 'Mindestdauer für die Registrierung',
+	'RegistrationDelayInfo'		=> 'Die minimale Zeitschwelle für das Ausfüllen des Registrierungsformulars, um Bots von Menschen zu unterscheiden (in Sekunden).',
 
 	//Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',

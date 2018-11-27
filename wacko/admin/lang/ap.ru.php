@@ -616,6 +616,8 @@ $ap_translation = [
 	'CommentDelayInfo'			=> 'Минимальная задержка между публикацией пользователем новых комментариев (в секундах).',
 	'IntercomDelay'				=> 'Анти-флуд для личных сообщений',
 	'IntercomDelayInfo'			=> 'Минимальная задержка между отправкой пользователем сообщений приватной связи (в секундах).',
+	'RegistrationDelay'			=> 'Time threshold for registering',
+	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
 	//Formatter settings
 	'FormatterSettingsInfo'		=> 'Группа параметров, отвечающих за тонкую настройку форматирования текста. Не меняйте их, если не уверены в своих действиях.',

@@ -168,6 +168,7 @@ $config_db['pwd_min_chars']					= $config['pwd_min_chars'];
 $config_db['pwd_unlike_login']				= $config['pwd_unlike_login'];
 $config_db['referrer_policy']				= $config['referrer_policy'];
 $config_db['referrers_purge_time']			= $config['referrers_purge_time'];
+$config_db['registration_delay']			= $config['registration_delay'];
 $config_db['remove_onlyadmins']				= $config['remove_onlyadmins'];
 $config_db['rename_globalacl']				= $config['rename_globalacl'];
 $config_db['reverse_proxy']					= $config['reverse_proxy'];

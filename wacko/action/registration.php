@@ -37,6 +37,14 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 	$user_lang		= $this->known_language($user_lang) ? $user_lang : $this->db->language;
 	$complexity		= $this->password_complexity($user_name, $password);
 
+	if (isset($this->sess->registration_delay) && time() - $this->sess->registration_delay < $this->db->registration_delay)
+	{
+		// mitigate bots from creating accounts
+		$this->sess->comment_delay	= time();
+
+		$error .= Ut::perc_replace($this->_t('RegistrationThreshold'), $this->db->registration_delay);
+	}
+
 	if (!$this->is_admin() && $this->db->captcha_registration && !$this->validate_captcha())
 	{
 		$error .= $this->_t('CaptchaFailed');
@@ -223,9 +231,13 @@ if (!(($this->db->allow_registration && !$this->get_user()) || $this->is_admin()
 }
 else
 {
-	$tpl->r_form = $this->href();
+	// show regitraion form
 
-	$tpl->r_approve = !!$this->db->approve_new_user;
+	// for timing method to mitigate bots from creating accounts
+	$this->sess->registration_delay	= time();
+
+	$tpl->r_form		= $this->href();
+	$tpl->r_approve		= !!$this->db->approve_new_user;
 
 	if ($this->db->multilanguage)
 	{

@@ -57,6 +57,8 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
+	'RegistrationThreshold'		=> 'De tijd voor het invullen van het formulier mag niet korter zijn dan %1 seconden.',
+
 	// login panel
 	'LoginWelcome'				=> 'Inloggen',
 	'LoginWelcome2'				=> '[[/Registratie Registreren]]',

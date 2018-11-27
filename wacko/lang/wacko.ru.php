@@ -58,6 +58,8 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'Одобрен доступ к %1.',
 	'UserDeniedInfo'			=> 'В доступе к %1 отказано.',
 
+	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+
 	// login panel
 	'LoginWelcome'				=> 'Вход',
 	'LoginWelcome2'				=> '((/Регистрация Регистрация))',
