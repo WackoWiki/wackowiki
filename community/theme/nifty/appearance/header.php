@@ -30,8 +30,8 @@ if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex 
 	<link media="print" rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css">
 	<link rel="icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>">
-	<?php if ($this->db->policy_page) {?>
-	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->policy_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" title="Copyright">
+	<?php if ($this->db->terms_page) {?>
+	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->terms_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" title="Copyright">
 	<?php } ?>
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
 	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
@@ -270,7 +270,7 @@ if ($doubleclick == true)
 		?>
 		<span class="search nobr"><label for="phrase"><?php echo $this->_t('SearchText'); ?></label>
 		<input type="search" name="phrase" id="phrase" size="15">
-		<input type="submit" id="search-submit-button" class="submitinput" title="<?php echo $this->_t('SearchButtonText') ?>" alt="<?php echo $this->_t('SearchButtonText') ?>" value="<?php echo $this->_t('SearchButtonText') ?>">
+		<input type="submit" id="search-submit-button" class="submitinput" title="<?php echo $this->_t('SearchButton') ?>" alt="<?php echo $this->_t('SearchButton') ?>" value="<?php echo $this->_t('SearchButton') ?>">
 		</span>
 		<?php
 		// search form close
