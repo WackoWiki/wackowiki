@@ -3,7 +3,86 @@
 #require (Ut::join_path(THEME_DIR, '_common/_header.php'));
 
 ?>
+<?php
+/*
+ Common header file.
+*/
+
+// HTTP header with right charset settings
+header("Content-Type: text/html; charset=" . $this->get_charset());
+?>
+<!DOCTYPE html>
+<html lang="<?php echo $this->page['page_lang'] ?>">
+<head>
+	<title><?php echo htmlspecialchars($this->db->site_name, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . ' : '.(isset($this->page['title']) ? $this->page['title'] : $this->add_spaces($this->tag)).($this->method != 'show' ? ' (' . $this->method . ')' : '');?></title>
+<?php
+// We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
+if ($this->method != 'show' || $this->page['latest'] == 0 || $this->db->noindex == 1 || $this->page['noindex'] == 1)
+{
+	echo "	<meta name=\"robots\" content=\"noindex, nofollow\">\n";
+}
+?>
+	<meta name="keywords" content="<?php echo htmlspecialchars($this->get_keywords(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>">
+	<meta name="description" content="<?php echo htmlspecialchars($this->get_description(), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>">
+	<meta name="language" content="<?php echo $this->page['page_lang'] ?>">
+	<meta charset="<?php echo $this->get_charset(); ?>">
+
+	<link rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/default.css">
+	<?php if ($this->db->allow_x11colors) {?>
+	<link rel="stylesheet" href="<?php echo Ut::join_path(THEME_DIR, "_common/X11colors.css"); ?>">
+	<?php } ?>
+	<link media="print" rel="stylesheet" href="<?php echo $this->db->theme_url ?>css/print.css">
+	<link rel="icon" href="<?php echo $this->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
+	<link  rel="start" title="<?php echo $this->db->root_page;?>" href="<?php echo $this->db->base_url;?>">
+	<?php if ($this->db->terms_page) {?>
+	<link rel="license" href="<?php echo htmlspecialchars($this->href('', $this->db->terms_page), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET); ?>" title="Copyright">
+	<?php } ?>
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('ChangesFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('CommentsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
+	<?php if ($this->db->news_cluster) {?>
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('NewsFeed');?>" href="<?php echo $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name));?>.xml">
+	<?php } ?>
+	<link rel="alternate" type="application/rss+xml" title="<?php echo $this->_t('RevisionsFeed');?><?php echo $this->tag; ?>" href="<?php echo $this->href('revisions.xml');?>">
+<?php
+// JS files.
+// default.js contains common procedures and should be included everywhere
+?>
+	<script src="<?php echo $this->db->base_url;?>js/default.js"></script>
+<?php
+// autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We include them only for pages in edit mode.
+if ($this->method == 'edit')
+{
+	echo "<script src=\"" . $this->db->base_url . "js/protoedit.js\"></script>\n";
+	echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
+	echo "<script src=\"" . $this->db->base_url . "js/wikiedit.js\"></script>\n";
+	echo "<script src=\"" . $this->db->base_url . "js/autocomplete.js\"></script>\n";
+}
+
+// Doubleclick edit feature.
+// Enabled only for registered users who don't swith it off (requires class=page in show handler).
+$doubleclick = '';
+if ($user = $this->get_user())
+{
+	if ($user['doubleclick_edit'] == 1)
+	{
+		$doubleclick = true;
+	}
+}
+else if($this->has_access('write'))
+{
+	$doubleclick = true;
+}
+if ($doubleclick == true)
+{
+?>
+	<script>
+	var edit = "<?php echo $this->href('edit');?>";
+	</script>
+<?php
+}
+?>
 </head>
+
 <body>
 <table style="width:100%;">
 	<tr>
