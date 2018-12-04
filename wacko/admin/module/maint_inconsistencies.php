@@ -41,9 +41,9 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			echo '<table class="formation" style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
 			?>
 			<tr>
-				<th style="width:250px;">Inconsistencies</th>
+				<th style="width:250px;"><?php echo $engine->_t('Inconsistencies');?></th>
 				<th class="t_left"></th>
-				<th class="t_left">Records</th>
+				<th class="t_left"><?php echo $engine->_t('Records');?></th>
 			</tr>
 			<?php
 			// 1.1 usergroup_member without user
@@ -330,9 +330,9 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			echo '<table class="formation" style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
 			?>
 			<tr>
-				<th style="width:250px;">Inconsistencies</th>
+				<th style="width:250px;"><?php echo $engine->_t('Inconsistencies');?></th>
 				<th class="t_left"></th>
-				<th class="t_left">Records</th>
+				<th class="t_left"><?php echo $engine->_t('Records');?></th>
 			</tr>
 			<?php
 			// 1.1 usergroup_member without user
@@ -575,9 +575,9 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 			echo '</table>';
 
-			$engine->log(1, 'Removed inconsistencies');
+			$engine->log(1, $engine->_t('InconsistenciesRemoved'));
 
-			$message = 'Data Inconsistencies solved.';
+			$message = $engine->_t('InconsistenciesDone');
 			$engine->show_message($message, 'success');
 		}
 
@@ -588,8 +588,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 	echo $engine->form_open('usersupdate');
 ?>
 		<input type="hidden" name="action" value="check_inconsistencies">
-		<input type="submit" name="check" id="submit" value="check">
-		<input type="submit" name="solve" id="submit" value="solve">
+		<input type="submit" name="check" id="submit" value="<?php echo $engine->_t('Check');?>">
+		<input type="submit" name="solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
 <?php
 	echo $engine->form_close();
 }

@@ -1205,6 +1205,12 @@ $ap_translation = [
 
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
+	'Inconsistencies'			=> 'Inconsistencies',
+	'Records'					=> 'Records',
+	'InconsistenciesDone'		=> 'Data Inconsistencies solved.',
+	'InconsistenciesRemoved'	=> 'Removed inconsistencies',
+	'Check'						=> 'check',
+	'Solve'						=> 'solve',
 
 	// Transliterate module
 	'TranslitField'				=> 'Transliterate field %1 in table `%2`.',
