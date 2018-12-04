@@ -1155,6 +1155,7 @@ $ap_translation = [
 	'ServerOS'					=> 'Операционная система',
 	'ServerName'				=> 'Имя сервера',
 	'WebServer'					=> 'Web сервер',
+	'HTTPProtocol'				=> 'HTTP Протокол',
 	'DbVersion'					=> 'СУБД MariaDB / MySQL',
 	'SQLModesGlobal'			=> 'SQL Modes Global',
 	'SQLModesSession'			=> 'SQL Modes Session',

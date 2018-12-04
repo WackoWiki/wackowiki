@@ -1168,6 +1168,7 @@ $ap_translation = [
 	'ServerOS'					=> 'OS',
 	'ServerName'				=> 'Server name',
 	'WebServer'					=> 'Web server',
+	'HTTPProtocol'				=> 'HTTP Protocol',
 	'DbVersion'					=> 'MariaDB / MySQL',
 	'SQLModesGlobal'			=> 'SQL Modes Global',
 	'SQLModesSession'			=> 'SQL Modes Session',

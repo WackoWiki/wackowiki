@@ -76,6 +76,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['os']					= [$engine->_t('ServerOS'), PHP_OS . ' (' . @php_uname() . ')'];
 	$sysinfo['server_name']			= [$engine->_t('ServerName'), $_SERVER['SERVER_NAME']];
 	$sysinfo['server_software']		= [$engine->_t('WebServer'), $_SERVER['SERVER_SOFTWARE']];
+	$sysinfo['server_protocol']		= [$engine->_t('HTTPProtocol'), $_SERVER['SERVER_PROTOCOL']];
 	$sysinfo['db_version']			= [$engine->_t('DbVersion'), $db_version];
 	$sysinfo['sql_mode_global']		= [$engine->_t('SQLModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
 	$sysinfo['sql_mode_session']	= [$engine->_t('SQLModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
