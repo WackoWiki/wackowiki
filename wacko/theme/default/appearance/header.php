@@ -232,12 +232,12 @@ else
 	$echo_tab('referrers', 'ReferrersTip', 'ReferrersText', 2, '', 'l');
 
 	// watch tab
-		// ($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnWatchText') : $this->_t('WatchText') ) : '',
+		// ($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnwatchText') : $this->_t('WatchText') ) : '',
 	if ($logged_in)
 	{
 		if ($this->is_watched)
 		{
-			$echo_tab('watch', 'RemoveWatch', 'UnWatchText', 2, 'watch-off', 'w');
+			$echo_tab('watch', 'RemoveWatch', 'UnwatchText', 2, 'watch-off', 'w');
 		}
 		else
 		{
