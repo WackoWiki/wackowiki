@@ -305,7 +305,7 @@
 			<li class="m-attachments"><a href="[ ' href: attachments ' ]">[ ' i Icon ' ][ ' _t: SettingsAttachments ' ]</a></li>
 			<li class="m-upload"><a href="[ ' href: upload ' ]">[ ' i Icon ' ][ ' _t: SettingsUpload ' ]</a></li>
 			<li class="m-referrers"><a href="[ ' href: referrers ' ]">[ ' i Icon ' ][ ' _t: SettingsReferrers ' ]</a></li>
-			<li class="[ ' watched | list watch-on watch-off ' ]"><a href="[ ' href: watch ' ]">[ ' i Icon ' ][ ' watched | list SetWatch RemoveWatch | _t ' ]</a></li>
+			<li class="[ ' watched | list watch-on watch-off ' ]"><a href="[ ' href: watch ' ]">[ ' i Icon ' ][ ' watched | list WatchText UnwatchText | _t ' ]</a></li>
 			<li class="m-print"><a href="[ ' href: print ' ]">[ ' i Icon ' ][ ' _t: SettingsPrint ' ]</a></li>
 			[== CommentedOut _ =
 				<li class="m-word"><a href="[ ' href: wordprocessor ' ]">[ ' i Icon ' ][ ' _t: SettingsWordprocessor ' ]</a></li>
