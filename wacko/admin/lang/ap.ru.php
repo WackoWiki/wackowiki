@@ -1204,6 +1204,66 @@ $ap_translation = [
 	'TranslitContinue'			=> 'продолжить',
 	'TranslitCompleted'			=> 'Процедура обновления завершена.',
 
+	// Bad Behavior module
+	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
+	'BbEnable'					=> 'Enable Bad Behavior',
+	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
+	'BbStats'					=> 'Bad Behavior has blocked %1 access attempts in the last 7 days.',
+
+	'BbSummary'					=> 'Summary',
+	'BbLog'						=> 'Log',
+	'BbSettings'				=> 'Settings',
+	'BbWhitelist'				=> 'Whitelist',
+
+	// --> Log
+	'BbHits'					=> 'Hits',
+	'BbRecordsFiltered'			=> 'Displaying %1 of %2 records filtered by',
+	'BbStatus'					=> 'Status',
+	'BbBlocked'					=> 'Blocked',
+	'BbPermitted'				=> 'Permitted',
+	'BbIP'						=> 'IP',
+	'BbGetPost'					=> 'GET/POST',
+	'BbRecordsAll'				=> 'Displaying all %1 records',
+	'BbShowBlocked'				=> 'Show Blocked',
+	'BbShowPermitted'			=> 'Show Permitted',
+	'BbIPDateStatus'			=> 'IP/Date/Status',
+	'BbHeaders'					=> 'Headers',
+	'BbEntity'					=> 'Entity',
+
+	// --> Whitelist
+	'BbOptionsSaved'			=> 'Options saved.',
+	'BbWhitelistHint'			=> 'Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.',
+	'BbIPAddress'				=> 'IP Address',
+	'BbIPAddressInfo'			=> 'IP address or CIDR format address ranges to be whitelisted (one per line)',
+	'BbURL'						=> 'URL',
+	'BbURLInfo'					=> 'URL fragments beginning with the / after your web site hostname (one per line)',
+	'BbUserAgent'				=> 'User Agent',
+	'BbUserAgentInfo'			=> 'User agent strings to be whitelisted (one per line)',
+
+	// --> Settings
+	'BbSettingsUpdated'			=> 'Updated Bad Behavior settings',
+	'BbLogRequest'				=> 'Logging HTTP request',
+	'BbLogVerbose'				=> 'Verbose',
+	'BbLogNormal'				=> 'Normal (recommended)',
+	'BbLogOff'					=> 'Do not log (not recommended)',
+	'BbSecurity'				=> 'Security',
+	'BbStrict'					=> 'Strict checking',
+	'BbStrictInfo'				=> 'blocks more spam but may block some people',
+	'BbOffsiteForms'			=> 'Allow form postings from other web sites',
+	'BbOffsiteFormsInfo'		=> 'required for OpenID; increases spam received',
+	'BbHttpbl'					=> 'http:BL',
+	'BbHttpblInfo'				=> 'To use Bad Behavior\'s http:BL features you must have an %1',
+	'BbHttpblKey'				=> 'http:BL Access Key',
+	'BbHttpblThreat'			=> 'Minimum Threat Level (25 is recommended)',
+	'BbHttpblMaxage'			=> 'Maximum Age of Data (30 is recommended)',
+	'BbReverseProxy'			=> 'Reverse Proxy/Load Balancer',
+	'BbReverseProxyInfo'		=> 'If you are using Bad Behavior behind a reverse proxy, load balancer, HTTP accelerator, content cache or similar technology, enable the Reverse Proxy option.<br>' .
+									'If you have a chain of two or more reverse proxies between your server and the public Internet, you must specify <em>all</em> of the IP address ranges (in CIDR format) of all of your proxy servers, load balancers, etc. Otherwise, Bad Behavior may be unable to determine the client\'s true IP address.<br>' .
+									'In addition, your reverse proxy servers must set the IP address of the Internet client from which they received the request in an HTTP header. If you don\'t specify a header, %1 will be used. Most proxy servers already support X-Forwarded-For and you would then only need to ensure that it is enabled on your proxy servers. Some other header names in common use include %2 and %3.',
+	'BbReverseProxyEnable'		=> 'Enable Reverse Proxy',
+	'BbReverseProxyHeader'		=> 'Header containing Internet clients IP address',
+	'BbReverseProxyAddresses'	=> 'IP address or CIDR format address ranges for your proxy servers (one per line)',
+
 
 ];
 

@@ -127,19 +127,13 @@ function bb2_summary(&$engine)
 	$settings		= bb2_read_settings();
 	$where			= '';
 
-	?>
-	<h2>Summary</h2>
-
-	<?php
 	echo $engine->form_open('bb2_manage', ['form_more' => 'setting=bb2_manage']);
 	?>
-	<p class="right">See also: <span class="active">Summary</span> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']); ?>">Log</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_options']); ?>">Settings</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_whitelist']); ?>">Whitelist</a></p>
-
 
 	<div class="alignleft">
-<?php bb2_insert_stats(true); ?>
+	<?php echo Ut::perc_replace($engine->_t('BbStats'), '<strong>' . bb2_insert_stats(true) . '</strong>');?>
 	</div>
-<?php
+	<?php
 	// select arguments
 	$arguments = [
 		'status_key',
@@ -171,19 +165,19 @@ function bb2_summary(&$engine)
 	// Display rows to the user
 
 	?>
-<table class="formation">
-	<colgroup>
-		<col span="1" style="width: 5%;">
-		<col span="1">
-	</colgroup>
-	<thead>
-		<tr>
-			<th scope="col">Hits</th>
-			<th scope="col"><?php echo $argument; ?></th>
-		</tr>
-	</thead>
-	<tbody>
-<?php
+	<table class="formation">
+		<colgroup>
+			<col span="1" style="width: 5%;">
+			<col span="1">
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col"><?php echo $engine->_t('BbHits');?></th>
+				<th scope="col"><?php echo $argument; ?></th>
+			</tr>
+		</thead>
+		<tbody>
+	<?php
 		// all ip related host names
 
 		if ($results)
@@ -192,7 +186,7 @@ function bb2_summary(&$engine)
 			{
 				echo '<tr id="request-' . '' . '" class="lined">' . "\n";
 				echo '<td class="label">' . $result['n'] . "</td>\n";
-				#echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
+				# echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
 
 				if ($argument == 'status_key')
 				{
@@ -243,7 +237,7 @@ function bb2_manage(&$engine)
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n " .
 		"FROM " . $engine->db->table_prefix . "bad_behavior l " .
-		"WHERE 1=1 " .( $where ?: '' ));
+		"WHERE 1=1 " . ( $where ?: '' ));
 
 	$key_pagination				= ($_GET['status_key']		?? '');
 	$blocked_pagination			= ($_GET['blocked']			?? '');
@@ -275,50 +269,55 @@ function bb2_manage(&$engine)
 		$pagination['limit']);
 
 	// Display rows to the user
+
+	echo $engine->form_open('bb2_manage');
 	?>
 
-<h2>Log</h2>
-<?php
-	echo $engine->form_open('bb2_manage');
-?>
+	<div class="alignleft">
+	<?php
+	if ($count['n'] < $totalcount['n'])
+	{
+		echo Ut::perc_replace($engine->_t('BbRecordsFiltered'), '<strong>' . $count['n'] . '</strong>', '<strong>' . $totalcount['n'] . '</strong>') . ':<br>';
 
-	<p class="right">See also: <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_summary']); ?>">Summary</a> | <span class="active">Log</span> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_options']); ?>">Settings</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_whitelist']); ?>">Whitelist</a></p>
+		if (!empty($_GET['status_key']))		echo $engine->_t('BbStatus')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+		if (!empty($_GET['blocked']))			echo $engine->_t('BbBlocked')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+		if (!empty($_GET['permitted']))			echo $engine->_t('BbPermitted')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+		if (!empty($_GET['ip']))				echo $engine->_t('BbIP')		. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+		if (!empty($_GET['user_agent']))		echo $engine->_t('BbUserAgent')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+		if (!empty($_GET['request_method']))	echo $engine->_t('BbGetPost')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
+	}
+	else
+	{
+		echo Ut::perc_replace($engine->_t('BbRecordsFiltered'), $count['n'], '<strong>' . $totalcount['n'] . '</strong>') . ':<br>';
+	}
 
-<div class="alignleft">
-<?php if ($count['n'] < $totalcount['n']): ?>
-Displaying <strong><?php echo $count['n']; ?></strong> of <strong><?php echo $totalcount['n']; ?></strong> records filtered by:<br>
-<?php
-if (!empty($_GET['status_key']))		echo 'Status [<a href="' .		$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-if (!empty($_GET['blocked']))			echo 'Blocked [<a href="' .		$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-if (!empty($_GET['permitted']))			echo 'Permitted [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-if (!empty($_GET['ip']))				echo 'IP [<a href="' .			$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-if (!empty($_GET['user_agent']))		echo 'User Agent [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-if (!empty($_GET['request_method']))	echo 'GET/POST [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-?>
-<?php else: ?>
-Displaying all <strong><?php echo $totalcount['n']; ?></strong> records<br>
-<?php
-endif; ?>
-<?php if (!isset($_GET['status_key']) && !isset($_GET['blocked'])) { ?><a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;blocked=true'; ?>">Show Blocked</a> <?php } ?>
-<?php if (!isset($_GET['status_key']) && !isset($_GET['permitted'])) { ?><a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;permitted=true'; ?>">Show Permitted</a> <?php } ?>
-</div>
+	if (!isset($_GET['status_key']) && !isset($_GET['blocked']))
+	{
+		echo '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'blocked' => 'true']) . '">' . $engine->_t('BbShowBlocked') . '</a>';
+	}
 
-<?php
-		$engine->print_pagination($pagination);
-?>
-<table class="formation">
-	<thead>
-		<tr>
-			<th scope="col" class="check-column"></th>
-			<th scope="col">IP/Date/Status</th>
-			<th scope="col">Headers</th>
-			<th scope="col">Entity</th>
-		</tr>
-	</thead>
-	<tbody>
-<?php
+	if (!isset($_GET['status_key']) && !isset($_GET['permitted']))
+	{
+		echo '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'permitted' => 'true']) . '">' . $engine->_t('BbShowPermitted') . '</a>';
+	}
+	?>
+	</div>
+
+	<?php
+			$engine->print_pagination($pagination);
+	?>
+	<table class="formation">
+		<thead>
+			<tr>
+				<th scope="col" class="check-column"></th>
+				<th scope="col"><?php echo $engine->_t('BbIPDateStatus');?></th>
+				<th scope="col"><?php echo $engine->_t('BbHeaders');?></th>
+				<th scope="col"><?php echo $engine->_t('BbEntity');?></th>
+			</tr>
+		</thead>
+		<tbody>
+	<?php
 	// all ip related host names
-
 	if ($results)
 	{
 		foreach ($results as $result)
@@ -326,7 +325,9 @@ endif; ?>
 			$status_key = bb2_get_response($result['status_key']);
 
 			echo '<tr id="request-' . $result['log_id'] . '" class="lined">' . "\n";
-			echo '<td scope="row" class="check-column label"><input type="checkbox" name="submit[]" value="' . $result['log_id'] . '"></td>' . "\n";
+			echo '<td scope="row" class="check-column label">' .
+					'<input type="checkbox" name="submit[]" value="' . $result['log_id'] . '">' .
+				'</td>' . "\n";
 
 			$httpbl	= bb2_httpbl_lookup($engine, $result['ip']);
 
@@ -438,30 +439,26 @@ function bb2_whitelist(&$engine)
 		}
 
 		update_option('bad_behavior_whitelist', $whitelists);
-?>
-	<div id="message" class="updated fade"><p><strong>Options saved.</strong></p></div>
-<?php
+	?>
+	<div id="message" class="updated fade"><p><strong><?php echo $engine->_t('BbOptionsSaved');?></strong></p></div>
+	<?php
 	}
-?>
 
-	<h2>Whitelist</h2>
-<?php
 	echo $engine->form_open('bb2_whitelist', ['form_more' => 'setting=bb2_whitelist']);
-?>
-	<p>Inappropriate whitelisting WILL expose you to spam, or cause Bad Behavior to stop functioning entirely! DO NOT WHITELIST unless you are 100% CERTAIN that you should.</p>
-	<p class="right">See also: <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_summary']); ?>">Summary</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']); ?>">Log</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_options']); ?>">Settings</a> | <span class="active">Whitelist</span></p>
+	?>
+	<p><?php echo $engine->_t('BbWhitelistHint');?></p>
 
 	<table class="formation">
 		<tr>
 			<th colspan="2">
 				<br>
-				Whitelist
+				<?php echo $engine->_t('BbWhitelist');?>
 			</th>
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="whitelists_ip"><strong>IP Address:</strong><br>
-				<small>IP address or CIDR format address ranges to be whitelisted (one per line)</small></label>
+				<label for="whitelists_ip"><strong><?php echo $engine->_t('BbIPAddress');?>:</strong><br>
+				<small><?php echo $engine->_t('BbIPAddressInfo');?></small></label>
 			</td>
 			<td>
 				<textarea cols="24" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea>
@@ -472,8 +469,8 @@ function bb2_whitelist(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="whitelists_url"><strong>URL:</strong><br>
-				<small>URL fragments beginning with the / after your web site hostname (one per line)</small></label>
+				<label for="whitelists_url"><strong><?php echo $engine->_t('BbURL');?>:</strong><br>
+				<small><?php echo $engine->_t('BbURLInfo');?></small></label>
 			</td>
 			<td>
 				<textarea cols="48" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea>
@@ -484,8 +481,8 @@ function bb2_whitelist(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="whitelists_useragent"><strong>User Agent:</strong><br>
-				<small>User agent strings to be whitelisted (one per line)</small></label>
+				<label for="whitelists_useragent"><strong><?php echo $engine->_t('BbUserAgent');?>:</strong><br>
+				<small><?php echo $engine->_t('BbUserAgentInfo');?></small></label>
 			</td>
 			<td>
 				<textarea cols="48" rows="6" id="whitelists_useragent" name="useragent"><?php echo implode("\n", $whitelists['useragent']); ?></textarea>
@@ -493,7 +490,7 @@ function bb2_whitelist(&$engine)
 		</tr>
 	</table>
 	<br>
-	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;"></div>
+	<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?>"></div>
 
 <?php
 	echo $engine->form_close();
@@ -506,8 +503,10 @@ function bb2_options(&$engine)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		#$config['display_stats']				= (string) $_POST['display_stats'];
 		$config['ext_bad_behavior']				= (int) $_POST['ext_bad_behavior'];
+
+		/*
+		$config['display_stats']				= (string) $_POST['display_stats'];
 		$config['strict']						= (string) $_POST['strict'];
 		$config['verbose']						= (string) $_POST['verbose'];
 		$config['logging']						= (string) $_POST['logging'];
@@ -518,11 +517,12 @@ function bb2_options(&$engine)
 		$config['reverse_proxy']				= (int) $_POST['reverse_proxy'];
 		$config['reverse_proxy_header']			= $_POST['reverse_proxy_header'];
 		$config['reverse_proxy_addresses']		= (string) $_POST['reverse_proxy_addresses'];
+		*/
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!Updated Bad Behavior settings!!');
-		$engine->set_message('Updated Bad Behavior settings');
+		$engine->log(1, '!!' . $engine->_t('BbSettingsUpdated') . '!!');
+		$engine->set_message($engine->_t('BbSettingsUpdated'));
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
@@ -645,41 +645,40 @@ function bb2_options(&$engine)
 
 		bb2_write_settings($settings);
 ?>
-	<div id="message" class="updated fade"><p><strong>Options saved</strong></p></div>
+	<div id="message" class="updated fade"><p><strong><?php echo $engine->_t('BbOptionsSaved');?></strong></p></div>
 <?php
 	}
 ?>
 	<div class="wrap">
 
-	<h2>Settings</h2>
-
 <?php
 	echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
 ?>
 	<input type="hidden" name="action" value="bb2_options">
-	<p class="right">See also: <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_summary']); ?>">Summary</a> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_manage']); ?>">Log</a> | <span class="active">Settings</span> | <a href="<?php echo $engine->href('', '', ['setting' => 'bb2_whitelist']); ?>">Whitelist</a></p>
 
 	<table class="formation">
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
 		<tr class="hl_setting">
-			<td class="label"><strong>Enable Bad Behavior:</strong><br>
-				<small>All other settings can be changed in the config folder <code>bb_settings.conf</code>.</small></td>
+			<td class="label"><strong><?php echo $engine->_t('BbEnable');?>:</strong><br>
+				<small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_settings.conf</code>');?></small></td>
 			<td>
-				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>>
+				<label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
+				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '');?>>
+				<label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
 			</td>
 		</tr>
 		<tr>
 			<th colspan="2">
 				<br>
-				Logging HTTP request
+				<?php echo $engine->_t('BbLogRequest');?>
 			</th>
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="logging_verbose">Verbose</label>
+				<label for="logging_verbose"><?php echo $engine->_t('BbLogVerbose');?></label>
 			</td>
 			<td>
 				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked <?php } ?>>
@@ -687,7 +686,7 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="logging_normal">Normal (recommended)</label>
+				<label for="logging_normal"><?php echo $engine->_t('BbLogNormal');?></label>
 			</td>
 			<td>
 				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked <?php } ?>>
@@ -695,7 +694,7 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="logging_false">Do not log (not recommended)</label>
+				<label for="logging_false"><?php echo $engine->_t('BbLogOff');?></label>
 			</td>
 			<td>
 				<input type="radio" id="logging_false" name="logging" value="false" <?php if (!$settings['logging']) { ?>checked <?php } ?>>
@@ -704,13 +703,13 @@ function bb2_options(&$engine)
 		<tr>
 			<th colspan="2">
 				<br>
-				Security
+				<?php echo $engine->_t('BbSecurity');?>
 			</th>
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="strict_checking"><strong>Strict checking</strong><br>
-				blocks more spam but may block some people</label>
+				<label for="strict_checking"><strong><?php echo $engine->_t('BbStrict');?></strong><br>
+				<?php echo $engine->_t('BbStrictInfo');?></label>
 			</td>
 			<td><input type="checkbox" id="strict_checking" name="strict" value="true" <?php if ($settings['strict']) { ?>checked <?php } ?>/></td>
 		</tr>
@@ -719,8 +718,8 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="offsite_forms"><strong>Allow form postings from other web sites</strong><br>
-				required for OpenID; increases spam received</label>
+				<label for="offsite_forms"><strong><?php echo $engine->_t('BbOffsiteForms');?></strong><br>
+				<?php echo $engine->_t('BbOffsiteFormsInfo');?></label>
 			</td>
 			<td>
 				<input type="checkbox" id="offsite_forms" name="offsite_forms" value="true" <?php if ($settings['offsite_forms']) { ?>checked <?php } ?>>
@@ -729,18 +728,22 @@ function bb2_options(&$engine)
 		<tr>
 			<th colspan="2">
 				<br>
-				http:BL
+				<?php echo $engine->_t('BbHttpbl');?>
 			</th>
 		</tr>
 		<tr class="hl_setting">
 			<td colspan="2">
-				<p>To use Bad Behavior's http:BL features you must have an <a href="http://www.projecthoneypot.org/httpbl_configure.php?rf=24694" rel="noreferrer">http:BL Access Key</a>.</p>
+				<p><?php echo Ut::perc_replace(
+							$engine->_t('BbHttpblInfo'),
+							'<a href="http://www.projecthoneypot.org/httpbl_configure.php?rf=24694" rel="noreferrer">http:BL Access Key</a>'
+						);?>
+				</p>
 				<br>
 			</td>
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="httpbl_key">http:BL Access Key</label>
+				<label for="httpbl_key"><?php echo $engine->_t('BbHttpblKey');?></label>
 			</td>
 			<td>
 				<input type="text" size="12" maxlength="12" id="httpbl_key" name="httpbl_key" value="<?php echo $settings['httpbl_key']; ?>">
@@ -751,7 +754,7 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="httpbl_threat">Minimum Threat Level (25 is recommended)</label>
+				<label for="httpbl_threat"><?php echo $engine->_t('BbHttpblThreat');?></label>
 			</td>
 			<td>
 				<input type="text" size="3" maxlength="3" id="httpbl_threat" name="httpbl_threat" value="<?php echo intval($settings['httpbl_threat']); ?>">
@@ -762,7 +765,7 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="httpbl_maxage">Maximum Age of Data (30 is recommended)</label>
+				<label for="httpbl_maxage"><?php echo $engine->_t('BbHttpblMaxage');?></label>
 			</td>
 			<td>
 				<input type="text" size="3" maxlength="3" id="httpbl_maxage" name="httpbl_maxage" value="<?php echo intval($settings['httpbl_maxage']); ?>">
@@ -771,22 +774,25 @@ function bb2_options(&$engine)
 		<tr>
 			<th colspan="2">
 				<br>
-				Reverse Proxy/Load Balancer
+				<?php echo $engine->_t('BbReverseProxy');?>
 			</th>
 		</tr>
 		<tr class="hl_setting">
 			<td colspan="2">
 				<div>
-					If you are using Bad Behavior behind a reverse proxy, load balancer, HTTP accelerator, content cache or similar technology, enable the Reverse Proxy option.
-					<p>If you have a chain of two or more reverse proxies between your server and the public Internet, you must specify <em>all</em> of the IP address ranges (in CIDR format) of all of your proxy servers, load balancers, etc. Otherwise, Bad Behavior may be unable to determine the client's true IP address.</p>
-					<p>In addition, your reverse proxy servers must set the IP address of the Internet client from which they received the request in an HTTP header. If you don't specify a header, <code><a href="http://en.wikipedia.org/wiki/X-Forwarded-For" rel="noreferrer">X-Forwarded-For</a></code> will be used. Most proxy servers already support X-Forwarded-For and you would then only need to ensure that it is enabled on your proxy servers. Some other header names in common use include <code>X-Real-Ip</code> (nginx) and <code>Cf-Connecting-Ip</code> (CloudFlare).</p>
+					<?php echo Ut::perc_replace(
+							$engine->_t('BbReverseProxyInfo'),
+							'<code><a href="http://en.wikipedia.org/wiki/X-Forwarded-For" rel="noreferrer">X-Forwarded-For</a></code>',
+							'<code>X-Real-Ip</code> (nginx)',
+							'<code>Cf-Connecting-Ip</code> (CloudFlare)'
+						);?>
 					<br>
 				</div>
 			</td>
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="reverse_proxy">Enable Reverse Proxy</label>
+				<label for="reverse_proxy"><?php echo $engine->_t('BbReverseProxyEnable');?></label>
 			</td>
 			<td>
 				<input type="checkbox" id="reverse_proxy" name="reverse_proxy" value="true" <?php if ($settings['reverse_proxy']) { ?>checked <?php } ?>>
@@ -797,7 +803,7 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="reverse_proxy_header">Header containing Internet clients' IP address</label>
+				<label for="reverse_proxy_header"><?php echo $engine->_t('BbReverseProxyHeader');?></label>
 			</td>
 			<td>
 				<input type="text" size="32" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo $settings['reverse_proxy_header']; ?>">
@@ -808,7 +814,7 @@ function bb2_options(&$engine)
 		</tr>
 		<tr class="hl_setting">
 			<td class="label">
-				<label for="reverse_proxy_addresses">IP address or CIDR format address ranges for your proxy servers (one per line)</label>
+				<label for="reverse_proxy_addresses"><?php echo $engine->_t('BbReverseProxyAddresses');?></label>
 			</td>
 			<td>
 				<textarea cols="24" rows="6" id="reverse_proxy_addresses" name="reverse_proxy_addresses"><?php echo implode("\n", $settings['reverse_proxy_addresses']); ?></textarea>
@@ -816,13 +822,13 @@ function bb2_options(&$engine)
 		</tr>
 	</table>
 	<br>
-	<div class="center"><input type="submit" class="button" name="submit" value="Update &raquo;"></div>
-<?php
-	echo $engine->form_close();
-?>
-	</div>
-<?php
-}
+	<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?>"></div>
+	<?php
+		echo $engine->form_close();
+	?>
+		</div>
+	<?php
+	}
 
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'bb2_options')
@@ -831,31 +837,48 @@ function bb2_options(&$engine)
 
 		$engine->config->_set($config);
 
-		$engine->log(1, '!!Updated Bad Behavior settings!!');
-		$engine->set_message('Updated Bad Behavior settings');
+		$engine->log(1, '!!' . $engine->_t('BbSettingsUpdated') . '!!');
+		$engine->set_message($engine->_t('BbSettingsUpdated'));
 		$engine->http->redirect(rawurldecode($engine->href()));
 	}
 
-if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
-{
-	$sql = "TRUNCATE " . $engine->db->table_prefix . "badbehavior";
-	$engine->db->sql_query($sql);
+	if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
+	{
+		$sql = "TRUNCATE " . $engine->db->table_prefix . "badbehavior";
+		$engine->db->sql_query($sql);
 
-	// queries
-	$engine->config->invalidate_sql_cache();
-}
-
-
-#######################################################################################################
+		// queries
+		$engine->config->invalidate_sql_cache();
+	}
 
 
-?>
+	#######################################################################################################
+
+
+	?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
-	Detects and blocks unwanted Web accesses, deny automated spambots access
-	<p>For more information please visit the <a href="http://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a> homepage.</p>
+	<?php echo Ut::perc_replace($engine->_t('BbInfo'), '<a href="http://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a>');?>
+	<br><br>
+	<?php
+	$mode_selector	= 'setting';
+	$mode			= @$_GET[$mode_selector];
 
-<?php
+	// navigation
+	$tabs	= [
+		''					=> 'BbSummary',
+		'bb2_manage'		=> 'BbLog',
+		'bb2_options'		=> 'BbSettings',
+		'bb2_whitelist'		=> 'BbWhitelist',
+	];
+
+	if (!array_key_exists($mode, $tabs))
+	{
+		$mode = '';
+	}
+
+	echo '<h2>' . $engine->_t($tabs[$mode]) . "</h2>";
+	echo '<p>' . $engine->tab_menu($tabs, $mode, '', [], $mode_selector) . '</p><br>';
 
 	if (!empty($engine->db->ext_bad_behavior))
 	{
@@ -879,7 +902,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 	else
 	{
 		echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
-?>
+	?>
 		<br>
 		<input type="hidden" name="action" value="bb2_options">
 
@@ -891,19 +914,21 @@ if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 			<tbody>
 				<tr class="hl_setting">
 					<th scope="row" class="label">
-						<strong>Enable Bad Behavior:</strong><br>
-						<small>All other settings can be changed in the config folder.</small>
+						<strong><?php echo $engine->_t('BbEnable');?>:</strong><br>
+						<small><?php echo $engine->_t('BbEnableInfo');?></small>
 					</th>
 					<td>
-						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-						<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo (!$engine->db->ext_bad_behavior ? ' checked' : '');?>><label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>>
+						<label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
+						<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo (!$engine->db->ext_bad_behavior ? ' checked' : '');?>>
+						<label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<br>
-		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?> &raquo;"></div>
-<?php
+		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?> "></div>
+	<?php
 		echo $engine->form_close();
 	}
 }
