@@ -586,7 +586,7 @@ textarea {
 
 /*	Pop-up menus	*/
 
-nav.menu {
+nav#menu {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	background-color: #FFFFFF;
@@ -597,27 +597,27 @@ nav.menu {
 	overflow: hidden;
 	z-index: 10;*/
 }
-	nav.menu a {
+	nav#menu a {
 		color: #073D69;
 		display: block;
 		text-decoration: none;
 		padding-left: 4px;
 		padding-right: 4px;
 	}
-	nav.menu a:hover {
+	nav#menu a:hover {
 		color: #FFFFFF;
 		background-color: #1A5581;
 		text-decoration: none;
 	}
-	nav.menu span.text {
+	nav#menu span.text {
 		display: block;
 		padding-left: 4px;
 		padding-right: 4px;
 	}
-	nav.menu a.bookmark {
+	nav#menu a.bookmark {
 		text-align: center;
 	}
-	nav.menu hr {
+	nav#menu hr {
 		background-color: #073D69;
 		border: none;
 		margin-top: 1px;
@@ -625,10 +625,10 @@ nav.menu {
 		padding: 0;
 		height: 1px;
 	}
-	nav.menu img {
+	nav#menu img {
 		display: none;
 	}
-	nav.menu div.sub {
+	nav#menu div.sub {
 		padding: 1px;
 	}
 #toc {
@@ -645,11 +645,11 @@ nav.menu {
 span.tocnumber {
 	margin-right: 0.3em;
 }
-	nav.menu ul, nav.menu ol {
+	nav#menu ul, nav.menu ol {
 		padding-left: 0;
 		list-style: none;
 	}
-	nav.menu ul ul a, nav.menu ol ol a {
+	nav#menu ul ul a, nav.menu ol ol a {
 		padding-left: 15px;
 	}
 #menu {
@@ -668,7 +668,33 @@ span.tocnumber {
 	width: 150px;
 }
 
-.menu .active{
+#menu .active{
+	font-weight: bold;
+}
+
+.menu
+{
+	list-style: none outside none;
+	float: right;
+	margin: 0;
+	padding: 0;
+}
+
+.menu li:first-child {
+	border-left: 1px none;
+}
+
+.menu li {
+	border-left: 1px dotted #CCCCCC;
+	float: left;
+	line-height: 1.2em;
+	margin: 0 0.5em 0 -0.5em;
+	padding: 0 0.5em;
+	white-space: nowrap;
+}
+
+.menu li.active {
+	/* background: none repeat scroll 0 0 #CCFFCC; */
 	font-weight: bold;
 }
 

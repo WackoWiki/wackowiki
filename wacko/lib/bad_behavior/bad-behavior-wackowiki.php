@@ -19,7 +19,7 @@ Please report any problems to bad . bots AT ioerror DOT us
 http://bad-behavior.ioerror.us/
 
 WackoWiki implementation, 2018 WackoWiki Team
-Version 0.6
+Version 0.7
 https://wackowiki.org/doc/Dev/PatchesHacks/BadBehavior
 
 */
@@ -131,6 +131,7 @@ function bb2_db_date()
 function bb2_db_affected_rows($result)
 {
 	global $db;
+
 	return $db->affected_rows($result);
 }
 
@@ -138,6 +139,7 @@ function bb2_db_affected_rows($result)
 function bb2_db_escape($string)
 {
 	global $db;
+
 	return $db->quote($string);
 #	return $string;	// No-op when database not in use.
 }
@@ -146,7 +148,10 @@ function bb2_db_escape($string)
 function bb2_db_num_rows($result)
 {
 	if ($result !== FALSE)
+	{
 		return count($result);
+	}
+
 	return 0;
 }
 
@@ -156,6 +161,7 @@ function bb2_db_num_rows($result)
 function bb2_db_query($query)
 {
 	global $db;
+
 	return $db->ll_query($query);
 }
 
@@ -173,6 +179,7 @@ function bb2_db_rows($result)
 	}
 
 	$db->free_result($result);
+
 	return $data;
 }
 
@@ -180,13 +187,14 @@ function bb2_db_rows($result)
 function bb2_email()
 {
 	global $db;
+
 	return $db->abuse_email;	// You need to change this.
 }
 
 // retrieve whitelist
 function bb2_read_whitelist()
 {
-	return @parse_ini_file('config/bb_whitelist.conf'); // dirname(BB2_CORE) . 'bb_whitelist.conf'
+	return @parse_ini_file('config/bb_whitelist.conf');
 }
 
 // retrieve settings from database
@@ -194,8 +202,10 @@ function bb2_read_whitelist()
 function bb2_read_settings()
 {
 	global $bb2_settings_defaults;
-	$settings = @parse_ini_file('config/bb_settings.conf'); // dirname(__FILE__) . 'bb_settings.conf'
+	$settings = @parse_ini_file('config/bb_settings.conf');
+
 	if (!$settings) $settings = [];
+
 	return @array_merge($bb2_settings_defaults, $settings);
 }
 
@@ -209,8 +219,10 @@ function bb2_write_settings($settings)
 function bb2_install()
 {
 	$settings = bb2_read_settings();
+
 	if (defined('BB2_NO_CREATE')) return;
 	if (!$settings['logging']) return;
+
 	bb2_db_query(bb2_table_structure($settings['log_table']));
 }
 
@@ -218,6 +230,7 @@ function bb2_install()
 function bb2_timer()
 {
 	global $bb2_timer_total;
+
 	return "<!-- Bad Behavior " . BB2_VERSION . " run time: " . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n";
 }
 
@@ -233,7 +246,7 @@ function bb2_insert_stats($force = false)
 
 		if ($blocked !== FALSE)
 		{
-			echo sprintf('<p>%1$s %2$s <strong>%3$s</strong> %4$s</p>', 'Bad Behavior', 'has blocked', $blocked[0]['n'], 'access attempts in the last 7 days.');
+			return $blocked[0]['n'];
 		}
 	}
 }

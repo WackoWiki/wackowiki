@@ -315,7 +315,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 ########################################################
 
 ?>
-	<nav id="menu" class="menu">
+	<nav id="menu">
 		<div class="sub">
 <?php
 			echo $menu;

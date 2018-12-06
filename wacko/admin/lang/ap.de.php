@@ -1233,6 +1233,66 @@ $ap_translation = [
 	'TranslitContinue'			=> 'Weiter',
 	'TranslitCompleted'			=> 'Der Update-Vorgang ist abgeschlossen.',
 
+	// Bad Behavior module
+	'BbInfo'					=> 'Erkennt und blockiert unerwünschte Webzugriffe, verweigert automatisierten Spambots den Zugriff.<br>Für weitere Informationen besuche die %1 Webseite.',
+	'BbEnable'					=> 'Bad Behavior aktivieren',
+	'BbEnableInfo'				=> 'Alle anderen Einstellungen können im Konfigurationsordner geändert werden. %1.',
+	'BbStats'					=> 'Bad Behavior hat in den letzten 7 Tagen %1 Zugriffsversuche blockiert.',
+
+	'BbSummary'					=> 'Zusammenfassung',
+	'BbLog'						=> 'Log',
+	'BbSettings'				=> 'Einstellungen',
+	'BbWhitelist'				=> 'Whitelist',
+
+	// --> Log
+	'BbHits'					=> 'Zugriffe',
+	'BbRecordsFiltered'			=> 'Displaying %1 of %2 records filtered by',
+	'BbStatus'					=> 'Status',
+	'BbBlocked'					=> 'Gesperrt',
+	'BbPermitted'				=> 'Zugelassen',
+	'BbIP'						=> 'IP',
+	'BbGetPost'					=> 'GET/POST',
+	'BbRecordsAll'				=> 'Displaying all %1 records',
+	'BbShowBlocked'				=> 'Gesperrte anzeigen',
+	'BbShowPermitted'			=> 'Zugelassene anzeigen',
+	'BbIPDateStatus'			=> 'IP/Datum/Status',
+	'BbHeaders'					=> 'Headers',
+	'BbEntity'					=> 'Entität',
+
+	// --> Whitelist
+	'BbOptionsSaved'			=> 'Einstellungen gespeichert.',
+	'BbWhitelistHint'			=> 'Unsachgemäßes Whitelisting wird zu Spam führen oder dazu, dass Bad Behavior nicht mehr funktioniert! NICHT WEISSLISTEN, es sei denn, es besteht eine 100%ige Sicherheit, dass es erforderlich ist.',
+	'BbIPAddress'				=> 'IP-Adresse',
+	'BbIPAddressInfo'			=> 'IP-Adressbereiche oder Adressbereiche im CIDR-Format, welche auf die Whitelist gesetzt werden sollen (einer pro Zeile).',
+	'BbURL'						=> 'URL',
+	'BbURLInfo'					=> 'URL-Fragmente, die mit dem / nach dem Hostnamen Ihrer Website beginnen (eines pro Zeile).',
+	'BbUserAgent'				=> 'User Agent',
+	'BbUserAgentInfo'			=> 'User-Agent Zeichenketten, die auf die Whitelist gesetzt werden sollen (eine pro Zeile).',
+
+	// --> Settings
+	'BbSettingsUpdated'			=> 'Updated Bad Behavior settings',
+	'BbLogRequest'				=> 'HTTP-Request protokollieren',
+	'BbLogVerbose'				=> 'Umfassend',
+	'BbLogNormal'				=> 'Normal (empfohlen)',
+	'BbLogOff'					=> 'Nicht protokollieren (nicht empfohlen)',
+	'BbSecurity'				=> 'Sicherheit',
+	'BbStrict'					=> 'Strenge Prüfung',
+	'BbStrictInfo'				=> 'Blockiert mehr Spam, kann aber einige Nutzer aussperren.',
+	'BbOffsiteForms'			=> 'Formularpostings von anderen Websites zulassen',
+	'BbOffsiteFormsInfo'		=> 'erforderlich für OpenID; erhöht den Spam-Eingang.',
+	'BbHttpbl'					=> 'http:BL',
+	'BbHttpblInfo'				=> 'Um die http:BL-Funktionen von Bad Behavior nutzen zu können, benötigt man einen %1',
+	'BbHttpblKey'				=> 'http:BL Zugangsschlüssel',
+	'BbHttpblThreat'			=> 'Minimale Bedrohungsstufe (25 wird empfohlen)',
+	'BbHttpblMaxage'			=> 'Maximales Alter der Daten (30 wird empfohlen)',
+	'BbReverseProxy'			=> 'Reverse-Proxy/Load-Balancer',
+	'BbReverseProxyInfo'		=> 'Aktivieren die Option Reverse-Proxy, wenn Bad Behavior hinter einem Reverse-Proxy, Load-Balancer, HTTP-Accelerator, Content-Cache oder einer ähnlichen Technologie verwendet wird.<br>' .
+									'Wenn eine Reihe von zwei oder mehr Reverse-Proxies zwischen dem Server und dem öffentlichen Internet sind, müssen <em>alle</em> IP-Adressbereiche (im CIDR-Format) aller Ihrer Proxy-Server, Load-Balancer usw. angeben. Andernfalls kann Bad Behavior möglicherweise nicht in Stande sein, die wahre IP-Adresse des Clients zu bestimmen.<br>' .
+									'Zusätzlich müssen Ihre Reverse-Proxy-Server die IP-Adresse des Internet-Clients, von dem sie die Anfrage erhalten haben, in dem HTTP-Header angeben. Wenn Sie keinen Header angeben, wird %1 verwendet. Die meisten Proxy-Server unterstützen bereits X-Forwarded-For und Sie müssen dann nur noch sicherstellen, dass es auf Ihren Proxy-Servern aktiviert ist.  Einige andere häufig verwendete Header-Namen sind unter anderem %2 und %3.',
+	'BbReverseProxyEnable'		=> 'Reverse-Proxy aktivieren',
+	'BbReverseProxyHeader'		=> 'Kopfzeile mit der IP-Adresse des Internet-Clients',
+	'BbReverseProxyAddresses'	=> 'IP-Adressbereiche oder Adressbereiche im CIDR-Format für die Proxy-Server (eine pro Zeile)',
+
 
 ];
 
