@@ -246,7 +246,7 @@ echo "\n";
 		{
 			if ($this->is_watched === true)
 			{
-				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->_t('RemoveWatch'); ?>"><?php echo $this->_t('UnWatchText'); ?></a> &nbsp;&nbsp; <?php
+				?><a href="<?php echo $this->href('watch') ?>" title="<?php echo $this->_t('RemoveWatch'); ?>"><?php echo $this->_t('UnwatchText'); ?></a> &nbsp;&nbsp; <?php
 			}
 			else
 			{

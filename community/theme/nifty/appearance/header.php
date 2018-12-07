@@ -722,7 +722,7 @@ if ($doubleclick == true)
 						#echo echo_tab(
 						#	$this->href(($this->is_watched === true ? 'watch-on' : 'watch-off')),
 						#	($this->is_watched === true ? $this->_t('RemoveWatch') : $this->_t('SetWatch')),
-						#	($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnWatchText') : $this->_t('WatchText') ) : '',
+						#	($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnwatchText') : $this->_t('WatchText') ) : '',
 						#	$this->method == 'watch',
 						#	1,
 						#	'a');
@@ -730,7 +730,7 @@ if ($doubleclick == true)
 						echo echo_tab(
 							$this->href('watch'),
 							($this->is_watched === true ? $this->_t('RemoveWatch') : $this->_t('SetWatch')),
-							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnWatchText') : $this->_t('WatchText') ): '',
+							($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnwatchText') : $this->_t('WatchText') ): '',
 							$this->method == 'watch',
 							1,
 							($this->is_watched === true ? 'watch-on.svg' : 'watch-off.svg'),
