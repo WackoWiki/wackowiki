@@ -4,14 +4,14 @@
 	[= s =
 		<form action="[ ' href: attachments ' ]" method="get" name="file_search">
 			[ ' csrf: file_search ' ]
-			<input type="hidden" name="files" value="[ ' filter |e attr ' ]">
+			<input type="hidden" name="files" value="[ ' filter | e attr ' ]">
 			<table class="formation">
 				<tr>
 					<td class="label">
 						<label for="search_file">[ ' _t: FileSearch ' ]:</label>
 					</td>
 					<td>
-						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase |e attr ' ]">
+						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase | e attr ' ]">
 						<input type="submit" value="[ ' _t: SearchButton ' ]">
 					</td>
 				</tr>

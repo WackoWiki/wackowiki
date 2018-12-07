@@ -13,12 +13,12 @@
 				<td>
 					<ul class="ul_list">
 					[= page _ =
-						<li><strong>[ ' ch |e ' ]</strong>
+						<li><strong>[ ' ch | e ' ]</strong>
 							<ul>
 								[= l _ =
 									<li>
-										<a href="[ ' href ' ]" class="[ ' class |e ' ]">
-											<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title |e ' ]" alt="[ ' title |e ' ]">
+										<a href="[ ' href ' ]" class="[ ' class | e ' ]">
+											<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e ' ]" alt="[ ' title | e ' ]">
 										</a>
 										[ ' link ' ]
 									</li>

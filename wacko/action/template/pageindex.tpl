@@ -6,10 +6,10 @@
 		[= l _ =
 			['' commit | void  // alternation hack '']
 				[= active _ =
-					<li class="active"><strong>[ ' ch |e ' ]</strong></li>
+					<li class="active"><strong>[ ' ch | e ' ]</strong></li>
 				=]
 				[= item _ =
-					<li><a href="[ ' link ' ]">[ ' ch |e ' ]</a></li>
+					<li><a href="[ ' link ' ]">[ ' ch | e ' ]</a></li>
 				=]
 		=]
 		</ul>
@@ -20,7 +20,7 @@
 	=]
 	<ul class="ul_list">
 	[= page _ =
-		<li><strong>[ ' ch |e ' ]</strong>
+		<li><strong>[ ' ch | e ' ]</strong>
 			<ul>
 				[= l _ =
 					<li>[ ' link ' ]</li>

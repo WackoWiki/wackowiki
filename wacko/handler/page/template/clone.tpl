@@ -29,13 +29,13 @@ leave it as is for the memories
 [ ====================================== log2 =================================== ]
 <li>['' message // message contains url '']</li>
 [ ====================================== logHead =================================== ]
-[' to |e ']: <br>
+[' to | e ']: <br>
 
 [ ====================================== form =================================== ]
 <form action="[' href ']" method="post" name="clone_page" >
 	[' csrf: clone_page ']
 	<label for="clone_name">[' _t: CloneName ']</label><br>
-	<input type="text" id="clone_name" name="clone_name" size="40" maxlength="250" placeholder="[' placeholder |e attr ']">
+	<input type="text" id="clone_name" name="clone_name" size="40" maxlength="250" placeholder="[' placeholder | e attr ']">
 	[' e editNote ']
 	[' doCluster ']
 	<br><br>
@@ -46,7 +46,7 @@ leave it as is for the memories
 [ ====================================== editNote =================================== ]
 <br>
 <label for="edit_note">[' _t: EditNote ']</label><br>
-<input type="text" id="edit_note" maxlength="200" value="[' note |e ']" size="60" name="edit_note">
+<input type="text" id="edit_note" maxlength="200" value="[' note | e ']" size="60" name="edit_note">
 [ ====================================== doCluster =================================== ]
 <br><br>
 <input type="checkbox" id="massclone" name="massclone">

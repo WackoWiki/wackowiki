@@ -21,7 +21,7 @@
 									</nav>
 								=]
 								<header class="comment-title">
-									<h2><a href="[ ' href ' ]">[ ' title |e ' ]</a></h2>
+									<h2><a href="[ ' href ' ]">[ ' title | e ' ]</a></h2>
 								</header>
 								<p>[ ' comment ' ]</p>
 								<footer>
@@ -64,7 +64,7 @@
 						
 						<noscript><div class="errorbox_js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
 						<label for="addcomment_title">[ ' _t: AddCommentTitle ' ]</label><br>
-						<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="[ ' title |e attr ' ]"><br>
+						<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="[ ' title | e attr ' ]"><br>
 						<br>
 						<label for="addcomment">[ ' _t: AddComment ' ]</label><br>
 						<textarea id="addcomment" name="body" rows="6" cols="7">[ ' payload | pre ' ]</textarea>

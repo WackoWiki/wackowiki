@@ -19,7 +19,7 @@
 						<li>
 							<span class="[ ' vclass ' ]">[ ' val ' ]</span>&nbsp;&nbsp;&nbsp;&nbsp;
 							<span class="">
-								<a title="[ ' ref |e ' ]" href="[ ' ref |e ' ]" rel="nofollow noreferrer">[ ' trunc |e ' ]</a>
+								<a title="[ ' ref | e ' ]" href="[ ' ref | e ' ]" rel="nofollow noreferrer">[ ' trunc | e ' ]</a>
 							</span>
 						</li>
 					=]
@@ -33,7 +33,7 @@
 						<li>
 							<span class="[ ' vclass ' ]">[ ' val ' ]</span>&nbsp;&nbsp;&nbsp;&nbsp;
 							<span class="">
-								<a title="[ ' ref |e ' ]" href="[ ' ref |e ' ]" rel="nofollow noreferrer">[ ' trunc |e ' ]</a>
+								<a title="[ ' ref | e ' ]" href="[ ' ref | e ' ]" rel="nofollow noreferrer">[ ' trunc | e ' ]</a>
 							</span>
 							[= l _ =
 								&nbsp;&nbsp;&rarr;&nbsp;&nbsp;<small>[ ' link ' ]</small>
@@ -48,7 +48,7 @@
 				<li>
 					<span class="[ ' vclass ' ]">[ ' val ' ]</span>&nbsp;&nbsp;&nbsp;&nbsp;
 					<span class="">
-						<a title="[ ' ref |e ' ]" href="[ ' ref |e ' ]" rel="nofollow noreferrer">[ ' trunc |e ' ]</a>
+						<a title="[ ' ref | e ' ]" href="[ ' ref | e ' ]" rel="nofollow noreferrer">[ ' trunc | e ' ]</a>
 					</span>
 				</li>
 			=]
