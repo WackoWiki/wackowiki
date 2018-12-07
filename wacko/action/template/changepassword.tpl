@@ -3,8 +3,8 @@
 	<!--notypo-->
 	[= c ChangePassword =
 		<form action="[ ' form ' ]" method="post" name="change_password">
-			['' csrf: change_password '']
-			[''' autocomplete ''']
+			[ ' csrf: change_password ' ]
+			[ ' autocomplete ' ]
 			[= secret _ =
 				<input type="hidden" name="secret_code" value="[ ' code | e attr ' ]">
 			=]
@@ -18,12 +18,12 @@
 				=]
 				<p>
 					<label for="new_password">[ ' _t: NewPassword ' ]:</label>
-					<input type="password" id="new_password" name="new_password" minlength="[''' minchars ''']" size="24">
-					[''' complexity ''']
+					<input type="password" id="new_password" name="new_password" minlength="[ ' minchars ' ]" size="24">
+					[ ' complexity ' ]
 				</p>
 				<p>
 					<label for="conf_password">[ ' _t: ConfirmPassword ']:</label>
-					<input type="password" id="conf_password" name="conf_password" minlength="[''' minchars ''']" size="24">
+					<input type="password" id="conf_password" name="conf_password" minlength="[ ' minchars ' ]" size="24">
 				</p>
 				<p>
 					<input type="submit" class="OkBtn" value="[ ' _t: RegistrationButton ' ]">
@@ -33,7 +33,7 @@
 	=]
 	[= f ForgotPassword =
 		<form action="[ ' form ' ]" method="post" name="forgot_password">
-			['' csrf: forgot_password '']
+			[ ' csrf: forgot_password ' ]
 			<h3>[ ' format_t: ForgotPassword ' ]</h3>
 			<p>[ ' format_t: ForgotPasswordHint ' ]</p>
 			<div class="cssform">

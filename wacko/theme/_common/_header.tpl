@@ -36,7 +36,7 @@ _common include file for themes
 			<link rel="alternate" type="application/rss+xml" title="[ ' _t: RevisionsFeed ' ][ ' tag ' ]" href="[ ' href ' ]">
 		=]
 	=]
-	['' bb2 | '']
+	[ ' bb2 | ' ]
 	<script src="[ ' db: base_url ' ]js/default.js"></script>
 	[= edit _ =
 		['' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '']
@@ -50,5 +50,5 @@ _common include file for themes
 			var edit = "[ ' href | e js ' ]";
 		</script>
 	=]
-	['' additions '']
+	[ ' additions ' ]
 </head>

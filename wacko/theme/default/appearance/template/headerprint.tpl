@@ -25,7 +25,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;[ ' _t: Version ' ]: [ ' mtime | time_formatted ' ]
 				=]
 				<br>
-				[''' path ''']
+				[ ' path ' ]
 			</div>
 		</header>
 <!-- End of header //-->
