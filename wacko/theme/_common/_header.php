@@ -68,6 +68,12 @@ if ($this->db->enable_feeds)
 	}
 }
 
+// display Bad Behavior timer
+if (!empty($this->db->ext_bad_behavior))
+{
+	$tpl->h_bb2 = bb2_timer();
+}
+
 if ($this->method == 'edit')
 {
 	$tpl->h_edit_lang = $this->user_lang;
