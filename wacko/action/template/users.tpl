@@ -13,7 +13,7 @@ first really BIG template written
 [ === // USERPROFILE ---------------------------------------------------------------------------------- === ]
 
 [= Profile =]
-	<h1>[ ' username |e ' ]</h1>
+	<h1>[ ' username | e ' ]</h1>
 	<small><a href="[ ' href ' ]">&laquo; [ ' _t: UsersList ' ]</a></small>
 
 	[= tab _ =
@@ -39,7 +39,7 @@ first really BIG template written
 		<table class="userprofile lined">
 			<tr>
 				<th scope="row">[ ' _t: RealName ' ]</th>
-				<td>[ ' user.real_name |e ' ]</td>
+				<td>[ ' user.real_name | e ' ]</td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: UsersSignupDate ' ]</th>
@@ -52,7 +52,7 @@ first really BIG template written
 			<tr>
 				<th scope="row">[ ' _t: UserSpace ' ]</th>
 				[= userPage =
-					<td><a href="[ ' href ' ]">[ ' text |e ' ]</a></td>
+					<td><a href="[ ' href ' ]">[ ' text | e ' ]</a></td>
 				=]
 			</tr>
 			<tr>
@@ -81,7 +81,7 @@ first really BIG template written
 				<br>
 				<form action="[ ' href ' ]" method="post" name="personal_message">
 					[ ' csrf: personal_message ' ]
-					<input type="hidden" name="profile" value="[ ' username |e attr ' ]">
+					<input type="hidden" name="profile" value="[ ' username | e attr ' ]">
 					[= ref _ =
 						<input type="hidden" name="ref" value="[ ' ref | e attr ' ]">
 					=]
@@ -97,7 +97,7 @@ first really BIG template written
 							<tr>
 								<td class="label nowrap" style="width:50px;">[ ' _t: UsersIntercomSubject ' ]:</td>
 								<td>
-									<input type="text" name="mail_subject" value="[ ' subj |e attr ' ]" size="60" maxlength="200">
+									<input type="text" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200">
 									[= ref _ =
 										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
 									=]
@@ -105,7 +105,7 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td colspan="2">
-									<textarea name="mail_body" cols="80" rows="15">[ ' body |e ' ]</textarea>
+									<textarea name="mail_body" cols="80" rows="15">[ ' body | e ' ]</textarea>
 								</td>
 							</tr>
 							<tr>
@@ -190,7 +190,7 @@ first really BIG template written
 
 [= UserList =]
 	[= groups _ =
-		<h2 id="pages">[ ' members |e ' ] [ ' _t: GroupsMembers ' ]</h2>
+		<h2 id="pages">[ ' members | e ' ] [ ' _t: GroupsMembers ' ]</h2>
 		<br>
 	=]
 	[= form _ =
@@ -198,7 +198,7 @@ first really BIG template written
 		<form action="[ ' href ' ]" method="get" name="search_user">
 			[ ' href | hide_page ' ]
 			[= hid _ =
-				<input type="hidden" name="[ ' param |e attr ' ]" value="[ ' value |e attr ' ]">
+				<input type="hidden" name="[ ' param | e attr ' ]" value="[ ' value | e attr ' ]">
 			=]
 			<table class="formation">
 				<tr>

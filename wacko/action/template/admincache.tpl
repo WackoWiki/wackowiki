@@ -29,19 +29,19 @@
 ['' page '']['' sql '']['' config '']['' feed '']['' template '']['' _t: CacheCleared '']
 
 [ === page === ]
-['' _t: PageCache ''] (['' n |e '']) ... ['' '']
+['' _t: PageCache ''] (['' n | e '']) ... ['' '']
 
 [ === sql === ]
-['' _t: SQLCache ''] (['' n |e '']) ... ['' '']
+['' _t: SQLCache ''] (['' n | e '']) ... ['' '']
 
 [ === config === ]
-['' _t: ConfigCache ''] (['' n |e '']) ... ['' '']
+['' _t: ConfigCache ''] (['' n | e '']) ... ['' '']
 
 [ === feed === ]
-['' _t: FeedCache ''] (['' n |e '']) ... ['' '']
+['' _t: FeedCache ''] (['' n | e '']) ... ['' '']
 
 [ === template === ]
-['' _t: TemplateCache ''] (['' n |e '']) ... ['' '']
+['' _t: TemplateCache ''] (['' n | e '']) ... ['' '']
 
 [ === tumbnail === ]
-['' _t: ThumbCache ''] (['' n |e '']) ... ['' '']
+['' _t: ThumbCache ''] (['' n | e '']) ... ['' '']

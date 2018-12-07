@@ -122,7 +122,7 @@
 								<label for="title">[ ' _t: MetaTitle ' ]</label>
 							</th>
 							<td>
-								<input type="text" id="title" name="title" value="[ ' page.title |e ' ]" size="60" maxlength="250">
+								<input type="text" id="title" name="title" value="[ ' page.title | e ' ]" size="60" maxlength="250">
 							</td>
 						</tr>
 						<tr>
@@ -130,7 +130,7 @@
 								<label for="keywords">[ ' _t: MetaKeywords ' ]</label>
 							</th>
 							<td>
-								<textarea id="keywords" name="keywords" rows="4" cols="51" maxlength="250">[ ' page.keywords |e ' ]</textarea>
+								<textarea id="keywords" name="keywords" rows="4" cols="51" maxlength="250">[ ' page.keywords | e ' ]</textarea>
 								[= categories _ =
 									<br>
 									['' html '']
@@ -142,7 +142,7 @@
 								<label for="description">[ ' _t: MetaDescription ' ]</label>
 							</th>
 							<td>
-								<textarea id="description" name="description" rows="4" cols="51" maxlength="250">[ ' page.description |e ' ]</textarea>
+								<textarea id="description" name="description" rows="4" cols="51" maxlength="250">[ ' page.description | e ' ]</textarea>
 							</td>
 						</tr>
 						[== Commented _ =
@@ -222,19 +222,19 @@
 			<table class="form_tbl lined">
 				<tr>
 					<th scope="row">[ ' _t: MetaTitle ' ]</th>
-					<td>[ ' page.title |e ' ]</td>
+					<td>[ ' page.title | e ' ]</td>
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: MetaKeywords ' ]</th>
-					<td>[ ' page.keywords |e ' ]</td>
+					<td>[ ' page.keywords | e ' ]</td>
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: MetaDescription ' ]</th>
-					<td>[ ' page.description |e ' ]</td>
+					<td>[ ' page.description | e ' ]</td>
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: SetLang ' ]</th>
-					<td>[ ' page.page_lang |e ' ]</td>
+					<td>[ ' page.page_lang | e ' ]</td>
 				</tr>
 			</table>
 		=]
@@ -245,7 +245,7 @@
 		<table class="form_tbl lined">
 			<tr>
 				<th scope="row">[ ' _t: SettingsID ' ]</th>
-				<td>[ ' page.page_id |e ' ]</td>
+				<td>[ ' page.page_id | e ' ]</td>
 			</tr>
 			<tr>
 				<th scope="row">[ ' _t: Owner ' ]</th>

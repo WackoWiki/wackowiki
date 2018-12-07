@@ -5,8 +5,8 @@
 			<form action="[ ' href: edit ' ]" method="post" name="edit_page" cf="true">
 				[ ' csrf: edit_page ' ]
 				[= new _ =
-					<input type="hidden" name="page_lang" value="[ ' lang |e attr ' ]">
-					<input type="hidden" name="tag" value="[ ' tag |e attr ' ]">
+					<input type="hidden" name="page_lang" value="[ ' lang | e attr ' ]">
+					<input type="hidden" name="tag" value="[ ' tag | e attr ' ]">
 					<input type="hidden" name="add" value="1">
 				=]
 				[= p _ =
@@ -24,7 +24,7 @@
 				[= e _ =
 					<br>
 					<label for="page_title">[ ' label ' ]</label><br>
-					<input type="text" id="page_title" maxlength="250" value="[ ' title |e ' ]" size="60" name="title" >
+					<input type="text" id="page_title" maxlength="250" value="[ ' title | e ' ]" size="60" name="title" >
 					<br>
 				=]
 				[= r _ =
@@ -38,7 +38,7 @@
 	
 				[= n _ =
 					<label for="edit_note">[ ' _t: EditNote ' ]:</label><br>
-					<input type="text" id="edit_note" maxlength="200" value="[ ' note |e ' ]" size="60" name="edit_note">
+					<input type="text" id="edit_note" maxlength="200" value="[ ' note | e ' ]" size="60" name="edit_note">
 					&nbsp;&nbsp;&nbsp;
 				=]
 				[= minor _ =

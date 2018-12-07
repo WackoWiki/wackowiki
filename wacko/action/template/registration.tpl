@@ -15,7 +15,7 @@
 				<p><label for="user_lang">[ ' _t: RegistrationLang ' ]:</label>
 				<select id="user_lang" name="user_lang">
 				[= l _ =
-					<option value="[ ' lang |e attr ' ]"[ ' selected | format ' selected' ' ]>[ ' name ' ] ([ ' lang |e ' ])</option>
+					<option value="[ ' lang | e attr ' ]"[ ' selected | format ' selected' ' ]>[ ' name ' ] ([ ' lang | e ' ])</option>
 				=]
 				</select></p>
 			=]
@@ -41,7 +41,7 @@
 				<p>
 				<label for="terms_of_use">[ ' _t: TermsOfUse ' ]:</label>
 				<input type="checkbox" id="terms_of_use" name="terms_of_use" value="1">
-				<small> [ ' _t: AcceptTermsOfUse ' ] [ ' db: site_name |e ' ] <a href="[ ' href ' ]">[ ' _t: TermsOfUse ' ]</a><br></small></p>
+				<small> [ ' _t: AcceptTermsOfUse ' ] [ ' db: site_name | e ' ] <a href="[ ' href ' ]">[ ' _t: TermsOfUse ' ]</a><br></small></p>
 			=]
 			[= captcha _ =
 				<p>[ ' show ' ]</p>

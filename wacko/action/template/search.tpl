@@ -3,7 +3,7 @@
 		<form action="[ ' href ' ]" method="get" name="search">
 			[ ' href | hide_page ' ]
 			<label for="searchfor">[ ' _t: SearchFor ' ]:</label><br>
-			<input type="search" name="phrase" id="searchfor" size="40" value="[ ' phrase |e attr ' ]">
+			<input type="search" name="phrase" id="searchfor" size="40" value="[ ' phrase | e attr ' ]">
 			<input type="submit" value="[ ' _t: SearchButton ' ]"><br>
 			[= options _ =
 				<input type="checkbox" name="topic"[ ' topic | format ' checked' ' ] id="checkboxSearch">
@@ -13,14 +13,14 @@
 		<br>
 	=]
 	[= none _ =
-		[ ' _t: NoResultsFor ' ] "[ ' phrase |e ' ]"
+		[ ' _t: NoResultsFor ' ] "[ ' phrase | e ' ]"
 	=]
 	[= s _ =
 		[''' pagination ''']
 		[= mark _ =
 			<div class="layout-box">
 			<p>
-				<span>[ ' diag ' ] "<strong>[ ' phrase |e ' ]</strong>" ([ ' count |e ' ]):</span>
+				<span>[ ' diag ' ] "<strong>[ ' phrase | e ' ]</strong>" ([ ' count | e ' ]):</span>
 			</p>
 		=]
 		[= ul _ =

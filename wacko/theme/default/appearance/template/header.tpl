@@ -13,13 +13,13 @@
 			<h1>
 			[= site _ =
 				[= link _ =
-					<a href="[ ' db: base_url ' ]" title="[ ' db: site_desc |e ' ]">
+					<a href="[ ' db: base_url ' ]" title="[ ' db: site_desc | e ' ]">
 				=]
 				[= logo _ =
-					<img src="[ ' path ' ]" alt="[ ' db: site_name |e ' ]" height="[ ' db: logo_height ' ]" width="[ ' db: logo_width ' ]">
+					<img src="[ ' path ' ]" alt="[ ' db: site_name | e ' ]" height="[ ' db: logo_height ' ]" width="[ ' db: logo_width ' ]">
 				=]
 				[= title _ =
-					<span>[ ' db: site_name |e ' ]</span>
+					<span>[ ' db: site_name | e ' ]</span>
 				=]
 				[= clink _ =
 					[ ' nonstatic ' ]

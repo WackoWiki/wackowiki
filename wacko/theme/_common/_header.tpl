@@ -5,15 +5,15 @@ _common include file for themes
 <html lang="[ ' lang ' ]">
 <head>
 	<meta charset="[ ' charset ' ]">
-	<title>[ ' title |e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name |e ' ]</title>
+	<title>[ ' title | e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name | e ' ]</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	[= norobots _ =
 		['' nonstatic // dummy to make pattern non-static '']
 		<meta name="robots" content="noindex, nofollow">
 	=]
 	[= page _ =
-		<meta name="keywords" content="[ ' keywords |e ' ]">
-		<meta name="description" content="[ ' description |e ' ]">
+		<meta name="keywords" content="[ ' keywords | e ' ]">
+		<meta name="description" content="[ ' description | e ' ]">
 	=]
 	<meta name="language" content="[ ' lang ' ]">
 	<link rel="stylesheet" href="[ ' db: theme_url ' ]css/default.css">
@@ -41,7 +41,7 @@ _common include file for themes
 	[= edit _ =
 		['' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '']
 		<script src="[ ' db: base_url ' ]js/protoedit.js"></script>
-		<script src="[ ' db: base_url ' ]js/lang/wikiedit.[ ' lang |e ' ].js"></script>
+		<script src="[ ' db: base_url ' ]js/lang/wikiedit.[ ' lang | e ' ].js"></script>
 		<script src="[ ' db: base_url ' ]js/wikiedit.js"></script>
 		<script src="[ ' db: base_url ' ]js/autocomplete.js"></script>
 	=]
