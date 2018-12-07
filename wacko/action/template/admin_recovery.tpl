@@ -9,13 +9,13 @@
 	<h2>[ ' _t: GenerateRecoveryHash ' ]</h2>
 
 	<form action="[ ' href ' ]" method="post" name="generate_hash">
-		['' csrf: generate_hash '']
-		['' autocomplete '']
+		[ ' csrf: generate_hash ' ]
+		[ ' autocomplete ' ]
 
 		<p><label for="recovery_password">[ ' _t: RegistrationPassword ' ]:</label>
 		<input type="password" id="recovery_password" name="recovery_password" size="24" minlength="[ ' db: pwd_admin_min_chars ' ]" autocomplete="new-password" value="[ ' password | e attr ' ]">
 
-		['' complexity | '']
+		[ ' complexity | ' ]
 		</p>
 
 		<p><label for="conf_password">[ ' _t: ConfirmPassword ' ]:</label>

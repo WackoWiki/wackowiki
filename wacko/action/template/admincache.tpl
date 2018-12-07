@@ -1,7 +1,7 @@
 
 [ === main === ]
 	<form action="[ ' href ' ]" method="post" name="purge_cache">
-		['' csrf: purge_cache '']
+		[ ' csrf: purge_cache ' ]
 		<div class="layout-box">
 			<input type="checkbox" id="purge_config_cache" name="config_cache">
 			<label for="purge_config_cache">[ ' _t: ConfigCache ' ]</label><br>
@@ -26,22 +26,22 @@
 	</form>
 
 [ === post === ]
-['' page '']['' sql '']['' config '']['' feed '']['' template '']['' _t: CacheCleared '']
+[ ' page ' ][ ' sql ' ][ ' config ' ][ ' feed ' ][ ' template ' ][ ' _t: CacheCleared ' ]
 
 [ === page === ]
-['' _t: PageCache ''] (['' n | e '']) ... ['' '']
+[ ' _t: PageCache ' ] ([ ' n | e ' ]) ... ['' '']
 
 [ === sql === ]
-['' _t: SQLCache ''] (['' n | e '']) ... ['' '']
+[ ' _t: SQLCache ' ] ([ ' n | e ' ]) ... ['' '']
 
 [ === config === ]
-['' _t: ConfigCache ''] (['' n | e '']) ... ['' '']
+[ ' _t: ConfigCache ' ] ([ ' n | e ' ]) ... ['' '']
 
 [ === feed === ]
-['' _t: FeedCache ''] (['' n | e '']) ... ['' '']
+[ ' _t: FeedCache ' ] ([ ' n | e ' ]) ... ['' '']
 
 [ === template === ]
-['' _t: TemplateCache ''] (['' n | e '']) ... ['' '']
+[ ' _t: TemplateCache ' ] ([ ' n | e ' ]) ... ['' '']
 
 [ === tumbnail === ]
-['' _t: ThumbCache ''] (['' n | e '']) ... ['' '']
+[ ' _t: ThumbCache ' ] ([ ' n | e ' ]) ... ['' '']

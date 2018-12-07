@@ -4,7 +4,7 @@
 	[= letter _ =
 		<ul class="ul_letters">
 		[= l _ =
-			['' commit | void  // alternation hack '']
+			[ ' commit | void  // alternation hack ' ]
 				[= active _ =
 					<li class="active"><strong>[ ' ch | e ' ]</strong></li>
 				=]

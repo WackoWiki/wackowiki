@@ -55,7 +55,7 @@
 <div id="menu-user">
 <ol>
 	[= menu menuList =
-		['' commit | void  // alternation hack '']
+		[ ' commit | void  // alternation hack ' ]
 		[= item _ =
 			<li>[ ' link ' ]</li>
 		=]
@@ -115,8 +115,8 @@
 	<li class="search">
 	<div id="search_box">
 		<form action="[ ' search ' ]" method="get" name="search">
-			['' // search | hide_page '']
-			['' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 '']
+			[ ' // search | hide_page ' ]
+			[ ' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 ' ]
 			<span class="search nobr">
 				<label for="phrase">[ ' _t: SearchText ' ]</label>
 				<input type="search" name="phrase" id="phrase" size="20" title="[ ' _t: SearchButton ' ]">
@@ -147,7 +147,7 @@
 =]
 
 [ === TabTitle === ]
-['' im TabImage ''] ['' title '']
+[ ' im TabImage ' ] [ ' title ' ]
 [ === TabImage === ]
 <img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title ' ]">
 

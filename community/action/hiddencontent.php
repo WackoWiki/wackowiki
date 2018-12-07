@@ -1,23 +1,23 @@
 <?php
 /*
-      {{Hidden Content Wrapper
+	{{Hidden Content Wrapper
 
-      Version 1.2
-      David Millington aka Tann San
+	Version 1.2
+	David Millington aka Tann San
 
-      Shows hidden content based on user group or user name
+	Shows hidden content based on user group or user name
 
-      1.1 - Added optional alt attribute which shows content to users who don't meet the login requirements
-      1.2 - Updated to work with Wacko r5.0
+	1.1 - Added optional alt attribute which shows content to users who don't meet the login requirements
+	1.2 - Updated to work with Wacko r5.0
 
-      [$username=<comma deliminated list of user names>] - optional - $username="TannSan,BillyBob"
-      [$usergroup=a single user group name] - optional - $usergroup="Admins"
-      [$text=text to display if user meets login requirements]
-      [$alt=alternative text to display to users who do not meet the login requirements] - optional
+	[$username	=<comma deliminated list of user names>] - optional - $username="TannSan,BillyBob"
+	[$usergroup	=a single user group name] - optional - $usergroup="Admins"
+	[$text		=text to display if user meets login requirements]
+	[$alt		=alternative text to display to users who do not meet the login requirements] - optional
 
-      https://wackowiki.org/doc/Dev/PatchesHacks/HiddenContent
-      }}
-   */
+	https://wackowiki.org/doc/Dev/PatchesHacks/HiddenContent
+	}}
+	*/
 
 if (!defined('IN_WACKO'))
 {

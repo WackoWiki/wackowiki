@@ -20,7 +20,7 @@ first really BIG template written
 
 		<ul class="menu" id="list">
 			[= li _ =
-				['' commit | void  // alternation hack '']
+				[ ' commit | void  // alternation hack ' ]
 				[= href _ =
 					<li><a href="[ ' item.0 ' ]">[ ' item.1 ' ]</a></li>
 				=]
