@@ -431,9 +431,10 @@ class TemplatestFilters extends TemplatestEscaper
 		return (($value == $on)? ' selected ' : '');
 	}
 
+	// FIXME: workaround for pre and textarea
 	function filter_pre($value)
 	{
-		// for pre and textarea
+		// suppress line break stripping and auto-indent
 		$this->pre = true;
 
 		return $value;
