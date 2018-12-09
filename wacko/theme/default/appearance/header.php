@@ -232,7 +232,6 @@ else
 	$echo_tab('referrers', 'ReferrersTip', 'ReferrersText', 2, '', 'l');
 
 	// watch tab
-		// ($this->forum === false && $this->page && ($this->is_admin() || $this->is_owner())) ? ($this->is_watched === true ? $this->_t('UnwatchText') : $this->_t('WatchText') ) : '',
 	if ($logged_in)
 	{
 		if ($this->is_watched)
@@ -275,8 +274,8 @@ else
 $tpl->leave();
 
 $tpl->search		= $this->href('', $this->_t('SearchPage'));
-$tpl->breadcrumbs	= $this->get_page_path($titles = false, ' &gt; ', true, true);
-# $tpl->usertrail	= $this->get_user_trail($titles = true, ' &gt; ', true, $size = 8);
+$tpl->breadcrumbs	= $this->get_page_path(false, ' &gt; ', true, true);
+# $tpl->usertrail	= $this->get_user_trail(true, ' &gt; ', true, $size = 8);
 
 if (!isset($this->sess->php_version))
 {
