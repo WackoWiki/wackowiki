@@ -25,16 +25,19 @@ or if logged in links to the user page, account settings and logout.
 
 CUSTOMIZATION ------------------------------------------------------------------
 
-To alternate the HTML just edit header.php and footer.php at the appearance
+First copy the theme to a new folder, e.g. theme/default_customized, to not accidentally 
+overwrite your changes during a update or rollback.
+
+To alternate the HTML just edit header.tpl and footer.tpl at the appearance/template/
 folder. To change colors/etc and typographical formatting you can edit
-screen.css and typography.css at the layout folder.
+default.css and wacko.css at the layout folder.
 
 /* == Edit your main menu here ====================================== */
  
 $menu = [
-    'WikiSite' => 'Name of Site',
-    'YourHomePage' => 'Homepage',
-    'http://externlink.example.com' => 'Go away'
+	'WikiSite' => 'Name of Site',
+	'YourHomePage' => 'Homepage',
+	'http://externlink.example.com' => 'Go away'
 ];
  
 /* == Stop here! ... and let it flow ================================ */
@@ -52,7 +55,7 @@ LICENSE ------------------------------------------------------------------------
 The Default Theme is part of the WackoWiki package.
 BSD licence.
 
-Icons were taken from the Breeze (Plasma 5 icon theme) Icons set.
+Icons were taken from the Breeze (Plasma 5 icon theme) icons set.
 https://github.com/KDE/breeze-icons
 Icons are licensed under the LGPLv3
 
