@@ -122,10 +122,10 @@ echo $this->compose_link_to_page($this->_t('AccountLink'), "", $this->_t('Accoun
 			"<a href=\"" . $this->href('watch') . "\">" . $this->_t('RemoveWatch') . "</a>" :
 			"<a href=\"" . $this->href('watch') . "\">" . $this->_t('SetWatch') . "</a>" ) ?> ::
 	<?php if (!in_array($this->page['page_id'], $this->get_menu_links())) {?>
-	<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->db->theme_url ?>icon/bookmark.png" width="12" height="12" alt="<?php echo $this->_t('AddToBookmarks') ?>"></a> ::
+	<a href="<?php echo $this->href('', '', "addbookmark=yes")?>"><img src="<?php echo $this->db->theme_url ?>icon/bookmark.png" width="12" height="12" alt="<?php echo $this->_t('AddBookmark') ?>"></a> ::
 <?php } else { ?>
 	<a href="<?php echo $this->href('', '', "removebookmark=yes")?>">
-	<img src="<?php echo $this->db->theme_url ?>icon/unbookmark.png" width="12" height="12" alt="<?php echo $this->_t('RemoveFromBookmarks') ?>"></a> ::
+	<img src="<?php echo $this->db->theme_url ?>icon/unbookmark.png" width="12" height="12" alt="<?php echo $this->_t('RemoveBookmark') ?>"></a> ::
 <?php } }
 ?>
 <?php echo"<a href=\"" . $this->href('print') . "\">" ?><img

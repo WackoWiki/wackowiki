@@ -45,13 +45,13 @@ if ($this->page)
 	height="16"> <?php } ?> </a></li><li><?php // Bookmark page ?> <?php if(in_array($this->page['page_id'], $this->get_menu_links())) { ?>
 <a href="<?php echo $this->href('', '', "removebookmark=yes"); ?>"> <img
 	src="<?php echo $this->db->theme_url; ?>images/bookmark-remove.png"
-	alt="<?php echo $this->_t('RemoveFromBookmarks'); ?>"
-	title="<?php echo $this->_t('RemoveFromBookmarks'); ?>"
+	alt="<?php echo $this->_t('RemoveBookmark'); ?>"
+	title="<?php echo $this->_t('RemoveBookmark'); ?>"
 	width="16" height="16"> <?php } else { ?> <a
 	href="<?php echo $this->href('', '', "addbookmark=yes"); ?>"> <img
 	src="<?php echo $this->db->theme_url; ?>images/bookmark-add.png"
-	alt="<?php echo $this->_t('AddToBookmarks'); ?>"
-	title="<?php echo $this->_t('AddToBookmarks'); ?>"
+	alt="<?php echo $this->_t('AddBookmark'); ?>"
+	title="<?php echo $this->_t('AddBookmark'); ?>"
 	width="16" height="16"> <?php } ?> </a></li> <?php }
 	// End of "Page exists" ?> <?php
 	if ($this->get_user()){

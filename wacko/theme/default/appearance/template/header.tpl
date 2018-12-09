@@ -74,14 +74,14 @@
 	[= addmark _ =
 		<li>
 			<a href="[ ' href ' ]">
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="+" title="[ ' _t: AddToBookmarks ' ]" class="btn-addbookmark">
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="+" title="[ ' _t: AddBookmark ' ]" class="btn-addbookmark">
 			</a>
 		</li>
 	=]
 	[= removemark _ =
 		<li>
 			<a href="[ ' href ' ]">
-				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: RemoveFromBookmarks ' ]" class="btn-removebookmark">
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: RemoveBookmark ' ]" class="btn-removebookmark">
 			</a>
 		</li>
 	=]

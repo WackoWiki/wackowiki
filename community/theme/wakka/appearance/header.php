@@ -72,14 +72,14 @@ else
 			echo '<li><a href="' .  $this->href('', '', 'addbookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
 				. 'icon/bookmark1.png" alt="+" title="' .
-				$this->_t('AddToBookmarks')  . '"></a></li>';
+				$this->_t('AddBookmark')  . '"></a></li>';
 		}
 		else
 		{
 			echo '<li><a href="' .  $this->href('', '', 'removebookmark=yes')
 				 . '"><img src="' .  $this->db->theme_url
 				. 'icon/bookmark2.png" alt="-" title="' .
-				$this->_t('RemoveFromBookmarks')  . '"></a></li>';
+				$this->_t('RemoveBookmark')  . '"></a></li>';
 		}
 	}
 	echo "\n</ol></div>";

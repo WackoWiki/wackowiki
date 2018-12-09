@@ -170,11 +170,11 @@ echo "\n";
 	{
 		if (in_array($this->tag, $this->get_menu_links()))
 		{
-			echo '<div class="bookmark_out"><a href="' . $this->href('', '', 'removebookmark=yes') . '" title="' . $this->_t('RemoveFromBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png"></a></div>';
+			echo '<div class="bookmark_out"><a href="' . $this->href('', '', 'removebookmark=yes') . '" title="' . $this->_t('RemoveBookmark') . '"><img src="' . $this->db->theme_url . 'images/spacer.png"></a></div>';
 		}
 		else
 		{
-			echo '<div class="bookmark_in"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddToBookmarks') . '"><img src="' . $this->db->theme_url . 'images/spacer.png"></a></div>';
+			echo '<div class="bookmark_in"><a href="' . $this->href('', '', 'addbookmark=yes') . '" title="' . $this->_t('AddBookmark') . '"><img src="' . $this->db->theme_url . 'images/spacer.png"></a></div>';
 		}
 	}
 	else
