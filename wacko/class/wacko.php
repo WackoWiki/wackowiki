@@ -4187,6 +4187,7 @@ class Wacko
 				$this->track_link($tag, LINK_PAGE);
 			}
 
+			// FIXME: it still writes multiple instances ?!
 			// set a anchor once for link at the first appearance
 			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
 			{
@@ -6459,7 +6460,7 @@ class Wacko
 		}
 
 		// adding new menu item
-		if (@$_GET['addbookmark'] && $user)
+		if (@$_GET['addbookmark'] && $user && !empty($this->page['page_id']))
 		{
 			unset($_GET['addbookmark']);
 
