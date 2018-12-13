@@ -37,6 +37,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 												// .php.net - to make cookies visible on all subdomains
 	public $cf_cookie_secure		= false;	// cookie should only be sent over secure connections.
 	public $cf_cookie_httponly		= true;		// Marks the cookie as accessible only through the HTTP protocol. This means that the cookie won't be accessible by js and such
+	public $cf_cookie_samesite		= 'Strict';	// asserting that a particular cookie should only be sent with requests initiated from the same registrable domain
 	public $cf_referer_check		= '';
 	public $cf_cache_limiter		= 'none';
 	public $cf_cache_expire			= 180*60;	// ttl for cached session pages in seconds
@@ -548,7 +549,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$this->setcookie($name);
 	}
 
-	public function setcookie($name, $value = null, $expires = 0, $path = null, $domain = null, $secure = null, $httponly = null)
+	public function setcookie($name, $value = null, $expires = 0, $path = null, $domain = null, $secure = null, $httponly = null, $samesite = null)
 	{
 		if (headers_sent($file, $line))
 		{
@@ -561,6 +562,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		isset($domain)		or $domain		= $this->cf_cookie_domain;
 		isset($secure)		or $secure		= $this->cf_cookie_secure;
 		isset($httponly)	or $httponly	= $this->cf_cookie_httponly;
+		isset($samesite)	or $samesite	= $this->cf_cookie_samesite;
 
 		// cookie name must be rfc2616 2.2 token:
 		$name = Ut::urlencode('/[\x7F\x00-\x1F\s()<>@,;:\\\\"\/\[\]?={}%]/', $name);
@@ -594,6 +596,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$domain		and $cookie .= '; domain=' . $domain;
 		$secure		and $cookie .= '; secure';
 		$httponly	and $cookie .= '; httponly';
+		$samesite	and $cookie .= '; SameSite=' . $samesite;
 
 		header($cookie, false); // false -- add, not replace
 
