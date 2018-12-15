@@ -70,7 +70,7 @@ h6 { font-family: Arial, sans-serif;   font-size: 12px; }
 /** Revisions-related *********************************************************/
 
 /* Displays text: "This is an old revision of..." */
-.revisioninfo {
+.revision-info {
 	border: 1px solid #d5d9e6;
 	color: #cc3333;
 	font-weight: bold;
@@ -80,18 +80,13 @@ h6 { font-family: Arial, sans-serif;   font-size: 12px; }
 	position: relative;
 }
 
-.revision-count {
-	display: inline-block;
-	width: 40px;
-}
-
 .revision-id {
 	display: inline-block;
 	width: 80px;
 }
 
 /* Displays text: "Comparison for..." */
-.diffinfo {
+.diff-info {
 	font-weight: bold;
 	color: #555555; 
 }

@@ -57,13 +57,13 @@ h5 { font-family: Arial;  font-size: 14px; padding-top:10px; padding-bottom:5px 
 /** Revisions-related *********************************************************/
 
 /* Displays text: "This is an old revision of..." */
-.revisioninfo {
+.revision-info {
   color: #AAAAAA;
   padding-bottom: 20px;
 }
 
 /* Displays text: "Comparison for..." */
-.diffinfo { font-weight: bold; color: #555555; }
+.diff-info { font-weight: bold; color: #555555; }
 
 /* Simple differences */
 .additions { color: #008800; }

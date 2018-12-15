@@ -2,7 +2,7 @@
 [ === main === ]
 	[ ' dummy | default * // ADD_NO_DIV ' ]<article class="page">
 	[ = rev RevisionInfo =
-		<div class="revisioninfo">
+		<div class="revision-info">
 			[' text ']
 		</div>
 	=]

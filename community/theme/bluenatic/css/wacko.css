@@ -75,21 +75,21 @@ h6 {font-size:1.0em;}
 /** Revisions-related *********************************************************/
 
 /* Displays text: "This is an old revision of..." */
-.revisioninfo {
+.revision-info {
 	background-color:	#fee;
 	border:			dashed 1px #baa;
 	margin:			25px 0;
 	padding:		3px;
 	width:			auto;
 }
-.revisioninfo a,
-.revisioninfo a:hover {
+.revision-info a,
+.revision-info a:hover {
 	color:			#000;
 	border:			none;
 }
 
 /* Displays text: "Comparison for..." */
-.diffinfo { font-weight: bold; color: #555555; }
+.diff-info { font-weight: bold; color: #555555; }
 
 /* Simple differences */
 .additions {

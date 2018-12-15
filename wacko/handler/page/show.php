@@ -97,7 +97,7 @@ if ($this->has_access('read'))
 			}
 			else
 			{
-				$tpl->n_message = $this->show_message($message, 'revisioninfo', false);
+				$tpl->n_message = $this->show_message($message, 'revision-info', false);
 			}
 		}
 
