@@ -35,6 +35,9 @@
 				<small> (
 					<span class="nobr Tune">
 						[ ' account ' ]
+						[= ap _ =
+							| <a id="login-ap" href="[ ' link ' ]" title="[ ' _t: AdminTip ' ]" target="_blank">[ ' _t: AdminText ' ]</a>
+						=]
 						|
 						<a id="logout-confirm" data-logout-confirm="[ ' _t: LogoutAreYouSure ' ]" href="[ ' logout ']">[ ' _t: LogoutLink ' ]</a>
 					</span>
