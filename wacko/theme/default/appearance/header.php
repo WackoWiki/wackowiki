@@ -38,6 +38,11 @@ if (($logged_in = $this->get_user()))
 	$tpl->uare_link		= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
 	$tpl->uare_account	= $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), $this->_t('AccountTip'));
 	$tpl->uare_logout	= $this->href('', $this->_t('LoginPage'), ['action' => 'logout']);
+
+	if ($this->is_admin())
+	{
+		# $tpl->uare_ap_link	= $this->href('', 'admin.php');
+	}
 }
 // else shows login's controls
 else
