@@ -368,7 +368,7 @@ div .action-content {
 /* Revisions-related *********************************************************/
 
 /* Displays text: "This is an old revision of..." */
-.revisioninfo {
+.revision-info {
 	border:				dashed 1px #000;
 	margin:				25px 0;
 	padding:			3px;
@@ -376,7 +376,7 @@ div .action-content {
 }
 
 /* Displays text: "Comparison for..." */
-.diffinfo {
+.diff-info {
 	font-weight:		bold; color: #555555;
 }
 

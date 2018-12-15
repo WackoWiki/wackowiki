@@ -59,7 +59,7 @@ if ($this->has_access('read')
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),
 			$this->user_link($this->page['user_name'], '', true, false));
-		$tpl->message = $this->show_message($message, 'revisioninfo', false);
+		$tpl->message = $this->show_message($message, 'revision-info', false);
 	}
 
 	if (isset($_POST))

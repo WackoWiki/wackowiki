@@ -5,7 +5,7 @@
 	[= diff _ =
 
 		<!--nomail-->
-		<div class="diffinfo">
+		<div class="diff-info">
 			[ ' diffinfo ' ]
 		</div>
 		<br><br>

@@ -34,7 +34,7 @@
 
 
 [= reedit =]
-<div class="revisioninfo">
+<div class="revision-info">
 	[ ' message ' ]
 	<br><br>
 	<form action="[ ' href ' ]" method="post" name="edit_revision">

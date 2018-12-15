@@ -23,7 +23,7 @@ if ($this->has_access('read'))
 			$this->get_time_formatted($this->page['modified']),
 			$this->user_link($this->page['user_name'], '', true, false));
 
-		$this->show_message($message, 'revisioninfo');
+		$this->show_message($message, 'revision-info');
 	}
 
 	echo $this->format($this->page['body'], 'source', ['copy_button' => true]);

@@ -1573,12 +1573,6 @@ fieldset {
 	margin: 0;
 }
 
-.logBtn {
-	height: 21px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-}
-
 #tooltip {
 	background: #FFFFFF;
 	border: 1px solid #666666;
@@ -2224,21 +2218,21 @@ article.newsarticle:hover {
 	background: #E7F9FF;
 }
 
-.newstitle {
+.news-title {
 	font-size: 13px;
 	border: none;
 }
 
-.newsinfo {
+.news-info {
 	color: #666666;
 	margin: 4px 0 6px;
 }
 
-.newsinfo span {
+.news-info span {
 	border-bottom: 1px dotted;
 }
 
-.newsmeta {
+.news-meta {
 	border-bottom: 1px dotted #666666;
 	min-height: 25px;
 	margin-top: 20px;

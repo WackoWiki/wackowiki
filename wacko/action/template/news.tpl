@@ -19,14 +19,14 @@
 			[''' pagination ''']
 			[= l =
 				<article class="newsarticle">
-					<h2 class="newstitle">
+					<h2 class="news-title">
 						<a href="[ ' href ' ]">[ ' page.title ' ]</a>
 					</h2>
-					<div class="newsinfo">
+					<div class="news-info">
 						<span><time datetime="[ ' page.created ' ]">[ ' page.created | time_formatted ' ]</time> [ ' _t: By ' ] [ ' user ' ]</span>
 					</div>
 					<div class="newscontent">[ ' include | pre ' ]</div>
-					<footer class="newsmeta">
+					<footer class="news-meta">
 						[ ' category ' ] [ ' edit ' ] <a href="[ ' comments ' ]#header-comments" title="[ ' _t: NewsDiscuss ' ] [ ' page.title ' ]">[ ' page.comments ' ] [ ' _t: Comments ' ] &raquo;</a>
 					</footer>
 				</article>
@@ -36,8 +36,8 @@
 				<br><a id="newtopic"></a><br>
 				<form action="[ ' href ' ]" method="post" name="add_topic">
 					[ ' csrf: add_topic ' ]
-					<label for="newstitle">[ ' _t: NewsName ' ]:</label>
-					<input type="text" id="newstitle" name="title" size="50" maxlength="250" value="">
+					<label for="news-title">[ ' _t: NewsName ' ]:</label>
+					<input type="text" id="news-title" name="title" size="50" maxlength="250" value="">
 					<input type="submit" id="submit" value="[ ' _t: NewsSubmit ' ]">
 				</form>
 			=]
