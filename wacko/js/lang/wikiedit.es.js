@@ -8,12 +8,12 @@ lang = {
 	HelpFormattingTip :		"Ayuda de formatear el Wiki",
 	HelpFormattingPage :	"Doc/English/Formatting",
 	
-	Heading1 :				"Heading 1",
-	Heading2 :				"Heading 2",
-	Heading3 :				"Heading 3",
-	Heading4 :				"Heading 4",
-	Heading5 :				"Heading 5",
-	Heading6 :				"Heading 6",
+	Título1 :				"Título 1",
+	Título2 :				"Título 2",
+	Título3 :				"Título 3",
+	Título4 :				"Título 4",
+	Título5 :				"Título 5",
+	Título6 :				"Título 6",
 	Bold :					"Negrita",
 	Italic :				"Cursivo",
 	Underline :				"Subrayado",
@@ -49,7 +49,7 @@ lang = {
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
 							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
+							' Ctrl+Shift+1 .. 4 - Título 1..4\n'+
 							' Alt+I or Ctrl+T - Indent\n'+
 							' Alt+U or Ctrl+Shift+T - Unindent\n'+
 							' Ctrl+J - MarkUp (!!)\n'+
