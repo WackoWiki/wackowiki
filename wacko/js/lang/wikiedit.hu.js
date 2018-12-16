@@ -33,7 +33,7 @@ lang = {
 	HTML :					"HTML",
 	Action :				"Action",
 	Line :					"Vízszintes elválasztó vonal",
-	Signature :				"Signature",
+	Signature :				"Aláírás beszúrása",
 	Quote :					"Quote",
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
