@@ -22,7 +22,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],		'Csoportok',		'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],		'Felhasználók',		'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Segítség',			'',			$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Segítség',		'',			$page_lang, 'Admins', false, false);
 	insert_page($config['terms_page'],		'Terms',		'',			$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Privacy',		'',			$page_lang, 'Admins', false, false);
 
