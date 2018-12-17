@@ -30,9 +30,9 @@ if ($config['language'] == $page_lang)
 }
 
 //
-insert_page('FrissVáltoztatások',	'Friss változtatások',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Changes');
-insert_page('RecentlyCommented',	'Recently Commented',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Comments');
-insert_page('PageIndex',			'Page Index',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
+insert_page('FrissVáltoztatások',	'Friss változtatások',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Változtatások');
+insert_page('UtolsóMegjegyzések',	'Utolsó megjegyzések',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Megjegyzések');
+insert_page('OldalIndex',			'Oldal Index',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
 
 insert_page('Regisztráció',			'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
 insert_page('Jelszó',				'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);

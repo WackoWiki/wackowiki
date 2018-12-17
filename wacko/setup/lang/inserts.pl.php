@@ -18,15 +18,15 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Category',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'U¿ytkownicy',	'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'Kategoria',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Grupy',		'{{groups}}',				$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'U¿ytkownicy',	'{{users}}',				$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Pomoc',		'',			$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Warunki u¿ytkowania',		'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Polityka ochrony prywatno¶ci',		'',			$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Pomoc',		'',							$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],		'Warunki u¿ytkowania',		'',				$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'Polityka ochrony prywatno¶ci',		'',		$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
+	#insert_page('Losow±Strona',			'Losow± strona',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Losow±');
 }
 
 insert_page('OstatnieZmiany',		'Ostatnie Zmiany',			'{{changes}}',			$page_lang, 'Admins', false, true, 'Zmiany');
@@ -34,8 +34,8 @@ insert_page('OstatnioKomentowane',	'Ostatnio Komentowane',		'{{commented}}',		$p
 insert_page('IndexStron',			'Index Stron',				'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
 
 insert_page('Rejestracja',			'Rejestracja',				'{{registration}}',		$page_lang, 'Admins', false, false);
-insert_page('Password',				'Password',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Search',				'Poszukiwanie',				'{{search}}',			$page_lang, 'Admins', false, false);
+insert_page('Has³o',				'Has³o',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
+insert_page('Szukaj',				'Szukaj',					'{{search}}',			$page_lang, 'Admins', false, false);
 insert_page('Login',				'Login',					'{{login}}',			$page_lang, 'Admins', false, false);
 insert_page('Ustawienia',			'Ustawienia',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
 

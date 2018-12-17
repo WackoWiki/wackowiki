@@ -18,15 +18,15 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Category',		'{{category}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Users',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'категория',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Групи',			'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'Потребители',		'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Помощ',			'',			$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Помощ',			'',						$page_lang, 'Admins', false, false);
 	insert_page($config['terms_page'],		'Условия за ползване',			'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Поверителност',	'',			$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'Поверителност',	'',						$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
+	#insert_page('СлучайнаСтраница',		'Случайна страница',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Случаен');
 }
 
 insert_page('Каталог',			'Каталог',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Каталог');
@@ -35,7 +35,7 @@ insert_page('НовиКоментари',	'Нови Коментари',	'{{commented}}',		$page_lang, 'Ad
 
 insert_page('Регистрация',		'Регистрация',		'{{registration}}',		$page_lang, 'Admins', false, false);
 insert_page('Password',			'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Search',			'Search',			'{{search}}',			$page_lang, 'Admins', false, false);
+insert_page('Търсене',			'Търсене',			'{{search}}',			$page_lang, 'Admins', false, false);
 insert_page('влизане',			'влизане',			'{{login}}',			$page_lang, 'Admins', false, false);
 insert_page('Settings',			'Settings',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 

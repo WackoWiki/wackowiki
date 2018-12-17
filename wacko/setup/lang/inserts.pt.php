@@ -18,15 +18,15 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Category',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Users',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'Categoria',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Grupos',		'{{groups}}',				$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'Usuários',		'{{users}}',				$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Ajuda',		'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Terms',		'',						$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Ajuda',		'',							$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],		'Terms',		'',							$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Política de privacidade',		'',			$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
+	#insert_page('PáginaAleatória',			'Página aleatória',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Aleatória');
 }
 
 insert_page('AlteraçõesRecentes',		'Alterações Recentes',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Alterações');
@@ -35,7 +35,7 @@ insert_page('ÍndicedePáginas',			'Índicede Páginas',			'{{pageindex}}',		$page_l
 
 insert_page('Registration',				'Registration',				'{{registration}}',		$page_lang, 'Admins', false, false);
 insert_page('Password',					'Password',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Search',					'Search',					'{{search}}',			$page_lang, 'Admins', false, false);
+insert_page('Buscar',					'Buscar',					'{{search}}',			$page_lang, 'Admins', false, false);
 insert_page('Entrar',					'Entrar',					'{{login}}',			$page_lang, 'Admins', false, false);
 insert_page('Settings',					'Settings',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
 

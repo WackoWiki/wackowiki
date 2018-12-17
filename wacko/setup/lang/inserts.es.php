@@ -22,11 +22,11 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],		'Grupos',			'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],		'Usuarios',			'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Ayuda',		'',			$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Terms',		'',			$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Ayuda',		'',							$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],		'Terms',		'',							$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Normativa de privacidad',		'',			$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
+	#insert_page('PáginaAleatoria',			'Página aleatoria',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Aleatoria');
 }
 
 insert_page('UltimasModificaciones',	'Ultimas Modificaciones',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Modificaciones');
