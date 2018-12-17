@@ -18,19 +18,19 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Category',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Users',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'Κατηγορία',	'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Ομάδες',		'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'Χρήστες',		'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Βοήθεια',		'',			$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Όροι Χρήσης',		'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Πολιτική προσωπικών δεδομένων',		'',			$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Βοήθεια',				'',				$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],		'Όροι Χρήσης',			'',				$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'Πολιτική προσωπικών δεδομένων',	'',	$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
+	#insert_page('RandomPage',				'Τυχαία σελίδα',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Τυχαία');
 }
 
-insert_page('RecentChanges',		'Recent Changes',		'{{changes}}',		$page_lang, 'Admins', false, true, 'Changes');
-insert_page('RecentlyCommented',	'Recently Commented',	'{{commented}}',	$page_lang, 'Admins', false, true, 'Comments');
+insert_page('RecentChanges',		'Recent Changes',		'{{changes}}',		$page_lang, 'Admins', false, true, 'Αλλαγές');
+insert_page('RecentlyCommented',	'Recently Commented',	'{{commented}}',	$page_lang, 'Admins', false, true, 'Σχόλια');
 insert_page('PageIndex',			'Page Index',			'{{pageindex}}',	$page_lang, 'Admins', false, true, 'Index');
 
 insert_page('Registration',			'Registration',		'{{registration}}',		$page_lang, 'Admins', false, false);

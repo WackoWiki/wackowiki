@@ -29,7 +29,6 @@ if ($config['language'] == $page_lang)
 	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
 }
 
-//
 insert_page('RecentChanges',		'Recent Changes',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Changes');
 insert_page('RecentlyCommented',	'Recently Commented',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Comments');
 insert_page('PageIndex',			'Page Index',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');

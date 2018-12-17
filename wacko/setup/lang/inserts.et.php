@@ -18,15 +18,15 @@ if ($config['language'] == $page_lang)
 		//...
 	}
 
-	insert_page($config['category_page'],	'Category',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Groups',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Users',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'Kategooria',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Grupid',			'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'Kasutajad',		'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Help',			'',			$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Terms',		'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Andmekaitse',		'',			$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Abi',				'',						$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],		'Terms',			'',						$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'Andmekaitse',		'',						$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Random Page',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
+	#insert_page('JuhuslikLehekülg',		'Juhuslik lehekülg',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Juhuslik');
 }
 
 insert_page('ViimasedMuudatused',		'Viimased Muudatused',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Muudatused');
