@@ -44,6 +44,7 @@ $lang_codes['en'] = 'English';
 $lang_codes['el'] = '&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940;';
 $lang_codes['es'] = 'Espa&ntilde;ol';
 $lang_codes['fr'] = 'Fran&#231;ais';
+$lang_codes['hu'] = 'Magyar';
 $lang_codes['it'] = 'Italiano';
 $lang_codes['nl'] = 'Nederlands';
 $lang_codes['pl'] = 'Polski';

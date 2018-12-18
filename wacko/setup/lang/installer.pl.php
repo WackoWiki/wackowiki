@@ -16,9 +16,9 @@ $lang = [
 	'site_name'			=> 'MyWikiSite',
 
 	// pages
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
-	'users_page'		=> 'Users',
+	'category_page'		=> 'Kategoria',
+	'groups_page'		=> 'Grupy',
+	'users_page'		=> 'U¿ytkownicy',
 
 	#'help_page'			=> 'Pomoc',
 	#'terms_page'		=> 'Terms',
