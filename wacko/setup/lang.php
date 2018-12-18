@@ -48,6 +48,7 @@ $lang_codes['hu'] = 'Magyar';
 $lang_codes['it'] = 'Italiano';
 $lang_codes['nl'] = 'Nederlands';
 $lang_codes['pl'] = 'Polski';
+$lang_codes['pt'] = 'Portugues';
 $lang_codes['ru'] = '&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;';
 
 foreach($lang_codes as $key => $value)
