@@ -135,8 +135,8 @@
 </nav>
 [ === #------------------------------ === ]
 <nav class="breadcrumb">
-	['' breadcrumbs '']
-	['' // usertrail '']
+	[ ' breadcrumbs ' ]
+	[ ' // usertrail ' ]
 </nav>
 </header>
 [ === #------------------------------ === ]
