@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Log ind',
-	'LoginWelcome2'				=> '((/Registrering Registrering))',
+	'CreateAccount'				=> 'Registrering',
+	'RegistrationLink'			=> 'Registrering',
 	'LoginName'					=> 'Dit brugernavn',
 	'LoginPassword'				=> 'Din adgangskode',
 	'LoginButton'				=> 'Log ind',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Nuværende password',
 	'NewPassword'				=> 'Nyt password',
 	'YouWantChangePassword'		=> 'Skift password',
+	'ChangePasswordLink'		=> 'Password',
 	'PasswordChanged'			=> 'Password ændret',
 	'EmailWelcome'				=> 'Du blev registreret den ',
 	'EmailRegistered'			=> 'Du er nu registreret i %1.' . "\n" . 'Dit brugernavn: %2'."\n\n" . 'Hvis du vil modtage notifikationer, skal du godkende din mail. Følg ' . "\n" . '%3' . "\n" . 'dette link for at godkende din mail.',
@@ -855,7 +857,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((login))',
 	'Bookmarks'					=> 'Bogmærker',
 	'ReallyDeleteComment'		=> 'Er du sikker på, at du vil slette kommentaren?',
-	'ForgotLink'				=> '((/Password Glemt dit password?))',
+
 	'RegistrationClosed'		=> 'Registrering ikke mulig. Kontakt Administrator.',
 	'ACLForCluster'				=> 'Tilladelser for %1',
 	'ACLAreYouSure'				=> 'Du ændrer nu adgangstilladelser for denne side og alle dens undersider. Vil du fortsætte?',

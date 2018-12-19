@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Вход',
-	'LoginWelcome2'				=> '[[/Регистрация Регистрация]]',
+	'CreateAccount'				=> 'Регистрация',
+	'RegistrationLink'			=> 'Регистрация',
 	'LoginName'					=> 'Потребителско име',
 	'LoginPassword'				=> 'Парола',
 	'LoginButton'				=> 'Влез',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Въведете текущата парола',
 	'NewPassword'				=> 'Нова парола',
 	'YouWantChangePassword'		=> 'Промяна на паролата',
+	'ChangePasswordLink'		=> 'Password',
 	'PasswordChanged'			=> 'Паролата е  успешно променена',
 	'EmailWelcome'				=> 'Регистрация ',
 	'EmailRegistered'			=> 'Успешна регистрация  %1.' . "\n" . 'Вашия логин е: %2'."\n\n" . 'За получаване на информация, трябва да потвърдите адреса си. Кликнете на ' . "\n" . '%3' . "\n" . 'този линк.'."\n\n\n" . ''."\n\n\n" . 'Ако не сте регистрирани, пропуснете това съобщение.'."\n\n",
@@ -855,7 +857,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Settings Login Въведете име и парола))',
 	'Bookmarks'					=> 'Предпочитано',
 	'ReallyDeleteComment'		=> 'Наистина  ИЗТРИВАНЕ на комментара? <br>Възстановяването след това е невъзможно.',
-	'ForgotLink'				=> '((/Password Забравена парола?))',
+
 	'RegistrationClosed'		=> 'Регистрацията на тази страница е невъзможна. Свържете се с администратора.',
 	'ACLForCluster'				=> 'Контрол на достъп  за  целия  СЕКТОР %1',
 	'ACLAreYouSure'				=> 'Ще се сменят правата за тази страница и всички подстраници. Продължение?',

@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Zaloguj siê',
-	'LoginWelcome2'				=> 'a mo¿e potrzebujesz siê [[/Rejestracja zarejestrowaæ]]?',
+	'CreateAccount'				=> 'a mo¿e potrzebujesz siê zarejestrowaæ?',
+	'RegistrationLink'			=> 'Rejestracja',
 	'LoginName'					=> 'Nazwa u¿ytkownika',
 	'LoginPassword'				=> 'Has³o',
 	'LoginButton'				=> 'Zaloguj',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Bie¿±ce has³o',
 	'NewPassword'				=> 'Nowe has³o',
 	'YouWantChangePassword'		=> 'Zmiana has³a',
+	'ChangePasswordLink'		=> 'Password',
 	'PasswordChanged'			=> 'Has³o zosta³o zmienione',
 	'EmailWelcome'				=> 'Dziêkujemy. Rejestracja przebieg³a pomy¶lnie ',
 	'EmailRegistered'			=> 'Dziêkujemy! Twoja rejestracja zosta³a zakoñczona pomy¶lnie' . "\n" . 'Nazwa u¿ytkownika: %2'."\n\n" . 'Aby w³±czyæ mo¿liwo¶æ otrzymywania powiadomieñ z tej strony nale¿y potwierdziæ swój adres e-mail. W tym celu nale¿y po³±czyæ siê z ' . "\n" . '%3' . "\n" . 't± stron±.',
@@ -855,7 +857,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Settings Zaloguj tutaj))',
 	'Bookmarks'					=> 'Zak³adki',
 	'ReallyDeleteComment'		=> 'Czy na pewno chcesz USUN¡Æ komentarz??<br>Nie mo¿na tego cofn±æ!',
-	'ForgotLink'				=> '((/Password Zapomnia³e¶ has³a?))',
+
 	'RegistrationClosed'		=> 'Rejestracja nie jest dostêpna tutaj. Spróbuj skontaktowaæ siê z administratorem strony.',
 	'ACLForCluster'				=> 'Lista Praw Dostêpu dla CA£EGO klastra %1',
 	'ACLAreYouSure'				=> 'Zamierzasz zmieniæ prawa dostêpu dla tej strony i wszystkich jej podstron. Kontynuowaæ?',

@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Bejelentkezés',
-	'LoginWelcome2'				=> '((/Registration Create new account))',
+	'CreateAccount'				=> 'Create new account',
+	'RegistrationLink'			=> 'Regisztráció',
 	'LoginName'					=> 'Szerkesztõneved',
 	'LoginPassword'				=> 'Jelszavad',
 	'LoginButton'				=> 'Belépés',
@@ -585,7 +586,8 @@ $wacko_translation = [
 	'RedirectedTo'				=> 'Átirányítva a következõhöz',
 	'CurrentPassword'			=> 'Régi jelszó',
 	'NewPassword'				=> 'Új jelszó',
-	'YouWantChangePassword'		=> 'Change password',
+	'YouWantChangePassword'		=> 'Jelszó módosítása',
+	'ChangePasswordLink'		=> 'Jelszó',
 	'PasswordChanged'			=> 'Password changed',
 	'EmailWelcome'				=> 'You\'ve registered at ',
 	'EmailRegistered'			=> 'You\'ve successfully registered at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want to receive notifications, you need to approve your email. Please follow ' . "\n" . '%3' . "\n" . 'the link to do this.',
@@ -855,7 +857,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Settings Login here,please))',
 	'Bookmarks'					=> 'Kedvencek',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
-	'ForgotLink'				=> '((/Password Forgot password?))',
+
 	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',
 	'ACLForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'ACLAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
