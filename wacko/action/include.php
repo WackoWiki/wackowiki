@@ -37,7 +37,10 @@ $page_id = $this->get_page_id($page);
 
 if (!$this->has_access('read', $page_id))
 {
-	if ($nowarning != 1) echo $this->_t('NoAccessToSourcePage');
+	if ($nowarning != 1)
+	{
+		$tpl->forbidden = true;
+	}
 }
 else
 {
