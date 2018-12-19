@@ -3,6 +3,9 @@
 	[= none _ =
 		<em>[ ' _t: SourcePageDoesntExist ' ] ([ ' link ' ])</em>
 	=]
+	[= forbidden _ =
+		<em>[ ' _t: NoAccessToSourcePage ' ]</em>
+	=]
 	[= mark =
 		[ ' nonstatic ' ]
 		<section class="include-page">
