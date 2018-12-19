@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Σύνδεση',
-	'LoginWelcome2'				=> '((/Registration Εγγραφή))',
+	'CreateAccount'				=> 'Εγγραφή',
+	'RegistrationLink'			=> 'Registration',
 	'LoginName'					=> 'Όνομα χρήστη',
 	'LoginPassword'				=> 'Συνθηματικό',
 	'LoginButton'				=> 'Σύνδεση',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Τωρινό συνθηματικό',
 	'NewPassword'				=> 'Νέο συνθηματικό',
 	'YouWantChangePassword'		=> 'Αλλαγή συνθηματικού',
+	'ChangePasswordLink'		=> 'Password',
 	'PasswordChanged'			=> 'Το συνθηματικά άλλαξε',
 	'EmailWelcome'				=> 'Εγγραφήκατε στο ',
 	'EmailRegistered'			=> 'Εγγραφήκατε επιτυχώς στο %1.' . "\n" . 'Το όνομα σύνδεσή σας είναι: %2'."\n\n" . 'Εάν θέλετε να λαμβάνετε ειδοποιήσεις, χρειάζεται να πιστοποιήσετε το ηλεκτρονικό σας  ταχυδρομείο. Παρακαλώ μεταβείτε ' . "\n" . '%3' . "\n" . 'σε αυτό το σύνδεσμο για να το κάνετε.',
@@ -855,7 +857,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Settings Login here,please))',
 	'Bookmarks'					=> 'Σύνδεσμοι',
 	'ReallyDeleteComment'		=> 'Θέλετε σίγουρα να διαγράψετε αυτό το σχόλιο;<br>Δεν υπάρχει ενέργεια αναίρεσης για αυτό!',
-	'ForgotLink'				=> '((/Password Ξέχασες το συνθηματικό σου;))',
+
 	'RegistrationClosed'		=> 'Η εγγραφή δεν είναι δυνατή εδώ, Προσπαθήστε να επικοινωνήστε με τον διαχειριστή.',
 	'ACLForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'ACLAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',

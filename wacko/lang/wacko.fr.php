@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Connexion',
-	'LoginWelcome2'				=> '[[/Enregistrement Enregistrement]]',
+	'CreateAccount'				=> 'Enregistrement',
+	'RegistrationLink'			=> 'Enregistrement',
 	'LoginName'					=> 'Nom d&rsquo;utilisateur',
 	'LoginPassword'				=> 'Mot de Passe ',
 	'LoginButton'				=> 'Connexion',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Mot de passe actuel ',
 	'NewPassword'				=> 'Nouveau mot de passe (au moins 5 caractères) ',
 	'YouWantChangePassword'		=> 'Changement de mot de passe',
+	'ChangePasswordLink'		=> 'MotDePasse',
 	'PasswordChanged'			=> 'Le mot de passe a été changé',
 	'EmailWelcome'				=> 'Bienvenue sur ',
 	'EmailRegistered'			=> 'Votre enregistrement est confirmé sur %1.' . "\n" . 'Votre nom d&rsquo;utilisateur ou NomWiki est&nbsp;: %2'."\n\n" . 'Nous vous conseillons de confirmer votre adresse de messagerie ; ceci vous permettra&nbsp;:' . "\n" . ' - de recevoir des courriels pour vous informer de changements ou commentaires sur certaines pages,' . "\n" . ' - et d&rsquo;obtenir un nouveau mot de passe en cas de perte.'."\n\n" . 'Pour confirmer votre adresse de messagerie suivez ' . "\n" . '%3' . "\n" . 'ce lien, ou copiez-le dans la barre d&rsquo;adresses de votre navigateur.',
@@ -856,7 +858,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Paramètres de connexion ici, s&rsquo;il vous plait))',
 	'Bookmarks'					=> 'Signets',
 	'ReallyDeleteComment'		=> 'Voulez-vous vraiment effacer ce commentaire ?<br>Cet effacement est définitif !',
-	'ForgotLink'				=> '((/MotDePasse Mot de passe oublié ?))',
+
 	'RegistrationClosed'		=> 'Enregistrement non autorisé ici. Contactez l&rsquo;administrateur du site.',
 	'ACLForCluster'				=> 'Contrôle d&rsquo;accès pour LA TOTALITÉ du groupe %1',
 	'ACLAreYouSure'				=> 'Vous allez changer les droits relatifs à cette page et à toutes ses pages subordonnées ou sous-pages. Continuer ?',

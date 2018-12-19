@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Inloggen',
-	'LoginWelcome2'				=> '[[/Registratie Registreren]]',
+	'CreateAccount'				=> 'Registreren',
+	'RegistrationLink'			=> 'Registratie',
 	'LoginName'					=> 'Gebruikersnaam',
 	'LoginPassword'				=> 'Wachtwoord',
 	'LoginButton'				=> 'Aanmelden',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Huidig wachtwoord',
 	'NewPassword'				=> 'Nieuw wachtwoord',
 	'YouWantChangePassword'		=> 'Wachtwoord wijzigen',
+	'ChangePasswordLink'		=> 'Paswoord',
 	'PasswordChanged'			=> 'Wachtwoord gewijzigd',
 	'EmailWelcome'				=> 'U hebt geregistreerd bij ',
 	'EmailRegistered'			=> 'Uw registratie bij %1 is succesvol verlopen.' . "\n" . 'Uw gebruikersnaam: %2'."\n\n" . 'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik ' . "\n" . '%3' . "\n" . 'hier om dit te doen.',
@@ -855,7 +857,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Settings Hier inloggen))',
 	'Bookmarks'					=> 'Bookmarks',
 	'ReallyDeleteComment'		=> 'Weet u zeker dat u deze reactie wilt verwijderen?<br>Deze handeling kan niet ongedaan gemaakt worden!',
-	'ForgotLink'				=> '((/Paswoord Wachtwoord vergeten?))',
+
 	'RegistrationClosed'		=> 'Registratie is hier niet mogelijk. Neem contact op met de beheerder.',
 	'ACLForCluster'				=> 'ACL\'s (rechten) voor de GEHELE cluster %1',
 	'ACLAreYouSure'				=> 'U gaat de rechten (ACL\'s) voor deze pagina en alle subpagina\'s veranderen. Wilt u doorgaan?',

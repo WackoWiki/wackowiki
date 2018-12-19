@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Anmeldung',
-	'LoginWelcome2'				=> '((/Registrierung Benutzerkonto anlegen))',
+	'CreateAccount'				=> 'Benutzerkonto anlegen',
+	'RegistrationLink'			=> 'Registrierung',
 	'LoginName'					=> 'Benutzer',
 	'LoginPassword'				=> 'Passwort',
 	'LoginButton'				=> 'Anmelden',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Derzeitiges Passwort',
 	'NewPassword'				=> 'Neues Passwort',
 	'YouWantChangePassword'		=> 'Passwort ändern',
+	'ChangePasswordLink'		=> 'Passwort',
 	'PasswordChanged'			=> 'Passwort geändert',
 	'EmailWelcome'				=> 'Du bist registriert bei ',
 	'EmailRegistered'			=> 'Du hast dich bei %1 registriert.' . "\n" . 'Dein Benutzername lautet: %2'."\n\n" . 'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem Link' . "\n" . '%3',
@@ -856,7 +858,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Einstellungen Bitte hier registrieren))',
 	'Bookmarks'					=> 'Lesezeichen',
 	'ReallyDeleteComment'		=> 'Willst du den Kommentar wirklich löschen?<br>Diese Aktion kann nicht rückgängig gemacht werden!',
-	'ForgotLink'				=> '((/Passwort Passwort vergessen?))',
+
 	'RegistrationClosed'		=> 'Registrierung ist nicht verfügbar. Kontaktiere bei Interesse den Administrator.',
 	'ACLForCluster'				=> 'Berechtigungen für gesamten Cluster %1',
 	'ACLAreYouSure'				=> 'Du bist dabei die ACLs von dieser Seite und aller ihrer Unterseiten zu ändern. Fortfahren?',

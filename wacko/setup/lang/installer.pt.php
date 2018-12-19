@@ -152,7 +152,7 @@ $lang = [
    Database Installation Page
 */
 'database-install' => 'Instalação do banco de dados',
-'TestingConfiguration' => 'Testing Configuration',
+'TestingConfiguration' => 'Teste de Configuração',
 'TestConnectionString' => 'Testing database connection settings',
 'TestDatabaseExists' => 'Checking if the database you specified exists',
 'InstallingTables' => 'Instalando Tabelas',
@@ -199,7 +199,7 @@ $lang = [
 /*
    Write Config Page
 */
-'write-config' => 'Write Config File',
+'write-config' => 'Escrever ficheiro de configuração',
 'FinalStep' => 'Passo final',
 'Writing' => 'Writing Configuration File',
 'RemovingWritePrivilege' => 'Removing Write Privilege',

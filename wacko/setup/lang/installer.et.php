@@ -44,15 +44,15 @@ $lang = [
 */
 'lang' => 'Keele konfigureerimine',
 'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">5.0.x</code>.',
-'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>.  The next few pages will guide you through the upgrade process.',
-'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <code class="version">%1</code>.  The next few pages will guide you through the installation process.',
+'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>. Järgmised mõned lehed viivad teid uuendusprotsessi läbi.',
+'FreshInstall' => 'Tere tulemast WackoWiki-le, et kavatsete installida WackoWiki <code class="version">%1</code>. Järgmised mõned lehed suunavad teid installiprotsessi.',
 'PleaseBackup' => 'Enne, kui alustad versioonitäienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kõikidest muudetud failidest. See võib sind säästa suurest peavalust!',
 'LangDesc' => 'Vali keel, mida installeerimise ajal kasutada. Seesama keel saab olema ka vaikimisi keeleks sinu WackoWiki installatsioonil.',
 
 /*
    System Requirements Page
 */
-'version-check' => 'System Requirements',
+'version-check' => 'Nõuded süsteemile',
 'PHPVersion' => 'PHP Version',
 'PHPDetected' => 'Detected PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
@@ -60,7 +60,7 @@ $lang = [
 'Database' => 'Database',
 'PHPExtensions' => 'PHP Extensions',
 'Permissions' => 'Permissions',
-'ReadyToInstall' => 'Ready to Install?',
+'ReadyToInstall' => 'Valmis installida?',
 'Requirements' => 'Your server must meet the requirements listed below.',
 'OK' => 'OK',
 'Problem' => 'Problem',
@@ -68,8 +68,8 @@ $lang = [
 'ErrorPHPExtensions' => 'Your PHP installation appears to be missing the noted PHP extensions which are required by WackoWiki.',
 'PCREwithoutUTF8' => 'PCRE is not compiled with UTF-8 support.',
 'NotePermissions' => 'Üritatakse konfiguratsiooni andmeid kirjutada faili nimega %1, mis asub sinu  WackoWiki kataloogis. Et see töötaks, pead sa olema kindel, et veebi serveril on kirjutamisõigused sellesse faili! Kui kirjutamisoigust ei ole, pead sa käsitsi seda faili muutma (installeerimise käigus üteldakse kuidas see käib).<br><br>Vaata seda, et saada täpsemaid juhiseid: <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
-'ErrorPermissions' => 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPHPVersion' => 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
+'ErrorPermissions' => 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
+'ErrorMinPHPVersion' => 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version. You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
 'Ready' => 'Congratulations, it appears that your server is capable of running WackoWiki.  The next few pages will take you through the configuration process.',
 
 /*
@@ -91,7 +91,7 @@ $lang = [
 'PasswordDesc' => 'Vali administraatorile parool (vähemalt %1 tähemärki)',
 'Password2' => 'Korda parooli:',
 'Mail' => 'Administraatori e-post',
-'MailDesc' => 'Enter the admins email address.',
+'MailDesc' => 'Sisestage administraatori e-posti aadress.',
 'Base' => 'Baas-URL',
 'BaseDesc' => 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
 'Rewrite' => 'Ülekirjutamise olek',
@@ -151,11 +151,11 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Database Installation',
+'database-install' => 'Andmebaasi paigaldamine',
 'TestingConfiguration' => 'Testin konfiguratsiooni',
 'TestConnectionString' => 'Testin database ühenduse seadistusi',
 'TestDatabaseExists' => 'Checking if the database you specified exists',
-'InstallingTables' => 'Installing Tables',
+'InstallingTables' => 'Tabelite installimine',
 'ErrorDBConnection' => 'There was a problem with the database connection details you specified, please go back and check they are correct.',
 'ErrorDBExists' => 'Andmebaasi, mida sa konfigureerisid, ei leita. See peab olemas olema, kui sa tahad WackoWikit installeerida voi sellesse täiendusi sisse viia!',
 'To' => '->',
@@ -191,7 +191,7 @@ $lang = [
 'ErrorCreatingTable' => 'Error creating <code>%1</code> table, does it already exist?',
 'ErrorMovingRevisions' => 'Error moving revision data',
 'MovingRevisions' => 'Paigutan andmed ümber kontroll-tabelisse',
-'DeletingTables' => 'Deleting Tables',
+'DeletingTables' => 'Tabelite kustutamine',
 'DeletingTablesEnd' => 'Finished Deleting Tables',
 'ErrorDeletingTable' => 'Error deleting <code>%1</code> table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
 'DeletingTable' => 'Deleting <code>%1</code> table',
@@ -199,11 +199,11 @@ $lang = [
 /*
    Write Config Page
 */
-'write-config' => 'Write Config File',
-'FinalStep' => 'Final Step',
+'write-config' => 'Konfigurifaili kirjutamine',
+'FinalStep' => 'Viimane samm',
 'Writing' => 'Kirjutan konfiguratsioonifaili',
 'RemovingWritePrivilege' => 'Removing Write Privilege',
-'InstallationComplete' => 'Installation Complete',
+'InstallationComplete' => 'Paigaldamine on lõppenud',
 'ThatsAll' => 'Ja ongi kõik! Nüüd võid sa <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'Soovitan sul eemaldada kirjutamisõigus %1 failile. Kirjutamisõiguse allesjätmine on riskantne turvalisuse seisukohast!',

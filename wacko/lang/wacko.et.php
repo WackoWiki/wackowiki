@@ -61,7 +61,8 @@ $wacko_translation = [
 
 	// login panel
 	'LoginWelcome'				=> 'Logi sisse',
-	'LoginWelcome2'				=> '[[/Registration Registereeri]]',
+	'CreateAccount'				=> 'Registereeri',
+	'RegistrationLink'			=> 'Registration',
 	'LoginName'					=> 'Kasutajanimi',
 	'LoginPassword'				=> 'Parool',
 	'LoginButton'				=> 'Sisse',
@@ -586,6 +587,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Praegune parool',
 	'NewPassword'				=> 'Uus parool',
 	'YouWantChangePassword'		=> 'Muuda parool',
+	'ChangePasswordLink'		=> 'Password',
 	'PasswordChanged'			=> 'Parool muudetud',
 	'EmailWelcome'				=> 'Sa oled registreerunud ',
 	'EmailRegistered'			=> 'sa oled edukalt registreerunud %1.' . "\n" . 'Sinu kasutajanimi on: %2'."\n\n" . 'Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi ' . "\n" . '%3' . "\n" . 'seda linki, et seda teha.',
@@ -855,7 +857,7 @@ $wacko_translation = [
 	'PleaseLogin'				=> '((Seaded Logi sisee siin, palun))',
 	'Bookmarks'					=> 'Kiirvalikud',
 	'ReallyDeleteComment'		=> 'Kas sa tõesti tahad KUSTUTADA kommentaari?<br>Seda ei saa siis enam taastada!',
-	'ForgotLink'				=> '((/Password Unustasid parooli?))',
+
 	'RegistrationClosed'		=> 'Registreerimine ei ole võimalik. Proovi kontakteeruda administraatoriga.',
 	'ACLForCluster'				=> 'Kasutaja õiguste loend üle kogu %1 grupi',
 	'ACLAreYouSure'				=> 'Sa asud nüüd muutma nii selle lehe, kui kõigi selle lehe alamlehtede kasutaja  õiguste loendit. Kas jätkad?',

@@ -47,9 +47,9 @@
 			<p>
 				<input type="submit" class="OkBtn" value="[ ' _t: LoginButton ' ]" tabindex="4">
 			</p>
-			<p>[ ' format_t: ForgotLink ' ]</p>
+			<p><a href="[ ' pwhref ' ]">[ ' _t: ForgotPassword ' ]</a></p>
 			[= welcome _ =
-				<p>[ ' format_t: LoginWelcome2 ' ]</p>
+				<p><a href="[ ' href ' ]">[ ' _t: CreateAccount ' ]</a></p>
 			=]
 		</form>
 		</div>

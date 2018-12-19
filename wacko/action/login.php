@@ -189,10 +189,12 @@ else // login
 	}
 
 	$tpl->l_href		= $this->href();
+	$tpl->l_pwhref		= $this->href('', $this->_t('ChangePasswordLink'));
 	$tpl->l_username	= @$this->sess->login_username;
 
 	if ($this->db->allow_registration)
 	{
-		$tpl->l_welcome = true;
+		$tpl->l_welcome			= true;
+		$tpl->l_welcome_href	= $this->href('', $this->_t('RegistrationLink'));
 	}
 }
