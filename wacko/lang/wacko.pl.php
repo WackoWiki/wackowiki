@@ -505,7 +505,7 @@ $wacko_translation = [
 	// clone handler
 	'ClonePage'					=> 'Sklonuj stronê',
 	'CloneText'					=> 'Klon',
-	'CloneName'					=> 'Enter new name for a clone this page',
+	'CloneName'					=> 'Enter a new name for a clone of this page',
 	'CloneButton'				=> 'Klon',
 	'PageCloned'				=> 'Page %1 cloned.',
 	'ClonedFrom'				=> 'Cloned from %1.',
