@@ -416,13 +416,15 @@ a[href $='.rdf'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/xml.svg') no-repeat scroll left center;
 	padding-left: 17px;
 }
-a[href $='.zip'] .icon,
+
 a[href $='.7z'] .icon,
-a[href $='.tar'] .icon,
 a[href $='.bz2'] .icon,
 a[href $='.gz'] .icon,
+a[href $='.rar'] .icon,
+a[href $='.tar'] .icon,
 a[href $='.tgz'] .icon,
-a[href $='.rar'] .icon {
+a[href $='.zip'] .icon,
+a[href $='.zst'] .icon{
 	background: rgba(0, 0, 0, 0) url('./../icon/archive.svg') no-repeat scroll left center;
 	padding-left: 17px;
 }
