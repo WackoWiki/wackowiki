@@ -1364,6 +1364,7 @@ application/yang				yang
 application/yin+xml				yin
 application/zip					zip
 # application/zlib
+application/zstd				zst
 # audio/1d-interleaved-parityfec
 # audio/32kadpcm
 # audio/3gpp
