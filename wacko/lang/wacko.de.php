@@ -954,7 +954,7 @@ $wacko_translation = [
 	'CommentsXML'				=> 'Letzte Kommentare im ',
 	'NewsTitleXML'				=> ' - Aktuelle Nachrichten',
 	'NewsXML'					=> 'Aktuelle Nachrichten zu ',
-	'PageRevisionsXML'			=> 'Historie/Revisionen von ',
+	'PageRevisionsXML'			=> 'Revisionen von ',
 	'ExportClusterXML'			=> 'Export des ganzen Clusters von ',
 	'AccessDeniedXML'			=> 'Du hast keine Berechtigung für den Zugriff auf diese Seite.',
 

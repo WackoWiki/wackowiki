@@ -953,14 +953,14 @@ $wacko_translation = [
 	'CommentsXML'				=> 'Recent comments to the ',
 	'NewsTitleXML'				=> ' - Recent news',
 	'NewsXML'					=> 'Recent news to the ',
-	'PageRevisionsXML'			=> 'History/revisions of ',
+	'PageRevisionsXML'			=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
 
 	'ChangesFeed'				=> 'Changes',
 	'CommentsFeed'				=> 'Comments',
 	'NewsFeed'					=> 'News',
-	'RevisionsFeed'				=> 'History/revisions of ',
+	'RevisionsFeed'				=> 'Revisions of ',
 
 	'LastModification'			=> 'Ultima modifica',
 
