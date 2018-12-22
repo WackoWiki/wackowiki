@@ -165,6 +165,7 @@ $wacko_translation = [
 	'ReadAccessDeniedHintGuest'	=> '',
 	'PageDeletedInfo'			=> 'This page has been deleted.',
 
+	'LastEditedBy'				=> 'Τελευταία επεξεργασία από',
 	'YouAreOwner'				=> 'Δεν είσαι ο ιδιοκτήτης αυτής της σελίδας.',
 	'Owner'						=> 'Ιδιοκτήτης',
 	'Nobody'					=> 'Κανένας',
