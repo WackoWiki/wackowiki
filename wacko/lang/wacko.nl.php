@@ -165,6 +165,7 @@ $wacko_translation = [
 	'ReadAccessDeniedHintGuest'	=> '',
 	'PageDeletedInfo'			=> 'Deze pagina is verwijderd.',
 
+	'LastEditedBy'				=> 'Laatst bewerkt door',
 	'YouAreOwner'				=> 'U bent de eigenaar van deze pagina.',
 	'Owner'						=> 'Eigenaar',
 	'Nobody'					=> 'Niemand',

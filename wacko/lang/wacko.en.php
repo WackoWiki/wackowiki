@@ -165,6 +165,7 @@ $wacko_translation = [
 	'ReadAccessDeniedHintGuest'	=> 'Consider logging in to read this page.',
 	'PageDeletedInfo'			=> 'This page has been deleted.',
 
+	'LastEditedBy'				=> 'Last edited by',
 	'YouAreOwner'				=> 'You are the owner of this page.',
 	'Owner'						=> 'Owner',
 	'Nobody'					=> 'Nobody',

@@ -166,6 +166,7 @@ $wacko_translation = [
 	'ReadAccessDeniedHintGuest'	=> 'Попробуйте зарегистрироваться',
 	'PageDeletedInfo'			=> 'Эта страница удалена.',
 
+	'LastEditedBy'				=> 'Последний раз редактировалось',
 	'YouAreOwner'				=> 'Владелец: Вы. ',
 	'Owner'						=> 'Владелец',
 	'Nobody'					=> 'Никто',

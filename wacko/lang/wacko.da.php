@@ -165,6 +165,7 @@ $wacko_translation = [
 	'ReadAccessDeniedHintGuest'	=> '',
 	'PageDeletedInfo'			=> 'Denne side er blevet slettet.',
 
+	'LastEditedBy'				=> 'Senest redigeret af',
 	'YouAreOwner'				=> 'Du ejer denne side.',
 	'Owner'						=> 'Ejer',
 	'Nobody'					=> 'Ingen',

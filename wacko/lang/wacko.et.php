@@ -165,6 +165,7 @@ $wacko_translation = [
 	'ReadAccessDeniedHintGuest'	=> '',
 	'PageDeletedInfo'			=> 'See leht on kustutatud.',
 
+	'LastEditedBy'				=> 'Viimati redigeerinud',
 	'YouAreOwner'				=> 'Sa oled selle lehe omanik.',
 	'Owner'						=> 'Omanik',
 	'Nobody'					=> 'Mittekeegi',
