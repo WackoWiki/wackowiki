@@ -288,6 +288,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 			// TODO: check for abandoned files, files with no reference left in the upload table
 
+			// check summary
 			foreach ($inconsistencies as $param => $value)
 			{
 				if ($value[1] >= 1)
@@ -553,6 +554,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 			// TODO: // 3.2. page without valid user_id (e.g. deleted user)
 
+			// execution summery
 			foreach ($_solved as $param => $value)
 			{
 				if ($value[1] >= 1)
