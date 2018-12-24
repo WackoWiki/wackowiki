@@ -497,6 +497,15 @@ $wacko_translation = [
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
 
+	'AccountDelete'				=> 'Felhasználói hozzáférés törölése',
+	'AccountDeleteConfirm'		=> 'Biztosan törölni akarja ezt a felhasználói hozzáférést?',
+	'AccountDeleted'			=> 'A felhasználóiiók sikeresen törölve',
+	'AccountDeleteHeader'		=> 'Felhasználói hozzáférés törlése %1',
+	'AccountDeleteInfo'			=> 'A létrehozott adatok (pl. e-mail, beállítások, mellékletek, wiki bejegyzés) lehetõség szerint törlõdnek. Azonban máshol használt adatokat, mint pl. a mellékletek és wiki bejegyzések, nem lehet törölni a többi felhasználó munkájának akadályozása nélkül. Az ilyen adatokat ezért áthelyezzük egy <code>törölt felhasználó</code> nevû fiókba. Mivel minden törölt hozzáférésnél ez a fiók tartalmazza az adatokat, nem lehet megkülönböztetni a törölt felhasználók adatainak szerzõjét egymástól.',
+	'AccountDeleteWarning'		=> 'A felhasználói hozzáférés törlése visszafordíthatatlan mûvelet.',
+	'AccountDeleteHint'			=> 'A felhasználói hozzáférésed törlésre kerül a rendszerbõl. Ezért,  már nem tud bejelentkezni a jelenlegi hozzáférésével. Ha úgy dönt, hogy a felhasználó az alkalmazást újra hasznáhatja, akkor azt újra megteheti.',
+	'AccountDeleteVerify'		=> 'Adja meg a felhasználó nevét %1, hogy megerõsítse a törlést. Amikor elküldi, meg kell erõsíteni a jelszavát.',
+
 	'MarkRead'					=> 'Mark all as read',
 	'CurrentTime'				=> 'It is currently',
 	'Created'					=> 'created',

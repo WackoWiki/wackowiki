@@ -504,6 +504,8 @@ $ap_translation = [
 	'TermHumanModeration'		=> 'Term human moderation',
 	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
 
+	'UserCanDeleteAccount'		=> 'Gebruikers kunnen hun accounts verwijderen',
+
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.',
 	'SecuritySettingsUpdated'	=> 'Updated security settings',

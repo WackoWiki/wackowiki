@@ -378,7 +378,7 @@ $ap_translation = [
 	'EnableReferrers'			=> 'Erlaube Referrer',
 	'EnableReferrersInfo'		=> 'Ermöglicht das Speichern und Anzeigen externer Verweise.',
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
-	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, könnte zu einer hohen Auslastung der Datenbank führen.',
+	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, kann zu einer hohen Auslastung der Datenbank führen.',
 
 	'AttachmentHandler'			=> 'Datei-Handler aktivieren',
 	'AttachmentHandlerInfo'		=> 'Erlaubt das Anzeigen des Datei-Handlers für Gäste oder registrierte Benutzer.',
@@ -500,7 +500,7 @@ $ap_translation = [
 	'RenameRights'				=> 'Globale Berechtigung Seiten umzubenennen',
 	'RenameRightsInfo'			=> 'Liste von Benutzern mit Berechtigung, Seiten umzubenennen (zu verschieben).',
 	'LockAcl'					=> 'Beschränke alle Berechtigungen auf Nur Lesen',
-	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>Dies könnte nützlich sein, wenn ein Projekt beendet wurde oder aus Sicherheitsgründen die Bearbeitung von Seiten zeitweise ausgesetzt werden muss oder als Notfallmaßnahme.',
+	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>Dies kann nützlich sein, wenn ein Projekt beendet wurde oder aus Sicherheitsgründen die Bearbeitung von Seiten zeitweise ausgesetzt werden muss oder als Notfallmaßnahme.',
 	'HideLocked'				=> 'Nicht zugängliche Seiten ausblenden',
 	'HideLockedInfo'			=> 'Wenn der Benutzer nicht berechtigt ist, eine Seite zu lesen, blenden sie in verschiedenen Seitenlisten aus (der im Text platzierte Link ist jedoch weiterhin sichtbar).',
 	'RemoveOnlyAdmins'			=> 'Nur Administratoren können Seiten löschen',
@@ -511,6 +511,8 @@ $ap_translation = [
 	'OwnersEditCategoriesInfo'	=> 'Erlaubt es den Seitenbesitzern die Kageorien-Liste, welche den Seiten zugewiesen ist, zu ändern (Wörter hinzufügen, umbenennen oder löschen)',
 	'TermHumanModeration'		=> 'Zeit zur Moderation',
 	'TermHumanModerationInfo'	=> 'Moderatoren können Kommentare nur innerhalb dieser Anzahl von Tagen nach deren Erstellung bearbeiten (diese Einschränkung gilt nicht für den letzten Kommentar zum Thema)',
+
+	'UserCanDeleteAccount'		=> 'Benutzer dürfen ihre Konten löschen',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Gesamte Sicherheitseinstellungen für die Platform, Benutzersicherheit und Sicherheitsteilsysteme.',

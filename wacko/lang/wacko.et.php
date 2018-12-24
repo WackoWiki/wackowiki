@@ -497,6 +497,15 @@ $wacko_translation = [
 	'SomeoneCommented'			=> ' kommenteeris seda lehte, mida sa praegu vaatad: ',
 	'AlertReferringPages'		=> 'Sellele lehele viidavad järgmised lehed',
 
+	'AccountDelete'				=> 'Kustuta konto',
+	'AccountDeleteConfirm'		=> 'Oled kindel, et tahad seda kontot kustutada?',
+	'AccountDeleted'			=> 'Konto on kustutatud',
+	'AccountDeleteHeader'		=> 'Kustuta konto %1',
+	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note however, that data like attachments and wiki entries can not be deleted without impeding the work of the other users. Such data is hence reassigned to an account called <code>Deleted user</code>. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
+	'AccountDeleteWarning'		=> 'Oma kasutajakonto kustutamine on pöördumatu tegevus.',
+	'AccountDeleteHint'			=> 'Sinu konto kustutatakse süsteemist. Seetõttu ei saa sa enam sisse logida oma praeguste kasutajatunnustega. Küll aga võid sa registreerida end uuesti rakenduse kasutajaks.',
+	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
+
 	'MarkRead'					=> 'Mark all as read',
 	'CurrentTime'				=> 'current time',
 	'Created'					=> 'created',

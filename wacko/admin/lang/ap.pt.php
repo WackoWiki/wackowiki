@@ -29,9 +29,9 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'FormSave'					=> 'Save',
-	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Update',
+	'FormSave'					=> 'Guardar',
+	'FormReset'					=> 'Reiniciar',
+	'FormUpdate'				=> 'Atualizar',
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
@@ -49,10 +49,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
-	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
+	'Cancel'					=> 'Cancelar',
+	'Add'						=> 'Adicionar',
+	'Edit'						=> 'Editar',
+	'Remove'					=> 'Remover',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
 	'On'						=> 'on',
@@ -503,6 +503,8 @@ $ap_translation = [
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
 	'TermHumanModeration'		=> 'Term human moderation',
 	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
+
+	'UserCanDeleteAccount'		=> 'Os utilizadores podem eliminar as suas contas',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.',
@@ -1075,7 +1077,7 @@ $ap_translation = [
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'restore',
-	'BackupRemove'				=> 'remove',
+	'BackupRemove'				=> 'Remover',
 	'RestoreYes'				=> 'yes',
 	'RestoreNo'					=> 'no',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1085,7 +1087,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
+	'UserEditButton'			=> 'Editar',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user ',
@@ -1130,11 +1132,11 @@ $ap_translation = [
 	'GroupsDelete'				=> 'Are you sure you want to remove group ',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Cancel',
-	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Edit',
-	'GroupsRemoveButton'		=> 'Remove',
+	'GroupsSaveButton'			=> 'Enviar',
+	'GroupsCancelButton'		=> 'Cancelar',
+	'GroupsAddButton'			=> 'Adicionar',
+	'GroupsEditButton'			=> 'Editar',
+	'GroupsRemoveButton'		=> 'Remover',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'MembersAddNew'				=> 'Add new member',
