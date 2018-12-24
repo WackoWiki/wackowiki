@@ -218,6 +218,12 @@ $wacko_translation = [
 	'ACLCancelButton'			=> 'Annuler',
 	'ACLAccessDenied'			=> 'Vous n&rsquo;êtes pas le propriétaire de cette page.',
 	'AclSyntaxError'			=> 'Erreur de syntaxe dans la liste de contrôle d&rsquo;accès',
+	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
+									'<code>$</code> - only registered users<br>' .
+									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
+									'<code>[UserName]</code> - names of allowed users<br>' .
+									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
+									'<code>(an empty list)</code> - only the page owner has access',
 
 	// purge handler
 	'PurgePage'					=> 'Purger la page',
