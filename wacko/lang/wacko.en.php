@@ -387,7 +387,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions removed.',
-	'ActionHaveNoUndo'		=> 'This action cannot be undone.',
+	'ActionHaveNoUndo'			=> 'This action cannot be undone.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 

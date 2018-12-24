@@ -218,6 +218,12 @@ $wacko_translation = [
 	'ACLCancelButton'			=> 'Annuleren',
 	'ACLAccessDenied'			=> 'U ben niet de eigenaar van deze pagina.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
+	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
+									'<code>$</code> - only registered users<br>' .
+									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
+									'<code>[UserName]</code> - names of allowed users<br>' .
+									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
+									'<code>(an empty list)</code> - only the page owner has access',
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',
