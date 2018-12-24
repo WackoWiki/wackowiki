@@ -53,7 +53,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 	if ((!$error) || $this->is_admin() || !$this->db->captcha_registration)
 	{
 		// strip \-\_\'\.\/\\
-		$user_name	= str_replace(['-', '.', /* '/', */ "'", '\\', '_'], '', $user_name);
+		$user_name	= $this->sanitize_username($user_name);
 
 		// check if name is WikiName style
 		if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)

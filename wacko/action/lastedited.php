@@ -8,12 +8,14 @@ if (!defined('IN_WACKO'))
 
 	Last edited by: SomeUser (22.12.2018 13:08 ) fixed two typos
 
-	{{lastedit [label=0|1] [note=0|1]}}
+	{{lastedited [label=0|1] [note=0|1]}}
 
+	icon	= show icon
 	label	= show 'Last edited by:' label
 	note	= show edit note
 */
 
+if (!isset($icon))		$icon		= false;
 if (!isset($label))		$label		= true;
 if (!isset($note))		$note		= false;
 
@@ -41,7 +43,8 @@ if (($mtime = $this->page['modified']))
 	{
 		$tpl->label	= true;
 	}
-	else
+
+	if ($icon || !$label)
 	{
 		$tpl->icon	= true;
 	}

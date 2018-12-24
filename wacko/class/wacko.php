@@ -4577,6 +4577,12 @@ class Wacko
 		return null; // it's ok :)
 	}
 
+	function sanitize_username($user_name)
+	{
+		// strip \-\_\'\.\/\\
+		return str_replace(['-', '.', /* '/', */ "'", '\\', '_'], '', $user_name);
+	}
+
 	/**
 	* Check if text is WikiName
 	*
