@@ -497,6 +497,15 @@ $wacko_translation = [
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
 
+	'AccountDelete'				=> 'Delete account',
+	'AccountDeleteConfirm'		=> 'Are you sure you want to delete the account?',
+	'AccountDeleted'			=> 'Account successfully deleted',
+	'AccountDeleteHeader'		=> 'Delete account %1',
+	'AccountDeleteInfo'			=> 'Of the data you created (e.g. email, preferences, attachments, wiki entries) as much as possible will be deleted. Note however, that data like attachments and wiki entries can not be deleted without impeding the work of the other users. Such data is hence reassigned to an account called <code>Deleted user</code>. As the data of every deleted account is reassigned to this account it will not be possible to distinguish the data you created from the data of another deleted account.',
+	'AccountDeleteWarning'		=> 'Deleting the user account is an irreversible action.',
+	'AccountDeleteHint'			=> 'Your account will be deleted from the system. Therefore, you will no longer be able to log in with your current credentials. If you choose to become a user of this application again, you can do so by using the means this application grants.',
+	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
+
 	'MarkRead'					=> 'Mark all as read',
 	'CurrentTime'				=> 'It is currently',
 	'Created'					=> 'created',

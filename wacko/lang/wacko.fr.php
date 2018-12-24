@@ -497,6 +497,15 @@ $wacko_translation = [
 	'SomeoneCommented'			=> ' a commenté cette page que vous surveillez&nbsp;: ',
 	'AlertReferringPages'		=> 'Cette page est référencée depuis les pages suivantes ',
 
+	'AccountDelete'				=> 'Supprimer le compte',
+	'AccountDeleteConfirm'		=> 'Êtes-vous sûr de vouloir supprimer le compte ?',
+	'AccountDeleted'			=> 'Compte supprimé avec succès',
+	'AccountDeleteHeader'		=> 'Supprimer le compte %1',
+	'AccountDeleteInfo'			=> 'Les données que vous avez créées (e.g. e-mail, préférences, pièces jointes, entrées wiki) seront supprimées autant que possible. Notez toutefois que les données comme les pièces jointes et les entrées wiki ne peuvent pas être supprimées sans impacter le travail des autres utilisateurs. Ces données sont donc réaffectées à un compte appelé <code>Utilisateur supprimé</code>. Étant donné que les données de chaque compte supprimé sont réaffectées à ce compte, il ne sera plus possible de distinguer les données que vous avez créées de celles d\'un autre compte supprimé.',
+	'AccountDeleteWarning'		=> 'Supprimer votre compte d\'utilisateur est une action irréversible.',
+	'AccountDeleteHint'			=> 'Votre compte sera supprimé du système. Par conséquent, vous ne serez plus en mesure de vous identifier avec vos informations d\'identification actuelles. Vous pourrez choisir de redevenir un utilisateur de cette application en suivant les procédures habituelles.',
+	'AccountDeleteVerify'		=> 'Entrez votre login %1 pour vérifier la suppression. Une fois celui-ci soumis, vous devrez confirmer votre mot de passe.',
+
 	'MarkRead'					=> 'Marquer tout comme lu',
 	'CurrentTime'				=> 'heure actuelle',
 	'Created'					=> 'créé',
