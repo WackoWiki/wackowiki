@@ -4892,7 +4892,7 @@ class Wacko
 			&& !$this->bad_words($ref)
 			&& filter_var($ref, FILTER_VALIDATE_URL))
 		{
-			$heads		= ['https://' . $this->db->tls_proxy . '/', 'https://', 'http://'];
+			$heads		= ['https://', 'http://'];
 			$headless	= str_replace($heads, '', $ref);
 
 			if ($ref !== $headless) // if protocol known..

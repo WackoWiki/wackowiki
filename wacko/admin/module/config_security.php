@@ -47,7 +47,6 @@ function admin_config_security(&$engine, &$module)
 		$config['allow_email_reuse']			= (int) ($_POST['allow_email_reuse'] ?? 0);
 		$config['tls']							= (int) ($_POST['tls'] ?? 0);
 		$config['tls_implicit']					= (int) ($_POST['tls_implicit'] ?? 0);
-		$config['tls_proxy']					= trim((string) $_POST['tls_proxy']);
 		$config['pwd_admin_min_chars']			= (int) $_POST['pwd_admin_min_chars'];
 		$config['pwd_min_chars']				= (int) $_POST['pwd_min_chars'];
 		$config['pwd_char_classes']				= (int) $_POST['pwd_char_classes'];
@@ -254,18 +253,6 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<input type="checkbox" id="tls_implicit" name="tls_implicit" value="1"<?php echo ($engine->db->tls_implicit ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl_setting">
-				<td class="label">
-					<label for="tls_proxy"><strong><?php echo $engine->_t('TlsProxy');?>:</strong><br>
-					<small><?php echo $engine->_t('TlsProxyInfo');?></small></label>
-				</td>
-				<td>
-					<input type="text" maxlength="100" id="tls_proxy" name="tls_proxy" value="<?php echo Ut::html($engine->db->tls_proxy);?>">
 				</td>
 			</tr>
 			<tr class="hl_setting">

@@ -192,7 +192,7 @@ if ($upload_allowed)
 }
 
 // show form
-$tpl->title = Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', ''));
+$tpl->title		= Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', ''));
 
 $tpl->read		= Ut::html($read_acl['list']);
 $tpl->write		= Ut::html($write_acl['list']);

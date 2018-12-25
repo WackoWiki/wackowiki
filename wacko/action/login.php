@@ -57,7 +57,7 @@ if (($user = $this->get_user()))
 		'</code>' . "<br>\n";
 
 	// show traffic protection
-	if ($this->db->tls || $this->db->tls_proxy)
+	if ($this->db->tls)
 	{
 		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
