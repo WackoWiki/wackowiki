@@ -11,7 +11,6 @@ if (!defined('IN_WACKO'))
 //				  a comma-delimeted list of tag names of pages that must be
 //				  considered subforums, so topics under these cluster subpages
 //				  will not be displayed. tags must be absolute
-//					  ^^^ UNTESTED FUNCTIONALITY!!! ^^^
 
 if (!isset($pages))		$pages = '';
 
