@@ -3123,20 +3123,20 @@ class Wacko
 	// generate url for email confirmation, used for registration and email change
 	function user_email_confirm($user_id)
 	{
-		$confirm = Ut::random_token(21);
+		$token = Ut::random_token(21);
 
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .
-				"email_confirm = " . $this->db->q(hash_hmac('sha256', $confirm, $this->db->system_seed_hash)) . " " .
+				"email_confirm = " . $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash)) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
 
-		return $this->href('', '', ['confirm' => $confirm]);
+		return $this->href('', '', ['confirm' => $token]);
 	}
 
-	function user_email_confirm_check($code)
+	function user_email_confirm_check($token)
 	{
-		$hash = $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed_hash));
+		$hash = $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash));
 
 		if (($user = $this->db->load_single(
 			"SELECT user_name, email " .
