@@ -551,8 +551,7 @@ $ap_translation = [
 	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich!</span><br>Es legt auch fest, ob der Cookie Secure Flag gesetzt ist, der <code>secure</code> Flag definiert, ob Cookies nur über sichere Verbindungen geschickt werden sollen.',
 	'TlsImplicit'				=> 'TLS erzwingen',
 	'TlsImplicitInfo'			=> 'Erzwingt erneute Verbindung des Clients von HTTP zu HTTPS. Wenn die Option deaktiviert ist, kann der Client die die Webseite über einen verschlüsselten HTTPS-Kanal übertragen.',
-	'TlsProxy'					=> 'TLS-Proxy',
-	'TlsProxyInfo'				=> 'Verwendet diesen TLS-Proxy anstelle von TLS. z.B. https://<span class="cite">dein-https-proxy.tld</span> ohne Schrägstrich am Ende und ohne https://.',
+
 	'HttpSecurityHeaders'		=> 'HTTP-Security-Header',
 	'EnableSecurityHeaders'		=> 'Security-Header aktivieren',
 	'EnableSecurityHeadersinfo'	=> 'Aktiviert Security-Header (frame busting, clickjacking/XSS/CSRF-Schutz). <br> Diese Content Security Policy (CSP) kann in bestimmten Situationen (z. B. während der Entwicklung) oder bei Verwendung von Plugins, die auf extern gehostete Ressourcen wie Bilder oder Skripts angewiesen sind, Probleme verursachen. <br> Das Deaktivieren der CSP ist ein Sicherheitsrisiko!',

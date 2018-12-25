@@ -530,8 +530,7 @@ $ap_translation = [
 	'TlsConnectionInfo'			=> 'Использовать TLS-защищенное подключение. <span class="cite">Для активации требуется предварительная установка на сервер SSL-сертификата, иначе вы лишитесь доступа к административной панели!</span><br>Он также определяет, установлен ли защищенный флаг Cookie, the <code>secure</code> флаг указывает, должны ли cookies передаваться только через защищенное соединение.',
 	'TlsImplicit'				=> 'Принудительный TLS',
 	'TlsImplicitInfo'			=> 'Принудительно переподключать клиента c HTTP на HTTPS. При отключенной опции клиент может просматривать сайт по открытому HTTP-каналу.',
-	'TlsProxy'					=> 'TLS прокси',
-	'TlsProxyInfo'				=> 'Использовать указанный TLS прокси т.е. https://<span class="cite">your-https-proxy.tld</span> без конечного слэша и без https://.',
+
 	'HttpSecurityHeaders'		=> 'HTTP Security Headers',
 	'EnableSecurityHeaders'		=> 'Разрешить Security Headers',
 	'EnableSecurityHeadersinfo'	=> 'Set security headers (frame busting, clickjacking/XSS/CSRF protection). <br>CSP may cause issues in certain situations (e.g. during development), or when using plugins relying on externally hosted resources such as images or scripts. <br>Disabling Content Security Policy is a security risk !',

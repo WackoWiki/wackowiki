@@ -161,7 +161,6 @@ class Diag
 					echo "\t<li>IP-address: " . $http->ip . "</li>\n";
 					echo "\t<li>SERVER_PORT: " . $_SERVER['SERVER_PORT'] . "</li>\n";
 					echo "\t<li>TLS: " . (isset($config['tls']) ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>TLS Proxy: " . (!empty($config['tls_proxy']) ? $config['tls_proxy'] : 'false') . "</li>\n";
 					echo "\t<li>TLS implicit: " . (($config['tls_implicit'] == true) ? 'on' : 'off') . "</li>\n";
 					echo "\t<li>Cookie path: " . $config['cookie_path'] . "</li>\n";
 					// echo "\t<li>GZIP: " . (@extension_loaded('zlib') ? 'On' : 'Off') . "</li>\n";

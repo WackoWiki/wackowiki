@@ -46,7 +46,7 @@ class Http
 		if (!isset($this->db->open_url) && $this->db->tls)
 		{
 			$this->db->open_url		= $this->db->base_url;
-			$this->db->base_url		= str_replace('http://', 'https://' . ($this->db->tls_proxy? $this->db->tls_proxy . '/' : ''), $this->db->base_url);
+			$this->db->base_url		= str_replace('http://', 'https://', $this->db->base_url);
 			$this->db->rebase_url();
 		}
 	}
@@ -55,7 +55,7 @@ class Http
 	{
 		if ($this->db->tls && !$this->tls_session)
 		{
-			$this->redirect(str_replace('http://', 'https://' . ($this->db->tls_proxy? $this->db->tls_proxy . '/' : ''), $url));
+			$this->redirect(str_replace('http://', 'https://', $url));
 		}
 	}
 
@@ -715,11 +715,8 @@ class Http
 	// remove base_url's base from REQUEST_URI
 	private function request_uri()
 	{
-		$tls = $this->db->tls? $this->db->tls_proxy : '';
-
 		$base = parse_url($this->db->base_url);
 		$base = trim($base['path'], '/');
-		$base = $this->cut_prefix($tls, $base);
 
 		$uri = explode('?', $_SERVER['REQUEST_URI'], 2);
 		$path = rawurldecode($uri[0]); // %xx not yet decoded in REQUEST_URI
@@ -736,7 +733,6 @@ class Http
 
 		$path = trim($path, '/');
 
-		$path = $this->cut_prefix($tls, $path);
 		$path = $this->cut_prefix($base, $path);
 
 		isset($uri[1])  and  $path .= '?' . $uri[1];

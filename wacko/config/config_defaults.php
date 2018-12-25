@@ -42,7 +42,6 @@ $wacko_config_defaults = [
 	'rewrite_mode'					=> ($found_rewrite_extension ? 1 : 0),
 	'tls'							=> 0,
 	'tls_implicit'					=> 0,
-	'tls_proxy'						=> '',
 	'cookie_prefix'					=> '',
 
 	'reverse_proxy'					=> 0,
@@ -173,6 +172,7 @@ $wacko_config_defaults = [
 	'owners_can_change_categories'	=> 1,
 	'remove_onlyadmins'				=> 0,
 	'owners_can_remove_comments'	=> 1,
+	'user_can_delete_account'		=> 0,
 	'store_deleted_pages'			=> 1,
 	'default_rename_redirect'		=> 0,
 
