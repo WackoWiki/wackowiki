@@ -212,7 +212,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 								|| ($topic['owner_name'] != $user['user_name']
 									&& $topic['created'] > $user['last_mark']) ));
 
-				#$topic['description'] = Ut::html($topic['description']); -> [ ' topic.description | e ' ]
+				$topic['description'] = Ut::html($topic['description']); // replaces -> [ ' topic.description | e ' ]
 
 				if ($this->page['page_lang'] != $topic['page_lang'])
 				{
