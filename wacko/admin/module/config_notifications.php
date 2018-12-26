@@ -164,8 +164,11 @@ function admin_config_notifications(&$engine, &$module)
 					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ($engine->db->notify_comment == 2 ? ' checked' : '');?>><label for="notify_comment2"><?php echo $engine->_t('NotifyPending'); ?></label>
 				</td>
 			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
+			<tr class="hl_setting">
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('PersonalMessagesSection');?>
+				</th>
 			</tr>
 			<tr class="hl_setting">
 				<td class="label">

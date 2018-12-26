@@ -794,6 +794,8 @@ $ap_translation = [
 
 	'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
 	'NotifyUserAccountInfo'		=> 'Der Administrator wird benachrichtigt, wenn ein neuer Benutzer über das Anmelde-Formular erstellt wurde.',
+
+	'PersonalMessagesSection'	=> 'Persönliche Mitteilungen',
 	'AllowIntercomDefault'		=> 'Erlaube Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Ermöglicht das Senden von persönlichen Nachrichten an die E-Mail-Adresse des Empfänger ohne Offenlegung seiner Adresse.',
 	'AllowMassemailDefault'		=> 'Erlaube Rundmail',
