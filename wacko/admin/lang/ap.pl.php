@@ -541,7 +541,7 @@ $ap_translation = [
 	'TlsSection'				=> 'TLS Settings',
 	'TlsConnection'				=> 'TLS-Connection',
 	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server, otherwise you will lose access to the admin panel!</span><br>It also determines if the the Cookie Secure Flag is set, the <code>secure</code> flag specifies whether cookies should only be sent over secure connections.',
-	'TlsImplicit'				=> 'Forced TLS',
+	'TlsImplicit'				=> 'Mandatory TLS',
 	'TlsImplicitInfo'			=> 'Forcibly reconnect the client from HTTP to HTTPS. With the option disabled, the client can browse the site through an open HTTP channel.',
 
 	'HttpSecurityHeaders'		=> 'HTTP Security Headers',
