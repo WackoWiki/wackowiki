@@ -784,6 +784,8 @@ $ap_translation = [
 
 	'NotifyUserAccount'			=> 'Notify new user account',
 	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the "signup form".',
+
+	'PersonalMessagesSection'	=> 'Personal messages',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
 	'AllowMassemailDefault'		=> 'Allow Massemail',

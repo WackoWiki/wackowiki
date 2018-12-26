@@ -768,6 +768,8 @@ $ap_translation = [
 
 	'NotifyUserAccount'			=> 'Уведомление о регистрации нового пользователя',
 	'NotifyUserAccountInfo'		=> 'Отправлять Администратору уведомление о регистрации нового пользователя.',
+
+	'PersonalMessagesSection'	=> 'Личные сообщения',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
 	'AllowMassemailDefault'		=> 'Allow Massemail',
