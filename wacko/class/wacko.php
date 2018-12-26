@@ -3092,12 +3092,13 @@ class Wacko
 
 						if ($user['notify_comment'] == 2)
 						{
+							$this->set_language($lang, true, true);
 							$body .= $this->_t('FurtherPending') . "\n\n";
 						}
 					}
 					else
 					{
-						$subject = $this->_t('WatchedPageChanged') . "'" . $tag . "'";
+						$subject = $this->_t('WatchedPageChanged') . "'" . $title . "'";
 
 						$body .=
 								$this->_t('SomeoneChangedThisPage') . "\n" .
@@ -3109,6 +3110,7 @@ class Wacko
 
 						if ($user['notify_page'] == 2)
 						{
+							$this->set_language($lang, true, true);
 							$body .= $this->_t('FurtherPending') . "\n\n";
 						}
 					}
