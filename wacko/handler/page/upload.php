@@ -24,7 +24,6 @@ $clean_text = function ($string)
 
 $is_global		= '';
 $is_image		= '';
-$message		= '';
 $error			= '';
 $can_upload		= $this->can_upload();
 
@@ -116,6 +115,8 @@ if (isset($_POST['upload']) & $can_upload)
 
 			// TODO: check MIME for extension, e.g.
 			// File extension ".pdf" does not match the detected MIME type of the file (image/jpeg).
+
+			// user given file name
 			if (isset($_POST['file_dest_name']) && $_POST['file_dest_name'] != '')
 			{
 				$name = $_POST['file_dest_name'];
@@ -125,7 +126,10 @@ if (isset($_POST['upload']) & $can_upload)
 				$name	= implode('.', $_data);
 			}
 
-			$name	= str_replace('@', '_', $name);
+			// prepare for translit
+			$name	= str_replace(['@', '%20', '+'], '-', $name);
+			$name	= preg_replace('/[\r\n\t -]+/', '_', $name);
+			$name	= trim($name, ' .-_');
 
 			// here would be place for translit
 			$t_name = $this->format($name, 'translit');
@@ -157,7 +161,7 @@ if (isset($_POST['upload']) & $can_upload)
 			// TODO: check against file owner, Admin is always allowed
 			// + check for file / page owner
 			if (isset($_POST['file_overwrite'])
-				&& $this->check_file_record($t_name . '.' . $ext, $page_id))
+				&& $this->check_file_record($t_name . '.' . $ext, $page_id))	// ?????
 			{
 				$replace = true;
 			}

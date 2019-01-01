@@ -98,7 +98,7 @@ if ($logged_in)
 }
 
 // defining tabs constructor
-//		$image = 0 text only, 1 image only, 2 image and text
+//	$image = 0 text only, 1 image only, 2 image and text
 $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = null) use (&$tpl)
 {
 	$tpl->class = $tab_class ?: ('m-' . $method);
@@ -271,7 +271,7 @@ else
 	}
 
 	// upload tab
-	if (!$this->forum && $this->has_access('upload'))
+	if (!$this->forum && $this->can_upload())
 	{
 		$echo_tab('upload', 'UploadFiles', 'UploadFile', 2, '', 'u');
 	}
