@@ -252,7 +252,7 @@ else if (($user = $this->get_user()))
 		$tpl->validateip		= $user['validate_ip'];
 		$tpl->hidesession		= $user['hide_lastsession'];
 		$tpl->sessionlength		= $user['session_length'];
-		#$tpl->typografica		= $user['typografica'];
+		# $tpl->typografica		= $user['typografica'];
 
 		if ($this->db->publish_anonymously)
 		{
@@ -340,13 +340,13 @@ else if (($user = $this->get_user()))
 
 		if ($this->db->upload_quota_per_user)
 		{
-			$tpl->percentage =  round(($upload_quota / (($this->db->upload_quota_per_user) / 100)) ) . '%';
+			$tpl->percentage = round(($upload_quota / (($this->db->upload_quota_per_user) / 100)) ) . '%';
 		}
 
 		$tpl->userpage		= $this->href('', ($this->db->users_page . '/' . $user['user_name']));
 		$tpl->quota			= $this->binary_multiples($upload_quota, false, true, true);
 		$tpl->pages			= $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'pages');
-		#$tpl->revisions	= $this->href('', $this->db->users_page, 'profile=' . $user['user_name']);
+		# $tpl->revisions	= $this->href('', $this->db->users_page, 'profile=' . $user['user_name']);
 		$tpl->comments		= $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'comments');
 		$tpl->uploads		= $this->href('', $this->db->users_page, 'profile=' . $user['user_name'], '', 'uploads');
 

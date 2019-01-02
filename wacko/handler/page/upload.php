@@ -161,7 +161,7 @@ if (isset($_POST['upload']) & $can_upload)
 			// TODO: check against file owner, Admin is always allowed
 			// + check for file / page owner
 			if (isset($_POST['file_overwrite'])
-				&& $this->check_file_record($t_name . '.' . $ext, $page_id))	// ?????
+				&& $this->check_file_record($t_name . '.' . $ext, $page_id))
 			{
 				$replace = true;
 			}
@@ -261,7 +261,7 @@ if (isset($_POST['upload']) & $can_upload)
 
 						// replace option: keep old data if new entry is empty
 						$description	= substr($_POST['file_description'], 0, 250);
-						$description	= $clean_text((string) $description);
+						$description	= $this->sanitize_text_field((string) $description);
 						# $caption		= $clean_text((string) $_POST['caption']);
 
 						if ($replace)

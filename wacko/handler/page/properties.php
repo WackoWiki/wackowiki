@@ -47,11 +47,11 @@ if (@$_POST['_action'] === 'general_properties')
 			"theme				= " . ($this->db->q(($_POST['theme']) ?? '')) . ", " .
 			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
-			# "menu_tag			= " . $this->db->q(Ut::html(trim($_POST['menu_tag']))) . ", " .
-			# "show_menu_tag		= " . $this->db->q((int) $_POST['show_menu_tag']) . ", " .
-			"title				= " . $this->db->q(trim($_POST['title'])) . ", " .
-			"keywords			= " . $this->db->q(trim($_POST['keywords'])) . ", " .
-			"description		= " . $this->db->q(trim($_POST['description'])) . " " .
+			# "menu_tag			= " . $this->db->q($this->sanitize_text_field($_POST['menu_tag'], true)) . ", " .
+			# "show_menu_tag	= " . (int) $_POST['show_menu_tag'] . ", " .
+			"title				= " . $this->db->q($this->sanitize_text_field($_POST['title'], true)) . ", " .
+			"keywords			= " . $this->db->q($this->sanitize_text_field($_POST['keywords'], true)) . ", " .
+			"description		= " . $this->db->q($this->sanitize_text_field($_POST['description'], true)) . " " .
 		"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 		"LIMIT 1");
 }
@@ -127,12 +127,6 @@ else
 			$tpl->categories_html = $categories;
 		}
 
-		/*
-			<input type="text" id="menu_tag" name="menu_tag" value="' . ($this->page['menu_tag'] ?? '') . '" size="60" maxlength="100">
-			'<input type="radio" id="menu_tag_on" name="show_menu_tag" value="1" ' . ($this->page['show_menu_tag'] ? 'checked ' : '' ) . '/><label for="menu_tag_on">' . $this->_t('MetaOn') . "</label>" .
-			'<input type="radio" id="menu_tag_off" name="show_menu_tag" value="0" ' . ( !$this->page['show_menu_tag'] ? 'checked ' : '' ) . '/><label for="menu_tag_off">' . $this->_t('MetaOff') . "</label>" .
-		 */
-
 		$langs = $this->available_languages();
 
 		if (!($clang = $this->page['page_lang']) || !isset($langs[$clang]))
@@ -199,7 +193,7 @@ if ($this->is_owner() || $this->is_admin())
 	$tpl->perm_i	= true;
 }
 
-// Remove link (shows only for page owner if allowed)
+// Remove link (shows only for page owner if allowed or Admin)
 if (($this->is_owner() && !$this->db->remove_onlyadmins) || $this->is_admin())
 {
 	$tpl->remove_i = true;
