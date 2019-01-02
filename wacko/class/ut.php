@@ -546,6 +546,19 @@ class Ut
 		return str_replace('&amp;', '&', $text);
 	}
 
+	static function strip_all_tags($string, $remove_nl = false)
+	{
+		$string = preg_replace('@<(script|style)[^>]*?>.*?</\\1>@si', '', $string);
+		$string = strip_tags($string);
+
+		if ($remove_nl)
+		{
+			$string = preg_replace('/[\r\n\t ]+/', ' ', $string);
+		}
+
+		return trim($string);
+	}
+
 	static function strip_spaces($text)
 	{
 		return str_replace([' ', "\t", "\r", "\n", "\x0b", "\0"], '', (string) $text);
