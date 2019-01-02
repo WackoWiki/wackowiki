@@ -2137,6 +2137,8 @@ class Wacko
 			$body_r			= $this->compile_body($body, $page_id, $paragrafica, false);
 			$body_toc		= $this->body_toc ?? null;
 
+			$edit_note		= $this->sanitize_text_field($edit_note, true);
+
 			// review
 			if (isset($reviewed))
 			{
@@ -2268,7 +2270,7 @@ class Wacko
 						"depth			= " . (int) $depth . ", " .
 						"owner_id		= " . (int) $owner_id . ", " .
 						"user_id		= " . (int) $user_id . ", " .
-						"title			= " . $this->db->q($title) . ", " .
+						"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
 						"tag			= " . $this->db->q($tag) . ", " .
 						"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
 						"body			= " . $this->db->q($body) . ", " .
@@ -2379,8 +2381,8 @@ class Wacko
 							"modified		= UTC_TIMESTAMP(), " .
 							"owner_id		= " . (int) $owner_id . ", " .
 							"user_id		= " . (int) $user_id . ", " .
-							"title			= " . $this->db->q($title) . ", " .
-							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc )) . ", " .
+							"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
+							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ?: $desc)) . ", " .
 							"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
 							"body			= " . $this->db->q($body) . ", " .
 							"body_r			= " . $this->db->q($body_r) . ", " .
@@ -4577,6 +4579,21 @@ class Wacko
 		}
 
 		return null; // it's ok :)
+	}
+
+	/**
+	 * Sanitize a string
+	 *
+	 * @param string $string String to sanitize.
+	 * @param bool $keep_nl optional Whether to keep newlines. Default: false.
+	 *
+	 * @return string Sanitized string.
+	 */
+	function sanitize_text_field($string, $keep_nl = false )
+	{
+		$filtered = Ut::strip_all_tags($string, $keep_nl);
+
+		return $filtered;
 	}
 
 	function sanitize_username($user_name)

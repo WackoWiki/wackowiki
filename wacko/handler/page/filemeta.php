@@ -343,7 +343,7 @@ else
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
 				$description	= substr($_POST['file_description'], 0, 250);
-				$description	= $clean_text((string) $description);
+				$description	= $this->sanitize_text_field((string) $description, true);
 				$caption		= $clean_text((string) $_POST['caption']);
 				$license_id		= $_POST['license'] ?? 0;
 				$file_lang		= $_POST['file_lang'] ?? $file['file_lang'];
