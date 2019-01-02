@@ -87,6 +87,7 @@ define('WACKO_VERSION',					'5.5.7');
 define('HTML_ENTITIES_CHARSET',			'ISO-8859-1');		// ISO-8859-1, cp1251
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 
+define('WACKO_ENV',						1);					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
 define('HTML_FILTERING',				null);				// safehtml, htmlpurifier
 
 define('ACTION4DIFF',					'anchor, toc');		// allowed actions in DIFF
