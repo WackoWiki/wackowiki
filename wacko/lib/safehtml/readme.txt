@@ -1,6 +1,6 @@
 SafeHTML
 --------
-Version 1.3.10.
+Version 1.3.11.
 https://wackowiki.org/doc/Dev/Projects/SafeHTML
 --------
 
@@ -30,12 +30,15 @@ when SAFEHTML will be updated.
 --------
 Version history:
 --------
-1.3.10.
+1.3.11.
  * added HTML5 Block-level elements
-1.3.9.
+1.3.10.
  * Replaced preg_replace() e modifier with preg_replace_callback
-1.3.8.
+1.3.9.
  * UTF-7 XSS vulnerability fixed
+1.3.8.
+ * Allowed tags with setAllowTags() method.
+ * AllowTags can be disabled using resetAllowTags()
 1.3.7.
  * Added 'dl' to the list of 'lists' tags.
  * Added 'callto' to the white list of protocols.
