@@ -39,7 +39,7 @@ require_once(XML_HTMLSAX3 . 'HTMLSax3.php');
  *
  * <b>Example:</b>
  * <pre>
- * $parser = new HTML_Safe;
+ * $parser = new SafeHTML;
  * $result = $parser->parse($doc);
  * </pre>
  */
@@ -261,18 +261,24 @@ class SafeHTML
 	public function __construct()
 	{
 		//making regular expressions based on Proto & CSS arrays
-		foreach ($this->blackProtocols as $proto) {
+		foreach ($this->blackProtocols as $proto)
+		{
 			$preg = "/[\s\x01-\x1F]*";
-			for ($i=0; $i<strlen($proto); $i++) {
+
+			for ($i = 0; $i < strlen($proto); $i++)
+			{
 				$preg .= $proto{$i} . "[\s\x01-\x1F]*";
 			}
+
 			$preg .= ":/i";
 			$this->protoRegexps[] = $preg;
 		}
 
-		foreach ($this->cssKeywords as $css) {
+		foreach ($this->cssKeywords as $css)
+		{
 			$this->cssRegexps[] = '/' . $css . '/i';
 		}
+
 		return true;
 	}
 
@@ -606,7 +612,7 @@ class SafeHTML
 	 *
 	 * Example:
 	 * <pre>
-	 * $safe = new HTML_Safe;
+	 * $safe = new SafeHTML;
 	 * $safe->setAllowTags(['body']);
 	 * </pre>
 	 *
