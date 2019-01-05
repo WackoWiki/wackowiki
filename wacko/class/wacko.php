@@ -2776,19 +2776,21 @@ class Wacko
 
 		$save = $this->set_language($user['user_lang'], true, true);
 
-		$email_to	=	$user['email'];
-		$name_to	=	$user['user_name'];
-		$subject	=	'[' . $this->db->site_name . '] ' . $subject;
-		$body		=	$this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
+		$email_to	= $user['email'];
+		$name_to	= $user['user_name'];
+		$prefix		= '[' . $this->db->site_name . '] ';	// TODO: add option for custom prefix
 
-						Ut::amp_decode($body) . "\n\n" .
+		$subject	= $prefix . $subject;
+		$body		= $this->_t('EmailHello') . $user['user_name'] . ",\n\n" .
 
-						$this->_t('EmailDoNotReply') . "\n\n" .
-						# $this->_t('EmailGoodbye') . "\n" .
-						$this->db->site_name . "\n" .
-						$this->db->base_url;
+					Ut::amp_decode($body) . "\n\n" .
 
-		$charset	=	$this->get_charset($user['user_lang']);
+					$this->_t('EmailDoNotReply') . "\n\n" .
+					# $this->_t('EmailGoodbye') . "\n" .
+					$this->db->site_name . "\n" .
+					$this->db->base_url;
+
+		$charset	= $this->get_charset($user['user_lang']);
 		# Diag::dbg('ORANGE', $user['user_name'], $user['user_lang'], $charset);
 
 		$this->set_language($save, true);

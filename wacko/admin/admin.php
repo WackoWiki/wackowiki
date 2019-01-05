@@ -243,9 +243,9 @@ foreach ($module as $row)
 		{
 			continue;
 		}
-	}
 
-	$category = $row['cat'];
+		$category = $row['cat'];
+	}
 }
 
 $menu .= "</ul>\n</li>\n</ul>";

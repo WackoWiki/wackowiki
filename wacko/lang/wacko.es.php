@@ -549,7 +549,7 @@ $wacko_translation = [
 
 	'UserSettings'				=> 'Configuración de usuario',
 	'UserSettingsGeneral'		=> 'General',
-	'UserSettingsNotifications'	=> 'Notifications',
+	'UserSettingsNotifications'	=> 'Notificaciones',
 
 	'NotifyMinorEdit'			=> 'Notificar tambén modificación menor',
 	'NotifyPageEdit'			=> 'Edit',

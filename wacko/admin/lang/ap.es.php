@@ -106,7 +106,7 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
+		'name'		=> 'Notificaciones',
 		'title'		=> 'configuración de notificationes',
 	],
 

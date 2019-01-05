@@ -505,6 +505,17 @@ footer {
 	background-color: #E7F9FF;
 }
 
+/* comments and files actions (only visible on hover) */
+.comment nav,
+.upload nav {
+	visibility: hidden;
+}
+
+.comment:hover nav,
+.upload tr:hover nav {
+	visibility: visible;
+}
+
 /* Comment author and date */
 .comment-info {
 	color: #AAAAAA;
