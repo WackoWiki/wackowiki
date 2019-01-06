@@ -70,7 +70,7 @@ first really BIG template written
 			[= not _ =
 				<table class="formation">
 					<tr>
-						<td colspan="2" class="t_center">
+						<td colspan="2" class="t-center">
 							<em>[ ' _t: UsersPMNotLoggedIn ' ]</em>
 						</td>
 					</tr>
@@ -88,7 +88,7 @@ first really BIG template written
 					<table class="formation">
 						[= disabled _ =
 							<tr>
-								<td colspan="2" class="t_center">
+								<td colspan="2" class="t-center">
 									<strong><em>[ ' _t: UsersIntercomDisabled ' ]</em></strong>
 								</td>
 							</tr>
@@ -132,7 +132,7 @@ first really BIG template written
 		[= pages _ =
 			<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
 			['' pagination '']<br>
-			<ul class="ul_list lined">
+			<ul class="ul-list lined">
 				[= li _ =
 					<li><small>[ ' created | time_formatted ' ]</small>  &mdash; [ ' link ' ]</li>
 				=]
@@ -148,7 +148,7 @@ first really BIG template written
 			[ ''' none UsersNA2 ''' ]
 			[= c _ =
 				[ ''' pagination ''' ]<br>
-				<ul class="ul_list lined">
+				<ul class="ul-list lined">
 					[= li _ =
 						<li><small>[ ' created | time_formatted ' ]</small> &mdash; [ ' link ' ]</li>
 					=]
@@ -163,7 +163,7 @@ first really BIG template written
 				[ ''' none UsersNA2 ''' ]
 				[= u2 _ =
 					[ ''' pagination ''' ]<br>
-					<ul class="ul_list lined">
+					<ul class="ul-list lined">
 						[= li _ =
 							<li>
 								<small>[ ' t | time_formatted ' ]</small>
@@ -234,7 +234,7 @@ first really BIG template written
 		<tbody>
 		[= none _ =
 			<tr>
-				<td colspan="5" class="t_center" style="padding: 10px;">
+				<td colspan="5" class="t-center" style="padding: 10px;">
 					<small><em>[ ' _t: UsersNoMatching ' ]</em></small>
 				</td>
 			</tr>
@@ -242,13 +242,13 @@ first really BIG template written
 		[= u _ =
 			<tr>
 				<td style="padding-left:5px;">[ ' link ' ]</td>
-				<td class="t_center">[ ' user.total_pages | number 0 , . ' ]</td>
-				<td class="t_center">[ ' user.total_comments | number 0 , . ' ]</td>
-				<td class="t_center">[ ' user.total_revisions | number 0 , . ' ]</td>
+				<td class="t-center">[ ' user.total_pages | number 0 , . ' ]</td>
+				<td class="t-center">[ ' user.total_comments | number 0 , . ' ]</td>
+				<td class="t-center">[ ' user.total_revisions | number 0 , . ' ]</td>
 				[= reg _ =
-					<td class="t_center">[ ' user.total_uploads | number 0 , . ' ]</td>
-					<td class="t_center">[ ' user.signup_time | time_formatted ' ]</td>
-					<td class="t_center">[ ' sess lastSession ' ]</td>
+					<td class="t-center">[ ' user.total_uploads | number 0 , . ' ]</td>
+					<td class="t-center">[ ' user.signup_time | time_formatted ' ]</td>
+					<td class="t-center">[ ' sess lastSession ' ]</td>
 				=]
 			</tr>
 		=]

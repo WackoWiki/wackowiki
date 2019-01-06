@@ -210,7 +210,7 @@ class Polls
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">' .
 					'<tr><th>' . $this->engine->_t('PollsError') . '</th></tr>' .
-					'<tr><td class="t_center"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
+					'<tr><td class="t-center"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
 					'</table>';
 		}
 		else
@@ -218,7 +218,7 @@ class Polls
 			$poll	= $this->engine->form_open('poll', ['page_method' => $tag, 'href_param' => '#poll-results' . $poll_id.'_form']) .
 					'<input type="hidden" name="poll" value="' . $poll_id . '">' .
 					'<table id="poll-vote' . $poll_id . '_form" class="formation">' . "\n" .
-					'<tr><th colspan="2" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#' . ((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
+					'<tr><th colspan="2" class="t-left">' . date('d/m', strtotime($header['start'])) . ' (#' . ((int) $poll_id) . '): ' . $header['text'] . '</th></tr>' . "\n";
 
 			foreach ($vars as $var)
 			{
@@ -227,7 +227,7 @@ class Polls
 								? '<input type="checkbox" id="' . $var['v_id'] . '" name="' . $var['v_id'] . '" value="1">'
 								: '<input type="radio" id="' . $var['v_id'] . '" name="id" value="' . $var['v_id'] . '">') .
 							'</td>' .
-						'<td class="t_left" style="width:95%;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>' . "\n";
+						'<td class="t-left" style="width:95%;"><label for="' . $var['v_id'] . '">' . $var['text'] . '</label></td></tr>' . "\n";
 			}
 
 			$poll	.= '<tr><td colspan="2"><small>' . $this->engine->_t('PollsLasts') . ': ' . $duration.
@@ -262,19 +262,19 @@ class Polls
 		{	// non-existent or not moderated poll
 			$poll	= '<table class="formation">' .
 					'<tr><th>' . $this->engine->_t('PollsError') . '</th></tr>' .
-					'<tr><td class="t_center"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
+					'<tr><td class="t-center"><em>' . $this->engine->_t('PollsNotExists') . '</em></td></tr>' .
 					'</table>';
 		}
 		else
 		{
 			$poll	= $this->engine->form_open() .
 					'<table id="poll-results' . $poll_id . '_form" class="formation">' .
-					'<tr><th colspan="3" class="t_left">' . date('d/m', strtotime($header['start'])) . ' (#' . ((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
+					'<tr><th colspan="3" class="t-left">' . date('d/m', strtotime($header['start'])) . ' (#' . ((int) $poll_id) . '): ' . $header['text'] . '</th></tr>';
 
 			foreach ($vars as $var)
 			{
 				$percent = ($total == 0 ? 0 : round($var['votes'] / $total * 100, 1));
-				$poll	.= '<tr class="lined"><td class="t_left" style="width:95%;">' . $var['text'] . '</td>' .
+				$poll	.= '<tr class="lined"><td class="t-left" style="width:95%;">' . $var['text'] . '</td>' .
 						'<td>&nbsp;<strong>' . $var['votes'] . '</strong>&nbsp;</td>' .
 						'<td>&nbsp;<strong>' . $percent . '%</strong></td></tr>';
 			}

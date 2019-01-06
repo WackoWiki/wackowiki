@@ -140,7 +140,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>' .
 					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '"> ' .
-					'<a href="' . rawurldecode($engine->href('', '', $mode_http)) . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '"></a>' .
+					'<a href="' . rawurldecode($engine->href('', '', $mode_http)) . '" class="btn-link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '"></a>' .
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();
@@ -161,7 +161,7 @@ function admin_content_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>' . $engine->_t('PollsCurrent') . '</th></tr>';
-			echo '<tr><td class="t_center"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
+			echo '<tr><td class="t-center"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
 		}
 		else
 		{
@@ -201,7 +201,7 @@ function admin_content_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>' . $engine->_t('PollsModeration') . '</th></tr>';
-			echo '<tr><td class="t_center"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
+			echo '<tr><td class="t-center"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
 		}
 		else
 		{
@@ -212,7 +212,7 @@ function admin_content_polls(&$engine, &$module)
 				echo '<tr>';
 					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:80%;">' . $row['text'] . '</td>';
-					echo '<td class="a_top">' . $row['user_name'] . '</td>';
+					echo '<td class="a-top">' . $row['user_name'] . '</td>';
 				echo '</tr>';
 				echo '<tr>';
 					$vars	= $polls_obj->get_poll_vars($row['poll_id']);
@@ -225,7 +225,7 @@ function admin_content_polls(&$engine, &$module)
 					}
 
 					echo '</table></td>';
-					echo '<td class="t_left a_top">' .
+					echo '<td class="t-left a-top">' .
 						($row['plural'] == 1 ? $engine->_t('PollsPlural') : $engine->_t('PollsSingular')) . '</td>';
 				echo '</tr>';
 			}
@@ -252,7 +252,7 @@ function admin_content_polls(&$engine, &$module)
 		if (empty($list))
 		{
 			echo '<tr><th>' . $engine->_t('PollsEnded') . '</th></tr>';
-			echo '<tr><td class="t_center"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
+			echo '<tr><td class="t-center"><em>' . $engine->_t('PollsEmptyList') . '</em></td></tr>';
 		}
 		else
 		{

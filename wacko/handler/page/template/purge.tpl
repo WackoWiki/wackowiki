@@ -34,7 +34,7 @@
 			=]
 			<br>
 			<input type="submit" id="submit" name="submit" value="[ ' _t: PurgeButton ' ]">
-			<a href="[ ' href: properties ' ]" class="btn_link">
+			<a href="[ ' href: properties ' ]" class="btn-link">
 				<input type="button" id="button" value="[ ' _t: EditCancelButton ' ]">
 			</a>
 			<br>

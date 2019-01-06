@@ -6,7 +6,7 @@
 		<section class="news">
 			<h1>[ ' title ' ]</h1>
 			[= xml =
-				<span class="desc_rss_feed">
+				<span class="desc-rss-feed">
 					<a href="[ ' href ' ]">
 						<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: NewsXMLTip ' ]" alt="XML" class="btn-feed">
 					</a>

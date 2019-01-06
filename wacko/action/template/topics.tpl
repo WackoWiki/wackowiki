@@ -40,15 +40,15 @@
 							=]
 							<strong>[ ' title ' ]</strong>
 						</td>
-						<td class="t_center nowrap">
+						<td class="t-center nowrap">
 							<small title="[ ' ip ' ]">
 								&nbsp;&nbsp;[ ' owner ' ]&nbsp;&nbsp;<br>
 								&nbsp;&nbsp;[ ' topic.created | time_formatted ' ]&nbsp;&nbsp;
 							</small>
 						</td>
-						<td class="t_center"><small>[ ' topic.comments | number 0 , . ' ]</small></td>
-						<td class="t_center"><small>[ ' topic.hits | number 0 , . ' ]</small></td>
-						<td class="t_center">
+						<td class="t-center"><small>[ ' topic.comments | number 0 , . ' ]</small></td>
+						<td class="t-center"><small>[ ' topic.hits | number 0 , . ' ]</small></td>
+						<td class="t-center">
 							[= c =
 								<small[ ' style ' ] title="[ ' ip ' ]">
 									[ ' user ' ]<br>

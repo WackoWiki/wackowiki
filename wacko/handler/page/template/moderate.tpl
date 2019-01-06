@@ -16,7 +16,7 @@
 				<tr><td>
 					<em>[ ' text ' ]</em><br>
 					<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-					<a href="[ ' href: moderate ' ]" class="btn_link">
+					<a href="[ ' href: moderate ' ]" class="btn-link">
 						<input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]">
 					</a>
 				</td></tr>
@@ -38,7 +38,7 @@
 							=]
 						</select>
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
-						<a href="[ ' href: moderate ' ]" class="btn_link">
+						<a href="[ ' href: moderate ' ]" class="btn-link">
 							<input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]">
 						</a>
 				</td></tr>
@@ -55,7 +55,7 @@
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title ' ]">
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
-						<a href="[ ' href: moderate ' ]" class="btn_link">
+						<a href="[ ' href: moderate ' ]" class="btn-link">
 							<input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]">
 						</a>
 						[= onlyone _ =
@@ -82,7 +82,7 @@
 							=]
 						</select>
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
-						<a href="[ ' href: moderate ' ]" class="btn_link">
+						<a href="[ ' href: moderate ' ]" class="btn-link">
 							<input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]">
 						</a>
 					</td>
@@ -118,7 +118,7 @@
 
 					[= n _ =
 						<tr class="lined">
-							<td class="label a_middle">
+							<td class="label a-middle">
 								<input type="checkbox" name="[ ' pageid ' ]" value="id" [ ' set | checkbox ' ]>
 							</td>
 							<td>
@@ -127,9 +127,9 @@
 								=]
 								[ ' moderate ' ] <strong>[ ' topic ' ]</strong>
 							</td>
-							<td class="t_center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' user ' ]&nbsp;&nbsp;</small></td>
-							<td class="t_center"><small>[ ' comments | number 0 , . ' ]</small></td>
-							<td class="t_center nowrap"><small>&nbsp;&nbsp;[ ' created | time_formatted ' ]</small></td>
+							<td class="t-center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' user ' ]&nbsp;&nbsp;</small></td>
+							<td class="t-center"><small>[ ' comments | number 0 , . ' ]</small></td>
+							<td class="t-center nowrap"><small>&nbsp;&nbsp;[ ' created | time_formatted ' ]</small></td>
 						</tr>
 					=]
 
@@ -151,7 +151,7 @@
 					<td>
 						<em>[ ' text ' ]</em><br>
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
-						<a href="[ ' href: moderate ' ]" class="btn_link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
+						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
 					</td>
 				</tr>
 			</table><br>
@@ -174,7 +174,7 @@
 								=]
 							</select> or <input type="text" name="cluster" size="50" maxlength="250"><br>
 							<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-							<a href="[ ' href: moderate ' ]" class="btn_link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
+							<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
 						</td>
 					</tr>
 				</table><br>
@@ -191,7 +191,7 @@
 						<em>[ ' text ' ]</em><br>
 						<input type="text" name="cluster" size="50" maxlength="250">
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
-						<a href="[ ' href: moderate ' ]" class="btn_link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
+						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
 					</td></tr>
 				</table><br>
 			=]
@@ -207,7 +207,7 @@
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title ' ]"> 
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-						<a href="[ ' href: moderate ' ]" class="btn_link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
+						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
 					</td>
 				</tr>
 			</table><br>
@@ -223,7 +223,7 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-						<a href="[ ' href: moderate ' ]" class="btn_link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
+						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
 					</td>
 				</tr>
 			</table><br>
@@ -241,7 +241,7 @@
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value=""> 
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-						<a href="[ ' href: moderate ' ]" class="btn_link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
+						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
 						<br>
 						<small>
 						<input type="radio" name="scheme" value="after" id="after" [ ' after | checkbox ' ]> 
@@ -309,15 +309,15 @@
 			</tr>
 			[= n _ =
 				<tr class="lined">
-					<td class="label a_middle">
+					<td class="label a-middle">
 						<input type="checkbox" name="[ ' comment.page_id ' ]" value="id" [ ' set | checkbox ' ]>
 					</td>
 					<td>
 						<strong>[ ' clink ' ]</strong>
 						<br>[ ' desc ' ]
 					</td>
-					<td class="t_center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' ulink ' ]&nbsp;&nbsp;</small></td>
-					<td class="t_center nowrap"><small>&nbsp;&nbsp; [ ' comment.created | time_formatted ' ]</small></td>
+					<td class="t-center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' ulink ' ]&nbsp;&nbsp;</small></td>
+					<td class="t-center nowrap"><small>&nbsp;&nbsp; [ ' comment.created | time_formatted ' ]</small></td>
 				</tr>
 			=]
 		=]

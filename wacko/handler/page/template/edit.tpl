@@ -20,7 +20,7 @@
 				=]
 				[ '' buttons '' ]
 				<br>
-				<noscript><div class="errorbox_js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
+				<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
 				[= e _ =
 					<br>
 					<label for="page_title">[ ' label ' ]</label><br>
@@ -84,6 +84,6 @@
 [= buttons =]
 <input type="submit" class="OkBtn_Top" name="save" value="[ ' _t: EditStoreButton ' ]">&nbsp;
 <input type="submit" class="OkBtn_Top" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
-<a href="[ ' href: ' ]" class="btn_link"><input type="button" class="CancelBtn_Top" value="[ ' _t: EditCancelButton ' ]"></a>
+<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn_Top" value="[ ' _t: EditCancelButton ' ]"></a>
 
 	

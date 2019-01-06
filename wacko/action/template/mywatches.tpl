@@ -8,10 +8,10 @@
 		<em>[ ' text ' ]</em>
 	=]
 	[= w =
-		<table class="category_browser">
+		<table class="category-browser">
 			<tr>
 				<td>
-					<ul class="ul_list">
+					<ul class="ul-list">
 					[= page _ =
 						<li><strong>[ ' ch | e ' ]</strong>
 							<ul>
@@ -30,7 +30,7 @@
 						</ul>
 					</td>
 					<td>
-						<ul class="ul_list">
+						<ul class="ul-list">
 					=]
 								=]
 							[= e _ =

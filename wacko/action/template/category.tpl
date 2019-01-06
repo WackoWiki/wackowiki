@@ -27,7 +27,7 @@
 		[= ml _ =
 			<form action="[ ' href: ' ]" method="post" name="category_lang">
 				[ ' csrf: category_lang ' ]
-				<p class="t_right">
+				<p class="t-right">
 					[ ' lang ' ]
 					<input type="submit" name="update" id="submit" value="[ ' _t: UpdateButton ' ]">
 				</p>
@@ -39,10 +39,10 @@
 					<span>[ ' _t: Categories ' ] [ ' cluster ' ] [ ' link ' ]:</span>
 				</p>
 		=]
-		<table class="category_browser">
+		<table class="category-browser">
 			<tr>
 				<td>
-					<ul class="ul_list lined">
+					<ul class="ul-list lined">
 						[= l _ =
 							<li>
 								[ ' link ' ]
@@ -60,7 +60,7 @@
 								</ul>
 							</td>
 							<td>
-								<ul class="ul_list lined">
+								<ul class="ul-list lined">
 							=]
 						=]
 					</ul>

@@ -196,11 +196,11 @@ if ($can_view)
 	{
 		if ($table)
 		{
-			echo '<table class="t_center" style="width:100%;">';
+			echo '<table class="t-center" style="width:100%;">';
 		}
 		else
 		{
-			echo '<div class="gallery t_center">' . "\n";
+			echo '<div class="gallery t-center">' . "\n";
 		}
 
 		foreach ($files as $file)
@@ -303,7 +303,7 @@ if ($can_view)
 					echo '<tr>';
 				}
 
-				echo '<td class="t_center">';
+				echo '<td class="t-center">';
 			}
 			else
 			{
@@ -380,7 +380,7 @@ if ($can_view)
 			</figcaption>
 		</figure> */
 
-		echo '<div id="' . $param_token . '" class="t_center">';
+		echo '<div id="' . $param_token . '" class="t-center">';
 
 		if (count($file) > 0)
 		{

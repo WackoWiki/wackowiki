@@ -106,7 +106,7 @@
 		</li>
 	=]
 	[= droptab _ =
-		<li class="dropdown"><a href="#" id="handler-more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown_arrow">&#9660;</span></a>
+		<li class="dropdown"><a href="#" id="handler-more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown-arrow">&#9660;</span></a>
 			<ul class="dropdown_menu">
 				['' tab TabList '']
 				['' // last empty '']
@@ -116,7 +116,7 @@
 	=]
 
 	<li class="search">
-	<div id="search_box">
+	<div id="search-box">
 		<form action="[ ' search ' ]" method="get" name="search">
 			[ ' // search | hide_page ' ]
 			[ ' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 ' ]

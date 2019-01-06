@@ -8,10 +8,10 @@
 
 	<strong>[ ' title ' ]</strong><br><br>
 
-	<ul class="ul_list lined">
+	<ul class="ul-list lined">
 		[= l _ =
 			<li>
-				<span class="list_count">[ ' count ' ]</span>
+				<span class="list-count">[ ' count ' ]</span>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				[ ' site ' ]
 			</li>

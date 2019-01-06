@@ -7,6 +7,6 @@
 	<h3>[ ' _t: UploadFiles ' ]</h3>
 	[ ' upload ' ]
 	<br><br>
-	<a href="[ ' href: ' ]" class="btn_link">
+	<a href="[ ' href: ' ]" class="btn-link">
 		<input type="button" value="[ ' _t: CancelDifferencesButton ' ]">
 	</a>

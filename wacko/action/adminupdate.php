@@ -226,13 +226,13 @@ if ($this->is_admin())
 			foreach ($_acls as $_acl)
 			{
 				echo $_acl['privilege'] . '<br>';
-				// get object_right_id (e.g. 'write' -> 1, 'read' -> 2)
-				$_object_right_id = $this->db->load_single(
-					"SELECT object_right_id " .
+				// get object-right_id (e.g. 'write' -> 1, 'read' -> 2)
+				$_object-right_id = $this->db->load_single(
+					"SELECT object-right_id " .
 					"FROM " . $this->db->table_prefix . "acl_right " .
-					"WHERE object_right = '{$_acl['privilege']}'
+					"WHERE object-right = '{$_acl['privilege']}'
 					");
-				$object_right_id = $_object_right_id['object_right_id'];
+				$object-right_id = $_object-right_id['object-right_id'];
 
 				// get object_type_id (e.g. 'page' -> 1) / there is only 'page' so far
 				$_object_type_id = $this->db->load_single(
@@ -244,8 +244,8 @@ if ($this->is_admin())
 
 				// INSERT rights in 'acl' table
 				$sql =	"INSERT INTO " . $this->db->table_prefix . "acl
-						(object_id, object_type_id, object_right_id)
-						VALUES ('{$_acl['page_id']}', '{$object_type_id}', '{$object_right_id}')";
+						(object_id, object_type_id, object-right_id)
+						VALUES ('{$_acl['page_id']}', '{$object_type_id}', '{$object-right_id}')";
 
 				$this->db->sql_query($sql);
 
@@ -255,7 +255,7 @@ if ($this->is_admin())
 					"FROM " . $this->db->table_prefix . "acl " .
 					"WHERE object_id = '{$_acl['page_id']}' " .
 						"AND object_type_id = '{$object_type_id}' " .
-						"AND object_right_id = '{$object_right_id}'
+						"AND object-right_id = '{$object-right_id}'
 					");
 				$acl_id = $acl_id['acl_id'];
 

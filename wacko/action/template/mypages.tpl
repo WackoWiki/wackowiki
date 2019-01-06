@@ -11,7 +11,7 @@
 
 		[''' // pagination ''']
 
-		<ul class="ul_list">
+		<ul class="ul-list">
 			[= page _ =
 				<li><strong>[ ' day ' ][ ' char ' ]</strong>
 					<ul>

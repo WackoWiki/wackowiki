@@ -274,12 +274,15 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<div id="pane">
 			<div class="left"></div>
 			<div class="middle">
-				<a href="<?php echo $engine->href(); ?>">
-				<?php
-					# echo '<img src="' . rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
-				?>
-					<img src="<?php echo rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, 'wacko_logo.png'); ?>" alt="WackoWiki" width="108" height="50">
-				</a>
+				<h1>
+					<a href="<?php echo $engine->href(); ?>">
+					<?php
+						echo '<img src="' . rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
+						# echo '<img src="' . rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
+						# echo $engine->_t('AdminPanel');
+						?>
+					</a>
+				</h1>
 			</div>
 			<div id="tools">
 				<span>

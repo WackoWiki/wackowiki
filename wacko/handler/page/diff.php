@@ -86,7 +86,7 @@ if ($page_a && $page_b
 		$out = '<div class="diffdown">' . "\n"; //<button class="diffbtn">';
 		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : '')) . '">' .
 				$this->get_time_formatted($page['modified']) .
-				' <span class="dropdown_arrow">&#9660;</span></a>' . "\n";
+				' <span class="dropdown-arrow">&#9660;</span></a>' . "\n";
 		//$out .= '</button><div class="diffdown-content">';
 		$out .= '<div class="diffdown-content">' . "\n";
 

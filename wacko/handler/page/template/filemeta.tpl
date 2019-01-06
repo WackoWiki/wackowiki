@@ -8,7 +8,7 @@
 			<h4>[ ' link ' ]</h4>
 			<form action="[ ' href: filemeta ' ]" method="post" name="remove_file">
 			[ ' csrf: remove_file ' ]
-			<table class="upload tbl_fixed">
+			<table class="upload tbl-fixed">
 				<tr>
 					<th scope="row">[ ' _t: FileDesc ' ]:</th>
 					<td>[ ' file.file_description ' ]</td>
@@ -56,7 +56,7 @@
 
 			<input type="submit" class="OkBtn" name="submit" value="[ ' _t: RemoveButton ' ]">
 			&nbsp;
-			<a href="[ ' href: ' ]" class="btn_link">
+			<a href="[ ' href: ' ]" class="btn-link">
 				<input type="button" class="CancelBtn" value="[ ' _t: EditCancelButton ' ]">
 			</a>
 			<br>
@@ -80,7 +80,7 @@
 			[= i _ =
 				<span class="show-image"><a href="[ ' href ' ]">[ ' image ' ]</a></span>
 			=]
-			<table class="upload tbl_fixed">
+			<table class="upload tbl-fixed">
 				<tr>
 					<th scope="row">[ ' _t: FileSyntax ' ]:</th>
 					<td><code>[ ' syntax ' ]</code></td>
@@ -148,7 +148,7 @@
 			</table>
 
 			<br>
-			<a href="[ ' href: ' ]" class="btn_link">
+			<a href="[ ' href: ' ]" class="btn-link">
 				<input type="button" value="[ ' _t: CancelDifferencesButton ' ]">
 			</a>
 			<br>
@@ -191,7 +191,7 @@
 				<input type="hidden" name="file_id" value="[ ' fileid ' ]">
 				<input type="submit" class="OkBtn" name="submit" value="[ ' _t: EditStoreButton ' ]">
 				&nbsp;
-				<a href="[ ' href: ' ]" class="btn_link">
+				<a href="[ ' href: ' ]" class="btn-link">
 					<input type="button" class="CancelBtn" value="[ ' _t: EditCancelButton ' ]">
 				</a>
 				<br>

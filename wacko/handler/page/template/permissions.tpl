@@ -1,18 +1,19 @@
 [ === main === ]
 
 	<h3>[ ' title ' ]</h3>
-	<aside>[ ' _t: AclHelp ' ]</aside>
+	
+	<div class="">
 	<form action="[ ' href: permissions ' ]" method="post" name="set_permissions">
 		[ ' csrf: set_permissions ' ]
-		<input type="checkbox" id="massacls" name="massacls">
-		<label for="massacls">[ ' _t: AclForEntireCluster ' ]</label>
+		
 		<br>
-		<table class="form_tbl lined">
+		<table class="form-tbl lined">
 			<colgroup>
-				<col span="1" width="30%">
+				<col span="1" width="10%">
 				<col span="1" width="70%">
 			</colgroup>
 			<tbody>
+				
 				<tr>
 					<th scope="row">
 						<label for="read_acl">[ ' _t: ACLRead ' ]</label>
@@ -57,6 +58,21 @@
 				=]
 				<tr>
 					<th scope="row">
+					</th>
+					<td>
+						<input type="checkbox" id="massacls" name="massacls">
+						<label for="massacls">[ ' _t: AclForEntireCluster ' ]</label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
+					</th>
+					<td>
+						<div class="hint">[ ' _t: AclHelp ' ]</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">
 						<label for="new_owner_id">[ ' _t: SetOwner ' ]</label>
 					</th>
 					<td>
@@ -68,12 +84,16 @@
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<th scope="row">
+					</th>
+					<td>
+						<br>
+						<input type="submit" class="OkBtn" id="submit" value="[ ' _t: ACLStoreButton ' ]" accesskey="s"> &nbsp;
+						<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" id="button" value="[ ' _t: ACLCancelButton ' ]"/></a>
+					</td>
+				</tr>
 			</tbody>
 		</table>
-		<div class="cssform">
-			<p>
-				<input type="submit" class="OkBtn" id="submit" value="[ ' _t: ACLStoreButton ' ]" accesskey="s"> &nbsp;
-				<a href="[ ' href: ' ]" class="btn_link"><input type="button" class="CancelBtn" id="button" value="[ ' _t: ACLCancelButton ' ]"/></a>
-			</p>
 		</div>
 	</form>

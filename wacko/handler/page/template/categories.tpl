@@ -31,7 +31,7 @@
 							<label for="group0">[ ' _t: CategoriesAddGroupedNo ' ]</label><br><br>
 						=]
 						<input type="submit" id="submit" name="create" value="[ ' _t: CategoriesSaveButton ' ]">
-						<a href="[ ' href: categories ' ]" class="btn_link">
+						<a href="[ ' href: categories ' ]" class="btn-link">
 							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
 						</a>
 					</td>
@@ -50,7 +50,7 @@
 						<label for="new_name">[ ' newname ' ]</label>
 						<input type="text" name="category" id="new_name" value="[ ' category | e attr ' ]" size="40" maxlength="100">
 						<input type="submit" name="rename" id="submit_new_name" value="[ ' _t: CategoriesSaveButton ' ]">
-						<a href="[ ' href: categories ' ]" class="btn_link">
+						<a href="[ ' href: categories ' ]" class="btn-link">
 							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
 						</a>
 						<br><small>[ ' _t: CategoriesRenameInfo ' ]</small>
@@ -75,7 +75,7 @@
 							=]
 						</select>
 						<input type="submit" id="submit" name="ugroup" value="[ ' _t: CategoriesSaveButton ' ]">
-						<a href="[ ' href: categories ' ]" class="btn_link">
+						<a href="[ ' href: categories ' ]" class="btn-link">
 							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
 						</a>
 						<br><small>[ ' _t: CategoriesGroupInfo ' ]</small>
@@ -94,7 +94,7 @@
 					<td>
 						<label for="">[ ' category ' ]</label> 
 						<input type="submit" id="submit_delete" name="delete" value="[ ' _t: DeleteText ' ]">
-						<a href="[ ' href: categories ' ]" class="btn_link">
+						<a href="[ ' href: categories ' ]" class="btn-link">
 							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
 						</a>
 						<br><small>[ ' _t: CategoriesDeleteInfo ' ]</small>

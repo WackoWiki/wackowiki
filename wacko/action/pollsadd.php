@@ -255,7 +255,7 @@ else if ($stop_mod !== true)
 	echo '<table id="pollsadd_form" class="formation">';
 	echo '<tr>';
 		echo '<th>' . $this->_t('PollsTopic') . ':</th>';
-		echo '<td class="t_left"><input type="text" name="topic" size="70" maxlength="250" value="' . $topic . '"></td>';
+		echo '<td class="t-left"><input type="text" name="topic" size="70" maxlength="250" value="' . $topic . '"></td>';
 	echo '</tr>';
 
 	// fill out survey answers
@@ -292,7 +292,7 @@ else if ($stop_mod !== true)
 	echo '<input type="submit" name="submit_poll" id="submit" value="' . $this->_t('PollsSubmit') . '"> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn_link"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"></a>' : '') .
+		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn-link"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"></a>' : '') .
 			($admin ? '&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked ' : ' ') . '> ' .
 			'<label for="startmod">' . $this->_t('PollsStartMod') . '</label>' : '') .
 			'</td></tr>';

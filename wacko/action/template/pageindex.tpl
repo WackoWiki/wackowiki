@@ -2,7 +2,7 @@
 [ === main ===]
 	[''' pagination ''']
 	[= letter _ =
-		<ul class="ul_letters">
+		<ul class="ul-letters">
 		[= l _ =
 			[ ' commit | void  // alternation hack ' ]
 				[= active _ =
@@ -18,7 +18,7 @@
 	[= nopages _ =
 		[ ' _t: NoPagesFound ' ]
 	=]
-	<ul class="ul_list">
+	<ul class="ul-list">
 	[= page _ =
 		<li><strong>[ ' ch | e ' ]</strong>
 			<ul>

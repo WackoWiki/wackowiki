@@ -4,7 +4,7 @@
 		<small><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 	=]
 	[= xml =
-		<span class="desc_rss_feed">
+		<span class="desc-rss-feed">
 			<a href="[ ' href ' ]">
 				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: CommentsXMLTip ' ]" alt="XML" class="btn-feed">
 			</a>
@@ -15,7 +15,7 @@
 		[ ' _t: NoRecentlyCommented ' ]
 	=]
 	[''' pagination ''']
-	<ul class="ul_list">
+	<ul class="ul-list">
 		[= page _ =
 			<li><strong>[ ' day ' ]</strong>
 				<ul>
