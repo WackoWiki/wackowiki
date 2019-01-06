@@ -182,7 +182,7 @@ if ($can_view)
 	if ($picture)
 	{
 		$path1 = 'file:/';
-		$style = 'upload tbl_fixed';
+		$style = 'upload tbl-fixed';
 	}
 	else
 	{

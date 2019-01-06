@@ -101,13 +101,13 @@ function admin_db_restore(&$engine, &$module)
 					 '<td>
 							<table>
 								<tr>' .
-									'<td class="label a_middle" style="width:10px;">' .
+									'<td class="label a-middle" style="width:10px;">' .
 									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . (in_array($log['pack'], $set) ? ' checked' : '') . '>
 									#</td>' .
 									#'<td style="width:10px;">' .
 									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 									'</td>
-									<th class="t_left nowrap">' .
+									<th class="t-left nowrap">' .
 										date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
 									'</th>
 								</tr>
@@ -129,7 +129,7 @@ function admin_db_restore(&$engine, &$module)
 					// description
 					echo '<td><table>';
 						// cluster root
-						echo '<tr><th colspan="3" class="t_left nowrap">' .
+						echo '<tr><th colspan="3" class="t-left nowrap">' .
 								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
@@ -216,7 +216,7 @@ function admin_db_restore(&$engine, &$module)
 						'<input type="hidden" name="start" value="true">' . "\n" .
 						'<label for="">' . $engine->_t('ConfirmDbRestore') . ' \'<code>' . Ut::html($backup_id) . '</code>\'?</label> ' .
 						'<input type="submit" id="submit" name="restore" value="' . $engine->_t('RestoreYes') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
+						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
 						'<br><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
 
 				echo '<br><br>
@@ -398,7 +398,7 @@ function admin_db_restore(&$engine, &$module)
 			'<div class="warning">' .
 				'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . Ut::html($backup_id) . '</code>\'?</label> ' .
 				'<input type="submit" id="submit" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
-				'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
+				'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
 				'<br><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
 			'</div>
 			<br>';
@@ -486,13 +486,13 @@ function admin_db_restore(&$engine, &$module)
 						echo '<td>
 								<table>
 									<tr>' .
-										'<td class="label a_middle" style="width:10px;">' .
+										'<td class="label a-middle" style="width:10px;">' .
 										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '>
 										#</td>' .
 										#'<td style="width:10px;">' .
 											'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 										'</td>
-										<th class="t_left nowrap">' .
+										<th class="t-left nowrap">' .
 											date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
 										'</th>
 									</tr>
@@ -520,7 +520,7 @@ function admin_db_restore(&$engine, &$module)
 						// description
 						echo '<td><table>';
 							// cluster root
-							echo '<tr><th colspan="3" class="t_left nowrap">' .
+							echo '<tr><th colspan="3" class="t-left nowrap">' .
 									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents

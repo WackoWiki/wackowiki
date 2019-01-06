@@ -545,29 +545,29 @@ p.layout-box span {
 }
 
 /* lists */
-.ul_list, .revisions {
+.ul-list, .revisions {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_list ul {
+.ul-list ul {
 	list-style-type: none;
 	padding-left: 20px;
 }
 
-.ul_letters {
+.ul-letters {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_letters ul {
+.ul-letters ul {
 	list-style: none outside none;
 	margin: 0;
 	padding: 0;
 }
-.ul_letters li {
+.ul-letters li {
 	border-left: 1px dotted #AAAAAA;
 	float: left;
 	line-height: 1.2em;
@@ -576,7 +576,7 @@ p.layout-box span {
 	white-space: nowrap;
 }
 
-.ul_letters li.active   {
+.ul-letters li.active   {
 	/*background: #CCFFCC;
 
 */}
@@ -595,7 +595,7 @@ p.layout-box span {
 	letter-spacing: 1px;
 }
 
-.desc_rss_feed {
+.desc-rss-feed {
 	float:right;
 	margin-right:20px;
 }

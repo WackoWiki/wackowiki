@@ -344,7 +344,7 @@ float: right;
 }
 
 /* also used at sidebar */
-.bookmark_remove img {
+.bookmark-remove img {
 	background-image: url(./../icon/bookmark-remove.svg);
 	background-repeat: no-repeat;
 	height: 16px;
@@ -1230,13 +1230,13 @@ background-repeat: no-repeat;
 	
 }
 
-#page .ul_letters {
+#page .ul-letters {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-#page .ul_letters li {
+#page .ul-letters li {
 	display: inline;
 	padding-right: 4px;
 }
@@ -1946,14 +1946,6 @@ p.layout-box span {
 	height: 50px;
 }
 
-.cssform span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px;
-	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-
 .hint {
 	border: 1px solid #ffee66;
 	width: 400px;
@@ -2000,21 +1992,12 @@ p.layout-box span {
 	height: 150px;
 }
 
-#cssform1 span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: 0; /*
-	margin-left: -155px; width of left column*/
-	width: 150px;
-	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-
-.form_tbl {
+.form-tbl {
 	width: 100%;
 }
 
-.form_tbl td,
-.form_tbl th {
+.form-tbl td,
+.form-tbl th {
 	padding: 3px;
 	margin: 0;
 }
@@ -2064,7 +2047,7 @@ th.form_left {
 	border-bottom: 1px dotted;
 }
 
-.feed_element_title {
+.feed-element-title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background-color: transparent;
 	background-repeat: no-repeat;
@@ -2109,45 +2092,45 @@ th.form_left {
 	font-weight: bold;
 }
 
-#search_results li {
+#search-results li {
 	margin: 1em 0;
 }
 
-#search_results li div { /*padding-left: 20px;*/
+#search-results li div { /*padding-left: 20px;*/
 	
 }
 
-#search_results h3 {
+#search-results h3 {
 	font-size: 14px;
 	border-bottom-width: 0;
 	border-bottom-style: none;
 }
 
 /* lists */
-.ul_list,
+.ul-list,
 .revisions {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_list ul {
+.ul-list ul {
 	list-style-type: none;
 	padding-left: 20px;
 }
 
-.ul_letters {
+.ul-letters {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_letters ul {
+.ul-letters ul {
 	list-style: none outside none;
 	margin: 0;
 	padding: 0;
 }
-.ul_letters li {
+.ul-letters li {
 	border-left: 1px dotted #AAAAAA;
 	float: left;
 	line-height: 1.2em;
@@ -2156,7 +2139,7 @@ th.form_left {
 	white-space: nowrap;
 }
 
-.ul_letters li.active   {
+.ul-letters li.active   {
 	background: #CCFFCC;
 
 }
@@ -2174,10 +2157,10 @@ th.form_left {
 	background: #CCFFCC;
 }
 
-.page_settings {
+.page-settings {
 	float: left;
 }
-.page_tools {
+.page-tools {
 	float: right;
 	padding: 0 40px 10px 10px;
 	
@@ -2323,7 +2306,7 @@ tr.formation th {
 	font-style: italic;
 }
 
-.desc_rss_feed {
+.desc-rss-feed {
 	float: right;
 	margin-right: 20px;
 }

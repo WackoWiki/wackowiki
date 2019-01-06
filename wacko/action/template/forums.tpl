@@ -19,7 +19,7 @@
 			[= f =
 				<tbody>
 					<tr>
-						<td class="a_top">
+						<td class="a-top">
 							[= closed =
 								<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">'
 							=]
@@ -29,10 +29,10 @@
 							<strong>[ ' link ' ]</strong><br>
 							<small>[ ' description ' ]</small>
 						</td>
-						<td class="t_center">&nbsp;[ ' counter.topics_total | number 0 , . ' ]&nbsp;&nbsp;</td>
-						<td class="t_center">&nbsp;[ ' counter.posts_total | number 0 , . ' ]&nbsp;&nbsp;</td>
+						<td class="t-center">&nbsp;[ ' counter.topics_total | number 0 , . ' ]&nbsp;&nbsp;</td>
+						<td class="t-center">&nbsp;[ ' counter.posts_total | number 0 , . ' ]&nbsp;&nbsp;</td>
 							[= c =
-								<td class="a_top">
+								<td class="a-top">
 									<small>
 										<a href="[ ' href ' ]">[ ' title ' ]</a><br>
 										[ ' user ' ] ([ ' comment.created | time_formatted ' ])
@@ -53,7 +53,7 @@
 			<small><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 		=]
 		[= xml =
-			<span class="desc_rss_feed">
+			<span class="desc-rss-feed">
 				<a href="[ ' href ' ]">
 					<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: CommentsXMLTip ' ]" alt="XML" class="btn-feed">
 				</a>

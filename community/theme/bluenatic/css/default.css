@@ -527,12 +527,7 @@ width:0;
 	width: 250px;
 	height: 150px;
 }
-.cssform span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
+
 .hint{
 	border: 1px solid #ffee66;
 	width: 400px;
@@ -572,13 +567,6 @@ width:0;
 	width: 250px;
 	height: 150px;
 }
-#cssform1 span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: 0; /*
-	margin-left: -155px; width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
 
 /* feed action */
 .feed {
@@ -591,7 +579,7 @@ width:0;
 .feed .note a {
 	color: #777;
 }
-.feed_element_title {
+.feed-element-title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background-color:transparent;
 	background-repeat:no-repeat;
@@ -608,7 +596,7 @@ width:0;
 	padding-right:20px;
 }
 
-.desc_rss_feed {
+.desc-rss-feed {
 	float:right;
 	margin-right:20px;
 }

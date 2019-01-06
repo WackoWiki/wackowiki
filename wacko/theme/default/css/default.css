@@ -691,25 +691,25 @@ fieldset {
 }
 
 /* replaces inline CSS */
-.t_center {
+.t-center {
 	text-align: center;
 }
-.t_right {
+.t-right {
 	text-align: right;
 }
-.t_left {
+.t-left {
 	text-align: left;
 }
 
-.a_top {
+.a-top {
 	vertical-align: top;
 }
 
-.a_middle {
+.a-middle {
 	vertical-align: middle;
 }
 
-a.btn_link {
+a.btn-link {
 	text-decoration: none;
 }
 
@@ -725,7 +725,7 @@ a.btn_link {
 	width: 100%;
 }
 
-.tbl_fixed
+.tbl-fixed
 {
 	table-layout: fixed;
 }
@@ -1091,14 +1091,6 @@ a:target {
 	height: 50px;
 }
 
-.cssform span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px;
-	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-
 /* cssform1 for actions */
 #cssform1 {
 	padding: 10px;
@@ -1132,35 +1124,26 @@ a:target {
 	height: 150px;
 }
 
-#cssform1 span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: 0; /*
-	margin-left: -155px; width of left column*/
-	width: 150px;
-	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
-
-.form_tbl {
+.form-tbl {
 	width: 100%;
 }
 
-.form_tbl td,
-.form_tbl th {
+.form-tbl td,
+.form-tbl th {
 	padding: 3px;
 	margin: 0;
 }
 
-.form_tbl td {
+.form-tbl td {
 	text-align: left;
 	vertical-align: top;
 }
 
-.form_tbl td label {
+.form-tbl td label {
 	color: #666666;
 }
 
-.form_tbl th {
+.form-tbl th {
 	color: #444444;
 	font-weight: bold;
 	text-align: right;
@@ -1191,7 +1174,7 @@ a:target {
 	border-bottom: 1px dotted;
 }
 
-.feed_element_title {
+.feed-element-title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background: transparent no-repeat 0 1px;
 	padding-left: 0;
@@ -1204,7 +1187,7 @@ a:target {
 }
 
 /* search action */
-.search_meta {
+.search-meta {
 	color: #808080; 
 	line-height: 1.24; 
 	white-space: nowrap;
@@ -1293,7 +1276,7 @@ a:target {
 	color: #FF0000;
 }
 
-#search_box {
+#search-box {
 	margin: 0 auto 0;
 	overflow: hidden;
 	float: right;
@@ -1301,7 +1284,7 @@ a:target {
 	position: relative;
 }
 
-#search_box label {
+#search-box label {
 	display: none;
 }
 
@@ -1391,44 +1374,44 @@ a:target {
 	font-weight: bold;
 }
 
-#search_results li {
+#search-results li {
 	margin: 1em 0;
 }
 
-#search_results li div {
+#search-results li div {
 	/*padding-left: 20px;*/
 }
 
-#search_results h3 {
+#search-results h3 {
 	font-size: 14px;
 	border-bottom: 0 none;
 }
 
 /* lists */
-.ul_list,
+.ul-list,
 .revisions {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_list ul {
+.ul-list ul {
 	list-style-type: none;
 	padding-left: 20px;
 }
 
-.ul_letters {
+.ul-letters {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_letters ul {
+.ul-letters ul {
 	list-style: none outside none;
 	margin: 0;
 	padding: 0;
 }
-.ul_letters li {
+.ul-letters li {
 	border-left: 1px dotted #AAAAAA;
 	float: left;
 	line-height: 1.2em;
@@ -1437,7 +1420,7 @@ a:target {
 	white-space: nowrap;
 }
 
-.ul_letters li.active   {
+.ul-letters li.active   {
 	background: #CCFFCC;
 
 }
@@ -1469,11 +1452,11 @@ li.lined:hover {
 	background: #CCFFCC;
 }
 
-.page_settings {
+.page-settings {
 	float: left;
 	width: 60%;
 }
-.page_tools {
+.page-tools {
 	float: right;
 	padding: 0 10px 10px 10px;
 }
@@ -1749,7 +1732,7 @@ table.formation td {
 	background: none repeat scroll 0 0 transparent;
 }
 
-.dropdown_arrow {
+.dropdown-arrow {
 	font-size: 85%;
 	text-decoration: none;
 }
@@ -1802,12 +1785,12 @@ table.formation td {
 #page-handler #more-icon {
 }
 
-.page_handler{
+.page-handler{
 	list-style: none;
 }
 
-.page_handler img,
-.page_handler a img,
+.page-handler img,
+.page-handler a img,
 #page-handler img,
 #page-handler a img,
 #page-handler span img {
@@ -1816,7 +1799,7 @@ table.formation td {
 	width: 16px;
 }
 
-.page_handler img {
+.page-handler img {
 	padding: 2px 5px 2px 0;
 }
 
@@ -1878,7 +1861,7 @@ li.m-source img {
 	background: url('./../icon/text.svg') no-repeat;
 }
 
-.desc_rss_feed {
+.desc-rss-feed {
 	float: right;
 	margin-right: 20px;
 }
@@ -1975,7 +1958,7 @@ li.m-source img {
 	width: 16px;
 	display: inline-block;
 }
-.btn-add_page {
+.btn-add-page {
 	background: url('./../icon/page-add.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
@@ -2050,7 +2033,7 @@ li.m-source img {
 	font-weight: 600;
 }
 
-.list_count {
+.list-count {
 	text-align: right; 
 	width: 30px; 
 	float: left; 
@@ -2086,7 +2069,7 @@ ul.upload ul {
 	overflow-wrap: break-word;
 }
 
-.info_title {
+.info-title {
 	display: block;
 	float: left;
 	text-align: left;
@@ -2177,7 +2160,7 @@ table.forum td {
 }
 
 /* noscript ------------- */
-.errorbox_js {
+.errorbox-js {
 	border: 1px solid red;
 	font-family: "Courier New",Courier,monospace;
 	margin: 0.5em 0;
@@ -2187,7 +2170,7 @@ table.forum td {
 
 
 /* category handles ------------- */
-.set_category {
+.set-category {
 	border: 1px solid #eeeeee;
 /*	font-size:11px; */
 	max-height: 400px;
@@ -2197,16 +2180,16 @@ table.forum td {
 	width: auto;
 }
 
-.set_category legend {
+.set-category legend {
 	color: #444444;
 }
 
-.category_browser {
+.category-browser {
 	width: 100%;
 }
 
 /* TODO: vertical-align: middle; for input and label */
-.category_browser td {
+.category-browser td {
 	vertical-align: top;
 }
 
@@ -2215,13 +2198,13 @@ table.forum td {
 	color: #767676;
 }
 
-.hide_radio input[type="radio"] {
+.hide-radio input[type="radio"] {
 	visibility: hidden;
 	/* display: none; */
 }
 
-.hide_radio li:hover input[type="radio"], 
-.hide_radio li input[type="radio"]:checked
+.hide-radio li:hover input[type="radio"], 
+.hide-radio li input[type="radio"]:checked
 {
 	visibility: visible;
 	/* display: inline; */

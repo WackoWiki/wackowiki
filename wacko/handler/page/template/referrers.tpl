@@ -11,7 +11,7 @@
 	
 	[''' pagination ''']
 	
-	<ul class="ul_list">
+	<ul class="ul-list">
 		[= p _ =
 			<li><strong>[ ' link ' ]</strong> ([ ' num ' ])
 				<ul class="lined">

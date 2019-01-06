@@ -62,7 +62,7 @@
 						<script src="[ ' db: base_url ' ]js/wikiedit.js"></script>
 						<script src="[ ' db: base_url ' ]js/autocomplete.js"></script>
 						
-						<noscript><div class="errorbox_js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
+						<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
 						<label for="addcomment_title">[ ' _t: AddCommentTitle ' ]</label><br>
 						<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="[ ' title | e attr ' ]"><br>
 						<br>

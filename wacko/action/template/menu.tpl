@@ -33,7 +33,7 @@
 							=]
 							<label for="menu_item[ ' menuid ' ]" title="[ ' title ' ]">&raquo; [ ' tag ' ]</label>
 						</td>
-						<td class="t_center">
+						<td class="t-center">
 							<input type="checkbox" id="menu_item[ ' menuid ' ]" name="delete_[ ' menuid ' ]">
 						</td>
 					</tr>

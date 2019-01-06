@@ -46,7 +46,7 @@
 			=]
 			<br>
 			<input type="submit" class="OkBtn" name="submit" value="[ ' _t: RemoveButton ' ]"> &nbsp;
-			<a href="[ ' href: ' ]" class="btn_link">
+			<a href="[ ' href: ' ]" class="btn-link">
 				<input type="button" class="CancelBtn" value="[ ' _t: EditCancelButton ' ]">
 			</a>
 			<br>

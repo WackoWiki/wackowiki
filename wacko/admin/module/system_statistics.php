@@ -40,10 +40,10 @@ function admin_system_statistics(&$engine, &$module)
 	<table style="max-width:500px;" class="formation">
 		<tr>
 			<th style="width:50px;"><?php echo $engine->_t('DbTable');?></th>
-			<th class="t_left"><?php echo $engine->_t('DbRecords');?></th>
-			<th class="t_left"><?php echo $engine->_t('DbSize');?></th>
-			<th class="t_left"><?php echo $engine->_t('DbIndex');?></th>
-			<th class="t_left"><?php echo $engine->_t('DbOverhead');?></th>
+			<th class="t-left"><?php echo $engine->_t('DbRecords');?></th>
+			<th class="t-left"><?php echo $engine->_t('DbSize');?></th>
+			<th class="t-left"><?php echo $engine->_t('DbIndex');?></th>
+			<th class="t-left"><?php echo $engine->_t('DbOverhead');?></th>
 		</tr>
 <?php
 	$results	= $engine->db->load_all("SHOW TABLE STATUS FROM `{$engine->db->database_database}`", true);
@@ -91,8 +91,8 @@ function admin_system_statistics(&$engine, &$module)
 	<table style="max-width:300px;" class="formation">
 		<tr>
 			<th style=""><?php echo $engine->_t('FileFolder');?></th>
-			<th class="t_left"><?php echo $engine->_t('FileFiles');?></th>
-			<th class="t_left"><?php echo $engine->_t('FileSize');?></th>
+			<th class="t-left"><?php echo $engine->_t('FileFiles');?></th>
+			<th class="t-left"><?php echo $engine->_t('FileSize');?></th>
 		</tr>
 <?php
 	clearstatcache();

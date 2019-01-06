@@ -29,7 +29,6 @@ function admin_db_convert(&$engine, &$module)
 
 	$scheme		= [];
 	$getstr		= '';
-	$elements	= '';
 	$sql		= '';
 	$sql_log	= [];
 
@@ -182,7 +181,7 @@ function admin_db_convert(&$engine, &$module)
 				<table style="max-width:250px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 					<tr>
 						<th style="width:50px;" colspan="2"><a href="<?php echo $engine->href('', '') . $getstr . ((isset($scheme['all']) && $scheme['all']) == 1 ? '&all=0' : '&all=1'); ?>"><?php echo $engine->_t('EngineTable');?></a></th>
-						<th class="t_left"><?php echo $engine->_t('EngineTyp');?></th>
+						<th class="t-left"><?php echo $engine->_t('EngineTyp');?></th>
 					</tr>
 <?php
 				foreach ($results as $table)
@@ -252,9 +251,9 @@ function admin_db_convert(&$engine, &$module)
 			<table style="max-width:500px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
 				<tr>
 					<th style="width:50px;"><?php echo $engine->_t('EngineTable');?></th>
-					<th class="t_left"><?php echo $engine->_t('EngineColumn');?></th>
-					<th class="t_left"><?php echo $engine->_t('EngineTyp');?></th>
-					<th class="t_left"><?php echo $engine->_t('EngineDefault');?></th>
+					<th class="t-left"><?php echo $engine->_t('EngineColumn');?></th>
+					<th class="t-left"><?php echo $engine->_t('EngineTyp');?></th>
+					<th class="t-left"><?php echo $engine->_t('EngineDefault');?></th>
 				</tr>
 		<?php
 			foreach ($results as $table)

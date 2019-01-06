@@ -92,7 +92,7 @@ else
 	}
 	else
 	{
-		$class = ' class="feed_element_title"';
+		$class = ' class="feed-element-title"';
 
 		if ($title != 'no')
 		{

@@ -232,12 +232,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	width: 250px;
 	height: 150px;
 }
-.cssform span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: -155px; /*width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
+
 .hint{
 	border: 1px solid #ffee66;
 	width: 400px;
@@ -277,13 +272,6 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	width: 250px;
 	height: 150px;
 }
-#cssform1 span.site_count {
-	font-weight: normal;
-	float: left;
-	margin-left: 0; /*
-	margin-left: -155px; width of left column*/
-	width: 150px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
-}
 
 /* feed action */
 .feed {
@@ -296,7 +284,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 .feed .note a {
 	color: #777;
 }
-.feed_element_title {
+.feed-element-title {
 	/* We're going to add some space next to the titles so we can fit the 16x16 favicon image. */
 	background-color:transparent;
 	background-repeat:no-repeat;
@@ -313,7 +301,7 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	padding-right:20px;
 }
 
-.desc_rss_feed {
+.desc-rss-feed {
 	float:right;
 	margin-right:20px;
 }
@@ -330,13 +318,13 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	padding: 0;
 }
 
-.ul_letters {
+.ul-letters {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_letters li {
+.ul-letters li {
 	float: left;
 	line-height: 1.2em;
 	margin: 0 0.5em 0 -0.5em;
@@ -348,13 +336,13 @@ p.layout-box span {background:#FFF; padding:0 1px;}
 	float: right;
 }
 
-.ul_list, .revisions {
+.ul-list, .revisions {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 }
 
-.ul_list ul {
+.ul-list ul {
 	list-style-type: none;
 	padding-left: 20px;
 }
@@ -371,7 +359,7 @@ ul.upload, ul.upload ul {
 	text-align: left;
 }
 
-.info_title{
+.info-title{
 	display: block;
 	float: left;
 	text-align: left;

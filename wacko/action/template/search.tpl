@@ -24,14 +24,14 @@
 			</p>
 		=]
 		[= ul _ =
-			<ul id="search_results">
+			<ul id="search-results">
 			[= l _ =
 				[ ' delim | void ' ]
 				<li>
 					[= l SearchItem =
 						<h3 style="display: inline;">[ ' link ' ]</h3>[ ' count | enclose " (" ")" ' ]
 						<br>
-						<span class="search_meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ]
+						<span class="search-meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ]
 						[= comments =
 							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
 						=]
@@ -45,7 +45,7 @@
 			</ul>
 		=]
 		[= ol _ =
-			<ol id="search_results" start="[ ' offset ' ]">
+			<ol id="search-results" start="[ ' offset ' ]">
 			[= l _ =
 				[ ' delim | void ' ]
 				<li>

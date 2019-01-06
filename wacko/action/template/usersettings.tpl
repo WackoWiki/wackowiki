@@ -9,8 +9,8 @@
 	[= n _ =
 		<form action="[ ' href: ' ]" method="post" name="user_settings_notifications">
 			[ ' csrf: user_settings_notifications ' ]
-			<div class="page_settings">
-				<table class="form_tbl lined">
+			<div class="page-settings">
+				<table class="form-tbl lined">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -88,8 +88,8 @@
 	[= e _ =
 		<form action="[ ' href: ' ]" method="post" name="user_settings_extended">
 			[ ' csrf: user_settings_extended ' ]
-			<div class="page_settings">
-			<table class="form_tbl lined">
+			<div class="page-settings">
+			<table class="form-tbl lined">
 				<colgroup>
 					<col span="1" width="30%">
 					<col span="1" width="70%">
@@ -210,8 +210,8 @@
 	[= g _ =
 		<form action="[ ' href: ' ]" method="post" name="user_settings_general">
 			[ ' csrf: user_settings_general ' ]
-			<div class="page_settings">
-				<table class="form_tbl lined">
+			<div class="page-settings">
+				<table class="form-tbl lined">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -238,7 +238,7 @@
 							<a href="[ ' href ' ]">[ ' _t: YouWantChangePassword ' ]</a>
 						</th>
 						<td>
-							<a href="[ ' href ' ]" class="btn_link"><input type="button" id="button" value="[ ' _t: YouWantChangePassword ' ]" name="_password"></a>
+							<a href="[ ' href ' ]" class="btn-link"><input type="button" id="button" value="[ ' _t: YouWantChangePassword ' ]" name="_password"></a>
 						</td>
 					</tr>
 					<tr>
@@ -340,7 +340,7 @@
 						<td>
 							<input type="submit" class="OkBtn" id="submit" name="submit" value="[ ' _t: UpdateSettingsButton ' ]">
 							&nbsp;
-							<a href="[ ' logout ' ]" class="btn_link"><input type="button" class="CancelBtn" id="logout" name="logout" value="[ ' _t: LogoutButton ' ]"></a>
+							<a href="[ ' logout ' ]" class="btn-link"><input type="button" class="CancelBtn" id="logout" name="logout" value="[ ' _t: LogoutButton ' ]"></a>
 						</td>
 					</tr>
 				</tbody>
@@ -349,8 +349,8 @@
 			<br>
 		</form>
 
-		<aside class="page_tools">
-			<table class="form_tbl lined">
+		<aside class="page-tools">
+			<table class="form-tbl lined">
 				<tr>
 					<th scope="row">[ ' _t: UserSpace ' ]</th>
 					<td><a href="[ ' userpage ' ]">[ ' db: users_page ' ]/[ ' user.user_name ' ]</a></td>

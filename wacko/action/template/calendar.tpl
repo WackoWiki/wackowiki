@@ -2,7 +2,7 @@
 	<table style="margin: auto;">
 		<tr>
 			[= m _ =
-				<td class="a_top">
+				<td class="a-top">
 					[ ' month ' ]
 				</td>
 				[= next _ =

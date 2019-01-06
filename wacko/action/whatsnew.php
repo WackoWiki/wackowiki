@@ -275,7 +275,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 				$tpl->l_title	= $this->_t('NewPageCreated');
 				$tpl->l_alt		= 'new';
-				$tpl->l_class	= 'btn-add_page';
+				$tpl->l_class	= 'btn-add-page';
 				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
 				$tpl->l_cluster	= $sub_tag[0];
 			}

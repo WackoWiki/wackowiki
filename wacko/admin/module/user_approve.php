@@ -362,7 +362,7 @@ function admin_user_approve(&$engine, &$module)
 		{
 			echo '<tr class="lined">' . "\n" .
 					'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
-					#'<td class="label a_middle" style="width:10px;">' .
+					#'<td class="label a-middle" style="width:10px;">' .
 					#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
 					#'</td>' .
 					#'<td>' .

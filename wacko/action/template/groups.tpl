@@ -48,14 +48,14 @@
 				=]
 			</tr>
 			[= none _ =
-				<tr><td colspan="5" class="t_center" style="padding:10px;"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
+				<tr><td colspan="5" class="t-center" style="padding:10px;"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
 			=]
 			[= line _ =
 				<tr>
 					<td style="padding-left:5px;"><a href="[ ' profile ' ]">[ ' group.group_name | e ' ]</a></td>
-					<td class="t_center">[ ' group.members | e ' ]</td>
+					<td class="t-center">[ ' group.members | e ' ]</td>
 					[= reg _ =
-						<td class="t_center">[ ' group.created | time_formatted ' ]</td>
+						<td class="t-center">[ ' group.created | time_formatted ' ]</td>
 					=]
 				</tr>
 			=]

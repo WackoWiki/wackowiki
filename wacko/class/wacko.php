@@ -2852,7 +2852,7 @@ class Wacko
 	{
 		$save = $this->set_language($user['user_lang'], true, true);
 
-		$subject	=	$this->_t('EmailWelcome');
+		$subject	=	$this->_t('EmailWelcome') . ' ' . $this->db->base_url; // TODO: customize!
 		$body		=	Ut::perc_replace($this->_t('EmailRegistered'),
 							$this->db->site_name, $user['user_name'],
 							$this->user_email_confirm($user['user_id'])) . "\n\n" .
@@ -8486,12 +8486,12 @@ class Wacko
 			$i		= 0;
 			$n		= 1;
 
-			$out = '<div class="set_category">' . "\n";
+			$out = '<div class="set-category">' . "\n";
 			// TODO: div or fieldset?
-			#$out .= '<fieldset class="set_category"><legend>' . $this->_t('Categories') . ' (' . $lang . ")</legend>\n";
-			$out .= '<table class="category_browser">' . "\n";
+			# $out .= '<fieldset class="set-category"><legend>' . $this->_t('Categories') . ' (' . $lang . ")</legend>\n";
+			$out .= '<table class="category-browser">' . "\n";
 			$out .= "\t<tr>\n" . "\t\t<td>\n";
-			$out .= '<ul class="ul_list lined">' . "\n"; // hide_radio
+			$out .= '<ul class="ul-list lined">' . "\n"; // hide-radio
 
 			foreach ($categories as $category_id => $word)
 			{
@@ -8539,7 +8539,7 @@ class Wacko
 				{
 					$out .= "</ul>\n";
 					$out .= "\t\t</td>\n\t\t<td>\n";
-					$out .= '<ul class="ul_list lined">' . "\n"; // hide_radio
+					$out .= '<ul class="ul-list lined">' . "\n"; // hide-radio
 				}
 
 				$i = 0;
@@ -8555,7 +8555,7 @@ class Wacko
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '"> ' .
-						'<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "<br>\n" .
+						'<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}
@@ -8567,7 +8567,7 @@ class Wacko
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" class="btn_link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "\n";
+				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "\n";
 			}
 		}
 

@@ -138,7 +138,7 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=1') . "\"><img title=\"" . $this->_t('RemoveBookmark') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\"></a></div>";
+								echo "<div class=\"bookmark-remove\"><a href=\"" . $this->href('', '', 'removebookmark=1') . "\"><img title=\"" . $this->_t('RemoveBookmark') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\"></a></div>";
 							}
 							else
 							{
@@ -399,7 +399,7 @@ if ($doubleclick == true)
 						{
 							if (in_array($this->page['page_id'], $this->get_menu_links()))
 							{
-								echo "<div class=\"bookmark_remove\"><a href=\"" . $this->href('', '', 'removebookmark=yes') . "\"><img title=\"" . $this->_t('RemoveBookmark') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\"></a></div>";
+								echo "<div class=\"bookmark-remove\"><a href=\"" . $this->href('', '', 'removebookmark=yes') . "\"><img title=\"" . $this->_t('RemoveBookmark') . "\" src=\"" . $this->db->theme_url."icon/spacer.png\"></a></div>";
 							}
 							else
 							{

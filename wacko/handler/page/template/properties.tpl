@@ -7,10 +7,10 @@
 		</ul>
 		<br><br>
 		[= x _ =
-			<div class="page_settings">
+			<div class="page-settings">
 			<form action="[ ' href: properties ' ]" method="post" name="extended_properties">
 				[' csrf: extended_properties ']
-				<table class="form_tbl lined">
+				<table class="form-tbl lined">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -92,7 +92,7 @@
 							<th></th>
 							<td>
 								<input type="submit" class="OkBtn" name="extended" value="[ ' _t: MetaStoreButton ' ]" accesskey="s"> &nbsp;
-								<a href="[ ' href: ' ]" class="btn_link"><input type="button" class="CancelBtn" value="[ ' _t: MetaCancelButton ' ]"></a>
+								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: MetaCancelButton ' ]"></a>
 							</td>
 						</tr>
 					</tbody>
@@ -107,11 +107,11 @@
 			<li><a href="[ ' href: properties extended ' ]">[ ' _t: UserSettingsExtended ' ]</a></li>
 		</ul>
 		<br><br>
-		<div class="page_settings">
+		<div class="page-settings">
 		[= f GenOwner =
 			<form action="[ ' href: properties ' ]" method="post" name="general_properties">
 				[' csrf: general_properties ']
-				<table class="form_tbl lined">
+				<table class="form-tbl lined">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -211,7 +211,7 @@
 							<th></th>
 							<td>
 								<input type="submit" class="OkBtn" value="[ ' _t: MetaStoreButton ' ]" accesskey="s"> &nbsp;
-								<a href="[ ' href: ' ]" class="btn_link"><input type="button" class="CancelBtn" value="[ ' _t: MetaCancelButton ' ]"></a>
+								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: MetaCancelButton ' ]"></a>
 							</td>
 						</tr>
 					</tbody>
@@ -219,7 +219,7 @@
 			</form>
 		=]
 		[= w GenWorld =
-			<table class="form_tbl lined">
+			<table class="form-tbl lined">
 				<tr>
 					<th scope="row">[ ' _t: MetaTitle ' ]</th>
 					<td>[ ' page.title | e ' ]</td>
@@ -241,8 +241,8 @@
 		</div>
 	=]
 
-	<aside class="page_tools">
-		<table class="form_tbl lined">
+	<aside class="page-tools">
+		<table class="form-tbl lined">
 			<tr>
 				<th scope="row">[ ' _t: SettingsID ' ]</th>
 				<td>[ ' page.page_id | e ' ]</td>
@@ -284,7 +284,7 @@
 		</table>
 		<br>
 
-		<ul class="page_handler">
+		<ul class="page-handler">
 			<li class="m-edit"><a href="[ ' href: edit ' ]">[ ' i Icon ' ][ ' _t: SettingsEdit' ]</a></li>
 			<li class="m-revisions"><a href="[ ' href: revisions ' ]">[ ' i Icon ' ][ ' _t: SettingsRevisions ' ]</a></li>
 			<li class="m-clone"><a href="[ ' href: clone ' ]">[ ' i Icon ' ][ ' _t: SettingsClone ' ]</a></li>

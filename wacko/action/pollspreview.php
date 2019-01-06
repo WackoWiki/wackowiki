@@ -15,7 +15,7 @@ $list = $polls_obj->get_polls_list('moderation');
 if (empty($list))
 {
 	echo '<tr><th>' . $this->_t('PollsModeration') . '</th></tr>';
-	echo '<tr><td class="t_center"><em>' . $this->_t('PollsEmptyList') . '</em></td></tr>';
+	echo '<tr><td class="t-center"><em>' . $this->_t('PollsEmptyList') . '</em></td></tr>';
 }
 else
 {
@@ -40,7 +40,7 @@ else
 			}
 
 			echo '</table></td>';
-			echo '<td class="a_top">' .
+			echo '<td class="a-top">' .
 				($row['plural'] == 1 ? $this->_t('PollsPlural') : $this->_t('PollsSingular')) . '</td>';
 		echo '</tr>';
 	}

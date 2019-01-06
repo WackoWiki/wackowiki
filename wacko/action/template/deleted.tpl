@@ -4,7 +4,7 @@
 	=]
 	[''' pagination ''']
 
-	<ul class="ul_list">
+	<ul class="ul-list">
 	[= page _ =
 			<li><strong>[ ' day ' ]</strong>
 				<ul class="lined">

@@ -46,7 +46,7 @@
 				[= rename _ =
 					[ ' // not in use ' ]
 					<tr>
-						<td class="t_right">
+						<td class="t-right">
 							<label for="upload_dest_file">[ ' _t: UploadAsName ' ]:&nbsp;</label>
 						</td>
 						<td>
@@ -56,7 +56,7 @@
 				=]
 				[= desc _ =
 					<tr>
-						<td class="t_right">
+						<td class="t-right">
 							<label for="upload_desc">[ ' _t: FileDesc ' ]:&nbsp;</label>
 						</td>
 						<td>
@@ -66,7 +66,7 @@
 				=]
 				
 				<tr>
-					<td class="t_right">
+					<td class="t-right">
 					</td>
 					<td>
 						<input type="checkbox" name="file_overwrite" id="upload_overwrite" value="1">
