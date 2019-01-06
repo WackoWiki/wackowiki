@@ -78,7 +78,7 @@ function admin_config_email(&$engine, &$module)
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('MainSection'); ?></th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_email"><strong><?php echo $engine->_t('EnableEmail'); ?>:</strong><br>
 					<small><?php echo $engine->_t('EnableEmailInfo'); ?></small></label>
@@ -91,7 +91,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="phpmailer_method"><strong><?php echo $engine->_t('EmailFunctionName'); ?>:</strong><br>
 					<small><?php echo $engine->_t('EmailFunctionNameInfo'); ?><br>
@@ -108,7 +108,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="email_from"><strong><?php echo $engine->_t('FromEmailName'); ?>:</strong><br>
 					<small><?php echo $engine->_t('FromEmailNameInfo'); ?></small></label>
@@ -120,7 +120,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="noreply_email"><strong><?php echo $engine->_t('NoReplyEmail'); ?>:</strong><br>
 					<small><?php echo $engine->_t('NoReplyEmailInfo'); ?></small></label>
@@ -132,7 +132,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="admin_email"><strong><?php echo $engine->_t('AdminEmail'); ?>:</strong><br>
 					<small><?php echo $engine->_t('AdminEmailInfo'); ?></small></label>
@@ -144,7 +144,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="abuse_email"><strong><?php echo $engine->_t('AbuseEmail'); ?>:</strong><br>
 					<small><?php echo $engine->_t('AbuseEmailInfo'); ?></small></label>
@@ -156,7 +156,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="send_test_email"><strong><?php echo $engine->_t('SendTestEmail'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SendTestEmailInfo'); ?></small></label>
@@ -172,7 +172,7 @@ function admin_config_email(&$engine, &$module)
 					<?php echo $engine->_t('SmtpSettings'); ?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SmtpServerInfo'); ?></small></label>
@@ -184,7 +184,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="smtp_port"><strong><?php echo $engine->_t('SmtpPort'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SmtpPortInfo'); ?></small></label>
@@ -196,7 +196,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="smtp_connection_mode"><strong><?php echo $engine->_t('SmtpConnectionMode'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SmtpConnectionModeInfo'); ?>.</small></label>
@@ -212,7 +212,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="smtp_auto_tls"><strong><?php echo $engine->_t('SmtpAutoTls'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SmtpAutoTlsInfo'); ?></small></label>
@@ -225,7 +225,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="smtp_username"><strong><?php echo $engine->_t('SmtpUsername'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SmtpUsernameInfo'); ?></small></label>
@@ -237,7 +237,7 @@ function admin_config_email(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="smtp_password"><strong><?php echo $engine->_t('SmtpPassword'); ?>:</strong><br>
 					<small><?php echo $engine->_t('SmtpPasswordInfo'); ?></small></label>

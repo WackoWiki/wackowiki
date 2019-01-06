@@ -190,7 +190,7 @@ function admin_db_convert(&$engine, &$module)
 					{
 						if ($table['TABLE_NAME'] == $wtable['name'])
 						{
-							echo '<tr class="hl_setting">' .
+							echo '<tr class="hl-setting">' .
 									'<td class="label"><input type="checkbox" name="' . $table['TABLE_NAME'] . '" value="table" checked></td>' .
 									'<td>&nbsp;&nbsp;<strong>' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</strong></td>' .
 									'<td>' . ($table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ) . $table['ENGINE'] . ($table['ENGINE'] == 'MyISAM' ? '</strong>' : '') . '</td>' .
@@ -265,7 +265,7 @@ function admin_db_convert(&$engine, &$module)
 						// case 1  DATETIME
 						if ($table['DATA_TYPE'] == 'datetime')
 						{
-							echo '<tr class="hl_setting">' .
+							echo '<tr class="hl-setting">' .
 									'<td>&nbsp;&nbsp;' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</td>' .
 									'<td class="label">&nbsp;&nbsp;<strong>' . $table['COLUMN_NAME'] . '&nbsp;&nbsp;</strong></td>' .
 									'<td>&nbsp;&nbsp;' . $table['DATA_TYPE'] . '&nbsp;&nbsp;</td>' .

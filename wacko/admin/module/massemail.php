@@ -140,7 +140,7 @@ function admin_massemail(&$engine, &$module)
 				<col span="1" style="width:50%;">
 				<col span="1" style="width:50%;">
 			</colgroup>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="user_id"><strong><?php echo $engine->_t('SendToUser'); ?></strong><br>
 					<small><?php echo $engine->_t('SendToUserInfo');?></small></label>
@@ -170,7 +170,7 @@ function admin_massemail(&$engine, &$module)
 			</td>
 		</tr>
 <?php
-	echo '<tr class="hl_setting">
+	echo '<tr class="hl-setting">
 			<td class="label">
 				<label for="group_id"><strong>' . $engine->_t('SendToGroup') . ':</strong></label>
 			</td>' .
@@ -190,7 +190,7 @@ function admin_massemail(&$engine, &$module)
 			?>
 				</td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label"><strong><?php echo $engine->_t('MessageSubject'); ?>:</strong><br>
 					<small><?php echo $engine->_t('MessageSubjectInfo');?></small></td>
 				</td>
@@ -199,7 +199,7 @@ function admin_massemail(&$engine, &$module)
 				</td>
 			</tr>
 
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label"><label for="mail_body"><strong><?php echo $engine->_t('YourMessage');?>:</strong><br>
 					<small><?php echo $engine->_t('YourMessageInfo');?></small></label></td>
 				<td><textarea style="width:500px; height:200px;" id="mail_body" name="mail_body" required><?php echo Ut::html($mail_body);?></textarea></td>
@@ -207,7 +207,7 @@ function admin_massemail(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label"><label for="language"><strong><?php echo $engine->_t('MessageLanguage');?>:</strong><br>
 					<small><?php echo $engine->_t('MessageLanguageInfo');?></small></label></td>
 				<td>

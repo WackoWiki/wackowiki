@@ -1,9 +1,17 @@
 
 /*	Basic tag styles	*/
 
+html {
+	font-size: 120%;
+}
+
 body {
 	margin: 0;
 	padding: 0;
+	color: #333333;
+	background-color: #FFFFFF;
+	cursor: default;
+	font-size: 100%;
 }
 h1, h2, h3, h4, h5, h6 {
 	text-align: left;
@@ -26,14 +34,16 @@ pre {
 	text-align: left;
 }
 small {
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	line-height: normal;
 }
-form small, table.usertable small, small small {
-	font-size: 11px;
+form small, 
+table.usertable small, 
+small small {
+	font-size: 0.6875rem; /* 11px */
 }
 sub, sup {
-	font-size: 11px;
+	font-size: 0.6875rem; /* 11px */
 	letter-spacing: normal;
 	margin-left: 1px;
 	margin-right: 1px;
@@ -83,7 +93,7 @@ ul, ol {
 
 img {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10px;
+	font-size: 0.625rem; /* 10px */
 	height: auto;
 	max-width: 100%;
 }
@@ -124,14 +134,16 @@ table th {
 
 /*	Form elements	*/
 
-input, select {
+input,
+select {
 	/* vertical-align: middle; */
 }
 textarea {
 	height: 160px;
 	padding: 3px;
 }
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
 	margin-left: 8px;
 	margin-right: 10px;
 }
@@ -156,7 +168,8 @@ input.verify { display: none; }
 .right {
 	text-align: right;
 }
-.code, .hl-main pre {
+.code,
+.hl-main pre {
 	letter-spacing: normal;
 	word-spacing: normal;
 	background: #EDEDED none;
@@ -179,48 +192,50 @@ input.verify { display: none; }
 
 
 table.formation {
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	/*border: 1px dotted #CCCCCC;*/
 	padding: 3px;
 }
-table.formation th, tr.formation th, table.forum th {
+table.formation th,
+tr.formation th,
+table.forum th {
 	color: #333333;
 	letter-spacing: 1px;
 	background-color: #FFFFFF;
 	border-bottom: solid 1px #BABFC7;
 }
-td.label, th.label {
+td.label,
+th.label {
 	text-align: right;
 	padding-right: 5px;
 	border-right: 1px solid #CC0000;
-	border-bottom: 0 !important;
+	/* border-bottom: 0 !important; */
 }
 tr.lined td {
 	border-bottom: 1px dotted #BABFC7;
 }
 
 .lined:hover,
-.hl_setting:hover {
+.hl-setting:hover {
 	background:none repeat scroll 0 0 #CCFFCC !important;
 }
 
 table.forum th {
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	text-align: center;
 	white-space: nowrap;
 	border-spacing: 3px;
 	border-collapse: separate;
 }
 
-
 #content fieldset {
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	padding: 0 0 0 30px;
 	margin: 0;
 	border: none;
 }
 #content fieldset legend {
-	font-size: 11px;
+	font-size: 0.6875rem; /* 11px */
 	letter-spacing: 2px;
 	padding-left: 10px;
 	padding-right: 100px;
@@ -239,35 +254,30 @@ table.forum th {
 
 /*	Basic tags	*/
 
-body {
-	color: #333333;
-	background-color: #FFFFFF;
-	cursor: default;
-}
 h1, h2, h3, h4, h5, h6 {
 	color: #1A1A1A;
 	font-weight: bold;
+	padding: 1em 0;
+	color: #505050
 }
-h2, h3, h4, h5, h6 {
-	padding-left: 30px;
-}
+
 h1 {
-	font-size: 19px;
+	font-size: 1.1875rem; /* 19px */
 	margin-top: 0;
 }
 h2 {
-	font-size: 17px;
+	font-size: 1.0625rem; /* 17px */
 	margin-top: 30px;
 	padding-top: 3px;
 }
 h3 {
-	font-size: 16px;
+	font-size: 1rem;
 }
 h4 {
-	font-size: 14px;
+	font-size: 0.875rem; /* 14px */
 }
 h5, h6 {
-	font-size: 11px;
+	font-size: 0.6875rem; /* 11px */
 }
 small {
 	word-spacing: 2px;
@@ -296,7 +306,7 @@ sup, sub {
 
 .info {
 	background: #F4FBFF url('./../../image/info.svg') no-repeat scroll 10px 10px;
-	margin: 10px;
+	margin: 10px auto;
 	padding: 10px 10px 10px 40px;
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
@@ -306,7 +316,7 @@ sup, sub {
 .notice {
 	background-color: #FFFFEF;
 	border: 1px dotted #DDDDAA;
-	/* font-size: 0.75em; */
+	/* font-size: 0.75rem; */
 	height: 35px;
 	line-height: 35px;
 	margin: 0 0 10px;
@@ -379,18 +389,27 @@ input, select {
 input, select, textarea {
 
 }
-input#button, input#submit, .btnlite, .btnmain {
+input#button,
+input#submit,
+.btnlite,
+.btnmain {
 
 }
-input#button:hover, input#submit:hover, .btnlite:hover, .btnmain:hover {
+input#button:hover,
+input#submit:hover,
+.btnlite:hover,
+.btnmain:hover {
 	
 }
-input#button:active, input#submit:active, .btnlite:active, .btnmain:active {
+input#button:active,
+input#submit:active,
+.btnlite:active,
+.btnmain:active {
 
 }
 textarea {
 	font-family: "Lucida Console", "Courier New", monospace;
-	font-size: 14px;
+	font-size: 0.875rem; /* 14px */
 	color: #333333;
 	letter-spacing: 1px;
 	width: 100%;
@@ -424,7 +443,7 @@ textarea {
 }
 #path {
 	font-family: "Lucida Console", "Courier New", monospace;
-	font-size: 10px;
+	font-size: 0.625rem; /* 10px */
 	color: #333333;
 	line-height: 20px;
 	margin-left: 20px;
@@ -462,22 +481,28 @@ textarea {
 		height: 60px;
 		float: left;
 	}
-		#pane div.middle h1, #pane div.middle h1 a, #pane div.middle h1 a:hover, #pane div.middle h1 a:active {
-			color: #FFFFFF;
+		#pane div.middle h1,
+		#pane div.middle h1 a,
+		#pane div.middle h1 a:hover,
+		#pane div.middle h1 a:active {
+			color: #666666;
 			font-family: "Lucida Console", "Courier New", monospace;
-			font-size: 18px;
+			font-size: 1.125rem; /* 18px */
 			line-height: 18px;
 			text-align: center;
 			white-space: normal;
 			margin: 0;
-			padding-top: 13px;
-			width: 153px;
+			/* padding-top: 13px; */
+			padding: 0;
+			/* width: 153px; */
 			height: 60px;
 			float: left;
+			text-decoration: none;
+}
 		}
 	#nav {
 		font-weight: bold;
-		font-size: 11px;
+		font-size: 0.6875rem; /* 11px */
 		margin-right: 30px;
 		padding-left: 15px;
 		padding-top: 2px;
@@ -501,7 +526,7 @@ textarea {
 		}
 	#tools {
 		color: #073D69;
-		font-size: 10px;
+		font-size: 0.625rem; /* 10px */
 		text-align: right;
 		padding-right: 20px;
 		padding-top: 10px;
@@ -534,7 +559,7 @@ textarea {
 			}
 			#tools input.field {
 				color: #CBDAE1;
-				font-size: 11px;
+				font-size: 0.6875rem; /* 11px */
 				background-color: #2A6792;
 				padding: 1px;
 				border: 1px solid #1A5581;
@@ -546,7 +571,7 @@ textarea {
 				border: 1px solid #5083A6;
 			}
 	#sections {
-		font-size: 12px;
+		font-size: 0.75rem; /* 12px */
 		text-align: right;
 		margin-top: 5px;
 		padding-right: 20px;
@@ -588,7 +613,7 @@ textarea {
 
 nav#menu {
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 11px;
+	font-size: 0.6875rem; /* 11px */
 	background-color: #FFFFFF;
 	padding-bottom: 20px;
 
@@ -643,13 +668,15 @@ nav#menu {
 	padding-left: 15px;
 }
 span.tocnumber {
-	margin-right: 0.3em;
+	margin-right: 0.3rem;
 }
-	nav#menu ul, nav.menu ol {
+	nav#menu ul,
+	nav.menu ol {
 		padding-left: 0;
 		list-style: none;
 	}
-	nav#menu ul ul a, nav.menu ol ol a {
+	nav#menu ul ul a,
+	nav.menu ol ol a {
 		padding-left: 15px;
 	}
 #menu {
@@ -687,9 +714,9 @@ span.tocnumber {
 .menu li {
 	border-left: 1px dotted #CCCCCC;
 	float: left;
-	line-height: 1.2em;
-	margin: 0 0.5em 0 -0.5em;
-	padding: 0 0.5em;
+	line-height: 1.2rem;
+	margin: 0 0.5em 0 -0.5rem;
+	padding: 0 0.5rem;
 	white-space: nowrap;
 }
 
@@ -710,7 +737,7 @@ span.tocnumber {
 #page {
 	color: #333333;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 14px;
+	font-size: 0.875rem; /* 14px */
 	line-height: 18px;
 	word-spacing: 3px;
 /*	text-align: justify;*/
@@ -728,7 +755,7 @@ span.tocnumber {
 }
 	div.owner {
 		color: #B00202;
-		font-size: 10px;
+		font-size: 0.625rem; /* 10px */
 		text-align: right;
 		padding-right: 20px;
 	}
@@ -745,7 +772,7 @@ span.tocnumber {
 			text-decoration: none;
 		}
 	#tabs div.controls {
-		font-size: 11px;
+		font-size: 0.6875rem; /* 11px */
 		font-weight: bold;
 		background-color: #B00202;
 		padding-left: 20px;
@@ -788,7 +815,7 @@ span.tocnumber {
 	background-color: #F0F4F5;
 	border-top:1px dotted #CCCCCC;
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 10px;
+	font-size: 0.625rem; /* 10px */
 	text-align: center;
 	padding: 20px;
 	clear: both;
@@ -809,7 +836,7 @@ span.tocnumber {
 /*	 Debugging informations 		*/
 .time {
 	color: #999999;
-	font-size: 9px;
+	font-size: 0.5625rem; /* 9px */
 	margin: 5px 20px;
 }
 
@@ -817,15 +844,17 @@ span.tocnumber {
 	padding: 20px;
 	}
 
-.debug, #debug li, #debug pre {
-	font-size: 11px;
+.debug, 
+#debug li, 
+#debug pre {
+	font-size: 0.6875rem; /* 11px */
 	color: #888888;
 }
 
 div#loginbox {
 	font-family: 'Lucida Console', 'Courier New', monospace;
 	color: #073D69;
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	background-color: #F0F4F5;
 	width:500px;
 	margin:50px auto;
@@ -838,15 +867,15 @@ div#loginbox {
 }
 .cross {
 	background: url('../../image/cross.svg'), none no-repeat;
-	background-size: 22px 22px;
-	height: 22px;
-	width: 22px;
+	background-size: 1.375rem;
+	height: 1.375rem;
+	width: 1.375rem;
 }
 .tick {
 	background: url('../../image/tick.svg'), none no-repeat;
-	background-size: 22px 22px;
-	height: 22px;
-	width: 22px;
+	background-size: 1.375rem;
+	height: 1.375rem;
+	width: 1.375rem;
 }
 
 /*	alternate row style	*/
@@ -859,7 +888,8 @@ div#loginbox {
 	text-align:center;
 }
 
-.formation > tbody > tr:nth-of-type(2n+1) {
+.formation > tbody > tr:nth-of-type(2n+1),
+.formation > tbody > th:nth-of-type(2n+1) {
 	background-color: #f9f9f9;
 }
 
@@ -876,16 +906,16 @@ a.cancel:active{
 
 .btn-approve {
 	background: url("./../../image/user-approve.svg"), none no-repeat;
-	background-size: 16px 16px;
+	background-size: 1rem;
 	display: inline-block;
-	height: 16px;
-	width: 16px;
+	height: 1rem;
+	width: 1rem;
 }
 .btn-deny {
 	background: url("./../../image/user-block.svg"), none no-repeat;
-	background-size: 16px 16px;
+	background-size: 1rem;
 	display: inline-block;
-	height: 16px;
-	width: 16px;
+	height: 1rem;
+	width: 1rem;
 }
 

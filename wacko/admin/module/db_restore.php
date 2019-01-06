@@ -95,7 +95,7 @@ function admin_db_restore(&$engine, &$module)
 							'</td>
 						</tr>' .
 					// open row
-					'<tr class="hl_setting">' . "\n" .
+					'<tr class="hl-setting">' . "\n" .
 
 					// pack
 					 '<td>
@@ -480,7 +480,7 @@ function admin_db_restore(&$engine, &$module)
 					foreach ($logs as $log)
 					{
 						// open row
-						echo '<tr class="hl_setting">' . "\n";
+						echo '<tr class="hl-setting">' . "\n";
 
 						// pack
 						echo '<td>

@@ -77,9 +77,9 @@ function admin_config_pages(&$engine, &$module)
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('MainSection');?></th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
-					<label for="list_count"><strong><?php echo $engine->_t('ListCount');?>:</strong><br>
+					<label for="list-count"><strong><?php echo $engine->_t('ListCount');?>:</strong><br>
 					<small><?php echo $engine->_t('ListCountInfo');?></small></label>
 				</td>
 				<td>
@@ -89,7 +89,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('ForumSection');?></th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="forum_cluster"><strong><?php echo $engine->_t('ForumCluster');?>:</strong><br>
 					<small><?php echo $engine->_t('');?></small></label>
@@ -101,7 +101,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="forum_topics"><strong><?php echo $engine->_t('ForumTopics');?>:</strong><br>
 					<small><?php echo $engine->_t('ForumTopicsInfo');?></small></label>
@@ -113,7 +113,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="comments_count"><strong><?php echo $engine->_t('CommentsCount');?>:</strong><br>
 					<small><?php echo $engine->_t('CommentsCountInfo');?></small></label>
@@ -128,7 +128,7 @@ function admin_config_pages(&$engine, &$module)
 					<?php echo $engine->_t('NewsSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="news_cluster"><strong><?php echo $engine->_t('NewsCluster');?>:</strong><br>
 					<small><?php echo $engine->_t('NewsClusterInfo');?></small></label>
@@ -140,7 +140,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="news_levels"><strong><?php echo $engine->_t('NewsLevels');?>:</strong><br>
 					<small><?php echo $engine->_t('NewsLevelsInfo');?></small></label>
@@ -155,7 +155,7 @@ function admin_config_pages(&$engine, &$module)
 					<?php echo $engine->_t('LicenseSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('EnableLicense');?>:</strong><br>
 					<small><?php echo $engine->_t('EnableLicenseInfo');?></small>
@@ -170,7 +170,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="license"><strong><?php echo $engine->_t('DefaultLicense');?>:</strong><br>
 					<small><?php echo $engine->_t('DefaultLicenseInfo');?></small></label>
@@ -185,7 +185,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('LicensePerPage');?>:</strong><br>
 					<small><?php echo $engine->_t('LicensePerPageInfo');?></small>
@@ -203,7 +203,7 @@ function admin_config_pages(&$engine, &$module)
 					<?php echo $engine->_t('ServicePagesSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="root_page"><strong><?php echo $engine->_t('RootPage');?>:</strong><br>
 					<small><?php echo $engine->_t('RootPageInfo');?></small></label>
@@ -215,7 +215,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="help_page"><strong><?php echo $engine->_t('HelpPage');?>:</strong><br>
 					<small><?php echo $engine->_t('HelpPageInfo');?></small></label>
@@ -227,7 +227,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="privacy_page"><strong><?php echo $engine->_t('PrivacyPage');?>:</strong><br>
 					<small><?php echo $engine->_t('PrivacyPageInfo');?></small></label>
@@ -239,7 +239,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="terms_page"><strong><?php echo $engine->_t('TermsPage');?>:</strong><br>
 					<small><?php echo $engine->_t('TermsPageInfo');?></small></label>
@@ -251,7 +251,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="search_page"><strong><?php echo $engine->_t('SearchPage');?>:</strong><br>
 					<small><?php echo $engine->_t('SearchPageInfo');?></small></label>
@@ -263,7 +263,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="registration_page"><strong><?php echo $engine->_t('RegistrationPage');?>:</strong><br>
 					<small><?php echo $engine->_t('RegistrationPageInfo');?></small></label>
@@ -275,7 +275,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="login_page"><strong><?php echo $engine->_t('LoginPage');?>:</strong><br>
 					<small><?php echo $engine->_t('LoginPageInfo');?></small></label>
@@ -287,7 +287,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="settings_page"><strong><?php echo $engine->_t('SettingsPage');?>:</strong><br>
 					<small><?php echo $engine->_t('SettingsPageInfo');?></small></label>
@@ -299,7 +299,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="password_page"><strong><?php echo $engine->_t('PasswordPage');?>:</strong><br>
 					<small><?php echo $engine->_t('PasswordPageInfo');?></small></label>
@@ -311,7 +311,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="users_page"><strong><?php echo $engine->_t('UsersPage');?>:</strong><br>
 					<small><?php echo $engine->_t('UsersPageInfo');?></small></label>
@@ -323,7 +323,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="category_page"><strong><?php echo $engine->_t('CategoryPage');?> :</strong><br>
 					<small><?php echo $engine->_t('CategoryPageInfo');?></small></label>
@@ -335,7 +335,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="tag_page"><strong><?php echo $engine->_t('TagPage');?> :</strong><br>
 					<small><?php echo $engine->_t('TagPageInfo');?></small></label>
@@ -347,7 +347,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="groups_page"><strong><?php echo $engine->_t('GroupsPage');?>:</strong><br>
 					<small><?php echo $engine->_t('GroupsPageInfo');?></small></label>
@@ -359,7 +359,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="changes_page"><strong><?php echo $engine->_t('ChangesPage');?>:</strong><br>
 					<small><?php echo $engine->_t('ChangesPageInfo');?></small></label>
@@ -371,7 +371,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="comments_page"><strong><?php echo $engine->_t('CommentsPage');?>:</strong><br>
 					<small><?php echo $engine->_t('CommentsPageInfo');?></small></label>
@@ -383,7 +383,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="removals_page"><strong><?php echo $engine->_t('RemovalsPage');?>:</strong><br>
 					<small><?php echo $engine->_t('RemovalsPageInfo');?></small></label>
@@ -395,7 +395,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="wanted_page"><strong><?php echo $engine->_t('WantedPage');?>:</strong><br>
 					<small><?php echo $engine->_t('WantedPageInfo');?></small></label>
@@ -407,7 +407,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="orphaned_page"><strong><?php echo $engine->_t('OrphanedPage');?>:</strong><br>
 					<small><?php echo $engine->_t('OrphanedPageInfo');?></small></label>
@@ -419,7 +419,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="sandbox"><strong><?php echo $engine->_t('SandboxPage');?>:</strong><br>
 					<small><?php echo $engine->_t('SandboxPageInfo');?></small></label>

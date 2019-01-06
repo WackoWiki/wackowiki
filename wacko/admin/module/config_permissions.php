@@ -68,7 +68,7 @@ function admin_config_permissions(&$engine, &$module)
 					<?php echo $engine->_t('PermissionsSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_read_acl"><strong><?php echo $engine->_t('ReadRights');?>:</strong><br>
 					<small><?php echo $engine->_t('ReadRightsInfo');?></small></label>
@@ -80,7 +80,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_write_acl"><strong><?php echo $engine->_t('WriteRights');?>:</strong><br>
 					<small><?php echo $engine->_t('WriteRightsInfo');?></small></label>
@@ -92,7 +92,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_comment_acl"><strong><?php echo $engine->_t('CommentRights');?>:</strong><br>
 					<small><?php echo $engine->_t('CommentRightsInfo');?></small></label>
@@ -104,7 +104,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_create_acl"><strong><?php echo $engine->_t('CreateRights');?>:</strong><br>
 					<small><?php echo $engine->_t('CreateRightsInfo');?></small></label>
@@ -116,7 +116,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_upload_acl"><strong><?php echo $engine->_t('UploadRights');?>:</strong><br>
 					<small><?php echo $engine->_t('UploadRightsInfo');?></small></label>
@@ -128,7 +128,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="rename_globalacl"><strong><?php echo $engine->_t('RenameRights');?>:</strong><br>
 					<small><?php echo $engine->_t('RenameRightsInfo');?></small></label>
@@ -137,13 +137,13 @@ function admin_config_permissions(&$engine, &$module)
 					<textarea style="width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo Ut::html($engine->db->rename_globalacl);?></textarea>
 				</td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<th colspan="2">
 					<br>
 					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="acl_lock"><strong><?php echo $engine->_t('LockAcl');?>:</strong><br>
 					<small><span class="cite"><?php echo $engine->_t('LockAclInfo');?></small></label>
@@ -155,7 +155,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="hide_locked"><strong><?php echo $engine->_t('HideLocked');?>:</strong><br>
 					<small><?php echo $engine->_t('HideLockedInfo');?></small></label>
@@ -167,7 +167,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="remove_onlyadmins"><strong><?php echo $engine->_t('RemoveOnlyAdmins');?>:</strong><br>
 					<small><?php echo $engine->_t('RemoveOnlyAdminsInfo');?></small></label>
@@ -179,7 +179,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="owners_can_remove_comments"><strong><?php echo $engine->_t('OwnersRemoveComments');?>:</strong><br>
 					<small><?php echo $engine->_t('OwnersRemoveCommentsInfo');?></small></label>
@@ -191,7 +191,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="owners_can_change_categories"><strong><?php echo $engine->_t('OwnersEditCategories');?>:</strong><br>
 					<small><?php echo $engine->_t('OwnersEditCategoriesInfo');?></small></label>
@@ -203,7 +203,7 @@ function admin_config_permissions(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="moders_can_edit"><strong><?php echo $engine->_t('TermHumanModeration');?>:</strong><br>
 					<small><?php echo $engine->_t('TermHumanModerationInfo');?></small></label>

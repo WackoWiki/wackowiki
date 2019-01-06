@@ -71,7 +71,7 @@ function admin_config_filter(&$engine, &$module)
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('WordCensoringSection');?></th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="spam_filter"><strong><?php echo $engine->_t('SPAMFilter');?>:</strong><br>
 					<small><?php echo $engine->_t('SPAMFilterInfo');?></small></label>
@@ -84,7 +84,7 @@ function admin_config_filter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="phrase_list"><strong><?php echo $engine->_t('WordList');?>:</strong><br>
 					<small><?php echo $engine->_t('WordListInfo');?></small></label>

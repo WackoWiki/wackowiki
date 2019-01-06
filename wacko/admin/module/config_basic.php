@@ -105,7 +105,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('MainSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="site_name"><strong><?php echo $engine->_t('SiteName');?>:</strong><br>
 					<small><?php echo $engine->_t('SiteNameInfo');?></small></label>
@@ -117,7 +117,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="site_desc"><strong><?php echo $engine->_t('SiteDesc');?>:</strong><br>
 					<small><?php echo $engine->_t('SiteDescInfo');?></small></label>
@@ -129,7 +129,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="admin_name"><strong><?php echo $engine->_t('AdminName');?>:</strong><br>
 					<small><?php echo $engine->_t('AdminNameInfo');?></small></label>
@@ -144,7 +144,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('LanguageSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="language"><strong><?php echo $engine->_t('DefaultLanguage');?>:</strong><br>
 					<small><?php echo $engine->_t('DefaultLanguageInfo');?></small></label>
@@ -166,7 +166,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="multilanguage"><strong><?php echo $engine->_t('MultiLanguage');?>:</strong><br>
 					<small><?php echo $engine->_t('MultiLanguageInfo');?></small></label>
@@ -180,7 +180,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('AllowedLanguages');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowedLanguagesInfo');?></small></label>
@@ -237,7 +237,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('CommentSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('AllowComments');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowCommentsInfo');?></small></label>
@@ -251,7 +251,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="sorting_comments"><strong><?php echo $engine->_t('SortingComments');?>:</strong><br>
 					<small><?php echo $engine->_t('SortingCommentsInfo');?></small></label>
@@ -269,7 +269,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('ToolbarSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('CommentsPanel');?>:</strong><br>
 					<small><?php echo $engine->_t('CommentsPanelInfo');?></small></label>
@@ -283,7 +283,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('FilePanel');?>:</strong><br>
 					<small><?php echo $engine->_t('FilePanelInfo');?></small></label>
@@ -297,7 +297,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('RatingPanel');?>:</strong><br>
 					<small><?php echo $engine->_t('RatingPanelInfo');?></small></label>
@@ -311,7 +311,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('TagsPanel');?>:</strong><br>
 					<small><?php echo $engine->_t('TagsPanelInfo');?></small></label>
@@ -328,7 +328,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('NavigationSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('HideRevisions');?>:</strong><br>
 					<small><?php echo $engine->_t('HideRevisionsInfo');?></small></label>
@@ -342,7 +342,7 @@ function admin_config_basic(&$engine, &$module)
 						<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('AttachmentHandler');?>:</strong><br>
 					<small><?php echo $engine->_t('AttachmentHandlerInfo');?></small></label>
@@ -356,7 +356,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('TocPanel');?>:</strong><br>
 					<small><?php echo $engine->_t('TocPanelInfo');?></small></label>
@@ -369,7 +369,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('SectionsPanel');?>:</strong><br>
 					<small><?php echo $engine->_t('SectionsPanelInfo');?></small></label>
@@ -382,7 +382,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('DisplayingSections');?>:</strong><br>
 					<small><?php echo $engine->_t('DisplayingSectionsInfo');?></small></label>
@@ -396,7 +396,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="menu_items"><strong><?php echo $engine->_t('MenuItems');?>:</strong><br>
 					<small><?php echo $engine->_t('MenuItemsInfo');?></small></label>
@@ -411,7 +411,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('FeedsSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_feeds"><strong><?php echo $engine->_t('EnableFeeds');?>:</strong><br>
 					<small><?php echo $engine->_t('EnableFeedsInfo');?></small></label>
@@ -423,7 +423,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="xml_sitemap"><strong><?php echo $engine->_t('XmlSitemap');?>:</strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('XmlSitemapInfo'), '<code>' . SITEMAP_XML . '</code>');?>
@@ -436,7 +436,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="xml_sitemap_time"><strong><?php echo $engine->_t('XmlSitemapTime');?>:</strong><br>
 					<small><?php echo $engine->_t('XmlSitemapTimeInfo');?></small></label>
@@ -451,7 +451,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('DiffModeSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_diff_mode"><strong><?php echo $engine->_t('DefaultDiffModeSetting');?>:</strong><br>
 					<small><?php echo $engine->_t('DefaultDiffModeSettingInfo');?></small></label>
@@ -472,7 +472,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('AllowedDiffMode');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowedDiffModeInfo');?></small></label>
@@ -517,7 +517,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('EditingSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('EditSummary');?>:</strong><br>
 					<small><?php echo $engine->_t('EditSummaryInfo');?></small></label>
@@ -531,7 +531,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('MinorEdit');?>:</strong><br>
 					<small><?php echo $engine->_t('MinorEditInfo');?></small></label>
@@ -544,7 +544,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('ReviewSettings');?>:</strong><br>
 					<small><?php echo $engine->_t('ReviewSettingsInfo');?></small></label>
@@ -557,7 +557,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('PublishAnonymously');?>:</strong><br>
 					<small><?php echo $engine->_t('PublishAnonymouslyInfo');?></small></label>
@@ -573,7 +573,7 @@ function admin_config_basic(&$engine, &$module)
 					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_rename_redirect"><strong><?php echo $engine->_t('DefaultRenameRedirect');?>:</strong><br>
 					<small><?php echo $engine->_t('DefaultRenameRedirectInfo');?></small></label>
@@ -585,7 +585,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="store_deleted_pages"><strong><?php echo $engine->_t('StoreDeletedPages');?>:</strong><br>
 					<small><?php echo $engine->_t('StoreDeletedPagesInfo');?></small></label>
@@ -597,7 +597,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="keep_deleted_time"><strong><?php echo $engine->_t('KeepDeletedTime');?>:</strong><br>
 					<small><?php echo $engine->_t('KeepDeletedTimeInfo');?></small></label>
@@ -609,7 +609,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="pages_purge_time"><strong><?php echo $engine->_t('PagesPurgeTime');?>:</strong><br>
 					<small><?php echo $engine->_t('PagesPurgeTimeInfo');?></small></label>
@@ -621,7 +621,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('EnableReferrers');?>:</strong><br>
 					<small><?php echo $engine->_t('EnableReferrersInfo');?></small></label>
@@ -635,7 +635,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="referrers_purge_time"><strong><?php echo $engine->_t('ReferrersPurgeTime');?>:</strong><br>
 					<small><?php echo $engine->_t('ReferrersPurgeTimeInfo');?></small></label>
@@ -647,7 +647,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="noindex"><strong><?php echo $engine->_t('SearchEngineVisibility');?>:</strong><br>
 					<small><?php echo $engine->_t('SearchEngineVisibilityInfo');?></small></label>

@@ -79,7 +79,7 @@ function admin_config_formatter(&$engine, &$module)
 					<?php echo $engine->_t('TextHandlerSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_typografica"><strong><?php echo $engine->_t('Typografica');?>:</strong><br>
 					<small><?php echo $engine->_t('TypograficaInfo');?></small></label>
@@ -91,7 +91,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="paragrafica"><strong><?php echo $engine->_t('Paragrafica');?>:</strong><br>
 					<small><?php echo $engine->_t('ParagraficaInfo');?></small></label>
@@ -103,7 +103,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="allow_rawhtml"><strong><?php echo $engine->_t('AllowRawhtml');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowRawhtmlInfo');?></small></label>
@@ -115,7 +115,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('SafeHtml');?>:</strong><br>
 					<small><?php echo $engine->_t('SafeHtmlInfo');?></small>
@@ -131,7 +131,7 @@ function admin_config_formatter(&$engine, &$module)
 					<?php echo $engine->_t('WackoFormatterSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="allow_x11colors"><strong><?php echo $engine->_t('X11colors');?>:</strong><br>
 					<small><?php echo $engine->_t('X11colorsInfo');?></small></label>
@@ -143,7 +143,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="disable_tikilinks"><strong><?php echo $engine->_t('TikiLinks');?>:</strong><br>
 					<small><?php echo $engine->_t('TikiLinksInfo');?></small></label>
@@ -155,7 +155,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="disable_wikilinks"><strong><?php echo $engine->_t('WikiLinks');?>:</strong><br>
 					<small><?php echo $engine->_t('WikiLinksInfo');?></small></label>
@@ -167,7 +167,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="disable_bracketslinks"><strong><?php echo $engine->_t('BracketsLinks');?>:</strong><br>
 					<small><?php echo $engine->_t('BracketsLinksInfo');?></small></label>
@@ -179,7 +179,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="disable_formatters"><strong><?php echo $engine->_t('Formatters');?>:</strong><br>
 					<small><?php echo $engine->_t('FormattersInfo');?></small></label>
@@ -194,7 +194,7 @@ function admin_config_formatter(&$engine, &$module)
 					<?php echo $engine->_t('DateFormatsSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="date_format"><strong><?php echo $engine->_t('DateFormat');?>:</strong><br>
 					<small><?php echo $engine->_t('DateFormatInfo');?></small></label>
@@ -206,7 +206,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="time_format"><strong><?php echo $engine->_t('TimeFormat');?>:</strong><br>
 					<small><?php echo $engine->_t('TimeFormatInfo');?></small></label>
@@ -218,7 +218,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="time_format_seconds"><strong><?php echo $engine->_t('TimeFormatSeconds');?>:</strong><br>
 					<small><?php echo $engine->_t('TimeFormatSecondsinfo');?></small></label>
@@ -230,7 +230,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="name_date_macro"><strong><?php echo $engine->_t('NameDateMacro');?>:</strong><br>
 					<small><?php echo $engine->_t('NameDateMacroInfo');?></small></label>
@@ -242,7 +242,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label" scope="row">
 					<label for="timezone"><strong><?php echo $engine->_t('Timezone');?></strong><br>
 					<small><?php echo $engine->_t('TimezoneInfo');?></small></label>
@@ -272,7 +272,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('EnableDst');?>:</strong><br>
 					<small><?php echo $engine->_t('EnableDstInfo');?></small>
@@ -288,7 +288,7 @@ function admin_config_formatter(&$engine, &$module)
 					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_link_target"><strong><?php echo $engine->_t('LinkTarget');?>:</strong><br>
 					<small><?php echo $engine->_t('LinkTargetInfo');?></small></label>
@@ -300,7 +300,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_noreferrer"><strong><?php echo $engine->_t('Noreferrer');?>:</strong><br>
 					<small><?php echo $engine->_t('NoreferrerInfo');?></small></label>
@@ -312,7 +312,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_nofollow"><strong><?php echo $engine->_t('Nofollow');?>:</strong><br>
 					<small><?php echo $engine->_t('NofollowInfo');?></small></label>
@@ -324,7 +324,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_urls_underscores"><strong><?php echo $engine->_t('UrlsUnderscores');?>:</strong><br>
 					<small><?php echo $engine->_t('UrlsUnderscoresInfo');?></small></label>
@@ -336,7 +336,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_show_spaces"><strong><?php echo $engine->_t('ShowSpaces');?>:</strong><br>
 					<small><?php echo $engine->_t('ShowSpacesInfo');?></small></label>
@@ -348,7 +348,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_numerate_links"><strong><?php echo $engine->_t('NumerateLinks');?>:</strong><br>
 					<small><?php echo $engine->_t('NumerateLinksInfo');?></small></label>
@@ -360,7 +360,7 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_youarehere_text"><strong><?php echo $engine->_t('YouareHereText');?>:</strong><br>
 					<small><?php echo $engine->_t('YouareHereTextInfo');?></small></label>

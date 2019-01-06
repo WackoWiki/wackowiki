@@ -70,7 +70,7 @@ function admin_config_system(&$engine, &$module)
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('DebugModeSection');?></th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="debug_mode"><strong><?php echo $engine->_t('DebugMode');?>:</strong><br>
 					<small><?php echo $engine->_t('DebugModeInfo');?></small></label>
@@ -91,7 +91,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="debug_sql_threshold"><strong><?php echo $engine->_t('DebugSqlThreshold');?>:</strong><br>
 					<small><?php echo $engine->_t('DebugSqlThresholdInfo');?></small></label></td>
@@ -102,7 +102,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="debug_admin_only"><strong><?php echo $engine->_t('DebugAdminOnly');?>:</strong><br>
 					<small><?php echo $engine->_t('DebugAdminOnlyInfo');?></small></label>
@@ -117,7 +117,7 @@ function admin_config_system(&$engine, &$module)
 					<?php echo $engine->_t('CachingSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="cache"><strong><?php echo $engine->_t('Cache');?>:</strong><br>
 					<small><?php echo $engine->_t('CacheInfo');?></small></label>
@@ -129,7 +129,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="cache_ttl"><strong><?php echo $engine->_t('CacheTtl');?>:</strong><br>
 					<small><?php echo $engine->_t('CacheTtlInfo');?></small></label>
@@ -141,7 +141,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="cache_sql"><strong><?php echo $engine->_t('CacheSql');?>:</strong><br>
 					<small><?php echo $engine->_t('CacheSqlInfo');?></small></label>
@@ -153,7 +153,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="cache_sql_ttl"><strong><?php echo $engine->_t('CacheSqlTtl');?>:</strong><br>
 					<small><?php echo $engine->_t('CacheSqlTtlInfo');?></small></label>
@@ -168,7 +168,7 @@ function admin_config_system(&$engine, &$module)
 					<?php echo $engine->_t('LogSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="log_level"><strong><?php echo $engine->_t('LogLevel');?>:</strong><br>
 					<small><?php echo $engine->_t('LogLevelInfo');?></small></label>
@@ -189,7 +189,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="log_default_show"><strong><?php echo $engine->_t('LogDefaultShow');?>:</strong><br>
 					<small><?php echo $engine->_t('LogDefaultShowInfo');?></small></label>
@@ -210,7 +210,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="log_purge_time"><strong><?php echo $engine->_t('LogPurgeTime');?>:</strong><br>
 					<small><?php echo $engine->_t('LogPurgeTimeInfo');?></small></label>
@@ -225,7 +225,7 @@ function admin_config_system(&$engine, &$module)
 					<?php echo $engine->_t('PrivacySection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="approve_new_user"><strong><?php echo $engine->_t('AnonymizeIp');?>:</strong><br>
 					<small><?php echo $engine->_t('AnonymizeIpInfo');?></small></label>
@@ -241,7 +241,7 @@ function admin_config_system(&$engine, &$module)
 					<?php echo $engine->_t('ReverseProxySection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="reverse_proxy"><strong><?php echo $engine->_t('ReverseProxy');?>:</strong><br>
 					<small><?php echo $engine->_t('ReverseProxyInfo');?></small></label>
@@ -253,7 +253,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="reverse_proxy_header"><strong><?php echo $engine->_t('ReverseProxyHeader');?>:</strong><br>
 					<small><?php echo $engine->_t('ReverseProxyHeaderInfo');?></small></label>
@@ -265,7 +265,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="reverse_proxy_addresses"><strong><?php echo $engine->_t('ReverseProxyAddresses');?>:</strong><br>
 					<small><?php echo $engine->_t('ReverseProxyAddressesInfo');?></small></label>
@@ -280,7 +280,7 @@ function admin_config_system(&$engine, &$module)
 					<?php echo $engine->_t('SessionSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="session_store"><strong><?php echo $engine->_t('SessionStorage');?>:</strong><br>
 					<small><?php echo $engine->_t('SessionStorageInfo');?></small></label>
@@ -305,7 +305,7 @@ function admin_config_system(&$engine, &$module)
 					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="rewrite_mode"><strong><?php echo $engine->_t('RewriteMode');?>:</strong><br>
 					<small><?php echo $engine->_t('RewriteModeInfo');?></span></small></label>
