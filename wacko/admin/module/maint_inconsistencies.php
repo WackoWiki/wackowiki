@@ -293,7 +293,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			{
 				if ($value[1] >= 1)
 				{
-					echo '<tr class="hl_setting">' .
+					echo '<tr class="hl-setting">' .
 						'<td class="label">' .
 							($value[1] >= 1
 								? '<strong>' . $value[0] . '</strong>'
@@ -559,7 +559,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			{
 				if ($value[1] >= 1)
 				{
-					echo '<tr class="hl_setting">' .
+					echo '<tr class="hl-setting">' .
 							'<td class="label">' .
 								($value[1] >= 1
 									? '<strong>' . $value[0] . '</strong>'

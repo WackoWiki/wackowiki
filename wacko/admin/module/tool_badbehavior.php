@@ -455,7 +455,7 @@ function bb2_whitelist(&$engine)
 				<?php echo $engine->_t('BbWhitelist');?>
 			</th>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="whitelists_ip"><strong><?php echo $engine->_t('BbIPAddress');?>:</strong><br>
 				<small><?php echo $engine->_t('BbIPAddressInfo');?></small></label>
@@ -467,7 +467,7 @@ function bb2_whitelist(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="whitelists_url"><strong><?php echo $engine->_t('BbURL');?>:</strong><br>
 				<small><?php echo $engine->_t('BbURLInfo');?></small></label>
@@ -479,7 +479,7 @@ function bb2_whitelist(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="whitelists_useragent"><strong><?php echo $engine->_t('BbUserAgent');?>:</strong><br>
 				<small><?php echo $engine->_t('BbUserAgentInfo');?></small></label>
@@ -660,7 +660,7 @@ function bb2_options(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label"><strong><?php echo $engine->_t('BbEnable');?>:</strong><br>
 				<small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_settings.conf</code>');?></small></td>
 			<td>
@@ -676,7 +676,7 @@ function bb2_options(&$engine)
 				<?php echo $engine->_t('BbLogRequest');?>
 			</th>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="logging_verbose"><?php echo $engine->_t('BbLogVerbose');?></label>
 			</td>
@@ -684,7 +684,7 @@ function bb2_options(&$engine)
 				<input type="radio" id="logging_verbose" name="logging" value="verbose" <?php if ($settings['verbose'] && $settings['logging']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="logging_normal"><?php echo $engine->_t('BbLogNormal');?></label>
 			</td>
@@ -692,7 +692,7 @@ function bb2_options(&$engine)
 				<input type="radio" id="logging_normal" name="logging" value="normal" <?php if ($settings['logging'] && !$settings['verbose']) { ?>checked <?php } ?>>
 			</td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="logging_false"><?php echo $engine->_t('BbLogOff');?></label>
 			</td>
@@ -706,7 +706,7 @@ function bb2_options(&$engine)
 				<?php echo $engine->_t('BbSecurity');?>
 			</th>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="strict_checking"><strong><?php echo $engine->_t('BbStrict');?></strong><br>
 				<?php echo $engine->_t('BbStrictInfo');?></label>
@@ -716,7 +716,7 @@ function bb2_options(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="offsite_forms"><strong><?php echo $engine->_t('BbOffsiteForms');?></strong><br>
 				<?php echo $engine->_t('BbOffsiteFormsInfo');?></label>
@@ -731,7 +731,7 @@ function bb2_options(&$engine)
 				<?php echo $engine->_t('BbHttpbl');?>
 			</th>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td colspan="2">
 				<p><?php echo Ut::perc_replace(
 							$engine->_t('BbHttpblInfo'),
@@ -741,7 +741,7 @@ function bb2_options(&$engine)
 				<br>
 			</td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="httpbl_key"><?php echo $engine->_t('BbHttpblKey');?></label>
 			</td>
@@ -752,7 +752,7 @@ function bb2_options(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="httpbl_threat"><?php echo $engine->_t('BbHttpblThreat');?></label>
 			</td>
@@ -763,7 +763,7 @@ function bb2_options(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="httpbl_maxage"><?php echo $engine->_t('BbHttpblMaxage');?></label>
 			</td>
@@ -777,7 +777,7 @@ function bb2_options(&$engine)
 				<?php echo $engine->_t('BbReverseProxy');?>
 			</th>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td colspan="2">
 				<div>
 					<?php echo Ut::perc_replace(
@@ -790,7 +790,7 @@ function bb2_options(&$engine)
 				</div>
 			</td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="reverse_proxy"><?php echo $engine->_t('BbReverseProxyEnable');?></label>
 			</td>
@@ -801,7 +801,7 @@ function bb2_options(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="reverse_proxy_header"><?php echo $engine->_t('BbReverseProxyHeader');?></label>
 			</td>
@@ -812,7 +812,7 @@ function bb2_options(&$engine)
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
-		<tr class="hl_setting">
+		<tr class="hl-setting">
 			<td class="label">
 				<label for="reverse_proxy_addresses"><?php echo $engine->_t('BbReverseProxyAddresses');?></label>
 			</td>
@@ -912,7 +912,7 @@ function bb2_options(&$engine)
 				<col span="1" style="width:50%;">
 			</colgroup>
 			<tbody>
-				<tr class="hl_setting">
+				<tr class="hl-setting">
 					<th scope="row" class="label">
 						<strong><?php echo $engine->_t('BbEnable');?>:</strong><br>
 						<small><?php echo $engine->_t('BbEnableInfo');?></small>

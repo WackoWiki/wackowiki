@@ -67,7 +67,7 @@ function admin_config_upload(&$engine, &$module)
 					<?php echo $engine->_t('FileUploads');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="upload"><strong><?php echo $engine->_t('RightToUpload');?>:</strong><br>
 					<small><?php echo $engine->_t('RightToUploadInfo');?></small></label>
@@ -83,7 +83,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="upload_images_only"><strong><?php echo $engine->_t('UploadOnlyImages');?>:</strong><br>
 					<small><?php echo $engine->_t('UploadOnlyImagesInfo');?></small></label>
@@ -95,7 +95,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="upload_max_size"><strong><?php echo $engine->_t('UploadMaxFilesize');?>:</strong><br>
 					<small><?php echo $engine->_t('UploadMaxFilesizeInfo');?></small></label>
@@ -113,7 +113,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="upload_quota"><strong><?php echo $engine->_t('UploadQuota');?>:</strong><br>
 					<small><?php echo $engine->_t('UploadQuotaInfo');?><strong> <?php echo $engine->binary_multiples($engine->upload_quota(), false, true, true);?></strong> used.</small></label>
@@ -132,7 +132,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="upload_quota_per_user"><strong><?php echo $engine->_t('UploadQuotaUser');?>:</strong><br>
 					<small><?php echo $engine->_t('UploadQuotaUserInfo');?></small></label>
@@ -151,7 +151,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('CheckMimetype');?>:</strong><br>
 					<small><?php echo $engine->_t('CheckMimetypeInfo');?></small>
@@ -169,7 +169,7 @@ function admin_config_upload(&$engine, &$module)
 					<?php echo $engine->_t('Thumbnails');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('CreateThumbnail');?>:</strong><br>
 					<small><?php echo $engine->_t('CreateThumbnailInfo');?></small>
@@ -182,7 +182,7 @@ function admin_config_upload(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('MaxThumbWidth');?>:</strong><br>
 					<small><?php echo $engine->_t('MaxThumbWidthInfo');?></small>

@@ -57,7 +57,7 @@ function admin_messages(&$engine, &$module)
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('SysMsgSection');?></th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="system_message"><strong><?php echo $engine->_t('SysMsg');?>:</strong><br>
 					<small><?php echo $engine->_t('SysMsgInfo');?></small></label>
@@ -69,7 +69,7 @@ function admin_messages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="system_message_type"><strong><?php echo $engine->_t('SysMsgType');?>:</strong><br>
 					<small><?php echo $engine->_t('SysMsgTypeInfo');?></small></label>
@@ -94,7 +94,7 @@ function admin_messages(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<strong><?php echo $engine->_t('EnableSysMsg');?>:</strong><br>
 					<small><?php echo $engine->_t('EnableSysMsgInfo');?></small></td>

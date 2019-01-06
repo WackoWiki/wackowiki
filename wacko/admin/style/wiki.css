@@ -2,11 +2,13 @@
 /*	Files/comments forms layout	*/
 
 #commentsfiles {
-	font-size: 11px;
+	font-size: 0.6875rem; /* 11px */
 }
 
 
-.header-comments, .header-files, .linksheader {
+.header-comments,
+.header-files,
+.linksheader {
 	letter-spacing: 2px;
 	white-space: nowrap;
 	padding-left: 10px;
@@ -14,23 +16,27 @@
 	margin-bottom: 10px;
 	border-bottom: solid 1px #BABFC7;
 }
-.comment img, .files img {
+.comment img,
+.files img {
 	vertical-align: middle;
 	margin-right: 3px;
 }
-.commentform, .filesform {
+.commentform,
+.filesform {
 	margin-bottom: 20px;
 }
 
-
-.commentform, .comment, .filesform, .files, .rating {
+.commentform,
+.comment,
+.filesform,
+.files,
+.rating {
 	padding-left: 10px;
 	padding-right: 10px;
 }
 
-
 .comment-info {
-	font-size: 11px;
+	font-size: 0.6875rem; /* 11px */
 	letter-spacing: 1px;
 	line-height: 13px;
 	/*white-space: nowrap;*/
@@ -40,7 +46,7 @@
 	border-bottom: 1px solid #BABFC7;
 }
 .comment {
-	font-size: 14px;
+	font-size: 0.875rem; /* 14px */
 	margin-bottom: 20px;
 }
 
@@ -48,13 +54,16 @@
 .files {
 	margin-bottom: 20px;
 }
-table.upload, .filesform table {
+table.upload,
+.filesform table {
 	width: auto;
 }
+
 table.upload td {
 	text-align: left;
 	padding-right: 20px;
 }
+
 table.upload img {
 	vertical-align: middle;
 }
@@ -108,9 +117,10 @@ table.upload img {
 	font-weight: normal;
 }
 span.tocnumber {
-	margin-right: 0.3em;
+	margin-right: 0.3rem;
 }
-#content fieldset ul, #content fieldset ol {
+#content fieldset ul,
+#content fieldset ol {
 	padding-left: 20px;
 }
 
@@ -126,14 +136,14 @@ span.tocnumber {
 	padding: 5px 0;
 }
 #content fieldset.preview {
-	font-size: 14px;
+	font-size: 0.875rem; /* 14px */
 	line-height: 18px;
 	padding: 10px;
 	border: 2px dashed #BABFC7;	
 }
 #content fieldset.preview legend {
 	color: #BABFC7;
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	font-weight: 600;
 	margin-left: 0;
 	padding: 5px 5px 5px 0;
@@ -149,7 +159,8 @@ span.tocnumber {
 	font-style: normal;
 	border-bottom: 1px dashed #C1C1C1;
 }
-.page img, fieldset.preview img {
+.page img,
+fieldset.preview img {
 	vertical-align: middle;
 	padding-left: 3px;
 	padding-right: 3px;
@@ -167,12 +178,15 @@ span.tocnumber {
 .cite {
 	color: #CC0000;
 }
-.cite a, #content .cite a {
+.cite a,
+#content .cite a {
 	color: #990000;
 }
-.cite a:hover, #content .cite a:hover {
+.cite a:hover,
+#content .cite a:hover {
 }
-.cite a:active, #content .cite a:active {
+.cite a:active,
+#content .cite a:active {
 	color: #990000;
 }
 
@@ -202,17 +216,23 @@ mark {
 /*	border: 1px solid #990000;*/
 }
 
-.nb td, .fyi td, .inf td {
+.nb td,
+.fyi td,
+.inf td {
 	padding: 5px;
 	height: 50px;
 }
-.nb .text, .fyi .text, .inf .text {
+.nb .text,
+.fyi .text,
+.inf .text {
 	border-top: 2px solid;
 	border-bottom: 2px solid;
 }
-.nb .sign, .fyi .sign, .inf .sign {
+.nb .sign,
+.fyi .sign,
+.inf .sign {
 	font-weight: 700;
-	font-size: 50px;
+	font-size: 3.125rem; /* 50px */
 	text-align: center;
 	width: 40px;
 	border: 2px solid;
@@ -229,7 +249,8 @@ mark {
 	color: #00AACC;
 	font-family: "Times New Roman", Times, serif;
 }
-.fyi .sign, .fyi .text {
+.fyi .sign,
+.fyi .text {
 	border-color: #00AACC;
 }
 .inf .sign {
@@ -239,14 +260,15 @@ mark {
 .inf .text {
 	color: #6A7387;
 }
-.inf .sign, .inf .text {
+.inf .sign,
+.inf .text {
 	border-color: #BABFC7;
 }
 
 
 table.usertable {
 	border: 1px none;
-	font-size: 12px;
+	font-size: 0.75rem; /* 12px */
 	width: auto;
 	margin-top: 20px;
 }
@@ -260,14 +282,18 @@ table.usertable td.usercell {
 	background-color: #EDEDED;
 	text-align: left;
 }
-table.usertable, table.usertable th.userhead, table.usertable td.usercell {
+table.usertable,
+table.usertable th.userhead,
+table.usertable td.usercell {
 /*	border: 1px solid #BABFC7;*/
 }
-table.usertable th.userhead, table.usertable td.usercell {
+table.usertable th.userhead,
+table.usertable td.usercell {
 	padding: 3px;
 }
 
-table.dtable th.userhead, table.dtable td.usercell {
+table.dtable th.userhead,
+table.dtable td.usercell {
 	padding-right: 5px;
 	padding-bottom: 5px;
 }
@@ -287,7 +313,7 @@ table.dtable th.userhead, table.dtable td.usercell {
 	border: 1px solid #EEEEEE;
 }
 .include .name {
-	font-size: 11px;
+	font-size: 0.6875rem; /* 11px */
 	letter-spacing: 2px;
 	text-align: right;
 	background-color: #EEEEEE;

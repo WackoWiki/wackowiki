@@ -230,7 +230,7 @@ function admin_db_backup(&$engine, &$module)
 					$check = true;
 				}
 
-				echo '<tr class="hl_setting lined">' .
+				echo '<tr class="hl-setting lined">' .
 						'<td class="label">' . $table['name'] . '</td>' .
 						'<td class="t-center">&nbsp;&nbsp;
 							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . '>

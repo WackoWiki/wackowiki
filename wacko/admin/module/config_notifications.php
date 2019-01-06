@@ -63,7 +63,7 @@ function admin_config_notifications(&$engine, &$module)
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('MainSection');?></th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_email_notification"><strong><?php echo $engine->_t('EmailNotification');?>:</strong><br>
 					<small><?php echo $engine->_t('EmailNotificationInfo');?></small></label>
@@ -76,7 +76,7 @@ function admin_config_notifications(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('Autosubscribe');?>:</strong><br>
 					<small><?php echo $engine->_t('AutosubscribeInfo');?></small></label>
@@ -92,7 +92,7 @@ function admin_config_notifications(&$engine, &$module)
 					<?php echo $engine->_t('NotificationSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="notify_page"><strong><?php echo $engine->_t('NotifyPageEdit');?>:</strong><br>
 					<small><?php echo $engine->_t('NotifyPageEditInfo');?></small></label>
@@ -106,7 +106,7 @@ function admin_config_notifications(&$engine, &$module)
 						<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="default_diff_mode"><strong><?php echo $engine->_t('NotifyDiffMode');?>:</strong><br>
 					<small><?php echo $engine->_t('NotifyDiffModeInfo');?><br>(Content-Type: text/plain;)</small></label>
@@ -141,7 +141,7 @@ function admin_config_notifications(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="notify_minor_edit"><strong><?php echo $engine->_t('NotifyMinorEdit');?>:</strong><br>
 					<small><?php echo $engine->_t('NotifyMinorEditInfo');?></small></label>
@@ -153,7 +153,7 @@ function admin_config_notifications(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="notify_comment"><strong><?php echo $engine->_t('NotifyNewComment');?>:</strong><br>
 					<small><?php echo $engine->_t('NotifyNewCommentInfo');?></small></label>
@@ -164,13 +164,13 @@ function admin_config_notifications(&$engine, &$module)
 					<input type="radio" id="notify_comment2" name="notify_comment" value="2"<?php echo ($engine->db->notify_comment == 2 ? ' checked' : '');?>><label for="notify_comment2"><?php echo $engine->_t('NotifyPending'); ?></label>
 				</td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<th colspan="2">
 					<br>
 					<?php echo $engine->_t('PersonalMessagesSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="allow_intercom"><strong><?php echo $engine->_t('AllowIntercomDefault');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowIntercom');?></small></label>
@@ -183,7 +183,7 @@ function admin_config_notifications(&$engine, &$module)
 			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="allow_massemail"><strong><?php echo $engine->_t('AllowMassemailDefault');?>:</strong><br>
 					<small><?php echo $engine->_t('AllowMassemailDefaultInfo');?></small></label>
@@ -193,13 +193,13 @@ function admin_config_notifications(&$engine, &$module)
 					<input type="radio" id="allow_massemail_off" name="allow_massemail" value="1"<?php echo ($engine->db->allow_massemail ? ' checked' : '');?>><label for="allow_massemail_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<th colspan="2">
 					<br>
 					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
 			</tr>
-			<tr class="hl_setting">
+			<tr class="hl-setting">
 				<td class="label">
 					<label for="notify_new_user_account"><strong><?php echo $engine->_t('NotifyUserAccount');?>:</strong><br>
 					<small><?php echo $engine->_t('NotifyUserAccountInfo');?></small></label>

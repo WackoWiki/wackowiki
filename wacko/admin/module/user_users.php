@@ -128,7 +128,7 @@ function admin_user_users(&$engine, &$module)
 			"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
 			"LIMIT 1"))
 		{
-			$engine->show_message($engine->_t('UsersAlreadyExists'));
+			$engine->show_message($engine->_t('RegistrationUserNameOwned'));
 			#$_POST['change']	= $_POST['user_id'];
 			$_POST['create']	= 1;
 		}
@@ -218,7 +218,7 @@ function admin_user_users(&$engine, &$module)
 				"AND user_id <> " . (int) $_POST['user_id'] . " " .
 			"LIMIT 1"))
 		{
-			$engine->set_message($engine->_t('UsersAlreadyExists'));
+			$engine->set_message($engine->_t('RegistrationUserNameOwned'));
 			$_POST['change']	= (int) $_POST['user_id'];
 			$_POST['edit']		= 1;
 		}
@@ -395,7 +395,7 @@ function admin_user_users(&$engine, &$module)
 					<td>
 						<br>
 						<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
+						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
 					'</td>
 				</tr>' .
 			'</table><br>';
@@ -512,7 +512,7 @@ function admin_user_users(&$engine, &$module)
 					<td>
 						<br>
 						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
+						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
 						'<br>
 						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
 					'</td>
@@ -567,7 +567,7 @@ function admin_user_users(&$engine, &$module)
 						<td>
 							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> ' .
 							'<input type="submit" id="submit" name="delete" value="yes"> ' .
-							'<a href="' . $engine->href() . '" class="btn_link"><input type="button" id="button" value="no"></a><br>' .
+							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="no"></a><br>' .
 							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
 					</tr>' .
@@ -865,7 +865,7 @@ function admin_user_users(&$engine, &$module)
 			foreach ($users as $row)
 			{
 				echo '<tr class="lined">' . "\n" .
-						'<td class="label a_middle" style="width:10px;">
+						'<td class="label a-middle" style="width:10px;">
 							<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
 						</td>' .
 						'<td>
