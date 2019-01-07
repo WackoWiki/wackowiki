@@ -10,7 +10,7 @@
 		<form action="[ ' href: ' ]" method="post" name="user_settings_notifications">
 			[ ' csrf: user_settings_notifications ' ]
 			<div class="page-settings">
-				<table class="form-tbl lined">
+				<table class="form-tbl">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -89,7 +89,7 @@
 		<form action="[ ' href: ' ]" method="post" name="user_settings_extended">
 			[ ' csrf: user_settings_extended ' ]
 			<div class="page-settings">
-			<table class="form-tbl lined">
+			<table class="form-tbl">
 				<colgroup>
 					<col span="1" width="30%">
 					<col span="1" width="70%">
@@ -167,7 +167,7 @@
 						</td>
 					</tr>
 				=]
-				<tr class="hl_setting">
+				<tr>
 					<th><label for="default_diff_mode">[ ' _t: DefaultDiffMode ' ]</label></th>
 					<td>
 						<select id="default_diff_mode" name="diff_mode">
@@ -211,7 +211,7 @@
 		<form action="[ ' href: ' ]" method="post" name="user_settings_general">
 			[ ' csrf: user_settings_general ' ]
 			<div class="page-settings">
-				<table class="form-tbl lined">
+				<table class="form-tbl">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">

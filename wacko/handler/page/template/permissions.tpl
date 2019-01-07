@@ -7,7 +7,7 @@
 		[ ' csrf: set_permissions ' ]
 		
 		<br>
-		<table class="form-tbl lined">
+		<table class="form-tbl">
 			<colgroup>
 				<col span="1" width="10%">
 				<col span="1" width="70%">
