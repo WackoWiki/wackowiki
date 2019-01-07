@@ -1093,7 +1093,7 @@ $ap_translation = [
 	'UsersAddNew'				=> 'Ajouter un utilisateur',
 	'UsersDelete'				=> 'Êtes-vous sûr de vouloir supprimer un utilisateur ',
 	'UsersDeleted'				=> 'L&rsquo;utilisateur a été supprimé de la base de données.',
-	'UsersRename'				=> 'Renommer l&rsquo;utilisateur',
+	'UsersRename'				=> 'Renommer l&rsquo;utilisateur %1 en',
 	'UsersRenameInfo'			=> '* Note&nbsp;: les modifications affecteront toutes les pages affectées à cet utilisateur.',
 	'UsersUpdated'				=> 'Utilisateur effectivement actualisé.',
 

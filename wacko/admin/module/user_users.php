@@ -314,7 +314,7 @@ function admin_user_users(&$engine, &$module)
 						"DELETE FROM " . $prefix . "page " .
 						"WHERE tag = " . $engine->db->q($user_space) . " " .
 							"OR tag LIKE " . $engine->db->q($user_space . '/%') . " " .
-							#"AND owner_id = " . (int) $_POST['user_id'] . " " .
+							#"AND owner_id = " . (int) $user_id . " " .
 						"");
 
 					$engine->config->invalidate_config_cache();
@@ -344,7 +344,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">' . $engine->_t('UserName') . '</label>' .
 					'</td>
 					<td>
-						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -419,10 +419,10 @@ function admin_user_users(&$engine, &$module)
 				'<table class="formation">' .
 				'<tr>
 					<td>
-						<label for="newname">' . $engine->_t('UsersRename') . ' \'<code>' . Ut::html($user['user_name']) . '</code>\' in *</label>
+						<label for="newname">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
 					</td>' .
 					'<td>
-						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? $user['user_name'])) . '" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? $user['user_name'])) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
