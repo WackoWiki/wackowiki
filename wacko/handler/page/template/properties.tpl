@@ -10,7 +10,7 @@
 			<div class="page-settings">
 			<form action="[ ' href: properties ' ]" method="post" name="extended_properties">
 				[' csrf: extended_properties ']
-				<table class="form-tbl lined">
+				<table class="form-tbl">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -111,7 +111,7 @@
 		[= f GenOwner =
 			<form action="[ ' href: properties ' ]" method="post" name="general_properties">
 				[' csrf: general_properties ']
-				<table class="form-tbl lined">
+				<table class="form-tbl">
 					<colgroup>
 						<col span="1" width="30%">
 						<col span="1" width="70%">
@@ -219,7 +219,7 @@
 			</form>
 		=]
 		[= w GenWorld =
-			<table class="form-tbl lined">
+			<table class="form-tbl">
 				<tr>
 					<th scope="row">[ ' _t: MetaTitle ' ]</th>
 					<td>[ ' page.title | e ' ]</td>
