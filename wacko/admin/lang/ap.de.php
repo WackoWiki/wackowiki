@@ -196,7 +196,7 @@ $ap_translation = [
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Reperatur',
+		'name'		=> 'Reparatur',
 		'title'		=> 'Datenbank reparieren und optimieren',
 	],
 
@@ -394,14 +394,14 @@ $ap_translation = [
 	'LogoAndTitle'				=> 'Logo und Titel',
 
 	'LogoSection'				=> 'Logo',
-	'SiteLogo'					=> 'Site Logo',
+	'SiteLogo'					=> 'Website-Logo',
 	'SiteLogoInfo'				=> 'Das Logo wird normalerweise in der oberen linken Ecke der Anwendung angezeigt. Die maximale Größe beträgt 2 MiB. Optimale Abmessungen sind 255 Pixel breit und 55 Pixel hoch.',
 	'LogoDimensions'			=> 'Logo Maße',
 	'LogoDimensionsInfo'		=> 'Breite und Höhe des angezeigten Logos.',
 	'LogoDisplayMode'			=> 'Logo-Anzeigemodus',
 	'LogoDisplayModeInfo'		=> 'Bestimmt wie und ob das Logo angezeigt wird. Standard ist ausgeschaltet.',
 	'FaviconSection'			=> 'Favicon',
-	'SiteFavicon'				=> 'Site Favicon',
+	'SiteFavicon'				=> 'Website-Favicon',
 	'SiteFaviconInfo'			=> 'Das Verknüpfungssymbol oder Favicon wird in der Adressleiste, den Registerkarten und den Lesezeichen der meisten Browser angezeigt. Dies überschreibt das Favicon deines Themas.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Layout',
@@ -1109,7 +1109,7 @@ $ap_translation = [
 	'UsersAddNew'				=> 'Füge einen neuen Benutzer hinzu',
 	'UsersDelete'				=> 'Bist du dir sicher das du den Benutzer entfernen willst ',
 	'UsersDeleted'				=> 'Der Benutzer wurde aus der Datenbank entfernt.',
-	'UsersRename'				=> 'Benutzer umbenennen',
+	'UsersRename'				=> 'Benutzer %1 umbenennen zu',
 	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Benutzer zugeordnet sind.',
 	'UsersUpdated'				=> 'Benutzer erfolgreich aktualisiert.',
 

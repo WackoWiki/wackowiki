@@ -27,8 +27,8 @@ if ($this->is_owner() || $this->is_admin())
 {
 	if (isset($_POST))
 	{
-		$_category				= trim($_POST['category'] ?? '');
-		$_category_description	= trim($_POST['category_description'] ?? '');
+		$_category				= $this->sanitize_text_field(($_POST['category'] ?? ''), true);
+		$_category_description	= $this->sanitize_text_field(($_POST['category_description'] ?? ''));
 
 		/////////////////////////////////////////////
 		//   list change/update

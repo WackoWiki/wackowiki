@@ -261,7 +261,7 @@ if (isset($_POST['upload']) & $can_upload)
 
 						// replace option: keep old data if new entry is empty
 						$description	= substr($_POST['file_description'], 0, 250);
-						$description	= $this->sanitize_text_field((string) $description);
+						$description	= $this->sanitize_text_field((string) $description, true);
 						# $caption		= $clean_text((string) $_POST['caption']);
 
 						if ($replace)
