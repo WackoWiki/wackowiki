@@ -75,8 +75,8 @@ switch ($config['database_driver'])
 {
 	case 'mysqli_legacy':
 
-		if ( !isset ( $config['database_port'] ) )		$config['database_port']	= '3306';
-		if (!$port = trim($config['database_port']))	$port						= '3306';
+		if (!isset ( $config['database_port']))		$config['database_port']	= '3306';
+		if (!$port = trim($config['database_port']))	$port					= '3306';
 
 		echo "         <ul>\n";
 
@@ -125,19 +125,6 @@ switch ($config['database_driver'])
 
 			echo "         </ul>\n";
 			echo "         <br>\n";
-
-			// Check if database version matches engine and switch to MyISAM if necessary
-			if ($result	= mysqli_query($dblink, $db_version))
-			{
-				$_result		= mysqli_fetch_assoc($result);
-				$mysql_version	= substr($_result['mysql_version'], 0, strpos($_result['mysql_version'], '-'));
-
-				// InnoDb up to MariaDB / MySql 5.6.4 doesn't support FULLTEXT indexes
-				if (version_compare($mysql_version, '5.6.4', '<'))
-				{
-					$config['database_engine'] = 'MyISAM';
-				}
-			}
 
 			// mariadb / mysql only
 			require_once 'setup/database_mysql.php';
@@ -273,19 +260,6 @@ switch ($config['database_driver'])
 
 		if (!$fatal_error)
 		{
-			// Check if database version matches engine and switch to MyISAM if necessary
-			if ($result = $dblink->query($db_version))
-			{
-				$_result		= $result->fetch(PDO::FETCH_ASSOC);
-				$mysql_version	= substr($_result['mysql_version'], 0, strpos($_result['mysql_version'], '-'));
-
-				// InnoDb up to MariaDB / MySql 5.6.4 doesn't support FULLTEXT indexes
-				if (version_compare($mysql_version, '5.6.4', '<'))
-				{
-					$config['database_engine'] = 'MyISAM';
-				}
-			}
-
 			// mariadb / mysql only
 			require_once 'setup/database_mysql.php';
 			require_once 'setup/database_mysql_updates.php';
