@@ -136,10 +136,11 @@ $upgrade['5.5.rc2'][]	= ['update',	'category_assignment',	$update_category_assig
 
 // config
 $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_0];
-$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_1];
 $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_2];
 $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_3];
 $upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_4];
+
+$upgrade['5.5.6'][]		= ['update',	'config',			$update_config_r5_4_1];
 
 // external link
 $upgrade['5.5.5'][]		= ['create',	'external_link',	$tbl_external_link_r5_4_0];

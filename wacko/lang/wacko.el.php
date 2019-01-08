@@ -209,8 +209,8 @@ $wacko_translation = [
 	'ACLRead'					=> 'Ανάγνωση:',
 	'ACLWrite'					=> 'Εγγραφή:',
 	'ACLComment'				=> 'Σχόλια:',
-	'ACLCreate'					=> 'Create:',
-	'ACLUpload'					=> 'Upload:',
+	'ACLCreate'					=> 'Δημιουργώ:',
+	'ACLUpload'					=> 'Μεταφόρτωση:',
 	'ACLFor'					=> 'Λίστα Δικαιωμάτων Πρόσβασης για την %1',
 	'SetOwner'					=> 'Όρισε Ιδιοκτήτη:',
 	'OwnerDontChange'			=> 'Μην αλλάξεις',
@@ -573,11 +573,11 @@ $wacko_translation = [
 
 	'CreatePage'				=> 'Δημιούργησε αυτή την σελίδα',
 	'CreateNewPage'				=> 'Δημιουργήστε μια νέα σελίδα',
-	'CreateNewPageText'			=> 'Create',
+	'CreateNewPageText'			=> 'Δημιουργώ',
 	'CreateNewPageTip'			=> 'Δημιουργήστε μια νέα σελίδα.',
 
 	'CreateRandomPage'			=> 'Create a random page',
-	'CreatePageButton'			=> 'Create',
+	'CreatePageButton'			=> 'Δημιουργώ',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
@@ -794,7 +794,7 @@ $wacko_translation = [
 	// upload
 	'UploadFiles'				=> 'Upload files',
 	'UploadFor'					=> 'Ανέβασε αρχείο',
-	'UploadButton'				=> 'Προχώρησε',
+	'UploadButton'				=> 'Μεταφόρτωση',
 	'UploadGlobalText'			=> 'για δημόσια προβολή',
 	'UploadGlobal'				=> 'global',
 	'UploadHereText'			=> 'μόνο επιτρεπόμενοι χρήστες να μπορούν να δουν την συγκεκριμένη σελίδα',
@@ -812,7 +812,7 @@ $wacko_translation = [
 	'UploadTitle'				=> 'Τα αρχεία που είναι προσβάσιμα από αυτή την σελίδα',
 	'UploadTitleGlobal'			=> 'Files accessible from anywhere',
 
-	'UploadFile'				=> 'Προχώρησε',
+	'UploadFile'				=> 'Μεταφόρτωση',
 	'UploadMax'					=> 'Όχι μεγαλύτερο από ',
 	'UploadUsedStorage'			=> 'Storage in use ',
 
