@@ -321,7 +321,7 @@ function admin_user_approve(&$engine, &$module)
 	//   control buttons
 	/////////////////////////////////////////////
 
-	$control_buttons =	'<br>' .
+	/* $control_buttons =	'<br>' .
 						'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> ' .
 						'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> ' .
 						'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
@@ -331,7 +331,7 @@ function admin_user_approve(&$engine, &$module)
 								? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
 								  '&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
 								: ''
-							);
+							); */
 
 	$approve_icon	= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Approve') . '" alt="' . $engine->_t('Approve') . '" class="btn-approve">';
 	$deny_icon		= '<img src="' . $engine->db->theme_url . 'icon/spacer.png" title="' . $engine->_t('Deny') . '" alt="' . $engine->_t('Deny') . '" class="btn-deny">';
@@ -342,49 +342,53 @@ function admin_user_approve(&$engine, &$module)
 	$engine->print_pagination($pagination);
 ?>
 	<table class="formation listcenter">
-		<tr>
-			<!--<th style="width:5px;"></th>-->
-			<!--<th style="width:5px;"></th>-->
-			<th style="width:5px;">ID</th>
-			<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
-			<th><?php echo $engine->_t('UserEmail'); ?></th>
-			<th><?php echo $engine->_t('UserIP'); ?></th>
-			<th style="width:20px;"><?php echo $engine->_t('UserLanguage'); ?></th>
-			<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $signup_time, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
-			<th style="width:20px;"><?php echo $engine->_t('UserEnabled'); ?></th>
-			<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
-			<th style="width:200px;"><?php echo $engine->_t('UserActions'); ?></th>
-		</tr>
+		<thead>
+			<tr>
+				<!--<th style="width:5px;"></th>-->
+				<!--<th style="width:5px;"></th>-->
+				<th style="width:5px;">ID</th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
+				<th><?php echo $engine->_t('UserEmail'); ?></th>
+				<th><?php echo $engine->_t('UserIP'); ?></th>
+				<th style="width:20px;"><?php echo $engine->_t('UserLanguage'); ?></th>
+				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $signup_time, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
+				<th style="width:20px;"><?php echo $engine->_t('UserEnabled'); ?></th>
+				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
+				<th style="width:200px;"><?php echo $engine->_t('UserActions'); ?></th>
+			</tr>
+		<thead>
+		<tbody>
 <?php
 	if ($users)
 	{
 		foreach ($users as $row)
 		{
-			echo '<tr class="lined">' . "\n" .
-					'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
-					#'<td class="label a-middle" style="width:10px;">' .
-					#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
-					#'</td>' .
-					#'<td>' .
-					#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
-					#'</td>' . <a href="' . $engine->href() . '&amp;mode=db_restore">Restore database</a>
-					'<td>' . $row['user_id'] . '</td>' .
-					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
-					'<td>' . $row['email'] . '</td>' .
-					'<td>' . $row['user_ip'] . '</td>' .
-					'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang'], 'account_status' => $account_status]) . '">' . $row['user_lang'] . '</a></small></td>' .
-					'<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>' .
-					'<td>' . $row['enabled'] . '</td>' .
-					'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
-					'<td>' .
-						(($account_status > 0) || $account_status == -1
-							? '<a href="' . $engine->href('', '', ['approve' => 1, 'user_id' => $row['user_id']]) . '">' . $approve_icon . '' . $engine->_t('Approve') . '</a>'
-							: '') .
-						(($account_status < 2) || $account_status == -1
-							? '<a href="' . $engine->href('', '', ['approve' => 2, 'user_id' => $row['user_id']]) . '">' . $deny_icon . '' . $engine->_t('Deny') . '</a>'
-							: '') .
-					'</td>' .
-				'</tr>';
+			echo
+			'<tr class="lined">' . "\n" .
+				'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
+				#'<td class="label a-middle" style="width:10px;">' .
+				#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
+				#'</td>' .
+				#'<td>' .
+				#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
+				#'</td>' . <a href="' . $engine->href() . '&amp;mode=db_restore">Restore database</a>
+				'<td>' . $row['user_id'] . '</td>' .
+				'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
+				'<td>' . $row['email'] . '</td>' .
+				'<td>' . $row['user_ip'] . '</td>' .
+				'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang'], 'account_status' => $account_status]) . '">' . $row['user_lang'] . '</a></small></td>' .
+				'<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>' .
+				'<td>' . $row['enabled'] . '</td>' .
+				'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
+				'<td>' .
+					(($account_status > 0) || $account_status == -1
+						? '<a href="' . $engine->href('', '', ['approve' => 1, 'user_id' => $row['user_id']]) . '">' . $approve_icon . '' . $engine->_t('Approve') . '</a>'
+						: '') .
+					(($account_status < 2) || $account_status == -1
+						? '<a href="' . $engine->href('', '', ['approve' => 2, 'user_id' => $row['user_id']]) . '">' . $deny_icon . '' . $engine->_t('Deny') . '</a>'
+						: '') .
+				'</td>' .
+			'</tr>';
 		}
 	}
 	else
@@ -392,7 +396,8 @@ function admin_user_approve(&$engine, &$module)
 		echo '<tr><td colspan="5"><br><em>' . $engine->_t('NoMatchingUser') . '</em></td></tr>';
 	}
 ?>
-		</table>
+		</tbody>
+	</table>
 <?php
 	$engine->print_pagination($pagination);
 

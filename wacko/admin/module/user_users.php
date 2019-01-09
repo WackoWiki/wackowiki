@@ -121,6 +121,41 @@ function admin_user_users(&$engine, &$module)
 	// add user processing
 	if (isset($_POST['create']) && isset($_POST['newname']))
 	{
+		/* // strip \-\_\'\.\/\\
+		$user_name	= $engine->sanitize_username($user_name);
+
+		// check if name is WikiName style
+		if (!$engine->is_wiki_name($user_name) && $engine->db->disable_wikiname === false)
+		{
+			$error .= $engine->_t('MustBeWikiName') . " ";
+		}
+		else if (strlen($user_name) < $engine->db->username_chars_min)
+		{
+			$error .= Ut::perc_replace($engine->_t('NameTooShort'), 0, $engine->db->username_chars_min) . " ";
+		}
+		else if (strlen($user_name) > $engine->db->username_chars_max)
+		{
+			$error .= Ut::perc_replace($engine->_t('NameTooLong'), 0, $engine->db->username_chars_max) . " ";
+		}
+		// check if valid user name (and disallow '/')
+		else if (!preg_match('/^([' . $engine->language['ALPHANUM_P'] . ']+)$/', $user_name) || preg_match('/\//', $user_name))
+		{
+			$error .= $engine->_t('InvalidUserName') . " ";
+		}
+		// check if reserved word
+		else if (($result = $engine->validate_reserved_words($user_name)))
+		{
+			$error .= Ut::perc_replace($engine->_t('UserReservedWord'), $result);
+		}
+		// if user name already exists
+		else if ($engine->user_name_exists($user_name) === true)
+		{
+			$error .= $engine->_t('RegistrationUserNameOwned');
+
+			// log event
+			$engine->log(2, Ut::perc_replace($engine->_t('LogUserSimiliarName', SYSTEM_LANG), $user_name));
+		} */
+
 		// do we have identical names?
 		if ($engine->db->load_single(
 			"SELECT user_id " .
@@ -523,9 +558,8 @@ function admin_user_users(&$engine, &$module)
 			echo $engine->form_close();
 		}
 	}
-
 	// delete user form
-	if (isset($_POST['remove']) && (isset($user_id) || $set == true))
+	else if (isset($_POST['remove']) && (isset($user_id) || $set == true))
 	{
 		$users	= '';
 		$i		= 0;
@@ -576,9 +610,8 @@ function admin_user_users(&$engine, &$module)
 
 		echo $engine->form_close();
 	}
-
 	// get user
-	if (isset($_GET['user_id']))
+	else if (isset($_GET['user_id']))
 	{
 		echo '<h2>' . $user['user_name'] . "</h2>";
 
@@ -842,23 +875,42 @@ function admin_user_users(&$engine, &$module)
 		$engine->print_pagination($pagination);
 ?>
 		<table class="formation listcenter">
-			<tr>
-				<th style="width:5px;"></th>
-				<th style="width:5px;"></th>
-				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_user]); ?>"><?php echo $engine->_t('UsersName');?></a></th>
-				<!--<th style="width:150px;"><a href="<?php echo $engine->href('', '', ['order' => $order_name]); ?>"><?php echo $engine->_t('RealName');?></a></th>-->
-				<th><?php echo $engine->_t('Email');?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_pages]); ?>"><?php echo $engine->_t('UsersPages');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_comments]); ?>"><?php echo $engine->_t('UsersComments');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_revisions]); ?>"><?php echo $engine->_t('UsersRevisions');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_uploads]); ?>"><?php echo $engine->_t('UsersUploads');?></a></th>
-				<th style="width:20px;"><?php echo $engine->_t('UserLanguage');?></th>
-				<th style="width:20px;"><?php echo $engine->_t('Enabled');?></th>
-				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $signup_time]); ?>"><?php echo $engine->_t('UsersSignup');?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $last_visit]); ?>"><?php echo $engine->_t('UsersLastSession');?></a></th>
-			</tr>
+			<colgroup>
+				<col span="1" style="width:5px;">
+				<col span="1" style="width:5px;">
+				<col span="1" style="width:5px;">
+				<col span="1" style="width:20px;">
+				<col span="1">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+				<col span="1" style="width:20px;">
+			</colgroup>
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th>ID</th>
+					<th><a href="<?php echo $engine->href('', '', ['order' => $order_user]); ?>"><?php echo $engine->_t('UsersName');?></a></th>
+					<!--<th style="width:150px;"><a href="<?php echo $engine->href('', '', ['order' => $order_name]); ?>"><?php echo $engine->_t('RealName');?></a></th>-->
+					<th><?php echo $engine->_t('Email');?></th>
+					<th><a href="<?php echo $engine->href('', '', ['order' => $order_pages]); ?>"><?php echo $engine->_t('UsersPages');?></a></th>
+					<th><a href="<?php echo $engine->href('', '', ['order' => $order_comments]); ?>"><?php echo $engine->_t('UsersComments');?></a></th>
+					<th><a href="<?php echo $engine->href('', '', ['order' => $order_revisions]); ?>"><?php echo $engine->_t('UsersRevisions');?></a></th>
+					<th><a href="<?php echo $engine->href('', '', ['order' => $order_uploads]); ?>"><?php echo $engine->_t('UsersUploads');?></a></th>
+					<th><?php echo $engine->_t('UserLanguage');?></th>
+					<th><?php echo $engine->_t('Enabled');?></th>
+					<th><?php echo $engine->_t('AccountStatus'); ?></th>
+					<th><a href="<?php echo $engine->href('', '', ['order' => $signup_time]); ?>"><?php echo $engine->_t('UsersSignup');?></a></th>
+					<th><a href="<?php echo $engine->href('', '', ['order' => $last_visit]); ?>"><?php echo $engine->_t('UsersLastSession');?></a></th>
+				</tr>
+			<thead>
+			<tbody>
 <?php
 		if ($users)
 		{
@@ -892,7 +944,8 @@ function admin_user_users(&$engine, &$module)
 			echo '<tr><td colspan="5"><br><em>' . $engine->_t('UsersNoMatching') . '</em></td></tr>';
 		}
 ?>
-			</table>
+			</tbody>
+		</table>
 <?php
 		$engine->print_pagination($pagination);
 
