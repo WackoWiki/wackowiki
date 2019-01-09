@@ -353,7 +353,7 @@ function admin_user_users(&$engine, &$module)
 						"");
 
 					$engine->config->invalidate_config_cache();
-					$engine->show_message($engine->_t('UsersDeleted'), 'success');
+					$engine->show_message(Ut::perc_replace($engine->_t('UsersDeleted'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>'), 'success');
 					$engine->log(4, Ut::perc_replace($engine->_t('LogUserDeleted', SYSTEM_LANG), $user['user_name']));
 				}
 			}
@@ -599,9 +599,9 @@ function admin_user_users(&$engine, &$module)
 				'<table class="formation">' .
 					'<tr>
 						<td>
-							<label for="">' . $engine->_t('UsersDelete') . ' ' . $users . '?</label> ' .
-							'<input type="submit" id="submit" name="delete" value="yes"> ' .
-							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="no"></a><br>' .
+							<label for="">' . Ut::perc_replace($engine->_t('UsersDelete'), ' ' . $users) . '?</label> ' .
+							'<input type="submit" id="submit" name="delete" value="' . $engine->_t('Remove') . '"> ' .
+							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a><br>' .
 							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
 					</tr>' .

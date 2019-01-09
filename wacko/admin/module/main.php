@@ -55,7 +55,7 @@ function admin_main(&$engine, &$module)
 	echo $engine->form_open('lock');
 	?>
 	<input type="hidden" name="action" value="lock">
-	<table style="max-width:200px;" class="formation">
+	<table style="max-width: 200px;" class="formation">
 		<tr class="hl-setting">
 			<td class="label" style="white-space:nowrap;"><?php echo ($config->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
 			<td class="t-center"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>"></td>
@@ -68,7 +68,7 @@ function admin_main(&$engine, &$module)
 ?>
 		<input type="hidden" name="mode" value="main">
 		<input type="hidden" name="action" value="purge_sessions">
-		<table style="max-width:200px;" class="formation">
+		<table style="max-width: 200px;" class="formation">
 			<tr class="hl-setting">
 				<td class="label nowrap"><?php echo $engine->_t('PurgeSessionsTip');?>
 				<br><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
@@ -77,6 +77,7 @@ function admin_main(&$engine, &$module)
 		</table>
 <?php
 	echo $engine->form_close();
+	echo '<br><br>';
 	echo $engine->action('admincache');
 
 }
