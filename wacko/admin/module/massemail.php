@@ -134,12 +134,15 @@ function admin_massemail(&$engine, &$module)
 
 	echo $engine->form_open('massemail');
 ?>
-		<input type="hidden" name="action" value="update">
-		<table class="formation">
-			<colgroup>
-				<col span="1" style="width:50%;">
-				<col span="1" style="width:50%;">
-			</colgroup>
+	<input type="hidden" name="action" value="update">
+	<table class="formation">
+		<colgroup>
+			<col span="1" style="width:50%;">
+			<col span="1" style="width:50%;">
+		</colgroup>
+		<tr>
+			<th colspan="2"><?php echo $engine->_t('SysMsgSection');?></th>
+		</tr>
 		<tr class="hl-setting">
 			<td class="label">
 				<label for="user_id"><strong><?php echo $engine->_t('SendToUser'); ?></strong><br>
@@ -169,6 +172,9 @@ function admin_massemail(&$engine, &$module)
 				</select>
 			</td>
 		</tr>
+		<tr class="lined">
+			<td colspan="2"></td>
+		</tr>
 <?php
 	echo '<tr class="hl-setting">
 			<td class="label">
@@ -190,6 +196,9 @@ function admin_massemail(&$engine, &$module)
 			?>
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
 			<tr class="hl-setting">
 				<td class="label"><strong><?php echo $engine->_t('MessageSubject'); ?>:</strong><br>
 					<small><?php echo $engine->_t('MessageSubjectInfo');?></small></td>
@@ -198,7 +207,9 @@ function admin_massemail(&$engine, &$module)
 					<input type="text" name="mail_subject" value="<?php echo Ut::html(($_POST['mail_subject'] ?? '')); ?>" size="60" maxlength="200"  required>
 				</td>
 			</tr>
-
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
 			<tr class="hl-setting">
 				<td class="label"><label for="mail_body"><strong><?php echo $engine->_t('YourMessage');?>:</strong><br>
 					<small><?php echo $engine->_t('YourMessageInfo');?></small></label></td>

@@ -125,29 +125,27 @@ if (!isset($engine->sess->ap_created))
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
-		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen">
+		<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 	</head>
 
 	<body>
+		<div id="mainwrapper">
 <?php
-		// here we show messages
-		$engine->output_messages();
+			// here we show messages
+			$engine->output_messages();
 ?>
-		<div id="loginbox">
-			<strong><?php echo $engine->_t('Authorization'); ?></strong><br>
-			<?php echo $engine->_t('AuthorizationTip'); ?>
-			<br><br>
-			<?php
-			echo $engine->form_open('emergency', ['tag' => 'admin.php']);
-			?>
-				<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
-				<?php
-				echo $engine->form_autocomplete_off();
-				?>
-				<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" autofocus>
-				<input type="submit" id="submit" value="<?php echo $engine->_t('LoginButton'); ?>">
-			</form>
+			<div id="loginbox">
+				<strong><?php echo $engine->_t('Authorization'); ?></strong><br>
+				<?php echo $engine->_t('AuthorizationTip'); ?>
+				<br><br>
+				<?php echo $engine->form_open('emergency', ['tag' => 'admin.php']); ?>
+					<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
+					<?php echo $engine->form_autocomplete_off(); ?>
+					<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" autofocus>
+					<input type="submit" id="submit" value="<?php echo $engine->_t('LoginButton'); ?>">
+				</form>
+			</div>
 		</div>
 	</body>
 </html>
@@ -158,7 +156,7 @@ if (!isset($engine->sess->ap_created))
 // setting temporary admin user context
 $session_length = 1800; // 1800 -> 30 minutes
 
-if (time() - $engine->sess->ap_last_activity > 900) // 1800
+if (time() - $engine->sess->ap_last_activity > 900)
 {
 	// last request was more than 15 minutes ago
 	unset($engine->sess->ap_created);
@@ -173,7 +171,7 @@ $engine->sess->ap_last_activity = time(); // update last activity time stamp
 if (time() - $engine->sess->ap_created > $session_length)
 {
 	$session_expire				= time() + $session_length;
-	$engine->sess->ap_created	= time();  // update creation time
+	$engine->sess->ap_created	= time(); // update creation time
 }
 
 ########################################################
@@ -189,6 +187,7 @@ foreach (Ut::file_glob('admin/{common,module}/*.php') as $file_name)
 ##     Build menu                                     ##
 ########################################################
 
+// add main page to menu
 $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['main']['cat']].
 			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'main' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
@@ -216,15 +215,16 @@ uasort($module,
 	}
 );
 
+// append modules to menu
 foreach ($module as $row)
 {
-	if ($row['status'] === true)
+	if ($row['status'] === true) // exclude disabled modules
 	{
 		if ($row['mode'] != 'main')
 		{
 			$menu .= ($row['cat'] != $category
-						? "</ul>\n</li>\n" . '<li class="text submenu2">' . $engine->_t('CategoryArray')[$row['cat']] . "<ul>\n"
-						: '');
+				? "</ul>\n</li>\n" . '<li class="text submenu2">' . $engine->_t('CategoryArray')[$row['cat']] . "<ul>\n"
+				: '');
 
 			if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
 			{
@@ -264,8 +264,8 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<meta http-equiv="Content-Type" content="text/html;">
-		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/wiki.css" media="screen">
-		<link rel="stylesheet" href="<?php echo rtrim($engine->db->base_url); ?>admin/style/backend.css" media="screen">
+		<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/wiki.css" media="screen">
+		<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 	</head>
 
@@ -277,8 +277,8 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 				<h1>
 					<a href="<?php echo $engine->href(); ?>">
 					<?php
-						echo '<img src="' . rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
-						# echo '<img src="' . rtrim($engine->db->base_url) . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
+						echo '<img src="' . $engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
+						# echo '<img src="' . $engine->db->base_url . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
 						# echo $engine->_t('AdminPanel');
 						?>
 					</a>
@@ -293,7 +293,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 						'&nbsp;&nbsp;' .
 						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
 						'&nbsp;&nbsp;' .
-						$engine->compose_link_to_page('/', '', rtrim($engine->db->base_url, '/')) .
+						$engine->compose_link_to_page('/', '', $engine->db->base_url, '/') .
 						'&nbsp;&nbsp;' .
 						($db->is_locked() || RECOVERY_MODE == true ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
 						'&nbsp;&nbsp;' .
@@ -304,7 +304,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 			<br style="clear: right;">
 			<div id="sections">
 				<?php
-				echo '<a href="' . rtrim($engine->db->base_url) . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>';
+				echo '<a href="' . $engine->db->base_url . '" title="' . $engine->_t('ApHomePageTip') . '">' . $engine->_t('ApHomePage') . '</a>';
 				echo '<a href="' . $engine->href('', '', ['action' => 'logout']) . '" title="' . $engine->_t('ApLogOutTip') . '">' . $engine->_t('ApLogOut') . '</a>';
 				?>
 			</div>
@@ -382,11 +382,7 @@ else if (!($_GET && $_POST))
 <!-- end page output -->
 	</div>
 </main>
-<?php /*
-<div id="tabs">
-	<div class="controls"></div>
-</div>
-*/ ?>
+
 <footer id="footer">System <a href="https://wackowiki.org/">WackoWiki</a></footer>
 
 <?php

@@ -170,7 +170,7 @@ function admin_user_groups(&$engine, &$module)
 					'<table class="formation">' .
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('MembersRemove') . ' \'<code>' . Ut::html($member['user_name']) . '</code>\'?</label> ' .
+								<label for="">' . $engine->_t('MembersRemove') . ' <code>' . Ut::html($member['user_name']) . '</code>?</label> ' .
 								'<input type="submit" id="submit" name="remove_member" value="yes"> ' .
 								'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="no"></a>' .
 								'<br><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
@@ -185,7 +185,8 @@ function admin_user_groups(&$engine, &$module)
 		}
 
 		// add group
-		if (isset($_POST['create']) && isset($_POST['new_group_name']))
+		if (isset($_POST['create'])
+			&& isset($_POST['new_group_name']))
 		{
 			// do we have identical names?
 			if ($engine->db->load_single(
@@ -216,7 +217,9 @@ function admin_user_groups(&$engine, &$module)
 			}
 		}
 		// edit group
-		else if (isset($_POST['edit']) && isset($_POST['group_id']) && (isset($_POST['new_group_name']) || isset($_POST['moderator_id'])))
+		else if (isset($_POST['edit'])
+			&&  isset($_POST['group_id'])
+			&& (isset($_POST['new_group_name']) || isset($_POST['moderator_id'])))
 		{
 			// do we have identical names?
 			if ($engine->db->load_single(
@@ -262,7 +265,7 @@ function admin_user_groups(&$engine, &$module)
 				"WHERE group_id = " . (int) $_POST['group_id']);
 
 			$engine->config->invalidate_config_cache();
-			$engine->show_message($engine->_t('GroupsDeleted'), 'success');
+			$engine->show_message(Ut::perc_replace($engine->_t('GroupsDeleted'), $usergroup['group_name']), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRemoved', SYSTEM_LANG), $usergroup['group_name']));
 
 			unset($_GET['group_id']);
@@ -320,7 +323,7 @@ function admin_user_groups(&$engine, &$module)
 						<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 					</td>' .
 					'<td>
-						<input type="checkbox" id="open" name="open" value="1" ' . ( !isset($_POST['open']) ? ' checked' : '') . '>
+						<input type="checkbox" id="open" name="open" value="1" ' . (!isset($_POST['open']) ? ' checked' : '') . '>
 					</td>
 				</tr>' .
 				'<tr>
@@ -328,7 +331,7 @@ function admin_user_groups(&$engine, &$module)
 						<label for="active">' . $engine->_t('GroupsActive') . '</label>
 	 				</td>' .
 					'<td>
-	 					<input type="checkbox" id="active" name="active" value="1" ' . ( !isset($_POST['active']) ? ' checked' : '') . '>
+	 					<input type="checkbox" id="active" name="active" value="1" ' . (!isset($_POST['active']) ? ' checked' : '') . '>
 	 				</td>
 				</tr>' .
 				'<tr>
@@ -357,13 +360,13 @@ function admin_user_groups(&$engine, &$module)
 			echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
 				'<table class="formation">' .
 				'<tr><td>
-					<label for="new_group_name">' . $engine->_t('GroupsRename') . ' \'<code>' . Ut::html($usergroup['group_name']) . '</code>\' in</label>
+					<label for="new_group_name">' . Ut::perc_replace($engine->_t('GroupsRename'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . '</label>
 				</td>' .
 				'<td>
 					<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? $usergroup['group_name'])) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
 				</td></tr>' .
 				'<tr><td>
-						<label for="new_description">' . $engine->_t('GroupsDescription') . '</label>
+					<label for="new_description">' . $engine->_t('GroupsDescription') . '</label>
 				</td>' .
 				'<td>
 					<input type="text" id="new_description" name="new_description" value="' . Ut::html(($_POST['new_description'] ?? $usergroup['description'])) . '" size="50" maxlength="100">
@@ -389,13 +392,13 @@ function admin_user_groups(&$engine, &$module)
 						<label for="open">' . $engine->_t('GroupsOpen') . '</label>
 				</td>' .
 				'<td>
-						<input type="checkbox" id="open" name="open" value="1" ' . ( isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '') . '>
+						<input type="checkbox" id="open" name="open" value="1" ' . (isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '') . '>
 				</td></tr>' .
 				'<tr><td>
 						<label for="active">' . $engine->_t('GroupsActive') . '</label>
 				</td>' .
 				'<td>
-						<input type="checkbox" id="active" name="active" value="1" ' . ( isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '') . '>
+						<input type="checkbox" id="active" name="active" value="1" ' . (isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '') . '>
 				</td></tr>' .
 				'<tr><td>
 					<br>
@@ -423,9 +426,9 @@ function admin_user_groups(&$engine, &$module)
 				'<table class="formation">' .
 					'<tr>
 						<td>
-							<label for="">' . $engine->_t('GroupsDelete') . ' \'<code>' . Ut::html($usergroup['group_name']) . '</code>\'?</label> ' .
-							'<input type="submit" id="submit" name="delete" value="yes"> ' .
-							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="no"></a>' .
+							<label for="">' . Ut::perc_replace($engine->_t('GroupsDelete'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . '?</label> ' .
+							'<input type="submit" id="submit" name="delete" value="' . $engine->_t('Remove') . '"> ' .
+							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>' .
 							'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
 						'</td>
 					</tr>' .
