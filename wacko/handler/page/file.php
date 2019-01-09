@@ -10,7 +10,6 @@ if (!isset($_GET['get']) || (!isset($_GET['global']) && !$this->page))
 	$this->show_must_go_on();
 }
 
-$error			= '';
 $file_path		= '';
 
 // 1. check existence

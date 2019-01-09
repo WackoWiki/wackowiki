@@ -190,7 +190,7 @@ $tbl_page = "CREATE TABLE {$pref}page (" .
 					"PRIMARY KEY (page_id)," .
 					"KEY idx_user_id (user_id)," .
 					"KEY idx_owner_id (owner_id)," .
-					"FULLTEXT KEY body (body),". // InnoDb up to MySql 5.6 or MariaDB: #1214 - The used table type doesn't support FULLTEXT indexes
+					"FULLTEXT KEY body (body),".
 					"UNIQUE KEY idx_tag (tag)," .
 					"KEY idx_supertag (supertag)," .
 					"KEY idx_depth(depth)," .

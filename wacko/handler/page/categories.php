@@ -11,11 +11,8 @@ if (!defined('IN_WACKO'))
 //	  find a way to unwrap table-structured SQL data array
 //	  into a tree-structured multilevel array)
 //	- split in functions and move into new class -> tagging for attachments
-//	- trim input string
 
-$selected	= '';
 $parent_id	= '';
-$options	= '';
 
 // redirect to show method if page don't exists
 if (!$this->page)
