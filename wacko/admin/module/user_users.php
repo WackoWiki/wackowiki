@@ -502,7 +502,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="theme">' . $engine->_t('ChooseTheme') . '</label>
 					</td>
 					<td>
-						<select id="theme" name="theme">' .
+						<select id="theme" name="theme">';
 
 						$themes = $engine->available_themes();
 
