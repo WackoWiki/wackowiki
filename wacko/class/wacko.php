@@ -6818,10 +6818,6 @@ class Wacko
 		// clean _POST if no csrf token
 		$this->validate_post_token();
 
-		// url lang selection
-		$url	= explode('@@', $tag);
-		$tag	= trim($url[0]);
-		$lang	= trim(@$url[1]); // STS: unused! remove?
 		$user	= [];
 
 		if (!$tag)
