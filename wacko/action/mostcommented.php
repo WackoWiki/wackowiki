@@ -25,6 +25,7 @@ if ($for)					$page = $for;
 
 if (!isset($page))			$page = '';
 if (!isset($nomark))		$nomark = 0;
+if (!isset($lang))			$lang = '';
 if (!isset($max))			$max = null;
 if (!isset($legend))		$legend = '';
 if (!isset($title))			$title = 0;
@@ -133,9 +134,9 @@ if (!empty($pages))
 
 	if (!$nomark)
 	{
-		$tpl->mark		= true;
-		$tpl->emark		= true;
-		$tpl->legend	= $this->link($ppage, '', $legend);
+		$tpl->mark			= true;
+		$tpl->mark_legend	= $this->link($ppage, '', $legend);
+		$tpl->emark			= true;
 	}
 
 	$tpl->pagination_text = $pagination['text'];

@@ -137,9 +137,9 @@ if (!empty($pages))
 
 	if (!$nomark)
 	{
-		$tpl->mark		= true;
-		$tpl->emark		= true;
-		$tpl->legend	= $this->link($ppage, '', $legend);
+		$tpl->mark			= true;
+		$tpl->mark_legend	= $this->link($ppage, '', $legend);
+		$tpl->emark			= true;
 	}
 
 	$tpl->pagination_text = $pagination['text'];

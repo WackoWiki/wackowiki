@@ -12,6 +12,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	$title		= trim(@$_POST['title']);
 	$parent_id	= (int) @$_POST['parent_id'];
 
+	$user		= $this->get_user();
+
 	// if form token failed
 	if (!$_POST)
 	{
@@ -41,8 +43,6 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	{
 		$num = 1;
 	}
-
-	$user = $this->get_user();
 
 	// watch page
 	if ($this->page
