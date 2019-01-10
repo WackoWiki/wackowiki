@@ -411,7 +411,7 @@ function admin_user_users(&$engine, &$module)
 				{
 					foreach ($langs as $lang)
 					{
-						echo '<option value="' . $lang . '" ' . ($user['user_lang'] == $lang ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang.")</option>\n";
+						echo '<option value="' . $lang . '">' . $languages[$lang] . ' (' . $lang . ")</option>\n";
 					}
 				}
 
