@@ -16,9 +16,9 @@ $upgrade_msg = [
 		'error'		=> $lang['ErrorAlteringTable']
 	],
 
-	'update' => [
-		'ok'		=> $lang['UpdateTable'],
-		'error'		=> $lang['ErrorUpdatingTable']
+	'create' => [
+		'ok'		=> $lang['CreatingTable'],
+		'error'		=> $lang['ErrorCreatingTable']
 	],
 
 	'delete' => [
@@ -26,18 +26,21 @@ $upgrade_msg = [
 		'error'		=> $lang['ErrorDeletingTable']
 	],
 
-	'create' => [
-		'ok'		=> $lang['CreatingTable'],
-		'error'		=> $lang['ErrorCreatingTable']
+	'insert' => [
+		'ok'		=> $lang['InsertRecord'],
+		'error'		=> $lang['ErrorInsertingRecord']
 	],
 
 	'rename' => [
 		'ok'		=> $lang['RenameTable'],
 		'error'		=> $lang['ErrorRenamingTable']
+	],
+
+	'update' => [
+		'ok'		=> $lang['UpdateTable'],
+		'error'		=> $lang['ErrorUpdatingTable']
 	]
 ];
-
-$db_version				= "SELECT VERSION() as mysql_version";
 
 require_once 'setup/_insert_default.php';
 require_once 'setup/_insert_config.php';
@@ -75,12 +78,16 @@ switch ($config['database_driver'])
 {
 	case 'mysqli_legacy':
 
-		if (!isset ( $config['database_port']))		$config['database_port']	= '3306';
-		if (!$port = trim($config['database_port']))	$port					= '3306';
+		if (!isset($config['database_port']))			$config['database_port']	= '3306';
+		if (!$port = trim($config['database_port']))	$port						= '3306';
 
 		echo "         <ul>\n";
 
-		if (!test($lang['TestConnectionString'], $dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port), $lang['ErrorDBConnection']))
+		if (!test(
+			$lang['TestConnectionString'],
+			$dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port),
+			$lang['ErrorDBConnection'])
+		)
 		{
 			/*
 			 There was a problem with the connection string
@@ -138,7 +145,11 @@ switch ($config['database_driver'])
 
 				foreach ($delete_table as $value)
 				{
-					test(Ut::perc_replace($lang['DeletingTable'], $value[0]), @mysqli_query($dblink, $value[1]), Ut::perc_replace($lang['ErrorDeletingTable'], $value[0]));
+					test(
+						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
+						@mysqli_query($dblink, $value[1]),
+						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>')
+					);
 
 					/* echo '<pre>';
 					print_r($value);
@@ -162,15 +173,28 @@ switch ($config['database_driver'])
 
 					foreach ($create_table as $value)
 					{
-						test(Ut::perc_replace($lang['CreatingTable'], $value[0]), @mysqli_query($dblink, $value[1]), Ut::perc_replace($lang['ErrorCreatingTable'], $value[0]));
+						test(
+							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+							@mysqli_query($dblink, $value[1]),
+							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>')
+						);
 					}
 
 					foreach ($insert_records as $value)
 					{
-						test($value[0], @mysqli_query($dblink, $value[1]), Ut::perc_replace($lang['ErrorAlreadyExists'], $value[2]));
+						test(
+							$value[0],
+							@mysqli_query($dblink, $value[1]),
+							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>')
+						);
 					}
 
-					test($lang['InstallingLogoImage'], @mysqli_query($dblink, $insert_logo_image), Ut::perc_replace($lang['ErrorAlreadyExists'], 'logo image'));
+					test(
+						$lang['InstallingLogoImage'],
+						@mysqli_query($dblink, $insert_logo_image),
+						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
+					);
+
 					echo "            </ol>\n";
 				}
 				else
@@ -187,7 +211,11 @@ switch ($config['database_driver'])
 
 							foreach ($upgrade[$to_version] as $value)
 							{
-								test(Ut::perc_replace($upgrade_msg[$value[0]]['ok'], $value[1]), @mysqli_query($dblink, $value[2]), Ut::perc_replace($upgrade_msg[$value[0]]['error'], $value[1]));
+								test(
+									Ut::perc_replace($upgrade_msg[$value[0]]['ok'], '<code>' . $value[1] . '</code>'),
+									@mysqli_query($dblink, $value[2]),
+									Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>')
+								);
 							}
 
 							echo "            </ol>\n";
@@ -200,7 +228,11 @@ switch ($config['database_driver'])
 				echo "         <ul>\n";
 
 				// inserting config values
-				test($lang['InstallingConfigValues'], @mysqli_query($dblink, $insert_config), Ut::perc_replace($lang['ErrorAlreadyExists'], 'config values'));
+				test(
+					$lang['InstallingConfigValues'],
+					@mysqli_query($dblink, $insert_config),
+					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
+				);
 
 				echo "            <li>" . $lang['InstallingPagesBegin'];
 				require_once 'setup/insert_pages.php';
@@ -219,7 +251,7 @@ switch ($config['database_driver'])
 			/* case 'sqlite3': */
 
 			case 'mysql_pdo':
-				$dsn = "mysql:host=" . $config['database_host'].($config['database_port'] != '' ? ";port=" . $config['database_port'] : '') . ";dbname=" . $config['database_database'].($config['database_charset'] != '' ? ";charset=" . $config['database_charset'] : '');
+				$dsn = "mysql:host=" . $config['database_host'] . ($config['database_port'] != '' ? ";port=" . $config['database_port'] : '') . ";dbname=" . $config['database_database'] . ($config['database_charset'] != '' ? ";charset=" . $config['database_charset'] : '');
 				break;
 
 			/* case 'pgsql':
@@ -272,7 +304,11 @@ switch ($config['database_driver'])
 
 				foreach ($delete_table as $value)
 				{
-					test_pdo(Ut::perc_replace($lang['DeletingTable'], $value[0]), $value[1], Ut::perc_replace($lang['ErrorDeletingTable'], $value[0]));
+					test_pdo(
+						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
+						$value[1],
+						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>')
+					);
 				}
 
 				echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
@@ -292,15 +328,28 @@ switch ($config['database_driver'])
 
 					foreach ($create_table as $value)
 					{
-						test_pdo(Ut::perc_replace($lang['CreatingTable'], $value[0]), $value[1], Ut::perc_replace($lang['ErrorCreatingTable'], $value[0]));
+						test_pdo(
+							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+							$value[1],
+							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>')
+						);
 					}
 
 					foreach ($insert_records as $value)
 					{
-						test_pdo($value[0], $value[1], Ut::perc_replace($lang['ErrorAlreadyExists'], $value[2]));
+						test_pdo(
+							$value[0],
+							$value[1],
+							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>')
+						);
 					}
 
-					test_pdo($lang['InstallingLogoImage'], $insert_logo_image, Ut::perc_replace($lang['ErrorAlreadyExists'], 'logo image'));
+					test_pdo(
+						$lang['InstallingLogoImage'],
+						$insert_logo_image,
+						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
+					);
+
 					echo "            </ol>\n";
 				}
 				else
@@ -317,7 +366,11 @@ switch ($config['database_driver'])
 
 							foreach ($upgrade[$to_version] as $value)
 							{
-								test_pdo(Ut::perc_replace($upgrade_msg[$value[0]]['ok'], $value[1]), $value[2], Ut::perc_replace($upgrade_msg[$value[0]]['error'], $value[1]));
+								test_pdo(
+									Ut::perc_replace($upgrade_msg[$value[0]]['ok'], '<code>' . $value[1] . '</code>'),
+									$value[2],
+									Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>')
+								);
 							}
 
 							echo "            </ol>\n";
@@ -330,7 +383,11 @@ switch ($config['database_driver'])
 				echo "         <ul>\n";
 
 				// inserting config values
-				test_pdo($lang['InstallingConfigValues'], $insert_config, Ut::perc_replace($lang['ErrorAlreadyExists'], 'config values'));
+				test_pdo(
+					$lang['InstallingConfigValues'],
+					$insert_config,
+					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
+				);
 
 				echo "            <li>" . $lang['InstallingPagesBegin'];
 				require_once 'setup/insert_pages.php';

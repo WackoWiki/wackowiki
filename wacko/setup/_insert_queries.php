@@ -64,11 +64,11 @@ $create_table[]			= ['watch',					$tbl_watch];
 $create_table[]			= ['word',					$tbl_word];
 
 // insert_records
-//		$value[0] - table name
+//		$value[0] - record type
 //		$value[1] - SQL query
 //		$value[2] - record
-$insert_records[]		= [$lang['InstallingSystemAccount'],		$insert_system,					'system account'];
-$insert_records[]		= [$lang['InstallingDeletedAccount'],		$insert_deleted,				'deleted account'];
+$insert_records[]		= [$lang['InstallingSystemAccount'],		$insert_user_system,			'system account'];
+$insert_records[]		= [$lang['InstallingDeletedAccount'],		$insert_user_deleted,			'deleted account'];
 $insert_records[]		= [$lang['InstallingAdmin'],				$insert_admin,					'admin user'];
 $insert_records[]		= [$lang['InstallingAdminSetting'],			$insert_admin_setting,			'admin user settings'];
 $insert_records[]		= [$lang['InstallingAdminGroup'],			$insert_admin_group,			'admin group'];
@@ -218,6 +218,8 @@ $upgrade['5.4.0'][]		= ['alter',		'user',				$alter_user_r5_4_3];
 
 $upgrade['5.5.beta'][]	= ['alter',		'user',				$alter_user_r5_4_4];
 $upgrade['5.5.beta'][]	= ['alter',		'user',				$alter_user_r5_4_5];
+
+$upgrade['5.5.6'][]		= ['insert',	'user',				$insert_user_deleted];
 
 // user setting
 $upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_0];

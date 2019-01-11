@@ -33,6 +33,8 @@ write_config_hidden_nodes(['none' => '']);
 </p>
 	<?php
 
+	# $db_version			= "SELECT VERSION() as mysql_version";
+
 	/*
 	 Check which database extensions are installed and what versions of the db are there
 	 */
