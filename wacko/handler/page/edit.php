@@ -310,7 +310,7 @@ if ($this->has_access('read')
 	$tpl->body		= Ut::html($body);  // -> [ ' body | pre ' ]
 
 	// XXX: only for \n issue testing
-	#echo '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">'. Ut::html($body) . "</textarea>\n";
+	# echo '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">'. Ut::html($body) . "</textarea>\n";
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
 	{

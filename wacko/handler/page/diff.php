@@ -152,7 +152,7 @@ if ($page_a && $page_b
 
 			$added		= array_diff($body_a, $body_b);
 			$deleted	= array_diff($body_b, $body_a);
-			$charset	= $this->get_charset($page_a['page_lang']);
+			# $charset	= $this->get_charset($page_a['page_lang']);
 
 			$tpl->enter('m2_');
 
@@ -160,14 +160,14 @@ if ($page_a && $page_b
 			{
 				// remove blank lines
 				$tpl->added_diff = $source
-						? '<pre>' . wordwrap(Ut::html(implode("\n", $added), true, $charset), 70, "\n", 1) . '</pre>'
+						? '<pre>' . wordwrap(Ut::html(implode("\n", $added)), 70, "\n", 1) . '</pre>'
 						: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
 			}
 
 			if ($deleted)
 			{
 				$tpl->deleted_diff  = $source
-						? '<pre>' . wordwrap(Ut::html(implode("\n", $deleted), true, $charset), 70, "\n", 1) . '</pre>'
+						? '<pre>' . wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", 1) . '</pre>'
 						: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
 			}
 
