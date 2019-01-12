@@ -181,6 +181,7 @@ function admin_user_users(&$engine, &$module)
 					"email				= " . $engine->db->q($_POST['email']) . ", " .
 					"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
 					"enabled			= " . (int) ($_POST['enabled'] ?? 0) . ", " .
+					"account_lang		= " . $engine->db->q(($_POST['user_lang'] ?: $engine->db->language)) . ", " .
 					"user_name			= " . $engine->db->q($_POST['newname']) . " ");
 
 			// get new user_id

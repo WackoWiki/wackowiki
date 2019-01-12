@@ -17,7 +17,7 @@ $clean_text = function ($string)
 	$string = $this->format($string, 'pre_wacko');
 	$string = $this->format($string, 'wacko'); //
 	$string = $this->format($string, 'safehtml'); //
-	#$string = Ut::html($string, true, $this->get_charset()); // breaks html unicode chars
+	#$string = Ut::html($string, true); // breaks html unicode chars
 
 	return $string;
 };
