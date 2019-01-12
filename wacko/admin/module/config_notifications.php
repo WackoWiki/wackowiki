@@ -176,8 +176,8 @@ function admin_config_notifications(&$engine, &$module)
 					<small><?php echo $engine->_t('AllowIntercom');?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="allow_intercom_on" name="allow_intercom" value="0"<?php echo (!$engine->db->allow_intercom ? ' checked' : '');?>><label for="allow_intercom_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="allow_intercom_off" name="allow_intercom" value="1"<?php echo ($engine->db->allow_intercom ? ' checked' : '');?>><label for="allow_intercom_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="allow_intercom_on" name="allow_intercom" value="1"<?php echo ($engine->db->allow_intercom ? ' checked' : '');?>><label for="allow_intercom_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="allow_intercom_off" name="allow_intercom" value="0"<?php echo (!$engine->db->allow_intercom ? ' checked' : '');?>><label for="allow_intercom_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -189,8 +189,8 @@ function admin_config_notifications(&$engine, &$module)
 					<small><?php echo $engine->_t('AllowMassemailDefaultInfo');?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="allow_massemail_on" name="allow_massemail" value="0"<?php echo (!$engine->db->allow_massemail ? ' checked' : '');?>><label for="allow_massemail_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="allow_massemail_off" name="allow_massemail" value="1"<?php echo ($engine->db->allow_massemail ? ' checked' : '');?>><label for="allow_massemail_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="allow_massemail_on" name="allow_massemail" value="1"<?php echo ($engine->db->allow_massemail ? ' checked' : '');?>><label for="allow_massemail_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="allow_massemail_off" name="allow_massemail" value="0"<?php echo (!$engine->db->allow_massemail ? ' checked' : '');?>><label for="allow_massemail_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="hl-setting">

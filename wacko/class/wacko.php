@@ -8802,7 +8802,7 @@ class Wacko
 		else
 		{
 			$diff_class = 'diff-zero';
-			$size_delta = '±' . $size_delta;
+			$size_delta = '&plusmn;' . $size_delta; // ± plus-minus sign
 		}
 
 		return '<span class="' . $diff_class . '">' . $size_delta . '</span>';
