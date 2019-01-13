@@ -35,12 +35,12 @@ function admin_config_notifications(&$engine, &$module)
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['enable_email_notification']	= (int) $_POST['enable_email_notification'];
-		$config['disable_autosubscribe']		= (int) $_POST['disable_autosubscribe'];
+		$config['autosubscribe']				= (int) $_POST['autosubscribe'];
 		$config['notify_diff_mode']				= (int) $_POST['notify_diff_mode'];
 		$config['notify_minor_edit']			= (int) ($_POST['notify_minor_edit'] ?? 0);
 		$config['notify_page']					= (int) $_POST['notify_page'];
 		$config['notify_comment']				= (int) $_POST['notify_comment'];
-		$config['notify_upload']				= (int) $_POST['notify_upload'];
+		$config['notify_upload']				= (int) ($_POST['notify_upload'] ?? 0);
 		$config['notify_new_user_account']		= (int) ($_POST['notify_new_user_account'] ?? 0);
 		$config['allow_intercom']				= (int) $_POST['allow_intercom'];
 		$config['allow_massemail']				= (int) $_POST['allow_massemail'];
@@ -82,8 +82,8 @@ function admin_config_notifications(&$engine, &$module)
 					<small><?php echo $engine->_t('AutosubscribeInfo');?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="disable_autosubscribe_on" name="disable_autosubscribe" value="0"<?php echo (!$engine->db->disable_autosubscribe ? ' checked' : '');?>><label for="disable_autosubscribe_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="disable_autosubscribe_off" name="disable_autosubscribe" value="1"<?php echo ($engine->db->disable_autosubscribe ? ' checked' : '');?>><label for="disable_autosubscribe_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="autosubscribe_on" name="autosubscribe" value="1"<?php echo (!$engine->db->autosubscribe ? ' checked' : '');?>><label for="autosubscribe_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="autosubscribe_off" name="autosubscribe" value="0"<?php echo ($engine->db->autosubscribe ? ' checked' : '');?>><label for="autosubscribe_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -206,6 +206,18 @@ function admin_config_notifications(&$engine, &$module)
 				</td>
 				<td>
 					<input type="checkbox" id="notify_new_user_account" name="notify_new_user_account" value="1"<?php echo ($engine->db->notify_new_user_account ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="notify_upload"><strong><?php echo $engine->_t('NotifyUpload');?>:</strong><br>
+					<small><?php echo $engine->_t('NotifyUploadInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="notify_upload" name="notify_upload" value="1"<?php echo ($engine->db->notify_upload ? ' checked' : '');?>>
 				</td>
 			</tr>
 		</table>

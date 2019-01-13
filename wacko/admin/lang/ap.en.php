@@ -784,6 +784,8 @@ $ap_translation = [
 
 	'NotifyUserAccount'			=> 'Notify new user account',
 	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the "signup form".',
+	'NotifyUpload'				=> 'Notify file upload',
+	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
 	'PersonalMessagesSection'	=> 'Personal messages',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
