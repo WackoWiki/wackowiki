@@ -2321,7 +2321,7 @@ class Wacko
 				}
 
 				// set watch
-				if (!$this->db->disable_autosubscribe && !$comment_on_id)
+				if ($this->db->autosubscribe && !$comment_on_id)
 				{
 					// subscribe the author
 					if ($reg === true)
@@ -2918,6 +2918,11 @@ class Wacko
 
 	function notify_upload($page_id, $file_id, $tag, $file_name, $user_id, $user_name, $replace)
 	{
+		if (!$this->db->notify_upload)
+		{
+			return;
+		}
+
 		$subject[]	=	'FileUploadedSubj';
 		$subject[]	=	$file_name;
 

@@ -180,7 +180,7 @@ $wacko_config_defaults = [
 
 	'allow_registration'			=> 0,
 	'antidupe'						=> 0,
-	'disable_autosubscribe'			=> 0,
+	'autosubscribe'					=> 1,
 	'disable_wikiname'				=> 1,
 	'username_chars_min'			=> 3,
 	'username_chars_max'			=> 20,

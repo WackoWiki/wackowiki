@@ -768,6 +768,8 @@ $ap_translation = [
 
 	'NotifyUserAccount'			=> 'Уведомление о регистрации нового пользователя',
 	'NotifyUserAccountInfo'		=> 'Отправлять Администратору уведомление о регистрации нового пользователя.',
+	'NotifyUpload'				=> 'Notify file upload',
+	'NotifyUploadInfo'			=> 'Модераторы будут уведомлены, когда файл будет загружен.',
 
 	'PersonalMessagesSection'	=> 'Личные сообщения',
 	'AllowIntercomDefault'		=> 'Allow Intercom',

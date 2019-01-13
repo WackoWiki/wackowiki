@@ -781,7 +781,7 @@ $ap_translation = [
 	'EmailNotification'			=> 'E-Mail-Benachrichtigung',
 	'EmailNotificationInfo'		=> 'E-Mail-Benachrichtigung zulassen. Wähle EIN, um E-Mail-Benachrichtigungen zu aktivieren, und AUS, um sie zu deaktivieren. Beachte, dass die Deaktivierung von E-Mail-Benachrichtigungen keine Auswirkungen auf E-Mails hat, die im Rahmen des Benutzeranmeldungsvorgangs generiert werden.',
 	'Autosubscribe'				=> 'Automatisch abonnieren',
-	'AutosubscribeInfo'			=> 'Automatically sign a new page in the owner\'s notice of its changes.',
+	'AutosubscribeInfo'			=> 'Aktiviert die automatischen Benachrichtigung für den Seitenbesitzer bei Änderungen.',
 
 	'NotificationSection'		=> 'Benachrichtigungen',
 	'NotifyPageEdit'			=> 'Seitenänderung mitteilen',
@@ -794,6 +794,8 @@ $ap_translation = [
 
 	'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
 	'NotifyUserAccountInfo'		=> 'Der Administrator wird benachrichtigt, wenn ein neuer Benutzer über das Anmelde-Formular erstellt wurde.',
+	'NotifyUpload'				=> 'Benachrichtigung bei Datei-Upload',
+	'NotifyUploadInfo'			=> 'Die Moderatoren werden benachrichtigt, wenn eine Datei hochgeladen wurde.',
 
 	'PersonalMessagesSection'	=> 'Persönliche Mitteilungen',
 	'AllowIntercomDefault'		=> 'Erlaube Intercom',
