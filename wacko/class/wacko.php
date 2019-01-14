@@ -4913,9 +4913,12 @@ class Wacko
 	// REFERRERS
 	function log_referrer()
 	{
+		$se = 'https://www.google.';
+
 		if ($this->page
 			&& ($ref = @$_SERVER['HTTP_REFERER'])
 			&& !$this->bad_words($ref)
+			&& (stripos($ref, trim($se)) === false) // cast away pointless www.google.[]
 			&& filter_var($ref, FILTER_VALIDATE_URL))
 		{
 			$heads		= ['https://', 'http://'];
