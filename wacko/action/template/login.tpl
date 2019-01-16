@@ -24,7 +24,7 @@
 		<h3>[ ' _t: LoginWelcome ' ]</h3>
 
 		<form action="[ ' href ' ]" method="post" name="login">
-			[' csrf: login ']
+			[ ' csrf: login ' ]
 			<p>
 				<label for="user_name">[ ' format_t: LoginName ' ]:</label>
 				<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="[ ' username | e attr ' ]" pattern="[A-Za-z0-9]+" tabindex="1" required autofocus>

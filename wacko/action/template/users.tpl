@@ -2,10 +2,10 @@ first really BIG template written
 
 [ === main === ]
 	[= not _ =
-		<div class="error">['' found '']</div>
+		<div class="error">[ ' found ' ]</div>
 	=]
 	[= disabled _ =
-		<div class="info">['' _t: AccountDisabled '']</div>
+		<div class="info">[ ' _t: AccountDisabled ' ]</div>
 	=]
 	[''' u Profile  ''']
 	[''' l UserList ''']

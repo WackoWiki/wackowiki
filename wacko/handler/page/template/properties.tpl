@@ -9,7 +9,7 @@
 		[= x _ =
 			<div class="page-settings">
 			<form action="[ ' href: properties ' ]" method="post" name="extended_properties">
-				[' csrf: extended_properties ']
+				[ ' csrf: extended_properties ' ]
 				<table class="form-tbl">
 					<colgroup>
 						<col span="1" width="30%">
