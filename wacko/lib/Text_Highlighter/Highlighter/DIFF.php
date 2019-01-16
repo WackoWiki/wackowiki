@@ -34,7 +34,7 @@
  * @package    Text_Highlighter
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.7.1
+ * @version    Release: 0.8
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 class  Text_Highlighter_DIFF extends Text_Highlighter
@@ -382,4 +382,3 @@ class  Text_Highlighter_DIFF extends Text_Highlighter
 	}
 
 }
-?>
