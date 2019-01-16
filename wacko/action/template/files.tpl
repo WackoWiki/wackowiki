@@ -4,6 +4,7 @@
 	[= s =
 		<form action="[ ' href: attachments ' ]" method="get" name="file_search">
 			[ ' csrf: file_search ' ]
+			[ ' href: attachments | hide_page ' ]
 			<input type="hidden" name="files" value="[ ' filter | e attr ' ]">
 			<table class="formation">
 				<tr>

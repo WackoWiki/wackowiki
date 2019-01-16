@@ -2,7 +2,8 @@
 	[ ' message ' ]
 	[= r _ =
 		<form action="[ ' href: diff ' ]" method="get" name="diff_versions">
-			[' csrf: diff_versions ']
+			[ ' csrf: diff_versions ' ]
+			[ ' href: diff | hide_page ' ]
 			<p>
 				<input type="submit" value="[ ' _t: ShowDifferencesButton ' ]">
 				[= d _ =

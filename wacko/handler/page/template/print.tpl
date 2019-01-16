@@ -3,7 +3,7 @@
 	[ ' dummy | default * // ADD_NO_DIV ' ]<article class="page">
 	[ = rev RevisionInfo =
 		<div class="revision-info">
-			[' text ']
+			[ ' text ' ]
 		</div>
 	=]
 	[''' body ''']
@@ -12,7 +12,7 @@
 		<br>
 		<section id="comments">
 			<header class="header-comments">
-				[' _t: Comments ']
+				[ ' _t: Comments ' ]
 			</header>
 			[= cmt _ =
 				<article class="comment">
