@@ -15,7 +15,7 @@
  * @link       http://pear.php.net/package/Text_Highlighter
  * @category   Text
  * @package    Text_Highlighter
- * @version    generated from: : css.xml,v 1.2 2008/01/01 23:45:07 ssttoo Exp
+ * @version    generated from: css.xml
  * @author Andrey Demenev <demenev@gmail.com>
  *
  */
@@ -34,7 +34,7 @@
  * @package    Text_Highlighter
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.7.1
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 class  Text_Highlighter_CSS extends Text_Highlighter

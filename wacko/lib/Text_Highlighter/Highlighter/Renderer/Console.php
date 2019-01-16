@@ -16,7 +16,7 @@
  * @author     Andrey Demenev <demenev@gmail.com>
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id: Console.php,v 1.1 2007/06/03 02:37:08 ssttoo Exp $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
@@ -45,7 +45,7 @@ define ('HL_CONSOLE_DEFCOLOR', "\033[0m");
  * @package    Text_Highlighter
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.7.1
+ * @version    Release: 0.8
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 

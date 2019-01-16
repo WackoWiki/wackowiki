@@ -16,7 +16,7 @@
  * @author     Andrey Demenev <demenev@gmail.com>
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id: Renderer.php,v 1.1 2007/06/03 02:36:35 ssttoo Exp $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
@@ -28,7 +28,7 @@
  * @package    Text_Highlighter
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.7.1
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  * @abstract
  */

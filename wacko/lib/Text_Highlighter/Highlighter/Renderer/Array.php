@@ -19,7 +19,7 @@
  * @author     Stoyan Stefanov <ssttoo@gmail.com>
  * @copyright  2006 Stoyan Stefanov
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id: Array.php,v 1.1 2007/06/03 02:37:08 ssttoo Exp $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 

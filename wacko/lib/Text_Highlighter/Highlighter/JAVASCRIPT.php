@@ -15,7 +15,7 @@
  * @link       http://pear.php.net/package/Text_Highlighter
  * @category   Text
  * @package    Text_Highlighter
- * @version    generated from: : javascript.xml,v 1.3 2008/01/01 23:43:36 ssttoo Exp
+ * @version    generated from: javascript.xml
  * @author Andrey Demenev <demenev@gmail.com>
  *
  */
@@ -34,7 +34,7 @@
  * @package    Text_Highlighter
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.7.1
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 class  Text_Highlighter_JAVASCRIPT extends Text_Highlighter
@@ -629,4 +629,3 @@ class  Text_Highlighter_JAVASCRIPT extends Text_Highlighter
 	}
 
 }
-?>

@@ -16,7 +16,7 @@
  * @author     Andrey Demenev <demenev@gmail.com>
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id: Highlighter.php,v 1.1 2007/06/03 02:35:28 ssttoo Exp $
+ * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
@@ -58,7 +58,7 @@ define ('HL_INFINITY',      1000000000);
  * @author     Andrey Demenev <demenev@gmail.com>
  * @copyright  2004-2006 Andrey Demenev
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.7.1
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
@@ -204,7 +204,8 @@ class Text_Highlighter
 		$classname = 'Text_Highlighter_' . $lang;
 
 		if (!class_exists($classname)) {
-			return PEAR::raiseError('Highlighter for ' . $lang . ' not found');
+			$error = 'Highlighter for ' . $lang . ' not found';
+			return $error;
 		}
 
 		$obj = new $classname($options);
