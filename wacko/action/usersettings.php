@@ -202,7 +202,7 @@ else if (($user = $this->get_user()))
 	}
 
 	// print navigation
-	$tpl->header	=  $this->_t($tabs[$mode]);
+	$tpl->header	= $this->_t($tabs[$mode]);
 	$tpl->tabs		= $this->tab_menu($tabs, $mode, '', [], $mod_selector);
 
 	// MENU
