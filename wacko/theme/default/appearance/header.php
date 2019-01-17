@@ -185,7 +185,7 @@ else
 	// print tab
 	if ($readable)
 	{
-		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank"');
+		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank" rel="noopener"');
 	}
 
 	// create tab

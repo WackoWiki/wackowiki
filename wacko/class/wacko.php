@@ -4344,16 +4344,22 @@ class Wacko
 				}
 
 				// TODO: refactor, static?
+				// https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
 				if ($this->db->noreferrer || $this->db->nofollow)
 				{
-					if ($this->db->noreferrer)
+					if ($this->db->link_target)
 					{
-						$_rel[] = 'noreferrer';
+						$_rel[] = 'noopener';
 					}
 
 					if ($this->db->nofollow)
 					{
 						$_rel[] = 'nofollow';
+					}
+
+					if ($this->db->noreferrer)
+					{
+						$_rel[] = 'noreferrer';
 					}
 
 					$rel_separated	= implode(' ', $_rel);
