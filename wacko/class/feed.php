@@ -308,7 +308,7 @@ class Feed
 					}
 
 					$xml .= '<item>' . "\n";
-					$xml .= '<title>' . $comment['title'] . ' ' . $this->engine->_t('To') . ' ' . $comment['page_title'] . ' ' . $this->engine->_t('From') . ' ' .
+					$xml .= '<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
 						($comment['user_name']
 							? $comment['user_name']
 							: $this->engine->_t('Guest')) .
