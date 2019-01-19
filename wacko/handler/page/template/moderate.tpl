@@ -170,7 +170,7 @@
 							<select name="section">
 								<option selected></option>
 								[= o _ =
-									<option value="[ ' tag ' ]">[ ' title ' ]"</option>
+									<option value="[ ' tag ' ]">[ ' title ' ]</option>
 								=]
 							</select> or <input type="text" name="cluster" size="50" maxlength="250"><br>
 							<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
