@@ -190,6 +190,10 @@ input.verify { display: none; }
 	white-space: nowrap;
 }
 
+.favicon {
+	max-width: 4em;
+}
+
 
 table.formation {
 	font-size: 0.75rem; /* 12px */

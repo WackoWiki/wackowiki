@@ -592,7 +592,7 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Wy³±cz funkcjê automatycznego przekierowania.',
 	'SendWatchEmail'			=> 'Wy¶lij powiadomienie, gdy kto¶ (poza Tob±) zmieni zawarto¶æ obserwowanych stron.',
-	'AllowIntercom'				=> 'Allow private messages from users of the system',
+	'AllowIntercom'				=> 'Allow personal messages from users of the system',
 	'AllowMassemail'			=> 'Administratorzy mog± wysy³aæ mi e-maile',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',

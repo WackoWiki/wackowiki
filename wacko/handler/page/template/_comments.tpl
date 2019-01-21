@@ -21,7 +21,7 @@
 									</nav>
 								=]
 								<header class="comment-title">
-									<h2><a href="[ ' href ' ]">[ ' title | e ' ]</a></h2>
+									<h2><a href="[ ' href ' ]">[ ' title ' ]</a></h2>
 								</header>
 								<p>[ ' comment ' ]</p>
 								<footer>

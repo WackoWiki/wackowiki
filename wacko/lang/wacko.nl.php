@@ -592,7 +592,7 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Sta automatische doorverwijzing niet toe.',
 	'SendWatchEmail'			=> 'Stuur een e-mail wanneer iemand (behalve uzelf) een pagina die u in de gaten houdt verandert.',
-	'AllowIntercom'				=> 'Allow private messages from users of the system',
+	'AllowIntercom'				=> 'Allow personal messages from users of the system',
 	'AllowMassemail'			=> 'Beheerders mogen mij per e-mail informeren',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',

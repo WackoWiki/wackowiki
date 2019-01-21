@@ -424,7 +424,7 @@ a[href $='.rar'] .icon,
 a[href $='.tar'] .icon,
 a[href $='.tgz'] .icon,
 a[href $='.zip'] .icon,
-a[href $='.zst'] .icon{
+a[href $='.zst'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/archive.svg') no-repeat scroll left center;
 	padding-left: 17px;
 }

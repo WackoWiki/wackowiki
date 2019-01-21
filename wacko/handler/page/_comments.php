@@ -228,7 +228,7 @@ if ($this->has_access('read'))
 								$this->sess->freecap_old_comment
 									?? ($payload
 										?? '')
-							);  // -> [ ' payload | pre ' ]
+							); // -> [ ' payload | pre ' ]
 
 			if ($user)
 			{

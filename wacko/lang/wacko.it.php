@@ -592,7 +592,7 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Non consentire il reindirizzo automatico dall\'azione di Reindirizzo.',
 	'SendWatchEmail'			=> 'Spedisci una mail di notifica quando qualcuno (tranne te) modifica una pagina da te  controllata',
-	'AllowIntercom'				=> 'Allow private messages from users of the system',
+	'AllowIntercom'				=> 'Allow personal messages from users of the system',
 	'AllowMassemail'			=> 'Gli amministratori possono inviarti e-mail',
 	'HideLastSession'			=> 'Nascondi l\'ultima sessione',
 	'ValidateIP'				=> 'Legare la sessione a IP',
