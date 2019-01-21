@@ -151,7 +151,7 @@
 									<label for="menu_tag">[ ' _t: SetMenuLabel ' ]</label>
 								</th>
 								<td>
-									<input type="text" id="menu_tag" name="menu_tag" value="[ ' page.menu_tag ' ]" size="60" maxlength="100">
+									<input type="text" id="menu_tag" name="menu_tag" value="[ ' page.menu_tag | e attr ' ]" size="60" maxlength="100">
 								</td>
 							</tr>
 							<tr>

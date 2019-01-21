@@ -288,13 +288,13 @@ if ($this->has_access('read')
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
 		// comment title
-		$tpl->e_title = Ut::html($title);
+		$tpl->e_title = $title;
 		$tpl->e_label = $this->_t('AddCommentTitle');
 	}
 	else if (!$this->page || $this->is_owner() || $this->is_admin())
 	{
 		// edit page title
-		$tpl->e_title = Ut::html($title);
+		$tpl->e_title = $title;
 		$tpl->e_label = $this->_t('MetaTitle');
 	}
 	else
@@ -318,7 +318,7 @@ if ($this->has_access('read')
 		if ($this->db->edit_summary != 0)
 		{
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
-			$tpl->n_note = Ut::html($edit_note);
+			$tpl->n_note = $edit_note;
 		}
 
 		if ($user)

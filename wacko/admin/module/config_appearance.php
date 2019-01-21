@@ -304,7 +304,7 @@ function admin_config_appearance(&$engine, &$module)
 			<td>
 			<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)
 			{?>
-				<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_favicon); ?>" alt="Site Favicon"><br>
+				<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_favicon); ?>" alt="Site Favicon" class="favicon"><br>
 				<input type="submit" id="remove_favicon" name="remove_favicon" value="<?php echo $engine->_t('Remove'); ?>">
 			<?php }?>
 				<input type="file" name="favicon" id="favicon_upload" accept=".gif, .ico, .jpg, .png, .svg, .webp, image/gif, image/x-icon, image/jpeg, image/png, image/svg+xml, image/webp">

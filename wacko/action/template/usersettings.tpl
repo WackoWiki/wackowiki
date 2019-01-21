@@ -230,7 +230,7 @@
 							<label for="real_name">[ ' _t: RealName ' ]</label>
 						</th>
 						<td>
-							<input type="text" id="real_name" name="real_name" value="[ ' realname ' ]" size="40" maxlength="80">
+							<input type="text" id="real_name" name="real_name" value="[ ' realname | e attr ' ]" size="40" maxlength="80">
 						</td>
 					</tr>
 					<tr>

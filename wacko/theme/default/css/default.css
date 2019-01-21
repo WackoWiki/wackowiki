@@ -547,7 +547,6 @@ ol#comments {
 .comment-tool li {
 	border: medium none;
 	padding: 0;
-	
 	float: left;
 	font-size: 13px;
 	line-height: 15px;
@@ -802,10 +801,6 @@ td.file- {
 	border: 4px solid white;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 	margin: 10px 0;
-	/* display: block;
-	height: 115px;
-	overflow: hidden;
-	width: 178px; */
 }
 
 .show-image a img:hover {

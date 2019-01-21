@@ -7,7 +7,6 @@ if (!defined('IN_WACKO'))
 
 if ($this->get_user_name())
 {
-	#'mode' => Ut::html(@$_GET['mode'])
 	$mode_selector	= 'mode';
 	$mode			= @$_GET[$mode_selector];
 

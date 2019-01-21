@@ -592,7 +592,7 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Να μην επιτρέπονται αυτόματες ανακατευθύνσεις από ενέργεια Ανακατεύθυνσης.',
 	'SendWatchEmail'			=> 'Απόστειλε ηλεκτρονικό μήνυμα ενημέρωσης όταν κάποιος <br> (εκτός από εσένα) τροποποιεί τις σελίδες που παρακολουθείς',
-	'AllowIntercom'				=> 'Allow private messages from users of the system',
+	'AllowIntercom'				=> 'Allow personal messages from users of the system',
 	'AllowMassemail'			=> 'Οι Διαχειριστές μπορούν να μου στείλουν πληροφορίες χρησιμοποιώντας μήνυμα ηλεκτρονικού ταχυδρομείου',
 	'HideLastSession' 			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
