@@ -3,7 +3,7 @@
 /**
  * Abstract base class for Highlighter renderers
  *
- * PHP versions 4 and 5
+ * PHP versions 5
  *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
@@ -61,18 +61,6 @@ class Text_Highlighter_Renderer
 	function __construct($options = array())
 	{
 		$this->_options = $options;
-	}
-
-	/**
-	 * PHP4 compatable constructor
-	 *
-	 * @access public
-	 *
-	 * @param  array $options  Rendering options. Renderer-specific.
-	 */
-	function Text_Highlighter_Renderer($options = array())
-	{
-		$this->__construct($options);
 	}
 
 	/**

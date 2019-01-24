@@ -2,7 +2,7 @@
 /**
  * Auto-generated class. JAVA syntax highlighting
  *
- * PHP version 4 and 5
+ * PHP version 5
  *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
@@ -40,18 +40,6 @@
 class  Text_Highlighter_JAVA extends Text_Highlighter
 {
 	var $_language = 'java';
-
-	/**
-	 * PHP4 Compatible Constructor
-	 *
-	 * @param array  $options
-	 * @access public
-	 */
-	function Text_Highlighter_JAVA($options=array())
-	{
-		$this->__construct($options);
-	}
-
 
 	/**
 	 *  Constructor
@@ -781,7 +769,7 @@ class  Text_Highlighter_JAVA extends Text_Highlighter
 		),
 		);
 		$this->_conditions = array (
-            'java.builtins' => 
+            'java.builtins' =>
 		array (
 		0 =>
 		array (
