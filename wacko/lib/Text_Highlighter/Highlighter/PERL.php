@@ -7,7 +7,7 @@
  * My  knowledge  of  Perl  is  poor,  and  Perl  syntax  seems  too
  * complicated to me.
  *
- * PHP version 4 and 5
+ * PHP version 5
  *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
@@ -47,18 +47,6 @@
 class  Text_Highlighter_PERL extends Text_Highlighter
 {
 	var $_language = 'perl';
-
-	/**
-	 * PHP4 Compatible Constructor
-	 *
-	 * @param array  $options
-	 * @access public
-	 */
-	function Text_Highlighter_PERL($options=array())
-	{
-		$this->__construct($options);
-	}
-
 
 	/**
 	 *  Constructor
