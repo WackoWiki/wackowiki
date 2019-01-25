@@ -1,6 +1,6 @@
 <?php
 /**
- * Highlight XHTML Markup
+ * Highlight HTML Markup
  *
  * @author Davey Shafik <davey@php.net>
  * @copyright Copyright 2003 Davey Shafik and Synaptic Media. All Rights Reserved.
@@ -13,7 +13,7 @@ $options['color']['attributevalues']	= 'blue';
 $options['color']['entities']			= 'orange';
 $options['line_numbers']				= false;
 
-$xhtml_tags = [
+$html_tags = [
 	'!DOCTYPE',
 	'a',
 	'abbr',
@@ -175,13 +175,13 @@ $xhtml_tags = [
 			function ($matches)
 			{
 				return
-				$matches[1].
+				$matches[1] .
 				$this->format($matches[2], 'highlight/css', ['nopre' => true, 'notypo' => false]) .
 				'&lt;/style&gt;';
 			},
 		$source);
 
-	foreach ($xhtml_tags as $i)
+	foreach ($html_tags as $i)
 	{
 		$source = preg_replace(
 				'/&lt;' . $i . '(&gt;|[[:space:]])/',
@@ -205,8 +205,8 @@ $xhtml_tags = [
 			$source);
 
 	$source = preg_replace( "/([a-z-]+)=(&quot;|\')(.*?)\\2/i",
-			'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: '
-			.$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
+			'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: ' .
+			$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
 			$source = preg_replace("/&amp;([a-z0-9]*?;)/i", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
 
 	if ($options['line_numbers'] == true)
@@ -226,7 +226,7 @@ $xhtml_tags = [
 
 	echo '<!--notypo-->';
 	echo '<pre class="code">';
-	echo  str_replace("\t","  ",$source);
+	echo str_replace("\t", "  ", $source);
 	echo "</pre>";
 	echo '<!--/notypo-->';
 

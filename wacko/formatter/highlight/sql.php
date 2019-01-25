@@ -17,15 +17,15 @@ $functions = '\$[[:alnum:]]+';
 $text = preg_replace("#\t#s","    ", $text );
 
 // lexeme extraction
-$text = "\001" . preg_replace("#($delim)+#s","\001$0\001", $text ) . "\001";
+$text = "\001" . preg_replace("#($delim)+#s", "\001$0\001", $text ) . "\001";
 
 // html escape
 $text = preg_replace("#&#s","&amp;", $text );
 $text = preg_replace("#<#s","&lt;", $text );
 $text = preg_replace("#>#s","&gt;", $text );
-$text = preg_replace("#\n#s","\002", $text );    // newline
-$text = preg_replace("#\s#s","&nbsp;", $text );  // spaces
-$text = preg_replace("#\002#s","<br>\n", $text );    // newline
+$text = preg_replace("#\n#s","\002", $text );		// newline
+$text = preg_replace("#\s#s","&nbsp;", $text );		// spaces
+$text = preg_replace("#\002#s","<br>", $text );	// newline
 
 // Highlighting
 
@@ -38,7 +38,7 @@ $text = preg_replace("#\001($skipwords)\001#si", '<span style="color:green;"><st
 $text = preg_replace("#\001($keywords)\001#si" , '<span style="color:blue;">$1</span>', $text );
 
 // Comments
-$text = preg_replace('#(\-\-.*)$#m', "<span style=\"color:#888888;\"><em>$1</em></span>", $text );
+$text = preg_replace('#(\-\-.*)$#m', '<span style="color:#888888;"><em>$1</em></span>', $text );
 
 // Remove lexeme delimiter
 $text = preg_replace("#\001#s",'', $text );
