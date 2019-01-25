@@ -144,8 +144,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 		if ($this->db->hide_locked)
 		{
 			$access = ($page['comment_on_id'] && $page['ctype'] != 2
-					? $this->has_access('read', $page['comment_on_id'])
-					: $this->has_access('read', $page['page_id']));
+				? $this->has_access('read', $page['comment_on_id'])
+				: $this->has_access('read', $page['page_id']));
 		}
 		else
 		{
