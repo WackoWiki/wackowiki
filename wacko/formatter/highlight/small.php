@@ -1,5 +1,5 @@
 <?php
 
-echo "<small>" . Ut::html($text) . "</small>";
+echo '<small>' . Ut::html($text) . '</small>';
 
 ?>

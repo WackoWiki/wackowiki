@@ -3,7 +3,7 @@
 /**
  * HTML renderer that uses only basic html tags
  *
- * PHP versions 4 and 5. Based on the "normal" HTML renderer by Andrey Demenev.
+ * PHP versions 5. Based on the "normal" HTML renderer by Andrey Demenev.
  * It's designed to work with user agents that support only a limited number of
  * HTML tags. Like the iPod which supports only b, i, u and a.
  *
