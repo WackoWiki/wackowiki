@@ -16,28 +16,28 @@ Random Page Action
 
 $tag = $page ?? '';
 
-$query = // "SELECT p.supertag " .
-		"FROM ". $this->db->table_prefix . "page p, ". $this->db->table_prefix . "acl a " .
-		"WHERE p.owner_id != " . (int) $this->db->system_user_id . " " .
-			($tag
-				? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
-				: ""
-			) .
-			"AND p.comment_on_id = 0 " .
-			"AND p.page_id <> " . (int) $this->page['page_id'] . " " .
-			"AND a.privilege = 'read' " .
-			"AND a.list = '*' " .
-			"AND p.page_id = a.page_id ";
+$query =
+	"FROM ". $this->db->table_prefix . "page p, ". $this->db->table_prefix . "acl a " .
+	"WHERE p.owner_id != " . (int) $this->db->system_user_id . " " .
+		($tag
+			? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
+			: ""
+		) .
+		"AND p.comment_on_id = 0 " .
+		"AND p.page_id <> " . (int) $this->page['page_id'] . " " .
+		"AND a.privilege = 'read' " .
+		"AND a.list = '*' " .
+		"AND p.page_id = a.page_id ";
 
 $count = $this->db->load_single(
-		"SELECT COUNT(p.supertag) AS n " .
-		$query, true);
+	"SELECT COUNT(p.supertag) AS n " .
+	$query, true);
 
 $page = $this->db->load_single(
-		"SELECT p.supertag, p.tag " .
-		$query.
-		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
-		, true);
+	"SELECT p.supertag, p.tag " .
+	$query.
+	"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
+	, true);
 
 if (!$page)
 {
