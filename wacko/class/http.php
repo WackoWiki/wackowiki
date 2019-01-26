@@ -74,7 +74,7 @@ class Http
 			{
 				if (($contents = file_get_contents($this->file)))
 				{
-					return $contents . "\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $timestamp) . " -->\n";
+					return $contents;
 				}
 			}
 		}
@@ -223,6 +223,7 @@ class Http
 
 				if (strpos($this->method, '.xml') === false)
 				{
+					echo "\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $mtime) . " -->\n";
 					echo "</body>\n</html>";
 				}
 
@@ -236,13 +237,14 @@ class Http
 
 	public function check_cache($page, $method)
 	{
+		$this->method	= $method;
+
 		if ($this->db->cache && $_SERVER['REQUEST_METHOD'] != 'POST' && $method != 'edit' && $method != 'watch')
 		{
 			// cache only for anonymous user
 			if (!isset($this->sess->userprofile))
 			{
 				$this->page		= $page;
-				$this->method	= $method;
 				$this->caching	= $this->check_http_request();
 			}
 		}
