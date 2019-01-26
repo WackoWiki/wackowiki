@@ -4,6 +4,14 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// redirect to show method if hide_revisions is true
+if ($this->hide_revisions)
+{
+	$this->http->redirect($this->href());
+}
+
+$this->ensure_page(true);
+
 header('Content-type: text/xml');
 
 $tpl->charset	= $this->get_charset();
@@ -15,7 +23,7 @@ $tpl->logo		= Ut::join_path(IMAGE_DIR, $this->db->site_logo);
 #echo '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
 #echo '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
-if ($this->has_access('read') && !$this->hide_revisions)
+if ($this->has_access('read'))
 {
 	// load revisions for this page except minor edits
 	if (list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], 1))
@@ -33,7 +41,7 @@ if ($this->has_access('read') && !$this->hide_revisions)
 
 			if (($c <= $max) && $c > 1)
 			{
-				$etag = str_replace('%2F', '/', rawurlencode($page['tag']));
+				$etag			= str_replace('%2F', '/', rawurlencode($page['tag']));
 				$_GET['d']		= $page['modified'];
 				$_GET['a']		= $_GET['b'];
 				$_GET['b']		= $page['revision_id'];
@@ -45,14 +53,13 @@ if ($this->has_access('read') && !$this->hide_revisions)
 				$tpl->perma		= $this->href('', $etag);
 
 				// get diff
-				$diff = $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);
+				$diff			= $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);
 
 				// remove diff type navigation
-				$diff = preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $diff);
+				$diff			= preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $diff);
 
 				$tpl->diff		= str_replace('<', '&lt;', str_replace('&', '&amp;', $diff));
 				$tpl->date		= date ('r', strtotime ($_GET['c']));
-
 			}
 		}
 
@@ -63,4 +70,3 @@ else
 {
 	$tpl->denied = true;
 }
-

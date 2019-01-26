@@ -26,7 +26,7 @@
 			[= denied _ =
 				<item>
 					<title>Error</title>
-					<link>[ ' href: show ' ]</link>
+					<link>[ ' href: ' ]</link>
 					<description>[ ' _t: AccessDeniedXML ' ]</description>
 				</item>
 			=]
