@@ -41,7 +41,7 @@ if (($logged_in = $this->get_user()))
 
 	if ($this->is_admin())
 	{
-		$tpl->uare_ap_link	= $this->href('', 'admin.php');
+		$tpl->uare_ap_link	= $this->href('', 'admin.php', [], false, '', false);
 	}
 }
 // else shows login's controls
