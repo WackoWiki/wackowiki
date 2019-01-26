@@ -21,7 +21,6 @@ if ($this->has_access('read') && !$this->hide_revisions)
 	if (list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], 1))
 	{
 		$max				= 10;
-
 		$c					= 0;
 		$_GET['b']			= -1;
 		$_GET['diffmode']	= 2; // 2 - source diff
@@ -35,14 +34,14 @@ if ($this->has_access('read') && !$this->hide_revisions)
 			if (($c <= $max) && $c > 1)
 			{
 				$etag = str_replace('%2F', '/', rawurlencode($page['tag']));
-				$_GET['d'] = $page['modified'];
-				$_GET['a'] = $_GET['b'];
-				$_GET['b'] = $page['revision_id'];
-				$_GET['c'] = ($_GET['d'] == '' ? $this->page['modified'] : $_GET['d']);
+				$_GET['d']		= $page['modified'];
+				$_GET['a']		= $_GET['b'];
+				$_GET['b']		= $page['revision_id'];
+				$_GET['c']		= ($_GET['d'] == '' ? $this->page['modified'] : $_GET['d']);
 
-				$tpl->user		= $page['user_name'];
+				$tpl->user		= $page['user_id'] ? $page['user_name'] : $this->_t('Guest');
 				$tpl->note		= $page['edit_note'];
-				$tpl->link		= $this->href('show', '', ['revision_id' => (int) $_GET['a']]);
+				$tpl->link		= $this->href('', '', ['revision_id' => (int) $_GET['a']]);
 				$tpl->perma		= $this->href('', $etag);
 
 				// get diff
