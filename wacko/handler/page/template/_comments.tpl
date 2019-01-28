@@ -11,12 +11,12 @@
 						<li id="[ ' tag ' ]" class="comment">
 							<article class="comment-text">
 								[= b _ =
-									<nav>
+									<nav class="comment-tools">
 										[= remove _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" style="float: right; padding: 2px;" class="btn-delete"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-delete"></a>
 										=]
 										[= edit _ =
-											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditCommentTip ' ]" alt="[ ' _t: EditComment ' ]" style="float: right; padding: 2px;" class="btn-edit"></a>
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditCommentTip ' ]" alt="[ ' _t: EditComment ' ]" class="btn-edit"></a>
 										=]
 									</nav>
 								=]

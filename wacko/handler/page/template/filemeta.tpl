@@ -4,7 +4,7 @@
 	[ ' tabs ' ]
 	<br>
 	[= r _ =
-		<div class="fileinfo">
+		<div class="file-info">
 			<h4>[ ' link ' ]</h4>
 			<form action="[ ' href: filemeta ' ]" method="post" name="remove_file">
 			[ ' csrf: remove_file ' ]
@@ -75,7 +75,7 @@
 		</form>
 	=]
 	[= s _ =
-		<div class="fileinfo">
+		<div class="file-info">
 			<h4>[ ' link ' ]</h4>
 			[= i _ =
 				<span class="show-image"><a href="[ ' href ' ]">[ ' image ' ]</a></span>
@@ -156,7 +156,7 @@
 		</div>
 	=]
 	[= e _ =
-		<div class="fileinfo">
+		<div class="file-info">
 			<h4>[ ' link ' ]</h4>
 			<form action="[ ' href: filemeta ' ]" method="post" name="edit_file">
 				[ ' csrf: edit_file ' ]

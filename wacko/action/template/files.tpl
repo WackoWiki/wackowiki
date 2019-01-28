@@ -49,7 +49,7 @@
 						</td>
 					=]
 				<td class="tool-">
-					<nav class="dt2- tool2-">[ ' i icon ' ]</nav>
+					<nav class="dt2- file-tools">[ ' i icon ' ]</nav>
 				</td>
 			</tr>
 		=]
