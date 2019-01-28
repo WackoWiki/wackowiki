@@ -506,13 +506,13 @@ footer {
 }
 
 /* comments and files actions (only visible on hover) */
-.comment nav,
-.upload nav {
+.comment-tools,
+.file-tools {
 	visibility: hidden;
 }
 
-.comment:hover nav,
-.upload tr:hover nav {
+.comment:hover .comment-tools,
+.upload tr:hover .file-tools {
 	visibility: visible;
 }
 
@@ -522,6 +522,11 @@ footer {
 	padding-bottom: 20px;
 	float: right;
 	list-style-type: none;
+}
+
+.comment-tools img {
+	float: right;
+	padding: 2px;
 }
 
 li.comment {
@@ -785,7 +790,7 @@ td.file- {
 }
 
 .upload td.dt- .dt2-,
-.upload td.tool- .tool2- a,
+.upload td .file-tools a,
 .upload td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
@@ -793,7 +798,7 @@ td.file- {
 	white-space: nowrap;
 }
 
-.fileinfo {
+.file-info {
 	overflow-wrap: break-word;
 }
 
