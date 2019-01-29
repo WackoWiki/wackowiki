@@ -36,10 +36,16 @@ if ($this->has_access('read')
 
 	$user	= $this->get_user();
 
-	// comment header?
+	// is comment?
 	if ($this->page['comment_on_id'])
 	{
-		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
+		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL); // TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
+
+		// formatter needs these values from parent page
+		$this->page['allow_rawhtml']	= $comment_on['allow_rawhtml'];
+		$this->page['disable_safehtml']	= $comment_on['disable_safehtml'];
+
+		// comment header
 		$message = $this->_t('ThisIsCommentOn') . ' ' .
 			$this->compose_link_to_page($comment_on['tag'], '', $comment_on['title'], $comment_on['tag']) . ', ' .
 			$this->_t('PostedBy') . ' ' .
