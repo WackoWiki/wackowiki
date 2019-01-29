@@ -24,7 +24,7 @@ class SessionFileStore extends Session
 		{
 			$dir = $this->cf_file_path;
 
-			if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
+			if (!is_writable($dir) || is_link($dir) || !is_dir($dir))
 			{
 				die('SessionFileStore: inaccessible directory "' . $dir . '"');
 			}
@@ -200,7 +200,7 @@ class SessionFileStore extends Session
 		if (@file_exists($fname))
 		{
 			// we REQUIRE existant session file to be writable usual file and not symlink
-			if (!is_writeable($fname) || is_link($fname) || !is_file($fname))
+			if (!is_writable($fname) || is_link($fname) || !is_file($fname))
 			{
 				if (!$create)
 				{
@@ -229,7 +229,7 @@ class SessionFileStore extends Session
 
 			if (@file_exists($dir))
 			{
-				if (!is_writeable($dir) || is_link($dir) || !is_dir($dir))
+				if (!is_writable($dir) || is_link($dir) || !is_dir($dir))
 				{
 					// destructive fix attempt
 					unlink($dir) or rmdir($dir);
