@@ -18,7 +18,7 @@ class TemplatestFilters extends TemplatestEscaper
 	{
 		$this->filters = [];
 
-		foreach (get_class_methods(__CLASS__) as $meth)
+		foreach (get_class_methods(self::class) as $meth)
 		{
 			if (preg_match('/^filter_(\w+?)(_also_(\w+?))?$/', $meth, $match))
 			{

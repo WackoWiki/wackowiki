@@ -32,7 +32,7 @@ class TemplatestEscaper
 		{
 			$this->sc_encoding = HTML_ENTITIES_CHARSET;
 			/* throw new Exception\InvalidArgumentException(
-				'Value of \'' . $encoding . '\' passed to ' . __CLASS__
+				'Value of \'' . $encoding . '\' passed to ' . self::class
 				. ' constructor parameter is invalid. Provide an encoding supported by htmlspecialchars()'
 			); */
 		}
@@ -229,7 +229,7 @@ class TemplatestEscaper
 		else
 		{
 			throw new Exception\RuntimeException(
-				__CLASS__
+				self::class
 				. ' requires either the iconv or mbstring extension to be installed'
 				. ' when escaping for non UTF-8 strings.'
 			);
