@@ -42,8 +42,8 @@ if ($this->has_access('read')
 		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL); // TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
 
 		// formatter needs these values from parent page
-		$this->page['allow_rawhtml']	= $comment_on['allow_rawhtml'];
-		$this->page['disable_safehtml']	= $comment_on['disable_safehtml'];
+		$this->db->allow_rawhtml	= $comment_on['allow_rawhtml'];
+		$this->db->disable_safehtml	= $comment_on['disable_safehtml'];
 
 		// comment header
 		$message = $this->_t('ThisIsCommentOn') . ' ' .
