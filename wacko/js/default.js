@@ -58,6 +58,8 @@ function new_freecap()
 	+ Math.round(Math.random() * 100000);
 }
 
+var dbclick = "page";
+
 function dclick(frame)
 {
 	if (edit)

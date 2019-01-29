@@ -4,7 +4,7 @@
 .include _rating.tpl
 
 [ === main === ]
-	[ ' dummy | default * // ADD_NO_DIV ' ]<article id="page-show" class="page" data-dbclick1="page">
+	[ ' dummy | default * // ADD_NO_DIV ' ]<article id="page-show">
 		[= n _ =
 			[ ' message ' ]
 		=]
@@ -17,10 +17,8 @@
 				<h1>[ ' title ' ]</h1>
 			</header>
 		=]
-		<section id="section-content">
+		<section id="section-content" class="page" data-dbclick="page">
 			[ ' data | pre ' ]
-			[ ' // edit via double click ' ]
-			<script>var dbclick = "page";</script>
 		</section>
 		[= p _ =
 			<nav class="category">[ ' category ' ]</nav>
