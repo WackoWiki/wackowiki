@@ -239,7 +239,7 @@ class Diag
 		if ($debug)
 		{
 			echo <<<'EOD'
-	<script type="text/javascript">
+	<script>
 		console = window.open('', 'WackoWikiConsoleWindow', 'height=150,width=450,location=0,menubar=0,status=0,toolbar=0,scrollbars=1');
 		console.document.writeln(
 			'<html><head><style type=text/css>'
