@@ -29,9 +29,8 @@
 				[ ' delim | void ' ]
 				<li>
 					[= l SearchItem =
-						<h3 style="display: inline;">[ ' link ' ]</h3>[ ' count | enclose " (" ")" ' ]
-						<br>
-						<span class="search-meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ]
+						<h3>[ ' link ' ]</h3>
+						<span class="search-meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ] - [ ' count | enclose " (" ")" ' ]
 						[= comments =
 							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
 						=]

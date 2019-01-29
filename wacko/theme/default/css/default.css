@@ -1374,6 +1374,10 @@ a:target {
 	font-weight: bold;
 }
 
+#search-results li:hover {
+	background-color: #E7F9FF; /* #CCFFCC */
+}
+
 #search-results li {
 	margin: 1em 0;
 }
