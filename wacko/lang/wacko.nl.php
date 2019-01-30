@@ -761,6 +761,7 @@ $wacko_translation = [
 	'SettingsCurrent'			=> 'Modified',
 	'SettingsTotalRevs'			=> 'Revisions',
 	'SettingsTotalComs'			=> 'Comments',
+	'SettingsWatchers'			=> 'Hoeders',
 	'SettingsHits'				=> 'Views',
 	'SettingsRating'			=> 'Readers rating',
 	'SettingsText'				=> 'Instellingen',

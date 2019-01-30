@@ -22,7 +22,7 @@ else
 	$page_id	= $this->page['page_id'];
 }
 
-if ($this->is_owner($page_id))
+if ($this->is_owner($page_id) || $this->is_admin())
 {
 	$watchers = $this->db->load_all(
 		"SELECT u.user_name " .

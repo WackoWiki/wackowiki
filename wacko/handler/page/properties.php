@@ -66,16 +66,6 @@ if ($_POST)
 	$this->http->redirect($this->href('properties', '', $mode));
 }
 
-// load settings
-$rating = $this->db->load_single(
-	"SELECT page_id, value, voters " .
-	"FROM " . $this->db->table_prefix . "rating " .
-	"WHERE page_id = {$this->page['page_id']} " .
-	"LIMIT 1");
-
-if ($rating['voters'] > 0)			$rating['ratio'] = $rating['value'] / $rating['voters'];
-if (is_float($rating['ratio']))		$rating['ratio'] = round($rating['ratio'], 2);
-if ($rating['ratio'] > 0)			$rating['ratio'] = '+' . $rating['ratio'];
 // show form
 
 // EXTENDED
@@ -177,8 +167,28 @@ $tpl->bodylen	= $this->binary_multiples($this->page['page_size'], false, true, t
 $tpl->bodyrlen	= $this->binary_multiples(strlen($this->page['body_r']), false, true, true);
 $tpl->version	= $this->page['version_id'];
 
+
+$watchers = $this->db->load_single(
+		"SELECT COUNT(page_id) AS n " .
+		"FROM " . $this->db->table_prefix . "watch " .
+		"WHERE page_id = {$this->page['page_id']} " .
+		"LIMIT 1", true);
+
+$tpl->wat_number	= $watchers['n'];
+
 if ($this->db->footer_rating)
 {
+	// load rating
+	$rating = $this->db->load_single(
+		"SELECT page_id, value, voters " .
+		"FROM " . $this->db->table_prefix . "rating " .
+		"WHERE page_id = {$this->page['page_id']} " .
+		"LIMIT 1", true);
+
+	if ($rating['voters'] > 0)			$rating['ratio'] = $rating['value'] / $rating['voters'];
+	if (is_float($rating['ratio']))		$rating['ratio'] = round($rating['ratio'], 2);
+	if ($rating['ratio'] > 0)			$rating['ratio'] = '+' . $rating['ratio'];
+
 	$tpl->rat_ratio		= $rating['ratio'];
 	$tpl->rat_voters	= (int) $rating['voters'];
 }

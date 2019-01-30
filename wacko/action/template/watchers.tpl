@@ -5,7 +5,7 @@
 				<span>[ ' title ' ]:</span>
 			</p>
 	=]
-		[ ' denied ' ]
+		[ ' denied ' ][ ' none ' ]
 		<ol>
 			[= l _ =
 				<li>[ ' link ' ]</li>
