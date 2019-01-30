@@ -48,7 +48,7 @@ $rename_category_assignment_r5_4_0 = "RENAME TABLE {$pref}category_page TO {$pre
 $update_category_assignment_r5_4_0 = "UPDATE {$pref}category_assignment SET object_type_id = 1 WHERE object_type_id IS NULL OR object_type_id = 0";
 
 // CONFIG
-$update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = 'addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|watchers|wordprocessor' WHERE config_name = 'standard_handlers'";
+$update_config_r5_4_0 = "UPDATE {$pref}config SET config_value = " . _quote('addcomment|admin\\.php|categories|claim|clone|diff|edit|export\\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\\.xml|robots\\.txt|sitemap\\.xml|show|source|upload|watch|watchers|wordprocessor') . " WHERE config_name = 'standard_handlers'";
 $update_config_r5_4_1 = "DELETE FROM {$pref}config WHERE config_name IN ('session_expiration', 'x_csp', 'x_frame_option', 'session_encrypt_cookie', 'allow_swfobject', 'revisions_hide_cancel', 'date_precise_format', 'date_macro_format', 'phpmailer', 'npjlinks', 'meta_description', 'meta_keywords', 'session_match_ip', 'session_match_useragent', 'tls_proxy', 'disable_autosubscribe')";
 $update_config_r5_4_2 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_max_size'";
 $update_config_r5_4_3 = "UPDATE {$pref}config SET config_value = config_value * 1024 WHERE config_name = 'upload_quota'";

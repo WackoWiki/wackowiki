@@ -236,7 +236,7 @@ class Settings extends Dbal implements ArrayAccess
 		}
 
 		// to update existing values we use INSERT ... ON DUPLICATE KEY UPDATE
-		// http://dev.mysql.com/doc/refman/5.5/en/insert-on-duplicate.html
+		// https://dev.mysql.com/doc/refman/5.7/en/insert-on-duplicate.html
 
 		if ($values)
 		{

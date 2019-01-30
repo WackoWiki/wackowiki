@@ -54,7 +54,7 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 				<li>&gt;</li>
 				<li class="<?php echo $install_action == 'config-database' ? 'current' : 'item'; ?>"><?php echo $lang['database-config']; ?></li>
 				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'database-install' ? 'current' : 'item'; ?>"><?php echo $lang['database-install']; ?></li>
+				<li class="<?php echo $install_action == 'install-database' ? 'current' : 'item'; ?>"><?php echo $lang['database-install']; ?></li>
 				<li>&gt;</li>
 				<li class="<?php echo $install_action == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang['write-config']; ?></li>
 			</ul>
