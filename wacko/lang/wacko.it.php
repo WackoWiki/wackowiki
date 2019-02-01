@@ -621,7 +621,7 @@ $wacko_translation = [
 									'If, within days after registration You never got a email, ask for it again by clicking ',
 
 	'ForgotPasswordHint'		=> 'Inserisci il tuo login e indirizzo e-mail,' . "\n" . 'quindi verrà inviata una e-mail con le istruzioni.',
-	'ForgotPassword'			=> 'Forgot password?',
+	'ForgotPassword'			=> 'Password dimenticata?',
 	'SendButton'				=> 'Send',
 	'UserNotFound'				=> 'User with this name or e-mail address was not found.',
 	'NotConfirmedEmail'			=> 'Your e-mail address is not confirmed.<br>Mail can\'t be send to non-confirmed address.',
@@ -632,6 +632,7 @@ $wacko_translation = [
 	'ChangePasswordForUser'		=> '%1\'s password change',
 
 	'Watchers' 					=> 'List of watchers for %1',
+	'WatchersFor'				=> 'Osservatori per',
 	'NoWatchers'				=> 'There are no watchers for %1',
 	'NotOwnerToViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
 

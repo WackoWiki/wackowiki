@@ -632,6 +632,7 @@ $wacko_translation = [
 	'ChangePasswordForUser'		=> '%1\'s parooli muutmine',
 
 	'Watchers'					=> '%1 vaatajate nimekiri ',
+	'WatchersFor'				=> 'Vaatlejad',
 	'NoWatchers'				=> 'Keegi ei jälgi %1',
 	'NotOwnerToViewWatchers'	=> 'Sa ei ole selle lehe omanik ja seetõttu sa ei saa vaadata nimekirja inmestest kes seda lehte jälgivad.',
 
