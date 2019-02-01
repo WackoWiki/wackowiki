@@ -632,6 +632,7 @@ $wacko_translation = [
 	'ChangePasswordForUser'		=> 'Changement de mot de passe pour %1',
 
 	'Watchers'					=> 'Liste des utilisateurs qui surveillent %1',
+	'WatchersFor'				=> 'Observateurs pour',
 	'NoWatchers'				=> 'Personne ne surveille %1',
 	'NotOwnerToViewWatchers'	=> 'N&rsquo;étant pas le propriétaire de cette page, vous ne pouvez pas voir la liste des utilisateurs qui la surveillent.',
 

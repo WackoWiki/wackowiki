@@ -139,7 +139,7 @@ function array_to_str ($arr, $name = '')
 	$entries	= '';
 	$arrays		= '';
 
-	$str = "\$wacko_config" . ($name ? "[\"" . $name."\"]" : "") . " = [\n";
+	$str = "\$wacko_config" . ($name ? "[\"" . $name . "\"]" : "") . " = [\n";
 
 	foreach ($arr as $k => $v)
 	{
@@ -153,7 +153,7 @@ function array_to_str ($arr, $name = '')
 		}
 	}
 
-	$str .= $entries."];\n";
+	$str .= $entries . "];\n";
 	$str .= $arrays;
 
 	return $str;

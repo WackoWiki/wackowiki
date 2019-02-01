@@ -632,6 +632,7 @@ $wacko_translation = [
 	'ChangePasswordForUser'		=> '%1 viu a sua password alterada',
 
 	'Watchers'					=> 'Lista de quem acompanha %1',
+	'WatchersFor'				=> 'Vigilantes para',
 	'NoWatchers'				=> 'Não ninguém a acompanhar %1',
 	'NotOwnerToViewWatchers'	=> 'Não sendo o dono desta página não pode ver a lista de que a acompanha.',
 

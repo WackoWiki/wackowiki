@@ -306,7 +306,7 @@ if ($this->is_owner() || $this->is_admin())
 		}
 		else
 		{
-			$tpl->a_h_link	=  $this->compose_link_to_page($this->tag, '', '');
+			$tpl->a_h_link	= $this->compose_link_to_page($this->tag, '', '');
 
 			if ($this->is_admin() || $this->db->owners_can_change_categories)
 			{

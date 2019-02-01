@@ -632,6 +632,7 @@ $wacko_translation = [
 	'ChangePasswordForUser'		=> '%1\'s password opdatering',
 
 	'Watchers'					=> 'Abonnenter til %1',
+	'WatchersFor'				=> 'Abonnenter til',
 	'NoWatchers'				=> 'Ingen abonnenter til %1',
 	'NotOwnerToViewWatchers'	=> 'Du har ikke adgang til denne information.',
 
