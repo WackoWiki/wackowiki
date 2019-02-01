@@ -6,6 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 $text = $this->format($text, 'wacko');
-// $text = $this->format($text, 'post_wacko');
-// echo $text;
-include Ut::join_path(FORMATTER_DIR, 'post_wacko.php');
+
+echo $text;
+
+// prevents parsing links and actions dynamically
+# include Ut::join_path(FORMATTER_DIR, 'post_wacko.php');
