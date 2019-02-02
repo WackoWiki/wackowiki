@@ -374,6 +374,9 @@ class Http
 			// prevent clickjacking
 			// TODO configure?
 			header('X-Frame-Options: SAMEORIGIN');
+
+			// prevents the browser from doing MIME-type sniffing
+			header('X-Content-Type-Options: nosniff');
 		}
 	}
 
@@ -661,6 +664,12 @@ class Http
 			header('Expires: ' . Ut::http_date(-1));
 			header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 			header('Pragma: no-cache');
+		}
+
+		// nosniff only applies to "script" and "style" types.
+		if (preg_match('/^text|xml|javascript/i', $type))
+		{
+			header('X-Content-Type-Options: nosniff');
 		}
 
 		ob_implicit_flush(true);
