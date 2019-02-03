@@ -3540,7 +3540,7 @@ class Wacko
 		}
 		else
 		{
-			return '<!--link:begin-->' . str_replace(' ', '%20', urldecode($tag)) . " ==" . ($this->format_safe ? str_replace('>', "&gt;", str_replace('<', "&lt;", $text)) : $text) . '<!--link:end-->';
+			return '<!--link:begin-->' . str_replace(' ', '%20', urldecode($tag)) . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end-->';
 		}
 	}
 

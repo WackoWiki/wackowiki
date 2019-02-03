@@ -603,6 +603,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Bie膨ce has這',
 	'NewPassword'				=> 'Nowe has這',
 	'YouWantChangePassword'		=> 'Zmiana has豉',
+	'ChangePasswordButton'		=> 'Zmiana has豉',
 	'ChangePasswordLink'		=> 'Password',
 	'PasswordChanged'			=> 'Has這 zosta這 zmienione',
 	'EmailWelcome'				=> 'Dzi瘯ujemy. Rejestracja przebieg豉 pomy郵nie ',
