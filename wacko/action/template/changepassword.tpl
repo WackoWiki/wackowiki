@@ -26,7 +26,7 @@
 					<input type="password" id="conf_password" name="conf_password" minlength="[ ' minchars ' ]" size="24">
 				</p>
 				<p>
-					<input type="submit" class="OkBtn" value="[ ' _t: RegistrationButton ' ]">
+					<input type="submit" class="OkBtn" value="[ ' _t: ChangePasswordButton ' ]">
 				</p>
 			</div>
 		</form>

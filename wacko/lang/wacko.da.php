@@ -603,6 +603,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Nuværende password',
 	'NewPassword'				=> 'Nyt password',
 	'YouWantChangePassword'		=> 'Skift password',
+	'ChangePasswordButton'		=> 'Skift password',
 	'ChangePasswordLink'		=> 'Password',
 	'PasswordChanged'			=> 'Password ændret',
 	'EmailWelcome'				=> 'Du blev registreret den ',

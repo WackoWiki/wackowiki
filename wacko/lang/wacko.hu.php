@@ -603,6 +603,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Régi jelszó',
 	'NewPassword'				=> 'Új jelszó',
 	'YouWantChangePassword'		=> 'Jelszó módosítása',
+	'ChangePasswordButton'		=> 'Jelszó módosítása',
 	'ChangePasswordLink'		=> 'Jelszó',
 	'PasswordChanged'			=> 'Password changed',
 	'EmailWelcome'				=> 'You\'ve registered at ',

@@ -603,6 +603,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Mot de passe actuel ',
 	'NewPassword'				=> 'Nouveau mot de passe (au moins 5 caractères) ',
 	'YouWantChangePassword'		=> 'Changement de mot de passe',
+	'ChangePasswordButton'		=> 'Changement de mot de passe',
 	'ChangePasswordLink'		=> 'MotDePasse',
 	'PasswordChanged'			=> 'Le mot de passe a été changé',
 	'EmailWelcome'				=> 'Bienvenue sur ',

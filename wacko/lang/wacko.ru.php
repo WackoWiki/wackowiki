@@ -604,6 +604,7 @@ $wacko_translation = [
 	'CurrentPassword'			=> 'Введите текущий пароль',
 	'NewPassword'				=> 'Новый пароль',
 	'YouWantChangePassword'		=> 'Смена пароля',
+	'ChangePasswordButton'		=> 'Смена пароля',
 	'ChangePasswordLink'		=> 'Пароль',
 	'PasswordChanged'			=> 'Пароль успешно изменён',
 	'EmailWelcome'				=> 'Регистрация в ',
