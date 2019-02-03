@@ -408,7 +408,8 @@ a[href $='.ico'] .icon,
 a[href $='.jpe'] .icon,
 a[href $='.jpeg'] .icon,
 a[href $='.jpg'] .icon,
-a[href $='.png'] .icon {
+a[href $='.png'] .icon, 
+a[href $='.webp'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/image.svg') no-repeat scroll left center;
 	padding-left: 17px;
 }

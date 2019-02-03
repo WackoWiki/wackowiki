@@ -333,7 +333,6 @@ $tbl_user = "CREATE TABLE {$pref}user (" .
 					"user_ip VARCHAR(40) NOT NULL DEFAULT ''," .
 					"email_confirm VARCHAR(64) NOT NULL DEFAULT ''," .
 					"last_visit DATETIME NULL DEFAULT NULL," .
-					"session_expire INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"last_mark DATETIME NULL DEFAULT NULL," .
 					"login_count INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0'," .
