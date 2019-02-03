@@ -1212,6 +1212,7 @@ $ap_translation = [
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
 	'Inconsistencies'			=> 'Incohérences',
 	'Records'					=> 'Records',
+	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
 	'InconsistenciesDone'		=> 'Les incohérences dans les données ont été résolues.',
 	'InconsistenciesRemoved'	=> 'Correction des incohérences',
 	'Check'						=> 'vérifier',
