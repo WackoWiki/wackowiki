@@ -1228,6 +1228,7 @@ $ap_translation = [
 	'InconsistenciesInfo'		=> 'Inkonsistenzen anzeigen und beheben, verwaiste Datensätze löschen oder einem neuen Benutzer / Wert zuweisen.',
 	'Inconsistencies'			=> 'Inkonsistenzen',
 	'Records'					=> 'Datensätze',
+	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
 	'InconsistenciesDone'		=> 'Dateninkonsistenzen behoben.',
 	'InconsistenciesRemoved'	=> 'Inkonsistenzen beseitigt',
 	'Check'						=> 'prüfen',

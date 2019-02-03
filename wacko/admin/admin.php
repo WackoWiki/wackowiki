@@ -52,11 +52,33 @@ if (@$_GET['action'] === 'logout')
 ##           Authorization & preparations             ##
 ########################################################
 
-// recovery password
+// missing recovery password
 if (!$engine->db->recovery_password)
 {
-	echo '<strong>' . $engine->_t('NoRecoceryPassword') . '</strong><br>';
-	echo $engine->_t('NoRecoceryPasswordTip');
+	$engine->http->status(403);
+	header('Content-Type: text/html; charset=' . $engine->get_charset());
+	?>
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
+			<meta name="robots" content="noindex, nofollow, noarchive">
+			<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/backend.css" media="screen">
+			<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
+		</head>
+
+		<body>
+			<div id="mainwrapper">
+				<div id="loginbox">
+				<?php
+					echo '<strong>' . $engine->_t('NoRecoceryPassword') . '</strong><br><br>';
+					echo $engine->_t('NoRecoceryPasswordTip');
+				?>
+				</div>
+			</div>
+		</body>
+	</html>
+	<?php
 
 	die();
 }
@@ -131,10 +153,7 @@ if (!isset($engine->sess->ap_created))
 
 	<body>
 		<div id="mainwrapper">
-<?php
-			// here we show messages
-			$engine->output_messages();
-?>
+		<?php $engine->output_messages(); ?>
 			<div id="loginbox">
 				<strong><?php echo $engine->_t('Authorization'); ?></strong><br>
 				<?php echo $engine->_t('AuthorizationTip'); ?>
