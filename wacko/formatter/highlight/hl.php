@@ -1,5 +1,6 @@
 <?php
-require_once 'lib/Text_Highlighter/Highlighter.php';
+
+$hl = new Text_Highlighter();
 
 if ($options['_default'])
 {
@@ -21,4 +22,3 @@ else
 {
 	echo Ut::html($text);
 }
-?>
