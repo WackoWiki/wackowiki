@@ -370,8 +370,8 @@ if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 	if (function_exists('admin_' . $mode) === true)
 	{
 		// page context
-		$engine->module = $mode;
-		$engine->tag = $engine->supertag = 'admin.php' . ($db->rewrite_mode ? '?' : '&amp;') . 'mode=' . $mode;
+		$engine->module	= $mode;
+		$engine->tag	= $engine->supertag = 'admin.php' . ($db->rewrite_mode ? '?' : '&amp;') . 'mode=' . $mode;
 		$engine->context[++$engine->current_context] = $engine->tag;
 
 		// module run

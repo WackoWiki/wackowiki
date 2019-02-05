@@ -7,5 +7,3 @@ echo $dh->analysecode($text);
 echo "</pre>";
 echo '<!--/notypo-->';
 unset($dh);
-
-?>
