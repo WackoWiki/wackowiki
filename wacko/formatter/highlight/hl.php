@@ -4,7 +4,11 @@ $hl = new Text_Highlighter();
 
 if ($options['_default'])
 {
-	$hl =& Text_Highlighter::factory(strtoupper($options['_default']), ['numbers' => false]);
+	$language	= $options['_default'];
+	$numbers	= (bool) $options['numbers'];
+	$start		= (int)($options['start'] ?? 1);
+
+	$hl =& Text_Highlighter::factory(strtoupper($language), ['numbers' => $numbers, 'numbers_start' => $start]);
 
 	if (!is_object($hl))
 	{

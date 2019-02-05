@@ -14,8 +14,8 @@
  *
  **/
 
-class JavaHighlighter{
-
+class JavaHighlighter
+{
 	var $code = '';		//the code to be hightlighed
 	var $newcode = '';	//the generated code
 	var $tok;			// Le mot en train d'etre decoupe
@@ -25,44 +25,44 @@ class JavaHighlighter{
 	/****************************************************************/
 	/* Les variables qui definissent le comportement de l'analyseur */
 	/****************************************************************/
-	var $case_sensitive	= true;                   // Langage sensible a la case ou pas
-	var $tokdelimiters	= " []()=+-/*:;,.\n\t\r  "; // Les delimiteurs de mots
+	var $case_sensitive	= true;						// Langage sensible a la case ou pas
+	var $tokdelimiters	= " []()=+-/*:;,.\n\t\r  ";	// Les delimiteurs de mots
 
 	/***************************************************/
 	/* Les couleurs associees a chaque type de donnees */
 	/***************************************************/
-	var $colorkeyword	= "#0000CC";
-	var $colortext		= "";
-	var $colorstring	= "#000000";
-	var $colorcomment	= "#006600";
-	var $colorsymbol	= "";
-	var $colornumber	= "#000080";
-	var $colorpreproc	= "#008000";
+	var $colorkeyword	= '#0000CC';
+	var $colortext		= '';
+	var $colorstring	= '#000000';
+	var $colorcomment	= '#006600';
+	var $colorsymbol	= '';
+	var $colornumber	= '#000080';
+	var $colorpreproc	= '#008000';
 
 	/*************************************************/
 	/* Les styles donnes pour chaque type de donnees */
 	/*************************************************/
-	var $stylekeyword	= ["<strong>", "</strong>"];
-	var $styletext		= ["", ""];
-	//var $stylestring	= ["<span style=\"background-color:yellow\">", "</span>");
-	var $stylestring	 = ["",""];
-	var $stylecomment	= ["<em>", "</em>"];
-	var $stylesymbol	= ["", ""];
-	var $stylenumber	= ["", ""];
-	var $stylepreproc	= ["<em>", "</em>"];
+	var $stylekeyword	= ['<strong>', '</strong>'];
+	var $styletext		= ['', ''];
+	//var $stylestring	= ['<span style="background-color: yellow">', '</span>');
+	var $stylestring	= ['', ''];
+	var $stylecomment	= ['<em>', '</em>'];
+	var $stylesymbol	= ['', ''];
+	var $stylenumber	= ['', ''];
+	var $stylepreproc	= ['<em>', '</em>'];
 
 	/*****************/
 	/* Keywords */
 	/*****************/
 	var $keywords = [
-    'abstract','double','double','strictfp','boolean','else',
-    'interface','super','break','extends','long','switch','byte','final','native',
-    'synchronized','case','finally','new','this','catch','float','package','throw','char','for',
-    'protected','public','published','record','packed','case','of','const','array',
-    'private','throws','class','goto','protected','transient','const','if','public','try',
-    'constructor','destructor','library','set','inherited','object','overload',
-    'continue','implements','return','void','default','import','short','volatile',
-    'do','instanceof','static','while'];
+	'abstract','double','double','strictfp','boolean','else',
+	'interface','super','break','extends','long','switch','byte','final','native',
+	'synchronized','case','finally','new','this','catch','float','package','throw','char','for',
+	'protected','public','published','record','packed','case','of','const','array',
+	'private','throws','class','goto','protected','transient','const','if','public','try',
+	'constructor','destructor','library','set','inherited','object','overload',
+	'continue','implements','return','void','default','import','short','volatile',
+	'do','instanceof','static','while'];
 	/***********************************/
 	/* Delimiters for comment */
 	/***********************************/
@@ -94,7 +94,8 @@ class JavaHighlighter{
 	/************************************************************************/
 	/* Renvoie vrai si un caractere est visible et peut etre mis en couleur */
 	/************************************************************************/
-	function visiblechar($char) {
+	function visiblechar($char)
+	{
 		$inviblechars = " \t\n\r  ";
 		return (!is_integer(strpos($inviblechars, $char)));
 	}
@@ -144,29 +145,33 @@ class JavaHighlighter{
 	/***************************************************/
 	/* On regarde si on ne tombe pas sur un delimiteur */
 	/***************************************************/
-	function parsearray($array, $color = "#000080", $style = ["<em>", "</em>"])
+	function parsearray($array, $color = '#000080', $style = ['<em>', '</em>'])
 	{
 		// On effectue quelques verifications
-		if (!is_array($array))   return FALSE;
-		if (!strlen($this->code))     return FALSE;
-		if (!sizeof($array))     return FALSE;
+		if (!is_array($array))		return FALSE;
+		if (!strlen($this->code))	return FALSE;
+		if (!sizeof($array))		return FALSE;
 
 		// On va essayer de comparer le caractere courrant avec le 1ø
 		// caractere de chaque premier delimiteur
-		foreach ($array as $delimiterarray) {
+		foreach ($array as $delimiterarray)
+		{
 			$delimiter1 = $delimiterarray[0];
 
 			// Si le 1ø char correspond
-			if ($this->char == $delimiter1[0]) {
+			if ($this->char == $delimiter1[0])
+			{
 				$match = TRUE;
 				// On va tenter de comparer tous les autres caracteres
 				// Pour verifier qu'on a bien le delimiteur complet
-				for ($j = 1; ($j < strlen($delimiter1)) && $match; $j++) {
+				for ($j = 1; ($j < strlen($delimiter1)) && $match; $j++)
+				{
 					$match = ($this->code[$this->i + $j] == $delimiter1[$j]);
 				} // for
 
 				// Si on l'a en entier
-				if ($match) {
+				if ($match)
+				{
 					$delimiter2 = $delimiterarray[1];
 					// Alors on recherche le delimiteur de fin
 					$delimiterend = strpos($this->code, $delimiter2, $this->i + strlen($delimiter1));
@@ -175,9 +180,10 @@ class JavaHighlighter{
 					if (!is_integer($delimiterend)) $delimiterend = strlen($this->code);
 
 					// Maintenant qu'on a tout, on analyse le mot avant le delimiteur, s'il existe
-					if (!empty($this->tok)) {
+					if (!empty($this->tok))
+					{
 						$this->newcode .= $this->analyseword($this->tok);
-						$this->tok = "";
+						$this->tok = '';
 					}
 
 					// Ensuite, on place le texte contenu entre les delimiteurs
@@ -205,15 +211,18 @@ class JavaHighlighter{
 		$haschanged = TRUE;
 
 		// A chaque changement, on redemarre la boucle entiere
-		while($haschanged){
+		while($haschanged)
+		{
 			// On regarde si on ne tombe pas sur un delimiteur de commentaire
 			$haschanged = $this->parsearray($this->preprocdelimiters, $this->colorpreproc, $this->stylepreproc);
 
-			if (!$haschanged) {
+			if (!$haschanged)
+			{
 				// On regarde si on ne tombe pas sur un delimiteur de commentaire
 				$haschanged = $this->parsearray($this->commentdelimiters, $this->colorcomment, $this->stylecomment);
 
-				if (!$haschanged) {
+				if (!$haschanged)
+				{
 					// Ou de chaine de caractere
 					$haschanged = $this->parsearray($this->stringdelimiters, $this->colorstring, $this->stylestring);
 				} // if
@@ -221,12 +230,15 @@ class JavaHighlighter{
 		} // while
 	} // parsearrays
 
-	function dump($var,$name){
+	function dump($var,$name)
+	{
 		//  echo "<pre>$name = \n";
 		//  print_r($var);
 		//  echo "</pre><br>";
 	}
-	function trace($msg){
+
+	function trace($msg)
+	{
 		error_log("$msg");
 	}
 	/***************************/
@@ -235,20 +247,21 @@ class JavaHighlighter{
 	function analysecode($text)
 	{
 		// Initialize variables
-		$this->newcode		= "";
-		$this->tok			= "";
+		$this->newcode		= '';
+		$this->tok			= '';
 		$this->char			= null;
 		$this->code			= $text;
 		$this->codelength	= strlen($this->code);
 
-		$this->trace("debut analysecode");
-		$this->dump($this->codelength,"codelength");
-		$this->dump($this->code,"code");
+		$this->trace('debut analysecode');
+		$this->dump($this->codelength,'codelength');
+		$this->dump($this->code,'code');
 
-		for ($this->i = 0; $this->i < $this->codelength; $this->i++ ) {
-			$this->dump($this->i,"i");
+		for ($this->i = 0; $this->i < $this->codelength; $this->i++ )
+		{
+			$this->dump($this->i,'i');
 			$this->char = $this->code[$this->i];
-			$this->dump($this->char,"char");
+			$this->dump($this->char,'char');
 			// On regarde si on tombe sur un cas special
 			$this->parsearrays();
 
@@ -256,7 +269,8 @@ class JavaHighlighter{
 			if ($this->char == null) return $this->newcode;
 			// On a fini d'analyser les commentaires, on regarde si on a un mot complet
 
-			if (is_integer(strpos($this->tokdelimiters, $this->char))) {
+			if (is_integer(strpos($this->tokdelimiters, $this->char)))
+			{
 				// On tombe sur un delimiteur, on coupe le mot
 				$this->newcode .= $this->analyseword($this->tok);
 
@@ -264,9 +278,11 @@ class JavaHighlighter{
 				if ($this->visiblechar($this->char)) $this->newcode .= $this->formatspecialtok($this->char, $this->colorsymbol, $this->stylesymbol);
 				else $this->newcode .= $this->char;
 				// On remet a 0 le mot en cours
-				$this->tok = "";
+				$this->tok = '';
 			}
-			else {// On n'a pas de mot complet, on complete le mot
+			else
+			{
+				// On n'a pas de mot complet, on complete le mot
 				$this->tok .= $this->char;
 			}
 		} // for
