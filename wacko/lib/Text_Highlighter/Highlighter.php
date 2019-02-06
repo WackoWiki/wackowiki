@@ -204,8 +204,8 @@ class Text_Highlighter
 		$classname = 'Text_Highlighter_' . $lang;
 
 		if (!class_exists($classname)) {
-			$error = 'Highlighter for ' . $lang . ' not found';
-			return $error;
+			# $error = 'Highlighter for ' . $lang . ' not found';
+			return $lang;
 		}
 
 		$obj = new $classname($options);

@@ -117,11 +117,13 @@ del.diff {
 	background-color: #fee;
 }
 
+/** Code wrapper-related ************************************************************/
+
 /* Code areas: SYNTAX %%code%% */
 
 .code,
 .code-break,
-.hl-main pre {
+div.hl-main {
 	background: #FCFCFC;
 	border: 1px lightgray solid;
 	font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
@@ -131,6 +133,16 @@ del.diff {
 	padding: 0.25em;
 	white-space: pre-wrap;
 }
+
+	/* hl numers li */
+	div.hl-main ol {
+		white-space: normal;
+	}
+
+	/* hl numbers table */
+	div .hl-numbers-table div.hl-main{
+		border: none;
+	}
 
 .code-break {
 	white-space: pre-wrap;
@@ -156,8 +168,7 @@ del.diff {
 }
 
 .usertable td, 
-.usertable th
-{
+.usertable th {
 	border: 1px solid #CCCCCC;
 	padding: 4px;
 	vertical-align: top;
@@ -256,7 +267,9 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	font-family: monospace;
 	font-size: 13px;
 }
-.hl-table {border: solid 1px #000000; }
+.hl-table {border: solid 1px lightgray; }
+
+	td.hl-main pre{	margin-left: 1em; }
 
 .hl-default { color: #000000; }
 .hl-code { color: #7f7f33; }
