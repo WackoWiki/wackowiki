@@ -702,6 +702,7 @@ $wacko_translation = [
 	'UsersIntercomSubject'		=> 'Título',
 	'UsersIntercomSubjectN'		=> '[iniciar nuevo tema]',
 	'UsersIntercomDisabled'		=> 'Perdón, no desea o no puede recibir mensajes privados.',
+	'UsersIntercomHint'			=> 'Por favor, identifíquese primero y siga el enlace de nuevo, si desea responder el mensaje personal que ha recibido.',
 	'UsersIntercomSend'			=> 'enviar',
 	'UsersIntercomDesc'			=> 'Observación: Mensaje privado enviado al email del destinatario ' .
 								   'sin revelar su dirección de email. El recipiente podrá responderle usando ' .
@@ -1301,7 +1302,7 @@ $wacko_translation = [
 	'LogPollStopped'			=> 'Stopped poll with ID %1',
 	'LogFileUploadedLocal'		=> 'A la página [[/%1]] fue subido archivo nuevo ##%2## (tamaño %3)',
 	'LogFileUploadedGlobal'		=> 'Subido archivo nuevo a carpeta global ##%2## (tamaño %3)',
-	'LogPMSent'					=> 'Private Message ##%1->%2## successfully sent',
+	'LogPMSent'					=> 'personal message ##%1->%2## successfully sent',
 	'LogUserSimiliarName'		=> 'Se registraron intentos de registrar el nombre de usuario ya existente: ##%1##',
 	'LogUserRegistered'			=> 'Usuario nuevo registrado con éxito ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Email activado con éxito ##%1## de usuario ##%2##',

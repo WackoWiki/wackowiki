@@ -186,7 +186,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					// send notification
 					$this->notify_pm($user, $subject, $body, $headers, $msg_id);
 
-					$this->set_message($this->_t('UsersPMSent'));
+					$this->set_message($this->_t('UsersPMSent'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogPMSent', SYSTEM_LANG), $this->get_user_name(), $user['user_name']));
 
 					$this->sess->intercom_delay	= time();
@@ -269,6 +269,11 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				else
 				{
 					$tpl->u_prof_pm_not = true;
+
+					if (($ref0 = @$_GET['ref']))
+					{
+						$tpl->u_prof_pm_hint = true;
+					}
 				}
 			}
 
