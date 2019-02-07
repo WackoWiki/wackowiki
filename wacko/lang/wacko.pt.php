@@ -701,7 +701,8 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[hidden]',
 	'UsersIntercomSubject'		=> 'Sujeito',
 	'UsersIntercomSubjectN'		=> '[iniciar um novo tópico]',
-	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive private messages.',
+	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
+	'UsersIntercomHint'			=> 'Faça login primeiro e siga o link novamente, se quiser responder à mensagem pessoal que recebeu.',
 	'UsersIntercomSend'			=> 'submit',
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
 								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
@@ -716,7 +717,7 @@ $wacko_translation = [
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 								   'violates the rules of the site, please send it (using the button Forward /' .
 								   'Forward your mail program) to address %1.',
-	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send private messages to users.',
+	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send personal messages to users.',
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
@@ -1293,7 +1294,7 @@ $wacko_translation = [
 	'LogPollStopped'			=> 'Stopped poll with ID %1',
 	'LogFileUploadedLocal'		=> 'To page [[/%1]] uploaded new file ##%2## (size %3)',
 	'LogFileUploadedGlobal'		=> 'Uploaded a new file to global folder ##%2## (size %3)',
-	'LogPMSent'					=> 'Private Message ##%1->%2## successfully sent',
+	'LogPMSent'					=> 'personal message ##%1->%2## successfully sent',
 	'LogUserSimiliarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',

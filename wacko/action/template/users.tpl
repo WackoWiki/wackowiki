@@ -76,6 +76,9 @@ first really BIG template written
 					</tr>
 				</table>
 			=]
+			[= hint _ =
+				<div class="hint">[ ' _t: UsersIntercomHint ' ]</div>
+			=]
 			[= pm _ =
 				[ ' // contact form ' ]
 				<br>

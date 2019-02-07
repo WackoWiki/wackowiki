@@ -33,7 +33,8 @@
 			=]
 			[''' pagination ''']
 			[= f =
-				<br><a id="newtopic"></a><br>
+				<br><br>
+				<a id="newtopic"></a><br>
 				<form action="[ ' href ' ]" method="post" name="add_topic">
 					[ ' csrf: add_topic ' ]
 					<label for="news-title">[ ' _t: NewsName ' ]:</label>
