@@ -256,7 +256,7 @@ class Wacko
 		if (empty($file))
 		{
 			$file = $this->db->load_single(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, picture_w, picture_h, file_ext " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = " . (int) $page_id . " " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
@@ -1494,7 +1494,7 @@ class Wacko
 		{
 			// get and cache file data
 			if ($files = $this->db->load_all(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, picture_w, picture_h, file_ext " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, picture_w, picture_h, file_ext " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE file_id IN (" . $this->ids_string($file_ids) . ") " .
 				"AND deleted <> 1 "
@@ -3565,6 +3565,7 @@ class Wacko
 	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1, $meta_direct = true)
 	{
 		// TODO: add case for audio and video file <audio> / <video>
+		$caption	= '';
 		$class		= '';
 		$icon		= '';
 		$audio_link	= false;
@@ -3874,21 +3875,17 @@ class Wacko
 			{
 				#echo '---------------------------<br>';
 				// check 403 here!
-				if ($_global == true || $file_access == true)
+				if ($_global || $file_access)
 				{
 					$title		= $file_data['file_description'] . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
 					$alt		= $file_data['file_description'];
+					$href		= '';
 					$img_link	= false;
 					$icon		= $this->_t('OuterIcon');
 					$tpl		= 'localfile';
 
 					if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
 					{
-						/* if (!$text)
-						{
-							$text = $title;
-						} */
-
 						if ($file_data['file_ext'] == 'svg')
 						{
 							$scale = '';
@@ -3898,53 +3895,48 @@ class Wacko
 							$scale = ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '"';
 						}
 
-						// direct file access
-						// TODO: option: direct else link to filemeta page
-						if ($_global == true)
+						if(!$text)
 						{
-							if (!$text)
+							$tpl	= 'localimage';
+							$icon	= '';
+
+							// TODO: add option for $url:
+							//	(a) direct link to file (global) or to file handler (local)
+							//	(b) link to filemeta handler
+
+							// direct file access
+							if ($_global)
 							{
 								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
-								$text	= '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" ' .
-										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
-								$tpl	= 'localfile';
-								$icon	= '';
+								$href	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+							}
+							else
+							{
+								// no direct file access for local files, the file handler checks the access right first
+								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
+								$href	= $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
+							}
+
+							if($href)
+							{
+								$text	= '<img src="' . $href . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
+
+								if (!empty($file_data['caption']))
+								{
+									$caption	=
+										'<span class="image-sub">' . $file_data['caption'] . '</span>' . ' ' .
+										'<span class="image-license">' .
+											'(' . $this->_t('FileSource') . ': <a href="' . $file_data['source_url'] . '" rel="nofollow" target="_blank">' . $file_data['author'] . '</a>' .
+											# '/<a href="' . $file_data['license'] . '" rel="nofollow" target="_blank">' . $file_data['license'] . '</a>' .
+										')</span>';
+									$tpl	= 'localfigure';
+								}
 
 								// disables linking also for print handler, first and foremost to prevent those links showing up in numerating_links
 								if (! $meta_direct || (isset($this->method) && $this->method == 'print'))
 								{
 									return $text;
 								}
-							}
-							else
-							{
-								// continue
-								# return '<a href="' . $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name) . '" title="' . $title . '">' . $text . '</a>';
-							}
-						}
-						else
-						{
-							// no direct file access for files per page
-							// the file handler checks the access rights
-							# return '<img src="' . $this->db->base_url . Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_data['page_id'] . '@' . $_file) . '" ' . ($text ? 'alt="' . $alt . '" title="' . $text . '"' : '') . ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '">';
-							if (!$text)
-							{
-								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
-								$text	= '<img src="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" ' .
-										($text ? 'alt="' . $alt . '" title="' . $title . '"' : '') . $scale . $resize . '>';
-								$tpl	= 'localimage';
-								$icon	= '';
-
-								// disables linking also for print handler, first and foremost to prevent those links showing up in numerating_links
-								if (! $meta_direct || (isset($this->method) && $this->method == 'print'))
-								{
-									return $text;
-								}
-							}
-							else
-							{
-								// continue
-								#return '<a href="' . $this->href('file', trim($page_tag, '/'), ['get' => $file_name]) . '" title="' . $title . '">' . $text . '</a>';
 							}
 						}
 					}
@@ -3963,7 +3955,7 @@ class Wacko
 				$tpl	= 'wlocalfile';
 				$url	= '404';
 
-				if ($_global == true)
+				if ($_global)
 				{
 					$title	= '404: /' . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
@@ -4382,6 +4374,7 @@ class Wacko
 				$res		= str_replace('{title}',	$title,		$res);
 				$res		= str_replace('{url}',		$url,		$res);
 				$res		= str_replace('{text}',		$text,		$res);
+				$res		= str_replace('{caption}',	$caption,	$res);
 
 				// numerated outer links and file links
 				if ($url != $text && $url != '404' && $url != '403')
@@ -4602,7 +4595,7 @@ class Wacko
 	 *
 	 * @return string Sanitized string.
 	 */
-	function sanitize_text_field($string, $keep_nl = false )
+	function sanitize_text_field($string, $keep_nl = false)
 	{
 		$filtered = Ut::strip_all_tags($string, $keep_nl);
 
