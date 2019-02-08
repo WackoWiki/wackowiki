@@ -98,7 +98,7 @@ switch ($config['database_driver'])
 
 			$fatal_error = true;
 		}
-		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDBExists']))
+		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDBExists'], $dblink))
 		{
 			/*
 			 There was a problem with the specified database name
@@ -148,7 +148,8 @@ switch ($config['database_driver'])
 					test(
 						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
 						@mysqli_query($dblink, $value[1]),
-						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>')
+						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>'),
+						$dblink
 					);
 
 					/* echo '<pre>';
@@ -176,7 +177,8 @@ switch ($config['database_driver'])
 						test(
 							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
 							@mysqli_query($dblink, $value[1]),
-							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>')
+							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>'),
+							$dblink
 						);
 					}
 
@@ -185,14 +187,16 @@ switch ($config['database_driver'])
 						test(
 							$value[0],
 							@mysqli_query($dblink, $value[1]),
-							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>')
+							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>'),
+							$dblink
 						);
 					}
 
 					test(
 						$lang['InstallingLogoImage'],
 						@mysqli_query($dblink, $insert_logo_image),
-						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
+						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage']),
+						$dblink
 					);
 
 					echo "            </ol>\n";
@@ -232,7 +236,8 @@ switch ($config['database_driver'])
 				test(
 					$lang['InstallingConfigValues'],
 					@mysqli_query($dblink, $insert_config),
-					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
+					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues']),
+					$dblink
 				);
 
 				echo "            <li>" . $lang['InstallingPagesBegin'];

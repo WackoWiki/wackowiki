@@ -133,6 +133,28 @@
 						<td colspan="2">&nbsp;</td>
 					</tr>
 				=]
+				[= a _ =
+					<tr>
+						<th scope="row">[ ' _t: FileAuthor ' ]:</th>
+						<td>[ ' author ' ]</td>
+					</tr>
+					<tr>
+						<th scope="row">[ ' _t: FileSource ' ]:</th>
+						<td>
+						[= url _ =
+							<a href="[ ' href | e  ' ]" title="[ ' db: site_desc | e ' ]">
+						=]
+							[ ' source ' ]
+						[= chref _ =
+							[ ' nonstatic ' ]
+							</a>
+						=]
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+				=]
 				<tr>
 					<th scope="row">[ ' _t: FileAttachedTo ' ]:</th>
 					<td>[ ' location ' ]</td>
@@ -176,6 +198,36 @@
 						<td>
 							[ ' license ' ]
 						</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="author">[ ' _t: FileAuthor ' ]</label>
+						</th>
+						<td>
+							<input type="text" maxlength="250" name="author" id="UploadAuthor" size="80" value="[ ' author | e attr ' ]">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="source">[ ' _t: FileSource ' ]</label>
+						</th>
+						<td>
+							<input type="text" maxlength="250" name="source" id="UploadSource" size="80" value="[ ' source | e attr ' ]">
+						</td>
+					</tr>
+					<tr>
+						<th scope="row">
+							<label for="source_url">[ ' _t: FileSourceUrl ' ]</label>
+						</th>
+						<td>
+							<input type="text" maxlength="255" name="source_url" id="UploadSourceUrl" size="80" value="[ ' url | e attr ' ]">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">&nbsp;</td>
 					</tr>
 					<tr>
 						<th scope="row">

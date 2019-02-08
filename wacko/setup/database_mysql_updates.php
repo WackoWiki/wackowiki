@@ -78,6 +78,9 @@ $alter_file_r5_4_4 = "ALTER TABLE {$pref}file ADD mime_type VARCHAR(255) NOT NUL
 $alter_file_r5_4_5 = "ALTER TABLE {$pref}file DROP INDEX idx_page_id, ADD UNIQUE idx_page_id (page_id, file_name)";
 $alter_file_r5_4_6 = "ALTER TABLE {$pref}file ADD modified_dt DATETIME NULL DEFAULT NULL AFTER uploaded_dt";
 $alter_file_r5_4_7 = "ALTER TABLE {$pref}file ADD license_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER caption";
+$alter_file_r5_4_8 = "ALTER TABLE {$pref}file ADD author VARCHAR(250) NOT NULL DEFAULT '' AFTER caption";
+$alter_file_r5_4_9 = "ALTER TABLE {$pref}file ADD source VARCHAR(250) NOT NULL DEFAULT '' AFTER author";
+$alter_file_r5_4_10 = "ALTER TABLE {$pref}file ADD source_url VARCHAR(255) NOT NULL DEFAULT '' AFTER source";
 
 $rename_file_r5_4_0 = "RENAME TABLE {$pref}upload TO {$pref}file";
 
