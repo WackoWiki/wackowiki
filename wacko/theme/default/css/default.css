@@ -724,8 +724,6 @@ a.btn-link {
 /* <------------------ */
 
 .upload {
-/*	 border: 0 none;
-	border-collapse: collapse; */
 	width: 100%;
 }
 
@@ -735,10 +733,8 @@ a.btn-link {
 }
 
 .upload img {
-/* 	max-width: 10%;
-	max-height: 10%;
-	transform: scale(10); */
-}
+
+	}
 
 .upload tr:hover {
 	background: #CCFFCC;
@@ -760,8 +756,6 @@ a.btn-link {
 .upload td.dt-,
 .upload td.file- {
 	white-space: nowrap;
-	/* font-size: 80%;
-	font-weight: bold; */
 	color: #000000;
 	vertical-align: top;
 }
@@ -814,6 +808,18 @@ td.file- {
 
 .show-image a img:active {
 	box-shadow: 0 0 10px 0 #3daee9;
+}
+
+/* caption */
+.caption{
+	color: #1d1d1d; /* #888 */
+	font-size: 12px;
+}
+.caption-sub {
+	
+}
+.caption-license {
+	color: #888;
 }
 
 .preview {
