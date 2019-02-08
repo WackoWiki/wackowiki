@@ -214,7 +214,8 @@ switch ($config['database_driver'])
 								test(
 									Ut::perc_replace($upgrade_msg[$value[0]]['ok'], '<code>' . $value[1] . '</code>'),
 									@mysqli_query($dblink, $value[2]),
-									Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>')
+									Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>'),
+									$dblink
 								);
 							}
 
