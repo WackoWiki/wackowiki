@@ -88,6 +88,9 @@ $tbl_file = "CREATE TABLE {$pref}file (" .
 					"file_lang VARCHAR(2) NOT NULL DEFAULT ''," .
 					"file_description VARCHAR(250) NOT NULL DEFAULT ''," .
 					"caption TEXT NOT NULL," .
+					"author VARCHAR(250) NOT NULL DEFAULT ''," .
+					"source VARCHAR(250) NOT NULL DEFAULT ''," .
+					"source_url VARCHAR(255) NOT NULL DEFAULT ''," .
 					"license_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"uploaded_dt DATETIME NULL DEFAULT NULL," .
 					"modified_dt DATETIME NULL DEFAULT NULL," .

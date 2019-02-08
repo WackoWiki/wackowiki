@@ -14,7 +14,7 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
@@ -232,6 +232,23 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					$tpl->l_license	= $this->action('license', ['license_id' => $file['license_id'], 'icon' => 1, 'intro' => 0]);
 				}
 
+				// file author
+				if ($file['author'] || $file['source'])
+				{
+					$tpl->enter('a_');
+
+					$tpl->author		= $file['author'];
+					$tpl->source		= $file['source'];
+
+					if ($file['source_url'] && $file['source'])
+					{
+						$tpl->url_href		= $file['source_url'];
+						$tpl->chref			= true;
+					}
+
+					$tpl->leave();
+				}
+
 				$tpl->location		= $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal');
 				$tpl->fileusage		= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
 				$tpl->categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
@@ -258,6 +275,10 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 				$file_license	= $file['license_id'] ?? 0;
 				$tpl->license	= $this->show_select_license('file_license', $file_license, false);
+
+				$tpl->author	= $file['author'];
+				$tpl->source	= $file['source'];
+				$tpl->url		= $file['source_url'];
 
 				$file_lang		= $file['file_lang'] ?: $this->db->language;
 				$tpl->lang		= $this->show_select_lang('file_lang', $file_lang, false);
@@ -345,6 +366,9 @@ else
 				$description	= substr($_POST['file_description'], 0, 250);
 				$description	= $this->sanitize_text_field((string) $description, true);
 				$caption		= $clean_text((string) $_POST['caption']);
+				$author			= $this->sanitize_text_field(substr($_POST['author'], 0, 250), true);
+				$source			= $this->sanitize_text_field(substr($_POST['source'], 0, 250), true);
+				$source_url		= filter_var($_POST['source_url'], FILTER_VALIDATE_URL);
 				$license_id		= $_POST['license'] ?? 0;
 				$file_lang		= $_POST['file_lang'] ?? $file['file_lang'];
 
@@ -354,6 +378,9 @@ else
 						"file_lang			= " . $this->db->q($file_lang) . ", " .
 						"file_description	= " . $this->db->q($description) . ", " .
 						"caption			= " . $this->db->q($caption) . ", " .
+						"author				= " . $this->db->q($author) . ", " .
+						"source				= " . $this->db->q($source) . ", " .
+						"source_url			= " . $this->db->q($source_url) . ", " .
 						"license_id			= " . (int) $license_id . ", " .
 						"modified_dt		= UTC_TIMESTAMP() " .
 					"WHERE file_id = " . (int) $file['file_id'] . " " .

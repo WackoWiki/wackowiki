@@ -161,6 +161,10 @@ $upgrade['5.5.rc2'][]	= ['update',	'file',				$update_file_r5_4_0];
 
 $upgrade['5.5.5'][]		= ['alter',		'file',				$alter_file_r5_4_7];
 
+$upgrade['5.5.7'][]		= ['alter',		'file',				$alter_file_r5_4_8];
+$upgrade['5.5.7'][]		= ['alter',		'file',				$alter_file_r5_4_9];
+$upgrade['5.5.7'][]		= ['alter',		'file',				$alter_file_r5_4_10];
+
 // file link
 $upgrade['5.4.0'][]		= ['create',	'file_link',		$tbl_file_link_r5_4_0];
 
