@@ -4,7 +4,7 @@
 			[ ' _t: DistributedUnder ' ]<br>
 		=]
 		[= a =
-			<a rel="license" href="[ ' href ' ]">
+			<a rel="license nofollow" href="[ ' href ' ]">
 		=]
 			[ '' i icon '' ]
 			<span title="[ ' text ' ]" class="license">[ ' meta ' ]</span>

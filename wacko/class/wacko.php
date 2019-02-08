@@ -256,7 +256,7 @@ class Wacko
 		if (empty($file))
 		{
 			$file = $this->db->load_single(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, picture_w, picture_h, file_ext " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = " . (int) $page_id . " " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
@@ -1494,7 +1494,7 @@ class Wacko
 		{
 			// get and cache file data
 			if ($files = $this->db->load_all(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, picture_w, picture_h, file_ext " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE file_id IN (" . $this->ids_string($file_ids) . ") " .
 				"AND deleted <> 1 "
@@ -3924,11 +3924,20 @@ class Wacko
 								if (!empty($file_data['caption']))
 								{
 									$caption	=
-										'<span class="image-sub">' . $file_data['caption'] . '</span>' . ' ' .
-										'<span class="image-license">' .
-											'(' . $this->_t('FileSource') . ': <a href="' . $file_data['source_url'] . '" rel="nofollow" target="_blank">' . $file_data['author'] . '</a>' .
-											# '/<a href="' . $file_data['license'] . '" rel="nofollow" target="_blank">' . $file_data['license'] . '</a>' .
-										')</span>';
+										'<span class="caption-sub">' . $file_data['caption'] . '</span>' . ' ' .
+										($file_data['author']
+											? '<br><span class="caption-license"><small>' .
+												'(' . $this->_t('FileSource') . ': ' .
+												($file_data['source_url']
+													? '<a href="' . $file_data['source_url'] . '" rel="nofollow" target="_blank">' . $file_data['author'] . '</a>'
+													: $file_data['author']) .
+												($file_data['license_id']
+													? ' /' .
+														// FIXME; bad .tpl hack to remove
+														preg_replace('/[\r\n\t]+/', '', $this->action('license', ['license_id' => $file_data['license_id'], 'intro' => 0]))
+													: '') .
+												')</small></span>'
+											: '');
 									$tpl	= 'localfigure';
 								}
 
