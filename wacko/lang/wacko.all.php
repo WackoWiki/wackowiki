@@ -7,12 +7,12 @@ if (!defined('IN_WACKO'))
 
 $wacko_all_resource = [
 	// link templates
-	'Tpl.childpage'		=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.parentpage'	=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.equalpage'		=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.rootpage'		=> '<a {aname} href="{pagelink}" class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.descrpage'		=> '<a {aname} href="{pagelink}" class="{class}" title="{pagepath}{page}">{accicon}{text}</a>',
-	'Tpl.descrpagealt'	=> '<a {aname} href="{pagelink}" class="{class}" title="{title}">{accicon}{text}</a>',
+	'Tpl.childpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
+	'Tpl.parentpage'	=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
+	'Tpl.equalpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
+	'Tpl.rootpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
+	'Tpl.descrpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}" title="{pagepath}{page}">{accicon}{text}</a>',
+	'Tpl.descrpagealt'	=> '<a {aname} href="{pagelink}" {rel} class="{class}" title="{title}">{accicon}{text}</a>',
 
 	'Tpl.wchildpage'	=> '<span class="missingpage">{icon}{page}</span><a href="{pagelink}" title="{title}">{accicon}</a>',
 	'Tpl.wparentpage'	=> '<span class="missingpage">{icon}{page}</span><a href="{pagelink}" title="{title}">{accicon}</a>',
