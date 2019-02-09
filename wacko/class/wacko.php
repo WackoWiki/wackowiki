@@ -3573,6 +3573,7 @@ class Wacko
 		$video_link	= false;
 		$lang		= '';
 		$matches	= [];
+		$rel		= '';
 		$url		= '';
 		$text		= str_replace('"', '&quot;', $text);
 
@@ -4233,6 +4234,7 @@ class Wacko
 				if (!$access || $this->_acl['list'] == '')
 				{
 					$class		= 'acl-denied';
+					$rel		= 'nofollow';
 					$accicon	= $this->_t('OuterIcon');
 				}
 				else if ($this->_acl['list'] == '*')
@@ -4243,6 +4245,7 @@ class Wacko
 				else
 				{
 					$class		= 'acl-customsec';
+					$rel		= 'nofollow';
 					$accicon	= $this->_t('OuterIcon');
 				}
 
@@ -4278,6 +4281,12 @@ class Wacko
 
 			if ($res)
 			{
+				// sets only 'nofollow' as link type for internal links to protected pages
+				if ($rel)
+				{
+					$rel	= 'rel="' . $rel . '"';
+				}
+
 				if (isset($this->method) && $this->method == 'print')
 				{
 					$icon	= '';
@@ -4286,6 +4295,7 @@ class Wacko
 				//TODO: pagepath
 				#$aname		= str_replace('/',			'.',		$aname); // FIXME: missmatch id="doc.deutsch" but anchor '#doc/deutsch' - what was the purpose of setting a dot here if it breaks the anchor?
 				$res		= str_replace('{aname}',	$aname,		$res);
+				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
 				$res		= str_replace('{accicon}',	$accicon,	$res);
 				$res		= str_replace('{class}',	$class,		$res);	// TODO: refactor, do not set empty class="", its pointless clutter

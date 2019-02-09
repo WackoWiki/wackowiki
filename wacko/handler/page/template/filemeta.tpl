@@ -223,7 +223,7 @@
 							<label for="source_url">[ ' _t: FileSourceUrl ' ]</label>
 						</th>
 						<td>
-							<input type="text" maxlength="255" name="source_url" id="UploadSourceUrl" size="80" value="[ ' url | e attr ' ]">
+							<input type="url" maxlength="255" name="source_url" id="UploadSourceUrl" size="80" value="[ ' url | e attr ' ]">
 						</td>
 					</tr>
 					<tr>
