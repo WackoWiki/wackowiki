@@ -3895,10 +3895,13 @@ class Wacko
 							$scale = ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '"';
 						}
 
+						// show image
 						if(!$text)
 						{
 							$tpl	= 'localimage';
 							$icon	= '';
+
+							// TODO: parse off [?|&][caption|direct|nolink|linkonly|right|left|20x50] arguments from file:/image.png?arg1&arg2=
 
 							// TODO: add option for $url:
 							//	(a) direct link to file (global) or to file handler (local)
@@ -3921,6 +3924,7 @@ class Wacko
 							{
 								$text	= '<img src="' . $href . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
 
+								// add caption
 								if (!empty($file_data['caption']))
 								{
 									$caption	=
@@ -4324,6 +4328,7 @@ class Wacko
 			if ($img_link)
 			{
 				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . '>';
+				$tpl		= 'outerimg';
 			}
 
 			$res			= $this->_t('Tpl.' . $tpl);

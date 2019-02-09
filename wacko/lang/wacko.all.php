@@ -29,6 +29,7 @@ $wacko_all_resource = [
 	'Tpl.anchor'		=> '<a href="{url}">{text}</a>',
 	'Tpl.grouplink'		=> '<a href="{url}" title="{title}" class="{class}">{icon}{text}</a>',
 	'Tpl.userlink'		=> '<a href="{url}" title="{title}" class="{class}">{icon}{text}</a>',
+	'Tpl.outerimg'		=> '<a href="{url}" {rel} {target} title="{title}" class="{class}">{text}</a>',
 	'Tpl.outerlink'		=> '<a href="{url}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
 	'Tpl.interwiki'		=> '<a href="{url}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
 	'Tpl.email'			=> '<a href="{url}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
