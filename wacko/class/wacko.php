@@ -3508,6 +3508,86 @@ class Wacko
 		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text . '</a>';
 	}
 
+	// parse off [?|&][caption|direct|nolink|linkonly|right|left|20x50] arguments from file:[/|!/|../]image.png?arg1&arg2=
+	function parse_media_param($file_name)
+	{
+		//split into src and parameters (using the questionmark)
+		$pos = strrpos($file_name, '?');
+
+		if($pos !== false)
+		{
+			$src		= substr($file_name, 0, $pos);
+			$param		= substr($file_name, $pos + 1);
+		}
+		else
+		{
+			$src		= $file_name;
+			$param		= '';
+		}
+
+		// parse width and height
+		if(preg_match('#(\d+)(x(\d+))?#i', $param, $size))
+		{
+			!empty($size[1]) ? $w = $size[1] : $w = null;
+			!empty($size[3]) ? $h = $size[3] : $h = null;
+		}
+		else
+		{
+			$w = null;
+			$h = null;
+		}
+
+		// get alignment type
+		if(preg_match('/center/i',$param))
+		{
+			$align = 'center';
+		}
+		else if(preg_match('/right/i',$param))
+		{
+			$align = 'right';
+		}
+		else
+		{
+			$align = 'left';
+		}
+
+		// get linking type
+		if(preg_match('/nolink/i',$param))
+		{
+			$linking = 'nolink';
+		}
+		else if(preg_match('/direct/i',$param))
+		{
+			$linking = 'direct';
+		}
+		else if(preg_match('/linkonly/i',$param))
+		{
+			$linking = 'linkonly';
+		}
+		else
+		{
+			$linking = 'meta';
+		}
+
+		//get caption command
+		if (preg_match('/(caption)/i',$param))
+		{
+			$caption = 'caption'; // true / caption + license
+		}
+
+		$params = [
+			'src'		=> $src ?? null,
+			'caption'	=> $caption ?? null,
+			'align'		=> $align,
+			'width'		=> $w,
+			'height'	=> $h,
+			#'cache'		=> $cache,
+			'linking'	=> $linking,
+		];
+
+		return $params;
+	}
+
 	// preparing links to save them to body_r
 	/**
 	* Wraps links in special symbols <!--link:begin-->Link ==Text<!--link:end--> for
@@ -3574,7 +3654,7 @@ class Wacko
 		$lang		= '';
 		$matches	= [];
 		$rel		= '';
-		$url		= '';
+		$href		= '';
 		$text		= str_replace('"', '&quot;', $text);
 
 		// parse off <img> resizing tags from text: height= / width= / align=
@@ -3687,7 +3767,7 @@ class Wacko
 		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
 		{
 			// this is a valid Email
-			$url	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
+			$href	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
 			$title	= $this->_t('EmailLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
@@ -3696,7 +3776,7 @@ class Wacko
 		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
 		{
 			// this is a valid XMPP address
-			$url	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
+			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
 			$title	= $this->_t('JabberLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
@@ -3705,7 +3785,7 @@ class Wacko
 		else if (preg_match('/^#/', $tag))
 		{
 			// html-anchor
-			$url	= $tag;
+			$href	= $tag;
 			$tpl	= 'anchor';
 		}
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/i', $tag))
@@ -3719,7 +3799,7 @@ class Wacko
 			}
 			else
 			{
-				$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
+				$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 				$title	= $this->_t('OuterLink2');
 				$icon	= $this->_t('OuterIcon');
 				$tpl	= 'outerlink';
@@ -3728,7 +3808,7 @@ class Wacko
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/', $tag))
 		{
 			// this is a file link
-			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
+			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('FileLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
@@ -3737,7 +3817,7 @@ class Wacko
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/', $tag))
 		{
 			// this is a PDF link
-			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
+			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('PDFLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
@@ -3746,7 +3826,7 @@ class Wacko
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/', $tag))
 		{
 			// this is a RDF link
-			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
+			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('RDFLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
@@ -3755,7 +3835,7 @@ class Wacko
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
 		{
 			// this is a valid external URL
-			$url	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
+			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
 
 			if (!stristr($tag, $this->db->base_url))
@@ -3770,6 +3850,7 @@ class Wacko
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$_file_name		= $matches[2];
 			$arr			= explode('/', $_file_name);
+			$param			= [];
 			$page_tag		= '';
 			$class			= 'file-link'; // generic file icon
 			$_global		= true;
@@ -3779,11 +3860,12 @@ class Wacko
 			if (count($arr) == 1) // case 1 -> file:some.zip
 			{
 				#echo '####1: file:some.zip<br>';
-				$file_name = $_file_name;
+				$file_name	= $_file_name;
+				$param		= $this->parse_media_param($file_name);
 
-				if ($file_data = $this->check_file_record($file_name, 0))
+				if ($file_data = $this->check_file_record($param['src'], 0))
 				{
-					$url = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$href = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 					$have_global = true;
 
 					// tracking file link
@@ -3796,11 +3878,12 @@ class Wacko
 			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - global only file
 			{
 				#echo '####2: file:/some.zip <br>' . $arr[1] . '####<br>';
-				$file_name = $arr[1];
+				$file_name	= $arr[1];
+				$param		= $this->parse_media_param($file_name);
 
-				if ($file_data = $this->check_file_record($file_name, 0))
+				if ($file_data = $this->check_file_record($param['src'], 0))
 				{
-					$url = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$href = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
@@ -3810,15 +3893,15 @@ class Wacko
 				}
 			}
 
-			if (!$url || $have_global) // case 3 -> check for local file
+			if (!$href || $have_global) // case 3 -> check for local file
 			{
 				// keep data from global file, maybe we need it
 				if ($have_global)
 				{
 					$_global_file_name	= $file_name;
 					$_global_file_data	= $file_data;
-					$_global_url		= $url;
-					$url				= '';
+					$_global_href		= $href;
+					$href				= '';
 				}
 
 				#echo '####3: local file <br>';
@@ -3838,11 +3921,12 @@ class Wacko
 				$uw_supertag	= $this->translit($uw_tag);
 				$page_tag		= rtrim($uw_supertag, './');
 				// TODO: supertag won't match tag! neither in page_id_cache nor the query itself!
-				$page_id	= $this->get_page_id($page_tag);
+				$page_id		= $this->get_page_id($page_tag);
+				$param			= $this->parse_media_param($file_name);
 
-				if ($file_data = $this->check_file_record($file_name, $page_id))
+				if ($file_data = $this->check_file_record($param['src'], $page_id))
 				{
-					$url = $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
+					$href = $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
 
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
@@ -3860,31 +3944,31 @@ class Wacko
 				}
 
 				// no local file available, take the global file
-				if (!$url && $have_global)
+				if (!$href && $have_global)
 				{
 					$_global	= true;
 					$file_name	= $_global_file_name;
 					$file_data	= $_global_file_data;
-					$url		= $_global_url;
+					$href		= $_global_href;
 
-					unset ($_global_url, $_global_file_data, $_global_file_name);
+					unset ($_global_href, $_global_file_data, $_global_file_name);
 				}
 			}
 
 			// try to find file in global / local storage and return if success
 			if (is_array($file_data))
 			{
-				#echo '---------------------------<br>';
 				// check 403 here!
 				if ($_global || $file_access)
 				{
 					$title		= $file_data['file_description'] . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
 					$alt		= $file_data['file_description'];
-					$href		= '';
+					$src		= '';
 					$img_link	= false;
 					$icon		= $this->_t('OuterIcon');
 					$tpl		= 'localfile';
 
+					// image it is
 					if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
 					{
 						if ($file_data['file_ext'] == 'svg')
@@ -3902,31 +3986,41 @@ class Wacko
 							$tpl	= 'localimage';
 							$icon	= '';
 
-							// TODO: parse off [?|&][caption|direct|nolink|linkonly|right|left|20x50] arguments from file:/image.png?arg1&arg2=
-
-							// TODO: add option for $url:
-							//	(a) direct link to file (global) or to file handler (local)
-							//	(b) link to filemeta handler
-
 							// direct file access
 							if ($_global)
 							{
-								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
-								$href	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+								$src	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+								$href	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
 							else
 							{
 								// no direct file access for local files, the file handler checks the access right first
-								$url	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
-								$href	= $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
+								$src	= $this->href('file', trim($page_tag, '/'), ['get' => $file_data['file_name']]);
+								$href	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
 
-							if($href)
+							switch ($param['linking'])
 							{
-								$text	= '<img src="' . $href . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
+								case 'nolink':
+									$href	= '';
+									break;
+								case 'direct':
+									$href	= $src;
+									break;
+								case 'linkonly':
+									$href	= $src; // assumes direct link
+									$icon	= $this->_t('OuterIcon');
+									$tpl	= 'localfile';
+									$text	= $file_data['file_name'];
+									break;
+							}
+
+							if($src && !$text)
+							{
+								$text	= '<img src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
 
 								// add caption
-								if (!empty($file_data['caption']))
+								if (!empty($file_data['caption']) && $param['caption'])
 								{
 									$caption	=
 										'<span class="caption-sub">' . $file_data['caption'] . '</span>' . ' ' .
@@ -3938,7 +4032,7 @@ class Wacko
 													: $file_data['author']) .
 												($file_data['license_id']
 													? ' /' .
-														// FIXME; bad .tpl hack to remove
+														// FIXME; bad .tpl hack to remove line feed and indent stuff
 														preg_replace('/[\r\n\t]+/', '', $this->action('license', ['license_id' => $file_data['license_id'], 'intro' => 0]))
 													: '') .
 												')</small></span>'
@@ -3957,7 +4051,7 @@ class Wacko
 				}
 				else //403
 				{
-					$url		= $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
+					$href		= $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
 					$icon		= $this->_t('OuterIcon');
 					$img_link	= false;
 					$tpl		= 'localfile';
@@ -3967,7 +4061,7 @@ class Wacko
 			else	//404
 			{
 				$tpl	= 'wlocalfile';
-				$url	= '404';
+				$href	= '404';
 
 				if ($_global)
 				{
@@ -4008,7 +4102,7 @@ class Wacko
 				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
-			$url	= $this->href('', $this->db->users_page . '/', ['profile' => implode('/', $parts)]);
+			$href	= $this->href('', $this->db->users_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'user-link';
 			$icon	= $this->_t('OuterIcon');
@@ -4029,7 +4123,7 @@ class Wacko
 				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
-			$url	= $this->href('', $this->db->groups_page . '/', ['profile' => implode('/', $parts)]);
+			$href	= $this->href('', $this->db->groups_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'group-link';
 			$icon	= $this->_t('OuterIcon');
@@ -4050,7 +4144,7 @@ class Wacko
 				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
-			$url	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
+			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
 			$class	= 'iw-' . strtolower($matches[1]);
 			$icon	= $this->_t('OuterIcon'); # $this->_t('IwIcon');
 			$tpl	= 'interwiki';
@@ -4281,7 +4375,7 @@ class Wacko
 
 			if ($res)
 			{
-				// sets only 'nofollow' as link type for internal links to protected pages
+				// sets only 'nofollow' as link type to internal links to protected pages
 				if ($rel)
 				{
 					$rel	= 'rel="' . $rel . '"';
@@ -4333,7 +4427,7 @@ class Wacko
 
 		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 
-		if ($url)
+		if ($href)
 		{
 			if ($img_link)
 			{
@@ -4396,18 +4490,24 @@ class Wacko
 				$res		= str_replace('{icon}',		$icon,		$res);
 				$res		= str_replace('{class}',	$class,		$res);
 				$res		= str_replace('{title}',	$title,		$res);
-				$res		= str_replace('{url}',		$url,		$res);
+				$res		= str_replace('{href}',		$href,		$res);
 				$res		= str_replace('{text}',		$text,		$res);
 				$res		= str_replace('{caption}',	$caption,	$res);
 
 				// numerated outer links and file links
-				if ($url != $text && $url != '404' && $url != '403')
+				if ($href != $text && $href != '404' && $href != '403')
 				{
-					$res .= $this->numerate_link($url);
+					$res .= $this->numerate_link($href);
 				}
 
 				return $res;
 			}
+		}
+
+		// file:image.png + ?nolink + &caption
+		if ($caption)
+		{
+			return '<figure class="caption">' . $text . '<figcaption>' . $caption . '</figcaption></figure>';
 		}
 
 		return $text;

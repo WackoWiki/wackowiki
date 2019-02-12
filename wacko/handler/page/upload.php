@@ -72,7 +72,7 @@ if (isset($_POST['upload']) & $can_upload)
 			// TODO: filter against banned and then allowed file extentions / mime type
 			// see file_extension_check()
 			#php5", ".pht", ".phtml", ".shtml", ".asa", ".cer", ".asax", ".swf", or ".xap"
-
+			/*
 			// 3. extensions
 			$upload_banned_exts = [
 				// HTML may contain cookie-stealing JavaScript and web bugs
@@ -96,7 +96,7 @@ if (isset($_POST['upload']) & $can_upload)
 				'text/scriptlet', 'application/x-msdownload',
 				// Windows metafile, client-side vulnerability on some systems
 				'application/x-msmetafile',
-			];
+			]; */
 
 			$ext	= strtolower($ext);
 			$banned	= explode('|', $this->db->upload_banned_exts);
@@ -370,13 +370,15 @@ if (isset($_POST['upload']) & $can_upload)
 		if ($this->db->upload_quota_per_user > 0)
 		{
 			$error = $this->_t('UploadMaxFileQuota') . '. <br>' .
-					 $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) . ' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
+					 $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) .
+					' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
 		}
 
 		if ($this->db->upload_quota > 0)
 		{
 			$error .= '<br>' . $this->_t('UploadMaxFileQuota') . '. <br>' .
-					  $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($files['used_quota'], false, true, true) . ' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota), true, true, true);
+					  $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($files['used_quota'], false, true, true) .
+					' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota), true, true, true);
 		}
 	}
 
