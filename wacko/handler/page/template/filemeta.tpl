@@ -129,9 +129,6 @@
 						<th scope="row">[ ' _t: License ' ]:</th>
 						<td>[ ' license ' ]</td>
 					</tr>
-					<tr>
-						<td colspan="2">&nbsp;</td>
-					</tr>
 				=]
 				[= a _ =
 					<tr>
