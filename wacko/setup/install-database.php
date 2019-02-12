@@ -119,7 +119,7 @@ switch ($config['database_driver'])
 			mysqli_set_charset($dblink, $config['database_charset']);
 
 			// set SESSION sql_mode
-			if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+			if (!empty($config['sql_mode_strict']))
 			{
 				$sql_modes = SQL_MODE_STRICT;
 			}
@@ -282,7 +282,7 @@ switch ($config['database_driver'])
 		}
 
 		// set SESSION sql_mode
-		if (isset($config['sql_mode_strict']) && $config['sql_mode_strict'])
+		if (!empty($config['sql_mode_strict']))
 		{
 			$sql_modes = SQL_MODE_STRICT;
 		}
