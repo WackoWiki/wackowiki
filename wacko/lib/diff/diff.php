@@ -157,9 +157,14 @@ class Side
 		while (!$this->isend() && !$this->isdigit($this->character))
 		{
 			while (!$this->isend() && $this->character != "\n")
-			$this->nextchar();
-			if ($this->character=="\n")
-			$this->nextchar();
+			{
+				$this->nextchar();
+			}
+
+			if ($this->character == "\n")
+			{
+				$this->nextchar();
+			}
 		}
 	}
 
@@ -170,6 +175,7 @@ class Side
 			$out .= $this->character;
 			$this->nextchar();
 		}
+
 		$this->position++;
 	}
 
@@ -179,6 +185,7 @@ class Side
 		{
 			$this->nextchar();
 		}
+
 		$this->position++;
 	}
 
@@ -201,7 +208,9 @@ class Side
 				}
 			}
 			else if ($state != 1 && $state != 3)
-			$error = 1;
+			{
+				$error = 1;
+			}
 
 			/* Assign the proper value.  */
 
@@ -214,7 +223,9 @@ class Side
 				case 0:
 				case 2:
 					if ($this->character == ',')
-					$this->nextchar();
+					{
+						$this->nextchar();
+					}
 					break;
 
 				case 1:
@@ -224,14 +235,19 @@ class Side
 						$this->nextchar();
 					}
 					else
-					$error = 1;
+					{
+						$error = 1;
+					}
 					break;
 
 				case 3:
 					if ($this->character != "\n")
-					$error = 1;
+					{
+						$error = 1;
+					}
 					break;
 			}
+
 			$state++;
 		}
 
@@ -243,7 +259,9 @@ class Side
 		}
 
 		if ($this->character == "\n")
-		$this->nextchar();
+		{
+			$this->nextchar();
+		}
 
 		return !$error;
 	}
@@ -285,7 +303,10 @@ class _DiffOp_Copy extends _DiffOp
 	function __construct($orig, $final = false)
 	{
 		if (!is_array($final))
-		$final = $orig;
+		{
+			$final = $orig;
+		}
+
 		$this->orig = $orig;
 		$this->final = $final;
 	}
@@ -366,7 +387,10 @@ class _DiffEngine
 		for ($skip = 0; $skip < $n_from && $skip < $n_to; $skip++)
 		{
 			if ($from_lines[$skip] != $to_lines[$skip])
-			break;
+			{
+				break;
+			}
+
 			$this->xchanged[$skip] = $this->ychanged[$skip] = false;
 		}
 
@@ -375,18 +399,27 @@ class _DiffEngine
 		for ($endskip = 0; --$xi > $skip && --$yi > $skip; $endskip++)
 		{
 			if ($from_lines[$xi] != $to_lines[$yi])
-			break;
+			{
+				break;
+			}
+
 			$this->xchanged[$xi] = $this->ychanged[$yi] = false;
 		}
 
 		// Ignore lines which do not exist in both files.
 		for ($xi = $skip; $xi < $n_from - $endskip; $xi++)
-		$xhash[$from_lines[$xi]] = 1;
+		{
+			$xhash[$from_lines[$xi]] = 1;
+		}
+
 		for ($yi = $skip; $yi < $n_to - $endskip; $yi++)
 		{
 			$line = $to_lines[$yi];
 			if ( ($this->ychanged[$yi] = empty($xhash[$line])) )
-			continue;
+			{
+				continue;
+			}
+
 			$yhash[$line] = 1;
 			$this->yv[] = $line;
 			$this->yind[] = $yi;
@@ -395,7 +428,10 @@ class _DiffEngine
 		{
 			$line = $from_lines[$xi];
 			if ( ($this->xchanged[$xi] = empty($yhash[$line])) )
-			continue;
+			{
+				continue;
+			}
+
 			$this->xv[] = $line;
 			$this->xind[] = $xi;
 		}
@@ -424,25 +460,39 @@ class _DiffEngine
 				$copy[] = $from_lines[$xi++];
 				++$yi;
 			}
+
 			if ($copy)
-			$edits[] = new _DiffOp_Copy($copy);
+			{
+				$edits[] = new _DiffOp_Copy($copy);
+			}
 
 			// Find deletes & adds.
 			$delete = [];
 			while ($xi < $n_from && $this->xchanged[$xi])
-			$delete[] = $from_lines[$xi++];
+			{
+				$delete[] = $from_lines[$xi++];
+			}
 
 			$add = [];
 			while ($yi < $n_to && $this->ychanged[$yi])
-			$add[] = $to_lines[$yi++];
+			{
+				$add[] = $to_lines[$yi++];
+			}
 
 			if ($delete && $add)
-			$edits[] = new _DiffOp_Change($delete, $add);
+			{
+				$edits[] = new _DiffOp_Change($delete, $add);
+			}
 			elseif ($delete)
-			$edits[] = new _DiffOp_Delete($delete);
+			{
+				$edits[] = new _DiffOp_Delete($delete);
+			}
 			elseif ($add)
-			$edits[] = new _DiffOp_Add($add);
+			{
+				$edits[] = new _DiffOp_Add($add);
+			}
 		}
+
 		return $edits;
 	}
 
@@ -471,19 +521,26 @@ class _DiffEngine
 			// Things seems faster (I'm not sure I understand why)
 			// when the shortest sequence in X.
 			$flip = true;
-			list ($xoff, $xlim, $yoff, $ylim)
-			= [$yoff, $ylim, $xoff, $xlim];
+			list ($xoff, $xlim, $yoff, $ylim) = [$yoff, $ylim, $xoff, $xlim];
 		}
 
 		if ($flip)
-		for ($i = $ylim - 1; $i >= $yoff; $i--)
-		$ymatches[$this->xv[$i]][] = $i;
+		{
+			for ($i = $ylim - 1; $i >= $yoff; $i--)
+			{
+				$ymatches[$this->xv[$i]][] = $i;
+			}
+		}
 		else
-		for ($i = $ylim - 1; $i >= $yoff; $i--)
-		$ymatches[$this->yv[$i]][] = $i;
+		{
+			for ($i = $ylim - 1; $i >= $yoff; $i--)
+			{
+				$ymatches[$this->yv[$i]][] = $i;
+			}
+		}
 
 		$this->lcs = 0;
-		$this->seq[0]= $yoff - 1;
+		$this->seq[0] = $yoff - 1;
 		$this->in_seq = [];
 		$ymids[0] = [];
 
@@ -492,45 +549,52 @@ class _DiffEngine
 		for ($chunk = 0; $chunk < $nchunks; $chunk++)
 		{
 			if ($chunk > 0)
-			for ($i = 0; $i <= $this->lcs; $i++)
-			$ymids[$i][$chunk-1] = $this->seq[$i];
+			{
+				for ($i = 0; $i <= $this->lcs; $i++)
+				{
+					$ymids[$i][$chunk-1] = $this->seq[$i];
+				}
+			}
 
 			$x1 = $xoff + (int)(($numer + ($xlim-$xoff)*$chunk) / $nchunks);
 			for ( ; $x < $x1; $x++)
 			{
 				$line = $flip ? $this->yv[$x] : $this->xv[$x];
 				if (empty($ymatches[$line]))
-				continue;
-				$matches = $ymatches[$line];
-				reset($matches);
-
-				foreach ($matches as $y)
 				{
-					if (empty($this->in_seq[$y]))
-					{
-						$k = $this->_lcs_pos($y);
-						USE_ASSERTS && assert($k > 0);
-						$ymids[$k] = $ymids[$k-1];
-						break;
-					}
+					continue;
 				}
-
+				$matches = $ymatches[$line];
+				$found_empty = false;
 				foreach ($matches as $y)
 				{
-					if ($y > $this->seq[$k-1])
+					if (!$found_empty)
 					{
-						USE_ASSERTS && assert($y < $this->seq[$k]);
-						// Optimization: this is a common case:
-						//  next match is just replacing previous match.
-						$this->in_seq[$this->seq[$k]] = false;
-						$this->seq[$k] = $y;
-						$this->in_seq[$y] = 1;
+						if (empty($this->in_seq[$y]))
+						{
+							$k = $this->_lcs_pos($y);
+							USE_ASSERTS && assert($k > 0);
+							$ymids[$k] = $ymids[$k - 1];
+							$found_empty = true;
+						}
 					}
-					else if (empty($this->in_seq[$y]))
+					else
 					{
-						$k = $this->_lcs_pos($y);
-						USE_ASSERTS && assert($k > 0);
-						$ymids[$k] = $ymids[$k-1];
+						if ($y > $this->seq[$k - 1])
+						{
+							USE_ASSERTS && assert($y < $this->seq[$k]);
+							// Optimization: this is a common case:
+							//  next match is just replacing previous match.
+							$this->in_seq[$this->seq[$k]] = false;
+							$this->seq[$k] = $y;
+							$this->in_seq[$y] = 1;
+						}
+						else if (empty($this->in_seq[$y]))
+						{
+							$k = $this->_lcs_pos($y);
+							USE_ASSERTS && assert($k > 0);
+							$ymids[$k] = $ymids[$k - 1];
+						}
 					}
 				}
 			}
@@ -544,6 +608,7 @@ class _DiffEngine
 			$y1 = $ymid[$n] + 1;
 			$seps[] = $flip ? [$y1, $x1] : [$x1, $y1];
 		}
+
 		$seps[] = $flip ? [$ylim, $xlim] : [$xlim, $ylim];
 
 		return [$this->lcs, $seps];
@@ -565,9 +630,13 @@ class _DiffEngine
 		{
 			$mid = (int)(($beg + $end) / 2);
 			if ( $ypos > $this->seq[$mid] )
-			$beg = $mid + 1;
+			{
+				$beg = $mid + 1;
+			}
 			else
-			$end = $mid;
+			{
+				$end = $mid;
+			}
 		}
 
 		USE_ASSERTS && assert($ypos != $this->seq[$end]);
@@ -575,6 +644,7 @@ class _DiffEngine
 		$this->in_seq[$this->seq[$end]] = false;
 		$this->seq[$end] = $ypos;
 		$this->in_seq[$ypos] = 1;
+
 		return $end;
 	}
 
@@ -608,15 +678,16 @@ class _DiffEngine
 		}
 
 		if ($xoff == $xlim || $yoff == $ylim)
-		$lcs = 0;
+		{
+			$lcs = 0;
+		}
 		else
 		{
 			// This is ad hoc but seems to work well.
 			//$nchunks = sqrt(min($xlim - $xoff, $ylim - $yoff) / 2.5);
 			//$nchunks = max(2,min(8,(int) $nchunks));
 			$nchunks = min(7, $xlim - $xoff, $ylim - $yoff) + 1;
-			list ($lcs, $seps)
-			= $this->_diag($xoff,$xlim,$yoff, $ylim,$nchunks);
+			list ($lcs, $seps) = $this->_diag($xoff, $xlim, $yoff, $ylim, $nchunks);
 		}
 
 		if ($lcs == 0)
@@ -624,9 +695,13 @@ class _DiffEngine
 			// X and Y sequences have no common subsequence:
 			// mark all changed.
 			while ($yoff < $ylim)
-			$this->ychanged[$this->yind[$yoff++]] = 1;
+			{
+				$this->ychanged[$this->yind[$yoff++]] = 1;
+			}
 			while ($xoff < $xlim)
-			$this->xchanged[$this->xind[$xoff++]] = 1;
+			{
+				$this->xchanged[$this->xind[$xoff++]] = 1;
+			}
 		}
 		else
 		{
@@ -676,24 +751,33 @@ class _DiffEngine
 			 * $other_changed[$j] == false.
 			 */
 			while ($j < $other_len && $other_changed[$j])
-			$j++;
+			{
+				$j++;
+			}
 
 			while ($i < $len && ! $changed[$i])
 			{
 				USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
-				$i++; $j++;
-				while ($j < $other_len && $other_changed[$j])
+				$i++;
 				$j++;
+				while ($j < $other_len && $other_changed[$j])
+				{
+					$j++;
+				}
 			}
 
 			if ($i == $len)
-			break;
+			{
+				break;
+			}
 
 			$start = $i;
 
 			// Find the end of this run of changes.
 			while (++$i < $len && $changed[$i])
-			continue;
+			{
+				continue;
+			}
 
 			do
 			{
@@ -713,10 +797,14 @@ class _DiffEngine
 					$changed[--$start] = 1;
 					$changed[--$i] = false;
 					while ($start > 0 && $changed[$start - 1])
-					$start--;
+					{
+						$start--;
+					}
 					USE_ASSERTS && assert($j > 0);
 					while ($other_changed[--$j])
-					continue;
+					{
+						continue;
+					}
 					USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
 				}
 
@@ -739,7 +827,9 @@ class _DiffEngine
 					$changed[$start++] = false;
 					$changed[$i++] = 1;
 					while ($i < $len && $changed[$i])
-					$i++;
+					{
+						$i++;
+					}
 
 					USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
 					$j++;
@@ -747,7 +837,9 @@ class _DiffEngine
 					{
 						$corresponding = $i;
 						while ($j < $other_len && $other_changed[$j])
-						$j++;
+						{
+							$j++;
+						}
 					}
 				}
 			} while ($runlength != $i - $start);
@@ -762,7 +854,9 @@ class _DiffEngine
 				$changed[--$i] = 0;
 				USE_ASSERTS && assert($j > 0);
 				while ($other_changed[--$j])
-				continue;
+				{
+					continue;
+				}
 				USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
 			}
 		}
@@ -809,7 +903,6 @@ class DiffFormatter
 	 */
 	function format($diff)
 	{
-
 		$xi = $yi = 1;
 		$block = false;
 		$context = [];
@@ -828,9 +921,7 @@ class DiffFormatter
 					}
 					else
 					{
-						$this->_block($x0, + $xi - $x0,
-						$y0, + $yi - $y0,
-						$block);
+						$this->_block($x0, + $xi - $x0, $y0, + $yi - $y0, $block);
 						$block = false;
 					}
 				}
@@ -843,19 +934,25 @@ class DiffFormatter
 					$y0 = $yi;
 					$block = [];
 				}
+
 				$block[] = $edit;
 			}
 
 			if ($edit->orig)
-			$xi += sizeof($edit->orig);
+			{
+				$xi += sizeof($edit->orig);
+			}
+
 			if ($edit->final)
-			$yi += sizeof($edit->final);
+			{
+				$yi += sizeof($edit->final);
+			}
 		}
 
 		if (is_array($block))
-		$this->_block($x0, $xi - $x0,
-		$y0, $yi - $y0,
-		$block);
+		{
+			$this->_block($x0, $xi - $x0, $y0, $yi - $y0, $block);
+		}
 
 		return $this->_end_diff();
 	}
@@ -874,15 +971,21 @@ class DiffFormatter
 	{
 		$val = ob_get_contents();
 		ob_end_clean();
+
 		return $val;
 	}
 
 	function _block_header($xbeg, $xlen, $ybeg, $ylen)
 	{
 		if ($xlen > 1)
-		$xbeg .= "," . ($xbeg + $xlen - 1);
+		{
+			$xbeg .= "," . ($xbeg + $xlen - 1);
+		}
+
 		if ($ylen > 1)
-		$ybeg .= "," . ($ybeg + $ylen - 1);
+		{
+			$ybeg .= "," . ($ybeg + $ylen - 1);
+		}
 
 		return $xbeg . ($xlen ? ($ylen ? 'c' : 'd') : 'a') . $ybeg;
 	}
