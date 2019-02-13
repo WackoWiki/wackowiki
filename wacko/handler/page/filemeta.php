@@ -187,12 +187,12 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 		if ($file['page_id'])
 		{
 			$path	= 'file:/' . $file['supertag'] . '/';
-			$url	= $this->href('file', trim($file['supertag'], '/'), 'get=' . $file['file_name']);
+			$href	= $this->href('file', trim($file['supertag'], '/'), 'get=' . $file['file_name']);
 		}
 		else
 		{
 			$path	= 'file:/';
-			$url	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
+			$href	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 		}
 
 		if ($mode == 'show')
@@ -205,10 +205,15 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				$tpl->link			= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
 
 				// show image
-				if ($file['picture_w'] || $file['file_ext'] == 'svg')
+				if (in_array($file['file_ext'], ['gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp']))
 				{
-					$tpl->i_href		= $url;
+					$tpl->i_href		= $href;
 					$tpl->i_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false);
+				}
+				// show audio & video
+				else if (in_array($file['file_ext'], ['mp4', 'ogv', 'webm', 'm4a' , 'mp3', 'ogg', 'opus']))
+				{
+					$tpl->m_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false);
 				}
 
 				$tpl->syntax		= $path . $file['file_name'];
