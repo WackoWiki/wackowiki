@@ -256,7 +256,7 @@ class Wacko
 		if (empty($file))
 		{
 			$file = $this->db->load_single(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = " . (int) $page_id . " " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
@@ -1492,9 +1492,10 @@ class Wacko
 
 		if (!empty($file_ids))
 		{
+			// TODO: use one query function together with check_file_record() -> both need the same set
 			// get and cache file data
 			if ($files = $this->db->load_all(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE file_id IN (" . $this->ids_string($file_ids) . ") " .
 				"AND deleted <> 1 "
@@ -3528,8 +3529,8 @@ class Wacko
 		// parse width and height
 		if(preg_match('#(\d+)(x(\d+))?#i', $param, $size))
 		{
-			!empty($size[1]) ? $w = $size[1] : $w = null;
-			!empty($size[3]) ? $h = $size[3] : $h = null;
+			$w = $size[1] ?? null;
+			$h = $size[3] ?? null;
 		}
 		else
 		{
@@ -3964,12 +3965,14 @@ class Wacko
 					$title		= $file_data['file_description'] . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
 					$alt		= $file_data['file_description'];
 					$src		= '';
+					$width		= '';
+					$height		= '';
 					$img_link	= false;
 					$icon		= $this->_t('OuterIcon');
 					$tpl		= 'localfile';
 
-					// image it is
-					if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg') && !$noimg)
+					// media it is
+					if ((in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm', 'm4a', 'mp3', 'ogg', 'opus', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp'])) && !$noimg)
 					{
 						if ($file_data['file_ext'] == 'svg')
 						{
@@ -3977,7 +3980,26 @@ class Wacko
 						}
 						else
 						{
-							$scale = ' width="' . $file_data['picture_w'] . '" height="' . $file_data['picture_h'] . '"';
+							// calculate relative height
+							if ($param['width'] && !$param['height'])
+							{
+								$param['height'] = round(($param['width'] * $file_data['picture_h']) / $file_data['picture_w']);
+							}
+
+							if ($file_data['picture_w'])
+							{
+								// takes user provided values else original size
+								$width	= $param['width']	?? $file_data['picture_w'];
+								$height	= $param['height']	?? $file_data['picture_h'];
+							}
+
+							if(!$param['width'] && in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
+							{
+								$width	= 800;
+								$height = null;
+							}
+
+							$scale	= ' width="' . $width . '" height="' . $height . '"';
 						}
 
 						// show image
@@ -4017,7 +4039,20 @@ class Wacko
 
 							if($src && !$text)
 							{
-								$text	= '<img src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
+								if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg'))
+								{
+									$text	= '<img src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
+								}
+								else if (in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
+								{
+									$tpl	= '';
+									$text	= '<video src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" ' . $scale . ' controls>';
+								}
+								else if (in_array($file_data['file_ext'], ['m4a' , 'mp3', 'ogg', 'opus']))
+								{
+									$tpl	= '';
+									$text	= '<audio src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" controls>';
+								}
 
 								// add caption
 								if (!empty($file_data['caption']) && $param['caption'])

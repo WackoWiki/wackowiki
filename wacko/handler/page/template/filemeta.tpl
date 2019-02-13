@@ -80,6 +80,9 @@
 			[= i _ =
 				<span class="show-image"><a href="[ ' href ' ]">[ ' image ' ]</a></span>
 			=]
+			[= m _ =
+				<span class="show-image">[ ' image ' ]</span>
+			=]
 			<table class="upload tbl-fixed">
 				<tr>
 					<th scope="row">[ ' _t: FileSyntax ' ]:</th>
