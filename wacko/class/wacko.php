@@ -3773,14 +3773,6 @@ class Wacko
 				$video_link = $link;
 			}
 		}
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(m4a|mp3|ogg|opus)$/i', preg_replace('/<\/?nobr>/', '', $text)))
-		{
-			$audio_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
-		}
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(mp4|ogv|webm)$/i', preg_replace('/<\/?nobr>/', '', $text)))
-		{
-			$video_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
-		}
 
 		// TODO: match all external links for tracking: images, mail:, xampp:
 		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
