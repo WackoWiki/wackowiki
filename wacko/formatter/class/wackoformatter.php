@@ -744,15 +744,23 @@ class WackoFormatter
 		{
 			$url = strtolower($matches[1]);
 
-			if (   substr($url, -4) == '.gif'
-				|| substr($url, -4) == '.jpe'
-				|| substr($url, -4) == '.jpg'
-				|| substr($url, -4) == '.png'
-				|| substr($url, -4) == '.svg'
-				|| substr($url, -5) == '.jpeg'
-				|| substr($url, -5) == '.webp')
+			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/', $url, $media))
 			{
-				return '<img src="' . $matches[1] . '">' . $matches[2];
+				// audio
+				if ($media[4])
+				{
+					return '<audio src="' . $matches[1] . '" controls>' . $matches[2];
+				}
+				// image
+				if ($media[5])
+				{
+					return '<img src="' . $matches[1] . '">' . $matches[2];
+				}
+				// video
+				if ($media[6])
+				{
+					return '<video src="' . $matches[1] . '" controls>' . $matches[2];
+				}
 			}
 			// shorten url name if too long
 			else if (strlen($url) > 55)
