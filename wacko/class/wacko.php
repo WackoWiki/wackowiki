@@ -2179,6 +2179,8 @@ class Wacko
 					}
 				}
 
+				$acl	= [];
+
 				// create appropriate acls
 				if (strstr($this->context[$this->current_context], '/') && !$comment_on_id)
 				{
@@ -3539,29 +3541,33 @@ class Wacko
 		}
 
 		// get alignment type
-		if(preg_match('/center/i',$param))
+		if(preg_match('/center/i', $param))
 		{
 			$align = 'center';
 		}
-		else if(preg_match('/right/i',$param))
+		else if(preg_match('/right/i', $param))
 		{
 			$align = 'right';
 		}
-		else
+		else if(preg_match('/left/i', $param))
 		{
 			$align = 'left';
 		}
+		else
+		{
+			$align = 'default';
+		}
 
 		// get linking type
-		if(preg_match('/nolink/i',$param))
+		if(preg_match('/nolink/i', $param))
 		{
 			$linking = 'nolink';
 		}
-		else if(preg_match('/direct/i',$param))
+		else if(preg_match('/direct/i', $param))
 		{
 			$linking = 'direct';
 		}
-		else if(preg_match('/linkonly/i',$param))
+		else if(preg_match('/linkonly/i', $param))
 		{
 			$linking = 'linkonly';
 		}
@@ -3571,7 +3577,7 @@ class Wacko
 		}
 
 		//get caption command
-		if (preg_match('/(caption)/i',$param))
+		if (preg_match('/(caption)/i', $param))
 		{
 			$caption = 'caption'; // true / caption + license
 		}
@@ -3629,7 +3635,7 @@ class Wacko
 	* Returns full <a href=".."> or <img ...> HTML for Tag
 	*
 	* @param string $tag Link content - may be Wacko tag, interwiki wikiname:page tag,
-	*	http/file/ftp/https/mailto/xmpp URL, local or remote image-file for <img> link, or local or
+	*	http/file/ftp/https/mailto/xmpp URL, local or remote audio/image/video-file for <audio>/<img>/<video> link, or local or
 	*	remote doc-file; if pagetag is for an external link but not protocol is specified, http:// is prepended
 	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $text Optional text or image-file for HREF link (defaults to same as pagetag)
@@ -3747,9 +3753,33 @@ class Wacko
 			// XXX: user can't check or upload to image/ folder - how useful is this?
 			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
 		}
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/i', preg_replace('/<\/?nobr>/', '', $text)))
+		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/i', preg_replace('/<\/?nobr>/', '', $media)))
 		{
-			$img_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
+			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
+
+			// audio
+			if ($media[4])
+			{
+				$audio_link = $link;
+			}
+			// image
+			if ($media[5])
+			{
+				$img_link = $link;
+			}
+			// video
+			if ($media[6])
+			{
+				$video_link = $link;
+			}
+		}
+		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(m4a|mp3|ogg|opus)$/i', preg_replace('/<\/?nobr>/', '', $text)))
+		{
+			$audio_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
+		}
+		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.(mp4|ogv|webm)$/i', preg_replace('/<\/?nobr>/', '', $text)))
+		{
+			$video_link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
 		}
 
 		// TODO: match all external links for tracking: images, mail:, xampp:
@@ -4041,17 +4071,17 @@ class Wacko
 							{
 								if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg'))
 								{
-									$text	= '<img src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
+									$text	= '<img src="' . $src . '" class="media-' . $param['align'] . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
 								}
 								else if (in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
 								{
 									$tpl	= '';
-									$text	= '<video src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" ' . $scale . ' controls>';
+									$text	= '<video src="' . $src . '" class="media-' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" ' . $scale . ' controls>';
 								}
 								else if (in_array($file_data['file_ext'], ['m4a' , 'mp3', 'ogg', 'opus']))
 								{
 									$tpl	= '';
-									$text	= '<audio src="' . $src . '" class="media' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" controls>';
+									$text	= '<audio src="' . $src . '" class="media-' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" controls>';
 								}
 
 								// add caption
@@ -4468,6 +4498,16 @@ class Wacko
 			{
 				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . '>';
 				$tpl		= 'outerimg';
+			}
+			else if ($audio_link)
+			{
+				return		'<audio src="' . $audio_link . '" title="' . $text . '">';
+				$tpl		= '';
+			}
+			else if ($video_link)
+			{
+				return		'<video src="' . $video_link . '" title="' . $text . '"' . $resize . '>';
+				$tpl		= '';
 			}
 
 			$res			= $this->_t('Tpl.' . $tpl);

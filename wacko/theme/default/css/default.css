@@ -161,12 +161,17 @@ a.self-link:hover {
 	content: "\00b6"; 
 } */
 
+img,
 svg,
-img {
+video {
 	border-width: 0;
 	vertical-align: middle;
 	max-width: 100%;
 	height: auto;
+}
+
+audio {
+	min-width: 800px;
 }
 
 kbd {
@@ -425,6 +430,7 @@ article,
 #page-edit form textarea {
 	width: 100%;
 	height: 400px;
+	min-height: 5em;
 }
 
 footer {
@@ -734,7 +740,7 @@ a.btn-link {
 
 .upload img {
 
-	}
+}
 
 .upload tr:hover {
 	background: #CCFFCC;
@@ -819,7 +825,7 @@ td.file- {
 	
 }
 .caption-license {
-	color: #888;
+	color: #888; /* #AAAAAA */
 }
 
 .preview {
