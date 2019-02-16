@@ -3753,22 +3753,22 @@ class Wacko
 			// XXX: user can't check or upload to image/ folder - how useful is this?
 			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
 		}
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/i', preg_replace('/<\/?nobr>/', '', $media)))
+		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/i', preg_replace('/<\/?nobr>/', '', $text), $matches))
 		{
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
 
 			// audio
-			if ($media[4])
+			if ($matches[4])
 			{
 				$audio_link = $link;
 			}
 			// image
-			if ($media[5])
+			if ($matches[5])
 			{
 				$img_link = $link;
 			}
 			// video
-			if ($media[6])
+			if ($matches[6])
 			{
 				$video_link = $link;
 			}
