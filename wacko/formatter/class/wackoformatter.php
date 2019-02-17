@@ -749,7 +749,7 @@ class WackoFormatter
 				// audio
 				if ($media[4])
 				{
-					return '<audio src="' . $matches[1] . '" controls>' . $matches[2];
+					return '<audio src="' . $matches[1] . '" controls></audio>' . $matches[2];
 				}
 				// image
 				if ($media[5])
@@ -759,7 +759,7 @@ class WackoFormatter
 				// video
 				if ($media[6])
 				{
-					return '<video src="' . $matches[1] . '" controls>' . $matches[2];
+					return '<video src="' . $matches[1] . '" controls></video>' . $matches[2];
 				}
 			}
 			// shorten url name if too long
@@ -1194,8 +1194,13 @@ class WackoFormatter
 		// media file links
 		else if (preg_match('/^file:((\.\.|!)?\/)?[[:alnum:]][[:alnum:]\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/s', $thing, $matches))
 		{
+			$caption = 0;
+			if(!empty($matches[4]) && preg_match('/caption/i', $matches[4]))
+			{
+				$caption = 2;
+			}
 			#Diag::dbg('GOLD', ' ::fileimg:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
-			return $wacko->pre_link($thing);
+			return $wacko->pre_link($thing, '', 1, $caption);
 		}
 		// interwiki links
 		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/s', $thing, $matches))

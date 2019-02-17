@@ -3606,7 +3606,7 @@ class Wacko
 	* @param boolean $img_url
 	* @return string Wrapped link
 	*/
-	function pre_link($tag, $text = '', $track = 1, $img_url = 0)
+	function pre_link($tag, $text = '', $track = 1, $media_url = 0)
 	{
 		// if (!$text) $text = $this->add_spaces($tag);
 
@@ -3621,9 +3621,14 @@ class Wacko
 
 		$text = str_replace('%20', ' ', urldecode($text));
 
-		if ($img_url == 1)
+		if ($media_url == 1)
 		{
 			return '<!--imglink:begin-->' . str_replace(' ', '%20', urldecode($tag)) . ' ==' . $text . '<!--imglink:end-->';
+		}
+		else if ($media_url == 2)
+		{
+			// figure loads dynamically: <ignore> is terminator for paragrafica
+			return '<ignore><!--link:begin-->' . str_replace(' ', '%20', urldecode($tag)) . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end--></ignore>';
 		}
 		else
 		{
@@ -4003,7 +4008,7 @@ class Wacko
 						else
 						{
 							// calculate relative height
-							if ($param['width'] && !$param['height'])
+							if ($param['width'] && !$param['height'] && $file_data['picture_h'])
 							{
 								$param['height'] = round(($param['width'] * $file_data['picture_h']) / $file_data['picture_w']);
 							}
@@ -4015,10 +4020,10 @@ class Wacko
 								$height	= $param['height']	?? $file_data['picture_h'];
 							}
 
-							if(!$param['width'] && in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
+							if(in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
 							{
-								$width	= 800;
-								$height = null;
+								$width	= $param['width'] ?? 800;
+								$height	= 0;
 							}
 
 							$scale	= ' width="' . $width . '" height="' . $height . '"';
@@ -4061,19 +4066,21 @@ class Wacko
 
 							if($src && !$text)
 							{
+								$media_class = 'media-' . $param['align'];
+
 								if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg'))
 								{
-									$text	= '<img src="' . $src . '" class="media-' . $param['align'] . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
+									$text	= '<img src="' . $src . '" class="' . $media_class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
 								}
 								else if (in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
 								{
 									$tpl	= '';
-									$text	= '<video src="' . $src . '" class="media-' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" ' . $scale . ' controls>';
+									$text	= $this->video_link($src, $media_class, $title, $scale);
 								}
 								else if (in_array($file_data['file_ext'], ['m4a' , 'mp3', 'ogg', 'opus']))
 								{
 									$tpl	= '';
-									$text	= '<audio src="' . $src . '" class="media-' . $param['align'] . '" title="' . $title . '" type="' . $file_data['mime_type'] . '" controls>';
+									$text	= $this->audio_link($src, $media_class, $title );
 								}
 
 								// add caption
@@ -4094,7 +4101,6 @@ class Wacko
 													: '') .
 												')</small></span>'
 											: '');
-									$tpl	= 'localfigure';
 								}
 
 								// disables linking also for print handler, first and foremost to prevent those links showing up in numerating_links
@@ -4443,7 +4449,8 @@ class Wacko
 					$icon	= '';
 				}
 
-				//TODO: pagepath
+				// TODO: pagepath?
+				// TODO: replace only available values
 				#$aname		= str_replace('/',			'.',		$aname); // FIXME: missmatch id="doc.deutsch" but anchor '#doc/deutsch' - what was the purpose of setting a dot here if it breaks the anchor?
 				$res		= str_replace('{aname}',	$aname,		$res);
 				$res		= str_replace('{rel}',		$rel,		$res);
@@ -4552,6 +4559,7 @@ class Wacko
 					$icon	= '';
 				}
 
+				// TODO: replace only available values
 				$res		= str_replace('{target}',	$target,	$res);
 				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
@@ -4559,12 +4567,16 @@ class Wacko
 				$res		= str_replace('{title}',	$title,		$res);
 				$res		= str_replace('{href}',		$href,		$res);
 				$res		= str_replace('{text}',		$text,		$res);
-				$res		= str_replace('{caption}',	$caption,	$res);
 
 				// numerated outer links and file links
 				if ($href != $text && $href != '404' && $href != '403')
 				{
 					$res .= $this->numerate_link($href);
+				}
+
+				if ($caption)
+				{
+					$res	= $this->add_caption($res, $caption, $media_class);
 				}
 
 				return $res;
@@ -4574,7 +4586,7 @@ class Wacko
 		// file:image.png + ?nolink + &caption
 		if ($caption)
 		{
-			return '<figure class="caption">' . $text . '<figcaption>' . $caption . '</figcaption></figure>';
+			return $this->add_caption($text, $caption, $media_class);
 		}
 
 		return $text;
@@ -4594,6 +4606,33 @@ class Wacko
 
 			return '<sup class="refnum">' . $refnum . '</sup>';
 		}
+	}
+
+	function add_caption($text, $caption, $class)
+	{
+		return 
+				'<figure class="caption ' . $class . '">' . "\n" .
+					$text . "\n" .
+					'<figcaption>' . $caption . '</figcaption>' . "\n" .
+				'</figure>';
+	}
+
+	function audio_link($src, $class, $title)
+	{
+		$fallback	= '<p>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</p>';
+		return
+				'<audio src="' . $src . '" class="' . $class . '" title="' . $title . '" controls>' .
+					$fallback .
+				'<audio>'; // source: type="' . $file_data['mime_type'] . '"
+	}
+
+	function video_link($src, $class, $title, $scale = null)
+	{
+		$fallback	= '<p>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the video</a> instead.</p>';
+		return
+				'<video src="' . $src . '" class="' . $class . '" title="' . $title . '" ' . $scale . ' controls>' .
+					$fallback .
+				'</video>'; // source: type="' . $file_data['mime_type'] . '"
 	}
 
 	// creates a link to the user profile

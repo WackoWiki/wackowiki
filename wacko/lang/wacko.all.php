@@ -38,7 +38,6 @@ $wacko_all_resource = [
 
 	'Tpl.localfile'		=> '<a href="{href}" title="{title}" class="{class}">{icon}{text}</a>',
 	'Tpl.localimage'	=> '<a href="{href}" title="{title}" class="{class}">{text}</a>',
-	'Tpl.localfigure'	=> '<figure class="caption"><a href="{href}" class="{class}">{text}</a><figcaption>{caption}</figcaption></figure>',
 	'Tpl.wlocalfile'	=> '<span class="missingpage" title="{title}">{text}</span>',
 	'Tpl.lan'			=> '<a href="{href}" {target} title="{title}" class="{class}">{icon}{text}</a>',
 
