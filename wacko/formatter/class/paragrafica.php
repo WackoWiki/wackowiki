@@ -36,6 +36,7 @@ class Paragrafica
 			'!(<form)!si',
 			'!(<textarea)!si',
 			'!(<blockquote)!si',
+			'!(<ignore>)!si',
 		],
 		[ // wronginators
 			'!(</td>)!si',
@@ -67,6 +68,7 @@ class Paragrafica
 			'!(</form>)!si',
 			'!(</textarea>)!si',
 			'!(</blockquote>)!si',
+			'!(</ignore>)!si',
 		],
 		[ // wronginators
 			'!(<td[^>]*>)!si',
@@ -228,7 +230,8 @@ class Paragrafica
 						if (strlen($inside))
 						{
 							$pcount++;
-							$pieces[$k] = $this->prefix1 .
+							$pieces[$k] = "\n" .
+										  $this->prefix1 .
 										  $page_id . '-' . $pcount .
 										  $this->prefix2 .
 										  $inside .
@@ -245,6 +248,10 @@ class Paragrafica
 		$what = str_replace($this->mark2, '', $what);
 		$what = str_replace($this->mark3, '', $what);
 		$what = str_replace($this->mark4, '', $what);
+		// remove obsolete <ignore> tags
+		$what = str_replace('<ignore>', '', $what);
+		$what = str_replace('</ignore>', '', $what);
+
 		// -. done with P
 
 		// INFINITY-2. inserting a (or next?) ignored regexp
