@@ -36,6 +36,7 @@ class Paragrafica
 			'!(<form)!si',
 			'!(<textarea)!si',
 			'!(<blockquote)!si',
+			'!(<pre)!si',
 			'!(<ignore>)!si',
 		],
 		[ // wronginators
@@ -43,9 +44,6 @@ class Paragrafica
 		],
 		[ // wronginators-2
 			'!(</li>)!si',
-		],
-		[ // wronginators-3
-			'!(</pre>)!si',
 		],
 	];
 	var $t2				= [ // terminators like $1<t->
@@ -68,6 +66,7 @@ class Paragrafica
 			'!(</form>)!si',
 			'!(</textarea>)!si',
 			'!(</blockquote>)!si',
+			'!(</pre>)!si',
 			'!(</ignore>)!si',
 		],
 		[ // wronginators
@@ -75,9 +74,6 @@ class Paragrafica
 		],
 		[ // wronginators-2
 			'!(<li[^>]*>)!is',
-		],
-		[ // wronginators-3
-			'!(<pre[^>]*>)!is',
 		],
 	];
 

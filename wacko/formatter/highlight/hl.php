@@ -36,11 +36,11 @@ if ($options['_default'])
 	}
 	else
 	{
-		echo '<!--notypo-->';
+		echo '<ignore><!--notypo-->';
 		echo $table ? '<div class="hl-numbers-table">' : '';
 		echo $hl->highlight($text);
 		echo $table ? '</div>' : '';
-		echo '<!--/notypo-->';
+		echo '<!--/notypo--></ignore>';
 	}
 }
 else

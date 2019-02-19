@@ -13,7 +13,7 @@ $text = preg_replace_callback('/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--
 
 [&$parser, 'postcallback'], $text);
 
-if (!isset($options['stripnotypo'])) $options['stripnotypo'] = '';
+if (!isset($options['stripnotypo'])) $options['stripnotypo'] = false;
 
 if ($options['stripnotypo'])
 {
