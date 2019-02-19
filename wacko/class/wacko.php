@@ -3656,13 +3656,14 @@ class Wacko
 	*/
 	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1, $meta_direct = true)
 	{
-		// TODO: add case for audio and video file <audio> / <video>
 		$caption	= '';
 		$class		= '';
+		$media_class = '';
 		$icon		= '';
 		$audio_link	= false;
 		$img_link	= false;
 		$video_link	= false;
+		$scale		= '';
 		$lang		= '';
 		$matches	= [];
 		$rel		= '';
@@ -3725,17 +3726,33 @@ class Wacko
 				$_height .= 'px';
 			}
 
-			$resize = ' style="width:' . $_width . ';height:' . $_height;
+			$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
 		}
 
 		if ($_align)
 		{
-			$resize .= ' vertical-align:' . $_align . ';"';
+			// get alignment type
+			if(preg_match('/center/i', $_align))
+			{
+				$e_align = 'center';
+			}
+			else if(preg_match('/right/i', $_align))
+			{
+				$e_align = 'right';
+			}
+			else if(preg_match('/left/i', $_align))
+			{
+				$e_align = 'left';
+			}
+			else
+			{
+				$e_align = 'default';
+			}
+
+			$media_class = 'media-' . $e_align;
+
 		}
-		else if ($resize != '')
-		{
-			$resize .= ';"';
-		}
+
 
 		if ($track)
 		{
@@ -3823,7 +3840,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" ' . ($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $resize . '>';
+				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" ' . ($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $scale . '>';
 			}
 			else
 			{
@@ -4070,7 +4087,7 @@ class Wacko
 
 								if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg'))
 								{
-									$text	= '<img src="' . $src . '" class="' . $media_class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . $resize . '>';
+									$text	= '<img src="' . $src . '" class="' . $media_class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . '>';
 								}
 								else if (in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
 								{
@@ -4080,7 +4097,7 @@ class Wacko
 								else if (in_array($file_data['file_ext'], ['m4a' , 'mp3', 'ogg', 'opus']))
 								{
 									$tpl	= '';
-									$text	= $this->audio_link($src, $media_class, $title );
+									$text	= $this->audio_link($src, $media_class, $title);
 								}
 
 								// add caption
@@ -4332,7 +4349,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . '>';
+				$text		= '<img src="' . $img_link . '" class="' . $media_class . '"  title="' . $text . '"' . $scale . '>';
 			}
 
 			if ($text)
@@ -4495,17 +4512,17 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '" title="' . $text . '"' . $resize . '>';
+				$text		= '<img src="' . $img_link . '"  class="' . $media_class . '" title="' . $text . '"' . $scale . '>';
 				$tpl		= 'outerimg';
 			}
 			else if ($audio_link)
 			{
-				return		'<audio src="' . $audio_link . '" title="' . $text . '">';
+				return		$this->audio_link($audio_link, $media_class, $text);
 				$tpl		= '';
 			}
 			else if ($video_link)
 			{
-				return		'<video src="' . $video_link . '" title="' . $text . '"' . $resize . '>';
+				return		$this->video_link($video_link, $media_class, $text, $scale);
 				$tpl		= '';
 			}
 
@@ -4610,7 +4627,7 @@ class Wacko
 
 	function add_caption($text, $caption, $class)
 	{
-		return 
+		return
 				'<figure class="caption ' . $class . '">' . "\n" .
 					$text . "\n" .
 					'<figcaption>' . $caption . '</figcaption>' . "\n" .
@@ -4621,18 +4638,22 @@ class Wacko
 	{
 		$fallback	= '<p>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</p>';
 		return
-				'<audio src="' . $src . '" class="' . $class . '" title="' . $title . '" controls>' .
-					$fallback .
-				'<audio>'; // source: type="' . $file_data['mime_type'] . '"
+				'<audio src="' . $src . '" class="' . $class . '" title="' . $title . '" controls>' . "\n" .
+					$fallback . "\n" .
+				'</audio>'; 
+
+				// source: type="' . $file_data['mime_type'] . '"
 	}
 
 	function video_link($src, $class, $title, $scale = null)
 	{
 		$fallback	= '<p>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the video</a> instead.</p>';
 		return
-				'<video src="' . $src . '" class="' . $class . '" title="' . $title . '" ' . $scale . ' controls>' .
-					$fallback .
-				'</video>'; // source: type="' . $file_data['mime_type'] . '"
+				'<video src="' . $src . '" class="' . $class . '" title="' . $title . '" ' . $scale . ' controls>' . "\n" .
+					$fallback . "\n" .
+				'</video>'; 
+
+				// source: type="' . $file_data['mime_type'] . '"
 	}
 
 	// creates a link to the user profile

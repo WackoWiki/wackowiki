@@ -433,7 +433,7 @@ class WackoFormatter
 		else if (preg_match('/^\{\{(.*?)\}\}$/s', $thing, $matches))
 		{
 			// used in paragrafica, too
-			return '<!--escaped--><!--notypo--><!--action:begin-->' . $matches[1] . '<!--action:end--><!--/notypo--><!--escaped-->';
+			return '<!--escaped--><ignore><!--notypo--><!--action:begin-->' . $matches[1] . '<!--action:end--><!--/notypo--></ignore><!--escaped-->';
 		}
 
 		// if we reach this point, it must have been an accident

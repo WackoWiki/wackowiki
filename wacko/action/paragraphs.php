@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 /*
 	{{paragraphs style="BEFORE|after|left|right"		// table-type "left/right" not implemented yet
-														// styles can be found in /classes/wacko.php
+														// styles can be found in /class/wacko.php
 		name="absolute|toc-relative|DOCUMENT-RELATIVE"	// "toc-relative" not implemented yet
 	}}
 */

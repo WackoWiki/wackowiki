@@ -1,9 +1,9 @@
 <?php
 
-echo	'<!--notypo-->' .
+echo	'<ignore><!--notypo-->' .
 			'<pre class="code">' .
 				Ut::html($text) .
 			'</pre>' .
-		'<!--/notypo-->';
+		'<!--/notypo--></ignore>';
 
 ?>

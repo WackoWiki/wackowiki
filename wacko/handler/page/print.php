@@ -32,7 +32,7 @@ if ((($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate
 $data = $this->format($this->page['body'], 'wacko');
 
 // display page
-$data		= $this->format($data, 'post_wacko', ['bad' => 'good']);
+$data		= $this->format($data, 'post_wacko', ['stripnotypo' => true]);
 $tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
 
 // display comments
