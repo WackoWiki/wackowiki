@@ -3785,12 +3785,12 @@ class Wacko
 				$audio_link = $link;
 			}
 			// image
-			if ($matches[5])
+			else if ($matches[5])
 			{
 				$img_link = $link;
 			}
 			// video
-			if ($matches[6])
+			else if ($matches[6])
 			{
 				$video_link = $link;
 			}
@@ -4636,22 +4636,24 @@ class Wacko
 
 	function audio_link($src, $class, $title)
 	{
-		$fallback	= '<p>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</p>';
+		// inline element (paragrafica!)
+		$fallback	= '<span>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</span>';
 		return
 				'<audio src="' . $src . '" class="' . $class . '" title="' . $title . '" controls>' . "\n" .
 					$fallback . "\n" .
-				'</audio>'; 
+				'</audio>';
 
 				// source: type="' . $file_data['mime_type'] . '"
 	}
 
 	function video_link($src, $class, $title, $scale = null)
 	{
-		$fallback	= '<p>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the video</a> instead.</p>';
+		// inline element (paragrafica!)
+		$fallback	= '<span>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the video</a> instead.</span>';
 		return
 				'<video src="' . $src . '" class="' . $class . '" title="' . $title . '" ' . $scale . ' controls>' . "\n" .
 					$fallback . "\n" .
-				'</video>'; 
+				'</video>';
 
 				// source: type="' . $file_data['mime_type'] . '"
 	}
