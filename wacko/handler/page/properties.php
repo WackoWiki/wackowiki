@@ -117,7 +117,7 @@ else
 			$tpl->categories_html = $categories;
 		}
 
-		$langs = $this->available_languages();
+		$langs = $this->http->available_languages();
 
 		if (!($clang = $this->page['page_lang']) || !isset($langs[$clang]))
 		{

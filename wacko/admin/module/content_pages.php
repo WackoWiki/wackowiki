@@ -146,7 +146,7 @@ function admin_content_pages(&$engine, &$module)
 
 		if ($engine->db->multilanguage)
 		{
-			$langs = $engine->available_languages();
+			$langs = $engine->http->available_languages();
 		}
 		else
 		{

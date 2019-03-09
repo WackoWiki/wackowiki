@@ -408,7 +408,7 @@ function admin_user_users(&$engine, &$module)
 
 				$languages = $engine->_t('LanguageArray');
 
-				if ($langs = $engine->available_languages())
+				if ($langs = $engine->http->available_languages())
 				{
 					foreach ($langs as $lang)
 					{
@@ -487,7 +487,7 @@ function admin_user_users(&$engine, &$module)
 
 						$languages = $engine->_t('LanguageArray');
 
-						if ($langs = $engine->available_languages())
+						if ($langs = $engine->http->available_languages())
 						{
 							foreach ($langs as $lang)
 							{

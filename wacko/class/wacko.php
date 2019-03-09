@@ -609,102 +609,9 @@ class Wacko
 		}
 	}
 
-	/**
-	* Get array of available resource translations
-	*
-	* @param bool $subset, true for allowed_languages only
-	*
-	* @return array Array of language codes
-	*/
-	function available_languages($subset = true)
-	{
-		// TODO: add $reset option to reset sess->available_languages
-		//		for AP basic module, else the user must logout/login again
-		//		after changing the languge set to be available
-		$lang_list = &$this->sess->available_languages;
-
-		if (!isset($lang_list))
-		{
-			$list = [];
-
-			foreach (Ut::file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
-			{
-				$lang = substr($file, -6, 2);
-				$list[$lang] = $lang;
-			}
-
-			ksort($list, SORT_STRING);
-			$lang_list[false] = $list;
-
-			if (($allow = preg_split('/[\s,]+/', $this->db->allowed_languages, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
-			{
-				// system language is always allowed
-				if (!in_array($this->db->language, $allow))
-				{
-					$allow[] = $this->db->language;
-				}
-
-				$list = array_intersect($list, $allow);
-			}
-
-			if (!isset($list[$this->db->language]))
-			{
-				die('WackoWiki system language is unavailable');
-			}
-
-			$lang_list[true] = $list;
-		}
-
-		return $lang_list[!!$subset];
-	}
-
 	function known_language($lang)
 	{
-		return array_key_exists($lang, $this->available_languages());
-	}
-
-	// negotiate language with user's browser
-	function user_agent_language()
-	{
-		$lang = $this->db->language;
-
-		if ($this->db->multilanguage && isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-		{
-			$lang_list = $this->available_languages();
-
-			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
-			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
-					"(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/",
-					strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
-					$matches, PREG_SET_ORDER);
-
-			$best = 0;
-
-			foreach ($matches as $i)
-			{
-				$want1 = $want2 = $i[1];
-
-				if ($i[3])
-				{
-					$want2 = $want1 . '-' . $i[3];
-				}
-
-				$q = ($i[5] !== '')? (float)$i[5] : 1;
-
-				if (isset($lang_list[$want2]) && $q > $best)
-				{
-					$lang = $want2;
-					$best = $q;
-				}
-				else if (isset($lang_list[$want1]) && $q * 0.9 > $best)
-				{
-					$lang = $want1;
-					$best = $q * 0.9;
-				}
-			}
-		}
-
-		return $lang;
+		return array_key_exists($lang, $this->http->available_languages());
 	}
 
 	function get_user_language()
@@ -713,7 +620,7 @@ class Wacko
 
 		if (!$this->known_language($lang))
 		{
-			$lang = $this->user_agent_language();
+			$lang = $this->http->user_agent_language();
 		}
 
 		return $lang;
@@ -8946,7 +8853,7 @@ class Wacko
 
 		if ($this->db->multilanguage)
 		{
-			$langs = $this->available_languages();
+			$langs = $this->http->available_languages();
 		}
 		else
 		{

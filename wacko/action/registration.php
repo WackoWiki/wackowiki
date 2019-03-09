@@ -242,9 +242,9 @@ else
 	if ($this->db->multilanguage)
 	{
 		$languages	= $this->_t('LanguageArray');
-		$sel		= $this->user_agent_language();
+		$sel		= $this->http->user_agent_language();
 
-		foreach ($this->available_languages() as $lang)
+		foreach ($this->http->available_languages() as $lang)
 		{
 			$tpl->r_multi_l_lang		= $lang;
 			$tpl->r_multi_l_name		= $languages[$lang];

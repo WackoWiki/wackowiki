@@ -153,7 +153,7 @@ function admin_config_basic(&$engine, &$module)
 					<select id="language" name="language">
 					<?php
 						$languages	= $engine->_t('LanguageArray');
-						$langs		= $engine->available_languages();
+						$langs		= $engine->http->available_languages();
 
 						foreach ($langs as $lang)
 						{
@@ -187,10 +187,13 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 				<?php
+					// TODO: add $reset option to reset sess->available_languages
+					//		for AP basic module, else the user must logout/login again
+					//		after changing the languge set to be available
 					if ($engine->db->multilanguage)
 					{
 						// subset: false
-						$langs = $engine->available_languages(false);
+						$langs = $engine->http->available_languages(false);
 					}
 					else
 					{

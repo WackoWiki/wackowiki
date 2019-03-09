@@ -225,7 +225,7 @@ function admin_massemail(&$engine, &$module)
 					<select id="language" name="language">
 <?php
 						$languages	= $engine->_t('LanguageArray');
-						$langs		= $engine->available_languages();
+						$langs		= $engine->http->available_languages();
 
 						foreach ($langs as $lang)
 						{
