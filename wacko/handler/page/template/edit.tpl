@@ -67,14 +67,15 @@
 				=]
 	
 				[ ' captcha ' ]
-					<script>
-						wE = new WikiEdit();
-							[= autocomplete _ =
-								if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: edit ' ]" ); }
-							=]
-						wE.init('postText','WikiEdit','edname-w','[ ' wikiedit ' ]');
-					</script>
-					<br>
+
+				<script>
+					wE = new WikiEdit();
+						[= autocomplete _ =
+							if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: edit ' ]" ); }
+						=]
+					wE.init('postText','WikiEdit','edname-w','[ ' wikiedit ' ]');
+				</script>
+				<br>
 				[ '' buttons '' ]
 			</form>
 		=]
