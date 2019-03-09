@@ -10,8 +10,8 @@ if (!defined('IN_WACKO'))
 
 /*
  * DiffMode
- *	0	Full diff
- *	1	Simple diff
+ *	0	Full diff		(rendered)
+ *	1	Simple diff		(rendered)
  *	2	Source			(text/plain)
  *	3	Side by side
  *	4	Inline
