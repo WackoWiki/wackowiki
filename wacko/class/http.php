@@ -111,7 +111,7 @@ class Http
 			list($page, $hash) = $this->normalize_page($page);
 
 			$params	= $this->db->load_all(
-				"SELECT method, query " .
+				"SELECT method, query, cache_lang " .
 				"FROM " . $this->db->table_prefix . "cache " .
 				"WHERE name = " . $this->db->q($hash));
 
@@ -121,7 +121,7 @@ class Http
 
 			foreach ($params as $param)
 			{
-				$file	= $this->construct_id($page, $param['method'], $param['query']);
+				$file	= $this->construct_id($page, $param['method'], $param['query'], $param['cache_lang']);
 				$x		= @touch($file, $past); // touching is faster than unlinking
 
 				if ($x)
