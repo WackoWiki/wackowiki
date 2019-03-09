@@ -17,6 +17,7 @@ class Http
 	public		$method;					// for finalize & diag..
 	private		$hash;
 	private		$query;
+	private		$lang;
 	private		$file;
 	private		$caching		= 0;
 
@@ -27,6 +28,7 @@ class Http
 		$this->tls_session	= $this->tls_session();
 		$this->ip			= $this->real_ip();
 		$this->tls_mark		= $this->db->cookie_prefix . 'TLS';
+
 
 		// if we have used tls already - do secure session!
 		if ($db->tls && !$this->tls_session && @$_COOKIE[$this->tls_mark])
@@ -62,9 +64,11 @@ class Http
 	// Get page content from cache
 	private function load_page(&$timestamp)
 	{
+		$this->lang		= $this->user_agent_language();
+
 		// store data for save_page()
 		list($this->page, $this->hash) = $this->normalize_page($this->page);
-		$this->file		= $this->construct_id($this->page, $this->method, $this->query);
+		$this->file		= $this->construct_id($this->page, $this->method, $this->query, $this->lang);
 
 		clearstatcache();
 
@@ -92,7 +96,8 @@ class Http
 			"INSERT INTO " . $this->db->table_prefix . "cache SET " .
 				"name	= " . $this->db->q($this->hash) . ", " .
 				"method	= " . $this->db->q($this->method) . ", " .
-				"query	= " . $this->db->q($this->query));
+				"query	= " . $this->db->q($this->query) . ", " .
+				"cache_lang	= " . $this->db->q($this->lang));		// user lang NOT user agent lang NOR page lang!
 				// TIMESTAMP type is filled automatically by MySQL
 	}
 
@@ -141,9 +146,9 @@ class Http
 		return [$page, hash('sha1', $page)];
 	}
 
-	private function construct_id($page, $method, $query)
+	private function construct_id($page, $method, $query, $lang)
 	{
-		return Ut::join_path(CACHE_PAGE_DIR, Ut::http64_encode(hash('sha1', ($page . '_' . $method . '_' . $query), 1)));
+		return Ut::join_path(CACHE_PAGE_DIR, Ut::http64_encode(hash('sha1', ($page . '_' . $method . '_' . $query . '_' . $lang), 1)));
 	}
 
 	// Check http-request. May be, output cached version.
@@ -443,6 +448,96 @@ class Http
 		// to be replaced then by no_cache or what
 		header('Cache-Control: public');
 		header('Pragma: cache');
+	}
+
+	// negotiate language with user's browser
+	function user_agent_language()
+	{
+		$lang = $this->db->language;
+
+		if ($this->db->multilanguage && isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+		{
+			$lang_list = $this->available_languages();
+
+			// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+			preg_match_all("/([[:alpha:]]{1,8})(-([[:alpha:]|-]{1,8}))?" .
+					"(\s*;\s*q\s*=\s*(1\.0{0,3}|0\.\d{0,3}))?\s*(,|$)/",
+					strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE']),
+					$matches, PREG_SET_ORDER);
+
+			$best = 0;
+
+			foreach ($matches as $i)
+			{
+				$want1 = $want2 = $i[1];
+
+				if ($i[3])
+				{
+					$want2 = $want1 . '-' . $i[3];
+				}
+
+				$q = ($i[5] !== '')? (float)$i[5] : 1;
+
+				if (isset($lang_list[$want2]) && $q > $best)
+				{
+					$lang = $want2;
+					$best = $q;
+				}
+				else if (isset($lang_list[$want1]) && $q * 0.9 > $best)
+				{
+					$lang = $want1;
+					$best = $q * 0.9;
+				}
+			}
+		}
+
+		return $lang;
+	}
+
+	/**
+	* Get array of available resource translations
+	*
+	* @param bool $subset, true for allowed_languages only
+	*
+	* @return array Array of language codes
+	*/
+	function available_languages($subset = true)
+	{
+		$lang_list = &$this->sess->available_languages;
+
+		if (!isset($lang_list))
+		{
+			$list = [];
+
+			foreach (Ut::file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
+			{
+				$lang = substr($file, -6, 2);
+				$list[$lang] = $lang;
+			}
+
+			ksort($list, SORT_STRING);
+			$lang_list[false] = $list;
+
+			if (($allow = preg_split('/[\s,]+/', $this->db->allowed_languages, -1, PREG_SPLIT_NO_EMPTY)) && $allow[0])
+			{
+				// system language is always allowed
+				if (!in_array($this->db->language, $allow))
+				{
+					$allow[] = $this->db->language;
+				}
+
+				$list = array_intersect($list, $allow);
+			}
+
+			if (!isset($list[$this->db->language]))
+			{
+				die('WackoWiki system language is unavailable');
+			}
+
+			$lang_list[true] = $list;
+		}
+
+		return $lang_list[!!$subset];
 	}
 
 	private function real_ip()
