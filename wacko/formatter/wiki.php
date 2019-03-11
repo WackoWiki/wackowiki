@@ -7,7 +7,13 @@ if (!defined('IN_WACKO'))
 
 $text = $this->format($text, 'wacko');
 
-echo $text;
-
-// prevents parsing links and actions dynamically
-# include Ut::join_path(FORMATTER_DIR, 'post_wacko.php');
+// by default links and actions where parsed dynamically via show handler
+if (isset($options['diff']))
+{
+	// parsing links and actions
+	include Ut::join_path(FORMATTER_DIR, 'post_wacko.php');
+}
+else
+{
+	echo $text;
+}
