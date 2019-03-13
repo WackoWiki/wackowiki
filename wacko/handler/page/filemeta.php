@@ -256,7 +256,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 				$tpl->location		= $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal');
 				$tpl->fileusage		= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
-				$tpl->categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
+				$tpl->c_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
 			}
 
 			$tpl->leave();

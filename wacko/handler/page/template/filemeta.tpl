@@ -142,7 +142,7 @@
 						<th scope="row">[ ' _t: FileSource ' ]:</th>
 						<td>
 						[= url _ =
-							<a href="[ ' href | e  ' ]" title="[ ' db: site_desc | e ' ]">
+							<a href="[ ' href | e ' ]" title="[ ' db: site_desc | e ' ]">
 						=]
 							[ ' source ' ]
 						[= chref _ =
@@ -163,10 +163,12 @@
 					<th scope="row">[ ' _t: FileUsage ' ]:</th>
 					<td>[ ' fileusage ' ]</td>
 				</tr>
-				<tr>
-					<th scope="row">[ ' _t: Categories ' ]:</th>
-					<td>[ ' categories ' ]</td>
-				</tr>
+				[= c _ =
+					<tr>
+						<th scope="row">[ ' _t: Categories ' ]:</th>
+						<td>[ ' categories ' ]</td>
+					</tr>
+				=]
 			</table>
 
 			<br>
