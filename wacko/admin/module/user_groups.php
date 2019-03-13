@@ -82,7 +82,6 @@ function admin_user_groups(&$engine, &$module)
 					$engine->log(4, Ut::perc_replace($engine->_t('LogMemberAdded', SYSTEM_LANG), $_POST['new_member_id'], $usergroup['group_name']));
 					unset($_POST['add_member']);
 			}
-
 			// remove member from group
 			else if (isset($_POST['remove_member']) && isset($_POST['member_id']) && isset($_POST['group_id']))
 			{
@@ -468,10 +467,15 @@ function admin_user_groups(&$engine, &$module)
 		<input type="hidden" name="group_id" value="<?php echo (int) $group_id; ?>">
 
 		<table class="formation listcenter">
+			<colgroup>
+				<col span="1" style="width:5px;">
+				<col span="1" style="width:5px;">
+				<col span="1" style="width:20px;">
+			</colgroup>
 			<tr>
-				<th style="width:5px;"></th>
-				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href() . $orderuser; ?>"><?php echo $engine->_t('UserName');?></a></th>
+				<th></th>
+				<th>ID</th>
+				<th><a href="<?php echo $engine->href() . $orderuser; ?>"><?php echo $engine->_t('UserName');?></a></th>
 			</tr>
 <?php
 		foreach ($members as $member)
@@ -620,7 +624,7 @@ function admin_user_groups(&$engine, &$module)
 					<th><a href="<?php echo $engine->href('', '', ['order' => $created]); ?>"><?php echo $engine->_t('GroupsCreated');?></a></th>
 				</tr>
 			</thead>
-				<tbody>
+			<tbody>
 <?php
 		if ($groups)
 		{

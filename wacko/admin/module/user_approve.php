@@ -342,19 +342,30 @@ function admin_user_approve(&$engine, &$module)
 	$engine->print_pagination($pagination);
 ?>
 	<table class="formation listcenter">
+		<colgroup>
+			<col span="1" style="width:5px;">
+			<col span="1" style="width:20px;">
+			<col span="1">
+			<col span="1">
+			<col span="1" style="width:20px;">
+			<col span="1" style="width:20px;">
+			<col span="1" style="width:20px;">
+			<col span="1" style="width:20px;">
+			<col span="1" style="width:200px;">
+		</colgroup>
 		<thead>
 			<tr>
-				<!--<th style="width:5px;"></th>-->
-				<!--<th style="width:5px;"></th>-->
-				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
+				<!--<th></th>-->
+				<!--<th></th>-->
+				<th>ID</th>
+				<th><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
 				<th><?php echo $engine->_t('UserEmail'); ?></th>
 				<th><?php echo $engine->_t('UserIP'); ?></th>
-				<th style="width:20px;"><?php echo $engine->_t('UserLanguage'); ?></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $signup_time, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
-				<th style="width:20px;"><?php echo $engine->_t('UserEnabled'); ?></th>
-				<th style="width:20px;"><?php echo $engine->_t('AccountStatus'); ?></th>
-				<th style="width:200px;"><?php echo $engine->_t('UserActions'); ?></th>
+				<th><?php echo $engine->_t('UserLanguage'); ?></th>
+				<th><a href="<?php echo $engine->href('', '', ['order' => $signup_time, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
+				<th><?php echo $engine->_t('UserEnabled'); ?></th>
+				<th><?php echo $engine->_t('AccountStatus'); ?></th>
+				<th><?php echo $engine->_t('UserActions'); ?></th>
 			</tr>
 		<thead>
 		<tbody>
@@ -393,7 +404,7 @@ function admin_user_approve(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5"><br><em>' . $engine->_t('NoMatchingUser') . '</em></td></tr>';
+		echo '<tr><td colspan="9"><br><em>' . $engine->_t('NoMatchingUser') . '</em></td></tr>';
 	}
 ?>
 		</tbody>
