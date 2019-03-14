@@ -5279,7 +5279,7 @@ class Wacko
 		$result				= $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
 
 		return (!strncmp($result, ADD_NO_DIV, strlen(ADD_NO_DIV)))
-			?  substr($result, strlen(ADD_NO_DIV))
+			? substr($result, strlen(ADD_NO_DIV))
 			: '<div id="' . $handler . '">' . $result . "</div>\n";
 	}
 
