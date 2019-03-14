@@ -64,21 +64,21 @@ class Email
 	{
 		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
 
-		$mail->SetLanguage($this->engine->db->language, 'language/');
+		$mail->setLanguage($this->engine->db->language, 'language/');
 
 		// Select the method to send mail
 		switch ($this->engine->db->phpmailer_method)
 		{
 			case 'mail':
-				$mail->IsMail();
+				$mail->isMail();
 				break;
 
 			case 'sendmail':
-				$mail->IsSendmail();
+				$mail->isSendmail();
 				break;
 
 			case 'smtp':
-				$mail->IsSMTP();
+				$mail->isSMTP();
 
 				// SMTP collection is always kept alive
 				# $mail->SMTPKeepAlive = true;
@@ -116,17 +116,17 @@ class Email
 		{
 			$mail->Host			= $this->engine->db->smtp_host;			// SMTP server
 
-			$mail->AddCustomHeader('X-Wacko: ' . $this->engine->db->base_url);
-			$mail->AddCustomHeader('Auto-Submitted: auto-generated');	// RFC3834
-			$mail->AddCustomHeader('X-Auto-Response-Suppress: All');	// Microsoft Exchange
+			$mail->addCustomHeader('X-Wacko: ' . $this->engine->db->base_url);
+			$mail->addCustomHeader('Auto-Submitted: auto-generated');	// RFC3834
+			$mail->addCustomHeader('X-Auto-Response-Suppress: All');	// Microsoft Exchange
 
 			# $mail->Sender		= $this->engine->db->abuse_email;		// 'return-path' header
-			# $mail->AddReplyTo('name@example.com', 'First Last');		//
-			$mail->SetFrom($email_from, $name_from);
-			$mail->AddAddress($email_to, $name_to);
-			# $mail->AddBCC($email_to, $name_to);
+			# $mail->addReplyTo('name@example.com', 'First Last');		//
+			$mail->setFrom($email_from, $name_from);
+			$mail->addAddress($email_to, $name_to);
+			# $mail->addBCC($email_to, $name_to);
 
-			$mail->IsHTML(false);		// set email format to plain
+			$mail->isHTML(false);		// set email format to plain
 			$mail->ContentType	= 'text/plain';
 			$mail->WordWrap		= 80;
 			$mail->Priority		= $this->engine->db->email_priority;	// Urgent = 1, Not Urgent = 5, Disable = 0
@@ -145,12 +145,12 @@ class Email
 					}
 					else
 					{
-						$mail->AddCustomHeader( "$key: $value" );
+						$mail->addCustomHeader( "$key: $value" );
 					}
 				}
 			}
 
-			$mail->Send();
+			$mail->send();
 
 			/* if (!$mail->Send())
 			{
