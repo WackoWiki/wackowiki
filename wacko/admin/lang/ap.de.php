@@ -1103,7 +1103,7 @@ $ap_translation = [
 	'LogDbRestored'				=> 'Sicherung ##%1## der Datenbank wiederhergestellt.',
 
 	// User module
-	'UsersInfo'					=> 'Hier können Sie Ihre Benutzerinformationen und bestimmte spezifische Optionen ändern.',
+	'UsersInfo'					=> 'Hier können Benutzerinformationen und bestimmte spezifische Optionen geändert werden.',
 
 	'UsersAdded'				=> 'Benutzer hinzugefügt',
 	'UsersDeleteInfo'			=> '[Informationen an Benutzer zur Löschung hier..]',
@@ -1126,7 +1126,7 @@ $ap_translation = [
 	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfüllen.',
 
 	// Groups module
-	'GroupsInfo'				=> 'Von diesem Panel aus können Sie alle Ihre Benutzergruppen verwalten. Sie können vorhandene Gruppen löschen, erstellen und bearbeiten. Darüber hinaus können Sie Gruppenleiter auswählen, den Status der offenen / versteckten / geschlossenen Gruppen umschalten und den Gruppennamen und die Beschreibung festlegen.',
+	'GroupsInfo'				=> 'Benutzergruppen verwalten. Hier können Gruppen erstellt, bearbeitet und gelöscht werden. Darüber hinaus lässt sich ein Gruppenleiter auswählen, der Status der Gruppe ändern und der Gruppenname und die Beschreibung festlegen.',
 
 	'LogMembersUpdated'			=> 'Gruppenmitglieder aktualisiert',
 	'LogMemberAdded'			=> 'Gruppenmitglied ##%1## zu Gruppe ##%2## hinzugefügt',
@@ -1149,8 +1149,9 @@ $ap_translation = [
 	'GroupsAdd'					=> 'Eine neue Gruppe hinzufügen',
 	'GroupsRename'				=> 'Gruppe %1 umbenennen zu',
 	'GroupsRenameInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Seiten aus, die dieser Gruppe zugeordnet sind.',
-	'GroupsDelete'				=> 'Bist du dir sicher das du die Gruppe %1 entfernen möchtest ',
+	'GroupsDelete'				=> 'Bist du dir sicher das du die Gruppe %1 entfernen möchtest',
 	'GroupsDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
+	'GroupsIsSystem'			=> 'Die Gruppe %1 gehört zum System und kann nicht entfernt werden.',
 	'GroupsStoreButton'			=> 'Speichere Gruppen',
 	'GroupsSaveButton'			=> 'Absenden',
 	'GroupsCancelButton'		=> 'Abbrechen',
