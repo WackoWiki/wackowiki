@@ -251,20 +251,23 @@ function admin_user_groups(&$engine, &$module)
 		else if (isset($_POST['delete']) && isset($_POST['group_id']))
 		{
 			$usergroup = $engine->db->load_single(
-				"SELECT group_name
+				"SELECT group_name, group_id
 				FROM " . $prefix . "usergroup
 				WHERE group_id = " . (int) $_POST['group_id'] . "
+					AND is_system <> 1
 				LIMIT 1");
 
 			$engine->db->sql_query(
 				"DELETE FROM " . $prefix . "usergroup " .
-				"WHERE group_id = " . (int) $_POST['group_id']);
+				"WHERE group_id = " . (int) $usergroup['group_id']) . " " .
+					"AND is_system <> 1";
 			$engine->db->sql_query(
 				"DELETE FROM " . $prefix . "usergroup_member " .
-				"WHERE group_id = " . (int) $_POST['group_id']);
+				"WHERE group_id = " . (int) $usergroup['group_id']) . " " .
+					"AND is_system <> 1";
 
 			$engine->config->invalidate_config_cache();
-			$engine->show_message(Ut::perc_replace($engine->_t('GroupsDeleted'), $usergroup['group_name']), 'success');
+			$engine->show_message(Ut::perc_replace($engine->_t('GroupsDeleted'), '<code>' . $usergroup['group_name'] . '</code>'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogGroupRemoved', SYSTEM_LANG), $usergroup['group_name']));
 
 			unset($_GET['group_id']);
@@ -414,27 +417,34 @@ function admin_user_groups(&$engine, &$module)
 	else if (isset($_POST['delete']) && isset($_POST['change']))
 	{
 		if ($usergroup = $engine->db->load_single(
-			"SELECT group_name
+			"SELECT group_name, is_system
 			FROM " . $prefix . "usergroup
 			WHERE group_id = " . (int) $_POST['change'] . "
 			LIMIT 1"))
 		{
-			echo $engine->form_open('delete_group');
+			if ($usergroup['is_system'])
+			{
+				$engine->show_message(Ut::perc_replace($engine->_t('GroupsIsSystem'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>'));
+			}
+			else
+			{
+				echo $engine->form_open('delete_group');
 
-			echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
-				'<table class="formation">' .
-					'<tr>
-						<td>
-							<label for="">' . Ut::perc_replace($engine->_t('GroupsDelete'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . '?</label> ' .
-							'<input type="submit" id="submit" name="delete" value="' . $engine->_t('Remove') . '"> ' .
-							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>' .
-							'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
-						'</td>
-					</tr>' .
-				'</table>
-				<br>';
+				echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
+					'<table class="formation">' .
+						'<tr>
+							<td>
+								<label for="">' . Ut::perc_replace($engine->_t('GroupsDelete'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . '?</label> ' .
+								'<input type="submit" id="submit" name="delete" value="' . $engine->_t('Remove') . '"> ' .
+								'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>' .
+								'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
+							'</td>
+						</tr>' .
+					'</table>
+					<br>';
 
-			echo $engine->form_close();
+				echo $engine->form_close();
+			}
 		}
 
 		echo '<!-- end trying to delete group -->';

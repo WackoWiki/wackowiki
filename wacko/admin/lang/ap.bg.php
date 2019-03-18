@@ -1135,6 +1135,7 @@ $ap_translation = [
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
 	'GroupsDelete'				=> 'Are you sure you want to remove group %1',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsSaveButton'			=> 'Submit',
 	'GroupsCancelButton'		=> 'Откажи',
