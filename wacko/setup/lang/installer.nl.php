@@ -125,7 +125,7 @@ $lang = [
 */
 'database-config' => 'Database Configuratie',
 'DBDriver' => 'Driver',
-'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="http://de2.php.net/pdo" target="_blank">PDO</a> installed.',
+'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',
@@ -212,7 +212,7 @@ $lang = [
 'ThatsAll' => 'Dat is alles! U kunt nu <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Beveiligingsoverwegingen',
 'SecurityRisk' => 'Echter, u wordt geadviseerd om schrijfrechten op %1 te verwijderen nu het is weggeschreven. Door de schrijfrechten te handhaven creert u een veiligheidsrisico!',
-'RemoveSetupDirectory' => 'You should delete the <code>setup/</code> directory now that the installation process has been completed.',
+'RemoveSetupDirectory' => 'You should delete the %1 directory now that the installation process has been completed.',
 'ErrorGivePrivileges' => 'Het configuratie bestand %1 Geen schrijf rechten. U dient uw webserver tijdelijk schrijfrechten te geven op uw WackoWiki directory, of een lege bestand met de naam %1<br>%2<br>; vergeet niet om de schrijfrechten later te verwijderen, i.e. %3.<br>Als, voor welke reden dan ook,for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'In de volgende stap probeert het installatieprogramma het actuele configuratie bestand weg te schrijven, %1. Controleer of de web server schrijfrechten heeft op het bestand, anders moet u het handmatig aanpassen. Wederom, zie <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'WrittenAt' => 'geschreven op ',
