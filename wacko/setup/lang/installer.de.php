@@ -125,7 +125,7 @@ $lang = [
 */
 'database-config' => 'Datenbank Konfiguration',
 'DBDriver' => 'Treiber',
-'DBDriverDesc' => 'Der Datenbanktreiber der verwendet werden soll. Du musst einen Altsystem (legacy) Treiber wählen falls <a href="http://de2.php.net/pdo" target="_blank">PDO</a> nicht zur Verfügung steht.',
+'DBDriverDesc' => 'Der Datenbanktreiber der verwendet werden soll. Du musst einen Altsystem (legacy) Treiber wählen falls <a href="https://secure.php.net/pdo" target="_blank">PDO</a> nicht zur Verfügung steht.',
 'DBCharset' => 'Zeichensatz',
 'DBCharsetDesc' => 'Der Datenbankzeichensatz, den du verwenden möchtest.',
 'DBEngine' => 'Engine',
@@ -212,7 +212,7 @@ $lang = [
 'ThatsAll' => 'Das wars! Du kannst nun <a href="%1"> zu deinem WackoWiki zurückkehren</a>.',
 'SecurityConsiderations' => 'Sicherheitserwägungen',
 'SecurityRisk' => 'Es wird dringend empfohlen, die Schreibrechte auf die Datei %1 nach dem Schreiben der Konfiguration wieder mit %2 zu entfernen. Eine überschreibbare Konfigurationsdatei ist ein Sicherheitsrisiko!',
-'RemoveSetupDirectory' => 'Du solltest den Ordner <code><code>setup/</code></code> löschen nachdem die Installation beendet wurde.',
+'RemoveSetupDirectory' => 'Du solltest den Ordner <code>%1</code> löschen nachdem die Installation beendet wurde.',
 'ErrorGivePrivileges' => 'Die Konfigurationsdatei %1 konnte nicht geschrieben werden. Du musst dem Webserver vorübergehend Schreibrechte auf das WackoWiki Verzeichnis oder auf eine leere Datei %1<br>%2<br> geben; vergiss nicht, das Schreibrecht später wieder zu entziehen, z.B. mit %2.<br>Falls das aus irgendwelchen Gründen nicht möglich ist, kopiere den folgenden Text in eine neue Datei und speichere diese unter %1 in dem WackoWiki Verzeichnis ab. Danach sollte dein WackoWiki funktionieren. Falls nicht, gehe zu <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a>',
 'NextStep' => 'Im nächsten Schritt wird das Installationsprogramm versuchen, die aktualisierte Konfigurationsdatei, %1, zu schreiben. Bitte stelle sicher, dass der Webserver Schreibrechte auf die Datei besitzt oder du musst die Datei von Hand ändern.  Für die Einzelheiten besuche bitte <a href="https://wackowiki.org/doc/Doc/Deutsch/Installation" target="_blank">WackoWiki:Doc/Deutsch/Installation</a>.',
 'WrittenAt' => 'geschrieben am ',

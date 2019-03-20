@@ -96,7 +96,9 @@ if (!$perm_changed)
 					"</li>\n";
 }
 
-echo "			<li>" . $lang['RemoveSetupDirectory'] . "</li>\n";
+echo "			<li>" . Ut::perc_replace($lang['RemoveSetupDirectory'],
+						'<code>setup/</code>') .
+				"</li>\n";
 
 if ($write_file == false)
 {

@@ -125,7 +125,7 @@ $lang = [
 */
 'database-config' => 'Andmebaasi konfigureerimine',
 'DBDriver' => 'Driver',
-'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="http://de2.php.net/pdo" target="_blank">PDO</a> installed.',
+'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',
@@ -212,7 +212,7 @@ $lang = [
 'ThatsAll' => 'Ja ongi kõik! Nüüd võid sa <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'Soovitan sul eemaldada kirjutamisõigus %1 failile. Kirjutamisõiguse allesjätmine on riskantne turvalisuse seisukohast!',
-'RemoveSetupDirectory' => 'You should delete the <code>setup/</code> directory now that the installation process has been completed.',
+'RemoveSetupDirectory' => 'You should delete the %1 directory now that the installation process has been completed.',
 'ErrorGivePrivileges' => 'Konfiguratsiooni faili %1 ei ole võimalik kirjutada. Sa pead andma oma veebi serverile ajutiselt kirjutamisõiguse kas oma WackoWiki kataloogile, või siis tühjale failile nimega %1<br>%2 ara unusta hiljem kirjutamisõigust eemaldada, näiteks nii: %3.<br>Kuid kui sa mingil põhjusel ei saa seda teha, siis pead sa allpool oleva teksti kopeerima uude faili ja siis salvestama ning uploadima selle nimega %1 WackoWiki kataloogi. Kui sa oled selle ära teinud, siis peaks su WackoWiki leht töötama. Kui ei tööta, siis mine aadressile <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'Järgmisena üritatakse kirjutada täiendatud konfiguratsioonifaili, %1. Palun veendu, et veebi serveril oleks faili kirjutamise õigused, vastasel korral pead sa seda käsitsi tegema. Uuesti, vaata täpsema info saamiseks siia: <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Dokumentatsioon/Installeerimine</a>.',
 'WrittenAt' => 'kirjutan ',

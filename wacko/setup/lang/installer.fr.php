@@ -212,7 +212,7 @@ $lang = [
 'ThatsAll' => 'C&rsquo;est tout ! Vous pouvez maintenant <a href="%1">accéder à votre site WackoWiki</a>.',
 'SecurityConsiderations' => 'Considérations sur la sécurité',
 'SecurityRisk' => 'Par sécurité, limitez maintenant le droit d&rsquo;écrire le fichier %1 maintenant, par exemple %2.',
-'RemoveSetupDirectory' => 'Par sécurité, supprimez maintenant le répertoire <code>setup/</code>, devenu inutile.',
+'RemoveSetupDirectory' => 'Par sécurité, supprimez maintenant le répertoire %1, devenu inutile.',
 'ErrorGivePrivileges' => 'Le fichier de configuration %1 n&rsquo;a pas pu être écrit par le serveur http dans votre répertoire WackoWiki.<br>Si possible, créez un fichier vide appelé  %1, sur lequel vous attribuerez à provisoirement à tous le droit d&rsquo;écrire :<br>%2<br>Nota : après enregistrement vous supprimerez ce droit, i.e. %3.<br> Sinon, vous devrez copier le texte ci-dessous dans un fichier et le sauvegarder comme %1 dans le répertoire WackoWiki.<br>Ceci fait, votre site WackoWiki devrait fonctionner. Sinon, voyez  <a href="https://wackowiki.org/doc/Doc/Francophone/InstallationEtMiseAJour" target="_blank">WackoWiki:Doc/Francophone/InstallationEtMiseAJour</a>',
 'NextStep' => 'Au cours de la prochaine étape, l&rsquo;installeur va tenter d&rsquo;écrire le fichier de configuration mis à jour, %1.  Assurez-vous que le serveur ait le droit d&rsquo;écrire ce fichier, sinon vous devrez l&rsquo;éditer manuellement. Encore une fois, voyez <a href="https://wackowiki.org/doc/Doc/Francophone/InstallationEtMiseAJour" target="_blank">WackoWiki:Doc/Francophone/InstallationEtMiseAJour</a> pour les détails.',
 'WrittenAt' => 'écrit à ',

@@ -125,7 +125,7 @@ $lang = [
 */
 'database-config' => 'Konfiguracja Bazy Danych',
 'DBDriver' => 'Driver',
-'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="http://de2.php.net/pdo" target="_blank">PDO</a> installed.',
+'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
 'DBCharsetDesc' => 'The database charset you want to use.',
 'DBEngine' => 'Engine',
@@ -212,7 +212,7 @@ $lang = [
 'ThatsAll' => 'To wszystko! Mo&#380;esz teraz <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'Jednak, doradzamy usuni&#281;cie praw zapisu do pliku %1 po tym jak zosta&#322; on zapisany. Zagro&#380;eniem dla bezpiecze&#324;stwa jest pozostawienie pliku z prawem do zapisu!',
-'RemoveSetupDirectory' => 'You should delete the <code>setup/</code> directory now that the installation process has been completed.',
+'RemoveSetupDirectory' => 'You should delete the %1 directory now that the installation process has been completed.',
 'ErrorGivePrivileges' => 'Plik konfiguracyjny %1 nie mo&#380;e zosta&#263; zapisany. Musisz nada&#263; swojemu serwerowi tymczasowe prawo do zapisu do katalogu WackoWiki, lub tak&#380;e dla pustego pliku %1<br>%2<br>; nie zapomnij usun&#261;&#263; prawa do zapisu p&#243;&#378;niej, czyli %3.<br>Je&#380;eli, z jakiego&#347; powodu nie mo&#380;esz tego zrobi&#263;, b&#281;dziesz musia&#322; skopiowa&#263; poni&#380;szy tekst do nowego pliku i zapisa&#263;/wgra&#263; go na server jako %1 do katalogu WackoWiki. Gdy ju&#380; to zrobisz, Twoja strona WackoWiki powinna ju&#380; dzia&#322;a&#263;. Je&#380;eli nie, odwied&#378; prosz&#281; <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'W nast&#281;pnym kroku, instalator b&#281;dzie pr&#243;bowa&#322; zapisa&#263; zaktualizowany plik konfiguracyjny, %1.  Postaraj si&#281;, &#380;e serwer posiada prawo zapisu do pliku, w przeciwnym wypadku b&#281;dziesz musia&#322; edytowa&#263; go r&#281;cznie. Raz jeszcze, zagl&#261;dnij na  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> po wi&#281;cej informacji.',
 'WrittenAt' => 'zapisano jako ',
