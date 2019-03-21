@@ -32,20 +32,12 @@ function admin_maint_inconsistencies(&$engine, &$module)
 <?php
 
 	/////////////////////////////////////////////
-	// A. check for inconsistencies
+	// A. check for db inconsistencies
 	/////////////////////////////////////////////
-	if (isset($_POST['check']))
+	if (isset($_POST['db_check']))
 	{
-		if ($_REQUEST['action'] == 'check_inconsistencies')
+		if ($_REQUEST['db_action'] == 'check_inconsistencies')
 		{
-			echo '<table class="formation" style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
-			?>
-			<tr>
-				<th style="width:250px;"><?php echo $engine->_t('Inconsistencies');?></th>
-				<th class="t-left"></th>
-				<th class="t-left"><?php echo $engine->_t('Records');?></th>
-			</tr>
-			<?php
 			// 1.1 usergroup_member without user
 			$usergroup_member = $engine->db->load_all(
 				"SELECT
@@ -326,10 +318,16 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$inconsistencies['3.5'] = ['revision without valid owner_id', count($page_user)];
 				// -> UPDATE / assign to new user
 
-			// TODO: check for abandoned files, files with no reference left in the upload table
-
-			$matches = 0;
 			// check summary
+			echo '<table class="formation" style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
+			?>
+			<tr>
+				<th style="width: 250px;"><?php echo $engine->_t('Inconsistencies');?></th>
+				<th class="t-left"></th>
+				<th class="t-left"><?php echo $engine->_t('Records');?></th>
+			</tr>
+			<?php
+			$matches = 0;
 			foreach ($inconsistencies as $param => $value)
 			{
 				if ($value[1] >= 1)
@@ -352,7 +350,6 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				}
 			}
 
-
 			echo '</table>';
 
 			if (!$matches)
@@ -367,20 +364,12 @@ function admin_maint_inconsistencies(&$engine, &$module)
 	}
 
 	/////////////////////////////////////////////
-	// B. solve inconsistencies
+	// B. solve db inconsistencies
 	/////////////////////////////////////////////
-	if (isset($_POST['solve']))
+	if (isset($_POST['db_solve']))
 	{
-		if ($_REQUEST['action'] == 'check_inconsistencies')
+		if ($_REQUEST['db_action'] == 'check_inconsistencies')
 		{
-			echo '<table class="formation" style="max-width:600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
-			?>
-			<tr>
-				<th style="width:250px;"><?php echo $engine->_t('Inconsistencies');?></th>
-				<th class="t-left"></th>
-				<th class="t-left"><?php echo $engine->_t('Records');?></th>
-			</tr>
-			<?php
 			// 1.1 usergroup_member without user
 			$usergroup_member = $engine->db->sql_query(
 				"DELETE
@@ -659,11 +648,17 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 			$_solved['3.5'] = ['revision without valid owner_id', $engine->config->affected_rows];
 
-			// TODO:
-
-
-			$matches = 0;
 			// execution summery
+			echo '<table class="formation" style="max-width: 600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
+			?>
+			<tr>
+				<th style="width: 250px;"><?php echo $engine->_t('Inconsistencies');?></th>
+				<th class="t-left"></th>
+				<th class="t-left"><?php echo $engine->_t('Records');?></th>
+			</tr>
+			<?php
+			$matches = 0;
+
 			foreach ($_solved as $param => $value)
 			{
 				if ($value[1] >= 1)
@@ -702,16 +697,155 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			}
 		}
 	}
-?>
-	<br>
-<?php
-	echo $engine->form_open('usersupdate');
-?>
-		<input type="hidden" name="action" value="check_inconsistencies">
-		<input type="submit" name="check" id="submit" value="<?php echo $engine->_t('Check');?>">
-		<input type="submit" name="solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
-<?php
-	echo $engine->form_close();
-}
 
+	/////////////////////////////////////////////
+	// C. check for file inconsistencies
+	/////////////////////////////////////////////
+	if (isset($_POST['file_check']) || isset($_POST['file_solve']))
+	{
+		// check for abandoned files, files with no reference left in the file table
+		if ($_REQUEST['file_action'] == 'check_inconsistencies')
+		{
+			// 1. get db records
+			/* $count = $engine->db->load_single(
+				"SELECT COUNT(f.file_id) AS n " .
+				"FROM " . $engine->db->table_prefix . "file f " .
+				"", true);
+
+			$pagination = $engine->pagination($count['n'], $max, 'f', $params, $method); */
+
+			$files = $engine->db->load_all(
+				"SELECT f.file_id, f.page_id, f.file_ext, f.file_name " .
+				"FROM " . $engine->db->table_prefix . "file f " .
+				#$pagination['limit']);
+				"");
+
+			$db_files			= [];
+
+			foreach ($files as $file)
+			{
+				if ($file['page_id'])
+				{
+					$db_files['local'][]		= UPLOAD_PER_PAGE_DIR . '/' . '@' . $file['page_id'] . '@' . $file['file_name'];
+				}
+				else
+				{
+					$db_files['global'][]		= UPLOAD_GLOBAL_DIR . '/' . $file['file_name'];
+				}
+			}
+
+			// 2. get dir files
+			$fs_files = [];
+
+			foreach (Ut::file_glob(UPLOAD_PER_PAGE_DIR, '*') as $file)
+			{
+				$fs_files['local'][] = $file;
+			}
+
+			foreach (Ut::file_glob(UPLOAD_GLOBAL_DIR, '*') as $file)
+			{
+				$fs_files['global'][] = $file;
+			}
+
+			#ksort($list, SORT_STRING);
+
+			if (!empty($fs_files['local']))
+			{
+				$abandoned['local'] = array_diff($fs_files['local'], $db_files['local']);
+			}
+
+			if (!empty($fs_files['global']))
+			{
+				$abandoned['global'] = array_diff($fs_files['global'], $db_files['global']);
+			}
+
+			echo '<table class="formation" style="max-width: 600px; border-spacing: 1px; border-collapse: separate; padding: 4px;">';
+			?>
+			<tr>
+				<th style="width: 25px;"><?php echo $engine->_t('Inconsistencies');?></th>
+				<th class="t-left"></th>
+				<th class="t-left"><?php echo $engine->_t('Records');?></th>
+			</tr>
+			<?php
+			$matches = 0;
+			foreach ($abandoned as $location => $files)
+			{
+				if ($location)
+				{
+					echo '<tr class="lined"><td colspan="5">' . $location . '</td></tr>' . "\n";
+
+					foreach ($files as $file)
+					{
+						$matches++;
+
+						echo '<tr class="hl-setting">' .
+								'<td class="label">' .
+									'<strong>' . $matches . '</strong>' .
+								'</td>' .
+								'<td> </td>' .
+								'<td>' .
+									'<strong>' . $file . '</strong>' .
+								'</td>' .
+							'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
+
+						// remove abondoned file
+						if (isset($_POST['file_solve']))
+						{
+							unlink($file);
+						}
+					}
+				}
+			}
+
+			echo '</table>';
+
+			if ($matches)
+			{
+				if (isset($_POST['file_solve']))
+				{
+					$engine->log(1, $engine->_t('InconsistenciesRemoved'));
+
+					$message = $engine->_t('InconsistenciesDone');
+					$engine->show_message($message, 'success');
+				}
+			}
+			else
+			{
+				$message = $engine->_t('InconsistenciesNone');
+				$engine->show_message($message, 'info');
+			}
+
+			#Ut::debug_print_r($abandoned);
+		}
+	}
+
+	if (!isset($_POST['file_check']))
+	{
+		?>
+		<h2><?php echo $engine->_t('CheckDatabase'); ?></h2>
+		<?php
+		echo $engine->form_open('db_inconsistencies');
+		?>
+		<input type="hidden" name="db_action" value="check_inconsistencies">
+		<input type="submit" name="db_check" id="submit" value="<?php echo $engine->_t('Check');?>">
+		<input type="submit" name="db_solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
+		<?php
+		echo $engine->form_close();
+	}
+
+	if (!isset($_POST['db_check']))
+	{
+		?>
+		<h2><?php echo $engine->_t('CheckFiles'); ?></h2>
+		<?php
+		echo $engine->form_open('file_inconsistencies');
+		?>
+		<input type="hidden" name="file_action" value="check_inconsistencies">
+		<input type="submit" name="file_check" id="submit" value="<?php echo $engine->_t('Check');?>">
+		<input type="submit" name="file_solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
+		<?php
+		echo $engine->form_close();
+	}
+
+}
 ?>

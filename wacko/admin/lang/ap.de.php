@@ -1228,6 +1228,8 @@ $ap_translation = [
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Inkonsistenzen anzeigen und beheben, verwaiste Datensätze löschen oder einem neuen Benutzer / Wert zuweisen.',
 	'Inconsistencies'			=> 'Inkonsistenzen',
+	'CheckDatabase'				=> 'Datenbank',
+	'CheckFiles'				=> 'Dateien',
 	'Records'					=> 'Datensätze',
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
 	'InconsistenciesDone'		=> 'Dateninkonsistenzen behoben.',
