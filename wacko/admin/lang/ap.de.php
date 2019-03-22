@@ -1035,6 +1035,7 @@ $ap_translation = [
 									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
+	'Backup'					=> 'Backup',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Du kannst jedes gefundene Sicherungsspaket wiederherstellen oder vom Server entfernen.',

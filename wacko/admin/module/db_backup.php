@@ -267,7 +267,7 @@ function admin_db_backup(&$engine, &$module)
 			}
 ?>
 				</table>
-				<input type="submit" name="start" id="submit" value="backup">
+				<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Backup'); ?>">
 <?php
 			echo $engine->form_close();
 		}

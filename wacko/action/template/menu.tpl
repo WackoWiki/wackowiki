@@ -8,7 +8,7 @@
 			<input type="hidden" name="_user_menu" value="yes">
 			[= lang _ =
 				[ ' select ' ]
-				<input type="submit" name="update" id="submit" value="update">
+				<input type="submit" name="update" id="submit" value="[ ' _t: UpdateButton ' ]">
 				<br><br>
 			=]
 			<table class="lined">

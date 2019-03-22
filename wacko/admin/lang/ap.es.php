@@ -55,8 +55,8 @@ $ap_translation = [
 	'Remove'					=> 'Remover',
 	'Enabled'					=> 'Habilitar',
 	'Disabled'					=> 'Deshabilitar',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'On'						=> 'On',
+	'Off'						=> 'Off',
 	'Mandatory'					=> 'Obligatorio',
 	'Admin'						=> 'Admin',
 
@@ -285,7 +285,7 @@ $ap_translation = [
 	],
 
 	// Main module
-	'PurgeSessions'				=> 'purge',
+	'PurgeSessions'				=> 'Purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
@@ -381,7 +381,7 @@ $ap_translation = [
 	'AppearanceSettingsInfo'	=> 'Configuración predeterminada de visualización para el sitio.',
 	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
 
-	'LogoOff'					=> 'off',
+	'LogoOff'					=> 'Off',
 	'LogoOnly'					=> 'logo',
 	'LogoAndTitle'				=> 'logo y título',
 
@@ -900,7 +900,7 @@ $ap_translation = [
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
 
 	// DB Convert module
-	'Convert'					=> 'convert',
+	'Convert'					=> 'Convert',
 	'NoColumnsToConvert'		=> 'No columns to convert.',
 	'NoTablesToConvert'			=> 'No tables to convert.',
 
@@ -1020,6 +1020,7 @@ $ap_translation = [
 									'Use FTP para descargarlo (mantenga la estructura de diretorios y nombres de archivos al copiar).<br>' .
 									'Para restaurar una copia del backup o remover un paquete, ingrese en <a href="%2">Restaurar base de datos</a>.',
 	'LogSavedBackup'			=> 'Guardado backup de base de datos ##%1##',
+	'Backup'					=> 'Backup',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Puede restaurar un backup existente o removerlo del servidor.',
@@ -1080,8 +1081,8 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'restore',
-	'BackupRemove'				=> 'remove',
+	'BackupRestore'				=> 'Restore',
+	'BackupRemove'				=> 'Remove',
 	'RestoreYes'				=> 'yes',
 	'RestoreNo'					=> 'no',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1218,8 +1219,8 @@ $ap_translation = [
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
 	'InconsistenciesDone'		=> 'Data Inconsistencies solved.',
 	'InconsistenciesRemoved'	=> 'Removed inconsistencies',
-	'Check'						=> 'check',
-	'Solve'						=> 'solve',
+	'Check'						=> 'Check',
+	'Solve'						=> 'Solve',
 
 	// Transliterate module
 	'TranslitField'				=> 'Transliterate field %1 in table `%2`.',

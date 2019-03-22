@@ -162,10 +162,10 @@ if (isset($_POST['_user_menu']))
 
 						$this->db->sql_query(
 							"INSERT INTO " . $this->db->table_prefix . "menu SET " .
-							"user_id			= " . (int) $_user_id . ", " .
-							"page_id			= " . (int) $_page_id.", " .
-							"menu_lang			= " . $this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)) . ", " .
-							"menu_position		= " . (int)($_menu_item_count + 1));
+								"user_id			= " . (int) $_user_id . ", " .
+								"page_id			= " . (int) $_page_id.", " .
+								"menu_lang			= " . $this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)) . ", " .
+								"menu_position		= " . (int)($_menu_item_count + 1));
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set
 					}

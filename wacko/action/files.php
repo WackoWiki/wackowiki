@@ -36,7 +36,7 @@ if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
 if (!isset($legend))	$legend		= '';
 if (!isset($method))	$method		= '';	// for use in page handler
-if (!isset($params))	$params		= null;	//for $_GET parameters to be passed with the page link
+if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
 if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
 if (!isset($picture))	$picture	= null;
@@ -198,17 +198,17 @@ if ($can_view)
 	if ($results && $form)
 	{
 		// search
-		$files_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? $_GET['files'] : '';
+		$files_filter		= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? $_GET['files'] : '';
 
-		$tpl->s_filter	= $files_filter;
-		$tpl->s_phrase	= Ut::html(($_GET['phrase'] ?? ''));
+		$tpl->s_filter		= $files_filter;
+		$tpl->s_phrase		= Ut::html(($_GET['phrase'] ?? ''));
 	}
 
 	if (!$nomark)
 	{
-		$tpl->mark		= true;
-		$tpl->emark		= true;
-		$title			= $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
+		$tpl->mark			= true;
+		$tpl->emark			= true;
+		$title				= $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
 		$tpl->mark_results	= $results . ' of ' . '' . $count['n'] . ' ' . $title;
 	}
 

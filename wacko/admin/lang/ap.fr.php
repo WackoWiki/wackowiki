@@ -41,10 +41,10 @@ $ap_translation = [
 	'TimeLeft'					=> 'Time left:  %1 minutes',
 	'ApVersion'					=> 'version',
 
-	'SiteOpen'					=> 'open',
+	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
 	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'close',
+	'SiteClose'					=> 'Close',
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
 
@@ -55,8 +55,8 @@ $ap_translation = [
 	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
-	'On'						=> 'on',
-	'Off'						=> 'off',
+	'On'						=> 'On',
+	'Off'						=> 'Off',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -285,7 +285,7 @@ $ap_translation = [
 	],
 
 	// Main module
-	'PurgeSessions'				=> 'purge',
+	'PurgeSessions'				=> 'Purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
@@ -381,7 +381,7 @@ $ap_translation = [
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
 	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
 
-	'LogoOff'					=> 'off',
+	'LogoOff'					=> 'Off',
 	'LogoOnly'					=> 'logo',
 	'LogoAndTitle'				=> 'logo and title',
 
@@ -900,7 +900,7 @@ $ap_translation = [
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
 
 	// DB Convert module
-	'Convert'					=> 'convert',
+	'Convert'					=> 'Convert',
 	'NoColumnsToConvert'		=> 'No columns to convert.',
 	'NoTablesToConvert'			=> 'No tables to convert.',
 
@@ -1020,6 +1020,7 @@ $ap_translation = [
 									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
 									'To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
+	'Backup'					=> 'Backup',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
@@ -1080,8 +1081,8 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'restore',
-	'BackupRemove'				=> 'remove',
+	'BackupRestore'				=> 'Restore',
+	'BackupRemove'				=> 'Remove',
 	'RestoreYes'				=> 'yes',
 	'RestoreNo'					=> 'no',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1219,7 +1220,7 @@ $ap_translation = [
 	'InconsistenciesDone'		=> 'Les incohérences dans les données ont été résolues.',
 	'InconsistenciesRemoved'	=> 'Correction des incohérences',
 	'Check'						=> 'vérifier',
-	'Solve'						=> 'solve',
+	'Solve'						=> 'Solve',
 
 	// Transliterate module
 	'TranslitField'				=> 'Transliterate field %1 in table `%2`.',
