@@ -1008,6 +1008,7 @@ $ap_translation = [
 									'ƒл€ его получени€ используйте FTP (не забудьте при копировании сохран€ть структуру каталогов и имена файлов и директорий).<br>' .
 									'¬осстановить резервную копию или удалить пакет можно в разделе <a href="%2">¬осстановление</a>.',
 	'LogSavedBackup'			=> '—охранена резервна€ копи€ базы данных ##%1##',
+	'Backup'					=> 'Backup',
 
 	// DB Restore module
 	'RestoreInfo'				=> '¬ы можете восстановить любой из найденных резервных пакетов, либо удалить его с сервера.',
@@ -1205,8 +1206,8 @@ $ap_translation = [
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
 	'InconsistenciesDone'		=> 'Ќепоследовательность данных решена.',
 	'InconsistenciesRemoved'	=> '”даленные несоответстви€',
-	'Check'						=> 'check',
-	'Solve'						=> 'solve',
+	'Check'						=> 'Check',
+	'Solve'						=> 'Solve',
 
 	// Transliterate module
 	'TranslitField'				=> '“ранслитерировать поле %1 в таблице  `%2`.',
