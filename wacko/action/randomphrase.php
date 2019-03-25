@@ -4,8 +4,8 @@ if (!defined('IN_WACKO'))
 {
 	exit;
 }
-$use_empty_string = (int) ($useemptystring ?? 0);
-$revision_id = (int) ($_GET['revision_id'] ?? 0);
+$use_empty_string	= (int) ($useemptystring ?? 0);
+$revision_id		= (int) ($_GET['revision_id'] ?? 0);
 
 if (!isset($page)) $page = '';
 
@@ -26,6 +26,7 @@ else
 	{
 		$strings		= preg_replace('/\{\{[^\}]+\}\}/', '', $phrase_page['body']);
 		$strings		= $this->format($strings);
+		$strings		= $this->format($strings, 'post_wacko');
 		$splitexpr		= '|<br>|';
 
 		if ($use_empty_string)

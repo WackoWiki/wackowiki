@@ -241,13 +241,11 @@ if ($can_view)
 				// absolute file path: file:/path/
 				$path2	= $path1 . ($this->slim_url($file['tag'])) . '/';
 				$page	= $file['tag'];
-				$url	= $this->href('file', trim($file['supertag'], '/'), ['get' => $file['file_name']]);
 			}
 			else
 			{
 				// global file
 				$path2	= $path1;
-				$url	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 			}
 
 			$dt			= $this->get_time_formatted($file['uploaded_dt']);
