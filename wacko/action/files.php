@@ -47,7 +47,7 @@ $order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
 
 // filter categories
-$phrase 			= (string) @$_GET['phrase'];
+$phrase 			= (string) ($_GET['phrase'] ?? '');
 $type_id			= (int) ($_GET['type_id'] ?? $type_id);
 $category_id		= (int) @$_GET['category_id'];
 $file_link			= (int) $linked;
@@ -74,8 +74,8 @@ if (!$global)
 	}
 	else
 	{
-		$page	= $this->unwrap_link($page);
-		$ppage	= '/' . $page;
+		$page		= $this->unwrap_link($page);
+		$ppage		= '/' . $page;
 
 		if ($_page_id = $this->get_page_id($page))
 		{
@@ -216,14 +216,6 @@ if ($can_view)
 
 	if ($results)
 	{
-		/* echo '<colgroup>
-			<col span="1">
-			<col span="1">
-			<col span="1">
-			<col span="1">
-			<col span="1">
-		</colgroup>'; */
-
 		foreach ($files as $file)
 		{
 			// check for local file
