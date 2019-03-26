@@ -139,7 +139,7 @@ if ($can_view)
 
 	if ($file_link)
 	{
-		$selector .= "AND l.page_id = " . $filepage['page_id'] . " ";
+		$selector .= "AND l.page_id = " . (int) $filepage['page_id'] . " ";
 	}
 
 	$count = $this->db->load_single(

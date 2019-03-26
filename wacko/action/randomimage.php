@@ -38,7 +38,7 @@ $selector =
 		: '') .
 	($global
 		? "AND f.page_id = 0 "
-		: "AND f.page_id = " . $this->page['page_id'] . " "
+		: "AND f.page_id = " . (int) $this->page['page_id'] . " "
 		) . " " .
 	($deleted != 1
 		? "AND f.deleted <> 1 "
