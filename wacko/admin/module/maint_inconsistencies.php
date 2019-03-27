@@ -356,6 +356,19 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			{
 				$message = $engine->_t('InconsistenciesNone');
 				$engine->show_message($message, 'info');
+
+				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
+			}
+			else
+			{
+				echo $engine->form_open('db_inconsistencies');
+				?>
+				<br>
+				<input type="hidden" name="db_action" value="check_inconsistencies">
+				<input type="submit" name="db_solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
+				<?php
+				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>';
+				echo $engine->form_close();
 			}
 ?>
 			<br>
@@ -695,6 +708,8 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				$message = $engine->_t('InconsistenciesNone');
 				$engine->show_message($message, 'info');
 			}
+
+			echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
 		}
 	}
 
@@ -707,18 +722,11 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		if ($_REQUEST['file_action'] == 'check_inconsistencies')
 		{
 			// 1. get db records
-			/* $count = $engine->db->load_single(
-				"SELECT COUNT(f.file_id) AS n " .
-				"FROM " . $engine->db->table_prefix . "file f " .
-				"", true);
 
-			$pagination = $engine->pagination($count['n'], $max, 'f', $params, $method); */
 
 			$files = $engine->db->load_all(
 				"SELECT f.file_id, f.page_id, f.file_ext, f.file_name " .
-				"FROM " . $engine->db->table_prefix . "file f " .
-				#$pagination['limit']);
-				"");
+				"FROM " . $engine->db->table_prefix . "file f ");
 
 			$db_files			= [];
 
@@ -746,8 +754,6 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			{
 				$fs_files['global'][] = $file;
 			}
-
-			#ksort($list, SORT_STRING);
 
 			if (!empty($fs_files['local']))
 			{
@@ -782,7 +788,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 								'<td class="label">' .
 									'<strong>' . $matches . '</strong>' .
 								'</td>' .
-								'<td> </td>' .
+								'<td></td>' .
 								'<td>' .
 									'<strong>' . $file . '</strong>' .
 								'</td>' .
@@ -807,19 +813,34 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 					$message = $engine->_t('InconsistenciesDone');
 					$engine->show_message($message, 'success');
+
+					echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
+				}
+				else
+				{
+					echo $engine->form_open('file_inconsistencies');
+					?>
+					<br>
+					<input type="hidden" name="file_action" value="check_inconsistencies">
+					<input type="submit" name="file_solve" id="submit" value="<?php echo $engine->_t('RemoveButton');?>">
+					<?php
+					echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>';
+					echo $engine->form_close();
 				}
 			}
 			else
 			{
 				$message = $engine->_t('InconsistenciesNone');
 				$engine->show_message($message, 'info');
+
+				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
 			}
 
 			#Ut::debug_print_r($abandoned);
 		}
 	}
 
-	if (!isset($_POST['file_check']))
+	if (empty($_POST))
 	{
 		?>
 		<h2><?php echo $engine->_t('CheckDatabase'); ?></h2>
@@ -828,21 +849,16 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		?>
 		<input type="hidden" name="db_action" value="check_inconsistencies">
 		<input type="submit" name="db_check" id="submit" value="<?php echo $engine->_t('Check');?>">
-		<input type="submit" name="db_solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
 		<?php
 		echo $engine->form_close();
-	}
-
-	if (!isset($_POST['db_check']))
-	{
 		?>
+
 		<h2><?php echo $engine->_t('CheckFiles'); ?></h2>
 		<?php
 		echo $engine->form_open('file_inconsistencies');
 		?>
 		<input type="hidden" name="file_action" value="check_inconsistencies">
 		<input type="submit" name="file_check" id="submit" value="<?php echo $engine->_t('Check');?>">
-		<input type="submit" name="file_solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
 		<?php
 		echo $engine->form_close();
 	}
