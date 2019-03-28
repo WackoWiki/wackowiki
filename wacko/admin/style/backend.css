@@ -259,10 +259,9 @@ table.forum th {
 /*	Basic tags	*/
 
 h1, h2, h3, h4, h5, h6 {
-	color: #1A1A1A;
 	font-weight: bold;
 	padding: 1em 0;
-	color: #505050
+	color: #505050;
 }
 
 h1 {
@@ -502,7 +501,6 @@ textarea {
 			height: 60px;
 			float: left;
 			text-decoration: none;
-}
 		}
 	#nav {
 		font-weight: bold;
