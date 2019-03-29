@@ -206,9 +206,9 @@ $wacko_translation = [
 	'NewPageOwnership'			=> 'Propiedad de página transferida',
 	'YouAreNewOwner'			=> 'El propietario %1 le otorgó' . "\n" . 'la propiedad del sitio',
 	'PageOwnershipInfo'			=> '',
-	'ACLRead'					=> 'lectura:',
-	'ACLWrite'					=> 'modificacion:',
-	'ACLComment'				=> 'comentario:',
+	'ACLRead'					=> 'Lectura:',
+	'ACLWrite'					=> 'Modificacion:',
+	'ACLComment'				=> 'Comentario:',
 	'ACLCreate'					=> 'Crear:',
 	'ACLUpload'					=> 'Upload:',
 	'ACLFor'					=> 'Listas de control de acceso para %1',
@@ -217,13 +217,13 @@ $wacko_translation = [
 	'ACLStoreButton'			=> 'Guardar ACLs',
 	'ACLCancelButton'			=> 'Cancelar',
 	'ACLAccessDenied'			=> 'No eres el propietario de esta página.',
-	'AclSyntaxError'			=> 'Access control list syntax error',
-	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
-									'<code>$</code> - only registered users<br>' .
-									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
-									'<code>[UserName]</code> - names of allowed users<br>' .
-									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
-									'<code>(an empty list)</code> - only the page owner has access',
+	'AclSyntaxError'			=> 'Error de sintaxis de la lista de control de acceso',
+	'AclHelp'					=> '<code>*</code> - todo el mundo puede<br>' .
+									'<code>$</code> - sólo usuarios registrados<br>' .
+									'<code>!</code> - un signo de exclamación precedente deniega el derecho respectivo<br>' .
+									'<code>[UserName]</code> - nombres de usuarios permitidos<br>' .
+									'<code>[GroupName]</code> - nombres de grupos de usuarios permitidos (alias)<br>' .
+									'<code>(una lista vacía)</code> - sólo el propietario de la página tiene acceso',
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',
@@ -387,7 +387,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'Eliminado todas las páginas del cluster.',
 	'RevisionsRemoved'			=> 'Revisions de la página removed.',
-	'ActionHaveNoUndo'		=> 'Esta acción no se podrá deshacer !',
+	'ActionHaveNoUndo'			=> 'Esta acción no se podrá deshacer !',
 	'PageRestored'				=> 'Página restaurada.',
 	'LocalFilesRestored'		=> 'Archivos locales restaurados.',
 
@@ -429,7 +429,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Buscar',
 	'TopicSearchResults'		=> 'Resultado de búsqueda en los topicos para ',
 	'NotFoundInTopics'			=> 'no encontrado en los topicos',
-	'SearchPage'			=> 'Buscar',
+	'SearchPage'				=> 'Buscar',
 
 	'PostedBy'					=> 'publicado por',
 	'ThisIsCommentOn'			=> 'Esto es un comentario sobre',
