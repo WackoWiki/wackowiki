@@ -62,6 +62,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['footer_rating']				= (int) $_POST['footer_rating'];
 		$config['footer_tags']					= (int) $_POST['footer_tags'];
 		$config['hide_revisions']				= (int) $_POST['hide_revisions'];
+		$config['show_permalink']				= (int) $_POST['show_permalink'];
 		$config['hide_toc']						= (int) $_POST['hide_toc'];
 		$config['hide_index']					= (int) $_POST['hide_index'];
 		$config['tree_level']					= (int) $_POST['tree_level'];
@@ -342,7 +343,21 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ($engine->db->hide_revisions == 0 ? ' checked' : '');?>><label for="hide_revisions_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
-						<tr class="lined">
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for=""><strong><?php echo $engine->_t('ShowPermalink');?>:</strong><br>
+					<small><?php echo $engine->_t('ShowPermalinkInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="show_permalink_on" name="show_permalink" value="1"<?php echo ($engine->db->show_permalink == 1 ? ' checked' : '');?>><label for="show_permalink_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="show_permalink_guest" name="show_permalink" value="2"<?php echo ($engine->db->show_permalink == 2 ? ' checked' : '');?>><label for="show_permalink_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="show_permalink_off" name="show_permalink" value="0"<?php echo ($engine->db->show_permalink == 0 ? ' checked' : '');?>><label for="show_permalink_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl-setting">
