@@ -8,9 +8,6 @@ if (!defined('IN_WACKO'))
 // If User has rights to edit page, show Edit link
 // {{edit [page="yourPage"] [text="your text"]}}
 
-if (!isset($for))		$for = ''; // depreciated
-if ($for)				$page = $for;
-
 if (!isset($page))		$page = '';
 if (!isset($text))		$text = '';
 

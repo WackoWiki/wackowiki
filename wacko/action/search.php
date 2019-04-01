@@ -263,9 +263,6 @@ $highlight_this = function ($text, $words, $the_place)
 
 $output = '';
 
-if (!isset($for))		$for		= ''; // depreciated
-if ($for)				$page		= $for;
-
 if (!isset($page))		$page		= '';
 if (!isset($topic))		$topic		= '';
 if (!isset($title))		$title		= 0;

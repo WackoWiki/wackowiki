@@ -5,9 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($for))		$for = ''; // depreciated
-if ($for)				$page = $for;
-
 if (!isset($page))		$page = '';
 if (!isset($nomark))	$nomark = false;
 
