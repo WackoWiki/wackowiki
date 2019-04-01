@@ -18,9 +18,6 @@ if (!defined('IN_WACKO'))
 	}}
 */
 
-if (!isset($for))		$for		= ''; // depreciated
-if ($for)				$page		= $for;
-
 if (!isset($page))		$page		= '';
 if (!isset($nomark))	$nomark		= 0;
 if (!isset($numerate))	$numerate	= 0;

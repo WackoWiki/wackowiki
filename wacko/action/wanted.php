@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$load_wanted = function ($for, $limit, $deleted = 0)
+$load_wanted = function ($cluster, $limit, $deleted = 0)
 {
 	$pagination	= [];
 	$pref		= $this->db->table_prefix;
@@ -18,8 +18,8 @@ $load_wanted = function ($for, $limit, $deleted = 0)
 					"AND l.to_supertag = '') " .
 					"OR l.to_supertag = p.supertag) " .
 			"WHERE " .
-				($for
-					? "l.to_tag LIKE " . $this->db->q($for . '/%') . " AND "
+				($cluster
+					? "l.to_tag LIKE " . $this->db->q($cluster . '/%') . " AND "
 					: "") .
 				"p.tag is NULL GROUP BY wanted_tag ";
 
@@ -78,8 +78,8 @@ if ($linking_to = $_GET['linking_to'] ?? '')
 }
 else
 {
-	$for	= $root;
-	$user	= $this->get_user();
+	$cluster	= $root;
+	$user		= $this->get_user();
 
 	if (!isset($max))		$max = null;
 

@@ -8,9 +8,6 @@ if (!defined('IN_WACKO'))
 // {{hits}}
 // take $this->page['hits'] in the first place
 
-if (!isset($for))			$for	= ''; // depreciated
-if ($for)					$page	= $for;
-
 if (!isset($page))			$page	= '';
 $result = 0;
 

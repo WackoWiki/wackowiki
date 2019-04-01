@@ -55,9 +55,6 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 	return [$comments, $pagination];
 };
 
-if (!isset($for))		$for	= ''; // depreciated
-if ($for)				$page = $for;
-
 if (!isset($page))		$page = '';
 if (!isset($root))		$root	= $this->unwrap_link($page ?? '');
 if (!isset($title))		$title	= 0;
