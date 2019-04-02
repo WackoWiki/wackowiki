@@ -845,6 +845,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		?>
 		<h2><?php echo $engine->_t('CheckDatabase'); ?></h2>
 		<?php
+		echo $engine->_t('CheckDatabaseInfo');
 		echo $engine->form_open('db_inconsistencies');
 		?>
 		<input type="hidden" name="db_action" value="check_inconsistencies">
@@ -855,6 +856,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 		<h2><?php echo $engine->_t('CheckFiles'); ?></h2>
 		<?php
+		echo $engine->_t('CheckFilesInfo');
 		echo $engine->form_open('file_inconsistencies');
 		?>
 		<input type="hidden" name="file_action" value="check_inconsistencies">

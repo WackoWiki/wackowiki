@@ -9,23 +9,17 @@ if (!defined('IN_WACKO'))
 //{{comment [page="CommentThisPage"] [text="your text"]}}
 
 if (!isset($page))		$page	= '';
-if (!isset($output))	$output	= '';
 if (!isset($text))		$text	= '';
 
 if (!$page) {$page = '';}
-{
-	$output .= $this->href('', $page, ['show_comments' => 1, '#' => 'header-comments']) . '">';
-}
+
+$tpl->href	= $this->href('', $page, ['show_comments' => 1, '#' => 'header-comments']);
 
 if (!$text)
 {
-	$output .= $this->_t('ShowComments');
+	$tpl->text	= $this->_t('ShowComments');
 }
 else
 {
-	$output .= $text;
+	$tpl->text	= $text;
 }
-
-echo '<a href="' . ($output) . "</a>\n";
-
-?>
