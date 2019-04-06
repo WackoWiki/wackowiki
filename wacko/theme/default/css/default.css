@@ -476,6 +476,14 @@ footer {
 	display: inline;
 }
 
+.page-lang {
+	font-size: 11px;
+	color: #AAAAAA;
+	text-align: right;
+	float: left;
+	width: 100%;
+}
+
 /** File and comment-related *************************************************/
 	/* Headers (always visible) */
 #header-files,

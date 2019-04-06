@@ -2,6 +2,7 @@
 	[ ' dummy | default * // ADD_NO_DIV ' ]<div id="page-edit">
 		[ ' message ' ]
 		[= f _ =
+			<span class="page-lang" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
 			<form action="[ ' href: edit ' ]" method="post" name="edit_page" cf="true">
 				[ ' csrf: edit_page ' ]
 				[= new _ =

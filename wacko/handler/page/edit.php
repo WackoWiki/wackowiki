@@ -253,6 +253,16 @@ if ($this->has_access('read')
 		$tpl->new_lang	= $this->page_lang;
 	}
 
+
+	if ($this->db->multilanguage)
+	{
+		$languages = $this->_t('LanguageArray');
+
+		$tpl->language	= $languages[$this->page_lang];
+		$tpl->lang		= $this->page_lang;
+		$tpl->charset	= $this->get_charset();
+	}
+
 	$preview		=	'';
 
 	// preview?
@@ -289,7 +299,7 @@ if ($this->has_access('read')
 		$title				= $this->page['title'];
 	}
 
-	$tpl->buttons= true;
+	$tpl->buttons = true;
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
 	{
