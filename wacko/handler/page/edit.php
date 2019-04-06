@@ -258,9 +258,9 @@ if ($this->has_access('read')
 	{
 		$languages = $this->_t('LanguageArray');
 
-		$tpl->language	= $languages[$this->page_lang];
-		$tpl->lang		= $this->page_lang;
-		$tpl->charset	= $this->get_charset();
+		$tpl->l_language	= $languages[$this->page_lang];
+		$tpl->l_lang		= $this->page_lang;
+		$tpl->l_charset		= $this->get_charset();
 	}
 
 	$preview		=	'';
