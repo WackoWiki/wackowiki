@@ -205,10 +205,14 @@ if ($this->has_access('read')
 				// now we render it internally so we can write the updated link tables.
 				$this->update_link_table($this->page['page_id'], $body_r);
 
-				// forward
+
 				$this->page_cache['supertag'][$this->supertag]			= '';
 				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
+				$message	= $this->page['comment_on_id'] ? $this->_t('CommentSaved') : $this->_t('PageSaved');
+				$this->set_message($message, 'success');
+
+				// forward to show handler
 				$this->http->redirect($this->href());
 			}
 		}
@@ -253,10 +257,9 @@ if ($this->has_access('read')
 		$tpl->new_lang	= $this->page_lang;
 	}
 
-
 	if ($this->db->multilanguage)
 	{
-		$languages = $this->_t('LanguageArray');
+		$languages			= $this->_t('LanguageArray');
 
 		$tpl->l_language	= $languages[$this->page_lang];
 		$tpl->l_lang		= $this->page_lang;
@@ -268,10 +271,10 @@ if ($this->has_access('read')
 	// preview?
 	if (isset($_POST['preview']))
 	{
-		$text_chars	= number_format(strlen($_body), 0, ',', '.');
-		$preview	= $this->format($body,		'pre_wacko');
-		$preview	= $this->format($preview,	'wacko');
-		$preview	= $this->format($preview,	'post_wacko');
+		$text_chars			= number_format(strlen($_body), 0, ',', '.');
+		$preview			= $this->format($body,		'pre_wacko');
+		$preview			= $this->format($preview,	'wacko');
+		$preview			= $this->format($preview,	'post_wacko');
 
 		$tpl->p_chars		= $text_chars;
 		$tpl->p_title		= $title;

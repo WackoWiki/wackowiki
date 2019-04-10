@@ -330,6 +330,8 @@ $wacko_translation = [
 	'CommentFlooded'			=> 'Les publications de messages doivent être espacées d&rsquo;au moins une seconde.',
 	'CommentAdded'				=> 'Commentaires ajoutés.',
 	'YouAreNowTheOwner'			=> 'Vous n&rsquo;êtes pas le propriétaire de cette page.',
+	'PageSaved'					=> 'Page sauvegardée.',
+	'CommentSaved'				=> 'Commentaire enregistré.',
 
 	'DefaultDiffMode'			=> 'Mode d&rsquo;affichage des différence par défaut',
 	'DiffMode'		=> [
