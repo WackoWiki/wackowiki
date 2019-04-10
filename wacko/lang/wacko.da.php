@@ -330,6 +330,8 @@ $wacko_translation = [
 	'CommentFlooded'			=> 'The interval between the publication of the messages shall not be less than %1 seconds.',
 	'CommentAdded'				=> 'Kommentar tilføjet.',
 	'YouAreNowTheOwner'			=> 'Du er nu ejer af denne side.',
+	'PageSaved'					=> 'Side gemt.',
+	'CommentSaved'				=> 'Kommentar gemt.',
 
 	'DefaultDiffMode'			=> 'Standard diff-tilstand',
 	'DiffMode'		=> [

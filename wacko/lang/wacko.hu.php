@@ -330,6 +330,8 @@ $wacko_translation = [
 	'CommentFlooded'			=> 'The interval between the publication of the messages shall not be less than %1 seconds.',
 	'CommentAdded'				=> 'Comment added.',
 	'YouAreNowTheOwner'			=> 'You are now the owner of this page.',
+	'PageSaved'					=> 'Az oldal mentve.',
+	'CommentSaved'				=> 'Comment saved.',
 
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [

@@ -330,6 +330,8 @@ $wacko_translation = [
 	'CommentFlooded'			=> 'Der Abstand zwischen der Veröffentlichung der Nachrichten darf nicht kleiner sein als %1 Sekunden.',
 	'CommentAdded'				=> 'Kommentar hinzugefügt.',
 	'YouAreNowTheOwner'			=> 'Du bist nicht der Besitzer dieser Seite.',
+	'PageSaved'					=> 'Seite gespeichert.',
+	'CommentSaved'				=> 'Kommentar gespeichert.',
 
 	'DefaultDiffMode'			=> 'Standard Diff-Modus',
 	'DiffMode'		=> [
