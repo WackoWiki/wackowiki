@@ -6569,10 +6569,10 @@ class Wacko
 		}
 
 		$user_id = $this->db->system_user_id;
-		return $this->get_user_menu($user_id, $lang);
+		return $this->get_user_menu($user_id, $lang, true);
 	}
 
-	function get_user_menu($user_id, $lang = '')
+	function get_user_menu($user_id, $lang = '', $public = false)
 	{
 		$user_menu_formatted = [];
 
@@ -6582,10 +6582,17 @@ class Wacko
 			$user_menu = $this->db->load_all(
 				"SELECT p.page_id, p.tag, p.title, m.menu_title, m.menu_lang " .
 				"FROM " . $this->db->table_prefix . "menu m " .
+					($public
+						? "LEFT JOIN ". $this->db->table_prefix . "acl a ON (m.page_id = a.page_id) "
+						: "") .
 					"LEFT JOIN " . $this->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
 				"WHERE m.user_id = " . (int) $user_id . " " .
 					($lang
 						? "AND m.menu_lang = " . $this->db->q($lang) . " "
+						: "") .
+					($public
+						? "AND a.privilege = 'read' " .
+						  "AND a.list = '*' " // TODO: assumes only '*' is present, will fail with additional lines
 						: "") .
 				"ORDER BY m.menu_position", true);
 
