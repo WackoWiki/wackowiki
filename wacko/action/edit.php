@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// If User has rights to edit page, show Edit link
+// If user has rights to edit page, show Edit link
 // {{edit [page="yourPage"] [text="your text"]}}
 
 if (!isset($page))		$page = '';
