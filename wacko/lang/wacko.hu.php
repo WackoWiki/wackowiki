@@ -162,8 +162,8 @@ $wacko_translation = [
 	'PromptCreate'				=> 'Maybe you want to <strong><a href="%1">create</a></strong> it?',
 	'Revision'					=> 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied'			=> 'You aren\'t allowed to read this page.',
-	'ReadAccessDeniedHintGuest'	=> '',
-	'PageDeletedInfo'			=> 'This page has been deleted.',
+	'ReadAccessDeniedHintGuest'	=> 'Az oldal elolvasásához be kell jelentkeznie.',
+	'PageDeletedInfo'			=> 'Ezt az oldalt törölték.',
 
 	'LastEditedBy'				=> 'Utoljára szerkesztette',
 	'YouAreOwner'				=> 'You are the owner of this page.',

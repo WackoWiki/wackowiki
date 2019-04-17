@@ -162,7 +162,7 @@ $wacko_translation = [
 	'PromptCreate'				=> 'Vil du <a href="%1">oprette</a> den?',
 	'Revision'					=> 'Dette er en ældre version af <a href="%1">%2</a> fra %3.',
 	'ReadAccessDenied'			=> 'Du har ikke lov til at se denne side.',
-	'ReadAccessDeniedHintGuest'	=> '',
+	'ReadAccessDeniedHintGuest'	=> 'For at læse denne side skal du logge ind.',
 	'PageDeletedInfo'			=> 'Denne side er blevet slettet.',
 
 	'LastEditedBy'				=> 'Senest redigeret af',

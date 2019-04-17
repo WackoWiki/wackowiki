@@ -162,8 +162,8 @@ $wacko_translation = [
 	'PromptCreate'				=> 'Искате ли <a href="%1">да я съзадете</a> ?',
 	'Revision'					=> 'Това е стара версия на <a href="%1">%2</a> от %3.',
 	'ReadAccessDenied'			=> 'Вие нямате права за да четете тази страница.',
-	'ReadAccessDeniedHintGuest'	=> '',
-	'PageDeletedInfo'			=> 'This page has been deleted.',
+	'ReadAccessDeniedHintGuest'	=> 'За да прочетете тази страница, трябва да влезете.',
+	'PageDeletedInfo'			=> 'Тази страница е изтрита.',
 
 	'LastEditedBy'				=> 'Последна редакция на',
 	'YouAreOwner'				=> 'Собственик: Вие. ',
@@ -329,7 +329,9 @@ $wacko_translation = [
 	'CommentAccessDenied'		=> '!Извинявайте, но Вие нямате права за коментар на тази страница.',
 	'CommentFlooded'			=> 'The interval between the publication of the messages shall not be less than %1 seconds.',
 	'CommentAdded'				=> 'Comment added.',
-	'YouAreNowTheOwner'			=> 'Сега вие сте собственик на тази страница.'  ,
+	'YouAreNowTheOwner'			=> 'Сега вие сте собственик на тази страница.',
+	'PageSaved'					=> 'Страницата е запазена.',
+	'CommentSaved'				=> 'Коментарът е запазен.',
 
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [

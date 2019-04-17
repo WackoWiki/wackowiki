@@ -14,7 +14,7 @@ $tab_mode	= @$_GET['mode'];
 // display user profile
 if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private message can POST here
 {
-	// hide  H1 article header
+	// hide H1 article header
 	$this->hide_article_header = true;
 
 	// does requested user exists?

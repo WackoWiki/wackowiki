@@ -162,7 +162,7 @@ $wacko_translation = [
 	'PromptCreate'				=> 'Soovid sa seda <a href="%1">luua</a>?',
 	'Revision'					=> 'See on varasem redigeering <a href="%1">%2</a> %3.',
 	'ReadAccessDenied'			=> 'Sul pole õigusi seda lehte lugeda.',
-	'ReadAccessDeniedHintGuest'	=> '',
+	'ReadAccessDeniedHintGuest'	=> 'Selle lehe lugemiseks peate sisse logima.',
 	'PageDeletedInfo'			=> 'See leht on kustutatud.',
 
 	'LastEditedBy'				=> 'Viimati redigeerinud',
