@@ -509,7 +509,7 @@ $ap_translation = [
 	'UserCanDeleteAccount'		=> 'Engedélyezi, hogy a felhasználók törölhessék a saját fiókjukat',
 
 	// Security settings
-	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, work permits and additional security subsystems.',
+	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, safety restrictions and additional security subsystems.',
 	'SecuritySettingsUpdated'	=> 'Updated security settings',
 
 	'AllowRegistration'			=> 'Register online',
@@ -735,7 +735,7 @@ $ap_translation = [
 	'RegistrationPageInfo'		=> 'Page new user registration (action <code>{{registration}}</code>).',
 	'LoginPage'					=> 'User login',
 	'LoginPageInfo'				=> 'Login page on the site (action <code>{{login}}</code>).',
-	'SettingsPage'				=> 'Profile Settings',
+	'SettingsPage'				=> 'User Settings',
 	'SettingsPageInfo'			=> 'Page customize the user profile (action <code>{{usersettings}}</code>).',
 	'PasswordPage'				=> 'Change Password',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action <code>{{changepassword}}</code>).',
