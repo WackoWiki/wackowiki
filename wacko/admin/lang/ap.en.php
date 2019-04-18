@@ -355,7 +355,7 @@ $ap_translation = [
 	'AllowedDiffMode'			=> 'Allowed Diff modes',
 	'AllowedDiffModeInfo'		=> 'It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
 	'NotifyDiffMode'			=> 'Notify diff mode',
-	'NotifyDiffModeInfo'		=> 'Diff mode used for Notifications in Email body.',
+	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
 	'EditingSection'			=> 'Editing',
 	'EditSummary'				=> 'Edit summary',
@@ -785,7 +785,7 @@ $ap_translation = [
 	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
 
 	'NotifyUserAccount'			=> 'Notify new user account',
-	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the "signup form".',
+	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the signup form.',
 	'NotifyUpload'				=> 'Notify file upload',
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
