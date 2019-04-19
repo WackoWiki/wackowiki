@@ -574,7 +574,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead" colspan="' . ($this->cols-$count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -595,7 +595,7 @@ class WackoFormatter
 
 			$output .= '</tr>';
 
-			if ($this->cols	== 0)
+			if ($this->cols == 0)
 			{
 				$this->cols	= $count;
 			}
@@ -642,7 +642,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell" colspan="' . ($this->cols-$count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -719,7 +719,7 @@ class WackoFormatter
 		{
 			$this->br = 1;
 
-			if (isset($matches[3]) && $color = ($this->object->db->allow_x11colors == 1 ? ($this->x11_colors[$matches[3]] ?? '') : $this->colors[$matches[3]] ?? ''))
+			if (isset($matches[3]) && $color = ($this->object->db->allow_x11colors == 1 ? ($this->x11_colors[$matches[3]] ?? '') : ($this->colors[$matches[3]] ?? '')))
 			{
 				return '<span class="cl-' . $color . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]) . '</span>';
 			}
@@ -731,7 +731,7 @@ class WackoFormatter
 		{
 			$this->br = 1;
 
-			if (isset($matches[3]) && $color = ($this->object->db->allow_x11colors == 1 ? ($this->x11_colors[$matches[3]] ?? '') : $this->colors[$matches[3]] ?? ''))
+			if (isset($matches[3]) && $color = ($this->object->db->allow_x11colors == 1 ? ($this->x11_colors[$matches[3]] ?? '') : ($this->colors[$matches[3]] ?? '')))
 			{
 				return '<mark class="mark-' . $color . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]) . '</mark>';
 			}
@@ -821,7 +821,7 @@ class WackoFormatter
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h6 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h6>';
+			return $result . '<h6 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h6>';
 		}
 		else if (preg_match('/\n[ \t]*======(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -830,7 +830,7 @@ class WackoFormatter
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h5 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h5>';
+			return $result . '<h5 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h5>';
 		}
 		else if (preg_match('/\n[ \t]*=====(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -839,7 +839,7 @@ class WackoFormatter
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h4 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h4>';
+			return $result . '<h4 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h4>';
 		}
 		else if (preg_match('/\n[ \t]*====(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -848,7 +848,7 @@ class WackoFormatter
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h3 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h3>';
+			return $result . '<h3 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h3>';
 		}
 		else if (preg_match('/\n[ \t]*===(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -857,7 +857,7 @@ class WackoFormatter
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h2 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h2>';
+			return $result . '<h2 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h2>';
 		}
 		else if (preg_match('/\n[ \t]*==(.*?)={2,7}$/', $thing, $matches))
 		{
@@ -866,14 +866,14 @@ class WackoFormatter
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h1 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a>' . '</h1>';
+			return $result . '<h1 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h1>';
 		}
 		// separators
 		else if (preg_match('/^[-]{4,}$/', $thing))
 		{
 			$this->br = 0;
 
-			return "<hr>";
+			return "<hr>\n";
 		}
 		// forced line breaks
 		else if (preg_match('/^---\n?\s*$/', $thing, $matches))
@@ -1095,7 +1095,7 @@ class WackoFormatter
 			// we definitely want no line break in this one.
 			$this->br = 0;
 
-			//#18 syntax support
+			// #18 syntax support
 			if ($matches[5])
 			{
 				$start = substr($matches[5], 1);
@@ -1111,14 +1111,14 @@ class WackoFormatter
 			if (!$new_indent_type)
 			{
 				$opener		= '<div class="indent">';
-				$closer		= '</div>';
+				$closer		= '</div>' . "\n";
 				$this->br	= 1;
 				$new_type	= 'i';
 			}
 			else if ($new_indent_type == '-' || $new_indent_type == '*')
 			{
 				$opener		= '<ul><li>';
-				$closer		= '</li></ul>';
+				$closer		= '</li></ul>' . "\n";
 				$new_type	= '*';
 				$li			= 1;
 			}
@@ -1126,7 +1126,7 @@ class WackoFormatter
 			{
 				$opener		= '<ol type="' . $new_indent_type . '"><li' .
 							  ($start ? ' value="' . $start . '"' : '') . '>';
-				$closer		= '</li></ol>';
+				$closer		= '</li></ol>' . "\n";
 				$new_type	= 1;
 				$li			= 1;
 			}
@@ -1134,7 +1134,7 @@ class WackoFormatter
 			// get new indent level
 			if ($matches[2][0] == ' ')
 			{
-				$new_indent_level = (int)strlen($matches[2]) / 2;
+				$new_indent_level = (int) strlen($matches[2]) / 2;
 			}
 			else
 			{
@@ -1168,7 +1168,7 @@ class WackoFormatter
 
 			if ($li && !preg_match('/' . str_replace(')', '\)', $opener) . '$/', $result))
 			{
-				$result .= '</li><li' . ($start ? ' value="' . $start . '"' : '') . '>';
+				$result .= '</li> . "\n" . <li' . ($start ? ' value="' . $start . '"' : '') . '>';
 			}
 
 			return $result;
