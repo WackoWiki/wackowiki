@@ -886,9 +886,9 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Maximale Dateigröße',
 	'UploadMaxFilesizeInfo'		=> 'Maximale Größe pro Datei. Die Dateigröße wird nur durch die PHP-Konfiguration beschränkt, wenn 0 als Wert eingestellt wird.',
 	'UploadQuota'				=> 'Maximales Kontingent für Dateianhänge',
-	'UploadQuotaInfo'			=> 'Maximaler für Dateianhänge verfügbarer Speicherplatz für das gesamte Wiki; 0 bedeutet unbegrenzt.',
+	'UploadQuotaInfo'			=> 'Maximaler für Dateianhänge verfügbarer Speicherplatz für das gesamte Wiki; <code>0</code> bedeutet unbegrenzt.',
 	'UploadQuotaUser'			=> 'Speicherkontingent pro Benutzer',
-	'UploadQuotaUserInfo'		=> 'Beschränkung des Speicherkontingentes, der von einem Benutzer hochgeladen werden kann, wobei 0 unbegrenzt ist.',
+	'UploadQuotaUserInfo'		=> 'Beschränkung des Speicherkontingentes, der von einem Benutzer hochgeladen werden kann, wobei <code>0</code> unbegrenzt ist.',
 	'CheckMimetype'				=> 'Dateianhänge prüfen',
 	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
 

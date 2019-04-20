@@ -872,9 +872,9 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Tamanho Máximo de Anexos',
 	'UploadMaxFilesizeInfo'		=> 'Tamanho máximo de cada anexo. Se este valor for 0, o tamanho do ficheiro enviado fica sujeito às permissões do PHP.',
 	'UploadQuota'				=> 'Espaço total de Anexos',
-	'UploadQuotaInfo'			=> 'Espaço máximo em disco reservado aos anexos. 0 = ilimitado.',
+	'UploadQuotaInfo'			=> 'Espaço máximo em disco reservado aos anexos. <code>0</code> = ilimitado.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Verificar ficheiros anexados',
 	'CheckMimetypeInfo'			=> 'Alguns Ficheiros podem obrigar os navegadores e executar funções incorretas. Esta opção permite recusar esses Ficheiros.',
 

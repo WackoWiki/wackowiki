@@ -872,9 +872,9 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Maksimal filstørrelse',
 	'UploadMaxFilesizeInfo'		=> 'Er størrelsen sat til 0, er det alene din interne PHP-konfiguration, der begrænser filstørrelsen.',
 	'UploadQuota'				=> 'Den totale kvote for vedhæftede filer',
-	'UploadQuotaInfo'			=> 'Maksimum drevplads tilgængelig for vedhæftede filer på hele wiki, 0 betyder ubegrænset.',
+	'UploadQuotaInfo'			=> 'Maksimum drevplads tilgængelig for vedhæftede filer på hele wiki, <code>0</code> betyder ubegrænset.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Kontrol af vedhæftede filer',
 	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
 

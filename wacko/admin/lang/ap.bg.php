@@ -872,9 +872,9 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Максимален размер на файла',
 	'UploadMaxFilesizeInfo'		=> 'Максимален размер на всеки файл, ако поставите 0, размера ще се ограничава от настройките на PHP-то.',
 	'UploadQuota'				=> 'Обща квота на прикачените файлове',
-	'UploadQuotaInfo'			=> 'Максимален размер на всички прикачени файлове, 0 е неограничен.',
+	'UploadQuotaInfo'			=> 'Максимален размер на всички прикачени файлове, <code>0</code> е неограничен.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Провери прикачените файлове',
 	'CheckMimetypeInfo'			=> 'При някои браузъри може да има проблем с MIME типовете. Тази опция оправя този проблем.',
 

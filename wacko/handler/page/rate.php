@@ -67,10 +67,10 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 				// create entry
 				$this->db->sql_query(
 					"INSERT INTO " . $this->db->table_prefix . "rating SET " .
-					"page_id		= $page_id, " .
-					"value			= " . $this->db->q($value) . ", " .
-					"voters			= 1");
-					// time is set automatically
+						"page_id		= $page_id, " .
+						"value			= " . $this->db->q($value) . ", " .
+						"voters			= 1");
+						// time is set automatically
 			}
 
 			// set cookie

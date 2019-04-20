@@ -872,9 +872,9 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Μέγιστο μέγεθος αρχείου',
 	'UploadMaxFilesizeInfo'		=> 'Μέγιστο μέγεθος του κάθε αρχείου. Εάν η τιμή είναι 0, το μέγεθος του προς φόρτωση αρχείου περιορίζεται μόνο από τις ρυθμίσεις του PHP σας.',
 	'UploadQuota'				=> 'Συνολική ποσόστωση συνημμένων.',
-	'UploadQuotaInfo'			=> 'Μέγιστος διαθέσιμος χώρος στη μονάδα δίσκου για ολόκληρo το σύστημα συζητήσεων, με 0 είναι απεριόριστος.',
+	'UploadQuotaInfo'			=> 'Μέγιστος διαθέσιμος χώρος στη μονάδα δίσκου για ολόκληρo το σύστημα συζητήσεων, με <code>0</code> είναι απεριόριστος.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Έλεγχος αρχείων συνημμένων',
 	'CheckMimetypeInfo'			=> 'Ορισμένα προγράμματα περιήγησης μπορεί να εξαπατηθούν και να υποθέσουν ένα ανακριβές είδος κωδικοποίησης για τα φορτώσιμα αρχεία. Αυτή η επιλογή εξασφαλίζει ότι τέτοια αρχεία που είναι πιθανό να προκαλέσουν αυτό, να απορρίπτονται.',
 

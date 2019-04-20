@@ -872,9 +872,9 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Taille maximale des pièces jointes',
 	'UploadMaxFilesizeInfo'		=> 'La taille maximale des pièces jointes. Si cette valeur est réglée sur 0, la taille ne sera limitée que par votre configuration de PHP.',
 	'UploadQuota'				=> 'Quota maximal des pièces jointes',
-	'UploadQuotaInfo'			=> 'L\'espace de stockage maximal alloué à la totalité des pièces jointes transférées sur le forum. Réglez cette valeur sur 0 si vous ne souhaitez pas limiter cet espace.',
+	'UploadQuotaInfo'			=> 'L\'espace de stockage maximal alloué à la totalité des pièces jointes transférées sur le forum. Réglez cette valeur sur <code>0</code> si vous ne souhaitez pas limiter cet espace.',
 	'UploadQuotaUser'			=> 'Quota de stockage par utilisateur',
-	'UploadQuotaUserInfo'		=> 'Restriction sur le quota de stockage qui peut être téléchargé par un utilisateur, 0 étant illimité.',
+	'UploadQuotaUserInfo'		=> 'Restriction sur le quota de stockage qui peut être téléchargé par un utilisateur, <code>0</code> étant illimité.',
 	'CheckMimetype'				=> 'Vérifier les pièces jointes',
 	'CheckMimetypeInfo'			=> 'Certains navigateurs internet peuvent faire erreur en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui présentent un risque de provoquer cette erreur.',
 
@@ -887,7 +887,7 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'Si la taille des images est inférieure à cette valeur, ces dernières ne seront pas miniaturisées.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages and files.
+	'DeletedObjectsInfo'		=> 'Liste des pages et fichiers supprimés.
 									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
@@ -896,7 +896,7 @@ $ap_translation = [
 	'FilterSettingsUpdated'		=> 'Mise à jour des paramètres du filtre anti-spam',
 
 	'WordCensoringSection'		=> 'Censure des mots',
-	'SPAMFilter'				=> 'SPAM Filter',
+	'SPAMFilter'				=> 'Filtre anti-spam',
 	'SPAMFilterInfo'			=> 'Activation du filtre anti-spam',
 	'WordList'					=> 'Liste de mots',
 	'WordListInfo'				=> 'Mot ou phrase <code>fragment</code> à mettre sur liste noire (un par ligne)',
@@ -956,7 +956,7 @@ $ap_translation = [
 
 	'NoEmailMessage'			=> 'Vous devez saisir un message.',
 	'NoEmailSubject'			=> 'Vous devez saisir le sujet de votre message.',
-	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
+	'NoEmailRecipient'			=> 'Vous devez spécifier au moins un utilisateur ou un groupe d\'utilisateurs.',
 
 	'MassemailSection'			=> 'Courriel de masse',
 	'MessageSubject'			=> 'Sujet',
@@ -968,8 +968,8 @@ $ap_translation = [
 	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Envoyer',
 
-	'NoUser'					=> 'No user',
-	'NoUserGroup'				=> 'No user group',
+	'NoUser'					=> 'Aucun utilisateur',
+	'NoUserGroup'				=> 'Aucun groupe d\'utilisateurs',
 
 	'SendToGroup'				=> 'Envoyer à un groupe d\'utilisateurs',
 	'SendToUser'				=> 'Envoyer à des utilisateurs',
@@ -1025,9 +1025,9 @@ $ap_translation = [
 	'Backup'					=> 'Sauvegarde',
 
 	// DB Restore module
-	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
+	'RestoreInfo'				=> 'Vous pouvez restaurer n\'importe lequel des paquets de sauvegarde trouvés ou le supprimer du serveur.',
 	'ConfirmDbRestore'			=> 'Do you want to restore backup',
-	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
+	'ConfirmDbRestoreInfo'		=> 'Veuillez patienter quelques minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
 	'BackupDelete'				=> 'Are you sure you want to remove backup',
 	'BackupDeleteInfo'			=> '',
@@ -1045,7 +1045,7 @@ $ap_translation = [
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
 	'IgnoreSameFiles'			=> 'Ignore the same files (not overwrite)',
-	'NoBackupsAvailable'		=> 'No backups available.',
+	'NoBackupsAvailable'		=> 'Aucune sauvegarde n\'est disponible.',
 	'BackupEntireSite'			=> 'Entire site',
 	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
 	'BackupRemoved'				=> 'The selected backup has been successfully removed.',
@@ -1113,14 +1113,14 @@ $ap_translation = [
 	'NoMatchingUser'			=> 'Aucun utilisateur ne répond aux critères',
 
 	// Groups module
-	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
+	'GroupsInfo'				=> 'A partir de ce panneau, vous pouvez administrer tous vos groupes d\'utilisateurs. Vous pouvez supprimer, créer et modifier des groupes existants. En outre, vous pouvez choisir les chefs de groupe, basculer entre les statuts Ouvert/Masqué/Fermé et définir le nom et la description du groupe.',
 
-	'LogMembersUpdated'			=> 'Updated usergroup members',
+	'LogMembersUpdated'			=> 'Mise à jour des membres du groupe d\'utilisateurs',
 	'LogMemberAdded'			=> 'Added member ##%1## into group ##%2##',
 	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
-	'LogGroupCreated'			=> 'Created a new group ##%1##',
+	'LogGroupCreated'			=> 'Création d\'un nouveau groupe ##%1##',
 	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',
-	'LogGroupRemoved'			=> 'Removed group ##%1##',
+	'LogGroupRemoved'			=> 'Groupe supprimé ##%1##',
 
 	'GroupsMembersFor'			=> 'Membres du groupe',
 	'GroupsDescription'			=> 'Description',

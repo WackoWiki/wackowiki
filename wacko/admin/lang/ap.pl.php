@@ -873,9 +873,9 @@ $ap_translation = [
 	'UploadMaxFilesize'			=> 'Maksymalny rozmiar pliku',
 	'UploadMaxFilesizeInfo'		=> 'Maksymalny rozmiar zamieszczanego pliku. Warto¶æ zero (0) - rozmiar zamieszczanego pliku ograniczany jest tylko przez ustawienia PHP.',
 	'UploadQuota'				=> 'Rozmiar przestrzeni dyskowej',
-	'UploadQuotaInfo'			=> 'Maksymalna przestrzeñ dyskowa dostêpna dla wszystkich za³±czników w tej instalacji Wiki. Warto¶æ zero (0) - brak ograniczenia przestrzeni.',
+	'UploadQuotaInfo'			=> 'Maksymalna przestrzeñ dyskowa dostêpna dla wszystkich za³±czników w tej instalacji Wiki. Warto¶æ zero <code>0</code> - brak ograniczenia przestrzeni.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with 0 being unlimited.',
+	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Sprawdzaj pliki za³±cznika',
 	'CheckMimetypeInfo'			=> 'Niektóre przegl±darki mog± byæ zmuszane do przybierania nieprawid³owego typu mediów (mimetype) dla wysy³anych plików. Funkcja ta zabezpiecza takie pliki przed odrzuceniem.',
 
