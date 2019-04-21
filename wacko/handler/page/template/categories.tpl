@@ -1,6 +1,10 @@
 [ === main === ]
 	[ ' denied ' ]
+	[= l _ =
+			<span class="page-lang" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
+	=]
 	[= n _ =
+		
 		[ '' header '' ]
 		<form action="[ ' href: categories ' ]" method="post" name="add_category">
 			[ ' csrf: add_category ' ]
