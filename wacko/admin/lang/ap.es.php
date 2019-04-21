@@ -318,17 +318,17 @@ $ap_translation = [
 	'CommentsPanel'				=> 'Panel de comentarios',
 	'CommentsPanelInfo'			=> 'La visualización por defecto de los comentarios en la parte inferior de la página.',
 	'FilePanel'					=> 'File panel',
-	'FilePanelInfo'				=> 'The default display of attachments in the bottom of the page.',
+	'FilePanelInfo'				=> 'La visualización predeterminada de los archivos adjuntos en la parte inferior de la página.',
 	'RatingPanel'				=> 'Rating panel',
-	'RatingPanelInfo'			=> 'The default display of the rating panel in the bottom of the page.',
+	'RatingPanelInfo'			=> 'La pantalla predeterminada del panel de clasificación en la parte inferior de la página.',
 	'TagsPanel'					=> 'Tags panel',
-	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
+	'TagsPanelInfo'				=> 'La visualización por defecto del panel de etiquetas en la parte inferior de la página.',
 
 	'NavigationSection'			=> 'Navigation',
-	'HideRevisions'				=> 'Hide Revisions',
-	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
+	'HideRevisions'				=> 'Suprimir revisiones',
+	'HideRevisionsInfo'			=> 'La visualización por defecto de las revisiones de la página.',
 	'ShowPermalink'				=> 'Show Permalink',
-	'ShowPermalinkInfo'			=> 'The default display of the permalink for the current version of the page.',
+	'ShowPermalinkInfo'			=> 'La visualización por defecto del enlace permanente para la versión actual de la página.',
 	'TocPanel'					=> 'Table of contents panel',
 	'TocPanelInfo'				=> 'The default display table of contents panel of a page (may need support in the templates).',
 	'SectionsPanel'				=> 'Sections panel',
@@ -343,7 +343,7 @@ $ap_translation = [
 	'XmlSitemap'				=> 'XML Sitemap',
 	'XmlSitemapInfo'			=> 'Create an XML file called %1 inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder. On the other hand you can also add the path to the sitemap in the robots.txt file in your root directory as follows:',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
-	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
+	'XmlSitemapTimeInfo'		=> 'Genera el Sitemap sólo una vez en el número de días dado, cero significa en cada cambio de página.',
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -364,20 +364,20 @@ $ap_translation = [
 
 	'DefaultRenameRedirect'		=> 'When renaming put redirection',
 	'DefaultRenameRedirectInfo'	=> 'By default, offer to set a redirect to the old address of the page being renamed.',
-	'StoreDeletedPages'			=> 'Keep deleted pages',
+	'StoreDeletedPages'			=> 'Mantener páginas eliminadas',
 	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file put her in a special section where she had some time (below) will be available for viewing and recovery.',
 	'KeepDeletedTime'			=> 'Storage time of deleted pages',
 	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only if the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).',
 	'PagesPurgeTime'			=> 'Storage time of page revisions',
 	'PagesPurgeTimeInfo'		=> 'Automatically deletes the older versions within the given number of days. If you enter zero, the older versions will not be removed.',
-	'EnableReferrers'			=> 'Enable Referrers',
-	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
+	'EnableReferrers'			=> 'Habilitar referenciadores',
+	'EnableReferrersInfo'		=> 'Permite almacenar y mostrar referencias externas.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
 	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
 	'AttachmentHandler'			=> 'Enable attachments handler',
 	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
+	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility)',
+	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Configuración predeterminada de visualización para el sitio.',
@@ -389,10 +389,10 @@ $ap_translation = [
 
 	'LogoSection'				=> 'Logo',
 	'SiteLogo'					=> 'Site Logo',
-	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
+	'SiteLogoInfo'				=> 'Su logotipo aparecerá normalmente en la esquina superior izquierda de la aplicación. El tamaño máximo es de 2 MiB. Las dimensiones óptimas son 255 píxeles de ancho por 55 píxeles de alto.',
 	'LogoDimensions'			=> 'Logo dimensions',
-	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
-	'LogoDisplayMode'			=> 'Logo display mode',
+	'LogoDimensionsInfo'		=> 'Ancho y alto del Logo mostrado.',
+	'LogoDisplayMode'			=> 'Modo de visualización del logo',
 	'LogoDisplayModeInfo'		=> 'Defines the apearence of the Logo. Default is off.',
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site Favicon',
@@ -874,7 +874,7 @@ $ap_translation = [
 	'UploadQuota'				=> 'Máximo total para adjuntos',
 	'UploadQuotaInfo'			=> 'Máximo en disco disponible para adjuntos en todo el sitio, <code>0</code> significa ilimitado.',
 	'UploadQuotaUser'			=> 'Cuota de espacio por usuario',
-	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
+	'UploadQuotaUserInfo'		=> 'Restricción de la cuota de almacenamiento que puede ser cargada por un usuario, siendo <code>0</code> ilimitado.',
 	'CheckMimetype'				=> 'Comprobar archivos adjuntos',
 	'CheckMimetypeInfo'			=> 'Algunos navegadores pueden ser engañados para que asuman un mimetype de archivos subibles incorrecto. Esta opción previene que tales archivos que puedan causar eso sean rechazados.',
 
@@ -887,13 +887,13 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'No crear vista en miniatura para imágenes más pequeñas que esto.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages and files.
+	'DeletedObjectsInfo'		=> 'Lista de páginas y archivos eliminados.
 									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
 	// Filter module
-	'FilterSettingsInfo'		=> 'Words that will be automatically censored on your Wiki.',
-	'FilterSettingsUpdated'		=> 'Updated spam filter settings',
+	'FilterSettingsInfo'		=> 'Palabras que serán automáticamente censuradas en su Wiki.',
+	'FilterSettingsUpdated'		=> 'Configuración actualizada del filtro de spam',
 
 	'WordCensoringSection'		=> 'Word censoring',
 	'SPAMFilter'				=> 'SPAM Filter',

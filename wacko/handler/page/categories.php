@@ -22,6 +22,16 @@ if (!$this->page)
 
 if ($this->is_owner() || $this->is_admin())
 {
+	// indicate page language, categories were defined per lang
+	if ($this->db->multilanguage)
+	{
+		$languages			= $this->_t('LanguageArray');
+
+		$tpl->l_language	= $languages[$this->page_lang];
+		$tpl->l_lang		= $this->page_lang;
+		$tpl->l_charset		= $this->get_charset();
+	}
+
 	if (isset($_POST))
 	{
 		$_category				= $this->sanitize_text_field(($_POST['category'] ?? ''), true);
