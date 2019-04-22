@@ -1168,7 +1168,7 @@ class WackoFormatter
 
 			if ($li && !preg_match('/' . str_replace(')', '\)', $opener) . '$/', $result))
 			{
-				$result .= '</li> . "\n" . <li' . ($start ? ' value="' . $start . '"' : '') . '>';
+				$result .= '</li>' . "\n" . '<li' . ($start ? ' value="' . $start . '"' : '') . '>';
 			}
 
 			return $result;
