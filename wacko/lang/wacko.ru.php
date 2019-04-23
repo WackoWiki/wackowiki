@@ -46,7 +46,7 @@ $wacko_translation = [
 	'UserWaitingApproval'		=> 'Email был отправлен администратору сайта. Администратор проверит предоставленную информацию и одобрит или отклонит ваш запрос.',
 	'UserRequiresApproval'		=> 'Чтобы одобрить или отклонить доступ этого пользователя к %1 перейдите в панель администрирования.',
 	'UserApprovalInfo'			=> 'После вашей регистрации администратору системы будет отправлен запрос на одобрение. Затем вы получите email с дальнейшими инструкциями.',
-	'UserApprovalHint'			=> 'The successful activation of your account will be announced in a specific e-mail. Until then, a login is not possible.',
+	'UserApprovalHint'			=> 'Об успешной активации аккаунта будет сообщено по электронной почте. До тех пор вход в систему невозможен.',
 
 	'UserApprovalPending'		=> 'Ваш аккаунт ожидает утверждения.',
 	'UserApprovalDenied'		=> 'Вашему аккаунту отказано в доступе.',
@@ -58,7 +58,7 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'Одобрен доступ к %1.',
 	'UserDeniedInfo'			=> 'В доступе к %1 отказано.',
 
-	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+	'RegistrationThreshold'		=> 'Время заполнения анкеты должно составлять не менее 1% секунды.',
 
 	// login panel
 	'LoginWelcome'				=> 'Вход',
