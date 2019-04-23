@@ -45,7 +45,7 @@ $wacko_translation = [
 	'UserWaitingApproval'		=> 'Email enviado al administrador del sitio. el administrador va a revisar la información y aprobar o rechazar la solicitud.',
 	'UserRequiresApproval'		=> 'Para aprobar o rechazar acceso de este usuario a %1 entre al panel de administración.',
 	'UserApprovalInfo'			=> 'Al registrar se envia un email al administrador del sitio para su aprobación. Luego va a recibir un email con más instrucciones.',
-	'UserApprovalHint'			=> 'The successful activation of your account will be announced in a specific e-mail. Until then, a login is not possible.',
+	'UserApprovalHint'			=> 'La activación exitosa de su cuenta será anunciada en un correo electrónico específico. Hasta entonces, no es posible iniciar sesión.',
 
 	'UserApprovalPending'		=> 'Su cuenta todavía está pendiente de aprobar.',
 	'UserApprovalDenied'		=> 'Su cuenta fue bloqueada de este sitio.',

@@ -45,7 +45,7 @@ $wacko_translation = [
 	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
 	'UserRequiresApproval'		=> 'To approve or deny this user access to %1 go to the admin panel.',
 	'UserApprovalInfo'			=> 'After you register, your request will be sent to the site administrator for approval. You will then receive an email with further instructions.',
-	'UserApprovalHint'			=> 'The successful activation of your account will be announced in a specific e-mail. Until then, a login is not possible.',
+	'UserApprovalHint'			=> 'L\'attivazione di successo del tuo account sarà annunciata in una specifica e-mail. Fino ad allora non è possibile effettuare il login.',
 
 	'UserApprovalPending'		=> 'Your account is still pending approval.',
 	'UserApprovalDenied'		=> 'Al tuo account è stato negato l\'accesso a questo sito.',
