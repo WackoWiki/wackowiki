@@ -719,7 +719,7 @@ $ap_translation = [
 	'NewsCluster'				=> 'Nachrichten Cluster',
 	'NewsClusterInfo'			=> 'Root-Cluster für den Nachrichtenbereich.',
 	'NewsLevels'				=> 'Tiefe der Nachrichtenseiten aus dem Root-Cluster',
-	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
+	'NewsLevelsInfo'			=> 'Regulärer Ausdruck (SQL regexp-slang), der die Anzahl der Zwischenstufen des Nachrichten-Wurzelclusters direkt zu den Namen der Seiten der Nachrichtenberichte angibt. (e.g. <code>[cluster]/[jahr]/[monat]</code> -> <code>/.+/.+/.+</code>)',
 
 	'LicenseSection'			=> 'Lizenz',
 	'DefaultLicense'			=> 'Standard-Lizenz',
@@ -857,7 +857,7 @@ $ap_translation = [
 	'SendTestEmail'				=> 'Test-Mail senden',
 	'SendTestEmailInfo'			=> 'Sendet eine Test-Mail an die in deinem Benutzerkonto hinterlegte Adresse.',
 	'TestEmailSubject'			=> 'Dein Wiki ist für den E-Mail-Versand richtig konfiguriert',
-	'TestEmailBody'				=> 'Wenn du diese Nachricht erhältst, ist deine Wiki richtig für den E-Mail-Versand konfiguriert.',
+	'TestEmailBody'				=> 'wenn du diese Nachricht erhältst, ist deine Wiki richtig für den E-Mail-Versand konfiguriert.',
 	'TestEmailMessage'			=> 'Eine Test-E-Mail wurde gesendet.<br>Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Einstellungen.',
 
 	'SmtpAutoTls'				=> 'STARTTLS',
@@ -1027,7 +1027,7 @@ $ap_translation = [
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Dateien',
 	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br>' .
-									'Der Stammcluster wirkt sich nicht auf die Sicherung der globalen Dateisicherung und der Cache-Dateien aus (die Auswahl wird immer vollständig gespeichert).<br>' .
+									'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollständig gespeichert).<br>' .
 									'<br>' .
 									'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, ' .
 									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. ' .
@@ -1037,10 +1037,10 @@ $ap_translation = [
 									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
-	'Backup'					=> 'Backup',
+	'Backup'					=> 'Datensicherung',
 
 	// DB Restore module
-	'RestoreInfo'				=> 'Du kannst jedes gefundene Sicherungsspaket wiederherstellen oder vom Server entfernen.',
+	'RestoreInfo'				=> 'Du kannst jedes der gefundenen Sicherungspakete wiederherstellen oder vom Server entfernen.',
 	'ConfirmDbRestore'			=> 'Möchtest du die Datensicherung wiederherstellen',
 	'ConfirmDbRestoreInfo'		=> 'Bitte warte dies kann einige Minuten benötigen.',
 	'RestoreWrongVersion'		=> 'WackoWiki Version stimmt nicht überein!',
@@ -1099,8 +1099,8 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Erstellungsdatum',
 	'BackupPackageContents'		=> 'Der Inhalt des Pakets',
-	'BackupRestore'				=> 'wiederherstellen',
-	'BackupRemove'				=> 'entfernen',
+	'BackupRestore'				=> 'Wiederherstellen',
+	'BackupRemove'				=> 'Entfernen',
 	'RestoreYes'				=> 'ja',
 	'RestoreNo'					=> 'nein',
 	'LogDbRestored'				=> 'Sicherung ##%1## der Datenbank wiederhergestellt.',
@@ -1109,7 +1109,7 @@ $ap_translation = [
 	'UsersInfo'					=> 'Hier können Benutzerinformationen und bestimmte spezifische Optionen geändert werden.',
 
 	'UsersAdded'				=> 'Benutzer hinzugefügt',
-	'UsersDeleteInfo'			=> '[Informationen an Benutzer zur Löschung hier..]',
+	'UsersDeleteInfo'			=> '[Informationen zur Löschung eines Benutzers hier...]',
 	'UserEditButton'			=> 'Bearbeiten',
 	'UserEnabled'				=> 'Aktiviert',
 	'UsersAddNew'				=> 'Füge einen neuen Benutzer hinzu',
@@ -1239,8 +1239,8 @@ $ap_translation = [
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
 	'InconsistenciesDone'		=> 'Dateninkonsistenzen behoben.',
 	'InconsistenciesRemoved'	=> 'Inkonsistenzen beseitigt',
-	'Check'						=> 'prüfen',
-	'Solve'						=> 'beheben',
+	'Check'						=> 'Prüfen',
+	'Solve'						=> 'Beheben',
 
 	// Transliterate module
 	'TranslitField'				=> 'Transliteriere Feld %1 in der Tabelle `%2`.',
