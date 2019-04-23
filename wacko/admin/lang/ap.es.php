@@ -60,10 +60,10 @@ $ap_translation = [
 	'Mandatory'					=> 'Obligatorio',
 	'Admin'						=> 'Admin',
 
-	'MiscellaneousSection'		=> 'Miscellaneous',
-	'MainSection'				=> 'Basic Parameters',
+	'MiscellaneousSection'		=> 'Misceláneo',
+	'MainSection'				=> 'Parámetros básicos',
 
-	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'DirNotWritable'			=> 'El directorio %1 no es escribible.',
 
 	/**
 	 * AP MENU
@@ -388,15 +388,15 @@ $ap_translation = [
 	'LogoAndTitle'				=> 'logo y título',
 
 	'LogoSection'				=> 'Logo',
-	'SiteLogo'					=> 'Site Logo',
+	'SiteLogo'					=> 'Logo del sitio',
 	'SiteLogoInfo'				=> 'Su logotipo aparecerá normalmente en la esquina superior izquierda de la aplicación. El tamaño máximo es de 2 MiB. Las dimensiones óptimas son 255 píxeles de ancho por 55 píxeles de alto.',
-	'LogoDimensions'			=> 'Logo dimensions',
+	'LogoDimensions'			=> 'Dimensiones del logo',
 	'LogoDimensionsInfo'		=> 'Ancho y alto del Logo mostrado.',
 	'LogoDisplayMode'			=> 'Modo de visualización del logo',
 	'LogoDisplayModeInfo'		=> 'Defines the apearence of the Logo. Default is off.',
 	'FaviconSection'			=> 'Favicon',
-	'SiteFavicon'				=> 'Site Favicon',
-	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
+	'SiteFavicon'				=> 'Sitio Favicon',
+	'SiteFaviconInfo'			=> 'El icono de acceso directo, o favicon, se muestra en la barra de direcciones, pestañas y marcadores de la mayoría de los navegadores. Esto invalidará el favicon de su tema.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Theme',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
@@ -406,11 +406,11 @@ $ap_translation = [
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
-	'SystemSettingsUpdated'		=> 'Updated system settings',
+	'SystemSettingsInfo'		=> 'Grupo de parámetros responsables de la plataforma de ajuste fino. No los cambie a menos que tenga confianza en sus acciones.',
+	'SystemSettingsUpdated'		=> 'Actualización de la configuración del sistema',
 
-	'DebugModeSection'			=> 'Debug mode',
-	'DebugMode'					=> 'Debug mode',
+	'DebugModeSection'			=> 'Modo de depuración',
+	'DebugMode'					=> 'Modo de depuración',
 	'DebugModeInfo'				=> 'Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.',
 	'DebugModes'	=> [
 		'0'		=> 'debugging is off',
@@ -423,7 +423,7 @@ $ap_translation = [
 	'DebugAdminOnly'			=> 'Closed diagnosis',
 	'DebugAdminOnlyInfo'		=> 'Show debug data of the program (and DBMS) only for the administrator.',
 
-	'CachingSection'			=> 'Caching Options',
+	'CachingSection'			=> 'Cache options',
 	'Cache'						=> 'Cache rendered pages',
 	'CacheInfo'					=> 'Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.',
 	'CacheTtl'					=> 'Term relevance cached pages',
@@ -433,9 +433,9 @@ $ap_translation = [
 	'CacheSqlTtl'				=> 'Term relevance Cache Database',
 	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
 
-	'PrivacySection'			=> 'Privacy',
-	'AnonymizeIp'				=> 'Anonymize users IP addresses',
-	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
+	'PrivacySection'			=> 'Privacidad',
+	'AnonymizeIp'				=> 'Anonimizar las direcciones IP de los usuarios',
+	'AnonymizeIpInfo'			=> 'Anonimizar direcciones IP donde sea aplicable como página, revisión o referencias.',
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
 	'ReverseProxy'				=> 'Use Reverse proxy',
@@ -476,31 +476,31 @@ $ap_translation = [
 										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
 
 	// Permissions settings
-	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
-	'PermissionsSettingsUpdated'	=> 'Updated permissions settings',
+	'PermissionsSettingsInfo'		=> 'Parámetros responsables del control de acceso y permisos.',
+	'PermissionsSettingsUpdated'	=> 'Configuración de permisos actualizada',
 
-	'PermissionsSection'		=> 'Rights and privileges',
-	'ReadRights'				=> 'Read rights by default',
+	'PermissionsSection'		=> 'Derechos y privilegios',
+	'ReadRights'				=> 'Derechos de lectura por defecto',
 	'ReadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
-	'WriteRights'				=> 'Write rights by default',
+	'WriteRights'				=> 'Derechos de escritura por defecto',
 	'WriteRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
-	'CommentRights'				=> 'Comment rights by default',
+	'CommentRights'				=> 'Derechos de comentario por defecto',
 	'CommentRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine the parental rights.',
-	'CreateRights'				=> 'Create rights of a sub page by default',
+	'CreateRights'				=> 'Crear derechos de una subpágina por defecto',
 	'CreateRightsInfo'			=> 'Define the tolerance for the establishment of root pages and assign pages for which we can not determine the parental rights.',
-	'UploadRights'				=> 'Upload rights by default',
+	'UploadRights'				=> 'Derechos de carga por defecto',
 	'UploadRightsInfo'			=> 'Typically used for putting the root pages, and pages for which we can not determine parental rights.',
 	'RenameRights'				=> 'Global rename right',
 	'RenameRightsInfo'			=> 'List for admission to the possibility of free rename (move) pages.',
 
 	'LockAcl'					=> 'Lock all ACL to read only',
 	'LockAclInfo'				=> '<span class="cite">Overwrites the acl settings for all pages to read only.</span><br>This might be useful if a project is finished, you want close editing for a period for security reasons or as a emergency response.',
-	'HideLocked'				=> 'Hide inaccessible pages',
-	'HideLockedInfo'			=> 'If the user does not have permission to read the page, hide it in different page lists (however the link placed in text, will still be visible).',
-	'RemoveOnlyAdmins'			=> 'Only administrators can delete pages',
-	'RemoveOnlyAdminsInfo'		=> 'Deny all, except administrators, to delete pages. In the first limit applies to owners of normal pages.',
-	'OwnersRemoveComments'		=> 'Owners of pages can delete comments',
-	'OwnersRemoveCommentsInfo'	=> 'Allow page owners to moderate comments on their pages.',
+	'HideLocked'				=> 'Esconder páginas inaccesibles',
+	'HideLockedInfo'			=> 'Si el usuario no tiene permiso para leer la página, ocúltela en diferentes listas de páginas (sin embargo, el enlace colocado en el texto, seguirá siendo visible).',
+	'RemoveOnlyAdmins'			=> 'Sólo los administradores pueden eliminar páginas',
+	'RemoveOnlyAdminsInfo'		=> 'Denegar todas las páginas, excepto los administradores, para eliminarlas. En el primer límite se aplica a los propietarios de páginas normales.',
+	'OwnersRemoveComments'		=> 'Los propietarios de las páginas pueden eliminar comentarios',
+	'OwnersRemoveCommentsInfo'	=> 'Permite a los propietarios de páginas moderar los comentarios en sus páginas.',
 	'OwnersEditCategories'		=> 'Owners can edit page categories',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
 	'TermHumanModeration'		=> 'Term human moderation',
@@ -509,34 +509,34 @@ $ap_translation = [
 	'UserCanDeleteAccount'		=> 'Permitir a los usuarios eliminar sus propias cuentas',
 
 	// Security settings
-	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, safety restrictions and additional security subsystems.',
-	'SecuritySettingsUpdated'	=> 'Updated security settings',
+	'SecuritySettingsInfo'		=> 'Parámetros responsables de la seguridad general de la plataforma, restricciones de seguridad y subsistemas de seguridad adicionales.',
+	'SecuritySettingsUpdated'	=> 'Configuración de seguridad actualizada',
 
-	'AllowRegistration'			=> 'Register online',
-	'AllowRegistrationInfo'		=> 'Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.',
-	'ApproveNewUser'			=> 'Approve new users',
-	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
-	'PersistentCookies'			=> 'Persistent cookies',
-	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
+	'AllowRegistration'			=> 'Regístrese en línea',
+	'AllowRegistrationInfo'		=> 'Registro continuo de usuarios. Desactivar la opción evitará el registro gratuito, sin embargo, el administrador del sitio podrá registrar a otros usuarios por su cuenta.',
+	'ApproveNewUser'			=> 'Aprobar nuevos usuarios',
+	'ApproveNewUserInfo'		=> 'Permite a los administradores aprobar a los usuarios una vez que se registran. Sólo los usuarios aprobados podrán iniciar sesión en el sitio.',
+	'PersistentCookies'			=> 'Cookies persistentes',
+	'PersistentCookiesInfo'		=> 'Permitir cookies persistentes.',
 	'AntiDupe'					=> 'Anti-clone',
 	'AntiDupeInfo'				=> 'Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.',
-	'DisableWikiName'			=> 'Disable WikiName',
-	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
-	'AllowEmailReuse'			=> 'Allow email address re-use',
-	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'UsernameLength'			=> 'Username length',
-	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
+	'DisableWikiName'			=> 'Desactivar NombreWiki',
+	'DisableWikiNameInfo'		=> 'Desactivar el uso obligatorio de NombreWiki. Permite registrar usuarios con apodos tradicionales, no forzado NameSurname.',
+	'AllowEmailReuse'			=> 'Permitir la reutilización de la dirección de correo electrónico',
+	'AllowEmailReuseInfo'		=> 'Diferentes usuarios pueden registrarse con la misma dirección de correo electrónico.',
+	'UsernameLength'			=> 'Longitud del nombre de usuario',
+	'UsernameLengthInfo'		=> 'Número mínimo y máximo de caracteres en los nombres de usuario.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
-	'EnableCaptcha'				=> 'Enable Captcha',
-	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
-	'CaptchaComment'			=> 'New comment',
+	'EnableCaptcha'				=> 'Habilitar Captcha',
+	'EnableCaptchaInfo'			=> 'Si está habilitado, Captcha se mostrará en los siguientes casos o si se alcanza un umbral de seguridad.',
+	'CaptchaComment'			=> 'Nuevo comentario',
 	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
-	'CaptchaPage'				=> 'New page',
+	'CaptchaPage'				=> 'Nueva página',
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
-	'CaptchaEdit'				=> 'Edit page',
+	'CaptchaEdit'				=> 'Editar página',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
-	'CaptchaRegistration'		=> 'Registration',
+	'CaptchaRegistration'		=> 'Inscripciones',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
@@ -588,11 +588,11 @@ $ap_translation = [
 		'2'		=> 'password does not contain username',
 	],
 
-	'LoginSection'				=> 'Login',
-	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username',
-	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
-	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address',
-	'IpLoginLimitMaxInfo'		=> 'The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.',
+	'LoginSection'				=> 'Conectar',
+	'MaxLoginAttempts'			=> 'Número máximo de intentos de inicio de sesión por nombre de usuario',
+	'MaxLoginAttemptsInfo'		=> 'El número de intentos de inicio de sesión permitidos para una sola cuenta antes de que se active la tarea anti-spambot. Introduzca 0 para evitar que se active la tarea anti-spambot para cuentas de usuario distintas.',
+	'IpLoginLimitMax'			=> 'Número máximo de intentos de inicio de sesión por dirección IP',
+	'IpLoginLimitMaxInfo'		=> 'El umbral de intentos de inicio de sesión permitido desde una única dirección IP antes de que se active una tarea anti-spambot. Introduzca 0 para evitar que la tarea anti-spambot sea activada por las direcciones IP.',
 
 	'LogSection'				=> 'Log settings',
 	'LogLevel'					=> 'Using logging',
@@ -608,7 +608,7 @@ $ap_translation = [
 		'7'		=> 'record all',
 	],
 	'LogDefaultShow'			=> 'Display Log Mode',
-	'LogDefaultShowInfo'		=> 'The minimum priority events displayed in the log by default.',
+	'LogDefaultShowInfo'		=> 'Los eventos de prioridad mínima visualizados en el log por defecto.',
 	'LogModes'	=> [
 		'1'		=> 'only the critical level',
 		'2'		=> 'from the highest level',
@@ -622,7 +622,7 @@ $ap_translation = [
 	'LogPurgeTimeInfo'			=> 'Remove event log over a given number of days.',
 
 	'FormsSection'				=> 'Forms',
-	'FormTokenTime'				=> 'Maximum time to submit forms',
+	'FormTokenTime'				=> 'Tiempo máximo para enviar formularios',
 	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in seconds).<br> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.',
 
 	'SessionLength'				=> 'Term login cookie',
@@ -711,11 +711,11 @@ $ap_translation = [
 	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
 
 	'LicenseSection'			=> 'Licencia',
-	'DefaultLicense'			=> 'Default license',
+	'DefaultLicense'			=> 'Licencia por defecto',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 
-	'EnableLicense'				=> 'Enable License',
-	'EnableLicenseInfo'			=> 'Enable to show license information.',
+	'EnableLicense'				=> 'Habilitar licencia',
+	'EnableLicenseInfo'			=> 'Habilitar para mostrar información de licencia.',
 	'LicensePerPage'			=> 'License per page',
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
@@ -895,11 +895,11 @@ $ap_translation = [
 	'FilterSettingsInfo'		=> 'Palabras que serán automáticamente censuradas en su Wiki.',
 	'FilterSettingsUpdated'		=> 'Configuración actualizada del filtro de spam',
 
-	'WordCensoringSection'		=> 'Word censoring',
-	'SPAMFilter'				=> 'SPAM Filter',
-	'SPAMFilterInfo'			=> 'Enabling SPAM Filter',
-	'WordList'					=> 'Word list',
-	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
+	'WordCensoringSection'		=> 'Censura de palabras',
+	'SPAMFilter'				=> 'Filtro de SPAM',
+	'SPAMFilterInfo'			=> 'Habilitación del Filtro de SPAM',
+	'WordList'					=> 'Lista de palabras',
+	'WordListInfo'				=> 'Palabra o frase <code>fragmento</code> a incluir en la lista negra (una por línea)',
 
 	// DB Convert module
 	'Convert'					=> 'Convert',
@@ -959,9 +959,9 @@ $ap_translation = [
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MassemailSection'			=> 'Mass email',
-	'MessageSubject'			=> 'Subject',
+	'MessageSubject'			=> 'Sujeto',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Your message',
+	'YourMessage'				=> 'Su mensaje',
 	'YourMessageInfo'			=> 'Por favor, ten en cuenta que solo puede insertarse texto plano. Se eliminará cualquier código antes de enviar.',
 
 	'MessageLanguage'			=> 'Language',
@@ -973,20 +973,20 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Enviar a grupo',
 	'SendToUser'				=> 'Enviar a usuario',
-	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Envía sólo mensajes a aquellos usuarios que permitieron a los administradores enviarles información por correo electrónico. Esta opción está disponible en sus opciones de usuario en Notificaciones.',
 
 	// System message module
 	'SysMsgInfo'				=> '',
-	'SysMsgUpdated'				=> 'Updated system message',
+	'SysMsgUpdated'				=> 'Mensaje de sistema actualizado',
 
-	'SysMsgSection'				=> 'System message',
-	'SysMsg'					=> 'System message',
-	'SysMsgInfo'				=> 'Your text here',
+	'SysMsgSection'				=> 'Mensaje de sistema',
+	'SysMsg'					=> 'Mensaje de sistema',
+	'SysMsgInfo'				=> 'Su texto aquí',
 
 	'SysMsgType'				=> 'Type',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
-	'EnableSysMsg'				=> 'Enable system message',
-	'EnableSysMsgInfo'			=> 'Show system message.',
+	'EnableSysMsg'				=> 'Habilitar mensaje de sistema',
+	'EnableSysMsgInfo'			=> 'Mostrar mensaje de sistema.',
 
 	// User approval module
 	'ApproveNotExists'			=> 'Please select at least one user via the Set button.',
