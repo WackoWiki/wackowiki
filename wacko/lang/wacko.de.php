@@ -78,7 +78,7 @@ $wacko_translation = [
 	'LoggedInAs'				=> 'Du bist angemeldet als',
 
 	'ClearCookies'				=> 'Alle Cookies löschen',
-	'BindSessionIp'				=> 'Sizung an die IP-Adresse binden',// ''
+	'BindSessionIp'				=> 'Sizung an die IP-Adresse binden',
 	'BindSessionIpOn'			=> 'aktiviert (die aktuelle IP',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'Die aktuelle Sitzung endet',
@@ -714,9 +714,7 @@ $wacko_translation = [
 	'UsersPMSent'				=> 'Persönliche Nachricht wurde erfolgreich an den Nutzer gesendet.',
 	'UsersPMPlnSent'			=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',
 	'UsersPMBody'				=> 'Diese Nachricht wurde dir durch den Benutzer %1 geschickt.',
-	'UsersPMReply'				=> 'Um auf diese Email-Nachricht zu antworten, ' .
-								   'klicke den folgenden Link (verwende nicht die Schaltfläche \'Antworten\' ' .
-								   'in deinem Mailprogramm):',
+	'UsersPMReply'				=> 'Um auf diese Email-Nachricht zu antworten, klicke den folgenden Link (verwende nicht die Schaltfläche \'Antworten\' in deinem Mailprogramm):',
 	'PMAbuseInfo'				=> 'Hinweis: Falls diese Nachricht Spam enthält, beleidigt oder anderweitig gegen die Regeln der Seite verstößt, ' .
 								   'dann sende sie bitte (unter Verwendung der Schaltfläche \'Weiterleiten\' ' .
 								   'in deinem Mailprogramm) an diese Adresse %1.',

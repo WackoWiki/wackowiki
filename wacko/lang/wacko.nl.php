@@ -714,8 +714,7 @@ $wacko_translation = [
 	'UsersPMSent'				=> 'Een persoonlijk bericht werd met succes naar de gebruiker verzonden.',
 	'UsersPMPlnSent'			=> 'Persoonlijk bericht dat in platte tekst naar de gebruiker wordt gestuurd.',
 	'UsersPMBody'				=> 'Dit bericht is door de gebruiker naar u verzonden %1.',
-	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply ' .
-									'in mailer):',
+	'UsersPMReply'				=> 'Om deze e-mail te beantwoorden, klik op de volgende link (gebruik niet de Reply-knop / Reply in mailer):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 									'violates the rules of the site, please send it (using the button Forward /' .
 									'Forward your mail program) to address %1.',

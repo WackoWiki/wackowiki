@@ -78,7 +78,7 @@ $wacko_translation = [
 	'LoggedInAs'				=> 'Vous êtes connecté en tant que ',
 
 	'ClearCookies'				=> 'Effacer tous les cookies',
-	'BindSessionIp'				=> 'Lier la session à l&rsquo;adresse IP',// ''
+	'BindSessionIp'				=> 'Lier la session à l&rsquo;adresse IP',
 	'BindSessionIpOn'			=> 'en fonction (IP en cours)',
 	'TrafficProtection'			=> 'Protection du trafic',
 	'SessionEnds'				=> 'La session en cours se termine',
@@ -714,9 +714,7 @@ $wacko_translation = [
 	'UsersPMSent'				=> 'le message personnel a été transmis à l&rsquo;utilisateur.',
 	'UsersPMPlnSent'			=> 'Le message personnel a été transmis à l&rsquo;utilisateur en texte brut.',
 	'UsersPMBody'				=> 'Ce message vous a été envoyé par l&rsquo;utilisateur %1.',
-	'UsersPMReply'				=> 'Pour répondre à ce courriel, ' .
-								   'cliquez sur le lien suivant (n&rsquo;utilisez pas  le bouton "répondre" de votre logiciel ' .
-								   'de courriel):',
+	'UsersPMReply'				=> 'Pour répondre à ce courriel, cliquez sur le lien suivant (n&rsquo;utilisez pas  le bouton "répondre" de votre logiciel de courriel):',
 	'PMAbuseInfo'				=> 'Note: Si ce message est du spam, a un contenu inacceptable ou viole autrement ' .
 								   'les règles du site, merci de l&rsquo;envoyer (en utilisant le bouton Transmettre /' .
 								   'de votre logiciel de courriel) à l&rsquo;adresse %1.',

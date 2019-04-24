@@ -78,7 +78,7 @@ $wacko_translation = [
 	'LoggedInAs'				=> 'Está logueado como',
 
 	'ClearCookies'				=> 'Eliminar todos los cookies',
-	'BindSessionIp'				=> 'Vincular sesión a la dirección IP',// ''
+	'BindSessionIp'				=> 'Vincular sesión a la dirección IP',
 	'BindSessionIpOn'			=> 'habilitado (IP actual',
 	'TrafficProtection'			=> 'Protección de Trafico',
 	'SessionEnds'				=> 'Se finaliza la sesión actual',
@@ -714,8 +714,7 @@ $wacko_translation = [
 	'UsersPMSent'				=> 'Mensaje personal enviado exitosamente al usuario.',
 	'UsersPMPlnSent'			=> 'Mensaje personal enviado al usuario en texto plano.',
 	'UsersPMBody'				=> 'Este mensaje le fue enviado por el usuario %1.',
-	'UsersPMReply'				=> 'Para responder este email, presione el siguiente enlace (NO use el botón "Responder" en ' .
-								   'su cliente de email):',
+	'UsersPMReply'				=> 'Para responder este email, presione el siguiente enlace (NO use el botón "Responder" en su cliente de email):',
 	'PMAbuseInfo'				=> 'Observación: Si este mensaje es spam, tiene un contenido abusivo o viola ' .
 								   'de alguna manera las reglas del sitio, por favor envíelo (usando el botón "Reenviar" ' .
 								   'de su programa de email) a la dirección %1.',
@@ -1307,7 +1306,7 @@ $wacko_translation = [
 	'LogPollStopped'			=> 'Stopped poll with ID %1',
 	'LogFileUploadedLocal'		=> 'A la página [[/%1]] fue subido archivo nuevo ##%2## (tamaño %3)',
 	'LogFileUploadedGlobal'		=> 'Subido archivo nuevo a carpeta global ##%2## (tamaño %3)',
-	'LogPMSent'					=> 'personal message ##%1->%2## successfully sent',
+	'LogPMSent'					=> 'Personal message ##%1->%2## successfully sent',
 	'LogUserSimiliarName'		=> 'Se registraron intentos de registrar el nombre de usuario ya existente: ##%1##',
 	'LogUserRegistered'			=> 'Usuario nuevo registrado con éxito ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Email activado con éxito ##%1## de usuario ##%2##',
