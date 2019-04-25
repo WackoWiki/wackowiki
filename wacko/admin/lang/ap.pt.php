@@ -9,25 +9,25 @@ $ap_translation = [
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
-		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
-		'content'		=> 'Content',
-		'users'			=> 'Users',
-		'maintenance'	=> 'Maintenance',
-		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'basics'		=> 'Funções básicas',
+		'preferences'	=> 'Preferências',
+		'content'		=> 'Conteúdo',
+		'users'			=> 'Usuários',
+		'maintenance'	=> 'Manutenção',
+		'messages'		=> 'Mensagens',
+		'extension'		=> 'Extensão',
+		'database'		=> 'Base de dados',
 	],
 
 	// Admin panel
 	'AdminPanel'				=> 'Painel de Administração',
 	'RecoveryMode'				=> 'Modo de recuperação',
-	'Authorization'				=> 'Authorization',
-	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoceryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'Authorization'				=> 'Autorização',
+	'AuthorizationTip'			=> 'Digite a senha administrativa (certifique-se também de que os cookies são permitidos no seu navegador).',
+	'NoRecoceryPassword'		=> 'A senha administrativa não é especificada!',
+	'NoRecoceryPasswordTip'		=> 'Nota: A ausência de uma senha administrativa é uma ameaça à segurança! Digite sua senha no arquivo de configuração e execute o programa novamente.',
 
-	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
+	'ErrorLoadingModule'		=> 'Erro ao carregar o módulo admin %1: não existe.',
 
 	'FormSave'					=> 'Guardar',
 	'FormReset'					=> 'Reiniciar',
@@ -38,7 +38,7 @@ $ap_translation = [
 	'ApLogOut'					=> 'Log out',
 	'ApLogOutTip'				=> 'quit system administration',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeft'					=> 'Tempo restante: %1 minutos',
 	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'Open',
@@ -53,17 +53,17 @@ $ap_translation = [
 	'Add'						=> 'Adicionar',
 	'Edit'						=> 'Editar',
 	'Remove'					=> 'Remover',
-	'Enabled'					=> 'Enabled',
+	'Enabled'					=> 'Ativado',
 	'Disabled'					=> 'Disabled',
 	'On'						=> 'On',
 	'Off'						=> 'Off',
-	'Mandatory'					=> 'Mandatory',
+	'Mandatory'					=> 'Obrigatório',
 	'Admin'						=> 'Admin',
 
-	'MiscellaneousSection'		=> 'Miscellaneous',
+	'MiscellaneousSection'		=> 'Diversos',
 	'MainSection'				=> 'Basic Parameters',
 
-	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'DirNotWritable'			=> 'O diretório %1 não pode ser escrito.',
 
 	/**
 	 * AP MENU
@@ -76,14 +76,14 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
-		'title'		=> 'Basic parameters',
+		'name'		=> 'Básico',
+		'title'		=> 'Parâmetros básicos',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
 		'name'		=> 'Aparência',
-		'title'		=> 'Appearance settings',
+		'title'		=> 'Configurações de aparência',
 	],
 
 	// Config Email module
@@ -106,31 +106,31 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
+		'name'		=> 'Notificações',
 		'title'		=> 'Notifications settings',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
-		'title'		=> 'Pages and site parameters',
+		'name'		=> 'Páginas',
+		'title'		=> 'Páginas e parâmetros do site',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
-		'title'		=> 'Permissions settings',
+		'name'		=> 'Permissões',
+		'title'		=> 'Configurações de permissões',
 	],
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
-		'title'		=> 'Security subsystems settings',
+		'name'		=> 'Segurança',
+		'title'		=> 'Configurações dos subsistemas de segurança',
 	],
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
+		'name'		=> 'Sistema',
 		'title'		=> 'System options',
 	],
 
@@ -142,19 +142,19 @@ $ap_translation = [
 
 	// Categories module
 	'content_categories'		=> [
-		'name'		=> 'Categories',
+		'name'		=> 'Categorias',
 		'title'		=> 'Manage categories',
 	],
 
 	// Comments module
 	'content_comments'		=> [
-		'name'		=> 'Comments',
+		'name'		=> 'Comentários',
 		'title'		=> 'Manage comments',
 	],
 
 	// Deleted module
 	'content_deleted'		=> [
-		'name'		=> 'Deleted',
+		'name'		=> 'Eliminado',
 		'title'		=> 'Newly deleted content',
 	],
 
@@ -172,7 +172,7 @@ $ap_translation = [
 
 	// Pages module
 	'content_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> 'Páginas',
 		'title'		=> 'Manage pages',
 	],
 
@@ -208,25 +208,25 @@ $ap_translation = [
 
 	// Dashboard module
 	'main'		=> [
-		'name'		=> 'Main Menu',
+		'name'		=> 'Menu principal',
 		'title'		=> 'WackoWiki Administration',
 	],
 
 	// Inconsistencies module
 	'maint_inconsistencies'		=> [
-		'name'		=> 'Inconsistencies',
-		'title'		=> 'Fixing Data Inconsistencies',
+		'name'		=> 'Inconsistências',
+		'title'		=> 'Correção de inconsistências de dados',
 	],
 
 	// Data Synchronization module
 	'maint_resync'		=> [
-		'name'		=> 'Data Synchronization',
-		'title'		=> 'Synchronizing data',
+		'name'		=> 'Sincronização de dados',
+		'title'		=> 'Sincronização de dados',
 	],
 
 	// Transliterate module
 	'maint_transliterate'		=> [
-		'name'		=> 'Transliterate',
+		'name'		=> 'Transliterado',
 		'title'		=> 'Update the supertag in the database records',
 	],
 
@@ -256,7 +256,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Estatística',
 		'title'		=> 'Show statistics',
 	],
 
@@ -274,13 +274,13 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'Grupos',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> 'Usuários',
 		'title'		=> 'User management',
 	],
 
@@ -1116,7 +1116,7 @@ $ap_translation = [
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
 
 	'LogMembersUpdated'			=> 'Updated usergroup members',
-	'LogMemberAdded'			=> 'Added member ##%1## into group ##%2##',
+	'LogMemberAdded'			=> 'Added member ##%1## to group ##%2##',
 	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
 	'LogGroupCreated'			=> 'Created a new group ##%1##',
 	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',

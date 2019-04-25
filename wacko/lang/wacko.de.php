@@ -389,7 +389,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache bereinigt.',
 	'ClusterRemoved'			=> 'Alle Seiten des Cluster gelöscht.',
 	'RevisionsRemoved'			=> 'Revisionen gelöscht.',
-	'ActionHaveNoUndo'		=> 'Diese Aktion kann nicht rückgängig gemacht werden.',
+	'ActionHaveNoUndo'			=> 'Diese Aktion kann nicht rückgängig gemacht werden.',
 	'PageRestored'				=> 'Seite wiederhergestellt.',
 	'LocalFilesRestored'		=> 'Angehängte Dateien wiederhergestellt.',
 
