@@ -1116,7 +1116,7 @@ $ap_translation = [
 	'GroupsInfo'				=> 'A partir de ce panneau, vous pouvez administrer tous vos groupes d\'utilisateurs. Vous pouvez supprimer, créer et modifier des groupes existants. En outre, vous pouvez choisir les chefs de groupe, basculer entre les statuts Ouvert/Masqué/Fermé et définir le nom et la description du groupe.',
 
 	'LogMembersUpdated'			=> 'Mise à jour des membres du groupe d\'utilisateurs',
-	'LogMemberAdded'			=> 'Added member ##%1## into group ##%2##',
+	'LogMemberAdded'			=> 'Added member ##%1## to group ##%2##',
 	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
 	'LogGroupCreated'			=> 'Création d\'un nouveau groupe ##%1##',
 	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',

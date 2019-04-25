@@ -720,11 +720,11 @@ $ap_translation = [
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
 	'ServicePagesSection'		=> 'Service pages',
-	'RootPage'					=> 'Home page',
+	'RootPage'					=> 'Página principal',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
 	'PrivacyPage'				=> 'Privacy Policy',
-	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
+	'PrivacyPageInfo'			=> 'La página con la Política de Privacidad del sitio.',
 
 	'TermsPage'					=> 'Policies and Regulations',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
@@ -786,9 +786,9 @@ $ap_translation = [
 	'NotifyUploadInfo'			=> 'Los Moderadores serán notificados cuando un archivo haya sido cargado.',
 
 	'PersonalMessagesSection'	=> 'Mensajes personales',
-	'AllowIntercomDefault'		=> 'Allow Intercom',
+	'AllowIntercomDefault'		=> 'Permitir intercomunicación',
 	'AllowIntercomDefaultInfo'	=> 'Habilitar esta opción permite a otros usuarios enviar mensajes personales a la dirección de correo electrónico del destinatario sin revelar la dirección.',
-	'AllowMassemailDefault'		=> 'Allow Massemail',
+	'AllowMassemailDefault'		=> 'Permitir correo masivo',
 	'AllowMassemailDefaultInfo'	=> 'Envía sólo mensajes a aquellos usuarios que permitieron a los administradores enviarles información por correo electrónico.',
 
 	// Resync settings
@@ -801,7 +801,7 @@ $ap_translation = [
 
 	'LogUserStatsSynched'		=> 'Estadísticas de usuarios sincronizadas',
 	'LogPageStatsSynched'		=> 'Estadísticas de página sincronizadas',
-	'LogFeedsUpdated'			=> 'Synchronized RSS feeds',
+	'LogFeedsUpdated'			=> 'Canales RSS sincronizados',
 	'LogPageBodySynched'		=> 'Reparsed page body and links',
 
 	'UserStats'					=> 'Estadísticas de usuarios',
@@ -902,30 +902,30 @@ $ap_translation = [
 	'WordListInfo'				=> 'Palabra o frase <code>fragmento</code> a incluir en la lista negra (una por línea)',
 
 	// DB Convert module
-	'Convert'					=> 'Convert',
-	'NoColumnsToConvert'		=> 'No columns to convert.',
-	'NoTablesToConvert'			=> 'No tables to convert.',
+	'Convert'					=> 'Convertir',
+	'NoColumnsToConvert'		=> 'No hay columnas que convertir.',
+	'NoTablesToConvert'			=> 'No hay tablas que convertir.',
 
-	'LogDatabaseConverted'		=> 'Database converted',
-	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
+	'LogDatabaseConverted'		=> 'Base de datos convertida',
+	'ConversionTablesOk'		=> 'Conversión de las tablas seleccionadas con éxito.',
 
 	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
-	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB/XtraDB',
-	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
-	'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
+	'ConvertTablesEngine'		=> 'Conversión de tablas de MyISAM a InnoDB/XtraDB',
+	'ConvertTablesEngineInfo'	=> 'Si tiene tablas existentes que desea convertir a InnoDB/XtraDB* para una mayor fiabilidad y escalabilidad, utilice la siguiente rutina. Estas tablas eran originalmente MyISAM, que antes era la tabla por defecto.',
+	'ConvertTablesEngineHint'	=> '* XtraDB es una versión mejorada del motor de almacenamiento InnoDB, diseñado para escalar mejor en hardware moderno, e incluye una variedad de otras características útiles en entornos de alto rendimiento. <br><br>Es totalmente compatible con versiones anteriores, y se identifica a sí mismo como "<code>ENGINE=InnoDB</code>" (al igual que InnoDB), por lo que puede ser utilizado como sustituto de la InnoDB estándar.',
 
-	'DbVersion'					=> 'Requires at least MySQL 5.6.4, available version',
-	'DbEngineOk'				=> 'InnoDB/XtraDB is available.',
-	'DbEngineMissing'			=> 'InnoDB / XtraDB is not available.',
-	'EngineTable'				=> 'Table',
+	'DbVersion'					=> 'Requiere al menos MySQL 5.6.4, versión disponible',
+	'DbEngineOk'				=> 'InnoDB/XtraDB está disponible.',
+	'DbEngineMissing'			=> 'InnoDB/XtraDB no está disponible.',
+	'EngineTable'				=> 'Tabla',
 	'EngineDefault'				=> 'Default',
 	'EngineColumn'				=> 'Column',
 	'EngineTyp'					=> 'Type',
 
-	'ConvertColumnsToStrict'	=> 'Converting Columns to SQL strict',
-	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.',
+	'ConvertColumnsToStrict'	=> 'Conversión de columnas a SQL estricto',
+	'ConvertTablesStrictInfo'	=> 'Si tiene tablas existentes que desea convertir para cumplir con el modo SQL srtict, utilice la siguiente rutina.',
 
 	// Log module
 	'LogFilterTip'				=> 'Filtrar eventos por criterios',
@@ -951,14 +951,14 @@ $ap_translation = [
 
 	// Massemail module
 	'MassemailInfo'				=> 'Desde aquí puedes enviar un email a todos los usuarios, o a los usuarios de un grupo específico. Para esto se enviará un email a la dirección administrativa proporcionada, con copia oculta a todos los receptores. Si el grupo de personas es muy grande, por favor se paciente después de pulsar en "Enviar" y no detengas el proceso por la mitad. Es normal que enviar un email masivo lleve algún tiempo, serás notificado cuando se complete el proceso',
-	'LogMassemail'				=> 'Messemail send %1 to group / user ',
-	'MassemailSend'				=> 'Massemail send',
+	'LogMassemail'				=> 'Envío de mensajes %1 al grupo/usuario ',
+	'MassemailSend'				=> 'Envío de correo masivo',
 
 	'NoEmailMessage'			=> 'Tienes que introducir un mensaje.',
 	'NoEmailSubject'			=> 'Tienes que especificar un tema para su mensaje.',
-	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
+	'NoEmailRecipient'			=> 'Debe especificar por lo menos un usuario o grupo de usuarios.',
 
-	'MassemailSection'			=> 'Mass email',
+	'MassemailSection'			=> 'Correo electrónico masivo',
 	'MessageSubject'			=> 'Sujeto',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Su mensaje',
@@ -989,13 +989,13 @@ $ap_translation = [
 	'EnableSysMsgInfo'			=> 'Mostrar mensaje de sistema.',
 
 	// User approval module
-	'ApproveNotExists'			=> 'Please select at least one user via the Set button.',
+	'ApproveNotExists'			=> 'Por favor, seleccione al menos un usuario a través del botón Set.',
 
-	'LogUserApproved'			=> 'User ##%1## approved',
-	'LogUserBlocked'			=> 'User ##%1## blocked',
-	'LogUserDeleted'			=> 'User ##%1## removed from the database',
-	'LogUserCreated'			=> 'Created a new user ##%1##',
-	'LogUserUpdated'			=> 'Updated User ##%1##',
+	'LogUserApproved'			=> 'Usuario ##%1## aprobado',
+	'LogUserBlocked'			=> 'Usuario ##%1## bloqueado',
+	'LogUserDeleted'			=> 'Usuario ##%1## eliminado de la base de datos',
+	'LogUserCreated'			=> 'Creado un nuevo usuario ##%1##',
+	'LogUserUpdated'			=> 'Usuario actualizado ##%1##',
 
 	'UserApproveInfo'			=> 'Aprobar nuevos usuarios antes de permitir su login al sitio.',
 	'Approve'					=> 'Aprobar',
@@ -1077,17 +1077,17 @@ $ap_translation = [
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'all',
+	'FilesAll'					=> 'todo',
 	'SkipFiles'					=> 'Files are not stored - skip',
-	'RestoreDone'				=> 'RESTORATION COMPLETED',
+	'RestoreDone'				=> 'RESTAURACIÓN REALIZADA',
 
-	'BackupCreationDate'		=> 'Creation Date',
-	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
-	'BackupRemove'				=> 'Remove',
+	'BackupCreationDate'		=> 'Fecha de creación',
+	'BackupPackageContents'		=> 'El contenido del paquete',
+	'BackupRestore'				=> 'Restaurar',
+	'BackupRemove'				=> 'Eliminar',
 	'RestoreYes'				=> 'sí',
 	'RestoreNo'					=> 'no',
-	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
+	'LogDbRestored'				=> 'Copia de seguridad ##%1## de la base de datos restaurada.',
 
 	// User module
 	'UsersInfo'					=> 'Aquí puede cambiar la información de sus usuarios y ciertas opciones específicas.',
@@ -1116,11 +1116,11 @@ $ap_translation = [
 	'GroupsInfo'				=> 'Desde este panel puedes administrar todos tus grupos de usuarios. Puede borrar, crear y editar grupos existentes. Además, puede elegir líderes de grupo, alternar entre estado de grupo abierto/oculto/cerrado y establecer el nombre y la descripción del grupo.',
 
 	'LogMembersUpdated'			=> 'Miembros actualizados del grupo de usuarios',
-	'LogMemberAdded'			=> 'Added member ##%1## into group ##%2##',
-	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
-	'LogGroupCreated'			=> 'Created a new group ##%1##',
+	'LogMemberAdded'			=> 'Añadido miembro ##%1## al grupo ##%2##',
+	'LogMemberRemoved'			=> 'Eliminado miembro ##%1## del grupo ##%2##',
+	'LogGroupCreated'			=> 'Creó un nuevo grupo ##%1##',
 	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',
-	'LogGroupRemoved'			=> 'Removed group ##%1##',
+	'LogGroupRemoved'			=> 'Grupo eliminado ##%1##',
 
 	'GroupsMembersFor'			=> 'Miembros del grupo',
 	'GroupsDescription'			=> 'Descripción',
@@ -1217,14 +1217,14 @@ $ap_translation = [
 	'Inconsistencies'			=> 'Inconsistencias',
 	'CheckDatabase'				=> 'Base de datos',
 	'CheckDatabaseInfo'			=> 'Verifica si hay inconsistencias de registro en la base de datos.',
-	'CheckFiles'				=> 'Files',
-	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
-	'Records'					=> 'Records',
+	'CheckFiles'				=> 'Ficheros',
+	'CheckFilesInfo'			=> 'Busca ficheros abandonados, ficheros sin referencia en la tabla de ficheros.',
+	'Records'					=> 'Registros',
 	'InconsistenciesNone'		=> 'No se han encontrado inconsistencias en los datos.',
 	'InconsistenciesDone'		=> 'Inconsistencias de datos resueltas.',
-	'InconsistenciesRemoved'	=> 'Removed inconsistencies',
-	'Check'						=> 'Check',
-	'Solve'						=> 'Solve',
+	'InconsistenciesRemoved'	=> 'Eliminadas las inconsistencias',
+	'Check'						=> 'Verificar',
+	'Solve'						=> 'Resolver',
 
 	// Transliterate module
 	'TranslitField'				=> 'Transliterar el campo %1 en la tabla `%2`.',

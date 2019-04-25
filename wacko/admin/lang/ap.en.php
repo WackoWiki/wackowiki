@@ -1120,7 +1120,7 @@ $ap_translation = [
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
 
 	'LogMembersUpdated'			=> 'Updated usergroup members',
-	'LogMemberAdded'			=> 'Added member ##%1## into group ##%2##',
+	'LogMemberAdded'			=> 'Added member ##%1## to group ##%2##',
 	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
 	'LogGroupCreated'			=> 'Created a new group ##%1##',
 	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',
