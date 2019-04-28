@@ -150,7 +150,7 @@ function admin_db_convert(&$engine, &$module)
 		else
 		{
 			$required_mysql_version = false;
-			echo output_image($engine, false) . '<strong class="red">' . $engine->_t('DbVersion') . ': </strong> ' . $db_version . "<br>\n";
+			echo output_image($engine, false) . '<strong class="red">' . $engine->_t('DbVersionMin') . ': </strong> ' . $db_version . "<br>\n";
 		}
 
 		if ($InnoDB_support['SUPPORT'] == 'YES' || 'DEFAULT')

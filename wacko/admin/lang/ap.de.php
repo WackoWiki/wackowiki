@@ -605,7 +605,7 @@ $ap_translation = [
 	'IpLoginLimitMaxInfo'		=> 'Anzahl der zulässigen Login-Versuche von einer einzelnen IP-Adresse aus, bevor der SPAM-Schutz ausgelöst wird. Wenn 0 eingetragen: kein SPAM-Schutz für die Anmeldung je IP-Adresse.',
 
 	'LogSection'				=> 'Protokolleinstellungen',
-	'LogLevel'					=> 'Protokollierung verwenden',
+	'LogLevelUsage'				=> 'Protokollierung verwenden',
 	'LogLevelInfo'				=> 'Die Mindestpriorität für Ereignisse, die im Protokoll aufgezeichnet werden.',
 	'LogThresholds'	=> [
 		'0'		=> 'keine Protokollierung',
@@ -930,7 +930,7 @@ $ap_translation = [
 	'ConvertTablesEngineInfo'	=> 'Falls man über vorhandene Tabellen verfügt, die für eine bessere Zuverlässigkeit und Skalierbarkeit in InnoDB / XtraDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprünglich MyISAM, was früher der Standard war.',
 	'ConvertTablesEngineHint'	=> '* XtraDB ist eine erweiterte Version der InnoDB-Speicher-Engine, die auf moderner Hardware besser skaliert werden kann, und enthält eine Vielzahl anderer Funktionen, die in Hochleistungsumgebungen nützlich sind. Sie ist vollständig abwärtskompatibel und identifiziert sich selbst MariaDB als "<code> ENGINE = InnoDB </code>" (genau wie InnoDB) und kann daher als ein Drop-In-Ersatz für Standard-InnoDB verwendet werden.',
 
-	'DbVersion'					=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
+	'DbVersionMin'				=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
 	'DbEngineOk'				=> 'InnoDB/XtraDB ist verfügbar.',
 	'DbEngineMissing'			=> 'InnoDB / XtraDB ist nicht verfügbar.',
 	'EngineTable'				=> 'Tabelle',
@@ -991,7 +991,7 @@ $ap_translation = [
 	'SendToUserInfo'			=> 'Es sendet nur Nachrichten an diejenigen Benutzer, die es Administratoren erlaubt haben, ihnen Informationen per E-Mail zu senden. Diese Option ist in den Benutzereinstellungen unter Benachrichtigungen verfügbar.',
 
 	// System message module
-	'SysMsgInfo'				=> '',
+	'SystemMessageInfo'			=> '',
 	'SysMsgUpdated'				=> 'System-Mitteilung aktualisiert',
 
 	'SysMsgSection'				=> 'System-Mitteilung',

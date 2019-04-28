@@ -583,7 +583,7 @@ $ap_translation = [
 	'IpLoginLimitMaxInfo'		=> 'Порог числа неверных попыток залогиниться до распознания как спам-бота и временного запрета логина. Значение 0 означает "без ограничения" и детектор спам-бота не включится.',
 
 	'LogSection'				=> 'Параметры журнала',
-	'LogLevel'					=> 'Режим ведения журнала',
+	'LogLevelUsage'				=> 'Режим ведения журнала',
 	'LogLevelInfo'				=> 'Минимальный приоритет событий, фиксируемых в логе.',
 	'LogThresholds'	=> [
 		'0'		=> 'не вести журнал',
@@ -770,14 +770,14 @@ $ap_translation = [
 
 	'NotifyUserAccount'			=> 'Уведомление о регистрации нового пользователя',
 	'NotifyUserAccountInfo'		=> 'Отправлять Администратору уведомление о регистрации нового пользователя.',
-	'NotifyUpload'				=> 'Notify file upload',
+	'NotifyUpload'				=> 'Уведомить о закачке файла',
 	'NotifyUploadInfo'			=> 'Модераторы будут уведомлены, когда файл будет загружен.',
 
 	'PersonalMessagesSection'	=> 'Личные сообщения',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
-	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
-	'AllowMassemailDefault'		=> 'Allow Massemail',
-	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
+	'AllowIntercomDefaultInfo'	=> 'Включить эту опцию позволяет другим пользователям отправлять личные сообщения на адрес электронной почты получателя, не раскрывая его.',
+	'AllowMassemailDefault'		=> 'Разрешить массовую почту',
+	'AllowMassemailDefaultInfo'	=> 'Он посылает сообщения только тем пользователям, которые разрешили Администраторам отправлять им информацию по электронной почте.',
 
 	// Resync settings
 	'Synchronize'				=> 'синхронизировать',
@@ -801,7 +801,7 @@ $ap_translation = [
 	'XmlSiteMap'				=> 'XML-Sitemap карта сайта',
 	'XmlSiteMapInfo'			=> 'Синхронизирует карту сайта с текущм состоянием базы данных.',
 	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
-	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
+	'XmlSiteMapView'			=> 'Показать файл Sitemap в новом окне.',
 	'WikiLinksResync'			=> 'Wiki-ссылки',
 	'WikiLinksResyncInfo'		=> 'Выполняет повторный рендеринг всех внутрисайтовых ссылок и восстанавливает содержимое таблицы <code>page_link</code> и <code>file_link</code> в случае ее порчи или повреждений (может занять значительное время).',
 	'RecompilePage'				=> 'Повторная компиляция всех страниц (чрезвычайно дорогостоящая)',
@@ -904,7 +904,7 @@ $ap_translation = [
 	'ConvertTablesEngineInfo'	=> 'Если в вашей базе есть таблицы старого движка MyISAM вы можете преобразовать их в таблицы InnoDB/XtraDB* для повышения надежности и масштабируемости. Для этого нажмите кнопку Преобразовать. <br><br>* XtraDB - это усовершенствованная версия движка для хранения данных InnoDB, предназначенная для лучшего масштабирования на современном оборудовании и включающая в себя множество других функций, полезных в средах с высокой производительностью. Онa полностью обратно совместимa и идентифицирует себя как MariaDB как "<code>ENGINE = InnoDB</code>" (как и InnoDB), и поэтому может использоваться для замены стандартного InnoDB.',
 	'ConvertTablesEngineHint'	=> '* XtraDB - это усовершенствованная версия движка для хранения данных InnoDB, предназначенная для лучшего масштабирования на современном оборудовании и включающая в себя множество других функций, полезных в средах с высокой производительностью. <br> <br> Онa полностью обратно совместимa и идентифицирует себя как MariaDB как "<code>ENGINE = InnoDB</code>" (как и InnoDB), и поэтому может использоваться для замены стандартного InnoDB.',
 
-	'DbVersion'					=> 'Требуется версия минимум MySQL 5.6.4',
+	'DbVersionMin'				=> 'Требуется версия минимум MySQL 5.6.4',
 	'DbEngineOk'				=> 'InnoDB/XtraDB доступна.',
 	'DbEngineMissing'			=> 'InnoDB/XtraDB недоступна.',
 	'EngineTable'				=> 'Таблица',
@@ -961,10 +961,10 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Послать группе',
 	'SendToUser'				=> 'Послать пользователю',
-	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
+	'SendToUserInfo'			=> 'Он посылает сообщения только тем пользователям, которые разрешили Администраторам отправлять им информацию по электронной почте. Эта опция доступна в настройках пользователя в разделе Уведомления.',
 
 	// System message module
-	'SysMsgInfo'				=> 'Системное сообщение 1',
+	'SystemMessageInfo'			=> 'Системное сообщение 1',
 	'SysMsgUpdated'				=> 'Системное сообщение обновлено',
 
 	'SysMsgSection'				=> 'Системное сообщение',
@@ -977,7 +977,7 @@ $ap_translation = [
 	'EnableSysMsgInfo'			=> 'Системное сообщение будет показано внизу всех страниц сайта.',
 
 	// User approval module
-	'ApproveNotExists'			=> 'Please select at least one user via the Set button.',
+	'ApproveNotExists'			=> 'Пожалуйста, выберите хотя бы одного пользователя с помощью кнопки Set (Установить).',
 
 	'LogUserApproved'			=> 'Пользователь ##%1## подтверждён',
 	'LogUserBlocked'			=> 'Пользователь ##%1## отклонён',
@@ -1200,17 +1200,17 @@ $ap_translation = [
 	'RepairsComplete'			=> 'Исправление завершено',
 
 	// Inconsistencies module
-	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
+	'InconsistenciesInfo'		=> 'Показывать и исправлять несоответствия, удалять или присваивать "сиротские" записи новому пользователю/значению.',
 	'Inconsistencies'			=> 'несоответствия',
-	'CheckDatabase'				=> 'Database',
-	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
-	'CheckFiles'				=> 'Files',
-	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
-	'Records'					=> 'Records',
-	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
+	'CheckDatabase'				=> 'База данных',
+	'CheckDatabaseInfo'			=> 'Проверяет наличие несоответствий в записях в базе данных.',
+	'CheckFiles'				=> 'Файлы',
+	'CheckFilesInfo'			=> 'Проверка на наличие заброшенных файлов, файлов, на которые не осталось ссылок в таблице файлов.',
+	'Records'					=> 'База данных Записи',
+	'InconsistenciesNone'		=> 'Несоответствий данных не обнаружено.',
 	'InconsistenciesDone'		=> 'Непоследовательность данных решена.',
 	'InconsistenciesRemoved'	=> 'Удаленные несоответствия',
-	'Check'						=> 'Check',
+	'Check'						=> 'Проверь',
 	'Solve'						=> 'Solve',
 
 	// Transliterate module
