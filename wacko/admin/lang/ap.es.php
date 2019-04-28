@@ -595,7 +595,7 @@ $ap_translation = [
 	'IpLoginLimitMaxInfo'		=> 'El umbral de intentos de inicio de sesión permitido desde una única dirección IP antes de que se active una tarea anti-spambot. Introduzca 0 para evitar que la tarea anti-spambot sea activada por las direcciones IP.',
 
 	'LogSection'				=> 'Log settings',
-	'LogLevel'					=> 'Using logging',
+	'LogLevelUsage'				=> 'Using logging',
 	'LogLevelInfo'				=> 'The minimum priority of the events recorded in the log.',
 	'LogThresholds'	=> [
 		'0'		=> 'not keep a journal',
@@ -916,7 +916,7 @@ $ap_translation = [
 	'ConvertTablesEngineInfo'	=> 'Si tiene tablas existentes que desea convertir a InnoDB/XtraDB* para una mayor fiabilidad y escalabilidad, utilice la siguiente rutina. Estas tablas eran originalmente MyISAM, que antes era la tabla por defecto.',
 	'ConvertTablesEngineHint'	=> '* XtraDB es una versión mejorada del motor de almacenamiento InnoDB, diseñado para escalar mejor en hardware moderno, e incluye una variedad de otras características útiles en entornos de alto rendimiento. <br><br>Es totalmente compatible con versiones anteriores, y se identifica a sí mismo como "<code>ENGINE=InnoDB</code>" (al igual que InnoDB), por lo que puede ser utilizado como sustituto de la InnoDB estándar.',
 
-	'DbVersion'					=> 'Requiere al menos MySQL 5.6.4, versión disponible',
+	'DbVersionMin'				=> 'Requiere al menos MySQL 5.6.4, versión disponible',
 	'DbEngineOk'				=> 'InnoDB/XtraDB está disponible.',
 	'DbEngineMissing'			=> 'InnoDB/XtraDB no está disponible.',
 	'EngineTable'				=> 'Tabla',
@@ -976,7 +976,7 @@ $ap_translation = [
 	'SendToUserInfo'			=> 'Envía sólo mensajes a aquellos usuarios que permitieron a los administradores enviarles información por correo electrónico. Esta opción está disponible en sus opciones de usuario en Notificaciones.',
 
 	// System message module
-	'SysMsgInfo'				=> '',
+	'SystemMessageInfo'			=> '',
 	'SysMsgUpdated'				=> 'Mensaje de sistema actualizado',
 
 	'SysMsgSection'				=> 'Mensaje de sistema',

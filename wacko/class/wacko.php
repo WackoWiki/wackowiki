@@ -4425,12 +4425,10 @@ class Wacko
 			else if ($audio_link)
 			{
 				return		$this->audio_link($audio_link, $media_class, $text);
-				$tpl		= '';
 			}
 			else if ($video_link)
 			{
 				return		$this->video_link($video_link, $media_class, $text, $scale);
-				$tpl		= '';
 			}
 
 			$res			= $this->_t('Tpl.' . $tpl);

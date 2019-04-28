@@ -170,7 +170,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="log_level"><strong><?php echo $engine->_t('LogLevel');?>:</strong><br>
+					<label for="log_level"><strong><?php echo $engine->_t('LogLevelUsage');?>:</strong><br>
 					<small><?php echo $engine->_t('LogLevelInfo');?></small></label>
 				</td>
 				<td>

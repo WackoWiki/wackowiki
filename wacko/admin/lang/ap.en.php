@@ -600,7 +600,7 @@ $ap_translation = [
 	'IpLoginLimitMaxInfo'		=> 'The threshold of login attempts allowed from a single IP address before an anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered by IP addresses.',
 
 	'LogSection'				=> 'Log settings',
-	'LogLevel'					=> 'Using logging',
+	'LogLevelUsage'				=> 'Using logging',
 	'LogLevelInfo'				=> 'The minimum priority of the events recorded in the log.',
 	'LogThresholds'	=> [
 		'0'		=> 'not keep a journal',
@@ -920,7 +920,7 @@ $ap_translation = [
 	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB/XtraDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
 	'ConvertTablesEngineHint'	=> '* XtraDB is an enhanced version of the InnoDB storage engine, designed to better scale on modern hardware, and it includes a variety of other features useful in high performance environments.<br><br>It is fully backwards compatible, and it identifies itself to MariaDB as "<code>ENGINE=InnoDB</code>" (just like InnoDB), and so can be used as a drop-in replacement for standard InnoDB.',
 
-	'DbVersion'					=> 'Requires at least MySQL 5.6.4, available version',
+	'DbVersionMin'				=> 'Requires at least MySQL 5.6.4, available version',
 	'DbEngineOk'				=> 'InnoDB/XtraDB is available.',
 	'DbEngineMissing'			=> 'InnoDB / XtraDB is not available.',
 	'EngineTable'				=> 'Table',
@@ -980,7 +980,7 @@ $ap_translation = [
 	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
-	'SysMsgInfo'				=> '',
+	'SystemMessageInfo'			=> '',
 	'SysMsgUpdated'				=> 'Updated system message',
 
 	'SysMsgSection'				=> 'System message',
@@ -1295,12 +1295,6 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Enable Reverse Proxy',
 	'BbReverseProxyHeader'		=> 'Header containing Internet clients IP address',
 	'BbReverseProxyAddresses'	=> 'IP address or CIDR format address ranges for your proxy servers (one per line)',
-
-		''				=> '',
-		''				=> '',
-		''				=> '',
-		''				=> '',
-
 
 ];
 

@@ -26,8 +26,8 @@ $wacko_translation = [
 	'RegistrationUserNameOwned'	=> 'Il nome è già utilizzato, scegline un altro.',
 	'RegistrationPage'			=> 'Registrazione',
 	'SiteRegistered'			=> 'Ti sei registrato con successo sul sito %1.',
-	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'RegistrationEmailInfo'		=> 'Un indirizzo e-mail valido. Tutte le e-mail del sistema saranno inviate a questo indirizzo. L\'indirizzo e-mail non viene reso pubblico e verrà utilizzato solo se si desidera ricevere una nuova password o se si desidera ricevere determinate notizie o notifiche via e-mail.',
+	'SiteEmailConfirm'			=> 'Conferma il tuo indirizzo e-mail cliccando sul link nelle istruzioni che ti sono state inviate. <br>Se non verifichi il tuo indirizzo e-mail, non sarai in grado di recuperare un\'eventuale password persa. Inoltre, non ti verranno notificati i recenti cambiamenti di pagina e i commenti.',
 	'NameTooShort'				=> 'Il nome utente è troppo corto, è richiesto un minimo di %2 caratteri.',
 	'NameTooLong'				=> 'Il nome utente è troppo lungo, è consentito un massimo di %2 caratteri.',
 	'NameAlphanumOnly'			=> 'Il nome utente deve avere minimo %1 e massimo %2 caratteri, deve contenere solo caratteri alfanumerici.',
@@ -35,19 +35,19 @@ $wacko_translation = [
 	'NewUserAccount'			=> 'nuovo account utente',
 
 	'NewAccountSubject'			=> 'Nuovo account registrato',
-	'NewAccountAdminCreated'	=> 'The user %1 has created an account for you with username "%2". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:',
+	'NewAccountAdminCreated'	=> 'L\'utente %1 ha creato per te un account con il nome utente "%2". Per completare la registrazione, visitate il seguente URL (assicuratevi che sia inserito come riga singola) e impostate la vostra password di accesso:',
 	'NewAccountUsername'		=> 'Nome utente:',
 	'AccountLanguage'			=> 'Lingua:',
 	'NewAccountEmail'			=> 'E-mail:',
 	'NewAccountIP'				=> 'Indirizzo IP:',
 	'NewAccountSignupInfo'		=> 'È stato creato il seguente account:',
 
-	'UserWaitingApproval'		=> 'An email has been sent to the site administrator. The administrator will review the information that has been submitted and either approve or deny your request.',
-	'UserRequiresApproval'		=> 'To approve or deny this user access to %1 go to the admin panel.',
-	'UserApprovalInfo'			=> 'After you register, your request will be sent to the site administrator for approval. You will then receive an email with further instructions.',
+	'UserWaitingApproval'		=> 'Una e-mail è stata inviata all\'amministratore del sito. L\'amministratore esaminerà le informazioni inviate e approverà o negherà la vostra richiesta.',
+	'UserRequiresApproval'		=> 'Per approvare o negare a questo utente l\'accesso a %1 vai al pannello di amministrazione.',
+	'UserApprovalInfo'			=> 'Dopo la registrazione, la richiesta verrà inviata all\'amministratore del sito per l\'approvazione. Riceverai un\'e-mail con ulteriori istruzioni.',
 	'UserApprovalHint'			=> 'L\'attivazione di successo del tuo account sarà annunciata in una specifica e-mail. Fino ad allora non è possibile effettuare il login.',
 
-	'UserApprovalPending'		=> 'Your account is still pending approval.',
+	'UserApprovalPending'		=> 'Il tuo account è ancora in attesa di approvazione.',
 	'UserApprovalDenied'		=> 'Al tuo account è stato negato l\'accesso a questo sito.',
 
 	'RegistrationApproved'		=> 'Registrazione approvata',
@@ -86,7 +86,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'Il nome utente o la password che hai inserito non sono validi.',
 	'WelcomeBack'				=> 'Ben tornato, %1',
-	'LoginAttemtsExceeded'		=> 'Hai superato il numero massimo di tentativi di accesso.<br>In aggiunta ai dati nome utente e password dovrai inserire anche il codice di conferma che leggi nell’immagine sottostante.',
+	'LoginAttemtsExceeded'		=> 'Hai superato il numero massimo di tentativi di accesso.<br>In aggiunta ai dati nome utente e password dovrai inserire anche il codice di conferma che leggi nell\'immagine sottostante.',
 
 	// session notice
 	'IPAddressChanged'			=> 'Indirizzo IP cambiato in %1 (was %2)',
@@ -178,10 +178,10 @@ $wacko_translation = [
 	'DeleteText'				=> 'Cancella',
 	'EditACLConfirm'			=> 'Vuoi davvero uscire senza salvare?',
 	'ACLText'					=> 'Modifica i permessi (ACL)',
-	'ACLTip'					=> 'Edit Permissions',
+	'ACLTip'					=> 'Modifica Autorizzazioni',
 	'EditPropertiesConfirm'		=> 'Vuoi davvero uscire senza salvare?',
 	'PropertiesText'			=> 'Proprietà',
-	'PropertiesTip'				=> 'Edit Page Properties',
+	'PropertiesTip'				=> 'Modifica le proprietà della pagina',
 	'EditTip'					=> 'Clicca per editare la pagina.',
 	'EditText'					=> 'Edita questa pagina',
 	'EditCommentTip'			=> 'Modifica commento',
@@ -217,13 +217,13 @@ $wacko_translation = [
 	'ACLStoreButton'			=> 'Registra i permessi (ACL)',
 	'ACLCancelButton'			=> 'Annulla',
 	'ACLAccessDenied'			=> 'Non sei il proprietario di questa pagina.',
-	'AclSyntaxError'			=> 'Access control list syntax error',
-	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
-									'<code>$</code> - only registered users<br>' .
-									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
-									'<code>[UserName]</code> - names of allowed users<br>' .
-									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
-									'<code>(an empty list)</code> - only the page owner has access',
+	'AclSyntaxError'			=> 'Errore di sintassi della lista di controllo accessi',
+	'AclHelp'					=> '<code>*</code> - a tutti è permesso<br>' .
+									'<code>$</code> - solo utenti registrati<br>' .
+									'<code>!</code> - un punto esclamativo precedente nega il rispettivo diritto<br>' .
+									'<code>[UserName]</code> - nomi degli utenti autorizzati<br>' .
+									'<code>[GroupName]</code> - nomi di gruppi di utenti autorizzati (alias)<br>' .
+									'<code>(an empty list)</code> - solo il proprietario della pagina ha accesso',
 
 	// purge handler
 	'PurgePage'					=> 'Purge page',
@@ -374,8 +374,8 @@ $wacko_translation = [
 	'RemoveComment'				=> 'Elimina commento',
 	'RemoveCluster'				=> 'Rimuovi tutte le pagine del cluster',
 	'RemoveDontKeep'			=> 'Non salvare una copia di una pagina e di commenti rimossi',
-	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
-	'RemoveDontKeepFile'		=> 'Do not save a copy of the removed file',
+	'RemoveDontKeepComment'		=> 'Non salvare una copia del commento rimosso',
+	'RemoveDontKeepFile'		=> 'Non salvare una copia del file rimosso',
 	'ReferrersRemoved'			=> ' Riferimenti rimossi.',
 	'LinksRemoved'				=> ' Links dalla pagina rimossi.',
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
@@ -389,7 +389,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page rimossi.',
-	'ActionHaveNoUndo'		=> 'Questa azione non può essere annullata.',
+	'ActionHaveNoUndo'			=> 'Questa azione non può essere annullata.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
@@ -400,7 +400,7 @@ $wacko_translation = [
 	'Footnotes'					=> 'Footnotes',
 	'Footnote'					=> 'Nota',
 	'MostPopularPages'			=> 'Pagine più popolari',
-	'MostCommentedPages'		=> 'Most commented pages',
+	'MostCommentedPages'		=> 'Pagine più commentate',
 	'NoAccessToSourcePage'		=> 'Non ti è permesso leggere la pagina-sorgente dell\'azione.',
 	'SourcePageDoesntExist'		=> 'La pagina-sorgente dell\'azione non esiste ancora',
 	'NotLoggedInThusEdited'		=> ' Non sei connesso, dunque la lista delle pagine da te editate non può essere richiamata.',
@@ -486,7 +486,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Vedi l\'elenco delle pagine di tua proprietà (MiePagine) e da te editate (MieModifiche).',
 	'AddBookmark'				=> 'Aggiungi pagina corrente ai QuickLink',
 	'RemoveBookmark'			=> 'Rimuovere dai segnalibri',
-	'CantAddBookmarks'			=> 'You must be registered to work with the bookmarks system.',
+	'CantAddBookmarks'			=> 'Devi essere registrato per lavorare con il sistema dei segnalibri.',
 	'YourBookmarks'				=> 'I tuoi QuickLink',
 	'YourLanguage'				=> 'Scegli la lingua',
 	'ShowSpaces'				=> 'Mostra gli spazi nei NomiWiki',
@@ -594,7 +594,7 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Non consentire il reindirizzo automatico dall\'azione di Reindirizzo.',
 	'SendWatchEmail'			=> 'Spedisci una mail di notifica quando qualcuno (tranne te) modifica una pagina da te  controllata',
-	'AllowIntercom'				=> 'Allow personal messages from users of the system',
+	'AllowIntercom'				=> 'Consentire messaggi personali degli utenti del sistema',
 	'AllowMassemail'			=> 'Gli amministratori possono inviarti e-mail',
 	'HideLastSession'			=> 'Nascondi l\'ultima sessione',
 	'ValidateIP'				=> 'Legare la sessione a IP',
@@ -668,7 +668,7 @@ $wacko_translation = [
 
 	// users action
 	'UsersSearch'				=> 'Trova utenti',
-	'UsersFilter'				=> 'Search',
+	'UsersFilter'				=> 'Ricerca',
 	'UsersOpenProfile'			=> 'Guarda il profilo',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'Nome',
@@ -703,22 +703,22 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[nascosto]',
 	'UsersIntercomSubject'		=> 'Soggetto',
 	'UsersIntercomSubjectN'		=> '[inizia un nuovo argomento]',
-	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
+	'UsersIntercomDisabled'		=> 'Spiacente, non vuoi o non puoi ricevere messaggi personali.',
 	'UsersIntercomHint'			=> 'Effettua il login per primo e segui di nuovo il link, se vuoi rispondere al messaggio personale che hai ricevuto.',
 	'UsersIntercomSend'			=> 'Submit',
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
 								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
 								   'similar form on your profile page. ',
 	'UsersPMOversized'			=> 'The length of your message exceeds the maximum permissible to %1 characters. Please shorten your message and submit again.',
-	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
-	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
-	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
-	'UsersPMBody'				=> 'This message has been sent to you by the user %1.',
-	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'UsersPMFlooded'			=> 'L\'intervallo tra l\'invio di messaggi personali non deve essere inferiore a %1 secondi.',
+	'UsersPMSent'				=> 'Il messaggio personale è stato inviato con successo all\'utente.',
+	'UsersPMPlnSent'			=> 'Messaggio personale inviato all\'utente in chiaro.',
+	'UsersPMBody'				=> 'Questo messaggio è stato inviato dall\'utente %1.',
+	'UsersPMReply'				=> 'Per rispondere a questa e-mail, clicca sul seguente link (non utilizzare il pulsante Rispondi / Rispondi nella posta):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 								   'violates the rules of the site, please send it (using the button Forward /' .
 								   'Forward your mail program) to address %1.',
-	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send personal messages to users.',
+	'UsersPMNotLoggedIn'		=> 'Non sei registrato nel sistema e non puoi inviare messaggi personali agli utenti.',
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
@@ -790,8 +790,8 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Versione di Videoscrittura',
 	'SettingsLatex'				=> 'Versione di LaTeX',
 	'SettingsXML'				=> 'Esporta in XML',
-	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
-	'BewareChangeLang'			=> 'Don\'t change language, if you don\'t know exactly, what are you doing. Change of language setting will lead to renaming of the page according to transliteration rules of selected language. All non-english content will become unreadable also. You could turn those effects backward by returning language setting to its initial value.',
+	'NeedToChangeLang'			=> 'Il linguaggio della pagina non supportato "<code>%1</code>" deve essere cambiato.',
+	'BewareChangeLang'			=> 'Non cambiare lingua, se non sai esattamente cosa stai facendo. Il cambiamento di impostazione della lingua porterà a rinominare la pagina secondo le regole di traslitterazione della lingua selezionata. Anche tutti i contenuti non inglesi diventeranno illeggibili. Potresti far tornare questi effetti indietro, riportando l\'impostazione della lingua al suo valore iniziale.',
 	'SetLang'					=> 'Lingua di questa pagina',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Mostra in navigazione',
@@ -992,7 +992,7 @@ $wacko_translation = [
 	'Captcha'					=> 'Inserire la parola visibile nell\'immagine',
 	'CaptchaFailed'				=> 'La parola inserita non è corretta. Si prega di riprovare.',
 	'CaptchaReload'				=> 'Nuova Captcha',
-	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
+	'CaptchaReloadWarning'		=> 'Spiacente, non è possibile ricaricare l\'immagine captcha, si dovrà ricaricare la pagina per farlo',
 
 	// news
 	'News'						=> 'Notizie',
@@ -1217,7 +1217,7 @@ $wacko_translation = [
 		'es' => 'Spanish',
 	],
 
-	'AccountStatus'				=> 'Account status',
+	'AccountStatus'				=> 'Stato del conto',
 	'AccountStatusArray' => [
 		'0' => 'attivo',
 		'1' => 'pending',
@@ -1262,7 +1262,7 @@ $wacko_translation = [
 	// loading error
 	'UnknownAction'				=> 'Sconosciuto azione',
 	'UnknownMethod'				=> 'Unknown method',
-	'FormatterNotFound'			=> 'Formatter %1 not found',
+	'FormatterNotFound'			=> 'Formattatore %1 non trovato',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',
