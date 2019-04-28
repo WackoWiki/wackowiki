@@ -347,7 +347,7 @@ function get_table(&$engine, $table, $drop = true)
 		$index[$kname][] = '`' . $row['Column_name'] . '`' . ($row['Sub_part'] ? '(' . $row['Sub_part'] . ')' : '' );
 	}
 
-	while (list($x, $columns) = @each($index))
+	foreach ($index as $x => $columns)
 	{
 		$schema_create .= ", \n";
 
