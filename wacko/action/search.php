@@ -190,7 +190,7 @@ $preview_text = function ($text, $limit, $tags = 0)
 
 	if ($tags == 0)
 	{
-		return substr($text, 0, $limit) . ' [..]';
+		return substr($text, 0, $limit) . ' [...]';
 	}
 	else
 	{
@@ -222,7 +222,7 @@ $preview_text = function ($text, $limit, $tags = 0)
 			}
 		}
 
-		return $return . '[..]';
+		return $return . '[...]';
 	}
 };
 

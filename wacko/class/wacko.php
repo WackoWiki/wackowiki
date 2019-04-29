@@ -2034,7 +2034,7 @@ class Wacko
 			if (!$comment_on_id && $this->forum)
 			{
 				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[..]' : $desc);
+				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[...]' : $desc);
 			}
 
 			// PreFormatter (macros and such)
@@ -8336,7 +8336,7 @@ class Wacko
 
 	function shorten_string($string, $maxlen = 80)
 	{
-		return (strlen($string) > $maxlen)?  substr($string, 0, 30) . '[..]' . substr($string, -20) : $string;
+		return (strlen($string) > $maxlen)?  substr($string, 0, 30) . '[...]' . substr($string, -20) : $string;
 	}
 
 	// show captcha form on a page. must be incorporated as an input

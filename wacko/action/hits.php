@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 // {{hits}}
 // take $this->page['hits'] in the first place
 
-if (!isset($page))			$page	= '';
+if (!isset($page))		$page	= '';
 $result = 0;
 
 if ($page)
