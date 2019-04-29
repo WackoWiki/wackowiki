@@ -61,7 +61,7 @@ if ($linking_to = $_GET['linking_to'] ?? '')
 {
 	$tpl->to_target = $this->link($linking_to);
 
-	if ($pages = $this->load_pages_linking_to($linking_to, $root))
+	if ($pages = $this->load_pages_linking($linking_to, $root))
 	{
 		foreach ($pages as $page)
 		{
@@ -101,7 +101,7 @@ else
 					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
 
-					if ($referring_pages = $this->load_pages_linking_to($page['wanted_tag'], $root))
+					if ($referring_pages = $this->load_pages_linking($page['wanted_tag'], $root))
 					{
 						foreach ($referring_pages as $referrer_page)
 						{

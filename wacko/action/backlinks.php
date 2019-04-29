@@ -19,7 +19,7 @@ if (!$nomark)
 	$tpl->emark		= true;
 }
 
-if (($pages = $this->load_pages_linking_to($tag)))
+if (($pages = $this->load_pages_linking($tag)))
 {
 	foreach ($pages as $page)
 	{

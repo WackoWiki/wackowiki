@@ -1677,7 +1677,7 @@ class Wacko
 		return [$revisions, $pagination];
 	}
 
-	function load_pages_linking_to($to_tag, $tag = '')
+	function load_pages_linking($to_tag, $tag = '')
 	{
 		return $this->db->load_all(
 			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
