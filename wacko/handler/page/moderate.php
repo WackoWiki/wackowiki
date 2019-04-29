@@ -1159,7 +1159,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
-		$body = (strlen($body) > 300 ? substr($body, 0, 300) . '[..]' : $body);
+		$body = (strlen($body) > 300 ? substr($body, 0, 300) . '[...]' : $body);
 		$body = Ut::html($body);
 
 		// display list
@@ -1301,7 +1301,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				$desc = $this->format($comment['body'], 'cleanwacko');
-				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300) . '[..]' : $desc);
+				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300) . '[...]' : $desc);
 				$desc = Ut::html($desc);
 
 				$tpl->comment	= $comment;
