@@ -327,7 +327,10 @@ function admin_config_formatter(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="enable_urls_underscores"><strong><?php echo $engine->_t('UrlsUnderscores');?>:</strong><br>
-					<small><?php echo $engine->_t('UrlsUnderscoresInfo');?></small></label>
+					<small><?php echo Ut::perc_replace(
+									$engine->_t('UrlsUnderscoresInfo'),
+									'<code>http://[...]/WackoWiki</code>',
+									'<code>http://[...]/Wacko_Wiki</code>');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="enable_urls_underscores" name="urls_underscores" value="1"<?php echo ($engine->db->urls_underscores ? ' checked' : '');?>>

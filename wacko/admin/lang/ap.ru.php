@@ -669,7 +669,7 @@ $ap_translation = [
 	'Nofollow'					=> 'nofollow',
 	'NofollowInfo'				=> 'Запрещает поисковым ботам переходить по ссылкам на данной странице или по конкретной ссылке. Добавляет <code>rel="nofollow"</code>.',
 	'UrlsUnderscores'			=> 'Добавлять в линк знак подчёркивания',
-	'UrlsUnderscoresInfo'		=> 'Например <code>http://[..]/WackoWiki</code> превратится в <code>http://[..]/Wacko_Wiki</code> при включенной опции.',
+	'UrlsUnderscoresInfo'		=> 'Например %1 превратится в %2 при включенной опции.',
 	'ShowSpaces'				=> 'Показывать пробелы в ВикиИменах',
 	'ShowSpacesInfo'			=> 'Например <code>ВикиИмя</code> бодет показано в виде <code>Вики Имя</code>.',
 	'NumerateLinks'				=> 'Нумеровать линки в версии для  печати',

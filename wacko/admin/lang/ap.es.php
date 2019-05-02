@@ -681,7 +681,7 @@ $ap_translation = [
 	'Nofollow'					=> 'nofollow',
 	'NofollowInfo'				=> 'Instruct some search engines that the hyperlink should not influence the ranking of the link\'s target in the search engine\'s index. Adds <code>rel="nofollow"</code> to the link syntax.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
-	'UrlsUnderscoresInfo'		=> 'For example <code>http://[..]/WackoWiki</code> becames <code>http://[..]/Wacko_Wiki</code> with this option.',
+	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> beeing displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Numerate links in print view',
