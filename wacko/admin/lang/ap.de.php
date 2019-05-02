@@ -645,7 +645,7 @@ $ap_translation = [
 	'RegistrationDelayInfo'		=> 'Die minimale Zeitschwelle für das Ausfüllen des Registrierungsformulars, um Bots von Menschen zu unterscheiden (in Sekunden).',
 
 	//Formatter settings
-	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'FormatterSettingsInfo'		=> 'Gruppe von Parametern, die für die Feinabstimmung der Plattform verantwortlich sind. Ändere sie nicht, es sei denn, du bist mit ihrer Funktionsweise vertraut.',
 	'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
 
 	'TextHandlerSection'		=> 'Text Handler ',
@@ -691,7 +691,7 @@ $ap_translation = [
 	'Nofollow'					=> 'nofollow',
 	'NofollowInfo'				=> 'Weist Suchmaschinen an, daß die Hyperlinks sich nicht auf das Seiten-Ranking der Zielseite im Suchmaschinenindex auswirken sollen. Fügt <code>rel="nofollow"</code> zum Link-Syntax hinzu.',
 	'UrlsUnderscores'			=> 'Bildet Adressen (URLs) mit Unterstrichen',
-	'UrlsUnderscoresInfo'		=> 'Beispielsweise <code>http://[..]/WackoWiki</code> wird zu <code>http://[..]/Wacko_Wiki</code> mit dieser Option.',
+	'UrlsUnderscoresInfo'		=> 'Beispielsweise %1 wird zu %2 mit dieser Option.',
 	'ShowSpaces'				=> 'Zeigt Leerzeichen in WikiNamen',
 	'ShowSpacesInfo'			=> 'Zeigt Leerzeichen in WikiNamen, e.g. <code>MyName</code> wird angezeigt als <code>My Name</code> mit dieser Option.',
 	'NumerateLinks'				=> 'Nummeriert die Links in der Druckansicht',

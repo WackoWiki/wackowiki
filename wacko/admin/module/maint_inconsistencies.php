@@ -722,8 +722,6 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		if ($_REQUEST['file_action'] == 'check_inconsistencies')
 		{
 			// 1. get db records
-
-
 			$files = $engine->db->load_all(
 				"SELECT f.file_id, f.page_id, f.file_ext, f.file_name " .
 				"FROM " . $engine->db->table_prefix . "file f ");
@@ -845,7 +843,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		?>
 		<h2><?php echo $engine->_t('CheckDatabase'); ?></h2>
 		<?php
-		echo $engine->_t('CheckDatabaseInfo');
+		echo '<p>' . $engine->_t('CheckDatabaseInfo') . '</p><br>';
 		echo $engine->form_open('db_inconsistencies');
 		?>
 		<input type="hidden" name="db_action" value="check_inconsistencies">
@@ -856,7 +854,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 		<h2><?php echo $engine->_t('CheckFiles'); ?></h2>
 		<?php
-		echo $engine->_t('CheckFilesInfo');
+		echo '<p>' . $engine->_t('CheckFilesInfo') . '</p><br>';
 		echo $engine->form_open('file_inconsistencies');
 		?>
 		<input type="hidden" name="file_action" value="check_inconsistencies">
