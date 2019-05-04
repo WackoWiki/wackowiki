@@ -4190,6 +4190,8 @@ class Wacko
 
 			if ($handler)
 			{
+				// strip handler from page tag
+				$unwtag		= substr($unwtag, 0, - (strlen($handler) + 1));
 				$method		= $handler;
 			}
 
