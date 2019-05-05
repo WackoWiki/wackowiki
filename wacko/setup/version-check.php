@@ -33,7 +33,7 @@ write_config_hidden_nodes(['none' => '']);
 </p>
 	<?php
 
-	# $db_version			= "SELECT VERSION() as mysql_version";
+	#$db_version			= "SELECT VERSION() as mysql_version";
 
 	/*
 	 Check which database extensions are installed and what versions of the db are there
@@ -132,6 +132,7 @@ write_config_hidden_nodes(['none' => '']);
 		[CACHE_CONFIG_DIR,		0777],
 		[CACHE_FEED_DIR,		0777],
 		[CACHE_PAGE_DIR,		0777],
+		[CACHE_SESSION_DIR,		0777],
 		[CACHE_SQL_DIR,			0777],
 		[CACHE_TEMPLATE_DIR,	0777],
 		[CONFIG_FILE,			0777],
