@@ -4395,7 +4395,7 @@ class Wacko
 				}
 
 				// disable and visualize self-referencing link
-				if ($this->db->youarehere_text)
+				if ($this->db->youarehere_text && !$handler)
 				{
 					if (isset($this->context[$this->current_context]) && ($this->translit($tag) == $this->translit($this->context[$this->current_context])) )
 					{
@@ -4455,6 +4455,8 @@ class Wacko
 				// https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
 				if ($this->db->noreferrer || $this->db->nofollow)
 				{
+					$_rel = [];
+
 					if ($this->db->link_target)
 					{
 						$_rel[] = 'noopener';

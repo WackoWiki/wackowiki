@@ -213,12 +213,13 @@ hr {
 /*
    Write Config Specific
 */
+p.security,
 ul.security {
 	padding: 10px;
 	border: 1px solid #d893a1;
 	background: #fbe6f2;
 }
-
+p.security,
 ul.security li {
 	min-height: 23px;
 	padding: 3px 0 0 35px;
