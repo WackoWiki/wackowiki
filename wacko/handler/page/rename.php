@@ -116,24 +116,47 @@ if ($registered
 		}
 		else
 		{
-			// show rename form
-			$tpl->f_tag	= $this->tag;
-
-			if ($this->db->default_rename_redirect == 1)
+			if ($this->db->multilanguage)
 			{
-				$tpl->f_checked	= ' checked';
+				$languages			= $this->_t('LanguageArray');
+
+				$tpl->l_language	= $languages[$this->page_lang];
+				$tpl->l_lang		= $this->page_lang;
+				$tpl->l_charset		= $this->get_charset();
 			}
 
-			if ($this->check_acl($user_name, $this->db->rename_globalacl))
+			$user_lang			= $user['user_lang'] ?: $this->db->language;
+
+			// avoid translieration and charset conflict
+			if ($this->get_charset($this->page['page_lang']) != $this->get_charset($user_lang))
 			{
-				$tpl->f_global = true;
+				$tpl->m_warning = Ut::perc_replace($this->_t('RenameCharsetConflict'), '[<code>' . $user_lang . '</code>]', '[<code>' . $this->page['page_lang'] . '</code>]');
 			}
+			else
+			{
+				$tpl->enter('f_');
 
-			// show backlinks
-			$tpl->f_backlinks	= $this->action('backlinks', ['nomark' => 0]);
+				// show rename form
+				$tpl->tag	= $this->tag;
 
-			// show sub-pages
-			$tpl->f_tree 		= $this->action('tree', ['depth' => 3]);
+				if ($this->db->default_rename_redirect == 1)
+				{
+					$tpl->checked	= ' checked';
+				}
+
+				if ($this->check_acl($user_name, $this->db->rename_globalacl))
+				{
+					$tpl->global = true;
+				}
+
+				// show backlinks
+				$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
+
+				// show sub-pages
+				$tpl->tree 		= $this->action('tree', ['depth' => 3]);
+
+				$tpl->leave();
+			}
 		}
 	}
 }
@@ -146,6 +169,8 @@ function recursive_move(&$engine, $root, $new_root)
 {
 	$message	= '';
 	$new_root	= trim($new_root, '/');
+	$user		= $engine->get_user();
+	$user_lang	= $user['user_lang'] ?: $engine->db->language;
 
 	if ($root == '/')
 	{
@@ -156,7 +181,7 @@ function recursive_move(&$engine, $root, $new_root)
 	$owner_id	= '';
 	$_root		= $engine->translit($root);
 	$pages		= $engine->db->load_all(
-					"SELECT page_id, tag, supertag " .
+					"SELECT page_id, tag, supertag, page_lang " .
 					"FROM " . $engine->db->table_prefix . "page " .
 					"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " " .
 						" OR supertag = " . $engine->db->q($_root) . ") " .
@@ -170,6 +195,15 @@ function recursive_move(&$engine, $root, $new_root)
 	foreach ($pages as $page)
 	{
 		$message .= '<li><strong>' . $page['tag'] . "</strong>\n";
+
+		if ($engine->get_charset($page['page_lang']) != $engine->get_charset($user_lang))
+		{
+			$message .= "<ul>\n";
+			$message .= '<li>' . Ut::perc_replace($engine->_t('SkipCharsetConflict'), $engine->link('/' . $page['tag']), '<code>' . $page['page_lang'] . ' (' . $engine->get_charset($page['page_lang']) . ')</code>') . "</li>\n";
+			$message .= "</ul>\n";
+			$message .= "</li>\n";
+			continue;
+		}
 
 		// $new_tag = str_replace( $root, $new_root, $page['tag'] );
 		$new_tag = preg_replace('/' . preg_quote($root, '/') . '/', preg_quote($new_root), $page['tag'], 1);

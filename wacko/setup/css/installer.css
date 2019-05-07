@@ -168,6 +168,14 @@ hr {
 	padding: 10px 10px 10px 40px;
 	position: relative;
 }
+p.security {
+	border: 1px solid #d893a1;
+	width: auto;
+	background: #fbe6f2 url('../image/warning.svg') no-repeat scroll 10px 10px;
+	margin: 10px 43px;
+	padding: 10px 10px 10px 40px;
+	position: relative;
+}
 
 /*
    Version Check Specific
@@ -213,13 +221,11 @@ hr {
 /*
    Write Config Specific
 */
-p.security,
 ul.security {
 	padding: 10px;
 	border: 1px solid #d893a1;
 	background: #fbe6f2;
 }
-p.security,
 ul.security li {
 	min-height: 23px;
 	padding: 3px 0 0 35px;
