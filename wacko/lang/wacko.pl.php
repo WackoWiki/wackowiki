@@ -548,6 +548,8 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Przepraszamy. Tylko autor strony mo¿e zmieniæ jej nazwê.',
 	'NeedRedirect'				=> 'Utwórz przekierowanie ze starej do nowej strony',
 	'RedirectCreated'			=> 'Na poprzedniej stronie %1 utworzono przekierowanie do nowej nazwy.',
+	'RenameCharsetConflict'		=> 'Zmieñ jêzyk u¿ytkownika %1 na ten sam jêzyk, co na tej stronie %2, aby unikn±æ konfliktu charsetów podczas zmiany nazwy. W przeciwnym razie linki do tej strony mog± nie byæ ju¿ wa¿ne, a strona mo¿e staæ siê niedostêpna.',
+	'SkipCharsetConflict'		=> 'Strona %1 bez zmiany nazwy, inny zestaw znaków %2.',
 
 	'UserSettings'				=> 'Ustawienia u¿ytkownika',
 	'UserSettingsGeneral'		=> 'General',

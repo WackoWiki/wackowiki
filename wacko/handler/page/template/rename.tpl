@@ -1,6 +1,13 @@
 [ === main === ]
+	[= l _ =
+		<span class="page-lang" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
+	=]
 	<h3>[ ' _t: RenamePage ' ] [ ' page ' ]</h3><br>
+	[= m _ =
+		<div class="warning">[ ' warning ' ]</div>
+	=]
 	[= f _ =
+		
 		[ ' _t: NewName ' ]
 		<form action="[ ' href: rename ' ]" method="post" name="rename_page">
 			[ ' csrf: rename_page ' ]
