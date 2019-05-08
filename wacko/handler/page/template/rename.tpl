@@ -7,7 +7,6 @@
 		<div class="warning">[ ' warning ' ]</div>
 	=]
 	[= f _ =
-		
 		[ ' _t: NewName ' ]
 		<form action="[ ' href: rename ' ]" method="post" name="rename_page">
 			[ ' csrf: rename_page ' ]
