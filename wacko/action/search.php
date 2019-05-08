@@ -385,6 +385,12 @@ if (strlen($phrase) >= 3)
 					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);
+
+					if ($this->db->multilanguage)
+					{
+						$tpl->l_lang	= '- ' . $page['page_lang'];
+					}
+
 					if ($page['comments'])
 					{
 						$tpl->l_comments_n	= $page['comments'];

@@ -127,7 +127,7 @@ if ($registered
 
 			$user_lang			= $user['user_lang'] ?: $this->db->language;
 
-			// avoid translieration and charset conflict
+			// avoid transliteration and charset conflict
 			if ($this->get_charset($this->page['page_lang']) != $this->get_charset($user_lang))
 			{
 				$tpl->m_warning = Ut::perc_replace($this->_t('RenameCharsetConflict'), '[<code>' . $user_lang . '</code>]', '[<code>' . $this->page['page_lang'] . '</code>]');
@@ -196,12 +196,13 @@ function recursive_move(&$engine, $root, $new_root)
 	{
 		$message .= '<li><strong>' . $page['tag'] . "</strong>\n";
 
+		// avoid transliteration and charset conflict
 		if ($engine->get_charset($page['page_lang']) != $engine->get_charset($user_lang))
 		{
 			$message .= "<ul>\n";
 			$message .= '<li>' . Ut::perc_replace($engine->_t('SkipCharsetConflict'), $engine->link('/' . $page['tag']), '<code>' . $page['page_lang'] . ' (' . $engine->get_charset($page['page_lang']) . ')</code>') . "</li>\n";
-			$message .= "</ul>\n";
-			$message .= "</li>\n";
+			$message .= "</ul>\n</li>\n";
+
 			continue;
 		}
 
