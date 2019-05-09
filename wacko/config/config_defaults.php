@@ -38,7 +38,7 @@ $wacko_config_defaults = [
 											? ':' . $_SERVER['SERVER_PORT']
 											: ''
 										) .
-										($path = preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/'))
+										(($path = preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')))
 											? '/' . $path
 											: ''
 										) . '/' ,
