@@ -1130,8 +1130,8 @@ $ap_translation = [
 	'GroupsActive'				=> 'Aktywny',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
-	'GroupsAlreadyExists'		=> 'This group already exists.',
-	'GroupsAdded'				=> 'Group added successfully.',
+	'GroupsAlreadyExists'		=> 'Ta grupa ju¿ istnieje.',
+	'GroupsAdded'				=> 'Grupa zosta³a pomy¶lnie dodana.',
 	'GroupsRenamed'				=> 'Group successfully renamed.',
 	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
 	'GroupsAdd'					=> 'Add a new group',
@@ -1148,9 +1148,15 @@ $ap_translation = [
 	'GroupsRemoveButton'		=> 'Usuñ',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
+	'GroupAddMember'			=> 'Dodaj cz³onka',
+	'GroupRemoveMember'			=> 'Usuñ cz³onka',
+	'GroupAddNew'				=> 'Dodaj grupê',
+	'GroupEdit'					=> 'Grupa redakcyjna',
+	'GroupDelete'				=> 'Usuñ grupê',
+
 	'MembersAddNew'				=> 'Add new member',
 	'MembersAdded'				=> 'Added new member to the group successfully.',
-	'MembersRemove'				=> 'Are you sure you want to remove member ',
+	'MembersRemove'				=> 'Are you sure you want to remove member %1?',
 	'MembersRemoved'			=> 'The member was removed from the group.',
 	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 

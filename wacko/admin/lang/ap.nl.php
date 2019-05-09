@@ -1147,9 +1147,15 @@ $ap_translation = [
 	'GroupsRemoveButton'		=> 'Remove',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
+	'GroupAddMember'			=> 'Lid toevoegen',
+	'GroupRemoveMember'			=> 'Lid verwijderen',
+	'GroupAddNew'				=> 'Groep toevoegen',
+	'GroupEdit'					=> 'Groep bewerken',
+	'GroupDelete'				=> 'Groep verwijderen',
+
 	'MembersAddNew'				=> 'Add new member',
 	'MembersAdded'				=> 'Added new member to the group successfully.',
-	'MembersRemove'				=> 'Are you sure you want to remove member ',
+	'MembersRemove'				=> 'Are you sure you want to remove member %1?',
 	'MembersRemoved'			=> 'The member was removed from the group.',
 	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 
