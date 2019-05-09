@@ -113,10 +113,11 @@ function admin_user_groups(&$engine, &$module)
 					"FROM " . $engine->db->user_table." " .
 					"WHERE user_id NOT IN (" . $subqery_members.") " .
 						"AND account_type = 0 " .
+						"AND enabled = 1 " .
 					"ORDER BY BINARY user_name");
 
 				#Ut::debug_print_r($available_users);
-
+				echo '<h2>' . $engine->_t('GroupAddMember') . '</h2>';
 				echo $engine->form_open('add_group_member');
 
 				echo '<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
@@ -143,7 +144,7 @@ function admin_user_groups(&$engine, &$module)
 					'<tr>
 						<td>
 							<br>
-							<input type="submit" id="submit" name="add_member" value="' . $engine->_t('GroupsSaveButton') . '"> ' .
+							<input type="submit" id="submit" name="add_member" value="' . $engine->_t('GroupsAddButton') . '"> ' .
 							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
 						'</td>
 					</tr>' .
@@ -162,6 +163,7 @@ function admin_user_groups(&$engine, &$module)
 					"WHERE user_id = " . (int) $_POST['change_member'] . " " .
 					"LIMIT 1"))
 				{
+					echo '<h2>' . $engine->_t('GroupRemoveMember') . '</h2>';
 					echo $engine->form_open('remove_group_member');
 
 					echo '<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
@@ -169,9 +171,9 @@ function admin_user_groups(&$engine, &$module)
 					'<table class="formation">' .
 						'<tr>
 							<td>
-								<label for="">' . $engine->_t('MembersRemove') . ' <code>' . Ut::html($member['user_name']) . '</code>?</label> ' .
-								'<input type="submit" id="submit" name="remove_member" value="yes"> ' .
-								'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="no"></a>' .
+								<label for="">' . Ut::perc_replace($engine->_t('MembersRemove'), '<code>' . Ut::html($member['user_name']) . '</code>') . '</label> ' .
+								'<input type="submit" id="submit" name="remove_member" value="' . $engine->_t('Remove') . '"> ' .
+								'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>' .
 								'<br><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
@@ -282,6 +284,7 @@ function admin_user_groups(&$engine, &$module)
 	// add new group
 	if (isset($_POST['create']))
 	{
+		echo '<h2>' . $engine->_t('GroupAddNew') . '</h2>';
 		echo $engine->form_open('add_group');
 
 		echo '<table class="formation">' .
@@ -357,6 +360,7 @@ function admin_user_groups(&$engine, &$module)
 			WHERE group_id = " . (int) $_POST['change'] . "
 			LIMIT 1"))
 		{
+			echo '<h2>' . $engine->_t('GroupEdit') . '</h2>';
 			echo $engine->form_open('edit_group');
 
 			echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
@@ -428,6 +432,7 @@ function admin_user_groups(&$engine, &$module)
 			}
 			else
 			{
+				echo '<h2>' . $engine->_t('GroupDelete') . '</h2>';
 				echo $engine->form_open('delete_group');
 
 				echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .

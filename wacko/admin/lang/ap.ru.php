@@ -1134,9 +1134,15 @@ $ap_translation = [
 	'GroupsRemoveButton'		=> 'Удалить',
 	'GroupsEditInfo'			=> 'Для редактирования списка групп выберите радио-кнопку.',
 
+	'GroupAddMember'			=> 'Add member',
+	'GroupRemoveMember'			=> 'Remove Member',
+	'GroupAddNew'				=> 'Добавить группу',
+	'GroupEdit'					=> 'Редактировать группу',
+	'GroupDelete'				=> 'Удалить группу',
+
 	'MembersAddNew'				=> 'Добавить нового участника',
 	'MembersAdded'				=> 'Участник добавлен в группу.',
-	'MembersRemove'				=> 'Даете добро на удаление участника ',
+	'MembersRemove'				=> 'Даете добро на удаление участника %1?',
 	'MembersRemoved'			=> 'Участник из группы удален.',
 	'MembersDeleteInfo'			=> '* Внимание: Изменения затронут всех пользователей, входящих в группу.',
 
