@@ -6628,8 +6628,8 @@ class Wacko
 
 	function set_menu($set = MENU_AUTO, $update = false)
 	{
-		$menu_page_ids	= @$this->sess->menu_page_id ?: [];
-		$menu_formatted	= @$this->sess->menu ?: [];
+		$menu_page_ids	= $this->sess->menu_page_id ?? [];
+		$menu_formatted	= $this->sess->menu ?? [];
 
 		$user = $this->get_user();
 
