@@ -42,7 +42,7 @@
 	<div class="TopLeft">
 		[== // if user are logged, shows "You are UserName" ==]
 		[= uare _ =
-			<img src="[ ' db: theme_url ' ]icon/role.png" width="9" height="15" alt=""><span class="nobr">[ ' _t: YouAre ' ] [ ' link ' ]</span> <small>( <span class="nobr Tune">
+			<img src="[ ' db: theme_url ' ]icon/user.svg" width="16" height="16" alt=""><span class="nobr">[ ' _t: YouAre ' ] [ ' link ' ]</span> <small>( <span class="nobr Tune">
 			[ ' account ' ]
 			[= ap _ =
 				| <a id="login-ap" href="[ ' link ' ]" title="[ ' _t: AdminTip ' ]" target="_blank" rel="noopener">[ ' _t: AdminText ' ]</a>
@@ -121,14 +121,14 @@
 	<a href="[ ' href: watch ' ]">[ ' watch ' ]</a>
 	::
 	[= addmark _ =
-		<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/bookmark.png" width="12" height="12" alt="[ ' _t: AddBookmark ' ]"></a> ::
+		<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/bookmark.svg" width="16" height="16" alt="[ ' _t: AddBookmark ' ]"></a> ::
 	=]
 	[= removemark _ =
-		<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/unbookmark.png" width="12" height="12" alt="[ ' _t: RemoveBookmark ' ]"></a> ::
+		<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/bookmark-remove.svg" width="16" height="16" alt="[ ' _t: RemoveBookmark ' ]"></a> ::
 	=]
 =]
-	<a href="[ ' href: print ' ]"><img src="[ ' db: theme_url ' ]icon/print.png" width="21" height="20" alt="[ ' _t: PrintVersion ' ]"></a> :: 
-	<a href="[ ' href: wordprocessor ' ]"><img src="[ ' db: theme_url ' ]icon/wordprocessor.png" width="16" height="16" alt="[ ' _t: WordprocessorVersion ' ]"></a>
+	<a href="[ ' href: print ' ]"><img src="[ ' db: theme_url ' ]icon/print.svg" width="16" height="16" alt="[ ' _t: PrintVersion ' ]"></a> :: 
+	<a href="[ ' href: wordprocessor ' ]"><img src="[ ' db: theme_url ' ]icon/document.svg" width="16" height="16" alt="[ ' _t: WordprocessorVersion ' ]"></a>
 </div>
 <div class="header">
 	<h1><span class="Main">[ ' db: site_name ' ]:</span> [ ' pagepath ' ] </h1>

@@ -1,11 +1,19 @@
 /* Wiki Formatting ---------------------------------------- */
 
 /* Definitions: SYNTAX (?icq i seek you?) */
-dfn { font-variant: small-caps; letter-spacing: 0.1em; font-style: normal; cursor: help; border-bottom: 1px dotted #000; }
+dfn {
+	font-variant: small-caps;
+	letter-spacing: 0.1em;
+	font-style: normal;
+	cursor: help;
+	border-bottom: 1px dotted #000;
+}
 
 /* Strike through text: SYNTAX --text-- */
-del { color:#999999 }
-del a:visited, del a:link { color:#999999 }
+del { color: #999999; }
+
+del a:visited,
+del a:link { color: #999999; }
 
 
 /* Horizontal rule: SYNTAX ---- */
@@ -16,7 +24,7 @@ border-width:1px 0 0;
 }
 
 /* No line break */
-.nobr {white-space: nowrap}
+.nobr {white-space: nowrap;}
 
 /** List-related *************************************************************/
 
@@ -49,10 +57,10 @@ h5 { font-family: Arial;  font-size: 14px; padding-top:10px; padding-bottom:5px 
 
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
-.center{  text-align: center;}
+.center{ text-align: center;}
 
 /* Indent text: SYNTAX "  ", "  1.", etc. */
-.indent {  margin-left: 40px; }
+.indent { margin-left: 40px;}
 
 /** Revisions-related *********************************************************/
 
@@ -63,7 +71,10 @@ h5 { font-family: Arial;  font-size: 14px; padding-top:10px; padding-bottom:5px 
 }
 
 /* Displays text: "Comparison for..." */
-.diff-info { font-weight: bold; color: #555555; }
+.diff-info {
+	font-weight: bold;
+	color: #555555; 
+}
 
 /* Simple differences */
 .additions { color: #008800; }
@@ -77,9 +88,11 @@ ins.diff {
 }
 del.diff {
 	font-style: italic;
-	color:#c00;
+	color: #c00;
 	text-decoration: line-through;
 }
+
+/** Code wrapper-related ************************************************************/
 
 /* Code areas: SYNTAX %%code%% */
 
@@ -109,16 +122,26 @@ del.diff {
 }
 
 .usertable th {
+	background-color: #EEEEEE;
 }
 
-.usertable td, .usertable th
-{
+.usertable td,
+.usertable th {
 	border-width: 1px;
 	border-color: #999999;  
 	border-style: solid;  
 	padding: 4px;
-	vertical-align:top;  
+	vertical-align: top;
 }
+
+.usertable tr:hover {
+	background-color: #CCFFCC;
+}
+
+/* .usertable > tbody > tr:nth-of-type(2n+1) {
+	background-color: #f9f9f9;
+} */
+
 /* 100%-width tables: SYNTAX #| || Here | there || |# */
 .dtable { width:100%; border: 0 none; border-collapse: collapse; }
 .dtable td { vertical-align:top; border-width: 0;  border-color: #999999;  border-style: none;  padding: 4px; }
@@ -144,27 +167,57 @@ span.tocnumber {
 	margin-right: 0.3em;
 }
 
+/** File-related ************************************************************/
+
+img.media-default,
+img.media-left {
+	margin: .2em 1em .2em 0;
+}
+.media-left {
+	float: left;
+}
+
+img.media-center {
+	margin: .2em auto;
+}
+.media-center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+img.media-right {
+	margin: .2em 0 .2em 1em;
+}
+.media-right {
+	float: right;
+}
+
 /** Email-related ************************************************************/
 
 /* Quoted message on new email */
 
-.email1 {color:#800000}
-.email2 {color:#808000}
-.email-odd {color:#800000}
-.email-even {color:#808000}
+.email1 {color: #800000;}
+.email2 {color: #808000;}
+.email-odd {color: #800000;}
+.email-even {color: #808000;}
 
 /* Quotes: SYNTAX <[text]> */
 blockquote {  border-left:#999 3px solid; padding:5px; }
 blockquote p {  padding:0px;  margin: 5px 0; }
 
 /* Paragraphs */
-p.auto { margin:0px; padding:0px; font-size:100%; }
-.pmark { color:#cccccc; font:10px Arial }
+p.auto { margin: 0; padding: 0; font-size: 100%; }
+.pmark { color: #cccccc; font: 10px Arial; }
+
 .pmark a:link,
-.pmark a:visited { color:#cccccc }
+.pmark a:visited { color: #cccccc; }
+
 .pmark a:hover,
-.pmark a:active  { color:#cc3300 }
+.pmark a:active  { color: #cc3300; }
+
 .pright {}
+
 .pright .p- { float:right; padding: 0 0 0 15px;  }
 .pright .pbody- { }
 
@@ -195,18 +248,19 @@ p.auto { margin:0px; padding:0px; font-size:100%; }
 .hl-special { color: #0000FF; }
 .hl-number { color: #007F00; }
 .hl-inlinetags { color: #FF0000; }
-.hl-builtin    { color:#996633; }
+.hl-builtin    { color: #996633; }
 
 /** Wrapper-related **********************************************************/
 
 /* SYNTAX %%(wrapper xyz)%% */
 
-div.action           {
+div.action,
+aside.action {
 	margin:2px;
 	background: #eeeeee;
 
 }
-div.action-content   { padding:10px 10px 25px 10px; }
+div.action-content { padding: 10px 10px 25px 10px; }
 
 /* Important colored text: SYNTAX !!(red)text!! */
 .cl-red {color: #CC0000;}
@@ -218,16 +272,155 @@ div.action-content   { padding:10px 10px 25px 10px; }
 code { color:#666600; background:#ffffcc; padding: 0 2px }
 
 /* Important text: SYNTAX !!text!! */
-.cite {color:#ff0000;font-style:normal;}
+.cite {color: #ff0000; font-style: normal;}
 
 /* underline text: SYNTAX __text__ */
-.underline { text-decoration:underline; }
+.underline { text-decoration: underline; }
 
 /* Highlighted text: SYNTAX ??text?? */
-mark { background:#ffaaaa; }
+mark { background: #ffaaaa; }
 
 /* Highlighted text: SYNTAX ??(green)text?? */
 .mark-yellow {background: #ffff00;}
 .mark-green {background: #008000;}
 .mark-blue {background: #0000ff;}
 .mark-red {background: #ff0000;}
+
+/* InterWiki links: SYNTAX (HostPrefix:Term) */
+a.iw-bugs .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/report-bug.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.iw-revision .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/commit.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.iw-source .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/repository.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+/* Wiki links: SYNTAX (prefix://) */
+span.icon{
+/* 	background-size: 16px 16px;*/
+	/* ! required for span width -> inline element */
+	display: inline-block;
+	height: 16px;
+	width: 0;
+	vertical-align: text-bottom; /* middle */
+}
+
+a.external-link .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/web.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.group-link .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/group.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a.user-link .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/user.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+a.file-link .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/file.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+a[href^="mailto:"] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/mail.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href^="xmpp:"] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/jabber.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+/* lockicon */
+a.acl-denied .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/locked.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+/* keyicon */
+a.acl-customsec .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/unlocked.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+/* mime */
+
+a[href $='.pdf'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/pdf.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.epub'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/epub.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.txt'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/text.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.diff'] .icon,
+a[href $='.patch'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/patch.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odt'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/document.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.gif'] .icon,
+a[href $='.ico'] .icon,
+a[href $='.jpe'] .icon,
+a[href $='.jpeg'] .icon,
+a[href $='.jpg'] .icon,
+a[href $='.png'] .icon, 
+a[href $='.webp'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/image.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.rdf'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/xml.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+
+a[href $='.7z'] .icon,
+a[href $='.bz2'] .icon,
+a[href $='.gz'] .icon,
+a[href $='.rar'] .icon,
+a[href $='.tar'] .icon,
+a[href $='.tgz'] .icon,
+a[href $='.zip'] .icon,
+a[href $='.zst'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/archive.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.ods'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/spreadsheet.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odp'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/presentation.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.odg'] .icon,
+a[href $='.svg'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/drawing.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.mp3'] .icon,
+a[href $='.m4a'] .icon,
+a[href $='.ogg'] .icon,
+a[href $='.opus'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/audio.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+a[href $='.mp4'] .icon,
+a[href $='.ogv'] .icon,
+a[href $='.webm'] .icon {
+	background: rgba(0, 0, 0, 0) url('./../icon/video.svg') no-repeat scroll left center;
+	padding-left: 17px;
+}
+

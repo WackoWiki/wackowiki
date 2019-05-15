@@ -60,7 +60,7 @@ foreach ((array) $this->get_default_menu($logged_in['user_lang']) as $menu_item)
 	}
 	else
 	{
-		$tpl->item_link		= $this->format($menu_item[2], 'post_wacko');
+		$tpl->item_link		= $this->format($this->format($menu_item[2]), 'post_wacko'); // TODO: put default menu in session next to user menu! -> format($menu_item[2])
 	}
 }
 
