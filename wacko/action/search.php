@@ -26,6 +26,8 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 					(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
 					"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
 					"OR lower(a.tag) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
+					"OR lower(a.description) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
+					"OR lower(a.keywords) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ") " .
 				") " .
 			($tag
 				? "AND (a.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " " .
