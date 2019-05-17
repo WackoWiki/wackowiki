@@ -104,6 +104,7 @@ body {
 a {
 	color: #003399;
 	text-decoration: none;
+	white-space: nowrap;
 }
 
 a:link {
