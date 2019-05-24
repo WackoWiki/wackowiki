@@ -3581,7 +3581,6 @@ class Wacko
 		$_align		= '';
 		$_height	= '';
 		$_width		= '';
-		$resize		= '';
 		$trim		= 0;
 		$text = preg_replace_callback(
 			'/\s*\b([a-z]+)=([0-9a-z%]+)/i',
@@ -3704,6 +3703,7 @@ class Wacko
 		}
 
 		// TODO: match all external links for tracking: images, mail:, xampp:
+		// TODO: add related code to actions and handlers (currently no use case available)
 		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
 		{
 			if (!stristr($tag, $this->db->base_url))
@@ -4167,7 +4167,7 @@ class Wacko
 				}
 
 				// not used ..?
-				if ($handler)
+				/* if ($handler)
 				{
 					if (!isset($data))
 					{
@@ -4182,7 +4182,7 @@ class Wacko
 					}
 
 					$params = explode('/', $opar); //there're good params
-				}
+				} */
 			}
 
 			$unwtag			= trim($unwtag, '/.');

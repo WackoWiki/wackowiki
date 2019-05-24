@@ -79,10 +79,10 @@ $wacko_translation = [
 
 	'ClearCookies'				=> 'Alle cookies verwijderen',
 	'BindSessionIp'				=> 'Bindsessie naar het IP adres',
-	'BindSessionIpOn'			=> 'enabled (the current IP',
+	'BindSessionIpOn'			=> 'ingeschakeld (huidig IP %1)',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'The current session ends',
-	'LastVisit'					=> 'Last visit was recorded',
+	'LastVisit'					=> 'Laatste bezoek werd opgenomen',
 
 	'LoginIncorrect'			=> 'De door u ingevoerde gebruikersnaam of wachtwoord is ongeldig.',
 	'WelcomeBack'				=> 'Welkom terug, %1',

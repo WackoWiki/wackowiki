@@ -30,7 +30,7 @@
 				<li>
 					[= l SearchItem =
 						<h3>[ ' link ' ]</h3>
-						<span class="search-meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ] - [ ' count | enclose " (" ")" ' ]
+						<span class="search-meta">[ ' mtime | time_formatted ' ] - [ ' userlink ' ] - [ ' psize ' ] [ ' lang ' ]
 						[= comments =
 							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
 						=]
