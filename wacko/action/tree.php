@@ -222,7 +222,8 @@ if ($pages = $this->db->load_all(
 
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '<strong>';
 
-				if ($title == 0) $page['title'] = null;
+				// displaying only the last word of tag OR title
+				$link_text = ($title == 0) ? substr($page['tag'], strrpos($page['tag'], '/') + 1) : $page['title'];
 
 				if ($this->tag == $page['tag'])
 				{
@@ -234,7 +235,7 @@ if ($pages = $this->db->load_all(
 					// do unicode entities
 					$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
-					echo $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
+					echo $this->link('/' . $page['tag'], '', $link_text, '', 0, 1, $page_lang, 0);
 				}
 
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '</strong>';
