@@ -80,7 +80,7 @@ $wacko_translation = [
 
 	'ClearCookies'				=> 'Удалить все куки (cookie)',
 	'BindSessionIp'				=> 'Привязать сессию к IP-адресу',
-	'BindSessionIpOn'			=> 'Включено (текущий IP-адрес',
+	'BindSessionIpOn'			=> 'Включено (текущий IP-адрес %1)',
 	'TrafficProtection'			=> 'Защищенное соединение:',
 	'SessionEnds'				=> 'Эта сессия закончится в',
 	'LastVisit'					=> 'Последнее посещение',

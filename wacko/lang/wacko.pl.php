@@ -77,12 +77,12 @@ $wacko_translation = [
 	'SessionDurationMonth'		=> '1 miesi±c',
 	'LoggedInAs'				=> 'You are logged in as',
 
-	'ClearCookies'				=> 'Delete all cookies',
-	'BindSessionIp'				=> 'Bind session to the IP-address',
-	'BindSessionIpOn'			=> 'enabled (the current IP',
+	'ClearCookies'				=> 'Usuñ wszystkie pliki cookie',
+	'BindSessionIp'				=> 'Przywi±¿ sesjê do adresu IP',
+	'BindSessionIpOn'			=> 'w³±czona (aktualny adres IP %1)',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'The current session ends',
-	'LastVisit'					=> 'Last visit was recorded',
+	'LastVisit'					=> 'Ostatnia wizyta zosta³a zarejestrowana',
 
 	'LoginIncorrect'			=> 'Wprowadzona nazwa u¿ytkownika lub has³o s± niewa¿ne.',
 	'WelcomeBack'				=> 'Witamy spowrotem, %1',

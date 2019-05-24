@@ -77,12 +77,12 @@ $wacko_translation = [
 	'SessionDurationMonth'		=> '1 mês',
 	'LoggedInAs'				=> 'You are logged in as',
 
-	'ClearCookies'				=> 'Delete all cookies',
-	'BindSessionIp'				=> 'Bind session to the IP-address',
-	'BindSessionIpOn'			=> 'enabled (the current IP',
+	'ClearCookies'				=> 'Apagar todos os cookies',
+	'BindSessionIp'				=> 'Ligar sessão ao endereço IP',
+	'BindSessionIpOn'			=> 'activado (IP actual %1)',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'The current session ends',
-	'LastVisit'					=> 'Last visit was recorded',
+	'LastVisit'					=> 'A última visita foi registada',
 
 	'LoginIncorrect'			=> 'O nome de usuário ou senha que você digitou é inválido.',
 	'WelcomeBack'				=> 'Bem-vindo de volta, %1',

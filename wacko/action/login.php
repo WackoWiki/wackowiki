@@ -51,17 +51,17 @@ if (($user = $this->get_user()))
 
 	// show IP address restriction for user session
 	$message .= $this->_t('BindSessionIp') . ' ' .
-		($user['validate_ip']? $this->_t('BindSessionIpOn') . ' ' : '') .
-		'<code>' .
-		($user['validate_ip']? $user['ip'] : 'Off') .
-		'</code>' . "<br>\n";
+		($user['validate_ip']
+			? Ut::perc_replace($this->_t('BindSessionIpOn'), '<code>' . $user['ip'] . '</code>')
+			: '<code>' . $this->_t('MetaOff') . '</code>') .
+		"<br>\n";
 
 	// show traffic protection
 	if ($this->db->tls)
 	{
 		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
-			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : 'no') .
+			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : $this->_t('MetaOff')) .
 			'</code>' . "<br>\n";
 	}
 

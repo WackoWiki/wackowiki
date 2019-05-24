@@ -79,7 +79,7 @@ $wacko_translation = [
 
 	'ClearCookies'				=> 'Effacer tous les cookies',
 	'BindSessionIp'				=> 'Lier la session à l&rsquo;adresse IP',
-	'BindSessionIpOn'			=> 'en fonction (IP en cours)',
+	'BindSessionIpOn'			=> 'en fonction (IP en cours %1)',
 	'TrafficProtection'			=> 'Protection du trafic',
 	'SessionEnds'				=> 'La session en cours se termine',
 	'LastVisit'					=> 'La dernière visite a été enregistrée',

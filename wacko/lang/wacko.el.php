@@ -75,16 +75,16 @@ $wacko_translation = [
 	'SessionDurationDay'		=> '1 ημέρα',
 	'SessionDurationWeek'		=> '1 εβδομάδα',
 	'SessionDurationMonth'		=> '1 μήνας',
-	'LoggedInAs'				=> 'You are logged in as',
+	'LoggedInAs'				=> 'Εχετε συνδεθεί ως',
 
 	'ClearCookies'				=> 'Delete all cookies',
 	'BindSessionIp'				=> 'Bind session to the IP-address',
-	'BindSessionIpOn'			=> 'enabled (the current IP',
+	'BindSessionIpOn'			=> 'enabled (current IP %1)',
 	'TrafficProtection'			=> 'Traffic Protection',
 	'SessionEnds'				=> 'The current session ends',
 	'LastVisit'					=> 'Last visit was recorded',
 
-	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
+	'LoginIncorrect'			=> 'Το όνομα χρήστη ή ο κωδικός πρόσβασης που έχετε εισάγει δεν είναι έγκυρος.',
 	'WelcomeBack'				=> 'Καλως ορισες πισω, %1',
 	'LoginAttemtsExceeded'		=> 'Έχετε υπερβεί το μέγιστο αριθμό προσπαθειών σύνδεσης.<br>Εκτός από το όνομα μέλους και τον κωδικό πρόσβασης σας τώρα επίσης πρέπει να εισαγάγετε και τον κώδικα επιβεβαίωσης από την εικόνα που βλέπετε ποιο κάτω.',
 
@@ -294,7 +294,7 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsFilter'				=> 'Search',
+	'GroupsFilter'				=> 'Αναζήτηση',
 	'GroupsOpenProfile'			=> 'View Profile',
 	'GroupsName'				=> 'Group',
 	'GroupsMembers'				=> 'Members',
@@ -431,7 +431,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Αναζήτηση για',
 	'TopicSearchResults'		=> 'Αποτελέσματα αναζήτησης θεμάτων για ',
 	'NotFoundInTopics'			=> 'δεν βρέθηκε στα θέματα',
-	'SearchPage'			=> 'Search',
+	'SearchPage'				=> 'Αναζήτηση',
 
 	'PostedBy'					=> 'δημοσιεύτηκε από',
 	'ThisIsCommentOn'			=> 'Αυτό είναι ένα σχόλιο στην σελίδα ',
@@ -670,7 +670,7 @@ $wacko_translation = [
 
 	// users action
 	'UsersSearch'				=> 'Find Users',
-	'UsersFilter'				=> 'Search',
+	'UsersFilter'				=> 'Αναζήτηση',
 	'UsersOpenProfile'			=> 'View Profile',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'Name',
