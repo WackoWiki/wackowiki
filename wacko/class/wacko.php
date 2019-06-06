@@ -3659,7 +3659,6 @@ class Wacko
 
 		}
 
-
 		if ($track)
 		{
 			$track = $this->link_tracking();
@@ -3703,7 +3702,7 @@ class Wacko
 		}
 
 		// TODO: match all external links for tracking: images, mail:, xampp:
-		// TODO: add related code to actions and handlers (currently no use case available)
+		// TODO: add related code to actions and handlers (currently there is no available use case)
 		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
 		{
 			if (!stristr($tag, $this->db->base_url))
@@ -3895,7 +3894,7 @@ class Wacko
 					}
 				}
 
-				// no local file available, take the global file
+				// no local file available, take the global file instead
 				if (!$href && $have_global)
 				{
 					$_global	= true;
@@ -3946,7 +3945,7 @@ class Wacko
 
 							if(in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
 							{
-								$width	= $param['width'] ?? 800;
+								$width	= $param['width'] ?? 800; // default width
 								$height	= 0;
 							}
 
@@ -4166,7 +4165,7 @@ class Wacko
 					$unwtag	= substr($unwtag, 0, strrpos($unwtag, '/'));
 				}
 
-				// not used ..?
+				// XXX: not used ..?
 				/* if ($handler)
 				{
 					if (!isset($data))
@@ -4263,6 +4262,12 @@ class Wacko
 
 			if ($text)
 			{
+				// take page title intead of pagepath when only tag is provided, e.g. ((/Root/Page))
+				if (!$title && $tag == $text)
+				{
+					$title = $this_page['title'];
+				}
+
 				if ($title)
 				{
 					// title="{title}" - alternate title is provided
