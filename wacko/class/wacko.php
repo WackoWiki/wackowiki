@@ -3746,7 +3746,7 @@ class Wacko
 
 			if ($text == $tag)
 			{
-				return '<img src="' . str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)) . '" ' . ($text ? 'alt="' . $text . '" title="' . $text . '"' : '') . $scale . '>';
+				return $this->image_link(str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)), $class, $text, $text, $scale);
 			}
 			else
 			{
@@ -3993,7 +3993,7 @@ class Wacko
 
 								if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg'))
 								{
-									$text	= '<img src="' . $src . '" class="' . $media_class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . '>';
+									$text	= $this->image_link($src, $media_class, $title, $alt, $scale);
 								}
 								else if (in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
 								{
@@ -4257,7 +4257,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '" class="' . $media_class . '"  title="' . $text . '"' . $scale . '>';
+				$text		= $this->image_link($img_link, $media_class, $text, $text, $scale);
 			}
 
 			if ($text)
@@ -4426,7 +4426,7 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= '<img src="' . $img_link . '"  class="' . $media_class . '" title="' . $text . '"' . $scale . '>';
+				$text		= $this->image_link($img_link, $media_class, $text, $text, $scale);
 				$tpl		= 'outerimg';
 			}
 			else if ($audio_link)
@@ -4548,10 +4548,17 @@ class Wacko
 				'</figure>';
 	}
 
+	function image_link($src, $class, $title, $alt = null, $scale = null)
+	{
+		// inline element (paragrafica!)
+		return
+				'<img src="' . $src . '" class="' . $class . '" title="' . $title . '" alt="' . $title . '" ' . $scale . '>';
+	}
+
 	function audio_link($src, $class, $title)
 	{
 		// inline element (paragrafica!)
-		$fallback	= '<span>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</span>';
+		$fallback	= '<span>Your browser doesn\'t support HTML5 audio. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</span>';
 		return
 				'<audio src="' . $src . '" class="' . $class . '" title="' . $title . '" controls>' . "\n" .
 					$fallback . "\n" .
