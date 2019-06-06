@@ -219,6 +219,14 @@ span.tocnumber {
 
 /** File-related ************************************************************/
 
+figure {
+	display: table;
+}
+figcaption {
+	display: table-caption;
+	caption-side: bottom;
+}
+
 img.media-default,
 img.media-left {
 	margin: .2em 1em .2em 0;
