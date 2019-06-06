@@ -219,36 +219,49 @@ span.tocnumber {
 
 /** File-related ************************************************************/
 
-figure {
+figure.caption {
 	display: table;
 }
-figcaption {
+.caption figcaption {
 	display: table-caption;
 	caption-side: bottom;
 }
 
-img.media-default,
-img.media-left {
-	margin: .2em 1em .2em 0;
-}
 .media-left {
 	float: left;
 }
-
-img.media-center {
-	margin: .2em auto;
+img.media-default,
+img.media-left,
+.media-default figcaption,
+.media-left figcaption {
+	margin: .2em 1em .2em 0;
 }
+
 .media-center {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
-
-img.media-right {
-	margin: .2em 0 .2em 1em;
+img.media-center {
+	margin: .2em auto;
 }
+
+/* special case to align figure with caption as center */
+.figure-center-wrp {
+	display: flex;
+	justify-content: center;
+	clear: both;
+}
+div.figure-center-wrp .media-center {
+	display: table;
+}
+
 .media-right {
 	float: right;
+}
+img.media-right,
+.media-right figcaption {
+	margin: .2em 0 .2em 1em;
 }
 
 /** Email-related ************************************************************/

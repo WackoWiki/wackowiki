@@ -4541,11 +4541,18 @@ class Wacko
 
 	function add_caption($text, $caption, $class)
 	{
-		return
-				'<figure class="caption ' . $class . '">' . "\n" .
-					$text . "\n" .
-					'<figcaption>' . $caption . '</figcaption>' . "\n" .
-				'</figure>';
+		$figure =
+			'<figure class="caption ' . $class . '">' . "\n" .
+				$text . "\n" .
+				'<figcaption>' . $caption . '</figcaption>' . "\n" .
+			'</figure>';
+
+		if ($class == 'media-center')
+		{
+			$figure = '<div class="figure-center-wrp">' . $figure . '</div>';
+		}
+
+		return $figure;
 	}
 
 	function image_link($src, $class, $title, $alt = null, $scale = null)
