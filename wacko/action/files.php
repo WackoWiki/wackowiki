@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 		[page="PageName" or global=1 or all=1]
 		[order="time|FILENAME|size|size_desc|ext"]
 		[owner="UserName"]
-		[picture=1]
+		[media=1]
 		[max=number]
 	}}
 */
@@ -24,6 +24,9 @@ $page_id	= '';
 $ppage		= '';
 $files		= [];
 $object_ids	= [];
+
+if (!isset($picture))	$picture	= null;	// depreciated
+$media				= $picture;				// replaces picture with media
 
 if (!isset($nomark))	$nomark		= 0;
 if (!isset($form))		$form		= 0;	// show search form
@@ -39,7 +42,7 @@ if (!isset($method))	$method		= '';	// for use in page handler
 if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
 if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
-if (!isset($picture))	$picture	= null;
+if (!isset($media))		$media	= null;
 if (!isset($max))		$max		= null;
 if (!isset($type_id))	$type_id	= null;
 
@@ -179,7 +182,7 @@ if ($can_view)
 	$this->preload_categories($object_ids, OBJECT_FILE);
 	$this->preload_acl($page_ids);
 
-	if ($picture)
+	if ($media)
 	{
 		$path1 = 'file:/';
 		$style = 'upload tbl-fixed';
@@ -252,17 +255,16 @@ if ($can_view)
 			$file_id	= $file['file_id'];
 			$file_name	= $file['file_name'];
 			$shown_name	= $this->shorten_string($file_name, $file_name_maxlen);
-			$text		= ($picture
-							? ($file['picture_w'] || $file['file_ext'] == 'svg'
-								? ''
-								: $shown_name)
+			$text		= ($media
+							? ($file['picture_w'] || in_array($file['file_ext'], ['m4a', 'mp3', 'ogg', 'opus', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp', 'mp4', 'ogv', 'webm'])
+								? ''					// parses image, audio and video links into their media tags
+								: $shown_name)			// shows file link
 							: $shown_name);
 			$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
-			$file_ext	= $file['file_ext'];
 
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
-			if (!in_array($file_ext, ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp']))
+			if (!in_array($file['file_ext'], ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp']))
 			{
 				$hits	= $file['hits'] . ' ' . $this->_t('SettingsHits');
 			}
@@ -274,7 +276,7 @@ if ($can_view)
 			// display file
 			$tpl->r_link = $link;
 
-			if ($picture)
+			if ($media)
 			{
 				// get context for filter
 				$method_filter	= $this->method == 'show' ? '' : $this->method;

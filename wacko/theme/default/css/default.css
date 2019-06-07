@@ -172,7 +172,8 @@ video {
 }
 
 audio {
-	min-width: 800px;
+	min-width: 100%;
+	max-width: 100%;
 }
 
 kbd {

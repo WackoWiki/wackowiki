@@ -227,6 +227,11 @@ figure.caption {
 	caption-side: bottom;
 }
 
+figure.caption audio 
+{
+	min-width: 800px;
+}
+
 .media-left {
 	float: left;
 }
