@@ -3930,9 +3930,14 @@ class Wacko
 						}
 						else
 						{
-							// calculate relative height
-							if ($param['width'] && !$param['height'] && $file_data['picture_h'])
+							if ($param['height'] && !$param['width'] && $file_data['picture_h'])
 							{
+								// calculate relative width, e.g. ?0x400
+								$param['width'] = round(($param['height'] * $file_data['picture_w']) / $file_data['picture_h']);
+							}
+							else if ($param['width'] && !$param['height'] && $file_data['picture_h'])
+							{
+								// calculate relative height, e.g. ?600
 								$param['height'] = round(($param['width'] * $file_data['picture_h']) / $file_data['picture_w']);
 							}
 
