@@ -57,15 +57,13 @@ if ($this->has_access('read')
 	// revision header
 	if ($this->page['latest'] == 0 && !!$this->page)
 	{
-		// add also hint:
-		// [en] You are editing an old revision of this page. If you publish it, any changes made since then will be removed. You may wish to edit the current revision instead.
-		// [de] Du bearbeitest nicht die aktuelle, sondern eine ältere Version dieser Seite. Wenn du speicherst, wird diese als aktuelle Version neu gespeichert. Eventuell später hinzugekommene Änderungen werden damit gelöscht.
-		$message = Ut::perc_replace($this->_t('Revision'),
+		$message = Ut::perc_replace($this->_t('RevisionHint'),
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),
 			$this->user_link($this->page['user_name'], '', true, false));
 		$tpl->message = $this->show_message($message, 'revision-info', false);
+		$tpl->warning = $this->show_message($this->_t('EditingRevisionWarning'), 'warning', false);
 	}
 
 	if (isset($_POST))
@@ -209,7 +207,9 @@ if ($this->has_access('read')
 				$this->page_cache['supertag'][$this->supertag]			= '';
 				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
-				$message	= $this->page['comment_on_id'] ? $this->_t('CommentSaved') : $this->_t('PageSaved');
+				$message	= $this->page['comment_on_id']
+								? $this->_t('CommentSaved')
+								: Ut::perc_replace($this->_t('PageSaved'), ($this->page['version_id'] + 1));
 				$this->set_message($message, 'success');
 
 				// forward to show handler

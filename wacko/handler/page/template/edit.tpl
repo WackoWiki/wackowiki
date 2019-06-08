@@ -1,6 +1,7 @@
 [ === main === ]
 	[ ' dummy | default * // ADD_NO_DIV ' ]<div id="page-edit">
 		[ ' message ' ]
+		[ ' warning ' ]
 		[= f _ =
 			[= l _ =
 				<span class="page-lang" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>

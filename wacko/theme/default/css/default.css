@@ -273,15 +273,13 @@ form input.submitinput {
 }
 
 .warning {
-	color: red;
+	color: #d33;
 	font-weight: bold;
 	/*background-color: #fbe6f2;*/
 	background: #fcfcfc url('./../icon/warning.svg') no-repeat scroll 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	border: 1px dotted #d893a1;
-	border-right-style: none;
-	border-left-style: none;
 }
 
 .hint {
