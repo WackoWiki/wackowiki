@@ -15,7 +15,7 @@ if (!$this->has_access('read'))
 
 if (!$this->page['latest'])
 {
-	$tpl->rev_text = Ut::perc_replace($this->_t('Revision'),
+	$tpl->rev_text = Ut::perc_replace($this->_t('RevisionHint'),
 		$this->href(),
 		$this->tag,
 		$this->get_time_formatted($this->page['modified']),

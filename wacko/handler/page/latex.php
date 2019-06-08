@@ -34,7 +34,7 @@ if ($this->has_access('read'))
 		if (!$this->page['latest'])
 		{
 			echo '<div class="revision-info">' .
-				Ut::perc_replace($this->_t('Revision'), $this->href(), $this->tag, $this->page['modified']) .
+				Ut::perc_replace($this->_t('RevisionHint'), $this->href(), $this->tag, $this->page['modified']) .
 				'</div>';
 		}
 
