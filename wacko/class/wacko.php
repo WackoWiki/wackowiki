@@ -149,15 +149,15 @@ class Wacko
 	}
 
 	// MISC
-	function get_page_tag($page_id = 0)
+	function get_page_tag($page_id = 0, $supertag = false)
 	{
 		$page = $this->db->load_single(
-			"SELECT tag " .
+			"SELECT tag, supertag " .
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE page_id = " . (int) $page_id . " " .
 			"LIMIT 1");
 
-		return $page['tag'];
+		return $supertag ? $page['supertag'] : $page['tag'];
 	}
 
 	function get_page_id($tag = '')
@@ -2013,7 +2013,7 @@ class Wacko
 			// page cache
 			if ($comment_on_id)
 			{
-				$this->http->invalidate_page($this->get_page_tag($comment_on_id));
+				$this->http->invalidate_page($this->get_page_tag($comment_on_id, true));
 			}
 			else
 			{
