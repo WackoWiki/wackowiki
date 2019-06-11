@@ -191,7 +191,7 @@ class Http
 				$lastm = substr($lastm, 0, $p);
 			}
 
-			if ($_SERVER['REQUEST_METHOD'] == 'GET') // may be we need HEAD support ???
+			if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD') // may be we need HEAD support ???
 			{
 				if (!$lastm && !$etag);
 				else if ($lastm && $gmt != $lastm);
@@ -603,7 +603,7 @@ class Http
 
 		if (!headers_sent())
 		{
-			header((@$_SERVER['SERVER_PROTOCOL'] ?: 'HTTP/1.0') . ' ' . $code . ' ' . $text[$code], true, $code);
+			header(($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0') . ' ' . $code . ' ' . $text[$code], true, $code);
 		}
 	}
 
