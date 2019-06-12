@@ -85,7 +85,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
 	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->binary_multiples($post_max_size * 1024 * 1024, false, true, true)];
 	$sysinfo['max_execution_time']	= [$engine->_t('MaxExecutionTime'), get_cfg_var('max_execution_time') . ' seconds'];
-	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), get_cfg_var('session.save_path')];
+	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), ini_get('session.save_path')];
 	$sysinfo['default_charset']		= [$engine->_t('PhpDefaultCharset'), ini_get('default_charset')];
 	$sysinfo['gzip_compression']	= [$engine->_t('GZipCompression'), $gzip_compression];
 	$sysinfo['php_extensions']		= [$engine->_t('PHPExtensions'), implode(', ',get_loaded_extensions())];
@@ -109,6 +109,7 @@ function admin_system_info(&$engine, &$module)
 
 <?php
 
+# Ut::debug_print_r(ini_get_all());
 /*
 if ($action == 'phpinfo')
 {

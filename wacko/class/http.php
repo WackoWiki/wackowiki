@@ -191,7 +191,7 @@ class Http
 				$lastm = substr($lastm, 0, $p);
 			}
 
-			if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD') // may be we need HEAD support ???
+			if ($_SERVER['REQUEST_METHOD'] == 'GET' || $_SERVER['REQUEST_METHOD'] == 'HEAD')
 			{
 				if (!$lastm && !$etag);
 				else if ($lastm && $gmt != $lastm);
