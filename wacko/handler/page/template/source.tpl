@@ -1,4 +1,6 @@
 [ === main === ]
 	[ ' message ' ]
-	<h3>[ ' head ' ]</h3>
+	[= h _ =
+		<h3>[ ' head ' ]</h3>
+	=]
 	[ ' body | pre ' ]
