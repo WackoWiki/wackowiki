@@ -290,6 +290,8 @@ $wacko_translation = [
 	'SourceFrom'				=> 'original is located at: ',
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'Kopier til udklipsholder',
+	'SourceFor'					=> 'Se kilde til %1',
+	'SourceForInfo'				=> 'Du kan se og kopiere kildeteksten for denne side :',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Grupper',

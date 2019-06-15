@@ -329,5 +329,7 @@ if ($page_a && $page_b
 }
 else
 {
+	$this->http->status(403);
+
 	$tpl->denied = $this->show_message($this->_t('ReadAccessDenied'), 'info', false);
 }
