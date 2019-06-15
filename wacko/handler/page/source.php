@@ -11,11 +11,11 @@ if (!defined('IN_WACKO'))
 	TODO: add config option to set an treshhold or to disable the source handler
 */
 
-$this->ensure_page();
+# $this->ensure_page(true); // we allow comments, like we do for edit handler
 
 if ($this->has_access('read'))
 {
-	$tpl->head = Ut::perc_replace($this->_t('SourceFor'), $this->compose_link_to_page($this->tag, '', ''));
+	$tpl->h_head = Ut::perc_replace($this->_t('SourceFor'), $this->compose_link_to_page($this->tag, '', $this->page['title'], $this->tag));
 
 	// is comment?
 	if ($this->page['comment_on_id'])

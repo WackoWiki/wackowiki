@@ -9030,7 +9030,7 @@ class Wacko
 		{
 			$this->show_must_go_on();
 		}
-		else if ($p['comment_on_id'] && $this->method != 'source')
+		else if ($p['comment_on_id'])
 		{
 			// show main page for comment
 			$this->http->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), ['show_comments' => 1], false, $p['tag']));
