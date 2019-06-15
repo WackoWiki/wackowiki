@@ -290,6 +290,8 @@ $wacko_translation = [
 	'SourceFrom'				=> 'original is located at: ',
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceFor'					=> 'Kezdõlap forrásának megtekintése %1',
+	'SourceForInfo'				=> 'Megtekintheted és másolhatod a lap forrását.',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',

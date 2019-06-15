@@ -15,6 +15,22 @@ $this->ensure_page();
 
 if ($this->has_access('read'))
 {
+	$tpl->head = Ut::perc_replace($this->_t('SourceFor'), $this->compose_link_to_page($this->tag, '', ''));
+
+	// is comment?
+	if ($this->page['comment_on_id'])
+	{
+		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL); // TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
+
+		// comment header
+		$message = $this->_t('ThisIsCommentOn') . ' ' .
+			$this->compose_link_to_page($comment_on['tag'], '', $comment_on['title'], $comment_on['tag']) . ', ' .
+			$this->_t('PostedBy') . ' ' .
+			$this->user_link($this->page['user_name'], '', true, false) . ' ' .
+			$this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
+		$tpl->message = $this->show_message($message, 'comment-info', false);
+	}
+
 	if (!$this->page['latest'])
 	{
 		$message = Ut::perc_replace($this->_t('RevisionHint'),
@@ -23,12 +39,14 @@ if ($this->has_access('read'))
 			$this->get_time_formatted($this->page['modified']),
 			$this->user_link($this->page['user_name'], '', true, false));
 
-		$this->show_message($message, 'revision-info');
+		$tpl->message = $this->show_message($message, 'revision-info', false);
 	}
 
-	echo $this->format($this->page['body'], 'source', ['copy_button' => true]);
+	$tpl->body	= $this->format($this->page['body'], 'source', ['copy_button' => true]); // -> [ ' body | pre ' ]
 }
 else
 {
-	$this->show_message($this->_t('ReadAccessDenied'), 'error');
+	$this->http->status(403);
+
+	$tpl->message = $this->show_message($this->_t('ReadAccessDenied'), 'error', false);
 }

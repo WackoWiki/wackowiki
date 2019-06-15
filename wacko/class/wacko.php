@@ -155,7 +155,7 @@ class Wacko
 			"SELECT tag, supertag " .
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE page_id = " . (int) $page_id . " " .
-			"LIMIT 1");
+			"LIMIT 1", true);
 
 		return $supertag ? $page['supertag'] : $page['tag'];
 	}
@@ -9030,7 +9030,7 @@ class Wacko
 		{
 			$this->show_must_go_on();
 		}
-		else if ($p['comment_on_id'])
+		else if ($p['comment_on_id'] && $this->method != 'source')
 		{
 			// show main page for comment
 			$this->http->redirect($this->href('', $this->get_page_tag($p['comment_on_id']), ['show_comments' => 1], false, $p['tag']));

@@ -290,6 +290,8 @@ $wacko_translation = [
 	'SourceFrom'				=> 'l&rsquo;original se trouve à&nbsp;: ',
 	'SourceFromLink'			=> 'référence',
 	'SourceCopyToClipboard'		=> 'copier vers le presse-papier',
+	'SourceFor'					=> 'Voir la source de %1',
+	'SourceForInfo'				=> 'Vous pouvez voir et copier le contenu de cette page.',
 
 	// Groups action
 	'GroupsSearch'				=> 'Trouver des groupes',

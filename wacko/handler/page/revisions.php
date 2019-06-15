@@ -129,5 +129,7 @@ if ($this->has_access('read'))
 }
 else
 {
+	$this->http->status(403);
+
 	$tpl->message = $this->show_message($this->_t('ReadAccessDenied'), 'error', false);
 }

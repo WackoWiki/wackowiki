@@ -133,6 +133,10 @@ if ($this->has_access('read'))
 				{
 					$tpl->l_b_edit_href = $this->href('edit', $comment['tag']);
 				}
+				else // if ($this->has_access('read'))
+				{
+					$tpl->l_b_source_href = $this->href('source', $comment['tag']);
+				}
 
 				// recompile if necessary
 				if (!$comment['body_r'])

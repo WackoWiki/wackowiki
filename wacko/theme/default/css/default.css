@@ -1955,6 +1955,13 @@ li.m-source img {
 	width: 16px;
 	display: inline-block;
 }
+.btn-source {
+	background: url('./../icon/text.svg') no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
 .btn-feed {
 	background: url('./../icon/feed.svg') no-repeat;
 	background-size: 16px 16px;

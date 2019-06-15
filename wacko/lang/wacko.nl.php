@@ -290,6 +290,8 @@ $wacko_translation = [
 	'SourceFrom'				=> 'original is located at: ',
 	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceFor'					=> 'Brontekst bekijken van %1',
+	'SourceForInfo'				=> 'U kunt de brontekst van deze pagina bekijken en kopiëren.',
 
 	// Groups action
 	'GroupsSearch'				=> 'Groepen zoeken',

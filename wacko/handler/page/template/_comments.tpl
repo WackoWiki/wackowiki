@@ -18,6 +18,9 @@
 										[= edit _ =
 											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditCommentTip ' ]" alt="[ ' _t: EditComment ' ]" class="btn-edit"></a>
 										=]
+										[= source _ =
+											<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: SourceTip ' ]" alt="[ ' _t: SourceText ' ]" class="btn-source"></a>
+										=]
 									</nav>
 								=]
 								<header class="comment-title">
