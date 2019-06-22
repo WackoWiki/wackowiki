@@ -101,9 +101,9 @@ if ($this->has_access('read'))
 			$tpl->user			= $this->user_link($page['user_name'], '', true, false);
 			if ($page['edit_note'])
 			{
-				$tpl->n_note		= $page['edit_note'];
+				$tpl->n_note	= $page['edit_note'];
 			}
-			$tpl->minor			= ($page['minor_edit'] ? 'm' : '');
+			$tpl->m_minor		= ($page['minor_edit'] ? 'm' : null);
 
 			// review
 			if ($this->db->review)

@@ -53,7 +53,7 @@ $load_diff_page = function ($revision_id)
 	if ($revision_id > 0)
 	{
 		return $this->db->load_single(
-			"SELECT r.page_id, r.revision_id, r.modified, r.body, r.page_lang, u.user_name " .
+			"SELECT r.page_id, r.version_id, r.revision_id, r.modified, r.body, r.edit_note, r.minor_edit, r.page_lang, u.user_name " .
 			"FROM " . $this->db->table_prefix . "revision r " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
 			"WHERE r.revision_id = " . (int) $revision_id . " " .
@@ -62,7 +62,7 @@ $load_diff_page = function ($revision_id)
 	else
 	{
 		return $this->db->load_single(
-			"SELECT p.page_id, 0 AS revision_id, p.modified, p.body, p.page_lang, u.user_name " .
+			"SELECT p.page_id, p.version_id, 0 AS revision_id, p.modified, p.body, p.edit_note, p.minor_edit, p.page_lang, u.user_name " .
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"WHERE p.page_id = " . (int) $this->get_page_id() . " " .
@@ -81,14 +81,18 @@ if ($page_a && $page_b
 	// TODO: $hide_minor_edit
 	list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
 
-	$revisions_menu = function ($rev, $page) use ($revisions, $diffmode, $a, $b)
+	$revisions_menu = function ($rev, $page, $prefix) use ($revisions, $diffmode, $a, $b, &$tpl)
 	{
-		$out = '<div class="diffdown">' . "\n"; //<button class="diffbtn">';
-		$out .= '<a href="' . $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : '')) . '">' .
-				$this->get_time_formatted($page['modified']) .
-				' <span class="dropdown-arrow">&#9660;</span></a>' . "\n";
-		//$out .= '</button><div class="diffdown-content">';
-		$out .= '<div class="diffdown-content">' . "\n";
+		$tpl->enter($prefix . '_');
+
+		$tpl->href		= $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : ''));
+		$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $page['version_id'] . '</strong>');
+		$tpl->modified	= $page['modified'];
+		$tpl->username	= $this->user_link($page['user_name'], '', true, true);
+		$tpl->n_note	= $page['edit_note'] ?: null;
+		$tpl->m_minor	= $page['minor_edit'] ? 'm' : null;
+
+		$tpl->enter('r_');
 
 		foreach ($revisions as $r)
 		{
@@ -96,7 +100,8 @@ if ($page_a && $page_b
 
 			if ($act)
 			{
-				$href = '#';
+				$href	= '#';
+				$class	= ' class="active"';
 			}
 			else
 			{
@@ -104,26 +109,29 @@ if ($page_a && $page_b
 							? ['a' => $r['revision_id'],	'b' => $b]
 							: ['a' => $a,					'b' => $r['revision_id']];
 				$href	= $this->href('diff', '', $params + ['diffmode' => $diffmode]);
+				$class	= '';
 			}
 
-			$out .= '<a href="' . $href . '">';
-			$out .= '<span>' . $r['version_id'] . '.</span>';
-			$out .= $this->get_time_formatted($r['modified']);
-			$out .= '</a>' . "\n";
+			$tpl->href		= $href;
+			$tpl->class		= $class;
+			$tpl->version	= $r['version_id'];
+			$tpl->modified	= $r['modified'];
+			$tpl->username	= $r['user_name'];
+			$tpl->editnote	= $r['edit_note'] ?: null;
 		}
 
-		return $out . '</div></div>' . "\n";
+		$tpl->leave();	// prefix
+		$tpl->leave();	// menu
+
 	};
 
-	$tpl->enter('diff_');
-
 	// print header
-	$tpl->diffinfo = Ut::perc_replace($this->_t('Comparison'),
-		$revisions_menu($a, $page_a),
-		$revisions_menu($b, $page_b),
-		//'<a href="' . $this->href('', '', ($a > 0 ? ['revision_id' => $page_a['revision_id']] : '')) . '">' . $this->get_time_formatted($page_a['modified']) . '</a>',
-		//'<a href="' . $this->href('', '', ($b > 0 ? ['revision_id' => $page_b['revision_id']] : '')) . '">' . $this->get_time_formatted($page_b['modified']) . '</a>',
-		$this->compose_link_to_page($this->tag, '', ''));
+	$tpl->head = Ut::perc_replace($this->_t('Comparison'), $this->compose_link_to_page($this->tag, '', ''));
+
+	$revisions_menu($a, $page_a, 'a');
+	$revisions_menu($b, $page_b, 'b');
+
+
 
 	$params = ['a' => $a, 'b' => $b];
 
@@ -137,6 +145,8 @@ if ($page_a && $page_b
 				? '<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
 				: '<li class="active">' . $diff_modes[$mode]) . '</li>';
 	}
+
+	$tpl->enter('diff_');
 
 	// do diffs
 	switch ($diffmode)

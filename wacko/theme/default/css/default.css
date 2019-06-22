@@ -2326,6 +2326,11 @@ span.license {
 }
 
 /* diff handler ------------- */
+
+table.diff {
+	width: 100%;
+}
+
 .diffbtn {
 	/*background-color: #4CAF50;*/
 	/*color: white;*/

@@ -1,21 +1,28 @@
 [ === main === ]
 	[ ' denied ' ]
 	[ ' nodiff ' ]
+	
+	<!--nomail-->
+	<h3>[ ' head ' ]</h3>
+	<ul class="menu">
+		[= l _ =
+			[ ' diffmode ' ]
+		=]
+	</ul>
+	<br><br><br>
+	<table class="diff">
+		<tr>
+			<td>
+				[ ' a diffmeta ' ]
+			</td>
+			<td>
+				[ ' b diffmeta ' ]
+			</td>
+		</tr>
+	</table>
+	<!--/nomail-->
 
 	[= diff _ =
-
-		<!--nomail-->
-		<div class="diff-info">
-			[ ' diffinfo ' ]
-		</div>
-		<br><br>
-		<ul class="menu">
-			[= l _ =
-				[ ' diffmode ' ]
-			=]
-		</ul>
-		<!--/nomail-->
-
 		[= m0 _ =
 			<br><br>
 			[ ' diff ' ]
@@ -47,3 +54,29 @@
 
 [= nodiff =]
 <br>[ ' _t: NoDifferences ' ]
+
+[= diffmeta =]
+<div class="diffdown">
+	<span>[ ' version ' ]</span>
+	<a href="[ ' href ' ]">
+		[ ' modified | time_formatted ' ]
+		<span class="dropdown-arrow">&#9660;</span>
+	</a>
+	<div class="diffdown-content">
+		[= r _ =
+			<a href="[ ' href ' ]" [ ' class ' ]>
+				<span>[ ' version ' ]</span>
+				[ ' modified | time_formatted ' ]
+				[ ' username ' ]
+				[ ' editnote | enclose " [" "]" ' ]
+			</a>
+		=]
+	</div><br>
+	[ ' username ' ]<br>
+	[= m _ =
+		<abbr class="minoredit" title="[ ' _t: EditMinor ' ]">[ ' minor ' ]</abbr>
+	=]
+	[= n _ =
+		<span class="editnote">[ ' note | enclose " [" "]" ' ]</span>
+	=]
+</div>
