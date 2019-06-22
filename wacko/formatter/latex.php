@@ -15,50 +15,54 @@ if ($text == '')
 $text = preg_replace('/{{(toc).*?}}/i', '', $text);
 $data = $this->format($text, 'wiki');
 
-// Convert everything that doesn't need regexps
+// convert everything that doesn't need regexps
 $data = str_replace(
 [
-	"<br>\n",						// Strip newlines
-	'&nbsp;',						// Blanks to blanks for easier handling
-	'<strong>',						// Bold
+	"<br>\n",							// Strip newlines
+	'&nbsp;',							// Blanks to blanks for easier handling
+	'<strong>',							// Bold
 	'</strong>',
-	'<em>',							// Emphasized
+	'<em>',								// Emphasized
 	'</em>',
-	'<small>',						// Small
+	'<small>',							// Small
 	'</small>',
-	'<blockquote>',					// Blockquote
+	'<del>',							// Strikethough
+	'</del>',
+	'<blockquote>',						// Blockquote
 	'</blockquote>',
-	'</pre>',						// Preformatted
-	'<code>',						// Monospaced
+	'</pre>',							// Preformatted
+	'<code>',							// Monospaced
 	'</code>',
-	'<li>',							// List item
+	'<li>',								// List item
 	'</li>',
-	'</ul>',						// End of unnumbered list
-	'</ol>',						// End of numbered list
+	'</ul>',							// End of unnumbered list
+	'</ol>',							// End of numbered list
 ],
 [
-	"\n",
-	' ',
-	'\textbf{',
+	"\n",								// <br>
+	' ',								// &nbsp;
+	'\textbf{',							// strong
 	'}',
-	'\emph{',
+	'\emph{',							// em
 	'}',
-	'\textsmaller{',
+	'\textsmaller{',					// small
 	'}',
-	"\n\\begin{quotation}\n",
+	'\sout{',							// del
+	'}',
+	"\n\\begin{quotation}\n",			// blockquote
 	"\n\\end{quotation}\n\n",
-	"\n\\end{verbatim}",
-	'\texttt{',
+	"\n\\end{verbatim}",				// </pre>
+	'\texttt{',							// code
 	'}',
-	'&nbsp;&nbsp;&nbsp;&nbsp;\item ',
+	'&nbsp;&nbsp;&nbsp;&nbsp;\item ',	// li
 	"\n",
-	"\\end{itemize}\n\n",
-	"\\end{enumerate}\n\n",
+	"\\end{itemize}\n\n",				// </ul>
+	"\\end{enumerate}\n\n",				// </ol>
 ],
 $data
 );
 
-// Convert the cool stuff
+// convert the cool stuff
 $data = preg_replace(
 [
 	'|%%\(math\)(.*)%%|Us',				// Math formula
@@ -66,9 +70,14 @@ $data = preg_replace(
 	'|<h1[^>]*>\s*?(.*)\s*</h1>|U',		// Headings
 	'|<h2[^>]*>\s*?(.*)\s*</h2>|U',
 	'|<h3[^>]*>\s*?(.*)\s*</h3>|U',
+	'|<h4[^>]*>\s*?(.*)\s*</h4>|U',
+	'|<h5[^>]*>\s*?(.*)\s*</h5>|U',
+	'|<h6[^>]*>\s*?(.*)\s*</h6>|U',
 	'|<pre[^>]*>|U',					// Preformatted
 	'|<ul[^>]*>|U',						// Unnumbered list
 	'|<ol[^>]*>|U',						// Numbered list
+	# '|<!--\([^<]*\)-->|U',				// Comment
+	'|<span class="underline">(.*)</span>|U',	// Separate paragraphs by blank line
 	'|<p.*>(.*)</p>|Us',				// Separate paragraphs by blank line
 	'|</?.*>|U',						// Strip all other HTML tags
 	'|( *\n){3,}|m',					// Cut all \n\n\n... to \n\n
@@ -76,13 +85,18 @@ $data = preg_replace(
 [
 	'$\\1$',
 	'$$\1$$',
-	"\n\\section{\\1}\n",
-	"\n\\subsection{\\1}\n",
-	"\n\\subsubsection{\\1}\n",
-	"\n\\begin{verbatim}\n",
-	"\n\\begin{itemize}\n",
-	"\n\\begin{enumerate}\n",
-	"\\1\n\n",
+	"\n\\chapter{\\1}\n",				// h1
+	"\n\\section{\\1}\n",				// h2
+	"\n\\subsection{\\1}\n",			// h3
+	"\n\\subsubsection{\\1}\n",			// h4
+	"\n\\paragraph{\\1}\n",				// h5
+	"\n\\subparagraph{\\1}\n",			// h6
+	"\n\\begin{verbatim}\n",			// </pre>
+	"\n\\begin{itemize}\n",				// ul
+	"\n\\begin{enumerate}\n",			// ol
+	# "\n\\begin{comment}{\1}\\end{comment}\n",	// <!-- comment -->
+	"\underline{\\1}",					// underline
+	"\\1\n\n",							// p
 	'',
 	"\n\n",
 ],
