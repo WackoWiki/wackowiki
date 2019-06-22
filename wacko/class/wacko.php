@@ -3160,6 +3160,15 @@ class Wacko
 		}
 	}
 
+	function msg_is_comment_on($tag, $title, $user_name, $modified)
+	{
+		return $this->_t('ThisIsCommentOn') . ' ' .
+			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
+			$this->_t('PostedBy') . ' ' .
+			$this->user_link($user_name, '', true, true) . ' ' .
+			$this->_t('At') . ' ' . $this->get_time_formatted($modified);
+	}
+
 	/**
 	* @deprecated: use http->redirect() instead
 	*/

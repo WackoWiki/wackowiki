@@ -207,11 +207,11 @@ if ($this->is_admin()
 		// show warning
 		if ($comment_on_id)
 		{
-			$message = $this->_t('ThisIsCommentOn') . ' ' .
-				$this->compose_link_to_page($comment_on['tag'], '', $comment_on['title'], $comment_on['tag']) . ', ' .
-				$this->_t('PostedBy') . ' ' .
-				$this->user_link($this->page['user_name'], '', true, false) . ' ' .
-				$this->_t('At') . ' ' . $this->get_time_formatted($this->page['modified']);
+			$message = $this->msg_is_comment_on(
+				$comment_on['tag'],
+				$comment_on['title'],
+				$this->page['user_name'],
+				$this->page['modified']);
 
 			$tpl->f_preview_meta	= $this->show_message($message, 'comment-info', false);
 			$tpl->f_preview_text	= $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');

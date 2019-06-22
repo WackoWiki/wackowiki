@@ -122,9 +122,9 @@ del.diff {
 
 .comment-info {
 	border: 1px solid #d5d9e6;
-	color: #cc3333;
+	color: #AAAAAA;
 	font-weight: bold;
-	background: #f4fbff url(./../icon/comment.svg) no-repeat scroll 10px 10px;
+	background: url(./../icon/comment.svg) no-repeat scroll 10px 10px;
 	margin: 10px;
 	padding: 10px 10px 10px 40px;
 	position: relative;

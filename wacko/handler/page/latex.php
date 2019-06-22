@@ -23,12 +23,12 @@ if ($this->has_access('read'))
 		if ($this->page['comment_on_id'])
 		{
 			$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
-			echo '<div class="comment-info">' .
-				$this->_t('ThisIsCommentOn') . ' ' .
-				$this->compose_link_to_page($comment_on['tag'], '', $comment_on['title'], $comment_on['tag']) . ', ' .
-				$this->_t('PostedBy') . ' ' .
-				$this->user_link($this->page['user_name'], '', true, false) . ' ' .
-				$this->_t('At') . ' ' . $this->page['modified'] . "</div>";
+			$message = $this->this_is_comment_on(
+				$comment_on['tag'],
+				$comment_on['title'],
+				$this->page['user_name'],
+				$this->page['modified']);
+			$this->show_message($message, 'comment-info');
 		}
 
 		if (!$this->page['latest'])
