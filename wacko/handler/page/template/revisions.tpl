@@ -44,7 +44,9 @@
 						[= n _ =
 							<span class="editnote">[[ ' note ' ]]</span>
 						=]
-						[ ' minor ' ]
+						[= m _ =
+							<abbr class="minoredit" title="[ ' _t: EditMinor ' ]">[ ' minor ' ]</abbr>
+						=]
 						[= r _ =
 							[= x _ =
 								<span class="review">[[ ' _t: ReviewedBy ' ] [ ' user ' ]]</span>
