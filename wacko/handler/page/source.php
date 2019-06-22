@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 	TODO: add config option to set an treshhold or to disable the source handler
 */
 
-# $this->ensure_page(true); // we allow comments, like we do for edit handler
+# $this->ensure_page(true); // we allow comments, like we do in edit handler
 
 if ($this->has_access('read'))
 {

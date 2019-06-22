@@ -531,7 +531,7 @@ footer {
 }
 
 /* Comment author and date */
-.comment-info {
+.comment-meta {
 	color: #AAAAAA;
 	padding-bottom: 20px;
 	float: right;
@@ -552,7 +552,7 @@ ol#comments {
 	padding: 0;
 }
 
-.comment-info li {
+.comment-meta li {
 	border: medium none;
 	margin: 0;
 	padding: 0;
@@ -826,7 +826,7 @@ td.file- {
 
 /* caption */
 .caption{
-	color: #1d1d1d; /* #888 */
+	color: #1d1d1d; /* #888 #666*/
 	font-size: 12px;
 }
 .caption-sub {
@@ -2355,11 +2355,16 @@ span.license {
 	display: block;
 }
 
-.diffdown-content a:hover {background-color: #f1f1f1;}
+.diffdown-content a:hover {background-color: #CCFFCC;} /* #f1f1f1 */
 
 .diffdown-content span {
 	display: inline-block; 
 	width: 40px;
+}
+
+.diffdown-content .active {
+	background-color: #E7F9FF; 
+
 }
 
 .diffdown:hover .diffdown-content {

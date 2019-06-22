@@ -16,7 +16,7 @@
 			</header>
 			[= cmt _ =
 				<article class="comment">
-					<span class="comment-info">
+					<span class="comment-meta">
 						<strong>&#8212; [ ' user ' ]</strong> ([ ' created | time_formatted ' ][ ' edit CmtEdited ' ])&nbsp;&nbsp;&nbsp;
 					</span>
 					<br>

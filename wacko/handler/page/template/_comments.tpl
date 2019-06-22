@@ -28,7 +28,7 @@
 								</header>
 								<p>[ ' comment ' ]</p>
 								<footer>
-									<ul class="comment-info">
+									<ul class="comment-meta">
 										<li>[ ' owner ' ]</li>
 										<li><time datetime="[ ' created ' ]">[ ' created | time_formatted ' ]</time></li>
 										[= m _ =
