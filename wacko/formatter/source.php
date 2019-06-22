@@ -20,7 +20,7 @@ if ($copy_button)
 		'</button>';
 }
 
-echo '<pre id="' . $div_id . '" class="code" style="padding:5px">';
+echo '<pre id="' . $div_id . '" class="code">';
 
 switch ($default)
 {
