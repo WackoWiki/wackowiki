@@ -122,7 +122,6 @@ if ($page_a && $page_b
 
 		$tpl->leave();	// prefix
 		$tpl->leave();	// menu
-
 	};
 
 	// print header
@@ -130,8 +129,6 @@ if ($page_a && $page_b
 
 	$revisions_menu($a, $page_a, 'a');
 	$revisions_menu($b, $page_b, 'b');
-
-
 
 	$params = ['a' => $a, 'b' => $b];
 
