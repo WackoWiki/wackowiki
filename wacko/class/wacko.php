@@ -4279,7 +4279,7 @@ class Wacko
 				// take page title intead of pagepath when only tag is provided, e.g. ((/Root/Page))
 				if (!$title && $tag == $text)
 				{
-					$title = $this_page['title'];
+					$title = $this_page['title'] ?? '';
 				}
 
 				if ($title)
