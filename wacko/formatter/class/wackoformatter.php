@@ -564,6 +564,7 @@ class WackoFormatter
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
+
 			if (($this->cols <> 0) and ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
