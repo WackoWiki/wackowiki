@@ -120,8 +120,8 @@ if ($page_a && $page_b
 			$tpl->editnote	= $r['edit_note'] ?: null;
 		}
 
+		$tpl->leave();	// r
 		$tpl->leave();	// prefix
-		$tpl->leave();	// menu
 	};
 
 	// print header
