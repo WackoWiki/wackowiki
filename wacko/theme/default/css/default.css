@@ -526,7 +526,7 @@ footer {
 }
 
 .comment:hover .comment-tools,
-.upload tr:hover .file-tools {
+.file tr:hover .file-tools {
 	visibility: visible;
 }
 
@@ -737,7 +737,9 @@ a.btn-link {
 
 /* <------------------ */
 
-.upload {
+/* files action */
+
+.file {
 	width: 100%;
 }
 
@@ -746,29 +748,29 @@ a.btn-link {
 	table-layout: fixed;
 }
 
-.upload img {
+.file img {
 
 }
 
-.upload tr:hover {
+.file tr:hover {
 	background: #CCFFCC;
 }
 
-.upload th{
+.file th{
 	color: #444444;
 	font-weight: normal;
 	text-align: left;
 	width: 130px;
 }
 
-.upload td,
-.upload th {
+.file td,
+.file th {
 	padding: 2px 5px 2px 5px;
 	vertical-align: top;
 }
 
-.upload td.dt-,
-.upload td.file- {
+.file td.dt-,
+.file td.file- {
 	white-space: nowrap;
 	color: #000000;
 	vertical-align: top;
@@ -778,32 +780,69 @@ td.file- {
 	width: 50%;
 }
 
-.upload td.dt- {
+.file td.dt- {
 	padding-right: 0;
 }
 
-.upload td.tool- {
+.file td.tool- {
 	padding-right: 0;
 	width: 9%;
 }
 
-.upload td.size- {
+.file td.size- {
 	padding-right: 0;
 	text-align: right;
 }
 
-.upload td.desc- {
+.file td.desc- {
 	font-size: 80%;
 	color: #444444;
 }
 
-.upload td.dt- .dt2-,
-.upload td .file-tools a,
-.upload td.size- .size2- {
+.file td.dt- .dt2-,
+.file td .file-tools a,
+.file td.size- .size2- {
 	font: 11px Tahoma;
 	color: #666666;
 	padding: 5px;
 	white-space: nowrap;
+}
+
+/* filemeta handler */
+
+.filemeta {
+	width: 100%;
+}
+
+.filemeta tr:hover {
+	background: #CCFFCC;
+}
+
+.filemeta th{
+	color: #444444;
+	font-weight: normal;
+	text-align: left;
+	width: 130px;
+}
+
+.filemeta td,
+.filemeta th {
+	padding: 2px 5px 2px 5px;
+	vertical-align: top;
+}
+
+ul.filemeta,
+ul.filemeta ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.filemeta li {
+	display: block;
+	overflow: hidden;
+	padding-bottom: 5px;
+	text-align: left;
+	overflow-wrap: break-word;
 }
 
 .file-info {
@@ -2087,20 +2126,6 @@ li.m-source img {
 	text-align: left;
 }
 
-ul.upload,
-ul.upload ul {
-	list-style-type: none;
-	padding: 0;
-}
-
-.upload li {
-	display: block;
-	overflow: hidden;
-	padding-bottom: 5px;
-	text-align: left;
-	overflow-wrap: break-word;
-}
-
 .info-title {
 	display: block;
 	float: left;
@@ -2329,6 +2354,10 @@ span.license {
 
 table.diff {
 	width: 100%;
+}
+
+table.diff td {
+	vertical-align: top;
 }
 
 .diffbtn {

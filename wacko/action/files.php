@@ -185,13 +185,13 @@ if ($can_view)
 	if ($media)
 	{
 		$path1 = 'file:/';
-		$style = 'upload tbl-fixed';
+		$style = 'file tbl-fixed';
 	}
 	else
 	{
 		// !!!!! patch link to not show pictures when not needed
 		$path1 = '_file:/';
-		$style = 'upload';
+		$style = 'file';
 	}
 
 	$tpl->pagination_text = $pagination['text'];
