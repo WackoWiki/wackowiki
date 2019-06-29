@@ -735,8 +735,6 @@ a.btn-link {
 	white-space: nowrap;
 }
 
-/* <------------------ */
-
 /* files action */
 
 .file {
@@ -831,18 +829,20 @@ td.file- {
 	vertical-align: top;
 }
 
-ul.filemeta,
-ul.filemeta ul {
-	list-style-type: none;
-	padding: 0;
+.filemeta ol {
+	/* padding: 0; */
 }
 
 .filemeta li {
-	display: block;
-	overflow: hidden;
+	list-style-type: none;
+	/* padding: 0; */
 	padding-bottom: 5px;
 	text-align: left;
 	overflow-wrap: break-word;
+}
+
+.filemeta p {
+	margin: 0;
 }
 
 .file-info {
