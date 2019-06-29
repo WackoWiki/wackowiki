@@ -8,7 +8,7 @@
 			<h4>[ ' link ' ]</h4>
 			<form action="[ ' href: filemeta ' ]" method="post" name="remove_file">
 			[ ' csrf: remove_file ' ]
-			<table class="upload tbl-fixed">
+			<table class="filemeta tbl-fixed">
 				<tr>
 					<th scope="row">[ ' _t: FileDesc ' ]:</th>
 					<td>[ ' file.file_description ' ]</td>
@@ -83,7 +83,7 @@
 			[= m _ =
 				<span class="show-image">[ ' image ' ]</span>
 			=]
-			<table class="upload tbl-fixed">
+			<table class="filemeta tbl-fixed">
 				<tr>
 					<th scope="row">[ ' _t: FileSyntax ' ]:</th>
 					<td><code>[ ' syntax ' ]</code></td>
@@ -184,7 +184,7 @@
 			<h4>[ ' link ' ]</h4>
 			<form action="[ ' href: filemeta ' ]" method="post" name="edit_file">
 				[ ' csrf: edit_file ' ]
-				<table class="upload">
+				<table class="filemeta">
 					<tr>
 						<th scope="row">[ ' _t: FileDesc ' ]:</th>
 						<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="[ ' desc | e attr ' ]"></td>
