@@ -3498,9 +3498,16 @@ class Wacko
 			$caption = 'caption'; // true / caption + license
 		}
 
+		//get clear command
+		if (preg_match('/(clear)/i', $param))
+		{
+			$clear = 'clear'; // true / clear float
+		}
+
 		$params = [
 			'src'		=> $src ?? null,
 			'caption'	=> $caption ?? null,
+			'clear'		=> $clear ?? null,
 			'align'		=> $align,
 			'width'		=> $w,
 			'height'	=> $h,
@@ -3574,6 +3581,7 @@ class Wacko
 	{
 		$caption	= '';
 		$class		= '';
+		$clear		= '';
 		$media_class = '';
 		$icon		= '';
 		$audio_link	= false;
@@ -3586,7 +3594,7 @@ class Wacko
 		$href		= '';
 		$text		= str_replace('"', '&quot;', $text);
 
-		// parse off <img> resizing tags from text: height= / width= / align=
+		// parse off <img> resizing tags from text: height= / width= / align=, e.g. ((http://example.com/image.png width=500))
 		$_align		= '';
 		$_height	= '';
 		$_width		= '';
@@ -4018,6 +4026,20 @@ class Wacko
 								{
 									$tpl	= '';
 									$text	= $this->audio_link($src, $media_class, $title);
+								}
+
+								// add clearfix
+								// 		link		-> <a class="... clearfix" ...><img ...></a>
+								// 		nolink		-> <span class="clearfix"><img ...></span>
+								// 		caption		-> <figure><span class="clearfix"></span>
+								if ($param['clear'])
+								{
+									$clear = true;
+
+									if (!$param['caption'])
+									{
+										$class .= ' clearfix'; // add CSS clearfix class
+									}
 								}
 
 								// add caption
@@ -4521,7 +4543,7 @@ class Wacko
 
 				if ($caption)
 				{
-					$res	= $this->add_caption($res, $caption, $media_class);
+					$res	= $this->add_caption($res, $caption, $media_class, $clear);
 				}
 
 				return $res;
@@ -4531,7 +4553,12 @@ class Wacko
 		// file:image.png + ?nolink + &caption
 		if ($caption)
 		{
-			return $this->add_caption($text, $caption, $media_class);
+			return $this->add_caption($text, $caption, $media_class, $clear);
+		}
+
+		if ($clear)
+		{
+			$text = '<span class="clearfix">' . $text . '</span>';
 		}
 
 		return $text;
@@ -4553,7 +4580,7 @@ class Wacko
 		}
 	}
 
-	function add_caption($text, $caption, $class)
+	function add_caption($text, $caption, $class, $clear = false)
 	{
 		$figure =
 			'<figure class="caption ' . $class . '">' . "\n" .
@@ -4561,9 +4588,16 @@ class Wacko
 				'<figcaption>' . $caption . '</figcaption>' . "\n" .
 			'</figure>';
 
+		// center requires additional wrapper
 		if ($class == 'media-center')
 		{
 			$figure = '<div class="figure-center-wrp">' . $figure . '</div>';
+		}
+
+		// add clearfix
+		if ($clear)
+		{
+			$figure .= '<span class="clearfix"></span>';
 		}
 
 		return $figure;
