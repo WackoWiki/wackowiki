@@ -361,11 +361,22 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 
 /* SYNTAX %%(wrapper xyz)%% */
 
+.wrapper-center {
+	margin: 0 auto !important;
+}
+.wrapper-left {
+	float: left;
+}
+.wrapper-right {
+	float: right;
+}
+
 div.action,
 aside.action {
 	margin: 2px;
 	background: #f6f7ed;
 	border: 1px dotted #CCCCCC;
+	max-width: 100%;
 }
 div.action-content { padding: 10px 10px 25px 10px; }
 

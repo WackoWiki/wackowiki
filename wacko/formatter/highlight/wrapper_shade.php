@@ -1,8 +1,14 @@
 <?php
 
-echo '<div class="action">' . "\n";
-echo '<div class="action-content">' . "\n";
-echo $text;
-echo "</div>\n</div>\n";
+/*
+	%%(Formatter
+		wrapper="shade")
+	content
+	%%
+*/
 
-?>
+echo	'<div class="action">' . "\n" .
+			'<div class="action-content">' . "\n" .
+				$text .
+			"</div>\n" .
+		"</div>\n";
