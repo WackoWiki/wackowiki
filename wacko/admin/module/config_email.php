@@ -165,7 +165,6 @@ function admin_config_email(&$engine, &$module)
 					<input type="submit" id="send_test_email" name="send_test_email" value="<?php echo $engine->_t('SendTestEmail'); ?>">
 				</td>
 			</tr>
-
 			<tr>
 				<th colspan="2">
 					<br>
