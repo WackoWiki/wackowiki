@@ -11,6 +11,10 @@
 	</ul>
 	<br><br><br>
 	<table class="diff">
+		<colgroup>
+			<col span="1" style="width: 50%;">
+			<col span="1" style="width: 50%;">
+		</colgroup>
 		<tr>
 			<td>
 				[ ' a diffmeta ' ]

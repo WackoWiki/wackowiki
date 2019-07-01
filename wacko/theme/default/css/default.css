@@ -104,7 +104,7 @@ body {
 a {
 	color: #003399;
 	text-decoration: none;
-	white-space: nowrap;
+	/* white-space: nowrap; */
 }
 
 a:link {
@@ -355,7 +355,7 @@ header {
 
 .menu-main {
 	float: left;
-	height: 25px;
+	/* height: 25px; */
 	background: #FFFFFF;
 	width: 100%;
 	padding-top: 5px;
@@ -1341,6 +1341,7 @@ a:target {
 	float: right;
 	text-align: left;
 	position: relative;
+	height: 25px;
 }
 
 #search-box label {
@@ -2371,7 +2372,7 @@ table.diff td {
 
 .diffdown {
 	position: relative;
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .diffdown-content {
