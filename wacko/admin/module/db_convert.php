@@ -214,9 +214,6 @@ function admin_db_convert(&$engine, &$module)
 
 		?>
 		<br><br><br>
-		<p><small>
-			<?php echo $engine->_t('ConvertTablesEngineHint');?>
-		</small></p>
 		<br>
 <?php
 	}

@@ -926,13 +926,12 @@ $ap_translation = [
 	'LogColumsToStrict'			=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
 	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
 
-	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB/XtraDB',
-	'ConvertTablesEngineInfo'	=> 'Falls man über vorhandene Tabellen verfügt, die für eine bessere Zuverlässigkeit und Skalierbarkeit in InnoDB / XtraDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprünglich MyISAM, was früher der Standard war.',
-	'ConvertTablesEngineHint'	=> '* XtraDB ist eine erweiterte Version der InnoDB-Speicher-Engine, die auf moderner Hardware besser skaliert werden kann, und enthält eine Vielzahl anderer Funktionen, die in Hochleistungsumgebungen nützlich sind. Sie ist vollständig abwärtskompatibel und identifiziert sich selbst MariaDB als "<code> ENGINE = InnoDB </code>" (genau wie InnoDB) und kann daher als ein Drop-In-Ersatz für Standard-InnoDB verwendet werden.',
+	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB',
+	'ConvertTablesEngineInfo'	=> 'Falls man über vorhandene Tabellen verfügt, die für eine bessere Zuverlässigkeit und Skalierbarkeit in InnoDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprünglich MyISAM, was früher der Standard war.',
 
 	'DbVersionMin'				=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
-	'DbEngineOk'				=> 'InnoDB/XtraDB ist verfügbar.',
-	'DbEngineMissing'			=> 'InnoDB / XtraDB ist nicht verfügbar.',
+	'DbEngineOk'				=> 'InnoDB ist verfügbar.',
+	'DbEngineMissing'			=> 'InnoDB ist nicht verfügbar.',
 	'EngineTable'				=> 'Tabelle',
 	'EngineDefault'				=> 'Standard',
 	'EngineColumn'				=> 'Spalte',

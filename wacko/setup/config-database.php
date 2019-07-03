@@ -171,7 +171,7 @@ if ($config['is_update'] == false)
 	 */
 
 	$engines	= [];
-	$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB / XtraDB (' . $lang['Recommended'] . ')'];	// default
+	$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB (' . $lang['Recommended'] . ')'];	// default
 	$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
 
 	foreach ($engines as $k => $engine)
