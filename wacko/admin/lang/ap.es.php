@@ -912,13 +912,12 @@ $ap_translation = [
 	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
-	'ConvertTablesEngine'		=> 'Conversión de tablas de MyISAM a InnoDB/XtraDB',
-	'ConvertTablesEngineInfo'	=> 'Si tiene tablas existentes que desea convertir a InnoDB/XtraDB* para una mayor fiabilidad y escalabilidad, utilice la siguiente rutina. Estas tablas eran originalmente MyISAM, que antes era la tabla por defecto.',
-	'ConvertTablesEngineHint'	=> '* XtraDB es una versión mejorada del motor de almacenamiento InnoDB, diseñado para escalar mejor en hardware moderno, e incluye una variedad de otras características útiles en entornos de alto rendimiento. <br><br>Es totalmente compatible con versiones anteriores, y se identifica a sí mismo como "<code>ENGINE=InnoDB</code>" (al igual que InnoDB), por lo que puede ser utilizado como sustituto de la InnoDB estándar.',
+	'ConvertTablesEngine'		=> 'Conversión de tablas de MyISAM a InnoDB',
+	'ConvertTablesEngineInfo'	=> 'Si tiene tablas existentes que desea convertir a InnoDB* para una mayor fiabilidad y escalabilidad, utilice la siguiente rutina. Estas tablas eran originalmente MyISAM, que antes era la tabla por defecto.',
 
 	'DbVersionMin'				=> 'Requiere al menos MySQL 5.6.4, versión disponible',
-	'DbEngineOk'				=> 'InnoDB/XtraDB está disponible.',
-	'DbEngineMissing'			=> 'InnoDB/XtraDB no está disponible.',
+	'DbEngineOk'				=> 'InnoDB está disponible.',
+	'DbEngineMissing'			=> 'InnoDB no está disponible.',
 	'EngineTable'				=> 'Tabla',
 	'EngineDefault'				=> 'Default',
 	'EngineColumn'				=> 'Column',
