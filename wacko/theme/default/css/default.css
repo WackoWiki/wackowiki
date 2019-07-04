@@ -2365,6 +2365,10 @@ table.diff td {
 	background-color: #E7F9FF; 
 
 }
+.diffdown-content .disabled {
+	background-color: #d3d7cf; 
+
+}
 
 .diffdown:hover .diffdown-content {
 	display: block;

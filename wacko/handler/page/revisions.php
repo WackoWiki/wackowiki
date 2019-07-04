@@ -88,8 +88,8 @@ if ($this->has_access('read'))
 			}
 
 			$tpl->value			= (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']);
-			$tpl->checkedA		= $num == 0 ? 'checked' : '';
-			$tpl->checkedB		= $num == 1 ? 'checked' : '';
+			$tpl->checkedA		= $num == 1 ? 'checked' : '';
+			$tpl->checkedB		= $num == 0 ? 'checked' : '';
 
 			// page_size change
 			$tpl->delta			= $this->delta_formatted($this->rev_delta[$page['revision_id']]);

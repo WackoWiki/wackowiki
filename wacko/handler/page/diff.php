@@ -70,8 +70,8 @@ $load_diff_page = function ($revision_id)
 	}
 };
 
-$page_a = $load_diff_page($b);
-$page_b = $load_diff_page($a);
+$page_a = $load_diff_page($a);
+$page_b = $load_diff_page($b);
 
 if ($page_a && $page_b
 	&& $this->page['page_id'] == $page_a['page_id']
@@ -81,9 +81,9 @@ if ($page_a && $page_b
 	// TODO: $hide_minor_edit
 	list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
 
-	$revisions_menu = function ($rev, $page, $prefix) use ($revisions, $diffmode, $a, $b, &$tpl)
+	$revisions_menu = function ($rev, $page, $side) use ($revisions, $diffmode, $page_a, $page_b, &$tpl)
 	{
-		$tpl->enter($prefix . '_');
+		$tpl->enter($side . '_');
 
 		$tpl->href		= $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : ''));
 		$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $page['version_id'] . '</strong>');
@@ -96,18 +96,25 @@ if ($page_a && $page_b
 
 		foreach ($revisions as $r)
 		{
-			$act = ($r['revision_id'] == $a || $r['revision_id'] == $b);
+			$act = (   ($side == 'a' && $r['revision_id'] == $page_a['revision_id'])
+					|| ($side == 'b' && $r['revision_id'] == $page_b['revision_id']));
 
 			if ($act)
 			{
 				$href	= '#';
 				$class	= ' class="active"';
 			}
+			else if (  ($side == 'a' && $r['version_id'] >= $page_b['version_id'])
+					|| ($side == 'b' && $r['version_id'] <= $page_a['version_id']))
+			{
+				$href	= '#';
+				$class	= ' class="disabled"';
+			}
 			else
 			{
-				$params	= ($a != $rev)
-							? ['a' => $r['revision_id'],	'b' => $b]
-							: ['a' => $a,					'b' => $r['revision_id']];
+				$params	= ($page_a['revision_id'] != $rev)
+							? ['a' => $page_a['revision_id'],	'b' => $r['revision_id']]
+							: ['a' => $r['revision_id'],		'b' => $page_b['revision_id']];
 				$href	= $this->href('diff', '', $params + ['diffmode' => $diffmode]);
 				$class	= '';
 			}
@@ -121,7 +128,7 @@ if ($page_a && $page_b
 		}
 
 		$tpl->leave();	// r
-		$tpl->leave();	// prefix
+		$tpl->leave();	// prefix side
 	};
 
 	// print header
@@ -154,11 +161,11 @@ if ($page_a && $page_b
 
 			// This is a really cheap way to do it.
 			// prepare bodies
-			$body_a		= explode("\n", $page_b['body']);
-			$body_b		= explode("\n", $page_a['body']);
+			$body_a		= explode("\n", $page_a['body']);
+			$body_b		= explode("\n", $page_b['body']);
 
-			$added		= array_diff($body_a, $body_b);
-			$deleted	= array_diff($body_b, $body_a);
+			$added		= array_diff($body_b, $body_a);
+			$deleted	= array_diff($body_a, $body_b);
 			# $charset	= $this->get_charset($page_a['page_lang']);
 
 			$tpl->enter('m2_');
