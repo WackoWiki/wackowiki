@@ -1121,9 +1121,6 @@ a:target {
 	background: #1E9905;
 }
 
-/* ------------------------------- */
-
-
 /* CSS form formater */
 .cssform p {
 	width: 320px;
@@ -1148,39 +1145,6 @@ a:target {
 .cssform textarea {
 	width: 570px;
 	height: 50px;
-}
-
-/* cssform1 for actions */
-#cssform1 {
-	padding: 10px;
-	margin: 0 auto;
-}
-
-#cssform1 p {
-	clear: left;
-	margin: 0;
-	padding: 5px 0 8px 0;
-	/*padding-left: 20%; width of left column containing the label elements*/
-	height: 1%;
-}
-
-#cssform1 label {
-	float: left;
-	margin-left: 0; /*
-	margin-left: -155px; width of left column*/
-	width: 350px;
-	/* width of labels. Should be smaller than left column (155px) to create some right margin*/
-	text-align: left;
-	margin-right: 10px;
-}
-
-#cssform1 input[type="text"] {
-	width: 180px;
-}
-
-#cssform1 textarea {
-	width: 250px;
-	height: 150px;
 }
 
 .form-tbl {
