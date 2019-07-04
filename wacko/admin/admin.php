@@ -149,6 +149,7 @@ if (!isset($engine->sess->ap_created))
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
+		<?php if (RECOVERY_MODE) echo '<style>input.verify { display: none; }</style>'; // TODO: fix routing for static files ?>
 	</head>
 
 	<body>
