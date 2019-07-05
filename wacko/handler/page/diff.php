@@ -96,10 +96,8 @@ if ($page_a && $page_b
 
 		foreach ($revisions as $r)
 		{
-			$act = (   ($side == 'a' && $r['revision_id'] == $page_a['revision_id'])
-					|| ($side == 'b' && $r['revision_id'] == $page_b['revision_id']));
-
-			if ($act)
+			if (   ($side == 'a' && $r['revision_id'] == $page_a['revision_id'])
+				|| ($side == 'b' && $r['revision_id'] == $page_b['revision_id']))
 			{
 				$href	= '#';
 				$class	= ' class="active"';
@@ -107,8 +105,8 @@ if ($page_a && $page_b
 			else if (  ($side == 'a' && $r['version_id'] >= $page_b['version_id'])
 					|| ($side == 'b' && $r['version_id'] <= $page_a['version_id']))
 			{
-				$href	= '#';
-				$class	= ' class="disabled"';
+				// skip all revisions out of a -> b scope
+				continue;
 			}
 			else
 			{
@@ -128,7 +126,7 @@ if ($page_a && $page_b
 		}
 
 		$tpl->leave();	// r
-		$tpl->leave();	// prefix side
+		$tpl->leave();	// side prefix
 	};
 
 	// print header
