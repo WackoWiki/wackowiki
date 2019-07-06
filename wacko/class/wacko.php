@@ -3427,7 +3427,7 @@ class Wacko
 		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text . '</a>';
 	}
 
-	// parse off [?|&][caption|direct|nolink|linkonly|right|left|20x50] arguments from file:[/|!/|../]image.png?arg1&arg2=
+	// parse off [?|&][caption|clear|direct|nolink|linkonly|right|left|20x50] arguments from file:[/|!/|../]image.png?arg1&arg2=
 	function parse_media_param($file_name)
 	{
 		//split into src and parameters (using the questionmark)
