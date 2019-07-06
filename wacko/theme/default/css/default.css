@@ -2321,6 +2321,13 @@ table.diff {
 	width: 100%;
 }
 
+.diffmeta-a {
+	width: 50%;
+}
+.diffmeta-b {
+	width: 50%;
+}
+
 table.diff td {
 	vertical-align: top;
 }
@@ -2337,6 +2344,7 @@ table.diff td {
 .diffdown {
 	position: relative;
 	/* display: inline-block; */
+	margin-right: 20px;
 }
 
 .diffdown-content {
@@ -2361,13 +2369,10 @@ table.diff td {
 	width: 40px;
 }
 
-.diffdown-content .active {
-	background-color: #E7F9FF; 
-
-}
-.diffdown-content .disabled {
-	background-color: #d3d7cf; 
-
+.diffdown-content .active,
+.diffdown-content .active:hover {
+	background-color: #4383e8;
+	color: white;
 }
 
 .diffdown:hover .diffdown-content {

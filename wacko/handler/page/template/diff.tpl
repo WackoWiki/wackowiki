@@ -12,8 +12,8 @@
 	<br><br><br>
 	<table class="diff">
 		<colgroup>
-			<col span="1" style="width: 50%;">
-			<col span="1" style="width: 50%;">
+			<col span="1" class="diffmeta-a">
+			<col span="1" class="diffmeta-b">
 		</colgroup>
 		<tr>
 			<td>
@@ -69,7 +69,7 @@
 	<div class="diffdown-content">
 		[= r _ =
 			<a href="[ ' href ' ]" [ ' class ' ]>
-				<span>[ ' version ' ]</span>
+				<span><strong>[ ' version ' ]</strong></span>
 				[ ' modified | time_formatted ' ]
 				[ ' username ' ]
 				[ ' editnote | enclose " [" "]" ' ]
