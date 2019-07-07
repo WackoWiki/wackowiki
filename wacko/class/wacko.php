@@ -7411,7 +7411,7 @@ class Wacko
 		{
 			// #2. find all <hX id="h1249-1" class="heading"></hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)</h\\2>)!i",
+			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)!i",
 				[&$this, 'numerate_toc_callback_toc'], $what);
 		}
 
@@ -7430,6 +7430,7 @@ class Wacko
 	{
 		return '<h' . $matches[2] . ' id="' . $matches[3] . '" class="heading">' .
 			($this->post_wacko_toc_hash[$matches[3]][1] ?? $matches[4]) .
+			'<a class="self-link" href="#' . $matches[3] . '"></a>' .
 			'</h' . $matches[2] . '>';
 	}
 
