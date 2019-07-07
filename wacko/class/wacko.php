@@ -7311,10 +7311,11 @@ class Wacko
 
 		foreach ($toc as $k => $v)
 		{
-			$toc[$k] = implode('<heading,col>', $v);
+			$toc[$k] = implode('<h-item>', $v);
 		}
 
-		$this->body_toc = implode('<heading,row>', $toc);
+		// the last <h-end> ensures there is no empty body_toc in database
+		$this->body_toc = implode('<h-end>', $toc) . '<h-end>';
 	}
 
 	function build_toc($tag, $from, $to, $numerate, $link = -1)
@@ -7339,11 +7340,11 @@ class Wacko
 
 		$page['body_toc']	= $page['body_toc'] ?? null;
 		#$toc				= unserialize($page['body_toc']); //json_decode
-		$toc				= explode('<heading,row>', $page['body_toc']);
+		$toc				= explode('<h-end>', $page['body_toc']);
 
 		foreach ($toc as $k => $toc_item)
 		{
-			$toc[$k] = explode('<heading,col>', $toc_item);
+			$toc[$k] = explode('<h-item>', $toc_item);
 		}
 
 		foreach ($toc as $k => $toc_item)
