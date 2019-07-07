@@ -274,7 +274,7 @@ class Paragrafica
 		// 1. get all ^^ of this
 		$this->toc = [];
 		$what = preg_replace_callback( '!' .
-				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]\"></a></h\\2>)" .	// 2=depth, 3=h-id, 4=name
+				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)" .	// 2=depth, 3=h-id, 4=name
 					"|" .
 				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)" .												// 6=p-id
 					"|" .
