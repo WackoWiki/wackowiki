@@ -3415,10 +3415,9 @@ class Wacko
 
 		if ($title)
 		{
-			$title = htmlentities($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+			$title = Ut::html($title, false);
 		}
 
-		//$text = htmlentities($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 		if ($track && $this->link_tracking())
 		{
 			$this->track_link($tag, LINK_PAGE);
