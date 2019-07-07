@@ -7428,9 +7428,7 @@ class Wacko
 	function numerate_toc_callback_toc($matches)
 	{
 		return '<h' . $matches[2] . ' id="' . $matches[3] . '" class="heading">' .
-			(isset($this->post_wacko_toc_hash[$matches[3]][1])
-				? $this->post_wacko_toc_hash[$matches[3]][1]
-				: $matches[4]) .
+			($this->post_wacko_toc_hash[$matches[3]][1] ?? $matches[4]) .
 			'</h' . $matches[2] . '>';
 	}
 
