@@ -207,10 +207,11 @@ if ($this->has_access('read')
 				$this->page_cache['supertag'][$this->supertag]			= '';
 				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
-				$message	= $this->page['comment_on_id']
+				// show success message
+				/* $message	= $this->page['comment_on_id']
 								? $this->_t('CommentSaved')
 								: Ut::perc_replace($this->_t('PageSaved'), ($this->page['version_id'] + 1));
-				$this->set_message($message, 'success');
+				$this->set_message($message, 'success'); */
 
 				// forward to show handler
 				$this->http->redirect($this->href());

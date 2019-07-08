@@ -157,11 +157,11 @@ else
 	$tpl->n_message = $this->show_message($message, 'info', false);
 
 	// user might want to login
-	if ($this->has_access('read', '', GUEST) === false)
+	/* if ($this->has_access('read', '', GUEST) === false)
 	{
 		$message = $this->_t('ReadAccessDeniedHintGuest');
 		$tpl->n_message = $this->show_message($message, 'hint', false);
-	}
+	} */
 }
 
 // show category tags

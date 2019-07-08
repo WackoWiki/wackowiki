@@ -43,7 +43,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 	$tpl->enter('page_');
 
-	foreach ($pages as $i => $page)
+	foreach ($pages as $page)
 	{
 		if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 		{
