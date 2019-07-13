@@ -275,30 +275,32 @@ function bb2_manage(&$engine)
 
 	<div class="alignleft">
 	<?php
+	echo Ut::perc_replace($engine->_t('BbRecordsFiltered'), '<strong>' . $count['n'] . '</strong>', '<strong>' . $totalcount['n'] . '</strong>') . ':<br>';
+	echo $engine->_t('BbShow') . ' ';
+
 	if ($count['n'] < $totalcount['n'])
 	{
-		echo Ut::perc_replace($engine->_t('BbRecordsFiltered'), '<strong>' . $count['n'] . '</strong>', '<strong>' . $totalcount['n'] . '</strong>') . ':<br>';
+		$link = '[<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>]';
 
-		if (!empty($_GET['status_key']))		echo $engine->_t('BbStatus')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-		if (!empty($_GET['blocked']))			echo $engine->_t('BbBlocked')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-		if (!empty($_GET['permitted']))			echo $engine->_t('BbPermitted')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-		if (!empty($_GET['ip']))				echo $engine->_t('BbIP')		. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-		if (!empty($_GET['user_agent']))		echo $engine->_t('BbUserAgent')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-		if (!empty($_GET['request_method']))	echo $engine->_t('BbGetPost')	. ' [<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>] ';
-	}
-	else
-	{
-		echo Ut::perc_replace($engine->_t('BbRecordsFiltered'), $count['n'], '<strong>' . $totalcount['n'] . '</strong>') . ':<br>';
+		if (!empty($_GET['status_key']))		echo '<strong>' . $engine->_t('BbStatus')		. '</strong> ' . $link . ' ';
+		if (!empty($_GET['blocked']))			echo '<strong>' . $engine->_t('BbBlocked')		. '</strong> ' . $link . ' ';
+		if (!empty($_GET['permitted']))			echo '<strong>' . $engine->_t('BbPermitted')	. '</strong> ' . $link . ' ';
+		if (!empty($_GET['ip']))				echo '<strong>' . $engine->_t('BbIP')			. '</strong> ' . $link . ' ';
+		if (!empty($_GET['user_agent']))		echo '<strong>' . $engine->_t('BbUserAgent')	. '</strong> ' . $link . ' ';
+		if (!empty($_GET['request_method']))	echo '<strong>' . $engine->_t('BbGetPost')		. '</strong> ' . $link . ' ';
 	}
 
-	if (!isset($_GET['status_key']) && !isset($_GET['blocked']))
+	if (!isset($_GET['status_key']))
 	{
-		echo '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'blocked' => 'true']) . '">' . $engine->_t('BbShowBlocked') . '</a>';
-	}
+		if (!isset($_GET['blocked']))
+		{
+			echo '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'blocked' => 'true']) . '">' . $engine->_t('BbBlocked') . '</a> ';
+		}
 
-	if (!isset($_GET['status_key']) && !isset($_GET['permitted']))
-	{
-		echo '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'permitted' => 'true']) . '">' . $engine->_t('BbShowPermitted') . '</a>';
+		if (!isset($_GET['permitted']))
+		{
+			echo ' <a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'permitted' => 'true']) . '">' . $engine->_t('BbPermitted') . '</a>';
+		}
 	}
 	?>
 	</div>
