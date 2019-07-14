@@ -3160,8 +3160,10 @@ class Wacko
 		}
 	}
 
-	function msg_is_comment_on($tag, $title, $user_name, $modified)
+	function msg_is_comment_on($tag, $title, $user_name, $modified, $lang)
 	{
+		$title = $this->get_unicode_entities($title, $lang);
+
 		return $this->_t('ThisIsCommentOn') . ' ' .
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
 			$this->_t('PostedBy') . ' ' .
