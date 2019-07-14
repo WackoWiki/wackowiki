@@ -24,7 +24,8 @@ if ($this->has_access('read'))
 			$comment_on['tag'],
 			$comment_on['title'],
 			$this->page['user_name'],
-			$this->page['modified']);
+			$this->page['modified'],
+			$comment_on['page_lang']);
 		$this->show_message($message, 'comment-info');
 	}
 

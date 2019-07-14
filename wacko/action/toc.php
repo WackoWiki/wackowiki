@@ -163,6 +163,7 @@ if ($_page)
 		$tab			= "\t";
 		$tabs			= [];
 		$ident_level	= [];
+		$prev_level		= 0;
 
 		// TODO: properly indent list elements
 		$tabs[0]		= "";
@@ -184,8 +185,6 @@ if ($_page)
 		{
 			if (isset($toc_item[4]) && $toc_item[4])
 			{
-				if (!isset($prev_level)) $prev_level = 0;
-
 				// check page level
 				$cur_level	= $toc_item[4];
 
