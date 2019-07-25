@@ -278,7 +278,7 @@ class Paragrafica
 					"|" .
 				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)" .												// 6=p-id
 					"|" .
-				"<\!--action:begin-->include\s+[^=]+=([^\ ]+)(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .		// 7=tag, 8=notoc
+				"<\!--action:begin-->include\s+.*?page=\"([^\ ]+)\".*?(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .		// 7=tag, 8=notoc
 				// {{include page="TAG" notoc=1}}
 				"!i", [&$this, 'add_toc_entry'], $what);
 
