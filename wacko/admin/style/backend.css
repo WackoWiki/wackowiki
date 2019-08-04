@@ -79,14 +79,12 @@ dfn:hover {
 }
 
 
-
 /*	List styles	*/
 
 ul, ol {
 	margin: 0;
 	padding-left: 30px;
 }
-
 
 
 /*	Image styles	*/
@@ -219,7 +217,7 @@ tr.lined td {
 	border-bottom: 1px dotted #BABFC7;
 }
 
-.lined:hover,
+.lined tr:hover,
 .hl-setting:hover {
 	background:none repeat scroll 0 0 #CCFFCC !important;
 }
