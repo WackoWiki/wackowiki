@@ -246,8 +246,11 @@ function admin_db_backup(&$engine, &$module)
 					<th>&nbsp;&nbsp;<a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
 				</tr>
 <?php
+			$i = 0;
+
 			foreach ($directories as $dir)
 			{
+				$i++;
 				$check = false;
 
 				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR))
@@ -258,10 +261,12 @@ function admin_db_backup(&$engine, &$module)
 				$dir = rtrim($dir, '/');
 
 				echo '<tr>' .
-						'<td colspan="2" class="label"><strong>' . $dir . '</strong></td>' .
-						'<td class="t-center">&nbsp;&nbsp;
-							<input type="checkbox" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . '>
-						</td>' .
+						'<td colspan="2" class="label">' .
+							'<label for="dir_' . $i . '"><strong>' . $dir . '</strong></label>' .
+						'</td>' .
+						'<td class="t-center">&nbsp;&nbsp;' .
+							'<input type="checkbox" id="dir_' . $i . '" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . '>' .
+						'</td>' .
 					'</tr>' .
 					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
 			}
