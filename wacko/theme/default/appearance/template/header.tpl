@@ -68,7 +68,7 @@
 		=]
 		[= dropmenu _ =
 			<li class="dropdown">
-				<a href="#" id="menu-more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-menu"></a>
+				<a href="#" id="menu-more"><img src="[ ' db: theme_url ' ]icon/spacer.png" alt="-" title="[ ' _t: Bookmarks ' ]" class="btn-overflow-menu"></a>
 				<ul class="dropdown_menu">
 					['' menu menuList '']
 				</ul>
