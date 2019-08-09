@@ -19,7 +19,6 @@ Random Image Action
 if (!isset($category))	$category	= '';
 if (!isset($global))	$global		= 0;	// global attachments
 if (!isset($owner))		$owner		= '';
-if (!isset($deleted))	$deleted	= 0;
 if (!isset($caption))	$caption	= 0;
 
 if ($caption)	$param[]	= 'caption';
@@ -32,17 +31,15 @@ $selector =
 		  "LEFT JOIN " . $this->db->table_prefix . "category c ON (k.category_id = c.category_id) "
 		: "") . " " .
 		"WHERE ".
-	"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
+		"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
+		"AND f.deleted <> 1 " .
 	($owner
 		? "AND u.user_name = " . $this->db->q($owner) . " "
 		: '') .
 	($global
 		? "AND f.page_id = 0 "
 		: "AND f.page_id = " . (int) $this->page['page_id'] . " "
-		) . " " .
-	($deleted != 1
-		? "AND f.deleted <> 1 "
-		: "");
+		);
 
 	if ($category)
 	{

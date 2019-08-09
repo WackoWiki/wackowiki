@@ -163,6 +163,7 @@ if ($can_view)
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
 			"AND f.picture_w <> 0 " .
+			"AND f.deleted <> 1 " .
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "
 			: '');
