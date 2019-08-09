@@ -25,5 +25,5 @@ Upstream projects
 - safehtml			- https://wackowiki.org/doc/Dev/Projects/SafeHTML
 - simplepie			- https://github.com/simplepie/simplepie
 - text_highlighter	- https://pear.php.net/package/Text_Highlighter/
-- hashids			- http://hashids.org/php/
+- hashids			- https://hashids.org/php/
 - php-diff			- https://github.com/chrisboulton/php-diff
