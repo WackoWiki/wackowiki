@@ -66,6 +66,7 @@ $this->add_html('footer', '<script src="' . $this->db->base_url . 'js/fancybox/j
 $this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.css">');
 
 // Loading parameters
+$file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
 $thumb_prefix	= 'tn_';
 $imgclass		= '';
@@ -184,33 +185,193 @@ if ($can_view)
 	$cur = 0;
 
 	// pagination
-	$this->print_pagination($pagination);
+	$tpl->pagination_text = $pagination['text'];
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p><span>' . htmlspecialchars($title, null, '') . ":</span></p>\n";
+		$tpl->mark		= true;
+		$tpl->emark		= true;
+
+		$tpl->title		= $title;
 	}
 
 	if (!isset($_GET['file_id']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
 	{
-		if ($table)
+		if (!empty($files))
 		{
-			echo '<table class="t-center" style="width:100%;">';
-		}
-		else
-		{
-			echo '<div class="gallery t-center">' . "\n";
-		}
+			if ($table)
+			{
+				$tpl->table		= true;
+				$tpl->etable	= true;
+			}
+			else
+			{
+				$tpl->div		= true;
+				$tpl->ediv		= true;
+			}
 
-		foreach ($files as $file)
-		{
-			$this->files_cache[$file['page_id']][$file['file_name']] = $file;
+			$tpl->enter('items_');
 
-			$file_name			= $file['file_name'];
-			$file_width			= ''; // $file['picture_w'];
-			$file_height		= ''; // $file['picture_h'];
-			$prefix_global		= '';
-			$tnb_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
+			foreach ($files as $file)
+			{
+				$this->files_cache[$file['page_id']][$file['file_name']] = $file;
+
+				$file_name			= $file['file_name'];
+				$file_width			= ''; // $file['picture_w'];
+				$file_height		= ''; // $file['picture_h'];
+				$prefix_global		= '';
+				$tnb_name			= $thumb_prefix . $file['file_id'] . '.' . $file['file_ext'];
+
+				if ($caption == 1)
+				{
+					$file_description	= $file['file_description'];
+				}
+				else if ($caption == 2)
+				{
+					$file_description	= $file['caption'];
+				}
+
+				$file_description	= $this->format($file_description, 'typografica' );
+
+				if ($this->page['page_lang'] != $file['file_lang'])
+				{
+					$file_description	= $this->do_unicode_entities($file_description, $file['file_lang']);
+				}
+
+				// check for upload location: global / per page
+				if ($file['page_id'] == '0')
+				{
+					$tnb_path		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
+					$url			= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+				}
+				else
+				{
+					$tnb_path		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
+					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
+				}
+
+				$tpl->img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
+
+				if (!file_exists($tnb_path))
+				{
+					if ($file['page_id'] == 0)
+					{
+						$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+						$thumb_name		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
+					}
+					else
+					{
+						$src_image		= Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
+						$thumb_name		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
+					}
+
+					if (file_exists($src_image))
+					{
+						// check for missing source image, we can't trust db record
+						if (!file_exists($thumb_name) && file_exists($src_image))
+						{
+							// create tumbnail
+							@set_time_limit(0);
+							@ignore_user_abort(true);
+
+							try
+							{
+								$thumb = new PHPThumb\GD($src_image);
+							}
+							catch (Exception $e)
+							{
+								// handle error here however you'd like
+							}
+
+							if (is_object($thumb))
+							{
+								$thumb->resize($width, $width);
+
+								// requires correct write permissions!
+								$thumb->save($thumb_name);
+							}
+						}
+					}
+
+					// IDEA: adding an additional field like 'tumbnail' in the 'file' table for tracking,
+					// there might be many derived tumbs from the original image
+				}
+
+				if ($table)
+				{
+					if ($cur == 0)
+					{
+						$tpl->row	= ($table ? '<tr>' : '');
+					}
+
+					$tpl->table = true;
+				}
+				else
+				{
+					#$tpl->spacer	= $img_spacer;
+				}
+
+				if (!$target)
+				{
+					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], 'token' => $param_token, '#' => $param_token]);
+				}
+				else
+				{
+					// show file via JS with data-attributes
+					if ($target == 2)
+					{
+						$tpl->href			= $url;
+						$tpl->description	= $file_description;
+						#$tpl->title			= $file_description;
+						$tpl->alt			= $file_description;
+						#$tpl->token			= $param_token;
+						$tpl->datafancybox	= ' data-fancybox="'. $param_token .'"';
+						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
+						#echo '<a href="' . $url . '" data-fancybox="'. $param_token .'" data-caption="' . $file_description . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
+					}
+					else
+					{
+						// show file itself
+						$tpl->href	= $url;
+					}
+				}
+
+				// figcaption
+				if ($caption)
+				{
+					$tpl->enter('caption_');
+
+					$tpl->description	= $file_description;
+					#$tpl->user			= $file['user'];
+					#$tpl->dimension	= $file['picture_w'] . 'x' . $file['picture_h'];
+					#$tpl->hits			= $file['hits'];	// we do exclude images from hit cout atm -> see file handler
+
+					$tpl->leave();
+				}
+
+				$cur = ($cur + 1) % $images_row;
+
+				if ($cur == 0)
+				{
+					$tpl->next	= ($table ? '</tr>' : '<br>');
+				}
+				else
+				{
+					#echo $img_spacer;
+				}
+			}
+
+			$tpl->leave();	// items
+		}
+	}
+	else
+	{
+		// selected image
+		$file = $get_file($file_id);
+
+		if ($file)
+		{
+			$tpl->enter('item_');
 
 			if ($caption == 1)
 			{
@@ -228,161 +389,9 @@ if ($can_view)
 				$file_description	= $this->do_unicode_entities($file_description, $file['file_lang']);
 			}
 
-			// check for upload location: global / per page
-			if ($file['page_id'] == '0')
-			{
-				$tnb_path		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
-				$url			= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-			}
-			else
-			{
-				$tnb_path		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
-				$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
-			}
+			$tpl->token			= $param_token;
+			$tpl->description	= $file_description;
 
-			$img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
-
-			$figcaption = '<br>' .
-				'<figcaption>' .
-					'<span>' . $file_description . '</span> ' . '<br>' .
-					#$file['user'] . '<br>' .
-					#$file['picture_w'] . 'x' . $file['picture_h'] . '<br>' .
-					#$file['hits'] . '<br>' .  // we do exclude images from hit cout atm -> see file handler
-				"</figcaption>\n";
-
-			if (!file_exists($tnb_path))
-			{
-				if ($file['page_id'] == 0)
-				{
-					$src_image		= Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-					$thumb_name		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
-				}
-				else
-				{
-					$src_image		= Ut::join_path(UPLOAD_PER_PAGE_DIR, '@' . $file_page['page_id'] . '@' . $file_name);
-					$thumb_name		= Ut::join_path(THUMB_DIR, '@' . $file_page['page_id'] . '@' . $tnb_name);
-				}
-
-				if (file_exists($src_image))
-				{
-					// check for missing source image, we can't trust db record
-					if (!file_exists($thumb_name) && file_exists($src_image))
-					{
-						// create tumbnail
-						@set_time_limit(0);
-						@ignore_user_abort(true);
-
-						try
-						{
-							$thumb = new PHPThumb\GD($src_image);
-						}
-						catch (Exception $e)
-						{
-							// handle error here however you'd like
-						}
-
-						if (is_object($thumb))
-						{
-							$thumb->resize($width, $width);
-
-							// requires correct write permissions!
-							$thumb->save($thumb_name);
-						}
-					}
-				}
-
-				// IDEA: adding an additional field like 'tumbnail' in the 'file' table for tracking,
-				// there might be many derived tumbs from the original image
-			}
-
-			if ($table)
-			{
-				if ($cur == 0)
-				{
-					echo '<tr>';
-				}
-
-				echo '<td class="t-center">';
-			}
-			else
-			{
-				echo $img_spacer;
-			}
-
-			echo '<figure class="zoom">';
-
-			if (!$target)
-			{
-				echo '<a href="' . $this->href('', $this->tag, ['file_id' => $file['file_id'], 'token' => $param_token, '#' => $param_token]) . '">' . $img . "</a>\n";
-			}
-			else
-			{
-				if ($target == 2)
-				{
-					echo '<a href="' . $url . '" data-fancybox="'. $param_token .'" data-caption="' . $file_description . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
-				}
-				else
-				{
-					echo '<a href="' . $url . '">' . $img . "</a>\n";
-				}
-			}
-
-			if ($caption)
-			{
-				echo $figcaption;
-			}
-
-			echo "</figure>\n";
-
-			if ($table)
-			{
-				echo "</td>\n";
-			}
-
-			$cur = ($cur + 1) % $images_row;
-
-			if ($cur == 0)
-			{
-				echo ($table ? '</tr>' : '<br>');
-			}
-			else
-			{
-				echo $img_spacer;
-			}
-		}
-
-		if ($table)
-		{
-			echo "</table>\n";
-		}
-		else
-		{
-			echo "</div>\n";
-		}
-	}
-	else
-	{
-		// We choose one image
-		$file = $get_file((int) $_GET['file_id']);
-
-		/* 	<figure class="zoom">
-			<a class="inline" href="#gallery:zoom_123">
-				<img alt="File description" src="http://images.123.jpg">
-			</a>
-			<figcaption>
-				<a class="inline" href="#gallery:zoom_123">
-					<span>
-						File description
-						<small>(Image: Author</small>
-					</span>
-				</a>
-			</figcaption>
-		</figure> */
-
-		echo '<div id="' . $param_token . '" class="t-center">';
-
-		if (count($file) > 0)
-		{
 			if ($file['page_id'])
 			{
 				$path = 'file:/' . $file['supertag'] . '/';
@@ -395,27 +404,19 @@ if ($can_view)
 			// show image
 			if ($file['picture_w'] || $file['file_ext'] == 'svg')
 			{
-				echo $this->link($path . $file['file_name']);
+				$tpl->img	=  $this->link($path . $file['file_name']);
 			}
 
-			echo '<br><br>';
-			echo '<a href="' . $this->href('', $this->tag, '') . '">&lt;' . $this->_t('Back') . '</a>';
+			// backlink
+			$tpl->href	= $this->href('', $this->tag, '');
+
+			$tpl->leave();	// item
 		}
-
-		echo "</div>\n";
 	}
-
-	if (!$nomark)
-	{
-		echo "</div>\n";
-	}
-
-	// pagination
-	$this->print_pagination($pagination);
 }
 else
 {
-	echo '<em>' . $this->_t('ActionDenied') . '</em>';
+	$tpl->noaccess = true;
 }
 
 ?>
