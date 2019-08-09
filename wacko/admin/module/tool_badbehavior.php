@@ -365,7 +365,7 @@ function bb2_manage(&$engine)
 
 			if ($httpbl)
 			{
-				echo "<br><br><a href=\"http://www.projecthoneypot.org/ip_{$result['ip']}\">http:BL</a>:<br>$httpbl\n";
+				echo "<br><br><a href=\"https://www.projecthoneypot.org/ip_{$result['ip']}\">http:BL</a>:<br>$httpbl\n";
 			}
 
 			echo "</td>\n";
@@ -737,7 +737,7 @@ function bb2_options(&$engine)
 			<td colspan="2">
 				<p><?php echo Ut::perc_replace(
 							$engine->_t('BbHttpblInfo'),
-							'<a href="http://www.projecthoneypot.org/httpbl_configure.php?rf=24694" rel="noreferrer">http:BL Access Key</a>'
+							'<a href="https://www.projecthoneypot.org/httpbl_configure.php?rf=24694" rel="noreferrer">http:BL Access Key</a>'
 						);?>
 				</p>
 				<br>
@@ -784,7 +784,7 @@ function bb2_options(&$engine)
 				<div>
 					<?php echo Ut::perc_replace(
 							$engine->_t('BbReverseProxyInfo'),
-							'<code><a href="http://en.wikipedia.org/wiki/X-Forwarded-For" rel="noreferrer">X-Forwarded-For</a></code>',
+							'<code><a href="https://en.wikipedia.org/wiki/X-Forwarded-For" rel="noreferrer">X-Forwarded-For</a></code>',
 							'<code>X-Real-Ip</code> (nginx)',
 							'<code>Cf-Connecting-Ip</code> (CloudFlare)'
 						);?>
@@ -860,7 +860,7 @@ function bb2_options(&$engine)
 	?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
-	<?php echo Ut::perc_replace($engine->_t('BbInfo'), '<a href="http://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a>');?>
+	<?php echo Ut::perc_replace($engine->_t('BbInfo'), '<a href="https://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a>');?>
 	<br><br>
 	<?php
 	$mode_selector	= 'setting';

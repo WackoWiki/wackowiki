@@ -4,7 +4,7 @@ The version and status of each is summarized below:
 
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
-| bad_behavior		| Bad Behavior		| 2.2.22	| patched: various, see repo |
+| bad_behavior		| Bad Behavior		| 2.2.23	| patched: various, see repo |
 | captcha			| freeCap			| 1.4.4		| patched: various, see repo |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
 | phpmailer			| PHPMailer			| 6.0.6		| patched: various, see repo |
@@ -17,13 +17,13 @@ The version and status of each is summarized below:
 
 Upstream projects
 ==================
-- bad_behavior		- http://bad-behavior.ioerror.us/
+- bad_behavior		- https://bad-behavior.ioerror.us/
 - freecap			- http://www.puremango.co.uk/2005/04/php_captcha_script_113/
 - htmlsax3			- https://pear.php.net/package/XML_HTMLSax3/
 - phpmailer			- https://github.com/PHPMailer/PHPMailer
 - phpthumb			- https://github.com/masterexploder/PHPThumb
 - safehtml			- https://wackowiki.org/doc/Dev/Projects/SafeHTML
 - simplepie			- https://github.com/simplepie/simplepie
-- text_highlighter	- http://pear.php.net/package/Text_Highlighter/
+- text_highlighter	- https://pear.php.net/package/Text_Highlighter/
 - hashids			- http://hashids.org/php/
 - php-diff			- https://github.com/chrisboulton/php-diff
