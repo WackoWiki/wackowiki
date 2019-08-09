@@ -60,7 +60,7 @@ require_once 'lib/phpthumb/PHPThumb.php';
 require_once 'lib/phpthumb/GD.php';
 
 // Add jQuery library
-$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/jquery-3.2.1.min.js"></script>');
+$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/jquery-3.4.1.min.js"></script>');
 // Add fancyBox
 $this->add_html('footer', '<script src="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.js"></script>');
 $this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.css">');
