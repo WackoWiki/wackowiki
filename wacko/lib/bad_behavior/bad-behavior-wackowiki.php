@@ -16,7 +16,7 @@ You should have received a copy of the GNU Lesser General Public License along
 with this program. If not, see <http://www.gnu.org/licenses/>.
 
 Please report any problems to bad . bots AT ioerror DOT us
-http://bad-behavior.ioerror.us/
+https://bad-behavior.ioerror.us/
 
 WackoWiki implementation, 2018 WackoWiki Team
 Version 0.7
