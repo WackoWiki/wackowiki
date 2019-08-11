@@ -3543,20 +3543,21 @@ class Wacko
 			}
 		}
 
-		$text = str_replace('%20', ' ', urldecode($text));
+		$text	= str_replace('%20', ' ', $text);
+		$tag	= str_replace(' ', '%20', $tag);
 
 		if ($media_url == 1)
 		{
-			return '<!--imglink:begin-->' . str_replace(' ', '%20', urldecode($tag)) . ' ==' . $text . '<!--imglink:end-->';
+			return '<!--imglink:begin-->' . $tag . ' ==' . $text . '<!--imglink:end-->';
 		}
 		else if ($media_url == 2)
 		{
 			// figure loads dynamically: <ignore> is terminator for paragrafica
-			return '<ignore><!--link:begin-->' . str_replace(' ', '%20', urldecode($tag)) . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end--></ignore>';
+			return '<ignore><!--link:begin-->' . $tag . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end--></ignore>';
 		}
 		else
 		{
-			return '<!--link:begin-->' . str_replace(' ', '%20', urldecode($tag)) . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end-->';
+			return '<!--link:begin-->' . $tag . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end-->';
 		}
 	}
 
@@ -3653,9 +3654,9 @@ class Wacko
 			$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
 		}
 
+		// get alignment type
 		if ($_align)
 		{
-			// get alignment type
 			if(preg_match('/center/i', $_align))
 			{
 				$e_align = 'center';
