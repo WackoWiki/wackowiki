@@ -5,6 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// {{fileusage [page="PageName"] [max=Number] [nomark=1] [title=0]}}
+
 if (!isset($file_id))	$file_id	= null;
 if (!isset($nomark))	$nomark		= 0;
 if (!isset($title))		$title		= '';
