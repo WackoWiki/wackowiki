@@ -1677,31 +1677,61 @@ class Wacko
 		return [$revisions, $pagination];
 	}
 
-	function load_pages_linking($to_tag, $tag = '')
+	function load_pages_linking($to_tag, $tag = '', $limit = 100)
 	{
-		return $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+		$selector =
 			"FROM " . $this->db->table_prefix . "page_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.from_page_id) " .
 			"WHERE " . ($tag
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 				: "") .
-				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") " .
-			"ORDER BY tag", true);
+				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") ";
+
+		// count pages
+		$count_pages = $this->db->load_single(
+			"SELECT COUNT(p.page_id) AS n " .
+			$selector
+			);
+
+		$pagination = $this->pagination($count_pages['n'], $limit);
+
+		if ($pages = $this->db->load_all(
+			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			$selector .
+			"ORDER BY tag " .
+			$pagination['limit'], true))
+		{
+			return [$pages, $pagination];
+		}
 	}
 
-	function load_file_usage($file_id, $tag = '')
+	function load_file_usage($file_id, $tag = '', $limit = 100)
 	{
-		return $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+		$selector =
 			"FROM " . $this->db->table_prefix . "file_link l " .
 				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.page_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "file u ON (u.file_id = l.file_id) " .
 			"WHERE " . ($tag
 					? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 					: "") .
-				"l.file_id = " . (int) $file_id . " " .
-			"ORDER BY tag", true);
+				"l.file_id = " . (int) $file_id . " ";
+
+		// count pages
+		$count_pages = $this->db->load_single(
+			"SELECT COUNT(p.page_id) AS n " .
+			$selector
+			);
+
+		$pagination = $this->pagination($count_pages['n'], $limit);
+
+		if ($pages = $this->db->load_all(
+			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			$selector .
+			"ORDER BY tag " .
+			$pagination['limit'], true))
+		{
+			return [$pages, $pagination];
+		}
 	}
 
 	function load_changed($limit = 100, $tag = '', $from = '', $minor_edit = '', $default_pages = false, $deleted = 0)
