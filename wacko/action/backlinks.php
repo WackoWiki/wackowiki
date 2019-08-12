@@ -7,9 +7,11 @@ if (!defined('IN_WACKO'))
 
 // {{backlinks [page="PageName"] [nomark=1] [title=0]}}
 
-if (!isset($page))		$page = '';
-if (!isset($nomark))	$nomark = 0;
-if (!isset($title))		$title = '';
+if (!isset($page))		$page		= '';
+if (!isset($nomark))	$nomark		= 0;
+if (!isset($title))		$title		= '';
+if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
+if (!isset($max))		$max		= null;
 
 $tag = $page ? $this->unwrap_link($page) : $this->tag;
 
@@ -19,7 +21,7 @@ if (!$nomark)
 	$tpl->emark		= true;
 }
 
-if (($pages = $this->load_pages_linking($tag)))
+if (list ($pages, $pagination) = $this->load_pages_linking($tag, null, $max))
 {
 	foreach ($pages as $page)
 	{
@@ -33,6 +35,9 @@ if (($pages = $this->load_pages_linking($tag)))
 	$this->preload_acl($page_ids);
 
 	$anchor = $this->translit($tag);
+
+	// display navigation
+	$tpl->pagination_text = $pagination['text'];
 
 	foreach ($pages as $page)
 	{

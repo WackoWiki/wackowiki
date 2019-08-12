@@ -5,9 +5,11 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($file_id))	$file_id = null;
-if (!isset($nomark))	$nomark = 0;
-if (!isset($title))		$title = '';
+if (!isset($file_id))	$file_id	= null;
+if (!isset($nomark))	$nomark		= 0;
+if (!isset($title))		$title		= '';
+if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
+if (!isset($max))		$max		= null;
 
 if ($file_id)
 {
@@ -17,7 +19,7 @@ if ($file_id)
 		$tpl->emark		= true;
 	}
 
-	if ($pages = $this->load_file_usage($file_id))
+	if (list ($pages, $pagination) = $this->load_file_usage($file_id, null, $max))
 	{
 		foreach ($pages as $page)
 		{
@@ -29,6 +31,9 @@ if ($file_id)
 
 		// cache acls
 		$this->preload_acl($page_ids);
+
+		// display navigation
+		$tpl->pagination_text = $pagination['text'];
 
 		foreach ($pages as $page)
 		{
