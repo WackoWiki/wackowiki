@@ -1,4 +1,5 @@
 [ === main === ]
+	[''' pagination ''']
 	[= mark _ =
 		<div class="layout-box">
 			<p>
@@ -17,3 +18,9 @@
 		[ ' nonstatic ' ]
 		</div>
 	=]
+	[''' pagination ''']
+	
+[============================== // assorted utilities ==============================]
+
+[= pagination =]
+<nav class="pagination">[ ' text ' ]</nav>
