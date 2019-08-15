@@ -64,7 +64,7 @@ if ($user_id = $this->get_user_id())
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
+				$text = $page['tag'];
 
 				$tpl->l_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('History'));
 				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);

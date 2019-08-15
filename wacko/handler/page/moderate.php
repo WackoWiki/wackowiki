@@ -722,11 +722,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			if ($this->has_access('read', $topic['page_id']))
 			{
-				if ($this->page['page_lang'] != $topic['page_lang'])
-				{
-					$topic['title']	= $this->do_unicode_entities($topic['title'], $topic['page_lang']);
-				}
-
 				$tpl->title		= $topic['title'];
 				$tpl->pageid	= $topic['page_id'];
 				$tpl->created	= $topic['created'];
@@ -1294,12 +1289,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// ...and comments list
 			foreach ($comments as $comment)
 			{
-				if ($this->page['page_lang'] != $comment['page_lang'])
-				{
-					#$comment['title']	= $this->do_unicode_entities($comment['title'], $comment['page_lang']);
-					#$comment['body']	= $this->do_unicode_entities($comment['body'], $comment['page_lang']);
-				}
-
 				$desc = $this->format($comment['body'], 'cleanwacko');
 				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300) . '[...]' : $desc);
 				$desc = Ut::html($desc);

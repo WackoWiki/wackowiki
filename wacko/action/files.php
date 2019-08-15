@@ -245,7 +245,6 @@ if ($can_view)
 
 			$dt			= $this->get_time_formatted($file['uploaded_dt']);
 			$desc		= $this->format($file['file_description'], 'typografica' );
-			$desc		= $this->get_unicode_entities($desc, $file['file_lang']);
 
 			if ($desc == '')
 			{

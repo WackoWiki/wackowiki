@@ -662,21 +662,6 @@ class Wacko
 
 				if (($text = @$this->translations[$lang][$name]))
 				{
-					if ($dounicode && !$this->notify_lang)
-					{
-						if (is_array($text))
-						{
-							foreach ($text as &$one)
-							{
-								$one = $this->do_unicode_entities($one, $lang);
-							}
-						}
-						else
-						{
-							$text = $this->do_unicode_entities($text, $lang);
-						}
-					}
-
 					return $text;
 				}
 			}
@@ -885,20 +870,6 @@ class Wacko
 		}
 
 		return $encoded_string;
-	}
-
-	// wrapper for do_unicode_entities()
-	// checks string language against page language
-	function get_unicode_entities($string, $lang)
-	{
-		if ($this->page['page_lang'] != $lang)
-		{
-			return $this->do_unicode_entities($string, $lang);
-		}
-		else
-		{
-			return $string;
-		}
 	}
 
 	// PAGES
@@ -3151,9 +3122,6 @@ class Wacko
 		// TODO: set type also via backend and store it [where?]
 		if (($message = $this->db->system_message) && !$this->db->ap_mode)
 		{
-			// check current page lang for different charset to do_unicode_entities()
-			$message = $this->get_unicode_entities($message, $this->db->language);
-
 			array_unshift($messages, [$message, 'sysmessage ' . $this->db->system_message_type]);
 		}
 
@@ -3192,8 +3160,6 @@ class Wacko
 
 	function msg_is_comment_on($tag, $title, $user_name, $modified, $lang)
 	{
-		$title = $this->get_unicode_entities($title, $lang);
-
 		return $this->_t('ThisIsCommentOn') . ' ' .
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
 			$this->_t('PostedBy') . ' ' .
@@ -4151,11 +4117,6 @@ class Wacko
 				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
 			}
 
-			if ($link_lang)
-			{
-				$text	= $this->do_unicode_entities($text, $link_lang);
-			}
-
 			$href	= $this->href('', $this->db->users_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'user-link';
@@ -4172,11 +4133,6 @@ class Wacko
 				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
 			}
 
-			if ($link_lang)
-			{
-				$text	= $this->do_unicode_entities($text, $link_lang);
-			}
-
 			$href	= $this->href('', $this->db->groups_page . '/', ['profile' => implode('/', $parts)]);
 
 			$class	= 'group-link';
@@ -4191,11 +4147,6 @@ class Wacko
 			for ($i = 0; $i < count($parts); $i++)
 			{
 				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
-			}
-
-			if ($link_lang)
-			{
-				$text	= $this->do_unicode_entities($text, $link_lang);
 			}
 
 			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
@@ -4405,13 +4356,6 @@ class Wacko
 					$accicon	= $this->_t('OuterIcon');
 				}
 
-				if ($text == trim($otag, '/') || $link_lang)
-				{
-					$text = $this->do_unicode_entities($text, $lang);
-				}
-
-				$page = $this->do_unicode_entities($page, $lang);
-
 				if (isset($_lang))
 				{
 					$this->set_language($_lang);
@@ -4426,8 +4370,7 @@ class Wacko
 
 				if ($link_lang)
 				{
-					$text	= $this->do_unicode_entities($text, $link_lang);
-					$page	= $this->do_unicode_entities($page, $link_lang);
+					//
 				}
 			}
 
@@ -4675,8 +4618,7 @@ class Wacko
 			$linking	= false;
 		}
 
-		// check current page lang for different charset to do_unicode_entities()
-		$text = ($this->page['page_lang'] != $account_lang) ? $this->do_unicode_entities($user_name, $account_lang) : $user_name;
+		$text = $user_name;
 		$icon = $add_icon?  '<span class="icon"></span>' : '';
 
 		if ($linking)
@@ -4697,8 +4639,8 @@ class Wacko
 			return false;
 		}
 
-		// check current page lang for different charset to do_unicode_entities()
-		$text = ($this->page['page_lang'] != $group_lang) ? $this->do_unicode_entities($group_name, $group_lang) : $group_name;
+
+		$text = $group_name;
 		$icon = $add_icon?  '<span class="icon"></span>' : '';
 
 		if ($linking)
@@ -8629,8 +8571,6 @@ class Wacko
 		{
 			foreach ($categories as $n => $category)
 			{
-				$category['category']	= $this->get_unicode_entities($category['category'], $category['category_lang']);
-
 				if ($n > 0)
 				{
 					$out .= ', ';
@@ -8766,9 +8706,6 @@ class Wacko
 
 			foreach ($categories as $category_id => $word)
 			{
-				// do unicode entities
-				$word['category'] = $this->get_unicode_entities($word['category'], $word['lang']);
-
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
 							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '">'
@@ -8779,9 +8716,6 @@ class Wacko
 				{
 					foreach ($word['child'] as $category_id => $word)
 					{
-						// do unicode entities
-						$word['category'] = $this->get_unicode_entities($word['category'], $word['lang']);
-
 						if ($i++ < 1)
 						{
 							$out .= "\t<ul>\n";

@@ -378,9 +378,7 @@ if (strlen($phrase) >= 3)
 					// check current page lang for different charset to do_unicode_entities() against
 					if ($this->page['page_lang'] != $page['page_lang'])
 					{
-						#$page['title'] = $this->do_unicode_entities($page['title'], $page['page_lang']);
 						$_lang		= $page['page_lang'];
-						$preview	= $this->do_unicode_entities($preview, $_lang);
 					}
 
 					$tpl->l_link		= $this->link('/' . $page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '', $_lang);

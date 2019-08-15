@@ -94,11 +94,6 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 			if (($edit_note = $page['edit_note']))
 			{
-				if ($page_lang)
-				{
-					$edit_note = $this->do_unicode_entities($edit_note, $page_lang);
-				}
-
 				$tpl->l_edit_note = $edit_note;
 			}
 

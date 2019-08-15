@@ -165,8 +165,8 @@ if ($user_id = $this->get_user_id())
 					$skip				= 0;
 				}
 
-				$text	= $this->get_unicode_entities($page['tag'], $page['page_lang']);
-				$title	= $this->get_unicode_entities($page['title'], $page['page_lang']);
+				$text	= $page['tag'];
+				$title	= $page['title'];
 
 				$tpl->l_class	= $icon_class;
 				$tpl->l_title	= $icon_text;
