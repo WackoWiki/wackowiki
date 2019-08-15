@@ -12,16 +12,16 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Потребители',
-		'maintenance'	=> 'Поддръжка',
+		'users'			=> 'РџРѕС‚СЂРµР±РёС‚РµР»Рё',
+		'maintenance'	=> 'РџРѕРґРґСЂСЉР¶РєР°',
 		'messages'		=> 'Messages',
-		'extension'		=> 'Разширения',
-		'database'		=> 'База данни',
+		'extension'		=> 'Р Р°Р·С€РёСЂРµРЅРёСЏ',
+		'database'		=> 'Р‘Р°Р·Р° РґР°РЅРЅРё',
 	],
 
 	// Admin panel
-	'AdminPanel'				=> 'Администраторски контролен панел',
-	'RecoveryMode'				=> 'Режим на възстановяване',
+	'AdminPanel'				=> 'РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂСЃРєРё РєРѕРЅС‚СЂРѕР»РµРЅ РїР°РЅРµР»',
+	'RecoveryMode'				=> 'Р РµР¶РёРј РЅР° РІСЉР·СЃС‚Р°РЅРѕРІСЏРІР°РЅРµ',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -53,10 +53,10 @@ $ap_translation = [
 	'Add'						=> 'Add',
 	'Edit'						=> 'Edit',
 	'Remove'					=> 'Remove',
-	'Enabled'					=> 'Включено',
-	'Disabled'					=> 'Изключено',
-	'On'						=> 'Включено',
-	'Off'						=> 'Изключено',
+	'Enabled'					=> 'Р’РєР»СЋС‡РµРЅРѕ',
+	'Disabled'					=> 'РР·РєР»СЋС‡РµРЅРѕ',
+	'On'						=> 'Р’РєР»СЋС‡РµРЅРѕ',
+	'Off'						=> 'РР·РєР»СЋС‡РµРЅРѕ',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -89,7 +89,7 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'Email',
-		'title'		=> 'Email настройки',
+		'title'		=> 'Email РЅР°СЃС‚СЂРѕР№РєРё',
 	],
 
 	// Config Filter module
@@ -118,7 +118,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Права',
+		'name'		=> 'РџСЂР°РІР°',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -232,8 +232,8 @@ $ap_translation = [
 
 	// Mass email module
 	'massemail'		=> [
-		'name'		=> 'Масов email',
-		'title'		=> 'Масов email',
+		'name'		=> 'РњР°СЃРѕРІ email',
+		'title'		=> 'РњР°СЃРѕРІ email',
 	],
 
 	// System message module
@@ -256,7 +256,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Статистика',
+		'name'		=> 'РЎС‚Р°С‚РёСЃС‚РёРєР°',
 		'title'		=> 'Show statistics',
 	],
 
@@ -274,13 +274,13 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Групи',
+		'name'		=> 'Р“СЂСѓРїРё',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Потребители',
+		'name'		=> 'РџРѕС‚СЂРµР±РёС‚РµР»Рё',
 		'title'		=> 'User management',
 	],
 
@@ -506,7 +506,7 @@ $ap_translation = [
 	'TermHumanModeration'		=> 'Term human moderation',
 	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
 
-	'UserCanDeleteAccount'		=> 'Потребителите могат да изтриват профилите си',
+	'UserCanDeleteAccount'		=> 'РџРѕС‚СЂРµР±РёС‚РµР»РёС‚Рµ РјРѕРіР°С‚ РґР° РёР·С‚СЂРёРІР°С‚ РїСЂРѕС„РёР»РёС‚Рµ СЃРё',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, safety restrictions and additional security subsystems.',
@@ -710,7 +710,7 @@ $ap_translation = [
 	'NewsLevels'				=> 'Depth of news pages from the root cluster',
 	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
 
-	'LicenseSection'			=> 'Лиценза',
+	'LicenseSection'			=> 'Р›РёС†РµРЅР·Р°',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 
@@ -759,7 +759,7 @@ $ap_translation = [
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action <code>{{orphaned}}</code>).',
 	'SandboxPage'				=> 'Sandbox',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
-	'HelpPage'					=> 'Помогне',
+	'HelpPage'					=> 'РџРѕРјРѕРіРЅРµ',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 
 
@@ -785,14 +785,14 @@ $ap_translation = [
 	'NotifyUpload'				=> 'Notify file upload',
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
-	'PersonalMessagesSection'	=> 'Лични съобщения',
+	'PersonalMessagesSection'	=> 'Р›РёС‡РЅРё СЃСЉРѕР±С‰РµРЅРёСЏ',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
 	'AllowMassemailDefault'		=> 'Allow Massemail',
 	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
 
 	// Resync settings
-	'Synchronize'				=> 'синхронизирам',
+	'Synchronize'				=> 'СЃРёРЅС…СЂРѕРЅРёР·РёСЂР°Рј',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
@@ -816,17 +816,17 @@ $ap_translation = [
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
 	'WikiLinksResync'			=> 'Wiki-links',
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
-	'RecompilePage'				=> 'Преизграждане на всички страници (изключително скъпо)',
-	'ResyncOptions'				=> 'Допълнителни опции',
+	'RecompilePage'				=> 'РџСЂРµРёР·РіСЂР°Р¶РґР°РЅРµ РЅР° РІСЃРёС‡РєРё СЃС‚СЂР°РЅРёС†Рё (РёР·РєР»СЋС‡РёС‚РµР»РЅРѕ СЃРєСЉРїРѕ)',
+	'ResyncOptions'				=> 'Р”РѕРїСЉР»РЅРёС‚РµР»РЅРё РѕРїС†РёРё',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Тази информация се използва от форума при изпращане на email-и до други потребители. Уверете се че email адреса, който сте въвели е валиден, повредените и неполучените съобщения ще бъдат изпращани на този адрес. Ако хостинга ви не позволява използването на php базираната mail(); функция, можете да използвате директно SMTP.',
+	'EmaiSettingsInfo'			=> 'РўР°Р·Рё РёРЅС„РѕСЂРјР°С†РёСЏ СЃРµ РёР·РїРѕР»Р·РІР° РѕС‚ С„РѕСЂСѓРјР° РїСЂРё РёР·РїСЂР°С‰Р°РЅРµ РЅР° email-Рё РґРѕ РґСЂСѓРіРё РїРѕС‚СЂРµР±РёС‚РµР»Рё. РЈРІРµСЂРµС‚Рµ СЃРµ С‡Рµ email Р°РґСЂРµСЃР°, РєРѕР№С‚Рѕ СЃС‚Рµ РІСЉРІРµР»Рё Рµ РІР°Р»РёРґРµРЅ, РїРѕРІСЂРµРґРµРЅРёС‚Рµ Рё РЅРµРїРѕР»СѓС‡РµРЅРёС‚Рµ СЃСЉРѕР±С‰РµРЅРёСЏ С‰Рµ Р±СЉРґР°С‚ РёР·РїСЂР°С‰Р°РЅРё РЅР° С‚РѕР·Рё Р°РґСЂРµСЃ. РђРєРѕ С…РѕСЃС‚РёРЅРіР° РІРё РЅРµ РїРѕР·РІРѕР»СЏРІР° РёР·РїРѕР»Р·РІР°РЅРµС‚Рѕ РЅР° php Р±Р°Р·РёСЂР°РЅР°С‚Р° mail(); С„СѓРЅРєС†РёСЏ, РјРѕР¶РµС‚Рµ РґР° РёР·РїРѕР»Р·РІР°С‚Рµ РґРёСЂРµРєС‚РЅРѕ SMTP.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
-	'EmailFunctionName'			=> 'Email функция име',
-	'EmailFunctionNameInfo'		=> 'Функцията използвана за изпращане на съобщения чрез PHP.',
-	'UseSmtpInfo'				=> 'Избери <code>SMTP</code>, ако искаш или трябва да изпращат email адреси през именован сървър вместо локалната mail функция.',
+	'EmailFunctionName'			=> 'Email С„СѓРЅРєС†РёСЏ РёРјРµ',
+	'EmailFunctionNameInfo'		=> 'Р¤СѓРЅРєС†РёСЏС‚Р° РёР·РїРѕР»Р·РІР°РЅР° Р·Р° РёР·РїСЂР°С‰Р°РЅРµ РЅР° СЃСЉРѕР±С‰РµРЅРёСЏ С‡СЂРµР· PHP.',
+	'UseSmtpInfo'				=> 'РР·Р±РµСЂРё <code>SMTP</code>, Р°РєРѕ РёСЃРєР°С€ РёР»Рё С‚СЂСЏР±РІР° РґР° РёР·РїСЂР°С‰Р°С‚ email Р°РґСЂРµСЃРё РїСЂРµР· РёРјРµРЅРѕРІР°РЅ СЃСЉСЂРІСЉСЂ РІРјРµСЃС‚Рѕ Р»РѕРєР°Р»РЅР°С‚Р° mail С„СѓРЅРєС†РёСЏ.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -848,20 +848,20 @@ $ap_translation = [
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Автентичност SMTP',
+	'SmtpConnectionMode'		=> 'РђРІС‚РµРЅС‚РёС‡РЅРѕСЃС‚ SMTP',
 	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
-	'SmtpPassword'				=> 'SMTP парола',
-	'SmtpPasswordInfo'			=> 'Въведи парола само ако SMTP сървъра я изисква. <em><strong>Важно:</strong> паролата се запазва като прост текст в базата данни.</em>',
-	'SmtpPort'					=> 'SMTP сървър порт',
-	'SmtpPortInfo'				=> 'Промени само, ако знаеш че SMTP е на друг порт. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP сървър адрес',
+	'SmtpPassword'				=> 'SMTP РїР°СЂРѕР»Р°',
+	'SmtpPasswordInfo'			=> 'Р’СЉРІРµРґРё РїР°СЂРѕР»Р° СЃР°РјРѕ Р°РєРѕ SMTP СЃСЉСЂРІСЉСЂР° СЏ РёР·РёСЃРєРІР°. <em><strong>Р’Р°Р¶РЅРѕ:</strong> РїР°СЂРѕР»Р°С‚Р° СЃРµ Р·Р°РїР°Р·РІР° РєР°С‚Рѕ РїСЂРѕСЃС‚ С‚РµРєСЃС‚ РІ Р±Р°Р·Р°С‚Р° РґР°РЅРЅРё.</em>',
+	'SmtpPort'					=> 'SMTP СЃСЉСЂРІСЉСЂ РїРѕСЂС‚',
+	'SmtpPortInfo'				=> 'РџСЂРѕРјРµРЅРё СЃР°РјРѕ, Р°РєРѕ Р·РЅР°РµС€ С‡Рµ SMTP Рµ РЅР° РґСЂСѓРі РїРѕСЂС‚. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP СЃСЉСЂРІСЉСЂ Р°РґСЂРµСЃ',
 	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'SMTP settings',
-	'SmtpUsername'				=> 'SMTP име',
-	'SmtpUsernameInfo'			=> 'Въведи името само ако SMTP го изисква.',
+	'SmtpUsername'				=> 'SMTP РёРјРµ',
+	'SmtpUsernameInfo'			=> 'Р’СЉРІРµРґРё РёРјРµС‚Рѕ СЃР°РјРѕ Р°РєРѕ SMTP РіРѕ РёР·РёСЃРєРІР°.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'От тук можете да конфигурирате главните настройки за прикачените файлове.',
+	'UploadSettingsInfo'		=> 'РћС‚ С‚СѓРє РјРѕР¶РµС‚Рµ РґР° РєРѕРЅС„РёРіСѓСЂРёСЂР°С‚Рµ РіР»Р°РІРЅРёС‚Рµ РЅР°СЃС‚СЂРѕР№РєРё Р·Р° РїСЂРёРєР°С‡РµРЅРёС‚Рµ С„Р°Р№Р»РѕРІРµ.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -869,22 +869,22 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Максимален размер на файла',
-	'UploadMaxFilesizeInfo'		=> 'Максимален размер на всеки файл, ако поставите 0, размера ще се ограничава от настройките на PHP-то.',
-	'UploadQuota'				=> 'Обща квота на прикачените файлове',
-	'UploadQuotaInfo'			=> 'Максимален размер на всички прикачени файлове, <code>0</code> е неограничен.',
+	'UploadMaxFilesize'			=> 'РњР°РєСЃРёРјР°Р»РµРЅ СЂР°Р·РјРµСЂ РЅР° С„Р°Р№Р»Р°',
+	'UploadMaxFilesizeInfo'		=> 'РњР°РєСЃРёРјР°Р»РµРЅ СЂР°Р·РјРµСЂ РЅР° РІСЃРµРєРё С„Р°Р№Р», Р°РєРѕ РїРѕСЃС‚Р°РІРёС‚Рµ 0, СЂР°Р·РјРµСЂР° С‰Рµ СЃРµ РѕРіСЂР°РЅРёС‡Р°РІР° РѕС‚ РЅР°СЃС‚СЂРѕР№РєРёС‚Рµ РЅР° PHP-С‚Рѕ.',
+	'UploadQuota'				=> 'РћР±С‰Р° РєРІРѕС‚Р° РЅР° РїСЂРёРєР°С‡РµРЅРёС‚Рµ С„Р°Р№Р»РѕРІРµ',
+	'UploadQuotaInfo'			=> 'РњР°РєСЃРёРјР°Р»РµРЅ СЂР°Р·РјРµСЂ РЅР° РІСЃРёС‡РєРё РїСЂРёРєР°С‡РµРЅРё С„Р°Р№Р»РѕРІРµ, <code>0</code> Рµ РЅРµРѕРіСЂР°РЅРёС‡РµРЅ.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
-	'CheckMimetype'				=> 'Провери прикачените файлове',
-	'CheckMimetypeInfo'			=> 'При някои браузъри може да има проблем с MIME типовете. Тази опция оправя този проблем.',
+	'CheckMimetype'				=> 'РџСЂРѕРІРµСЂРё РїСЂРёРєР°С‡РµРЅРёС‚Рµ С„Р°Р№Р»РѕРІРµ',
+	'CheckMimetypeInfo'			=> 'РџСЂРё РЅСЏРєРѕРё Р±СЂР°СѓР·СЉСЂРё РјРѕР¶Рµ РґР° РёРјР° РїСЂРѕР±Р»РµРј СЃ MIME С‚РёРїРѕРІРµС‚Рµ. РўР°Р·Рё РѕРїС†РёСЏ РѕРїСЂР°РІСЏ С‚РѕР·Рё РїСЂРѕР±Р»РµРј.',
 
 	'Thumbnails'				=> 'Thumbnails',
-	'CreateThumbnail'			=> 'Създай галерия',
-	'CreateThumbnailInfo'		=> 'Създай галерия за всички възможни ситуации.',
-	'MaxThumbWidth'				=> 'Максимална ширина на галерия',
-	'MaxThumbWidthInfo'			=> 'Генерираната галерия няма да превиши ширината тук.',
-	'MinThumbFilesize'			=> 'Минимален размер на галерията',
-	'MinThumbFilesizeInfo'		=> 'Не създавайте галерия на изображения по-малки от размера тук.',
+	'CreateThumbnail'			=> 'РЎСЉР·РґР°Р№ РіР°Р»РµСЂРёСЏ',
+	'CreateThumbnailInfo'		=> 'РЎСЉР·РґР°Р№ РіР°Р»РµСЂРёСЏ Р·Р° РІСЃРёС‡РєРё РІСЉР·РјРѕР¶РЅРё СЃРёС‚СѓР°С†РёРё.',
+	'MaxThumbWidth'				=> 'РњР°РєСЃРёРјР°Р»РЅР° С€РёСЂРёРЅР° РЅР° РіР°Р»РµСЂРёСЏ',
+	'MaxThumbWidthInfo'			=> 'Р“РµРЅРµСЂРёСЂР°РЅР°С‚Р° РіР°Р»РµСЂРёСЏ РЅСЏРјР° РґР° РїСЂРµРІРёС€Рё С€РёСЂРёРЅР°С‚Р° С‚СѓРє.',
+	'MinThumbFilesize'			=> 'РњРёРЅРёРјР°Р»РµРЅ СЂР°Р·РјРµСЂ РЅР° РіР°Р»РµСЂРёСЏС‚Р°',
+	'MinThumbFilesizeInfo'		=> 'РќРµ СЃСЉР·РґР°РІР°Р№С‚Рµ РіР°Р»РµСЂРёСЏ РЅР° РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РїРѕ-РјР°Р»РєРё РѕС‚ СЂР°Р·РјРµСЂР° С‚СѓРє.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages and files.
@@ -953,11 +953,11 @@ $ap_translation = [
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
-	'NoEmailMessage'			=> 'Трябва да въведете съобщение.',
-	'NoEmailSubject'			=> 'Трябва да въведете заглавие на съобщението си.',
+	'NoEmailMessage'			=> 'РўСЂСЏР±РІР° РґР° РІСЉРІРµРґРµС‚Рµ СЃСЉРѕР±С‰РµРЅРёРµ.',
+	'NoEmailSubject'			=> 'РўСЂСЏР±РІР° РґР° РІСЉРІРµРґРµС‚Рµ Р·Р°РіР»Р°РІРёРµ РЅР° СЃСЉРѕР±С‰РµРЅРёРµС‚Рѕ СЃРё.',
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
-	'MassemailSection'			=> 'Масов email',
+	'MassemailSection'			=> 'РњР°СЃРѕРІ email',
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Your message',
@@ -970,8 +970,8 @@ $ap_translation = [
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 
-	'SendToGroup'				=> 'Изпрати на група',
-	'SendToUser'				=> 'Изпрати на потребители',
+	'SendToGroup'				=> 'РР·РїСЂР°С‚Рё РЅР° РіСЂСѓРїР°',
+	'SendToUser'				=> 'РР·РїСЂР°С‚Рё РЅР° РїРѕС‚СЂРµР±РёС‚РµР»Рё',
 	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
@@ -1093,8 +1093,8 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Промени',
-	'UserEnabled'				=> 'Включено',
+	'UserEditButton'			=> 'РџСЂРѕРјРµРЅРё',
+	'UserEnabled'				=> 'Р’РєР»СЋС‡РµРЅРѕ',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user %1',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
@@ -1106,7 +1106,7 @@ $ap_translation = [
 	'UserRealname'				=> 'Realname',
 	'UserEmail'					=> 'Email',
 	'UserIP'					=> 'IP',
-	'UserLanguage'				=> 'език',
+	'UserLanguage'				=> 'РµР·РёРє',
 	'UserSignuptime'			=> 'Signuptime',
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
@@ -1140,9 +1140,9 @@ $ap_translation = [
 	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Откажи',
+	'GroupsCancelButton'		=> 'РћС‚РєР°Р¶Рё',
 	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Промени',
+	'GroupsEditButton'			=> 'РџСЂРѕРјРµРЅРё',
 	'GroupsRemoveButton'		=> 'Remove',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 

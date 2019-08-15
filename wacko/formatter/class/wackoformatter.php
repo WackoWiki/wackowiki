@@ -211,8 +211,8 @@ class WackoFormatter
 			"\*\*[^\n]*?\*\*|" .
 			// ##...##
 			"\#\#[^\n]*?\#\#|" .
-			// นน...นน
-			"\น\น[^\n]*?\น\น|" .
+			// ยนยน...ยนยน
+			"\ยน\ยน[^\n]*?\ยน\ยน|" .
 			// ''...'''
 			"\'\'.*?\'\'|" .
 			// !!...!!
@@ -705,7 +705,7 @@ class WackoFormatter
 		}
 		// code
 		else if (  preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches)
-				|| preg_match('/^\น\น(.*?)\น\น$/', $thing, $matches))
+				|| preg_match('/^\ยน\ยน(.*?)\ยน\ยน$/', $thing, $matches))
 		{
 			return '<code>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</code>';
 		}

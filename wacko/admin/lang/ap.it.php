@@ -21,7 +21,7 @@ $ap_translation = [
 
 	// Admin panel
 	'AdminPanel'				=> 'Pannello di Controllo Amministrazione',
-	'RecoveryMode'				=> 'Modalità di recupero',
+	'RecoveryMode'				=> 'ModalitÃ  di recupero',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -820,7 +820,7 @@ $ap_translation = [
 	'ResyncOptions'				=> 'Opzioni aggiuntive',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Questo modulo viene usato quando si inviano email ai propri utenti dalla Board. Assicurati che l\'indirizzo email specificato sia valido; ogni messaggio respinto o non consegnato, verrà inviato a questo indirizzo. Se il tuo server non fornisce un servizio email (basato su PHP) puoi in alternativa inviare messaggi direttamente via SMTP. Questo richiede l\'indirizzo di un server appropriato (chiedi al tuo provider, se necessario). Non specificare nomi vecchi qui. Se il server richiede autenticazione (e solo se lo fa) inserisci nome utente e password.',
+	'EmaiSettingsInfo'			=> 'Questo modulo viene usato quando si inviano email ai propri utenti dalla Board. Assicurati che l\'indirizzo email specificato sia valido; ogni messaggio respinto o non consegnato, verrÃ  inviato a questo indirizzo. Se il tuo server non fornisce un servizio email (basato su PHP) puoi in alternativa inviare messaggi direttamente via SMTP. Questo richiede l\'indirizzo di un server appropriato (chiedi al tuo provider, se necessario). Non specificare nomi vecchi qui. Se il server richiede autenticazione (e solo se lo fa) inserisci nome utente e password.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
@@ -841,7 +841,7 @@ $ap_translation = [
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
 	'SendTestEmail'				=> 'Invia email di prova',
-	'SendTestEmailInfo'			=> 'Questo invierà un\'email di prova all\'indirizzo specificato sul tuo account.',
+	'SendTestEmailInfo'			=> 'Questo invierÃ  un\'email di prova all\'indirizzo specificato sul tuo account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
 	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your emails configuration.',
@@ -851,11 +851,11 @@ $ap_translation = [
 	'SmtpConnectionMode'		=> 'Metodo autenticazione per SMTP',
 	'SmtpConnectionModeInfo'	=> 'Si usa solo se un nome utente o una password sono impostati. Chiedi al tuo provider se non sei sicuro del metodo da usare.',
 	'SmtpPassword'				=> 'Password SMTP',
-	'SmtpPasswordInfo'			=> 'Inserisci una password solo se il tuo server SMTP la richiede. <br><em><strong>Attenzione:</strong> questa password è conservata come testo in chiaro nel database.</em>',
+	'SmtpPasswordInfo'			=> 'Inserisci una password solo se il tuo server SMTP la richiede. <br><em><strong>Attenzione:</strong> questa password Ã¨ conservata come testo in chiaro nel database.</em>',
 	'SmtpPort'					=> 'Porta del server SMTP',
 	'SmtpPortInfo'				=> 'Modifica questo parametro solo se sai che il tuo server SMTP si trova su una porta diversa. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
 	'SmtpServer'				=> 'Indirizzo server SMTP',
-	'SmtpServerInfo'			=> 'Tieni presente che è necessario fornire il protocollo che il server utilizza. Se si utilizza il protocollo SSL, questo deve essere <code>ssl://mail.example.com</code>',
+	'SmtpServerInfo'			=> 'Tieni presente che Ã¨ necessario fornire il protocollo che il server utilizza. Se si utilizza il protocollo SSL, questo deve essere <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'Impostazioni SMTP',
 	'SmtpUsername'				=> 'Nome utente SMTP',
 	'SmtpUsernameInfo'			=> 'Inserisci un nome utente solo se il tuo server SMTP lo richiede.',
@@ -870,7 +870,7 @@ $ap_translation = [
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
 	'UploadMaxFilesize'			=> 'Dimensione massima',
-	'UploadMaxFilesizeInfo'		=> 'Dimensione massima di ogni file. Se questo valore è uguale a 0, la dimensione del file inviabile sarà limitata solo dalla configurazione PHP.',
+	'UploadMaxFilesizeInfo'		=> 'Dimensione massima di ogni file. Se questo valore Ã¨ uguale a 0, la dimensione del file inviabile sarÃ  limitata solo dalla configurazione PHP.',
 	'UploadQuota'				=> 'Quota massima allegati',
 	'UploadQuotaInfo'			=> 'Dimensione massima riservata su disco per tutti gli allegati; <code>0</code> = illimitata.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
@@ -882,7 +882,7 @@ $ap_translation = [
 	'CreateThumbnail'			=> 'Crea miniatura',
 	'CreateThumbnailInfo'		=> 'Crea miniatura in tutte le situazioni possibili.',
 	'MaxThumbWidth'				=> 'Larghezza massima miniatura in pixel',
-	'MaxThumbWidthInfo'			=> 'La miniatura generata non avrà una larghezza superiore a quella impostata qui.',
+	'MaxThumbWidthInfo'			=> 'La miniatura generata non avrÃ  una larghezza superiore a quella impostata qui.',
 	'MinThumbFilesize'			=> 'Dimensioni minime per miniatura',
 	'MinThumbFilesizeInfo'		=> 'Non crea miniature per immagini con dimensioni inferiori a queste.',
 
@@ -949,7 +949,7 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Da qui puoi inviare messaggi email a tutti gli utenti o a quelli di un gruppo specifico, <strong>purché abbiano l\'opzione di ricevere email di massa dall\'amministratore abilitata</strong>. L\'email verrà inviata all\'indirizzo amministrativo del Forum, e i destinatari la riceveranno come copia di conoscenza nascosta (CCN). Le impostazioni predefinite prevedono un massimo di 20 destinatari per ciascuna email, quindi se il numero è maggiore, verranno spedite diverse email; pertanto abbi pazienza dopo l\'invio e non bloccare il procedimento in corso, in quanto potrebbe durare anche diversi minuti se il numero di destinatari è molto elevato. Al termine dell\'operazione verrai informato dell\'avvenuto invio.',
+	'MassemailInfo'				=> 'Da qui puoi inviare messaggi email a tutti gli utenti o a quelli di un gruppo specifico, <strong>purchÃ© abbiano l\'opzione di ricevere email di massa dall\'amministratore abilitata</strong>. L\'email verrÃ  inviata all\'indirizzo amministrativo del Forum, e i destinatari la riceveranno come copia di conoscenza nascosta (CCN). Le impostazioni predefinite prevedono un massimo di 20 destinatari per ciascuna email, quindi se il numero Ã¨ maggiore, verranno spedite diverse email; pertanto abbi pazienza dopo l\'invio e non bloccare il procedimento in corso, in quanto potrebbe durare anche diversi minuti se il numero di destinatari Ã¨ molto elevato. Al termine dell\'operazione verrai informato dell\'avvenuto invio.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
@@ -961,7 +961,7 @@ $ap_translation = [
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Il tuo messaggio',
-	'YourMessageInfo'			=> 'Puoi scrivere soltanto testo normale. Tutto il resto sarà rimosso prima della trasmissione.',
+	'YourMessageInfo'			=> 'Puoi scrivere soltanto testo normale. Tutto il resto sarÃ  rimosso prima della trasmissione.',
 
 	'MessageLanguage'			=> 'Language',
 	'MessageLanguageInfo'		=> '',
@@ -1128,7 +1128,7 @@ $ap_translation = [
 	'GroupsActive'				=> 'Active',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
-	'GroupsAlreadyExists'		=> 'Questo gruppo esiste già.',
+	'GroupsAlreadyExists'		=> 'Questo gruppo esiste giÃ .',
 	'GroupsAdded'				=> 'Gruppo aggiunto con successo.',
 	'GroupsRenamed'				=> 'Gruppo rinominato con successo.',
 	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
@@ -1137,7 +1137,7 @@ $ap_translation = [
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
 	'GroupsDelete'				=> 'Sei sicuro di voler rimuovere il gruppo %1',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
-	'GroupsIsSystem'			=> 'Il gruppo %1 appartiene al sistema e non può essere rimosso.',
+	'GroupsIsSystem'			=> 'Il gruppo %1 appartiene al sistema e non puÃ² essere rimosso.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsSaveButton'			=> 'Submit',
 	'GroupsCancelButton'		=> 'Cancel',
@@ -1155,7 +1155,7 @@ $ap_translation = [
 	'MembersAddNew'				=> 'Aggiungere un nuovo membro',
 	'MembersAdded'				=> 'Aggiunto con successo un nuovo membro del gruppo.',
 	'MembersRemove'				=> 'Sei sicuro di voler rimuovere un membro %1?',
-	'MembersRemoved'			=> 'Il membro è stato allontanato dal gruppo.',
+	'MembersRemoved'			=> 'Il membro Ã¨ stato allontanato dal gruppo.',
 	'MembersDeleteInfo'			=> '* Nota: Le modifiche riguardano tutti i membri assegnati a quel gruppo.',
 
 	// Statistics module

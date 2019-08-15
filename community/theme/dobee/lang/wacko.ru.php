@@ -1,5 +1,5 @@
 <?php
-$theme_translation = [  'ThisPage' => 'Ýòà ñòðàíèöà',
-  'ExportToXML' => 'Ýêñïîðò â XML',
+$theme_translation = [  'ThisPage' => 'ÃÃ²Ã  Ã±Ã²Ã°Ã Ã­Ã¨Ã¶Ã ',
+  'ExportToXML' => 'ÃÃªÃ±Ã¯Ã®Ã°Ã² Ã¢ XML',
 ];
 ?>

@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Hinweis: Es wird empfolen den Zugang zur Site für administrative Wartungsarbeiten zu sperren.',
+	'MainNote'					=> 'Hinweis: Es wird empfolen den Zugang zur Site fÃ¼r administrative Wartungsarbeiten zu sperren.',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Grundfunktion',
@@ -25,32 +25,32 @@ $ap_translation = [
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von deinem Browser akzeptiert werden).',
 	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
-	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
+	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung fÃ¼r die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
 
 	'ErrorLoadingModule'		=> 'Fehler beim Laden des Admin-Moduls %1: existiert nicht.',
 
 	'FormSave'					=> 'Speichern',
-	'FormReset'					=> 'Zurücksetzen',
+	'FormReset'					=> 'ZurÃ¼cksetzen',
 	'FormUpdate'				=> 'Aktualisieren',
 
 	'ApHomePage'				=> 'Startseite',
-	'ApHomePageTip'				=> 'Öffne die Startseite, beende nicht die Verwaltung ',
+	'ApHomePageTip'				=> 'Ã–ffne die Startseite, beende nicht die Verwaltung ',
 	'ApLogOut'					=> 'Abmelden',
 	'ApLogOutTip'				=> 'Beende die Systemverwaltung',
 
 	'TimeLeft'					=> 'Restzeit:  %1 Minuten',
 	'ApVersion'					=> 'Version',
 
-	'SiteOpen'					=> 'öffnen',
-	'SiteOpened'				=> 'Website geöffnet',
+	'SiteOpen'					=> 'Ã¶ffnen',
+	'SiteOpened'				=> 'Website geÃ¶ffnet',
 	'SiteOpenedTip'				=> 'Die Website ist offen',
-	'SiteClose'					=> 'schließen',
+	'SiteClose'					=> 'schlieÃŸen',
 	'SiteClosed'				=> 'Website geschlossen',
 	'SiteClosedTip'				=> 'Die Website ist geschlossen',
 
 	// Generic
 	'Cancel'					=> 'Abbrechen',
-	'Add'						=> 'Hinzufügen',
+	'Add'						=> 'HinzufÃ¼gen',
 	'Edit'						=> 'Bearbeiten',
 	'Remove'					=> 'Entfernen',
 	'Enabled'					=> 'aktiviert',
@@ -107,7 +107,7 @@ $ap_translation = [
 	// Config Notifications module
 	'config_notifications'		=> [
 		'name'		=> 'Mitteilungen',
-		'title'		=> 'Einstellungen für Benachrichtigungen',
+		'title'		=> 'Einstellungen fÃ¼r Benachrichtigungen',
 	],
 
 	// Config Pages module
@@ -119,7 +119,7 @@ $ap_translation = [
 	// Config Permissions module
 	'config_permissions'		=> [
 		'name'		=> 'Berechtigungen',
-		'title'		=> 'Einstellungen für Berechtigungen',
+		'title'		=> 'Einstellungen fÃ¼r Berechtigungen',
 	],
 
 	// Config Security module
@@ -154,8 +154,8 @@ $ap_translation = [
 
 	// Deleted module
 	'content_deleted'		=> [
-		'name'		=> 'Gelöscht',
-		'title'		=> 'Neu gelöschte Inhalte',
+		'name'		=> 'GelÃ¶scht',
+		'title'		=> 'Neu gelÃ¶schte Inhalte',
 	],
 
 	// Files module
@@ -166,8 +166,8 @@ $ap_translation = [
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menü',
-		'title'		=> 'Hinzufügen, Bearbeiten oder Entfernen von Standard-Menüpunkten',
+		'name'		=> 'MenÃ¼',
+		'title'		=> 'HinzufÃ¼gen, Bearbeiten oder Entfernen von Standard-MenÃ¼punkten',
 	],
 
 	// Pages module
@@ -208,7 +208,7 @@ $ap_translation = [
 
 	// Dashboard module
 	'main'		=> [
-		'name'		=> 'Haupt-Menü',
+		'name'		=> 'Haupt-MenÃ¼',
 		'title'		=> 'WackoWiki Administration',
 	],
 
@@ -227,7 +227,7 @@ $ap_translation = [
 	// Transliterate module
 	'maint_transliterate'		=> [
 		'name'		=> 'Transliteration',
-		'title'		=> 'Aktualisiere den Supertag in den Datenbankdatensätzen',
+		'title'		=> 'Aktualisiere den Supertag in den DatenbankdatensÃ¤tzen',
 	],
 
 	// Mass email module
@@ -287,7 +287,7 @@ $ap_translation = [
 	// Main module
 	'PurgeSessions'				=> 'entfernen',
 	'PurgeSessionsTip'			=> 'Entferne alle Sitzungen',
-	'PurgeSessionsConfirm'		=> 'Bist du dir sicher, daß du alle Sitzungen entfernen willst? Dies wird alle Nuzer abmelden.',
+	'PurgeSessionsConfirm'		=> 'Bist du dir sicher, daÃŸ du alle Sitzungen entfernen willst? Dies wird alle Nuzer abmelden.',
 	'PurgeSessionsExplain'		=> 'Entferne alle Sitzungen. Dies wird alle Nuzer abmelden in dem es die auth_token Tabelle leert.',
 	'PurgeSessionsDone'			=> 'Sitzungen erfolgreich enfernt.',
 
@@ -299,96 +299,96 @@ $ap_translation = [
 	'SiteName'					=> 'Name der Seite',
 	'SiteNameInfo'				=> 'Der Seitentitel erscheint in der Titelleiste des Browsers, Theme Header, Email-Benachrichtigung, etc.',
 	'SiteDesc'					=> 'Beschreibung der Seite',
-	'SiteDescInfo'				=> 'Ergänzung zum Titel der Website, die im Seitenkopf erscheint, um in wenigen Worten zu erklären, worum es in dieser Seite geht.',
+	'SiteDescInfo'				=> 'ErgÃ¤nzung zum Titel der Website, die im Seitenkopf erscheint, um in wenigen Worten zu erklÃ¤ren, worum es in dieser Seite geht.',
 	'AdminName'					=> 'Administrator der Seite',
-	'AdminNameInfo'				=> 'Benutzername, der insgesamt für die Webseite verantwortlich ist. Dieser Name wird nicht verwendet, um Zugriffsrechte zu bestimmen, aber es ist wünschenswert, dass er dem Namen des Hauptadministrators der Webseite entspricht.',
+	'AdminNameInfo'				=> 'Benutzername, der insgesamt fÃ¼r die Webseite verantwortlich ist. Dieser Name wird nicht verwendet, um Zugriffsrechte zu bestimmen, aber es ist wÃ¼nschenswert, dass er dem Namen des Hauptadministrators der Webseite entspricht.',
 
 	'LanguageSection'			=> 'Sprache',
 	'DefaultLanguage'			=> 'Standard Sprache',
-	'DefaultLanguageInfo'		=> 'Definiert die Spracheinstellung für (nicht registrierte) Gäste sowie die Gebietsschemaeinstellungen und die Transliterationsregeln für Seitennamen.',
-	'MultiLanguage'				=> 'Unterstützung mehrerer Sprachen',
-	'MultiLanguageInfo'			=> 'Enthält eine Auswahl an Sprachen auf Seitenbasis.',
+	'DefaultLanguageInfo'		=> 'Definiert die Spracheinstellung fÃ¼r (nicht registrierte) GÃ¤ste sowie die Gebietsschemaeinstellungen und die Transliterationsregeln fÃ¼r Seitennamen.',
+	'MultiLanguage'				=> 'UnterstÃ¼tzung mehrerer Sprachen',
+	'MultiLanguageInfo'			=> 'EnthÃ¤lt eine Auswahl an Sprachen auf Seitenbasis.',
 	'AllowedLanguages'			=> 'Erlaubte Sprachen',
-	'AllowedLanguagesInfo'		=> 'Es wird empfohlen, nur die Sprachen auszuwählen, die man verwenden möchte. Andernfalls sind alle Sprachen ausgewählt.',
+	'AllowedLanguagesInfo'		=> 'Es wird empfohlen, nur die Sprachen auszuwÃ¤hlen, die man verwenden mÃ¶chte. Andernfalls sind alle Sprachen ausgewÃ¤hlt.',
 
 	'CommentSection'			=> 'Kommentare',
 	'AllowComments'				=> 'Kommentare aktivieren',
-	'AllowCommentsInfo'			=> 'Aktivieren von Kommentaren für Gäste, registrierte Benutzer oder deaktivieren auf der gesamten Website.',
+	'AllowCommentsInfo'			=> 'Aktivieren von Kommentaren fÃ¼r GÃ¤ste, registrierte Benutzer oder deaktivieren auf der gesamten Website.',
 	'SortingComments'			=> 'Kommentare sortieren',
-	'SortingCommentsInfo'		=> 'Ändern der Reihenfolge, in der die Seitenkommentare angezeigt werden, entweder mit dem neuesten oder dem ältesten Kommentar oben.',
+	'SortingCommentsInfo'		=> 'Ã„ndern der Reihenfolge, in der die Seitenkommentare angezeigt werden, entweder mit dem neuesten oder dem Ã¤ltesten Kommentar oben.',
 
 	'ToolbarSection'			=> 'Werkzeugleisten',
 	'CommentsPanel'				=> 'Kommentare',
 	'CommentsPanelInfo'			=> 'Die Standardanzeige von Kommentaren im unteren Bereich der Seite.',
 	'FilePanel'					=> 'Dateien',
-	'FilePanelInfo'				=> 'Die Standardanzeige von Anhängen im unteren Bereich der Seite.',
+	'FilePanelInfo'				=> 'Die Standardanzeige von AnhÃ¤ngen im unteren Bereich der Seite.',
 	'RatingPanel'				=> 'Bewertung',
-	'RatingPanelInfo'			=> 'Die Standardanzeige für das Bewertungsfeld im unteren Bereich der Seite.',
+	'RatingPanelInfo'			=> 'Die Standardanzeige fÃ¼r das Bewertungsfeld im unteren Bereich der Seite.',
 	'TagsPanel'					=> 'Schlagworte',
-	'TagsPanelInfo'				=> 'Die Standardanzeige für Schlagworte im unteren Bereich der Seite.',
+	'TagsPanelInfo'				=> 'Die Standardanzeige fÃ¼r Schlagworte im unteren Bereich der Seite.',
 
 	'NavigationSection'			=> 'Navigation',
 	'HideRevisions'				=> 'Seitenversionen ausblenden',
 	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
 	'ShowPermalink'				=> 'Zeige Permalink',
-	'ShowPermalinkInfo'			=> 'Die Standardanzeige des Permalinks für die aktuelle Version der Seite.',
+	'ShowPermalinkInfo'			=> 'Die Standardanzeige des Permalinks fÃ¼r die aktuelle Version der Seite.',
 	'TocPanel'					=> 'Inhaltsverzeichnis',
-	'TocPanelInfo'				=> 'Die Standardanzeige für das Inhaltsverzeichnis-Fenster der Seite (setzt die Unterstützung durch das Layout vorraus).',
+	'TocPanelInfo'				=> 'Die Standardanzeige fÃ¼r das Inhaltsverzeichnis-Fenster der Seite (setzt die UnterstÃ¼tzung durch das Layout vorraus).',
 	'SectionsPanel'				=> 'Bereichsanzeige (Seitenbaum)',
-	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmäßig benachbarte Seiten im Namensraum an (setzt die Unterstützung durch das Layout voraus).',
+	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmÃ¤ÃŸig benachbarte Seiten im Namensraum an (setzt die UnterstÃ¼tzung durch das Layout voraus).',
 
 	'DisplayingSections'		=> 'Angezeigte Bereiche',
 	'DisplayingSectionsInfo'	=> 'Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </em>), nur benachbarte (<em> obere </em>) oder beide (<em> Baum </em>) ausgegeben.',
-	'MenuItems'					=> 'Menüpunkte',
-	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten Menüelemente (setzt die Unterstützung durch das Layout vorraus).',
+	'MenuItems'					=> 'MenÃ¼punkte',
+	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten MenÃ¼elemente (setzt die UnterstÃ¼tzung durch das Layout vorraus).',
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Aktiviere Feeds',
-	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
+	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds fÃ¼r das gesamte Wiki.',
 	'XmlSitemap'				=> 'XML Sitemap',
-	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis des Servers gespeichert werden. Andererseits kann der Pfad zur Sitemap auch in der robots.txt-Datei im Stammverzeichnis wie folgt hinzufügt werden:',
+	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis des Servers gespeichert werden. Andererseits kann der Pfad zur Sitemap auch in der robots.txt-Datei im Stammverzeichnis wie folgt hinzufÃ¼gt werden:',
 	'XmlSitemapTime'			=> 'XML Sitemap Erstellungszeit',
-	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
+	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder SeitenÃ¤nderung.',
 
 	'DiffModeSection'			=> 'Diff-Modi',
 	'DefaultDiffModeSetting'	=> 'Standard Diff-Modus',
-	'DefaultDiffModeSettingInfo'=> 'Vorausgewählter Diff-Modus.',
+	'DefaultDiffModeSettingInfo'=> 'VorausgewÃ¤hlter Diff-Modus.',
 	'AllowedDiffMode'			=> 'Zugelassene Diff-Modi',
-	'AllowedDiffModeInfo'		=> 'Es wird empfohlen, nur die Modi auszuwählen, welche man verwenden möchte. Andernfalls werden alle Diff-Modi ausgewählt.',
-	'NotifyDiffMode'			=> 'Diff-Modus für Benachrichtigungen',
-	'NotifyDiffModeInfo'		=> 'Diff-Modus für Benachrichtigungen im E-Mail-Textkörper.',
+	'AllowedDiffModeInfo'		=> 'Es wird empfohlen, nur die Modi auszuwÃ¤hlen, welche man verwenden mÃ¶chte. Andernfalls werden alle Diff-Modi ausgewÃ¤hlt.',
+	'NotifyDiffMode'			=> 'Diff-Modus fÃ¼r Benachrichtigungen',
+	'NotifyDiffModeInfo'		=> 'Diff-Modus fÃ¼r Benachrichtigungen im E-Mail-TextkÃ¶rper.',
 
 	'EditingSection'			=> 'Bearbeitung',
-	'EditSummary'				=> 'Änderungszusammenfassung aktivieren',
-	'EditSummaryInfo'			=> 'Zeigt Kommentarfeld für die Zusammenfassung von Änderungen im Bearbeitungsmodus.',
-	'MinorEdit'					=> 'Kleine Änderung',
-	'MinorEditInfo'				=> 'Aktiviert die Option "Kleine Änderung" im Bearbeitungsmodus.',
-	'ReviewSettings'			=> 'Änderungen überprüfen',
-	'ReviewSettingsInfo'		=> 'Aktiviert die Option Änderungen durch einen "Reviewer" zu prüfen. In der Gruppenverwaltung muss mindestens ein "Reviewer" zugeordnet sein (WackoWiki Administration: Nutzer > Gruppen > Reviewer > hinzufügen).',
-	'PublishAnonymously'		=> 'Anonyme Veröffentlichung zulassen',
-	'PublishAnonymouslyInfo'	=> 'Erlaubt den Benutzern, vorzugsweise anonym zu veröffentlichen (um den Namen zu verbergen).',
+	'EditSummary'				=> 'Ã„nderungszusammenfassung aktivieren',
+	'EditSummaryInfo'			=> 'Zeigt Kommentarfeld fÃ¼r die Zusammenfassung von Ã„nderungen im Bearbeitungsmodus.',
+	'MinorEdit'					=> 'Kleine Ã„nderung',
+	'MinorEditInfo'				=> 'Aktiviert die Option "Kleine Ã„nderung" im Bearbeitungsmodus.',
+	'ReviewSettings'			=> 'Ã„nderungen Ã¼berprÃ¼fen',
+	'ReviewSettingsInfo'		=> 'Aktiviert die Option Ã„nderungen durch einen "Reviewer" zu prÃ¼fen. In der Gruppenverwaltung muss mindestens ein "Reviewer" zugeordnet sein (WackoWiki Administration: Nutzer > Gruppen > Reviewer > hinzufÃ¼gen).',
+	'PublishAnonymously'		=> 'Anonyme VerÃ¶ffentlichung zulassen',
+	'PublishAnonymouslyInfo'	=> 'Erlaubt den Benutzern, vorzugsweise anonym zu verÃ¶ffentlichen (um den Namen zu verbergen).',
 
 	'DefaultRenameRedirect'		=> 'Bei Umbenennung einer Seite eine Umleitung setzen',
-	'DefaultRenameRedirectInfo'	=> 'Standardmäßig erfolgt eine Umleitung an die alte Adresse der umbenannten Seite.',
+	'DefaultRenameRedirectInfo'	=> 'StandardmÃ¤ÃŸig erfolgt eine Umleitung an die alte Adresse der umbenannten Seite.',
 
-	'StoreDeletedPages'			=> 'Gelöschte Seiten behalten',
-	'StoreDeletedPagesInfo'		=> 'Wenn eine Seite, einen Kommentar oder eine Datei gelöscht wird, steht diese noch in einen gesonderten Bereich für eine bestimmte Zeit (siehe nächster Punkt) zur die Wiederherstellung und Anzeige zur Verfügung.',
-	'KeepDeletedTime'			=> 'Aufbewahrungszeit für gelöschten Seiten',
-	'KeepDeletedTimeInfo'		=> 'Der Zeitraum in Tagen. Dies macht nur mit der vorherigen Option Sinn. Null bedeutet unbegrenzte Aufbewahrungszeit (in diesem Fall kann der Administrator diese manuell im Verwaltungs-Panel löschen).',
+	'StoreDeletedPages'			=> 'GelÃ¶schte Seiten behalten',
+	'StoreDeletedPagesInfo'		=> 'Wenn eine Seite, einen Kommentar oder eine Datei gelÃ¶scht wird, steht diese noch in einen gesonderten Bereich fÃ¼r eine bestimmte Zeit (siehe nÃ¤chster Punkt) zur die Wiederherstellung und Anzeige zur VerfÃ¼gung.',
+	'KeepDeletedTime'			=> 'Aufbewahrungszeit fÃ¼r gelÃ¶schten Seiten',
+	'KeepDeletedTimeInfo'		=> 'Der Zeitraum in Tagen. Dies macht nur mit der vorherigen Option Sinn. Null bedeutet unbegrenzte Aufbewahrungszeit (in diesem Fall kann der Administrator diese manuell im Verwaltungs-Panel lÃ¶schen).',
 	'PagesPurgeTime'			=> 'Aufbewahrungszeit der Seiten-Revisionen',
-	'PagesPurgeTimeInfo'		=> 'Löscht automatisch die älteren Versionen innerhalb der angegebenen Anzahl von Tagen. Wenn Sie Null eingeben, werden die älteren Versionen nicht entfernt.',
+	'PagesPurgeTimeInfo'		=> 'LÃ¶scht automatisch die Ã¤lteren Versionen innerhalb der angegebenen Anzahl von Tagen. Wenn Sie Null eingeben, werden die Ã¤lteren Versionen nicht entfernt.',
 	'EnableReferrers'			=> 'Erlaube Referrer',
-	'EnableReferrersInfo'		=> 'Ermöglicht das Speichern und Anzeigen externer Verweise.',
+	'EnableReferrersInfo'		=> 'ErmÃ¶glicht das Speichern und Anzeigen externer Verweise.',
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
-	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, kann zu einer hohen Auslastung der Datenbank führen.',
+	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht lÃ¤nger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, kann zu einer hohen Auslastung der Datenbank fÃ¼hren.',
 
 	'AttachmentHandler'			=> 'Datei-Handler aktivieren',
-	'AttachmentHandlerInfo'		=> 'Erlaubt das Anzeigen des Datei-Handlers für Gäste oder registrierte Benutzer.',
+	'AttachmentHandlerInfo'		=> 'Erlaubt das Anzeigen des Datei-Handlers fÃ¼r GÃ¤ste oder registrierte Benutzer.',
 	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
-	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
+	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Ãœberschreibt die Seiteneinstellungen. Hiermit wird erklÃ¤rt, keine Indexierung durch Suchmaschinen zu erlauben.',
 
 	// Appearance settings
-	'AppearanceSettingsInfo'	=> 'Die Darstellung der Webseite ändern',
+	'AppearanceSettingsInfo'	=> 'Die Darstellung der Webseite Ã¤ndern',
 	'AppearanceSettingsUpdated'	=> 'Aussehen der Webseite wurde aktualisiert.',
 
 	'LogoOff'					=> 'Aus',
@@ -397,64 +397,64 @@ $ap_translation = [
 
 	'LogoSection'				=> 'Logo',
 	'SiteLogo'					=> 'Website-Logo',
-	'SiteLogoInfo'				=> 'Das Logo wird normalerweise in der oberen linken Ecke der Anwendung angezeigt. Die maximale Größe beträgt 2 MiB. Optimale Abmessungen sind 255 Pixel breit und 55 Pixel hoch.',
-	'LogoDimensions'			=> 'Logo Maße',
-	'LogoDimensionsInfo'		=> 'Breite und Höhe des angezeigten Logos.',
+	'SiteLogoInfo'				=> 'Das Logo wird normalerweise in der oberen linken Ecke der Anwendung angezeigt. Die maximale GrÃ¶ÃŸe betrÃ¤gt 2 MiB. Optimale Abmessungen sind 255 Pixel breit und 55 Pixel hoch.',
+	'LogoDimensions'			=> 'Logo MaÃŸe',
+	'LogoDimensionsInfo'		=> 'Breite und HÃ¶he des angezeigten Logos.',
 	'LogoDisplayMode'			=> 'Logo-Anzeigemodus',
 	'LogoDisplayModeInfo'		=> 'Bestimmt wie und ob das Logo angezeigt wird. Standard ist ausgeschaltet.',
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Website-Favicon',
-	'SiteFaviconInfo'			=> 'Das Verknüpfungssymbol oder Favicon wird in der Adressleiste, den Registerkarten und den Lesezeichen der meisten Browser angezeigt. Dies überschreibt das Favicon deines Themas.',
+	'SiteFaviconInfo'			=> 'Das VerknÃ¼pfungssymbol oder Favicon wird in der Adressleiste, den Registerkarten und den Lesezeichen der meisten Browser angezeigt. Dies Ã¼berschreibt das Favicon deines Themas.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Layout',
-	'ThemeInfo'					=> 'Layout, welches die Site standardmäßig verwendet.',
-	'ThemesAllowed'				=> 'Zulässige Layouts',
-	'ThemesAllowedInfo'			=> 'Wähle die zulässigen Layouts aus, die der Benutzer verwenden kann, andernfalls sind alle verfügbaren Layouts zulässig.',
+	'ThemeInfo'					=> 'Layout, welches die Site standardmÃ¤ÃŸig verwendet.',
+	'ThemesAllowed'				=> 'ZulÃ¤ssige Layouts',
+	'ThemesAllowedInfo'			=> 'WÃ¤hle die zulÃ¤ssigen Layouts aus, die der Benutzer verwenden kann, andernfalls sind alle verfÃ¼gbaren Layouts zulÃ¤ssig.',
 	'ThemesPerPage'				=> 'Layouts pro Seite',
-	'ThemesPerPageInfo'			=> 'Erlaube Layouts pro Seite, welche der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
+	'ThemesPerPageInfo'			=> 'Erlaube Layouts pro Seite, welche der Seitenbesitzer Ã¼ber Seiteneigenschaften auswÃ¤hlen kann.',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Systemeinstellungen der Webseite. Verändere hier nichts, außer wenn Du sicher über die Folgen bist.',
+	'SystemSettingsInfo'		=> 'Systemeinstellungen der Webseite. VerÃ¤ndere hier nichts, auÃŸer wenn Du sicher Ã¼ber die Folgen bist.',
 	'SystemSettingsUpdated'		=> 'Systemeinstellungen  aktualisiert',
 	'DebugModeSection'			=> 'Debug-Modus',
 	'DebugMode'					=> 'Debug-Modus',
-	'DebugModeInfo'				=> 'An- und Abschaltung der Ausgabe von Telemetriedaten über die Programmlaufzeit. Achtung: Der Modus für alle Details stellt höhere Anforderungen an den zugewiesenen Speicher, insbesondere bei ressourcenintensiven Vorgängen wie dem Sichern und Wiederherstellen der Datenbank.',
+	'DebugModeInfo'				=> 'An- und Abschaltung der Ausgabe von Telemetriedaten Ã¼ber die Programmlaufzeit. Achtung: Der Modus fÃ¼r alle Details stellt hÃ¶here Anforderungen an den zugewiesenen Speicher, insbesondere bei ressourcenintensiven VorgÃ¤ngen wie dem Sichern und Wiederherstellen der Datenbank.',
 	'DebugModes'	=> [
 		'0'		=> 'Debug-Modus ist deaktiviert',
-		'1'		=> 'nur die Gesamtausführungszeit',
+		'1'		=> 'nur die GesamtausfÃ¼hrungszeit',
 		'2'		=> 'alle Zeiten',
 		'3'		=> 'alle Details (DBMS, Cache, usw.)',
 	],
 	'DebugSqlThreshold'			=> 'RDBMS Schwellenwert',
-	'DebugSqlThresholdInfo'		=> 'Im erweiterten Debug-Modus werden nur die Abfragen aufgezeichnet, welche die Anzahl der hier ausgewiesen Sekunden überschreiten.',
+	'DebugSqlThresholdInfo'		=> 'Im erweiterten Debug-Modus werden nur die Abfragen aufgezeichnet, welche die Anzahl der hier ausgewiesen Sekunden Ã¼berschreiten.',
 	'DebugAdminOnly'			=> 'Geschlossene Diagnose',
 	'DebugAdminOnlyInfo'		=> 'Zeigt die Telemetriedaten der Anwendung (und des DBMS) nur dem Administrator.',
 
 	'CachingSection'			=> 'Zwischenspeicher-Optionen',
 	'Cache'						=> 'Gerenderte Seiten zwischenspeichern',
-	'CacheInfo'					=> 'Gerenderte Seiten zwischenspeichern, um nachfolgende Seitenaufrufe zu beschleunigen. Nur gültig für nicht angemeldete Nutzer.',
+	'CacheInfo'					=> 'Gerenderte Seiten zwischenspeichern, um nachfolgende Seitenaufrufe zu beschleunigen. Nur gÃ¼ltig fÃ¼r nicht angemeldete Nutzer.',
 	'CacheTtl'					=> 'Aufbewahrungsdauer zwischenspeicherter Seiten',
-	'CacheTtlInfo'				=> 'Speichere Seiten nicht länger als die angegebene Anzahl von Sekunden zwischen.',
+	'CacheTtlInfo'				=> 'Speichere Seiten nicht lÃ¤nger als die angegebene Anzahl von Sekunden zwischen.',
 	'CacheSql'					=> 'SQL-Abfragen zwischenspeichern',
 	'CacheSqlInfo'				=> 'Einen lokalen Zwischenspeicher mit Ergebnissen aus bestimmten Datenbankabfragen (resource-SQL-queries) behalten.',
 	'CacheSqlTtl'				=> 'Aufbewahrungsdauer zwischengespeicherter SQL-Abfragen',
-	'CacheSqlTtlInfo'			=> 'Speichere Ergebnisse der SQL-Abfragen nicht länger als die angegebene Anzahl von Sekunden zwischen. Einen Wert >1200 zu verwenden ist ungünstig.',
+	'CacheSqlTtlInfo'			=> 'Speichere Ergebnisse der SQL-Abfragen nicht lÃ¤nger als die angegebene Anzahl von Sekunden zwischen. Einen Wert >1200 zu verwenden ist ungÃ¼nstig.',
 
 	'PrivacySection'			=> 'Datenschutz',
 	'AnonymizeIp'				=> 'Anonymisiere Benutzer IP-Adressen',
-	'AnonymizeIpInfo'			=> 'Anonymisiert IP-Adressen wo möglich, wie Bearbeitung der Seite, Revisionen oder Referrers.',
+	'AnonymizeIpInfo'			=> 'Anonymisiert IP-Adressen wo mÃ¶glich, wie Bearbeitung der Seite, Revisionen oder Referrers.',
 
 	'ReverseProxySection'		=> 'Reverse-Proxy',
 	'ReverseProxy'				=> 'Nutze Reverse-Proxy',
 	'ReverseProxyInfo'			=> 'Aktivieren Sie diese Einstellung, um die korrekte IP-Adresse des Remote-
 									 Clients zu ermitteln, indem Sie die in den X-Forwarded-For-Headern
 									 gespeicherten Informationen untersuchen. X-Forwarded-For-Header sind ein
-									 Standardmechanismus zum Identifizieren von Client-Systemen, die über einen
+									 Standardmechanismus zum Identifizieren von Client-Systemen, die Ã¼ber einen
 									 Reverse-Proxy-Server wie Squid oder Pound verbunden sind. Reverse-Proxy-Server
-									 werden häufig verwendet, um die Leistung stark frequentierter Websites zu
-									 verbessern, und bieten möglicherweise auch andere Vorteile für lokale
-									 Zwischenspeicherung (Cache), Sicherheit oder Verschlüsselung.
-									 Wenn diese WackoWiki-Installation hinter einem Reverse-Proxy ausgeführt wird,
+									 werden hÃ¤ufig verwendet, um die Leistung stark frequentierter Websites zu
+									 verbessern, und bieten mÃ¶glicherweise auch andere Vorteile fÃ¼r lokale
+									 Zwischenspeicherung (Cache), Sicherheit oder VerschlÃ¼sselung.
+									 Wenn diese WackoWiki-Installation hinter einem Reverse-Proxy ausgefÃ¼hrt wird,
 									 sollte diese Einstellung aktiviert sein, damit die korrekten
 									 IP-Adressinformationen in WackoWiki\'s Sitzungsmanagement-, Protokollierungs-,
 									 Statistik- und Zugriffsverwaltungssystemen erfasst werden.
@@ -469,96 +469,96 @@ $ap_translation = [
 	'ReverseProxyAddresses'		=> 'Reverse-Proxy IP-Adressliste',
 	'ReverseProxyAddressesInfo'	=> 'Jedes Element dieser Liste ist eine IP-Adresse eines zu verwendenden
 									 Reverse-Proxy. WackoWiki wird diesen, im X-Forwarded-For Header zu speichernden,
-									 Informationen nur vertrauen, wenn die Anfrage den Webserver über die
-									 entfernte IP-Adresse eines gelisteten Reverse-Proxies erreicht. Ansonsten könnte
-									 der Client sich direkt mit Deinem Webserver verbinden und den X-Forwarded-For Header täuschen.',
+									 Informationen nur vertrauen, wenn die Anfrage den Webserver Ã¼ber die
+									 entfernte IP-Adresse eines gelisteten Reverse-Proxies erreicht. Ansonsten kÃ¶nnte
+									 der Client sich direkt mit Deinem Webserver verbinden und den X-Forwarded-For Header tÃ¤uschen.',
 
 	'SessionSection'				=> 'Sitzungsbehandlung',
 	'SessionStorage'				=> 'Sitzungsspeicher',
-	'SessionStorageInfo'			=> 'Diese Option definiert, wo die Sitzungsdaten gespeichert werden. Standardmäßig ist entweder der Speicher für Datei- oder Datenbanksitzungen ausgewählt.',
+	'SessionStorageInfo'			=> 'Diese Option definiert, wo die Sitzungsdaten gespeichert werden. StandardmÃ¤ÃŸig ist entweder der Speicher fÃ¼r Datei- oder Datenbanksitzungen ausgewÃ¤hlt.',
 	'SessionModes'	=> [
 		'1'		=> 'Datei',
 		'2'		=> 'Datenbank',
 	],
 
 	'RewriteMode'				=> 'Verwende <code>mod_rewrite</code>',
-	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktivieren sie, um "schöne" Seitenadressen zu erhalten.<br>
-									<span class="cite">Der Wert wird möglicherweise zur Laufzeit von der Settings-Klasse überschrieben, obwohl er deaktiviert ist, wenn HTTP_MOD_REWRITE aktiviert ist.',
+	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstÃ¼tzt, aktivieren sie, um "schÃ¶ne" Seitenadressen zu erhalten.<br>
+									<span class="cite">Der Wert wird mÃ¶glicherweise zur Laufzeit von der Settings-Klasse Ã¼berschrieben, obwohl er deaktiviert ist, wenn HTTP_MOD_REWRITE aktiviert ist.',
 
 	// Permissions settings
-	'PermissionsSettingsInfo'		=> 'Einstellungen für Zugriffsteuerung und Berechtigungen.',
+	'PermissionsSettingsInfo'		=> 'Einstellungen fÃ¼r Zugriffsteuerung und Berechtigungen.',
 	'PermissionsSettingsUpdated'	=> 'Berechtigungen aktualisiert',
 	'PermissionsSection'		=> 'Rechte und Privilegien',
 	'ReadRights'				=> 'Standard-Leserechte',
-	'ReadRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, für die keine Elternrechte definiert werden können.',
+	'ReadRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, fÃ¼r die keine Elternrechte definiert werden kÃ¶nnen.',
 	'WriteRights'				=> 'Standard-Schreibrechte',
-	'WriteRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, für die keine Elternrechte definiert werden können.',
+	'WriteRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, fÃ¼r die keine Elternrechte definiert werden kÃ¶nnen.',
 	'CommentRights'				=> 'Standard-Kommentarrechte',
-	'CommentRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, für die keine Elternrechte definiert werden können.',
+	'CommentRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, fÃ¼r die keine Elternrechte definiert werden kÃ¶nnen.',
 	'CreateRights'				=> 'Standard-Rechte zum Erstellen von Unterseiten',
-	'CreateRightsInfo'			=> 'Hiermit wird die Berechtigung für die Erstellung von Wurzelseiten festgelegt und auch Seiten zugeordnet, für die keine Elternrechte definiert werden können.',
-	'UploadRights'				=> 'Standard-Rechte für das Hochladen von Dateien',
-	'UploadRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, für die keine Elternrechte definiert werden können.',
+	'CreateRightsInfo'			=> 'Hiermit wird die Berechtigung fÃ¼r die Erstellung von Wurzelseiten festgelegt und auch Seiten zugeordnet, fÃ¼r die keine Elternrechte definiert werden kÃ¶nnen.',
+	'UploadRights'				=> 'Standard-Rechte fÃ¼r das Hochladen von Dateien',
+	'UploadRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, fÃ¼r die keine Elternrechte definiert werden kÃ¶nnen.',
 	'RenameRights'				=> 'Globale Berechtigung Seiten umzubenennen',
 	'RenameRightsInfo'			=> 'Liste von Benutzern mit Berechtigung, Seiten umzubenennen (zu verschieben).',
-	'LockAcl'					=> 'Beschränke alle Berechtigungen auf Nur Lesen',
-	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>Dies kann nützlich sein, wenn ein Projekt beendet wurde oder aus Sicherheitsgründen die Bearbeitung von Seiten zeitweise ausgesetzt werden muss oder als Notfallmaßnahme.',
-	'HideLocked'				=> 'Nicht zugängliche Seiten ausblenden',
+	'LockAcl'					=> 'BeschrÃ¤nke alle Berechtigungen auf Nur Lesen',
+	'LockAclInfo'				=> '<span class="cite">Ãœberschreibt die Berechtigungen fÃ¼r alle Seiten zu Nur Lesen.</span><br>Dies kann nÃ¼tzlich sein, wenn ein Projekt beendet wurde oder aus SicherheitsgrÃ¼nden die Bearbeitung von Seiten zeitweise ausgesetzt werden muss oder als NotfallmaÃŸnahme.',
+	'HideLocked'				=> 'Nicht zugÃ¤ngliche Seiten ausblenden',
 	'HideLockedInfo'			=> 'Wenn der Benutzer nicht berechtigt ist, eine Seite zu lesen, blenden sie in verschiedenen Seitenlisten aus (der im Text platzierte Link ist jedoch weiterhin sichtbar).',
-	'RemoveOnlyAdmins'			=> 'Nur Administratoren können Seiten löschen',
-	'RemoveOnlyAdminsInfo'		=> 'Verbietet allen Benutzern, außer Administratoren, Seiten zu löschen. Wird zuerst auf Besitzer normaler Seiten angewendet.',
-	'OwnersRemoveComments'		=> 'Seitenbesitzer können Kommentare löschen',
-	'OwnersRemoveCommentsInfo'	=> 'Ermöglicht es Seitenbesitzern, Kommentare auf ihren Seiten zu moderieren.',
-	'OwnersEditCategories'		=> 'Seitenbesitzer können Seitenkategorien bearbeiten',
-	'OwnersEditCategoriesInfo'	=> 'Erlaubt es den Seitenbesitzern die Kageorien-Liste, welche den Seiten zugewiesen ist, zu ändern (Wörter hinzufügen, umbenennen oder löschen)',
+	'RemoveOnlyAdmins'			=> 'Nur Administratoren kÃ¶nnen Seiten lÃ¶schen',
+	'RemoveOnlyAdminsInfo'		=> 'Verbietet allen Benutzern, auÃŸer Administratoren, Seiten zu lÃ¶schen. Wird zuerst auf Besitzer normaler Seiten angewendet.',
+	'OwnersRemoveComments'		=> 'Seitenbesitzer kÃ¶nnen Kommentare lÃ¶schen',
+	'OwnersRemoveCommentsInfo'	=> 'ErmÃ¶glicht es Seitenbesitzern, Kommentare auf ihren Seiten zu moderieren.',
+	'OwnersEditCategories'		=> 'Seitenbesitzer kÃ¶nnen Seitenkategorien bearbeiten',
+	'OwnersEditCategoriesInfo'	=> 'Erlaubt es den Seitenbesitzern die Kageorien-Liste, welche den Seiten zugewiesen ist, zu Ã¤ndern (WÃ¶rter hinzufÃ¼gen, umbenennen oder lÃ¶schen)',
 	'TermHumanModeration'		=> 'Zeit zur Moderation',
-	'TermHumanModerationInfo'	=> 'Moderatoren können Kommentare nur innerhalb dieser Anzahl von Tagen nach deren Erstellung bearbeiten (diese Einschränkung gilt nicht für den letzten Kommentar zum Thema)',
+	'TermHumanModerationInfo'	=> 'Moderatoren kÃ¶nnen Kommentare nur innerhalb dieser Anzahl von Tagen nach deren Erstellung bearbeiten (diese EinschrÃ¤nkung gilt nicht fÃ¼r den letzten Kommentar zum Thema)',
 
-	'UserCanDeleteAccount'		=> 'Benutzer dürfen ihre Konten löschen',
+	'UserCanDeleteAccount'		=> 'Benutzer dÃ¼rfen ihre Konten lÃ¶schen',
 
 	// Security settings
-	'SecuritySettingsInfo'		=> 'Gesamte Sicherheitseinstellungen für die Platform, Benutzersicherheit und Sicherheitsteilsysteme.',
+	'SecuritySettingsInfo'		=> 'Gesamte Sicherheitseinstellungen fÃ¼r die Platform, Benutzersicherheit und Sicherheitsteilsysteme.',
 	'SecuritySettingsUpdated'	=> 'Sicherheitseinstellungen aktualisiert',
 
 	'AllowRegistration'			=> 'Online registrieren',
-	'AllowRegistrationInfo'		=> 'Öffnen der Benutzerregistrierung. Das Deaktivieren der Option verhindert die freie Registrierung. Der Site-Administrator kann jedoch andere Benutzer selbst registrieren.',
-	'ApproveNewUser'			=> 'Neue Nutzer bestätigen',
-	'ApproveNewUserInfo'		=> 'Ermöglicht Administratoren, Benutzer nach der Registrierung zuzulassen. Nur zugelassene Benutzer dürfen sich auf der Site anmelden.',
+	'AllowRegistrationInfo'		=> 'Ã–ffnen der Benutzerregistrierung. Das Deaktivieren der Option verhindert die freie Registrierung. Der Site-Administrator kann jedoch andere Benutzer selbst registrieren.',
+	'ApproveNewUser'			=> 'Neue Nutzer bestÃ¤tigen',
+	'ApproveNewUserInfo'		=> 'ErmÃ¶glicht Administratoren, Benutzer nach der Registrierung zuzulassen. Nur zugelassene Benutzer dÃ¼rfen sich auf der Site anmelden.',
 	'PersistentCookies'			=> 'Dauerhafte Cookies',
 	'PersistentCookiesInfo'		=> 'Erlaube dauerhafte Cookies.',
 
 	'AntiDupe'					=> 'Anti-clone',
-	'AntiDupeInfo'				=> 'Verweigern der Registrierung von Namen, die <span class = "underline">ähnlich</span> zu vorhanden Benutzernamen sind (Gäste können diese Namen auch nicht zum Unterschreiben von Kommentaren verwenden). Wenn die Option deaktiviert ist, nur bei <span class = "underline">identischen</span> Namen.',
+	'AntiDupeInfo'				=> 'Verweigern der Registrierung von Namen, die <span class = "underline">Ã¤hnlich</span> zu vorhanden Benutzernamen sind (GÃ¤ste kÃ¶nnen diese Namen auch nicht zum Unterschreiben von Kommentaren verwenden). Wenn die Option deaktiviert ist, nur bei <span class = "underline">identischen</span> Namen.',
 	'DisableWikiName'			=> 'Deaktiviere WikiName',
-	'DisableWikiNameInfo'		=> 'Deaktiviert die die obligatorische Verwendung von WikiNamen. Ermöglicht die Registrierung von Benutzern mit traditionellen Spitznamen, NameVorname ist nicht zwingend.',
+	'DisableWikiNameInfo'		=> 'Deaktiviert die die obligatorische Verwendung von WikiNamen. ErmÃ¶glicht die Registrierung von Benutzern mit traditionellen Spitznamen, NameVorname ist nicht zwingend.',
 	'AllowEmailReuse'			=> 'Erlaubt die Wiederverwendung von E-Mail-Adressen',
-	'AllowEmailReuseInfo'		=> 'Verschiedene Benutzer können sich mit derselben E-Mail-Adresse registrieren.',
-	'UsernameLength'			=> 'Länge von Benutzernamen',
-	'UsernameLengthInfo'		=> 'Mindestens erforderliche und maximal zulässige Zeichenanzahl in Benutzernamen.',
+	'AllowEmailReuseInfo'		=> 'Verschiedene Benutzer kÃ¶nnen sich mit derselben E-Mail-Adresse registrieren.',
+	'UsernameLength'			=> 'LÃ¤nge von Benutzernamen',
+	'UsernameLengthInfo'		=> 'Mindestens erforderliche und maximal zulÃ¤ssige Zeichenanzahl in Benutzernamen.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Aktiviere Captcha',
 	'EnableCaptchaInfo'			=> 'Aktiviert eine Sicherheitsabfrage zum Schutz vor SPAM auf der gesamten Website.',
 	'CaptchaComment'			=> 'Neuer Kommentar',
-	'CaptchaCommentInfo'		=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Veröffentlichung von Kommentaren erforderlich.',
+	'CaptchaCommentInfo'		=> 'Wenn aktiviert, wird fÃ¼r nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der VerÃ¶ffentlichung von Kommentaren erforderlich.',
 	'CaptchaPage'				=> 'Neue Seite',
-	'CaptchaPageInfo'			=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Erstellung von neuen Seiten erforderlich.',
+	'CaptchaPageInfo'			=> 'Wenn aktiviert, wird fÃ¼r nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Erstellung von neuen Seiten erforderlich.',
 	'CaptchaEdit'				=> 'Seite bearbeiten',
-	'CaptchaEditInfo'			=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Bearbeitung von Seiten erforderlich.',
+	'CaptchaEditInfo'			=> 'Wenn aktiviert, wird fÃ¼r nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Bearbeitung von Seiten erforderlich.',
 	'CaptchaRegistration'		=> 'Registrierung',
-	'CaptchaRegistrationInfo'	=> 'Wenn aktiviert, wird für nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Registrierung  erforderlich.',
+	'CaptchaRegistrationInfo'	=> 'Wenn aktiviert, wird fÃ¼r nicht registrierte Benutzer eine Sicherheitsabfrage (Captcha) vor der Registrierung  erforderlich.',
 
 	'TlsSection'				=> 'TLS-Einstellungen',
 	'TlsConnection'				=> 'TLS-Verwendung',
-	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich!</span><br>Es legt auch fest, ob der Cookie Secure Flag gesetzt ist, der <code>secure</code> Flag definiert, ob Cookies nur über sichere Verbindungen geschickt werden sollen.',
+	'TlsConnectionInfo'			=> 'Verwende eine TLS-gesicherte Verbindung. <span class = "cite"> Dazu ist es erforderlich, ein TLS-Zertifikat auf dem Server zu installieren, sonst besteht kein Zugriff auf den Admin-Bereich!</span><br>Es legt auch fest, ob der Cookie Secure Flag gesetzt ist, der <code>secure</code> Flag definiert, ob Cookies nur Ã¼ber sichere Verbindungen geschickt werden sollen.',
 	'TlsImplicit'				=> 'TLS erzwingen',
-	'TlsImplicitInfo'			=> 'Erzwingt erneute Verbindung des Clients von HTTP zu HTTPS. Wenn die Option deaktiviert ist, kann der Client die die Webseite über einen verschlüsselten HTTPS-Kanal übertragen.',
+	'TlsImplicitInfo'			=> 'Erzwingt erneute Verbindung des Clients von HTTP zu HTTPS. Wenn die Option deaktiviert ist, kann der Client die die Webseite Ã¼ber einen verschlÃ¼sselten HTTPS-Kanal Ã¼bertragen.',
 
 	'HttpSecurityHeaders'		=> 'HTTP-Security-Header',
 	'EnableSecurityHeaders'		=> 'Security-Header aktivieren',
-	'EnableSecurityHeadersinfo'	=> 'Aktiviert Security-Header (frame busting, clickjacking/XSS/CSRF-Schutz). <br> Diese Content Security Policy (CSP) kann in bestimmten Situationen (z. B. während der Entwicklung) oder bei Verwendung von Plugins, die auf extern gehostete Ressourcen wie Bilder oder Skripts angewiesen sind, Probleme verursachen. <br> Das Deaktivieren der CSP ist ein Sicherheitsrisiko!',
+	'EnableSecurityHeadersinfo'	=> 'Aktiviert Security-Header (frame busting, clickjacking/XSS/CSRF-Schutz). <br> Diese Content Security Policy (CSP) kann in bestimmten Situationen (z. B. wÃ¤hrend der Entwicklung) oder bei Verwendung von Plugins, die auf extern gehostete Ressourcen wie Bilder oder Skripts angewiesen sind, Probleme verursachen. <br> Das Deaktivieren der CSP ist ein Sicherheitsrisiko!',
 	'Csp'						=> 'Content-Security-Policy (CSP)',
-	'CspInfo'					=> 'Zur Etablierung von Sicherheitsrichtlinien gegen schadhafte Inhalte gehört zu entscheiden, welche einzelnen Richtlinien geschaffen werden sollen, diese zu gestalten und festzuschreiben.',
+	'CspInfo'					=> 'Zur Etablierung von Sicherheitsrichtlinien gegen schadhafte Inhalte gehÃ¶rt zu entscheiden, welche einzelnen Richtlinien geschaffen werden sollen, diese zu gestalten und festzuschreiben.',
 	'CspModes'	=> [
 		'0'		=> 'deaktiviert',
 		'1'		=> 'strikt',
@@ -579,38 +579,38 @@ $ap_translation = [
 	],
 
 	'UserPasswordSection'		=> 'Passwortschutz-Einstellungen',
-	'PwdMinChars'				=> 'Minimale Passwortlänge',
-	'PwdMinCharsInfo'			=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 12 bis 16 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
+	'PwdMinChars'				=> 'Minimale PasswortlÃ¤nge',
+	'PwdMinCharsInfo'			=> 'LÃ¤ngere PasswÃ¶rter bieten notwendigerweise mehr Schutz als kÃ¼rzere PasswÃ¶rter (z.B. 12 bis 16 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
 
-	'AdminPwdMinChars'			=> 'Minimale Admin Passwortlänge',
-	'AdminPwdMinCharsInfo'		=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 15 bis 20 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
-	'PwdCharComplexity'			=> 'Die erforderliche Kennwortkomplexität',
+	'AdminPwdMinChars'			=> 'Minimale Admin PasswortlÃ¤nge',
+	'AdminPwdMinCharsInfo'		=> 'LÃ¤ngere PasswÃ¶rter bieten notwendigerweise mehr Schutz als kÃ¼rzere PasswÃ¶rter (z.B. 15 bis 20 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
+	'PwdCharComplexity'			=> 'Die erforderliche KennwortkomplexitÃ¤t',
 	'PwdCharClasses'	=> [
-		'0'		=> 'ungeprüft',
+		'0'		=> 'ungeprÃ¼ft',
 		'1'		=> 'alle Buchstaben + Zahlen',
-		'2'		=> 'Groß- und Kleinschreibung + Zahlen',
-		'3'		=> 'Groß- und Kleinschreibung + Zahlen + Zeichen',
+		'2'		=> 'GroÃŸ- und Kleinschreibung + Zahlen',
+		'3'		=> 'GroÃŸ- und Kleinschreibung + Zahlen + Zeichen',
 	],
-	'PwdUnlikeLogin'			=> 'zusätzliche Erschwernis',
+	'PwdUnlikeLogin'			=> 'zusÃ¤tzliche Erschwernis',
 	'PwdUnlikes'	=> [
-		'0'		=> 'ungeprüft',
+		'0'		=> 'ungeprÃ¼ft',
 		'1'		=> 'Passwort darf nicht identisch mit dem Anmeldenamen sein',
 		'2'		=> 'Passwort darf nicht den Anmeldenamen enthalten',
 	],
 
 	'LoginSection'				=> 'Anmeldung',
 	'MaxLoginAttempts'			=> 'Maximale Anzahl von Anmeldeversuchen pro Nutzername',
-	'MaxLoginAttemptsInfo'		=> 'Anzahl der zulässigen Login-Versuche je Benutzerkonto bevor der SPAM-Schutz ausgelöst wird. Wenn 0 eingetragen: kein SPAM-Schutz für die Anmeldung je Benutzer.',
+	'MaxLoginAttemptsInfo'		=> 'Anzahl der zulÃ¤ssigen Login-Versuche je Benutzerkonto bevor der SPAM-Schutz ausgelÃ¶st wird. Wenn 0 eingetragen: kein SPAM-Schutz fÃ¼r die Anmeldung je Benutzer.',
 	'IpLoginLimitMax'			=> 'Maximale Anzahl von Anmeldeversuchen pro IP-Adresse',
-	'IpLoginLimitMaxInfo'		=> 'Anzahl der zulässigen Login-Versuche von einer einzelnen IP-Adresse aus, bevor der SPAM-Schutz ausgelöst wird. Wenn 0 eingetragen: kein SPAM-Schutz für die Anmeldung je IP-Adresse.',
+	'IpLoginLimitMaxInfo'		=> 'Anzahl der zulÃ¤ssigen Login-Versuche von einer einzelnen IP-Adresse aus, bevor der SPAM-Schutz ausgelÃ¶st wird. Wenn 0 eingetragen: kein SPAM-Schutz fÃ¼r die Anmeldung je IP-Adresse.',
 
 	'LogSection'				=> 'Protokolleinstellungen',
 	'LogLevelUsage'				=> 'Protokollierung verwenden',
-	'LogLevelInfo'				=> 'Die Mindestpriorität für Ereignisse, die im Protokoll aufgezeichnet werden.',
+	'LogLevelInfo'				=> 'Die MindestprioritÃ¤t fÃ¼r Ereignisse, die im Protokoll aufgezeichnet werden.',
 	'LogThresholds'	=> [
 		'0'		=> 'keine Protokollierung',
 		'1'		=> 'nur kritische Stufe',
-		'2'		=> 'höchste Stufe',
+		'2'		=> 'hÃ¶chste Stufe',
 		'3'		=> 'hoch',
 		'4'		=> 'mittel',
 		'5'		=> 'niedrig',
@@ -618,57 +618,57 @@ $ap_translation = [
 		'7'		=> 'alles aufzeichnen',
 	],
 	'LogDefaultShow'			=> 'Angezeigter Log-Modus',
-	'LogDefaultShowInfo'		=> 'Die Mindestpriorität für Ereignisse die standardmäßig im Log angezeigt werden .',
+	'LogDefaultShowInfo'		=> 'Die MindestprioritÃ¤t fÃ¼r Ereignisse die standardmÃ¤ÃŸig im Log angezeigt werden .',
 	'LogModes'	=> [
 		'1'		=> 'nur kritische Stufe',
-		'2'		=> 'höchste Stufe',
+		'2'		=> 'hÃ¶chste Stufe',
 		'3'		=> 'hohes Stufe',
 		'4'		=> 'mittel',
 		'5'		=> 'niedrig',
 		'6'		=> 'niedrigste Stufe',
 		'7'		=> 'zeige alle',
 	],
-	'LogPurgeTime'				=> 'Aufbewahrungszeit für das Ereignisprotokoll',
+	'LogPurgeTime'				=> 'Aufbewahrungszeit fÃ¼r das Ereignisprotokoll',
 	'LogPurgeTimeInfo'			=> 'Entfernt das Ereignisprotokoll nach der angegebenen Anzahl von Tagen.',
 
 	'FormsSection'				=> 'Formulare',
-	'FormTokenTime'				=> 'Maximale Zeit für die Übermittlung von Formularen',
-	'FormTokenTimeInfo'			=> 'Die Zeit, die ein Benutzer für das Senden eines Formulares hat (in Sekunden).<br> Verwende -1 zum Deaktivieren. Beachte: Ein Formular wird unabhängig von dieser Einstellung ungültig, wenn die Sitzung (Session) abläuft.',
+	'FormTokenTime'				=> 'Maximale Zeit fÃ¼r die Ãœbermittlung von Formularen',
+	'FormTokenTimeInfo'			=> 'Die Zeit, die ein Benutzer fÃ¼r das Senden eines Formulares hat (in Sekunden).<br> Verwende -1 zum Deaktivieren. Beachte: Ein Formular wird unabhÃ¤ngig von dieser Einstellung ungÃ¼ltig, wenn die Sitzung (Session) ablÃ¤uft.',
 
 	'SessionLength'				=> 'Aufbewahrungsdauer Login-Cookie',
-	'SessionLengthInfo'			=> 'Die standardmäßige Lebensdauer des Anmelde-Cookies von Benutzern (in Tagen).',
-	'CommentDelay'				=> 'Anti-Flut für Kommentare',
-	'CommentDelayInfo'			=> 'Mindestwartezeit zwischen der Veröffentlichung von neuen Benutzerkommentaren (in Sekunden).',
-	'IntercomDelay'				=> 'Anti-Flut für persönliche Mitteilungen',
-	'IntercomDelayInfo'			=> 'Mindestwartezeit zwischen dem Senden einer persönlicher Nachricht (in Sekunden).',
-	'RegistrationDelay'			=> 'Mindestdauer für die Registrierung',
-	'RegistrationDelayInfo'		=> 'Die minimale Zeitschwelle für das Ausfüllen des Registrierungsformulars, um Bots von Menschen zu unterscheiden (in Sekunden).',
+	'SessionLengthInfo'			=> 'Die standardmÃ¤ÃŸige Lebensdauer des Anmelde-Cookies von Benutzern (in Tagen).',
+	'CommentDelay'				=> 'Anti-Flut fÃ¼r Kommentare',
+	'CommentDelayInfo'			=> 'Mindestwartezeit zwischen der VerÃ¶ffentlichung von neuen Benutzerkommentaren (in Sekunden).',
+	'IntercomDelay'				=> 'Anti-Flut fÃ¼r persÃ¶nliche Mitteilungen',
+	'IntercomDelayInfo'			=> 'Mindestwartezeit zwischen dem Senden einer persÃ¶nlicher Nachricht (in Sekunden).',
+	'RegistrationDelay'			=> 'Mindestdauer fÃ¼r die Registrierung',
+	'RegistrationDelayInfo'		=> 'Die minimale Zeitschwelle fÃ¼r das AusfÃ¼llen des Registrierungsformulars, um Bots von Menschen zu unterscheiden (in Sekunden).',
 
 	//Formatter settings
-	'FormatterSettingsInfo'		=> 'Gruppe von Parametern, die für die Feinabstimmung der Plattform verantwortlich sind. Ändere sie nicht, es sei denn, du bist mit ihrer Funktionsweise vertraut.',
+	'FormatterSettingsInfo'		=> 'Gruppe von Parametern, die fÃ¼r die Feinabstimmung der Plattform verantwortlich sind. Ã„ndere sie nicht, es sei denn, du bist mit ihrer Funktionsweise vertraut.',
 	'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
 
 	'TextHandlerSection'		=> 'Text Handler ',
 	'Typografica'				=> 'Typografischer Korrektor',
-	'TypograficaInfo'			=> 'Durch das Deaktivieren wird der Vorgang des Hinzufügens von Kommentaren und des Speicherns von Seiten geringfügig beschleunigt.',
+	'TypograficaInfo'			=> 'Durch das Deaktivieren wird der Vorgang des HinzufÃ¼gens von Kommentaren und des Speicherns von Seiten geringfÃ¼gig beschleunigt.',
 	'Paragrafica'				=> 'Paragrafica Markierungen',
-	'ParagraficaInfo'			=> 'Ähnlich wie bei der vorherigen Option, jedoch wird die Deaktivierung zu einer Fehlfunktion des automatischen Inhaltsverzeichnisses führen: <code>{{toc}}</code>.',
-	'AllowRawhtml'				=> 'Globale HTML-Unterstützung',
-	'AllowRawhtmlInfo'			=> 'Die Verwendung dieser Option für eine offene Site ist möglicherweise unsicher.',
+	'ParagraficaInfo'			=> 'Ã„hnlich wie bei der vorherigen Option, jedoch wird die Deaktivierung zu einer Fehlfunktion des automatischen Inhaltsverzeichnisses fÃ¼hren: <code>{{toc}}</code>.',
+	'AllowRawhtml'				=> 'Globale HTML-UnterstÃ¼tzung',
+	'AllowRawhtmlInfo'			=> 'Die Verwendung dieser Option fÃ¼r eine offene Site ist mÃ¶glicherweise unsicher.',
 	'SafeHtml'					=> 'HTML filtern',
-	'SafeHtmlInfo'				=> 'Verhindert das Speichern gefährlicher HTML-Objekte. Das Deaktivieren des Filters auf einer offnen Website mit HTML-Unterstützung ist <span class="underline">extrem</span> unerwünscht!',
+	'SafeHtmlInfo'				=> 'Verhindert das Speichern gefÃ¤hrlicher HTML-Objekte. Das Deaktivieren des Filters auf einer offnen Website mit HTML-UnterstÃ¼tzung ist <span class="underline">extrem</span> unerwÃ¼nscht!',
 
 	'WackoFormatterSection'		=> 'Wiki Text Formatierer (Wacko Formatierer)',
 	'X11colors'					=> 'X11 Farben Verwendung',
-	'X11colorsInfo'				=> 'Erweitert die verfügbaren Farben für <code>??(Farbe) Hintergrund??</code> und <code>!!(Farbe) Text!!</code>. Durch das Deaktivieren wird der Vorgang des Hinzufügens von Kommentaren und des Speicherns von Seiten geringfügig beschleunigt.',
+	'X11colorsInfo'				=> 'Erweitert die verfÃ¼gbaren Farben fÃ¼r <code>??(Farbe) Hintergrund??</code> und <code>!!(Farbe) Text!!</code>. Durch das Deaktivieren wird der Vorgang des HinzufÃ¼gens von Kommentaren und des Speicherns von Seiten geringfÃ¼gig beschleunigt.',
 	'TikiLinks'					=> 'Deaktiviere Tikilinks',
 	'TikiLinksInfo'				=> 'Deaktiviert die Verlinkung von <code>Double.CamelCaseWords</code>.',
 	'WikiLinks'					=> 'Deaktiviere Wikilinks',
-	'WikiLinksInfo'				=> 'Deaktiviert die Verlinkung von <code>CamelCaseWords</code>, deine CamelCase Wörter werden nicht mehr direkt auf eine neue Seite verlink. Dies ist nützlich, wenn man über verschiedene Namensräume, also Cluster, hinweg arbeitet. Standardmäßig ist es ausgeschaltet.',
+	'WikiLinksInfo'				=> 'Deaktiviert die Verlinkung von <code>CamelCaseWords</code>, deine CamelCase WÃ¶rter werden nicht mehr direkt auf eine neue Seite verlink. Dies ist nÃ¼tzlich, wenn man Ã¼ber verschiedene NamensrÃ¤ume, also Cluster, hinweg arbeitet. StandardmÃ¤ÃŸig ist es ausgeschaltet.',
 	'BracketsLinks'				=> 'Deaktiviere Bracketslinks',
 	'BracketsLinksInfo'			=> 'Deaktiviert <code>[[link]]</code> und <code>((link))</code> Syntax.',
 	'Formatters'				=> 'Deaktiviere Formatierer',
-	'FormattersInfo'			=> 'Deaktiviert <code>%%code%%</code> Syntax, verwendet für Textauszeichner.',
+	'FormattersInfo'			=> 'Deaktiviert <code>%%code%%</code> Syntax, verwendet fÃ¼r Textauszeichner.',
 
 	'DateFormatsSection'		=> 'Datumsformate',
 	'DateFormat'				=> 'Das Format des Datums',
@@ -680,22 +680,22 @@ $ap_translation = [
 	'NameDateMacro'				=> 'Das Format des <code>::@::</code> Makros',
 	'NameDateMacroInfo'			=> '(Name, Zeit), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Zeitzone',
-	'TimezoneInfo'				=> 'Zeitzone für die Anzeige von Zeiten für Benutzer, die nicht angemeldet sind (Gäste). Angemeldete Benutzer können ihre Zeitzone in ihren Benutzereinstellungen einstellen und ändern.',
+	'TimezoneInfo'				=> 'Zeitzone fÃ¼r die Anzeige von Zeiten fÃ¼r Benutzer, die nicht angemeldet sind (GÃ¤ste). Angemeldete Benutzer kÃ¶nnen ihre Zeitzone in ihren Benutzereinstellungen einstellen und Ã¤ndern.',
 	'EnableDst'					=> 'Sommerzeit aktivieren',
 	'EnableDstInfo'				=> '',
 
-	'LinkTarget'				=> 'Wo externe Links geöffnet werden',
-	'LinkTargetInfo'			=> 'Öffnet jeden externen Link in einem neuen Browserfenster. Fügt <code>target="_blank"</code> zum Link-Syntax hinzu.',
+	'LinkTarget'				=> 'Wo externe Links geÃ¶ffnet werden',
+	'LinkTargetInfo'			=> 'Ã–ffnet jeden externen Link in einem neuen Browserfenster. FÃ¼gt <code>target="_blank"</code> zum Link-Syntax hinzu.',
 	'Noreferrer'				=> 'noreferrer',
-	'NoreferrerInfo'			=> 'Setzt voraus, dass der Browser, wenn der Benutzer den Hyperlink folgt keine Referrer-Header sendet. Fügt <code>rel="noreferrer"</code> zum Link-Syntax hinzu.',
+	'NoreferrerInfo'			=> 'Setzt voraus, dass der Browser, wenn der Benutzer den Hyperlink folgt keine Referrer-Header sendet. FÃ¼gt <code>rel="noreferrer"</code> zum Link-Syntax hinzu.',
 	'Nofollow'					=> 'nofollow',
-	'NofollowInfo'				=> 'Weist Suchmaschinen an, daß die Hyperlinks sich nicht auf das Seiten-Ranking der Zielseite im Suchmaschinenindex auswirken sollen. Fügt <code>rel="nofollow"</code> zum Link-Syntax hinzu.',
+	'NofollowInfo'				=> 'Weist Suchmaschinen an, daÃŸ die Hyperlinks sich nicht auf das Seiten-Ranking der Zielseite im Suchmaschinenindex auswirken sollen. FÃ¼gt <code>rel="nofollow"</code> zum Link-Syntax hinzu.',
 	'UrlsUnderscores'			=> 'Bildet Adressen (URLs) mit Unterstrichen',
 	'UrlsUnderscoresInfo'		=> 'Beispielsweise %1 wird zu %2 mit dieser Option.',
 	'ShowSpaces'				=> 'Zeigt Leerzeichen in WikiNamen',
 	'ShowSpacesInfo'			=> 'Zeigt Leerzeichen in WikiNamen, e.g. <code>MyName</code> wird angezeigt als <code>My Name</code> mit dieser Option.',
 	'NumerateLinks'				=> 'Nummeriert die Links in der Druckansicht',
-	'NumerateLinksInfo'			=> 'Nummeriert und listet alle Links am Fuß der Seite in der Druckansicht mit dieser Option.',
+	'NumerateLinksInfo'			=> 'Nummeriert und listet alle Links am FuÃŸ der Seite in der Druckansicht mit dieser Option.',
 	'YouareHereText'			=> 'Deaktiviert und visualisiert selbstreferenzierende Links',
 	'YouareHereTextInfo'		=> 'Visualisiert Links zur selben Seite, bspw. <code>&lt;b&gt;####&lt;/b&gt;</code>, alle Links auf sich selbst werden nicht als Link, sondern als fetter Text dargestellt.',
 
@@ -703,8 +703,8 @@ $ap_translation = [
 	'PagesSettingsInfo'			=> '',
 	'PagesSettingsUpdated'		=> 'Einstellungen der Basisseiten aktualisiert',
 
-	'ListCount'					=> 'Anzahl der Datensätze pro Liste',
-	'ListCountInfo'				=> 'Anzahl der Zeilen, die in jeder Liste für Gäste angezeigt werden, oder als Standardwert für neue Benutzer.',
+	'ListCount'					=> 'Anzahl der DatensÃ¤tze pro Liste',
+	'ListCountInfo'				=> 'Anzahl der Zeilen, die in jeder Liste fÃ¼r GÃ¤ste angezeigt werden, oder als Standardwert fÃ¼r neue Benutzer.',
 
 	'ForumSection'				=> 'Options Forum',
 
@@ -713,30 +713,30 @@ $ap_translation = [
 	'ForumTopics'				=> 'Anzahl der Themen pro Seite',
 	'ForumTopicsInfo'			=> 'Anzahl der Themen, die auf jeder Seite der Liste in den Forumsabschnitten angezeigt werden.',
 	'CommentsCount'				=> 'Anzahl der Kommentare pro Seite',
-	'CommentsCountInfo'			=> 'Die Anzahl der Kommentare, welche auf jeder Seite der in der Kommentarliste angezeigt werden. Dies gilt für alle Kommentare auf der Website und nicht nur für die im Forum.',
+	'CommentsCountInfo'			=> 'Die Anzahl der Kommentare, welche auf jeder Seite der in der Kommentarliste angezeigt werden. Dies gilt fÃ¼r alle Kommentare auf der Website und nicht nur fÃ¼r die im Forum.',
 
 	'NewsSection'				=> 'Nachrichten',
 	'NewsCluster'				=> 'Nachrichten Cluster',
-	'NewsClusterInfo'			=> 'Root-Cluster für den Nachrichtenbereich.',
+	'NewsClusterInfo'			=> 'Root-Cluster fÃ¼r den Nachrichtenbereich.',
 	'NewsLevels'				=> 'Tiefe der Nachrichtenseiten aus dem Root-Cluster',
-	'NewsLevelsInfo'			=> 'Regulärer Ausdruck (SQL regexp-slang), der die Anzahl der Zwischenstufen des Nachrichten-Wurzelclusters direkt zu den Namen der Seiten der Nachrichtenberichte angibt. (e.g. <code>[cluster]/[jahr]/[monat]</code> -> <code>/.+/.+/.+</code>)',
+	'NewsLevelsInfo'			=> 'RegulÃ¤rer Ausdruck (SQL regexp-slang), der die Anzahl der Zwischenstufen des Nachrichten-Wurzelclusters direkt zu den Namen der Seiten der Nachrichtenberichte angibt. (e.g. <code>[cluster]/[jahr]/[monat]</code> -> <code>/.+/.+/.+</code>)',
 
 	'LicenseSection'			=> 'Lizenz',
 	'DefaultLicense'			=> 'Standard-Lizenz',
-	'DefaultLicenseInfo'		=> 'Unter welcher Lizenz sollen deine Inhalte veröffentlicht werden?',
+	'DefaultLicenseInfo'		=> 'Unter welcher Lizenz sollen deine Inhalte verÃ¶ffentlicht werden?',
 
 	'EnableLicense'				=> 'Aktiviere Lizenz',
 	'EnableLicenseInfo'			=> 'Aktivieren, um Lizenzinformationen anzuzeigen.',
 	'LicensePerPage'			=> 'Lizenz pro Seite',
-	'LicensePerPageInfo'		=> 'Erlaube Lizenz pro Seite, die der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
+	'LicensePerPageInfo'		=> 'Erlaube Lizenz pro Seite, die der Seitenbesitzer Ã¼ber Seiteneigenschaften auswÃ¤hlen kann.',
 
 	'ServicePagesSection'		=> 'Standardseiten',
 
 	'RootPage'					=> 'Startseite',
 	'RootPageInfo'				=> 'Der Tag der Hauptseite, welcher automatisch aufgerufen wird, wenn ein Nutzer die Website besucht.',
 
-	'PrivacyPage'				=> 'Datenschutzerklärung',
-	'PrivacyPageInfo'			=> 'Seite mit der Datenschutzerklärung der Website.',
+	'PrivacyPage'				=> 'DatenschutzerklÃ¤rung',
+	'PrivacyPageInfo'			=> 'Seite mit der DatenschutzerklÃ¤rung der Website.',
 
 	'TermsPage'					=> 'Nutzungsbedingungen',
 	'TermsPageInfo'				=> 'Seite mit den Nutzungsbedingungen der Website.',
@@ -744,14 +744,14 @@ $ap_translation = [
 	'SearchPage'				=> 'Suche',
 	'SearchPageInfo'			=> 'Seite mit dem Suchformular (Aktion <code>{{search}}</code>).',
 	'RegistrationPage'			=> 'Register on our site',
-	'RegistrationPageInfo'		=> 'Seite für neue Benutzerregistrierung (Aktion <code>{{registration}}</code>).',
+	'RegistrationPageInfo'		=> 'Seite fÃ¼r neue Benutzerregistrierung (Aktion <code>{{registration}}</code>).',
 	'LoginPage'					=> 'Benutzer-Anmeldung',
 	'LoginPageInfo'				=> 'Seite zur Anmeldung (Aktion <code>{{login}}</code>).',
 
 	'SettingsPage'				=> 'Benutzereinstellungen',
 	'SettingsPageInfo'			=> 'Seite zum Anpassen des Benutzerprofils (Aktion <code>{{usersettings}}</code>).',
-	'PasswordPage'				=> 'Passwort ändern',
-	'PasswordPageInfo'			=> 'Seite mit dem Formular zum Ändern und Zurücksetzen des Benutzerpasswortes (Aktion <code>{{changepassword}}</code>).',
+	'PasswordPage'				=> 'Passwort Ã¤ndern',
+	'PasswordPageInfo'			=> 'Seite mit dem Formular zum Ã„ndern und ZurÃ¼cksetzen des Benutzerpasswortes (Aktion <code>{{changepassword}}</code>).',
 	'UsersPage'					=> 'Benutzerliste',
 	'UsersPageInfo'				=> 'Seite mit einer Liste der registrierten Benutzer (Aktion <code>{{users}}</code>).',
 	'CategoryPage'				=> 'Kategorien',
@@ -761,47 +761,47 @@ $ap_translation = [
 
 	'GroupsPage'				=> 'Gruppen',
 	'GroupsPageInfo'			=> 'Seite mit einer Liste von Arbeitsgruppen (Aktion <code>{{usergroups}}</code>).',
-	'ChangesPage'				=> 'Letzte Änderungen',
-	'ChangesPageInfo'			=> 'Seite mit einer Liste der zuletzt geänderten Seiten (Aktion <code>{{changes}}</code>).',
+	'ChangesPage'				=> 'Letzte Ã„nderungen',
+	'ChangesPageInfo'			=> 'Seite mit einer Liste der zuletzt geÃ¤nderten Seiten (Aktion <code>{{changes}}</code>).',
 	'CommentsPage'				=> 'Letzte Kommentare',
 	'CommentsPageInfo'			=> 'Seite mit einer Liste der letzten Kommentare auf der Seite (Aktion <code>{{commented}}</code>).',
-	'RemovalsPage'				=> 'Gelöschte Seiten',
-	'RemovalsPageInfo'			=> 'Seite mit einer Liste der zuletzt gelöschten Seiten (Aktion <code>{{deleted}}</code>).',
-	'WantedPage'				=> 'Gewünschte Seiten',
+	'RemovalsPage'				=> 'GelÃ¶schte Seiten',
+	'RemovalsPageInfo'			=> 'Seite mit einer Liste der zuletzt gelÃ¶schten Seiten (Aktion <code>{{deleted}}</code>).',
+	'WantedPage'				=> 'GewÃ¼nschte Seiten',
 	'WantedPageInfo'			=> 'Seite mit einer Liste der fehlenden Seiten, auf die verwiesen wird (Aktion <code>{{wanted}}</code>).',
 	'OrphanedPage'				=> 'Verwaiste Seiten',
 	'OrphanedPageInfo'			=> 'Seite mit einer Liste der vorhandenen Seiten welche von anderen Seiten nicht verlinkt wurden (Aktion <code>{{orphaned}}</code>).',
 	'SandboxPage'				=> 'Sandkasten',
-	'SandboxPageInfo'			=> 'Seite, auf der Benutzer die Verwendung des Wiki-Markups üben können.',
+	'SandboxPageInfo'			=> 'Seite, auf der Benutzer die Verwendung des Wiki-Markups Ã¼ben kÃ¶nnen.',
 	'HelpPage'					=> 'Hilfe',
 	'HelpPageInfo'				=> 'Die Dokumentation zum Arbeiten mit den Website-Werkzeugen.',
 
 	// Notification settings
-	'NotificationSettingsInfo'	=> 'Parameter für Benachrichtigungen des Systems.',
+	'NotificationSettingsInfo'	=> 'Parameter fÃ¼r Benachrichtigungen des Systems.',
 	'NotificationSettingsUpdated'	=> 'Benachrichtigungseinstellungen aktualisiert',
 
 	'EmailNotification'			=> 'E-Mail-Benachrichtigung',
-	'EmailNotificationInfo'		=> 'E-Mail-Benachrichtigung zulassen. Wähle EIN, um E-Mail-Benachrichtigungen zu aktivieren, und AUS, um sie zu deaktivieren. Beachte, dass die Deaktivierung von E-Mail-Benachrichtigungen keine Auswirkungen auf E-Mails hat, die im Rahmen des Benutzeranmeldungsvorgangs generiert werden.',
+	'EmailNotificationInfo'		=> 'E-Mail-Benachrichtigung zulassen. WÃ¤hle EIN, um E-Mail-Benachrichtigungen zu aktivieren, und AUS, um sie zu deaktivieren. Beachte, dass die Deaktivierung von E-Mail-Benachrichtigungen keine Auswirkungen auf E-Mails hat, die im Rahmen des Benutzeranmeldungsvorgangs generiert werden.',
 	'Autosubscribe'				=> 'Automatisch abonnieren',
-	'AutosubscribeInfo'			=> 'Aktiviert die automatischen Benachrichtigung für den Seitenbesitzer bei Änderungen.',
+	'AutosubscribeInfo'			=> 'Aktiviert die automatischen Benachrichtigung fÃ¼r den Seitenbesitzer bei Ã„nderungen.',
 
 	'NotificationSection'		=> 'Benachrichtigungen',
-	'NotifyPageEdit'			=> 'Seitenänderung mitteilen',
-	'NotifyPageEditInfo'		=> 'Ausstehend - Es wird nur für die erste Änderung einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
+	'NotifyPageEdit'			=> 'SeitenÃ¤nderung mitteilen',
+	'NotifyPageEditInfo'		=> 'Ausstehend - Es wird nur fÃ¼r die erste Ã„nderung einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
 	//
-	'NotifyMinorEdit'			=> 'Kleine Änderung mitteilen',
-	'NotifyMinorEditInfo'		=> 'Sende Mitteilungen auch bei kleinen Änderungen.',
+	'NotifyMinorEdit'			=> 'Kleine Ã„nderung mitteilen',
+	'NotifyMinorEditInfo'		=> 'Sende Mitteilungen auch bei kleinen Ã„nderungen.',
 	'NotifyNewComment'			=> 'Neuen Kommentar mitteilen',
-	'NotifyNewCommentInfo'		=> 'Ausstehend - Es wird nur für den ersten Kommentar einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
+	'NotifyNewCommentInfo'		=> 'Ausstehend - Es wird nur fÃ¼r den ersten Kommentar einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
 
 	'NotifyUserAccount'			=> 'Neues Benutzerkonto mitteilen',
-	'NotifyUserAccountInfo'		=> 'Der Administrator wird benachrichtigt, wenn ein neuer Benutzer über das Anmelde-Formular erstellt wurde.',
+	'NotifyUserAccountInfo'		=> 'Der Administrator wird benachrichtigt, wenn ein neuer Benutzer Ã¼ber das Anmelde-Formular erstellt wurde.',
 	'NotifyUpload'				=> 'Benachrichtigung bei Datei-Upload',
 	'NotifyUploadInfo'			=> 'Die Moderatoren werden benachrichtigt, wenn eine Datei hochgeladen wurde.',
 
-	'PersonalMessagesSection'	=> 'Persönliche Mitteilungen',
+	'PersonalMessagesSection'	=> 'PersÃ¶nliche Mitteilungen',
 	'AllowIntercomDefault'		=> 'Erlaube Intercom',
-	'AllowIntercomDefaultInfo'	=> 'Ermöglicht das Senden von persönlichen Nachrichten an die E-Mail-Adresse des Empfänger ohne Offenlegung seiner Adresse.',
+	'AllowIntercomDefaultInfo'	=> 'ErmÃ¶glicht das Senden von persÃ¶nlichen Nachrichten an die E-Mail-Adresse des EmpfÃ¤nger ohne Offenlegung seiner Adresse.',
 	'AllowMassemailDefault'		=> 'Erlaube Rundmail',
 	'AllowMassemailDefaultInfo'	=> 'Er sendet nur Nachrichten an die Benutzer, die den Administratoren das Senden von Informationen per E-Mail gestattet haben.',
 
@@ -816,58 +816,58 @@ $ap_translation = [
 	'LogUserStatsSynched'		=> 'Benutzerstatistiken synchronisiert',
 	'LogPageStatsSynched'		=> 'Seitenstatistiken synchronisiert',
 	'LogFeedsUpdated'			=> 'RSS-Feeds synchronisiert',
-	'LogPageBodySynched'		=> 'Seitenkörper und Links repariert',
+	'LogPageBodySynched'		=> 'SeitenkÃ¶rper und Links repariert',
 
 	'UserStats'					=> 'Benutzerstatistik',
-	'UserStatsInfo'				=> 'Benutzerstatistiken (Anzahl der Kommentare, besessene Seiten, Revisionen und Dateien) können in einigen Situationen von den tatsächlichen Daten abweichen.<br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',
+	'UserStatsInfo'				=> 'Benutzerstatistiken (Anzahl der Kommentare, besessene Seiten, Revisionen und Dateien) kÃ¶nnen in einigen Situationen von den tatsÃ¤chlichen Daten abweichen.<br> Diese Operation ermÃ¶glicht das Aktualisieren von Statistiken auf aktuelle tatsÃ¤chliche Daten der Datenbank.',
 	'PageStats'					=> 'Seitenstatistiken',
-	'PageStatsInfo'				=> 'Seitenstatistiken (Anzahl der Kommentare, Dateien und Revisionen) können in einigen Situationen von den tatsächlichen Daten abweichen. <br> Diese Operation ermöglicht das Aktualisieren von Statistiken auf aktuelle tatsächliche Daten der Datenbank.',
+	'PageStatsInfo'				=> 'Seitenstatistiken (Anzahl der Kommentare, Dateien und Revisionen) kÃ¶nnen in einigen Situationen von den tatsÃ¤chlichen Daten abweichen. <br> Diese Operation ermÃ¶glicht das Aktualisieren von Statistiken auf aktuelle tatsÃ¤chliche Daten der Datenbank.',
 	'Feeds'						=> 'Feeds',
-	'FeedsInfo'					=> 'Im Falle der direkten Bearbeitung von Seiten in der Datenbank spiegelt der Inhalt der RSS-Feeds möglicherweise nicht die vorgenommenen Änderungen wider. <br> Diese Funktion synchronisiert die RSS-Kanäle mit dem aktuellen Zustand der Datenbank.',
+	'FeedsInfo'					=> 'Im Falle der direkten Bearbeitung von Seiten in der Datenbank spiegelt der Inhalt der RSS-Feeds mÃ¶glicherweise nicht die vorgenommenen Ã„nderungen wider. <br> Diese Funktion synchronisiert die RSS-KanÃ¤le mit dem aktuellen Zustand der Datenbank.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
 	'XmlSiteMapInfo'			=> 'Diese Funktion synchronisiert die XML-Sitemap mit dem aktuellen Zustand der Datenbank.',
 	'XmlSiteMapPeriod'			=> 'Dauer %1 Tage. Zuletzt erstellt %2.',
 	'XmlSiteMapView'			=> 'Zeigt die Sitemap in einem neuen Fenster.',
 	'WikiLinksResync'			=> 'Wiki-Links',
-	'WikiLinksResyncInfo'		=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code>page_link</code> und <code>file_link</code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
+	'WikiLinksResyncInfo'		=> 'FÃ¼hrt ein Re-Rendering fÃ¼r alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code>page_link</code> und <code>file_link</code> im Falle einer BeschÃ¤digung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
 	'RecompilePage'				=> 'Alle Seiten neu kompilieren (extrem teuer)',
-	'ResyncOptions'				=> 'Zusätzliche Otionen',
+	'ResyncOptions'				=> 'ZusÃ¤tzliche Otionen',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Diese Informationen werden benötigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gültig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, können die Nachrichten auch direkt über SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nötig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wähle eine Authentifizierungsmethode aus.',
+	'EmaiSettingsInfo'			=> 'Diese Informationen werden benÃ¶tigt, um E-Mails an die Benutzer zu senden. Stelle bitte sicher, dass die angegebene Adresse gÃ¼ltig ist; abgewiesene oder nicht zustellbare Nachrichten werden an diese Adresse geschickt. Falls dein Webhosting-Provider keinen PHP-basierten E-Mail-Dienst anbietet, kÃ¶nnen die Nachrichten auch direkt Ã¼ber SMTP versendet werden. Dies erfordert die Angabe der Adresse eines geeigneten Servers (frage falls nÃ¶tig deinen Provider). Falls der Server eine Authentifizierung erfordert (und nur, wenn dies der Fall ist), gib den Benutzernamen und das Passwort ein und wÃ¤hle eine Authentifizierungsmethode aus.',
 
 	'EmailSettingsUpdated'		=> 'E-Mail Einstellungen wurden aktualisiert.',
 
 	'EmailFunctionName'			=> 'Verwendete E-Mail-Funktion',
 	'EmailFunctionNameInfo'		=> 'Die PHP-Funktion, welche genutzt wird, um E-Mails zu versenden.',
-	'UseSmtpInfo'				=> 'Wähle <code>SMTP</code> aus, wenn du E-Mails über einen SMTP-Server senden möchtest (oder musst), anstatt die PHP-eigene Mail-Funktion zu nutzen.',
+	'UseSmtpInfo'				=> 'WÃ¤hle <code>SMTP</code> aus, wenn du E-Mails Ã¼ber einen SMTP-Server senden mÃ¶chtest (oder musst), anstatt die PHP-eigene Mail-Funktion zu nutzen.',
 
 	'EnableEmail'				=> 'Aktiviere E-Mail',
-	'EnableEmailInfo'			=> 'Aktiviere E-Mail-Funktionalität',
+	'EnableEmailInfo'			=> 'Aktiviere E-Mail-FunktionalitÃ¤t',
 
 	'FromEmailName'				=> 'Absender',
-	'FromEmailNameInfo'			=> 'Absender Name, im Adressfeld <code>Von:</code> der Kopfzeile in E-Mails für alle E-Mail-Benachrichtigungen, die von dieser Seite gesendet werden.',
+	'FromEmailNameInfo'			=> 'Absender Name, im Adressfeld <code>Von:</code> der Kopfzeile in E-Mails fÃ¼r alle E-Mail-Benachrichtigungen, die von dieser Seite gesendet werden.',
 	'NoReplyEmail'				=> 'No-reply Adresse',
 	'NoReplyEmailInfo'			=> 'Diese Adresse, z.B. <code>noreply@example.com</code>, erscheint im Adressfeld <code>Von:</code> der Kopfzeile bei allen E-Mail Benachrichtigungen, die von dieser Seite gesendet werden.',
 	'AdminEmail'				=> 'E-Mail Adresse des Seiteninhabers',
-	'AdminEmailInfo'			=> 'Diese Adresse ist für Administrationszwecke, wie Benachrichtigung bei neuen Benutzern.',
+	'AdminEmailInfo'			=> 'Diese Adresse ist fÃ¼r Administrationszwecke, wie Benachrichtigung bei neuen Benutzern.',
 	'AbuseEmail'				=> 'Dienst bei E-Mail-Missbrauch',
-	'AbuseEmailInfo'			=> 'Adresse für dringende Angelegenheiten: Registrierung einer verdächtigen E-Mail, usw. Kann mit der vorherigen übereinstimmen.',
+	'AbuseEmailInfo'			=> 'Adresse fÃ¼r dringende Angelegenheiten: Registrierung einer verdÃ¤chtigen E-Mail, usw. Kann mit der vorherigen Ã¼bereinstimmen.',
 
 	'SendTestEmail'				=> 'Test-Mail senden',
 	'SendTestEmailInfo'			=> 'Sendet eine Test-Mail an die in deinem Benutzerkonto hinterlegte Adresse.',
-	'TestEmailSubject'			=> 'Dein Wiki ist für den E-Mail-Versand richtig konfiguriert',
-	'TestEmailBody'				=> 'wenn du diese Nachricht erhältst, ist deine Wiki richtig für den E-Mail-Versand konfiguriert.',
-	'TestEmailMessage'			=> 'Eine Test-E-Mail wurde gesendet.<br>Falls du sie nicht erhalten solltest, prüfe bitte deine E-Mail-Einstellungen.',
+	'TestEmailSubject'			=> 'Dein Wiki ist fÃ¼r den E-Mail-Versand richtig konfiguriert',
+	'TestEmailBody'				=> 'wenn du diese Nachricht erhÃ¤ltst, ist deine Wiki richtig fÃ¼r den E-Mail-Versand konfiguriert.',
+	'TestEmailMessage'			=> 'Eine Test-E-Mail wurde gesendet.<br>Falls du sie nicht erhalten solltest, prÃ¼fe bitte deine E-Mail-Einstellungen.',
 
 	'SmtpAutoTls'				=> 'STARTTLS',
-	'SmtpAutoTlsInfo'			=> 'Aktiviert Verschlüsselung automatisch, wenn der Server TLS Verschlüsselung anbietet (nach dem Aufbau der Serververbindung), sogar wenn <code>SMTPSecure</code> nicht eingeschaltet wurde.',
-	'SmtpConnectionMode'		=> 'Authentifizierungsmethode für SMTP',
-	'SmtpConnectionModeInfo'	=> 'Nur benötigt, wenn ein Benutzername/Passwort eingegeben ist. Frage deinen Webhosting-Provider, falls du nicht sicher bist, welche Methode du wählen sollst.',
+	'SmtpAutoTlsInfo'			=> 'Aktiviert VerschlÃ¼sselung automatisch, wenn der Server TLS VerschlÃ¼sselung anbietet (nach dem Aufbau der Serververbindung), sogar wenn <code>SMTPSecure</code> nicht eingeschaltet wurde.',
+	'SmtpConnectionMode'		=> 'Authentifizierungsmethode fÃ¼r SMTP',
+	'SmtpConnectionModeInfo'	=> 'Nur benÃ¶tigt, wenn ein Benutzername/Passwort eingegeben ist. Frage deinen Webhosting-Provider, falls du nicht sicher bist, welche Methode du wÃ¤hlen sollst.',
 	'SmtpPassword'				=> 'SMTP-Passwort',
-	'SmtpPasswordInfo'			=> 'Gib nur ein Passwort ein, wenn dein SMTP-Server dies erfordert. <em><strong>WARNUNG:</strong> Dieses Passwort wird im Klartext in der Datenbank gespeichert und ist daher für jeden einsehbar, der Zugriff auf die Datenbank oder diese Konfigurationsseite hat.</em>',
+	'SmtpPasswordInfo'			=> 'Gib nur ein Passwort ein, wenn dein SMTP-Server dies erfordert. <em><strong>WARNUNG:</strong> Dieses Passwort wird im Klartext in der Datenbank gespeichert und ist daher fÃ¼r jeden einsehbar, der Zugriff auf die Datenbank oder diese Konfigurationsseite hat.</em>',
 	'SmtpPort'					=> 'SMTP-Server-Port',
-	'SmtpPortInfo'				=> 'Ändere diese Einstellung nur, wenn du weißt, dass dein SMTP-Server einen anderen Port nutzt. <br>(default: <code>tls</code> auf Port 587 (oder möglicherweise 25) und <code>ssl</code> auf Port 465)',
+	'SmtpPortInfo'				=> 'Ã„ndere diese Einstellung nur, wenn du weiÃŸt, dass dein SMTP-Server einen anderen Port nutzt. <br>(default: <code>tls</code> auf Port 587 (oder mÃ¶glicherweise 25) und <code>ssl</code> auf Port 465)',
 	'SmtpServer'				=> 'SMTP-Server-Adresse',
 	'SmtpServerInfo'			=> 'Beachte, dass du das Protokoll angeben musst, das dein Server verwendet. Wird SSL verwendet, musst du <code>ssl://mail.example.com</code> angeben.',
 	'SmtpSettings'				=> 'SMTP-Einstellungen',
@@ -875,39 +875,39 @@ $ap_translation = [
 	'SmtpUsernameInfo'			=> 'Gib nur einen Benutzernamen ein, wenn dein SMTP-Server dies erfordert.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Hier können die Einstellungen für Dateianhänge und damit verknüpfte Kategorien angepasst werden.',
-	'UploadSettingsUpdated'		=> 'Einstellungen für Dateianhänge aktualisiert',
+	'UploadSettingsInfo'		=> 'Hier kÃ¶nnen die Einstellungen fÃ¼r DateianhÃ¤nge und damit verknÃ¼pfte Kategorien angepasst werden.',
+	'UploadSettingsUpdated'		=> 'Einstellungen fÃ¼r DateianhÃ¤nge aktualisiert',
 
 	'RightToUpload'				=> 'Berechtigung Dateien hochzuladen',
-	'RightToUploadInfo'			=> '<code>admins</code> bedeutet nur Nutzer welche der Admins-Gruppe angehören, können Dateien hochladen. <code>1</code> bedeutet jeder registrierte Benutzer kann Dateien hochladen. <code>0</code> das Hochladen von Dateien ist nicht möglich.',
+	'RightToUploadInfo'			=> '<code>admins</code> bedeutet nur Nutzer welche der Admins-Gruppe angehÃ¶ren, kÃ¶nnen Dateien hochladen. <code>1</code> bedeutet jeder registrierte Benutzer kann Dateien hochladen. <code>0</code> das Hochladen von Dateien ist nicht mÃ¶glich.',
 	'UploadOnlyImages'			=> 'Erlaube nur das Hochladen von Bildern',
-	'UploadOnlyImagesInfo'		=> 'Nur Bilder können hochgeladen werden.',
+	'UploadOnlyImagesInfo'		=> 'Nur Bilder kÃ¶nnen hochgeladen werden.',
 	'FileUploads'				=> 'Dateien hochladen',
-	'UploadMaxFilesize'			=> 'Maximale Dateigröße',
-	'UploadMaxFilesizeInfo'		=> 'Maximale Größe pro Datei. Die Dateigröße wird nur durch die PHP-Konfiguration beschränkt, wenn 0 als Wert eingestellt wird.',
-	'UploadQuota'				=> 'Maximales Kontingent für Dateianhänge',
-	'UploadQuotaInfo'			=> 'Maximaler für Dateianhänge verfügbarer Speicherplatz für das gesamte Wiki; <code>0</code> bedeutet unbegrenzt.',
+	'UploadMaxFilesize'			=> 'Maximale DateigrÃ¶ÃŸe',
+	'UploadMaxFilesizeInfo'		=> 'Maximale GrÃ¶ÃŸe pro Datei. Die DateigrÃ¶ÃŸe wird nur durch die PHP-Konfiguration beschrÃ¤nkt, wenn 0 als Wert eingestellt wird.',
+	'UploadQuota'				=> 'Maximales Kontingent fÃ¼r DateianhÃ¤nge',
+	'UploadQuotaInfo'			=> 'Maximaler fÃ¼r DateianhÃ¤nge verfÃ¼gbarer Speicherplatz fÃ¼r das gesamte Wiki; <code>0</code> bedeutet unbegrenzt.',
 	'UploadQuotaUser'			=> 'Speicherkontingent pro Benutzer',
-	'UploadQuotaUserInfo'		=> 'Beschränkung des Speicherkontingentes, der von einem Benutzer hochgeladen werden kann, wobei <code>0</code> unbegrenzt ist.',
-	'CheckMimetype'				=> 'Dateianhänge prüfen',
-	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
+	'UploadQuotaUserInfo'		=> 'BeschrÃ¤nkung des Speicherkontingentes, der von einem Benutzer hochgeladen werden kann, wobei <code>0</code> unbegrenzt ist.',
+	'CheckMimetype'				=> 'DateianhÃ¤nge prÃ¼fen',
+	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ fÃ¼r hochgeladene Dateien vorgetÃ¤uscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren kÃ¶nnten, abgewiesen werden.',
 
 	'Thumbnails'				=> 'Vorschaubilder',
 	'CreateThumbnail'			=> 'Vorschaubild erstellen',
-	'CreateThumbnailInfo'		=> 'Vorschaubild in allen möglichen Fällen erstellen.',
+	'CreateThumbnailInfo'		=> 'Vorschaubild in allen mÃ¶glichen FÃ¤llen erstellen.',
 	'MaxThumbWidth'				=> 'Maximale Breite der Vorschaubilder in Pixeln',
 	'MaxThumbWidthInfo'			=> 'Ein Vorschaubild wird nicht breiter sein als der hier eingestellte Wert.',
-	'MinThumbFilesize'			=> 'Minimale Vorschaubild-Dateigröße',
+	'MinThumbFilesize'			=> 'Minimale Vorschaubild-DateigrÃ¶ÃŸe',
 	'MinThumbFilesizeInfo'		=> 'Erstellt keine Vorschaubilder bei Bildern, die kleiner sind als dieser Wert.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten und Dateien.
-									Um die Seiten und Dateien endgültig aus der Datenbank zu löschen oder wiederherzustellen klicke in der entsprechenden Zeile auf <em>Entfernen</em> oder <em>Wiederherstellen</em>.
-									(Achtung, es ist keine Löschbestätigung erforderlich!)',
+									Um die Seiten und Dateien endgÃ¼ltig aus der Datenbank zu lÃ¶schen oder wiederherzustellen klicke in der entsprechenden Zeile auf <em>Entfernen</em> oder <em>Wiederherstellen</em>.
+									(Achtung, es ist keine LÃ¶schbestÃ¤tigung erforderlich!)',
 
 	// Filter module
-	'FilterSettingsInfo'		=> 'Wörter, die automatisch in deinem Wiki zensiert werden.',
-	'FilterSettingsUpdated'		=> 'Die Einstellungen für den Spamfilter wurden aktualisiert',
+	'FilterSettingsInfo'		=> 'WÃ¶rter, die automatisch in deinem Wiki zensiert werden.',
+	'FilterSettingsUpdated'		=> 'Die Einstellungen fÃ¼r den Spamfilter wurden aktualisiert',
 
 	'WordCensoringSection'		=> 'Wort zensieren',
 	'SPAMFilter'				=> 'Spamfilter',
@@ -921,24 +921,24 @@ $ap_translation = [
 	'NoTablesToConvert'			=> 'Keine Tabellen zum Konvertieren.',
 
 	'LogDatabaseConverted'		=> 'Datenbank konvertiert',
-	'ConversionTablesOk'		=> 'Konvertierung der ausgewählten Tabellen erfolgreich.',
+	'ConversionTablesOk'		=> 'Konvertierung der ausgewÃ¤hlten Tabellen erfolgreich.',
 
 	'LogColumsToStrict'			=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
-	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
+	'ConversionColumnsOk'		=> 'Konvertierung der ausgewÃ¤hlten Spalten erfolgreich.',
 
 	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB',
-	'ConvertTablesEngineInfo'	=> 'Falls man über vorhandene Tabellen verfügt, die für eine bessere Zuverlässigkeit und Skalierbarkeit in InnoDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprünglich MyISAM, was früher der Standard war.',
+	'ConvertTablesEngineInfo'	=> 'Falls man Ã¼ber vorhandene Tabellen verfÃ¼gt, die fÃ¼r eine bessere ZuverlÃ¤ssigkeit und Skalierbarkeit in InnoDB * konvertiert werden sollen, verwende die folgende Routine. Diese Tabellen waren ursprÃ¼nglich MyISAM, was frÃ¼her der Standard war.',
 
-	'DbVersionMin'				=> 'Erfordert mindestens MySQL 5.6.4, verfügbare Version',
-	'DbEngineOk'				=> 'InnoDB ist verfügbar.',
-	'DbEngineMissing'			=> 'InnoDB ist nicht verfügbar.',
+	'DbVersionMin'				=> 'Erfordert mindestens MySQL 5.6.4, verfÃ¼gbare Version',
+	'DbEngineOk'				=> 'InnoDB ist verfÃ¼gbar.',
+	'DbEngineMissing'			=> 'InnoDB ist nicht verfÃ¼gbar.',
 	'EngineTable'				=> 'Tabelle',
 	'EngineDefault'				=> 'Standard',
 	'EngineColumn'				=> 'Spalte',
 	'EngineTyp'					=> 'Typ',
 
-	'ConvertColumnsToStrict'	=> 'Konvertiere Spalten für den SQL-Strikt-Modus',
-	'ConvertTablesStrictInfo'	=> 'Wenn man über vorhandene Tabellen verfügt, welche man konvertieren möchte, um dem strikten SQL-Modus zu entsprechen, verwende die folgende Routine.',
+	'ConvertColumnsToStrict'	=> 'Konvertiere Spalten fÃ¼r den SQL-Strikt-Modus',
+	'ConvertTablesStrictInfo'	=> 'Wenn man Ã¼ber vorhandene Tabellen verfÃ¼gt, welche man konvertieren mÃ¶chte, um dem strikten SQL-Modus zu entsprechen, verwende die folgende Routine.',
 	//
 
 	// Log module
@@ -946,16 +946,16 @@ $ap_translation = [
 	'LogLevel'					=> 'Stufe',
 	'LogLevelFilters'	=> [
 		'1'		=> 'nicht weniger als',
-		'2'		=> 'nicht höher als',
+		'2'		=> 'nicht hÃ¶her als',
 		'3'		=> 'gleich',
 	],
-	'LogNoMatch'				=> 'Keine Ereignisse, die die Kriterien erfüllen',
+	'LogNoMatch'				=> 'Keine Ereignisse, die die Kriterien erfÃ¼llen',
 	'LogDate'					=> 'Datum',
 	'LogEvent'					=> 'Ereignis',
 	'LogUsername'				=> 'Benutzername',
 	'LogLevels'	=> [
 		'1'		=> 'kritisch',
-		'2'		=> 'höchste',
+		'2'		=> 'hÃ¶chste',
 		'3'		=> 'hoch',
 		'4'		=> 'mittel',
 		'5'		=> 'niedrig',
@@ -964,12 +964,12 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Hier kannst du eine Nachricht per E-Mail an alle Mitglieder des Wikis oder einer spezifischen Gruppe senden, <strong>sofern diese den Erhalt von Informationen per E-Mail zugelassen haben</strong>. Dazu wird eine E-Mail an die festgelegte administrative E-Mail-Adresse verschickt und alle Empfänger als Blindkopie (BCC) hinzugefügt. Standardmäßig wird pro 20 Empfänger eine solche E-Mail versandt; bei mehreren Empfängern werden mehrere E-Mails versandt. Bitte habe nach dem Absenden Geduld, wenn du eine Nachricht an eine große Gruppe schickst und breche den Vorgang nicht ab. Bei einer Massen-E-Mail ist es normal, dass ihr Versand länger dauert. Du wirst benachrichtigt, sobald der Vorgang abgeschlossen wurde.',
+	'MassemailInfo'				=> 'Hier kannst du eine Nachricht per E-Mail an alle Mitglieder des Wikis oder einer spezifischen Gruppe senden, <strong>sofern diese den Erhalt von Informationen per E-Mail zugelassen haben</strong>. Dazu wird eine E-Mail an die festgelegte administrative E-Mail-Adresse verschickt und alle EmpfÃ¤nger als Blindkopie (BCC) hinzugefÃ¼gt. StandardmÃ¤ÃŸig wird pro 20 EmpfÃ¤nger eine solche E-Mail versandt; bei mehreren EmpfÃ¤ngern werden mehrere E-Mails versandt. Bitte habe nach dem Absenden Geduld, wenn du eine Nachricht an eine groÃŸe Gruppe schickst und breche den Vorgang nicht ab. Bei einer Massen-E-Mail ist es normal, dass ihr Versand lÃ¤nger dauert. Du wirst benachrichtigt, sobald der Vorgang abgeschlossen wurde.',
 	'LogMassemail'				=> 'Rundmail gesendet %1 an Gruppe / Nutzer ',
 	'MassemailSend'				=> 'Rundmail gesendet',
 
 	'NoEmailMessage'			=> 'Du musst eine Nachricht angeben.',
-	'NoEmailSubject'			=> 'Du musst einen Betreff für die Nachricht angeben.',
+	'NoEmailSubject'			=> 'Du musst einen Betreff fÃ¼r die Nachricht angeben.',
 	'NoEmailRecipient'			=> 'Du musst mindestens einen Benutzer oder eine Benutzergruppe angeben.',
 
 	'MassemailSection'			=> 'Rundmail',
@@ -987,7 +987,7 @@ $ap_translation = [
 
 	'SendToGroup'				=> 'Sende an Nutzergruppe',
 	'SendToUser'				=> 'Sende an Nutzer',
-	'SendToUserInfo'			=> 'Es sendet nur Nachrichten an diejenigen Benutzer, die es Administratoren erlaubt haben, ihnen Informationen per E-Mail zu senden. Diese Option ist in den Benutzereinstellungen unter Benachrichtigungen verfügbar.',
+	'SendToUserInfo'			=> 'Es sendet nur Nachrichten an diejenigen Benutzer, die es Administratoren erlaubt haben, ihnen Informationen per E-Mail zu senden. Diese Option ist in den Benutzereinstellungen unter Benachrichtigungen verfÃ¼gbar.',
 
 	// System message module
 	'SystemMessageInfo'			=> '',
@@ -1003,7 +1003,7 @@ $ap_translation = [
 	'EnableSysMsgInfo'			=> 'Zeige System-Mitteilung.',
 
 	// User approval module
-	'ApproveNotExists'			=> 'Bitte wähle mindestens einen Benutzer über die Schaltfläche Setzen aus.',
+	'ApproveNotExists'			=> 'Bitte wÃ¤hle mindestens einen Benutzer Ã¼ber die SchaltflÃ¤che Setzen aus.',
 
 	'LogUserApproved'			=> 'Benutzer ##%1## zugelassen',
 	'LogUserBlocked'			=> 'Benutzer ##%1## gesperrt',
@@ -1011,11 +1011,11 @@ $ap_translation = [
 	'LogUserCreated'			=> 'Neuer Benutzer ##%1## erstellt',
 	'LogUserUpdated'			=> 'Benutzer ##%1## aktualisiert',
 
-	'UserApproveInfo'			=> 'Schalte neue Benutzer frei, damit sie sich auf der Seite anmelden können.',
+	'UserApproveInfo'			=> 'Schalte neue Benutzer frei, damit sie sich auf der Seite anmelden kÃ¶nnen.',
 	'Approve'					=> 'Zulassen',
 	'Deny'						=> 'Ablehnen',
 	'Pending'					=> 'Ausstehend',
-	'Approved'					=> 'Bestätigt',
+	'Approved'					=> 'BestÃ¤tigt',
 	'Denied'					=> 'Abgelehnt',
 
 	// DB Backup module
@@ -1025,75 +1025,75 @@ $ap_translation = [
 	'BackupTable'				=> 'Tabelle',
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Dateien',
-	'BackupSettings'			=> 'Wähle das gewünsche Datensicherungs-Schema.<br>' .
-									'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollständig gespeichert).<br>' .
+	'BackupSettings'			=> 'WÃ¤hle das gewÃ¼nsche Datensicherungs-Schema.<br>' .
+									'Der Root-Cluster hat keinen Einfluss auf die Sicherung globaler Dateien und die Sicherung von Cache-Dateien (die Auswahl wird immer vollstÃ¤ndig gespeichert).<br>' .
 									'<br>' .
 									'<strong>Achtung</strong>: Um den Verlust von Informationen aus der Datenbank bei der Angabe des Root-Clusters zu vermeiden, werden die Tabellen aus dieser Sicherung nicht umstrukturiert, ' .
 									'auch wenn nur die Tabellenstruktur gesichert wird, ohne die Daten zu speichern. ' .
-									'Um eine vollständige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollständigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
+									'Um eine vollstÃ¤ndige Konvertierung der Tabellen in das Backup-Format vorzunehmen, muss eine <em> vollstÃ¤ndigen Datenbanksicherung (Struktur und Daten) ohne Angabe des Clusters</em> gemacht werden.',
 	'BackupCompleted'			=> 'Sichern und Archivieren abgeschlossen.<br>' .
 									'Die Sicherungspaketdateien wurden im Unterverzeichnis %1 abgelegt.<br>' .
-									'Um es herunterzuladen verwende FTP (verändere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
+									'Um es herunterzuladen verwende FTP (verÃ¤ndere die Verzeichnisstruktur und die Dateinamen beim Kopieren nicht).<br>' .
 									'Um eine Sicherungskopie wiederherzustellen oder ein Paket zu entfernen, gehe zu <a href="%2">Datenbank wiederherstellen</a>.',
 	'LogSavedBackup'			=> 'Sicherungskopie gespeichert ##%1##',
 	'Backup'					=> 'Datensicherung',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Du kannst jedes der gefundenen Sicherungspakete wiederherstellen oder vom Server entfernen.',
-	'ConfirmDbRestore'			=> 'Möchtest du die Datensicherung wiederherstellen',
-	'ConfirmDbRestoreInfo'		=> 'Bitte warte dies kann einige Minuten benötigen.',
-	'RestoreWrongVersion'		=> 'WackoWiki Version stimmt nicht überein!',
+	'ConfirmDbRestore'			=> 'MÃ¶chtest du die Datensicherung wiederherstellen',
+	'ConfirmDbRestoreInfo'		=> 'Bitte warte dies kann einige Minuten benÃ¶tigen.',
+	'RestoreWrongVersion'		=> 'WackoWiki Version stimmt nicht Ã¼berein!',
 	'BackupDelete'				=> 'Willst du die Datensicherung wirklich entfernen',
 	'BackupDeleteInfo'			=> '',
-	'RestoreOptions'			=> 'Zusätzliche Otionen zur Daten-Wiederherstellung',
+	'RestoreOptions'			=> 'ZusÃ¤tzliche Otionen zur Daten-Wiederherstellung',
 	'RestoreOptionsInfo'		=> '* Vor dem Wiederherstellen der <strong>Cluster-Sicherung</strong>, ' .
-									'werden die Zieltabellen nicht gelöscht (um den Verlust von Informationen aus den Clustern, die nicht gesichert wurden, zu verhindern).. ' .
-									'Somit werden während des Wiederherstellungsvorgangs doppelte Datensätze auftreten. ' .
-									'Im normalen Modus werden alle Dateien durch die Datensätze ersetzt (mit SQL-Anweisung <code>REPLACE</code>), ' .
-									'aber wenn dieses Kontrollkästchen aktiviert ist, werden alle Duplikate übersprungen (die aktuellen Werte der Datensätze werden beibehalten), ' .
-									'und nur die Datensätze mit neuem Schlüssel werden in die Tabelle aufgenommen (SQL-Anweisung <code>INSERT IGNORE</code>).<br>' .
-									'<strong>Hinweis</strong>: Wenn eine vollständige Sicherung der Site wiederherstellt wird, hat diese Option keine Zweck.<br>' .
+									'werden die Zieltabellen nicht gelÃ¶scht (um den Verlust von Informationen aus den Clustern, die nicht gesichert wurden, zu verhindern).. ' .
+									'Somit werden wÃ¤hrend des Wiederherstellungsvorgangs doppelte DatensÃ¤tze auftreten. ' .
+									'Im normalen Modus werden alle Dateien durch die DatensÃ¤tze ersetzt (mit SQL-Anweisung <code>REPLACE</code>), ' .
+									'aber wenn dieses KontrollkÃ¤stchen aktiviert ist, werden alle Duplikate Ã¼bersprungen (die aktuellen Werte der DatensÃ¤tze werden beibehalten), ' .
+									'und nur die DatensÃ¤tze mit neuem SchlÃ¼ssel werden in die Tabelle aufgenommen (SQL-Anweisung <code>INSERT IGNORE</code>).<br>' .
+									'<strong>Hinweis</strong>: Wenn eine vollstÃ¤ndige Sicherung der Site wiederherstellt wird, hat diese Option keine Zweck.<br>' .
 									'<br>' .
-									'** Wenn die Sicherung die Benutzerdateien (global und perpage, Cache-Dateien usw.) enthält, ' .
+									'** Wenn die Sicherung die Benutzerdateien (global und perpage, Cache-Dateien usw.) enthÃ¤lt, ' .
 									'ersetzen sie im normalen Modus die vorhandenen Dateien mit denselben Namen und werden beim Wiederherstellen in demselben Verzeichnis abgelegt. ' .
 									'Mit dieser Option kann man die aktuellen Kopien der Dateien speichern und aus einer Sicherung nur neue Dateien (auf dem Server nicht vorhandene) wiederherstellen.',
-	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte Tabellenschlüssel (nicht ersetzen)',
-	'IgnoreSameFiles'			=> 'Ignoriere die gleichen Dateien (nicht überschreiben)',
-	'NoBackupsAvailable'		=> 'Keien Datensicherung verfügbar.',
+	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte TabellenschlÃ¼ssel (nicht ersetzen)',
+	'IgnoreSameFiles'			=> 'Ignoriere die gleichen Dateien (nicht Ã¼berschreiben)',
+	'NoBackupsAvailable'		=> 'Keien Datensicherung verfÃ¼gbar.',
 	'BackupEntireSite'			=> 'Gesamte Website',
-	'BackupRestored'			=> 'Die Datensicherung wurde wiederhergestellt, ein zusammenfassender Bericht ist angefügt. Um die Dateien zu dieser Datensicherung zu löschen, klicke bitte',
-	'BackupRemoved'				=> 'Die ausgewählte Datensicherung wurde erfolgreich entfernt.',
-	'LogRemovedBackup'			=> 'Sicherungskopie gelöscht ##%1##',
+	'BackupRestored'			=> 'Die Datensicherung wurde wiederhergestellt, ein zusammenfassender Bericht ist angefÃ¼gt. Um die Dateien zu dieser Datensicherung zu lÃ¶schen, klicke bitte',
+	'BackupRemoved'				=> 'Die ausgewÃ¤hlte Datensicherung wurde erfolgreich entfernt.',
+	'LogRemovedBackup'			=> 'Sicherungskopie gelÃ¶scht ##%1##',
 
 	'RestoreStarted'			=> 'Beginne mit Wiederherstellung der Datensicherung',
 	'RestoreParameters'			=> 'Verwendete Parameter',
-	'IgnoreDublicatedKeys'		=> 'Ignoriere doppelte Schlüssel',
+	'IgnoreDublicatedKeys'		=> 'Ignoriere doppelte SchlÃ¼ssel',
 	'IgnoreDublicatedFiles'		=> 'Ignoriere doppelte Dateien',
 	'SavedCluster'				=> 'Gespeicherter Cluster',
 	'DataProtection'			=> 'Datenschutz - %1 weggelassen',
 	'AssumeDropTable'			=> 'Nehme %1',
 	'RestoreTableStructure'		=> 'Wiederherstellen der Struktur der Tabelle',
-	'RunSqlQueries'				=> 'Führe SQL-Anweisungen aus',
+	'RunSqlQueries'				=> 'FÃ¼hre SQL-Anweisungen aus',
 	'CompletedSqlQueries'		=> 'Abgeschlossen. Verarbeitete Anweisungen',
-	'NoTableStructure'			=> 'Die Struktur der Tabellen wurde nicht gespeichert - überspringen',
+	'NoTableStructure'			=> 'Die Struktur der Tabellen wurde nicht gespeichert - Ã¼berspringen',
 	'RestoreRecords'			=> 'Tabelleninhalte wiederherstellen',
 	'ProcessTablesDump'			=> 'Tabellen-Dump entpacken und verarbeiten',
 
 	'Instruction'				=> 'Anweisung',
-	'RestoredRecords'			=> 'Datensätze',
-	'RecordsRestoreDone'		=> 'Abgeschlossen. Gesamtzahl der Datensätze',
-	'SkippedRecords'			=> 'Daten nicht gespeichert - übersprungen',
+	'RestoredRecords'			=> 'DatensÃ¤tze',
+	'RecordsRestoreDone'		=> 'Abgeschlossen. Gesamtzahl der DatensÃ¤tze',
+	'SkippedRecords'			=> 'Daten nicht gespeichert - Ã¼bersprungen',
 	'RestoringFiles'			=> 'Dateien wiederherstellen',
 	'DecompressAndStore'		=> 'Entpake und speichere Inhalte der Verzeichnisse',
 	'HomonymicFiles'			=> 'gleichnamige Dateien',
-	'RestoreSkip'				=> 'überspringen',
+	'RestoreSkip'				=> 'Ã¼berspringen',
 	'RestoreReplace'			=> 'ersetzen',
 	'RestoreFile'				=> 'Datei',
 	'Restored'					=> 'wiederhergestellt',
-	'Skipped'					=> 'übersprungen',
+	'Skipped'					=> 'Ã¼bersprungen',
 	'FileRestoreDone'			=> 'Abgeschlossen. Gesamtzahl der Dateien',
 	'FilesAll'					=> 'alle',
-	'SkipFiles'					=> 'Dateien nicht gespeichert - übersprungen',
+	'SkipFiles'					=> 'Dateien nicht gespeichert - Ã¼bersprungen',
 	'RestoreDone'				=> 'WIEDERHERSTELLUNG ABGESCHLOSSEN',
 
 	'BackupCreationDate'		=> 'Erstellungsdatum',
@@ -1105,17 +1105,17 @@ $ap_translation = [
 	'LogDbRestored'				=> 'Sicherung ##%1## der Datenbank wiederhergestellt.',
 
 	// User module
-	'UsersInfo'					=> 'Hier können Benutzerinformationen und bestimmte spezifische Optionen geändert werden.',
+	'UsersInfo'					=> 'Hier kÃ¶nnen Benutzerinformationen und bestimmte spezifische Optionen geÃ¤ndert werden.',
 
-	'UsersAdded'				=> 'Benutzer hinzugefügt',
-	'UsersDeleteInfo'			=> '[Informationen zur Löschung eines Benutzers hier...]',
+	'UsersAdded'				=> 'Benutzer hinzugefÃ¼gt',
+	'UsersDeleteInfo'			=> '[Informationen zur LÃ¶schung eines Benutzers hier...]',
 	'UserEditButton'			=> 'Bearbeiten',
 	'UserEnabled'				=> 'Aktiviert',
-	'UsersAddNew'				=> 'Füge einen neuen Benutzer hinzu',
+	'UsersAddNew'				=> 'FÃ¼ge einen neuen Benutzer hinzu',
 	'UsersDelete'				=> 'Bist du dir sicher das du den Benutzer %1 entfernen willst',
 	'UsersDeleted'				=> 'Der Benutzer %1 wurde aus der Datenbank entfernt.',
 	'UsersRename'				=> 'Benutzer %1 umbenennen zu',
-	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Benutzer zugeordnet sind.',
+	'UsersRenameInfo'			=> '* Hinweise: Die Ã„nderung wirkt sich auf alle Seiten aus, die diesem Benutzer zugeordnet sind.',
 	'UsersUpdated'				=> 'Benutzer erfolgreich aktualisiert.',
 
 	'UserName'					=> 'Benutzername',
@@ -1125,13 +1125,13 @@ $ap_translation = [
 	'UserLanguage'				=> 'Sprache',
 	'UserSignuptime'			=> 'Anmeldung',
 	'UserActions'				=> 'Actions',
-	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfüllen.',
+	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfÃ¼llen.',
 
 	// Groups module
-	'GroupsInfo'				=> 'Benutzergruppen verwalten. Hier können Gruppen erstellt, bearbeitet und gelöscht werden. Darüber hinaus lässt sich ein Gruppenleiter auswählen, der Status der Gruppe ändern und der Gruppenname und die Beschreibung festlegen.',
+	'GroupsInfo'				=> 'Benutzergruppen verwalten. Hier kÃ¶nnen Gruppen erstellt, bearbeitet und gelÃ¶scht werden. DarÃ¼ber hinaus lÃ¤sst sich ein Gruppenleiter auswÃ¤hlen, der Status der Gruppe Ã¤ndern und der Gruppenname und die Beschreibung festlegen.',
 
 	'LogMembersUpdated'			=> 'Gruppenmitglieder aktualisiert',
-	'LogMemberAdded'			=> 'Gruppenmitglied ##%1## zu Gruppe ##%2## hinzugefügt',
+	'LogMemberAdded'			=> 'Gruppenmitglied ##%1## zu Gruppe ##%2## hinzugefÃ¼gt',
 	'LogMemberRemoved'			=> 'Gruppenmitglied ##%1## aus Gruppe ##%2## entfernt',
 	'LogGroupCreated'			=> 'Neue Gruppe ##%1## erstellt',
 	'LogGroupRenamed'			=> 'Gruppe ##%1## zu ##%2## umbenannt',
@@ -1145,48 +1145,48 @@ $ap_translation = [
 	'GroupsTip'					=> 'Klicke um die Gruppe zu bearbeiten',
 	'GroupsUpdated'				=> 'Gruppen aktualisiert',
 	'GroupsAlreadyExists'		=> 'Diese Gruppe gibt es bereits.',
-	'GroupsAdded'				=> 'Gruppe erfolgreich hinzugefügt.',
+	'GroupsAdded'				=> 'Gruppe erfolgreich hinzugefÃ¼gt.',
 	'GroupsRenamed'				=> 'Gruppe erfolgreich umbenannt.',
-	'GroupsDeleted'				=> 'Die Gruppe %1 und alle Mitglieder wurde aus der Datenbank gelöscht.',
-	'GroupsAdd'					=> 'Eine neue Gruppe hinzufügen',
+	'GroupsDeleted'				=> 'Die Gruppe %1 und alle Mitglieder wurde aus der Datenbank gelÃ¶scht.',
+	'GroupsAdd'					=> 'Eine neue Gruppe hinzufÃ¼gen',
 	'GroupsRename'				=> 'Gruppe %1 umbenennen zu',
-	'GroupsRenameInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Seiten aus, die dieser Gruppe zugeordnet sind.',
-	'GroupsDelete'				=> 'Bist du dir sicher das du die Gruppe %1 entfernen möchtest',
-	'GroupsDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
-	'GroupsIsSystem'			=> 'Die Gruppe %1 gehört zum System und kann nicht entfernt werden.',
+	'GroupsRenameInfo'			=> '* Hinweis: Die Ã„nderung wirkt sich auf alle Seiten aus, die dieser Gruppe zugeordnet sind.',
+	'GroupsDelete'				=> 'Bist du dir sicher das du die Gruppe %1 entfernen mÃ¶chtest',
+	'GroupsDeleteInfo'			=> '* Hinweis: Die Ã„nderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
+	'GroupsIsSystem'			=> 'Die Gruppe %1 gehÃ¶rt zum System und kann nicht entfernt werden.',
 	'GroupsStoreButton'			=> 'Speichere Gruppen',
 	'GroupsSaveButton'			=> 'Absenden',
 	'GroupsCancelButton'		=> 'Abbrechen',
-	'GroupsAddButton'			=> 'Hinzufügen',
+	'GroupsAddButton'			=> 'HinzufÃ¼gen',
 	'GroupsEditButton'			=> 'Bearbeiten',
 	'GroupsRemoveButton'		=> 'Entfernen',
-	'GroupsEditInfo'			=> 'Zum Bearbeiten der Gruppen-Liste wähle das Optionsfeld',
+	'GroupsEditInfo'			=> 'Zum Bearbeiten der Gruppen-Liste wÃ¤hle das Optionsfeld',
 
-	'GroupAddMember'			=> 'Mitglied hinzufügen',
+	'GroupAddMember'			=> 'Mitglied hinzufÃ¼gen',
 	'GroupRemoveMember'			=> 'Mitglied entfernen',
-	'GroupAddNew'				=> 'Gruppe hinzufügen',
+	'GroupAddNew'				=> 'Gruppe hinzufÃ¼gen',
 	'GroupEdit'					=> 'Gruppe bearbeiten',
 	'GroupDelete'				=> 'Gruppe entfernen',
 
-	'MembersAddNew'				=> 'Neues Mitglied hinzufügen',
-	'MembersAdded'				=> 'Neues Mitglied der Gruppe erfolgreich hinzugefügt.',
-	'MembersRemove'				=> 'Bist du dir sicher das du das Mitglied %1 enfernen möchtest?',
+	'MembersAddNew'				=> 'Neues Mitglied hinzufÃ¼gen',
+	'MembersAdded'				=> 'Neues Mitglied der Gruppe erfolgreich hinzugefÃ¼gt.',
+	'MembersRemove'				=> 'Bist du dir sicher das du das Mitglied %1 enfernen mÃ¶chtest?',
 	'MembersRemoved'			=> 'Das Mitglied wurde aus der Gruppe entfernt.',
-	'MembersDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
+	'MembersDeleteInfo'			=> '* Hinweis: Die Ã„nderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
 
 	// Statistics module
 	'DbStatSection'				=> 'Datenbank-Statistik',
 	'DbTable'					=> 'Tabelle',
-	'DbRecords'					=> 'Datensätze',
-	'DbSize'					=> 'Größe',
+	'DbRecords'					=> 'DatensÃ¤tze',
+	'DbSize'					=> 'GrÃ¶ÃŸe',
 	'DbIndex'					=> 'Index',
-	'DbOverhead'				=> 'Überhang',
+	'DbOverhead'				=> 'Ãœberhang',
 	'DbTotal'					=> 'Gesamt',
 
 	'FileStatSection'			=> 'Dateisystem-Statistik',
 	'FileFolder'				=> 'Ordner',
 	'FileFiles'					=> 'Dateien',
-	'FileSize'					=> 'Größe',
+	'FileSize'					=> 'GrÃ¶ÃŸe',
 	'FileTotal'					=> 'Gesamt',
 
 	// Sysinfo module
@@ -1217,11 +1217,11 @@ $ap_translation = [
 	// DB repair module
 	'DbRepairSection'			=> 'Datenbank reparieren',
 	'DbRepair'					=> 'Datenbank reparieren',
-	'DbRepairInfo'				=> 'Dieses Skript kann automatisch nach einigen häufigen Datenbankproblemen suchen und sie reparieren. Das Reparieren kann eine Weile dauern, seien Sie also bitte geduldig.',
+	'DbRepairInfo'				=> 'Dieses Skript kann automatisch nach einigen hÃ¤ufigen Datenbankproblemen suchen und sie reparieren. Das Reparieren kann eine Weile dauern, seien Sie also bitte geduldig.',
 
 	'DbOptimizeRepairSection'	=> 'Datenbank reparieren und optimieren',
 	'DbOptimizeRepair'			=> 'Datenbank reparieren und optimieren',
-	'DbOptimizeRepairInfo'		=> 'Dieses Skript kann auch versuchen, die Datenbank zu optimieren. Dies verbessert die Leistung in einigen Situationen. Das Reparieren und Optimieren der Datenbank kann sehr lange dauern und die Datenbank wird während der Optimierung gesperrt.',
+	'DbOptimizeRepairInfo'		=> 'Dieses Skript kann auch versuchen, die Datenbank zu optimieren. Dies verbessert die Leistung in einigen Situationen. Das Reparieren und Optimieren der Datenbank kann sehr lange dauern und die Datenbank wird wÃ¤hrend der Optimierung gesperrt.',
 
 	'TableOk'					=> 'Die Tabelle %1 ist in Ordnung.',
 	'TableNotOk'				=> 'Die %1-Tabelle ist nicht in Ordnung. Es meldet den folgenden Fehler: %2. Dieses Skript wird versuchen, diese Tabelle zu reparieren&hellip;',
@@ -1234,17 +1234,17 @@ $ap_translation = [
 	'RepairsComplete'			=> 'Reparaturen abgeschlossen',
 
 	// Inconsistencies module
-	'InconsistenciesInfo'		=> 'Inkonsistenzen anzeigen und beheben, verwaiste Datensätze löschen oder einem neuen Benutzer / Wert zuweisen.',
+	'InconsistenciesInfo'		=> 'Inkonsistenzen anzeigen und beheben, verwaiste DatensÃ¤tze lÃ¶schen oder einem neuen Benutzer / Wert zuweisen.',
 	'Inconsistencies'			=> 'Inkonsistenzen',
 	'CheckDatabase'				=> 'Datenbank',
-	'CheckDatabaseInfo'			=> 'Prüft auf Datensatzinkonsistenzen in der Datenbank.',
+	'CheckDatabaseInfo'			=> 'PrÃ¼ft auf Datensatzinkonsistenzen in der Datenbank.',
 	'CheckFiles'				=> 'Dateien',
 	'CheckFilesInfo'			=> 'Sucht nach nicht mehr verwendeten Dateien, Dateien ohne Referenz in der Dateitabelle.',
-	'Records'					=> 'Datensätze',
+	'Records'					=> 'DatensÃ¤tze',
 	'InconsistenciesNone'		=> 'Keine Daten-Inkonsistenzen gefunden.',
 	'InconsistenciesDone'		=> 'Dateninkonsistenzen behoben.',
 	'InconsistenciesRemoved'	=> 'Inkonsistenzen beseitigt',
-	'Check'						=> 'Prüfen',
+	'Check'						=> 'PrÃ¼fen',
 	'Solve'						=> 'Beheben',
 
 	// Transliterate module
@@ -1254,9 +1254,9 @@ $ap_translation = [
 	'TranslitCompleted'			=> 'Der Update-Vorgang ist abgeschlossen.',
 
 	// Bad Behavior module
-	'BbInfo'					=> 'Erkennt und blockiert unerwünschte Webzugriffe, verweigert automatisierten Spambots den Zugriff.<br>Für weitere Informationen besuche die %1 Webseite.',
+	'BbInfo'					=> 'Erkennt und blockiert unerwÃ¼nschte Webzugriffe, verweigert automatisierten Spambots den Zugriff.<br>FÃ¼r weitere Informationen besuche die %1 Webseite.',
 	'BbEnable'					=> 'Bad Behavior aktivieren',
-	'BbEnableInfo'				=> 'Alle anderen Einstellungen können im Konfigurationsordner geändert werden. %1.',
+	'BbEnableInfo'				=> 'Alle anderen Einstellungen kÃ¶nnen im Konfigurationsordner geÃ¤ndert werden. %1.',
 	'BbStats'					=> 'Bad Behavior hat in den letzten 7 Tagen %1 Zugriffsversuche blockiert.',
 
 	'BbSummary'					=> 'Zusammenfassung',
@@ -1266,21 +1266,21 @@ $ap_translation = [
 
 	// --> Log
 	'BbHits'					=> 'Zugriffe',
-	'BbRecordsFiltered'			=> 'Anzeige von %1 von %2 Datensätzen, gefiltert nach',
+	'BbRecordsFiltered'			=> 'Anzeige von %1 von %2 DatensÃ¤tzen, gefiltert nach',
 	'BbStatus'					=> 'Status',
 	'BbBlocked'					=> 'Gesperrt',
 	'BbPermitted'				=> 'Zugelassen',
 	'BbIP'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
-	'BbRecordsAll'				=> 'Alle %1-Datensätze anzeigen',
+	'BbRecordsAll'				=> 'Alle %1-DatensÃ¤tze anzeigen',
 	'BbShow'					=> 'Anzeigen',
 	'BbIPDateStatus'			=> 'IP/Datum/Status',
 	'BbHeaders'					=> 'Headers',
-	'BbEntity'					=> 'Entität',
+	'BbEntity'					=> 'EntitÃ¤t',
 
 	// --> Whitelist
 	'BbOptionsSaved'			=> 'Einstellungen gespeichert.',
-	'BbWhitelistHint'			=> 'Unsachgemäßes Whitelisting wird zu Spam führen oder dazu, dass Bad Behavior nicht mehr funktioniert! NICHT WEISSLISTEN, es sei denn, es besteht eine 100%ige Sicherheit, dass es erforderlich ist.',
+	'BbWhitelistHint'			=> 'UnsachgemÃ¤ÃŸes Whitelisting wird zu Spam fÃ¼hren oder dazu, dass Bad Behavior nicht mehr funktioniert! NICHT WEISSLISTEN, es sei denn, es besteht eine 100%ige Sicherheit, dass es erforderlich ist.',
 	'BbIPAddress'				=> 'IP-Adresse',
 	'BbIPAddressInfo'			=> 'IP-Adressbereiche oder Adressbereiche im CIDR-Format, welche auf die Whitelist gesetzt werden sollen (einer pro Zeile).',
 	'BbURL'						=> 'URL',
@@ -1295,22 +1295,22 @@ $ap_translation = [
 	'BbLogNormal'				=> 'Normal (empfohlen)',
 	'BbLogOff'					=> 'Nicht protokollieren (nicht empfohlen)',
 	'BbSecurity'				=> 'Sicherheit',
-	'BbStrict'					=> 'Strenge Prüfung',
+	'BbStrict'					=> 'Strenge PrÃ¼fung',
 	'BbStrictInfo'				=> 'Blockiert mehr Spam, kann aber einige Nutzer aussperren.',
 	'BbOffsiteForms'			=> 'Formularpostings von anderen Websites zulassen',
-	'BbOffsiteFormsInfo'		=> 'erforderlich für OpenID; erhöht den Spam-Eingang.',
+	'BbOffsiteFormsInfo'		=> 'erforderlich fÃ¼r OpenID; erhÃ¶ht den Spam-Eingang.',
 	'BbHttpbl'					=> 'http:BL',
-	'BbHttpblInfo'				=> 'Um die http:BL-Funktionen von Bad Behavior nutzen zu können, benötigt man einen %1',
-	'BbHttpblKey'				=> 'http:BL Zugangsschlüssel',
+	'BbHttpblInfo'				=> 'Um die http:BL-Funktionen von Bad Behavior nutzen zu kÃ¶nnen, benÃ¶tigt man einen %1',
+	'BbHttpblKey'				=> 'http:BL ZugangsschlÃ¼ssel',
 	'BbHttpblThreat'			=> 'Minimale Bedrohungsstufe (25 wird empfohlen)',
 	'BbHttpblMaxage'			=> 'Maximales Alter der Daten (30 wird empfohlen)',
 	'BbReverseProxy'			=> 'Reverse-Proxy/Load-Balancer',
-	'BbReverseProxyInfo'		=> 'Aktivieren die Option Reverse-Proxy, wenn Bad Behavior hinter einem Reverse-Proxy, Load-Balancer, HTTP-Accelerator, Content-Cache oder einer ähnlichen Technologie verwendet wird.<br>' .
-									'Wenn eine Reihe von zwei oder mehr Reverse-Proxies zwischen dem Server und dem öffentlichen Internet sind, müssen <em>alle</em> IP-Adressbereiche (im CIDR-Format) aller Ihrer Proxy-Server, Load-Balancer usw. angeben. Andernfalls kann Bad Behavior möglicherweise nicht in Stande sein, die wahre IP-Adresse des Clients zu bestimmen.<br>' .
-									'Zusätzlich müssen Ihre Reverse-Proxy-Server die IP-Adresse des Internet-Clients, von dem sie die Anfrage erhalten haben, in dem HTTP-Header angeben. Wenn Sie keinen Header angeben, wird %1 verwendet. Die meisten Proxy-Server unterstützen bereits X-Forwarded-For und Sie müssen dann nur noch sicherstellen, dass es auf Ihren Proxy-Servern aktiviert ist.  Einige andere häufig verwendete Header-Namen sind unter anderem %2 und %3.',
+	'BbReverseProxyInfo'		=> 'Aktivieren die Option Reverse-Proxy, wenn Bad Behavior hinter einem Reverse-Proxy, Load-Balancer, HTTP-Accelerator, Content-Cache oder einer Ã¤hnlichen Technologie verwendet wird.<br>' .
+									'Wenn eine Reihe von zwei oder mehr Reverse-Proxies zwischen dem Server und dem Ã¶ffentlichen Internet sind, mÃ¼ssen <em>alle</em> IP-Adressbereiche (im CIDR-Format) aller Ihrer Proxy-Server, Load-Balancer usw. angeben. Andernfalls kann Bad Behavior mÃ¶glicherweise nicht in Stande sein, die wahre IP-Adresse des Clients zu bestimmen.<br>' .
+									'ZusÃ¤tzlich mÃ¼ssen Ihre Reverse-Proxy-Server die IP-Adresse des Internet-Clients, von dem sie die Anfrage erhalten haben, in dem HTTP-Header angeben. Wenn Sie keinen Header angeben, wird %1 verwendet. Die meisten Proxy-Server unterstÃ¼tzen bereits X-Forwarded-For und Sie mÃ¼ssen dann nur noch sicherstellen, dass es auf Ihren Proxy-Servern aktiviert ist.  Einige andere hÃ¤ufig verwendete Header-Namen sind unter anderem %2 und %3.',
 	'BbReverseProxyEnable'		=> 'Reverse-Proxy aktivieren',
 	'BbReverseProxyHeader'		=> 'Kopfzeile mit der IP-Adresse des Internet-Clients',
-	'BbReverseProxyAddresses'	=> 'IP-Adressbereiche oder Adressbereiche im CIDR-Format für die Proxy-Server (eine pro Zeile)',
+	'BbReverseProxyAddresses'	=> 'IP-Adressbereiche oder Adressbereiche im CIDR-Format fÃ¼r die Proxy-Server (eine pro Zeile)',
 
 
 ];

@@ -12,15 +12,15 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Felhasználók',
-		'maintenance'	=> 'Karbantartás',
+		'users'			=> 'FelhasznÃ¡lÃ³k',
+		'maintenance'	=> 'KarbantartÃ¡s',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
-		'database'		=> 'Adatbázis',
+		'database'		=> 'AdatbÃ¡zis',
 	],
 
 	// Admin panel
-	'AdminPanel'				=> 'Adminisztrátori vezérlõpult',
+	'AdminPanel'				=> 'AdminisztrÃ¡tori vezÃ©rlÅ‘pult',
 	'RecoveryMode'				=> 'Recovery Mode',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
@@ -31,11 +31,11 @@ $ap_translation = [
 
 	'FormSave'					=> 'Save',
 	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Frissítés',
+	'FormUpdate'				=> 'FrissÃ­tÃ©s',
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Kilépés',
+	'ApLogOut'					=> 'KilÃ©pÃ©s',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
@@ -89,7 +89,7 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-mail',
-		'title'		=> 'E-mail beállítások',
+		'title'		=> 'E-mail beÃ¡llÃ­tÃ¡sok',
 	],
 
 	// Config Filter module
@@ -118,7 +118,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Jogosultságok',
+		'name'		=> 'JogosultsÃ¡gok',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -184,7 +184,7 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Kimentés',
+		'name'		=> 'KimentÃ©s',
 		'title'		=> 'Backing up data',
 	],
 
@@ -275,13 +275,13 @@ $ap_translation = [
 	// Groups module
 	'user_groups'		=> [
 		'name'		=> 'Csoportok',
-		'title'		=> 'Csoportok kezelése',
+		'title'		=> 'Csoportok kezelÃ©se',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Felhasználók',
-		'title'		=> 'Felhasználók kezelése',
+		'name'		=> 'FelhasznÃ¡lÃ³k',
+		'title'		=> 'FelhasznÃ¡lÃ³k kezelÃ©se',
 	],
 
 	// Main module
@@ -506,7 +506,7 @@ $ap_translation = [
 	'TermHumanModeration'		=> 'Term human moderation',
 	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
 
-	'UserCanDeleteAccount'		=> 'Engedélyezi, hogy a felhasználók törölhessék a saját fiókjukat',
+	'UserCanDeleteAccount'		=> 'EngedÃ©lyezi, hogy a felhasznÃ¡lÃ³k tÃ¶rÃ¶lhessÃ©k a sajÃ¡t fiÃ³kjukat',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, safety restrictions and additional security subsystems.',
@@ -710,7 +710,7 @@ $ap_translation = [
 	'NewsLevels'				=> 'Depth of news pages from the root cluster',
 	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
 
-	'LicenseSection'			=> 'Engedély',
+	'LicenseSection'			=> 'EngedÃ©ly',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 
@@ -759,7 +759,7 @@ $ap_translation = [
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action <code>{{orphaned}}</code>).',
 	'SandboxPage'				=> 'Sandbox',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
-	'HelpPage'					=> 'Segítség',
+	'HelpPage'					=> 'SegÃ­tsÃ©g',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 
 
@@ -785,14 +785,14 @@ $ap_translation = [
 	'NotifyUpload'				=> 'Notify file upload',
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
-	'PersonalMessagesSection'	=> 'Személyes üzenetek',
+	'PersonalMessagesSection'	=> 'SzemÃ©lyes Ã¼zenetek',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
 	'AllowMassemailDefault'		=> 'Allow Massemail',
 	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
 
 	// Resync settings
-	'Synchronize'				=> 'szinkronizálni',
+	'Synchronize'				=> 'szinkronizÃ¡lni',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
@@ -816,17 +816,17 @@ $ap_translation = [
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
 	'WikiLinksResync'			=> 'Wiki-links',
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
-	'RecompilePage'				=> 'Minden oldal újra összeállítása (rendkívül költséges)',
-	'ResyncOptions'				=> 'További beállítások',
+	'RecompilePage'				=> 'Minden oldal Ãºjra Ã¶sszeÃ¡llÃ­tÃ¡sa (rendkÃ­vÃ¼l kÃ¶ltsÃ©ges)',
+	'ResyncOptions'				=> 'TovÃ¡bbi beÃ¡llÃ­tÃ¡sok',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Az alábbi információkat használja a fórum e-mailek küldésekor. Kérünk, gyõzõdj meg róla, hogy az e-mail cím, amit megadsz, helyes, mivel minden nem kézbesíthetõ levél erre a címre fog menni. Ha a tárhelyszolgáltatód nem biztosítja a natív (PHP alapú) e-mail küldést, használhatsz helyette SMTP-t. Ehhez szükség van egy megfelelõ szerver címére (ha szükséges, kérdezd meg a szolgáltatód). Ha (és csak ha) a szerver megköveteli az azonosítást, add meg a szükséges felhasználónevet, jelszót és azonosítási módot.',
+	'EmaiSettingsInfo'			=> 'Az alÃ¡bbi informÃ¡ciÃ³kat hasznÃ¡lja a fÃ³rum e-mailek kÃ¼ldÃ©sekor. KÃ©rÃ¼nk, gyÅ‘zÅ‘dj meg rÃ³la, hogy az e-mail cÃ­m, amit megadsz, helyes, mivel minden nem kÃ©zbesÃ­thetÅ‘ levÃ©l erre a cÃ­mre fog menni. Ha a tÃ¡rhelyszolgÃ¡ltatÃ³d nem biztosÃ­tja a natÃ­v (PHP alapÃº) e-mail kÃ¼ldÃ©st, hasznÃ¡lhatsz helyette SMTP-t. Ehhez szÃ¼ksÃ©g van egy megfelelÅ‘ szerver cÃ­mÃ©re (ha szÃ¼ksÃ©ges, kÃ©rdezd meg a szolgÃ¡ltatÃ³d). Ha (Ã©s csak ha) a szerver megkÃ¶veteli az azonosÃ­tÃ¡st, add meg a szÃ¼ksÃ©ges felhasznÃ¡lÃ³nevet, jelszÃ³t Ã©s azonosÃ­tÃ¡si mÃ³dot.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
-	'EmailFunctionName'			=> 'E-mail függvény neve',
-	'EmailFunctionNameInfo'		=> 'A függvény neve, amivel e-mailt lehet küldeni PHP-n keresztül.',
-	'UseSmtpInfo'				=> '<code>SMTP</code> Állítsd igenre, ha a helyi mail függvény helyett egy meghatározott szerveren keresztül szeretnéd az e-maileket kiküldeni.',
+	'EmailFunctionName'			=> 'E-mail fÃ¼ggvÃ©ny neve',
+	'EmailFunctionNameInfo'		=> 'A fÃ¼ggvÃ©ny neve, amivel e-mailt lehet kÃ¼ldeni PHP-n keresztÃ¼l.',
+	'UseSmtpInfo'				=> '<code>SMTP</code> ÃllÃ­tsd igenre, ha a helyi mail fÃ¼ggvÃ©ny helyett egy meghatÃ¡rozott szerveren keresztÃ¼l szeretnÃ©d az e-maileket kikÃ¼ldeni.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -848,20 +848,20 @@ $ap_translation = [
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'SMTP azonosítási mód',
-	'SmtpConnectionModeInfo'	=> 'Csak akkor van használva, ha egy felhasználónév/jelszó páros meg van adva. Ha nem vagy biztos benne, melyik módot használd, kérdezd meg a szolgáltatódat.',
-	'SmtpPassword'				=> 'SMTP jelszó',
-	'SmtpPasswordInfo'			=> 'Csak akkor adj meg jelszót, ha a használt SMTP szerver megköveteli.<br><em><strong>Figyelmeztetés:</strong> Ez a jelszó az adatbázisban sima szövegként kerül tárolásra, így bárki által hozzáférhetõ, aki hozzáfér az adatbázishoz vagy látja ezt a beállítás oldalt.</em>',
+	'SmtpConnectionMode'		=> 'SMTP azonosÃ­tÃ¡si mÃ³d',
+	'SmtpConnectionModeInfo'	=> 'Csak akkor van hasznÃ¡lva, ha egy felhasznÃ¡lÃ³nÃ©v/jelszÃ³ pÃ¡ros meg van adva. Ha nem vagy biztos benne, melyik mÃ³dot hasznÃ¡ld, kÃ©rdezd meg a szolgÃ¡ltatÃ³dat.',
+	'SmtpPassword'				=> 'SMTP jelszÃ³',
+	'SmtpPasswordInfo'			=> 'Csak akkor adj meg jelszÃ³t, ha a hasznÃ¡lt SMTP szerver megkÃ¶veteli.<br><em><strong>FigyelmeztetÃ©s:</strong> Ez a jelszÃ³ az adatbÃ¡zisban sima szÃ¶vegkÃ©nt kerÃ¼l tÃ¡rolÃ¡sra, Ã­gy bÃ¡rki Ã¡ltal hozzÃ¡fÃ©rhetÅ‘, aki hozzÃ¡fÃ©r az adatbÃ¡zishoz vagy lÃ¡tja ezt a beÃ¡llÃ­tÃ¡s oldalt.</em>',
 	'SmtpPort'					=> 'SMTP szerver port',
-	'SmtpPortInfo'				=> 'Csak akkor változtasd meg, ha tudod, hogy az SMTP szerver más porton van. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'SMTP szerver cím',
+	'SmtpPortInfo'				=> 'Csak akkor vÃ¡ltoztasd meg, ha tudod, hogy az SMTP szerver mÃ¡s porton van. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP szerver cÃ­m',
 	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'SMTP beállítások',
-	'SmtpUsername'				=> 'SMTP felhasználónév',
-	'SmtpUsernameInfo'			=> 'Csak akkor adj meg felhasználónevet, ha a használt SMTP szerver megköveteli.',
+	'SmtpSettings'				=> 'SMTP beÃ¡llÃ­tÃ¡sok',
+	'SmtpUsername'				=> 'SMTP felhasznÃ¡lÃ³nÃ©v',
+	'SmtpUsernameInfo'			=> 'Csak akkor adj meg felhasznÃ¡lÃ³nevet, ha a hasznÃ¡lt SMTP szerver megkÃ¶veteli.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Itt a csatolmányok fõbb beállításait adhatod meg, valamint a speciális kategóriák egyedi opcióit módosíthatod.',
+	'UploadSettingsInfo'		=> 'Itt a csatolmÃ¡nyok fÅ‘bb beÃ¡llÃ­tÃ¡sait adhatod meg, valamint a speciÃ¡lis kategÃ³riÃ¡k egyedi opciÃ³it mÃ³dosÃ­thatod.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -869,22 +869,22 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Maximum állományméret',
-	'UploadMaxFilesizeInfo'		=> 'Legfeljebb ekkorák lehetnek az állományok. A 0 érték kikapcsolja a korlátozást.',
-	'UploadQuota'				=> 'Csatolmányok tárhelye',
-	'UploadQuotaInfo'			=> 'Az egész fórumon a csatolmányok legfeljebb ekkora helyet foglalhatnak el összesen. A <code>0</code> érték kikapcsolja a korlátozást.',
+	'UploadMaxFilesize'			=> 'Maximum Ã¡llomÃ¡nymÃ©ret',
+	'UploadMaxFilesizeInfo'		=> 'Legfeljebb ekkorÃ¡k lehetnek az Ã¡llomÃ¡nyok. A 0 Ã©rtÃ©k kikapcsolja a korlÃ¡tozÃ¡st.',
+	'UploadQuota'				=> 'CsatolmÃ¡nyok tÃ¡rhelye',
+	'UploadQuotaInfo'			=> 'Az egÃ©sz fÃ³rumon a csatolmÃ¡nyok legfeljebb ekkora helyet foglalhatnak el Ã¶sszesen. A <code>0</code> Ã©rtÃ©k kikapcsolja a korlÃ¡tozÃ¡st.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
-	'CheckMimetype'				=> 'Csatolt állományok ellenõrzése',
-	'CheckMimetypeInfo'			=> 'Néhány böngészõ rávehetõ, hogy a feltöltött állományokhoz helytelen MIME típust állapítson meg. Ezzel a beállítással az ennek okozására hajlamos állományok visszautasításra kerülnek.',
+	'CheckMimetype'				=> 'Csatolt Ã¡llomÃ¡nyok ellenÅ‘rzÃ©se',
+	'CheckMimetypeInfo'			=> 'NÃ©hÃ¡ny bÃ¶ngÃ©szÅ‘ rÃ¡vehetÅ‘, hogy a feltÃ¶ltÃ¶tt Ã¡llomÃ¡nyokhoz helytelen MIME tÃ­pust Ã¡llapÃ­tson meg. Ezzel a beÃ¡llÃ­tÃ¡ssal az ennek okozÃ¡sÃ¡ra hajlamos Ã¡llomÃ¡nyok visszautasÃ­tÃ¡sra kerÃ¼lnek.',
 
 	'Thumbnails'				=> 'Thumbnails',
-	'CreateThumbnail'			=> 'Kiskép készítése',
-	'CreateThumbnailInfo'		=> 'Minden lehetséges esetben készítsen kisképet.',
-	'MaxThumbWidth'				=> 'Maximum kiskép szélesség pixelben',
-	'MaxThumbWidthInfo'			=> 'A generált kiskép nem fogja túllépni az itt megadott szélességet.',
-	'MinThumbFilesize'			=> 'Minimum kiskép állományméret',
-	'MinThumbFilesizeInfo'		=> 'Ennél kisebb képeknél nem lesz kiskép készítve.',
+	'CreateThumbnail'			=> 'KiskÃ©p kÃ©szÃ­tÃ©se',
+	'CreateThumbnailInfo'		=> 'Minden lehetsÃ©ges esetben kÃ©szÃ­tsen kiskÃ©pet.',
+	'MaxThumbWidth'				=> 'Maximum kiskÃ©p szÃ©lessÃ©g pixelben',
+	'MaxThumbWidthInfo'			=> 'A generÃ¡lt kiskÃ©p nem fogja tÃºllÃ©pni az itt megadott szÃ©lessÃ©get.',
+	'MinThumbFilesize'			=> 'Minimum kiskÃ©p Ã¡llomÃ¡nymÃ©ret',
+	'MinThumbFilesizeInfo'		=> 'EnnÃ©l kisebb kÃ©peknÃ©l nem lesz kiskÃ©p kÃ©szÃ­tve.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages and files.
@@ -949,19 +949,19 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Itt egy e-mailt küldhetsz az összes olyan felhasználónak vagy egy meghatározott csoport olyan tagjainak, <strong>akinek be van kapcsolva a csoport e-mail fogadása beállítása</strong>. Ez a következõ módon fog történni: a megadott adminisztrációs e-mail címre egy e-mail kerül kiküldésre, és a címzettek titkos másolatot kapnak ebbõl a levélbõl. Az alap beállítás szerint egy levélben csak 50 címzett fog szerepelni, több címzettnél több e-mail kerül kiküldésre. Ha sok embernek küldesz e-mailt, az ûrlap elküldése után, kérünk, légy türelmes, ne szakítsd meg az oldal töltését félúton. Teljesen normális, hogy a csoportos e-mail küldése hosszú ideig tart; amint a szkript befejezte futását, értesítve leszel.',
+	'MassemailInfo'				=> 'Itt egy e-mailt kÃ¼ldhetsz az Ã¶sszes olyan felhasznÃ¡lÃ³nak vagy egy meghatÃ¡rozott csoport olyan tagjainak, <strong>akinek be van kapcsolva a csoport e-mail fogadÃ¡sa beÃ¡llÃ­tÃ¡sa</strong>. Ez a kÃ¶vetkezÅ‘ mÃ³don fog tÃ¶rtÃ©nni: a megadott adminisztrÃ¡ciÃ³s e-mail cÃ­mre egy e-mail kerÃ¼l kikÃ¼ldÃ©sre, Ã©s a cÃ­mzettek titkos mÃ¡solatot kapnak ebbÅ‘l a levÃ©lbÅ‘l. Az alap beÃ¡llÃ­tÃ¡s szerint egy levÃ©lben csak 50 cÃ­mzett fog szerepelni, tÃ¶bb cÃ­mzettnÃ©l tÃ¶bb e-mail kerÃ¼l kikÃ¼ldÃ©sre. Ha sok embernek kÃ¼ldesz e-mailt, az Å±rlap elkÃ¼ldÃ©se utÃ¡n, kÃ©rÃ¼nk, lÃ©gy tÃ¼relmes, ne szakÃ­tsd meg az oldal tÃ¶ltÃ©sÃ©t fÃ©lÃºton. Teljesen normÃ¡lis, hogy a csoportos e-mail kÃ¼ldÃ©se hosszÃº ideig tart; amint a szkript befejezte futÃ¡sÃ¡t, Ã©rtesÃ­tve leszel.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
-	'NoEmailMessage'			=> 'Meg kell adnod az üzenetet.',
-	'NoEmailSubject'			=> 'Meg kell adnod az üzenet témáját.',
+	'NoEmailMessage'			=> 'Meg kell adnod az Ã¼zenetet.',
+	'NoEmailSubject'			=> 'Meg kell adnod az Ã¼zenet tÃ©mÃ¡jÃ¡t.',
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MassemailSection'			=> 'Mass email',
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Your message',
-	'YourMessageInfo'			=> 'Kérjük, vedd figyelembe, csak sima szöveget adhatsz meg. Az elküldés elõtt minden kód eltávolításra kerül.',
+	'YourMessageInfo'			=> 'KÃ©rjÃ¼k, vedd figyelembe, csak sima szÃ¶veget adhatsz meg. Az elkÃ¼ldÃ©s elÅ‘tt minden kÃ³d eltÃ¡volÃ­tÃ¡sra kerÃ¼l.',
 
 	'MessageLanguage'			=> 'Language',
 	'MessageLanguageInfo'		=> '',
@@ -970,8 +970,8 @@ $ap_translation = [
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 
-	'SendToGroup'				=> 'Címzett csoport',
-	'SendToUser'				=> 'Címzett felhasználók',
+	'SendToGroup'				=> 'CÃ­mzett csoport',
+	'SendToUser'				=> 'CÃ­mzett felhasznÃ¡lÃ³k',
 	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
@@ -1093,7 +1093,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Szerkesztés',
+	'UserEditButton'			=> 'SzerkesztÃ©s',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user %1',
@@ -1122,7 +1122,7 @@ $ap_translation = [
 	'LogGroupRemoved'			=> 'Removed group ##%1##',
 
 	'GroupsMembersFor'			=> 'Members for Group',
-	'GroupsDescription'			=> 'Leírás',
+	'GroupsDescription'			=> 'LeÃ­rÃ¡s',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
 	'GroupsActive'				=> 'Active',
@@ -1139,11 +1139,11 @@ $ap_translation = [
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Elküld',
-	'GroupsCancelButton'		=> 'Mégsem',
+	'GroupsSaveButton'			=> 'ElkÃ¼ld',
+	'GroupsCancelButton'		=> 'MÃ©gsem',
 	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Szerkesztés',
-	'GroupsRemoveButton'		=> 'Törlés',
+	'GroupsEditButton'			=> 'SzerkesztÃ©s',
+	'GroupsRemoveButton'		=> 'TÃ¶rlÃ©s',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'GroupAddMember'			=> 'Add member',

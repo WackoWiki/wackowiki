@@ -12,7 +12,7 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'U¿ytkownicy',
+		'users'			=> 'UÅ¼ytkownicy',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
@@ -30,7 +30,7 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
 	'FormSave'					=> 'Save',
-	'FormReset'					=> 'Wyczy¶æ',
+	'FormReset'					=> 'WyczyÅ›Ä‡',
 	'FormUpdate'				=> 'Aktualizuj',
 
 	'ApHomePage'				=> 'Strona domowa',
@@ -55,8 +55,8 @@ $ap_translation = [
 	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Odblokuj',
 	'Disabled'					=> 'Zablokuj',
-	'On'						=> 'w³±czony',
-	'Off'						=> 'wy³±czony',
+	'On'						=> 'wÅ‚Ä…czony',
+	'Off'						=> 'wyÅ‚Ä…czony',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -82,7 +82,7 @@ $ap_translation = [
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Wygl±d',
+		'name'		=> 'WyglÄ…d',
 		'title'		=> 'Appearance settings',
 	],
 
@@ -280,7 +280,7 @@ $ap_translation = [
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'U¿ytkownicy',
+		'name'		=> 'UÅ¼ytkownicy',
 		'title'		=> 'User management',
 	],
 
@@ -507,7 +507,7 @@ $ap_translation = [
 	'TermHumanModeration'		=> 'Term human moderation',
 	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
 
-	'UserCanDeleteAccount'		=> 'U¿ytkownicy mog± usuwaæ swoje konta',
+	'UserCanDeleteAccount'		=> 'UÅ¼ytkownicy mogÄ… usuwaÄ‡ swoje konta',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, safety restrictions and additional security subsystems.',
@@ -786,14 +786,14 @@ $ap_translation = [
 	'NotifyUpload'				=> 'Notify file upload',
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
-	'PersonalMessagesSection'	=> 'Wiadomo¶ci osobiste',
+	'PersonalMessagesSection'	=> 'WiadomoÅ›ci osobiste',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
 	'AllowMassemailDefault'		=> 'Allow Massemail',
 	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
 
 	// Resync settings
-	'Synchronize'				=> 'synchronizowaæ',
+	'Synchronize'				=> 'synchronizowaÄ‡',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
@@ -821,13 +821,13 @@ $ap_translation = [
 	'ResyncOptions'				=> 'Dodatkowe opcje',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Te informacje s± u¿ywane przez witrynê podczas wysy³ania e-maili do u¿ytkowników. Sprawd¼ czy podany adres e-mail jest wa¿nym adresem, poniewa¿ wszystkie zwrócone lub niedostarczone wiadomo¶ci bêd± prawdopodobnie odsy³ane na ten adres. Je¶li serwer nie udostêpnia natywnych (opartych na PHP) us³ug e-mail, mo¿na wysy³aæ wiadomo¶ci bezpo¶rednio, u¿ywaj±c protoko³u SMTP. Wymaga to adresu odpowiedniego serwera. Je¶li go nie znasz, zapytaj o niego swojego us³ugodawcê. Je¶li serwer wymaga uwierzytelnienia (i tylko, je¶li wymaga), wprowad¼ nazwê u¿ytkownika, has³o i metodê uwierzytelniania.',
+	'EmaiSettingsInfo'			=> 'Te informacje sÄ… uÅ¼ywane przez witrynÄ™ podczas wysyÅ‚ania e-maili do uÅ¼ytkownikÃ³w. SprawdÅº czy podany adres e-mail jest waÅ¼nym adresem, poniewaÅ¼ wszystkie zwrÃ³cone lub niedostarczone wiadomoÅ›ci bÄ™dÄ… prawdopodobnie odsyÅ‚ane na ten adres. JeÅ›li serwer nie udostÄ™pnia natywnych (opartych na PHP) usÅ‚ug e-mail, moÅ¼na wysyÅ‚aÄ‡ wiadomoÅ›ci bezpoÅ›rednio, uÅ¼ywajÄ…c protokoÅ‚u SMTP. Wymaga to adresu odpowiedniego serwera. JeÅ›li go nie znasz, zapytaj o niego swojego usÅ‚ugodawcÄ™. JeÅ›li serwer wymaga uwierzytelnienia (i tylko, jeÅ›li wymaga), wprowadÅº nazwÄ™ uÅ¼ytkownika, hasÅ‚o i metodÄ™ uwierzytelniania.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'Nazwa funkcji',
-	'EmailFunctionNameInfo'		=> 'Nazwa funkcji e-maila u¿ywana do wysy³ania maili przez PHP.',
-	'UseSmtpInfo'				=> 'Wybierz <code>SMTP</code> , je¶li takie jest twoje ¿yczenie lub trzeba wysy³aæ wiadomo¶ci e-mail przez dany serwer zamiast przez lokaln± funkcjê pocztow±.',
+	'EmailFunctionNameInfo'		=> 'Nazwa funkcji e-maila uÅ¼ywana do wysyÅ‚ania maili przez PHP.',
+	'UseSmtpInfo'				=> 'Wybierz <code>SMTP</code> , jeÅ›li takie jest twoje Å¼yczenie lub trzeba wysyÅ‚aÄ‡ wiadomoÅ›ci e-mail przez dany serwer zamiast przez lokalnÄ… funkcjÄ™ pocztowÄ….',
 
 	'EnableEmail'				=> 'E-mail do wszystkich',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -850,19 +850,19 @@ $ap_translation = [
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Metoda uwierzytelniania dla SMTP',
-	'SmtpConnectionModeInfo'	=> 'Uwierzytelnianie jest u¿ywane tylko wtedy, gdy jest okre¶lona nazwa u¿ytkownika i has³o. Je¶li nie wiesz, jakiej metody u¿yæ, zapytaj swojego dostawcê us³ugi.',
-	'SmtpPassword'				=> 'SMTP Has³o',
-	'SmtpPasswordInfo'			=> 'Nale¿y wprowadziæ tylko, je¶li serwer SMTP tego wymaga.<br><em><strong>Ostrze¿enie:</strong> Has³o zostanie zapisane w bazie danych jako zwyk³y tekst i bêdzie widoczne dla ka¿dego, kto ma dostêp do bazy danych lub kto mo¿e przegl±daæ tê stronê konfiguracji.</em>',
+	'SmtpConnectionModeInfo'	=> 'Uwierzytelnianie jest uÅ¼ywane tylko wtedy, gdy jest okreÅ›lona nazwa uÅ¼ytkownika i hasÅ‚o. JeÅ›li nie wiesz, jakiej metody uÅ¼yÄ‡, zapytaj swojego dostawcÄ™ usÅ‚ugi.',
+	'SmtpPassword'				=> 'SMTP HasÅ‚o',
+	'SmtpPasswordInfo'			=> 'NaleÅ¼y wprowadziÄ‡ tylko, jeÅ›li serwer SMTP tego wymaga.<br><em><strong>OstrzeÅ¼enie:</strong> HasÅ‚o zostanie zapisane w bazie danych jako zwykÅ‚y tekst i bÄ™dzie widoczne dla kaÅ¼dego, kto ma dostÄ™p do bazy danych lub kto moÅ¼e przeglÄ…daÄ‡ tÄ™ stronÄ™ konfiguracji.</em>',
 	'SmtpPort'					=> 'Port serwera',
-	'SmtpPortInfo'				=> 'Mo¿na zmieniaæ tylko wtedy, gdy wiadomo, ¿e serwer pracuje na innym porcie. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpPortInfo'				=> 'MoÅ¼na zmieniaÄ‡ tylko wtedy, gdy wiadomo, Å¼e serwer pracuje na innym porcie. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
 	'SmtpServer'				=> 'SMTP Adres serwera',
 	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'Ustawienia SMTP',
-	'SmtpUsername'				=> 'SMTP Nazwa u¿ytkownika',
-	'SmtpUsernameInfo'			=> 'Nale¿y wprowadziæ tylko, je¶li serwer SMTP tego wymaga.',
+	'SmtpUsername'				=> 'SMTP Nazwa uÅ¼ytkownika',
+	'SmtpUsernameInfo'			=> 'NaleÅ¼y wprowadziÄ‡ tylko, jeÅ›li serwer SMTP tego wymaga.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Tutaj mo¿na dokonaæ konfiguracji g³ównych ustawieñ za³±czników i powi±zanych z nimi kategorii specjalnych.',
+	'UploadSettingsInfo'		=> 'Tutaj moÅ¼na dokonaÄ‡ konfiguracji gÅ‚Ã³wnych ustawieÅ„ zaÅ‚Ä…cznikÃ³w i powiÄ…zanych z nimi kategorii specjalnych.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -871,21 +871,21 @@ $ap_translation = [
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
 	'UploadMaxFilesize'			=> 'Maksymalny rozmiar pliku',
-	'UploadMaxFilesizeInfo'		=> 'Maksymalny rozmiar zamieszczanego pliku. Warto¶æ zero (0) - rozmiar zamieszczanego pliku ograniczany jest tylko przez ustawienia PHP.',
+	'UploadMaxFilesizeInfo'		=> 'Maksymalny rozmiar zamieszczanego pliku. WartoÅ›Ä‡ zero (0) - rozmiar zamieszczanego pliku ograniczany jest tylko przez ustawienia PHP.',
 	'UploadQuota'				=> 'Rozmiar przestrzeni dyskowej',
-	'UploadQuotaInfo'			=> 'Maksymalna przestrzeñ dyskowa dostêpna dla wszystkich za³±czników w tej instalacji Wiki. Warto¶æ zero <code>0</code> - brak ograniczenia przestrzeni.',
+	'UploadQuotaInfo'			=> 'Maksymalna przestrzeÅ„ dyskowa dostÄ™pna dla wszystkich zaÅ‚Ä…cznikÃ³w w tej instalacji Wiki. WartoÅ›Ä‡ zero <code>0</code> - brak ograniczenia przestrzeni.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
-	'CheckMimetype'				=> 'Sprawdzaj pliki za³±cznika',
-	'CheckMimetypeInfo'			=> 'Niektóre przegl±darki mog± byæ zmuszane do przybierania nieprawid³owego typu mediów (mimetype) dla wysy³anych plików. Funkcja ta zabezpiecza takie pliki przed odrzuceniem.',
+	'CheckMimetype'				=> 'Sprawdzaj pliki zaÅ‚Ä…cznika',
+	'CheckMimetypeInfo'			=> 'NiektÃ³re przeglÄ…darki mogÄ… byÄ‡ zmuszane do przybierania nieprawidÅ‚owego typu mediÃ³w (mimetype) dla wysyÅ‚anych plikÃ³w. Funkcja ta zabezpiecza takie pliki przed odrzuceniem.',
 
 	'Thumbnails'				=> 'Thumbnails',
-	'CreateThumbnail'			=> 'Zawsze twórz miniaturê',
-	'CreateThumbnailInfo'		=> 'Tworzy miniaturê we wszystkich mo¿liwych sytuacjach. Dziêki tej funkcji miniatura bêdzie wy¶wietlana bezpo¶rednio w po¶cie i u¿ytkownik mo¿e j± klikn±æ, aby zobaczyæ pe³ny obrazek.',
-	'MaxThumbWidth'				=> 'Maksymalna szeroko¶æ miniatury w pikselach',
-	'MaxThumbWidthInfo'			=> 'Generowana miniatura nie bêdzie mog³a przekroczyæ okre¶lonej tutaj szeroko¶ci.',
+	'CreateThumbnail'			=> 'Zawsze twÃ³rz miniaturÄ™',
+	'CreateThumbnailInfo'		=> 'Tworzy miniaturÄ™ we wszystkich moÅ¼liwych sytuacjach. DziÄ™ki tej funkcji miniatura bÄ™dzie wyÅ›wietlana bezpoÅ›rednio w poÅ›cie i uÅ¼ytkownik moÅ¼e jÄ… kliknÄ…Ä‡, aby zobaczyÄ‡ peÅ‚ny obrazek.',
+	'MaxThumbWidth'				=> 'Maksymalna szerokoÅ›Ä‡ miniatury w pikselach',
+	'MaxThumbWidthInfo'			=> 'Generowana miniatura nie bÄ™dzie mogÅ‚a przekroczyÄ‡ okreÅ›lonej tutaj szerokoÅ›ci.',
 	'MinThumbFilesize'			=> 'Minimalny rozmiar pliku miniatury',
-	'MinThumbFilesizeInfo'		=> 'Je¶li rozmiar pliku miniatury jest mniejszy ni¿ zdefiniowana tutaj warto¶æ, miniatura nie zostanie utworzona.',
+	'MinThumbFilesizeInfo'		=> 'JeÅ›li rozmiar pliku miniatury jest mniejszy niÅ¼ zdefiniowana tutaj wartoÅ›Ä‡, miniatura nie zostanie utworzona.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages and files.
@@ -950,19 +950,19 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Tutaj mo¿esz wys³aæ wiadomo¶æ e-mail do wszystkich u¿ytkowników lub do wszystkich cz³onków konkretnej grupy, która ma w³±czon± <strong>funkcjê odbierania masowych wiadomo¶ci e-mail</strong>. Aby to osi±gn±æ e-mail zostanie wys³any na adres e-maila wykonawczego z ukryt± kopi± (odbiorca nie bêdzie widzia³ adresów innych odbiorców) wys³an± do wszystkich odbiorców. Domy¶lnie ustawionych jest 50 odbiorców. Wys³anie wiadomo¶ci do du¿ej liczby osób mo¿e potrwaæ d³u¿sz± chwilê. Zachowaj cierpliwo¶æ i nie przerywaj tej operacji. Po jej zakoñczeniu zostanie wy¶wietlone powiadomienie.',
+	'MassemailInfo'				=> 'Tutaj moÅ¼esz wysÅ‚aÄ‡ wiadomoÅ›Ä‡ e-mail do wszystkich uÅ¼ytkownikÃ³w lub do wszystkich czÅ‚onkÃ³w konkretnej grupy, ktÃ³ra ma wÅ‚Ä…czonÄ… <strong>funkcjÄ™ odbierania masowych wiadomoÅ›ci e-mail</strong>. Aby to osiÄ…gnÄ…Ä‡ e-mail zostanie wysÅ‚any na adres e-maila wykonawczego z ukrytÄ… kopiÄ… (odbiorca nie bÄ™dzie widziaÅ‚ adresÃ³w innych odbiorcÃ³w) wysÅ‚anÄ… do wszystkich odbiorcÃ³w. DomyÅ›lnie ustawionych jest 50 odbiorcÃ³w. WysÅ‚anie wiadomoÅ›ci do duÅ¼ej liczby osÃ³b moÅ¼e potrwaÄ‡ dÅ‚uÅ¼szÄ… chwilÄ™. Zachowaj cierpliwoÅ›Ä‡ i nie przerywaj tej operacji. Po jej zakoÅ„czeniu zostanie wyÅ›wietlone powiadomienie.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
-	'NoEmailMessage'			=> 'Nale¿y wprowadziæ tre¶æ wiadomo¶ci.',
-	'NoEmailSubject'			=> 'Nale¿y okre¶liæ temat wiadomo¶ci.',
+	'NoEmailMessage'			=> 'NaleÅ¼y wprowadziÄ‡ treÅ›Ä‡ wiadomoÅ›ci.',
+	'NoEmailSubject'			=> 'NaleÅ¼y okreÅ›liÄ‡ temat wiadomoÅ›ci.',
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MassemailSection'			=> 'Mass email',
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Tre¶æ wiadomo¶ci',
-	'YourMessageInfo'			=> 'Tre¶æ wiadomo¶ci musi byæ wpisana zwyk³ym tekstem. Przed wys³aniem wiadomo¶ci wszystkie znaczniki zostan± usuniête.',
+	'YourMessage'				=> 'TreÅ›Ä‡ wiadomoÅ›ci',
+	'YourMessageInfo'			=> 'TreÅ›Ä‡ wiadomoÅ›ci musi byÄ‡ wpisana zwykÅ‚ym tekstem. Przed wysÅ‚aniem wiadomoÅ›ci wszystkie znaczniki zostanÄ… usuniÄ™te.',
 
 	'MessageLanguage'			=> 'Language',
 	'MessageLanguageInfo'		=> '',
@@ -971,8 +971,8 @@ $ap_translation = [
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 
-	'SendToGroup'				=> 'Wy¶lij do grupy',
-	'SendToUser'				=> 'Wy¶lij do u¿ytkowników',
+	'SendToGroup'				=> 'WyÅ›lij do grupy',
+	'SendToUser'				=> 'WyÅ›lij do uÅ¼ytkownikÃ³w',
 	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
@@ -1103,11 +1103,11 @@ $ap_translation = [
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
 	'UsersUpdated'				=> 'User successfully updated.',
 
-	'UserName'					=> 'Nazwa u¿ytkownika',
+	'UserName'					=> 'Nazwa uÅ¼ytkownika',
 	'UserRealname'				=> 'Realname',
 	'UserEmail'					=> 'E-mail',
 	'UserIP'					=> 'IP',
-	'UserLanguage'				=> 'Jêzyk',
+	'UserLanguage'				=> 'JÄ™zyk',
 	'UserSignuptime'			=> 'Signuptime',
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
@@ -1120,7 +1120,7 @@ $ap_translation = [
 	'LogMemberRemoved'			=> 'Removed member ##%1## from group ##%2##',
 	'LogGroupCreated'			=> 'Created a new group ##%1##',
 	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',
-	'LogGroupRemoved'			=> 'Usuniêta grupa ##%1##',
+	'LogGroupRemoved'			=> 'UsuniÄ™ta grupa ##%1##',
 
 	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'Opis',
@@ -1129,8 +1129,8 @@ $ap_translation = [
 	'GroupsActive'				=> 'Aktywny',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
-	'GroupsAlreadyExists'		=> 'Ta grupa ju¿ istnieje.',
-	'GroupsAdded'				=> 'Grupa zosta³a pomy¶lnie dodana.',
+	'GroupsAlreadyExists'		=> 'Ta grupa juÅ¼ istnieje.',
+	'GroupsAdded'				=> 'Grupa zostaÅ‚a pomyÅ›lnie dodana.',
 	'GroupsRenamed'				=> 'Group successfully renamed.',
 	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
 	'GroupsAdd'					=> 'Add a new group',
@@ -1138,20 +1138,20 @@ $ap_translation = [
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
 	'GroupsDelete'				=> 'Are you sure you want to remove group %1',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
-	'GroupsIsSystem'			=> 'Grupa %1 nale¿y do systemu i nie mo¿e byæ usuniêta.',
+	'GroupsIsSystem'			=> 'Grupa %1 naleÅ¼y do systemu i nie moÅ¼e byÄ‡ usuniÄ™ta.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Wy¶lij',
+	'GroupsSaveButton'			=> 'WyÅ›lij',
 	'GroupsCancelButton'		=> 'Anuluj',
 	'GroupsAddButton'			=> 'Add',
 	'GroupsEditButton'			=> 'Edytuj',
-	'GroupsRemoveButton'		=> 'Usuñ',
+	'GroupsRemoveButton'		=> 'UsuÅ„',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
-	'GroupAddMember'			=> 'Dodaj cz³onka',
-	'GroupRemoveMember'			=> 'Usuñ cz³onka',
-	'GroupAddNew'				=> 'Dodaj grupê',
+	'GroupAddMember'			=> 'Dodaj czÅ‚onka',
+	'GroupRemoveMember'			=> 'UsuÅ„ czÅ‚onka',
+	'GroupAddNew'				=> 'Dodaj grupÄ™',
 	'GroupEdit'					=> 'Grupa redakcyjna',
-	'GroupDelete'				=> 'Usuñ grupê',
+	'GroupDelete'				=> 'UsuÅ„ grupÄ™',
 
 	'MembersAddNew'				=> 'Add new member',
 	'MembersAdded'				=> 'Added new member to the group successfully.',

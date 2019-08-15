@@ -152,13 +152,13 @@ class JavaHighlighter
 		if (!strlen($this->code))	return FALSE;
 		if (!sizeof($array))		return FALSE;
 
-		// On va essayer de comparer le caractere courrant avec le 1ø
+		// On va essayer de comparer le caractere courrant avec le 1Ã¸
 		// caractere de chaque premier delimiteur
 		foreach ($array as $delimiterarray)
 		{
 			$delimiter1 = $delimiterarray[0];
 
-			// Si le 1ø char correspond
+			// Si le 1Ã¸ char correspond
 			if ($this->char == $delimiter1[0])
 			{
 				$match = TRUE;

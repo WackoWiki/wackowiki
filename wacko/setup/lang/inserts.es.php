@@ -7,10 +7,10 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Bienvenida a tu ((WackoWiki:Doc/English WackoWiki))!**\n\nDa click en el enlace \"Editar esta pagina\" abajo en la pagina para empezar.\n\nLa documentación se puede encontrar en WackoWiki:Doc/English.\n\nPaginas útiles: ((WackoWiki:Doc/English/Formatting Formatting)), ((Buscar)).\n\n";
+		$home_page_body		= "file:/wacko_logo.png?right\n**Bienvenida a tu ((WackoWiki:Doc/English WackoWiki))!**\n\nDa click en el enlace \"Editar esta pagina\" abajo en la pagina para empezar.\n\nLa documentaciÃ³n se puede encontrar en WackoWiki:Doc/English.\n\nPaginas Ãºtiles: ((WackoWiki:Doc/English/Formatting Formatting)), ((Buscar)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
-		insert_page($config['root_page'], 'Página de inicio', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
+		insert_page($config['root_page'], 'PÃ¡gina de inicio', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
 	}
 	else
@@ -18,7 +18,7 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Categoría',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'CategorÃ­a',		'{{category}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['groups_page'],		'Grupos',			'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],		'Usuarios',			'{{users}}',			$page_lang, 'Admins', false, false);
 
@@ -26,7 +26,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],		'Terms',		'',							$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Normativa de privacidad',		'',			$page_lang, 'Admins', false, false);
 
-	#insert_page('PáginaAleatoria',			'Página aleatoria',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Aleatoria');
+	#insert_page('PÃ¡ginaAleatoria',			'PÃ¡gina aleatoria',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Aleatoria');
 }
 
 insert_page('UltimasModificaciones',	'Ultimas Modificaciones',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Modificaciones');

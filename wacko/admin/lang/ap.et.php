@@ -14,14 +14,14 @@ $ap_translation = [
 		'content'		=> 'Content',
 		'users'			=> 'Kasutajad',
 		'maintenance'	=> 'Hooldamine',
-		'messages'		=> 'Sınumid',
+		'messages'		=> 'S√µnumid',
 		'extension'		=> 'Extension',
 		'database'		=> 'Andmebaas',
 	],
 
 	// Admin panel
 	'AdminPanel'				=> 'Administraatori juhtpaneel',
-	'RecoveryMode'				=> 'Taastere˛iim',
+	'RecoveryMode'				=> 'Taastere≈æiim',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
@@ -30,12 +30,12 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
 	'FormSave'					=> 'Save',
-	'FormReset'					=> 'L‰htesta',
+	'FormReset'					=> 'L√§htesta',
 	'FormUpdate'				=> 'Uuendan',
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Logi v‰lja',
+	'ApLogOut'					=> 'Logi v√§lja',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
@@ -56,7 +56,7 @@ $ap_translation = [
 	'Enabled'					=> 'Lubatud',
 	'Disabled'					=> 'Keelatud',
 	'On'						=> 'Sees',
-	'Off'						=> 'V‰ljas',
+	'Off'						=> 'V√§ljas',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -118,7 +118,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> '’igused',
+		'name'		=> '√ïigused',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -785,14 +785,14 @@ $ap_translation = [
 	'NotifyUpload'				=> 'Notify file upload',
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
-	'PersonalMessagesSection'	=> 'Isiklikud sınumid',
+	'PersonalMessagesSection'	=> 'Isiklikud s√µnumid',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
 	'AllowMassemailDefault'		=> 'Allow Massemail',
 	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
 
 	// Resync settings
-	'Synchronize'				=> 's¸nkroonida',
+	'Synchronize'				=> 's√ºnkroonida',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
@@ -816,17 +816,17 @@ $ap_translation = [
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
 	'WikiLinksResync'			=> 'Wiki-links',
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
-	'RecompilePage'				=> 'Kıigi lehtede uuesti koostamine (v‰ga kallis)',
+	'RecompilePage'				=> 'K√µigi lehtede uuesti koostamine (v√§ga kallis)',
 	'ResyncOptions'				=> 'Additional options',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Seda infot kasutatakse, kui foorum saadab e-kirja kasutajale. Palun ole kindel, et siinsisestatud e-postiaadress on kehtiv, kıik tagasipırkuvad vıi kohaletoimetamata e-kirjad l‰hevad sinna. Kui su teenusepakkuja ei paku kohalikku (PHP pıhist) e-posti teenust , vıid saata sınumeid otse l‰bi SMTP. See nıuab serveri aadressi (k¸si pakkujalt, kui vaja). Kui server nıuab autentimist, (ja vaid sellisel juhul) sisesta vajalik kasutajanimi, parool ja autentimismeetod.',
+	'EmaiSettingsInfo'			=> 'Seda infot kasutatakse, kui foorum saadab e-kirja kasutajale. Palun ole kindel, et siinsisestatud e-postiaadress on kehtiv, k√µik tagasip√µrkuvad v√µi kohaletoimetamata e-kirjad l√§hevad sinna. Kui su teenusepakkuja ei paku kohalikku (PHP p√µhist) e-posti teenust , v√µid saata s√µnumeid otse l√§bi SMTP. See n√µuab serveri aadressi (k√ºsi pakkujalt, kui vaja). Kui server n√µuab autentimist, (ja vaid sellisel juhul) sisesta vajalik kasutajanimi, parool ja autentimismeetod.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
 	'EmailFunctionName'			=> 'E-posti funktsiooni nimi',
-	'EmailFunctionNameInfo'		=> 'E-posti funktsioon, mis saadab kirju l‰bi PHP.',
-	'UseSmtpInfo'				=> 'Vali <code>SMTP</code>, kui soovid vıi pead e-maili saatma oma serverist Wiki e-posti funktsiooni asemel.',
+	'EmailFunctionNameInfo'		=> 'E-posti funktsioon, mis saadab kirju l√§bi PHP.',
+	'UseSmtpInfo'				=> 'Vali <code>SMTP</code>, kui soovid v√µi pead e-maili saatma oma serverist Wiki e-posti funktsiooni asemel.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -849,19 +849,19 @@ $ap_translation = [
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Autentimismeetod SMTP jaoks',
-	'SmtpConnectionModeInfo'	=> 'Kasutatakse vaid siis, kui kasutajanimi/parool on m‰‰ratud, k¸si oma teenusepakkujalt, kui sa pole kindel, millist meetodit kasutada.',
+	'SmtpConnectionModeInfo'	=> 'Kasutatakse vaid siis, kui kasutajanimi/parool on m√§√§ratud, k√ºsi oma teenusepakkujalt, kui sa pole kindel, millist meetodit kasutada.',
 	'SmtpPassword'				=> 'SMTP parool',
-	'SmtpPasswordInfo'			=> 'Sisesta parool vaid siis, kui SMTP server seda nıuab..<br><em><strong>HOIATUS:</strong> See parool salvestatakse lihttekstina andmebaasi, ning on n‰htav kıigile kes p‰‰sevad ligi sinu foorumi andmebaasile vıi sellele lehek¸ljele.</em>',
+	'SmtpPasswordInfo'			=> 'Sisesta parool vaid siis, kui SMTP server seda n√µuab..<br><em><strong>HOIATUS:</strong> See parool salvestatakse lihttekstina andmebaasi, ning on n√§htav k√µigile kes p√§√§sevad ligi sinu foorumi andmebaasile v√µi sellele lehek√ºljele.</em>',
 	'SmtpPort'					=> 'SMTP serveri port',
 	'SmtpPortInfo'				=> 'Muuda seda vaid siis, kui tead, et SMTP server jookseb teisel pordil. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
 	'SmtpServer'				=> 'SMTP serveri aadress',
-	'SmtpServerInfo'			=> 'Pane t‰hele, et sa pead andma protokolli, mida kasutab sinu server. Kui kasutad SSL, siis see peab olema <code>ssl://mail.example.com</code>',
+	'SmtpServerInfo'			=> 'Pane t√§hele, et sa pead andma protokolli, mida kasutab sinu server. Kui kasutad SSL, siis see peab olema <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'SMTP seaded',
 	'SmtpUsername'				=> 'SMTP kasutajanimi',
-	'SmtpUsernameInfo'			=> 'Sisesta kasutajanimi vaid siis, kui server seda nıuab.',
+	'SmtpUsernameInfo'			=> 'Sisesta kasutajanimi vaid siis, kui server seda n√µuab.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Siin saad sa muuta manuste pıhiseadeid ja nendega seotud kategooriaid.',
+	'UploadSettingsInfo'		=> 'Siin saad sa muuta manuste p√µhiseadeid ja nendega seotud kategooriaid.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -870,21 +870,21 @@ $ap_translation = [
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
 	'UploadMaxFilesize'			=> 'Maksimaalne failisuurus',
-	'UploadMaxFilesizeInfo'		=> 'MMaksimaalne failisuurus igale failile. 0 t‰hendab maksimumi puudumist.',
+	'UploadMaxFilesizeInfo'		=> 'MMaksimaalne failisuurus igale failile. 0 t√§hendab maksimumi puudumist.',
 	'UploadQuota'				=> 'Manuseid lubatud',
-	'UploadQuotaInfo'			=> 'Maksimaalne kettaruum, mis on eraldatud terve foorumi manustele. <code>0</code> t‰hendab maksimumi puudumist.',
+	'UploadQuotaInfo'			=> 'Maksimaalne kettaruum, mis on eraldatud terve foorumi manustele. <code>0</code> t√§hendab maksimumi puudumist.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Kontrolli manuseid',
-	'CheckMimetypeInfo'			=> 'Mındasid veebilehitsejaid saab petta, eeldades, et tegu on vale miimit¸¸biga. See valik kindlustab, et sellised failid keelatakse.',
+	'CheckMimetypeInfo'			=> 'M√µndasid veebilehitsejaid saab petta, eeldades, et tegu on vale miimit√º√ºbiga. See valik kindlustab, et sellised failid keelatakse.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Loo pisipilt',
-	'CreateThumbnailInfo'		=> 'Loo pisipilt igas vıimalikus olukorras.',
+	'CreateThumbnailInfo'		=> 'Loo pisipilt igas v√µimalikus olukorras.',
 	'MaxThumbWidth'				=> 'Maksimaalne pisipildi laius pikslites',
-	'MaxThumbWidthInfo'			=> 'Loodud pisipilt ei ¸leta siin m‰‰ratud laiust.',
+	'MaxThumbWidthInfo'			=> 'Loodud pisipilt ei √ºleta siin m√§√§ratud laiust.',
 	'MinThumbFilesize'			=> 'Minimaalne pisipildi failisuurus',
-	'MinThumbFilesizeInfo'		=> 'ƒra loo pisipilti piltidele, mis on sellest v‰iksemad.',
+	'MinThumbFilesizeInfo'		=> '√Ñra loo pisipilti piltidele, mis on sellest v√§iksemad.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages and files.
@@ -949,11 +949,11 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Sellel lehek¸ljel saad saata e-kirja kıigile liikmetele vıi valitud grupile, <strong>millel on valikus lubatud mass e-kiri vastu vıtta</strong>. Pimekoopia saadetakse ka administraatori e-posti aadressile. Kui ¸ritad saata kirja v‰ga paljudele liikmetele, siis ‰ra lahku enne lehelt, kui skript on lıpetanud saatmise, sest saatmisega l‰hebki kaua aega.',
+	'MassemailInfo'				=> 'Sellel lehek√ºljel saad saata e-kirja k√µigile liikmetele v√µi valitud grupile, <strong>millel on valikus lubatud mass e-kiri vastu v√µtta</strong>. Pimekoopia saadetakse ka administraatori e-posti aadressile. Kui √ºritad saata kirja v√§ga paljudele liikmetele, siis √§ra lahku enne lehelt, kui skript on l√µpetanud saatmise, sest saatmisega l√§hebki kaua aega.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
-	'NoEmailMessage'			=> 'Sa pead sisestama ka sınumi.',
+	'NoEmailMessage'			=> 'Sa pead sisestama ka s√µnumi.',
 	'NoEmailSubject'			=> 'Sa pead sisestama ka pealkirja.',
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
@@ -961,7 +961,7 @@ $ap_translation = [
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Your message',
-	'YourMessageInfo'			=> 'Sa vıid sisestada ainult puhast teksti, kıik koodi m‰rgistused eemaldatakse enne saatmist.',
+	'YourMessageInfo'			=> 'Sa v√µid sisestada ainult puhast teksti, k√µik koodi m√§rgistused eemaldatakse enne saatmist.',
 
 	'MessageLanguage'			=> 'Language',
 	'MessageLanguageInfo'		=> '',

@@ -861,7 +861,7 @@ $ap_translation = [
 	'SmtpUsernameInfo'			=> 'Voer alleen een gebruikersnaam in als je SMTP-server dit vereist.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Hier kan je de hoofdinstellingen voor bijlagen en bijbehorende speciale categorieën instellen.',
+	'UploadSettingsInfo'		=> 'Hier kan je de hoofdinstellingen voor bijlagen en bijbehorende speciale categorieÃ«n instellen.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -870,13 +870,13 @@ $ap_translation = [
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
 	'UploadMaxFilesize'			=> 'Maximum bestandsgrootte',
-	'UploadMaxFilesizeInfo'		=> 'Maximum grootte van elk bestand, met 0 als ongelimiteerd, bijgevoegd aan een privébericht.',
+	'UploadMaxFilesizeInfo'		=> 'Maximum grootte van elk bestand, met 0 als ongelimiteerd, bijgevoegd aan een privÃ©bericht.',
 	'UploadQuota'				=> 'Totaal bijlage quota',
 	'UploadQuotaInfo'			=> 'Maximum schijfruimte beschikbaar voor bijlagen van het hele wiki, met <code>0</code> als ongelimiteerd.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Controleer bijlage bestanden',
-	'CheckMimetypeInfo'			=> 'Sommige browsers kunnen een incorrecte mimetype voor geüploade bestanden aannemen. Deze optie verzekerd je er van dat zulke bestanden die dit veroorzaken worden afgewezen.',
+	'CheckMimetypeInfo'			=> 'Sommige browsers kunnen een incorrecte mimetype voor geÃ¼ploade bestanden aannemen. Deze optie verzekerd je er van dat zulke bestanden die dit veroorzaken worden afgewezen.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Miniatuur aanmaken',

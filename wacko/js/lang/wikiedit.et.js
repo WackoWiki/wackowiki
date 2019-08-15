@@ -17,7 +17,7 @@ lang = {
 	Bold :					"Rasvane kiri",
 	Italic :				"Kaldkiri",
 	Underline :				"Alajoonega kiri",
-	Strikethrough :			"Läbijoonitud tekst",
+	Strikethrough :			"LÃ¤bijoonitud tekst",
 	Code :					"Koodi tekst",
 	Superscript :			"Superscript",
 	Subscript :				"Subscript",

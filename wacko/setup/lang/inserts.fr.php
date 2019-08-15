@@ -7,7 +7,7 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Bienvenue sur votre wiki motorisé par ((WackoWiki:Doc/Francophone WackoWiki))!**\n\nConnectez-vous, puis cliquez sur le lien \"Editer cette page\" en bas à gauche pour commencer.\n\nUne documentation sommaire peut être trouvée ici : WackoWiki:Doc/Francophone.\n\nPages utiles: ((WackoWiki:Doc/Francophone/MiseEnForme MiseEnForme)), ((Recherche)).\n\n";
+		$home_page_body		= "file:/wacko_logo.png?right\n**Bienvenue sur votre wiki motorisÃ© par ((WackoWiki:Doc/Francophone WackoWiki))!**\n\nConnectez-vous, puis cliquez sur le lien \"Editer cette page\" en bas Ã  gauche pour commencer.\n\nUne documentation sommaire peut Ãªtre trouvÃ©e ici : WackoWiki:Doc/Francophone.\n\nPages utiles: ((WackoWiki:Doc/Francophone/MiseEnForme MiseEnForme)), ((Recherche)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], 'Page d\'accueil', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
@@ -18,13 +18,13 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Catégories',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'CatÃ©gories',		'{{category}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['groups_page'],		'Groupes',			'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],		'Utilisateurs',		'{{users}}',			$page_lang, 'Admins', false, false);
 
 	insert_page($config['help_page'],		'Aide',				'',						$page_lang, 'Admins', false, false);
 	insert_page($config['terms_page'],		'Conditions d\'utilisation',		'',		$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Politique de confidentialité',		'',		$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'Politique de confidentialitÃ©',		'',		$page_lang, 'Admins', false, false);
 
 	#insert_page('PageAuHasard',			'Page au hasard',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Au hasard');
 }
@@ -37,6 +37,6 @@ insert_page('Enregistrement',	'Enregistrement',	'{{registration}}',		$page_lang,
 insert_page('MotDePasse',		'Mot De Passe',		'{{changepassword}}',	$page_lang, 'Admins', false, false);
 insert_page('Recherche',		'Recherche',		'{{search}}',			$page_lang, 'Admins', false, false);
 insert_page('Connexion',		'Connexion',		'{{login}}',			$page_lang, 'Admins', false, false);
-insert_page('Préférences',		'Préférences',		'{{usersettings}}',		$page_lang, 'Admins', false, false);
+insert_page('PrÃ©fÃ©rences',		'PrÃ©fÃ©rences',		'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 ?>

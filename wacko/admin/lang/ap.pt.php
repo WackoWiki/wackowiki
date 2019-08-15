@@ -9,25 +9,25 @@ $ap_translation = [
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
-		'basics'		=> 'Funções básicas',
-		'preferences'	=> 'Preferências',
-		'content'		=> 'Conteúdo',
-		'users'			=> 'Usuários',
-		'maintenance'	=> 'Manutenção',
+		'basics'		=> 'FunÃ§Ãµes bÃ¡sicas',
+		'preferences'	=> 'PreferÃªncias',
+		'content'		=> 'ConteÃºdo',
+		'users'			=> 'UsuÃ¡rios',
+		'maintenance'	=> 'ManutenÃ§Ã£o',
 		'messages'		=> 'Mensagens',
-		'extension'		=> 'Extensão',
+		'extension'		=> 'ExtensÃ£o',
 		'database'		=> 'Base de dados',
 	],
 
 	// Admin panel
-	'AdminPanel'				=> 'Painel de Administração',
-	'RecoveryMode'				=> 'Modo de recuperação',
-	'Authorization'				=> 'Autorização',
-	'AuthorizationTip'			=> 'Digite a senha administrativa (certifique-se também de que os cookies são permitidos no seu navegador).',
-	'NoRecoceryPassword'		=> 'A senha administrativa não é especificada!',
-	'NoRecoceryPasswordTip'		=> 'Nota: A ausência de uma senha administrativa é uma ameaça à segurança! Digite sua senha no arquivo de configuração e execute o programa novamente.',
+	'AdminPanel'				=> 'Painel de AdministraÃ§Ã£o',
+	'RecoveryMode'				=> 'Modo de recuperaÃ§Ã£o',
+	'Authorization'				=> 'AutorizaÃ§Ã£o',
+	'AuthorizationTip'			=> 'Digite a senha administrativa (certifique-se tambÃ©m de que os cookies sÃ£o permitidos no seu navegador).',
+	'NoRecoceryPassword'		=> 'A senha administrativa nÃ£o Ã© especificada!',
+	'NoRecoceryPasswordTip'		=> 'Nota: A ausÃªncia de uma senha administrativa Ã© uma ameaÃ§a Ã  seguranÃ§a! Digite sua senha no arquivo de configuraÃ§Ã£o e execute o programa novamente.',
 
-	'ErrorLoadingModule'		=> 'Erro ao carregar o módulo admin %1: não existe.',
+	'ErrorLoadingModule'		=> 'Erro ao carregar o mÃ³dulo admin %1: nÃ£o existe.',
 
 	'FormSave'					=> 'Guardar',
 	'FormReset'					=> 'Reiniciar',
@@ -57,13 +57,13 @@ $ap_translation = [
 	'Disabled'					=> 'Disabled',
 	'On'						=> 'On',
 	'Off'						=> 'Off',
-	'Mandatory'					=> 'Obrigatório',
+	'Mandatory'					=> 'ObrigatÃ³rio',
 	'Admin'						=> 'Admin',
 
 	'MiscellaneousSection'		=> 'Diversos',
 	'MainSection'				=> 'Basic Parameters',
 
-	'DirNotWritable'			=> 'O diretório %1 não pode ser escrito.',
+	'DirNotWritable'			=> 'O diretÃ³rio %1 nÃ£o pode ser escrito.',
 
 	/**
 	 * AP MENU
@@ -76,14 +76,14 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Básico',
-		'title'		=> 'Parâmetros básicos',
+		'name'		=> 'BÃ¡sico',
+		'title'		=> 'ParÃ¢metros bÃ¡sicos',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Aparência',
-		'title'		=> 'Configurações de aparência',
+		'name'		=> 'AparÃªncia',
+		'title'		=> 'ConfiguraÃ§Ãµes de aparÃªncia',
 	],
 
 	// Config Email module
@@ -106,26 +106,26 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notificações',
+		'name'		=> 'NotificaÃ§Ãµes',
 		'title'		=> 'Notifications settings',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Páginas',
-		'title'		=> 'Páginas e parâmetros do site',
+		'name'		=> 'PÃ¡ginas',
+		'title'		=> 'PÃ¡ginas e parÃ¢metros do site',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissões',
-		'title'		=> 'Configurações de permissões',
+		'name'		=> 'PermissÃµes',
+		'title'		=> 'ConfiguraÃ§Ãµes de permissÃµes',
 	],
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Segurança',
-		'title'		=> 'Configurações dos subsistemas de segurança',
+		'name'		=> 'SeguranÃ§a',
+		'title'		=> 'ConfiguraÃ§Ãµes dos subsistemas de seguranÃ§a',
 	],
 
 	// Config System module
@@ -148,7 +148,7 @@ $ap_translation = [
 
 	// Comments module
 	'content_comments'		=> [
-		'name'		=> 'Comentários',
+		'name'		=> 'ComentÃ¡rios',
 		'title'		=> 'Manage comments',
 	],
 
@@ -172,7 +172,7 @@ $ap_translation = [
 
 	// Pages module
 	'content_pages'		=> [
-		'name'		=> 'Páginas',
+		'name'		=> 'PÃ¡ginas',
 		'title'		=> 'Manage pages',
 	],
 
@@ -214,14 +214,14 @@ $ap_translation = [
 
 	// Inconsistencies module
 	'maint_inconsistencies'		=> [
-		'name'		=> 'Inconsistências',
-		'title'		=> 'Correção de inconsistências de dados',
+		'name'		=> 'InconsistÃªncias',
+		'title'		=> 'CorreÃ§Ã£o de inconsistÃªncias de dados',
 	],
 
 	// Data Synchronization module
 	'maint_resync'		=> [
-		'name'		=> 'Sincronização de dados',
-		'title'		=> 'Sincronização de dados',
+		'name'		=> 'SincronizaÃ§Ã£o de dados',
+		'title'		=> 'SincronizaÃ§Ã£o de dados',
 	],
 
 	// Transliterate module
@@ -256,7 +256,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Estatística',
+		'name'		=> 'EstatÃ­stica',
 		'title'		=> 'Show statistics',
 	],
 
@@ -280,7 +280,7 @@ $ap_translation = [
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Usuários',
+		'name'		=> 'UsuÃ¡rios',
 		'title'		=> 'User management',
 	],
 
@@ -710,7 +710,7 @@ $ap_translation = [
 	'NewsLevels'				=> 'Depth of news pages from the root cluster',
 	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
 
-	'LicenseSection'			=> 'Licença',
+	'LicenseSection'			=> 'LicenÃ§a',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 
@@ -816,17 +816,17 @@ $ap_translation = [
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
 	'WikiLinksResync'			=> 'Wiki-links',
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
-	'RecompilePage'				=> 'Recopilando todas as páginas (extremamente caras)',
+	'RecompilePage'				=> 'Recopilando todas as pÃ¡ginas (extremamente caras)',
 	'ResyncOptions'				=> 'Additional options',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Esta informação é usada quando o Fórum envia emails aos Utilizadores. Certifique-se que usa um email válido. Qualquer Mensagem incorreta não será entregue neste endereço. Se o seu serviço de hospedagem não oferece um serviço nativo de email baseado no PHP, pode enviar mensagens através de SMTP. É necessário um Servidor adequado, não especifique qualquer nome antigo aqui! Se o servidor requer autenticação, introduza os nomes e senhas necessários. tenha em atenção que apenas é usada a autenticação básica. Implementações de autenticações diferentes não estão disponíveis.',
+	'EmaiSettingsInfo'			=> 'Esta informaÃ§Ã£o Ã© usada quando o FÃ³rum envia emails aos Utilizadores. Certifique-se que usa um email vÃ¡lido. Qualquer Mensagem incorreta nÃ£o serÃ¡ entregue neste endereÃ§o. Se o seu serviÃ§o de hospedagem nÃ£o oferece um serviÃ§o nativo de email baseado no PHP, pode enviar mensagens atravÃ©s de SMTP. Ã‰ necessÃ¡rio um Servidor adequado, nÃ£o especifique qualquer nome antigo aqui! Se o servidor requer autenticaÃ§Ã£o, introduza os nomes e senhas necessÃ¡rios. tenha em atenÃ§Ã£o que apenas Ã© usada a autenticaÃ§Ã£o bÃ¡sica. ImplementaÃ§Ãµes de autenticaÃ§Ãµes diferentes nÃ£o estÃ£o disponÃ­veis.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
-	'EmailFunctionName'			=> 'Nome da Função de email',
-	'EmailFunctionNameInfo'		=> 'Função de email usada para enviar emails através do PHP.',
-	'UseSmtpInfo'				=> 'Select <code>SMTP</code> se quer ou tem que enviar os emails recorrendo a um Servidor SMTP em vez da função de email do Servidor.',
+	'EmailFunctionName'			=> 'Nome da FunÃ§Ã£o de email',
+	'EmailFunctionNameInfo'		=> 'FunÃ§Ã£o de email usada para enviar emails atravÃ©s do PHP.',
+	'UseSmtpInfo'				=> 'Select <code>SMTP</code> se quer ou tem que enviar os emails recorrendo a um Servidor SMTP em vez da funÃ§Ã£o de email do Servidor.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -848,20 +848,20 @@ $ap_translation = [
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Método de Autenticação para o SMTP',
-	'SmtpConnectionModeInfo'	=> 'Apenas usado se um Nome/Senha é atribuído, pergunte ao seu ISP se não sabe que método usa.',
+	'SmtpConnectionMode'		=> 'MÃ©todo de AutenticaÃ§Ã£o para o SMTP',
+	'SmtpConnectionModeInfo'	=> 'Apenas usado se um Nome/Senha Ã© atribuÃ­do, pergunte ao seu ISP se nÃ£o sabe que mÃ©todo usa.',
 	'SmtpPassword'				=> 'Senha do SMTP',
-	'SmtpPasswordInfo'			=> 'Só introduza a Senha se o Servidor de SMTP a pedir.<br><em><strong>Aviso:</strong> Esta senha será armazenada como texto simples na Base de Dados, visível a todos que podem aceder à Base de Dados ou a quem pode ver esta página de configuração.</em>',
+	'SmtpPasswordInfo'			=> 'SÃ³ introduza a Senha se o Servidor de SMTP a pedir.<br><em><strong>Aviso:</strong> Esta senha serÃ¡ armazenada como texto simples na Base de Dados, visÃ­vel a todos que podem aceder Ã  Base de Dados ou a quem pode ver esta pÃ¡gina de configuraÃ§Ã£o.</em>',
 	'SmtpPort'					=> 'Porta do Servidor de SMTP',
-	'SmtpPortInfo'				=> 'Mude apenas se tiver a certeza de que seu Servidor de SMTP está numa porta diferente. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'Endereço do Servidor de SMTP',
-	'SmtpServerInfo'			=> 'Note que você tem que fornecer o protocolo que o servidor utiliza. Se você estiver usando SSL, isso tem que ser <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'Configurações do SMTP',
+	'SmtpPortInfo'				=> 'Mude apenas se tiver a certeza de que seu Servidor de SMTP estÃ¡ numa porta diferente. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'EndereÃ§o do Servidor de SMTP',
+	'SmtpServerInfo'			=> 'Note que vocÃª tem que fornecer o protocolo que o servidor utiliza. Se vocÃª estiver usando SSL, isso tem que ser <code>ssl://mail.example.com</code>',
+	'SmtpSettings'				=> 'ConfiguraÃ§Ãµes do SMTP',
 	'SmtpUsername'				=> 'Nome de Utilizador SMTP',
-	'SmtpUsernameInfo'			=> 'Só introduza um Nome se o Servidor de SMTP o pedir.',
+	'SmtpUsernameInfo'			=> 'SÃ³ introduza um Nome se o Servidor de SMTP o pedir.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Aqui pode configurar as Opções Principais para os Anexos e Categorias Especiais associadas.',
+	'UploadSettingsInfo'		=> 'Aqui pode configurar as OpÃ§Ãµes Principais para os Anexos e Categorias Especiais associadas.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -869,22 +869,22 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Tamanho Máximo de Anexos',
-	'UploadMaxFilesizeInfo'		=> 'Tamanho máximo de cada anexo. Se este valor for 0, o tamanho do ficheiro enviado fica sujeito às permissões do PHP.',
-	'UploadQuota'				=> 'Espaço total de Anexos',
-	'UploadQuotaInfo'			=> 'Espaço máximo em disco reservado aos anexos. <code>0</code> = ilimitado.',
+	'UploadMaxFilesize'			=> 'Tamanho MÃ¡ximo de Anexos',
+	'UploadMaxFilesizeInfo'		=> 'Tamanho mÃ¡ximo de cada anexo. Se este valor for 0, o tamanho do ficheiro enviado fica sujeito Ã s permissÃµes do PHP.',
+	'UploadQuota'				=> 'EspaÃ§o total de Anexos',
+	'UploadQuotaInfo'			=> 'EspaÃ§o mÃ¡ximo em disco reservado aos anexos. <code>0</code> = ilimitado.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Verificar ficheiros anexados',
-	'CheckMimetypeInfo'			=> 'Alguns Ficheiros podem obrigar os navegadores e executar funções incorretas. Esta opção permite recusar esses Ficheiros.',
+	'CheckMimetypeInfo'			=> 'Alguns Ficheiros podem obrigar os navegadores e executar funÃ§Ãµes incorretas. Esta opÃ§Ã£o permite recusar esses Ficheiros.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Criar uma Imagem reduzida',
-	'CreateThumbnailInfo'		=> 'Criar uma Imagem reduzida em todas as situações possíveis.',
-	'MaxThumbWidth'				=> 'Largura máxima das imagens em miniaturas em píxeis',
-	'MaxThumbWidthInfo'			=> 'A largura das miniaturas geradas não ultrapassará a selecionada.',
-	'MinThumbFilesize'			=> 'Tamanho Mínimo de imagem reduzida',
-	'MinThumbFilesizeInfo'		=> 'Não criar imagem reduzida para imagens menores do que o selecionado.',
+	'CreateThumbnailInfo'		=> 'Criar uma Imagem reduzida em todas as situaÃ§Ãµes possÃ­veis.',
+	'MaxThumbWidth'				=> 'Largura mÃ¡xima das imagens em miniaturas em pÃ­xeis',
+	'MaxThumbWidthInfo'			=> 'A largura das miniaturas geradas nÃ£o ultrapassarÃ¡ a selecionada.',
+	'MinThumbFilesize'			=> 'Tamanho MÃ­nimo de imagem reduzida',
+	'MinThumbFilesizeInfo'		=> 'NÃ£o criar imagem reduzida para imagens menores do que o selecionado.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages and files.
@@ -949,7 +949,7 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Aqui pode enviar um email a todos os seus Utilizadores ou a todos os Utilizadores de um determinado Grupo, <strong>se tiver a opção de receber emails ativada</strong>. Para isso, uma mensagem será enviada ao endereço de email do administrador a informar, com uma cópia a todos membros. A configuração padrão apenas inclui 20 destinatários por mensagem, sendo que para mais destinatários mais emails serão enviados. Se está a enviar mensagens a um grande grupo de Utilizadores, por favor, seja paciente e não feche a página durante o envio. É normal que o envio em massa de mensagens leve algum tempo: Será avisado quando o processo terminar.',
+	'MassemailInfo'				=> 'Aqui pode enviar um email a todos os seus Utilizadores ou a todos os Utilizadores de um determinado Grupo, <strong>se tiver a opÃ§Ã£o de receber emails ativada</strong>. Para isso, uma mensagem serÃ¡ enviada ao endereÃ§o de email do administrador a informar, com uma cÃ³pia a todos membros. A configuraÃ§Ã£o padrÃ£o apenas inclui 20 destinatÃ¡rios por mensagem, sendo que para mais destinatÃ¡rios mais emails serÃ£o enviados. Se estÃ¡ a enviar mensagens a um grande grupo de Utilizadores, por favor, seja paciente e nÃ£o feche a pÃ¡gina durante o envio. Ã‰ normal que o envio em massa de mensagens leve algum tempo: SerÃ¡ avisado quando o processo terminar.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
@@ -961,7 +961,7 @@ $ap_translation = [
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'A sua Mensagem',
-	'YourMessageInfo'			=> 'A mensagem só pode conter texto puro. Todos os códigos serão removidos ao enviar.',
+	'YourMessageInfo'			=> 'A mensagem sÃ³ pode conter texto puro. Todos os cÃ³digos serÃ£o removidos ao enviar.',
 
 	'MessageLanguage'			=> 'Language',
 	'MessageLanguageInfo'		=> '',
@@ -1106,7 +1106,7 @@ $ap_translation = [
 	'UserRealname'				=> 'Realname',
 	'UserEmail'					=> 'Email',
 	'UserIP'					=> 'IP',
-	'UserLanguage'				=> 'Língua',
+	'UserLanguage'				=> 'LÃ­ngua',
 	'UserSignuptime'			=> 'Signuptime',
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
@@ -1122,13 +1122,13 @@ $ap_translation = [
 	'LogGroupRemoved'			=> 'Removed group ##%1##',
 
 	'GroupsMembersFor'			=> 'Members for Group',
-	'GroupsDescription'			=> 'Descrição',
+	'GroupsDescription'			=> 'DescriÃ§Ã£o',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
 	'GroupsActive'				=> 'Active',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
-	'GroupsAlreadyExists'		=> 'Este grupo já existe.',
+	'GroupsAlreadyExists'		=> 'Este grupo jÃ¡ existe.',
 	'GroupsAdded'				=> 'Grupo adicionado com sucesso.',
 	'GroupsRenamed'				=> 'Grupo renomeado com sucesso.',
 	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
@@ -1137,7 +1137,7 @@ $ap_translation = [
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
 	'GroupsDelete'				=> 'Tens a certeza que queres remover o grupo %1',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
-	'GroupsIsSystem'			=> 'O Grupo %1 pertence ao sistema e não pode ser removido.',
+	'GroupsIsSystem'			=> 'O Grupo %1 pertence ao sistema e nÃ£o pode ser removido.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsSaveButton'			=> 'Enviar',
 	'GroupsCancelButton'		=> 'Cancelar',
@@ -1156,7 +1156,7 @@ $ap_translation = [
 	'MembersAdded'				=> 'Adicionado um novo membro ao grupo com sucesso.',
 	'MembersRemove'				=> 'Tens a certeza que queres remover o membro %1?',
 	'MembersRemoved'			=> 'O membro foi retirado do grupo.',
-	'MembersDeleteInfo'			=> '* Nota: A mudança afetará todos os membros designados a esse grupo.',
+	'MembersDeleteInfo'			=> '* Nota: A mudanÃ§a afetarÃ¡ todos os membros designados a esse grupo.',
 
 	// Statistics module
 	'DbStatSection'				=> 'Database Statistics',

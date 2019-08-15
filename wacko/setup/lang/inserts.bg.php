@@ -7,7 +7,7 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Äîáðå äîøëè âúâ âúëøåáíèÿ ñâÿò íà ((WackoWiki:Doc/English WackoWiki)).**\n\nÊëèêíåòå íà ëèíêà äîëó, çà äà ðåäàêòèðàòå òàçè ñòðàíèöà (ñòàâà ñúùî è ñàìî ñ äâîéíî êëèêàíå íà ìèøêàòà íÿêúäå íà ñòðàíèöàòà).\n\nÄîêóìåíòàöèÿ (íà àíãëèéñêè) èìà íà WackoWiki:Doc/Bulgarian.\n\nÏîëåçíè íåùà: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).\n\n";
+		$home_page_body		= "file:/wacko_logo.png?right\n**Ð”Ð¾Ð±Ñ€Ðµ Ð´Ð¾ÑˆÐ»Ð¸ Ð²ÑŠÐ² Ð²ÑŠÐ»ÑˆÐµÐ±Ð½Ð¸Ñ ÑÐ²ÑÑ‚ Ð½Ð° ((WackoWiki:Doc/English WackoWiki)).**\n\nÐšÐ»Ð¸ÐºÐ½ÐµÑ‚Ðµ Ð½Ð° Ð»Ð¸Ð½ÐºÐ° Ð´Ð¾Ð»Ñƒ, Ð·Ð° Ð´Ð° Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð°Ñ‚Ðµ Ñ‚Ð°Ð·Ð¸ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ð° (ÑÑ‚Ð°Ð²Ð° ÑÑŠÑ‰Ð¾ Ð¸ ÑÐ°Ð¼Ð¾ Ñ Ð´Ð²Ð¾Ð¹Ð½Ð¾ ÐºÐ»Ð¸ÐºÐ°Ð½Ðµ Ð½Ð° Ð¼Ð¸ÑˆÐºÐ°Ñ‚Ð° Ð½ÑÐºÑŠÐ´Ðµ Ð½Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ð°Ñ‚Ð°).\n\nÐ”Ð¾ÐºÑƒÐ¼ÐµÐ½Ñ‚Ð°Ñ†Ð¸Ñ (Ð½Ð° Ð°Ð½Ð³Ð»Ð¸Ð¹ÑÐºÐ¸) Ð¸Ð¼Ð° Ð½Ð° WackoWiki:Doc/Bulgarian.\n\nÐŸÐ¾Ð»ÐµÐ·Ð½Ð¸ Ð½ÐµÑ‰Ð°: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], '', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
@@ -18,25 +18,25 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'êàòåãîðèÿ',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Ãðóïè',			'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Ïîòðåáèòåëè',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'ÐºÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ',		'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'Ð“Ñ€ÑƒÐ¿Ð¸',			'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'ÐŸÐ¾Ñ‚Ñ€ÐµÐ±Ð¸Ñ‚ÐµÐ»Ð¸',		'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Ïîìîù',			'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Óñëîâèÿ çà ïîëçâàíå',			'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Ïîâåðèòåëíîñò',	'',						$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'ÐŸÐ¾Ð¼Ð¾Ñ‰',			'',						$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],		'Ð£ÑÐ»Ð¾Ð²Ð¸Ñ Ð·Ð° Ð¿Ð¾Ð»Ð·Ð²Ð°Ð½Ðµ',			'',			$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'ÐŸÐ¾Ð²ÐµÑ€Ð¸Ñ‚ÐµÐ»Ð½Ð¾ÑÑ‚',	'',						$page_lang, 'Admins', false, false);
 
-	#insert_page('Ñëó÷àéíàÑòðàíèöà',		'Ñëó÷àéíà ñòðàíèöà',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Ñëó÷àåí');
+	#insert_page('Ð¡Ð»ÑƒÑ‡Ð°Ð¹Ð½Ð°Ð¡Ñ‚Ñ€Ð°Ð½Ð¸Ñ†Ð°',		'Ð¡Ð»ÑƒÑ‡Ð°Ð¹Ð½Ð° ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ð°',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Ð¡Ð»ÑƒÑ‡Ð°ÐµÐ½');
 }
 
-insert_page('Êàòàëîã',			'Êàòàëîã',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Êàòàëîã');
-insert_page('ÏîñëåäíèÏðîìåíè',	'Ïîñëåäíè Ïðîìåíè',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Ïðîìåíè');
-insert_page('ÍîâèÊîìåíòàðè',	'Íîâè Êîìåíòàðè',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Êîìåíòàðè');
+insert_page('ÐšÐ°Ñ‚Ð°Ð»Ð¾Ð³',			'ÐšÐ°Ñ‚Ð°Ð»Ð¾Ð³',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'ÐšÐ°Ñ‚Ð°Ð»Ð¾Ð³');
+insert_page('ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸ÐŸÑ€Ð¾Ð¼ÐµÐ½Ð¸',	'ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸ ÐŸÑ€Ð¾Ð¼ÐµÐ½Ð¸',	'{{changes}}',			$page_lang, 'Admins', false, true, 'ÐŸÑ€Ð¾Ð¼ÐµÐ½Ð¸');
+insert_page('ÐÐ¾Ð²Ð¸ÐšÐ¾Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸',	'ÐÐ¾Ð²Ð¸ ÐšÐ¾Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸',	'{{commented}}',		$page_lang, 'Admins', false, true, 'ÐšÐ¾Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸');
 
-insert_page('Ðåãèñòðàöèÿ',		'Ðåãèñòðàöèÿ',		'{{registration}}',		$page_lang, 'Admins', false, false);
+insert_page('Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ',		'Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ',		'{{registration}}',		$page_lang, 'Admins', false, false);
 insert_page('Password',			'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Òúðñåíå',			'Òúðñåíå',			'{{search}}',			$page_lang, 'Admins', false, false);
-insert_page('âëèçàíå',			'âëèçàíå',			'{{login}}',			$page_lang, 'Admins', false, false);
+insert_page('Ð¢ÑŠÑ€ÑÐµÐ½Ðµ',			'Ð¢ÑŠÑ€ÑÐµÐ½Ðµ',			'{{search}}',			$page_lang, 'Admins', false, false);
+insert_page('Ð²Ð»Ð¸Ð·Ð°Ð½Ðµ',			'Ð²Ð»Ð¸Ð·Ð°Ð½Ðµ',			'{{login}}',			$page_lang, 'Admins', false, false);
 insert_page('Settings',			'Settings',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 ?>

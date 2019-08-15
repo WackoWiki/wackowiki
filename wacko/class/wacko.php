@@ -80,9 +80,9 @@ class Wacko
 		'left'		=> ['_before'],
 	];
 	var $translit_macros = [
-		'âèêè'		=> 'wiki',
-		'âàêà'		=> 'wacko',
-		'âåá'		=> 'web',
+		'Ã¢Ã¨ÃªÃ¨'		=> 'wiki',
+		'Ã¢Ã ÃªÃ '		=> 'wacko',
+		'Ã¢Ã¥Ã¡'		=> 'web',
 	];
 	var $time_intervals = [
 		365*DAYSECS	=> 'Year',
@@ -3415,13 +3415,13 @@ class Wacko
 
 		if ($this->db->urls_underscores == 1)
 		{
-			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶' . $this->language['UPPERNUM'] . ')/', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶\/)/', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')¶(' . $this->language['UPPERNUM'] . ')($|\b)/', '\\1\\2', $tag);
-			$tag = preg_replace('/\/¶(' . $this->language['UPPERNUM'] . ')/', '/\\1', $tag);
-			$tag = str_replace('¶', '_', $tag);
+			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1Â¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1Â¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPER'] . ')Â¶(?=' . $this->language['UPPER'] . 'Â¶' . $this->language['UPPERNUM'] . ')/', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPER'] . ')Â¶(?=' . $this->language['UPPER'] . 'Â¶\/)/', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')Â¶(' . $this->language['UPPERNUM'] . ')($|\b)/', '\\1\\2', $tag);
+			$tag = preg_replace('/\/Â¶(' . $this->language['UPPERNUM'] . ')/', '/\\1', $tag);
+			$tag = str_replace('Â¶', '_', $tag);
 		}
 
 		return $tag;
@@ -5495,8 +5495,8 @@ class Wacko
 
 		// substitutions table
 		$table = [
-			'cyr' => 'ÀÂÑÄÅÍÊÌÎÐÒÕÓàñåêìïîðãèòõó0áI1',
-			'lat' => 'ABCDEHKMOPTXYacekmnoprutxyÎ6ll',
+			'cyr' => 'Ã€Ã‚Ã‘Ã„Ã…ÃÃŠÃŒÃŽÃÃ’Ã•Ã“Ã Ã±Ã¥ÃªÃ¬Ã¯Ã®Ã°Ã£Ã¨Ã²ÃµÃ³0Ã¡I1',
+			'lat' => 'ABCDEHKMOPTXYacekmnoprutxyÃŽ6ll',
 		];
 
 		// splitting input name into array
@@ -8230,7 +8230,7 @@ class Wacko
 		{
 			case 1:
 				if (   !preg_match('/[0-9]+/',			$pwd)
-					|| !preg_match('/[a-zA-Zà-ÿÀ-ß]+/',	$pwd))
+					|| !preg_match('/[a-zA-ZÃ -Ã¿Ã€-ÃŸ]+/',	$pwd))
 				{
 					++$error;
 				}
@@ -8238,8 +8238,8 @@ class Wacko
 
 			case 2:
 				if (   !preg_match('/[0-9]+/',		$pwd)
-					|| !preg_match('/[A-ZÀ-ß]+/',	$pwd)
-					|| !preg_match('/[a-zà-ÿ]+/',	$pwd))
+					|| !preg_match('/[A-ZÃ€-ÃŸ]+/',	$pwd)
+					|| !preg_match('/[a-zÃ -Ã¿]+/',	$pwd))
 				{
 					++$error;
 				}
@@ -8247,8 +8247,8 @@ class Wacko
 
 			case 3:
 				if (   !preg_match('/[0-9]+/',		$pwd)
-					|| !preg_match('/[A-ZÀ-ß]+/',	$pwd)
-					|| !preg_match('/[a-zà-ÿ]+/',	$pwd)
+					|| !preg_match('/[A-ZÃ€-ÃŸ]+/',	$pwd)
+					|| !preg_match('/[a-zÃ -Ã¿]+/',	$pwd)
 					|| !preg_match('/[\W]+/',		$pwd))
 				{
 					++$error;
@@ -9077,7 +9077,7 @@ class Wacko
 		else
 		{
 			$diff_class = 'diff-zero';
-			$size_delta = '&plusmn;' . $size_delta; // ± plus-minus sign
+			$size_delta = '&plusmn;' . $size_delta; // Â± plus-minus sign
 		}
 
 		return '<span class="' . $diff_class . '">' . $size_delta . '</span>';
