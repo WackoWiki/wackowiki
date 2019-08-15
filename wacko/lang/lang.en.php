@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_language = [
 	'name'					=> "English",
 	'code'					=> "en",
-	'charset'				=> "windows-1252",
+	'charset'				=> "utf-8",
 	'locale'				=> "en_US",
 	'utfdecode'				=> [],
 	'UPPER_P'				=> "A-Z\xc0-\xd6\xd8-\xdd",

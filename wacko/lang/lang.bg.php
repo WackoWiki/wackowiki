@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 $wacko_language = [
 	'name'					=> "Bulgarian",
 	'code'					=> "bg",
-	'charset'				=> "windows-1251",
-	'locale'				=> ["bg_BG.CP1251","bg_BG","bulgarian","bg"],
+	'charset'				=> "utf-8",
+	'locale'				=> ["bg_BG","bulgarian","bg"],
 	'utfdecode'				=> [],
 	'UPPER_P'				=> "A-Z\xc0-\xdf\xa8",
 	'LOWER_P'				=> "a-z\xe0-\xff\xb8\/\'",

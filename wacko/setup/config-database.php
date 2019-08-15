@@ -131,19 +131,16 @@ foreach ($drivers as $k => $driver)
  */
 
 $charsets	= [];
-# $charsets[]	= ['utf8mb4', 'utf8mb4', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
-$charsets[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
-$charsets[]	= ['latin1',	'latin1',	'cp1252 West European'];			// default
-$charsets[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European'];		// not tested
-$charsets[]	= ['greek',		'greek',	'ISO 8859-7 Greek'];				// not tested
+$charsets[]	= ['utf8mb4',	'utf8mb4',	'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
+$charsets[]	= ['utf8',		'utf8',		'UTF-8 Unicode'];	// default
 
 echo '	<select id="database_charset" name="config[database_charset]" required>';
 
-// set default database charset to cp1251 Windows Cyrillic for Russian
-if ($config['is_update'] == false && $config['language'] == 'ru')
+// set default database charset to utf8 when innodb_large_prefix option is NOT enabled
+/* if ($config['is_update'] == false && $config['innodb_large_prefix'] == true)
 {
-	$config['database_charset'] = 'cp1251';
-}
+	$config['database_charset'] = 'utf8';
+} */
 
 foreach ($charsets as $charset)
 {
@@ -172,7 +169,7 @@ if ($config['is_update'] == false)
 
 	$engines	= [];
 	$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB (' . $lang['Recommended'] . ')'];	// default
-	$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];
+	#$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];									// XXX: depreciated
 
 	foreach ($engines as $k => $engine)
 	{
