@@ -151,13 +151,13 @@ class DelphiHightlighter{
 		if (!strlen($this->code))	return FALSE;
 		if (!sizeof($array))		return FALSE;
 
-		// On va essayer de comparer le caractere courrant avec le 1°
+		// On va essayer de comparer le caractere courrant avec le 1Â°
 		// caractere de chaque premier delimiteur
 		foreach ($array as $delimiterarray)
 		{
 			$delimiter1 = $delimiterarray[0];
 
-			// Si le 1° char correspond
+			// Si le 1Â° char correspond
 			if ($this->char == $delimiter1[0])
 			{
 				$match = TRUE;

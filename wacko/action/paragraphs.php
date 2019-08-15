@@ -60,7 +60,7 @@ if (!$style) $style = 'before';
 			else
 			{
 				$num = str_replace('-', "&#0150;&sect;",
-						str_replace('p', 'น', $toc[$i][0] ));
+						str_replace('p', 'ยน', $toc[$i][0] ));
 			}
 
 			// editing TOC containing @66

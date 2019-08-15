@@ -1,11 +1,11 @@
 <?php
 $theme_translation = [
-	'ACLStoreButton' => 'ñîõðàíèòü',
-	'ACLCancelButton' => 'îòìåíà',
-	'EditStoreButton' => 'ñîõðàíèòü',
-	'EditRe-EditButton' => 'ïðîäîëæèòü ïðàâêó',
-	'EditCancelButton' => 'îòìåíà',
-	'EditPreviewButton' => 'ïðåäïðîñìîòð',
+	'ACLStoreButton' => 'Ã±Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼',
+	'ACLCancelButton' => 'Ã®Ã²Ã¬Ã¥Ã­Ã ',
+	'EditStoreButton' => 'Ã±Ã®ÃµÃ°Ã Ã­Ã¨Ã²Ã¼',
+	'EditRe-EditButton' => 'Ã¯Ã°Ã®Ã¤Ã®Ã«Ã¦Ã¨Ã²Ã¼ Ã¯Ã°Ã Ã¢ÃªÃ³',
+	'EditCancelButton' => 'Ã®Ã²Ã¬Ã¥Ã­Ã ',
+	'EditPreviewButton' => 'Ã¯Ã°Ã¥Ã¤Ã¯Ã°Ã®Ã±Ã¬Ã®Ã²Ã°',
 
 ];
 ?>

@@ -18,7 +18,7 @@ $lang = [
 	// pages
 	'category_page'		=> 'Kategoria',
 	'groups_page'		=> 'Grupy',
-	'users_page'		=> 'U¿ytkownicy',
+	'users_page'		=> 'UÅ¼ytkownicy',
 
 	#'help_page'			=> 'Pomoc',
 	#'terms_page'		=> 'Terms',
@@ -37,7 +37,7 @@ $lang = [
 'Continue' => 'Kontynuuj',
 'Back' => 'Plecy',
 'Recommended' => 'zalecane',
-'InvalidAction' => 'Nieprawid³owe dzia³anie',
+'InvalidAction' => 'NieprawidÅ‚owe dziaÅ‚anie',
 
 /*
    Language Selection Page
@@ -144,7 +144,7 @@ $lang = [
 'Prefix' => 'Przedrostek tabeli',
 'ErrorNoDbDriverDetected' => 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
 'ErrorNoDbDriverSelected' => 'No database driver has been selected, please pick one from the list.',
-'DeleteTables' => 'Usuwanie istniej±cych tabel?',
+'DeleteTables' => 'Usuwanie istniejÄ…cych tabel?',
 'DeleteTablesDesc' => 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
 'ConfirmTableDeletion' => 'Are you sure you want to delete all current wiki tables?',
 
@@ -208,7 +208,7 @@ $lang = [
 'FinalStep' => 'Ostatnim krokiem',
 'Writing' => 'Zapisywanie pliku konfiguracyjnego',
 'RemovingWritePrivilege' => 'Removing Write Privilege',
-'InstallationComplete' => 'Instalacja zakoñczona',
+'InstallationComplete' => 'Instalacja zakoÅ„czona',
 'ThatsAll' => 'To wszystko! Mo&#380;esz teraz <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'Jednak, doradzamy usuni&#281;cie praw zapisu do pliku %1 po tym jak zosta&#322; on zapisany. Zagro&#380;eniem dla bezpiecze&#324;stwa jest pozostawienie pliku z prawem do zapisu!',

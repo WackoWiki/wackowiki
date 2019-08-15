@@ -1,11 +1,11 @@
 <?php
-$theme_translation = [	'EditIcon' => '<img src="' . $this->db->theme_url . 'icon/edit.png" alt="Редактировать вложенную страницу">',
-	'ACLStoreButton'  => 'Сохранить',
-	'ACLCancelButton' => 'Отменить\nи вернуться',
-	'ACLAccessDenied' => '<em>Вы не владелец этой страницы.</em>',
-	'EditStoreButton' => 'Сохранить изменения',
-	'EditCancelButton'  => 'Отменить\nизменения',
-	'EditPreviewButton' => 'Предварительный просмотр',
+$theme_translation = [	'EditIcon' => '<img src="' . $this->db->theme_url . 'icon/edit.png" alt="ГђГҐГ¤Г ГЄГІГЁГ°Г®ГўГ ГІГј ГўГ«Г®Г¦ГҐГ­Г­ГіГѕ Г±ГІГ°Г Г­ГЁГ¶Гі">',
+	'ACLStoreButton'  => 'Г‘Г®ГµГ°Г Г­ГЁГІГј',
+	'ACLCancelButton' => 'ГЋГІГ¬ГҐГ­ГЁГІГј\nГЁ ГўГҐГ°Г­ГіГІГјГ±Гї',
+	'ACLAccessDenied' => '<em>Г‚Г» Г­ГҐ ГўГ«Г Г¤ГҐГ«ГҐГ¶ ГЅГІГ®Г© Г±ГІГ°Г Г­ГЁГ¶Г».</em>',
+	'EditStoreButton' => 'Г‘Г®ГµГ°Г Г­ГЁГІГј ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї',
+	'EditCancelButton'  => 'ГЋГІГ¬ГҐГ­ГЁГІГј\nГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї',
+	'EditPreviewButton' => 'ГЏГ°ГҐГ¤ГўГ Г°ГЁГІГҐГ«ГјГ­Г»Г© ГЇГ°Г®Г±Г¬Г®ГІГ°',
 
 ];
 ?>

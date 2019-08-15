@@ -353,7 +353,7 @@ $ap_translation = [
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
 	'EditingSection'			=> 'Redigering',
-	'EditSummary'				=> 'Opsummér redigering',
+	'EditSummary'				=> 'OpsummÃ©r redigering',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Minor edit',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
@@ -759,7 +759,7 @@ $ap_translation = [
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action <code>{{orphaned}}</code>).',
 	'SandboxPage'				=> 'Sandbox',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
-	'HelpPage'					=> 'Hjælp',
+	'HelpPage'					=> 'HjÃ¦lp',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 
 
@@ -820,13 +820,13 @@ $ap_translation = [
 	'ResyncOptions'				=> 'Yderligere muligheder',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Disse indstillinger anvendes af webstedet ved forsendelse af emails til tilmeldte brugere. Bemærk venligst at denne emailadresse skal være gyldig, da enhver tilbagesendt eller vildfaren email sandsynligvis vil blive returneret til denne emailaddresse. Hvis din vært ikke lader dig bruge den indbyggede (PHP-baserede) emailservice, kan du i stedet sende emails direkte igennem SMTP. Dette kræver adressen på en passende server (spørg om nødvendigt din vært). Hvis serveren kræver autentifikation (og kun hvis den gør) angives det nødvendige brugernavn, kodeord og autentifikationsmetoden.',
+	'EmaiSettingsInfo'			=> 'Disse indstillinger anvendes af webstedet ved forsendelse af emails til tilmeldte brugere. BemÃ¦rk venligst at denne emailadresse skal vÃ¦re gyldig, da enhver tilbagesendt eller vildfaren email sandsynligvis vil blive returneret til denne emailaddresse. Hvis din vÃ¦rt ikke lader dig bruge den indbyggede (PHP-baserede) emailservice, kan du i stedet sende emails direkte igennem SMTP. Dette krÃ¦ver adressen pÃ¥ en passende server (spÃ¸rg om nÃ¸dvendigt din vÃ¦rt). Hvis serveren krÃ¦ver autentifikation (og kun hvis den gÃ¸r) angives det nÃ¸dvendige brugernavn, kodeord og autentifikationsmetoden.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
-	'EmailFunctionName'			=> 'Navn på emailfunktion',
-	'EmailFunctionNameInfo'		=> 'Navnet på den anvendte emailfunktion ved forsendelse af emails gennem PHP.',
-	'UseSmtpInfo'				=> 'Vælg <code>SMTP</code>, hvis du vil eller skal bruge en navngiven server til at sende email i stedet for boardets indbyggede emailfunktion.',
+	'EmailFunctionName'			=> 'Navn pÃ¥ emailfunktion',
+	'EmailFunctionNameInfo'		=> 'Navnet pÃ¥ den anvendte emailfunktion ved forsendelse af emails gennem PHP.',
+	'UseSmtpInfo'				=> 'VÃ¦lg <code>SMTP</code>, hvis du vil eller skal bruge en navngiven server til at sende email i stedet for boardets indbyggede emailfunktion.',
 
 	'EnableEmail'				=> 'Boardets emailsystem er',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -849,19 +849,19 @@ $ap_translation = [
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
 	'SmtpConnectionMode'		=> 'Godkendelsesmetode for SMTP',
-	'SmtpConnectionModeInfo'	=> 'Bruges kun, hvis et brugernavn og kodeord er angivet, spørg din vært, hvis du er usikker på hvilken metode, der skal bruges.',
+	'SmtpConnectionModeInfo'	=> 'Bruges kun, hvis et brugernavn og kodeord er angivet, spÃ¸rg din vÃ¦rt, hvis du er usikker pÃ¥ hvilken metode, der skal bruges.',
 	'SmtpPassword'				=> 'SMTP-kodeord',
-	'SmtpPasswordInfo'			=> 'Indtast kun et kodeord, hvis din SMTP-server kræver det.<br><em><strong>Advarsel:</strong> Kodeordet bliver lagret i databasen i klar og ukrypteret tekst, og vil være synligt for alle med adgang til databasen eller til denne konfigurationsside.</em>',
+	'SmtpPasswordInfo'			=> 'Indtast kun et kodeord, hvis din SMTP-server krÃ¦ver det.<br><em><strong>Advarsel:</strong> Kodeordet bliver lagret i databasen i klar og ukrypteret tekst, og vil vÃ¦re synligt for alle med adgang til databasen eller til denne konfigurationsside.</em>',
 	'SmtpPort'					=> 'SMTP-serverport',
 	'SmtpPortInfo'				=> 'Skift kun denne, hvis du ved, at din SMTP-server benytter en anden port. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'Adresse på SMTP-server',
-	'SmtpServerInfo'			=> 'Bemærk at du skal anføre den protokol din server anvender. Hvis der anvendes SSL, anføres <code>ssl://mail.example.com</code>',
+	'SmtpServer'				=> 'Adresse pÃ¥ SMTP-server',
+	'SmtpServerInfo'			=> 'BemÃ¦rk at du skal anfÃ¸re den protokol din server anvender. Hvis der anvendes SSL, anfÃ¸res <code>ssl://mail.example.com</code>',
 	'SmtpSettings'				=> 'SMTP-indstillinger',
 	'SmtpUsername'				=> 'SMTP-brugernavn',
-	'SmtpUsernameInfo'			=> 'Indtast kun et brugernavn, hvis din SMTP-server kræver det.',
+	'SmtpUsernameInfo'			=> 'Indtast kun et brugernavn, hvis din SMTP-server krÃ¦ver det.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Her kan du ændre og vedligeholde indstillingerne for vedhæftede filer og tilknyttede specialkategorier.',
+	'UploadSettingsInfo'		=> 'Her kan du Ã¦ndre og vedligeholde indstillingerne for vedhÃ¦ftede filer og tilknyttede specialkategorier.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -869,21 +869,21 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Maksimal filstørrelse',
-	'UploadMaxFilesizeInfo'		=> 'Er størrelsen sat til 0, er det alene din interne PHP-konfiguration, der begrænser filstørrelsen.',
-	'UploadQuota'				=> 'Den totale kvote for vedhæftede filer',
-	'UploadQuotaInfo'			=> 'Maksimum drevplads tilgængelig for vedhæftede filer på hele wiki, <code>0</code> betyder ubegrænset.',
+	'UploadMaxFilesize'			=> 'Maksimal filstÃ¸rrelse',
+	'UploadMaxFilesizeInfo'		=> 'Er stÃ¸rrelsen sat til 0, er det alene din interne PHP-konfiguration, der begrÃ¦nser filstÃ¸rrelsen.',
+	'UploadQuota'				=> 'Den totale kvote for vedhÃ¦ftede filer',
+	'UploadQuotaInfo'			=> 'Maksimum drevplads tilgÃ¦ngelig for vedhÃ¦ftede filer pÃ¥ hele wiki, <code>0</code> betyder ubegrÃ¦nset.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
-	'CheckMimetype'				=> 'Kontrol af vedhæftede filer',
-	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
+	'CheckMimetype'				=> 'Kontrol af vedhÃ¦ftede filer',
+	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfÃ¸rer fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er Ã¥rsag hertil.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Opret miniature',
 	'CreateThumbnailInfo'		=> 'Der oprettes altid en miniature.',
-	'MaxThumbWidth'				=> 'Maksimal bredde på miniature i pixels',
-	'MaxThumbWidthInfo'			=> 'Miniaturer vil ikke blive oprettet bredere end værdien defineret her.',
-	'MinThumbFilesize'			=> 'Grænse for oprettelse af miniature',
+	'MaxThumbWidth'				=> 'Maksimal bredde pÃ¥ miniature i pixels',
+	'MaxThumbWidthInfo'			=> 'Miniaturer vil ikke blive oprettet bredere end vÃ¦rdien defineret her.',
+	'MinThumbFilesize'			=> 'GrÃ¦nse for oprettelse af miniature',
 	'MinThumbFilesizeInfo'		=> 'Opret ikke miniature for billeder der er mindre end.',
 
 	// Deleted module
@@ -949,7 +949,7 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Her kan du sende en email til enten alle dine brugere, eller til de brugere i en specifik gruppe som <strong>har muligheden for at modtage masse-emails aktiveret</strong>. Når en masse-email afsendes bliver administrator sat som afsender, og afsendes med modtagere som blind kopi, som derfor ikke kan se øvrige modtagere. Som standard afsendes emailen til 20 brugere ad gangen. Vær tålmodig, når du sender email til en stor gruppe af personer og stop ikke siden halvvejs. Afsendelsen af en masse-email kan tage lang tid, men du bliver informeret når scriptet er fuldført.',
+	'MassemailInfo'				=> 'Her kan du sende en email til enten alle dine brugere, eller til de brugere i en specifik gruppe som <strong>har muligheden for at modtage masse-emails aktiveret</strong>. NÃ¥r en masse-email afsendes bliver administrator sat som afsender, og afsendes med modtagere som blind kopi, som derfor ikke kan se Ã¸vrige modtagere. Som standard afsendes emailen til 20 brugere ad gangen. VÃ¦r tÃ¥lmodig, nÃ¥r du sender email til en stor gruppe af personer og stop ikke siden halvvejs. Afsendelsen af en masse-email kan tage lang tid, men du bliver informeret nÃ¥r scriptet er fuldfÃ¸rt.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
@@ -961,7 +961,7 @@ $ap_translation = [
 	'MessageSubject'			=> 'Subject',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Emailens tekst',
-	'YourMessageInfo'			=> 'Bemærk venligst at du kun bør skrive ren tekst. Al opmærkning vil blive fjernet inden afsendelse.',
+	'YourMessageInfo'			=> 'BemÃ¦rk venligst at du kun bÃ¸r skrive ren tekst. Al opmÃ¦rkning vil blive fjernet inden afsendelse.',
 
 	'MessageLanguage'			=> 'Language',
 	'MessageLanguageInfo'		=> '',

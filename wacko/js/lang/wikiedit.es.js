@@ -44,12 +44,12 @@ lang = {
 	Link :					"Enlace",
 	TextForLinking :		"Texto del enlace",
 	
-	HelpAboutTip : 			' Teclas rápidas:\n'+
+	HelpAboutTip : 			' Teclas rÃ¡pidas:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
 							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - T�tulo 1..4\n'+
+							' Ctrl+Shift+1 .. 4 - Título 1..4\n'+
 							' Alt+I or Ctrl+T - Indent\n'+
 							' Alt+U or Ctrl+Shift+T - Unindent\n'+
 							' Ctrl+J - MarkUp (!!)\n'+

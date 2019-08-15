@@ -18,7 +18,7 @@ $lang = [
 	// pages
 	'category_page'		=> 'Categoria',
 	'groups_page'		=> 'Grupos',
-	'users_page'		=> 'Usuários',
+	'users_page'		=> 'UsuÃ¡rios',
 
 	#'help_page'		=> 'Help',
 	#'terms_page'		=> 'Terms',
@@ -33,7 +33,7 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title' => 'WackoWiki Instalação',
+'Title' => 'WackoWiki InstalaÃ§Ã£o',
 'Continue' => 'Continuar',
 'Back' => 'Voltar',
 'Recommended' => 'recomendado',
@@ -42,7 +42,7 @@ $lang = [
 /*
    Language Selection Page
 */
-'lang' => 'Configuração de idioma',
+'lang' => 'ConfiguraÃ§Ã£o de idioma',
 'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">5.0.x</code>.',
 'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>.  The next few pages will guide you through the upgrade process.',
 'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <code class="version">%1</code>.  The next few pages will guide you through the installation process.',
@@ -75,7 +75,7 @@ $lang = [
 /*
    Site Config Page
 */
-'site-config' => 'Configuração do Site',
+'site-config' => 'ConfiguraÃ§Ã£o do Site',
 'SiteName' => 'Nome da wiki',
 'SiteNameDesc' => 'Please enter the name of your Wiki site.',
 'HomePage' => 'Home Page',
@@ -123,7 +123,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Configuração do banco de dados',
+'database-config' => 'ConfiguraÃ§Ã£o do banco de dados',
 'DBDriver' => 'Driver',
 'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
@@ -151,8 +151,8 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Instalação do banco de dados',
-'TestingConfiguration' => 'Teste de Configuração',
+'database-install' => 'InstalaÃ§Ã£o do banco de dados',
+'TestingConfiguration' => 'Teste de ConfiguraÃ§Ã£o',
 'TestConnectionString' => 'Testing database connection settings',
 'TestDatabaseExists' => 'Checking if the database you specified exists',
 'InstallingTables' => 'Instalando Tabelas',
@@ -204,11 +204,11 @@ $lang = [
 /*
    Write Config Page
 */
-'write-config' => 'Escrever ficheiro de configuração',
+'write-config' => 'Escrever ficheiro de configuraÃ§Ã£o',
 'FinalStep' => 'Passo final',
 'Writing' => 'Writing Configuration File',
 'RemovingWritePrivilege' => 'Removing Write Privilege',
-'InstallationComplete' => 'Instalação completa',
+'InstallationComplete' => 'InstalaÃ§Ã£o completa',
 'ThatsAll' => 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!',

@@ -7,10 +7,10 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Καλώς ήλθατε στο ((WackoWiki:Doc/English WackoWiki)) site σας!**\n\nΠατήστε στον σύνδεμο \"Επεξεργασία Σελίδας\" στο κάτω μέρος της σελίδας για να ξεκινήσετε.\n\nΗ τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.\n\nΧρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).\n\n";
+		$home_page_body		= "file:/wacko_logo.png?right\n**ΞΞ±Ξ»ΟΟ‚ Ξ®Ξ»ΞΈΞ±Ο„Ξµ ΟƒΟ„ΞΏ ((WackoWiki:Doc/English WackoWiki)) site ΟƒΞ±Ο‚!**\n\nΞ Ξ±Ο„Ξ®ΟƒΟ„Ξµ ΟƒΟ„ΞΏΞ½ ΟƒΟΞ½Ξ΄ΞµΞΌΞΏ \"Ξ•Ο€ΞµΞΎΞµΟΞ³Ξ±ΟƒΞ―Ξ± Ξ£ΞµΞ»Ξ―Ξ΄Ξ±Ο‚\" ΟƒΟ„ΞΏ ΞΊΞ¬Ο„Ο‰ ΞΌΞ­ΟΞΏΟ‚ Ο„Ξ·Ο‚ ΟƒΞµΞ»Ξ―Ξ΄Ξ±Ο‚ Ξ³ΞΉΞ± Ξ½Ξ± ΞΎΞµΞΊΞΉΞ½Ξ®ΟƒΞµΟ„Ξµ.\n\nΞ— Ο„ΞµΞΊΞΌΞ·ΟΞ―Ο‰ΟƒΞ· ΞΌΟ€ΞΏΟΞµΞ― Ξ½Ξ± Ξ²ΟΞµΞΈΞµΞ― ΟƒΟ„ΞΏ WackoWiki:Doc/English.\n\nΞ§ΟΞ®ΟƒΞΉΞΌΞµΟ‚ Ξ£ΞµΞ»Ξ―Ξ΄ΞµΟ‚: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
-		insert_page($config['root_page'], 'Αρχική σελίδα', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
+		insert_page($config['root_page'], 'Ξ‘ΟΟ‡ΞΉΞΊΞ® ΟƒΞµΞ»Ξ―Ξ΄Ξ±', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
 	}
 	else
@@ -18,19 +18,19 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Κατηγορία',	'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Ομάδες',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Χρήστες',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],	'ΞΞ±Ο„Ξ·Ξ³ΞΏΟΞ―Ξ±',	'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],		'ΞΞΌΞ¬Ξ΄ΞµΟ‚',		'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],		'Ξ§ΟΞ®ΟƒΟ„ΞµΟ‚',		'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Βοήθεια',				'',				$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Όροι Χρήσης',			'',				$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Πολιτική προσωπικών δεδομένων',	'',	$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'Ξ’ΞΏΞ®ΞΈΞµΞΉΞ±',				'',				$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],		'ΞΟΞΏΞΉ Ξ§ΟΞ®ΟƒΞ·Ο‚',			'',				$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'Ξ ΞΏΞ»ΞΉΟ„ΞΉΞΊΞ® Ο€ΟΞΏΟƒΟ‰Ο€ΞΉΞΊΟΞ½ Ξ΄ΞµΞ΄ΞΏΞΌΞ­Ξ½Ο‰Ξ½',	'',	$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Τυχαία σελίδα',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Τυχαία');
+	#insert_page('RandomPage',				'Ξ¤Ο…Ο‡Ξ±Ξ―Ξ± ΟƒΞµΞ»Ξ―Ξ΄Ξ±',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Ξ¤Ο…Ο‡Ξ±Ξ―Ξ±');
 }
 
-insert_page('RecentChanges',		'Recent Changes',		'{{changes}}',		$page_lang, 'Admins', false, true, 'Αλλαγές');
-insert_page('RecentlyCommented',	'Recently Commented',	'{{commented}}',	$page_lang, 'Admins', false, true, 'Σχόλια');
+insert_page('RecentChanges',		'Recent Changes',		'{{changes}}',		$page_lang, 'Admins', false, true, 'Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ­Ο‚');
+insert_page('RecentlyCommented',	'Recently Commented',	'{{commented}}',	$page_lang, 'Admins', false, true, 'Ξ£Ο‡ΟΞ»ΞΉΞ±');
 insert_page('PageIndex',			'Page Index',			'{{pageindex}}',	$page_lang, 'Admins', false, true, 'Index');
 
 insert_page('Registration',			'Registration',		'{{registration}}',		$page_lang, 'Admins', false, false);

@@ -49,8 +49,8 @@ class Typografica
 							]
 						];
 
-	var $glueleft	= ["ğèñ\.", "òàáë\.", "ñì\.", "èì\.", "óë\.", "ïåğ\.", "êâ\.", "îôèñ", "îô\.", "ã\."]; // contains some Russian abberviations, also see below
-	var $glueright	= ["ğóá\.", "êîï\.", "ó\.å\.", "ìèí\."];
+	var $glueleft	= ["Ã°Ã¨Ã±\.", "Ã²Ã Ã¡Ã«\.", "Ã±Ã¬\.", "Ã¨Ã¬\.", "Ã³Ã«\.", "Ã¯Ã¥Ã°\.", "ÃªÃ¢\.", "Ã®Ã´Ã¨Ã±", "Ã®Ã´\.", "Ã£\."]; // contains some Russian abberviations, also see below
+	var $glueright	= ["Ã°Ã³Ã¡\.", "ÃªÃ®Ã¯\.", "Ã³\.Ã¥\.", "Ã¬Ã¨Ã­\."];
 
 	var $settings	= [
 							'inches'	=> 1, // convert inches into &quot;
@@ -146,7 +146,7 @@ class Typografica
 		if ($this->settings['spacing'])
 		{
 			$data = preg_replace('/(\s*)([,]*)/i', "\\2\\1", $data);
-			$data = preg_replace('/(\s*)([\.?!]*)(\s*[¨À-ßA-Z])/', "\\2\\1\\3", $data);
+			$data = preg_replace('/(\s*)([\.?!]*)(\s*[Â¨Ã€-ÃŸA-Z])/', "\\2\\1\\3", $data);
 		}
 
 		// 2. Splitting to strings with length no more than XX characters
@@ -165,8 +165,8 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i', "\\1\\2&nbsp;\\4", $data);
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   "\\1\\2&nbsp;\\4", $data);
+				$data	= preg_replace('/(\s+)([a-zÃ -Ã¿Ã€-ÃŸ]{1,2})(\s+)([^\\s$])/i', "\\1\\2&nbsp;\\4", $data);
+				$data	= preg_replace('/(\s+)([a-zÃ -Ã¿Ã€-ÃŸ]{3})(\s+)([^\\s$])/i',   "\\1\\2&nbsp;\\4", $data);
 			}
 
 			foreach ($this->glueleft as $i)
@@ -183,7 +183,7 @@ class Typografica
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
 		if ($this->settings['dashglue'])
 		{
-			$data = preg_replace('/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/i', "<nobr>\\1</nobr>", $data);
+			$data = preg_replace('/([a-zÃ -Ã¿Ã€-ÃŸ0-9]+(\-[a-zÃ -Ã¿Ã€-ÃŸ0-9]+)+)/i', "<nobr>\\1</nobr>", $data);
 		}
 
 		// 6. Macros
@@ -256,7 +256,7 @@ class Typografica
 		// 0a. apostroph
 		if ($this->settings['apostroph'])
 		{
-			$data = preg_replace("/([\s\"][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+)'([~ºª³²¿¯àÀåÅèÈîÎóÓşŞÿß][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+[\s\.,:;\)<=\"])/i", "\\1’\\2", $data );
+			$data = preg_replace("/([\s\"][~0-9Â¸Â¨Â´Â¥ÂºÂªÂ³Â²Â¿Â¯â€™'A-Za-zÃ€-ÃŸÃ -Ã¿\-:\/\.]+)'([~ÂºÂªÂ³Â²Â¿Â¯Ã Ã€Ã¥Ã…Ã¨ÃˆÃ®ÃÃ³Ã“Ã¾ÃÃ¿ÃŸ][~0-9Â¸Â¨Â´Â¥ÂºÂªÂ³Â²Â¿Â¯â€™'A-Za-zÃ€-ÃŸÃ -Ã¿\-:\/\.]+[\s\.,:;\)<=\"])/i", "\\1â€™\\2", $data );
 		}
 
 		// 1. English quotes
@@ -278,18 +278,18 @@ class Typografica
 		if ($this->settings['laquo'])
 		{
 			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data);
-			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
+			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9Â¸Â¨Â´Â¥ÂºÂªÂ³Â²Â¿Â¯â€™'A-Za-zÃ€-ÃŸÃ -Ã¿\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			// nb: wacko only regexp follows:
-			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
+			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9Â¸Â¨Â´Â¥ÂºÂªÂ³Â²â€™'A-Za-zÃ€-ÃŸÃ -Ã¿\-:\/\.])/i", "\\1&laquo;\\2", $data);
 			$_data	= "\"\"";
 
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[Â¸Â¨Â´Â¥ÂºÂªÂ³Â²Â¿Â¯â€™'A-Za-zÃ€-ÃŸÃ -Ã¿0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
 				// nb: wacko only regexps follows:
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/si", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[Â¸Â¨Â´Â¥ÂºÂªÂ³Â²Â¿Â¯â€™'A-Za-zÃ€-ÃŸÃ -Ã¿0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[Â¸Â¨Â´Â¥ÂºÂªÂ³Â²Â¿Â¯â€™'A-Za-zÃ€-ÃŸÃ -Ã¿0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/si", "\\1&raquo;", $data);
 			}
 		}
 
@@ -315,11 +315,11 @@ class Typografica
 			$data = preg_replace('/(\s|;)\-\-(\s)/i', "\\1&mdash;\\2", $data);
 		}
 
-		// 4. (ñ)
+		// 4. (Ã±)
 		if ($this->settings['(c)'])
 		{
-			$data = preg_replace('/\([cCñÑ]\)/i', "&copy;", $data);
-			# $data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data); // not working (?)
+			$data = preg_replace('/\([cCÃ±Ã‘]\)/i', "&copy;", $data);
+			# $data = preg_replace("/\([cCÃ±Ã‘]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data); // not working (?)
 		}
 
 		// 4a. (r)
@@ -331,7 +331,7 @@ class Typografica
 		// 4b. (tm)
 		if ($this->settings['(tm)'])
 		{
-			$data = preg_replace('/\(tm\)|\(òì\)/i', "&#153;", $data);
+			$data = preg_replace('/\(tm\)|\(Ã²Ã¬\)/i', "&#153;", $data);
 		}
 
 		// 4c. (p)
@@ -349,9 +349,9 @@ class Typografica
 		// 5a. 12^C
 		if ($this->settings['degrees'])
 		{
-			$data = preg_replace('/-([0-9])+\^([FCÑK])/', "&ndash;\\1&#176\\2", $data);
-			$data = preg_replace('/\+([0-9])+\^([FCÑK])/', "+\\1&#176\\2", $data);
-			$data = preg_replace('/\^([FCÑK])/', "&#176\\1", $data);
+			$data = preg_replace('/-([0-9])+\^([FCÃ‘K])/', "&ndash;\\1&#176\\2", $data);
+			$data = preg_replace('/\+([0-9])+\^([FCÃ‘K])/', "+\\1&#176\\2", $data);
+			$data = preg_replace('/\^([FCÃ‘K])/', "&#176\\1", $data);
 		}
 
 		// 6. phones

@@ -3,17 +3,17 @@ lang = {
 	ReallySave :			"Wirklich speichern?",
 
 	// wikiedit.js
-	HelpAbout :				"Hilfe & Über",
+	HelpAbout :				"Hilfe & Ãœber",
 	HelpFormatting :		"Hilfe",
 	HelpFormattingTip :		"Hilfe zur Wiki-Formatierung",
 	HelpFormattingPage :	"Doc/Deutsch/Formatierung",
 	
-	Heading1 :				"Überschrift 1 (Strg+Umschalt+1)",
-	Heading2 :				"Überschrift 2",
-	Heading3 :				"Überschrift 3",
-	Heading4 :				"Überschrift 4",
-	Heading5 :				"Überschrift 5",
-	Heading6 :				"Überschrift 6",
+	Heading1 :				"Ãœberschrift 1 (Strg+Umschalt+1)",
+	Heading2 :				"Ãœberschrift 2",
+	Heading3 :				"Ãœberschrift 3",
+	Heading4 :				"Ãœberschrift 4",
+	Heading5 :				"Ãœberschrift 5",
+	Heading6 :				"Ãœberschrift 6",
 	Bold :					"Fett (Strg+B)",
 	Italic :				"Kursiv (Strg+I)",
 	Underline :				"Unterstrichen (Strg+U)",
@@ -23,12 +23,12 @@ lang = {
 	Subscript :				"Tiefgestellt",
 	List :					"Liste",
 	NumberedList :			"Nummerierte Liste",
-	Left :					"Linksbündig",
+	Left :					"LinksbÃ¼ndig",
 	Center :				"Zentriert",
-	Right :					"Rechtsbündig",
+	Right :					"RechtsbÃ¼ndig",
 	Justify :				"Blocksatz",
-	Outdent :				"Ausrücken",
-	Indent :				"Einrücken",
+	Outdent :				"AusrÃ¼cken",
+	Indent :				"EinrÃ¼cken",
 	CodeWrapper :			"Code Container",
 	HTML :					"HTML",
 	Action :				"Aktion",
@@ -39,19 +39,19 @@ lang = {
 	HighlightText :			"Text hervorheben",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Tabelle einfügen",
+	InsertTable :			"Tabelle einfÃ¼gen",
 	
 	Link :					"Link",
-	TextForLinking :		"Text für Verlinkung",
+	TextForLinking :		"Text fÃ¼r Verlinkung",
 	
-	HelpAboutTip : 			' Tastenkürzel:\n'+
+	HelpAboutTip : 			' TastenkÃ¼rzel:\n'+
 							' Strg+B - Fett\n'+
 							' Strg+I - Kursiv\n'+
 							' Strg+U - Unterstrichen\n'+
 							' Strg+Umschalt+S - Durchgestrichen\n'+
-							' Strg+Umschalt+1 .. 4 - Überschrift 1..4\n'+
-							' Alt+I oder Ctrl+T - Einrücken\n'+
-							' Alt+U oder Ctrl+Shift+T - Ausrücken\n'+
+							' Strg+Umschalt+1 .. 4 - Ãœberschrift 1..4\n'+
+							' Alt+I oder Ctrl+T - EinrÃ¼cken\n'+
+							' Alt+U oder Ctrl+Shift+T - AusrÃ¼cken\n'+
 							' Strg+J - Hervorheben (!!)\n'+
 							' Strg+H - Markieren (??)\n'+
 							' Alt+L - Link\n'+

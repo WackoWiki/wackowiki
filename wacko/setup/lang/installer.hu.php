@@ -16,11 +16,11 @@ $lang = [
 	'site_name'			=> 'MyWikiSite',
 
 	// pages
-	'category_page'		=> 'Kategória',
+	'category_page'		=> 'KategÃ³ria',
 	'groups_page'		=> 'Csoportok',
-	'users_page'		=> 'Felhasználók',
+	'users_page'		=> 'FelhasznÃ¡lÃ³k',
 
-	#'help_page'		=> 'Segítség',
+	#'help_page'		=> 'SegÃ­tsÃ©g',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',
 
@@ -33,16 +33,16 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title' => 'WackoWiki Telepítés',
+'Title' => 'WackoWiki TelepÃ­tÃ©s',
 'Continue' => 'Folytatni',
 'Back' => 'Vissza',
-'Recommended' => 'ajánlott',
+'Recommended' => 'ajÃ¡nlott',
 'InvalidAction' => 'Invalid action',
 
 /*
    Language Selection Page
 */
-'lang' => 'Nyelvi beállítások',
+'lang' => 'Nyelvi beÃ¡llÃ­tÃ¡sok',
 'PleaseUpgradeToR5' => 'You aware to be running an old (pre 5.0.0) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">5.0.x</code>.',
 'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>.  The next few pages will guide you through the upgrade process.',
 'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <code class="version">%1</code>.  The next few pages will guide you through the installation process.',
@@ -57,7 +57,7 @@ $lang = [
 'PHPDetected' => 'Detected PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled' => 'Rewrite Extension (mod_rewrite) Installed?',
-'Database' => 'Adatbázis',
+'Database' => 'AdatbÃ¡zis',
 'PHPExtensions' => 'PHP Extensions',
 'Permissions' => 'Permissions',
 'ReadyToInstall' => 'Ready to Install?',
@@ -123,7 +123,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Adatbázis konfiguráció',
+'database-config' => 'AdatbÃ¡zis konfigurÃ¡ciÃ³',
 'DBDriver' => 'Driver',
 'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
@@ -134,7 +134,7 @@ $lang = [
 'DBHostDesc' => 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
 'DBPort' => 'Port (Optional)',
 'DBPortDesc' => 'The port number your database server is accessable through, leave it blank to use the default port number.',
-'DB' => 'Adatbázis név',
+'DB' => 'AdatbÃ¡zis nÃ©v',
 'DBDesc' => 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DBUserDesc' => 'Name of the user used to connect to your database.',
 'DBUser' => 'User Name',
@@ -151,11 +151,11 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Adatbázis telepítés',
+'database-install' => 'AdatbÃ¡zis telepÃ­tÃ©s',
 'TestingConfiguration' => 'Testing Configuration',
 'TestConnectionString' => 'Testing database connection settings',
 'TestDatabaseExists' => 'Checking if the database you specified exists',
-'InstallingTables' => 'Táblák telepítése',
+'InstallingTables' => 'TÃ¡blÃ¡k telepÃ­tÃ©se',
 'ErrorDBConnection' => 'There was a problem with the database connection details you specified, please go back and check they are correct.',
 'ErrorDBExists' => 'The database you configured was not found. Remember, it needs to exist before you can install/upgrade WackoWiki!',
 'To' => 'to',
@@ -196,7 +196,7 @@ $lang = [
 'ErrorCreatingTable' => 'Error creating %1 table, does it already exist?',
 'ErrorMovingRevisions' => 'Error moving revision data',
 'MovingRevisions' => 'Moving data to revisions table',
-'DeletingTables' => 'Táblázatok törlése',
+'DeletingTables' => 'TÃ¡blÃ¡zatok tÃ¶rlÃ©se',
 'DeletingTablesEnd' => 'Finished Deleting Tables',
 'ErrorDeletingTable' => 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
 'DeletingTable' => 'Deleting %1 table',
@@ -208,7 +208,7 @@ $lang = [
 'FinalStep' => 'Final Step',
 'Writing' => 'Writing Configuration File',
 'RemovingWritePrivilege' => 'Removing Write Privilege',
-'InstallationComplete' => 'Telepítés befejezve',
+'InstallationComplete' => 'TelepÃ­tÃ©s befejezve',
 'ThatsAll' => 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!',
@@ -218,7 +218,7 @@ $lang = [
 'WrittenAt' => 'written at ',
 'DontChange' => 'do not change wacko_version manually!',
 'ConfigDescription' => 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
-'TryAgain' => 'Próbáld újra',
+'TryAgain' => 'PrÃ³bÃ¡ld Ãºjra',
 
 ];
 ?>

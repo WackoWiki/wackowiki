@@ -7,7 +7,7 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch WackoWiki)) Installation!**\n\nKlicke nach der ((Anmeldung)) unten auf den Punkt \"Editieren\" um zu beginnen.\n\nDie Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.\n\nNützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((Suche)).\n\n";
+		$home_page_body		= "file:/wacko_logo.png?right\n**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch WackoWiki)) Installation!**\n\nKlicke nach der ((Anmeldung)) unten auf den Punkt \"Editieren\" um zu beginnen.\n\nDie Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.\n\nNÃ¼tzliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((Suche)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], 'Startseite', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
@@ -24,12 +24,12 @@ if ($config['language'] == $page_lang)
 
 	insert_page($config['help_page'],		'Hilfe',					'',			$page_lang, 'Admins', false, false);
 	insert_page($config['terms_page'],		'Nutzungsbedingungen',		'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Datenschutzerklärung',		'',			$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],	'DatenschutzerklÃ¤rung',		'',			$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Zufällige Seite',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Zufall');
+	#insert_page('RandomPage',				'ZufÃ¤llige Seite',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Zufall');
 }
 
-insert_page('LetzteAenderungen',	'Letzte Änderungen',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Änderungen');
+insert_page('LetzteAenderungen',	'Letzte Ã„nderungen',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Ã„nderungen');
 insert_page('LetzteKommentare',		'Letzte Kommentare',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Kommentare');
 insert_page('SeitenIndex',			'Seiten Index',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
 

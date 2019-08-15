@@ -7,7 +7,7 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Velkommen til din ((WackoWiki:Doc/English WackoWiki)) installation!**\n\nKlik på \"Rediger siden\" linket nederst for at rette denne side.\n\nDokumentation finder du på WackoWiki:Doc/English.\n\nSærlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), ((Søgning)).\n\n";
+		$home_page_body		= "file:/wacko_logo.png?right\n**Velkommen til din ((WackoWiki:Doc/English WackoWiki)) installation!**\n\nKlik pÃ¥ \"Rediger siden\" linket nederst for at rette denne side.\n\nDokumentation finder du pÃ¥ WackoWiki:Doc/English.\n\nSÃ¦rlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), ((SÃ¸gning)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], 'Startside', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
@@ -22,11 +22,11 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],		'Grupper',		'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],		'Brugere',		'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Hjælp',		'',						$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],		'HjÃ¦lp',		'',						$page_lang, 'Admins', false, false);
 	insert_page($config['terms_page'],		'Brugsbetingelser',		'',				$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Privacy',		'',						$page_lang, 'Admins', false, false);
 
-	#insert_page('TilfældigSide',			'Tilfældig side',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Tilfældig');
+	#insert_page('TilfÃ¦ldigSide',			'TilfÃ¦ldig side',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'TilfÃ¦ldig');
 }
 
 insert_page('Opdateringer',		'Opdateringer',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Opdateringer');
@@ -35,7 +35,7 @@ insert_page('Indhold',			'Indhold',			'{{pageindex}}',		$page_lang, 'Admins', fa
 
 insert_page('Registrering',		'Registrering',		'{{registration}}',		$page_lang, 'Admins', false, false);
 insert_page('Password',			'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Søgning',			'Søgning',			'{{search}}',			$page_lang, 'Admins', false, false);
+insert_page('SÃ¸gning',			'SÃ¸gning',			'{{search}}',			$page_lang, 'Admins', false, false);
 insert_page('Login',			'Login',			'{{login}}',			$page_lang, 'Admins', false, false);
 insert_page('Indstillinger',	'Indstillinger',	'{{usersettings}}',		$page_lang, 'Admins', false, false);
 

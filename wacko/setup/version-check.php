@@ -113,7 +113,7 @@ write_config_hidden_nodes(['none' => '']);
 	// Check whether PCRE has been compiled with UTF-8 support
 	/* $UTF8_ar = [];
 
-	if (1 != preg_match('/^.{1}$/u', "ñ", $UTF8_ar))
+	if (1 != preg_match('/^.{1}$/u', "Ã±", $UTF8_ar))
 	{
 		echo "\t<li>" . $lang['PCREwithoutUTF8'] . ' ' . output_image(false) . "</li>\n";
 	}
