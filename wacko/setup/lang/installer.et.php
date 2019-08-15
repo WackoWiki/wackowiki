@@ -4,7 +4,7 @@ $lang = [
 /*
    Language Settings
 */
-'Charset' => 'windows-1257',
+'Charset' => 'utf-8',
 'LangISO' => 'et',
 'LangName' => 'Estonian',
 

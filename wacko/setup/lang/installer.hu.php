@@ -4,7 +4,7 @@ $lang = [
 /*
    Language Settings
 */
-'Charset' => 'iso-8859-2',
+'Charset' => 'utf-8',
 'LangISO' => 'hu',
 'LangName' => 'Magyar',
 
