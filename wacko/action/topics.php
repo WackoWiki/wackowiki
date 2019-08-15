@@ -214,12 +214,6 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				$topic['description'] = Ut::html($topic['description']); // replaces -> [ ' topic.description | e ' ]
 
-				if ($this->page['page_lang'] != $topic['page_lang'])
-				{
-					$topic['title']			= $this->do_unicode_entities($topic['title'], $topic['page_lang']);
-					$topic['description']	= $this->do_unicode_entities($topic['description'], $topic['page_lang']);
-				}
-
 				// load related categories
 				$_category = $this->get_categories($topic['page_id'], OBJECT_PAGE);
 				$tpl->category = !empty($_category) ? '<br>' . $_category : '';

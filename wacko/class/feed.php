@@ -210,13 +210,6 @@ class Feed
 				// TODO: format -> add ['feed' => true]
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
 
-				// check current page lang for different charset to do_unicode_entities() against
-				if ($this->lang != $page['page_lang'])
-				{
-					$title	= $this->engine->do_unicode_entities($title, $page['page_lang']);
-					$text	= $this->engine->do_unicode_entities($text, $page['page_lang']);
-				}
-
 				$xml .= '<item>' . "\n" .
 							'<title>' . $title . '</title>' . "\n" .
 							'<link>' . $link . '</link>' . "\n" .
@@ -298,14 +291,6 @@ class Feed
 					}
 
 					$text = $this->engine->format($comment['body_r'], 'post_wacko');
-
-					// check current page lang for different charset to do_unicode_entities() against
-					if ($this->lang != $comment['page_lang'])
-					{
-						$text					= $this->engine->do_unicode_entities($text, $comment['page_lang']);
-						$comment['title']		= $this->engine->do_unicode_entities($comment['title'], $comment['page_lang']);
-						$comment['page_title']	= $this->engine->do_unicode_entities($comment['page_title'], $comment['page_lang']);
-					}
 
 					$xml .= '<item>' . "\n";
 					$xml .= '<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .

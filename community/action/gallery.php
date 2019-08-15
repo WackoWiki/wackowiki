@@ -234,11 +234,6 @@ if ($can_view)
 
 				$file_description	= $this->format($file_description, 'typografica' );
 
-				if ($this->page['page_lang'] != $file['file_lang'])
-				{
-					$file_description	= $this->do_unicode_entities($file_description, $file['file_lang']);
-				}
-
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
 				{
@@ -384,11 +379,6 @@ if ($can_view)
 			}
 
 			$file_description	= $this->format($file_description, 'typografica' );
-
-			if ($this->page['page_lang'] != $file['file_lang'])
-			{
-				$file_description	= $this->do_unicode_entities($file_description, $file['file_lang']);
-			}
 
 			$tpl->token			= $param_token;
 			$tpl->description	= $file_description;

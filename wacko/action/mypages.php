@@ -84,7 +84,7 @@ if (($user_id = $this->get_user_id()))
 					$tpl->day = $current_day = $day;
 				}
 
-				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
+				$text = $page['tag'];
 
 				// print entry
 				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
@@ -139,7 +139,7 @@ if (($user_id = $this->get_user_id()))
 					$tpl->day = $current_day = $day;
 				}
 
-				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
+				$text = $page['tag'];
 
 				// print entry
 				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
@@ -193,7 +193,7 @@ if (($user_id = $this->get_user_id()))
 					$tpl->char = $current_char = $first_char;
 				}
 
-				$text = $this->get_unicode_entities($page['tag'], $page['page_lang']);
+				$text = $page['tag'];
 
 				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
 			}

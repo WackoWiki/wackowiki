@@ -91,9 +91,6 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		{
 			foreach ($_words as $word)
 			{
-				// do unicode entities
-				$word['category'] = $this->get_unicode_entities($word['category'], $word['category_lang']);
-
 				$words[] = $word['category'];
 			}
 
@@ -144,9 +141,6 @@ if ($list && ($ids || isset($_GET['category_id'])))
 				}
 				else
 				{
-					// do unicode entities
-					$page['title'] = $this->get_unicode_entities($page['title'], $page['page_lang']);
-
 					$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
 
 					if ($sort == 'date')
@@ -206,9 +200,6 @@ if (!$ids)
 		foreach ($categories as $category_id => $word)
 		{
 			$spacer = '&nbsp;&nbsp;&nbsp;';
-
-			// do unicode entities
-			$word['category'] = $this->get_unicode_entities($word['category'], $lang);
 
 			$tpl->l_link		= $category_link($word, $category_id, $type_id, $filter, $list);
 

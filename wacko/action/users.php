@@ -127,12 +127,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$tpl->u_prof_userGroups_na = true;
 			}
 
-			if ($this->page['page_lang'] != $user['account_lang'])
-			{
-				// $user['user_name'] = $this->do_unicode_entities($user['user_name'], $user['account_lang']);
-				// $user['real_name'] = $this->do_unicode_entities($user['real_name'], $user['account_lang']);
-			}
-
 			$allow_intercom = ($this->db->enable_email
 								&& $logged_in && $user['email']
 								&& ($this->is_admin()
@@ -448,11 +442,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 								if (($file_description = $upload['file_description']) !== '')
 								{
-									if ($_lang)
-									{
-										$file_description = $this->do_unicode_entities($file_description, $_lang);
-									}
-
 									$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
 								}
 

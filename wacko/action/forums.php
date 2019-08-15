@@ -138,7 +138,6 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			if ($this->page['page_lang'] != $forum['page_lang'])
 			{
 				$_lang = $forum['page_lang'];
-				$forum['description'] = $this->do_unicode_entities($forum['description'], $forum['page_lang']);
 			}
 			else
 			{
@@ -171,15 +170,11 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 				if ($comment['comment_on_id'])
 				{
-					$comment['topic_title'] = $this->get_unicode_entities($comment['topic_title'], $comment['topic_lang']);
-
 					$tpl->href	= $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'];
 					$tpl->title	= $comment['topic_title'];
 				}
 				else
 				{
-					$comment['title'] = $this->get_unicode_entities($comment['title'], $comment['page_lang']);
-
 					$tpl->href	= $this->href('', $comment['tag']);
 					$tpl->title	= $comment['title'];
 				}

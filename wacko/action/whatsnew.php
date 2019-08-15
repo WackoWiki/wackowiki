@@ -203,15 +203,6 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 			if (($edit_note = $page['edit_note']))
 			{
-				if ($_lang)
-				{
-					$edit_note = $this->do_unicode_entities($edit_note, $_lang);
-				}
-				else if ($_cf_lang)
-				{
-					$edit_note = $this->do_unicode_entities($edit_note, $_cf_lang);
-				}
-
 				$tpl->l_edit_note = $edit_note;
 			}
 

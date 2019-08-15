@@ -317,11 +317,6 @@ if ($can_view)
 				$dt			= $file['uploaded_dt'];
 				$desc		= $this->format($file['file_description'], 'typografica' );
 
-				if ($this->page['page_lang'] != $file['file_lang'])
-				{
-					$desc	= $this->do_unicode_entities($desc, $file['file_lang']);
-				}
-
 				if ($desc == '')
 				{
 					$desc = "&nbsp;";

@@ -46,7 +46,6 @@ if ($this->is_admin())
 				// do unicode entities
 				if (($edit_note = $page['edit_note']) !== '')
 				{
-					$edit_note = $this->get_unicode_entities($edit_note, $page['page_lang']);
 					$tpl->l_n_text = $edit_note;
 				}
 
