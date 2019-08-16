@@ -48,7 +48,7 @@ if (($logged_in = $this->get_user()))
 else
 {
 	// show register / login link
-	$tpl->login_link	= $this->compose_link_to_page($this->db->login_page, '', $this->_t('LoginPage'), '');
+	$tpl->login_link	= $this->compose_link_to_page($this->db->login_page, '', $this->_t('LoginLink'), '');
 
 	if ($this->db->allow_registration)
 	{
