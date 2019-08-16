@@ -1045,13 +1045,13 @@ class Wacko
 		// 1. search for page_id (... is preferred, $tag next)
 		if ($page_id != 0)
 		{
-			$page = $this->_load_page('', $page_id, $revision_id, $cache, false, $metadata_only, $deleted);
+			$page = $this->_load_page('', $page_id, $revision_id, $cache, $metadata_only, $deleted);
 		}
 
 		// 3. if not found, search for tag
 		if (!$page)
 		{
-			$page = $this->_load_page($tag, 0, $revision_id, $cache, false, $metadata_only, $deleted);
+			$page = $this->_load_page($tag, 0, $revision_id, $cache, $metadata_only, $deleted);
 		}
 
 		// 4. still nothing? file under wanted
@@ -1066,7 +1066,7 @@ class Wacko
 		return $page;
 	}
 
-	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
+	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $metadata_only = 0, $deleted = 0)
 	{
 		$cached_page	= '';
 		$page			= null;
@@ -1105,7 +1105,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($supertagged || $page_id)
+			if ($tag || $page_id)
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .

@@ -1225,12 +1225,6 @@ $ap_translation = [
 	'Check'						=> 'Vérifier',
 	'Solve'						=> 'Solve',
 
-	// Transliterate module
-	'TranslitField'				=> 'Transliterate field %1 in table `%2`.',
-	'TranslitStart'				=> 'Start',
-	'TranslitContinue'			=> 'Continue',
-	'TranslitCompleted'			=> 'The update procedure is completed.',
-
 	// Bad Behavior module
 	'BbInfo'					=> 'Détecte et bloque les accès Web indésirables, refuse l\'accès aux robots spammeurs automatisés <br>Pour plus d\'informations, veuillez consulter la page d\'accueil %1.',
 	'BbEnable'					=> 'Activer Bad Behavior',

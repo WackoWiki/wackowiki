@@ -224,12 +224,6 @@ $ap_translation = [
 		'title'		=> 'Daten synchronisieren',
 	],
 
-	// Transliterate module
-	'maint_transliterate'		=> [
-		'name'		=> 'Transliteration',
-		'title'		=> 'Aktualisiere den Supertag in den Datenbankdatensätzen',
-	],
-
 	// Mass email module
 	'massemail'		=> [
 		'name'		=> 'Rundmail',
@@ -1246,12 +1240,6 @@ $ap_translation = [
 	'InconsistenciesRemoved'	=> 'Inkonsistenzen beseitigt',
 	'Check'						=> 'Prüfen',
 	'Solve'						=> 'Beheben',
-
-	// Transliterate module
-	'TranslitField'				=> 'Transliteriere Feld %1 in der Tabelle `%2`.',
-	'TranslitStart'				=> 'Start',
-	'TranslitContinue'			=> 'Weiter',
-	'TranslitCompleted'			=> 'Der Update-Vorgang ist abgeschlossen.',
 
 	// Bad Behavior module
 	'BbInfo'					=> 'Erkennt und blockiert unerwünschte Webzugriffe, verweigert automatisierten Spambots den Zugriff.<br>Für weitere Informationen besuche die %1 Webseite.',
