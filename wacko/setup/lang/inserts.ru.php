@@ -26,17 +26,21 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],		'Условия использования',		'',			$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Политика конфиденциальности',		'',		$page_lang, 'Admins', false, false);
 
-	#insert_page('СлучайнаяСтраница',		'Случайная страница',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Случайный');
+	#insert_page($config['random_page'],		'Случайная страница',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Случайный');
 
-	insert_page($config['registration_page'],		'Регистрация',			'{{registration}}',				$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],			'Пароль',				'{{changepassword}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],				'Поиск',				'{{search}}',					$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],				'Вход',					'{{login}}',					$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],			'Настройки',			'{{usersettings}}',				$page_lang, 'Admins', false, false);
+	insert_page($config['registration_page'],	'Регистрация',			'{{registration}}',				$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Пароль',				'{{changepassword}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],			'Поиск',				'{{search}}',					$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'Вход',					'{{login}}',					$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Настройки',			'{{usersettings}}',				$page_lang, 'Admins', false, false);
+
+	insert_page($config['changes_page'],		'Изменения',			'{{changes}}',					$page_lang, 'Admins', false, true, 'Изменения');
+	insert_page($config['comments_page'],		'Новые Комментарии',	'{{commented}}',				$page_lang, 'Admins', false, true, 'Комментарии');
+	insert_page($config['index_page'],			'Каталог',				'{{pageindex}}',				$page_lang, 'Admins', false, true, 'Каталог');
 }
-
-insert_page('Каталог',			'Каталог',				'{{pageindex}}',				$page_lang, 'Admins', false, true, 'Каталог');
-insert_page('Изменения',		'Изменения',			'{{changes}}',					$page_lang, 'Admins', false, true, 'Изменения');
-insert_page('НовыеКомментарии',	'Новые Комментарии',	'{{commented}}',				$page_lang, 'Admins', false, true, 'Комментарии');
+else
+{
+	// set only bookmarks
+}
 
 ?>

@@ -26,6 +26,11 @@ $lang = [
 	'registration_page'	=> 'Regisztráció',
 	'password_page'		=> 'Jelszó',
 
+	'changes_page'		=> 'FrissVáltoztatások',
+	'comments_page'		=> 'UtolsóMegjegyzések',
+	'index_page'		=> 'OldalIndex',
+
+	'random_page'		=> 'LapTalálomra',
 	#'help_page'		=> 'Segítség',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',

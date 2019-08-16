@@ -26,17 +26,21 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],		'Условия за ползване',			'',			$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Поверителност',	'',						$page_lang, 'Admins', false, false);
 
-	#insert_page('СлучайнаСтраница',		'Случайна страница',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Случаен');
+	#insert_page($config['random_page'],		'Случайна страница',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Случаен');
 
 	insert_page($config['registration_page'],	'Регистрация',		'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Търсене',			'{{search}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['login_page'],			'влизане',			'{{login}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['account_page'],		'Settings',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
-}
 
-insert_page('Каталог',			'Каталог',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Каталог');
-insert_page('ПоследниПромени',	'Последни Промени',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Промени');
-insert_page('НовиКоментари',	'Нови Коментари',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Коментари');
+	insert_page($config['changes_page'],		'Последни Промени',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Промени');
+	insert_page($config['comments_page'],		'Нови Коментари',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Коментари');
+	insert_page($config['index_page'],			'Каталог',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Каталог');
+}
+else
+{
+	// set only bookmarks
+}
 
 ?>

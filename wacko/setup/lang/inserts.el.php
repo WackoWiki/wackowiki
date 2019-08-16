@@ -26,17 +26,21 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],		'Όροι Χρήσης',			'',				$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Πολιτική προσωπικών δεδομένων',	'',	$page_lang, 'Admins', false, false);
 
-	#insert_page('RandomPage',				'Τυχαία σελίδα',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Τυχαία');
+	#insert_page($config['random_page'],				'Τυχαία σελίδα',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Τυχαία');
 
-	insert_page($config['registration_page'],		'Registration',		'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],			'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],				'Search',			'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],				'Login',			'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],			'Settings',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['registration_page'],	'Registration',		'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],			'Search',			'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'Login',			'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Settings',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
+
+	insert_page($config['changes_page'],		'Recent Changes',		'{{changes}}',		$page_lang, 'Admins', false, true, 'Αλλαγές');
+	insert_page($config['comments_page'],		'Recently Commented',	'{{commented}}',	$page_lang, 'Admins', false, true, 'Σχόλια');
+	insert_page($config['index_page'],			'Page Index',			'{{pageindex}}',	$page_lang, 'Admins', false, true, 'Index');
 }
-
-insert_page('RecentChanges',		'Recent Changes',		'{{changes}}',		$page_lang, 'Admins', false, true, 'Αλλαγές');
-insert_page('RecentlyCommented',	'Recently Commented',	'{{commented}}',	$page_lang, 'Admins', false, true, 'Σχόλια');
-insert_page('PageIndex',			'Page Index',			'{{pageindex}}',	$page_lang, 'Admins', false, true, 'Index');
+else
+{
+	// set only bookmarks
+}
 
 ?>

@@ -26,6 +26,11 @@ $lang = [
 	'registration_page'	=> 'Registrering',
 	'password_page'		=> 'Password',
 
+	'changes_page'		=> 'Opdateringer',
+	'comments_page'		=> 'Kommentarer',
+	'index_page'		=> 'Indhold',
+
+	'random_page'		=> 'TilfældigSide',
 	#'help_page'			=> 'Hjælp',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',

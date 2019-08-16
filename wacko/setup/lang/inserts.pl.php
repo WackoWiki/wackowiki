@@ -26,17 +26,21 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],		'Warunki użytkowania',		'',				$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Polityka ochrony prywatności',		'',		$page_lang, 'Admins', false, false);
 
-	#insert_page('LosowąStrona',			'Losową strona',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Losową');
+	#insert_page($config['random_page'],			'Losową strona',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Losową');
 
-	insert_page($config['registration_page'],		'Rejestracja',				'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],			'Hasło',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],				'Szukaj',					'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],				'Login',					'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],			'Ustawienia',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['registration_page'],	'Rejestracja',				'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Hasło',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],			'Szukaj',					'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'Login',					'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Ustawienia',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
+
+	insert_page($config['changes_page'],		'Ostatnie Zmiany',			'{{changes}}',			$page_lang, 'Admins', false, true, 'Zmiany');
+	insert_page($config['comments_page'],		'Ostatnio Komentowane',		'{{commented}}',		$page_lang, 'Admins', false, true, 'Komentowane');
+	insert_page($config['index_page'],			'Index Stron',				'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
 }
-
-insert_page('OstatnieZmiany',		'Ostatnie Zmiany',			'{{changes}}',			$page_lang, 'Admins', false, true, 'Zmiany');
-insert_page('OstatnioKomentowane',	'Ostatnio Komentowane',		'{{commented}}',		$page_lang, 'Admins', false, true, 'Komentowane');
-insert_page('IndexStron',			'Index Stron',				'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
+else
+{
+	// set only bookmarks
+}
 
 ?>

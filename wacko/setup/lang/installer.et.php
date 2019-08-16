@@ -26,6 +26,11 @@ $lang = [
 	'registration_page'	=> 'Registreerimine',
 	'password_page'		=> 'Password',
 
+	'changes_page'		=> 'ViimasedMuudatused',
+	'comments_page'		=> 'ViimatiKommenteeritud',
+	'index_page'		=> 'SisuKord',
+
+	'random_page'		=> 'JuhuslikLehekülg',
 	#'help_page'			=> 'Help',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',

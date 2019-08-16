@@ -83,7 +83,7 @@ define('TRANSLIT_LOAD',					0);
 define('TRANSLIT_DONTLOAD',				1);
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'5.5.12');
+define('WACKO_VERSION',					'6.0.alpha1');
 define('HTML_ENTITIES_CHARSET',			'UTF-8');
 define('XML_HTMLSAX3',					'lib/HTMLSax3/');
 

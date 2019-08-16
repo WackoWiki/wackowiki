@@ -26,6 +26,11 @@ $lang = [
 	'registration_page'	=> 'Регистрация',
 	'password_page'		=> 'Password',
 
+	'changes_page'		=> 'ПоследниПромени',
+	'comments_page'		=> 'НовиКоментари',
+	'index_page'		=> 'Каталог',
+
+	'random_page'		=> 'СлучайнаСтраница',
 	#'help_page'			=> 'Помощ',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',
