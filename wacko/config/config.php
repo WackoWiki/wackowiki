@@ -1,7 +1,7 @@
 <?php
-// config.php written at Fr 16 Aug 2019 14:53:48 CEST
-// detailed description https://wackowiki.org/doc/Doc/English/Configuration
-// do not change wacko_version manually!
+// config.php geschrieben am Fri Aug 16 17:29:14 2019
+// https://wackowiki.org/doc/Doc/Deutsch/Konfiguration
+// Ändere wacko_version nicht von Hand!
 
 $wacko_config = [
 	'base_url' => 'http://localhost/workspace/wackowiki-unicode/wacko/',
@@ -16,9 +16,9 @@ $wacko_config = [
 	'database_password' => '',
 	'sql_mode_strict' => '0',
 	'table_prefix' => 'wacko_',
-	'system_seed' => 'Q}4a|s95y4!Y_G^9wCK2',
+	'system_seed' => 'odX7va10i235Wi_E@UBb',
 	'recovery_password' => '',
-	'hashid_seed' => 'OQZd0f_E2Y1Cf0L%z5L]',
+	'hashid_seed' => '8hR7_1]1TR}][1t6eP0u',
 	'wacko_version' => '5.5.12',
 ];
 
