@@ -72,18 +72,18 @@ else
 		"(SELECT u.user_name AS name, YEAR(r.modified) AS year " .
 		"FROM " . $prefix . "revision r " .
 			"INNER JOIN " . $prefix . "user u ON (r.user_id = u.user_id) " .
-		"WHERE r.supertag = " . $this->db->q($this->supertag) . " " .
+		"WHERE r.tag = " . $this->db->q($this->tag) . " " .
 			($cluster
-				? "OR r.supertag LIKE " . $this->db->q($this->supertag . '/%') . " "
+				? "OR r.tag LIKE " . $this->db->q($this->tag . '/%') . " "
 				: '') .
 		"GROUP BY u.user_name, year ) " .
 		"UNION " .
 		"(SELECT u.user_name AS name, YEAR(p.modified) AS year " .
 		"FROM " . $prefix . "page p " .
 			"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
-		"WHERE p.supertag = " . $this->db->q($this->supertag) . " " .
+		"WHERE p.tag = " . $this->db->q($this->tag) . " " .
 			($cluster
-				? "OR p.supertag LIKE " . $this->db->q($this->supertag . '/%') . " "
+				? "OR p.tag LIKE " . $this->db->q($this->tag . '/%') . " "
 				: '') .
 		"GROUP BY u.user_name, year ) " .
 		"ORDER BY name ASC, year ASC", true))

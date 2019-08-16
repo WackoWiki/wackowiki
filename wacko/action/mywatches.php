@@ -66,7 +66,7 @@ if ($user_id = $this->get_user_id())
 			$selector;
 
 		$sql =
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY p.tag ASC ";
 	}
@@ -90,7 +90,7 @@ if ($user_id = $this->get_user_id())
 			$selector;
 
 		$sql =
-			"SELECT w.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			"SELECT w.page_id, p.tag, p.title, p.page_lang " .
 			"FROM {$prefix}watch AS w " .
 				"LEFT JOIN {$prefix}page AS p " .
 					"ON (p.page_id = w.page_id) " .
@@ -171,7 +171,7 @@ if ($user_id = $this->get_user_id())
 				$tpl->l_class	= $icon_class;
 				$tpl->l_title	= $icon_text;
 				$tpl->l_href	= $this->href('', '', $profile + $p + $tab_mode + ['mode' => 'mywatches', $action_mode => $page['page_id'], '#' => 'list']);
-				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text, $title);
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text, $title);
 			}
 
 			if ($n < $r_count)

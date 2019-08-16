@@ -19,7 +19,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	{
 		if (!$user)
 		{
-			$this->http->invalidate_page($this->supertag);
+			$this->http->invalidate_page($this->tag);
 		}
 
 		$this->sess->body	= $body;
@@ -58,7 +58,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 	{
 		if (!$user)
 		{
-			$this->http->invalidate_page($this->supertag);
+			$this->http->invalidate_page($this->tag);
 		}
 
 		$this->set_message($this->_t('EmptyComment'));
@@ -68,7 +68,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// comment preview
 		if (!$user)
 		{
-			$this->http->invalidate_page($this->supertag);
+			$this->http->invalidate_page($this->tag);
 		}
 
 		$this->sess->preview	= $body;
@@ -82,7 +82,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		// posting flood protection
 		if (!$user)
 		{
-			$this->http->invalidate_page($this->supertag);
+			$this->http->invalidate_page($this->tag);
 		}
 
 		$this->sess->body			= $body;

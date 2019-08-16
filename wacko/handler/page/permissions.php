@@ -143,8 +143,8 @@ if (@$_POST['_action'] === 'set_permissions')
 		$pages = $this->db->load_all(
 			"SELECT page_id, tag, title, owner_id " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE (supertag = " . $this->db->q($this->supertag) .
-				" OR supertag LIKE " . $this->db->q($this->supertag . '/%') .
+			"WHERE (tag = " . $this->db->q($this->tag) .
+				" OR tag LIKE " . $this->db->q($this->tag . '/%') .
 				") " .
 			($this->is_admin()
 				? ""

@@ -27,10 +27,10 @@ $tag = $text;
 //insert _ between words
 $tag = preg_replace('/\s+/ms', '_', $tag);
 
-$tag = strtolower($tag);
-$tag = strtr($tag, $TranslitCaps, $TranslitSmall);
-$tag = strtr($tag, $TranslitLettersFrom, $TranslitLettersTo);
-$tag = strtr($tag, $TranslitBiLetters);
+$tag = mb_strtolower($tag);
+$tag = mb_strtr($tag, $TranslitCaps, $TranslitSmall);
+$tag = mb_strtr($tag, $TranslitLettersFrom, $TranslitLettersTo);
+$tag = mb_strtr($tag, $TranslitBiLetters);
 
 $tag = preg_replace('/[^a-z0-9_.]+/mi', '', $tag);
 

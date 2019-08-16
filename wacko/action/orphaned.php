@@ -14,8 +14,7 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 		"FROM " . $pref . "page p " .
 			"LEFT JOIN " . $pref . "page_link l ON " .
 			"((l.to_tag = p.tag " .
-				"AND l.to_supertag = '') " .
-				"OR l.to_supertag = p.supertag) " .
+				"AND l.to_tag = '')) " .
 		"WHERE " .
 			($tag
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "

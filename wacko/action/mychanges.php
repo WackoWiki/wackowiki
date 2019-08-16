@@ -59,7 +59,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('byname'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, tag, supertag, title, modified, page_lang " .
+			"SELECT page_id, tag, title, modified, page_lang " .
 			$selector .
 			"ORDER BY tag ASC, modified DESC " .
 			$pagination['limit'], true))
@@ -89,7 +89,7 @@ if (($user_id = $this->get_user_id()))
 				$text = $page['tag'];
 
 				// print entry
-				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
 				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('RevisionTip'));
 			}
 
@@ -115,7 +115,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if (($pages = $this->db->load_all(
-			"SELECT page_id, tag, supertag, title, modified, edit_note, page_lang " .
+			"SELECT page_id, tag, title, modified, edit_note, page_lang " .
 			$selector .
 			"ORDER BY modified DESC, tag ASC " .
 			$pagination['limit'], true)))
@@ -140,7 +140,7 @@ if (($user_id = $this->get_user_id()))
 				$text = $page['tag'];
 
 				// print entry
-				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
 				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'));
 
 				if ($page['edit_note'])

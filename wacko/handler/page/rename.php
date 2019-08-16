@@ -38,10 +38,9 @@ if ($registered
 		if (@$_POST['_action'] === 'rename_page')
 		{
 			$new_tag		= $_POST['new_tag'];
-			$new_supertag	= $this->translit($new_tag);
-			$old_supertag	= $this->page['supertag'];
+			$old_tag		= $this->page['tag'];
 
-			if (($error = $this->sanitize_new_pagename($new_tag, $new_supertag, $this->tag)))
+			if (($error = $this->sanitize_new_pagename($new_tag, $this->tag)))
 			{
 				$this->set_message($error, 'error');
 				$this->reload_me();
@@ -64,7 +63,7 @@ if ($registered
 					}
 				}
 
-				if ($this->rename_page($this->tag, $new_tag, $new_supertag))
+				if ($this->rename_page($this->tag, $new_tag))
 				{
 					$message .= '<li>' . $this->_t('PageRenamed') . "</li>\n";
 				}
@@ -73,12 +72,10 @@ if ($registered
 				$this->page_id_cache[$this->tag] = null;
 
 				$this->clear_cache_wanted_page($new_tag);
-				$this->clear_cache_wanted_page($new_supertag);
 
-				if ($need_redirect && ($old_supertag != $new_supertag))
+				if ($need_redirect && ($old_tag != $new_tag))
 				{
 					$this->cache_wanted_page($this->tag);
-					$this->cache_wanted_page($this->supertag);
 
 					// set redirect on original page
 					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_tag . '"}}', $this->_t('RedirectedTo') . ' ' . $new_tag))
@@ -87,7 +84,6 @@ if ($registered
 					}
 
 					$this->clear_cache_wanted_page($this->tag);
-					$this->clear_cache_wanted_page($this->supertag);
 				}
 
 				$message .= '<li>' . $this->_t('NewNameOfPage') . $this->link('/' . $new_tag) . "</li>\n";
@@ -179,12 +175,12 @@ function recursive_move(&$engine, $root, $new_root)
 
 	// FIXME: missing $owner_id -> rename_globalacl || owner
 	$owner_id	= '';
-	$_root		= $engine->translit($root);
+	$_root		= $root;
 	$pages		= $engine->db->load_all(
-					"SELECT page_id, tag, supertag, page_lang " .
+					"SELECT page_id, tag, page_lang " .
 					"FROM " . $engine->db->table_prefix . "page " .
-					"WHERE (supertag LIKE " . $engine->db->q($_root . '/%') . " " .
-						" OR supertag = " . $engine->db->q($_root) . ") " .
+					"WHERE (tag LIKE " . $engine->db->q($_root . '/%') . " " .
+						" OR tag = " . $engine->db->q($_root) . ") " .
 					($owner_id
 						? "AND owner_id = " . (int) $owner_id . " "
 						: "") .
@@ -231,8 +227,6 @@ function move(&$engine, $old_page, $new_tag)
 	if (($engine->check_acl($user['user_name'], $engine->db->rename_globalacl)
 	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id))
 	{
-		$new_supertag = $engine->translit($new_tag);
-
 		$message .= "<ul>\n";
 
 		if (!preg_match('/^([\_\.\-' . $engine->language['ALPHANUM_P'] . ']+)$/', $new_tag))
@@ -245,7 +239,7 @@ function move(&$engine, $old_page, $new_tag)
 		}
 		else
 		{
-			if ($old_page['supertag'] != $new_supertag && $page = $engine->load_page($new_supertag, 0, '', LOAD_CACHE, LOAD_META))
+			if ($old_page['tag'] != $new_tag && $page = $engine->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				$message .= '<li>' . Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_tag)) . "</li>\n";
 			}
@@ -262,7 +256,7 @@ function move(&$engine, $old_page, $new_tag)
 					}
 				}
 
-				if ($engine->rename_page($old_page['tag'], $new_tag, $new_supertag))
+				if ($engine->rename_page($old_page['tag'], $new_tag))
 				{
 					$message .= '<li>' . $engine->_t('PageRenamed') . "</li>\n";
 				}
@@ -271,12 +265,10 @@ function move(&$engine, $old_page, $new_tag)
 				$engine->page_id_cache[$engine->tag] = null;
 
 				$engine->clear_cache_wanted_page($new_tag);
-				$engine->clear_cache_wanted_page($new_supertag);
 
-				if ($need_redirect && ($old_page['supertag'] != $new_supertag))
+				if ($need_redirect && ($old_page['tag'] != $new_tag))
 				{
 					$engine->cache_wanted_page($old_page['tag']);
-					$engine->cache_wanted_page($old_page['supertag']);
 
 					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_tag . '"}}', $engine->_t('RedirectedTo') . ' ' . $new_tag))
 					{
@@ -284,7 +276,6 @@ function move(&$engine, $old_page, $new_tag)
 					}
 
 					$engine->clear_cache_wanted_page($old_page['tag']);
-					$engine->clear_cache_wanted_page($old_page['supertag']);
 				}
 
 				$message .= '<li>' . $engine->_t('NewNameOfPage') . $engine->link('/' . $new_tag) . "</li>\n";

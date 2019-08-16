@@ -52,20 +52,20 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 
 			// update cache
 			$this->set_message($this->_t('PollsDone'));
-			$this->http->invalidate_page($this->supertag);
+			$this->http->invalidate_page($this->tag);
 		}
 	}
 	else if ($polls_obj->poll_is_voted($header['poll_id']))
 	{
 		$vote = $header['poll_id'];
 		$this->set_message($this->_t('PollsAlreadyVoted'));
-		$this->http->invalidate_page($this->supertag);
+		$this->http->invalidate_page($this->tag);
 	}
 	else if ($header['start'] && $header['end'])
 	{
 		$vote = $header['poll_id'];
 		$this->set_message($this->_t('PollsAlreadyEnded'));
-		$this->http->invalidate_page($this->supertag);
+		$this->http->invalidate_page($this->tag);
 	}
 	else
 	{

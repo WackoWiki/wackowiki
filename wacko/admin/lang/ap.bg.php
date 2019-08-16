@@ -224,12 +224,6 @@ $ap_translation = [
 		'title'		=> 'Synchronizing data',
 	],
 
-	// Transliterate module
-	'maint_transliterate'		=> [
-		'name'		=> 'Transliterate',
-		'title'		=> 'Update the supertag in the database records',
-	],
-
 	// Mass email module
 	'massemail'		=> [
 		'name'		=> 'Масов email',

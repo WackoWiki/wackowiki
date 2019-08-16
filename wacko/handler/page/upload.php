@@ -132,7 +132,8 @@ if (isset($_POST['upload']) & $can_upload)
 			$name	= trim($name, ' .-_');
 
 			// here would be place for translit
-			$t_name = $this->format($name, 'translit');
+			#$t_name = $this->format($name, 'translit');
+			$t_name = $name;
 
 			// 1.5. +write @page_id@ to name
 			if (isset($_POST['to']) && $_POST['to'] != 'global')
@@ -251,7 +252,7 @@ if (isset($_POST['upload']) & $can_upload)
 						{
 							$small_name		= explode('@', $result_name);
 							$file_name		= $small_name[count($small_name) - 1];
-							$path			= 'file:/' . $this->page['supertag'] . '/';
+							$path			= 'file:/' . $this->page['tag'] . '/';
 							$syntax_file	= 'file:' . $file_name;
 						}
 
@@ -260,7 +261,7 @@ if (isset($_POST['upload']) & $can_upload)
 						$page_id		= $is_global ? 0 : $this->page['page_id'];
 
 						// replace option: keep old data if new entry is empty
-						$description	= substr($_POST['file_description'], 0, 250);
+						$description	= mb_substr($_POST['file_description'], 0, 250);
 						$description	= $this->sanitize_text_field((string) $description, true);
 						# $caption		= $clean_text((string) $_POST['caption']);
 
@@ -279,7 +280,7 @@ if (isset($_POST['upload']) & $can_upload)
 									"file_size			= " . (int) $file_size . "," .
 									"picture_w			= " . (int) $size[0] . "," .
 									"picture_h			= " . (int) $size[1] . "," .
-									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
+									"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
 									"uploaded_dt		= " . $this->db->q($uploaded_dt) . ", " .
 									"modified_dt		= UTC_TIMESTAMP() " .
@@ -304,7 +305,7 @@ if (isset($_POST['upload']) & $can_upload)
 									"file_size			= " . (int) $file_size . "," .
 									"picture_w			= " . (int) $size[0] . "," .
 									"picture_h			= " . (int) $size[1] . "," .
-									"file_ext			= " . $this->db->q(substr($ext, 0, 10)) . "," .
+									"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
 									"uploaded_dt		= " . $this->db->q($uploaded_dt) . "," .
 									"modified_dt		= UTC_TIMESTAMP() ");

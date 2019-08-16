@@ -1,6 +1,7 @@
 <?php
 
 define('IN_WACKO', 'wacko');
+include 'lib/mb_extends/mb_extends.php';
 include 'class/init.php';
 
 $db = new Settings;

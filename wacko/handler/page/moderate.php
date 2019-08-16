@@ -55,13 +55,13 @@ function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
 	$forum_context	= $engine->forum;
 	$engine->forum	= true;
 
-	$supertag = $engine->translit($new_tag);
+	$tag = $new_tag;
 
-	$engine->rename_page($old_tag, $new_tag, $supertag);
+	$engine->rename_page($old_tag, $new_tag, $tag);
 	$engine->remove_referrers($old_tag);
 	$engine->remove_links($old_tag);
 	$engine->clear_cache_wanted_page($new_tag);
-	$engine->clear_cache_wanted_page($supertag);
+	$engine->clear_cache_wanted_page($tag);
 
 	// rerender page and update page_link table in new context
 	$page = $engine->load_page($new_tag);
@@ -607,7 +607,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make collector query
 		$sql =
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
+			"SELECT p.page_id, p.tag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page AS p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .

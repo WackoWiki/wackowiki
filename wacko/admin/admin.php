@@ -372,7 +372,7 @@ if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 	{
 		// page context
 		$engine->module	= $mode;
-		$engine->tag	= $engine->supertag = 'admin.php' . ($db->rewrite_mode ? '?' : '&amp;') . 'mode=' . $mode;
+		$engine->tag	= $engine->tag = 'admin.php' . ($db->rewrite_mode ? '?' : '&amp;') . 'mode=' . $mode;
 		$engine->context[++$engine->current_context] = $engine->tag;
 
 		// module run

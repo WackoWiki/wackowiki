@@ -45,7 +45,7 @@ if (@$_POST['_action'] === 'purge_data')
 	}
 
 	// purge related page cache
-	if ($this->http->invalidate_page($this->supertag))
+	if ($this->http->invalidate_page($this->tag))
 	{
 		$message[] = $this->_t('PageCachePurged');
 	}

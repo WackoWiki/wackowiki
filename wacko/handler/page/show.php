@@ -130,7 +130,7 @@ if ($this->has_access('read'))
 			$store					= ($this->page['latest'] ? true : false);
 			$this->page['body_r']	= $this->compile_body($this->page['body'], $this->page['page_id'], true, $store);
 
-			$this->http->invalidate_page($this->supertag);
+			$this->http->invalidate_page($this->tag);
 			$this->http->no_cache(false);
 		}
 

@@ -14,7 +14,7 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.supertag, p.title " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
@@ -108,7 +108,7 @@ if ($mode == 'remove' && isset($file))
 		{
 			if ($file['page_id'])
 			{
-				$path = 'file:/' . $file['supertag'] . '/';
+				$path = 'file:/' . $file['tag'] . '/';
 			}
 			else
 			{
@@ -120,7 +120,7 @@ if ($mode == 'remove' && isset($file))
 			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
 			$tpl->user		= $this->user_link($file['user_name'], '', true, false);
 
-			$tpl->location	= $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal');
+			$tpl->location	= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
 			$tpl->fileusage	= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
 			$tpl->notice	= $this->show_message($this->_t('FileRemoveConfirm'), 'warning', false);
 
@@ -157,7 +157,7 @@ else if ($mode == 'label' && isset($file))
 		{
 			if ($file['page_id'])
 			{
-				$path = 'file:/' . $file['supertag'] . '/';
+				$path = 'file:/' . $file['tag'] . '/';
 			}
 			else
 			{
@@ -185,8 +185,8 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 	{
 		if ($file['page_id'])
 		{
-			$path	= 'file:/' . $file['supertag'] . '/';
-			$href	= $this->href('file', trim($file['supertag'], '/'), 'get=' . $file['file_name']);
+			$path	= 'file:/' . $file['tag'] . '/';
+			$href	= $this->href('file', trim($file['tag'], '/'), 'get=' . $file['file_name']);
 		}
 		else
 		{
@@ -253,7 +253,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					$tpl->leave();
 				}
 
-				$tpl->location		= $file['supertag']? $this->link('/' . $file['supertag'], '', $file['title'], $file['supertag']) : $this->_t('UploadGlobal');
+				$tpl->location		= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
 				$tpl->fileusage		= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
 				$tpl->c_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
 			}

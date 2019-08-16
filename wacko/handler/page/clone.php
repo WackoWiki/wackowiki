@@ -17,7 +17,6 @@ if (!$this->has_access('read'))
 }
 
 $from		= $this->tag;
-$superfrom	= $this->supertag;
 $edit_note	= Ut::perc_replace($this->_t('ClonedFrom'), $this->tag);
 
 
@@ -50,12 +49,10 @@ if (@$_POST['_action'] === 'clone_page')
 		$log = $tpl->massLog();
 
 		$pages = $this->db->load_all(
-			"SELECT page_id, tag, supertag " .
+			"SELECT page_id, tag " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE (supertag LIKE " . $this->db->q($superfrom . '/%') . " " .
-				"OR tag LIKE " . $this->db->q($from . '/%') . " " .
-				"OR tag = " . $this->db->q($from) . " " .
-				"OR supertag = " . $this->db->q($superfrom) . ") " .
+			"WHERE (tag LIKE " . $this->db->q($from . '/%') . " " .
+				"OR tag = " . $this->db->q($from) . ") " .
 				"AND comment_on_id = 0");
 
 		$slashes	= (int) @count_chars($from, 1)['/']; // @ to return 0 when no slashes used
@@ -124,8 +121,7 @@ if ($this->check_acl($this->get_user_name(), $this->db->rename_globalacl))
 	$klusterwerks = $this->db->load_single(
 		"SELECT COUNT(*) AS n " .
 		"FROM " . $this->db->table_prefix . "page " .
-		"WHERE (supertag LIKE " . $this->db->q($superfrom . '/%') . " " .
-			"OR tag LIKE " . $this->db->q($from . '/%') . ") " .
+		"WHERE (tag LIKE " . $this->db->q($from . '/%') . ") " .
 			"AND comment_on_id = 0");
 
 	if ((int) $klusterwerks['n'])

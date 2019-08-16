@@ -63,12 +63,12 @@ function admin_content_pages(&$engine, &$module)
 	// set level ordering
 	if (isset($_GET['order']) && $_GET['order'] == 'tag_asc')
 	{
-		$order		= 'ORDER BY p.supertag DESC ';		// we make level sorting
+		$order		= 'ORDER BY p.tag DESC ';			// we make level sorting
 		$ordertag	= 'tag_desc';						// in reverse orber because
 	}													// higher level is denoted
 	else if (isset($_GET['order']) && $_GET['order'] == 'tag_desc')		// by lower value (e.g.
 	{													// 1 = critical, 2 = highest,
-		$order		= 'ORDER BY p.supertag ASC ';		// and so on)
+		$order		= 'ORDER BY p.tag ASC ';			// and so on)
 		$ordertag	= 'tag_asc';
 	}
 	else

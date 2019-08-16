@@ -165,8 +165,8 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/i', "\\1\\2&nbsp;\\4", $data);
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/i',   "\\1\\2&nbsp;\\4", $data);
+				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/ui', "\\1\\2&nbsp;\\4", $data);
+				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/ui',   "\\1\\2&nbsp;\\4", $data);
 			}
 
 			foreach ($this->glueleft as $i)
@@ -183,7 +183,7 @@ class Typografica
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
 		if ($this->settings['dashglue'])
 		{
-			$data = preg_replace('/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/i', "<nobr>\\1</nobr>", $data);
+			$data = preg_replace('/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/ui', "<nobr>\\1</nobr>", $data);
 		}
 
 		// 6. Macros
@@ -256,7 +256,7 @@ class Typografica
 		// 0a. apostroph
 		if ($this->settings['apostroph'])
 		{
-			$data = preg_replace("/([\s\"][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+)'([~ºª³²¿¯àÀåÅèÈîÎóÓþÞÿß][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+[\s\.,:;\)<=\"])/i", "\\1’\\2", $data );
+			$data = preg_replace("/([\s\"][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+)'([~ºª³²¿¯àÀåÅèÈîÎóÓþÞÿß][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+[\s\.,:;\)<=\"])/ui", "\\1’\\2", $data );
 		}
 
 		// 1. English quotes
@@ -278,18 +278,18 @@ class Typografica
 		if ($this->settings['laquo'])
 		{
 			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data);
-			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
+			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1&laquo;\\2", $data);
 			// nb: wacko only regexp follows:
-			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/i", "\\1&laquo;\\2", $data);
+			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/&nbsp;|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1&laquo;\\2", $data);
 			$_data	= "\"\"";
 
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1&raquo;", $data);
 				// nb: wacko only regexps follows:
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/si", "\\1&raquo;", $data);
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/si", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1&raquo;", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/usi", "\\1&raquo;", $data);
 			}
 		}
 
@@ -318,7 +318,7 @@ class Typografica
 		// 4. (ñ)
 		if ($this->settings['(c)'])
 		{
-			$data = preg_replace('/\([cCñÑ]\)/i', "&copy;", $data);
+			$data = preg_replace('/\([cCñÑ]\)/ui', "&copy;", $data);
 			# $data = preg_replace("/\([cCñÑ]\)((?=\w)|(?=\s[0-9]+))/i", "&copy;", $data); // not working (?)
 		}
 
@@ -349,9 +349,9 @@ class Typografica
 		// 5a. 12^C
 		if ($this->settings['degrees'])
 		{
-			$data = preg_replace('/-([0-9])+\^([FCÑK])/', "&ndash;\\1&#176\\2", $data);
-			$data = preg_replace('/\+([0-9])+\^([FCÑK])/', "+\\1&#176\\2", $data);
-			$data = preg_replace('/\^([FCÑK])/', "&#176\\1", $data);
+			$data = preg_replace('/-([0-9])+\^([FCÑK])/u', "&ndash;\\1&#176\\2", $data);
+			$data = preg_replace('/\+([0-9])+\^([FCÑK])/u', "+\\1&#176\\2", $data);
+			$data = preg_replace('/\^([FCÑK])/u', "&#176\\1", $data);
 		}
 
 		// 6. phones

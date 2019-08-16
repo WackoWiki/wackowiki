@@ -391,12 +391,12 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		// get array with cluster related page_id's
 		if (!isset($cluster_pages[$root]))
 		{
-			$_root = $engine->translit($root);
+			$_root = $root;
 			$pages = $engine->db->load_all(
 				"SELECT page_id " .
 				"FROM " . $engine->db->table_prefix . "page " .
-				"WHERE supertag LIKE " . $engine->db->q($_root . '/%') . " " .
-					"OR supertag = " . $engine->db->q($_root) . " ");
+				"WHERE tag LIKE " . $engine->db->q($_root . '/%') . " " .
+					"OR tag = " . $engine->db->q($_root) . " ");
 
 			foreach ($pages as $page)
 			{

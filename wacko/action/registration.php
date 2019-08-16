@@ -21,7 +21,7 @@ $this->no_way_back = true; // prevent goback'ing that page
 if (isset($_GET['confirm']))
 {
 	$this->user_email_confirm_check($_GET['confirm']);
-	$this->http->invalidate_page($this->supertag);
+	$this->http->invalidate_page($this->tag);
 	$this->login_page();
 }
 

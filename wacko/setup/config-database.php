@@ -131,8 +131,8 @@ foreach ($drivers as $k => $driver)
  */
 
 $charsets	= [];
-$charsets[]	= ['utf8mb4',	'utf8mb4',	'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
-$charsets[]	= ['utf8',		'utf8',		'UTF-8 Unicode'];	// default
+$charsets[]	= ['utf8mb4',	'utf8mb4',	'utf8mb4 (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
+$charsets[]	= ['utf8',		'utf8',		'utf8'];	// default
 
 echo '	<select id="database_charset" name="config[database_charset]" required>';
 
