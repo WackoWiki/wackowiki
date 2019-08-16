@@ -1212,12 +1212,6 @@ $ap_translation = [
 	'Check'						=> 'Проверь',
 	'Solve'						=> 'Solve',
 
-	// Transliterate module
-	'TranslitField'				=> 'Транслитерировать поле %1 в таблице  `%2`.',
-	'TranslitStart'				=> 'пуск',
-	'TranslitContinue'			=> 'продолжить',
-	'TranslitCompleted'			=> 'Процедура обновления завершена.',
-
 	// Bad Behavior module
 	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
 	'BbEnable'					=> 'Enable Bad Behavior',
