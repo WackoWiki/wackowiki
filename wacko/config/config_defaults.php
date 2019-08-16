@@ -138,7 +138,16 @@ $wacko_config_defaults = [
 	'nofollow'						=> 0,
 
 
-	// TODO: uniform use of term 'page' and 'cluster' ('groups_page' but 'news_cluster')
+
+
+
+
+
+	'license'						=> '',
+	'enable_license'				=> 0,
+	'allow_license_per_page'		=> 0,
+
+	// default pages (replaced by lang value in installer.xy.php)
 	'groups_page'					=> 'Groups',
 	'users_page'					=> 'Users',
 	'category_page'					=> 'Category',
@@ -148,22 +157,19 @@ $wacko_config_defaults = [
 	'terms_page'					=> '',	// Terms
 	'privacy_page'					=> '',	// Privacy
 
-	'license'						=> '',
-	'enable_license'				=> 0,
-	'allow_license_per_page'		=> 0,
-
-	// default pages
 	'sandbox'						=> '',
-	'comments_page'					=> '',
-	'changes_page'					=> '',
+	'comments_page'					=> '',	#
+	'changes_page'					=> '',	#
+	'index_page'					=> '',	# +
+	'random_page'					=> '',	# +
 	'removals_page'					=> '',
 	'wanted_page'					=> '',
 	'orphaned_page'					=> '',
-	'search_page'					=> '',
-	'login_page'					=> '',
-	'settings_page'					=> '',
-	'registration_page'				=> '',
-	'password_page'					=> '',
+	'search_page'					=> '',	// Search
+	'login_page'					=> '',	// Login
+	'account_page'					=> '',	// Account
+	'registration_page'				=> '',	// Registration
+	'password_page'					=> '',	// Password
 
 	'default_write_acl'				=> '$',
 	'default_read_acl'				=> '*',

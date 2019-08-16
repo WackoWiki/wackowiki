@@ -71,7 +71,7 @@ if (($user = $this->get_user()))
 	}
 
 	$tpl->u_logout	= $this->href('', '', 'action=logout');
-	$tpl->u_account	= $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'));
+	$tpl->u_account	= $this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'));
 	$tpl->u_cookies	= $this->href('', '', 'action=clearcookies');
 }
 else // login
@@ -189,7 +189,7 @@ else // login
 	}
 
 	$tpl->l_href		= $this->href();
-	$tpl->l_pwhref		= $this->href('', $this->_t('ChangePasswordLink'));
+	$tpl->l_pwhref		= $this->href('', $this->db->password_page);
 	$tpl->l_username	= @$this->sess->login_username;
 
 	if ($this->db->allow_registration)

@@ -17,7 +17,7 @@ $wacko_config = [
 	'sql_mode_strict' => '0',
 	'table_prefix' => 'wacko_',
 	'system_seed' => 'odX7va10i235Wi_E@UBb',
-	'recovery_password' => '',
+	'recovery_password' => '$2y$10$9G7NCZZx9qbANiWy0oaaoekmK8pUZH2AVc72Z9rrW.shc1m73H7IO',
 	'hashid_seed' => '8hR7_1]1TR}][1t6eP0u',
 	'wacko_version' => '5.5.12',
 ];

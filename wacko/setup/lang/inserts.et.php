@@ -27,16 +27,16 @@ if ($config['language'] == $page_lang)
 	insert_page($config['privacy_page'],	'Andmekaitse',		'',						$page_lang, 'Admins', false, false);
 
 	#insert_page('JuhuslikLehekülg',		'Juhuslik lehekülg',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Juhuslik');
+
+	insert_page($config['registration_page'],		'Registreerimine',			'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],			'Parool',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],				'Otsing',					'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],				'Login',					'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],			'Settings',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
 }
 
 insert_page('ViimasedMuudatused',		'Viimased Muudatused',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Muudatused');
 insert_page('ViimatiKommenteeritud',	'Viimati Kommenteeritud',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Kommenteeritud');
 insert_page('SisuKord',					'Sisu Kord',				'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
-
-insert_page('Registration',				'Registreerimine',			'{{registration}}',		$page_lang, 'Admins', false, false);
-insert_page('Password',					'Parool',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Otsing',					'Otsing',					'{{search}}',			$page_lang, 'Admins', false, false);
-insert_page('Login',					'Login',					'{{login}}',			$page_lang, 'Admins', false, false);
-insert_page('Settings',					'Settings',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 ?>

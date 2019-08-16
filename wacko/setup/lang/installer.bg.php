@@ -20,6 +20,12 @@ $lang = [
 	'groups_page'		=> 'Groups',
 	'users_page'		=> 'Users',
 
+	'search_page'		=> 'Търсене',
+	'login_page'		=> 'влизане',
+	'account_page'		=> 'Settings',
+	'registration_page'	=> 'Регистрация',
+	'password_page'		=> 'Password',
+
 	#'help_page'			=> 'Помощ',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',

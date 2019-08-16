@@ -27,16 +27,17 @@ if ($config['language'] == $page_lang)
 	insert_page($config['privacy_page'],	'Privacybeleid',		'',				$page_lang, 'Admins', false, false);
 
 	#insert_page('WillekeurigePagina',		'Willekeurige pagina',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Willekeurig');
+
+	insert_page($config['registration_page'],		'Registratie',			'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],			'Paswoord',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],				'Zoeken',				'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],				'Inloggen',				'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],			'Instellingen',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 }
 
 insert_page('PaginaIndex',			'Pagina Index',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
 insert_page('LaatsteWijzigingen',	'Laatste Wijzigingen',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Wijzigingen');
 insert_page('LaatsteOpmerkingen',	'Laatste Opmerkingen',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Opmerkingen');
 
-insert_page('Registratie',			'Registratie',			'{{registration}}',		$page_lang, 'Admins', false, false);
-insert_page('Paswoord',				'Paswoord',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Zoeken',				'Zoeken',				'{{search}}',			$page_lang, 'Admins', false, false);
-insert_page('Inloggen',				'Inloggen',				'{{login}}',			$page_lang, 'Admins', false, false);
-insert_page('Instellingen',			'Instellingen',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 ?>

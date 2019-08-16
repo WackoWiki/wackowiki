@@ -46,7 +46,7 @@ function admin_config_pages(&$engine, &$module)
 		$config['search_page']				= trim((string) $_POST['search_page'], '/');
 		$config['registration_page']		= trim((string) $_POST['registration_page'], '/');
 		$config['login_page']				= trim((string) $_POST['login_page'], '/');
-		$config['settings_page']			= trim((string) $_POST['settings_page'], '/');
+		$config['account_page']			= trim((string) $_POST['account_page'], '/');
 		$config['password_page']			= trim((string) $_POST['password_page'], '/');
 		$config['users_page']				= trim((string) $_POST['users_page'], '/');
 		$config['category_page']			= trim((string) $_POST['category_page'], '/');
@@ -289,11 +289,11 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="settings_page"><strong><?php echo $engine->_t('SettingsPage');?>:</strong><br>
+					<label for="account_page"><strong><?php echo $engine->_t('SettingsPage');?>:</strong><br>
 					<small><?php echo $engine->_t('SettingsPageInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="settings_page" name="settings_page" value="<?php echo Ut::html($engine->db->settings_page);?>">
+					<input type="text" maxlength="255" id="account_page" name="account_page" value="<?php echo Ut::html($engine->db->account_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">

@@ -36,8 +36,8 @@ if (@$this->page['tag'] !== $this->db->root_page)
 if (($logged_in = $this->get_user()))
 {
 	$tpl->uare_link		= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
-	$tpl->uare_account	= $this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'), $this->_t('AccountTip'));
-	$tpl->uare_logout	= $this->href('', $this->_t('LoginPage'), ['action' => 'logout']);
+	$tpl->uare_account	= $this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'), $this->_t('AccountTip'));
+	$tpl->uare_logout	= $this->href('', $this->db->login_page, ['action' => 'logout']);
 
 	if ($this->is_admin())
 	{
@@ -48,11 +48,11 @@ if (($logged_in = $this->get_user()))
 else
 {
 	// show register / login link
-	$tpl->login_link	= $this->compose_link_to_page($this->_t('LoginPage'), '', $this->_t('LoginPage'), '');
+	$tpl->login_link	= $this->compose_link_to_page($this->db->login_page, '', $this->_t('LoginPage'), '');
 
 	if ($this->db->allow_registration)
 	{
-		$tpl->login_reg_link = $this->compose_link_to_page($this->_t('RegistrationPage'), '', $this->_t('RegistrationPage'));
+		$tpl->login_reg_link = $this->compose_link_to_page($this->db->registration_page, '', $this->_t('RegistrationLink'));
 	}
 }
 
@@ -278,7 +278,7 @@ else
 }
 $tpl->leave();
 
-$tpl->search		= $this->href('', $this->_t('SearchPage'));
+$tpl->search		= $this->href('', $this->db->search_page);
 $tpl->breadcrumbs	= $this->get_page_path(false, ' &gt; ', true, true);
 # $tpl->usertrail	= $this->get_user_trail(true, ' &gt; ', true, $size = 8);
 
