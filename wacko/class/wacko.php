@@ -1446,7 +1446,7 @@ class Wacko
 			}
 			else
 			{
-				$pages[]	= $this->db->registratio_page;
+				$pages[]	= $this->db->registration_page;
 			}
 
 			$pages[]	= $this->db->category_page;
