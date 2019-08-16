@@ -20,6 +20,12 @@ $lang = [
 	'groups_page'		=> 'Grupper',
 	'users_page'		=> 'Brugere',
 
+	'search_page'		=> 'Søgning',
+	'login_page'		=> 'Login',
+	'account_page'		=> 'Indstillinger',
+	'registration_page'	=> 'Registrering',
+	'password_page'		=> 'Password',
+
 	#'help_page'			=> 'Hjælp',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',

@@ -20,6 +20,12 @@ $lang = [
 	'groups_page'		=> 'Csoportok',
 	'users_page'		=> 'Felhasználók',
 
+	'search_page'		=> 'Keresés',
+	'login_page'		=> 'Bejelentkezés',
+	'account_page'		=> 'Beállítások',
+	'registration_page'	=> 'Regisztráció',
+	'password_page'		=> 'Jelszó',
+
 	#'help_page'		=> 'Segítség',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',

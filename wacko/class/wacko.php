@@ -1442,11 +1442,11 @@ class Wacko
 			if (isset($user['user_name']))
 			{
 				$pages[]	= $this->db->users_page . '/' . $user['user_name'];
-				$pages[]	= $this->_t('AccountLink');
+				$pages[]	= $this->db->account_page;
 			}
 			else
 			{
-				$pages[]	= $this->_t('RegistrationPage');
+				$pages[]	= $this->db->registratio_page;
 			}
 
 			$pages[]	= $this->db->category_page;
@@ -1456,8 +1456,8 @@ class Wacko
 			$pages[]	= $this->db->users_page;
 			$pages[]	= $this->db->terms_page;
 
-			$pages[]	= $this->_t('LoginPage');
-			$pages[]	= $this->_t('SearchPage');
+			$pages[]	= $this->db->login_page;
+			$pages[]	= $this->db->search_page;
 			$pages[]	= $this->tag;
 
 			$pages		= array_unique($pages);
@@ -3057,7 +3057,7 @@ class Wacko
 		else
 		{
 			$this->set_message(Ut::perc_replace($this->_t('EmailNotConfirmed'),
-				$this->compose_link_to_page($this->_t('AccountLink'), '', $this->_t('AccountText'))), 'error');
+				$this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'))), 'error');
 		}
 	}
 
@@ -9015,7 +9015,7 @@ class Wacko
 
 	function login_page()
 	{
-		$this->http->redirect($this->href('', $this->_t('LoginPage'), Ut::random_token(4)));
+		$this->http->redirect($this->href('', $this->db->login_page, Ut::random_token(4)));
 	}
 
 	function go_back($to)

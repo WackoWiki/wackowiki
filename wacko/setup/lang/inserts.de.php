@@ -27,16 +27,17 @@ if ($config['language'] == $page_lang)
 	insert_page($config['privacy_page'],	'Datenschutzerklärung',		'',			$page_lang, 'Admins', false, false);
 
 	#insert_page('RandomPage',				'Zufällige Seite',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Zufall');
+
+	insert_page($config['registration_page'],	'Registrierung',		'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Passwort',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],			'Suche',				'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'Anmeldung',			'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Einstellungen',		'{{usersettings}}',		$page_lang, 'Admins', false, false);
 }
 
 insert_page('LetzteAenderungen',	'Letzte Änderungen',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Änderungen');
 insert_page('LetzteKommentare',		'Letzte Kommentare',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Kommentare');
 insert_page('SeitenIndex',			'Seiten Index',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
 
-insert_page('Registrierung',		'Registrierung',		'{{registration}}',		$page_lang, 'Admins', false, false);
-insert_page('Passwort',				'Passwort',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Suche',				'Suche',				'{{search}}',			$page_lang, 'Admins', false, false);
-insert_page('Anmeldung',			'Anmeldung',			'{{login}}',			$page_lang, 'Admins', false, false);
-insert_page('Einstellungen',		'Einstellungen',		'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 ?>

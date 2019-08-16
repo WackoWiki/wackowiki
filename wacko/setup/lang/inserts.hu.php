@@ -27,17 +27,17 @@ if ($config['language'] == $page_lang)
 	insert_page($config['privacy_page'],	'Privacy',		'',			$page_lang, 'Admins', false, false);
 
 	#insert_page('LapTalálomra',			'Lap találomra',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Random');
+
+	insert_page($config['registration_page'],		'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],			'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],				'Keresés',				'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],				'Bejelentkezés',		'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],			'Beállítások',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 }
 
 //
 insert_page('FrissVáltoztatások',	'Friss változtatások',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Változtatások');
 insert_page('UtolsóMegjegyzések',	'Utolsó megjegyzések',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Megjegyzések');
 insert_page('OldalIndex',			'Oldal Index',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
-
-insert_page('Regisztráció',			'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
-insert_page('Jelszó',				'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
-insert_page('Keresés',				'Keresés',				'{{search}}',			$page_lang, 'Admins', false, false);
-insert_page('Bejelentkezés',		'Bejelentkezés',		'{{login}}',			$page_lang, 'Admins', false, false);
-insert_page('Beállítások',			'Beállítások',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 ?>

@@ -9,7 +9,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Ошибка отправки формы. Попробуйте ещё раз.',
 	// logged in panel
 	'YouAre'					=> 'Вы ',
-	'AccountLink'				=> 'Настройки',
 	'AccountText'				=> 'Профиль',
 	'AccountTip'				=> 'Профиль',
 	'AdminText'					=> 'Admin',
@@ -24,7 +23,6 @@ $wacko_translation = [
 	'RegistrationPassword'		=> 'Пароль',
 	'RegistrationButton'		=> 'Поехали',
 	'RegistrationUserNameOwned'	=> 'Данное имя уже зарегистрировано. Выберите другое.',
-	'RegistrationPage'			=> 'Регистрация',
 	'SiteRegistered'			=> 'Вы успешно зарегистрировались на сайте %1.',
 	'RegistrationEmailInfo'		=> 'Действующий email адрес, на который будут высылаться все сообщения от WackoWiki.' .
 								   ' Email не будет публично доступен и будет использоваться исключительно для получения регистрационной информации или для запрошенных уведомлений и новостей.',
@@ -436,7 +434,6 @@ $wacko_translation = [
 	'SearchFor'					=> 'Искать',
 	'TopicSearchResults'		=> 'Результаты поиска в заголовках фразы ',
 	'NotFoundInTopics'			=> 'не встречается в заголовках',
-	'SearchPage'			=> 'Поиск',
 
 	'PostedBy'					=> 'отправлен',
 	'ThisIsCommentOn'			=> 'Комментарий к',
@@ -613,7 +610,6 @@ $wacko_translation = [
 	'NewPassword'				=> 'Новый пароль',
 	'YouWantChangePassword'		=> 'Смена пароля',
 	'ChangePasswordButton'		=> 'Смена пароля',
-	'ChangePasswordLink'		=> 'Пароль',
 	'PasswordChanged'			=> 'Пароль успешно изменён',
 	'EmailWelcome'				=> 'Регистрация в ',
 	'EmailRegistered'			=> 'Вы успешно зарегистрировались в %1.' . "\n" . 'Ваше имя пользователя: %2'."\n\n" . 'Если вы хотите получать уведомления, необходимо подтвердить адрес электронной почты. Для этого пройдите, пожалуйста, по ссылке:' . "\n" . '%3',
