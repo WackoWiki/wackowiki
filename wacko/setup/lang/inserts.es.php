@@ -30,7 +30,7 @@ if ($config['language'] == $page_lang)
 }
 
 insert_page('UltimasModificaciones',	'Ultimas Modificaciones',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Modificaciones');
-insert_page('UltimosCommentarios',		'Ultimos Commentarios',		'{{commented}}',		$page_lang, 'Admins', false, true, 'Commentarios');
+insert_page('UltimosComentarios',		'Ultimos Comentarios',		'{{commented}}',		$page_lang, 'Admins', false, true, 'Comentarios');
 insert_page('IndiceDePaginas',			'Indice De Paginas',		'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Indice');
 
 insert_page('Registrarse',				'Registrarse',				'{{registration}}',		$page_lang, 'Admins', false, false);
