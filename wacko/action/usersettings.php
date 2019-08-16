@@ -288,7 +288,7 @@ else if (($user = $this->get_user()))
 		$tpl->userlink		= $this->user_link($user['user_name'], '', true, false);
 		$tpl->realname		= $user['real_name'];
 		$tpl->href			= $this->href('', $this->_t('ChangePasswordLink'));
-		$tpl->email			= htmlentities($user['email'], ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+		$tpl->email			= $user['email'];
 
 		if (!$user['email_confirm'])
 		{

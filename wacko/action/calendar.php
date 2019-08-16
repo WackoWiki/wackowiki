@@ -117,7 +117,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		// if day_name_length is > 3, the full name of the day will be printed
 		foreach ($day_names as $d)
 		{
-			$calendar .= '<th abbr="' . htmlentities($d, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '">' . htmlentities(($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '</th>';
+			$calendar .= '<th abbr="' . $d . '">' . ($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d) . '</th>';
 		}
 
 		$calendar .= "</tr>\n<tr>";
