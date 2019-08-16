@@ -137,12 +137,6 @@ $wacko_config_defaults = [
 	'noreferrer'					=> 0,
 	'nofollow'						=> 0,
 
-
-
-
-
-
-
 	'license'						=> '',
 	'enable_license'				=> 0,
 	'allow_license_per_page'		=> 0,

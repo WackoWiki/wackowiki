@@ -26,18 +26,21 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],		'Brugsbetingelser',		'',				$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Privacy',		'',						$page_lang, 'Admins', false, false);
 
-	#insert_page('TilfældigSide',			'Tilfældig side',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Tilfældig');
+	#insert_page($config['random_page'],			'Tilfældig side',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Tilfældig');
 
 	insert_page($config['registration_page'],	'Registrering',		'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Søgning',			'{{search}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['login_page'],			'Login',			'{{login}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['account_page'],		'Indstillinger',	'{{usersettings}}',		$page_lang, 'Admins', false, false);
+
+	insert_page($config['changes_page'],		'Opdateringer',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Opdateringer');
+	insert_page($config['comments_page'],		'Kommentarer',		'{{commented}}',		$page_lang, 'Admins', false, true, 'Kommentarer');
+	insert_page($config['index_page'],			'Indhold',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Indhold');
 }
-
-insert_page('Opdateringer',		'Opdateringer',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Opdateringer');
-insert_page('Kommentarer',		'Kommentarer',		'{{commented}}',		$page_lang, 'Admins', false, true, 'Kommentarer');
-insert_page('Indhold',			'Indhold',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Indhold');
-
+else
+{
+	// set only bookmarks
+}
 
 ?>

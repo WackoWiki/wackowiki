@@ -26,17 +26,21 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],		'Terms',		'',							$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],	'Política de privacidade',		'',			$page_lang, 'Admins', false, false);
 
-	#insert_page('PáginaAleatória',			'Página aleatória',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Aleatória');
+	#insert_page($config['random_page'],			'Página aleatória',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Aleatória');
 
-	insert_page($config['registration_page'],		'Registration',				'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],			'Password',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],				'Buscar',					'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],				'Entrar',					'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],			'Settings',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['registration_page'],	'Registration',				'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Password',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],			'Buscar',					'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'Entrar',					'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Settings',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
+
+	insert_page($config['changes_page'],		'Alterações Recentes',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Alterações');
+	insert_page($config['comments_page'],		'Recentemente Comentadas',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Comentadas');
+	insert_page($config['index_page'],			'Índicede Páginas',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Índicede');
 }
-
-insert_page('AlteraçõesRecentes',		'Alterações Recentes',		'{{changes}}',			$page_lang, 'Admins', false, true, 'Alterações');
-insert_page('RecentementeComentadas',	'Recentemente Comentadas',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Comentadas');
-insert_page('ÍndicedePáginas',			'Índicede Páginas',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Índicede');
+else
+{
+	// set only bookmarks
+}
 
 ?>

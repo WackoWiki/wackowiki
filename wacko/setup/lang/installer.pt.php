@@ -26,6 +26,11 @@ $lang = [
 	'registration_page'	=> 'Registration',
 	'password_page'		=> 'Password',
 
+	'changes_page'		=> 'AlteraçõesRecentes',
+	'comments_page'		=> 'RecentementeComentadas',
+	'index_page'		=> 'ÍndicedePáginas',
+
+	'random_page'		=> 'PáginaAleatória',
 	#'help_page'		=> 'Help',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',
