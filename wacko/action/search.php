@@ -399,7 +399,7 @@ if (strlen($phrase) >= 3)
 
 					if ($mode != 'topic')
 					{
-						$tpl->l_count	= $ccount;
+						#$tpl->l_count	= $ccount;
 						$tpl->l_preview	= $preview;
 					}
 				}
