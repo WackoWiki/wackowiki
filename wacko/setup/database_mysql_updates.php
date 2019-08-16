@@ -123,11 +123,14 @@ $update_page_r5_4_4 = "UPDATE {$pref}page AS p, (SELECT page_id, MAX(version_id)
 $update_page_r5_4_5 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(file_id) AS files FROM {$pref}file WHERE page_id <> 0 AND deleted <> 1 GROUP BY page_id) AS f SET p.files = f.files WHERE p.page_id = f.page_id";
 $update_page_r5_4_6 = "UPDATE {$pref}page AS p, (SELECT page_id, COUNT(page_id) AS revisions FROM {$pref}revision WHERE deleted <> 1 GROUP BY page_id) AS r SET p.revisions = r.revisions WHERE p.page_id = r.page_id";
 
+$alter_page_r5_5_0 = "ALTER TABLE {$pref}page DROP supertag";
 
 // PAGE LINK
 $alter_page_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag(78))";
 
 $rename_page_link_r5_4_0 = "RENAME TABLE {$pref}link TO {$pref}page_link";
+
+$alter_page_link_r5_5_0 = "ALTER TABLE {$pref}link DROP to_supertag";
 
 // POLL
 
@@ -144,6 +147,7 @@ $alter_revision_r5_4_2 = "ALTER TABLE {$pref}revision ADD INDEX idx_page_id (pag
 $alter_revision_r5_4_3 = "ALTER TABLE {$pref}revision ADD INDEX idx_version_id (version_id, page_id)";
 $alter_revision_r5_4_4 = "ALTER TABLE {$pref}revision CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
 $alter_revision_r5_4_5 = "ALTER TABLE {$pref}revision ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
+$alter_revision_r5_5_0 = "ALTER TABLE {$pref}revision DROP supertag";
 
 $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, {$pref}page AS p SET r.page_lang = p.page_lang WHERE r.page_id = p.page_id";
 $update_revision_r5_4_1 = "UPDATE {$pref}revision SET page_size = LENGTH(body)";
