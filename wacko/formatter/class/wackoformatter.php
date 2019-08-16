@@ -270,7 +270,7 @@ class WackoFormatter
 			($this->object->db->disable_wikilinks == 1
 				? ''
 				: "(~?)(?<=[^\." . $object->language['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->language['UPPER'] . $object->language['LOWER'] . "+" . $object->language['UPPERNUM'] . $object->language['ALPHANUM'] . "*)\b|") .
-			"\n)/sm";
+			"\n)/usm";
 
 		$this->NOTLONGREGEXP =
 			"/(" . ($this->object->db->disable_formatters == 1
@@ -776,7 +776,7 @@ class WackoFormatter
 			}
 		}
 		// lan path
-		else if (preg_match('/^\\\\\\\\([' . $wacko->language['ALPHANUM_P'] . '\\\!\.\-\_]+)$/', $thing, $matches))
+		else if (preg_match('/^\\\\\\\\([' . $wacko->language['ALPHANUM_P'] . '\\\!\.\-\_]+)$/u', $thing, $matches))
 		{
 			return '<a href="file://///' . str_replace('\\', '/', $matches[1]) . '">\\\\' . $matches[1] . '</a>';
 		}
@@ -1204,7 +1204,7 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', 1, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/s', $thing, $matches))
+		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];
@@ -1212,14 +1212,14 @@ class WackoFormatter
 		// tikiwiki links
 		else if (!$wacko->_formatter_noautolinks
 				&& $wacko->db->disable_tikilinks != 1
-				&& preg_match('/^(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . $wacko->language['ALPHANUM'] . '*\.' . $wacko->language['ALPHA'] . $wacko->language['ALPHANUM'] . '+)$/s', $thing, $matches))
+				&& preg_match('/^(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . $wacko->language['ALPHANUM'] . '*\.' . $wacko->language['ALPHA'] . $wacko->language['ALPHANUM'] . '+)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::tiki:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($thing);
 		}
 		// wacko links!
 		else if ((!$wacko->_formatter_noautolinks)
-				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . '+' . $wacko->language['UPPERNUM'] . $wacko->language['ALPHANUM'] . '*)$/s', $thing, $matches)))
+				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . '+' . $wacko->language['UPPERNUM'] . $wacko->language['ALPHANUM'] . '*)$/us', $thing, $matches)))
 		{
 			if ($matches[1] == '~')
 			{

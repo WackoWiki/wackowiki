@@ -181,7 +181,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 	// user_id for user 'System'
 	// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
-	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, supertag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . _quote($tag) . "', '" . translit($tag, $lang) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
+	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . _quote($tag) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
 
 	$page_id				= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag = '" . $tag . "' LIMIT 1";
 
@@ -295,7 +295,7 @@ function set_language($lang)
 }
 
 // TODO: refactor -> same function as in wacko class
-function translit($tag, $lang)
+/* function translit($tag, $lang)
 {
 	$language = set_language($lang);
 
@@ -304,13 +304,13 @@ function translit($tag, $lang)
 	$tag = str_replace(' ', '', $tag);
 	$tag = str_replace("'", '_', $tag);
 
-	$tag = @strtr($tag, $language['TranslitLettersFrom'], $language['TranslitLettersTo']);
-	$tag = @strtr($tag, $language['TranslitBiLetters']);
-	$tag = strtolower($tag);
+	$tag = @mb_strtr($tag, $language['TranslitLettersFrom'], $language['TranslitLettersTo']);
+	$tag = @mb_strtr($tag, $language['TranslitBiLetters']);
+	$tag = mb_strtolower($tag);
 
 	return rtrim($tag, '/');
 }
-
+ */
 // TODO: refactor -> same function as in dbal class
 function _quote($string)
 {

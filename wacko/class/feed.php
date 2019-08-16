@@ -322,7 +322,7 @@ class Feed
 
 		// collect data
 		$pages = $this->engine->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.modified, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.modified, p.page_lang " .
 			"FROM {$prefix}page p, " .
 				"{$prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
@@ -345,10 +345,7 @@ class Feed
 
 				$xml .= '<url>' . "\n";
 
-				// TODO: legacy issue with multilanguage mode
-				// supertag	-> to avoid encoding errors for non latin1 charsets
-				// tag		-> latin1 and utf8
-				$xml .= '<loc>' . $this->engine->href('', $page['supertag']) . '</loc>' . "\n";
+				$xml .= '<loc>' . $this->engine->href('', $page['tag']) . '</loc>' . "\n";
 				$xml .= '<lastmod>' . substr($page['modified'], 0, 10)  . '</lastmod>' . "\n";
 
 				$days_since_last_changed = (time() - strtotime($page['modified'])) / DAYSECS;

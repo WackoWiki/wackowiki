@@ -72,7 +72,7 @@ if (!isset($legend)) $legend = '';
 
 // collect pages
 if ($pages = $this->db->load_all(
-	"SELECT page_id, tag, supertag, title, page_lang " .
+	"SELECT page_id, tag, title, page_lang " .
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = 0 " .
 		($cluster

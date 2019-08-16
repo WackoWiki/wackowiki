@@ -30,11 +30,11 @@ $query =
 		"AND p.page_id = a.page_id ";
 
 $count = $this->db->load_single(
-	"SELECT COUNT(p.supertag) AS n " .
+	"SELECT COUNT(p.tag) AS n " .
 	$query, true);
 
 $page = $this->db->load_single(
-	"SELECT p.supertag, p.tag " .
+	"SELECT p.tag " .
 	$query .
 	"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
 	, true);
@@ -50,5 +50,5 @@ if (isset($test) || $this->get_user_setting('dont_redirect') || @$_POST['redirec
 }
 else
 {
-	$this->http->redirect($this->href('', $page['supertag']));
+	$this->http->redirect($this->href('', $page['tag']));
 }

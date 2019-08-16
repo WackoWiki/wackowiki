@@ -76,7 +76,7 @@ if (!isset($letters)
 		"WHERE comment_on_id = 0 " .
 			"AND deleted = 0 " .
 			($page
-				? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
+				? "AND tag LIKE " . $this->db->q($tag . '/%') . " "
 				: "") .
 			($user_id
 				? "AND owner_id <> " . (int) $user_id . " "
@@ -114,7 +114,7 @@ $selector =
 	"WHERE comment_on_id = 0 " .
 		"AND deleted = 0 " .
 		($page
-			? "AND supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
+			? "AND tag LIKE " . $this->db->q($tag . '/%') . " "
 			: "") .
 		($user_id
 			? "AND owner_id <> " . (int) $user_id . " "
@@ -142,7 +142,7 @@ $pages_to_display	= [];
 $page_ids			= [];
 
 if (($pages = $this->db->load_all(
-	"SELECT page_id, owner_id, tag, supertag, title, page_lang " .
+	"SELECT page_id, owner_id, tag, title, page_lang " .
 	$selector .
 	"ORDER BY " .
 		($title

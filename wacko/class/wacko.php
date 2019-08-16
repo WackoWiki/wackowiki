@@ -18,7 +18,6 @@ class Wacko
 	var $tag;
 	var $module;
 	var $method					= '';
-	var $supertag;
 	var $forum					= false;
 	var $categories;
 	var $watch					= [];
@@ -33,7 +32,7 @@ class Wacko
 	var $context				= [];		// page context, used for correct processing of inclusions
 	var $current_context		= 0;		// current context level
 	var $header_count			= 0;
-	var $page_meta				= 'page_id, owner_id, user_id, tag, supertag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
+	var $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	var $first_inclusion		= [];		// for backlinks
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
 	var $unicode_entities		= [];		// common unicode array
@@ -149,15 +148,15 @@ class Wacko
 	}
 
 	// MISC
-	function get_page_tag($page_id = 0, $supertag = false)
+	function get_page_tag($page_id = 0)
 	{
 		$page = $this->db->load_single(
-			"SELECT tag, supertag " .
+			"SELECT tag " .
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE page_id = " . (int) $page_id . " " .
 			"LIMIT 1", true);
 
-		return $supertag ? $page['supertag'] : $page['tag'];
+		return $page['tag'];
 	}
 
 	function get_page_id($tag = '')
@@ -170,12 +169,10 @@ class Wacko
 		{
 			if (!isset($this->page_id_cache[$tag]))
 			{
-				$supertag = $this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
-
 				$page = $this->db->load_single(
 					"SELECT page_id " .
 					"FROM " . $this->db->table_prefix . "page " .
-					"WHERE supertag = " . $this->db->q($supertag) . " " .
+					"WHERE tag = " . $this->db->q($tag) . " " .
 					"LIMIT 1");
 
 				$page_id = $page['page_id'];
@@ -484,6 +481,8 @@ class Wacko
 			$this->language = &$this->languages[$lang];
 
 			setlocale(LC_CTYPE, $this->language['locale']);
+
+			mb_internal_encoding($this->language['charset']);
 
 			$this->language['locale'] = setlocale(LC_CTYPE, 0);
 		}
@@ -932,11 +931,11 @@ class Wacko
 		$tag	= str_replace('-',		'',		$tag);
 		$tag	= str_replace(' ',		'',		$tag);
 		$tag	= str_replace("'",		'_',	$tag);
-		$_tag	= strtolower($tag);
+		$_tag	= mb_strtolower($tag);
 
 		if ($strtolow)
 		{
-			$tag = @strtr($_tag, $this->translit_macros);
+			$tag = @mb_strtr($_tag, $this->translit_macros);
 		}
 		else
 		{
@@ -944,18 +943,18 @@ class Wacko
 			{
 				while (($pos = strpos($_tag, $macro)) !== false)
 				{
-					$_tag	= substr_replace($_tag, $value, $pos, strlen($macro));
-					$tag	= substr_replace($tag, ucfirst($value), $pos, strlen($macro));
+					$_tag	= mb_substr_replace($_tag, $value, $pos, strlen($macro));
+					$tag	= mb_substr_replace($tag, ucfirst($value), $pos, strlen($macro));
 				}
 			}
 		}
 
-		$tag = @strtr($tag, $this->language['TranslitLettersFrom'], $this->language['TranslitLettersTo']);
-		$tag = @strtr($tag, $this->language['TranslitBiLetters']);
+		$tag = @mb_strtr($tag, $this->language['TranslitLettersFrom'], $this->language['TranslitLettersTo']);
+		$tag = @mb_strtr($tag, $this->language['TranslitBiLetters']);
 
 		if ($strtolow)
 		{
-			$tag = strtolower($tag);
+			$tag = mb_strtolower($tag);
 		}
 
 		// reset to original language setting
@@ -1011,7 +1010,7 @@ class Wacko
 	/**
 	* Loads page-data from DB
 	*
-	* @param string $tag Page tag or supertag
+	* @param string $tag Page tag
 	* @param int $page_id
 	* @param int $revision_id
 	* @param int $cache If LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
@@ -1043,16 +1042,10 @@ class Wacko
 			}
 		}
 
-		// 1. search for page_id (... is preferred, $supertag next)
+		// 1. search for page_id (... is preferred, $tag next)
 		if ($page_id != 0)
 		{
 			$page = $this->_load_page('', $page_id, $revision_id, $cache, false, $metadata_only, $deleted);
-		}
-
-		// 2. search for supertag
-		if (!$page)
-		{
-			$page = $this->_load_page($this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD), 0, $revision_id, $cache, true, $metadata_only, $deleted);
 		}
 
 		// 3. if not found, search for tag
@@ -1075,7 +1068,6 @@ class Wacko
 
 	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $supertagged = false, $metadata_only = 0, $deleted = 0)
 	{
-		$supertag		= '';
 		$cached_page	= '';
 		$page			= null;
 
@@ -1084,16 +1076,8 @@ class Wacko
 			return '';
 		}
 
-		if ($page_id == 0)
-		{
-			(!$supertagged
-				? $supertag = $this->translit($tag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD)
-				: $supertag = $tag
-			);
-		}
-
 		// retrieve from cache
-		if (!$revision_id && $cache && ($cached_page = $this->get_cached_page($supertag, $page_id, $metadata_only)))
+		if (!$revision_id && $cache && ($cached_page = $this->get_cached_page($tag, $page_id, $metadata_only)))
 		{
 			$page = $cached_page;
 		}
@@ -1103,17 +1087,17 @@ class Wacko
 		{
 			if ($metadata_only)
 			{
-				$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, ' .
+				$what_p =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
 							'p.page_lang, p.keywords, p.description, p.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
-				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, ' .
+				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.latest, p.handler, p.comment_on_id, ' .
 							'p.page_lang, p.keywords, p.description, s.noindex, p.deleted, u.user_name, o.user_name AS owner_name';
 			}
 			else
 			{
 				$what_p =	'p.*, u.user_name, o.user_name AS owner_name';
-				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.version_id, ' .
+				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.reviewed_time, ' .
 							'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, ' .
 							'p.description, p.keywords, s.revisions , s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, ' .
@@ -1131,7 +1115,7 @@ class Wacko
 					"WHERE " .
 						($page_id != 0
 							? "page_id  = " . (int) $page_id . " "
-							: "supertag = " . $this->db->q($supertag) . " ") .
+							: "tag = " . $this->db->q($tag) . " ") .
 						($deleted != 1
 							? "AND p.deleted <> 1 "
 							: "") .
@@ -1151,8 +1135,8 @@ class Wacko
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
 						"WHERE " .
 							($page_id != 0
-								? "p.page_id  = " . (int) $page_id . " "
-								: "p.supertag = " . $this->db->q($supertag) . " ") .
+								? "p.page_id	= " . (int) $page_id . " "
+								: "p.tag		= " . $this->db->q($tag) . " ") .
 							($deleted != 1
 								? "AND p.deleted <> 1 "
 								: "") .
@@ -1217,7 +1201,7 @@ class Wacko
 	*
 	* @return mixed Page from cache or FALSE if not found
 	*/
-	function get_cached_page($supertag, $page_id = 0, $metadata_only = 0)
+	function get_cached_page($tag, $page_id = 0, $metadata_only = 0)
 	{
 		if ($page_id != 0)
 		{
@@ -1237,12 +1221,12 @@ class Wacko
 		}
 		else
 		{
-			if (isset($this->page_cache['supertag'][$supertag]))
+			if (isset($this->page_cache['tag'][$tag]))
 			{
-				if (   $this->page_cache['supertag'][$supertag]['mdonly'] == 0
-					|| $this->page_cache['supertag'][$supertag]['mdonly'] == $metadata_only)
+				if (   $this->page_cache['tag'][$tag]['mdonly'] == 0
+					|| $this->page_cache['tag'][$tag]['mdonly'] == $metadata_only)
 				{
-					return $this->page_cache['supertag'][$supertag];
+					return $this->page_cache['tag'][$tag];
 				}
 			}
 			else
@@ -1270,13 +1254,8 @@ class Wacko
 		$this->page_cache['page_id'][$page['page_id']]				= $page;
 		$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
 
-		if (empty($page['supertag']))
-		{
-			$page['supertag'] = $this->translit($page['tag'], TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
-		}
-
-		$this->page_cache['supertag'][$page['supertag']]			= $page;
-		$this->page_cache['supertag'][$page['supertag']]['mdonly']	= $metadata_only;
+		$this->page_cache['tag'][$page['tag']]				= $page;
+		$this->page_cache['tag'][$page['tag']]['mdonly']	= $metadata_only;
 	}
 
 	function cache_wanted_page($tag, $page_id = 0, $check = 0)
@@ -1487,9 +1466,8 @@ class Wacko
 			{
 				if ($page != '')
 				{
-					$supertag		= $this->translit($page, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
-					$spages[]		= $supertag;
-					$q_spages[]		= $this->db->q($supertag);
+					$spages[]		= $page;
+					$q_spages[]		= $this->db->q($page);
 				}
 			}
 		}
@@ -1503,7 +1481,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE page_id IN (" . $this->ids_string($p_ids) . ") " .
 				($default
-					? "OR supertag IN ( " . implode(", ", $q_spages) . " ) "
+					? "OR tag IN ( " . implode(", ", $q_spages) . " ) "
 					: "")
 			, true))
 		{
@@ -1511,7 +1489,7 @@ class Wacko
 			{
 				$this->cache_page($link, true);
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
-				$exists[]		= $link['supertag'];
+				$exists[]		= $link['tag'];
 				$_page_ids[]	= $link['page_id'];
 			}
 		}
@@ -1581,7 +1559,7 @@ class Wacko
 		$revisions	= [];
 		$pagination	= [];
 
-		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.edit_note, p.minor_edit, ' .
+		$page_meta = 'p.page_id, p.version_id, p.owner_id, p.user_id, p.tag, p.modified, p.edit_note, p.minor_edit, ' .
 					 'p.page_size, p.reviewed, p.latest, p.deleted, p.comment_on_id, p.title, u.user_name, o.user_name as reviewer ';
 
 		$selector =
@@ -1656,7 +1634,7 @@ class Wacko
 			"WHERE " . ($tag
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
 				: "") .
-				"(l.to_supertag = " . $this->db->q($this->translit($to_tag)) . ") ";
+				"(l.to_tag = " . $this->db->q($to_tag) . ") ";
 
 		// count pages
 		$count_pages = $this->db->load_single(
@@ -1667,7 +1645,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY tag " .
 			$pagination['limit'], true))
@@ -1696,7 +1674,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY tag " .
 			$pagination['limit'], true))
@@ -1720,7 +1698,7 @@ class Wacko
 					? "AND p.modified <= " . $this->db->q($from . ' 23:59:59') . " "
 					: "") .
 				($tag
-					? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
+					? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
 					: "") .
 				($minor_edit
 					? "AND p.minor_edit = 0 "
@@ -1742,7 +1720,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
+		"SELECT p.page_id, p.owner_id, p.tag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
 		$selector .
 		"ORDER BY p.modified DESC " .
 		$pagination['limit'], true))
@@ -1766,13 +1744,13 @@ class Wacko
 		$limit	= $this->get_list_count($limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT c.page_id, c.owner_id, c.tag, c.supertag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
+		"SELECT c.page_id, c.owner_id, c.tag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
 		"FROM " . $this->db->table_prefix . "page c " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (c.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
 		"WHERE c.comment_on_id <> 0 " .
 			($tag
-				? "AND p.supertag LIKE " . $this->db->q($this->translit($tag) . '/%') . " "
+				? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
 				: "") .
 			(!$deleted
 				? "AND p.deleted <> 1 AND c.deleted <> 1 "
@@ -1839,7 +1817,7 @@ class Wacko
 			$pagination = $this->pagination($count_deleted['n'], $limit);
 
 			$deleted = $this->db->load_all(
-				"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.created, p.modified, p.edit_note,
+				"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.edit_note,
 						p.minor_edit, p.latest, p.handler, p.comment_on_id, p.page_lang, p.title, p.keywords,
 						p.description, u.user_name " .
 				"FROM " . $this->db->table_prefix . "page p " .
@@ -2000,10 +1978,9 @@ class Wacko
 		if (isset($_POST['tag']))
 		{
 			$this->tag		= $tag = $_POST['tag'];
-			$this->supertag	= $this->translit($tag);
 		}
 
-		if (!$this->translit($tag))
+		if (!$tag)
 		{
 			return;
 		}
@@ -2018,7 +1995,7 @@ class Wacko
 			}
 			else
 			{
-				$this->http->invalidate_page($this->supertag);
+				$this->http->invalidate_page($this->tag);
 			}
 
 			$this->db->invalidate_sql_cache();
@@ -2034,8 +2011,8 @@ class Wacko
 			// for forum topic prepare description
 			if (!$comment_on_id && $this->forum)
 			{
-				$desc = $this->format(substr($body, 0, 500), 'cleanwacko');
-				$desc = (strlen($desc) > 240 ? substr($desc, 0, 240) . '[...]' : $desc);
+				$desc = $this->format(mb_substr($body, 0, 500), 'cleanwacko');
+				$desc = (mb_strlen($desc) > 240 ? mb_substr($desc, 0, 240) . '[...]' : $desc);
 			}
 
 			// PreFormatter (macros and such)
@@ -2183,7 +2160,6 @@ class Wacko
 						"user_id		= " . (int) $user_id . ", " .
 						"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
 						"tag			= " . $this->db->q($tag) . ", " .
-						"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
 						"body			= " . $this->db->q($body) . ", " .
 						"body_r			= " . $this->db->q($body_r) . ", " .
 						"body_toc		= " . $this->db->q($body_toc) . ", " .
@@ -2294,7 +2270,6 @@ class Wacko
 							"user_id		= " . (int) $user_id . ", " .
 							"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
 							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ?: $desc)) . ", " .
-							"supertag		= " . $this->db->q($this->translit($tag)) . ", " .
 							"body			= " . $this->db->q($body) . ", " .
 							"body_r			= " . $this->db->q($body_r) . ", " .
 							"body_toc		= " . $this->db->q($body_toc) . ", " .
@@ -2384,7 +2359,6 @@ class Wacko
 				"user_id		= " . (int) $page['user_id'] . ", " .
 				"title			= " . $this->db->q($page['title']) . ", " .
 				"tag			= " . $this->db->q($page['tag']) . ", " .
-				"supertag		= " . $this->db->q($page['supertag']) . ", " .
 				# "created		= " . $this->db->q($page['created']) . ", " .
 				"modified		= " . $this->db->q($page['modified']) . ", " .
 				"body			= " . $this->db->q($page['body']) . ", " .
@@ -3204,36 +3178,36 @@ class Wacko
 		$new_tag = $tag;
 
 		// get root tag
-		if (isset($this->context[$this->current_context]) && strstr($this->context[$this->current_context], '/'))
+		if (isset($this->context[$this->current_context]) && mb_strstr($this->context[$this->current_context], '/'))
 		{
-			$root	= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $this->context[$this->current_context]);
+			$root	= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context]);
 		}
 		else
 		{
 			$root	= '';
 		}
 
-		if (preg_match('/^\.\/(.*)$/', $tag, $matches))			// './tag'
+		if (preg_match('/^\.\/(.*)$/u', $tag, $matches))			// './tag'
 		{
 			$root	= '';
 		}
-		else if (preg_match('/^\/(.*)$/', $tag, $matches))		// '/tag'
+		else if (preg_match('/^\/(.*)$/u', $tag, $matches))		// '/tag'
 		{
 			$root		= '';
 			$new_tag	= $matches[1];
 		}
-		else if (preg_match('/^\!\/(.*)$/', $tag, $matches))	// '!/tag'
+		else if (preg_match('/^\!\/(.*)$/u', $tag, $matches))	// '!/tag'
 		{
 			$root		= $this->context[$this->current_context];
 			$new_tag	= $matches[1];
 		}
-		else if (preg_match('/^\.\.\/(.*)$/', $tag, $matches))	// '../tag'
+		else if (preg_match('/^\.\.\/(.*)$/u', $tag, $matches))	// '../tag'
 		{
 			$new_tag	= $matches[1];
 
-			if (strstr($root, '/'))
+			if (mb_strstr($root, '/'))
 			{
-				$root	= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $root);
+				$root	= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $root);
 			}
 			else
 			{
@@ -3357,7 +3331,6 @@ class Wacko
 		{
 			$tag = $this->slim_url($tag);
 		}
-		// if ($alter)		$tag = $this->translit($tag);
 
 		$tag = trim($tag, '/.');
 		// $tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
@@ -3373,7 +3346,6 @@ class Wacko
 	*/
 	function slim_url($tag)
 	{
-		$tag = $this->translit($tag, TRANSLIT_DONTCHANGE); // TODO: set config option ?
 		// why we do replace this here?
 		//	this behavior is unwanted in the AP, it breaks the redirect for e.g. config_basic.php
 		//	looks like a reverse of it in the tranlit function (?)
@@ -3381,12 +3353,12 @@ class Wacko
 
 		if ($this->db->urls_underscores == 1)
 		{
-			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶' . $this->language['UPPERNUM'] . ')/', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶\/)/', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')¶(' . $this->language['UPPERNUM'] . ')($|\b)/', '\\1\\2', $tag);
-			$tag = preg_replace('/\/¶(' . $this->language['UPPERNUM'] . ')/', '/\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶' . $this->language['UPPERNUM'] . ')/u', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶\/)/u', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')¶(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $tag);
+			$tag = preg_replace('/\/¶(' . $this->language['UPPERNUM'] . ')/u', '/\\1', $tag);
 			$tag = str_replace('¶', '_', $tag);
 		}
 
@@ -3884,9 +3856,7 @@ class Wacko
 
 				//unwrap tag (check !/, ../ cases)
 				$uw_tag			= $this->unwrap_link($_page_tag);
-				$uw_supertag	= $this->translit($uw_tag);
-				$page_tag		= rtrim($uw_supertag, './');
-				// TODO: supertag won't match tag! neither in page_id_cache nor the query itself!
+				$page_tag		= rtrim($uw_tag, './');
 				$page_id		= $this->get_page_id($page_tag);
 				$param			= $this->parse_media_param($file_name);
 
@@ -4095,7 +4065,7 @@ class Wacko
 
 			unset($file_data);
 		}
-		else if ($this->db->disable_tikilinks != 1 && preg_match('/^(' . $this->language['UPPER'] . $this->language['LOWER'] . $this->language['ALPHANUM'] . '*)\.(' . $this->language['ALPHA'] . $this->language['ALPHANUM'] . '+)$/s', $tag, $matches))
+		else if ($this->db->disable_tikilinks != 1 && preg_match('/^(' . $this->language['UPPER'] . $this->language['LOWER'] . $this->language['ALPHANUM'] . '*)\.(' . $this->language['ALPHA'] . $this->language['ALPHANUM'] . '+)$/us', $tag, $matches))
 		{
 			// it`s a Tiki link! (Tiki.Link -> /Tiki/Link)
 			$tag	= '/' . $matches[1] . '/' . $matches[2];
@@ -4163,7 +4133,7 @@ class Wacko
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/i';
 			// TODO: multilingual & donotload (TEST: passing $link_lang)
-			$ptag			= $this->translit($unwtag);
+			$ptag			= $unwtag;
 			$handler		= null;
 
 			if (preg_match($regex_handlers, '/' . $ptag . '/', $match))
@@ -4236,11 +4206,11 @@ class Wacko
 				}
 
 				$this->set_language($lang);
-				$supertag	= $this->translit($untag);
+				$supertag	= $untag;
 			}
 			else
 			{
-				$supertag	= $this->translit($untag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
+				$supertag	= $untag; // lowercase?
 			}
 
 			$aname = '';
@@ -4413,7 +4383,7 @@ class Wacko
 				// disable and visualize self-referencing link
 				if ($this->db->youarehere_text && !$handler)
 				{
-					if (isset($this->context[$this->current_context]) && ($this->translit($tag) == $this->translit($this->context[$this->current_context])) )
+					if (isset($this->context[$this->current_context]) && ($tag == $this->context[$this->current_context]) )
 					{
 						$res	= str_replace('####', $text, $this->db->youarehere_text);
 					}
@@ -4685,17 +4655,17 @@ class Wacko
 
 	function add_nbsps($text)
 	{
-		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//', '\\1&nbsp;/', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;' . $this->language['UPPERNUM'] . ')/', '\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;\/)/', '\\1', $text);
-		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/', '/&nbsp;\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')&nbsp;(' . $this->language['UPPERNUM'] . ')($|\b)/', '\\1\\2', $text);
-		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/(' . $this->language['ALPHA'] . ')([0-9])/', '\\1&nbsp;\\2', $text);
-		// $text = preg_replace('/([0-9])&nbsp;(?=[0-9])/', '\\1', $text);
-		$text = preg_replace('/([0-9])&nbsp;(?!' . $this->language['ALPHA'] . ')/', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//u', '\\1&nbsp;/', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;' . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;\/)/u', '\\1', $text);
+		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/u', '/&nbsp;\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')&nbsp;(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
+		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/u', '\\1&nbsp;\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHA'] . ')([0-9])/u', '\\1&nbsp;\\2', $text);
+		// $text = preg_replace('/([0-9])&nbsp;(?=[0-9])/u', '\\1', $text);
+		$text = preg_replace('/([0-9])&nbsp;(?!' . $this->language['ALPHA'] . ')/u', '\\1', $text);
 
 		return $text;
 	}
@@ -4707,14 +4677,14 @@ class Wacko
 
 	function validate_reserved_words( $data )
 	{
-		$_data = $this->translit( $data );
+		$_data = $data;
 		$_data = '/' . $_data . '/';
 
 		// Find the string of text
 		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/' . $this->db->standard_handlers . '\/(.*)$/i';
 
 		// Find the word
-		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers . ')\b/i';
+		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers . ')\b/ui';
 
 		if (preg_match($this->REGEX_WACKO_HANDLERS, $_data, $match))
 		{
@@ -4725,7 +4695,7 @@ class Wacko
 		if (!$this->page['comment_on_id'])
 		{
 			// disallow pages with Comment[0-9] and all sub pages, we do not want sub pages on a comment.
-			if (preg_match( '/\b(Comment([0-9]+))\b/i', $_data, $match ))
+			if (preg_match( '/\b(Comment([0-9]+))\b/ui', $_data, $match ))
 			{
 				return 'Comment([0-9]+)';
 			}
@@ -4751,7 +4721,7 @@ class Wacko
 
 	// returns error text, or null on OK
 	// if old_tag specified - check also for already-namedness & already-existance
-	function sanitize_new_pagename(&$tag, &$supertag, $old_tag = false)
+	function sanitize_new_pagename(&$tag, $old_tag = false)
 	{
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes
 		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#',
@@ -4760,7 +4730,6 @@ class Wacko
 				return @$x[1]? '/' : '';
 			}, $tag);
 
-		$supertag = $this->translit($tag);
 
 		// - / ' _ .
 		// TODO: remove punctuations from language ALPHA* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -4781,7 +4750,7 @@ class Wacko
 				return Ut::perc_replace($this->_t('AlreadyNamed'), $this->compose_link_to_page($tag, '', ''));
 			}
 
-			if ($this->supertag != $supertag && $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
+			if ($this->tag != $tag && $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				return Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($tag, '', ''));
 			}
@@ -4878,16 +4847,14 @@ class Wacko
 				$query .= "(" .
 						(int) $from_page_id . ", " .
 						(int) $this->get_page_id($to_tag) . ", " .
-						$this->db->q($to_tag) . ", " .
-						$this->db->q($this->translit($to_tag)) . "),";
+						$this->db->q($to_tag) . "),";
 			}
 
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->table_prefix . "page_link " .
 					"(	from_page_id,
 						to_page_id,
-						to_tag,
-						to_supertag) " .
+						to_tag) " .
 				"VALUES " . rtrim($query, ','));
 		}
 
@@ -5022,7 +4989,7 @@ class Wacko
 			if (strpos($url, $this->db->base_url) !== false)
 			{
 				$sub = substr($url, strlen($this->db->base_url));
-				$url = $this->db->base_url . $this->translit($sub);
+				$url = $this->db->base_url . $sub;
 			}
 
 			// tagging
@@ -5867,7 +5834,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->db->load_all(
-				"SELECT p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name " .
+				"SELECT p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name " .
 				"FROM " . $this->db->table_prefix . "page p " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
@@ -7116,7 +7083,6 @@ class Wacko
 			{
 				$this->method			= 'show';
 				$this->tag				= $page['tag'];
-				$this->supertag			= $page['supertag'];
 				$_GET['revision_id']	= $revision_id;
 			}
 		}
@@ -7144,16 +7110,12 @@ class Wacko
 			$page			= $this->load_page($tag, 0, $revision_id, '', '', $deleted);
 
 			$this->tag		= $tag;
-			$this->supertag =
-				(!$page
-					? $this->translit($tag)
-					: $page['supertag']); // TODO: PHP Notice:  Undefined index: supertag
 
 			// TODO: obsolete? Add description what it does
 			// creates dummy array
 			if ($this->db->outlook_workaround && !$page)
 			{
-				$page = $this->load_page($this->supertag . "'", 0, $revision_id);
+				$page = $this->load_page($this->tag . "'", 0, $revision_id);
 			}
 		}
 
@@ -7435,9 +7397,13 @@ class Wacko
 	function get_page_path($titles = false, $separator = '/', $linking = true, $root_page = false)
 	{
 		$result = '';
+		$_root_page = false;
 
 		// check if current page is home page
-		$_root_page	= !strcasecmp($this->db->root_page, $this->tag);
+		if (mb_strtolower($this->config['root_page']) == mb_strtolower($this->tag))
+		{
+			$_root_page = true;
+		}
 
 		// adds home page in front of breadcrumbs or current page is home page
 		if ($_root_page || $root_page)
@@ -7516,16 +7482,11 @@ class Wacko
 
 	// CLONE / RENAMING / MOVING
 
-	function clone_page($tag, $clone_tag, $clone_supertag = '', $edit_note = '')
+	function clone_page($tag, $clone_tag, $edit_note = '')
 	{
 		if (!$tag || !$clone_tag)
 		{
 			return false;
-		}
-
-		if ($clone_supertag == '')
-		{
-			$clone_supertag = $this->translit($clone_tag);
 		}
 
 		// load page and site information
@@ -7533,23 +7494,17 @@ class Wacko
 		$new_tag	= $clone_tag;
 
 		$this->clear_cache_wanted_page($clone_tag);		// STS what's that wanted stuff?!
-		$this->clear_cache_wanted_page($clone_supertag);
 
 		return
 			// save
 			$this->save_page($new_tag, $page['title'], $page['body'], $edit_note, 0, 0, 0, 0, $page['page_lang'], false, false);
 	}
 
-	function rename_page($tag, $new_tag, $new_supertag = '')
+	function rename_page($tag, $new_tag)
 	{
 		if (!$tag || !$new_tag)
 		{
 			return false;
-		}
-
-		if ($new_supertag == '')
-		{
-			$new_supertag = $this->translit($new_tag);
 		}
 
 		// determine the page depth
@@ -7562,13 +7517,11 @@ class Wacko
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "revision SET " .
 					"tag		= " . $this->db->q($new_tag) . ", " .
-					"supertag	= " . $this->db->q($new_supertag) . " " .
 				"WHERE tag		= " . $this->db->q($tag) . " ")
 			&&
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page  SET " .
 					"tag		= " . $this->db->q($new_tag) . ", " .
-					"supertag	= " . $this->db->q($new_supertag) . ", " .
 					"parent_id	= " . (int) $parent_id . ", " .
 					"depth		= " . (int) $new_depth . " " .
 				"WHERE tag		= " . $this->db->q($tag) . " ");
@@ -8172,7 +8125,7 @@ class Wacko
 		{
 			case 1:
 				if (   !preg_match('/[0-9]+/',			$pwd)
-					|| !preg_match('/[a-zA-Zà-ÿÀ-ß]+/',	$pwd))
+					|| !preg_match('/[a-zA-Zà-ÿÀ-ß]+/u',	$pwd))
 				{
 					++$error;
 				}
@@ -8180,8 +8133,8 @@ class Wacko
 
 			case 2:
 				if (   !preg_match('/[0-9]+/',		$pwd)
-					|| !preg_match('/[A-ZÀ-ß]+/',	$pwd)
-					|| !preg_match('/[a-zà-ÿ]+/',	$pwd))
+					|| !preg_match('/[A-ZÀ-ß]+/u',	$pwd)
+					|| !preg_match('/[a-zà-ÿ]+/u',	$pwd))
 				{
 					++$error;
 				}
@@ -8189,8 +8142,8 @@ class Wacko
 
 			case 3:
 				if (   !preg_match('/[0-9]+/',		$pwd)
-					|| !preg_match('/[A-ZÀ-ß]+/',	$pwd)
-					|| !preg_match('/[a-zà-ÿ]+/',	$pwd)
+					|| !preg_match('/[A-ZÀ-ß]+/u',	$pwd)
+					|| !preg_match('/[a-zà-ÿ]+/u',	$pwd)
 					|| !preg_match('/[\W]+/',		$pwd))
 				{
 					++$error;

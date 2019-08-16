@@ -148,7 +148,7 @@ if (isset($_POST['submit_poll']))
 		// update page cache
 		if ($this->tag)
 		{
-			$this->http->invalidate_page($this->supertag);
+			$this->http->invalidate_page($this->tag);
 		}
 
 		// update news RSS feed

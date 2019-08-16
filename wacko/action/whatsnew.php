@@ -33,7 +33,7 @@ if (isset($_GET['markread']) && $user == true)
 
 // loading new pages/comments
 $pages1 = $this->db->load_all(
-	"SELECT p.page_id, p.tag, p.supertag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, user_name, 1 AS ctype, p.deleted " .
+	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, user_name, 1 AS ctype, p.deleted " .
 	"FROM " . $this->db->table_prefix . "page p " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -43,7 +43,7 @@ $pages1 = $this->db->load_all(
 
 // loading revisions
 $pages2 = $this->db->load_all(
-	"SELECT p.page_id, p.tag, p.supertag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, user_name, 1 AS ctype, p.deleted " .
+	"SELECT p.page_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, user_name, 1 AS ctype, p.deleted " .
 	"FROM " . $this->db->table_prefix . "page p " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -55,7 +55,7 @@ $pages2 = $this->db->load_all(
 
 // loading uloads
 $files = $this->db->load_all(
-	"SELECT f.page_id, c.tag, c.supertag, f.uploaded_dt AS created, f.uploaded_dt AS modified, f.file_name AS title, f.file_id AS comment_on_id, f.hits AS ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, user_name, 2 AS ctype, f.deleted " .
+	"SELECT f.page_id, c.tag, f.uploaded_dt AS created, f.uploaded_dt AS modified, f.file_name AS title, f.file_id AS comment_on_id, f.hits AS ip, f.uploaded_dt AS date, f.file_description AS edit_note, c.page_lang, f.file_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, user_name, 2 AS ctype, f.deleted " .
 	"FROM " . $this->db->table_prefix . "file f " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (f.page_id = c.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
@@ -121,7 +121,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 	if (!empty($file_ids))
 	{
 		if ($files = $this->db->load_all(
-			"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, p.supertag, u.user_name " .
+			"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.tag, u.user_name " .
 			"FROM " . $this->db->table_prefix . "file f " .
 				"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
@@ -198,8 +198,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 										? ' viewed'
 										: '' );
 			$tpl->l_revisions	= (!$this->hide_revisions && ($page['ctype'] != 2 || $page['comment_on_id'] === 0))
-									? $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip'))
-									: $this->compose_link_to_page($page['supertag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
+									? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'))
+									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
 
 			if (($edit_note = $page['edit_note']))
 			{

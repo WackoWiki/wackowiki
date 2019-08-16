@@ -149,7 +149,7 @@ $tbl_page = "CREATE TABLE {$pref}page (" .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"title VARCHAR(250) NOT NULL DEFAULT ''," .
 					"tag VARCHAR(250) NOT NULL DEFAULT ''," .
-					"supertag VARCHAR(250) NOT NULL DEFAULT ''," .
+					# "supertag VARCHAR(250) NOT NULL DEFAULT ''," .
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT ''," .
 					"depth INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -195,7 +195,7 @@ $tbl_page = "CREATE TABLE {$pref}page (" .
 					"KEY idx_owner_id (owner_id)," .
 					"FULLTEXT KEY body (body),".
 					"UNIQUE KEY idx_tag (tag)," .
-					"KEY idx_supertag (supertag)," .
+					#"KEY idx_supertag (supertag)," .
 					"KEY idx_depth(depth)," .
 					"KEY idx_created (created)," .
 					"KEY idx_modified (modified)," .
@@ -212,7 +212,7 @@ $tbl_page_link = "CREATE TABLE {$pref}page_link (" .
 					"from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT ''," .
-					"to_supertag VARCHAR(250) NOT NULL DEFAULT ''," .
+					#"to_supertag VARCHAR(250) NOT NULL DEFAULT ''," .
 					"PRIMARY KEY (link_id)," .
 					"KEY idx_from_tag (from_page_id, to_tag(78))," .
 					"KEY idx_from_page_id (from_page_id)," .
@@ -261,7 +261,7 @@ $tbl_revision = "CREATE TABLE {$pref}revision (" .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"title VARCHAR(250) NOT NULL DEFAULT ''," .
 					"tag VARCHAR(250) BINARY NOT NULL DEFAULT ''," .
-					"supertag VARCHAR(250) BINARY NOT NULL DEFAULT ''," .
+					# "supertag VARCHAR(250) BINARY NOT NULL DEFAULT ''," .
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT ''," .
 					"created DATETIME NULL DEFAULT NULL," .
 					"modified DATETIME NULL DEFAULT NULL," .
@@ -288,7 +288,7 @@ $tbl_revision = "CREATE TABLE {$pref}revision (" .
 					"KEY idx_owner_id (owner_id)," .
 					"KEY idx_user_id (user_id)," .
 					"KEY idx_tag (tag)," .
-					"KEY idx_supertag (supertag)," .
+					#"KEY idx_supertag (supertag)," .
 					"KEY idx_modified (modified)," .
 					"KEY idx_minor_edit (minor_edit)," .
 					"KEY idx_deleted (deleted)," .

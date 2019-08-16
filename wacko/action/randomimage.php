@@ -55,7 +55,7 @@ $count = $this->db->load_single(
 if ($count['n'])
 {
 	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.file_name, p.tag, p.supertag " .
+		"SELECT f.file_id, f.page_id, f.file_name, p.tag " .
 			"FROM " . $this->db->table_prefix . "file f " .
 				"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .

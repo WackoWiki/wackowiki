@@ -34,7 +34,7 @@ if (list ($pages, $pagination) = $this->load_pages_linking($tag, null, $max))
 	// cache acls
 	$this->preload_acl($page_ids);
 
-	$anchor = $this->translit($tag);
+	$anchor = $tag;
 
 	// display navigation
 	$tpl->pagination_text = $pagination['text'];

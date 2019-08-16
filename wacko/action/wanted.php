@@ -15,8 +15,7 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 			"FROM " . $pref . "page_link l " .
 				"LEFT JOIN " . $pref . "page p ON " .
 				"((l.to_tag = p.tag " .
-					"AND l.to_supertag = '') " .
-					"OR l.to_supertag = p.supertag) " .
+					"AND l.to_tag = '')) " .
 			"WHERE " .
 				($cluster
 					? "l.to_tag LIKE " . $this->db->q($cluster . '/%') . " AND "

@@ -62,7 +62,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('bydate'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, tag, supertag, title, created, page_lang " .
+			"SELECT page_id, tag, title, created, page_lang " .
 			$selector .
 			"ORDER BY created DESC, tag ASC " .
 			$pagination['limit'], true))
@@ -87,8 +87,8 @@ if (($user_id = $this->get_user_id()))
 				$text = $page['tag'];
 
 				// print entry
-				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
-				$tpl->l_t_time	= $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip'));
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
+				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'));
 			}
 
 			$tpl->leave();
@@ -116,7 +116,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('bychange'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.modified, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.title, p.modified, p.page_lang " .
 			$selector .
 			"GROUP BY tag " .
 			"ORDER BY modified DESC, tag ASC " .
@@ -142,8 +142,8 @@ if (($user_id = $this->get_user_id()))
 				$text = $page['tag'];
 
 				// print entry
-				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
-				$tpl->l_t_time	= $this->compose_link_to_page($page['supertag'], 'revisions', $time, $this->_t('RevisionTip'));
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
+				$tpl->l_t_time	= $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'));
 			}
 
 			$tpl->leave();
@@ -168,7 +168,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
 		if (($pages = $this->db->load_all(
-			"SELECT page_id, tag, supertag, title, modified, page_lang " .
+			"SELECT page_id, tag, title, modified, page_lang " .
 			$selector .
 			"ORDER BY tag ASC " .
 			$pagination['limit'], true)))
@@ -195,7 +195,7 @@ if (($user_id = $this->get_user_id()))
 
 				$text = $page['tag'];
 
-				$tpl->l_link	= $this->compose_link_to_page($page['supertag'], '', $text);
+				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
 			}
 
 			$tpl->leave();

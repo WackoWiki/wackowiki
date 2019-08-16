@@ -65,27 +65,27 @@ $q		= $_GET['q'];
 $ta_id	= $_GET['ta_id'];
 
 
-// 1. convert into supertag and unwrap
+// 1. unwrap
 $q = ltrim($q, '/');
-$supertag1 = $this->translit( $this->unwrap_link($q) );
-$supertag2 = $this->translit( $q );
+$tag1 = $this->unwrap_link($q);
+$tag2 = $q;
 
 // 2. going to DB two times
 $limit = 10;
 
 $pages1 = $this->db->load_all(
-	"SELECT page_id, tag, supertag " .
+	"SELECT page_id, tag " .
 	"FROM " . $this->db->table_prefix . "page " .
-	"WHERE supertag LIKE " . $this->db->q($supertag1 . '%') . " " .
+	"WHERE tag LIKE " . $this->db->q($tag1 . '%') . " " .
 		"AND comment_on_id = 0 " .
-	"ORDER BY supertag ASC LIMIT $limit");
+	"ORDER BY tag ASC LIMIT $limit");
 
 $pages2 = $this->db->load_all(
-	"SELECT page_id, tag, supertag " .
+	"SELECT page_id, tag " .
 	"FROM " . $this->db->table_prefix . "page " .
-	"WHERE  supertag LIKE " . $this->db->q($supertag2 . '%') . " " .
+	"WHERE  tag LIKE " . $this->db->q($tag2 . '%') . " " .
 		"AND comment_on_id = 0 " .
-	"ORDER BY supertag ASC LIMIT $limit");
+	"ORDER BY tag ASC LIMIT $limit");
 
 // 3. stripping by rights
 $pages = [];
@@ -144,9 +144,9 @@ if ($pages2)
 
 // counting context
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-$local_supertag_sliced	= explode('/', $this->page['supertag']);
-$local_supertag			= $this->page['supertag'] . '/';
-$local_context_sliced	= array_slice( $local_supertag_sliced, 0, count($local_supertag_sliced)-1 );
+$local_tag_sliced		= explode('/', $this->page['tag']);
+$local_tag				= $this->page['tag'] . '/';
+$local_context_sliced	= array_slice( $local_tag_sliced, 0, count($local_tag_sliced) - 1 );
 $local_context			= implode('/', $local_context_sliced ) . '/';
 
 // preparing to output
@@ -158,13 +158,13 @@ foreach ($pages as $page)
 	{
 		$tag_sliced = explode('/', $page['tag'] );
 
-		if (strpos( $page['supertag'], $local_supertag ) === 0)
+		if (strpos( $page['tag'], $local_tag ) === 0)
 		{
-			$out[] = '!/' . implode('/', array_slice( $tag_sliced, count($local_supertag_sliced) ));
+			$out[] = '!/' . implode('/', array_slice( $tag_sliced, count($local_tag_sliced) ));
 		}
 		else
 		{
-			if (strpos( $page['supertag'], $local_context ) === 0)
+			if (strpos( $page['tag'], $local_context ) === 0)
 			{
 				$out[] = implode('/', array_slice( $tag_sliced, count($local_context_sliced) ));
 			}

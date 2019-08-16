@@ -16,10 +16,10 @@ if ($this->has_access('read'))
 	$num_slashes = substr_count($this->tag, '/');
 
 	$pages = $this->db->load_all(
-		"SELECT page_id, owner_id, tag, supertag, title, created, body " .
+		"SELECT page_id, owner_id, tag, title, created, body " .
 		"FROM " . $this->db->table_prefix . "page " .
-		"WHERE (supertag = " . $this->db->q($this->supertag) . " " .
-		" OR supertag LIKE " . $this->db->q($this->supertag . '/%') . ")" .
+		"WHERE (tag = " . $this->db->q($this->tag) . " " .
+		" OR tag LIKE " . $this->db->q($this->tag . '/%') . ")" .
 		" AND comment_on_id = 0");
 
 	$tpl->enter('p_');
@@ -51,7 +51,7 @@ if ($this->has_access('read'))
 
 		$tpl->tag		= rtrim($tag, '/');
 		$tpl->title		= Ut::html($page['title']);
-		$tpl->supertag	= $page['supertag'];
+		$tpl->supertag	= $page['tag'];
 		$tpl->body		= str_replace(']]>', ']]&gt;', $page['body']);
 		$tpl->owner		= $page['owner_id'];
 		$tpl->date		= Ut::http_date(strtotime($page['created']));

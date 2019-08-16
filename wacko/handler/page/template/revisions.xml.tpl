@@ -3,7 +3,7 @@
 	<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
 		<channel>
 			<title>[ ' db: site_name ' ] - [ ' tag ' ]</title>
-			<link>[ ' db: base_url ' ][ ' supertag ' ]</link>
+			<link>[ ' db: base_url ' ][ ' tag ' ]</link>
 			<description>[ ' _t: PageRevisionsXML ' ] [ ' db: site_name ' ]/[ ' tag ' ]</description>
 			<lastBuildDate>[ ' date ' ]</lastBuildDate>
 			<image>
