@@ -82,7 +82,7 @@ $insert_records[]		= [$lang['InstallingReviewerGroup'],		$insert_reviewer_group,
 //		$value[1] - table name
 //		$value[2] - SQL query
 
-// 5.1.0 ############
+// 5.1 ############
 // cache
 $upgrade['5.1.0'][]		= ['alter',		'cache',			$alter_cache_r5_1_0];
 $upgrade['5.1.0'][]		= ['alter',		'cache',			$alter_cache_r5_1_1];
@@ -105,7 +105,7 @@ $upgrade['5.1.0'][]		= ['alter',		'link',				$alter_page_link_r5_1_0];
 // revision
 $upgrade['5.1.0'][]		= ['alter',		'revision',			$alter_revision_r5_1_0];
 
-// 5.4.0 ############
+// 5.4 ############
 
 // auth_token
 $upgrade['5.5.rc'][]	= ['delete',	'auth_token',		$tbl_auth_token_drop];
@@ -200,7 +200,7 @@ $upgrade['5.5.12'][]	= ['alter',		'page',				$alter_page_r5_5_0];
 // page link
 $upgrade['5.5.rc2'][]	= ['rename',	'page_link',		$rename_page_link_r5_4_0];
 
-$upgrade['5.5.0'][]		= ['alter',		'page_link',		$alter_page_link_r5_5_0];
+$upgrade['5.5.12'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 
 // referrer
 $upgrade['5.4.0'][]		= ['alter',		'referrer',			$alter_referrer_r5_4_0];
@@ -262,5 +262,7 @@ $upgrade['5.4.0'][]		= ['create',	'word',				$tbl_word_r5_4_0];
 
 // watch
 $upgrade['5.5.beta'][]	= ['alter',		'watch',			$alter_watch_r5_4_0];
+
+// 6.0 ############
 
 ?>
