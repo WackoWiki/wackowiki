@@ -2279,7 +2279,7 @@ class Wacko
 				if ($comment_on_id && !$mute)
 				{
 					// notifying watchers
-					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, false, $minor_edit);
+					$this->notify_watcher($page_id, $comment_on_id, $tag, $title, $body, $user_id, $user_name, $minor_edit);
 				}
 			} // end of new page
 			else
@@ -2355,7 +2355,7 @@ class Wacko
 					if (!$comment_on_id && !$mute)
 					{
 						// notifying watchers
-						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, true, $minor_edit);
+						$this->notify_watcher($page_id, $comment_on_id, $tag, $title, null, $user_id, $user_name, $minor_edit);
 					}
 				} // end of new != old
 			} // end of existing page
