@@ -17,8 +17,8 @@ $wacko_language = [
 	'ALPHA_P'				=> "A-Za-z\xb6\xb8-\xba\xbc\xbe-\xfe\/'",
 	'TranslitLettersFrom'	=> "¶¸¹º¼¾¿ÀÚÛÜÝÞßàúûüýþáâãäåæçéêëìíïðñóòôõö÷ùÁÂÃÄÅÆÇÉÊËÌÍÏÐÑÓÔÕÖ×Ù",
 	'TranslitLettersTo'		=> "aehioywiiyaehiyiyoywavgdezhiklmnoprsstyfxwavgdezhiklmnoprstyfxw",
-	'TranslitCaps'			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÜÚÛÝÞß",
-	'TranslitSmall'			=> "àáâãäå¸æçèéêëìíîïðñòóôõö÷øùüúûýþÿ",
+	'TranslitCaps'			=> "ÀÁÂÃÄÅ¨ÆÇÈÉÊËÌÍÎÏÐÑÓÔÕÖ×ØÙÜÚÛÝÞº",
+	'TranslitSmall'			=> "àáâãäå¸æçèéêëìíîïðñóôõö÷øùüúûýþß",
 	'TranslitBiLetters'		=> [
 								"è"=>"th", "È"=>"th", "î"=>"ks", "Î"=>"ks", "ø"=>"ps", "Ø"=>"ps"
 	],
