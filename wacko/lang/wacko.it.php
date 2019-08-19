@@ -495,6 +495,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Scegli la lingua',
 	'ShowSpaces'				=> 'Mostra gli spazi nei NomiWiki',
 	'WrongPage4Redirect'		=> 'Reindirizzo impossibile a causa di parametri di reindirizzo errati',
+	'RedirectsToItself'			=> 'La pagina si reindirizza a se stessa.',
 	'ReallyDelete'				=> 'Vuoi davvero CANCELLARE la pagina?<br>Dopo non potrai annullare questa azione!<br><br>ATTENZIONE: cancellando la pagina, si cancelleranno tutte le sue versioni, i suoi commenti, gli allegati, gli ACL ed i suoi riferimenti.',
 	'RemoveButton'				=> 'Si, elimina!',
 	'RestoreButton'				=> 'Restore',

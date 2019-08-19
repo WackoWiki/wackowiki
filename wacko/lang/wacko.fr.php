@@ -495,6 +495,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Choisissez votre langue ',
 	'ShowSpaces'				=> 'Insérer des espaces dans les NomWiki ',
 	'WrongPage4Redirect'		=> 'Cette page semble vous diriger vers une autre, non trouvée. Vous pouvez éditer cette page pour connaître le nom de l&rsquo;autre.',
+	'RedirectsToItself'			=> 'La page se redirige vers elle-même. ',
 	'ReallyDelete'				=> 'Voulez-vous vraiment EFFACER cette page?<br>Cette effacement sera définitif !<br><br>AVERTISSEMENT&nbsp;: supprimer cette page entraîne la suppression ou effacement de toutes ses versions, commentaires, pièces jointes, droits associés et référents.',
 	'RemoveButton'				=> 'Oui, supprimer !',
 	'RestoreButton'				=> 'Restaurer',

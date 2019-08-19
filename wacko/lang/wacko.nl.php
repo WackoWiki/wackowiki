@@ -495,6 +495,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Selecteer taal',
 	'ShowSpaces'				=> 'Toon spaties in WikiNames',
 	'WrongPage4Redirect'		=> 'Kan niet doorlinken, pagina bestaat niet.',
+	'RedirectsToItself'			=> 'De pagina verwijst naar zichzelf.',
 	'ReallyDelete'				=> 'Weet u zeker dat u deze pagina wilt verwijderen?<br>Deze handeling kan niet ongedaan worden gemaakt!<br><br>WAARSCHUWING: Verwijderen van deze pagina betekent dat u alle revisies, reacties, bijlagen, ACL\'s (rechten) en verwijzigen van deze pagina ook verwijderd.',
 	'RemoveButton'				=> 'Ja, verwijder!',
 	'RestoreButton'				=> 'Herstellen',
