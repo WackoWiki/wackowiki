@@ -495,6 +495,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Vælg sprog',
 	'ShowSpaces'				=> 'Vis mellemrum i WikiNavne',
 	'WrongPage4Redirect'		=> 'Hov, den kan vi ikke finde',
+	'RedirectsToItself'			=> 'Webstedet omdirigerer til sig selv.',
 	'ReallyDelete'				=> 'Er du sikker på at du vil SLETTE siden?<br>Der er ingen fortrydelsesret!<br><br>ADVARSEL: Alle versioner af siden slettes.',
 	'RemoveButton'				=> 'Ja, slet!',
 	'RestoreButton'				=> 'Gendan',

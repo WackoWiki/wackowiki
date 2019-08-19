@@ -495,6 +495,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Wähle Sprache',
 	'ShowSpaces'				=> 'Zeige Leerzeichen in WikiNamen',
 	'WrongPage4Redirect'		=> 'Umleitung funktioniert wegen falschen Umleitungsparametern nicht',
+	'RedirectsToItself'			=> 'Die Seite leitet auf auf sich selbst weiter.',
 	'ReallyDelete'				=> 'Willst du wirklich diese Seite löschen?<br>Diese Aktion kann nicht rückgängig gemacht werden!<br><br>WARNUNG: Mit dieser Seite werden alle zur Seite gehörigen Versionen, Kommentare, Anhänge, Berechtigungen und Verweise gelöscht.',
 	'RemoveButton'				=> 'Ja, löschen!',
 	'RestoreButton'				=> 'Wiederherstellen',

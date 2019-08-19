@@ -495,6 +495,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Seleccionar idioma',
 	'ShowSpaces'				=> 'Mostrar los WikiNames con espacios',
 	'WrongPage4Redirect'		=> 'No se puede efectuar la redirección.',
+	'RedirectsToItself'			=> 'La página se redirige a sí misma.',
 	'ReallyDelete'				=> 'Seguro que quieres ELIMINAR la página?<br>Esta acción no se puede recuperar!<br><br>ADVERTENCIA: eliminar una página consiste en eliminar todas las versiones pasadas de la página, comentarios, archivos adjuntos, ACLs y referencias.',
 	'RemoveButton'				=> 'Eliminar',
 	'RestoreButton'				=> 'Restaurar',
