@@ -31,7 +31,7 @@ if (($page = $this->unwrap_link($to)))
 			// do not redirect a page to itself
 			if ($this->tag == $page)
 			{
-				$this->set_message($this->_t('RedirectsToItself') . 'Nixda', 'warning');
+				$this->set_message($this->_t('RedirectsToItself'), 'warning');
 				return;
 			}
 

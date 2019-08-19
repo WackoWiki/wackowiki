@@ -16,7 +16,7 @@ class PreFormatter
 			 && $this->object->user_lang != $this->object->page_lang
 				? '|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)'
 				: '') .
-			')/sm';
+			')/usm';
 	}
 
 	function precallback($things)
@@ -25,11 +25,11 @@ class PreFormatter
 
 		$thing = $things[1];
 
-		if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
+		if (preg_match('/^\%\%(.*)\%\%$/us', $thing, $matches))
 		{
 			return '%%' . $matches[1] . '%%';
 		}
-		else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
+		else if (preg_match('/^\"\"(.*)\"\"$/us', $thing, $matches))
 		{
 			return '""' . $matches[1] . '""';
 		}
@@ -49,18 +49,19 @@ class PreFormatter
 		{
 			return date($wacko->db->date_format . ' ' . $wacko->db->time_format);
 		}
-		else if (  preg_match('/^(\[\[)(.+)(\]\])$/', $thing, $matches)
-				|| preg_match('/^(\(\()(.+)(\)\))$/', $thing, $matches))
+		// depreciated unicode entities replacement, e.g. ((Link Description @@ru))
+		/* else if (  preg_match('/^(\[\[)(.+)(\]\])$/u', $thing, $matches)
+				|| preg_match('/^(\(\()(.+)(\)\))$/u', $thing, $matches))
 		{
 			list (, $b1, $cont, $b2) = $matches;
 
-			if (preg_match('/\&\#\d+;/', $cont, $matches))
+			if (preg_match('/\&\#\d+;/u', $cont, $matches))
 			{
 				$thing = $b1 . @strtr($cont, $this->object->unicode_entities) . ' @@' . $this->object->user_lang . $b2;
 			}
 
 			return $thing;
-		}
+		} */
 
 		return $thing;
 	}

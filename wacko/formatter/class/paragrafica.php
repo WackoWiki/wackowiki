@@ -9,12 +9,12 @@ https://wackowiki.org/doc/Dev/Projects/Typografica
 
 class Paragrafica
 {
-	var $ignore			= '/(<!--notypo-->.*?<!--\/notypo-->)/si'; // regex to be ignored
+	var $ignore			= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
 	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>
 	var $wacko;
 	var $t0 			= [ // terminators like <-t>$1<t->
-		'/(<br[^>]*>)(\s*<br[^>]*>)+/si',
-		'/(<hr[^>]*>)/si',
+		'/(<br[^>]*>)(\s*<br[^>]*>)+/usi',
+		'/(<hr[^>]*>)/usi',
 	];
 	var $t1				= [ // terminators like <-t>$1
 		[ // rightinators
@@ -280,7 +280,7 @@ class Paragrafica
 					"|" .
 				"<\!--action:begin-->include\s+.*?page=\"([^\ ]+)\".*?(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .		// 7=tag, 8=notoc
 				// {{include page="TAG" notoc=1}}
-				"!i", [&$this, 'add_toc_entry'], $what);
+				"!ui", [&$this, 'add_toc_entry'], $what);
 
 		return $what;
 	}

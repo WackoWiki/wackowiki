@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $text	= str_replace("\r", '', $text);
-$text	= "\177\n" . $text."\n";
+$text	= "\u{2592}\n" . $text . "\n";
 
 $parser	= new WackoFormatter($this);
 
@@ -18,12 +18,12 @@ $wtext	= $texts[0];
 
 for ($i = 2; $i < count($texts); $i = $i + 2)
 {
-	$wtext = $wtext."\xfe\xa6" . $texts[$i];
+	$wtext = $wtext . "\u{00FE}\u{00A6}" . $texts[$i];
 }
 
 $wtext	= preg_replace_callback($parser->MOREREGEXP, [&$parser, 'wacko_middleprocess'], $wtext);
 $wtext	= preg_replace_callback($parser->LONGREGEXP, [&$parser, 'wacko_callback'], $wtext);
-$wtexts	= explode("\xfe\xa6", $wtext);
+$wtexts	= explode("\u{00FE}\u{00A6}", $wtext);
 $text	= '';
 
 for ($i = 0; $i < count($wtexts); $i++)
@@ -33,8 +33,8 @@ for ($i = 0; $i < count($wtexts); $i++)
 			($texts[2 * $i + 1] ?? '');
 }
 
-$text	= str_replace("\177" . "<br>\n", '', $text);
-$text	= str_replace("\177" . "", '', $text);
+$text	= str_replace("\u{2592}" . "<br>\n", '', $text);
+$text	= str_replace("\u{2592}" . "", '', $text);
 
 // we're cutting the last <br>
 $text	= preg_replace('/<br>$/', '', $text);
