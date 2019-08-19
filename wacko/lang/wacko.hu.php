@@ -492,6 +492,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Select language',
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
+	'RedirectsToItself'			=> 'A webhely átirányítja magához.',
 	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
 	'RemoveButton'				=> 'Yes, delete!',
 	'RestoreButton'				=> 'Restore',

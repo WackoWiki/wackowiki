@@ -492,6 +492,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Vali keel',
 	'ShowSpaces'				=> 'Näita WikiNimedes tühikuid',
 	'WrongPage4Redirect'		=> 'Ei saa ümber suunata, kuna tegemist on valede parameetritega',
+	'RedirectsToItself'			=> 'Sait suunab enda juurde.',
 	'ReallyDelete'				=> 'Kas tõesti tahad seda lehte kustutada?<br>Seda ei saa taastada!<br><br>TÄHELEPANU! Kustutades selle lehe kustutad kõik selle lehe versioonid, kommentaarid, manused, kasutajateloendid ja viited.',
 	'RemoveButton'				=> 'Jah, kustuta!',
 	'RestoreButton'				=> 'Restore',

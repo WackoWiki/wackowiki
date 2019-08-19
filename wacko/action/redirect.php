@@ -28,6 +28,13 @@ if (($page = $this->unwrap_link($to)))
 				$this->set_message($this->_t('RedirectedFrom') . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title'], $this->tag, false, ['redirect' => 'no']));
 			}
 
+			// do not redirect a page to itself
+			if ($this->tag == $page)
+			{
+				$this->set_message($this->_t('RedirectsToItself') . 'Nixda', 'warning');
+				return;
+			}
+
 			$this->http->redirect($this->href('', $page), $permanent);
 			// NEVER BEEN HERE
 		}

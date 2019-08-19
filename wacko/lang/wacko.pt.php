@@ -492,6 +492,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Seleccione Idioma',
 	'ShowSpaces'				=> 'Mostrar espaço em WikiNames',
 	'WrongPage4Redirect'		=> 'Impossível redirecionar por causa de parâmetro errado',
+	'RedirectsToItself'			=> 'A página redireciona para si mesma. ',
 	'ReallyDelete'				=> 'Quer mesmo apagar a página?<br>Não poderá deppois anular esta acção!<br><br>AVISO: ao Apagar esta página irá eliminar todas as suas revisões, comentários, anexos, permissões e referenciadores.',
 	'RemoveButton'				=> 'Sim, Apague!',
 	'RestoreButton'				=> 'Restaurar',
