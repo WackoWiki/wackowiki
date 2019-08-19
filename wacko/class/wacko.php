@@ -2145,7 +2145,7 @@ class Wacko
 						"body_toc		= " . $this->db->q($body_toc) . ", " .
 						"edit_note		= " . $this->db->q($edit_note) . ", " .
 						"minor_edit		= " . (int) $minor_edit . ", " .
-						"page_size		= " . (int) mb_strlen($body) . ", " .
+						"page_size		= " . (int) strlen($body) . ", " .
 						($reviewed
 							?	"reviewed		= " . (int) $reviewed . ", " .
 								"reviewed_time	= UTC_TIMESTAMP(), " .
@@ -2255,7 +2255,7 @@ class Wacko
 							"body_toc		= " . $this->db->q($body_toc) . ", " .
 							"edit_note		= " . $this->db->q($edit_note) . ", " .
 							"minor_edit		= " . (int) $minor_edit . ", " .
-							"page_size		= " . (int) mb_strlen($body) . ", " .
+							"page_size		= " . (int) strlen($body) . ", " .
 							(isset($reviewed)
 								?	"reviewed		= " . (int) $reviewed . ", " .
 									"reviewed_time	= UTC_TIMESTAMP(), " .
