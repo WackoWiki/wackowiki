@@ -33,7 +33,7 @@ class PostWacko
 				$url	= str_replace(' ', '%20', trim($url));
 				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $text));
 
-				if (stristr($text, '@@'))
+				if (mb_stristr($text, '@@'))
 				{
 					$t		= explode('@@', $text);
 					$text	= $t[0];
@@ -77,7 +77,7 @@ class PostWacko
 		else if (preg_match('/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/us', $thing, $matches))
 		{
 			// check for action parameters
-			$sep = strpos($matches[1], ' ');
+			$sep = mb_strpos($matches[1], ' ');
 
 			if ($sep === false)
 			{
@@ -101,7 +101,7 @@ class PostWacko
 				}
 			}
 
-			if ($action && (!isset($this->options['diff']) || in_array(strtolower($action), $this->action)))
+			if ($action && (!isset($this->options['diff']) || in_array(mb_strtolower($action), $this->action)))
 			{
 				return $wacko->action($action, $params);
 			}

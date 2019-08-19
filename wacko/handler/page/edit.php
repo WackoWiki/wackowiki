@@ -273,7 +273,7 @@ if ($this->has_access('read')
 	// preview?
 	if (isset($_POST['preview']))
 	{
-		$text_chars			= number_format(strlen($_body), 0, ',', '.');
+		$text_chars			= number_format(mb_strlen($_body), 0, ',', '.');
 		$preview			= $this->format($body,		'pre_wacko');
 		$preview			= $this->format($preview,	'wacko');
 		$preview			= $this->format($preview,	'post_wacko');

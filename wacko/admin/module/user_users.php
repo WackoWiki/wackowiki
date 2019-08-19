@@ -129,11 +129,11 @@ function admin_user_users(&$engine, &$module)
 		{
 			$error .= $engine->_t('MustBeWikiName') . " ";
 		}
-		else if (strlen($user_name) < $engine->db->username_chars_min)
+		else if (mb_strlen($user_name) < $engine->db->username_chars_min)
 		{
 			$error .= Ut::perc_replace($engine->_t('NameTooShort'), 0, $engine->db->username_chars_min) . " ";
 		}
-		else if (strlen($user_name) > $engine->db->username_chars_max)
+		else if (mb_strlen($user_name) > $engine->db->username_chars_max)
 		{
 			$error .= Ut::perc_replace($engine->_t('NameTooLong'), 0, $engine->db->username_chars_max) . " ";
 		}
@@ -670,7 +670,7 @@ function admin_user_users(&$engine, &$module)
 	else
 	{
 		// defining WHERE and ORDER clauses
-		if (!empty($_GET['user']) && strlen($_GET['user']) > 2)
+		if (!empty($_GET['user']) && mb_strlen($_GET['user']) > 2)
 		{
 			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 		}

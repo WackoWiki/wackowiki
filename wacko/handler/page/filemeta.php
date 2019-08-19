@@ -367,11 +367,11 @@ else
 					&& ($this->page['owner_id'] == $this->get_user_id()))
 				|| ($file['user_id'] == $this->get_user_id()))
 			{
-				$description	= substr($_POST['file_description'], 0, 250);
+				$description	= mb_substr($_POST['file_description'], 0, 250);
 				$description	= $this->sanitize_text_field((string) $description, true);
 				$caption		= $clean_text((string) $_POST['caption']);
-				$author			= $this->sanitize_text_field(substr($_POST['author'], 0, 250), true);
-				$source			= $this->sanitize_text_field(substr($_POST['source'], 0, 250), true);
+				$author			= $this->sanitize_text_field(mb_substr($_POST['author'], 0, 250), true);
+				$source			= $this->sanitize_text_field(mb_substr($_POST['source'], 0, 250), true);
 				$source_url		= filter_var($_POST['source_url'], FILTER_VALIDATE_URL);
 				$license_id		= $_POST['license'] ?? 0;
 				$file_lang		= $_POST['file_lang'] ?? $file['file_lang'];

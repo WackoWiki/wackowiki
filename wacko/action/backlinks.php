@@ -54,7 +54,7 @@ if (list ($pages, $pagination) = $this->load_pages_linking($tag, null, $max))
 					$link = $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['tag'], $page['title']);
 				}
 
-				if (strpos($link, 'span class="missingpage"') === false)
+				if (mb_strpos($link, 'span class="missingpage"') === false)
 				{
 					$tpl->l_link = $link;
 				}

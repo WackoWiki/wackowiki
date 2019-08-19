@@ -360,7 +360,7 @@ class WackoFormatter
 				if ($matches[1])
 				{
 					// check for formatter parameters
-					$sep = strpos($matches[1], ' ');
+					$sep = mb_strpos($matches[1], ' ');
 
 					if ($sep === false)
 					{
@@ -764,7 +764,7 @@ class WackoFormatter
 				}
 			}
 			// shorten url name if too long
-			else if (strlen($url) > 55)
+			else if (mb_strlen($url) > 55)
 			{
 				$url = substr($matches[1], 0, 30) . '[...]' . substr($matches[1], -20);
 

@@ -215,7 +215,7 @@ if ($this->is_admin()
 				$comment_on['page_lang']);
 
 			$tpl->f_preview_meta	= $this->show_message($message, 'comment-info', false);
-			$tpl->f_preview_text	= $this->format(substr($this->page['body'], 0, 500), 'cleanwacko');
+			$tpl->f_preview_text	= $this->format(mb_substr($this->page['body'], 0, 500), 'cleanwacko');
 			$tpl->f_preview_title	= $this->page['title'];
 
 			$message = $this->_t('ReallyDeleteComment');

@@ -112,7 +112,7 @@ if (isset($_POST['_user_menu']))
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "menu SET " .
 					"menu_position	= " . (int) $item['menu_position'] . ", " .
-					"menu_title		= " . $this->db->q(substr(trim($_POST['title_' . $item['menu_id']]), 0, 250)) . " " .
+					"menu_title		= " . $this->db->q(mb_substr(trim($_POST['title_' . $item['menu_id']]), 0, 250)) . " " .
 				"WHERE menu_id		= " . (int) $item['menu_id'] . " " .
 				"LIMIT 1");
 		}

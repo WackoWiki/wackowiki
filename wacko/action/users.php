@@ -139,9 +139,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				$error = '';
 
 				// message is too long
-				if (strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
+				if (mb_strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
 				{
-					$error = Ut::perc_replace($this->_t('UsersPMOversized'), strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
+					$error = Ut::perc_replace($this->_t('UsersPMOversized'), mb_strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
 				}
 				// personal messages flood control
 				else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)

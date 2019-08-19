@@ -53,7 +53,7 @@ if ($this->db->enable_feeds)
 	$tpl->h_rss_url = $url =
 		[
 			$this->db->base_url . XML_DIR . '/',
-			'_' . preg_replace('/[^0-9a-z]/', '', strtolower($this->db->site_name)) . '.xml'
+			'_' . preg_replace('/[^0-9a-z]/', '', mb_strtolower($this->db->site_name)) . '.xml'
 		];
 
 	if ($this->db->news_cluster)

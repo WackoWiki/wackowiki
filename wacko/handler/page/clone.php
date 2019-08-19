@@ -63,8 +63,8 @@ if (@$_POST['_action'] === 'clone_page')
 			// rebase page to cloned root
 			$src = $page['tag'];
 
-			for ($pos = 0, $i = $slashes; ($pos = strpos($src, '/', $pos)) !== false && $i--; ++$pos);
-			$dst = $to . ($pos? substr($src, $pos) : '');
+			for ($pos = 0, $i = $slashes; ($pos = mb_strpos($src, '/', $pos)) !== false && $i--; ++$pos);
+			$dst = $to . ($pos? mb_substr($src, $pos) : '');
 
 			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
 			{

@@ -59,7 +59,7 @@ class PostSafehtml
 
 			$action = $params['name'];
 
-			if ($action && (!$this->options['feed'] || in_array(strtolower($action), $this->action)))
+			if ($action && (!$this->options['feed'] || in_array(mb_strtolower($action), $this->action)))
 			{
 				if ($action == $params[0])
 				{

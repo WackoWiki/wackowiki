@@ -90,7 +90,7 @@ if ($pages = $this->db->load_all(
 	// pick all subpages up to the desired depth level
 	if ($depth > 0)
 	{
-		$max_level = substr_count($root, '/') + $depth;
+		$max_level = mb_substr_count($root, '/') + $depth;
 		reset($pages);
 		$_pages = [];
 
@@ -98,7 +98,7 @@ if ($pages = $this->db->load_all(
 		{
 			$k = key($pages);
 
-			if (substr_count($pages[$k]['tag'], '/') < $max_level)
+			if (mb_substr_count($pages[$k]['tag'], '/') < $max_level)
 			{
 				$_pages[]	= $pages[$k];
 				$page_ids[]	= $pages[$k]['page_id'];
@@ -164,7 +164,7 @@ if ($pages = $this->db->load_all(
 		else
 		{
 			// cluster root level
-			$root_level = substr_count($root, '/');
+			$root_level = mb_substr_count($root, '/');
 
 			// begin list
 			echo '<ul class="tree">' . "\n";
@@ -184,7 +184,7 @@ if ($pages = $this->db->load_all(
 				}
 
 				// check page level
-				$cur_level	= substr_count($page['tag'], '/');
+				$cur_level	= mb_substr_count($page['tag'], '/');
 				if (!isset($prev_level)) $prev_level	= 0;
 
 				// indents (sublevels)
@@ -223,7 +223,7 @@ if ($pages = $this->db->load_all(
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '<strong>';
 
 				// displaying only the last word of tag OR title
-				$link_text = ($title == 0) ? substr($page['tag'], strrpos($page['tag'], '/') + 1) : $page['title'];
+				$link_text = ($title == 0) ? mb_substr($page['tag'], mb_strrpos($page['tag'], '/') + 1) : $page['title'];
 
 				if ($this->tag == $page['tag'])
 				{
@@ -241,7 +241,7 @@ if ($pages = $this->db->load_all(
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '</strong>';
 
 				// recheck page level
-				$prev_level	= substr_count($page['tag'], '/');
+				$prev_level	= mb_substr_count($page['tag'], '/');
 
 				$i++;
 			}

@@ -190,7 +190,7 @@ function admin_user_approve(&$engine, &$module)
 	// manage, approving or denying users
 
 	// defining WHERE and ORDER clauses
-	if (!empty($_GET['user']) && strlen($_GET['user']) > 2)
+	if (!empty($_GET['user']) && mb_strlen($_GET['user']) > 2)
 	{
 		$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 	}

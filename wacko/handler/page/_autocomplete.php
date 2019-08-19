@@ -37,7 +37,7 @@ function _unescape_callback($p)
 	if ($p[1])
 	{
 		$u = pack('n', $dec=hexdec($p[1]));
-		$c = @iconv('UCS-2BE', "windows-1251", $u);
+		$c = @iconv('UCS-2BE', "UTF-8", $u);
 
 		if (!strlen($c) && $SCRIPT_DECODE_MODE == 'entities')
 		{
@@ -158,13 +158,13 @@ foreach ($pages as $page)
 	{
 		$tag_sliced = explode('/', $page['tag'] );
 
-		if (strpos( $page['tag'], $local_tag ) === 0)
+		if (mb_strpos( $page['tag'], $local_tag ) === 0)
 		{
 			$out[] = '!/' . implode('/', array_slice( $tag_sliced, count($local_tag_sliced) ));
 		}
 		else
 		{
-			if (strpos( $page['tag'], $local_context ) === 0)
+			if (mb_strpos( $page['tag'], $local_context ) === 0)
 			{
 				$out[] = implode('/', array_slice( $tag_sliced, count($local_context_sliced) ));
 			}

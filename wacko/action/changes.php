@@ -34,7 +34,7 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 	if (!$root && !(int) $noxml)
 	{
-		$tpl->xml_href = $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
+		$tpl->xml_href = $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
 	$tpl->pagination_text = $pagination['text'];

@@ -52,7 +52,7 @@ if ($this->is_admin())
 						$this->set_translation($lang);
 						$this->set_page_lang($lang);
 						// tag to title
-						$title = $this->add_spaces_title(trim(substr($page['tag'], strrpos($page['tag'], '/')), '/'));
+						$title = $this->add_spaces_title(trim(substr($page['tag'], mb_strrpos($page['tag'], '/')), '/'));
 
 						$this->db->sql_query(
 							"UPDATE " . $this->db->table_prefix . "page " .

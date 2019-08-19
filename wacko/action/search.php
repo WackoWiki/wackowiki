@@ -148,7 +148,7 @@ $get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanu
 	{
 		if ($insensitive == true)
 		{
-			if (stripos($line, $phrase))
+			if (mb_stripos($line, $phrase))
 			{
 				if ($result)
 				{
@@ -158,7 +158,7 @@ $get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanu
 		}
 		else
 		{
-			if (strpos($line, $phrase))
+			if (mb_strpos($line, $phrase))
 			{
 				if ($result)
 				{
@@ -185,21 +185,21 @@ $preview_text = function ($text, $limit, $tags = 0)
 	}
 
 	// if strlen is smaller than limit return
-	if (strlen($text) < $limit)
+	if (mb_strlen($text) < $limit)
 	{
 		return $text;
 	}
 
 	if ($tags == 0)
 	{
-		return substr($text, 0, $limit) . ' [...]';
+		return mb_substr($text, 0, $limit) . ' [...]';
 	}
 	else
 	{
 		$counter = 0;
 		$return	= '';
 
-		for ($i = 0; $i <= strlen($text); $i++)
+		for ($i = 0; $i <= mb_strlen($text); $i++)
 		{
 			if ($text[$i] == '<')
 			{
@@ -236,7 +236,7 @@ $highlight_this = function ($text, $words, $the_place)
 
 	foreach ($words_array as $word)
 	{
-		if (strlen(trim($word)) != 0)
+		if (mb_strlen(trim($word)) != 0)
 		{
 			//exclude these words from being replaced
 			$exclude_list = ['word1', 'word2', 'word3'];
@@ -331,7 +331,7 @@ if ($form)
 
 $n = 0;
 
-if (strlen($phrase) >= 3)
+if (mb_strlen($phrase) >= 3)
 {
 	if ($mode == 'topic')
 	{

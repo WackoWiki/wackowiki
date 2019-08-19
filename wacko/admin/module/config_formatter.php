@@ -254,9 +254,9 @@ function admin_config_formatter(&$engine, &$module)
 
 					foreach ($timezones as $offset => $timezone)
 					{
-						if (strlen($timezone) > 50)
+						if (mb_strlen($timezone) > 50)
 						{
-							$timezone = substr($timezone, 0, 45 ) . '...';
+							$timezone = mb_substr($timezone, 0, 45 ) . '...';
 						}
 
 						echo '<option value="' . $offset . '" ' .

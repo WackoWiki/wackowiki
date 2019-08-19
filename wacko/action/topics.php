@@ -15,12 +15,12 @@ if (!defined('IN_WACKO'))
 if (!isset($pages))		$pages = '';
 
 // make sure that we're executing inside the forum cluster
-if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
+if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 {
 	// count slashes in the tag
 	$i = $off = 0;
 
-	while (($off = strpos($this->tag, '/', $off)) !== false)
+	while (($off = mb_strpos($this->tag, '/', $off)) !== false)
 	{
 		++$i;
 		++$off;

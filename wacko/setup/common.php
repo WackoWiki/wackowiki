@@ -294,23 +294,6 @@ function set_language($lang)
 	return $language;
 }
 
-// TODO: refactor -> same function as in wacko class
-/* function translit($tag, $lang)
-{
-	$language = set_language($lang);
-
-	$tag = str_replace('//', '/', $tag);
-	$tag = str_replace('-', '', $tag);
-	$tag = str_replace(' ', '', $tag);
-	$tag = str_replace("'", '_', $tag);
-
-	$tag = @mb_strtr($tag, $language['TranslitLettersFrom'], $language['TranslitLettersTo']);
-	$tag = @mb_strtr($tag, $language['TranslitBiLetters']);
-	$tag = mb_strtolower($tag);
-
-	return rtrim($tag, '/');
-}
- */
 // TODO: refactor -> same function as in dbal class
 function _quote($string)
 {

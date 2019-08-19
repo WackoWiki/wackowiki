@@ -9,7 +9,7 @@ $tpl->title = ($this->forum
 		? $this->_t('Topics')
 		: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
 
-$tpl->moderate =  ($this->forum ? $this->compose_link_to_page(substr($this->tag, 0, strrpos($this->tag, '/')), 'moderate', '&laquo; ' . $this->_t('ModerateSection2')) . '<br><br>' : '');
+$tpl->moderate =  ($this->forum ? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '&laquo; ' . $this->_t('ModerateSection2')) . '<br><br>' : '');
 
 // local functions
 function moderate_page_exists(&$engine, $tag)
@@ -308,7 +308,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	$accept_action	= '';
 	$error			= '';
 
-	if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
+	if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 	{
 		$forum_cluster = true;
 	}
@@ -438,7 +438,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				foreach ($set as $page_id)
 				{
 					$old_tags[] = $this->get_page_tag($page_id);
-					$new_tags[] = $_POST['section'] . substr($old_tags[$i], strrpos($old_tags[$i], '/'));
+					$new_tags[] = $_POST['section'] . mb_substr($old_tags[$i], mb_strrpos($old_tags[$i], '/'));
 
 					if (moderate_page_exists($this, $new_tags[$i++]) === true)
 					{
@@ -771,7 +771,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				$this->set_message($this->_t('ModerateTopicDeleted'), 'success');
-				$this->http->redirect($this->href('moderate', substr($this->tag, 0, strrpos($this->tag, '/'))));
+				$this->http->redirect($this->href('moderate', mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'))));
 			}
 		}
 		// move topic elsewhere
@@ -782,8 +782,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// processing...
 			if (isset($_POST['accept']) && (isset($_POST['section']) || isset($_POST['cluster'])))
 			{
-				$pos		= strrpos($this->tag, '/');
-				$sub_tag	= substr($this->tag, ($pos ? $pos + 1 : 0));
+				$pos		= mb_strrpos($this->tag, '/');
+				$sub_tag	= mb_substr($this->tag, ($pos ? $pos + 1 : 0));
 				$old_tag	= $this->tag;
 				$new_tag	= ($_POST['cluster']
 								? ($_POST['cluster'] == '/'
@@ -850,8 +850,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// perform accepted rename
 			if (isset($_POST['accept']) && $forum_cluster === true)
 			{
-				$pos		= strrpos($this->tag, '/');
-				$section	= substr($this->tag, 0, ($pos ?: null));
+				$pos		= mb_strrpos($this->tag, '/');
+				$section	= mb_substr($this->tag, 0, ($pos ?: null));
 				$tag		= trim($_POST['new_tag'], " \t");
 				$title		= $tag;
 				$tag 		= ucwords($tag);
@@ -962,7 +962,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// perform accepted splitting
 			if (isset($_POST['accept']) && isset($_POST['new_tag']))
 			{
-				$section	= substr($this->tag, 0, strrpos($this->tag, '/'));
+				$section	= mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'));
 				$old_tag	= $this->tag;
 				$tag		= trim($_POST['new_tag'], "/ \t");
 				$title		= $tag;
@@ -1154,7 +1154,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		$body = $this->format($this->page['body'], 'cleanwacko');
-		$body = (strlen($body) > 300 ? substr($body, 0, 300) . '[...]' : $body);
+		$body = (mb_strlen($body) > 300 ? mb_substr($body, 0, 300) . '[...]' : $body);
 		$body = Ut::html($body);
 
 		// display list
@@ -1290,7 +1290,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			foreach ($comments as $comment)
 			{
 				$desc = $this->format($comment['body'], 'cleanwacko');
-				$desc = (strlen($desc) > 300 ? substr($desc, 0, 300) . '[...]' : $desc);
+				$desc = (mb_strlen($desc) > 300 ? mb_substr($desc, 0, 300) . '[...]' : $desc);
 				$desc = Ut::html($desc);
 
 				$tpl->comment	= $comment;

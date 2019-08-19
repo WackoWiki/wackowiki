@@ -106,7 +106,7 @@ else // login
 				}
 
 				// check for old password formats
-				if (($n = strlen($user['password'])) == 32 || $n == 64)
+				if (($n = mb_strlen($user['password'])) == 32 || $n == 64)
 				{
 					if ($n == 32)
 					{

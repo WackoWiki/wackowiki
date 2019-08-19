@@ -92,7 +92,7 @@ else
 
 			foreach ($pages as $page)
 			{
-				$page_parent	= substr($page['wanted_tag'], 0, strrpos($page['wanted_tag'], '/'));
+				$page_parent	= mb_substr($page['wanted_tag'], 0, mb_strrpos($page['wanted_tag'], '/'));
 				$page_id_parent	= $this->get_page_id($page_parent);
 
 				if (!$this->db->hide_locked || $this->has_access('read', $page_id_parent))
