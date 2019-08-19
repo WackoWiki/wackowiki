@@ -492,6 +492,7 @@ $wacko_translation = [
 	'YourLanguage'				=> 'Zmień język',
 	'ShowSpaces'				=> 'Wyświetlaj NazwyWiki z odstępem',
 	'WrongPage4Redirect'		=> 'Wykonanie przekierowania było niemożliwe, ponieważ podano nieprawidłowy parametr',
+	'RedirectsToItself'			=> 'Strona przekierowuje się do siebie.',
 	'ReallyDelete'				=> 'Czy na pewno USUNĄĆ tę stronę?<br>Tej czynności nie można cofnąć!<br><br>OSTRZEŻENIE: Usunięcie tej strony spowoduje usunięcie wszystkich zachowanych wersji strony, komentarzy, załączniki, odsyłaczy i list dostępu.',
 	'RemoveButton'				=> 'Usuń na pewno!',
 	'RestoreButton'				=> 'Restore',
