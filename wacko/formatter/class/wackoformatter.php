@@ -280,13 +280,13 @@ class WackoFormatter
 			"\"\".*?\"\"|" .
 			"\{\{[^\n]*?\}\}|" .
 			"<!--escaped-->.*?<!--escaped-->" .
-			")/sm";
+			")/usm";
 
 		$this->MOREREGEXP =
 			"/(>>.*?<<|" .
 			"~([^ \t\n]+)|" .
 			"<!--escaped-->.*?<!--escaped-->" .
-			")/sm";
+			")/usm";
 	}
 
 	function indent_close()
@@ -338,22 +338,22 @@ class WackoFormatter
 		}
 
 		// escaped text
-		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/s', $thing, $matches))
+		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/us', $thing, $matches))
 		{
 			return $matches[1];
 		}
 		// escaped text
-		else if (preg_match('/^\"\"(.*)\"\"$/s', $thing, $matches))
+		else if (preg_match('/^\"\"(.*)\"\"$/us', $thing, $matches))
 		{
 			return '<!--escaped--><!--notypo-->' . str_replace("\n", '<br>', Ut::html($matches[1])) . '<!--/notypo--><!--escaped-->';
 		}
 		// code text
-		else if (preg_match('/^\%\%(.*)\%\%$/s', $thing, $matches))
+		else if (preg_match('/^\%\%(.*)\%\%$/us', $thing, $matches))
 		{
 			// check if a formatter has been specified
 			$code = $matches[1];
 
-			if (preg_match('/^\(([^\n]+?)\)(.*)$/s', $code, $matches))
+			if (preg_match('/^\(([^\n]+?)\)(.*)$/us', $code, $matches))
 			{
 				$code = $matches[2];
 
@@ -371,7 +371,7 @@ class WackoFormatter
 					{
 						$formatter	= substr($matches[1], 0, $sep);
 						$p			= ' ' . substr($matches[1], $sep) . ' ';
-						$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/', $p, $matches, PREG_SET_ORDER);
+						$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $matches, PREG_SET_ORDER);
 						$params		= [];
 						$c			= 0;
 
@@ -394,7 +394,7 @@ class WackoFormatter
 
 			$formatter = strtolower($formatter);
 
-			if ($formatter == "\xF1")
+			if ($formatter == 'с') // cyrillic -> latin
 			{
 				$formatter = 'c';
 			}
@@ -430,7 +430,7 @@ class WackoFormatter
 			return '<!--escaped-->' . $output . '<!--escaped-->';
 		}
 		// actions
-		else if (preg_match('/^\{\{(.*?)\}\}$/s', $thing, $matches))
+		else if (preg_match('/^\{\{(.*?)\}\}$/us', $thing, $matches))
 		{
 			// used in paragrafica, too
 			return '<!--escaped--><ignore><!--notypo--><!--action:begin-->' . $matches[1] . '<!--action:end--><!--/notypo--></ignore><!--escaped-->';
@@ -453,7 +453,7 @@ class WackoFormatter
 		}
 
 		// escaped text
-		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/s', $thing, $matches))
+		if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/us', $thing, $matches))
 		{
 			return $matches[1];
 		}
@@ -494,12 +494,12 @@ class WackoFormatter
 			return '&gt;';
 		}
 		// escaped text
-		else if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/s', $thing, $matches))
+		else if (preg_match('/^<!--escaped-->(.*)<!--escaped-->$/us', $thing, $matches))
 		{
 			return $matches[1];
 		}
 		// escaped html
-		else if (preg_match('/^\<\#(.*)\#\>$/s', $thing, $matches))
+		else if (preg_match('/^\<\#(.*)\#\>$/us', $thing, $matches))
 		{
 			if ($this->object->db->disable_safehtml)
 			{
@@ -539,7 +539,7 @@ class WackoFormatter
 			return '</table>';
 		}
 		// table head
-		else if (preg_match('/^\*\|(.*?)\|\*$/s', $thing, $matches) && $this->table_scope)
+		else if (preg_match('/^\*\|(.*?)\|\*$/us', $thing, $matches) && $this->table_scope)
 		{
 			$this->br			= 1;
 			$this->intable		= true;
@@ -560,7 +560,7 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$i])));
+				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$i])));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -575,7 +575,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -589,7 +589,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</th>';
 			}
@@ -607,7 +607,7 @@ class WackoFormatter
 			return $output;
 		}
 		// table row and cells
-		else if (preg_match('/^\|\|(.*?)\|\|$/s', $thing, $matches) && $this->table_scope)
+		else if (preg_match('/^\|\|(.*?)\|\|$/us', $thing, $matches) && $this->table_scope)
 		{
 			$this->br			= 1;
 			$this->intable		= true;
@@ -628,7 +628,7 @@ class WackoFormatter
 					$cells[$i] = substr($cells[$i], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$i])));
+				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$i])));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -643,7 +643,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -657,7 +657,7 @@ class WackoFormatter
 					$cells[$count] = substr($cells[$count], 1);
 				}
 
-				$output	.= str_replace("\177", '', str_replace("\177" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\177\n" . $cells[$count])));
+				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
 				$output	.= $this->indent_close();
 				$output	.= '</td>';
 			}
@@ -675,14 +675,14 @@ class WackoFormatter
 			return $output;
 		}
 		// deleted
-		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/s', $thing, $matches))
+		else if (preg_match('/^<!--markup:1:begin-->((\S.*?\S)|(\S))<!--markup:1:end-->$/us', $thing, $matches))
 		{
 			$this->br = 0;
 
 			return '<del class="diff">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</del>';
 		}
 		// inserted
-		else if (preg_match('/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/s', $thing, $matches))
+		else if (preg_match('/^<!--markup:2:begin-->((\S.*?\S)|(\S))<!--markup:2:end-->$/us', $thing, $matches))
 		{
 			$this->br = 0;
 
@@ -704,8 +704,8 @@ class WackoFormatter
 			return '<span class="underline">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</span>';
 		}
 		// code
-		else if (  preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches)
-				|| preg_match('/^\¹\¹(.*?)\¹\¹$/', $thing, $matches))
+		else if (  preg_match('/^\#\#(.*?)\#\#$/u', $thing, $matches)
+				|| preg_match('/^\¹\¹(.*?)\¹\¹$/u', $thing, $matches))
 		{
 			return '<code>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</code>';
 		}
@@ -715,8 +715,8 @@ class WackoFormatter
 			return '<small>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</small>';
 		}
 		// cite
-		else if (  preg_match('/^\'\'(.*?)\'\'$/s', $thing, $matches)
-				|| preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/s', $thing, $matches))
+		else if (  preg_match('/^\'\'(.*?)\'\'$/us', $thing, $matches)
+				|| preg_match('/^\!\!((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\!\!$/us', $thing, $matches))
 		{
 			$this->br = 1;
 
@@ -728,7 +728,7 @@ class WackoFormatter
 			return '<span class="cite">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</span>';
 		}
 		// mark
-		else if (preg_match('/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/s', $thing, $matches))
+		else if (preg_match('/^\?\?((\((\S*?)\)(.*?\S))|(\S.*?\S)|(\S))\?\?$/us', $thing, $matches))
 		{
 			$this->br = 1;
 
@@ -740,12 +740,12 @@ class WackoFormatter
 			return '<mark>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</mark>';
 		}
 		// urls
-		else if (  preg_match('/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/', $thing, $matches)
-				|| preg_match('/^([[:alpha:]]+:\/\/\S+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/', $thing, $matches))
+		else if (  preg_match('/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches)
+				|| preg_match('/^([[:alpha:]]+:\/\/\S+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches))
 		{
 			$url = strtolower($matches[1]);
 
-			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/', $url, $media))
+			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/u', $url, $media))
 			{
 				// audio
 				if ($media[4])
@@ -781,7 +781,7 @@ class WackoFormatter
 			return '<a href="file://///' . str_replace('\\', '/', $matches[1]) . '">\\\\' . $matches[1] . '</a>';
 		}
 		// citated
-		else if (preg_match('/^\n[ \t]*(>+)(.*)$/s', $thing, $matches))
+		else if (preg_match('/^\n[ \t]*(>+)(.*)$/us', $thing, $matches))
 		{
 			return '<div class="email' . strlen($matches[1]) . ' email-' . (strlen($matches[1]) % 2 ? 'odd' : 'even') . '">' . Ut::html($matches[1]) . preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]) . '</div>';
 		}
@@ -805,7 +805,7 @@ class WackoFormatter
 			return $result; // '<blockquote>' . $result . '</blockquote>';
 		}
 		// super
-		else if (preg_match('/^\^\^(.*)\^\^$/', $thing, $matches))
+		else if (preg_match('/^\^\^(.*)\^\^$/u', $thing, $matches))
 		{
 			return '<sup>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</sup>';
 		}
@@ -870,25 +870,25 @@ class WackoFormatter
 			return $result . '<h1 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h1>';
 		}
 		// separators
-		else if (preg_match('/^[-]{4,}$/', $thing))
+		else if (preg_match('/^[-]{4,}$/u', $thing))
 		{
 			$this->br = 0;
 
 			return "<hr>\n";
 		}
 		// forced line breaks
-		else if (preg_match('/^---\n?\s*$/', $thing, $matches))
+		else if (preg_match('/^---\n?\s*$/u', $thing, $matches))
 		{
 			return "<br>\n";
 		}
 		// strike
-		else if (preg_match('/^--((\S.*?\S)|(\S))--$/s', $thing, $matches))    //NB: wrong
+		else if (preg_match('/^--((\S.*?\S)|(\S))--$/us', $thing, $matches))    //NB: wrong
 		{
 			return '<del>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</del>';
 		}
 		// definitions
-		else if (  preg_match('/^\(\?(.+?)(==|\|\|)(.*)\?\)$/', $thing, $matches)
-				|| preg_match('/^\(\?(\S+)(\s+(.+))?\?\)$/', $thing, $matches))
+		else if (  preg_match('/^\(\?(.+?)(==|\|\|)(.*)\?\)$/u', $thing, $matches)
+				|| preg_match('/^\(\?(\S+)(\s+(.+))?\?\)$/u', $thing, $matches))
 		{
 			list (, $def, ,$text) = $matches;
 
@@ -899,7 +899,7 @@ class WackoFormatter
 					$text = $def;
 				}
 
-				$text = preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/', '', $text);
+				$text = preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $text);
 
 				return '<dfn title="' . Ut::html($text) . '">' . $def . '</dfn>';
 			}
@@ -907,10 +907,10 @@ class WackoFormatter
 			return '';
 		}
 		// forced links & footnotes
-		else if (  preg_match('/^\[\[(.+)(==|\|)(.*)\]\]$/', $thing, $matches)
-				|| preg_match('/^\(\((.+)(==|\|)(.*)\)\)$/', $thing, $matches)
-				|| preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/', $thing, $matches)
-				|| preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/', $thing, $matches))
+		else if (  preg_match('/^\[\[(.+)(==|\|)(.*)\]\]$/u', $thing, $matches)
+				|| preg_match('/^\(\((.+)(==|\|)(.*)\)\)$/u', $thing, $matches)
+				|| preg_match('/^\[\[(\S+)(\s+(.+))?\]\]$/u', $thing, $matches)
+				|| preg_match('/^\(\((\S+)(\s+(.+))?\)\)$/u', $thing, $matches))
 		{
 			$url	= $matches[1] ?? '';
 			$text	= $matches[3] ?? '';
@@ -1004,7 +1004,7 @@ class WackoFormatter
 				}
 				else
 				{
-					if ($url != ($url = (preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/', '', $url))))
+					if ($url != ($url = (preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/u', '', $url))))
 					{
 						$result	= '</span>';
 					}
@@ -1027,7 +1027,7 @@ class WackoFormatter
 					}
 
 					$url	= str_replace(' ', '', $url);
-					$text	= preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/', '', $text);
+					$text	= preg_replace('/<!--markup:1:[\w]+-->|<!--markup:2:[\w]+-->|\[\[|\(\(/u', '', $text);
 
 					#Diag::dbg('GOLD', ' ::forced:: ' . $thing . ' => ' . $url . ' -> ' . $text);
 					return $result . $wacko->pre_link($url, $text);
@@ -1038,8 +1038,8 @@ class WackoFormatter
 		}
 		// experimental: backported from openSpace
 		// image link (*(http://example.com file:image.png)*)
-		else if (  preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/', $thing, $matches)
-				|| preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/', $thing, $matches)
+		else if (  preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/u', $thing, $matches)
+				|| preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/u', $thing, $matches)
 				)
 		{
 			$url	= $matches[1] ?? '';
@@ -1047,7 +1047,7 @@ class WackoFormatter
 
 			if ($url && $img)
 			{
-				if ($url != ($url = (preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/', '', $url))))
+				if ($url != ($url = (preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/u', '', $url))))
 				{
 					$result	= '</span>';
 				}
@@ -1064,7 +1064,7 @@ class WackoFormatter
 					$result	.= '[';
 				}
 
-				$img		= preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/', '', $img);
+				$img		= preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/u', '', $img);
 
 				return $result . $wacko->pre_link($url, $img, 1, 1);
 			}
@@ -1074,7 +1074,7 @@ class WackoFormatter
 			}
 		}
 		// indented text
-		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|[0-9]{1,3})[\.\)](\#[0-9]{1,3})?)?(\n|$)/s', $thing, $matches))
+		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|[0-9]{1,3})[\.\)](\#[0-9]{1,3})?)?(\n|$)/us', $thing, $matches))
 		{
 			// new line
 			$result .= ($this->br ? "<br>\n" : "\n");
@@ -1167,7 +1167,7 @@ class WackoFormatter
 			$old_level	= $new_indent_level;
 			$old_type	= $new_type;
 
-			if ($li && !preg_match('/' . str_replace(')', '\)', $opener) . '$/', $result))
+			if ($li && !preg_match('/' . str_replace(')', '\)', $opener) . '$/u', $result))
 			{
 				$result .= '</li>' . "\n" . '<li' . ($start ? ' value="' . $start . '"' : '') . '>';
 			}
@@ -1193,10 +1193,10 @@ class WackoFormatter
 			return $result;
 		}
 		// media file links
-		else if (preg_match('/^file:((\.\.|!)?\/)?[[:alnum:]][[:alnum:]\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/s', $thing, $matches))
+		else if (preg_match('/^file:((\.\.|!)?\/)?[[:alnum:]][[:alnum:]\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
 		{
 			$caption = 0;
-			if(!empty($matches[4]) && preg_match('/caption/i', $matches[4]))
+			if(!empty($matches[4]) && preg_match('/caption/ui', $matches[4]))
 			{
 				$caption = 2;
 			}

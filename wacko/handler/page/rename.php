@@ -229,7 +229,7 @@ function move(&$engine, $old_page, $new_tag)
 	{
 		$message .= "<ul>\n";
 
-		if (!preg_match('/^([\_\.\-' . $engine->language['ALPHANUM_P'] . ']+)$/', $new_tag))
+		if (!preg_match('/^([\_\.\-' . $engine->language['ALPHANUM_P'] . ']+)$/u', $new_tag))
 		{
 			$message .= '<li>' . $engine->_t('InvalidWikiName') . "</li>\n";
 		}

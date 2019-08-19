@@ -38,13 +38,13 @@ if ($lang && !$this->known_language($lang))
 
 $tag		= $page; // use tag from here on
 $title		= (int) $title;
-$_alnum		= '/' . $this->language['ALPHANUM'] . '/S';
+$_alnum		= '/' . $this->language['ALPHANUM'] . '/uS';
 
 
 
 $get_letter	= function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {
-	$ch = strtoupper(substr($ch, 0, 1));
+	$ch = mb_strtoupper(mb_substr($ch, 0, 1));
 
 	if ($ch !== '' && !preg_match($_alnum, $ch))
 	{

@@ -12,7 +12,6 @@ $text = preg_replace ('/ {2, }/', ' ', $text);
 $trans = [
 	"\r" => '',
 	"\n" => '<br>',
-	'|' => '&#124;'
 	];
 
 $text = strtr ($text, $trans);

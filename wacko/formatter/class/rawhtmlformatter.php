@@ -33,7 +33,7 @@ class RawHtmlFormatter
 			$language = $params['name'];
 			$formatter = strtolower($language);
 
-			if ($formatter == "\xF1")	$formatter = 'c';
+			if ($formatter == 'с')		$formatter = 'c';		// cyrillic -> latin
 			if ($formatter == 'c')		$formatter = 'comment';
 			if ($formatter == '')		$formatter = 'code';
 
