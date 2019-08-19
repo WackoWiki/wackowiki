@@ -47,7 +47,7 @@ class Side
 		$this->cursor		= 0;
 		$this->directive	= '';
 		$this->argument		= [];
-		$this->length		= strlen($this->content);
+		$this->length		= mb_strlen($this->content);
 		$this->character	= substr($this->content, 0, 1);
 	}
 

@@ -136,9 +136,9 @@ if ($user_id = $this->get_user_id())
 		{
 			if (!$this->db->hide_locked || $this->has_access('read', $page['page_id']))
 			{
-				$first_char = strtoupper($page['tag'][0]);
+				$first_char = mb_strtoupper(mb_substr($page['tag'], 0, 1));
 
-				if (!preg_match('/' . $this->language['ALPHA'] . '/', $first_char))
+				if (!preg_match('/' . $this->language['ALPHA'] . '/u', $first_char))
 				{
 					$first_char = '#';
 				}

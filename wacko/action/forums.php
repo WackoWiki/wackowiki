@@ -19,7 +19,7 @@ $comment	= null;
 if (!isset($noxml))		$noxml = 0;
 
 // make sure that we're executing inside the forum cluster
-if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
+if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 {
 	$this->forum = false;
 
@@ -198,7 +198,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 
 	if (!(int) $noxml)
 	{
-		$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
+		$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
 	$tpl->leave(); // forum_

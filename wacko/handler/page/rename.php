@@ -11,7 +11,7 @@ $tpl->page = $this->compose_link_to_page($this->tag, '', '');
 
 if ($user = $this->get_user())
 {
-	$user_name	= strtolower($this->get_user_name());
+	$user_name	= mb_strtolower($this->get_user_name());
 	$user_id	= $this->get_user_id();
 	$registered	= true;
 }

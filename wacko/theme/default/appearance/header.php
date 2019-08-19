@@ -103,7 +103,7 @@ $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_k
 {
 	$tpl->class = $tab_class ?: ('m-' . $method);
 
-	if (!strncmp($this->method, $method, strlen($method))) // STS why?!
+	if (!strncmp($this->method, $method, mb_strlen($method))) // STS why?!
 	{
 		$tpl->active = ' active';
 		$tpl->enter('in_');

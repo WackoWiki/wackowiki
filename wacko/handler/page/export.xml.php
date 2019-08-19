@@ -13,7 +13,7 @@ $tpl->lang		= $this->page_lang;
 
 if ($this->has_access('read'))
 {
-	$num_slashes = substr_count($this->tag, '/');
+	$num_slashes = mb_substr_count($this->tag, '/');
 
 	$pages = $this->db->load_all(
 		"SELECT page_id, owner_id, tag, title, created, body " .
@@ -34,7 +34,7 @@ if ($this->has_access('read'))
 		// output page
 		$tag = $page['tag'];
 
-		if ($num_slashes == substr_count($tag, '/'))
+		if ($num_slashes == mb_substr_count($tag, '/'))
 		{
 			$tag = '';
 		}

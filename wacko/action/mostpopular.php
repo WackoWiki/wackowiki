@@ -80,7 +80,7 @@ else
 	// $recurse
 	//	true	- recurses and includes all the sub pages of sub pages (and so on) in the listing
 	//	false	- display only pages directly under the selected page, not their kids and grandkids
-	(!$dontrecurse || strtolower($dontrecurse) == 'false')
+	(!$dontrecurse || $dontrecurse == 'false')
 		? $recurse = true
 		: $recurse = false;
 

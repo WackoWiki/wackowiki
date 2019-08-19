@@ -94,7 +94,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 				$words[] = $word['category'];
 			}
 
-			$words = strtolower(implode(', ', $words));
+			$words = mb_strtolower(implode(', ', $words));
 		}
 
 		$tpl->mark			= true;

@@ -409,7 +409,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 				}
 			}
 
-			$result					= substr($result, 0, strlen($result) - 2);
+			$result					= mb_substr($result, 0, mb_strlen($result) - 2);
 			$cluster_pages[$root]	= $result;
 		}
 

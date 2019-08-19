@@ -60,11 +60,11 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		{
 			$error .= $this->_t('MustBeWikiName') . " ";
 		}
-		else if (strlen($user_name) < $this->db->username_chars_min)
+		else if (mb_strlen($user_name) < $this->db->username_chars_min)
 		{
 			$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min) . " ";
 		}
-		else if (strlen($user_name) > $this->db->username_chars_max)
+		else if (mb_strlen($user_name) > $this->db->username_chars_max)
 		{
 			$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . " ";
 		}

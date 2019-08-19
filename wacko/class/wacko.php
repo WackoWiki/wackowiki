@@ -78,11 +78,6 @@ class Wacko
 		'right'		=> ['_before'],
 		'left'		=> ['_before'],
 	];
-	var $translit_macros = [
-		'âèêè'		=> 'wiki',
-		'âàêà'		=> 'wacko',
-		'âåá'		=> 'web',
-	];
 	var $time_intervals = [
 		365*DAYSECS	=> 'Year',
 		30*DAYSECS	=> 'Month',
@@ -933,21 +928,6 @@ class Wacko
 		$tag	= str_replace("'",		'_',	$tag);
 		$_tag	= mb_strtolower($tag);
 
-		if ($strtolow)
-		{
-			$tag = @mb_strtr($_tag, $this->translit_macros);
-		}
-		else
-		{
-			foreach ($this->translit_macros as $macro => $value)
-			{
-				while (($pos = strpos($_tag, $macro)) !== false)
-				{
-					$_tag	= mb_substr_replace($_tag, $value, $pos, strlen($macro));
-					$tag	= mb_substr_replace($tag, ucfirst($value), $pos, strlen($macro));
-				}
-			}
-		}
 
 		$tag = @mb_strtr($tag, $this->language['TranslitLettersFrom'], $this->language['TranslitLettersTo']);
 		$tag = @mb_strtr($tag, $this->language['TranslitBiLetters']);
@@ -988,7 +968,7 @@ class Wacko
 				$meta_keywords .= ', ';
 			}
 
-			$meta_keywords .= strtolower(implode(', ', $this->categories[OBJECT_PAGE]));
+			$meta_keywords .= mb_strtolower(implode(', ', $this->categories[OBJECT_PAGE]));
 		}
 
 		return $meta_keywords;
@@ -1910,7 +1890,7 @@ class Wacko
 			{
 				foreach ($spam as $one)
 				{
-					if (stripos($text, trim($one)) !== false)
+					if (mb_stripos($text, trim($one)) !== false)
 					{
 						return $this->_t('PotentialSpam') . ' : <code>' . $one . '</code>';
 					}
@@ -2067,7 +2047,7 @@ class Wacko
 				$acl	= [];
 
 				// create appropriate acls
-				if (strstr($this->context[$this->current_context], '/') && !$comment_on_id)
+				if (mb_strstr($this->context[$this->current_context], '/') && !$comment_on_id)
 				{
 					$root			= preg_replace( '/^(.*)\\/([^\\/]+)$/', '$1', $this->context[$this->current_context] );
 					$root_id		= $this->get_page_id($root);
@@ -2165,7 +2145,7 @@ class Wacko
 						"body_toc		= " . $this->db->q($body_toc) . ", " .
 						"edit_note		= " . $this->db->q($edit_note) . ", " .
 						"minor_edit		= " . (int) $minor_edit . ", " .
-						"page_size		= " . (int) strlen($body) . ", " .
+						"page_size		= " . (int) mb_strlen($body) . ", " .
 						($reviewed
 							?	"reviewed		= " . (int) $reviewed . ", " .
 								"reviewed_time	= UTC_TIMESTAMP(), " .
@@ -2275,7 +2255,7 @@ class Wacko
 							"body_toc		= " . $this->db->q($body_toc) . ", " .
 							"edit_note		= " . $this->db->q($edit_note) . ", " .
 							"minor_edit		= " . (int) $minor_edit . ", " .
-							"page_size		= " . (int) strlen($body) . ", " .
+							"page_size		= " . (int) mb_strlen($body) . ", " .
 							(isset($reviewed)
 								?	"reviewed		= " . (int) $reviewed . ", " .
 									"reviewed_time	= UTC_TIMESTAMP(), " .
@@ -2333,7 +2313,7 @@ class Wacko
 					// write news feed
 					if ($this->db->news_cluster)
 					{
-						if (substr($this->tag, 0, strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
+						if (mb_substr($this->tag, 0, mb_strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
 						{
 							$xml->feed(); // $this->tag
 						}
@@ -3692,7 +3672,7 @@ class Wacko
 		// TODO: add related code to actions and handlers (currently there is no available use case)
 		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
 		{
-			if (!stristr($tag, $this->db->base_url))
+			if (!mb_stristr($tag, $this->db->base_url))
 			{
 				// tracking external link
 				if ($track)
@@ -3776,7 +3756,7 @@ class Wacko
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
 
-			if (!stristr($tag, $this->db->base_url))
+			if (!mb_stristr($tag, $this->db->base_url))
 			{
 				$title	= $this->_t('OuterLink2');
 				$icon	= $this->_t('OuterIcon');
@@ -4120,7 +4100,7 @@ class Wacko
 			}
 
 			$href	= $this->get_inter_wiki_url($matches[1], implode('/', $parts));
-			$class	= 'iw-' . strtolower($matches[1]);
+			$class	= 'iw-' . mb_strtolower($matches[1]);
 			$icon	= $this->_t('OuterIcon'); # $this->_t('IwIcon');
 			$tpl	= 'interwiki';
 		}
@@ -4161,7 +4141,7 @@ class Wacko
 			if ($handler)
 			{
 				// strip handler from page tag
-				$unwtag		= mb_substr($unwtag, 0, - (strlen($handler) + 1));
+				$unwtag		= mb_substr($unwtag, 0, - (mb_strlen($handler) + 1));
 				$method		= $handler;
 			}
 
@@ -4197,21 +4177,21 @@ class Wacko
 
 			$aname = '';
 
-			if (substr($tag, 0, 2) == '!/')
+			if (mb_substr($tag, 0, 2) == '!/')
 			{
 				$icon		= $this->_t('ChildIcon');
 				$page0		= mb_substr($tag, 2);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'childpage';
 			}
-			else if (substr($tag, 0, 3) == '../')
+			else if (mb_substr($tag, 0, 3) == '../')
 			{
 				$icon		= $this->_t('ParentIcon');
 				$page0		= mb_substr($tag, 3);
 				$page		= $this->add_spaces($page0);
 				$tpl		= 'parentpage';
 			}
-			else if (substr($tag, 0, 1) == '/')
+			else if (mb_substr($tag, 0, 1) == '/')
 			{
 				$icon		= $this->_t('RootIcon');
 				$page0		= mb_substr($tag, 1);
@@ -4253,7 +4233,7 @@ class Wacko
 				$icon		= '';
 			}
 
-			$page_path		= mb_substr($untag, 0, strlen($untag) - strlen($page0));
+			$page_path		= mb_substr($untag, 0, mb_strlen($untag) - mb_strlen($page0));
 			$anchor			= $matches[2] ?? '';
 			$tag			= $unwtag;
 
@@ -4770,7 +4750,7 @@ class Wacko
 	*/
 	function is_wiki_name($text)
 	{
-		return preg_match('/^' . $this->language['UPPER'] . $this->language['LOWER'] . '+' . $this->language['UPPERNUM'] . $this->language['ALPHANUM'] . '*$/', $text);
+		return preg_match('/^' . $this->language['UPPER'] . $this->language['LOWER'] . '+' . $this->language['UPPERNUM'] . $this->language['ALPHANUM'] . '*$/u', $text);
 	}
 
 	// TRACK LINKS
@@ -4786,7 +4766,7 @@ class Wacko
 	{
 		if (isset($this->linktable)) // no linktable? we are not tracking!
 		{
-			$this->linktable[$link_type][strtolower($tag)] = $tag;
+			$this->linktable[$link_type][mb_strtolower($tag)] = $tag;
 		}
 	}
 
@@ -4947,13 +4927,13 @@ class Wacko
 					if (($line = trim($line)) && !ctype_punct($line[0]))
 					{
 						list($wiki_name, $wiki_url) = preg_split('/\s+/', $line);
-						$inter_wiki[strtolower($wiki_name)] = $wiki_url;
+						$inter_wiki[mb_strtolower($wiki_name)] = $wiki_url;
 					}
 				}
 			}
 		}
 
-		if (($url = @$inter_wiki[strtolower($name)]))
+		if (($url = @$inter_wiki[mb_strtolower($name)]))
 		{
 			// xhtmlisation
 			$url = str_replace('&', '&amp;', $url);
@@ -4970,7 +4950,7 @@ class Wacko
 			// translit
 			if (strpos($url, $this->db->base_url) !== false)
 			{
-				$sub = substr($url, strlen($this->db->base_url));
+				$sub = mb_substr($url, mb_strlen($this->db->base_url));
 				$url = $this->db->base_url . $sub;
 			}
 
@@ -5242,7 +5222,7 @@ class Wacko
 	*/
 	function action($action, $params = [], $force_link_tracking = 0)
 	{
-		$action = strtolower(trim($action));
+		$action = mb_strtolower(trim($action));
 		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
 
 		if (!$force_link_tracking)
@@ -5386,7 +5366,7 @@ class Wacko
 
 		// substitutions table
 		$table = [
-			'cyr' => 'ÀÂÑÄÅÍÊÌÎÐÒÕÓàñåêìïîðãèòõó0áI1',
+			'cyr' => 'АВСДЕНКМОРТХУасекмпоргитху0бI1',
 			'lat' => 'ABCDEHKMOPTXYacekmnoprutxyÎ6ll',
 		];
 
@@ -5403,11 +5383,11 @@ class Wacko
 		{
 			if (isset($p[$pos]) === false)
 			{
-				if (false !== $sub = strpos($table['lat'], $char))
+				if (false !== $sub = mb_strpos($table['lat'], $char))
 				{
 					$p[$pos] = $sub;
 				}
-				else if (false !== $sub = strpos($table['cyr'], $char))
+				else if (false !== $sub = mb_strpos($table['cyr'], $char))
 				{
 					$p[$pos] = $sub;
 				}
@@ -6160,12 +6140,12 @@ class Wacko
 					// work correctly.
 					if (!empty($page_id))
 					{
-						$tag = strtolower($this->get_page_tag($page_id));
+						$tag = mb_strtolower($this->get_page_tag($page_id));
 					}
 					else
 					{
 						// new page which is to be created
-						$tag = strtolower($new_tag);
+						$tag = mb_strtolower($new_tag);
 					}
 
 					if ($parent_id = $this->get_parent_id($tag))
@@ -6211,7 +6191,7 @@ class Wacko
 	{
 		if (!$user_name)
 		{
-			$user_name = strtolower($this->get_user_name());
+			$user_name = mb_strtolower($this->get_user_name());
 		}
 
 		if (!($page_id = (int) $page_id))
@@ -6281,10 +6261,10 @@ class Wacko
 			$user_name = GUEST;
 		}
 
-		$user_name = strtolower($user_name);
+		$user_name = mb_strtolower($user_name);
 
 		// replace groups
-		$acl = str_replace(' ', '', strtolower($this->replace_aliases($acl_list)));
+		$acl = str_replace(' ', '', mb_strtolower($this->replace_aliases($acl_list)));
 
 		if ($copy_to_this_acl)
 		{
@@ -6295,7 +6275,7 @@ class Wacko
 
 		if ($user_name == GUEST || $user_name == '')
 		{
-			if (($pos = strpos($acls, '*')) === false)
+			if (($pos = mb_strpos($acls, '*')) === false)
 			{
 				return false;
 			}
@@ -6308,10 +6288,10 @@ class Wacko
 			return false;
 		}
 
-		$upos	= strpos($acls, "\n" . $user_name . "\n");
-		$aupos	= strpos($acls, "\n!" . $user_name . "\n");
-		$spos	= strpos($acls, '*');
-		$bpos	= strpos($acls, '$');
+		$upos	= mb_strpos($acls, "\n" . $user_name . "\n");
+		$aupos	= mb_strpos($acls, "\n!" . $user_name . "\n");
+		$spos	= mb_strpos($acls, '*');
+		$bpos	= mb_strpos($acls, '$');
 
 		if ($aupos !== false)
 		{
@@ -6371,7 +6351,7 @@ class Wacko
 
 		foreach ($this->db->aliases as $key => $val)
 		{
-			$aliases[strtolower($key)] = $val;
+			$aliases[mb_strtolower($key)] = $val;
 		}
 
 		do
@@ -6395,7 +6375,7 @@ class Wacko
 					$negate = 0;
 				}
 
-				$linel = strtolower(trim($linel));
+				$linel = mb_strtolower(trim($linel));
 
 				if (isset($aliases[$linel]))
 				{
@@ -6426,7 +6406,7 @@ class Wacko
 	{
 		if ($this->get_user())
 		{
-			$user_name		= strtolower($this->get_user_name());
+			$user_name		= mb_strtolower($this->get_user_name());
 			$registered		= true;
 		}
 		else
@@ -7458,8 +7438,8 @@ class Wacko
 		// default page title is just page's WikiName
 		return $title
 				?: ($tag
-					? $this->add_spaces_title(trim(substr($tag, strrpos($tag, '/')), '/'))
-					: $this->add_spaces_title(trim(substr($this->tag, strrpos($this->tag, '/')), '/')));
+					? $this->add_spaces_title(trim(mb_substr($tag, mb_strrpos($tag, '/')), '/'))
+					: $this->add_spaces_title(trim(mb_substr($this->tag, mb_strrpos($this->tag, '/')), '/')));
 	}
 
 	// CLONE / RENAMING / MOVING
@@ -8063,8 +8043,8 @@ class Wacko
 		$min_chars		= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
 		$out			= '';
 
-		$l = strlen($login);
-		$p = strlen($pwd);
+		$l = mb_strlen($login);
+		$p = mb_strlen($pwd);
 
 		if ($l == 0 || $p == 0)
 		{
@@ -8083,7 +8063,7 @@ class Wacko
 			case 2:	// don't run this check if login is much shorter than password or vice versa
 				if (($l > 4 && $p > 4) && $r < 4)
 				{
-					$error += (stristr($login, $pwd) !== false || stristr($pwd, $login) !== false);
+					$error += (mb_stristr($login, $pwd) !== false || mb_stristr($pwd, $login) !== false);
 				}
 			case 1:
 				$error += (strcasecmp($login, $pwd) === 0);
@@ -8316,7 +8296,7 @@ class Wacko
 
 	function shorten_string($string, $maxlen = 80)
 	{
-		return (strlen($string) > $maxlen)?  substr($string, 0, 30) . '[...]' . substr($string, -20) : $string;
+		return (mb_strlen($string) > $maxlen)?  mb_substr($string, 0, 30) . '[...]' . mb_substr($string, -20) : $string;
 	}
 
 	// show captcha form on a page. must be incorporated as an input
@@ -8789,9 +8769,9 @@ class Wacko
 
 		foreach ($licenses as $offset => $text)
 		{
-			if (strlen($text) > 50)
+			if (mb_strlen($text) > 50)
 			{
-				$text = substr($text, 0, 45 ) . '...';
+				$text = mb_substr($text, 0, 45 ) . '...';
 			}
 
 			$out .= '<option value="' . $offset . '" ' .
