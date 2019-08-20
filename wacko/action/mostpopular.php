@@ -157,15 +157,13 @@ if (!empty($pages))
 			// print entry
 			$num++;
 
-			$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
-
 			if ($title == 1)
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
+				$_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0);
 			}
 			else
 			{
-				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
+				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0);
 			}
 
 			$tpl->l_num		= $num;

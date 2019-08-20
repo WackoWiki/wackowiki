@@ -3375,7 +3375,7 @@ class Wacko
 	*
 	* @return string full Href link
 	*/
-	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $link_lang = '', $anchor_link = 1, $meta_direct = true)
+	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $anchor_link = 1, $meta_direct = true)
 	{
 		$caption	= '';
 		$class		= '';
@@ -3482,11 +3482,6 @@ class Wacko
 		if (!$safe)
 		{
 			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
-		}
-
-		if ($link_lang)
-		{
-			$this->set_language($link_lang);
 		}
 
 		if (preg_match('/^[\.\-' . $this->language['ALPHANUM_P'] . ']+\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $text))
@@ -3995,13 +3990,6 @@ class Wacko
 
 			$this_page		= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
 
-			if (!$this_page && $link_lang)
-			{
-				$this->set_language($link_lang);
-				$lang		= $link_lang;
-				$this_page	= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
-			}
-
 			if ($this_page)
 			{
 				$_lang		= $this->language['code'];
@@ -4147,11 +4135,6 @@ class Wacko
 				$page_link	= $this->href('edit', $tag, $lang ? 'lang=' . $lang : '', 1);
 				$accicon	= $this->_t('WantedIcon');
 				$title		= $this->_t('CreatePage');
-
-				if ($link_lang)
-				{
-					//
-				}
 			}
 
 			// see lang/wacko.all.php

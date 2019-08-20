@@ -108,14 +108,11 @@ if ($this->user_allowed_comments())
 									&& $page['comment_user'] != $user['user_name']
 									&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
-				// page lang
-				$page_lang = ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
-
 				// print entry
 				$tpl->l_time = $time;
 				$tpl->l_page = ($title == 1
-					? $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
-					: $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
+					? $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, 0)
+					: $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, 0)
 				);
 
 				$tpl->l_user = $this->user_link($page['comment_user'], '', true, false);

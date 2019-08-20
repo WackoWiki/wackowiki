@@ -232,9 +232,8 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-					$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
-					echo $this->link('/' . $page['tag'], '', $link_text, '', 0, 1, $page_lang, 0);
+					echo $this->link('/' . $page['tag'], '', $link_text, '', 0, 1, 0);
 				}
 
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '</strong>';

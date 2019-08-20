@@ -207,12 +207,12 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				if (in_array($file['file_ext'], ['gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp']))
 				{
 					$tpl->i_href		= $href;
-					$tpl->i_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false);
+					$tpl->i_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', false);
 				}
 				// show audio & video
 				else if (in_array($file['file_ext'], ['mp4', 'ogv', 'webm', 'm4a' , 'mp3', 'ogg', 'opus']))
 				{
-					$tpl->m_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', '', '', false);
+					$tpl->m_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', false);
 				}
 
 				$tpl->syntax		= $path . $file['file_name'];

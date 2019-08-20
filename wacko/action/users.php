@@ -319,10 +319,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				{
 					if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
 					{
-						$_lang = ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
-
 						$tpl->u_prof_pages_li_created	= $page['created'];
-						$tpl->u_prof_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
+						$tpl->u_prof_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
 					}
 				}
 			}
@@ -371,10 +369,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					{
 						if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
 						{
-							$_lang = ($this->page['page_lang'] != $comment['page_lang']) ? $comment['page_lang'] : '';
-
 							$tpl->u_prof_cmt_c_li_created	= $comment['created'];
-							$tpl->u_prof_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1, $_lang);
+							$tpl->u_prof_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1);
 						}
 					}
 				}
@@ -435,8 +431,6 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 								|| !$upload['page_id']
 								|| $this->has_access('read', $upload['page_id']))
 							{
-								$_lang = ($this->page['page_lang'] != $upload['file_lang']) ? $upload['file_lang'] : '';
-
 								if (($file_description = $upload['file_description']) !== '')
 								{
 									$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
@@ -450,7 +444,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 									$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
 									$on_tag		= $upload['file_on_page'];
 									$on_page	= $this->_t('To') . ' ' .
-												  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1, $_lang) .
+												  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1) .
 												  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
 								}
 								else
@@ -461,7 +455,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 								}
 
 								$tpl->u_prof_up_u_u2_li_t		= $upload['uploaded_dt'];
-								# $tpl->u_prof_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1, $_lang);
+								# $tpl->u_prof_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
 								$tpl->u_prof_up_u_u2_li_link	= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
 								$tpl->u_prof_up_u_u2_li_onpage	= $on_page;
 								$tpl->u_prof_up_u_u2_li_descr	= $file_description;

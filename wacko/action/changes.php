@@ -56,8 +56,6 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 
 			$review = $viewed = '';
 
-			$page_lang = ($this->page['page_lang'] != $page['page_lang']) ? $page['page_lang'] : '';
-
 			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
 
@@ -72,8 +70,8 @@ if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_m
 				);
 			$tpl->l_page =
 				($title == 1
-					? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0)
-					: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0)
+					? $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0)
+					: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0)
 				);
 
 			$tpl->l_user = $this->user_link($page['user_name'], '', true, false);

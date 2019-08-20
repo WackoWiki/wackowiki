@@ -161,13 +161,10 @@ $check_ref = function ($ref)
 	}
 	else
 	{
-		// - page lang
-		$lang = ($this->page['page_lang'] != $ref['page_lang'])? $ref['page_lang'] : '';
-
 		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$ref['tag']] = $page_id;
 
-		$link = $this->link('/' . $ref['tag'], '', $ref['title'], '', '', '', $lang, 0);
+		$link = $this->link('/' . $ref['tag'], '', $ref['title'], '', '', '', 0);
 	}
 
 	return $link;
