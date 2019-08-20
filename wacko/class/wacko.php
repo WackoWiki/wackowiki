@@ -6410,14 +6410,13 @@ class Wacko
 
 				// [0] - page_id
 				// [1] - menu_title
-				// [2] - menu_item formatted ((tag menu_title @@menu_lang))
+				// [2] - menu_item formatted ((tag menu_title))
 				// [3] - menu_lang
 				$user_menu_formatted[] = [
 					$menu_item['page_id'],
 					(($title !== '')? $title : $menu_item['tag']),
 					'((' . $menu_item['tag'] .
 						(($title !== '')? ' ' . $title : '') .
-						($menu_item['menu_lang']? ' @@' . $menu_item['menu_lang'] : '') .
 					'))',
 					$menu_item['menu_lang'],
 				];
@@ -6501,7 +6500,7 @@ class Wacko
 				$menu_formatted[]	= [
 										$this->page['page_id'],
 										($title? $title : $this->tag),
-										$this->format('((' . $this->tag . ($title? ' ' . $title : '') . ($lang? ' @@' . $lang : '') . '))', 'wacko'),
+										$this->format('((' . $this->tag . ($title? ' ' . $title : '') . '))', 'wacko'),
 										$lang,
 									];
 
