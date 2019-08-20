@@ -401,10 +401,9 @@ class Wacko
 		// TODO: made format depended from localization and user preferences?
 		// default: d.m.Y H:i
 
-		// XXX: testing strftime(), charset issue with CP1251
 		#setlocale(LC_TIME, $this->language['locale']);
 		#setlocale(LC_TIME, 'ru_RU.UTF-8');
-		#return $this->try_utf_decode(strftime('%d. %B %Y' . ' ' . '%H.%M', $local_time));
+		#return strftime('%d. %B %Y' . ' ' . '%H.%M', $local_time);
 
 		if ($relative)
 		{
@@ -593,13 +592,6 @@ class Wacko
 			$wacko_language['ALPHANUM']		= '[' . $wacko_language['ALPHANUM_P'] . ']';
 
 			$this->languages[$lang] = $wacko_language;
-
-			if (($ue = @array_flip($wacko_language['unicode_entities'])))
-			{
-				$this->unicode_entities = array_merge($this->unicode_entities, $ue);
-			}
-
-			unset($this->unicode_entities[0]);
 		}
 	}
 
@@ -721,40 +713,6 @@ class Wacko
 		$this->load_lang($lang);
 
 		return @$this->languages[$lang]['charset'];
-	}
-
-	/**
-	* Replace symbols in $string to their Html Unicode entity
-	*
-	* @param string $string Input string
-	* @param string $lang Target language code
-	*
-	* @return string Converted string
-	*/
-	function do_unicode_entities($string, $lang)
-	{
-		if (!$this->db->multilanguage)
-		{
-			return $string;
-		}
-
-		$_lang = $this->determine_lang();
-
-		if ($lang == $_lang)
-		{
-			return $string;
-		}
-
-		$this->load_translation($lang);
-
-		if (isset($this->languages[$lang]['unicode_entities']) && is_array($this->languages[$lang]['unicode_entities']))
-		{
-			return @strtr($string, $this->languages[$lang]['unicode_entities']);
-		}
-		else
-		{
-			return $string;
-		}
 	}
 
 	function try_utf_decode($string)

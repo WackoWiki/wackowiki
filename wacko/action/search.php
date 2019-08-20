@@ -375,7 +375,6 @@ if (mb_strlen($phrase) >= 3)
 						$preview	= $context;
 					}
 
-					// check current page lang for different charset to do_unicode_entities() against
 					if ($this->page['page_lang'] != $page['page_lang'])
 					{
 						$_lang		= $page['page_lang'];

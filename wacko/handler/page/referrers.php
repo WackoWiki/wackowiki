@@ -161,7 +161,6 @@ $check_ref = function ($ref)
 	}
 	else
 	{
-		// check current page lang for different charset to do_unicode_entities() against
 		// - page lang
 		$lang = ($this->page['page_lang'] != $ref['page_lang'])? $ref['page_lang'] : '';
 

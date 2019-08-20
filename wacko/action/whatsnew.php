@@ -169,7 +169,6 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$tpl->day = $curday = $day;
 			}
 
-			// check current page lang for different charset to do_unicode_entities() against
 			// - page lang
 			if ($this->page['page_lang'] != $page['page_lang'])
 			{
