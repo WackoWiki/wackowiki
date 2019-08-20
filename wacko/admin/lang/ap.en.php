@@ -1292,5 +1292,3 @@ $ap_translation = [
 	'BbReverseProxyAddresses'	=> 'IP address or CIDR format address ranges for your proxy servers (one per line)',
 
 ];
-
-?>

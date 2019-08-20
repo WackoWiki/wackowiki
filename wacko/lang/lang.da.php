@@ -10,7 +10,6 @@ $wacko_language = [
 	'code'					=> "da",
 	'charset'				=> "utf-8",
 	'locale'				=> "da_DK",
-	'utfdecode'				=> [],
 	'UPPER_P'				=> "A-ZÀ-ÖØ-Ý",
 	'LOWER_P'				=> "a-zß-öø-ýÿ\/''",
 	'ALPHA_P'				=> "A-Za-zÀ-ÖØ-Ýß-öø-ýÿ\_\-\/'",
@@ -24,4 +23,3 @@ $wacko_language = [
 								],
 ];
 
-?>
