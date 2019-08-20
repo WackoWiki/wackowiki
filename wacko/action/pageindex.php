@@ -216,7 +216,6 @@ $cur_char = false;
 
 foreach ($pages_to_display as $page)
 {
-	$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 	$ch			= $get_letter($title ? $page['title'] : $page['tag']);
 
 	if ($ch !== $cur_char)
@@ -226,10 +225,10 @@ foreach ($pages_to_display as $page)
 
 	if ($title)
 	{
-		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $page_lang, 0);
+		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0);
 	}
 	else
 	{
-		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, $page_lang, 0);
+		$tpl->page_l_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0);
 	}
 }

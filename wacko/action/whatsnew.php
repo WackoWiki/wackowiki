@@ -169,26 +169,6 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$tpl->day = $curday = $day;
 			}
 
-			// - page lang
-			if ($this->page['page_lang'] != $page['page_lang'])
-			{
-				$_lang = $page['page_lang'];
-			}
-			else
-			{
-				$_lang = '';
-			}
-
-			// - comment lang / file description lang
-			if ($this->page['page_lang'] != $page['cf_lang'])
-			{
-				$_cf_lang = $page['cf_lang'];
-			}
-			else
-			{
-				$_cf_lang = '';
-			}
-
 			// print entry
 			$tpl->l_user		= $this->user_link($page['user_name'], '', true, false);
 			$tpl->l_viewed		= (isset($user['last_mark']) && $user['last_mark']
@@ -213,7 +193,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				if ($page['page_id']) // !$global
 				{
 					$path2				= '_file:/' . $this->slim_url($page['tag']) . '/';
-					$tpl->l_to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_lang);
+					$tpl->l_to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
 					$tpl->l_cluster		= $sub_tag[0];
 				}
 				else
@@ -225,7 +205,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$tpl->l_title	= $this->_t('NewFileAdded');
 				$tpl->l_alt		= 'file';
 				$tpl->l_class	= 'btn-attachment';
-				$tpl->l_link	= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1, $_lang);
+				$tpl->l_link	= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1);
 			}
 			// deleted
 			else if ($page['deleted'])
@@ -242,8 +222,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$tpl->l_title	= $this->_t('NewCommentAdded');
 				$tpl->l_alt		= 'deleted';
 				$tpl->l_class	= 'btn-delete';
-				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang);
-				$tpl->l_to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang);
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->l_to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
 				$tpl->l_cluster	= $sub_tag[0];
 			}
 			// new comment
@@ -254,8 +234,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$tpl->l_title	= $this->_t('NewCommentAdded');
 				$tpl->l_alt		= 'comment';
 				$tpl->l_class	= 'btn-comment';
-				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_cf_lang);
-				$tpl->l_to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1, $_cf_lang);
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->l_to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
 				$tpl->l_cluster	= $sub_tag[0];
 			}
 			// new page
@@ -266,7 +246,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$tpl->l_title	= $this->_t('NewPageCreated');
 				$tpl->l_alt		= 'new';
 				$tpl->l_class	= 'btn-add-page';
-				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
 				$tpl->l_cluster	= $sub_tag[0];
 			}
 			// new revision
@@ -277,7 +257,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 				$tpl->l_title	= $this->_t('NewRevisionAdded');
 				$tpl->l_alt		= 'changed';
 				$tpl->l_class	= 'btn-edit';
-				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, $_lang);
+				$tpl->l_link	= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
 				$tpl->l_cluster	= $sub_tag[0];
 			}
 		}

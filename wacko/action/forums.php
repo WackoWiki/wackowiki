@@ -135,15 +135,6 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 			$forum['description'] = Ut::html($forum['description']); // don't use [ ' description | e ' ]
 
-			if ($this->page['page_lang'] != $forum['page_lang'])
-			{
-				$_lang = $forum['page_lang'];
-			}
-			else
-			{
-				$_lang = '';
-			}
-
 			$tpl->counter = $counter; // array
 
 			if ($this->has_access('read', $forum['page_id'], GUEST) === false)
@@ -158,7 +149,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 				$tpl->updated	= true;
 			}
 
-			$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '', $_lang);
+			$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '');
 			$tpl->description	= $forum['description'];
 
 			if ($comment)

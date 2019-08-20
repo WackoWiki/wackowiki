@@ -17,7 +17,6 @@ class PostWacko
 
 	function postcallback($things)
 	{
-		$lang		= '';
 		$matches	= [];
 		$thing		= $things[1];
 
@@ -33,14 +32,7 @@ class PostWacko
 				$url	= str_replace(' ', '%20', trim($url));
 				$text	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $text));
 
-				if (mb_stristr($text, '@@'))
-				{
-					$t		= explode('@@', $text);
-					$text	= $t[0];
-					$lang	= $t[1];
-				}
-
-				return $wacko->link($url, '', $text, '', 1, 1, $lang);
+				return $wacko->link($url, '', $text, '', 1, 1);
 			}
 			else
 			{
