@@ -216,7 +216,6 @@ $cur_char = false;
 
 foreach ($pages_to_display as $page)
 {
-	// do unicode entities
 	$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 	$ch			= $get_letter($title ? $page['title'] : $page['tag']);
 

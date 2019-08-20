@@ -232,7 +232,6 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-					// do unicode entities
 					$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
 					echo $this->link('/' . $page['tag'], '', $link_text, '', 0, 1, $page_lang, 0);

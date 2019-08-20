@@ -35,7 +35,6 @@ class Wacko
 	var $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	var $first_inclusion		= [];		// for backlinks
 	var $format_safe			= true;		// for htmlspecialchars() in pre_link
-	var $unicode_entities		= [];		// common unicode array
 	var $toc_context			= [];
 	var $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
 	var $language				= null;
@@ -621,7 +620,7 @@ class Wacko
 	 *
 	 * @return string Message set
 	 */
-	function _t($name, $lang = '', $dounicode = true)
+	function _t($name, $lang = '')
 	{
 		if ($this->db->multilanguage)
 		{
@@ -713,115 +712,6 @@ class Wacko
 		$this->load_lang($lang);
 
 		return @$this->languages[$lang]['charset'];
-	}
-
-	function try_utf_decode($string)
-	{
-		$t1 = $this->utf8_to_unicode_entities($string);
-		$t2 = @strtr($t1, $this->unicode_entities);
-
-		if (!preg_match('/\&\#[0-9]+\;/', $t2))
-		{
-			$string = $t2;
-		}
-
-		return $string;
-	}
-
-	function utf8_to_unicode_entities($source)
-	{
-		$decrement	= [];
-		$shift		= [];
-
-		// array used to figure what number to decrement from character order value
-		// according to number of characters used to map unicode to ascii by utf-8
-		$decrement[4] = 240;
-		$decrement[3] = 224;
-		$decrement[2] = 192;
-		$decrement[1] = 0;
-
-		// the number of bits to shift each char_num by
-		$shift[1][0] = 0;
-		$shift[2][0] = 6;
-		$shift[2][1] = 0;
-		$shift[3][0] = 12;
-		$shift[3][1] = 6;
-		$shift[3][2] = 0;
-		$shift[4][0] = 18;
-		$shift[4][1] = 12;
-		$shift[4][2] = 6;
-		$shift[4][3] = 0;
-
-		$pos			= 0;
-		$len			= strlen ($source);
-		$encoded_string	= '';
-
-		while ($pos < $len)
-		{
-			$ascii_pos = ord (substr ($source, $pos, 1));
-
-			if (($ascii_pos >= 240) && ($ascii_pos <= 255))
-			{
-				// 4 chars representing one unicode character
-				$this_letter = substr ($source, $pos, 4);
-				$pos += 4;
-			}
-			else if (($ascii_pos >= 224) && ($ascii_pos <= 239))
-			{
-				// 3 chars representing one unicode character
-				$this_letter = substr ($source, $pos, 3);
-				$pos += 3;
-			}
-			else if (($ascii_pos >= 192) && ($ascii_pos <= 223))
-			{
-				// 2 chars representing one unicode character
-				$this_letter = substr ($source, $pos, 2);
-				$pos += 2;
-			}
-			else
-			{
-				// 1 char (lower ascii)
-				$this_letter = substr ($source, $pos, 1);
-				$pos += 1;
-			}
-
-			// process the string representing the letter to a unicode entity
-			$this_len = strlen ($this_letter);
-
-			if ($this_len > 1)
-			{
-				$this_pos		= 0;
-				$decimal_code	= 0;
-
-				while ($this_pos < $this_len)
-				{
-					$this_char_ord = ord (substr ($this_letter, $this_pos, 1));
-
-					if ($this_pos == 0)
-					{
-						$char_num = intval ($this_char_ord - $decrement[$this_len]);
-						$decimal_code += ($char_num << $shift[$this_len][$this_pos]);
-					}
-					else
-					{
-						$char_num = intval ($this_char_ord - 128);
-						$decimal_code += ($char_num << $shift[$this_len][$this_pos]);
-					}
-
-					$this_pos++;
-				}
-
-				$encoded_letter = '&#' . $decimal_code . ';';
-			}
-			else
-			{
-				$encoded_letter = $this_letter;
-			}
-
-			$encoded_string .= $encoded_letter;
-		}
-
-		return $encoded_string;
 	}
 
 	// PAGES

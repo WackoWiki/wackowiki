@@ -125,7 +125,6 @@ if ($this->user_allowed_comments())
 						$tpl->day = $curday = $day;
 					}
 
-					// do unicode entities
 					// page lang
 					$page_lang		= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
