@@ -586,10 +586,10 @@ class Wacko
 
 			$wacko_language['LANG']			= $lang;
 			$wacko_language['UPPER']		= '\p{Lu}';										//'[' . $wacko_language['UPPER_P'] . ']';
-			$wacko_language['UPPERNUM']		= '\p{Lu} \p{Nd}';								// '[0-9' . $wacko_language['UPPER_P'] . ']';
+			$wacko_language['UPPERNUM']		= '\p{Lu}\p{Nd}';								// '[0-9' . $wacko_language['UPPER_P'] . ']';
 			$wacko_language['LOWER']		= '\p{Ll}';										//'[' . $wacko_language['LOWER_P'] . ']';
 			$wacko_language['ALPHA']		= '\p{L}';										// '[' . $wacko_language['ALPHA_P'] . ']';
-			$wacko_language['ALPHANUM_P']	= '\p{L} \p{Nd}\_\-\/';								// '0-9' . $wacko_language['ALPHA_P'];
+			$wacko_language['ALPHANUM_P']	= '\p{L}\p{Nd}\_\-\/';							// '0-9' . $wacko_language['ALPHA_P'];
 			$wacko_language['ALPHANUM']		= '[' . $wacko_language['ALPHANUM_P'] . ']';
 
 			$this->languages[$lang] = $wacko_language;
