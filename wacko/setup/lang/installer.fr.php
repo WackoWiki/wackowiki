@@ -12,9 +12,6 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
-	// site name
-	'site_name'			=> 'MonSiteWiki',
-
 	// pages
 	'category_page'		=> 'Catégories',
 	'groups_page'		=> 'Groupes',
