@@ -154,7 +154,6 @@ if (!empty($pages))
 			// print entry
 			$num++;
 
-			// do unicode entities
 			$page_lang	= ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 
 			if ($title == 1)

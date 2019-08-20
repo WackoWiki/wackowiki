@@ -108,7 +108,6 @@ if ($this->user_allowed_comments())
 									&& $page['comment_user'] != $user['user_name']
 									&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
-				// do unicode entities
 				// page lang
 				$page_lang = ($this->page['page_lang'] != $page['page_lang'])? $page['page_lang'] : '';
 

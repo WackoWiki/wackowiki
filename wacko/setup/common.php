@@ -271,29 +271,6 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	}
 }
 
-function set_language($lang)
-{
-	global $config, $language, $languages;
-
-	if (!isset($languages[$lang]))
-	{
-		$lang_file = 'lang/lang.' . $lang . '.php';
-
-		if (@file_exists($lang_file))
-		{
-			include $lang_file;
-		}
-
-		$languages[$lang] = $wacko_language;
-	}
-
-	$language = &$languages[$lang];
-	setlocale(LC_CTYPE, $language['locale']);
-	$language['locale'] = setlocale(LC_CTYPE, 0);
-
-	return $language;
-}
-
 // TODO: refactor -> same function as in dbal class
 function _quote($string)
 {

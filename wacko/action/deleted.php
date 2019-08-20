@@ -43,7 +43,6 @@ if ($this->is_admin())
 					$tpl->day = $curday = $day;
 				}
 
-				// do unicode entities
 				if (($edit_note = $page['edit_note']) !== '')
 				{
 					$tpl->l_n_text = $edit_note;
