@@ -229,4 +229,3 @@ $lang = [
 'TryAgain' => 'Intente de Nuevo',
 
 ];
-?>

@@ -10,7 +10,6 @@ $wacko_language = [
 	'code'					=> "bg",
 	'charset'				=> "utf-8",
 	'locale'				=> ["bg_BG","bulgarian","bg"],
-	'utfdecode'				=> [],
 	'UPPER_P'				=> "A-Z\xc0-\xdf\xa8",
 	'LOWER_P'				=> "a-z\xe0-\xff\xb8\/\'",
 	'ALPHA_P'				=> "A-Za-z\xc0-\xff\xa8\xb8\_\/\'",
@@ -26,4 +25,3 @@ $wacko_language = [
 	],
 ];
 
-?>

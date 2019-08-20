@@ -1287,5 +1287,3 @@ $ap_translation = [
 
 
 ];
-
-?>
