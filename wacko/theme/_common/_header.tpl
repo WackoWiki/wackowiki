@@ -2,7 +2,7 @@ _common include file for themes
 
 [ === HtmlHead === ]
 <!DOCTYPE html>
-<html lang="[ ' lang ' ]">
+<html dir="[ ' dir ' ]" lang="[ ' lang ' ]">
 <head>
 	<meta charset="[ ' charset ' ]">
 	<title>[ ' title | e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name | e ' ]</title>

@@ -616,7 +616,6 @@ class Wacko
 	 *
 	 * @param string $name Name of message set
 	 * @param string $lang Language code
-	 * @param bool $dounicode
 	 *
 	 * @return string Message set
 	 */
@@ -663,7 +662,7 @@ class Wacko
 	// wrapper for get and format message set translation
 	function format_t($name, $lang = '')
 	{
-		$string = $this->_t($name, $lang, false);
+		$string = $this->_t($name, $lang);
 		$this->format_safe = false;
 		$string = $this->format($string);
 		$this->format_safe = true;
@@ -3369,7 +3368,6 @@ class Wacko
 	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINK table).
 	*	Optional, default is TRUE
 	* @param boolean $safe If false, then sanitize $text, else no.
-	* @param string $link_lang
 	* @param string $anchor_link Optional HTTP anchor-fragment
 	* @param boolean $meta_direct Links attached files to filemeta handler if TRUE
 	*

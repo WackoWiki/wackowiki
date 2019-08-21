@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_language = [
 	'name'					=> "Greek",
 	'code'					=> "el",
+	'dir'					=> "ltr",
 	'charset'				=> "utf-8",
 	'locale'				=> "el_GR.UTF-8",
 	//http://en.wikipedia.org/wiki/ISO-8859-7

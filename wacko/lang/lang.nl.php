@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_language = [
 	'name'					=> "Dutch",
 	'code'					=> "nl",
+	'dir'					=> "ltr",
 	'charset'				=> "utf-8",
 	'locale'				=> "nl_NL.UTF-8",
 	'UPPER_P'				=> "A-ZÀ-ÖØ-Ý",

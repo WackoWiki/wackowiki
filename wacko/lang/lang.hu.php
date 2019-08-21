@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_language = [
 	'name'					=> "Hungarian",
 	'code'					=> "hu",
+	'dir'					=> "ltr",
 	'charset'				=> "utf-8",
 	'locale'				=> "hu_HU.UTF-8",
 	'UPPER_P'				=> "A-Z\xa1\xa3\xa5\xa6\xa9-\xac\xae\xaf\xc0-\xd6\xd8-\xde",

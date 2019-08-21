@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_language = [
 	'name'					=> "Bulgarian",
 	'code'					=> "bg",
+	'dir'					=> "ltr",
 	'charset'				=> "utf-8",
 	'locale'				=> "bg_BG.UTF-8",
 	'UPPER_P'				=> "A-Z\xc0-\xdf\xa8",
