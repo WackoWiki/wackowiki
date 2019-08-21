@@ -329,7 +329,7 @@ class WackoFormatter
 		$wacko		= &$this->object;
 		$callback	= [&$this, 'wacko_preprocess'];
 
-		if ($thing[0] == '~')
+		if (!empty($thing[0]) && $thing[0] == '~')
 		{
 			if ($thing[1] == '~')
 			{
@@ -446,10 +446,12 @@ class WackoFormatter
 		$wacko		= &$this->object;
 		$callback	= [&$this, 'wacko_callback'];
 
-		if ($thing[0] == '~')
-		if ($thing[1] == '~')
+		if (!empty($thing[0]) && $thing[0] == '~')
 		{
-			return '~~' . $this->wacko_middleprocess( [0, substr($thing, 2)] );
+			if ($thing[1] == '~')
+			{
+				return '~~' . $this->wacko_middleprocess( [0, substr($thing, 2)] );
+			}
 		}
 
 		// escaped text
