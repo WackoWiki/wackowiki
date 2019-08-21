@@ -181,7 +181,10 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 	// user_id for user 'System'
 	// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
-	$page_insert			= "INSERT INTO " . $config_global['table_prefix'] . "page (tag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex) VALUES ('" . _quote($tag) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
+	$page_insert			= "INSERT INTO " .
+									$config_global['table_prefix'] . "page (tag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex)
+								VALUES
+									('" . _quote($tag) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
 
 	$page_id				= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag = '" . $tag . "' LIMIT 1";
 

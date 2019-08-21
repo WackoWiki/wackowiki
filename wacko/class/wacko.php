@@ -6889,7 +6889,9 @@ class Wacko
 			// normalizing tag name
 			if (!preg_match('/^[' . $this->language['ALPHANUM_P'] . '\!]+$/u', $tag))
 			{
-				$tag = $this->try_utf_decode($tag);
+				#$tag = ''; // TODO: other allowed code points?
+
+				// debug here..
 			}
 
 			$tag = str_replace("'", '_', str_replace('\\', '', str_replace('_', '', $tag)));

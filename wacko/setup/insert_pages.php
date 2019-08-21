@@ -17,7 +17,7 @@ if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	{
 		$lang_list = explode(',', $config['allowed_languages']);
 
-		// system language is always allowed
+		// system language is mandatory
 		if (!in_array($config['language'], $lang_list))
 		{
 			$lang_list[] = $config['language'];
