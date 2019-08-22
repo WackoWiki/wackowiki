@@ -185,21 +185,19 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 	$page_id				= "SELECT page_id FROM " . $config_global['table_prefix'] . "page WHERE tag = '" . $tag . "' LIMIT 1";
 
-	$perm_read_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'read',		'*')";
-	$perm_write_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'write',		'" . $rights . "')";
-	$perm_comment_insert	= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'comment',	'$')";
-	$perm_create_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'create',		'$')";
-	$perm_upload_insert		= "INSERT INTO " . $config_global['table_prefix'] . "acl (page_id, privilege, list) VALUES ((" . $page_id."), 'upload',		'')";
+	$perm_insert				= "INSERT INTO " .
+									$config_global['table_prefix'] . "acl (page_id, privilege, list)
+								VALUES
+									((" . $page_id . "), 'read',		'*'),
+									((" . $page_id . "), 'write',		'" . $rights . "'),
+									((" . $page_id . "), 'comment',		'$'),
+									((" . $page_id . "), 'create',		'$'),
+									((" . $page_id . "), 'upload',		'')";
 
 	$default_menu_item		= "INSERT INTO " . $config_global['table_prefix'] . "menu (user_id, page_id, menu_lang, menu_title) VALUES ((" . $owner_id . "), (" . $page_id . "), '" . _quote($lang) . "', '" . _quote($menu_title) . "')";
-	#$site_menu_item		= "INSERT INTO " . $config_global['table_prefix'] . "menu (user_id, page_id, menu_lang, menu_title) VALUES ((" . $owner_id . "), (" . $page_id . "), '" . _quote($lang) . "', '" . _quote($menu_title) . "')";
 
 	$insert_data[]			= [$page_insert,			$lang_global['ErrorInsertingPage']];
-	$insert_data[]			= [$perm_read_insert,		$lang_global['ErrorInsertingPageReadPermission']];
-	$insert_data[]			= [$perm_write_insert,		$lang_global['ErrorInsertingPageWritePermission']];
-	$insert_data[]			= [$perm_comment_insert,	$lang_global['ErrorInsertingPageCommentPermission']];
-	$insert_data[]			= [$perm_create_insert,		$lang_global['ErrorInsertingPageCreatePermission']];
-	$insert_data[]			= [$perm_upload_insert,		$lang_global['ErrorInsertingPageUploadPermission']];
+	$insert_data[]			= [$perm_insert,			$lang_global['ErrorInsertingPagePermission']];
 
 	if ($is_menu)
 	{
