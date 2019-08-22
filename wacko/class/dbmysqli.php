@@ -69,12 +69,4 @@ class DbMysqli implements DbInterface
 		return mysqli_affected_rows($this->dblink);
 	}
 
-	/**
-	 * Change the current SQL mode at runtime
-	 */
-	function set_mode($strict = false)
-	{
-		$sql_modes = $strict?  SQL_MODE_STRICT : SQL_MODE_PERMISSIVE;
-		$this->query("SET SESSION sql_mode='$sql_modes'");
-	}
 }
