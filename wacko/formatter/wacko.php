@@ -18,7 +18,7 @@ $wtext	= $texts[0];
 
 for ($i = 2; $i < count($texts); $i = $i + 2)
 {
-	$wtext = $wtext."\xfe\xa6" . $texts[$i];
+	$wtext = $wtext . "\xfe\xa6" . $texts[$i];
 }
 
 $wtext	= preg_replace_callback($parser->MOREREGEXP, [&$parser, 'wacko_middleprocess'], $wtext);

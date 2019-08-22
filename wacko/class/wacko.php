@@ -2290,7 +2290,7 @@ class Wacko
 				// getting title
 				if ($title == '')
 				{
-					if ($comment_on_id == true)
+					if ($comment_on_id)
 					{
 						$title = $this->_t('Comment') . ' ' . substr($tag, 7);
 					}
@@ -2658,7 +2658,8 @@ class Wacko
 		// add user page
 		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
 		{
-			$this->save_page($tag, '', $user_page_template, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
+			// profile title = user_name
+			$this->save_page($tag, $user_name, $user_page_template, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
 		}
 	}
 
