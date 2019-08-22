@@ -92,6 +92,6 @@ define('HTML_FILTERING',				null);				// safehtml, htmlpurifier
 
 define('ACTION4DIFF',					'anchor, toc');		// allowed actions in DIFF
 
-define('PHP_MIN_VERSION',				'7.0.0');			// minimum required PHP version
+define('PHP_MIN_VERSION',				'7.2.0');			// minimum required PHP version
 define('PHP_MAX_VERSION',				'7.3.0');			// maximum required PHP version
 define('PHP_ERROR_REPORTING',			6);					// PHP error reporting: 0 - off, 6 - all
