@@ -5,93 +5,93 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-define('CONFIG_DIR',					'config');			// NB hardcoded as config/constants.php for bootstrap
-define('CONFIG_FILE',					'config/config.php');
-define('CONFIG_DEFAULTS',				'config/config_defaults.php');
-define('SITE_LOCK',						'config/lock');
-define('AP_LOCK',						'config/lock_ap');
+const CONFIG_DIR					= 'config';				// NB hardcoded as config/constants.php for bootstrap
+const CONFIG_FILE					= 'config/config.php';
+const CONFIG_DEFAULTS				= 'config/config_defaults.php';
+const SITE_LOCK						= 'config/lock';
+const AP_LOCK						= 'config/lock_ap';
 
-define('ACTION_DIR',					'action');
-define('LANG_DIR',						'lang');
-define('FORMATTER_DIR',					'formatter');
-define('HANDLER_DIR',					'handler');
-define('IMAGE_DIR',						'image');
-define('THEME_DIR',						'theme');
-define('THUMB_DIR',						'file/thumb');
-define('UPLOAD_GLOBAL_DIR',				'file/global');
-define('UPLOAD_PER_PAGE_DIR',			'file/perpage');
-define('UPLOAD_BACKUP_DIR',				'file/backup');
-define('XML_DIR',						'xml');
+const ACTION_DIR					= 'action';
+const LANG_DIR						= 'lang';
+const FORMATTER_DIR					= 'formatter';
+const HANDLER_DIR					= 'handler';
+const IMAGE_DIR						= 'image';
+const THEME_DIR						= 'theme';
+const THUMB_DIR						= 'file/thumb';
+const UPLOAD_GLOBAL_DIR				= 'file/global';
+const UPLOAD_PER_PAGE_DIR			= 'file/perpage';
+const UPLOAD_BACKUP_DIR				= 'file/backup';
+const XML_DIR						= 'xml';
 
-define('CACHE_CONFIG_DIR',				'_cache/config');
-define('CACHE_FEED_DIR',				'_cache/feed');
-define('CACHE_PAGE_DIR',				'_cache/page');
-define('CACHE_SQL_DIR',					'_cache/query');
-define('CACHE_TEMPLATE_DIR',			'_cache/template');
-define('CACHE_SESSION_DIR',				'/tmp');			// '_cache/session'
-define('SAFE_CHMOD',					0640);				// better to use 0600 in production
+const CACHE_CONFIG_DIR				= '_cache/config';
+const CACHE_FEED_DIR				= '_cache/feed';
+const CACHE_PAGE_DIR				= '_cache/page';
+const CACHE_SQL_DIR					= '_cache/query';
+const CACHE_TEMPLATE_DIR			= '_cache/template';
+const CACHE_SESSION_DIR				= '/tmp';				// '_cache/session'
+const SAFE_CHMOD					= 0640;					// better to use 0600 in production
 
-define('SITEMAP_XML',					'sitemap.xml');
+const SITEMAP_XML					= 'sitemap.xml';
 
-define('HTTP_403',						'image/upload403.svg');
-define('HTTP_404',						'image/upload404.svg');
+const HTTP_403						= 'image/upload403.svg';
+const HTTP_404						= 'image/upload404.svg';
 
-define('DAYSECS',						86400);				// 24 * 60 * 60
+const DAYSECS						= 86400;				// 24 * 60 * 60
 
-define('BACKUP_COMPRESSION_RATE',		9);					// gzip compression rate
-define('BACKUP_MEMORY_STEP',			1048576);			// max bytes to process per cycle (make sure it's at least 10 times less than PHP memory limit!)
-define('BACKUP_FILE_LOG',				'backup.log');		// backup log filename
-define('BACKUP_FILE_STRUCTURE',			'structure.sql');	// tables structure filename
-define('BACKUP_FILE_DUMP_SUFFIX',		'.dat.gz');			// tables dump filename suffix
-define('BACKUP_FILE_GZIP_SUFFIX',		'.gz');				// regular compressed files suffix
+const BACKUP_COMPRESSION_RATE		= 9;					// gzip compression rate
+const BACKUP_MEMORY_STEP			= 1048576;				// max bytes to process per cycle (make sure it's at least 10 times less than PHP memory limit!)
+const BACKUP_FILE_LOG				= 'backup.log';			// backup log filename
+const BACKUP_FILE_STRUCTURE			= 'structure.sql';		// tables structure filename
+const BACKUP_FILE_DUMP_SUFFIX		= '.dat.gz';			// tables dump filename suffix
+const BACKUP_FILE_GZIP_SUFFIX		= '.gz';				// regular compressed files suffix
 
-define('GLOB_ALL',						'{,.}*');			// for glob()
-define('ADD_NO_DIV',					'*');				// for Wacko::method()
-define('SYSTEM_LANG',					-1);				// for Wacko::_t()
+const GLOB_ALL						= '{,.}*';				// for glob()
+const ADD_NO_DIV					= '*';					// for Wacko::method()
+const SYSTEM_LANG					= -1;					// for Wacko::_t()
 
-define('AUTH_TOKEN',					'Auth');
-define('GUEST',							'guest@wacko');
-define('INTERCOM_MAX_SIZE',				262144);
+const AUTH_TOKEN					= 'Auth';
+const GUEST							= 'guest@wacko';
+const INTERCOM_MAX_SIZE				= 262144;
 
-define('LOAD_NOCACHE',					0);
-define('LOAD_CACHE',					1);
-define('LOAD_ALL',						0);
-define('LOAD_META',						1);
+const LOAD_NOCACHE					= 0;
+const LOAD_CACHE					= 1;
+const LOAD_ALL						= 0;
+const LOAD_META						= 1;
 
-define('MENU_AUTO',						0);
-define('MENU_USER',						1);
-define('MENU_DEFAULT',					2);
+const MENU_AUTO						= 0;
+const MENU_USER						= 1;
+const MENU_DEFAULT					= 2;
 
-define('LINK_PAGE',						0);
-define('LINK_FILE',						1);
-define('LINK_EXTERNAL',					2);
+const LINK_PAGE						= 0;
+const LINK_FILE						= 1;
+const LINK_EXTERNAL					= 2;
 
-define('OBJECT_PAGE',					1);
-define('OBJECT_FILE',					2);
+const OBJECT_PAGE					= 1;
+const OBJECT_FILE					= 2;
 
-define('RECOVERY_MODE',					0);					// 1 - restore database
-define('AUTO_REWRITE',					1);					// 0 - off, turns off auto rewrite for debugging,
+const RECOVERY_MODE					= 0;					// 1 - restore database
+const AUTO_REWRITE					= 1;					// 0 - off, turns off auto rewrite for debugging,
 															//		with mode_rewrite still active on your webserver,
 															//		you're also required to deactivate the rules in the .htaccess file
 
-define('SQL_MODE_STRICT',				'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY');
-define('SQL_MODE_PERMISSIVE',			'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER');
+const SQL_MODE_STRICT				= 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY';
+const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
 
-define('TRANSLIT_DONTCHANGE',			0);
-define('TRANSLIT_LOWERCASE',			1);
-define('TRANSLIT_LOAD',					0);
-define('TRANSLIT_DONTLOAD',				1);
+const TRANSLIT_DONTCHANGE			= 0;
+const TRANSLIT_LOWERCASE			= 1;
+const TRANSLIT_LOAD					= 0;
+const TRANSLIT_DONTLOAD				= 1;
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-define('WACKO_VERSION',					'6.0.alpha1');
-define('HTML_ENTITIES_CHARSET',			'UTF-8');
-define('XML_HTMLSAX3',					'lib/HTMLSax3/');
+const WACKO_VERSION					= '6.0.alpha1';
+const HTML_ENTITIES_CHARSET			= 'UTF-8';
+const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
-define('WACKO_ENV',						4);					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
-define('HTML_FILTERING',				null);				// safehtml, htmlpurifier
+const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
+const HTML_FILTERING				= null;					// safehtml, htmlpurifier
 
-define('ACTION4DIFF',					'anchor, toc');		// allowed actions in DIFF
+const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
-define('PHP_MIN_VERSION',				'7.2.0');			// minimum required PHP version
-define('PHP_MAX_VERSION',				'7.3.0');			// maximum required PHP version
-define('PHP_ERROR_REPORTING',			6);					// PHP error reporting: 0 - off, 6 - all
+const PHP_MIN_VERSION				= '7.2.0';				// minimum required PHP version
+const PHP_MAX_VERSION				= '7.3.0';				// maximum required PHP version
+const PHP_ERROR_REPORTING			= 6;					// PHP error reporting: 0 - off, 6 - all
