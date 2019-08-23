@@ -114,4 +114,3 @@ if (!$nomark)
 // destroy polls object
 unset($polls_obj);
 
-?>

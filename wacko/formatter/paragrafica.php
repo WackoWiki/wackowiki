@@ -16,5 +16,3 @@ $result	= $para->correct($text);
 $this->set_toc_array($para->toc);
 
 echo $result;
-
-?>

@@ -134,5 +134,3 @@ class BbCode
 		return $string;
 	}
 }
-
-?>

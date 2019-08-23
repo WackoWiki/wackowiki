@@ -13,5 +13,3 @@ $text = preg_replace('/^(\[.*\])/m',				'<strong style="color:#AA0000;background
 echo '<!--notypo-->';
 echo '<pre class="code">' . $text . '</pre>';
 echo '<!--/notypo-->';
-
-?>

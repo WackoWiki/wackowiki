@@ -82,5 +82,3 @@ class PostSafehtml
 		return $thing;
 	}
 }
-
-?>

@@ -5,5 +5,3 @@ echo	'<ignore><!--notypo-->' .
 				Ut::html($text) .
 			'</pre>' .
 		'<!--/notypo--></ignore>';
-
-?>

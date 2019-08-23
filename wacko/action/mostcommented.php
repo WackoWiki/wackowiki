@@ -170,4 +170,3 @@ if (!empty($pages))
 		}
 	}
 }
-

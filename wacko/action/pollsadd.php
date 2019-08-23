@@ -303,4 +303,3 @@ else if ($stop_mod !== true)
 // destroy polls object
 unset($polls_obj);
 
-?>

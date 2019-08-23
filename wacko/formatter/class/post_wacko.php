@@ -111,5 +111,3 @@ class PostWacko
 		return $thing;
 	}
 }
-
-?>

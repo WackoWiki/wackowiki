@@ -94,4 +94,3 @@ if ($this->has_access('read'))
 	$tpl->leave();
 }
 
-?>

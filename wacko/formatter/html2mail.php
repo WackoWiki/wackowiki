@@ -40,5 +40,3 @@ $text = str_replace('&mdash;', '--', $text);
 $text = wordwrap($text, 74, "\n", 1);
 
 echo $text;
-
-?>

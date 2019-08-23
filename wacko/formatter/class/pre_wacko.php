@@ -53,5 +53,3 @@ class PreFormatter
 		return $thing;
 	}
 }
-
-?>

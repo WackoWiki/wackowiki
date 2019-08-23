@@ -1246,5 +1246,3 @@ class WackoFormatter
 	}
 
 }
-
-?>

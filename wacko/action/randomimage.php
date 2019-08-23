@@ -89,5 +89,3 @@ else
 {
 	$tpl->none	= true;
 }
-
-?>

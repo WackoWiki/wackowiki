@@ -193,5 +193,3 @@ $tbl_word_r5_4_0 = "CREATE TABLE {$pref}word (" .
 					"replacement VARCHAR(255) NOT NULL DEFAULT ''," .
 					"PRIMARY KEY (word_id)" .
 				") {$engine} COMMENT='' {$charset}";
-
-?>

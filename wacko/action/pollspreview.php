@@ -49,5 +49,3 @@ echo '</table>';
 
 // destroy polls object
 unset($polls_obj);
-
-?>

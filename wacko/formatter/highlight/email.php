@@ -11,5 +11,3 @@ $text = preg_replace("/^([^\s\n>]*?(>{2})+)([^>].*)$/m", "<span class=\"email2\"
 echo '<pre class="code-break">';
 echo $text;
 echo '</pre>';
-
-?>

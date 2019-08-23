@@ -131,4 +131,3 @@ else
 // destroy polls object
 unset($polls_obj);
 
-?>
