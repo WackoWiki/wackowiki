@@ -77,4 +77,3 @@ else
 	$tpl->message	= $this->show_message($message, 'info', false);
 }
 
-?>

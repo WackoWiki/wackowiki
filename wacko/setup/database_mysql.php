@@ -452,5 +452,3 @@ $tbl_usergroup_drop				= "DROP TABLE IF EXISTS {$pref}usergroup";
 $tbl_usergroup_member_drop		= "DROP TABLE IF EXISTS {$pref}usergroup_member";
 $tbl_watch_drop					= "DROP TABLE IF EXISTS {$pref}watch";
 $tbl_word_drop					= "DROP TABLE IF EXISTS {$pref}word";
-
-?>

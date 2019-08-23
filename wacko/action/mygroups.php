@@ -41,4 +41,3 @@ if ($user = $this->get_user())
 		echo "</div>\n";
 	}
 }
-?>

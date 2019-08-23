@@ -89,5 +89,3 @@ if (isset($bottom))
 
 	echo "</div>\n";
 }
-
-?>

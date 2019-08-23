@@ -92,5 +92,3 @@ if ($user = $this->get_user())
 		}
 	}
 }
-
-?>

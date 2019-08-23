@@ -30,7 +30,7 @@ $ap_translation = [
 	'ErrorLoadingModule'		=> 'Error cargar admin module %1: no existe.',
 
 	'FormSave'					=> 'Guardar',
-	'FormReset'					=> 'Reset',
+	'FormReset'					=> 'Reiniciar',
 	'FormUpdate'				=> 'Actualizar',
 
 	'ApHomePage'				=> 'Home Page',

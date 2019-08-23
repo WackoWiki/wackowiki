@@ -124,4 +124,3 @@ if ($tags)
 		echo "</div>\n";
 	}
 }
-?>

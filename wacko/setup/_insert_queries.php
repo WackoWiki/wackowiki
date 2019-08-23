@@ -264,5 +264,3 @@ $upgrade['5.4.0'][]		= ['create',	'word',				$tbl_word_r5_4_0];
 $upgrade['5.5.beta'][]	= ['alter',		'watch',			$alter_watch_r5_4_0];
 
 // 6.0 ############
-
-?>

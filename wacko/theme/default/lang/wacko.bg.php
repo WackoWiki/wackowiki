@@ -2,4 +2,3 @@
 $theme_translation = [
 
 ];
-?>

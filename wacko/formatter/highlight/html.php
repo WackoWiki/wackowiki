@@ -229,5 +229,3 @@ $html_tags = [
 	echo str_replace("\t", "  ", $source);
 	echo "</pre>";
 	echo '<!--/notypo-->';
-
-?>

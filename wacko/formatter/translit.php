@@ -35,5 +35,3 @@ $tag = mb_strtr($tag, $TranslitBiLetters);
 $tag = preg_replace('/[^a-z0-9_.]+/mi', '', $tag);
 
 echo $tag;
-
-?>

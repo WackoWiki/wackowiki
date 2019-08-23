@@ -44,5 +44,3 @@ $text = preg_replace('#(\-\-.*)$#m', '<span style="color:#888888;"><em>$1</em></
 $text = preg_replace("#\001#s",'', $text );
 
 echo '<!--notypo--><pre class="code">' . $text . '</pre><!--/notypo-->';
-
-?>

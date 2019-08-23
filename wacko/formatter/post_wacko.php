@@ -22,5 +22,3 @@ if ($options['stripnotypo'])
 }
 
 echo $text;
-
-?>

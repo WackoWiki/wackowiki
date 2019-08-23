@@ -46,5 +46,3 @@ class RawHtmlFormatter
 		return $thing;
 	}
 }
-
-?>

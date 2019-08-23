@@ -63,4 +63,3 @@ if ($this->is_admin())
 		$tpl->nopages = true;
 	}
 }
-

@@ -51,5 +51,3 @@ else
 {
 	echo $this->_t('NotLoggedInThusOwned');
 }
-
-?>

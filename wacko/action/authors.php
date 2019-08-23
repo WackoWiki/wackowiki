@@ -190,5 +190,3 @@ else
 		$tpl->authors = implode('<br>', $output);
 	}
 }
-
-?>

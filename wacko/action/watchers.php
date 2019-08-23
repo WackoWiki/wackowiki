@@ -51,5 +51,3 @@ else
 {
 	$tpl->denied =  Ut::perc_replace($this->_t('NotOwnerToViewWatchers'), $this->link('/' . $tag, '', $tag));
 }
-
-?>

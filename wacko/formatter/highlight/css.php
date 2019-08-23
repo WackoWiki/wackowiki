@@ -211,5 +211,3 @@ $special_keyword2 = [
 
 	if (!isset($options['nopre'])) echo '</pre>';
 	if (isset($options['notypo'])) echo '<!--/notypo-->"';
-
-?>
