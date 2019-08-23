@@ -5,6 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+const SET_MENU			= 1;
+const SET_MENU_ONLY		= 2;
+
 class Installer
 {
 	static function run(&$db)
