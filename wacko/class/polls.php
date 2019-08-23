@@ -368,5 +368,3 @@ class Polls
 		return true;
 	}
 }
-
-?>

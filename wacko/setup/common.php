@@ -316,4 +316,3 @@ function _quote($string)
 	}
 }
 
-?>

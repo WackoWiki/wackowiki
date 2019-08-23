@@ -751,4 +751,3 @@ class SafeHTML
 	}
 }
 
-?>
