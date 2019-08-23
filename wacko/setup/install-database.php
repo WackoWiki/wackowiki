@@ -74,6 +74,15 @@ if (isset($config['wacko_version']))
 	}
 }
 
+if (!empty($config['sql_mode_strict']))
+{
+	$sql_modes = SQL_MODE_STRICT;
+}
+else
+{
+	$sql_modes = SQL_MODE_PERMISSIVE;
+}
+
 switch ($config['database_driver'])
 {
 	case 'mysqli_legacy':
@@ -119,15 +128,6 @@ switch ($config['database_driver'])
 			mysqli_set_charset($dblink, $config['database_charset']);
 
 			// set SESSION sql_mode
-			if (!empty($config['sql_mode_strict']))
-			{
-				$sql_modes = SQL_MODE_STRICT;
-			}
-			else
-			{
-				$sql_modes = SQL_MODE_PERMISSIVE;
-			}
-
 			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
 
 			echo "         </ul>\n";
@@ -282,15 +282,6 @@ switch ($config['database_driver'])
 		}
 
 		// set SESSION sql_mode
-		if (!empty($config['sql_mode_strict']))
-		{
-			$sql_modes = SQL_MODE_STRICT;
-		}
-		else
-		{
-			$sql_modes = SQL_MODE_PERMISSIVE;
-		}
-
 		$dblink->query("SET SESSION sql_mode='$sql_modes'");
 
 		echo "         </ul>\n";
