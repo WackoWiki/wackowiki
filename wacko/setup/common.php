@@ -204,7 +204,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 									((" . $owner_id . "), (" . $page_id . "), '" . _quote($lang) . "', '" . _quote($menu_title) . "')";
 
 	$insert_data[]			= [$page_insert,			$lang_global['ErrorInsertingPage']];
-	$insert_data[]			= [$perm_insert,			$lang_global['ErrorInsertingPageReadPermission']];
+	$insert_data[]			= [$perm_insert,			$lang_global['ErrorInsertingPagePermission']];
 
 	if ($is_menu)
 	{
