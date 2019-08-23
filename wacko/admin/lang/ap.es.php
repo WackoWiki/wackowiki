@@ -77,79 +77,79 @@ $ap_translation = [
 	// Config Basic module
 	'config_basic'		=> [
 		'name'		=> 'Basic',
-		'title'		=> 'parámetros básicos',
+		'title'		=> 'Parámetros básicos',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
 		'name'		=> 'Apariencia',
-		'title'		=> 'configuración de apariencia',
+		'title'		=> 'Configuración de apariencia',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'Email',
-		'title'		=> 'configuración Email',
+		'title'		=> 'Configuración Email',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
-		'title'		=> 'configuración de Filtros',
+		'title'		=> 'Configuración de Filtros',
 	],
 
 	// Config Formatter module
 	'config_formatter'		=> [
 		'name'		=> 'Formatter',
-		'title'		=> 'opciones de Formatter',
+		'title'		=> 'Opciones de Formatter',
 	],
 
 	// Config Notifications module
 	'config_notifications'		=> [
 		'name'		=> 'Notificaciones',
-		'title'		=> 'configuración de notificationes',
+		'title'		=> 'Configuración de notificationes',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
 		'name'		=> 'Pages',
-		'title'		=> 'parámetros de páginas y del sitio',
+		'title'		=> 'Parámetros de páginas y del sitio',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
 		'name'		=> 'Permissions',
-		'title'		=> 'configuración de permisos',
+		'title'		=> 'Configuración de permisos',
 	],
 
 	// Config Security module
 	'config_security'		=> [
 		'name'		=> 'Seguridad',
-		'title'		=> 'configuración de seguridad',
+		'title'		=> 'Configuración de seguridad',
 	],
 
 	// Config System module
 	'config_system'		=> [
 		'name'		=> 'Sistema',
-		'title'		=> 'configuración del sistema',
+		'title'		=> 'Configuración del sistema',
 	],
 
 	// Config Upload module
 	'config_upload'		=> [
 		'name'		=> 'Adjuntos',
-		'title'		=> 'configuración de adjuntos',
+		'title'		=> 'Configuración de adjuntos',
 	],
 
 	// Categories module
 	'content_categories'		=> [
 		'name'		=> 'Categorias',
-		'title'		=> 'configurar categorias',
+		'title'		=> 'Configurar categorias',
 	],
 
 	// Comments module
 	'content_comments'		=> [
 		'name'		=> 'Comentarios',
-		'title'		=> 'configurar comentarios',
+		'title'		=> 'Configurar comentarios',
 	],
 
 	// Deleted module
@@ -161,7 +161,7 @@ $ap_translation = [
 	// Files module
 	'content_files'		=> [
 		'name'		=> 'Archivos',
-		'title'		=> 'administrar archivos adjuntos',
+		'title'		=> 'Administrar archivos adjuntos',
 	],
 
 	// Menu module
@@ -696,13 +696,13 @@ $ap_translation = [
 	'ListCount'					=> 'Number of items per list',
 	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
 
-	'ForumSection'				=> 'Options Forum',
+	'ForumSection'				=> 'Foro Opciones',
 	'ForumCluster'				=> 'Cluster Forum',
 	'ForumClusterInfo'			=> 'Address of the index (main) page of the forum.',
-	'ForumTopics'				=> 'Number of topics per page',
-	'ForumTopicsInfo'			=> 'Number of topics displayed on each page of the list in the forum sections.',
-	'CommentsCount'				=> 'Number of comments per page',
-	'CommentsCountInfo'			=> 'Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.',
+	'ForumTopics'				=> 'Número de temas por página',
+	'ForumTopicsInfo'			=> 'Número de temas mostrados en cada página de la lista en las secciones del foro.',
+	'CommentsCount'				=> 'Número de comentarios por página',
+	'CommentsCountInfo'			=> 'Número de comentarios mostrados en cada página de la lista de comentarios. Esto se aplica a todos los comentarios en el sitio, y no sólo a los publicados en el foro.',
 
 	'NewsSection'				=> 'Section News',
 	'NewsCluster'				=> 'Cluster for the News',
@@ -740,19 +740,19 @@ $ap_translation = [
 	'PasswordPage'				=> 'Change Password',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action <code>{{changepassword}}</code>).',
 	'UsersPage'					=> 'Lista de usuarios',
-	'UsersPageInfo'				=> 'Page with a list of registered users (action <code>{{users}}</code>).',
+	'UsersPageInfo'				=> 'Página con una lista de usuarios registrados (action <code>{{users}}</code>).',
 	'CategoryPage'				=> 'Category',
-	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action <code>{{category}}</code>).',
+	'CategoryPageInfo'			=> 'Página con una lista de páginas categorizadas (action <code>{{category}}</code>).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action <code>{{tag}}</code>).',
 	'GroupsPage'				=> 'Grupos',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action <code>{{usergroups}}</code>).',
 	'ChangesPage'				=> 'Recent changes',
-	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action <code>{{changes}}</code>).',
+	'ChangesPageInfo'			=> 'Página con una lista de las últimas páginas modificadas (action <code>{{changes}}</code>).',
 	'CommentsPage'				=> 'Recent comments',
 	'CommentsPageInfo'			=> 'Page with a list of recent comment on the page (action <code>{{commented}}</code>).',
 	'RemovalsPage'				=> 'Páginas eliminadas',
-	'RemovalsPageInfo'			=> 'Page with a list of recently deleted pages (action <code>{{deleted}}</code>).',
+	'RemovalsPageInfo'			=> 'Página con una lista de páginas eliminadas recientemente (action <code>{{deleted}}</code>).',
 	'WantedPage'				=> 'Wanted pages',
 	'WantedPageInfo'			=> 'Page with a list of missing pages that are referenced (action <code>{{wanted}}</code>).',
 	'OrphanedPage'				=> 'Orphaned pages',
@@ -807,15 +807,15 @@ $ap_translation = [
 	'UserStats'					=> 'Estadísticas de usuarios',
 	'UserStatsInfo'				=> 'User statistics (number of comments, owned pages, revisions and files) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
 	'PageStats'					=> 'Estadísticas de página',
-	'PageStatsInfo'				=> 'Page statistics (number of comments, files and revisions) may differ in some situations from actual data. <br>This operation allows updating statistics to current actual data of the database.',
+	'PageStatsInfo'				=> 'Las estadísticas de página (número de comentarios, archivos y revisiones) pueden diferir en algunas situaciones de los datos reales. <br>Esta operación permite actualizar las estadísticas a los datos actuales de la base de datos.',
 	'Feeds'						=> 'Feeds',
-	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
+	'FeedsInfo'					=> 'En el caso de la edición directa de las páginas de la base de datos, el contenido de las fuentes RSS puede no reflejar los cambios realizados. <br>Esta función sincroniza los canales RSS con el estado actual de la base de datos.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
 	'XmlSiteMapInfo'			=> 'Esta función sincroniza el XML-Sitemap con el estado actual de la base de datos.',
 	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
 	'WikiLinksResync'			=> 'Wiki-links',
-	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
+	'WikiLinksResyncInfo'		=> 'Realiza una re-renderización para todos los enlaces dentro del sitio y restaura el contenido de la tabla <code>page_link</code> y <code>file_link</code> en caso de daño o reubicación (esto puede llevar un tiempo considerable).',
 	'RecompilePage'				=> 'Volver a compilar todas las páginas (extremadamente caro)',
 	'ResyncOptions'				=> 'Opciones adicionales',
 
