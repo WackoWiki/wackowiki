@@ -251,13 +251,17 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 				if ($result->fetchColumn() > 0)
 				{
 					$page_exists = true;
-					output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+
+					if ($critical)
+					{
+						output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+					}
 				}
 
 				$result->closeCursor();
 			}
 
-			if (!$page_exists)
+			if (!$page_exists || $set_menu == SET_MENU_ONLY)
 			{
 				foreach ($insert_data as $data)
 				{
