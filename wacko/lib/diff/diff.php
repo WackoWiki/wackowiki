@@ -997,4 +997,3 @@ class DiffFormatter
 
 }
 
-?>

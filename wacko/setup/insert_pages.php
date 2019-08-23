@@ -59,5 +59,3 @@ else
 		require_once $inserts_file;
 	}
 }
-
-?>
