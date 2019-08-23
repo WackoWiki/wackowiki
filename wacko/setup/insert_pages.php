@@ -16,12 +16,6 @@ if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	if ($config['allowed_languages'])
 	{
 		$lang_list = explode(',', $config['allowed_languages']);
-
-		// system language is mandatory
-		if (!in_array($config['language'], $lang_list))
-		{
-			$lang_list[] = $config['language'];
-		}
 	}
 	else
 	{
@@ -38,6 +32,11 @@ if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 			closedir($handle);
 		}
 	}
+
+	$lang_list = array_diff($lang_list, [$config['language']]);
+
+	// system language is mandatory and must be the first include
+	array_unshift($lang_list , $config['language']);
 
 	foreach ($lang_list as $_lang)
 	{

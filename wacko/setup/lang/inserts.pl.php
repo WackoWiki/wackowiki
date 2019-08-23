@@ -18,15 +18,15 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Kategoria',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Grupy',		'{{groups}}',				$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Użytkownicy',	'{{users}}',				$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],		'Kategoria',				'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],			'Grupy',					'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],			'Użytkownicy',				'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Pomoc',		'',							$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Warunki użytkowania',		'',				$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Polityka ochrony prywatności',		'',		$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],			'Pomoc',					'',						$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],			'Warunki użytkowania',		'',						$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],		'Polityka ochrony prywatności',		'',				$page_lang, 'Admins', false, false);
 
-	#insert_page($config['random_page'],			'Losową strona',	'{{randompage}}',		$page_lang, 'Admins', false, true, 'Losową');
+	#insert_page($config['random_page'],		'Losową strona',			'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Losową');
 
 	insert_page($config['registration_page'],	'Rejestracja',				'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Hasło',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
@@ -34,12 +34,18 @@ if ($config['language'] == $page_lang)
 	insert_page($config['login_page'],			'Login',					'{{login}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['account_page'],		'Ustawienia',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
-	insert_page($config['changes_page'],		'Ostatnie Zmiany',			'{{changes}}',			$page_lang, 'Admins', false, true, 'Zmiany');
-	insert_page($config['comments_page'],		'Ostatnio Komentowane',		'{{commented}}',		$page_lang, 'Admins', false, true, 'Komentowane');
-	insert_page($config['index_page'],			'Index Stron',				'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Index');
+	insert_page($config['changes_page'],		'Ostatnie Zmiany',			'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Zmiany');
+	insert_page($config['comments_page'],		'Ostatnio Komentowane',		'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Komentowane');
+	insert_page($config['index_page'],			'Index Stron',				'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
 }
 else
 {
 	// set only bookmarks
+	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Zmiany');
+	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Komentowane');
+	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
+
+	#insert_page($config['random_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Losową');
+
 }
 

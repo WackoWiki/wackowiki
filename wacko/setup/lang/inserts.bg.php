@@ -18,28 +18,34 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'категория',		'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Групи',			'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Потребители',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],		'категория',			'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],			'Групи',				'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],			'Потребители',			'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Помощ',			'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Условия за ползване',			'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Поверителност',	'',						$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],			'Помощ',				'',						$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],			'Условия за ползване',	'',						$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],		'Поверителност',		'',						$page_lang, 'Admins', false, false);
 
-	#insert_page($config['random_page'],		'Случайна страница',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Случаен');
+	#insert_page($config['random_page'],		'Случайна страница',	'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Случаен');
 
-	insert_page($config['registration_page'],	'Регистрация',		'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'Търсене',			'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'влизане',			'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Settings',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['registration_page'],	'Регистрация',			'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Password',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],			'Търсене',				'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'влизане',				'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Settings',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
-	insert_page($config['changes_page'],		'Последни Промени',	'{{changes}}',			$page_lang, 'Admins', false, true, 'Промени');
-	insert_page($config['comments_page'],		'Нови Коментари',	'{{commented}}',		$page_lang, 'Admins', false, true, 'Коментари');
-	insert_page($config['index_page'],			'Каталог',			'{{pageindex}}',		$page_lang, 'Admins', false, true, 'Каталог');
+	insert_page($config['changes_page'],		'Последни Промени',		'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Промени');
+	insert_page($config['comments_page'],		'Нови Коментари',		'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Коментари');
+	insert_page($config['index_page'],			'Каталог',				'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Каталог');
 }
 else
 {
 	// set only bookmarks
+	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Промени');
+	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Коментари');
+	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Каталог');
+
+	#insert_page($config['random_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Случаен');
+
 }
 

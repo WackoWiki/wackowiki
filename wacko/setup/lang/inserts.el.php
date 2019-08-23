@@ -18,28 +18,34 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],	'Κατηγορία',	'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],		'Ομάδες',		'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],		'Χρήστες',		'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],		'Κατηγορία',			'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['groups_page'],			'Ομάδες',				'{{groups}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],			'Χρήστες',				'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],		'Βοήθεια',				'',				$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],		'Όροι Χρήσης',			'',				$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],	'Πολιτική προσωπικών δεδομένων',	'',	$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],			'Βοήθεια',				'',						$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],			'Όροι Χρήσης',			'',						$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],		'Πολιτική προσωπικών δεδομένων',	'',			$page_lang, 'Admins', false, false);
 
-	#insert_page($config['random_page'],				'Τυχαία σελίδα',	'{{randompage}}',	$page_lang, 'Admins', false, true, 'Τυχαία');
+	#insert_page($config['random_page'],		'Τυχαία σελίδα',	'{{randompage}}',	$page_lang, 'Admins', false, SET_MENU, 'Τυχαία');
 
-	insert_page($config['registration_page'],	'Registration',		'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Password',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'Search',			'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'Login',			'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Settings',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['registration_page'],	'Registration',			'{{registration}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Password',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['search_page'],			'Search',				'{{search}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'Login',				'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Settings',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
-	insert_page($config['changes_page'],		'Recent Changes',		'{{changes}}',		$page_lang, 'Admins', false, true, 'Αλλαγές');
-	insert_page($config['comments_page'],		'Recently Commented',	'{{commented}}',	$page_lang, 'Admins', false, true, 'Σχόλια');
-	insert_page($config['index_page'],			'Page Index',			'{{pageindex}}',	$page_lang, 'Admins', false, true, 'Index');
+	insert_page($config['changes_page'],		'Recent Changes',		'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Αλλαγές');
+	insert_page($config['comments_page'],		'Recently Commented',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Σχόλια');
+	insert_page($config['index_page'],			'Page Index',			'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
 }
 else
 {
 	// set only bookmarks
+	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Αλλαγές');
+	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Σχόλια');
+	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
+
+	#insert_page($config['random_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Τυχαία');
+
 }
 
