@@ -353,19 +353,19 @@ function get_table(&$engine, $table, $drop = true)
 
 		if ($x == 'PRIMARY')
 		{
-			$schema_create .= '	PRIMARY KEY (' . implode($columns, ', ') . ')';
+			$schema_create .= '	PRIMARY KEY (' . implode(', ', $columns) . ')';
 		}
 		else if (substr($x,0,6) == 'UNIQUE')
 		{
-			$schema_create .= '	UNIQUE `' . substr($x,7) . '` (' . implode($columns, ', ') . ')';
+			$schema_create .= '	UNIQUE `' . substr($x,7) . '` (' . implode(', ', $columns) . ')';
 		}
 		else if (substr($x,0,8) == 'FULLTEXT')
 		{
-			$schema_create .= '	FULLTEXT KEY `' . substr($x,9) . '` (' . implode($columns, ', ') . ')';
+			$schema_create .= '	FULLTEXT KEY `' . substr($x,9) . '` (' . implode(', ', $columns) . ')';
 		}
 		else
 		{
-			$schema_create .= "	KEY `$x` (" . implode($columns, ', ') . ')';
+			$schema_create .= "	KEY `$x` (" . implode(', ', $columns) . ')';
 		}
 	}
 
