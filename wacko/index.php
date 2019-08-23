@@ -1,6 +1,6 @@
 <?php
 
-define('IN_WACKO', 'wacko');
+const IN_WACKO = 'wacko';
 include 'class/init.php';
 
 $db = new Settings;
