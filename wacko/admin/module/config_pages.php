@@ -46,7 +46,7 @@ function admin_config_pages(&$engine, &$module)
 		$config['search_page']				= trim((string) $_POST['search_page'], '/');
 		$config['registration_page']		= trim((string) $_POST['registration_page'], '/');
 		$config['login_page']				= trim((string) $_POST['login_page'], '/');
-		$config['account_page']			= trim((string) $_POST['account_page'], '/');
+		$config['account_page']				= trim((string) $_POST['account_page'], '/');
 		$config['password_page']			= trim((string) $_POST['password_page'], '/');
 		$config['users_page']				= trim((string) $_POST['users_page'], '/');
 		$config['category_page']			= trim((string) $_POST['category_page'], '/');
@@ -54,6 +54,8 @@ function admin_config_pages(&$engine, &$module)
 		$config['groups_page']				= trim((string) $_POST['groups_page'], '/');
 		$config['changes_page']				= trim((string) $_POST['changes_page'], '/');
 		$config['comments_page']			= trim((string) $_POST['comments_page'], '/');
+		$config['index_page']				= trim((string) $_POST['index_page'], '/');
+		$config['random_page']				= trim((string) $_POST['random_page'], '/');
 		$config['removals_page']			= trim((string) $_POST['removals_page'], '/');
 		$config['wanted_page']				= trim((string) $_POST['wanted_page'], '/');
 		$config['orphaned_page']			= trim((string) $_POST['orphaned_page'], '/');
@@ -131,7 +133,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="news_cluster"><strong><?php echo $engine->_t('NewsCluster');?>:</strong><br>
-					<small><?php echo $engine->_t('NewsClusterInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('NewsClusterInfo'), '<code>{{news}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="news_cluster" name="news_cluster" value="<?php echo Ut::html($engine->db->news_cluster);?>">
@@ -254,7 +256,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="search_page"><strong><?php echo $engine->_t('SearchPage');?>:</strong><br>
-					<small><?php echo $engine->_t('SearchPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('SearchPageInfo'), '<code>{{search}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="search_page" name="search_page" value="<?php echo Ut::html($engine->db->search_page);?>">
@@ -266,7 +268,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="registration_page"><strong><?php echo $engine->_t('RegistrationPage');?>:</strong><br>
-					<small><?php echo $engine->_t('RegistrationPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('RegistrationPageInfo'), '<code>{{registration}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="registration_page" name="registration_page" value="<?php echo Ut::html($engine->db->registration_page);?>">
@@ -278,7 +280,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="login_page"><strong><?php echo $engine->_t('LoginPage');?>:</strong><br>
-					<small><?php echo $engine->_t('LoginPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('LoginPageInfo'), '<code>{{login}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="login_page" name="login_page" value="<?php echo Ut::html($engine->db->login_page);?>">
@@ -290,7 +292,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="account_page"><strong><?php echo $engine->_t('SettingsPage');?>:</strong><br>
-					<small><?php echo $engine->_t('SettingsPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('SettingsPageInfo'), '<code>{{usersettings}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="account_page" name="account_page" value="<?php echo Ut::html($engine->db->account_page);?>">
@@ -302,7 +304,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="password_page"><strong><?php echo $engine->_t('PasswordPage');?>:</strong><br>
-					<small><?php echo $engine->_t('PasswordPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('PasswordPageInfo'), '<code>{{changepassword}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="password_page" name="password_page" value="<?php echo Ut::html($engine->db->password_page);?>">
@@ -314,7 +316,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="users_page"><strong><?php echo $engine->_t('UsersPage');?>:</strong><br>
-					<small><?php echo $engine->_t('UsersPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('UsersPageInfo'), '<code>{{users}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="users_page" name="users_page" value="<?php echo Ut::html($engine->db->users_page);?>">
@@ -326,7 +328,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="category_page"><strong><?php echo $engine->_t('CategoryPage');?> :</strong><br>
-					<small><?php echo $engine->_t('CategoryPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('CategoryPageInfo'), '<code>{{category}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="category_page" name="category_page" value="<?php echo Ut::html($engine->db->category_page);?>">
@@ -338,7 +340,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="tag_page"><strong><?php echo $engine->_t('TagPage');?> :</strong><br>
-					<small><?php echo $engine->_t('TagPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('TagPageInfo'), '<code>{{tag}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="tag_page" name="tag_page" value="<?php echo Ut::html($engine->db->tag_page);?>">
@@ -350,7 +352,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="groups_page"><strong><?php echo $engine->_t('GroupsPage');?>:</strong><br>
-					<small><?php echo $engine->_t('GroupsPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('GroupsPageInfo'), '<code>{{usergroups}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="groups_page" name="groups_page" value="<?php echo Ut::html($engine->db->groups_page);?>">
@@ -362,7 +364,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="changes_page"><strong><?php echo $engine->_t('ChangesPage');?>:</strong><br>
-					<small><?php echo $engine->_t('ChangesPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('ChangesPageInfo'), '<code>{{changes}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="changes_page" name="changes_page" value="<?php echo Ut::html($engine->db->changes_page);?>">
@@ -374,10 +376,31 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="comments_page"><strong><?php echo $engine->_t('CommentsPage');?>:</strong><br>
-					<small><?php echo $engine->_t('CommentsPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('CommentsPageInfo'), '<code>{{commented}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="comments_page" name="comments_page" value="<?php echo Ut::html($engine->db->comments_page);?>">
+				</td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="index_page"><strong><?php echo $engine->_t('IndexPage');?>:</strong><br>
+					<small><?php echo Ut::perc_replace($engine->_t('IndexPageInfo'), '<code>{{pageindex}}</code>');?></small></label>
+				</td>
+				<td>
+					<input type="text" maxlength="255" id="index_page" name="index_page" value="<?php echo Ut::html($engine->db->index_page);?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="random_page"><strong><?php echo $engine->_t('RandomPage');?>:</strong><br>
+					<small><?php echo Ut::perc_replace($engine->_t('RandomPageInfo'), '<code>{{randompage}}</code>');?></small></label>
+				</td>
+				<td>
+					<input type="text" maxlength="255" id="random_page" name="random_page" value="<?php echo Ut::html($engine->db->random_page);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -386,7 +409,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="removals_page"><strong><?php echo $engine->_t('RemovalsPage');?>:</strong><br>
-					<small><?php echo $engine->_t('RemovalsPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('RemovalsPageInfo'), '<code>{{deleted}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="removals_page" name="removals_page" value="<?php echo Ut::html($engine->db->removals_page);?>">
@@ -398,7 +421,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="wanted_page"><strong><?php echo $engine->_t('WantedPage');?>:</strong><br>
-					<small><?php echo $engine->_t('WantedPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('WantedPageInfo'), '<code>{{wanted}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="wanted_page" name="wanted_page" value="<?php echo Ut::html($engine->db->wanted_page);?>">
@@ -410,7 +433,7 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="orphaned_page"><strong><?php echo $engine->_t('OrphanedPage');?>:</strong><br>
-					<small><?php echo $engine->_t('OrphanedPageInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('OrphanedPageInfo'), '<code>{{orphaned}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="orphaned_page" name="orphaned_page" value="<?php echo Ut::html($engine->db->orphaned_page);?>">
@@ -427,6 +450,9 @@ function admin_config_pages(&$engine, &$module)
 				<td>
 					<input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo Ut::html($engine->db->sandbox);?>">
 				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
 			</tr>
 		</table>
 		<br>
