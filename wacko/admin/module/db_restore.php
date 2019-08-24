@@ -384,6 +384,12 @@ function admin_db_restore(&$engine, &$module)
 				<pre><?php echo $results; ?></pre>
 			</div><br>
 <?php
+			// purge old cache files
+			Ut::purge_directory(CACHE_PAGE_DIR);
+			Ut::purge_directory(CACHE_SQL_DIR);
+			Ut::purge_directory(CACHE_CONFIG_DIR);
+			Ut::purge_directory(CACHE_TEMPLATE_DIR);
+
 			$engine->log(1, Ut::perc_replace($engine->_t('LogDbRestored', SYSTEM_LANG), $pack));
 		}
 	}
