@@ -167,6 +167,7 @@ $alter_user_r5_4_3 = "ALTER TABLE {$pref}user ADD account_lang VARCHAR(2) NOT NU
 $alter_user_r5_4_4 = "ALTER TABLE {$pref}user ADD account_status TINYINT(1) UNSIGNED NOT NULL DEFAULT '0' AFTER email";
 $alter_user_r5_4_5 = "ALTER TABLE {$pref}user ADD user_ip VARCHAR(40) NOT NULL DEFAULT '' AFTER change_password";
 $alter_user_r5_4_6 = "ALTER TABLE {$pref}user DROP session_expire";
+$alter_user_r5_4_7 = "ALTER TABLE {$pref}user CHANGE user_ip user_ip VARCHAR(45) NOT NULL";
 
 $update_user_r5_4_0 = "UPDATE {$pref}user AS u, (SELECT user_id, user_lang FROM {$pref}user_setting) AS s SET u.account_lang = s.user_lang WHERE u.user_id = s.user_id";
 
