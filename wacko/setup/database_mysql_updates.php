@@ -97,6 +97,7 @@ $tbl_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (" .
 						") {$engine} COMMENT='' {$charset}";
 
 // LOG
+$alter_log_r5_4_0 = "ALTER TABLE {$pref}log CHANGE ip ip VARCHAR(45) NOT NULL";
 
 // MENU
 $alter_menu_r5_4_0 = "ALTER TABLE {$pref}menu CHANGE lang menu_lang VARCHAR(2) NOT NULL";
@@ -113,6 +114,7 @@ $alter_page_r5_4_4 = "ALTER TABLE {$pref}page ADD page_size INT(10) UNSIGNED NOT
 $alter_page_r5_4_5 = "ALTER TABLE {$pref}page ADD files INT(4) UNSIGNED NOT NULL DEFAULT '0' AFTER comments";
 $alter_page_r5_4_6 = "ALTER TABLE {$pref}page ADD revisions INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER files";
 $alter_page_r5_4_7 = "ALTER TABLE {$pref}page ADD license_id INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER page_size";
+$alter_page_r5_4_8 = "ALTER TABLE {$pref}page CHANGE ip ip VARCHAR(45) NOT NULL";
 
 $update_page_r5_1_0 = "UPDATE {$pref}page SET noindex = 0 WHERE noindex IS NULL";
 $update_page_r5_4_0 = "UPDATE {$pref}page SET body_toc = ''";
@@ -138,6 +140,7 @@ $alter_page_link_r5_5_0 = "ALTER TABLE {$pref}link DROP to_supertag";
 
 // REFERRER
 $alter_referrer_r5_4_0 = "ALTER TABLE {$pref}referrer ADD referrer_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST";
+$alter_referrer_r5_4_1 = "ALTER TABLE {$pref}referrer CHANGE ip ip VARCHAR(45) NOT NULL";
 
 // REVISION
 $alter_revision_r5_1_0 = "ALTER TABLE {$pref}revision ADD INDEX idx_deleted (deleted)";
@@ -147,6 +150,8 @@ $alter_revision_r5_4_2 = "ALTER TABLE {$pref}revision ADD INDEX idx_page_id (pag
 $alter_revision_r5_4_3 = "ALTER TABLE {$pref}revision ADD INDEX idx_version_id (version_id, page_id)";
 $alter_revision_r5_4_4 = "ALTER TABLE {$pref}revision CHANGE edit_note edit_note VARCHAR(200) NOT NULL DEFAULT ''";
 $alter_revision_r5_4_5 = "ALTER TABLE {$pref}revision ADD page_size INT(10) UNSIGNED NOT NULL DEFAULT '0' AFTER minor_edit";
+$alter_revision_r5_4_6 = "ALTER TABLE {$pref}revision CHANGE ip ip VARCHAR(45) NOT NULL";
+
 $alter_revision_r5_5_0 = "ALTER TABLE {$pref}revision DROP supertag";
 
 $update_revision_r5_4_0 = "UPDATE {$pref}revision AS r, {$pref}page AS p SET r.page_lang = p.page_lang WHERE r.page_id = p.page_id";
