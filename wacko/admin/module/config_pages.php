@@ -382,6 +382,9 @@ function admin_config_pages(&$engine, &$module)
 					<input type="text" maxlength="255" id="comments_page" name="comments_page" value="<?php echo Ut::html($engine->db->comments_page);?>">
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="index_page"><strong><?php echo $engine->_t('IndexPage');?>:</strong><br>
@@ -450,9 +453,6 @@ function admin_config_pages(&$engine, &$module)
 				<td>
 					<input type="text" maxlength="255" id="sandbox" name="sandbox" value="<?php echo Ut::html($engine->db->sandbox);?>">
 				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
 			</tr>
 		</table>
 		<br>
