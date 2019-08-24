@@ -122,7 +122,7 @@ $tbl_log = "CREATE TABLE {$pref}log (" .
 					"log_time TIMESTAMP NOT NULL," .
 					"level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"ip VARCHAR(15) NOT NULL DEFAULT ''," .
+					"ip VARCHAR(45) NOT NULL DEFAULT ''," .
 					"message TEXT NOT NULL," .
 					"PRIMARY KEY (log_id)," .
 					"KEY idx_level (level)," .
@@ -166,7 +166,7 @@ $tbl_page = "CREATE TABLE {$pref}page (" .
 					"reviewed TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
 					"reviewed_time DATETIME NULL DEFAULT NULL," .
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"ip VARCHAR(15) NOT NULL DEFAULT ''," .
+					"ip VARCHAR(45) NOT NULL DEFAULT ''," .
 					"latest TINYINT(1) UNSIGNED DEFAULT '1'," .
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page'," .
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -246,7 +246,7 @@ $tbl_referrer = "CREATE TABLE {$pref}referrer (" .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"referrer VARCHAR(255) NOT NULL DEFAULT ''," .
 					"referrer_time DATETIME DEFAULT NULL," .
-					"ip VARCHAR(40) COLLATE utf8_bin NOT NULL DEFAULT ''," .
+					"ip VARCHAR(45) COLLATE utf8_bin NOT NULL DEFAULT ''," .
 					"user_agent VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT ''," .
 					"PRIMARY KEY (referrer_id)," .
 					"KEY idx_page_id (page_id)," .
@@ -275,7 +275,7 @@ $tbl_revision = "CREATE TABLE {$pref}revision (" .
 					"reviewed_time DATETIME NULL DEFAULT NULL," .
 					"reviewer_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"latest TINYINT(1) UNSIGNED DEFAULT '0'," .
-					"ip VARCHAR(15) NOT NULL DEFAULT ''," .
+					"ip VARCHAR(45) NOT NULL DEFAULT ''," .
 					"handler VARCHAR(30) NOT NULL DEFAULT 'page'," .
 					"comment_on_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"page_lang VARCHAR(2) NOT NULL DEFAULT ''," .
@@ -452,5 +452,3 @@ $tbl_usergroup_drop				= "DROP TABLE IF EXISTS {$pref}usergroup";
 $tbl_usergroup_member_drop		= "DROP TABLE IF EXISTS {$pref}usergroup_member";
 $tbl_watch_drop					= "DROP TABLE IF EXISTS {$pref}watch";
 $tbl_word_drop					= "DROP TABLE IF EXISTS {$pref}word";
-
-?>
