@@ -168,6 +168,9 @@ $upgrade['5.5.7'][]		= ['alter',		'file',				$alter_file_r5_4_10];
 // file link
 $upgrade['5.4.0'][]		= ['create',	'file_link',		$tbl_file_link_r5_4_0];
 
+// LOG
+$upgrade['5.5.12'][]	= ['alter',		'log',				$alter_log_r5_4_0];
+
 //menu
 $upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_0];
 $upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_1];
@@ -195,6 +198,8 @@ $upgrade['5.5.5'][]		= ['alter',		'page',				$alter_page_r5_4_7];
 
 $upgrade['5.5.11'][]	= ['update',	'page',				$update_page_r5_4_0];
 
+$upgrade['5.5.12'][]	= ['alter',		'page',				$alter_page_r5_4_8];
+
 $upgrade['5.5.12'][]	= ['alter',		'page',				$alter_page_r5_5_0];
 
 // page link
@@ -204,6 +209,8 @@ $upgrade['5.5.12'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 
 // referrer
 $upgrade['5.4.0'][]		= ['alter',		'referrer',			$alter_referrer_r5_4_0];
+
+$upgrade['5.5.12'][]	= ['alter',		'referrer',			$alter_referrer_r5_4_1];
 
 // revision
 $upgrade['5.4.0'][]		= ['alter',		'revision',			$alter_revision_r5_4_0];
@@ -217,6 +224,7 @@ $upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_4];
 $upgrade['5.5.rc2'][]	= ['alter',		'revision',			$alter_revision_r5_4_5];
 $upgrade['5.5.rc2'][]	= ['update',	'revision',			$update_revision_r5_4_1];
 
+$upgrade['5.5.12'][]	= ['alter',		'revision',			$alter_revision_r5_4_6];
 $upgrade['5.5.12'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 
 // tag
