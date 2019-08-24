@@ -236,6 +236,8 @@ $upgrade['5.5.7'][]		= ['alter',		'user',				$alter_user_r5_4_6];
 
 $upgrade['5.5.6'][]		= ['insert',	'user',				$insert_user_deleted];
 
+$upgrade['5.5.12'][]	= ['alter',		'user',				$alter_user_r5_4_7];
+
 // user setting
 $upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_0];
 $upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_1];
