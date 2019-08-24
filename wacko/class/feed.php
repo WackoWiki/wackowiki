@@ -107,7 +107,6 @@ class Feed
 		$name			= 'news';
 		$news_cluster	= empty($feed_cluster) ? $this->engine->db->news_cluster : $feed_cluster;
 		$news_levels	= $this->engine->db->news_levels;
-		$feed_pages		= [];
 		$prefix			= $this->engine->db->table_prefix;
 
 		//  collect data
@@ -121,46 +120,8 @@ class Feed
 				"AND p.noindex <> 1 " .
 				"AND p.deleted <> 1 " .
 				"AND p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-			"ORDER BY p.tag");
-
-		if ($pages)
-		{
-			// build an array
-			foreach ($pages as $page)
-			{
-				#$access = $this->engine->has_access('read', $page['page_id'], GUEST);
-
-				#if ($access === true)
-				#{
-					$feed_pages[]	= [
-						'page_id'	=> $page['page_id'],
-						'tag'		=> $page['tag'],
-						'title'		=> $page['title'],
-						'modified'	=> $page['created'],
-						'body_r'	=> $page['body_r'],
-						'comments'	=> $page['comments'],
-						'page_lang'	=> $page['page_lang'],
-						'date'		=> date('Y/m-d', strtotime($page['created']))
-
-					];
-				#}
-			}
-
-			// sorting function: sorts by dates
-			// in tag names in reverse order
-			$sort_dates = function($a, $b)
-			{
-				if ($a['date'] == $b['date'])
-				{
-					return 0;
-				}
-
-				return ($a['date'] < $b['date'] ? 1 : -1);
-			};
-
-			// sort pages array
-			usort($feed_pages, $sort_dates);
-		}
+			"ORDER BY p.created DESC " .
+			"LIMIT " . (int) $limit);
 
 		// build output
 		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
@@ -187,9 +148,9 @@ class Feed
 
 		$i = 0;
 
-		if ($feed_pages)
+		if (pages)
 		{
-			foreach ($feed_pages as $page)
+			foreach ($pages as $page)
 			{
 				$i++;
 
@@ -204,7 +165,7 @@ class Feed
 				// recompile if necessary
 				if ($page['body_r'] == '')
 				{
-					$page['body_r'] = $this->engine->compile_body($page['body'], $page['page_id'], true, true);
+					# $page['body_r'] = $this->engine->compile_body($page['body'], $page['page_id'], true, true); // requiers 'body'
 				}
 
 				// TODO: format -> add ['feed' => true]
