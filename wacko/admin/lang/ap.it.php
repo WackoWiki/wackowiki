@@ -1042,7 +1042,7 @@ $ap_translation = [
 									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. ' .
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
 	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
-	'IgnoreSameFiles'			=> 'Ignore the same files (not overwrite)',
+	'IgnoreSameFiles'			=> 'Ignore same files (not overwrite)',
 	'NoBackupsAvailable'		=> 'No backups available.',
 	'BackupEntireSite'			=> 'Entire site',
 	'BackupRestored'			=> 'The backup is restored, a summary report is attached below. To delete this backup package, click',
@@ -1051,8 +1051,8 @@ $ap_translation = [
 
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
-	'IgnoreDublicatedKeys'		=> 'Ignore dublicated keys',
-	'IgnoreDublicatedFiles'		=> 'Ignore dublicated files',
+	'IgnoreDublicatedKeys'		=> 'Ignore duplicated keys',
+	'IgnoreDublicatedFiles'		=> 'Ignore duplicated files',
 	'SavedCluster'				=> 'Saved cluster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',

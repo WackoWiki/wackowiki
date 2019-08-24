@@ -1051,8 +1051,8 @@ $ap_translation = [
 
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
-	'IgnoreDublicatedKeys'		=> 'Ignore dublicated keys',
-	'IgnoreDublicatedFiles'		=> 'Ignore dublicated files',
+	'IgnoreDublicatedKeys'		=> 'Ignore duplicated keys',
+	'IgnoreDublicatedFiles'		=> 'Ignore duplicated files',
 	'SavedCluster'				=> 'Saved cluster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
