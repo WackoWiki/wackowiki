@@ -3617,54 +3617,9 @@ class Wacko
 			$file_access	= false;
 			$have_global	= false;
 
-			if (count($arr) == 1) // case 1 -> file:some.zip
+			if (count($arr) == 1) // case 1 -> file:some.zip - local precedes global location
 			{
-				#echo '####1: file:some.zip<br>';
-				$file_name	= $_file_name;
-				$param		= $this->parse_media_param($file_name);
-
-				if ($file_data = $this->check_file_record($param['src'], 0))
-				{
-					$href = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-					$have_global = true;
-
-					// tracking file link
-					if ($track && isset($file_data['file_id']))
-					{
-						$this->track_link($file_data['file_id'], LINK_FILE);
-					}
-				}
-			}
-			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - global only file
-			{
-				#echo '####2: file:/some.zip <br>' . $arr[1] . '####<br>';
-				$file_name	= $arr[1];
-				$param		= $this->parse_media_param($file_name);
-
-				if ($file_data = $this->check_file_record($param['src'], 0))
-				{
-					$href = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-
-					// tracking file link
-					if ($track && isset($file_data['file_id']))
-					{
-						$this->track_link($file_data['file_id'], LINK_FILE);
-					}
-				}
-			}
-
-			if (!$href || $have_global) // case 3 -> check for local file
-			{
-				// keep data from global file, maybe we need it
-				if ($have_global)
-				{
-					$_global_file_name	= $file_name;
-					$_global_file_data	= $file_data;
-					$_global_href		= $href;
-					$href				= '';
-				}
-
-				#echo '####3: local file <br>';
+				#echo '####1: file:some.zip (local)<br>';
 				$_global	= false;
 				$file_name	= $arr[count($arr) - 1];
 
@@ -3692,6 +3647,7 @@ class Wacko
 						$this->track_link($file_data['file_id'], LINK_FILE);
 					}
 
+					// check permissions
 					if ($this->is_admin()
 					|| ($file_data['file_id'] && ($this->page['owner_id'] == $this->get_user_id()))
 					|| ($this->has_access('read', $page_id))
@@ -3700,16 +3656,41 @@ class Wacko
 						$file_access = true;
 					}
 				}
-
-				// no local file available, take the global file instead
-				if (!$href && $have_global)
+				else
 				{
-					$_global	= true;
-					$file_name	= $_global_file_name;
-					$file_data	= $_global_file_data;
-					$href		= $_global_href;
+					#echo '####2: file:some.zip (global)<br>';
+					$file_name	= $_file_name;
+					$param		= $this->parse_media_param($file_name);
 
-					unset ($_global_href, $_global_file_data, $_global_file_name);
+					// no local file available, take the global file instead
+					if ($file_data = $this->check_file_record($param['src'], 0))
+					{
+						$href = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+						$have_global = true;
+
+						// tracking file link
+						if ($track && isset($file_data['file_id']))
+						{
+							$this->track_link($file_data['file_id'], LINK_FILE);
+						}
+					}
+				}
+			}
+			else if (count($arr) == 2 && $arr[0] == '')	// case 2 -> file:/some.zip - global only file
+			{
+				#echo '####3: file:/some.zip <br>' . $arr[1] . '####<br>';
+				$file_name	= $arr[1];
+				$param		= $this->parse_media_param($file_name);
+
+				if ($file_data = $this->check_file_record($param['src'], 0))
+				{
+					$href = $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+
+					// tracking file link
+					if ($track && isset($file_data['file_id']))
+					{
+						$this->track_link($file_data['file_id'], LINK_FILE);
+					}
 				}
 			}
 
