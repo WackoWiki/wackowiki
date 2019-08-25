@@ -141,7 +141,7 @@ class Wacko
 	// TODO: throw error for nested arrays
 	function ids_string($ids)
 	{
-		// sanitize array alow only integer values
+		// sanitize array allow only integer values
 		$ids_string = array_map( 'intval', $ids );
 
 		// implode the array to be used in a SQL statement
