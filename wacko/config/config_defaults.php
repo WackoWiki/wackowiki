@@ -152,16 +152,16 @@ $wacko_config_defaults = [
 	'privacy_page'					=> '',	// Privacy
 
 	'sandbox'						=> '',
-	'comments_page'					=> '',	#
-	'changes_page'					=> '',	#
-	'index_page'					=> '',	# +
-	'random_page'					=> '',	# +
+	'comments_page'					=> '',
+	'changes_page'					=> '',
+	'index_page'					=> 'Index',
+	'random_page'					=> 'Random',
 	'removals_page'					=> '',
 	'wanted_page'					=> '',
 	'orphaned_page'					=> '',
 	'search_page'					=> '',	// Search
 	'login_page'					=> '',	// Login
-	'account_page'					=> '',	// Account
+	'account_page'					=> 'Account',
 	'registration_page'				=> '',	// Registration
 	'password_page'					=> '',	// Password
 

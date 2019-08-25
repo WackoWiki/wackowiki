@@ -213,7 +213,6 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 		$insert_data[]		= [$default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']];
 	}
 
-
 	switch ($config_global['database_driver'])
 	{
 		case 'mysqli_legacy':

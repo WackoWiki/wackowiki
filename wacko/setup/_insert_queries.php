@@ -171,7 +171,7 @@ $upgrade['5.4.0'][]		= ['create',	'file_link',		$tbl_file_link_r5_4_0];
 // LOG
 $upgrade['5.5.12'][]	= ['alter',		'log',				$alter_log_r5_4_0];
 
-//menu
+// menu
 $upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_0];
 $upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_1];
 
@@ -274,3 +274,10 @@ $upgrade['5.4.0'][]		= ['create',	'word',				$tbl_word_r5_4_0];
 $upgrade['5.5.beta'][]	= ['alter',		'watch',			$alter_watch_r5_4_0];
 
 // 6.0 ############
+
+// menu
+$upgrade['5.5.12'][]	= ['update',	'menu',				$update_menu_r5_5_0];
+
+// page
+$upgrade['5.5.12'][]	= ['update',	'page',				$update_page_r5_5_0];
+
