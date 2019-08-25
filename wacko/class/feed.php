@@ -123,6 +123,18 @@ class Feed
 			"ORDER BY p.created DESC " .
 			"LIMIT " . (int) $limit);
 
+		if ($pages)
+		{
+			// build an array
+			foreach ($pages as $page)
+			{
+				$object_ids[] = $page['page_id'];
+			}
+
+			$this->engine->preload_categories($object_ids, OBJECT_PAGE);
+			$this->engine->preload_file_links($object_ids);
+		}
+
 		// build output
 		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
 				'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
@@ -230,7 +242,7 @@ class Feed
 
 		if ($comments = $this->engine->load_comment())
 		{
-			foreach ($comments as $i => $comment)
+			foreach ($comments as $comment)
 			{
 				if ($this->engine->db->hide_locked)
 				{
