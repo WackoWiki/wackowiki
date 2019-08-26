@@ -111,8 +111,8 @@ if ($page_a && $page_b
 			else
 			{
 				$params	= ($page_a['revision_id'] != $rev)
-							? ['a' => $page_a['revision_id'],	'b' => $r['revision_id']]
-							: ['a' => $r['revision_id'],		'b' => $page_b['revision_id']];
+					? ['a' => $page_a['revision_id'],	'b' => $r['revision_id']]
+					: ['a' => $r['revision_id'],		'b' => $page_b['revision_id']];
 				$href	= $this->href('diff', '', $params + ['diffmode' => $diffmode]);
 				$class	= '';
 			}
@@ -172,15 +172,15 @@ if ($page_a && $page_b
 			{
 				// remove blank lines
 				$tpl->added_diff = $source
-						? '<pre>' . wordwrap(Ut::html(implode("\n", $added)), 70, "\n", 1) . '</pre>'
-						: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
+					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $added)), 70, "\n", 1) . '</pre>'
+					: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
 			}
 
 			if ($deleted)
 			{
 				$tpl->deleted_diff  = $source
-						? '<pre>' . wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", 1) . '</pre>'
-						: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
+					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", 1) . '</pre>'
+					: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
 			}
 
 			if (!$added && !$deleted)
