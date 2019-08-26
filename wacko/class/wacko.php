@@ -400,10 +400,6 @@ class Wacko
 		// TODO: made format depended from localization and user preferences?
 		// default: d.m.Y H:i
 
-		#setlocale(LC_TIME, $this->language['locale']);
-		#setlocale(LC_TIME, 'ru_RU.UTF-8');
-		#return strftime('%d. %B %Y' . ' ' . '%H.%M', $local_time);
-
 		if ($relative)
 		{
 			return $this->get_time_interval($local_time);
@@ -411,6 +407,8 @@ class Wacko
 		else
 		{
 			return date($this->db->date_format . ' ' . $this->db->time_format, $local_time);
+			// https://www.php.net/manual/en/function.strftime.php
+			#return strftime('%d. %b %y' . ' ' . '%H:%M', $local_time);
 		}
 
 		// TODO: add options for ..
@@ -474,6 +472,7 @@ class Wacko
 			$this->language = &$this->languages[$lang];
 
 			setlocale(LC_CTYPE, $this->language['locale']);
+			#setlocale(LC_TIME, $this->language['locale']);	// get_time_formatted()
 
 			mb_internal_encoding($this->language['charset']);
 

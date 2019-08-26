@@ -782,9 +782,9 @@ $wacko_translation = [
 	'SettingsRemove'			=> 'Αφαίρεση',
 	'SettingsPurge'				=> 'Purge',
 	'SettingsModerate'			=> 'Moderate',
-	'SettingsPermissions'		=> 'ACLs',
+	'SettingsPermissions'		=> 'Δικαιώματα',
 	'AclForEntireCluster'		=> 'για ολόκληρο το cluster',
-	'SettingsAttachments'		=> 'Attachments',
+	'SettingsAttachments'		=> 'Συνημμένα',
 	'SettingsUpload'			=> 'Ανέβασμα',
 	'SettingsCategories'		=> 'Κατηγορίες',
 	'SettingsReferrers'			=> 'Παραπομπές',
@@ -825,8 +825,8 @@ $wacko_translation = [
 	'UploadUsedStorage'			=> 'Storage in use ',
 
 	// attachments
-	'Attachments'				=> 'Attachments',
-	'Attachment'				=> 'Attachment',
+	'Attachments'				=> 'Συνημμένα',
+	'Attachment'				=> 'Συνημμένο',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -863,7 +863,7 @@ $wacko_translation = [
 	'FileSource'				=> 'Source',
 	'FileSourceUrl'				=> 'URL',
 	'FileAttachedTo'			=> 'Attached to',
-	'FileSyntax'				=> 'Syntax',
+	'FileSyntax'				=> 'Σύνταξη',
 	'FileUsage'					=> 'Συνδέσεις αρχείου',
 	'FileUsageText'				=> 'Τα παρακάτω λήμματα συνδέουν σε αυτό το αρχείο:',
 	'NoFileUsage'				=> 'Δεν υπάρχουν σελίδες που συνδέουν σε αυτό το αρχείο.',
@@ -929,7 +929,7 @@ $wacko_translation = [
 	'Groups'					=> 'ομάδες',
 
 	// license action
-	'DistributedUnder'			=> 'Material is distributed under',
+	'DistributedUnder'			=> 'Το αρχείο διανέμεται υπό την άδεια',
 	'AuthorsDisplayHint'		=> 'The list of authors will be displayed when saving the page.',
 	'AnonymousUsers'			=> 'Anonymous users',
 	'License'					=> 'Αδεια',

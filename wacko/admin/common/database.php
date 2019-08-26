@@ -666,7 +666,7 @@ function put_data(&$engine, $pack, $table, $mode)
 			$engine->db->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
 
 			// run and count sql query
-			$engine->db->sql_query("$mode INTO $table VALUES ( ".implode(', ', $row) . " )");
+			$engine->db->sql_query("$mode INTO $table VALUES ( " . implode(', ', $row) . " )");
 			$t++;	// rows processed
 		}
 
