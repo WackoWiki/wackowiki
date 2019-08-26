@@ -12,7 +12,7 @@ if ($this->hide_revisions)
 
 $this->ensure_page(true);
 
-header('Content-type: text/xml');
+header('Content-type: text/xml; charset=utf-8');
 
 $tpl->charset	= $this->get_charset();
 $tpl->tag		= $this->tag;
@@ -58,7 +58,7 @@ if ($this->has_access('read'))
 				// remove diff type navigation
 				$diff			= preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $diff);
 
-				$tpl->diff		= str_replace('<', '&lt;', str_replace('&', '&amp;', $diff));
+				$tpl->diff		= '<![CDATA[' . str_replace(']]>', ']]&gt;', $diff) . ']]';
 				$tpl->date		= date ('r', strtotime ($_GET['c']));
 			}
 		}
