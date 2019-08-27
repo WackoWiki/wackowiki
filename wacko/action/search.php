@@ -139,92 +139,93 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 	return [$results, $pagination, $count['n']];
 };
 
-$get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanup = '')
+// return context around first keyword match
+$get_context = function($phrase, $string, $position, $padding, $hellip = true)
 {
-	$lines	= explode("\n", $string);
-	$result	= '';
+	$clength	= strlen($string);
 
-	foreach ($lines as $line)
+	// get start point
+	$_start		= $position - $padding;
+	$start		= $_start < 0
+					? 0
+					: strpos($string, ' ', $_start);
+
+	$_length	= (strlen($phrase) + $padding * 2);
+
+	// get endpoint
+	$_end		= $start + $_length;
+	$end		= $_end > $clength
+					? $clength
+					: strpos($string, ' ', $_end);
+
+	$length		= $end - $start;
+	$context	= substr($string, $start, $length);
+	$_hellip	= $hellip ? ($_end < $clength ? ' ... ' : '') : '';
+
+	#echo '##' . $position . ' $clength: ' .$clength . ' $start0: ' . $start0 .  ' $start:  ' . $start  . ' $length0:  ' . $length0  . ' $end0: ' . $end0  . ' $end: ' . $end  . ' $length: ' .$length . ' ' . '<br><br><br>';
+	#echo '-->'.$context .'<br><br><br>';
+	return $context . $_hellip;
+};
+
+// returns only the first $position match as intended
+$strpos_array = function($content, $keywords, $offset=0)
+{
+	if(!is_array($keywords)) $keywords = [$keywords];
+
+	foreach($keywords as $keyword)
 	{
-		if ($insensitive == true)
+		if(($position = stripos($content, $keyword, $offset)) !== false)
 		{
-			if (stripos($line, $phrase))
-			{
-				if ($result)
-				{
-					$result .= "<br>\n";
-				}
-			}
+			return $position; // stop on first true result
 		}
-		else
-		{
-			if (strpos($line, $phrase))
-			{
-				if ($result)
-				{
-					$result .= "<br>\n";
-				}
-			}
+	}
 
-			$result .= $cleanup ? str_replace('$phrase', '', $line) : $line;
+	return false;
+};
+
+// return the part of the content where the keyword was matched
+$get_line_with_phrase = function ($content, $phrase, $padding, $insensitive = true) use ($get_context, $strpos_array)
+{
+	$_padding	= 75;
+	$_keywords	= explode(' ', $phrase);
+	$lines		= explode("\n", $content);
+	$result		= '';
+	$matches	= 0;
+
+	// get a first taste, skip the rest
+	foreach ($lines as $string)
+	{
+		if ($matches > 3) break; // enough berries, go home!
+
+		if (($position	= $strpos_array($string, $_keywords)) !== false)
+		{
+			#echo '##' . $position . '<br><br><br>';
+			$result .= $get_context($phrase, $string, $position, $_padding);
+
+			$matches++;
 		}
 	}
 
 	return $result;
 };
 
-$preview_text = function ($text, $limit, $tags = 0)
+// TODO: cut new line at the end without present keyword, e.g. ... stump text
+$preview_text = function ($text, $limit, $hellip = true)
 {
 	// trim text
 	$text = trim($text);
-
-	// strip tags if preview is without HTML
-	if ($tags == 0)
-	{
-		$text = preg_replace('/\s\s+/', ' ', strip_tags($text));
-	}
 
 	// if strlen is smaller than limit return
 	if (strlen($text) < $limit)
 	{
 		return $text;
 	}
-
-	if ($tags == 0)
-	{
-		return substr($text, 0, $limit) . ' [...]';
-	}
 	else
 	{
-		$counter = 0;
-		$return	= '';
+		$length		= strpos($text, ' ', $limit);
+		$_hellip	= $hellip ? ($length < $limit ? ' ... ' : '') : '';
 
-		for ($i = 0; $i <= strlen($text); $i++)
-		{
-			if ($text[$i] == '<')
-			{
-				$stop = 1;
-			}
-
-			if ($stop != 1)
-			{
-				$counter++;
-			}
-
-			if ($text[$i] == '>')
-			{
-				$stop = 0;
-			}
-
-			$return .= $text[$i];
-
-			if ($counter >= $limit && $text[$i] == ' ')
-			{
-				break;
-			}
-		}
-
-		return $return . '[...]';
+		return substr($text, 0, $length) . $_hellip;
 	}
 };
 
@@ -233,6 +234,9 @@ $highlight_this = function ($text, $words, $the_place)
 	$words			= trim($words);
 	$the_count		= 0;
 	$words_array	= explode(' ', $words);
+
+	// strip tags if preview is without HTML
+	$text 			= Ut::html($text);
 
 	foreach ($words_array as $word)
 	{
@@ -263,8 +267,6 @@ $highlight_this = function ($text, $words, $the_place)
 
 // --------------------------------------------------------------------------------
 
-$output = '';
-
 if (!isset($page))		$page		= '';
 if (!isset($topic))		$topic		= '';
 if (!isset($title))		$title		= 0;
@@ -276,8 +278,8 @@ if (!isset($nomark))	$nomark		= 0;
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($lang))		$lang		= '';
-if (!isset($max))		$max		= null;
-if (!isset($clean))		$clean		= false;
+if (!isset($max))		$max		= 10;	// (null) 50 -> 10 overwrites system default value!
+if (!isset($padding))	$padding	= 250;
 
 if ($lang && !$this->known_language($lang))
 {
@@ -285,8 +287,7 @@ if ($lang && !$this->known_language($lang))
 	$this->set_message('The selected language is not available!');
 }
 
-$user			= $this->get_user();
-$category_id	= $_GET['category_id'] ?? 0;
+$category_id	= (int) ($_GET['category_id'] ?? 0);
 $mode			= ($topic || isset($_GET['topic']))? 'topic' : 'full';
 
 $filter = [
@@ -315,7 +316,7 @@ else
 	$form	= 1;
 }
 
-$phrase or $phrase = @$_GET['phrase'];
+$phrase or $phrase = trim(@$_GET['phrase']);
 
 if ($form)
 {
@@ -368,7 +369,10 @@ if (strlen($phrase) >= 3)
 					if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 					{
 						$body		= $this->format($page['body'], 'cleanwacko');
-						$context	= $get_line_with_phrase($phrase, $body, $clean);
+						// strip tags if preview is without HTML
+						#$body		 = preg_replace('/\s\s+/', ' ', strip_tags($text));
+
+						$context	= $get_line_with_phrase($body, $phrase, $padding);
 						$context	= $preview_text($context, 500, 0);
 						$context	= $highlight_this($context, $phrase, 0);
 						list($context, $ccount) = $context;
@@ -401,7 +405,7 @@ if (strlen($phrase) >= 3)
 
 					if ($mode != 'topic')
 					{
-						$tpl->l_count	= $ccount;
+						#$tpl->l_count	= $ccount;
 						$tpl->l_preview	= $preview;
 					}
 				}
