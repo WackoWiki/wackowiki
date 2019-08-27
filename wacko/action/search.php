@@ -139,92 +139,91 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 	return [$results, $pagination, $count['n']];
 };
 
-$get_line_with_phrase = function ($phrase, $string, $insensitive = true, $cleanup = '')
+// return context around first keyword match
+$get_context = function($phrase, $string, $position, $padding, $hellip = true)
 {
-	$lines	= explode("\n", $string);
-	$result	= '';
+	$clength	= mb_strlen($string);
 
-	foreach ($lines as $line)
+	// get start point
+	$_start		= $position - $padding;
+	$start		= $_start < 0
+					? 0
+					: strpos($string, ' ', $_start);
+
+	$_length	= (mb_strlen($phrase) + $padding * 2);
+
+	// get endpoint
+	$_end		= $start + $_length;
+	$end		= $_end > $clength
+					? $clength
+					: strpos($string, ' ', $_end);
+
+	$length		= $end - $start;
+	$context	= mb_substr($string, $start, $length);
+	$_hellip	= $hellip ? ($_end < $clength ? ' ... ' : '') : '';
+
+	return $context . $_hellip;
+};
+
+// returns only the first $position match as intended
+$mb_strpos_array = function($content, $keywords, $offset=0)
+{
+	if(!is_array($keywords)) $keywords = [$keywords];
+
+	foreach($keywords as $keyword)
 	{
-		if ($insensitive == true)
+		if(($position = mb_stripos($content, $keyword, $offset)) !== false)
 		{
-			if (mb_stripos($line, $phrase))
-			{
-				if ($result)
-				{
-					$result .= "<br>\n";
-				}
-			}
+			return $position; // stop on first true result
 		}
-		else
-		{
-			if (mb_strpos($line, $phrase))
-			{
-				if ($result)
-				{
-					$result .= "<br>\n";
-				}
-			}
+	}
 
-			$result .= $cleanup ? str_replace('$phrase', '', $line) : $line;
+	return false;
+};
+
+// return the part of the content where the keyword was matched
+$get_line_with_phrase = function ($content, $phrase, $padding, $insensitive = true) use ($get_context, $mb_strpos_array)
+{
+	$_padding	= 75;
+	$_keywords	= explode(' ', $phrase);
+	$lines		= explode("\n", $content);
+	$result		= '';
+	$matches	= 0;
+
+	// get a first taste, skip the rest
+	foreach ($lines as $string)
+	{
+		if ($matches > 3) break; // enough berries, go home!
+
+		if (($position	= $mb_strpos_array($string, $_keywords)) !== false)
+		{
+			#echo '##' . $position . '<br><br><br>';
+			$result .= $get_context($phrase, $string, $position, $_padding);
+
+			$matches++;
 		}
 	}
 
 	return $result;
 };
 
-$preview_text = function ($text, $limit, $tags = 0)
+// TODO: cut new line at the end without present keyword, e.g. ... stump text
+$preview_text = function ($text, $limit, $hellip = true)
 {
 	// trim text
 	$text = trim($text);
-
-	// strip tags if preview is without HTML
-	if ($tags == 0)
-	{
-		$text = preg_replace('/\s\s+/', ' ', strip_tags($text));
-	}
 
 	// if strlen is smaller than limit return
 	if (mb_strlen($text) < $limit)
 	{
 		return $text;
 	}
-
-	if ($tags == 0)
-	{
-		return mb_substr($text, 0, $limit) . ' [...]';
-	}
 	else
 	{
-		$counter = 0;
-		$return	= '';
+		$length		= strpos($text, ' ', $limit);
+		$_hellip	= $hellip ? ($length < $limit ? ' ... ' : '') : '';
 
-		for ($i = 0; $i <= mb_strlen($text); $i++)
-		{
-			if ($text[$i] == '<')
-			{
-				$stop = 1;
-			}
-
-			if ($stop != 1)
-			{
-				$counter++;
-			}
-
-			if ($text[$i] == '>')
-			{
-				$stop = 0;
-			}
-
-			$return .= $text[$i];
-
-			if ($counter >= $limit && $text[$i] == ' ')
-			{
-				break;
-			}
-		}
-
-		return $return . '[...]';
+		return mb_substr($text, 0, $length) . $_hellip;
 	}
 };
 
@@ -233,6 +232,9 @@ $highlight_this = function ($text, $words, $the_place)
 	$words			= trim($words);
 	$the_count		= 0;
 	$words_array	= explode(' ', $words);
+
+	// strip tags if preview is without HTML
+	$text 			= Ut::html($text);
 
 	foreach ($words_array as $word)
 	{
@@ -243,7 +245,7 @@ $highlight_this = function ($text, $words, $the_place)
 		}
 
 		// Check if it's excluded
-		if (in_array(strtolower($word), $exclude_list))
+		if (in_array(mb_strtolower($word), $exclude_list))
 		{
 			// skip
 		}
@@ -253,7 +255,7 @@ $highlight_this = function ($text, $words, $the_place)
 			$word		= preg_quote($word);
 
 			// highlight uppercase and lowercase correctly
-			$text		= preg_replace('/(' . $word . ')/i','<mark class="highlight">$1</mark>' , $text, -1 , $count);
+			$text		= preg_replace('/(' . $word . ')/ui','<mark class="highlight">$1</mark>' , $text, -1 , $count);
 			$the_count	= $count + $the_count;
 		}
 	}
@@ -262,8 +264,6 @@ $highlight_this = function ($text, $words, $the_place)
 };
 
 // --------------------------------------------------------------------------------
-
-$output = '';
 
 if (!isset($page))		$page		= '';
 if (!isset($topic))		$topic		= '';
@@ -276,8 +276,8 @@ if (!isset($nomark))	$nomark		= 0;
 if (!isset($term))		$term		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($lang))		$lang		= '';
-if (!isset($max))		$max		= null;
-if (!isset($clean))		$clean		= false;
+if (!isset($max))		$max		= 10;	// (null) 50 -> 10 overwrites system default value!
+if (!isset($padding))	$padding	= 250;
 
 if ($lang && !$this->known_language($lang))
 {
@@ -285,8 +285,7 @@ if ($lang && !$this->known_language($lang))
 	$this->set_message('The selected language is not available!');
 }
 
-$user			= $this->get_user();
-$category_id	= $_GET['category_id'] ?? 0;
+$category_id	= (int) ($_GET['category_id'] ?? 0);
 $mode			= ($topic || isset($_GET['topic']))? 'topic' : 'full';
 
 $filter = [
@@ -315,7 +314,7 @@ else
 	$form	= 1;
 }
 
-$phrase or $phrase = @$_GET['phrase'];
+$phrase or $phrase = trim(@$_GET['phrase']);
 
 if ($form)
 {
@@ -367,7 +366,10 @@ if (mb_strlen($phrase) >= 3)
 					if ($mode !== 'topic' && $this->has_access('read', $page['page_id']))
 					{
 						$body		= $this->format($page['body'], 'cleanwacko');
-						$context	= $get_line_with_phrase($phrase, $body, $clean);
+						// strip tags if preview is without HTML
+						#$body		 = preg_replace('/\s\s+/', ' ', strip_tags($text));
+
+						$context	= $get_line_with_phrase($body, $phrase, $padding);
 						$context	= $preview_text($context, 500, 0);
 						$context	= $highlight_this($context, $phrase, 0);
 						list($context, $ccount) = $context;
