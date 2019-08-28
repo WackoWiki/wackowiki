@@ -37,7 +37,7 @@ $a					= (int) $_GET['a'];
 $b					= (int) $_GET['b'];
 $diffmode			= (int) @$_GET['diffmode'];
 $hide_minor_edit	= (int) @$_GET['minor_edit'];
-echo 'a: '. $a . ' b: '. $b . '<br>';
+
 if ($a < 0) $a = 0;
 if ($b < 0) $b = 0;
 
