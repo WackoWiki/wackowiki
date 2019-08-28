@@ -6887,14 +6887,13 @@ class Wacko
 			// load page
 			$page			= $this->load_page($tag, 0, $revision_id, '', '', $deleted);
 
-			$this->tag		= $tag;
-
-			// TODO: obsolete? Add description what it does
-			// creates dummy array
-			if ($this->db->outlook_workaround && !$page)
+			// no available revision
+			if ($revision_id && empty($page['tag']))
 			{
-				$page = $this->load_page($this->tag . "'", 0, $revision_id);
+				$page		= $this->load_page($tag, 0, 0, '', '', $deleted);
 			}
+
+			$this->tag		= $tag;
 		}
 
 		// create $this->page

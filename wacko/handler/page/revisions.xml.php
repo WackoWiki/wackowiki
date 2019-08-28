@@ -30,7 +30,6 @@ if ($this->has_access('read'))
 	{
 		$max				= 10;
 		$c					= 0;
-		$_GET['b']			= -1;
 		$_GET['diffmode']	= 2; // 2 - source diff
 
 		$tpl->enter('p_');
@@ -41,11 +40,11 @@ if ($this->has_access('read'))
 
 			if (($c <= $max) && $c > 1)
 			{
+				$_GET['b']		= $_GET['a'] ?? -1;			// subsequent	(-1 recent -> or previous)
+				$_GET['a']		= $page['revision_id']; 	// previous
+
 				$etag			= str_replace('%2F', '/', rawurlencode($page['tag']));
-				$_GET['d']		= $page['modified'];
-				$_GET['a']		= $_GET['b'];
-				$_GET['b']		= $page['revision_id'];
-				$_GET['c']		= ($_GET['d'] == '' ? $this->page['modified'] : $_GET['d']);
+				$date			= ($page['modified'] == '' ? $this->page['modified'] : $page['modified']);
 
 				$tpl->user		= $page['user_id'] ? $page['user_name'] : $this->_t('Guest');
 				$tpl->note		= $page['edit_note'];
@@ -56,10 +55,10 @@ if ($this->has_access('read'))
 				$diff			= $this->include_buffered('page/diff.php', 'oops', '', HANDLER_DIR);
 
 				// remove diff type navigation
-				$diff			= preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/si', '', $diff);
+				$diff			= preg_replace('/(<!--nomail-->.*?<!--\/nomail-->)/usi', '', $diff);
 
-				$tpl->diff		= '<![CDATA[' . str_replace(']]>', ']]&gt;', $diff) . ']]';
-				$tpl->date		= date ('r', strtotime ($_GET['c']));
+				$tpl->diff		= '' . str_replace(']]>', ']]&gt;', $diff) . '';
+				$tpl->date		= date ('r', strtotime ($date));
 			}
 		}
 

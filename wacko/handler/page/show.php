@@ -34,7 +34,7 @@ if ($this->has_access('read'))
 	{
 		$this->http->status(404);
 
-		$message = $this->_t('DoesNotExists') . " " . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
+		$message = $this->_t('DoesNotExists') . ' ' . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
 		$tpl->n_message = $this->show_message($message, 'notice', false);
 	}
 	else
