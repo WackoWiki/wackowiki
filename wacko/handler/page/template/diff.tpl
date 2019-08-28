@@ -1,7 +1,7 @@
 [ === main === ]
 	[ ' denied ' ]
 	[ ' nodiff ' ]
-	
+
 	<!--nomail-->
 	<h3>[ ' head ' ]</h3>
 	<ul class="menu">
@@ -35,17 +35,11 @@
 			[ ' nodiff ' ]
 			[= added _ =
 				<br><strong>[ ' _t: SimpleDiffAdditions ' ]</strong><br>
-				<div class="additions">
-					[ ' diff | pre ' ]
-				
-				</div>
+				<div class="additions">[ ' diff | pre ' ]</div>
 			=]
 			[= deleted _ =
 				<br><strong>[ ' _t: SimpleDiffDeletions ' ]</strong><br>
-				<div class="deletions">
-					[ ' diff | pre ' ]
-				
-				</div>
+				<div class="deletions">[ ' diff | pre ' ]</div>
 			=]
 		=]
 		[= m6 _ =
@@ -54,7 +48,6 @@
 			[ ' diff ' ]
 		=]
 	=]
-
 
 [= nodiff =]
 <br>[ ' _t: NoDifferences ' ]
