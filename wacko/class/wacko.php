@@ -7188,6 +7188,12 @@ class Wacko
 			// load page
 			$page			= $this->load_page($tag, 0, $revision_id, '', '', $deleted);
 
+			// no available revision
+			if ($revision_id && empty($page['tag']))
+			{
+				$page		= $this->load_page($tag, 0, 0, '', '', $deleted);
+			}
+
 			$this->tag		= $tag;
 			$this->supertag =
 				(!$page

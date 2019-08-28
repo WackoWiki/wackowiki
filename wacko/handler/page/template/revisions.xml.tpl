@@ -19,7 +19,7 @@
 					<title>[ ' user ' ]: [ ' note ' ]</title>
 					<link>[ ' link ' ]</link>
 					<guid isPermaLink="true">[ ' perma ' ]</guid>
-					<description>[ ' diff | pre ' ]</description>
+					<description><![CDATA[[ ' diff | pre ' ]]]></description>
 					<pubDate>[ ' date ' ]</pubDate>
 				</item>
 			=]

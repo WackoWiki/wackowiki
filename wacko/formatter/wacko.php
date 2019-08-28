@@ -77,5 +77,3 @@ if (!empty($parser->auto_fn['content']))
 }
 
 echo $text;
-
-?>
