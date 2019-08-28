@@ -3962,7 +3962,14 @@ class Wacko
 					{
 						if ($file_data['file_ext'] == 'svg')
 						{
-							$scale = '';
+							if ($param['width'])
+							{
+								$scale	= ' width="' . $param['width'] . '"';
+							}
+							else
+							{
+								$scale = '';
+							}
 						}
 						else
 						{
