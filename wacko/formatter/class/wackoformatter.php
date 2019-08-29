@@ -267,7 +267,7 @@ class WackoFormatter
 				? ''
 				: "\b(" . $object->language['UPPER'] . $object->language['LOWER'] . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHA'] . $object->language['ALPHANUM'] . "+)\b|") .
 			// wiki links (beside actions)
-			($this->object->db->disable_wikilinks == 1
+			($this->object->db->disable_wikilinks
 				? ''
 				: "(~?)(?<=[^\." . $object->language['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->language['UPPER'] . $object->language['LOWER'] . "+" . $object->language['UPPERNUM'] . $object->language['ALPHANUM'] . "*)\b|") .
 			"\n)/usm";
