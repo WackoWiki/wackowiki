@@ -132,7 +132,7 @@ foreach ($drivers as $k => $driver)
 
 $charsets	= [];
 $charsets[]	= ['utf8mb4',	'utf8mb4',	'utf8mb4 (' . $lang['Recommended'] . ')'];	// default
-$charsets[]	= ['utf8',		'utf8',		'utf8'];	// Do not use, only for testing!
+#$charsets[]	= ['utf8',		'utf8',		'utf8mb3'];	// XXX: Do not use, only for testing!
 
 echo '	<select id="database_charset" name="config[database_charset]" required>';
 

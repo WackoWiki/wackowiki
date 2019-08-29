@@ -3227,12 +3227,12 @@ class Wacko
 	function parse_media_param($file_name)
 	{
 		//split into src and parameters (using the questionmark)
-		$pos = strrpos($file_name, '?');
+		$pos = mb_strrpos($file_name, '?');
 
 		if($pos !== false)
 		{
-			$src		= substr($file_name, 0, $pos);
-			$param		= substr($file_name, $pos + 1);
+			$src		= mb_substr($file_name, 0, $pos);
+			$param		= mb_substr($file_name, $pos + 1);
 		}
 		else
 		{
