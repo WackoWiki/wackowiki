@@ -37,6 +37,6 @@ $text = str_replace('&ndash;', '-', $text);
 $text = str_replace('&mdash;', '--', $text);
 
 // break up long lines
-$text = mb_wordwrap($text, 74, "\n", 1);
+$text = utf8_wordwrap($text, 74, "\n", 1);
 
 echo $text;

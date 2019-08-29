@@ -221,6 +221,7 @@ function admin_user_users(&$engine, &$module)
 					'user_lang'		=> $_POST['user_lang'] ?: $engine->db->language
 				];
 
+				// send email to user and set email_confirm  token!
 				$engine->notify_user_signup($new_user);
 			}
 
@@ -380,7 +381,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">' . $engine->_t('UserName') . '</label>' .
 					'</td>
 					<td>
-						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100" required>
 					</td>
 				</tr>' .
 				'<tr>
@@ -403,8 +404,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
 					</td>' .
 					'<td>
-						<select id="user_lang" name="user_lang">
-							<option value=""></option>';
+						<select id="user_lang" name="user_lang">';
 
 				$languages = $engine->_t('LanguageArray');
 
@@ -412,7 +412,7 @@ function admin_user_users(&$engine, &$module)
 				{
 					foreach ($langs as $lang)
 					{
-						echo '<option value="' . $lang . '">' . $languages[$lang] . ' (' . $lang . ")</option>\n";
+						echo '<option value="' . $lang . '"' . ($lang == $engine->db->language ? ' selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ')' . "</option>\n";
 					}
 				}
 
@@ -959,4 +959,3 @@ function admin_user_users(&$engine, &$module)
 	}
 }
 
-?>
