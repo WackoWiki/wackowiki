@@ -257,13 +257,13 @@ class WackoFormatter
 			// list including multilevel
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|" .
 			// media links
-			"file:((\.\.|!)?\/)?[[:alnum:]][[:alnum:]\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
+			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
 			"\b[[:alnum:]]+[:][" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// tikiwiki links
-			($this->object->db->disable_tikilinks == 1
+			($this->object->db->disable_tikilinks
 				? ''
 				: "\b(" . $object->language['UPPER'] . $object->language['LOWER'] . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHA'] . $object->language['ALPHANUM'] . "+)\b|") .
 			// wiki links (beside actions)
@@ -273,7 +273,7 @@ class WackoFormatter
 			"\n)/usm";
 
 		$this->NOTLONGREGEXP =
-			"/(" . ($this->object->db->disable_formatters == 1
+			"/(" . ($this->object->db->disable_formatters
 				? ''
 				: "\%\%.*?\%\%|") .
 			"~([^ \t\n]+)|" .
@@ -1195,7 +1195,7 @@ class WackoFormatter
 			return $result;
 		}
 		// media file links
-		else if (preg_match('/^file:((\.\.|!)?\/)?[[:alnum:]][[:alnum:]\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
+		else if (preg_match('/^file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
 		{
 			$caption = 0;
 			if(!empty($matches[4]) && preg_match('/caption/ui', $matches[4]))

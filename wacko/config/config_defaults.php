@@ -18,7 +18,7 @@ $wacko_config_defaults = [
 	'database_user'					=> '',
 	'database_password'				=> '',
 	'database_collation'			=> 0,			// 'utf8mb4_general_ci', 'utf8mb4_unicode_520_ci'
-	'database_charset'				=> 'utf8	',	// 'utf8mb4, utf8'
+	'database_charset'				=> 'utf8mb4',	// 'utf8mb4'
 	'database_engine'				=> 'InnoDB',
 
 	'session_store'					=> 1,
