@@ -36,7 +36,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Регистрация учетной записи',
 	'NewAccountAdminCreated'	=> 'Пользователь %1 создал аккаунт для Вас с именем пользователя "%2". Для завершения регистрации, перейдите по следующей ссылке (проверьте, чтобы ссылка была в одну строку, иначе она не сработает) и введите в соответствующие поля удобный для Вас пароль доступа (будьте внимательны, пароль надо ввести в два поля):',
 	'NewAccountUsername'		=> 'Пользователь:',
-	'AccountLanguage'			=> 'Language:',
+	'AccountLanguage'			=> 'Язык:',
 	'NewAccountEmail'			=> 'Адрес электронной почты:',
 	'NewAccountIP'				=> 'IP-адрес клиента:',
 	'NewAccountSignupInfo'		=> 'Создана следующая учетная запись:',
@@ -46,7 +46,7 @@ $wacko_translation = [
 	'UserApprovalInfo'			=> 'После вашей регистрации администратору системы будет отправлен запрос на одобрение. Затем вы получите email с дальнейшими инструкциями.',
 	'UserApprovalHint'			=> 'Об успешной активации аккаунта будет сообщено по электронной почте. До тех пор вход в систему невозможен.',
 
-	'UserApprovalPending'		=> 'Ваш аккаунт ожидает утверждения.',
+	'UserApprovalPending'		=> 'Ваш аккаунт ожидает подтверждения.',
 	'UserApprovalDenied'		=> 'Вашему аккаунту отказано в доступе.',
 
 	'RegistrationApproved'		=> 'Регистрация одобрена',
@@ -127,7 +127,7 @@ $wacko_translation = [
 	'EmailLink'					=> 'Написать письмо (вызов почтовой программы)',
 	'JabberLink'				=> 'Начать чат по XMPP (будет запущен клиент Jabber)',
 	'PermaLink'					=> 'Постоянная ссылка',
-	'PermaLinkTip'				=> 'Постоянная ссылка страницы',
+	'PermaLinkTip'				=> 'Постоянная ссылка на страницу',
 
 	'ShowTip'					=> 'Вернуться к просмотру страницы',
 	'ShowText'					=> 'Просмотр',
@@ -169,10 +169,10 @@ $wacko_translation = [
 	'Owner'						=> 'Владелец',
 	'Nobody'					=> 'Никто',
 	'TakeOwnership'				=> 'Вступить во владение',
-	'FilesTip'					=> 'управление прикрепленными файлами',
+	'FilesTip'					=> 'Управление прикрепленными файлами',
 	'FilesText'					=> 'Файлы',
 	'DeleteConfirm'				=> 'Вы действительно хотите УДАЛИТЬ текст? ' . "\n" . 'Восстановить его потом не удастся.',
-	'DeleteTip'					=> 'Нажмите, чтобы удалить.',
+	'DeleteTip'					=> 'Удалить страницу, связанные файлы и комментарии',
 	'DeleteCommentTip'			=> 'Удалить комментарий',
 	'DeleteText'				=> 'Удалить',
 	'EditACLConfirm'			=> 'Перейти без сохранения сделанных изменений?',
@@ -193,9 +193,9 @@ $wacko_translation = [
 	'CommentsXMLTip'			=> 'Нажмите, чтобы увидеть последние комментарии в формате XML.',
 	'ChangesXMLTip'				=> 'Нажмите, чтобы увидеть последние изменения в формате XML.',
 	'NewsXMLTip'				=> 'Щёлкните, чтобы увидеть последние новости в формате XML.',
-	'ReferrersTip'				=> 'Просмотр списка страниц (и сайтов], ссылающихся на эту',
+	'ReferrersTip'				=> 'Просмотр списка страниц (и сайтов), ссылающихся на эту',
 	'ReferrersText'				=> 'Рефереры',
-	'ModerateTip'				=> 'модерация тем и сообщений форума',
+	'ModerateTip'				=> 'Модерация тем и сообщений форума',
 	'ModerateText'				=> 'Модерация',
 	'SearchText'				=> 'Поиск: ',
 
@@ -217,12 +217,12 @@ $wacko_translation = [
 	'ACLCancelButton'			=> 'Отмена',
 	'ACLAccessDenied'			=> 'Вы не владелец этой страницы.',
 	'AclSyntaxError'			=> 'Контроль доступа синтаксическая ошибка списка',
-	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
-									'<code>$</code> - only registered users<br>' .
-									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
-									'<code>[UserName]</code> - names of allowed users<br>' .
-									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
-									'<code>(an empty list)</code> - only the page owner has access',
+	'AclHelp'					=> '<code>*</code> - разрешено всем<br>' .
+									'<code>$</code> - только для зарегистрированных пользователей<br>' .
+									'<code>!</code> - предшествующий восклицательный знак запрещает<br>соответствующее право указанному пользователю/группе<br>' .
+									'<code>[UserName]</code> - имена пользователей, которым разрешено<br>' .
+									'<code>[GroupName]</code> - имена групп пользователей, которым разрешено<br>' .
+									'<code>(пустой список)</code> - разрешено только владельцу страницы',
 
 	// purge handler
 	'PurgePage'					=> 'Чистка документа',
@@ -279,9 +279,9 @@ $wacko_translation = [
 	'CategoryEmpty'				=> 'Категория пуста.',
 	'NoCategorySelected'		=> 'Категория не выбрана.',
 	'TagCloud'					=> 'Облако тегов',
-	'PagesTaggedWith'			=> '%1 pages tagged with %2',
-	'UpdateButton'				=> 'Update',
-	'CategoriesOfCluster'		=> 'of cluster',
+	'PagesTaggedWith'			=> '%1 страницы отмечены тегом %2',
+	'UpdateButton'				=> 'Обновить',
+	'CategoriesOfCluster'		=> 'кластера',
 
 	// source handler
 	'SourceText'				=> 'Исходник',
@@ -389,7 +389,7 @@ $wacko_translation = [
 	'CommentsRemoved'			=> 'Комментарии к странице удалены.',
 	'FilesRemoved'				=> 'Файлы со страницы удалены.',
 	'PageRemoved'				=> 'Страница удалена.',
-	'PageCachePurged'			=> 'Кэш прочищен.',
+	'PageCachePurged'			=> 'Кэш очищен.',
 	'ClusterRemoved'			=> 'Все страницы кластера удалены.',
 	'RevisionsRemoved'			=> 'Версии страницы удалены.',
 	'ActionHaveNoUndo'		=> 'Удаление нельзя отменить.',
