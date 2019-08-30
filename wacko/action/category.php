@@ -32,12 +32,15 @@ $category_link = function ($word, $category_id, $type_id, $filter = [], $list)
 //	lang		- categories language if necessary (defaults to current page lang)
 //	sort		- order pages alphabetically ('abc', default) or creation date ('date')
 //	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
+//	info		- display category description
 
 if (!isset($page))			$page		= '/';
 if (!isset($list))			$list		= 1;
 if (!isset($type_id))		$type_id	= OBJECT_PAGE;
 if (!isset($ids))			$ids		= '';
 if (!isset($lang))			$lang		= $this->page['page_lang'];
+if (!isset($nomark))		$nomark 	= 0;
+if (!isset($info))			$info 		= 0;
 if (isset($_REQUEST['category_lang']))
 {
 	$lang = ($this->db->multilanguage
@@ -50,7 +53,7 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 {
 	$sort = 'abc';
 }
-if (!isset($nomark))		$nomark = 0;
+
 $type_id	= (int) ($_GET['type_id'] ?? OBJECT_PAGE);
 $filter		= [];
 
@@ -129,10 +132,15 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		"ORDER BY p.{$order} ", true))
 	{
 		if ($_words = $this->db->load_all(
-			"SELECT category, category_lang " .
+			"SELECT category, category_description, category_lang " .
 			"FROM " . $this->db->table_prefix . "category " .
 			"WHERE category_id IN (" . $this->ids_string($category_ids) . ")", true))
 		{
+			if ($info)
+			{
+				$tpl->d_description	= $_words[0]['category_description'];
+			}
+
 			foreach ($pages as $page)
 			{
 				// cache page_id for for has_access validation in link function
