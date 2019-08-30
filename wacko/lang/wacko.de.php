@@ -283,6 +283,7 @@ $wacko_translation = [
 	'PagesTaggedWith'			=> '%1 Seiten getaggt mit %2',
 	'UpdateButton'				=> 'Aktualisieren',
 	'CategoriesOfCluster'		=> 'des Clusters',
+	'TaggedWithTip'				=> 'Zeige mit %1 gekennzeichnet Seiten.',
 
 	// source handler
 	'SourceText'				=> 'Quelltext',

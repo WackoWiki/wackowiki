@@ -283,6 +283,7 @@ $wacko_translation = [
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 	'UpdateButton'				=> 'Frissítés',
 	'CategoriesOfCluster'		=> 'of cluster',
+	'TaggedWithTip'				=> 'Mutassa a %1 címkével ellátott oldalakat',
 
 	// source handler
 	'SourceText'				=> 'Oldalforrás',
