@@ -124,7 +124,8 @@ if ($this->is_owner() || $this->is_admin())
 				{
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "category SET " .
-							"category = " . $this->db->q($_category) . " " .
+							"category 				= " . $this->db->q($_category) . ", " .
+							"category_description	= " . $this->db->q($_category_description) . " " .
 						"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 						"LIMIT 1");
 
@@ -237,7 +238,7 @@ if ($this->is_owner() || $this->is_admin())
 			else if (isset($_POST['rename']) && isset($_POST['change_id']))
 			{
 				if ($word = $this->db->load_single(
-					"SELECT category
+					"SELECT category, category_description
 					FROM " . $this->db->table_prefix . "category
 					WHERE category_id = " . (int) $_POST['change_id'] . "
 					LIMIT 1"))
@@ -246,6 +247,7 @@ if ($this->is_owner() || $this->is_admin())
 					$tpl->r_changeid	= (int) $_POST['change_id'];
 					$tpl->r_newname		= Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . Ut::html($word['category']) . '</code>');
 					$tpl->r_category	= ($_POST['category'] ?? $word['category']);
+					$tpl->r_description	= ($_POST['category_description'] ?? $word['category_description']);
 				}
 			}
 			// (un)group item

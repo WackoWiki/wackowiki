@@ -27,7 +27,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="2">
 						[= p _ =
 							<input type="radio" id="group1" name="group" value="1" checked>
 							<label for="group1">[ ' _t: CategoriesAddGrouped ' ]<code>[ ' category | e ' ]</code>.</label><br>
@@ -52,12 +52,26 @@
 				<tr>
 					<td>
 						<label for="new_name">[ ' newname ' ]</label>
+					</td>
+					<td>
 						<input type="text" name="category" id="new_name" value="[ ' category | e attr ' ]" size="40" maxlength="100">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="category_description">[ ' _t: CategoryDescription ' ]</label>
+					</td>
+					<td>
+						<textarea id="category_description" name="category_description" rows="4" cols="51" maxlength="250">[ ' description | e ' ]</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<small>[ ' _t: CategoriesRenameInfo ' ]</small><br>
 						<input type="submit" name="rename" id="submit_new_name" value="[ ' _t: CategoriesSaveButton ' ]">
 						<a href="[ ' href: categories ' ]" class="btn-link">
 							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
 						</a>
-						<br><small>[ ' _t: CategoriesRenameInfo ' ]</small>
 					</td>
 				</tr>
 			</table><br>

@@ -6,6 +6,9 @@
 					<span>[ ' _t: PagesCategory ' ]: &laquo;<strong>[ ' words ' ]</strong>&raquo;</span>
 				</p>
 		=]
+		[= d _ =
+			<div class="note">[ ' description ' ]</div><br>
+		=]
 		<ol>
 			[= l _ =
 				<li>
