@@ -53,16 +53,19 @@ if (isset($this->categories))
 	foreach ($this->categories[$type_id] as $category_id => $category)
 	{
 		$href	= $this->href('', $page, ['category_id' => $category_id, 'type_id' => $type_id]);
+		$title	= Ut::perc_replace($this->_t('TaggedWithTip'), $category);
 
 		if ($list)
 		{
 			$tpl->o_l_category	= $category;
 			$tpl->o_l_href		= $href;
+			$tpl->o_l_title		= $title;
 		}
 		else
 		{
 			$tpl->d_l_category	= $category;
 			$tpl->d_l_href		= $href;
+			$tpl->d_l_title		= $title;
 
 			if ($i++ > 0)
 			{
