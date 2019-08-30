@@ -281,6 +281,7 @@ $wacko_translation = [
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 	'UpdateButton'				=> 'Uuenda',
 	'CategoriesOfCluster'		=> 'of cluster',
+	'TaggedWithTip'				=> 'kuva lehed märksõnaga %1',
 
 	// source handler
 	'SourceText'				=> 'Source',
