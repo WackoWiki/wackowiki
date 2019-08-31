@@ -4,7 +4,7 @@
 		<channel>
 			<title>[ ' db: site_name ' ] - [ ' tag ' ]</title>
 			<link>[ ' db: base_url ' ][ ' supertag ' ]</link>
-			<description>[ ' _t: PageRevisionsXML ' ] [ ' db: site_name ' ]/[ ' tag ' ]</description>
+			<description>[ ' _t: PageRevisionsXML ' ] [ ' db: site_name ' ]: [ ' tag ' ]</description>
 			<lastBuildDate>[ ' date ' ]</lastBuildDate>
 			<image>
 				<title>[ ' db: site_name ' ][ ' _t: CommentsTitleXML ' ]</title>

@@ -246,7 +246,7 @@
 							<label for="email">[ ' _t: EmailAddress ' ]</label>
 						</th>
 						<td>
-							<input type="email" id="email" name="email" value="[ ' email | e attr ' ]" size="40">&nbsp;
+							<input type="email" id="email" name="email" value="[ ' email ' ]" size="40">&nbsp;
 							<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' confirm ' ]" title="[ ' confirm ' ]" class="[ ' icon ' ]">
 							[= verify _ =
 								<div class="hint"><strong class="cite">
