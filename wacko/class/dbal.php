@@ -192,7 +192,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 	{
 		$data['affected_rows'] = $this->affected_rows;
 		file_put_contents($this->sqlfile, Ut::serialize($data));
-		chmod($this->sqlfile, SAFE_CHMOD);
+		chmod($this->sqlfile, CHMOD_SAFE);
 	}
 
 	// Invalidate the SQL cache

@@ -29,7 +29,10 @@ const CACHE_PAGE_DIR				= '_cache/page';
 const CACHE_SQL_DIR					= '_cache/query';
 const CACHE_TEMPLATE_DIR			= '_cache/template';
 const CACHE_SESSION_DIR				= '/tmp';				// '_cache/session'
-const SAFE_CHMOD					= 0640;					// better to use 0600 in production
+
+const CHMOD_SAFE					= 0640;					// better to use 0600 in production
+const CHMOD_FILE					= 0644;					// file creation mode
+const CHMOD_DIR						= 0755;					// directory creation mode
 
 const SITEMAP_XML					= 'sitemap.xml';
 

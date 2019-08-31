@@ -151,7 +151,7 @@ if (!isset($tables, $directories))
 
 	// define files dirs
 	$directories = [
-			// CACHE_FEED_DIR, // not configurable now!
+			// CACHE_FEED_DIR,
 			// CACHE_PAGE_DIR,
 			// CACHE_SQL_DIR,
 			UPLOAD_GLOBAL_DIR,
@@ -171,7 +171,7 @@ function ensure_dir($dir)
 		mkdir($dir);
 	}
 
-	@chmod($dir, 0755);
+	@chmod($dir, CHMOD_DIR);
 }
 
 // set backup directory
@@ -490,7 +490,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 
 	// save and close file
 	gzclose($file);
-	chmod($file_name, 0644);
+	chmod($file_name, CHMOD_FILE);
 
 	return $t;
 }
@@ -558,7 +558,7 @@ function get_files(&$engine, $pack, $dir, $root)
 					// close files
 					gzclose($filez);
 					fclose($filep);
-					chmod($packname, 0644);
+					chmod($packname, CHMOD_FILE);
 					$t++;	// total files processed
 				}
 				else
@@ -743,7 +743,7 @@ function put_files(&$engine, $pack, $dir, $keep = false)
 				// close files
 				fclose($filep);
 				gzclose($filez);
-				chmod($fullname, 0644);
+				chmod($fullname, CHMOD_FILE);
 				$total[0]++;
 			}
 		}
