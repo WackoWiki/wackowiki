@@ -152,7 +152,7 @@ function admin_db_backup(&$engine, &$module)
 			// off the sql) and close file
 			fwrite($file, $sql); // see array_pop($sql); on database.php
 			fclose($file);
-			chmod($filename, 0644);
+			chmod($filename, CHMOD_FILE);
 		}
 
 		// save backup log
@@ -185,7 +185,7 @@ function admin_db_backup(&$engine, &$module)
 		// write log file
 		fwrite($file, implode("\n", $contents));
 		fclose($file);
-		chmod($filename, 0644);
+		chmod($filename, CHMOD_FILE);
 
 		$engine->log(1, Ut::perc_replace($engine->_t('LogSavedBackup', SYSTEM_LANG), trim($pack, '/')));
 

@@ -144,7 +144,7 @@ function admin_config_appearance(&$engine, &$module)
 					}
 
 					move_uploaded_file($_FILES[$file]['tmp_name'], Ut::join_path(IMAGE_DIR, $result_name));
-					chmod(Ut::join_path(IMAGE_DIR, $result_name), 0644);
+					chmod(Ut::join_path(IMAGE_DIR, $result_name), CHMOD_FILE);
 
 					$config['site_' . $file]		= $result_name;
 

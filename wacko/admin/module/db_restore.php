@@ -32,11 +32,11 @@ function admin_db_restore(&$engine, &$module)
 //	{
 //		if (is_dir($dir . '/' . $file) !== true)
 //		{
-//			chmod($dir . '/' . $file, 0777);
+//			chmod($dir . '/' . $file, CHMOD_DIR);
 //		}
 //	}
 //	closedir($dh);
-//	chmod($dir, 0777);
+//	chmod($dir, CHMOD_DIR);
 //}
 
 #Ut::debug_print_r($_REQUEST);
