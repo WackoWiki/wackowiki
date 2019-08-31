@@ -54,7 +54,7 @@ class UriRouter
 			$text = Ut::serialize(array_merge([self::CODE_VERSION], $this->config));
 			// unable to write cache file considered are 'turn config caching off' feature
 			@file_put_contents($cache_file, $text);
-			@chmod($cache_file, SAFE_CHMOD);
+			@chmod($cache_file, CHMOD_SAFE);
 		}
 	}
 

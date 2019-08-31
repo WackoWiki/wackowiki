@@ -4,7 +4,7 @@ class SessionFileStore extends Session
 {
 	// config options:
 	public $cf_file_path	= '/tmp';
-	public $cf_file_mode	= SAFE_CHMOD;	// should be 0600 in production
+	public $cf_file_mode	= CHMOD_SAFE;	// should be 0600 in production
 	public $cf_file_encrypt	= 1;
 
 	private $prefix = false;

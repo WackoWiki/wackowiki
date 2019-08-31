@@ -90,7 +90,7 @@ class Http
 	private function save_page($data)
 	{
 		file_put_contents($this->file, $data);
-		chmod($this->file, SAFE_CHMOD);
+		chmod($this->file, CHMOD_SAFE);
 
 		$this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "cache SET " .
@@ -650,7 +650,7 @@ class Http
 				$text = Ut::serialize($types);
 				// unable to write cache file considered are 'turn config caching off' feature
 				@file_put_contents($cachefile, $text);
-				@chmod($cachefile, 0644);
+				@chmod($cachefile, CHMOD_FILE);
 			}
 		}
 

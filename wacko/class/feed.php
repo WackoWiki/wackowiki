@@ -33,7 +33,7 @@ class Feed
 	{
 		$file_name = Ut::join_path(XML_DIR, $name . '_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->engine->db->site_name)) . '.xml');
 		@file_put_contents($file_name, $body);
-		@chmod($file_name, 0644);
+		@chmod($file_name, CHMOD_FILE);
 	}
 
 	function changes()
@@ -369,6 +369,6 @@ class Feed
 		$xml .= '</urlset>' . "\n";
 
 		file_put_contents(SITEMAP_XML, $xml);
-		@chmod(SITEMAP_XML, 0644);
+		@chmod(SITEMAP_XML, CHMOD_FILE);
 	}
 }
