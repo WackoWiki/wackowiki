@@ -236,7 +236,7 @@ if (isset($_POST['upload']) & $can_upload)
 					{
 						// 3. save to permanent location
 						move_uploaded_file($_FILES['file']['tmp_name'], $dir . $result_name);
-						chmod($dir . $result_name, 0644);
+						chmod($dir . $result_name, CHMOD_FILE);
 
 						// replace
 						#clearstatcache();

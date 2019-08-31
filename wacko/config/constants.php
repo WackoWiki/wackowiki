@@ -29,7 +29,10 @@ const CACHE_PAGE_DIR				= '_cache/page';
 const CACHE_SQL_DIR					= '_cache/query';
 const CACHE_TEMPLATE_DIR			= '_cache/template';
 const CACHE_SESSION_DIR				= '/tmp';				// '_cache/session'
-const SAFE_CHMOD					= 0640;					// better to use 0600 in production
+
+const CHMOD_SAFE					= 0640;					// better to use 0600 in production
+const CHMOD_FILE					= 0644;					// file creation mode
+const CHMOD_DIR						= 0755;					// directory creation mode
 
 const SITEMAP_XML					= 'sitemap.xml';
 
@@ -94,4 +97,4 @@ const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
 const PHP_MIN_VERSION				= '7.0.0';				// minimum required PHP version
 const PHP_MAX_VERSION				= '7.3.0';				// maximum required PHP version
-const PHP_ERROR_REPORTING			= 0;					// PHP error reporting: 0 - off, 6 - all
+const PHP_ERROR_REPORTING			= 6;					// PHP error reporting: 0 - off, 6 - all
