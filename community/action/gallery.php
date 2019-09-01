@@ -190,10 +190,9 @@ if ($can_view)
 
 	if (!$nomark)
 	{
-		$tpl->mark		= true;
-		$tpl->emark		= true;
-
-		$tpl->title		= $title;
+		$tpl->mark			= true;
+		$tpl->mark_title	= $title;
+		$tpl->emark			= true;
 	}
 
 	if (!isset($_GET['file_id']) || (isset($_GET['token']) && $_GET['token'] != $param_token))
