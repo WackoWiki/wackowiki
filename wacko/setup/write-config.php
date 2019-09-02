@@ -57,7 +57,7 @@ if (is_writable($file_name))
 	if ($write_file == true)
 	{
 		// Try and make it non-writable
-		@chmod($file_name, CHMOD_FILE);
+		@chmod($file_name, CHMOD_SAFE);
 		$perm_changed = !is_writable($file_name);
 
 		echo output_image(true) . "</li>\n";
@@ -92,7 +92,7 @@ if (!$perm_changed)
 {
 	echo "			<li>" . Ut::perc_replace($lang['SecurityRisk'],
 							'<code>' . CONFIG_FILE . '</code>',
-							'<code>chmod 644 ' . CONFIG_FILE . '</code>') .
+							'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
 					"</li>\n";
 }
 
@@ -105,7 +105,7 @@ if ($write_file == false)
 	echo "			<li>" . Ut::perc_replace($lang['ErrorGivePrivileges'],
 							'<code>' . CONFIG_FILE . '</code>',
 							'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod 666 ' . CONFIG_FILE . '</code>',
-							'<code>chmod 644 ' . CONFIG_FILE . '</code>') .
+							'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
 					"</li>\n";
 }
 
