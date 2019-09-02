@@ -127,23 +127,23 @@ write_config_hidden_nodes(['none' => '']);
 	 */
 
 	// [0] - directory, file
-	// [1] - permissions (octal integer, precede the number with a 0 (zero)!)
+	// [1] - write permissions (octal integer, precede the number with a 0 (zero)!)
 	$file_permission = [
-		[CACHE_CONFIG_DIR,		0777],
-		[CACHE_FEED_DIR,		0777],
-		[CACHE_PAGE_DIR,		0777],
-		[CACHE_SESSION_DIR,		0777],
-		[CACHE_SQL_DIR,			0777],
-		[CACHE_TEMPLATE_DIR,	0777],
-		[CONFIG_FILE,			0777],
-		[SITE_LOCK,				0660],
-		[AP_LOCK,				0660],
-		[UPLOAD_BACKUP_DIR,		0777],
-		[UPLOAD_GLOBAL_DIR,		0777],
-		[UPLOAD_PER_PAGE_DIR,	0777],
-		[THUMB_DIR,				0777],
-		[XML_DIR,				0777],
-		[SITEMAP_XML,			0777],
+		[CACHE_CONFIG_DIR,		CHMOD_DIR],
+		[CACHE_FEED_DIR,		CHMOD_DIR],
+		[CACHE_PAGE_DIR,		CHMOD_DIR],
+		[CACHE_SESSION_DIR,		CHMOD_DIR],
+		[CACHE_SQL_DIR,			CHMOD_DIR],
+		[CACHE_TEMPLATE_DIR,	CHMOD_DIR],
+		[CONFIG_FILE,			CHMOD_FILE],
+		[SITE_LOCK,				CHMOD_FILE],
+		[AP_LOCK,				CHMOD_FILE],
+		[UPLOAD_BACKUP_DIR,		CHMOD_DIR],
+		[UPLOAD_GLOBAL_DIR,		CHMOD_DIR],
+		[UPLOAD_PER_PAGE_DIR,	CHMOD_DIR],
+		[THUMB_DIR,				CHMOD_DIR],
+		[XML_DIR,				CHMOD_DIR],
+		[SITEMAP_XML,			CHMOD_FILE],
 	];
 
 	$file_permissions_result = true;
@@ -157,7 +157,7 @@ write_config_hidden_nodes(['none' => '']);
 	// Try applying the correct permissions now and then display whether it worked or not, if they fail then the user will have to manually set the permissions
 	foreach ($file_permission as $permission)
 	{
-		@chmod ($permission[0], $permission[1]);
+		@chmod($permission[0], $permission[1]);
 		$result = is_writable($permission[0]);
 
 		if (!$result)
