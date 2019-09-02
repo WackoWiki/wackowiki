@@ -215,7 +215,7 @@ $lang = [
 'InstallationComplete' => 'Instalación completa',
 'ThatsAll' => 'Terminó! Ahora puede ingresar <a href="%1">al sitio WackoWiki</a>.',
 'SecurityConsiderations' => 'Consideraciones de Seguridad',
-'SecurityRisk' => 'Le recomendamos remover el privilegio de escritura para el archivo %1 ya que ahora está guardado. Si el archivo permanece con privilegios de escritura, puede correr un riesgo de seguridad!',
+'SecurityRisk' => 'Le recomendamos remover el privilegio de escritura para el archivo %1 ya que ahora está guardado. Si el archivo permanece con privilegios de escritura, puede correr un riesgo de seguridad!<br>i.e. %2',
 'RemoveSetupDirectory' => 'Debería eliminar ahora el directorio %1 ya que se finalizó la instalación.',
 'ErrorGivePrivileges' => 'No fue posible guardar el archivo de configuración %1. Debería dar temporalmente permisos al servidor web para el directorio de WackoWiki, o al menos un archivo en blanco llamado %1<br>%2<br>; no se olvide de remover los privilegios de escritura más adelante, i.e. %3.<br>Si por algun  motivo no lo logra hacer, debería copiar el texto abajo en un archivo nuevo, y guardarlo/subirlo como %1 al directorio de WackoWiki. Hecho esto el sitio WackoWiki debería funcionar. Si continúa con problemas, visite <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'En el paso siguiente el instalador intentará guardar el archivo con las configuraciones actualizadas, %1. Por favor asegurese que el servidor web tenga acceso de escritura al archivo, o lo tendrá que editar manualmente. Vea <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> por detalles.',
