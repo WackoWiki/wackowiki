@@ -607,7 +607,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make collector query
 		$sql =
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page AS p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
@@ -1141,7 +1141,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// make collector query
 		$sql =
-			"SELECT p.page_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .

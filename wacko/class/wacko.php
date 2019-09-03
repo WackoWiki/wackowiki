@@ -1696,7 +1696,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY tag " .
 			$pagination['limit'], true))
@@ -1725,7 +1725,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.supertag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY tag " .
 			$pagination['limit'], true))
@@ -1771,7 +1771,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
 		$selector .
 		"ORDER BY p.modified DESC " .
 		$pagination['limit'], true))

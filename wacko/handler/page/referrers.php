@@ -58,7 +58,7 @@ $px = $this->db->table_prefix;
 if ($mode == 'perpage')
 {
 	$query =
-		"SELECT r.page_id, COUNT(r.referrer) AS num, p.tag, p.title, p.page_lang " .
+		"SELECT r.page_id, COUNT(r.referrer) AS num, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 		"FROM " . $px . "referrer r " .
 			"LEFT JOIN " . $px . "page p ON ( p.page_id = r.page_id ) " .
 		"GROUP BY r.page_id " .
@@ -67,7 +67,7 @@ if ($mode == 'perpage')
 else if ($mode == 'bytime')
 {
 	$query =
-		"SELECT r.page_id, r.referrer_time, r.referrer, p.tag, p.title, p.page_lang " .
+		"SELECT r.page_id, r.referrer_time, r.referrer, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 		"FROM " . $px . "referrer r " .
 			"LEFT JOIN " . $px . "page p ON ( p.page_id = r.page_id ) " .
 		"ORDER BY r.referrer_time DESC";
