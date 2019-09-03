@@ -359,4 +359,3 @@ if (!$nomark)
 	echo "</nav>\n";
 }
 
-?>

@@ -74,4 +74,4 @@ if ($file_id)
 		$tpl->nobacklinks = true;
 	}
 }
-?>
+
