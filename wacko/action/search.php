@@ -58,7 +58,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
+		"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
 			MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) AS score,
 			u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page a " .
@@ -127,7 +127,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 
 	// load search results
 	$results = $this->db->load_all(
-		"SELECT a.page_id, a.title, a.tag, a.created, a.modified, a.comment_on_id, a.page_lang, a.page_size, comments,
+		"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.comment_on_id, a.page_lang, a.page_size, comments,
 			u.user_name, o.user_name as owner_name " .
 		"FROM " . $this->db->table_prefix . "page a " .
 			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .

@@ -295,7 +295,7 @@ class Feed
 
 		// collect data
 		$pages = $this->engine->load_all(
-			"SELECT p.page_id, p.tag, p.modified, p.page_lang " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.modified, p.page_lang " .
 			"FROM {$prefix}page p, " .
 				"{$prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .

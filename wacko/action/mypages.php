@@ -62,7 +62,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('bydate'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT page_id, tag, title, created, page_lang " .
+			"SELECT page_id, owner_id, user_id, tag, title, created, page_lang " .
 			$selector .
 			"ORDER BY created DESC, tag ASC " .
 			$pagination['limit'], true))
@@ -116,7 +116,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('bychange'));
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.modified, p.page_lang " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.modified, p.page_lang " .
 			$selector .
 			"GROUP BY tag " .
 			"ORDER BY modified DESC, tag ASC " .
@@ -168,7 +168,7 @@ if (($user_id = $this->get_user_id()))
 		$pagination = $this->pagination($count['n'], $max, 'p', $by(''));
 
 		if (($pages = $this->db->load_all(
-			"SELECT page_id, tag, title, modified, page_lang " .
+			"SELECT page_id, owner_id, user_id, tag, title, modified, page_lang " .
 			$selector .
 			"ORDER BY tag ASC " .
 			$pagination['limit'], true)))

@@ -42,7 +42,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	}
 
 	// make query
-	$sql =	"SELECT p.page_id, p.tag, p.title, p.description, p.page_lang " .
+	$sql =	"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.description, p.page_lang " .
 			"FROM " . $this->db->table_prefix . "page AS p, " .
 					  $this->db->table_prefix . "acl AS a " .
 			"WHERE p.page_id = a.page_id " .
@@ -105,7 +105,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 			// load latest comment
 			$comments = $this->db->load_all(
-				"SELECT a.page_id, a.tag, a.title, a.comment_on_id, a.user_id, a.owner_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name " .
+				"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.comment_on_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name " .
 				"FROM " . $this->db->table_prefix . "page a " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .

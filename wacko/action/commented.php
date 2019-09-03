@@ -40,7 +40,7 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 
 		// load complete comments
 		$comments = $this->db->load_all(
-			"SELECT a.page_id, a.tag, b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id,
+			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id,
 				a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id,
 				u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time " .
 			"FROM " . $this->db->table_prefix . "page a " .
