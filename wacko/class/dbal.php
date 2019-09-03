@@ -52,7 +52,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 			$this->db->query("SET SESSION sql_mode = '$sql_modes'");
 
 			// Set database collation
-			if ($this->database_collation) // @@collation_database
+			if ($this->database_collation)
 			{
 				$this->db->query("SET collation_connection = '$this->database_collation'");
 			}
