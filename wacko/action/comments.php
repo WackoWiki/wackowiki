@@ -31,7 +31,7 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 		$pagination = $this->pagination($count['n'], $limit);
 
 		$comments = $this->db->load_all(
-			"SELECT a.page_id, a.tag, b.tag as comment_on_tag, b.title as page_title, b.page_lang,
+			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag as comment_on_tag, b.title as page_title, b.page_lang,
 				a.title AS comment_title, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id " .
 			"FROM " . $this->db->table_prefix . "page a " .
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .

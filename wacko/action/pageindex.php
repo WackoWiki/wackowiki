@@ -142,7 +142,7 @@ $pages_to_display	= [];
 $page_ids			= [];
 
 if (($pages = $this->db->load_all(
-	"SELECT page_id, owner_id, tag, title, page_lang " .
+	"SELECT page_id, owner_id, user_id, tag, title, page_lang " .
 	$selector .
 	"ORDER BY " .
 		($title

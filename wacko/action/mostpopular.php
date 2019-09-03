@@ -108,7 +108,7 @@ else
 		$selector;
 
 	$sql	=
-		"SELECT DISTINCT a.page_id, a.tag, a.title, a.hits, a.page_lang " .
+		"SELECT DISTINCT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.hits, a.page_lang " .
 		$selector .
 		"ORDER BY a.hits DESC ";
 }
