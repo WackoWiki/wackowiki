@@ -6045,7 +6045,7 @@ class Wacko
 		}
 
 		// if current user is owner or admin, return true. they can do anything!
-		if ($user_name == '' && $user_name != GUEST)
+		if ($user_name != '' || $user_name != GUEST)
 		{
 			if ($this->is_owner($page_id) || $this->is_admin())
 			{
