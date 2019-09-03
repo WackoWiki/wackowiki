@@ -124,11 +124,9 @@ class Diag
 
 				if ($config['debug'] >= 3)
 				{
-					$query1 = $engine->db->load_all('SHOW VARIABLES LIKE "%character_set\_%";', true);
-					$query2 = $engine->db->load_all('SHOW VARIABLES LIKE "collation_connection";', true);
-					$r = array_merge($query1, $query2);
+					$query = "SHOW VARIABLES WHERE Variable_name LIKE 'character\_set\_%' OR Variable_name LIKE 'collation\_connection';";
 
-					if ($r)
+					if ($r = $engine->db->load_all($query, true))
 					{
 						echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
 
