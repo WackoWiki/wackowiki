@@ -6350,6 +6350,13 @@ class Wacko
 		{
 			if ($this->is_owner($page_id) || $this->is_admin())
 			{
+				$acl = explode("\n", $this->_acl['list']);
+
+				if (!in_array('*', $acl) && !in_array('$', $acl))
+				{
+					$this->_acl['list']	.= (!empty($this->_acl['list']) ? "\n" : '') . $user_name;
+				}
+
 				return true;
 			}
 		}
@@ -6578,6 +6585,50 @@ class Wacko
 		{
 			return false;
 		}
+	}
+
+	function show_access_mode($page_id = null, $tag = '',  $privilege = 'read')
+	{
+		if (!$page_id)	$page_id	= $this->page['page_id'];
+		if (!$tag)		$tag		= $this->page['tag'];
+
+		$user		= $this->get_user();
+		$access		= $this->has_access($privilege, $page_id);
+		$link		= $this->href('permissions', $tag);
+
+		$acl_modes = [
+			'denied'		=> 'AccessDenied',
+			'public'		=> 'AccessPublic',
+			'registered'	=> 'AccessRegistered',
+			'privat'		=> 'AccessPrivat',
+			'custom'		=> 'AccessCustom',
+		];
+
+		$acl = [];
+		$acl = explode("\n", $this->_acl['list']);
+
+		if (in_array('', $acl))
+		{
+			$mode = 'denied';
+		}
+		else if(in_array('*', $acl))
+		{
+			$mode = 'public';
+		}
+		else if(in_array('$', $acl))
+		{
+			$mode = 'registered';
+		}
+		else if(in_array(strtolower($user['user_name']), $acl) && count($acl) == 1)
+		{
+			$mode = 'privat';
+		}
+		else
+		{
+			$mode = 'custom';
+		}
+
+		return '<a href="' . $link . '" title="' . $this->_t('AccessMode') . '" class="tag acl-' . $mode . '">' . $this->_t($acl_modes[$mode]) . '</a>';
 	}
 
 	// WATCHES

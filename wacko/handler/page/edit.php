@@ -268,6 +268,8 @@ if ($this->has_access('read')
 		$tpl->l_charset		= $this->get_charset();
 	}
 
+	$tpl->l_accessmode		= $this->show_access_mode();
+
 	$preview		=	'';
 
 	// preview?
