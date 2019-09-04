@@ -4381,13 +4381,15 @@ class Wacko
 					}
 				}
 
+				$acl = explode("\n", $this->_acl['list']);
+
 				if (!$access || $this->_acl['list'] == '')
 				{
 					$class		= 'acl-denied';
 					$rel		= 'nofollow';
 					$accicon	= $this->_t('OuterIcon');
 				}
-				else if ($this->_acl['list'] == '*')
+				else if (in_array('*', $acl))
 				{
 					$class		= '';
 					$accicon	= '';
