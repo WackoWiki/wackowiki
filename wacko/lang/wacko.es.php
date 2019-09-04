@@ -223,6 +223,13 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - nombres de grupos de usuarios permitidos (alias)<br>' .
 									'<code>(una lista vacía)</code> - sólo el propietario de la página tiene acceso',
 
+	'AccessMode'				=> 'Visibility',
+	'AccessDenied'				=> 'denied',
+	'AccessPublic'				=> 'public',
+	'AccessRegistered'			=> 'registered',
+	'AccessPrivat'				=> 'privat',
+	'AccessCustom'				=> 'custom',
+
 	// purge handler
 	'PurgePage'					=> 'Purge page',
 	'NotOwnerAndCantPurge'		=> 'No puede limpiar esta página, porque no es el propietario de esta página.',

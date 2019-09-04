@@ -223,6 +223,13 @@ $wacko_translation = [
 									'<code>[BenutzerGruppe]</code> - Namen der erlaubten Benutzergruppen (alias)<br>' .
 									'<code>(eine leere Liste)</code> - nur der Seitenbesitzer hat das Recht',
 
+	'AccessMode'				=> 'Sichtbarkeit',
+	'AccessDenied'				=> 'verweigert',
+	'AccessPublic'				=> 'öffentlich',
+	'AccessRegistered'			=> 'registriert',
+	'AccessPrivat'				=> 'privat',
+	'AccessCustom'				=> 'benutzerdefiniert',
+
 	// purge handler
 	'PurgePage'					=> 'Seite bereinigen',
 	'NotOwnerAndCantPurge'		=> 'Du bist nicht der Besitzer dieser Seite und du kannst diese nicht bereinigen.',

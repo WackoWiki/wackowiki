@@ -4,7 +4,8 @@
 		[ ' warning ' ]
 		[= f _ =
 			[= l _ =
-				<span class="page-lang" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
+				<div class="page-properties">[ ' accessmode ' ]<br><br><br>
+				<span title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]&nbsp;&nbsp;</span></div>
 			=]
 			<form action="[ ' href: edit ' ]" method="post" name="edit_page" cf="true">
 				[ ' csrf: edit_page ' ]
