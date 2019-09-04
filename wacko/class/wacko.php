@@ -1471,7 +1471,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY tag " .
 			$pagination['limit'], true))
@@ -1500,7 +1500,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 			$selector .
 			"ORDER BY tag " .
 			$pagination['limit'], true))
@@ -1546,7 +1546,7 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT p.page_id, p.owner_id, p.tag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
 		$selector .
 		"ORDER BY p.modified DESC " .
 		$pagination['limit'], true))
@@ -4097,13 +4097,16 @@ class Wacko
 					}
 				}
 
+				#Ut::debug_print_r($this->_acl['list']);
+				$acl = explode("\n", $this->_acl['list']);
+
 				if (!$access || $this->_acl['list'] == '')
 				{
 					$class		= 'acl-denied';
 					$rel		= 'nofollow';
 					$accicon	= $this->_t('OuterIcon');
 				}
-				else if ($this->_acl['list'] == '*')
+				else if (in_array('*', $acl))
 				{
 					$class		= '';
 					$accicon	= '';
@@ -6049,6 +6052,14 @@ class Wacko
 		{
 			if ($this->is_owner($page_id) || $this->is_admin())
 			{
+				#Ut::debug_print_r($this->_acl['list']);
+				$acl = explode("\n", $this->_acl['list']);
+
+				if (!in_array('*', $acl) && !in_array('$', $acl))
+				{
+					$this->_acl['list']	.= (!empty($this->_acl['list']) ? "\n" : '') . $user_name;
+				}
+
 				return true;
 			}
 		}
@@ -6277,6 +6288,50 @@ class Wacko
 		{
 			return false;
 		}
+	}
+
+	function show_access_mode($page_id = null, $tag = '',  $privilege = 'read')
+	{
+		if (!$page_id)	$page_id	= $this->page['page_id'];
+		if (!$tag)		$tag		= $this->page['tag'];
+
+		$user		= $this->get_user();
+		$access		= $this->has_access($privilege, $page_id);
+		$link		= $this->href('permissions', $tag);
+
+		$acl_modes = [
+			'denied'		=> 'AccessDenied',
+			'public'		=> 'AccessPublic',
+			'registered'	=> 'AccessRegistered',
+			'privat'		=> 'AccessPrivat',
+			'custom'		=> 'AccessCustom',
+		];
+
+		$acl = [];
+		$acl = explode("\n", $this->_acl['list']);
+
+		if (in_array('', $acl))
+		{
+			$mode = 'denied';
+		}
+		else if(in_array('*', $acl))
+		{
+			$mode = 'public';
+		}
+		else if(in_array('$', $acl))
+		{
+			$mode = 'registered';
+		}
+		else if(in_array(strtolower($user['user_name']), $acl) && count($acl) == 1)
+		{
+			$mode = 'privat';
+		}
+		else
+		{
+			$mode = 'custom';
+		}
+
+		return '<a href="' . $link . '" title="' . $this->_t('AccessMode') . '" class="tag acl-' . $mode . '">' . $this->_t($acl_modes[$mode]) . '</a>';
 	}
 
 	// WATCHES
