@@ -476,12 +476,16 @@ footer {
 	display: inline;
 }
 
-.page-lang {
+.page-properties {
 	font-size: 11px;
 	color: #AAAAAA;
 	text-align: right;
-	float: left;
-	width: 100%;
+	float: right;
+	width: 30%;
+}
+.page-properties a {
+	color: #AAAAAA;
+	font-size: 11px;
 }
 
 /** File and comment-related *************************************************/

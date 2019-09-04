@@ -223,6 +223,13 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
 									'<code>(an empty list)</code> - only the page owner has access',
 
+	'AccessMode'				=> 'Visibility',
+	'AccessDenied'				=> 'denied',
+	'AccessPublic'				=> 'public',
+	'AccessRegistered'			=> 'registered',
+	'AccessPrivat'				=> 'privat',
+	'AccessCustom'				=> 'custom',
+
 	// purge handler
 	'PurgePage'					=> 'Rens side',
 	'NotOwnerAndCantPurge'		=> 'You are not the owner of the page and you can not purge it.',
