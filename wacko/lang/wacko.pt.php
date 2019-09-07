@@ -227,7 +227,7 @@ $wacko_translation = [
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
-	'AccessPrivat'				=> 'privat',
+	'AccessPrivat'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
 	// purge handler
