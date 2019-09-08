@@ -85,6 +85,7 @@ $alter_file_r5_4_10 = "ALTER TABLE {$pref}file ADD source_url VARCHAR(255) NOT N
 $rename_file_r5_4_0 = "RENAME TABLE {$pref}upload TO {$pref}file";
 
 $update_file_r5_4_0 = "UPDATE {$pref}file SET modified_dt = uploaded_dt WHERE modified_dt IS NULL";
+$update_file_r5_4_1 = "UPDATE {$pref}file SET file_lang = '" . _quote($config['language']) . "' WHERE file_lang IS NULL";
 
 // FILE LINK
 $tbl_file_link_r5_4_0 = "CREATE TABLE {$pref}file_link (" .
