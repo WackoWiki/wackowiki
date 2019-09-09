@@ -299,7 +299,7 @@ $ap_translation = [
 
 	'LanguageSection'			=> 'Language',
 	'DefaultLanguage'			=> 'Default language',
-	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings and the page address transliteration rules.',
+	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
