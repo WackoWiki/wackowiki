@@ -210,7 +210,7 @@ function admin_db_backup(&$engine, &$module)
 <?php
 		echo $engine->form_open('backup');
 ?>
-			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
+			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">
 				<tr>
 					<th class="t-right"><?php echo $engine->_t('BackupCluster'); ?>:</th>
 					<th colspan="2"><input type="text" name="root" size="30" value=""></th>
@@ -230,7 +230,7 @@ function admin_db_backup(&$engine, &$module)
 					$check = true;
 				}
 
-				echo '<tr class="hl-setting lined">' .
+				echo '<tr>' .
 						'<td class="label">' . $table['name'] . '</td>' .
 						'<td class="t-center">&nbsp;&nbsp;
 							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . '>

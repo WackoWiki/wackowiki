@@ -28,7 +28,7 @@ function admin_system_info(&$engine, &$module)
 	<br>
 	<?php echo $engine->_t('SysInfo');?>:<br>
 	<br>
-	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
+	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">
 		<tr>
 			<th style="width:120px;"><?php echo $engine->_t('SysParameter');?></th>
 			<th class="t-left"></th>
@@ -97,7 +97,7 @@ function admin_system_info(&$engine, &$module)
 
 	foreach ($sysinfo as $param => $value)
 	{
-		echo '<tr class="lined">' .
+		echo '<tr>' .
 				'<td class="label"><strong>' . $value[0] . '</strong></td>' .
 				'<td> </td>' .
 				'<td>' . $value[1] . '</td>' .
