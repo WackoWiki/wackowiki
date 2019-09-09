@@ -169,7 +169,7 @@ function admin_content_pages(&$engine, &$module)
 <?php
 		$engine->print_pagination($pagination);
 ?>
-		<table class="formation">
+		<table class="formation lined">
 			<tr>
 				<th style="width:5px;">ID</th>
 				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $ordertime]);?>"><?php echo $engine->_t('LogDate'); ?></a></th>
@@ -186,7 +186,7 @@ function admin_content_pages(&$engine, &$module)
 			// tz offset
 			$time_tz = $engine->sql2precisetime($row['modified']);
 
-			echo '<tr class="lined">' . "\n" .
+			echo '<tr>' . "\n" .
 					'<td class="t-center a-top">' . $row['page_id'] . '</td>' .
 					'<td class="t-center a-top"><small>' . $time_tz . '</small></td>' .
 					'<td class="a-top" style="padding-left:5px; padding-right:5px;">' . $row['tag'] . '</td>' .

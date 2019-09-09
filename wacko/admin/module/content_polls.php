@@ -155,7 +155,7 @@ function admin_content_polls(&$engine, &$module)
 		// current active polls
 		echo $engine->form_open('polls');
 
-		echo '<table class="formation">';
+		echo '<table class="formation lined">';
 		$list = $polls_obj->get_polls_list('current');
 
 		if (empty($list))
@@ -169,7 +169,7 @@ function admin_content_polls(&$engine, &$module)
 
 			foreach ($list as $row)
 			{
-				echo '<tr class="lined">';
+				echo '<tr>';
 					echo '<td class="label">
 						<input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;">
@@ -195,7 +195,7 @@ function admin_content_polls(&$engine, &$module)
 			echo $engine->form_open('polls');
 
 
-		echo '<table class="formation">';
+		echo '<table class="formation lined">';
 		$list = $polls_obj->get_polls_list('moderation');
 
 		if (empty($list))
@@ -221,7 +221,7 @@ function admin_content_polls(&$engine, &$module)
 
 					foreach ($vars as $var)
 					{
-						echo '<tr class="lined"><td>' . $var['text'] . '</td></tr>';
+						echo '<tr><td>' . $var['text'] . '</td></tr>';
 					}
 
 					echo '</table></td>';
@@ -244,7 +244,7 @@ function admin_content_polls(&$engine, &$module)
 		echo $engine->form_open('polls');
 
 
-		echo '<table class="formation">';
+		echo '<table class="formation lined">';
 		// make list
 		if ($year != 0)	$list	= $polls_obj->get_polls_list('archive', $year);
 		else			$list	= $polls_obj->get_polls_list('ended');
@@ -260,7 +260,7 @@ function admin_content_polls(&$engine, &$module)
 
 			foreach ($list as $row)
 			{
-				echo '<tr class="lined">';
+				echo '<tr>';
 					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;"><a href="' .
 						rawurldecode($engine->href('', '', ['year' => $year, 'poll_id' => $row['poll_id'], 'results' => 1])) . '">' .
