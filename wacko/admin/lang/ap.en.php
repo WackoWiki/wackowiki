@@ -520,8 +520,6 @@ $ap_translation = [
 	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies',
 	'PersistentCookiesInfo'		=> 'Allow persistent cookies.',
-	'AntiDupe'					=> 'Anti-clone',
-	'AntiDupeInfo'				=> 'Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.',
 	'DisableWikiName'			=> 'Disable WikiName',
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
 	'AllowEmailReuse'			=> 'Allow email address re-use',

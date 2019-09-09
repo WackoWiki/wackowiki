@@ -714,89 +714,6 @@ class Wacko
 
 	// PAGES
 
-	/**
-	* Transliterate tag to supertag
-	*
-	* @param string $tag
-	* @param integer $strtolow Change tag case. TRAN_DONTCHANGE - don't change TRAN_LOWERCASE - convert to lowercase
-	* @param integer $donotload WTF: doesn't use
-	*
-	* @return string
-	*/
-	function translit($tag, $strtolow = TRANSLIT_LOWERCASE, $donotload = TRANSLIT_LOAD, $lang = null)
-	{
-		// Lookup transliteration result in the cache and return it if found
-		static $translit_cache;
-		$cach_key = $tag . $strtolow . $donotload;
-
-		if (isset($translit_cache[$cach_key]))
-		{
-			return $translit_cache[$cach_key];
-		}
-
-		$_lang = null;
-
-		if (!$this->db->multilanguage)
-		{
-			$donotload = 1;
-		}
-
-		if (!$donotload)
-		{
-			if (!$lang)
-			{
-				if ($page = $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
-				{
-					if (isset($page['page_lang']))
-					{
-						$lang = $page['page_lang'];
-					}
-					else
-					{
-						$lang = $this->db->language;
-					}
-				}
-			}
-
-			if ($lang)
-			{
-				// store old language setting
-				$_lang = $this->language['code'];
-
-				// set new language setting
-				$this->set_language($lang);
-			}
-		}
-
-		$tag	= str_replace('//',		'/',	$tag);
-		$tag	= str_replace('-',		'',		$tag);
-		$tag	= str_replace(' ',		'',		$tag);
-		$tag	= str_replace("'",		'_',	$tag);
-		$_tag	= mb_strtolower($tag);
-
-
-		$tag = @mb_strtr($tag, $this->language['TranslitLettersFrom'], $this->language['TranslitLettersTo']);
-		$tag = @mb_strtr($tag, $this->language['TranslitBiLetters']);
-
-		if ($strtolow)
-		{
-			$tag = mb_strtolower($tag);
-		}
-
-		// reset to original language setting
-		if ($_lang)
-		{
-			$this->set_language($_lang);
-		}
-
-		$result = rtrim($tag, '/');
-
-		// Put transliteration result in the cache
-		$translit_cache[$cach_key] = $result;
-
-		return $result;
-	}
-
 	function get_keywords()
 	{
 		$meta_keywords = '';
@@ -3062,7 +2979,7 @@ class Wacko
 	* @param mixed $params		Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
 	* @param boolean $addpage	Optional
 	* @param string $anchor		Optional HTTP anchor-fragment
-	* @param boolean $alter		Optional uses slim_url and translit (turn off for e.g. addpage or hashid routing)
+	* @param boolean $alter		Optional uses slim_url (turn off for e.g. addpage or hashid routing)
 	*
 	* @return string			HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
@@ -4772,7 +4689,6 @@ class Wacko
 				}
 			}
 
-			// translit
 			if (strpos($url, $this->db->base_url) !== false)
 			{
 				$sub = mb_substr($url, mb_strlen($this->db->base_url));
@@ -5163,8 +5079,6 @@ class Wacko
 
 	// USERS
 	// check whether defined username is already registered.
-	// we add appropriate (but not thorough) transliterations
-	// to not allow too similiar names.
 	function user_name_exists($user_name)
 	{
 		if ($user_name == '')
@@ -5172,81 +5086,12 @@ class Wacko
 			return false;
 		}
 
-		// checking identical name only?
-		if (!$this->db->antidupe)
-		{
-			if ($this->db->load_single(
+		// checking for identical name
+		if ($this->db->load_single(
 			"SELECT user_id " .
 			"FROM " . $this->db->user_table . " " .
 			"WHERE user_name = " . $this->db->q($user_name) . " " .
 			"LIMIT 1"))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		// substitutions table
-		$table = [
-			'cyr' => 'АВСДЕНКМОРТХУасекмпоргитху0бI1',
-			'lat' => 'ABCDEHKMOPTXYacekmnoprutxyÎ6ll',
-		];
-
-		// splitting input name into array
-		$user_name = preg_split('//', $user_name, -1, PREG_SPLIT_NO_EMPTY);
-
-		// let's define characters positions and corresponding substitutions.
-		// so we're constructing $p array with username chars needing
-		// substitution positions as keys, and corresponding table positions
-		// as array values
-		$p = [];
-
-		foreach ($user_name as $pos => &$char)
-		{
-			if (isset($p[$pos]) === false)
-			{
-				if (false !== $sub = mb_strpos($table['lat'], $char))
-				{
-					$p[$pos] = $sub;
-				}
-				else if (false !== $sub = mb_strpos($table['cyr'], $char))
-				{
-					$p[$pos] = $sub;
-				}
-			}
-		}
-
-		// exploding substitutions table into array
-		foreach ($table as &$val)
-		{
-			$val = preg_split('//', $val, -1, PREG_SPLIT_NO_EMPTY);
-		}
-
-		// running through all chars positions needing replacement
-		foreach ($p as $pos => $sub)
-		{
-			// what substitution character we have to use?
-			if ($user_name[$pos] != $table['cyr'][$sub])
-			{
-				// constructing cyrillic regexp addition
-				$user_name[$pos] = '[' . $user_name[$pos] . $table['cyr'][$sub] . ']';
-			}
-			else if ($user_name[$pos] != $table['lat'][$sub])
-			{
-				// constructing latin regexp addition
-				$user_name[$pos] = '[' . $user_name[$pos] . $table['lat'][$sub] . ']';
-			}
-		}
-
-		// checking database
-		if ($this->db->load_single(
-		"SELECT user_id " .
-		"FROM " . $this->db->user_table . " " .
-		"WHERE user_name REGEXP " . $this->db->q(implode('', $user_name)) . " " .
-		"LIMIT 1", true))
 		{
 			return true;
 		}

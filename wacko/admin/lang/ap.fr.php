@@ -512,8 +512,6 @@ $ap_translation = [
 	'ApproveNewUserInfo'		=> 'Permet aux administrateurs d\'approuver les utilisateurs une fois qu\'ils se sont enregistrés. Seuls les utilisateurs approuvés seront autorisés à se connecter sur le site.',
 	'PersistentCookies'			=> 'Cookies persistants',
 	'PersistentCookiesInfo'		=> 'Autoriser les cookies persistants.',
-	'AntiDupe'					=> 'Anti-clone',
-	'AntiDupeInfo'				=> 'Disable register on the website under the names, <span class="underline">like</span> on the names of existing users (guests also can not use similar names for the signature comments). When this option is checked only <span class="underline">identical</span> names.',
 	'DisableWikiName'			=> 'Désactiver le NomWiki',
 	'DisableWikiNameInfo'		=> 'Désactivez l\'utilisation obligatoire du NomWiki. Permet d\'enregistrer les utilisateurs avec des surnoms traditionnels, et non forcés NameSurname.',
 	'AllowEmailReuse'			=> 'Autoriser la réutilisation de l\'adresse e-mail',

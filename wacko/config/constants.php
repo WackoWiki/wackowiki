@@ -80,11 +80,6 @@ const AUTO_REWRITE					= 1;					// 0 - off, turns off auto rewrite for debugging
 const SQL_MODE_STRICT				= 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_BY';
 const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
 
-const TRANSLIT_DONTCHANGE			= 0;
-const TRANSLIT_LOWERCASE			= 1;
-const TRANSLIT_LOAD					= 0;
-const TRANSLIT_DONTLOAD				= 1;
-
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
 const WACKO_VERSION					= '6.0.alpha1';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
