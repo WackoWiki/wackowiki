@@ -42,7 +42,6 @@ function admin_config_security(&$engine, &$module)
 		$config['captcha_edit_page']			= (int) ($_POST['captcha_edit_page'] ?? 0);
 		$config['captcha_registration']			= (int) ($_POST['captcha_registration'] ?? 0);
 		$config['allow_persistent_cookie']		= (int) ($_POST['allow_persistent_cookie'] ?? 0);
-		$config['antidupe']						= (int) ($_POST['antidupe'] ?? 0);
 		$config['disable_wikiname']				= (int) ($_POST['disable_wikiname'] ?? 0);
 		$config['allow_email_reuse']			= (int) ($_POST['allow_email_reuse'] ?? 0);
 		$config['tls']							= (int) ($_POST['tls'] ?? 0);
@@ -114,18 +113,6 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<input type="checkbox" id="allow_persistent_cookie" name="allow_persistent_cookie" value="1"<?php echo ($engine->db->allow_persistent_cookie ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="antidupe"><strong><?php echo $engine->_t('AntiDupe');?>:</strong><br>
-					<small><?php echo $engine->_t('AntiDupeInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="antidupe" name="antidupe" value="1"<?php echo ($engine->db->antidupe ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">

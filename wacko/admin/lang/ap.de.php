@@ -521,8 +521,6 @@ $ap_translation = [
 	'PersistentCookies'			=> 'Dauerhafte Cookies',
 	'PersistentCookiesInfo'		=> 'Erlaube dauerhafte Cookies.',
 
-	'AntiDupe'					=> 'Anti-clone',
-	'AntiDupeInfo'				=> 'Verweigern der Registrierung von Namen, die <span class = "underline">ähnlich</span> zu vorhanden Benutzernamen sind (Gäste können diese Namen auch nicht zum Unterschreiben von Kommentaren verwenden). Wenn die Option deaktiviert ist, nur bei <span class = "underline">identischen</span> Namen.',
 	'DisableWikiName'			=> 'Deaktiviere WikiName',
 	'DisableWikiNameInfo'		=> 'Deaktiviert die die obligatorische Verwendung von WikiNamen. Ermöglicht die Registrierung von Benutzern mit traditionellen Spitznamen, NameVorname ist nicht zwingend.',
 	'AllowEmailReuse'			=> 'Erlaubt die Wiederverwendung von E-Mail-Adressen',
