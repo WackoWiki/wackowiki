@@ -802,7 +802,6 @@ $wacko_translation = [
 	'SettingsLatex'				=> 'LaTeX-versie',
 	'SettingsXML'				=> 'Export to XML',
 	'NeedToChangeLang'			=> 'Niet-ondersteunde paginataal "<code>%1</code>" moet worden gewijzigd.',
-	'BewareChangeLang'			=> 'Verander de taal van de pagina niet, tenzij u precies weet wat u aan het doen bent. Het hernoemen van deze pagina leidt ertoe dat links in de oorspronkelijke taal ongeldig worden. U kunt dit terugdraaien door de pagina in te stellen op de oorspronkelijke taal.',
 	'SetLang'					=> 'Taal van deze pagina',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Show in navigation',

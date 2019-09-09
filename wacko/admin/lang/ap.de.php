@@ -299,7 +299,7 @@ $ap_translation = [
 
 	'LanguageSection'			=> 'Sprache',
 	'DefaultLanguage'			=> 'Standard Sprache',
-	'DefaultLanguageInfo'		=> 'Definiert die Spracheinstellung für (nicht registrierte) Gäste sowie die Gebietsschemaeinstellungen und die Transliterationsregeln für Seitennamen.',
+	'DefaultLanguageInfo'		=> 'Definiert die Spracheinstellung für (nicht registrierte) Gäste sowie die Gebietsschemaeinstellungen.',
 	'MultiLanguage'				=> 'Unterstützung mehrerer Sprachen',
 	'MultiLanguageInfo'			=> 'Enthält eine Auswahl an Sprachen auf Seitenbasis.',
 	'AllowedLanguages'			=> 'Erlaubte Sprachen',

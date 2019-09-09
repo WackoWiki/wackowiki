@@ -802,7 +802,6 @@ $wacko_translation = [
 	'SettingsLatex'				=> 'Versión LaTeX',
 	'SettingsXML'				=> 'Export to XML',
 	'NeedToChangeLang'			=> 'No soportado para idioma "<code>%1</code>" debe cambiar.',
-	'BewareChangeLang'			=> 'No cambies el idioma, si no sabes exactamente lo que haces. El ajuste de cambio de idioma presupone cambiar el nombre de la página en acuerdo con las reglas de transliteración del idioma seleccionado. Todo contenido no-español será ilegible. Podrá anular esos efectos volviendo a ajustar el idioma original.',
 	'SetLang'					=> 'Idioma de esta página',
 	'SetMenuLabel'				=> 'Etiqueta del menú',
 	'SetShowMenuLabel'			=> 'Mostrar en navegación',
