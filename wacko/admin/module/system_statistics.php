@@ -37,7 +37,7 @@ function admin_system_statistics(&$engine, &$module)
 	<?php echo $engine->_t('DbStatSection');?>:
 	<br>
 	<br>
-	<table style="max-width:500px;" class="formation">
+	<table style="max-width:500px;" class="formation lined">
 		<tr>
 			<th style="width:50px;"><?php echo $engine->_t('DbTable');?></th>
 			<th class="t-left"><?php echo $engine->_t('DbRecords');?></th>
@@ -58,7 +58,7 @@ function admin_system_statistics(&$engine, &$module)
 		{
 			if ($table['Name'] == $wtable['name'])
 			{
-				echo '<tr class="lined">' .
+				echo '<tr>' .
 						'<th class="label"><strong>' . $table['Name'] . '</strong></th>' .
 						'<td>&nbsp;&nbsp;&nbsp;' . number_format($table['Rows'], 0, ',', '.') . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Data_length'], false, true, true) . '</td>' .
@@ -76,7 +76,7 @@ function admin_system_statistics(&$engine, &$module)
 		}
 	}
 ?>
-		<tr class="lined">
+		<tr>
 			<td class="label"><strong><?php echo $engine->_t('DbTotal');?>:</strong></td>
 			<td><strong>&nbsp;&nbsp;&nbsp;<?php echo number_format($trows, 0, ',', '.'); ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tdata, false, true, true); ?></strong></td>
@@ -88,7 +88,7 @@ function admin_system_statistics(&$engine, &$module)
 	<?php echo $engine->_t('FileStatSection');?>:
 	<br>
 	<br>
-	<table style="max-width:300px;" class="formation">
+	<table style="max-width:300px;" class="formation lined">
 		<tr>
 			<th style=""><?php echo $engine->_t('FileFolder');?></th>
 			<th class="t-left"><?php echo $engine->_t('FileFiles');?></th>
@@ -116,7 +116,7 @@ function admin_system_statistics(&$engine, &$module)
 			$tfiles += $files;
 			$tsize += $size;
 
-			echo '<tr class="lined">' .
+			echo '<tr>' .
 					'<td class="label"><strong>' . $dir . '</strong></td>' .
 					'<td>&nbsp;&nbsp;&nbsp;' . $files . '</td>' .
 					'<td>' . $engine->binary_multiples($size, false, true, true) . '</td>' .
@@ -124,7 +124,7 @@ function admin_system_statistics(&$engine, &$module)
 		}
 	}
 ?>
-		<tr class="lined">
+		<tr>
 			<td class="label"><strong><?php echo $engine->_t('FileTotal');?>:</strong></td>
 			<td>&nbsp;&nbsp;&nbsp;<strong><?php echo $tfiles; ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tsize, false, true, true); ?></strong></td>

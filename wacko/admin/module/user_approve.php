@@ -341,7 +341,7 @@ function admin_user_approve(&$engine, &$module)
 
 	$engine->print_pagination($pagination);
 ?>
-	<table class="formation listcenter">
+	<table class="formation listcenter lined">
 		<colgroup>
 			<col span="1" style="width:5px;">
 			<col span="1" style="width:20px;">
@@ -375,7 +375,7 @@ function admin_user_approve(&$engine, &$module)
 		foreach ($users as $row)
 		{
 			echo
-			'<tr class="lined">' . "\n" .
+			'<tr>' . "\n" .
 				'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
 				#'<td class="label a-middle" style="width:10px;">' .
 				#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .

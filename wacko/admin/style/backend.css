@@ -213,10 +213,10 @@ th.label {
 	border-right: 1px solid #CC0000;
 	/* border-bottom: 0 !important; */
 }
-tr.lined td {
+
+.lined td {
 	border-bottom: 1px dotted #BABFC7;
 }
-
 .lined tr:hover,
 .hl-setting:hover {
 	background:none repeat scroll 0 0 #CCFFCC !important;
