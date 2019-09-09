@@ -375,34 +375,35 @@ function admin_user_users(&$engine, &$module)
 		echo $engine->form_open('add_user');
 
 		echo '<h2>' . $engine->_t('UsersAddNew') . '</h2>';
-		echo '<table class="formation">' .
+		echo '<table class="formation lined">' .
 				'<tr>
-					<td>
+					<th>
 						<label for="newname">' . $engine->_t('UserName') . '</label>' .
-					'</td>
+					'</th>
 					<td>
 						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100" required>
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="newrealname">' . $engine->_t('RealName') . '</label>' .
-					'<td>
+					'</th>
+					<td>
 						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? '')) . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="email">' . $engine->_t('Email') . '</label>
-					</td>' .
+					</th>' .
 					'<td>
 						<input type="email" id="email" name="email" value="' . Ut::html(($_POST['email'] ?? '')) . '" size="50" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
-					</td>' .
+					</th>' .
 					'<td>
 						<select id="user_lang" name="user_lang">';
 
@@ -420,15 +421,15 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
-						</td>' .
+					</th>' .
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (!isset($_POST['enabled']) ? ' checked' : '') . '>
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<td colspan="2">
 						<br>
 						<input type="submit" id="submit" name="create" value="' . $engine->_t('GroupsSaveButton') . '"> ' .
 						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
@@ -452,35 +453,35 @@ function admin_user_users(&$engine, &$module)
 			echo $engine->form_open('edit_user');
 
 			echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">' . "\n" .
-				'<table class="formation">' .
+				'<table class="formation lined">' .
 				'<tr>
-					<td>
+					<th>
 						<label for="newname">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
-					</td>' .
+					</th>' .
 					'<td>
 						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? $user['user_name'])) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="newrealname">' . $engine->_t('RealName') . '</label> ' .
-					'</td>
+					'</th>
 					<td>
 						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? $user['real_name'])) . '" size="50" maxlength="100">
 					</td>' .
 				'</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="newemail">' . $engine->_t('Email') . '</label> ' .
-					'</td>
+					'</th>
 					<td>
 						<input type="email" id="newemail" name="newemail" value="' . Ut::html(($_POST['newemail'] ?? $user['email'])) . '" size="50" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
-					</td>
+					</th>
 					<td>
 						<select id="user_lang" name="user_lang">
 							<option value=""></option>';
@@ -499,9 +500,9 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="theme">' . $engine->_t('ChooseTheme') . '</label>
-					</td>
+					</th>
 					<td>
 						<select id="theme" name="theme">';
 
@@ -516,17 +517,17 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
-					<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
-					</td>' .
+					<th>
+						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
+					</th>' .
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . '>
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<th>
 						<label for="account_status">' . $engine->_t('AccountStatus') . '</label>
-					</td>
+					</th>
 					<td>
 						<select id="account_status" name="account_status">';
 
@@ -545,12 +546,12 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<td>
+					<td colspan="2">
 						<br>
+						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
+						'<br><br>
 						<input type="submit" id="submit" name="edit" value="' . $engine->_t('GroupsSaveButton') . '"> ' .
 						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('GroupsCancelButton') . '"></a>' .
-						'<br>
-						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
 					'</td>
 				</tr>' .
 			'</table>
@@ -623,34 +624,34 @@ function admin_user_users(&$engine, &$module)
 		?>
 		<input type="hidden" name="user_id" value="<?php echo (int) $user_id; ?>">
 
-		<table class="formation">
+		<table class="formation lined">
 		<?php
 
-			echo '<tr class="lined">' . "\n" .
+			echo '<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('UserName') . '</th>' .
 					'<td><strong>' . $user['user_name'] . '</strong></td>' .
 				'</tr>' .
-				'<tr class="lined">' . "\n" .
+				'<tr>' . "\n" .
 					'<th  class="label">' . $engine->_t('RealName') . '</th>' .
 					'<td>' . $user['real_name'] . '</td>' .
 				'</tr>' .
-				'<tr class="lined">' . "\n" .
+				'<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('EmailAddress') . '</th>' .
 					'<td>' . $user['email'] . '</td>' .
 				'</tr>' .
-				'<tr class="lined">' . "\n" .
+				'<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('YourLanguage') . '</th>' .
 					'<td>' . $user['user_lang'] . '</td>' .
 				'</tr>' .
-				'<tr class="lined">' . "\n" .
+				'<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('ChooseTheme') . '</th>' .
 					'<td>' . $user['theme'] . '</td>' .
 				'</tr>' .
-				'<tr class="lined">' . "\n" .
+				'<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('UserEnabled') . '</th>' .
 					'<td>' . $user['enabled'] . '</td>' .
 				'</tr>' .
-				'<tr class="lined">' . "\n" .
+				'<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('AccountStatus') . '</th>' .
 					'<td>' . $status[$user['account_status']] . '</td>' .
 				'</tr>';
@@ -875,7 +876,7 @@ function admin_user_users(&$engine, &$module)
 
 		$engine->print_pagination($pagination);
 ?>
-		<table class="formation listcenter">
+		<table class="formation listcenter lined">
 			<colgroup>
 				<col span="1" style="width:5px;">
 				<col span="1" style="width:5px;">
@@ -917,7 +918,7 @@ function admin_user_users(&$engine, &$module)
 		{
 			foreach ($users as $row)
 			{
-				echo '<tr class="lined">' . "\n" .
+				echo '<tr>' . "\n" .
 						'<td class="label a-middle" style="width:10px;">
 							<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
 						</td>' .
