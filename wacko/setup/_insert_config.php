@@ -27,7 +27,7 @@ if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
 }
 
 // check for language related default values
-if ($config['is_update'] == false)
+if ($config['is_update'] == false || version_compare($config['wacko_version'], '6.0.alpha1', '<'))
 {
 	$config = array_merge($config, $lang['ConfigDefaults']);
 }
@@ -49,7 +49,6 @@ $config_db['allow_themes']					= $config['allow_themes'];
 $config_db['allow_themes_per_page']			= $config['allow_themes_per_page'];
 $config_db['allow_x11colors']				= $config['allow_x11colors'];
 $config_db['allowed_languages']				= $config['allowed_languages'];
-$config_db['antidupe']						= $config['antidupe'];
 $config_db['ap_failed_login_count']			= $config['ap_failed_login_count'];
 $config_db['ap_max_login_attempts']			= $config['ap_max_login_attempts'];
 $config_db['approve_new_user']				= $config['approve_new_user'];

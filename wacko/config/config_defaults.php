@@ -159,11 +159,11 @@ $wacko_config_defaults = [
 	'removals_page'					=> '',
 	'wanted_page'					=> '',
 	'orphaned_page'					=> '',
-	'search_page'					=> '',	// Search
-	'login_page'					=> '',	// Login
+	'search_page'					=> 'Search',
+	'login_page'					=> 'Login',
 	'account_page'					=> 'Account',
-	'registration_page'				=> '',	// Registration
-	'password_page'					=> '',	// Password
+	'registration_page'				=> 'Registration',
+	'password_page'					=> 'Password',
 
 	'default_write_acl'				=> '$',
 	'default_read_acl'				=> '*',
@@ -183,7 +183,6 @@ $wacko_config_defaults = [
 	'publish_anonymously'			=> 0,
 
 	'allow_registration'			=> 0,
-	'antidupe'						=> 0,
 	'autosubscribe'					=> 1,
 	'disable_wikiname'				=> 1,
 	'username_chars_min'			=> 3,
