@@ -111,7 +111,7 @@ class Feed
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, p.comments, p.page_lang " .
 			"FROM {$prefix}page p, " .
 				"{$prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
@@ -160,7 +160,7 @@ class Feed
 
 		$i = 0;
 
-		if (pages)
+		if ($pages)
 		{
 			foreach ($pages as $page)
 			{
