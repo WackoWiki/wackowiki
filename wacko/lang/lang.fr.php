@@ -11,8 +11,8 @@ $wacko_language = [
 	'dir'					=> "ltr",
 	'charset'				=> "utf-8",
 	'locale'				=> "fr_FR.UTF-8",
-	'UPPER_P'				=> "A-ZÀ-ÖØ-Ý",
-	'LOWER_P'				=> "a-zß-öø-ýÿ\/''",
-	'ALPHA_P'				=> "A-Za-zÀ-ÖØ-Ýß-öø-ýÿ\_\-\/'",
+	'UPPER_P'				=> "\p{Lu}",
+	'LOWER_P'				=> "\p{Ll}",
+	'ALPHA_P'				=> "\p{L}\p{Nd}\_\-\/",
 ];
 
