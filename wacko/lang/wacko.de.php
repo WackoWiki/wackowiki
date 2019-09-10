@@ -321,7 +321,6 @@ $wacko_translation = [
 	'EditCancelButton'			=> 'Abbrechen',
 	'EditPreviewButton'			=> 'Vorschau',
 	'EditPreview'				=> 'Vorschau',
-	'EditPreviewSlim'			=> 'Vorschau',
 	'Chars'						=> 'Zeichen',
 	'EditNote'					=> 'Kommentar',
 	'EditNoteMissing'			=> 'Zusammenfassung fehlt',

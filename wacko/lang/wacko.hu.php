@@ -321,7 +321,6 @@ $wacko_translation = [
 	'EditCancelButton'			=> 'Mégsem',
 	'EditPreviewButton'			=> 'Előnézet',
 	'EditPreview'				=> 'Előnézet',
-	'EditPreviewSlim'			=> 'Előnézet',
 	'Chars'						=> 'chars',
 	'EditNote'					=> 'A változások összefoglalása',
 	'EditNoteMissing'			=> 'Edit summary missing',
