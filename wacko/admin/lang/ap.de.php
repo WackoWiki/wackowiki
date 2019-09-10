@@ -743,7 +743,7 @@ $ap_translation = [
 
 	'SearchPage'				=> 'Suche',
 	'SearchPageInfo'			=> 'Seite mit dem Suchformular (Aktion <code>{{search}}</code>).',
-	'RegistrationPage'			=> 'Register on our site',
+	'RegistrationPage'			=> 'Registration',
 	'RegistrationPageInfo'		=> 'Seite für neue Benutzerregistrierung (Aktion <code>{{registration}}</code>).',
 	'LoginPage'					=> 'Benutzer-Anmeldung',
 	'LoginPageInfo'				=> 'Seite zur Anmeldung (Aktion <code>{{login}}</code>).',

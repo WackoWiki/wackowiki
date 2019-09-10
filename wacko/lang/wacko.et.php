@@ -323,7 +323,6 @@ $wacko_translation = [
 	'EditCancelButton'			=> 'Loobun',
 	'EditPreviewButton'			=> 'Eelvaade',
 	'EditPreview'				=> 'Eelvaade',
-	'EditPreviewSlim'			=> 'Eelvaade',
 	'Chars'						=> 'chars',
 	'EditNote'					=> 'Redigeeri kokkuvõte',
 	'EditNoteMissing'			=> 'Edit summary missing',
