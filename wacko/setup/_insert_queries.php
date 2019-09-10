@@ -280,6 +280,9 @@ $upgrade['5.5.12'][]	= ['alter',		'page',				$alter_page_r5_5_0];
 
 $upgrade['5.5.12'][]	= ['update',	'page',				$update_page_r5_5_0];
 
+// keep this order, after $update_page_r5_5_0!
+$upgrade['5.5.12'][]	= ['update',	'menu',				$update_menu_r5_5_1];
+
 // page link
 $upgrade['5.5.12'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 
