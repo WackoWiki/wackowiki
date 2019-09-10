@@ -111,7 +111,7 @@ class Feed
 
 		//  collect data
 		$pages = $this->engine->load_all(
-			"SELECT p.page_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, p.comments, p.page_lang " .
+			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
 			"FROM {$prefix}page p, " .
 				"{$prefix}acl AS a " .
 			"WHERE p.page_id = a.page_id " .
@@ -171,7 +171,7 @@ class Feed
 				// this is a news article
 				$title	= $page['title'];
 				$link	= $this->engine->href('', $page['tag']);
-				$pdate	= date('r', strtotime($page['modified']));
+				$pdate	= date('r', strtotime($page['created']));
 				$coms	= $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments']);
 
 				// recompile if necessary
@@ -288,7 +288,7 @@ class Feed
 						'</title>' . "\n";
 					$xml .= '<link>' . $this->engine->href('', $comment['tag'], '') . '</link>' . "\n";
 					$xml .= '<guid>' . $this->engine->href('', $comment['tag'], '') . '</guid>' . "\n";
-					$xml .= '<pubDate>' . date('r', strtotime($comment['modified'])) . '</pubDate>' . "\n";
+					$xml .= '<pubDate>' . date('r', strtotime($comment['created'])) . '</pubDate>' . "\n";
 					$xml .= '<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n";
 
 					$xml .= '<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n";
