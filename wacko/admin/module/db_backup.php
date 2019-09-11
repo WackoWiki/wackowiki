@@ -267,8 +267,7 @@ function admin_db_backup(&$engine, &$module)
 						'<td class="t-center">&nbsp;&nbsp;' .
 							'<input type="checkbox" id="dir_' . $i . '" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . '>' .
 						'</td>' .
-					'</tr>' .
-					'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
+					'</tr>' . "\n";
 			}
 ?>
 				</table>
