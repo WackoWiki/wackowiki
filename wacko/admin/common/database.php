@@ -297,7 +297,7 @@ function get_table(&$engine, $table, $drop = true)
 
 		// provide timestamp with CURRENT_TIMESTAMP without quotes
 		if (!empty($row['Default'])
-			&& (($row['Type'] == 'timestamp' && $row['Default'] == 'CURRENT_TIMESTAMP')
+			&& (($row['Type'] == 'timestamp' && ($row['Default'] == 'CURRENT_TIMESTAMP' || $row['Default'] == 'current_timestamp()'))
 				|| ($row['Type'] == 'tinyint' && $row['Default'] == 'NULL')))
 		{
 			$schema_create .= ' DEFAULT ' . $row['Default'] . '';
