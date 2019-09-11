@@ -214,7 +214,7 @@ $tbl_page_link = "CREATE TABLE {$pref}page_link (" .
 					"to_tag VARCHAR(250) BINARY NOT NULL DEFAULT ''," .
 					#"to_supertag VARCHAR(250) NOT NULL DEFAULT ''," .
 					"PRIMARY KEY (link_id)," .
-					"KEY idx_from_tag (from_page_id, to_tag(78))," .
+					"KEY idx_from_tag (from_page_id, to_tag)," .
 					"KEY idx_from_page_id (from_page_id)," .
 					"KEY idx_to (to_tag)" .
 					") {$engine} COMMENT='' {$charset}";

@@ -102,7 +102,8 @@ $alter_log_r5_4_0 = "ALTER TABLE {$pref}log CHANGE ip ip VARCHAR(45) NOT NULL";
 
 // MENU
 $alter_menu_r5_4_0 = "ALTER TABLE {$pref}menu CHANGE lang menu_lang VARCHAR(2) NOT NULL";
-$alter_menu_r5_4_1 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_user_id (user_id, page_id, menu_lang) USING BTREE";
+$alter_menu_r5_4_1 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_user_id (user_id, page_id, menu_lang)";
+$alter_menu_r5_4_2 = "ALTER TABLE {$pref}menu CHANGE menu_position menu_position SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0' AFTER menu_title";
 
 $update_menu_r5_5_0 = "DELETE FROM {$pref}menu WHERE user_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT menu_lang = '" . _quote($config['language']) . "'";
 $update_menu_r5_5_1 = "DELETE m.* FROM {$pref}menu m LEFT JOIN {$pref}page p ON (m.page_id = p.page_id) WHERE p.page_id IS NULL";
@@ -135,6 +136,7 @@ $update_page_r5_5_0 = "DELETE FROM {$pref}page WHERE owner_id = (SELECT user_id 
 
 // PAGE LINK
 $alter_page_link_r5_1_0 = "ALTER TABLE {$pref}link DROP INDEX from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag(78))";
+$alter_page_link_r5_4_0 = "ALTER TABLE {$pref}page_link DROP INDEX idx_from_tag, ADD INDEX idx_from_tag (from_page_id, to_tag)";
 
 $rename_page_link_r5_4_0 = "RENAME TABLE {$pref}link TO {$pref}page_link";
 
