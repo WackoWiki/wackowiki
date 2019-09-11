@@ -177,6 +177,8 @@ $upgrade['5.5.12'][]	= ['alter',		'log',				$alter_log_r5_4_0];
 $upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_0];
 $upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_1];
 
+$upgrade['5.5.12'][]	= ['alter',		'menu',				$alter_menu_r5_4_2];
+
 // page
 $upgrade['5.4.0'][]		= ['alter',		'page',				$alter_page_r5_4_0];
 $upgrade['5.4.0'][]		= ['update',	'page',				$update_page_r5_4_1];
@@ -204,6 +206,7 @@ $upgrade['5.5.12'][]	= ['alter',		'page',				$alter_page_r5_4_8];
 
 // page link
 $upgrade['5.5.rc2'][]	= ['rename',	'page_link',		$rename_page_link_r5_4_0];
+$upgrade['5.5.12'][]	= ['alter',		'page_link',		$alter_page_link_r5_4_0];
 
 // referrer
 $upgrade['5.4.0'][]		= ['alter',		'referrer',			$alter_referrer_r5_4_0];
