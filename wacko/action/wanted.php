@@ -15,7 +15,7 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 			"FROM " . $pref . "page_link l " .
 				"LEFT JOIN " . $pref . "page p ON " .
 				"((l.to_tag = p.tag " .
-					"AND l.to_supertag = '') " .
+					"AND l.to_page_id <> 0) " .
 					"OR l.to_supertag = p.supertag) " .
 			"WHERE " .
 				($cluster
@@ -45,10 +45,11 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 
 };
 
-if (!isset($root))		$root	= ''; // depreciated
-if ($root)				$page	= $root;
+if (!isset($page))		$page	= '';
 
-if (!isset($root))
+$root = $page;
+
+if (! $root)
 {
 	$root = $this->page['tag'];
 }
@@ -59,9 +60,9 @@ else
 
 if ($linking_to = $_GET['linking_to'] ?? '')
 {
-	$tpl->to_target = $this->link($linking_to);
+	$tpl->to_target = $this->link('/' . $linking_to);
 
-	if ($pages = $this->load_pages_linking($linking_to, $root))
+	if (list ($pages, $pagination) = $this->load_pages_linking($linking_to, $root))
 	{
 		foreach ($pages as $page)
 		{
@@ -101,11 +102,11 @@ else
 					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
 
-					if ($referring_pages = $this->load_pages_linking($page['wanted_tag'], $root))
+					if (list ($ref_pages, $pagination) = $this->load_pages_linking($page['wanted_tag'], $root))
 					{
-						foreach ($referring_pages as $referrer_page)
+						foreach ($ref_pages as $ref_page)
 						{
-							if (!$this->db->hide_locked || $this->has_access('read', $referrer_page['page_id']))
+							if (!$this->db->hide_locked || $this->has_access('read', $ref_page['page_id']))
 							{
 								$count++;
 							}
