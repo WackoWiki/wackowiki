@@ -90,6 +90,8 @@ const HTML_FILTERING				= null;					// safehtml, htmlpurifier
 
 const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
+const DB_MIN_VERSION				= ['mariadb' => '10.2.2', 'mysql' => '5.7.7'];
+
 const PHP_MIN_VERSION				= '7.2.0';				// minimum required PHP version
 const PHP_MAX_VERSION				= '7.3.0';				// maximum required PHP version
 const PHP_ERROR_REPORTING			= 6;					// PHP error reporting: 0 - off, 6 - all
