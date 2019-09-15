@@ -152,7 +152,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		}
 		else
 		{
-			$calendar .= "<td>$day</td>";
+			$calendar .= '<td>' . $day . '</td>';
 		}
 	}
 
@@ -166,24 +166,16 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	return $calendar;
 };
 
-
-$oldlocale = setlocale(LC_TIME, null); // save current locale
-setlocale(LC_TIME, ['de_DE@euro', 'de_DE', 'deu_deu']);
-
 #echo "_range:" . $_range . "<br>";
 #echo "month:" . $month;
 
 for ($month; $month <= $_range; $month++)
 {
-		$tpl->m_month = $generate_calendar($year, $month, $days, $daywidth, null, 0, [3,2]);
+		$tpl->m_month = $generate_calendar($year, $month, $days, $daywidth, null, 0, []);
 
 		if ($month % 3 == 0 and $month < $_range)
 		{
 			$tpl->m_next = true;
 		}
 }
-
-#echo $generate_calendar($year, $month, $days, $daywidth);
-
-setlocale(LC_TIME, $oldlocale);
 
