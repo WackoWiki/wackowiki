@@ -32,8 +32,17 @@ write_config_hidden_nodes(['none' => '']);
 	} ?>
 </p>
 	<?php
-
-	#$db_version			= "SELECT VERSION() as mysql_version";
+	if ($config['is_update'])
+	{
+		$_db_version		= $db->load_single("SELECT version()");
+		$db_version			= $_db_version['version()'];
+		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
+			? DB_MIN_VERSION['mariadb']
+			: DB_MIN_VERSION['mysql'];
+		$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
+			? true
+			: false;
+	}
 
 	/*
 	 Check which database extensions are installed and what versions of the db are there
@@ -74,6 +83,13 @@ write_config_hidden_nodes(['none' => '']);
 	?>
 <h2><?php echo $lang['Database']; ?></h2>
 <ul>
+	<?php
+	if ($config['is_update'])
+	{
+		echo '<li>Version: ' . $db_version . '   ' . output_image($valid_db_version) . "<br><br></li>\n";
+	}
+	?>
+
 	<li>MySQLi   <?php echo output_image(extension_loaded('mysqli')); ?></li>
 	<li>PDO   <?php echo output_image($detected > 0); ?></li>
 </ul>

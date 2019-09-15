@@ -206,7 +206,9 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	$default_menu_item		= "INSERT INTO " .
 									$prefix . "menu (user_id, page_id, menu_lang, menu_title)
 								VALUES
-									((" . $owner_id . "), (" . $page_id . "), '" . _quote($lang) . "', '" . _quote($menu_title) . "')";
+									((" . $owner_id . "), (" . $page_id . "), '" . _quote($lang) . "', '" . _quote($menu_title) . "')
+								ON DUPLICATE KEY UPDATE
+									menu_title = '" . _quote($menu_title) . "'";
 
 	if ($set_menu)
 	{
@@ -265,6 +267,15 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 				foreach ($insert_data as $data)
 				{
 					@$dblink_global->query($data[0]);
+
+					/* try
+					{
+						@$dblink_global->query($data[0]);
+					}
+					catch(PDOException $error)
+					{
+						echo $error->getMessage() . '<br>';
+					} */
 
 					if ($critical)
 					{

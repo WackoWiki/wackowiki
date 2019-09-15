@@ -130,121 +130,147 @@ switch ($config['database_driver'])
 			// set SESSION sql_mode
 			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
 
+			// check min database version
+			$_db_version		= mysqli_query($dblink, "SELECT version()");
+			$_db_version		= mysqli_fetch_assoc($_db_version);
+			$db_version			= $_db_version['version()'];
+
+			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
+				? DB_MIN_VERSION['mariadb']
+				: DB_MIN_VERSION['mysql'];
+			$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
+				? true
+				: false;
+
+			echo '<li>' . ($valid_db_version
+				? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
+				: Ut::perc_replace(
+					$lang['ErrorDatabaseVersion'],
+					'<code>' . $db_version . '</code>',
+					'<code>' . $min_db_version . '</code>') . ' ' .
+					output_image($valid_db_version)
+				) . '</li>';
+
+			$fatal_error = $valid_db_version ? false : true;
+
 			echo "         </ul>\n";
 			echo "         <br>\n";
 
-			// mariadb / mysql only
-			require_once 'setup/database_mysql.php';
-			require_once 'setup/database_mysql_updates.php';
-			require_once 'setup/_insert_queries.php';
-
-			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
+			if (!$fatal_error)
 			{
-				echo "<h2>" . $lang['DeletingTables'] . "</h2>\n";
-				echo "            <ol>\n";
+				// mariadb / mysql only
+				require_once 'setup/database_mysql.php';
+				require_once 'setup/database_mysql_updates.php';
+				require_once 'setup/_insert_queries.php';
 
-				foreach ($delete_table as $value)
+				if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 				{
-					test(
-						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
-						@mysqli_query($dblink, $value[1]),
-						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>'),
-						$dblink
-					);
+					echo "<h2>" . $lang['DeletingTables'] . "</h2>\n";
+					echo "            <ol>\n";
 
-					/* echo '<pre>';
-					print_r($value);
-					echo '</pre>'; */
-				}
-
-				echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
-				echo "         </ol>\n";
-				echo "         <br>\n";
-
-				$version = 0;
-			}
-
-			if (!is_null($version))
-			{
-				// new installation
-				if ($version == '0')
-				{
-					echo "         <h2>" . $lang['InstallingTables'] . "</h2>\n";
-					echo "         <ol>\n";
-
-					foreach ($create_table as $value)
+					foreach ($delete_table as $value)
 					{
 						test(
-							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+							Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
 							@mysqli_query($dblink, $value[1]),
-							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>'),
+							Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>'),
 							$dblink
 						);
+
+						/* echo '<pre>';
+						print_r($value);
+						echo '</pre>'; */
 					}
 
-					foreach ($insert_records as $value)
-					{
-						test(
-							$value[0],
-							@mysqli_query($dblink, $value[1]),
-							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>'),
-							$dblink
-						);
-					}
+					echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
+					echo "         </ol>\n";
+					echo "         <br>\n";
 
-					test(
-						$lang['InstallingLogoImage'],
-						@mysqli_query($dblink, $insert_logo_image),
-						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage']),
-						$dblink
-					);
-
-					echo "            </ol>\n";
+					$version = 0;
 				}
-				else
-				{
-					// The funny upgrading stuff. Make sure these are in order!
-					ksort($upgrade, SORT_STRING);
 
-					foreach ($upgrade as $to_version => $dummy)
+				if (!is_null($version))
+				{
+					// new installation
+					if ($version == '0')
 					{
-						if (version_compare($version, $to_version, '<='))
+						echo "         <h2>" . $lang['InstallingTables'] . "</h2>\n";
+						echo "         <ol>\n";
+
+						foreach ($create_table as $value)
 						{
-							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " " . WACKO_VERSION . "</h2>\n";
-							echo "         <ol>\n";
+							test(
+								Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+								@mysqli_query($dblink, $value[1]),
+								Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>'),
+								$dblink
+							);
+						}
 
-							foreach ($upgrade[$to_version] as $value)
+						foreach ($insert_records as $value)
+						{
+							test(
+								$value[0],
+								@mysqli_query($dblink, $value[1]),
+								Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>'),
+								$dblink
+							);
+						}
+
+						test(
+							$lang['InstallingLogoImage'],
+							@mysqli_query($dblink, $insert_logo_image),
+							Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage']),
+							$dblink
+						);
+
+						echo "            </ol>\n";
+					}
+					else
+					{
+						// The funny upgrading stuff. Make sure these are in order!
+						ksort($upgrade, SORT_STRING);
+
+						foreach ($upgrade as $to_version => $dummy)
+						{
+							if (version_compare($version, $to_version, '<='))
 							{
-								test(
-									Ut::perc_replace($upgrade_msg[$value[0]]['ok'], '<code>' . $value[1] . '</code>'),
-									@mysqli_query($dblink, $value[2]),
-									Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>'),
-									$dblink
-								);
-							}
+								echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " " . WACKO_VERSION . "</h2>\n";
+								echo "         <ol>\n";
 
-							echo "            </ol>\n";
+								foreach ($upgrade[$to_version] as $value)
+								{
+									test(
+										Ut::perc_replace($upgrade_msg[$value[0]]['ok'], '<code>' . $value[1] . '</code>'),
+										@mysqli_query($dblink, $value[2]),
+										Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>'),
+										$dblink
+									);
+								}
+
+								echo "            </ol>\n";
+							}
 						}
 					}
+
+					echo "         <br>\n";
+					echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
+					echo "         <ul>\n";
+
+					// inserting config values
+					test(
+						$lang['InstallingConfigValues'],
+						@mysqli_query($dblink, $insert_config),
+						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues']),
+						$dblink
+					);
+
+					echo "            <li>" . $lang['InstallingPagesBegin'];
+					require_once 'setup/insert_pages.php';
+					echo "</li>\n";
+					echo "            <li>" . $lang['InstallingPagesEnd'] . "</li>\n";
+					echo "         </ul>\n";
 				}
-
-				echo "         <br>\n";
-				echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
-				echo "         <ul>\n";
-
-				// inserting config values
-				test(
-					$lang['InstallingConfigValues'],
-					@mysqli_query($dblink, $insert_config),
-					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues']),
-					$dblink
-				);
-
-				echo "            <li>" . $lang['InstallingPagesBegin'];
-				require_once 'setup/insert_pages.php';
-				echo "</li>\n";
-				echo "            <li>" . $lang['InstallingPagesEnd'] . "</li>\n";
-				echo "         </ul>\n";
 			}
 		}
 
@@ -283,6 +309,29 @@ switch ($config['database_driver'])
 
 		// set SESSION sql_mode
 		$dblink->query("SET SESSION sql_mode='$sql_modes'");
+
+		// check min database version
+		$_db_version		= $dblink->query("SELECT version()");
+		$_db_version		= $_db_version->fetch(PDO::FETCH_ASSOC);
+		$db_version			= $_db_version['version()'];
+
+		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
+			? DB_MIN_VERSION['mariadb']
+			: DB_MIN_VERSION['mysql'];
+		$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
+			? true
+			: false;
+
+		echo '<li>' . ($valid_db_version
+			? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
+			: Ut::perc_replace(
+				$lang['ErrorDatabaseVersion'],
+				'<code>' . $db_version . '</code>',
+				'<code>' . $min_db_version . '</code>') . ' ' .
+				output_image($valid_db_version)
+			) . '</li>';
+
+		$fatal_error = $valid_db_version ? false : true;
 
 		echo "         </ul>\n";
 		echo "         <br>\n";
