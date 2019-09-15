@@ -472,7 +472,7 @@ class Wacko
 			$this->language = &$this->languages[$lang];
 
 			setlocale(LC_CTYPE, $this->language['locale']);
-			#setlocale(LC_TIME, $this->language['locale']);	// get_time_formatted()
+			setlocale(LC_TIME, $this->language['locale']);	// get_time_formatted()
 
 			mb_internal_encoding($this->language['charset']);
 
