@@ -262,10 +262,6 @@ class WackoFormatter
 			"\b[[:alnum:]]+[:][" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
-			// tikiwiki links
-			($this->object->db->disable_tikilinks
-				? ''
-				: "\b(" . $object->language['UPPER'] . $object->language['LOWER'] . $object->language['ALPHANUM'] . "*\." . $object->language['ALPHA'] . $object->language['ALPHANUM'] . "+)\b|") .
 			// wiki links (beside actions)
 			($this->object->db->disable_wikilinks
 				? ''
@@ -1210,14 +1206,6 @@ class WackoFormatter
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];
-		}
-		// tikiwiki links
-		else if (!$wacko->_formatter_noautolinks
-				&& $wacko->db->disable_tikilinks != 1
-				&& preg_match('/^(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . $wacko->language['ALPHANUM'] . '*\.' . $wacko->language['ALPHA'] . $wacko->language['ALPHANUM'] . '+)$/us', $thing, $matches))
-		{
-			#Diag::dbg('GOLD', ' ::tiki:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
-			return $wacko->pre_link($thing);
 		}
 		// wacko links!
 		else if ((!$wacko->_formatter_noautolinks)

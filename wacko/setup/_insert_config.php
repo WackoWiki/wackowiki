@@ -85,7 +85,6 @@ $config_db['diff_modes']					= $config['diff_modes'];
 $config_db['disable_bracketslinks']			= $config['disable_bracketslinks'];
 $config_db['disable_formatters']			= $config['disable_formatters'];
 $config_db['disable_safehtml']				= $config['disable_safehtml'];
-$config_db['disable_tikilinks']				= $config['disable_tikilinks'];
 $config_db['disable_wikilinks']				= $config['disable_wikilinks'];
 $config_db['disable_wikiname']				= $config['disable_wikiname'];
 $config_db['dst']							= $config['dst'];

@@ -3796,18 +3796,6 @@ class Wacko
 
 			unset($file_data);
 		}
-		else if ($this->db->disable_tikilinks != 1 && preg_match('/^(' . $this->language['UPPER'] . $this->language['LOWER'] . $this->language['ALPHANUM'] . '*)\.(' . $this->language['ALPHA'] . $this->language['ALPHANUM'] . '+)$/us', $tag, $matches))
-		{
-			// it`s a Tiki link! (Tiki.Link -> /Tiki/Link)
-			$tag	= '/' . $matches[1] . '/' . $matches[2];
-
-			if (!$text)
-			{
-				$text = $this->add_spaces($tag);
-			}
-
-			return $this->link($tag, $method, $text, $title, $track, 1);
-		}
 		else if (preg_match('/^(user)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
 			// user link -> user:UserName
