@@ -40,7 +40,6 @@ function admin_config_formatter(&$engine, &$module)
 		$config['paragrafica']				= (int) ($_POST['paragrafica'] ?? 0);
 		$config['allow_rawhtml']			= (int) ($_POST['allow_rawhtml'] ?? 0);
 		$config['disable_safehtml']			= (int) $_POST['disable_safehtml'];
-		$config['disable_tikilinks']		= (int) ($_POST['disable_tikilinks'] ?? 0);
 		$config['disable_bracketslinks']	= (int) ($_POST['disable_bracketslinks'] ?? 0);
 		$config['disable_wikilinks']		= (int) ($_POST['disable_wikilinks'] ?? 0);
 		$config['disable_formatters']		= (int) ($_POST['disable_formatters'] ?? 0);
@@ -138,18 +137,6 @@ function admin_config_formatter(&$engine, &$module)
 				</td>
 				<td>
 					<input type="checkbox" id="allow_x11colors" name="allow_x11colors" value="1"<?php echo ($engine->db->allow_x11colors ? ' checked' : '');?>>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="disable_tikilinks"><strong><?php echo $engine->_t('TikiLinks');?>:</strong><br>
-					<small><?php echo $engine->_t('TikiLinksInfo');?></small></label>
-				</td>
-				<td>
-					<input type="checkbox" id="disable_tikilinks" name="disable_tikilinks" value="1"<?php echo ($engine->db->disable_tikilinks ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">
