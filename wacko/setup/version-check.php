@@ -104,6 +104,7 @@ write_config_hidden_nodes(['none' => '']);
 		'ctype',
 		'gd',
 		'iconv',
+		'intl',
 		'json',
 		'mbstring',
 		'openssl',
