@@ -34,7 +34,7 @@ if (list ($pages, $pagination) = $this->load_pages_linking($tag, null, $max))
 	// cache acls
 	$this->preload_acl($page_ids);
 
-	$anchor = $tag;
+	$anchor = 'a-' . $this->get_page_id($tag);
 
 	// display navigation
 	$tpl->pagination_text = $pagination['text'];
@@ -47,11 +47,11 @@ if (list ($pages, $pagination) = $this->load_pages_linking($tag, null, $max))
 			{
 				if ($title)
 				{
-					$link = $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['title']);
+					$link = $this->link('/' . $page['tag'] . "#" . $anchor, '', $page['title']);
 				}
 				else
 				{
-					$link = $this->link('/' . $page['tag'] . "#a-" . $anchor, '', $page['tag'], $page['title']);
+					$link = $this->link('/' . $page['tag'] . "#" . $anchor, '', $page['tag'], $page['title']);
 				}
 
 				if (mb_strpos($link, 'span class="missingpage"') === false)
