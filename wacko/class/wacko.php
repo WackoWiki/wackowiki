@@ -4200,6 +4200,7 @@ class Wacko
 		else if (preg_match('/^([\!\.\-' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . '\_\-]+)?$/', $tag, $matches))
 		{
 			// it's a Wiki link!
+			$aname			= '';
 			$match			= '';
 			$tag			= $otag		= $matches[1];
 			$untag			= $unwtag	= $this->unwrap_link($tag);
@@ -4226,24 +4227,6 @@ class Wacko
 				{
 					$unwtag	= substr($unwtag, 0, strrpos($unwtag, '/'));
 				}
-
-				// XXX: not used ..?
-				/* if ($handler)
-				{
-					if (!isset($data))
-					{
-						$data = ''; // XXX: ???
-					}
-
-					$opar	= '/' . $untag . '/';
-
-					for ($i = 0; $i < substr_count($data, '/') + 2; $i++)
-					{
-						$opar = substr($opar, strpos($opar, '/') + 1);
-					}
-
-					$params = explode('/', $opar); //there're good params
-				} */
 			}
 
 			$unwtag			= trim($unwtag, '/.');
@@ -4279,14 +4262,7 @@ class Wacko
 				}
 
 				$this->set_language($lang);
-				$supertag	= $this->translit($untag);
 			}
-			else
-			{
-				$supertag	= $this->translit($untag, TRANSLIT_LOWERCASE, TRANSLIT_DONTLOAD);
-			}
-
-			$aname = '';
 
 			if (substr($tag, 0, 2) == '!/')
 			{
@@ -4354,18 +4330,17 @@ class Wacko
 				$this->track_link($tag, LINK_PAGE);
 			}
 
-			// FIXME: it still writes multiple instances ?!
-			// set a anchor once for link at the first appearance
-			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
-			{
-				$aname = 'id="a-' . $supertag . '"';
-				$this->first_inclusion[$supertag] = 1;
-			}
-
 			if ($this_page)
 			{
 				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ?: '');
-				$page_id	= $this->get_page_id($tag);
+				$page_id	= $this_page['page_id'];
+
+				// set a anchor once for link at the first appearance
+				if ($anchor_link && !isset($this->first_inclusion[$page_id]))
+				{
+					$aname = 'id="a-' . $page_id . '"';
+					$this->first_inclusion[$page_id] = 1;
+				}
 
 				if ($this->db->hide_locked)
 				{
