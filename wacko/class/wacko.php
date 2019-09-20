@@ -1011,7 +1011,7 @@ class Wacko
 			);
 
 		}
-		else if ($this->_load_page($tag, $page_id, '', 1, false, 1) == '')
+		else if ($this->_load_page($tag, $page_id, '', 1, 1) == '')
 		{
 			($page_id != 0
 				? $this->wanted_cache['page_id'][$page_id] = 1
@@ -3846,12 +3846,12 @@ class Wacko
 		else if (preg_match('/^([\!\.\-' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . '\_\-]+)?$/u', $tag, $matches))
 		{
 			// it's a Wiki link!
+			$aname			= '';
 			$match			= '';
 			$tag			= $otag		= $matches[1];
 			$untag			= $unwtag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/ui';
-			// TODO: multilingual & donotload (TEST: passing $link_lang)
 			$ptag			= $unwtag;
 			$handler		= null;
 
@@ -3885,29 +3885,6 @@ class Wacko
 			}
 
 			$this_page		= $this->load_page($unwtag, 0, '', LOAD_CACHE, LOAD_META);
-
-			if ($this_page)
-			{
-				$_lang		= $this->language['code'];
-
-				if (isset($this_page['page_lang']))
-				{
-					$lang	= $this_page['page_lang'];
-				}
-				else
-				{
-					$lang	= $this->db->language;
-				}
-
-				$this->set_language($lang);
-				$supertag	= $untag;
-			}
-			else
-			{
-				$supertag	= $untag; // lowercase?
-			}
-
-			$aname = '';
 
 			if (mb_substr($tag, 0, 2) == '!/')
 			{
@@ -3975,18 +3952,17 @@ class Wacko
 				$this->track_link($tag, LINK_PAGE);
 			}
 
-			// FIXME: it still writes multiple instances ?!
-			// set a anchor once for link at the first appearance
-			if ($anchor_link && !isset($this->first_inclusion[$supertag]))
-			{
-				$aname = 'id="a-' . $supertag . '"';
-				$this->first_inclusion[$supertag] = 1;
-			}
-
 			if ($this_page)
 			{
 				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ?: '');
-				$page_id	= $this->get_page_id($tag);
+				$page_id	= $this_page['page_id'];
+
+				// set a anchor once for link at the first appearance
+				if ($anchor_link && !isset($this->first_inclusion[$page_id]))
+				{
+					$aname = 'id="a-' . $page_id . '"';
+					$this->first_inclusion[$page_id] = 1;
+				}
 
 				if ($this->db->hide_locked)
 				{
@@ -4021,11 +3997,6 @@ class Wacko
 					$class		= 'acl-customsec';
 					$rel		= 'nofollow';
 					$accicon	= $this->_t('OuterIcon');
-				}
-
-				if (isset($_lang))
-				{
-					$this->set_language($_lang);
 				}
 			}
 			else
