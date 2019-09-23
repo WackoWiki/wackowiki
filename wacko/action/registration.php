@@ -40,7 +40,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 	if (isset($this->sess->registration_delay) && time() - $this->sess->registration_delay < $this->db->registration_delay)
 	{
 		// mitigate bots from creating accounts
-		$this->sess->comment_delay	= time();
+		$this->sess->registration_delay	= time();
 
 		$error .= Ut::perc_replace($this->_t('RegistrationThreshold'), $this->db->registration_delay);
 	}
