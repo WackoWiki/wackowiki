@@ -6724,6 +6724,14 @@ class Wacko
 				$page		= $this->load_page($tag, 0, 0, '', '', $deleted);
 			}
 
+			// invalide namespace
+			if (empty($page) && !$tag)
+			{
+				$this->http->status(404);
+				$this->set_message($this->_t('InvalidNamespace'), 'error', false);
+				$this->ensure_page();
+			}
+
 			$this->tag		= $tag;
 		}
 
