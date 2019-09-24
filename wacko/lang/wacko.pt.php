@@ -158,6 +158,7 @@ $wacko_translation = [
 	'PageHandlerMoreTip'		=> 'mais',
 
 	'ThemeCorrupt'				=> 'Theme is corrupt',
+	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Esta página ainda não existe.',
 	'PromptCreate'				=> 'Talvez a queira <a href="%1">criar</a> agora?',
 	'RevisionHint'				=> 'Esta é uma revisão antiga de <a href="%1">%2</a> de %3.',

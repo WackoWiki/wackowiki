@@ -158,6 +158,7 @@ $wacko_translation = [
 	'PageHandlerMoreTip'		=> 'weitere',
 
 	'ThemeCorrupt'				=> 'Layout ist beschädigt',
+	'InvalidNamespace'			=> 'Es wurde ein ungültiger Namensraum angegeben.',
 	'DoesNotExists'				=> 'Diese Seite existiert nicht.',
 	'PromptCreate'				=> 'Möchtest du sie <strong><a href="%1">erstellen</a></strong>?',
 	'RevisionHint'				=> 'Das ist eine alte Version von <a href="%1">%2</a> vom %3 bearbeitet durch %4.',
