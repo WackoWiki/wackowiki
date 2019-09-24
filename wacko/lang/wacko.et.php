@@ -156,6 +156,7 @@ $wacko_translation = [
 	'PageHandlerMoreTip'		=> 'rohkem',
 
 	'ThemeCorrupt'				=> 'Theme is corrupt',
+	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Seda lehte ei eksisteeri veel.',
 	'PromptCreate'				=> 'Soovid sa seda <a href="%1">luua</a>?',
 	'RevisionHint'				=> 'See on varasem redigeering <a href="%1">%2</a> %3.',
