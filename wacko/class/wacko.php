@@ -7235,11 +7235,18 @@ class Wacko
 					? $this->translit($tag)
 					: $page['supertag']); // TODO: PHP Notice:  Undefined index: supertag
 
-			// TODO: obsolete? Add description what it does
-			// creates dummy array
+			// creates dummy array for translit special case -> '
 			if ($this->db->outlook_workaround && !$page)
 			{
 				$page = $this->load_page($this->supertag . "'", 0, $revision_id);
+			}
+
+			// invalide namespace
+			if (empty($page) && !$tag)
+			{
+				$this->http->status(404);
+				$this->set_message($this->_t('InvalidNamespace'), 'error', false);
+				$this->ensure_page();
 			}
 		}
 
