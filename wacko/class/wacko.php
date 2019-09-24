@@ -582,10 +582,10 @@ class Wacko
 			require $lang_file;
 
 			$wacko_language['LANG']			= $lang;
-			$wacko_language['UPPER']		= '[\p{Lu}]';										//'[' . $wacko_language['UPPER_P'] . ']';
+			$wacko_language['UPPER']		= '[\p{Lu}]';									// '[' . $wacko_language['UPPER_P'] . ']';
 			$wacko_language['UPPERNUM']		= '[\p{Lu}\p{Nd}]';								// '[0-9' . $wacko_language['UPPER_P'] . ']';
-			$wacko_language['LOWER']		= '[\p{Ll}\/]';									//'[' . $wacko_language['LOWER_P'] . ']';
-			$wacko_language['ALPHA']		= '[\p{L}\_\-\/]';										// '[' . $wacko_language['ALPHA_P'] . ']';
+			$wacko_language['LOWER']		= '[\p{Ll}\/]';									// '[' . $wacko_language['LOWER_P'] . ']';
+			$wacko_language['ALPHA']		= '[\p{L}\_\-\/]';								// '[' . $wacko_language['ALPHA_P'] . ']';
 			$wacko_language['ALPHANUM_P']	= '\p{L}\p{Nd}\_\-\/';							// '0-9' . $wacko_language['ALPHA_P'];
 			$wacko_language['ALPHANUM']		= '[' . $wacko_language['ALPHANUM_P'] . ']';
 
@@ -848,7 +848,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($tag || $page_id)
+			if ($page_id || !preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-]/u', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .
@@ -880,41 +880,6 @@ class Wacko
 							($page_id != 0
 								? "p.page_id	= " . (int) $page_id . " "
 								: "p.tag		= " . $this->db->q($tag) . " ") .
-							($deleted != 1
-								? "AND p.deleted <> 1 "
-								: "") .
-							"AND revision_id = " . (int) $revision_id . " " .
-						"LIMIT 1");
-
-					$page['owner_id'] = $owner_id;
-				}
-			}
-			else if (!preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-]/u', $tag))
-			{
-				$page = $this->db->load_single(
-					"SELECT " . $what_p . " " .
-					"FROM " . $this->db->table_prefix . "page p " .
-						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-					"WHERE tag = " . $this->db->q($tag) . " " .
-						($deleted != 1
-							? "AND p.deleted <> 1 "
-							: "") .
-					"LIMIT 1");
-
-				$owner_id = $page['owner_id'];
-
-				if ($revision_id)
-				{
-					$this->cache_page($page, $metadata_only);
-
-					$page = $this->db->load_single(
-						"SELECT " . $what_r . " " .
-						"FROM " . $this->db->table_prefix . "revision p " .
-							"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
-						"WHERE p.tag = " . $this->db->q($tag) . " " .
 							($deleted != 1
 								? "AND p.deleted <> 1 "
 								: "") .
