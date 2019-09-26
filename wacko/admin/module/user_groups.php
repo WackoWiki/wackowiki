@@ -293,7 +293,7 @@ function admin_user_groups(&$engine, &$module)
 						<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
 					</th>' .
 					'<td>
-						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
+						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? '')) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
@@ -370,7 +370,7 @@ function admin_user_groups(&$engine, &$module)
 						<label for="new_group_name">' . Ut::perc_replace($engine->_t('GroupsRename'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . '</label>
 					</th>' .
 					'<td>
-						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? $usergroup['group_name'])) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
+						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? $usergroup['group_name'])) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>

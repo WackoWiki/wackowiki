@@ -3486,7 +3486,7 @@ class Wacko
 				$icon	= $this->_t('OuterIcon');
 			}
 		}
-		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/', $tag, $matches))
+		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/u', $tag, $matches))
 		{
 			// this is a uploaded file
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
@@ -7736,27 +7736,27 @@ class Wacko
 		switch ($char_classes)
 		{
 			case 1:
-				if (   !preg_match('/[0-9]+/',			$pwd)
-					|| !preg_match('/[a-zA-Zà-ÿÀ-ß]+/u',	$pwd))
+				if (   !preg_match('/[\p{N}]+/',				$pwd)
+					|| !preg_match('/[\p{L}]+/u',				$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 2:
-				if (   !preg_match('/[0-9]+/',		$pwd)
-					|| !preg_match('/[A-ZÀ-ß]+/u',	$pwd)
-					|| !preg_match('/[a-zà-ÿ]+/u',	$pwd))
+				if (   !preg_match('/[\pN]+/',					$pwd)
+					|| !preg_match('/[\p{Lu}]+/u',				$pwd)
+					|| !preg_match('/[\p{Ll}]+/u',				$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 3:
-				if (   !preg_match('/[0-9]+/',		$pwd)
-					|| !preg_match('/[A-ZÀ-ß]+/u',	$pwd)
-					|| !preg_match('/[a-zà-ÿ]+/u',	$pwd)
-					|| !preg_match('/[\W]+/',		$pwd))
+				if (   !preg_match('/[\p{N}]+/',				$pwd)
+					|| !preg_match('/[\p{Lu}]+/u',				$pwd)
+					|| !preg_match('/[\p{Ll}]+/u',				$pwd)
+					|| !preg_match('/[\p{Z}|\p{S}|\p{P}]+/',	$pwd))
 				{
 					++$error;
 				}

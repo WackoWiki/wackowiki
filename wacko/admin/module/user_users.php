@@ -459,7 +459,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
 					</th>' .
 					'<td>
-						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? $user['user_name'])) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? $user['user_name'])) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>
