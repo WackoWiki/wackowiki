@@ -587,4 +587,9 @@ class Ut
 		static $rfc3986 = '#[^a-zA-Z0-9._~/?:@!$()*,;-]#';
 		return static::urlencode($rfc3986, $name) . '=' . static::urlencode($rfc3986, $value);
 	}
+
+	static function normalize($string, $form = Normalizer::FORM_C)
+	{
+		return normalizer_normalize($string, $form);
+	}
 }
