@@ -189,6 +189,7 @@ else // login
 	}
 
 	$tpl->l_href		= $this->href();
+	$tpl->l_pattern		= $this->language['USER_NAME'];
 	$tpl->l_pwhref		= $this->href('', $this->db->password_page);
 	$tpl->l_username	= @$this->sess->login_username;
 

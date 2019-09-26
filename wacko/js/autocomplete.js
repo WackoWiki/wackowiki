@@ -20,10 +20,10 @@ function AutoComplete(wikiedit, handler)
 	this.found_patterns_selected = - 1;
 	this.magic_mode = false;
 
-	this.regexp_LinkLetter = /[[~a-zA-Z∏®‡-ˇ¿-ﬂ\!\-\.\(\[\/0-9]/;
+	this.regexp_LinkLetter = /[[~a-zA-Z—ë–Å–∞-—è–ê-–Ø\!\-\.\(\[\/0-9]/;
 
-	this.regexp_LinkWhole = /^(([\(\[]){2})?((\!\/)|[A-Z®¿-ﬂ\/])[a-zA-Z∏®‡-ˇ¿-ﬂ\-\.\/0-9]+$/;
-	this.regexp_LinkCamel = /[a-z∏‡-ˇ\.0-9][A-Z®¿-ﬂ]/;
+	this.regexp_LinkWhole = /^(([\(\[]){2})?((\!\/)|[A-Z–Å–ê-–Ø\/])[a-zA-Z—ë–Å–∞-—è–ê-–Ø\-\.\/0-9]+$/;
+	this.regexp_LinkCamel = /[a-z—ë–∞-—è\.0-9][A-Z–Å–ê-–Ø]/;
 	this.regexp_LinkStrict = /^([\(\[]){2}.{2,}/;
 	this.regexp_LinkSubpage = /^!\/.{2,}/;
 }
