@@ -582,11 +582,12 @@ class Wacko
 			require $lang_file;
 
 			$wacko_language['LANG']			= $lang;
+			$wacko_language['USER_NAME']	= '[\p{L}\p{Nd}\-\.]+';
 			$wacko_language['UPPER']		= '[\p{Lu}]';									// '[' . $wacko_language['UPPER_P'] . ']';
 			$wacko_language['UPPERNUM']		= '[\p{Lu}\p{Nd}]';								// '[0-9' . $wacko_language['UPPER_P'] . ']';
 			$wacko_language['LOWER']		= '[\p{Ll}\/]';									// '[' . $wacko_language['LOWER_P'] . ']';
 			$wacko_language['ALPHA']		= '[\p{L}\_\-\/]';								// '[' . $wacko_language['ALPHA_P'] . ']';
-			$wacko_language['ALPHANUM_P']	= '\p{L}\p{Nd}\_\-\/';							// '0-9' . $wacko_language['ALPHA_P'];
+			$wacko_language['ALPHANUM_P']	= '\p{L}\p{M}*+\p{Nd}\_\-\/';							// '0-9' . $wacko_language['ALPHA_P'];
 			$wacko_language['ALPHANUM']		= '[' . $wacko_language['ALPHANUM_P'] . ']';
 
 			$this->languages[$lang] = $wacko_language;
@@ -848,7 +849,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($page_id || !preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-]/u', $tag))
+			if ($page_id || !preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .
@@ -4405,7 +4406,7 @@ class Wacko
 	function sanitize_username($user_name)
 	{
 		// strip \-\_\'\.\/\\
-		return str_replace(['-', '.', /* '/', */ "'", '\\', '_'], '', $user_name);
+		return str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
 	}
 
 	/**
@@ -6702,12 +6703,7 @@ class Wacko
 			}
 
 			// normalizing tag name
-			if (!preg_match('/^[' . $this->language['ALPHANUM_P'] . '\!]+$/u', $tag))
-			{
-				#$tag = ''; // TODO: other allowed code points?
-
-				// debug here..
-			}
+			$tag = Ut::normalize($tag);
 
 			$tag = str_replace("'", '_', str_replace('\\', '', str_replace('_', '', $tag)));
 			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', '', $tag);

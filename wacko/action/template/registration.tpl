@@ -21,7 +21,7 @@
 			=]
 			[ ' autocomplete ' ]
 			<p><label for="user_name">[ ' _t: UserName ' ]:</label>
-			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" pattern="[A-Za-z0-9]+" autocomplete="off" required autofocus>
+			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" pattern="[ ' pattern ' ]" autocomplete="off" required autofocus>
 			<br><small>[ ' only ' ]</small></p>
 
 			<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>

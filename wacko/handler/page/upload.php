@@ -98,7 +98,7 @@ if (isset($_POST['upload']) & $can_upload)
 				'application/x-msmetafile',
 			]; */
 
-			$ext	= strtolower($ext);
+			$ext	= mb_strtolower($ext);
 			$banned	= explode('|', $this->db->upload_banned_exts);
 
 			if (in_array($ext, $banned))
@@ -128,11 +128,18 @@ if (isset($_POST['upload']) & $can_upload)
 
 			// prepare for translit
 			$name	= str_replace(['@', '%20', '+'], '-', $name);
-			$name	= preg_replace('/[\r\n\t -]+/', '_', $name);
+			$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
 			$name	= trim($name, ' .-_');
+			$name	= Ut::normalize($name);
 
 			// here would be place for translit
-			#$t_name = $this->format($name, 'translit');
+			/* $t_name = transliterator_transliterate(
+				"Any-Latin;
+				Latin-ASCII;
+				[\u0100-\u7fff] remove;
+				Lower()",
+				$name); */
+
 			$t_name = $name;
 
 			// 1.5. +write @page_id@ to name

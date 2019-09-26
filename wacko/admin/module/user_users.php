@@ -138,7 +138,7 @@ function admin_user_users(&$engine, &$module)
 			$error .= Ut::perc_replace($engine->_t('NameTooLong'), 0, $engine->db->username_chars_max) . " ";
 		}
 		// check if valid user name (and disallow '/')
-		else if (!preg_match('/^([' . $engine->language['ALPHANUM_P'] . ']+)$/', $user_name) || preg_match('/\//', $user_name))
+		else if (!preg_match('/^(' . $engine->language['USER_NAME'] . ')$/u', $user_name))
 		{
 			$error .= $engine->_t('InvalidUserName') . " ";
 		}
@@ -381,7 +381,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newname">' . $engine->_t('UserName') . '</label>' .
 					'</th>
 					<td>
-						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100" required>
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" maxlength="100" required>
 					</td>
 				</tr>' .
 				'<tr>
