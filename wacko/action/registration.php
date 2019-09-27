@@ -218,6 +218,10 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		}
 	}
 
+	// fetch fields
+	$this->sess->r_user_name	= $user_name;
+	$this->sess->r_email		= $email;
+
 	$this->set_message($this->format($error), 'error');
 }
 
@@ -231,13 +235,26 @@ if (!(($this->db->allow_registration && !$this->get_user()) || $this->is_admin()
 }
 else
 {
+	if (!empty($this->sess->r_user_name))
+	{
+		$user_name					= $this->sess->r_user_name;
+		$this->sess->r_user_name	= '';
+	}
+
+	if (!empty($this->sess->r_email))
+	{
+		$email						= $this->sess->r_email;
+		$this->sess->r_email		= '';
+	}
+
 	// show regitraion form
+	$tpl->enter('r_');
 
 	// for timing method to mitigate bots from creating accounts
 	$this->sess->registration_delay	= time();
 
-	$tpl->r_form		= $this->href();
-	$tpl->r_approve		= !!$this->db->approve_new_user;
+	$tpl->form		= $this->href();
+	$tpl->approve	= !!$this->db->approve_new_user;
 
 	if ($this->db->multilanguage)
 	{
@@ -246,30 +263,32 @@ else
 
 		foreach ($this->http->available_languages() as $lang)
 		{
-			$tpl->r_multi_l_lang		= $lang;
-			$tpl->r_multi_l_name		= $languages[$lang];
-			$tpl->r_multi_l_selected	= ($sel == $lang);
+			$tpl->multi_l_lang		= $lang;
+			$tpl->multi_l_name		= $languages[$lang];
+			$tpl->multi_l_selected	= ($sel == $lang);
 		}
 	}
 
-	$tpl->r_autocomplete	= $this->form_autocomplete_off();
-	$tpl->r_username		= $user_name;
-	$tpl->r_password 		= $password;
-	$tpl->r_confpassword	= $conf_password;
-	$tpl->r_only			=
+	$tpl->autocomplete	= $this->form_autocomplete_off();
+	$tpl->username		= $user_name;
+	$tpl->password 		= $password;
+	$tpl->confpassword	= $conf_password;
+	$tpl->only			=
 		Ut::perc_replace($this->_t($this->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'),
 			$this->db->username_chars_min,
 			$this->db->username_chars_max);
-	$tpl->r_complexity		= $this->show_password_complexity();
-	$tpl->r_email			= $email;
+	$tpl->complexity	= $this->show_password_complexity();
+	$tpl->email			= $email;
 
 	if ($this->db->terms_page)
 	{
-		# $tpl->r_terms_href = $this->href('', $this->db->terms_page);
+		# $tpl->terms_href = $this->href('', $this->db->terms_page);
 	}
 
 	if ($this->db->captcha_registration)
 	{
-		$tpl->r_captcha_show = $this->show_captcha();
+		$tpl->captcha_show = $this->show_captcha();
 	}
+
+	$tpl->leave();
 }
