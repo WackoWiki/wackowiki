@@ -84,7 +84,7 @@ if ($this->has_access('read')
 		}
 
 		// only if saving:
-		if (isset($_POST['save']) && (isset($_POST['body']) && $_POST['body'] != ''))
+		if (isset($_POST['save']) && !empty($_POST['body']))
 		{
 			$edit_note	= trim(	($_POST['edit_note']	?? ''));
 			$minor_edit	= (int)	($_POST['minor_edit']	?? 0);
@@ -204,7 +204,6 @@ if ($this->has_access('read')
 				// now we render it internally so we can write the updated link tables.
 				$this->update_link_table($this->page['page_id'], $body_r);
 
-
 				$this->page_cache['supertag'][$this->supertag]			= '';
 				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
@@ -286,13 +285,13 @@ if ($this->has_access('read')
 		$tpl->p_buttons		= true;
 	}
 
-	if (isset($this->sess->body) && $this->sess->body != '')
+	if (!empty($this->sess->body))
 	{
 		$body				= $this->sess->body;
 		$this->sess->body	= '';
 	}
 
-	if (isset($this->sess->title) && $this->sess->title != '')
+	if (!empty($this->sess->title))
 	{
 		$title				= $this->sess->title;
 		$this->sess->title	= '';
