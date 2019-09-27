@@ -219,6 +219,10 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		}
 	}
 
+	// fetch fields
+	$this->sess->r_user_name	= $user_name;
+	$this->sess->r_email		= $email;
+
 	$this->set_message($this->format($error), 'error');
 }
 
@@ -232,6 +236,18 @@ if (!(($this->db->allow_registration && !$this->get_user()) || $this->is_admin()
 }
 else
 {
+	if (!empty($this->sess->r_user_name))
+	{
+		$user_name					= $this->sess->r_user_name;
+		$this->sess->r_user_name	= '';
+	}
+
+	if (!empty($this->sess->r_email))
+	{
+		$email						= $this->sess->r_email;
+		$this->sess->r_email		= '';
+	}
+
 	// show regitraion form
 	$tpl->enter('r_');
 
