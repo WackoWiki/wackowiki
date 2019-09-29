@@ -8322,7 +8322,7 @@ class Wacko
 			$pwd_cplx_text .= '. ' . $this->_t('PwdCplxDesc5');
 		}
 
-		return '<br><small>' .
+		return
 			$this->_t('PwdCplxDesc1') .
 			Ut::perc_replace($this->_t('PwdCplxDesc2'), $min_chars) .
 			($this->db->pwd_unlike_login > 0
@@ -8330,7 +8330,7 @@ class Wacko
 				: '') .
 			($this->db->pwd_char_classes > 0
 				? ', ' . $pwd_cplx_text
-				: '') . '</small>';
+				: '');
 	}
 
 	// pages listing/navigation for multipage lists.
