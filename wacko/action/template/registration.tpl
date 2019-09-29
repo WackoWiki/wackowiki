@@ -21,16 +21,16 @@
 			=]
 			[ ' autocomplete ' ]
 			<p><label for="user_name">[ ' _t: UserName ' ]:</label>
-			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" pattern="[A-Za-z0-9]+" autocomplete="off" required autofocus>
-			<br><small>[ ' only ' ]</small></p>
+			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" pattern="[A-Za-z0-9]+" autocomplete="off" required autofocus></p>
+			<p>[ ' only ' ]</p>
 
 			<p><label for="password">[ ' _t: RegistrationPassword ' ]:</label>
 			<input type="password" id="password" name="password" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' password | e attr ' ]" autocomplete="off" required>
-			[''' complexity ''']
 			</p>
 
 			<p><label for="conf_password">[ ' _t:'ConfirmPassword ' ]:</label>
 			<input type="password" id="conf_password" name="conf_password" size="24"  minlength="[ ' db: pwd_min_chars ' ]" value="[ ' confpassword | e attr ' ]" autocomplete="off"></p>
+			<p>[''' complexity ''']</p>
 
 			<p>
 			<label for="email">[ ' _t: Email ' ]:</label>
