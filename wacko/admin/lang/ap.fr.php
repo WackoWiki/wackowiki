@@ -872,6 +872,8 @@ $ap_translation = [
 	'UploadQuotaUserInfo'		=> 'Restriction sur le quota de stockage qui peut être téléchargé par un utilisateur, <code>0</code> étant illimité.',
 	'CheckMimetype'				=> 'Vérifier les pièces jointes',
 	'CheckMimetypeInfo'			=> 'Certains navigateurs internet peuvent faire erreur en attribuant un type MIME incorrect aux fichiers transférés. Cette option permet de rejeter les fichiers qui présentent un risque de provoquer cette erreur.',
+	'TranslitFileName'			=> 'Transliterate file names',
+	'TranslitFileNameInfo'		=> 'Si elle est applicable et qu\'il n\'est pas nécessaire d\'avoir des caractères Unicode, il est fortement recommandé de n\'accepter que des caractères alphanumériques.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Générer des miniatures',

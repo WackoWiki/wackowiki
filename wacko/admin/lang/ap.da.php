@@ -872,6 +872,8 @@ $ap_translation = [
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Kontrol af vedhæftede filer',
 	'CheckMimetypeInfo'			=> 'Nogle browsere kan snydes og medfører fejlfortolkning af uploadede filers mimetype. Denne kontrol sikrer afvisning af filer der er årsag hertil.',
+	'TranslitFileName'			=> 'Transliterate file names',
+	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Opret miniature',

@@ -174,7 +174,6 @@
 										<option value="[ ' lang ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' name ' ] ([ ' lang ' ])</option>
 									=]
 								</select>
-								<div class="hint">[ ' _t: BewareChangeLang ' ]</div>
 							</td>
 						</tr>
 						[= themes _ =

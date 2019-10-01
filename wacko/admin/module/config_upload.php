@@ -43,6 +43,7 @@ function admin_config_upload(&$engine, &$module)
 		$config['upload_quota']				= (int) ($_POST['upload_quota'] * $binary_factor[$_POST['upload_quota_factor']]);
 		$config['upload_quota_per_user']	= (int) $_POST['upload_quota_per_user'] * $binary_factor[$_POST['upload_quota_per_user_factor']];
 		$config['check_mimetype']			= (int) $_POST['check_mimetype'];
+		$config['upload_translit']			= (int) $_POST['upload_translit'];
 		$config['img_create_thumbnail']		= (int) $_POST['img_create_thumbnail'];
 		$config['img_max_thumb_width']		= (int) $_POST['img_max_thumb_width'];
 
@@ -161,6 +162,21 @@ function admin_config_upload(&$engine, &$module)
 					<label for="check_mimetype_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="check_mimetype_off" name="check_mimetype" value="0"<?php echo ($engine->db->check_mimetype == 0 ? ' checked' : '');?>>
 					<label for="check_mimetype_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<strong><?php echo $engine->_t('TranslitFileName');?>:</strong><br>
+					<small><?php echo $engine->_t('TranslitFileNameInfo');?></small>
+				</td>
+				<td>
+					<input type="radio" id="upload_translit_on" name="upload_translit" value="1"<?php echo ($engine->db->upload_translit == 1 ? ' checked' : '');?>>
+					<label for="upload_translit_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="upload_translit_off" name="upload_translit" value="0"<?php echo ($engine->db->upload_translit == 0 ? ' checked' : '');?>>
+					<label for="upload_translit_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
