@@ -886,6 +886,8 @@ $ap_translation = [
 	'UploadQuotaUserInfo'		=> 'Beschränkung des Speicherkontingentes, der von einem Benutzer hochgeladen werden kann, wobei <code>0</code> unbegrenzt ist.',
 	'CheckMimetype'				=> 'Dateianhänge prüfen',
 	'CheckMimetypeInfo'			=> 'Manchen Browsern kann ein fehlerhafter MIME-Typ für hochgeladene Dateien vorgetäuscht werden. Diese Option stellt sicher, dass Dateien, die dieses Verhalten provozieren könnten, abgewiesen werden.',
+	'TranslitFileName'			=> 'Translitieren der Dateinamen',
+	'TranslitFileNameInfo'		=> 'Soweit dies möglich ist und keine Unicode-Zeichen erforderlich sind, wird dringend empfohlen, nur alphanumerische Zeichen zu akzeptieren.',
 
 	'Thumbnails'				=> 'Vorschaubilder',
 	'CreateThumbnail'			=> 'Vorschaubild erstellen',
