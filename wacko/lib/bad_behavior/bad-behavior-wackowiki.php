@@ -82,7 +82,7 @@ function bb2_table_structure($name)
 		KEY `idx_user_agent_hash` (`user_agent_hash`),
 		KEY `idx_ip` (`ip`),
 		KEY `idx_request_method` (`request_method`)
-		);";	// TODO: INDEX might need tuning
+		);";
 }
 
 // Insert a new record
