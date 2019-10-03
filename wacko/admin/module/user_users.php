@@ -119,9 +119,19 @@ function admin_user_users(&$engine, &$module)
 	}
 
 	// add user processing
-	if (isset($_POST['create']) && isset($_POST['newname']))
+	if (isset($_POST['create']) && isset($_POST['user_name']))
 	{
-		/* // strip \-\_\'\.\/\\
+		// create new account if possible
+		// passing vars from user input
+		$user_name		= Ut::strip_spaces($_POST['user_name']);
+		$email			= Ut::strip_spaces($_POST['email']);
+		$password		= $_POST['password'];
+		$conf_password	= $_POST['conf_password'];
+		$user_lang		= $_POST['user_lang'] ?? $engine->db->language;
+		$user_lang		= $engine->known_language($user_lang) ? $user_lang : $engine->db->language;
+		$complexity		= $engine->password_complexity($user_name, $password);
+
+		// strip \-\_\'\.\/\\
 		$user_name	= $engine->sanitize_username($user_name);
 
 		// check if name is WikiName style
@@ -154,80 +164,83 @@ function admin_user_users(&$engine, &$module)
 
 			// log event
 			$engine->log(2, Ut::perc_replace($engine->_t('LogUserSimiliarName', SYSTEM_LANG), $user_name));
-		} */
-
-		// do we have identical names?
-		if ($engine->db->load_single(
-			"SELECT user_id " .
-			"FROM " . $prefix . "user " .
-			"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
-			"LIMIT 1"))
-		{
-			$engine->show_message($engine->_t('RegistrationUserNameOwned'));
-			#$_POST['change']	= $_POST['user_id'];
-			$_POST['create']	= 1;
-		}
-		else if (!$engine->validate_email($_POST['email']))
-		{
-			$engine->show_message($engine->_t('NotAEmail'));
-			#$_POST['change']	= $_POST['user_id'];
-			$_POST['create']	= 1;
 		}
 		else
 		{
-			$engine->db->sql_query(
-				"INSERT INTO " . $prefix . "user SET " .
-					"signup_time		= UTC_TIMESTAMP(), " .
-					"email				= " . $engine->db->q($_POST['email']) . ", " .
-					"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
-					"enabled			= " . (int) ($_POST['enabled'] ?? 0) . ", " .
-					"account_lang		= " . $engine->db->q(($_POST['user_lang'] ?: $engine->db->language)) . ", " .
-					"user_name			= " . $engine->db->q($_POST['newname']) . " ");
-
-			// get new user_id
-			$_user_id = $engine->db->load_single(
+			// do we have identical names?
+			if ($engine->db->load_single(
 				"SELECT user_id " .
 				"FROM " . $prefix . "user " .
-				"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
-				"LIMIT 1");
-
-			// INSERT user settings
-			$engine->db->sql_query(
-				"INSERT INTO " . $prefix . "user_setting SET " .
-					"user_id			= " . (int) $_user_id['user_id'] . ", " .
-					"typografica		= " . (($engine->db->default_typografica == 1) ? 1 : 0) . ", " .
-					"user_lang			= " . $engine->db->q(($_POST['user_lang'] ?: $engine->db->language)) . ", " .
-					"list_count			= " . (int) $engine->db->list_count . ", " .
-					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
-					"diff_mode			= " . (int) $engine->db->default_diff_mode . ", " .
-					"notify_minor_edit	= " . (int) $engine->db->notify_minor_edit . ", " .
-					"notify_page		= " . (int) $engine->db->notify_page . ", " .
-					"notify_comment		= " . (int) $engine->db->notify_comment . ", " .
-					"sorting_comments	= " . (int) $engine->db->sorting_comments . ", " .
-					"allow_intercom		= " . (int) $engine->db->allow_intercom . ", " .
-					"allow_massemail	= " . (int) $engine->db->allow_massemail . ", " .
-					"send_watchmail		= 1");
-
-			// add user page
-			$engine->add_user_page($_POST['newname'], $_POST['user_lang']);
-
-			if ($engine->db->enable_email)
+				"WHERE user_name = " . $engine->db->q($_POST['user_name']) . " " .
+				"LIMIT 1"))
 			{
-				// 1. Send signup email to new user
-				$new_user = [
-					'user_id'		=> $_user_id['user_id'],
-					'user_name'		=> $_POST['newname'],
-					'email'			=> $_POST['email'],
-					'user_lang'		=> $_POST['user_lang'] ?: $engine->db->language
-				];
-
-				// send email to user and set email_confirm  token!
-				$engine->notify_user_signup($new_user);
+				$engine->show_message($engine->_t('RegistrationUserNameOwned'));
+				#$_POST['change']	= $_POST['user_id'];
+				$_POST['create']	= 1;
 			}
+			else if (!$engine->validate_email($_POST['email']))
+			{
+				$engine->show_message($engine->_t('NotAEmail'));
+				#$_POST['change']	= $_POST['user_id'];
+				$_POST['create']	= 1;
+			}
+			else
+			{
+				$engine->db->sql_query(
+					"INSERT INTO " . $prefix . "user SET " .
+						"signup_time		= UTC_TIMESTAMP(), " .
+						"email				= " . $engine->db->q($email) . ", " .
+						"password			= " . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ", " .
+						#"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
+						"enabled			= " . (int) ($_POST['enabled'] ?? 0) . ", " .
+						"account_lang		= " . $engine->db->q(($user_lang ?: $engine->db->language)) . ", " .
+						"user_name			= " . $engine->db->q($user_name) . " ");
 
-			$engine->show_message($engine->_t('UsersAdded'), 'success');
-			$engine->log(4, Ut::perc_replace($engine->_t('LogUserCreated', SYSTEM_LANG), $_POST['newname']));
-			unset($_POST['create']);
+				// get new user_id
+				$_user_id = $engine->db->load_single(
+					"SELECT user_id " .
+					"FROM " . $prefix . "user " .
+					"WHERE user_name = " . $engine->db->q($user_name) . " " .
+					"LIMIT 1");
+
+				// INSERT user settings
+				$engine->db->sql_query(
+					"INSERT INTO " . $prefix . "user_setting SET " .
+						"user_id			= " . (int) $_user_id['user_id'] . ", " .
+						"typografica		= " . (($engine->db->default_typografica == 1) ? 1 : 0) . ", " .
+						"user_lang			= " . $engine->db->q(($user_lang ?: $engine->db->language)) . ", " .
+						"list_count			= " . (int) $engine->db->list_count . ", " .
+						"theme				= " . $engine->db->q($engine->db->theme) . ", " .
+						"diff_mode			= " . (int) $engine->db->default_diff_mode . ", " .
+						"notify_minor_edit	= " . (int) $engine->db->notify_minor_edit . ", " .
+						"notify_page		= " . (int) $engine->db->notify_page . ", " .
+						"notify_comment		= " . (int) $engine->db->notify_comment . ", " .
+						"sorting_comments	= " . (int) $engine->db->sorting_comments . ", " .
+						"allow_intercom		= " . (int) $engine->db->allow_intercom . ", " .
+						"allow_massemail	= " . (int) $engine->db->allow_massemail . ", " .
+						"send_watchmail		= 1");
+
+				// add user page
+				$engine->add_user_page($user_name, $user_lang);
+
+				if ($engine->db->enable_email)
+				{
+					// 1. Send signup email to new user
+					$new_user = [
+						'user_id'		=> $_user_id['user_id'],
+						'user_name'		=> $user_name,
+						'email'			=> $email,
+						'user_lang'		=> $user_lang ?: $engine->db->language
+					];
+
+					// send email to user and set email_confirm  token!
+					$engine->notify_user_signup($new_user);
+				}
+
+				$engine->show_message($engine->_t('UsersAdded'), 'success');
+				$engine->log(4, Ut::perc_replace($engine->_t('LogUserCreated', SYSTEM_LANG), $user_name));
+				unset($_POST['create']);
+			}
 		}
 	}
 	// approve user processing
@@ -245,13 +258,13 @@ function admin_user_users(&$engine, &$module)
 		$engine->add_user_page($user['user_name'], $user['user_lang']);
 	}
 	// edit user processing
-	else if (isset($_POST['edit']) && $user_id && (isset($_POST['newname']) || isset($_POST['moderator_id'])))
+	else if (isset($_POST['edit']) && $user_id && (isset($_POST['user_name']) || isset($_POST['moderator_id'])))
 	{
 		// do we have identical names?
 		if ($engine->db->load_single(
 			"SELECT user_id " .
 			"FROM " . $prefix . "user " .
-			"WHERE user_name = " . $engine->db->q($_POST['newname']) . " " .
+			"WHERE user_name = " . $engine->db->q($_POST['user_name']) . " " .
 				"AND user_id <> " . (int) $_POST['user_id'] . " " .
 			"LIMIT 1"))
 		{
@@ -269,8 +282,10 @@ function admin_user_users(&$engine, &$module)
 		{
 			$engine->db->sql_query(
 				"UPDATE " . $prefix . "user SET " .
-					"user_name		= " . $engine->db->q($_POST['newname']) . ", " .
+					"user_name		= " . $engine->db->q($_POST['user_name']) . ", " .
+					"account_lang	= " . $engine->db->q($_POST['user_lang']) . ", " .
 					"email			= " . $engine->db->q($_POST['newemail']) . ", " .
+					#"password		= " . $engine->db->q($engine->password_hash(['user_name' => $_POST['user_name']], $password)) . ", " .
 					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .
 					"enabled		= " . (int) ($_POST['enabled'] ?? 0) . ", " .
 					"account_status	= " . (int) $_POST['account_status'] . " " .
@@ -364,7 +379,6 @@ function admin_user_users(&$engine, &$module)
 		}
 	}
 
-
 	/////////////////////////////////////////////
 	//   edit forms
 	/////////////////////////////////////////////
@@ -378,20 +392,39 @@ function admin_user_users(&$engine, &$module)
 		echo '<table class="formation lined">' .
 				'<tr>
 					<th>
-						<label for="newname">' . $engine->_t('UserName') . '</label>' .
+						<label for="user_name">' . $engine->_t('UserName') . '</label>' .
 					'</th>
 					<td>
-						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100" required>
+						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['user_name'] ?? '')) . '" pattern="[A-Za-z0-9]+" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
 					</td>
 				</tr>' .
-				'<tr>
+				/* '<tr>
 					<th>
 						<label for="newrealname">' . $engine->_t('RealName') . '</label>' .
 					'</th>
 					<td>
 						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? '')) . '" size="20" maxlength="100">
 					</td>
+				</tr>' . */
+
+				'<tr>
+					<th>
+						<label for="password">' . $engine->_t('RegistrationPassword') . '</label>' .
+					'</th>
+					<td>
+						<input type="password" id="password" name="password" size="24" minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html(($_POST['password'] ?? '')) . '" autocomplete="off" required>
+					</td>
 				</tr>' .
+				'<tr>
+					<th>
+						<label for="conf_password">' . $engine->_t('ConfirmPassword') . '</label>' .
+					'</th>
+					<td>
+						<input type="password" id="conf_password" name="conf_password" size="24"  minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html(($_POST['conf_password'] ?? '')) . '" autocomplete="off" required>
+						<p>' . $engine->show_password_complexity() . '</p>
+					</td>
+				</tr>' .
+
 				'<tr>
 					<th>
 						<label for="email">' . $engine->_t('Email') . '</label>
@@ -456,10 +489,10 @@ function admin_user_users(&$engine, &$module)
 				'<table class="formation lined">' .
 				'<tr>
 					<th>
-						<label for="newname">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
+						<label for="user_name">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
 					</th>' .
 					'<td>
-						<input type="text" id="newname" name="newname" value="' . Ut::html(($_POST['newname'] ?? $user['user_name'])) . '" pattern="[A-Za-z0-9]+" size="20" maxlength="100">
+						<input type="text" id="user_name" name="user_name" value="' . Ut::html(($_POST['user_name'] ?? $user['user_name'])) . '" pattern="[A-Za-z0-9]+" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
 					</td>
 				</tr>' .
 				'<tr>
