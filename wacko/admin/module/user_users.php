@@ -130,6 +130,8 @@ function admin_user_users(&$engine, &$module)
 		$user_lang		= $_POST['user_lang'] ?? $engine->db->language;
 		$user_lang		= $engine->known_language($user_lang) ? $user_lang : $engine->db->language;
 		$complexity		= $engine->password_complexity($user_name, $password);
+		$notify_signup	= (int) ($_POST['notify_signup'] ?? 0);
+		$verify_email	= (int) ($_POST['verify_email'] ?? 0);
 
 		// strip \-\_\'\.\/\\
 		$user_name	= $engine->sanitize_username($user_name);
@@ -190,11 +192,6 @@ function admin_user_users(&$engine, &$module)
 		{
 			$error .= $complexity;
 		}
-		else if ($error)
-		{
-			$engine->show_message($error, 'error');
-			$_POST['create']	= 1;
-		}
 		else
 		{
 			$engine->db->sql_query(
@@ -234,7 +231,7 @@ function admin_user_users(&$engine, &$module)
 			// add user page
 			$engine->add_user_page($user_name, $user_lang);
 
-			if ($engine->db->enable_email)
+			if ($engine->db->enable_email && $notify_signup)
 			{
 				// 1. Send signup email to new user
 				$new_user = [
@@ -245,12 +242,18 @@ function admin_user_users(&$engine, &$module)
 				];
 
 				// send email to user and set email_confirm  token!
-				$engine->notify_user_signup($new_user);
+				$engine->notify_user_signup($new_user, $verify_email);
 			}
 
 			$engine->show_message($engine->_t('UsersAdded'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogUserCreated', SYSTEM_LANG), $user_name));
 			unset($_POST['create']);
+		}
+
+		if ($error)
+		{
+			$engine->show_message($error, 'error');
+			$_POST['create']	= 1;
 		}
 	}
 	// approve user processing
@@ -470,6 +473,17 @@ function admin_user_users(&$engine, &$module)
 					</th>' .
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (!isset($_POST['enabled']) ? ' checked' : '') . '>
+					</td>
+				</tr>' .
+				'<tr>
+					<th>
+						<label>' . $engine->_t('UserAccountNotify') . '</label>
+					</th>' .
+					'<td>
+						<input type="checkbox" id="notify_signup" name="notify_signup" value="1" ' . (!isset($_POST['notify_signup']) ? '' : ' checked') . '>
+						<label for="notify_signup">' . $engine->_t('UserNotifySignup') . '</label><br>
+						<input type="checkbox" id="verify_email" name="verify_email" value="1" ' . (!isset($_POST['verify_email']) ? '' : ' checked') . '>
+						<label for="verify_email">' . $engine->_t('UserVerifyEmail') . '</label>
 					</td>
 				</tr>' .
 				'<tr>

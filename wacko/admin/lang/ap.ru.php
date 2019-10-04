@@ -614,7 +614,7 @@ $ap_translation = [
 	'RegistrationDelay'			=> 'Time threshold for registering',
 	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
-	//Formatter settings
+	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Группа параметров, отвечающих за тонкую настройку форматирования текста. Не меняйте их, если не уверены в своих действиях.',
 	'FormatterSettingsUpdated'	=> 'Параметры форматирования обновлены.',
 
@@ -1094,6 +1094,10 @@ $ap_translation = [
 	'UserSignuptime'			=> 'Дата регистрации',
 	'UserActions'				=> 'Действия',
 	'NoMatchingUser'			=> 'Нет пользователей, соответствующих заданным критериям',
+
+	'UserAccountNotify'			=> 'Уведомить пользователя',
+	'UserNotifySignup'			=> 'проинформировать пользователя о новой учетной записи',
+	'UserVerifyEmail'			=> 'установить токен для подтверждения электронной почты и добавить ссылку для проверки электронной почты',
 
 	// Groups module
 	'GroupsInfo'				=> 'На этой странице можно изменить параметры групп. Можно создать, удалить, изменить группы. Кроме того, вы можете выбрать лидеров группы, переключить статус открытой / скрытой / закрытой группы и задать имя и описание группы.',

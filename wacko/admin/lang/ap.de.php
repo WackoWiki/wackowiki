@@ -636,7 +636,7 @@ $ap_translation = [
 	'RegistrationDelay'			=> 'Mindestdauer für die Registrierung',
 	'RegistrationDelayInfo'		=> 'Die minimale Zeitschwelle für das Ausfüllen des Registrierungsformulars, um Bots von Menschen zu unterscheiden (in Sekunden).',
 
-	//Formatter settings
+	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Gruppe von Parametern, die für die Feinabstimmung der Plattform verantwortlich sind. Ändere sie nicht, es sei denn, du bist mit ihrer Funktionsweise vertraut.',
 	'FormatterSettingsUpdated'	=> 'Formatierungseinstellungen aktualisiert',
 
@@ -1123,6 +1123,10 @@ $ap_translation = [
 	'UserSignuptime'			=> 'Anmeldung',
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfüllen.',
+
+	'UserAccountNotify'			=> 'Benutzer benachrichtigen',
+	'UserNotifySignup'			=> 'den Benutzer über das neue Konto informieren',
+	'UserVerifyEmail'			=> 'setze E-Mail-Bestätigungstoken und füge einen Link zur E-Mail-Verifizierung hinzu',
 
 	// Groups module
 	'GroupsInfo'				=> 'Benutzergruppen verwalten. Hier können Gruppen erstellt, bearbeitet und gelöscht werden. Darüber hinaus lässt sich ein Gruppenleiter auswählen, der Status der Gruppe ändern und der Gruppenname und die Beschreibung festlegen.',

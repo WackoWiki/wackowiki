@@ -626,7 +626,7 @@ $ap_translation = [
 	'RegistrationDelay'			=> 'Time threshold for registering',
 	'RegistrationDelayInfo'		=> 'El umbral de tiempo mínimo para rellenar el formulario de registro para distinguir a los robots de los humanos (en segundos).',
 
-	//Formatter settings
+	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
 	'FormatterSettingsUpdated'	=> 'Updated formatting settings',
 
@@ -1107,6 +1107,10 @@ $ap_translation = [
 	'UserSignuptime'			=> 'Signuptime',
 	'UserActions'				=> 'Acciones',
 	'NoMatchingUser'			=> 'No hay usuarios con este criterio',
+
+	'UserAccountNotify'			=> 'Notificar al usuario',
+	'UserNotifySignup'			=> 'informar al usuario sobre la nueva cuenta',
+	'UserVerifyEmail'			=> 'configurar el token de confirmación de correo electrónico y añadir un enlace para la verificación del correo electrónico',
 
 	// Groups module
 	'GroupsInfo'				=> 'Desde este panel puedes administrar todos tus grupos de usuarios. Puede borrar, crear y editar grupos existentes. Además, puede elegir líderes de grupo, alternar entre estado de grupo abierto/oculto/cerrado y establecer el nombre y la descripción del grupo.',
