@@ -26,8 +26,6 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],			'Condizioni di utilizzo',		'',				$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],		'Informativa sulla privacy',		'',			$page_lang, 'Admins', false, false);
 
-	#insert_page($config['random_page'],		'Pagina a caso',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Casuale');
-
 	insert_page($config['registration_page'],	'Registrazione',		'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Password',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Ricerca',				'{{search}}',			$page_lang, 'Admins', false, false);
@@ -37,6 +35,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['changes_page'],		'Ultime Modifiche',		'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Modifiche');
 	insert_page($config['comments_page'],		'Ultimi Commenti',		'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Commenti');
 	insert_page($config['index_page'],			'Indice Pagine',		'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Indice');
+	insert_page($config['random_page'],			'Pagina a caso',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Casuale');
 }
 else
 {
@@ -44,8 +43,7 @@ else
 	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Modifiche');
 	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Commenti');
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Indice');
-
-	#insert_page($config['random_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Casuale');
+	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Casuale');
 
 }
 

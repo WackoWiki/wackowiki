@@ -26,8 +26,6 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],			'Terms',					'',						$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],		'Andmekaitse',				'',						$page_lang, 'Admins', false, false);
 
-	#insert_page($config['random_page'],		'Juhuslik lehekülg',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Juhuslik');
-
 	insert_page($config['registration_page'],	'Registreerimine',			'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Parool',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Otsing',					'{{search}}',			$page_lang, 'Admins', false, false);
@@ -37,6 +35,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['changes_page'],		'Viimased Muudatused',		'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Muudatused');
 	insert_page($config['comments_page'],		'Viimati Kommenteeritud',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Kommenteeritud');
 	insert_page($config['index_page'],			'Sisu Kord',				'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
+	insert_page($config['random_page'],			'Juhuslik lehekülg',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Juhuslik');
 }
 else
 {
@@ -44,8 +43,7 @@ else
 	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Muudatused');
 	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Kommenteeritud');
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
-
-	#insert_page($config['random_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Juhuslik');
+	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Juhuslik');
 
 }
 
