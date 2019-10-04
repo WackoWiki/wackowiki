@@ -1210,6 +1210,8 @@ class Wacko
 		{
 			if (isset($pages[array_search($notexist, $spages)]))
 			{
+				// now without check but previous query may be cached
+				#$this->cache_wanted_page($pages[array_search($notexist, $spages)]);
 				$this->cache_wanted_page($pages[array_search($notexist, $spages)], 0, 1);
 			}
 		}
@@ -2443,14 +2445,23 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_user_signup($user)
+	/**
+	 * send signup email to user
+	 *
+	 * @param array		$user		user data array
+	 * @param boolean	$verify		set email_confirm token and add link for email verification
+	 */
+	function notify_user_signup($user, $verify = true)
 	{
 		$save = $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('EmailWelcome') . ' ' . $this->db->base_url; // TODO: customize!
-		$body		=	Ut::perc_replace($this->_t('EmailRegistered'),
-							$this->db->site_name, $user['user_name'],
-							$this->user_email_confirm($user['user_id'])) . "\n\n" .
+		$body		=	Ut::perc_replace(
+							$this->_t('EmailRegistered'),
+							$this->db->site_name, $user['user_name']) .
+						($verify
+							? Ut::perc_replace($this->_t('EmailVerify'), $this->user_email_confirm($user['user_id']))
+							: '') . "\n\n" .
 						($this->db->approve_new_user
 							? $this->_t('UserWaitingApproval')
 							: $this->_t('EmailRegisteredLogin') ) . "\n\n" .
@@ -4358,7 +4369,6 @@ class Wacko
 			{
 				return @$x[1]? '/' : '';
 			}, $tag);
-
 
 		// - / ' _ .
 		// TODO: remove punctuations from language ALPHA* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

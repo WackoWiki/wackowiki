@@ -626,7 +626,7 @@ $ap_translation = [
 	'RegistrationDelay'			=> 'Time threshold for registering',
 	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
-	//Formatter settings
+	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
 	'FormatterSettingsUpdated'	=> 'Mise à jour des paramètres de formatage',
 
@@ -1107,6 +1107,10 @@ $ap_translation = [
 	'UserSignuptime'			=> 'Temps d\'inscription',
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'Aucun utilisateur ne répond aux critères',
+
+	'UserAccountNotify'			=> 'Notifier l\'utilisateur',
+	'UserNotifySignup'			=> 'informer l\'utilisateur du nouveau compte',
+	'UserVerifyEmail'			=> 'configurer le jeton de confirmation de l\'email et ajouter un lien pour la vérification de l\'email',
 
 	// Groups module
 	'GroupsInfo'				=> 'A partir de ce panneau, vous pouvez administrer tous vos groupes d\'utilisateurs. Vous pouvez supprimer, créer et modifier des groupes existants. En outre, vous pouvez choisir les chefs de groupe, basculer entre les statuts Ouvert/Masqué/Fermé et définir le nom et la description du groupe.',

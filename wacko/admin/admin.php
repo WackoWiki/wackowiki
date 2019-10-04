@@ -281,6 +281,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="<?php echo $engine->get_charset(); ?>">
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<meta http-equiv="Content-Type" content="text/html;">

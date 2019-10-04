@@ -634,7 +634,7 @@ $ap_translation = [
 	'RegistrationDelay'			=> 'Time threshold for registering',
 	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
-	//Formatter settings
+	// Formatter settings
 	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
 	'FormatterSettingsUpdated'	=> 'Updated formatting settings',
 
@@ -1113,6 +1113,10 @@ $ap_translation = [
 	'UserSignuptime'			=> 'Signuptime',
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
+
+	'UserAccountNotify'			=> 'Notify user',
+	'UserNotifySignup'			=> 'inform the user about the new account',
+	'UserVerifyEmail'			=> 'set email confirm token and add link for email verification',
 
 	// Groups module
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
