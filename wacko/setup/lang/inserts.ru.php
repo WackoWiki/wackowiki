@@ -26,8 +26,6 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],			'Условия использования',		'',				$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],		'Политика конфиденциальности',		'',			$page_lang, 'Admins', false, false);
 
-	#insert_page($config['random_page'],		'Случайная страница',	'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Случайный');
-
 	insert_page($config['registration_page'],	'Регистрация',			'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Пароль',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Поиск',				'{{search}}',			$page_lang, 'Admins', false, false);
@@ -37,6 +35,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['changes_page'],		'Изменения',			'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Изменения');
 	insert_page($config['comments_page'],		'Новые Комментарии',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Комментарии');
 	insert_page($config['index_page'],			'Каталог',				'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Каталог');
+	insert_page($config['random_page'],			'Случайная страница',	'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Случайный');
 }
 else
 {
@@ -44,8 +43,7 @@ else
 	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Изменения');
 	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Комментарии');
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Каталог');
-
-	#insert_page($config['random_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Случайный');
+	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Случайный');
 
 }
 

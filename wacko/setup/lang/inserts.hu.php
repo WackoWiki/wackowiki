@@ -26,8 +26,6 @@ if ($config['language'] == $page_lang)
 	insert_page($config['terms_page'],			'Terms',				'',						$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],		'Privacy',				'',						$page_lang, 'Admins', false, false);
 
-	#insert_page($config['random_page'],		'Lap találomra',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Random');
-
 	insert_page($config['registration_page'],	'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Keresés',				'{{search}}',			$page_lang, 'Admins', false, false);
@@ -37,6 +35,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['changes_page'],		'Friss változtatások',	'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Változtatások');
 	insert_page($config['comments_page'],		'Utolsó megjegyzések',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Megjegyzések');
 	insert_page($config['index_page'],			'Oldal Index',			'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
+	insert_page($config['random_page'],			'Lap találomra',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Random');
 }
 else
 {
@@ -44,8 +43,7 @@ else
 	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Változtatások');
 	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Megjegyzések');
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
-
-	#insert_page($config['random_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Random');
+	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Random');
 
 }
 
