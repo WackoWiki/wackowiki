@@ -1111,6 +1111,10 @@ $ap_translation = [
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
 
+	'UserAccountNotify'			=> 'Teata kasutajat',
+	'UserNotifySignup'			=> 'teavitage kasutajat uuest kontost',
+	'UserVerifyEmail'			=> 'määrake e-posti kinnituse märk ja lisage link e-posti kinnitamiseks',
+
 	// Groups module
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
 

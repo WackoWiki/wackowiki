@@ -156,7 +156,7 @@ else if (($user = $this->get_user()))
 		{
 			$save		=	$this->set_language($user['user_lang'], true);
 			$subject	=	$this->_t('EmailConfirm');
-			$body		=	Ut::perc_replace($this->_t('EmailVerify'),
+			$body		=	Ut::perc_replace($this->_t('EmailReverify'),
 								$this->db->site_name,
 								$user['user_name'],
 								$this->user_email_confirm($user['user_id'])) . "\n\n";

@@ -1127,6 +1127,10 @@ $ap_translation = [
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'Keine Benutzer, welche diese Kriterien erfüllen.',
 
+	'UserAccountNotify'			=> 'Benutzer benachrichtigen',
+	'UserNotifySignup'			=> 'den Benutzer über das neue Konto informieren',
+	'UserVerifyEmail'			=> 'setze E-Mail-Bestätigungstoken und füge einen Link zur E-Mail-Verifizierung hinzu',
+
 	// Groups module
 	'GroupsInfo'				=> 'Benutzergruppen verwalten. Hier können Gruppen erstellt, bearbeitet und gelöscht werden. Darüber hinaus lässt sich ein Gruppenleiter auswählen, der Status der Gruppe ändern und der Gruppenname und die Beschreibung festlegen.',
 
