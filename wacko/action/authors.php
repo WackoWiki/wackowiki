@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 /*
 print page and revisions authors.
-	{{authors [add="(c) 2009 Ivan Ivanov[;(c) 2010 John Smith[;...]]"] [license="CC-BY-SA"] [cluster=0]}}
+	{{authors [add="2009 Ivan Ivanov[;2010 John Smith[;...]]"] [license="CC-BY-SA"] [cluster=0]}}
 	add		= semicolon-separated list of original authors (for reprinted work or such),
 			  or any appropriate text. wiki-formatting applies.
 			  note: every semicolon-separated block is printed on the new line
@@ -29,11 +29,11 @@ print page and revisions authors.
 	https://en.wikipedia.org/wiki/Creative_Commons_license
 */
 
-if (!isset($add))		$add		= '';
-if (!isset($add_only))	$add_only	= 0;
-if (!isset($license))	$license	= '';
+if (!isset($add))			$add		= '';
+if (!isset($add_only))		$add_only	= 0;
+if (!isset($license))		$license	= '';
 if (!isset($license_id))	$license_id	= null;
-if (!isset($cluster))	$cluster	= '';
+if (!isset($cluster))		$cluster	= '';
 
 // check for license_id
 if (empty($license) && !isset($license_id))
@@ -58,7 +58,7 @@ else
 
 		foreach ($add as $i => $str)
 		{
-			$output[$i] = $this->format($this->format($str, 'wacko'), 'post_wacko');
+			$output[$i] = '&copy; ' . $this->format($this->format($str, 'wacko'), 'post_wacko');
 		}
 	}
 
@@ -174,7 +174,7 @@ else
 				$all_authors[] = $guest_authors;
 			}
 
-			$output = $all_authors;
+			$output[] = implode('<br>', $all_authors);
 		}
 	}
 
