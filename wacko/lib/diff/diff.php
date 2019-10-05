@@ -48,7 +48,7 @@ class Side
 		$this->directive	= '';
 		$this->argument		= [];
 		$this->length		= mb_strlen($this->content);
-		$this->character	= substr($this->content, 0, 1);
+		$this->character	= mb_substr($this->content, 0, 1);
 	}
 
 	function getposition()
@@ -73,7 +73,7 @@ class Side
 	function nextchar()
 	{
 		$this->cursor++;
-		$this->character = substr($this->content,$this->cursor,1);
+		$this->character = mb_substr($this->content,$this->cursor,1);
 	}
 
 	function copy_until_ordinal($ordinal,&$out)
@@ -114,18 +114,18 @@ class Side
 		$this->cursor		= 0;
 		$this->directive	= '';
 		$this->argument		= [];
-		$this->character	= substr($this->content, 0, 1);
+		$this->character	= mb_substr($this->content, 0, 1);
 	}
 
 	function isspace($char)
 	{
-		if (preg_match('/([[:space:]]|\*)/', $char)) return true;
+		if (preg_match('/([[:space:]]|\*)/u', $char)) return true;
 		return false;
 	}
 
 	function isdigit($char)
 	{
-		if (preg_match('/[[:digit:]]/',$char)) return true;
+		if (preg_match('/[[:digit:]]/u',$char)) return true;
 		return false;
 	}
 
