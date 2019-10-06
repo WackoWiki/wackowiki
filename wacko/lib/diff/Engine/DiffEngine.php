@@ -22,6 +22,8 @@
  */
 class DiffEngine
 {
+	const USE_ASSERTS = false;
+
 	function diff ($from_lines, $to_lines)
 	{
 		$n_from = sizeof($from_lines);
@@ -100,8 +102,8 @@ class DiffEngine
 
 		while ($xi < $n_from || $yi < $n_to)
 		{
-			USE_ASSERTS && assert($yi < $n_to || $this->xchanged[$xi]);
-			USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
+			$this::USE_ASSERTS && assert($yi < $n_to || $this->xchanged[$xi]);
+			$this::USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
 
 			// Skip matching "snake" .
 			$copy = [];
@@ -224,7 +226,7 @@ class DiffEngine
 						if (empty($this->in_seq[$y]))
 						{
 							$k = $this->_lcs_pos($y);
-							USE_ASSERTS && assert($k > 0);
+							$this::USE_ASSERTS && assert($k > 0);
 							$ymids[$k] = $ymids[$k - 1];
 							$found_empty = true;
 						}
@@ -233,7 +235,7 @@ class DiffEngine
 					{
 						if ($y > $this->seq[$k - 1])
 						{
-							USE_ASSERTS && assert($y < $this->seq[$k]);
+							$this::USE_ASSERTS && assert($y < $this->seq[$k]);
 							// Optimization: this is a common case:
 							//  next match is just replacing previous match.
 							$this->in_seq[$this->seq[$k]] = false;
@@ -243,7 +245,7 @@ class DiffEngine
 						else if (empty($this->in_seq[$y]))
 						{
 							$k = $this->_lcs_pos($y);
-							USE_ASSERTS && assert($k > 0);
+							$this::USE_ASSERTS && assert($k > 0);
 							$ymids[$k] = $ymids[$k - 1];
 						}
 					}
@@ -290,7 +292,7 @@ class DiffEngine
 			}
 		}
 
-		USE_ASSERTS && assert($ypos != $this->seq[$end]);
+		$this::USE_ASSERTS && assert($ypos != $this->seq[$end]);
 
 		$this->in_seq[$this->seq[$end]] = false;
 		$this->seq[$end] = $ypos;
@@ -384,7 +386,7 @@ class DiffEngine
 		$i = 0;
 		$j = 0;
 
-		USE_ASSERTS && assert(sizeof($lines) == sizeof($changed));
+		$this::USE_ASSERTS && assert(sizeof($lines) == sizeof($changed));
 		$len = sizeof($lines);
 		$other_len = sizeof($other_changed);
 
@@ -408,7 +410,7 @@ class DiffEngine
 
 			while ($i < $len && ! $changed[$i])
 			{
-				USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
+				$this::USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
 				$i++;
 				$j++;
 				while ($j < $other_len && $other_changed[$j])
@@ -451,12 +453,12 @@ class DiffEngine
 					{
 						$start--;
 					}
-					USE_ASSERTS && assert($j > 0);
+					$this::USE_ASSERTS && assert($j > 0);
 					while ($other_changed[--$j])
 					{
 						continue;
 					}
-					USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
+					$this::USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
 				}
 
 				/*
@@ -482,7 +484,7 @@ class DiffEngine
 						$i++;
 					}
 
-					USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
+					$this::USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
 					$j++;
 					if ($j < $other_len && $other_changed[$j])
 					{
@@ -503,12 +505,12 @@ class DiffEngine
 			{
 				$changed[--$start] = 1;
 				$changed[--$i] = 0;
-				USE_ASSERTS && assert($j > 0);
+				$this::USE_ASSERTS && assert($j > 0);
 				while ($other_changed[--$j])
 				{
 					continue;
 				}
-				USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
+				$this::USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
 			}
 		}
 	}
