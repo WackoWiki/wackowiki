@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 /*
- diff.php
+ Diff.php
 
  Copyright (C) 1992 Free Software Foundation, Inc. Francois Pinard <pinard@iro.umontreal.ca>.
  Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
@@ -30,17 +30,13 @@ if (!defined('IN_WACKO'))
  */
 
 
-// difflib
-//
-// A PHP diff engine for phpwiki.
-//
-// Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
-// You may copy this code freely under the conditions of the GPL.
-//
-
-// PHP3 does not have assert()
-define('USE_ASSERTS', function_exists('assert'));
-
+/** difflib
+ *
+ * Based on PHP diff engine for phpwiki.
+ *
+ * Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
+ * You may copy this code freely under the conditions of the GPL.
+ */
 
 /**
  * Class representing a 'diff' between two sequences of strings.
@@ -53,9 +49,9 @@ class Diff2
 	 * Constructor.
 	 * Computes diff between sequences of strings.
 	 *
-	 * @param $from_lines array An array of strings.
+	 * @param array $from_lines array An array of strings.
 	 *        (Typically these are lines from a file.)
-	 * @param $to_lines array An array of strings.
+	 * @param array $to_lines array An array of strings.
 	 */
 	function __construct($from_lines, $to_lines)
 	{
