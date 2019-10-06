@@ -15,8 +15,8 @@ if (array_key_exists('wacko_version', $config))
 	{
 		$config['is_update'] = null;
 		echo '<ul class="security"><li>' . Ut::perc_replace($lang['PleaseUpgradeToR5'], $min_upgrade_version, $min_upgrade_version) . "</li></ul>\n";
-		// http://sourceforge.net/projects/wackowiki/files/
-		// https://wackowiki.org/doc/Dev/Release/R55/Upgrade
+		// https://sourceforge.net/projects/wackowiki/files/
+		// https://wackowiki.org/doc/Dev/Release/R6.0/Upgrade
 	}
 	else
 	{
@@ -38,20 +38,20 @@ echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_
 <?php
 // http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 $lang_codes = [];
-$lang_codes['bg'] = '&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080;';
+$lang_codes['bg'] = 'български';
 $lang_codes['da'] = 'Dansk';
 $lang_codes['de'] = 'Deutsch';
 $lang_codes['et'] = 'Eesti';
 $lang_codes['en'] = 'English';
-$lang_codes['el'] = '&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940;';
-$lang_codes['es'] = 'Espa&ntilde;ol';
-$lang_codes['fr'] = 'Fran&#231;ais';
+$lang_codes['el'] = 'Ελληνικά';
+$lang_codes['es'] = 'Español';
+$lang_codes['fr'] = 'Français';
 $lang_codes['hu'] = 'Magyar';
 $lang_codes['it'] = 'Italiano';
 $lang_codes['nl'] = 'Nederlands';
 $lang_codes['pl'] = 'Polski';
 $lang_codes['pt'] = 'Portugues';
-$lang_codes['ru'] = '&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;';
+$lang_codes['ru'] = 'Русский';
 
 foreach($lang_codes as $key => $value)
 {
