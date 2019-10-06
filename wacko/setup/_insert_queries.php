@@ -82,213 +82,29 @@ $insert_records[]		= [$lang['InstallingReviewerGroup'],		$insert_reviewer_group,
 //		$value[1] - table name
 //		$value[2] - SQL query
 
-// 5.1 ############
-// cache
-$upgrade['5.1.0'][]		= ['alter',		'cache',			$alter_cache_r5_1_0];
-$upgrade['5.1.0'][]		= ['alter',		'cache',			$alter_cache_r5_1_1];
-
-// file (see 5.4.0)
-$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_0];
-$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_1];
-$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_2];
-$upgrade['5.1.0'][]		= ['alter',		'upload',			$alter_file_r5_1_3];
-
-// page
-$upgrade['5.1.0'][]		= ['alter',		'page',				$alter_page_r5_1_0];
-$upgrade['5.1.0'][]		= ['alter',		'page',				$alter_page_r5_1_1];
-
-$upgrade['5.1.0'][]		= ['update',	'page',				$update_page_r5_1_0];
-
-// page link
-$upgrade['5.1.0'][]		= ['alter',		'link',				$alter_page_link_r5_1_0];
-
-// revision
-$upgrade['5.1.0'][]		= ['alter',		'revision',			$alter_revision_r5_1_0];
-
-// 5.4 ############
-
-// auth_token
-$upgrade['5.5.rc'][]	= ['delete',	'auth_token',		$tbl_auth_token_drop];
-
-$upgrade['5.5.rc'][]	= ['create',	'auth_token',		$tbl_auth_token_r5_4_0];
-
-// cache
-$upgrade['5.4.0'][]		= ['alter',		'cache',			$alter_cache_r5_4_0];
-$upgrade['5.4.0'][]		= ['alter',		'cache',			$alter_cache_r5_4_1];
-
-// category
-$upgrade['5.4.0'][]		= ['alter',		'category',			$alter_category_r5_4_0];
-$upgrade['5.4.0'][]		= ['alter',		'category',			$alter_category_r5_4_1];
-$upgrade['5.4.0'][]		= ['alter',		'category',			$alter_category_r5_4_2];
-
-$upgrade['5.5.rc2'][]	= ['alter',		'category',			$alter_category_r5_4_3];
-
-// category assignment
-$upgrade['5.5.rc2'][]	= ['rename',	'category_page',	$rename_category_assignment_r5_4_0];
-
-$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_0];
-$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_1];
-$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_2];
-$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_3];
-$upgrade['5.5.rc2'][]	= ['alter',		'category_assignment',	$alter_category_assignment_r5_4_4];
-
-$upgrade['5.5.rc2'][]	= ['update',	'category_assignment',	$update_category_assignment_r5_4_0];
-
-// config
-$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_2];
-$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_3];
-$upgrade['5.4.0'][]		= ['update',	'config',			$update_config_r5_4_4];
-
-$upgrade['5.5.7'][]		= ['update',	'config',			$update_config_r5_4_0];
-$upgrade['5.5.7'][]		= ['update',	'config',			$update_config_r5_4_1];
-
-// external link
-$upgrade['5.5.5'][]		= ['create',	'external_link',	$tbl_external_link_r5_4_0];
-
-// file
-$upgrade['5.4.0'][]		= ['alter',		'upload',			$alter_file_r5_4_0];
-
-$upgrade['5.5.rc2'][]	= ['rename',	'file',				$rename_file_r5_4_0];
-
-$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_1];
-$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_2];
-$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_3];
-$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_4];
-$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_5];
-$upgrade['5.5.rc2'][]	= ['alter',		'file',				$alter_file_r5_4_6];
-
-$upgrade['5.5.rc2'][]	= ['update',	'file',				$update_file_r5_4_0];
-
-$upgrade['5.5.5'][]		= ['alter',		'file',				$alter_file_r5_4_7];
-
-$upgrade['5.5.7'][]		= ['alter',		'file',				$alter_file_r5_4_8];
-$upgrade['5.5.7'][]		= ['alter',		'file',				$alter_file_r5_4_9];
-$upgrade['5.5.7'][]		= ['alter',		'file',				$alter_file_r5_4_10];
-
-$upgrade['5.5.12'][]	= ['update',	'file',				$update_file_r5_4_1];
-
-// file link
-$upgrade['5.4.0'][]		= ['create',	'file_link',		$tbl_file_link_r5_4_0];
-
-// LOG
-$upgrade['5.5.12'][]	= ['alter',		'log',				$alter_log_r5_4_0];
-
-// menu
-$upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_0];
-$upgrade['5.4.0'][]		= ['alter',		'menu',				$alter_menu_r5_4_1];
-
-$upgrade['5.5.12'][]	= ['alter',		'menu',				$alter_menu_r5_4_2];
-
-// page
-$upgrade['5.4.0'][]		= ['alter',		'page',				$alter_page_r5_4_0];
-$upgrade['5.4.0'][]		= ['update',	'page',				$update_page_r5_4_1];
-$upgrade['5.4.0'][]		= ['update',	'page',				$update_page_r5_4_2];
-
-$upgrade['5.5.rc'][]	= ['alter',		'page',				$alter_page_r5_4_1];
-$upgrade['5.5.rc'][]	= ['alter',		'page',				$alter_page_r5_4_2];
-$upgrade['5.5.rc'][]	= ['alter',		'page',				$alter_page_r5_4_3];
-
-$upgrade['5.5.rc2'][]	= ['alter',		'page',				$alter_page_r5_4_4];
-$upgrade['5.5.rc2'][]	= ['update',	'page',				$update_page_r5_4_3];
-$upgrade['5.5.rc2'][]	= ['update',	'page',				$update_page_r5_4_4];
-
-$upgrade['5.5.0'][]		= ['alter',		'page',				$alter_page_r5_4_5];
-$upgrade['5.5.0'][]		= ['alter',		'page',				$alter_page_r5_4_6];
-
-$upgrade['5.5.0'][]		= ['update',	'page',				$update_page_r5_4_5];
-$upgrade['5.5.0'][]		= ['update',	'page',				$update_page_r5_4_6];
-
-$upgrade['5.5.5'][]		= ['alter',		'page',				$alter_page_r5_4_7];
-
-$upgrade['5.5.11'][]	= ['update',	'page',				$update_page_r5_4_0];
-
-$upgrade['5.5.12'][]	= ['alter',		'page',				$alter_page_r5_4_8];
-
-// page link
-$upgrade['5.5.rc2'][]	= ['rename',	'page_link',		$rename_page_link_r5_4_0];
-$upgrade['5.5.12'][]	= ['alter',		'page_link',		$alter_page_link_r5_4_0];
-
-// referrer
-$upgrade['5.4.0'][]		= ['alter',		'referrer',			$alter_referrer_r5_4_0];
-
-$upgrade['5.5.12'][]	= ['alter',		'referrer',			$alter_referrer_r5_4_1];
-
-// revision
-$upgrade['5.4.0'][]		= ['alter',		'revision',			$alter_revision_r5_4_0];
-$upgrade['5.4.0'][]		= ['update',	'revision',			$update_revision_r5_4_0];
-
-$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_1];
-$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_2];
-$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_3];
-$upgrade['5.5.rc'][]	= ['alter',		'revision',			$alter_revision_r5_4_4];
-
-$upgrade['5.5.rc2'][]	= ['alter',		'revision',			$alter_revision_r5_4_5];
-$upgrade['5.5.rc2'][]	= ['update',	'revision',			$update_revision_r5_4_1];
-
-$upgrade['5.5.12'][]	= ['alter',		'revision',			$alter_revision_r5_4_6];
-
-// tag
-$upgrade['5.4.0'][]		= ['alter',		'tag',				$alter_tag_r5_4_0];
-
-// user
-$upgrade['5.4.0'][]		= ['alter',		'user',				$alter_user_r5_4_0];
-$upgrade['5.4.0'][]		= ['alter',		'user',				$alter_user_r5_4_2];
-$upgrade['5.4.0'][]		= ['alter',		'user',				$alter_user_r5_4_3];
-
-$upgrade['5.5.beta'][]	= ['alter',		'user',				$alter_user_r5_4_4];
-$upgrade['5.5.beta'][]	= ['alter',		'user',				$alter_user_r5_4_5];
-$upgrade['5.5.7'][]		= ['alter',		'user',				$alter_user_r5_4_6];
-
-$upgrade['5.5.6'][]		= ['insert',	'user',				$insert_user_deleted];
-
-$upgrade['5.5.12'][]	= ['alter',		'user',				$alter_user_r5_4_7];
-
-// user setting
-$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_0];
-$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_1];
-$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_2];
-$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_3];
-$upgrade['5.4.0'][]		= ['alter',		'user_setting',		$alter_user_setting_r5_4_4];
-
-$upgrade['5.5.beta'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_5];
-$upgrade['5.5.beta'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_6];
-$upgrade['5.5.beta'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_7];
-
-$upgrade['5.5.rc'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_8];
-
-$upgrade['5.5.rc3'][]	= ['alter',		'user_setting',		$alter_user_setting_r5_4_9];
-
-$upgrade['5.5.rc3'][]	= ['update',	'user_setting',		$update_user_setting_r5_4_0];
-
-// Make sure these are in order!
-$upgrade['5.4.0'][]		= ['update',	'user',				$update_user_r5_4_0];
-
-// usergroup
-$upgrade['5.4.0'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_4_0];
-$upgrade['5.4.0'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_4_1];
-
-// usergroup
-$upgrade['5.4.0'][]		= ['create',	'word',				$tbl_word_r5_4_0];
-
-// watch
-$upgrade['5.5.beta'][]	= ['alter',		'watch',			$alter_watch_r5_4_0];
 
 // 5.5 ############
 
+// config
+$upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_0];
+$upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_1];
+
 // menu
-$upgrade['5.5.12'][]	= ['update',	'menu',				$update_menu_r5_5_0];
+$upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_0];
 
 // page
-$upgrade['5.5.12'][]	= ['alter',		'page',				$alter_page_r5_5_0];
+$upgrade['5.5.14'][]	= ['alter',		'page',				$alter_page_r5_5_0];
 
-$upgrade['5.5.12'][]	= ['update',	'page',				$update_page_r5_5_0];
+$upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_0];
+$upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_1];
+$upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_2];
 
-// keep this order, after $update_page_r5_5_0!
-$upgrade['5.5.12'][]	= ['update',	'menu',				$update_menu_r5_5_1];
+// keep this order, after $update_page_r5_5_2!
+$upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_1];
 
 // page link
-$upgrade['5.5.12'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
+$upgrade['5.5.14'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 
 // revision
-$upgrade['5.5.12'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
+$upgrade['5.5.14'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 
