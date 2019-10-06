@@ -913,7 +913,7 @@ $ap_translation = [
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
-	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB* for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
+	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
 
 	'DbVersionMin'				=> 'Requires at least MySQL 5.6.4, available version',
 	'DbEngineOk'				=> 'InnoDB is available.',
