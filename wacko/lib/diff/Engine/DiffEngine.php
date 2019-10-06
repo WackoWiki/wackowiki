@@ -1,354 +1,5 @@
 <?php
 
-if (!defined('IN_WACKO'))
-{
-	exit;
-}
-
-/*
- diff.php
-
- Copyright (C) 1992 Free Software Foundation, Inc. Francois Pinard <pinard@iro.umontreal.ca>.
- Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
- Copyright 2002,2003,2004  David DELON
- Copyright 2002  Patrick PAUL
- Copyright 2003  Eric FELDSTEIN
-
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-// Side : a string for wdiff
-
-class Side
-{
-	var $position;
-	var $cursor;
-	var $content;
-	var $character;
-	var $directive;
-	var $argument;
-	var $length;
-
-	function __construct($content)
-	{
-		$this->content		= $content;
-		$this->position		= 0;
-		$this->cursor		= 0;
-		$this->directive	= '';
-		$this->argument		= [];
-		$this->length		= strlen($this->content);
-		$this->character	= substr($this->content, 0, 1);
-	}
-
-	function getposition()
-	{
-		return $this->position;
-	}
-
-	function getcharacter() {
-		return $this->character;
-	}
-
-	function getdirective()
-	{
-		return $this->directive;
-	}
-
-	function getargument()
-	{
-		return $this->argument;
-	}
-
-	function nextchar()
-	{
-		$this->cursor++;
-		$this->character = substr($this->content,$this->cursor,1);
-	}
-
-	function copy_until_ordinal($ordinal,&$out)
-	{
-		while ($this->position < $ordinal)
-		{
-			$this->copy_whitespace($out);
-			$this->copy_word($out);
-		}
-	}
-
-	function skip_until_ordinal($ordinal)
-	{
-		while ($this->position < $ordinal)
-		{
-			$this->skip_whitespace();
-			$this->skip_word();
-		}
-	}
-
-	function split_file_into_words (&$out)
-	{
-		while (!$this->isend())
-		{
-			$this->skip_whitespace();
-			if ($this->isend())
-			{
-				break;
-			}
-			$this->copy_word($out);
-			$out .= "\n";
-		}
-	}
-
-	function init()
-	{
-		$this->position		= 0;
-		$this->cursor		= 0;
-		$this->directive	= '';
-		$this->argument		= [];
-		$this->character	= substr($this->content, 0, 1);
-	}
-
-	function isspace($char)
-	{
-		if (preg_match('/([[:space:]]|\*)/', $char)) return true;
-		return false;
-	}
-
-	function isdigit($char)
-	{
-		if (preg_match('/[[:digit:]]/',$char)) return true;
-		return false;
-	}
-
-	function isend()
-	{
-		if (($this->cursor)>=($this->length)) return true;
-		return false;
-	}
-
-	function copy_whitespace(&$out)
-	{
-		while (!$this->isend() && $this->isspace($this->character))
-		{
-			$out .=$this->character;
-			$this->nextchar();
-		}
-	}
-
-	function skip_whitespace()
-	{
-		while (!$this->isend() && $this->isspace($this->character))
-		{
-			$this->nextchar();
-		}
-	}
-
-	function skip_line()
-	{
-		while (!$this->isend() && !$this->isdigit($this->character))
-		{
-			while (!$this->isend() && $this->character != "\n")
-			{
-				$this->nextchar();
-			}
-
-			if ($this->character == "\n")
-			{
-				$this->nextchar();
-			}
-		}
-	}
-
-	function copy_word(&$out)
-	{
-		while (!$this->isend() && !($this->isspace($this->character)))
-		{
-			$out .= $this->character;
-			$this->nextchar();
-		}
-
-		$this->position++;
-	}
-
-	function skip_word()
-	{
-		while (!$this->isend() && !($this->isspace($this->character)))
-		{
-			$this->nextchar();
-		}
-
-		$this->position++;
-	}
-
-
-	function decode_directive_line()
-	{
-		$value = 0;
-		$state = 0;
-		$error = 0;
-
-		while (!$error && $state < 4)
-		{
-			if ($this->isdigit($this->character))
-			{
-				$value = 0;
-				while($this->isdigit($this->character))
-				{
-					$value = 10 * $value + $this->character - '0';
-					$this->nextchar();
-				}
-			}
-			else if ($state != 1 && $state != 3)
-			{
-				$error = 1;
-			}
-
-			/* Assign the proper value.  */
-
-			$this->argument[$state] = $value;
-
-			/* Skip the following character.  */
-
-			switch ($state)
-			{
-				case 0:
-				case 2:
-					if ($this->character == ',')
-					{
-						$this->nextchar();
-					}
-					break;
-
-				case 1:
-					if ($this->character == 'a' || $this->character == 'd' || $this->character == 'c')
-					{
-						$this->directive = $this->character;
-						$this->nextchar();
-					}
-					else
-					{
-						$error = 1;
-					}
-					break;
-
-				case 3:
-					if ($this->character != "\n")
-					{
-						$error = 1;
-					}
-					break;
-			}
-
-			$state++;
-		}
-
-		/* Complete reading of the line and return success value.  */
-
-		while ((!$this->isend()) && ($this->character != "\n"))
-		{
-			$this->nextchar();
-		}
-
-		if ($this->character == "\n")
-		{
-			$this->nextchar();
-		}
-
-		return !$error;
-	}
-
-}
-
-// difflib
-//
-// A PHP diff engine for phpwiki.
-//
-// Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
-// You may copy this code freely under the conditions of the GPL.
-//
-
-// PHP3 does not have assert()
-define('USE_ASSERTS', function_exists('assert'));
-
-class _DiffOp
-{
-	var $type;
-	var $orig;
-	var $final;
-
-	function norig()
-	{
-		return $this->orig ? sizeof($this->orig) : 0;
-	}
-
-	function nfinal()
-	{
-		return $this->final ? sizeof($this->final) : 0;
-	}
-}
-
-class _DiffOp_Copy extends _DiffOp
-{
-	var $type = 'copy';
-
-	function __construct($orig, $final = false)
-	{
-		if (!is_array($final))
-		{
-			$final = $orig;
-		}
-
-		$this->orig = $orig;
-		$this->final = $final;
-	}
-
-}
-
-class _DiffOp_Delete extends _DiffOp
-{
-	var $type = 'delete';
-
-	function __construct($lines)
-	{
-		$this->orig = $lines;
-		$this->final = false;
-	}
-
-}
-
-class _DiffOp_Add extends _DiffOp
-{
-	var $type = 'add';
-
-	function __construct($lines)
-	{
-		$this->final = $lines;
-		$this->orig = false;
-	}
-
-}
-
-class _DiffOp_Change extends _DiffOp
-{
-	var $type = 'change';
-
-	function __construct($orig, $final)
-	{
-		$this->orig = $orig;
-		$this->final = $final;
-	}
-
-}
-
 /**
  * Class used internally by Diff to actually compute the diffs.
  *
@@ -369,8 +20,10 @@ class _DiffOp_Change extends _DiffOp
  * @author Geoffrey T. Dairiki
  * @access private
  */
-class _DiffEngine
+class DiffEngine
 {
+	const USE_ASSERTS = false;
+
 	function diff ($from_lines, $to_lines)
 	{
 		$n_from = sizeof($from_lines);
@@ -449,8 +102,8 @@ class _DiffEngine
 
 		while ($xi < $n_from || $yi < $n_to)
 		{
-			USE_ASSERTS && assert($yi < $n_to || $this->xchanged[$xi]);
-			USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
+			$this::USE_ASSERTS && assert($yi < $n_to || $this->xchanged[$xi]);
+			$this::USE_ASSERTS && assert($xi < $n_from || $this->ychanged[$yi]);
 
 			// Skip matching "snake" .
 			$copy = [];
@@ -463,7 +116,7 @@ class _DiffEngine
 
 			if ($copy)
 			{
-				$edits[] = new _DiffOp_Copy($copy);
+				$edits[] = new DiffOp_Copy($copy);
 			}
 
 			// Find deletes & adds.
@@ -481,15 +134,15 @@ class _DiffEngine
 
 			if ($delete && $add)
 			{
-				$edits[] = new _DiffOp_Change($delete, $add);
+				$edits[] = new DiffOp_Change($delete, $add);
 			}
 			elseif ($delete)
 			{
-				$edits[] = new _DiffOp_Delete($delete);
+				$edits[] = new DiffOp_Delete($delete);
 			}
 			elseif ($add)
 			{
-				$edits[] = new _DiffOp_Add($add);
+				$edits[] = new DiffOp_Add($add);
 			}
 		}
 
@@ -573,7 +226,7 @@ class _DiffEngine
 						if (empty($this->in_seq[$y]))
 						{
 							$k = $this->_lcs_pos($y);
-							USE_ASSERTS && assert($k > 0);
+							$this::USE_ASSERTS && assert($k > 0);
 							$ymids[$k] = $ymids[$k - 1];
 							$found_empty = true;
 						}
@@ -582,7 +235,7 @@ class _DiffEngine
 					{
 						if ($y > $this->seq[$k - 1])
 						{
-							USE_ASSERTS && assert($y < $this->seq[$k]);
+							$this::USE_ASSERTS && assert($y < $this->seq[$k]);
 							// Optimization: this is a common case:
 							//  next match is just replacing previous match.
 							$this->in_seq[$this->seq[$k]] = false;
@@ -592,7 +245,7 @@ class _DiffEngine
 						else if (empty($this->in_seq[$y]))
 						{
 							$k = $this->_lcs_pos($y);
-							USE_ASSERTS && assert($k > 0);
+							$this::USE_ASSERTS && assert($k > 0);
 							$ymids[$k] = $ymids[$k - 1];
 						}
 					}
@@ -639,7 +292,7 @@ class _DiffEngine
 			}
 		}
 
-		USE_ASSERTS && assert($ypos != $this->seq[$end]);
+		$this::USE_ASSERTS && assert($ypos != $this->seq[$end]);
 
 		$this->in_seq[$this->seq[$end]] = false;
 		$this->seq[$end] = $ypos;
@@ -733,7 +386,7 @@ class _DiffEngine
 		$i = 0;
 		$j = 0;
 
-		USE_ASSERTS && assert(sizeof($lines) == sizeof($changed));
+		$this::USE_ASSERTS && assert(sizeof($lines) == sizeof($changed));
 		$len = sizeof($lines);
 		$other_len = sizeof($other_changed);
 
@@ -757,7 +410,7 @@ class _DiffEngine
 
 			while ($i < $len && ! $changed[$i])
 			{
-				USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
+				$this::USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
 				$i++;
 				$j++;
 				while ($j < $other_len && $other_changed[$j])
@@ -800,12 +453,12 @@ class _DiffEngine
 					{
 						$start--;
 					}
-					USE_ASSERTS && assert($j > 0);
+					$this::USE_ASSERTS && assert($j > 0);
 					while ($other_changed[--$j])
 					{
 						continue;
 					}
-					USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
+					$this::USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
 				}
 
 				/*
@@ -831,7 +484,7 @@ class _DiffEngine
 						$i++;
 					}
 
-					USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
+					$this::USE_ASSERTS && assert($j < $other_len && ! $other_changed[$j]);
 					$j++;
 					if ($j < $other_len && $other_changed[$j])
 					{
@@ -852,149 +505,13 @@ class _DiffEngine
 			{
 				$changed[--$start] = 1;
 				$changed[--$i] = 0;
-				USE_ASSERTS && assert($j > 0);
+				$this::USE_ASSERTS && assert($j > 0);
 				while ($other_changed[--$j])
 				{
 					continue;
 				}
-				USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
+				$this::USE_ASSERTS && assert($j >= 0 && !$other_changed[$j]);
 			}
 		}
 	}
 }
-
-/**
- * Class representing a 'diff' between two sequences of strings.
- */
-class Diff2
-{
-	var $edits;
-
-	/**
-	 * Constructor.
-	 * Computes diff between sequences of strings.
-	 *
-	 * @param $from_lines array An array of strings.
-	 *        (Typically these are lines from a file.)
-	 * @param $to_lines array An array of strings.
-	 */
-	function __construct($from_lines, $to_lines)
-	{
-		$eng = new _DiffEngine;
-		$this->edits = $eng->diff($from_lines, $to_lines);
-	}
-
-}
-
-/**
- * A class to format Diffs
- *
- * This class formats the diff in classic diff format.
- * It is intended that this class be customized via inheritance,
- * to obtain fancier outputs.
- */
-class DiffFormatter
-{
-	/**
-	 * Format a diff.
-	 *
-	 * @param $diff object A Diff object.
-	 * @return string The formatted output.
-	 */
-	function format($diff)
-	{
-		$xi = $yi = 1;
-		$block = false;
-		$context = [];
-
-		$this->_start_diff();
-
-		foreach ($diff->edits as $edit)
-		{
-			if ($edit->type == 'copy')
-			{
-				if (is_array($block))
-				{
-					if (sizeof($edit->orig) <= 0)
-					{
-						$block[] = $edit;
-					}
-					else
-					{
-						$this->_block($x0, + $xi - $x0, $y0, + $yi - $y0, $block);
-						$block = false;
-					}
-				}
-			}
-			else
-			{
-				if (! is_array($block))
-				{
-					$x0 = $xi;
-					$y0 = $yi;
-					$block = [];
-				}
-
-				$block[] = $edit;
-			}
-
-			if ($edit->orig)
-			{
-				$xi += sizeof($edit->orig);
-			}
-
-			if ($edit->final)
-			{
-				$yi += sizeof($edit->final);
-			}
-		}
-
-		if (is_array($block))
-		{
-			$this->_block($x0, $xi - $x0, $y0, $yi - $y0, $block);
-		}
-
-		return $this->_end_diff();
-	}
-
-	function _block($xbeg, $xlen, $ybeg, $ylen, &$edits)
-	{
-		$this->_start_block($this->_block_header($xbeg, $xlen, $ybeg, $ylen));
-	}
-
-	function _start_diff()
-	{
-		ob_start();
-	}
-
-	function _end_diff()
-	{
-		$val = ob_get_contents();
-		ob_end_clean();
-
-		return $val;
-	}
-
-	function _block_header($xbeg, $xlen, $ybeg, $ylen)
-	{
-		if ($xlen > 1)
-		{
-			$xbeg .= "," . ($xbeg + $xlen - 1);
-		}
-
-		if ($ylen > 1)
-		{
-			$ybeg .= "," . ($ybeg + $ylen - 1);
-		}
-
-		return $xbeg . ($xlen ? ($ylen ? 'c' : 'd') : 'a') . $ybeg;
-	}
-
-	function _start_block($header)
-	{
-		echo $header . "\n";
-	}
-
-}
-
-?>
