@@ -9,10 +9,12 @@ write_config_hidden_nodes([
 // Check if Upgrade or Fresh Install
 if (array_key_exists('wacko_version', $config))
 {
-	if ($config['wacko_version'][0] < 5)
+	$min_upgrade_version = '5.5.14';
+
+	if (version_compare($min_upgrade_version, $config['wacko_version']))
 	{
 		$config['is_update'] = null;
-		echo '<ul class="security"><li>' . preg_replace(['/%1/', '/%2/'], [$config['wacko_version'], WACKO_VERSION], $lang['PleaseUpgradeToR5']) . "</li></ul>\n";
+		echo '<ul class="security"><li>' . Ut::perc_replace($lang['PleaseUpgradeToR5'], $min_upgrade_version, $min_upgrade_version) . "</li></ul>\n";
 		// http://sourceforge.net/projects/wackowiki/files/
 		// https://wackowiki.org/doc/Dev/Release/R55/Upgrade
 	}
