@@ -11,7 +11,7 @@ if (array_key_exists('wacko_version', $config))
 {
 	$min_upgrade_version = '5.5.14';
 
-	if (version_compare($min_upgrade_version, $config['wacko_version']))
+	if (version_compare($config['wacko_version'], $min_upgrade_version, '<'))
 	{
 		$config['is_update'] = null;
 		echo '<ul class="security"><li>' . Ut::perc_replace($lang['PleaseUpgradeToR5'], $min_upgrade_version, $min_upgrade_version) . "</li></ul>\n";
@@ -36,7 +36,7 @@ echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_
 ?>
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
-// http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+// https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 $lang_codes = [];
 $lang_codes['bg'] = 'български';
 $lang_codes['da'] = 'Dansk';
