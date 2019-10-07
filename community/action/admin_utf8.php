@@ -41,9 +41,9 @@ $large_prefix	= false;
 echo '<h1>Unicode conversion utilities</h1>';
 
 echo 'WackoWiki version ' . $this->format('**!!(green)' . $this->db->wacko_version . '!!**', 'wacko') . '<br>';
-echo 'MariaDB / MySQL version: <strong>' . $db_version . '</strong>' . '<br>';
-echo 'Database charset: <strong>' . $this->db->database_charset . '</strong>';
-
+echo 'MariaDB / MySQL version: <strong>' . $db_version . '</strong><br>';
+echo 'Database charset: <strong>' . $this->db->database_charset . '</strong><br>';
+echo 'Database collation: <strong>' . $this->db->database_collation . '</strong>';
 
 echo '<h2>1. Pre-Upgrade Routines for R6.x</h2>';
 
@@ -81,16 +81,16 @@ if ($this->is_admin())
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}page
-					CHANGE title title VARCHAR(191) COLLATE '{$collation}' NOT NULL DEFAULT '',
-					CHANGE tag tag VARCHAR(191) COLLATE '{$collation}' NOT NULL DEFAULT '';");
+					CHANGE title title VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '',
+					CHANGE tag tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}page_link
-					CHANGE to_tag to_tag VARCHAR(191) COLLATE '{$collation}' NOT NULL DEFAULT '';");
+					CHANGE to_tag to_tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}file
-					CHANGE file_name file_name VARCHAR(191) COLLATE '{$collation}' NOT NULL DEFAULT '';");
+					CHANGE file_name file_name VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			echo
 				'<div class="code">' .
@@ -148,7 +148,7 @@ if ($this->is_admin())
 			'Collation: ' . ' ' . $collation . ':</strong>' . "\n\n";
 
 		// Database
-		$this->db->sql_query("ALTER DATABASE {$this->db->database_database} CHARACTER SET = {$charset} COLLATE = {$collation};");
+		$this->db->sql_query("ALTER DATABASE {$this->db->database_database} CHARACTER SET = {$charset} COLLATE = '{$collation}';");
 
 		// Tables
 		foreach ($tables as $table)
@@ -613,17 +613,17 @@ if ($this->is_admin())
 		 *		LONGTEXT -> MEDIUMTEXT -> TEXT
 		*/
 		$sql = [
-			"ALTER TABLE {$prefix}acl CHANGE list list TEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER privilege;",
-			"ALTER TABLE {$prefix}config CHANGE config_value config_value TEXT COLLATE 'utf8mb4_general_ci' NULL AFTER config_name;",
-			"ALTER TABLE {$prefix}external_link CHANGE link link TEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER page_id;",
-			"ALTER TABLE {$prefix}file CHANGE caption caption TEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER file_description;",
-			"ALTER TABLE {$prefix}log CHANGE message message TEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER ip;",
-			"ALTER TABLE {$prefix}page CHANGE body body MEDIUMTEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER modified,
-				CHANGE body_r body_r MEDIUMTEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER body,
-				CHANGE body_toc body_toc TEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER body_r;",
-			"ALTER TABLE {$prefix}referrer CHANGE user_agent user_agent TEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER ip;",
-			"ALTER TABLE {$prefix}revision CHANGE body body MEDIUMTEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER modified,
-				CHANGE body_r body_r MEDIUMTEXT COLLATE 'utf8mb4_general_ci' NOT NULL AFTER body;",
+			"ALTER TABLE {$prefix}acl CHANGE list list TEXT COLLATE {$collation} NOT NULL AFTER privilege;",
+			"ALTER TABLE {$prefix}config CHANGE config_value config_value TEXT COLLATE {$collation} NULL AFTER config_name;",
+			"ALTER TABLE {$prefix}external_link CHANGE link link TEXT COLLATE {$collation} NOT NULL AFTER page_id;",
+			"ALTER TABLE {$prefix}file CHANGE caption caption TEXT COLLATE {$collation} NOT NULL AFTER file_description;",
+			"ALTER TABLE {$prefix}log CHANGE message message TEXT COLLATE {$collation} NOT NULL AFTER ip;",
+			"ALTER TABLE {$prefix}page CHANGE body body MEDIUMTEXT COLLATE {$collation} NOT NULL AFTER modified,
+				CHANGE body_r body_r MEDIUMTEXT COLLATE {$collation} NOT NULL AFTER body,
+				CHANGE body_toc body_toc TEXT COLLATE {$collation} NOT NULL AFTER body_r;",
+			"ALTER TABLE {$prefix}referrer CHANGE user_agent user_agent TEXT COLLATE {$collation} NOT NULL AFTER ip;",
+			"ALTER TABLE {$prefix}revision CHANGE body body MEDIUMTEXT COLLATE {$collation} NOT NULL AFTER modified,
+				CHANGE body_r body_r MEDIUMTEXT COLLATE {$collation} NOT NULL AFTER body;",
 		];
 
 		$results =
