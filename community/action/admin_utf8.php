@@ -30,7 +30,7 @@ if (!defined('IN_WACKO'))
 
 $prefix			= $this->db->table_prefix;
 $charset		= 'utf8mb4';
-$collation		= 'utf8mb4_unicode_ci';
+$collation		= 'utf8mb4_unicode_520_ci';		// Unicode (UCA 5.2.0), case-insensitive, https://dev.mysql.com/doc/refman/8.0/en/charset-collation-names.html
 
 // get MariaDB / MySQL version
 $_db_version	= $this->db->load_single("SELECT version()");

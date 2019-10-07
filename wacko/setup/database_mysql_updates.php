@@ -8,6 +8,7 @@
 
 $pref		= $config['table_prefix'];
 $charset	= 'DEFAULT CHARSET=' . $config['database_charset'];
+$collation	= 'COLLATE ' . $config['database_collation'];
 $engine		= 'ENGINE=' . $config['database_engine'];
 
 // ACL

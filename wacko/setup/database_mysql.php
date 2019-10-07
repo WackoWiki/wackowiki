@@ -8,6 +8,7 @@
 
 $pref		= $config['table_prefix'];
 $charset	= 'DEFAULT CHARSET=' . $config['database_charset'];
+$collation	= 'COLLATE ' . $config['database_collation'];
 $engine		= 'ENGINE=' . $config['database_engine'];
 
 $tbl_acl = "CREATE TABLE {$pref}acl (" .
@@ -16,7 +17,7 @@ $tbl_acl = "CREATE TABLE {$pref}acl (" .
 					"list TEXT NOT NULL," .
 					// "updated TIMESTAMP NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP," .
 					"UNIQUE KEY idx_page_id (page_id, privilege)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_auth_token = "CREATE TABLE {$pref}auth_token (" .
 					"auth_token_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -27,7 +28,7 @@ $tbl_auth_token = "CREATE TABLE {$pref}auth_token (" .
 					"PRIMARY KEY (auth_token_id)," .
 					"UNIQUE KEY idx_selector (selector)," .
 					"KEY idx_user_id (user_id)" .
-					") {$engine} COMMENT='' {$charset}";
+					") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_cache = "CREATE TABLE {$pref}cache (" .
 					"cache_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -39,7 +40,7 @@ $tbl_cache = "CREATE TABLE {$pref}cache (" .
 					"PRIMARY KEY (cache_id)," .
 					"INDEX (name)," .
 					"KEY idx_cache_time (cache_time)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_category = "CREATE TABLE {$pref}category (" .
 					"category_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -49,7 +50,7 @@ $tbl_category = "CREATE TABLE {$pref}category (" .
 					"category_description VARCHAR(255) NOT NULL DEFAULT ''," .
 					"PRIMARY KEY (category_id)," .
 					"UNIQUE KEY idx_category (category_lang, category)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
 					"assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -61,7 +62,7 @@ $tbl_category_assignment = "CREATE TABLE {$pref}category_assignment (" .
 					"KEY idx_object_id (object_id)," .
 					"KEY idx_object_type_id (object_type_id)," .
 					"UNIQUE KEY idx_assignment (category_id, object_type_id, object_id)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_config = "CREATE TABLE {$pref}config (" .
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -70,7 +71,7 @@ $tbl_config = "CREATE TABLE {$pref}config (" .
 					// "updated TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP," .
 					"PRIMARY KEY (config_id)," .
 					"UNIQUE KEY idx_config_name (config_name)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_external_link = "CREATE TABLE {$pref}external_link (" .
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
@@ -78,7 +79,7 @@ $tbl_external_link = "CREATE TABLE {$pref}external_link (" .
 					"link TEXT NOT NULL," .
 					"PRIMARY KEY (link_id)," .
 					"KEY idx_page_id (page_id)" .
-					") {$engine} COMMENT='' {$charset}";
+					") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_file = "CREATE TABLE {$pref}file (" .
 					"file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -106,7 +107,7 @@ $tbl_file = "CREATE TABLE {$pref}file (" .
 					"KEY idx_page_id_2 (page_id, uploaded_dt)," .
 					"KEY idx_deleted (deleted)," .
 					"KEY idx_user_id (user_id)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_file_link = "CREATE TABLE {$pref}file_link (" .
 					"file_link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
@@ -115,7 +116,7 @@ $tbl_file_link = "CREATE TABLE {$pref}file_link (" .
 					"PRIMARY KEY (file_link_id)," .
 					"KEY idx_page_id (page_id)," .
 					"KEY idx_file_id (file_id)" .
-					") {$engine} COMMENT='' {$charset}";
+					") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_log = "CREATE TABLE {$pref}log (" .
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -129,7 +130,7 @@ $tbl_log = "CREATE TABLE {$pref}log (" .
 					"KEY idx_user_id (user_id)," .
 					"KEY idx_ip (ip)," .
 					"KEY idx_time (log_time)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_menu = "CREATE TABLE {$pref}menu (" .
 					"menu_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -140,7 +141,7 @@ $tbl_menu = "CREATE TABLE {$pref}menu (" .
 					"menu_position SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0'," .
 					"PRIMARY KEY (menu_id)," .
 					"UNIQUE KEY idx_user_id (user_id, page_id, menu_lang)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_page = "CREATE TABLE {$pref}page (" .
 					"page_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -203,7 +204,7 @@ $tbl_page = "CREATE TABLE {$pref}page (" .
 					"KEY idx_comment_on_id (comment_on_id)," .
 					"KEY idx_commented (commented)," .
 					"KEY idx_title (title)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_page_link = "CREATE TABLE {$pref}page_link (" .
 					"link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT," .
@@ -214,7 +215,7 @@ $tbl_page_link = "CREATE TABLE {$pref}page_link (" .
 					"KEY idx_from_tag (from_page_id, to_tag)," .
 					"KEY idx_from_page_id (from_page_id)," .
 					"KEY idx_to (to_tag)" .
-					") {$engine} COMMENT='' {$charset}";
+					") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_poll = "CREATE TABLE {$pref}poll (" .
 					"poll_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -227,7 +228,7 @@ $tbl_poll = "CREATE TABLE {$pref}poll (" .
 					"end DATETIME NULL DEFAULT NULL," .
 					"KEY idx_poll_id (poll_id)," .
 					"KEY idx_time_frame (start, end)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_rating = "CREATE TABLE {$pref}rating (" .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
@@ -236,7 +237,7 @@ $tbl_rating = "CREATE TABLE {$pref}rating (" .
 					"rating_time TIMESTAMP NOT NULL," .
 					"PRIMARY KEY (page_id)," .
 					"KEY idx_voters_rate (voters)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_referrer = "CREATE TABLE {$pref}referrer (" .
 					"referrer_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -248,7 +249,7 @@ $tbl_referrer = "CREATE TABLE {$pref}referrer (" .
 					"PRIMARY KEY (referrer_id)," .
 					"KEY idx_page_id (page_id)," .
 					"KEY idx_referrer_time (referrer_time)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_revision = "CREATE TABLE {$pref}revision (" .
 					"revision_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -289,7 +290,7 @@ $tbl_revision = "CREATE TABLE {$pref}revision (" .
 					"KEY idx_deleted (deleted)," .
 					"KEY idx_reviewed (reviewed)," .
 					"KEY idx_comment_on_id (comment_on_id)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_tag = "CREATE TABLE {$pref}tag (" .
 					"tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -300,7 +301,7 @@ $tbl_tag = "CREATE TABLE {$pref}tag (" .
 					"date_updated DATETIME NULL DEFAULT NULL," .
 					"PRIMARY KEY (tag_id)," .
 					"KEY idx_tag_name (tag_name)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_tag_assignment = "CREATE TABLE {$pref}tag_assignment (" .
 					"assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -314,7 +315,7 @@ $tbl_tag_assignment = "CREATE TABLE {$pref}tag_assignment (" .
 					"KEY idx_object_id (object_id)," .
 					"KEY idx_object_type_id (object_type_id)," .
 					"UNIQUE KEY idx_assignment (tag_id, object_type_id, object_id)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_user = "CREATE TABLE {$pref}user (" .
 					"user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -345,7 +346,7 @@ $tbl_user = "CREATE TABLE {$pref}user (" .
 					"KEY idx_account_type (account_type)," .
 					"KEY idx_enabled (enabled)," .
 					"KEY idx_signup_time (signup_time)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_user_setting = "CREATE TABLE {$pref}user_setting (" .
 					"setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -379,7 +380,7 @@ $tbl_user_setting = "CREATE TABLE {$pref}user_setting (" .
 					"PRIMARY KEY (setting_id)," .
 					"UNIQUE KEY idx_user_id (user_id)," .
 					"KEY idx_send_watchmail (send_watchmail)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_usergroup = "CREATE TABLE {$pref}usergroup (" .
 					"group_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -393,13 +394,13 @@ $tbl_usergroup = "CREATE TABLE {$pref}usergroup (" .
 					"active TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
 					"PRIMARY KEY (group_id)," .
 					"UNIQUE KEY idx_name (group_name)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_usergroup_member = "CREATE TABLE {$pref}usergroup_member (" .
 					"group_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"UNIQUE KEY idx_group_id (group_id, user_id)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_watch = "CREATE TABLE {$pref}watch (" .
 					"watch_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
@@ -409,14 +410,14 @@ $tbl_watch = "CREATE TABLE {$pref}watch (" .
 					"pending TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
 					"watch_time TIMESTAMP NOT NULL," .
 					"PRIMARY KEY (watch_id)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_word = "CREATE TABLE {$pref}word (" .
 					"word_id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"word VARCHAR(255) NOT NULL DEFAULT ''," .
 					"replacement VARCHAR(255) NOT NULL DEFAULT ''," .
 					"PRIMARY KEY (word_id)" .
-				") {$engine} COMMENT='' {$charset}";
+				") {$engine} COMMENT='' {$charset} {$collation}";
 
 /*
  Wacko Wiki MySQL Table Deletion Script
