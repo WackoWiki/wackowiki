@@ -77,7 +77,11 @@ if ($this->is_admin())
 
 			$results .=
 				'<strong>' . 'VARCHAR(191): ' . "\n" .
-				'Tables:  file, page and page_link:</strong>' . "\n\n";
+				'Tables:  file, page, page_link and revision:</strong>' . "\n\n";
+
+			$this->db->sql_query("
+				ALTER TABLE {$prefix}file
+					CHANGE file_name file_name VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}page
@@ -89,8 +93,9 @@ if ($this->is_admin())
 					CHANGE to_tag to_tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
-				ALTER TABLE {$prefix}file
-					CHANGE file_name file_name VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
+				ALTER TABLE {$prefix}revision
+					CHANGE title title VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '',
+					CHANGE tag tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			echo
 				'<div class="code">' .
