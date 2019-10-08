@@ -33,15 +33,18 @@ $count = $this->db->load_single(
 	"SELECT COUNT(p.tag) AS n " .
 	$query, true);
 
-$page = $this->db->load_single(
-	"SELECT p.tag " .
-	$query .
-	"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
-	, true);
+if ($count['n'] > 1)
+{
+	$page = $this->db->load_single(
+		"SELECT p.tag " .
+		$query .
+		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
+		, true);
+}
 
 if (!$page)
 {
-	$page = $this->db->root_page;
+	$page['tag'] = $this->db->root_page;
 }
 
 if (isset($test) || $this->get_user_setting('dont_redirect') || @$_POST['redirect'] == 'no')
