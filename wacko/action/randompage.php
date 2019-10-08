@@ -35,23 +35,23 @@ $count = $this->db->load_single(
 
 if ($count['n'] > 1)
 {
-	$page = $this->db->load_single(
+	$result = $this->db->load_single(
 		"SELECT p.supertag, p.tag " .
 		$query .
 		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
 		, true);
 }
 
-if (!$page)
+if (empty($result))
 {
-	$page['tag'] = $page['supertag'] = $this->db->root_page;
+	$result['tag'] = $result['supertag'] = $this->db->root_page;
 }
 
 if (isset($test) || $this->get_user_setting('dont_redirect') || @$_POST['redirect'] == 'no')
 {
-	echo $this->compose_link_to_page($page['tag']);
+	echo $this->compose_link_to_page($result['tag']);
 }
 else
 {
-	$this->http->redirect($this->href('', $page['supertag']));
+	$this->http->redirect($this->href('', $result['supertag']));
 }
