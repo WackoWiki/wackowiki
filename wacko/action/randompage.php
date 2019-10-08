@@ -14,6 +14,9 @@ Random Page Action
  }}
  */
 
+// do not cache random page!
+$this->http->no_cache(false);
+
 $tag = $page ?? '';
 
 $query =
