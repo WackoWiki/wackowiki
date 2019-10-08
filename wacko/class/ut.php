@@ -404,11 +404,6 @@ class Ut
 
 		$sha .= microtime(1);
 
-		if (function_exists('mcrypt_create_iv'))
-		{
-			$sha .= mcrypt_create_iv(21, MCRYPT_DEV_URANDOM);
-		}
-
 		$rnd = '';
 		for ($i = 0; $i < $length; $i++)
 		{
