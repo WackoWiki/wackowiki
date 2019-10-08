@@ -61,7 +61,10 @@ if (($user = $this->get_user()))
 	{
 		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
-			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on' ? $_SERVER['SSL_CIPHER'] . ' (' . $_SERVER['SSL_PROTOCOL'] . ')' : $this->_t('MetaOff')) .
+			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'
+				? ($_SERVER['SSL_CIPHER'] ?? '') . ' (' . ($_SERVER['SSL_PROTOCOL'] ?? '') . ')'
+				: $this->_t('MetaOff')
+			) .
 			'</code>' . "<br>\n";
 	}
 
