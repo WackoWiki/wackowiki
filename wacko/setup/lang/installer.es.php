@@ -90,7 +90,7 @@ $lang = [
 'HomePageDesc' => 'Ingrese el nombre de la página de inicio del sitio, esto será la página por defecto que los visitantes verán y debería ser escrito de manera <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">NombreWiki</a>.',
 'HomePageDefault' => 'HomePage',
 'MultiLang' => 'Modo Multi Idioma',
-'MultiLangDesc' => 'Modo Multi-idioma permite con una sola instalación mantener páginas con diferentes preferencias de idioma. Al habilitar este modo, el instalador creará las páginas iniciales en todos los idiomas disponibles en la instalación.',
+'MultiLangDesc' => 'Modo Multi-idioma permite con una sola instalación mantener páginas con diferentes preferencias de idioma. Al habilitar este modo, el instalador creará los elementos del menú iniciales en todos los idiomas disponibles en la instalación.',
 'AllowedLang' => 'Idiomas permitidos',
 'AllowedLangDesc' => 'Se recomienda seleccionar únicamente los idiomas que va a utilizar, sino se selecionarán todos los idiomas.',
 'Admin' => 'Nombre de Administrador',
