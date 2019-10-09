@@ -192,8 +192,8 @@ else // login
 	}
 
 	$tpl->l_href		= $this->href();
-	$tpl->l_pattern		= '';	// $this->language['USER_NAME'] TODO: JavaScript does not support the construct \p{}.
-	$tpl->l_pwhref		= $this->href('', $this->db->password_page);
+	$tpl->l_pattern		= '';	// $this->language['USER_NAME'] TODO: JavaScript does not support the construct \p{}. pattern="[ ' pattern ' ]"
+	#$tpl->l_pwhref		= $this->href('', $this->db->password_page);
 	$tpl->l_username	= @$this->sess->login_username;
 
 	if ($this->db->allow_registration)
