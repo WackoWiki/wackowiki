@@ -34,7 +34,7 @@ $wacko_config_defaults = [
 											: 'http'
 										) . '://' .
 										$_SERVER['SERVER_NAME'] .
-										($_SERVER['SERVER_PORT'] != 80
+										(!in_array($_SERVER['SERVER_PORT'], [80, 443])
 											? ':' . $_SERVER['SERVER_PORT']
 											: ''
 										) .
