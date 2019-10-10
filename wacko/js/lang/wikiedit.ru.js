@@ -6,7 +6,7 @@ lang = {
 	HelpAbout :				"Справка и о программе",
 	HelpFormatting :		"Помощь",
 	HelpFormattingTip :		"Помощь по Wiki-разметке",
-	HelpFormattingPage :	"Doc/Russian/WackoSintaksis",
+	HelpFormattingPage :	"Doc/Russian/WackoСинтаксис",
 	
 	Heading1 :				"Заголовок 1",
 	Heading2 :				"Заголовок 2",
