@@ -17,8 +17,8 @@ $wacko_config_defaults = [
 	'database_database'				=> 'wacko',
 	'database_user'					=> '',
 	'database_password'				=> '',
-	'database_collation'			=> 'utf8mb4_unicode_520_ci',			// 'utf8mb4_general_ci', 'utf8mb4_unicode_520_ci'
-	'database_charset'				=> 'utf8mb4',	// 'utf8mb4'
+	'database_collation'			=> 'utf8mb4_unicode_520_ci',
+	'database_charset'				=> 'utf8mb4',
 	'database_engine'				=> 'InnoDB',
 
 	'session_store'					=> 1,
@@ -49,7 +49,7 @@ $wacko_config_defaults = [
 
 	'reverse_proxy'					=> 0,
 	'reverse_proxy_header'			=> '',
-	'reverse_proxy_addresses'		=> '', // 'a.b.c.d', ...'
+	'reverse_proxy_addresses'		=> '',	// 'a.b.c.d', ...'
 
 	'phpmailer_method'				=> 'mail',
 
@@ -247,13 +247,13 @@ $wacko_config_defaults = [
 	'captcha_registration'			=> 1,
 
 	'max_login_attempts'			=> 3,
-	'ip_login_limit_max'			=> 50, // not in use
+	'ip_login_limit_max'			=> 50,	// not in use
 	'anonymize_ip'					=> 0,
 
 	'ap_failed_login_count'			=> 0,
 	'ap_max_login_attempts'			=> 4,
 
-	'session_length'				=> 30, // cookie_expire_days
+	'session_length'				=> 30,	// cookie_expire_days
 	'allow_persistent_cookie'		=> 1,
 
 	'enable_security_headers'		=> 1,
@@ -262,10 +262,10 @@ $wacko_config_defaults = [
 
 	'form_token_time'				=> 7200,
 
-	'system_seed'					=> '', // installer autogenerates random one
-	'hashid_seed'					=> '', // installer autogenerates random one
+	'system_seed'					=> '',	// installer autogenerates random one
+	'hashid_seed'					=> '',	// installer autogenerates random one
 	'recovery_password'				=> '',
-	'trusted_domains'				=> '', // not in use
+	'trusted_domains'				=> '',	// not in use
 
 	'date_format'					=> 'd.m.Y',
 	'time_format'					=> 'H:i',

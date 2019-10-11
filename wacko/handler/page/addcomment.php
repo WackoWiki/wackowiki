@@ -7,10 +7,12 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('comment') && $this->has_access('read'))
 {
-	$body		= str_replace("\r", '', rtrim($_POST['body']));
-	$error		= '';
-	$title		= trim(@$_POST['title']);
-	$parent_id	= (int) @$_POST['parent_id'];
+	$body				= str_replace("\r", '', rtrim($_POST['body']));
+	$error				= '';
+	$title				= trim(@$_POST['title']);
+	$parent_id			= (int) @$_POST['parent_id'];
+	$watchpage			= (int) ($_POST['watchpage'] ?? 0);
+	$noid_publication	= (int) ($_POST['noid_publication'] ?? 0);
 
 	$user		= $this->get_user();
 
@@ -46,8 +48,8 @@ if ($this->has_access('comment') && $this->has_access('read'))
 
 	// watch page
 	if ($this->page
-		&& (isset($_POST['watchpage']) && ($_POST['watchpage']))
-		&& ($_POST['noid_publication'] != $this->page['page_id'])
+		&& ($watchpage)
+		&& ($noid_publication != $this->page['page_id'])
 		&& $user
 		&& !$this->is_watched)
 	{
@@ -132,7 +134,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		$this->sess->comment_delay	= time();
 
 		// publish anonymously
-		if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
+		if ($noid_publication == $this->page['page_id'])
 		{
 			// undefine username
 			$remember_name = $this->get_user_name();
@@ -151,7 +153,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 			$this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag . ' ' . $this->page['title']));
 
 			// restore username after anonymous publication
-			if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
+			if ($noid_publication == $this->page['page_id'])
 			{
 				$this->set_user_setting('user_name', $remember_name);
 				unset($remember_name);
