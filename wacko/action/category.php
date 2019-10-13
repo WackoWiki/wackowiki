@@ -20,7 +20,7 @@ $category_link = function ($word, $category_id, $type_id, $filter = [], $list)
 				? ($selected
 					? '</span>'
 					: '</a>' ) .
-				  '<span class="item-multiplier-x"> &times; </span>' .
+				  '<span class="item-multiplier-x"> × </span>' .
 				  '<span class="item-multiplier-count">' . (int) $word['n'] . '</span>'
 				: '');
 };

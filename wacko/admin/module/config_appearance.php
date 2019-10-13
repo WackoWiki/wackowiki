@@ -89,7 +89,7 @@ function admin_config_appearance(&$engine, &$module)
 		$ext					= strtolower($ext);
 
 		$image['favicon']		= ['gif', 'ico' , 'jpeg', 'jpe', 'jpg', 'png', 'svg'];
-		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'webp'];
+		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp'];
 		// calculate resonable filesize: Pixels * Bit Depth
 		// - GIF/PNG palette-based images (up to 8-bit)
 		// - Non-palette images (JPEG/PNG/TIFF/SVG) are 0, 8, or 16.
@@ -108,7 +108,6 @@ function admin_config_appearance(&$engine, &$module)
 				$size			= [0, 0];
 				$size			= @getimagesize($_FILES[$file]['tmp_name']);
 
-
 				if ($file == 'logo')
 				{
 					$config['logo_height']			= (int) $size[1];
@@ -117,8 +116,7 @@ function admin_config_appearance(&$engine, &$module)
 				else if ($file == 'favicon'
 					&& ($size[0] > 64 || $size[1] > 64))
 				{
-					#$error = $engine->_t('UploadMaxSizeReached');
-					$error = 'Favicon is bigger than 64 &times; 64px. <code>' . (int) $size[0] . ' &times; ' . (int) $size[1] .'px</code>';
+					$error = $engine->_t('SiteFaviconTooBig') . ' <code>' . (int) $size[0] . ' × ' . (int) $size[1] .'px</code>';
 				}
 
 				if (!$error)
@@ -251,7 +249,7 @@ function admin_config_appearance(&$engine, &$module)
 				<input type="submit" id="remove_logo" name="remove_logo" value="<?php echo $engine->_t('Remove'); ?>">
 			<?php }
 				// SVG format is intentionally excluded ?>
-				<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, .webp, image/gif, image/jpeg, image/png, image/webp">
+				<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, .webp, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
 			</td>
 		</tr>
 		<?php
