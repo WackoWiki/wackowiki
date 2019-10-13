@@ -399,6 +399,7 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Website-Favicon',
 	'SiteFaviconInfo'			=> 'Das Verknüpfungssymbol oder Favicon wird in der Adressleiste, den Registerkarten und den Lesezeichen der meisten Browser angezeigt. Dies überschreibt das Favicon deines Themas.',
+	'SiteFaviconTooBig'			=> 'Favicon ist größer als 64 × 64px.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Layout',
 	'ThemeInfo'					=> 'Layout, welches die Site standardmäßig verwendet.',

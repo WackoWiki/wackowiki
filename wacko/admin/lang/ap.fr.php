@@ -391,6 +391,7 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Favicon du site',
 	'SiteFaviconInfo'			=> 'Votre icône de raccourci, ou favicon, est affichée dans la barre d\'adresse, les onglets et les signets de la plupart des navigateurs. Ceci remplacera le favicon de votre thème.',
+	'SiteFaviconTooBig'			=> 'Favicon est plus grand que 64 × 64px.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Thème',
 	'ThemeInfo'					=> 'La conception des modèles que le site utilise par défaut.',

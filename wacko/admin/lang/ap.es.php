@@ -391,6 +391,7 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Sitio Favicon',
 	'SiteFaviconInfo'			=> 'El icono de acceso directo, o favicon, se muestra en la barra de direcciones, pestañas y marcadores de la mayoría de los navegadores. Esto invalidará el favicon de su tema.',
+	'SiteFaviconTooBig'			=> 'Favicon es más grande que 64 × 64px.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Tema',
 	'ThemeInfo'					=> 'El diseño de la plantilla que el sitio utiliza por defecto.',

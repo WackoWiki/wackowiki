@@ -396,6 +396,7 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site Favicon',
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
+	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 × 64px.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Theme',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
