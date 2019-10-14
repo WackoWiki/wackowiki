@@ -204,7 +204,7 @@ function admin_config_appearance(&$engine, &$module)
 		$config['logo_display']				= (int) $_POST['logo_display'];
 		$config['theme']					= (string) $_POST['theme'];
 
-		if (is_array($_POST['allow_themes']))
+		if (isset($_POST['allow_themes']) && is_array($_POST['allow_themes']))
 		{
 			$config['allow_themes'] = (string) implode(',', $_POST['allow_themes']);
 		}

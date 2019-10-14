@@ -917,7 +917,7 @@ function bb2_options(&$engine)
 				<tr class="hl-setting">
 					<th scope="row" class="label">
 						<strong><?php echo $engine->_t('BbEnable');?>:</strong><br>
-						<small><?php echo $engine->_t('BbEnableInfo');?></small>
+						<small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_settings.conf</code>');?></small>
 					</th>
 					<td>
 						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>>
