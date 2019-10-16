@@ -9,9 +9,10 @@ if (!defined('IN_WACKO'))
 header('Content-Type: text/html; charset=' . $this->get_charset());
 header_remove('X-Powered-By');
 
-$tpl->h_lang	= $this->page_lang;
-$tpl->h_dir		= $this->languages[$this->page_lang]['dir'];
-$tpl->h_charset	= $this->get_charset();
+$tpl->h_lang		= $this->page_lang;
+$tpl->h_dir			= $this->languages[$this->page_lang]['dir'];
+$tpl->h_charset		= $this->get_charset();
+$tpl->h_canonical	= $this->tag;
 
 !Ut::is_empty($tpl->h_title = @$this->page['title']) or $tpl->h_tag = $this->add_spaces($this->tag);
 $this->method == 'show' or $tpl->h_method = $this->method;
