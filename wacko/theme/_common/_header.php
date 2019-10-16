@@ -9,48 +9,50 @@ if (!defined('IN_WACKO'))
 header('Content-Type: text/html; charset=' . $this->get_charset());
 header_remove('X-Powered-By');
 
-$tpl->h_lang	= $this->page_lang;
-$tpl->h_charset	= $this->get_charset();
+$tpl->enter('h_');
 
-!Ut::is_empty($tpl->h_title = @$this->page['title']) or $tpl->h_tag = $this->add_spaces($this->tag);
-$this->method == 'show' or $tpl->h_method = $this->method;
+$tpl->lang	= $this->page_lang;
+$tpl->charset	= $this->get_charset();
+
+!Ut::is_empty($tpl->title = @$this->page['title']) or $tpl->tag = $this->add_spaces($this->tag);
+$this->method == 'show' or $tpl->method = $this->method;
 
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
-$tpl->h_norobots = ($this->method != 'show' || $this->db->noindex || !$this->page || !$this->page['latest'] || $this->page['noindex']);
+$tpl->norobots = ($this->method != 'show' || $this->db->noindex || !$this->page || !$this->page['latest'] || $this->page['noindex']);
 
 if ($this->has_access('read'))
 {
-	$tpl->h_page_keywords		= $this->get_keywords();
-	$tpl->h_page_description	= $this->get_description();
+	$tpl->page_keywords		= $this->get_keywords();
+	$tpl->page_description	= $this->get_description();
 }
 
 if ($this->db->allow_x11colors)
 {
-	$tpl->h_x11_colors = $this->db->base_url . Ut::join_path(THEME_DIR, '_common/X11colors.css');
+	$tpl->x11_colors = $this->db->base_url . Ut::join_path(THEME_DIR, '_common/X11colors.css');
 }
 
 if ($this->db->site_favicon)
 {
-	$tpl->h_favicon = $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_favicon);
+	$tpl->favicon = $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_favicon);
 }
 else
 {
-	$tpl->h_favicon = $this->db->theme_url . 'icon/favicon.ico';
+	$tpl->favicon = $this->db->theme_url . 'icon/favicon.ico';
 }
 
 if ($this->db->terms_page)
 {
-	$tpl->h_license_href = $this->href('', $this->db->terms_page);
+	$tpl->license_href = $this->href('', $this->db->terms_page);
 }
 
 if ($this->db->license)
 {
-	# $tpl->h_license_href = $this->href('', $this->db->terms_page);
+	# $tpl->license_href = $this->href('', $this->db->terms_page);
 }
 
 if ($this->db->enable_feeds)
 {
-	$tpl->h_rss_url = $url =
+	$tpl->rss_url = $url =
 		[
 			$this->db->base_url . XML_DIR . '/',
 			'_' . preg_replace('/[^0-9a-z]/', '', strtolower($this->db->site_name)) . '.xml'
@@ -58,25 +60,25 @@ if ($this->db->enable_feeds)
 
 	if ($this->db->news_cluster)
 	{
-		$tpl->h_rss_news_url = $url;
+		$tpl->rss_news_url = $url;
 	}
 
 	if (!$this->hide_revisions)
 	{
-		$tpl->h_rss_revisions_tag	= $this->tag;
-		$tpl->h_rss_revisions_href	= $this->href('revisions.xml');
+		$tpl->rss_revisions_tag	= $this->tag;
+		$tpl->rss_revisions_href	= $this->href('revisions.xml');
 	}
 }
 
 // display Bad Behavior timer
 if (!empty($this->db->ext_bad_behavior))
 {
-	$tpl->h_bb2 = bb2_timer();
+	$tpl->bb2 = bb2_timer();
 }
 
 if ($this->method == 'edit')
 {
-	$tpl->h_edit_lang = $this->user_lang;
+	$tpl->edit_lang = $this->user_lang;
 }
 
 // Doubleclick edit feature.
@@ -92,7 +94,9 @@ else
 
 if ($doubleclick)
 {
-	$tpl->h_doubleclick_href = $this->href('edit');
+	$tpl->doubleclick_href = $this->href('edit');
 }
 
-$tpl->h_additions = $this->get_html_addition('header');
+$tpl->additions = $this->get_html_addition('header');
+
+$tpl->leave();	// _h
