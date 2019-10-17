@@ -40,10 +40,22 @@ $large_prefix	= false;
 
 echo '<h1>Unicode conversion utilities</h1>';
 
-echo 'WackoWiki version ' . $this->format('**!!(green)' . $this->db->wacko_version . '!!**', 'wacko') . '<br>';
-echo 'MariaDB / MySQL version: <strong>' . $db_version . '</strong><br>';
-echo 'Database charset: <strong>' . $this->db->database_charset . '</strong><br>';
-echo 'Database collation: <strong>' . $this->db->database_collation . '</strong>';
+$info[] = ['WackoWiki version', $this->format('**!!(green)' . $this->db->wacko_version . '!!**', 'wacko')];
+$info[] = ['MariaDB / MySQL version', $db_version];
+$info[] = ['Database charset', $this->db->database_charset];
+$info[] = ['Database collation', $this->db->database_collation];
+
+echo '<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">' . "\n";
+
+foreach ($info as $value)
+{
+	echo '<tr>' .
+			'<td class="label"><strong>' . $value[0] . '</strong></td>' .
+			'<td> </td>' .
+			'<td>' . $value[1] . '</td>' . "\n";
+}
+
+echo '</table>' . "\n";
 
 echo '<h2>1. Pre-Upgrade Routines for R6.x</h2>';
 
@@ -66,7 +78,7 @@ if ($this->is_admin())
 		if (!isset($_POST['set_large_prefix_tables']))
 		{
 			echo $this->form_open();
-			echo '<input type="submit" name="set_large_prefix_tables" value="' . $this->_t('CategoriesSaveButton') . '">';
+			echo '<input type="submit" name="set_large_prefix_tables" value="' . $this->_t('UpdateButton') . '">';
 			echo $this->form_close();
 		}
 		else if (isset($_POST['set_large_prefix_tables']))
@@ -113,7 +125,7 @@ if ($this->is_admin())
 	if (!isset($_POST['set_charset_tables']))
 	{
 		echo $this->form_open();
-		echo '<input type="submit" name="set_charset_tables" value="' . $this->_t('CategoriesSaveButton') . '">';
+		echo '<input type="submit" name="set_charset_tables" value="' . $this->_t('UpdateButton') . '">';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['set_charset_tables']))
@@ -191,7 +203,7 @@ if ($this->is_admin())
 		if (!isset($_POST['set_charset_record']))
 		{
 			echo $this->form_open();
-			echo '<input type="submit" name="set_charset_record" value="' . $this->_t('CategoriesSaveButton') . '">';
+			echo '<input type="submit" name="set_charset_record" value="' . $this->_t('UpdateButton') . '">';
 			echo $this->form_close();
 		}
 		else if (isset($_POST['set_charset_record']))
@@ -569,7 +581,7 @@ if ($this->is_admin())
 	if (!isset($_POST['remove_converted_column']))
 	{
 		echo $this->form_open();
-		echo '<input type="submit" name="remove_converted_column" value="' . $this->_t('CategoriesSaveButton') . '">';
+		echo '<input type="submit" name="remove_converted_column" value="' . $this->_t('UpdateButton') . '">';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['remove_converted_column']))
@@ -606,7 +618,7 @@ if ($this->is_admin())
 	if (!isset($_POST['reset_text_column']))
 	{
 		echo $this->form_open();
-		echo '<input type="submit" name="reset_text_column" value="' . $this->_t('CategoriesSaveButton') . '">';
+		echo '<input type="submit" name="reset_text_column" value="' . $this->_t('UpdateButton') . '">';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['reset_text_column']))

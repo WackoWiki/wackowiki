@@ -1,6 +1,6 @@
 <?php
 
-// BbCode parsing class
+// BBCode parsing class
 
 class BbCode
 {
