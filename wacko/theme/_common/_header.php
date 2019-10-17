@@ -11,10 +11,9 @@ header_remove('X-Powered-By');
 
 $tpl->enter('h_');
 
-$tpl->lang		= $this->page_lang;
+$tpl->lang			= $this->page_lang;
 $tpl->dir			= $this->languages[$this->page_lang]['dir'];
 $tpl->charset		= $this->get_charset();
-
 
 !Ut::is_empty($tpl->title = @$this->page['title']) or $tpl->tag = $this->add_spaces($this->tag);
 $this->method == 'show' or $tpl->method = $this->method;
@@ -72,7 +71,7 @@ if ($this->db->enable_feeds)
 
 	if (!$this->hide_revisions)
 	{
-		$tpl->rss_revisions_tag	= $this->tag;
+		$tpl->rss_revisions_tag		= $this->tag;
 		$tpl->rss_revisions_href	= $this->href('revisions.xml');
 	}
 }
@@ -106,4 +105,4 @@ if ($doubleclick)
 
 $tpl->additions = $this->get_html_addition('header');
 
-$tpl->leave();	// _h
+$tpl->leave();	// h_

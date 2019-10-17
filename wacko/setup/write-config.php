@@ -6,6 +6,11 @@ if (($config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo')) && empty($c
 	$config['database_port'] = '3306';
 }
 
+if ($config['database_collation'] == '0')
+{
+	$config['database_collation'] = 'utf8mb4_unicode_520_ci';
+}
+
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
 
