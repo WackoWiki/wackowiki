@@ -195,6 +195,69 @@ if ($this->is_admin())
 	}
 
 	########################################################
+	##            Set missing ACL sets                    ##
+	########################################################
+
+	if ($this->is_admin())
+	{
+		echo "<h4>8. Set missing ACL permissions:</h4>";
+
+		if (!isset($_POST['set_missing_permissions']))
+		{
+			echo $this->form_open();
+			?>
+			<input type="submit" name="set_missing_permissions" value="<?php echo $this->_t('UpdateButton');?>">
+			<?php
+			echo $this->form_close();
+		}
+		else if (isset($_POST['set_missing_permissions']))
+		{
+			$pages = $this->db->load_all(
+				"SELECT
+					p.page_id, p.tag, COUNT(*) AS n
+				FROM
+					" . $this->db->table_prefix . "page p
+					LEFT JOIN " . $this->db->table_prefix . "acl a ON (p.page_id = a.page_id)
+				GROUP BY p.page_id
+				HAVING COUNT(p.page_id) < 5
+				ORDER BY p.page_id ASC");
+
+			if (!empty($pages))
+			{
+				echo "<table><tr><th>page_id</th><th>tag</th><th>sets</th></tr>";
+
+				foreach ($pages as $page)
+				{
+					$acl	= [];
+					// load acls
+					$acl['read']	= $this->load_acl($page['page_id'], 'read',		1, 0);
+					$acl['write']	= $this->load_acl($page['page_id'], 'write',	1, 0);
+					$acl['comment']	= $this->load_acl($page['page_id'], 'comment',	1, 0);
+					$acl['create']	= $this->load_acl($page['page_id'], 'create',	1, 0);
+					$acl['upload']	= $this->load_acl($page['page_id'], 'upload',	1, 0);
+
+					// saving acls
+					$this->save_acl($page['page_id'], 'read',		$acl['read']['list']);
+					$this->save_acl($page['page_id'], 'write',		$acl['write']['list']);
+					$this->save_acl($page['page_id'], 'comment',	$acl['comment']['list']);
+					$this->save_acl($page['page_id'], 'create',		$acl['create']['list']);
+					$this->save_acl($page['page_id'], 'upload',		$acl['upload']['list']);
+
+					echo "<tr><td>" . $page['page_id'] . "</td><td>" . $page['tag'] . "</td><td>" . $page['n'] . "</td></tr>";
+					echo "<tr><td>create: " . $acl['create']['list'] . "</td><td>upload: " . $acl['upload']['list'] . "</td><td>" . $page['n'] . "</td></tr>";
+				}
+
+				echo "</table>";
+				echo '<br>Missing permissions set.';
+			}
+			else
+			{
+				echo 'No pages with missing permissions found.';
+			}
+		}
+	}
+
+	########################################################
 	##            MIGRATE ACLs to new scheme              ##
 	########################################################
 
