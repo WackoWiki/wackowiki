@@ -21,7 +21,7 @@
 				<ul>
 					[= l _ =
 						<li class="lined[ ' viewed ' ]">
-							<span class="dt">[ ' revisions ' ]</span> &mdash; [ ' page ' ]
+							<span class="dt">[ ' revisions ' ]</span> — [ ' page ' ]
 							 . . . . . . . . . . . . . . . . 
 							<small>
 								[ ' user ' ]

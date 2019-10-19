@@ -445,13 +445,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 									$on_tag		= $upload['file_on_page'];
 									$on_page	= $this->_t('To') . ' ' .
 												  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1) .
-												  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">&rarr; ' . $sub_tag[0];
+												  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">→ ' . $sub_tag[0];
 								}
 								else
 								{
 									$path2		= '_file:/';
 									$on_tag		= '';
-									$on_page	= '<span title="">&rarr; ' . $this->_t('UploadGlobal');
+									$on_page	= '<span title="">→ ' . $this->_t('UploadGlobal');
 								}
 
 								$tpl->u_prof_up_u_u2_li_t		= $upload['uploaded_dt'];

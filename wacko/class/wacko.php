@@ -6443,7 +6443,7 @@ class Wacko
 
 	// user trail navigation
 	//		call this function in your theme header or footer
-	//		$separator	= &gt; &raquo;
+	//		$separator	= &gt; »
 	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size)
 	{
 		// don't call this inside the run function, it will also writes all included pages
@@ -7909,7 +7909,7 @@ class Wacko
 
 			if ($page > 1)
 			{
-				$navigation .= $make_link($page - 1, ('&laquo; ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
+				$navigation .= $make_link($page - 1, ('« ' . $this->_t('PrevAcr')), ' rel="prev"') . ' ';
 			}
 
 			// pages range links
@@ -7935,7 +7935,7 @@ class Wacko
 			// next page shortcut
 			if ($page < $pages)
 			{
-				$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' &raquo;'), ' rel="next"');
+				$navigation .= ' ' . $make_link($page + 1, ($this->_t('NextAcr') . ' »'), ' rel="next"');
 			}
 
 			$pagination['text']		= $navigation;

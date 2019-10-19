@@ -106,7 +106,7 @@
 			</li>
 		=]
 		[= droptab _ =
-			<li class="dropdown"><a href="#" id="handler-more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown-arrow">&#9660;</span></a>
+			<li class="dropdown"><a href="#" id="handler-more">[ ' _t: PageHandlerMoreTip ' ]<span class="dropdown-arrow">▼</span></a>
 				<ul class="dropdown_menu">
 					['' tab TabList '']
 					['' // last empty '']

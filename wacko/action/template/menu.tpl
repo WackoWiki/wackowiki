@@ -31,7 +31,7 @@
 							[= nouse _ =
 								<!--<input type="radio" id="menu_item[ ' menuid ' ]" name="change" value="[ ' menuid ' ]"> -->
 							=]
-							<label for="menu_item[ ' menuid ' ]" title="[ ' title ' ]">&raquo; [ ' tag ' ]</label>
+							<label for="menu_item[ ' menuid ' ]" title="[ ' title ' ]">» [ ' tag ' ]</label>
 						</td>
 						<td class="t-center">
 							<input type="checkbox" id="menu_item[ ' menuid ' ]" name="delete_[ ' menuid ' ]">

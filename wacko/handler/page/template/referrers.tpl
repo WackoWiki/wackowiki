@@ -1,5 +1,5 @@
 [ === main === ]
-	<h3>[ ' _t: ReferrersText ' ] &raquo; [ ' header ' ]</h3>
+	<h3>[ ' _t: ReferrersText ' ] » [ ' header ' ]</h3>
 	[ ' menu ' ]
 	[= b _ =
 		<strong>[ ' _t: ReferringPages ' ]:</strong><br><br>
@@ -36,7 +36,7 @@
 								<a title="[ ' ref | e ' ]" href="[ ' ref | e ' ]" rel="nofollow noreferrer">[ ' trunc | e ' ]</a>
 							</span>
 							[= l _ =
-								&nbsp;&nbsp;&rarr;&nbsp;&nbsp;<small>[ ' link ' ]</small>
+								&nbsp;&nbsp;→&nbsp;&nbsp;<small>[ ' link ' ]</small>
 							=]
 						</li>
 					=]

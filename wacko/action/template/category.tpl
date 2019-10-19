@@ -3,7 +3,7 @@
 		[= mark _ =
 			<div class="layout-box">
 				<p>
-					<span>[ ' _t: PagesCategory ' ]: &laquo;<strong>[ ' words ' ]</strong>&raquo;</span>
+					<span>[ ' _t: PagesCategory ' ]: «<strong>[ ' words ' ]</strong>»</span>
 				</p>
 		=]
 		[= d _ =

@@ -59,7 +59,7 @@ if (!$style) $style = 'before';
 			}
 			else
 			{
-				$num = str_replace('-', "&#0150;&sect;",
+				$num = str_replace('-', "&#0150;§",
 						str_replace('p', '¹', $toc[$i][0] ));
 			}
 

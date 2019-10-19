@@ -21,13 +21,13 @@
 				<ul>
 					[= l _ =
 						<li class="lined[ ' viewed ' ]">
-							<span class="dt">[ ' revisions ' ]</span> &mdash; [ ' page ' ]
+							<span class="dt">[ ' revisions ' ]</span> — [ ' page ' ]
 							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title ' ]" alt="[ ' alt ' ]" class="[ ' class ' ]">
 							[ ' link ' ]
 								[= to =
 									[ ' _t: To ' ]&nbsp;&nbsp;[ ' link ' ]
 								=]
-							<span title="[ ' _t: Cluster ' ]">&rarr; [ ' cluster ' ]</span>
+							<span title="[ ' _t: Cluster ' ]">→ [ ' cluster ' ]</span>
 							 . . . . . . . . . . . . . . . . 
 							<small>
 								[ ' user ' ]

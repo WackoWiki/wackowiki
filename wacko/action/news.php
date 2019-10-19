@@ -187,7 +187,7 @@ if (!empty($this->db->news_cluster))
 	{
 		if (isset($category_title))
 		{
-			$_category_title = ' ' . $this->_t('For') . ' ' . $this->_t('Category') . ' &laquo;' . $category_title['category'] . '&raquo;';
+			$_category_title = ' ' . $this->_t('For') . ' ' . $this->_t('Category') . ' «' . $category_title['category'] . '»';
 		}
 		else
 		{

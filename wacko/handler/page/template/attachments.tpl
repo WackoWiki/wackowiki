@@ -8,7 +8,7 @@
 				<li><a href="[ ' href: upload ' ]">[ ' _t: UploadFile ' ]</a></li>
 			=]
 		</ul>
-		<h3>[ ' _t: Attachments ' ] &raquo; [ ' header ' ]</h3>
+		<h3>[ ' _t: Attachments ' ] » [ ' header ' ]</h3>
 		[ ' tabs ' ]
 		<br><br>
 		[ ' files ' ]

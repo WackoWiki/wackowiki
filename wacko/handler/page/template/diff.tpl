@@ -57,7 +57,7 @@
 	<span>[ ' version ' ]</span>
 	<a href="[ ' href ' ]">
 		[ ' modified | time_formatted ' ]
-		<span class="dropdown-arrow">&#9660;</span>
+		<span class="dropdown-arrow">▼</span>
 	</a>
 	<div class="diffdown-content">
 		[= r _ =

@@ -10,7 +10,7 @@
 				<ul class="lined">
 					[= l _ =
 						<li class="lined[ ' viewed ' ]">
-							<span class="dt">[ ' time ' ]</span> &mdash; [ ' icon ' ][ ' page ' ]
+							<span class="dt">[ ' time ' ]</span> — [ ' icon ' ][ ' page ' ]
 							 . . . . . . . . . . . . . . . . 
 							<small>
 								[ ' user ' ]

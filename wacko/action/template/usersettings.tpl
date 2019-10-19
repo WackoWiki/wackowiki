@@ -1,6 +1,6 @@
 [ === main === ]
 	<!--notypo-->
-	<h3>[ ' _t: UserSettings ' ] &raquo; [ ' header ' ] </h3>
+	<h3>[ ' _t: UserSettings ' ] » [ ' header ' ] </h3>
 	[ ' tabs ' ]
 	<br><br>
 	[= menu _ =

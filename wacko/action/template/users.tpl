@@ -14,7 +14,7 @@ first really BIG template written
 
 [= Profile =]
 	<h1>[ ' username | e ' ]</h1>
-	<small><a href="[ ' href ' ]">&laquo; [ ' _t: UsersList ' ]</a></small>
+	<small><a href="[ ' href ' ]">« [ ' _t: UsersList ' ]</a></small>
 
 	[= tab _ =
 
@@ -137,7 +137,7 @@ first really BIG template written
 			['' pagination '']<br>
 			<ul class="ul-list lined">
 				[= li _ =
-					<li><small>[ ' created | time_formatted ' ]</small>  &mdash; [ ' link ' ]</li>
+					<li><small>[ ' created | time_formatted ' ]</small>  — [ ' link ' ]</li>
 				=]
 			</ul>
 		=]
@@ -153,7 +153,7 @@ first really BIG template written
 				[ ''' pagination ''' ]<br>
 				<ul class="ul-list lined">
 					[= li _ =
-						<li><small>[ ' created | time_formatted ' ]</small> &mdash; [ ' link ' ]</li>
+						<li><small>[ ' created | time_formatted ' ]</small> — [ ' link ' ]</li>
 					=]
 				</ul>
 			=]
@@ -170,7 +170,7 @@ first really BIG template written
 						[= li _ =
 							<li>
 								<small>[ ' t | time_formatted ' ]</small>
-								&mdash; [ ' link ' ]
+								— [ ' link ' ]
 								. . . . . . . . . . . . . . . .
 								[ ' onpage ' ]</span>['' // TODO refactor! '']
 								[ ' descr ' ]

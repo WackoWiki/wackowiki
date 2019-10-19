@@ -753,7 +753,7 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Свойства документа %1',
-	'MetaInfo'					=> 'Ключевые слова/Описание&nbsp;&mdash; поля, вставляемые в HTML-заголовок каждой страницы (META).',
+	'MetaInfo'					=> 'Ключевые слова/Описание&nbsp;— поля, вставляемые в HTML-заголовок каждой страницы (META).',
 	'MetaTag'					=> 'Тэг',
 	'MetaTitle'					=> 'Заголовок',
 	'MetaKeywords'				=> 'Ключевые слова',

@@ -18,7 +18,7 @@
 						[= l _ =
 							<li>
 								[= t _ =
-									[ ' time ' ] &mdash; 
+									[ ' time ' ] — 
 								=]
 								[ ' link ' ]
 							</li>
