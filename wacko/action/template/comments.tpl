@@ -21,7 +21,7 @@
 				<ul>
 					[= l _ =
 						<li class="lined[ ' viewed ' ]">
-							<span class="dt">[ ' time ' ]</span> &mdash; [ ' page ' ]
+							<span class="dt">[ ' time ' ]</span> — [ ' page ' ]
 							 . . . . . . . . . . . . . . . . 
 							<small>
 								[ ' // _t: LatestCommentBy ' ]

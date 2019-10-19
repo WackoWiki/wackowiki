@@ -1,5 +1,5 @@
 [ === main === ]
-	<h3>[ ' _t: ReferrersText ' ] &raquo; [ ' header ' ]</h3>
+	<h3>[ ' _t: ReferrersText ' ] » [ ' header ' ]</h3>
 	[ ' menu ' ]
 
 	[= none _ =

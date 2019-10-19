@@ -9,7 +9,7 @@ $tpl->title = ($this->forum
 		? $this->_t('Topics')
 		: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
 
-$tpl->moderate =  ($this->forum ? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '&laquo; ' . $this->_t('ModerateSection2')) . '<br><br>' : '');
+$tpl->moderate =  ($this->forum ? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '« ' . $this->_t('ModerateSection2')) . '<br><br>' : '');
 
 // local functions
 function moderate_page_exists(&$engine, $tag)
@@ -442,7 +442,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					if (moderate_page_exists($this, $new_tags[$i++]) === true)
 					{
-						$error[] = '<span class="underline">&laquo;' . $this->get_page_title('', $page_id) . '&raquo;</span>';
+						$error[] = '<span class="underline">«' . $this->get_page_title('', $page_id) . '»</span>';
 					}
 				}
 
@@ -689,7 +689,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			foreach ($set as $page_id)
 			{
-				$options[$i]['accept_text']	= '&laquo;' . $this->get_page_title('', $page_id) . '&raquo;';
+				$options[$i]['accept_text']	= '«' . $this->get_page_title('', $page_id) . '»';
 				$options[$i]['topic']		= $this->get_page_tag($page_id);
 				$i++;
 			}
@@ -806,7 +806,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						if (moderate_page_exists($this, $new_tag) === true)
 						{
-							$error = '<span class="underline">&laquo;' . $this->page['title'] . '&raquo;</span>';
+							$error = '<span class="underline">«' . $this->page['title'] . '»</span>';
 						}
 					}
 				}

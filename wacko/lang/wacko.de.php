@@ -6,7 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = [
+
+	// common
+	'StoreButton'				=> 'Speichern',
+	'UpdateButton'				=> 'Aktualisieren', // move up
+	'CancelButton'				=> 'Abbrechen',
+	'ConvertButton'				=> 'Convert',
+
 	'FormInvalid'				=> 'Das übermittelte Formular war ungültig. Versuche erneut, das Formular abzusenden.',
+
 	// logged in panel
 	'YouAre'					=> 'Du bist ',
 	'AccountText'				=> 'Konto',

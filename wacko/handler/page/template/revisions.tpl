@@ -35,7 +35,7 @@
 							<del>
 						=]
 						<a href="[ ' href ' ]">[ ' modified | time_formatted ' ]</a>
-						<span class="rev-size"> &mdash; ([ ' size ' ]) [ ' delta ' ]</span>
+						<span class="rev-size"> — ([ ' size ' ]) [ ' delta ' ]</span>
 						[= edel _ =
 							[ ' nonstatic ' ]
 							</del>

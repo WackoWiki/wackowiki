@@ -5,7 +5,7 @@
 	=]
 	[= p Profile =
 		<h1>[ ' group.group_name | e ' ]</h1>
-		<small><a href="[ ' link ' ]">&laquo; [ ' _t: GroupsList ' ]</a></small>
+		<small><a href="[ ' link ' ]">« [ ' _t: GroupsList ' ]</a></small>
 		<h2>[ ' _t: GroupsProfile ' ]</h2>
 		<table class="userprofile lined">
 			<tr>

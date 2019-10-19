@@ -89,7 +89,7 @@ $lang = [
 'HomePage' => 'Главна страница',
 'HomePageDesc' => 'Главна страница на WackoWiki.  Трябва да е  с <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">УикиИме</a>.',
 'HomePageDefault' => 'HomePage',
-'MultiLang' => '&laquo;Многоезичен&raquo; режим',
+'MultiLang' => '«Многоезичен» режим',
 'MultiLangDesc' => 'Многоезичен режим, позволяващ работа на няколко езика. Ако е включен, инсталаторът ще инициализира елементи от менюто на няколко различни езика.',
 'AllowedLang' => 'Allowed Languages',
 'AllowedLangDesc' => 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',

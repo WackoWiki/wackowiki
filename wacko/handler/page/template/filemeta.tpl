@@ -1,6 +1,6 @@
 [ === main === ]
 	[ ' navigation ' ]
-	<h3>[ ' _t: File ' ] &raquo; [ ' mode ' ]</h3>
+	<h3>[ ' _t: File ' ] » [ ' mode ' ]</h3>
 	[ ' tabs ' ]
 	<br>
 	[= r _ =

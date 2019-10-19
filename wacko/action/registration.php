@@ -204,7 +204,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// forward
 			$this->set_message(
-				Ut::perc_replace($this->_t('SiteRegistered'), '&laquo;' . $this->db->site_name . '&raquo;') .
+				Ut::perc_replace($this->_t('SiteRegistered'), '«' . $this->db->site_name . '»') .
 				'<br><br>' .
 				$this->_t('SiteEmailConfirm'));
 
