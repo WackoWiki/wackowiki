@@ -4295,24 +4295,24 @@ class Wacko
 
 	function add_nbsps($text)
 	{
-		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//u', '\\1&nbsp;/', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;' . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')&nbsp;(?=' . $this->language['UPPER'] . '&nbsp;\/)/u', '\\1', $text);
-		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/u', '/&nbsp;\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')&nbsp;(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
-		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/u', '\\1&nbsp;\\2', $text);
-		$text = preg_replace('/(' . $this->language['ALPHA'] . ')([0-9])/u', '\\1&nbsp;\\2', $text);
-		// $text = preg_replace('/([0-9])&nbsp;(?=[0-9])/u', '\\1', $text);
-		$text = preg_replace('/([0-9])&nbsp;(?!' . $this->language['ALPHA'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//u', '\\1' . NBSP . '/', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . '' . NBSP . '' . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . '' . NBSP . '\/)/u', '\\1', $text);
+		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')' . NBSP . '(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
+		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHA'] . ')([0-9])/u', '\\1' . NBSP . '\\2', $text);
+		// $text = preg_replace('/([0-9])' . NBSP . '(?=[0-9])/u', '\\1', $text);
+		$text = preg_replace('/([0-9])' . NBSP . '(?!' . $this->language['ALPHA'] . ')/u', '\\1', $text);
 
 		return $text;
 	}
 
 	function add_spaces_title($text)
 	{
-		return preg_replace('/&nbsp;/', ' ', $this->add_nbsps($text));
+		return preg_replace('/' . NBSP . '/', ' ', $this->add_nbsps($text));
 	}
 
 	function validate_reserved_words( $data )
@@ -8541,7 +8541,7 @@ class Wacko
 
 			if ($suffix === true)
 			{
-				$size= $size . '&nbsp;' . $norm[$x];
+				$size= $size . NBSP . $norm[$x];
 			}
 
 			return $size;

@@ -364,11 +364,11 @@ $wacko_translation = [
 	'History'					=> 'История на промените',
 	'ReEditOldRevision'			=> 'Редактирай старата версия',
 
-	'ExternalPages'				=> 'Външни страници, препращащи на&nbsp;%1<br> (%2) (<a href="%3">списък на сайтовете</a>):',
+	'ExternalPages'				=> 'Външни страници, препращащи на %1<br> (%2) (<a href="%3">списък на сайтовете</a>):',
 	'ExternalPagesGlobal'		=> 'Външни страници, препращащи (%2)<br> (<a href="%1">списък на сайтовете</a>):',
 	'Last24Hours'				=> 'за последното денонощие',
 	'LastDays'					=> 'за последните %1 дни',
-	'DomainsSitesPages'			=> 'Сайтове, на които има препратки&nbsp;%1<br> (%2)  (<a href="%3">списък на отделните страници</a>):',
+	'DomainsSitesPages'			=> 'Сайтове, на които има препратки %1<br> (%2)  (<a href="%3">списък на отделните страници</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Сайтове, на които има препратки<br> (<a href="%1">списък на отделните страници</a>):',
 	'ViewReferringSites'		=> '<a href="%1">Сайтове, препращащи на %2</a>',
 	'ViewReferringSitesGlobal'	=> '<a href="%1">Сайтове, препращащи</a>',
@@ -526,8 +526,8 @@ $wacko_translation = [
 	'EditIcon'					=> 'редактиране',
 	'TreeClusterTitle'			=> 'Дърво на СЕКТОР %1',
 	'TreeSiteTitle'				=> 'Дърво на сайта',
-	'TreeEmpty'					=> '%1&nbsp;няма подстраници',
-	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmpty'					=> '%1 няма подстраници',
+	'TreeEmptyLevels'			=> '%1 has not subpages for given levels of depth. Increase the value for depth.',
 	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler

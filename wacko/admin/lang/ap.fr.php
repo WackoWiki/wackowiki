@@ -23,9 +23,9 @@ $ap_translation = [
 	'AdminPanel'				=> 'Panneau de contrôle d\'administration',
 	'RecoveryMode'				=> 'Mode de récupération',
 	'Authorization'				=> 'Autorisation',
-	'AuthorizationTip'			=> 'Merci d&rsquo;indiquer le mot de passe d&rsquo;administration (assurez-vous également que les cookies soient autorisés par votre navigateur).',
-	'NoRecoceryPassword'		=> 'le mot de passe d&rsquo;administration n&rsquo;est pas spécifié !',
-	'NoRecoceryPasswordTip'		=> 'Note&nbsp;: l&rsquo; absence de mot de passe d&rsquo;administration constitue une menace pour la sécurité ! Saisissez votre mot de passe dans le fichier de configuration et exécutez le programme de nouveau.',
+	'AuthorizationTip'			=> 'Merci d’indiquer le mot de passe d’administration (assurez-vous également que les cookies soient autorisés par votre navigateur).',
+	'NoRecoceryPassword'		=> 'le mot de passe d’administration n’est pas spécifié !',
+	'NoRecoceryPasswordTip'		=> 'Note : l’ absence de mot de passe d’administration constitue une menace pour la sécurité ! Saisissez votre mot de passe dans le fichier de configuration et exécutez le programme de nouveau.',
 
 	'ErrorLoadingModule'		=> 'Erreur de chargement du module admin %1 : n\'existe pas.',
 
@@ -935,7 +935,7 @@ $ap_translation = [
 	'LogNoMatch'				=> 'Aucun événement ne répond aux critères',
 	'LogDate'					=> 'Date',
 	'LogEvent'					=> 'Événement',
-	'LogUsername'				=> 'Nom d&rsquo;utilisateur',
+	'LogUsername'				=> 'Nom d’utilisateur',
 	'LogLevels'	=> [
 		'1'		=> 'critique',
 		'2'		=> 'le plus élevé',
@@ -1095,9 +1095,9 @@ $ap_translation = [
 	'UserEnabled'				=> 'En fonction',
 	'UsersAddNew'				=> 'Ajouter un utilisateur',
 	'UsersDelete'				=> 'Êtes-vous sûr de vouloir supprimer un utilisateur %1 ',
-	'UsersDeleted'				=> 'L&rsquo;utilisateur %1 a été supprimé de la base de données.',
-	'UsersRename'				=> 'Renommer l&rsquo;utilisateur %1 en',
-	'UsersRenameInfo'			=> '* Note&nbsp;: les modifications affecteront toutes les pages affectées à cet utilisateur.',
+	'UsersDeleted'				=> 'L’utilisateur %1 a été supprimé de la base de données.',
+	'UsersRename'				=> 'Renommer l’utilisateur %1 en',
+	'UsersRenameInfo'			=> '* Note : les modifications affecteront toutes les pages affectées à cet utilisateur.',
 	'UsersUpdated'				=> 'Utilisateur effectivement actualisé.',
 
 	'UserName'					=> 'Nom d\'utilisateur',
@@ -1136,9 +1136,9 @@ $ap_translation = [
 	'GroupsDeleted'				=> 'Le groupe %1 a été supprimé de la base de données et de toutes les pages.',
 	'GroupsAdd'					=> 'Ajouter un groupe',
 	'GroupsRename'				=> 'Renommer le groupe %1',
-	'GroupsRenameInfo'			=> '* Note&nbsp;: la modification affectera toutes les pages affectées au groupe.',
+	'GroupsRenameInfo'			=> '* Note : la modification affectera toutes les pages affectées au groupe.',
 	'GroupsDelete'				=> 'Êtes-vous sûr(e) de vouloir supprimer le groupe %1',
-	'GroupsDeleteInfo'			=> '* Note&nbsp;: la modification affectera tous les membres du groupe.',
+	'GroupsDeleteInfo'			=> '* Note : la modification affectera tous les membres du groupe.',
 	'GroupsIsSystem'			=> 'Le groupe %1 appartient au système et ne peut pas être supprimé.',
 	'GroupsStoreButton'			=> 'Sauvegarder les  groupes',
 	'GroupsSaveButton'			=> 'Sauvegarder',
@@ -1158,7 +1158,7 @@ $ap_translation = [
 	'MembersAdded'				=> 'Added new member to the group successfully.',
 	'MembersRemove'				=> 'Êtes-vous sûr de vouloir ôter le membre %1 ?',
 	'MembersRemoved'			=> 'Le membre a été ôté du groupe.',
-	'MembersDeleteInfo'			=> '* Note&nbsp;: Les modifications affecteront tous les membres de ce groupe.',
+	'MembersDeleteInfo'			=> '* Note : Les modifications affecteront tous les membres de ce groupe.',
 
 	// Statistics module
 	'DbStatSection'				=> 'Statistiques de la base de données',
@@ -1210,7 +1210,7 @@ $ap_translation = [
 	'DbOptimizeRepairInfo'		=> 'Ce script peut également tenter d\'optimiser la base de données. Cela améliore les performances dans certaines situations. La réparation et l\'optimisation de la base de données peuvent prendre beaucoup de temps et la base de données sera verrouillée tout en l\'optimisant.',
 
 	'TableOk'					=> 'Le tableau %1 est correct.',
-	'TableNotOk'				=> 'Le tableau %1 n\'est pas correct. Il signale l\'erreur suivante : %2. Ce script va tenter de réparer cette table&hellip;',
+	'TableNotOk'				=> 'Le tableau %1 n\'est pas correct. Il signale l\'erreur suivante : %2. Ce script va tenter de réparer cette table…',
 	'TableRepaired'				=> 'Successfully repaired the %1 table.',
 	'TableRepairFailed'			=> 'N\'a pas réussi à réparer la table %1. <br>Erreur : %2',
 	'TableAlreadyOptimized'		=> 'Le tableau %1 est déjà optimisé.',

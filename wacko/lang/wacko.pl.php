@@ -527,7 +527,7 @@ $wacko_translation = [
 	'TreeClusterTitle'			=> 'Drzewo klastra %1',
 	'TreeSiteTitle'				=> 'Drzewo odnośników witryny',
 	'TreeEmpty'					=> '%1 nie zawiera podstron',
-	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmptyLevels'			=> '%1 has not subpages for given levels of depth. Increase the value for depth.',
 	'TreeTooBig'				=> 'zbyt wiele podstron',
 
 	// clone handler
