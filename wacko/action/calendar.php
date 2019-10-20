@@ -92,7 +92,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	list ($month, $year, $month_name, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
 	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
-	$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . '&nbsp;' . $year;  // note that some locales don't capitalize month and day names
+	$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
 
 	// Begin calendar. Uses a real <caption>.
 	@list ($p, $pl) = each($pn);
@@ -100,12 +100,12 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	if ($p)
 	{
-		$p = '<span class="calendar-prev">' . ($pl ? '<a href="' . Ut::html($pl) . '">' . $p . '</a>' : $p) . '</span>&nbsp;';
+		$p = '<span class="calendar-prev">' . ($pl ? '<a href="' . Ut::html($pl) . '">' . $p . '</a>' : $p) . '</span>' . NBSP;
 	}
 
 	if ($n)
 	{
-		$n = '&nbsp;<span class="calendar-next">' . ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n) . '</span>';
+		$n = NBSP . '<span class="calendar-next">' . ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n) . '</span>';
 	}
 
 	$calendar = '<table class="calendar">' . "\n" .
@@ -125,7 +125,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	if ($weekday > 0)
 	{
-		$calendar .= '<td colspan="' . $weekday . '">&nbsp;</td>'; // initial 'empty' days
+		$calendar .= '<td colspan="' . $weekday . '">' . NBSP . '</td>'; // initial 'empty' days
 	}
 
 	for ($day = 1, $days_in_month = gmdate('t', $first_of_month); $day <= $days_in_month; $day++, $weekday++)
@@ -158,7 +158,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	if ($weekday != 7)
 	{
-		$calendar .= '<td colspan="' . (7 - $weekday) . '">&nbsp;</td>'; // remaining "empty" days
+		$calendar .= '<td colspan="' . (7 - $weekday) . '">' . NBSP . '</td>'; // remaining "empty" days
 	}
 
 	$calendar .= "</tr>\n</table>\n";

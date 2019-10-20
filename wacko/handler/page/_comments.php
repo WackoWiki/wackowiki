@@ -155,7 +155,7 @@ if ($this->has_access('read'))
 							? $tpl->l_m_modified = $comment['modified']
 							: '');
 						/*($user_stats == true
-							? '<li>' . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . '&nbsp;&nbsp; ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . '&nbsp;&nbsp; ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
+							? '<li>' . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . NBSP . NBSP . ' ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . ' . NBSP . ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
 							: '') .*/
 
 				// comment footer

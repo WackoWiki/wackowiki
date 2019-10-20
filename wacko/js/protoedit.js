@@ -111,7 +111,7 @@ ProtoEdit.prototype.createToolbar = function (id, width, height, readOnly) {
 		var btn = this.buttons[i];
 		
 		if (btn.name == ' ')
-			html += ' <li>&nbsp;</li>\n';
+			html += ' <li> </li>\n';
 		else if (btn.name == 'customhtml')
 			html += btn.desc;
 		else

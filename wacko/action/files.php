@@ -248,7 +248,7 @@ if ($can_view)
 
 			if ($desc == '')
 			{
-				$desc = "&nbsp;";
+				$desc = NBSP;
 			}
 
 			$file_id	= $file['file_id'];

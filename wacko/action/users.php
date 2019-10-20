@@ -445,7 +445,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 									$on_tag		= $upload['file_on_page'];
 									$on_page	= $this->_t('To') . ' ' .
 												  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1) .
-												  ' &nbsp;&nbsp;<span title="' . $this->_t('Cluster') . '">→ ' . $sub_tag[0];
+												  ' ' . NBSP . NBSP . '<span title="' . $this->_t('Cluster') . '">→ ' . $sub_tag[0];
 								}
 								else
 								{

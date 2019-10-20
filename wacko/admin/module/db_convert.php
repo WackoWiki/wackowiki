@@ -192,7 +192,7 @@ function admin_db_convert(&$engine, &$module)
 						{
 							echo '<tr class="hl-setting">' .
 									'<td class="label"><input type="checkbox" name="' . $table['TABLE_NAME'] . '" value="table" checked></td>' .
-									'<td>&nbsp;&nbsp;<strong>' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</strong></td>' .
+									'<td>  <strong>' . $table['TABLE_NAME'] . '  </strong></td>' .
 									'<td>' . ($table['ENGINE'] == 'MyISAM' ? '<strong class="red">' : '' ) . $table['ENGINE'] . ($table['ENGINE'] == 'MyISAM' ? '</strong>' : '') . '</td>' .
 								'</tr>' .
 								'<tr class="lined"><td colspan="3"></td></tr>' . "\n";
@@ -263,9 +263,9 @@ function admin_db_convert(&$engine, &$module)
 						if ($table['DATA_TYPE'] == 'datetime')
 						{
 							echo '<tr class="hl-setting">' .
-									'<td>&nbsp;&nbsp;' . $table['TABLE_NAME'] . '&nbsp;&nbsp;</td>' .
-									'<td class="label">&nbsp;&nbsp;<strong>' . $table['COLUMN_NAME'] . '&nbsp;&nbsp;</strong></td>' .
-									'<td>&nbsp;&nbsp;' . $table['DATA_TYPE'] . '&nbsp;&nbsp;</td>' .
+									'<td>  ' . $table['TABLE_NAME'] . '  </td>' .
+									'<td class="label">  <strong>' . $table['COLUMN_NAME'] . '  </strong></td>' .
+									'<td>  ' . $table['DATA_TYPE'] . '  </td>' .
 									'<td>' . ($table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '<strong class="red">' : '' ) . $table['COLUMN_DEFAULT'] . ($table['COLUMN_DEFAULT'] == '0000-00-00 00:00:00' ? '</strong>' : '') . '</td>' .
 								'</tr>' .
 								'<tr class="lined"><td colspan="4"></td></tr>' . "\n";

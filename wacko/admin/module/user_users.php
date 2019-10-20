@@ -924,7 +924,7 @@ function admin_user_users(&$engine, &$module)
 								'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> ' .
 								($set
 										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
-										'&nbsp;&nbsp;&nbsp;<small>ids: ' . implode(', ', $set) . '</small>'
+										'<small>ids: ' . implode(', ', $set) . '</small>'
 										: ''
 								);
 

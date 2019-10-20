@@ -319,7 +319,7 @@ if ($can_view)
 
 				if ($desc == '')
 				{
-					$desc = "&nbsp;";
+					$desc = "\u{00A0}";	// \u{00A0} No-Break Space (NBSP)
 				}
 
 				$file_id	= $file['file_id'];

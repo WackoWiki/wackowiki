@@ -20,7 +20,7 @@ class WackoFormatter
 	var $intable			= 0;
 	var $intablebr			= 0;
 	var $cols				= 0;
-	var $z_gif				= '&nbsp;';
+	var $z_gif				= "\u{00A0}";	// \u{00A0} No-Break Space (NBSP)
 	var $colors				= [
 								'red' => 'red',
 								'green' => 'green',
@@ -266,6 +266,7 @@ class WackoFormatter
 			($this->object->db->disable_wikilinks
 				? ''
 				: "(~?)(?<=[^\." . $object->language['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->language['UPPER'] . $object->language['LOWER'] . "+" . $object->language['UPPERNUM'] . $object->language['ALPHANUM'] . "*)\b|") .
+				# "(~?)(?<=[^\.[[:alpha:]][[:digit:]]\_\-\/]|^)(((\.\.|!)?\/)?[[:upper:][:lower:]\/]+[[:upper:][:digit:]][[:alpha:][:digit:]\_\-\/]*)\b|") .
 			"\n)/usm";
 
 		$this->NOTLONGREGEXP =

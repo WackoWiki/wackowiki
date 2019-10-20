@@ -275,8 +275,8 @@ class Polls
 			{
 				$percent = ($total == 0 ? 0 : round($var['votes'] / $total * 100, 1));
 				$poll	.= '<tr class="lined"><td class="t-left" style="width:95%;">' . $var['text'] . '</td>' .
-						'<td>&nbsp;<strong>' . $var['votes'] . '</strong>&nbsp;</td>' .
-						'<td>&nbsp;<strong>' . $percent . '%</strong></td></tr>';
+						'<td>' . NBSP . '<strong>' . $var['votes'] . '</strong>' . NBSP . '</td>' .
+						'<td>' . NBSP . '<strong>' . $percent . '%</strong></td></tr>';
 			}
 
 			$poll	.= '<tr><td colspan="3"><small>' . $this->engine->_t('PollsTotalVotes') . ': ' . $voters.
