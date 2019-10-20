@@ -526,8 +526,8 @@ $wacko_translation = [
 	'EditIcon'					=> 'redigeeri',
 	'TreeClusterTitle'			=> 'Grupi %1 puu',
 	'TreeSiteTitle'				=> 'Saitide puu',
-	'TreeEmpty'					=> '%1&nbsp;-el ei ole alamlehti',
-	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmpty'					=> '%1 -el ei ole alamlehti',
+	'TreeEmptyLevels'			=> '%1 has not subpages for given levels of depth. Increase the value for depth.',
 	'TreeTooBig'				=> 'liiga palju alamlehti',
 
 	// clone handler

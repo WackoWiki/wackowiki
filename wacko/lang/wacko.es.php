@@ -526,8 +526,8 @@ $wacko_translation = [
 	'EditIcon'					=> 'editar',
 	'TreeClusterTitle'			=> 'Arbol de grupo %1',
 	'TreeSiteTitle'				=> 'Arbol de web',
-	'TreeEmpty'					=> '%1&nbsp;no tiene sub-páginas',
-	'TreeEmptyLevels'			=> '%1&nbsp;no tiene sub-páginas para el nivel indicado. Aumente el valor de nivel.',
+	'TreeEmpty'					=> '%1 no tiene sub-páginas',
+	'TreeEmptyLevels'			=> '%1 no tiene sub-páginas para el nivel indicado. Aumente el valor de nivel.',
 	'TreeTooBig'				=> 'too many subpages',
 
 	// clone handler

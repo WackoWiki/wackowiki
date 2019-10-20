@@ -534,8 +534,8 @@ $wacko_translation = [
 	'EditIcon'					=> 'Editieren',
 	'TreeClusterTitle'			=> 'Baumansicht des Clusters %1',
 	'TreeSiteTitle'				=> 'Baumansicht der Seite',
-	'TreeEmpty'					=> '%1&nbsp;hat keine Unterseiten',
-	'TreeEmptyLevels'			=> '%1&nbsp;hat keine Unterseiten für die angegebene Baumtiefe. Erhöhe den Wert für die Tiefe.',
+	'TreeEmpty'					=> '%1 hat keine Unterseiten',
+	'TreeEmptyLevels'			=> '%1 hat keine Unterseiten für die angegebene Baumtiefe. Erhöhe den Wert für die Tiefe.',
 	'TreeTooBig'				=> 'zu viele Unterseiten',
 
 	// clone handler

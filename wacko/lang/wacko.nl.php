@@ -526,8 +526,8 @@ $wacko_translation = [
 	'EditIcon'					=> 'Bewerk',
 	'TreeClusterTitle'			=> 'Verwijzingenboom van cluster %1',
 	'TreeSiteTitle'				=> 'Boom van alle pagina\'s',
-	'TreeEmpty'					=> '%1&nbsp;heeft geen subpagina\'s',
-	'TreeEmptyLevels'			=> '%1&nbsp;has not subpages for given levels of depth. Increase the value for depth.',
+	'TreeEmpty'					=> '%1 heeft geen subpagina\'s',
+	'TreeEmptyLevels'			=> '%1 has not subpages for given levels of depth. Increase the value for depth.',
 	'TreeTooBig'				=> 'te veel subpagina\'s',
 
 	// clone handler
