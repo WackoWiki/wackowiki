@@ -20,6 +20,7 @@ if (!defined('IN_WACKO'))
  * 2. Post-Upgrade Routines for R6.x
  *    2.1. Remove column 'converted' from tables
  *    2.2. Reset upsized TEXT columns back to TEXT or MEDIUMTEXT
+ *    2.3. Convert HTML entities to their corresponding Unicode characters
  */
 
 /* TODO:
@@ -172,10 +173,10 @@ if ($this->is_admin())
 		{
 			$this->db->sql_query("ALTER TABLE " . $prefix . $table . " DEFAULT CHARACTER SET {$charset} COLLATE {$collation};");
 			$this->db->sql_query("ALTER TABLE " . $prefix . $table . " CONVERT TO CHARACTER SET {$charset} COLLATE {$collation};");
-			// TODO: convert records in a different charset -> see next routine
-			// TODO: HTML entities
+			// B: convert records in a different charset -> see next routine
+			// C: HTML entities  -> see post upgrade routine
 			// TODO: convert mojibake
-			// TODO: supertag links
+			// TODO: deal with old supertag links
 
 			$results .=
 				"\t" . '<strong>' . date('H:i:s') . ' - ' . $table."\n" .
@@ -250,7 +251,8 @@ if ($this->is_admin())
 
 			/* Tables: sets value 1 in converted record to avoid double conversion
 			 *		1 - utf8
-			 *		2 - mojibake
+			 *		2 - HTML entities
+			 *		3 - mojibake
 			 */
 			$tables = [
 				'category',
@@ -305,7 +307,7 @@ if ($this->is_admin())
 
 					#echo $category_name . '<br>';
 
-					// update current page copy
+					// update catagory
 					mysqli_query($dblink,
 						"UPDATE {$prefix}category SET " .
 							"category				= " . $this->db->q($category_name) . ", " .
@@ -343,7 +345,7 @@ if ($this->is_admin())
 
 					# echo $file['file_name'] . '<br>';
 
-					// update current page copy
+					// update file meta data
 					mysqli_query($dblink,
 						"UPDATE {$prefix}file SET " .
 							"file_description	= " . $this->db->q($file_description) . ", " .
@@ -380,7 +382,7 @@ if ($this->is_admin())
 
 					# echo $menu_title . '<br>';
 
-					// update current page copy
+					// update menu title
 					mysqli_query($dblink,
 						"UPDATE {$prefix}menu SET " .
 							"menu_title	= " . $this->db->q($menu_title) . ", " .
@@ -467,7 +469,7 @@ if ($this->is_admin())
 
 					# echo $revision['revision_id'] . ': ' . $tag . '<br>';
 
-					// update current page copy
+					// update revision
 					mysqli_query($dblink,
 						"UPDATE {$prefix}revision SET " .
 							"tag			= " . $this->db->q($tag) . ", " .
@@ -509,7 +511,7 @@ if ($this->is_admin())
 
 					# echo $user_name . '<br>';
 
-					// update current page copy
+					// update user
 					mysqli_query($dblink,
 						"UPDATE {$prefix}user SET " .
 							"user_name	= " . $this->db->q($user_name) . ", " .
@@ -547,7 +549,7 @@ if ($this->is_admin())
 
 					# echo $group_name . '<br>';
 
-					// update current page copy
+					// update user group
 					mysqli_query($dblink,
 						"UPDATE {$prefix}usergroup SET " .
 							"group_name	= " . $this->db->q($group_name) . ", " .
@@ -661,6 +663,172 @@ if ($this->is_admin())
 			'<div class="code">' .
 				'<pre>' . $results . '</pre>' .
 			'</div><br>';
+	}
+
+	if (version_compare($this->db->wacko_version, '6.0.beta1' , '>='))
+	{
+		echo '<h3>2.3. Convert HTML entities to their corresponding Unicode characters:</h3>';
+
+		if (!isset($_POST['convert_html_entities']))
+		{
+			echo $this->form_open();
+			echo '<input type="submit" name="convert_html_entities" value="' . $this->_t('UpdateButton') . '">';
+			echo $this->form_close();
+		}
+		else if (isset($_POST['convert_html_entities']))
+		{
+			$convert_entities = function($input)
+			{
+				return preg_replace_callback('/(&#[0-9]+;)/', function($m) { return mb_convert_encoding($m[1], 'UTF-8', 'HTML-ENTITIES'); }, $input);
+			};
+
+			/* Tables: sets value 1 in converted record to avoid double conversion
+			 *		1 - utf8
+			 *		2 - HTML entities
+			 *		3 - mojibake
+			 */
+			$tables = [
+				'file',
+				'page',
+				'revision',
+			];
+
+			// add field 'converted'
+			foreach ($tables as $table)
+			{
+				$this->db->sql_query("ALTER TABLE " . $prefix . $table . " ADD converted TINYINT(1) UNSIGNED NOT NULL DEFAULT '0';");
+			}
+
+			$results =
+				'<strong>' . date('H:i:s') . ' - ' . 'Tables record conversion started ' . "\n" .
+				'================================================</strong>' . "\n";
+
+			## 1. FILES ##
+
+			if ($files = $this->db->load_all(
+				"SELECT file_id, file_name, file_description, caption " .
+				"FROM {$prefix}file " .
+				"WHERE converted <> 2 ")
+			)
+			{
+				$total = 0;
+				$results .=
+					"\t" . '<strong>' . date('H:i:s') . ' - ' . 'file' . "\n" .
+					"\t" . '------------------------------------------------</strong>' . "\n";
+
+				foreach($files as $file)
+				{
+					$file_description	= $convert_entities($file['file_description']);
+					$caption			= $convert_entities($file['caption']);
+
+					# echo $file['file_name'] . '<br>';
+
+					// update file meta data
+					$this->db->sql_query(
+						"UPDATE {$prefix}file SET " .
+							"file_description	= " . $this->db->q($file_description) . ", " .
+							"caption			= " . $this->db->q($caption) . ", " .
+							"converted			= 2 " .
+						"WHERE file_id = " . (int) $file['file_id'] . " " .
+						"LIMIT 1");
+
+					$total++;
+				}
+
+				$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . 'Records converted' . ': ' . $total . '</strong>' . "\n\n\n";
+			}
+
+			## 2. PAGES ##
+
+			if ($pages = $this->db->load_all(
+				"SELECT page_id, title, body, edit_note, description, keywords " .
+				"FROM {$prefix}page " .
+				"WHERE converted <> 2 ")
+			)
+			{
+				$total = 0;
+				$results .=
+					"\t" . '<strong>' . date('H:i:s') . ' - ' . 'page' . "\n" .
+					"\t" . '------------------------------------------------</strong>' . "\n";
+
+				foreach($pages as $page)
+				{
+					$title			= $convert_entities($page['title']);
+					$body			= $convert_entities($page['body']);
+					$edit_note		= $convert_entities($page['edit_note']);
+					$description	= $convert_entities($page['description']);
+					$keywords		= $convert_entities($page['keywords']);
+
+					# echo $tag . '<br>';
+
+					// update current page copy
+					$this->db->sql_query(
+						"UPDATE {$prefix}page SET " .
+							"title			= " . $this->db->q($title) . ", " .
+							"body			= " . $this->db->q($body) . ", " .
+							"edit_note		= " . $this->db->q($edit_note) . ", " .
+							"description	= " . $this->db->q($description) . ", " .
+							"keywords		= " . $this->db->q($keywords) . ", " .
+							"converted		= 2 " .
+						"WHERE page_id = " . (int) $page['page_id'] . " " .
+						"LIMIT 1");
+
+					$total++;
+				}
+
+				$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . 'Records converted' . ': ' . $total . '</strong>' . "\n\n\n";
+			}
+
+			## 3. REVISIONS ##
+
+			if ($revisions = $this->db->load_all(
+				"SELECT revision_id, title, body, edit_note, description, keywords " .
+				"FROM {$prefix}revision " .
+				"WHERE converted <> 2 ")
+			)
+			{
+				$total = 0;
+				$results .=
+					"\t" . '<strong>' . date('H:i:s') . ' - ' . 'revision' . "\n" .
+					"\t" . '------------------------------------------------</strong>' . "\n";
+
+				foreach($revisions as $revision)
+				{
+					$title			= $convert_entities($revision['title']);
+					$body			= $convert_entities($revision['body']);
+					$edit_note		= $convert_entities($revision['edit_note']);
+					$description	= $convert_entities($revision['description']);
+					$keywords		= $convert_entities($revision['keywords']);
+
+					# echo $revision['revision_id'] . ': ' . $tag . '<br>';
+
+					// update revision
+					$this->db->sql_query(
+						"UPDATE {$prefix}revision SET " .
+							"title			= " . $this->db->q($title) . ", " .
+							"body			= " . $this->db->q($body) . ", " .
+							"edit_note		= " . $this->db->q($edit_note) . ", " .
+							"description	= " . $this->db->q($description) . ", " .
+							"keywords		= " . $this->db->q($keywords) . ", " .
+							"converted		= 2 " .
+						"WHERE revision_id = " . (int) $revision['revision_id'] . " " .
+						"LIMIT 1");
+
+					$total++;
+				}
+
+				$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . 'Records converted' . ': ' . $total . '</strong>' . "\n\n\n";
+			}
+
+			$results .=
+				'<strong>' . date('H:i:s') . ' - ' . 'Tables records converted.' . "\n" .
+				'================================================</strong>' . "\n";
+
+			echo
+				'<div class="code">' .
+					'<pre>' . $results . '</pre>' .
+				'</div><br>';
+		}
 	}
 
 }
