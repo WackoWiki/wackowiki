@@ -311,13 +311,13 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 					$time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
 
 					echo (RECOVERY_MODE ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') .
-						'&nbsp;&nbsp;' .
+						NBSP . NBSP .
 						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
-						'&nbsp;&nbsp;' .
+						NBSP . NBSP .
 						$engine->compose_link_to_page('/', '', $engine->db->base_url, '/') .
-						'&nbsp;&nbsp;' .
+						NBSP . NBSP .
 						($db->is_locked() || RECOVERY_MODE ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
-						'&nbsp;&nbsp;' .
+						NBSP . NBSP .
 						$engine->_t('ApVersion') . ' ' . $engine->db->wacko_version;
 					?>
 				</span>

@@ -44,7 +44,7 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 	</head>
 	<body>
 		<div class="installer">
-			<h1><?php echo $lang['Title'];?><span class="white">&nbsp;:&nbsp;</span><?php echo $install_action == 'lang' ? $lang['lang'] : $lang[$install_action]; ?></h1>
+			<h1><?php echo $lang['Title'];?><span class="white"> : </span><?php echo $install_action == 'lang' ? $lang['lang'] : $lang[$install_action]; ?></h1>
 			<ul class="menu">
 				<li class="<?php echo $install_action == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang['lang']; ?></li>
 				<li>&gt;</li>

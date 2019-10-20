@@ -61,12 +61,12 @@ class Wacko
 						'before'	=> '',
 						'after'		=> '<span class="pmark">[##]</span>'],
 		'right'		=> [
-						'_before'	=> '<div class="pright"><div class="p-">&nbsp;<span class="pmark">[##]</span></div><div class="pbody-">',
+						'_before'	=> '<div class="pright"><div class="p-">' . NBSP . '<span class="pmark">[##]</span></div><div class="pbody-">',
 						'_after'	=> '</div></div>',
 						'before'	=> '',
 						'after'		=> ''],
 		'left'		=> [
-						'_before'	=> '<div class="pleft"><div class="p-"><span class="pmark">[##]</span>&nbsp;</div><div class="pbody-">',
+						'_before'	=> '<div class="pleft"><div class="p-"><span class="pmark">[##]</span>' . NBSP . '</div><div class="pbody-">',
 						'_after'	=> '</div></div>',
 						'before'	=> '',
 						'after'		=> ''],

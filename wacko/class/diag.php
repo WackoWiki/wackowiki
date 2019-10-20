@@ -87,7 +87,7 @@ class Diag
 						foreach (array_chunk($bt, 2) as &$one)
 						{
 							list ($fname, $func) = $one;
-							$btext .= '<tr><td>' . $func . '&nbsp;</td><td>&nbsp;' . $fname . '</td></tr>';
+							$btext .= '<tr><td>' . $func . NBSP . '</td><td>' . NBSP . $fname . '</td></tr>';
 						}
 
 						echo "\t";

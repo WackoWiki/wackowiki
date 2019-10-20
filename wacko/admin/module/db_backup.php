@@ -217,7 +217,7 @@ function admin_db_backup(&$engine, &$module)
 				</tr>
 				<tr>
 					<th><?php echo $engine->_t('BackupTable'); ?></th>
-					<th>&nbsp;&nbsp;<a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
+					<th>  <a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['structure']) && $scheme['structure'] == 1 ? '&amp;structure=0' : '&amp;structure=1'); ?>"><?php echo $engine->_t('BackupStructure'); ?></a></th>
 					<th><a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['data']) && $scheme['data'] == 1 ? '&amp;data=0' : '&amp;data=1'); ?>"><?php echo $engine->_t('BackupData'); ?></a></th>
 				</tr>
 <?php
@@ -232,7 +232,7 @@ function admin_db_backup(&$engine, &$module)
 
 				echo '<tr>' .
 						'<td class="label">' . $table['name'] . '</td>' .
-						'<td class="t-center">&nbsp;&nbsp;
+						'<td class="t-center">
 							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . '>
 						</td>' .
 						'<td class="t-center">
@@ -243,7 +243,7 @@ function admin_db_backup(&$engine, &$module)
 ?>
 				<tr>
 					<th colspan="2"><?php echo $engine->_t('BackupFolder'); ?></th>
-					<th>&nbsp;&nbsp;<a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
+					<th>  <a href="<?php echo $engine->href('', '') . $getstr . (isset($scheme['files']) && $scheme['files'] == 1 ? '&amp;files=0' : '&amp;files=1'); ?>"><?php echo $engine->_t('BackupFiles'); ?></a></th>
 				</tr>
 <?php
 			$i = 0;
@@ -264,7 +264,7 @@ function admin_db_backup(&$engine, &$module)
 						'<td colspan="2" class="label">' .
 							'<label for="dir_' . $i . '"><strong>' . $dir . '</strong></label>' .
 						'</td>' .
-						'<td class="t-center">&nbsp;&nbsp;' .
+						'<td class="t-center">  ' .
 							'<input type="checkbox" id="dir_' . $i . '" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . '>' .
 						'</td>' .
 					'</tr>' . "\n";

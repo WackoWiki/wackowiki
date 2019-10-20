@@ -148,7 +148,7 @@ function admin_config_security(&$engine, &$module)
 					<small><?php echo $engine->_t('UsernameLengthInfo');?></small></label>
 				</td>
 				<td>
-					<input type="number" min="0" maxlength="3" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>"> Min&nbsp;&nbsp;<input type="number" min="0" maxlength="3" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>"> Max
+					<input type="number" min="0" maxlength="3" id="username_chars_min" name="username_chars_min" value="<?php echo (int) $engine->db->username_chars_min;?>"> Min  <input type="number" min="0" maxlength="3" id="username_chars_max" name="username_chars_max" value="<?php echo (int) $engine->db->username_chars_max;?>"> Max
 				</td>
 			</tr>
 			<tr>

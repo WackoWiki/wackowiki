@@ -207,7 +207,7 @@ if (!$ids)
 
 		foreach ($categories as $category_id => $word)
 		{
-			$spacer = '&nbsp;&nbsp;&nbsp;';
+			$spacer = NBSP . NBSP . NBSP;	// No-Break Space (NBSP)
 
 			$tpl->l_link		= $category_link($word, $category_id, $type_id, $filter, $list);
 
