@@ -24,7 +24,7 @@ _common include file for themes
 	<link rel="icon" href="[ ' favicon ' ]" type="image/x-icon">
 	<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_url ' ]">
 	[= index _ =
-		<link rel="canonical" href="[ ' db: base_url ' ][ ' canonical ' ]">
+		<link rel="canonical" href="[ ' canonical ' ]">
 	=]
 	[= license _ =
 		<link rel="license" href="[ ' href ' ]">

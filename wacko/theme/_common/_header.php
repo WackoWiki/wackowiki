@@ -23,7 +23,7 @@ $tpl->norobots = ($this->method != 'show' || $this->db->noindex || !$this->page 
 
 if (!$tpl->norobots)
 {
-	$tpl->index_canonical	= $this->tag;
+	$tpl->index_canonical	= $this->href('', $this->tag);
 }
 
 if ($this->has_access('read'))
