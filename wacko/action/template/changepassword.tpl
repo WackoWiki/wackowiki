@@ -19,12 +19,12 @@
 				<p>
 					<label for="new_password">[ ' _t: NewPassword ' ]:</label>
 					<input type="password" id="new_password" name="new_password" minlength="[ ' minchars ' ]" size="24">
-					[ ' complexity ' ]
 				</p>
 				<p>
 					<label for="conf_password">[ ' _t: ConfirmPassword ']:</label>
 					<input type="password" id="conf_password" name="conf_password" minlength="[ ' minchars ' ]" size="24">
 				</p>
+				<p>[ ' complexity ' ]</p>
 				<p>
 					<input type="submit" class="OkBtn" value="[ ' _t: ChangePasswordButton ' ]">
 				</p>
