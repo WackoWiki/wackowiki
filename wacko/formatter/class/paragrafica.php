@@ -314,5 +314,3 @@ class Paragrafica
 		return $matches[0];
 	}
 }
-
-?>
