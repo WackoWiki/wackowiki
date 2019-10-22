@@ -253,15 +253,6 @@ class XML_HTMLSax3_Entities_Parsed {
 	}
 }
 /**
- * Compatibility with older PHP versions
- */
-if (version_compare(phpversion(), '4.3', '<') && !function_exists('html_entity_decode') ) {
-	function html_entity_decode($str, $style=ENT_NOQUOTES) {
-		return strtr($str,
-		array_flip(get_html_translation_table(HTML_ENTITIES,$style)));
-	}
-}
-/**
  * Breaks up data by XML entities but leaves them unparsed,
  * resulting in additional calls to the data handler<br />
  * @package XML_HTMLSax3
@@ -343,16 +334,16 @@ class XML_HTMLSax3_Escape_Stripper {
 		// Check for HTML comments first
 		if ( substr($data,0,2) == '--' ) {
 			$patterns = array(
-                '/^\-\-/',          // Opening comment: --
-                '/\-\-$/',          // Closing comment: --
+				'/^\-\-/',				// Opening comment: --
+				'/\-\-$/',				// Closing comment: --
 			);
 			$data = preg_replace($patterns,'',$data);
 
 			// Check for XML CDATA sections (note: don't do both!)
 		} else if ( substr($data,0,1) == '[' ) {
 			$patterns = array(
-                '/^\[.*CDATA.*\[/s', // Opening CDATA
-                '/\].*\]$/s',       // Closing CDATA
+				'/^\[.*CDATA.*\[/s',	// Opening CDATA
+				'/\].*\]$/s',			// Closing CDATA
 			);
 			$data = preg_replace($patterns,'',$data);
 		}
@@ -360,4 +351,3 @@ class XML_HTMLSax3_Escape_Stripper {
 		$this->orig_obj->{$this->orig_method}($this, $data);
 	}
 }
-?>
