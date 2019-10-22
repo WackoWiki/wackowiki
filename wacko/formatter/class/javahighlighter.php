@@ -292,5 +292,3 @@ class JavaHighlighter
 		return $this->newcode;
 	}
 }
-
-?>
