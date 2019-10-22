@@ -207,7 +207,7 @@ if ($this->has_access('read')
 				$this->page_cache['tag'][$this->tag]					= '';
 				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
-				// show success message
+				// show success message (too much visual clutter)
 				/* $message	= $this->page['comment_on_id']
 					? $this->_t('CommentSaved')
 					: Ut::perc_replace($this->_t('PageSaved'), ($this->page['version_id'] + 1));
@@ -229,7 +229,7 @@ if ($this->has_access('read')
 	// fetch fields
 	$previous	= $_POST['previous']	?? $this->page['modified'];
 	$body		= $_POST['body']		?? $this->page['body'];
-	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+	# $body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);			// XXX: R5 html entity legacy
 	$title		= $_POST['title']
 					?? $this->page['title']
 						?? (isset($this->sess->title)
@@ -238,7 +238,7 @@ if ($this->has_access('read')
 								: $this->sess->title)
 							: $this->get_page_title($this->tag)
 						);
-	$title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+	# $title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);	// XXX: R5 html entity legacy
 
 	$edit_note	= (string)	($_POST['edit_note']	?? '');
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);
