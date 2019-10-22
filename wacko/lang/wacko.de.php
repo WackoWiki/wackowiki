@@ -97,14 +97,14 @@ $wacko_translation = [
 	// session notice
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
 
-	'SessionReplay'				=> 'Session terminated due to replay.',
-	'SessionObsolete'			=> 'Session is outdated.',
+	'SessionReplay'				=> 'Die Sitzung wurde aufgrund von Wiederholung beendet.',
+	'SessionObsolete'			=> 'Die Sitzung ist veraltet.',
 	'SessionExpired'			=> 'Die Sitzung ist abgelaufen.',
-	'SessionTimeout'			=> 'Session terminated due to timeout.',
+	'SessionTimeout'			=> 'Die Sitzung wurde aufgrund von Zeitüberschreitung beendet.',
 	'SessionInactivity'			=> 'Die Sitzung wurde wegen Inaktivität beendet.',
-	'SessionUaChange'			=> 'Session terminated due to user agent change.',
-	'SessionTLSChange'			=> 'Session terminated due to TLS change.',
-	'SessionIPChange'			=> 'Session terminated due to IP change.',
+	'SessionUaChange'			=> 'Die Sitzung wurde aufgrund einer Änderung des Benutzeragenten beendet.',
+	'SessionTLSChange'			=> 'Die Sitzung wurde aufgrund einer TLS-Änderung beendet.',
+	'SessionIPChange'			=> 'Die Sitzung wurde aufgrund eines IP-Wechsels beendet.',
 
 	// other
 	'Guest'						=> 'Gast',
