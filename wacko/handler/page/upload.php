@@ -135,12 +135,7 @@ if (isset($_POST['upload']) & $can_upload)
 			// here would be place for translit
 			if ($this->db->upload_translit)
 			{
-				$t_name = transliterator_transliterate(
-					"Any-Latin;
-					Latin-ASCII;
-					[\u0100-\u7fff] remove;
-					Lower()",
-					$name);
+				$t_name = Ut::translit($name);
 			}
 			else
 			{
