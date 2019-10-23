@@ -587,4 +587,14 @@ class Ut
 	{
 		return normalizer_normalize($string, $form);
 	}
+
+	static function translit($string)
+	{
+		return transliterator_transliterate(
+			"Any-Latin;
+			Latin-ASCII;
+			[\u0100-\u7fff] remove;
+			Lower()",
+			$string);
+	}
 }
