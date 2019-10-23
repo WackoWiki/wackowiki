@@ -140,9 +140,10 @@ function admin_resync(&$engine, &$module)
 			$engine->set_user_setting('dont_redirect', '1');
 
 			if ($pages = $engine->load_all(
-			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id
-			FROM {$engine->config['table_prefix']}page
-			LIMIT ".($i * $limit).", $limit"))
+			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, b.tag as comment_on_tag 
+			FROM {$engine->config['table_prefix']}page a
+				LEFT JOIN {$engine->config['table_prefix']}page b ON (a.comment_on_id = b.page_id) 
+			LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $n => $page)
 				{
@@ -153,7 +154,6 @@ function admin_resync(&$engine, &$module)
 					{
 
 						// build html body
-						#$page['body_r'] = $engine->format($engine->format(( $body_t ? $body_t : $page['body'] ), 'bbcode'), 'wacko');
 						$page['body_r'] = $engine->format($page['body'], 'wacko');
 
 						// build toc
@@ -175,7 +175,7 @@ function admin_resync(&$engine, &$module)
 					}
 
 					// rendering links
-					$engine->context[++$engine->current_context] = ( $page['comment_on_id'] ? $page['comment_on_id'] : $page['tag'] );
+					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_tag'] : $page['tag']);
 					$engine->clear_link_table();
 					$engine->start_link_tracking();
 					$dummy = $engine->format($page['body_r'], 'post_wacko');
