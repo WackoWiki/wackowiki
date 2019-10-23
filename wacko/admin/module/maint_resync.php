@@ -205,9 +205,10 @@ function admin_maint_resync(&$engine, &$module)
 			$engine->set_user_setting('dont_redirect', 1, 0);
 
 			if ($pages = $engine->db->load_all(
-			"SELECT page_id, tag, body, body_r, body_toc, comment_on_id " .
-			"FROM " . $prefix . "page " .
-			"WHERE owner_id <> " . (int) $engine->db->system_user_id . " " .
+			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, b.tag as comment_on_tag " .
+			"FROM " . $prefix . "page a " .
+				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
+			"WHERE a.owner_id <> " . (int) $engine->db->system_user_id . " " .
 			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				foreach ($pages as $n => $page)
@@ -225,7 +226,7 @@ function admin_maint_resync(&$engine, &$module)
 					}
 
 					// rendering links
-					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ?: $page['tag']);
+					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_tag'] : $page['tag']);
 					// TODO: update_link_table() may break processing !!! (WHY?)
 					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;
