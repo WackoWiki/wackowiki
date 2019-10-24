@@ -690,4 +690,3 @@ function admin_user_groups(&$engine, &$module)
 	}
 }
 
-?>

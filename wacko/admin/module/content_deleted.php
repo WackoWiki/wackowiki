@@ -191,4 +191,3 @@ else if ($type == OBJECT_FILE)
 	}
 }
 
-?>

@@ -34,5 +34,3 @@ function admin_content_categories(&$engine, &$module)
 <?php
 
 }
-
-?>

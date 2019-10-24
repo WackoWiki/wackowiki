@@ -230,4 +230,3 @@ function admin_config_notifications(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

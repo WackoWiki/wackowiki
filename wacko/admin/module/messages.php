@@ -115,4 +115,3 @@ function admin_messages(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

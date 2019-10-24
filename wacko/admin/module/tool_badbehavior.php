@@ -935,4 +935,3 @@ function bb2_options(&$engine)
 	}
 }
 
-?>

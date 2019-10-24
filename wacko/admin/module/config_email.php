@@ -256,4 +256,3 @@ function admin_config_email(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>
