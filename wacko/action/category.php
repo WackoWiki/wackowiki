@@ -83,13 +83,15 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		}
 	}
 
-	if ($_words = $this->db->load_all(
+	$_words = $this->db->load_all(
 		"SELECT category, category_lang " .
 		"FROM " . $this->db->table_prefix . "category " .
-		"WHERE category_id IN (" . $this->ids_string($category_ids) . ")", true));
+		"WHERE category_id IN (" . $this->ids_string($category_ids) . ")", true);
 
 	if ($nomark != 2)
 	{
+		$words	= '';
+
 		if ($_words)
 		{
 			foreach ($_words as $word)
