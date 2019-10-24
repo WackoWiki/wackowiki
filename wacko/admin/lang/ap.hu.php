@@ -797,6 +797,7 @@ $ap_translation = [
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
 	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'ParseNextBatch'			=> 'Parse next batch of pages:',
 	'WikiLinksRestored'			=> 'Wiki-links restored.',
 
 	'LogUserStatsSynched'		=> 'Synchronized user statistics',
@@ -818,6 +819,7 @@ $ap_translation = [
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Minden oldal újra összeállítása (rendkívül költséges)',
 	'ResyncOptions'				=> 'További beállítások',
+	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Az alábbi információkat használja a fórum e-mailek küldésekor. Kérünk, gyõzõdj meg róla, hogy az e-mail cím, amit megadsz, helyes, mivel minden nem kézbesíthetõ levél erre a címre fog menni. Ha a tárhelyszolgáltatód nem biztosítja a natív (PHP alapú) e-mail küldést, használhatsz helyette SMTP-t. Ehhez szükség van egy megfelelõ szerver címére (ha szükséges, kérdezd meg a szolgáltatód). Ha (és csak ha) a szerver megköveteli az azonosítást, add meg a szükséges felhasználónevet, jelszót és azonosítási módot.',

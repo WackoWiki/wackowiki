@@ -804,6 +804,7 @@ $ap_translation = [
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
 	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'ParseNextBatch'			=> 'Parse next batch of pages:',
 	'WikiLinksRestored'			=> 'Wiki-links restored.',
 
 	'LogUserStatsSynched'		=> 'Synchronized user statistics',
@@ -825,6 +826,7 @@ $ap_translation = [
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Re-compiling all pages (extremely costly)',
 	'ResyncOptions'				=> 'Additional options',
+	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',

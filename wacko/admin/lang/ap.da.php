@@ -797,6 +797,7 @@ $ap_translation = [
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
 	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'ParseNextBatch'			=> 'Parse next batch of pages:',
 	'WikiLinksRestored'			=> 'Wiki-links restored.',
 
 	'LogUserStatsSynched'		=> 'Synchronized user statistics',
@@ -818,6 +819,7 @@ $ap_translation = [
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Genopbygning af alle sider (ekstremt dyre)',
 	'ResyncOptions'				=> 'Yderligere muligheder',
+	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Disse indstillinger anvendes af webstedet ved forsendelse af emails til tilmeldte brugere. Bemærk venligst at denne emailadresse skal være gyldig, da enhver tilbagesendt eller vildfaren email sandsynligvis vil blive returneret til denne emailaddresse. Hvis din vært ikke lader dig bruge den indbyggede (PHP-baserede) emailservice, kan du i stedet sende emails direkte igennem SMTP. Dette kræver adressen på en passende server (spørg om nødvendigt din vært). Hvis serveren kræver autentifikation (og kun hvis den gør) angives det nødvendige brugernavn, kodeord og autentifikationsmetoden.',

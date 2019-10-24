@@ -797,6 +797,7 @@ $ap_translation = [
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
 	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'ParseNextBatch'			=> 'Parse next batch of pages:',
 	'WikiLinksRestored'			=> 'Wiki-links restored.',
 
 	'LogUserStatsSynched'		=> 'Synchronized user statistics',
@@ -818,6 +819,7 @@ $ap_translation = [
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Преизграждане на всички страници (изключително скъпо)',
 	'ResyncOptions'				=> 'Допълнителни опции',
+	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Тази информация се използва от форума при изпращане на email-и до други потребители. Уверете се че email адреса, който сте въвели е валиден, повредените и неполучените съобщения ще бъдат изпращани на този адрес. Ако хостинга ви не позволява използването на php базираната mail(); функция, можете да използвате директно SMTP.',
