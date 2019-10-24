@@ -793,6 +793,7 @@ $ap_translation = [
 	'PageStatsSynched'			=> 'Estadísticas de página sincronizadas.',
 	'FeedsUpdated'				=> 'RSS-feeds actualizados.',
 	'SiteMapCreated'			=> 'La nueva versión del mapa del sitio creado con éxito.',
+	'ParseNextBatch'			=> 'Parse next batch of pages:',
 	'WikiLinksRestored'			=> 'Wiki-enlaces restaurados.',
 
 	'LogUserStatsSynched'		=> 'Estadísticas de usuarios sincronizadas',
@@ -814,6 +815,7 @@ $ap_translation = [
 	'WikiLinksResyncInfo'		=> 'Realiza una re-renderización para todos los enlaces dentro del sitio y restaura el contenido de la tabla <code>page_link</code> y <code>file_link</code> en caso de daño o reubicación (esto puede llevar un tiempo considerable).',
 	'RecompilePage'				=> 'Volver a compilar todas las páginas (extremadamente caro)',
 	'ResyncOptions'				=> 'Opciones adicionales',
+	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Esta información se usa cuando el Sitio envía emails a sus usuarios. Por favor verifique que la dirección de email ingresada sea válida, cualquier rebote se reenviará a esa dirección. Si su host no provee un servicio de email nativo (utilizable por PHP), entonces use directamente SMTP. Esto requiere la dirección de un servidor apropiado (pregúntele a su ISP de ser necesario). Si (si, y solo si) el servidor requiere autentificación complete el usuario y contraseña. Por favor observe que solo se ofrece autentificación básica, otro tipo de implementación no es posible actualmente.',
