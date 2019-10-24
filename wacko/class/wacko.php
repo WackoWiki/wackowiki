@@ -3705,9 +3705,9 @@ class Wacko
 								}
 
 								// add clearfix
-								// 		link		-> <a class="... clearfix" ...><img ...></a>
-								// 		nolink		-> <span class="clearfix"><img ...></span>
-								// 		caption		-> </figure><span class="clearfix"></span>
+								//		link		-> <a class="... clearfix" ...><img ...></a>
+								//		nolink		-> <span class="clearfix"><img ...></span>
+								//		caption		-> </figure><span class="clearfix"></span>
 								if ($param['clear'])
 								{
 									$clear = true;
