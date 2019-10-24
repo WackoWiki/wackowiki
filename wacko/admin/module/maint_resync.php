@@ -176,20 +176,27 @@ function admin_maint_resync(&$engine, &$module)
 							- (Undefined property: Wacko::$charset) -> include_buffered()
 							- $tpl->setEncoding($this->charset);
 							- registration and changepassword action?
+						4) TIMEOUT - try to reduce the value for the $limit parameter
 			*/
-			$limit		= 500;
+			$limit		= 30;
 			$recompile	= 0;
+			$redirects	= 10;
+
+			@set_time_limit(1800);
 
 			if (isset($_POST['recompile_page']) && $_POST['recompile_page']	== 1) $recompile = true;
 
 			if (isset($_REQUEST['i']))
 			{
-				$i = $_REQUEST['i'];
+				$i		= (int) ($_REQUEST['i'] ?? 0);
 			}
 			else
 			{
 				// truncate link tables
-				$i = 0;
+				$i = 1;
+				$engine->sess->resync_links			= '';
+				$engine->sess->resync_counter		= 0;
+
 				$engine->db->sql_query("TRUNCATE " . $prefix . "page_link");
 				$engine->db->sql_query("TRUNCATE " . $prefix . "file_link");
 
@@ -214,7 +221,7 @@ function admin_maint_resync(&$engine, &$module)
 				foreach ($pages as $n => $page)
 				{
 					$record = (($i * $limit) + $n + 1);
-					echo $record . '. ' . $page['tag'] . "<br>\n";
+					$engine->sess->resync_links .= date('H:i:s') . ' - ' . $record . '. ('. $i .') ' . $page['tag'] . ' ' . $engine->sess->resync_counter ."<br>\n";
 					// find last rendered page
 					# Diag::dbg('GOLD', $record, $page['tag']);
 
@@ -232,14 +239,28 @@ function admin_maint_resync(&$engine, &$module)
 					$engine->current_context--;
 				}
 
+				#Diag::dbg('GOLD', $i, $engine->sess->resync_counter);
+
 				// TODO: Fix or workaround, see notice above
-				#if ($i < 20)
-				$engine->http->redirect(rawurldecode($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)])));
+				if ($i < ($redirects + ($engine->sess->resync_counter)))
+				{
+					$engine->http->redirect(rawurldecode($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)])));
+				}
+				else
+				{
+					$engine->sess->resync_counter = $i + 1 ;
+					echo '<a href="' . $engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)]) . '"' . '>' . $engine->_t('Next') . '</a>' . "<br><br>\n";;
+				}
 			}
 			else
 			{
-				$engine->log(1, $engine->_t('LogPageBodySynched', SYSTEM_LANG));
 				$engine->show_message($engine->_t('WikiLinksRestored'), 'success');
+				echo $engine->sess->resync_links;
+
+				$engine->sess->resync_links	= null;
+				$engine->sess->resync_counter		= null;
+
+				$engine->log(1, $engine->_t('LogPageBodySynched', SYSTEM_LANG));
 			}
 		}
 	}
