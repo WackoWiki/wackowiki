@@ -13,8 +13,7 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 	$selector =
 		"FROM " . $pref . "page p " .
 			"LEFT JOIN " . $pref . "page_link l ON " .
-			"((l.to_tag = p.tag " .
-				"AND l.to_tag = '')) " .
+			"(l.to_tag = p.tag) " .
 		"WHERE " .
 			($tag
 				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
@@ -36,7 +35,7 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 		$pagination = $this->pagination($count['n'], $limit);
 
 		$orphaned = $this->db->load_all(
-			"SELECT DISTINCT page_id, tag, title " .
+			"SELECT DISTINCT page_id, owner_id, tag, title " .
 			$selector .
 			"ORDER BY tag " .
 			$pagination['limit']);
@@ -69,6 +68,7 @@ if (list ($pages, $pagination) = $load_orphaned_pages($root, $max))
 
 		foreach ($pages as $page)
 		{
+			$this->cache_page($page, true);
 			$page_ids[] = (int) $page['page_id'];
 			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
