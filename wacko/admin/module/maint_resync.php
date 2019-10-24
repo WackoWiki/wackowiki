@@ -176,9 +176,14 @@ function admin_maint_resync(&$engine, &$module)
 							- (Undefined property: Wacko::$charset) -> include_buffered()
 							- $tpl->setEncoding($this->charset);
 							- registration and changepassword action?
-						4) TIMEOUT - try to reduce the value for the $limit parameter
+						4) TIMEOUT or reach of memory limit - try to reduce the value for the $limit parameter
 			*/
-			$limit		= 30;
+
+			$page_limit = (int) ($_POST['page_limit'] ?? 30);
+
+			$engine->sess->resync_limit = (in_array($page_limit, [10, 20, 30, 50, 100, 200, 300, 500])) ? $page_limit : 30;
+
+			$limit		= $engine->sess->resync_limit;
 			$recompile	= 0;
 			$redirects	= 10;
 
@@ -216,12 +221,15 @@ function admin_maint_resync(&$engine, &$module)
 			"FROM " . $prefix . "page a " .
 				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
 			"WHERE a.owner_id <> " . (int) $engine->db->system_user_id . " " .
+			"ORDER BY a.tag " .
 			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
+				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . $i . " #########################################<br><br>\n";
+
 				foreach ($pages as $n => $page)
 				{
-					$record = (($i * $limit) + $n + 1);
-					$engine->sess->resync_links .= date('H:i:s') . ' - ' . $record . '. ['. $i .'] ' . $page['tag'] . "<br>\n";
+					$record = ((($i - 1) * $limit) + $n + 1);
+					$engine->sess->resync_links .=  $record . '. ' . $page['tag'] . "<br>\n";
 					// find last rendered page
 					# Diag::dbg('GOLD', $record, $page['tag']);
 
@@ -249,11 +257,15 @@ function admin_maint_resync(&$engine, &$module)
 				else
 				{
 					$engine->sess->resync_counter = $i + 1 ;
-					echo '<a href="' . $engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)]) . '"' . '>' . $engine->_t('Next') . '</a>' . "<br><br>\n";;
+					echo $engine->_t('ParseNextBatch') . ' ' .
+						'<a href="' . $engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)]) . '"' . '>' . $engine->_t('Next') . ' »</a>' .
+						"<br>\n";
 				}
 			}
 			else
 			{
+				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . ' DONE ' . " #########################################<br>\n";
+
 				$engine->show_message($engine->_t('WikiLinksRestored'), 'success');
 				echo $engine->sess->resync_links;
 
@@ -318,6 +330,17 @@ if ($engine->db->xml_sitemap)
 		<input type="hidden" name="action" value="wikilinks">
 		<br>
 		<strong><small><?php echo $engine->_t('ResyncOptions');?>:</small></strong><br>
+		<select id="page_limit" name="page_limit">
+			<option value="10">10</option>
+			<option value="20">20</option>
+			<option value="30">30</option>
+			<option value="50" selected>50</option>
+			<option value="100">100</option>
+			<option value="200">200</option>
+			<option value="300">300</option>
+			<option value="500">500</option>
+		</select>
+		<label for="page_limit"><small><?php echo $engine->_t('RecompilePageLimit');?></small></label><br><br>
 		<input type="checkbox" id="recompile_page" name="recompile_page" value="1">
 		<label for="recompile_page"><small><?php echo $engine->_t('RecompilePage');?></small></label><br><br>
 		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
@@ -325,4 +348,3 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_close();
 }
 
-?>

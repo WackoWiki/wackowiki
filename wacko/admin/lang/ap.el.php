@@ -797,6 +797,7 @@ $ap_translation = [
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
 	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'ParseNextBatch'			=> 'Parse next batch of pages:',
 	'WikiLinksRestored'			=> 'Wiki-links restored.',
 
 	'LogUserStatsSynched'		=> 'Synchronized user statistics',
@@ -818,6 +819,7 @@ $ap_translation = [
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Ανασυγκρότηση όλων των σελίδων (εξαιρετικά δαπανηρή)',
 	'ResyncOptions'				=> 'Επιπλέον επιλογές',
+	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Αυτές οι πληροφορίες χρησιμοποιούνται όταν το σύστημα συζητήσεων στέλνει μηνύματα ηλεκτρονικού ταχυδρομείου στα μέλη σας. Παρακαλώ βεβαιωθείτε ότι η διεύθυνση ηλεκτρονικού ταχυδρομείου που έχετε ορίσει είναι έγκυρη, όλα τα απαγορευμένα ή μη απεσταλμένα μηνύματα μηνύματα κατά πάσα πιθανότητα θα αποστέλλονται σε αυτή τη διεύθυνση. Εάν ο πάροχος φιλοξενίας σας δεν παρέχει μια μητρική (βασισμένη σε PHP) υπηρεσία ηλεκτρονικού ταχυδρομείου, μπορείτε αντί αυτού να στέλνετε μηνύματα απευθείας με χρήση του SMTP. Αυτό απαιτεί τη διεύθυνση ενός κατάλληλου διακομιστή (ρωτήστε τον πάροχο σας εάν είναι απαραίτητο). Εάν ο διακομιστής απαιτεί πιστοποίηση (και μόνο εάν το κάνει) εισάγετε τα απαιτούμενα όνομα χρήστη, κωδικό πρόσβασης και μέθοδο πιστοποίησης.',

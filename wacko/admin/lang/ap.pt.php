@@ -797,6 +797,7 @@ $ap_translation = [
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
 	'SiteMapCreated'			=> 'The new version of the site map created successfully.',
+	'ParseNextBatch'			=> 'Parse next batch of pages:',
 	'WikiLinksRestored'			=> 'Wiki-links restored.',
 
 	'LogUserStatsSynched'		=> 'Synchronized user statistics',
@@ -818,6 +819,7 @@ $ap_translation = [
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Recopilando todas as páginas (extremamente caras)',
 	'ResyncOptions'				=> 'Additional options',
+	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Esta informação é usada quando o Fórum envia emails aos Utilizadores. Certifique-se que usa um email válido. Qualquer Mensagem incorreta não será entregue neste endereço. Se o seu serviço de hospedagem não oferece um serviço nativo de email baseado no PHP, pode enviar mensagens através de SMTP. É necessário um Servidor adequado, não especifique qualquer nome antigo aqui! Se o servidor requer autenticação, introduza os nomes e senhas necessários. tenha em atenção que apenas é usada a autenticação básica. Implementações de autenticações diferentes não estão disponíveis.',
