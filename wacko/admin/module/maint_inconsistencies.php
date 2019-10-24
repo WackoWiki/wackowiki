@@ -864,4 +864,4 @@ function admin_maint_inconsistencies(&$engine, &$module)
 	}
 
 }
-?>
+

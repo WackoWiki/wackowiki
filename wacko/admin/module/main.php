@@ -81,5 +81,3 @@ function admin_main(&$engine, &$module)
 	echo $engine->action('admincache');
 
 }
-
-?>

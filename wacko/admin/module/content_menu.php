@@ -29,5 +29,3 @@ function admin_content_menu(&$engine, &$module)
 <?php
 	echo $engine->action('menu', ['system' => 1]);
 }
-
-?>

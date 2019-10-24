@@ -222,4 +222,3 @@ function admin_config_permissions(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

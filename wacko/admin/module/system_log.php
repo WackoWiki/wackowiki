@@ -247,4 +247,3 @@ function admin_system_log(&$engine, &$module)
 	$engine->print_pagination($pagination);
 }
 
-?>

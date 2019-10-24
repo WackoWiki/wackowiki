@@ -140,5 +140,3 @@ function admin_db_repair(&$engine, &$module)
 		<?php	echo $engine->form_close();
 	}
 }
-
-?>

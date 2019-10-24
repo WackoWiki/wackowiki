@@ -211,4 +211,3 @@ function admin_content_pages(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

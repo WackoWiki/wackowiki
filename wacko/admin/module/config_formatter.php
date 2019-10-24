@@ -369,4 +369,3 @@ function admin_config_formatter(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

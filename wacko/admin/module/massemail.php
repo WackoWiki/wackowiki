@@ -244,5 +244,3 @@ function admin_massemail(&$engine, &$module)
 <?php
 	echo $engine->form_close();
 }
-
-?>

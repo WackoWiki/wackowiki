@@ -304,4 +304,3 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_close();
 }
 
-?>

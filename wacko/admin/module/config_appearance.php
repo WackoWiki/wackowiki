@@ -396,4 +396,3 @@ function admin_config_appearance(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>
