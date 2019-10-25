@@ -11,7 +11,7 @@
 				<item>
 					<guid>[ ' tag ' ]</guid>
 					<title>[ ' title | e ' ]</title>
-					<link>[ ' db: base_url ' ][ ' tag ' ]</link>
+					<link>[ ' db: base_url ' ][ ' ptag ' ]</link>
 					<description><![CDATA[[ ' body | pre ' ]]]></description>
 					<author>[ ' owner ' ]</author>
 					<pubDate>[ ' date ' ]</pubDate>

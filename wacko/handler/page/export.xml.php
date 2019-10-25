@@ -51,7 +51,7 @@ if ($this->has_access('read'))
 
 		$tpl->tag		= rtrim($tag, '/');
 		$tpl->title		= Ut::html($page['title']);
-		$tpl->supertag	= $page['tag'];
+		$tpl->ptag		= $page['tag'];
 		$tpl->body		= str_replace(']]>', ']]&gt;', $page['body']);
 		$tpl->owner		= $page['owner_id'];
 		$tpl->date		= Ut::http_date(strtotime($page['created']));
