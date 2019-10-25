@@ -23,18 +23,18 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
-if (!isset($nomark))	$nomark = 0;
-if (!isset($order))		$order = '';
-if (!isset($global))	$global = 0;
-if (!isset($tag))		$tag = ''; // FIXME: $tag == $page
-if (!isset($owner))		$owner = '';
-if (!isset($page))		$page = '';
-if (!isset($ppage))		$ppage = '';
-if (!isset($legend))	$legend = '';
-if (!isset($deleted))	$deleted = 0;
-if (!isset($track))		$track = 0;
-if (!isset($picture))	$picture = 1;
-if (!isset($max))		$max = null;
+if (!isset($nomark))	$nomark		= 0;
+if (!isset($order))		$order		= '';
+if (!isset($global))	$global		= 0;
+if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
+if (!isset($owner))		$owner		= '';
+if (!isset($page))		$page		= '';
+if (!isset($ppage))		$ppage		= '';
+if (!isset($legend))	$legend		= '';
+if (!isset($deleted))	$deleted	= 0;
+if (!isset($track))		$track		= 0;
+if (!isset($picture))	$picture	= 1;
+if (!isset($max))		$max		= null;
 
 if ($max)
 {
@@ -159,7 +159,6 @@ if ($can_view)
 	if (!$nomark)
 	{
 		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ) . ' '.($page ? $this->link($ppage, '', $legend) : '');
-		#echo '<div class="layout-box"><p class="layout-box"><span>' . $title . ": </span></p>\n";
 	}
 
 	if ($factor = count($files))
@@ -356,5 +355,3 @@ else
 {
 	echo '<em>' . $this->_t('ActionDenied') . '</em>';
 }
-
-?>

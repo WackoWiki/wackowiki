@@ -31,21 +31,20 @@ if (!defined('IN_WACKO'))
 }}
 
 TODO: config settings
-- image_processing (boolean)
-- thumbnails (boolean)
+	- image_processing (boolean)
+	- thumbnails (boolean)
 
-- split local and global tumbs -> read access
-- add filter for categories cat="one,two"
-- generated thumbnails full-blown 32-bit PNGs (or at least 24-bit) resulting in a file size often larger than the original image
-- remove thumbs with file or page
-- fall back if no JS or Image manipulation library is available or disabled
+	- split local and global tumbs -> read access
+	- add filter for categories cat="one,two"
+	- remove thumbs with file or page
+	- fall back if no JS or Image manipulation library is available or disabled
 
 */
 
 $get_file = function ($file_id)
 {
 	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.tag, p.title " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
@@ -384,7 +383,7 @@ if ($can_view)
 
 			if ($file['page_id'])
 			{
-				$path = 'file:/' . $file['supertag'] . '/';
+				$path = 'file:/' . $file['tag'] . '/';
 			}
 			else
 			{
@@ -408,5 +407,3 @@ else
 {
 	$tpl->noaccess = true;
 }
-
-?>

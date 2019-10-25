@@ -2,13 +2,14 @@
 /*
 	{{Hidden Content Wrapper
 
-	Version 1.2
+	Version 1.3
 	David Millington aka Tann San
 
 	Shows hidden content based on user group or user name
 
 	1.1 - Added optional alt attribute which shows content to users who don't meet the login requirements
 	1.2 - Updated to work with Wacko r5.0
+	1.3 - Updated to work with Wacko r5.5 and R.6.0
 
 	[$username	=<comma deliminated list of user names>] - optional - $username="TannSan,BillyBob"
 	[$usergroup	=a single user group name] - optional - $usergroup="Admins"
@@ -24,10 +25,10 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($usergroup)) $usergroup = '';
-if (!isset($username)) $username = '';
-if (!isset($text)) $text = '';
-if (!isset($alt)) $alt = '';
+if (!isset($usergroup))	$usergroup	= '';
+if (!isset($username))	$username	= '';
+if (!isset($text))		$text		= '';
+if (!isset($alt))		$alt		= '';
 
 if ($usergroup !== '' || $username !== '')
 {
@@ -64,5 +65,3 @@ else if ($alt !== '')
 {
 	echo $this->format($alt);
 }
-
-?>
