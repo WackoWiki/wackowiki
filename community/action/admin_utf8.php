@@ -209,6 +209,8 @@ if ($this->is_admin())
 		}
 		else if (isset($_POST['set_charset_record']))
 		{
+			# set_time_limit(3600);
+
 			// iso-8859-1 -> windows-1252
 			$_charset	= [
 				'bg'	=> 'windows-1251',
@@ -677,6 +679,8 @@ if ($this->is_admin())
 		}
 		else if (isset($_POST['convert_html_entities']))
 		{
+			# set_time_limit(3600);
+
 			$convert_entities = function($input)
 			{
 				return preg_replace_callback('/(&#[0-9]+;)/', function($m) { return mb_convert_encoding($m[1], 'UTF-8', 'HTML-ENTITIES'); }, $input);
