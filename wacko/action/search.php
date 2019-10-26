@@ -2,7 +2,7 @@
 
 // TODO:
 // - too much loose ends, read thoroughly and refactor
-// - seach also for attachments
+// - search also for attachments
 
 if (!defined('IN_WACKO'))
 {
