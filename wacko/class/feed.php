@@ -244,14 +244,7 @@ class Feed
 		{
 			foreach ($comments as $comment)
 			{
-				if ($this->engine->db->hide_locked)
-				{
-					$access = $this->engine->has_access('read', $comment['page_id'], GUEST);
-				}
-				else
-				{
-					$access = true;
-				}
+				$access = $this->engine->has_access('read', $comment['comment_on_id'], GUEST);
 
 				if ( $access && ($count < $limit) )
 				{
