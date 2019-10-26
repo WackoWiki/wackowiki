@@ -1815,7 +1815,7 @@ class Wacko
 			foreach ($pages as $page)
 			{
 				$this->cache_page($page, true);
-				$page_ids[]	= $page['page_id'];
+				$page_ids[]	= $page['comment_on_id'];
 			}
 
 			$this->preload_acl($page_ids);
