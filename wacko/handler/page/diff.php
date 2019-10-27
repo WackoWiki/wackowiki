@@ -5,6 +5,15 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// Import the PHPDiff class into the global namespace
+use PHPDiff\ {
+	Diff,
+	Diff\Renderer\Html\Inline,
+	Diff\Renderer\Html\SideBySide,
+	Diff\Renderer\Text\Context,
+	Diff\Renderer\Text\Unified,
+};
+
 // NB to minimize amount of diff modes provided for user in menus - you
 // can turn off some undesirables by setting diff_modes in secondary config
 
@@ -305,13 +314,13 @@ if ($page_a && $page_b
 
 			if ($diffmode == 3)
 			{
-				$renderer = new Diff_Renderer_Html_SideBySide;
+				$renderer = new SideBySide;
 				$renderer->thead = '';
 				$tpl->m6_diff = $diff->Render($renderer);
 			}
 			else if ($diffmode == 4)
 			{
-				$renderer = new Diff_Renderer_Html_Inline;
+				$renderer = new Inline;
 				$renderer->thead = '';
 				$tpl->m6_diff = $diff->render($renderer);
 			}
@@ -320,11 +329,11 @@ if ($page_a && $page_b
 				if ($diffmode == 5)
 				{
 					// standard unified diff, useful for sending in emails or what
-					$renderer = new Diff_Renderer_Text_Unified;
+					$renderer = new Unified;
 				}
 				else
 				{
-					$renderer = new Diff_Renderer_Text_Context;
+					$renderer = new Context;
 				}
 
 				$tpl->m6_diff =
