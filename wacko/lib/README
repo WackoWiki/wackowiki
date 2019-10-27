@@ -4,7 +4,7 @@ The version and status of each is summarized below:
 
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
-| bad_behavior		| Bad Behavior		| 2.2.23	| patched: various, see repo |
+| bad_behavior		| Bad Behavior		| 2.2.24	| patched: various, see repo |
 | captcha			| freeCap			| 1.4.4		| patched: various, see repo |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
 | phpmailer			| PHPMailer			| 6.1.1		| patched: various, see repo |
@@ -13,7 +13,7 @@ The version and status of each is summarized below:
 | simplepie			| SimplePie			| 1.5.3		| unpatched |
 | text_highlighter	| Text_Highlighter	| 0.8.0		| patched: various, see repo |
 | hashids			| Hashids			| 4.0.0		| unpatched |
-| php-diff			| php-diff			| 1.0		| patched, see subdir |
+| php-diff			| php-diff			| 1.13		| patched, see subdir |
 
 Upstream projects
 ==================
@@ -26,4 +26,4 @@ Upstream projects
 - simplepie			- https://github.com/simplepie/simplepie
 - text_highlighter	- https://pear.php.net/package/Text_Highlighter/
 - hashids			- https://hashids.org/php/
-- php-diff			- https://github.com/chrisboulton/php-diff
+- php-diff			- https://github.com/JBlond/php-diff
