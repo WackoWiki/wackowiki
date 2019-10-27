@@ -217,7 +217,8 @@ function admin_maint_resync(&$engine, &$module)
 			$engine->set_user_setting('dont_redirect', 1, 0);
 
 			if ($pages = $engine->db->load_all(
-			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, b.tag as comment_on_tag " .
+			"SELECT a.page_id, a.tag, a.body, a.body_r, a.body_toc, a.comment_on_id, a.allow_rawhtml, a.disable_safehtml, " .
+				"b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml " .
 			"FROM " . $prefix . "page a " .
 				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
 			"WHERE a.owner_id <> " . (int) $engine->db->system_user_id . " " .
@@ -230,8 +231,13 @@ function admin_maint_resync(&$engine, &$module)
 				{
 					$record = ((($i - 1) * $limit) + $n + 1);
 					$engine->sess->resync_links .=  $record . '. ' . $page['tag'] . "<br>\n";
+
 					// find last rendered page
 					# Diag::dbg('GOLD', $record, $page['tag']);
+
+					// formatter needs these values, comment requirers settings from parent page
+					$engine->db->allow_rawhtml		= ($page['comment_on_id'] ? $page['parent_allow_rawhtml']		: $page['allow_rawhtml']);
+					$engine->db->disable_safehtml	= ($page['comment_on_id'] ? $page['parent_disable_safehtml']	: $page['disable_safehtml']);
 
 					// recompile if necessary
 					if ($page['body_r'] == '')
@@ -242,7 +248,6 @@ function admin_maint_resync(&$engine, &$module)
 
 					// rendering links
 					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_tag'] : $page['tag']);
-					// TODO: update_link_table() may break processing !!! (WHY?)
 					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;
 				}
