@@ -453,6 +453,7 @@ $wacko_translation = [
 	'From'						=> 'uit',
 	'For'						=> 'voor',
 	'ReturnToCommented'			=> 'Terug naar de commentaar pagina',
+	'AbandonedComment'			=> 'De pagina waartoe dit commentaar behoort bestaat niet meer!',
 
 	'PagesLinkingTo'			=> 'Pagina\'s met verwijzingen naar ',
 	'NoPageLinkingTo'			=> 'Geen pagina bevat links naar',

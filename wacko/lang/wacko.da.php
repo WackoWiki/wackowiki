@@ -453,6 +453,7 @@ $wacko_translation = [
 	'From'						=> 'fra',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Tilbage til kommenteret side',
+	'AbandonedComment'			=> 'Den side, denne kommentar tilhører, findes ikke længere!',
 
 	'PagesLinkingTo'			=> 'Sider som linker til',
 	'NoPageLinkingTo'			=> 'Ingen sider linker til',

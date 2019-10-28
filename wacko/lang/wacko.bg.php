@@ -443,7 +443,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Търси',
 	'TopicSearchResults'		=> 'Резултати за заглавието на търсената фраза ',
 	'NotFoundInTopics'			=> 'няма в заглавието ',
-	'SearchPage'			=> 'Search',
+	'SearchPage'				=> 'Search',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
@@ -453,6 +453,7 @@ $wacko_translation = [
 	'From'						=> 'from',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
+	'AbandonedComment'			=> 'Страницата, към която принадлежи този коментар, вече не съществува!',
 
 	'PagesLinkingTo'			=> 'Страници, препращащи на ',
 	'NoPageLinkingTo'			=> 'Няма препращащи страници',
