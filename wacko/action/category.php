@@ -90,16 +90,17 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 	if ($nomark != 2)
 	{
+		$word	= [];
 		$words	= '';
 
 		if ($_words)
 		{
-			foreach ($_words as $word)
+			foreach ($_words as $_word)
 			{
-				$words[] = $word['category'];
+				$word[] = $_word['category'];
 			}
 
-			$words = mb_strtolower(implode(', ', $words));
+			$words = mb_strtolower(implode(', ', $word));
 		}
 
 		$tpl->mark			= true;
