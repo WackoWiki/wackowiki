@@ -453,6 +453,7 @@ $wacko_translation = [
 	'From'						=> 'from',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
+	'AbandonedComment'			=> 'Strona, do której nale¿y ten komentarz, ju¿ nie istnieje!',
 
 	'PagesLinkingTo'			=> 'Dokumenty zawieraj±ce odno¶nik do',
 	'NoPageLinkingTo'			=> '¯aden dokument nie zawiera odno¶nika do strony: ',

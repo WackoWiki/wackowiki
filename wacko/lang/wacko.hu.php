@@ -453,6 +453,7 @@ $wacko_translation = [
 	'From'						=> 'from',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
+	'AbandonedComment'			=> 'Az az oldal, amelyhez ez a megjegyzés tartozik, már nem létezik!',
 
 	'PagesLinkingTo'			=> 'Pages linking to',
 	'NoPageLinkingTo'			=> 'No page is linking to',
