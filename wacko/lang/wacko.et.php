@@ -450,6 +450,7 @@ $wacko_translation = [
 	'From'						=> 'from',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
+	'AbandonedComment'			=> 'Lehte, kuhu see kommentaar kuulub, pole enam olemas!',
 
 	'PagesLinkingTo'			=> 'Leht on lingitud',
 	'NoPageLinkingTo'			=> 'Leht ei ole lingitud',
