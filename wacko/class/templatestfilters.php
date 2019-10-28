@@ -139,12 +139,12 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_lower($value)
 	{
-		return strtolower($value);
+		return mb_strtolower($value);
 	}
 
 	function filter_upper($value)
 	{
-		return strtoupper($value);
+		return mb_strtoupper($value);
 	}
 
 	// TODO: localize formatting
