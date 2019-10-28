@@ -450,6 +450,7 @@ $wacko_translation = [
 	'From'						=> 'from',
 	'For'						=> 'per',
 	'ReturnToCommented'			=> 'Tornare alla pagina commentato',
+	'AbandonedComment'			=> 'La pagina a cui appartiene questo commento non esiste più!',
 
 	'PagesLinkingTo'			=> 'Pagine da collegare a',
 	'NoPageLinkingTo'			=> 'Nessuna pagina collegata a',

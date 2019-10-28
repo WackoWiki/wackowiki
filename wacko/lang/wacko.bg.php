@@ -450,6 +450,7 @@ $wacko_translation = [
 	'From'						=> 'from',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
+	'AbandonedComment'			=> 'Страницата, към която принадлежи този коментар, вече не съществува!',
 
 	'PagesLinkingTo'			=> 'Страници, препращащи на ',
 	'NoPageLinkingTo'			=> 'Няма препращащи страници',
@@ -460,7 +461,7 @@ $wacko_translation = [
 	'UnwatchText'				=> 'Not follow',
 	'UserSettingsStored'		=> 'Вашите настройки са запазени',
 	'LoggedOut'					=> 'Вие излизате от системата',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> 'От съображения за сигурност сесията ви приключи. Моля, влезте отново.',
 
 	// user settings
 	'SettingsCodeResent'		=> 'Повторный код подтверждения email выслан на Ваш адрес.',
@@ -471,7 +472,7 @@ $wacko_translation = [
 	'RealName'					=> 'Real name',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Записи на страница',
-	'DoShowComments'				=> 'Покажи коментариите по подразбиране',
+	'DoShowComments'			=> 'Покажи коментариите по подразбиране',
 	'DoubleclickEditing'		=> 'Редактирание с двоен клик на мишката',
 	'UpdateSettingsButton'		=> 'Запази настройките',
 

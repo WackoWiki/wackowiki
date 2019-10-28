@@ -23,8 +23,16 @@ if ($this->page['comment_on_id'] && !$this->page['deleted'])
 	// determine comments page number where this comment is located
 	$p = ceil($count['n'] / $this->db->comments_count);
 
-	// forcibly open page
-	$this->http->redirect($this->href('', $this->get_page_tag($this->page['comment_on_id']), ['show_comments' => 1, 'p' => $p, '#' => $this->page['tag']]));
+	if ($parent_tag = $this->get_page_tag($this->page['comment_on_id']))
+	{
+		// forcibly open page
+		$this->http->redirect($this->href('', $parent_tag, ['show_comments' => 1, 'p' => $p, '#' => $this->page['tag']]));
+	}
+	else
+	{
+		$message = $this->_t('AbandonedComment');
+		$tpl->n_message = $this->show_message($message, 'error', false);
+	}
 }
 
 // display page body

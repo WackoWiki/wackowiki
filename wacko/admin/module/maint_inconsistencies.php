@@ -249,6 +249,20 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$inconsistencies['2.11'] = ['file_link without page', count($file_link)];
 				// -> DELETE
 
+			// 2.12. comment without page
+			$parent_page = $engine->db->load_all(
+				"SELECT
+					c.page_id
+				FROM
+					" . $prefix . "page c
+					LEFT JOIN " . $prefix . "page p ON (c.comment_on_id = p.page_id)
+				WHERE
+					c.comment_on_id <> 0 AND
+					p.page_id IS NULL");
+
+			$inconsistencies['2.8'] = ['comment without parent page', count($parent_page)];
+				// -> DELETE
+
 			// 3.1. usergroup_member without group
 			$usergroup_member2 = $engine->db->load_all(
 				"SELECT
@@ -586,6 +600,19 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					p.page_id IS NULL");
 
 			$_solved['2.11'] = ['file_link without page', $engine->config->affected_rows];
+
+			// 2.12. comment without page
+			$parent_page = $engine->db->sql_query(
+				"DELETE
+					c.*
+				FROM
+					" . $prefix . "page c
+					LEFT JOIN " . $prefix . "page p ON (c.comment_on_id = p.page_id)
+				WHERE
+					c.comment_on_id <> 0 AND
+					p.page_id IS NULL");
+
+			$_solved['2.12'] = ['comment without parent page', $engine->config->affected_rows];
 
 			// 3.1. usergroup_member without group
 			$usergroup_member2 = $engine->db->sql_query(
