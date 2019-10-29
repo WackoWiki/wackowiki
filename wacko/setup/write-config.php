@@ -44,7 +44,7 @@ $config_file['wacko_version']			= $config['wacko_version'];
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // convert config array into PHP code
-$config_code  = "<?php\n// config.php " . $lang['WrittenAt'] . strftime("%c") . "\n// " . $lang['ConfigDescription'] . "\n// " . $lang['DontChange'] . "\n\n";
+$config_code  = "<?php\n// config.php " . $lang['WrittenAt'] . strftime('%c') . "\n// " . $lang['ConfigDescription'] . "\n// " . $lang['DontChange'] . "\n\n";
 $config_code .= array_to_str($config_file) . "\n";
 
 // try to write configuration file
