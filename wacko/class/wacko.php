@@ -2608,8 +2608,8 @@ class Wacko
 				"ORDER BY modified DESC " .
 				"LIMIT 1");
 
-			$_GET['a']			= -1;
-			$_GET['b']			= $page['revision_id'];
+			$_GET['a']			= $page['revision_id'];
+			$_GET['b']			= -1;
 			$_GET['diffmode']	= $this->db->notify_diff_mode;
 			$diff				= $this->method('diff');
 		}
