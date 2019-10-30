@@ -26,7 +26,7 @@ if (!defined('IN_WACKO'))
 /* TODO:
  * set progress in config
  * add check to analyzed the database prior to show the suggested actions
- * currently it uses only the Mysqli API to update the records
+ * currently it uses only the Mysqli API to update the cross charset records
  */
 
 $prefix			= $this->db->table_prefix;
@@ -121,7 +121,7 @@ if ($this->is_admin())
 	##	Convert charset for tables						  ##
 	########################################################
 
-	echo '<h3>1.1. Convert all tables based on charset to ' . $charset . ':</h3>';
+	echo '<h3>1.1. Convert database and tables based on charset to ' . $charset . ':</h3>';
 
 	if (!isset($_POST['set_charset_tables']))
 	{

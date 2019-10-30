@@ -3738,7 +3738,7 @@ class Wacko
 											: '');
 								}
 
-								// disables linking also for print handler, first and foremost to prevent those links showing up in numerating_links
+								// disables linking also for print handler, first and foremost to prevent those links showing up in numerate_links
 								if (! $meta_direct || (isset($this->method) && $this->method == 'print'))
 								{
 									return $text;
