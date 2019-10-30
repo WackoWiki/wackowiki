@@ -93,6 +93,8 @@ else
 // we using a parameter token here to sort out multiple instances
 $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
 
+$nav_offset		= (int) ($_GET[$param_token] ?? '');
+
 							$order_by = "file_name ASC";
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
@@ -171,9 +173,6 @@ if ($can_view)
 	// Making an gallery
 	$cur = 0;
 
-	// pagination
-	$tpl->pagination_text = $pagination['text'];
-
 	if (!$nomark)
 	{
 		$tpl->mark			= true;
@@ -185,6 +184,9 @@ if ($can_view)
 	{
 		if (!empty($files))
 		{
+			// pagination
+			$tpl->pagination_text = $pagination['text'];
+
 			if ($table)
 			{
 				$tpl->table		= true;
@@ -297,7 +299,7 @@ if ($can_view)
 
 				if (!$target)
 				{
-					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], 'token' => $param_token, '#' => $param_token]);
+					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 				}
 				else
 				{
@@ -389,16 +391,16 @@ if ($can_view)
 
 			if (array_key_exists($key - 1, $files))
 			{
-				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key -1]['file_id'], 'token' => $param_token, '#' => $param_token]);
+				$tpl->navigation_prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key -1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			if (array_key_exists($key + 1, $files))
 			{
-				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key +1]['file_id'], 'token' => $param_token, '#' => $param_token]);
+				$tpl->navigation_next_href	= $this->href('', $this->tag, ['file_id' => $files[$key +1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			// backlink
-			$tpl->href		= $this->href('', $this->tag, '');
+			$tpl->navigation_href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
 
 			$tpl->leave();	// item
 		}
