@@ -200,11 +200,8 @@ if ($can_view)
 
 			$tpl->enter('items_');
 
-			foreach ($files as $key => $file)
+			foreach ($files as $file)
 			{
-				#$previous	= array_key_exists($key - 1, $files) ? $files[$key -1] : false;
-				#$next		= array_key_exists($key + 1, $files) ? $files[$key +1] : false;
-
 				$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
 				$file_name			= $file['file_name'];
@@ -389,19 +386,22 @@ if ($can_view)
 				$tpl->img	=  $this->link($path . $file['file_name']);
 			}
 
+			$tpl->enter('navigation_');
+
 			if (array_key_exists($key - 1, $files))
 			{
-				$tpl->navigation_prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key -1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key -1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			if (array_key_exists($key + 1, $files))
 			{
-				$tpl->navigation_next_href	= $this->href('', $this->tag, ['file_id' => $files[$key +1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key +1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			// backlink
-			$tpl->navigation_href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
+			$tpl->href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
 
+			$tpl->leave();	// navigation
 			$tpl->leave();	// item
 		}
 	}
