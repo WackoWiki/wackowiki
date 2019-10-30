@@ -42,26 +42,20 @@
 		[ ' nonstatic ' ]
 		</div>
 	=]
-	[= item _ =	
-		
-		<figure id="[ ' token ' ]" class="t-center">
-			[= prev _ =
-				<a href="[ ' href ' ]">« [ ' _t: Back ' ]</a> |
-			=]
-			 <a href="[ ' href ' ]"> [ ' _t: Files ' ]</a> 
-			[= next _ =
-				| <a href="[ ' href ' ]">[ ' _t: Next ' ] »</a>
-			=]
-			<br><br>
+	[= item _ =
+		<a id="[ ' token ' ]"></a>
+		[''' navigation ''']
+		<br><br>
+		<figure class="t-center">
 			[ ' img ' ]
 			<figcaption>
 				<span>
 					[ ' description ' ]
 				</span>
 			</figcaption>
-			<br><br>
+			<br>
 		</figure>
-		
+		[''' navigation ''']
 	=]
 	[= emark _ =
 		[ ' nonstatic ' ]
@@ -69,6 +63,7 @@
 	=]
 
 	[''' pagination ''']
+	
 
 	[= noaccess _ =
 		[ ' _t: ActionDenied ' ]
@@ -78,3 +73,14 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
+
+[= navigation =]
+<nav class="pagination">
+	[= prev _ =
+		<a href="[ ' href ' ]">« [ ' _t: Back ' ]</a> |
+	=]
+		 <a href="[ ' href ' ]"> [ ' _t: Files ' ]</a> 
+	[= next _ =
+		| <a href="[ ' href ' ]">[ ' _t: Next ' ] »</a>
+	=]
+</nav>
