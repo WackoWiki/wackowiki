@@ -245,6 +245,7 @@ function bb2_manage(&$engine)
 	$ip_pagination				= ($_GET['ip']				?? '');
 	$user_agent_pagination		= ($_GET['user_agent']		?? '');
 	$request_method_pagination	= ($_GET['request_method']	?? '');
+	$request_uri_pagination		= ($_GET['request_uri']		?? '');
 
 	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'badbehavior', 'setting' => 'bb2_manage']
 								+ (!empty($blocked_pagination)			? ['blocked'		=> Ut::html($blocked_pagination)] : [])
@@ -252,6 +253,7 @@ function bb2_manage(&$engine)
 								+ (!empty($key_pagination)				? ['status_key'		=> Ut::html($key_pagination)] : [])
 								+ (!empty($ip_pagination)				? ['ip'				=> Ut::html($ip_pagination)] : [])
 								+ (!empty($request_method_pagination)	? ['request_method'	=> Ut::html($request_method_pagination)] : [])
+								+ (!empty($request_uri_pagination)		? ['request_uri'	=> Ut::html($request_uri_pagination)] : [])
 								+ (!empty($user_agent_pagination)		? ['user_agent'		=> Ut::html($user_agent_pagination)] : []), '', 'admin.php');
 
 	// Query the DB based on variables selected
@@ -917,7 +919,7 @@ function bb2_options(&$engine)
 				<tr class="hl-setting">
 					<th scope="row" class="label">
 						<strong><?php echo $engine->_t('BbEnable');?>:</strong><br>
-						<small><?php echo $engine->_t('BbEnableInfo');?></small>
+						<small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_settings.conf</code>');?></small>
 					</th>
 					<td>
 						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>>
@@ -935,4 +937,3 @@ function bb2_options(&$engine)
 	}
 }
 
-?>
