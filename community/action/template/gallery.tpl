@@ -43,7 +43,16 @@
 		</div>
 	=]
 	[= item _ =	
+		
 		<figure id="[ ' token ' ]" class="t-center">
+			[= prev _ =
+				<a href="[ ' href ' ]">« [ ' _t: Back ' ]</a> |
+			=]
+			 <a href="[ ' href ' ]"> [ ' _t: Files ' ]</a> 
+			[= next _ =
+				| <a href="[ ' href ' ]">[ ' _t: Next ' ] »</a>
+			=]
+			<br><br>
 			[ ' img ' ]
 			<figcaption>
 				<span>
@@ -51,8 +60,8 @@
 				</span>
 			</figcaption>
 			<br><br>
-			<a href="[ ' href ' ]">&lt;[ ' _t: Back ' ]</a>
 		</figure>
+		
 	=]
 	[= emark _ =
 		[ ' nonstatic ' ]
