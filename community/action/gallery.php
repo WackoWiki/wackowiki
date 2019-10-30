@@ -41,19 +41,6 @@ TODO: config settings
 
 */
 
-$get_file = function ($file_id)
-{
-	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.tag, p.title " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-		"WHERE f.file_id = " . (int) $file_id . " " .
-		"LIMIT 1", true);
-
-	return $file;
-};
-
 // Include PHP Thumbnailer
 require_once 'lib/phpthumb/PHPThumb.php';
 require_once 'lib/phpthumb/GD.php';
@@ -211,8 +198,11 @@ if ($can_view)
 
 			$tpl->enter('items_');
 
-			foreach ($files as $file)
+			foreach ($files as $key => $file)
 			{
+				#$previous	= array_key_exists($key - 1, $files) ? $files[$key -1] : false;
+				#$next		= array_key_exists($key + 1, $files) ? $files[$key +1] : false;
+
 				$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
 				$file_name			= $file['file_name'];
@@ -361,7 +351,8 @@ if ($can_view)
 	else
 	{
 		// selected image
-		$file = $get_file($file_id);
+		$key		= array_search($file_id, array_column($files, 'file_id'));
+		$file		= $files[$key];
 
 		if ($file)
 		{
@@ -396,8 +387,18 @@ if ($can_view)
 				$tpl->img	=  $this->link($path . $file['file_name']);
 			}
 
+			if (array_key_exists($key - 1, $files))
+			{
+				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key -1]['file_id'], 'token' => $param_token, '#' => $param_token]);
+			}
+
+			if (array_key_exists($key + 1, $files))
+			{
+				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key +1]['file_id'], 'token' => $param_token, '#' => $param_token]);
+			}
+
 			// backlink
-			$tpl->href	= $this->href('', $this->tag, '');
+			$tpl->href		= $this->href('', $this->tag, '');
 
 			$tpl->leave();	// item
 		}
