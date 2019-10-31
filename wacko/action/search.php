@@ -373,7 +373,6 @@ if (mb_strlen($phrase) >= 3)
 						$preview	= $context;
 					}
 
-
 					$tpl->l_link		= $this->link('/' . $page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '');
 					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
 					$tpl->l_mtime		= $page['modified'];
@@ -409,6 +408,7 @@ if (mb_strlen($phrase) >= 3)
 			$tpl->s_emark		= true;
 		}
 	}
+
+	$nomark or $n or $tpl->none_phrase = $phrase;
 }
 
-$nomark or $n or $tpl->none_phrase = $phrase;
