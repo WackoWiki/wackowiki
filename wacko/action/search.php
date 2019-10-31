@@ -2,7 +2,7 @@
 
 // TODO:
 // - too much loose ends, read thoroughly and refactor
-// - seach also for attachments
+// - search also for attachments
 
 if (!defined('IN_WACKO'))
 {
@@ -162,8 +162,6 @@ $get_context = function($phrase, $string, $position, $padding, $hellip = true)
 	$context	= substr($string, $start, $length);
 	$_hellip	= $hellip ? ($_end < $clength ? ' ... ' : '') : '';
 
-	#echo '##' . $position . ' $clength: ' .$clength . ' $start0: ' . $start0 .  ' $start:  ' . $start  . ' $length0:  ' . $length0  . ' $end0: ' . $end0  . ' $end: ' . $end  . ' $length: ' .$length . ' ' . '<br><br><br>';
-	#echo '-->'.$context .'<br><br><br>';
 	return $context . $_hellip;
 };
 
@@ -270,12 +268,11 @@ $highlight_this = function ($text, $words, $the_place)
 if (!isset($page))		$page		= '';
 if (!isset($topic))		$topic		= '';
 if (!isset($title))		$title		= 0;
-if (!isset($filter))	$filter		= '';
-if ($filter)			$scope		= $filter; // depreciated
+
 if (!isset($style))		$style		= '';
 if (!isset($scope))		$scope		= '';
 if (!isset($nomark))	$nomark		= 0;
-if (!isset($term))		$term		= '';
+if (!isset($phrase))	$phrase		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($lang))		$lang		= '';
 if (!isset($max))		$max		= 10;	// (null) 50 -> 10 overwrites system default value!
@@ -305,14 +302,12 @@ if ($scope != 'pages')
 	$scope = 'all';
 }
 
-if (isset($$term)) // TODO: some historical junk, $vars currently not available
+if (!empty($phrase))
 {
-	$phrase = $$term;
 	$form	= 0;
 }
 else
 {
-	$phrase	= '';
 	$form	= 1;
 }
 
