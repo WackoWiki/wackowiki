@@ -16,13 +16,13 @@ use PHPDiff\ {
 
 /*
  * DiffMode
- *	0	Full diff			(rendered/html)
- *	1	Simple diff			(rendered/html)
- *	2	Source				(text/plain)
- *	3	Side by side		(text/html)
- *	4	Inline				(text/html)
- *	5	Unified				(text/plain)
- *	6	Context				(text/plain)
+ *	0	Full diff			(rendered/html)		diff library
+ *	1	Simple diff			(rendered/html)		array_diff()
+ *	2	Source				(text/plain)		..
+ *	3	Side by side		(text/html)			php-diff library
+ *	4	Inline				(text/html)			..
+ *	5	Unified				(text/plain)		..
+ *	6	Context				(text/plain)		..
  *
  * default setting
  *	page/revisions.xml		=> 2
@@ -45,6 +45,7 @@ if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
 $a					= (int) $_GET['a'];
 $b					= (int) $_GET['b'];
 $diffmode			= (int) @$_GET['diffmode'];
+$notification		= (int) ($_GET['notification'] ?? 0);
 $hide_minor_edit	= (int) @$_GET['minor_edit'];
 
 if ($a < 0) $a = 0;
@@ -87,74 +88,80 @@ if ($page_a && $page_b
 	&& $this->page['page_id'] == $page_b['page_id']
 	&& $this->has_access('read', $page_a['page_id']))
 {
-	// TODO: $hide_minor_edit
-	list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
-
-	$revisions_menu = function ($rev, $page, $side) use ($revisions, $diffmode, $page_a, $page_b, &$tpl)
+	if ($notification == 0)
 	{
-		$tpl->enter($side . '_');
+		$tpl->enter('nav_');
+		// TODO: $hide_minor_edit
+		list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
 
-		$tpl->href		= $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : ''));
-		$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $page['version_id'] . '</strong>');
-		$tpl->modified	= $page['modified'];
-		$tpl->username	= $this->user_link($page['user_name'], '', true, true);
-		$tpl->n_note	= $page['edit_note'] ?: null;
-		$tpl->m_minor	= $page['minor_edit'] ? 'm' : null;
-
-		$tpl->enter('r_');
-
-		foreach ($revisions as $r)
+		$revisions_menu = function ($rev, $page, $side) use ($revisions, $diffmode, $page_a, $page_b, &$tpl)
 		{
-			if (   ($side == 'a' && $r['revision_id'] == $page_a['revision_id'])
-				|| ($side == 'b' && $r['revision_id'] == $page_b['revision_id']))
+			$tpl->enter($side . '_');
+
+			$tpl->href		= $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : ''));
+			$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $page['version_id'] . '</strong>');
+			$tpl->modified	= $page['modified'];
+			$tpl->username	= $this->user_link($page['user_name'], '', true, true);
+			$tpl->n_note	= $page['edit_note'] ?: null;
+			$tpl->m_minor	= $page['minor_edit'] ? 'm' : null;
+
+			$tpl->enter('r_');
+
+			foreach ($revisions as $r)
 			{
-				$href	= '#';
-				$class	= ' class="active"';
-			}
-			else if (  ($side == 'a' && $r['version_id'] >= $page_b['version_id'])
-					|| ($side == 'b' && $r['version_id'] <= $page_a['version_id']))
-			{
-				// skip all revisions out of a -> b scope
-				continue;
-			}
-			else
-			{
-				$params	= ($page_a['revision_id'] != $rev)
-					? ['a' => $page_a['revision_id'],	'b' => $r['revision_id']]
-					: ['a' => $r['revision_id'],		'b' => $page_b['revision_id']];
-				$href	= $this->href('diff', '', $params + ['diffmode' => $diffmode]);
-				$class	= '';
+				if (   ($side == 'a' && $r['revision_id'] == $page_a['revision_id'])
+					|| ($side == 'b' && $r['revision_id'] == $page_b['revision_id']))
+				{
+					$href	= '#';
+					$class	= ' class="active"';
+				}
+				else if (  ($side == 'a' && $r['version_id'] >= $page_b['version_id'])
+						|| ($side == 'b' && $r['version_id'] <= $page_a['version_id']))
+				{
+					// skip all revisions out of a -> b scope
+					continue;
+				}
+				else
+				{
+					$params	= ($page_a['revision_id'] != $rev)
+						? ['a' => $page_a['revision_id'],	'b' => $r['revision_id']]
+						: ['a' => $r['revision_id'],		'b' => $page_b['revision_id']];
+					$href	= $this->href('diff', '', $params + ['diffmode' => $diffmode]);
+					$class	= '';
+				}
+
+				$tpl->href		= $href;
+				$tpl->class		= $class;
+				$tpl->version	= $r['version_id'];
+				$tpl->modified	= $r['modified'];
+				$tpl->username	= $r['user_name'];
+				$tpl->editnote	= $r['edit_note'] ?: null;
 			}
 
-			$tpl->href		= $href;
-			$tpl->class		= $class;
-			$tpl->version	= $r['version_id'];
-			$tpl->modified	= $r['modified'];
-			$tpl->username	= $r['user_name'];
-			$tpl->editnote	= $r['edit_note'] ?: null;
+			$tpl->leave();	// r
+			$tpl->leave();	// side
+		};
+
+		// print header
+		$tpl->head = Ut::perc_replace($this->_t('Comparison'), $this->compose_link_to_page($this->tag, '', ''));
+
+		$revisions_menu($a, $page_a, 'a');
+		$revisions_menu($b, $page_b, 'b');
+
+		$params = ['a' => $a, 'b' => $b];
+
+		$diff_modes		= $this->_t('DiffMode');
+		$diff_mode_list	= explode(',', $this->db->diff_modes);
+
+		foreach($diff_mode_list as $mode)
+		{
+			$tpl->l_diffmode =
+				($diffmode != $mode
+					? '<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
+					: '<li class="active">' . $diff_modes[$mode]) . '</li>';
 		}
 
-		$tpl->leave();	// r
-		$tpl->leave();	// side
-	};
-
-	// print header
-	$tpl->head = Ut::perc_replace($this->_t('Comparison'), $this->compose_link_to_page($this->tag, '', ''));
-
-	$revisions_menu($a, $page_a, 'a');
-	$revisions_menu($b, $page_b, 'b');
-
-	$params = ['a' => $a, 'b' => $b];
-
-	$diff_modes		= $this->_t('DiffMode');
-	$diff_mode_list	= explode(',', $this->db->diff_modes);
-
-	foreach($diff_mode_list as $mode)
-	{
-		$tpl->l_diffmode =
-			($diffmode != $mode
-				? '<li><a href="' . $this->href('diff', '', $params + ['diffmode' => $mode]) . '">' . $diff_modes[$mode] . '</a>'
-				: '<li class="active">' . $diff_modes[$mode]) . '</li>';
+		$tpl->leave();	// nav
 	}
 
 	$tpl->enter('diff_');
