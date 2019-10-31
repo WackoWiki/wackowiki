@@ -2,30 +2,31 @@
 	[ ' denied ' ]
 	[ ' nodiff ' ]
 
-	<!--nomail-->
-	<h3>[ ' head ' ]</h3>
-	<ul class="menu">
-		[= l _ =
-			[ ' diffmode ' ]
-		=]
-	</ul>
-	<br><br><br>
-	<table class="diff">
-		<colgroup>
-			<col span="1" class="diffmeta-a">
-			<col span="1" class="diffmeta-b">
-		</colgroup>
-		<tr>
-			<td>
-				[ ' a diffmeta ' ]
-			</td>
-			<td>
-				[ ' b diffmeta ' ]
-			</td>
-		</tr>
-	</table>
-	<!--/nomail-->
-
+	[= nav _ =
+		<!--nomail-->
+		<h3>[ ' head ' ]</h3>
+		<ul class="menu">
+			[= l _ =
+				[ ' diffmode ' ]
+			=]
+		</ul>
+		<br><br><br>
+		<table class="diff">
+			<colgroup>
+				<col span="1" class="diffmeta-a">
+				<col span="1" class="diffmeta-b">
+			</colgroup>
+			<tr>
+				<td>
+					[ ' a diffmeta ' ]
+				</td>
+				<td>
+					[ ' b diffmeta ' ]
+				</td>
+			</tr>
+		</table>
+		<!--/nomail-->
+	=]
 	[= diff _ =
 		[= m0 _ =
 			<br><br>
@@ -34,7 +35,7 @@
 		[= m2 _ =
 			[ ' nodiff ' ]
 			[= added _ =
-				<br><strong>[ ' _t: SimpleDiffAdditions ' ]</strong><br>
+				<strong>[ ' _t: SimpleDiffAdditions ' ]</strong><br>
 				<div class="additions">[ ' diff | pre ' ]</div>
 			=]
 			[= deleted _ =

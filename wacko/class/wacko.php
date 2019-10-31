@@ -2956,6 +2956,7 @@ class Wacko
 			$_GET['a']			= $page['revision_id'];
 			$_GET['b']			= -1;
 			$_GET['diffmode']	= $this->db->notify_diff_mode;
+			$_GET['notification']	= 1;
 			$diff				= $this->method('diff');
 			$diff				= $this->format($diff, 'html2mail');
 		}
