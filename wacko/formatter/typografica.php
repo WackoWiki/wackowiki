@@ -16,5 +16,3 @@ $typo = new Typografica($this);
 $typo->settings['dashglue'] = false;
 
 echo $typo->correct($text, false);
-
-?>

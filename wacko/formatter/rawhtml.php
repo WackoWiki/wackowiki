@@ -12,5 +12,3 @@ $text = preg_replace_callback('/(<format [^>]*?>.*?<\/format>|<a [^>]*>)/ism', [
 //$text = $this->format($text, 'safehtml');
 //echo 'rawhtml: ' . $text;
 include 'safehtml.php';
-
-?>
