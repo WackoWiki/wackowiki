@@ -417,6 +417,7 @@ if (strlen($phrase) >= 3)
 			$tpl->s_emark		= true;
 		}
 	}
+
+	$nomark or $n or $tpl->none_phrase = $phrase;
 }
 
-$nomark or $n or $tpl->none_phrase = $phrase;
