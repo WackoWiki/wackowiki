@@ -19,11 +19,14 @@ if (!defined('IN_WACKO'))
  *	6	Context			(text/plain)
  *
  * default setting
- *	page/revisions.xml	=> 2
- *	notify_watcher()	=> 2 (source -> text/plain)
+ *	page/revisions.xml		=> 2
+ *	notify_watcher()		=> 2 (source -> text/plain)
  *
- * TODO: make diff modes acceccible via config
- * - to change mode for cases above
+ * config settings
+ *	db->diff_modes			sets the available diff modes for the user in secondary config
+ *	db->notify_diff_mode	sets diff mode for email notifications
+ *
+ * TODO:
  * add navigation to move to next of previous diff
  * add revision meta headers
 */
@@ -126,7 +129,7 @@ if ($page_a && $page_b
 		}
 
 		$tpl->leave();	// r
-		$tpl->leave();	// side prefix
+		$tpl->leave();	// side
 	};
 
 	// print header
