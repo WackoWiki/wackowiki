@@ -2952,10 +2952,12 @@ class Wacko
 				"ORDER BY modified DESC " .
 				"LIMIT 1");
 
+			// a -> b (old -> new)
 			$_GET['a']			= $page['revision_id'];
 			$_GET['b']			= -1;
 			$_GET['diffmode']	= $this->db->notify_diff_mode;
 			$diff				= $this->method('diff');
+			$diff				= $this->format($diff, 'html2mail');
 		}
 
 		// get watchers
@@ -3064,7 +3066,7 @@ class Wacko
 								$this->href('', $tag) . "\n\n" .
 								$title . "\n" .
 								"======================================================================\n\n" .
-								$this->format($diff, 'html2mail') . "\n\n" .
+								$diff . "\n\n" .
 								"======================================================================\n\n";
 
 						if ($user['notify_page'] == 2)
