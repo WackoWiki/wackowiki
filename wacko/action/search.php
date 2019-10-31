@@ -148,7 +148,7 @@ $get_context = function($phrase, $string, $position, $padding, $hellip = true)
 	$_start		= $position - $padding;
 	$start		= $_start < 0
 					? 0
-					: strpos($string, ' ', $_start);
+					: mb_strpos($string, ' ', $_start);
 
 	$_length	= (mb_strlen($phrase) + $padding * 2);
 
@@ -156,7 +156,7 @@ $get_context = function($phrase, $string, $position, $padding, $hellip = true)
 	$_end		= $start + $_length;
 	$end		= $_end > $clength
 					? $clength
-					: strpos($string, ' ', $_end);
+					: mb_strpos($string, ' ', $_end);
 
 	$length		= $end - $start;
 	$context	= mb_substr($string, $start, $length);
@@ -220,7 +220,7 @@ $preview_text = function ($text, $limit, $hellip = true)
 	}
 	else
 	{
-		$length		= strpos($text, ' ', $limit);
+		$length		= mb_strpos($text, ' ', $limit);
 		$_hellip	= $hellip ? ($length < $limit ? ' ... ' : '') : '';
 
 		return mb_substr($text, 0, $length) . $_hellip;
