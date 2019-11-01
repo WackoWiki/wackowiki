@@ -441,6 +441,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Cerca per',
 	'TopicSearchResults'		=> 'Risultati della ricerca per argomenti: ',
 	'NotFoundInTopics'			=> 'non trovato tra argomenti',
+	'FilterLangNotAvailable'	=> 'La lingua selezionata non è disponibile!',
 
 	'PostedBy'					=> 'postato da',
 	'ThisIsCommentOn'			=> 'Questo è un commento su',

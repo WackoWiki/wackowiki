@@ -441,6 +441,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Znajdź',
 	'TopicSearchResults'		=> 'Tematy - wyniki wyszukiwania: ',
 	'NotFoundInTopics'			=> 'wyszukiwanego słowa nie odnaleziono w tematach',
+	'FilterLangNotAvailable'	=> 'Wybrany język nie jest dostępny!',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',

@@ -13,7 +13,7 @@
 		<br>
 	=]
 	[= none _ =
-		[ ' _t: NoResultsFor ' ] "[ ' phrase | e ' ]"
+		[ ' _t: NoResultsFor ' ] "<b>[ ' phrase | e ' ]</b>"
 	=]
 	[= s _ =
 		[''' pagination ''']
