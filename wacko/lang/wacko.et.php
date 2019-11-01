@@ -441,6 +441,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Otsi',
 	'TopicSearchResults'		=> 'Otsingu tulemused ',
 	'NotFoundInTopics'			=> 'Ei leidunud',
+	'FilterLangNotAvailable'	=> 'Valitud keel pole saadaval!',
 
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',

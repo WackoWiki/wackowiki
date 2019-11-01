@@ -281,7 +281,7 @@ if (!isset($padding))	$padding	= 250;
 if ($lang && !$this->known_language($lang))
 {
 	$lang = '';
-	$this->set_message('The selected language is not available!');
+	$this->set_message($this->_t('FilterLangNotAvailable'));
 }
 
 $category_id	= (int) ($_GET['category_id'] ?? 0);

@@ -442,6 +442,7 @@ $wacko_translation = [
 	'SearchFor'					=> 'Искать',
 	'TopicSearchResults'		=> 'Результаты поиска в заголовках фразы ',
 	'NotFoundInTopics'			=> 'не встречается в заголовках',
+	'FilterLangNotAvailable'	=> 'Выбранный язык недоступен!',
 
 	'PostedBy'					=> 'отправлен',
 	'ThisIsCommentOn'			=> 'Комментарий к',
