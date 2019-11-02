@@ -324,4 +324,3 @@ function admin_config_system(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

@@ -420,4 +420,3 @@ function admin_user_approve(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

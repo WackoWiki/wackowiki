@@ -89,7 +89,7 @@ function admin_config_appearance(&$engine, &$module)
 		$ext					= strtolower($ext);
 
 		$image['favicon']		= ['gif', 'ico' , 'jpeg', 'jpe', 'jpg', 'png', 'svg'];
-		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'webp'];
+		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp'];
 		// calculate resonable filesize: Pixels * Bit Depth
 		// - GIF/PNG palette-based images (up to 8-bit)
 		// - Non-palette images (JPEG/PNG/TIFF/SVG) are 0, 8, or 16.
@@ -107,7 +107,6 @@ function admin_config_appearance(&$engine, &$module)
 
 				$size			= [0, 0];
 				$size			= @getimagesize($_FILES[$file]['tmp_name']);
-
 
 				if ($file == 'logo')
 				{
@@ -206,7 +205,7 @@ function admin_config_appearance(&$engine, &$module)
 		$config['logo_display']				= (int) $_POST['logo_display'];
 		$config['theme']					= (string) $_POST['theme'];
 
-		if (is_array($_POST['allow_themes']))
+		if (isset($_POST['allow_themes']) && is_array($_POST['allow_themes']))
 		{
 			$config['allow_themes'] = (string) implode(',', $_POST['allow_themes']);
 		}
@@ -251,7 +250,7 @@ function admin_config_appearance(&$engine, &$module)
 				<input type="submit" id="remove_logo" name="remove_logo" value="<?php echo $engine->_t('Remove'); ?>">
 			<?php }
 				// SVG format is intentionally excluded ?>
-				<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, .webp, image/gif, image/jpeg, image/png, image/webp">
+				<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, .webp, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
 			</td>
 		</tr>
 		<?php
@@ -398,4 +397,3 @@ function admin_config_appearance(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

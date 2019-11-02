@@ -684,4 +684,3 @@ function admin_config_basic(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

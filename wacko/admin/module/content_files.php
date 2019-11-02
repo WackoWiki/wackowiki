@@ -33,5 +33,3 @@ function admin_content_files(&$engine, &$module)
 
 
 }
-
-?>

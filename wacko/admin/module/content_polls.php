@@ -317,4 +317,3 @@ function admin_content_polls(&$engine, &$module)
 	unset($polls_obj);
 }
 
-?>

@@ -278,4 +278,3 @@ function admin_db_backup(&$engine, &$module)
 	}
 }
 
-?>
