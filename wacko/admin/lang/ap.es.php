@@ -24,8 +24,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Modo de recuperación',
 	'Authorization'				=> 'Autorización',
 	'AuthorizationTip'			=> 'Por favor ingrese la contraseña del administrador (asegúrese que su navegador permita cookies).',
-	'NoRecoceryPassword'		=> 'Contraseña administrativa no especificada!',
-	'NoRecoceryPasswordTip'		=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
+	'NoRecoveryPassword'		=> 'Contraseña administrativa no especificada!',
+	'NoRecoveryPasswordTip'		=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
 
 	'ErrorLoadingModule'		=> 'Error cargar admin module %1: no existe.',
 
@@ -674,7 +674,7 @@ $ap_translation = [
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
-	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> beeing displayed as <code>My Name</code> with this option.',
+	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
 	'YouareHereText'			=> 'Disable and visualize self-referencing links',
@@ -909,7 +909,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Base de datos convertida',
 	'ConversionTablesOk'		=> 'Conversión de las tablas seleccionadas con éxito.',
 
-	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
+	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Conversión de tablas de MyISAM a InnoDB',
@@ -1025,10 +1025,10 @@ $ap_translation = [
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Puede restaurar un backup existente o removerlo del servidor.',
-	'ConfirmDbRestore'			=> 'Desea restaurar un backup',
+	'ConfirmDbRestore'			=> '¿Desea restaurar la copia de seguridad %1?',
 	'ConfirmDbRestoreInfo'		=> 'Por favor espere, esto puede durar unos minutos.',
 	'RestoreWrongVersion'		=> 'Versión de WackoWiki incorrecta!',
-	'BackupDelete'				=> 'Seguro que desea eliminar el backup',
+	'BackupDelete'				=> '¿Está seguro de que desea eliminar la copia de seguridad %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Opciones adicionales de restaurar',
 	'RestoreOptionsInfo'		=> '* Antes de restaurar el <strong>cluster backup</strong>, ' .
@@ -1052,8 +1052,8 @@ $ap_translation = [
 
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
-	'IgnoreDublicatedKeys'		=> 'Ignore duplicated keys',
-	'IgnoreDublicatedFiles'		=> 'Ignore duplicated files',
+	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated keys',
+	'IgnoreDuplicatedFiles'		=> 'Ignore duplicated files',
 	'SavedCluster'				=> 'Saved cluster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
@@ -1085,7 +1085,7 @@ $ap_translation = [
 	'BackupRestore'				=> 'Restaurar',
 	'BackupRemove'				=> 'Eliminar',
 	'RestoreYes'				=> 'sí',
-	'RestoreNo'					=> 'no',
+	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Copia de seguridad ##%1## de la base de datos restaurada.',
 
 	// User module
@@ -1096,7 +1096,7 @@ $ap_translation = [
 	'UserEditButton'			=> 'Edit',
 	'UserEnabled'				=> 'Habilitado',
 	'UsersAddNew'				=> 'Nuevo usuario',
-	'UsersDelete'				=> 'Está seguro que desea eliminar al usuario %1',
+	'UsersDelete'				=> '¿Estás seguro de que quieres eliminar el usuario %1?',
 	'UsersDeleted'				=> 'Usuario %1 eliminado de la base de datos.',
 	'UsersRename'				=> 'Renombrar usuario %1 a',
 	'UsersRenameInfo'			=> '* Observación: El cambio afectará a todas las páginas asignadas a este usuario.',
@@ -1139,7 +1139,7 @@ $ap_translation = [
 	'GroupsAdd'					=> 'Agregar grupo nuevo',
 	'GroupsRename'				=> 'Renombrar el grupo %1',
 	'GroupsRenameInfo'			=> '* Observación: El cambio afectará a todas las páginas con el grupo asignado.',
-	'GroupsDelete'				=> 'Está seguro que desea eliminar el grupo ',
+	'GroupsDelete'				=> 'Está seguro que desea eliminar el grupo %1?',
 	'GroupsDeleteInfo'			=> '* Observación: El cambio afectará a todas los miembros del grupo.',
 	'GroupsIsSystem'			=> 'El grupo %1 pertenece al sistema y no se puede eliminar.',
 	'GroupsStoreButton'			=> 'Guardar Grupos',

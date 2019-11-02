@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ##########################################################
-##	Maintaince setting									##
+##	Maintenance setting									##
 ##########################################################
 $_mode = 'config_system';
 

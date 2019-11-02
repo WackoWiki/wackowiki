@@ -71,8 +71,8 @@ if (!$engine->db->recovery_password)
 			<div id="mainwrapper">
 				<div id="loginbox">
 				<?php
-					echo '<strong>' . $engine->_t('NoRecoceryPassword') . '</strong><br><br>';
-					echo $engine->_t('NoRecoceryPasswordTip');
+					echo '<strong>' . $engine->_t('NoRecoveryPassword') . '</strong><br><br>';
+					echo $engine->_t('NoRecoveryPasswordTip');
 				?>
 				</div>
 			</div>

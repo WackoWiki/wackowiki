@@ -4364,7 +4364,7 @@ class Wacko
 	}
 
 	// returns error text, or null on OK
-	// if old_tag specified - check also for already-namedness & already-existance
+	// if old_tag specified - check also for already-namedness & already-existence
 	function sanitize_new_pagename(&$tag, $old_tag = false) : ?string
 	{
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes

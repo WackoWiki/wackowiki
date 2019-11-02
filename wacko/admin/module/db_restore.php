@@ -214,7 +214,7 @@ function admin_db_restore(&$engine, &$module)
 
 				echo	'<input type="hidden" name="backup_id" value="' . Ut::html($backup_id) . '">' . "\n" .
 						'<input type="hidden" name="start" value="true">' . "\n" .
-						'<label for="">' . $engine->_t('ConfirmDbRestore') . ' \'<code>' . Ut::html($backup_id) . '</code>\'?</label> ' .
+						Ut::perc_replace($engine->_t('ConfirmDbRestore'), ' <code>' . Ut::html($backup_id) . '</code>') . '<br><br>' .
 						'<input type="submit" id="submit" name="restore" value="' . $engine->_t('RestoreYes') . '"> ' .
 						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
 						'<br><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
@@ -248,8 +248,8 @@ function admin_db_restore(&$engine, &$module)
 			$results = '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreStarted') . "\n" .
 				'================================================' . "\n" .
 				$engine->_t('RestoreParameters') . ':' . "\n" .
-				"\t" . $engine->_t('IgnoreDublicatedKeys') . ': ' . ($ikeys === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n" .
-				"\t" . $engine->_t('IgnoreDublicatedFiles') . ': ' . ($ifiles === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n\n" .
+				"\t" . $engine->_t('IgnoreDuplicatedKeys') . ': ' . ($ikeys === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n" .
+				"\t" . $engine->_t('IgnoreDuplicatedFiles') . ': ' . ($ifiles === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n\n" .
 				$engine->_t('SavedCluster') . ': ' . ($log[2] == true ? $log[2] : $engine->_t('RestoreNo')) . "\n" .
 				"\t" . Ut::perc_replace($engine->_t(
 					($log[2] == true
@@ -402,8 +402,8 @@ function admin_db_restore(&$engine, &$module)
 
 		echo '<input type="hidden" name="backup_id" value="' . Ut::html($backup_id) . '">' . "\n" .
 			'<div class="warning">' .
-				'<label for="">' . $engine->_t('BackupDelete') . ' \'<code>' . Ut::html($backup_id) . '</code>\'?</label> ' .
-				'<input type="submit" id="submit" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
+				Ut::perc_replace($engine->_t('BackupDelete'), ' <code>' . Ut::html($backup_id) . '</code>') . '<br><br>' .
+				'<input type="submit" id="submit_delete" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
 				'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
 				'<br><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
 			'</div>

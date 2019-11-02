@@ -235,7 +235,7 @@ function admin_maint_resync(&$engine, &$module)
 					// find last rendered page
 					# Diag::dbg('GOLD', $record, $page['tag']);
 
-					// formatter needs these values, comment requirers settings from parent page
+					// formatter needs these values, comment requires settings from parent page
 					$engine->db->allow_rawhtml		= ($page['comment_on_id'] ? $page['parent_allow_rawhtml']		: $page['allow_rawhtml']);
 					$engine->db->disable_safehtml	= ($page['comment_on_id'] ? $page['parent_disable_safehtml']	: $page['disable_safehtml']);
 

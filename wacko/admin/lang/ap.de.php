@@ -24,8 +24,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Wiederherstellungs-Modus',
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von deinem Browser akzeptiert werden).',
-	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
-	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
+	'NoRecoveryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
+	'NoRecoveryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
 
 	'ErrorLoadingModule'		=> 'Fehler beim Laden des Admin-Moduls %1: existiert nicht.',
 
@@ -923,7 +923,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Datenbank konvertiert',
 	'ConversionTablesOk'		=> 'Konvertierung der ausgewählten Tabellen erfolgreich.',
 
-	'LogColumsToStrict'			=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
+	'LogColumnsToStrict'			=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
 	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
 
 	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB',
@@ -1040,10 +1040,10 @@ $ap_translation = [
 
 	// DB Restore module
 	'RestoreInfo'				=> 'Du kannst jedes der gefundenen Sicherungspakete wiederherstellen oder vom Server entfernen.',
-	'ConfirmDbRestore'			=> 'Möchtest du die Datensicherung wiederherstellen',
-	'ConfirmDbRestoreInfo'		=> 'Bitte warte dies kann einige Minuten benötigen.',
+	'ConfirmDbRestore'			=> 'Möchtest du die Datensicherung %1 wiederherstellen?',
+	'ConfirmDbRestoreInfo'		=> 'Bitte warte, dies kann einige Minuten benötigen.',
 	'RestoreWrongVersion'		=> 'WackoWiki Version stimmt nicht überein!',
-	'BackupDelete'				=> 'Willst du die Datensicherung wirklich entfernen',
+	'BackupDelete'				=> 'Willst du die Datensicherung %1 wirklich entfernen?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Zusätzliche Otionen zur Daten-Wiederherstellung',
 	'RestoreOptionsInfo'		=> '* Vor dem Wiederherstellen der <strong>Cluster-Sicherung</strong>, ' .
@@ -1067,8 +1067,8 @@ $ap_translation = [
 
 	'RestoreStarted'			=> 'Beginne mit Wiederherstellung der Datensicherung',
 	'RestoreParameters'			=> 'Verwendete Parameter',
-	'IgnoreDublicatedKeys'		=> 'Ignoriere doppelte Schlüssel',
-	'IgnoreDublicatedFiles'		=> 'Ignoriere doppelte Dateien',
+	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte Schlüssel',
+	'IgnoreDuplicatedFiles'		=> 'Ignoriere doppelte Dateien',
 	'SavedCluster'				=> 'Gespeicherter Cluster',
 	'DataProtection'			=> 'Datenschutz - %1 weggelassen',
 	'AssumeDropTable'			=> 'Nehme %1',
@@ -1100,8 +1100,8 @@ $ap_translation = [
 	'BackupPackageContents'		=> 'Der Inhalt des Pakets',
 	'BackupRestore'				=> 'Wiederherstellen',
 	'BackupRemove'				=> 'Entfernen',
-	'RestoreYes'				=> 'ja',
-	'RestoreNo'					=> 'nein',
+	'RestoreYes'				=> 'Ja',
+	'RestoreNo'					=> 'Nein',
 	'LogDbRestored'				=> 'Sicherung ##%1## der Datenbank wiederhergestellt.',
 
 	// User module
@@ -1112,7 +1112,7 @@ $ap_translation = [
 	'UserEditButton'			=> 'Bearbeiten',
 	'UserEnabled'				=> 'Aktiviert',
 	'UsersAddNew'				=> 'Füge einen neuen Benutzer hinzu',
-	'UsersDelete'				=> 'Bist du dir sicher das du den Benutzer %1 entfernen willst',
+	'UsersDelete'				=> 'Bist du dir sicher das du den Benutzer %1 entfernen willst?',
 	'UsersDeleted'				=> 'Der Benutzer %1 wurde aus der Datenbank entfernt.',
 	'UsersRename'				=> 'Benutzer %1 umbenennen zu',
 	'UsersRenameInfo'			=> '* Hinweise: Die Änderung wirkt sich auf alle Seiten aus, die diesem Benutzer zugeordnet sind.',
@@ -1155,7 +1155,7 @@ $ap_translation = [
 	'GroupsAdd'					=> 'Eine neue Gruppe hinzufügen',
 	'GroupsRename'				=> 'Gruppe %1 umbenennen zu',
 	'GroupsRenameInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Seiten aus, die dieser Gruppe zugeordnet sind.',
-	'GroupsDelete'				=> 'Bist du dir sicher das du die Gruppe %1 entfernen möchtest',
+	'GroupsDelete'				=> 'Bist du dir sicher das du die Gruppe %1 entfernen möchtest?',
 	'GroupsDeleteInfo'			=> '* Hinweis: Die Änderung wirkt sich auf alle Mitglieder aus, die dieser Gruppe zugeordnet sind.',
 	'GroupsIsSystem'			=> 'Die Gruppe %1 gehört zum System und kann nicht entfernt werden.',
 	'GroupsStoreButton'			=> 'Speichere Gruppen',
