@@ -155,7 +155,7 @@ class Wacko
 		return $page['tag'];
 	}
 
-	function get_page_id($tag = '') : int
+	function get_page_id($tag = '') : ?int
 	{
 		if (!$tag)
 		{
@@ -5079,7 +5079,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function get_user_name() : string
+	function get_user_name() : ?string
 	{
 		return $this->get_user_setting('user_name');
 	}
@@ -5532,7 +5532,7 @@ class Wacko
 		}
 	}
 
-	function get_page_owner_id($page_id = '', $revision_id = '') : int
+	function get_page_owner_id($page_id = '', $revision_id = '') : ?int
 	{
 		if (!$page_id)
 		{
@@ -6049,6 +6049,10 @@ class Wacko
 				{
 					#echo '[debug] TRUE local';
 					return true;
+				}
+				else
+				{
+					return false;
 				}
 			}
 			else if ($global == true)
@@ -8492,7 +8496,7 @@ class Wacko
 		return $out;
 	}
 
-	function binary_multiples($size, $prefix = true, $short = true, $rounded = false, $suffix = true) : string
+	function binary_multiples($size, $prefix = true, $short = true, $rounded = false, $suffix = true)
 	{
 		if (is_numeric($size))
 		{
