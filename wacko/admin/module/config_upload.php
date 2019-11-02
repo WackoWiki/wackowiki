@@ -202,4 +202,3 @@ function admin_config_upload(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

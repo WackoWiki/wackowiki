@@ -82,8 +82,8 @@ function admin_config_notifications(&$engine, &$module)
 					<small><?php echo $engine->_t('AutosubscribeInfo');?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="autosubscribe_on" name="autosubscribe" value="1"<?php echo (!$engine->db->autosubscribe ? ' checked' : '');?>><label for="autosubscribe_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="autosubscribe_off" name="autosubscribe" value="0"<?php echo ($engine->db->autosubscribe ? ' checked' : '');?>><label for="autosubscribe_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="autosubscribe_on" name="autosubscribe" value="1"<?php echo ($engine->db->autosubscribe == 1 ? ' checked' : '');?>><label for="autosubscribe_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="autosubscribe_off" name="autosubscribe" value="0"<?php echo ($engine->db->autosubscribe == 0 ? ' checked' : '');?>><label for="autosubscribe_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -230,4 +230,3 @@ function admin_config_notifications(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>

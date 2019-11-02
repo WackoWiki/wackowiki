@@ -330,4 +330,3 @@ function admin_db_convert(&$engine, &$module)
 	}
 }
 
-?>

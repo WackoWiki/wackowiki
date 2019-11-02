@@ -516,4 +516,3 @@ function admin_config_security(&$engine, &$module)
 	echo $engine->form_close();
 }
 
-?>
