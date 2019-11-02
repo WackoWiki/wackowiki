@@ -434,7 +434,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 		$tweak = true;
 	}
 
-	// check file existance
+	// check file existence
 	clearstatcache();
 	$file_name = $pack . $table . BACKUP_FILE_DUMP_SUFFIX;
 

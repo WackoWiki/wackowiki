@@ -124,7 +124,7 @@ if (isset($_POST['_user_menu']))
 		{
 			$new_tag = trim($_POST['tag'], '/ ');
 
-			// check target page existance
+			// check target page existence
 			if ($page = $this->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				$_page_id		= $this->get_page_id($new_tag);

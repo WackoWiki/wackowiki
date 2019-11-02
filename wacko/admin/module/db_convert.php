@@ -32,7 +32,7 @@ function admin_db_convert(&$engine, &$module)
 	$sql		= '';
 	$sql_log	= [];
 
-	// optimizatin scheme
+	// optimization scheme
 	if (isset($_GET['all']) && $_GET['all'] == 1)
 	{
 		$scheme['all'] = 1;
@@ -108,7 +108,7 @@ function admin_db_convert(&$engine, &$module)
 		{
 			$sql_log = implode(",\n", $sql_log);
 
-			$engine->log(1, $engine->_t('LogColumsToStrict', SYSTEM_LANG));
+			$engine->log(1, $engine->_t('LogColumnsToStrict', SYSTEM_LANG));
 
 			$message = $engine->_t('ConversionColumnsOk');
 			$engine->show_message($message, 'success');

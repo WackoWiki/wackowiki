@@ -24,8 +24,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Recovery Mode',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoceryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoceryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
+	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
@@ -239,7 +239,7 @@ $ap_translation = [
 	// System Info module
 	'system_info'		=> [
 		'name'		=> 'System Info',
-		'title'		=> 'System Informations',
+		'title'		=> 'System Information',
 	],
 
 	// System log module
@@ -303,7 +303,7 @@ $ap_translation = [
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
-	'AllowedLanguagesInfo'		=> 'It is recomended to select only the set of languages you want to use, other wise all languages are selected.',
+	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 
 	'CommentSection'			=> 'Comments',
 	'AllowComments'				=> 'Allow comments',
@@ -347,7 +347,7 @@ $ap_translation = [
 	'DefaultDiffModeSetting'	=> 'Default diff mode',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
 	'AllowedDiffMode'			=> 'Allowed Diff modes',
-	'AllowedDiffModeInfo'		=> 'It is recomended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
+	'AllowedDiffModeInfo'		=> 'It is recommended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
 	'NotifyDiffMode'			=> 'Notify diff mode',
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
@@ -682,7 +682,7 @@ $ap_translation = [
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
-	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> beeing displayed as <code>My Name</code> with this option.',
+	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
 	'YouareHereText'			=> 'Disable and visualize self-referencing links',
@@ -915,7 +915,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Database converted',
 	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
 
-	'LogColumsToStrict'			=> 'Converted colums to comply with the SQL strict mode',
+	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
@@ -930,7 +930,7 @@ $ap_translation = [
 	'EngineTyp'					=> 'Type',
 
 	'ConvertColumnsToStrict'	=> 'Converting Columns to SQL strict',
-	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL srtict mode, use the following routine.',
+	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL strict mode, use the following routine.',
 
 	// Log module
 	'LogFilterTip'				=> 'Filter events by criteria',
@@ -1031,10 +1031,10 @@ $ap_translation = [
 
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
-	'ConfirmDbRestore'			=> 'Do you want to restore backup',
+	'ConfirmDbRestore'			=> 'Do you want to restore backup %1?',
 	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
-	'BackupDelete'				=> 'Are you sure you want to remove backup',
+	'BackupDelete'				=> 'Are you sure you want to remove backup %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',
 	'RestoreOptionsInfo'		=> '* Before restoring the <strong>cluster backup</strong>, ' .
@@ -1058,8 +1058,8 @@ $ap_translation = [
 
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
-	'IgnoreDublicatedKeys'		=> 'Ignore duplicated keys',
-	'IgnoreDublicatedFiles'		=> 'Ignore duplicated files',
+	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated keys',
+	'IgnoreDuplicatedFiles'		=> 'Ignore duplicated files',
 	'SavedCluster'				=> 'Saved cluster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
 	'AssumeDropTable'			=> 'Assume %1',
@@ -1090,8 +1090,8 @@ $ap_translation = [
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'Restore',
 	'BackupRemove'				=> 'Remove',
-	'RestoreYes'				=> 'yes',
-	'RestoreNo'					=> 'no',
+	'RestoreYes'				=> 'Yes',
+	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
@@ -1102,7 +1102,7 @@ $ap_translation = [
 	'UserEditButton'			=> 'Edit',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
-	'UsersDelete'				=> 'Are you sure you want to remove user %1',
+	'UsersDelete'				=> 'Are you sure you want to remove user %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
 	'UsersRename'				=> 'Rename the user %1 to',
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
@@ -1145,7 +1145,7 @@ $ap_translation = [
 	'GroupsAdd'					=> 'Add a new group',
 	'GroupsRename'				=> 'Rename the group %1 to',
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
-	'GroupsDelete'				=> 'Are you sure you want to remove group %1',
+	'GroupsDelete'				=> 'Are you sure you want to remove group %1?',
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',

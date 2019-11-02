@@ -490,7 +490,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= preg_replace('/[^- \\w]/', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
 
-				// check new tag existance
+				// check new tag existence
 				if ($old_tag != $this->tag . '/' . $tag
 					&& moderate_page_exists($this, $this->tag . '/' . $tag) === true)
 				{
@@ -860,7 +860,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$old_tag	= $this->tag;
 				$new_tag	= ($section ? $section . '/' : '') . $tag;
 
-				// check new tag existance
+				// check new tag existence
 				if ($old_tag == $new_tag || moderate_page_exists($this, $new_tag) === true)
 				{
 					$error = $this->_t('ModerateRenameExists');
@@ -949,7 +949,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					}
 
 					$set = [];
-					$this->set_message($this->_t('ModerateCommentsDeleted'), 'succcess');
+					$this->set_message($this->_t('ModerateCommentsDeleted'), 'success');
 					$this->http->redirect($this->href('moderate'));
 				}
 			}
@@ -973,7 +973,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				if ($forum_cluster === true)
 				{
-					// check new tag existance
+					// check new tag existence
 					if ($old_tag != $section . '/' . $tag
 						&& moderate_page_exists($this, $section . '/' . $tag) === true)
 					{
@@ -982,7 +982,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 				else
 				{
-					// check desired target tag existance
+					// check desired target tag existence
 					if (moderate_page_exists($this, $title) === false)
 					{
 						$error = $this->_t('ModerateMoveNotExists');

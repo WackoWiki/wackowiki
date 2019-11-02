@@ -265,7 +265,7 @@ function admin_config_appearance(&$engine, &$module)
 				<small><?php echo $engine->_t('LogoDimensionsInfo');?></small></label>
 			</td>
 			<td>
-			<?php	// TODO: add option to reset dimentions to default image size
+			<?php	// TODO: add option to reset dimensions to default image size
 					// + option to 'readonly / disable' input fields
 			?>
 				<input type="number" min="16" max="500" maxlength="3" style="width: 50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>"> × <input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height;?>"> pix

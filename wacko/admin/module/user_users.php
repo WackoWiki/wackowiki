@@ -165,7 +165,7 @@ function admin_user_users(&$engine, &$module)
 			$error .= $engine->_t('RegistrationUserNameOwned');
 
 			// log event
-			$engine->log(2, Ut::perc_replace($engine->_t('LogUserSimiliarName', SYSTEM_LANG), $user_name));
+			$engine->log(2, Ut::perc_replace($engine->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
 		}
 		// no email given
 		else if ($email == '')
@@ -658,8 +658,8 @@ function admin_user_users(&$engine, &$module)
 			 '<input type="hidden" name="ids" value="' . implode('-', $set) . '">' . "\n" .
 				'<table class="formation">' .
 					'<tr>
-						<td>
-							<label for="">' . Ut::perc_replace($engine->_t('UsersDelete'), ' ' . $users) . '?</label> ' .
+						<td>' .
+							Ut::perc_replace($engine->_t('UsersDelete'), ' ' . $users) . ' ' .
 							'<input type="submit" id="submit" name="delete" value="' . $engine->_t('Remove') . '"> ' .
 							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a><br>' .
 							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .

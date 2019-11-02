@@ -85,7 +85,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			$error .= $this->_t('RegistrationUserNameOwned');
 
 			// log event
-			$this->log(2, Ut::perc_replace($this->_t('LogUserSimiliarName', SYSTEM_LANG), $user_name));
+			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
 		}
 		// no email given
 		else if ($email == '')
@@ -248,7 +248,7 @@ else
 		$this->sess->r_email		= '';
 	}
 
-	// show regitraion form
+	// show registration form
 	$tpl->enter('r_');
 
 	// for timing method to mitigate bots from creating accounts

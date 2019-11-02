@@ -1321,7 +1321,7 @@ $wacko_translation = [
 	'LogFileUploadedLocal'		=> 'New file ##%2## uploaded to the page [[/%1]] (size %3)',  // Russian often use reverse word order regarding to English :)
 	'LogFileUploadedGlobal'		=> 'New file ##%2## uploaded to the global folder (size %3)', // --'--'
 	'LogPMSent'					=> 'Personal message ##%1->%2## successfully sent',
-	'LogUserSimiliarName'		=> 'There were attempts to register under the same user name: ##%1##', // 'same' => 'similar'
+	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##', // 'same' => 'similar'
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',  // reorder?
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',  // reorder?
 	'LogCommentPosted'			=> 'Added [[/%1 new comment(s)]] to page [[/%2]]',

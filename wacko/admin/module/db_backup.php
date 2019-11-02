@@ -136,7 +136,7 @@ function admin_db_backup(&$engine, &$module)
 		// save sql to the disk
 		if ($sql == true)
 		{
-			// check file existance
+			// check file existence
 			clearstatcache();
 			$filename = $pack . BACKUP_FILE_STRUCTURE;
 
