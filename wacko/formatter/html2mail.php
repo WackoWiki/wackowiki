@@ -18,7 +18,7 @@ $text = preg_replace('/(?:\\n){2,}/', "\n", $text);
 $text = preg_replace('/<br>/', "\n", $text);
 
 // HTML email filters (text/html)
-if ($options['text_html'])
+if (isset($options['text_html']))
 {
 	// convert links to pages in the format "Description (URL)"
 	$text = preg_replace('/<a .*?href="(https?:\/\/.*?)" class="".*?>(.*?)<\/a>/', '$2 ($1)', $text);
