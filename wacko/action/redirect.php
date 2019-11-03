@@ -5,12 +5,14 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{redirect to="!/NewPage" permanent=[0 or 1] mute=[0|1]}}
+// {{redirect to="!/NewPage" temporary=[0 or 1] mute=[0|1]}}
 
 if (isset($page))		$to = $page;
 if (!isset($to))		$to = '';
-if (!isset($permanent))	$permanent = 0;
+if (!isset($temporary))	$temporary = 0;
 if (!isset($mute))		$mute = 0;
+
+$permanent = $temporary ? 0 : 1;
 
 if (($page = $this->unwrap_link($to)))
 {
