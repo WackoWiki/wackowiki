@@ -131,12 +131,12 @@ foreach ($drivers as $k => $driver)
  */
 
 $charsets	= [];
-# $charsets[]	= ['utf8mb4', 'utf8mb4', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 7.0
+# $charsets[]	= ['utf8mb4', 'utf8mb4', 'UTF-8 Unicode (' . $lang['Recommended'] . ')']; // requires unicode ready wiki engine! -> Version 6.0
 $charsets[]	= ['cp1251',	'cp1251',	'cp1251 Windows Cyrillic'];
 $charsets[]	= ['cp1257',	'cp1257',	'cp1257 Windows  Baltic'];
 $charsets[]	= ['latin1',	'latin1',	'cp1252 West European'];			// default
-$charsets[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European'];		// not tested
-$charsets[]	= ['greek',		'greek',	'ISO 8859-7 Greek'];				// not tested
+$charsets[]	= ['latin2',	'latin2',	'ISO 8859-2 Central European'];
+$charsets[]	= ['greek',		'greek',	'ISO 8859-7 Greek'];
 
 echo '	<select id="database_charset" name="config[database_charset]" required>';
 
