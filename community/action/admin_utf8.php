@@ -242,7 +242,7 @@ if ($this->is_admin())
 			{
 				$_lang_set = "'da', 'de', 'el', 'en', 'es', 'et', 'fr', 'hu', 'it', 'nl', 'pl', 'pt'";
 			}
-			else if ($this->db->database_charset == 'cp1257')	// Estonian	(windows-1257)
+			else if ($this->db->database_charset == 'cp1257')	// Baltic	(windows-1257)
 			{
 				$_lang_set = "'bg', 'da', 'de', 'el', 'en', 'es', 'fr', 'hu', 'it', 'nl', 'pl', 'pt', 'ru'";
 			}
@@ -554,9 +554,9 @@ if ($this->is_admin())
 					// update user group
 					mysqli_query($dblink,
 						"UPDATE {$prefix}usergroup SET " .
-							"group_name	= " . $this->db->q($group_name) . ", " .
+							"group_name		= " . $this->db->q($group_name) . ", " .
 							"description	= " . $this->db->q($description) . ", " .
-							"converted	= 1 " .
+							"converted		= 1 " .
 						"WHERE group_id = " . (int) $group['group_id'] . " " .
 						"LIMIT 1");
 
