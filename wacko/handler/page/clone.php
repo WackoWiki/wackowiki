@@ -39,7 +39,7 @@ if (@$_POST['_action'] === 'clone_page')
 
 	if (!isset($_POST['massclone']))
 	{
-		$this->clone_page($from, $to, $superto, $edit_note);
+		$this->clone_page($from, $to, $edit_note);
 		$this->log(4, Ut::perc_replace($this->_t('LogClonedPage', SYSTEM_LANG), $from, $to));
 		$log = Ut::perc_replace($this->_t('PageCloned'), $this->link('/' . $to));
 	}

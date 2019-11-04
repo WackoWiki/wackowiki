@@ -733,8 +733,9 @@ function admin_user_users(&$engine, &$module)
 		{
 			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 		}
+
 		// set signuptime ordering
-		else if ($_order == 'signup_asc')
+		if ($_order == 'signup_asc')
 		{
 			$order				= 'ORDER BY signup_time ASC ';
 			$signup_time		= 'signup_desc';
