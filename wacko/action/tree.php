@@ -25,16 +25,10 @@ if (!defined('IN_WACKO'))
 $limit	= 500;
 
 // input
-if (!isset($root) && !isset($page))
-{
-	$root	= '/' . $this->page['tag'];
-}
-
-if (!isset($page))		$page = '';
-if (!isset($root))		$root = '';
-if (!isset($title))		$title = 1;
-if (!isset($system))	$system = 0;
-if (!isset($lang))		$lang = '';
+if (!isset($page))		$page	= '/' . $this->page['tag'];
+if (!isset($title))		$title	= 1;
+if (!isset($system))	$system	= 0;
+if (!isset($lang))		$lang	= '';
 
 $system == true
 	? $user_id		= $this->db->system_user_id
@@ -43,16 +37,12 @@ $system == true
 if ($lang && !$this->known_language($lang))
 {
 	$lang = '';
-	#$this->set_message('The selected language is not available!');
+	#$this->set_message($this->_t('FilterLangNotAvailable'));
 }
 
-if ($page)				$root	= $page;
-if ($root == '/')		$root	= '';
-if ($root)				$root	= $this->unwrap_link($root);
-
-
-$cluster	= $root; // without slash -> LIKE /%
-$root		= $root . '/';
+if ($page == '/')		$page	= '';
+$tag	= $this->unwrap_link($page);
+$root	= $tag . '/';
 
 if (!isset($depth)) $depth = '';
 // TODO: set default depth level via config
@@ -75,8 +65,8 @@ if ($pages = $this->db->load_all(
 	"SELECT page_id, tag, title, page_lang " .
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE comment_on_id = 0 " .
-		($cluster
-			? "AND tag LIKE " . $this->db->q($cluster . '/%') . " "
+		($tag
+			? "AND tag LIKE " . $this->db->q($tag . '/%') . " "
 			: "") .
 		($user_id
 			? "AND owner_id <> " . (int) $user_id . " "
@@ -132,7 +122,7 @@ if ($pages = $this->db->load_all(
 		$this->preload_acl($page_ids);
 
 		// header
-		if ($cluster)
+		if ($tag)
 		{
 			if (!$nomark)
 			{
@@ -142,7 +132,7 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-					$legend = Ut::perc_replace($this->_t('TreeClusterTitle'), $this->link('/' . $root, '', rtrim($root, '/'))) . ':';
+					$legend = Ut::perc_replace($this->_t('TreeClusterTitle'), $this->link('/' . $root, '', $tag)) . ':';
 				}
 
 				echo '<nav class="layout-box"><p><span>' . $legend . "</span></p>\n";
@@ -177,7 +167,7 @@ if ($pages = $this->db->load_all(
 			foreach ($pages as $page)
 			{
 				// check read privilege and current page tag
-				if ($page['tag'] == $root
+				if ($page['tag'] == $tag
 					|| ($this->db->hide_locked && !$this->has_access('read', $page['page_id'])))
 				{
 					continue;
@@ -271,7 +261,7 @@ if ($pages = $this->db->load_all(
 	else
 	{
 		// no results in given level $depth
-		$empty_tree = Ut::perc_replace($this->_t('TreeEmptyLevels'), $this->link('/' . $root, '', rtrim($root, '/')));
+		$empty_tree = Ut::perc_replace($this->_t('TreeEmptyLevels'), $this->link('/' . $root, '', $tag));
 		echo '<em>' . $empty_tree . '</em><br>';
 	}
 }
@@ -279,7 +269,7 @@ else
 {
 	if (!$nomark)
 	{
-		$empty_tree = Ut::perc_replace($this->_t('TreeEmpty'), $this->link('/' . $root, '', rtrim($root, '/')));
+		$empty_tree = Ut::perc_replace($this->_t('TreeEmpty'), $this->link('/' . $root, '', $tag));
 		echo '<em>' . $empty_tree . '</em><br>';
 	}
 }

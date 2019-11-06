@@ -46,22 +46,20 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 
 if (!isset($page))		$page	= '';
 
-$root = $page;
-
-if (! $root)
+if (! $page)
 {
-	$root = $this->page['tag'];
+	$tag = $this->page['tag'];
 }
 else
 {
-	$root = $this->unwrap_link($root);
+	$tag = $this->unwrap_link($page);
 }
 
 if ($linking_to = $_GET['linking_to'] ?? '')
 {
 	$tpl->to_target = $this->link('/' . $linking_to);
 
-	if (list ($pages, $pagination) = $this->load_pages_linking($linking_to, $root))
+	if (list ($pages, $pagination) = $this->load_pages_linking($linking_to, $tag))
 	{
 		foreach ($pages as $page)
 		{
@@ -78,12 +76,12 @@ if ($linking_to = $_GET['linking_to'] ?? '')
 }
 else
 {
-	$cluster	= $root;
+	$cluster	= $tag;
 	$user		= $this->get_user();
 
 	if (!isset($max))		$max = null;
 
-	if (list ($pages, $pagination) = $load_wanted($root, $max))
+	if (list ($pages, $pagination) = $load_wanted($tag, $max))
 	{
 		if (is_array($pages))
 		{
@@ -101,7 +99,7 @@ else
 					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
 
-					if (list ($ref_pages, $pagination) = $this->load_pages_linking($page['wanted_tag'], $root))
+					if (list ($ref_pages, $pagination) = $this->load_pages_linking($page['wanted_tag'], $tag))
 					{
 						foreach ($ref_pages as $ref_page)
 						{
