@@ -29,7 +29,6 @@ class Http
 		$this->ip			= $this->real_ip();
 		$this->tls_mark		= $this->db->cookie_prefix . 'TLS';
 
-
 		// if we have used tls already - do secure session!
 		if ($db->tls && !$this->tls_session && @$_COOKIE[$this->tls_mark])
 		{
@@ -60,7 +59,7 @@ class Http
 			// relative addressing
 			if (!preg_match('/^(http|https):\/\/([^\\s\"<>]+)$/', $url))
 			{
-				$url = 'http://' . $_SERVER['SERVER_NAME'] . $url;
+				$url = 'https://' . $_SERVER['SERVER_NAME'] . $url;
 			}
 
 			$this->redirect(str_replace('http://', 'https://', $url));
