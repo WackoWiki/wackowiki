@@ -68,7 +68,6 @@ if (!isset($nomark))	$nomark		= '';
 
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;
-if (!isset($tag))		$tag		= ''; // FIXME: $tag = $page
 if (!isset($owner))		$owner		= '';
 if (!isset($max))		$max		= '';
 
@@ -106,16 +105,16 @@ if (!$global)
 {
 	if ($page == '')
 	{
-		$page				= $this->tag;
+		$tag				= $this->tag;
 		$source_page_tag	= $this->tag;
 		$page_id			= $this->page['page_id'];
 	}
 	else
 	{
-		$page				= $this->unwrap_link($page);
-		$source_page_tag	= $page;
+		$tag				= $this->unwrap_link($page);
+		$source_page_tag	= $tag;
 
-		if ($_page_id = $this->get_page_id($page))
+		if ($_page_id = $this->get_page_id($tag))
 		{
 			$page_id		= $_page_id;
 		}
@@ -126,19 +125,19 @@ if (!$global)
 else
 {
 	$can_view			= 1;
-	$page				= $this->tag;
+	$tag				= $this->tag;
 	$source_page_tag	= '/';
 }
 
 if ($can_view)
 {
-	if ($global || ($tag == $page))
+	if ($global || ($tag == $this->tag))
 	{
 		$file_page = $this->page;
 	}
 	else
 	{
-		$file_page = $this->load_page($page);
+		$file_page = $this->load_page($tag);
 	}
 
 	if (!$global && !isset($file_page['page_id']))
