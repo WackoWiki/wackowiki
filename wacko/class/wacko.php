@@ -2876,27 +2876,31 @@ class Wacko
 	}
 
 	/**
-	 * unwrap tag based on $this->context
+	 * normalizes absolute or relative link
 	 *
-	 * looks for tag with relative path and returns tag with absolute path
+	 * a) absolute: strips leading slash from link
 	 *
-	 *	$this->context =	'cluster/base'
-	 *		'page'				'cluster/page'
-	 *		'../page'			'page'
-	 *		'!/page'			'cluster/base/page'
+	 * 		/cluster/base	->	cluster/base
+	 *
+	 * b) relative: unwraps link based on $this->context
+	 *
+	 *		$this->context	=	'cluster/base'
+	 *			'page'		->	'cluster/page'
+	 *			'../page'	->	'page'
+	 *			'!/page'	->	'cluster/base/page'
 	 *
 	 * @param string $tag
 	 *
-	 * @return string tag with absolute path
+	 * @return string tag with with full path and without leading slash
 	 */
 	function unwrap_link($tag) : string
 	{
-		if ($tag == '/')										// '/'
+		if ($tag == '/')											// '/'
 		{
 			return '';
 		}
 
-		if ($tag == '!')										// '!'
+		if ($tag == '!')											// '!'
 		{
 			return $this->context[$this->current_context];
 		}
@@ -2906,16 +2910,16 @@ class Wacko
 		// get root tag
 		if (isset($this->context[$this->current_context]) && mb_strstr($this->context[$this->current_context], '/'))
 		{
-			$root	= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context]);
+			$root		= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context]);
 		}
 		else
 		{
-			$root	= '';
+			$root		= '';
 		}
 
 		if (preg_match('/^\.\/(.*)$/u', $tag, $matches))			// './tag'
 		{
-			$root	= '';
+			$root		= '';
 		}
 		else if (preg_match('/^\/(.*)$/u', $tag, $matches))			// '/tag'
 		{
@@ -2943,12 +2947,12 @@ class Wacko
 
 		if ($root != '')
 		{
-			$new_tag = '/' . $new_tag;
+			$new_tag	= '/' . $new_tag;
 		}
 
-		// build tag with absolute path
-		$tag = $root . $new_tag;
-		$tag = str_replace('//', '/', $tag);
+		// tag equivalent to 'tag' in page table
+		$tag	= $root . $new_tag;
+		$tag	= str_replace('//', '/', $tag);
 
 		return $tag;
 	}
@@ -3378,7 +3382,7 @@ class Wacko
 
 		if (!$safe)
 		{
-			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
+			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);	// TODO: Notice: expects parameter 1 to be string, array given
 		}
 
 		if (preg_match('/^[\.\-' . $this->language['ALPHANUM_P'] . ']+\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $text))
@@ -4761,7 +4765,7 @@ class Wacko
 	* @param int $backdays
 	* @return array Array of (referer, num)
 	*/
-	function load_referrers($page_ids = null) : array
+	function load_referrers($page_ids = null) : ?array
 	{
 		return $this->db->load_all(
 			"SELECT " .
@@ -5058,7 +5062,7 @@ class Wacko
 	 *
 	 * @return array
 	 */
-	function load_user($user_name, $user_id = 0) : array
+	function load_user($user_name, $user_id = 0) : ?array
 	{
 		return $this->db->load_single(
 			"SELECT
@@ -5363,7 +5367,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function load_users($enabled = true) : array
+	function load_users($enabled = true) : ?array
 	{
 		return $this->db->load_all(
 			"SELECT user_id, user_name " .
@@ -5399,7 +5403,7 @@ class Wacko
 	}
 
 	// COMMENTS AND COUNTS
-	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0) : array
+	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0) : ?array
 	{
 		// avoid results if $page_id is 0 (page does not exists)
 		if ($page_id)
