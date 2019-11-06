@@ -55,22 +55,23 @@ $print_tag_cloud = function ($tags, $method = '')
 
 
 // settings:
-//	root		- where to start counting from (defaults to current tag)
+//	page		- where to start counting from (defaults to current tag)
 //	lang		- categories language if necessary (defaults to current page lang)
 //	owner		- page owner
 //	sort		- order categories alphabetically or by number ('abc'| 'number')
 //	nomark		- display header and fieldset (1) or 0 (default))
 
 
-if (!isset($root))			$root	= '/';
+if (!isset($page))			$page	= '/';
 if (!isset($nomark))		$nomark = 0;
 if (!isset($lang))			$lang	= $this->page['page_lang'];
-if (!isset($owner))			$owner = '';
+if (!isset($owner))			$owner	= '';
 if (!isset($sort) || !in_array($sort, ['abc', 'number']))
 {
 	$sort = 'abc';
 }
-$root = $this->unwrap_link($root);
+
+$tag = $this->unwrap_link($page);
 
 if		($sort == 'abc')	$order = 'c.category ASC';
 else if ($sort == 'number')	$order = 'number DESC';
@@ -90,8 +91,8 @@ $sql = "SELECT
 		"WHERE c.category_lang = " . $this->db->q($lang) . " " .
 			"AND ca.object_type_id = 1 " .
 			"AND p.deleted <> 1 " .
-			($root
-				? "AND ( p.tag = " . $this->db->q($root) . " OR p.tag LIKE " . $this->db->q($root . '/%') . " ) "
+			($tag
+				? "AND ( p.tag = " . $this->db->q($tag) . " OR p.tag LIKE " . $this->db->q($tag . '/%') . " ) "
 				: '' ) .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
@@ -104,11 +105,11 @@ $tags = $this->db->load_all($sql, true);
 
 if ($tags)
 {
-	foreach ($tags as $key => $tag)
+	foreach ($tags as $cat)
 	{
-		$this->cloud[$tag['category_id']] = [
-			'category'	=> $tag['category'],
-			'number'	=> $tag['number']
+		$this->cloud[$cat['category_id']] = [
+			'category'	=> $cat['category'],
+			'number'	=> $cat['number']
 		];
 	}
 

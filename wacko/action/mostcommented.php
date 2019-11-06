@@ -34,22 +34,14 @@ if ($max > 500)			$max = 500;
 // check for first param (for what mostpopular is built)
 if (!empty($page))
 {
-	$page		= $this->unwrap_link($page);
-	$ppage		= '/' . $page;
-	$context	= $page;
-	$_page		= $this->load_page($page);
-	if (!$legend)
-		$legend = $page;
-	if (isset($_page['tag']))
-		$link		= $this->href('', $_page['tag']);
+	$tag		= $this->unwrap_link($page);
+	$ppage		= '/' . $tag;
+	if (!$legend) $legend = $tag;
 }
 else
 {
-	$page		= '';
 	$ppage		= '';
-	$context	= $this->tag;
 	$_page		= $this->page;
-	$link		= '';
 }
 
 if (!$page)
@@ -74,7 +66,7 @@ if (!$page)
 }
 else
 {
-	$page = $this->unwrap_link($page);
+	$tag = $this->unwrap_link($page);
 
 	// $recurse
 	//	true	- recurses and includes all the sub pages of sub pages (and so on) in the listing
@@ -87,12 +79,12 @@ else
 		"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
 			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
-		"WHERE a.tag <> " . $this->db->q($page) . " " .
+		"WHERE a.tag <> " . $this->db->q($tag) . " " .
 			"AND a.tag = c.tag " .
 			($recurse
-				? "AND INSTR(b.tag, " . $this->db->q($page) . ") = 1 "
-				: "AND b.tag = " . $this->db->q($page) . " ") .
-			"AND INSTR(c.tag, " . $this->db->q($page) . ") = 1 " .
+				? "AND INSTR(b.tag, " . $this->db->q($tag) . ") = 1 "
+				: "AND b.tag = " . $this->db->q($tag) . " ") .
+			"AND INSTR(c.tag, " . $this->db->q($tag) . ") = 1 " .
 			"AND a.comments >= 1 " .
 			"AND a.comment_on_id = 0 " .
 			"AND a.deleted = 0 " .

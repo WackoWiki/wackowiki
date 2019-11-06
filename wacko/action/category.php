@@ -57,7 +57,7 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 $type_id	= (int) ($_GET['type_id'] ?? OBJECT_PAGE);
 $filter		= [];
 
-$root = $this->unwrap_link($page);
+$tag = $this->unwrap_link($page);
 
 // show assigned objects
 if ($list && ($ids || isset($_GET['category_id'])))
@@ -125,9 +125,9 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		"WHERE k.category_id IN (" . $this->ids_string($category_ids) . ") " .
 			"AND k.object_type_id = 1 " .
 			"AND p.deleted <> 1 " .
-			(($root && $type_id = OBJECT_PAGE)
-				? "AND (p.tag = " . $this->db->q($root) . " " .
-					"OR p.tag LIKE " . $this->db->q($root . '/%') . ") "
+			(($tag && $type_id = OBJECT_PAGE)
+				? "AND (p.tag = " . $this->db->q($tag) . " " .
+					"OR p.tag LIKE " . $this->db->q($tag . '/%') . ") "
 				: '') .
 		"ORDER BY p.{$order} ", true))
 	{
@@ -194,15 +194,15 @@ if (!$ids)
 		$tpl->mark		= true;
 		$tpl->emark		= true;
 
-		if ($root)
+		if ($tag)
 		{
-			$tpl->mark_link		= $this->link('/' . $root, '', '', '', 0);
+			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', 0);
 			$tpl->mark_cluster	= $this->_t('CategoriesOfCluster');
 		}
 	}
 
 	// categories list
-	if ($categories = $this->get_categories_list($lang, true, $root))
+	if ($categories = $this->get_categories_list($lang, true, $tag))
 	{
 		$filter[]	= (int) ($_GET['category_id'] ?? null);
 		$total		= ceil(count($categories) / 4); // TODO: without subcategories!
