@@ -3223,27 +3223,31 @@ class Wacko
 	}
 
 	/**
-	 * unwrap tag based on $this->context
+	 * normalizes absolute or relative link
 	 *
-	 * looks for tag with relative path and returns tag with absolute path
+	 * a) absolute: strips leading slash from link
 	 *
-	 *	$this->context =	'cluster/base'
-	 *		'page'				'cluster/page'
-	 *		'../page'			'page'
-	 *		'!/page'			'cluster/base/page'
+	 * 		/cluster/base	->	cluster/base
+	 *
+	 * b) relative: unwraps link based on $this->context
+	 *
+	 *		$this->context	=	'cluster/base'
+	 *			'page'		->	'cluster/page'
+	 *			'../page'	->	'page'
+	 *			'!/page'	->	'cluster/base/page'
 	 *
 	 * @param string $tag
 	 *
-	 * @return string tag with absolute path
+	 * @return string tag with with full path and without leading slash
 	 */
 	function unwrap_link($tag)
 	{
-		if ($tag == '/')										// '/'
+		if ($tag == '/')											// '/'
 		{
 			return '';
 		}
 
-		if ($tag == '!')										// '!'
+		if ($tag == '!')											// '!'
 		{
 			return $this->context[$this->current_context];
 		}
@@ -3253,28 +3257,28 @@ class Wacko
 		// get root tag
 		if (isset($this->context[$this->current_context]) && strstr($this->context[$this->current_context], '/'))
 		{
-			$root	= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $this->context[$this->current_context]);
+			$root		= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $this->context[$this->current_context]);
 		}
 		else
 		{
-			$root	= '';
+			$root		= '';
 		}
 
 		if (preg_match('/^\.\/(.*)$/', $tag, $matches))			// './tag'
 		{
-			$root	= '';
+			$root		= '';
 		}
 		else if (preg_match('/^\/(.*)$/', $tag, $matches))		// '/tag'
 		{
 			$root		= '';
 			$new_tag	= $matches[1];
 		}
-		else if (preg_match('/^\!\/(.*)$/', $tag, $matches))	// '!/tag'
+		else if (preg_match('/^\!\/(.*)$/', $tag, $matches))		// '!/tag'
 		{
 			$root		= $this->context[$this->current_context];
 			$new_tag	= $matches[1];
 		}
-		else if (preg_match('/^\.\.\/(.*)$/', $tag, $matches))	// '../tag'
+		else if (preg_match('/^\.\.\/(.*)$/', $tag, $matches))		// '../tag'
 		{
 			$new_tag	= $matches[1];
 
@@ -3290,12 +3294,12 @@ class Wacko
 
 		if ($root != '')
 		{
-			$new_tag = '/' . $new_tag;
+			$new_tag	= '/' . $new_tag;
 		}
 
-		// build tag with absolute path
-		$tag = $root . $new_tag;
-		$tag = str_replace('//', '/', $tag);
+		// tag equivalent to 'tag' in page table
+		$tag	= $root . $new_tag;
+		$tag	= str_replace('//', '/', $tag);
 
 		return $tag;
 	}
