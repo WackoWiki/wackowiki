@@ -9,8 +9,8 @@ $revision_id		= (int) ($_GET['revision_id'] ?? 0);
 
 if (!isset($page)) $page = '';
 
-$page		= $this->unwrap_link($page);
-$page_id	= $this->get_page_id($page);
+$tag		= $this->unwrap_link($page);
+$page_id	= $this->get_page_id($tag);
 
 if (!$this->has_access('read', $page_id))
 {
@@ -20,7 +20,7 @@ else
 {
 	if (!($phrase_page = $this->load_page('', $page_id, $revision_id)))
 	{
-		$tpl->none_link	= $this->link('/' . $page);
+		$tpl->none_link	= $this->link('/' . $tag);
 	}
 	else
 	{

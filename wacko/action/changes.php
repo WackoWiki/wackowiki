@@ -8,14 +8,13 @@ if (!defined('IN_WACKO'))
 $viewed = '';
 
 if (!isset($page))		$page = '';
-if (!isset($root) && isset($page))	$root = $this->unwrap_link($page);
-if (!isset($root))		$root = '';
 if (!isset($date))		$date = @$_GET['date'];
 if (!isset($hide_minor_edit)) $hide_minor_edit = @$_GET['minor_edit'];
 if (!isset($noxml))		$noxml = 0;
 if (!isset($title))		$title = 0;
 if (!isset($max))		$max = null;
 
+$tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
 // process 'mark read' - reset session time
@@ -25,14 +24,14 @@ if (isset($_GET['markread']) && $user)
 	$this->set_user_setting('last_mark', date('Y-m-d H:i:s'));
 }
 
-if (list ($pages, $pagination) = $this->load_changed($max, $root, $date, $hide_minor_edit))
+if (list ($pages, $pagination) = $this->load_changed($max, $tag, $date, $hide_minor_edit))
 {
 	if ($user)
 	{
 		$tpl->mark_href = $this->href('', '', ['markread' => 1]);
 	}
 
-	if (!$root && !(int) $noxml)
+	if (!$tag && !(int) $noxml)
 	{
 		$tpl->xml_href = $this->db->base_url . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 	}

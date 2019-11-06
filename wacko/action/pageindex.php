@@ -17,12 +17,12 @@ if (!defined('IN_WACKO'))
  }}
  */
 
-if (!isset($page))		$page = '';
-if (!isset($title))		$title = 0;
-if (!isset($letter))	$letter = '';
-if (!isset($system))	$system = 0;
-if (!isset($lang))		$lang = '';
-if (!isset($max))		$max = null;
+if (!isset($page))		$page	= '';
+if (!isset($title))		$title	= 0;
+if (!isset($letter))	$letter	= '';
+if (!isset($system))	$system	= 0;
+if (!isset($lang))		$lang	= '';
+if (!isset($max))		$max	= null;
 
 $system == true
 	? $user_id		= $this->db->system_user_id
@@ -31,16 +31,12 @@ $system == true
 if ($lang && !$this->known_language($lang))
 {
 	$lang = '';
-	#$this->set_message('The selected language is not available!');
+	#$this->set_message($this->_t('FilterLangNotAvailable'));
 }
 
-
-
-$tag		= $page; // use tag from here on
+$tag		= $this->unwrap_link($page);
 $title		= (int) $title;
 $_alnum		= '/' . $this->language['ALPHANUM'] . '/S';
-
-
 
 $get_letter	= function ($ch) use (&$_alnum) // hope "it" will cache compiled regex
 {

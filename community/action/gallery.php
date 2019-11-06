@@ -31,29 +31,15 @@ if (!defined('IN_WACKO'))
 }}
 
 TODO: config settings
-- image_processing (boolean)
-- thumbnails (boolean)
+	- image_processing (boolean)
+	- thumbnails (boolean)
 
-- split local and global tumbs -> read access
-- add filter for categories cat="one,two"
-- generated thumbnails full-blown 32-bit PNGs (or at least 24-bit) resulting in a file size often larger than the original image
-- remove thumbs with file or page
-- fall back if no JS or Image manipulation library is available or disabled
+	- split local and global tumbs -> read access
+	- add filter for categories cat="one,two"
+	- remove thumbs with file or page
+	- fall back if no JS or Image manipulation library is available or disabled
 
 */
-
-$get_file = function ($file_id)
-{
-	$file = $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.uploaded_dt, f.picture_w, f.picture_h, f.file_ext, u.user_name, p.supertag, p.title " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-		"WHERE f.file_id = " . (int) $file_id . " " .
-		"LIMIT 1", true);
-
-	return $file;
-};
 
 // Include PHP Thumbnailer
 require_once 'lib/phpthumb/PHPThumb.php';
@@ -82,7 +68,6 @@ if (!isset($nomark))	$nomark		= '';
 
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;
-if (!isset($tag))		$tag		= ''; // FIXME: $tag = $page
 if (!isset($owner))		$owner		= '';
 if (!isset($max))		$max		= '';
 
@@ -107,6 +92,8 @@ else
 // we using a parameter token here to sort out multiple instances
 $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
 
+$nav_offset		= (int) ($_GET[$param_token] ?? '');
+
 							$order_by = "file_name ASC";
 if ($order == 'time')		$order_by = "uploaded_dt DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
@@ -118,16 +105,16 @@ if (!$global)
 {
 	if ($page == '')
 	{
-		$page				= $this->tag;
+		$tag				= $this->tag;
 		$source_page_tag	= $this->tag;
 		$page_id			= $this->page['page_id'];
 	}
 	else
 	{
-		$page				= $this->unwrap_link($page);
-		$source_page_tag	= $page;
+		$tag				= $this->unwrap_link($page);
+		$source_page_tag	= $tag;
 
-		if ($_page_id = $this->get_page_id($page))
+		if ($_page_id = $this->get_page_id($tag))
 		{
 			$page_id		= $_page_id;
 		}
@@ -138,19 +125,19 @@ if (!$global)
 else
 {
 	$can_view			= 1;
-	$page				= $this->tag;
+	$tag				= $this->tag;
 	$source_page_tag	= '/';
 }
 
 if ($can_view)
 {
-	if ($global || ($tag == $page))
+	if ($global || ($tag == $this->tag))
 	{
 		$file_page = $this->page;
 	}
 	else
 	{
-		$file_page = $this->load_page($page);
+		$file_page = $this->load_page($tag);
 	}
 
 	if (!$global && !isset($file_page['page_id']))
@@ -185,9 +172,6 @@ if ($can_view)
 	// Making an gallery
 	$cur = 0;
 
-	// pagination
-	$tpl->pagination_text = $pagination['text'];
-
 	if (!$nomark)
 	{
 		$tpl->mark			= true;
@@ -199,6 +183,9 @@ if ($can_view)
 	{
 		if (!empty($files))
 		{
+			// pagination
+			$tpl->pagination_text = $pagination['text'];
+
 			if ($table)
 			{
 				$tpl->table		= true;
@@ -313,7 +300,7 @@ if ($can_view)
 
 				if (!$target)
 				{
-					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], 'token' => $param_token, '#' => $param_token]);
+					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 				}
 				else
 				{
@@ -367,7 +354,8 @@ if ($can_view)
 	else
 	{
 		// selected image
-		$file = $get_file($file_id);
+		$key		= array_search($file_id, array_column($files, 'file_id'));
+		$file		= $files[$key];
 
 		if ($file)
 		{
@@ -407,9 +395,22 @@ if ($can_view)
 				$tpl->img	=  $this->link($path . $file['file_name']);
 			}
 
-			// backlink
-			$tpl->href	= $this->href('', $this->tag, '');
+			$tpl->enter('navigation_');
 
+			if (array_key_exists($key - 1, $files))
+			{
+				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key -1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+			}
+
+			if (array_key_exists($key + 1, $files))
+			{
+				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key +1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+			}
+
+			// backlink
+			$tpl->href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
+
+			$tpl->leave();	// navigation
 			$tpl->leave();	// item
 		}
 	}
@@ -418,5 +419,3 @@ else
 {
 	$tpl->noaccess = true;
 }
-
-?>

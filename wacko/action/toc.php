@@ -27,17 +27,17 @@ if (!isset($legend))	$legend		= '';
 
 if ($page)
 {
-	$page		= $this->unwrap_link($page);
-	$ppage		= '/' . $page;
-	$context	= $page;
-	$_page		= $this->load_page($page);
+	$tag		= $this->unwrap_link($page);
+	$ppage		= '/' . $tag;
+	$context	= $tag;
+	$_page		= $this->load_page($tag);
 
-	if (!$legend)	$legend = $page;
+	if (!$legend)	$legend = $tag;
 	if ($_page)		$link	= $this->href('', $_page['tag']);
 }
 else
 {
-	$page		= '';
+	$tag		= '';
 	$ppage		= '';
 	$context	= $this->tag;
 	$_page		= $this->page;
