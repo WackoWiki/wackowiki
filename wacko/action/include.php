@@ -11,7 +11,7 @@ if (!isset($nomark))		$nomark			= 0;
 if (!isset($nowarning))		$nowarning		= 0;
 if (!isset($revision_id))	$revision_id	= null;
 
-$page = $this->unwrap_link($page);
+$tag = $this->unwrap_link($page);
 
 if (!isset($first_anchor))	$first_anchor	= '';
 if (!isset($last_anchor))	$last_anchor	= '';
@@ -19,21 +19,21 @@ if (!isset($track))			$track			= 0;
 
 if ($track && $this->link_tracking())
 {
-	$this->track_link($page, LINK_PAGE);
+	$this->track_link($tag, LINK_PAGE);
 }
 
 // prevent include loop!
-if (in_array($page, $this->context))
+if (in_array($tag, $this->context))
 {
 	return;
 }
 
-if ($page == $this->tag)
+if ($tag == $this->tag)
 {
 	return;
 }
 
-$page_id = $this->get_page_id($page);
+$page_id = $this->get_page_id($tag);
 
 if (!$this->has_access('read', $page_id))
 {
@@ -44,9 +44,9 @@ if (!$this->has_access('read', $page_id))
 }
 else
 {
-	if (!$inc_page = $this->load_page($page, 0, $revision_id))
+	if (!$inc_page = $this->load_page($tag, 0, $revision_id))
 	{
-		$tpl->none_link = $this->link('/' . $page);
+		$tpl->none_link = $this->link('/' . $tag);
 	}
 	else
 	{
@@ -97,4 +97,3 @@ else
 	}
 }
 
-?>

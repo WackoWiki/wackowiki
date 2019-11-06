@@ -34,7 +34,6 @@ if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;	// global attachments
 if (!isset($all))		$all		= 0;	// all attachments
 if (!isset($linked))	$linked		= '';	// file link in page
-if (!isset($tag))		$tag		= '';	// FIXME: $tag == $page
 if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
 if (!isset($legend))	$legend		= '';
@@ -42,7 +41,7 @@ if (!isset($method))	$method		= '';	// for use in page handler
 if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
 if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
-if (!isset($media))		$media	= null;
+if (!isset($media))		$media		= null;
 if (!isset($max))		$max		= null;
 if (!isset($type_id))	$type_id	= null;
 
@@ -72,15 +71,15 @@ if (!$global)
 {
 	if ($page == '')
 	{
-		$page		= $this->tag;
+		$tag		= $this->tag;
 		$page_id	= $this->page['page_id'];
 	}
 	else
 	{
-		$page		= $this->unwrap_link($page);
-		$ppage		= '/' . $page;
+		$tag		= $this->unwrap_link($page);
+		$ppage		= '/' . $tag;
 
-		if ($_page_id = $this->get_page_id($page))
+		if ($_page_id = $this->get_page_id($tag))
 		{
 			$page_id	= $_page_id;
 		}
@@ -92,18 +91,18 @@ if (!$global)
 else
 {
 	$can_view	= 1;
-	$page		= $this->tag;
+	$tag		= $this->tag;
 }
 
 if ($can_view)
 {
-	if ($global || ($tag == $page))
+	if ($global || ($tag == $this->tag))
 	{
 		$filepage = $this->page;
 	}
 	else
 	{
-		$filepage = $this->load_page($page);
+		$filepage = $this->load_page($tag);
 	}
 
 	if (!$global && !isset($filepage['page_id']))

@@ -6,5 +6,3 @@ if (!defined('IN_WACKO'))
 }
 
 echo '<h6 style="page-break-after: always;"> </h6>';
-
-?>

@@ -284,6 +284,7 @@ if ($lang && !$this->known_language($lang))
 	$this->set_message('The selected language is not available!');
 }
 
+$tag			= $this->unwrap_link($page);
 $category_id	= (int) ($_GET['category_id'] ?? 0);
 $mode			= ($topic || isset($_GET['topic']))? 'topic' : 'full';
 
@@ -331,11 +332,11 @@ if (strlen($phrase) >= 3)
 {
 	if ($mode == 'topic')
 	{
-		$results = $tag_search($phrase, $page, $max, ($scope != 'all'), $filter);
+		$results = $tag_search($phrase, $tag, $max, ($scope != 'all'), $filter);
 	}
 	else
 	{
-		$results = $full_text_search($phrase, $page, $max, ($scope != 'all'), $filter);
+		$results = $full_text_search($phrase, $tag, $max, ($scope != 'all'), $filter);
 	}
 
 	list ($pages, $pagination, $tcount) = $results;

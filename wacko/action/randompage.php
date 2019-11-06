@@ -17,7 +17,9 @@ Random Page Action
 // do not cache random page!
 $this->http->no_cache(false);
 
-$tag = $page ?? '';
+if (!isset($page))		$page		= '';
+
+$tag = $this->unwrap_link($page);
 
 $query =
 	"FROM ". $this->db->table_prefix . "page p, ". $this->db->table_prefix . "acl a " .

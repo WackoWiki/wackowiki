@@ -44,23 +44,22 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 	}
 };
 
-if (!isset($root))		$root	= ''; // depreciated
-if ($root)				$page	= $root;
+if (!isset($page))		$page	= ''; // depreciated
 
-if (!isset($root))
+if (! $page)
 {
-	$root = $this->page['tag'];
+	$tag = $this->page['tag'];
 }
 else
 {
-	$root = $this->unwrap_link($root);
+	$tag = $this->unwrap_link($page);
 }
 
 if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
 
-if (list ($pages, $pagination) = $load_orphaned_pages($root, $max))
+if (list ($pages, $pagination) = $load_orphaned_pages($tag, $max))
 {
 	if (is_array($pages))
 	{

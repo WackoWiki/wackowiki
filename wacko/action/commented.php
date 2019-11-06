@@ -56,11 +56,11 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 };
 
 if (!isset($page))		$page = '';
-if (!isset($root))		$root	= $this->unwrap_link($page ?? '');
 if (!isset($title))		$title	= 0;
 if (!isset($noxml))		$noxml	= 0;
 if (!isset($max))		$max = null;
 
+$tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
 if ($this->user_allowed_comments())
@@ -73,7 +73,7 @@ if ($this->user_allowed_comments())
 		$user = $this->get_user();
 	}
 
-	if (list ($pages, $pagination) = $load_commented($root, $max))
+	if (list ($pages, $pagination) = $load_commented($tag, $max))
 	{
 		if ($pages)
 		{
@@ -94,7 +94,7 @@ if ($this->user_allowed_comments())
 				$tpl->mark_href =  $this->href('', '', ['markread' => 1]);
 			}
 
-			if ($root == '' && !(int) $noxml)
+			if ($tag == '' && !(int) $noxml)
 			{
 				$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', strtolower($this->db->site_name)) . '.xml';
 			}
