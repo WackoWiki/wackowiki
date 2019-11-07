@@ -353,6 +353,9 @@ $wacko_translation = [
 		'6'		=> 'Context',
 	],
 
+	'PreviousEdit'				=> 'Vanem muudatus',
+	'NextEdit'					=> 'Uuem muudatus',
+
 	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Näita erinevusi',
 	'CancelDifferencesButton'	=> 'Tagasi / Katkesta',

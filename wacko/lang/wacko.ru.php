@@ -354,6 +354,9 @@ $wacko_translation = [
 		'6'		=> 'Контекстное',
 	],
 
+	'PreviousEdit'				=> 'Предыдущая правка',
+	'NextEdit'					=> 'Следующая правка',
+
 	'RevisionsShowAll'			=> 'Показать все редакции...',
 	'ShowDifferencesButton'		=> 'Сравнить',
 	'CancelDifferencesButton'	=> 'Вернуться / Отмена',
