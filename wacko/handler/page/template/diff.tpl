@@ -54,6 +54,13 @@
 <br>[ ' _t: NoDifferences ' ]
 
 [= diffmeta =]
+	[= prev _ =
+		<a href="[ ' href ' ]">← [ ' _t: PreviousEdit ' ]</a>
+	=]
+	[= next _ =
+		<a href="[ ' href ' ]">[ ' _t: NextEdit ' ] →</a>
+	=]
+	<br>
 <div class="diffdown">
 	<span>[ ' version ' ]</span>
 	<a href="[ ' href ' ]">

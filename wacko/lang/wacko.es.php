@@ -355,6 +355,9 @@ $wacko_translation = [
 		'6'		=> 'Context',
 	],
 
+	'PreviousEdit'				=> 'Ir a diferencia anterior',
+	'NextEdit'					=> 'Ir a siguiente diferencia',
+
 	'RevisionsShowAll'			=> 'Mostrar todas las revisiones...',
 	'ShowDifferencesButton'		=> 'Mostrar Differencias',
 	'CancelDifferencesButton'	=> 'Vuelta al Nodo/ Cancelar',

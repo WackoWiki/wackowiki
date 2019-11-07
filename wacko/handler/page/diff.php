@@ -8,13 +8,13 @@ if (!defined('IN_WACKO'))
 
 /*
  * DiffMode
- *	0	Full diff		(rendered)
- *	1	Simple diff		(rendered)
- *	2	Source			(text/plain)
- *	3	Side by side
- *	4	Inline
- *	5	Unified			(text/plain)
- *	6	Context			(text/plain)
+ *	0	Full diff			(rendered/html)		diff library
+ *	1	Simple diff			(rendered/html)		array_diff()
+ *	2	Source				(text/plain)		..
+ *	3	Side by side		(text/html)			php-diff library
+ *	4	Inline				(text/html)			..
+ *	5	Unified				(text/plain)		..
+ *	6	Context				(text/plain)		..
  *
  * default setting
  *	page/revisions.xml		=> 2
@@ -24,9 +24,6 @@ if (!defined('IN_WACKO'))
  *	db->diff_modes			sets the available diff modes for the user in secondary config
  *	db->notify_diff_mode	sets diff mode for email notifications
  *
- * TODO:
- * add navigation to move to next of previous diff
- * add revision meta headers
 */
 
 if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
@@ -97,6 +94,20 @@ if ($page_a && $page_b
 			$tpl->n_note	= $page['edit_note'] ?: null;
 			$tpl->m_minor	= $page['minor_edit'] ? 'm' : null;
 
+			// previous & next diff navigation
+			$revision_id	= ($side == 'a' ? $page_a['revision_id'] : $page_b['revision_id']);
+			$key			= array_search($revision_id, array_column($revisions, 'revision_id'));
+
+			if ($side == 'a' && array_key_exists($key + 1, $revisions))
+			{
+				$tpl->prev_href	= $this->href('diff', '', ['a' => $revisions[$key + 1]['revision_id'], 'b' => $page_a['revision_id'], 'diffmode' => $diffmode]);
+			}
+			else if ($side == 'b' && array_key_exists($key - 1, $revisions))
+			{
+				$tpl->next_href	= $this->href('diff', '', ['a' => $page_b['revision_id'], 'b' => $revisions[$key - 1]['revision_id'], 'diffmode' => $diffmode]);
+			}
+
+			// dropdown navigation
 			$tpl->enter('r_');
 
 			foreach ($revisions as $r)
