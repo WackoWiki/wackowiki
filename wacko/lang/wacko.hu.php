@@ -355,6 +355,9 @@ $wacko_translation = [
 		'6'		=> 'Context',
 	],
 
+	'PreviousEdit'				=> 'Régebbi szerkesztés',
+	'NextEdit'					=> 'Újabb szerkesztés',
+
 	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Összehasonlítás módja',
 	'CancelDifferencesButton'	=> 'Cancel and return to page',

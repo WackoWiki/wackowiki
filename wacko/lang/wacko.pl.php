@@ -355,6 +355,9 @@ $wacko_translation = [
 		'6'		=> 'Context',
 	],
 
+	'PreviousEdit'				=> 'Poprzednia edycja',
+	'NextEdit'					=> 'Nastêpna edycja',
+
 	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Poka¿ zmiany pomiêdzy',
 	'CancelDifferencesButton'	=> 'Powróæ do wêz³a / Anuluj',
