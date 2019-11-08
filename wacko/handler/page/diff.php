@@ -189,7 +189,9 @@ if ($page_a && $page_b
 
 			if ($added)
 			{
-				// remove blank lines
+				$notification
+					? $tpl->added_email		= true
+					: $tpl->added_browser	= true;
 				$tpl->added_diff = $source
 					? '<pre>' . wordwrap(Ut::html(implode("\n", $added)), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
@@ -197,6 +199,9 @@ if ($page_a && $page_b
 
 			if ($deleted)
 			{
+				$notification
+					? $tpl->deleted_email	= true
+					: $tpl->deleted_browser	= true;
 				$tpl->deleted_diff  = $source
 					? '<pre>' . wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", 1) . '</pre>'
 					: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
