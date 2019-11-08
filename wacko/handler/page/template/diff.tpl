@@ -35,11 +35,21 @@
 		[= m2 _ =
 			[ ' nodiff ' ]
 			[= added _ =
-				<strong>[ ' _t: SimpleDiffAdditions ' ]</strong><br>
+				[= browser _ =
+					<strong>[ ' _t: SimpleDiffAdditions ' ]</strong><br>
+				=]
+				[= email _ =
+					** %%SimpleDiffAdditions%% **<br>
+				=]
 				<div class="additions">[ ' diff | pre ' ]</div>
 			=]
 			[= deleted _ =
-				<br><strong>[ ' _t: SimpleDiffDeletions ' ]</strong><br>
+				[= browser _ =
+					<br><strong>[ ' _t: SimpleDiffDeletions ' ]</strong><br>
+				=]
+				[= email _ =
+					<br>** %%SimpleDiffDeletions%% **<br>
+				=]
 				<div class="deletions">[ ' diff | pre ' ]</div>
 			=]
 		=]
@@ -54,13 +64,13 @@
 <br>[ ' _t: NoDifferences ' ]
 
 [= diffmeta =]
-	[= prev _ =
-		<a href="[ ' href ' ]">← [ ' _t: PreviousEdit ' ]</a>
-	=]
-	[= next _ =
-		<a href="[ ' href ' ]">[ ' _t: NextEdit ' ] →</a>
-	=]
-	<br>
+[= prev _ =
+	<a href="[ ' href ' ]">← [ ' _t: PreviousEdit ' ]</a>
+=]
+[= next _ =
+	<a href="[ ' href ' ]">[ ' _t: NextEdit ' ] →</a>
+=]
+<br>
 <div class="diffdown">
 	<span>[ ' version ' ]</span>
 	<a href="[ ' href ' ]">
