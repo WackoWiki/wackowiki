@@ -2938,8 +2938,8 @@ class Wacko
 
 		if ($comment_on_id)
 		{
-			$object_id		= $comment_on_id;
-			$page_title		= $this->get_page_title('', $comment_on_id);
+			$object_id				= $comment_on_id;
+			$page_title				= $this->get_page_title('', $comment_on_id);
 		}
 		else
 		{
@@ -2953,12 +2953,13 @@ class Wacko
 				"LIMIT 1");
 
 			// a -> b (old -> new)
-			$_GET['a']			= $page['revision_id'];
-			$_GET['b']			= -1;
-			$_GET['diffmode']	= $this->db->notify_diff_mode;
+			$_GET['a']				= $page['revision_id'];
+			$_GET['b']				= -1;
+			$_GET['diffmode']		= $this->db->notify_diff_mode;
 			$_GET['notification']	= 1;
-			$diff				= $this->method('diff');
-			$diff				= $this->format($diff, 'html2mail');
+
+			$diff					= $this->method('diff');
+			$diff					= $this->format($diff, 'html2mail');
 		}
 
 		// get watchers
@@ -3060,7 +3061,11 @@ class Wacko
 					}
 					else
 					{
-						$subject = $this->_t('WatchedPageChanged') . "'" . $title . "'";
+						$subject	= $this->_t('WatchedPageChanged') . "'" . $title . "'";
+
+						$patterns		= ['/%%SimpleDiffAdditions%%/',			'/%%SimpleDiffDeletions%%/'];
+						$replacements	= [$this->_t('SimpleDiffAdditions'),	$this->_t('SimpleDiffDeletions')];
+						$diff			= preg_replace($patterns, $replacements, $diff);
 
 						$body .=
 								$this->_t('SomeoneChangedThisPage') . "\n" .
