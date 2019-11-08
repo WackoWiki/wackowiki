@@ -2614,7 +2614,7 @@ class Wacko
 			$_GET['b']				= -1;
 			$_GET['diffmode']		= $this->db->notify_diff_mode;
 			$_GET['notification']	= 1;
-			// TODO: 'SimpleDiffAdditions' and 'SimpleDiffDeletions' were NOT localized in foreach
+
 			$diff					= $this->method('diff');
 			$diff					= $this->format($diff, 'html2mail');
 		}
