@@ -389,12 +389,12 @@ if ($can_view)
 
 			if (array_key_exists($key - 1, $files))
 			{
-				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key -1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key - 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			if (array_key_exists($key + 1, $files))
 			{
-				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key +1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key + 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			// backlink

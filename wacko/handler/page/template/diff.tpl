@@ -36,10 +36,11 @@
 			[ ' nodiff ' ]
 			[= added _ =
 				[= browser _ =
-					<strong>[ ' _t: SimpleDiffAdditions ' ]</strong><br>
+					<br><strong>[ ' _t: SimpleDiffAdditions ' ]</strong><br>
 				=]
 				[= email _ =
 					** %%SimpleDiffAdditions%% **<br>
+					[ ' nonstatic ' ]
 				=]
 				<div class="additions">[ ' diff | pre ' ]</div>
 			=]
@@ -49,6 +50,7 @@
 				=]
 				[= email _ =
 					<br>** %%SimpleDiffDeletions%% **<br>
+					[ ' nonstatic ' ]
 				=]
 				<div class="deletions">[ ' diff | pre ' ]</div>
 			=]

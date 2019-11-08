@@ -30,9 +30,6 @@ if (isset($options['text_html']))
 	$text = preg_replace('/<a .*?href="https?:\/\/.*?edit\\?add=1" title="' . $this->_t('CreatePage') . '">.*?<\/a>/', '', $text);
 }
 
-// replace the tags around the header with the double asterisk (now solved template)
-#$text = preg_replace('/<strong>(' . $this->_t('SimpleDiffAdditions') . ')<\/strong>|<strong>(' . $this->_t('SimpleDiffDeletions') . ')<\/strong>/u', '** $1$2 **', $text);
-
 // sanitizing remaining tags
 $text = preg_replace('/<\/?[a-z][a-z0-9]*[^<>]*?>|<!--.*?-->/', '', $text);
 
