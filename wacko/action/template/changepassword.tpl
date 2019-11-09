@@ -18,11 +18,11 @@
 				=]
 				<p>
 					<label for="new_password">[ ' _t: NewPassword ' ]:</label>
-					<input type="password" id="new_password" name="new_password" minlength="[ ' minchars ' ]" size="24">
+					<input type="password" id="new_password" name="new_password" minlength="[ ' minchars ' ]" size="24" required>
 				</p>
 				<p>
 					<label for="conf_password">[ ' _t: ConfirmPassword ']:</label>
-					<input type="password" id="conf_password" name="conf_password" minlength="[ ' minchars ' ]" size="24">
+					<input type="password" id="conf_password" name="conf_password" minlength="[ ' minchars ' ]" size="24" required>
 				</p>
 				<p>[ ' complexity ' ]</p>
 				<p>
@@ -39,11 +39,11 @@
 			<div class="cssform">
 			<p>
 				<label for="user_name">[ ' format_t: UserName ' ]:</label>
-				<input type="text" id="user_name" name="user_name" size="25" maxlength="80"><br>
+				<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" required autofocus><br>
 			</p>
 			<p>
 				<label for="email">[ ' format_t: Email ' ]:</label>
-				<input type="text" id="email" name="email" size="24">
+				<input type="email" id="email" name="email" size="30" required>
 			</p>
 			<p>
 				<input type="submit" class="OkBtn" value="[ ' _t: SendButton ' ]">
