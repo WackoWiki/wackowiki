@@ -87,8 +87,10 @@ else // login
 	{
 		++$logins;
 
-		$user_name	= Ut::strip_spaces($_POST['user_name']);
-		$password	= $_POST['password'];
+		$user_name	= Ut::strip_spaces(($_POST['user_name'] ?? ''));
+		$password	= (string)	($_POST['password'] ?? '');
+		$email		= (string)	($_POST['email'] ?? null);
+		$persistent	= (bool)	($_POST['persistent'] ?? false);
 
 		if ($this->sess->login_captcha && !$this->validate_captcha())
 		{
@@ -101,7 +103,7 @@ else // login
 
 			// if user name already exists, check password
 			// check email dummy field in search for bots
-			if (!$_POST['email'] && ($user = $this->load_user($user_name)))
+			if (!$email && ($user = $this->load_user($user_name)))
 			{
 				if (($n = $user['failed_login_count']) > $logins)
 				{
@@ -158,7 +160,7 @@ else // login
 					}
 					else
 					{
-						$this->log_user_in($user, isset($_POST['persistent']));
+						$this->log_user_in($user, $persistent);
 						$this->context[++$this->current_context] = ''; // STS what for?
 
 						$this->log(3, Ut::perc_replace($this->_t('LogUserLoginOK', SYSTEM_LANG), $user['user_name']));

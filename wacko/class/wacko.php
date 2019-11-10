@@ -895,7 +895,7 @@ class Wacko
 		}
 
 		// cache result
-		if (!$revision_id && !$cached_page)
+		if (!empty($page) && !$revision_id && !$cached_page)
 		{
 			$this->cache_page($page, $metadata_only);
 		}
@@ -955,8 +955,8 @@ class Wacko
 	*/
 	function cache_page($page, $metadata_only = false)
 	{
-		// do not override the current page
-		if ($this->page['page_id'] == $page['page_id'] && $metadata_only)
+		// do not override current page
+		if (($this->page['page_id'] == $page['page_id'] && $metadata_only) || empty($page))
 		{
 			return;
 		}
@@ -965,8 +965,8 @@ class Wacko
 		$this->page_cache['page_id'][$page['page_id']]				= $page;
 		$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
 
-		$this->page_cache['tag'][$page['tag']]				= $page;
-		$this->page_cache['tag'][$page['tag']]['mdonly']	= $metadata_only;
+		$this->page_cache['tag'][$page['tag']]						= $page;
+		$this->page_cache['tag'][$page['tag']]['mdonly']			= $metadata_only;
 	}
 
 	function cache_wanted_page($tag, $page_id = 0, $check = 0)
@@ -5313,7 +5313,7 @@ class Wacko
 				'obsolete'		=> 'Obsolete',
 				'reg_expire'	=> 'Expired',
 				'max_session'	=> 'Timeout',
-				'max_idle'		=> 'Inactivity', // You have been logged out due to inactivity.
+				'max_idle'		=> 'Inactivity',
 				'ua'			=> 'UaChange',
 				'tls'			=> 'TLSChange',
 				'ip'			=> 'IPChange',
