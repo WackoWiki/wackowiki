@@ -29,15 +29,19 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	}
 	else
 	{
+		$tpl->enter('u_');
+
 		$profile			= ['profile' => $user['user_name']];
 		$default_tab		= false;
-		$tpl->u_username	= $user['user_name'];
-		$tpl->u_href		= $this->href();
+		$tpl->username	= $user['user_name'];
+		$tpl->href		= $this->href();
 
 		if ($tab_mode == '')
 		{
 			$default_tab	= true;
 		}
+
+		$tpl->enter('tab_');
 
 		// profile navigation
 		if ($user['user_id'] == $this->get_user_id())
@@ -76,33 +80,36 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 			foreach ($tabs as $k => $tab)
 			{
-				$tpl->u_tab_li_commit = true;
+				$tpl->li_commit = true;
 
 				if ($k == $tab_mode)
 				{
-					$tpl->u_tab_li_active_item	= $this->_t($tab[1]);
-					$tpl->u_tab_heading			= $this->_t($tab[2]);
+					$tpl->li_active_item	= $this->_t($tab[1]);
+					$tpl->heading			= $this->_t($tab[2]);
 
 					if ($tab[3])
 					{
-						$tpl->u_tab_action		= $this->action($tab[3], $profile);
+						$tpl->action		= $this->action($tab[3], $profile);
 					}
 				}
 				else
 				{
-					$tpl->u_tab_li_href_item	= [$tab[0], $this->_t($tab[1])];
+					$tpl->li_href_item	= [$tab[0], $this->_t($tab[1])];
 				}
 			}
 		}
 		else
 		{
-			$tpl->u_tab_heading = $this->_t('UsersProfile');
+			$tpl->heading = $this->_t('UsersProfile');
 		}
+
+		$tpl->leave();	//	tab_
+		$tpl->enter('prof_');
 
 		// user profile
 		if ($default_tab == true)
 		{
-			$tpl->u_prof_user	= $user;
+			$tpl->user	= $user;
 
 			// usergroups
 			if (is_array($this->db->aliases))
@@ -120,11 +127,11 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					}
 				}
 
-				$tpl->u_prof_userGroups_list = implode(', ', $groups);
+				$tpl->userGroups_list = implode(', ', $groups);
 			}
 			else
 			{
-				$tpl->u_prof_userGroups_na = true;
+				$tpl->userGroups_na = true;
 			}
 
 			$allow_intercom = ($this->db->enable_email
@@ -193,27 +200,31 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			// basic info
 			if ($user['hide_lastsession'])
 			{
-				$tpl->u_prof_last_hidden	= true;
+				$tpl->last_hidden	= true;
 			}
 			else if ($this->db->is_null_date($user['last_visit']))
 			{
-				$tpl->u_prof_last_na		= true;
+				$tpl->last_na		= true;
 			}
 			else
 			{
-				$tpl->u_prof_last_last_visit = $user['last_visit'];
+				$tpl->last_last_visit = $user['last_visit'];
 			}
 
-			$tpl->u_prof_userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
-			$tpl->u_prof_userPage_href	= $this->href('', $home);
-			$tpl->u_prof_groupsPage		= $this->href('', $this->db->groups_page);
+			$tpl->userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
+			$tpl->userPage_href	= $this->href('', $home);
+			$tpl->groupsPage		= $this->href('', $this->db->groups_page);
 
 			// hide contact form if profile is equal with current user
 			if ($user['user_id'] != $this->get_user_id())
 			{
+				$tpl->enter('pm_');
+
 				// only registered users can send PMs
 				if ($logged_in)
 				{
+					$tpl->enter('pm_');
+
 					$subject	= (string) @$_POST['mail_subject'];
 					$ref		= (string) @$_POST['ref'];
 					$body		= (string) @$_POST['mail_body'];
@@ -235,40 +246,44 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						}
 					}
 
-					$tpl->u_prof_pm_pm_href		= $this->href();
-					$tpl->u_prof_pm_pm_username	= $user['user_name'];
+					$tpl->href		= $this->href();
+					$tpl->username	= $user['user_name'];
 
 					if ($ref)
 					{
-						$tpl->u_prof_pm_pm_ref_ref = $ref;
+						$tpl->ref_ref = $ref;
 					}
 
 					// user must allow incoming messages, and needs confirmed email address set
 					if ($allow_intercom)
 					{
-						$tpl->u_prof_pm_pm_ic_subj = $subject;
+						$tpl->ic_subj = $subject;
 
 						if ($ref)
 						{
-							$tpl->u_prof_pm_pm_ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
+							$tpl->ic_ref_href = $this->href('', '', $profile + ['#' => 'contacts']);
 						}
 
-						$tpl->u_prof_pm_pm_ic_body = $body;
+						$tpl->ic_body = $body;
 					}
 					else
 					{
-						$tpl->u_prof_pm_pm_disabled = true;
+						$tpl->disabled = true;
 					}
+
+					$tpl->leave();	// pm_
 				}
 				else
 				{
-					$tpl->u_prof_pm_not = true;
+					$tpl->not = true;
 
 					if (($ref0 = @$_GET['ref']))
 					{
-						$tpl->u_prof_pm_hint = true;
+						$tpl->hint = true;
 					}
 				}
+
+				$tpl->leave();	// pm_
 			}
 
 			// user-owned pages
@@ -305,39 +320,39 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				// sorting and pagination
 				if ($sort_name)
 				{
-					$tpl->u_prof_pages_date_href = $this->href('', '', $profile + ['sort' => 'date']);
+					$tpl->pages_date_href = $this->href('', '', $profile + ['sort' => 'date']);
 				}
 				else
 				{
-					$tpl->u_prof_pages_name_href = $this->href('', '', $profile + ['sort' => 'name']);
+					$tpl->pages_name_href = $this->href('', '', $profile + ['sort' => 'name']);
 				}
 
-				$tpl->u_prof_pages_pagination_text = $pagination['text'];
+				$tpl->pages_pagination_text = $pagination['text'];
 
 				// pages list itself
 				foreach ($pages as $page)
 				{
 					if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
 					{
-						$tpl->u_prof_pages_li_created	= $page['created'];
-						$tpl->u_prof_pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+						$tpl->pages_li_created	= $page['created'];
+						$tpl->pages_li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
 					}
 				}
 			}
 			else
 			{
-				$tpl->u_prof_nopages = true;
+				$tpl->nopages = true;
 			}
 
 			// last user comments
 			if ($this->user_allowed_comments())
 			{
-				$tpl->u_prof_cmt_n = $user['total_comments'];
+				$tpl->cmt_n = $user['total_comments'];
 
 				if ($user['total_comments'])
 				{
 					$pagination = $this->pagination($user['total_comments'], 10, 'c', $profile + ['#' => 'comments']);
-					$tpl->u_prof_cmt_c_pagination_text = $pagination['text'];
+					$tpl->cmt_c_pagination_text = $pagination['text'];
 
 					$comments = $this->db->load_all(
 						"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
@@ -369,19 +384,19 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 					{
 						if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
 						{
-							$tpl->u_prof_cmt_c_li_created	= $comment['created'];
-							$tpl->u_prof_cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1);
+							$tpl->cmt_c_li_created	= $comment['created'];
+							$tpl->cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1);
 						}
 					}
 				}
 				else
 				{
-					$tpl->u_prof_cmt_none = true;
+					$tpl->cmt_none = true;
 				}
 			}
 			else
 			{
-				$tpl->u_prof_cmtdisabled = true;
+				$tpl->cmtdisabled = true;
 			}
 
 			// last user uploads
@@ -390,13 +405,15 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			{
 				if ($this->db->attachments_handler == 2 || $this->db->upload == 1 || $this->is_admin())
 				{
-					$tpl->u_prof_up_u_n = $user['total_uploads'];
+					$tpl->enter('up_');
+
+					$tpl->u_n = $user['total_uploads'];
 
 					if ($user['total_uploads'])
 					{
 						$pagination = $this->pagination($user['total_uploads'], 10, 'u', $profile + ['#' => 'comments']);
 
-						$tpl->u_prof_up_u_u2_pagination_text = $pagination['text'];
+						$tpl->u_u2_pagination_text = $pagination['text'];
 
 						$uploads = $this->db->load_all(
 							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
@@ -454,25 +471,30 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 									$on_page	= '<span title="">→ ' . $this->_t('UploadGlobal');
 								}
 
-								$tpl->u_prof_up_u_u2_li_t		= $upload['uploaded_dt'];
-								# $tpl->u_prof_up_u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
-								$tpl->u_prof_up_u_u2_li_link	= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
-								$tpl->u_prof_up_u_u2_li_onpage	= $on_page;
-								$tpl->u_prof_up_u_u2_li_descr	= $file_description;
+								$tpl->u_u2_li_t		= $upload['uploaded_dt'];
+								# $tpl->u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
+								$tpl->u_u2_li_link	= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+								$tpl->u_u2_li_onpage	= $on_page;
+								$tpl->u_u2_li_descr	= $file_description;
 							}
 						}
 					}
 					else
 					{
-						$tpl->u_prof_up_u_none = true;
+						$tpl->u_none = true;
 					}
+
+					$tpl->leave();	// up_
 				}
 				else
 				{
-					$tpl->u_prof_up = true;
+					$tpl->up = true;
 				}
 			}
 		}
+
+		$tpl->leave();	//	prof_
+		$tpl->leave();	//	u_
 	}
 }
 // USERLIST
@@ -558,21 +580,23 @@ else
 		"FROM " . $this->db->user_table . " u " .
 		$sql_where, true);
 
+	$tpl->enter('l_');
+
 	if ($group_id)
 	{
-		$tpl->l_groups_members = $count['n'];
+		$tpl->groups_members = $count['n'];
 	}
 	else
 	{
 		// user filter form
-		$tpl->l_form_href = $this->href();
-		$tpl->l_form_user = $_user;
+		$tpl->form_href = $this->href();
+		$tpl->form_user = $_user;
 
 		// hide params into search form fields
 		foreach ($params as $param => $value)
 		{
-			$tpl->l_form_hid_param = $param;
-			$tpl->l_form_hid_value = $value;
+			$tpl->form_hid_param = $param;
+			$tpl->form_hid_value = $value;
 		}
 	}
 
@@ -587,12 +611,12 @@ else
 		$sql_order .
 		$pagination['limit'], true);
 
-	$tpl->l_pagination_text = $pagination['text'];
+	$tpl->pagination_text = $pagination['text'];
 
 	// change sorting order navigation bar
 	$sort_link = function ($sort, $text) use ($params, &$tpl)
 	{
-		$tpl->l_s_what	= $this->_t($text);
+		$tpl->s_what	= $this->_t($text);
 		$order			= 'asc';
 
 		if (@$params['sort'] == $sort)
@@ -602,7 +626,7 @@ else
 				$order = 'desc';
 			}
 
-			$tpl->l_s_arrow_a = $order;
+			$tpl->s_arrow_a = $order;
 		}
 		else
 		{
@@ -611,7 +635,7 @@ else
 
 		$params['order'] = $order;
 
-		$tpl->l_s_link = $this->href('', '', $params);
+		$tpl->s_link = $this->href('', '', $params);
 	};
 
 	$sort_link('name',		'UsersName');
@@ -629,32 +653,38 @@ else
 	// list entries
 	if (!$users)
 	{
-		$tpl->l_none = true;
+		$tpl->none = true;
 	}
 	else
 	{
+		$tpl->enter('u_');
+
 		foreach ($users as $user)
 		{
-			$tpl->l_u_user = $user;
-			$tpl->l_u_link = $this->user_link($user['user_name'], $user['account_lang'], true, false);
+			$tpl->user = $user;
+			$tpl->link = $this->user_link($user['user_name'], $user['account_lang'], true, false);
 
 			if ($logged_in)
 			{
-				$tpl->l_u_reg_user = $user;
+				$tpl->reg_user = $user;
 
 				if ($user['hide_lastsession'])
 				{
-					$tpl->l_u_reg_sess_hidden = true;
+					$tpl->reg_sess_hidden = true;
 				}
 				else if ($this->db->is_null_date($user['last_visit']))
 				{
-					$tpl->l_u_reg_sess_na = true;
+					$tpl->reg_sess_na = true;
 				}
 				else
 				{
-					$tpl->l_u_reg_sess_last_visit = $user['last_visit'];
+					$tpl->reg_sess_last_visit = $user['last_visit'];
 				}
 			}
 		}
+
+		$tpl->leave();	//	u_
 	}
+
+	$tpl->leave();	//	l_
 }
