@@ -17,6 +17,7 @@ _common include file for themes
 	=]
 	<meta name="language" content="[ ' lang ' ]">
 	<link rel="stylesheet" href="[ ' db: theme_url ' ]css/default.css">
+	<link rel="stylesheet" href="[ ' db: theme_url ' ]css/wacko.css">
 	[= x11 _ =
 		<link rel="stylesheet" href="[ ' colors ' ]">
 	=]
