@@ -663,14 +663,14 @@ class Http
 		return $types[$ext] ?? 'application/octet-stream';
 	}
 
-	public function sendfile($path, $filename = null)
+	public function sendfile($path, $filename = null, $age = null)
 	{
 		header_remove();
 		set_time_limit(0);
 		isset($this->sess)  and  $this->sess->write_close();
 
 		// allow to be called sendfile(404)
-		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename))))
+		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename, $age))))
 		{
 			$this->status($code);
 
