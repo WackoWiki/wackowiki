@@ -142,17 +142,22 @@ class Wacko
 	}
 
 	// MISC
-	function get_page_tag($page_id = 0) : string
+	function get_page_tag($page_id = 0) : ?string
 	{
-		// TODO: $page_id = 0 ?
+		if (!$page_id)
+		{
+			return null;
+		}
+		else
+		{
+			$page = $this->db->load_single(
+				"SELECT tag " .
+				"FROM " . $this->db->table_prefix . "page " .
+				"WHERE page_id = " . (int) $page_id . " " .
+				"LIMIT 1", true);
 
-		$page = $this->db->load_single(
-			"SELECT tag " .
-			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE page_id = " . (int) $page_id . " " .
-			"LIMIT 1", true);
-
-		return $page['tag'];
+			return $page['tag'];
+		}
 	}
 
 	function get_page_id($tag = '') : ?int
