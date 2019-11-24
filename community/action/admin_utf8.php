@@ -18,9 +18,9 @@ if (!defined('IN_WACKO'))
  *    1.1. Convert all tables based on charset to utf8mb4
  *    1.2. Convert all cross charset records
  * 2. Post-Upgrade Routines for R6.x
- *    2.1. Remove column 'converted' from tables
- *    2.2. Reset upsized TEXT columns back to TEXT or MEDIUMTEXT
- *    2.3. Convert HTML entities to their corresponding Unicode characters
+ *    2.1. Reset upsized TEXT columns back to TEXT or MEDIUMTEXT
+ *    2.2. Convert HTML entities to their corresponding Unicode characters
+ *    2.3. Remove column 'converted' from tables
  */
 
 /* TODO:
@@ -580,44 +580,7 @@ if ($this->is_admin())
 
 	echo '<h2>2. Post-Upgrade Routines for R6.x</h2>';
 
-	echo '<h3>2.1. Remove column \'converted\' from tables:</h3>';
-
-	if (!isset($_POST['remove_converted_column']))
-	{
-		echo $this->form_open();
-		echo '<input type="submit" name="remove_converted_column" value="' . $this->_t('UpdateButton') . '">';
-		echo $this->form_close();
-	}
-	else if (isset($_POST['remove_converted_column']))
-	{
-		// tables having 'converted' column to avoid double conversion
-		$tables = [
-			'category',
-			'file',
-			'menu',
-			'page',
-			'revision',
-			'user',
-			'usergroup',
-		];
-
-		// drop field 'converted'
-		foreach ($tables as $table)
-		{
-			$this->db->sql_query("ALTER TABLE " . $prefix . $table . " DROP converted;");
-		}
-
-		$results =
-			'<strong>' . date('H:i:s') . ' - ' . 'Droped column \'converted\' from tables' . "\n" .
-			'================================================</strong>' . "\n";
-
-		echo
-			'<div class="code">' .
-				'<pre>' . $results . '</pre>' .
-			'</div><br>';
-	}
-
-	echo '<h3>2.2. Reset upsized TEXT columns back to TEXT or MEDIUMTEXT:</h3>';
+	echo '<h3>2.1. Reset upsized TEXT columns back to TEXT or MEDIUMTEXT:</h3>';
 
 	if (!isset($_POST['reset_text_column']))
 	{
@@ -669,7 +632,7 @@ if ($this->is_admin())
 
 	if (version_compare($this->db->wacko_version, '6.0.beta1' , '>='))
 	{
-		echo '<h3>2.3. Convert HTML entities to their corresponding Unicode characters:</h3>';
+		echo '<h3>2.2. Convert HTML entities to their corresponding Unicode characters:</h3>';
 
 		if (!isset($_POST['convert_html_entities']))
 		{
@@ -833,6 +796,42 @@ if ($this->is_admin())
 					'<pre>' . $results . '</pre>' .
 				'</div><br>';
 		}
-	}
 
+		echo '<h3>2.3. Remove column \'converted\' from tables:</h3>';
+
+		if (!isset($_POST['remove_converted_column']))
+		{
+			echo $this->form_open();
+			echo '<input type="submit" name="remove_converted_column" value="' . $this->_t('UpdateButton') . '">';
+			echo $this->form_close();
+		}
+		else if (isset($_POST['remove_converted_column']))
+		{
+			// tables having 'converted' column to avoid double conversion
+			$tables = [
+				'category',
+				'file',
+				'menu',
+				'page',
+				'revision',
+				'user',
+				'usergroup',
+			];
+
+			// drop field 'converted'
+			foreach ($tables as $table)
+			{
+				$this->db->sql_query("ALTER TABLE " . $prefix . $table . " DROP converted;");
+			}
+
+			$results =
+				'<strong>' . date('H:i:s') . ' - ' . 'Droped column \'converted\' from tables' . "\n" .
+				'================================================</strong>' . "\n";
+
+			echo
+				'<div class="code">' .
+					'<pre>' . $results . '</pre>' .
+				'</div><br>';
+		}
+	}
 }
