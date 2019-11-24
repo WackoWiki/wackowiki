@@ -96,6 +96,10 @@ else // login
 		{
 			$error = $this->_t('CaptchaFailed');
 		}
+		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
+		{
+			$error = $this->_t('InvalidUserName');
+		}
 		else
 		{
 			// let's begin pessimistically ;)
