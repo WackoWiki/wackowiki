@@ -96,7 +96,7 @@ else // login
 		{
 			$error = $this->_t('CaptchaFailed');
 		}
-		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
+		else if (!preg_match('/^([' . $this->language['ALPHANUM_P'] . ']+)$/', $user_name) || preg_match('/\//', $user_name))
 		{
 			$error = $this->_t('InvalidUserName');
 		}
