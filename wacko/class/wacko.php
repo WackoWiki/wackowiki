@@ -1681,12 +1681,12 @@ class Wacko
 		}
 		else if ($this->forum || $comment_on_id)
 		{
-			$owner_id	= 0; // GUEST
+			$owner_id	= $user_id	= 0; // GUEST
 			$reg		= false;
 		}
 		else
 		{
-			$owner_id	= 0;
+			$owner_id	= $user_id	= 0;
 			$reg		= false;
 		}
 
