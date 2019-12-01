@@ -44,6 +44,8 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	// checking new topic input if any
 	if (@$_POST['_action'] === 'add_topic' && $create_access)
 	{
+		$error	= '';
+
 		if (@$_POST['title'])
 		{
 			$topic_name		= trim($_POST['title'], ". \t");
@@ -244,7 +246,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 					$tpl->href		= $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]);
 					$tpl->created	= $comment['created'];
 
-					$tpl->leave();
+					$tpl->leave(); // c_
 				}
 				else
 				{
@@ -253,7 +255,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 			}
 		}
 
-		$tpl->leave();
+		$tpl->leave(); // r_
 
 		// mark all topis read
 		if ($user)
@@ -268,8 +270,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 		$tpl->form_href = $this->href();
 	}
 
-	$tpl->leave();
-
+	$tpl->leave(); // t_
 	$tpl->leave(); // topics_
 }
 else
