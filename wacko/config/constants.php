@@ -86,7 +86,7 @@ const TRANSLIT_LOAD					= 0;
 const TRANSLIT_DONTLOAD				= 1;
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '5.5.15';
+const WACKO_VERSION					= '5.5.16';
 const HTML_ENTITIES_CHARSET			= 'ISO-8859-1';
 const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
