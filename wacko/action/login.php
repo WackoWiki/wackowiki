@@ -98,7 +98,7 @@ else // login
 		}
 		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
 		{
-			$error = $this->_t('InvalidUserName') . " ";
+			$error = $this->_t('InvalidUserName');
 		}
 		else
 		{

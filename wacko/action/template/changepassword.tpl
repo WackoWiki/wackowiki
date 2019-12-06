@@ -18,7 +18,7 @@
 				=]
 				<p>
 					<label for="new_password">[ ' _t: NewPassword ' ]:</label>
-					<input type="password" id="new_password" name="new_password" minlength="[ ' minchars ' ]" size="24" required>
+					<input type="password" id="new_password" name="new_password" minlength="[ ' minchars ' ]" size="24" required autofocus>
 				</p>
 				<p>
 					<label for="conf_password">[ ' _t: ConfirmPassword ']:</label>
