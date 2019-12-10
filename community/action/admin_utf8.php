@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 /*
  * status: beta
- * https://wackowiki.org/doc/Dev/Release/R6.0/Unicode/DatebaseConversionScript
+ * https://wackowiki.org/doc/Dev/Release/R6.0/Upgrade/DatabaseConversion
  * modify the script for your needs, please conribute your improvements
  *
  * 1. Pre-Upgrade Routines for R6.x
