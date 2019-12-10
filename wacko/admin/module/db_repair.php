@@ -133,7 +133,7 @@ function admin_db_repair(&$engine, &$module)
 		<p><?php echo $engine->_t('DbOptimizeRepairInfo'); ?></p>
 		<br>
 		<?php
-		echo $engine->form_open('repair');
+		echo $engine->form_open('optimize_repair');
 		?>
 		<input type="hidden" name="action" value="2">
 		<input type="submit" name="repair" id="submit" value="<?php echo $engine->_t('DbOptimizeRepair');?>">
