@@ -78,7 +78,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['set_large_prefix_tables']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('large_prefix');
 			echo '<input type="submit" name="set_large_prefix_tables" value="' . $this->_t('UpdateButton') . '">';
 			echo $this->form_close();
 		}
@@ -125,7 +125,7 @@ if ($this->is_admin())
 
 	if (!isset($_POST['set_charset_tables']))
 	{
-		echo $this->form_open();
+		echo $this->form_open('charset_tables');
 		echo '<input type="submit" name="set_charset_tables" value="' . $this->_t('UpdateButton') . '">';
 		echo $this->form_close();
 	}
@@ -203,7 +203,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['set_charset_record']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('charset_records');
 			echo '<input type="submit" name="set_charset_record" value="' . $this->_t('UpdateButton') . '">';
 			echo $this->form_close();
 		}
@@ -584,7 +584,7 @@ if ($this->is_admin())
 
 	if (!isset($_POST['reset_text_column']))
 	{
-		echo $this->form_open();
+		echo $this->form_open('reset_text');
 		echo '<input type="submit" name="reset_text_column" value="' . $this->_t('UpdateButton') . '">';
 		echo $this->form_close();
 	}
@@ -636,7 +636,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['convert_html_entities']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('html_entities');
 			echo '<input type="submit" name="convert_html_entities" value="' . $this->_t('UpdateButton') . '">';
 			echo $this->form_close();
 		}
@@ -801,7 +801,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['remove_converted_column']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('converted_column');
 			echo '<input type="submit" name="remove_converted_column" value="' . $this->_t('UpdateButton') . '">';
 			echo $this->form_close();
 		}

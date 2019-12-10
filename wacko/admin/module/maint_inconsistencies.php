@@ -342,6 +342,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			</tr>
 			<?php
 			$matches = 0;
+
 			foreach ($inconsistencies as $param => $value)
 			{
 				if ($value[1] >= 1)
@@ -375,7 +376,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			}
 			else
 			{
-				echo $engine->form_open('db_inconsistencies');
+				echo $engine->form_open('solve_db_inconsistencies');
 				?>
 				<br>
 				<input type="hidden" name="db_action" value="check_inconsistencies">
@@ -843,7 +844,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				}
 				else
 				{
-					echo $engine->form_open('file_inconsistencies');
+					echo $engine->form_open('solve_file_inconsistencies');
 					?>
 					<br>
 					<input type="hidden" name="file_action" value="check_inconsistencies">
@@ -871,7 +872,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		<h2><?php echo $engine->_t('CheckDatabase'); ?></h2>
 		<?php
 		echo '<p>' . $engine->_t('CheckDatabaseInfo') . '</p><br>';
-		echo $engine->form_open('db_inconsistencies');
+		echo $engine->form_open('check_db_inconsistencies');
 		?>
 		<input type="hidden" name="db_action" value="check_inconsistencies">
 		<input type="submit" name="db_check" id="submit" value="<?php echo $engine->_t('Check');?>">
@@ -882,7 +883,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		<h2><?php echo $engine->_t('CheckFiles'); ?></h2>
 		<?php
 		echo '<p>' . $engine->_t('CheckFilesInfo') . '</p><br>';
-		echo $engine->form_open('file_inconsistencies');
+		echo $engine->form_open('check_file_inconsistencies');
 		?>
 		<input type="hidden" name="file_action" value="check_inconsistencies">
 		<input type="submit" name="file_check" id="submit" value="<?php echo $engine->_t('Check');?>">

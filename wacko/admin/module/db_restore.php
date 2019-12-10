@@ -80,7 +80,7 @@ function admin_db_restore(&$engine, &$module)
 			// read backup log
 			$log = file(Ut::join_path($dir, $backup_id, BACKUP_FILE_LOG), FILE_IGNORE_NEW_LINES);
 
-			echo $engine->form_open('delete_backup');
+			echo $engine->form_open('restore_backup');
 
 			// check for possible backwards compatibility issues if the version differs
 			if ($log[6] !== WACKO_VERSION)

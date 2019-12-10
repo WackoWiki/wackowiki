@@ -26,7 +26,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['set_title']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('set_title');
 			?>
 			<input type="submit" name="set_title"  value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
@@ -88,7 +88,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['set_depth']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('set_depth');
 			?>
 			<input type="submit" name="set_depth"  value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
@@ -143,7 +143,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['set_version_id']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('set_version_id');
 			?>
 			<input type="submit" name="set_version_id" value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
@@ -204,7 +204,7 @@ if ($this->is_admin())
 
 		if (!isset($_POST['set_missing_permissions']))
 		{
-			echo $this->form_open();
+			echo $this->form_open('set_missing_permissions');
 			?>
 			<input type="submit" name="set_missing_permissions" value="<?php echo $this->_t('UpdateButton');?>">
 			<?php
@@ -270,7 +270,7 @@ if ($this->is_admin())
 		if (!isset($_POST['migrate_acls']))
 		{
 			echo "<h3>7. Migrates acls to new scheme:</h3>";
-			echo $this->form_open();
+			echo $this->form_open('migrate_acls');
 			?>
 			<input type="submit" name="migrate_acls" value="<?php echo $this->_t('CategoriesSaveButton');?>">
 			<?php
