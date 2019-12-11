@@ -194,7 +194,7 @@ class XML_HTMLSax3_StateParser {
 	 */
 	function scanCharacter() {
 		if ($this->position < $this->length) {
-			return $this->rawtext{$this->position++};
+			return $this->rawtext[$this->position++];
 		}
 	}
 
