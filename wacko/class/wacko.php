@@ -5616,7 +5616,7 @@ class Wacko
 		{
 			#$this->reload_me();
 			return;
-		};
+		}
 
 		$this->db->sql_query('
 			INSERT INTO ' . $this->db->table_prefix . 'acl (
