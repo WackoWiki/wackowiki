@@ -3072,7 +3072,7 @@ class Wacko
 		}
 
 		$tag = trim($tag, '/.');
-		// $tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
+		$tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
 
 		return $tag . ($method ? '/' . $method : '');
 	}
