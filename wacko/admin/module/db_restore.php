@@ -204,7 +204,7 @@ function admin_db_restore(&$engine, &$module)
 							<td colspan="2">
 								<strong>' . $engine->_t('RestoreOptions') . ':</strong><br>
 								<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1">
-								<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeys') . ' *</small></label><br>
+								<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeysNr') . ' *</small></label><br>
 								<input type="checkbox" id="ignore_files" name="ignore_files" value="1">
 								<label for="ignore_files"><small>' . $engine->_t('IgnoreSameFiles') . ' **</small></label><br>
 							</td>
