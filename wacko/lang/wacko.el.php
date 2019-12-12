@@ -6,7 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = [
+
+	// common
+	'StoreButton'				=> 'Save',
+	'UpdateButton'				=> 'Update',
+	'CancelButton'				=> 'Cancel',
+	'ConvertButton'				=> 'Convert',
+
 	'FormInvalid'				=> 'Η υποβληθείσα μορφή ήταν άκυρη. Προσπαθήστε πάλι.',
+
 	// logged in panel
 	'YouAre'					=> 'Είσαι ο ',
 	'AccountText'				=> 'Ο λογαριασμός μου',
@@ -287,7 +295,6 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Δεν έχει επιλεγεί καμμία κατηγορία.',
 	'TagCloud'					=> 'Σύννεφο ετικετών',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
-	'UpdateButton'				=> 'Update',
 	'CategoriesOfCluster'		=> 'of cluster',
 	'TaggedWithTip'				=> 'εμφάνιση σελίδων με %1',
 

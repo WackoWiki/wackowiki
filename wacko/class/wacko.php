@@ -6756,7 +6756,7 @@ class Wacko
 			if (empty($page) && !$tag)
 			{
 				$this->http->status(404);
-				$this->set_message($this->_t('InvalidNamespace'), 'error', false);
+				$this->set_message($this->_t('InvalidNamespace'), 'error');
 				$this->ensure_page();
 			}
 

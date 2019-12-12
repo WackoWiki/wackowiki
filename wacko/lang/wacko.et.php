@@ -6,7 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = [
+
+	// common
+	'StoreButton'				=> 'Save',
+	'UpdateButton'				=> 'Uuenda',
+	'CancelButton'				=> 'Cancel',
+	'ConvertButton'				=> 'Convert',
+
 	'FormInvalid'				=> 'Esitatud avaldus oli ebakorrektne. Proovi see uuesti esitada.',
+
 	// logged in panel
 	'YouAre'					=> 'Tere tulemast, ',
 	'AccountText'				=> 'Minu andmed',
@@ -287,7 +295,6 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'No category selected.',
 	'TagCloud'					=> 'Tag Cloud',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
-	'UpdateButton'				=> 'Uuenda',
 	'CategoriesOfCluster'		=> 'of cluster',
 	'TaggedWithTip'				=> 'kuva lehed märksõnaga %1',
 
