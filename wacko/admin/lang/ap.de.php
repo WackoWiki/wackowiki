@@ -1057,7 +1057,7 @@ $ap_translation = [
 									'** Wenn die Sicherung die Benutzerdateien (global und perpage, Cache-Dateien usw.) enthält, ' .
 									'ersetzen sie im normalen Modus die vorhandenen Dateien mit denselben Namen und werden beim Wiederherstellen in demselben Verzeichnis abgelegt. ' .
 									'Mit dieser Option kann man die aktuellen Kopien der Dateien speichern und aus einer Sicherung nur neue Dateien (auf dem Server nicht vorhandene) wiederherstellen.',
-	'IgnoreDuplicatedKeys'		=> 'Ignoriere doppelte Tabellenschlüssel (nicht ersetzen)',
+	'IgnoreDuplicatedKeysNr'	=> 'Ignoriere doppelte Tabellenschlüssel (nicht ersetzen)',
 	'IgnoreSameFiles'			=> 'Ignoriere die gleichen Dateien (nicht überschreiben)',
 	'NoBackupsAvailable'		=> 'Keien Datensicherung verfügbar.',
 	'BackupEntireSite'			=> 'Gesamte Website',

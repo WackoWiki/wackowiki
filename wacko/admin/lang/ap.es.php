@@ -1042,7 +1042,7 @@ $ap_translation = [
 									'** Si el backup contiene los archivos de usuario (global y por página, archivos cache, etc.), ' .
 									'en modo normal serán sustituidos al rastaurar con igual nombre y en la misma ubicación de directorio. ' .
 									'Esta opción permite guardar los archivos actuales y restaurar de un backup solamente los archivos nuevos (que faltan en el servidor).',
-	'IgnoreDuplicatedKeys'		=> 'Ignorar claves duplicadas de tabla (no reemplazar)',
+	'IgnoreDuplicatedKeysNr'	=> 'Ignorar claves duplicadas de tabla (no reemplazar)',
 	'IgnoreSameFiles'			=> 'Ignorar archivos iguales (no sobreescribir)',
 	'NoBackupsAvailable'		=> 'No existe backup.',
 	'BackupEntireSite'			=> 'Sitio completo',

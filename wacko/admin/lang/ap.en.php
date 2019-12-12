@@ -1048,7 +1048,7 @@ $ap_translation = [
 									'** If the backup contains the user files (global and perpage, cache files, etc.), ' .
 									'in normal mode they replace the existing files with the same names and are placed in the same directory when being restored. ' .
 									'This option allows you to save the current copies of the files and restore from a backup only new files (missing on the server).',
-	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated table keys (not replace)',
+	'IgnoreDuplicatedKeysNr'	=> 'Ignore duplicated table keys (not replace)',
 	'IgnoreSameFiles'			=> 'Ignore same files (not overwrite)',
 	'NoBackupsAvailable'		=> 'No backups available.',
 	'BackupEntireSite'			=> 'Entire site',
