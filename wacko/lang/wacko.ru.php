@@ -6,7 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = [
+
+	// common
+	'StoreButton'				=> 'Save',
+	'UpdateButton'				=> 'Обновить',
+	'CancelButton'				=> 'Cancel',
+	'ConvertButton'				=> 'Convert',
+
 	'FormInvalid'				=> 'Ошибка отправки формы. Попробуйте ещё раз.',
+
 	// logged in panel
 	'YouAre'					=> 'Вы ',
 	'AccountText'				=> 'Профиль',
@@ -288,7 +296,6 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Категория не выбрана.',
 	'TagCloud'					=> 'Облако тегов',
 	'PagesTaggedWith'			=> '%1 страницы отмечены тегом %2',
-	'UpdateButton'				=> 'Обновить',
 	'CategoriesOfCluster'		=> 'кластера',
 	'TaggedWithTip'				=> 'отображение страниц с тегами %1',
 

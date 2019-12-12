@@ -6,7 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = [
+
+	// common
+	'StoreButton'				=> 'Save',
+	'UpdateButton'				=> 'Update',
+	'CancelButton'				=> 'Cancel',
+	'ConvertButton'				=> 'Convert',
+
 	'FormInvalid'				=> 'Den indsendte formular var ugyldig. Prøv at indsende igen.',
+
 	// logged in panel
 	'YouAre'					=> 'Du er ',
 	'AccountText'				=> 'Min konto',
@@ -287,7 +295,6 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Ingen kategori valgt.',
 	'TagCloud'					=> 'Ordsky',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
-	'UpdateButton'				=> 'Update',
 	'CategoriesOfCluster'		=> 'of cluster',
 	'TaggedWithTip'				=> 'Vis sider mærket med %1',
 

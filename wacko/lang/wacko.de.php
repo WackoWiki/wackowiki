@@ -9,7 +9,7 @@ $wacko_translation = [
 
 	// common
 	'StoreButton'				=> 'Speichern',
-	'UpdateButton'				=> 'Aktualisieren', // move up
+	'UpdateButton'				=> 'Aktualisieren',
 	'CancelButton'				=> 'Abbrechen',
 	'ConvertButton'				=> 'Convert',
 
@@ -295,7 +295,6 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Es wurden keine Kategorie ausgewählt.',
 	'TagCloud'					=> 'Wortwolke',
 	'PagesTaggedWith'			=> '%1 Seiten getaggt mit %2',
-	'UpdateButton'				=> 'Aktualisieren',
 	'CategoriesOfCluster'		=> 'des Clusters',
 	'TaggedWithTip'				=> 'Zeige mit %1 gekennzeichnet Seiten.',
 

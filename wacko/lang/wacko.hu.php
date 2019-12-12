@@ -6,7 +6,15 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_translation = [
+
+	// common
+	'StoreButton'				=> 'Save',
+	'UpdateButton'				=> 'Frissítés',
+	'CancelButton'				=> 'Cancel',
+	'ConvertButton'				=> 'Convert',
+
 	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+
 	// logged in panel
 	'YouAre'					=> 'Belépett felhasználó ',
 	'AccountText'				=> 'Fiók',
@@ -287,7 +295,6 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'No category selected.',
 	'TagCloud'					=> 'Tag Cloud',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
-	'UpdateButton'				=> 'Frissítés',
 	'CategoriesOfCluster'		=> 'of cluster',
 	'TaggedWithTip'				=> 'Mutassa a %1 címkével ellátott oldalakat',
 
