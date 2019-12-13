@@ -24,8 +24,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Wiederherstellungs-Modus',
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Bitte gib das Administratorkennwort ein (und stelle sicher, dass Cookies von deinem Browser akzeptiert werden).',
-	'NoRecoceryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
-	'NoRecoceryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
+	'NoRecoveryPassword'		=> 'Das Administrator-Passwort wurde nicht gesetzt!',
+	'NoRecoveryPasswordTip'		=> 'Hinweis: Das Fehlen eines Administrator-Passworts ist eine Bedrohung für die Sicherheit! Gib das Passwort in der Konfigurationsdatei an und starte das Programm erneut.',
 
 	'ErrorLoadingModule'		=> 'Fehler beim Laden des Admin-Moduls %1: existiert nicht.',
 
