@@ -59,7 +59,7 @@ if (!$engine->db->recovery_password)
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
 	?>
 	<!DOCTYPE html>
-	<html>
+	<html lang="<?php echo $engine->db->language; ?>">
 		<head>
 			<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 			<meta name="robots" content="noindex, nofollow, noarchive">
@@ -71,8 +71,8 @@ if (!$engine->db->recovery_password)
 			<div id="mainwrapper">
 				<div id="loginbox">
 				<?php
-					echo '<strong>' . $engine->_t('NoRecoceryPassword') . '</strong><br><br>';
-					echo $engine->_t('NoRecoceryPasswordTip');
+					echo '<strong>' . $engine->_t('NoRecoveryPassword') . '</strong><br><br>';
+					echo $engine->_t('NoRecoveryPasswordTip');
 				?>
 				</div>
 			</div>
@@ -143,7 +143,7 @@ if (!isset($engine->sess->ap_created))
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo $engine->db->language; ?>">
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
@@ -279,7 +279,7 @@ unset($category);
 header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo $engine->db->language; ?>">
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">

@@ -24,8 +24,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Modo de recuperación',
 	'Authorization'				=> 'Autorización',
 	'AuthorizationTip'			=> 'Por favor ingrese la contraseña del administrador (asegúrese que su navegador permita cookies).',
-	'NoRecoceryPassword'		=> 'Contraseña administrativa no especificada!',
-	'NoRecoceryPasswordTip'		=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
+	'NoRecoveryPassword'		=> 'Contraseña administrativa no especificada!',
+	'NoRecoveryPasswordTip'		=> 'Observación: La falta de una contraseña administrativa es un riesgo de seguridad! Ingrese la contraseña en el archivo de configuración y vuelva a ejecutar el programa.',
 
 	'ErrorLoadingModule'		=> 'Error cargar admin module %1: no existe.',
 

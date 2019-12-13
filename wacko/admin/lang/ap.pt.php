@@ -24,8 +24,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Modo de recuperação',
 	'Authorization'				=> 'Autorização',
 	'AuthorizationTip'			=> 'Digite a senha administrativa (certifique-se também de que os cookies são permitidos no seu navegador).',
-	'NoRecoceryPassword'		=> 'A senha administrativa não é especificada!',
-	'NoRecoceryPasswordTip'		=> 'Nota: A ausência de uma senha administrativa é uma ameaça à segurança! Digite sua senha no arquivo de configuração e execute o programa novamente.',
+	'NoRecoveryPassword'		=> 'A senha administrativa não é especificada!',
+	'NoRecoveryPasswordTip'		=> 'Nota: A ausência de uma senha administrativa é uma ameaça à segurança! Digite sua senha no arquivo de configuração e execute o programa novamente.',
 
 	'ErrorLoadingModule'		=> 'Erro ao carregar o módulo admin %1: não existe.',
 
