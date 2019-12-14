@@ -21,8 +21,8 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
 	#		|| $this->is_admin() // XXX: Only for testing - comment out afterwards!
-	|| ($this->page['comment_on_id'] && $this->is_owner())
-	|| ($this->page['comment_on_id'] && $this->is_admin())
+	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_owner())
+	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_admin())
 	|| (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word
@@ -229,7 +229,6 @@ if ($this->has_access('read')
 	// fetch fields
 	$previous	= $_POST['previous']	?? $this->page['modified'];
 	$body		= $_POST['body']		?? $this->page['body'];
-	# $body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);			// XXX: R5 html entity legacy
 	$title		= $_POST['title']
 					?? $this->page['title']
 						?? (isset($this->sess->title)
@@ -238,7 +237,6 @@ if ($this->has_access('read')
 								: $this->sess->title)
 							: $this->get_page_title($this->tag)
 						);
-	# $title		= html_entity_decode($title, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);	// XXX: R5 html entity legacy
 
 	$edit_note	= (string)	($_POST['edit_note']	?? '');
 	$minor_edit	= (int)		($_POST['minor_edit']	?? 0);

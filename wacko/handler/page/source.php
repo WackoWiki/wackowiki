@@ -12,6 +12,11 @@ if (!defined('IN_WACKO'))
 */
 
 # $this->ensure_page(true); // we allow comments, like we do in edit handler
+if (!$this->page)
+{
+	$this->http->status(404);
+	$this->http->redirect($this->href());
+}
 
 if ($this->has_access('read'))
 {

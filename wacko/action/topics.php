@@ -208,7 +208,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 				}
 
 				// check new comments
-				$updated = ($user['last_mark']
+				$updated = (isset($user['last_mark'])
 							&& (($comment['user_name'] != $user['user_name']
 									&& $comment['created'] > $user['last_mark'])
 								|| ($topic['owner_name'] != $user['user_name']

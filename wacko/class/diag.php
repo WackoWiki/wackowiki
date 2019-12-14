@@ -113,7 +113,7 @@ class Diag
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE chopped value: " . strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)) . "</li>\n";
 					echo "\t<li>User language set: " . (isset($user['user_lang']) ? 'true' : 'false') . "</li>\n";
 					echo "\t<li>User language value: " . ($user['user_lang'] ?? '') . "</li>\n";
-					echo "\t<li>Page language: " . $engine->page['page_lang']  . "</li>\n";
+					echo "\t<li>Page language: " . ($engine->page['page_lang'] ?? '')  . "</li>\n";
 					echo "\t<li>Config language: " . $config['language'] . "</li>\n";
 					echo "\t<li>User selected language: " . ($engine->user_lang ?? '') . "</li>\n";
 					echo "\t<li>Charset: " . $engine->get_charset() . "</li>\n";

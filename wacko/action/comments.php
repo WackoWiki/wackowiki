@@ -103,7 +103,7 @@ if ($this->user_allowed_comments())
 					$tpl->day = $curday = $day;
 				}
 
-				$tpl->l_viewed	= ($user['last_mark'] == true
+				$tpl->l_viewed	= (isset($user['last_mark'])
 									&& $page['comment_user'] != $user['user_name']
 									&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
