@@ -103,7 +103,7 @@ if ($this->user_allowed_comments())
 					$tpl->day = $curday = $day;
 				}
 
-				$tpl->l_viewed	= ($user['last_mark'] == true
+				$tpl->l_viewed	= (isset($user['last_mark'])
 									&& $page['comment_user'] != $user['user_name']
 									&& $page['comment_time'] > $user['last_mark'] ? ' class="viewed"' : '');
 
@@ -113,7 +113,7 @@ if ($this->user_allowed_comments())
 
 				// print entry
 				$tpl->l_time = $time;
-				$tpl->l_page = ($title == 1
+				$tpl->l_page = ($title
 					? $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
 					: $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, $page_lang, 0)
 				);

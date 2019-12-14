@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 #$include_tail = '</article>';
 
 // redirect from comment page to the commented one
-if ($this->page['comment_on_id'] && !$this->page['deleted'])
+if (isset($this->page['latest']) && $this->page['comment_on_id'] && !$this->page['deleted'])
 {
 	// count previous comments
 	$count = $this->db->load_single(
@@ -123,7 +123,10 @@ if ($this->has_access('read'))
 		$noid_protect	= $this->get_user_setting('noid_protect');
 
 		// clear new edits for watched page
-		if ($user && $this->page['latest'] != 0 && $this->watch['pending'] && !$noid_protect)
+		if ($user
+			&& (isset($this->page['latest']) && $this->page['latest'] != 0)
+			&& (isset($this->watch['pending']) && $this->watch['pending'])
+			&& !$noid_protect)
 		{
 			$this->clear_watch_pending($user['user_id'], $this->page['page_id']);
 		}
@@ -187,7 +190,7 @@ if ($this->forum
 }
 
 // page comments and files
-if ($this->method == 'show' && $this->page['latest'] > 0 && !$this->page['comment_on_id'])
+if ($this->method == 'show' && (isset($this->page['latest']) && $this->page['latest'] > 0) && !$this->page['comment_on_id'])
 {
 	// revoking payload
 	if (isset($this->sess->body))

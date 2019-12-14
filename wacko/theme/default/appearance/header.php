@@ -72,7 +72,7 @@ foreach ((array) $this->get_menu() as $menu_item)
 
 	$tpl->commit = true;
 
-	if ($this->page['page_id'] == $menu_item[0])
+	if (isset($this->page['page_id']) && $this->page['page_id'] == $menu_item[0])
 	{
 		$tpl->active_item	= $menu_item[1];
 	}

@@ -152,7 +152,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				$tpl->closed	= true;
 			}
 
-			if ($user['last_mark'] == true
+			if (isset($user['last_mark'])
 				&& $comment['user_name'] != $user['user_name']
 				&& $comment['created'] > $user['last_mark'])
 			{

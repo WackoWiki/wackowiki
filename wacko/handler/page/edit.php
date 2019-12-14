@@ -21,8 +21,8 @@ if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
 	#		|| $this->is_admin() // XXX: Only for testing - comment out afterwards!
-	|| ($this->page['comment_on_id'] && $this->is_owner())
-	|| ($this->page['comment_on_id'] && $this->is_admin())
+	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_owner())
+	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_admin())
 	|| (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word
@@ -207,7 +207,7 @@ if ($this->has_access('read')
 				$this->page_cache['supertag'][$this->supertag]			= '';
 				$this->page_cache['page_id'][$this->page['page_id']]	= '';
 
-				// show success message
+				// show success message (too much visual clutter)
 				/* $message	= $this->page['comment_on_id']
 					? $this->_t('CommentSaved')
 					: Ut::perc_replace($this->_t('PageSaved'), ($this->page['version_id'] + 1));

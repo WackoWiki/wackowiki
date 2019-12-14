@@ -99,4 +99,4 @@ if ($doubleclick)
 
 $tpl->additions = $this->get_html_addition('header');
 
-$tpl->leave();	// _h
+$tpl->leave();	// h_

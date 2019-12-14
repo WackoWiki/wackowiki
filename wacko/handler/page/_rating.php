@@ -56,16 +56,16 @@ if (handler_show_page_is_rated($this, $this->page['page_id']) === false
 }
 else
 {
-	$results = $this->db->load_single(
+	if ($results = $this->db->load_single(
 		"SELECT page_id, value, voters " .
 		"FROM " . $this->db->table_prefix . "rating " .
 		"WHERE page_id = {$this->page['page_id']} " .
-		"LIMIT 1");
-
-	if ($results['voters'] > 0)			$results['ratio'] = $results['value'] / $results['voters'];
-	if (is_float($results['ratio']))	$results['ratio'] = round($results['ratio'], 2);
-	if ($results['ratio'] > 0)			$results['ratio'] = '+' . $results['ratio'];
-
+		"LIMIT 1"))
+	{
+		if ($results['voters'] > 0)			$results['ratio'] = $results['value'] / $results['voters'];
+		if (is_float($results['ratio']))	$results['ratio'] = round($results['ratio'], 2);
+		if ($results['ratio'] > 0)			$results['ratio'] = '+' . $results['ratio'];
+	}
 	// display rating header
 	$tpl->title		= $this->_t('RatingHeaderResults');
 
