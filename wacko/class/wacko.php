@@ -178,7 +178,7 @@ class Wacko
 					"WHERE supertag = " . $this->db->q($supertag) . " " .
 					"LIMIT 1");
 
-				$page_id = $page['page_id'];
+				$page_id = $page['page_id'] ?? null;
 
 				// cache it
 				$this->page_id_cache[$tag] = $page_id;
@@ -1028,7 +1028,7 @@ class Wacko
 	{
 		$meta_description = '';
 
-		if ($this->page['description'])
+		if (!empty($this->page['description']))
 		{
 			$meta_description = $this->page['description'];
 		}
@@ -1166,7 +1166,7 @@ class Wacko
 							: "") .
 					"LIMIT 1");
 
-				$owner_id = $page['owner_id'];
+				$owner_id = $page['owner_id'] ?? 0;
 
 				if ($revision_id)
 				{
@@ -1289,8 +1289,8 @@ class Wacko
 	*/
 	function cache_page($page, $metadata_only = false)
 	{
-		// do not override the current page
-		if ($this->page['page_id'] == $page['page_id'] && $metadata_only)
+		// do not override current page
+		if ((isset($this->page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only) || empty($page))
 		{
 			return;
 		}
@@ -1569,7 +1569,7 @@ class Wacko
 
 	function set_page($page)
 	{
-		if ($page['deleted'] && !$this->is_admin())
+		if (isset($page['deleted']) && $page['deleted'] && !$this->is_admin())
 		{
 			$page['body']			= '';
 			$page['body_r']			= '';
@@ -1581,12 +1581,12 @@ class Wacko
 
 		$this->page	= $page;
 
-		if ($this->page['tag'])
+		if (isset($this->page['tag']))
 		{
 			$this->tag = $this->page['tag'];
 		}
 
-		if ($this->known_language($page['page_lang']))
+		if (isset($page['page_lang']) && $this->known_language($page['page_lang']))
 		{
 			$this->page_lang = $page['page_lang'];
 		}
@@ -5361,7 +5361,7 @@ class Wacko
 
 	function method($method)
 	{
-		if (!($handler = $this->page['handler']))
+		if (!($handler = $this->page['handler'] ?? null))
 		{
 			$handler = 'page';
 		}
@@ -6713,6 +6713,7 @@ class Wacko
 		}
 
 		$user_id = $this->db->system_user_id;
+
 		return $this->get_user_menu($user_id, $lang, true);
 	}
 
@@ -6780,7 +6781,7 @@ class Wacko
 		{
 			$menu = 0;
 
-			if ($set != MENU_DEFAULT)
+			if (isset($user['user_id']) && $set != MENU_DEFAULT)
 			{
 				$menu = $this->get_user_menu($user['user_id']);
 				$this->sess->menu_default = false;
@@ -7266,7 +7267,7 @@ class Wacko
 			if (empty($page) && !$tag)
 			{
 				$this->http->status(404);
-				$this->set_message($this->_t('InvalidNamespace'), 'error', false);
+				$this->set_message($this->_t('InvalidNamespace'), 'error');
 				$this->ensure_page();
 			}
 		}
@@ -7322,7 +7323,7 @@ class Wacko
 			unset($categories, $word);
 		}
 
-		if (!$user && $this->page['modified'])
+		if (!$user && isset($this->page['modified']))
 		{
 			header('Last-Modified: ' . Ut::http_date(strtotime($this->page['modified']) + 120));
 		}
@@ -7336,7 +7337,7 @@ class Wacko
 		$this->is_watched =
 			($user
 			&& $this->page
-			&& $this->watch['watch_id']);
+			&& (isset($this->watch['watch_id']) && $this->watch['watch_id']));
 
 		// check revision hideing (1 - guests, 2 - registered users)
 		$this->hide_revisions =
@@ -7348,7 +7349,7 @@ class Wacko
 		// forum page
 		$this->forum =
 			!! (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->tag)
-			|| ($this->page['comment_on_id']
+			|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id']
 				? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->get_page_tag($this->page['comment_on_id']))
 				: ''));
 
@@ -7372,7 +7373,11 @@ class Wacko
 				$mod = '';
 			}
 
-			$this->preload_links([$this->page['page_id']], true);
+			if (isset($this->page['page_id']))
+			{
+				$this->preload_links([$this->page['page_id']], true);
+			}
+
 			$this->current_context++;
 			$this->context[$this->current_context] = $this->tag;
 			$data = $this->method($this->method);

@@ -44,6 +44,8 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 	// checking new topic input if any
 	if (@$_POST['_action'] === 'add_topic' && $create_access)
 	{
+		$error	= '';
+
 		if (@$_POST['title'])
 		{
 			$topic_name		= trim($_POST['title'], ". \t");
@@ -206,7 +208,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 				}
 
 				// check new comments
-				$updated = ($user['last_mark']
+				$updated = (isset($user['last_mark'])
 							&& (($comment['user_name'] != $user['user_name']
 									&& $comment['created'] > $user['last_mark'])
 								|| ($topic['owner_name'] != $user['user_name']
@@ -250,7 +252,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 					$tpl->href		= $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]);
 					$tpl->created	= $comment['created'];
 
-					$tpl->leave();
+					$tpl->leave(); // c_
 				}
 				else
 				{
@@ -259,7 +261,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 			}
 		}
 
-		$tpl->leave();
+		$tpl->leave(); // r_
 
 		// mark all topis read
 		if ($user)
@@ -274,8 +276,7 @@ if (substr($this->tag, 0, strlen($this->db->forum_cluster)) == $this->db->forum_
 		$tpl->form_href = $this->href();
 	}
 
-	$tpl->leave();
-
+	$tpl->leave(); // t_
 	$tpl->leave(); // topics_
 }
 else

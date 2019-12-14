@@ -71,9 +71,9 @@ $mod_selector	= 'm';
 $tabs['show']	= 'FileViewProperties';
 
 if ($this->is_admin()
-	|| ($file['page_id']
+	|| (isset($file['page_id']) && $file['page_id']
 		&& $this->page['owner_id'] == $this->get_user_id())
-	|| $file['user_id'] == $this->get_user_id())
+	|| (isset($file['user_id']) && $file['user_id'] == $this->get_user_id()))
 {
 	$tabs['edit']	= 'FileEditProperties';
 	$tabs['label']	= 'FileLabel';
@@ -92,7 +92,7 @@ if (!array_key_exists($mode, $tabs))
 // print tabs
 $tpl->navigation	= $meta_navigation($can_upload);
 $tpl->mode			= $this->_t($tabs[$mode]);
-$tpl->tabs			= $this->tab_menu($tabs, $mode, 'filemeta', ['file_id' => $file['file_id']], $mod_selector);
+$tpl->tabs			= $this->tab_menu($tabs, $mode, 'filemeta', ['file_id' => ($file['file_id'] ?? null)], $mod_selector);
 
 // 1. SHOW FORMS
 if ($mode == 'remove' && isset($file))
