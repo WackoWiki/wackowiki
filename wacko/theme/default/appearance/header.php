@@ -87,7 +87,7 @@ $tpl->leave();
 if ($logged_in)
 {
 	// determines what it should show: "add to menu" or "remove from menu" icon
-	if (!in_array($this->page['page_id'], (array) $this->get_menu_links()))
+	if (isset($this->page['page_id']) && !in_array($this->page['page_id'], (array) $this->get_menu_links()))
 	{
 		$tpl->addmark_href		= $this->href('', '', ['addbookmark' => 1]);
 	}
