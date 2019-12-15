@@ -5507,7 +5507,7 @@ class Wacko
 		// set default tag
 		if (!$page_id)
 		{
-			$page_id = $this->page['page_id'];
+			$page_id = $this->page['page_id'] ?? null;
 		}
 
 		// check if user is owner
@@ -5551,11 +5551,11 @@ class Wacko
 		{
 			if (!$revision_id)
 			{
-				return $this->page['owner_id'];
+				return $this->page['owner_id'] ?? null;
 			}
 			else
 			{
-				$page_id = $this->page['page_id'];
+				$page_id = $this->page['page_id'] ?? null;
 			}
 		}
 
@@ -6819,7 +6819,7 @@ class Wacko
 			header('Last-Modified: ' . Ut::http_date(strtotime($this->page['modified']) + 120));
 		}
 
-		if ($user)
+		if ($user && isset($this->page['page_id']))
 		{
 			$this->watch = $this->is_watched($user['user_id'], $this->page['page_id']);
 		}
