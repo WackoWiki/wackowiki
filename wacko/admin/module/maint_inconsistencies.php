@@ -820,7 +820,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 								'</td>' .
 							'<tr class="lined"><td colspan="5"></td></tr>' . "\n";
 
-						// remove abondoned file
+						// remove abandoned file
 						if (isset($_POST['file_solve']))
 						{
 							unlink($file);

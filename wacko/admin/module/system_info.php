@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 ##########################################################
-##	System Informations									##
+##	System Information									##
 ##########################################################
 $_mode = 'system_info';
 
@@ -16,7 +16,7 @@ $module[$_mode] = [
 		'status'=> true,
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// System Info
-		'title'	=> $engine->_t($_mode)['title'],	// System Informations
+		'title'	=> $engine->_t($_mode)['title'],	// System Information
 	];
 
 ##########################################################

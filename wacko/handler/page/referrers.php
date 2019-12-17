@@ -148,7 +148,7 @@ $preload_acl = function ($referrers)
 	return $page_ids;
 };
 
-// check referrer permissions, and return link to referal wikipage, or '' if none available/accessible
+// check referrer permissions, and return link to referral wikipage, or '' if none available/accessible
 $check_ref = function ($ref)
 {
 	if (!($page_id = (int) $ref['page_id']))

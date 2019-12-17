@@ -69,7 +69,7 @@ if (isset($_POST['upload']) & $can_upload)
 			$ext		= $_data[count($_data) - 1];
 			unset($_data[count($_data) - 1]);
 
-			// TODO: filter against banned and then allowed file extentions / mime type
+			// TODO: filter against banned and then allowed file extensions / mime type
 			// see file_extension_check()
 			#php5", ".pht", ".phtml", ".shtml", ".asa", ".cer", ".asax", ".swf", or ".xap"
 			/*

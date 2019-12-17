@@ -90,7 +90,7 @@ function admin_config_appearance(&$engine, &$module)
 
 		$image['favicon']		= ['gif', 'ico' , 'jpeg', 'jpe', 'jpg', 'png', 'svg'];
 		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp'];
-		// calculate resonable filesize: Pixels * Bit Depth
+		// calculate reasonable filesize: Pixels * Bit Depth
 		// - GIF/PNG palette-based images (up to 8-bit)
 		// - Non-palette images (JPEG/PNG/TIFF/SVG) are 0, 8, or 16.
 		$max_size['favicon']	= 64 * 64 * 8;

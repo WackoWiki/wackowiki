@@ -1,7 +1,7 @@
 <?php
 
 /**
- * noautolinks formatter supressed links detection in wacko text
+ * noautolinks formatter suppressed links detection in wacko text
  */
 
 $this->_formatter_noautolinks = true;

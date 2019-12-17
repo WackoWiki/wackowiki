@@ -199,7 +199,7 @@ class SessionFileStore extends Session
 
 		if (@file_exists($fname))
 		{
-			// we REQUIRE existant session file to be writable usual file and not symlink
+			// we REQUIRE existent session file to be writable usual file and not symlink
 			if (!is_writable($fname) || is_link($fname) || !is_file($fname))
 			{
 				if (!$create)

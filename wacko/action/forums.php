@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 // {{forums [pages="subtag1, subtag2, ..."]}}
 //		pages	= to create multilevel forums this optional parameter passes
 //				  a comma-delimeted list of tag names of pages that must be
-//				  considered subforums, and not topics. tags must be absolut (not relative)
+//				  considered subforums, and not topics. tags must be absolute (not relative)
 //		if you define pages, it must be done for all subforums and topic pages
 
 // define variables

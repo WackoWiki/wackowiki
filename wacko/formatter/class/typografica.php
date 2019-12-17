@@ -54,7 +54,7 @@ class Typografica
 
 	var $settings	= [
 							'inches'	=> 1, // convert inches into &quot;
-							'apostroph'	=> 1, // apostroph convertor
+							'apostroph'	=> 1, // apostroph converter
 							'laquo'		=> 0, // angle quotes
 							'farlaquo'	=> 0, // angle quotes for FAR (greater&less characters)
 							'quotes'	=> 0, // English quotes
@@ -116,7 +116,7 @@ class Typografica
 		//  how does stripping work? let's assume a special character. Yes-yes, special character
 		//    it would be stick (?like bee or mosquito?) within us =)
 		//  will change all tags with special character, simultaneously store them into an array.
-		//  and then beleive, there are no special characters in the wild world (unexplored wilderness?).
+		//  and then believe, there are no special characters in the wild world (unexplored wilderness?).
 		$tags = [];
 
 		if ($this->skip_tags)
