@@ -121,7 +121,7 @@ if (pack('L', $abyz) == pack('N', $abyz))
 // There are other programs to can create GD fonts, but my script allows a greater
 // degree of control over exactly how wide each character is, and is therefore
 // recommended for 'special' uses. For normal use of GD fonts,
-// the GDFontGenerator @ http://www.philiplb.de is excellent for convering ttf to GD
+// the GDFontGenerator @ http://www.philiplb.de is excellent for converting ttf to GD
 
 // the fonts included with freeCap *only* include lowercase alphabetic characters
 // so are not suitable for most other uses
@@ -892,7 +892,7 @@ ImageString($im, 2, $width - $tag_width, $height - 13, $tag_str, $tag_col);
 
 // unset all sensetive vars
 // in case someone include()s this file on a shared server
-// you might think this unneccessary, as it exit()s
+// you might think this unnecessary, as it exit()s
 // but by using register_shutdown_function
 // on a -very- insecure shared server, they -might- be able to get the word
 unset($word);

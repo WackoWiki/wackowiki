@@ -182,7 +182,7 @@ class TemplatestUser extends TemplatestSetter
 				$name = array_shift($args);
 				if (!$args)
 				{
-					// path exhaused, only value remains, so we instructed to assign into sub!
+					// path exhausted, only value remains, so we instructed to assign into sub!
 					$err = null;
 
 					if (is_array($name))

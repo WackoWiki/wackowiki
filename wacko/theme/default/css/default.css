@@ -289,7 +289,7 @@ form input.submitinput {
 	position: relative;
 }
 
-/* Debugging informations*/
+/* Debugging information */
 .time {
 	color: #999999;
 	font-size: 9px;
@@ -1123,7 +1123,7 @@ a:target {
 	background: #1E9905;
 }
 
-/* CSS form formater */
+/* CSS form formatter */
 .cssform p {
 	width: 320px;
 	clear: left;

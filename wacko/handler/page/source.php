@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	the source text will be shown with exception of those fragments which are hidden by formatters %%(comment)..%%
 
-	TODO: add config option to set an treshhold or to disable the source handler
+	TODO: add config option to set an threshold or to disable the source handler
 */
 
 # $this->ensure_page(true); // we allow comments, like we do in edit handler

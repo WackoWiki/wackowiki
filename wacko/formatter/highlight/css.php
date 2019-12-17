@@ -139,7 +139,7 @@ $special_keywords = [
 	'border-left'
 ];
 
-// These should NOT be preceeded by a -
+// These should NOT be preceded by a -
 $special_keyword2 = [
 	'height',
 	'left',

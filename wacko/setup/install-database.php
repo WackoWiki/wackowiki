@@ -306,7 +306,7 @@ switch ($config['database_driver'])
 
 		global $dblink;
 
-		// Do the initial database connection test seperately as it is a special case.
+		// Do the initial database connection test separately as it is a special case.
 		try
 		{
 			test($lang['TestConnectionString'], $dblink = @new PDO($dsn, $config['database_user'], $config['database_password']), $lang['ErrorDBConnection']);

@@ -956,7 +956,7 @@ class Wacko
 	* Put page in page cache.
 	*
 	* @param array $page Page data
-	* @param boolean $metadata_only Marks that page contains metadata only (all atributes, excepts page body)
+	* @param boolean $metadata_only Marks that page contains metadata only (all attributes, excepts page body)
 	*/
 	function cache_page($page, $metadata_only = false)
 	{
@@ -1649,7 +1649,7 @@ class Wacko
 	 * @param integer	$comment_on_id	commented page_id
 	 * @param integer	$parent_id		page_id of related comment or parent page
 	 * @param string	$lang			page language
-	 * @param boolean	$mute			supress email reminders and xml rss recompilation
+	 * @param boolean	$mute			suppress email reminders and xml rss recompilation
 	 * @param string	$user_name		attach guest pseudonym
 	 * @param boolean	$user_page		user is page owner
 	 *
@@ -3917,7 +3917,7 @@ class Wacko
 
 			if ($text)
 			{
-				// take page title intead of pagepath when only tag is provided, e.g. ((/Root/Page))
+				// take page title instead of pagepath when only tag is provided, e.g. ((/Root/Page))
 				if (!$title && $tag == $text)
 				{
 					$title = $this_page['title'] ?? '';
@@ -4021,7 +4021,7 @@ class Wacko
 
 				// TODO: pagepath?
 				// TODO: replace only available values
-				#$aname		= str_replace('/',			'.',		$aname); // FIXME: missmatch id="doc.deutsch" but anchor '#doc/deutsch' - what was the purpose of setting a dot here if it breaks the anchor?
+				#$aname		= str_replace('/',			'.',		$aname); // FIXME: mismatch id="doc.deutsch" but anchor '#doc/deutsch' - what was the purpose of setting a dot here if it breaks the anchor?
 				$res		= str_replace('{aname}',	$aname,		$res);
 				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
@@ -6752,7 +6752,7 @@ class Wacko
 				$page		= $this->load_page($tag, 0, 0, '', '', $deleted);
 			}
 
-			// invalide namespace
+			// invalid namespace
 			if (empty($page) && !$tag)
 			{
 				$this->http->status(404);
@@ -7530,7 +7530,7 @@ class Wacko
 				{
 					// moved file to backup folder
 
-					// remove category assigments
+					// remove category assignments
 					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 				}
 
@@ -7552,7 +7552,7 @@ class Wacko
 
 					@unlink($file_name);
 
-					// remove category assigments
+					// remove category assignments
 					$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
 				}
 
@@ -8016,7 +8016,7 @@ class Wacko
 	}
 
 	// checks whether user's captcha solution was right. function
-	// takes no arguments, instead it recieves user input from
+	// takes no arguments, instead it receives user input from
 	// HTTP-POST variable 'captcha', submitted through webform.
 	function validate_captcha() : bool
 	{

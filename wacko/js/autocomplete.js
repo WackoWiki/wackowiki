@@ -217,7 +217,7 @@ AutoComplete.prototype.insertFound = function (foundPattern)
 // keydown handler. Invoked from wikiedit`s keyDown
 // its job is:
 //	1. if user is likely typing some WikiName, then invoke recongnizer
-//	2. if we have found some patterns, allow to select preferrable one with up-down arrows and Enter/Escape as ok/cancel
+//	2. if we have found some patterns, allow to select preferable one with up-down arrows and Enter/Escape as ok/cancel
 AutoComplete.prototype.keyDown = function (key, shiftKey)
 {
 	// first of all -- inplace movements

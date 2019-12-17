@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Supressed typografica in formated text.
+ * Suppressed typografica in formatted text.
  */
 
 echo "<!--notypo-->";

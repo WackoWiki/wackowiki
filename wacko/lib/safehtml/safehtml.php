@@ -676,7 +676,7 @@ class SafeHTML
 	}
 
 	/**
-	 * Main parsing fuction
+	 * Main parsing function
 	 *
 	 * @param string $doc HTML document for processing
 	 *
@@ -712,7 +712,7 @@ class SafeHTML
 	}
 
 	/**
-	 * UTF-7 decoding fuction
+	 * UTF-7 decoding function
 	 *
 	 * @param string $str HTML document for recode ASCII part of UTF-7 back to ASCII
 	 * @return string Decoded document
@@ -724,7 +724,7 @@ class SafeHTML
 	}
 
 	/**
-	 * Additional UTF-7 decoding fuction
+	 * Additional UTF-7 decoding function
 	 *
 	 * @param string $str String for recode ASCII part of UTF-7 back to ASCII
 	 * @return string Recoded string
@@ -739,7 +739,7 @@ class SafeHTML
 	}
 
 	/**
-	 * Additional UTF-7 encoding fuction
+	 * Additional UTF-7 encoding function
 	 *
 	 * @param string $str String for recode ASCII part of UTF-7 back to ASCII
 	 * @return string Recoded string

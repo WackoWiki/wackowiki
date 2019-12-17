@@ -87,7 +87,7 @@ img {
 
 /** Styles for the main content in the page. *********************************/
 
-/* Debugging informations (not shown) */
+/* Debugging information (not shown) */
 .time {
 	display:			none;
 }
@@ -186,7 +186,7 @@ code {
 }
 
 
-/** Advanced formating and action-related ************************************/
+/** Advanced formatting and action-related ************************************/
 
 /* Hyperlinks: SYNTAX ((HomePage)) */
 
@@ -310,7 +310,7 @@ h6 {
 /** List-related *************************************************************/
 
 /* SYNTAX "  *", "  1.", etc. */
-/* List possibilites */
+/* List possibilities */
 ol, ul {
 	margin-bottom:		0;
 	margin-top:			0;
