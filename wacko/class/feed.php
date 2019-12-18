@@ -249,6 +249,8 @@ class Feed
 
 		if ($comments = $this->engine->load_comment())
 		{
+			$reset_tag = $this->engine->tag;
+
 			foreach ($comments as $comment)
 			{
 				$access = $this->engine->has_access('read', $comment['comment_on_id'], GUEST);
@@ -263,6 +265,8 @@ class Feed
 						$comment['body_r'] = $this->engine->compile_body($comment['body'], $comment['page_id'], false, true);
 					}
 
+					// set page context
+					$this->engine->tag = $comment['page_tag'];
 					$text = $this->engine->format($comment['body_r'], 'post_wacko');
 
 					// check current page lang for different charset to do_unicode_entities() against
@@ -289,6 +293,8 @@ class Feed
 					$xml .= '</item>' . "\n";
 				}
 			}
+
+			$this->engine->tag = $reset_tag;
 		}
 
 		$xml .= '</channel>' . "\n";
