@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 /* gallery action :
  * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
+ * modify the script for your needs, please conribute your improvements
  *
  * requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
  * optional jQuery <https://jquery.com/>
