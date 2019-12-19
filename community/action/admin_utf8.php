@@ -9,9 +9,12 @@ if (!defined('IN_WACKO'))
 ## WackoWiki UTF-8 Conversion Routines					##
 ##########################################################
 /*
- * status: beta
+ * status: stable
  * https://wackowiki.org/doc/Dev/Release/R6.0/Upgrade/DatabaseConversion
  * modify the script for your needs, please conribute your improvements
+ *
+ * place the script under action/admin_utf8.php
+ * call the action via {{admin_utf8}} as Administrator
  *
  * 1. Pre-Upgrade Routines for R6.x
  *    1.0. Alter tables to work without key prefixes longer than 767 bytes
@@ -37,7 +40,6 @@ $collation		= 'utf8mb4_unicode_520_ci';		// Unicode (UCA 5.2.0), case-insensitiv
 $_db_version	= $this->db->load_single("SELECT version()");
 $db_version		= $_db_version['version()'];
 $large_prefix	= false;
-
 
 echo '<h1>Unicode conversion utilities</h1>';
 
@@ -109,6 +111,10 @@ if ($this->is_admin())
 				ALTER TABLE {$prefix}revision
 					CHANGE title title VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '',
 					CHANGE tag tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
+
+			$results .=
+				'<strong>' . date('H:i:s') . ' - ' . 'Tables altered.' . "\n" .
+				'================================================</strong>' . "\n";
 
 			echo
 				'<div class="code">' .
