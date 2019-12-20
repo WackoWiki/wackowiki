@@ -267,7 +267,7 @@ class Feed
 
 					// set page context
 					$this->engine->tag = $comment['page_tag'];
-					$text = $this->engine->format($comment['body_r'], 'post_wacko');
+					$text = $this->engine->format($comment['body_r'], 'post_wacko', ['stripnotypo' => true]);
 
 					// check current page lang for different charset to do_unicode_entities() against
 					if ($this->lang != $comment['page_lang'])
