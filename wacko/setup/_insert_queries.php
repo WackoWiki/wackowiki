@@ -108,3 +108,5 @@ $upgrade['5.5.14'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 // revision
 $upgrade['5.5.14'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 
+// user
+$upgrade['6.0.0'][]		= ['insert',	'user',				$insert_user_r5_5_0];

@@ -62,6 +62,7 @@ $alter_revision_r5_5_0 = "ALTER TABLE {$pref}revision DROP supertag";
 // TAG
 
 // USER
+$insert_user_r5_5_0 = "INSERT INTO {$pref}user (user_name, account_lang, password, email, account_type, signup_time) VALUES ('Deleted', '" . _quote($config['language']) . "', '', '', '1', UTC_TIMESTAMP())";
 
 // USER SETTING
 
