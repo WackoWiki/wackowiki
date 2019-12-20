@@ -24,9 +24,9 @@
 									</nav>
 								=]
 								<header class="comment-title">
-									<h2><a href="[ ' href ' ]">[ ' title ' ]</a></h2>
+									<h2><a href="[ ' href ' ]">[ ' title | e ' ]</a></h2>
 								</header>
-								<p>[ ' comment ' ]</p>
+								[ ' comment ' ]
 								<footer>
 									<ul class="comment-meta">
 										<li>[ ' owner ' ]</li>
@@ -49,12 +49,12 @@
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
 						[= p _ =
 							<div id="preview" class="preview">
-								<p class="preview"><span>[ ' _t: EditPreviewSlim ' ]</span></p>
+								<p class="preview"><span>[ ' _t: EditPreview ' ]</span></p>
 								<div class="comment-preview">
 									<header class="comment-title">
 										<h2>[ ' title ' ]</h2>
-										<p>[ ' preview ' ]</p>
 									</header>
+									[ ' preview ' ]
 								</div>
 							</div>
 							<br>
@@ -64,7 +64,7 @@
 						<script src="[ ' db: base_url ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
 						<script src="[ ' db: base_url ' ]js/wikiedit.js"></script>
 						<script src="[ ' db: base_url ' ]js/autocomplete.js"></script>
-						
+
 						<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
 						<label for="addcomment_title">[ ' _t: AddCommentTitle ' ]</label><br>
 						<input type="text" id="addcomment_title" name="title" size="60" maxlength="250" value="[ ' title | e attr ' ]"><br>

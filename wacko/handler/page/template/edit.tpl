@@ -17,8 +17,8 @@
 				[= p _ =
 					[ '' buttons '' ]
 					<section id="preview" class="preview">
-						<p class="preview"><span>[ ' _t: EditPreviewSlim ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
-						<h1>[ ' title ' ]</h1>
+						<p class="preview"><span>[ ' _t: EditPreview ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
+						<h1>[ ' title | e ' ]</h1>
 						[ ' preview | pre ' ]
 					</section>
 					<br>
@@ -92,4 +92,4 @@
 <input type="submit" class="OkBtn_Top" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
 <a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn_Top" value="[ ' _t: EditCancelButton ' ]"></a>
 
-	
+
