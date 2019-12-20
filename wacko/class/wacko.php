@@ -5423,6 +5423,12 @@ class Wacko
 			$body_r		= $this->format($body_r, 'paragrafica');
 			$body_toc	= $this->body_toc;
 		}
+		else
+		{
+			// remove obsolete <ignore> tags
+			$body_r = str_replace('<ignore>', '', $body_r);
+			$body_r = str_replace('</ignore>', '', $body_r);
+		}
 
 		// store to DB ($this->page['latest'] != 0)
 		if ($store && $page_id)
