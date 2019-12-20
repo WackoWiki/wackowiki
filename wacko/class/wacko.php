@@ -1091,7 +1091,7 @@ class Wacko
 
 	function preload_links($page_ids, $default = false)
 	{
-		if (empty($page_ids))
+		if (empty($page_ids) && !$default)
 		{
 			return;
 		}
@@ -1103,30 +1103,33 @@ class Wacko
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
 
-		// cache file links
-		if ($file_page_ids = $this->preload_file_links($page_ids))
+		if (!empty($page_ids))
 		{
-			#$page_ids + $file_page_ids;
-			$p_ids	= array_merge($page_ids, $file_page_ids);
-		}
-		else
-		{
-			$p_ids	= $page_ids;
-		}
-
-		// get page links
-		if ($links = $this->db->load_all(
-			"SELECT to_page_id, to_tag " .
-			"FROM " . $this->db->table_prefix . "page_link " .
-			"WHERE from_page_id IN (" . $this->ids_string($page_ids) . ")"))
-		{
-			foreach ($links as $link)
+			// cache file links
+			if ($file_page_ids = $this->preload_file_links($page_ids))
 			{
-				$p_ids[] = $link['to_page_id'];
+				#$page_ids + $file_page_ids;
+				$p_ids	= array_merge($page_ids, $file_page_ids);
+			}
+			else
+			{
+				$p_ids	= $page_ids;
+			}
 
-				if(!$link['to_page_id'])
+			// get page links
+			if ($links = $this->db->load_all(
+				"SELECT to_page_id, to_tag " .
+				"FROM " . $this->db->table_prefix . "page_link " .
+				"WHERE from_page_id IN (" . $this->ids_string($page_ids) . ")"))
+			{
+				foreach ($links as $link)
 				{
-					$pages[] = $link['to_tag'];
+					$p_ids[] = $link['to_page_id'];
+
+					if(!$link['to_page_id'])
+					{
+						$pages[] = $link['to_tag'];
+					}
 				}
 			}
 		}
@@ -6871,10 +6874,7 @@ class Wacko
 				$mod = '';
 			}
 
-			if (isset($this->page['page_id']))
-			{
-				$this->preload_links([$this->page['page_id']], true);
-			}
+			$this->preload_links([($this->page['page_id'] ?? null)], true);
 
 			$this->current_context++;
 			$this->context[$this->current_context] = $this->tag;
