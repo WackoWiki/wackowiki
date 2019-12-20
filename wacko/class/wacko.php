@@ -156,7 +156,7 @@ class Wacko
 				"WHERE page_id = " . (int) $page_id . " " .
 				"LIMIT 1", true);
 
-			return $page['tag'];
+			return $page['tag'] ?? null;
 		}
 	}
 
@@ -961,7 +961,7 @@ class Wacko
 	function cache_page($page, $metadata_only = false)
 	{
 		// do not override current page
-		if ((isset($this->page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only) || empty($page))
+		if ((isset($this->page['page_id']) && isset($page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only) || empty($page))
 		{
 			return;
 		}
@@ -4995,6 +4995,12 @@ class Wacko
 		{
 			$body_r		= $this->format($body_r, 'paragrafica');
 			$body_toc	= $this->body_toc;
+		}
+		else
+		{
+			// remove obsolete <ignore> tags
+			$body_r = str_replace('<ignore>', '', $body_r);
+			$body_r = str_replace('</ignore>', '', $body_r);
 		}
 
 		// store to DB ($this->page['latest'] != 0)

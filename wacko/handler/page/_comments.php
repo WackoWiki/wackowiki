@@ -79,7 +79,7 @@ if ($this->has_access('read'))
 		$comments		= $this->load_comments($this->page['page_id'], $pagination['offset'], $this->db->comments_count, $sort_comment);
 
 		// clear new comments for watched page
-		if ($user && $comments && $this->watch['comment_id'] && !$noid_protect)
+		if ($user && $comments && isset($this->watch['comment_id']) && $this->watch['comment_id'] && !$noid_protect)
 		{
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "watch SET " .
@@ -146,7 +146,7 @@ if ($this->has_access('read'))
 
 				# $user_stats = $handler_show_get_user_stats($comment['user_id']);
 
-				$tpl->l_comment	= $this->format($comment['body_r'], 'post_wacko');
+				$tpl->l_comment	= $this->format($comment['body_r'], 'post_wacko', ['stripnotypo' => true]);
 
 				$tpl->l_owner	= $this->user_link($comment['owner_name']);
 				$tpl->l_created	= $comment['created'];
