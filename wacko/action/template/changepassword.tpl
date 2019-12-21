@@ -9,7 +9,7 @@
 				<input type="hidden" name="secret_code" value="[ ' code | e attr ' ]">
 			=]
 			<div class="cssform">
-				<h3>[ ' title ' ]</h3>
+				<h3>[ ' title | e ' ]</h3>
 				[= current _ =
 					<p>
 						<label for="password">[ ' _t: CurrentPassword ' ]:</label>

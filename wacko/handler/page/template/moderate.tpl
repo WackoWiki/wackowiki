@@ -1,6 +1,6 @@
 [ === main === ]
 	<h3>
-		[ ' _t: Moderation ' ] [ ' title ' ]
+		[ ' _t: Moderation ' ] [ ' title | e ' ]
 	</h3>
 	[ ' moderate ' ]
 
@@ -34,7 +34,7 @@
 						<select name="section">
 							<option selected></option>
 							[= o _ =
-								<option value="[ ' tag ' ]">[ ' title ' ]</option>
+								<option value="[ ' tag ' ]">[ ' title | e ' ]</option>
 							=]
 						</select>
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
@@ -53,7 +53,7 @@
 						[= e _ =
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
-						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title ' ]">
+						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]">
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
 						<a href="[ ' href: moderate ' ]" class="btn-link">
 							<input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]">
@@ -170,7 +170,7 @@
 							<select name="section">
 								<option selected></option>
 								[= o _ =
-									<option value="[ ' tag ' ]">[ ' title ' ]</option>
+									<option value="[ ' tag ' ]">[ ' title | e ' ]</option>
 								=]
 							</select> or <input type="text" name="cluster" size="50" maxlength="250"><br>
 							<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
@@ -205,7 +205,7 @@
 						[= e _ =
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
-						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title ' ]"> 
+						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]"> 
 						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
 						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: ModerateDecline ' ]"></a>
 					</td>

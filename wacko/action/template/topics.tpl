@@ -38,7 +38,7 @@
 							[= updated =
 								<strong><span class="cite" title="[ ' _t: ForumNewPosts ' ]">[[ ' _t: ForumUpdated ' ]]</span> 
 							=]
-							<strong>[ ' title ' ]</strong>
+							<strong>[ ' title | e ' ]</strong>
 						</td>
 						<td class="t-center nowrap">
 							<small title="[ ' ip ' ]">

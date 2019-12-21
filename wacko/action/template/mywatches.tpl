@@ -1,6 +1,6 @@
 [ === main === ]
 	[ ' tabs ' ]
-	[ ' title ' ]<br><br>
+	[ ' title | e ' ]<br><br>
 	[= denied =
 		<em>[ ' _t: NotLoggedInWatches ' ]</em>
 	=]

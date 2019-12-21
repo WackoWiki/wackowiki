@@ -34,7 +34,7 @@
 				=]
 				[= r _ =
 					<br>
-					<h1>[ ' title ' ]</h1>
+					<h1>[ ' title | e ' ]</h1>
 				=]
 	
 				<input type="hidden" name="previous" value="[ ' previous ' ]"><br>

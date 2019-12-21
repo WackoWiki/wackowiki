@@ -34,7 +34,7 @@
 							[= c =
 								<td class="a-top">
 									<small>
-										<a href="[ ' href ' ]">[ ' title ' ]</a><br>
+										<a href="[ ' href ' ]">[ ' title | e ' ]</a><br>
 										[ ' user ' ] ([ ' comment.created | time_formatted ' ])
 									</small>
 							=]

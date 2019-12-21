@@ -3,7 +3,7 @@
 		<section id="section-comments">
 			<header id="header-comments">
 				[''' pagination ''']
-				<h1><a href="[ ' href ' ]" title="[ ' title ' ]">[ ' text ' ]</a></h1>
+				<h1><a href="[ ' href ' ]" title="[ ' title | e attr ' ]">[ ' text ' ]</a></h1>
 			</header>
 			[= ol _ =
 				<ol id="comments">
@@ -52,7 +52,7 @@
 								<p class="preview"><span>[ ' _t: EditPreview ' ]</span></p>
 								<div class="comment-preview">
 									<header class="comment-title">
-										<h2>[ ' title ' ]</h2>
+										<h2>[ ' title | e ' ]</h2>
 									</header>
 									[ ' preview ' ]
 								</div>
