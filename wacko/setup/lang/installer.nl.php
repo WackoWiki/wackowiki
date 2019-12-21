@@ -72,7 +72,7 @@ $lang = [
 /*
    Site Config Page
 */
-'site-config' => 'Site Configuratie',
+'config-site' => 'Site Configuratie',
 'SiteName' => 'Uw Wiki\'s naam',
 'SiteNameDesc' => 'De naam van uw Wiki site.',
 'HomePage' => 'Home pagina',
@@ -120,7 +120,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Database Configuratie',
+'config-database' => 'Database Configuratie',
 'DBDriver' => 'Driver',
 'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
@@ -148,7 +148,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Database Installation',
+'install-database' => 'Database Installation',
 'TestingConfiguration' => 'Testen Configuratie',
 'TestConnectionString' => 'Testen database connectie instellingen',
 'TestDatabaseExists' => 'Checking if the database you specified exists',
