@@ -7,7 +7,7 @@
 		<p></p>
 	=]
 
-	<strong>[ ' title ' ]</strong><br><br>
+	<strong>[ ' title | e ' ]</strong><br><br>
 	
 	[''' pagination ''']
 	

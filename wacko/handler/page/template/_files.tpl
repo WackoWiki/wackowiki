@@ -2,7 +2,7 @@
 	[= s _ =
 		<section id="section-files">
 			<header id="header-files">
-				<h1><a href="[ ' href ' ]" title="[ ' title ' ]">[ ' text ' ]</a></h1>
+				<h1><a href="[ ' href ' ]" title="[ ' title | e attr ' ]">[ ' text ' ]</a></h1>
 			</header>
 			[= f _ =
 				<div class="files">

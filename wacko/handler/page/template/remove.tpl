@@ -19,7 +19,7 @@
 		[= preview _ =
 			<div class="preview">
 				[ ' meta ' ]
-				<div class="comment-title"><h2>[ ' title ' ]</h2></div>
+				<div class="comment-title"><h2>[ ' title | e ' ]</h2></div>
 				[ ' text | truncate 250 | e ' ]
 			</div><br>
 		=]

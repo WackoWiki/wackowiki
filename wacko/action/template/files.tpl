@@ -64,4 +64,4 @@
 <nav class="pagination">[ ' text ' ]</nav>
 
 [= icon =]
-<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title ' ]" alt="[ ' title ' ]" class="btn-[ ' class ' ]"></a>
+<a href="[ ' info ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' title | e attr ' ]" class="btn-[ ' class ' ]"></a>

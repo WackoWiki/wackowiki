@@ -1,6 +1,6 @@
 [ === main === ]
 
-	<h3>[ ' title ' ]</h3>
+	<h3>[ ' title | e ' ]</h3>
 	
 	<div class="">
 	<form action="[ ' href: permissions ' ]" method="post" name="set_permissions">

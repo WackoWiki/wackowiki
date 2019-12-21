@@ -25,13 +25,13 @@
 							<input type="number" min="0" name="pos_[ ' menuid ' ]" size="2" style="width: 40px;" value="[ ' position ' ]">
 						</td>
 						<td>
-							<input type="text" maxlength="100" name="title_[ ' menuid ' ]" size="40" value="[ ' menutitle ' ]" placeholder="[ ' title ' ]">
+							<input type="text" maxlength="100" name="title_[ ' menuid ' ]" size="40" value="[ ' menutitle ' ]" placeholder="[ ' title | e attr ' ]">
 						</td>
 						<td>
 							[= nouse _ =
 								<!--<input type="radio" id="menu_item[ ' menuid ' ]" name="change" value="[ ' menuid ' ]"> -->
 							=]
-							<label for="menu_item[ ' menuid ' ]" title="[ ' title ' ]">» [ ' tag ' ]</label>
+							<label for="menu_item[ ' menuid ' ]" title="[ ' title | e attr ' ]">» [ ' tag ' ]</label>
 						</td>
 						<td class="t-center">
 							<input type="checkbox" id="menu_item[ ' menuid ' ]" name="delete_[ ' menuid ' ]">

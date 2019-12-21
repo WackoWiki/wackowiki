@@ -2,9 +2,9 @@
 	[= s _ =
 		<section id="section-rating">
 			<header id="header-rating">
-				<h1>[ ' title ' ] 
+				<h1>[ ' title | e ' ] 
 				[= l _ =
-					[<a href="[ ' href ' ]" title="[ ' title ' ]">[ ' text ' ]</a>]</h1>
+					[<a href="[ ' href ' ]" title="[ ' title | e attr ' ]">[ ' text ' ]</a>]</h1>
 				=]
 			</header>
 			[= f _ =

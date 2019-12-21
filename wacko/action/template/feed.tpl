@@ -6,7 +6,7 @@
 	[= mark _ =
 		<div class="layout-box" style="display: table;">
 			<p>
-				<span>[ ' header ' ]: <strong>[ ' title ' ]</strong> [ ' lastitems ' ]</span>
+				<span>[ ' header ' ]: <strong>[ ' title | e ' ]</strong> [ ' lastitems ' ]</span>
 			</p>
 	=]
 

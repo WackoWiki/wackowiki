@@ -150,7 +150,7 @@
 =]
 
 [ === TabTitle === ]
-[ ' im TabImage ' ] [ ' title ' ]
+[ ' im TabImage ' ] [ ' title | e ' ]
 [ === TabImage === ]
-<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title ' ]">
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' title | e attr ' ]">
 
