@@ -83,7 +83,7 @@ $lang = [
 /*
    Site Config Page
 */
-'site-config' => 'Настройки на сайта',
+'config-site' => 'Настройки на сайта',
 'SiteName' => 'Посочете името на УакоУики',
 'SiteNameDesc' => 'Име на вашия Wiki.',
 'HomePage' => 'Главна страница',
@@ -131,7 +131,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Настройка на БД',
+'config-database' => 'Настройка на БД',
 'DBDriver' => 'Driver',
 'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
@@ -159,7 +159,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Database Installation',
+'install-database' => 'Database Installation',
 'TestingConfiguration' => 'Тест на настройките',
 'TestConnectionString' => 'Проверка на връзката с БД',
 'TestDatabaseExists' => 'Checking if the database you specified exists',

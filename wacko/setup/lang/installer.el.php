@@ -84,7 +84,7 @@ $lang = [
 /*
    Site Config Page
 */
-'site-config' => 'Παραμετροποίηση Site',
+'config-site' => 'Παραμετροποίηση Site',
 'SiteName' => 'Όνομα του Wiki',
 'SiteNameDesc' => 'Παρακαλώ εισάγεται ένα όνομα για το Wiki site σας, αυτό πρέπει να είναι
 της μορφής <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
@@ -133,7 +133,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Ρυθμίσεις Βάσης',
+'config-database' => 'Ρυθμίσεις Βάσης',
 'DBDriver' => 'Οδηγός',
 'DBDriverDesc' => 'Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε. Θα πρέπει να είναι ένας παραδοσιακός οδηγός εάν δεν έχετε εγκατεστημένο <a href="http://gr.php.net/pdo" target="_blank">PDO</a>.',
 'DBCharset' => 'Charset',
@@ -162,7 +162,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Εγκατάσταση Βάσης',
+'install-database' => 'Εγκατάσταση Βάσης',
 'TestingConfiguration' => 'Έλεγχος Ρυθμίσεων',
 'TestConnectionString' => 'Έλεγχος ρυθμίσεων σύνδεσης με την βάση δεδομένων',
 'TestDatabaseExists' => 'Δοκιμή εάν η βάση δεδομένων που δηλώσατε υπάρχει',

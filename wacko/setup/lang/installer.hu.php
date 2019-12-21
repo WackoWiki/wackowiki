@@ -83,7 +83,7 @@ $lang = [
 /*
    Site Config Page
 */
-'site-config' => 'Site Configuration',
+'config-site' => 'Site Configuration',
 'SiteName' => 'Wiki Name',
 'SiteNameDesc' => 'Please enter the name of your Wiki site.',
 'HomePage' => 'Home Page',
@@ -131,7 +131,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Adatbázis konfiguráció',
+'config-database' => 'Adatbázis konfiguráció',
 'DBDriver' => 'Driver',
 'DBDriverDesc' => 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DBCharset' => 'Charset',
@@ -159,7 +159,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Adatbázis telepítés',
+'install-database' => 'Adatbázis telepítés',
 'TestingConfiguration' => 'Testing Configuration',
 'TestConnectionString' => 'Testing database connection settings',
 'TestDatabaseExists' => 'Checking if the database you specified exists',
