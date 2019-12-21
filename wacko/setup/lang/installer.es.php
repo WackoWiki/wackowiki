@@ -72,7 +72,7 @@ $lang = [
 /*
    Site Config Page
 */
-'site-config' => 'Configuración del sitio',
+'config-site' => 'Configuración del sitio',
 'SiteName' => 'Nombre Wiki',
 'SiteNameDesc' => 'Por favor ingrese el nombre de su sitio Wiki.',
 'HomePage' => 'Página de inicio',
@@ -120,7 +120,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Configuración de Base de Datos',
+'config-database' => 'Configuración de Base de Datos',
 'DBDriver' => 'Controlador',
 'DBDriverDesc' => 'Controlador de base de datos a utilizar. Debe elegir un controlador legacy si no tiene <a href="https://secure.php.net/pdo" target="_blank">PDO</a> instalado.',
 'DBCharset' => 'Charset',
@@ -148,7 +148,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Instalación de base de datos',
+'install-database' => 'Instalación de base de datos',
 'TestingConfiguration' => 'Comprobando la configuración',
 'TestConnectionString' => 'Comprobando configuración de la conexión con la base de datos',
 'TestDatabaseExists' => 'Verificando si existe la base de datos especificada',

@@ -72,7 +72,7 @@ $lang = [
 /*
    Site Config Page
 */
-'site-config' => 'Site Konfiguration',
+'config-site' => 'Site Konfiguration',
 'SiteName' => 'Wiki Name',
 'SiteNameDesc' => 'Der Name deines Wikis.',
 'HomePage' => 'Startseite',
@@ -120,7 +120,7 @@ $lang = [
 /*
    Database Config Page
 */
-'database-config' => 'Datenbank Konfiguration',
+'config-database' => 'Datenbank Konfiguration',
 'DBDriver' => 'Treiber',
 'DBDriverDesc' => 'Der Datenbanktreiber der verwendet werden soll. Du musst einen Altsystem (legacy) Treiber wählen falls <a href="https://secure.php.net/pdo" target="_blank">PDO</a> nicht zur Verfügung steht.',
 'DBCharset' => 'Zeichensatz',
@@ -148,7 +148,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'database-install' => 'Datenbank Installation',
+'install-database' => 'Datenbank Installation',
 'TestingConfiguration' => 'Teste Konfiguration',
 'TestConnectionString' => 'Teste Datenbank Verbindung',
 'TestDatabaseExists' => 'Prüfe ob die ausgewählte Datenbank vorhanden ist',
