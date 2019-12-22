@@ -6,7 +6,7 @@
 		[ ' _t: NoneReferrers ' ]<br><br>
 	=]
 
-	<strong>[ ' title | e ' ]</strong><br><br>
+	<strong>[ ' title ' ]</strong><br><br>
 
 	<ul class="ul-list lined">
 		[= l _ =
