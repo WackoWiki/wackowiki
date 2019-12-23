@@ -53,7 +53,7 @@ Version history:
  * Dumb bug fixed (some closing tags were ignored).
 1.3.0.
  * Two holes (with decimal HTML entities and with \x00 symbol) fixed.
- * Class rewritten under PEAR coding standarts.
+ * Class rewritten under PEAR coding standards.
  * Class now uses unmodified HTMLSax3 from PEAR.
  * To the list of table tags added: "caption", "col", "colgroup".
 1.2.1.
@@ -61,7 +61,7 @@ Version history:
 1.2.0.
  * "id" and "name" attributes added to dangerous attributes list, because malefactor can broke legal javascript by spoofing ID or NAME of some element.
  * New method parse() allows to do all parsing process in two lines of code. Examples also updated.
- * New array, closeParagraph, contains list of block-level elements. When we open such elemet, we should close paragraph before. . It allows SafeHTML to produce more XHTML compliant code.
+ * New array, closeParagraph, contains list of block-level elements. When we open such element, we should close paragraph before. . It allows SafeHTML to produce more XHTML compliant code.
  * Added "webcal" to white list of protocols for those who uses calendar programs (Mozilla/iCal/etc).
  * Now SafeHTML strips down table elements when we are not inside table.
  * Now SafeHTML correctly closes unclosed "li" tags: before opening "li" of the same nesting level.
