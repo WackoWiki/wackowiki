@@ -27,7 +27,7 @@ class Polls
 	// id number of the latest poll
 	function get_last_poll_id()
 	{
-		$poll_id = $this->engine->load_single(
+		$poll_id = $this->engine->db->load_single(
 			'SELECT poll_id ' .
 			'FROM ' . $this->engine->db->table_prefix . 'poll ' .
 			'ORDER BY poll_id DESC ' .
@@ -46,7 +46,7 @@ class Polls
 	// title information for a given poll
 	function get_poll_title($poll_id)
 	{
-		$title = $this->engine->load_single(
+		$title = $this->engine->db->load_single(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name " .
 			"FROM " . $this->engine->db->table_prefix . "poll p " .
 				"LEFT JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -59,7 +59,7 @@ class Polls
 	// sorts by total votes if "$votes = 1"
 	function get_poll_vars($poll_id, $votes = 0)
 	{
-		$vars = $this->engine->load_all(
+		$vars = $this->engine->db->load_all(
 			"SELECT poll_id, v_id, text, votes " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
 			"WHERE poll_id = " . (int) $poll_id . " AND v_id <> 0 " .
@@ -73,7 +73,7 @@ class Polls
 	{
 		$years = [];
 
-		$list = $this->engine->load_all(
+		$list = $this->engine->db->load_all(
 			"SELECT YEAR(start) AS years " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
 			"WHERE v_id = 0 AND start IS NOT NULL " .
@@ -104,7 +104,7 @@ class Polls
 		{
 			case 'active':
 			case 'current':
-				$list = $this->engine->load_all(
+				$list = $this->engine->db->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, u.user_name " .
 					"FROM " . $this->engine->db->table_prefix . "poll p " .
 						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -114,7 +114,7 @@ class Polls
 
 			case 'mod':
 			case 'moderation':
-				$list = $this->engine->load_all(
+				$list = $this->engine->db->load_all(
 					"SELECT poll_id, text, p.user_id, plural, u.user_name " .
 					"FROM " . $this->engine->db->table_prefix . "poll p " .
 						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -123,7 +123,7 @@ class Polls
 				break;
 
 			case 'ended':
-				$list = $this->engine->load_all(
+				$list = $this->engine->db->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name " .
 					"FROM " . $this->engine->db->table_prefix . "poll p " .
 						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -133,7 +133,7 @@ class Polls
 
 			case 'archive':
 				if ($year == 0) $year = date('Y');
-				$list = $this->engine->load_all(
+				$list = $this->engine->db->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name " .
 					"FROM " . $this->engine->db->table_prefix . "poll p " .
 						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -144,7 +144,7 @@ class Polls
 
 			default:
 			case 'all':
-				$list = $this->engine->load_all(
+				$list = $this->engine->db->load_all(
 					"SELECT poll_id, text, p.user_id, plural, start, end, u.user_name " .
 					"FROM " . $this->engine->db->table_prefix . "poll p " .
 						"LEFT OUTER JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -161,7 +161,7 @@ class Polls
 		if ($plural != 1) $plural = 0;
 
 		// submitting title
-		$this->engine->sql_query(
+		$this->engine->db->sql_query(
 			"INSERT INTO " . $this->engine->db->table_prefix . "poll SET " .
 				"poll_id	= " . (int) $poll_id . ", " .
 				"text		= " . $this->engine->db->q(rtrim($topic, '.')) . ", " .
@@ -174,7 +174,7 @@ class Polls
 		{
 			$v_id	+= 1;
 
-			$this->engine->sql_query(
+			$this->engine->db->sql_query(
 				"INSERT INTO " . $this->engine->db->table_prefix . "poll SET " .
 					"poll_id	= " . (int) $poll_id . ", " .
 					"v_id		= " . (int) $v_id . ", " .
@@ -187,7 +187,7 @@ class Polls
 	// remove a given poll from the datebase
 	function remove_poll($poll_id)
 	{
-		return $this->engine->sql_query(
+		return $this->engine->db->sql_query(
 			"DELETE " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
 			"WHERE poll_id = " . (int) $poll_id);
@@ -347,7 +347,7 @@ class Polls
 				if ($var['v_id'] == $vote_id)
 				{
 					$new_votes = $var['votes'] + 1;
-					$this->engine->sql_query(
+					$this->engine->db->sql_query(
 						"UPDATE " . $this->engine->db->table_prefix . "poll " .
 						"SET votes = " . (int) $new_votes . " " .
 						"WHERE poll_id = " . (int) $poll_id . " " .
@@ -359,7 +359,7 @@ class Polls
 
 		$new_votes = $header['votes'] + 1; //$total;
 
-		$this->engine->sql_query(
+		$this->engine->db->sql_query(
 			"UPDATE " . $this->engine->db->table_prefix . "poll " .
 			"SET votes = " . (int) $new_votes . " " .
 			"WHERE poll_id = " . (int) $poll_id . " " .
