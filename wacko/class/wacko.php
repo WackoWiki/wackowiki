@@ -105,32 +105,6 @@ class Wacko
 
 	// DATABASE
 
-	// Backward compatibility wrapper for legacy sql functions
-
-	/**
-	* @deprecated use db->sql_query() instead
-	*/
-	function sql_query($query, $debug = 0)
-	{
-		return $this->dblink->sql_query($query, $debug);
-	}
-
-	/**
-	 * @deprecated use db->load_all() instead
-	 */
-	function load_all($query, $docache = false)
-	{
-		return $this->dblink->load_all($query, $docache);
-	}
-
-	/**
-	* @deprecated use db->load_single() instead
-	*/
-	function load_single($query, $docache = false)
-	{
-		return $this->dblink->load_single($query, $docache);
-	}
-
 	// TODO: throw error for nested arrays
 	function ids_string($ids) : string
 	{
