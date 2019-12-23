@@ -5,17 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/**
- * backward compat, it's here to be removed sometime
- *
- * @deprecated use dblink->q() instead
- */
-function quote($dblink, $string)
-{
-	return $dblink->quote($string);
-}
-
-
 // DATABASE ABSTRACT LAYER
 
 abstract class Dbal // need to be extended by Settings to be usable
