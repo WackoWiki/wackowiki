@@ -2955,7 +2955,7 @@ class Wacko
 	*
 	* @return string			HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
-	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true) : string
+	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true, $encode = true) : string
 	{
 		if (!is_array($params))
 		{
@@ -2986,11 +2986,11 @@ class Wacko
 
 		if ($this->db->rewrite_mode)
 		{
-			$href .= $this->mini_href($method, $tag, $alter);
+			$href .= $this->mini_href($method, $tag, $alter, $encode);
 		}
 		else
 		{
-			$params['page'] = $this->mini_href($method, $tag, $alter);
+			$params['page'] = $this->mini_href($method, $tag, $alter, $encode);
 		}
 
 		if ($params)
@@ -3035,7 +3035,7 @@ class Wacko
 	* @param boolean $alter Optional
 	* @return string String tag[/method]
 	*/
-	function mini_href($method = '', $tag = '', $alter = true) : string
+	function mini_href($method = '', $tag = '', $alter = true, $encode = true) : string
 	{
 		if (!($tag = trim($tag)))
 		{
@@ -3049,8 +3049,12 @@ class Wacko
 		}
 
 		$tag = trim($tag, '/.');
+
 		// percent-encode the non-ASCII bytes (rfc3986)
-		$tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
+		if ($encode)
+		{
+			$tag = str_replace(['%2F', '%3F', '%3D'], ['/', '?', '='], rawurlencode($tag));
+		}
 
 		return $tag . ($method ? '/' . $method : '');
 	}
