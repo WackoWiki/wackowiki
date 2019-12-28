@@ -213,7 +213,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 			$tpl->userPage_text	= $home = $this->db->users_page . '/' . $user['user_name'];
 			$tpl->userPage_href	= $this->href('', $home);
-			$tpl->groupsPage		= $this->href('', $this->db->groups_page);
+			$tpl->groupsPage	= $this->href('', $this->db->groups_page);
 
 			// hide contact form if profile is equal with current user
 			if ($user['user_id'] != $this->get_user_id())
