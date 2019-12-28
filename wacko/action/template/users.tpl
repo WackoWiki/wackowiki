@@ -260,7 +260,7 @@ first really BIG template written
 	['' pagination '']
 
 [== sortsArr ==]
-&nbsp;&['' a | replace desc uarr asc darr ''];
+&nbsp;['' a | replace desc ↑ asc ↓ '']
 
 
 
