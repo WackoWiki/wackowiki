@@ -43,14 +43,14 @@
 		<table class="lined nowrap" style="width:100%; padding-right:20px;">
 			['' pagination '']
 			<tr>
-				[= head _ =
-					<th>[ ' a ' ]</th>
+				[= s _ =
+					<th><a href="[ ' link ' ]">[ ' what ' ][''' arrow sortsArr ''']</a></th>
 				=]
 			</tr>
 			[= none _ =
 				<tr><td colspan="5" class="t-center" style="padding:10px;"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
 			=]
-			[= line _ =
+			[= g _ =
 				<tr>
 					<td style="padding-left:5px;"><a href="[ ' profile ' ]">[ ' group.group_name | e ' ]</a></td>
 					<td class="t-center">[ ' group.members | e ' ]</td>
@@ -62,6 +62,10 @@
 			['' pagination '']
 		</table>
 	=]
+
+
+[== sortsArr ==]
+ ['' a | replace desc ↑ asc ↓ '']
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>

@@ -6,7 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 // args:
-$max = (int) @$max;
+$max			= (int) @$max;
+$logged_in		= $this->get_user();
 
 $order			= '';
 $param			= [];
@@ -38,6 +39,8 @@ if (($group = @$_GET['profile']))
 else
 {
 	$where			= '';
+	$sql_order		= '';
+	$params			= [];
 
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
@@ -55,38 +58,36 @@ else
 		$param['group'] = $group;
 	}
 
-	$param['sort'] = $sort = @$_GET['sort'];
+	$_sort = @$_GET['sort'];
+	$sort_modes	=
+	[
+		'name'			=> 'g.group_name',
+		'created'		=> 'g.created',
+		'members'		=> 'members',
+	];
 
-	if ($sort == 'name')
+	if (isset($sort_modes[$_sort]))
 	{
-		$order = "ORDER BY group_name ";
-	}
-	else if ($sort == 'members')
-	{
-		$order = "ORDER BY members ";
-	}
-	else if ($sort == 'created')
-	{
-		$order = "ORDER BY created ";
+		$_order			= @$_GET['order'];
+		$order_modes	=
+		[
+			'asc'	=> 'ASC',
+			'desc'	=> 'DESC'
+		];
+
+		if (!isset($order_modes[$_order]))
+		{
+			$_order = 'asc';
+		}
+
+		$params['sort']		= $_sort;
+		$params['order']	= $_order;
+
+		$sql_order = 'ORDER BY ' . $sort_modes[$_sort] . ' ' . $order_modes[$_order] . ' ';
 	}
 	else
 	{
-		unset($param['sort']);
-	}
-
-	$param['order'] = $_order = @$_GET['order'];
-
-	if ($_order == 'asc')
-	{
-		$order .= "ASC ";
-	}
-	else if ($_order == 'desc')
-	{
-		$order .= "DESC ";
-	}
-	else
-	{
-		unset($param['order']);
+		$sql_order = 'ORDER BY members DESC ';
 	}
 
 	$count = $this->db->load_single(
@@ -102,43 +103,76 @@ else
 		"FROM " . $this->db->table_prefix . "usergroup g " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (g.moderator_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (m.group_id = g.group_id) " .
-		$where.
-		( $where ? 'AND ' : "WHERE ") .
+		$where .
+		($where ? 'AND ' : "WHERE ") .
 			"g.active = 1 " .
 		"GROUP BY g.group_id " .
-		( $order ?: "ORDER BY members DESC " ) .
+		$sql_order .
 		$pagination['limit']);
 
+	$tpl->enter('l_');
+
 	// usergroup filter form
-	$tpl->l_href = $this->href();
-	$tpl->l_group = $group;
+	$tpl->href	= $this->href();
+	$tpl->group	= $group;
 
-	$tpl->l_pagination_text = $pagination['text'];
+	$tpl->pagination_text = $pagination['text'];
 
-	// list header
-	// TODO STS refactor, like in users
-	$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=name' . (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsName').( (isset($_GET['sort']) && $_GET['sort'] == 'name') || (isset($_REQUEST['group']) && $_REQUEST['group'] == true) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? NBSP . '↑' : NBSP . '↓' ) : '') . '</a>';
-	$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=members' . (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsMembers').( (isset($_GET['sort']) && $_GET['sort'] == 'members') || (isset($_GET['sort']) && $_GET['sort'] == false) ?  (isset($_GET['order']) && $_GET['order'] == 'asc' ? NBSP . '↑' : NBSP . '↓' ) : '') . '</a>';
-	if ($this->get_user())
+	// change sorting order navigation bar
+	$sort_link = function ($sort, $text) use ($params, &$tpl)
 	{
-		$tpl->l_head_a = '<a href="' . $this->href('', '', 'sort=created' . (isset($_GET['order']) && $_GET['order'] == 'asc' ? '&amp;order=desc' : '&amp;order=asc') ) . '">' . $this->_t('GroupsCreated').( isset($_GET['sort']) && $_GET['sort'] == 'created' ? (isset($_GET['order']) && $_GET['order'] == 'asc' ? NBSP . '↑' : NBSP . '↓' ) : '') . '</a>';
+		$tpl->s_what	= $this->_t($text);
+		$order			= 'asc';
+
+		if (@$params['sort'] == $sort)
+		{
+			if ($params['order'] == 'asc')
+			{
+				$order = 'desc';
+			}
+
+			$tpl->s_arrow_a = $order;
+		}
+		else
+		{
+			$params['sort'] = $sort;
+		}
+
+		$params['order'] = $order;
+
+		$tpl->s_link = $this->href('', '', $params);
+	};
+
+	$sort_link('name',		'GroupsName');
+	$sort_link('members',	'GroupsMembers');
+
+	if ($logged_in)
+	{
+		$sort_link('created',		'GroupsCreated');
 	}
 
 	// list entries
 	if (!$groups)
 	{
-		$tpl->l_none = true;
+		$tpl->none = true;
 	}
 	else
 	{
+		$tpl->enter('g_');
+
 		foreach ($groups as $usergroup)
 		{
-			$tpl->l_line_profile = $this->href('', '', ['profile' => $usergroup['group_name']]);
-			$tpl->l_line_group = $usergroup;
+			$tpl->profile	= $this->href('', '', ['profile' => $usergroup['group_name']]);
+			$tpl->group	= $usergroup;
+
 			if ($this->get_user())
 			{
-				$tpl->l_line_reg_group = $usergroup;
+				$tpl->reg_group = $usergroup;
 			}
 		}
+
+		$tpl->leave();	//	g_
 	}
+
+	$tpl->leave();	//	l_
 }
