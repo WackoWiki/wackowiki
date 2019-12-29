@@ -4331,7 +4331,7 @@ class Wacko
 			return $match[0];
 		}
 
-		if (!$this->page['comment_on_id'])
+		if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 		{
 			// disallow pages with Comment[0-9] and all sub pages, we do not want sub pages on a comment.
 			if (preg_match( '/\b(Comment([0-9]+))\b/ui', $_data, $match ))
@@ -6081,8 +6081,8 @@ class Wacko
 
 	function show_access_mode($page_id = null, $tag = '',  $privilege = 'read') : string
 	{
-		if (!$page_id)	$page_id	= $this->page['page_id'];
-		if (!$tag)		$tag		= $this->page['tag'];
+		if (!$page_id)	$page_id	= $this->page['page_id']	?? null;
+		if (!$tag)		$tag		= $this->page['tag']		?? null;
 
 		$user		= $this->get_user();
 		$access		= $this->has_access($privilege, $page_id);
@@ -7099,7 +7099,7 @@ class Wacko
 					: "tag		= " . $this->db->q($tag) . " ") .
 				"LIMIT 1");
 
-			$title = $page['title'];
+			$title = $page['title'] ?? null;
 		}
 		else if ($this->page)
 		{
