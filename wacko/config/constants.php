@@ -86,7 +86,7 @@ const TRANSLIT_LOAD					= 0;
 const TRANSLIT_DONTLOAD				= 1;
 
 // do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '5.5.16';
+const WACKO_VERSION					= '5.5.17';
 const HTML_ENTITIES_CHARSET			= 'ISO-8859-1';
 const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
@@ -96,5 +96,5 @@ const HTML_FILTERING				= null;					// safehtml, htmlpurifier
 const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
 const PHP_MIN_VERSION				= '7.0.0';				// minimum required PHP version
-const PHP_MAX_VERSION				= '7.3.0';				// maximum required PHP version
+const PHP_MAX_VERSION				= '7.4.0';				// maximum required PHP version
 const PHP_ERROR_REPORTING			= 0;					// PHP error reporting: 0 - off, 6 - all
