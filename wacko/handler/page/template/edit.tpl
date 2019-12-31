@@ -34,11 +34,11 @@
 				=]
 				[= r _ =
 					<br>
-					<h1>[ ' title ' ]</h1>
+					<h1>[ ' title | e ' ]</h1>
 				=]
 	
 				<input type="hidden" name="previous" value="[ ' previous ' ]"><br>
-				<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">[ ' body | pre ' ]</textarea>
+				<textarea id="postText" name="body" rows="40" cols="60" class="TextArea" required>[ ' body | pre ' ]</textarea>
 				<br>
 	
 				[= n _ =
