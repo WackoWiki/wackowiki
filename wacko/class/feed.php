@@ -110,7 +110,7 @@ class Feed
 		$prefix			= $this->engine->db->table_prefix;
 
 		//  collect data
-		$pages = $this->engine->load_all(
+		$pages = $this->engine->db->load_all(
 			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
 			"FROM {$prefix}page p, " .
 				"{$prefix}acl AS a " .
@@ -308,7 +308,7 @@ class Feed
 		$prefix		= $this->engine->db->table_prefix;
 
 		// collect data
-		$pages = $this->engine->load_all(
+		$pages = $this->engine->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.supertag, p.modified, p.page_lang " .
 			"FROM {$prefix}page p, " .
 				"{$prefix}acl AS a " .

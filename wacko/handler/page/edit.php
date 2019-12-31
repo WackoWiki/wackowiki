@@ -37,7 +37,7 @@ if ($this->has_access('read')
 	$user	= $this->get_user();
 
 	// is comment?
-	if ($this->page['comment_on_id'])
+	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'])
 	{
 		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_ALL); // TODO: LOAD_META only plus 'allow_rawhtml' and 'disable_safehtml'
 
@@ -56,7 +56,7 @@ if ($this->has_access('read')
 	}
 
 	// revision header
-	if ($this->page['latest'] == 0 && !!$this->page)
+	if (isset($this->page['latest']) && $this->page['latest'] == 0 && !!$this->page)
 	{
 		$message = Ut::perc_replace($this->_t('RevisionHint'),
 			$this->href(),
@@ -173,7 +173,7 @@ if ($this->has_access('read')
 				$body_r = $this->save_page($this->tag, $title, $body, $edit_note, $minor_edit, $reviewed, $this->page['comment_on_id']);
 
 				// is page ..
-				if ($this->page['comment_on_id'] == 0)
+				if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == 0)
 				{
 					// save categories
 					if ($this->page == false)
@@ -227,8 +227,8 @@ if ($this->has_access('read')
 	}
 
 	// fetch fields
-	$previous	= $_POST['previous']	?? $this->page['modified'];
-	$body		= $_POST['body']		?? $this->page['body'];
+	$previous	= $_POST['previous']	?? ($this->page['modified']	?? null);
+	$body		= $_POST['body']		?? ($this->page['body']		?? null);
 	$body		= html_entity_decode($body, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 	$title		= $_POST['title']
 					?? $this->page['title']
@@ -277,7 +277,7 @@ if ($this->has_access('read')
 		$text_chars			= number_format(strlen($_body), 0, ',', '.');
 		$preview			= $this->format($body,		'pre_wacko');
 		$preview			= $this->format($preview,	'wacko');
-		$preview			= $this->format($preview,	'post_wacko');
+		$preview			= $this->format($preview,	'post_wacko', ['stripnotypo' => true]);
 
 		$tpl->p_chars		= $text_chars;
 		$tpl->p_title		= $title;

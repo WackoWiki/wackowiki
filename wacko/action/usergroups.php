@@ -30,7 +30,7 @@ if ($user = $this->get_user())
 
 		echo '<table style="border-spacing: 5px; border-collapse: separate; padding: 5px;"><tr>';
 
-		$result = $this->load_all(
+		$result = $this->db->load_all(
 			"SELECT
 				g.group_name,
 				u.user_id,
