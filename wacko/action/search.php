@@ -255,7 +255,7 @@ $highlight_this = function ($text, $words, $the_place)
 			$word		= preg_quote($word);
 
 			// highlight uppercase and lowercase correctly
-			$text		= preg_replace('/(' . $word . ')/ui','<mark class="highlight">$1</mark>' , $text, -1 , $count);
+			$text		= preg_replace('/(' . $word . ')/ui', '<mark class="highlight">$1</mark>', $text, -1 , $count);
 			$the_count	= $count + $the_count;
 		}
 	}

@@ -22,11 +22,11 @@ if (in_array($options['wrapper_align'], ['center', 'left', 'right']))
 	$align_class = ' wrapper-' . $options['wrapper_align'];
 }
 
-echo	'<aside class="action' . $align_class . '" style="width: ' . (int) $options['wrapper_width'] . 'px;">' . "\n" .
+echo	'<ignore><aside class="action' . $align_class . '" style="width: ' . (int) $options['wrapper_width'] . 'px;">' . "\n" .
 			'<div class="action-content">' . "\n" .
 				$text.
 			"</div>\n" .
-		"</aside>\n";
+		"</aside></ignore>\n";
 
 if ($options['clear'])
 {
