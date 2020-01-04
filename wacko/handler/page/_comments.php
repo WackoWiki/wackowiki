@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // get number of user's pages, revisions and comments
-$handler_show_get_user_stats = function ($user_id)
+$get_user_stats = function ($user_id)
 {
 	if ($user_id == 0)
 	{
@@ -106,17 +106,15 @@ if ($this->has_access('read'))
 			// TODO: evaluate -> option / array to handle nested comments
 			// display relation as @link to an extra handler which filters / shows only the current tree
 
-			$tpl->enter('ol_');
+			$tpl->enter('ol_l_');
 
 			foreach ($comments as $comment)
 			{
-				$handler_button = '';
-
 				$this->cache_page($comment, true);
 
-				$tpl->l_href	= $this->href('', $comment['tag']);
-				$tpl->l_tag		= $comment['tag'];
-				$tpl->l_title	= $comment['title'];
+				$tpl->href	= $this->href('', $comment['tag']);
+				$tpl->tag	= $comment['tag'];
+				$tpl->title	= $comment['title'];
 
 				// show remove comment button
 				if ($this->is_admin()
@@ -125,17 +123,17 @@ if ($this->has_access('read'))
 						|| ($this->db->owners_can_remove_comments && $this->is_owner($this->page['page_id']))
 				)))
 				{
-					$tpl->l_b_remove_href = $this->href('remove', $comment['tag']);
+					$tpl->b_remove_href = $this->href('remove', $comment['tag']);
 				}
 
 				// show edit comment button
 				if ($this->is_admin() || $this->is_owner($comment['page_id']))
 				{
-					$tpl->l_b_edit_href = $this->href('edit', $comment['tag']);
+					$tpl->b_edit_href = $this->href('edit', $comment['tag']);
 				}
 				else // if ($this->has_access('read'))
 				{
-					$tpl->l_b_source_href = $this->href('source', $comment['tag']);
+					$tpl->b_source_href = $this->href('source', $comment['tag']);
 				}
 
 				// recompile if necessary
@@ -146,22 +144,25 @@ if ($this->has_access('read'))
 
 				# $user_stats = $handler_show_get_user_stats($comment['user_id']);
 
-				$tpl->l_comment	= $this->format($comment['body_r'], 'post_wacko', ['stripnotypo' => true]);
+				$tpl->comment	= $this->format($comment['body_r'], 'post_wacko', ['stripnotypo' => true]);
 
-				$tpl->l_owner	= $this->user_link($comment['owner_name']);
-				$tpl->l_created	= $comment['created'];
+				$tpl->owner		= $this->user_link($comment['owner_name']);
+				$tpl->created	= $comment['created'];
 
 				($comment['modified'] != $comment['created']
-							? $tpl->l_m_modified = $comment['modified']
+							? $tpl->m_modified = $comment['modified']
 							: '');
-						/*($user_stats == true
-							? '<li>' . $this->_t('UsersComments') . ': ' . $user_stats['comments'] . NBSP . NBSP . ' ' . $this->_t('UsersPages') . ': ' . $user_stats['pages'] . ' . NBSP . ' . $this->_t('UsersRevisions') . ': ' . $user_stats['revisions'] . "</li>\n"
-							: '') .*/
+
+				/* if ($user_stats = $get_user_stats($comment['owner_id']))
+				{
+					$tpl->s_comments	= $user_stats['comments'];
+					$tpl->s_pages		= $user_stats['pages'];
+					$tpl->s_revisions	= $user_stats['revisions'];
+				} */
 
 				// comment footer
 				/* echo '<div class="comment-tool">' . "\n";
 				echo '<ul class="" style="padding-left: 0;">' . "\n" .
-						"" .
 						'<li class="voting">
 							<a title="Vote up" class="vote-up  count-0" href="' . $this->href('rate', '', ['vote' => 1]) . '">
 								<span class="updatable count">0</span>
@@ -186,7 +187,7 @@ if ($this->has_access('read'))
 				echo "</div>\n"; */
 			}
 
-			$tpl->leave();
+			$tpl->leave(); // ol_l_
 		}
 
 		// display comment form
@@ -203,8 +204,6 @@ if ($this->has_access('read'))
 
 			$parent_id = (int) ($_GET['parent_id'] ?? 0);
 
-			// TODO: What about mode_rewrite off mode?
-			#echo $this->form_open('add_comment', ['page_method' => 'addcomment']);
 			$tpl->parent	= $parent_id;
 
 			// preview
@@ -247,7 +246,6 @@ if ($this->has_access('read'))
 				// watch a page
 				if ($this->page && !$this->is_watched)
 				{
-					#$tpl->w_value	= 1;
 					$tpl->w_checked	= $this->get_user_setting('send_watchmail') == 1 ? 'checked' : '';
 				}
 			}
