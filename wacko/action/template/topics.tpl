@@ -17,7 +17,7 @@
 				</p>
 				[''' pagination ''']
 			</div>
-	
+
 			<table class="forum">
 				<thead>
 					<tr>
@@ -38,7 +38,7 @@
 							[= updated =
 								<strong><span class="cite" title="[ ' _t: ForumNewPosts ' ]">[[ ' _t: ForumUpdated ' ]]</span> 
 							=]
-							<strong>[ ' title | e ' ]</strong>
+							<strong>[ ' title ' ]</strong>
 						</td>
 						<td class="t-center nowrap">
 							<small title="[ ' ip ' ]">
@@ -69,7 +69,7 @@
 				</tbody>
 				=]
 			</table>
-	
+
 			<div class="clearfix">
 				<p>
 					[= mark _ =
@@ -78,7 +78,7 @@
 				</p>
 				[''' pagination ''']
 			</div>
-	
+
 			[= form _ =
 				<form action="[ ' href ' ]" method="post" name="add_topic">
 					[ ' csrf: add_topic ' ]
