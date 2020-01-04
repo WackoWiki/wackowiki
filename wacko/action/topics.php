@@ -176,8 +176,8 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	$tpl->enter('topics_');
 
-	//  display search
-	$tpl->search = $this->action('search', ['for' => $this->tag, 'nomark' => 1, 'options' => 0]);
+	// display search
+	$tpl->search = $this->action('search', ['page' => '/' . $this->tag, 'nomark' => 0, 'options' => 0]);
 
 	if (!isset($_GET['phrase']))
 	{

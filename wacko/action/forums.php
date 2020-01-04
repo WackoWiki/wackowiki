@@ -88,103 +88,112 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	$tpl->enter('forum_');
 
-	$tpl->enter('f_');
+	// display search
+	$tpl->search = $this->action('search', ['page' => '/' . $this->tag, 'nomark' => 0, 'options' => 0]);
 
-	// display list
-	foreach ($forums as $forum)
+	if (!isset($_GET['phrase']))
 	{
-		// show only those forums where user has read access
-		if ($this->has_access('read', $forum['page_id']))
+		$tpl->enter('t_');
+		$tpl->enter('f_');
+
+		// display list
+		foreach ($forums as $forum)
 		{
-			// count total topics and posts
-			$counter = $this->db->load_single(
-				"SELECT count(a.page_id) as topics_total, sum(a.comments) as posts_total " .
-				"FROM " . $this->db->table_prefix . "page a " .
-				"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-					"AND a.deleted <> 1 ", true);
-
-			// load latest comment
-			$comments = $this->db->load_all(
-				"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.comment_on_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name " .
-				"FROM " . $this->db->table_prefix . "page a " .
-					"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
-					"LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
-				"WHERE b.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-					"OR a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
-					"AND a.deleted <> 1 " .
-				"ORDER BY a.created DESC ", true);
-
-			foreach ($comments as $_comment)
+			// show only those forums where user has read access
+			if ($this->has_access('read', $forum['page_id']))
 			{
-				if ($this->db->hide_locked)
+				// count total topics and posts
+				$counter = $this->db->load_single(
+					"SELECT count(a.page_id) as topics_total, sum(a.comments) as posts_total " .
+					"FROM " . $this->db->table_prefix . "page a " .
+					"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
+						"AND a.deleted <> 1 ", true);
+
+				// load latest comment
+				$comments = $this->db->load_all(
+					"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.comment_on_id, a.created, a.page_lang, b.tag as comment_on, b.title as topic_title, b.page_lang as topic_lang, u.user_name " .
+					"FROM " . $this->db->table_prefix . "page a " .
+						"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
+						"LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
+					"WHERE b.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
+						"OR a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
+						"AND a.deleted <> 1 " .
+					"ORDER BY a.created DESC ", true);
+
+				foreach ($comments as $_comment)
 				{
-					if ($this->has_access('read', $_comment['page_id']))
+					if ($this->db->hide_locked)
+					{
+						if ($this->has_access('read', $_comment['page_id']))
+						{
+							$comment = $_comment;
+							break;
+						}
+					}
+					else
 					{
 						$comment = $_comment;
 						break;
 					}
 				}
+
+				$this->cache_page($comment, true);
+
+				$forum['description'] = Ut::html($forum['description']); // don't use [ ' description | e ' ]
+
+				$tpl->counter = $counter; // array
+
+				if ($this->has_access('read', $forum['page_id'], GUEST) === false)
+				{
+					$tpl->closed	= true;
+				}
+
+				if (isset($user['last_mark'])
+					&& $comment['user_name'] != $user['user_name']
+					&& $comment['created'] > $user['last_mark'])
+				{
+					$tpl->updated	= true;
+				}
+
+				$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '');
+				$tpl->description	= $forum['description'];
+
+				if ($comment)
+				{
+					$tpl->enter('c_');
+
+					$tpl->comment	= $comment;
+					$tpl->user		= $this->user_link($comment['user_name']);
+
+					if ($comment['comment_on_id'])
+					{
+						$tpl->href	= $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'];
+						$tpl->title	= $comment['topic_title'];
+					}
+					else
+					{
+						$tpl->href	= $this->href('', $comment['tag']);
+						$tpl->title	= $comment['title'];
+					}
+
+					$tpl->leave();
+				}
 				else
 				{
-					$comment = $_comment;
-					break;
+					$tpl->none = true;
 				}
-			}
-
-			$this->cache_page($comment, true);
-
-			$forum['description'] = Ut::html($forum['description']); // don't use [ ' description | e ' ]
-
-			$tpl->counter = $counter; // array
-
-			if ($this->has_access('read', $forum['page_id'], GUEST) === false)
-			{
-				$tpl->closed	= true;
-			}
-
-			if (isset($user['last_mark'])
-				&& $comment['user_name'] != $user['user_name']
-				&& $comment['created'] > $user['last_mark'])
-			{
-				$tpl->updated	= true;
-			}
-
-			$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '');
-			$tpl->description	= $forum['description'];
-
-			if ($comment)
-			{
-				$tpl->enter('c_');
-
-				$tpl->comment	= $comment;
-				$tpl->user		= $this->user_link($comment['user_name']);
-
-				if ($comment['comment_on_id'])
-				{
-					$tpl->href	= $this->href('', $comment['comment_on'], ['p' => 'last']) . '#' . $comment['tag'];
-					$tpl->title	= $comment['topic_title'];
-				}
-				else
-				{
-					$tpl->href	= $this->href('', $comment['tag']);
-					$tpl->title	= $comment['title'];
-				}
-
-				$tpl->leave();
-			}
-			else
-			{
-				$tpl->none = true;
 			}
 		}
-	}
 
-	$tpl->leave();
+		$tpl->leave(); // f_
 
-	// mark all forums read
-	if ($user)
-	{
-		$tpl->mark_href = $this->href('', '', ['markread' => 1]);
+		// mark all forums read
+		if ($user)
+		{
+			$tpl->mark_href = $this->href('', '', ['markread' => 1]);
+		}
+
+		$tpl->leave(); // t_
 	}
 
 	if (!(int) $noxml)
