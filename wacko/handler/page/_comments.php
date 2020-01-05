@@ -131,7 +131,8 @@ if ($this->has_access('read'))
 				{
 					$tpl->b_edit_href = $this->href('edit', $comment['tag']);
 				}
-				else // if ($this->has_access('read'))
+				else if ((	$this->db->source_handler == 2 && $this->get_user())
+					||		$this->db->source_handler == 1)
 				{
 					$tpl->b_source_href = $this->href('source', $comment['tag']);
 				}

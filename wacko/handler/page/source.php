@@ -18,7 +18,10 @@ if (!$this->page)
 	$this->http->redirect($this->href());
 }
 
-if ($this->has_access('read'))
+if ($this->has_access('read')
+	&& ((	$this->db->source_handler == 2 && $this->get_user())
+		||	$this->db->source_handler == 1)
+)
 {
 	$tpl->h_head = Ut::perc_replace($this->_t('SourceFor'), $this->compose_link_to_page($this->tag, '', $this->page['title'], $this->tag));
 

@@ -322,8 +322,6 @@ $ap_translation = [
 	'TagsPanelInfo'				=> 'По умолчанию отображать в нижней части страниц панель категорий.',
 
 	'NavigationSection'			=> 'Navigation',
-	'HideRevisions'				=> 'Показ версий',
-	'HideRevisionsInfo'			=> 'Показывать версии страниц.',
 	'ShowPermalink'				=> 'Show Permalink',
 	'ShowPermalinkInfo'			=> 'The default display of the permalink for the current version of the page.',
 	'TocPanel'					=> 'Панель оглавления',
@@ -334,6 +332,14 @@ $ap_translation = [
 	'DisplayingSectionsInfo'	=> 'При включенной предыдущей опции, следует ли выводить только дочерние страницы (<em>нижние</em>), только соседние (<em>верхние</em>) или и те, и другие (<em>дерево</em>).',
 	'MenuItems'					=> 'Пункты меню',
 	'MenuItemsInfo'				=> 'Количество пунктов в меню. (требуется поддержка в шаблоне оформления).',
+
+	'HandlerSection'			=> 'Handler',
+	'HideRevisions'				=> 'Показ версий',
+	'HideRevisionsInfo'			=> 'Показывать версии страниц.',
+	'AttachmentHandler'			=> 'Разрешить обработчик вложений',
+	'AttachmentHandlerInfo'		=> 'Показывает обработчик вложений.',
+	'SourceHandler'				=> 'Enable source handler',
+	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
 
 	'FeedsSection'				=> 'RSS-каналы',
 	'EnableFeeds'				=> 'Включить RSS-каналы',
@@ -374,8 +380,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Разрешить хранить и показывать внешние реферреры.',
 	'ReferrersPurgeTime'		=> 'Срок хранения реферреров',
 	'ReferrersPurgeTimeInfo'	=> 'Хранить историю ссылающихся внешних страниц не более данного числа дней. Ноль означает вечное хранение, однако для активно посещаемого сайта это может привести к переполнению базы данных.',
-	'AttachmentHandler'			=> 'Разрешить обработчик вложений',
-	'AttachmentHandlerInfo'		=> 'Показывает обработчик вложений.',
 	'SearchEngineVisibility'	=> 'Блокировать поисковые боты',
 	'SearchEngineVisibilityInfo'=> 'Блокировать поисковые боты но разрешает визит обычных пользователей. Преобладает над установками страниц. <br>Не дает поисковым ботом индексировать сайт. Поисковые боты могут игнорировать эту директиву.',
 

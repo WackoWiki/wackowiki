@@ -319,8 +319,6 @@ $ap_translation = [
 	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
 
 	'NavigationSection'			=> 'Navigation',
-	'HideRevisions'				=> 'Hide Revisions',
-	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
 	'ShowPermalink'				=> 'Show Permalink',
 	'ShowPermalinkInfo'			=> 'The default display of the permalink for the current version of the page.',
 	'TocPanel'					=> 'Table of contents panel',
@@ -331,6 +329,15 @@ $ap_translation = [
 	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
 	'MenuItems'					=> 'Menu items',
 	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
+
+	'HandlerSection'			=> 'Handler',
+	'HideRevisions'				=> 'Hide Revisions',
+	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
+	'AttachmentHandler'			=> 'Enable attachments handler',
+	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
+	'SourceHandler'				=> 'Enable source handler',
+	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',
 	'EnableFeedsInfo'			=> 'Turns on or off RSS feeds for the entire wiki.',
@@ -368,8 +375,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
 	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
-	'AttachmentHandler'			=> 'Enable attachments handler',
-	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 

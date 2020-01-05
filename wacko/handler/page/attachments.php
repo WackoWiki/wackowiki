@@ -10,8 +10,8 @@ $this->ensure_page(true);
 
 // show attachments for current page
 if ($this->has_access('read')
-		&& ((	$this->db->attachments_handler == 2 && $this->get_user())
-			||	$this->db->attachments_handler == 1)
+	&& ((	$this->db->attachments_handler == 2 && $this->get_user())
+		||	$this->db->attachments_handler == 1)
 )
 {
 	// tab navigation
@@ -55,4 +55,9 @@ if ($this->has_access('read')
 
 	$tpl->leave();
 }
+else
+{
+	$this->http->status(403);
 
+	$tpl->message = $this->show_message($this->_t('ReadAccessDenied'), 'error', false);
+}

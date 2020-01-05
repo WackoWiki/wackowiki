@@ -319,8 +319,6 @@ $ap_translation = [
 	'TagsPanelInfo'				=> 'La visualización por defecto del panel de etiquetas en la parte inferior de la página.',
 
 	'NavigationSection'			=> 'Navegación',
-	'HideRevisions'				=> 'Suprimir revisiones',
-	'HideRevisionsInfo'			=> 'La visualización por defecto de las revisiones de la página.',
 	'ShowPermalink'				=> 'Mostrar Permalink',
 	'ShowPermalinkInfo'			=> 'La visualización por defecto del enlace permanente para la versión actual de la página.',
 	'TocPanel'					=> 'Panel de contenido',
@@ -331,6 +329,15 @@ $ap_translation = [
 	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
 	'MenuItems'					=> 'Menu items',
 	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
+
+	'HandlerSection'			=> 'Handler',
+	'HideRevisions'				=> 'Suprimir revisiones',
+	'HideRevisionsInfo'			=> 'La visualización por defecto de las revisiones de la página.',
+	'AttachmentHandler'			=> 'Habilitar el manejador de archivos adjuntos',
+	'AttachmentHandlerInfo'		=> 'Permite mostrar el manejador de archivos adjuntos.',
+	'SourceHandler'				=> 'Enable source handler',
+	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',
 	'EnableFeedsInfo'			=> 'Turns on or off RSS feeds for the entire wiki.',
@@ -368,8 +375,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Permite almacenar y mostrar referencias externas.',
 	'ReferrersPurgeTime'		=> 'Tiempo de almacenamiento de los referidos.',
 	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
-	'AttachmentHandler'			=> 'Habilitar el manejador de archivos adjuntos',
-	'AttachmentHandlerInfo'		=> 'Permite mostrar el manejador de archivos adjuntos.',
 	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
 

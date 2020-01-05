@@ -322,19 +322,24 @@ $ap_translation = [
 	'TagsPanelInfo'				=> 'Die Standardanzeige für Schlagworte im unteren Bereich der Seite.',
 
 	'NavigationSection'			=> 'Navigation',
-	'HideRevisions'				=> 'Seitenversionen ausblenden',
-	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
 	'ShowPermalink'				=> 'Zeige Permalink',
 	'ShowPermalinkInfo'			=> 'Die Standardanzeige des Permalinks für die aktuelle Version der Seite.',
 	'TocPanel'					=> 'Inhaltsverzeichnis',
 	'TocPanelInfo'				=> 'Die Standardanzeige für das Inhaltsverzeichnis-Fenster der Seite (setzt die Unterstützung durch das Layout vorraus).',
 	'SectionsPanel'				=> 'Bereichsanzeige (Seitenbaum)',
 	'SectionsPanelInfo'			=> 'Das Fenster zeigt standardmäßig benachbarte Seiten im Namensraum an (setzt die Unterstützung durch das Layout voraus).',
-
 	'DisplayingSections'		=> 'Angezeigte Bereiche',
 	'DisplayingSectionsInfo'	=> 'Wenn die vorherige Option aktiviert ist, werden nur untergeordnete Seiten (<em> untere </em>), nur benachbarte (<em> obere </em>) oder beide (<em> Baum </em>) ausgegeben.',
 	'MenuItems'					=> 'Menüpunkte',
 	'MenuItemsInfo'				=> 'Standardanzahl der angezeigten Menüelemente (setzt die Unterstützung durch das Layout vorraus).',
+
+	'HandlerSection'			=> 'Handler',
+	'HideRevisions'				=> 'Seitenversionen ausblenden',
+	'HideRevisionsInfo'			=> 'Die Standardanzeige der Seitenversionen.',
+	'AttachmentHandler'			=> 'Datei-Handler aktivieren',
+	'AttachmentHandlerInfo'		=> 'Erlaubt das Anzeigen des Datei-Handlers für Gäste oder registrierte Benutzer.',
+	'SourceHandler'				=> 'Quelltext-Handler aktivieren',
+	'SourceHandlerInfo'			=> 'Erlaubt das Anzeigen des Quelltext-Handlers für Gäste oder registrierte Benutzer.',
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Aktiviere Feeds',
@@ -376,8 +381,6 @@ $ap_translation = [
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
 	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, kann zu einer hohen Auslastung der Datenbank führen.',
 
-	'AttachmentHandler'			=> 'Datei-Handler aktivieren',
-	'AttachmentHandlerInfo'		=> 'Erlaubt das Anzeigen des Datei-Handlers für Gäste oder registrierte Benutzer.',
 	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
 	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
 
