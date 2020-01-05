@@ -82,6 +82,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
 		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
+		$config['source_handler']				= (int) $_POST['source_handler'];
 		$config['enable_comments']				= (int) $_POST['enable_comments'];
 		$config['sorting_comments']				= (int) $_POST['sorting_comments'];
 
@@ -334,20 +335,6 @@ function admin_config_basic(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for=""><strong><?php echo $engine->_t('HideRevisions');?>:</strong><br>
-					<small><?php echo $engine->_t('HideRevisionsInfo');?></small></label>
-				</td>
-				<td>
-					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ($engine->db->hide_revisions == 2 ? ' checked' : '');?>><label for="hide_revisions_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="hide_revisions_guest" name="hide_revisions" value="1"<?php echo ($engine->db->hide_revisions == 1 ? ' checked' : '');?>><label for="hide_revisions_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ($engine->db->hide_revisions == 0 ? ' checked' : '');?>><label for="hide_revisions_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
 					<label for=""><strong><?php echo $engine->_t('ShowPermalink');?>:</strong><br>
 					<small><?php echo $engine->_t('ShowPermalinkInfo');?></small></label>
 				</td>
@@ -355,20 +342,6 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="show_permalink_on" name="show_permalink" value="1"<?php echo ($engine->db->show_permalink == 1 ? ' checked' : '');?>><label for="show_permalink_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="show_permalink_guest" name="show_permalink" value="2"<?php echo ($engine->db->show_permalink == 2 ? ' checked' : '');?>><label for="show_permalink_guest"><?php echo $engine->_t('MetaRegistered');?></label>
 					<input type="radio" id="show_permalink_off" name="show_permalink" value="0"<?php echo ($engine->db->show_permalink == 0 ? ' checked' : '');?>><label for="show_permalink_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for=""><strong><?php echo $engine->_t('AttachmentHandler');?>:</strong><br>
-					<small><?php echo $engine->_t('AttachmentHandlerInfo');?></small></label>
-				</td>
-				<td>
-					<input type="radio" id="attachments_handler_on" name="attachments_handler" value="1"<?php echo ($engine->db->attachments_handler == 1 ? ' checked' : '');?>><label for="attachments_handler_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="attachments_handler_guest" name="attachments_handler" value="2"<?php echo ($engine->db->attachments_handler == 2 ? ' checked' : '');?>><label for="attachments_handler_guest"><?php echo $engine->_t('MetaRegistered');?></label>
-					<input type="radio" id="attachments_handler_off" name="attachments_handler" value="0"<?php echo ($engine->db->attachments_handler == 0 ? ' checked' : '');?>><label for="attachments_handler_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -421,6 +394,51 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="number" min="0" max="20" maxlength="4" id="menu_items" name="menu_items" value="<?php echo (int) $engine->db->menu_items;?>">
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('HandlerSection');?>
+				</th>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for=""><strong><?php echo $engine->_t('HideRevisions');?>:</strong><br>
+					<small><?php echo $engine->_t('HideRevisionsInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ($engine->db->hide_revisions == 2 ? ' checked' : '');?>><label for="hide_revisions_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="hide_revisions_guest" name="hide_revisions" value="1"<?php echo ($engine->db->hide_revisions == 1 ? ' checked' : '');?>><label for="hide_revisions_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ($engine->db->hide_revisions == 0 ? ' checked' : '');?>><label for="hide_revisions_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for=""><strong><?php echo $engine->_t('AttachmentHandler');?>:</strong><br>
+					<small><?php echo $engine->_t('AttachmentHandlerInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="attachments_handler_on" name="attachments_handler" value="1"<?php echo ($engine->db->attachments_handler == 1 ? ' checked' : '');?>><label for="attachments_handler_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="attachments_handler_guest" name="attachments_handler" value="2"<?php echo ($engine->db->attachments_handler == 2 ? ' checked' : '');?>><label for="attachments_handler_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="attachments_handler_off" name="attachments_handler" value="0"<?php echo ($engine->db->attachments_handler == 0 ? ' checked' : '');?>><label for="attachments_handler_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for=""><strong><?php echo $engine->_t('SourceHandler');?>:</strong><br>
+					<small><?php echo $engine->_t('SourceHandlerInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="source_handler_on" name="source_handler" value="1"<?php echo ($engine->db->source_handler == 1 ? ' checked' : '');?>><label for="source_handler_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="source_handler_guest" name="source_handler" value="2"<?php echo ($engine->db->source_handler == 2 ? ' checked' : '');?>><label for="source_handler_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="source_handler_off" name="source_handler" value="0"<?php echo ($engine->db->source_handler == 0 ? ' checked' : '');?>><label for="source_handler_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>

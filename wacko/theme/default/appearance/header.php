@@ -150,16 +150,14 @@ else
 	{
 		$echo_tab('edit', 'EditTip', 'EditText', 1, '', 'e');
 	}
-	else if ($readable)
+	else if ($readable
+		&& ((	$this->db->source_handler == 2 && $this->get_user())
+		||		$this->db->source_handler == 1)
+	)
 	{
 		$echo_tab('source', 'SourceTip', 'SourceText', 1, '', 'e');
 	}
 
-	/*
-	 * too expensive query for every page call
-	 *	- adds now real revision count to page table or just check $this->page['version_id'] > 1
-	 *	- update revision count if revisions were be purged manually or by time
-	if (!$this->count_revisions($this->page['page_id'], 0, $this->is_admin()))*/
 	if (!$this->page['revisions'])
 	{
 		// no revisions - nothing to show

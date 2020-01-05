@@ -191,6 +191,7 @@ $config_db['show_spaces']					= $config['show_spaces'];
 $config_db['site_desc']						= $config['site_desc'];
 $config_db['site_favicon']					= $config['site_favicon'];
 $config_db['site_name']						= $config['site_name'];
+$config_db['source_handler']				= $config['source_handler'];
 $config_db['smtp_connection_mode']			= $config['smtp_connection_mode'];
 $config_db['smtp_host']						= $config['smtp_host'];
 $config_db['smtp_password']					= $config['smtp_password'];

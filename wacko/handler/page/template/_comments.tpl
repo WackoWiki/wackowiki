@@ -35,7 +35,7 @@
 											<li><time datetime="[ ' modified ' ]"></time>[ ' modified | time_formatted ' ] [ ' _t: CommentEdited ' ]</li>
 										=]
 										[= s _ =
-											<li>[ ' _t: UsersComments ' ]: [ ' comments ' ] - [ ' _t: UsersPages ' ]: [ ' pages ' ] - [ ' _t: UsersRevisions ' ]: [ ' revisions ' ]</li>
+											<li>[ ' _t: UsersComments ' ]: [ ' comments ' ] • [ ' _t: UsersPages ' ]: [ ' pages ' ] • [ ' _t: UsersRevisions ' ]: [ ' revisions ' ]</li>
 										=]
 									</ul>
 								</footer>

@@ -319,8 +319,6 @@ $ap_translation = [
 	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
 
 	'NavigationSection'			=> 'Navigation',
-	'HideRevisions'				=> 'Masquer révisions',
-	'HideRevisionsInfo'			=> 'L\'affichage par défaut des révisions de la page.',
 	'ShowPermalink'				=> 'Afficher le lien permanent',
 	'ShowPermalinkInfo'			=> 'L\'affichage par défaut du permalien pour la version actuelle de la page.',
 	'TocPanel'					=> 'Table des matières panneau',
@@ -331,6 +329,15 @@ $ap_translation = [
 	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
 	'MenuItems'					=> 'Éléments du menu',
 	'MenuItemsInfo'				=> 'Nombre par défaut d\'éléments de menu affichés (peut avoir besoin d\'aide dans les modèles).',
+
+	'HandlerSection'			=> 'Handler',
+	'HideRevisions'				=> 'Masquer révisions',
+	'HideRevisionsInfo'			=> 'L\'affichage par défaut des révisions de la page.',
+	'AttachmentHandler'			=> 'Activer le gestionnaire de pièces jointes',
+	'AttachmentHandlerInfo'		=> 'Permet d\'afficher le gestionnaire de pièces jointes.',
+	'SourceHandler'				=> 'Enable source handler',
+	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Activer les flux',
 	'EnableFeedsInfo'			=> 'Active ou désactive les flux RSS pour l\'ensemble du wiki.',
@@ -368,8 +375,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Permet de stocker et d\'afficher les références externes.',
 	'ReferrersPurgeTime'		=> 'Temps de stockage des référents',
 	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
-	'AttachmentHandler'			=> 'Activer le gestionnaire de pièces jointes',
-	'AttachmentHandlerInfo'		=> 'Permet d\'afficher le gestionnaire de pièces jointes.',
 	'SearchEngineVisibility'	=> 'Bloquer les moteurs de recherche (Visibilité sur les moteurs de recherche)',
 	'SearchEngineVisibilityInfo'=> 'Bloquer les moteurs de recherche, mais permettre aux visiteurs normaux. Remplace les paramètres de page. <br>Décourager les moteurs de recherche d\'indexer ce site, c\'est aux moteurs de recherche d\'honorer cette demande.',
 
