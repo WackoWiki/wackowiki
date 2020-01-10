@@ -694,7 +694,7 @@ $ap_translation = [
 
 	'ForumSection'				=> 'Foro Opciones',
 	'ForumCluster'				=> 'Cluster Forum',
-	'ForumClusterInfo'			=> 'Address of the index (main) page of the forum.',
+	'ForumClusterInfo'			=> 'Root cluster for forum section (action %1).',
 	'ForumTopics'				=> 'Número de temas por página',
 	'ForumTopicsInfo'			=> 'Número de temas mostrados en cada página de la lista en las secciones del foro.',
 	'CommentsCount'				=> 'Número de comentarios por página',

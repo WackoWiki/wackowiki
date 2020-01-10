@@ -703,9 +703,9 @@ $ap_translation = [
 	'ForumSection'				=> 'Options Forum',
 
 	'ForumCluster'				=> 'Cluster Forum',
-	'ForumClusterInfo'			=> 'Adresse der Hauptseite des Forums.',
+	'ForumClusterInfo'			=> 'Root-Cluster für den Forumbereich (Aktion %1).',
 	'ForumTopics'				=> 'Anzahl der Themen pro Seite',
-	'ForumTopicsInfo'			=> 'Anzahl der Themen, die auf jeder Seite der Liste in den Forumsabschnitten angezeigt werden.',
+	'ForumTopicsInfo'			=> 'Anzahl der Themen, die auf jeder Seite der Liste in den Forumsabschnitten angezeigt werden (Aktion %1).',
 	'CommentsCount'				=> 'Anzahl der Kommentare pro Seite',
 	'CommentsCountInfo'			=> 'Die Anzahl der Kommentare, welche auf jeder Seite der in der Kommentarliste angezeigt werden. Dies gilt für alle Kommentare auf der Website und nicht nur für die im Forum.',
 
