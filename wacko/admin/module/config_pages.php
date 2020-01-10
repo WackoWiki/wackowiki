@@ -88,13 +88,25 @@ function admin_config_pages(&$engine, &$module)
 					<input type="number" min="0" maxlength="3" id="list_count" name="list_count" value="<?php echo (int) $engine->db->list_count;?>">
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="comments_count"><strong><?php echo $engine->_t('CommentsCount');?>:</strong><br>
+					<small><?php echo $engine->_t('CommentsCountInfo');?></small></label>
+				</td>
+				<td>
+					<input type="number" min="0" maxlength="3" id="comments_count" name="comments_count" value="<?php echo (int) $engine->db->comments_count;?>">
+				</td>
+			</tr>
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('ForumSection');?></th>
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="forum_cluster"><strong><?php echo $engine->_t('ForumCluster');?>:</strong><br>
-					<small><?php echo $engine->_t('');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('ForumClusterInfo'), '<code>{{forums}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="text" maxlength="255" id="forum_cluster" name="forum_cluster" value="<?php echo Ut::html($engine->db->forum_cluster);?>">
@@ -106,22 +118,10 @@ function admin_config_pages(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="forum_topics"><strong><?php echo $engine->_t('ForumTopics');?>:</strong><br>
-					<small><?php echo $engine->_t('ForumTopicsInfo');?></small></label>
+					<small><?php echo Ut::perc_replace($engine->_t('ForumTopicsInfo'), '<code>{{topics}}</code>');?></small></label>
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="3" id="forum_topics" name="forum_topics" value="<?php echo (int) $engine->db->forum_topics;?>">
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for="comments_count"><strong><?php echo $engine->_t('CommentsCount');?>:</strong><br>
-					<small><?php echo $engine->_t('CommentsCountInfo');?></small></label>
-				</td>
-				<td>
-					<input type="number" min="0" maxlength="3" id="comments_count" name="comments_count" value="<?php echo (int) $engine->db->comments_count;?>">
 				</td>
 			</tr>
 			<tr>
