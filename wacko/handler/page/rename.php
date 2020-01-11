@@ -37,6 +37,7 @@ if ($registered
 	{
 		if (@$_POST['_action'] === 'rename_page')
 		{
+			$log			= $tpl->massLog();
 			$new_tag		= $_POST['new_tag'];
 			$old_tag		= $this->page['tag'];
 
@@ -49,8 +50,8 @@ if ($registered
 			// rename
 			if (!isset($_POST['massrename']))
 			{
-				$message .= '<strong><code>' . $this->tag . "</code></strong>\n";
-				$message .= '<ol>';
+				$log->mode		= $this->_t('RenamePage');
+				$log->log_n_h	= $this->tag;
 
 				// rename single page
 				$need_redirect = @$_POST['redirect'] == 'on';
@@ -59,13 +60,13 @@ if ($registered
 				{
 					if ($this->remove_referrers($this->tag))
 					{
-						$message .= '<li>' . $this->_t('ReferrersRemoved') . "</li>\n";
+						$log->log_n_l_message = $this->_t('ReferrersRemoved');
 					}
 				}
 
 				if ($this->rename_page($this->tag, $new_tag))
 				{
-					$message .= '<li>' . $this->_t('PageRenamed') . "</li>\n";
+					$log->log_n_l_message = $this->_t('PageRenamed');
 				}
 
 				// unset object cache
@@ -80,25 +81,25 @@ if ($registered
 					// set redirect on original page
 					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_tag . '"}}', $this->_t('RedirectedTo') . ' ' . $new_tag))
 					{
-						$message .= '<li>' . Ut::perc_replace($this->_t('RedirectCreated'), $this->link('/' . $this->tag)) . "</li>\n";
+						$log->log_n_l_message = Ut::perc_replace($this->_t('RedirectCreated'), $this->link('/' . $this->tag));
+
+						$this->set_noindex($this->page['page_id']);
 					}
 
 					$this->clear_cache_wanted_page($this->tag);
 				}
 
-				$message .= '<li>' . $this->_t('NewNameOfPage') . $this->link('/' . $new_tag) . "</li>\n";
+				$log->log_n_l_message = $this->_t('NewNameOfPage') . $this->link('/' . $new_tag);
 
 				// log event
 				$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $this->tag, $new_tag) .
 					($need_redirect? $this->_t('LogRenamedPage2', SYSTEM_LANG) : '' ));
-
-				$message .= "</ol>\n";
 			}
 			else
 			{
 				// massrename
-				$message .= '<p><strong>' . $this->_t('MassRenaming') . '</strong><p>';   //!!!
-				$message .= recursive_move($this, $this->tag, $new_tag);
+				$log->mode		= $this->_t('MassRenaming');
+				recursive_move($this, $this->tag, $new_tag, $log);
 			}
 
 			$this->db->invalidate_sql_cache();
@@ -106,8 +107,7 @@ if ($registered
 			// update sitemap
 			$this->update_sitemap();
 
-			$this->set_message($message, 'success'); // TODO & error too
-
+			$this->set_message($log, 'success'); // TODO & error too
 			$this->http->redirect($this->href('', $new_tag));
 		}
 		else
@@ -126,7 +126,7 @@ if ($registered
 			// avoid charset conflict
 			if ($this->get_charset($this->page['page_lang']) != $this->get_charset($user_lang))
 			{
-				$tpl->m_warning = Ut::perc_replace($this->_t('RenameCharsetConflict'), '[<code>' . $user_lang . '</code>]', '[<code>' . $this->page['page_lang'] . '</code>]');
+				$tpl->m_warning		= Ut::perc_replace($this->_t('RenameCharsetConflict'), '[<code>' . $user_lang . '</code>]', '[<code>' . $this->page['page_lang'] . '</code>]');
 			}
 			else
 			{
@@ -149,7 +149,7 @@ if ($registered
 				$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
 
 				// show sub-pages
-				$tpl->tree 		= $this->action('tree', ['depth' => 3]);
+				$tpl->tree		= $this->action('tree', ['depth' => 3]);
 
 				$tpl->leave();
 			}
@@ -161,9 +161,8 @@ else
 	$tpl->denied = true;
 }
 
-function recursive_move(&$engine, $root, $new_root)
+function recursive_move(&$engine, $root, $new_root, $log)
 {
-	$message	= '';
 	$new_root	= trim($new_root, '/');
 	$user		= $engine->get_user();
 	$user_lang	= $user['user_lang'] ?: $engine->db->language;
@@ -186,18 +185,14 @@ function recursive_move(&$engine, $root, $new_root)
 						: "") .
 					"AND comment_on_id = 0");
 
-	$message .= "<ol>\n";
-
 	foreach ($pages as $page)
 	{
-		$message .= '<li><strong>' . $page['tag'] . "</strong>\n";
+		$log->log_n_h	= $page['tag'];
 
 		// avoid charset conflict
 		if ($engine->get_charset($page['page_lang']) != $engine->get_charset($user_lang))
 		{
-			$message .= "<ul>\n";
-			$message .= '<li>' . Ut::perc_replace($engine->_t('SkipCharsetConflict'), $engine->link('/' . $page['tag']), '<code>' . $page['page_lang'] . ' (' . $engine->get_charset($page['page_lang']) . ')</code>') . "</li>\n";
-			$message .= "</ul>\n</li>\n";
+			$log->log_n_l_message =  Ut::perc_replace($engine->_t('SkipCharsetConflict'), $engine->link('/' . $page['tag']), '<code>' . $page['page_lang'] . ' (' . $engine->get_charset($page['page_lang']) . ')</code>');
 
 			continue;
 		}
@@ -208,40 +203,31 @@ function recursive_move(&$engine, $root, $new_root)
 		// FIXME: preg_quote is not universally suitable for escaping the replacement string. A single . will become \. and the preg_replace call will not undo the escaping.
 		$new_tag = stripslashes($new_tag);
 
-		$message .= move($engine, $page, $new_tag);
-
-		$message .= "</li>\n";
+		move($engine, $page, $new_tag, $log);
 	}
-
-	$message .= "</ol>\n";
-
-	return $message;
 }
 
-function move(&$engine, $old_page, $new_tag)
+function move(&$engine, $old_page, $new_tag, $log)
 {
-	$message	= '';
 	$user		= $engine->get_user();
 	$user_id	= $engine->get_user_id();
 
 	if (($engine->check_acl($user['user_name'], $engine->db->rename_globalacl)
 	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id))
 	{
-		$message .= "<ul>\n";
-
 		if (!preg_match('/^([\_\.\-' . $engine->language['ALPHANUM_P'] . ']+)$/u', $new_tag))
 		{
-			$message .= '<li>' . $engine->_t('InvalidWikiName') . "</li>\n";
+			$log->log_n_l_message = $engine->_t('InvalidWikiName');
 		}
 		else if ($old_page['tag'] == $new_tag)
 		{
-			$message .= '<li>' . Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_tag)) . "</li>\n";
+			$log->log_n_l_message = Ut::perc_replace($engine->_t('AlreadyNamed'), $engine->link($new_tag));
 		}
 		else
 		{
 			if ($old_page['tag'] != $new_tag && $page = $engine->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$message .= '<li>' . Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_tag)) . "</li>\n";
+				$log->log_n_l_message = Ut::perc_replace($engine->_t('AlreadyExists'), $engine->link($new_tag));
 			}
 			else
 			{
@@ -252,13 +238,13 @@ function move(&$engine, $old_page, $new_tag)
 				{
 					if ($engine->remove_referrers($old_page['tag']))
 					{
-						$message .= '<li>' . $engine->_t('ReferrersRemoved') . "</li>\n";
+						$log->log_n_l_message = $engine->_t('ReferrersRemoved');
 					}
 				}
 
 				if ($engine->rename_page($old_page['tag'], $new_tag))
 				{
-					$message .= '<li>' . $engine->_t('PageRenamed') . "</li>\n";
+					$log->log_n_l_message = $engine->_t('PageRenamed');
 				}
 
 				// unset object cache for current page
@@ -272,22 +258,20 @@ function move(&$engine, $old_page, $new_tag)
 
 					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_tag . '"}}', $engine->_t('RedirectedTo') . ' ' . $new_tag))
 					{
-						$message .= '<li>' . Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link('/' . $old_page['tag'])) . "</li>\n";
+						$log->log_n_l_message = Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link('/' . $old_page['tag']));
+
+						$engine->set_noindex($old_page['page_id']);
 					}
 
 					$engine->clear_cache_wanted_page($old_page['tag']);
 				}
 
-				$message .= '<li>' . $engine->_t('NewNameOfPage') . $engine->link('/' . $new_tag) . "</li>\n";
+				$log->log_n_l_message = $engine->_t('NewNameOfPage') . $engine->link('/' . $new_tag);
 
 				// log event
 				$engine->log(3, Ut::perc_replace($engine->_t('LogRenamedPage', SYSTEM_LANG), $old_page['tag'], $new_tag) .
 					($need_redirect? $engine->_t('LogRenamedPage2', SYSTEM_LANG) : '' ));
 			}
 		}
-
-		$message .= "</ul>\n";
-
-		return $message;
 	}
 }

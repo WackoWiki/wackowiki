@@ -39,3 +39,20 @@
 			[ ' _t: NotOwnerCantRename ' ]
 		</div>
 	=]
+
+[ === massLog === ]
+<p><strong>[' mode ']</strong></p>
+[' log ']
+
+[ === log === ]
+<ol>
+	[= n _ =
+		<li><strong><code>[' h | e ']: </code></strong>
+			<ul>
+				[= l _ =
+					<li>['' message '']</li>
+				=]
+			</ul>
+		</li>
+	=]
+</ol>
