@@ -46,7 +46,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	{
 		$error	= '';
 
-		if (@$_POST['title'])
+		if (isset($_POST['title']))
 		{
 			$topic_name		= trim($_POST['title'], ". \t");
 			$page_title		= $topic_name;
