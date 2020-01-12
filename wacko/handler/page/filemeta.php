@@ -46,7 +46,7 @@ $format_desc = function($text, $file_lang)
 
 $clean_text = function ($string)
 {
-	$string = rtrim($string, '\\');
+	$string = utf8_rtrim($string, '\\');
 
 	// Make HTML in the description redundant
 	$string = $this->format($string, 'pre_wacko');
@@ -186,7 +186,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 		if ($file['page_id'])
 		{
 			$path	= 'file:/' . $file['tag'] . '/';
-			$href	= $this->href('file', trim($file['tag'], '/'), 'get=' . $file['file_name']);
+			$href	= $this->href('file', utf8_trim($file['tag'], '/'), 'get=' . $file['file_name']);
 		}
 		else
 		{

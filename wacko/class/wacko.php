@@ -3047,7 +3047,7 @@ class Wacko
 			$tag = $this->slim_url($tag);
 		}
 
-		$tag = trim($tag, '/.');
+		$tag = utf8_trim($tag, '/.');
 
 		// percent-encode the non-ASCII bytes (rfc3986)
 		if ($encode)
@@ -3542,13 +3542,13 @@ class Wacko
 
 				//unwrap tag (check !/, ../ cases)
 				$uw_tag			= $this->unwrap_link($_page_tag);
-				$page_tag		= rtrim($uw_tag, './');
+				$page_tag		= utf8_rtrim($uw_tag, './');
 				$page_id		= $this->get_page_id($page_tag);
 				$param			= $this->parse_media_param($file_name);
 
 				if ($file_data = $this->check_file_record($param['src'], $page_id))
 				{
-					$href = $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
+					$href = $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_name]);
 
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
@@ -3659,13 +3659,13 @@ class Wacko
 							if ($_global)
 							{
 								$src	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
-								$href	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
+								$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
 							else
 							{
 								// no direct file access for local files, the file handler checks the access right first
-								$src	= $this->href('file', trim($page_tag, '/'), ['get' => $file_data['file_name']]);
-								$href	= $this->href('filemeta', trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
+								$src	= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_data['file_name']]);
+								$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
 
 							switch ($param['linking'])
@@ -3748,7 +3748,7 @@ class Wacko
 				}
 				else //403
 				{
-					$href		= $this->href('file', trim($page_tag, '/'), ['get' => $file_name]);
+					$href		= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_name]);
 					$icon		= $this->_t('OuterIcon');
 					$img_link	= false;
 					$tpl		= 'localfile';
@@ -3766,7 +3766,7 @@ class Wacko
 				}
 				else
 				{
-					$title	= '404: /' . trim($page_tag, '/') . '/file' . ($this->db->rewrite_mode ? '?' : '&amp;') . 'get=' . $file_name;
+					$title	= '404: /' . utf8_trim($page_tag, '/') . '/file' . ($this->db->rewrite_mode ? '?' : '&amp;') . 'get=' . $file_name;
 				}
 			} //forgot 'bout 403
 
@@ -3850,7 +3850,7 @@ class Wacko
 				}
 			}
 
-			$unwtag			= trim($unwtag, '/.');
+			$unwtag			= utf8_trim($unwtag, '/.');
 			$unwtag			= str_replace('_', '', $unwtag);
 
 			if ($handler)
@@ -4492,7 +4492,7 @@ class Wacko
 					"(	from_page_id,
 						to_page_id,
 						to_tag) " .
-				"VALUES " . rtrim($query, ','));
+				"VALUES " . utf8_rtrim($query, ','));
 		}
 
 		// delete page related old file links in table
@@ -4515,7 +4515,7 @@ class Wacko
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->table_prefix . "file_link " .
 				"(page_id, file_id) " .
-				"VALUES " . rtrim($query, ','));
+				"VALUES " . utf8_rtrim($query, ','));
 		}
 
 		// delete page related old external links in table
@@ -4541,7 +4541,7 @@ class Wacko
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->table_prefix . "external_link " .
 				"(page_id, link) " .
-				"VALUES " . rtrim($query, ','));
+				"VALUES " . utf8_rtrim($query, ','));
 		}
 	}
 
@@ -4731,7 +4731,7 @@ class Wacko
 
 			if ($ref !== $headless) // if protocol known..
 			{
-				$we = rtrim(str_replace($heads, '', $this->db->base_url), '/');
+				$we = utf8_rtrim(str_replace($heads, '', $this->db->base_url), '/');
 
 				if (strncasecmp($headless, $we, strlen($we))) // if not from ourselves..
 				{
@@ -7086,7 +7086,7 @@ class Wacko
 	// $page_id is preferred, $tag next
 	function get_page_title($tag = '', $page_id = 0) : string
 	{
-		$tag = trim($tag, '/');
+		$tag = utf8_trim($tag, '/');
 
 		if ($tag || $page_id)
 		{
@@ -7108,8 +7108,8 @@ class Wacko
 		// default page title is just page's WikiName
 		return $title
 				?: ($tag
-					? $this->add_spaces_title(trim(mb_substr($tag, mb_strrpos($tag, '/')), '/'))
-					: $this->add_spaces_title(trim(mb_substr($this->tag, mb_strrpos($this->tag, '/')), '/')));
+					? $this->add_spaces_title(utf8_trim(mb_substr($tag, mb_strrpos($tag, '/')), '/'))
+					: $this->add_spaces_title(utf8_trim(mb_substr($this->tag, mb_strrpos($this->tag, '/')), '/')));
 	}
 
 	// CLONE / RENAMING / MOVING

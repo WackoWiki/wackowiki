@@ -484,7 +484,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if (isset($_POST['accept']))
 			{
 				$old_tag	= $this->get_page_tag($set[0]);
-				$tag		= trim($_POST['new_tag'], " \t");
+				$tag		= utf8_trim($_POST['new_tag'], " \t");
 				$title		= $tag;
 				$tag 		= utf8_ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
@@ -788,7 +788,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$new_tag	= ($_POST['cluster']
 								? ($_POST['cluster'] == '/'
 									? ''
-									: trim($_POST['cluster'], '/') . '/'
+									: utf8_trim($_POST['cluster'], '/') . '/'
 									)
 								: $_POST['section'] . '/'
 								) . $sub_tag;
@@ -852,7 +852,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				$pos		= mb_strrpos($this->tag, '/');
 				$section	= mb_substr($this->tag, 0, ($pos ?: null));
-				$tag		= trim($_POST['new_tag'], " \t");
+				$tag		= utf8_trim($_POST['new_tag'], " \t");
 				$title		= $tag;
 				$tag 		= utf8_ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
@@ -964,7 +964,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			{
 				$section	= mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'));
 				$old_tag	= $this->tag;
-				$tag		= trim($_POST['new_tag'], "/ \t");
+				$tag		= utf8_trim($_POST['new_tag'], "/ \t");
 				$title		= $tag;
 				$page_id	= $this->get_page_id($tag);
 				$tag		= utf8_ucwords($tag);

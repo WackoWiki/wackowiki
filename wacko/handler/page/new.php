@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 //		either by user 'SYSTEM' or better via service: namespace
 
 // process input
-if (isset($_POST['tag']) && $new_tag = trim($_POST['tag'], '.-/ '))
+if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 {
 	switch ((int) $_POST['option'])
 	{
