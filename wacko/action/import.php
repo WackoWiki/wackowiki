@@ -79,8 +79,8 @@ if ($this->is_admin())
 
 			foreach ($items as $item)
 			{
-				$root_tag	= trim($_POST['_to'], '/ ');
-				$rel_tag	= trim(Ut::untag($item, 'guid'), '/ ');
+				$root_tag	= utf8_trim($_POST['_to'], '/ ');
+				$rel_tag	= utf8_trim(Ut::untag($item, 'guid'), '/ ');
 				$tag		= $root_tag.( $root_tag && $rel_tag ? '/' : '' ).$rel_tag;
 				$page_id	= $this->get_page_id($tag);
 				$owner		= Ut::untag($item, 'author');

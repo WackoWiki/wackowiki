@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 
 $clean_text = function ($string)
 {
-	$string = rtrim($string, '\\');
+	$string = utf8_rtrim($string, '\\');
 
 	// Make HTML in the description redundant
 	$string = $this->format($string, 'pre_wacko');
@@ -129,7 +129,7 @@ if (isset($_POST['upload']) & $can_upload)
 			// prepare for translit
 			$name	= str_replace(['@', '%20', '+'], '-', $name);
 			$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
-			$name	= trim($name, ' .-_');
+			$name	= utf8_trim($name, ' .-_');
 			$name	= Ut::normalize($name);
 
 			// here would be place for translit

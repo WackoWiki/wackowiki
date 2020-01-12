@@ -48,7 +48,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 		if (isset($_POST['title']))
 		{
-			$topic_name		= trim($_POST['title'], ". \t");
+			$topic_name		= utf8_trim($_POST['title'], ". \t");
 			$page_title		= $topic_name;
 			$topic_name		= utf8_ucwords($topic_name);
 			$topic_name		= preg_replace('/[^- \\w]/u', '', $topic_name);
@@ -88,7 +88,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 		foreach ($pages as &$page)
 		{
-			$page = trim($page, '/ ');
+			$page = utf8_trim($page, '/ ');
 		}
 	}
 

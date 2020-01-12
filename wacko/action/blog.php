@@ -43,7 +43,7 @@ if (!empty($blog_cluster))
 		// checking user input
 		if (isset($_POST['title']))
 		{
-			$name		= trim($_POST['title'], ". \t");
+			$name		= utf8_trim($_POST['title'], ". \t");
 			$namehead	= $name;
 			$name		= utf8_ucwords($name);
 			$name		= preg_replace('/[^- \\w]/u', '', $name);

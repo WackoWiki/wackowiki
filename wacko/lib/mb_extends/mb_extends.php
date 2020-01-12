@@ -30,7 +30,59 @@ function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
 	return preg_replace($search, $replace, $string);
 }
 
-// taken from https://sourceforge.net/projects/phputf8/
+// taken from phputf8 https://sourceforge.net/projects/phputf8/
+
+/**
+* UTF-8 aware replacement for ltrim()
+* Note: you only need to use this if you are supplying the charlist
+* optional arg and it contains UTF-8 characters. Otherwise ltrim will
+* work normally on a UTF-8 string
+* @see http://www.php.net/ltrim
+* @return string
+*/
+function utf8_ltrim($str, $charlist = false)
+{
+	if($charlist === false) return ltrim($str);
+
+	//quote charlist for use in a characterclass
+	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!','\\\${1}', $charlist);
+
+	return preg_replace('/^[' . $charlist . ']+/u', '', $str);
+}
+
+/**
+* UTF-8 aware replacement for rtrim()
+* Note: you only need to use this if you are supplying the charlist
+* optional arg and it contains UTF-8 characters. Otherwise rtrim will
+* work normally on a UTF-8 string
+* @see http://www.php.net/rtrim
+* @return string
+*/
+function utf8_rtrim($str, $charlist = false)
+{
+	if($charlist === false) return rtrim($str);
+
+	//quote charlist for use in a characterclass
+	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!','\\\${1}', $charlist);
+
+	return preg_replace('/[' . $charlist . ']+$/u', '', $str);
+}
+
+/**
+* UTF-8 aware replacement for trim()
+* Note: you only need to use this if you are supplying the charlist
+* optional arg and it contains UTF-8 characters. Otherwise trim will
+* work normally on a UTF-8 string
+* @see http://www.php.net/trim
+* @return string
+*/
+function utf8_trim($str, $charlist = false)
+{
+	if($charlist === false) return trim($str);
+
+	return utf8_ltrim(utf8_rtrim($str, $charlist), $charlist);
+}
+
 /**
 * UTF-8 aware alternative to ucwords
 * Uppercase the first character of each word in a string

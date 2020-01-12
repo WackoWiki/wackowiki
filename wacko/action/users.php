@@ -164,7 +164,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				else
 				{
 					// compose message
-					$prefix		= rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
+					$prefix		= utf8_rtrim(str_replace(['https://www.', 'https://', 'http://www.', 'http://'], '', $this->db->base_url), '/');
 					$msg_id		= date('ymdHi') . '.' . Ut::rand(100000, 999999) . '@' . $prefix;
 					$subject	= $_POST['mail_subject'];
 					$body		= $_POST['mail_body'];

@@ -66,7 +66,7 @@ $ta_id	= $_GET['ta_id'];
 
 
 // 1. unwrap
-$q = ltrim($q, '/');
+$q = utf8_ltrim($q, '/');
 $tag1 = $this->unwrap_link($q);
 $tag2 = $q;
 

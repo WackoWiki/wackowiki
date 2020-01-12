@@ -163,7 +163,7 @@ else
 
 function recursive_move(&$engine, $root, $new_root, $log)
 {
-	$new_root	= trim($new_root, '/');
+	$new_root	= utf8_trim($new_root, '/');
 	$user		= $engine->get_user();
 	$user_lang	= $user['user_lang'] ?: $engine->db->language;
 
