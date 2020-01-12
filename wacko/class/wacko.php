@@ -6407,34 +6407,24 @@ class Wacko
 	{
 		$page_id = $this->page['page_id'];
 
-		if ( $size )
+		if ($size)
 		{
-			#echo '### 1';
 			if (isset($this->sess->user_trail))
 			{
 				$count = count($this->sess->user_trail);
-				#echo '### @: [' . $count . ']';
-
-				#Ut::debug_print_r($this->sess->user_trail);
 
 				if (isset($this->sess->user_trail[$count - 1][0])
 					&&    $this->sess->user_trail[$count - 1][0] == $page_id)
 				{
-					#echo '### 2: [' . $count . ']';
 					// nothing
 				}
 				else
 				{
-					#echo '### 3';
-
 					if (count($this->sess->user_trail) > $size)
 					{
-						#echo '### 4';
-						$this->sess->user_trail	= array_slice($this->sess->user_trail, -5 );
-						#Ut::debug_print_r($this->sess->user_trail);
+						$this->sess->user_trail	= array_slice($this->sess->user_trail, -$size);
 					}
 
-					#echo '### 5';
 					$_user_trail[-1]	= [$page_id, $this->page['tag'], $this->page['title']];
 					$user_trail			= $this->sess->user_trail + $_user_trail;
 					$user_trail			= array_values($user_trail);
@@ -6444,7 +6434,6 @@ class Wacko
 			}
 			else
 			{
-				#echo '### 6';
 				$this->sess->user_trail[] = [$page_id, $this->page['tag'], $this->page['title']];
 			}
 		}
@@ -6462,12 +6451,9 @@ class Wacko
 		if (isset($this->sess->user_trail))
 		{
 			$links		= $this->sess->user_trail;
-			#$count		= count($this->sess->user_trail);
 			$result		= '';
 			$size		= (int) $size;
 			$i			= 0;
-
-			#Ut::debug_print_r($links);
 
 			foreach ($links as $link)
 			{
