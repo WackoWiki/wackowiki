@@ -39,7 +39,6 @@ TODO: config settings
 	- add filter for categories cat="one,two"
 	- remove thumbs with file or page
 	- fall back if no JS or Image manipulation library is available or disabled
-
 */
 
 // Include PHP Thumbnailer
@@ -57,7 +56,6 @@ $file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
 $thumb_prefix	= 'tn_';
 $imgclass		= '';
-$img_spacer		= '';
 $width			= $this->db->img_max_thumb_width; // default: 150
 
 if (!isset($page))		$page		= '';
@@ -233,7 +231,9 @@ if ($can_view)
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 				}
 
-				$tpl->img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' . ($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . ' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
+				$tpl->img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' .
+					($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') .
+					' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
 				if (!file_exists($tnb_path))
 				{
@@ -289,10 +289,6 @@ if ($can_view)
 
 					$tpl->table = true;
 				}
-				else
-				{
-					#$tpl->spacer	= $img_spacer;
-				}
 
 				if (!$target)
 				{
@@ -310,7 +306,6 @@ if ($can_view)
 						#$tpl->token			= $param_token;
 						$tpl->datafancybox	= ' data-fancybox="'. $param_token .'"';
 						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
-						#echo '<a href="' . $url . '" data-fancybox="'. $param_token .'" data-caption="' . $file_description . '" '.($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') . '>' . $img . "</a>\n";
 					}
 					else
 					{
@@ -337,10 +332,6 @@ if ($can_view)
 				if ($cur == 0)
 				{
 					$tpl->next	= ($table ? '</tr>' : '<br>');
-				}
-				else
-				{
-					#echo $img_spacer;
 				}
 			}
 
@@ -383,7 +374,7 @@ if ($can_view)
 			// show image
 			if ($file['picture_w'] || $file['file_ext'] == 'svg')
 			{
-				$tpl->img	=  $this->link($path . $file['file_name']);
+				$tpl->img		=  $this->link($path . $file['file_name']);
 			}
 
 			$tpl->enter('navigation_');
