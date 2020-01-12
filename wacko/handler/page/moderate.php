@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 $tpl->title = ($this->forum
-		? $this->_t('Topics')
-		: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
+	? $this->_t('Topics')
+	: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
 
 $tpl->moderate =  ($this->forum ? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '« ' . $this->_t('ModerateSection2')) . '<br><br>' : '');
 
@@ -486,8 +486,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$old_tag	= $this->get_page_tag($set[0]);
 				$tag		= trim($_POST['new_tag'], " \t");
 				$title		= $tag;
-				$tag 		= ucwords($tag);
-				$tag		= preg_replace('/[^- \\w]/', '', $tag);
+				$tag 		= utf8_ucwords($tag);
+				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
 
 				// check new tag existence
@@ -854,8 +854,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$section	= mb_substr($this->tag, 0, ($pos ?: null));
 				$tag		= trim($_POST['new_tag'], " \t");
 				$title		= $tag;
-				$tag 		= ucwords($tag);
-				$tag		= preg_replace('/[^- \\w]/', '', $tag);
+				$tag 		= utf8_ucwords($tag);
+				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
 				$old_tag	= $this->tag;
 				$new_tag	= ($section ? $section . '/' : '') . $tag;
@@ -967,8 +967,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= trim($_POST['new_tag'], "/ \t");
 				$title		= $tag;
 				$page_id	= $this->get_page_id($tag);
-				$tag		= ucwords($tag);
-				$tag		= preg_replace('/[^- \\w]/', '', $tag);
+				$tag		= utf8_ucwords($tag);
+				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
 
 				if ($forum_cluster === true)

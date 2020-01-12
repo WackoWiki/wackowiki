@@ -50,8 +50,8 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 		{
 			$topic_name		= trim($_POST['title'], ". \t");
 			$page_title		= $topic_name;
-			$topic_name		= ucwords($topic_name);
-			$topic_name		= preg_replace('/[^- \\w]/', '', $topic_name);
+			$topic_name		= utf8_ucwords($topic_name);
+			$topic_name		= preg_replace('/[^- \\w]/u', '', $topic_name);
 			$topic_name		= str_replace([' ', "\t"], '', $topic_name);
 
 			if (!$topic_name)

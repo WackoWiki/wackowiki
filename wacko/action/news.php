@@ -38,8 +38,8 @@ if (!empty($this->db->news_cluster))
 		{
 			$name		= trim($_POST['title'], ". \t");
 			$namehead	= $name;
-			$name		= ucwords($name);
-			$name		= preg_replace('/[^- \\w]/', '', $name);
+			$name		= utf8_ucwords($name);
+			$name		= preg_replace('/[^- \\w]/u', '', $name);
 			$name		= str_replace([' ', "\t"], '', $name);
 
 			if ($name == '')
