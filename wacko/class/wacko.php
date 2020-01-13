@@ -6110,7 +6110,7 @@ class Wacko
 		{
 			$mode = 'registered';
 		}
-		else if(in_array(strtolower($user['user_name']), $acl) && count($acl) == 1)
+		else if(in_array(mb_strtolower($user['user_name']), $acl) && count($acl) == 1)
 		{
 			$mode = 'privat';
 		}

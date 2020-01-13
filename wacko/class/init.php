@@ -31,6 +31,8 @@ if (function_exists('date_default_timezone_set') && function_exists('date_defaul
 	date_default_timezone_set(@date_default_timezone_get());
 }
 
+ini_set('default_charset', 'UTF-8');
+
 // will compress manually to produce correct Content-Length header
 ini_set('zlib.output_compression', 'Off');
 ob_start();

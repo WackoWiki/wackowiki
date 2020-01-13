@@ -31,7 +31,7 @@ class RawHtmlFormatter
 			}
 
 			$language = $params['name'];
-			$formatter = strtolower($language);
+			$formatter = mb_strtolower($language);
 
 			if ($formatter == 'с')		$formatter = 'c';		// cyrillic -> latin
 			if ($formatter == 'c')		$formatter = 'comment';
