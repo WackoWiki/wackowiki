@@ -24,14 +24,14 @@ else
 	}
 	else
 	{
-		$strings		= preg_replace('/\{\{[^\}]+\}\}/', '', $phrase_page['body']);
+		$strings		= preg_replace('/\{\{[^\}]+\}\}/u', '', $phrase_page['body']);
 		$strings		= $this->format($strings);
 		$strings		= $this->format($strings, 'post_wacko');
 		$splitexpr		= '|<br>|';
 
 		if ($use_empty_string)
 		{
-			$splitexpr = '|<br>[\n\r ]*<br>|';
+			$splitexpr = '|<br>[\n\r ]*<br>|u';
 		}
 
 		$lines = preg_split($splitexpr, $strings);

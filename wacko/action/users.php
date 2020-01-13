@@ -453,7 +453,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 									$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
 								}
 
-								preg_match('/^[^\/]+/', $upload['file_on_page'], $sub_tag);
+								preg_match('/^[^\/]+/u', $upload['file_on_page'], $sub_tag);
 
 								// TODO needs to be redone, moving to tpl
 								if ($upload['page_id']) // !$global

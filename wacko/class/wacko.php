@@ -422,7 +422,7 @@ class Wacko
 		if ($strip)
 		{
 			// STS: hack! need to patch language files...
-			$out = substr($out, 0, strrpos($out, ' '));
+			$out = mb_substr($out, 0, mb_strrpos($out, ' '));
 		}
 
 		return $out;
@@ -1763,14 +1763,14 @@ class Wacko
 				// create appropriate acls
 				if (mb_strstr($this->context[$this->current_context], '/') && !$comment_on_id)
 				{
-					$root			= preg_replace( '/^(.*)\\/([^\\/]+)$/', '$1', $this->context[$this->current_context] );
+					$root			= preg_replace( '/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context] );
 					$root_id		= $this->get_page_id($root);
 					$write_acl		= $this->load_acl($root_id, 'write');
 
 					while (!empty($write_acl['default']) && $write_acl['default'] == 1)
 					{
 						$_root		= $root;
-						$root		= preg_replace('/^(.*)\\/([^\\/]+)$/', '$1', $root);
+						$root		= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $root);
 
 						if ($root == $_root)
 						{
@@ -2701,7 +2701,7 @@ class Wacko
 					{
 						$subject	= $this->_t('WatchedPageChanged') . "'" . $title . "'";
 
-						$patterns		= ['/%%SimpleDiffAdditions%%/',			'/%%SimpleDiffDeletions%%/'];
+						$patterns		= ['/%%SimpleDiffAdditions%%/u',			'/%%SimpleDiffDeletions%%/u'];
 						$replacements	= [$this->_t('SimpleDiffAdditions'),	$this->_t('SimpleDiffDeletions')];
 						$diff			= preg_replace($patterns, $replacements, $diff);
 
@@ -3381,7 +3381,7 @@ class Wacko
 			// XXX: user can't check or upload to image/ folder - how useful is this?
 			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
 		}
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/i', preg_replace('/<\/?nobr>/', '', $text), $matches))
+		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/i', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
 
@@ -3731,7 +3731,7 @@ class Wacko
 												($file_data['license_id']
 													? ' /' .
 														// FIXME; bad .tpl hack to remove line feed and indent stuff
-														preg_replace('/[\r\n\t]+/', '', $this->action('license', ['license_id' => $file_data['license_id'], 'intro' => 0]))
+														preg_replace('/[\r\n\t]+/u', '', $this->action('license', ['license_id' => $file_data['license_id'], 'intro' => 0]))
 													: '') .
 												')</small></span>'
 											: '');
@@ -4278,15 +4278,15 @@ class Wacko
 
 		if (!strncmp($text, '/', 1))
 		{
-			$text = $this->_t('RootLinkIcon') . substr($text, 1);
+			$text = $this->_t('RootLinkIcon') . mb_substr($text, 1);
 		}
 		else if (!strncmp($text, '!/', 2))
 		{
-			$text = $this->_t('SubLinkIcon') . substr($text, 2);
+			$text = $this->_t('SubLinkIcon') . mb_substr($text, 2);
 		}
 		else if (!strncmp($text, '../', 3))
 		{
-			$text = $this->_t('UpLinkIcon') . substr($text, 3);
+			$text = $this->_t('UpLinkIcon') . mb_substr($text, 3);
 		}
 
 		return $text;
@@ -4340,14 +4340,14 @@ class Wacko
 		}
 
 		// TODO: disallow random pages for the first level in the users cluster except the own [UserName].
-		/* if (preg_match( '/\b(' . $this->db->users_page . '\/*\/)\b/i', $_data, $match ))
+		/* if (preg_match( '/\b(' . $this->db->users_page . '\/*\/)\b/ui', $_data, $match ))
 		{
 			Ut::debug_print_r($match);
 			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
 		} */
 
 		/*
-		if (preg_match( '/^\/[0-9]+/', $_data, $match ))
+		if (preg_match( '/^\/[0-9]+/u', $_data, $match ))
 		{
 			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
 			/// !!! to messageset, begins with 0-9
@@ -4362,7 +4362,7 @@ class Wacko
 	function sanitize_new_pagename(&$tag, $old_tag = false) : ?string
 	{
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes
-		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#',
+		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
 			function ($x)
 			{
 				return @$x[1]? '/' : '';
@@ -4925,7 +4925,7 @@ class Wacko
 		$result				= $this->include_buffered($method_location, $errmsg, '', HANDLER_DIR);
 
 		return (!strncmp($result, ADD_NO_DIV, strlen(ADD_NO_DIV)))
-			? substr($result, strlen(ADD_NO_DIV))
+			? mb_substr($result, strlen(ADD_NO_DIV))
 			: '<div id="' . $handler . '">' . $result . "</div>\n";
 	}
 
@@ -5576,8 +5576,8 @@ class Wacko
 
 		foreach ($lines as $line)
 		{
-			if (!( preg_match('/^([(\!)?' . $this->language['ALPHANUM_P'] . ']*)$/', $line)
-				|| preg_match('/^((\!)?[(\*|\$)])$/', $line) ))
+			if (!( preg_match('/^([(\!)?' . $this->language['ALPHANUM_P'] . ']*)$/u', $line)
+				|| preg_match('/^((\!)?[(\*|\$)])$/u', $line) ))
 			{
 				$error	.= '<code>' . $line . '</code><br>';
 			}
@@ -5982,7 +5982,7 @@ class Wacko
 				$linel = $line;
 
 				// check for inversion character "!"
-				if (preg_match('/^\!(.*)$/', $line, $matches))
+				if (preg_match('/^\!(.*)$/u', $line, $matches))
 				{
 					$negate	= 1;
 					$linel	= $matches[1];
@@ -6812,9 +6812,9 @@ class Wacko
 
 		// forum page
 		$this->forum =
-			!! (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->tag)
+			!! (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->tag)
 			|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id']
-				? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/', $this->get_page_tag($this->page['comment_on_id']))
+				? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->get_page_tag($this->page['comment_on_id']))
 				: ''));
 
 		// display page contents

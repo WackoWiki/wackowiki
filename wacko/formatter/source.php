@@ -26,7 +26,7 @@ switch ($default)
 {
 	case 'wacko':
 		// strip comments
-		$text = preg_replace('/(\n?)%%\((comment)\).*?%%([\n\r]*)/ims', '', $text);
+		$text = preg_replace('/(\n?)%%\((comment)\).*?%%([\n\r]*)/uims', '', $text);
 
 		$text = Ut::html($text, false);
 
@@ -34,10 +34,10 @@ switch ($default)
 		$text .= "\n\n----\n" . $this->_t('SourceFrom') . '((/' . $source . '))';
 
 		// prepare a text to the conclusion
-		$text = preg_replace_callback('/^ +/m',
+		$text = preg_replace_callback('/^ +/um',
 			function ($matches)
 			{
-				$m = strlen($matches[0]);
+				$m = mb_strlen($matches[0]);
 				return str_repeat('&nbsp; ', $m >> 1) . (($m & 1)? '&nbsp;' : '');
 			},
 			$text);

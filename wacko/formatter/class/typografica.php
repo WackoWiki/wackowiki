@@ -135,7 +135,7 @@ class Typografica
 			{
 				if ($this->settings['html'])
 				{
-					$matches[0][$i] = '&lt;' . substr($matches[0][$i], 1);
+					$matches[0][$i] = '&lt;' . mb_substr($matches[0][$i], 1);
 				}
 
 				$tags[] = $matches[0][$i];
@@ -238,7 +238,7 @@ class Typografica
 			$data = str_replace('<nobr>', '<span class="nobr">', str_replace('</nobr>', '</span>', $data));
 		}
 
-		return preg_replace('/^(\s)+/', '',  preg_replace('/(\s)+$/u', '', $data));
+		return preg_replace('/^(\s)+/u', '',  preg_replace('/(\s)+$/u', '', $data));
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -262,8 +262,8 @@ class Typografica
 		// 1. English quotes
 		if ($this->settings['quotes'])
 		{
-			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data);
-			$data	= preg_replace('/\"\.\"/i', '&quot;.&quot;', $data);
+			$data	= preg_replace('/\"\"/ui', '&quot;&quot;', $data);
+			$data	= preg_replace('/\"\.\"/ui', '&quot;.&quot;', $data);
 			$_data	= "\"\"";
 
 			while ($_data != $data)
@@ -277,7 +277,7 @@ class Typografica
 		// 2. angle quotes
 		if ($this->settings['laquo'])
 		{
-			$data	= preg_replace('/\"\"/i', '&quot;&quot;', $data);
+			$data	= preg_replace('/\"\"/ui', '&quot;&quot;', $data);
 			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
 			// nb: wacko only regexp follows:
 			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/\u{00A0}|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
@@ -324,25 +324,25 @@ class Typografica
 		// 4a. (r)
 		if ($this->settings['(r)'])
 		{
-			$data = preg_replace('/\(r\)/i', '<sup>®</sup>', $data);	// \u{00AE}
+			$data = preg_replace('/\(r\)/ui', '<sup>®</sup>', $data);	// \u{00AE}
 		}
 
 		// 4b. (tm)
 		if ($this->settings['(tm)'])
 		{
-			$data = preg_replace('/\(tm\)|\(тм\)/i', '™', $data);		// \u{2122}
+			$data = preg_replace('/\(tm\)|\(тм\)/ui', '™', $data);		// \u{2122}
 		}
 
 		// 4c. (p)
 		if ($this->settings['(p)'])
 		{
-			$data = preg_replace('/\(p\)/i', '§', $data);				// \u{00A7}
+			$data = preg_replace('/\(p\)/ui', '§', $data);				// \u{00A7}
 		}
 
 		// 5. +/-
 		if ($this->settings['+-'])
 		{
-			$data = preg_replace('/\+\-/i', '±', $data);				// \u{00B1}
+			$data = preg_replace('/\+\-/ui', '±', $data);				// \u{00B1}
 		}
 
 		// 5a. 12°C
@@ -375,8 +375,8 @@ class Typografica
 		// 2. Paragpaph indent (indented line)
 		if ($this->settings['[--]'])
 		{
-			$data = preg_replace('/\[--\]/i', $this->indent1, $data);
-			$data = preg_replace('/\[---\]/i', $this->indent2, $data);
+			$data = preg_replace('/\[--\]/ui', $this->indent1, $data);
+			$data = preg_replace('/\[---\]/ui', $this->indent2, $data);
 		}
 
 		// 3. mailto:

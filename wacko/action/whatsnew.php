@@ -188,7 +188,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			// new file
 			if ($page['ctype'] == 2)
 			{
-				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
+				preg_match('/^[^\/]+/u', $page['comment_on_page'], $sub_tag);
 
 				if ($page['page_id']) // !$global
 				{
@@ -212,11 +212,11 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			{
 				if ($page['comment_on_page'])
 				{
-					preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
+					preg_match('/^[^\/]+/u', $page['comment_on_page'], $sub_tag);
 				}
 				else
 				{
-					preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
+					preg_match('/^[^\/]+/u', $page['tag'], $sub_tag);
 				}
 
 				$tpl->l_title	= $this->_t('NewCommentAdded');
@@ -229,7 +229,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			// new comment
 			else if ($page['comment_on_id'])
 			{
-				preg_match('/^[^\/]+/', $page['comment_on_page'], $sub_tag);
+				preg_match('/^[^\/]+/u', $page['comment_on_page'], $sub_tag);
 
 				$tpl->l_title	= $this->_t('NewCommentAdded');
 				$tpl->l_alt		= 'comment';
@@ -241,7 +241,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			// new page
 			else if ($page['created'] == $page['date'])
 			{
-				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
+				preg_match('/^[^\/]+/u', $page['tag'], $sub_tag);
 
 				$tpl->l_title	= $this->_t('NewPageCreated');
 				$tpl->l_alt		= 'new';
@@ -252,7 +252,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			// new revision
 			else
 			{
-				preg_match('/^[^\/]+/', $page['tag'], $sub_tag);
+				preg_match('/^[^\/]+/u', $page['tag'], $sub_tag);
 
 				$tpl->l_title	= $this->_t('NewRevisionAdded');
 				$tpl->l_alt		= 'changed';

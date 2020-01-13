@@ -12,7 +12,7 @@ if ($text == '')
 	return;
 }
 
-$text = preg_replace('/{{(toc).*?}}/i', '', $text);
+$text = preg_replace('/{{(toc).*?}}/ui', '', $text);
 $data = $this->format($text, 'wiki');
 
 // convert everything that doesn't need regexps
