@@ -253,7 +253,7 @@ class Paragrafica
 		// INFINITY-2. inserting a (or next?) ignored regexp
 		{
 			$what	.= ' ';
-			$a		 = explode( '{:typo:markup:3:}', $what);
+			$a		 = explode('{:typo:markup:3:}', $what);
 
 			if ($a)
 			{

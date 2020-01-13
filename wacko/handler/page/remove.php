@@ -113,7 +113,7 @@ if ($this->is_admin()
 					$xml->changes();
 				}
 
-				if (preg_match('/' . $this->db->news_cluster . '\/.+?\/.+/', $this->tag))
+				if (preg_match('/' . $this->db->news_cluster . '\/.+?\/.+/u', $this->tag))
 				{
 					$xml->feed();
 				}

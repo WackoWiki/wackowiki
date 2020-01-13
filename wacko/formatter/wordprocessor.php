@@ -5,8 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$text = preg_replace('/{{(toc).*?}}/i', '', $text);
+$text = preg_replace('/{{(toc).*?}}/ui', '', $text);
 $data = $this->format($text, 'wiki');
-$data = preg_replace('/<br\s*>/', '</p><p>', $data);
+$data = preg_replace('/<br\s*>/u', '</p><p>', $data);
 
 echo $data;

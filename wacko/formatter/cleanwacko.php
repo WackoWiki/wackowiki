@@ -15,9 +15,9 @@ if ($text == '')
 }
 
 // ignore the slashes and the long dash in the title, in url and pgp headers
-$text = preg_replace('/====(.*?)\/\/(.*?)\/\/(.*?)====/',	'\\1@@@@\\2@@@@\\3',	$text);
-$text = preg_replace('/(http:|https:|ftp:|nntp:)\/\//',		'\\1@@@@',				$text);
-$text = preg_replace('/-{5}([A-Z ]+?)-{5}/',				'&&&&&\\1&&&&&',		$text);
+$text = preg_replace('/====(.*?)\/\/(.*?)\/\/(.*?)====/u',	'\\1@@@@\\2@@@@\\3',	$text);
+$text = preg_replace('/(http:|https:|ftp:|nntp:)\/\//u',	'\\1@@@@',				$text);
+$text = preg_replace('/-{5}([A-Z ]+?)-{5}/u',				'&&&&&\\1&&&&&',		$text);
 
 // Cut a simple counting
 $text = str_replace('**',		'',  $text);
@@ -58,16 +58,16 @@ $text = str_replace('@@@@',  '//',		$text);
 $text = str_replace('&&&&&', '-----',	$text);
 
 // cut or parse a complex layout
-$text = preg_replace('/!!(?:\\([\\w]+?\\))*(.+?)!!/',	'\\1',	$text); // !!(color)text!!
-$text = preg_replace('/\\^\\^([^\\s]+?)\\^\\^/',		'^\\1',	$text); // ^^123^^
-$text = preg_replace('/{{.+?}}[\s]*/',					'',		$text); // {{action}}
-$text = preg_replace('/[\n]{2,}/',						"\n\n",	$text); // more than two transfers
-$text = preg_replace('/\\n[ ]{1}/',						'',		$text); // gap in the beginning of the line
-$text = preg_replace('/--([^ ])/',						'[\\1',	$text); // strikethrough; not to be confused with the long dashes
-$text = preg_replace('/([^ ])--/',						'\\1]',	$text); // strikethrough; not to be confused with the long dashes
+$text = preg_replace('/!!(?:\\([\\w]+?\\))*(.+?)!!/u',	'\\1',	$text); // !!(color)text!!
+$text = preg_replace('/\\^\\^([^\\s]+?)\\^\\^/u',		'^\\1',	$text); // ^^123^^
+$text = preg_replace('/{{.+?}}[\s]*/u',					'',		$text); // {{action}}
+$text = preg_replace('/[\n]{2,}/u',						"\n\n",	$text); // more than two transfers
+$text = preg_replace('/\\n[ ]{1}/u',					'',		$text); // gap in the beginning of the line
+$text = preg_replace('/--([^ ])/u',						'[\\1',	$text); // strikethrough; not to be confused with the long dashes
+$text = preg_replace('/([^ ])--/u',						'\\1]',	$text); // strikethrough; not to be confused with the long dashes
 
 // Links
-$text = preg_replace('/(?:\\[\\[|\\(\\()([^\\s]+?) (.*?)(?:\\]\\]|\\)\\))/',	'\\2 (\\1)',	$text); // complex
-$text = preg_replace('/(?:\\[\\[|\\(\\()([^\\s]+?)(?:\\]\\]|\\)\\))/',			'\\1',			$text); // simple
+$text = preg_replace('/(?:\\[\\[|\\(\\()([^\\s]+?) (.*?)(?:\\]\\]|\\)\\))/u',	'\\2 (\\1)',	$text); // complex
+$text = preg_replace('/(?:\\[\\[|\\(\\()([^\\s]+?)(?:\\]\\]|\\)\\))/u',			'\\1',			$text); // simple
 
 echo $text;

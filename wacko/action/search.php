@@ -213,7 +213,7 @@ $preview_text = function ($text, $limit, $hellip = true)
 	// trim text
 	$text = trim($text);
 
-	// if strlen is smaller than limit return
+	// if mb_strlen is smaller than limit return
 	if (mb_strlen($text) < $limit)
 	{
 		return $text;
@@ -365,7 +365,7 @@ if (mb_strlen($phrase) >= 3)
 					{
 						$body		= $this->format($page['body'], 'cleanwacko');
 						// strip tags if preview is without HTML
-						#$body		 = preg_replace('/\s\s+/', ' ', strip_tags($text));
+						#$body		 = preg_replace('/\s\s+/u', ' ', strip_tags($text));
 
 						$context	= $get_line_with_phrase($body, $phrase, $padding);
 						$context	= $preview_text($context, 500, 0);

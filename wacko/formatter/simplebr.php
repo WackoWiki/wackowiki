@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 //!!! much room for optimization :-)
 
-$text = preg_replace ('/ {2, }/', ' ', $text);
+$text = preg_replace ('/ {2, }/u', ' ', $text);
 
 $trans = [
 	"\r" => '',

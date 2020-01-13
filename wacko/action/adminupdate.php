@@ -418,7 +418,7 @@ if ($this->is_admin())
 						if ($privilege[0] == '!')
 						{
 							$deny = 1;
-							$privilege = substr($privilege, 1);
+							$privilege = mb_substr($privilege, 1);
 						}
 						else
 						{

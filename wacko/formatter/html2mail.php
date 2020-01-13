@@ -8,30 +8,30 @@ if (!defined('IN_WACKO'))
 if ($text == '') return;
 
 // remove indent tabs
-$text = preg_replace('/\n\\t+/', "\n", $text);
+$text = preg_replace('/\n\\t+/u', "\n", $text);
 
 // remove extra blank lines
-$text = preg_replace('/(?:\\n){2,}/', "\n", $text);
+$text = preg_replace('/(?:\\n){2,}/u', "\n", $text);
 
 // remove tags <br>
 #$text = str_replace('<br>', '', $text);
-$text = preg_replace('/<br>/', "\n", $text);
+$text = preg_replace('/<br>/u', "\n", $text);
 
 // HTML email filters (text/html)
 if (isset($options['text_html']))
 {
 	// convert links to pages in the format "Description (URL)"
-	$text = preg_replace('/<a .*?href="(https?:\/\/.*?)" class="".*?>(.*?)<\/a>/', '$2 ($1)', $text);
+	$text = preg_replace('/<a .*?href="(https?:\/\/.*?)" class="".*?>(.*?)<\/a>/u', '$2 ($1)', $text);
 
 	// remove tags from the links that contain dates
-	$text = preg_replace('/<a .*?href="http:\/\/.*?">((?:0[1-9]|[12][0-9]|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19|20)[0-9]{2} [0-2][0-3][-\/.:][0-5][0-9])<\/a>/', '$1', $text);
+	$text = preg_replace('/<a .*?href="http:\/\/.*?">((?:0[1-9]|[12][0-9]|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19|20)[0-9]{2} [0-2][0-3][-\/.:][0-5][0-9])<\/a>/u', '$1', $text);
 
 	// remove references to the creation of new pages
-	$text = preg_replace('/<a .*?href="https?:\/\/.*?edit\\?add=1" title="' . $this->_t('CreatePage') . '">.*?<\/a>/', '', $text);
+	$text = preg_replace('/<a .*?href="https?:\/\/.*?edit\\?add=1" title="' . $this->_t('CreatePage') . '">.*?<\/a>/u', '', $text);
 }
 
 // sanitizing remaining tags
-$text = preg_replace('/<\/?[a-z][a-z0-9]*[^<>]*?>|<!--.*?-->/', '', $text);
+$text = preg_replace('/<\/?[a-z][a-z0-9]*[^<>]*?>|<!--.*?-->/u', '', $text);
 
 // convert html-entities in plain text
 $text = html_entity_decode($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
