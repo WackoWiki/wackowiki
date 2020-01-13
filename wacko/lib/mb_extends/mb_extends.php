@@ -84,6 +84,26 @@ function utf8_trim($str, $charlist = false)
 }
 
 /**
+* UTF-8 aware alternative to ucfirst
+* Make a string's first character uppercase
+* @param string $str
+* @return string with first character as upper case (if applicable)
+*/
+function utf8_ucfirst($str)
+{
+	switch (mb_strlen($str))
+	{
+		case 0:
+			return '';
+		case 1:
+			return mb_strtoupper($str);
+		default:
+			preg_match('/^(.{1})(.*)$/us', $str, $matches);
+			return mb_strtoupper($matches[1]) . $matches[2];
+	}
+}
+
+/**
 * UTF-8 aware alternative to ucwords
 * Uppercase the first character of each word in a string
 * Note: requires utf8_substr_replace

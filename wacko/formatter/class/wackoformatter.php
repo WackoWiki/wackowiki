@@ -389,7 +389,7 @@ class WackoFormatter
 				}
 			}
 
-			$formatter = strtolower($formatter);
+			$formatter = mb_strtolower($formatter);
 
 			if ($formatter == 'с') // cyrillic -> latin
 			{
@@ -742,7 +742,7 @@ class WackoFormatter
 		else if (  preg_match('/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches)
 				|| preg_match('/^([[:alpha:]]+:\/\/\S+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches))
 		{
-			$url = strtolower($matches[1]);
+			$url = mb_strtolower($matches[1]);
 
 			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/u', $url, $media))
 			{
