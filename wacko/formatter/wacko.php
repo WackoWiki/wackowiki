@@ -37,11 +37,11 @@ $text	= str_replace("\u{2592}" . "<br>\n", '', $text);
 $text	= str_replace("\u{2592}" . "", '', $text);
 
 // we're cutting the last <br>
-$text	= preg_replace('/<br>$/', '', $text);
+$text	= preg_replace('/<br>$/u', '', $text);
 
 // close all open tables
-$opens	= preg_match_all('/<table/', $text, $matches);
-$closes	= preg_match_all('/<\/table/', $text, $matches);
+$opens	= preg_match_all('/<table/u', $text, $matches);
+$closes	= preg_match_all('/<\/table/u', $text, $matches);
 
 if (1 * $closes < 1 * $opens)
 {

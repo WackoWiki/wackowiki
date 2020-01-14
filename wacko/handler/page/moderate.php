@@ -486,6 +486,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$old_tag	= $this->get_page_tag($set[0]);
 				$tag		= utf8_trim($_POST['new_tag'], " \t");
 				$title		= $tag;
+				$this->sanitize_page_tag($tag);
 				$tag 		= utf8_ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
@@ -854,6 +855,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$section	= mb_substr($this->tag, 0, ($pos ?: null));
 				$tag		= utf8_trim($_POST['new_tag'], " \t");
 				$title		= $tag;
+				$this->sanitize_page_tag($tag);
 				$tag 		= utf8_ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
@@ -966,6 +968,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$old_tag	= $this->tag;
 				$tag		= utf8_trim($_POST['new_tag'], "/ \t");
 				$title		= $tag;
+				$this->sanitize_page_tag($tag);
 				$page_id	= $this->get_page_id($tag);
 				$tag		= utf8_ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
