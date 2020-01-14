@@ -568,8 +568,9 @@ class Wacko
 			$wacko_language['UPPERNUM']		= '[\p{Lu}\p{Nd}]';
 			$wacko_language['LOWER']		= '[\p{Ll}\/]';
 			$wacko_language['ALPHA']		= '[\p{L}\_\-\/]';
-			$wacko_language['ALPHANUM_P']	= '\p{L}\p{M}*+\p{Nd}\_\-\/';
-			$wacko_language['ALPHANUM']		= '[' . $wacko_language['ALPHANUM_P'] . ']';
+			$wacko_language['ALPHANUM']		= '[\p{L}\p{M}\p{Nd}\_\-\/]';
+			$wacko_language['ALPHANUM_P']	= '\p{L}\p{M}\p{Nd}\_\-\/';
+			#$wacko_language['ALPHANUM_Q']	= '\p{L}\p{M}*+\p{Nd}\_\-\/';	// Grapheme Quantifier
 
 			$this->languages[$lang] = $wacko_language;
 		}
@@ -1976,7 +1977,7 @@ class Wacko
 									"reviewer_id	= " . (int) $reviewer_id . ", "
 								:	"") .
 							"latest			= 2 " . // 2 - modified page
-						"WHERE tag = " . $this->db->q($tag) . " " .
+						"WHERE page_id = " . (int) $page_id . " " .
 						"LIMIT 1");
 
 					// log event
@@ -4357,16 +4358,26 @@ class Wacko
 		return false;
 	}
 
-	// returns error text, or null on OK
-	// if old_tag specified - check also for already-namedness & already-existence
-	function sanitize_new_pagename(&$tag, $old_tag = false) : ?string
+	function sanitize_page_tag(&$tag, $normalize = false)
 	{
+		// normalizing tag name
+		$tag = Ut::normalize($tag);
+
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes
 		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
 			function ($x)
 			{
 				return @$x[1]? '/' : '';
 			}, $tag);
+
+		$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\.]/u', '', $tag);
+	}
+
+	// returns error text, or null on OK
+	// if old_tag specified - check also for already-namedness & already-existence
+	function sanitize_new_pagename(&$tag, $old_tag = false) : ?string
+	{
+		$this->sanitize_page_tag($tag);
 
 		// - / ' _ .
 		// TODO: remove punctuations from language ALPHA* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
