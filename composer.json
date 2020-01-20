@@ -1,0 +1,23 @@
+{
+	"name" : "WackoWiki/wackowiki",
+	"type" : "project",
+	"description" : "WackoWiki is a light and handy Wiki-engine.",
+	"homepage" : "https://wackowiki.org",
+	"license" : "BSD-3-Clause",
+	"require" : {
+		"php" : ">=7.2",
+		"ext-bcmath" : "*",
+		"ext-ctype" : "*",
+		"ext-gd" : "*",
+		"ext-iconv" : "*",
+		"ext-intl" : "*",
+		"ext-json" : "*",
+		"ext-mbstring" : "*",
+		"ext-mysqli" : "*",
+		"ext-openssl" : "*",
+		"ext-pcre" : "*",
+		"ext-pdo_mysql" : "*",
+		"ext-SPL" : "*"
+	},
+	"prefer-stable" : true
+}
