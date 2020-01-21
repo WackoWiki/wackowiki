@@ -159,6 +159,7 @@ $wacko_translation = [
 	'HideComments'				=> 'Ukryj komentarze',
 	'AddComment'				=> 'Skomentuj tę stronę:',
 	'AddCommentTitle'			=> 'Tytuł komentarza:',
+	'CommentTitleRe'			=> 'Re:',
 	'AddCommentButton'			=> 'Dodaj',
 	'HereLink'					=> 'tu',
 	'PageHandlerMoreTip'		=> 'więcej',

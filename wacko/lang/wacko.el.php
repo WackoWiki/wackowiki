@@ -159,6 +159,7 @@ $wacko_translation = [
 	'HideComments'				=> 'Απόκρυψη σχόλια/φόρμες',
 	'AddComment'				=> 'Πρόσθεσε ένα σχόλιο σε αυτήν την σελίδα:',
 	'AddCommentTitle'			=> 'Τίτλος του σχολίου:',
+	'CommentTitleRe'			=> 'Re:',
 	'AddCommentButton'			=> 'Προσθήκη Σχολίου',
 	'HereLink'					=> 'εδώ',
 	'PageHandlerMoreTip'		=> 'περισσότερο',

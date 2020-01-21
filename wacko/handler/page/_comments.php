@@ -203,7 +203,10 @@ if ($this->has_access('read'))
 
 			$tpl->enter('f_');
 
-			$parent_id = (int) ($_GET['parent_id'] ?? 0);
+			$title			= $this->forum && empty($title)
+								? $this->_t('CommentTitleRe') . ' ' . $this->page['title']
+								: $title;
+			$parent_id		= (int) ($_GET['parent_id'] ?? 0);
 
 			$tpl->parent	= $parent_id;
 
@@ -214,7 +217,7 @@ if ($this->has_access('read'))
 				$preview = $this->format($preview, 'wacko');
 				$preview = $this->format($preview, 'post_wacko');
 
-				$tpl->p_title		= $title;
+				$tpl->p_title		= $title ?? '';
 				$tpl->p_preview		= $preview;
 			}
 
@@ -224,6 +227,8 @@ if ($this->has_access('read'))
 			#echo '<script src="' . $this->db->base_url . 'js/wikiedit.js"></script>' . "\n";
 			#echo '<script src="' . $this->db->base_url . 'js/autocomplete.js"></script>' . "\n";
 			$tpl->userlang	= $this->user_lang;
+
+
 			$tpl->title		= $this->sess->freecap_old_title
 								?? ($title
 									?? '');

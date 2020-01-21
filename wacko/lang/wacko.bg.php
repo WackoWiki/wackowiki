@@ -159,6 +159,7 @@ $wacko_translation = [
 	'HideComments'				=> 'Скрий коментарите/формата',
 	'AddComment'				=> 'Добави комментар:',
 	'AddCommentTitle'			=> 'Заглавие на коментара:',
+	'CommentTitleRe'			=> 'Re:',
 	'AddCommentButton'			=> 'Насочи',
 	'HereLink'					=> 'тук',
 	'PageHandlerMoreTip'		=> 'повече',

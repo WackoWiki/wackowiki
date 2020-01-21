@@ -159,6 +159,7 @@ $wacko_translation = [
 	'HideComments'				=> 'Varja kommentaar/vorm',
 	'AddComment'				=> 'Lisa kommentaar sellele leheküljele:',
 	'AddCommentTitle'			=> 'Title of the comment:',
+	'CommentTitleRe'			=> 'Re:',
 	'AddCommentButton'			=> 'Lisa kommentaar',
 	'HereLink'					=> 'here',
 	'PageHandlerMoreTip'		=> 'rohkem',

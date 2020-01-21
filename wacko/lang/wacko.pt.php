@@ -159,6 +159,7 @@ $wacko_translation = [
 	'HideComments'				=> 'Fechar Comentários e Formulário',
 	'AddComment'				=> 'Anexar comentário a esta página:',
 	'AddCommentTitle'			=> 'Título do comentário:',
+	'CommentTitleRe'			=> 'Re:',
 	'AddCommentButton'			=> 'Anexar comentário',
 	'HereLink'					=> 'aqui',
 	'PageHandlerMoreTip'		=> 'mais',

@@ -159,6 +159,7 @@ $wacko_translation = [
 	'HideComments'				=> 'Gem kommentarer',
 	'AddComment'				=> 'Skriv en kommentar til denne side:',
 	'AddCommentTitle'			=> 'Title of the comment:',
+	'CommentTitleRe'			=> 'Re:',
 	'AddCommentButton'			=> 'Post kommentar',
 	'HereLink'					=> 'her',
 	'PageHandlerMoreTip'		=> 'mere',

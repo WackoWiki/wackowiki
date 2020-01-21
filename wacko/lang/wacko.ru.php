@@ -160,6 +160,7 @@ $wacko_translation = [
 	'HideComments'				=> 'Скрыть комментарии/форму',
 	'AddComment'				=> 'Добавить комментарий:',
 	'AddCommentTitle'			=> 'Заголовок комментария:',
+	'CommentTitleRe'			=> 'Re:',
 	'AddCommentButton'			=> 'Отправить',
 	'HereLink'					=> 'здесь',
 	'PageHandlerMoreTip'		=> 'еще',
