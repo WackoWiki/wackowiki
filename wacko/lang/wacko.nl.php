@@ -294,6 +294,7 @@ $wacko_translation = [
 	'CategoryNotExists'			=> 'Categorie bestaat niet.',
 	'CategoryEmpty'				=> 'Categorie leeg.',
 	'NoCategorySelected'		=> 'Geen categorie geselecteerd.',
+	'NoCategoriesAssigned'		=> 'Geen toegewezen categorieën voor deze taal.',
 	'TagCloud'					=> 'Woordwolk',
 	'PagesTaggedWith'			=> '%1 pagina\'s gelabeld met %2',
 	'CategoriesOfCluster'		=> 'of cluster',

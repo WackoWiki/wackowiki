@@ -295,6 +295,7 @@ $wacko_translation = [
 	'CategoryNotExists'			=> 'Категория не существует.',
 	'CategoryEmpty'				=> 'Категория пуста.',
 	'NoCategorySelected'		=> 'Категория не выбрана.',
+	'NoCategoriesAssigned'		=> 'Для этого языка нет назначенных категорий.',
 	'TagCloud'					=> 'Облако тегов',
 	'PagesTaggedWith'			=> '%1 страницы отмечены тегом %2',
 	'CategoriesOfCluster'		=> 'кластера',

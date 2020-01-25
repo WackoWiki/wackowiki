@@ -294,6 +294,7 @@ $wacko_translation = [
 	'CategoryNotExists'			=> 'Η κατηγορία δεν υπάρχει.',
 	'CategoryEmpty'				=> 'Κατηγορία κενή.',
 	'NoCategorySelected'		=> 'Δεν έχει επιλεγεί καμμία κατηγορία.',
+	'NoCategoriesAssigned'		=> 'Δεν έχουν ανατεθεί κατηγορίες για αυτήν τη γλώσσα.',
 	'TagCloud'					=> 'Σύννεφο ετικετών',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 	'CategoriesOfCluster'		=> 'of cluster',
@@ -410,7 +411,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionsRemoved'			=> 'Revisions from page αφαιρέθηκαν.',
-	'ActionHaveNoUndo'		=> 'Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.',
+	'ActionHaveNoUndo'			=> 'Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.',
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 

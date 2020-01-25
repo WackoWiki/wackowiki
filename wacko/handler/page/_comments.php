@@ -227,8 +227,6 @@ if ($this->has_access('read'))
 			#echo '<script src="' . $this->db->base_url . 'js/wikiedit.js"></script>' . "\n";
 			#echo '<script src="' . $this->db->base_url . 'js/autocomplete.js"></script>' . "\n";
 			$tpl->userlang	= $this->user_lang;
-
-
 			$tpl->title		= $this->sess->freecap_old_title
 								?? ($title
 									?? '');

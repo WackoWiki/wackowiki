@@ -16,6 +16,9 @@ if (!defined('IN_WACKO'))
 		legend="alternate legend"
 		nomark=[0|1]
 	}}
+
+ requires activated paragrafica formatter
+ toc is generated in paragrafica format
 */
 
 if (!isset($page))		$page		= '';
@@ -289,7 +292,7 @@ if ($_page)
 
 					$ident_level['li']++;
 
-				// recheck page level
+				// re-check page level
 				$prev_level	= $toc_item[4];
 
 				$i++;

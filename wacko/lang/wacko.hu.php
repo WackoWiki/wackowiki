@@ -294,6 +294,7 @@ $wacko_translation = [
 	'CategoryNotExists'			=> 'Category does not exist.',
 	'CategoryEmpty'				=> 'Category empty.',
 	'NoCategorySelected'		=> 'No category selected.',
+	'NoCategoriesAssigned'		=> 'Nincs hozzárendelt kategória ehhez a nyelvhez.',
 	'TagCloud'					=> 'Tag Cloud',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 	'CategoriesOfCluster'		=> 'of cluster',

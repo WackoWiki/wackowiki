@@ -294,6 +294,7 @@ $wacko_translation = [
 	'CategoryNotExists'			=> 'Kategoria nie istnieje.',
 	'CategoryEmpty'				=> 'Kategoria pusta.',
 	'NoCategorySelected'		=> 'Nie wybrano żadnej kategorii.',
+	'NoCategoriesAssigned'		=> 'Brak przypisanych kategorii dla tego języka.',
 	'TagCloud'					=> 'Chmura znaczników',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 	'CategoriesOfCluster'		=> 'of cluster',

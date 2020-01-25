@@ -5,11 +5,15 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// TODO: purge old SQL query cache
+
 $tpl->title = ($this->forum
 	? $this->_t('Topics')
 	: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
 
-$tpl->moderate =  ($this->forum ? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '« ' . $this->_t('ModerateSection2')) . '<br><br>' : '');
+$tpl->moderate =  ($this->forum
+	? $this->compose_link_to_page(mb_substr($this->tag, 0, mb_strrpos($this->tag, '/')), 'moderate', '« ' . $this->_t('ModerateSection2')) . '<br><br>'
+	: '');
 
 // local functions
 function moderate_page_exists(&$engine, $tag)
@@ -744,8 +748,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$tpl->leave();	// n_
 		$tpl->leave();	// subforum_
 	}
-////// END SUBFORUM MODERATION //////
-////// BEGIN PAGE/TOPIC MODERATION //////
+	////// END SUBFORUM MODERATION //////
+	////// BEGIN PAGE/TOPIC MODERATION //////
 	else
 	{
 		$tpl->enter('forum_');
@@ -1186,8 +1190,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tpl->e_text	= $error;
 				$tpl->text		= '<code>' . $this->page['title'] . '</code>';
 
-				$list = '';
-
 				$sections = $this->db->load_all(
 					"SELECT p.tag, p.title " .
 					"FROM " . $this->db->table_prefix . "page AS p, " .
@@ -1237,7 +1239,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
-			$tpl->confirm	= Ut::perc_replace($this->_t('ModerateComDelConfirm'), count($set), ( count($set) > 1 ? $this->_t('ModerateComments') : $this->_t('ModerateComment') ));
+			$tpl->confirm	= Ut::perc_replace($this->_t('ModerateComDelConfirm'), count($set), (count($set) > 1 ? $this->_t('ModerateComments') : $this->_t('ModerateComment') ));
 
 			$tpl->leave();
 		}

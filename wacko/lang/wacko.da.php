@@ -294,6 +294,7 @@ $wacko_translation = [
 	'CategoryNotExists'			=> 'Kategori eksisterer ikke.',
 	'CategoryEmpty'				=> 'Kategori tom.',
 	'NoCategorySelected'		=> 'Ingen kategori valgt.',
+	'NoCategoriesAssigned'		=> 'Ingen tildelte kategorier for dette sprog.',
 	'TagCloud'					=> 'Ordsky',
 	'PagesTaggedWith'			=> '%1 pages tagged with %2',
 	'CategoriesOfCluster'		=> 'of cluster',

@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$print_tag_cloud = function ($tags, $method = '')
+$print_tag_cloud = function ($tags, $method = '') use (&$tpl)
 {
 	// TODO: add name space 'category'
 	$tag = $this->db->category_page;
@@ -41,15 +41,11 @@ $print_tag_cloud = function ($tags, $method = '')
 		// find the $value in excess of $min_qty
 		// multiply by the font-size increment ($size)
 		// and add the $min_size set above
-		$size = round($min_size + (($value['number'] - $min_qty) * $step));
 
-		echo '<a href="' . $this->href($method, $tag, ['category_id' => $key]) .
-			'" style="font-size: ' . $size . 'px;" title="' .
-			Ut::perc_replace(
-				$this->_t('PagesTaggedWith'),
-				$value['number'],
-				$value['category']) . '">' .
-			$value['category'] . '</a> ';
+		$tpl->a_href		= $this->href($method, $tag, ['category_id' => $key]);
+		$tpl->a_size		= round($min_size + (($value['number'] - $min_qty) * $step));
+		$tpl->a_title		= Ut::perc_replace($this->_t('PagesTaggedWith'), $value['number'], $value['category']);
+		$tpl->a_category	= $value['category'];
 	}
 };
 
@@ -115,13 +111,14 @@ if ($tags)
 
 	if (!$nomark)
 	{
-		echo '<div class="layout-box"><p><span>' . $this->_t('TagCloud') . ":</span></p>\n";
+		$tpl->mark		= true;
+		$tpl->emark		= true;
 	}
 
 	$print_tag_cloud($this->cloud);
-
-	if (!$nomark)
-	{
-		echo "</div>\n";
-	}
 }
+else
+{
+	$tpl->notaggedpages = true;
+}
+

@@ -3382,9 +3382,9 @@ class Wacko
 			// XXX: user can't check or upload to image/ folder - how useful is this?
 			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
 		}
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/i', preg_replace('/<\/?nobr>/u', '', $text), $matches))
+		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
-			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
+			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
 			// audio
 			if ($matches[4])
@@ -3405,7 +3405,7 @@ class Wacko
 
 		// TODO: match all external links for tracking: images, mail:, xampp:
 		// TODO: add related code to actions and handlers (currently there is no available use case)
-		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
+		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
 			if (!mb_stristr($tag, $this->db->base_url))
 			{
@@ -3417,7 +3417,7 @@ class Wacko
 			}
 		} */
 
-		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
+		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
 			// this is a valid Email
 			$href	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
@@ -3426,7 +3426,7 @@ class Wacko
 			$class	= '';
 			$tpl	= 'email';
 		}
-		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/', $tag, $matches))
+		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
 			// this is a valid XMPP address
 			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
@@ -3441,10 +3441,10 @@ class Wacko
 			$href	= $tag;
 			$tpl	= 'anchor';
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/i', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $tag))
 		{
 			// external image
-			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/', '', $text);
+			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
 			if ($text == $tag)
 			{
@@ -3458,7 +3458,7 @@ class Wacko
 				$tpl	= 'outerlink';
 			}
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/u', $tag))
 		{
 			// this is a file link
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
@@ -3467,7 +3467,7 @@ class Wacko
 			$class	= '';
 			$tpl	= 'file';
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/u', $tag))
 		{
 			// this is a PDF link
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
@@ -3476,7 +3476,7 @@ class Wacko
 			$class	= '';
 			$tpl	= 'file';
 		}
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/u', $tag))
 		{
 			// this is a RDF link
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
@@ -3485,7 +3485,7 @@ class Wacko
 			$class	= '';
 			$tpl	= 'file';
 		}
-		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/', $tag))
+		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
 			// this is a valid external URL
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
@@ -3984,7 +3984,7 @@ class Wacko
 				$title		= $this->_t('CreatePage');
 			}
 
-			// see lang/wacko.all.php
+			// load and parse link template (see lang/wacko.all.php)
 			$res			= $this->_t('Tpl.' . $tpl);
 			$text			= trim($text);
 
