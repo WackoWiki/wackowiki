@@ -3376,12 +3376,13 @@ class Wacko
 			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);	// TODO: Notice: expects parameter 1 to be string, array given
 		}
 
+		// check for images in local image/ folder -> ((image.png))
 		if (preg_match('/^[\.\-' . $this->language['ALPHANUM_P'] . ']+\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $text))
 		{
-			// ((image.png)) - loads images from image/ folder
 			// XXX: user can't check or upload to image/ folder - how useful is this?
 			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
 		}
+		// external media file
 		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3417,33 +3418,33 @@ class Wacko
 			}
 		} */
 
+		// Email -> mailto:info@example.com
 		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
-			// this is a valid Email
 			$href	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
 			$title	= $this->_t('EmailLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'email';
 		}
+		// XMPP address
 		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
-			// this is a valid XMPP address
 			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
 			$title	= $this->_t('JabberLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'jabber';
 		}
+		// HTML anchor #...
 		else if (preg_match('/^#/', $tag))
 		{
-			// html-anchor
 			$href	= $tag;
 			$tpl	= 'anchor';
 		}
+		// external image
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $tag))
 		{
-			// external image
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
 			if ($text == $tag)
@@ -3458,36 +3459,36 @@ class Wacko
 				$tpl	= 'outerlink';
 			}
 		}
+		// file link -> http://example.com/file.zip
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rpm|gz|tgz|zip|rar|exe|doc|xls|ppt|bz2|7z)$/u', $tag))
 		{
-			// this is a file link
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('FileLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
+		// PDF link
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(pdf)$/u', $tag))
 		{
-			// this is a PDF link
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('PDFLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
+		// RDF link
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(rdf)$/u', $tag))
 		{
-			// this is a RDF link
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$title	= $this->_t('RDFLink');
 			$icon	= $this->_t('OuterIcon');
 			$class	= '';
 			$tpl	= 'file';
 		}
+		// external URL
 		else if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
-			// this is a valid external URL
 			$href	= str_replace('&', '&amp;', str_replace('&amp;', '&', $tag));
 			$tpl	= 'outerlink';
 
@@ -3497,9 +3498,9 @@ class Wacko
 				$icon	= $this->_t('OuterIcon');
 			}
 		}
+		// local file -> file:image.png
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/u', $tag, $matches))
 		{
-			// this is a uploaded file
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$_file_name		= $matches[2];
 			$file_array		= explode('/', $_file_name);
@@ -3773,9 +3774,9 @@ class Wacko
 
 			unset($file_data);
 		}
+		// user link -> user:UserName
 		else if (preg_match('/^(user)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
-			// user link -> user:UserName
 			$parts	= explode('/', $matches[2]);
 
 			for ($i = 0; $i < count($parts); $i++)
@@ -3789,9 +3790,9 @@ class Wacko
 			$icon	= $this->_t('OuterIcon');
 			$tpl	= 'userlink';
 		}
+		// group link -> group:UserGroup
 		else if (preg_match('/^(group)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
-			// group link -> group:UserGroup
 			$parts	= explode('/', $matches[2]);
 
 			for ($i = 0; $i < count($parts); $i++)
@@ -3805,9 +3806,9 @@ class Wacko
 			$icon	= $this->_t('OuterIcon');
 			$tpl	= 'grouplink';
 		}
+		// interwiki -> wiki:page
 		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
-			// interwiki
 			$parts	= explode('/', $matches[2]);
 
 			for ($i = 0; $i < count($parts); $i++)
@@ -3820,9 +3821,9 @@ class Wacko
 			$icon	= $this->_t('OuterIcon'); # $this->_t('IwIcon');
 			$tpl	= 'interwiki';
 		}
+		// wiki link
 		else if (preg_match('/^([\!\.\-' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . '\_\-]+)?$/u', $tag, $matches))
 		{
-			// it's a Wiki link!
 			$aname			= '';
 			$match			= '';
 			$tag			= $otag		= $matches[1];
@@ -3832,6 +3833,7 @@ class Wacko
 			$ptag			= $unwtag;
 			$handler		= null;
 
+			// detecting page handler
 			if (preg_match($regex_handlers, '/' . $ptag . '/', $match))
 			{
 				$handler	= $match[2];
@@ -3988,6 +3990,7 @@ class Wacko
 			$res			= $this->_t('Tpl.' . $tpl);
 			$text			= trim($text);
 
+			// make HTML link
 			if ($res)
 			{
 				// sets only 'nofollow' as link type to internal links to protected pages

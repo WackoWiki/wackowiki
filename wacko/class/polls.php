@@ -164,7 +164,7 @@ class Polls
 		$this->engine->db->sql_query(
 			"INSERT INTO " . $this->engine->db->table_prefix . "poll SET " .
 				"poll_id	= " . (int) $poll_id . ", " .
-				"text		= " . $this->engine->db->q(rtrim($topic, '.')) . ", " .
+				"text		= " . $this->engine->db->q(utf8_rtrim($topic, '.')) . ", " .
 				"user_id	= " . (int) $user_id . ", " .
 				"plural		= " . (int) $plural . ", " .
 				"start		= " . ($start == 1 ? "UTC_TIMESTAMP()" : "NULL"));
@@ -178,7 +178,7 @@ class Polls
 				"INSERT INTO " . $this->engine->db->table_prefix . "poll SET " .
 					"poll_id	= " . (int) $poll_id . ", " .
 					"v_id		= " . (int) $v_id . ", " .
-					"text		= " . $this->engine->db->q(rtrim($v_text, '.')) . " ");
+					"text		= " . $this->engine->db->q(utf8_rtrim($v_text, '.')) . " ");
 		}
 
 		return true;

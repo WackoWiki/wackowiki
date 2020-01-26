@@ -391,28 +391,17 @@ class WackoFormatter
 
 			$formatter = mb_strtolower($formatter);
 
-			if ($formatter == 'с') // cyrillic -> latin
-			{
-				$formatter = 'c';
-			}
-
-			if ($formatter == 'c')
-			{
-				$formatter = 'comment';
-			}
-
 			if ($formatter == '')
 			{
 				$formatter = 'code';
 			}
 
 			// TODO: Trim empty, whitespace only lines at the beginning
-			$code = ltrim($code, "\n\r\0");
+			$code = utf8_ltrim($code, "\n\r\0");
 			$code = rtrim($code);
 
+			// disabled trim($code), whitespace (or other characters) might be intentional in code examples
 			$res = $wacko->_format($code, 'highlight/' . $formatter, $params);
-			// XXX: disabled trim code, whitespace (or other characters) might be intentional in code examples
-			# $res = $wacko->_format(trim($code), 'highlight/' . $formatter, $params);
 
 			// add wrapper
 			if (isset($params['wrapper']) && ($params['wrapper'] != 'none'))
