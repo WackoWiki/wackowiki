@@ -391,27 +391,28 @@ class WackoFormatter
 
 			$formatter = mb_strtolower($formatter);
 
+			// no formatter specified, use default
 			if ($formatter == '')
 			{
 				$formatter = 'code';
 			}
 
 			// TODO: Trim empty, whitespace only lines at the beginning
-			$code = utf8_ltrim($code, "\n\r\0");
+			// disabled trim($code), whitespace (or other characters) might be intentional in code examples
+			$code = ltrim($code, "\n\r\0");		// TODO: utf8_ltrim($code, "\n\r\0") won't work, why?
 			$code = rtrim($code);
 
-			// disabled trim($code), whitespace (or other characters) might be intentional in code examples
-			$res = $wacko->_format($code, 'highlight/' . $formatter, $params);
+			$result = $wacko->_format($code, 'highlight/' . $formatter, $params);
 
 			// add wrapper
 			if (isset($params['wrapper']) && ($params['wrapper'] != 'none'))
 			{
 				$wrapper			= 'wrapper_' . $params['wrapper'];
 				$params['wrapper']	= ''; // no recursion
-				$res				= $wacko->_format(trim($res), 'highlight/' . $wrapper, $params);
+				$result				= $wacko->_format(trim($result), 'highlight/' . $wrapper, $params);
 			}
 
-			$output .= $res;
+			$output .= $result;
 
 			return '<!--escaped-->' . $output . '<!--escaped-->';
 		}

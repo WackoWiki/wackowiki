@@ -45,7 +45,7 @@ function utf8_ltrim($str, $charlist = false)
 	if($charlist === false) return ltrim($str);
 
 	//quote charlist for use in a characterclass
-	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!','\\\${1}', $charlist);
+	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
 
 	return preg_replace('/^[' . $charlist . ']+/u', '', $str);
 }
@@ -63,7 +63,7 @@ function utf8_rtrim($str, $charlist = false)
 	if($charlist === false) return rtrim($str);
 
 	//quote charlist for use in a characterclass
-	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!','\\\${1}', $charlist);
+	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
 
 	return preg_replace('/[' . $charlist . ']+$/u', '', $str);
 }
