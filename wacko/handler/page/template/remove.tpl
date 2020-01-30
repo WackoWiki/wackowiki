@@ -2,7 +2,7 @@
 	<h3>[ ' page ' ]</h3>
 	<br>
 	[= r _ =
-		<div class="success">
+		<div class="msg success">
 			<strong><code>[ ' tag ' ]</code></strong>
 			<ol>
 				[= l _ =
@@ -54,7 +54,7 @@
 
 	=]
 	[= denied _ =
-		<div class="error">
+		<div class="msg error">
 			[ ' _t: NotOwnerCantDelete ' ]
 		</div>
 	=]

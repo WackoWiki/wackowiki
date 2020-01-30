@@ -18,7 +18,7 @@
 	=]
 	[= l LoginForm =
 		[= toomuch _ =
-			<div class="error">[ ' _t: LoginAttemtsExceeded ' ]</div>
+			<div class="msg error">[ ' _t: LoginAttemtsExceeded ' ]</div>
 		=]
 		<div class="cssform">
 		<h3>[ ' _t: LoginWelcome ' ]</h3>

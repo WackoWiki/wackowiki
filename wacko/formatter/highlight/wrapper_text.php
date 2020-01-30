@@ -3,7 +3,8 @@
 /*
 	%%(Formatter
 		wrapper="text"
-		[wrapper_align= "left | center | right | justify")]
+		[wrapper_align="left | center | right | justify"]
+		[col=2|3|4|5]
 		[clear])
 	content
 	%%
@@ -28,6 +29,7 @@ if (in_array($options['wrapper_align'], ['center', 'justify', 'left', 'right']))
 
 $col_class	= $options['col'] ? ' wrapper-col' . (int) $options['col'] : '';
 
+// output wrapper
 echo	'<div class="' . $align_class . $col_class . '"' . $text_align . '>' . "\n" .
 			$text .
 		"</div>\n";

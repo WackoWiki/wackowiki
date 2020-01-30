@@ -1,7 +1,7 @@
 
 [ === main === ]
 	[= error _ =
-		<div class="error">[ ' message ' ]</div>
+		<div class="msg error">[ ' message ' ]</div>
 	=]
 	[= p Profile =
 		<h1>[ ' group.group_name | e ' ]</h1>

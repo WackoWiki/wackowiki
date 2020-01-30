@@ -47,7 +47,7 @@
 </div>
 
 [= restore =]
-<div class="warning">
+<div class="msg warning">
 	[ ' _t: PageDeletedInfo ' ]
 	<br><br>
 	<form action="[ ' href: restore ' ]" method="post" name="restore_page">

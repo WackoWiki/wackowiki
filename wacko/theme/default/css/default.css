@@ -227,66 +227,74 @@ form input.submitinput {
 }
 
 /* show message boxes */
-.error {
-	background: #f8d4cc url('./../icon/cross.svg') no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
-	color: #CC3333;
-	font-weight: bold;
+.msg {
+	position: relative;
+	margin: 0.625em;
+	padding: .625rem;
+	overflow: auto;
+}
+.msg-content {
+	margin: 0 -.625rem;
+	padding: .4rem .6rem .4rem 2.5rem;
+	/* font-weight: bold; */
+}
+.msg-content::before {
+	position: absolute;
+	left: .6rem;
+	height: 1rem;
+	width: 1rem;
 }
 
-.message {
-	overflow: hidden;
-	padding: 10px 20px;
-	width: 100%;
+.error {
+	background: #f8d4cc;
+	color: #CC3333;
+}
+.error > .msg-content::before {
+	content: url('./../icon/cross.svg') " ";
 }
 
 .info {
-	background: #F4FBFF url('./../icon/info.svg') no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
+	background: #F4FBFF;
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
-	font-weight: bold;
+
+}
+.info > .msg-content::before {
+	content: url('./../icon/info.svg') " ";
 }
 
 .notice {
 	background-color: #FFFFEF;
 	border: 1px dotted #DDDDAA;
-	/* font-size: 0.75em; */
-	height: 35px;
-	line-height: 35px;
-	margin: 0 0 10px;
-	overflow: hidden;
-	padding: 0 10px;
+}
+.notice > .msg-content::before {
+	content: url('./../icon/info.svg') " ";
 }
 
 .success {
-	background: #e9ffd9 url('./../icon/tick.svg') no-repeat scroll 10px 10px;
+	background: #e9ffd9;
 	/* border: 1px solid #adde5c; */
 	color: #008000;
-	font-weight: bold;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
+}
+.success > .msg-content::before {
+	content: url('./../icon/tick.svg') " ";
 }
 
 .warning {
 	color: #d33;
-	font-weight: bold;
-	/*background-color: #fbe6f2;*/
-	background: #fcfcfc url('./../icon/warning.svg') no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
+	background: #fcfcfc;
 	border: 1px dotted #d893a1;
+}
+.warning > .msg-content::before {
+	content: url('./../icon/warning.svg') " ";
 }
 
 .hint {
 	border: 1px solid #ffee66;
-	width: auto;
-	background: #ffffdd url('./../icon/important.svg') no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
-	position: relative;
+	background: #ffffdd;
+}
+.hint > .msg-content::before {
+	content: url('./../icon/important.svg') " ";
 }
 
 /* Debugging information */
@@ -1831,7 +1839,7 @@ table.formation td {
 }
 
 .page-handler img {
-	padding: 2px 5px 2px 0;
+	margin: 2px 5px 2px 0;
 }
 
 li.m-new img {

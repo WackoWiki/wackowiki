@@ -2,10 +2,10 @@ first really BIG template written
 
 [ === main === ]
 	[= not _ =
-		<div class="error">[ ' found ' ]</div>
+		<div class="msg error">[ ' found ' ]</div>
 	=]
 	[= disabled _ =
-		<div class="info">[ ' _t: AccountDisabled ' ]</div>
+		<div class="msg info">[ ' _t: AccountDisabled ' ]</div>
 	=]
 	[''' u Profile  ''']
 	[''' l UserList ''']
@@ -77,7 +77,7 @@ first really BIG template written
 				</table>
 			=]
 			[= hint _ =
-				<div class="hint">[ ' _t: UsersIntercomHint ' ]</div>
+				<div class="msg hint">[ ' _t: UsersIntercomHint ' ]</div>
 			=]
 			[= pm _ =
 				[ ' // contact form ' ]

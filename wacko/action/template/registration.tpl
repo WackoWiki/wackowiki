@@ -1,12 +1,12 @@
 [ === main === ]
 	<!--notypo-->
 	[= closed _ =
-		<div class="hint">[ ' _t: RegistrationClosed ' ]</div>
+		<div class="msg hint">[ ' _t: RegistrationClosed ' ]</div>
 	=]
 	[= r _ =
 		<div class="cssform">
 		[= approve _ =
-			<div class="hint">[ ' _t: UserApprovalInfo ' ]</div>
+			<div class="msg hint">[ ' _t: UserApprovalInfo ' ]</div>
 		=]
 		<form action="[ ' form ' ]" method="post" name="register">
 			[ ' csrf:  register ' ]

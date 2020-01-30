@@ -1,7 +1,7 @@
 [ === main === ]
 	<h3>[ ' _t: PurgePage ' ] [ ' page ' ]</h3>
 	[= p _ =
-		<div class="success">
+		<div class="msg success">
 			<ol>
 				[= l _ =
 					<li>[ ' notice ' ]</li>
@@ -11,7 +11,7 @@
 		</div>
 	=]
 	[= f _ =
-		<div class="warning">[ ' _t: ReallyPurge ' ]</div><br>
+		<div class="msg warning">[ ' _t: ReallyPurge ' ]</div><br>
 		<form action="[ ' href: purge ' ]" method="post" name="purge_data">
 			[ ' csrf: purge_data ' ]
 			<strong>[ ' _t: SelectPurgeOptions ' ]</strong><br>

@@ -1,6 +1,6 @@
 [ === main === ]
 
-	<h3>[ ' title | e ' ]</h3>
+	<h3>[ ' title ' ]</h3>
 	
 	<div class="">
 	<form action="[ ' href: permissions ' ]" method="post" name="set_permissions">
@@ -68,7 +68,7 @@
 					<th scope="row">
 					</th>
 					<td>
-						<div class="hint">[ ' _t: AclHelp ' ]</div>
+						<div class="msg hint">[ ' _t: AclHelp ' ]</div>
 					</td>
 				</tr>
 				<tr>

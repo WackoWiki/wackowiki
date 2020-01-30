@@ -4,7 +4,7 @@
 	=]
 	<h3>[ ' _t: RenamePage ' ] [ ' page ' ]</h3><br>
 	[= m _ =
-		<div class="warning">[ ' warning ' ]</div>
+		<div class="msg warning">[ ' warning ' ]</div>
 	=]
 	[= f _ =
 		[ ' _t: NewName ' ]
@@ -35,7 +35,7 @@
 		</form>
 	=]
 	[= denied _ =
-		<div class="info">
+		<div class="msg info">
 			[ ' _t: NotOwnerCantRename ' ]
 		</div>
 	=]
