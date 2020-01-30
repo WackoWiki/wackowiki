@@ -55,5 +55,5 @@ else
 	$this->http->status(403);
 
 	$message = $this->_t('ReadAccessDenied');
-	$this->show_message($message, 'info');
+	$this->show_message($message);
 }

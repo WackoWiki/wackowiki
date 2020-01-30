@@ -78,7 +78,7 @@ if ($this->has_access('read')
 			&& $user
 			&& !$this->is_watched)
 		{
-			#$this->set_message('watch page' , 'info');
+			#$this->set_message('watch page');
 			$this->set_watch($user['user_id'], $this->page['page_id']);
 			$this->is_watched = true;
 		}

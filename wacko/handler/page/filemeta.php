@@ -136,7 +136,7 @@ if ($mode == 'remove' && isset($file))
 	}
 	else
 	{
-		#$this->show_message($this->_t('FileNotFound'), 'info');
+		#$this->show_message($this->_t('FileNotFound'));
 	}
 
 	$tpl->leave();
@@ -174,7 +174,7 @@ else if ($mode == 'label' && isset($file))
 	}
 	else
 	{
-		#$this->show_message($this->_t('FileNotFound'), 'info');
+		#$this->show_message($this->_t('FileNotFound'));
 	}
 
 	$tpl->leave();
@@ -299,7 +299,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 	}
 	else
 	{
-		$this->show_message($this->_t('FileNotFound'), 'info');
+		$this->show_message($this->_t('FileNotFound'));
 	}
 
 	return true;

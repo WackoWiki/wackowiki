@@ -2782,7 +2782,7 @@ class Wacko
 	* @param string $message
 	* @param string $type
 	*/
-	function set_message($message, $type = 'info') : void
+	function set_message($message, $type = 'note') : void
 	{
 		if ($message)
 		{
@@ -2827,7 +2827,7 @@ class Wacko
 		}
 	}
 
-	function show_message($message, $type = 'info', $show = true)
+	function show_message($message, $type = 'note', $show = true)
 	{
 		if ($message)
 		{

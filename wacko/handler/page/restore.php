@@ -24,7 +24,7 @@ if ($this->db->store_deleted_pages && $this->is_admin() && $this->page['deleted'
 	}
 
 	// set message
-	$this->set_message($message, 'info');
+	$this->set_message($message);
 }
 
 $this->show_must_go_on();

@@ -606,7 +606,7 @@ function admin_db_restore(&$engine, &$module)
 				else
 				{
 					$message = $engine->_t('NoBackupsAvailable');
-					$engine->show_message($message, 'info') ;
+					$engine->show_message($message) ;
 				}
 
 				closedir($dh);

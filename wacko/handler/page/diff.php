@@ -373,5 +373,5 @@ else
 {
 	$this->http->status(403);
 
-	$tpl->denied = $this->show_message($this->_t('ReadAccessDenied'), 'info', false);
+	$tpl->denied = $this->show_message($this->_t('ReadAccessDenied'), 'note', false);
 }

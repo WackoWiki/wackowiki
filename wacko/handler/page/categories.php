@@ -297,7 +297,7 @@ if ($this->is_owner() || $this->is_admin())
 			else if (@$_POST && empty($_POST['change_id']))
 			{
 				// no record selected
-				$this->set_message($this->_t('NoCategorySelected'), 'info');
+				$this->set_message($this->_t('NoCategorySelected'));
 				$this->http->redirect($this->href('categories', '', 'edit'));
 			}
 		}
@@ -332,5 +332,5 @@ if ($this->is_owner() || $this->is_admin())
 else
 {
 	$message		= $this->_t('ACLAccessDenied');
-	$tpl->denied	= $this->show_message($message, 'info', false);
+	$tpl->denied	= $this->show_message($message, 'note', false);
 }

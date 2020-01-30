@@ -253,13 +253,13 @@ form input.submitinput {
 	content: url('./../icon/cross.svg') " ";
 }
 
-.info {
+.note {
 	background: #F4FBFF;
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
 
 }
-.info > .msg-content::before {
+.note > .msg-content::before {
 	content: url('./../icon/info.svg') " ";
 }
 
@@ -2107,13 +2107,6 @@ li.m-source img {
 	vertical-align: top;
 	padding-right: 20px;
 	text-align: left;
-}
-
-.info-title {
-	display: block;
-	float: left;
-	text-align: left;
-	width: 130px;
 }
 
 /* forum extension ******************************************* */

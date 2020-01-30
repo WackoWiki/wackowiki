@@ -370,7 +370,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			if (!$matches)
 			{
 				$message = $engine->_t('InconsistenciesNone');
-				$engine->show_message($message, 'info');
+				$engine->show_message($message);
 
 				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
 			}
@@ -734,7 +734,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			else
 			{
 				$message = $engine->_t('InconsistenciesNone');
-				$engine->show_message($message, 'info');
+				$engine->show_message($message);
 			}
 
 			echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
@@ -857,7 +857,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			else
 			{
 				$message = $engine->_t('InconsistenciesNone');
-				$engine->show_message($message, 'info');
+				$engine->show_message($message);
 
 				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
 			}

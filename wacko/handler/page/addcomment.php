@@ -176,5 +176,5 @@ if ($this->has_access('comment') && $this->has_access('read'))
 }
 else
 {
-	$this->show_message($this->_t('CommentAccessDenied'), 'info');
+	$this->show_message($this->_t('CommentAccessDenied'));
 }

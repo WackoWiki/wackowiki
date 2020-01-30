@@ -74,6 +74,6 @@ if ($this->can_upload(true) === true)
 else
 {
 	$message		= '<em>' . $this->_t('UploadForbidden') . '</em>';
-	$tpl->message	= $this->show_message($message, 'info', false);
+	$tpl->message	= $this->show_message($message, 'note', false);
 }
 

@@ -282,6 +282,6 @@ else
 		: Ut::perc_replace($this->_t('ForumOutsideCluster'), 'topics')
 	);
 
-	$tpl->message	= $this->show_message($message,'info', false);
+	$tpl->message	= $this->show_message($message,'note', false);
 }
 

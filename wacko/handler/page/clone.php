@@ -110,7 +110,7 @@ if (@$_POST['_action'] === 'clone_page')
 		}
 	}
 
-	$this->set_message($log, 'info');
+	$this->set_message($log);
 
 	// jump to new clone
 	$this->http->redirect($this->href('', $jump));

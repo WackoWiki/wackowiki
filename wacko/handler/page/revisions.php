@@ -29,7 +29,7 @@ $show_deleted = $this->is_admin();
 // get page_id for deleted but stored page
 if ($this->page['deleted'])
 {
-	$tpl->message = $this->show_message($this->_t('PageDeletedInfo'), 'info', false);
+	$tpl->message = $this->show_message($this->_t('PageDeletedInfo'), 'note', false);
 }
 
 if ($this->has_access('read'))

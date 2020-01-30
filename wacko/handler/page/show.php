@@ -167,8 +167,8 @@ else
 {
 	$this->http->status(403);
 
-	$message = $this->_t('ReadAccessDenied');
-	$tpl->n_message = $this->show_message($message, 'info', false);
+	$message		= $this->_t('ReadAccessDenied');
+	$tpl->n_message	= $this->show_message($message, 'note', false);
 
 	// user might want to login
 	/* if ($this->has_access('read', '', GUEST) === false)

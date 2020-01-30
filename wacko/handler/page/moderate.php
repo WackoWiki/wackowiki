@@ -1315,7 +1315,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 }
 else
 {
-	$this->show_message($this->_t('NotModerator'), 'info');
+	$this->show_message($this->_t('NotModerator'));
 }
 
 // set forum context
