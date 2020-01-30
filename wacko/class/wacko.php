@@ -3376,14 +3376,8 @@ class Wacko
 			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);	// TODO: Notice: expects parameter 1 to be string, array given
 		}
 
-		// check for images in local image/ folder -> ((image.png))
-		if (preg_match('/^[\.\-' . $this->language['ALPHANUM_P'] . ']+\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $text))
-		{
-			// XXX: user can't check or upload to image/ folder - how useful is this?
-			$img_link = $this->db->base_url . Ut::join_path(IMAGE_DIR, $text);
-		}
 		// external media file
-		else if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
+		if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
