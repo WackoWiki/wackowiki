@@ -3339,7 +3339,10 @@ class Wacko
 				$_height .= 'px';
 			}
 
-			$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
+			// uses width="50" height="50", no units allowed - assumes px
+			#$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
+			// uses style="..."
+			$scale	= ' style=" width: ' . $_width . '; height: ' . $_height . ';"';
 		}
 
 		// get alignment type
@@ -3441,9 +3444,9 @@ class Wacko
 		{
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
-			if ($text == $tag)
+			if ($text == $tag || (!$text && $scale))
 			{
-				return $this->image_link(str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)), $class, $text, $text, $scale);
+				return $this->image_link(str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)), $media_class, $text, $text, $scale);
 			}
 			else
 			{

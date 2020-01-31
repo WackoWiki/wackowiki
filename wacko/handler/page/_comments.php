@@ -151,8 +151,8 @@ if ($this->has_access('read'))
 				$tpl->created	= $comment['created'];
 
 				($comment['modified'] != $comment['created']
-							? $tpl->m_modified = $comment['modified']
-							: '');
+					? $tpl->m_modified = $comment['modified']
+					: '');
 
 				/* if ($user_stats = $get_user_stats($comment['owner_id']))
 				{
@@ -205,7 +205,7 @@ if ($this->has_access('read'))
 
 			$title			= $this->forum && empty($title)
 								? $this->_t('CommentTitleRe') . ' ' . $this->page['title']
-								: $title;
+								: ($title ?? '');
 			$parent_id		= (int) ($_GET['parent_id'] ?? 0);
 
 			$tpl->parent	= $parent_id;
