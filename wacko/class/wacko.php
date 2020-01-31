@@ -3117,6 +3117,98 @@ class Wacko
 		return '<a href="' . $this->href($method, $tag, $params) . '"' . ($title ? ' title="' . $title . '"' : '') . '>' . $text . '</a>';
 	}
 
+	// parse off <img> resizing tags from text: height= / width= / align=, e.g. ((http://example.com/image.png width=500))
+	function parse_img_param($text)
+	{
+		$media_class = '';
+		$scale		= '';
+		$align		= '';
+		$height		= '';
+		$width		= '';
+		$trim		= 0;
+
+		$text = preg_replace_callback(
+			'/\s*\b([a-z]+)=([0-9a-z%]+)/i',
+			function ($mat) use (&$align, &$height, &$width, &$trim)
+			{
+				if ($mat[1] == 'height')
+				{
+					$height = $mat[2];
+				}
+				else if ($mat[1] == 'width')
+				{
+					$width = $mat[2];
+				}
+				else if ($mat[1] == 'align')
+				{
+					$align = $mat[2];
+				}
+				else
+				{
+					return $mat[0];
+				}
+
+				$trim = 1;
+				return '';
+			}, $text);
+
+		if ($trim)
+		{
+			$text = trim($text);
+		}
+
+		if ($width || $height)
+		{
+			if (!$width)
+			{
+				$width = 'auto';
+			}
+			else if (preg_match('/^[0-9]+$/', $width))
+			{
+				$width .= 'px';
+			}
+
+			if (!$height)
+			{
+				$height = 'auto';
+			}
+			else if (preg_match('/^[0-9]+$/', $height))
+			{
+				$height .= 'px';
+			}
+
+			// uses width="50" height="50", no units allowed - assumes px
+			#$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
+			// uses style="..."
+			$scale	= ' style=" width: ' . $width . '; height: ' . $height . ';"';
+		}
+
+		// get alignment type
+		if ($align)
+		{
+			if(preg_match('/center/i', $align))
+			{
+				$e_align = 'center';
+			}
+			else if(preg_match('/right/i', $align))
+			{
+				$e_align = 'right';
+			}
+			else if(preg_match('/left/i', $align))
+			{
+				$e_align = 'left';
+			}
+			else
+			{
+				$e_align = 'default';
+			}
+
+			$media_class = 'media-' . $e_align;
+		}
+
+		return [$text, $scale, $media_class];
+	}
+
 	// parse off [?|&][caption|clear|direct|nolink|linkonly|right|left|20x50] arguments from file:[/|!/|../]image.png?arg1&arg2=
 	function parse_media_param($file_name) : array
 	{
@@ -3284,89 +3376,9 @@ class Wacko
 		$href		= '';
 		$text		= str_replace('"', '&quot;', $text);
 
-		// parse off <img> resizing tags from text: height= / width= / align=, e.g. ((http://example.com/image.png width=500))
-		$_align		= '';
-		$_height	= '';
-		$_width		= '';
-		$trim		= 0;
-		$text = preg_replace_callback(
-			'/\s*\b([a-z]+)=([0-9a-z%]+)/i',
-			function ($mat) use (&$_align, &$_height, &$_width, &$trim)
-			{
-				if ($mat[1] == 'height')
-				{
-					$_height = $mat[2];
-				}
-				else if ($mat[1] == 'width')
-				{
-					$_width = $mat[2];
-				}
-				else if ($mat[1] == 'align')
-				{
-					$_align = $mat[2];
-				}
-				else
-				{
-					return $mat[0];
-				}
-
-				$trim = 1;
-				return '';
-			}, $text);
-
-		if ($trim)
+		if ($text)
 		{
-			$text = trim($text);
-		}
-
-		if ($_width || $_height)
-		{
-			if (!$_width)
-			{
-				$_width = 'auto';
-			}
-			else if (preg_match('/^[0-9]+$/', $_width))
-			{
-				$_width .= 'px';
-			}
-
-			if (!$_height)
-			{
-				$_height = 'auto';
-			}
-			else if (preg_match('/^[0-9]+$/', $_height))
-			{
-				$_height .= 'px';
-			}
-
-			// uses width="50" height="50", no units allowed - assumes px
-			#$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
-			// uses style="..."
-			$scale	= ' style=" width: ' . $_width . '; height: ' . $_height . ';"';
-		}
-
-		// get alignment type
-		if ($_align)
-		{
-			if(preg_match('/center/i', $_align))
-			{
-				$e_align = 'center';
-			}
-			else if(preg_match('/right/i', $_align))
-			{
-				$e_align = 'right';
-			}
-			else if(preg_match('/left/i', $_align))
-			{
-				$e_align = 'left';
-			}
-			else
-			{
-				$e_align = 'default';
-			}
-
-			$media_class = 'media-' . $e_align;
-
+			list($text, $scale, $media_class) = $this->parse_img_param($text);
 		}
 
 		if ($track)
@@ -3382,6 +3394,7 @@ class Wacko
 		// external media file
 		if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
+			// remove typografica glue
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
 			// audio
@@ -3442,6 +3455,7 @@ class Wacko
 		// external image
 		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $tag))
 		{
+			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
 			if ($text == $tag || (!$text && $scale))
