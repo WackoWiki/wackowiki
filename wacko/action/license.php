@@ -43,33 +43,8 @@ if (empty($license) && !isset($license_id) && $this->db->enable_license)
 if ($license || $license_id)
 {
 	// id => [abbrivation, meta_id, url]
-	$licenses = [
-		1		=> ['CC-BY-ND',		2,	'https://creativecommons.org/licenses/by-nd/4.0/'],
-		2		=> ['CC-BY-NC-SA',	2,	'https://creativecommons.org/licenses/by-nc-sa/4.0/'],
-		3		=> ['CC-BY-NC-ND',	2,	'https://creativecommons.org/licenses/by-nc-nd/4.0/'],
-		4		=> ['CC-BY-SA',		2,	'https://creativecommons.org/licenses/by-sa/4.0/'],
-		5		=> ['CC-BY-NC',		2,	'https://creativecommons.org/licenses/by-nc/4.0/'],
-		6		=> ['CC-BY',		2,	'https://creativecommons.org/licenses/by/4.0/'],
-		7		=> ['CC-ZERO',		1,	'https://creativecommons.org/publicdomain/zero/1.0/'],
-		8		=> ['GNU-FDL',		2,	'https://www.gnu.org/licenses/fdl.html'],
-		9		=> ['PD',			1,	'https://creativecommons.org/publicdomain/mark/1.0/'],
-		10		=> ['CR',			3,	''],
-	];
-	// license abbrivation => id
-	$abbreviation = [
-		'CC-BY-ND'		=> 1,
-		'CC-BY-NC-SA'	=> 2,
-		'CC-BY-NC-ND'	=> 3,
-		'CC-BY-SA'		=> 4,
-		'CC-BY-NC'		=> 5,
-		'CC-BY'			=> 6,
-		'CC-ZERO'		=> 7,
-		'GNU-FDL'		=> 8,
-		'PD'			=> 9,
-		'CR'			=> 10,
-	];
-	// TODO:	wacko.all.php ($wacko_all_resource[]) is not available,
-	//			when page_lang != user_lang, why?
+	$licenses = $this->_t('LicenseIds');
+
 	// get translation arrays
 	$meta		= $this->_t('LicenseMeta');
 	$text		= $this->_t('LicenseArray');
@@ -83,7 +58,7 @@ if ($license || $license_id)
 
 	if (empty($license_id))
 	{
-		$license_id	= $abbreviation[$license];
+		$license_id	= array_search($license, array_combine(array_keys($licenses), array_column($licenses, 0)));
 	}
 
 	if (isset($licenses[$license_id]))

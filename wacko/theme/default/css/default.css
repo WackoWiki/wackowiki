@@ -226,7 +226,7 @@ form input.submitinput {
 	font-size: 12px;
 }
 
-/* show message boxes */
+/** message boxes ************************************************************/
 .msg {
 	position: relative;
 	margin: 0.625em;
@@ -235,8 +235,7 @@ form input.submitinput {
 }
 .msg-content {
 	margin: 0 -.625rem;
-	padding: .4rem .6rem .4rem 2.5rem;
-	/* font-weight: bold; */
+	padding: 0 .6rem 0 2.5rem;
 }
 .msg-content::before {
 	position: absolute;
@@ -248,16 +247,25 @@ form input.submitinput {
 .error {
 	background: #f8d4cc;
 	color: #CC3333;
+	font-weight: bold;
 }
 .error > .msg-content::before {
 	content: url('./../icon/cross.svg') " ";
+}
+
+.comment-info {
+	color: #AAAAAA;
+	border: 1px solid #d5d9e6;
+	font-weight: bold;
+}
+.comment-info > .msg-content::before {
+	content: url('./../icon/comment.svg') " ";
 }
 
 .note {
 	background: #F4FBFF;
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
-
 }
 .note > .msg-content::before {
 	content: url('./../icon/info.svg') " ";
@@ -275,6 +283,7 @@ form input.submitinput {
 	background: #e9ffd9;
 	/* border: 1px solid #adde5c; */
 	color: #008000;
+	font-weight: bold;
 }
 .success > .msg-content::before {
 	content: url('./../icon/tick.svg') " ";
@@ -284,6 +293,7 @@ form input.submitinput {
 	color: #d33;
 	background: #fcfcfc;
 	border: 1px dotted #d893a1;
+	font-weight: bold;
 }
 .warning > .msg-content::before {
 	content: url('./../icon/warning.svg') " ";

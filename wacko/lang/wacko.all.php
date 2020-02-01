@@ -55,4 +55,16 @@ $wacko_all_resource = [
 	// see wacko.css in theme folder, e.g. a.fileicon .icon {
 	'OuterIcon'			=> '<span class="icon"></span>',
 
+	'LicenseIds'	=> [
+		1		=> ['CC-BY-ND',		2,	'https://creativecommons.org/licenses/by-nd/4.0/'],
+		2		=> ['CC-BY-NC-SA',	2,	'https://creativecommons.org/licenses/by-nc-sa/4.0/'],
+		3		=> ['CC-BY-NC-ND',	2,	'https://creativecommons.org/licenses/by-nc-nd/4.0/'],
+		4		=> ['CC-BY-SA',		2,	'https://creativecommons.org/licenses/by-sa/4.0/'],
+		5		=> ['CC-BY-NC',		2,	'https://creativecommons.org/licenses/by-nc/4.0/'],
+		6		=> ['CC-BY',		2,	'https://creativecommons.org/licenses/by/4.0/'],
+		7		=> ['CC-ZERO',		1,	'https://creativecommons.org/publicdomain/zero/1.0/'],
+		8		=> ['GNU-FDL',		2,	'https://www.gnu.org/licenses/fdl.html'],
+		9		=> ['PD',			1,	'https://creativecommons.org/publicdomain/mark/1.0/'],
+		10		=> ['CR',			3,	''],
+	],
 ];

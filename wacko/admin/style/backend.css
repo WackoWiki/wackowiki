@@ -290,69 +290,84 @@ sup, sub {
 	text-decoration:underline;
 }
 
-/* show message boxes */
+/** message boxes ************************************************************/
+.msg {
+	position: relative;
+	margin: 0.625em;
+	padding: .625rem;
+	overflow: auto;
+}
+.msg-content {
+	margin: 0 -.625rem;
+	padding: 0 .6rem 0 2.5rem;
+}
+.msg-content::before {
+	position: absolute;
+	left: .6rem;
+	height: 1rem;
+	width: 1rem;
+}
 .error {
-	background: #f8d4cc url('./../../image/cross.svg') no-repeat scroll 10px 10px;
+	background: #f8d4cc;
 	margin: 10px;
-	padding: 10px 10px 10px 40px;
 	color: #CC3333;
 	font-weight: bold;
 }
-
-.message {
-	overflow: hidden;
-	padding: 10px 20px;
-	width: 100%;
+.error > .msg-content::before {
+	content: url('./../../image/cross.svg') " ";
+}
+.comment-info {
+	color: #AAAAAA;
+	border: 1px solid #d5d9e6;
+	font-weight: bold;
+}
+.comment-info > .msg-content::before {
+	content: url('./../../image/comment.svg') " ";
 }
 
-.info {
-	background: #F4FBFF url('./../../image/info.svg') no-repeat scroll 10px 10px;
-	margin: 10px auto;
-	padding: 10px 10px 10px 40px;
+.note {
+	background: #F4FBFF;
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
-	font-weight: normal;
+}
+.note > .msg-content::before {
+	content: url('./../../image/info.svg') " ";
 }
 
 .notice {
 	background-color: #FFFFEF;
 	border: 1px dotted #DDDDAA;
-	/* font-size: 0.75rem; */
-	height: 35px;
-	line-height: 35px;
-	margin: 0 0 10px;
-	overflow: hidden;
-	padding: 0 10px;
+}
+.notice > .msg-content::before {
+	content: url('./../../image/info.svg') " ";
 }
 
 .success {
-	background: #e9ffd9 url('./../../image/tick.svg') no-repeat scroll 10px 10px;
+	background: #e9ffd9;
 	/* border: 1px solid #adde5c; */
 	color: #008000;
 	font-weight: bold;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
+}
+.success > .msg-content::before {
+	content: url('./../../image/tick.svg') " ";
 }
 
 .warning {
-	color: red;
-	font-weight: bold;
-	/*background-color: #fbe6f2;*/
-	background: #fcfcfc url('./../../image/warning.svg') no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
+	color: #d33;
+	background: #fcfcfc;
 	border: 1px dotted #d893a1;
-	border-right-style: none;
-	border-left-style: none;
+	font-weight: bold;
+}
+.warning > .msg-content::before {
+	content: url('./../../image/warning.svg') " ";
 }
 
 .hint {
 	border: 1px solid #ffee66;
-	width: auto;
-	background: #ffffdd url('./../../image/warning.svg') no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
-	position: relative;
+	background: #ffffdd;
+}
+.hint > .msg-content::before {
+	content: url('./../../image/important.svg') " ";
 }
 
 
