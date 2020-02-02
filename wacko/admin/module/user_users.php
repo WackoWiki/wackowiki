@@ -731,7 +731,7 @@ function admin_user_users(&$engine, &$module)
 		// defining WHERE and ORDER clauses
 		if (!empty($_GET['user']) && mb_strlen($_GET['user']) > 2)
 		{
-			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
+			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . trim($_GET['user']) . '%') . " ";
 		}
 
 		// set signuptime ordering
@@ -903,7 +903,7 @@ function admin_user_users(&$engine, &$module)
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']) .
 					'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 					$engine->_t('UsersSearch') . ': </td><td>' .
-					'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(($_GET['user'] ?? '')) . '"> ' .
+					'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html((trim($_GET['user']) ?? '')) . '"> ' .
 					'<input type="submit" id="submit" value="' . $engine->_t('UsersFilter') . '"> ' .
 					$engine->form_close();
 

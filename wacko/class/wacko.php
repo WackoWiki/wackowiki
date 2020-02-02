@@ -7793,6 +7793,7 @@ class Wacko
 				}
 				break;
 		}
+
 		if ($error)
 		{
 			$out .= $this->_t('PwdCplxWeak') . ' ';

@@ -65,7 +65,14 @@ if ($license || $license_id)
 	{
 		if (!empty($licenses[$license_id][2]))
 		{
-			$tpl->a_href	= $licenses[$license_id][2];
+			$lang = '';
+
+			if (preg_match('/https:\/\/creativecommons\.org\//', $licenses[$license_id][2]))
+			{
+				$lang = 'deed.' . ($this->get_user()['user_lang'] ?? $this->http->user_agent_language());
+			}
+
+			$tpl->a_href	= $licenses[$license_id][2] . $lang;
 			$tpl->ea		= true;
 		}
 
