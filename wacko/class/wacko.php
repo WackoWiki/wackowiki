@@ -6990,7 +6990,7 @@ class Wacko
 		{
 			// #2. find all <hX id="h1249-1" class="heading"></hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)!i",
+			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)!ui",
 				[&$this, 'numerate_toc_callback_toc'], $what);
 		}
 
@@ -6998,7 +6998,7 @@ class Wacko
 		{
 			// #2. find all <p id="p1249-1" class="auto"> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">(.+?)</p>)!is",
+			$what = preg_replace_callback("!(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">(.+?)</p>)!uis",
 				[&$this, 'numerate_toc_callback_p'], $what);
 		}
 

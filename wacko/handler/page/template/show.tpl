@@ -32,7 +32,7 @@
 
 
 [= reedit =]
-<div class="revision-info">
+<div class="msg revision-info">
 	[ ' message ' ]
 	<br><br>
 	<form action="[ ' href ' ]" method="post" name="edit_revision">
