@@ -54,13 +54,6 @@ switch ($default)
 				$this->link($source, '', $this->_t('SourceFromLink')) .
 				"</p>";
 		break;
-
-	case 'simplebr':
-		echo Ut::html($text);
-
-		// about the source
-		echo "\n\n<hr>\n" . $this->_t('SourceFrom') . $this->href($source);
-		break;
 }
 
 echo '</pre>';
