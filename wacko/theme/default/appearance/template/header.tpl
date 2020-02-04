@@ -144,7 +144,7 @@
 [= msg _ =
 	<div id="output_messages">
 		[= one _ =
-			<div class="msg [ ' data.1 | e attr ' ]"><div class="msg-content">[ ' data.0 ' ]</div></div>
+			<div class="msg [ ' data.1 | e attr ' ]">[ ' data.0 ' ]</div>
 		=]
 	</div>
 =]

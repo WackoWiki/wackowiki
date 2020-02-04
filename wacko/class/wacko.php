@@ -2831,7 +2831,7 @@ class Wacko
 	{
 		if ($message)
 		{
-			$info_box = '<div class="msg ' . $type . '"><div class="msg-content">' . $message . "</div></div>\n";
+			$info_box = '<div class="msg ' . $type . '">' . $message . "</div>\n";
 
 			if ($show)
 			{

@@ -249,13 +249,13 @@
 							<input type="email" id="email" name="email" value="[ ' email | e attr ' ]" size="40">&nbsp;
 							<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' confirm ' ]" title="[ ' confirm ' ]" class="[ ' icon ' ]">
 							[= verify _ =
-								<div class="msg hint"><div class="msg-content"><strong class="cite">
+								<div class="msg hint"><strong class="cite">
 									[ ' _t: EmailNotVerified ' ]</strong><br>
 									<small>
 										[ ' _t: EmailNotVerifiedDesc ' ]
 										<strong><a href="[ ' href ' ]">[ ' _t: HereLink ' ]</a></strong>
 									</small>
-								</div></div>
+								</div>
 							=]
 						</td>
 					</tr>
