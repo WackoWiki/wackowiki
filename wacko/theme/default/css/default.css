@@ -2118,6 +2118,10 @@ table.forum td {
 	background-color: #ffeeee;
 }
 
+.search-box-right {
+	float: right;
+}
+
 /* categories tag ------------- */
 .tag {
 	/* background: #f0f4f5; */

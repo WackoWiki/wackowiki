@@ -180,8 +180,13 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	// display search
 	$tpl->search = $this->action('search', ['page' => '/' . $this->tag, 'nomark' => 0, 'options' => 0]);
 
-	if (!isset($_GET['phrase']))
+	if (isset($_GET['phrase']))
 	{
+		$tpl->salign = '';
+	}
+	else
+	{
+		$tpl->salign = 'search-box-right';
 		$tpl->enter('t_');
 
 		// display list

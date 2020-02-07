@@ -1,7 +1,7 @@
 [ === main === ]
 	[ ' message ' ]
 	[= topics =
-		<div class="clearfix" style="float: right; margin-bottom: 10px;">
+		<div class="[ ' salign ' ] clearfix">
 			[ ' search ' ]
 		</div>
 		[= t =
