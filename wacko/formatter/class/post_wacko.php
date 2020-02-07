@@ -19,6 +19,7 @@ class PostWacko
 	{
 		$matches	= [];
 		$thing		= $things[1];
+
 		$wacko		= &$this->object;
 
 		// forced links ((link link == desc desc))
