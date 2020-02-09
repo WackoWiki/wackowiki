@@ -547,12 +547,12 @@ class Ut
 
 	static function strip_all_tags($string, $remove_nl = false)
 	{
-		$string = preg_replace('@<(script|style)[^>]*?>.*?</\\1>@si', '', $string);
+		$string = preg_replace('@<(script|style)[^>]*?>.*?</\\1>@usi', '', $string);
 		$string = strip_tags($string);
 
 		if ($remove_nl)
 		{
-			$string = preg_replace('/[\r\n\t ]+/', ' ', $string);
+			$string = preg_replace('/[\r\n\t ]+/u', ' ', $string);
 		}
 
 		return trim($string);

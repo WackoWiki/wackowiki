@@ -17,7 +17,6 @@ $clean_text = function ($string)
 	$string = $this->format($string, 'pre_wacko');
 	$string = $this->format($string, 'wacko'); //
 	$string = $this->format($string, 'safehtml'); //
-	#$string = Ut::html($string, true); // breaks html unicode chars
 
 	return $string;
 };
@@ -135,11 +134,12 @@ if (isset($_POST['upload']) & $can_upload)
 			// here would be place for translit
 			if ($this->db->upload_translit)
 			{
-				$t_name = Ut::translit($name);
+				$t_name	= Ut::translit($name);
+				$t_name	= preg_replace('/[\p{Z}]+/u', '_', $t_name);
 			}
 			else
 			{
-				$t_name = $name;
+				$t_name	= $name;
 			}
 
 			// 1.5. +write @page_id@ to name
