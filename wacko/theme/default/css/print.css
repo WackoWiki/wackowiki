@@ -324,12 +324,35 @@ ol, ul {
 
 /* SYNTAX %%(wrapper xyz)%% */
 
-div .action {
+.wrapper-center {
+	margin: 0 auto !important;
+}
+.wrapper-left {
+	float: left;
+}
+.wrapper-right {
+	float: right;
+}
+
+.wrapper-col2 {
+	column-count: 2;
+}
+.wrapper-col3 {
+	column-count: 3;
+}
+.wrapper-col4 {
+	column-count: 4;
+}
+.wrapper-col5 {
+	column-count: 5;
+}
+
+div .wrapper {
 	border:				1px dotted #000;
 	margin:				5px;
 	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
 }
-div .action-content {
+div .wrapper-content {
 	padding:			7px;
 }
 
