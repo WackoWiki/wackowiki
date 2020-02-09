@@ -2,13 +2,15 @@
 
 /*
 	%%(Formatter
-		wrapper="page")
+		wrapper="page"
+		[wrapper_width=200])
 	content
 	%%
 */
 
 if (!isset($options['wrapper_width'])) $options['wrapper_width'] = '800';
 
-echo	'<div style="width:' . (int) $options['wrapper_width'] . 'px">' . "\n" .
+// output wrapper
+echo	'<ignore><div style="width: ' . (int) $options['wrapper_width'] . 'px">' . "\n" .
 			$text .
-		"</div>\n";
+		"</div></ignore>\n";

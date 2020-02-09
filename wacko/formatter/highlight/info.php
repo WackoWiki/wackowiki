@@ -1,8 +1,37 @@
 <?php
 
-// info box
-echo '<table class="inf">';
-echo '<tr><td class="sign">i</td><td class="text">';
+/*
+	%%(info
+		[type="note | warning | error | important"]
+		[title="Title"]
+		[icon=0|1])
+		[style="no use"])
+	content
+	%%
+*/
+
+$style_class	= 'info';
+$type_class		= '';
+$types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quote', 'success', 'warning'];
+
+if (!isset($options['type']))		$options['type']	= 'default';
+if (!isset($options['title']))		$options['title']	= '';
+if (!isset($options['icon']))		$options['icon']	= 1;
+if (!isset($options['style']))		$options['style']	= false;
+
+if (in_array($options['type'], $types))
+{
+	// info type-* in wacko.css
+	$type_class = ' type-' . $options['type'];
+}
+
+$title = $options['title'] ?? null;
+
+echo	'<ignore><div class="' . $style_class . $type_class . '">' . "\n";
+echo	($options['icon'] ? '<div class="info-content">' : '') . "\n" .
+		($title
+			? '<p class="info-title">' . Ut::html($title) . '</p>' . "\n"
+			: '');
 include Ut::join_path(FORMATTER_DIR, 'wiki.php');
-echo '</td></tr>';
-echo '</table>';
+echo	($options['icon'] ? '</div>' : '') . "\n";
+echo	"</div></ignore>\n";

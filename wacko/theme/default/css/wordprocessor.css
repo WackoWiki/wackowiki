@@ -1,5 +1,7 @@
-header h1 { font-size: 60%;
-	font-family: verdana, sans-serif; }
+header h1 { 
+	font-size: 60%;
+	font-family: verdana, sans-serif;
+}
 p { margin: 0 0 3px 0; padding: 0; }
 img { border-width: 0; vertical-align: middle; max-width: 100%; height: auto; }
 
@@ -15,5 +17,5 @@ hr {
 
 .nobr {white-space: nowrap;}
 
-div.action           { margin: 2px; background: #F6F7ED; }
-div.action-content   { padding: 10px 10px 25px 10px; } 
+div.wrapper				{ margin: 2px; background: #F6F7ED; }
+div.wrapper-content		{ padding: 10px 10px 25px 10px; } 

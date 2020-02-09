@@ -30,9 +30,9 @@ if (in_array($options['wrapper_align'], ['center', 'justify', 'left', 'right']))
 $col_class	= $options['col'] ? ' wrapper-col' . (int) $options['col'] : '';
 
 // output wrapper
-echo	'<div class="' . $align_class . $col_class . '"' . $text_align . '>' . "\n" .
+echo	'<ignore><div class="' . $align_class . $col_class . '"' . $text_align . '>' . "\n" .
 			$text .
-		"</div>\n";
+		"</div></ignore>\n";
 
 if ($options['clear'])
 {

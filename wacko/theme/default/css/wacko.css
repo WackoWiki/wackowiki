@@ -71,15 +71,6 @@ h6 { font-family: Arial, sans-serif;   font-size: 12px; }
 /** Revisions-related *********************************************************/
 
 /* Displays text: "This is an old revision of..." */
-.revision-info {
-	border: 1px solid #d5d9e6;
-	color: #cc3333;
-	font-weight: bold;
-	background: #f4fbff url(./../icon/revisions.svg) no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
-	position: relative;
-}
 
 .revision-id {
 	display: inline-block;
@@ -110,18 +101,6 @@ del.diff {
 	color: #c00;
 	text-decoration: line-through;
 	background-color: #fee;
-}
-
-/** Comments-related *********************************************************/
-
-.comment-info {
-	border: 1px solid #d5d9e6;
-	color: #AAAAAA;
-	font-weight: bold;
-	background: url(./../icon/comment.svg) no-repeat scroll 10px 10px;
-	margin: 10px;
-	padding: 10px 10px 10px 40px;
-	position: relative;
 }
 
 /** Code wrapper-related ************************************************************/
@@ -371,14 +350,27 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	float: right;
 }
 
-div.action,
-aside.action {
+.wrapper-col2 {
+	column-count: 2;
+}
+.wrapper-col3 {
+	column-count: 3;
+}
+.wrapper-col4 {
+	column-count: 4;
+}
+.wrapper-col5 {
+	column-count: 5;
+}
+
+div.wrapper,
+aside.wrapper {
 	margin: 2px;
 	background: #f6f7ed;
 	border: 1px dotted #CCCCCC;
 	max-width: 100%;
 }
-div.action-content { padding: 10px 10px 25px 10px; }
+div.wrapper-content { padding: 10px 10px 25px 10px; }
 
 /* Important colored text: SYNTAX !!(red)text!! */
 .cl-red {color: #CC0000;}
@@ -413,10 +405,12 @@ mark {background: #ffffaa;}
 .mark-red {background: #ffbaba;}
 
 /* InterWiki links: SYNTAX (HostPrefix:Term) */
+
 a.iw-bugs .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/report-bug.svg') no-repeat scroll left center;
 	padding-left: 17px;
 }
+a.iw-commit .icon,
 a.iw-revision .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/commit.svg') no-repeat scroll left center;
 	padding-left: 17px;

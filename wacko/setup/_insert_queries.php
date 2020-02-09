@@ -95,9 +95,10 @@ $upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_0];
 // page
 $upgrade['5.5.14'][]	= ['alter',		'page',				$alter_page_r5_5_0];
 
-$upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_0];
-$upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_1];
 $upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_2];
+
+$upgrade['6.0.2'][]		= ['update',	'page',				$update_page_r5_5_0];
+$upgrade['6.0.2'][]		= ['update',	'page',				$update_page_r5_5_1];
 
 // keep this order, after $update_page_r5_5_2!
 $upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_1];
