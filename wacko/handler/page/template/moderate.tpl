@@ -1,6 +1,6 @@
 [ === main === ]
 	<h3>
-		[ ' _t: Moderation ' ] [ ' title | e ' ]
+		[ ' _t: Moderation ' ] [ ' title ' ]
 	</h3>
 	[ ' moderate ' ]
 
