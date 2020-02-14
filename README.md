@@ -20,3 +20,7 @@ We invite you to join any of our networks and stay up to date with the newest de
 If you found a bug, or have an idea for new functionality, feel free to report it on the issue tracker - just use search beforehand.
 
 [Issue tracker](https://wackowiki.org/bugs)
+
+## Screenshot
+
+![Example Image](readme.png "Example")
