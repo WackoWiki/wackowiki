@@ -228,7 +228,8 @@ class Wacko
 		if (empty($file))
 		{
 			$file = $this->db->load_single(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption,
+						author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id = " . (int) $page_id . " " .
 					"AND file_name = " . $this->db->q($file_name) . " " .
@@ -1043,7 +1044,8 @@ class Wacko
 			// TODO: use one query function together with check_file_record() -> both need the same set
 			// get and cache file data
 			if ($files = $this->db->load_all(
-				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author, source, source_url, license_id, picture_w, picture_h, file_ext, mime_type " .
+				"SELECT file_id, page_id, user_id, file_name, file_size, file_lang, file_description, caption, author,
+						source, source_url, license_id, picture_w, picture_h, file_ext, mime_type " .
 				"FROM " . $this->db->table_prefix . "file " .
 				"WHERE file_id IN (" . $this->ids_string($file_ids) . ") " .
 				"AND deleted <> 1 "
@@ -1415,7 +1417,8 @@ class Wacko
 		$pagination = $this->pagination($count_pages['n'], $limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.edit_note, p.minor_edit, p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.edit_note, p.minor_edit,
+				p.reviewed, p.latest, p.handler, p.comment_on_id, p.page_lang, p.page_size, r1.page_size as parent_size, u.user_name " .
 		$selector .
 		"ORDER BY p.modified DESC " .
 		$pagination['limit'], true))
@@ -1439,7 +1442,8 @@ class Wacko
 		$limit	= $this->get_list_count($limit);
 
 		if ($pages = $this->db->load_all(
-		"SELECT c.page_id, c.owner_id, c.tag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest, c.handler, c.comment_on_id, c.page_lang, c.body, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
+		"SELECT c.page_id, c.owner_id, c.tag, c.title, c.created, c.modified, c.edit_note, c.minor_edit, c.latest,
+				c.handler, c.comment_on_id, c.page_lang, c.body, c.body_r, u.user_name, p.title AS page_title, p.tag AS page_tag " .
 		"FROM " . $this->db->table_prefix . "page c " .
 			"LEFT JOIN " . $this->db->table_prefix . "user u ON (c.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
@@ -3334,11 +3338,21 @@ class Wacko
 		else if ($media_url == 2)
 		{
 			// figure loads dynamically: <ignore> is terminator for paragrafica
-			return '<ignore><!--link:begin-->' . $tag . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end--></ignore>';
+			return
+				'<ignore><!--link:begin-->' .
+				$tag . ' ==' . ($this->format_safe
+					? str_replace('>', '&gt;', str_replace('<', '&lt;', $text))
+					: $text) .
+				'<!--link:end--></ignore>';
 		}
 		else
 		{
-			return '<!--link:begin-->' . $tag . ' ==' . ($this->format_safe ? str_replace('>', '&gt;', str_replace('<', '&lt;', $text)) : $text) . '<!--link:end-->';
+			return
+				'<!--link:begin-->' .
+				$tag . ' ==' . ($this->format_safe
+					? str_replace('>', '&gt;', str_replace('<', '&lt;', $text))
+					: $text) .
+				'<!--link:end-->';
 		}
 	}
 
@@ -3359,7 +3373,7 @@ class Wacko
 	*
 	* @return string full Href link
 	*/
-	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = 0, $anchor_link = 1, $meta_direct = true) : string
+	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = false, $anchor_link = 1, $meta_direct = true) : string
 	{
 		$caption	= '';
 		$class		= '';

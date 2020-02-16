@@ -293,19 +293,25 @@ sup, sub {
 /** message boxes ************************************************************/
 .msg {
 	position: relative;
-	margin: 0.625em;
-	padding: .625rem;
+	margin: .6rem 0;
+	padding: .625rem 2.5rem .625rem;
 	overflow: auto;
 }
-.msg-content {
-	margin: 0 -.625rem;
-	padding: 0 .6rem 0 2.5rem;
-}
-.msg-content::before {
+.msg::before {
+	bottom: 0;
+	content: '';
+	left: 0;
 	position: absolute;
-	left: .6rem;
+	top: 0;
+	width: 2.5rem;
+}
+.msg::after {
+	position: absolute;
 	height: 1rem;
 	width: 1rem;
+	margin-top: 0;
+	top: .6rem;
+	left: .6rem;
 }
 .error {
 	background: #f8d4cc;
@@ -313,7 +319,7 @@ sup, sub {
 	color: #CC3333;
 	font-weight: bold;
 }
-.error > .msg-content::before {
+.msg.error::after {
 	content: url('./../../image/cross.svg') " ";
 }
 .comment-info {
@@ -321,7 +327,7 @@ sup, sub {
 	border: 1px solid #d5d9e6;
 	font-weight: bold;
 }
-.comment-info > .msg-content::before {
+.msg.comment-info::after {
 	content: url('./../../image/comment.svg') " ";
 }
 
@@ -330,7 +336,7 @@ sup, sub {
 	border: 1px solid #D5D9E6;
 	color: #CC3333;
 }
-.note > .msg-content::before {
+.msg.note::after {
 	content: url('./../../image/info.svg') " ";
 }
 
@@ -338,7 +344,7 @@ sup, sub {
 	background-color: #FFFFEF;
 	border: 1px dotted #DDDDAA;
 }
-.notice > .msg-content::before {
+.msg.notice::after {
 	content: url('./../../image/info.svg') " ";
 }
 
@@ -348,7 +354,7 @@ sup, sub {
 	color: #008000;
 	font-weight: bold;
 }
-.success > .msg-content::before {
+.msg.success::after {
 	content: url('./../../image/tick.svg') " ";
 }
 
@@ -358,7 +364,7 @@ sup, sub {
 	border: 1px dotted #d893a1;
 	font-weight: bold;
 }
-.warning > .msg-content::before {
+.msg.warning::after {
 	content: url('./../../image/warning.svg') " ";
 }
 
@@ -366,7 +372,7 @@ sup, sub {
 	border: 1px solid #ffee66;
 	background: #ffffdd;
 }
-.hint > .msg-content::before {
+.msg.hint::after {
 	content: url('./../../image/important.svg') " ";
 }
 

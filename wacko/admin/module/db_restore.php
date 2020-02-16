@@ -401,7 +401,7 @@ function admin_db_restore(&$engine, &$module)
 		echo $engine->form_open('delete_backup');
 
 		echo '<input type="hidden" name="backup_id" value="' . Ut::html($backup_id) . '">' . "\n" .
-			'<div class="warning">' .
+			'<div class="msg warning">' .
 				Ut::perc_replace($engine->_t('BackupDelete'), ' <code>' . Ut::html($backup_id) . '</code>') . '<br><br>' .
 				'<input type="submit" id="submit_delete" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
 				'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
