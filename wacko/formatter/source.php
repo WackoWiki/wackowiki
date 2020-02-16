@@ -42,7 +42,7 @@ switch ($default)
 			},
 			$text);
 
-		echo $this->format($text, 'simplebr', ['no<p>' => 1]);
+		echo $text;
 		break;
 
 	case 'rawhtml':
