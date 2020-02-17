@@ -43,7 +43,7 @@
 		</div>
 	=]
 	[= item _ =
-		<a id="[ ' token ' ]"></a>
+		<a id="[ ' token ' ]"></a> <a href="[ ' href ' ]">← [ ' _t: ToOverview ' ]</a>
 		[''' navigation ''']
 		<br><br>
 		<figure class="t-center">
@@ -76,9 +76,8 @@
 [= navigation =]
 <nav class="pagination">
 	[= prev _ =
-		<a href="[ ' href ' ]">« [ ' _t: Back ' ]</a> |
+		<a href="[ ' href ' ]">« [ ' _t: Back ' ]</a> 
 	=]
-		 <a href="[ ' href ' ]"> [ ' _t: Files ' ]</a> 
 	[= next _ =
 		| <a href="[ ' href ' ]">[ ' _t: Next ' ] »</a>
 	=]

@@ -377,6 +377,9 @@ if ($can_view)
 				$tpl->img		=  $this->link($path . $file['file_name']);
 			}
 
+			// backlink
+			$tpl->href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
+
 			$tpl->enter('navigation_');
 
 			if (array_key_exists($key - 1, $files))
@@ -388,9 +391,6 @@ if ($can_view)
 			{
 				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key + 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
-
-			// backlink
-			$tpl->href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
 
 			$tpl->leave();	// navigation
 			$tpl->leave();	// item

@@ -934,6 +934,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Opret henvisning hertil på den gamle side',
 
 	// pagination
+	'ToOverview'				=> 'Back to overview',
 	'ToThePage'					=> 'Til side',
 	'Next'						=> 'Næste',
 	'Prev'						=> 'Forrige',

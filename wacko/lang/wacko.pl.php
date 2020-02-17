@@ -934,6 +934,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
 
 	// pagination
+	'ToOverview'				=> 'Powrót do przeglądu',
 	'ToThePage'					=> 'To page',
 	'Next'						=> 'Następna',
 	'Prev'						=> 'Poprzednia',
