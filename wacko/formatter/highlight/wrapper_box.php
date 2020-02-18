@@ -6,7 +6,7 @@
 		[wrapper_align="left | center | right"]
 		[wrapper_width="pixel"]
 		[wrapper_title="Title"]
-		[wrapper_type="note | warning | error | important"]
+		[wrapper_type="default | error | example | important | note | question | quote | success | warning"]
 		[col=2|3|4|5]
 		[clear])
 	content

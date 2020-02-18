@@ -2,7 +2,7 @@
 
 /*
 	%%(info
-		[type="note | warning | error | important"]
+		[type="default | error | example | important | note | question | quote | success | warning"]
 		[title="Title"]
 		[icon=0|1])
 		[style="no use"])
