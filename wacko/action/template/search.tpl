@@ -34,7 +34,7 @@
 						[= comments =
 							- <img src="[ ' db: theme_url ' ]icon/spacer.png" class="btn-comment">[ ' n ' ]
 						=]
-						</span>
+						</span><br>
 						[ ' preview | nl2br ' ]
 
 						[ ' category ' ]
