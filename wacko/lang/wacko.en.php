@@ -911,13 +911,13 @@ $wacko_translation = [
 	'ACLForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'ACLAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
 
-	'BookmarkDeleteSelected'	=> 'Delete Selected',
+	'BookmarkDeleteSelected'	=> 'Delete selected',
 	'BookmarkMark'				=> 'Mark',
 	'BookmarkNumber'			=> 'No.',
 	'BookmarkNone'				=> 'You have no bookmarks.',
-	'BookmarkTitle'				=> 'Bookmark Title',
+	'BookmarkTitle'				=> 'Bookmark title',
 	'BookmarkPage'				=> 'Page',
-	'BookmarkSaveChanges'		=> 'Save Changes',
+	'BookmarkSaveChanges'		=> 'Save changes',
 	'BookmarksAddPage'			=> 'Set a bookmark for the following page',
 	'BookmarkAlreadyExists'		=> 'The bookmark already exists.',
 

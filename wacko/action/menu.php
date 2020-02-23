@@ -34,8 +34,6 @@ $load_user_menu = function ($user_id, $lang = '')
 	return $_menu;
 };
 
-if (!isset($redirect)) $redirect = 0; // required for usersettings action
-
 if (!isset($system))
 {
 	$system = 0;
@@ -43,7 +41,7 @@ if (!isset($system))
 
 $message		= '';
 $user			= [];
-$default_menu	= '';
+$default_menu	= false;
 $menu_lang		= '';
 
 // get default menu items
@@ -84,14 +82,14 @@ if (isset($_POST['_user_menu']))
 		$b[$k]['tag']			= $v['tag'];
 	}
 
-	$object->data['user_menu'] = & $b;
+	$this->data['user_menu'] = & $b;
 
 	if (isset($_POST['update_menu']))
 	{
 		// reposition
 		$data = [];
 
-		foreach ($object->data['user_menu'] as $k => $item)
+		foreach ($this->data['user_menu'] as $k => $item)
 		{
 			$data[] = [
 				'menu_id'		=> $item['menu_id'],
@@ -194,7 +192,7 @@ if (isset($_POST['_user_menu']))
 	{
 		$menu_ids = [];
 
-		foreach ($object->data['user_menu'] as $item)
+		foreach ($this->data['user_menu'] as $item)
 		{
 			if (isset($_POST['delete_' . $item['menu_id']]))
 			{
@@ -222,14 +220,12 @@ if ($_user_id)
 {
 	$_menu = $load_user_menu($_user_id, $menu_lang);
 
+	// display form
 	if ($_menu)
 	{
-		// echo "<h4>" . $this->_t('YourBookmarks') . "</h4>";
 		$tpl->enter('bm_');
 
-		// user is logged in; display config form
-
-		if ($default_menu === true)
+		if ($default_menu)
 		{
 			$tpl->lang_select	= $this->show_select_lang('menu_lang', $menu_lang, true);
 		}
@@ -253,7 +249,7 @@ if ($_user_id)
 		$tpl->none = true;
 	}
 
-	if ($default_menu === true)
+	if ($default_menu)
 	{
 		$tpl->lang_select = $this->show_select_lang('lang_new', $menu_lang, false);
 	}

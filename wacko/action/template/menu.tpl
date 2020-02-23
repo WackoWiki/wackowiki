@@ -17,7 +17,6 @@
 					<th>[ ' _t: BookmarkTitle ' ]</th>
 					<th>[ ' _t: BookmarkPage ' ]</th>
 					<th>[ ' _t: BookmarkMark ' ]</th>
-					<!--<th>Display</th>-->
 				</tr>
 				[= l _ =
 					<tr>
@@ -28,9 +27,6 @@
 							<input type="text" maxlength="100" name="title_[ ' menuid ' ]" size="40" value="[ ' menutitle ' ]" placeholder="[ ' title | e attr ' ]">
 						</td>
 						<td>
-							[= nouse _ =
-								<!--<input type="radio" id="menu_item[ ' menuid ' ]" name="change" value="[ ' menuid ' ]"> -->
-							=]
 							<label for="menu_item[ ' menuid ' ]" title="[ ' title | e attr ' ]">» [ ' tag ' ]</label>
 						</td>
 						<td class="t-center">

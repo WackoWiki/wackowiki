@@ -12,7 +12,7 @@ $tabs			= [
 					'notification'	=> 'UserSettingsNotifications',
 					'extended'		=> 'UserSettingsExtended'
 				];
-$mode			= @$_GET[$mod_selector];
+$mode			= @$_GET[$mod_selector] ?? ($_POST['_user_menu'] ? 'menu' : '');
 
 if (!array_key_exists($mode, $tabs))
 {
@@ -208,7 +208,7 @@ else if (($user = $this->get_user()))
 	// MENU
 	if ($mode == 'menu' || isset($_POST['_user_menu']))
 	{
-		$tpl->menu_action	= $this->action('menu', ['redirect' => 1]);
+		$tpl->menu_action	= $this->action('menu');
 	}
 	// NOTIFICATIONS
 	else if ($mode == 'notification' || $action == 'user_settings_notifications')
