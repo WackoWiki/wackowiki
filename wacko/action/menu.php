@@ -27,7 +27,7 @@ $load_user_menu = function ($user_id, $lang = '')
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
 		"WHERE m.user_id = " . (int) $user_id . " " .
 			($lang
-				? "AND m.menu_lang =  " . $this->db->q($lang) . " "
+				? "AND m.menu_lang = " . $this->db->q($lang) . " "
 				: "") .
 		"ORDER BY m.menu_position", false);
 
@@ -47,7 +47,7 @@ $default_menu	= '';
 $menu_lang		= '';
 
 // get default menu items
-if ($this->is_admin() && $system == true)
+if ($this->is_admin() && $system)
 {
 	$_user_id		= $this->db->system_user_id;
 	$default_menu	= true;
@@ -137,8 +137,8 @@ if (isset($_POST['_user_menu']))
 					if ($this->db->load_single(
 						"SELECT menu_id " .
 						"FROM " . $this->db->table_prefix . "menu " .
-						"WHERE user_id = " . (int) $_user_id." " .
-							($default_menu === true
+						"WHERE user_id = " . (int) $_user_id . " " .
+							($default_menu
 								? "AND menu_lang = " . $this->db->q($_user_lang) . " "
 								: "") .
 							"AND page_id = " . (int) $_page_id." " .
@@ -153,7 +153,7 @@ if (isset($_POST['_user_menu']))
 							"SELECT menu_id " .
 							"FROM " . $this->db->table_prefix . "menu " .
 							"WHERE user_id = " . (int) $_user_id . " " .
-								($default_menu === true
+								($default_menu
 									? "AND menu_lang = " . $this->db->q($_user_lang) . " "
 									: "")
 								, false);
@@ -216,7 +216,6 @@ if (isset($_POST['_user_menu']))
 
 	// update user menu
 	$this->set_menu(MENU_USER, true);
-
 }
 
 if ($_user_id)
@@ -236,6 +235,7 @@ if ($_user_id)
 		}
 
 		$tpl->enter('l_');
+
 		foreach ($_menu as $menu_item)
 		{
 			$tpl->menuid	= $menu_item['menu_id'];
@@ -253,10 +253,8 @@ if ($_user_id)
 		$tpl->none = true;
 	}
 
-
 	if ($default_menu === true)
 	{
 		$tpl->lang_select = $this->show_select_lang('lang_new', $menu_lang, false);
 	}
-
 }
