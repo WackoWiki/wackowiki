@@ -140,40 +140,16 @@ $ap_translation = [
 		'title'		=> 'Configuración de adjuntos',
 	],
 
-	// Categories module
-	'content_categories'		=> [
-		'name'		=> 'Categorias',
-		'title'		=> 'Configurar categorias',
-	],
-
-	// Comments module
-	'content_comments'		=> [
-		'name'		=> 'Comentarios',
-		'title'		=> 'Configurar comentarios',
-	],
-
 	// Deleted module
 	'content_deleted'		=> [
 		'name'		=> 'Eliminar',
 		'title'		=> 'Contenido recientemente eliminado',
 	],
 
-	// Files module
-	'content_files'		=> [
-		'name'		=> 'Archivos',
-		'title'		=> 'Administrar archivos adjuntos',
-	],
-
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Menu',
 		'title'		=> 'Agregar, editar o eliminar itemes del menu',
-	],
-
-	// Pages module
-	'content_pages'		=> [
-		'name'		=> 'Paginas',
-		'title'		=> 'aministrar páginas',
 	],
 
 	// Polls module

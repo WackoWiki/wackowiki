@@ -140,40 +140,16 @@ $ap_translation = [
 		'title'		=> 'Anhang-Einstellungen',
 	],
 
-	// Categories module
-	'content_categories'		=> [
-		'name'		=> 'Kategorien',
-		'title'		=> 'Kategorien verwalten',
-	],
-
-	// Comments module
-	'content_comments'		=> [
-		'name'		=> 'Kommentare',
-		'title'		=> 'Kommentare verwalten',
-	],
-
 	// Deleted module
 	'content_deleted'		=> [
 		'name'		=> 'Gelöscht',
 		'title'		=> 'Neu gelöschte Inhalte',
 	],
 
-	// Files module
-	'content_files'		=> [
-		'name'		=> 'Dateien',
-		'title'		=> 'Verwalte hochgeladene Dateien',
-	],
-
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Menü',
 		'title'		=> 'Hinzufügen, Bearbeiten oder Entfernen von Standard-Menüpunkten',
-	],
-
-	// Pages module
-	'content_pages'		=> [
-		'name'		=> 'Seiten',
-		'title'		=> 'Seiten verwalten',
 	],
 
 	// Polls module

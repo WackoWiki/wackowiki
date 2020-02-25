@@ -140,40 +140,16 @@ $ap_translation = [
 		'title'		=> 'Attachment settings',
 	],
 
-	// Categories module
-	'content_categories'		=> [
-		'name'		=> 'Categorias',
-		'title'		=> 'Manage categories',
-	],
-
-	// Comments module
-	'content_comments'		=> [
-		'name'		=> 'Comentários',
-		'title'		=> 'Manage comments',
-	],
-
 	// Deleted module
 	'content_deleted'		=> [
 		'name'		=> 'Eliminado',
 		'title'		=> 'Newly deleted content',
 	],
 
-	// Files module
-	'content_files'		=> [
-		'name'		=> 'Files',
-		'title'		=> 'Manage uploaded files',
-	],
-
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Menu',
 		'title'		=> 'Add, edit or remove default menu items',
-	],
-
-	// Pages module
-	'content_pages'		=> [
-		'name'		=> 'Páginas',
-		'title'		=> 'Manage pages',
 	],
 
 	// Polls module

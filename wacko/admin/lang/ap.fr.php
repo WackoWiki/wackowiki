@@ -140,40 +140,16 @@ $ap_translation = [
 		'title'		=> 'Paramètres des pièces jointes',
 	],
 
-	// Categories module
-	'content_categories'		=> [
-		'name'		=> 'Catégories',
-		'title'		=> 'Gérer les catégories',
-	],
-
-	// Comments module
-	'content_comments'		=> [
-		'name'		=> 'Commentaires',
-		'title'		=> 'Gérer les commentaires',
-	],
-
 	// Deleted module
 	'content_deleted'		=> [
 		'name'		=> 'Supprimé',
 		'title'		=> 'Contenu récemment supprimé',
 	],
 
-	// Files module
-	'content_files'		=> [
-		'name'		=> 'Fichiers',
-		'title'		=> 'Gérer les fichiers téléchargés',
-	],
-
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Menu',
 		'title'		=> 'Ajouter, modifier ou supprimer des éléments de menu par défaut',
-	],
-
-	// Pages module
-	'content_pages'		=> [
-		'name'		=> 'Pages',
-		'title'		=> 'Gérer les pages',
 	],
 
 	// Polls module

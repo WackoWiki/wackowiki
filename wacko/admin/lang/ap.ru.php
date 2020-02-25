@@ -140,40 +140,16 @@ $ap_translation = [
 		'title'		=> 'Настройки загруженных файлов',
 	],
 
-	// Categories module
-	'content_categories'		=> [
-		'name'		=> 'Категории',
-		'title'		=> 'Управление категориями',
-	],
-
-	// Comments module
-	'content_comments'		=> [
-		'name'		=> 'Комментарии',
-		'title'		=> 'Управление комментариями',
-	],
-
 	// Deleted module
 	'content_deleted'		=> [
 		'name'		=> 'Удаленные документы',
 		'title'		=> 'Управление копиями недавно удаленных документов',
 	],
 
-	// Files module
-	'content_files'		=> [
-		'name'		=> 'Глобальные файлы',
-		'title'		=> 'Управление глобальными файлами',
-	],
-
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Меню',
 		'title'		=> 'Добавление, редактирование или удаление пунктов стандартного меню',
-	],
-
-	// Pages module
-	'content_pages'		=> [
-		'name'		=> 'Страницы',
-		'title'		=> 'Управление страницами',
 	],
 
 	// Polls module
