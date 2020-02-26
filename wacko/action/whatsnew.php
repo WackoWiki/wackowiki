@@ -176,8 +176,10 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 									&& $page['date'] > $user['last_mark']
 										? ' viewed'
 										: '' );
-			$tpl->l_revisions	= (!$this->hide_revisions && ($page['ctype'] != 2 || $page['comment_on_id'] === 0))
-									? $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip'))
+			$tpl->l_revisions	= ($page['ctype'] != 2 || $page['comment_on_id'] === 0)
+									? ($this->hide_revisions
+										? $time
+										: $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')))
 									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
 
 			if (($edit_note = $page['edit_note']))
