@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Note: Before the administration of technical activities <strong>strongly</strong> are encouraged to block access to the site!',
+	'MainNote'					=> 'Note: It is recommended that access to the site be temporarily blocked for administrative maintenance.',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
