@@ -1968,7 +1968,7 @@ class Wacko
 							"owner_id		= " . (int) $owner_id . ", " .
 							"user_id		= " . (int) $user_id . ", " .
 							"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
-							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ?: $desc)) . ", " .
+							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc)) . ", " .
 							"body			= " . $this->db->q($body) . ", " .
 							"body_r			= " . $this->db->q($body_r) . ", " .
 							"body_toc		= " . $this->db->q($body_toc) . ", " .
