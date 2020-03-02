@@ -15,7 +15,7 @@ use PHPDiff\Diff\Renderer\RendererAbstract;
  * @author Chris Boulton <chris.boulton@interspire.com>
  * @copyright (c) 2009 Chris Boulton
  * @license New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version 1.15
+ * @version 1.16
  * @link https://github.com/JBlond/php-diff
  */
 
@@ -32,7 +32,7 @@ class Unified extends RendererAbstract
     public function render(): string
     {
         $diff = '';
-        $opCodes = $this->diff->getGroupedOpcodes();
+        $opCodes = $this->diff->getGroupedOpCodes();
         foreach ($opCodes as $group) {
             $lastItem = count($group) - 1;
             $i1 = $group['0']['1'];
@@ -51,24 +51,23 @@ class Unified extends RendererAbstract
                     $diff .= ' ' .
                         implode(
                             "\n ",
-                            $this->diff->getArrayRange($this->diff->getOld(), $i1, $i2)
+                            $this->diff->getArrayRange($this->diff->getVersion1(), $i1, $i2)
                         ) . "\n";
-                } else {
-                    if ($tag == 'replace' || $tag == 'delete') {
-                        $diff .= '-' .
-                            implode(
-                                "\n-",
-                                $this->diff->getArrayRange($this->diff->getOld(), $i1, $i2)
-                            ) . "\n";
-                    }
-
-                    if ($tag == 'replace' || $tag == 'insert') {
-                        $diff .= '+' .
-                            implode(
-                                "\n+",
-                                $this->diff->getArrayRange($this->diff->getNew(), $j1, $j2)
-                            ) . "\n";
-                    }
+                    continue;
+                }
+                if ($tag == 'replace' || $tag == 'delete') {
+                    $diff .= '-' .
+                        implode(
+                            "\n-",
+                            $this->diff->getArrayRange($this->diff->getVersion1(), $i1, $i2)
+                        ) . "\n";
+                }
+                if ($tag == 'replace' || $tag == 'insert') {
+                    $diff .= '+' .
+                        implode(
+                            "\n+",
+                            $this->diff->getArrayRange($this->diff->getVersion2(), $j1, $j2)
+                        ) . "\n";
                 }
             }
         }

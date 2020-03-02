@@ -11,9 +11,10 @@ namespace PHPDiff\Diff\Renderer\Html;
  *
  * @package       jblond\Diff\Renderer\Html
  * @author        Chris Boulton <chris.boulton@interspire.com>
+ * @author        Ferry Cools <info@DigiLive.nl>
  * @copyright (c) 2009 Chris Boulton
  * @license       New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version       1.15
+ * @version       1.16
  * @link          https://github.com/JBlond/php-diff
  */
 class Inline extends HtmlArray
