@@ -138,7 +138,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 		if (isset($days[$day]) and is_array($days[$day]))
 		{
-			@list($link, $classes, $content) = $days[$day];
+			[$link, $classes, $content] = $days[$day];
 
 			if (is_null($content))
 			{

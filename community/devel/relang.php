@@ -249,7 +249,7 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 
 			foreach ($group as $code)
 			{
-				list($tag, $i1, $i2, $j1, $j2) = $code;
+				[$tag, $i1, $i2, $j1, $j2] = $code;
 				if ($tag == 'equal')
 				{
 					foreach ($diff->GetB($j1, $j2) as $line)

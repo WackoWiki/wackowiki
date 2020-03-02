@@ -283,7 +283,7 @@ else
 function make_seed()
 {
 	// from http://php.net/srand
-	list($usec, $sec) = explode(' ', microtime());
+	[$usec, $sec] = explode(' ', microtime());
 	return (float) $sec + ((float) $usec * 100000);
 }
 

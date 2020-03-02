@@ -203,7 +203,7 @@ class GPG
 		// parsing passed token, checking proper syntax
 		if (is_array($strings = explode("\n", $token)))
 		{
-			list($token_time, $token_proc) = explode('|', $strings[0]);
+			[$token_time, $token_proc] = explode('|', $strings[0]);
 			$token_mac = $strings[1];
 
 			// something's wrong with the input

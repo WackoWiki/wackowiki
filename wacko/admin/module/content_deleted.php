@@ -88,11 +88,11 @@ else if ($type == OBJECT_FILE)
 
 	if ($type == OBJECT_FILE)
 	{
-		list($files, $pagination) = $engine->load_deleted_files(50, false);
+		[$files, $pagination] = $engine->load_deleted_files(50, false);
 	}
 	else
 	{
-		list($pages, $pagination) = $engine->load_deleted_pages(50, false);
+		[$pages, $pagination] = $engine->load_deleted_pages(50, false);
 	}
 
 	echo $filter_type;
@@ -108,7 +108,7 @@ else if ($type == OBJECT_FILE)
 		foreach ($pages as $page)
 		{
 			// day header
-			list($day, $time) = explode(' ', $page['modified']);
+			[$day, $time] = explode(' ', $page['modified']);
 
 			if ($day != $curday)
 			{
@@ -148,7 +148,7 @@ else if ($type == OBJECT_FILE)
 		foreach ($files as $file)
 		{
 			// day header
-			list($day, $time) = explode(' ', $file['modified_dt']);
+			[$day, $time] = explode(' ', $file['modified_dt']);
 
 			if ($day != $curday)
 			{

@@ -2821,7 +2821,7 @@ class Wacko
 			// TODO: think about quoting....
 			foreach ($messages as $message)
 			{
-				list($_message, $_type) = $message;
+				[$_message, $_type] = $message;
 				$this->show_message($_message, $_type);
 			}
 		}
@@ -3392,7 +3392,7 @@ class Wacko
 
 		if ($text)
 		{
-			list($text, $scale, $media_class) = $this->parse_img_param($text);
+			[$text, $scale, $media_class] = $this->parse_img_param($text);
 		}
 
 		if ($track)
@@ -4640,7 +4640,7 @@ class Wacko
 				{
 					if (($line = trim($line)) && !ctype_punct($line[0]))
 					{
-						list($wiki_name, $wiki_url) = preg_split('/\s+/', $line);
+						[$wiki_name, $wiki_url] = preg_split('/\s+/', $line);
 						$inter_wiki[mb_strtolower($wiki_name)] = $wiki_url;
 					}
 				}

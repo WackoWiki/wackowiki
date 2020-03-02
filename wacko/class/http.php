@@ -72,7 +72,7 @@ class Http
 		$this->lang		= $this->user_agent_language();
 
 		// store data for save_page()
-		list($this->page, $this->hash) = $this->normalize_page($this->page);
+		[$this->page, $this->hash] = $this->normalize_page($this->page);
 		$this->file		= $this->construct_id($this->page, $this->method, $this->query, $this->lang);
 
 		clearstatcache();
@@ -113,7 +113,7 @@ class Http
 
 		if ($this->db->cache)
 		{
-			list($page, $hash) = $this->normalize_page($page);
+			[$page, $hash] = $this->normalize_page($page);
 
 			$params	= $this->db->load_all(
 				"SELECT method, query, cache_lang " .

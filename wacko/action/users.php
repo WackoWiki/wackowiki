@@ -237,7 +237,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 						if ($ref0 && strpos($ref0, '@@') !== false)
 						{
 							// TODO sanitize? someone can inject something into
-							list($ref, $subject) = explode('@@', Ut::strip_controls($ref0), 2);
+							[$ref, $subject] = explode('@@', Ut::strip_controls($ref0), 2);
 
 							if (strncmp($subject, 'Re:', 3))
 							{
