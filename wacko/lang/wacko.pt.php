@@ -735,7 +735,7 @@ $wacko_translation = [
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
 								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
 								   'similar form on your profile page. ',
-	'UsersPMOversized'			=> 'O comprimento da sua mensagem excede o máximo permitido de %1 caracteres. Por favor, encurte a sua mensagem e envie-a novamente.',
+	'UsersPMOversized'			=> 'O comprimento da mensagem excede em %1 o tamanho máximo permitido. Por favor, encurte a sua mensagem e envie-a novamente.',
 	'UsersPMFlooded'			=> 'O intervalo entre o envio de mensagens pessoais não deve ser inferior a %1 segundos.',
 	'UsersPMSent'				=> 'A mensagem pessoal foi enviada com sucesso para o usuário.',
 	'UsersPMPlnSent'			=> 'Mensagem pessoal enviada ao usuário em texto simples.',

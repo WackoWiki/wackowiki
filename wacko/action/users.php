@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 $max		= (int) @$max;
 $group_id	= (int) @$group_id;
 $logged_in	= $this->get_user();
-$tab_mode	= @$_GET['mode'];
+$tab_mode	= $_GET['mode'] ?? '';
 
 // display user profile
 if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private message can POST here
@@ -22,7 +22,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 	{
 		$tpl->not_found = Ut::perc_replace($this->_t('UsersNotFound'),
 			$this->href(),
-			'<code>' . Ut::html($profile) . '<code>');
+			'<code>' . Ut::html($profile) . '</code>');
 	}
 	else if (!$user['enabled'])
 	{
@@ -144,12 +144,14 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 			if (@$_POST['_action'] === 'personal_message' && $allow_intercom && $_POST['mail_body'])
 			{
 				// check for errors
-				$error = '';
+				$error		= '';
+				$pm_size	= strlen($_POST['mail_body']); // bytes!
 
 				// message is too long
-				if (mb_strlen($_POST['mail_body']) > INTERCOM_MAX_SIZE)
+				if ($pm_size > INTERCOM_MAX_SIZE)
 				{
-					$error = Ut::perc_replace($this->_t('UsersPMOversized'), mb_strlen($_POST['mail_body']) - INTERCOM_MAX_SIZE);
+					$error = Ut::perc_replace($this->_t('UsersPMOversized'),
+						binary_multiples(($pm_size - INTERCOM_MAX_SIZE)));
 				}
 				// personal messages flood control
 				else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)
@@ -226,9 +228,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				{
 					$tpl->enter('pm_');
 
-					$subject	= (string) @$_POST['mail_subject'];
-					$ref		= (string) @$_POST['ref'];
-					$body		= (string) @$_POST['mail_body'];
+					$subject	= (string) ($_POST['mail_subject']	?? '');
+					$ref		= (string) ($_POST['ref']			?? '');
+					$body		= (string) ($_POST['mail_body']		?? '');
 
 					// decompose reply referrer
 					if (($ref0 = @$_GET['ref']))
@@ -472,11 +474,11 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 									$on_page	= '<span title="">→ ' . $this->_t('UploadGlobal');
 								}
 
-								$tpl->u_u2_li_t		= $upload['uploaded_dt'];
-								# $tpl->u_u2_li_link		= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
-								$tpl->u_u2_li_link	= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+								$tpl->u_u2_li_t			= $upload['uploaded_dt'];
+								# $tpl->u_u2_li_link	= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
+								$tpl->u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
 								$tpl->u_u2_li_onpage	= $on_page;
-								$tpl->u_u2_li_descr	= $file_description;
+								$tpl->u_u2_li_descr		= $file_description;
 							}
 						}
 					}
@@ -529,7 +531,7 @@ else
 		$params['profile'] = $_GET['profile'];
 	}
 
-	$_sort		= @$_GET['sort'];
+	$_sort		= $_GET['sort'] ?? null;
 	$sort_modes	=
 	[
 		'name'			=> 'user_name',
@@ -543,7 +545,7 @@ else
 
 	if (isset($sort_modes[$_sort]))
 	{
-		$_order			= @$_GET['order'];
+		$_order			= $_GET['order'] ?? null;
 		$order_modes	=
 		[
 			'asc'	=> 'ASC',

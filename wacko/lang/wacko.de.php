@@ -735,7 +735,7 @@ $wacko_translation = [
 	'UsersIntercomDesc'			=> 'Hinweis: Senden von persönlichen Nachrichten an die E-Mail-Adresse des ' .
 								   'Empfänger ohne Offenlegung deiner Adresse. Der Empfänger hat die Möglichkeit dir zu anworten, indem ' .
 								   'er das gleiche Formular auf deiner Profilseite nutzt.',
-	'UsersPMOversized'			=> 'Die Länge der Nachricht überschreitet die maximal zulässigen %1 Zeichen. Bitte kürze deine Mitteilung und übermittle sie erneut.',
+	'UsersPMOversized'			=> 'Die Länge der Nachricht überschreitet die maximal zulässige Größe um %1. Bitte kürze deine Mitteilung und übermittle sie erneut.',
 	'UsersPMFlooded'			=> 'Der Abstand zwischen dem Senden von persönlichen Nachrichten sollte nicht kleiner sein als %1 Sekunden.',
 	'UsersPMSent'				=> 'Persönliche Nachricht wurde erfolgreich an den Nutzer gesendet.',
 	'UsersPMPlnSent'			=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',

@@ -735,7 +735,7 @@ $wacko_translation = [
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
 									'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
 									'similar form on your profile page. ',
-	'UsersPMOversized'			=> 'De lengte van uw bericht overschrijdt de maximaal toegestane lengte van uw bericht tot %1 tekens. Gelieve uw bericht in te korten en opnieuw te verzenden.',
+	'UsersPMOversized'			=> 'De lengte van het bericht overschrijdt de maximaal toegestane grootte met %1. Gelieve uw bericht in te korten en opnieuw te verzenden.',
 	'UsersPMFlooded'			=> 'Het interval tussen het verzenden van persoonlijke berichten mag niet korter zijn dan %1 seconde.',
 	'UsersPMSent'				=> 'Een persoonlijk bericht werd met succes naar de gebruiker verzonden.',
 	'UsersPMPlnSent'			=> 'Persoonlijk bericht dat in platte tekst naar de gebruiker wordt gestuurd.',

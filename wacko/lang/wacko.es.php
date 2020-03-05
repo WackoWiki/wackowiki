@@ -735,7 +735,7 @@ $wacko_translation = [
 	'UsersIntercomDesc'			=> 'Observación: Mensaje privado enviado al email del destinatario ' .
 								   'sin revelar su dirección de email. El recipiente podrá responderle usando ' .
 								   'un formulario similar en la página del perfil de usted. ',
-	'UsersPMOversized'			=> 'La longitud del mensaje excede el máximo permitido de %1 caracteres. Por favor acorte su mensaje y vuelva a enviar.',
+	'UsersPMOversized'			=> 'La longitud del mensaje excede el tamaño máximo permitido en un %1. Por favor acorte su mensaje y vuelva a enviar.',
 	'UsersPMFlooded'			=> 'El intervalo entre mensajes personales debe ser mayor de %1 segundos.',
 	'UsersPMSent'				=> 'Mensaje personal enviado exitosamente al usuario.',
 	'UsersPMPlnSent'			=> 'Mensaje personal enviado al usuario en texto plano.',

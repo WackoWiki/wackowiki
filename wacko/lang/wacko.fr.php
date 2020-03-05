@@ -735,7 +735,7 @@ $wacko_translation = [
 	'UsersIntercomDesc'			=> 'Note: Envoi de messages personnel à l’adresse courriel du destinataire ' .
 								   'sans dévoiler votre adresse. Le destinataire pourra vous répondre en utilisant ' .
 								   'un formulaire similaire sur votre page de profil. ',
-	'UsersPMOversized'			=> 'La taille de votre message excède le maximum autorisé de %1 caractères. '. 'Merci de raccourcir votre le message et de le soumettre à nouveau.',
+	'UsersPMOversized'			=> 'La longueur du message dépasse la taille maximale autorisée de %1. Merci de raccourcir votre le message et de le soumettre à nouveau.',
 	'UsersPMFlooded'			=> 'L’intervalle séparant l’envoi de messages personnels doit être d’au moins %1 secondes.',
 	'UsersPMSent'				=> 'le message personnel a été transmis à l’utilisateur.',
 	'UsersPMPlnSent'			=> 'Le message personnel a été transmis à l’utilisateur en texte brut.',

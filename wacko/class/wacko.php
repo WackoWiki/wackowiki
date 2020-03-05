@@ -8532,11 +8532,13 @@ class Wacko
 				// Decimal prefix
 				if ($short === true)
 				{
-					$norm = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+					// $norm = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+					$norm = $this->_t('DecimalPrefixShort');
 				}
 				else
 				{
-					$norm = ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'];
+					// $norm = ['Byte', 'Kilobyte', 'Megabyte', 'Gigabyte', 'Terabyte', 'Petabyte', 'Exabyte', 'Zettabyte', 'Yottabyte'];
+					$norm = $this->_t('DecimalPrefixLong');
 				}
 
 				$factor = 1000;
@@ -8546,11 +8548,13 @@ class Wacko
 				// Binary prefix
 				if ($short === true)
 				{
-					$norm = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+					// $norm = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+					$norm = $this->_t('BinaryPrefixShort');
 				}
 				else
 				{
-					$norm = ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'];
+					// $norm = ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'];
+					$norm = $this->_t('BinaryPrefixLong');
 				}
 
 				$factor = 1024;
@@ -8565,7 +8569,6 @@ class Wacko
 				$x++;
 			}
 
-			// TODO: $this->_t($norm[$x])
 			if ($rounded === true)
 			{
 				$size = round($size, 0);

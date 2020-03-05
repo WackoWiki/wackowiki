@@ -25,7 +25,7 @@ if (($group = @$_GET['profile']))
 	{
 		$tpl->error_message = Ut::perc_replace($this->_t('GroupsNotFound'),
 			$this->href(),
-			'<code>' . Ut::html($group) . '<code>');
+			'<code>' . Ut::html($group) . '</code>');
 	}
 	else
 	{
