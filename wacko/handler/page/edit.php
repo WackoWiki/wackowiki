@@ -29,7 +29,7 @@ if ($this->has_access('read')
 	if (($result = $this->validate_reserved_words($this->tag)))
 	{
 		// $this->tag is reserved word
-		$message = Ut::perc_replace($this->_t('PageReservedWord'), $result);
+		$message = Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>');
 		$this->set_message($message);
 		$this->http->redirect($this->href('new', $this->db->root_page));
 	}

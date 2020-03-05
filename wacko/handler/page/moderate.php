@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 // TODO: purge old SQL query cache
 
 $tpl->title = ($this->forum
-	? $this->_t('Topics')
+	? $this->_t('ForumTopic')
 	: $this->_t('ModerateSection') ) . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title']);
 
 $tpl->moderate =  ($this->forum

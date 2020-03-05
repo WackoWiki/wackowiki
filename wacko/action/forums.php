@@ -18,7 +18,7 @@ $comment	= null;
 
 if (!isset($noxml))		$noxml = 0;
 
-// make sure that we're executing inside the forum cluster
+// ensure that we're executing inside the forum cluster
 if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 {
 	$this->forum = false;
@@ -215,7 +215,7 @@ else
 	// wrong placed show hint
 	$message	= (!$this->db->forum_cluster
 		? $this->_t('ForumNoClusterDefined')
-		: Ut::perc_replace($this->_t('ForumOutsideCluster'), 'forums')
+		: Ut::perc_replace($this->_t('ForumOutsideCluster'), '<code>forums</code>')
 	);
 
 	$tpl->message	= $this->show_message($message,'note', false);

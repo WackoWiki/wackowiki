@@ -121,7 +121,7 @@ else
 
 		if (!($clang = $this->page['page_lang']) || !isset($langs[$clang]))
 		{
-			$this->set_message(Ut::perc_replace($this->_t('NeedToChangeLang'), $clang), 'error');
+			$this->set_message(Ut::perc_replace($this->_t('NeedToChangeLang'), '<code>' . $clang . '</code>'), 'error');
 			$clang = $this->db->language;
 		}
 

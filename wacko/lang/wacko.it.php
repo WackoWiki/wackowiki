@@ -318,7 +318,7 @@ $wacko_translation = [
 	'GroupsMembers'				=> 'Members',
 	'GroupsDescription'			=> 'Descrizione',
 	'GroupsCreated'				=> 'Creato',
-	'GroupsNotFound'			=> 'Group <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'GroupsProfile'				=> 'Profilo',
 	'GroupsList'				=> 'Visualizza l\'intero elenco di gruppi',
 	'GroupSpace'				=> 'Spazio di gruppo',
@@ -615,7 +615,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> 'modificare',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
 
-	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
+	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Non consentire il reindirizzo automatico dall\'azione di Reindirizzo.',
@@ -710,7 +710,7 @@ $wacko_translation = [
 	'UsersRevisions'			=> 'Revisioni',
 	'UsersSignup'				=> 'Iscritto',
 	'UsersLastSession'			=> 'Ultima sessione',
-	'UsersNotFound'				=> 'User <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'Profilo',
 	'UsersContact'				=> 'Contatto',
 	'UsersList'					=> 'Visualizza l\'intero elenco di utenti',
@@ -816,7 +816,7 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Versione di Videoscrittura',
 	'SettingsLatex'				=> 'Versione di LaTeX',
 	'SettingsXML'				=> 'Esporta in XML',
-	'NeedToChangeLang'			=> 'Il linguaggio della pagina non supportato "<code>%1</code>" deve essere cambiato.',
+	'NeedToChangeLang'			=> 'Il linguaggio della pagina non supportato %1 deve essere cambiato.',
 	'SetLang'					=> 'Lingua di questa pagina',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Mostra in navigazione',
@@ -1118,8 +1118,8 @@ $wacko_translation = [
 	'ForumNewPosts'				=> 'nuovo post',
 	'ForumLocked'				=> 'sezione bloccata',
 	'ForumUpdated'				=> 'aggiornato',
-	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
-	'ForumOutsideCluster'		=> 'Ensure that the <code>%1</code> action is located inside the forum cluster.',
+	'ForumNoClusterDefined'		=> 'Nessun cluster del forum definito.',
+	'ForumOutsideCluster'		=> 'Assicurarsi che l\'azione %1 si trovi all\'interno del cluster del forum.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'La password è troppo corta.',

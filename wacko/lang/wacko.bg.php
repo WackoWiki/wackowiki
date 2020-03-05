@@ -318,7 +318,7 @@ $wacko_translation = [
 	'GroupsMembers'				=> 'Members',
 	'GroupsDescription'			=> 'Description',
 	'GroupsCreated'				=> 'Created',
-	'GroupsNotFound'			=> 'Group <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'GroupsProfile'				=> 'Profile',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupSpace'				=> 'Group space',
@@ -615,7 +615,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
 
-	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
+	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Забрани действие Redirect автоматично пренасочване',
@@ -710,7 +710,7 @@ $wacko_translation = [
 	'UsersRevisions'			=> 'Revisions',
 	'UsersSignup'				=> 'Signup',
 	'UsersLastSession'			=> 'Last session',
-	'UsersNotFound'				=> 'User <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'Profile',
 	'UsersContact'				=> 'Contact',
 	'UsersList'					=> 'View the entire list of users',
@@ -816,7 +816,7 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Версия за обработване на текст',
 	'SettingsLatex'				=> 'Версия за LaTeX',
 	'SettingsXML'				=> 'Export to XML',
-	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
 	'SetLang'					=> 'Език на тази страница',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Show in navigation',
@@ -1119,7 +1119,7 @@ $wacko_translation = [
 	'ForumLocked'				=> 'section blocked',
 	'ForumUpdated'				=> 'актуализиран',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
-	'ForumOutsideCluster'		=> 'Ensure that the <code>%1</code> action is located inside the forum cluster.',
+	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Password is too short.',

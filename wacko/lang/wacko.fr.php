@@ -318,7 +318,7 @@ $wacko_translation = [
 	'GroupsMembers'				=> 'Membres',
 	'GroupsDescription'			=> 'Description',
 	'GroupsCreated'				=> 'Créé',
-	'GroupsNotFound'			=> 'Groupe <code>%2</code> non trouvé. Cliquer <a href="%1">ici</a>, pour aller à la liste principale.',
+	'GroupsNotFound'			=> 'Groupe %2 non trouvé. Cliquer <a href="%1">ici</a>, pour aller à la liste principale.',
 	'GroupsProfile'				=> 'Profil',
 	'GroupsList'				=> 'Voir la liste complète des groupes',
 	'GroupSpace'				=> 'Espace du groupe',
@@ -615,7 +615,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> 'l’éditer',
 	'PageAlreadyExistsEditDenied'	=> 'Vous ne pouvez pas l’éditer.',
 
-	'PageReservedWord'			=> 'Vous ne pouvez pas inclure <code>%1</code> dans l’ adresse car c’est un mot réservé.',
+	'PageReservedWord'			=> 'Vous ne pouvez pas inclure %1 dans l’ adresse car c’est un mot réservé.',
 	'UserReservedWord'			=> 'Les noms d’ utrilisateurs ne pevent pas contenir ##%1## car c’est un mot réservé.',
 
 	'DontRedirect'				=> 'Ne pas autoriser la redirection automatique par l’action de redirection {{redirect}} ',
@@ -710,7 +710,7 @@ $wacko_translation = [
 	'UsersRevisions'			=> 'Révisions',
 	'UsersSignup'				=> 'Inscription',
 	'UsersLastSession'			=> 'Dernière session',
-	'UsersNotFound'				=> 'Utilisateur <code>%2</code> non trouvé. Cliquez <a href="%1">ici</a>, to gafficher la liste principale.',
+	'UsersNotFound'				=> 'Utilisateur %2 non trouvé. Cliquez <a href="%1">ici</a>, to gafficher la liste principale.',
 	'UsersProfile'				=> 'Profil',
 	'UsersContact'				=> 'Contact',
 	'UsersList'					=> 'Voir la liste de tous les utilisateurs',
@@ -816,7 +816,7 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Version logiciel de traitement de texte',
 	'SettingsLatex'				=> 'Version LaTeX',
 	'SettingsXML'				=> 'Export en XML',
-	'NeedToChangeLang'			=> 'Le code langue "<code>%1</code>" n’est pas supporté, il doit être changé.',
+	'NeedToChangeLang'			=> 'Le code langue %1 n’est pas supporté, il doit être changé.',
 	'SetLang'					=> 'Langue de cette page',
 	'SetMenuLabel'				=> 'Étiquette de Menu',
 	'SetShowMenuLabel'			=> 'Montrer en navigation',
@@ -1119,7 +1119,7 @@ $wacko_translation = [
 	'ForumLocked'				=> 'section verrouillée',
 	'ForumUpdated'				=> 'actualisé',
 	'ForumNoClusterDefined'		=> 'Pas de groupe de forum défini.',
-	'ForumOutsideCluster'		=> 'Assurez-vous que le code action <code>%1</code> soit situé à l’ intérieur du groupe de	 forum.',
+	'ForumOutsideCluster'		=> 'Assurez-vous que le code action %1 soit situé à l’ intérieur du groupe de	 forum.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Le mot de passe est trop court.',

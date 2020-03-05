@@ -318,7 +318,7 @@ $wacko_translation = [
 	'GroupsMembers'				=> 'Członkowie',
 	'GroupsDescription'			=> 'Opis',
 	'GroupsCreated'				=> 'Created',
-	'GroupsNotFound'			=> 'Grupa <code>%2</code> nie znaleziono. Kliknij <a href="%1">tutaj</a>, aby przejść do listy głównej.',
+	'GroupsNotFound'			=> 'Grupa %2 nie znaleziono. Kliknij <a href="%1">tutaj</a>, aby przejść do listy głównej.',
 	'GroupsProfile'				=> 'Profile',
 	'GroupsList'				=> 'Wyświetl całą listę grup',
 	'GroupSpace'				=> 'Group space',
@@ -615,7 +615,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
 
-	'PageReservedWord'			=> 'You can\'t use <code>%1</code> as the part of the address as it\'s a reserved word.',
+	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Wyłącz funkcję automatycznego przekierowania.',
@@ -710,7 +710,7 @@ $wacko_translation = [
 	'UsersRevisions'			=> 'Revisions',
 	'UsersSignup'				=> 'Signup',
 	'UsersLastSession'			=> 'Last session',
-	'UsersNotFound'				=> 'User <code>%2</code> not found. Click <a href="%1">here</a>, to go to the main list.',
+	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'Profile',
 	'UsersContact'				=> 'Kontakt',
 	'UsersList'					=> 'Wyświetl całą listę użytkowników',
@@ -816,7 +816,7 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Wersja Procesor tekstu',
 	'SettingsLatex'				=> 'Wersja LaTeX',
 	'SettingsXML'				=> 'Eksportuj do XML',
-	'NeedToChangeLang'			=> 'Unsupported page language "<code>%1</code>" needs to be changed.',
+	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
 	'SetLang'					=> 'Język tej strony',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Show in navigation',
@@ -1118,8 +1118,8 @@ $wacko_translation = [
 	'ForumNewPosts'				=> 'new post',
 	'ForumLocked'				=> 'section blocked',
 	'ForumUpdated'				=> 'updated',
-	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
-	'ForumOutsideCluster'		=> 'Ensure that the <code>%1</code> action is located inside the forum cluster.',
+	'ForumNoClusterDefined'		=> 'Nie zdefiniowano klastra forum.',
+	'ForumOutsideCluster'		=> 'Upewnij się, że akcja %1 znajduje się wewnątrz klastra forum.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Hasło jest za krótkie.',

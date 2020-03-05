@@ -204,7 +204,7 @@ $wacko_translation = [
 	'NewsXMLTip'				=> 'Letzten Nachrichten im XML-Format ansehen.',
 	'ReferrersTip'				=> 'Liste von URLs, die auf diese Seite verweisen.',
 	'ReferrersText'				=> 'Verweise',
-	'ModerateTip'				=> 'Moderation von Themen und Forumsbeiträgen',
+	'ModerateTip'				=> 'Moderation von Themen und Forenbeiträgen',
 	'ModerateText'				=> 'Moderieren',
 	'SearchText'				=> 'Suchen: ',
 
@@ -318,7 +318,7 @@ $wacko_translation = [
 	'GroupsMembers'				=> 'Mitglieder',
 	'GroupsDescription'			=> 'Beschreibung',
 	'GroupsCreated'				=> 'Erstellt',
-	'GroupsNotFound'			=> 'Gruppe <code>%2</code> nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
+	'GroupsNotFound'			=> 'Gruppe %2 nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
 	'GroupsProfile'				=> 'Profil',
 	'GroupsList'				=> 'Zeige gesamte Liste der Gruppen',
 	'GroupSpace'				=> 'Gruppenseite',
@@ -615,7 +615,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> 'editieren',
 	'PageAlreadyExistsEditDenied'	=> 'Du kannst sie nicht editieren',
 
-	'PageReservedWord'			=> 'Du kannst <code>%1</code> als Teil der Adresse nicht verwenden, weil es ein reserviertes Wort ist.',
+	'PageReservedWord'			=> 'Du kannst %1 als Teil der Adresse nicht verwenden, weil es ein reserviertes Wort ist.',
 	'UserReservedWord'			=> 'Benutzernamen können nicht ##%1## enthalten, da es ein reserviertes Wort ist.',
 
 	'DontRedirect'				=> 'Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.',
@@ -710,7 +710,7 @@ $wacko_translation = [
 	'UsersRevisions'			=> 'Revisionen',
 	'UsersSignup'				=> 'Anmeldung',
 	'UsersLastSession'			=> 'Letzter Besuch',
-	'UsersNotFound'				=> 'Benutzer <code>%2</code> nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
+	'UsersNotFound'				=> 'Benutzer %2 nicht gefunden. Klicke <a href="%1">hier</a>, um zur Hauptliste zu gehen.',
 	'UsersProfile'				=> 'Profil',
 	'UsersContact'				=> 'Kontakt',
 	'UsersList'					=> 'Zeige gesamte Liste der Benutzer',
@@ -816,7 +816,7 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Textverarbeitungs-Version',
 	'SettingsLatex'				=> 'LaTeX Version',
 	'SettingsXML'				=> 'Export als XML',
-	'NeedToChangeLang'			=> 'Die gewählte Seitengprache "<code>%1</code>" wird nicht unterstützt und muss geändert werden.',
+	'NeedToChangeLang'			=> 'Die gewählte Seitengprache %1 wird nicht unterstützt und muss geändert werden.',
 	'SetLang'					=> 'Sprache dieser Seite',
 	'SetMenuLabel'				=> 'Menü-Label',
 	'SetShowMenuLabel'			=> 'Zeige in der Navigation',
@@ -1119,7 +1119,7 @@ $wacko_translation = [
 	'ForumLocked'				=> 'Bereich gesperrt',
 	'ForumUpdated'				=> 'aktualisiert',
 	'ForumNoClusterDefined'		=> 'Kein Formum-Cluster definiert.',
-	'ForumOutsideCluster'		=> 'Die Aktion <code>%1</code> befindet sich nicht im Forum-Cluster.',
+	'ForumOutsideCluster'		=> 'Die Aktion %1 befindet sich nicht im Forum-Cluster.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Passwort ist zu kurz.',

@@ -4416,7 +4416,7 @@ class Wacko
 
 		if (($result = $this->validate_reserved_words($tag)))
 		{
-			return Ut::perc_replace($this->_t('PageReservedWord'), $result);
+			return Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result .'</code>');
 		}
 
 		if ($old_tag)

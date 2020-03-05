@@ -14,7 +14,7 @@ if (!defined('IN_WACKO'))
 
 if (!isset($pages))		$pages = '';
 
-// make sure that we're executing inside the forum cluster
+// ensure that we're executing inside the forum cluster
 if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 {
 	// count slashes in the tag
@@ -284,7 +284,7 @@ else
 	// wrong placed show hint
 	$message	= (!$this->db->forum_cluster
 		? $this->_t('ForumNoClusterDefined')
-		: Ut::perc_replace($this->_t('ForumOutsideCluster'), 'topics')
+		: Ut::perc_replace($this->_t('ForumOutsideCluster'), '<code>topics</code>')
 	);
 
 	$tpl->message	= $this->show_message($message,'note', false);

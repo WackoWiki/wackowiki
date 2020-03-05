@@ -319,7 +319,7 @@ $wacko_translation = [
 	'GroupsMembers'				=> 'Участник(ов)',
 	'GroupsDescription'			=> 'Описание',
 	'GroupsCreated'				=> 'Создана',
-	'GroupsNotFound'			=> 'Группа <code>%2</code> не найдена. <a href="%1">Просмотреть полный список</a>.',
+	'GroupsNotFound'			=> 'Группа %2 не найдена. <a href="%1">Просмотреть полный список</a>.',
 	'GroupsProfile'				=> 'Профиль',
 	'GroupsList'				=> 'Вернуться к полному списку групп',
 	'GroupSpace'				=> 'Страничка группы',
@@ -412,7 +412,7 @@ $wacko_translation = [
 	'PageCachePurged'			=> 'Кэш очищен.',
 	'ClusterRemoved'			=> 'Все страницы кластера удалены.',
 	'RevisionsRemoved'			=> 'Версии страницы удалены.',
-	'ActionHaveNoUndo'		=> 'Удаление нельзя отменить.',
+	'ActionHaveNoUndo'			=> 'Удаление нельзя отменить.',
 	'PageRestored'				=> 'Страница восстановлена.',
 	'LocalFilesRestored'		=> 'Локальные файлы восстановлены.',
 
@@ -616,7 +616,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> 'Отредактировать',
 	'PageAlreadyExistsEditDenied'	=> 'Вы не можете отредактировать её.',
 
-	'PageReservedWord'			=> 'Недопустимо использовать служебное слово <code>%1</code> как часть адреса.',
+	'PageReservedWord'			=> 'Недопустимо использовать служебное слово %1 как часть адреса.',
 	'UserReservedWord'			=> 'Имя пользователя не может содержать служебное слово ##%1##.',
 
 	'DontRedirect'				=> 'Не давать действию Redirect автоматически перенаправлять',
@@ -713,7 +713,7 @@ $wacko_translation = [
 	'UsersRevisions'			=> 'Редакций',
 	'UsersSignup'				=> 'Регистрация',
 	'UsersLastSession'			=> 'Последнее посещение',
-	'UsersNotFound'				=> 'Пользователь <code>%2</code> не найден. Нажмите <a href="%1">здесь</a>, чтобы перейти к общему списку.',
+	'UsersNotFound'				=> 'Пользователь %2 не найден. Нажмите <a href="%1">здесь</a>, чтобы перейти к общему списку.',
 	'UsersProfile'				=> 'Досье',
 	'UsersContact'				=> 'Связь',
 	'UsersList'					=> 'Открыть общий список пользователей',
@@ -819,7 +819,7 @@ $wacko_translation = [
 	'SettingsWordprocessor'		=> 'Версия для Текстовый процессор',
 	'SettingsLatex'				=> 'Версия для LaTeX',
 	'SettingsXML'				=> 'Экспорт в XML',
-	'NeedToChangeLang'			=> 'Неподдерживаемый язык страницы "<code>%1</code>" должен быть изменен.',
+	'NeedToChangeLang'			=> 'Неподдерживаемый язык страницы %1 должен быть изменен.',
 	'SetLang'					=> 'Смена языка страницы',
 	'SetMenuLabel'				=> 'Метка для меню',
 	'SetShowMenuLabel'			=> 'Отображать в меню',
@@ -1120,8 +1120,8 @@ $wacko_translation = [
 	'ForumNewPosts'				=> 'поступили новые сообщения',
 	'ForumLocked'				=> 'раздел заблокирован',
 	'ForumUpdated'				=> 'Обновленный',
-	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
-	'ForumOutsideCluster'		=> 'Ensure that the <code>%1</code> action is located inside the forum cluster.',
+	'ForumNoClusterDefined'		=> 'Кластер форума не определен.',
+	'ForumOutsideCluster'		=> 'Убедитесь, что действие %1 находится внутри кластера форума.',
 
 	// password complexity
 	'PwdCplxShort'				=> 'Пароль слишком короткий.',
