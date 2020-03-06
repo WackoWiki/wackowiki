@@ -4018,10 +4018,16 @@ class Wacko
 			// make HTML link
 			if ($res)
 			{
+				// do not set empty class=""
+				if ($class)
+				{
+					$class	= ' class="' . $class . '"';
+				}
+
 				// sets only 'nofollow' as link type to internal links to protected pages
 				if ($rel)
 				{
-					$rel	= 'rel="' . $rel . '"';
+					$rel	= ' rel="' . $rel . '"';
 				}
 
 				if (isset($this->method) && $this->method == 'print')
@@ -4036,7 +4042,7 @@ class Wacko
 				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
 				$res		= str_replace('{accicon}',	$accicon,	$res);
-				$res		= str_replace('{class}',	$class,		$res);	// TODO: refactor, do not set empty class="", its pointless clutter
+				$res		= str_replace('{class}',	$class,		$res);
 				$res		= str_replace('{title}',	$title,		$res);
 				$res		= str_replace('{pagelink}',	$page_link,	$res);
 				$res		= str_replace('{pagepath}',	$page_path,	$res);
@@ -4096,9 +4102,15 @@ class Wacko
 					$class	= 'external-link';
 				}
 
+				// do not set empty class=""
+				if ($class)
+				{
+					$class	= ' class="' . $class . '"';
+				}
+
 				if ($this->db->link_target)
 				{
-					$target = 'target="_blank"';
+					$target = ' target="_blank"';
 				}
 				else
 				{
@@ -4127,7 +4139,7 @@ class Wacko
 					}
 
 					$rel_separated	= implode(' ', $_rel);
-					$rel			= 'rel="' . $rel_separated . '"';
+					$rel			= ' rel="' . $rel_separated . '"';
 				}
 				else
 				{

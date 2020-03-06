@@ -7,12 +7,12 @@ if (!defined('IN_WACKO'))
 
 $wacko_all_resource = [
 	// link templates
-	'Tpl.childpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.parentpage'	=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.equalpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.rootpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}">{accicon}{icon}{page}</a>',
-	'Tpl.descrpage'		=> '<a {aname} href="{pagelink}" {rel} class="{class}" title="{pagepath}{page}">{accicon}{text}</a>',
-	'Tpl.descrpagealt'	=> '<a {aname} href="{pagelink}" {rel} class="{class}" title="{title}">{accicon}{text}</a>',
+	'Tpl.childpage'		=> '<a {aname} href="{pagelink}"{rel}{class}>{accicon}{icon}{page}</a>',
+	'Tpl.parentpage'	=> '<a {aname} href="{pagelink}"{rel}{class}>{accicon}{icon}{page}</a>',
+	'Tpl.equalpage'		=> '<a {aname} href="{pagelink}"{rel}{class}>{accicon}{icon}{page}</a>',
+	'Tpl.rootpage'		=> '<a {aname} href="{pagelink}"{rel}{class}>{accicon}{icon}{page}</a>',
+	'Tpl.descrpage'		=> '<a {aname} href="{pagelink}"{rel}{class} title="{pagepath}{page}">{accicon}{text}</a>',
+	'Tpl.descrpagealt'	=> '<a {aname} href="{pagelink}"{rel}{class} title="{title}">{accicon}{text}</a>',
 
 	'Tpl.wchildpage'	=> '<span class="missingpage">{icon}{page}</span><a href="{pagelink}" title="{title}">{accicon}</a>',
 	'Tpl.wparentpage'	=> '<span class="missingpage">{icon}{page}</span><a href="{pagelink}" title="{title}">{accicon}</a>',
@@ -27,19 +27,19 @@ $wacko_all_resource = [
 	'Tpl.pwdescrpage'	=> '<span class="missingpage">{text}</span>',
 
 	'Tpl.anchor'		=> '<a href="{href}">{text}</a>',
-	'Tpl.grouplink'		=> '<a href="{href}" title="{title}" class="{class}">{icon}{text}</a>',
-	'Tpl.userlink'		=> '<a href="{href}" title="{title}" class="{class}">{icon}{text}</a>',
-	'Tpl.outerimg'		=> '<a href="{href}" {rel} {target} title="{title}" class="{class}">{text}</a>',
-	'Tpl.outerlink'		=> '<a href="{href}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
-	'Tpl.interwiki'		=> '<a href="{href}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
-	'Tpl.email'			=> '<a href="{href}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
-	'Tpl.jabber'		=> '<a href="{href}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
-	'Tpl.file'			=> '<a href="{href}" {rel} {target} title="{title}" class="{class}">{icon}{text}</a>',
+	'Tpl.grouplink'		=> '<a href="{href}" title="{title}"{class}>{icon}{text}</a>',
+	'Tpl.userlink'		=> '<a href="{href}" title="{title}"{class}>{icon}{text}</a>',
+	'Tpl.outerimg'		=> '<a href="{href}"{rel}{target} title="{title}"{class}>{text}</a>',
+	'Tpl.outerlink'		=> '<a href="{href}"{rel}{target} title="{title}"{class}>{icon}{text}</a>',
+	'Tpl.interwiki'		=> '<a href="{href}"{rel}{target} title="{title}"{class}>{icon}{text}</a>',
+	'Tpl.email'			=> '<a href="{href}"{rel}{target} title="{title}"{class}>{icon}{text}</a>',
+	'Tpl.jabber'		=> '<a href="{href}"{rel}{target} title="{title}"{class}>{icon}{text}</a>',
+	'Tpl.file'			=> '<a href="{href}"{rel}{target} title="{title}"{class}>{icon}{text}</a>',
 
-	'Tpl.localfile'		=> '<a href="{href}" title="{title}" class="{class}">{icon}{text}</a>',
-	'Tpl.localimage'	=> '<a href="{href}" title="{title}" class="{class}">{text}</a>',
+	'Tpl.localfile'		=> '<a href="{href}" title="{title}"{class}>{icon}{text}</a>',
+	'Tpl.localimage'	=> '<a href="{href}" title="{title}"{class}>{text}</a>',
 	'Tpl.wlocalfile'	=> '<span class="missingpage" title="{title}">{text}</span>',
-	'Tpl.lan'			=> '<a href="{href}" {target} title="{title}" class="{class}">{icon}{text}</a>',
+	'Tpl.lan'			=> '<a href="{href}"{target} title="{title}"{class}>{icon}{text}</a>',
 
 	//icons
 	'ChildIcon'			=> '!/',
