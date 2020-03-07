@@ -339,7 +339,7 @@ if (mb_strlen($phrase) >= 3)
 		$results = $full_text_search($phrase, $tag, $max, ($scope != 'all'), $filter);
 	}
 
-	list ($pages, $pagination, $tcount) = $results;
+	[$pages, $pagination, $tcount] = $results;
 
 	if ($pages)
 	{

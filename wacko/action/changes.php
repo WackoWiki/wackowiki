@@ -24,7 +24,7 @@ if (isset($_GET['markread']) && $user)
 	$this->set_user_setting('last_mark', date('Y-m-d H:i:s'));
 }
 
-if (list ($pages, $pagination) = $this->load_changed($max, $tag, $date, $hide_minor_edit))
+if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_edit))
 {
 	if ($user)
 	{

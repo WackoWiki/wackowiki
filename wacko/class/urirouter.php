@@ -113,7 +113,7 @@ class UriRouter
 
 		foreach ($this->config as $line)
 		{
-			list ($regex, $actions, $lineno) = $line;
+			[$regex, $actions, $lineno] = $line;
 
 			$err = -1;
 
@@ -131,7 +131,7 @@ class UriRouter
 				{
 					if (preg_match('#[^\d]#', $var))
 					{
-						list ($varname, $varidx) = $this->parse_var($var);
+						[$varname, $varidx] = $this->parse_var($var);
 						$env[$varname][$varidx] = $val;
 						$env['changed'][$varname][$varidx] = $val;
 					}
@@ -141,7 +141,7 @@ class UriRouter
 
 				foreach ($actions as $action)
 				{
-					list ($varname, $varidx, $func, $op, $val) = $action;
+					[$varname, $varidx, $func, $op, $val] = $action;
 
 					if ($op == '?=' && isset($env[$varname][$varidx])) // assign if unset
 					{
@@ -166,7 +166,7 @@ class UriRouter
 									return $x[0][1];
 								}
 
-								list ($varname, $varidx) = $this->parse_var((@$x[1] !== '')? $x[1] : $x[2]);
+								[$varname, $varidx] = $this->parse_var((@$x[1] !== '')? $x[1] : $x[2]);
 
 								if (isset($env[$varname][$varidx]))
 								{
@@ -399,7 +399,7 @@ class UriRouter
 						$this->aband($prefix . 'invalid action "' . $one . '"');
 					}
 
-					list ($dummy, $var, $dummy2, $func, $op, $val) = $match;
+					[$dummy, $var, $dummy2, $func, $op, $val] = $match;
 
 					if (($op == '~' || $op == '!~')
 						&& !(preg_match('/^(hashid:[1-9])$/', $val) || @preg_match($val, '') !== false))
@@ -412,7 +412,7 @@ class UriRouter
 						$val = 1;
 					}
 
-					list ($varname, $varidx) = $this->parse_var($var);
+					[$varname, $varidx] = $this->parse_var($var);
 
 					$actions[] = [$varname, $varidx, $func, $op, $val];
 				}

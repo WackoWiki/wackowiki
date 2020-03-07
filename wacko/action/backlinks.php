@@ -21,7 +21,7 @@ if (!$nomark)
 	$tpl->emark		= true;
 }
 
-if (list ($pages, $pagination) = $this->load_pages_linking($tag, null, $max))
+if ([$pages, $pagination] = $this->load_pages_linking($tag, null, $max))
 {
 	foreach ($pages as $page)
 	{

@@ -73,7 +73,7 @@ if ($this->user_allowed_comments())
 		$user = $this->get_user();
 	}
 
-	if (list ($pages, $pagination) = $load_commented($tag, $max))
+	if ([$pages, $pagination] = $load_commented($tag, $max))
 	{
 		if ($pages)
 		{

@@ -48,7 +48,7 @@ class Templatest
 					{
 						foreach ($cache[2] as $one)
 						{
-							list ($fname, $ftime) = $one;
+							[$fname, $ftime] = $one;
 							if (!($mtime = @filemtime($fname)) || $mtime != $ftime)
 							{
 								$cache = null;
@@ -104,7 +104,7 @@ class Templatest
 						switch ($one[0])
 						{
 							case 'escape':
-								list ($_dummy, $loc, $mode, $patname) = $one;
+								[$_dummy, $loc, $mode, $patname] = $one;
 								foreach ($store as $name => &$pat)
 								{
 									if (isset($pat['chunks']) && (isset($pat['escape'])? $name === $patname : !$patname))
@@ -115,7 +115,7 @@ class Templatest
 								break;
 
 							case 'patch':
-								list ($_dummy, $loc, $patname, $varname, $value) = $one;
+								[$_dummy, $loc, $patname, $varname, $value] = $one;
 								static::$setter->patch($patname, $varname, $value, $loc);
 								break;
 						}
@@ -250,7 +250,7 @@ class Templatest
 				{
 					foreach ($meta['text'] as $i => &$numline)
 					{
-						list ($lineno, $line) = $numline;
+						[$lineno, $line] = $numline;
 
 						if (preg_match('/^(\h*)\[\h*=+\h*([a-z][a-z0-9]*)(\h+(_|[a-z][a-z0-9]*))?\b(.*?)\h*=+\h*$/i', $line, $match))
 						{
@@ -309,7 +309,7 @@ class Templatest
 
 		foreach ($meta['text'] as $numline)
 		{
-			list ($lineno, $line) = $numline;
+			[$lineno, $line] = $numline;
 			$text .= $line;
 			$linepos[$lineno] = ($eolpos += strlen($line));
 		}

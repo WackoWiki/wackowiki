@@ -35,7 +35,7 @@ if ($this->page['deleted'])
 if ($this->has_access('read'))
 {
 	// load revisions for this page
-	if (list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $show_deleted))
+	if ([$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $show_deleted))
 	{
 		$this->context[++$this->current_context] = '';
 

@@ -26,7 +26,7 @@ class TemplatestSetter extends TemplatestFilters
 			return;
 		}
 
-		list ($place, $lineno, $block, $pipe) = $sub;
+		[$place, $lineno, $block, $pipe] = $sub;
 
 		// set for
 		$this->loc = $this->store[2][$tpl['file']][0] . ':' . $lineno;

@@ -54,7 +54,7 @@ $user	= $this->get_user();
 
 if ($this->user_allowed_comments())
 {
-	if (list ($comments, $pagination) = $load_recent_comments($tag, $max))
+	if ([$comments, $pagination] = $load_recent_comments($tag, $max))
 	{
 		$page_ids	= [];
 

@@ -59,7 +59,7 @@ if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
 
-if (list ($pages, $pagination) = $load_orphaned_pages($tag, $max))
+if ([$pages, $pagination] = $load_orphaned_pages($tag, $max))
 {
 	if (is_array($pages))
 	{

@@ -57,7 +57,7 @@ class Diag
 
 					foreach ($config->query_log as $one)
 					{
-						list ($query, $time, $affected_rows, $backtrace) = $one;
+						[$query, $time, $affected_rows, $backtrace] = $one;
 
 						if ($time < $config['debug_sql_threshold'])
 						{
@@ -86,7 +86,7 @@ class Diag
 
 						foreach (array_chunk($bt, 2) as &$one)
 						{
-							list ($fname, $func) = $one;
+							[$fname, $func] = $one;
 							$btext .= '<tr><td>' . $func . NBSP . '</td><td>' . NBSP . $fname . '</td></tr>';
 						}
 

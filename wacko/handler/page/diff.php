@@ -89,7 +89,7 @@ if ($page_a && $page_b
 	{
 		$tpl->enter('nav_');
 		// TODO: $hide_minor_edit
-		list ($revisions, $pagination) = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
+		[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $this->is_admin());
 
 		$revisions_menu = function ($rev, $page, $side) use ($revisions, $diffmode, $page_a, $page_b, &$tpl)
 		{

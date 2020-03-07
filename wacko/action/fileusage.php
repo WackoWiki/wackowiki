@@ -21,7 +21,7 @@ if ($file_id)
 		$tpl->emark		= true;
 	}
 
-	if (list ($pages, $pagination) = $this->load_file_usage($file_id, null, $max))
+	if ([$pages, $pagination] = $this->load_file_usage($file_id, null, $max))
 	{
 		foreach ($pages as $page)
 		{

@@ -89,14 +89,14 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		$day_names[$n] = ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
 	}
 
-	list ($month, $year, $month_name, $weekday) = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
+	[$month, $year, $month_name, $weekday] = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
 	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
 	$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
 
 	// Begin calendar. Uses a real <caption>.
-	@list ($p, $pl) = each($pn);
-	@list ($n, $nl) = each($pn); // previous and next links, if applicable
+	[$p, $pl] = each($pn);
+	[$n, $nl] = each($pn); // previous and next links, if applicable
 
 	if ($p)
 	{

@@ -59,7 +59,7 @@ if ($linking_to = $_GET['linking_to'] ?? '')
 {
 	$tpl->to_target = $this->link('/' . $linking_to);
 
-	if (list ($pages, $pagination) = $this->load_pages_linking($linking_to, $tag))
+	if ([$pages, $pagination] = $this->load_pages_linking($linking_to, $tag))
 	{
 		foreach ($pages as $page)
 		{
@@ -81,7 +81,7 @@ else
 
 	if (!isset($max))		$max = null;
 
-	if (list ($pages, $pagination) = $load_wanted($tag, $max))
+	if ([$pages, $pagination] = $load_wanted($tag, $max))
 	{
 		if (is_array($pages))
 		{
@@ -99,7 +99,7 @@ else
 					// update the referrer count for the WantedPage, we need to take pages the user is not allowed to view out of the total
 					$count = 0;
 
-					if (list ($ref_pages, $pagination) = $this->load_pages_linking($page['wanted_tag'], $tag))
+					if ([$ref_pages, $pagination] = $this->load_pages_linking($page['wanted_tag'], $tag))
 					{
 						foreach ($ref_pages as $ref_page)
 						{
