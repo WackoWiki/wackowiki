@@ -6,7 +6,7 @@ lang = {
 	HelpAbout :				"Help & About",
 	HelpFormatting :		"Help",
 	HelpFormattingTip :		"Help on Wiki-formatting",
-	HelpFormattingPage :	"Doc/Francophone/MiseEnForme",
+	HelpFormattingPage :	"Doc/Français/MiseEnForme",
 	
 	Heading1 :				"Heading 1",
 	Heading2 :				"Heading 2",
