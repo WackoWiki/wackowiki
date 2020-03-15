@@ -16,6 +16,7 @@ if (!defined('IN_WACKO'))
 	[title=1]					// shows the page title
 	[nomark=1]					// makes it possible to hide frame around
 	[dontrecurse="true|false"]	// if set to true the list will only include pages that are direct children of the "page" cluster
+	[counter=0|1]				// shows page hit counter
 	[system=0|1]				// excludes system pages
 	[lang="ru"]					// show pages only in specified language
  }}
@@ -29,6 +30,7 @@ if (!isset($max))			$max = null;
 if (!isset($legend))		$legend = '';
 if (!isset($title))			$title = 0;
 if (!isset($dontrecurse))	$dontrecurse = false;
+if (!isset($counter))		$counter = 1;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;
@@ -167,7 +169,11 @@ if (!empty($pages))
 
 			$tpl->l_num		= $num;
 			$tpl->l_link	= $_link;
-			$tpl->l_hits	= $page['hits'];
+
+			if ($counter)
+			{
+				$tpl->l_counter_hits	= $page['hits'];
+			}
 		}
 	}
 }

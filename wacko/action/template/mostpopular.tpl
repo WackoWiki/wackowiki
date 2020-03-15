@@ -13,8 +13,10 @@
 			<tr>
 				<td>&nbsp;&nbsp;[ ' num ' ]</td>
 				<td>[ ' link ' ]</td>
-				<td>&nbsp;&nbsp;</td>
-				<td>[ ' hits | number 0 , . ' ]</td>
+				[= counter _ =
+					<td>&nbsp;&nbsp;</td>
+					<td>[ ' hits | number 0 , . ' ]</td>
+				=]
 			</tr>
 		=]
 	</table>
