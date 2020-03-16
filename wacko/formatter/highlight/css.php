@@ -166,19 +166,19 @@ $special_keyword2 = [
 
 	foreach ($special_keyword2 as $i)
 	{
-		$css = preg_replace('/[^-y]' . $i . '/', '<span style="color: ##oct##;">' . $i . '</span>', $css);
+		$css = preg_replace('/[^-y]' . $i . '/u', '<span style="color: ##oct##;">' . $i . '</span>', $css);
 	}
 
-	$css = preg_replace('/(\.?)(.*)(\s?\{?)/s', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
+	$css = preg_replace('/(\.?)(.*)(\s?\{?)/us', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
 
-	$css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/", "<span style=\"color: " . $options['color']['digits'] . ";\">$1</span>", $css);
+	$css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/u", "<span style=\"color: " . $options['color']['digits'] . ";\">$1</span>", $css);
 
 	$css = str_replace("\:", "<span style=\"color: " . $options['color']['attributes'] . "; font-weight: bold;\">:</span>", $css);
 	$css = str_replace("{", "<span style=\"color: " . $options['color']['attributes'] . "; font-weight: bold;\">{</span>", $css);
 	$css = str_replace("}", "<span style=\"color: " . $options['color']['attributes'] . "; font-weight: bold;\">}</span>", $css);
 
 	$css = preg_replace_callback(
-			'!/\*(.*?)\*/!s',
+			'!/\*(.*?)\*/!us',
 			function ($matches) use ($options)
 			{
 				return
@@ -193,7 +193,7 @@ $special_keyword2 = [
 
 	if ($options['line_numbers'] == true)
 	{
-		$lines		= preg_split("/(\n|<br \/>)/s", $css);
+		$lines		= preg_split("/(\n|<br \/>)/us", $css);
 		$source		= '<ol>';
 		$i			= 0;
 
@@ -209,7 +209,7 @@ $special_keyword2 = [
 	if (isset($options['notypo'])) echo '<!--notypo-->';
 	if (!isset($options['nopre'])) echo '<pre class="code">';
 
-	echo preg_replace('/\&nbsp\;/', '', str_replace("\t", "	", $css), 1);
+	echo preg_replace('/\&nbsp\;/u', '', str_replace("\t", "	", $css), 1);
 
 	if (!isset($options['nopre'])) echo '</pre>';
 	if (isset($options['notypo'])) echo '<!--/notypo-->"';

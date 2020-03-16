@@ -158,7 +158,7 @@ $html_tags = [
 	$source = Ut::html($text);
 
 	$source = preg_replace_callback(
-			'/&lt;!--(.*?)--&gt;/s',
+			'/&lt;!--(.*?)--&gt;/us',
 			function ($matches) use ($options)
 			{
 				return
@@ -171,7 +171,7 @@ $html_tags = [
 		$source);
 
 	$source = preg_replace_callback(
-			'/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/s',
+			'/(&lt;style.*?&gt;)(.*?)&lt;\/style&gt;/us',
 			function ($matches)
 			{
 				return
@@ -184,7 +184,7 @@ $html_tags = [
 	foreach ($html_tags as $i)
 	{
 		$source = preg_replace(
-				'/&lt;' . $i . '(&gt;|[[:space:]])/',
+				'/&lt;' . $i . '(&gt;|[[:space:]])/u',
 				'<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&lt;' . $i . '\\1</span>',
 				$source);
 
@@ -200,18 +200,19 @@ $html_tags = [
 			$source);
 
 	$source = preg_replace(
-			'/([[:space:]]|&quot;|\'|\?)&gt;/',
+			'/([[:space:]]|&quot;|\'|\?)&gt;/u',
 			'\\1<span style="color: ' . $options['color']['tags'] . ';font-weight:bold;">&gt;</span>',
 			$source);
 
-	$source = preg_replace( "/([a-z-]+)=(&quot;|\')(.*?)\\2/i",
+	$source = preg_replace(
+			'/([a-z-]+)=(&quot;|\')(.*?)\\2/ui',
 			'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: ' .
 			$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
-			$source = preg_replace("/&amp;([a-z0-9]*?;)/i", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
+			$source = preg_replace("/&amp;([a-z0-9]*?;)/ui", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
 
 	if ($options['line_numbers'] == true)
 	{
-		$lines		= preg_split("/(\n|<br \/>)/s", $source);
+		$lines		= preg_split("/(\n|<br \/>)/us", $source);
 		$source		= '<ol>';
 		$i			= 0;
 

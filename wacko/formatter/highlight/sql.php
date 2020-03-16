@@ -14,33 +14,33 @@ $skipwords = '[0-9]*';
 $functions = '\$[[:alnum:]]+';
 
 // TAB -> 4 spaces
-$text = preg_replace("#\t#s","    ", $text );
+$text = preg_replace("#\t#us","    ", $text );
 
 // lexeme extraction
-$text = "\001" . preg_replace("#($delim)+#s", "\001$0\001", $text ) . "\001";
+$text = "\001" . preg_replace("#($delim)+#us", "\001$0\001", $text ) . "\001";
 
 // html escape
-$text = preg_replace("#&#s","&amp;", $text );
-$text = preg_replace("#<#s","&lt;", $text );
-$text = preg_replace("#>#s","&gt;", $text );
-$text = preg_replace("#\n#s","\002", $text );		// newline
-$text = preg_replace("#\s#s","&nbsp;", $text );		// spaces
-$text = preg_replace("#\002#s","<br>", $text );	// newline
+$text = preg_replace("#&#us","&amp;", $text );
+$text = preg_replace("#<#us","&lt;", $text );
+$text = preg_replace("#>#us","&gt;", $text );
+$text = preg_replace("#\n#us","\002", $text );		// newline
+$text = preg_replace("#\s#us","&nbsp;", $text );		// spaces
+$text = preg_replace("#\002#us","<br>", $text );	// newline
 
 // Highlighting
 
 // String constants
-$text = preg_replace("#\".*?\"#s", '<span style="color:#006666;">$0</span>', $text );
+$text = preg_replace("#\".*?\"#us", '<span style="color:#006666;">$0</span>', $text );
 
 // Keywords & functions
-$text = preg_replace("#\001($functions)\001#si", '<span style="color:#770055;">$1</span>', $text );
-$text = preg_replace("#\001($skipwords)\001#si", '<span style="color:green;"><strong>$1</strong></span>', $text );
-$text = preg_replace("#\001($keywords)\001#si" , '<span style="color:blue;">$1</span>', $text );
+$text = preg_replace("#\001($functions)\001#usi", '<span style="color:#770055;">$1</span>', $text );
+$text = preg_replace("#\001($skipwords)\001#usi", '<span style="color:green;"><strong>$1</strong></span>', $text );
+$text = preg_replace("#\001($keywords)\001#usi" , '<span style="color:blue;">$1</span>', $text );
 
 // Comments
-$text = preg_replace('#(\-\-.*)$#m', '<span style="color:#888888;"><em>$1</em></span>', $text );
+$text = preg_replace('#(\-\-.*)$#um', '<span style="color:#888888;"><em>$1</em></span>', $text );
 
 // Remove lexeme delimiter
-$text = preg_replace("#\001#s",'', $text );
+$text = preg_replace("#\001#us",'', $text );
 
 echo '<!--notypo--><pre class="code">' . $text . '</pre><!--/notypo-->';
