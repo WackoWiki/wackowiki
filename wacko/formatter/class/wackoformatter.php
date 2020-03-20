@@ -729,8 +729,8 @@ class WackoFormatter
 			return '<mark>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</mark>';
 		}
 		// urls
-		else if (  preg_match('/^([[:alpha:]]+:\/\/\S+?|mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches)
-				|| preg_match('/^([[:alpha:]]+:\/\/\S+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches))
+		else if (  preg_match('/^([[:alpha:]]+:\/\/\S+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/u', $thing, $matches)
+				|| preg_match('/^(mailto\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?|xmpp\:[[:alnum:]\-\_\.]+\@[[:alnum:]\-\.\_]+?)([^[:alnum:]^\/\-\_\=]?)$/u', $thing, $matches))
 		{
 			$url = mb_strtolower($matches[1]);
 
