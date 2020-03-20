@@ -1221,16 +1221,16 @@ a:target {
 	overflow: auto;
 }
 
-.feed .note {
+.feed-note {
 	font-size: 11px;
 	color: #777;
 }
 
-.feed .note a {
+.feed-note a {
 	color: #777;
 }
 
-.feed .note span {
+.feed-note span {
 	border-bottom: 1px dotted;
 }
 

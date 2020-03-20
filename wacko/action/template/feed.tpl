@@ -6,7 +6,7 @@
 	[= mark _ =
 		<div class="layout-box" style="display: table;">
 			<p>
-				<span>[ ' header ' ]: <strong>[ ' title | e ' ]</strong> [ ' lastitems ' ]</span>
+				<span>[ ' header ' ]: <strong>[ ' title ' ]</strong> [ ' lastitems ' ]</span>
 			</p>
 	=]
 
@@ -22,7 +22,7 @@
 	[= i _ =
 		<article class="feed">
 			<h2[ ' class ' ]>[ ' link ' ]</h2>
-				<p class="note">
+				<p class="feed-note">
 					<span>
 						[= m _ =
 							[ ' _t: FeedSource ' ] <a href="[ ' href ' ]">[ ' title | e ' ]</a> |
