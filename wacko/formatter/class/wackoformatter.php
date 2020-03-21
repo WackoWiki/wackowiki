@@ -259,7 +259,7 @@ class WackoFormatter
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
-			"\b[[:alnum:]]+[:][" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\-\_\.\+\&\=\#]+|" .
+			"\b[[:alnum:]]+[:][" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// wiki links (beside actions)
@@ -1193,7 +1193,7 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', 1, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\-\_\=]?)$/us', $thing, $matches))
+		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];

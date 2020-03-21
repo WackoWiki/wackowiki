@@ -3832,7 +3832,7 @@ class Wacko
 			$tpl	= 'grouplink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
