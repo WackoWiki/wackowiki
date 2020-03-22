@@ -4786,7 +4786,7 @@ class Wacko
 
 				if (strncasecmp($headless, $we, strlen($we))) // if not from ourselves..
 				{
-					$ua	= $_SERVER['HTTP_USER_AGENT'] ?? null;
+					#$ua	= $_SERVER['HTTP_USER_AGENT'] ?? null;
 
 					$this->db->sql_query(
 						"INSERT INTO " . $this->db->table_prefix . "referrer SET " .

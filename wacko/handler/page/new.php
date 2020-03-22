@@ -43,7 +43,9 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 		// check existing page write access
 		if ($this->has_access('write', $this->get_page_id($prefix . $new_tag)))
 		{
-			$message .= Ut::perc_replace($this->_t('PageAlreadyExistsEdit'), '<a href="' . $this->href('edit', $prefix . $new_tag) . '">' . $this->_t('PageAlreadyExistsEdit2') . '</a>');
+			$message .= Ut::perc_replace(
+				$this->_t('PageAlreadyExistsEdit'),
+				'<a href="' . $this->href('edit', $prefix . $new_tag) . '">' . $this->_t('PageAlreadyExistsEdit2') . '</a>');
 		}
 		else
 		{
@@ -58,7 +60,7 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 		if ($this->has_access('create', $this->get_page_id($prefix . $new_tag)))
 		{
 			// keep the original input for page title
-			$this->sess->title = $new_tag;
+			$this->sess->title = $this->add_spaces_title(utf8_trim(mb_substr($new_tag, mb_strrpos($new_tag, '/')), '/'));
 
 			// str_replace: fixes newPage&amp;add=1
 			$this->http->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix . $new_tag, '', 1))));
@@ -73,12 +75,12 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 // create a peer page
 if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
-	$tpl->p_f_base	= (mb_strlen($this->tag) > 50 ? '...' . mb_substr($this->tag, -50) : $this->tag);
-	$tpl->p_f_tag	= (isset($_POST['option']) && $_POST['option'] === 1 ? $new_tag : '');
+	$tpl->p_f_base		= (mb_strlen($this->tag) > 50 ? '...' . mb_substr($this->tag, -50) : $this->tag);
+	$tpl->p_f_tag		= (isset($_POST['option']) && $_POST['option'] === 1 ? $new_tag : '');
 }
 else
 {
-	$message = '<em>' . $this->_t('CreatePageDenied') . '</em>';
+	$message			= '<em>' . $this->_t('CreatePageDenied') . '</em>';
 	$tpl->p_d_message	= $this->show_message($message, 'note', false);
 }
 
@@ -98,7 +100,7 @@ if (mb_substr_count($this->tag, '/') > 0)
 	}
 	else
 	{
-		$message = '<em>' . $this->_t('CreatePageDenied') . '</em>';
+		$message			= '<em>' . $this->_t('CreatePageDenied') . '</em>';
 		$tpl->c_d_message	= $this->show_message($message, 'note', false);
 	}
 }
