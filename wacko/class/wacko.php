@@ -7145,8 +7145,14 @@ class Wacko
 		// default page title is just page's WikiName
 		return $title
 				?: ($tag
-					? $this->add_spaces_title(utf8_trim(mb_substr($tag, mb_strrpos($tag, '/')), '/'))
-					: $this->add_spaces_title(utf8_trim(mb_substr($this->tag, mb_strrpos($this->tag, '/')), '/')));
+					? $this->create_title_from_tag($tag)
+					: $this->create_title_from_tag($this->tag));
+	}
+
+	// creates page title from tag: /Path/To/WikiName -> Wiki Name
+	function create_title_from_tag($tag)
+	{
+		return $this->add_spaces_title(utf8_trim(mb_substr($tag, mb_strrpos($tag, '/')), '/'));
 	}
 
 	// CLONE / RENAMING / MOVING

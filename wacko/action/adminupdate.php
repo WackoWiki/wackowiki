@@ -74,7 +74,7 @@ if ($this->is_admin())
 					$this->set_translation($lang);
 					$this->set_page_lang($lang);
 					// tag to title
-					$title = $this->add_spaces_title(utf8_trim(mb_substr($page['tag'], mb_strrpos($page['tag'], '/')), '/'));
+					$title = $this->create_title_from_tag($page['tag']);
 
 					$this->db->sql_query(
 						"UPDATE {$prefix}page " .
