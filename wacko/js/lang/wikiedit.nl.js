@@ -7,7 +7,7 @@ lang = {
 	HelpFormatting :		"Help",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
+
 	Heading1 :				"Niveau 1 kop",
 	Heading2 :				"Niveau 2 kop",
 	Heading3 :				"Niveau 3 kop",
@@ -40,11 +40,11 @@ lang = {
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
-	
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+

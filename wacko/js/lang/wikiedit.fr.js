@@ -7,7 +7,7 @@ lang = {
 	HelpFormatting :		"Help",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/Français/MiseEnForme",
-	
+
 	Heading1 :				"Heading 1",
 	Heading2 :				"Heading 2",
 	Heading3 :				"Heading 3",
@@ -40,11 +40,11 @@ lang = {
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
-	
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+

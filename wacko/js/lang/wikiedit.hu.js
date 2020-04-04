@@ -7,7 +7,7 @@ lang = {
 	HelpFormatting :		"Segítség",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
+
 	Heading1 :				"1. szintű címsor",
 	Heading2 :				"2. szintű címsor",
 	Heading3 :				"3. szintű címsor",
@@ -40,11 +40,11 @@ lang = {
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
-	
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+

@@ -7,7 +7,7 @@ lang = {
 	HelpFormatting :		"Hilfe",
 	HelpFormattingTip :		"Hilfe zur Wiki-Formatierung",
 	HelpFormattingPage :	"Doc/Deutsch/Formatierung",
-	
+
 	Heading1 :				"Überschrift 1 (Strg+Umschalt+1)",
 	Heading2 :				"Überschrift 2",
 	Heading3 :				"Überschrift 3",
@@ -40,11 +40,11 @@ lang = {
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Tabelle einfügen",
-	
+
 	Link :					"Link",
 	TextForLinking :		"Text für Verlinkung",
-	
-	HelpAboutTip : 			' Tastenkürzel:\n'+
+
+	HelpAboutTip :			' Tastenkürzel:\n'+
 							' Strg+B - Fett\n'+
 							' Strg+I - Kursiv\n'+
 							' Strg+U - Unterstrichen\n'+

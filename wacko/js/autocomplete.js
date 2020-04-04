@@ -1,31 +1,31 @@
 //
 //
-//	autocomplete for wikiedit testdrive
+//	autocomplete for WikiEdit
 //
-//	(c) 2005 Kuso Mendokusee.
-//	mailto:mendokusee@pixel-apes.com
+//	(c) 2005 Kuso Mendokusee, WackoWikiTeam
+//	
 function AutoComplete(wikiedit, handler)
 {
-	this.wikiedit = wikiedit;
-	this.handler = handler;
+	this.wikiedit				= wikiedit;
+	this.handler				= handler;
 
-	wikiedit.autocomplete = this;
+	wikiedit.autocomplete		= this;
 
-	this.interval = 500;
-	this.wait = 0;
+	this.interval				= 500;
+	this.wait					= 0;
 
-	this.request_pattern = false;
-	this.found_pattern = '';
-	this.found_patterns = false;
+	this.request_pattern		= false;
+	this.found_pattern			= '';
+	this.found_patterns			= false;
 	this.found_patterns_selected = - 1;
-	this.magic_mode = false;
+	this.magic_mode				= false;
 
-	this.regexp_LinkLetter = /[[~a-zA-ZёЁа-яА-Я\!\-\.\(\[\/0-9]/;
+	this.regexp_LinkLetter		= /[[~a-zA-ZёЁа-яА-Я\!\-\.\(\[\/0-9]/;
 
-	this.regexp_LinkWhole = /^(([\(\[]){2})?((\!\/)|[A-ZЁА-Я\/])[a-zA-ZёЁа-яА-Я\-\.\/0-9]+$/;
-	this.regexp_LinkCamel = /[a-zёа-я\.0-9][A-ZЁА-Я]/;
-	this.regexp_LinkStrict = /^([\(\[]){2}.{2,}/;
-	this.regexp_LinkSubpage = /^!\/.{2,}/;
+	this.regexp_LinkWhole		= /^(([\(\[]){2})?((\!\/)|[A-ZЁА-Я\/])[a-zA-ZёЁа-яА-Я\-\.\/0-9]+$/;
+	this.regexp_LinkCamel		= /[a-zёа-я\.0-9][A-ZЁА-Я]/;
+	this.regexp_LinkStrict		= /^([\(\[]){2}.{2,}/;
+	this.regexp_LinkSubpage		= /^!\/.{2,}/;
 }
 
 // add some stuff for visualization
@@ -56,16 +56,20 @@ AutoComplete.prototype.selectInplace = function (pos)
 {
 	if (this.found_patterns === false) return;
 	var _pos = this.found_patterns_selected;
-	
+
 	if (_pos >= 0)
 	{
 		var _item = document.getElementById(this.wikiedit.id + '_item_' + _pos);
-		if (_item) _item.className = '';
+
+		if (_item)
+		{
+			_item.className = '';
+		}
 	}
-	
+
 	if (pos < 0) pos = this.found_patterns.length - 1;
 	if (pos >= this.found_patterns.length) pos = 0;
-	
+
 	if (pos >= 0)
 	{
 		var _item = document.getElementById(this.wikiedit.id + '_item_' + pos);
@@ -81,10 +85,10 @@ AutoComplete.prototype.redrawInplace = function ()
 {
 	if (this.found_patterns.length == 0) return;
 	if (!isIE) return; // IE ONLY
-	
+
 	var inplace = document.getElementById(this.id + '_inplace');
 	var contents = '';
-	
+
 	// lets prepare content from this.found_patterns
 	for (var i in this.found_patterns)
 	{
@@ -95,58 +99,60 @@ AutoComplete.prototype.redrawInplace = function ()
 			'<img align=right src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
 		contents += div;
 	}
-	
+
 	// now we place out stuff form
-	var d = document.body;
+	var d		= document.body;
 	if ((document.compatMode) && (document.compatMode == 'CSS1Compat')) d = document.documentElement;
-	var d_left = d.scrollLeft;
-	var d_top = d.scrollTop;
-	var ta = this.wikiedit.area;
-	var sel = document.selection;
-	
+	var d_left	= d.scrollLeft;
+	var d_top	= d.scrollTop;
+	var ta		= this.wikiedit.area;
+	var sel		= document.selection;
+
 	// step 1. calculate position for inplace window
 	this.wikiedit.area.focus();
 	window.scrollTo(d_left, d_top);
 	this.wikiedit.getDefines();
-	
+
 	str = this.wikiedit.str;
 	{
-		longtext = this.wikiedit.sel1 + this.wikiedit.sel;
-		itempos = longtext.lastIndexOf(this.request_pattern);
-		
+		longtext	= this.wikiedit.sel1 + this.wikiedit.sel;
+		itempos		= longtext.lastIndexOf(this.request_pattern);
+
 		if (itempos >= 0)
-			_str = longtext.substr(0, itempos) + this.wikiedit.begin +
-			this.request_pattern + this.wikiedit.end +
-			longtext.substr(itempos + this.request_pattern.length) +
-			this.wikiedit.sel2;
+		{
+			_str = longtext.substr(0, itempos) + this.wikiedit.begin
+				+ this.request_pattern + this.wikiedit.end
+				+ longtext.substr(itempos + this.request_pattern.length)
+				+ this.wikiedit.sel2;
+		}
 	}
-	
+
 	this.wikiedit.setAreaContent(_str);
-	var sel2 = document.selection;
-	var sel2_range = sel2.createRange();
+	var sel2		= document.selection;
+	var sel2_range	= sel2.createRange();
 	// -- calc x y of ta
 	z = ta;
 	var x = 0;
 	var y = 0;
-	
+
 	do
 	{
 		x += parseInt(isNaN(parseInt(z.offsetLeft)) ? 0 : z.offsetLeft);
 		y += parseInt(isNaN(parseInt(z.offsetTop)) ? 0 : z.offsetTop);
 	}
 	while (z = z.offsetParent);
-	
-	var left = d.scrollLeft + ta.scrollLeft + sel2_range.boundingLeft - 2;
-	var top = d.scrollTop + ta.scrollTop + sel2_range.boundingTop + 15;
-	
+
+	var left	= d.scrollLeft + ta.scrollLeft + sel2_range.boundingLeft - 2;
+	var top		= d.scrollTop + ta.scrollTop + sel2_range.boundingTop + 15;
+
 	// step 3. draw window itself
-	inplace.innerHTML = contents;
-	inplace.style.display = 'block';
-	inplace.style.position = 'absolute';
-	inplace.style.left = left;
-	inplace.style.top = top;
+	inplace.innerHTML		= contents;
+	inplace.style.display	= 'block';
+	inplace.style.position	= 'absolute';
+	inplace.style.left		= left;
+	inplace.style.top		= top;
 	this.selectInplace(0);
-	
+
 	// step 2. restore exact selection observed before "inplace magic"
 	this.wikiedit.setAreaContent(str);
 };
@@ -162,9 +168,9 @@ AutoComplete.prototype.hideInplace = function ()
 // reset autocomplete -- hide all stuff, reset patterns
 AutoComplete.prototype.reset = function ()
 {
-	this.request_pattern = false;
-	this.found_pattern = false;
-	this.magic_mode = false;
+	this.request_pattern	= false;
+	this.found_pattern		= false;
+	this.magic_mode			= false;
 	this.visualState('hidden');
 };
 
@@ -177,8 +183,8 @@ AutoComplete.prototype.insertFound = function (foundPattern)
 	if (this.request_pattern === false) return;
 	var d = document.body;
 	if ((document.compatMode) && (document.compatMode == 'CSS1Compat')) d = document.documentElement;
-	var d_left = d.scrollLeft;
-	var d_top = d.scrollTop;
+	var d_left	= d.scrollLeft;
+	var d_top	= d.scrollTop;
 	this.wikiedit.area.focus();
 	this.wikiedit.getDefines();
 	window.scrollTo(d_left, d_top);
@@ -187,29 +193,33 @@ AutoComplete.prototype.insertFound = function (foundPattern)
 	if (state == '404')
 	{
 		// just select word
-		longtext = this.wikiedit.sel1 + this.wikiedit.sel;
-		itempos = longtext.lastIndexOf(this.request_pattern);
-		
+		longtext		= this.wikiedit.sel1 + this.wikiedit.sel;
+		itempos			= longtext.lastIndexOf(this.request_pattern);
+
 		if (itempos >= 0)
-			str = longtext.substr(0, itempos) + this.wikiedit.begin +
-			this.request_pattern + this.wikiedit.end +
-			longtext.substr(itempos + this.request_pattern.length) +
-			this.wikiedit.sel2;
-	} 
+		{
+			str = longtext.substr(0, itempos) + this.wikiedit.begin
+				+ this.request_pattern + this.wikiedit.end
+				+ longtext.substr(itempos + this.request_pattern.length)
+				+ this.wikiedit.sel2;
+		}
+	}
 	else
 	{
 		// replace by proposition
-		itempos = this.wikiedit.sel1.lastIndexOf(this.request_pattern);
-		foundPattern = this.StrictLink(foundPattern);
-		
+		itempos			= this.wikiedit.sel1.lastIndexOf(this.request_pattern);
+		foundPattern	= this.StrictLink(foundPattern);
+
 		if (itempos >= 0)
-			str = this.wikiedit.sel1.substr(0, itempos) +
-			foundPattern +
-			this.wikiedit.sel1.substr(itempos + this.request_pattern.length) +
-			this.wikiedit.begin + this.wikiedit.sel + this.wikiedit.end +
-			this.wikiedit.sel2;
+		{
+			str = this.wikiedit.sel1.substr(0, itempos)
+				+ foundPattern
+				+ this.wikiedit.sel1.substr(itempos + this.request_pattern.length)
+				+ this.wikiedit.begin + this.wikiedit.sel + this.wikiedit.end
+				+ this.wikiedit.sel2;
+		}
 	}
-	
+
 	this.wikiedit.setAreaContent(str);
 	this.reset();
 };
@@ -249,21 +259,22 @@ AutoComplete.prototype.keyDown = function (key, shiftKey)
 				break;
 		}
 	}
-	
-	// it is magic key (Ctrl+Space)
+
+	// it is magic key (Ctrl + Space)
 	if (!this.found_pattern && key == 2080)
 	{
 		var pattern = this.checkPattern(this.getPattern(), 'magic');
-		
+
 		if (pattern !== false)
 		{
-			this.request_pattern = pattern;
-			this.magic_mode = true;
+			this.request_pattern	= pattern;
+			this.magic_mode			= true;
 			this.tryComplete('magic');
 		}
-		
+
 		return true;
 	}
+
 	// it is [`\-0-9a-z] key
 	// fix it to whole russian subset
 
@@ -273,13 +284,17 @@ AutoComplete.prototype.keyDown = function (key, shiftKey)
 		// we will work only if user just stopped typing
 		// these lines-o-logic should be rewritten to use "timeout entity" feature of setTimeout
 		this.wait++;
-		var _pattern = this.getPattern();
-		var pattern = this.checkPattern(_pattern, this.magic_mode);
-		if (pattern !== false) this.request_pattern = pattern;
-		
+		var _pattern	= this.getPattern();
+		var pattern		= this.checkPattern(_pattern, this.magic_mode);
+
+		if (pattern !== false)
+		{
+			this.request_pattern = pattern;
+		}
+
 		setTimeout('waitAutoComplete(\'' + this.wikiedit.id + '\',\'' + this.wait + '\')', this.interval);
 	}
-	
+
 	return false;
 };
 
@@ -290,30 +305,30 @@ AutoComplete.prototype.keyDown = function (key, shiftKey)
 AutoComplete.prototype.tryComplete = function (magic_button_mode)
 {
 	this.wait = 0;
-	
+
 	if (this.request_pattern === false)
 	{
 		this.reset();
 		return;
 	}
-	
+
 	this.request_pattern = false;
-	var _pattern = this.getPattern();
-	var pattern = this.checkPattern(_pattern, magic_button_mode);
-	
+	var _pattern	= this.getPattern();
+	var pattern		= this.checkPattern(_pattern, magic_button_mode);
+
 	if (pattern !== false)
 	{
-		if (magic_button_mode) this.request_pattern = pattern;
-		if (pattern.length > 2) this.request_pattern = pattern;
-		if (_pattern.length > 3) this.request_pattern = pattern;
+		if (magic_button_mode)		this.request_pattern = pattern;
+		if (pattern.length > 2)		this.request_pattern = pattern;
+		if (_pattern.length > 3)	this.request_pattern = pattern;
 	}
-	
+
 	if (this.request_pattern === false)
 	{
 		this.reset();
 		return;
 	}
-	
+
 	this.visualState('seeking');
 	this.requestPattern(this.request_pattern);
 };
@@ -322,11 +337,13 @@ AutoComplete.prototype.tryComplete = function (magic_button_mode)
 // if success, lightup green else go red with "404"
 AutoComplete.prototype.finishComplete = function (found_pattern, all_patterns)
 {
-	this.found_pattern = found_pattern;
-	this.found_patterns = all_patterns;
-	
+	this.found_pattern	= found_pattern;
+	this.found_patterns	= all_patterns;
+
 	if (this.found_pattern === false)
+	{
 		this.visualState('404');
+	}
 	else
 	{
 		this.visualState('found');
@@ -345,18 +362,23 @@ AutoComplete.prototype.checkPattern = function (pattern, magic_button_mode)
 		if (pattern.match(this.regexp_LinkStrict))
 		{
 			this.strict_linking_mode = true;
+
 			return pattern.substr(2);
 		}
 		
 		if (pattern.match(this.regexp_LinkSubpage))
 		{
 			this.strict_linking_mode = true;
+
 			return pattern;
 		}
-		
-		if (pattern.match(this.regexp_LinkCamel) || magic_button_mode) return pattern;
+
+		if (pattern.match(this.regexp_LinkCamel) || magic_button_mode)
+		{
+			return pattern;
+		}
 	}
-	
+
 	return false;
 };
 
@@ -366,9 +388,16 @@ AutoComplete.prototype.checkPattern = function (pattern, magic_button_mode)
  */
 AutoComplete.prototype.StrictLink = function (pattern)
 {
-	if (this.strict_linking_mode) return pattern;
-	if (pattern.match(this.regexp_LinkCamel)) return pattern;
-	
+	if (this.strict_linking_mode)
+	{
+		return pattern;
+	}
+
+	if (pattern.match(this.regexp_LinkCamel))
+	{
+		return pattern;
+	}
+
 	return '((' + pattern + '))';
 };
 
@@ -377,114 +406,140 @@ AutoComplete.prototype.StrictLink = function (pattern)
 AutoComplete.prototype.getPattern = function ()
 {
 	if (isIE)
-		var Range = document.selection.createRange();
+	{
+		var Range	= document.selection.createRange();
+	}
 	else
 	{
-		var start = this.wikiedit.area.selectionStart;
-		var end = this.wikiedit.area.selectionEnd;
+		var start	= this.wikiedit.area.selectionStart;
+		var end		= this.wikiedit.area.selectionEnd;
 	}
-	
+
 	// go left
 	var f = 1;
-	
+
 	while (f || (isIE && (Range.text.charAt(0)).match(this.regexp_LinkLetter))
 	|| (!isIE && (this.wikiedit.area.value.charAt(start)).match(this.regexp_LinkLetter))
 	)
 	{
 		f = 0;
-		
-		if (isIE) Range.moveStart('character', - 1);
-		else start--;
+
+		if (isIE)
+		{
+			Range.moveStart('character', - 1);
+		}
+		else
+		{
+			start--;
+		}
 	}
-	
-	if (isIE) Range.moveStart('character', 1);
-	else start++;
-	
-	if (isIE) return Range.text;
-	else return this.wikiedit.area.value.substr(start, end - start);
+
+	if (isIE)
+	{
+		Range.moveStart('character', 1);
+	}
+	else
+	{
+		start++;
+	}
+
+	if (isIE)
+	{
+		return Range.text;
+	}
+	else 
+	{
+		return this.wikiedit.area.value.substr(start, end - start);
+	}
 };
 
 // visual state routine. Sets some different visual widgets according to given state
 AutoComplete.prototype.visualState = function (to)
 {
-	var reset = document.getElementById(this.id + '_reset');
-	var li = document.getElementById(this.id + '_li');
-	var ac = document.getElementById(this.id);
-	
+	var reset	= document.getElementById(this.id + '_reset');
+	var li		= document.getElementById(this.id + '_li');
+	var ac		= document.getElementById(this.id);
+
 	switch (to)
 	{
 		case 'seeking':
 			if (this.visual_state == 'found') break;
-			li.style.display = '';
-			reset.style.display = '';
-			ac.innerHTML = '...';
-			ac.style.color = '#888888';
+			li.style.display			= '';
+			reset.style.display			= '';
+			ac.innerHTML				= '...';
+			ac.style.color				= '#888888';
 			break;
 		case 'found':
-			li.style.display = '';
-			reset.style.display = '';
-			ac.innerHTML = this.found_pattern;
-			ac.style.color = '#ffffff';
-			ac.style.backgroundColor = '#00cc00';
+			li.style.display			= '';
+			reset.style.display			= '';
+			ac.innerHTML				= this.found_pattern;
+			ac.style.color				= '#ffffff';
+			ac.style.backgroundColor	= '#00cc00';
 			this.redrawInplace();
 			break;
 		case '404':
-			li.style.display = '';
-			reset.style.display = '';
-			ac.innerHTML = this.request_pattern;
-			ac.style.color = '#ffffff';
-			ac.style.backgroundColor = '#FF0000';
+			li.style.display			= '';
+			reset.style.display			= '';
+			ac.innerHTML				= this.request_pattern;
+			ac.style.color				= '#ffffff';
+			ac.style.backgroundColor	= '#FF0000';
 			this.hideInplace();
 			break;
 		case 'hidden':
-			li.style.display = 'none';
-			reset.style.display = 'none';
+			li.style.display			= 'none';
+			reset.style.display			= 'none';
 			this.hideInplace();
 			break;
 	}
-	
+
 	this.visual_state = to;
 };
 
-// ajax "XmlHttpRequest" routine.
+// Ajax "XmlHttpRequest" routine.
 // builds request to server-side, 
 var req;
+
 AutoComplete.prototype.requestPattern = function (pattern)
 {
-	var href = this.handler + (this.handler.indexOf('?') >= 0 ? '&' : '?') + 'q=' + escape(pattern) +
-		'&ta_id=' + escape(this.wikiedit.area.id) + '&_autocomplete=1&rnd=' + Math.random();
-	req = window.XMLHttpRequest 
+	var href = this.handler + (this.handler.indexOf('?') >= 0 ? '&' : '?') + 'q=' + escape(pattern)
+		+ '&ta_id=' + escape(this.wikiedit.area.id) + '&_autocomplete=1&rnd=' + Math.random();
+	req = window.XMLHttpRequest
 		? new XMLHttpRequest()
 		: new ActiveXObject('Microsoft.XMLHTTP');
-	
+
 	req.onreadystatechange = function ()
 	{
 		if (req)
-			
+
 		if (req.readyState == 4)
 		{
-			var items = req.responseText.split('~~~');
-			var _items = [];
-			
+			var items	= req.responseText.split('~~~');
+			var _items	= [];
+
 			for (var i = 1; i < items.length; i++)
+			{
 				_items[i - 1] = items[i];
-			
+			}
+
 			if (items.length < 2)
 			{
-				_items[0] = false;
-				_items2 = [];
-			} 
-			else _items2 = _items;
-			
+				_items[0]	= false;
+				_items2		= [];
+			}
+			else
+			{
+				_items2 = _items;
+			}
+
 			launchFinishComplete(items[0], _items[0], _items2);
 		}
 	};
-	
+
 	req.open('GET', href, true);
 	req.send(null);
 };
 
-// ajax XmlHttpRequest helper routine.
+// Ajax XmlHttpRequest helper routine.
 // gets invoked after ajax response arrived
 // do invoke appropriate autocomplete method
 function launchFinishComplete(ta_id, found, out)
@@ -492,7 +547,7 @@ function launchFinishComplete(ta_id, found, out)
 	var ta = document.getElementById(ta_id);
 	var we = ta._owner;
 	var ac = we.autocomplete;
-	
+
 	if (found == '') found = false;
 	ac.finishComplete(found, out);
 }
@@ -503,6 +558,6 @@ function waitAutoComplete(ta_id, wait)
 	var ta = document.getElementById(ta_id);
 	var we = ta._owner;
 	var ac = we.autocomplete;
-	
+
 	if (ac.wait == wait) ac.tryComplete(ac.magic_mode);
 }

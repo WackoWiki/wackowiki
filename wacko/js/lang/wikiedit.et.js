@@ -7,7 +7,7 @@ lang = {
 	HelpFormatting :		"Help",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
-	
+
 	Heading1 :				"1. astme pealkiri",
 	Heading2 :				"2. astme pealkiri",
 	Heading3 :				"3. astme pealkiri",
@@ -40,11 +40,11 @@ lang = {
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Lisage tabel",
-	
+
 	Link :					"Link",
 	TextForLinking :		"Text for linking",
-	
-	HelpAboutTip : 			' Shortcuts:\n'+
+
+	HelpAboutTip :			' Shortcuts:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+

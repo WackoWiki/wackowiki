@@ -7,7 +7,7 @@ lang = {
 	HelpFormatting :		"Помощь",
 	HelpFormattingTip :		"Помощь по Wiki-разметке",
 	HelpFormattingPage :	"Doc/Русский/WackoСинтаксис",
-	
+
 	Heading1 :				"Заголовок 1",
 	Heading2 :				"Заголовок 2",
 	Heading3 :				"Заголовок 3",
@@ -40,11 +40,11 @@ lang = {
 	Shade :					"Тень",
 	Hyperlink :				"Гиперссылка",
 	InsertTable :			"Вставить таблицу",
-	
+
 	Link :					"Ссылка",
 	TextForLinking :		"Текст ссылки",
-	
-	HelpAboutTip : 			' Сочетания клавиш:\n'+
+
+	HelpAboutTip :			' Сочетания клавиш:\n'+
 							' Ctrl+B - Жирный\n'+
 							' Ctrl+I - Курсив\n'+
 							' Ctrl+U - Подчеркнутый\n'+

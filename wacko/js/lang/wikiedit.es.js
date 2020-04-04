@@ -40,11 +40,11 @@ lang = {
 	Shade :					"Sombra",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insertar tabla",
-	
+
 	Link :					"Enlace",
 	TextForLinking :		"Texto del enlace",
-	
-	HelpAboutTip : 			' Teclas rÃ¡pidas:\n'+
+
+	HelpAboutTip :			' Teclas rÃ¡pidas:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+
