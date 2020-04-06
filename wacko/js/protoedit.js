@@ -27,7 +27,7 @@ ProtoEdit.prototype._init = function (id, rte)
 	this.id				= id; // id - id of textarea
 	this.area			= document.getElementById(id); // area - textarea object
 	this.area._owner	= this; // area._owner - this
-	
+
 	// rte - id of rte frame 
 	if (rte)
 	{
@@ -39,7 +39,7 @@ ProtoEdit.prototype._init = function (id, rte)
 		}
 		else if (this.MZ = isMZ)
 		{
-			document.getElementById(rte).contentWindow.document.addEventListener('keypress', function (ev) {
+			document.getElementById(rte).contentWindow.document.addEventListener('keypress', function (ev){
 				document.getElementById(id)._owner.keyDown(ev)
 			}, true);
 			document.getElementById(rte).contentWindow.document.addEventListener('keyup', function (ev) {

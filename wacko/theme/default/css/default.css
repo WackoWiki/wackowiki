@@ -988,9 +988,9 @@ a:target {
 	background: ButtonFace;
 }
 
-.toolbar .btn-, 
-.toolbar .btn-hover, 
-.toolbar .btn-active, 
+.toolbar .btn-,
+.toolbar .btn-hover,
+.toolbar .btn-active,
 .toolbar .btn-pressed {
 	background: ButtonFace;
 	color: ButtonText;
@@ -1019,6 +1019,13 @@ a:target {
 	margin: 3px;
 	padding: 0;
 	width: 0;
+}
+
+.toolbar .btn-text {
+	font: 12px Arial;
+	text-decoration: underline;
+	height: 17px;
+	padding: 3px 3px 4px 4px;
 }
 
 .toolbar img, 

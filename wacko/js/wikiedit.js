@@ -67,7 +67,8 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 			this.undotext = this.area.value;
 			this.undosels = this.area.selectionStart;
 			this.undosele = this.area.selectionEnd;
-		} catch (e) {
+		}
+		catch (e) {
 		}
 	}
 
@@ -122,8 +123,8 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 	this.addButton('createtable',	lang.InsertTable,	'\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
 	this.addButton('customhtml',	separator);
 	this.addButton('help',			lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
-	this.addButton('customhtml', '<li><div style="font:12px Arial;text-decoration:underline; padding: 3px 3px 4px 4px;" id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
-		+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
+	this.addButton('customhtml',	'<li><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover btn-text";\' '
+		+ 'onmouseout=\'this.className="btn- btn-text";\' class="btn- btn-text" '
 		+ 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.org/doc/' + lang.HelpFormattingPage + '\');" '
 		+ ' title="' + lang.HelpFormattingTip + '">' + lang.HelpFormatting + ''
 		+ '</div></li>');
@@ -134,7 +135,8 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 		this.area.parentNode.insertBefore(toolbar, this.area);
 		toolbar				= document.getElementById('tb_' + this.id);
 		toolbar.innerHTML	= this.createToolbar(1);
-	} catch (e) {
+	}
+	catch (e) {
 	}
 };
 
@@ -195,7 +197,7 @@ WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 	if (q != null)
 	{
 		Text = q[1] + this.begin + q[2] + Tag + q[3] + q[4];
-	} 
+	}
 	else
 	{
 		var w	= new RegExp('^([ ]*)' + this.begin + '([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$');
@@ -297,7 +299,7 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
 				lines[i] = this.begin + lines[i];
 			}
 		}
-		
+
 		/*
 		fIn &&
 		onNewLine == 0 // adding tags
@@ -382,15 +384,24 @@ WikiEdit.prototype.keyDown = function (e)
 		e;
 	var justenter = false;
 	var wasEvent = remundo = res = false;
-	if (isMZ) var noscroll = false;
-	else var noscroll = true;
+	if (isMZ)
+	{
+		var noscroll = false;
+	}
+	else
+	{
+		var noscroll = true;
+	}
 	var t = this.area;
 	var Key = e.keyCode;
 	if (Key == 0) Key = e.charCode;
-	if (Key == 8 || Key == 13 || Key == 32 || (Key > 45 && Key < 91) || (Key > 93 && Key < 112) || (Key > 123 && Key < 144)
-	|| (Key > 145 && Key < 255)) remundo = Key;
-	if (e.altKey && !e.ctrlKey) Key = Key + 4096;
-	if (e.ctrlKey) Key = Key + 2048;
+	if (Key == 8 || Key == 13 || Key == 32 || (Key > 45 && Key < 91) || (Key > 93 && Key < 112) 
+		|| (Key > 123 && Key < 144) || (Key > 145 && Key < 255))
+	{
+		remundo = Key;
+	}
+	if (e.altKey && !e.ctrlKey)	Key = Key + 4096;
+	if (e.ctrlKey)				Key = Key + 2048;
 
 	if (isMZ && e.type == 'keypress' && this.checkKey(Key))
 	{
@@ -406,10 +417,10 @@ WikiEdit.prototype.keyDown = function (e)
 
 	if (isMZ || isO8)
 	{
-		var scroll = t.scrollTop;
-		undotext = t.value;
-		undosels = t.selectionStart;
-		undosele = t.selectionEnd;
+		var scroll	= t.scrollTop;
+		undotext	= t.value;
+		undosels	= t.selectionStart;
+		undosele	= t.selectionEnd;
 	}
 
 	if (isIE)
@@ -513,7 +524,7 @@ WikiEdit.prototype.keyDown = function (e)
 		case 4179: // Alt + S
 			try {
 				if (weSave != null) weSave();
-			} 
+			}
 			catch (e) {
 			}
 			break;
@@ -531,7 +542,9 @@ WikiEdit.prototype.keyDown = function (e)
 		case 2127: // O
 		case 2126: // N
 			if (e.ctrlKey && e.shiftKey)
+			{
 				res = this.insTag('  1. ', '', 0, 1, 1);
+			}
 			break;
 		case 13:
 		case 2061:
@@ -559,7 +572,7 @@ WikiEdit.prototype.keyDown = function (e)
 				}
 				var sel1	= text.substr(0, t.selectionStart);
 				var sel2	= text.substr(t.selectionEnd);
-				//if (isO8) sel1 = sel1.replace(/\r\n$/, "");
+				// if (isO8) sel1 = sel1.replace(/\r\n$/, "");
 				re			= new RegExp('(^|\n)(( +)((([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + (this.mzBugFixed ? '' : '\r?\n?') + '$');
 				q			= sel1.match(re);
 
@@ -602,7 +615,7 @@ WikiEdit.prototype.keyDown = function (e)
 							temp.setEnd(t.childNodes[0], sel);
 						}
 
-						//t.scrollIntoView(true);
+						// t.scrollIntoView(true);
 
 						z			= t.selectionStart;
 						lines		= t.value.substr(0, z).split('\n').length - 1;
@@ -694,7 +707,7 @@ WikiEdit.prototype.getDefines = function ()
 
 WikiEdit.prototype.setAreaContent = function (str)
 {
-	var t = this.area;
+	var t	= this.area;
 	q		= str.match(new RegExp('((.|\n)*)' + this.begin)); //?:
 	l		= q[1].length;
 	if (isO8) l = l + q[1].split('\n').length - 1;
@@ -705,7 +718,7 @@ WikiEdit.prototype.setAreaContent = function (str)
 	str		= str.replace(this.rend, '');
 	t.value	= str;
 	t.setSelectionRange(l, l + l1);
-	
+
 	if (isMZ)
 	{
 		t.scrollTop = this.scroll;
@@ -747,7 +760,7 @@ WikiEdit.prototype.unindent = function ()
 	var fIn		= false;
 	var lines	= this.str.split(isO8 ? '\r\n' : '\n');
 	var rbeginb	= new RegExp('^' + this.begin);
-	
+
 	for (var i = 0; i < lines.length; i++)
 	{
 		var line = lines[i];
@@ -800,11 +813,11 @@ WikiEdit.prototype.createLink = function (isAlt)
 	{
 		if (!isAlt)
 		{
-			lnk = prompt(lang.Link + ':', this.sel);
+			lnk			= prompt(lang.Link + ':', this.sel);
 			if (lnk == null) lnk = this.sel;
-			sl = prompt(lang.TextForLinking + ':', this.sel);
+			sl			= prompt(lang.TextForLinking + ':', this.sel);
 			if (sl == null) sl = '';
-			this.sel = lnk + ' ' + sl;
+			this.sel	= lnk + ' ' + sl;
 		}
 
 		str		= this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;

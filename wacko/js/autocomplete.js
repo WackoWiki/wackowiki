@@ -312,9 +312,9 @@ AutoComplete.prototype.tryComplete = function (magic_button_mode)
 		return;
 	}
 
-	this.request_pattern = false;
-	var _pattern	= this.getPattern();
-	var pattern		= this.checkPattern(_pattern, magic_button_mode);
+	this.request_pattern	= false;
+	var _pattern			= this.getPattern();
+	var pattern				= this.checkPattern(_pattern, magic_button_mode);
 
 	if (pattern !== false)
 	{
