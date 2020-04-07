@@ -8,11 +8,8 @@ For license see LICENSE.TXT
 */
 var isDOM		= document.getElementById; // DOM1 browser
 var isO			= isO5 = window.opera && isDOM; // Opera 5+
-var isO6		= isO && window.print; // Opera 6+
-var isO7		= isO && document.readyState; // Opera 7+
 var isO8		= isO && document.createProcessingInstruction && (new XMLHttpRequest()).getAllResponseHeaders; // Opera 8+
 var isIE		= document.all && document.all.item && !isO; // MSIE 4+
-var isIE5		= isIE && isDOM; // MSIE 5+
 var isMZ		= isDOM && (navigator.appName == 'Netscape');
 var ua			= navigator.userAgent.toLowerCase();
 var isSafari	= (ua.indexOf('safari') != - 1);

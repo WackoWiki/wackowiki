@@ -39,18 +39,6 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 {
 	if (!(isMZ || isIE || isO8)) return;
 
-	this.mzBugFixed = true;
-
-	if (isMZ && navigator.userAgent.substr(navigator.userAgent.indexOf('Gecko/') + 6, 4) == '2003')
-	{
-		this.mzBugFixed	= (navigator.userAgent.substr(navigator.userAgent.indexOf('Gecko/') + 6, 8) > 20030510);
-		mzOld			= (navigator.userAgent.substr(navigator.userAgent.indexOf('Gecko/') + 6, 8) < 20030110);
-
-		if (mzOld)	this.MZ = false;
-		else		this.MZ = true;
-	}
-
-	if (isMZ && navigator.userAgent.substr(navigator.userAgent.indexOf('Gecko/') + 6, 4) == '2002') this.MZ = false;
 	if (!(this.MZ || isIE || isO8)) return;
 	
 	this._init(id);
@@ -70,11 +58,6 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 		}
 		catch (e) {
 		}
-	}
-
-	if (isIE)
-	{
-		this.area.addBehavior(this.imagesPath + 'sel.htc');
 	}
 
 	//this.addButton('h1',			lang.Heading1,		'\'==\',\'==\',0,1');
@@ -254,10 +237,9 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
 	var fOut 	= false;
 	var add		= 0;
 	var f		= false;
-	var w = new RegExp('^  ( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))');
-	if (!isO8) Text			= Text.replace(new RegExp('\r', 'g'), '');
-	if (!isO8) var lines	= Text.split('\n');
-	else var lines = Text.split('\r\n');
+	var w		= new RegExp('^  ( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))');
+	Text		= Text.replace(new RegExp('\r', 'g'), '');
+	var lines	= Text.split('\n');
 
 	for (var i = 0; i < lines.length; i++)
 	{
@@ -423,19 +405,8 @@ WikiEdit.prototype.keyDown = function (e)
 		undosele	= t.selectionEnd;
 	}
 
-	if (isIE)
-	{
-		tr	= document.selection.createRange();
-		str	= tr.text;
-	}
-	else
-	{
-		str	= t.value.substr(t.selectionStart, t.selectionEnd - t.selectionStart);
-	}
-
-	sel = (str.length > 0);
-	if (isIE && Key == 2048 + 187) Key = 2048 + 61; //
-	if (isIE && Key == 2048 + 189 && e.shiftKey) Key = 2048 + 95; //
+	str	= t.value.substr(t.selectionStart, t.selectionEnd - t.selectionStart);
+	sel	= (str.length > 0);
 
 	// take an autocomplete
 	if (this.autocomplete)
@@ -566,14 +537,11 @@ WikiEdit.prototype.keyDown = function (e)
 			else
 			{
 				var text	= t.value;
-				if (!isO8)
-				{
-					text	= text.replace(/\r/g, '');
-				}
+				text		= text.replace(/\r/g, '');
 				var sel1	= text.substr(0, t.selectionStart);
 				var sel2	= text.substr(t.selectionEnd);
-				// if (isO8) sel1 = sel1.replace(/\r\n$/, "");
-				re			= new RegExp('(^|\n)(( +)((([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + (this.mzBugFixed ? '' : '\r?\n?') + '$');
+
+				re			= new RegExp('(^|\n)(( +)((([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$');
 				q			= sel1.match(re);
 
 				if (q != null)
@@ -594,15 +562,15 @@ WikiEdit.prototype.keyDown = function (e)
 								q[2] = q[2].replace(re, String(Number(q2[1]) + 1) + q2[2]);
 							}
 						}
-					} 
+					}
 					else
 					{
 						sel1 = sel1.replace(re, '');
 						q[2] = '';
 					}
 
-					t.value	= sel1 + (this.mzBugFixed ? '\n' : '') + q[2] + sel2;
-					sel		= q[2].length + sel1.length + (this.mzBugFixed ? 1 : 0) + (isO8 ? 1 : 0);
+					t.value	= sel1 + '\n' + q[2] + sel2;
+					sel		= q[2].length + sel1.length + 1;
 					t.setSelectionRange(sel, sel);
 
 					if (isMZ)
@@ -626,22 +594,6 @@ WikiEdit.prototype.keyDown = function (e)
 							t.scrollTop	= Math.floor((t.scrollHeight / (totalLines + 1)) * lines) - t.offsetHeight + 20;
 							t.focus();
 							noscroll	= true;
-						}
-					}
-					else if (isIE)
-					{
-						var op = this.area;
-						var tp = 0;
-						var lf = 0;
-
-						do {
-							tp += op.offsetTop;
-							lf += op.offsetLeft;
-						} while (op = op.offsetParent);
-
-						if (tr.offsetTop >= this.area.clientHeight + tp)
-						{
-							tr.scrollIntoView(false);
 						}
 					}
 
@@ -688,7 +640,6 @@ WikiEdit.prototype.getDefines = function ()
 {
 	var t		= this.area;
 	text		= t.value;
-	if (!isO8) text = text.replace(/\r/g, '');
 	this.ss		= t.selectionStart;
 	this.se		= t.selectionEnd;
 	this.sel1	= text.substr(0, this.ss);
@@ -710,10 +661,8 @@ WikiEdit.prototype.setAreaContent = function (str)
 	var t	= this.area;
 	q		= str.match(new RegExp('((.|\n)*)' + this.begin)); //?:
 	l		= q[1].length;
-	if (isO8) l = l + q[1].split('\n').length - 1;
 	q		= str.match(new RegExp(this.begin + '((.|\n)*)' + this.end));
 	l1		= q[1].length;
-	if (isO8) l1 = l1 + q[1].split('\n').length - 1;
 	str		= str.replace(this.rbegin, '');
 	str		= str.replace(this.rend, '');
 	t.value	= str;
@@ -758,7 +707,7 @@ WikiEdit.prototype.unindent = function ()
 	this.getDefines();
 	var r		= '';
 	var fIn		= false;
-	var lines	= this.str.split(isO8 ? '\r\n' : '\n');
+	var lines	= this.str.split('\n');
 	var rbeginb	= new RegExp('^' + this.begin);
 
 	for (var i = 0; i < lines.length; i++)
