@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	Flash Action
 
-	The first five arguments here are required.  The rest are optional.
+	The first three arguments here are required.  The rest are optional.
 
 	{{flash
 		[url="file:the_movie.swf"]
@@ -38,18 +38,20 @@ extract([
 	'align'		=> '',
 ], EXTR_SKIP);
 
-$url = Ut::html($url);
-
 if (!$width)	$width	= 550;
 if (!$height)	$height	= 100;
 
 if (!$url)
 {
-	echo '<p><em>' . $this->_t('FlashNoURL') . "</em></p>\n";
+	$tpl->none = true;
 }
 else
 {
-	// echo '<video width="' . $width . '" height="' . $height . '" src="' . $url . '" controls>';
-	echo '<embed src="' . $url . '" width="' . $width . '" height="' . $height . '">';
-	// echo "</video>\n";
+	$tpl->enter('embed_');
+
+	$tpl->url		= $url;
+	$tpl->width		= (int) $width;
+	$tpl->height	= (int) $height;
+
+	$tpl->leave();
 }

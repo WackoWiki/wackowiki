@@ -22,10 +22,6 @@ $module[$_mode] = [
 ##########################################################
 function admin_tool_badbehavior(&$engine, &$module)
 {
-	// import passed variables and objects
-	$tables			= & $module['vars'][0];
-	$directories	= & $module['vars'][1];
-
 	if (!empty($engine->db->ext_bad_behavior))
 	{
 		require_once 'lib/bad_behavior/bad-behavior/responses.inc.php';
@@ -33,471 +29,471 @@ function admin_tool_badbehavior(&$engine, &$module)
 
 	#Ut::debug_print_r($_POST);
 
-function bb2_httpbl_lookup(&$engine, $ip)
-{
-	// NB: Many of these are defunct
-	$engines = [
-		1 => 'AltaVista',
-		2 => 'Teoma/Ask Crawler',
-		3 => 'Baidu Spide',
-		4 => 'Excite',
-		5 => 'Googlebot',
-		6 => 'Looksmart',
-		7 => 'Lycos',
-		8 => 'msnbot',
-		9 => 'Yahoo! Slurp',
-		10 => 'Twiceler',
-		11 => 'Infoseek',
-		12 => 'Minor Search Engine',
-	];
-
-	$settings		= bb2_read_settings();
-	$httpbl_key		= $settings['httpbl_key'];
-
-	if (!$httpbl_key) return false;
-
-	$r = $engine->sess->httpbl[$ip];
-	$d = '';
-
-	if (!$r)
+	function bb2_httpbl_lookup(&$engine, $ip)
 	{
-		// Lookup
-		$find		= implode('.', array_reverse(explode('.', $ip)));
-		$result		= gethostbynamel("${httpbl_key}.${find}.dnsbl.httpbl.org.");
+		// NB: Many of these are defunct
+		$engines = [
+			1 => 'AltaVista',
+			2 => 'Teoma/Ask Crawler',
+			3 => 'Baidu Spide',
+			4 => 'Excite',
+			5 => 'Googlebot',
+			6 => 'Looksmart',
+			7 => 'Lycos',
+			8 => 'msnbot',
+			9 => 'Yahoo! Slurp',
+			10 => 'Twiceler',
+			11 => 'Infoseek',
+			12 => 'Minor Search Engine',
+		];
 
-		if (!empty($result))
+		$settings		= bb2_read_settings();
+		$httpbl_key		= $settings['httpbl_key'];
+
+		if (!$httpbl_key) return false;
+
+		$r = $engine->sess->httpbl[$ip];
+		$d = '';
+
+		if (!$r)
 		{
-			$r = $result[0];
-			$engine->sess->httpbl[$ip] = $r;
-		}
-	}
+			// Lookup
+			$find		= implode('.', array_reverse(explode('.', $ip)));
+			$result		= gethostbynamel("${httpbl_key}.${find}.dnsbl.httpbl.org.");
 
-	if ($r)
-	{	// Interpret
-		$ip = explode('.', $r);
-
-		if ($ip[0] == 127)
-		{
-			if ($ip[3] == 0)
+			if (!empty($result))
 			{
-				if ($engines[$ip[2]])
-				{
-					$d .= $engines[$ip[2]];
-				}
-				else
-				{
-					$d .= "Search engine ${ip[2]}<br>\n";
-				}
-			}
-
-			if ($ip[3] & 1)
-			{
-				$d .= "Suspicious<br>\n";
-			}
-
-			if ($ip[3] & 2)
-			{
-				$d .= "Harvester<br>\n";
-			}
-
-			if ($ip[3] & 4)
-			{
-				$d .= "Comment Spammer<br>\n";
-			}
-
-			if ($ip[3] & 7)
-			{
-				$d .= "Threat level ${ip[2]}<br>\n";
-			}
-
-			if ($ip[3] > 0)
-			{
-				$d .= "Age ${ip[1]} days<br>\n";
+				$r = $result[0];
+				$engine->sess->httpbl[$ip] = $r;
 			}
 		}
+
+		if ($r)
+		{	// Interpret
+			$ip = explode('.', $r);
+
+			if ($ip[0] == 127)
+			{
+				if ($ip[3] == 0)
+				{
+					if ($engines[$ip[2]])
+					{
+						$d .= $engines[$ip[2]];
+					}
+					else
+					{
+						$d .= "Search engine ${ip[2]}<br>\n";
+					}
+				}
+
+				if ($ip[3] & 1)
+				{
+					$d .= "Suspicious<br>\n";
+				}
+
+				if ($ip[3] & 2)
+				{
+					$d .= "Harvester<br>\n";
+				}
+
+				if ($ip[3] & 4)
+				{
+					$d .= "Comment Spammer<br>\n";
+				}
+
+				if ($ip[3] & 7)
+				{
+					$d .= "Threat level ${ip[2]}<br>\n";
+				}
+
+				if ($ip[3] > 0)
+				{
+					$d .= "Age ${ip[1]} days<br>\n";
+				}
+			}
+		}
+
+		return $d;
 	}
 
-	return $d;
-}
+	function bb2_summary(&$engine)
+	{
+		$bb_table		= $engine->db->table_prefix . 'bad_behavior';
+		$settings		= bb2_read_settings();
+		$where			= '';
 
-function bb2_summary(&$engine)
-{
-	$bb_table		= $engine->db->table_prefix . 'bad_behavior';
-	$settings		= bb2_read_settings();
-	$where			= '';
+		echo $engine->form_open('bb2_manage', ['form_more' => 'setting=bb2_manage']);
+		?>
 
-	echo $engine->form_open('bb2_manage', ['form_more' => 'setting=bb2_manage']);
+		<div class="alignleft">
+		<?php echo Ut::perc_replace($engine->_t('BbStats'), '<strong>' . bb2_insert_stats(true) . '</strong>');?>
+		</div>
+		<?php
+		// select arguments
+		$arguments = [
+			'status_key',
+			'request_method',
+			#'ip',
+			#'user_agent',
+			'request_uri'
+		];
+
+		foreach ($arguments as $argument)
+		{
+			if ($argument == 'request_uri')
+			{
+				$additional_fields = 'request_uri_hash, ';
+			}
+			else
+			{
+				$additional_fields = '';
+			}
+
+			// Query the DB based on variables selected
+			$results = $engine->db->load_all(
+				"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n " .
+				"FROM " . $engine->db->table_prefix . "bad_behavior " .
+				"GROUP BY {$argument} " .
+				"ORDER BY n DESC " .
+				"LIMIT 10", true);
+
+		// Display rows to the user
+
+		?>
+		<table class="formation">
+			<colgroup>
+				<col span="1" style="width: 5%;">
+				<col span="1">
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col"><?php echo $engine->_t('BbHits');?></th>
+					<th scope="col"><?php echo $argument; ?></th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php
+			// all ip related host names
+
+			if ($results)
+			{
+				foreach ($results as $result)
+				{
+					echo '<tr id="request-' . '' . '" class="lined">' . "\n";
+					echo '<td class="label">' . $result['n'] . "</td>\n";
+					# echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
+
+					if ($argument == 'status_key')
+					{
+						$status_key	= bb2_get_response($result['group_type']);
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;status_key=' . $result['group_type'] . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+					}
+					else if ($argument == 'request_uri')
+					{
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					}
+					else
+					{
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					}
+
+					echo '<td>' . $link . "</td>\n";
+					echo "</tr>\n";
+				}
+			}
 	?>
-
-	<div class="alignleft">
-	<?php echo Ut::perc_replace($engine->_t('BbStats'), '<strong>' . bb2_insert_stats(true) . '</strong>');?>
-	</div>
+		</tbody>
+	</table>
 	<?php
-	// select arguments
-	$arguments = [
-		'status_key',
-		'request_method',
-		#'ip',
-		#'user_agent',
-		'request_uri'
-	];
+		}
+	}
 
-	foreach ($arguments as $argument)
+	function bb2_manage(&$engine)
 	{
-		if ($argument == 'request_uri')
-		{
-			$additional_fields = 'request_uri_hash, ';
-		}
-		else
-		{
-			$additional_fields = '';
-		}
+		$bb_table		= $engine->db->table_prefix . 'bad_behavior';
+		$settings		= bb2_read_settings();
+
+		$where			= '';
+
+		// entries to display
+		$limit = 100;
+
+		// Get query variables desired by the user with input validation
+		if (!empty($_GET['status_key']))			$where .= "AND `status_key`			= " . $engine->db->q($_GET['status_key']) . " ";
+		if (!empty($_GET['blocked']))				$where .= "AND `status_key` 		!= '00000000' ";
+		else if (!empty($_GET['permitted']))		$where .= "AND `status_key`			= '00000000' ";
+
+		if (!empty($_GET['ip']))					$where .= "AND `ip` 				= " . $engine->db->q($_GET['ip']) . " ";
+		if (!empty($_GET['user_agent']))			$where .= "AND `user_agent_hash`	= " . $engine->db->q($_GET['user_agent']) . " ";
+		if (!empty($_GET['request_method']))		$where .= "AND `request_method`		= " . $engine->db->q($_GET['request_method']) . " ";
+		if (!empty($_GET['request_uri']))			$where .= "AND `request_uri_hash`	= " . $engine->db->q($_GET['request_uri']) . " ";
+
+		// collecting data
+		$count = $engine->db->load_single(
+			"SELECT COUNT(log_id) AS n " .
+			"FROM " . $engine->db->table_prefix . "bad_behavior l " .
+			"WHERE 1=1 " . ( $where ?: '' ));
+
+		$key_pagination				= ($_GET['status_key']		?? '');
+		$blocked_pagination			= ($_GET['blocked']			?? '');
+		$permitted_pagination		= ($_GET['permitted']		?? '');
+		$ip_pagination				= ($_GET['ip']				?? '');
+		$user_agent_pagination		= ($_GET['user_agent']		?? '');
+		$request_method_pagination	= ($_GET['request_method']	?? '');
+		$request_uri_pagination		= ($_GET['request_uri']		?? '');
+
+		$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'tool_badbehavior', 'setting' => 'bb2_manage']
+									+ (!empty($blocked_pagination)			? ['blocked'		=> Ut::html($blocked_pagination)] : [])
+									+ (!empty($permitted_pagination)		? ['permitted'		=> Ut::html($permitted_pagination)] : [])
+									+ (!empty($key_pagination)				? ['status_key'		=> Ut::html($key_pagination)] : [])
+									+ (!empty($ip_pagination)				? ['ip'				=> Ut::html($ip_pagination)] : [])
+									+ (!empty($request_method_pagination)	? ['request_method'	=> Ut::html($request_method_pagination)] : [])
+									+ (!empty($request_uri_pagination)		? ['request_uri'	=> Ut::html($request_uri_pagination)] : [])
+									+ (!empty($user_agent_pagination)		? ['user_agent'		=> Ut::html($user_agent_pagination)] : []), '', 'admin.php');
 
 		// Query the DB based on variables selected
-		$results = $engine->db->load_all(
-			"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n " .
-			"FROM " . $engine->db->table_prefix . "bad_behavior " .
-			"GROUP BY {$argument} " .
-			"ORDER BY n DESC " .
-			"LIMIT 10", true);
 
-	// Display rows to the user
+		$totalcount		= $engine->db->load_single(
+			"SELECT COUNT(log_id) AS n " .
+			"FROM " . $engine->db->table_prefix . "bad_behavior l ");
 
-	?>
-	<table class="formation">
-		<colgroup>
-			<col span="1" style="width: 5%;">
-			<col span="1">
-		</colgroup>
-		<thead>
-			<tr>
-				<th scope="col"><?php echo $engine->_t('BbHits');?></th>
-				<th scope="col"><?php echo $argument; ?></th>
-			</tr>
-		</thead>
-		<tbody>
-	<?php
+		$results		= $engine->db->load_all(
+			"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key " .
+			"FROM `" . $bb_table . "` " .
+			"WHERE 1=1 " .
+			$where .
+			"ORDER BY `log_id` DESC " .
+			$pagination['limit']);
+
+		// Display rows to the user
+
+		echo $engine->form_open('bb2_manage');
+		?>
+
+		<div class="alignleft">
+		<?php
+		echo Ut::perc_replace($engine->_t('BbRecordsFiltered'), '<strong>' . $count['n'] . '</strong>', '<strong>' . $totalcount['n'] . '</strong>') . ':<br>';
+		echo $engine->_t('BbShow') . ' ';
+
+		if ($count['n'] < $totalcount['n'])
+		{
+			$link = '[<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>]';
+
+			if (!empty($_GET['status_key']))		echo '<strong>' . $engine->_t('BbStatus')		. '</strong> ' . $link . ' ';
+			if (!empty($_GET['blocked']))			echo '<strong>' . $engine->_t('BbBlocked')		. '</strong> ' . $link . ' ';
+			if (!empty($_GET['permitted']))			echo '<strong>' . $engine->_t('BbPermitted')	. '</strong> ' . $link . ' ';
+			if (!empty($_GET['ip']))				echo '<strong>' . $engine->_t('BbIP')			. '</strong> ' . $link . ' ';
+			if (!empty($_GET['user_agent']))		echo '<strong>' . $engine->_t('BbUserAgent')	. '</strong> ' . $link . ' ';
+			if (!empty($_GET['request_method']))	echo '<strong>' . $engine->_t('BbGetPost')		. '</strong> ' . $link . ' ';
+		}
+
+		if (!isset($_GET['status_key']))
+		{
+			if (!isset($_GET['blocked']))
+			{
+				echo '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'blocked' => 'true']) . '">' . $engine->_t('BbBlocked') . '</a> ';
+			}
+
+			if (!isset($_GET['permitted']))
+			{
+				echo ' <a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'permitted' => 'true']) . '">' . $engine->_t('BbPermitted') . '</a>';
+			}
+		}
+		?>
+		</div>
+
+		<?php
+				$engine->print_pagination($pagination);
+		?>
+		<table class="formation">
+			<thead>
+				<tr>
+					<th scope="col" class="check-column"></th>
+					<th scope="col"><?php echo $engine->_t('BbIPDateStatus');?></th>
+					<th scope="col"><?php echo $engine->_t('BbHeaders');?></th>
+					<th scope="col"><?php echo $engine->_t('BbEntity');?></th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php
 		// all ip related host names
-
 		if ($results)
 		{
 			foreach ($results as $result)
 			{
-				echo '<tr id="request-' . '' . '" class="lined">' . "\n";
-				echo '<td class="label">' . $result['n'] . "</td>\n";
-				# echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
+				$status_key = bb2_get_response($result['status_key']);
 
-				if ($argument == 'status_key')
+				echo '<tr id="request-' . $result['log_id'] . '" class="lined">' . "\n";
+				echo '<td scope="row" class="check-column label">' .
+						'<input type="checkbox" name="submit[]" value="' . $result['log_id'] . '">' .
+					'</td>' . "\n";
+
+				$httpbl	= bb2_httpbl_lookup($engine, $result['ip']);
+
+				// avoid redundant lookups
+				if (empty($result['host']))
 				{
-					$status_key	= bb2_get_response($result['group_type']);
-					$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;status_key=' . $result['group_type'] . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+					$host = @gethostbyaddr($result['ip']);
+					$engine->db->sql_query(
+						"UPDATE " . $engine->db->table_prefix . "bad_behavior SET " .
+							"host		= " . $engine->db->q($host) . " " .
+						"WHERE log_id	= " . (int) $result['log_id'] . " " .
+						"LIMIT 1");
 				}
-				else if ($argument == 'request_uri')
+
+				$host = $result['host'];
+
+				if (!strcmp($host, $result['ip']))
 				{
-					$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					$host = '';
 				}
 				else
 				{
-					$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+					$host .= "<br>\n";
 				}
 
-				echo '<td>' . $link . "</td>\n";
+				$time_tz = $engine->sql2precisetime($result['date']);
+
+				echo '<td>' .
+						'<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'ip' => $result['ip']]) . '">' . $result['ip'] . '</a><br>' .
+						$host . "<br>\n" .
+						$time_tz . '<br><br>' .
+						'<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'status_key' => $result['status_key']]) . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+
+				if ($httpbl)
+				{
+					echo "<br><br><a href=\"https://www.projecthoneypot.org/ip_{$result['ip']}\">http:BL</a>:<br>$httpbl\n";
+				}
+
+				echo "</td>\n";
+
+				$headers = str_replace("\n", "<br>\n", Ut::html($result['http_headers']));
+
+				if (@strpos($headers, $result['user_agent']) !== FALSE)
+				{
+					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;user_agent=' . rawurlencode($result['user_agent_hash']) . '">' . $result['user_agent'] . '</a>', strpos($headers, $result['user_agent']), strlen($result['user_agent']));
+				}
+
+				if (@strpos($headers, $result['request_method']) !== FALSE)
+				{
+					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;request_method=' . rawurlencode($result['request_method']) . '">' . $result['request_method'] . '</a>', strpos($headers, $result['request_method']), strlen($result['request_method']));
+				}
+
+				echo '<td>' . $headers . "</td>\n";
+				echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
 				echo "</tr>\n";
 			}
 		}
-?>
-	</tbody>
-</table>
-<?php
-	}
-}
-
-function bb2_manage(&$engine)
-{
-	$bb_table		= $engine->db->table_prefix . 'bad_behavior';
-	$settings		= bb2_read_settings();
-
-	$where			= '';
-
-	// entries to display
-	$limit = 100;
-
-	// Get query variables desired by the user with input validation
-	if (!empty($_GET['status_key']))			$where .= "AND `status_key`			= " . $engine->db->q($_GET['status_key']) . " ";
-	if (!empty($_GET['blocked']))				$where .= "AND `status_key` 		!= '00000000' ";
-	else if (!empty($_GET['permitted']))		$where .= "AND `status_key`			= '00000000' ";
-
-	if (!empty($_GET['ip']))					$where .= "AND `ip` 				= " . $engine->db->q($_GET['ip']) . " ";
-	if (!empty($_GET['user_agent']))			$where .= "AND `user_agent_hash`	= " . $engine->db->q($_GET['user_agent']) . " ";
-	if (!empty($_GET['request_method']))		$where .= "AND `request_method`		= " . $engine->db->q($_GET['request_method']) . " ";
-	if (!empty($_GET['request_uri']))			$where .= "AND `request_uri_hash`	= " . $engine->db->q($_GET['request_uri']) . " ";
-
-	// collecting data
-	$count = $engine->db->load_single(
-		"SELECT COUNT(log_id) AS n " .
-		"FROM " . $engine->db->table_prefix . "bad_behavior l " .
-		"WHERE 1=1 " . ( $where ?: '' ));
-
-	$key_pagination				= ($_GET['status_key']		?? '');
-	$blocked_pagination			= ($_GET['blocked']			?? '');
-	$permitted_pagination		= ($_GET['permitted']		?? '');
-	$ip_pagination				= ($_GET['ip']				?? '');
-	$user_agent_pagination		= ($_GET['user_agent']		?? '');
-	$request_method_pagination	= ($_GET['request_method']	?? '');
-	$request_uri_pagination		= ($_GET['request_uri']		?? '');
-
-	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'badbehavior', 'setting' => 'bb2_manage']
-								+ (!empty($blocked_pagination)			? ['blocked'		=> Ut::html($blocked_pagination)] : [])
-								+ (!empty($permitted_pagination)		? ['permitted'		=> Ut::html($permitted_pagination)] : [])
-								+ (!empty($key_pagination)				? ['status_key'		=> Ut::html($key_pagination)] : [])
-								+ (!empty($ip_pagination)				? ['ip'				=> Ut::html($ip_pagination)] : [])
-								+ (!empty($request_method_pagination)	? ['request_method'	=> Ut::html($request_method_pagination)] : [])
-								+ (!empty($request_uri_pagination)		? ['request_uri'	=> Ut::html($request_uri_pagination)] : [])
-								+ (!empty($user_agent_pagination)		? ['user_agent'		=> Ut::html($user_agent_pagination)] : []), '', 'admin.php');
-
-	// Query the DB based on variables selected
-
-	$totalcount		= $engine->db->load_single(
-		"SELECT COUNT(log_id) AS n " .
-		"FROM " . $engine->db->table_prefix . "bad_behavior l ");
-
-	$results		= $engine->db->load_all(
-		"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key " .
-		"FROM `" . $bb_table . "` " .
-		"WHERE 1=1 " .
-		$where .
-		"ORDER BY `log_id` DESC " .
-		$pagination['limit']);
-
-	// Display rows to the user
-
-	echo $engine->form_open('bb2_manage');
 	?>
+		</tbody>
+	</table>
 
-	<div class="alignleft">
 	<?php
-	echo Ut::perc_replace($engine->_t('BbRecordsFiltered'), '<strong>' . $count['n'] . '</strong>', '<strong>' . $totalcount['n'] . '</strong>') . ':<br>';
-	echo $engine->_t('BbShow') . ' ';
+		$engine->print_pagination($pagination);
 
-	if ($count['n'] < $totalcount['n'])
-	{
-		$link = '[<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>]';
-
-		if (!empty($_GET['status_key']))		echo '<strong>' . $engine->_t('BbStatus')		. '</strong> ' . $link . ' ';
-		if (!empty($_GET['blocked']))			echo '<strong>' . $engine->_t('BbBlocked')		. '</strong> ' . $link . ' ';
-		if (!empty($_GET['permitted']))			echo '<strong>' . $engine->_t('BbPermitted')	. '</strong> ' . $link . ' ';
-		if (!empty($_GET['ip']))				echo '<strong>' . $engine->_t('BbIP')			. '</strong> ' . $link . ' ';
-		if (!empty($_GET['user_agent']))		echo '<strong>' . $engine->_t('BbUserAgent')	. '</strong> ' . $link . ' ';
-		if (!empty($_GET['request_method']))	echo '<strong>' . $engine->_t('BbGetPost')		. '</strong> ' . $link . ' ';
+		echo $engine->form_close();
 	}
 
-	if (!isset($_GET['status_key']))
+	function bb2_whitelist(&$engine)
 	{
-		if (!isset($_GET['blocked']))
+		$whitelists = bb2_read_whitelist();
+
+		if (empty($whitelists))
 		{
-			echo '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'blocked' => 'true']) . '">' . $engine->_t('BbBlocked') . '</a> ';
+			$whitelists					= [];
+			$whitelists['ip']			= [];
+			$whitelists['url']			= [];
+			$whitelists['useragent']	= [];
 		}
 
-		if (!isset($_GET['permitted']))
+		if ($_POST)
 		{
-			echo ' <a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'permitted' => 'true']) . '">' . $engine->_t('BbPermitted') . '</a>';
-		}
-	}
-	?>
-	</div>
+			#$_POST = array_map('stripslashes_deep', $_POST);
 
-	<?php
-			$engine->print_pagination($pagination);
-	?>
-	<table class="formation">
-		<thead>
-			<tr>
-				<th scope="col" class="check-column"></th>
-				<th scope="col"><?php echo $engine->_t('BbIPDateStatus');?></th>
-				<th scope="col"><?php echo $engine->_t('BbHeaders');?></th>
-				<th scope="col"><?php echo $engine->_t('BbEntity');?></th>
-			</tr>
-		</thead>
-		<tbody>
-	<?php
-	// all ip related host names
-	if ($results)
-	{
-		foreach ($results as $result)
-		{
-			$status_key = bb2_get_response($result['status_key']);
-
-			echo '<tr id="request-' . $result['log_id'] . '" class="lined">' . "\n";
-			echo '<td scope="row" class="check-column label">' .
-					'<input type="checkbox" name="submit[]" value="' . $result['log_id'] . '">' .
-				'</td>' . "\n";
-
-			$httpbl	= bb2_httpbl_lookup($engine, $result['ip']);
-
-			// avoid redundant lookups
-			if (empty($result['host']))
+			if ($_POST['ip'])
 			{
-				$host = @gethostbyaddr($result['ip']);
-				$engine->db->sql_query(
-					"UPDATE " . $engine->db->table_prefix . "bad_behavior SET " .
-						"host		= " . $engine->db->q($host) . " " .
-					"WHERE log_id	= " . (int) $result['log_id'] . " " .
-					"LIMIT 1");
-			}
-
-			$host = $result['host'];
-
-			if (!strcmp($host, $result['ip']))
-			{
-				$host = '';
+				$whitelists['ip'] = array_filter(preg_split("/\s+/m", $_POST['ip']));
 			}
 			else
 			{
-				$host .= "<br>\n";
+				$whitelists['ip'] = [];
 			}
 
-			$time_tz = $engine->sql2precisetime($result['date']);
-
-			echo '<td>' .
-					'<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'ip' => $result['ip']]) . '">' . $result['ip'] . '</a><br>' .
-					$host . "<br>\n" .
-					$time_tz . '<br><br>' .
-					'<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'status_key' => $result['status_key']]) . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
-
-			if ($httpbl)
+			if ($_POST['url'])
 			{
-				echo "<br><br><a href=\"https://www.projecthoneypot.org/ip_{$result['ip']}\">http:BL</a>:<br>$httpbl\n";
+				$whitelists['url'] = array_filter(preg_split("/\s+/m", $_POST['url']));
 			}
-
-			echo "</td>\n";
-
-			$headers = str_replace("\n", "<br>\n", Ut::html($result['http_headers']));
-
-			if (@strpos($headers, $result['user_agent']) !== FALSE)
+			else
 			{
-				$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;user_agent=' . rawurlencode($result['user_agent_hash']) . '">' . $result['user_agent'] . '</a>', strpos($headers, $result['user_agent']), strlen($result['user_agent']));
+				$whitelists['url'] = [];
 			}
 
-			if (@strpos($headers, $result['request_method']) !== FALSE)
+			if ($_POST['useragent'])
 			{
-				$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;request_method=' . rawurlencode($result['request_method']) . '">' . $result['request_method'] . '</a>', strpos($headers, $result['request_method']), strlen($result['request_method']));
+				$whitelists['useragent'] = array_filter(preg_split("/[\r\n]+/m", $_POST['useragent']));
+			}
+			else
+			{
+				$whitelists['useragent'] = [];
 			}
 
-			echo '<td>' . $headers . "</td>\n";
-			echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
-			echo "</tr>\n";
-		}
-	}
-?>
-	</tbody>
-</table>
-
-<?php
-	$engine->print_pagination($pagination);
-
-	echo $engine->form_close();
-}
-
-function bb2_whitelist(&$engine)
-{
-	$whitelists = bb2_read_whitelist();
-
-	if (empty($whitelists))
-	{
-		$whitelists					= [];
-		$whitelists['ip']			= [];
-		$whitelists['url']			= [];
-		$whitelists['useragent']	= [];
-	}
-
-	if ($_POST)
-	{
-		#$_POST = array_map('stripslashes_deep', $_POST);
-
-		if ($_POST['ip'])
-		{
-			$whitelists['ip'] = array_filter(preg_split("/\s+/m", $_POST['ip']));
-		}
-		else
-		{
-			$whitelists['ip'] = [];
+			update_option('bad_behavior_whitelist', $whitelists);
+		?>
+		<div id="message" class="updated fade"><p><strong><?php echo $engine->_t('BbOptionsSaved');?></strong></p></div>
+		<?php
 		}
 
-		if ($_POST['url'])
-		{
-			$whitelists['url'] = array_filter(preg_split("/\s+/m", $_POST['url']));
-		}
-		else
-		{
-			$whitelists['url'] = [];
-		}
+		echo $engine->form_open('bb2_whitelist', ['form_more' => 'setting=bb2_whitelist']);
+		?>
+		<p><?php echo $engine->_t('BbWhitelistHint');?></p>
 
-		if ($_POST['useragent'])
-		{
-			$whitelists['useragent'] = array_filter(preg_split("/[\r\n]+/m", $_POST['useragent']));
-		}
-		else
-		{
-			$whitelists['useragent'] = [];
-		}
+		<table class="formation">
+			<tr>
+				<th colspan="2">
+					<br>
+					<?php echo $engine->_t('BbWhitelist');?>
+				</th>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="whitelists_ip"><strong><?php echo $engine->_t('BbIPAddress');?>:</strong><br>
+					<small><?php echo $engine->_t('BbIPAddressInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="24" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="whitelists_url"><strong><?php echo $engine->_t('BbURL');?>:</strong><br>
+					<small><?php echo $engine->_t('BbURLInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="48" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="whitelists_useragent"><strong><?php echo $engine->_t('BbUserAgent');?>:</strong><br>
+					<small><?php echo $engine->_t('BbUserAgentInfo');?></small></label>
+				</td>
+				<td>
+					<textarea cols="48" rows="6" id="whitelists_useragent" name="useragent"><?php echo implode("\n", $whitelists['useragent']); ?></textarea>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?>"></div>
 
-		update_option('bad_behavior_whitelist', $whitelists);
-	?>
-	<div id="message" class="updated fade"><p><strong><?php echo $engine->_t('BbOptionsSaved');?></strong></p></div>
 	<?php
+		echo $engine->form_close();
 	}
-
-	echo $engine->form_open('bb2_whitelist', ['form_more' => 'setting=bb2_whitelist']);
-	?>
-	<p><?php echo $engine->_t('BbWhitelistHint');?></p>
-
-	<table class="formation">
-		<tr>
-			<th colspan="2">
-				<br>
-				<?php echo $engine->_t('BbWhitelist');?>
-			</th>
-		</tr>
-		<tr class="hl-setting">
-			<td class="label">
-				<label for="whitelists_ip"><strong><?php echo $engine->_t('BbIPAddress');?>:</strong><br>
-				<small><?php echo $engine->_t('BbIPAddressInfo');?></small></label>
-			</td>
-			<td>
-				<textarea cols="24" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea>
-			</td>
-		</tr>
-		<tr class="lined">
-			<td colspan="2"></td>
-		</tr>
-		<tr class="hl-setting">
-			<td class="label">
-				<label for="whitelists_url"><strong><?php echo $engine->_t('BbURL');?>:</strong><br>
-				<small><?php echo $engine->_t('BbURLInfo');?></small></label>
-			</td>
-			<td>
-				<textarea cols="48" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea>
-			</td>
-		</tr>
-		<tr class="lined">
-			<td colspan="2"></td>
-		</tr>
-		<tr class="hl-setting">
-			<td class="label">
-				<label for="whitelists_useragent"><strong><?php echo $engine->_t('BbUserAgent');?>:</strong><br>
-				<small><?php echo $engine->_t('BbUserAgentInfo');?></small></label>
-			</td>
-			<td>
-				<textarea cols="48" rows="6" id="whitelists_useragent" name="useragent"><?php echo implode("\n", $whitelists['useragent']); ?></textarea>
-			</td>
-		</tr>
-	</table>
-	<br>
-	<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('FormUpdate');?>"></div>
-
-<?php
-	echo $engine->form_close();
-}
 
 function bb2_options(&$engine)
 {
@@ -935,4 +931,3 @@ function bb2_options(&$engine)
 		echo $engine->form_close();
 	}
 }
-
