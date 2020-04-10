@@ -146,6 +146,12 @@ $ap_translation = [
 		'title'		=> 'Newly deleted content',
 	],
 
+	// Menu module
+	'content_menu'		=> [
+		'name'		=> 'Menu',
+		'title'		=> 'Add, edit or remove default menu items',
+	],
+
 	// Polls module
 	'content_polls'		=> [
 		'name'		=> 'Polls',
