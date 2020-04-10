@@ -197,43 +197,66 @@ if (time() - $engine->sess->ap_created > $session_length)
 ########################################################
 ##     Include admin modules and common functions     ##
 ########################################################
+$mode	= $_REQUEST['mode'] ?? null;
+$files	= Ut::file_glob('admin/{common,module}/*.php');
 
-foreach (Ut::file_glob('admin/{common,module}/*.php') as $file_name)
+if (!isset($engine->sess->ap_module))
 {
-	include $file_name;
+	foreach ($files as $file_name)
+	{
+		include $file_name;
+	}
+}
+else if (isset($mode) && in_array('admin/module/' . $mode . '.php', $files))
+{
+	include 'admin/common/database.php';
+	include 'admin/module/' . $mode . '.php';
+}
+else
+{
+	include 'admin/module/main.php';
 }
 
 ########################################################
 ##     Build menu                                     ##
 ########################################################
 
+if (isset($engine->sess->ap_module))
+{
+	$module = $engine->sess->ap_module;
+}
+else
+{
+	uasort($module,
+		function($a, $b)
+		{
+			if ((array) $a['order'] < (array) $b['order'])
+			{
+				return -1;
+			}
+			else if ((array) $a['order'] > (array) $b['order'])
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+	);
+
+	$engine->sess->ap_module = $module;
+}
+
 // add main page to menu
-$menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['main']['cat']].
-			(isset($_REQUEST['mode']) && $_REQUEST['mode'] == 'main' || (!$_GET && !$_POST)
+$menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['main']['cat']] .
+			($mode == 'main' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
 				: "\n<ul>\n<li>") .
 			'<a href="' . $engine->href() . '" title="' . $module['main']['title'] . '">' . $module['main']['name'] . '</a>' .
 			"</li>\n";
 
 $category = $module['main']['cat'];
-
-uasort($module,
-	function($a, $b)
-	{
-		if ((array) $a['order'] < (array) $b['order'])
-		{
-			return -1;
-		}
-		else if ((array) $a['order'] > (array) $b['order'])
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
-	}
-);
 
 // append modules to menu
 foreach ($module as $row)
@@ -246,7 +269,7 @@ foreach ($module as $row)
 				? "</ul>\n</li>\n" . '<li class="text submenu2">' . $engine->_t('CategoryArray')[$row['cat']] . "<ul>\n"
 				: '');
 
-			if (isset($_REQUEST['mode']) && $_REQUEST['mode'] == $row['mode'])
+			if ($mode == $row['mode'])
 			{
 				$menu .= '<li class="active">';
 				$_title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $row['name'];
@@ -365,10 +388,8 @@ $engine->output_messages();
 
 <?php
 
-if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
+if (isset($mode) === true && ($_GET || $_POST))
 {
-	$mode = $_REQUEST['mode'];
-
 	if (function_exists('admin_' . $mode) === true)
 	{
 		// page context
@@ -378,7 +399,7 @@ if (isset($_REQUEST['mode']) === true && ($_GET || $_POST))
 
 		// module run
 		$exec = 'admin_' . $mode;
-		$exec($engine, $module[$mode]);
+		$exec($engine, $module[$mode], $tables, $directories);
 
 		$engine->current_context--;
 	}

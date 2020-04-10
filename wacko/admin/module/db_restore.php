@@ -17,12 +17,11 @@ $module[$_mode] = [
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Restore
 		'title'	=> $engine->_t($_mode)['title'],	// Restoring backup data
-		'vars'	=> [&$tables, &$directories],
 	];
 
 ##########################################################
 
-function admin_db_restore(&$engine, &$module)
+function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 {
 
 //$dir = $engine->db->upload_path_backup.'/2007_06_27_20_53_bd57f009381325efff2d684d4c2fbd54';
@@ -42,8 +41,8 @@ function admin_db_restore(&$engine, &$module)
 #Ut::debug_print_r($_REQUEST);
 
 	// import passed variables and objects
-	$tables			= & $module['vars'][0];
-	$directories	= & $module['vars'][1];
+	$tables			= & $tables;
+	$directories	= & $directories;
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>

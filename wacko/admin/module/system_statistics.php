@@ -17,19 +17,18 @@ $module[$_mode] = [
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Statistics
 		'title'	=> $engine->_t($_mode)['title'],	// Show statistics
-		'vars'	=> [&$tables, &$directories],
 	];
 
 ##########################################################
 
-function admin_system_statistics(&$engine, &$module)
+function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 {
 	$order = '';
 	$error = '';
 
 	// import passed variables and objects
-	$tables			= & $module['vars'][0];
-	$directories	= & $module['vars'][1];
+	$tables			= & $tables;
+	$directories	= & $directories;
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>

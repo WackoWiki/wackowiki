@@ -17,17 +17,16 @@ $module[$_mode] = [
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Repair
 		'title'	=> $engine->_t($_mode)['title'],	// Repair and Optimize Database
-		'vars'	=> [&$tables, &$directories],
 	];
 
 ##########################################################
 
-function admin_db_repair(&$engine, &$module)
+function admin_db_repair(&$engine, &$module, &$tables)
 {
 	$check = '';
 
 	// import passed variables and objects
-	$tables			= & $module['vars'][0];
+	$tables			= & $tables;
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>

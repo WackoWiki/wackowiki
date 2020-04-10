@@ -17,15 +17,14 @@ $module[$_mode] = [
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Convert
 		'title'	=> $engine->_t($_mode)['title'],	// Converting Tables or Columns
-		'vars'	=> [&$tables],
 ];
 
 ##########################################################
 
-function admin_db_convert(&$engine, &$module)
+function admin_db_convert(&$engine, &$module, &$tables)
 {
 	// import passed variables and objects
-	$tables	= & $module['vars'][0];
+	$tables	= & $tables;
 
 	$scheme		= [];
 	$getstr		= '';

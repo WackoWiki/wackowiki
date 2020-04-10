@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Bad Behavior										##
 ##########################################################
-$_mode = 'badbehavior';
+$_mode = 'tool_badbehavior';
 
 $module[$_mode] = [
 		'order'	=> 800,
@@ -20,7 +20,7 @@ $module[$_mode] = [
 	];
 
 ##########################################################
-function admin_badbehavior(&$engine, &$module)
+function admin_tool_badbehavior(&$engine, &$module)
 {
 	// import passed variables and objects
 	$tables			= & $module['vars'][0];

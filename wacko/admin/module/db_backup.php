@@ -17,16 +17,15 @@ $module[$_mode] = [
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Backup
 		'title'	=> $engine->_t($_mode)['title'],	// Backing up data
-		'vars'	=> [&$tables, &$directories],
 	];
 
 ##########################################################
 
-function admin_db_backup(&$engine, &$module)
+function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 {
 	// import passed variables and objects
-	$tables			= & $module['vars'][0];
-	$directories	= & $module['vars'][1];
+	$tables			= & $tables;
+	$directories	= & $directories;
 
 	$scheme			= [];
 

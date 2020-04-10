@@ -231,7 +231,7 @@ $ap_translation = [
 	],
 
 	// Bad Behavior module
-	'badbehavior'		=> [
+	'tool_badbehavior'		=> [
 		'name'		=> 'Плохое поведение',
 		'title'		=> 'Подозрительная активность',
 	],
