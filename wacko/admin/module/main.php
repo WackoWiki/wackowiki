@@ -17,16 +17,12 @@ $module[$_mode] = [
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Main Menu
 		'title'	=> $engine->_t($_mode)['title'],	// WackoWiki Administration
-		'objs'	=> [&$config],
 	];
 
 ##########################################################
 
 function admin_main(&$engine, &$module)
 {
-	// import passed variables and objects
-	$config			= & $module['objs'][0];
-
 	// (un)lock website
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
 	{
@@ -57,8 +53,8 @@ function admin_main(&$engine, &$module)
 	<input type="hidden" name="action" value="lock">
 	<table style="max-width: 200px;" class="formation">
 		<tr class="hl-setting">
-			<td class="label" style="white-space:nowrap;"><?php echo ($config->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
-			<td class="t-center"><input type="submit" id="submit" value="<?php echo ($config->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>"></td>
+			<td class="label" style="white-space:nowrap;"><?php echo ($engine->db->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
+			<td class="t-center"><input type="submit" id="submit" value="<?php echo ($engine->db->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?>"></td>
 		</tr>
 	</table>
 <?php

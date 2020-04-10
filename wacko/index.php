@@ -54,7 +54,6 @@ switch ($route['route'])
 		$http->terminate();
 
 	case 'admin':
-		$config = & $db;
 		include 'admin/admin.php';
 		break;
 

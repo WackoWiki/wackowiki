@@ -17,7 +17,6 @@ $module[$_mode] = [
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Bad Behavior
 		'title'	=> $engine->_t($_mode)['title'],	// Bad Behavior
-		'vars'	=> [&$tables, &$directories],
 	];
 
 ##########################################################
