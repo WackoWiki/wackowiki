@@ -82,8 +82,8 @@ if ($registered
 					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_tag . '"}}', $this->_t('RedirectedTo') . ' ' . $new_tag))
 					{
 						$log->log_n_l_message = Ut::perc_replace($this->_t('RedirectCreated'), $this->link('/' . $this->tag));
-
-						$this->set_noindex($this->page['page_id']);
+						// TODO: clone and set ACLs
+						$this->set_noindex($this->get_page_id($this->tag));
 					}
 
 					$this->clear_cache_wanted_page($this->tag);
@@ -259,8 +259,8 @@ function move(&$engine, $old_page, $new_tag, $log)
 					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_tag . '"}}', $engine->_t('RedirectedTo') . ' ' . $new_tag))
 					{
 						$log->log_n_l_message = Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link('/' . $old_page['tag']));
-
-						$engine->set_noindex($old_page['page_id']);
+						// TODO: clone and set ACLs
+						$engine->set_noindex($engine->get_page_id($old_page['tag']));
 					}
 
 					$engine->clear_cache_wanted_page($old_page['tag']);

@@ -7202,6 +7202,15 @@ class Wacko
 				"WHERE tag		= " . $this->db->q($tag) . " ");
 	}
 
+	function set_noindex($page_id)
+	{
+		return $this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "page SET " .
+				"noindex	= 1 " .
+			"WHERE page_id = " . (int) $page_id . " " .
+			"LIMIT 1");
+	}
+
 	// REMOVALS
 	function remove_acls($tag, $cluster = false) : bool
 	{
