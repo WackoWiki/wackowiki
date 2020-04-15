@@ -64,7 +64,7 @@ else
 	{
 		// extract the name of the graph (second string in first line)
 		$gname		= file ("$tmpname.dot");
-		$gname		= split(' ', $gname[0]);
+		$gname		= explode(' ', $gname[0]);
 		$gname		= strtolower($gname[1]);
 		// the basename is generated in the same way like the upload-handler do this
 		$fname		= $GraphVizSettings['filedir'] . '/@' . $this->get_page_id() . '@' . $gname;
