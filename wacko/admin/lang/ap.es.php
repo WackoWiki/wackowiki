@@ -844,7 +844,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> 'Configuración de carga actualizada',
 
 	'RightToUpload'				=> 'Derecho a cargar archivos',
-	'RightToUploadInfo'			=> '<code>admins</code> means that only users belongig to admins group can upload the files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
+	'RightToUploadInfo'			=> '<code>admins</code> means that only users belonging to the admins group can upload  files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
 	'UploadOnlyImages'			=> 'Permitir sólo la carga de imágenes',
 	'UploadOnlyImagesInfo'		=> 'Permitir sólo la carga de archivos de imagen en la página.',
 	'FileUploads'				=> 'Carga de archivos',

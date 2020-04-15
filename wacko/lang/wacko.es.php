@@ -92,7 +92,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'Nombre de usuario o contraseña incorrecta.',
 	'WelcomeBack'				=> 'Bienvenido de nuevo, %1',
-	'LoginAttemtsExceeded'		=> 'Ha excedido el número máximo permitido de intentos de identificarse.<br>Además de su nombre de usuario y contraseña ahora deberá introducir el código de confirmación de la imagen que ve debajo.',
+	'LoginAttemptsExceeded'		=> 'Ha excedido el número máximo permitido de intentos de identificarse.<br>Además de su nombre de usuario y contraseña ahora deberá introducir el código de confirmación de la imagen que ve debajo.',
 
 	// session notice
 	'IPAddressChanged'			=> 'Dirección IP cambiado a %1 (antes %2)',
@@ -237,7 +237,7 @@ $wacko_translation = [
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
-	'AccessPrivat'				=> 'private',
+	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
 	// purge handler

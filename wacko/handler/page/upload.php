@@ -132,7 +132,7 @@ if (isset($_POST['upload']) & $can_upload)
 			$name	= Ut::normalize($name);
 			$name	= preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', '', $name);
 
-			// here would be place for translit
+			// here would be place for transliteration
 			if ($this->db->upload_translit)
 			{
 				$t_name	= Ut::translit($name);

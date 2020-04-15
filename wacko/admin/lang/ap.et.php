@@ -368,7 +368,7 @@ $ap_translation = [
 	'LogoDimensions'			=> 'Logo dimensions',
 	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
 	'LogoDisplayMode'			=> 'Logo display mode',
-	'LogoDisplayModeInfo'		=> 'Defines the apearence of the Logo. Default is off.',
+	'LogoDisplayModeInfo'		=> 'Defines the appearance of the Logo. Default is off.',
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site Favicon',
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
@@ -844,7 +844,7 @@ $ap_translation = [
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
-	'RightToUploadInfo'			=> '<code>admins</code> means that only users belongig to admins group can upload the files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
+	'RightToUploadInfo'			=> '<code>admins</code> means that only users belonging to the admins group can upload  files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
 	'UploadOnlyImages'			=> 'Allow only upload of images',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',

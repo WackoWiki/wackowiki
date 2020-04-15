@@ -92,7 +92,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'Wprowadzona nazwa użytkownika lub hasło są nieważne.',
 	'WelcomeBack'				=> 'Witamy spowrotem, %1',
-	'LoginAttemtsExceeded'		=> 'Przekroczyłeś/aś limit błędnych prób zalogowania.<br>Teraz, aby się zalogować, musisz dodatkowo przepisać kod z poniższego obrazka.',
+	'LoginAttemptsExceeded'		=> 'Przekroczyłeś/aś limit błędnych prób zalogowania.<br>Teraz, aby się zalogować, musisz dodatkowo przepisać kod z poniższego obrazka.',
 
 	// session notice
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
@@ -237,7 +237,7 @@ $wacko_translation = [
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
-	'AccessPrivat'				=> 'private',
+	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
 	// purge handler

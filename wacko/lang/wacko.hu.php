@@ -92,7 +92,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'Sajnáljuk, az azonosító vagy a jelszó nem jó.',
 	'WelcomeBack'				=> 'Welcome back, %1',
-	'LoginAttemtsExceeded'		=> 'You exceeded the maximum allowed number of login attempts.<br>In addition to your username and password you now also have to solve the CAPTCHA below.',
+	'LoginAttemptsExceeded'		=> 'You exceeded the maximum allowed number of login attempts.<br>In addition to your username and password you now also have to solve the CAPTCHA below.',
 
 	// session notice
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
@@ -237,7 +237,7 @@ $wacko_translation = [
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
-	'AccessPrivat'				=> 'private',
+	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
 	// purge handler

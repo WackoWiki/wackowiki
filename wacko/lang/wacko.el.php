@@ -92,7 +92,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'Το όνομα χρήστη ή ο κωδικός πρόσβασης που έχετε εισάγει δεν είναι έγκυρος.',
 	'WelcomeBack'				=> 'Καλως ορισες πισω, %1',
-	'LoginAttemtsExceeded'		=> 'Έχετε υπερβεί το μέγιστο αριθμό προσπαθειών σύνδεσης.<br>Εκτός από το όνομα μέλους και τον κωδικό πρόσβασης σας τώρα επίσης πρέπει να εισαγάγετε και τον κώδικα επιβεβαίωσης από την εικόνα που βλέπετε ποιο κάτω.',
+	'LoginAttemptsExceeded'		=> 'Έχετε υπερβεί το μέγιστο αριθμό προσπαθειών σύνδεσης.<br>Εκτός από το όνομα μέλους και τον κωδικό πρόσβασης σας τώρα επίσης πρέπει να εισαγάγετε και τον κώδικα επιβεβαίωσης από την εικόνα που βλέπετε ποιο κάτω.',
 
 	// session notice
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
@@ -237,7 +237,7 @@ $wacko_translation = [
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
-	'AccessPrivat'				=> 'private',
+	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
 	// purge handler

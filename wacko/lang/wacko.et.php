@@ -92,7 +92,7 @@ $wacko_translation = [
 
 	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
 	'WelcomeBack'				=> 'Welcome back, %1',
-	'LoginAttemtsExceeded'		=> 'Sa ületasid sisselogimiskatsete arvu.<br>Lisaks kasutajanimele ja paroolile pead nüüd ka sisestama kinnituskoodi, mida näed all.',
+	'LoginAttemptsExceeded'		=> 'Sa ületasid sisselogimiskatsete arvu.<br>Lisaks kasutajanimele ja paroolile pead nüüd ka sisestama kinnituskoodi, mida näed all.',
 
 	// session notice
 	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
@@ -237,7 +237,7 @@ $wacko_translation = [
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
-	'AccessPrivat'				=> 'private',
+	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
 	// purge handler

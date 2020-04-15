@@ -6142,7 +6142,7 @@ class Wacko
 			'denied'		=> 'AccessDenied',
 			'public'		=> 'AccessPublic',
 			'registered'	=> 'AccessRegistered',
-			'privat'		=> 'AccessPrivat',
+			'privat'		=> 'AccessPrivate',
 			'custom'		=> 'AccessCustom',
 		];
 

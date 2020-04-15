@@ -242,7 +242,7 @@ if ($this->is_admin())
 			}
 			else if ($this->db->database_charset == 'latin2')	// Latin2	(iso-8859-2)
 			{
-				$_lang_set = "'bg', 'da', 'de', 'el', 'en', 'es', 'et', 'fr', 'it', 'nl', 'pt', 'ru'";;
+				$_lang_set = "'bg', 'da', 'de', 'el', 'en', 'es', 'et', 'fr', 'it', 'nl', 'pt', 'ru'";
 			}
 			else if ($this->db->database_charset == 'cp1251')	// Kyrillic	(windows-1251)
 			{

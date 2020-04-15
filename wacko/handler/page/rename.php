@@ -82,7 +82,7 @@ if ($registered
 					if ($this->save_page($this->tag, '', '{{redirect page="/' . $new_tag . '"}}', $this->_t('RedirectedTo') . ' ' . $new_tag))
 					{
 						$log->log_n_l_message = Ut::perc_replace($this->_t('RedirectCreated'), $this->link('/' . $this->tag));
-						// TODO: clone and set ACLs
+						// TODO: clone and set ACLs for non-public pages
 						$this->set_noindex($this->get_page_id($this->tag));
 					}
 
@@ -259,7 +259,7 @@ function move(&$engine, $old_page, $new_tag, $log)
 					if ($engine->save_page($old_page['tag'], '', '{{redirect page="/' . $new_tag . '"}}', $engine->_t('RedirectedTo') . ' ' . $new_tag))
 					{
 						$log->log_n_l_message = Ut::perc_replace($engine->_t('RedirectCreated'), $engine->link('/' . $old_page['tag']));
-						// TODO: clone and set ACLs
+						// TODO: clone and set ACLs for non-public pages
 						$engine->set_noindex($engine->get_page_id($old_page['tag']));
 					}
 
