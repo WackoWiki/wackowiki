@@ -6,11 +6,11 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	Flash Action
+	Embed Action
 
 	The first three arguments here are required.  The rest are optional.
 
-	{{flash
+	{{embed
 		[url="file:the_movie.swf"]
 		[width="100"]
 		[height="100"]
