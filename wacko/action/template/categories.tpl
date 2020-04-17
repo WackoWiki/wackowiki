@@ -7,9 +7,11 @@
 				</p>
 		=]
 		<ol>
-			<li>
-				[ '' l link '' ]
-			</li>
+			[= l _ =
+				<li>
+					<a href="[ ' href ' ]"  title="[ ' title | e attr ' ]" class="tag" rel="tag">[ ' category | e ' ]</a>
+				</li>
+			=]
 		</ol>
 	=]
 
