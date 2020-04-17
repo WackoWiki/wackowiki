@@ -986,7 +986,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Vorschaubild Zwischenspeicher',
 
 	// Flash
-	'FlashNoURL'				=> 'Bitte gib eine Flashdatei mit dem Parameter url an. (z.B. {{flash url="file:the_movie.swf"}} )',
+	'EmbedNoURL'				=> 'Bitte gib die Adresse der Ressource mit dem Parameter url an. (z.B. {{embed url="file:the_movie.swf"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Titel',

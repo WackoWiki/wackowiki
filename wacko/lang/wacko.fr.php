@@ -986,7 +986,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Cache de vignette',
 
 	// Flash
-	'FlashNoURL'				=> 'Merci de spécifier un fichier Flash avec l’url en paramètre (p.ex. {{flash url="file:le_film.swf"}} )',
+	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="file:le_film.swf"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Titre du flux',

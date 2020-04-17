@@ -988,7 +988,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Кэш миниатюр Thumbnails',
 
 	// Flash
-	'FlashNoURL'				=> 'Пожалуйста, укажите адрес Flash-файла с помощью параметра url, например, {{flash url="file:the_movie.swf"}}',
+	'EmbedNoURL'				=> 'Пожалуйста, укажите адрес ресурса с помощью параметра url, например, {{embed url="file:the_movie.swf"}}',
 
 	// Feed
 	'FeedTitle'					=> 'Заголовок канала новостей',

@@ -986,7 +986,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Flash
-	'FlashNoURL'				=> 'Please specify a Flash file with the Parameter url. (e.g. {{flash url="file:the_movie.swf"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
