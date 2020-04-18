@@ -1842,6 +1842,9 @@ li.m-clone img {
 li.m-edit img {
 	background: url('./../icon/edit.svg') no-repeat;
 }
+li.m-languages img {
+	background: url('./../icon/languages.svg') no-repeat;
+}
 li.m-referrers img {
 	background: url('./../icon/link.svg') no-repeat;
 }
@@ -2052,6 +2055,13 @@ li.m-source img {
 }
 .btn-tag {
 	background: url('./../icon/tag.svg') no-repeat;
+	background-size: 16px 16px;
+	height: 16px;
+	width: 16px;
+	display: inline-block;
+}
+.btn-languages {
+	background: url('./../icon/languages.svg') no-repeat;
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
