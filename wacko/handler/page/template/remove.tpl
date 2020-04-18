@@ -25,6 +25,8 @@
 		=]
 		[ ' backlinks ' ]
 		<br>
+		[ ' tree ' ]
+		<br>
 		[ ' warning ' ]<br>
 		<form action="[ ' href: remove ' ]" method="post" name="remove_page">
 			[ ' csrf: remove_page ' ]

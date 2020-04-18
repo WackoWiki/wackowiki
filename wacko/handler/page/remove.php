@@ -227,6 +227,8 @@ if ($this->is_admin()
 
 		$tpl->f_warning		= $this->show_message($message, 'warning', false);
 		$tpl->f_backlinks	= $this->action('backlinks', ['nomark' => 0]);
+		// show sub-pages
+		$tpl->f_tree		= $this->action('tree', ['depth' => 3]);
 
 		// admin privileged removal options
 		if ($this->is_admin())
