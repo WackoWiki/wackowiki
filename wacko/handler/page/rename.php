@@ -151,7 +151,7 @@ if ($registered
 				// show sub-pages
 				$tpl->tree		= $this->action('tree', ['depth' => 3]);
 
-				$tpl->leave();
+				$tpl->leave();	// f_
 			}
 		}
 	}

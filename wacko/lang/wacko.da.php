@@ -668,6 +668,15 @@ $wacko_translation = [
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Generer kodeordets hash for dit <code>recovery_password</code>',
 
+	// import action
+	'ImportTo'					=> 'Importer til dette område',
+	'ImportWhat'				=> 'XML-fil til import',
+	'ImportButtonText'			=> 'Importer',
+	'ImportSuccess'				=> 'Importen lykkedes.',
+	'ImportFailed'				=> 'Import mislykkedes.',
+	'ImportHint'				=> 'Angiv en klynge, du vil importere til, uden relativ adressering.',
+	'ImportAttention'			=> 'OBS: Overskriver de samme sider i klyngen.',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',
@@ -926,10 +935,6 @@ $wacko_translation = [
 	'MeasuredMemory'			=> 'Hukommelse',
 	'PoweredBy'					=> 'Powered by',
 
-	'ImportTo'					=> 'Importer til dette område',
-	'ImportWhat'				=> 'XML-fil til import',
-	'ImportButtonText'			=> 'Importer',
-	'ImportSuccess'				=> 'Importen lykkedes.',
 	'MassRenaming'				=> 'Omdøb hele området',
 	'MassNewName'				=> 'Angiv nyt navn for dette område',
 	'MassNeedRedirect'			=> 'Opret henvisning hertil på den gamle side',

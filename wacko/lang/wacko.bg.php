@@ -668,6 +668,15 @@ $wacko_translation = [
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
 
+	// import action
+	'ImportTo'					=> 'Импортировать под адресом',
+	'ImportWhat'				=> 'Файл для импорта',
+	'ImportButtonText'			=> 'Импортировать',
+	'ImportSuccess'				=> 'Импортировано успешно.',
+	'ImportFailed'				=> 'Импортирането не бе успешно.',
+	'ImportHint'				=> 'Моля, предоставете клъстер, в който искате да импортирате, без относително адресиране.',
+	'ImportAttention'			=> 'Внимание: Презаписва същите страници в клъстера.',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',
@@ -926,10 +935,6 @@ $wacko_translation = [
 	'MeasuredMemory'			=> 'Използвана памет',
 	'PoweredBy'					=> 'Powered by',
 
-	'ImportTo'					=> 'Импортировать под адресом',
-	'ImportWhat'				=> 'Файл для импорта',
-	'ImportButtonText'			=> 'Импортировать',
-	'ImportSuccess'				=> 'Импортировано успешно.',
 	'MassRenaming'				=> 'Рекурсивное переименование',
 	'MassNewName'				=> 'Введите новое имя для этого кластера',
 	'MassNeedRedirect'			=> 'Поставить на старых страницых редирект на новые',

@@ -668,6 +668,15 @@ $wacko_translation = [
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Wygeneruj hash hasła dla hasła <code>recovery_password</code>',
 
+	// import action
+	'ImportTo'					=> 'Import w klastrze',
+	'ImportWhat'				=> 'Plik XML do importu',
+	'ImportButtonText'			=> 'Import',
+	'ImportSuccess'				=> 'Importowany z powodzeniem.',
+	'ImportFailed'				=> 'Import nie powiódł się.',
+	'ImportHint'				=> 'Proszę podać klaster, do którego chcesz zaimportować, bez adresowania względnego.',
+	'ImportAttention'			=> 'Uwaga: Nadpisuje te same strony w klastrze.',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',
@@ -926,10 +935,6 @@ $wacko_translation = [
 	'MeasuredMemory'			=> 'Memory',
 	'PoweredBy'					=> 'Powered by',
 
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
-	'ImportButtonText'			=> 'Import',
-	'ImportSuccess'				=> 'Imported successfully.',
 	'MassRenaming'				=> 'Rename entire cluster',
 	'MassNewName'				=> 'Enter new name for this cluster',
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',

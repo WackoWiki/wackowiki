@@ -668,6 +668,15 @@ $wacko_translation = [
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Δημιουργήστε το hash κωδικού πρόσβασης για το <code>recovery_password</code>',
 
+	// import action
+	'ImportTo'					=> 'Εισαγωγή στο cluster',
+	'ImportWhat'				=> 'Αρχείο XML για εισαγωγή',
+	'ImportButtonText'			=> 'Εισαγωγή',
+	'ImportSuccess'				=> 'Επιτυχής εισαγωγή.',
+	'ImportFailed'				=> 'Η εισαγωγή απέτυχε.',
+	'ImportHint'				=> 'Καταχωρίστε ένα σύμπλεγμα στο οποίο θέλετε να εισαγάγετε, χωρίς σχετική διεύθυνση.',
+	'ImportAttention'			=> 'Προσοχή: Αντικαθιστά τις ίδιες σελίδες στο σύμπλεγμα.',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',
@@ -926,10 +935,6 @@ $wacko_translation = [
 	'MeasuredMemory'			=> 'Μνήμη',
 	'PoweredBy'					=> 'Δημιουργήθηκε από',
 
-	'ImportTo'					=> 'Εισαγωγή στο cluster',
-	'ImportWhat'				=> 'Αρχείο XML για εισαγωγή',
-	'ImportButtonText'			=> 'Εισαγωγή',
-	'ImportSuccess'				=> 'Επιτυχής εισαγωγή.',
 	'MassRenaming'				=> 'Μετονομασία όλου του cluster',
 	'MassNewName'				=> 'Εισάγεται νέο όνομα για το cluster',
 	'MassNeedRedirect'			=> 'Δημιουργία ανακατεύθυνσης σε μία νέα σελίδα στις παλιές σελίδες',

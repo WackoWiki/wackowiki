@@ -204,6 +204,8 @@ if ($this->is_admin()
 	}
 	else
 	{
+		$tpl->enter('f_');
+
 		// show warning
 		if ($comment_on_id)
 		{
@@ -214,9 +216,9 @@ if ($this->is_admin()
 				$this->page['modified'],
 				$comment_on['page_lang']);
 
-			$tpl->f_preview_meta	= $this->show_message($message, 'comment-info', false);
-			$tpl->f_preview_text	= $this->format(mb_substr($this->page['body'], 0, 500), 'cleanwacko');
-			$tpl->f_preview_title	= $this->page['title'];
+			$tpl->preview_meta	= $this->show_message($message, 'comment-info', false);
+			$tpl->preview_text	= $this->format(mb_substr($this->page['body'], 0, 500), 'cleanwacko');
+			$tpl->preview_title	= $this->page['title'];
 
 			$message = $this->_t('ReallyDeleteComment');
 		}
@@ -225,10 +227,9 @@ if ($this->is_admin()
 			$message = $this->_t('ReallyDelete');
 		}
 
-		$tpl->f_warning		= $this->show_message($message, 'warning', false);
-		$tpl->f_backlinks	= $this->action('backlinks', ['nomark' => 0]);
-		// show sub-pages
-		$tpl->f_tree		= $this->action('tree', ['depth' => 3]);
+		$tpl->warning	= $this->show_message($message, 'warning', false);
+		$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
+		$tpl->tree		= $this->action('tree', ['depth' => 3]);
 
 		// admin privileged removal options
 		if ($this->is_admin())
@@ -236,21 +237,23 @@ if ($this->is_admin()
 			if (!$comment_on_id)
 			{
 				// remove cluster
-				$tpl->f_admin_p = true;
+				$tpl->admin_p = true;
 
 				if ($this->db->store_deleted_pages)
 				{
-					$tpl->f_admin_p_dontkeep = true;
+					$tpl->admin_p_dontkeep = true;
 				}
 			}
 			else
 			{
 				if ($this->db->store_deleted_pages)
 				{
-					$tpl->f_admin_c_dontkeep = true;
+					$tpl->admin_c_dontkeep = true;
 				}
 			}
 		}
+
+		$tpl->leave();	// f_
 	}
 }
 else

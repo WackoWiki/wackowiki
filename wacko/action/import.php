@@ -13,44 +13,28 @@ if (!defined('IN_WACKO'))
 	i.e. no relative addressing
 */
 
-// TODO: add a step for warning / confirmation (do you want overwrite? / Will add Import under ... [submit] [cancel])
-// add better description
-// finally localize all new message sets
+// TODO:
+//	add a step for warning / confirmation (do you want overwrite? / Will add Import under ... [submit] [cancel])
+//	add better description
+//	who is the new owner/user -> <author>[ ' owner ' ]</author>
 
 $t = '';
 
 if ($this->is_admin())
 {
+	// show FORM
 	if (!isset($_POST['_to']) || empty($_POST['_to']))
 	{
 		if (isset($_POST['_to']))
 		{
-			echo 'Pls. provide an cluster you want to import to, no relative addressing.<br><br>';
+			$tpl->f_hint = $this->_t('ImportHint');
 		}
 		else
 		{
-			echo 'Attention: overwrites the same pages in the cluster<br><br>';
+			$tpl->f_hint = $this->_t('ImportAttention');
 		}
-		// show FORM
-		// STS rawurldecode!? good ganja! why?
-		echo rawurldecode($this->form_open('import_xml', ['form_more' => ' enctype="multipart/form-data" ']));
-		?>
-		<div class="cssform">
-			<p>
-				<label for="importto"><?php echo $this->_t('ImportTo'); ?>:</label>
-				<input type="text" id="importto" name="_to" size="40" value="">
-			</p>
-			<p>
-				<label for="importwhat"><?php echo $this->_t('ImportWhat'); ?>:</label>
-				<input type="file" id="importwhat" name="_import">
-			</p>
-			<p>
-				<input type="submit" value="<?php echo $this->_t('ImportButtonText'); ?>">
-			</p>
-		</div>
-		<?php
-		echo $this->form_close();
 	}
+
 	if (!empty($_POST['_to']))
 	{
 		if ($_FILES['_import']['error'] == 0)
@@ -62,7 +46,7 @@ if ($this->is_admin())
 				echo '<pre>';
 				print_r($_FILES);
 				print_r($_POST);
-				die('</pre><br>IMPORT failed');
+				die('</pre><br>'. $this->_t('ImportFailed'));
 			}
 
 			// check for false and empty strings
@@ -81,15 +65,17 @@ if ($this->is_admin())
 			{
 				$root_tag	= utf8_trim($_POST['_to'], '/ ');
 				$rel_tag	= utf8_trim(Ut::untag($item, 'guid'), '/ ');
-				$tag		= $root_tag.( $root_tag && $rel_tag ? '/' : '' ).$rel_tag;
+				$tag		= $root_tag . ($root_tag && $rel_tag ? '/' : '') . $rel_tag;
 				$page_id	= $this->get_page_id($tag);
-				$owner		= Ut::untag($item, 'author');
-				$owner_id	= $this->get_user_id($owner);
+				# $owner		= Ut::untag($item, 'author');
+				# $owner_id	= $this->get_user_id($owner);
 				$body		= str_replace(']]&gt;', ']]>', Ut::untag($item, 'description'));
 				$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 				$body_r		= $this->save_page($tag, $title, $body, '');
-				$this->set_page_owner($page_id, $owner_id);
+
+				# $this->set_page_owner($page_id, $owner_id);
+
 				// now we render it internally in the context of imported
 				// page so we can write the updated link table
 				$this->context[++$this->current_context] = $tag;
@@ -104,11 +90,11 @@ if ($this->is_admin())
 				$pages[] = $tag;
 			}
 
-			echo '<em>' . Ut::perc_replace($this->_t('ImportSuccess'), $t) . '</em><br>';
+			$tpl->i_message = Ut::perc_replace($this->_t('ImportSuccess'), $t);
 
 			foreach ($pages as $page)
 			{
-				echo $this->link('/' . $page, '', '', '', 0) . '<br>';
+				$tpl->i_l_page = $this->link('/' . $page, '', '', '', 0);
 			}
 		}
 		else
@@ -116,7 +102,7 @@ if ($this->is_admin())
 			echo '<pre>';
 			print_r($_FILES);
 			print_r($_POST);
-			die('</pre><br>IMPORT failed');
+			die('</pre><br>'. $this->_t('ImportFailed'));
 		}
 	}
 }

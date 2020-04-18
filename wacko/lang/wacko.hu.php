@@ -668,6 +668,15 @@ $wacko_translation = [
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Generálja a jelszó hash-ot a <code>recovery_password</code> számára',
 
+	// import action
+	'ImportTo'					=> 'Import in cluster',
+	'ImportWhat'				=> 'XML-fájl importálásra',
+	'ImportButtonText'			=> 'Import',
+	'ImportSuccess'				=> 'Imported successfully.',
+	'ImportFailed'				=> 'Az importálás sikertelen.',
+	'ImportHint'				=> 'Kérjük, adjon meg egy fürtöt, amelybe importálni szeretne, nincs relatív cím.',
+	'ImportAttention'			=> 'Figyelem: Ugyanazokat az oldalakat írja felül a fürtben.',
+
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
 	'UnwatchedPages'			=> 'List of all pages you do not watch',
@@ -926,10 +935,6 @@ $wacko_translation = [
 	'MeasuredMemory'			=> 'Memory',
 	'PoweredBy'					=> 'Powered by',
 
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
-	'ImportButtonText'			=> 'Import',
-	'ImportSuccess'				=> 'Imported successfully.',
 	'MassRenaming'				=> 'Rename entire cluster',
 	'MassNewName'				=> 'Enter new name for this cluster',
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',

@@ -666,7 +666,16 @@ $wacko_translation = [
 	'NotOwnerToViewWatchers'	=> 'Sa ei ole selle lehe omanik ja seetõttu sa ei saa vaadata nimekirja inmestest kes seda lehte jälgivad.',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
+	'GenerateRecoveryHash'		=> 'Genereerige oma <code>recovery_password</code> jaoks paroolirästas',
+
+	// import action
+	'ImportTo'					=> 'Import klastrisse',
+	'ImportWhat'				=> 'XML-fail impordiks',
+	'ImportButtonText'			=> 'Import',
+	'ImportSuccess'				=> 'Importimine õnnestus.',
+	'ImportFailed'				=> 'Importimine ebaõnnestus.',
+	'ImportHint'				=> 'Esitage klaster, kuhu soovite importida, ilma suhtelise aadressita.',
+	'ImportAttention'			=> 'Tähelepanu: kirjutab klastris üle samad lehed.',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -926,10 +935,6 @@ $wacko_translation = [
 	'MeasuredMemory'			=> 'Mälu',
 	'PoweredBy'					=> 'Powered by',
 
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
-	'ImportButtonText'			=> 'Import',
-	'ImportSuccess'				=> 'Imported successfully.',
 	'MassRenaming'				=> 'Nimeta ümber kogu klastri',
 	'MassNewName'				=> 'Enter new name for this cluster',
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
