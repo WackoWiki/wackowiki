@@ -1,4 +1,5 @@
 [ === main === ]
+	[ ' message ' ]
 	[= a _ =
 		<ul class="menu">
 			[= notused _ =
