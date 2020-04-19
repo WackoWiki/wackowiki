@@ -63,7 +63,7 @@ if ($this->is_owner() || $this->is_admin())
 					"SELECT category_id, parent_id, category " .
 					"FROM " . $this->db->table_prefix . "category " .
 					"WHERE category_id = " . (int) $_POST['category_id'] . " " .
-						"AND category_lang = " . $this->page['page_lang'] . " " .
+						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 					"LIMIT 1");
 			}
 
@@ -124,7 +124,7 @@ if ($this->is_owner() || $this->is_admin())
 				{
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "category SET " .
-							"category 				= " . $this->db->q($_category) . ", " .
+							"category				= " . $this->db->q($_category) . ", " .
 							"category_description	= " . $this->db->q($_category_description) . " " .
 						"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 						"LIMIT 1");

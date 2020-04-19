@@ -12,7 +12,7 @@ $tabs			= [
 					'notification'	=> 'UserSettingsNotifications',
 					'extended'		=> 'UserSettingsExtended'
 				];
-$mode			= @$_GET[$mod_selector] ?? ($_POST['_user_menu'] ? 'menu' : '');
+$mode			= @$_GET[$mod_selector] ?? (@$_POST['_user_menu'] ? 'menu' : '');
 
 if (!array_key_exists($mode, $tabs))
 {
