@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
 									'<code>(an empty list)</code> - only the page owner has access',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Visibilité',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Voir la liste des pages dont vous êtes le propriétaire (MesPages) et les pages que vous avez modifiées (MesModifications).',
 	'AddBookmark'				=> 'Ajouter la page courante aux signets',
 	'RemoveBookmark'			=> 'Supprimer des signets',
-	'CantAddBookmarks'			=> 'Vous devez être enregistré pour utiliser le système de signets.',
-	'YourBookmarks'				=> 'Vos signets ',
+
 	'YourLanguage'				=> 'Choisissez votre langue ',
 	'ShowSpaces'				=> 'Insérer des espaces dans les NomWiki ',
 	'WrongPage4Redirect'		=> 'Cette page semble vous diriger vers une autre, non trouvée. Vous pouvez éditer cette page pour connaître le nom de l’autre.',

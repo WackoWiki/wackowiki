@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'See a list of pages you own (MyPages) and pages you\'ve edited (MyChanges).',
 	'AddBookmark'				=> 'Add current page to Bookmarks',
 	'RemoveBookmark'			=> 'Remove from bookmarks',
-	'CantAddBookmarks'			=> 'You must be registered to work with the bookmarks system.',
-	'YourBookmarks'				=> 'Your Bookmarks',
+
 	'YourLanguage'				=> 'Select language',
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',

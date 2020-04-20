@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - nombres de grupos de usuarios permitidos (alias)<br>' .
 									'<code>(una lista vacía)</code> - sólo el propietario de la página tiene acceso',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Visibilidad',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Ver lista de las páginas de las cuales soy propietario o en las cuales realicé cambios.',
 	'AddBookmark'				=> 'Añade esta página a mis favoritos',
 	'RemoveBookmark'			=> 'Eliminar de los favoritos',
-	'CantAddBookmarks'			=> 'Debe registrarse para usar el sistema de marcadores.',
-	'YourBookmarks'				=> 'Mis Favoritos',
+
 	'YourLanguage'				=> 'Seleccionar idioma',
 	'ShowSpaces'				=> 'Mostrar los WikiNames con espacios',
 	'WrongPage4Redirect'		=> 'No se puede efectuar la redirección.',

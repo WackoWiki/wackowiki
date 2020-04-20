@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - namen van toegestane gebruikersgroepen (alias)<br>' .
 									'<code>(een lege lijst)</code> - alleen de paginaeigenaar heeft toegang',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Zichtbaarheid',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Bekijk een lijst van pagina\'s waarvan u eigenaar bent (MyPages) en pagina\'s die u heeft gewijzigd (MyChanges).',
 	'AddBookmark'				=> 'Voeg de huidige pagina toe aan uw QuickLinks',
 	'RemoveBookmark'			=> 'Verwijder uit bookmarks',
-	'CantAddBookmarks'			=> 'U moet geregistreerd zijn om met het bladwijzersysteem te werken.',
-	'YourBookmarks'				=> 'Uw QuickLinks',
+
 	'YourLanguage'				=> 'Selecteer taal',
 	'ShowSpaces'				=> 'Toon spaties in WikiNames',
 	'WrongPage4Redirect'		=> 'Kan niet doorlinken, pagina bestaat niet.',

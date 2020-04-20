@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
 									'<code>(an empty list)</code> - only the page owner has access',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Widoczność',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages' 			=> 'Wyświetl listę stron, których jesteś autorem (MyPages) lub ostatnio były edytowane przez Ciebie (MyChanges).',
 	'AddBookmark'				=> 'Dodaj bieżącą stronę do listy szybkiego dostępu',
 	'RemoveBookmark'			=> 'Usuń z listy szybkiego dostępu',
-	'CantAddBookmarks'			=> 'You must be registered to work with the bookmarks system.',
-	'YourBookmarks'				=> 'Lista szybkiego dostępu',
+
 	'YourLanguage'				=> 'Zmień język',
 	'ShowSpaces'				=> 'Wyświetlaj NazwyWiki z odstępem',
 	'WrongPage4Redirect'		=> 'Wykonanie przekierowania było niemożliwe, ponieważ podano nieprawidłowy parametr',

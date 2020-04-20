@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
 									'<code>(an empty list)</code> - only the page owner has access',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Ορατότητα',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Δείτε μία λίστα των σελίδων που σας ανήκουν (MyPages) και των σελίδων που έχετε τροποποιήσει (MyChanges).',
 	'AddBookmark'				=> 'Προσθήκη της τρέχουσας σελίδας στα QuickLinks',
 	'RemoveBookmark'			=> 'Αφαίρεση από τους σελιδοδείκτες',
-	'CantAddBookmarks'			=> 'You must be registered to work with the bookmarks system.',
-	'YourBookmarks'				=> 'Οι συντομεύσεις σας',
+
 	'YourLanguage'				=> 'Επέλεξε γλώσσα',
 	'ShowSpaces'				=> 'Εμφάνιση κενών στα WikiNames',
 	'WrongPage4Redirect'		=> 'Δεν είναι δυνατή η ανακατεύθυνση λόγω λάθος σε παράμετρο ανακατεύθυνσης',

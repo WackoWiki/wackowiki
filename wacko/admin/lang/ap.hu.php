@@ -10,7 +10,7 @@ $ap_translation = [
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
+		'preferences'	=> 'Preferenciák',
 		'content'		=> 'Content',
 		'users'			=> 'Felhasználók',
 		'maintenance'	=> 'Karbantartás',
@@ -49,7 +49,7 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
+	'Cancel'					=> 'Mégse',
 	'Add'						=> 'Add',
 	'Edit'						=> 'Edit',
 	'Remove'					=> 'Remove',
@@ -82,7 +82,7 @@ $ap_translation = [
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Appearance',
+		'name'		=> 'Kinézet',
 		'title'		=> 'Appearance settings',
 	],
 
@@ -272,7 +272,7 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
-	'LanguageSection'			=> 'Language',
+	'LanguageSection'			=> 'Nyelv',
 	'DefaultLanguage'			=> 'Default language',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
@@ -944,7 +944,7 @@ $ap_translation = [
 	'YourMessage'				=> 'Your message',
 	'YourMessageInfo'			=> 'Kérjük, vedd figyelembe, csak sima szöveget adhatsz meg. Az elküldés előtt minden kód eltávolításra kerül.',
 
-	'MessageLanguage'			=> 'Language',
+	'MessageLanguage'			=> 'Nyelv',
 	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
@@ -1125,7 +1125,7 @@ $ap_translation = [
 	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsSaveButton'			=> 'Elküld',
-	'GroupsCancelButton'		=> 'Mégsem',
+	'GroupsCancelButton'		=> 'Mégse',
 	'GroupsAddButton'			=> 'Add',
 	'GroupsEditButton'			=> 'Szerkesztés',
 	'GroupsRemoveButton'		=> 'Törlés',

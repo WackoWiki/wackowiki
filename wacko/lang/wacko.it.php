@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - nomi di gruppi di utenti autorizzati (alias)<br>' .
 									'<code>(an empty list)</code> - solo il proprietario della pagina ha accesso',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Visibilità',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Vedi l\'elenco delle pagine di tua proprietà (MiePagine) e da te editate (MieModifiche).',
 	'AddBookmark'				=> 'Aggiungi pagina corrente ai QuickLink',
 	'RemoveBookmark'			=> 'Rimuovere dai segnalibri',
-	'CantAddBookmarks'			=> 'Devi essere registrato per lavorare con il sistema dei segnalibri.',
-	'YourBookmarks'				=> 'I tuoi QuickLink',
+
 	'YourLanguage'				=> 'Scegli la lingua',
 	'ShowSpaces'				=> 'Mostra gli spazi nei NomiWiki',
 	'WrongPage4Redirect'		=> 'Reindirizzo impossibile a causa di parametri di reindirizzo errati',

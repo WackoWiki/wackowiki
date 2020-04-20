@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
 									'<code>(an empty list)</code> - only the page owner has access',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Sigtbarhed',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Se en oversigt over sider du ejer (MyPages) og sider du har ændret (MyChanges).',
 	'AddBookmark'				=> 'Tilføj til HurtigLinks',
 	'RemoveBookmark'			=> 'Fjern fra bookmarks',
-	'CantAddBookmarks'			=> 'You must be registered to work with the bookmarks system.',
-	'YourBookmarks'				=> 'Dine HurtigkLinks',
+
 	'YourLanguage'				=> 'Vælg sprog',
 	'ShowSpaces'				=> 'Vis mellemrum i WikiNavne',
 	'WrongPage4Redirect'		=> 'Hov, den kan vi ikke finde',

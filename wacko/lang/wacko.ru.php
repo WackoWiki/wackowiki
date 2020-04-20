@@ -8,9 +8,9 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'StoreButton'				=> 'Сохранить',
 	'UpdateButton'				=> 'Обновить',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Отмена',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'Ошибка отправки формы. Попробуйте ещё раз.',
@@ -234,7 +234,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - имена групп пользователей, которым разрешено<br>' .
 									'<code>(пустой список)</code> - разрешено только владельцу страницы',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Видимость',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -510,8 +510,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Список ваших страниц и страниц, которые вы редактировали.',
 	'AddBookmark'				=> 'Добавить в личное меню',
 	'RemoveBookmark'			=> 'Удалить из личного меню',
-	'CantAddBookmarks'			=> 'вы должны быть зарегистрированы, чтобы работать с системой закладок.',
-	'YourBookmarks'				=> 'Ваше личное меню',
+
 	'YourLanguage'				=> 'Выберите язык',
 	'ShowSpaces'				=> 'Показывать пробелы в ВикиИменах',
 	'WrongPage4Redirect'		=> 'Переадресация не удалась из-за неверных параметров переадресации',

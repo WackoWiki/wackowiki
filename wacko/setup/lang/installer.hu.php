@@ -60,7 +60,7 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check' => 'System Requirements',
+'version-check' => 'Rendszerkövetelmények',
 'PHPVersion' => 'PHP Version',
 'PHPDetected' => 'Detected PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',

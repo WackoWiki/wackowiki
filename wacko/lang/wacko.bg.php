@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
 									'<code>(an empty list)</code> - only the page owner has access',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Видимост',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Списък на Вашите страници и тези, които сте редактирали.',
 	'AddBookmark'				=> 'Добави в личното меню',
 	'RemoveBookmark'			=> 'Изтрий от личното меню',
-	'CantAddBookmarks'			=> 'You must be registered to work with the bookmarks system.',
-	'YourBookmarks'				=> 'Вашето лично меню',
+
 	'YourLanguage'				=> 'Изберете език',
 	'ShowSpaces'				=> 'Покажи празните символи в УикиИмента',
 	'WrongPage4Redirect'		=> 'Преадресирането не е възможно поради неверни параметри на преадресацията',

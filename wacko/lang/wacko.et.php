@@ -233,7 +233,7 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
 									'<code>(an empty list)</code> - only the page owner has access',
 
-	'AccessMode'				=> 'Visibility',
+	'AccessMode'				=> 'Nähtavus',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
 	'AccessRegistered'			=> 'registered',
@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Vaade su oma lehtede nimekirjale (MinuLehed) ja lehtedele mida sa oled redigeerinud (MinuMuudatused).',
 	'AddBookmark'				=> 'Lisa see leht kiirvalikutesse',
 	'RemoveBookmark'			=> 'Eemalda kiirvalikute hulgast',
-	'CantAddBookmarks'			=> 'You must be registered to work with the bookmarks system.',
-	'YourBookmarks'				=> 'Sinu kiirvalikud',
+
 	'YourLanguage'				=> 'Vali keel',
 	'ShowSpaces'				=> 'Näita WikiNimedes tühikuid',
 	'WrongPage4Redirect'		=> 'Ei saa ümber suunata, kuna tegemist on valede parameetritega',

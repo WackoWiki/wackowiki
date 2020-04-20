@@ -509,8 +509,7 @@ $wacko_translation = [
 	'SeeListOfPages'			=> 'Zeige Liste meiner Seiten (MeineSeiten) und die Seiten, die ich editiert haben (MeineAenderungen).',
 	'AddBookmark'				=> 'Lesezeichen für aktuelle Seite setzen',
 	'RemoveBookmark'			=> 'Entferne Lesezeichen für aktuelle Seite',
-	'CantAddBookmarks'			=> 'Du musst angemeldet sein um Lesezeichen verwenden zu können.',
-	'YourBookmarks'				=> 'Deine Lesezeichen',
+
 	'YourLanguage'				=> 'Wähle Sprache',
 	'ShowSpaces'				=> 'Zeige Leerzeichen in WikiNamen',
 	'WrongPage4Redirect'		=> 'Umleitung funktioniert wegen falschen Umleitungsparametern nicht',
