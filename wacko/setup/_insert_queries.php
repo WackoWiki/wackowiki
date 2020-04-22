@@ -94,6 +94,7 @@ $upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_0];
 
 // page
 $upgrade['5.5.14'][]	= ['alter',		'page',				$alter_page_r5_5_0];
+$upgrade['6.0.5'][]		= ['alter',		'page',				$alter_page_r5_5_1];
 
 $upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_2];
 

@@ -152,7 +152,7 @@ $tbl_page = "CREATE TABLE {$pref}page (" .
 					"owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"title VARCHAR({$lp_size}) NOT NULL DEFAULT ''," .
-					"tag VARCHAR({$lp_size}) NOT NULL DEFAULT ''," .
+					"tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT ''," .
 					"menu_tag VARCHAR(250) NOT NULL DEFAULT ''," .
 					"depth INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .

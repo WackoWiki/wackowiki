@@ -41,6 +41,7 @@ $update_menu_r5_5_1 = "DELETE m.* FROM {$pref}menu m LEFT JOIN {$pref}page p ON 
 
 // PAGE
 $alter_page_r5_5_0 = "ALTER TABLE {$pref}page DROP supertag";
+$alter_page_r5_5_1 = "ALTER TABLE {$pref}page CHANGE tag tag VARCHAR(250) BINARY NOT NULL DEFAULT ''";
 
 $update_page_r5_5_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_5_1 = "UPDATE {$pref}page SET body_r = ''";
