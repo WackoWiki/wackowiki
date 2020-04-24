@@ -34,7 +34,7 @@ use PHPDiff\ {
  *
 */
 
-if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page)
+if (!isset($_GET['a']) || !isset($_GET['b']) || !$this->page || $this->hide_revisions)
 {
 	$this->http->redirect($this->href());
 }
