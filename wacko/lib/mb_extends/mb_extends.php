@@ -153,3 +153,79 @@ function utf8_substr_replace($str, $repl, $start , $length = null )
 
 	return implode('', $ar[0]);
 }
+
+/**
+* UTF-8 aware count_chars.
+* @see http://www.php.net/count_chars
+* taken from https://www.php.net/manual/en/function.count-chars.php#118726
+*/
+function utf8_count_chars($string, $mode = 0)
+{
+	$result =  array_fill(0, 256, 0);
+
+	for ($i = 0, $size = mb_strlen($string); $i < $size; $i++)
+	{
+		$char = mb_substr($string, $i, 1);
+		if (strlen($char) > 1)
+		{
+			continue;
+		}
+
+		$code = ord($char);
+		if ($code >= 0 && $code <= 255)
+		{
+			$result[$code]++;
+		}
+	}
+
+	switch ($mode)
+	{
+		case 1: // same as 0 but only byte-values with a frequency greater than zero are listed.
+			foreach ($result as $key => $value)
+			{
+				if ($value == 0)
+				{
+					unset($result[$key]);
+				}
+			}
+			break;
+		case 2: // same as 0 but only byte-values with a frequency equal to zero are listed.
+			foreach ($result as $key => $value)
+			{
+				if ($value > 0)
+				{
+					unset($result[$key]);
+				}
+			}
+			break;
+		case 3: // a string containing all unique characters is returned.
+			$buildString = '';
+			foreach ($result as $key => $value)
+			{
+				if ($value > 0)
+				{
+					$buildString .= chr($key);
+				}
+			}
+			return $buildString;
+		case 4: // a string containing all not used characters is returned.
+			$buildString = '';
+			foreach ($result as $key => $value)
+			{
+				if ($value == 0)
+				{
+					$buildString .= chr($key);
+				}
+			}
+			return $buildString;
+	}
+
+	// change key names...
+	foreach ($result as $key => $value)
+	{
+		$result[chr($key)] = $value;
+		unset($result[$key]);
+	}
+
+	return $result;
+}

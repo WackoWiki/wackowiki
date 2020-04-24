@@ -55,7 +55,7 @@ if (@$_POST['_action'] === 'clone_page')
 				"OR tag = " . $this->db->q($from) . ") " .
 				"AND comment_on_id = 0");
 
-		$slashes	= (int) @count_chars($from, 1)['/']; // @ to return 0 when no slashes used
+		$slashes	= (int) @utf8_count_chars($from, 1)['/']; // @ to return 0 when no slashes used
 		$work		= [];
 
 		foreach ($pages as $page)
@@ -116,6 +116,8 @@ if (@$_POST['_action'] === 'clone_page')
 	$this->http->redirect($this->href('', $jump));
 }
 
+$tpl->enter('form_');
+
 if ($this->check_acl($this->get_user_name(), $this->db->rename_globalacl))
 {
 	$klusterwerks = $this->db->load_single(
@@ -126,18 +128,20 @@ if ($this->check_acl($this->get_user_name(), $this->db->rename_globalacl))
 
 	if ((int) $klusterwerks['n'])
 	{
-		$tpl->form_doCluster = true;
+		$tpl->doCluster = true;
 	}
 }
 
 // STS $add = (@$_GET['add'] || @$_POST['add']);
-$tpl->form_href = $this->href('clone');
+$tpl->href = $this->href('clone');
 
 // edit note
 if ($this->db->edit_summary)
 {
-	$tpl->form_e_note = $edit_note;
+	$tpl->e_note = $edit_note;
 }
 
-$tpl->form_show = $this->href();
-$tpl->form_placeholder = $this->tag;
+$tpl->show			= $this->href();
+$tpl->placeholder	= $this->tag;
+
+$tpl->leave();	// form_
