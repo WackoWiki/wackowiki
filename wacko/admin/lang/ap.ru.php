@@ -779,6 +779,11 @@ $ap_translation = [
 	'XmlSiteMapInfo'			=> 'Синхронизирует карту сайта с текущм состоянием базы данных.',
 	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
 	'XmlSiteMapView'			=> 'Показать файл Sitemap в новом окне.',
+
+	'ReparseBody'				=> 'Reparse all pages',
+	'ReparseBodyInfo'			=> 'Empties <code>body_r</code> in page table, so that each page gets rendered again on the next page view. This may be useful if you modified the formatter or changed the domain of your wiki.',
+	'PreparsedBodyPurged'		=> 'Emptied <code>body_r</code> field in page table.',
+
 	'WikiLinksResync'			=> 'Wiki-ссылки',
 	'WikiLinksResyncInfo'		=> 'Выполняет повторный рендеринг всех внутрисайтовых ссылок и восстанавливает содержимое таблицы <code>page_link</code> и <code>file_link</code> в случае ее порчи или повреждений (может занять значительное время).',
 	'RecompilePage'				=> 'Повторная компиляция всех страниц (чрезвычайно дорогостоящая)',

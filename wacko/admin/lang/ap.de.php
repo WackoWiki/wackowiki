@@ -804,6 +804,11 @@ $ap_translation = [
 	'XmlSiteMapInfo'			=> 'Diese Funktion synchronisiert die XML-Sitemap mit dem aktuellen Zustand der Datenbank.',
 	'XmlSiteMapPeriod'			=> 'Dauer %1 Tage. Zuletzt erstellt %2.',
 	'XmlSiteMapView'			=> 'Zeigt die Sitemap in einem neuen Fenster.',
+
+	'ReparseBody'				=> 'Reparse all pages',
+	'ReparseBodyInfo'			=> 'Empties <code>body_r</code> in page table, so that each page gets rendered again on the next page view. This may be useful if you modified the formatter or changed the domain of your wiki.',
+	'PreparsedBodyPurged'		=> 'Emptied <code>body_r</code> field in page table.',
+
 	'WikiLinksResync'			=> 'Wiki-Links',
 	'WikiLinksResyncInfo'		=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code>page_link</code> und <code>file_link</code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
 	'RecompilePage'				=> 'Alle Seiten neu kompilieren (extrem teuer)',

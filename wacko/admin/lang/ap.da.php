@@ -792,6 +792,11 @@ $ap_translation = [
 	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
 	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
+
+	'ReparseBody'				=> 'Reparse all pages',
+	'ReparseBodyInfo'			=> 'Empties <code>body_r</code> in page table, so that each page gets rendered again on the next page view. This may be useful if you modified the formatter or changed the domain of your wiki.',
+	'PreparsedBodyPurged'		=> 'Emptied <code>body_r</code> field in page table.',
+
 	'WikiLinksResync'			=> 'Wiki-links',
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Genopbygning af alle sider (ekstremt dyre)',

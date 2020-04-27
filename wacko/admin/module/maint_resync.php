@@ -165,6 +165,13 @@ function admin_maint_resync(&$engine, &$module)
 
 			$engine->show_message($engine->_t('SiteMapCreated'), 'success');
 		}
+		else if ($_REQUEST['action'] == 'reparse_body')
+		{
+			// purge body_r field to enforce page re-compiling
+			$engine->db->sql_query("UPDATE " . $prefix . "page SET body_r = ''");
+
+			$engine->show_message($engine->_t('PreparsedBodyPurged'), 'success');
+		}
 		else if ($_REQUEST['action'] == 'wikilinks')
 		{
 			/* TODO:	1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
@@ -326,6 +333,16 @@ if ($engine->db->xml_sitemap)
 		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
 <?php		echo $engine->form_close();
 }?>
+
+	<h2><?php echo $engine->_t('ReparseBody');?></h2>
+	<p><?php echo $engine->_t('ReparseBodyInfo');?></p>
+
+<?php
+	echo $engine->form_open('reparse_body');
+?>
+		<input type="hidden" name="action" value="reparse_body">
+		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
+<?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('WikiLinksResync');?></h2>
 	<p><?php echo $engine->_t('WikiLinksResyncInfo');?></p>
