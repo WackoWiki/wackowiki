@@ -106,7 +106,7 @@ class Wacko
 	// DATABASE
 
 	// TODO: throw error for nested arrays
-	function ids_string($ids) : string
+	function ids_string($ids) : ?string
 	{
 		// sanitize array allow only integer values
 		$ids_string = array_map( 'intval', $ids );
