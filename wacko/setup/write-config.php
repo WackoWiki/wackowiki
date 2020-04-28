@@ -50,7 +50,7 @@ $config_code .= array_to_str($config_file) . "\n";
 // try to write configuration file
 echo "		<h2>" . $lang['FinalStep'] . "</h2>\n";
 echo "		<ul>\n";
-echo "			<li>" . $lang['Writing'] . " - ";
+echo "			<li>" . $lang['Writing'] . "   ";
 
 $perm_changed	= true;
 $file_name		= CONFIG_FILE;
