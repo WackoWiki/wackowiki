@@ -1223,6 +1223,13 @@ a:target {
 	font-size: 0.8em;
 }
 
+/* calendar action */
+.calendar {}
+.calendar_month {}
+.calendar th {padding: 5px;}
+.calendar tr td {padding: 5px;}
+.calendar-hl {color: red; font-weight: bold;}
+
 /* feed action */
 .feed {
 	overflow: auto;

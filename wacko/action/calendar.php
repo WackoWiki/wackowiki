@@ -6,10 +6,12 @@ if (!defined('IN_WACKO'))
 }
 
 /* {{calendar
-		[year=2012|2013...]
-		[month="1|2|..."]
-		[highlight="today|1|2|..."]
-		[daywidth=3]
+		[year=2012|2013...] 		- year to display
+		[month=1|2|...]				- month to display
+		[highlight=today|1|2|...]	- date to highlight
+		[daywidth=3]				- length of weekday name
+		[range=1|2|...]				- number of month displayed starting with "month to display" parameter
+		[firstday=0|1]				- week satrts on: 0 - Sunday, 1 - Monday
   }}
  */
 
@@ -18,6 +20,7 @@ if (!defined('IN_WACKO'))
 	.calendar_month		(month heading format)
 	.calendar th		(day of week headings)
 	.calendar tr td
+	.calendar-hl		(highlight)
 */
 
 if (!isset($year))		$year		= '';
@@ -43,11 +46,11 @@ if (!$month)
 
 if ($highlight == 'today')
 {
-	$days = [$current_day => [null, null, '<span style="color: red; font-weight: bold;">' . $current_day . '</span>']];
+	$days = [$current_day => [null, null, '<span class="calendar-hl">' . $current_day . '</span>']];
 }
 else if ($highlight)
 {
-	$days = [$highlight => [null, null, '<span style="color: red; font-weight: bold;">' . $highlight . '</span>']];
+	$days = [$highlight => [null, null, '<span class="calendar-hl">' . $highlight . '</span>']];
 }
 
 if (!$daywidth)
@@ -58,6 +61,11 @@ if (!$daywidth)
 if (!isset($range))
 {
 	$range = 1;
+}
+
+if (!isset($firstday))
+{
+	$firstday = 0;
 }
 
 if (($range > 1) && ($month > 1))
@@ -86,13 +94,13 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t += DAYSECS) // January 4, 1970 was a Sunday
 	{
-		$day_names[$n] = ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
+		$day_names[$n] = utf8_ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
 	}
 
 	[$month, $year, $month_name, $weekday] = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
 	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
-	$title		= htmlentities(ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
+	$title		= htmlentities(utf8_ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
 
 	// Begin calendar. Uses a real <caption>.
 	[$p, $pl] = each($pn);
@@ -117,7 +125,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		// if day_name_length is > 3, the full name of the day will be printed
 		foreach ($day_names as $d)
 		{
-			$calendar .= '<th abbr="' . $d . '">' . ($day_name_length < 4 ? substr($d, 0, $day_name_length) : $d) . '</th>';
+			$calendar .= '<th abbr="' . $d . '">' . ($day_name_length < 4 ? mb_substr($d, 0, $day_name_length) : $d) . '</th>';
 		}
 
 		$calendar .= "</tr>\n<tr>";
@@ -171,11 +179,11 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 for ($month; $month <= $_range; $month++)
 {
-		$tpl->m_month = $generate_calendar($year, $month, $days, $daywidth, null, 0, []);
+	$tpl->m_month = $generate_calendar($year, $month, $days, $daywidth, null, $firstday, []);
 
-		if ($month % 3 == 0 and $month < $_range)
-		{
-			$tpl->m_next = true;
-		}
+	if ($month % 3 == 0 and $month < $_range)
+	{
+		$tpl->m_next = true;
+	}
 }
 

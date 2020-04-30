@@ -805,9 +805,9 @@ $ap_translation = [
 	'XmlSiteMapPeriod'			=> 'Dauer %1 Tage. Zuletzt erstellt %2.',
 	'XmlSiteMapView'			=> 'Zeigt die Sitemap in einem neuen Fenster.',
 
-	'ReparseBody'				=> 'Reparse all pages',
-	'ReparseBodyInfo'			=> 'Empties <code>body_r</code> in page table, so that each page gets rendered again on the next page view. This may be useful if you modified the formatter or changed the domain of your wiki.',
-	'PreparsedBodyPurged'		=> 'Emptied <code>body_r</code> field in page table.',
+	'ReparseBody'				=> 'Alle Seiten erneut parsen',
+	'ReparseBodyInfo'			=> 'Leert <code>body_r</code> in der Tabelle page, so dass jede Seite bei der nächsten Seitenansicht erneut gerendert wird. Dies kann nützlich sein, wenn der Formatierer modifiziert oder die Domäne des Wikis geändert wurde.',
+	'PreparsedBodyPurged'		=> 'Feld <code>body_r</code> in Tabelle page geleert.',
 
 	'WikiLinksResync'			=> 'Wiki-Links',
 	'WikiLinksResyncInfo'		=> 'Führt ein Re-Rendering für alle Intrasite-Links durch und stellt den Inhalt der Tabelle <code>page_link</code> und <code>file_link</code> im Falle einer Beschädigung oder Verlagerung wieder her (dies kann einige Zeit in Anspruch nehmen).',
