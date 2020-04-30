@@ -273,10 +273,13 @@ img.media-right,
 	background-color: #448aff; 
 	color: white;
 }
+.chat tr { 
+	vertical-align: top;
+}
 
-.chat-user { padding: 2px; vertical-align: top; white-space: nowrap; font-weight: bold  }
-.chat-time { padding: 2px; vertical-align: top; white-space: nowrap; font: 12px tahoma, arial }
-.chat-text { padding: 2px; vertical-align: top; width: 100% }
+.chat-user { padding: 2px; white-space: nowrap; font-weight: bold  }
+.chat-time { padding: 2px; white-space: nowrap; font: 12px tahoma, arial }
+.chat-text { padding: 2px; width: 100% }
 
 .chat-u1 { background: rgba(0,200,83,.1); }
 .chat-u2 { background: rgba(255,23,68,.1); }

@@ -43,8 +43,10 @@ foreach($matches as $log)
 	if ($options['type'] == 'div')
 	{
 		$output .=
-			'<div class="chat chat-u'. $names[$log[3]] .'">' .
-				'[' . $log[1] . '] <span class="chat-user">' . $log[3] . '</span>: ' . $log[5] .
+			'<div class="chat-u'. $names[$log[3]] .'">' .
+				'<span class="chat-time">[' . $log[1] . ']</span> ' .
+				'<span class="chat-user">' . $log[3] . '</span> ' .
+				'<span class="chat-text">' . $log[5] . '</span>' .
 			'</div>';
 	}
 	else if ($options['type'] == 'table')
