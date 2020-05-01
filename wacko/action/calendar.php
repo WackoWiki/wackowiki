@@ -19,7 +19,7 @@ if (!defined('IN_WACKO'))
 	.calendar			(table container class)
 	.calendar_month		(month heading format)
 	.calendar th		(day of week headings)
-	.calendar tr td
+	.calendar td
 	.calendar-hl		(highlight)
 */
 
@@ -46,16 +46,16 @@ if (!$month)
 
 if ($highlight == 'today')
 {
-	$days = [$current_day => [null, null, '<span class="calendar-hl">' . $current_day . '</span>']];
+	$days = [$current_day => [null, null, $current_day]];
 }
 else if ($highlight)
 {
-	$days = [$highlight => [null, null, '<span class="calendar-hl">' . $highlight . '</span>']];
+	$days = [$highlight => [null, null, $highlight]];
 }
 
 if (!$daywidth)
 {
-	$daywidth = 3;
+	$daywidth = 2;
 }
 
 if (!isset($range))
@@ -65,7 +65,7 @@ if (!isset($range))
 
 if (!isset($firstday))
 {
-	$firstday = 0;
+	$firstday = 1;
 }
 
 if (($range > 1) && ($month > 1))
@@ -83,8 +83,9 @@ else
 
 $day_name_length = $daywidth;
 
-$generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, $month_href = null, $first_day = 0, $pn = [])
+$generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, $month_href = null, $first_day = 0, $pn = []) use (&$tpl)
 {
+	$save			=	$this->set_language($this->user_lang);
 	$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
 	// remember that mktime will automatically correct if invalid dates are entered
 	// for instance, mktime(0,0,0,12,32,1997) will be the date for Jan 1, 1998
@@ -99,7 +100,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	[$month, $year, $month_name, $weekday] = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
-	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
+	$weekday	= ($weekday + 7) % 7; // adjust for $first_day
 	$title		= htmlentities(utf8_ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
 
 	// Begin calendar. Uses a real <caption>.
@@ -116,8 +117,11 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		$n = NBSP . '<span class="calendar-next">' . ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n) . '</span>';
 	}
 
-	$calendar = '<table class="calendar">' . "\n" .
-		'<caption class="calendar-month">' . $p . ($month_href ? '<a href="' . Ut::html($month_href) . '">' . $title . '</a>' : $title) . $n . "</caption>\n<tr>";
+	# '<caption class="calendar-month">' . $p . ($month_href ? '<a href="' . Ut::html($month_href) . '">' . $title . '</a>' : $title) . $n . "</caption>\n<tr>";
+	$tpl->title		= $title;
+	$tpl->href		= $month_href;
+	$tpl->prev		= $p;
+	$tpl->next		= $n;
 
 	if ($day_name_length)
 	{
@@ -125,25 +129,20 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		// if day_name_length is > 3, the full name of the day will be printed
 		foreach ($day_names as $d)
 		{
-			$calendar .= '<th abbr="' . $d . '">' . ($day_name_length < 4 ? mb_substr($d, 0, $day_name_length) : $d) . '</th>';
+			$tpl->h_abbr	= $d;
+			$tpl->h_day		= $day_name_length < 4 ? mb_substr($d, 0, $day_name_length) : $d;
 		}
-
-		$calendar .= "</tr>\n<tr>";
 	}
 
 	if ($weekday > 0)
 	{
-		$calendar .= '<td colspan="' . $weekday . '">' . NBSP . '</td>'; // initial 'empty' days
+		$tpl->first_colspan	= $weekday; // initial 'empty' days
 	}
+
+	$tpl->enter('d_');
 
 	for ($day = 1, $days_in_month = gmdate('t', $first_of_month); $day <= $days_in_month; $day++, $weekday++)
 	{
-		if ($weekday == 7)
-		{
-			$weekday   = 0; // start a new week
-			$calendar .= "</tr>\n<tr>";
-		}
-
 		if (isset($days[$day]) and is_array($days[$day]))
 		{
 			[$link, $classes, $content] = $days[$day];
@@ -153,25 +152,34 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 				$content = $day;
 			}
 
-			$calendar .= '<td' . ($classes ? ' class="' . Ut::html($classes) . '">' : '>') .
-				($link
-					? '<a href="' . Ut::html($link) . '">' . $content . '</a>'
-					: $content) . '</td>';
+			# $calendar .= '<td' . ($classes ? ' class="' . Ut::html($classes) . '">' : '>') .
+			#	($link
+			#		? '<a href="' . Ut::html($link) . '">' . $content . '</a>'
+			#		: $content) . '</td>';
+			$tpl->class		= $classes;
+			$tpl->link		= $link;
+			$tpl->content	= '<span class="calendar-hl">' . $content . '</span>';
 		}
 		else
 		{
-			$calendar .= '<td>' . $day . '</td>';
+			$tpl->content = $day;
+		}
+
+		if ($weekday == 7)
+		{
+			$weekday	= 0; // start a new week
+			$tpl->next	= true;
 		}
 	}
 
+	$tpl->leave();	//	d_
+
 	if ($weekday != 7)
 	{
-		$calendar .= '<td colspan="' . (7 - $weekday) . '">' . NBSP . '</td>'; // remaining "empty" days
+		$tpl->last_colspan	= (7 - $weekday); // remaining "empty" days
 	}
 
-	$calendar .= "</tr>\n</table>\n";
-
-	return $calendar;
+	$this->set_language($save, true);
 };
 
 #echo "_range:" . $_range . "<br>";
@@ -179,11 +187,16 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 for ($month; $month <= $_range; $month++)
 {
-	$tpl->m_month = $generate_calendar($year, $month, $days, $daywidth, null, $firstday, []);
+	$tpl->enter('m_month_');
+
+	$generate_calendar($year, $month, $days, $daywidth, null, $firstday, []);
+	$days = []; // reset highlight array as we highlight only once per range
 
 	if ($month % 3 == 0 and $month < $_range)
 	{
-		$tpl->m_next = true;
+		$tpl->next = true;
 	}
+
+	$tpl->leave();	//	m_month_
 }
 
