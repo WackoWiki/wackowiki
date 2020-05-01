@@ -103,22 +103,23 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	$weekday	= ($weekday + 7) % 7; // adjust for $first_day
 	$title		= htmlentities(utf8_ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
 
-	// Begin calendar. Uses a real <caption>.
+	// begin calendar
 	[$p, $pl] = each($pn);
 	[$n, $nl] = each($pn); // previous and next links, if applicable
 
 	if ($p)
 	{
-		$p = '<span class="calendar-prev">' . ($pl ? '<a href="' . Ut::html($pl) . '">' . $p . '</a>' : $p) . '</span>' . NBSP;
+		$tpl->p_text	= ($pl ? '<a href="' . Ut::html($pl) . '">' . $p . '</a>' : $p);
+		$tpl->p_class	= 'calendar-prev';
 	}
 
 	if ($n)
 	{
-		$n = NBSP . '<span class="calendar-next">' . ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n) . '</span>';
+		$tpl->n_text	= ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n);
+		$tpl->n_class	= 'calendar-next';
 	}
 
-	# '<caption class="calendar-month">' . $p . ($month_href ? '<a href="' . Ut::html($month_href) . '">' . $title . '</a>' : $title) . $n . "</caption>\n<tr>";
-	$tpl->title		= $title;
+	$tpl->title		= ($month_href ? '<a href="' . Ut::html($month_href) . '">' . $title . '</a>' : $title);
 	$tpl->href		= $month_href;
 	$tpl->prev		= $p;
 	$tpl->next		= $n;
@@ -153,11 +154,8 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 			}
 
 			# $calendar .= '<td' . ($classes ? ' class="' . Ut::html($classes) . '">' : '>') .
-			#	($link
-			#		? '<a href="' . Ut::html($link) . '">' . $content . '</a>'
-			#		: $content) . '</td>';
 			$tpl->class		= $classes;
-			$tpl->link		= $link;
+			$content		= ($link ? '<a href="' . Ut::html($link) . '">' . $content . '</a>' : $content);
 			$tpl->content	= '<span class="calendar-hl">' . $content . '</span>';
 		}
 		else
