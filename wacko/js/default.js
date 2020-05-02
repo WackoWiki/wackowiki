@@ -121,7 +121,7 @@ var DOTS = '#define x_width 2\n#define x_height 1\nstatic char x_bits[]={0x01}';
 // slightly modified by Kukutz
 var root = window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null;
 var cf_modified = false;
-var WIN_CLOSE_MSG = '\nYou did not save changes. Are you sure you want to leave?\n';
+var WIN_CLOSE_MSG = '\n' + lang.NotSavedWarning + '\n';
 
 function set_modified(e, strict_e)
 {
@@ -137,7 +137,7 @@ function set_modified(e, strict_e)
 	if (el != null)
 	{
 		el.style.borderColor	= '#eecc99';
-		el.title				= '(field is changed, do not forget to save the changes)';
+		el.title				= '[' + lang.ModifiedHint + ']';
 	}
 
 	cf_modified = true;

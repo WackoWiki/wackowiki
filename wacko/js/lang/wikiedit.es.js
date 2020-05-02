@@ -1,6 +1,8 @@
 lang = {
 	// default.js
 	ReallySave :			"Realmente guardar?",
+	ModifiedHint :			"Field has changed, do not forget to save the changes.",
+	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
 
 	// wikiedit.js
 	HelpAbout :				"Ayuda & Acerca de",
