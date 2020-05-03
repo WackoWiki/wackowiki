@@ -416,7 +416,7 @@ $wacko_translation = [
 	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Έκδοση προς εκτύπωση',
-	'PrintText'					=> 'Print',
+	'PrintText'					=> 'Εκτύπωση',
 	'ReferringPages'			=> 'Σελίδες παραπομπών',
 	'NoReferringPages'			=> 'Δεν υπάρχει καμία σελίδα παραπομπής',
 	'Footnotes'					=> 'Υποσημειώσεις',

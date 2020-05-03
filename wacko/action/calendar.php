@@ -17,7 +17,7 @@ if (!defined('IN_WACKO'))
 
 /* stylesheet parameters:
 	.calendar			(table container class)
-	.calendar_month		(month heading format)
+	.calendar-month		(month heading format)
 	.calendar th		(day of week headings)
 	.calendar td
 	.calendar-hl		(highlight)
@@ -81,11 +81,9 @@ else
 	$_range = $range;
 }
 
-$day_name_length = $daywidth;
-
 $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, $month_href = null, $first_day = 0, $pn = []) use (&$tpl)
 {
-	$save			=	$this->set_language($this->user_lang);
+
 	$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
 	// remember that mktime will automatically correct if invalid dates are entered
 	// for instance, mktime(0,0,0,12,32,1997) will be the date for Jan 1, 1998
@@ -98,9 +96,11 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		$day_names[$n] = utf8_ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
 	}
 
+	#$make_date = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "MM,yyyy,LLLL,c");
+	#[$month, $year, $month_name, $weekday] = explode(',', $make_date->format($first_of_month));
 	[$month, $year, $month_name, $weekday] = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
 
-	$weekday	= ($weekday + 7) % 7; // adjust for $first_day
+	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
 	$title		= htmlentities(utf8_ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
 
 	// begin calendar
@@ -153,8 +153,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 				$content = $day;
 			}
 
-			# $calendar .= '<td' . ($classes ? ' class="' . Ut::html($classes) . '">' : '>') .
-			$tpl->class		= $classes;
+			$tpl->class		= $classes ? ' class="' . Ut::html($classes) . '"' : '';
 			$content		= ($link ? '<a href="' . Ut::html($link) . '">' . $content . '</a>' : $content);
 			$tpl->content	= '<span class="calendar-hl">' . $content . '</span>';
 		}
@@ -177,11 +176,12 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		$tpl->last_colspan	= (7 - $weekday); // remaining "empty" days
 	}
 
-	$this->set_language($save, true);
+
 };
 
 #echo "_range:" . $_range . "<br>";
 #echo "month:" . $month;
+$save	=	$this->set_language($this->user_lang, true);
 
 for ($month; $month <= $_range; $month++)
 {
@@ -198,3 +198,4 @@ for ($month; $month <= $_range; $month++)
 	$tpl->leave();	//	m_month_
 }
 
+$this->set_language($save, true);

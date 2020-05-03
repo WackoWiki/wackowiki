@@ -19,10 +19,8 @@
 		<tr>
 			[ ' first colspans ' ]
 			[= d _ =
-				[ ' next ' ]
-				<td class="[ ' classes ' ]">
-					[ ' content ' ]
-				</td>
+			[ ' next ' ]
+				<td[ ' class ' ]>[ ' content ' ]</td>
 			=]
 			[ ' last colspans ' ]
 		</tr>
@@ -35,7 +33,6 @@
 </tr>
 <tr>
 [ == colspans == ]
-<td colspan="[ ' colspan ' ]"> </td>
+<td colspan="[ ' colspan ' ]"></td>
 [ == nav == ]
 <span class="[ ' class ' ]">[ ' text ' ]</span>
-
