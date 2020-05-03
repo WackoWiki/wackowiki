@@ -83,7 +83,6 @@ else
 
 $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, $month_href = null, $first_day = 0, $pn = []) use (&$tpl)
 {
-
 	$first_of_month = gmmktime(0, 0, 0, $month, 1, $year);
 	// remember that mktime will automatically correct if invalid dates are entered
 	// for instance, mktime(0,0,0,12,32,1997) will be the date for Jan 1, 1998
@@ -96,6 +95,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		$day_names[$n] = utf8_ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
 	}
 
+	// https://bugs.php.net/bug.php?id=76123
 	#$make_date = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "MM,yyyy,LLLL,c");
 	#[$month, $year, $month_name, $weekday] = explode(',', $make_date->format($first_of_month));
 	[$month, $year, $month_name, $weekday] = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
@@ -175,12 +175,8 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	{
 		$tpl->last_colspan	= (7 - $weekday); // remaining "empty" days
 	}
-
-
 };
 
-#echo "_range:" . $_range . "<br>";
-#echo "month:" . $month;
 $save	=	$this->set_language($this->user_lang, true);
 
 for ($month; $month <= $_range; $month++)
@@ -190,7 +186,7 @@ for ($month; $month <= $_range; $month++)
 	$generate_calendar($year, $month, $days, $daywidth, null, $firstday, []);
 	$days = []; // reset highlight array as we highlight only once per range
 
-	if ($month % 3 == 0 and $month < $_range)
+	if (($month -1) % 3 == 0 and $month < $_range)
 	{
 		$tpl->next = true;
 	}

@@ -1225,6 +1225,7 @@ a:target {
 
 /* calendar action */
 .calendar { margin: 10px;}
+.calendar:hover { background-color: #E7F9FF;}
 .calendar-month {}
 .calendar th {padding: 5px;}
 .calendar td {padding: 5px; text-align: right;}
