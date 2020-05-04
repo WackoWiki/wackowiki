@@ -630,8 +630,9 @@ ol#comments {
 	font-size: 14px;
 	line-height: 22px;
 	font-weight: bold;
-	margin: 0;
+	margin: 0 0 10px 0;
 	border: none;
+	clear: left;
 }
 
 .comment-preview {

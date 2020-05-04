@@ -27,6 +27,8 @@ if (!isset($year))		$year		= '';
 if (!isset($month))		$month		= '';
 if (!isset($days))		$days		= '';
 if (!isset($daywidth))	$daywidth	= '';
+if (!isset($range))		$range		= 1;
+if (!isset($firstday))	$firstday	= 1;
 if (!isset($highlight))	$highlight	= 'today';
 
 $time			= time();
@@ -44,6 +46,7 @@ if (!$month)
 	$month = $current_month;
 }
 
+// TODO: missing context -> year, month
 if ($highlight == 'today')
 {
 	$days = [$current_day => [null, null, $current_day]];
@@ -56,16 +59,6 @@ else if ($highlight)
 if (!$daywidth)
 {
 	$daywidth = 2;
-}
-
-if (!isset($range))
-{
-	$range = 1;
-}
-
-if (!isset($firstday))
-{
-	$firstday = 1;
 }
 
 if (($range > 1) && ($month > 1))
@@ -90,8 +83,15 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	$day_names = []; // generate all the day names according to the current locale
 
+	#$day_pattern = ($day_name_length == 2
+	#	? "cccccc"	// cccccc - 2-letter textual day name
+	#	: "ccc");	// ccc    - 3-letter textual day name, see http://userguide.icu-project.org/formatparse/datetime
+
+	#$make_day = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, $day_pattern);
+
 	for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t += DAYSECS) // January 4, 1970 was a Sunday
 	{
+		#$day_names[$n] = utf8_ucfirst($make_day->format($t));
 		$day_names[$n] = utf8_ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
 	}
 
@@ -177,7 +177,8 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	}
 };
 
-$save	=	$this->set_language($this->user_lang, true);
+$save	= $this->set_language($this->user_lang, true);
+$n		= 1;
 
 for ($month; $month <= $_range; $month++)
 {
@@ -186,12 +187,13 @@ for ($month; $month <= $_range; $month++)
 	$generate_calendar($year, $month, $days, $daywidth, null, $firstday, []);
 	$days = []; // reset highlight array as we highlight only once per range
 
-	if (($month -1) % 3 == 0 and $month < $_range)
+	if ($n % 3 == 0 and $month < $_range)
 	{
 		$tpl->next = true;
 	}
 
 	$tpl->leave();	//	m_month_
+	$n++;
 }
 
 $this->set_language($save, true);
