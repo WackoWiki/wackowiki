@@ -3,6 +3,7 @@ lang = {
 	ReallySave :			"Really save?",
 	ModifiedHint :			"Field has changed, do not forget to save the changes.",
 	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"Η συνεδρία σας έχει λήξει!\nΈχετε αποσυνδεθεί λόγω μακράς αδράνειας.\n1. Αποθηκεύστε τις τροποποιήσεις της φόρμας σε αρχείο κειμένου για να αποφύγετε την απώλεια.\n2. Ανανέωσε τη σελίδα.\n3. Συνδεθείτε ξανά και υποβάλετε ξανά.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",

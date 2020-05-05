@@ -3,6 +3,7 @@ lang = {
 	ReallySave :			"Wirklich speichern?",
 	ModifiedHint :			"Feld wurde geändert, vergiss nicht, die Änderungen zu speichern.",
 	NotSavedWarning :		"Die Änderungen wurde nicht gespeichert. Bist du sicher, dass du die Seite verlassen willst?",
+	SessionExpiredEditor :	"Deine Sitzung ist abgelaufen!\nAufgrund langer Inaktivität wurdest du abgemeldet.\n1. Speichere die eingegebenen Daten in einer Textdatei, um sie nicht zu verlieren.\n2. Lade die Seite neu.\n3. Melde dich wieder an und sende die Daten erneut.",
 
 	// wikiedit.js
 	HelpAbout :				"Hilfe & Über",

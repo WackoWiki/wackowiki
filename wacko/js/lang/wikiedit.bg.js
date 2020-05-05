@@ -3,6 +3,7 @@ lang = {
 	ReallySave :			"Really save?",
 	ModifiedHint :			"Field has changed, do not forget to save the changes.",
 	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"Сесията ви е изтекла!\nВие сте излезли поради продължително бездействие.\n1. Запишете редакциите на формуляра си в текстов файл, за да предотвратите загуба.\n2. Обновете страницата.\n3. Влезте отново и отново изпратете.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",

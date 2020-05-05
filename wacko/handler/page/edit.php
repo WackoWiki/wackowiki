@@ -11,13 +11,6 @@ $minor_edit		= 0;
 $reviewed		= 0;
 $title			= '';
 
-// invoke autocomplete if needed
-if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
-{
-	include dirname(__FILE__) . '/_autocomplete.php';
-	return;
-}
-
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
 	#		|| $this->is_admin() // XXX: Only for testing - comment out afterwards!
@@ -32,6 +25,13 @@ if ($this->has_access('read')
 		$message = Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>');
 		$this->set_message($message);
 		$this->http->redirect($this->href('new', $this->db->root_page));
+	}
+
+	// invoke autocomplete if needed
+	if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
+	{
+		include dirname(__FILE__) . '/_autocomplete.php';
+		return;
 	}
 
 	$user	= $this->get_user();
@@ -390,6 +390,9 @@ if ($this->has_access('read')
 		{
 			$tpl->autocomplete = true;
 		}
+
+		// session heartbeat timeout = wiki session timeout - 40 second to let the request heartbeat and response go without fuss
+		$tpl->sessionlifetime = $this->sess->cf_gc_maxlifetime - 40;
 	}
 
 	$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';

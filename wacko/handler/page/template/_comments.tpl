@@ -92,9 +92,15 @@
 									if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: show ' ]" ); }
 								=]
 							wE.init('addcomment','WikiEdit','edname-w','[ ' wikiedit ' ]');
+
+							window.onload = function () {
+								var timeout = [ ' sessionlifetime ' ]; // server's session lifetime
+								var name = 'add_comment';
+								userSessionHeartbeat(timeout, name);
+							};
 						</script>
-						<input type="submit" name="save" value="[ ' _t: AddCommentButton ' ]" accesskey="s">
-						<input type="submit" name="preview" value="[ ' _t: EditPreviewButton ' ]">
+						<input type="submit" class="OkBtn_Top" name="save" value="[ ' _t: AddCommentButton ' ]" accesskey="s">
+						<input type="submit" class="OkBtn_Top" name="preview" value="[ ' _t: EditPreviewButton ' ]">
 					</form>
 				</div>
 			=]

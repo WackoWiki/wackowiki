@@ -61,9 +61,18 @@ function _unescape_callback($p)
 
 // Getting a query
 _parse_query_string();
-$q		= $_GET['q'];
-$ta_id	= $_GET['ta_id'];
-
+if(isset($_GET['q']) && isset($_GET['q']))
+{
+	// Working for autocomplete
+	$q		= $_GET['q'];
+	$ta_id	= $_GET['ta_id'];
+}
+else
+{
+	// Any answer to restart session counter
+	echo '1';
+	die();
+}
 
 // 1. unwrap
 $q = utf8_ltrim($q, '/');

@@ -3,6 +3,7 @@ lang = {
 	ReallySave :			"Really save?",
 	ModifiedHint :			"Field has changed, do not forget to save the changes.",
 	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"A sua sessão expirou!\nVocê foi desconectado devido a uma longa inatividade.\n1. Guarde as edições do seu formulário no ficheiro de texto para evitar a sua perda.\n2. Actualize a página.\n3. Faça novamente o login e volte a enviar.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",

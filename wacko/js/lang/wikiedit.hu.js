@@ -3,6 +3,7 @@ lang = {
 	ReallySave :			"Really save?",
 	ModifiedHint :			"Field has changed, do not forget to save the changes.",
 	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"A munkamenet lejárt!\nA hosszú tétlenség miatt bejelentkezett.\n1. Az elvesztés elkerülése érdekében az űrlapszerkesztéseket szöveges fájlba mentse.\n2. Frissítsd az oldalt.\n3. Jelentkezzen be újra, és küldje el újra.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",

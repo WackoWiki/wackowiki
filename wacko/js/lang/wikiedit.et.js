@@ -3,6 +3,7 @@ lang = {
 	ReallySave :			"Really save?",
 	ModifiedHint :			"Field has changed, do not forget to save the changes.",
 	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	SessionExpiredEditor :	"Sinu sessioon on aegunud!\nPika passiivsuse tõttu olete logitud välja.\n1. Kaotuse vältimiseks salvestage vormimuudatused tekstifaili.\n2. Värskendage lehte.\n3. Logi uuesti sisse ja esita uuesti.",
 
 	// wikiedit.js
 	HelpAbout :				"Help & About",

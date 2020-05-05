@@ -79,6 +79,12 @@
 							if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: edit ' ]" ); }
 						=]
 					wE.init('postText','WikiEdit','edname-w','[ ' wikiedit ' ]');
+
+					window.onload = function () {
+						var timeout = [ ' sessionlifetime ' ]; // server's session lifetime
+						var name = 'edit_page';
+						userSessionHeartbeat(timeout, name);
+					};
 				</script>
 				<br>
 				[ '' buttons '' ]

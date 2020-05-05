@@ -121,7 +121,7 @@ var DOTS = '#define x_width 2\n#define x_height 1\nstatic char x_bits[]={0x01}';
 // slightly modified by Kukutz
 var root = window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null;
 var cf_modified = false;
-var WIN_CLOSE_MSG = '\n' + lang.NotSavedWarning + '\n';
+//var WIN_CLOSE_MSG = '\n' + lang.NotSavedWarning + '\n';
 
 function set_modified(e, strict_e)
 {
@@ -137,7 +137,7 @@ function set_modified(e, strict_e)
 	if (el != null)
 	{
 		el.style.borderColor	= '#eecc99';
-		el.title				= '[' + lang.ModifiedHint + ']';
+		el.title				= lang.ModifiedHint;
 	}
 
 	cf_modified = true;
@@ -155,7 +155,7 @@ function check_cf()
 {
 	if (cf_modified)
 	{
-		return WIN_CLOSE_MSG;
+		return '\n' + lang.NotSavedWarning + '\n'; // WIN_CLOSE_MSG
 	}
 }
 
@@ -217,4 +217,44 @@ if (root)
 {
 	if (root.addEventListener) root.addEventListener('load', crit_init, false);
 	else if (root.attachEvent) root.attachEvent('onload', crit_init);
+}
+
+function userSessionHeartbeat(duration, name) {
+	var sessioncounter = setInterval(function () {
+
+		// 1. Prepare new XMLHttpRequest
+		var xhr = new XMLHttpRequest();
+		var url = window.location.href + '?_autocomplete=1&rnd=' + Math.random();
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status != 200) {
+				// Error handling
+				//alert(xhr.status + ': ' + (xhr.statusText ? xhr.statusText : 'Unknown')); // E.g.: 404: Not Found
+				var div = document.createElement('div');
+				div.className = 'msg error';
+				div.innerHTML = lang.SessionExpiredEditor.replace(new RegExp('\n', 'g'), '<br>');
+				alert(lang.SessionExpiredEditor);
+				document.getElementsByName(name)['0'].prepend(div);
+				var list = document.getElementsByClassName('OkBtn_Top');
+				for (var i = 0; i < list.length; i++) {
+					list[i].disabled = true;
+				}
+				var list = document.getElementsByClassName('CancelBtn_Top');
+				for (var i = 0; i < list.length; i++) {
+					list[i].disabled = true;
+				}
+				clearInterval(sessioncounter);
+			}
+
+			if (xhr.status == 200) {
+				// Response handling
+				//alert( xhr.responseText ); // responseText output
+			}
+		};
+		// 2. Configure: GET-request to url in async mode
+		xhr.open('GET', url, true);
+		// 3. Send heartbeat request
+		xhr.send();
+
+	}, duration * 1000);
 }
