@@ -235,11 +235,11 @@ function userSessionHeartbeat(duration, name) {
 				div.innerHTML = lang.SessionExpiredEditor.replace(new RegExp('\n', 'g'), '<br>');
 				alert(lang.SessionExpiredEditor);
 				document.getElementsByName(name)['0'].prepend(div);
-				var list = document.getElementsByClassName('OkBtn_Top');
+				var list = document.getElementsByClassName('btn-ok');
 				for (var i = 0; i < list.length; i++) {
 					list[i].disabled = true;
 				}
-				var list = document.getElementsByClassName('CancelBtn_Top');
+				var list = document.getElementsByClassName('btn-cancel');
 				for (var i = 0; i < list.length; i++) {
 					list[i].disabled = true;
 				}

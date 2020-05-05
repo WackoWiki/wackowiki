@@ -37,7 +37,7 @@
 					<h1>[ ' title | e ' ]</h1>
 				=]
 	
-				<input type="hidden" name="previous" value="[ ' previous ' ]"><br>
+				<input type="hidden" name="previous" value="[ ' previous | e attr ' ]"><br>
 				<textarea id="postText" name="body" rows="40" cols="60" class="TextArea" required>[ ' body | pre ' ]</textarea>
 				<br>
 	
@@ -70,21 +70,20 @@
 					<br>[ ' _t: Categories ' ]: 
 					[ ' categories ' ]
 				=]
-	
 				[ ' captcha ' ]
-
 				<script>
 					wE = new WikiEdit();
 						[= autocomplete _ =
 							if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: edit ' ]" ); }
 						=]
 					wE.init('postText','WikiEdit','edname-w','[ ' wikiedit ' ]');
-
-					window.onload = function () {
-						var timeout = [ ' sessionlifetime ' ]; // server's session lifetime
-						var name = 'edit_page';
-						userSessionHeartbeat(timeout, name);
-					};
+					[= user _ =
+						window.onload = function () {
+							var timeout = [ ' heartbeat ' ];
+							var name = 'edit_page';
+							userSessionHeartbeat(timeout, name);
+						};
+					=]
 				</script>
 				<br>
 				[ '' buttons '' ]
@@ -94,8 +93,8 @@
 
 
 [= buttons =]
-<input type="submit" class="OkBtn_Top" name="save" value="[ ' _t: EditStoreButton ' ]">&nbsp;
-<input type="submit" class="OkBtn_Top" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
-<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn_Top" value="[ ' _t: EditCancelButton ' ]"></a>
+<input type="submit" class="btn-ok" name="save" value="[ ' _t: EditStoreButton ' ]">&nbsp;
+<input type="submit" class="btn-ok" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
+<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="btn-cancel" value="[ ' _t: EditCancelButton ' ]"></a>
 
 

@@ -323,7 +323,7 @@ if ($this->has_access('read')
 		$tpl->r_title = $this->page['title'];
 	}
 
-	$tpl->previous	= Ut::html($previous);
+	$tpl->previous	= $previous; // -> [ ' previous | e attr ' ]
 
 	// FIXME: \n gets stripped by assign() function in TemplatestSetter class, see line 117
 	// -> workaround: [ ' body | pre ' ]
@@ -392,7 +392,7 @@ if ($this->has_access('read')
 		}
 
 		// session heartbeat timeout = wiki session timeout - 40 second to let the request heartbeat and response go without fuss
-		$tpl->sessionlifetime = $this->sess->cf_gc_maxlifetime - 40;
+		$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;
 	}
 
 	$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';

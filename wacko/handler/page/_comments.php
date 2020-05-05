@@ -268,7 +268,7 @@ if ($this->has_access('read'))
 				}
 
 				// session heartbeat timeout = wiki session timeout - 40 second
-				$tpl->sessionlifetime = $this->sess->cf_gc_maxlifetime - 40;
+				$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;
 			}
 
 			$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
