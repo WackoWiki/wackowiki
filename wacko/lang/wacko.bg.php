@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Неправилна парола!',
 	'AlreadyRegistered'			=> 'Ако Вие сте се регистрирали, влезте тук!',
 	'YourLogin'					=> 'Вашето УикиИме',
-	'StuffYouNeed'				=> 'Тези полета трябва да се попълнят, само ако Вие се  регистрирате тук за първи път (така ще бъде създаден нов потребител).',
 	'ConfirmPassword'			=> 'Подтвърждение на паролата',
 	'Email'						=> 'Адрес на електронната поща',
 	'MustBeWikiName'			=> 'Името на потребителя трябва да бъде ((WackoWiki:Doc/Русский/УикиИме УикиИмето)) ',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
+
+	'SimilarPagesExists'		=> 'Подобни страници на% 1 вече съществуват:',
+	'SimilarPagesHint'			=> 'Има съществуващи подобни страници на %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Настройки на %1',
-	'MetaInfo'					=> 'Ключови думи/Описание  (за HTML МЕТА таговете).',
 	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Title',
 	'MetaKeywords'				=> 'Ключови думи',

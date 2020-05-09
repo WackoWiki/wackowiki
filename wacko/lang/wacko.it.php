@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Password non corretta!',
 	'AlreadyRegistered'			=> 'Se sei un utente già registrato, connettiti da qui!',
 	'YourLogin'					=> 'Il tuo NomeWiki',
-	'StuffYouNeed'				=> 'Se ti stai connettendo per la prima volta, compila solo quello che serve (e diventa un nuovo utente del sito).',
 	'ConfirmPassword'			=> 'Conferma password',
 	'Email'						=> 'Indirizzo email',
 	'MustBeWikiName'			=> 'Il nome-utente deve essere ((WackoWiki:Doc/English/WikiName NomeWiki)) configurato!',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'modificare',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
+
+	'SimilarPagesExists'		=> 'Pagine simili a %1 esistono già:',
+	'SimilarPagesHint'			=> 'Esistono pagine simili a %1:',
 
 	'PageReservedWord'			=> 'Non è possibile utilizzare %1 come parte dell\'indirizzo, poiché si tratta di una parola riservata.',
 	'UserReservedWord'			=> 'I nomi utente non possono contenere ##%1## in quanto si tratta di una parola riservata.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Impostazioni per %1',
-	'MetaInfo'					=> 'META Keywords/Description that get inserted into the HTML headers.',
 	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Titolo',
 	'MetaKeywords'				=> 'Keywords',

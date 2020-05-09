@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Nieprawidłowe hasło!',
 	'AlreadyRegistered'			=> 'Zaloguj się!',
 	'YourLogin'					=> 'Twoja NazwaWiki',
-	'StuffYouNeed'				=> 'Musisz wypełnić jedynie, kiedy logujesz się za pierwszym razem (i w ten sposób zapisując się jako nowy użytkownik na tej stronie).',
 	'ConfirmPassword'			=> 'Potwierdź hasło',
 	'Email'						=> 'Adres e-mail',
 	'MustBeWikiName'			=> 'Nazwa użytkownika musi być w formacie ((WackoWiki:Doc/Polish/NazwaWiki NazwyWiki))!',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
+
+	'SimilarPagesExists'		=> 'Podobne strony do %1 już istnieją:',
+	'SimilarPagesHint'			=> 'Istnieją podobne strony do %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Ustawienia dla %1',
-	'MetaInfo'					=> 'Słowa kluczowe/Opis META które zostaną dodane do nagłówków HTML.',
 	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Tytuł',
 	'MetaKeywords'				=> 'Słowa kluczowe Meta',

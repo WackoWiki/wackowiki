@@ -4398,6 +4398,17 @@ class Wacko
 		return false;
 	}
 
+	// checks for a accent and case-insensitive version of the tag
+	function similar_page_exists($tag)
+	{
+		return $results = $this->db->load_all(
+			"SELECT page_id, tag " .
+			"FROM " . $this->db->table_prefix . "page " .
+			"WHERE tag = " . $this->db->q($tag) . " " .
+				"COLLATE utf8mb4_general_ci " .
+			"ORDER BY tag");
+	}
+
 	function sanitize_page_tag(&$tag, $normalize = false)
 	{
 		// normalizing tag name

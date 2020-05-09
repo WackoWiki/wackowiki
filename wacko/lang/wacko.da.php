@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Forkert password!',
 	'AlreadyRegistered'			=> 'Er du allerede registreret kan du logge ind her!',
 	'YourLogin'					=> 'Dit WikiNavn',
-	'StuffYouNeed'				=> 'Information som du skal angive når du logger ind første gang',
 	'ConfirmPassword'			=> 'Bekræft password',
 	'Email'						=> 'Emailadresse',
 	'MustBeWikiName'			=> 'Brugernavn skal være ((WackoWiki:Doc/English/WikiName WikiNavn)) formateret!',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
+
+	'SimilarPagesExists'		=> 'Lignende sider til% 1 findes allerede:',
+	'SimilarPagesHint'			=> 'Der findes eksisterende lignende sider til %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Indstillinger for %1',
-	'MetaInfo'					=> 'META Keywords/Description metadata.',
 	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Titel',
 	'MetaKeywords'				=> 'Nøgleord',

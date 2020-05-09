@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Vale parool!',
 	'AlreadyRegistered'			=> 'Kui sa oled juba registreerunud, logi siit sisse!',
 	'YourLogin'					=> 'Sinu WikiNimi',
-	'StuffYouNeed'				=> 'Asjad mis sa pead ära täitma, kui logid sisse esimest korda (seetõttu registreerud kui esmakordne kasutaja).',
 	'ConfirmPassword'			=> 'Korda parooli',
 	'Email'						=> 'E-posti aadress',
 	'MustBeWikiName'			=> 'Kasutajanimi peab olema formaadis ((WackoWiki:Doc/English/WikiName WikiNimi))!',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
+
+	'SimilarPagesExists'		=> 'Sarnased lehed %1-ga on juba olemas:',
+	'SimilarPagesHint'			=> '%1-ga on sarnaseid lehti:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> ' %1 seadistused.',
-	'MetaInfo'					=> 'META võtmesõnad/kirjeldus, mis lisatakse HTML-i päisesse.',
 	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Pealkiri',
 	'MetaKeywords'				=> 'META võtmesõnad',

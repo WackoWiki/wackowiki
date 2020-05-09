@@ -19,7 +19,7 @@ $wacko_translation = [
 	'YouAre'					=> 'Είσαι ο ',
 	'AccountText'				=> 'Ο λογαριασμός μου',
 	'AccountTip'				=> 'Ρυθμίσεις λογαριασμού',
-	'AdminText'					=> 'Admin',
+	'AdminText'					=> 'Διαχειριστής',
 	'AdminTip'					=> 'Administrative Panel',
 	'LogoutLink'				=> 'Αποσύνδεση',
 	'LogoutButton'				=> 'Αποσύνδεση',
@@ -442,8 +442,8 @@ $wacko_translation = [
 	'NoRecentComments'			=> 'Μη πρόσφατα σχόλια.',
 	'LatestCommentBy'			=> 'τελευταία σχόλια από',
 	'NoRecentlyCommented'		=> 'Δεν υπάρχουν πρόσφατες σελίδες με σχόλια',
-	'NoDeletedPages'			=> 'No deleted pages found.',
-	'NoDeletedFiles'			=> 'No deleted files found.',
+	'NoDeletedPages'			=> 'Δεν βρέθηκαν διαγραμμένες σελίδες.',
+	'NoDeletedFiles'			=> 'Δεν βρέθηκαν διαγραμμένα αρχεία.',
 	'CommentsDisabled'			=> 'Comments are not available.',
 
 	'SearchResults'				=> 'Αποτελέσματα αναζήτησης για ',
@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Λανθασμένο συνθηματικό!',
 	'AlreadyRegistered'			=> 'Αν είστε ήδη εγγεγραμμένος χρήστης, συνδεθείτε εδώ!',
 	'YourLogin'					=> 'Το WikiName',
-	'StuffYouNeed'				=> 'Stuff you only need to fill in when you\'re logging in for the first time (and thus signing up as a new user on this site).',
 	'ConfirmPassword'			=> 'Επιβεβαίωση συνθηματικού',
 	'Email'						=> 'Διεύθυνση Ηλεκτρονικού Ταχυδρομείου',
 	'MustBeWikiName'			=> 'Το όνομα χρήστη πρέπει να είναι σε ((WackoWiki:Doc/English/WikiName WikiName)) μορφή!',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'edit',
 	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
+
+	'SimilarPagesExists'		=> 'Υπάρχουν ήδη παρόμοιες σελίδες με το %1:',
+	'SimilarPagesHint'			=> 'Υπάρχουν υπάρχουσες παρόμοιες σελίδες με το %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Ρυθμίσεις για %1',
-	'MetaInfo'					=> 'META Keywords/Description that get inserted into the HTML headers.',
 	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Τίτλος',
 	'MetaKeywords'				=> 'Λέξεις Κλειδιά',

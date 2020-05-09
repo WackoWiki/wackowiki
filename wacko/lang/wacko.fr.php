@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Mot de passe incorrect !',
 	'AlreadyRegistered'			=> 'Si vous vous êtes déjà enregistré(e], connectez-vous ici !',
 	'YourLogin'					=> 'Votre NomWiki',
-	'StuffYouNeed'				=> 'Information à indiquer seulement pour votre première connexion (devenant ainsi un nouvel utilisateur de ce site).',
 	'ConfirmPassword'			=> 'Confirmez votre mot de passe ',
 	'Email'						=> 'Adresse de messagerie ',
 	'MustBeWikiName'			=> 'Votre nom d’utilisateur doit prendre la forme d’un ((WackoWiki:Doc/Français/NomWiki NomWiki)) !',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Voulez-vous %1',
 	'PageAlreadyExistsEdit2'	=> 'l’éditer',
 	'PageAlreadyExistsEditDenied'	=> 'Vous ne pouvez pas l’éditer.',
+
+	'SimilarPagesExists'		=> 'Des pages similaires à %1 existent déjà :',
+	'SimilarPagesHint'			=> 'Il existe des pages similaires à %1 :',
 
 	'PageReservedWord'			=> 'Vous ne pouvez pas inclure %1 dans l’ adresse car c’est un mot réservé.',
 	'UserReservedWord'			=> 'Les noms d’ utrilisateurs ne pevent pas contenir ##%1## car c’est un mot réservé.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Réglages pour %1',
-	'MetaInfo'					=> 'META Mots-clés/Description insérée dans les en-têtes HTML.',
 	'MetaTag'					=> 'Étiquette',
 	'MetaTitle'					=> 'Titre',
 	'MetaKeywords'				=> 'Méta mots-clés',

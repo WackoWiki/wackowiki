@@ -63,16 +63,16 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		}
 		else if (mb_strlen($user_name) < $this->db->username_chars_min)
 		{
-			$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min) . " ";
+			$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min) . ' ';
 		}
 		else if (mb_strlen($user_name) > $this->db->username_chars_max)
 		{
-			$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . " ";
+			$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . ' ';
 		}
 		// check if valid user name (and disallow '/')
 		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
 		{
-			$error .= $this->_t('InvalidUserName') . " ";
+			$error .= $this->_t('InvalidUserName') . ' ';
 		}
 		// check if reserved word
 		else if (($result = $this->validate_reserved_words($user_name)))
@@ -90,7 +90,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		// no email given
 		else if ($email == '')
 		{
-			$error .= $this->_t('SpecifyEmail') . " ";
+			$error .= $this->_t('SpecifyEmail') . ' ';
 		}
 		// invalid email
 		else if (!$this->validate_email($email))
@@ -100,12 +100,12 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		// no email reuse allowed
 		else if (!$this->db->allow_email_reuse && $this->email_exists($email))
 		{
-			$error .= $this->_t('EmailTaken') . " ";
+			$error .= $this->_t('EmailTaken') . ' ';
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $password)
 		{
-			$error .= $this->_t('PasswordsDidntMatch') . " ";
+			$error .= $this->_t('PasswordsDidntMatch') . ' ';
 		}
 		// password complexity validation
 		else if ($complexity)

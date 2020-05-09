@@ -493,7 +493,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Password errada!',
 	'AlreadyRegistered'			=> 'Se já é um utilizador registado, faça aqui o seu login!',
 	'YourLogin'					=> 'O seu username',
-	'StuffYouNeed'				=> 'Coisas que só precisa de inserir na primeira vez que faz login (e assim registando-se como novo utilizador neste site).',
 	'ConfirmPassword'			=> 'Confirme password',
 	'Email'						=> 'Email',
 	'MustBeWikiName'			=> 'O Username deve ser do formato((WackoWiki:Doc/English/WikiName WikiName)) !',
@@ -613,6 +612,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'editar',
 	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
+
+	'SimilarPagesExists'		=> 'Já existem páginas semelhantes a %1:',
+	'SimilarPagesHint'			=> 'Existem páginas semelhantes a %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
@@ -772,7 +774,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Parâmetros de  %1',
-	'MetaInfo'					=> 'META Keywords e descrições que são automaticamente inseridos nos headers do HTML.',
 	'MetaTag'					=> 'Tag',
 	'MetaTitle'					=> 'Título',
 	'MetaKeywords'				=> 'Keywords',

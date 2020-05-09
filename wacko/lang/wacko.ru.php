@@ -494,7 +494,6 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Неправильный пароль!',
 	'AlreadyRegistered'			=> 'Если вы уже регистрировались, заходите здесь!',
 	'YourLogin'					=> 'Ваше ВикиИмя',
-	'StuffYouNeed'				=> 'Эти поля нужно заполнять, только если вы регистрируетесь здесь впервые (при этом будет создан новый пользователь).',
 	'ConfirmPassword'			=> 'Подтверждение пароля',
 	'Email'						=> 'Адрес электронной почты',
 	'MustBeWikiName'			=> 'Имя пользователя должно быть ((WackoWiki:Doc/Русский/ВикиИмя ВикиИменем)) ',
@@ -614,6 +613,9 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit'		=> '%1 её?',
 	'PageAlreadyExistsEdit2'	=> 'Отредактировать',
 	'PageAlreadyExistsEditDenied'	=> 'Вы не можете отредактировать её.',
+
+	'SimilarPagesExists'		=> 'Подобные страницы с %1 уже существуют:',
+	'SimilarPagesHint'			=> 'Существуют аналогичные страницы до %1:',
 
 	'PageReservedWord'			=> 'Недопустимо использовать служебное слово %1 как часть адреса.',
 	'UserReservedWord'			=> 'Имя пользователя не может содержать служебное слово ##%1##.',
@@ -775,7 +777,6 @@ $wacko_translation = [
 
 	// Properties
 	'PropertiesFor'				=> 'Свойства документа %1',
-	'MetaInfo'					=> 'Ключевые слова/Описание — поля, вставляемые в HTML-заголовок каждой страницы (META).',
 	'MetaTag'					=> 'Тэг',
 	'MetaTitle'					=> 'Заголовок',
 	'MetaKeywords'				=> 'Ключевые слова',
