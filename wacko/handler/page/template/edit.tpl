@@ -97,4 +97,9 @@
 <input type="submit" class="btn-ok" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
 <a href="[ ' href: ' ]" class="btn-link"><input type="button" class="btn-cancel" value="[ ' _t: EditCancelButton ' ]"></a>
 
-
+[ === similarTags === ]
+<ol>
+	[= l _ =
+		<li>['' page '']</li>
+	=]
+</ol>

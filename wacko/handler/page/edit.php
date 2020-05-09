@@ -67,6 +67,23 @@ if ($this->has_access('read')
 		$tpl->warning = $this->show_message($this->_t('EditingRevisionWarning'), 'warning', false);
 	}
 
+	// has similar pages
+	if (!$this->page && $results = $this->similar_page_exists($this->tag))
+	{
+		$log	= $tpl->similarTags();
+
+		foreach ($results as $result)
+		{
+			if ($result['tag'] != $this->tag)
+			{
+				$log->l_page	= $this->link('/' . $result['tag']);
+			}
+		}
+
+		$message = Ut::perc_replace($this->_t('SimilarPagesExists'), '<code>' . $this->tag . '</code>') . '<br>' . $log;
+		$tpl->message = $this->show_message($message, 'notice', false);
+	}
+
 	if (isset($_POST))
 	{
 		$_body	= $_POST['body'] ?? '';
@@ -201,7 +218,7 @@ if ($this->has_access('read')
 					}
 				}
 
-				// now we render it internally so we can write the updated link tables.
+				// now we render it internally to the update the link tables.
 				$this->update_link_table($this->page['page_id'], $body_r);
 
 				$this->page_cache['tag'][$this->tag]					= '';
@@ -328,9 +345,6 @@ if ($this->has_access('read')
 	// FIXME: \n gets stripped by assign() function in TemplatestSetter class, see line 117
 	// -> workaround: [ ' body | pre ' ]
 	$tpl->body		= Ut::html($body);  // -> [ ' body | pre ' ]
-
-	// XXX: only for \n issue testing
-	# echo '<textarea id="postText" name="body" rows="40" cols="60" class="TextArea">'. Ut::html($body) . "</textarea>\n";
 
 	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
 	{
