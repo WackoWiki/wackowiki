@@ -503,9 +503,7 @@ AutoComplete.prototype.requestPattern = function (pattern)
 {
 	var href = this.handler + (this.handler.indexOf('?') >= 0 ? '&' : '?') + 'q=' + escape(pattern)
 		+ '&ta_id=' + escape(this.wikiedit.area.id) + '&_autocomplete=1&rnd=' + Math.random();
-	req = window.XMLHttpRequest
-		? new XMLHttpRequest()
-		: new ActiveXObject('Microsoft.XMLHTTP');
+	req = new XMLHttpRequest();
 
 	req.onreadystatechange = function ()
 	{

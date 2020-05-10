@@ -134,7 +134,7 @@ $wacko_translation = [
 	'EmailLink'					=> 'Συγγραφή ενός email (εκκίνηση mail εφαρμογής)',
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
 	'PermaLink'					=> 'Σταθερός σύνδεσμος',
-	'PermaLinkTip'				=> 'Permanent link to this page',
+	'PermaLinkTip'				=> 'Μόνιμος σύνδεσμος σε αυτή την έκδοση της σελίδας',
 
 	'ShowTip'					=> 'Πάτησε εδώ για να επιστρέψεις στην κατάσταση εμφάνισης',
 	'ShowText'					=> 'Εμφάνιση',
@@ -719,7 +719,7 @@ $wacko_translation = [
 	'UsersLogins'				=> 'Logins',
 	'UsersRevisions'			=> 'Revisions',
 	'UsersSignup'				=> 'Signup',
-	'UsersLastSession'			=> 'Last session',
+	'UsersLastSession'			=> 'Τελευταία συνεδρία',
 	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'Profile',
 	'UsersContact'				=> 'Contact',

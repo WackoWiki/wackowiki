@@ -134,7 +134,7 @@ $wacko_translation = [
 	'EmailLink'					=> ' Scrivi un email (avvia un programma di posta)',
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
 	'PermaLink'					=> 'Link permanente',
-	'PermaLinkTip'				=> 'Collegamento permanente della pagina',
+	'PermaLinkTip'				=> 'Collegamento permanente a questa versione della pagina',
 
 	'ShowTip'					=> 'Clicca per tornare in modalità visione',
 	'ShowText'					=> 'Visiona',

@@ -219,15 +219,18 @@ if (root)
 	else if (root.attachEvent) root.attachEvent('onload', crit_init);
 }
 
-function userSessionHeartbeat(duration, name) {
-	var sessioncounter = setInterval(function () {
-
+function userSessionHeartbeat(duration, name)
+{
+	var sessioncounter = setInterval(function ()
+	{
 		// 1. Prepare new XMLHttpRequest
 		var xhr = new XMLHttpRequest();
 		var url = window.location.href + '?_autocomplete=1&rnd=' + Math.random();
 
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status != 200) {
+		xhr.onreadystatechange = function()
+		{
+			if (xhr.readyState == 4 && xhr.status != 200)
+			{
 				// Error handling
 				//alert(xhr.status + ': ' + (xhr.statusText ? xhr.statusText : 'Unknown')); // E.g.: 404: Not Found
 				var div = document.createElement('div');
@@ -235,22 +238,29 @@ function userSessionHeartbeat(duration, name) {
 				div.innerHTML = lang.SessionExpiredEditor.replace(new RegExp('\n', 'g'), '<br>');
 				alert(lang.SessionExpiredEditor);
 				document.getElementsByName(name)['0'].prepend(div);
+
 				var list = document.getElementsByClassName('btn-ok');
-				for (var i = 0; i < list.length; i++) {
+				for (var i = 0; i < list.length; i++)
+				{
 					list[i].disabled = true;
 				}
+
 				var list = document.getElementsByClassName('btn-cancel');
-				for (var i = 0; i < list.length; i++) {
+				for (var i = 0; i < list.length; i++)
+				{
 					list[i].disabled = true;
 				}
+
 				clearInterval(sessioncounter);
 			}
 
-			if (xhr.status == 200) {
+			if (xhr.status == 200)
+			{
 				// Response handling
 				//alert( xhr.responseText ); // responseText output
 			}
 		};
+
 		// 2. Configure: GET-request to url in async mode
 		xhr.open('GET', url, true);
 		// 3. Send heartbeat request
