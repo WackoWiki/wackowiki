@@ -42,8 +42,8 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
+	/* overflow: hidden; */
 	clear: both;
-	/* position: relative; */
 }
 
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
@@ -56,10 +56,10 @@ h1 {
 	line-height: 110%;
 	color: #235e9a;
 }
-h2 { font-family: Verdana, sans-serif; font-size: 20px; margin-top:20px; margin-bottom:5px; border-bottom:3px dotted #ddd; color: #204a87;}
-h3 { font-family: Verdana, sans-serif; font-size: 17px; margin-top:15px; margin-bottom:5px; border-bottom:2px dotted #ddd;}
-h4 { font-family: Arial, sans-serif;   font-size: 16px; margin-top:15px; margin-bottom:5px; border-bottom:1px #999999 solid;}
-h5 { font-family: Arial, sans-serif;   font-size: 14px; margin-top:10px; margin-bottom:5px; border-bottom:1px #bbbbbb solid;}
+h2 { font-family: Verdana, sans-serif; font-size: 20px; margin-top: 20px; margin-bottom: 5px; border-bottom: 3px dotted #ddd; color: #204a87;}
+h3 { font-family: Verdana, sans-serif; font-size: 17px; margin-top: 15px; margin-bottom: 5px; border-bottom: 2px dotted #ddd;}
+h4 { font-family: Arial, sans-serif;   font-size: 16px; margin-top: 15px; margin-bottom: 5px; border-bottom: 1px #999999 solid;}
+h5 { font-family: Arial, sans-serif;   font-size: 14px; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px #bbbbbb solid;}
 h6 { font-family: Arial, sans-serif;   font-size: 12px; }
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
@@ -306,7 +306,6 @@ blockquote {
 	color: #444444;
 	padding: 25px 30px;
 	font-family: sans-serif;
-
 	/* background: #f5f5f5; */
 }
 blockquote p { padding: 0;  margin: 5px 0; }

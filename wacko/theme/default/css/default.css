@@ -10,12 +10,6 @@ textarea {
 	line-height: 1.3em;
 }
 
-/* pre {
-	font-family:"Lucida Console","Courier New",monospace;
-	text-align:left;
-	white-space:pre;
-} */
-
 /* cellspacing */
 table {
 	border-collapse: collapse;
@@ -115,7 +109,6 @@ a:visited {
 
 a:hover {
 	color: #B90022;
-	/*color: #FF6622;*/
 	text-decoration: underline;
 }
 
@@ -124,19 +117,16 @@ a:active {
 }
 
 a:target {
-	/* color: #FF0000; */
-	/* border: 2px solid #FF6600; */
 	background-color: #FFEEEE;
-	/* padding: 5px 10px; */
 }
 
 .heading > a.self-link::before {
-	content: "\00a7"; /* § UTF-8 escape sequences */
+	content: "§";
 	visibility: hidden;
 }
 
 .heading:hover > a.self-link::before {
-	content: "\00a7"; /* § UTF-8 escape sequences */
+	content: "§";
 	visibility: visible;
 	text-decoration: none;
 }
@@ -873,7 +863,6 @@ td.file- {
 
 .filemeta li {
 	list-style-type: none;
-	/* padding: 0; */
 	padding-bottom: 5px;
 	text-align: left;
 	overflow-wrap: break-word;
@@ -903,14 +892,14 @@ td.file- {
 
 /* caption */
 .caption{
-	color: #1d1d1d; /* #888 #666*/
+	color: #1d1d1d;
 	font-size: 12px;
 }
 .caption-sub {
 	
 }
 .caption-license {
-	color: #888; /* #AAAAAA */
+	color: #888;
 }
 
 .preview {
