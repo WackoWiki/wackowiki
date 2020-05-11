@@ -10,7 +10,7 @@ $this->ensure_page();
 
 if (!($this->is_owner() || $this->is_admin()))
 {
-	$this->set_message($this->_t('ACLAccessDenied'), 'error');
+	$this->set_message($this->_t('AclAccessDenied'), 'error');
 	$this->show_must_go_on();
 }
 
@@ -39,7 +39,7 @@ if (@$_POST['_action'] === 'set_permissions')
 
 		if (!$new_owner)
 		{
-			$this->set_message(Ut::perc_replace($this->_t('ACLNoNewOwner'), $uid), 'error');
+			$this->set_message(Ut::perc_replace($this->_t('AclNoNewOwner'), $uid), 'error');
 			$this->reload_me();
 		}
 
@@ -76,7 +76,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		}
 
 		// log event
-		$this->log(2, Ut::perc_replace($this->_t('LogACLUpdated', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
+		$this->log(2, Ut::perc_replace($this->_t('LogAclUpdated', SYSTEM_LANG), $page['tag'] . ' ' . $page['title']));
 
 		// Change permissions for all comments on this page
 		// TODO: need to rethink/redo
@@ -156,7 +156,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		}
 	}
 
-	$message = $this->_t('ACLUpdated');
+	$message = $this->_t('AclUpdated');
 
 	if ($new_owner && $new_owner['owned'])
 	{
@@ -168,7 +168,7 @@ if (@$_POST['_action'] === 'set_permissions')
 			$this->notify_new_owner($new_owner);
 		}
 
-		$message .= $this->_t('ACLGaveOwnership') . '<code>' . $new_owner['user_name'] . '</code>';
+		$message .= $this->_t('AclGaveOwnership') . '<code>' . $new_owner['user_name'] . '</code>';
 	}
 
 	// purge SQL queries cache
@@ -192,7 +192,7 @@ if ($upload_allowed)
 }
 
 // show form
-$tpl->title		= Ut::perc_replace($this->_t('ACLFor'), $this->compose_link_to_page($this->tag, '', ''));
+$tpl->title		= Ut::perc_replace($this->_t('AclFor'), $this->compose_link_to_page($this->tag, '', ''));
 
 $tpl->read		= Ut::html($read_acl['list']);
 $tpl->write		= Ut::html($write_acl['list']);

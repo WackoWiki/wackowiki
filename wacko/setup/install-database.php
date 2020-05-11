@@ -96,7 +96,7 @@ switch ($config['database_driver'])
 		if (!test(
 			$lang['TestConnectionString'],
 			$dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port),
-			$lang['ErrorDBConnection'])
+			$lang['ErrorDbConnection'])
 		)
 		{
 			/*
@@ -108,7 +108,7 @@ switch ($config['database_driver'])
 
 			$fatal_error = true;
 		}
-		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDBExists'], $dblink))
+		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDbExists'], $dblink))
 		{
 			/*
 			 There was a problem with the specified database name
@@ -309,7 +309,7 @@ switch ($config['database_driver'])
 		// Do the initial database connection test separately as it is a special case.
 		try
 		{
-			test($lang['TestConnectionString'], $dblink = @new PDO($dsn, $config['database_user'], $config['database_password']), $lang['ErrorDBConnection']);
+			test($lang['TestConnectionString'], $dblink = @new PDO($dsn, $config['database_user'], $config['database_password']), $lang['ErrorDbConnection']);
 			$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e)

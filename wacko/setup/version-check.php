@@ -12,8 +12,8 @@ write_config_hidden_nodes(['none' => '']);
 
 	$php_version_result = version_compare(PHP_MIN_VERSION, PHP_VERSION, '<');
 	?>
-<h2><?php echo $lang['PHPVersion']; ?></h2>
-<p class="notop"><?php echo $lang['PHPDetected']; ?> <?php echo phpversion() . '   ' . output_image($php_version_result); ?></p>
+<h2><?php echo $lang['PhpVersion']; ?></h2>
+<p class="notop"><?php echo $lang['PhpDetected']; ?> <?php echo phpversion() . '   ' . output_image($php_version_result); ?></p>
 	<?php
 	/*
 		Check if mod_rewrite is installed
@@ -112,7 +112,7 @@ write_config_hidden_nodes(['none' => '']);
 		'spl',
 	];
 	?>
-<h2><?php echo $lang['PHPExtensions']; ?></h2>
+<h2><?php echo $lang['PhpExtensions']; ?></h2>
 <ul class="column-3">
 	<?php
 	foreach ($php_extension as $extension)
@@ -132,7 +132,7 @@ write_config_hidden_nodes(['none' => '']);
 
 	if (1 != preg_match('/^.{1}$/u', "ñ", $UTF8_ar))
 	{
-		echo "\t<li>" . $lang['PCREwithoutUTF8'] . ' ' . output_image(false) . "</li>\n";
+		echo "\t<li>" . $lang['PcreWithoutUtf8'] . ' ' . output_image(false) . "</li>\n";
 	}
 
 	unset($UTF8_ar);
@@ -205,7 +205,7 @@ write_config_hidden_nodes(['none' => '']);
 	else if (!$php_version_result)
 	{
 ?>
-<p><?php echo $lang['ErrorMinPHPVersion']; ?></p>
+<p><?php echo $lang['ErrorMinPhpVersion']; ?></p>
 <input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
 <?php
 	}

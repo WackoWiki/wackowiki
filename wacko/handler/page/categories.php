@@ -331,6 +331,6 @@ if ($this->is_owner() || $this->is_admin())
 }
 else
 {
-	$message		= $this->_t('ACLAccessDenied');
+	$message		= $this->_t('AclAccessDenied');
 	$tpl->denied	= $this->show_message($message, 'note', false);
 }

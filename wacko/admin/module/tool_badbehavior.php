@@ -282,7 +282,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 			if (!empty($_GET['status_key']))		echo '<strong>' . $engine->_t('BbStatus')		. '</strong> ' . $link . ' ';
 			if (!empty($_GET['blocked']))			echo '<strong>' . $engine->_t('BbBlocked')		. '</strong> ' . $link . ' ';
 			if (!empty($_GET['permitted']))			echo '<strong>' . $engine->_t('BbPermitted')	. '</strong> ' . $link . ' ';
-			if (!empty($_GET['ip']))				echo '<strong>' . $engine->_t('BbIP')			. '</strong> ' . $link . ' ';
+			if (!empty($_GET['ip']))				echo '<strong>' . $engine->_t('BbIp')			. '</strong> ' . $link . ' ';
 			if (!empty($_GET['user_agent']))		echo '<strong>' . $engine->_t('BbUserAgent')	. '</strong> ' . $link . ' ';
 			if (!empty($_GET['request_method']))	echo '<strong>' . $engine->_t('BbGetPost')		. '</strong> ' . $link . ' ';
 		}
@@ -309,7 +309,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 			<thead>
 				<tr>
 					<th scope="col" class="check-column"></th>
-					<th scope="col"><?php echo $engine->_t('BbIPDateStatus');?></th>
+					<th scope="col"><?php echo $engine->_t('BbIpDateStatus');?></th>
 					<th scope="col"><?php echo $engine->_t('BbHeaders');?></th>
 					<th scope="col"><?php echo $engine->_t('BbEntity');?></th>
 				</tr>
@@ -456,8 +456,8 @@ function admin_tool_badbehavior(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="whitelists_ip"><strong><?php echo $engine->_t('BbIPAddress');?>:</strong><br>
-					<small><?php echo $engine->_t('BbIPAddressInfo');?></small></label>
+					<label for="whitelists_ip"><strong><?php echo $engine->_t('BbIpAddress');?>:</strong><br>
+					<small><?php echo $engine->_t('BbIpAddressInfo');?></small></label>
 				</td>
 				<td>
 					<textarea cols="24" rows="6" id="whitelists_ip" name="ip"><?php echo implode("\n", $whitelists['ip']); ?></textarea>
@@ -468,8 +468,8 @@ function admin_tool_badbehavior(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="whitelists_url"><strong><?php echo $engine->_t('BbURL');?>:</strong><br>
-					<small><?php echo $engine->_t('BbURLInfo');?></small></label>
+					<label for="whitelists_url"><strong><?php echo $engine->_t('BbUrl');?>:</strong><br>
+					<small><?php echo $engine->_t('BbUrlInfo');?></small></label>
 				</td>
 				<td>
 					<textarea cols="48" rows="6" id="whitelists_url" name="url"><?php echo implode("\n", $whitelists['url']); ?></textarea>

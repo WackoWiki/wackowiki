@@ -12,7 +12,7 @@ $tpl->head = Ut::perc_replace($this->_t('PropertiesFor'), $this->compose_link_to
 // STS write? really?
 if (!($this->is_owner() || $this->is_admin() || $this->has_access('write', $this->page['page_id'])))
 {
-	$this->set_message($this->_t('ACLAccessDenied'), 'error');
+	$this->set_message($this->_t('AclAccessDenied'), 'error');
 	$this->show_must_go_on();
 }
 

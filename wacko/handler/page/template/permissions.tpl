@@ -16,7 +16,7 @@
 				
 				<tr>
 					<th scope="row">
-						<label for="read_acl">[ ' _t: ACLRead ' ]</label>
+						<label for="read_acl">[ ' _t: AclRead ' ]</label>
 					</th>
 					<td>
 						<textarea id="read_acl" name="read_acl" rows="4" cols="20">[ ' read | pre ' ]</textarea>
@@ -24,7 +24,7 @@
 				</tr>
 				<tr>
 					<th scope="row">
-						<label for="write_acl">[ ' _t: ACLWrite ' ]</label>
+						<label for="write_acl">[ ' _t: AclWrite ' ]</label>
 					</th>
 					<td>
 						<textarea id="write_acl" name="write_acl" rows="4" cols="20">[ ' write | pre ' ]</textarea>
@@ -32,7 +32,7 @@
 				</tr>
 				<tr>
 					<th scope="row">
-						<label for="comment_acl">[ ' _t: ACLComment ' ]</label>
+						<label for="comment_acl">[ ' _t: AclComment ' ]</label>
 					</th>
 					<td>
 						<textarea id="comment_acl" name="comment_acl" rows="4" cols="20">[ ' comment | pre ' ]</textarea>
@@ -40,7 +40,7 @@
 				</tr>
 				<tr>
 					<th scope="row">
-						<label for="create_acl">[ ' _t: ACLCreate ' ]</label>
+						<label for="create_acl">[ ' _t: AclCreate ' ]</label>
 					</th>
 					<td>
 						<textarea id="create_acl" name="create_acl" rows="4" cols="20">[ ' create | pre ' ]</textarea>
@@ -49,7 +49,7 @@
 				[= u _ =
 					<tr>
 						<th scope="row">
-							<label for="upload_acl">[ ' _t: ACLUpload ' ]</label>
+							<label for="upload_acl">[ ' _t: AclUpload ' ]</label>
 						</th>
 						<td>
 							<textarea id="upload_acl" name="upload_acl" rows="4" cols="20">[ ' upload | pre ' ]</textarea>
@@ -89,8 +89,8 @@
 					</th>
 					<td>
 						<br>
-						<input type="submit" class="OkBtn" id="submit" value="[ ' _t: ACLStoreButton ' ]" accesskey="s"> &nbsp;
-						<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" id="button" value="[ ' _t: ACLCancelButton ' ]"/></a>
+						<input type="submit" class="OkBtn" id="submit" value="[ ' _t: AclStoreButton ' ]" accesskey="s"> &nbsp;
+						<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" id="button" value="[ ' _t: AclCancelButton ' ]"/></a>
 					</td>
 				</tr>
 			</tbody>

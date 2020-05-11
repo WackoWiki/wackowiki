@@ -71,8 +71,8 @@ echo '   <input type="hidden" name="password" value="' . ($_POST['password'] ?? 
 	{
 
 ?>
-	<h2><?php echo $lang['DBDriver'];?></h2>
-	<p class="notop"><?php echo $lang['DBDriverDesc']; ?></p>
+	<h2><?php echo $lang['DbDriver'];?></h2>
+	<p class="notop"><?php echo $lang['DbDriverDesc']; ?></p>
 	<ul>
 <?php
 /*
@@ -117,8 +117,8 @@ foreach ($drivers as $k => $driver)
 	</ul>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="database_charset"><?php echo $lang['DBCharset'];?></label>
-	<p class="notop"><?php echo $lang['DBCharsetDesc']; ?></p>
+	<label class="label_top" for="database_charset"><?php echo $lang['DbCharset'];?></label>
+	<p class="notop"><?php echo $lang['DbCharsetDesc']; ?></p>
 
 <?php
 /*
@@ -155,8 +155,8 @@ if ($config['is_update'] == false)
 {
 	echo $separator;
 	?>
-	<h2><?php echo $lang['DBEngine'];?></h2>
-	<p class="notop"><?php echo $lang['DBEngineDesc']; ?></p>
+	<h2><?php echo $lang['DbEngine'];?></h2>
+	<p class="notop"><?php echo $lang['DbEngineDesc']; ?></p>
 	<ul>
 	<?php
 	/*
@@ -189,28 +189,28 @@ else
 }
 ?>
 <?php echo $separator; ?>
-	<label class="label_top" for="database_host"><?php echo $lang['DBHost'];?></label>
-	<p class="notop"><?php echo $lang['DBHostDesc']; ?></p>
+	<label class="label_top" for="database_host"><?php echo $lang['DbHost'];?></label>
+	<p class="notop"><?php echo $lang['DbHostDesc']; ?></p>
 	<input type="text" maxlength="1000" id="database_host" name="config[database_host]" value="<?php echo $config['database_host'] ?>" placeholder="localhost" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="database_port"><?php echo $lang['DBPort'];?></label>
-	<p class="notop"><?php echo $lang['DBPortDesc']; ?></p>
+	<label class="label_top" for="database_port"><?php echo $lang['DbPort'];?></label>
+	<p class="notop"><?php echo $lang['DbPortDesc']; ?></p>
 	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input">
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="database_database"><?php echo $lang['DB'];?></label>
-	<p class="notop"><?php echo $lang['DBDesc']; ?></p>
+	<label class="label_top" for="database_database"><?php echo $lang['Db'];?></label>
+	<p class="notop"><?php echo $lang['DbDesc']; ?></p>
 	<input type="text" maxlength="64" id="database_database" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="database_user"><?php echo $lang['DBUser'];?></label>
-	<p class="notop"><?php echo $lang['DBUserDesc']; ?></p>
+	<label class="label_top" for="database_user"><?php echo $lang['DbUser'];?></label>
+	<p class="notop"><?php echo $lang['DbUserDesc']; ?></p>
 	<input type="text" maxlength="50" id="database_user" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="database_password"><?php echo $lang['DBPassword'];?></label>
-	<p class="notop"><?php echo $lang['DBPasswordDesc']; ?></p>
+	<label class="label_top" for="database_password"><?php echo $lang['DbPassword'];?></label>
+	<p class="notop"><?php echo $lang['DbPasswordDesc']; ?></p>
 	<input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input">
 	<br>
 <?php echo $separator; ?>

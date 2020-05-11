@@ -57,7 +57,7 @@ $end_depth		= $to[1];
 if (!$nomark)
 {
 	echo '<nav class="layout-box">' .
-			'<p><span> ' . $this->_t('TOCTitle') . ' ' . $this->link($ppage, '', $legend) . ' </span></p>';
+			'<p><span> ' . $this->_t('TocTitle') . ' ' . $this->link($ppage, '', $legend) . ' </span></p>';
 }
 
 if ($_page)

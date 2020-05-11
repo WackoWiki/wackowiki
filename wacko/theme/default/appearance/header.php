@@ -222,7 +222,7 @@ else
 	// permissions tab
 	if (!$this->forum && ($this->is_owner() || $this->is_admin()))
 	{
-		$echo_tab('permissions', 'ACLTip', 'ACLText', 2, '', 'a');
+		$echo_tab('permissions', 'AclTip', 'AclText', 2, '', 'a');
 	}
 
 	// categories tab
