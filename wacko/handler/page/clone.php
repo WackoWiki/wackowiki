@@ -68,12 +68,12 @@ if (@$_POST['_action'] === 'clone_page')
 
 			if ($this->load_page($dst, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				$log->err_a_error = Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($dst, '', ''));
+				$log->err_a_error = Ut::perc_replace($this->_t('AlreadyExists'), '<strong>' . $this->compose_link_to_page($dst, '', '') . '</strong>');
 			}
 			else if (!$this->has_access('read', $page['page_id']))
 			{
 				$this->set_message(
-					Ut::perc_replace($this->_t('CloneCannotRead'), $this->compose_link_to_page($src, '', '')),
+					Ut::perc_replace($this->_t('CloneCannotRead'), '<strong>' . $this->compose_link_to_page($src, '', '') . '</strong>'),
 					'error');
 
 				if ($dst === $to)
@@ -85,7 +85,7 @@ if (@$_POST['_action'] === 'clone_page')
 			}
 			else if (!$this->has_access('create', '', '', 1, $dst))
 			{
-				$log->err_a_error = Ut::perc_replace($this->_t('CloneCannotCreate'), $this->compose_link_to_page($dst, '', ''));
+				$log->err_a_error = Ut::perc_replace($this->_t('CloneCannotCreate'), '<strong>' . $this->compose_link_to_page($dst, '', '') . '</strong>');
 			}
 
 			$work[$src] = $dst;

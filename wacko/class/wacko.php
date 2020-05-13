@@ -4446,12 +4446,12 @@ class Wacko
 		{
 			if ($tag === $old_tag)
 			{
-				return Ut::perc_replace($this->_t('AlreadyNamed'), $this->compose_link_to_page($tag, '', ''));
+				return Ut::perc_replace($this->_t('AlreadyNamed'), '<strong>' . $this->compose_link_to_page($tag, '', '') . '</strong>');
 			}
 
 			if ($this->tag != $tag && $this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
-				return Ut::perc_replace($this->_t('AlreadyExists'), $this->compose_link_to_page($tag, '', ''));
+				return Ut::perc_replace($this->_t('AlreadyExists'), '<strong>' . $this->compose_link_to_page($tag, '', '') . '</strong>');
 			}
 		}
 

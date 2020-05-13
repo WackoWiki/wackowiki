@@ -550,8 +550,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Cloned from %1.',
 	'MassClone'					=> 'Clone entire cluster',
 	'MassCloning'				=> 'Cloning cluster.',
-	'CloneCannotRead'			=> 'Unreadable page <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
+	'CloneCannotRead'			=> 'Unreadable page %1.',
+	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
 	'SortComment'				=> 'Sort comment by',
 	'SortCommentAsc'			=> 'Most recent on bottom',
@@ -562,8 +562,8 @@ $wacko_translation = [
 	'RenameTip'					=> 'Rename page',
 	'NewName'					=> 'Въведете ново име за тази страница',
 	'RenameButton'				=> 'Преименувай',
-	'AlreadyExists'				=> 'Страница с име <strong>%1</strong> вече съществува.',
-	'AlreadyNamed'				=> 'Тази страница вече е с име <strong>%1</strong>.',
+	'AlreadyExists'				=> 'Страница с име %1 вече съществува.',
+	'AlreadyNamed'				=> 'Тази страница вече е с име %1.',
 	'PageRenamed'				=> 'Страница е преименувана.',
 	'NewNameOfPage'				=> 'Новото име е: ',
 	'NotOwnerCantRename'		=> 'Вие не сте собственика на тази страница и не можете да я преименувате',
@@ -989,7 +989,7 @@ $wacko_translation = [
 	'TemplateCache'				=> 'Template cache',
 	'ThumbCache'				=> 'Thumbnail cache',
 
-	// Flash
+	// Embed
 	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
 
 	// Feed

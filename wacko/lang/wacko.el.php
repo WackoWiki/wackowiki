@@ -550,8 +550,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Τα κλωνοποιημένα από %1.',
 	'MassClone'					=> 'Clone entire cluster',
 	'MassCloning'				=> 'Cloning cluster.',
-	'CloneCannotRead'			=> 'Unreadable page <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
+	'CloneCannotRead'			=> 'Unreadable page %1.',
+	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
 	'SortComment'				=> 'Sort comment by',
 	'SortCommentAsc'			=> 'Most recent on bottom',
@@ -562,8 +562,8 @@ $wacko_translation = [
 	'RenameTip'					=> 'Μετονομασία σελίδας',
 	'NewName'					=> 'Εισήγαγε ένα νέο όνομα σε αυτή την σελίδα',
 	'RenameButton'				=> 'Μετονομασία',
-	'AlreadyExists'				=> 'Η σελίδα <strong>%1</strong> υπάρχει ήδη.',
-	'AlreadyNamed'				=> 'Η σελίδα έχει ήδη μετονομαστεί <strong>%1</strong>.',
+	'AlreadyExists'				=> 'Η σελίδα %1 υπάρχει ήδη.',
+	'AlreadyNamed'				=> 'Η σελίδα έχει ήδη μετονομαστεί %1.',
 	'PageRenamed'				=> 'Η σελίδα μετονομάστηκε.',
 	'NewNameOfPage'				=> 'Νέο όνομα αυτής της σελίδας: ',
 	'NotOwnerCantRename'		=> 'Δεν είστε ο ιδιοκτήτης αυτής της σελίδα και λόγο αυτού δεν μπορείτε να την μετονομάστε',
@@ -989,7 +989,7 @@ $wacko_translation = [
 	'TemplateCache'				=> 'Template cache',
 	'ThumbCache'				=> 'Thumbnail cache',
 
-	// Flash
+	// Embed
 	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
 
 	// Feed

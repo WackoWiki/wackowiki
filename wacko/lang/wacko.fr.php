@@ -550,8 +550,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Clonée à partir de %1.',
 	'MassClone'					=> 'Cloner le groupe tout entier',
 	'MassCloning'				=> 'Clonage du groupe.',
-	'CloneCannotRead'			=> 'Page <strong>%1</strong> illisible.',
-	'CloneCannotCreate'			=> 'Page <strong>%1</strong> impossible à créer.',
+	'CloneCannotRead'			=> 'Page %1 illisible.',
+	'CloneCannotCreate'			=> 'Page %1 impossible à créer.',
 
 	'SortComment'				=> 'Trier le commentaires par',
 	'SortCommentAsc'			=> 'Le plus récent au fond',
@@ -562,8 +562,8 @@ $wacko_translation = [
 	'RenameTip'					=> 'Renommer cette page',
 	'NewName'					=> 'Donner un nouveau nom à cette page',
 	'RenameButton'				=> 'Renommer',
-	'AlreadyExists'				=> 'La page <strong>%1</strong> existe déjà .',
-	'AlreadyNamed'				=> 'Cette page s’appelle déjà <strong>%1</strong>.',
+	'AlreadyExists'				=> 'La page %1 existe déjà .',
+	'AlreadyNamed'				=> 'Cette page s’appelle déjà %1.',
 	'PageRenamed'				=> 'Page renommée.',
 	'NewNameOfPage'				=> 'Nouveau nom de cette page: ',
 	'NotOwnerCantRename'		=> 'Vous ne pouvez pas renommer cette page dont vous n’êtes pas le propriétaire',
@@ -989,7 +989,7 @@ $wacko_translation = [
 	'TemplateCache'				=> 'Cache de modèle',
 	'ThumbCache'				=> 'Cache de vignette',
 
-	// Flash
+	// Embed
 	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="file:le_film.swf"}} )',
 
 	// Feed

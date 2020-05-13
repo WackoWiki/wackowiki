@@ -550,8 +550,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Cloned from %1.',
 	'MassClone'					=> 'Clone entire cluster',
 	'MassCloning'				=> 'Cloning cluster.',
-	'CloneCannotRead'			=> 'Unreadable page <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
+	'CloneCannotRead'			=> 'Unreadable page %1.',
+	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
 	'SortComment'				=> 'Sorteer commentaar op',
 	'SortCommentAsc'			=> 'Meest recent op bodem',
@@ -562,8 +562,8 @@ $wacko_translation = [
 	'RenameTip'					=> 'Hernoemen pagina',
 	'NewName'					=> 'Geef een nieuwe naam voor deze pagina',
 	'RenameButton'				=> 'Hernoem',
-	'AlreadyExists'				=> 'Pagina <strong>%1</strong> bestaat al.',
-	'AlreadyNamed'				=> 'Deze pagina heeft al een naam: <strong>%1</strong>.',
+	'AlreadyExists'				=> 'Pagina %1 bestaat al.',
+	'AlreadyNamed'				=> 'Deze pagina heeft al een naam: %1.',
 	'PageRenamed'				=> 'Pagina hernoemd.',
 	'NewNameOfPage'				=> 'Nieuwe naam van deze pagina: ',
 	'NotOwnerCantRename'		=> 'U bent niet de eigenaar van deze pagina en kunt deze niet verwijderen.',
@@ -589,7 +589,7 @@ $wacko_translation = [
 
 	'FurtherPending'			=> 'Er zullen geen andere mededelingen worden gedaan in geval van verdere wijzigingen, tenzij u deze pagina bezoekt.',
 
-	'UserSettingsEmailMe'		=> 'Email me when ...',
+	'UserSettingsEmailMe'		=> 'E-mail me als ...',
 
 	'UserSettingsExtended'		=> 'Uitgebreid',
 	'UserSettingsOther'			=> 'Other settings',
@@ -613,10 +613,10 @@ $wacko_translation = [
 	'PageAlreadyExistsEditDenied' => 'Je kunt het niet bewerken.',
 
 	'SimilarPagesExists'		=> 'Soortgelijke pagina\'s als %1 bestaan al:',
-	'SimilarPagesHint'			=> 'Er bestaan soortgelijke pagina's als %1:',
+	'SimilarPagesHint'			=> 'Er bestaan soortgelijke pagina\'s als %1:',
 
-	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'PageReservedWord'			=> 'U kunt %1 niet gebruiken als onderdeel van het adres omdat het een gereserveerd woord is.',
+	'UserReservedWord'			=> 'Gebruikersnamen kunnen geen ##%1### bevatten omdat het een gereserveerd woord is.',
 
 	'DontRedirect'				=> 'Sta automatische doorverwijzing niet toe.',
 	'SendWatchEmail'			=> 'Stuur een e-mail wanneer iemand (behalve uzelf) een pagina die u in de gaten houdt verandert.',
@@ -643,7 +643,7 @@ $wacko_translation = [
 	'EmailConfirm'				=> 'Controleer uw emailadres',
 	'EmailConfirmed'			=> 'Emailadres is gecontroleerd.',
 	'EmailNotConfirmed'			=> 'Emailadres kon niet worden gecontroleerd. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
-	'EmailNotVerified'			=> 'Email not verified!',
+	'EmailNotVerified'			=> 'E-mail niet geverifieerd!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
 									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
 									'until your email-address was confirmed, by following the link in the email sent to you. ' .
@@ -796,7 +796,7 @@ $wacko_translation = [
 	'SettingsSize'				=> 'Size',
 	'SettingsSizeTip'			=> 'source / compiled',
 	'SettingsCreated'			=> 'Gemaakt',
-	'SettingsCurrent'			=> 'Modified',
+	'SettingsCurrent'			=> 'Gewijzigd',
 	'SettingsTotalRevs'			=> 'Revisions',
 	'SettingsTotalComs'			=> 'Commentaars',
 	'SettingsWatchers'			=> 'Hoeders',
@@ -989,8 +989,8 @@ $wacko_translation = [
 	'TemplateCache'				=> 'Template cache',
 	'ThumbCache'				=> 'Thumbnail cache',
 
-	// Flash
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
+	// Embed
+	'EmbedNoURL'				=> 'Geef een adres van de bron op met de parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
@@ -1002,22 +1002,22 @@ $wacko_translation = [
 	'FeedLastItem'				=> 'last item',
 
 	// XML / RSS autodiscovery
-	'ChangesTitleXML'			=> ' - Recent changes',
+	'ChangesTitleXML'			=> ' - Laatste wijzigingen',
 	'ChangesXML'				=> 'Recent changes to the ',
-	'CommentsTitleXML'			=> ' - Recent comments',
+	'CommentsTitleXML'			=> ' - Laatste opmerkingen',
 	'CommentsXML'				=> 'Recent comments to the ',
-	'NewsTitleXML'				=> ' - Recent news',
+	'NewsTitleXML'				=> ' - Laatste nieuws',
 	'NewsXML'					=> 'Recent news to the ',
 	'PageRevisionsXML'			=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
 
-	'ChangesFeed'				=> 'Changes',
-	'CommentsFeed'				=> 'Comments',
-	'NewsFeed'					=> 'News',
+	'ChangesFeed'				=> 'Wijzigingen',
+	'CommentsFeed'				=> 'Opmerkingen',
+	'NewsFeed'					=> 'Nieuws',
 	'RevisionsFeed'				=> 'Revisions of ',
 
-	'LastModification'			=> 'Last Modification',
+	'LastModification'			=> 'Laatste wijziging',
 
 	// Captcha
 	'Captcha'					=> 'Typ het woord dat u leest in de afbeelding in',
@@ -1028,7 +1028,7 @@ $wacko_translation = [
 	// news
 	'News'						=> 'Nieuws',
 	'NewsName'					=> 'Title',
-	'NewsSubmit'				=> 'toevoegen',
+	'NewsSubmit'				=> 'Toevoegen',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,22 +1106,22 @@ $wacko_translation = [
 
 	// forum
 	'ForumSubforums'			=> 'Forum',
-	'ForumTopic'				=> 'Topic',
+	'ForumTopic'				=> 'Onderwerp',
 	'ForumTopics'				=> 'Onderwerpen',
 	'ForumPosts'				=> 'Berichten',
-	'ForumReplies'				=> 'Replies',
-	'ForumAuthor'				=> 'Author',
+	'ForumReplies'				=> 'Reacties',
+	'ForumAuthor'				=> 'Auteur',
 	'ForumViews'				=> 'Views',
 	'ForumCreated'				=> 'Gemaakt',
-	'ForumComments'				=> 'Comments',
-	'ForumLastComment'			=> 'Last comment',
-	'ForumNoComments'			=> 'No comments',
-	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumComments'				=> 'Opmerkingen',
+	'ForumLastComment'			=> 'Laatste opmerking',
+	'ForumNoComments'			=> 'Geen opmerkingen',
+	'ForumNewTopic'				=> 'Start een nieuwe discussie',
+	'ForumTopicName'			=> 'Onderwerpnaam',
 	'ForumTopicSubmit'			=> 'Submit topic',
-	'ForumNoTopicName'			=> 'Specify a name for the new page.',
+	'ForumNoTopicName'			=> 'Geef een naam op voor de nieuwe pagina.',
 	'ForumNewPosts'				=> 'new post',
-	'ForumLocked'				=> 'section blocked',
+	'ForumLocked'				=> 'geblokkeerde sectie',
 	'ForumUpdated'				=> 'bijgewerkt',
 	'ForumNoClusterDefined'		=> 'Er is geen forumcluster gedefinieerd.',
 	'ForumOutsideCluster'		=> 'Zorg ervoor dat de %1 actie zich binnen het forumcluster bevindt.',
@@ -1292,9 +1292,9 @@ $wacko_translation = [
 	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
 
 	// loading error
-	'UnknownAction'				=> 'Unknown action',
-	'UnknownMethod'				=> 'Unknown method',
-	'FormatterNotFound'			=> 'Formatter %1 not found',
+	'UnknownAction'				=> 'Onbekende actie',
+	'UnknownMethod'				=> 'Onbekende methode',
+	'FormatterNotFound'			=> 'Formattering %1 niet gevonden',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',

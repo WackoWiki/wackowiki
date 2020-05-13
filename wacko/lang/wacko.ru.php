@@ -551,8 +551,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Клонировано с %1.',
 	'MassClone'					=> 'Клонировать весь кластер',
 	'MassCloning'				=> 'Клонируем кластер.',
-	'CloneCannotRead'			=> 'Невозможно прочитать страницу <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Невозможно создать страницу <strong>%1</strong>.',
+	'CloneCannotRead'			=> 'Невозможно прочитать страницу %1.',
+	'CloneCannotCreate'			=> 'Невозможно создать страницу %1.',
 
 	'SortComment'				=> 'Сортировать комментарии',
 	'SortCommentAsc'			=> 'Свежие снизу',
@@ -563,8 +563,8 @@ $wacko_translation = [
 	'RenameTip'					=> 'Переименовать страницу',
 	'NewName'					=> 'Введите новое имя для этой страницы',
 	'RenameButton'				=> 'Переименовать',
-	'AlreadyExists'				=> 'Страница с именем <strong>%1</strong> уже существует.',
-	'AlreadyNamed'				=> 'Эта страница уже называется <strong>%1</strong>.',
+	'AlreadyExists'				=> 'Страница с именем %1 уже существует.',
+	'AlreadyNamed'				=> 'Эта страница уже называется %1.',
 	'PageRenamed'				=> 'Страница переименована.',
 	'NewNameOfPage'				=> 'Введите новое имя страницы: ',
 	'NotOwnerCantRename'		=> 'Вы не владеете этой страницей и поэтому не можете переименовать её',
@@ -991,7 +991,7 @@ $wacko_translation = [
 	'TemplateCache'				=> 'Кэш шаблонов',
 	'ThumbCache'				=> 'Кэш миниатюр Thumbnails',
 
-	// Flash
+	// Embed
 	'EmbedNoURL'				=> 'Пожалуйста, укажите адрес ресурса с помощью параметра url, например, {{embed url="file:the_movie.swf"}}',
 
 	// Feed

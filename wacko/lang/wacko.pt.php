@@ -550,8 +550,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Cloned from %1.',
 	'MassClone'					=> 'Clone entire cluster',
 	'MassCloning'				=> 'Cloning cluster.',
-	'CloneCannotRead'			=> 'Unreadable page <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
+	'CloneCannotRead'			=> 'Unreadable page %1.',
+	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
 	'SortComment'				=> 'Ordenar comentário por',
 	'SortCommentAsc'			=> 'Most recent on bottom',
@@ -562,8 +562,8 @@ $wacko_translation = [
 	'RenameTip'					=> 'Página renomear',
 	'NewName'					=> 'Insira um novo nome para esta página',
 	'RenameButton'				=> 'Renomear',
-	'AlreadyExists'				=> 'Página <strong>%1</strong> já existente.',
-	'AlreadyNamed'				=> 'Página tem o nome <strong>%1</strong>.',
+	'AlreadyExists'				=> 'Página %1 já existente.',
+	'AlreadyNamed'				=> 'Página tem o nome %1.',
 	'PageRenamed'				=> 'Página renomeada.',
 	'NewNameOfPage'				=> 'Novo nome desta página: ',
 	'NotOwnerCantRename'		=> 'Não sendo dono desta página não pode renomeá-la',
@@ -989,7 +989,7 @@ $wacko_translation = [
 	'TemplateCache'				=> 'Template cache',
 	'ThumbCache'				=> 'Thumbnail cache',
 
-	// Flash
+	// Embed
 	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
 
 	// Feed

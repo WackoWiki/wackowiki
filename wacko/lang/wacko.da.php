@@ -550,8 +550,8 @@ $wacko_translation = [
 	'ClonedFrom'				=> 'Cloned from %1.',
 	'MassClone'					=> 'Clone entire cluster',
 	'MassCloning'				=> 'Cloning cluster.',
-	'CloneCannotRead'			=> 'Unreadable page <strong>%1</strong>.',
-	'CloneCannotCreate'			=> 'Uncreatable page <strong>%1</strong>.',
+	'CloneCannotRead'			=> 'Unreadable page %1.',
+	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
 	'SortComment'				=> 'Sorter kommentar ved',
 	'SortCommentAsc'			=> 'Nyeste på bunden',
@@ -562,8 +562,8 @@ $wacko_translation = [
 	'RenameTip'					=> 'Omdøb side',
 	'NewName'					=> 'Skriv nyt navn for siden',
 	'RenameButton'				=> 'Omdøb',
-	'AlreadyExists'				=> 'Siden <strong>%1</strong> findes allerede.',
-	'AlreadyNamed'				=> 'Siden hedder allerede <strong>%1</strong>.',
+	'AlreadyExists'				=> 'Siden %1 findes allerede.',
+	'AlreadyNamed'				=> 'Siden hedder allerede %1.',
 	'PageRenamed'				=> 'Siden omdøbt.',
 	'NewNameOfPage'				=> 'Nyt navn til denne side: ',
 	'NotOwnerCantRename'		=> 'Du ejer ikke siden og kan ikke omdøbe den',
@@ -989,7 +989,7 @@ $wacko_translation = [
 	'TemplateCache'				=> 'Template cache',
 	'ThumbCache'				=> 'Thumbnail cache',
 
-	// Flash
+	// Embed
 	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
 
 	// Feed
