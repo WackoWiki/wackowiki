@@ -8,9 +8,9 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'StoreButton'				=> 'Salvesta',
 	'UpdateButton'				=> 'Uuenda',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Loobun',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'Esitatud avaldus oli ebakorrektne. Proovi see uuesti esitada.',
@@ -81,7 +81,7 @@ $wacko_translation = [
 	'SessionDurationDay'		=> '1 päev',
 	'SessionDurationWeek'		=> '1 nädal',
 	'SessionDurationMonth'		=> '1 kuu',
-	'LoggedInAs'				=> 'You are logged in as',
+	'LoggedInAs'				=> 'Olete sisse logitud kui',
 
 	'ClearCookies'				=> 'Delete all cookies',
 	'BindSessionIp'				=> 'Bind session to the IP-address',
@@ -90,8 +90,8 @@ $wacko_translation = [
 	'SessionEnds'				=> 'The current session ends',
 	'LastVisit'					=> 'Last visit was recorded',
 
-	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
-	'WelcomeBack'				=> 'Welcome back, %1',
+	'LoginIncorrect'			=> 'Sisestatud kasutajanimi või parool on vale.',
+	'WelcomeBack'				=> 'Tere tulemast tagasi, %1',
 	'LoginAttemptsExceeded'		=> 'Sa ületasid sisselogimiskatsete arvu.<br>Lisaks kasutajanimele ja paroolile pead nüüd ka sisestama kinnituskoodi, mida näed all.',
 
 	// session notice
@@ -267,7 +267,7 @@ $wacko_translation = [
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
 	'CategoriesGrouped'			=> 'The category entered in the new group.',
 	'NoMultilevelGrouping'		=> 'Multilevel grouping categories is not possible.',
-	'CategoriesDeleted'			=> 'The category was deleted from the database and all pages.',
+	'CategoriesDeleted'			=> 'Kategooria kustutati andmebaasist ja kõigilt lehtedelt.',
 	'CategoriesAdd'				=> 'Lisage uus kategooria',
 	'CategoryDescription'		=> 'Kirjeldus',
 	'CategoriesAddGrouped'		=> 'Grouped with the category',
@@ -290,7 +290,7 @@ $wacko_translation = [
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
-	'CategoryNotExists'			=> 'Category does not exist.',
+	'CategoryNotExists'			=> 'Kategooriat pole olemas.',
 	'CategoryEmpty'				=> 'Category empty.',
 	'NoCategorySelected'		=> 'No category selected.',
 	'NoCategoriesAssigned'		=> 'Sellele keelele pole määratud kategooriaid.',
@@ -336,12 +336,12 @@ $wacko_translation = [
 	'EditMinor'					=> 'Minor edit',
 	'MinorEditHide'				=> 'Hide minor edit',
 	'MinorEditShow'				=> 'Show minor edit',
-	'PostAnonymously'			=> 'Post anonymously without giving your name',
+	'PostAnonymously'			=> 'Postitage anonüümselt ilma oma nime andmata',
 	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
 	'OverwriteAlert'			=> 'Ülekirjutuse hoiatus: kuni sina seda lehte muutsid, muutis seda lehte veel keegi teine.<br>Kopeeri oma muudatused ja nimeta leht ümber.',
 	'EditingRevisionWarning'	=> 'Te redigeerite selle lehe vana versiooni. Kui selle avaldate, eemaldatakse kõik sellest ajast tehtud muudatused. Võib-olla soovite muuta praegust ülevaatust.',
 	'WriteAccessDenied'			=> 'Sul ei ole sellele lehe kirjutamise õigusi.',
-	'EmptyPage'					=> 'Page body was empty - ei salvestatud!',
+	'EmptyPage'					=> 'Lehe sisu oli tühi - ei salvestatud!',
 	'EmptyComment'				=> 'Kommentaar on tühi - ei salvestatud!',
 	'CommentAccessDenied'		=> 'Sul pole lubatud seda lehte kommenteerida.',
 	'CommentFlooded'			=> 'The interval between the publication of the messages shall not be less than %1 seconds.',
@@ -371,7 +371,7 @@ $wacko_translation = [
 	'RevisionAsOf'				=> 'Versioon %1 dateeritud',
 	'SimpleDiffAdditions'		=> 'Lisatud:',
 	'SimpleDiffDeletions'		=> 'Kustutatud:',
-	'NoDifferences'				=> 'No differences.',
+	'NoDifferences'				=> 'Erinevusi pole.',
 	'History'					=> 'ajalugu',
 	'ReEditOldRevision'			=> 'Vana redigeeringu ümbermuutmine',
 
@@ -420,8 +420,8 @@ $wacko_translation = [
 	'NoReferringPages'			=> 'Viidatud lehti pole',
 	'Footnotes'					=> 'Allmärkused',
 	'Footnote'					=> 'Allmärkus',
-	'MostPopularPages'			=> 'Most popular pages',
-	'MostCommentedPages'		=> 'Most commented pages',
+	'MostPopularPages'			=> 'Kõige populaarsemad lehed',
+	'MostCommentedPages'		=> 'Enim kommenteeritud lehed',
 	'NoAccessToSourcePage'		=> 'Sulle pole võimaldatud lähtelehe lugemist.',
 	'SourcePageDoesntExist'		=> 'Lähtelehte ei eksisteeri veel',
 	'NotLoggedInThusEdited'		=> 'Sa ei ole sisse loginud, seega ei suuda tuvastada sinu muudetud lehti.',
@@ -441,8 +441,8 @@ $wacko_translation = [
 	'NoRecentComments'			=> 'Viimaseid kommentaare pole.',
 	'LatestCommentBy'			=> 'viimati kommenteeris',
 	'NoRecentlyCommented'		=> 'Viimati kommenteeritud lehti pole.',
-	'NoDeletedPages'			=> 'No deleted pages found.',
-	'NoDeletedFiles'			=> 'No deleted files found.',
+	'NoDeletedPages'			=> 'Kustutatud lehti ei leitud.',
+	'NoDeletedFiles'			=> 'Kustutatud faile ei leitud.',
 	'CommentsDisabled'			=> 'Kommentaarid pole saadaval.',
 
 	'SearchResults'				=> 'Otsi tulemusi ',
@@ -473,7 +473,7 @@ $wacko_translation = [
 	'UnwatchText'				=> 'Not follow',
 	'UserSettingsStored'		=> 'Kasutaja seaded salvesatud!',
 	'LoggedOut'					=> 'Oled välja logitud.',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> 'Turvalisuse huvides on teie seanss lõppenud. Logige uuesti sisse.',
 
 	// user settings
 	'SettingsCodeResent'		=> 'Repeated email confirmation code sent to your address.',
@@ -636,7 +636,7 @@ $wacko_translation = [
 	'EmailWelcome'				=> 'Sa oled registreerunud ',
 	'EmailRegistered'			=> 'sa oled edukalt registreerunud %1.' . "\n" . 'Sinu kasutajanimi on: %2' . "\n\n",
 	'EmailVerify'				=> 'Kui sa tahad märguandeid, siis sa pead näitama oma e-posti aadressi. Järgi ' . "\n" . '%1' . "\n" . 'seda linki, et seda teha.',
-	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredLogin'		=> 'Naaske Wiki ja logige sisse oma uue kasutajanime ja parooliga.',
 	'EmailRegisteredIgnore'		=> 'Kui sa pole taodelnud registreerimist, ignoreeri seda teadet ja midagi ei juhtu.',
 	'EmailDoNotReply'			=> 'äRA VASTA SELLELE TEATELE',
 	'EmailReverify'				=> 'Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.' . "\n" . 'Sinu kasutajanimi: %2'."\n\n" . 'Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata ' . "\n" . '%3' . "\n" . 'seda, et seda teha.'."\n\n" . '',
@@ -920,7 +920,7 @@ $wacko_translation = [
 	'AclForCluster'				=> 'Kasutaja õiguste loend üle kogu %1 grupi',
 	'AclAreYouSure'				=> 'Sa asud nüüd muutma nii selle lehe, kui kõigi selle lehe alamlehtede kasutaja  õiguste loendit. Kas jätkad?',
 
-	'BookmarkDeleteSelected'	=> 'Delete Selected',
+	'BookmarkDeleteSelected'	=> 'Kustuta valitud',
 	'BookmarkMark'				=> 'Mark',
 	'BookmarkNumber'			=> 'No.',
 	'BookmarkNone'				=> 'Teil pole järjehoidjaid.',
@@ -1023,7 +1023,7 @@ $wacko_translation = [
 	'Captcha'					=> 'Palun sisestage sõna, mida loete pildil',
 	'CaptchaFailed'				=> 'Te olete sisestanud captcha sõna valesti. Palun proovi uuesti.',
 	'CaptchaReload'				=> 'Uus captcha',
-	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
+	'CaptchaReloadWarning'		=> 'Kahjuks ei saa captcha-pilti uuesti laadida, selleks peate lehe uuesti laadima',
 
 	// news
 	'News'						=> 'Uudised',
