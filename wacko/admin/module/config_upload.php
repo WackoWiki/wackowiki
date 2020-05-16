@@ -32,7 +32,7 @@ function admin_config_upload(&$engine, &$module)
 	<br>
 <?php
 
-	$binary_factor = ['0' => 1, '1' => 1024, '2' => (1024 * 1024)];
+	$binary_factor = ['0' => 1, '1' => 1024, '2' => (1024 * 1024), '3' => (1024 * 1024 * 1024)];
 
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
