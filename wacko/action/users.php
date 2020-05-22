@@ -34,8 +34,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 		$profile			= ['profile' => $user['user_name']];
 		$default_tab		= false;
-		$tpl->username	= $user['user_name'];
-		$tpl->href		= $this->href();
+		$tpl->username		= $user['user_name'];
+		$tpl->href			= $this->href();
 
 		if ($tab_mode == '')
 		{

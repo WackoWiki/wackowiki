@@ -401,11 +401,11 @@ if (mb_strlen($phrase) >= 3)
 
 		$tpl->leave();
 
-		if (!$nomark)
+		if (!$nomark && $n)
 		{
 			$tpl->s_mark_diag	= $this->_t(($mode == 'topic' ? 'Topic' : '') . 'SearchResults');
 			$tpl->s_mark_phrase	= $phrase;
-			$tpl->s_mark_count	= $tcount;
+			$tpl->s_mark_count	= $tcount;	// TODO: count only accessible results
 			$tpl->s_emark		= true;
 		}
 	}
