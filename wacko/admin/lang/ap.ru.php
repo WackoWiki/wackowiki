@@ -633,6 +633,8 @@ $ap_translation = [
 	'EnableDst'					=> 'Разрешить переключение на летнее время Summer Time/DST',
 	'EnableDstInfo'				=> '',
 
+	'Canonical'					=> 'Полные канонические адреса',
+	'CanonicalInfo'				=> 'Все ссылки создаются в виде абсолютных URL в виде %1. URL относительно корня сервера в форме %2 должны быть предпочтительными.',
 	'LinkTarget'				=> 'Где открывать внешние линки',
 	'LinkTargetInfo'			=> 'Открывать внешние линки в новом окне браузера. Добавляет к линку <code>target="_blank"</code>.',
 	'Noreferrer'				=> 'noreferrer',

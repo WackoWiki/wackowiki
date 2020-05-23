@@ -646,6 +646,8 @@ $ap_translation = [
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
 
+	'Canonical'					=> 'Usa URL canoniche',
+	'CanonicalInfo'				=> 'Tutti i link vengono creati come URL assoluti nella forma %1. Sono da preferire gli URL relativi alla radice del server nella forma %2.',
 	'LinkTarget'				=> 'Where external links open',
 	'LinkTargetInfo'			=> 'Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.',
 	'Noreferrer'				=> 'noreferrer',

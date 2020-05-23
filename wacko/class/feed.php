@@ -317,7 +317,7 @@ class Feed
 
 				$xml .= '<url>' . "\n";
 
-				$xml .= '<loc>' . $this->engine->href('', $page['tag'], null, null, null, null, false) . '</loc>' . "\n";
+				$xml .= '<loc>' . $this->engine->href('', $page['tag'], null, null, null, null, false, true) . '</loc>' . "\n";
 				$xml .= '<lastmod>' . substr($page['modified'], 0, 10)  . '</lastmod>' . "\n";
 
 				$days_since_last_changed = (time() - strtotime($page['modified'])) / DAYSECS;

@@ -8,7 +8,7 @@
 		<title>[ ' title | e ' ] (wordprocessor) - [ ' db: site_name | e ' ]</title>
 		<meta name="robots" content="noindex, nofollow">
 		<link rel="stylesheet" href="[ ' db: theme_url ' ]css/wordprocessor.css">
-		<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_url ' ]">
+		<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_path ' ]">
 		<link rel="shortcut icon" href="[ ' db: theme_url ' ]icon/favicon.ico" type="image/x-icon">
 		[= terms _ =
 			<link rel="license" href="[ ' url ' ]">

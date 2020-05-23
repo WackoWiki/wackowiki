@@ -409,7 +409,7 @@ if ($this->has_access('read')
 		$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;
 	}
 
-	$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
+	$tpl->wikiedit = $this->db->base_path . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 
 	$tpl->leave();
 }

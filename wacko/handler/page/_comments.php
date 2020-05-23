@@ -222,10 +222,10 @@ if ($this->has_access('read'))
 			}
 
 			// load WikiEdit TODO: load in theme footer!
-			#echo '<script src="' . $this->db->base_url . 'js/protoedit.js"></script>' . "\n";
-			#echo '<script src="' . $this->db->base_url . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
-			#echo '<script src="' . $this->db->base_url . 'js/wikiedit.js"></script>' . "\n";
-			#echo '<script src="' . $this->db->base_url . 'js/autocomplete.js"></script>' . "\n";
+			#echo '<script src="' . $this->db->base_path . 'js/protoedit.js"></script>' . "\n";
+			#echo '<script src="' . $this->db->base_path . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
+			#echo '<script src="' . $this->db->base_path . 'js/wikiedit.js"></script>' . "\n";
+			#echo '<script src="' . $this->db->base_path . 'js/autocomplete.js"></script>' . "\n";
 			$tpl->userlang	= $this->user_lang;
 			$tpl->title		= $this->sess->freecap_old_title
 								?? ($title
@@ -271,7 +271,7 @@ if ($this->has_access('read'))
 				$tpl->user_heartbeat = $this->sess->cf_gc_maxlifetime - 40;
 			}
 
-			$tpl->wikiedit = $this->db->base_url . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
+			$tpl->wikiedit = $this->db->base_path . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 
 			$tpl->leave();
 		}

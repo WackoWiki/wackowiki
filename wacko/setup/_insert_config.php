@@ -59,6 +59,7 @@ $config_db['cache']							= $config['cache'];
 $config_db['cache_sql']						= $config['cache_sql'];
 $config_db['cache_sql_ttl']					= $config['cache_sql_ttl'];
 $config_db['cache_ttl']						= $config['cache_ttl'];
+$config_db['canonical']						= $config['canonical'];
 $config_db['captcha_edit_page']				= $config['captcha_edit_page'];
 $config_db['captcha_new_comment']			= $config['captcha_new_comment'];
 $config_db['captcha_new_page']				= $config['captcha_new_page'];

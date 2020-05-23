@@ -23,7 +23,7 @@ _common include file for themes
 	=]
 	<link media="print" rel="stylesheet" href="[ ' db: theme_url ' ]css/print.css">
 	<link rel="icon" href="[ ' favicon ' ]" type="image/x-icon">
-	<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_url ' ]">
+	<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_path ' ]">
 	[= index _ =
 		<link rel="canonical" href="[ ' canonical ' ]">
 	=]
@@ -41,13 +41,13 @@ _common include file for themes
 		=]
 	=]
 	[ ' bb2 | ' ]
-	<script src="[ ' db: base_url ' ]js/default.js"></script>
+	<script src="[ ' db: base_path ' ]js/default.js"></script>
 	[= edit _ =
 		['' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '']
-		<script src="[ ' db: base_url ' ]js/protoedit.js"></script>
-		<script src="[ ' db: base_url ' ]js/lang/wikiedit.[ ' lang | e ' ].js"></script>
-		<script src="[ ' db: base_url ' ]js/wikiedit.js"></script>
-		<script src="[ ' db: base_url ' ]js/autocomplete.js"></script>
+		<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
+		<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' lang | e ' ].js"></script>
+		<script src="[ ' db: base_path ' ]js/wikiedit.js"></script>
+		<script src="[ ' db: base_path ' ]js/autocomplete.js"></script>
 	=]
 	[= doubleclick _ =
 		<script>

@@ -646,6 +646,8 @@ $ap_translation = [
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
 
+	'Canonical'					=> 'Benyt fuldt kanoniske netadresser',
+	'CanonicalInfo'				=> 'Alle links oprettes som absolutte URL\'er i formularen %1. URL\'er i forhold til serverroden i formularen %2 bør foretrækkes.',
 	'LinkTarget'				=> 'Where external links open',
 	'LinkTargetInfo'			=> 'Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.',
 	'Noreferrer'				=> 'noreferrer',

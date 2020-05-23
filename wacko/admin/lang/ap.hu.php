@@ -646,6 +646,8 @@ $ap_translation = [
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
 
+	'Canonical'					=> 'Teljesen kanonikus URL-ek használata',
+	'CanonicalInfo'				=> 'Az összes hivatkozás abszolút URL-ként jön létre a %1 formában. A %2 formában a kiszolgáló gyökéréhez viszonyított URL-eket kell előnyben részesíteni.',
 	'LinkTarget'				=> 'Where external links open',
 	'LinkTargetInfo'			=> 'Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.',
 	'Noreferrer'				=> 'noreferrer',

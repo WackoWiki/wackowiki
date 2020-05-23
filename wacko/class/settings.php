@@ -120,6 +120,7 @@ class Settings extends Dbal implements ArrayAccess
 
 				$this->cookie_prefix	= preg_replace('/[^0-9a-z]+/i', '', $prefix);
 				$this->user_table		= $this->table_prefix . 'user';
+				$this->config['base_path']	= $this->get_base_url($this->canonical);
 
 				// cache to file
 				if ($this->wacko_version == WACKO_VERSION)
@@ -266,6 +267,25 @@ class Settings extends Dbal implements ArrayAccess
 	function lock($file = SITE_LOCK)
 	{
 		@file_put_contents($file, ($this->is_locked($file)? '0' : '1'));
+	}
+
+	function get_base_url($absolute = null)
+	{
+		$base_url = ($_SERVER['SERVER_PORT'] == 443
+				? 'https'
+				: 'http'
+			) . '://' .
+			$_SERVER['SERVER_NAME'] .
+			(!in_array($_SERVER['SERVER_PORT'], [80, 443])
+				? ':' . $_SERVER['SERVER_PORT']
+				: ''
+			);
+		$base_path = (($path = preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')))
+				? '/' . $path
+				: ''
+			) . '/';
+
+		return ($absolute ? $base_url : '') . $base_path;
 	}
 
 }

@@ -78,8 +78,8 @@ class Typografica
 	function __construct(&$wacko)
 	{
 		$this->wacko	= &$wacko;
-		$this->indent1	= '<img src="' . $wacko->db->base_url . $this->indent1;
-		$this->indent2	= '<img src="' . $wacko->db->base_url . $this->indent2;
+		$this->indent1	= '<img src="' . $wacko->db->base_path . $this->indent1;
+		$this->indent2	= '<img src="' . $wacko->db->base_path . $this->indent2;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////

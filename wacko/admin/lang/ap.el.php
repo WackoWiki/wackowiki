@@ -646,6 +646,8 @@ $ap_translation = [
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
 
+	'Canonical'					=> 'Πλήρη και κανονικοποιημένα URLs',
+	'CanonicalInfo'				=> 'Όλοι οι σύνδεσμοι δημιουργούνται ως απόλυτα URL με τη μορφή %1. Οι διευθύνσεις URL που σχετίζονται με τη ρίζα του διακομιστή με τη μορφή %2 θα πρέπει να προτιμώνται.',
 	'LinkTarget'				=> 'Where external links open',
 	'LinkTargetInfo'			=> 'Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.',
 	'Noreferrer'				=> 'noreferrer',

@@ -56,6 +56,7 @@ function admin_config_formatter(&$engine, &$module)
 		$config['show_spaces']				= (int) ($_POST['show_spaces'] ?? 0);
 		$config['youarehere_text']			= (string) $_POST['youarehere_text'];
 		$config['numerate_links']			= (int) ($_POST['numerate_links'] ?? 0);
+		$config['canonical']				= (int) ($_POST['canonical'] ?? 0);
 
 		$engine->config->_set($config);
 
@@ -274,6 +275,22 @@ function admin_config_formatter(&$engine, &$module)
 					<br>
 					<?php echo $engine->_t('MiscellaneousSection');?>
 				</th>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<strong><?php echo $engine->_t('Canonical');?>:</strong><br>
+					<small><?php echo Ut::perc_replace(
+									$engine->_t('CanonicalInfo'),
+									'<code>http://host/path</code>',
+									'<code>/path</code>');?></small>
+				</td>
+				<td>
+					<input type="radio" id="canonical_on" name="canonical" value="1"<?php echo ($engine->db->canonical ? ' checked' : '');?>><label for="canonical_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="canonical_off" name="canonical" value="0"<?php echo (!$engine->db->canonical ? ' checked' : '');?>><label for="canonical_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">

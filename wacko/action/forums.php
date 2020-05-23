@@ -205,7 +205,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	if (!(int) $noxml)
 	{
-		$tpl->xml_href = $this->db->base_url . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+		$tpl->xml_href = $this->db->base_path . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
 	$tpl->leave(); // forum_

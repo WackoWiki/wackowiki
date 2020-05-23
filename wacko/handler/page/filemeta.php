@@ -191,7 +191,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 		else
 		{
 			$path	= 'file:/';
-			$href	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
+			$href	= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file['file_name']);
 		}
 
 		if ($mode == 'show')

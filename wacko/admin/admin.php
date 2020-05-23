@@ -63,7 +63,7 @@ if (!$engine->db->recovery_password)
 		<head>
 			<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 			<meta name="robots" content="noindex, nofollow, noarchive">
-			<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/backend.css" media="screen">
+			<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
 			<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 		</head>
 
@@ -147,7 +147,7 @@ if (!isset($engine->sess->ap_created))
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
-		<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/backend.css" media="screen">
+		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 		<?php if (RECOVERY_MODE) echo '<style>input.verify { display: none; }</style>'; // TODO: fix routing for static files ?>
 	</head>
@@ -308,8 +308,8 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<meta http-equiv="Content-Type" content="text/html;">
-		<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/wiki.css" media="screen">
-		<link rel="stylesheet" href="<?php echo $engine->db->base_url; ?>admin/style/backend.css" media="screen">
+		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/wiki.css" media="screen">
+		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->db->theme_url ?>icon/favicon.ico" type="image/x-icon">
 	</head>
 
@@ -321,8 +321,8 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 				<h1>
 					<a href="<?php echo $engine->href(); ?>">
 					<?php
-						echo '<img src="' . $engine->db->base_url . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
-						# echo '<img src="' . $engine->db->base_url . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
+						echo '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
+						# echo '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
 						# echo $engine->_t('AdminPanel');
 						?>
 					</a>

@@ -15,7 +15,7 @@ require Ut::join_path(THEME_DIR, '_common/_header.php');
 if ($this->db->site_logo && $this->db->logo_display >= 1)
 {
 	$tpl->site_logo			= true;
-	$tpl->site_logo_path	= $this->db->base_url . Ut::join_path(IMAGE_DIR, $this->db->site_logo);
+	$tpl->site_logo_path	= $this->db->base_path . Ut::join_path(IMAGE_DIR, $this->db->site_logo);
 }
 
 if ($this->db->logo_display == 0

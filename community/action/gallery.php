@@ -46,10 +46,10 @@ require_once 'lib/phpthumb/PHPThumb.php';
 require_once 'lib/phpthumb/GD.php';
 
 // Add jQuery library
-$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/jquery-3.5.1.min.js"></script>');
+$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/jquery-3.5.1.min.js"></script>');
 // Add fancyBox
-$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.js"></script>');
-$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_url . 'js/fancybox/jquery.fancybox.min.css">');
+$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.js"></script>');
+$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.css">');
 
 // Loading parameters
 $file_id		= (int) ($_GET['file_id'] ?? null);
@@ -223,7 +223,7 @@ if ($can_view)
 				if ($file['page_id'] == '0')
 				{
 					$tnb_path		= Ut::join_path(THUMB_DIR, $prefix_global . '@' . $tnb_name);
-					$url			= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$url			= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 				}
 				else
 				{
@@ -231,7 +231,7 @@ if ($can_view)
 					$url			= $this->href('file', $source_page_tag, ['get' => $file_name]);
 				}
 
-				$tpl->img	= '<img src="' . $this->db->base_url . $tnb_path . '" ' .
+				$tpl->img	= '<img src="' . $this->db->base_path . $tnb_path . '" ' .
 					($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') .
 					' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 

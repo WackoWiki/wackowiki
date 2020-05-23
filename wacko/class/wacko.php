@@ -2959,7 +2959,7 @@ class Wacko
 	*
 	* @return string			HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
-	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true, $encode = true) : string
+	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true, $encode = true, $absolute = false) : string
 	{
 		if (!is_array($params))
 		{
@@ -2986,7 +2986,7 @@ class Wacko
 			$alter			= false;
 		}
 
-		$href = $this->db->base_url;
+		$href = $absolute ? $this->db->base_url : $this->db->base_path;
 
 		if ($this->db->rewrite_mode)
 		{
@@ -3543,7 +3543,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_record($param['src'], 0))
 				{
-					$href	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$href	= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
@@ -3605,7 +3605,7 @@ class Wacko
 						// no local file available, take the global file instead
 						if ($file_data = $this->check_file_record($param['src'], 0))
 						{
-							$href		= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+							$href		= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 							$_global	= true;
 
 							// tracking file link
@@ -3685,7 +3685,7 @@ class Wacko
 							// direct file access
 							if ($_global)
 							{
-								$src	= $this->db->base_url . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+								$src	= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
 								$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
 							else
@@ -6716,7 +6716,7 @@ class Wacko
 		if (!empty($user['theme']))
 		{
 			$this->db->theme		= $user['theme'];
-			$this->db->theme_url	= $this->db->base_url . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
+			$this->db->theme_url	= $this->db->base_path . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
 		}
 
 		$this->user_lang = $this->get_user_language();
@@ -6836,7 +6836,7 @@ class Wacko
 			}
 
 			// TODO: ['themes_per_page'] load themes language files
-			$this->db->theme_url = $this->db->base_url . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
+			$this->db->theme_url = $this->db->base_path . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
 
 			// set page categories. this defines $categories (array) object property
 			$categories = $this->load_categories($this->page['page_id'], OBJECT_PAGE);
@@ -8052,9 +8052,9 @@ class Wacko
 			$out .= '<label for="captcha">' . $this->_t('Captcha') . ":</label>\n";
 			$out .= $inline ? '' : "<br>\n";
 			// href('', '.freecap') won't work, because mini_href() would strip DOT
-			$out .= '<img src="' . $this->db->base_url . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
+			$out .= '<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
-			$out .= '<img src="' . $this->db->base_url . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n";
+			$out .= '<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n";
 			// $out .= $inline ? '' : "<br>\n";
 			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6">';
 			$out .= $inline ? '' : "<br>\n";

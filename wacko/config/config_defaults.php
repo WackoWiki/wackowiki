@@ -42,6 +42,7 @@ $wacko_config_defaults = [
 											? '/' . $path
 											: ''
 										) . '/' ,
+	'canonical'						=> 0,
 	'rewrite_mode'					=> ($found_rewrite_extension ? 1 : 0),
 	'tls'							=> 0,
 	'tls_implicit'					=> 0,

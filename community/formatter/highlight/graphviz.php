@@ -85,7 +85,7 @@ else
 					"file_name		= " . $this->db->q($gname . '.png') . "");
 		}
 
-		$imgurl		= $this->db->base_url . $this->page['tag'] . '/file?get=' . $gname . '.png';
+		$imgurl		= $this->db->base_path . $this->page['tag'] . '/file?get=' . $gname . '.png';
 		$imagesize	= getimagesize ($fname . '.png');
 
 		$this->db->sql_query(

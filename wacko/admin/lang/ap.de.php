@@ -654,6 +654,8 @@ $ap_translation = [
 	'EnableDst'					=> 'Sommerzeit aktivieren',
 	'EnableDstInfo'				=> '',
 
+	'Canonical'					=> 'Links immer mit vollständigen URLs erzeugen',
+	'CanonicalInfo'				=> 'Alle Links werden als absolute URLs in der Form %1 erstellt. URLs relativ zur Server-Root in der Form %2 sollten bevorzugt werden.',
 	'LinkTarget'				=> 'Wo externe Links geöffnet werden',
 	'LinkTargetInfo'			=> 'Öffnet jeden externen Link in einem neuen Browserfenster. Fügt <code>target="_blank"</code> zum Link-Syntax hinzu.',
 	'Noreferrer'				=> 'noreferrer',

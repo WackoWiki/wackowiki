@@ -210,7 +210,7 @@ if (!empty($this->db->news_cluster))
 	// displaying XML icon
 	if (!(int) $noxml)
 	{
-		$tpl->n_xml_href = $this->db->base_url . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+		$tpl->n_xml_href = $this->db->base_path . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
 	// displaying articles

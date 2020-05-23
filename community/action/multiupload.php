@@ -9,9 +9,9 @@ if (!defined('IN_WACKO'))
 // version 0.6.beta
 // https://wackowiki.org/doc/Dev/PatchesHacks/MultiUpload
 
-$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/jquery.min.js"></script>');
-$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/lang/upload.' . $this->user_lang . '.js"></script>');
-$this->add_html('footer', '<script src="' . $this->db->base_url . 'js/upload.js"></script>');
+$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/jquery.min.js"></script>');
+$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/lang/upload.' . $this->user_lang . '.js"></script>');
+$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/upload.js"></script>');
 $this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/upload.css">');
 
 // TODO:

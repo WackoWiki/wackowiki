@@ -63,10 +63,10 @@
 							<br>
 						=]
 						['' // load WikiEdit '']
-						<script src="[ ' db: base_url ' ]js/protoedit.js"></script>
-						<script src="[ ' db: base_url ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
-						<script src="[ ' db: base_url ' ]js/wikiedit.js"></script>
-						<script src="[ ' db: base_url ' ]js/autocomplete.js"></script>
+						<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
+						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
+						<script src="[ ' db: base_path ' ]js/wikiedit.js"></script>
+						<script src="[ ' db: base_path ' ]js/autocomplete.js"></script>
 
 						<noscript><div class="errorbox-js">[ ' _t: WikiEditInactiveJs ' ]</div></noscript>
 						<label for="addcomment_title">[ ' _t: AddCommentTitle ' ]</label><br>
