@@ -41,7 +41,7 @@ $engine->validate_post_token();
 
 if (@$_GET['action'] === 'logout')
 {
-	unset($engine->sess->ap_created);
+	unset($engine->sess->ap_created, $engine->sess->ap_module);
 	$engine->log(1, $engine->_t('LogAdminLogout', SYSTEM_LANG));
 	$http->secure_base_url();
 	$http->redirect($engine->href('', $db->root_page));

@@ -655,7 +655,7 @@ if ($this->is_admin())
 				return preg_replace_callback('/(&#[0-9]+;)/', function($m) { return mb_convert_encoding($m[1], 'UTF-8', 'HTML-ENTITIES'); }, $input);
 			};
 
-			/* Tables: sets value 1 in converted record to avoid double conversion
+			/* Tables: sets value 2 in converted record to avoid double conversion
 			 *		1 - utf8
 			 *		2 - HTML entities
 			 *		3 - mojibake

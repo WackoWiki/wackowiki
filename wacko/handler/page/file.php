@@ -11,6 +11,15 @@ if (!isset($_GET['get']) || (!isset($_GET['global']) && !$this->page))
 }
 
 $file_path		= '';
+$file_name		= $_GET['get'];
+
+#if (!preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', $file_name))
+if (!preg_match('#^([-/\'_.' . $this->language['ALPHANUM_P'] . ']+)$#u', $file_name))
+{
+	// invalid file name
+	$this->http->sendfile(404);
+	$this->http->terminate();
+}
 
 // 1. check existence
 $page_id = isset($_GET['global'])? 0 : $this->page['page_id'];
@@ -20,7 +29,7 @@ $file = $this->db->load_single(
 	"FROM " . $this->db->table_prefix . "file f " .
 		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 	"WHERE f.page_id = " . (int) $page_id . " " .
-		"AND f.file_name = " . $this->db->q($_GET['get']) . " " .
+		"AND f.file_name = " . $this->db->q($file_name) . " " .
 		"AND f.deleted <> 1 " .
 	"LIMIT 1");
 

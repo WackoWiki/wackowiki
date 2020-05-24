@@ -269,6 +269,7 @@ class Settings extends Dbal implements ArrayAccess
 		@file_put_contents($file, ($this->is_locked($file)? '0' : '1'));
 	}
 
+	// returns the full absolute or relative URL to the directory where WackoWiki is installed
 	function get_base_url($absolute = null)
 	{
 		$base_url = ($_SERVER['SERVER_PORT'] == 443
