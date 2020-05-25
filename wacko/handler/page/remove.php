@@ -229,7 +229,12 @@ if ($this->is_admin()
 
 		$tpl->warning	= $this->show_message($message, 'warning', false);
 		$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
-		$tpl->tree		= $this->action('tree', ['depth' => 3]);
+
+		// any sub-pages
+		if (!$this->page['comment_on_id'])
+		{
+			$tpl->tree_subpages	= $this->action('tree', ['depth' => 3]);
+		}
 
 		// admin privileged removal options
 		if ($this->is_admin())

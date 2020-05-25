@@ -25,8 +25,10 @@
 		=]
 		[ ' backlinks ' ]
 		<br>
-		[ ' tree ' ]
-		<br>
+		[= tree _ =
+			[ ' subpages ' ]
+			<br>
+		=]
 		[ ' warning ' ]<br>
 		<form action="[ ' href: remove ' ]" method="post" name="remove_page">
 			[ ' csrf: remove_page ' ]
