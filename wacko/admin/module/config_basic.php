@@ -34,6 +34,13 @@ function admin_config_basic(&$engine, &$module)
 		$config['site_name']					= (string) $_POST['site_name'];
 		$config['site_desc']					= (string) $_POST['site_desc'];
 		$config['admin_name']					= (string) $_POST['admin_name'];
+
+		// reset menu in session
+		if ($engine->db->language !== $_POST['language'])
+		{
+			unset($engine->sess->ap_module);
+		}
+
 		$config['language']						= (string) $_POST['language'];
 		$config['multilanguage']				= (int) ($_POST['multilanguage'] ?? 0);
 
@@ -665,7 +672,7 @@ function admin_config_basic(&$engine, &$module)
 				<td>
 					<input type="radio" id="enable_referrer_on" name="enable_referrers" value="1"<?php echo ($engine->db->enable_referrers == 1 ? ' checked' : '');?>><label for="enable_referrer_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="enable_referrer_admin" name="enable_referrers" value="2"<?php echo ($engine->db->enable_referrers == 2 ? ' checked' : '');?>><label for="enable_referrer_admin"><?php echo $engine->_t('Admin');?></label>
-					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ($engine->db->enable_referrers == 0? ' checked' : '');?>><label for="enable_referrer_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="enable_referrer_off" name="enable_referrers" value="0"<?php echo ($engine->db->enable_referrers == 0 ? ' checked' : '');?>><label for="enable_referrer_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
