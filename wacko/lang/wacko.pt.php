@@ -302,8 +302,6 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Source',
 	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
-	'SourceFrom'				=> 'original is located at: ',
-	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'SourceFor'					=> 'Mostrar código-fonte de %1',
 	'SourceForInfo'				=> 'No momento, você só pode visualizar e copiar o conteúdo desta página.',

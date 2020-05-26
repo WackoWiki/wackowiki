@@ -302,8 +302,6 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Source',
 	'SourceTip'					=> 'Näita lehepõhja (no %%-formatters shown)',
-	'SourceFrom'				=> 'original is located at: ',
-	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'SourceFor'					=> 'Lehekülje %1 lähteteksti vaatamine',
 	'SourceForInfo'				=> 'Saad vaadata ja kopeerida selle lehekülje lähteteksti.',

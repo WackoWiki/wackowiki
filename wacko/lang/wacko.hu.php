@@ -302,8 +302,6 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Oldalforrás',
 	'SourceTip'					=> 'Oldalforrás megtekintése (no %%-formatters shown)',
-	'SourceFrom'				=> 'original is located at: ',
-	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'SourceFor'					=> 'Kezdőlap forrásának megtekintése %1',
 	'SourceForInfo'				=> 'Megtekintheted és másolhatod a lap forrását.',

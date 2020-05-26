@@ -303,8 +303,6 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Исходник',
 	'SourceTip'					=> 'Просмотр wiki-исходника (%%-форматтеры не показаны)',
-	'SourceFrom'				=> 'адрес оригинала: ',
-	'SourceFromLink'			=> 'ссылка',
 	'SourceCopyToClipboard'		=> 'Копировать в буфер обмена',
 	'SourceFor'					=> 'Просмотр кода страницы %1 страница',
 	'SourceForInfo'				=> 'Вы можете просмотреть и скопировать исходный код этой страницы.',

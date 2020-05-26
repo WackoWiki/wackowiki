@@ -302,8 +302,6 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Κώδικας',
 	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
-	'SourceFrom'				=> 'original is located at: ',
-	'SourceFromLink'			=> 'reference',
 	'SourceCopyToClipboard'		=> 'copy to clipboard',
 	'SourceFor'					=> 'Προβολή πηγαίου κώδικα για τη σελίδα %1',
 	'SourceForInfo'				=> 'Μπορείτε να δείτε και να αντιγράψετε τον κώδικα της σελίδας:',

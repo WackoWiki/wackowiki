@@ -27,11 +27,7 @@ switch ($default)
 	case 'wacko':
 		// strip comments
 		$text = preg_replace('/(\n?)%%\((comment)\).*?%%([\n\r]*)/uims', '', $text);
-
 		$text = Ut::html($text, false);
-
-		// insert about the source
-		$text .= "\n\n----\n" . $this->_t('SourceFrom') . '((/' . $source . '))';
 
 		// prepare a text to the conclusion
 		$text = preg_replace_callback('/^ +/um',
@@ -47,12 +43,6 @@ switch ($default)
 
 	case 'rawhtml':
 		echo str_replace("\n", '<br>', Ut::html($text));
-
-		// about the source
-		echo "\n\n<br><br><hr>\n\n<p>" .
-			$this->_t('SourceFrom') .
-				$this->link($source, '', $this->_t('SourceFromLink')) .
-				"</p>";
 		break;
 }
 
