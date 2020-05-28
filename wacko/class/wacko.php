@@ -2466,7 +2466,7 @@ class Wacko
 		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
 							$this->db->site_name,
 							$user['user_name'],
-							$this->href('', '', ['secret_code' => $code])) . "\n\n";
+							$this->href('', '', ['secret_code' => $code], null, null, null, true, true)) . "\n\n";
 
 		$this->send_user_email($user, $subject, $body);
 		$this->set_language($save, true);
@@ -2487,7 +2487,8 @@ class Wacko
 						Ut::amp_decode($this->href('', '',
 							['profile'	=> $this->get_user_name(),
 							'ref'		=> Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
-							'#'			=> 'contacts'])) . "\n\n";
+							'#'			=> 'contacts'],
+							null, null, null, true, true)) . "\n\n";
 
 						// XXX: do we really need this, less clutter we want
 						# Ut::perc_replace($this->_t('PMAbuseInfo'), $this->db->abuse_email);
@@ -2504,7 +2505,7 @@ class Wacko
 		$body[]		=	'NewPageCreatedBody';
 		$body[]		=	$user_name;
 		$body[]		=	$title;
-		$body[]		=	$this->href('', $tag);
+		$body[]		=	$this->href('', $tag, null, null, null, null, true, true);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
@@ -2522,7 +2523,7 @@ class Wacko
 		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
 		$body[]		=	$user_name;
 		$body[]		=	$file_name . "\n" . $page_id? $tag : $this->_t('UploadGlobal');
-		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id]);
+		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id], null, null, null, true, true);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
@@ -2690,7 +2691,7 @@ class Wacko
 
 						$body .=
 								$this->_t('SomeoneCommented') . "\n" .
-								$this->href('', $this->get_page_tag($comment_on_id), '') . "\n\n" .
+								$this->href('', $this->get_page_tag($comment_on_id), null, null, null, null, true, true) . "\n\n" .
 								$title . "\n" .
 								"----------------------------------------------------------------------\n\n" .
 								$page_body . "\n\n" .
@@ -2712,7 +2713,7 @@ class Wacko
 
 						$body .=
 								$this->_t('SomeoneChangedThisPage') . "\n" .
-								$this->href('', $tag) . "\n\n" .
+								$this->href('', $tag, null, null, null, null, true, true) . "\n\n" .
 								$title . "\n" .
 								"======================================================================\n\n" .
 								$diff . "\n\n" .
@@ -2743,7 +2744,7 @@ class Wacko
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
 
-		return $this->href('', '', ['confirm' => $token]);
+		return $this->href('', '', ['confirm' => $token], null, null, null, true, true);
 	}
 
 	function user_email_confirm_check($token)
