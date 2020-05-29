@@ -48,7 +48,7 @@ class Feed
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n";
 		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
 		$xml .= '<description>' . $this->engine->_t('ChangesXML') . $this->engine->db->site_name . ' </description>' . "\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
+		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page, null, null, null, null, true, true) . '</copyright>' . "\n";
 		$xml .= '<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
 		$xml .= '<image>' . "\n";
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n";
@@ -79,8 +79,8 @@ class Feed
 					$count++;
 					$xml .= '<item>' . "\n";
 					$xml .= '<title>' . $page['tag'] . '</title>' . "\n";
-					$xml .= '<link>' . $this->engine->href('', $page['tag'], '') . '</link>' . "\n";
-					$xml .= '<guid>' . $this->engine->href('', $page['tag'], '') . '</guid>' . "\n";
+					$xml .= '<link>' . $this->engine->href('', $page['tag'], null, null, null, null, true, true) . '</link>' . "\n";
+					$xml .= '<guid>' . $this->engine->href('', $page['tag'], null, null, null, null, true, true) . '</guid>' . "\n";
 					$xml .= '<pubDate>' . date('r', strtotime($page['modified'])) . '</pubDate>' . "\n";
 					$xml .= '<description>' . $page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
 						($page['user_name']
@@ -144,7 +144,7 @@ class Feed
 						'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
 						'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
 						'<description>' . $this->engine->_t('NewsXML') . $this->engine->db->site_name . '</description>' . "\n" .
-						'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
+						'<copyright>' . $this->engine->href('', $this->engine->db->terms_page, null, null, null, null, true, true) . '</copyright>' . "\n" .
 						'<language>' . $this->lang . '</language>' . "\n" .
 						'<pubDate>' . date('r') . '</pubDate>' . "\n" .
 						'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
@@ -170,9 +170,9 @@ class Feed
 
 				// this is a news article
 				$title	= $page['title'];
-				$link	= $this->engine->href('', $page['tag']);
+				$link	= $this->engine->href('', $page['tag'], null, null, null, null, true, true);
 				$pdate	= date('r', strtotime($page['created']));
-				$coms	= $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments']);
+				$coms	= $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments'], null, null, null, true, true);
 
 				// recompile if necessary
 				if ($page['body_r'] == '')
@@ -227,7 +227,7 @@ class Feed
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . "</title>\n";
 		$xml .= '<link>' . $this->engine->db->base_url . "</link>\n";
 		$xml .= '<description>' . $this->engine->_t('CommentsXML') . $this->engine->db->site_name." </description>\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
+		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page, null, null, null, null, true, true) . '</copyright>' . "\n";
 		$xml .= '<lastBuildDate>' . date('r') . "</lastBuildDate>\n";
 		$xml .= '<image>' . "\n";
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . '</title>' . "\n";
@@ -268,8 +268,8 @@ class Feed
 							? $comment['user_name']
 							: $this->engine->_t('Guest')) .
 						'</title>' . "\n";
-					$xml .= '<link>' . $this->engine->href('', $comment['tag'], '') . '</link>' . "\n";
-					$xml .= '<guid>' . $this->engine->href('', $comment['tag'], '') . '</guid>' . "\n";
+					$xml .= '<link>' . $this->engine->href('', $comment['tag'], null, null, null, null, true, true) . '</link>' . "\n";
+					$xml .= '<guid>' . $this->engine->href('', $comment['tag'], null, null, null, null, true, true) . '</guid>' . "\n";
 					$xml .= '<pubDate>' . date('r', strtotime($comment['created'])) . '</pubDate>' . "\n";
 					$xml .= '<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n";
 
