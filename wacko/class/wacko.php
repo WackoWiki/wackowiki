@@ -19,6 +19,7 @@ class Wacko
 	var $module;
 	var $method					= '';
 	var $forum					= false;
+	var $canonical				= false;
 	var $categories;
 	var $watch					= [];
 	var $notify_lang			= null;
@@ -2987,7 +2988,7 @@ class Wacko
 			$alter			= false;
 		}
 
-		$href = $absolute ? $this->db->base_url : $this->db->base_path;
+		$href = ($absolute or $this->canonical) ? $this->db->base_url : $this->db->base_path;
 
 		if ($this->db->rewrite_mode)
 		{
@@ -3544,7 +3545,7 @@ class Wacko
 
 				if ($file_data = $this->check_file_record($param['src'], 0))
 				{
-					$href	= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+					$href	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 
 					// tracking file link
 					if ($track && isset($file_data['file_id']))
@@ -3606,7 +3607,7 @@ class Wacko
 						// no local file available, take the global file instead
 						if ($file_data = $this->check_file_record($param['src'], 0))
 						{
-							$href		= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
+							$href		= ($this->canonical ? $this->db->base_url : $this->db->base_path) . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
 							$_global	= true;
 
 							// tracking file link
@@ -3686,7 +3687,7 @@ class Wacko
 							// direct file access
 							if ($_global)
 							{
-								$src	= $this->db->base_path . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
+								$src	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
 								$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
 							else

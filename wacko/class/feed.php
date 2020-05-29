@@ -42,13 +42,15 @@ class Feed
 		$name	= 'changes';
 		$count	= '';
 
+		$this->engine->canonical = true;
+
 		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n";
 		$xml .= '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n";
 		$xml .= '<channel>' . "\n";
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n";
 		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
 		$xml .= '<description>' . $this->engine->_t('ChangesXML') . $this->engine->db->site_name . ' </description>' . "\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page, null, null, null, null, true, true) . '</copyright>' . "\n";
+		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
 		$xml .= '<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
 		$xml .= '<image>' . "\n";
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n";
@@ -79,8 +81,8 @@ class Feed
 					$count++;
 					$xml .= '<item>' . "\n";
 					$xml .= '<title>' . $page['tag'] . '</title>' . "\n";
-					$xml .= '<link>' . $this->engine->href('', $page['tag'], null, null, null, null, true, true) . '</link>' . "\n";
-					$xml .= '<guid>' . $this->engine->href('', $page['tag'], null, null, null, null, true, true) . '</guid>' . "\n";
+					$xml .= '<link>' . $this->engine->href('', $page['tag']) . '</link>' . "\n";
+					$xml .= '<guid>' . $this->engine->href('', $page['tag']) . '</guid>' . "\n";
 					$xml .= '<pubDate>' . date('r', strtotime($page['modified'])) . '</pubDate>' . "\n";
 					$xml .= '<description>' . $page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
 						($page['user_name']
@@ -99,6 +101,7 @@ class Feed
 		$xml .= '</rss>' . "\n";
 
 		$this->write_file($name, $xml);
+		$this->engine->canonical = false;
 	}
 
 	function feed($feed_cluster = '')
@@ -109,7 +112,9 @@ class Feed
 		$news_levels	= $this->engine->db->news_levels;
 		$prefix			= $this->engine->db->table_prefix;
 
-		//  collect data
+		$this->engine->canonical = true;
+
+		// collect data
 		$pages = $this->engine->db->load_all(
 			"SELECT p.page_id, p.tag, p.title, p.created, p.body, p.body_r, p.comments, p.page_lang " .
 			"FROM {$prefix}page p, " .
@@ -144,7 +149,7 @@ class Feed
 						'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
 						'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
 						'<description>' . $this->engine->_t('NewsXML') . $this->engine->db->site_name . '</description>' . "\n" .
-						'<copyright>' . $this->engine->href('', $this->engine->db->terms_page, null, null, null, null, true, true) . '</copyright>' . "\n" .
+						'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
 						'<language>' . $this->lang . '</language>' . "\n" .
 						'<pubDate>' . date('r') . '</pubDate>' . "\n" .
 						'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
@@ -170,9 +175,9 @@ class Feed
 
 				// this is a news article
 				$title	= $page['title'];
-				$link	= $this->engine->href('', $page['tag'], null, null, null, null, true, true);
+				$link	= $this->engine->href('', $page['tag']);
 				$pdate	= date('r', strtotime($page['created']));
-				$coms	= $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments'], null, null, null, true, true);
+				$coms	= $this->engine->href('', $page['tag'], ['show_comments' => 1, '#' => 'header-comments']);
 
 				// recompile if necessary
 				if ($page['body_r'] == '')
@@ -210,6 +215,7 @@ class Feed
 				'</rss>';
 
 		$this->write_file($name, $xml);
+		$this->engine->canonical = false;
 	}
 
 	function comments()
@@ -218,6 +224,7 @@ class Feed
 		$name	= 'comments';
 		$count	= '';
 		$access	= '';
+		$this->engine->canonical = true;
 
 		// build output
 		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n";
@@ -227,7 +234,7 @@ class Feed
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . "</title>\n";
 		$xml .= '<link>' . $this->engine->db->base_url . "</link>\n";
 		$xml .= '<description>' . $this->engine->_t('CommentsXML') . $this->engine->db->site_name." </description>\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page, null, null, null, null, true, true) . '</copyright>' . "\n";
+		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
 		$xml .= '<lastBuildDate>' . date('r') . "</lastBuildDate>\n";
 		$xml .= '<image>' . "\n";
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . '</title>' . "\n";
@@ -268,8 +275,8 @@ class Feed
 							? $comment['user_name']
 							: $this->engine->_t('Guest')) .
 						'</title>' . "\n";
-					$xml .= '<link>' . $this->engine->href('', $comment['tag'], null, null, null, null, true, true) . '</link>' . "\n";
-					$xml .= '<guid>' . $this->engine->href('', $comment['tag'], null, null, null, null, true, true) . '</guid>' . "\n";
+					$xml .= '<link>' . $this->engine->href('', $comment['tag']) . '</link>' . "\n";
+					$xml .= '<guid>' . $this->engine->href('', $comment['tag']) . '</guid>' . "\n";
 					$xml .= '<pubDate>' . date('r', strtotime($comment['created'])) . '</pubDate>' . "\n";
 					$xml .= '<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n";
 
@@ -286,6 +293,7 @@ class Feed
 		$xml .= '</rss>' . "\n";
 
 		$this->write_file($name, $xml);
+		$this->engine->canonical = false;
 	}
 
 	function site_map()
