@@ -3370,12 +3370,12 @@ class Wacko
 	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINK table).
 	*	Optional, default is TRUE
 	* @param boolean $safe If false, then sanitize $text, else no.
-	* @param string $anchor_link Optional HTTP anchor-fragment
+	* @param boolean $anchor_link Optional sets <a id="a-154" ...> once for link at the first appearance
 	* @param boolean $meta_direct Links attached files to filemeta handler if TRUE
 	*
 	* @return string full Href link
 	*/
-	function link($tag, $method = '', $text = '', $title = '', $track = 1, $safe = false, $anchor_link = 1, $meta_direct = true) : string
+	function link($tag, $method = '', $text = '', $title = '', $track = true, $safe = false, $anchor_link = true, $meta_direct = true) : string
 	{
 		$caption	= '';
 		$class		= '';
@@ -3391,6 +3391,7 @@ class Wacko
 		$rel		= '';
 		$href		= '';
 		$text		= str_replace('"', '&quot;', $text);
+		$title		= str_replace('"', '&quot;', $title);
 
 		if ($text)
 		{
@@ -3404,7 +3405,8 @@ class Wacko
 
 		if (!$safe)
 		{
-			$text = htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);	// TODO: Notice: expects parameter 1 to be string, array given
+			$text	= htmlspecialchars($text, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);	// TODO: Notice: expects parameter 1 to be string, array given
+			$title	= htmlspecialchars($title, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 		}
 
 		// external media file
@@ -3453,7 +3455,7 @@ class Wacko
 			$class	= '';
 			$tpl	= 'email';
 		}
-		// XMPP address
+		// XMPP address -> xmpp:info@example.com
 		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
 			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
@@ -4037,9 +4039,7 @@ class Wacko
 					$icon	= '';
 				}
 
-				// TODO: pagepath?
-				// TODO: replace only available values
-				#$aname		= str_replace('/',			'.',		$aname); // FIXME: mismatch id="doc.deutsch" but anchor '#doc/deutsch' - what was the purpose of setting a dot here if it breaks the anchor?
+				// process template for internal link
 				$res		= str_replace('{aname}',	$aname,		$res);
 				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
@@ -4079,6 +4079,7 @@ class Wacko
 
 		if (!$text) $text	= htmlspecialchars($tag, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 
+		// external link
 		if ($href)
 		{
 			if ($img_link)
@@ -4153,7 +4154,7 @@ class Wacko
 					$icon	= '';
 				}
 
-				// TODO: replace only available values
+				// process template for external link
 				$res		= str_replace('{target}',	$target,	$res);
 				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
