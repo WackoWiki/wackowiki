@@ -191,9 +191,11 @@ function admin_maint_resync(&$engine, &$module)
 						4) TIMEOUT or reach of memory limit - try to reduce the value for the $limit parameter
 			*/
 
-			$page_limit = (int) ($_POST['page_limit'] ?? 30);
-
-			$engine->sess->resync_limit = (in_array($page_limit, [10, 20, 30, 50, 100, 200, 300, 500])) ? $page_limit : 30;
+			if (isset($_POST['page_limit']))
+			{
+				$page_limit					= (int) ($_POST['page_limit'] ?? 30);
+				$engine->sess->resync_limit	= (in_array($page_limit, [10, 20, 30, 50, 100, 200, 300, 500])) ? $page_limit : 30;
+			}
 
 			$limit		= $engine->sess->resync_limit;
 			$recompile	= 0;
@@ -201,7 +203,7 @@ function admin_maint_resync(&$engine, &$module)
 
 			@set_time_limit(1800);
 
-			if (isset($_POST['recompile_page']) && $_POST['recompile_page']	== 1) $recompile = true;
+			if (isset($_POST['recompile_page']) && $_POST['recompile_page'] == 1) $recompile = true;
 
 			if (isset($_REQUEST['i']))
 			{
@@ -210,7 +212,7 @@ function admin_maint_resync(&$engine, &$module)
 			else
 			{
 				// truncate link tables
-				$i = 1;
+				$i = 0;
 				$engine->sess->resync_links			= '';
 				$engine->sess->resync_counter		= 0;
 
@@ -237,12 +239,12 @@ function admin_maint_resync(&$engine, &$module)
 			"ORDER BY a.tag " .
 			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
-				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . $i . " #########################################<br><br>\n";
+				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . $i . " #########################################\n\n";
 
 				foreach ($pages as $n => $page)
 				{
-					$record = ((($i - 1) * $limit) + $n + 1);
-					$engine->sess->resync_links .=  $record . '. ' . $page['tag'] . "<br>\n";
+					$record = (($i * $limit) + $n + 1);
+					$engine->sess->resync_links .=  $record . '. ' . $page['tag'] . "\n";
 
 					// find last rendered page
 					# Diag::dbg('GOLD', $record, $page['tag']);
@@ -281,13 +283,17 @@ function admin_maint_resync(&$engine, &$module)
 			}
 			else
 			{
-				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . ' DONE ' . " #########################################<br>\n";
+				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . ' DONE ' . " #########################################\n\n";
 
 				$engine->show_message($engine->_t('WikiLinksRestored'), 'success');
-				echo $engine->sess->resync_links;
+				?>
+				<div class="code">
+					<pre><?php echo $engine->sess->resync_links; ?></pre>
+				</div><br>
+				<?php
 
-				$engine->sess->resync_links	= null;
-				$engine->sess->resync_counter		= null;
+				$engine->sess->resync_links		= null;
+				$engine->sess->resync_counter	= null;
 
 				$engine->log(1, $engine->_t('LogPageBodySynched', SYSTEM_LANG));
 			}
