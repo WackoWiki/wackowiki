@@ -275,10 +275,12 @@ function admin_maint_resync(&$engine, &$module)
 				}
 				else
 				{
-					$engine->sess->resync_counter = $i + 1 ;
-					echo $engine->_t('ParseNextBatch') . ' ' .
+					$engine->sess->resync_counter	= $i + 1 ;
+					$engine->sess->resync_batch		= $engine->sess->resync_batch + 1;
+					$message = $engine->_t('ParseNextBatch') . ' #' . $engine->sess->resync_batch . ' ' .
 						'<a href="' . $engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)]) . '"' . '>' . $engine->_t('Next') . ' »</a>' .
 						"<br>\n";
+					$engine->show_message($message);
 				}
 			}
 			else
@@ -294,6 +296,7 @@ function admin_maint_resync(&$engine, &$module)
 
 				$engine->sess->resync_links		= null;
 				$engine->sess->resync_counter	= null;
+				$engine->sess->resync_batch		= null;
 
 				$engine->log(1, $engine->_t('LogPageBodySynched', SYSTEM_LANG));
 			}
