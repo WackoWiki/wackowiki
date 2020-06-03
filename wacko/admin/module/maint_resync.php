@@ -144,6 +144,10 @@ function admin_maint_resync(&$engine, &$module)
 		}
 		else if ($_REQUEST['action'] == 'rssfeeds')
 		{
+			$reset_module	= $engine->module;
+			$engine->module	= null;
+
+			// write feeds
 			$xml = new Feed($engine);
 			$xml->changes();
 			$xml->comments();
@@ -153,9 +157,10 @@ function admin_maint_resync(&$engine, &$module)
 				$xml->feed();
 			}
 
-			$engine->log(1, $engine->_t('LogFeedsUpdated', SYSTEM_LANG));
 			unset($xml);
+			$engine->module	= $reset_module;
 
+			$engine->log(1, $engine->_t('LogFeedsUpdated', SYSTEM_LANG));
 			$engine->show_message($engine->_t('FeedsUpdated'), 'success');
 		}
 		else if ($_REQUEST['action'] == 'xml_sitemap')

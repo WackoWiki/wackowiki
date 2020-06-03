@@ -224,6 +224,7 @@ class Feed
 		$name	= 'comments';
 		$count	= '';
 		$access	= '';
+
 		$this->engine->canonical = true;
 
 		// build output
