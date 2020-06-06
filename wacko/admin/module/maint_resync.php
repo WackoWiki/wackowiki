@@ -185,9 +185,6 @@ function admin_maint_resync(&$engine, &$module)
 							Chrome and Firefox out of the box is 20, Internet Explorer is 10
 						3) if processing breaks see point 1
 							- fails with page having a broken action using templates
-							- (Undefined property: Wacko::$charset) -> include_buffered()
-							- $tpl->setEncoding($this->charset);
-							- registration and changepassword action?
 						4) TIMEOUT or reach of memory limit - try to reduce the value for the $limit parameter
 			*/
 

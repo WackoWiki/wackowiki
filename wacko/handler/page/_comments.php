@@ -221,11 +221,6 @@ if ($this->has_access('read'))
 				$tpl->p_preview		= $preview;
 			}
 
-			// load WikiEdit TODO: load in theme footer!
-			#echo '<script src="' . $this->db->base_path . 'js/protoedit.js"></script>' . "\n";
-			#echo '<script src="' . $this->db->base_path . 'js/lang/wikiedit.' . $this->user_lang . '.js"></script>' . "\n";
-			#echo '<script src="' . $this->db->base_path . 'js/wikiedit.js"></script>' . "\n";
-			#echo '<script src="' . $this->db->base_path . 'js/autocomplete.js"></script>' . "\n";
 			$tpl->userlang	= $this->user_lang;
 			$tpl->title		= $this->sess->freecap_old_title
 								?? ($title
