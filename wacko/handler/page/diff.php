@@ -18,11 +18,11 @@ use PHPDiff\ {
  * DiffMode
  *	0	Full diff			(rendered/html)		diff library
  *	1	Simple diff			(rendered/html)		array_diff()
- *	2	Source				(text/plain)		..
+ *	2	Source				(text/plain)		...
  *	3	Side by side		(text/html)			php-diff library
- *	4	Inline				(text/html)			..
- *	5	Unified				(text/plain)		..
- *	6	Context				(text/plain)		..
+ *	4	Inline				(text/html)			...
+ *	5	Unified				(text/plain)		...
+ *	6	Context				(text/plain)		...
  *
  * default setting
  *	page/revisions.xml		=> 2
@@ -149,8 +149,8 @@ if ($page_a && $page_b
 				$tpl->editnote	= $r['edit_note'] ?: null;
 			}
 
-			$tpl->leave();	// r
-			$tpl->leave();	// side
+			$tpl->leave();	// r_
+			$tpl->leave();	// side_
 		};
 
 		// print header
@@ -315,7 +315,6 @@ if ($page_a && $page_b
 			$side_b->copy_until_ordinal($count_total_right, $output);
 			$side_b->copy_whitespace($output);
 
-			#echo '<br><br>';
 			$tpl->m0_diff = $this->format($output, 'wiki', ['diff' => true]);
 			break;
 
