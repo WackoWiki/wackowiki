@@ -42,6 +42,11 @@ pre {
 	background: #F7F7F7;
 }
 
+/* reset SYNTAX --text-- style */
+del {
+	color: #000000;
+}
+
 /*
  * HTML Side by Side Diff
  */
