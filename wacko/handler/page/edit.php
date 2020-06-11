@@ -189,32 +189,25 @@ if ($this->has_access('read')
 				// add page (revisions)
 				$body_r = $this->save_page($this->tag, $title, $body, $edit_note, $minor_edit, $reviewed, $this->page['comment_on_id']);
 
-				// is page ..
-				if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == 0)
+				// new page created
+				if (!$this->page)
 				{
-					// save categories
-					if ($this->page == false)
-					{
-						// new page created
-						$this->save_categories_list($this->get_page_id($this->tag), OBJECT_PAGE);
-					}
-
-					// restore username after anonymous publication
-					if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
-					{
-						$this->set_user_setting('user_name', $remember_name);
-						unset($remember_name);
-
-						if ($body_r)
-						{
-							$this->set_user_setting('noid_protect', true);
-						}
-					}
-
 					// this is a new page, get page_id via tag for the new created page
-					if (!$this->page)
+					$this->page['page_id'] = $this->get_page_id($this->tag);
+
+					// save categories
+					$this->save_categories_list($this->page['page_id'], OBJECT_PAGE);
+				}
+
+				// restore username after anonymous publication
+				if (isset($_POST['noid_publication']) && $_POST['noid_publication'] == $this->page['page_id'])
+				{
+					$this->set_user_setting('user_name', $remember_name);
+					unset($remember_name);
+
+					if ($body_r)
 					{
-						$this->page['page_id'] = $this->get_page_id($this->tag);
+						$this->set_user_setting('noid_protect', true);
 					}
 				}
 
