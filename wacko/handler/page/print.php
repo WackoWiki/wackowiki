@@ -30,6 +30,8 @@ if ((($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate
 
 // build html body
 $data = $this->format($this->page['body'], 'wacko');
+// remove obsolete <ignore> tags
+$data = str_replace(['<ignore>', '</ignore>'], '', $data);
 
 // display page
 $data		= $this->format($data, 'post_wacko', ['stripnotypo' => true]);

@@ -1352,6 +1352,34 @@ class Wacko
 		}
 	}
 
+	function load_outgoing_links($to_tag, $tag = '', $limit = 100)
+	{
+		$selector =
+			"FROM " . $this->db->table_prefix . "page_link l " .
+				"INNER JOIN " . $this->db->table_prefix . "page p ON (p.page_id = l.to_page_id) " .
+			"WHERE " . ($tag
+				? "p.tag LIKE " . $this->db->q($tag . '/%') . " AND "
+				: "") .
+				"(l.from_page_id = " . (int) $this->get_page_id($to_tag) . ") ";
+
+		// count pages
+		$count_pages = $this->db->load_single(
+			"SELECT COUNT(p.page_id) AS n " .
+			$selector
+			);
+
+		$pagination = $this->pagination($count_pages['n'], $limit);
+
+		if ($pages = $this->db->load_all(
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
+			$selector .
+			"ORDER BY tag " .
+			$pagination['limit'], true))
+		{
+			return [$pages, $pagination];
+		}
+	}
+
 	function load_file_usage($file_id, $tag = '', $limit = 100)
 	{
 		$selector =
@@ -5044,8 +5072,7 @@ class Wacko
 		else
 		{
 			// remove obsolete <ignore> tags
-			$body_r = str_replace('<ignore>', '', $body_r);
-			$body_r = str_replace('</ignore>', '', $body_r);
+			$body_r = str_replace(['<ignore>', '</ignore>'], '', $body_r);
 		}
 
 		// store to DB ($this->page['latest'] != 0)

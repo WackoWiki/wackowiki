@@ -245,8 +245,7 @@ class Paragrafica
 		$what = str_replace($this->mark3, '', $what);
 		$what = str_replace($this->mark4, '', $what);
 		// remove obsolete <ignore> tags
-		$what = str_replace('<ignore>', '', $what);
-		$what = str_replace('</ignore>', '', $what);
+		$what = str_replace(['<ignore>', '</ignore>'], '', $what);
 
 		// -. done with P
 
