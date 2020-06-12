@@ -29,7 +29,7 @@
 				[= e _ =
 					<br>
 					<label for="page_title">[ ' label ' ]</label><br>
-					<input type="text" id="page_title" maxlength="250" value="[ ' title | e attr ' ]" size="60" name="title" >
+					<input type="text" id="page_title" class="input-title" maxlength="250" value="[ ' title | e attr ' ]" size="100" name="title" >
 					<br>
 				=]
 				[= r _ =
@@ -38,12 +38,12 @@
 				=]
 	
 				<input type="hidden" name="previous" value="[ ' previous | e attr ' ]"><br>
-				<textarea id="postText" name="body" rows="40" cols="60" class="TextArea" required>[ ' body | pre ' ]</textarea>
+				<textarea id="postText" class="textarea-page" name="body" rows="40" cols="60" required>[ ' body | pre ' ]</textarea>
 				<br>
 	
 				[= n _ =
 					<label for="edit_note">[ ' _t: EditNote ' ]:</label><br>
-					<input type="text" id="edit_note" maxlength="200" value="[ ' note | e attr ' ]" size="60" name="edit_note">
+					<input type="text" id="edit_note" class="input-summary" maxlength="200" value="[ ' note | e attr ' ]" size="100" name="edit_note">
 					&nbsp;&nbsp;&nbsp;
 				=]
 				[= minor _ =
