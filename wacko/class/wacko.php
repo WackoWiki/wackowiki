@@ -3462,7 +3462,7 @@ class Wacko
 
 		// TODO: match all external links for tracking: images, mail:, xampp:
 		// TODO: add related code to actions and handlers (currently there is no available use case)
-		/* if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
+		if (preg_match('/^(http|https|ftp|file|nntp|telnet):\/\/([^\\s\"<>]+)$/u', $tag))
 		{
 			if (!mb_stristr($tag, $this->db->base_url))
 			{
@@ -3472,7 +3472,7 @@ class Wacko
 					$this->track_link($tag, LINK_EXTERNAL);
 				}
 			}
-		} */
+		}
 
 		// Email -> mailto:info@example.com
 		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
@@ -4845,7 +4845,6 @@ class Wacko
 	/**
 	* Loads all referrers to this page from DB
 	* @param int $page_id
-	* @param int $backdays
 	* @return array Array of (referer, num)
 	*/
 	function load_referrers($page_ids = null) : ?array
@@ -4863,6 +4862,29 @@ class Wacko
 				(!is_null($page_ids)
 				? "page_id, referrer "
 				: "referrer ") .
+			"ORDER BY num DESC");
+	}
+
+	/**
+	* Loads all external links of this page from DB
+	* @param int $page_id
+	* @return array Array of (link, num)
+	*/
+	function load_external_links($page_ids = null) : ?array
+	{
+		return $this->db->load_all(
+			"SELECT " .
+			(!is_null($page_ids)
+				? "page_id, link, count(link) AS num "
+				: "link, count(link) AS num ") .
+			"FROM " . $this->db->table_prefix . "external_link " .
+			(!is_null($page_ids)
+				? "WHERE page_id IN (" . $this->ids_string($page_ids) . ") "
+				: "") .
+			"GROUP BY " .
+				(!is_null($page_ids)
+				? "page_id, link "
+				: "link ") .
 			"ORDER BY num DESC");
 	}
 
