@@ -8,16 +8,16 @@
 	=]
 
 	<strong>[ ' title ' ]</strong><br><br>
-	
+
 	[''' pagination ''']
-	
+
 	<ul class="ul-list">
 		[= p _ =
 			<li><strong>[ ' link ' ]</strong> ([ ' num ' ])
 				<ul class="lined">
 					[= l _ =
 						<li>
-							<span class="[ ' vclass ' ]">[ ' val ' ]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="[ ' vclass ' ]">[ ' val ' ]</span>
 							<span class="">
 								<a title="[ ' ref | e ' ]" href="[ ' ref | e ' ]" rel="nofollow noreferrer">[ ' trunc | e ' ]</a>
 							</span>
@@ -31,7 +31,7 @@
 				<ul class="lined">
 					[= l _ =
 						<li>
-							<span class="[ ' vclass ' ]">[ ' val ' ]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span class="[ ' vclass ' ]">[ ' val ' ]</span>
 							<span class="">
 								<a title="[ ' ref | e ' ]" href="[ ' ref | e ' ]" rel="nofollow noreferrer">[ ' trunc | e ' ]</a>
 							</span>
@@ -46,7 +46,7 @@
 		[= g _ =
 			[= l _ =
 				<li>
-					<span class="[ ' vclass ' ]">[ ' val ' ]</span>&nbsp;&nbsp;&nbsp;&nbsp;
+					<span class="[ ' vclass ' ]">[ ' val ' ]</span>
 					<span class="">
 						<a title="[ ' ref | e ' ]" href="[ ' ref | e ' ]" rel="nofollow noreferrer">[ ' trunc | e ' ]</a>
 					</span>
@@ -57,7 +57,7 @@
 			[ ' _t: NoneReferrers ' ]<br><br>
 		=]
 	</ul>
-	
+
 	[''' pagination ''']
 
 

@@ -208,7 +208,7 @@ if ($mode == 'perpage')
 
 			foreach ($ref_perpage as $ref2)
 			{
-				$print_ref($ref2['referrer'], $ref2['num'], 'list_count');
+				$print_ref($ref2['referrer'], $ref2['num'], 'list-count');
 			}
 		}
 	}
@@ -245,7 +245,7 @@ else
 
 	foreach ($referrers as $referrer)
 	{
-		$print_ref($referrer['referrer'], $referrer['num'], 'list_count');
+		$print_ref($referrer['referrer'], $referrer['num'], 'list-count');
 	}
 
 	$tpl->leave();
