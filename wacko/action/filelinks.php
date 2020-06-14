@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{fileusage [page="PageName"] [max=Number] [nomark=1] [title=0]}}
+// {{filelinks [page="PageName"] [max=Number] [nomark=1] [title=0]}}
 
 if (!isset($file_id))	$file_id	= null;
 if (!isset($nomark))	$nomark		= 0;
@@ -21,7 +21,7 @@ if ($file_id)
 		$tpl->emark		= true;
 	}
 
-	if ([$pages, $pagination] = $this->load_file_usage($file_id, null, $max))
+	if ([$pages, $pagination] = $this->load_file_links($file_id, null, $max))
 	{
 		foreach ($pages as $page)
 		{
