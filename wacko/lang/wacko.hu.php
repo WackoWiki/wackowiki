@@ -414,6 +414,8 @@ $wacko_translation = [
 
 	'PrintVersion'				=> 'Print version',
 	'PrintText'					=> 'Print',
+	'LinkedPages'				=> 'Összekapcsolt oldalak',
+	'NoLinkedPages'				=> 'Nincsenek linkelt oldalak',
 	'ReferringPages'			=> 'Referring pages',
 	'NoReferringPages'			=> 'There are no referring pages',
 	'Footnotes'					=> 'Footnotes',

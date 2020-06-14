@@ -414,6 +414,8 @@ $wacko_translation = [
 
 	'PrintVersion'				=> 'Версия за печат',
 	'PrintText'					=> 'Версия за печат',
+	'LinkedPages'				=> 'Свързани страници',
+	'NoLinkedPages'				=> 'Няма свързани страници',
 	'ReferringPages'			=> 'Страници, препращащи на дадената',
 	'NoReferringPages'			=> 'Няма препратки на тази страница',
 	'Footnotes'					=> 'Footnotes',

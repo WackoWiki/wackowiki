@@ -414,6 +414,8 @@ $wacko_translation = [
 
 	'PrintVersion'				=> 'Wersja do druku',
 	'PrintText'					=> 'Print',
+	'LinkedPages'				=> 'Linkowane strony',
+	'NoLinkedPages'				=> 'Nie ma stron z linkami',
 	'ReferringPages'			=> 'Dokumenty Wiki, zawierające odnośnik tej strony',
 	'NoReferringPages'			=> 'W tej chwili żaden dokument nie zawiera odnośnika do tej strony',
 	'Footnotes'					=> 'Przypisy',

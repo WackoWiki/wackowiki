@@ -121,7 +121,7 @@ if ($mode == 'remove' && isset($file))
 			$tpl->user		= $this->user_link($file['user_name'], '', true, false);
 
 			$tpl->location	= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
-			$tpl->fileusage	= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
+			$tpl->fileusage	= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1]);
 			$tpl->notice	= $this->show_message($this->_t('FileRemoveConfirm'), 'warning', false);
 
 			if ($this->db->store_deleted_pages && $this->is_admin())
@@ -254,7 +254,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				}
 
 				$tpl->location		= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
-				$tpl->fileusage		= $this->action('fileusage', ['file_id' => $file['file_id'], 'nomark' => 1]);
+				$tpl->fileusage		= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1]);
 				$tpl->c_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
 			}
 

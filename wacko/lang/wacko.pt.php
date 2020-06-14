@@ -414,8 +414,10 @@ $wacko_translation = [
 
 	'PrintVersion'				=> 'Versão Impressora',
 	'PrintText'					=> 'Imprimir',
+	'LinkedPages'				=> 'Páginas ligadas',
+	'NoLinkedPages'				=> 'Não existem páginas ligadas',
 	'ReferringPages'			=> 'Páginas Referenciadoras',
-	'NoReferringPages'			=> 'Não existem Páginas Referenciadoras',
+	'NoReferringPages'			=> 'Não existem páginas referenciadoras',
 	'Footnotes'					=> 'Notas de rodapé',
 	'Footnote'					=> 'Nota de rodapé',
 	'MostPopularPages'			=> 'Páginas mais populares',

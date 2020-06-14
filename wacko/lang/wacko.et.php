@@ -414,6 +414,8 @@ $wacko_translation = [
 
 	'PrintVersion'				=> 'Prinditav versioon',
 	'PrintText'					=> 'Print',
+	'LinkedPages'				=> 'Lingitud lehed',
+	'NoLinkedPages'				=> 'Lingitud lehti pole',
 	'ReferringPages'			=> 'Viidatud lehed',
 	'NoReferringPages'			=> 'Viidatud lehti pole',
 	'Footnotes'					=> 'Allmärkused',

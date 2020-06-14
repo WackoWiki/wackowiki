@@ -1352,7 +1352,7 @@ class Wacko
 		}
 	}
 
-	function load_outgoing_links($to_tag, $tag = '', $limit = 100)
+	function load_page_links($to_tag, $tag = '', $limit = 100)
 	{
 		$selector =
 			"FROM " . $this->db->table_prefix . "page_link l " .
@@ -1380,7 +1380,7 @@ class Wacko
 		}
 	}
 
-	function load_file_usage($file_id, $tag = '', $limit = 100)
+	function load_file_links($file_id, $tag = '', $limit = 100)
 	{
 		$selector =
 			"FROM " . $this->db->table_prefix . "file_link l " .
