@@ -1380,6 +1380,29 @@ class Wacko
 		}
 	}
 
+	/**
+	* Loads all external links of this page from DB
+	* @param int $page_id
+	* @return array Array of (link, num)
+	*/
+	function load_external_links($page_ids = null) : ?array
+	{
+		return $this->db->load_all(
+			"SELECT " .
+			(!is_null($page_ids)
+				? "page_id, link, count(link) AS num "
+				: "link, count(link) AS num ") .
+			"FROM " . $this->db->table_prefix . "external_link " .
+			(!is_null($page_ids)
+				? "WHERE page_id IN (" . $this->ids_string($page_ids) . ") "
+				: "") .
+			"GROUP BY " .
+				(!is_null($page_ids)
+				? "page_id, link "
+				: "link ") .
+			"ORDER BY num DESC");
+	}
+
 	function load_file_links($file_id, $tag = '', $limit = 100)
 	{
 		$selector =
@@ -4862,29 +4885,6 @@ class Wacko
 				(!is_null($page_ids)
 				? "page_id, referrer "
 				: "referrer ") .
-			"ORDER BY num DESC");
-	}
-
-	/**
-	* Loads all external links of this page from DB
-	* @param int $page_id
-	* @return array Array of (link, num)
-	*/
-	function load_external_links($page_ids = null) : ?array
-	{
-		return $this->db->load_all(
-			"SELECT " .
-			(!is_null($page_ids)
-				? "page_id, link, count(link) AS num "
-				: "link, count(link) AS num ") .
-			"FROM " . $this->db->table_prefix . "external_link " .
-			(!is_null($page_ids)
-				? "WHERE page_id IN (" . $this->ids_string($page_ids) . ") "
-				: "") .
-			"GROUP BY " .
-				(!is_null($page_ids)
-				? "page_id, link "
-				: "link ") .
 			"ORDER BY num DESC");
 	}
 

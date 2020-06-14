@@ -233,7 +233,7 @@ else if ($mode == 'bytime')
 				$tpl->day = $curday = $day;
 			}
 
-			$print_ref($referrer['referrer'], $time, '', $link);
+			$print_ref($referrer['referrer'], $time, 'list-dt', $link);
 		}
 	}
 

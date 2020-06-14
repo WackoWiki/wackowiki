@@ -2089,6 +2089,9 @@ li.m-source img {
 	float: left; 
 	padding-right: 10px;
 }
+.list-dt {
+	padding-right: 10px;
+}
 
 .userprofile {
 	border-spacing: 3px; 
