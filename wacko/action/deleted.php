@@ -52,7 +52,7 @@ if ($this->is_admin())
 				$tpl->l_icon = true;
 				$tpl->l_time = $this->compose_link_to_page($page['tag'], 'revisions', $time);
 				$tpl->l_page = $this->compose_link_to_page($page['tag'], '', '');
-				$tpl->l_user = $this->user_link($page['user_name'], '', true, false);
+				$tpl->l_user = $this->user_link($page['user_name'], true, false);
 			}
 		}
 

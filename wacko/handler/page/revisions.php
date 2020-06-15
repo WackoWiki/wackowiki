@@ -98,7 +98,7 @@ if ($this->has_access('read'))
 			$tpl->href			= $this->href('show', '', ['revision_id' => $page['revision_id']]);
 			$tpl->modified		= $page['modified'];
 
-			$tpl->user			= $this->user_link($page['user_name'], '', true, false);
+			$tpl->user			= $this->user_link($page['user_name'], true, false);
 			if ($page['edit_note'])
 			{
 				$tpl->n_note	= $page['edit_note'];
@@ -110,7 +110,7 @@ if ($this->has_access('read'))
 			{
 				if ($page['reviewed'])
 				{
-					$tpl->r_x_user = $this->user_link($page['reviewer'], '', true, false);
+					$tpl->r_x_user = $this->user_link($page['reviewer'], true, false);
 				}
 				else if ($this->is_reviewer())
 				{

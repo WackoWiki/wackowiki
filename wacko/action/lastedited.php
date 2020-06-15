@@ -37,7 +37,7 @@ if (($mtime = $this->page['modified']))
 		$tpl->notes		= $this->page['edit_note'];
 	}
 
-	$tpl->user_link = $this->user_link($this->page['user_name'], '', true, false);
+	$tpl->user_link = $this->user_link($this->page['user_name'], true, false);
 
 	if ($label)
 	{

@@ -39,7 +39,7 @@ if ($this->is_owner($page_id) || $this->is_admin())
 	{
 		foreach ($watchers as $watcher)
 		{
-			$tpl->l_link = $this->user_link($watcher['user_name'], '', true, false);
+			$tpl->l_link = $this->user_link($watcher['user_name'], true, false);
 		}
 	}
 	else

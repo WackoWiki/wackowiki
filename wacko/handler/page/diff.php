@@ -98,7 +98,7 @@ if ($page_a && $page_b
 			$tpl->href		= $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : ''));
 			$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $page['version_id'] . '</strong>');
 			$tpl->modified	= $page['modified'];
-			$tpl->username	= $this->user_link($page['user_name'], '', true, true);
+			$tpl->username	= $this->user_link($page['user_name'], true, true);
 			$tpl->n_note	= $page['edit_note'] ?: null;
 			$tpl->m_minor	= $page['minor_edit'] ? 'm' : null;
 

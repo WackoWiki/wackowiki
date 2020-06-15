@@ -40,7 +40,7 @@ if ($this->page && $this->has_access('read'))
 		}
 		else
 		{
-			$tpl->owner_link = $this->user_link($owner, '', true, false);
+			$tpl->owner_link = $this->user_link($owner, true, false);
 		}
 	}
 	else if (!$this->page['comment_on_id'])

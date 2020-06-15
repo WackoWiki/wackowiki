@@ -50,8 +50,7 @@ if ($this->has_access('read')
 			$comment_on['tag'],
 			$comment_on['title'],
 			$this->page['user_name'],
-			$this->page['modified'],
-			$comment_on['page_lang']);
+			$this->page['modified']);
 		$tpl->message = $this->show_message($message, 'comment-info', false);
 	}
 
@@ -62,7 +61,7 @@ if ($this->has_access('read')
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),
-			$this->user_link($this->page['user_name'], '', true, false));
+			$this->user_link($this->page['user_name'], true, false));
 		$tpl->message = $this->show_message($message, 'revision-info', false);
 		$tpl->warning = $this->show_message($this->_t('EditingRevisionWarning'), 'warning', false);
 	}

@@ -124,7 +124,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 					if (in_array($user['user_name'], $group_users))
 					{
-						$groups[] = $this->group_link($group_name, '', true, false);
+						$groups[] = $this->group_link($group_name, true, false);
 					}
 				}
 
@@ -151,7 +151,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 				if ($pm_size > INTERCOM_MAX_SIZE)
 				{
 					$error = Ut::perc_replace($this->_t('UsersPMOversized'),
-						binary_multiples(($pm_size - INTERCOM_MAX_SIZE)));
+						$this->binary_multiples(($pm_size - INTERCOM_MAX_SIZE)));
 				}
 				// personal messages flood control
 				else if (time() - @$this->sess->intercom_delay < $this->db->intercom_delay)
@@ -665,7 +665,7 @@ else
 		foreach ($users as $user)
 		{
 			$tpl->user = $user;
-			$tpl->link = $this->user_link($user['user_name'], $user['account_lang'], true, false);
+			$tpl->link = $this->user_link($user['user_name'], true, false);
 
 			if ($logged_in)
 			{

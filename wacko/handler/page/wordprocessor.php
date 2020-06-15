@@ -24,8 +24,7 @@ if ($this->has_access('read'))
 			$comment_on['tag'],
 			$comment_on['title'],
 			$this->page['user_name'],
-			$this->page['modified'],
-			$comment_on['page_lang']);
+			$this->page['modified']);
 		$this->show_message($message, 'comment-info');
 	}
 
@@ -35,7 +34,7 @@ if ($this->has_access('read'))
 			$this->href(),
 			$this->tag,
 			$this->get_time_formatted($this->page['modified']),
-			$this->user_link($this->page['user_name'], '', true, false));
+			$this->user_link($this->page['user_name'], true, false));
 		$this->show_message($message, 'revision-info');
 	}
 

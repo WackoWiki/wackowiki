@@ -288,7 +288,7 @@ if ($can_view)
 											? number_format($file['picture_w'], 0, ',', '.') . ' &times; ' . number_format($file['picture_h'], 0, ',', '.') . ' px'
 											: $hits);
 				$tpl->r_p_size			= $file_size;
-				$tpl->r_p_user			= $this->user_link($file['user_name'], '', true, false);
+				$tpl->r_p_user			= $this->user_link($file['user_name'], true, false);
 				$tpl->r_p_dt			= $dt;
 				$tpl->r_p_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter);
 			}

@@ -251,7 +251,7 @@ if (!empty($blog_cluster))
 
 			$tpl->page		= $page;
 			$tpl->href		= $this->href('', $page['tag'], '');
-			$tpl->user		= $this->user_link($page['owner'], '', true, false);
+			$tpl->user		= $this->user_link($page['owner'], true, false);
 			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1);
 			$tpl->category	= $_category;
 			$tpl->edit		= ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ' : '');

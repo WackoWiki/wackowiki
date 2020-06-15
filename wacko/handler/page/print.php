@@ -19,7 +19,7 @@ if (!$this->page['latest'])
 		$this->href(),
 		$this->tag,
 		$this->get_time_formatted($this->page['modified']),
-		$this->user_link($this->page['user_name'], '', true, false));
+		$this->user_link($this->page['user_name'], true, false));
 }
 
 if ((($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate_links)

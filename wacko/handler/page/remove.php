@@ -213,8 +213,7 @@ if ($this->is_admin()
 				$comment_on['tag'],
 				$comment_on['title'],
 				$this->page['user_name'],
-				$this->page['modified'],
-				$comment_on['page_lang']);
+				$this->page['modified']);
 
 			$tpl->preview_meta	= $this->show_message($message, 'comment-info', false);
 			$tpl->preview_text	= $this->format(mb_substr($this->page['body'], 0, 500), 'cleanwacko');

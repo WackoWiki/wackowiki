@@ -731,7 +731,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tpl->pageid	= $topic['page_id'];
 				$tpl->created	= $topic['created'];
 				$tpl->comments	= $topic['comments'];
-				$tpl->user		= $this->user_link($topic['owner_name'], '', true, false);
+				$tpl->user		= $this->user_link($topic['owner_name'], true, false);
 				$tpl->ip		= $this->is_admin() ? $topic['ip'] : '';
 
 				if ($this->has_access('comment', $topic['page_id'], $this->db->default_comment_acl) === false)
@@ -1280,7 +1280,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		}
 
 		$_user			= $forum_cluster ? $this->page['user_name'] : $this->page['owner_name'];
-		$tpl->user		= $this->user_link($_user, '', true, false);
+		$tpl->user		= $this->user_link($_user, true, false);
 		$tpl->created	= $this->page['created'];
 
 		if ($comments)
@@ -1302,7 +1302,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tpl->desc		= $desc;
 				$tpl->ip		= $this->is_admin() ? $comment['ip'] : '';
 				$tpl->clink		= $this->compose_link_to_page($comment['tag'], '', $comment['title']);
-				$tpl->ulink		= $this->user_link($comment['owner_name'], '', true, false);
+				$tpl->ulink		= $this->user_link($comment['owner_name'], true, false);
 				$tpl->set		= in_array($comment['page_id'], $set);
 			}
 

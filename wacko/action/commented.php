@@ -136,7 +136,7 @@ if ($this->user_allowed_comments())
 						: $this->link('/' . $page['comment_tag'], '', $page['comment_title'], $page['comment_on_tag'], 0, 0)
 					);
 
-					$tpl->l_user = $this->user_link($page['comment_owner_name'], '', true, false);
+					$tpl->l_user = $this->user_link($page['comment_owner_name'], true, false);
 				}
 			}
 

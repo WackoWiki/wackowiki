@@ -175,7 +175,7 @@ function ensure_dir($dir)
 }
 
 // set backup directory
-function set_pack_dir(&$engine, $time)
+function set_pack_dir($time)
 {
 	// check dir name and create if not exists
 	$pack = date('Ymd_His', $time);
@@ -206,7 +206,7 @@ function get_directory_size($path)
 }
 
 // delete backup pack from the server
-function remove_pack(&$engine, $pack)
+function remove_pack($pack)
 {
 	$packdir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 
@@ -681,7 +681,7 @@ function put_data(&$engine, $pack, $table, $mode)
 }
 
 // decompress files and restore them into the filesystem
-function put_files(&$engine, $pack, $dir, $keep = false)
+function put_files($pack, $dir, $keep = false)
 {
 	$total		= [];
 	$total[0]	= 0;

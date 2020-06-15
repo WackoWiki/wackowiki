@@ -227,7 +227,7 @@ $preview_text = function ($text, $limit, $hellip = true)
 	}
 };
 
-$highlight_this = function ($text, $words, $the_place)
+$highlight_this = function ($text, $words)
 {
 	$words			= trim($words);
 	$the_count		= 0;
@@ -375,7 +375,7 @@ if (mb_strlen($phrase) >= 3)
 					}
 
 					$tpl->l_link		= $this->link('/' . $page['tag'], '', (isset($title) ? $page['title'] : $page['tag']), '', '', '');
-					$tpl->l_userlink	= $this->user_link($page['user_name'], '', false, false);
+					$tpl->l_userlink	= $this->user_link($page['user_name'], false, false);
 					$tpl->l_mtime		= $page['modified'];
 					$tpl->l_psize		= $this->binary_multiples($page['page_size'], false, true, true);
 

@@ -170,7 +170,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			}
 
 			// print entry
-			$tpl->l_user		= $this->user_link($page['user_name'], '', true, false);
+			$tpl->l_user		= $this->user_link($page['user_name'], true, false);
 			$tpl->l_viewed		= (isset($user['last_mark']) && $user['last_mark']
 									&& $page['user_name'] != $user['user_name']
 									&& $page['date'] > $user['last_mark']

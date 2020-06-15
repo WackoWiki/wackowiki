@@ -2433,7 +2433,7 @@ class Wacko
 		$this->set_language($save, true);
 
 		$email = new Email($this);
-		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset, $xtra_headers = []);
+		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset, $xtra_headers);
 	}
 
 	function notify_approved_account($user)
@@ -2901,12 +2901,12 @@ class Wacko
 		}
 	}
 
-	function msg_is_comment_on($tag, $title, $user_name, $modified, $lang) : string
+	function msg_is_comment_on($tag, $title, $user_name, $modified) : string
 	{
 		return $this->_t('ThisIsCommentOn') . ' ' .
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
 			$this->_t('PostedBy') . ' ' .
-			$this->user_link($user_name, '', true, true) . ' ' .
+			$this->user_link($user_name, true, true) . ' ' .
 			$this->_t('At') . ' ' . $this->get_time_formatted($modified);
 	}
 
@@ -4314,7 +4314,7 @@ class Wacko
 	}
 
 	// creates a link to the user profile
-	function user_link($user_name, $account_lang = '', $linking = true, $add_icon = true) : string
+	function user_link($user_name, $linking = true, $add_icon = true) : string
 	{
 		if (!$user_name)
 		{
@@ -4336,13 +4336,12 @@ class Wacko
 	}
 
 	// creates a link to the group profile
-	function group_link($group_name, $group_lang = '', $linking = true, $add_icon = true)
+	function group_link($group_name, $linking = true, $add_icon = true)
 	{
 		if (!$group_name)
 		{
 			return false;
 		}
-
 
 		$text = $group_name;
 		$icon = $add_icon?  '<span class="icon"></span>' : '';

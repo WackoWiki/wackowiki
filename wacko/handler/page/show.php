@@ -79,7 +79,7 @@ if ($this->has_access('read'))
 				$this->href(),
 				$this->tag,
 				$this->get_time_formatted($this->page['modified']),
-				$this->user_link($this->page['user_name'], '', true, false));
+				$this->user_link($this->page['user_name'], true, false));
 
 			// if this is an old revision, display ReEdit button
 			if ($this->has_access('write'))

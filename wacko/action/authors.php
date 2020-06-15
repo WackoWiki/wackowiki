@@ -162,7 +162,7 @@ else
 						$all_authors[$author['years']] .= ', ';
 					}
 
-					$all_authors[$author['years']] .= $this->user_link($author['name'], '', true, false);
+					$all_authors[$author['years']] .= $this->user_link($author['name'], true, false);
 				}
 				else
 				{

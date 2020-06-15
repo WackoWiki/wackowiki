@@ -37,7 +37,7 @@ $meta_navigation = function ($can_upload)
 		 "</ul>\n";
 };
 
-$format_desc = function($text, $file_lang)
+$format_desc = function($text)
 {
 	$desc	= $this->format($text, 'typografica' );
 
@@ -118,7 +118,7 @@ if ($mode == 'remove' && isset($file))
 			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
 			$tpl->file		= $file; // array -> [ ' file.field ' ]
 			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
-			$tpl->user		= $this->user_link($file['user_name'], '', true, false);
+			$tpl->user		= $this->user_link($file['user_name'], true, false);
 
 			$tpl->location	= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
 			$tpl->fileusage	= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1]);
@@ -228,7 +228,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				}
 
 				$tpl->mime			= $file['mime_type'];
-				$tpl->user			= $this->user_link($file['user_name'], '', true, false);
+				$tpl->user			= $this->user_link($file['user_name'], true, false);
 				$tpl->time			= $this->get_time_formatted($file['uploaded_dt']);
 
 				if ($file['license_id'])

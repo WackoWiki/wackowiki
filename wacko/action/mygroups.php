@@ -17,7 +17,7 @@ $my_groups = function ($user_id, $groups)
 	{
 		if (in_array ($user_id, $members))
 		{
-			echo $this->group_link($group_name, '', true, false) . '<br>';
+			echo $this->group_link($group_name, true, false) . '<br>';
 
 			$my_groups_count++;
 		}

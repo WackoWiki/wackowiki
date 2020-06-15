@@ -73,7 +73,7 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 					: $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0)
 				);
 
-			$tpl->l_user = $this->user_link($page['user_name'], '', true, false);
+			$tpl->l_user = $this->user_link($page['user_name'], true, false);
 
 			if (isset($user['last_mark']) && $user['last_mark']
 				&& $page['user_name'] != $user['user_name']

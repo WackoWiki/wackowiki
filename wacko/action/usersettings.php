@@ -285,7 +285,7 @@ else if (($user = $this->get_user()))
 			"LIMIT 1");
 
 		$tpl->user			= $user; // array
-		$tpl->userlink		= $this->user_link($user['user_name'], '', true, false);
+		$tpl->userlink		= $this->user_link($user['user_name'], true, false);
 		$tpl->realname		= $user['real_name'];
 		$tpl->href			= $this->href('', $this->db->password_page);
 		$tpl->email			= $user['email'];
