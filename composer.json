@@ -8,6 +8,7 @@
 		"php" : ">=7.2",
 		"ext-bcmath" : "*",
 		"ext-ctype" : "*",
+		"ext-fileinfo" : "*",
 		"ext-gd" : "*",
 		"ext-iconv" : "*",
 		"ext-intl" : "*",
@@ -16,8 +17,10 @@
 		"ext-mysqli" : "*",
 		"ext-openssl" : "*",
 		"ext-pcre" : "*",
+		"ext-pdo" : "*",
 		"ext-pdo_mysql" : "*",
-		"ext-SPL" : "*"
+		"ext-SPL" : "*",
+		"ext-zlib" : "*"
 	},
 	"prefer-stable" : true
 }
