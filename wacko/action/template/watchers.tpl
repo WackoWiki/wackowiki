@@ -2,7 +2,7 @@
 	[= mark _ =
 		<div class="layout-box">
 			<p>
-				<span>[ ' title | e ' ]:</span>
+				<span>[ ' title ' ]:</span>
 			</p>
 	=]
 		[ ' denied ' ][ ' none ' ]
