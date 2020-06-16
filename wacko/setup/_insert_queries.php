@@ -12,8 +12,6 @@ $delete_table[]			= ['auth_token',			$tbl_auth_token_drop];
 $delete_table[]			= ['menu',					$tbl_menu_drop];
 $delete_table[]			= ['cache',					$tbl_cache_drop];
 $delete_table[]			= ['config',				$tbl_config_drop];
-$delete_table[]			= ['usergroup',				$tbl_usergroup_drop];
-$delete_table[]			= ['usergroup_member',		$tbl_usergroup_member_drop];
 $delete_table[]			= ['category',				$tbl_category_drop];
 $delete_table[]			= ['category_assignment',	$tbl_category_assignment_drop];
 $delete_table[]			= ['external_link',			$tbl_external_link_drop];
@@ -30,6 +28,8 @@ $delete_table[]			= ['revision',				$tbl_revision_drop];
 #$delete_table[]		= ['tag_assignment',		$tbl_tag_assignment_drop];
 $delete_table[]			= ['user',					$tbl_user_drop];
 $delete_table[]			= ['user_setting',			$tbl_user_setting_drop];
+$delete_table[]			= ['usergroup',				$tbl_usergroup_drop];
+$delete_table[]			= ['usergroup_member',		$tbl_usergroup_member_drop];
 $delete_table[]			= ['watch',					$tbl_watch_drop];
 $delete_table[]			= ['word',					$tbl_word_drop];
 
@@ -42,8 +42,6 @@ $create_table[]			= ['auth_token',			$tbl_auth_token];
 $create_table[]			= ['menu',					$tbl_menu];
 $create_table[]			= ['cache',					$tbl_cache];
 $create_table[]			= ['config',				$tbl_config];
-$create_table[]			= ['usergroup',				$tbl_usergroup];
-$create_table[]			= ['usergroup_member',		$tbl_usergroup_member];
 $create_table[]			= ['category',				$tbl_category];
 $create_table[]			= ['category_assignment',	$tbl_category_assignment];
 $create_table[]			= ['external_link',			$tbl_external_link];
@@ -60,6 +58,8 @@ $create_table[]			= ['revision',				$tbl_revision];
 #$create_table[]		= ['tag_assignment',		$tbl_tag_assignment];
 $create_table[]			= ['user',					$tbl_user];
 $create_table[]			= ['user_setting',			$tbl_user_setting];
+$create_table[]			= ['usergroup',				$tbl_usergroup];
+$create_table[]			= ['usergroup_member',		$tbl_usergroup_member];
 $create_table[]			= ['watch',					$tbl_watch];
 $create_table[]			= ['word',					$tbl_word];
 
@@ -112,3 +112,7 @@ $upgrade['5.5.14'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 
 // user
 $upgrade['6.0.0'][]		= ['insert',	'user',				$insert_user_r5_5_0];
+$upgrade['6.0.7'][]		= ['alter',		'user',				$alter_user_r5_5_0];
+
+// usergroup
+$upgrade['6.0.7'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_5_0];

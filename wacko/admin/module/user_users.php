@@ -201,7 +201,6 @@ function admin_user_users(&$engine, &$module)
 					"password			= " . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ", " .
 					#"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
 					"enabled			= " . (int) ($_POST['enabled'] ?? 0) . ", " .
-					"account_lang		= " . $engine->db->q(($user_lang ?: $engine->db->language)) . ", " .
 					"user_name			= " . $engine->db->q($user_name) . " ");
 
 			// get new user_id
@@ -296,7 +295,6 @@ function admin_user_users(&$engine, &$module)
 			$engine->db->sql_query(
 				"UPDATE " . $prefix . "user SET " .
 					"user_name		= " . $engine->db->q($_POST['user_name']) . ", " .
-					"account_lang	= " . $engine->db->q($_POST['user_lang']) . ", " .
 					"email			= " . $engine->db->q($_POST['newemail']) . ", " .
 					#"password		= " . $engine->db->q($engine->password_hash(['user_name' => $_POST['user_name']], $password)) . ", " .
 					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .

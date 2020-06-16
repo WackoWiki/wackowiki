@@ -136,7 +136,6 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				"SET " .
 					"signup_time	= UTC_TIMESTAMP(), " .
 					"user_name		= " . $this->db->q($user_name) . ", " .
-					"account_lang	= " . $this->db->q($user_lang) . ", " .
 					"email			= " . $this->db->q($email) . ", " .
 					"password		= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", " .
 					"account_status	= " . (int) $account_status . ", " .

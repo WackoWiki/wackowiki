@@ -22,13 +22,13 @@ $password_hashed		= password_hash(
 								);
 
 // user 'system' holds all default pages
-$insert_user_system			= "INSERT INTO {$pref}user (user_name, account_lang, password, email, account_type, signup_time) VALUES ('System', '" . $config['language'] . "', '', '', '1', UTC_TIMESTAMP())";
+$insert_user_system			= "INSERT INTO {$pref}user (user_name, password, email, account_type, signup_time) VALUES ('System', '', '', '1', UTC_TIMESTAMP())";
 
 // user 'deleted' holds all pages and attachments from deleted users
-$insert_user_deleted		= "INSERT INTO {$pref}user (user_name, account_lang, password, email, account_type, signup_time) VALUES ('Deleted', '" . $config['language'] . "', '', '', '1', UTC_TIMESTAMP())";
+$insert_user_deleted		= "INSERT INTO {$pref}user (user_name, password, email, account_type, signup_time) VALUES ('Deleted', '', '', '1', UTC_TIMESTAMP())";
 
 // user 'admin'
-$insert_admin				= "INSERT INTO {$pref}user (user_name, account_lang, password, email, signup_time) VALUES ('" . $config['admin_name'] . "', '" . $config['language'] . "', '" . $password_hashed . "', '" . $config['admin_email'] . "', UTC_TIMESTAMP() )";
+$insert_admin				= "INSERT INTO {$pref}user (user_name, password, email, signup_time) VALUES ('" . $config['admin_name'] . "', '" . $password_hashed . "', '" . $config['admin_email'] . "', UTC_TIMESTAMP() )";
 $insert_admin_setting		= "INSERT INTO {$pref}user_setting (user_id, theme, user_lang) VALUES ((SELECT user_id FROM {$pref}user WHERE user_name = '" . $config['admin_name'] . "' LIMIT 1), '" . $config['theme'] . "', '" . $config['language'] . "')";
 
 // default groups
