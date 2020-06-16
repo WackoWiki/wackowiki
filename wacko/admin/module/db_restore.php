@@ -39,10 +39,6 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 //}
 
 #Ut::debug_print_r($_REQUEST);
-
-	// import passed variables and objects
-	$tables			= & $tables;
-	$directories	= & $directories;
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
@@ -348,7 +344,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $dir . "\n" .
 						"\t" . '==========================</strong>' . "\n";
 
-					$total		= put_files($engine, $pack, $dir, $keep);
+					$total		= put_files($pack, $dir, $keep);
 
 					$overall[0]	+= $total[0] ?? null;
 					$overall[1]	+= $total[1] ?? null;
@@ -418,7 +414,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 		{
 			if ($backup_id)
 			{
-				remove_pack($engine, $backup_id);
+				remove_pack($backup_id);
 				$engine->log(1, Ut::perc_replace($engine->_t('LogRemovedBackup', SYSTEM_LANG), $backup_id));
 			}
 

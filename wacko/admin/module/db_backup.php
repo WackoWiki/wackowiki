@@ -23,10 +23,6 @@ $module[$_mode] = [
 
 function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 {
-	// import passed variables and objects
-	$tables			= & $tables;
-	$directories	= & $directories;
-
 	$scheme			= [];
 
 	// backup scheme
@@ -67,7 +63,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 		@set_time_limit(1800);
 
 		$time		= time();
-		$pack		= set_pack_dir($engine, $time);	// backup directory
+		$pack		= set_pack_dir($time);	// backup directory
 		$root		= $_POST['root'];
 		$data		= [];
 		$structure	= [];

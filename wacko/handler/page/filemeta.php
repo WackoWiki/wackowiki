@@ -216,8 +216,8 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				}
 
 				$tpl->syntax		= $path . $file['file_name'];
-				$tpl->desc			= $format_desc($file['file_description'], $file['file_lang']);
-				$tpl->caption		= $format_desc($file['caption'], $file['file_lang']);
+				$tpl->desc			= $format_desc($file['file_description']);
+				$tpl->caption		= $format_desc($file['caption']);
 				$tpl->size			= $this->binary_multiples($file['file_size'], false, true, true);
 
 				// image dimension

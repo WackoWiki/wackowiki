@@ -369,7 +369,7 @@ if (mb_strlen($phrase) >= 3)
 
 						$context	= $get_line_with_phrase($body, $phrase, $padding);
 						$context	= $preview_text($context, 500, 0);
-						$context	= $highlight_this($context, $phrase, 0);
+						$context	= $highlight_this($context, $phrase);
 						[$context, $ccount] = $context;
 						$preview	= $context;
 					}

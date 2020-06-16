@@ -24,9 +24,6 @@ $module[$_mode] = [
 function admin_db_repair(&$engine, &$module, &$tables)
 {
 	$check = '';
-
-	// import passed variables and objects
-	$tables			= & $tables;
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>

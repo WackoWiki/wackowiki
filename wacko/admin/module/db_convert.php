@@ -23,9 +23,6 @@ $module[$_mode] = [
 
 function admin_db_convert(&$engine, &$module, &$tables)
 {
-	// import passed variables and objects
-	$tables	= & $tables;
-
 	$scheme		= [];
 	$getstr		= '';
 	$sql		= '';
