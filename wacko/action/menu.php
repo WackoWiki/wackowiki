@@ -21,7 +21,7 @@ $menu_sorting = function ($a, $b)
 
 $load_user_menu = function ($user_id, $lang = '')
 {
-	$_menu = $this->db->load_all(
+	return $this->db->load_all(
 		"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position " .
 		"FROM " . $this->db->table_prefix . "menu m " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
@@ -30,8 +30,6 @@ $load_user_menu = function ($user_id, $lang = '')
 				? "AND m.menu_lang = " . $this->db->q($lang) . " "
 				: "") .
 		"ORDER BY m.menu_position", false);
-
-	return $_menu;
 };
 
 if (!isset($system))

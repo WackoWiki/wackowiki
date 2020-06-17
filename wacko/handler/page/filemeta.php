@@ -13,15 +13,13 @@ if (!defined('IN_WACKO'))
 
 $get_file = function ($file_id)
 {
-	$file = $this->db->load_single(
+	return $this->db->load_single(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 		"WHERE f.file_id = " . (int) $file_id . " " .
 		"LIMIT 1", true);
-
-	return $file;
 };
 
 $meta_navigation = function ($can_upload)
@@ -39,9 +37,7 @@ $meta_navigation = function ($can_upload)
 
 $format_desc = function($text)
 {
-	$desc	= $this->format($text, 'typografica' );
-
-	return $desc;
+	return $this->format($text, 'typografica');
 };
 
 $clean_text = function ($string)

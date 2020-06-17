@@ -175,9 +175,8 @@ class Wacko
 		{
 			// determine the page depth
 			$depth_array	= explode('/', $tag);
-			$page_depth		= count($depth_array);
 
-			return $page_depth;
+			return count($depth_array);
 		}
 	}
 
@@ -320,9 +319,7 @@ class Wacko
 						: "") .
 				"LIMIT 1");
 
-		$used_upload_quota = $files['used_quota'];
-
-		return $used_upload_quota;
+		return $files['used_quota'];
 	}
 
 	function available_themes() : array
@@ -1589,7 +1586,7 @@ class Wacko
 		}
 		else
 		{
-			$categories = $this->db->load_all(
+			return $this->db->load_all(
 				"SELECT c.category_id, c.category, c.category_lang " .
 				"FROM " . $this->db->table_prefix . "category c " .
 					"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
@@ -1598,8 +1595,6 @@ class Wacko
 					? "AND ca.object_type_id = " . (int) $type_id . " "
 					: "AND ca.object_type_id = " . (int) $type_id . " " ) // TODO: explode array IN
 				, $cache);
-
-			return $categories;
 		}
 	}
 
@@ -3343,7 +3338,7 @@ class Wacko
 			$clear = 'clear'; // true / clear float
 		}
 
-		$params = [
+		return [
 			'src'		=> $src ?? null,
 			'caption'	=> $caption ?? null,
 			'clear'		=> $clear ?? null,
@@ -3353,8 +3348,6 @@ class Wacko
 			#'cache'		=> $cache,
 			'linking'	=> $linking,
 		];
-
-		return $params;
 	}
 
 	// preparing links to save them to body_r
@@ -4521,9 +4514,7 @@ class Wacko
 	 */
 	function sanitize_text_field($string, $keep_nl = false) : string
 	{
-		$filtered = Ut::strip_all_tags($string, $keep_nl);
-
-		return $filtered;
+		return Ut::strip_all_tags($string, $keep_nl);
 	}
 
 	function sanitize_username($user_name) : string
@@ -5117,7 +5108,7 @@ class Wacko
 	{
 		$fiels_default	= 'g.group_id, g.group_name, g.description, g.moderator_id, g.created, g.is_system, g.open, g.active, u.user_name AS moderator';
 
-		$usergroup = $this->db->load_single(
+		return $this->db->load_single(
 			"SELECT {$fiels_default} " .
 			"FROM " . $this->db->table_prefix . "usergroup g " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (g.moderator_id = u.user_id) " .
@@ -5125,8 +5116,6 @@ class Wacko
 				? "g.group_id		= " . (int) $group_id . " "
 				: "g.group_name		= " . $this->db->q($group_name) . " ") .
 			"LIMIT 1");
-
-		return $usergroup;
 	}
 
 	// USERS
@@ -7811,11 +7800,9 @@ class Wacko
 		 **/
 
 		// dummy fields for chrome/firefox/opera autofill getting the wrong fields
-		$result =	'<!-- disables autocomplete -->' . "\n" .
-					'<input type="text" class="verify">' . "\n" .
-					'<input type="password" class="verify">' . "\n";
-
-		return $result;
+		return	'<!-- disables autocomplete -->' . "\n" .
+				'<input type="text" class="verify">' . "\n" .
+				'<input type="password" class="verify">' . "\n";
 	}
 
 	// run checks of password complexity under current

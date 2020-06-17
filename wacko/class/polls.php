@@ -46,26 +46,22 @@ class Polls
 	// title information for a given poll
 	function get_poll_title($poll_id)
 	{
-		$title = $this->engine->db->load_single(
+		return $this->engine->db->load_single(
 			"SELECT p.poll_id, p.text, p.user_id, p.plural, p.votes, p.start, p.end, u.user_name " .
 			"FROM " . $this->engine->db->table_prefix . "poll p " .
 				"LEFT JOIN " . $this->engine->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"WHERE p.poll_id = " . (int) $poll_id . " AND p.v_id = 0");
-
-		return $title;
 	}
 
 	// variants data for a given poll
 	// sorts by total votes if "$votes = 1"
 	function get_poll_vars($poll_id, $votes = 0)
 	{
-		$vars = $this->engine->db->load_all(
+		return $this->engine->db->load_all(
 			"SELECT poll_id, v_id, text, votes " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
 			"WHERE poll_id = " . (int) $poll_id . " AND v_id <> 0 " .
 			"ORDER BY " . ($votes == 1 ? "votes DESC, " : "") . "v_id ASC");
-
-		return $vars;
 	}
 
 	// all years when new surveys was started
