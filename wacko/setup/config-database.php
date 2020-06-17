@@ -169,7 +169,7 @@ if ($config['is_update'] == false)
 
 	$engines	= [];
 	$engines[]	= ['mysql_innodb', 'InnoDB', 'InnoDB (' . $lang['Recommended'] . ')'];	// default
-	#$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];									// XXX: depreciated
+	#$engines[]	= ['mysql_myisam', 'MyISAM', 'MyISAM'];									// XXX: depreciated, DB sessions are not compatible with MyISAM database engine
 
 	foreach ($engines as $k => $engine)
 	{

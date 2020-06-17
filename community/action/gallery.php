@@ -63,7 +63,7 @@ if (!isset($title))		/*$title="Gallery";*/ $nomark = 1;
 if (!isset($target))	$target		= '';
 if (!isset($table))		$table		= 1;
 if (!isset($caption))	$caption	= 1;
-if (!isset($nomark))	$nomark		= '';
+if (!isset($nomark))	$nomark		= 0;
 
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;
