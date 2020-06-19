@@ -125,9 +125,9 @@ else if ($type == OBJECT_FILE)
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . rawurldecode($engine->href('', '', ['remove' => $page['page_id'], 'type' => OBJECT_PAGE])) . '">' . $engine->_t('RemoveButton') . '</a> ]' .
-						# ' [ <a href="' . rawurldecode($engine->href('', '', ['archive' => $page['page_id'], 'type' => OBJECT_PAGE])) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
-						' [ <a href="' . rawurldecode($engine->href('', '', ['restore' => $page['page_id'], 'type' => OBJECT_PAGE])) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
+						' [ <a href="' . $engine->href('', '', ['remove' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RemoveButton') . '</a> ]' .
+						# ' [ <a href="' . $engine->href('', '', ['archive' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
+						' [ <a href="' . $engine->href('', '', ['restore' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', $page['title']) .
 					'</td>' .
 				"</tr>\n";
@@ -165,9 +165,9 @@ else if ($type == OBJECT_FILE)
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . rawurldecode($engine->href('', '', ['remove' => $file['file_id'], 'type' => OBJECT_FILE])) . '">' . $engine->_t('RemoveButton') . '</a> ]' .
-						# ' [ <a href="' . rawurldecode($engine->href('', '', ['archive' => $file['file_id'], 'type' => OBJECT_FILE])) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
-						' [ <a href="' . rawurldecode($engine->href('', '', ['restore' => $file['file_id'], 'type' => OBJECT_FILE])) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
+						' [ <a href="' . $engine->href('', '', ['remove' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RemoveButton') . '</a> ]' .
+						# ' [ <a href="' . $engine->href('', '', ['archive' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
+						' [ <a href="' . $engine->href('', '', ['restore' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
 						'<span title="' . $file['file_description'] . '">' . $file['file_name'] . '</span>' .
 						#$engine->shorten_string($file['file_name']))
 					'</td>' .

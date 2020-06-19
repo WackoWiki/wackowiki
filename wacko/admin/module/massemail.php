@@ -69,7 +69,7 @@ function admin_massemail(&$engine, &$module)
 
 		if ($error)
 		{
-			$engine->http->redirect(rawurldecode($engine->href()));
+			$engine->http->redirect($engine->href());
 		}
 
 		//  remove all markup before sending
@@ -116,7 +116,7 @@ function admin_massemail(&$engine, &$module)
 			$engine->log(2, 'Massemail send: ' . $mail_subject . ' to group / user ' . $group_id);
 			$engine->set_message($engine->_t('MassemailSend') . ': ' . $mail_subject, 'success');
 
-			$engine->http->redirect(rawurldecode($engine->href()));
+			$engine->http->redirect($engine->href());
 		}
 		else
 		{

@@ -171,7 +171,7 @@ function admin_config_appearance(&$engine, &$module)
 	{
 		$remove_file('logo');
 
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	// remove favicon
@@ -179,7 +179,7 @@ function admin_config_appearance(&$engine, &$module)
 	{
 		$remove_file('favicon');
 
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	// update settings
@@ -219,7 +219,7 @@ function admin_config_appearance(&$engine, &$module)
 
 		$engine->log(1, $engine->_t('AppearanceSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('AppearanceSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	echo $engine->form_open('basic', ['form_more' => ' enctype="multipart/form-data" ']);

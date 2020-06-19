@@ -29,7 +29,7 @@ function admin_system_log(&$engine, &$module)
 <?php
 	if (isset($_POST['reset']))
 	{
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	if (@$_POST['action'] == 'purge_log')

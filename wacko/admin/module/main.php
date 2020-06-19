@@ -28,7 +28,7 @@ function admin_main(&$engine, &$module)
 	{
 		$engine->config->lock();
 
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')

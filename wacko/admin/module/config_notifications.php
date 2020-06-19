@@ -49,7 +49,7 @@ function admin_config_notifications(&$engine, &$module)
 
 		$engine->log(1, '!!' . $engine->_t('NotificationSettingsUpdated', SYSTEM_LANG)  . '!!');
 		$engine->set_message($engine->_t('NotificationSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	echo $engine->form_open('notifications');

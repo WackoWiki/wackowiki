@@ -65,7 +65,7 @@ function admin_config_pages(&$engine, &$module)
 
 		$engine->log(1, $engine->_t('PagesSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('PagesSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	echo $engine->form_open('pages');

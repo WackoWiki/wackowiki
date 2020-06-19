@@ -50,7 +50,7 @@ function admin_config_basic(&$engine, &$module)
 		}
 		else
 		{
-			$config['allowed_languages'] = 0;
+			$config['allowed_languages'] = 0; // why zero?
 		}
 
 		$config['default_diff_mode']			= (int) $_POST['default_diff_mode'];
@@ -97,7 +97,7 @@ function admin_config_basic(&$engine, &$module)
 
 		$engine->log(1, $engine->_t('LogBasicSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('BasicSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	echo $engine->form_open('basic');

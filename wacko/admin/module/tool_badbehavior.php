@@ -522,7 +522,7 @@ function bb2_options(&$engine)
 
 		$engine->log(1, '!!' . $engine->_t('BbSettingsUpdated') . '!!');
 		$engine->set_message($engine->_t('BbSettingsUpdated'));
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	if ($_POST)
@@ -838,7 +838,7 @@ function bb2_options(&$engine)
 
 		$engine->log(1, '!!' . $engine->_t('BbSettingsUpdated') . '!!');
 		$engine->set_message($engine->_t('BbSettingsUpdated'));
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')

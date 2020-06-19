@@ -140,7 +140,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>' .
 					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '"> ' .
-					'<a href="' . rawurldecode($engine->href('', '', $mode_http)) . '" class="btn-link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '"></a>' .
+					'<a href="' . $engine->href('', '', $mode_http) . '" class="btn-link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '"></a>' .
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();
@@ -174,7 +174,7 @@ function admin_content_polls(&$engine, &$module)
 						<input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;">
 							<a href="' .
-							rawurldecode($engine->href('', '', ['poll_id' => $row['poll_id'], 'results' => 1])) . '">' .
+							$engine->href('', '', ['poll_id' => $row['poll_id'], 'results' => 1]) . '">' .
 							date('d/m', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
 					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], time()) . '</td>';
@@ -263,7 +263,7 @@ function admin_content_polls(&$engine, &$module)
 				echo '<tr>';
 					echo '<td class="label"><input type="radio" name="id" value="' . $row['poll_id'] . '"></td>';
 					echo '<td style="width:95%;"><a href="' .
-						rawurldecode($engine->href('', '', ['year' => $year, 'poll_id' => $row['poll_id'], 'results' => 1])) . '">' .
+						$engine->href('', '', ['year' => $year, 'poll_id' => $row['poll_id'], 'results' => 1]) . '">' .
 						date('d/m/y', strtotime($row['start'])) . ': ' . $row['text'] . '</a></td>';
 					echo '<td>' . $row['user_name'] . '</td>';
 					echo '<td class="nowrap">' . $polls_obj->poll_time($row['start'], $row['end']) . '</td>';
@@ -281,7 +281,7 @@ function admin_content_polls(&$engine, &$module)
 		}
 		else
 		{
-			echo '<a href="' . rawurldecode($engine->href('', '', ['year' => 0])) . '">' . $engine->_t('PollsAll') . '</a> ';
+			echo '<a href="' . $engine->href('', '', ['year' => 0]) . '">' . $engine->_t('PollsAll') . '</a> ';
 		}
 
 		if (!empty($years))
@@ -294,7 +294,7 @@ function admin_content_polls(&$engine, &$module)
 				}
 				else
 				{
-					echo '<a href="' . rawurldecode($engine->href('', '', ['year' => $item])) . '">' . $item . '</a> ';
+					echo '<a href="' . $engine->href('', '', ['year' => $item]) . '">' . $item . '</a> ';
 				}
 			}
 		}

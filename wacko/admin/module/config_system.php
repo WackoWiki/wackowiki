@@ -56,7 +56,7 @@ function admin_config_system(&$engine, &$module)
 
 		$engine->log(1, $engine->_t('SystemSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('SystemSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	echo $engine->form_open('system');

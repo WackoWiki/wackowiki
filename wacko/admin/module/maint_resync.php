@@ -268,7 +268,7 @@ function admin_maint_resync(&$engine, &$module)
 				// TODO: Fix or workaround, see notice above
 				if ($i < ($redirects + ($engine->sess->resync_counter)))
 				{
-					$engine->http->redirect(rawurldecode($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)])));
+					$engine->http->redirect($engine->href('', '', ['start' => 1, 'action' => 'wikilinks', 'i' => (++$i)]));
 				}
 				else
 				{
