@@ -105,7 +105,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_regions = array();
+	var $_regions = [];
 
 	/**
 	 * List of blocks
@@ -113,7 +113,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_blocks = array();
+	var $_blocks = [];
 
 	/**
 	 * List of keyword groups
@@ -121,7 +121,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_keywords = array();
+	var $_keywords = [];
 
 	/**
 	 * List of authors
@@ -129,7 +129,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_authors = array();
+	var $_authors = [];
 
 	/**
 	 * Name of language
@@ -216,7 +216,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	function __construct($syntaxFile = '')
 	{
 		XML_Parser::XML_Parser(null, 'func');
-		$this->_errors = array();
+		$this->_errors = [];
 		$this->_declareErrorMessages();
 		if ($syntaxFile) {
 			$this->setInputFile($syntaxFile);
@@ -307,17 +307,17 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 	function generate()
 	{
-		$this->_regions    = array();
-		$this->_blocks     = array();
-		$this->_keywords   = array();
+		$this->_regions    = [];
+		$this->_blocks     = [];
+		$this->_keywords   = [];
 		$this->language    = '';
 		$this->_code       = '';
 		$this->_defClass   = 'default';
 		$this->_comment    = '';
 		$this->_inComment  = false;
-		$this->_authors    = array();
+		$this->_authors    = [];
 		$this->_blockOrder = 0;
-		$this->_errors   = array();
+		$this->_errors   = [];
 
 		$ret = $this->parse();
 		if (PEAR::isError($ret)) {
@@ -359,7 +359,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	{
 		$f = @fopen($filename, 'wb');
 		if (!$f) {
-			$this->_error(TEXT_HIGHLIGHTER_FILE_WRITE, array('outfile'=>$filename));
+			$this->_error(TEXT_HIGHLIGHTER_FILE_WRITE, ['outfile'=>$filename]);
 			return false;
 		}
 		fwrite ($f, $this->_code);
@@ -526,7 +526,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 		if (!isset($attribs['innerGroup']) || $attribs['innerGroup'] === '') {
 			$this->_error(TEXT_HIGHLIGHTER_EMPTY_OR_MISSING, 'innerGroup');
 		}
-		$this->_element = array('name' => $attribs['name']);
+		$this->_element = ['name' => $attribs['name']];
 		$this->_element['line'] = xml_get_current_line_number($this->parser);
 		if (isset($attribs['case'])) {
 			$this->_element['case'] = $attribs['case'] == 'yes';
@@ -568,7 +568,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 		if (isset($attribs['innerGroup']) && $attribs['innerGroup'] === '') {
 			$this->_error(TEXT_HIGHLIGHTER_EMPTY, 'innerGroup');
 		}
-		$this->_element = array('name' => $attribs['name']);
+		$this->_element = ['name' => $attribs['name']];
 		$this->_element['line'] = xml_get_current_line_number($this->parser);
 		if (isset($attribs['case'])) {
 			$this->_element['case'] = $attribs['case'] == 'yes';
@@ -658,7 +658,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 		if (!isset($attribs['inherits']) || $attribs['inherits'] === '') {
 			$this->_error(TEXT_HIGHLIGHTER_EMPTY_OR_MISSING, 'inherits');
 		}
-		$this->_element = array('name'=>@$attribs['name']);
+		$this->_element = ['name'=>@$attribs['name']];
 		$this->_element['line'] = xml_get_current_line_number($this->parser);
 		$this->_element['innerGroup'] = @$attribs['innerGroup'];
 		if (isset($attribs['case'])) {
@@ -756,10 +756,10 @@ class Text_Highlighter_Generator extends  XML_Parser
 		if (!isset($attribs['name']) || $attribs['name'] === '') {
 			$this->_error(TEXT_HIGHLIGHTER_EMPTY_OR_MISSING, 'author name');
 		}
-		$this->_authors[] = array(
-        'name'  => @$attribs['name'],
-        'email' => (string)@$attribs['email']
-		);
+		$this->_authors[] = [
+			'name'  => @$attribs['name'],
+			'email' => (string)@$attribs['email']
+		];
 	}
 
 	// }}}
@@ -792,7 +792,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @param integer $lineNo Source code line number
 	 * @access private
 	 */
-	function _error($code, $params = array(), $lineNo = 0)
+	function _error($code, $params = [], $lineNo = 0)
 	{
 		if (!$lineNo && !empty($this->parser)) {
 			$lineNo = xml_get_current_line_number($this->parser);
@@ -884,8 +884,8 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 */
 	function xmltag_Highlight_($xp, $elem)
 	{
-		$conditions = array();
-		$toplevel = array();
+		$conditions = [];
+		$toplevel = [];
 		foreach ($this->_blocks as $i => $current) {
 			if (!$current['contained'] && !isset($current['onlyin'])) {
 				$toplevel[] = $i;
@@ -980,10 +980,10 @@ class Text_Highlighter_Generator extends  XML_Parser
 
 		foreach ($this->_keywords as $name => $keyword) {
 			if (isset($keyword['ifdef'])) {
-				$conditions[$keyword['ifdef']][] = array($name, true);
+				$conditions[$keyword['ifdef']][] = [$name, true];
 			}
 			if (isset($keyword['ifndef'])) {
-				$conditions[$keyword['ifndef']][] = array($name, false);
+				$conditions[$keyword['ifndef']][] = [$name, false];
 			}
 			unset($this->_keywords[$name]['line']);
 			if (!isset($this->_blocks[$keyword['inherits']])) {
@@ -1007,16 +1007,16 @@ class Text_Highlighter_Generator extends  XML_Parser
         'blocks'     => array_merge($this->_blocks, $this->_regions),
         'toplevel'   => $toplevel,
 		);
-		uasort($syntax['blocks'], array(&$this, '_sortBlocks'));
+		uasort($syntax['blocks'], [&$this, '_sortBlocks']);
 		foreach ($syntax['blocks'] as $name => $block) {
 			if ($block['type'] == 'block') {
 				continue;
 			}
 			if (is_array(@$syntax['blocks'][$name]['lookfor'])) {
-				usort($syntax['blocks'][$name]['lookfor'], array(&$this, '_sortLookFor'));
+				usort($syntax['blocks'][$name]['lookfor'], [&$this, '_sortLookFor']);
 			}
 		}
-		usort($syntax['toplevel'], array(&$this, '_sortLookFor'));
+		usort($syntax['toplevel'], [&$this, '_sortLookFor']);
 		$syntax['case'] = $this->_case;
 		$this->_code = <<<CODE
 		<?php
@@ -1124,34 +1124,34 @@ CODE;
 
         \$this->_options = \$options;
 CODE;
-		$states = array();
+		$states = [];
 		$i = 0;
 		foreach ($syntax['blocks'] as $name => $block) {
 			if ($block['type'] == 'region') {
 				$states[$name] = $i++;
 			}
 		}
-		$regs = array();
-		$counts = array();
-		$delim = array();
-		$inner = array();
-		$end = array();
-		$stat = array();
-		$keywords = array();
-		$parts = array();
-		$kwmap = array();
-		$subst = array();
-		$re = array();
-		$ce = array();
-		$rd = array();
-		$in = array();
-		$st = array();
-		$kw = array();
-		$sb = array();
+		$regs = [];
+		$counts = [];
+		$delim = [];
+		$inner = [];
+		$end = [];
+		$stat = [];
+		$keywords = [];
+		$parts = [];
+		$kwmap = [];
+		$subst = [];
+		$re = [];
+		$ce = [];
+		$rd = [];
+		$in = [];
+		$st = [];
+		$kw = [];
+		$sb = [];
 		foreach ($syntax['toplevel'] as $name) {
 			$block = $syntax['blocks'][$name];
 			if ($block['type'] == 'block') {
-				$kwm = array();
+				$kwm = [];
 				$re[] = '(' . $block['match'] . ')';
 				$ce[] = $this->_countSubpatterns($block['match']);
 				$rd[] = '';
@@ -1196,14 +1196,14 @@ CODE;
 				continue;
 			}
 			$end[] = '/' . $ablock['end'] . '/';
-			$re = array();
-			$ce = array();
-			$rd = array();
-			$in = array();
-			$st = array();
-			$kw = array();
-			$pc = array();
-			$sb = array();
+			$re = [];
+			$ce = [];
+			$rd = [];
+			$in = [];
+			$st = [];
+			$kw = [];
+			$pc = [];
+			$sb = [];
 			foreach ((array)@$ablock['lookfor'] as $name) {
 				$block = $syntax['blocks'][$name];
 				if (isset($block['partClass'])) {
@@ -1212,7 +1212,7 @@ CODE;
 					$pc[] = null;
 				}
 				if ($block['type'] == 'block') {
-					$kwm = array();
+					$kwm = [];
 					$re[] = '(' . $block['match'] . ')';
 					$ce[] = $this->_countSubpatterns($block['match']);
 					$rd[] = '';

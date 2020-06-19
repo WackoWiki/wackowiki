@@ -41,7 +41,7 @@ class Text_Highlighter_Renderer
 	 * @var array
 	 * @access protected
 	 */
-	var $_options = array();
+	var $_options = [];
 
 	/**
 	 * Current language
@@ -58,7 +58,7 @@ class Text_Highlighter_Renderer
 	 *
 	 * @param  array $options  Rendering options. Renderer-specific.
 	 */
-	function __construct($options = array())
+	function __construct($options = [])
 	{
 		$this->_options = $options;
 	}

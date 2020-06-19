@@ -86,9 +86,9 @@ class Text_Highlighter_Renderer_Console extends Text_Highlighter_Renderer
 
 	/**#@-*/
 
-	var $_colors = array();
+	var $_colors = [];
 
-	var $_defColors = array(
+	var $_defColors = [
         'default' => "\033[0m",
         'inlinetags' => "\033[31m",
         'brackets' => "\033[36m",
@@ -101,7 +101,7 @@ class Text_Highlighter_Renderer_Console extends Text_Highlighter_Renderer
         'reserved' => "\033[35m",
         'comment' => "\033[33m",
         'mlcomment' => "\033[33m",
-	);
+	];
 
 	function preprocess($str)
 	{

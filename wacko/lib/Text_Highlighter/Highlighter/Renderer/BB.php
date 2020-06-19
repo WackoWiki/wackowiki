@@ -109,7 +109,7 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var boolean
 	 */
-	var $_colors = array(
+	var $_colors = [
         'default'    => 'Black',
         'code'       => 'Gray',
         'brackets'   => 'Olive',
@@ -126,7 +126,7 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
         'special'    => 'Navy',
         'number'     => 'Maroon',
         'inlinetags' => 'Blue',
-	);
+	];
 
 	/**#@-*/
 

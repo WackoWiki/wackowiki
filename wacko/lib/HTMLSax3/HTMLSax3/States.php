@@ -131,7 +131,7 @@ class XML_HTMLSax3_OpeningTagState {
 	 * @see XML_HTMLSax3_AttributeStartState
 	 */
 	function parseAttributes(&$context) {
-		$Attributes = array();
+		$Attributes = [];
 
 		$context->ignoreWhitespace();
 		$attributename = $context->scanUntilCharacters("=/> \n\r\t");
@@ -173,7 +173,7 @@ class XML_HTMLSax3_OpeningTagState {
 	function parse(&$context) {
 		$tag = $context->scanUntilCharacters("/> \n\r\t");
 		if ($tag != '') {
-			$this->attrs = array();
+			$this->attrs = [];
 			$Attributes = $this->parseAttributes($context);
 			$char = $context->scanCharacter();
 			if ($char == '/') {

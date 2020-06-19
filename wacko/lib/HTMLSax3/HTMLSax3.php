@@ -125,7 +125,7 @@ class XML_HTMLSax3_StateParser {
 	 * @var array
 	 * @access private
 	 */
-	var $parser_options = array();
+	var $parser_options = [];
 	/**
 	 * XML document being parsed
 	 * @var string
@@ -149,7 +149,7 @@ class XML_HTMLSax3_StateParser {
 	 * @var array
 	 * @access private
 	 */
-	var $State = array();
+	var $State = [];
 
 	/**
 	 * Constructs XML_HTMLSax3_StateParser setting up states

@@ -83,7 +83,7 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 	 *
 	 * @var array
 	 */
-	var $_output = array();
+	var $_output = [];
 
 	/**#@-*/
 
@@ -117,7 +117,7 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 	 */
 	function reset()
 	{
-		$this->_output = array();
+		$this->_output = [];
 		$this->_lastClass = 'default';
 		if (isset($this->_options['tabsize'])) {
 			$this->_tabsize = $this->_options['tabsize'];
@@ -149,7 +149,7 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 			$content = htmlspecialchars($content);
 		}
 		if ($this->_enumerated) {
-			$this->_output[] = array($class, $content);
+			$this->_output[] = [$class, $content];
 		} else {
 			$this->_output[][$class] = $content;
 		}

@@ -54,7 +54,7 @@ class Text_Highlighter_Renderer_JSON extends Text_Highlighter_Renderer_Array
 		parent::finalize();
 		$output = parent::getOutput();
 
-		$json_array = array();
+		$json_array = [];
 
 		foreach ($output AS $token) {
 

@@ -76,14 +76,14 @@ define ('HL_NUMBERS_UL',    3);
  * - 'use_language' - class names will be prefixed with language, like "php-reserved" or "css-code"
  *
  * Example of setting documentation links:
- * $options['doclinks'] = array(
+ * $options['doclinks'] = [
  *   'url' => 'http://php.net/%s',
  *   'target' => '_blank',
- *   'elements' => array('reserved', 'identifier')
- * );
+ *   'elements' => ['reserved', 'identifier']
+ * ];
  *
  * Example of setting class names map:
- * $options['class_map'] = array(
+ * $options['class_map'] = [
  *       'main'       => 'my-main',
  *       'table'      => 'my-table',
  *       'gutter'     => 'my-gutter',
@@ -103,10 +103,10 @@ define ('HL_NUMBERS_UL',    3);
  *       'string'     => 'my-string',
  *       'url'        => 'my-url',
  *       'var'        => 'my-var',
- * );
+ * ];
  *
  * Example of setting styles mapping:
- * $options['style_map'] = array(
+ * $options['style_map'] = [
  *       'main'       => 'color: black',
  *       'table'      => 'border: 1px solid black',
  *       'gutter'     => 'background-color: yellow',
@@ -115,7 +115,7 @@ define ('HL_NUMBERS_UL',    3);
  *       'code'       => 'color: green',
  *       'comment'    => 'color: orange',
  *       // ....
- * );
+ * ];
  *
  *
  * @author Andrey Demenev <demenev@gmail.com>
@@ -167,14 +167,14 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var array
 	 */
-	var $_style_map = array();
+	var $_style_map = [];
 
 	/**
 	 * Mapping of keywords to formatting rules using class names
 	 *
 	 * @var array
 	 */
-	var $_class_map = array(
+	var $_class_map = [
         'main'       => 'hl-main',
         'table'      => 'hl-table',
         'gutter'     => 'hl-gutter',
@@ -196,7 +196,7 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
         'types'      => 'hl-types',
         'url'        => 'hl-url',
         'var'        => 'hl-var',
-	);
+	];
 
 	/**
 	 * Setup for links to online documentation
@@ -208,7 +208,7 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var array
 	 */
-	var $_doclinks = array();
+	var $_doclinks = [];
 
 	/**#@-*/
 
@@ -249,7 +249,7 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 			$this->_doclinks = $this->_options['doclinks']; // keys: url, target, elements array
 
 			if (empty($this->_options['doclinks']['elements'])) {
-				$this->_doclinks['elements'] = array('reserved', 'identifier');
+				$this->_doclinks['elements'] = ['reserved', 'identifier'];
 			}
 		}
 		if (isset($this->_options['style_map'])) {

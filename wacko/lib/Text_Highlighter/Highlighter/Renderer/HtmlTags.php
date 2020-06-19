@@ -84,7 +84,7 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var array
 	 */
-	var $_hilite_tags = array(
+	var $_hilite_tags = [
         'default'    => '',
         'code'       => '',
         'brackets'   => 'b',
@@ -101,7 +101,7 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
         'special'    => '',
         'number'     => '',
         'inlinetags' => '',
-	);
+	];
 
 	/**#@-*/
 
