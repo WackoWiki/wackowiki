@@ -51,9 +51,9 @@ $lang = [
    Language Selection Page
 */
 'lang' => 'Taal Configuratie',
-'PleaseUpgradeToR5' => 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">%2</code>.',
-'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>.  The next few pages will guide you through the upgrade process.',
-'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <code class="version">%1</code>.  The next few pages will guide you through the installation process.',
+'PleaseUpgradeToR5' => 'Je weet dat je een oude (pre %1) release van WackoWiki uitvoert. Om deze versie van WackoWiki te updaten, moet je eerst je installatie updaten naar %2.',
+'UpgradeFromWacko' => 'Welkom bij WackoWiki, het lijkt erop dat je aan het upgraden bent van WackoWiki %1 naar %2. De volgende pagina\'s leiden u door het upgradeproces.',
+'FreshInstall' => 'Welkom bij WackoWiki, je staat op het punt om WackoWiki %1 te installeren. De volgende pagina\'s leiden u door het installatieproces.',
 'PleaseBackup' => 'Maak een kopie van de database, het configuratiebestand en alle gewijzigde bestanden (zoals thema\'s) voor u de upgrade start om gegevensverlies te voorkomen.',
 'LangDesc' => 'Kies de taal voor het installatieproces. Dezelfde taal zal de standaard taal van uw WackoWiki installatie zijn.',
 
@@ -61,7 +61,7 @@ $lang = [
    System Requirements Page
 */
 'version-check' => 'Systeem Vereisten',
-'PhpVersion' => 'PHP Version',
+'PhpVersion' => 'PHP Versie',
 'PhpDetected' => 'Gedetecteerd PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled' => 'Rewrite Extension (mod_rewrite) Installed?',
@@ -69,16 +69,16 @@ $lang = [
 'PhpExtensions' => 'PHP Extensions',
 'Permissions' => 'Permissions',
 'ReadyToInstall' => 'Klaar om te installeren?',
-'Requirements' => 'Your server must meet the requirements listed below.',
+'Requirements' => 'Uw server moet voldoen aan de onderstaande eisen.',
 'OK' => 'OK',
-'Problem' => 'Problem',
+'Problem' => 'Probleem',
 'NotePhpExtensions' => '',
 'ErrorPhpExtensions' => 'Uw PHP-installatie lijkt de genoteerde PHP-extensies te missen die door WackoWiki zijn vereist.',
-'PcreWithoutUtf8' => 'PCRE is not compiled with UTF-8 support.',
+'PcreWithoutUtf8' => 'PCRE is niet gecompileerd met UTF-8 ondersteuning.',
 'NotePermissions' => 'Deze installer, probeert het configuratie instellingen naar het bestand %1, in uw WackoWiki directory. Om dit te doen dient u zeker te weten dat uw webserver schrijfrechten heeft op dat bestand! Als dat niet mogelijk is moet u het bestand handmatig wijzigen (het installatieprogramma zal u vertellen hoe).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
-'ErrorPermissions' => 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion' => 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
-'Ready' => 'Congratulations, it appears that your server is capable of running WackoWiki.  The next few pages will take you through the configuration process.',
+'ErrorPermissions' => 'Het lijkt erop dat het installatieprogramma niet automatisch de vereiste bestandsrechten kan instellen om WackoWiki correct te laten werken. Later in het installatieproces wordt u gevraagd om de vereiste bestandsrechten op uw server handmatig te configureren.',
+'ErrorMinPhpVersion' => 'De PHP-versie moet groter zijn dan <strong>' . PHP_MIN_VERSION . '</strong>, uw server lijkt een eerdere versie te draaien. U moet upgraden naar een recentere PHP-versie om WackoWiki correct te laten werken.',
+'Ready' => 'Gefeliciteerd, het blijkt dat uw server in staat is om WackoWiki te draaien. De volgende pagina\'s nemen u mee door het configuratieproces.',
 
 /*
    Site Config Page
@@ -87,7 +87,7 @@ $lang = [
 'SiteName' => 'Uw Wiki\'s naam',
 'SiteNameDesc' => 'De naam van uw Wiki site.',
 'HomePage' => 'Home pagina',
-'HomePageDesc' => 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'HomePageDesc' => 'Voer de naam in die u wilt dat uw homepage heeft, dit zal de standaard pagina zijn die gebruikers zien wanneer ze uw site bezoeken en zou een <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="Bekijk Help" target="_blank">WikiName</a> moeten zijn.',
 'HomePageDefault' => 'HomePage',
 'MultiLang' => 'Multi Language Mode',
 'MultiLangDesc' => 'De meertalige modus maakt het mogelijk om paginas met verschillende taalinstellingen binnen één installatie te hebben. Als deze modus is ingeschakeld, zal het installatieprogramma de eerste menu-items voor alle talen die beschikbaar zijn in de distributie maken.',
@@ -101,7 +101,7 @@ $lang = [
 'Mail' => 'Beheerders mailadres.',
 'MailDesc' => 'Enter the beheerders mailadres.',
 'Base' => 'Basis URL',
-'BaseDesc' => 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc' => 'Your WackoWiki site base URL. Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
 'Rewrite' => 'Herschrijf modus',
 'RewriteDesc' => 'Herschrijven modus moet aan staan als u een WackoWiki met URL rewriting gebruikt.',
 'Enabled' => 'Aan:',
@@ -109,7 +109,7 @@ $lang = [
 'ErrorAdminPasswordMismatch' => 'Wachtwoorden komen niet overeen, vul het wachtwoord opnieuw in!',
 'ErrorAdminPasswordShort' => 'The admin Wachtwoord is te kort, vul het wachtwoord opnieuw in, the minimum length is %1 characters!',
 'WarningRewriteMode' => 'LET OP!\nMogelijk zit er een fout in uw basis-URL en instellingen van de rewrite-modus. In een basis-URL hoort geen vraagteken te staan als de rewrite-modus is ingeschakeld. In uw instellingen is dat wel het geval.\n\nKlik OK om met deze instellingen door te gaan.\nKlik Annuleren om terug te gaan en de instellingen te veranderen.\n\nU kunt doorgaan met deze instellingen, maar het is mogelijk dat er dan problemen ontstaan.',
-'ModRewriteStatusUnknown' => 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
+'ModRewriteStatusUnknown' => 'Het installatieprogramma kan niet controleren of mod_rewrite is ingeschakeld, maar dit betekent niet dat het is uitgeschakeld.',
 
 'LanguageArray'	=> [
 	'bg' => 'Bulgaars',
@@ -153,8 +153,8 @@ $lang = [
 'ErrorNoDbDriverDetected' => 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
 'ErrorNoDbDriverSelected' => 'No database driver has been selected, please pick one from the list.',
 'DeleteTables' => 'Bestaande tabellen verwijderen?',
-'DeleteTablesDesc' => 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion' => 'Are you sure you want to delete all current wiki tables?',
+'DeleteTablesDesc' => 'LET OP! Als u doorgaat met deze optie, worden alle huidige wikigegevens uit uw database gewist. Dit kan niet ongedaan worden gemaakt, tenzij u de gegevens handmatig uit een back-up herstelt.',
+'ConfirmTableDeletion' => 'Weet u zeker dat u alle huidige wiki tabellen wilt verwijderen?',
 
 /*
    Database Installation Page
@@ -162,12 +162,12 @@ $lang = [
 'install-database' => 'Database Installation',
 'TestingConfiguration' => 'Testen Configuratie',
 'TestConnectionString' => 'Testen database connectie instellingen',
-'TestDatabaseExists' => 'Checking if the database you specified exists',
-'TestDatabaseVersion' => 'Checking database minimum version requirements',
+'TestDatabaseExists' => 'Controleren of de door u opgegeven database bestaat',
+'TestDatabaseVersion' => 'Controle van de minimale versie-eisen van de database',
 'InstallingTables' => 'Installing Tables',
-'ErrorDbConnection' => 'There was a problem with the database connection details you specified, please go back and check they are correct.',
+'ErrorDbConnection' => 'Er was een probleem met de gegevens van de databaseverbinding die u hebt opgegeven, ga terug en controleer of ze correct zijn.',
 'ErrorDbExists' => 'De gekozen database is niet gevonden. De database moet al bestaan voordat u WackoWiki kunt installeren of upgraden!',
-'ErrorDatabaseVersion' => 'The database version is %1 but requires at least %2.',
+'ErrorDatabaseVersion' => 'De databaseversie is %1 maar vereist minstens %2.',
 'To' => 'aan',
 'AlterTable' => 'Altering %1 table',
 'InsertRecord' => 'Inserting Record into %1 table',
@@ -215,10 +215,10 @@ $lang = [
 'Writing' => 'Wegschrijven configuratie bestand',
 'RemovingWritePrivilege' => 'Removing Write Privilege',
 'InstallationComplete' => 'Installatie is voltooid',
-'ThatsAll' => 'Dat is alles! U kunt nu <a href="%1">view your WackoWiki site</a>.',
+'ThatsAll' => 'Dat is alles! U kunt nu <a href="%1">bekijk uw WackoWiki-site</a>.',
 'SecurityConsiderations' => 'Beveiligingsoverwegingen',
 'SecurityRisk' => 'Echter, u wordt geadviseerd om schrijfrechten op %1 te verwijderen nu het is weggeschreven. Door de schrijfrechten te handhaven creert u een veiligheidsrisico!<br>i.e. %2',
-'RemoveSetupDirectory' => 'You should delete the %1 directory now that the installation process has been completed.',
+'RemoveSetupDirectory' => 'U moet de %1 -directory verwijderen nu het installatieproces is voltooid.',
 'ErrorGivePrivileges' => 'Het configuratie bestand %1 Geen schrijf rechten. U dient uw webserver tijdelijk schrijfrechten te geven op uw WackoWiki directory, of een lege bestand met de naam %1<br>%2<br>; vergeet niet om de schrijfrechten later te verwijderen, i.e. %3.<br>Als, voor welke reden dan ook,for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'In de volgende stap probeert het installatieprogramma het actuele configuratie bestand weg te schrijven, %1. Controleer of de web server schrijfrechten heeft op het bestand, anders moet u het handmatig aanpassen. Wederom, zie <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'WrittenAt' => 'geschreven op ',

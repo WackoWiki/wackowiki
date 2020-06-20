@@ -51,9 +51,9 @@ $lang = [
    Language Selection Page
 */
 'lang' => 'Keele konfigureerimine',
-'PleaseUpgradeToR5' => 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">%2</code>.',
-'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>. Järgmised mõned lehed viivad teid uuendusprotsessi läbi.',
-'FreshInstall' => 'Tere tulemast WackoWiki-le, et kavatsete installida WackoWiki <code class="version">%1</code>. Järgmised mõned lehed suunavad teid installiprotsessi.',
+'PleaseUpgradeToR5' => 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
+'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2. Järgmised mõned lehed viivad teid uuendusprotsessi läbi.',
+'FreshInstall' => 'Tere tulemast WackoWiki-le, et kavatsete installida WackoWiki %1. Järgmised mõned lehed suunavad teid installiprotsessi.',
 'PleaseBackup' => 'Enne, kui alustad versioonitäienduse sisseviimist, tee tagavarakoopia oma andmebaasist, konfiguratsioonidefailist ja kõikidest muudetud failidest. See võib sind säästa suurest peavalust!',
 'LangDesc' => 'Vali keel, mida installeerimise ajal kasutada. Seesama keel saab olema ka vaikimisi keeleks sinu WackoWiki installatsioonil.',
 

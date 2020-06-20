@@ -51,16 +51,16 @@ $lang = [
    Language Selection Page
 */
 'lang' => 'Configurazione della lingua',
-'PleaseUpgradeToR5' => 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">%2</code>.',
-'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>.  The next few pages will guide you through the upgrade process.',
-'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <code class="version">%1</code>.  The next few pages will guide you through the installation process.',
-'PleaseBackup' => 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
+'PleaseUpgradeToR5' => 'Siete a conoscenza di una vecchia (pre %1) versione di WackoWiki. Per aggiornare a questa release di WackoWiki, devi prima aggiornare la tua installazione a %2.',
+'UpgradeFromWacko' => 'Benvenuti a WackoWiki, sembra che stiate aggiornando da WackoWiki %1 a %2. Le prossime pagine vi guideranno attraverso il processo di aggiornamento.',
+'FreshInstall' => 'Benvenuti su WackoWiki, state per installare WackoWiki %1. Le prossime pagine vi guideranno attraverso il processo di installazione.',
+'PleaseBackup' => 'Per favore, <strong>backup</strong> del vostro database, file di configurazione e tutti i file modificati come quelli che hanno hack e patch applicati ad essi prima di iniziare il processo di aggiornamento. Questo può salvarvi da un grande mal di testa.',
 'LangDesc' => 'Scegli una lingua per il processo d\'installazione: la stessa sarà installata come lingua di default nel tuo WackoWiki.',
 
 /*
    System Requirements Page
 */
-'version-check' => 'System Requirements',
+'version-check' => 'Requisiti di sistema',
 'PhpVersion' => 'PHP Version',
 'PhpDetected' => 'Detected PHP',
 'ModRewrite' => 'Apache Rewrite Extension (Optional)',
@@ -69,16 +69,16 @@ $lang = [
 'PhpExtensions' => 'PHP Extensions',
 'Permissions' => 'Permissions',
 'ReadyToInstall' => 'Ready to Install?',
-'Requirements' => 'Your server must meet the requirements listed below.',
+'Requirements' => 'Il vostro server deve soddisfare i requisiti elencati di seguito.',
 'OK' => 'OK',
-'Problem' => 'Problem',
+'Problem' => 'Problema',
 'NotePhpExtensions' => '',
-'ErrorPhpExtensions' => 'Your PHP installation appears to be missing the noted PHP extensions which are required by WackoWiki.',
+'ErrorPhpExtensions' => 'La vostra installazione PHP sembra mancare le note estensioni PHP richieste da WackoWiki.',
 'PcreWithoutUtf8' => 'PCRE is not compiled with UTF-8 support.',
 'NotePermissions' => 'Questo installatore  tenterà di scrivere i dati di configurazione nel file %1, presente nella tua directory WackoWiki. Per gestire al meglio questa operazione, devi assicurarti che il server del tuo sito sia accessibile alla scrittura per questo file! Se non puoi farlo, dovrai editare il file manualmente (l\'installatore ti dirà come farlo).<br><br>Vedi <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> per i dettagli.',
-'ErrorPermissions' => 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion' => 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
-'Ready' => 'Congratulations, it appears that your server is capable of running WackoWiki.  The next few pages will take you through the configuration process.',
+'ErrorPermissions' => 'Sembrerebbe che il programma di installazione non possa impostare automaticamente i permessi necessari per il corretto funzionamento di WackoWiki.  Più avanti nel processo di installazione vi verrà richiesto di configurare manualmente i permessi richiesti per i file sul vostro server.',
+'ErrorMinPhpVersion' => 'La versione di PHP deve essere maggiore di <strong>' . PHP_MIN_VERSION . '</strong>, il vostro server sembra eseguire una versione precedente. Per far funzionare correttamente WackoWiki, è necessario eseguire l\'aggiornamento a una versione più recente di PHP.',
+'Ready' => 'Congratulazioni, sembra che il vostro server sia in grado di eseguire WackoWiki. Le prossime pagine vi guideranno attraverso il processo di configurazione.',
 
 /*
    Site Config Page
@@ -92,14 +92,14 @@ $lang = [
 'MultiLang' => 'Multi Language Mode',
 'MultiLangDesc' => 'La modalità multilingua permette di avere pagine con impostazioni linguistiche diverse all\'interno di una singola installazione. Se questa modalità è abilitata, l\'installatore creerà le voci di menu iniziali per tutte le lingue disponibili nella distribuzione.',
 'AllowedLang' => 'Allowed Languages',
-'AllowedLangDesc' => 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc' => 'Si consiglia di selezionare solo l\'insieme delle lingue che si desidera utilizzare, altre saggiamente tutte le lingue sono selezionate.',
 'Admin' => 'Nome dell\'amministratore',
 'AdminDesc' => 'Immetti username dell\'amministratore (dovrà essere un <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>) (e.g. <code>WikiAdmin</code>).',
 'Password' => 'Admin Password',
 'PasswordDesc' => 'Scegli una password per amministratore (almeno %1 caratteri)',
 'Password2' => 'Ripeti password:',
 'Mail' => 'Email dell\'amministratore.',
-'MailDesc' => 'Enter the admins email address.',
+'MailDesc' => 'Inserisci l\'indirizzo e-mail degli amministratori.',
 'Base' => 'URL di base',
 'BaseDesc' => 'La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l\'oggetto-parametro "?page=" se la modalità di riscrittura di URL non funziona sul tuo server. <ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
 'Rewrite' => 'Modalità Rewrite',
@@ -109,7 +109,7 @@ $lang = [
 'ErrorAdminPasswordMismatch' => 'Le password non coincidono, reimmetti password!',
 'ErrorAdminPasswordShort' => 'The admin Password troppo corta, reimmetti un\'altra, the minimum length is %1 characters!',
 'WarningRewriteMode' => 'ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.',
-'ModRewriteStatusUnknown' => 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
+'ModRewriteStatusUnknown' => 'Il programma di installazione non può verificare che mod_rewrite sia abilitato, ma ciò non significa che sia disabilitato.',
 
 'LanguageArray'	=> [
 	'bg' => 'bulgarian',
@@ -152,22 +152,22 @@ $lang = [
 'Prefix' => 'Prefisso di tabella',
 'ErrorNoDbDriverDetected' => 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
 'ErrorNoDbDriverSelected' => 'No database driver has been selected, please pick one from the list.',
-'DeleteTables' => 'Delete Existing Tables?',
-'DeleteTablesDesc' => 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion' => 'Are you sure you want to delete all current wiki tables?',
+'DeleteTables' => 'Cancellare tabelle esistenti?',
+'DeleteTablesDesc' => 'ATTENZIONE! Se si procede con questa opzione selezionata tutti i dati del wiki corrente saranno cancellati dal database.  Questo non può essere annullato a meno che non si ripristini manualmente i dati da un backup.',
+'ConfirmTableDeletion' => 'Sei sicuro di voler cancellare tutte le tabelle wiki attuali?',
 
 /*
    Database Installation Page
 */
-'install-database' => 'Database Installation',
+'install-database' => 'Installazione database',
 'TestingConfiguration' => 'Test della configurazione',
 'TestConnectionString' => 'Prova i parametri di connessione database',
-'TestDatabaseExists' => 'Checking if the database you specified exists',
-'TestDatabaseVersion' => 'Checking database minimum version requirements',
+'TestDatabaseExists' => 'Verifica dell\'esistenza del database specificato',
+'TestDatabaseVersion' => 'Controllo dei requisiti minimi di versione della banca dati',
 'InstallingTables' => 'Installing Tables',
-'ErrorDbConnection' => 'There was a problem with the database connection details you specified, please go back and check they are correct.',
+'ErrorDbConnection' => 'C\'è stato un problema con i dettagli di connessione al database che hai specificato, per favore torna indietro e controlla che siano corretti.',
 'ErrorDbExists' => 'Il database da te configurato non è stato trovato. Ricorda che deve esistere prima di installare o aggiornare WackoWiki!',
-'ErrorDatabaseVersion' => 'The database version is %1 but requires at least %2.',
+'ErrorDatabaseVersion' => 'La versione del database è %1 ma richiede almeno %2.',
 'To' => 'a',
 'AlterTable' => 'Altering %1 table',
 'InsertRecord' => 'Inserting Record into %1 table',
@@ -204,7 +204,7 @@ $lang = [
 'MovingRevisions' => 'Trasferimento di dati alla tabella di revisione',
 'DeletingTables' => 'Deleting Tables',
 'DeletingTablesEnd' => 'Finished Deleting Tables',
-'ErrorDeletingTable' => 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
+'ErrorDeletingTable' => 'Errore di cancellazione della tabella %1, la ragione più probabile è che la tabella non esiste, nel qual caso si può ignorare questo avviso.',
 'DeletingTable' => 'Deleting %1 table',
 
 /*
@@ -218,7 +218,7 @@ $lang = [
 'ThatsAll' => 'È tutto! Adesso puoi <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations' => 'Security Considerations',
 'SecurityRisk' => 'Infine, ti consigliamo di escludere l\'opzione di scrittura su %1 ora che è stata scritta. Lasciare il file aperto alla scrittura è un rischio per la tua sicurezza!<br>i.e. %2',
-'RemoveSetupDirectory' => 'You should delete the %1 directory now that the installation process has been completed.',
+'RemoveSetupDirectory' => 'Dovreste cancellare la directory %1 ora che il processo di installazione è stato completato.',
 'ErrorGivePrivileges' => 'Il file di configurazione %1 non si è potuto scrivere. Si dovrà rendere temporaneamente accessibile alla scrittura il tuo server e la tua directory WackoWiki, o un file vuoto col nome di %1<br>%2<br>; don\'t forget to remove write access again later, i.e. %3.<br>Se, per qualche motivo, non puoi farlo, dovrai copiare il testo in basso in un nuovo file e salvarlo/immetterlo come %1 nella directory WackoWiki. Ciò fatto, il tuo sito WackoWiki è pronto per funzionare. Altrimenti, visita <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep' => 'Nel passo successivo, l\'installatore tenterà di scrivere il nuovo file di configurazione, %1. Verifica che il server del web abbia accesso alla scrittura sul file, o che tu possa editarlo manualmente.  Ancora una volta, consulta  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> per i dettagli.',
 'WrittenAt' => 'scritto a ',

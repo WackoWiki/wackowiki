@@ -9,26 +9,34 @@ write_config_hidden_nodes([
 // Check if Upgrade or Fresh Install
 if (array_key_exists('wacko_version', $config))
 {
-	$min_upgrade_version = '5.5.14';
+	$min_upgrade_version = '5.5.17';
 
 	if (version_compare($config['wacko_version'], $min_upgrade_version, '<'))
 	{
 		$config['is_update'] = null;
-		echo '<ul class="security"><li>' . Ut::perc_replace($lang['PleaseUpgradeToR5'], $min_upgrade_version, $min_upgrade_version) . "</li></ul>\n";
+		echo '<ul class="security"><li>' .
+			Ut::perc_replace($lang['PleaseUpgradeToR5'],
+				'<code class="version">' . $min_upgrade_version . '</code>',
+				'<code class="version">' . $min_upgrade_version . '</code>') .
+			"</li></ul>\n";
 		// https://sourceforge.net/projects/wackowiki/files/
 		// https://wackowiki.org/doc/Dev/Release/R6.0/Upgrade
 	}
 	else
 	{
 		$config['is_update'] = '1';
-		echo '<p>' . Ut::perc_replace($lang['UpgradeFromWacko'], $config['wacko_version'], WACKO_VERSION) . "</p>\n";
+		echo '<p>' .
+			Ut::perc_replace($lang['UpgradeFromWacko'],
+				'<code class="version">' . $config['wacko_version'] . '</code>',
+				'<code class="version">' . WACKO_VERSION . '</code>') .
+			"</p>\n";
 		echo '<p class="warning">' . $lang['PleaseBackup'] . "</p>\n";
 	}
 }
 else
 {
 	$config['is_update'] = '0';
-	echo '<p>' . Ut::perc_replace($lang['FreshInstall'], WACKO_VERSION) . "</p>\n";
+	echo '<p>' . Ut::perc_replace($lang['FreshInstall'], '<code class="version">' . WACKO_VERSION . '</code>') . "</p>\n";
 }
 
 echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_update]">';

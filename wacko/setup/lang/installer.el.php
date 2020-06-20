@@ -51,9 +51,9 @@ $lang = [
    Language Selection Page
 */
 'lang' => 'Ρυθμίσεις Γλώσσας',
-'PleaseUpgradeToR5' => 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to <code class="version">%2</code>.',
-'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki <code class="version">%1</code> to <code class="version">%2</code>.  The next few pages will guide you through the upgrade process.',
-'FreshInstall' => 'Welcome to WackoWiki, you are about to install WackoWiki <code class="version">%1</code>.  The next few pages will guide you through the installation process.',
+'PleaseUpgradeToR5' => 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
+'UpgradeFromWacko' => 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
+'FreshInstall' => 'Καλώς ορίσατε στο WackoWiki, πρόκειται να εγκαταστήσετε το WackoWiki %1. Οι επόμενες σελίδες θα σας καθοδηγήσουν στη διαδικασία εγκατάστασης.',
 'PleaseBackup' => 'Παρακαλώ, πάρτε αντίγραφο της βάσης, του αρχείου ρυθμίσεων και όλα τα τροποποιημένα αρχεία όπως αυτά που έχουν αλλαγές σε κώδικα και προσθήκες επιρραμάτων πριν την εκκίνηση της διαδικασίας ανάβάθμισης. Αυτό θα σας προτρέψει από έναν μεγάλο πονοκέφαλο.',
 'LangDesc' => 'Παρακαλώ επιλέξτε μια γλώσσα για την διαδικασία εγκατάστασης. Η γλώσσα αυτή θα χρησιμοποιηθεί επίσης και ως προκαθορισμένη γλώσσα για την εγκατάσταση του WackoWiki.',
 
@@ -94,7 +94,7 @@ $lang = [
 'MultiLang' => 'Πολυγλωσσική Υποστήριξη',
 'MultiLangDesc' => 'Η πολυγλωσσική υποστήριξη σας επιτρέπει να έχετε σελίδες με διαφορετικές γλωσσικές ρυθμίσεις μέσα σε μία μόνη εγκατάσταση. Εάν αυτή η επιλογή είναι ενεργοποιημένη, τότε το πρόγραμμα εγκατάστασης θα δημιουργήσει αρχικές αντικείμενα μενού για όλες τις διαθέσιμες γλώσσες στην διανομή.',
 'AllowedLang' => 'Allowed Languages',
-'AllowedLangDesc' => 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc' => 'Συνιστάται να επιλέξετε μόνο το σύνολο των γλωσσών που θέλετε να χρησιμοποιήσετε, άλλες σοφές επιλέγονται όλες οι γλώσσες.',
 'Admin' => 'Όνομα Διαχειριστή',
 'AdminDesc' => 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'Password' => 'Συνθηματικό Διαχειριστή',
@@ -156,7 +156,7 @@ $lang = [
 'ErrorNoDbDriverDetected' => 'Δεν εντοπίστηκε οδηγός βάσεων δεδομένων, παρακαλώ είτε ενεργοποιήστε μία εκ των επεκτάσεων mysql, mysqli ή pdo στο php.ini αρχείο σας.',
 'ErrorNoDbDriverSelected' => 'Δεν εντοπίστηκε οδηγός βάσεων δεδομένων, παρακαλώ επιλέξτε έναν από την λίστα.',
 'DeleteTables' => 'Delete Existing Tables?',
-'DeleteTablesDesc' => 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
+'DeleteTablesDesc' => 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database. This cannot be undone unless you manually restore the data from a backup.',
 'ConfirmTableDeletion' => 'Are you sure you want to delete all current wiki tables?',
 
 /*
@@ -166,7 +166,7 @@ $lang = [
 'TestingConfiguration' => 'Έλεγχος Ρυθμίσεων',
 'TestConnectionString' => 'Έλεγχος ρυθμίσεων σύνδεσης με την βάση δεδομένων',
 'TestDatabaseExists' => 'Δοκιμή εάν η βάση δεδομένων που δηλώσατε υπάρχει',
-'TestDatabaseVersion' => 'Checking database minimum version requirements',
+'TestDatabaseVersion' => 'Έλεγχος ελάχιστων απαιτήσεων έκδοσης βάσης δεδομένων',
 'InstallingTables' => 'Εγκατάσταση πινάκων',
 'ErrorDbConnection' => 'Υπήρξε ένα πρόβλημα με τις λεπτομέρειες που δώσατε για την σύνδεση με την βάση δεδομένων, παρακαλώ επιστρέψτε και ελέγξετε ότι είναι σωστά.',
 'ErrorDbExists' => 'Η βάση δεδομένων που έχετε ρυθμίσει δεν βρέθηκε. Θυμηθείτε, χρειάζεται να υπάρχει πριν από την εγκατάσταση/αναβάθμιση του WackoWiki!',
