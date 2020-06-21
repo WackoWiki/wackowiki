@@ -335,7 +335,7 @@ class Text_Highlighter
 			if ($endpos > $this->_pos) {
 				$this->_tokenStack[] = [$this->_lastinner, substr($this->_str, $this->_pos, $endpos-$this->_pos)];
 			}
-			list($this->_state, $this->_lastdelim, $this->_lastinner, $this->_endpattern) = array_pop($this->_stack);
+			[$this->_state, $this->_lastdelim, $this->_lastinner, $this->_endpattern] = array_pop($this->_stack);
 			$this->_pos = $endpos + strlen($endmatch);
 			return array_pop($this->_tokenStack);
 		}

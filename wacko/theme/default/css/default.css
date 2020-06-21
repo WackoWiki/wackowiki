@@ -622,6 +622,10 @@ ol#comments {
 	width: 800px;
 }
 
+.comment-text footer{
+	width: 100%;
+}
+
 .comment-title h2 {
 	font-size: 14px;
 	line-height: 22px;

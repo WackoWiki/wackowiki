@@ -1339,6 +1339,7 @@ $wacko_translation = [
 	'LogFileUploadedGlobal'		=> 'Attaché un nouveau fichier au dossier global ##%2## (taille %3)',
 	'LogPMSent'					=> 'Message personnel ##%1## -> ##%2## envoyé',
 	'LogUserSimilarName'		=> 'Il y a eu des tentatives d’enregistrement sous le même nom d’utilisateur : ##%1##',
+	'LogUserEmailNotAllowed'	=> 'Email ##%1## pas dans la liste des domaines autorisés',
 	'LogUserRegistered'			=> 'Enregistrement réussi d’un nouvel utilisateur ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Activation réussie de l’adresse de messagerie ##%1## de l’utilisateur ##%2##',
 	'LogCommentPosted'			=> 'Ajouté [[/%1 nouveau commentaire(s)]] à la page [[/%2]]',
