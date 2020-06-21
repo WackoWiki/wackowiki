@@ -38,6 +38,7 @@ if ($type == OBJECT_PAGE)
 		$page_id = (int) $_GET['remove'];
 
 		$engine->delete_pages([$page_id]);
+		$engine->delete_acls([$page_id], true);
 		// page_id -> tag -> page_id (really)
 		$tag = $engine->get_page_tag($page_id);
 		$engine->remove_revisions($tag, false, true);

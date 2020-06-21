@@ -7283,6 +7283,16 @@ class Wacko
 		return true;
 	}
 
+	function delete_acls($page_ids, $dontkeep = 0)
+	{
+		if ($dontkeep)
+		{
+			$this->db->sql_query(
+				"DELETE FROM " . $this->db->table_prefix . "acl " .
+				"WHERE page_id IN (" . $this->ids_string($page_ids) . ")");
+		}
+	}
+
 	function delete_pages($pages)
 	{
 		$remove	= [];
@@ -7391,9 +7401,12 @@ class Wacko
 		{
 			foreach ($comments as $comment)
 			{
+				$page_ids[] = (int) $comment['page_id'];
 				$this->remove_page($comment['page_id'], '', $dontkeep);
 			}
 		}
+
+		$this->delete_acls($page_ids, $dontkeep);
 
 		// reset comments count
 		$this->db->sql_query(
@@ -8147,6 +8160,28 @@ class Wacko
 			// Use PHP built-in FILTER_VALIDATE_EMAIL, does not allow 'dotless' domains;
 			// http://php.net/filter.filters.validate
 			return (boolean) filter_var($email_address, FILTER_VALIDATE_EMAIL);
+		}
+	}
+
+	// only allow and send email to addresses in the given domain(s)
+	function validate_email_domain($email_address)
+	{
+		$domain = substr($email_address, strpos($email_address, '@') + 1);
+
+		// see if we're limited to a set of known domains
+		if(!empty($this->db->allowed_email_domains))
+		{
+			foreach($this->db->allowed_email_domains as $email_domain)
+			{
+				if( 0 == strcasecmp(email_domain, $domain))
+				{
+					return true;
+				}
+			}
+
+			$this->log(2, Ut::perc_replace($this->_t('LogUserEmailNotAllowed', SYSTEM_LANG), $email_address));
+
+			return false;
 		}
 	}
 
