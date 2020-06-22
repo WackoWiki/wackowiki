@@ -342,7 +342,6 @@ $tbl_user = "CREATE TABLE {$pref}user (" .
 					"total_revisions INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"total_comments INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"total_uploads INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"fingerprint VARCHAR(40) DEFAULT ''," .
 					"PRIMARY KEY (user_id)," .
 					"UNIQUE KEY idx_user_name (user_name)," .
 					"KEY idx_account_type (account_type)," .

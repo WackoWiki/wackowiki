@@ -113,6 +113,7 @@ $upgrade['5.5.14'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 // user
 $upgrade['6.0.0'][]		= ['insert',	'user',				$insert_user_r5_5_0];
 $upgrade['6.0.7'][]		= ['alter',		'user',				$alter_user_r5_5_0];
+$upgrade['6.0.8'][]		= ['alter',		'user',				$alter_user_r5_5_1];
 
 // usergroup
 $upgrade['6.0.7'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_5_0];

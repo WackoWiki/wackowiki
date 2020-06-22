@@ -67,11 +67,11 @@ $alter_revision_r5_5_0 = "ALTER TABLE {$pref}revision DROP supertag";
 
 // USER
 $alter_user_r5_5_0 = "ALTER TABLE {$pref}user DROP account_lang";
+$alter_user_r5_5_1 = "ALTER TABLE {$pref}user DROP fingerprint";
 
 $insert_user_r5_5_0 = "INSERT INTO {$pref}user (user_name, password, email, account_type, signup_time) VALUES ('Deleted', '', '', '1', UTC_TIMESTAMP())";
 
 // USER SETTING
-
 $update_user_setting_r5_5_0 = "UPDATE {$pref}user_setting SET theme = 'default'";
 
 // USERGROUP
