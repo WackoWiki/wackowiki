@@ -75,7 +75,7 @@ $wacko_config_defaults = [
 	'allow_massemail'				=> 0,
 	'allow_intercom'				=> 0,
 
-	'limit_email_domain'			=> '',
+	'allowed_email_domains'			=> '',
 	'check_mx_record'				=> 0,
 	'validate_email'				=> 1,
 	'email_pattern'					=> '',
