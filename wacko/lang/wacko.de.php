@@ -1302,6 +1302,7 @@ $wacko_translation = [
 	'LogAdminLoginFailed'		=> '!!Gescheiterter Anmeldeversuch ins Verwaltungs-Panel!!',
 	'LogAdminLoginLocked'		=> 'Anmeldung ins Verwaltungs-Panel gesperrt',
 	'LogUserCookieForged'		=> '!!**Ein Versuch sich mit einem gefälschten Cookie ##%1## anzumelden**!!',
+	'LogInvalidFormToken'		=> '!!**Potential CSRF attack in progress detected. ##%1## : ##%2##**!!',
 	'LogRemovedPage'			=> '!!Seite entfernt ##%1## (Nutzer %2)!!',
 	'LogRemovedCluster'			=> '!!**Cluster** ##%1## entfernt (Nutzer %2)!!',
 	'LogRemovedComment'			=> '!!Kommentar von %3 auf Seite [[/%1]] entfernt (Nutzer %2)!!',

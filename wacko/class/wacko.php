@@ -4811,9 +4811,10 @@ class Wacko
 			$_REQUEST	= $_GET;
 
 			$this->set_message($this->_t('FormInvalid'), 'error');
-
-			// TODO diag or not?
-			// $this->log(1, '**!!' . 'Potential CSRF attack in progress detected.' . '!!**' . ' [[/' . $this->page['tag'] . ']] ' . $form_name); # 'Invalid form token'
+			$this->log(1, Ut::perc_replace(
+				$this->_t('LogInvalidFormToken', SYSTEM_LANG),
+				' [[/' . $this->page['tag'] . ']] ',
+				@$_POST['_action']));
 
 			return false;
 		}
