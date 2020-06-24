@@ -2906,14 +2906,6 @@ class Wacko
 	}
 
 	/**
-	* @deprecated: use http->redirect() instead
-	*/
-	function redirect($url, $permanent = false) : void
-	{
-		$this->http->redirect($url, $permanent);
-	}
-
-	/**
 	 * normalizes absolute or relative link
 	 *
 	 * a) absolute: strips leading slash from link
@@ -4807,14 +4799,15 @@ class Wacko
 		if ($_POST
 			&& !$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
 		{
+			$form_name	= (string) ($_POST['_action'] ?? '');
 			$_POST		= [];
 			$_REQUEST	= $_GET;
 
 			$this->set_message($this->_t('FormInvalid'), 'error');
 			$this->log(1, Ut::perc_replace(
 				$this->_t('LogInvalidFormToken', SYSTEM_LANG),
-				' [[/' . $this->page['tag'] . ']] ',
-				@$_POST['_action']));
+				' [[/' . $this->tag . ']] ',
+				$form_name));
 
 			return false;
 		}
@@ -6813,7 +6806,7 @@ class Wacko
 			// normalizing tag name
 			$tag = Ut::normalize($tag);
 
-			$tag = str_replace("'", '_', str_replace('\\', '', str_replace('_', '', $tag)));
+			$tag = str_replace(['\\', '_'], '', $tag);
 			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', '', $tag);
 
 			$revision_id	= (int) ($_GET['revision_id'] ?? '');
