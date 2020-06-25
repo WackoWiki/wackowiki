@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 if ($this->has_access('read'))
 {
-	// "show files" status are stored in _SESSION
+	// 'show files' status are stored in session
 	$show_files = &$this->sess->show_files[$this->page['page_id']];
 
 	if (!isset($show_files))
@@ -80,7 +80,7 @@ if ($this->has_access('read'))
 		if ($have_files)
 		{
 			// display files section
-			$tpl->href		= $this->href('', '', ['show_files' =>1, '#' => 'header-files']);
+			$tpl->href		= $this->href('', '', ['show_files' => 1, '#' => 'header-files']);
 			$tpl->title		= $this->_t('ShowFiles');
 			$tpl->text		= $have_files;
 		}

@@ -4806,8 +4806,7 @@ class Wacko
 			$this->set_message($this->_t('FormInvalid'), 'error');
 			$this->log(1, Ut::perc_replace(
 				$this->_t('LogInvalidFormToken', SYSTEM_LANG),
-				' [[/' . $this->tag . ']] ',
-				$form_name));
+				'<code>' . $form_name . '</code>'));
 
 			return false;
 		}
