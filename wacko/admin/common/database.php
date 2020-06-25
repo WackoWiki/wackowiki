@@ -178,8 +178,8 @@ function ensure_dir($dir)
 function set_pack_dir($time)
 {
 	// check dir name and create if not exists
-	$pack = date('Ymd_His', $time);
-	$dir = Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
+	$pack	= date('Y_md_His', $time);
+	$dir	= Ut::join_path(UPLOAD_BACKUP_DIR, $pack);
 
 	clearstatcache();
 	ensure_dir($dir);
