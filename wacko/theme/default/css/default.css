@@ -1527,6 +1527,7 @@ a:target {
 .revisions li:hover,
 .form-tbl tr:hover,
 .lined li:hover,
+.h-line tr:hover,
 .lined tr:hover,
 tr.lined:hover,
 li.lined:hover {
@@ -2097,6 +2098,23 @@ li.m-source img {
 	padding-right: 10px;
 }
 
+/* most* actions ------------- */
+.most-col-num td:nth-child(1)
+{
+	text-align: right; 
+	width: 30px; 
+	float: left; 
+	padding-right: 20px;
+}
+.most-col-value td:nth-child(3)
+{
+	text-align: right; 
+	width: 50px; 
+	float: left; 
+	padding-left: 10px;
+}
+
+/* users action ------------- */
 .userprofile {
 	border-spacing: 3px; 
 	border-collapse: separate;

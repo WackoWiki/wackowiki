@@ -8,12 +8,11 @@
 	[= none _ =
 
 	=]
-	<table class="">
+	<table class="h-line most-col-num most-col-value">
 		[= l _ =
 			<tr>
-				<td>&nbsp;&nbsp;[ ' num ' ]</td>
+				<td>[ ' num ' ]</td>
 				<td>[ ' link ' ]</td>
-				<td>&nbsp;&nbsp;</td>
 				<td><a href="[ ' href ' ]">[ ' comments | number 0 , . ' ]</a></td>
 			</tr>
 		=]

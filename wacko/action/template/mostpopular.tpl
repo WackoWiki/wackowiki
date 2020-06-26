@@ -1,4 +1,4 @@
-[ === mostpopular === ]
+[ === main === ]
 	[= mark _ =
 		<div class="layout-box">
 			<p>
@@ -8,13 +8,12 @@
 	[= none _ =
 
 	=]
-	<table class="">
+	<table class="h-line most-col-num most-col-value">
 		[= l _ =
 			<tr>
-				<td>&nbsp;&nbsp;[ ' num ' ]</td>
+				<td>[ ' num ' ]</td>
 				<td>[ ' link ' ]</td>
 				[= counter _ =
-					<td>&nbsp;&nbsp;</td>
 					<td>[ ' hits | number 0 , . ' ]</td>
 				=]
 			</tr>
