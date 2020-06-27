@@ -1,6 +1,10 @@
-This directory contains a copy the 3rd party libraries used by WackoWiki
+WackoWiki external libraries
+============================
+This directory contains a copy of the 3rd party libraries used by WackoWiki
 
 The version and status of each is summarized below:
+
+## PHP libraries
 
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
@@ -15,8 +19,15 @@ The version and status of each is summarized below:
 | hashids			| Hashids			| 4.0.0		| unpatched |
 | php-diff			| php-diff			| 1.17		| patched, see subdir |
 
+## Javascript libraries
+
+| directory			| project			| version	| status |
+| ----------------- | ----------------- | --------- | --------- |
+| js				| clipboard.js		| 2.0.6		| unpatched |
+| js				| WikiEdit			| 3.20		| unpatched |
+
 Upstream projects
-==================
+-----------------
 - bad_behavior		- https://bad-behavior.ioerror.us/
 - freecap			- http://www.puremango.co.uk/2005/04/php_captcha_script_113/
 - htmlsax3			- https://pear.php.net/package/XML_HTMLSax3/
@@ -27,3 +38,5 @@ Upstream projects
 - text_highlighter	- https://pear.php.net/package/Text_Highlighter/
 - hashids			- https://hashids.org/php/
 - php-diff			- https://github.com/JBlond/php-diff
+- clipboard.js		- https://github.com/zenorocha/clipboard.js
+- wikiedit			- https://wackowiki.org/doc/Dev/Projects/WikiEdit
