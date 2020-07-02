@@ -135,7 +135,7 @@ first really BIG template written
 		[= pages _ =
 			<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
 			['' pagination '']<br>
-			<ul class="ul-list lined">
+			<ul class="ul-list hl-line">
 				[= li _ =
 					<li><small>[ ' created | time_formatted ' ]</small>  — [ ' link ' ]</li>
 				=]
@@ -151,7 +151,7 @@ first really BIG template written
 			[ ''' none UsersNA2 ''' ]
 			[= c _ =
 				[ ''' pagination ''' ]<br>
-				<ul class="ul-list lined">
+				<ul class="ul-list hl-line">
 					[= li _ =
 						<li><small>[ ' created | time_formatted ' ]</small> — [ ' link ' ]</li>
 					=]
@@ -166,7 +166,7 @@ first really BIG template written
 				[ ''' none UsersNA2 ''' ]
 				[= u2 _ =
 					[ ''' pagination ''' ]<br>
-					<ul class="ul-list lined">
+					<ul class="ul-list hl-line">
 						[= li _ =
 							<li>
 								<small>[ ' t | time_formatted ' ]</small>

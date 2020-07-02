@@ -79,7 +79,7 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 				&& $page['user_name'] != $user['user_name']
 				&& $page['modified'] > $user['last_mark'])
 			{
-				$tpl->l_viewed = ' viewed';
+				$tpl->l_viewed = ' class="viewed"';
 			}
 
 			// review

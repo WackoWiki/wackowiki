@@ -14,7 +14,7 @@
 	<ul class="ul-list">
 		[= p _ =
 			<li><strong>[ ' link ' ]</strong> ([ ' num ' ])
-				<ul class="lined">
+				<ul class="hl-line">
 					[= l _ =
 						<li>
 							<span class="[ ' vclass ' ]">[ ' val ' ]</span>
@@ -28,7 +28,7 @@
 		=]
 		[= t _ =
 			<li><strong>[ ' day ' ]</strong>
-				<ul class="lined">
+				<ul class="hl-line">
 					[= l _ =
 						<li>
 							<span class="[ ' vclass ' ]">[ ' val ' ]</span>

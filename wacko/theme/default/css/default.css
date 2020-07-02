@@ -1526,11 +1526,9 @@ a:target {
 .forum tbody:hover,
 .revisions li:hover,
 .form-tbl tr:hover,
-.lined li:hover,
-.h-line tr:hover,
-.lined tr:hover,
-tr.lined:hover,
-li.lined:hover {
+.hl-line li:hover,
+.hl-line tr:hover,
+tr.lined:hover {
 	background: #CCFFCC;
 }
 

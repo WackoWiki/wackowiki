@@ -8417,7 +8417,7 @@ class Wacko
 			# $out .= '<fieldset class="set-category"><legend>' . $this->_t('Categories') . ' (' . $lang . ")</legend>\n";
 			$out .= '<table class="category-browser">' . "\n";
 			$out .= "\t<tr>\n" . "\t\t<td>\n";
-			$out .= '<ul class="ul-list lined">' . "\n"; // hide-radio
+			$out .= '<ul class="ul-list hl-line">' . "\n"; // hide-radio
 
 			foreach ($categories as $category_id => $word)
 			{
@@ -8459,7 +8459,7 @@ class Wacko
 				{
 					$out .= "</ul>\n";
 					$out .= "\t\t</td>\n\t\t<td>\n";
-					$out .= '<ul class="ul-list lined">' . "\n"; // hide-radio
+					$out .= '<ul class="ul-list hl-line">' . "\n"; // hide-radio
 				}
 
 				$i = 0;
@@ -8519,8 +8519,10 @@ class Wacko
 		{
 			if (preg_match('/^category([0-9]+)\|([0-9]+)$/', $key, $ids) && $val == 'set')
 			{
+				// category id
 				$set[] = $ids[1];
 
+				// parent category id
 				if ($ids[2] != 0 && !in_array($ids[2], $set))
 				{
 					$set[] = $ids[2];

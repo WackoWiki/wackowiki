@@ -7,9 +7,9 @@
 	<ul class="ul-list">
 	[= page _ =
 			<li><strong>[ ' day ' ]</strong>
-				<ul class="lined">
+				<ul class="hl-line">
 					[= l _ =
-						<li class="lined[ ' viewed ' ]">
+						<li>
 							<span class="dt">[ ' time ' ]</span> — [ ' icon ' ][ ' page ' ]
 							 . . . . . . . . . . . . . . . . 
 							<small>

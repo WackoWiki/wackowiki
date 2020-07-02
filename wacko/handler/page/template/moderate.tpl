@@ -103,35 +103,35 @@
 					<input type="submit" name="unlock" id="submit_unlock" value="[ ' _t: ModerateUnlock ' ]">
 					<br>
 					<input type="submit" name="set" id="submit" value="[ ' _t: ModerateSet ' ]">
-							[= set _ =
-								<input type="submit" name="reset" id="submit" value="[ ' _t: ModerateReset ' ]">
-								&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
-							=]
-						</td>
-					</tr>
-					<tr class="formation">
-						<th colspan="2">[ ' _t: ForumTopic ' ]</th>
-						<th>[ ' _t: ForumAuthor ' ]</th>
-						<th>[ ' _t: ForumReplies ' ]</th>
-						<th>[ ' _t: ForumCreated ' ]</th>
-					</tr>
+						[= set _ =
+							<input type="submit" name="reset" id="submit" value="[ ' _t: ModerateReset ' ]">
+							&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
+						=]
+				</td>
+			</tr>
+			<tr class="formation">
+				<th colspan="2">[ ' _t: ForumTopic ' ]</th>
+				<th>[ ' _t: ForumAuthor ' ]</th>
+				<th>[ ' _t: ForumReplies ' ]</th>
+				<th>[ ' _t: ForumCreated ' ]</th>
+			</tr>
 
-					[= n _ =
-						<tr class="lined">
-							<td class="label a-middle">
-								<input type="checkbox" name="[ ' pageid ' ]" value="id" [ ' set | checkbox ' ]>
-							</td>
-							<td>
-								[= locked _ =
-									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">
-								=]
-								[ ' moderate ' ] <strong>[ ' topic ' ]</strong>
-							</td>
-							<td class="t-center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' user ' ]&nbsp;&nbsp;</small></td>
-							<td class="t-center"><small>[ ' comments | number 0 , . ' ]</small></td>
-							<td class="t-center nowrap"><small>&nbsp;&nbsp;[ ' created | time_formatted ' ]</small></td>
-						</tr>
-					=]
+			[= n _ =
+				<tr class="lined">
+					<td class="label a-middle">
+						<input type="checkbox" name="[ ' pageid ' ]" value="id" [ ' set | checkbox ' ]>
+					</td>
+					<td>
+						[= locked _ =
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">
+						=]
+						[ ' moderate ' ] <strong>[ ' topic ' ]</strong>
+					</td>
+					<td class="t-center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' user ' ]&nbsp;&nbsp;</small></td>
+					<td class="t-center"><small>[ ' comments | number 0 , . ' ]</small></td>
+					<td class="t-center nowrap"><small>&nbsp;&nbsp;[ ' created | time_formatted ' ]</small></td>
+				</tr>
+			=]
 
 			</table>
 		</form>
@@ -325,8 +325,7 @@
 		</form>
 		[''' pagination ''']
 	=]
-	
-	
+
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
 	

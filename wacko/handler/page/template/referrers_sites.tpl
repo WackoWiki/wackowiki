@@ -8,7 +8,7 @@
 
 	<strong>[ ' title ' ]</strong><br><br>
 
-	<ul class="ul-list lined">
+	<ul class="ul-list hl-line">
 		[= l _ =
 			<li>
 				<span class="list-count">[ ' count ' ]</span>

@@ -174,7 +174,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			$tpl->l_viewed		= (isset($user['last_mark']) && $user['last_mark']
 									&& $page['user_name'] != $user['user_name']
 									&& $page['date'] > $user['last_mark']
-										? ' viewed'
+										? ' class="viewed"'
 										: '' );
 			$tpl->l_revisions	= ($page['ctype'] != 2 || $page['comment_on_id'] === 0)
 									? ($this->hide_revisions

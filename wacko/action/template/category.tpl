@@ -45,7 +45,7 @@
 		<table class="category-browser">
 			<tr>
 				<td>
-					<ul class="ul-list lined">
+					<ul class="ul-list hl-line">
 						[= l _ =
 							<li>
 								[ ' link ' ]
@@ -63,7 +63,7 @@
 								</ul>
 							</td>
 							<td>
-								<ul class="ul-list lined">
+								<ul class="ul-list hl-line">
 							=]
 						=]
 					</ul>

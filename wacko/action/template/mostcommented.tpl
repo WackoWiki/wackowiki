@@ -8,7 +8,7 @@
 	[= none _ =
 
 	=]
-	<table class="h-line most-col-num most-col-value">
+	<table class="hl-line most-col-num most-col-value">
 		[= l _ =
 			<tr>
 				<td>[ ' num ' ]</td>

@@ -18,9 +18,9 @@
 	<ul class="ul-list">
 		[= page _ =
 			<li><strong>[ ' day ' ]</strong>
-				<ul>
+				<ul class="hl-line">
 					[= l _ =
-						<li class="lined[ ' viewed ' ]">
+						<li[ ' viewed ' ]>
 							<span class="dt">[ ' revisions ' ]</span> — [ ' page ' ]
 							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' alt ' ]" class="[ ' class ' ]">
 							[ ' link ' ]
