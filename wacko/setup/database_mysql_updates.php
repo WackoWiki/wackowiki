@@ -36,6 +36,7 @@ $update_config_r5_5_1 = "DELETE FROM {$pref}config WHERE config_name IN ('antidu
 // FILE LINK
 
 // LOG
+$alter_log_r5_5_0 = "ALTER TABLE {$pref}log CHANGE log_time log_time DATETIME NULL DEFAULT NULL";
 
 // MENU
 
@@ -57,6 +58,7 @@ $alter_page_link_r5_5_0 = "ALTER TABLE {$pref}page_link DROP to_supertag";
 // POLL
 
 // RATING
+$alter_rating_r5_5_0 = "ALTER TABLE {$pref}rating CHANGE rating_time rating_time DATETIME NULL DEFAULT NULL";
 
 // REFERRER
 
@@ -78,6 +80,7 @@ $update_user_setting_r5_5_0 = "UPDATE {$pref}user_setting SET theme = 'default'"
 $alter_usergroup_r5_5_0 = "ALTER TABLE {$pref}usergroup DROP group_lang";
 
 // WATCH
+$alter_watch_r5_5_0 = "ALTER TABLE {$pref}watch CHANGE watch_time watch_time DATETIME NULL DEFAULT NULL";
 
 // WORD
 

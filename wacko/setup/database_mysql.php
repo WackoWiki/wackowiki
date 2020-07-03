@@ -121,7 +121,7 @@ $tbl_file_link = "CREATE TABLE {$pref}file_link (" .
 
 $tbl_log = "CREATE TABLE {$pref}log (" .
 					"log_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
-					"log_time TIMESTAMP NOT NULL," .
+					"log_time DATETIME NULL DEFAULT NULL," .
 					"level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
 					"user_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"ip VARCHAR(45) NOT NULL DEFAULT ''," .
@@ -235,7 +235,7 @@ $tbl_rating = "CREATE TABLE {$pref}rating (" .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"value INT(11) NOT NULL DEFAULT '0'," .
 					"voters INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
-					"rating_time TIMESTAMP NOT NULL," .
+					"rating_time DATETIME NULL DEFAULT NULL," .
 					"PRIMARY KEY (page_id)," .
 					"KEY idx_voters_rate (voters)" .
 				") {$engine} COMMENT='' {$charset} {$collation}";
@@ -406,7 +406,7 @@ $tbl_watch = "CREATE TABLE {$pref}watch (" .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"comment_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"pending TINYINT(1) UNSIGNED NOT NULL DEFAULT '0'," .
-					"watch_time TIMESTAMP NOT NULL," .
+					"watch_time DATETIME NULL DEFAULT NULL," .
 					"PRIMARY KEY (watch_id)" .
 				") {$engine} COMMENT='' {$charset} {$collation}";
 

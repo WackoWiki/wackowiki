@@ -39,8 +39,8 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 {
 	if (isset($_POST['value']))
 	{
-		$page_id		= $this->page['page_id'];
-		$value	= round((int) $_POST['value']);
+		$page_id	= $this->page['page_id'];
+		$value		= round((int) $_POST['value']);
 
 		if ($value >  3) $value =  3;
 		if ($value < -3) $value = -3;
@@ -52,7 +52,7 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 			if ($rating = $this->db->load_single(
 				"SELECT page_id, value, voters " .
 				"FROM " . $this->db->table_prefix . "rating " .
-				"WHERE page_id = $page_id " .
+				"WHERE page_id = " . (int) $page_id . " " .
 				"LIMIT 1"))
 			{
 				// update entry
@@ -60,17 +60,17 @@ if ($this->has_access('read') && $this->page && $this->db->footer_rating != 0 &&
 					"UPDATE " . $this->db->table_prefix . "rating SET " .
 						"value		= {$rating['value']} + " . $this->db->q($value) . ", " .
 						"voters		= {$rating['voters']} + 1 " .
-					"WHERE page_id = $page_id");
+					"WHERE page_id = " . (int) $page_id . "");
 			}
 			else
 			{
 				// create entry
 				$this->db->sql_query(
 					"INSERT INTO " . $this->db->table_prefix . "rating SET " .
-						"page_id		= $page_id, " .
+						"page_id		= " . (int) $page_id . ", " .
 						"value			= " . $this->db->q($value) . ", " .
-						"voters			= 1");
-						// time is set automatically
+						"voters			= 1, " .
+						"rating_time	= UTC_TIMESTAMP()");
 			}
 
 			// set cookie

@@ -6236,10 +6236,10 @@ class Wacko
 		if ($this->has_access('read', $page_id))
 		{
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->table_prefix . "watch (user_id, page_id) " .
+				"INSERT INTO " . $this->db->table_prefix . "watch (user_id, page_id, watch_time) " .
 				"VALUES (	" . (int) $user_id . ",
-							" . (int) $page_id . ")" );
-				// TIMESTAMP type is filled automatically by MySQL
+							" . (int) $page_id . ",
+							UTC_TIMESTAMP())" );
 		}
 	}
 
@@ -8220,9 +8220,9 @@ class Wacko
 		$user_id		= $this->get_user_id();
 		$this->db->allow_rawhtml = $html;
 
-		// current timestamp set automatically
 		return $this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "log SET " .
+				"log_time	= UTC_TIMESTAMP(), " .
 				"level		= " . (int) $level . ", " .
 				"user_id	= " . (int) ($user_id ?: 0) . ", " .
 				"ip			= " . $this->db->q($this->http->ip) . ", " .

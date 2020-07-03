@@ -92,6 +92,9 @@ $upgrade['6.0.8'][]		= ['alter',		'cache',			$alter_cache_r5_5_0];
 $upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_0];
 $upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_1];
 
+// log
+$upgrade['6.0.8'][]		= ['alter',		'log',				$alter_log_r5_5_0];
+
 // menu
 $upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_0];
 
@@ -110,6 +113,9 @@ $upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_1];
 // page link
 $upgrade['5.5.14'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 
+// rating
+$upgrade['6.0.8'][]		= ['alter',		'rating',			$alter_rating_r5_5_0];
+
 // revision
 $upgrade['5.5.14'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 
@@ -120,3 +126,6 @@ $upgrade['6.0.8'][]		= ['alter',		'user',				$alter_user_r5_5_1];
 
 // usergroup
 $upgrade['6.0.7'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_5_0];
+
+// watch
+$upgrade['6.0.8'][]		= ['alter',		'watch',			$alter_watch_r5_5_0];
