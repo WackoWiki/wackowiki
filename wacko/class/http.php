@@ -99,11 +99,12 @@ class Http
 
 		$this->db->sql_query(
 			"INSERT INTO " . $this->db->table_prefix . "cache SET " .
-				"name	= " . $this->db->q($this->hash) . ", " .
-				"method	= " . $this->db->q($this->method) . ", " .
-				"query	= " . $this->db->q($this->query) . ", " .
-				"cache_lang	= " . $this->db->q($this->lang));		// user lang NOT user agent lang NOR page lang!
-				// TIMESTAMP type is filled automatically by MySQL
+				"name		= " . $this->db->q($this->hash) . ", " .
+				"method		= " . $this->db->q($this->method) . ", " .
+				"query		= " . $this->db->q($this->query) . ", " .
+				"cache_lang	= " . $this->db->q($this->lang) . ", " .	// user lang NOT user agent lang NOR page lang!
+				"cache_time	= UTC_TIMESTAMP()");
+
 	}
 
 	// Invalidate the page cache

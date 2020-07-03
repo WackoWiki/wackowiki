@@ -18,7 +18,6 @@ $tbl_acl = "CREATE TABLE {$pref}acl (" .
 					"page_id INT(10) UNSIGNED NOT NULL DEFAULT '0'," .
 					"privilege VARCHAR(10) NOT NULL DEFAULT ''," .
 					"list TEXT NOT NULL," .
-					// "updated TIMESTAMP NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP," .
 					"UNIQUE KEY idx_page_id (page_id, privilege)" .
 				") {$engine} COMMENT='' {$charset} {$collation}";
 
@@ -39,7 +38,7 @@ $tbl_cache = "CREATE TABLE {$pref}cache (" .
 					"method VARCHAR(20) NOT NULL DEFAULT ''," .
 					"query VARCHAR(100) NOT NULL DEFAULT ''," .
 					"cache_lang VARCHAR(2) NOT NULL DEFAULT ''," .
-					"cache_time TIMESTAMP NOT NULL," .
+					"cache_time DATETIME NULL DEFAULT NULL," .
 					"PRIMARY KEY (cache_id)," .
 					"INDEX (name)," .
 					"KEY idx_cache_time (cache_time)" .
@@ -71,7 +70,6 @@ $tbl_config = "CREATE TABLE {$pref}config (" .
 					"config_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT," .
 					"config_name VARCHAR(100) NOT NULL DEFAULT ''," .
 					"config_value TEXT," .
-					// "updated TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP," .
 					"PRIMARY KEY (config_id)," .
 					"UNIQUE KEY idx_config_name (config_name)" .
 				") {$engine} COMMENT='' {$charset} {$collation}";

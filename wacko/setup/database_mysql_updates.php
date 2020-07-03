@@ -19,7 +19,7 @@ $lp_size	= $large_prefix ? '250' : '190';
 // AUTH TOKEN
 
 // CACHE
-
+$alter_cache_r5_5_0 = "ALTER TABLE {$pref}cache CHANGE cache_time cache_time DATETIME NULL DEFAULT NULL";
 // CATEGORY
 
 // CATEGORY ASSIGNMENT

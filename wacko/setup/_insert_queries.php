@@ -85,6 +85,9 @@ $insert_records[]		= [$lang['InstallingReviewerGroup'],		$insert_reviewer_group,
 
 // 5.5 ############
 
+// cache
+$upgrade['6.0.8'][]		= ['alter',		'cache',			$alter_cache_r5_5_0];
+
 // config
 $upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_0];
 $upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_1];
