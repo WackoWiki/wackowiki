@@ -6802,7 +6802,7 @@ class Wacko
 				$this->method = 'show';
 			}
 
-			// normalizing tag name
+			// normalize tag name
 			$tag = Ut::normalize($tag);
 
 			$tag = str_replace(['\\', '_'], '', $tag);

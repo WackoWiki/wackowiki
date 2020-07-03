@@ -147,7 +147,7 @@ class Http
 
 	private function normalize_page($page)
 	{
-		$page = strtolower(str_replace('\\', '', str_replace("'", '', str_replace('_', '', $page))));
+		$page = str_replace(['\\', "'", '_'], '', $page);
 		return [$page, hash('sha1', $page)];
 	}
 
