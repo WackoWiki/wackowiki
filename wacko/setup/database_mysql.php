@@ -1,7 +1,7 @@
 <?php
 
 /*
- Wacko Wiki MySQL Table Creation Script
+ WackoWiki MySQL Table Creation Script
 
  TODO: add COMMENT 'field description'
  */

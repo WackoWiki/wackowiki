@@ -1,7 +1,7 @@
 <?php
 
 /*
-	Wacko Wiki MySQL Table Updates Script
+	WackoWiki MySQL Table Updates Script
 
 	These are all the updates that need to applied to earlier Wacko version to bring them up to 6.0 specs
 */
@@ -20,6 +20,7 @@ $lp_size	= $large_prefix ? '250' : '190';
 
 // CACHE
 $alter_cache_r5_5_0 = "ALTER TABLE {$pref}cache CHANGE cache_time cache_time DATETIME NULL DEFAULT NULL";
+
 // CATEGORY
 
 // CATEGORY ASSIGNMENT

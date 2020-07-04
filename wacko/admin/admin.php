@@ -27,7 +27,8 @@ if (!($engine->is_admin() || $db->is_locked() || RECOVERY_MODE))
 }
 
 // register locale resources
-$engine->set_language($db->language, true);
+$engine->user_lang = $engine->get_user_language();
+$engine->set_language($engine->user_lang, true);
 
 // reconnect securely in tls mode
 $http->ensure_tls($engine->href('', 'admin.php'));
