@@ -160,7 +160,6 @@ $config_db['notify_new_user_account']		= $config['notify_new_user_account'];
 $config_db['notify_page']					= $config['notify_page'];
 $config_db['notify_upload']					= $config['notify_upload'];
 $config_db['numerate_links']				= $config['numerate_links'];
-$config_db['outlook_workaround']			= $config['outlook_workaround'];
 $config_db['owners_can_change_categories']	= $config['owners_can_change_categories'];
 $config_db['owners_can_remove_comments']	= $config['owners_can_remove_comments'];
 $config_db['pages_purge_time']				= $config['pages_purge_time'];

@@ -201,7 +201,6 @@ $wacko_config_defaults = [
 	'img_create_thumbnail'			=> 0,
 	'img_max_thumb_width'			=> 150,
 
-	'outlook_workaround'			=> 1,
 	'enable_feeds'					=> 1,
 
 	'forum_cluster'					=> 'Forum',
