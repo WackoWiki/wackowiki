@@ -8424,7 +8424,7 @@ class Wacko
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
 							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '">'
-							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '> ' . "\n\t") .
+							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '> ' . "\n\t") .
 						'<label for="category' . $category_id . '"><strong>' . Ut::html($word['category']) . '</strong></label>' . "\n";
 
 				if (isset($word['child']) && $word['child'] == true)
@@ -8439,7 +8439,7 @@ class Wacko
 						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
 									($can_edit
 										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '">' . "\n\t\t\t"
-										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '|' . $word['parent_id'] . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
+										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
 									'<label for="category' . $category_id . '">' . Ut::html($word['category']) . '</label>' . "\n\t\t" .
 								'</li>' . "\n";
 					}
@@ -8517,16 +8517,10 @@ class Wacko
 		// what's selected
 		foreach ($_POST as $key => $val)
 		{
-			if (preg_match('/^category([0-9]+)\|([0-9]+)$/', $key, $ids) && $val == 'set')
+			if (preg_match('/^category([0-9]+)$/', $key, $ids) && $val == 'set')
 			{
 				// category id
 				$set[] = $ids[1];
-
-				// parent category id
-				if ($ids[2] != 0 && !in_array($ids[2], $set))
-				{
-					$set[] = $ids[2];
-				}
 			}
 		}
 
