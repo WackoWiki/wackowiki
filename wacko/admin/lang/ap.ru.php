@@ -415,8 +415,8 @@ $ap_translation = [
 	'CacheSqlTtlInfo'			=> 'Кэшировать результаты SQL-запросов не более чем на указанное число секунд. Использование значений свыше 1200 нежелательно.',
 
 	'PrivacySection'			=> 'Privacy',
-	'AnonymizeIp'				=> 'Anonymize users IP addresses',
-	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
+	'AnonymizeIp'				=> 'Анонимизировать пользователей IP-адреса',
+	'AnonymizeIpInfo'			=> 'Анонимизируйте IP-адреса, где это применимо, например, страницы, ревизии или ссылающиеся на них.',
 
 	'ReverseProxySection'		=> 'Обратный прокси - Reverse Proxy',
 	'ReverseProxy'				=> 'Использовать обратный прокси',
@@ -436,7 +436,7 @@ $ap_translation = [
 
 	'RewriteMode'					=> 'Использовать <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'Если веб-сервер поддерживает данную функцию, включите, чтобы получить "красивые" адреса страниц.<br>
-										<span class="cite">Значение может быть переписано в положение ON независимо от того что установлено этой настройкой. См. https://wackowiki.org/doc/Dev/Release/R55/UriRouter#h3176-4 URI Router',
+										<span class="cite">Значение может быть переписано в положение ON независимо от того что установлено этой настройкой. См. https://wackowiki.org/doc/Dev/Projects/UriRouter#h3176-4 URI Router',
 
 	// Permissions settings
 	'PermissionsSettingsInfo'		=> 'Управление правами доступа к страницам и разрешениями.',
