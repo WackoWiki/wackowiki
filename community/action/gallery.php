@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* gallery action :
+/* gallery action:
  * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
  * modify the script for your needs, please conribute your improvements
  *
@@ -147,6 +147,7 @@ if ($can_view)
 	$selector =
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
 			"AND f.picture_w <> 0 " .
 			"AND f.deleted <> 1 " .
@@ -163,7 +164,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.uploaded_dt, u.user_name AS user, f.hits " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.uploaded_dt, u.user_name AS user, f.hits, p.tag " .
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}", true);

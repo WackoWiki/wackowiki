@@ -6,11 +6,11 @@ if (!defined('IN_WACKO'))
 }
 
 // action/mypages.php
-if (!isset($title))		$title = 0;
-if (!isset($bydate))	$bydate = '';
-if (!isset($profile))	$profile = ''; // user action
-if (!isset($max))		$max = null;
-if (!isset($bychange))	$bychange = '';
+if (!isset($title))		$title		= 0;
+if (!isset($bydate))	$bydate		= '';
+if (!isset($profile))	$profile	= ''; // user action
+if (!isset($max))		$max		= null;
+if (!isset($bychange))	$bychange	= '';
 $current_char	= '';
 $title			= (int) $title;
 
@@ -38,7 +38,7 @@ if (!array_key_exists($mode, $tabs))
 	$mode = '';
 }
 
-if (($user_id = $this->get_user_id()))
+if ($user_id = $this->get_user_id())
 {
 	$tpl->enter('u_');
 
