@@ -217,7 +217,7 @@ WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 			Text = s + Tag2 + q[1] + this.end + q[2];
 		}
 	}
-	
+
 	return Text;
 };
 
@@ -629,7 +629,6 @@ WikiEdit.prototype.getDefines = function ()
 	this.undotext	= t.value;
 	this.undosels	= t.selectionStart;
 	this.undosele	= t.selectionEnd;
-
 };
 
 WikiEdit.prototype.setAreaContent = function (str)
@@ -645,7 +644,6 @@ WikiEdit.prototype.setAreaContent = function (str)
 	t.setSelectionRange(l, l + l1);
 
 	t.scrollTop = this.scroll;
-
 };
 
 WikiEdit.prototype.insTag = function (Tag, Tag2, onNewLine, expand, strip)

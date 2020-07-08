@@ -69,7 +69,6 @@ function dclick(frame)
 	if (edit)
 
 	document.addEventListener('dblclick', mouseClick, true);
-
 }
 
 function mouseClick(event)

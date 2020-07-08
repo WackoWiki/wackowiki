@@ -61,7 +61,7 @@ function _unescape_callback($p)
 
 // Getting a query
 _parse_query_string();
-if(isset($_GET['q']) && isset($_GET['q']))
+if(isset($_GET['q']) && isset($_GET['ta_id']))
 {
 	// Working for autocomplete
 	$q		= $_GET['q'];
@@ -75,12 +75,12 @@ else
 }
 
 // 1. unwrap
-$q = utf8_ltrim($q, '/');
-$tag1 = $this->unwrap_link($q);
-$tag2 = $q;
+$q		= utf8_ltrim($q, '/');
+$tag1	= $this->unwrap_link($q);
+$tag2	= $q;
 
 // 2. going to DB two times
-$limit = 10;
+$limit	= 10;
 
 $pages1 = $this->db->load_all(
 	"SELECT page_id, tag " .
@@ -97,8 +97,8 @@ $pages2 = $this->db->load_all(
 	"ORDER BY tag ASC LIMIT $limit");
 
 // 3. stripping by rights
-$pages = [];
-$cnt = 0;
+$pages	= [];
+$cnt	= 0;
 
 if ($pages1)
 {

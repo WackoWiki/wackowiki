@@ -44,7 +44,7 @@
 				[= n _ =
 					<label for="edit_note">[ ' _t: EditNote ' ]:</label><br>
 					<input type="text" id="edit_note" class="input-summary" maxlength="200" value="[ ' note | e attr ' ]" size="100" name="edit_note">
-					&nbsp;&nbsp;&nbsp;
+					<br>
 				=]
 				[= minor _ =
 					<input type="checkbox" id="minor_edit" value="1" name="minor_edit">
