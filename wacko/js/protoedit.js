@@ -9,7 +9,6 @@ For license see LICENSE.TXT
 var isDOM		= document.getElementById; // DOM1 browser
 var isO			= isO5 = window.opera && isDOM; // Opera 5+
 var isO8		= isO && document.createProcessingInstruction && (new XMLHttpRequest()).getAllResponseHeaders; // Opera 8+
-var isIE		= document.all && document.all.item && !isO; // MSIE 4+
 var isMZ		= isDOM && (navigator.appName == 'Netscape');
 var ua			= navigator.userAgent.toLowerCase();
 var isSafari	= (ua.indexOf('safari') != - 1);
@@ -28,13 +27,7 @@ ProtoEdit.prototype._init = function (id, rte)
 	// rte - id of rte frame 
 	if (rte)
 	{
-		if (isIE)
-		{
-			frames[rte].document.onkeydown = function () {
-				document.getElementById(id)._owner.keyDown(frames[rte].event)
-			}
-		}
-		else if (this.MZ = isMZ)
+		if (this.MZ = isMZ)
 		{
 			document.getElementById(rte).contentWindow.document.addEventListener('keypress', function (ev){
 				document.getElementById(id)._owner.keyDown(ev)
@@ -46,13 +39,7 @@ ProtoEdit.prototype._init = function (id, rte)
 	} 
 	else
 	{
-		if (isIE)
-		{
-			this.area.onkeydown = function () {
-				this._owner.keyDown(event)
-			}
-		}
-		else if (isMZ)
+		if (isMZ)
 		{
 			this.area.addEventListener('keypress', function (ev) {
 				this._owner.keyDown(ev)
@@ -181,7 +168,7 @@ ProtoEdit.prototype.checkKey = function (k)
 
 ProtoEdit.prototype.addEvent = function (el, evname, func)
 {
-	if (isIE || isO8)
+	if (isO8)
 	{
 		el.attachEvent('on' + evname, func);
 	}

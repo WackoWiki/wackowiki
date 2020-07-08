@@ -37,9 +37,9 @@ WikiEdit.prototype.constructor	= WikiEdit;
 // initialisation
 WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 {
-	if (!(isMZ || isIE || isO8)) return;
+	if (!(isMZ || isO8)) return;
 
-	if (!(this.MZ || isIE || isO8)) return;
+	if (!(this.MZ || isO8)) return;
 	
 	this._init(id);
 	// if (!this.area.id) this.area.id = "area_" + String(Math.floor(Math.random() * 10000));

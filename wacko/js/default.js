@@ -1,5 +1,4 @@
 var isDOM	= document.getElementById;
-var isIE	= document.all && document.all.item;
 var isMZ	= isDOM && (navigator.appName == 'Netscape');
 var isO		= window.opera && isDOM;
 
@@ -70,7 +69,7 @@ var dbclick = "page";
 function dclick(frame)
 {
 	if (edit)
-	if (isIE || isO)
+	if (isO)
 	{
 		document.ondblclick = function () {
 			op = event.srcElement;

@@ -39,7 +39,6 @@ AutoComplete.prototype.addButton = function ()
 		+ ' onclick="document.getElementById(' + '\'' + we.id + '\')._owner.autocomplete.insertFound();return false;' + '" '
 		+ ' title="Insert Autocomplete">Autocomplete'
 		+ '</div>'
-		+ (isIE ? '<div style="display:none;" class="autocomplete-inplace" id="' + this.id + '_inplace"><hr></div>' : '')
 		+ '</li>'
 		+ '<li id="' + this.id + '_reset" style="display:none;"><div style="font:12px Arial; padding: 3px 3px 4px 4px;" '
 		+ 'onmouseover=\'this.className="btn-hover";\' '
@@ -84,7 +83,6 @@ AutoComplete.prototype.selectInplace = function (pos)
 AutoComplete.prototype.redrawInplace = function ()
 {
 	if (this.found_patterns.length == 0) return;
-	if (!isIE) return; // IE ONLY
 
 	var inplace = document.getElementById(this.id + '_inplace');
 	var contents = '';
@@ -155,13 +153,6 @@ AutoComplete.prototype.redrawInplace = function ()
 
 	// step 2. restore exact selection observed before "inplace magic"
 	this.wikiedit.setAreaContent(str);
-};
-
-AutoComplete.prototype.hideInplace = function ()
-{
-	if (!isIE) return;
-	var inplace = document.getElementById(this.id + '_inplace');
-	inplace.style.display = 'none';
 };
 
 // -------------------
@@ -405,52 +396,22 @@ AutoComplete.prototype.StrictLink = function (pattern)
 // some "range" magic
 AutoComplete.prototype.getPattern = function ()
 {
-	if (isIE)
-	{
-		var Range	= document.selection.createRange();
-	}
-	else
-	{
-		var start	= this.wikiedit.area.selectionStart;
-		var end		= this.wikiedit.area.selectionEnd;
-	}
+	var start	= this.wikiedit.area.selectionStart;
+	var end		= this.wikiedit.area.selectionEnd;
 
 	// go left
 	var f = 1;
 
-	while (f || (isIE && (Range.text.charAt(0)).match(this.regexp_LinkLetter))
-	|| (!isIE && (this.wikiedit.area.value.charAt(start)).match(this.regexp_LinkLetter))
-	)
+	while (f || ((this.wikiedit.area.value.charAt(start)).match(this.regexp_LinkLetter)))
 	{
 		f = 0;
-
-		if (isIE)
-		{
-			Range.moveStart('character', - 1);
-		}
-		else
-		{
-			start--;
-		}
+		start--;
 	}
 
-	if (isIE)
-	{
-		Range.moveStart('character', 1);
-	}
-	else
-	{
-		start++;
-	}
+	start++;
 
-	if (isIE)
-	{
-		return Range.text;
-	}
-	else 
-	{
-		return this.wikiedit.area.value.substr(start, end - start);
-	}
+	return this.wikiedit.area.value.substr(start, end - start);
+
 };
 
 // visual state routine. Sets some different visual widgets according to given state
@@ -483,12 +444,10 @@ AutoComplete.prototype.visualState = function (to)
 			ac.innerHTML				= this.request_pattern;
 			ac.style.color				= '#ffffff';
 			ac.style.backgroundColor	= '#FF0000';
-			this.hideInplace();
 			break;
 		case 'hidden':
 			li.style.display			= 'none';
 			reset.style.display			= 'none';
-			this.hideInplace();
 			break;
 	}
 
