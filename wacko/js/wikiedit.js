@@ -2,7 +2,7 @@
 ////////////////////////////////////////////////////////////////////////
 // WikiEdit                                                           //
 // v. 3.20                                                            //
-// supported: MZ1.4+, MSIE5+, Opera 8+                                //
+// supported:                                                         //
 //                                                                    //
 // (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2020             //
 //	 based on AutoIndent for textarea                                 //
@@ -37,10 +37,6 @@ WikiEdit.prototype.constructor	= WikiEdit;
 // initialisation
 WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 {
-	if (!(isMZ || isO8)) return;
-
-	if (!(this.MZ || isO8)) return;
-	
 	this._init(id);
 	// if (!this.area.id) this.area.id = "area_" + String(Math.floor(Math.random() * 10000));
 	this.imagesPath			= (imgPath ? imgPath : 'image/');
@@ -49,15 +45,12 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 	this.actionName			= 'document.getElementById(\'' + this.id + '\')._owner.insTag';
 	separator				= '<li><div class="btn-separator"/></div></li>';
 
-	if (isMZ || isO8)
-	{
-		try {
-			this.undotext = this.area.value;
-			this.undosels = this.area.selectionStart;
-			this.undosele = this.area.selectionEnd;
-		}
-		catch (e) {
-		}
+	try {
+		this.undotext = this.area.value;
+		this.undosels = this.area.selectionStart;
+		this.undosele = this.area.selectionEnd;
+	}
+	catch (e) {
 	}
 
 	//this.addButton('h1',			lang.Heading1,		'\'==\',\'==\',0,1');
@@ -366,14 +359,7 @@ WikiEdit.prototype.keyDown = function (e)
 		e;
 	var justenter = false;
 	var wasEvent = remundo = res = false;
-	if (isMZ)
-	{
-		var noscroll = false;
-	}
-	else
-	{
-		var noscroll = true;
-	}
+	var noscroll = false;
 	var t = this.area;
 	var Key = e.keyCode;
 	if (Key == 0) Key = e.charCode;
@@ -385,25 +371,22 @@ WikiEdit.prototype.keyDown = function (e)
 	if (e.altKey && !e.ctrlKey)	Key = Key + 4096;
 	if (e.ctrlKey)				Key = Key + 2048;
 
-	if (isMZ && e.type == 'keypress' && this.checkKey(Key))
+	if (e.type == 'keypress' && this.checkKey(Key))
 	{
 		e.preventDefault();
 		e.stopPropagation();
 		return false;
 	}
 
-	if (isMZ && e.type == 'keyup' && (Key == 9 || Key == 13))
+	if (e.type == 'keyup' && (Key == 9 || Key == 13))
 	{
 		return false;
 	}
 
-	if (isMZ || isO8)
-	{
-		var scroll	= t.scrollTop;
-		undotext	= t.value;
-		undosels	= t.selectionStart;
-		undosele	= t.selectionEnd;
-	}
+	var scroll	= t.scrollTop;
+	undotext	= t.value;
+	undosels	= t.selectionStart;
+	undosele	= t.selectionEnd;
 
 	str	= t.value.substr(t.selectionStart, t.selectionEnd - t.selectionStart);
 	sel	= (str.length > 0);
@@ -421,7 +404,7 @@ WikiEdit.prototype.keyDown = function (e)
 	switch (Key)
 	{
 		case 2138: // Z
-			if ((isMZ || isO8) && this.undotext)
+			if (this.undotext)
 			{
 				t.value = this.undotext;
 				t.setSelectionRange(this.undosels, this.undosele);
@@ -573,28 +556,26 @@ WikiEdit.prototype.keyDown = function (e)
 					sel		= q[2].length + sel1.length + 1;
 					t.setSelectionRange(sel, sel);
 
-					if (isMZ)
+
+					if (t.childNodes[0] != null)
 					{
-						if (t.childNodes[0] != null)
-						{
-							t.childNodes[0].nodeValue = t.value;
-							var temp = document.createRange();
-							temp.setStart(t.childNodes[0], sel - 2);
-							temp.setEnd(t.childNodes[0], sel);
-						}
+						t.childNodes[0].nodeValue = t.value;
+						var temp = document.createRange();
+						temp.setStart(t.childNodes[0], sel - 2);
+						temp.setEnd(t.childNodes[0], sel);
+					}
 
-						// t.scrollIntoView(true);
+					// t.scrollIntoView(true);
 
-						z			= t.selectionStart;
-						lines		= t.value.substr(0, z).split('\n').length - 1;
-						totalLines	= t.value.split('\n').length - 1;
+					z			= t.selectionStart;
+					lines		= t.value.substr(0, z).split('\n').length - 1;
+					totalLines	= t.value.split('\n').length - 1;
 
-						if (scroll + t.offsetHeight + 25 > Math.floor((t.scrollHeight / (totalLines + 1)) * lines))
-						{
-							t.scrollTop	= Math.floor((t.scrollHeight / (totalLines + 1)) * lines) - t.offsetHeight + 20;
-							t.focus();
-							noscroll	= true;
-						}
+					if (scroll + t.offsetHeight + 25 > Math.floor((t.scrollHeight / (totalLines + 1)) * lines))
+					{
+						t.scrollTop	= Math.floor((t.scrollHeight / (totalLines + 1)) * lines) - t.offsetHeight + 20;
+						t.focus();
+						noscroll	= true;
 					}
 
 					res = true;
@@ -605,7 +586,7 @@ WikiEdit.prototype.keyDown = function (e)
 
 			break;
 	}
-	
+
 	this.enterpressed = justenter;
 	
 	if (!res && remundo)
@@ -618,16 +599,13 @@ WikiEdit.prototype.keyDown = function (e)
 	{
 		this.area.focus();
 
-		if (isMZ || isO8)
-		{
-			this.undotext = undotext;
-			this.undosels = undosels;
-			this.undosele = undosele;
-			if (wasEvent) return true;
-			e.cancelBubble = true;
-			e.preventDefault();
-			e.stopPropagation();
-		}
+		this.undotext = undotext;
+		this.undosels = undosels;
+		this.undosele = undosele;
+		if (wasEvent) return true;
+		e.cancelBubble = true;
+		e.preventDefault();
+		e.stopPropagation();
 
 		if (!noscroll) t.scrollTop = scroll;
 		e.returnValue = false;
@@ -647,13 +625,11 @@ WikiEdit.prototype.getDefines = function ()
 	this.sel	= text.substr(this.ss, this.se - this.ss);
 	this.str	= this.sel1 + this.begin + this.sel + this.end + this.sel2;
 
-	if (isMZ)
-	{
-		this.scroll		= t.scrollTop;
-		this.undotext	= t.value;
-		this.undosels	= t.selectionStart;
-		this.undosele	= t.selectionEnd;
-	}
+	this.scroll		= t.scrollTop;
+	this.undotext	= t.value;
+	this.undosels	= t.selectionStart;
+	this.undosele	= t.selectionEnd;
+
 };
 
 WikiEdit.prototype.setAreaContent = function (str)
@@ -668,10 +644,8 @@ WikiEdit.prototype.setAreaContent = function (str)
 	t.value	= str;
 	t.setSelectionRange(l, l + l1);
 
-	if (isMZ)
-	{
-		t.scrollTop = this.scroll;
-	}
+	t.scrollTop = this.scroll;
+
 };
 
 WikiEdit.prototype.insTag = function (Tag, Tag2, onNewLine, expand, strip)

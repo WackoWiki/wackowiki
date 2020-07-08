@@ -1,6 +1,4 @@
 var isDOM	= document.getElementById;
-var isMZ	= isDOM && (navigator.appName == 'Netscape');
-var isO		= window.opera && isDOM;
 
 function undef(param)
 {
@@ -69,26 +67,9 @@ var dbclick = "page";
 function dclick(frame)
 {
 	if (edit)
-	if (isO)
-	{
-		document.ondblclick = function () {
-			op = event.srcElement;
 
-			while (op != null && op.className != frame && op.tagName != 'BODY')
-			op = op.parentElement;
+	document.addEventListener('dblclick', mouseClick, true);
 
-			if (op.className == frame)
-			{
-				document.location = edit;
-			}
-
-			return true;
-		}
-	}
-	else if (isMZ)
-	{
-		document.addEventListener('dblclick', mouseClick, true);
-	}
 }
 
 function mouseClick(event)
