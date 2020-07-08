@@ -57,7 +57,7 @@ class Settings extends Dbal implements ArrayAccess
 
 				// retrieving configuration data from db
 				if (!($result = $this->load_all(
-						"SELECT config_name, config_value FROM {$this->table_prefix}config")))
+					"SELECT config_name, config_value FROM {$this->table_prefix}config")))
 				{
 					die("Error loading WackoWiki config data: database `config` table is empty.");
 				}

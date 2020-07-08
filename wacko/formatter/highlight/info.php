@@ -35,4 +35,4 @@ echo	($options['icon'] ? '<div class="info-content">' : '') . "\n" .
 			: '');
 include Ut::join_path(FORMATTER_DIR, 'wiki.php');
 echo	($options['icon'] ? '</div>' : '') . "\n";
-echo	"</div></ignore>\n";
+echo	'</div></ignore>' . "\n";

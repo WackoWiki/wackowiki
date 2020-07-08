@@ -7,8 +7,6 @@
 		)
 	content
 	%%
-
-	Does not support nesting.
 */
 
 if (!isset($options['title']))		$options['title']	= null;
@@ -22,4 +20,4 @@ echo	($title
 			? '<summary>' . Ut::html($title) . '</summary>' . "\n"
 			: '');
 include Ut::join_path(FORMATTER_DIR, 'wiki.php');
-echo	"</details></ignore>\n";
+echo	'</details></ignore>' . "\n";
