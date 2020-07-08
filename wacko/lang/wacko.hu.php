@@ -151,6 +151,9 @@ $wacko_translation = [
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',
 
+	// details formatter
+	'ShowHideDetails'			=> 'Részletek',
+
 	'PrivacyPolicy'				=> 'Adatvédelmi irányelvek',
 	'TermsOfUse'				=> 'Felhasználási feltételek',
 	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of service of the site.',

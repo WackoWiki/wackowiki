@@ -151,6 +151,9 @@ $wacko_translation = [
 	'Links'						=> 'Links',
 	'Version'					=> 'Versione',
 
+	// details formatter
+	'ShowHideDetails'			=> 'Dettagli',
+
 	'PrivacyPolicy'				=> 'Informativa sulla privacy',
 	'TermsOfUse'				=> 'Condizioni di utilizzo',
 	'AcceptTermsOfUse'			=> ' I accept',
