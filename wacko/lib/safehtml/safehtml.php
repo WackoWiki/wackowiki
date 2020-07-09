@@ -8,9 +8,9 @@
  * @package		SafeHTML
  * @author		Roman Ivanov <thingol@mail.ru>
  * @author		Miguel Vazquez Gocobachi <demrit@mx.gnu.org>
- * @copyright	2004-2019 Roman Ivanov, Miguel Vazquez Gocobachi, WackoWiki Team
+ * @copyright	2004-2020 Roman Ivanov, Miguel Vazquez Gocobachi, WackoWiki Team
  * @license		http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version		1.3.11
+ * @version		1.3.20
  * @link		https://wackowiki.org/doc/Dev/Projects/SafeHTML
  */
 
@@ -213,13 +213,11 @@ class SafeHTML
 	 * @var array
 	 */
 	public $closeParagraph = [
-		'address', 'article',    'aside',   'audio',     'blockquote', 'canvas',
-		'center',  'dd',         'dir',     'div',       'dl',         'dt',
-		'figure',  'figcaption', 'footer',  'h1',        'h2',         'h3',
-		'h4',      'h5',         'h6',      'header',    'hr',         'isindex',
-		'listing', 'main',       'marquee', 'menu',      'multicol',   'nav',
-		'ol',      'output',     'p',       'plaintext', 'pre',        'section',
-		'table',   'ul',         'video',   'xmp',
+		'address',	'article',	'aside',		'blockquote',	'details',	'div',
+		'dl',		'fieldset',	'figcaption',	'figure',		'footer',	'form',
+		'h1',		'h2',		'h3',			'h4',			'h5',		'h6',
+		'header',	'hgroup',	'hr',			'main',			'menu',		'nav',
+		'ol',		'p',		'pre',			'section',		'table',	'ul',
 	];
 
 	/**
@@ -237,7 +235,7 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $listTags = ['dir', 'menu', 'ol', 'ul', 'dl', ];
+	public $listTags = ['menu', 'ol', 'ul', 'dl', ];
 
 	/**
 	 * List of dangerous attributes

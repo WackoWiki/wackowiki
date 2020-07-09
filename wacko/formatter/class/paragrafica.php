@@ -17,62 +17,78 @@ class Paragrafica
 		'/(<hr[^>]*>)/usi',
 	];
 	var $t1				= [ // terminators like <-t>$1
-		[ // rightinators
-			'!(<table)!si',
-			'!(<h[1-9][^>]*>)!si',
-			'!(<dl)!si',
-			'!(<(u|o)l)!si',
-			'!(<div)!si',
-			'!(<nav)!si',
-			'!(<aside)!si',
-			'!(<section)!si',
-			'!(<article)!si',
-			'!(<footer)!si',
-			'!(<header)!si',
+		[
+			// rightinators
+			'!(<(o|u)l)!si',
 			'!(<address)!si',
-			'!(<figure)!si',
-			'!(<figcaption)!si',
-			'!(<p)!si',
-			'!(<form)!si',
-			'!(<textarea)!si',
+			'!(<article)!si',
+			'!(<aside)!si',
 			'!(<blockquote)!si',
-			'!(<pre)!si',
+			'!(<details)!si',
+			'!(<div)!si',
+			'!(<dl)!si',
+			'!(<fieldset)!si',
+			'!(<figcaption)!si',
+			'!(<figure)!si',
+			'!(<footer)!si',
+			'!(<form)!si',
+			'!(<h[1-9][^>]*>)!si',
+			'!(<header)!si',
+			'!(<hgroup)!si',
+			'!(<hr)!si',
 			'!(<ignore>)!si',
+			'!(<menu)!si',
+			'!(<nav)!si',
+			'!(<p)!si',
+			'!(<pre)!si',
+			'!(<section)!si',
+			'!(<table)!si',
+			'!(<textarea)!si',
 		],
-		[ // wronginators
+		[
+			// wronginators
 			'!(</td>)!si',
 		],
-		[ // wronginators-2
+		[
+			// wronginators-2
 			'!(</li>)!si',
 		],
 	];
 	var $t2				= [ // terminators like $1<t->
-		[ // rightinators
-			'!(</table>)!si',
-			'!(</h[1-9]>)!si',
-			'!(</dl>)!si',
-			'!(</(u|o)l>)!si',
-			'!(</div>)!si',
-			'!(</nav>)!si',
-			'!(</aside>)!si',
-			'!(</section>)!si',
-			'!(</article>)!si',
-			'!(</footer>)!si',
-			'!(</header>)!si',
+		[
+			// rightinators
+			'!(</(o|u)l>)!si',
 			'!(</address>)!si',
-			'!(</figure>)!si',
-			'!(</figcaption>)!si',
-			'!(</p>)!si',
-			'!(</form>)!si',
-			'!(</textarea>)!si',
+			'!(</article>)!si',
+			'!(</aside>)!si',
 			'!(</blockquote>)!si',
-			'!(</pre>)!si',
+			'!(</details>)!si',
+			'!(</div>)!si',
+			'!(</dl>)!si',
+			'!(</fieldset>)!si',
+			'!(</figcaption>)!si',
+			'!(</figure>)!si',
+			'!(</footer>)!si',
+			'!(</form>)!si',
+			'!(</h[1-9]>)!si',
+			'!(</header>)!si',
+			'!(</hgroup>)!si',
+			'!(</hr>)!si',
 			'!(</ignore>)!si',
+			'!(</menu>)!si',
+			'!(</nav>)!si',
+			'!(</p>)!si',
+			'!(</pre>)!si',
+			'!(</section>)!si',
+			'!(</table>)!si',
+			'!(</textarea>)!si',
 		],
-		[ // wronginators
+		[
+			// wronginators
 			'!(<td[^>]*>)!si',
 		],
-		[ // wronginators-2
+		[
+			// wronginators-2
 			'!(<li[^>]*>)!is',
 		],
 	];
