@@ -78,11 +78,8 @@
 						=]
 					wE.init('postText','WikiEdit','edname-w','[ ' wikiedit ' ]');
 					[= user _ =
-						window.onload = function () {
-							var timeout = [ ' heartbeat ' ];
-							var name = 'edit_page';
-							userSessionHeartbeat(timeout, name);
-						};
+						var timeout = [ ' heartbeat ' ];
+						var name = 'edit_page';
 					=]
 				</script>
 				<br>

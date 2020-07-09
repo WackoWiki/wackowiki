@@ -25,6 +25,8 @@ function sign(x)
 var wikiedit;
 var dbclick;
 var edit;
+var timeout;
+var name;
 
 //initialization everything
 function all_init()
@@ -37,6 +39,11 @@ function all_init()
 	if (dbclick)
 	{
 		dclick(dbclick);
+	}
+
+	if (timeout)
+	{
+		userSessionHeartbeat(timeout, name);
 	}
 
 	crit_init();

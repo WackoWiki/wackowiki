@@ -93,11 +93,8 @@
 								=]
 							wE.init('addcomment','WikiEdit','edname-w','[ ' wikiedit ' ]');
 							[= user _ =
-								window.onload = function () {
-									var timeout = [ ' heartbeat ' ];
-									var name = 'add_comment';
-									userSessionHeartbeat(timeout, name);
-								};
+								var timeout = [ ' heartbeat ' ];
+								var name = 'add_comment';
 							=]
 						</script>
 						<input type="submit" class="btn-ok" name="save" value="[ ' _t: AddCommentButton ' ]" accesskey="s">
