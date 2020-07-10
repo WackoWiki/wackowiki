@@ -31,7 +31,6 @@ function admin_system_info(&$engine, &$module)
 	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">
 		<tr>
 			<th style="width:120px;"><?php echo $engine->_t('SysParameter');?></th>
-			<th class="t-left"></th>
 			<th class="t-left"><?php echo $engine->_t('SysValues');?></th>
 		</tr>
 <?php
@@ -72,7 +71,7 @@ function admin_system_info(&$engine, &$module)
 
 	// Sysinfo in array
 	$sysinfo['app_version']			= [$engine->_t('WackoVersion'), $engine->db->wacko_version];
-	$sysinfo['app_updated']			= [$engine->_t('LastWackoUpdate'), $engine->db->maint_last_update];
+	$sysinfo['app_updated']			= [$engine->_t('LastWackoUpdate'), $engine->sql2precisetime($engine->db->maint_last_update)];
 	$sysinfo['os']					= [$engine->_t('ServerOS'), PHP_OS . ' (' . @php_uname() . ')'];
 	$sysinfo['server_name']			= [$engine->_t('ServerName'), $_SERVER['SERVER_NAME']];
 	$sysinfo['server_software']		= [$engine->_t('WebServer'), $_SERVER['SERVER_SOFTWARE']];
@@ -97,12 +96,11 @@ function admin_system_info(&$engine, &$module)
 
 	foreach ($sysinfo as $param => $value)
 	{
-		echo '<tr>' .
+		echo
+			'<tr>' .
 				'<td class="label"><strong>' . $value[0] . '</strong></td>' .
-				'<td> </td>' .
 				'<td>' . $value[1] . '</td>' .
-			#'<tr class="lined"><td colspan="5"></td></tr>' .
-			"\n";
+			'</tr>' . "\n";
 	}
 ?>
 	</table>

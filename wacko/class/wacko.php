@@ -2472,7 +2472,7 @@ class Wacko
 		$subject	=	$this->_t('NewPageOwnership');
 		// STS TODO ou, pure shit message!
 		$body		=	Ut::perc_replace($this->_t('YouAreNewOwner'), $this->get_user_name()) . "\n\n" .
-						$user['owned'] . "\n" .
+						$user['owned_page'] . "\n" .
 						$this->_t('PageOwnershipInfo') . "\n";
 
 		$this->send_user_email($user, $subject, $body);

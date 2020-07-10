@@ -51,7 +51,7 @@ if (@$_POST['_action'] === 'set_permissions')
 		}
 
 		// where we collect new pages for emailing to user
-		$new_owner['owned'] = '';
+		$new_owner['owned_page'] = '';
 	}
 	else
 	{
@@ -124,7 +124,7 @@ if (@$_POST['_action'] === 'set_permissions')
 				"WHERE page_id = " . (int) $pid . " " .
 				"LIMIT 1");
 
-			$new_owner['owned'] .= $this->href('', $page['tag']) . "\n";
+			$new_owner['owned_page'] .= $this->href('', $page['tag'], null, null, null, null, true, true) . "\n";
 
 			// log event
 			$this->log(2, Ut::perc_replace($this->_t('LogOwnershipChanged', SYSTEM_LANG),
@@ -158,7 +158,7 @@ if (@$_POST['_action'] === 'set_permissions')
 
 	$message = $this->_t('AclUpdated');
 
-	if ($new_owner && $new_owner['owned'])
+	if ($new_owner && $new_owner['owned_page'])
 	{
 		if ($this->db->enable_email
 			&& $this->db->enable_email_notification
