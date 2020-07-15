@@ -10,7 +10,7 @@
  * @author		Miguel Vazquez Gocobachi <demrit@mx.gnu.org>
  * @copyright	2004-2020 Roman Ivanov, Miguel Vazquez Gocobachi, WackoWiki Team
  * @license		http://www.debian.org/misc/bsd.license  BSD License (3 Clause)
- * @version		1.3.20
+ * @version		1.3.12
  * @link		https://wackowiki.org/doc/Dev/Projects/SafeHTML
  */
 
