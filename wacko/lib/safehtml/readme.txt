@@ -1,6 +1,6 @@
 SafeHTML
 --------
-Version 1.3.11.
+Version 1.3.12.
 https://wackowiki.org/doc/Dev/Projects/SafeHTML
 --------
 
@@ -30,8 +30,11 @@ when SAFEHTML will be updated.
 --------
 Version history:
 --------
+1.3.12
+ * added missing HTML5 tag terminators for paragraph
+ * removed obsolete and deprecated HTML elements
 1.3.11.
- * added HTML5 Block-level elements
+ * added new HTML5 Block-level elements
 1.3.10.
  * Replaced preg_replace() e modifier with preg_replace_callback
 1.3.9.

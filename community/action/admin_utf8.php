@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 /*
  * status: stable
  * https://wackowiki.org/doc/Dev/Release/R6.0/Upgrade/DatabaseConversion
- * modify the script for your needs, please conribute your improvements
+ * modify the script for your needs, please contribute your improvements
  *
  * place the script under action/admin_utf8.php
  * call the action via {{admin_utf8}} as Administrator
@@ -315,7 +315,7 @@ if ($this->is_admin())
 
 					#echo $category_name . '<br>';
 
-					// update catagory
+					// update category
 					mysqli_query($dblink,
 						"UPDATE {$prefix}category SET " .
 							"category				= " . $this->db->q($category_name) . ", " .
@@ -597,7 +597,7 @@ if ($this->is_admin())
 	else if (isset($_POST['reset_text_column']))
 	{
 		/*
-		 * tables having converted to utf8mb4 auto upsized the TEXT columns to avoid unsufficient storage
+		 * tables having converted to utf8mb4 auto upsized the TEXT columns to avoid insufficient storage
 		 *		TEXT -> MEDIUMTEXT -> LONGTEXT
 		 * most of these columns store Latin1 strings and do not require that storage size, set them back to default size
 		 *		LONGTEXT -> MEDIUMTEXT -> TEXT
