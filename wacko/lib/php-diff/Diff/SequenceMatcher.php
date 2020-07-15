@@ -13,10 +13,11 @@ use InvalidArgumentException;
  *
  * @package jblond\Diff
  * @author Chris Boulton <chris.boulton@interspire.com>
+ * @author Mario Brandt <leet31337@web.de>
  * @author Ferry Cools <info@DigiLive.nl>
  * @copyright (c) 2009 Chris Boulton
  * @license New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version 1.17
+ * @version 2.0.0
  * @link https://github.com/JBlond/php-diff
  */
 class SequenceMatcher
@@ -235,36 +236,36 @@ class SequenceMatcher
      * that the junk element appears in the block. Extend it as far as possible
      * by matching only junk elements in both $a and $b.
      *
-     * @param int $alo The lower constraint for the first sequence.
-     * @param int $ahi The upper constraint for the first sequence.
-     * @param int $blo The lower constraint for the second sequence.
-     * @param int $bhi The upper constraint for the second sequence.
+     * @param int $aLower The lower constraint for the first sequence.
+     * @param int $aUpper The upper constraint for the first sequence.
+     * @param int $bLower The lower constraint for the second sequence.
+     * @param int $bUpper The upper constraint for the second sequence.
      * @return array Array containing the longest match that includes the starting position in $a,
      * start in $b and the length/size.
      */
-    public function findLongestMatch(int $alo, int $ahi, int $blo, int $bhi): array
+    public function findLongestMatch(int $aLower, int $aUpper, int $bLower, int $bUpper): array
     {
         $old = $this->old;
         $new = $this->new;
 
-        $bestI = $alo;
-        $bestJ = $blo;
+        $bestI = $aLower;
+        $bestJ = $bLower;
         $bestSize = 0;
 
         $j2Len = [];
         $nothing = [];
 
-        for ($i = $alo; $i < $ahi; ++$i) {
+        for ($i = $aLower; $i < $aUpper; ++$i) {
             $newJ2Len = [];
-            $jDict = $this->arrayGetDefault($this->b2j, $old[$i], $nothing);
+            $jDict = $this->b2j[$old[$i]] ?? $nothing;
             foreach ($jDict as $j) {
-                if ($j < $blo) {
+                if ($j < $bLower) {
                     continue;
-                } elseif ($j >= $bhi) {
+                } elseif ($j >= $bUpper) {
                     break;
                 }
 
-                $k = $this->arrayGetDefault($j2Len, $j - 1, 0) + 1;
+                $k = ($j2Len[$j - 1] ?? 0) + 1;
                 $newJ2Len[$j] = $k;
                 if ($k > $bestSize) {
                     $bestI = $i - $k + 1;
@@ -277,8 +278,8 @@ class SequenceMatcher
         }
 
         while (
-            $bestI > $alo &&
-            $bestJ > $blo &&
+            $bestI > $aLower &&
+            $bestJ > $bLower &&
             !$this->isBJunk($new[$bestJ - 1]) &&
             !$this->linesAreDifferent($bestI - 1, $bestJ - 1)
         ) {
@@ -288,8 +289,8 @@ class SequenceMatcher
         }
 
         while (
-            $bestI + $bestSize < $ahi &&
-            ($bestJ + $bestSize) < $bhi &&
+            $bestI + $bestSize < $aUpper &&
+            ($bestJ + $bestSize) < $bUpper &&
             !$this->isBJunk($new[$bestJ + $bestSize]) &&
             !$this->linesAreDifferent($bestI + $bestSize, $bestJ + $bestSize)
         ) {
@@ -297,8 +298,8 @@ class SequenceMatcher
         }
 
         while (
-            $bestI > $alo &&
-            $bestJ > $blo &&
+            $bestI > $aLower &&
+            $bestJ > $bLower &&
             $this->isBJunk($new[$bestJ - 1]) &&
             !$this->linesAreDifferent($bestI - 1, $bestJ - 1)
         ) {
@@ -308,8 +309,8 @@ class SequenceMatcher
         }
 
         while (
-            $bestI + $bestSize < $ahi &&
-            $bestJ + $bestSize < $bhi &&
+            $bestI + $bestSize < $aUpper &&
+            $bestJ + $bestSize < $bUpper &&
             $this->isBJunk($new[$bestJ + $bestSize]) &&
             !$this->linesAreDifferent($bestI + $bestSize, $bestJ + $bestSize)
         ) {
@@ -383,26 +384,26 @@ class SequenceMatcher
 
         $matchingBlocks = [];
         while (!empty($queue)) {
-            [$alo, $ahi, $blo, $bhi] = array_pop($queue);
-            $longestMatch = $this->findLongestMatch($alo, $ahi, $blo, $bhi);
+            [$aLower, $aUpper, $bLower, $bUpper] = array_pop($queue);
+            $longestMatch = $this->findLongestMatch($aLower, $aUpper, $bLower, $bUpper);
             [$list1, $list2, $list3] = $longestMatch;
             if ($list3) {
                 $matchingBlocks[] = $longestMatch;
-                if ($alo < $list1 && $blo < $list2) {
+                if ($aLower < $list1 && $bLower < $list2) {
                     $queue[] = [
-                        $alo,
+                        $aLower,
                         $list1,
-                        $blo,
+                        $bLower,
                         $list2
                     ];
                 }
 
-                if ($list1 + $list3 < $ahi && $list2 + $list3 < $bhi) {
+                if ($list1 + $list3 < $aUpper && $list2 + $list3 < $bUpper) {
                     $queue[] = [
                         $list1 + $list3,
-                        $ahi,
+                        $aUpper,
                         $list2 + $list3,
-                        $bhi
+                        $bUpper
                     ];
                 }
             }
@@ -411,7 +412,7 @@ class SequenceMatcher
         usort(
             $matchingBlocks,
             function ($aArray, $bArray) {
-                return $this->tupleSort($aArray, $bArray);
+                return DiffUtils::tupleSort($aArray, $bArray);
             }
         );
 
@@ -566,14 +567,14 @@ class SequenceMatcher
 
             $lastItem = count($opCodes) - 1;
             if ($opCodes[$lastItem]['0'] == 'equal') {
-                [$tag, $i1, $i2, $j1, $j2] = $opCodes[$lastItem];
+                [$tag, $item1, $item2, $item3, $item4] = $opCodes[$lastItem];
                 // Remove sequences at the end which are out of context.
                 $opCodes[$lastItem] = [
                     $tag,
-                    $i1,
-                    min($i2, $i1 + $this->options['context']),
-                    $j1,
-                    min($j2, $j1 + $this->options['context'])
+                    $item1,
+                    min($item2, $item1 + $this->options['context']),
+                    $item3,
+                    min($item4, $item3 + $this->options['context'])
                 ];
             }
         }
@@ -582,27 +583,27 @@ class SequenceMatcher
         $groups = [];
         $group = [];
 
-        foreach ($opCodes as [$tag, $i1, $i2, $j1, $j2]) {
-            if ($tag == 'equal' && $i2 - $i1 > $maxRange) {
+        foreach ($opCodes as [$tag, $item1, $item2, $item3, $item4]) {
+            if ($tag == 'equal' && $item2 - $item1 > $maxRange) {
                 $group[] = [
                     $tag,
-                    $i1,
-                    min($i2, $i1 + $this->options['context']),
-                    $j1,
-                    min($j2, $j1 + $this->options['context'])
+                    $item1,
+                    min($item2, $item1 + $this->options['context']),
+                    $item3,
+                    min($item4, $item3 + $this->options['context'])
                 ];
                 $groups[] = $group;
                 $group = [];
-                $i1 = max($i1, $i2 - $this->options['context']);
-                $j1 = max($j1, $j2 - $this->options['context']);
+                $item1 = max($item1, $item2 - $this->options['context']);
+                $item3 = max($item3, $item4 - $this->options['context']);
             }
 
             $group[] = [
                 $tag,
-                $i1,
-                $i2,
-                $j1,
-                $j2
+                $item1,
+                $item2,
+                $item3,
+                $item4
             ];
         }
 
@@ -612,50 +613,5 @@ class SequenceMatcher
         }
 
         return $groups;
-    }
-
-    /**
-     * Helper function that provides the ability to return the value for a key
-     * in an array of it exists, or if it doesn't then return a default value.
-     * Essentially cleaner than doing a series of if (isset()) {} else {} calls.
-     *
-     * @param array $array The array to search.
-     * @param string|int $key The key to check that exists.
-     * @param mixed $default The value to return as the default value if the key doesn't exist.
-     * @return mixed The value from the array if the key exists or otherwise the default.
-     */
-    private function arrayGetDefault(array $array, $key, $default)
-    {
-        if (isset($array[$key])) {
-            return $array[$key];
-        }
-        return $default;
-    }
-
-    /**
-     * Sort an array by the nested arrays it contains. Helper function for getMatchingBlocks
-     *
-     * @param array $aArray First array to compare.
-     * @param array $bArray Second array to compare.
-     * @return int -1, 0 or 1, as expected by the usort function.
-     */
-    private function tupleSort(array $aArray, array $bArray): int
-    {
-        $max = max(count($aArray), count($bArray));
-        for ($counter = 0; $counter < $max; ++$counter) {
-            if ($aArray[$counter] < $bArray[$counter]) {
-                return -1;
-            } elseif ($aArray[$counter] > $bArray[$counter]) {
-                return 1;
-            }
-        }
-
-        if (count($aArray) == count($bArray)) {
-            return 0;
-        }
-        if (count($aArray) < count($bArray)) {
-            return -1;
-        }
-        return 1;
     }
 }
