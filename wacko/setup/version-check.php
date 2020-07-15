@@ -166,7 +166,7 @@ write_config_hidden_nodes(['none' => '']);
 	$file_permissions_result = true;
 
 	// If the cache directory is writable then we can enable caching as default
-	echo '			<input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
+	echo '<input type="hidden" name="config[cache]" value="' . (is_writable(CACHE_PAGE_DIR) ? '1' : $config['cache']) . '">' . "\n";
 	?>
 <h2><?php echo $lang['Permissions']; ?></h2>
 <ul>

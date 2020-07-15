@@ -36,7 +36,7 @@ function write_config_hidden_nodes($skip_values)
 				$value = implode(',', $value);
 			}
 
-			echo '   <input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
+			echo '<input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
 		}
 	}
 }
@@ -58,7 +58,7 @@ function output_image($ok)
 // site config
 function available_languages()
 {
-	$lang_list	= [];
+	$lang_list = [];
 
 	if ($handle = opendir('lang'))
 	{
@@ -88,20 +88,20 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	global $lang;
 	global $config;
 
-	echo "            <li>" . $text."   ".output_image($condition);
+	echo '<li>' . $text . '   ' . output_image($condition);
 
 	if (!$condition)
 	{
 		if ($error_text)
 		{
-			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . " <br>";
+			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . '<br>';
 
 			if ($config['database_driver'] == 'mysqli_legacy')
 			{
 				$error_output .= mysqli_error($dblink);
 			}
 
-			$error_output .= "</li></ul>";
+			$error_output .= '</li></ul>';
 			echo $error_output;
 		}
 
@@ -168,7 +168,7 @@ insert default pages, all related acls and menu item
 	$lang		=
 	$rights		=
 	$critical	=
-	$is_menu	=
+	$set_menu	=
 	$menu_title	=
 	$noindex	=
 */
@@ -176,31 +176,32 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 {
 	global $config_global, $dblink_global, $lang_global;
 
-	$prefix					= $config_global['table_prefix'];
-	$page_select			= "SELECT page_id FROM " . $prefix . "page WHERE tag='" . $tag . "'";
-	$owner_id				= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
-	$page_id				= "SELECT page_id FROM " . $prefix . "page WHERE tag = '" . $tag . "' LIMIT 1";
+	$prefix				= $config_global['table_prefix'];
+	$page_select		= "SELECT page_id FROM " . $prefix . "page WHERE tag='" . _quote($tag) . "'";
+	$owner_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
+	$page_id			= "SELECT page_id FROM " . $prefix . "page WHERE tag = '" . _quote($tag) . "' LIMIT 1";
 
 	if ($set_menu != SET_MENU_ONLY)
 	{
 		// user_id for user 'System'
 		// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
-		$page_insert			= "INSERT INTO " .
-										$prefix . "page (tag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex)
-									VALUES
-										('" . _quote($tag) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
+		// the additional parentheses around $owner_id and $page_id are necessary for the sub-select queries
+		$page_insert		= "INSERT INTO " .
+									$prefix . "page (tag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex)
+								VALUES
+									('" . _quote($tag) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
 
-		$perm_insert			= "INSERT INTO " .
-										$prefix . "acl (page_id, privilege, list)
-									VALUES
-										((" . $page_id . "), 'read',		'*'),
-										((" . $page_id . "), 'write',		'" . $rights . "'),
-										((" . $page_id . "), 'comment',		'$'),
-										((" . $page_id . "), 'create',		'$'),
-										((" . $page_id . "), 'upload',		'')";
+		$perm_insert		= "INSERT INTO " .
+									$prefix . "acl (page_id, privilege, list)
+								VALUES
+									((" . $page_id . "), 'read',		'*'),
+									((" . $page_id . "), 'write',		'" . _quote($rights) . "'),
+									((" . $page_id . "), 'comment',		'$'),
+									((" . $page_id . "), 'create',		'$'),
+									((" . $page_id . "), 'upload',		'')";
 
-		$insert_data[]			= [$page_insert,			$lang_global['ErrorInsertingPage']];
-		$insert_data[]			= [$perm_insert,			$lang_global['ErrorInsertingPagePermission']];
+		$insert_data[]		= [$page_insert,	$lang_global['ErrorInsertingPage']];
+		$insert_data[]		= [$perm_insert,	$lang_global['ErrorInsertingPagePermission']];
 	}
 
 	$default_menu_item		= "INSERT INTO " .
@@ -212,7 +213,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 	if ($set_menu)
 	{
-		$insert_data[]		= [$default_menu_item,		$lang_global['ErrorInsertingDefaultMenuItem']];
+		$insert_data[]		= [$default_menu_item,	$lang_global['ErrorInsertingDefaultMenuItem']];
 	}
 
 	switch ($config_global['database_driver'])

@@ -63,7 +63,7 @@ $lang_codes['ru'] = 'Русский';
 
 foreach($lang_codes as $key => $value)
 {
-	echo '   <input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';
+	echo '<input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';
 
 	// Default or Selected Language
 	if (isset($_POST['config']['language']))

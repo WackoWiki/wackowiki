@@ -3,12 +3,12 @@
 @ignore_user_abort(true);
 
 // test configuration
-echo "         <h2>" . $lang['TestingConfiguration'] . "</h2>\n";
+echo '<h2>' . $lang['TestingConfiguration'] . '</h2>' . "\n";
 
-$delete_table			= [];
-$create_table			= [];
-$insert_records			= [];
-$upgrade				= [];
+$delete_table		= [];
+$create_table		= [];
+$insert_records		= [];
+$upgrade			= [];
 
 $upgrade_msg = [
 	'alter' => [
@@ -91,7 +91,7 @@ switch ($config['database_driver'])
 		if (!isset($config['database_port']))			$config['database_port']	= '3306';
 		if (!$port = trim($config['database_port']))	$port						= '3306';
 
-		echo "         <ul>\n";
+		echo '<ul>' . "\n";
 
 		if (!test(
 			$lang['TestConnectionString'],
@@ -103,8 +103,8 @@ switch ($config['database_driver'])
 			 There was a problem with the connection string
 			 */
 
-			echo "         </ul>\n";
-			echo "         <br>\n";
+			echo '</ul>' . "\n";
+			echo '<br>' . "\n";
 
 			$fatal_error = true;
 		}
@@ -114,8 +114,8 @@ switch ($config['database_driver'])
 			 There was a problem with the specified database name
 			 */
 
-			echo "         </ul>\n";
-			echo "         <br>\n";
+			echo '</ul>' . "\n";
+			echo '<br>' . "\n";
 
 			$fatal_error = true;
 		}
@@ -132,9 +132,9 @@ switch ($config['database_driver'])
 			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
 
 			// check min database version
-			$_db_version		= mysqli_query($dblink, "SELECT version()");
-			$_db_version		= mysqli_fetch_assoc($_db_version);
-			$db_version			= $_db_version['version()'];
+			$_db_version	= mysqli_query($dblink, "SELECT version()");
+			$_db_version	= mysqli_fetch_assoc($_db_version);
+			$db_version		= $_db_version['version()'];
 
 			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 				? DB_MIN_VERSION['mariadb']
@@ -164,8 +164,8 @@ switch ($config['database_driver'])
 
 			$fatal_error = $valid_db_version ? false : true;
 
-			echo "         </ul>\n";
-			echo "         <br>\n";
+			echo '</ul>' . "\n";
+			echo '<br>' . "\n";
 
 			if (!$fatal_error)
 			{
@@ -176,8 +176,8 @@ switch ($config['database_driver'])
 
 				if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 				{
-					echo "<h2>" . $lang['DeletingTables'] . "</h2>\n";
-					echo "            <ol>\n";
+					echo '<h2>' . $lang['DeletingTables'] . '</h2>' . "\n";
+					echo '<ol>' . "\n";
 
 					foreach ($delete_table as $value)
 					{
@@ -193,9 +193,9 @@ switch ($config['database_driver'])
 						echo '</pre>'; */
 					}
 
-					echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
-					echo "         </ol>\n";
-					echo "         <br>\n";
+					echo '<li>' . $lang['DeletingTablesEnd'] . '</li>' . "\n";
+					echo '</ol>' . "\n";
+					echo '<br>' . "\n";
 
 					$version = 0;
 				}
@@ -205,8 +205,8 @@ switch ($config['database_driver'])
 					// new installation
 					if ($version == '0')
 					{
-						echo "         <h2>" . $lang['InstallingTables'] . "</h2>\n";
-						echo "         <ol>\n";
+						echo '<h2>' . $lang['InstallingTables'] . '</h2>' . "\n";
+						echo '<ol>' . "\n";
 
 						foreach ($create_table as $value)
 						{
@@ -235,7 +235,7 @@ switch ($config['database_driver'])
 							$dblink
 						);
 
-						echo "            </ol>\n";
+						echo '</ol>' . "\n";
 					}
 					else
 					{
@@ -246,8 +246,8 @@ switch ($config['database_driver'])
 						{
 							if (version_compare($version, $to_version, '<='))
 							{
-								echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " " . WACKO_VERSION . "</h2>\n";
-								echo "         <ol>\n";
+								echo '<h2>Wacko ' . $to_version . ' ' . $lang['To'] . ' ' . WACKO_VERSION . '</h2>' . "\n";
+								echo '<ol>' . "\n";
 
 								foreach ($upgrade[$to_version] as $value)
 								{
@@ -259,14 +259,14 @@ switch ($config['database_driver'])
 									);
 								}
 
-								echo "            </ol>\n";
+								echo '</ol>' . "\n";
 							}
 						}
 					}
 
-					echo "         <br>\n";
-					echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
-					echo "         <ul>\n";
+					echo '<br>' . "\n";
+					echo '<h2>' . $lang['InstallingDefaultData'] . '</h2>' . "\n";
+					echo '<ul>' . "\n";
 
 					// inserting config values
 					test(
@@ -276,11 +276,11 @@ switch ($config['database_driver'])
 						$dblink
 					);
 
-					echo "            <li>" . $lang['InstallingPagesBegin'];
+					echo '<li>' . $lang['InstallingPagesBegin'];
 					require_once 'setup/insert_pages.php';
-					echo "</li>\n";
-					echo "            <li>" . $lang['InstallingPagesEnd'] . "</li>\n";
-					echo "         </ul>\n";
+					echo '</li>' . "\n";
+					echo '<li>' . $lang['InstallingPagesEnd'] . '</li>' . "\n";
+					echo '</ul>' . "\n";
 				}
 			}
 		}
@@ -302,7 +302,7 @@ switch ($config['database_driver'])
 				break; */
 		}
 
-		echo "         <ul>\n";
+		echo '<ul>' . "\n";
 
 		global $dblink;
 
@@ -322,9 +322,9 @@ switch ($config['database_driver'])
 		$dblink->query("SET SESSION sql_mode='$sql_modes'");
 
 		// check min database version
-		$_db_version		= $dblink->query("SELECT version()");
-		$_db_version		= $_db_version->fetch(PDO::FETCH_ASSOC);
-		$db_version			= $_db_version['version()'];
+		$_db_version	= $dblink->query("SELECT version()");
+		$_db_version	= $_db_version->fetch(PDO::FETCH_ASSOC);
+		$db_version		= $_db_version['version()'];
 
 		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 			? DB_MIN_VERSION['mariadb']
@@ -354,8 +354,8 @@ switch ($config['database_driver'])
 
 		$fatal_error = $valid_db_version ? false : true;
 
-		echo "         </ul>\n";
-		echo "         <br>\n";
+		echo '</ul>' . "\n";
+		echo '<br>' . "\n";
 
 		if (!$fatal_error)
 		{
@@ -366,8 +366,8 @@ switch ($config['database_driver'])
 
 			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				echo "<h2>" . $lang['DeletingTables'] . "</h2>\n";
-				echo "            <ol>\n";
+				echo '<h2>' . $lang['DeletingTables'] . '</h2>' . "\n";
+				echo '<ol>' . "\n";
 
 				foreach ($delete_table as $value)
 				{
@@ -378,9 +378,9 @@ switch ($config['database_driver'])
 					);
 				}
 
-				echo "            <li>" . $lang['DeletingTablesEnd'] . "</li>\n";
-				echo "         </ol>\n";
-				echo "         <br>\n";
+				echo '<li>' . $lang['DeletingTablesEnd'] . '</li>' . "\n";
+				echo '</ol>' . "\n";
+				echo '<br>' . "\n";
 
 				$version = 0;
 			}
@@ -390,8 +390,8 @@ switch ($config['database_driver'])
 				// new installation
 				if ($version == '0')
 				{
-					echo "         <h2>" . $lang['InstallingTables'] . "</h2>\n";
-					echo "         <ol>\n";
+					echo '<h2>' . $lang['InstallingTables'] . '</h2>' . "\n";
+					echo '<ol>' . "\n";
 
 					foreach ($create_table as $value)
 					{
@@ -417,7 +417,7 @@ switch ($config['database_driver'])
 						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
 					);
 
-					echo "            </ol>\n";
+					echo '</ol>' . "\n";
 				}
 				else
 				{
@@ -428,8 +428,8 @@ switch ($config['database_driver'])
 					{
 						if (version_compare($version, $to_version, '<='))
 						{
-							echo "         <h2>Wacko " . $to_version." " . $lang['To'] . " " . WACKO_VERSION . "</h2>\n";
-							echo "         <ol>\n";
+							echo '<h2>Wacko ' . $to_version . ' ' . $lang['To'] . ' ' . WACKO_VERSION . '</h2>' . "\n";
+							echo '<ol>' . "\n";
 
 							foreach ($upgrade[$to_version] as $value)
 							{
@@ -440,14 +440,14 @@ switch ($config['database_driver'])
 								);
 							}
 
-							echo "            </ol>\n";
+							echo '</ol>' . "\n";
 						}
 					}
 				}
 
-				echo "         <br>\n";
-				echo "         <h2>" . $lang['InstallingDefaultData'] . "</h2>\n";
-				echo "         <ul>\n";
+				echo '<br>' . "\n";
+				echo '<h2>' . $lang['InstallingDefaultData'] . '</h2>' . "\n";
+				echo '<ul>' . "\n";
 
 				// inserting config values
 				test_pdo(
@@ -456,11 +456,11 @@ switch ($config['database_driver'])
 					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
 				);
 
-				echo "            <li>" . $lang['InstallingPagesBegin'];
+				echo '<li>' . $lang['InstallingPagesBegin'];
 				require_once 'setup/insert_pages.php';
-				echo "</li>\n";
-				echo "            <li>" . $lang['InstallingPagesEnd'] . "</li>\n";
-				echo "         </ul>\n";
+				echo '</li>' . "\n";
+				echo '<li>' . $lang['InstallingPagesEnd'] . '</li>' . "\n";
+				echo '</ul>' . "\n";
 			}
 		}
 

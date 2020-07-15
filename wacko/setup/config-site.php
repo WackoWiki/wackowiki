@@ -42,8 +42,8 @@ write_config_hidden_nodes([
 	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['site_name']; ?>" class="text_input" required>
 <?php
 if ($config['is_update'] == false)
-{?>
-<?php echo $separator; ?>
+{
+	echo $separator; ?>
 	<label class="label_top" for="root_page"><?php echo $lang['HomePage'];?></label>
 	<p class="notop"><?php echo $lang['HomePageDesc'];?></p>
 	<input type="text" maxlength="250" id="root_page" name="config[root_page]" value="<?php echo $lang['HomePageDefault'] ?? $config['root_page']; ?>" class="text_input" required>
@@ -54,8 +54,8 @@ else
 {
 	echo '<input type="hidden" value="' . $config['root_page'] . '" name="config[root_page]">';
 }
-?>
-<?php echo $separator; ?>
+
+	echo $separator; ?>
 
 	<h2><?php echo $lang['MultiLang'];?></h2>
 	<p class="notop"><?php echo $lang['MultiLangDesc'];?></p>
@@ -112,8 +112,9 @@ foreach ($langs as $_lang)
 echo "\t</tr>\n</table>\n";
 
 if ($config['is_update'] == false)
-{?>
-<?php echo $separator; ?>
+{
+	echo $separator; ?>
+
 	<label class="label_top" for="admin_nam"><?php echo $lang['Admin'];?></label>
 	<p class="notop"><?php echo $lang['AdminDesc'];?></p>
 	<input type="text" minlength="<?php echo $config['username_chars_min'] ?>"  maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php if (isset($config['admin_name'])) echo $config['admin_name']; ?>" class="text_input" required>
@@ -137,8 +138,8 @@ else
 	echo '<input type="hidden" value="' . $config['admin_name'] . '" name="config[admin_name]">';
 	echo '<input type="hidden" value="' . $config['admin_email'] . '" name="config[admin_email]">';
 }
-?>
-<?php echo $separator; ?>
+
+	echo $separator; ?>
 
 	<label class="label_top" for="base_url"><?php echo $lang['Base'];?></label>
 	<p class="notop"><?php echo $lang['BaseDesc'];?></p>
