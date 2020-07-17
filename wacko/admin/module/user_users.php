@@ -402,7 +402,7 @@ function admin_user_users(&$engine, &$module)
 		echo '<h2>' . $engine->_t('UsersAddNew') . '</h2>';
 		echo '<table class="formation lined">' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="user_name">' . $engine->_t('UserName') . '</label>' .
 					'</th>
 					<td>
@@ -411,7 +411,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				/* '<tr>
-					<th>
+					<th class="label">
 						<label for="newrealname">' . $engine->_t('RealName') . '</label>' .
 					'</th>
 					<td>
@@ -420,7 +420,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>' . */
 
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="password">' . $engine->_t('RegistrationPassword') . '</label>' .
 					'</th>
 					<td>
@@ -428,7 +428,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="conf_password">' . $engine->_t('ConfirmPassword') . '</label>' .
 					'</th>
 					<td>
@@ -438,7 +438,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>' .
 
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="email">' . $engine->_t('Email') . '</label>
 					</th>' .
 					'<td>
@@ -446,7 +446,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
 					</th>' .
 					'<td>
@@ -466,7 +466,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 					</th>' .
 					'<td>
@@ -474,7 +474,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label>' . $engine->_t('UserAccountNotify') . '</label>
 					</th>' .
 					'<td>
@@ -511,7 +511,7 @@ function admin_user_users(&$engine, &$module)
 			echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">' . "\n" .
 				'<table class="formation lined">' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="user_name">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
 					</th>' .
 					'<td>
@@ -519,7 +519,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="newrealname">' . $engine->_t('RealName') . '</label> ' .
 					'</th>
 					<td>
@@ -527,7 +527,7 @@ function admin_user_users(&$engine, &$module)
 					</td>' .
 				'</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="newemail">' . $engine->_t('Email') . '</label> ' .
 					'</th>
 					<td>
@@ -535,7 +535,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
 					</th>
 					<td>
@@ -556,7 +556,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="theme">' . $engine->_t('ChooseTheme') . '</label>
 					</th>
 					<td>
@@ -573,7 +573,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
 					</th>' .
 					'<td>
@@ -581,7 +581,7 @@ function admin_user_users(&$engine, &$module)
 					</td>
 				</tr>' .
 				'<tr>
-					<th>
+					<th class="label">
 						<label for="account_status">' . $engine->_t('AccountStatus') . '</label>
 					</th>
 					<td>
