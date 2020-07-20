@@ -4,26 +4,26 @@ declare(strict_types=1);
 
 namespace PHPDiff\Diff\Renderer\Text;
 
-use PHPDiff\Diff\Renderer\RendererAbstract;
+use PHPDiff\Diff\Renderer\MainRendererAbstract;
 
 /**
  * Unified diff generator for PHP DiffLib.
  *
  * PHP version 7.2 or greater
  *
- * @package  jblond\Diff\Renderer\Text
- * @author Chris Boulton <chris.boulton@interspire.com>
- * @author Mario Brandt <leet31337@web.de>
- * @copyright (c) 2009 Chris Boulton
- * @license New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version 2.0.0
- * @link https://github.com/JBlond/php-diff
+ * @package     jblond\Diff\Renderer\Text
+ * @author      Chris Boulton <chris.boulton@interspire.com>
+ * @author      Mario Brandt <leet31337@web.de>
+ * @copyright   (c) 2020 Mario Brandt
+ * @license     New BSD License http://www.opensource.org/licenses/bsd-license.php
+ * @version     2.1.1
+ * @link        https://github.com/JBlond/php-diff
  */
 
 /**
  * Class Diff_Renderer_Text_Unified
  */
-class Unified extends RendererAbstract
+class Unified extends MainRendererAbstract
 {
     /**
      * Render and return a unified diff.
