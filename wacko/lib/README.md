@@ -17,7 +17,7 @@ The version and status of each is summarized below:
 | simplepie			| SimplePie			| 1.5.5		| unpatched |
 | text_highlighter	| Text_Highlighter	| 0.8.0		| patched: various, see repo |
 | hashids			| Hashids			| 4.0.0		| unpatched |
-| php-diff			| php-diff			| 2.1.0		| patched, see subdir |
+| php-diff			| php-diff			| 2.1.1		| patched, see subdir |
 
 ## Javascript libraries
 
