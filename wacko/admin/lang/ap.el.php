@@ -597,7 +597,7 @@ $ap_translation = [
 
 	'FormsSection'				=> 'Forms',
 	'FormTokenTime'				=> 'Maximum time to submit forms',
-	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in seconds).<br> Note that a form might become invalid if the session expires, regardless of this setting.',
+	'FormTokenTimeInfo'			=> 'Η ώρα που ο χρήστης πρέπει να υποβάλει μια φόρμα (σε δευτερόλεπτα). <br> Λάβετε υπόψη ότι μια φόρμα ενδέχεται να καταστεί άκυρη εάν λήξει η περίοδος σύνδεσης, ανεξάρτητα από αυτήν τη ρύθμιση.',
 
 	'SessionLength'				=> 'Term login cookie',
 	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
