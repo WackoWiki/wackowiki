@@ -4898,9 +4898,7 @@ class Wacko
 							// do not cache pages with nonces!
 							$this->http->no_cache(false);
 
-							$nonce = $this->sess->create_nonce($action,
-								(($this->db->form_token_time == -1)? 1000000 : max(30, $this->db->form_token_time)));
-								// STS remove -1 from setup
+							$nonce = $this->sess->create_nonce($action, max(30, $this->db->form_token_time));
 
 							return
 								'<input type="hidden" name="_nonce" value="' . $nonce . '">' . "\n" .
