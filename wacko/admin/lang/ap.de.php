@@ -605,7 +605,7 @@ $ap_translation = [
 
 	'FormsSection'				=> 'Formulare',
 	'FormTokenTime'				=> 'Maximale Zeit für die Übermittlung von Formularen',
-	'FormTokenTimeInfo'			=> 'Die Zeit, die ein Benutzer für das Senden eines Formulares hat (in Sekunden).<br> Verwende -1 zum Deaktivieren. Beachte: Ein Formular wird unabhängig von dieser Einstellung ungültig, wenn die Sitzung (Session) abläuft.',
+	'FormTokenTimeInfo'			=> 'Die Zeit, die ein Benutzer für das Senden eines Formulares hat (in Sekunden).<br> Beachte: Ein Formular wird unabhängig von dieser Einstellung ungültig, wenn die Sitzung (Session) abläuft.',
 
 	'SessionLength'				=> 'Aufbewahrungsdauer Login-Cookie',
 	'SessionLengthInfo'			=> 'Die standardmäßige Lebensdauer des Anmelde-Cookies von Benutzern (in Tagen).',

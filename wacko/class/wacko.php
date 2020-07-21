@@ -139,7 +139,7 @@ class Wacko
 	{
 		if (!$tag)
 		{
-			return $this->page['page_id'];
+			return (int) $this->page['page_id'];
 		}
 		else
 		{
@@ -161,7 +161,7 @@ class Wacko
 				$page_id = $this->page_id_cache[$tag];
 			}
 
-			return $page_id;
+			return (int) $page_id;
 		}
 	}
 
@@ -356,7 +356,7 @@ class Wacko
 
 	function sql2localtime($text)
 	{
-		return $this->db->is_null_date($text)? 0 : $this->utc2localtime(strtotime($text));
+		return $this->db->is_null_date($text)? 0 : (int) $this->utc2localtime(strtotime($text));
 	}
 
 	function sql2datetime($text, &$date, &$time)
@@ -4777,9 +4777,8 @@ class Wacko
 			// do not cache pages with nonces!
 			$this->http->no_cache(false);
 
-			$nonce = $this->sess->create_nonce($form_name,
-				(($this->db->form_token_time == -1)? 1000000 : max(30, $this->db->form_token_time)));
-				// STS remove -1 from setup
+			// we enforce a minimum value of 30 seconds
+			$nonce = $this->sess->create_nonce($form_name, max(30, $this->db->form_token_time));
 
 			$result .=
 				'<input type="hidden" name="_nonce" value="' . $nonce . '">' . "\n" .
@@ -4887,10 +4886,12 @@ class Wacko
 				if (@file_exists($__tpl))
 				{
 					$tpl = Templatest::read($__tpl, CACHE_TEMPLATE_DIR);
-					$tpl->pull('_t', function ($block, $loc, $str) { return $this->_t($str); });
-					$tpl->pull('format_t', function ($block, $loc, $str) { return $this->format_t($str); });
-					$tpl->pull('db', function ($block, $loc, $str) { return $this->db[$str]; });
-					$tpl->pull('href', function ($block, $loc, $method = '', $param = '') { return $this->href($method, '', $param); });
+
+					// pull
+					$tpl->pull('_t',		function ($block, $loc, $str)						{ return $this->_t($str); });
+					$tpl->pull('format_t',	function ($block, $loc, $str)						{ return $this->format_t($str); });
+					$tpl->pull('db',		function ($block, $loc, $str)						{ return $this->db[$str]; });
+					$tpl->pull('href',		function ($block, $loc, $method = '', $param = '')	{ return $this->href($method, '', $param); });
 					$tpl->pull('csrf',
 						function ($block, $loc, $action)
 						{
@@ -4905,7 +4906,10 @@ class Wacko
 								'<input type="hidden" name="_nonce" value="' . $nonce . '">' . "\n" .
 								'<input type="hidden" name="_action" value="' . $action . '">' . "\n";
 						});
+
 					$tpl->setEncoding($this->charset);
+
+					// filter
 					$tpl->filter('time_formatted',
 						function ($value)
 						{
@@ -5276,7 +5280,7 @@ class Wacko
 			$max = $user_max;
 		}
 
-		return $max;
+		return (int) $max;
 	}
 
 	/*
@@ -5643,7 +5647,7 @@ class Wacko
 
 		if (($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
 		{
-			return $page['owner_id'];
+			return (int) $page['owner_id'];
 		}
 	}
 
@@ -5895,7 +5899,7 @@ class Wacko
 	{
 		if (!$user_name)
 		{
-			$user_name = mb_strtolower($this->get_user_name());
+			$user_name = mb_strtolower(($this->get_user_name() ?? ''));
 		}
 
 		if (!($page_id = (int) $page_id))

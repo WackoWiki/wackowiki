@@ -598,7 +598,7 @@ $ap_translation = [
 
 	'FormsSection'				=> 'Forms',
 	'FormTokenTime'				=> 'Maximum time to submit forms',
-	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in seconds).<br> Use -1 to disable. Note that a form might become invalid if the session expires, regardless of this setting.',
+	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in seconds).<br> Note that a form might become invalid if the session expires, regardless of this setting.',
 
 	'SessionLength'				=> 'Term login cookie',
 	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
