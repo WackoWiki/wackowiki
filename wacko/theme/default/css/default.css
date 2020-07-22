@@ -2113,12 +2113,12 @@ li.m-source img {
 }
 
 /* users action ------------- */
-.userprofile {
+.user-profile {
 	border-spacing: 3px; 
 	border-collapse: separate;
 }
 
-.userprofile th{
+.user-profile th{
 	color: #444444;
 	font-weight: bold;
 	width: 100px;
@@ -2126,6 +2126,12 @@ li.m-source img {
 	vertical-align: top;
 	padding-right: 20px;
 	text-align: left;
+}
+
+.user-table {
+	width: 100%; 
+	border-spacing: 3px; 
+	border-collapse: separate;
 }
 
 /* forum extension ******************************************* */

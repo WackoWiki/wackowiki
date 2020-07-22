@@ -36,7 +36,7 @@ first really BIG template written
 
 	[= prof _ =
 
-		<table class="userprofile lined">
+		<table class="user-profile lined">
 			<tr>
 				<th scope="row">[ ' _t: RealName ' ]</th>
 				<td>[ ' user.real_name | e ' ]</td>
@@ -98,9 +98,9 @@ first really BIG template written
 						=]
 						[= ic _ =
 							<tr>
-								<td class="label nowrap" style="width:50px;">[ ' _t: UsersIntercomSubject ' ]:</td>
-								<td>
-									<input type="text" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200">
+								<td colspan="2">
+									<label for="mail_subject">[ ' _t: UsersIntercomSubject ' ]:</label><br>
+									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200">
 									[= ref _ =
 										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
 									=]
@@ -217,9 +217,9 @@ first really BIG template written
 		</form>
 	=]
 	['' pagination '']
-	<table class="lined nowrap" style="width: 100%; padding-right: 20px;border-spacing: 3px;border-collapse: separate;">
+	<table class="user-table lined hl-line nowrap">
 		<colgroup>
-			<col span="1" style="padding-left: 5px;">
+			<col span="1">
 			<col span="1">
 			<col span="1">
 			<col span="1">
@@ -237,14 +237,14 @@ first really BIG template written
 		<tbody>
 		[= none _ =
 			<tr>
-				<td colspan="5" class="t-center" style="padding: 10px;">
+				<td colspan="5" class="t-center">
 					<small><em>[ ' _t: UsersNoMatching ' ]</em></small>
 				</td>
 			</tr>
 		=]
 		[= u _ =
 			<tr>
-				<td style="padding-left:5px;">[ ' link ' ]</td>
+				<td>[ ' link ' ]</td>
 				<td class="t-center">[ ' user.total_pages | number 0 , . ' ]</td>
 				<td class="t-center">[ ' user.total_comments | number 0 , . ' ]</td>
 				<td class="t-center">[ ' user.total_revisions | number 0 , . ' ]</td>

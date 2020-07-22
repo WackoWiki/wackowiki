@@ -7,7 +7,7 @@
 		<h1>[ ' group.group_name | e ' ]</h1>
 		<small><a href="[ ' link ' ]">« [ ' _t: GroupsList ' ]</a></small>
 		<h2>[ ' _t: GroupsProfile ' ]</h2>
-		<table class="userprofile lined">
+		<table class="user-profile lined">
 			<tr>
 				<th scope="row">[ ' _t: GroupsDescription ' ]</th>
 				<td>[ ' group.description | e ' ]</td>
@@ -40,7 +40,7 @@
 			</tr>
 		</table>
 		<br>
-		<table class="lined nowrap" style="width:100%; padding-right:20px;">
+		<table class="user-table lined hl-line nowrap">
 			['' pagination '']
 			<tr>
 				[= s _ =
@@ -48,11 +48,11 @@
 				=]
 			</tr>
 			[= none _ =
-				<tr><td colspan="5" class="t-center" style="padding:10px;"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
+				<tr><td colspan="5" class="t-center"><small><em>[ ' _t: GroupsNoMatching ' ]</em></small></td></tr>
 			=]
 			[= g _ =
 				<tr>
-					<td style="padding-left:5px;"><a href="[ ' profile ' ]">[ ' group.group_name | e ' ]</a></td>
+					<td><a href="[ ' profile ' ]">[ ' group.group_name | e ' ]</a></td>
 					<td class="t-center">[ ' group.members | e ' ]</td>
 					[= reg _ =
 						<td class="t-center">[ ' group.created | time_formatted ' ]</td>
