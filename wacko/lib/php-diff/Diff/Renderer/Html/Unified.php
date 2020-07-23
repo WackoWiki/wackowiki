@@ -18,7 +18,7 @@ use PHPDiff\Diff\Renderer\SubRendererInterface;
  * @author          Ferry Cools <info@DigiLive.nl>
  * @copyright   (c) 2009 Chris Boulton
  * @license         New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version         2.0.0
+ * @version         2.2.0
  * @link            https://github.com/JBlond/php-diff
  */
 class Unified extends MainRenderer implements SubRendererInterface
@@ -57,9 +57,9 @@ class Unified extends MainRenderer implements SubRendererInterface
     /**
      * Render a and return diff-view with changes between the two sequences (under each other).
      *
-     * @return string The generated unified diff-view.
+     * @return string|false The generated diff-view or false when there's no difference.
      */
-    public function render(): string
+    public function render()
     {
         $changes = parent::renderSequences();
 

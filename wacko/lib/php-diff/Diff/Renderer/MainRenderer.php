@@ -15,13 +15,13 @@ namespace PHPDiff\Diff\Renderer;
  * @author        Ferry Cools <info@DigiLive.nl>
  * @copyright (c) 2009 Chris Boulton
  * @license       New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version       2.0.0
+ * @version       2.2.0
  * @link          https://github.com/JBlond/php-diff
  */
 class MainRenderer extends MainRendererAbstract
 {
     /**
-     * @var int
+     * @var int Character count of the line marker with the most characters.
      */
     protected $maxLineMarkerWidth = 0;
     /**
@@ -31,20 +31,20 @@ class MainRenderer extends MainRendererAbstract
     private $lastTag;
 
     /**
-     * Generate a string representation of changes between the "old and "new" sequences.
+     * Generate a string representation of changes between version1 and version2.
      *
      * This method is called by the renderers which extends this class.
      *
-     * @param array  $changes     Contains the op-codes about the differences between "old and "new".
+     * @param array  $changes     Contains the op-codes about the differences between version1 and version2.
      * @param object $subRenderer Renderer which is subClass of this class.
      *
-     * @return string Representation of the differences.
+     * @return string|false String representation of the differences or false when versions are identical.
      */
-    public function renderOutput(array $changes, object $subRenderer): string
+    public function renderOutput(array $changes, object $subRenderer)
     {
         if (!$changes) {
-            //No changes between "old" and "new"
-            return 'No differences found.';
+            //No changes between version1 and version2
+            return false;
         }
 
         $output = $subRenderer->generateDiffHeader();

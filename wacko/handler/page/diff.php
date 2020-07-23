@@ -327,7 +327,8 @@ if ($page_a && $page_b
 			// using nice lib/php-diff library..
 			$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
 
-			if (!$diff->getGroupedOpcodes())
+			// the compared versions are identical
+			if ($diff->isIdentical())
 			{
 				$tpl->m6_nodiff = true;
 				break;
@@ -336,13 +337,13 @@ if ($page_a && $page_b
 			if ($diffmode == 3)
 			{
 				$renderer = new SideBySide;
-				$renderer->thead = '';
+				#$renderer->thead = '';
 				$tpl->m6_diff = $diff->Render($renderer);
 			}
 			else if ($diffmode == 4)
 			{
 				$renderer = new Inline;
-				$renderer->thead = '';
+				#$renderer->thead = '';
 				$tpl->m6_diff = $diff->render($renderer);
 			}
 			else

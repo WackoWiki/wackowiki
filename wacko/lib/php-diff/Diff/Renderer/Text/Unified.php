@@ -16,7 +16,7 @@ use PHPDiff\Diff\Renderer\MainRendererAbstract;
  * @author      Mario Brandt <leet31337@web.de>
  * @copyright   (c) 2020 Mario Brandt
  * @license     New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version     2.1.1
+ * @version     2.2.0
  * @link        https://github.com/JBlond/php-diff
  */
 
@@ -28,11 +28,11 @@ class Unified extends MainRendererAbstract
     /**
      * Render and return a unified diff.
      *
-     * @return string The unified diff.
+     * @return string|false The generated diff-view or false when there's no difference.
      */
-    public function render(): string
+    public function render()
     {
-        $diff = '';
+        $diff = false;
         $opCodes = $this->diff->getGroupedOpCodes();
         foreach ($opCodes as $group) {
             $lastItem = count($group) - 1;
