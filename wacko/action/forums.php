@@ -72,7 +72,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	$sql .= "ORDER BY p.created ASC";
 
 	// load subforums data
-	$forums	= $this->db->load_all($sql, true);
+	$forums		= $this->db->load_all($sql, true);
 
 	$page_ids	= [];
 
@@ -126,6 +126,8 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 						"OR a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
 						"AND a.deleted <> 1 " .
 					"ORDER BY a.created DESC ", true);
+
+				$comment = null;
 
 				foreach ($comments as $_comment)
 				{

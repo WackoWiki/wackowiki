@@ -337,13 +337,13 @@ if ($page_a && $page_b
 			if ($diffmode == 3)
 			{
 				$renderer = new SideBySide;
-				#$renderer->thead = '';
-				$tpl->m6_diff = $diff->Render($renderer);
+				// patched header
+				$tpl->m6_diff = $diff->render($renderer);
 			}
 			else if ($diffmode == 4)
 			{
 				$renderer = new Inline;
-				#$renderer->thead = '';
+				// patched header
 				$tpl->m6_diff = $diff->render($renderer);
 			}
 			else
