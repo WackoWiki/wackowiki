@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $text = $this->format($text, 'wacko');
 
-// by default links and actions where parsed dynamically via show handler
+// by default links and actions are parsed dynamically via show handler
 if (isset($options['diff']))
 {
 	// parsing links and actions

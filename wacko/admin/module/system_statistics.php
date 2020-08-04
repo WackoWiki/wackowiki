@@ -32,7 +32,7 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 	<?php echo $engine->_t('DbStatSection');?>:
 	<br>
 	<br>
-	<table style="max-width:500px;" class="formation lined">
+	<table style="max-width: 600px;" class="formation lined">
 		<tr>
 			<th style="width:50px;"><?php echo $engine->_t('DbTable');?></th>
 			<th class="t-left"><?php echo $engine->_t('DbRecords');?></th>

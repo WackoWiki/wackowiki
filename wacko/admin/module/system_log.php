@@ -92,7 +92,7 @@ function admin_system_log(&$engine, &$module)
 		$order		= 'ORDER BY l.level DESC ';		// we make level sorting
 		$orderlevel	= 'level_desc';					// in reverse orber because
 	}												// higher level is denoted
-	else if ($_order == 'level_desc')		// by lower value (e.g.
+	else if ($_order == 'level_desc')				// by lower value (e.g.
 	{												// 1 = critical, 2 = highest,
 		$order		= 'ORDER BY l.level ASC ';		// and so on)
 		$orderlevel	= 'level_asc';

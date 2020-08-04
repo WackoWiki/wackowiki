@@ -59,7 +59,7 @@ $imgclass		= '';
 $width			= $this->db->img_max_thumb_width; // default: 150
 
 if (!isset($page))		$page		= '';
-if (!isset($title))		/*$title="Gallery";*/ $nomark = 1;
+if (!isset($title))		$nomark		= 1;
 if (!isset($target))	$target		= '';
 if (!isset($table))		$table		= 1;
 if (!isset($caption))	$caption	= 1;
