@@ -3846,7 +3846,7 @@ class Wacko
 
 			for ($i = 0; $i < count($parts); $i++)
 			{
-				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
+				$parts[$i] = str_replace('%23', '#', $parts[$i]);
 			}
 
 			$href	= $this->href('', $this->db->users_page . '/', ['profile' => implode('/', $parts)]);
@@ -3862,7 +3862,7 @@ class Wacko
 
 			for ($i = 0; $i < count($parts); $i++)
 			{
-				$parts[$i] = str_replace('%23', '#', rawurlencode($parts[$i]));
+				$parts[$i] = str_replace('%23', '#', $parts[$i]);
 			}
 
 			$href	= $this->href('', $this->db->groups_page . '/', ['profile' => implode('/', $parts)]);
