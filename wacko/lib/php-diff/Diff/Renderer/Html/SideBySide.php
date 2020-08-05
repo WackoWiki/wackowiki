@@ -224,6 +224,34 @@ HTML;
 </tr>
 HTML;
             }
+
+            return $html;
+        }
+
+        foreach ($changes['changed']['lines'] as $lineNo => $changedLine) {
+            $toLine   = $changes['changed']['offset'] + $lineNo + 1;
+            $fromLine = "&nbsp;";
+            $line     = "&nbsp;";
+            if (isset($changes['base']['lines'][$lineNo])) {
+                $fromLine = $changes['base']['offset'] + $lineNo + 1;
+                $line     = $changes['base']['lines'][$lineNo];
+            }
+
+            $line        = str_replace(["\0", "\1"], $this->options['deleteMarkers'], $line);
+            $changedLine = str_replace(["\0", "\1"], $this->options['insertMarkers'], $changedLine);
+
+            $html .= <<<HTML
+<tr>
+    <th>$fromLine</th>
+    <td class="Left">
+        <span>$line</span>
+    </td>
+    <th>$toLine</th>
+    <td class="Right">
+        <span>$changedLine</span>
+    </td>
+</tr>
+HTML;
         }
 
         return $html;
