@@ -846,7 +846,7 @@ $wacko_translation = [
 	'UploadForbidden'			=> 'Nie masz prawa na wgrywanie tutaj plików.',
 	'UploadNoFile'				=> 'Z jakiegoś powodu nie było pliku w formularzu.',
 	'UploadMaxSizeReached'		=> 'Rozmiar pliku wykracza poza dozwolony limit!',
-	'UploadDirNotWritable'		=> 'Katalog plików nie jest zapisywalny!',
+	'UploadDirNotWritable'		=> 'Katalog plików nie nadaje się do zapisu!',
 	'UploadNotAPicture'			=> 'Można wgrywać jedynie zdjęcia, a ty co próbujesz wgrać?',
 	'UploadMaxFileQuota'		=> 'Osiągnąłeś swój limit wgrywania, ten plik nie może zostać wgrany',
 	'UploadDone'				=> 'Plik wgrany pomyślnie',
@@ -993,7 +993,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
@@ -1237,19 +1237,22 @@ $wacko_translation = [
 
 	'LanguageArray'	=> [
 		'bg' => 'bułgarski',
-		'da' => 'Danish',
-		'nl' => 'Dutch',
-		'el' => 'Greek',
-		'en' => 'English',
-		'et' => 'Estonian',
-		'fr' => 'French',
-		'de' => 'German',
-		'hu' => 'Hungarian',
-		'it' => 'Italian',
-		'pl' => 'Polish',
+		'da' => 'duński',
+		'de' => 'niemiecki',
+		'el' => 'Grecki',
+		'en' => 'angielski',
+		'es' => 'hiszpański',
+		'et' => 'estoński',
+		'fr' => 'francuski',
+		'hu' => 'węgierski',
+		'it' => 'włoski',
+		'ja' => 'japoński',
+		'ko' => 'koreański',
+		'nl' => 'holenderski',
+		'pl' => 'polski',
 		'pt' => 'portugalski',
-		'ru' => 'Russian',
-		'es' => 'Spanish',
+		'ru' => 'rosyjski',
+		'zh' => 'chiński',
 	],
 
 	'AccountStatus'				=> 'Status konta',

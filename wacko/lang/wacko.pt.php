@@ -846,7 +846,7 @@ $wacko_translation = [
 	'UploadForbidden'			=> 'Não está autorizado a fazer upload de ficheiros aqui.',
 	'UploadNoFile'				=> 'Não existe nenhum ficheiro no formulário.',
 	'UploadMaxSizeReached'		=> 'Ficheiro com tamanho excessivo!',
-	'UploadDirNotWritable'		=> 'File directory is not writable!',
+	'UploadDirNotWritable'		=> 'O directório de ficheiros não se pode escrever!',
 	'UploadNotAPicture'			=> 'Só há permissões para upload de imagens.',
 	'UploadMaxFileQuota'		=> 'Atinngiu o seu limite de upload.',
 	'UploadDone'				=> 'Upload do Ficheiro com sucesso',
@@ -993,7 +993,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
@@ -1230,18 +1230,21 @@ $wacko_translation = [
 	'LanguageArray'	=> [
 		'bg' => 'búlgaro',
 		'da' => 'dinamarquês',
-		'nl' => 'holandês',
+		'de' => 'alemão',
 		'el' => 'grego',
 		'en' => 'inglês',
+		'es' => 'espanhol',
 		'et' => 'estoniano',
 		'fr' => 'francês',
-		'de' => 'alemão',
 		'hu' => 'húngaro',
 		'it' => 'italiano',
+		'ja' => 'japonesas',
+		'ko' => 'coreano',
+		'nl' => 'holandês',
 		'pl' => 'polonês',
 		'pt' => 'português',
 		'ru' => 'russo',
-		'es' => 'espanhol',
+		'zh' => 'chinês',
 	],
 
 	'AccountStatus'				=> 'Status da conta',

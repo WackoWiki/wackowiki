@@ -10,7 +10,7 @@ $wacko_translation = [
 	// common
 	'StoreButton'				=> 'Save',
 	'UpdateButton'				=> 'Mise à jour',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Annuler',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'Le formulaire que vous avez envoyé est incorrect. Veuillez essayer de le renvoyer.',
@@ -993,7 +993,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Cache de vignette',
 
 	// Embed
-	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="file:le_film.swf"}} )',
+	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="file:video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Titre du flux',
@@ -1238,18 +1238,21 @@ $wacko_translation = [
 	'LanguageArray'	=> [
 		'bg' => 'Bulgare',
 		'da' => 'Danois',
-		'nl' => 'Néerlandais',
+		'de' => 'Allemand',
 		'el' => 'Grec',
 		'en' => 'Anglais',
+		'es' => 'Espagnol',
 		'et' => 'Estonien',
 		'fr' => 'Français',
-		'de' => 'Allemand',
 		'hu' => 'Hongrois',
 		'it' => 'Italien',
+		'ja' => 'Japonais',
+		'ko' => 'Coréen',
+		'nl' => 'Néerlandais',
 		'pl' => 'Polonais',
 		'pt' => 'Portugais',
 		'ru' => 'Russe',
-		'es' => 'Espagnol',
+		'zh' => 'Chinois',
 	],
 
 	'AccountStatus'				=> 'Statut du compte',

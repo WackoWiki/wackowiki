@@ -319,7 +319,7 @@ $ap_translation = [
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',
-	'EnableFeedsInfo'			=> 'Turns on or off RSS feeds for the entire wiki.',
+	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
 	'XmlSitemap'				=> 'XML Sitemap',
 	'XmlSitemapInfo'			=> 'Create an XML file called %1 inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder. On the other hand you can also add the path to the sitemap in the robots.txt file in your root directory as follows:',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
@@ -660,7 +660,7 @@ $ap_translation = [
 	'Noreferrer'				=> 'noreferrer',
 	'NoreferrerInfo'			=> 'Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.',
 	'Nofollow'					=> 'nofollow',
-	'NofollowInfo'				=> 'Instruct some search engines that the hyperlink should not influence the ranking of the link\'s target in the search engine\'s index. Adds <code>rel="nofollow"</code> to the link syntax.',
+	'NofollowInfo'				=> 'Instruir a algunos motores de búsqueda que el hipervínculo no debe influir en el ranking del objetivo de los enlaces en el índice de los motores de búsqueda. Añade <code>rel="nofollow"</code> a la sintaxis del enlace.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Show spaces in WikiNames',

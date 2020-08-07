@@ -993,7 +993,7 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:the_movie.swf"}} )',
+	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
@@ -1236,19 +1236,22 @@ $wacko_translation = [
 
 	'LanguageArray'	=> [
 		'bg' => 'Bulgarian',
-		'da' => 'Danish',
-		'nl' => 'Dutch',
-		'el' => 'Greek',
-		'en' => 'English',
-		'et' => 'Estonian',
+		'da' => 'Danese',
+		'de' => 'Tedesco',
+		'el' => 'Greco',
+		'en' => 'Inglese',
+		'es' => 'Spanish',
+		'et' => 'Estone',
 		'fr' => 'French',
-		'de' => 'German',
-		'hu' => 'Hungarian',
-		'it' => 'Italian',
-		'pl' => 'Polish',
+		'hu' => 'Ungherese',
+		'it' => 'italiano',
+		'ja' => 'Japanese',
+		'ko' => 'coreano',
+		'nl' => 'Dutch',
+		'pl' => 'Polacco',
 		'pt' => 'Portuguese',
 		'ru' => 'Russian',
-		'es' => 'Spanish',
+		'zh' => 'Chinese',
 	],
 
 	'AccountStatus'				=> 'Stato del conto',
