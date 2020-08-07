@@ -6,9 +6,9 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_language = [
-	'name'					=> 'Estonian',
-	'code'					=> 'et',
-	'dir'					=> 'ltr',
-	'charset'				=> 'utf-8',
-	'locale'				=> 'et_EE.UTF-8',
+	'name'		=> 'Estonian',
+	'code'		=> 'et',
+	'dir'		=> 'ltr',
+	'charset'	=> 'utf-8',
+	'locale'	=> 'et_EE.UTF-8',
 ];

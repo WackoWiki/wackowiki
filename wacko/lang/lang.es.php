@@ -6,10 +6,10 @@ if (!defined('IN_WACKO'))
 }
 
 $wacko_language = [
-	'name'					=> 'Spanish',
-	'code'					=> 'es',
-	'dir'					=> 'ltr',
-	'charset'				=> 'utf-8',
-	'locale'				=> 'es_ES.UTF-8',
+	'name'		=> 'Spanish',
+	'code'		=> 'es',
+	'dir'		=> 'ltr',
+	'charset'	=> 'utf-8',
+	'locale'	=> 'es_ES.UTF-8',
 ];
 
