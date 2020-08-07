@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'					=> 'Attention : Il est fortement recommandé de ne pas accéder au site avant d\'organiser des événements techniques et/ou administratifs !',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Fonctions de base',
@@ -274,8 +274,8 @@ $ap_translation = [
 	'AdminNameInfo'				=> 'Nom d\'utilisateur, qui est responsable du support global du site. Ce nom n\'est pas utilisé pour déterminer les droits d\'accès, mais il est souhaitable de se conformer au nom de l\'administrateur en chef du site.',
 	'LanguageSection'			=> 'Langue',
 	'DefaultLanguage'			=> 'Langue par défaut',
-	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
-	'MultiLanguage'				=> 'Support multilingue',
+	'DefaultLanguageInfo'		=> 'Spécifie la langue des messages affichés aux invités non enregistrés, ainsi que les paramètres locaux.',
+	'MultiLanguage'				=> 'Soutien multilangues',
 	'MultiLanguageInfo'			=> 'Permet de sélectionner une langue page par page.',
 	'AllowedLanguages'			=> 'Langues autorisées',
 	'AllowedLanguagesInfo'		=> 'Il est recommandé de ne sélectionner que l\'ensemble des langues que vous souhaitez utiliser, sinon toutes les langues sont sélectionnées.',
@@ -292,7 +292,7 @@ $ap_translation = [
 	'RatingPanel'				=> 'Panneau d\'évaluation',
 	'RatingPanelInfo'			=> 'L\'affichage par défaut du panneau de notation en bas de la page.',
 	'TagsPanel'					=> 'Tags panel',
-	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
+	'TagsPanelInfo'				=> 'L\'affichage par défaut du panneau de balises en bas de la page.',
 
 	'NavigationSection'			=> 'Navigation',
 	'ShowPermalink'				=> 'Afficher le lien permanent',
@@ -318,7 +318,7 @@ $ap_translation = [
 	'EnableFeeds'				=> 'Activer les flux',
 	'EnableFeedsInfo'			=> 'Active ou désactive les flux RSS pour l\'ensemble du wiki.',
 	'XmlSitemap'				=> 'XML Sitemap',
-	'XmlSitemapInfo'			=> 'Create an XML file called %1 inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder. On the other hand you can also add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapInfo'			=> 'Créez un fichier XML appelé %1 dans le dossier xml. Générer un fichier XML compatible avec le format Sitemaps XML. Vous pouvez modifier le chemin d\'accès pour le placer dans votre dossier racine, car c\'est l\'une des conditions requises, à savoir que le fichier XML se trouve dans le dossier racine. D\'autre part, vous pouvez également ajouter le chemin d\'accès au plan du site dans le fichier robots.txt de votre répertoire racine comme suit :',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
 	'XmlSitemapTimeInfo'		=> 'Génère le Sitemap une seule fois dans le nombre de jours donné, zéro signifie à chaque changement de page.',
 	'DiffModeSection'			=> 'Diff Modes',
@@ -329,7 +329,7 @@ $ap_translation = [
 	'NotifyDiffMode'			=> 'Notify diff mode',
 	'NotifyDiffModeInfo'		=> 'Mode Diff utilisé pour les notifications dans le corps de l\'email.',
 
-	'EditingSection'			=> 'Editing',
+	'EditingSection'			=> 'Rédaction',
 	'EditSummary'				=> 'Edit summary',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Édition mineure',
@@ -342,15 +342,15 @@ $ap_translation = [
 	'DefaultRenameRedirect'		=> 'Lors du renommage, mettre la redirection',
 	'DefaultRenameRedirectInfo'	=> 'Par défaut, offrez de définir une redirection vers l\'ancienne adresse de la page à renommer.',
 	'StoreDeletedPages'			=> 'Conserver les pages supprimées',
-	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file, keep it in a special section, where it will be available for review and recovery for some more time (as described below).',
+	'StoreDeletedPagesInfo'		=> 'Lorsque vous supprimez une page, un commentaire ou un fichier, conservez-le dans une section spéciale, où il sera disponible pour examen et récupération pendant un certain temps encore (comme décrit ci-dessous).',
 	'KeepDeletedTime'			=> 'Temps de stockage des pages supprimées',
-	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only with the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).',
+	'KeepDeletedTimeInfo'		=> 'La période en jours. Cela n\'a de sens qu\'avec l\'option précédente. Le zéro indique la possession éternelle (dans ce cas, l\'administrateur peut vider le "panier" manuellement).',
 	'PagesPurgeTime'			=> 'Temps de stockage des révisions de page',
 	'PagesPurgeTimeInfo'		=> 'Supprime automatiquement les anciennes versions dans le nombre de jours donné. Si vous entrez zéro, les anciennes versions ne seront pas supprimées.',
 	'EnableReferrers'			=> 'Activer les référents',
 	'EnableReferrersInfo'		=> 'Permet de stocker et d\'afficher les références externes.',
 	'ReferrersPurgeTime'		=> 'Temps de stockage des référents',
-	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
+	'ReferrersPurgeTimeInfo'	=> 'L\'historique des renvois de pages externes ne doit pas dépasser un nombre de jours donné. Zéro signifie stockage éternel, mais pour un site activement visité, cela peut entraîner un débordement de la base de données.',
 	'SearchEngineVisibility'	=> 'Bloquer les moteurs de recherche (Visibilité sur les moteurs de recherche)',
 	'SearchEngineVisibilityInfo'=> 'Bloquer les moteurs de recherche, mais permettre aux visiteurs normaux. Remplace les paramètres de page. <br>Décourager les moteurs de recherche d\'indexer ce site, c\'est aux moteurs de recherche d\'honorer cette demande.',
 
@@ -480,7 +480,7 @@ $ap_translation = [
 	'OwnersEditCategories'		=> 'Les propriétaires peuvent modifier les catégories de pages',
 	'OwnersEditCategoriesInfo'	=> 'Permet aux propriétaires de modifier la liste des catégories de pages de votre site (ajouter des mots, supprimer des mots), assigne à une page.',
 	'TermHumanModeration'		=> 'Term human moderation',
-	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
+	'TermHumanModerationInfo'	=> 'Les modérateurs ne peuvent modifier les commentaires que s\'ils ont été créés il y a un nombre de jours maximum (cette limitation ne s\'applique pas au dernier commentaire du sujet).',
 
 	'UserCanDeleteAccount'		=> 'Utilisateurs autorisés à supprimer leur compte',
 
@@ -489,7 +489,7 @@ $ap_translation = [
 	'SecuritySettingsUpdated'	=> 'Mise à jour des paramètres de sécurité',
 
 	'AllowRegistration'			=> 'Inscription en ligne',
-	'AllowRegistrationInfo'		=> 'Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.',
+	'AllowRegistrationInfo'		=> 'Enregistrement ouvert des utilisateurs. La désactivation de cette option empêchera l\'enregistrement gratuit, mais l\'administrateur du site pourra enregistrer lui-même d\'autres utilisateurs.',
 	'ApproveNewUser'			=> 'Approuver de nouveaux utilisateurs',
 	'ApproveNewUserInfo'		=> 'Permet aux administrateurs d\'approuver les utilisateurs une fois qu\'ils se sont enregistrés. Seuls les utilisateurs approuvés seront autorisés à se connecter sur le site.',
 	'PersistentCookies'			=> 'Cookies persistants',

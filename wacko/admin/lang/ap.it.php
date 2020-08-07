@@ -350,7 +350,7 @@ $ap_translation = [
 	'EnableReferrers'			=> 'Enable Referrers',
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
-	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
+	'ReferrersPurgeTimeInfo'	=> 'Conservare la cronologia delle pagine esterne di riferimento non più di un determinato numero di giorni. Zero significa conservazione eterna, ma per un sito visitato attivamente questo può portare ad un overflow del database.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 
@@ -480,7 +480,7 @@ $ap_translation = [
 	'OwnersEditCategories'		=> 'Owners can edit page categories',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
 	'TermHumanModeration'		=> 'Term human moderation',
-	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
+	'TermHumanModerationInfo'	=> 'I moderatori possono modificare i commenti solo se sono stati creati non più di questo numero di giorni fa (questa limitazione non si applica all\'ultimo commento nell\'argomento).',
 
 	'UserCanDeleteAccount'		=> 'Gli utenti possono eliminare il proprio account',
 
@@ -489,7 +489,7 @@ $ap_translation = [
 	'SecuritySettingsUpdated'	=> 'Updated security settings',
 
 	'AllowRegistration'			=> 'Register online',
-	'AllowRegistrationInfo'		=> 'Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.',
+	'AllowRegistrationInfo'		=> 'Aprire la registrazione dell'utente. Disabilitando questa opzione si impedisce la registrazione gratuita, tuttavia, l'amministratore del sito potrà registrare personalmente gli altri utenti.',
 	'ApproveNewUser'			=> 'Approve new users',
 	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies',

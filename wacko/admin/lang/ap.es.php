@@ -350,7 +350,7 @@ $ap_translation = [
 	'EnableReferrers'			=> 'Habilitar referenciadores',
 	'EnableReferrersInfo'		=> 'Permite almacenar y mostrar referencias externas.',
 	'ReferrersPurgeTime'		=> 'Tiempo de almacenamiento de los referidos.',
-	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
+	'ReferrersPurgeTimeInfo'	=> 'Mantener el historial de remisión de páginas externas no más allá de un número determinado de días. Cero significa almacenamiento eterno, pero para un sitio visitado activamente esto puede llevar a un desbordamiento de la base de datos.',
 	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
 
@@ -480,7 +480,7 @@ $ap_translation = [
 	'OwnersEditCategories'		=> 'Owners can edit page categories',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
 	'TermHumanModeration'		=> 'Term human moderation',
-	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
+	'TermHumanModerationInfo'	=> 'Los moderadores sólo pueden editar los comentarios si se crearon hace no más de este número de días (esta limitación no se aplica al último comentario del tema).',
 
 	'UserCanDeleteAccount'		=> 'Permitir a los usuarios eliminar sus propias cuentas',
 
@@ -489,7 +489,7 @@ $ap_translation = [
 	'SecuritySettingsUpdated'	=> 'Configuración de seguridad actualizada',
 
 	'AllowRegistration'			=> 'Regístrese en línea',
-	'AllowRegistrationInfo'		=> 'Registro continuo de usuarios. Desactivar la opción evitará el registro gratuito, sin embargo, el administrador del sitio podrá registrar a otros usuarios por su cuenta.',
+	'AllowRegistrationInfo'		=> 'Abrir registro de usuario. Al desactivar esta opción se impedirá el registro gratuito, sin embargo, el administrador del sitio podrá registrar a otros usuarios él mismo.',
 	'ApproveNewUser'			=> 'Aprobar nuevos usuarios',
 	'ApproveNewUserInfo'		=> 'Permite a los administradores aprobar a los usuarios una vez que se registran. Sólo los usuarios aprobados podrán iniciar sesión en el sitio.',
 	'PersistentCookies'			=> 'Cookies persistentes',

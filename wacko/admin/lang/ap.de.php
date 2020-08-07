@@ -274,7 +274,7 @@ $ap_translation = [
 	'AdminNameInfo'				=> 'Benutzername, der insgesamt für die Webseite verantwortlich ist. Dieser Name wird nicht verwendet, um Zugriffsrechte zu bestimmen, aber es ist wünschenswert, dass er dem Namen des Hauptadministrators der Webseite entspricht.',
 
 	'LanguageSection'			=> 'Sprache',
-	'DefaultLanguage'			=> 'Standard Sprache',
+	'DefaultLanguage'			=> 'Standard-Sprache',
 	'DefaultLanguageInfo'		=> 'Definiert die Spracheinstellung für (nicht registrierte) Gäste sowie die Gebietsschemaeinstellungen.',
 	'MultiLanguage'				=> 'Unterstützung mehrerer Sprachen',
 	'MultiLanguageInfo'			=> 'Enthält eine Auswahl an Sprachen auf Seitenbasis.',

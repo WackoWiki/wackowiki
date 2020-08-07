@@ -350,7 +350,7 @@ $ap_translation = [
 	'EnableReferrers'			=> 'Enable Referrers',
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
-	'ReferrersPurgeTimeInfo'	=> 'Keep history of invoking external pages no more than this number of days. Zero means the perpetual possession, but to actively visit the site this could lead to overcrowding in the database.',
+	'ReferrersPurgeTimeInfo'	=> 'Съхранявайте историята на препращането на външни страници не повече от определен брой дни. Нулата означава вечно съхранение, но за активно посещаван сайт това може да доведе до препълване на база данни.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 
@@ -480,7 +480,7 @@ $ap_translation = [
 	'OwnersEditCategories'		=> 'Owners can edit page categories',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
 	'TermHumanModeration'		=> 'Term human moderation',
-	'TermHumanModerationInfo'	=> 'Moderators can edit comments, only if they were set up at most as many days ago (this restriction does not apply to the last comment in the topic).',
+	'TermHumanModerationInfo'	=> 'Модераторите могат да редактират коментари само ако са създадени преди повече от този брой дни (това ограничение не важи за последния коментар в темата).',
 
 	'UserCanDeleteAccount'		=> 'Потребителите могат да изтриват профилите си',
 
@@ -489,7 +489,7 @@ $ap_translation = [
 	'SecuritySettingsUpdated'	=> 'Updated security settings',
 
 	'AllowRegistration'			=> 'Register online',
-	'AllowRegistrationInfo'		=> 'Ongoing registration of users. Disabling the option will prevent free registration, however, the site administrator will be able to register other users on their own.',
+	'AllowRegistrationInfo'		=> 'Отворена регистрация на потребителя. Деактивирането на тази опция ще предотврати безплатна регистрация, обаче администраторът на сайта ще може сам да регистрира други потребители.',
 	'ApproveNewUser'			=> 'Approve new users',
 	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies',
