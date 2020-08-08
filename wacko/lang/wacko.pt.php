@@ -66,7 +66,7 @@ $wacko_translation = [
 	'RegistrationThreshold'		=> 'O tempo de preenchimento do formulário não deve ser inferior a %1 segundos.',
 
 	// login panel
-	'LoginWelcome'				=> 'Login',
+	'LoginWelcome'				=> 'Conecte-se',
 	'CreateAccount'				=> 'Register',
 	'RegistrationLink'			=> 'Registration',
 	'LoginName'					=> 'Nome de utilizador',
@@ -81,7 +81,7 @@ $wacko_translation = [
 	'SessionDurationDay'		=> '1 dia',
 	'SessionDurationWeek'		=> '1 semana',
 	'SessionDurationMonth'		=> '1 mês',
-	'LoggedInAs'				=> 'You are logged in as',
+	'LoggedInAs'				=> 'Está autenticado como',
 
 	'ClearCookies'				=> 'Apagar todos os cookies',
 	'BindSessionIp'				=> 'Ligar sessão ao endereço IP',
@@ -206,7 +206,7 @@ $wacko_translation = [
 	'NewsXMLTip'				=> 'Click to view recent news in XML format.',
 	'ReferrersTip'				=> 'Clique para ver uma lista de URLs que referenciam esta página',
 	'ReferrersText'				=> 'Referenciadores',
-	'ModerateTip'				=> 'Moderation of topics and forum posts',
+	'ModerateTip'				=> 'Moderação de tópicos e postagens no fórum',
 	'ModerateText'				=> 'Moderate',
 	'SearchText'				=> 'Pesquisa: ',
 
@@ -397,7 +397,7 @@ $wacko_translation = [
 	'RemoveCluster'				=> 'Remover todas as páginas do cluster',
 	'RemoveDontKeep'			=> 'Não guarde uma cópia de uma página removida e comentários',
 	'RemoveDontKeepComment'		=> 'Não guarde uma cópia do comentário removido',
-	'RemoveDontKeepFile'		=> 'Não salve uma cópia do arquivo removido',
+	'RemoveDontKeepFile'		=> 'Não guardar uma cópia do ficheiro removido',
 	'ReferrersRemoved'			=> 'Referenciadores para a página removidos.',
 	'LinksRemoved'				=> 'Ligações da página removidas.',
 	'CategoriesRemoved'			=> 'Categorias de páginas eliminadas.',
@@ -1183,7 +1183,7 @@ $wacko_translation = [
 	'PollsLasted'				=> 'Poll went (days)',
 	'PollsAdded'				=> 'Added',
 	'PollsTotalVotes'			=> 'Total votes',
-	'PollsGuest'				=> 'Guest',
+	'PollsGuest'				=> 'Clientes',
 	'PollsShow'					=> 'Show',
 	'PollsAll'					=> 'All',
 	'PollsNotifySubj'			=> 'Added a new poll',
