@@ -305,7 +305,7 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Source',
 	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
-	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceCopyToClipboard'		=> 'skopiuj do schowka',
 	'SourceFor'					=> 'Tekst źródłowy strony %1',
 	'SourceForInfo'				=> 'Tekst źródłowy strony można podejrzeć i skopiować.',
 
@@ -609,17 +609,17 @@ $wacko_translation = [
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'Nie masz niezbędnych praw dostępu.',
-	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
-	'PageAlreadyExists' 		=> 'According to the address provided the page %1 already exists.',
+	'CreatePageDeniedAddress'	=> 'Nie masz prawa do tworzenia strony pod tym adresem.',
+	'PageAlreadyExists'			=> 'Zgodnie z podanym adresem strona %1 już istnieje.',
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'edit',
-	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
+	'PageAlreadyExistsEditDenied'	=> 'Nie możesz tego edytować.',
 
 	'SimilarPagesExists'		=> 'Podobne strony do %1 już istnieją:',
 	'SimilarPagesHint'			=> 'Istnieją podobne strony do %1:',
 
-	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'PageReservedWord'			=> 'Nie można używać %1 jako części adresu, ponieważ jest to słowo zastrzeżone.',
+	'UserReservedWord'			=> 'Nazwy użytkowników nie mogą zawierać ##%1##, ponieważ jest to słowo zastrzeżone.',
 
 	'DontRedirect'				=> 'Wyłącz funkcję automatycznego przekierowania.',
 	'SendWatchEmail'			=> 'Wyślij powiadomienie, gdy ktoś (poza Tobą) zmieni zawartość obserwowanych stron.',

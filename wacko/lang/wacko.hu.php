@@ -305,7 +305,7 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Oldalforrás',
 	'SourceTip'					=> 'Oldalforrás megtekintése (no %%-formatters shown)',
-	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceCopyToClipboard'		=> 'másolja a vágólapra',
 	'SourceFor'					=> 'Kezdőlap forrásának megtekintése %1',
 	'SourceForInfo'				=> 'Megtekintheted és másolhatod a lap forrását.',
 
@@ -608,18 +608,18 @@ $wacko_translation = [
 	'CreatePageButton'			=> 'Create',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
-	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
-	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
-	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
+	'CreatePageDenied'			=> 'Nem rendelkezik a szükséges hozzáférési jogokkal.',
+	'CreatePageDeniedAddress'	=> 'Nincs joga arra, hogy ezen az oldalon hozzon létre oldalt.',
+	'PageAlreadyExists'			=> 'A megadott cím szerint az %1 már létezik.',
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'Szerkesztés',
-	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
+	'PageAlreadyExistsEditDenied'	=> 'Nem szerkesztheti.',
 
 	'SimilarPagesExists'		=> 'A %1-hez hasonló oldalak már léteznek:',
 	'SimilarPagesHint'			=> 'Vannak létező hasonló oldalak a %1-hez:',
 
-	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'PageReservedWord'			=> 'A %1 nem használható a cím részeként, mivel ez egy fenntartott szó.',
+	'UserReservedWord'			=> 'A felhasználói nevek nem tartalmazhatnak ##%1##, mert ez egy fenntartott szó.',
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
@@ -639,14 +639,14 @@ $wacko_translation = [
 	'EmailWelcome'				=> 'You\'ve registered at ',
 	'EmailRegistered'			=> 'You\'ve successfully registered at %1.' . "\n" . 'Your username: %2' . "\n\n",
 	'EmailVerify'				=> 'If you want to receive notifications, you need to approve your email. Please follow ' . "\n" . '%1' . "\n" . 'the link to do this.',
-	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredLogin'		=> 'Kérjük, térjen vissza a Wikibe, és jelentkezzen be új felhasználónevével és jelszavával.',
 	'EmailRegisteredIgnore'		=> 'If you did not request any registration, ignore this message and nothing will happen.',
 	'EmailDoNotReply'			=> 'Do not reply to this message.',
 	'EmailReverify'				=> 'Someone (maybe you) submitted your email as notification address at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want receive notifications, you need to approve your email. Please follow ' . "\n" . '%3' . "\n" . 'the link to do this.'."\n\n" . '',
 	'EmailConfirm'				=> 'Please verify your email',
 	'EmailConfirmed'			=> 'Az e-mail sikeresen megerősítve.',
-	'EmailNotConfirmed'			=> 'Email cannot be confirmed. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
-	'EmailNotVerified'			=> 'Email not verified!',
+	'EmailNotConfirmed'			=> 'Az e-mailt nem lehet megerősíteni. Ennek oka lehet a helytelen megerősítő kód, vagy az e-mail cím már megerősítést kapott. Ellenőrizheti, hogy az e-mail cím már megerősült-e, ha bejelentkezik, és megtekinti annak állapotát a %1 oldalon.',
+	'EmailNotVerified'			=> 'Az e-mail nem ellenőrizve!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
 									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
 									'until your email-address was confirmed, by following the link in the email sent to you. ' .

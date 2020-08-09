@@ -305,7 +305,7 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Source',
 	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
-	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceCopyToClipboard'		=> 'copiar para prancheta',
 	'SourceFor'					=> 'Mostrar código-fonte de %1',
 	'SourceForInfo'				=> 'No momento, você só pode visualizar e copiar o conteúdo desta página.',
 
@@ -595,7 +595,7 @@ $wacko_translation = [
 	'UserSettingsEmailMe'		=> 'Email me when ...',
 
 	'UserSettingsExtended'		=> 'Estendido',
-	'UserSettingsOther'			=> 'Other settings',
+	'UserSettingsOther'			=> 'Outros ajustes',
 	'UserSpace'					=> 'User space',
 	'ChooseTheme'				=> 'Escolha Visual',
 
@@ -609,17 +609,17 @@ $wacko_translation = [
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'Você não tem os direitos de acesso necessários.',
-	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
-	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
+	'CreatePageDeniedAddress'	=> 'Não tem o direito de criar a página neste endereço.',
+	'PageAlreadyExists'			=> 'De acordo com a morada fornecida, a página %1 já existe.',
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'editar',
-	'PageAlreadyExistsEditDenied'	=> 'You can\'t edit it.',
+	'PageAlreadyExistsEditDenied'	=> 'Não se pode editá-lo.',
 
 	'SimilarPagesExists'		=> 'Já existem páginas semelhantes a %1:',
 	'SimilarPagesHint'			=> 'Existem páginas semelhantes a %1:',
 
-	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'PageReservedWord'			=> 'Não se pode usar %1 como parte do endereço, pois é uma palavra reservada.',
+	'UserReservedWord'			=> 'Os nomes dos utilizadores não podem conter ##%1## pois é uma palavra reservada.',
 
 	'DontRedirect'				=> 'Não permitir redireccionamento automático por acção de redirecionamento.',
 	'SendWatchEmail'			=> 'Enviar notificação por email quando alguém (excepto voçê) alterar a página que estiver a acompanhar',
@@ -639,7 +639,7 @@ $wacko_translation = [
 	'EmailWelcome'				=> 'Registou-se em ',
 	'EmailRegistered'			=> 'Registou-se com sucesso em %1.' . "\n" . 'O seu username: %2' . "\n\n" ,
 	'EmailVerify'				=> 'Se quiser receber notificações , é necessário aprovar o seu email. Siga este ' . "\n" . '%1' . "\n" . 'link para o fazer.',
-	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredLogin'		=> 'Por favor, volte ao Wiki e inicie sessão com o seu novo nome de utilizador e palavra-passe.',
 	'EmailRegisteredIgnore'		=> 'Caso você não tenha pedido nenhum registo, ignore esta mensagem e nada irá acontecer.',
 	'EmailDoNotReply'			=> 'NÃO RESPONDA A ESTA MENSAGEM',
 	'EmailReverify'				=> 'Alguém (talvez voçê) submeteu o seu email como alvo de notificação no site  %1.' . "\n" . 'O seu username: %2'."\n\n" . 'Se quiser receber notificações , é necessário aprovar o seu email. Siga este ' . "\n" . '%3' . "\n" . 'link para o fazer.'."\n\n" . '',

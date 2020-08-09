@@ -305,7 +305,7 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Source',
 	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
-	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceCopyToClipboard'		=> 'Kopieer naar klembord',
 	'SourceFor'					=> 'Brontekst bekijken van %1',
 	'SourceForInfo'				=> 'U kunt de brontekst van deze pagina bekijken en kopiëren.',
 

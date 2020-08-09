@@ -305,7 +305,7 @@ $wacko_translation = [
 	// source handler
 	'SourceText'				=> 'Source',
 	'SourceTip'					=> 'Näita lehepõhja (no %%-formatters shown)',
-	'SourceCopyToClipboard'		=> 'copy to clipboard',
+	'SourceCopyToClipboard'		=> 'kopeerida lõikelauale',
 	'SourceFor'					=> 'Lehekülje %1 lähteteksti vaatamine',
 	'SourceForInfo'				=> 'Saad vaadata ja kopeerida selle lehekülje lähteteksti.',
 
@@ -608,18 +608,18 @@ $wacko_translation = [
 	'CreatePageButton'			=> 'Loo',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
-	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
-	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
-	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
+	'CreatePageDenied'			=> 'Teil pole vajalikke juurdepääsuõigusi.',
+	'CreatePageDeniedAddress'	=> 'Teil pole õigust sellel aadressil lehte luua.',
+	'PageAlreadyExists'			=> 'Vastavalt esitatud aadressile on leht %1 juba olemas.',
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'edit',
-	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
+	'PageAlreadyExistsEditDenied' => 'Te ei saa seda redigeerida.',
 
 	'SimilarPagesExists'		=> 'Sarnased lehed %1-ga on juba olemas:',
 	'SimilarPagesHint'			=> '%1-ga on sarnaseid lehti:',
 
-	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'PageReservedWord'			=> '%1 ei saa aadressi osana kasutada, kuna see on reserveeritud sõna.',
+	'UserReservedWord'			=> 'Kasutajanimed ei tohi sisaldada ##%1##, kuna see on reserveeritud sõna.',
 
 	'DontRedirect'				=> 'Ära võimalda automaatset ümbersuunamist',
 	'SendWatchEmail'			=> 'Saada e-postiga teade, kui keegi (väljaarvatud sa ise) muudab neid lehti mida sa vaatad',

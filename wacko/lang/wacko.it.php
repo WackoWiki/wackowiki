@@ -613,7 +613,7 @@ $wacko_translation = [
 	'PageAlreadyExists'			=> 'Secondo l\'indirizzo della pagina %1 già esistente.',
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'modificare',
-	'PageAlreadyExistsEditDenied' => 'You can\'t edit it.',
+	'PageAlreadyExistsEditDenied' => 'Non puoi modificarlo.',
 
 	'SimilarPagesExists'		=> 'Pagine simili a %1 esistono già:',
 	'SimilarPagesHint'			=> 'Esistono pagine simili a %1:',
