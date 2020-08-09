@@ -31,9 +31,9 @@ $wacko_translation = [
 	'RegistrationPassword'		=> 'Parool',
 	'RegistrationButton'		=> 'Registreerun',
 	'RegistrationUserNameOwned'	=> 'Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.',
-	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
-	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'SiteRegistered'			=> 'Olete saidil %1 edukalt registreerunud.',
+	'RegistrationEmailInfo'		=> 'Kehtiv e-posti aadress. Kõik süsteemi e-kirjad saadetakse sellele aadressile. E-posti aadressi ei avalikustata ja seda kasutatakse ainult siis, kui soovite saada uut parooli või soovite saada e-posti teel teatud uudiseid või teatisi.',
+	'SiteEmailConfirm'			=> 'Kinnitage oma e-posti aadress, klõpsates teile saadetud juhendis oleval lingil. <br> Kui te ei kinnita oma e-posti aadressi, ei saa te võimalikku kadunud parooli taastada. Lisaks ei teavitata teid viimastest lehemuutustest ja kommentaaridest.',
 	'NameTooShort'				=> 'Kasutajanimi on liiga lühike, minimaalselt %2 sümbolit on nõutud.',
 	'NameTooLong'				=> 'Kasutajanimi on liiga pikk, maksimaalselt %2 sümbolit on lubatud.',
 	'NameAlphanumOnly'			=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. Võid kasutada vaid kirjamärke.',
@@ -338,7 +338,7 @@ $wacko_translation = [
 	'MinorEditHide'				=> 'Hide minor edit',
 	'MinorEditShow'				=> 'Show minor edit',
 	'PostAnonymously'			=> 'Postitage anonüümselt ilma oma nime andmata',
-	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
+	'NotifyMe'					=> 'Teavitage mind lehe kommentaaridest ja muudatustest',
 	'OverwriteAlert'			=> 'Ülekirjutuse hoiatus: kuni sina seda lehte muutsid, muutis seda lehte veel keegi teine.<br>Kopeeri oma muudatused ja nimeta leht ümber.',
 	'EditingRevisionWarning'	=> 'Te redigeerite selle lehe vana versiooni. Kui selle avaldate, eemaldatakse kõik sellest ajast tehtud muudatused. Võib-olla soovite muuta praegust ülevaatust.',
 	'WriteAccessDenied'			=> 'Sul ei ole sellele lehe kirjutamise õigusi.',
@@ -756,7 +756,7 @@ $wacko_translation = [
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 									'violates the rules of the site, please send it (using the button Forward /' .
 									'Forward your mail program) to address %1.',
-	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send personal messages to users.',
+	'UsersPMNotLoggedIn'		=> 'Te pole süsteemi sisse logitud ega saa kasutajatele isiklikke sõnumeid saata.',
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',

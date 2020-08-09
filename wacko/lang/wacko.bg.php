@@ -31,9 +31,9 @@ $wacko_translation = [
 	'RegistrationPassword'		=> 'Парола',
 	'RegistrationButton'		=> 'Карай нататък!',
 	'RegistrationUserNameOwned'	=> 'Желаното име е вече заето!',
-	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
-	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'SiteRegistered'			=> 'Успешно се регистрирахте в сайта %1.',
+	'RegistrationEmailInfo'		=> 'Валиден имейл адрес. Всички имейли от системата ще бъдат изпратени на този адрес. Имейл адресът не е публично достояние и ще бъде използван само ако искате да получите нова парола или желаете да получавате определени новини или известия по имейл.',
+	'SiteEmailConfirm'			=> 'Моля, потвърдете своя имейл адрес, като кликнете върху връзката в инструкциите, изпратени до вас. <br> Ако не потвърдите своя имейл адрес, няма да можете да извлечете евентуална изгубена парола. Освен това няма да бъдете уведомявани за последните промени в страницата и коментарите.',
 	'NameTooShort'				=> 'Потребителското име е прекалено късо, минимума е %2 букви.',
 	'NameTooLong'				=> 'Потребителското име е прекалено дълго, максимума е %2 букви.',
 	'NameAlphanumOnly'			=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго и да използва само alphanumeric.',
@@ -756,7 +756,7 @@ $wacko_translation = [
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 								   'violates the rules of the site, please send it (using the button Forward /' .
 								   'Forward your mail program) to address %1.',
-	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send personal messages to users.',
+	'UsersPMNotLoggedIn'		=> 'Не сте влезли в системата и не можете да изпращате никакви лични съобщения до потребителите.',
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
@@ -820,8 +820,8 @@ $wacko_translation = [
 	'AclForEntireCluster'		=> 'Права за целия СЕКТОР',
 	'SettingsAttachments'		=> 'Attachments',
 	'SettingsUpload'			=> 'Качване на файлове',
-	'SettingsCategories'		=> 'Categories',
-	'SettingsLanguages'			=> 'Languages',
+	'SettingsCategories'		=> 'Категории',
+	'SettingsLanguages'			=> 'Езици',
 	'SettingsReferrers'			=> 'Референции',
 	'SettingsWatch'				=> 'Наблюдение',
 	'SettingsPrint'				=> 'Версия за печат',
@@ -834,7 +834,7 @@ $wacko_translation = [
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
-	'UploadFiles'				=> 'Upload files',
+	'UploadFiles'				=> 'Качване на файлове',
 	'UploadFor'					=> 'Качване на файл',
 	'UploadButton'				=> 'Качване',
 	'UploadGlobalText'			=> 'за всички',

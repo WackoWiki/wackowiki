@@ -31,9 +31,9 @@ $wacko_translation = [
 	'RegistrationPassword'		=> 'Adgangskode',
 	'RegistrationButton'		=> 'Registrer mig!',
 	'RegistrationUserNameOwned' => 'Dette brugernavn er allerede i brug. Vælg et andet.',
-	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
-	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'SiteRegistered'			=> 'Du har med succes registreret dig på siden %1.',
+	'RegistrationEmailInfo'		=> 'En gyldig e-mail-adresse. Alle e-mails fra systemet sendes til denne adresse. E-mail-adressen bliver ikke offentliggjort og bruges kun, hvis du ønsker at modtage en ny adgangskode eller ønsker at modtage visse nyheder eller meddelelser via e-mail.',
+	'SiteEmailConfirm'			=> 'Bekræft din e-mail-adresse ved at klikke på linket i instruktionerne sendt til dig. <br> Hvis du ikke verificerer din e-mail-adresse, vil du ikke kunne hente en mulig mistet adgangskode. Derudover vil du ikke blive underrettet om de seneste sideændringer og kommentarer.',
 	'NameTooShort'				=> 'Brugernavn er for kort, et minimum på %2 tegn er påkrævet.',
 	'NameTooLong'				=> 'Brugernavn er for langt, et maksimum på %2 tegn er tilladt.',
 	'NameAlphanumOnly'			=> 'Brugernavn skal være mellem %1 og %2 tegn langt og brug kun alfanumeriske tegn.',
@@ -756,7 +756,7 @@ $wacko_translation = [
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 								   'violates the rules of the site, please send it (using the button Forward /' .
 								   'Forward your mail program) to address %1.',
-	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send personal messages to users.',
+	'UsersPMNotLoggedIn'		=> 'Du er ikke logget ind på systemet og kan ikke sende nogen personlige beskeder til brugerne.',
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',

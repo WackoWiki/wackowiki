@@ -10,7 +10,7 @@ $wacko_translation = [
 	// common
 	'StoreButton'				=> 'Save',
 	'UpdateButton'				=> 'Update',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Ακύρωση',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'Η υποβληθείσα μορφή ήταν άκυρη. Προσπαθήστε πάλι.',
@@ -31,9 +31,9 @@ $wacko_translation = [
 	'RegistrationPassword'		=> 'Συνθηματικό',
 	'RegistrationButton'		=> 'Έγγραψέ με!',
 	'RegistrationUserNameOwned'	=> 'Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.',
-	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
-	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
-	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. Furthermore you will not be notified of recent page changes and comments.',
+	'SiteRegistered'			=> 'Έχετε εγγραφεί με επιτυχία στον ιστότοπο %1.',
+	'RegistrationEmailInfo'		=> 'Μια έγκυρη διεύθυνση email. Όλα τα email από το σύστημα θα σταλούν σε αυτήν τη διεύθυνση. Η διεύθυνση email δεν δημοσιοποιείται και θα χρησιμοποιηθεί μόνο εάν επιθυμείτε να λάβετε νέο κωδικό πρόσβασης ή να λάβετε συγκεκριμένες ειδήσεις ή ειδοποιήσεις μέσω email.',
+	'SiteEmailConfirm'			=> 'Επιβεβαιώστε τη διεύθυνση E-mail σας κάνοντας κλικ στο σύνδεσμο στις οδηγίες που σας έχουν σταλεί. <br> Εάν δεν επαληθεύσετε τη διεύθυνση email σας, δεν θα μπορείτε να ανακτήσετε έναν πιθανό χαμένο κωδικό πρόσβασης. Επιπλέον, δεν θα ειδοποιηθείτε για πρόσφατες αλλαγές σελίδας και σχόλια.',
 	'NameTooShort'				=> 'Το όνομα μέλους είναι πολύ μικρό, απαιτούνται τουλάχιστον %2 χαρακτήρες.',
 	'NameTooLong'				=> 'Το όνομα μέλους είναι πολύ μεγάλο, απαιτούνται το πολύ %2 χαρακτήρες.',
 	'NameAlphanumOnly'			=> 'Το όνομα μέλους πρέπει να είναι από %1 έως %2 χαρακτήρες μακρύ και να περιέχει μόνο αλφαριθμητικούς χαρακτήρες.',
@@ -285,7 +285,7 @@ $wacko_translation = [
 	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
 	'CategoriesStoreButton'		=> 'Αποθήκευση Κατηγορίες',
 	'CategoriesSaveButton'		=> 'Submit',
-	'CategoriesCancelButton'	=> 'Cancel',
+	'CategoriesCancelButton'	=> 'Ακύρωση',
 	'CategoriesAddButton'		=> 'Add',
 	'CategoriesRenameButton'	=> 'Rename',
 	'CategoriesGroupButton'		=> 'Group',
@@ -338,8 +338,8 @@ $wacko_translation = [
 	'MinorEditHide'				=> 'Απόκρυψη μικρών αλλαγών',
 	'MinorEditShow'				=> 'Εμφάνιση μικρή αλλαγή',
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
-	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
-	'OverwriteAlert'			=> 'OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br>Please copy your changes and re-edit this page.',
+	'NotifyMe'					=> 'Θέλω να λαμβάνω ειδοποιήσεις για νέα σχόλια και αλλαγές στη σελίδα',
+	'OverwriteAlert'			=> 'OVERWRITE ALERT: Αυτή η σελίδα τροποποιήθηκε από κάποιον άλλο κατά την επεξεργασία. <br> Αντιγράψτε τις αλλαγές σας και επεξεργαστείτε ξανά αυτήν τη σελίδα.',
 	'EditingRevisionWarning'	=> 'Επεξεργάζεστε μια παλιά έκδοση αυτής της σελίδας. Αν αποθηκεύσετε αυτή την έκδοση, όλες οι αλλαγές που έγιναν μετά από αυτήν θα χαθούν. Ενδέχεται να θέλετε να επεξεργαστείτε την τρέχουσα αναθεώρηση.',
 	'WriteAccessDenied'			=> 'Δεν έχετε δικαιώματα εγγραφής σε αυτή την σελίδα.',
 	'EmptyPage'					=> 'Page body was empty - δεν αποθηκεύτηκε!',
@@ -756,7 +756,7 @@ $wacko_translation = [
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 									'violates the rules of the site, please send it (using the button Forward /' .
 									'Forward your mail program) to address %1.',
-	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send personal messages to users.',
+	'UsersPMNotLoggedIn'		=> 'Δεν είστε συνδεδεμένοι στο σύστημα και δεν μπορείτε να στείλετε προσωπικά μηνύματα στους χρήστες.',
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
@@ -1068,7 +1068,7 @@ $wacko_translation = [
 	'ModerateSet'				=> 'Set',
 	'ModerateReset'				=> 'Reset',
 	'ModerateAccept'			=> 'Accept',
-	'ModerateDecline'			=> 'Cancel',
+	'ModerateDecline'			=> 'Ακύρωση',
 	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
 	'ModerateRenameConfirm'		=> 'Enter a new title for the selected page',
 	'ModerateRenameExists'		=> 'Page same name already exists! Choose a different name.',

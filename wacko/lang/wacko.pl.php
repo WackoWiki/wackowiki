@@ -338,7 +338,7 @@ $wacko_translation = [
 	'MinorEditHide'				=> 'Hide minor edit',
 	'MinorEditShow'				=> 'Show minor edit',
 	'PostAnonymously'			=> 'Publikuj anonimowo, nie podając swojego nazwiska',
-	'NotifyMe'					=> 'Notify me about new comments and changes of the page',
+	'NotifyMe'					=> 'Powiadamiaj mnie o nowych komentarzach i zmianach na stronie',
 	'OverwriteAlert'			=> 'UWAGA STRONA NADPISANA: Podczas wprowadzania zmian, zawartość strony została zmodyfikowana przez kogoś innego.<br>Należy skopiować wprowadzone zmiany do innego programu i ponownie rozpocząć edycję strony.',
 	'EditingRevisionWarning'	=> 'Edytujesz starą wersję tej strony. Jeśli ją opublikujesz, wszelkie zmiany dokonane od tego czasu zostaną usunięte. Zamiast tego możesz chcieć edytować bieżącą wersję.',
 	'WriteAccessDenied'			=> 'Przepraszamy. Nie masz prawa zapisu na tej stronie.',
@@ -756,7 +756,7 @@ $wacko_translation = [
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 									'violates the rules of the site, please send it (using the button Forward /' .
 									'Forward your mail program) to address %1.',
-	'UsersPMNotLoggedIn'		=> 'You are not registered in the system and can not send personal messages to users.',
+	'UsersPMNotLoggedIn'		=> 'Nie jesteś zalogowany do systemu i nie możesz wysyłać osobistych wiadomości do użytkowników.',
 
 	// rating handler
 	'RatingDenied'				=> 'You can not rate this page.',
