@@ -20,7 +20,6 @@ class WackoFormatter
 	var $intable			= 0;
 	var $intablebr			= 0;
 	var $cols				= 0;
-	var $z_gif				= "\u{00A0}";	// \u{00A0} No-Break Space (NBSP)
 	var $colors				= [
 								'blue' => 'blue',
 								'green' => 'green',
@@ -784,12 +783,6 @@ class WackoFormatter
 			$result = preg_replace_callback($this->LONGREGEXP, $callback, $matches[0]);
 			$result = preg_replace('/^(<br>)+/i', '', $result );
 			$result = preg_replace('/(<br>)+$/i', '', $result );
-
-			// These regexp needed for workaround MSIE bug (</ul></blockquote>)
-			if (preg_match('/<\/ul>[\s\r\t\n]*$/i', $result))
-			{
-				$result .= $this->z_gif;
-			}
 
 			return $result; // '<blockquote>' . $result . '</blockquote>';
 		}

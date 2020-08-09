@@ -104,8 +104,10 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	$title		= htmlentities(utf8_ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
 
 	// begin calendar
-	[$p, $pl] = each($pn);
-	[$n, $nl] = each($pn); // previous and next links, if applicable
+
+	// TODO: fix navigation array handling
+	[$p, $pl] = $pn;
+	[$n, $nl] = $pn; // previous and next links, if applicable
 
 	if ($p)
 	{

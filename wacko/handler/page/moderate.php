@@ -727,7 +727,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			if ($this->has_access('read', $topic['page_id']))
 			{
-				$tpl->title		= $topic['title'];
 				$tpl->pageid	= $topic['page_id'];
 				$tpl->created	= $topic['created'];
 				$tpl->comments	= $topic['comments'];
