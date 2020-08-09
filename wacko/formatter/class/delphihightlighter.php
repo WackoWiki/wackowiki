@@ -12,8 +12,8 @@
  *
  **/
 
-class DelphiHightlighter{
-
+class DelphiHightlighter
+{
 	var $code = '';		// the code to be hightlighed
 	var $newcode = '';	// generated code
 	var $tok;			// word being cut out
@@ -23,7 +23,7 @@ class DelphiHightlighter{
 	/****************************************************************/
 	/* The variables that define the behavior of the analyzer       */
 	/****************************************************************/
-	var $case_sensitive	= FALSE;                   // case sensitive language or not
+	var $case_sensitive	= false;                   // case sensitive language or not
 	var $tokdelimiters	= " []()=+-/*:;,.\n\t\r  "; // word delimiters
 
 	/***************************************************/
@@ -94,8 +94,10 @@ class DelphiHightlighter{
 	/************************************************************************/
 	/* Returns true if a character is visible and can be colored            */
 	/************************************************************************/
-	function visiblechar($char) {
+	function visiblechar($char)
+	{
 		$inviblechars = " \t\n\r  ";
+
 		return (!is_integer(strpos($inviblechars, $char)));
 	}
 
@@ -104,7 +106,11 @@ class DelphiHightlighter{
 	/************************************************************/
 	function formatspecialtok($tok, $color, $style)
 	{
-		if (empty($color)) return sprintf("%s$tok%s", $style[0], $style[1]);
+		if (empty($color))
+		{
+			return sprintf("%s$tok%s", $style[0], $style[1]);
+		}
+
 		return sprintf("%s<span style=\"color: %s;\">$tok</span>%s", $style[0], $color, $style[1]);
 	}
 
@@ -113,12 +119,18 @@ class DelphiHightlighter{
 	/*********************************************************************/
 	function array_search_case($needle, $array)
 	{
-		if (!is_array($array)) return FALSE;
-		if (empty($array)) return FALSE;
+		if (!is_array($array))	return false;
+		if (empty($array))		return false;
 
-		foreach ($array as $index=>$string)
-		if (strcasecmp($needle, $string) == 0) return intval($index);
-		return FALSE;
+		foreach ($array as $index => $string)
+		{
+			if (strcasecmp($needle, $string) == 0)
+			{
+				return intval($index);
+			}
+		}
+
+		return false;
 	}
 
 	/*****************************************************/
@@ -127,16 +139,21 @@ class DelphiHightlighter{
 	function analyseword($tok)
 	{
 		// If it's a number
-		if ((isset($tok[0]) && $tok[0] == '$') || (isset($tok[0]) && $tok[0] == '#') || ($tok == (string)intval($tok)))
-		return $this->formatspecialtok($tok, $this->colornumber, $this->stylenumber);
+		if ((isset($tok[0]) && $tok[0] == '$') || (isset($tok[0]) && $tok[0] == '#') || ($tok == (string) intval($tok)))
+		{
+			return $this->formatspecialtok($tok, $this->colornumber, $this->stylenumber);
+		}
 
 		// If it's empty, we return an empty string
 		if (empty($tok)) return $tok;
 
 		// If it's a keyword
-		if ((($this->case_sensitive) && (is_integer(array_search($tok, $this->keywords, FALSE)))) ||
-		((!$this->case_sensitive) && (is_integer($this->array_search_case($tok, $this->keywords)))))
-		return $this->formatspecialtok($tok, $this->colorkeyword, $this->stylekeyword);
+		if (   (($this->case_sensitive) && (is_integer(array_search($tok, $this->keywords, false))))
+			|| ((!$this->case_sensitive) && (is_integer($this->array_search_case($tok, $this->keywords)))))
+		{
+			return $this->formatspecialtok($tok, $this->colorkeyword, $this->stylekeyword);
+		}
+
 		// Otherwise, the word is returned without formatting
 		return $this->formatspecialtok($tok, $this->colortext, $this->styletext);
 	}
@@ -147,9 +164,9 @@ class DelphiHightlighter{
 	function parsearray($array, $color = '#000080', $style = ['<em>', '</em>'])
 	{
 		// We're doing some verifications.
-		if (!is_array($array))		return FALSE;
-		if (!strlen($this->code))	return FALSE;
-		if (!sizeof($array))		return FALSE;
+		if (!is_array($array))		return false;
+		if (!strlen($this->code))	return false;
+		if (!sizeof($array))		return false;
 
 		// We will try to compare the current character with the 1st
 		// character of each first delimiter
@@ -160,7 +177,7 @@ class DelphiHightlighter{
 			// If the 1st char matches
 			if ($this->char == $delimiter1[0])
 			{
-				$match = TRUE;
+				$match = true;
 
 				// We'll try to compare all the other characters
 				// To check that we have the complete delimiter
@@ -177,7 +194,10 @@ class DelphiHightlighter{
 					$delimiterend = strpos($this->code, $delimiter2, $this->i + strlen($delimiter1));
 					// If we don't find the end delimiter, we take the whole file
 
-					if (!is_integer($delimiterend)) $delimiterend = strlen($this->code);
+					if (!is_integer($delimiterend))
+					{
+						$delimiterend = strlen($this->code);
+					}
 					// Now that we have everything, we analyze the word before the delimiter, if it exists.
 
 					if (!empty($this->tok))
@@ -192,15 +212,22 @@ class DelphiHightlighter{
 					$this->i = $delimiterend + strlen($delimiter2);
 
 					// Finally we get the current character
-					if ($this->i > $this->codelength) $this->char = null;
-					else $this->char = $this->code[$this->i];
+					if ($this->i > $this->codelength)
+					{
+						$this->char = null;
+					}
+					else
+					{
+						$this->char = $this->code[$this->i];
+					}
+
 					// We state that we were successful in finding
-					return TRUE;
+					return true;
 				} //if
 			} // if
 		} // foreach
 
-		return FALSE;
+		return false;
 	}
 
 	/****************************/
@@ -208,10 +235,10 @@ class DelphiHightlighter{
 	/****************************/
 	function parsearrays()
 	{
-		$haschanged = TRUE;
+		$haschanged = true;
 
 		// With each change, the entire loop is restarted
-		while($haschanged)
+		while ($haschanged)
 		{
 			// We're checking to see if we're not running into a comment delimiter
 			$haschanged = $this->parsearray($this->preprocdelimiters, $this->colorpreproc, $this->stylepreproc);
@@ -259,14 +286,17 @@ class DelphiHightlighter{
 
 		for ($this->i = 0; $this->i < $this->codelength; $this->i++ )
 		{
-			$this->dump($this->i,'i');
+			$this->dump($this->i, 'i');
 			$this->char = $this->code[$this->i];
 			$this->dump($this->char,'char');
 			// We're looking for a special case.
 			$this->parsearrays();
 
 			// We're looking to see if we've reached the end of the chain.
-			if ($this->char == null) return $this->newcode;
+			if ($this->char == null)
+			{
+				return $this->newcode;
+			}
 
 			// We've finished analyzing the comments, we're checking to see if we have a complete word.
 			if (is_integer(strpos($this->tokdelimiters, $this->char)))
@@ -275,18 +305,30 @@ class DelphiHightlighter{
 				$this->newcode .= $this->analyseword($this->tok);
 				// We format the delimiter
 
-				if ($this->visiblechar($this->char)) $this->newcode .= $this->formatspecialtok($this->char, $this->colorsymbol, $this->stylesymbol);
-				else $this->newcode .= $this->char;
+				if ($this->visiblechar($this->char))
+				{
+					$this->newcode .= $this->formatspecialtok($this->char, $this->colorsymbol, $this->stylesymbol);
+				}
+				else
+				{
+					$this->newcode .= $this->char;
+				}
 				// We reset the current word to 0
 				$this->tok = '';
 			}
-			else {// We don't have a complete word, we complete the word
+			else
+			{
+				// We don't have a complete word, we complete the word
 				$this->tok .= $this->char;
 			}
 		} // for
 
 		// We're checking to see if we can get to the end of the code.
-		if (!empty($this->tok)) $this->newcode .= $this->analyseword($this->tok);
+		if (!empty($this->tok))
+		{
+			$this->newcode .= $this->analyseword($this->tok);
+		}
+
 		return $this->newcode;
 	}
 }
