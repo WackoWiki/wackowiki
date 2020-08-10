@@ -651,7 +651,7 @@ $ap_translation = [
 	'LinkTarget'				=> 'Where external links open',
 	'LinkTargetInfo'			=> 'Abre cada enlace externo en una nueva ventana del navegador. Añade <code>target="_blank"</code> a la sintaxis del enlace.',
 	'Noreferrer'				=> 'noreferrer',
-	'NoreferrerInfo'			=> 'Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.',
+	'NoreferrerInfo'			=> 'Requiere que el navegador no envíe un encabezado de referencia HTTP si el usuario sigue el hipervínculo. Añade <code>rel="noreferrer"</code> a la sintaxis del enlace.',
 	'Nofollow'					=> 'nofollow',
 	'NofollowInfo'				=> 'Instruct some search engines that the hyperlink should not influence the ranking of the links target in the search engines index. Adds <code>rel="nofollow"</code> to the link syntax.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
@@ -897,7 +897,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Base de datos convertida',
 	'ConversionTablesOk'		=> 'Conversión de las tablas seleccionadas con éxito.',
 
-	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
+	'LogColumnsToStrict'		=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Conversión de tablas de MyISAM a InnoDB',

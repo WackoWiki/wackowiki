@@ -652,7 +652,7 @@ $ap_translation = [
 	'LinkTarget'				=> 'Where external links open',
 	'LinkTargetInfo'			=> 'Otwiera każde zewnętrzne łącze w nowym oknie przeglądarki. Dodaje <code>target="_blank"</code> do składni linku.',
 	'Noreferrer'				=> 'noreferrer',
-	'NoreferrerInfo'			=> 'Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.',
+	'NoreferrerInfo'			=> 'Wymaga, aby przeglądarka nie wysyłała nagłówka referenta HTTP, jeśli użytkownik podąża za hiperłączem. Dodaje <code>rel="noreferrer"</code> do składni linku.',
 	'Nofollow'					=> 'nofollow',
 	'NofollowInfo'				=> 'Należy poinstruować niektóre wyszukiwarki, że hiperłącze nie powinno mieć wpływu na ranking linków docelowych w indeksie wyszukiwarek. Dodaje <code>rel="nofollow"</code> do składni linku.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
