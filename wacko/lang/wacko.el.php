@@ -139,7 +139,7 @@ $wacko_translation = [
 	'ShowTip'					=> 'Πάτησε εδώ για να επιστρέψεις στην κατάσταση εμφάνισης',
 	'ShowText'					=> 'Εμφάνιση',
 	'WikieditAutocomplete'		=> 'Ολοκλήρωση των wikilinks με Ctrl+Space',
-	'WikiEditInactiveJs'		=> 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
+	'WikiEditInactiveJs'		=> 'Για να μπορέσετε να χρησιμοποιήσετε το WikiEdit, ενεργοποιήστε τη JavaScript στο πρόγραμμα περιήγησής σας.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'Typografica'				=> 'Αυτόματη διόρθωση των τυπογραφικών κατά την προβολή',
 	'Comment'					=> 'Σχολιάστε',
@@ -491,9 +491,8 @@ $wacko_translation = [
 	'DoubleclickEditing'		=> 'Επεξεργασία με διπλό click',
 	'UpdateSettingsButton'		=> 'Αποθήκευση Ρυθμίσεων',
 
-	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
+	'AccountDisabled'			=> 'Ο λογαριασμός σας είναι απενεργοποιημένος ή αποκλεισμένος.',
 	'WrongPassword'				=> 'Λανθασμένο συνθηματικό!',
-	'AlreadyRegistered'			=> 'Αν είστε ήδη εγγεγραμμένος χρήστης, συνδεθείτε εδώ!',
 	'YourLogin'					=> 'Το WikiName',
 	'ConfirmPassword'			=> 'Επιβεβαίωση συνθηματικού',
 	'Email'						=> 'Διεύθυνση Ηλεκτρονικού Ταχυδρομείου',
@@ -751,7 +750,7 @@ $wacko_translation = [
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
-	'UsersPMBody'				=> 'This message has been sent to you by the user %1.',
+	'UsersPMBody'				=> 'Αυτό το μήνυμα σας έχει σταλεί από τον χρήστη %1.',
 	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 									'violates the rules of the site, please send it (using the button Forward /' .
@@ -993,12 +992,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:video.mp4"}} )',
+	'EmbedNoURL'				=> 'Προσδιορίστε τη διεύθυνση του πόρου χρησιμοποιώντας την παράμετρο url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',

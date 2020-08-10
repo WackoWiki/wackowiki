@@ -494,7 +494,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Ваш аккаунт запрещен или заблокирован.',
 	'WrongPassword'				=> 'Неправильный пароль!',
-	'AlreadyRegistered'			=> 'Если вы уже регистрировались, заходите здесь!',
 	'YourLogin'					=> 'Ваше ВикиИмя',
 	'ConfirmPassword'			=> 'Подтверждение пароля',
 	'Email'						=> 'Адрес электронной почты',
@@ -995,12 +994,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Кэш миниатюр Thumbnails',
 
 	// Embed
-	'EmbedNoURL'				=> 'Пожалуйста, укажите адрес ресурса с помощью параметра url, например, {{embed url="file:video.mp4"}}',
+	'EmbedNoURL'				=> 'Пожалуйста, укажите адрес ресурса с помощью параметра url, например, {{embed url="https://example.com/embed/video.mp4"}}',
 
 	// Feed
 	'FeedTitle'					=> 'Заголовок канала новостей',
 	'FeedMulti'					=> 'Несколько источников',
-	'FeedNoURL'					=> 'Пожалуйста, укажите канал новостей с помощью параметра url, например, {{feed url="http://example.com/xml/comments_wackowiki.xml"}}',
+	'FeedNoURL'					=> 'Пожалуйста, укажите канал новостей с помощью параметра url, например, {{feed url="https://example.com/xml/comments_wackowiki.xml"}}',
 	'FeedError'					=> 'Невозможно загрузить или распознать новости',
 	'FeedSource'				=> 'Источник:',
 	'FeedLastItems'				=> 'Последних элементов: %1',

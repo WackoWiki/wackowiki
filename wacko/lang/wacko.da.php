@@ -139,7 +139,7 @@ $wacko_translation = [
 	'ShowTip'					=> 'Klik for at vende tilbage til visning',
 	'ShowText'					=> 'Vis',
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
-	'WikiEditInactiveJs'		=> 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
+	'WikiEditInactiveJs'		=> 'For at kunne bruge WikiEdit skal du aktivere JavaScript i din browser.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'Typografica'				=> 'Autokorriger typografi ved visning',
 	'Comment'					=> 'Kommentar',
@@ -493,7 +493,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Din konto er måske deaktiveret.',
 	'WrongPassword'				=> 'Forkert password!',
-	'AlreadyRegistered'			=> 'Er du allerede registreret kan du logge ind her!',
 	'YourLogin'					=> 'Dit WikiNavn',
 	'ConfirmPassword'			=> 'Bekræft password',
 	'Email'						=> 'Emailadresse',
@@ -751,7 +750,7 @@ $wacko_translation = [
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
-	'UsersPMBody'				=> 'This message has been sent to you by the user %1.',
+	'UsersPMBody'				=> 'Denne meddelelse er blevet sendt til dig af brugeren %1.',
 	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 								   'violates the rules of the site, please send it (using the button Forward /' .
@@ -993,12 +992,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:video.mp4"}} )',
+	'EmbedNoURL'				=> 'Angiv adressen på den ressource ved hjælp url parameter. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
@@ -1013,7 +1012,7 @@ $wacko_translation = [
 	'NewsXML'					=> 'Recent news to the ',
 	'PageRevisionsXML'			=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
-	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
+	'AccessDeniedXML'			=> 'Du har ikke adgang til disse oplysninger.',
 
 	'ChangesFeed'				=> 'Ændringer',
 	'CommentsFeed'				=> 'Kommentarer',

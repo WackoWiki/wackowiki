@@ -139,7 +139,7 @@ $wacko_translation = [
 	'ShowTip'					=> 'Kliki, et minna tagasi vaaterežiimi',
 	'ShowText'					=> 'Vaata',
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
-	'WikiEditInactiveJs'		=> 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
+	'WikiEditInactiveJs'		=> 'WikiEditi kasutamiseks peaksite oma brauseris lubama JavaScripti.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'Typografica'				=> 'Trükivea autokorrektuur',
 	'Comment'					=> 'Kommentaar',
@@ -493,7 +493,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Sinu kasutajakonto võib olla blokeeritud.',
 	'WrongPassword'				=> 'Vale parool!',
-	'AlreadyRegistered'			=> 'Kui sa oled juba registreerunud, logi siit sisse!',
 	'YourLogin'					=> 'Sinu WikiNimi',
 	'ConfirmPassword'			=> 'Korda parooli',
 	'Email'						=> 'E-posti aadress',
@@ -751,7 +750,7 @@ $wacko_translation = [
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
-	'UsersPMBody'				=> 'This message has been sent to you by the user %1.',
+	'UsersPMBody'				=> 'Selle teate on teile saatnud kasutaja %1.',
 	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 									'violates the rules of the site, please send it (using the button Forward /' .
@@ -993,12 +992,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:video.mp4"}} )',
+	'EmbedNoURL'				=> 'Palun täpsustage aadress ressursi abil url parameetri. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
@@ -1013,7 +1012,7 @@ $wacko_translation = [
 	'NewsXML'					=> 'Recent news to the ',
 	'PageRevisionsXML'			=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
-	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
+	'AccessDeniedXML'			=> 'Teil pole sellele infole juurde pääseda.',
 
 	'ChangesFeed'				=> 'Changes',
 	'CommentsFeed'				=> 'Comments',

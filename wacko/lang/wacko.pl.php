@@ -493,7 +493,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Twoje konto może być wyłączone.',
 	'WrongPassword'				=> 'Nieprawidłowe hasło!',
-	'AlreadyRegistered'			=> 'Zaloguj się!',
 	'YourLogin'					=> 'Twoja NazwaWiki',
 	'ConfirmPassword'			=> 'Potwierdź hasło',
 	'Email'						=> 'Adres e-mail',
@@ -751,7 +750,7 @@ $wacko_translation = [
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
-	'UsersPMBody'				=> 'This message has been sent to you by the user %1.',
+	'UsersPMBody'				=> 'Ta wiadomość została wysłana do Ciebie przez użytkownika %1.',
 	'UsersPMReply'				=> 'Aby odpowiedzieć na ten e-mail, kliknij na poniższy link (nie używaj przycisku Odpowiedz / Odpowiadaj w mailerze):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
 									'violates the rules of the site, please send it (using the button Forward /' .
@@ -993,12 +992,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="file:video.mp4"}} )',
+	'EmbedNoURL'				=> 'Proszę wpisać adres zasobu za pomocą parametru url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',

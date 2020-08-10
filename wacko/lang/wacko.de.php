@@ -493,7 +493,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Dein Konto ist deaktiviert oder gesperrt.',
 	'WrongPassword'				=> 'Falsches Passwort!',
-	'AlreadyRegistered'			=> 'Falls du dich bereits registriert hast, melde dich hier an!',
 	'YourLogin'					=> 'Benutzername',
 	'ConfirmPassword'			=> 'Passwort bestätigen',
 	'Email'						=> 'E-Mailadresse',
@@ -993,12 +992,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Vorschaubild Zwischenspeicher',
 
 	// Embed
-	'EmbedNoURL'				=> 'Bitte gib die Adresse der Ressource mit dem Parameter url an. (z.B. {{embed url="file:video.mp4"}} )',
+	'EmbedNoURL'				=> 'Bitte gib die Adresse der Ressource mit dem Parameter url an. (z.B. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Titel',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url="http://example.com/xml/comments_wackowiki.xml"}}',
+	'FeedNoURL'					=> 'Bitte gib einen Feed mit dem Parameter url an. (z.B. {{feed url="https://example.com/xml/comments_wackowiki.xml"}}',
 	'FeedError'					=> 'Kann Feed nicht laden oder parsen',
 	'FeedSource'				=> 'Quelle:',
 	'FeedLastItems'				=> 'Letzte %1 Beiträge',

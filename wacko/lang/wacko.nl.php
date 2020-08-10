@@ -493,7 +493,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Uw account kan uitgeschakeld zijn.',
 	'WrongPassword'				=> 'Verkeerd wachtwoord!',
-	'AlreadyRegistered'			=> 'Als u een geregistreerde gebruiker ben, kunt u hier inloggen!',
 	'YourLogin'					=> 'Uw wikinaam',
 	'ConfirmPassword'			=> 'Bevestig het wachtwoord',
 	'Email'						=> 'Email adres',
@@ -993,12 +992,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Thumbnail cache',
 
 	// Embed
-	'EmbedNoURL'				=> 'Geef een adres van de bron op met de parameter url. (e.g. {{embed url="file:video.mp4"}} )',
+	'EmbedNoURL'				=> 'Geef een adres van de bron op met de parameter url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
-	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
@@ -1013,7 +1012,7 @@ $wacko_translation = [
 	'NewsXML'					=> 'Recent news to the ',
 	'PageRevisionsXML'			=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
-	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
+	'AccessDeniedXML'			=> 'Je hebt geen toegang tot deze informatie.',
 
 	'ChangesFeed'				=> 'Wijzigingen',
 	'CommentsFeed'				=> 'Opmerkingen',

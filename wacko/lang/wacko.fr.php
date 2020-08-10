@@ -493,7 +493,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Votre compte est peut être désactivé.',
 	'WrongPassword'				=> 'Mot de passe incorrect !',
-	'AlreadyRegistered'			=> 'Si vous vous êtes déjà enregistré(e], connectez-vous ici !',
 	'YourLogin'					=> 'Votre NomWiki',
 	'ConfirmPassword'			=> 'Confirmez votre mot de passe ',
 	'Email'						=> 'Adresse de messagerie ',
@@ -993,12 +992,12 @@ $wacko_translation = [
 	'ThumbCache'				=> 'Cache de vignette',
 
 	// Embed
-	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="file:video.mp4"}} )',
+	'EmbedNoURL'				=> 'Merci de spécifier l\'adresse de la ressource avec l’url en paramètre (p.ex. {{embed url="https://example.com/embed/video.mp4"}} )',
 
 	// Feed
 	'FeedTitle'					=> 'Titre du flux',
 	'FeedMulti'					=> 'Multi-flux',
-	'FeedNoURL'					=> 'Merci de spécifier un flux avec l’url en paramètre (p.ex. {{feed url="http://example.com/xml/comments_wackowiki.xml"}} )',
+	'FeedNoURL'					=> 'Merci de spécifier un flux avec l’url en paramètre (p.ex. {{feed url="https://example.com/xml/comments_wackowiki.xml"}} )',
 	'FeedError'					=> 'Impossible de charger ou d’analyser le flux',
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'Derniers %1 items',
