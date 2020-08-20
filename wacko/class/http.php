@@ -304,8 +304,8 @@ class Http
 		// for freecap, /file method and alike - do not play in NoReplay & do no simple id regen
 		if ($route & 2)
 		{
-			$sess->cf_static = 1;
-			$sess->cf_prevent_replay = 0;
+			$sess->cf_static			= 1;
+			$sess->cf_prevent_replay	= 0;
 		}
 
 		$sess->start('Session');

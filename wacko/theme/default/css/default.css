@@ -916,6 +916,8 @@ td.file- {
 	margin: .8em 2px 2px;
 	padding: 10px;
 	border: red 2px solid;
+	display: table;
+	width: 98%;
 }
 
 p.preview {

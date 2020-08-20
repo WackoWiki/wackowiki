@@ -446,7 +446,7 @@ class WackoFormatter
 			return $matches[1];
 		}
 		// centered text
-		else if (preg_match('/^>>(.*)<<$/s', $thing, $matches))
+		else if (preg_match('/^>>(.*)<<$/us', $thing, $matches))
 		{
 			return '<!--escaped--><div class="center">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</div><!--escaped-->';
 		}
@@ -677,17 +677,17 @@ class WackoFormatter
 			return '<ins class="diff">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</ins>';
 		}
 		// bold
-		else if (preg_match('/^\*\*(.*?)\*\*$/', $thing, $matches))
+		else if (preg_match('/^\*\*(.*?)\*\*$/u', $thing, $matches))
 		{
 			return '<strong>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</strong>';
 		}
 		// italic
-		else if (preg_match('/^\/\/(.*?)\/\/$/', $thing, $matches))
+		else if (preg_match('/^\/\/(.*?)\/\/$/u', $thing, $matches))
 		{
 			return '<em>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</em>';
 		}
 		// underline
-		else if (preg_match('/^__(.*?)__$/', $thing, $matches))
+		else if (preg_match('/^__(.*?)__$/u', $thing, $matches))
 		{
 			return '<span class="underline">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</span>';
 		}
@@ -698,7 +698,7 @@ class WackoFormatter
 			return '<code>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</code>';
 		}
 		// small
-		else if (preg_match('/^\+\+(.*?)\+\+$/', $thing, $matches))
+		else if (preg_match('/^\+\+(.*?)\+\+$/u', $thing, $matches))
 		{
 			return '<small>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</small>';
 		}
@@ -774,7 +774,7 @@ class WackoFormatter
 			return '<div class="email' . strlen($matches[1]) . ' email-' . (strlen($matches[1]) % 2 ? 'odd' : 'even') . '">' . Ut::html($matches[1]) . preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]) . '</div>';
 		}
 		// blockquote
-		else if (preg_match('/^<\[(.*)\]>$/s', $thing, $matches))
+		else if (preg_match('/^<\[(.*)\]>$/us', $thing, $matches))
 		{
 			// trivial substitution (is there a security hole?)
 			$matches[0] = str_replace('<[', '<!--escaped--><blockquote><!--escaped-->', $matches[0]);
@@ -792,7 +792,7 @@ class WackoFormatter
 			return '<sup>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</sup>';
 		}
 		// sub
-		else if (preg_match('/^vv(.*)vv$/', $thing, $matches))
+		else if (preg_match('/^vv(.*)vv$/u', $thing, $matches))
 		{
 			return '<sub>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</sub>';
 		}

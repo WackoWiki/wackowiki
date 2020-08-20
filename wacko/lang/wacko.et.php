@@ -134,9 +134,9 @@ $wacko_translation = [
 	'EmailLink'					=> 'Koosta e-kiri (mailiprogramm avaneb)',
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
 	'PermaLink'					=> 'Püsilink',
-	'PermaLinkTip'				=> 'Püsilink lehekülje sellele redaktsioonile',
+	'PermaLinkTip'				=> 'Püsilink sellele lehele',
 
-	'ShowTip'					=> 'Kliki, et minna tagasi vaaterežiimi',
+	'ShowTip'					=> 'Lehe vaaterezhiim',
 	'ShowText'					=> 'Vaata',
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs'		=> 'WikiEditi kasutamiseks peaksite oma brauseris lubama JavaScripti.',
@@ -353,12 +353,12 @@ $wacko_translation = [
 
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
-		'0'		=> 'Full diff',
+		'0'		=> 'Täistekst erinevus',
 		'1'		=> 'Lihtne erinevus',
-		'2'		=> 'Source',
-		'3'		=> 'Kõrvuti',
+		'2'		=> 'Lähtekoodi-põhine',
+		'3'		=> 'Külg-külje-kõrval',
 		'4'		=> 'Jooksvalt',
-		'5'		=> 'Unified',
+		'5'		=> 'Ühtlustatud',
 		'6'		=> 'Context',
 	],
 
@@ -387,7 +387,7 @@ $wacko_translation = [
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'by time',
-	'ViewReferrersGlobal'		=> 'globaalseid>',
+	'ViewReferrersGlobal'		=> 'globaalseid',
 	'NoneReferrers'				=> 'Ei',
 	'NotOwnerCantDelete'		=> 'Sa ei ole selle lehe omanik, seega ei saa ka kustutada',
 
@@ -415,8 +415,8 @@ $wacko_translation = [
 	'PageRestored'				=> 'Page restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
-	'PrintVersion'				=> 'Prinditav versioon',
-	'PrintText'					=> 'Print',
+	'PrintVersion'				=> 'Prindiversioon',
+	'PrintText'					=> 'Prindi',
 	'LinkedPages'				=> 'Lingitud lehed',
 	'NoLinkedPages'				=> 'Lingitud lehti pole',
 	'ReferringPages'			=> 'Viidatud lehed',

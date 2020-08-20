@@ -11,9 +11,9 @@ use Hashids\Hashids;
 
 class UriRouter
 {
-	const CODE_VERSION = 2; // to not read incompatible cached data
-	const GLOBALS = ['G' => '_GET', 'P' => '_POST', 'S' => '_SERVER'];
-	private $config = [];
+	const CODE_VERSION	= 2; // to not read incompatible cached data
+	const GLOBALS		= ['G' => '_GET', 'P' => '_POST', 'S' => '_SERVER'];
+	private $config		= [];
 	private $db;
 	private $http;
 
@@ -75,9 +75,9 @@ class UriRouter
 			$env[$varname] = $GLOBALS[$varname]; // $$varname don't work for _GET & others...
 		}
 
-		//Ut::dbg(array_diff_key($env, ['_SERVER'=>0]));
+		//Ut::dbg(array_diff_key($env, ['_SERVER' => 0]));
 		$this->route($env);
-		//Ut::dbg('->', array_diff_key($env, ['_SERVER'=>0]));
+		//Ut::dbg('->', array_diff_key($env, ['_SERVER' => 0]));
 
 		$vars = $env['vars'];
 

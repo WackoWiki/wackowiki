@@ -17,8 +17,7 @@ if (!isset($options['stripnotypo'])) $options['stripnotypo'] = false;
 
 if ($options['stripnotypo'])
 {
-	$text = str_replace('<!--notypo-->', '', $text);
-	$text = str_replace('<!--/notypo-->', '', $text);
+	$text = str_replace(['<!--notypo-->', '<!--/notypo-->'], '', $text);
 }
 
 echo $text;
