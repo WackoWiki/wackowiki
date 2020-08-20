@@ -6775,7 +6775,7 @@ class Wacko
 		// permalink
 		$page = 0;
 
-		if ($method == 'Hashid')
+		if ($method == 'hashid')
 		{
 			$method			= '';
 			$ids			= explode('x', $tag);
