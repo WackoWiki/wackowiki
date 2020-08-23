@@ -168,14 +168,14 @@ if ($can_view)
 	{
 		if ($file['page_id'])
 		{
-			$page_ids[]		= $file['page_id'];
-			$this->page_id_cache[$file['tag']] = $file['page_id'];
+			$page_ids[]							= $file['page_id'];
+			$this->page_id_cache[$file['tag']]	= $file['page_id'];
 		}
 
 		$this->cache_page($file, true);
 
-		$object_ids[]	= $file['file_id'];
-		$this->file_cache[$file['page_id']][$file['file_name']] = $file;
+		$object_ids[]												= $file['file_id'];
+		$this->file_cache[$file['page_id']][$file['file_name']]		= $file;
 	}
 
 	$this->preload_categories($object_ids, OBJECT_FILE);
@@ -233,7 +233,7 @@ if ($can_view)
 				}
 
 				// absolute file path: file:/path/
-				$path2	= $path1 . ($this->slim_url($file['tag'])) . '/';
+				$path2	= $path1 . ($file['tag']) . '/';
 				$page	= $file['tag'];
 			}
 			else
