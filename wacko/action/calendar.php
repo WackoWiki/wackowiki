@@ -106,25 +106,25 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	// begin calendar
 
 	// TODO: fix navigation array handling
-	[$p, $pl] = $pn;
-	[$n, $nl] = $pn; // previous and next links, if applicable
+	@[$prev, $pl] = $pn;
+	@[$next, $nl] = $pn; // previous and next links, if applicable
 
-	if ($p)
+	if ($prev)
 	{
-		$tpl->p_text	= ($pl ? '<a href="' . Ut::html($pl) . '">' . $p . '</a>' : $p);
+		$tpl->p_text	= ($pl ? '<a href="' . Ut::html($pl) . '">' . $prev . '</a>' : $prev);
 		$tpl->p_class	= 'calendar-prev';
 	}
 
-	if ($n)
+	if ($next)
 	{
-		$tpl->n_text	= ($nl ? '<a href="' . Ut::html($nl) . '">' . $n . '</a>' : $n);
+		$tpl->n_text	= ($nl ? '<a href="' . Ut::html($nl) . '">' . $next . '</a>' : $next);
 		$tpl->n_class	= 'calendar-next';
 	}
 
 	$tpl->title		= ($month_href ? '<a href="' . Ut::html($month_href) . '">' . $title . '</a>' : $title);
 	$tpl->href		= $month_href;
-	$tpl->prev		= $p;
-	$tpl->next		= $n;
+	$tpl->prev		= $prev;
+	$tpl->next		= $next;
 
 	if ($day_name_length)
 	{

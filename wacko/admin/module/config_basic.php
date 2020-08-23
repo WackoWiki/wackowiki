@@ -44,7 +44,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['language']						= (string) $_POST['language'];
 		$config['multilanguage']				= (int) ($_POST['multilanguage'] ?? 0);
 
-		if (is_array($_POST['allowed_languages']))
+		if (isset($_POST['allowed_languages']) && is_array($_POST['allowed_languages']))
 		{
 			$config['allowed_languages'] = (string) implode(',', $_POST['allowed_languages']);
 		}

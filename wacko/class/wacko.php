@@ -7400,9 +7400,9 @@ class Wacko
 				$page_ids[] = (int) $comment['page_id'];
 				$this->remove_page($comment['page_id'], '', $dontkeep);
 			}
-		}
 
-		$this->delete_acls($page_ids, $dontkeep);
+			$this->delete_acls($page_ids, $dontkeep);
+		}
 
 		// reset comments count
 		$this->db->sql_query(
@@ -8789,6 +8789,7 @@ class Wacko
 			$to = $back;
 			unset($this->sess->sticky_goback);
 		}
+
 		$this->http->redirect($this->href('', $to, Ut::random_token(4)));
 		// NEVER BEEN HERE
 	}
