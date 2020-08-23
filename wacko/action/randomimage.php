@@ -69,7 +69,7 @@ if ($count['n'])
 	if ($file['page_id'])
 	{
 		// absolute file path: file:/path/
-		$path2	= $path1 . ($this->slim_url($file['tag'])) . '/';
+		$path2	= $path1 . $file['tag'] . '/';
 		$page	= $file['tag'];
 	}
 	else

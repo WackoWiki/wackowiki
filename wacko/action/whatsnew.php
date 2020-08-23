@@ -194,7 +194,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 				if ($page['page_id']) // !$global
 				{
-					$path2				= '_file:/' . $this->slim_url($page['tag']) . '/';
+					$path2				= '_file:/' . $page['tag'] . '/';
 					$tpl->l_to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
 					$tpl->l_cluster		= $sub_tag[0];
 				}

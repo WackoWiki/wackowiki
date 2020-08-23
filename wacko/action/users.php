@@ -461,7 +461,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 								// TODO needs to be redone, moving to tpl
 								if ($upload['page_id']) // !$global
 								{
-									$path2		= '_file:/' . $this->slim_url($upload['file_on_page']) . '/';
+									$path2		= '_file:/' . $upload['file_on_page'] . '/';
 									$on_tag		= $upload['file_on_page'];
 									$on_page	= $this->_t('To') . ' ' .
 												  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1) .
