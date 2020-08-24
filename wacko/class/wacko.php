@@ -2995,7 +2995,9 @@ class Wacko
 	* @param mixed $params		Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
 	* @param boolean $addpage	Optional
 	* @param string $anchor		Optional HTTP anchor-fragment
-	* @param boolean $alter		Optional uses slim_url (turn off for e.g. addpage or hashid routing)
+	* @param boolean $alter		Optional uses underscore_url (turn off for e.g. addpage or hashid routing)
+	* @param boolean $encode	Optional - percent-encode the non-ASCII bytes (rfc3986)
+	* @param boolean $absolute	Optional - uses absolute URL
 	*
 	* @return string			HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
@@ -3070,14 +3072,15 @@ class Wacko
 		return $href;
 	}
 
-	// returns just PageName[/method].
 	/**
 	* Returns value for page 'wacko' parameter, in tag[/method][#anchor] format
 	*
 	* @param string $method Optional Wacko method (default 'show' method added in run() function)
 	* @param string $tag Optional tag - returns current-page tag if empty
 	* @param boolean $alter Optional
-	* @return string String tag[/method]
+	* @param boolean $encode Optional - percent-encode the non-ASCII bytes (rfc3986)
+	*
+	* @return string tag[/method]
 	*/
 	function mini_href($method = '', $tag = '', $alter = true, $encode = true) : string
 	{
@@ -3089,7 +3092,7 @@ class Wacko
 		// urls_underscores
 		if ($alter && !$this->db->ap_mode)
 		{
-			$tag = $this->slim_url($tag);
+			$tag = $this->underscore_url($tag);
 		}
 
 		$tag = utf8_trim($tag, '/.');
@@ -3109,13 +3112,9 @@ class Wacko
 	* @param string $tag Page tag
 	* @return string
 	*/
-	function slim_url($tag) : string
+	function underscore_url($tag) : string
 	{
-		// why we do replace this here?
-		//	this behavior is unwanted in the AP, it breaks the redirect for e.g. config_basic.php
-		//	looks like a reverse of it in the tranlit function (?)
-		$tag = str_replace('_', "'", $tag);
-
+		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
 		if ($this->db->urls_underscores == 1)
 		{
 			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
@@ -6947,7 +6946,7 @@ class Wacko
 		// goback feature
 		if ($this->page && !$this->no_way_back && $this->tag != $this->db->root_page)
 		{
-			$this->sess->sticky_goback = $this->slim_url($this->tag);
+			$this->sess->sticky_goback = $this->underscore_url($this->tag);
 		}
 
 		// NB: never been here if redirect() called!
