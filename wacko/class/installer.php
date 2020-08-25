@@ -12,6 +12,11 @@ class Installer
 {
 	static function run(&$db)
 	{
+		if (!file_exists('setup/header.php'))
+		{
+			die("WackoWiki fatal error: setup/ folder is missing or empty. Please add the missing setup folder in order to upgrade your WackoWiki installation.");
+		}
+
 		if (!($install_action = trim(@$_REQUEST['installAction'])))
 		{
 			$install_action = 'lang';

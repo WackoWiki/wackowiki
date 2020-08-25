@@ -3115,7 +3115,7 @@ class Wacko
 	function underscore_url($tag) : string
 	{
 		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
-		if ($this->db->urls_underscores == 1)
+		if ($this->db->urls_underscores)
 		{
 			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
 			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);

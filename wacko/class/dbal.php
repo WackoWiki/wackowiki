@@ -62,6 +62,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 	{
 		Ut::is_empty($t) and $t = time();
 		is_string($t) and $t = strtotime($t);
+
 		return gmdate(self::SQL_DATE_FORMAT, (int) $t);
 	}
 
@@ -168,6 +169,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 					// re @: if unserialize fails - it's OK and need not propagate further
 					$this->affected_rows = @$data['affected_rows'];
 					unset($data['affected_rows']);
+
 					return $data;
 				}
 			}
