@@ -3,34 +3,11 @@
 $config_db		= [];
 $config_insert	= '';
 
-// set back theme to default, just a precaution
-$config['theme'] = 'default';
-
-if (!isset($config['allowed_languages']))
-{
-	$config['allowed_languages'] = '';
-}
-
-if (!isset($config['multilanguage']))
-{
-	$config['multilanguage'] = 0;
-}
-
-if (!isset($config['rewrite_mode']))
-{
-	$config['rewrite_mode'] = 0;
-}
-
-if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
-{
-	$config['noreply_email'] = $config['admin_email'];
-}
-
-// check for language related default values
-if ($config['is_update'] == false || version_compare($config['wacko_version'], '6.0.alpha1', '<'))
-{
-	$config = array_merge($config, $lang['ConfigDefaults']);
-}
+// needed to allow config variables to be accessed within some functions like _quote or insert_pages.
+global $config_global, $dblink_global, $lang_global;
+$config_global	= $config;
+$dblink_global	= $dblink;
+$lang_global	= $lang;
 
 // inserting secondary config values
 $config_db['abuse_email']					= $config['admin_email'];

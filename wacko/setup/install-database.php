@@ -42,8 +42,34 @@ $upgrade_msg = [
 	]
 ];
 
-require_once 'setup/_insert_default.php';
-require_once 'setup/_insert_config.php';
+// set back theme to default, just a precaution
+$config['theme'] = 'default';
+
+if (!isset($config['allowed_languages']))
+{
+	$config['allowed_languages'] = '';
+}
+
+if (!isset($config['multilanguage']))
+{
+	$config['multilanguage'] = 0;
+}
+
+if (!isset($config['rewrite_mode']))
+{
+	$config['rewrite_mode'] = 0;
+}
+
+if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
+{
+	$config['noreply_email'] = $config['admin_email'];
+}
+
+// check for language related default values
+if ($config['is_update'] == false || version_compare($config['wacko_version'], '6.0.alpha1', '<'))
+{
+	$config = array_merge($config, $lang['ConfigDefaults']);
+}
 
 /*
  Setup the tables depending on which database we selected
@@ -170,6 +196,8 @@ switch ($config['database_driver'])
 			if (!$fatal_error)
 			{
 				// mariadb / mysql only
+				require_once 'setup/_insert_default.php';
+				require_once 'setup/_insert_config.php';
 				require_once 'setup/database_mysql.php';
 				require_once 'setup/database_mysql_updates.php';
 				require_once 'setup/_insert_queries.php';
@@ -360,6 +388,8 @@ switch ($config['database_driver'])
 		if (!$fatal_error)
 		{
 			// mariadb / mysql only
+			require_once 'setup/_insert_default.php';
+			require_once 'setup/_insert_config.php';
 			require_once 'setup/database_mysql.php';
 			require_once 'setup/database_mysql_updates.php';
 			require_once 'setup/_insert_queries.php';
