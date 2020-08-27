@@ -34,6 +34,8 @@ if ($file_id)
 		// cache acls
 		$this->preload_acl($page_ids);
 
+		$anchor = 'a-' . $file_id;
+
 		// display navigation
 		$tpl->pagination_text = $pagination['text'];
 
@@ -54,11 +56,11 @@ if ($file_id)
 				{
 					if ($title == 1)
 					{
-						$link = $this->link('/' . $page['tag'], '', $page['title']);
+						$link = $this->link('/' . $page['tag'] . "#" . $anchor, '', $page['title']);
 					}
 					else
 					{
-						$link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title']);
+						$link = $this->link('/' . $page['tag'] . "#" . $anchor, '', $page['tag'], $page['title']);
 					}
 
 					if (mb_strpos($link, 'span class="missingpage"') === false)

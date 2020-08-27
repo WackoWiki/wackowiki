@@ -3565,6 +3565,7 @@ class Wacko
 		// local file -> file:image.png
 		else if (preg_match('/^(_?)file:([^\\s\"<>\(\)]+)$/u', $tag, $matches))
 		{
+			$aname			= '';
 			$noimg			= $matches[1]; // files action: matches '_file:' - patched link to not show pictures when not needed
 			$_file_name		= $matches[2];
 			$file_array		= explode('/', $_file_name);
@@ -3660,6 +3661,13 @@ class Wacko
 			// try to find file in global / local storage and return if success
 			if (is_array($file_data))
 			{
+				// set a anchor once for file link at the first appearance
+				if ($anchor_link && !isset($this->first_inclusion[OBJECT_FILE][$file_data['file_id']]))
+				{
+					$aname = ' id="a-' . $file_data['file_id'] . '"';
+					$this->first_inclusion[OBJECT_FILE][$file_data['file_id']] = 1;
+				}
+
 				// check 403 here!
 				if ($_global || $file_access)
 				{
@@ -3756,17 +3764,17 @@ class Wacko
 
 								if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg'))
 								{
-									$text	= $this->image_link($src, $media_class, $title, $alt, $scale);
+									$text	= $this->image_link($src, $media_class, $aname, $title, $alt, $scale);
 								}
 								else if (in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm']))
 								{
 									$tpl	= '';
-									$text	= $this->video_link($src, $media_class, $title, $scale);
+									$text	= $this->video_link($src, $media_class, $aname, $title, $scale);
 								}
 								else if (in_array($file_data['file_ext'], ['m4a' , 'mp3', 'ogg', 'opus']))
 								{
 									$tpl	= '';
-									$text	= $this->audio_link($src, $media_class, $title);
+									$text	= $this->audio_link($src, $media_class, $aname, $title);
 								}
 
 								// add clearfix
@@ -4000,11 +4008,11 @@ class Wacko
 				$page_link	= $this->href($method, $this_page['tag']) . ($anchor ?: '');
 				$page_id	= $this_page['page_id'];
 
-				// set a anchor once for link at the first appearance
-				if ($anchor_link && !isset($this->first_inclusion[$page_id]))
+				// set a anchor once for page link at the first appearance
+				if ($anchor_link && !isset($this->first_inclusion[OBJECT_PAGE][$page_id]))
 				{
-					$aname = 'id="a-' . $page_id . '"';
-					$this->first_inclusion[$page_id] = 1;
+					$aname = ' id="a-' . $page_id . '"';
+					$this->first_inclusion[OBJECT_PAGE][$page_id] = 1;
 				}
 
 				if ($this->db->hide_locked)
@@ -4119,16 +4127,16 @@ class Wacko
 		{
 			if ($img_link)
 			{
-				$text		= $this->image_link($img_link, $media_class, $text, $text, $scale);
+				$text		= $this->image_link($img_link, $media_class, $aname, $text, $text, $scale);
 				$tpl		= 'outerimg';
 			}
 			else if ($audio_link)
 			{
-				return		$this->audio_link($audio_link, $media_class, $text);
+				return		$this->audio_link($audio_link, $media_class, $aname, $text);
 			}
 			else if ($video_link)
 			{
-				return		$this->video_link($video_link, $media_class, $text, $scale);
+				return		$this->video_link($video_link, $media_class, $aname, $text, $scale);
 			}
 
 			$res			= $this->_t('Tpl.' . $tpl);
@@ -4190,6 +4198,7 @@ class Wacko
 				}
 
 				// process template for external link
+				$res		= str_replace('{aname}',	$aname,		$res);
 				$res		= str_replace('{target}',	$target,	$res);
 				$res		= str_replace('{rel}',		$rel,		$res);
 				$res		= str_replace('{icon}',		$icon,		$res);
@@ -4266,31 +4275,33 @@ class Wacko
 		return $figure;
 	}
 
-	function image_link($src, $class, $title, $alt = null, $scale = null) : string
+	function image_link($src, $class, $id, $title, $alt = null, $scale = null) : string
 	{
 		// inline element (paragrafica!)
 		return
-				'<img src="' . $src . '" class="' . $class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . '>';
+				'<img src="' . $src . '"' . $id . ' class="' . $class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . '>';
 	}
 
-	function audio_link($src, $class, $title) : string
+	function audio_link($src, $class, $id, $title) : string
 	{
 		// inline element (paragrafica!)
 		$fallback	= '<span>Your browser doesn\'t support HTML5 audio. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</span>';
+
 		return
-				'<audio src="' . $src . '" class="' . $class . '" title="' . $title . '" controls>' . "\n" .
+				'<audio src="' . $src . '"' . $id . ' class="' . $class . '" title="' . $title . '" controls>' . "\n" .
 					$fallback . "\n" .
 				'</audio>';
 
 				// source: type="' . $file_data['mime_type'] . '"
 	}
 
-	function video_link($src, $class, $title, $scale = null) : string
+	function video_link($src, $class, $id, $title, $scale = null) : string
 	{
 		// inline element (paragrafica!)
 		$fallback	= '<span>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the video</a> instead.</span>';
+
 		return
-				'<video src="' . $src . '" class="' . $class . '" title="' . $title . '" ' . $scale . ' controls>' . "\n" .
+				'<video src="' . $src . '"' . $id . ' class="' . $class . '" title="' . $title . '" ' . $scale . ' controls>' . "\n" .
 					$fallback . "\n" .
 				'</video>';
 
