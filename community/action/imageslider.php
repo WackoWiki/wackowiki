@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	Showing images as slider for uploaded by {{upload}} files
 
-	version: 0.5
+	version: 0.6
 
 	{{imageslider
 		[page="PageName" or global=1]
@@ -149,7 +149,7 @@ if ($can_view)
 
 	if (!$global)
 	{
-		$path2 = 'file:/' . ($this->slim_url($page)) . '/';
+		$path2 = 'file:/' . $page . '/';
 	}
 	else
 	{
