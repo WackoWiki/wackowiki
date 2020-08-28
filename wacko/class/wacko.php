@@ -1082,7 +1082,6 @@ class Wacko
 			// cache file links
 			if ($file_page_ids = $this->preload_file_links($page_ids))
 			{
-				#$page_ids + $file_page_ids;
 				$p_ids	= array_merge($page_ids, $file_page_ids);
 			}
 			else
@@ -1181,9 +1180,9 @@ class Wacko
 			foreach ($links as $link)
 			{
 				$this->cache_page($link, true);
-				$this->page_id_cache[$link['tag']] = $link['page_id'];
-				$exists[]		= $link['tag'];
-				$_page_ids[]	= $link['page_id'];
+				$this->page_id_cache[$link['tag']]	= $link['page_id'];
+				$exists[]							= $link['tag'];
+				$_page_ids[]						= $link['page_id'];
 			}
 		}
 
@@ -1506,8 +1505,8 @@ class Wacko
 		"ORDER BY c.created DESC " .
 		"LIMIT " . $limit))
 		{
-			#$count		= count($pages['page_id']);
-			#$pagination = $this->pagination($count, $limit);
+			#$count			= count($pages['page_id']);
+			#$pagination	= $this->pagination($count, $limit);
 
 			foreach ($pages as $page)
 			{
@@ -2634,7 +2633,7 @@ class Wacko
 		}
 		else
 		{
-			$object_id			= $page_id;
+			$object_id				= $page_id;
 			// revisions diff
 			$page = $this->db->load_single(
 				"SELECT revision_id " .
@@ -2857,7 +2856,6 @@ class Wacko
 		}
 
 		// get system message
-		// TODO: set type also via backend and store it [where?]
 		if (($message = $this->db->system_message) && !$this->db->ap_mode)
 		{
 			array_unshift($messages, [$message, 'sysmessage ' . $this->db->system_message_type]);
@@ -3412,6 +3410,7 @@ class Wacko
 	*/
 	function link($tag, $method = '', $text = '', $title = '', $track = true, $safe = false, $anchor_link = true, $meta_direct = true) : string
 	{
+		$aname		= '';
 		$caption	= '';
 		$class		= '';
 		$clear		= '';
@@ -4163,7 +4162,6 @@ class Wacko
 					$target = '';
 				}
 
-				// TODO: refactor, static?
 				// https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types
 				if ($this->db->noreferrer || $this->db->nofollow)
 				{
@@ -4291,8 +4289,6 @@ class Wacko
 				'<audio src="' . $src . '"' . $id . ' class="' . $class . '" title="' . $title . '" controls>' . "\n" .
 					$fallback . "\n" .
 				'</audio>';
-
-				// source: type="' . $file_data['mime_type'] . '"
 	}
 
 	function video_link($src, $class, $id, $title, $scale = null) : string
@@ -4304,8 +4300,6 @@ class Wacko
 				'<video src="' . $src . '"' . $id . ' class="' . $class . '" title="' . $title . '" ' . $scale . ' controls>' . "\n" .
 					$fallback . "\n" .
 				'</video>';
-
-				// source: type="' . $file_data['mime_type'] . '"
 	}
 
 	// creates a link to the user profile
@@ -4407,9 +4401,6 @@ class Wacko
 	{
 		$_data = '/' . $data . '/';
 
-		// Find the string of text
-		# $this->REGEX_WACKO_HANDLERS = '/^(.*?)\/' . $this->db->standard_handlers . '\/(.*)$/i';
-
 		// Find the word
 		$this->REGEX_WACKO_HANDLERS = '/\b(' . $this->db->standard_handlers . ')\b/ui';
 
@@ -4427,21 +4418,6 @@ class Wacko
 				return 'Comment([0-9]+)';
 			}
 		}
-
-		// TODO: disallow random pages for the first level in the users cluster except the own [UserName].
-		/* if (preg_match( '/\b(' . $this->db->users_page . '\/*\/)\b/ui', $_data, $match ))
-		{
-			Ut::debug_print_r($match);
-			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
-		} */
-
-		/*
-		if (preg_match( '/^\/[0-9]+/u', $_data, $match ))
-		{
-			return "It is not possible to create pages, whose name consists of numbers or begins on them.";
-			/// !!! to messageset, begins with 0-9
-		}
-		*/
 
 		return false;
 	}
@@ -6243,7 +6219,7 @@ class Wacko
 
 	function set_watch($user_id, $page_id)
 	{
-		// Remove old watch first to avoid double watches
+		// remove old watch first to avoid double watches
 		$this->clear_watch($user_id, $page_id);
 
 		if ($this->has_access('read', $page_id))
@@ -7365,7 +7341,7 @@ class Wacko
 		{
 			return false;
 		}
-		#"WHERE modified < DATE_SUB(UTC_TIMESTAMP(), INTERVAL " . (int) $days . " DAY)");
+
 		if ($this->db->store_deleted_pages && !$dontkeep)
 		{
 			$this->db->sql_query(
@@ -7592,7 +7568,7 @@ class Wacko
 		{
 			return false;
 		}
-		#"WHERE referrer_time < DATE_SUB(UTC_TIMESTAMP(), INTERVAL " . (int) $days . " DAY)");
+
 		return $this->db->sql_query(
 			"DELETE " .
 				"r.* " .
@@ -8426,8 +8402,6 @@ class Wacko
 			$n		= 1;
 
 			$out = '<div class="set-category">' . "\n";
-			// TODO: div or fieldset?
-			# $out .= '<fieldset class="set-category"><legend>' . $this->_t('Categories') . ' (' . $lang . ")</legend>\n";
 			$out .= '<table class="category-browser">' . "\n";
 			$out .= "\t<tr>\n" . "\t\t<td>\n";
 			$out .= '<ul class="ul-list hl-line">' . "\n"; // hide-radio
@@ -8481,7 +8455,6 @@ class Wacko
 
 			$out .= "</ul>\n";
 			$out .= "\t\t</td>\n\t</tr>\n</table>\n";
-			#$out .= '</fieldset>';
 			$out .= "</div>\n";
 
 			// control buttons
