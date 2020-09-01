@@ -200,8 +200,8 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 									((" . $page_id . "), 'create',		'$'),
 									((" . $page_id . "), 'upload',		'')";
 
-		$insert_data[]		= [$page_insert,	$lang_global['ErrorInsertingPage']];
-		$insert_data[]		= [$perm_insert,	$lang_global['ErrorInsertingPagePermission']];
+		$insert_data[]		= [$page_insert,	$lang_global['ErrorInsertPage']];
+		$insert_data[]		= [$perm_insert,	$lang_global['ErrorInsertPagePermission']];
 	}
 
 	$default_menu_item		= "INSERT INTO " .
@@ -213,7 +213,7 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 
 	if ($set_menu)
 	{
-		$insert_data[]		= [$default_menu_item,	$lang_global['ErrorInsertingDefaultMenuItem']];
+		$insert_data[]		= [$default_menu_item,	$lang_global['ErrorInsertDefaultMenuItem']];
 	}
 
 	switch ($config_global['database_driver'])

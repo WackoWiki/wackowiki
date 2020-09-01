@@ -13,7 +13,7 @@ $upgrade			= [];
 $upgrade_msg = [
 	'alter' => [
 		'ok'		=> $lang['AlterTable'],
-		'error'		=> $lang['ErrorAlteringTable']
+		'error'		=> $lang['ErrorAlterTable']
 	],
 
 	'create' => [
@@ -28,12 +28,12 @@ $upgrade_msg = [
 
 	'insert' => [
 		'ok'		=> $lang['InsertRecord'],
-		'error'		=> $lang['ErrorInsertingRecord']
+		'error'		=> $lang['ErrorInsertRecord']
 	],
 
 	'rename' => [
 		'ok'		=> $lang['RenameTable'],
-		'error'		=> $lang['ErrorRenamingTable']
+		'error'		=> $lang['ErrorRenameTable']
 	],
 
 	'update' => [
@@ -233,7 +233,7 @@ switch ($config['database_driver'])
 					// new installation
 					if ($version == '0')
 					{
-						echo '<h2>' . $lang['InstallingTables'] . '</h2>' . "\n";
+						echo '<h2>' . $lang['InstallTables'] . '</h2>' . "\n";
 						echo '<ol>' . "\n";
 
 						foreach ($create_table as $value)
@@ -257,7 +257,7 @@ switch ($config['database_driver'])
 						}
 
 						test(
-							$lang['InstallingLogoImage'],
+							$lang['InstallLogoImage'],
 							@mysqli_query($dblink, $insert_logo_image),
 							Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage']),
 							$dblink
@@ -293,21 +293,21 @@ switch ($config['database_driver'])
 					}
 
 					echo '<br>' . "\n";
-					echo '<h2>' . $lang['InstallingDefaultData'] . '</h2>' . "\n";
+					echo '<h2>' . $lang['InstallDefaultData'] . '</h2>' . "\n";
 					echo '<ul>' . "\n";
 
 					// inserting config values
 					test(
-						$lang['InstallingConfigValues'],
+						$lang['InstallConfigValues'],
 						@mysqli_query($dblink, $insert_config),
 						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues']),
 						$dblink
 					);
 
-					echo '<li>' . $lang['InstallingPagesBegin'];
+					echo '<li>' . $lang['InstallPagesBegin'];
 					require_once 'setup/insert_pages.php';
 					echo '</li>' . "\n";
-					echo '<li>' . $lang['InstallingPagesEnd'] . '</li>' . "\n";
+					echo '<li>' . $lang['InstallPagesEnd'] . '</li>' . "\n";
 					echo '</ul>' . "\n";
 				}
 			}
@@ -420,7 +420,7 @@ switch ($config['database_driver'])
 				// new installation
 				if ($version == '0')
 				{
-					echo '<h2>' . $lang['InstallingTables'] . '</h2>' . "\n";
+					echo '<h2>' . $lang['InstallTables'] . '</h2>' . "\n";
 					echo '<ol>' . "\n";
 
 					foreach ($create_table as $value)
@@ -442,7 +442,7 @@ switch ($config['database_driver'])
 					}
 
 					test_pdo(
-						$lang['InstallingLogoImage'],
+						$lang['InstallLogoImage'],
 						$insert_logo_image,
 						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
 					);
@@ -476,20 +476,20 @@ switch ($config['database_driver'])
 				}
 
 				echo '<br>' . "\n";
-				echo '<h2>' . $lang['InstallingDefaultData'] . '</h2>' . "\n";
+				echo '<h2>' . $lang['InstallDefaultData'] . '</h2>' . "\n";
 				echo '<ul>' . "\n";
 
 				// inserting config values
 				test_pdo(
-					$lang['InstallingConfigValues'],
+					$lang['InstallConfigValues'],
 					$insert_config,
 					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
 				);
 
-				echo '<li>' . $lang['InstallingPagesBegin'];
+				echo '<li>' . $lang['InstallPagesBegin'];
 				require_once 'setup/insert_pages.php';
 				echo '</li>' . "\n";
-				echo '<li>' . $lang['InstallingPagesEnd'] . '</li>' . "\n";
+				echo '<li>' . $lang['InstallPagesEnd'] . '</li>' . "\n";
 				echo '</ul>' . "\n";
 			}
 		}
