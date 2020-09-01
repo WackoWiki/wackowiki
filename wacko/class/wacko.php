@@ -6350,7 +6350,13 @@ class Wacko
 		$menu_page_ids	= $this->sess->menu_page_id ?? [];
 		$menu_formatted	= $this->sess->menu ?? [];
 
-		$user = $this->get_user();
+		$user			= $this->get_user();
+
+		// update menu if guest client language has changed
+		if ($this->sess->menu_lang != $this->user_lang)
+		{
+			$menu_formatted = [];
+		}
 
 		// initial menu table construction
 		if ($set != MENU_AUTO || !($menu_formatted || $update))
@@ -6462,8 +6468,9 @@ class Wacko
 			}
 		}
 
-		$this->sess->menu_page_id	= $menu_page_ids;
 		$this->sess->menu			= $menu_formatted;
+		$this->sess->menu_lang		= $this->user_lang;
+		$this->sess->menu_page_id	= $menu_page_ids;
 	}
 
 	function get_menu()
