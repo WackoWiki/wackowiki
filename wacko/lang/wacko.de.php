@@ -373,7 +373,6 @@ $wacko_translation = [
 	'SimpleDiffAdditions'		=> 'hinzugefügt:',
 	'SimpleDiffDeletions'		=> 'entfernt:',
 	'NoDifferences'				=> 'Keine Unterschiede.',
-	'History'					=> 'Historie',
 	'ReEditOldRevision'			=> 'Editiere diese alte Version erneut',
 
 	'ExternalPages'				=> 'externe Seiten verlinkt zu %1 (%2) (<a href="%3">zeige Domänen</a>):',

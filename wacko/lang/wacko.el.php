@@ -373,7 +373,6 @@ $wacko_translation = [
 	'SimpleDiffAdditions'		=> 'Προσθήκες:',
 	'SimpleDiffDeletions'		=> 'Διαγραφές:',
 	'NoDifferences'				=> 'Καμία διαφορά.',
-	'History'					=> 'Ιστορικό',
 	'ReEditOldRevision'			=> 'Επανα-επεξεργασία της παλαιότερης έκδοσης',
 
 	'ExternalPages'				=> 'Εξωτερικές σελίδες που συνδέουν την %1 (%2) (<a href="%3">δες μία λίστα των domains</a>):',

@@ -373,7 +373,6 @@ $wacko_translation = [
 	'SimpleDiffAdditions'		=> 'Lisatud:',
 	'SimpleDiffDeletions'		=> 'Kustutatud:',
 	'NoDifferences'				=> 'Erinevusi pole.',
-	'History'					=> 'ajalugu',
 	'ReEditOldRevision'			=> 'Vana redigeeringu ümbermuutmine',
 
 	'ExternalPages'				=> 'Välised lehed on lingitud %1 (%2) (<a href="%3">vaata domeenide listi</a>):',

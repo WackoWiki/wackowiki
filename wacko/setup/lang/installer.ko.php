@@ -5,32 +5,32 @@ $lang = [
    Language Settings
 */
 'Charset'	=> 'utf-8',
-'LangISO'	=> 'zh',
-'LangName'	=> 'Chinese',
+'LangISO'	=> 'en',
+'LangName'	=> 'English',
 
 /*
    Config Defaults
 */
 'ConfigDefaults'	=> [
 	// pages
-	'category_page'		=> '类别',
-	'groups_page'		=> '群组',
-	'users_page'		=> '用户',
+	'category_page'		=> 'Category',
+	'groups_page'		=> 'Groups',
+	'users_page'		=> 'Users',
 
-	'search_page'		=> '搜索',
-	'login_page'		=> '用户登录',
-	'account_page'		=> '帐户',
-	'registration_page'	=> '创建账户',
-	'password_page'		=> '密码',
+	'search_page'		=> '검색',
+	'login_page'		=> '로그인',
+	'account_page'		=> '설정',
+	'registration_page'	=> '계정만들기',
+	'password_page'		=> '비밀번호',
 
-	'changes_page'		=> '最近更改',
-	'comments_page'		=> '最近评论',
-	'index_page'		=> '页面索引',
+	'changes_page'		=> 'RecentChanges',
+	'comments_page'		=> 'RecentlyCommented',
+	'index_page'		=> 'PageIndex',
 
-	'random_page'		=> '随机条目',
-	#'help_page'		=> '帮助',
-	#'terms_page'		=> '条款',
-	#'privacy_page'		=> '隐私',
+	'random_page'		=> 'RandomPage',
+	#'help_page'			=> 'Help',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',
@@ -42,15 +42,15 @@ $lang = [
    Generic Page Text
 */
 'Title'							=> 'WackoWiki Installation',
-'Continue'						=> '继续',
-'Back'							=> '后退',
-'Recommended'					=> '建议',
+'Continue'						=> 'Continue',
+'Back'							=> 'Back',
+'Recommended'					=> 'recommended',
 'InvalidAction'					=> 'Invalid action',
 
 /*
    Language Selection Page
 */
-'lang'							=> '语言设置',
+'lang'							=> 'Language Configuration',
 'PleaseUpgradeToR5'				=> 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
 'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
 'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
@@ -60,14 +60,14 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check'					=> '系统要求',
+'version-check'					=> 'System Requirements',
 'PhpVersion'					=> 'PHP Version',
 'PhpDetected'					=> 'Detected PHP',
-'ModRewrite'					=> 'Apache Rewrite Extension (可选)',
+'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
-'Database'						=> '数据库',
-'PhpExtensions'					=> 'PHP扩展',
-'Permissions'					=> '权限',
+'Database'						=> 'Database',
+'PhpExtensions'					=> 'PHP Extensions',
+'Permissions'					=> 'Permissions',
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
@@ -83,31 +83,31 @@ $lang = [
 /*
    Site Config Page
 */
-'config-site'					=> '设置网站',
+'config-site'					=> 'Site Configuration',
 'SiteName'						=> 'Wiki Name',
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
-'HomePage'						=> '主页',
+'HomePage'						=> '홈페이지',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
-'HomePageDefault'				=> '首页',
-'MultiLang'						=> '多语言模式',
+'HomePageDefault'				=> '홈페이지',
+'MultiLang'						=> 'Multi Language Mode',
 'MultiLangDesc'					=> 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial menu items for all languages available in distribution.',
 'AllowedLang'					=> 'Allowed Languages',
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
-'Admin'							=> '管理员用户名',
+'Admin'							=> 'Admin Name',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
-'Password'						=> '管理员密码',
+'Password'						=> 'Admin Password',
 'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
-'Password2'						=> '确认管理员密码:',
+'Password2'						=> 'Repeat Password:',
 'Mail'							=> 'Admin Email Address',
 'MailDesc'						=> 'Enter the admins email address.',
 'Base'							=> 'Base URL',
 'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
 'Rewrite'						=> 'Rewrite Mode',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
-'Enabled'						=> '启用:',
-'ErrorAdminEmail'				=> '您输入的 email 地址无效。',
-'ErrorAdminPasswordMismatch'	=> '您输入的两个密码不一致。',
-'ErrorAdminPasswordShort'		=> '您输入的密码太短，请输入最少 %1 个字符。',
+'Enabled'						=> 'Enabled:',
+'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
+'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
+'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
 'WarningRewriteMode'			=> 'ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.',
 'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
@@ -134,23 +134,23 @@ $lang = [
 /*
    Database Config Page
 */
-'config-database'				=> '数据库配置',
+'config-database'				=> 'Database Configuration',
 'DbDriver'						=> 'Driver',
 'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
 'DbEngineDesc'					=> 'The database engine you want to use.',
-'DbHost'						=> '主机',
+'DbHost'						=> 'Host',
 'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
-'DbPort'						=> '端口 (可选)',
+'DbPort'						=> 'Port (Optional)',
 'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
-'Db'							=> '数据库名称',
+'Db'							=> 'Database Name',
 'DbDesc'						=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
-'DbUser'						=> '数据库用户名',
+'DbUser'						=> 'User Name',
 'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
-'DbPassword'					=> '数据库密码',
+'DbPassword'					=> 'Password',
 'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',
 'Prefix'						=> 'Table Prefix',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
@@ -162,7 +162,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'install-database'				=> '数据库安装',
+'install-database'				=> 'Database Installation',
 'TestingConfiguration'			=> 'Testing Configuration',
 'TestConnectionString'			=> 'Testing database connection settings',
 'TestDatabaseExists'			=> 'Checking if the database you specified exists',

@@ -373,7 +373,6 @@ $wacko_translation = [
 	'SimpleDiffAdditions'		=> 'Aanvullingen:',
 	'SimpleDiffDeletions'		=> 'Verwijderingen:',
 	'NoDifferences'				=> 'Geen verschillen.',
-	'History'					=> 'historie',
 	'ReEditOldRevision'			=> 'Bewerk deze oude revisie nogmaals',
 
 	'ExternalPages'				=> 'Externe pagina\'s met links naar %1 (%2) (<a href="%3">Bekijk een lijst van domeinen</a>):',

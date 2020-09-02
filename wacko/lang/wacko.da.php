@@ -373,7 +373,6 @@ $wacko_translation = [
 	'SimpleDiffAdditions'		=> 'Tilføjelser:',
 	'SimpleDiffDeletions'		=> 'Sletninger:',
 	'NoDifferences'				=> 'Ingen forskelle.',
-	'History'					=> 'historie',
 	'ReEditOldRevision'			=> 'Genrediger denne gamle version',
 
 	'ExternalPages'				=> 'Eksterne sider som linker til %1 (%2) (<a href="%3">se liste over domæner</a>):',

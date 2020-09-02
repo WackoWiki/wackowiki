@@ -373,7 +373,6 @@ $wacko_translation = [
 	'SimpleDiffAdditions'		=> 'Добавено:',
 	'SimpleDiffDeletions'		=> 'Извадено:',
 	'NoDifferences'				=> 'No differences.',
-	'History'					=> 'История на промените',
 	'ReEditOldRevision'			=> 'Редактирай старата версия',
 
 	'ExternalPages'				=> 'Външни страници, препращащи на %1<br> (%2) (<a href="%3">списък на сайтовете</a>):',

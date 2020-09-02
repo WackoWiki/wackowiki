@@ -374,7 +374,6 @@ $wacko_translation = [
 	'SimpleDiffAdditions'		=> 'Добавлено:',
 	'SimpleDiffDeletions'		=> 'Удалено:',
 	'NoDifferences'				=> 'Нет различий.',
-	'History'					=> 'История',
 	'ReEditOldRevision'			=> 'Редактировать эту старую версию',
 
 	'ExternalPages'				=> 'Внешние страницы, ссылающиеся на %1<br> (%2) (<a href="%3">список сайтов</a>):',
