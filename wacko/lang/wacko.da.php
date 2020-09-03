@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Indstil et bogmærke for den følgende side',
 	'BookmarkAlreadyExists'		=> 'Bogmærket eksisterer allerede.',
 
-	'MeasuredTime'				=> 'Tidspunkt',
-	'MeasuredMemory'			=> 'Hukommelse',
 	'PoweredBy'					=> 'Powered by',
 
 	'MassRenaming'				=> 'Omdøb hele området',

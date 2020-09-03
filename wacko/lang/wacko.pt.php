@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Defina um favorito para a seguinte página',
 	'BookmarkAlreadyExists'		=> 'O favorito já existe.',
 
-	'MeasuredTime'				=> 'Tempo',
-	'MeasuredMemory'			=> 'Memória',
 	'PoweredBy'					=> 'Powered by',
 
 	'MassRenaming'				=> 'Rename entire cluster',

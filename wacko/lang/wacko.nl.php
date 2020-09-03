@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Een bladwijzer instellen voor de volgende pagina',
 	'BookmarkAlreadyExists'		=> 'De bladwijzer bestaat al.',
 
-	'MeasuredTime'				=> 'Tijd',
-	'MeasuredMemory'			=> 'Geheugen',
 	'PoweredBy'					=> 'Powered by',
 
 	'MassRenaming'				=> 'Hernoem de cluster',

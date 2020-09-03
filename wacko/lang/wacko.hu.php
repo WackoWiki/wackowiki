@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Set a bookmark for the following page',
 	'BookmarkAlreadyExists'		=> 'A könyvjelző már létezik.',
 
-	'MeasuredTime'				=> 'Idő',
-	'MeasuredMemory'			=> 'Memory',
 	'PoweredBy'					=> 'Powered by',
 
 	'MassRenaming'				=> 'Rename entire cluster',

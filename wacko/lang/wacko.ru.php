@@ -933,8 +933,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Добавить страницу в личное меню',
 	'BookmarkAlreadyExists'		=> 'Уже есть в меню.',
 
-	'MeasuredTime'				=> 'Время работы',
-	'MeasuredMemory'			=> 'Использовано памяти',
 	'PoweredBy'					=> 'На основе',
 
 	'MassRenaming'				=> 'Рекурсивное переименование',

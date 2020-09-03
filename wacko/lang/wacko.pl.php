@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Ustaw zakładkę dla następnej strony',
 	'BookmarkAlreadyExists'		=> 'Zakładka już istnieje.',
 
-	'MeasuredTime'				=> 'Czas',
-	'MeasuredMemory'			=> 'Memory',
 	'PoweredBy'					=> 'Powered by',
 
 	'MassRenaming'				=> 'Rename entire cluster',

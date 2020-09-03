@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Määra järgmise lehe järjehoidja',
 	'BookmarkAlreadyExists'		=> 'Järjehoidja on juba olemas.',
 
-	'MeasuredTime'				=> 'Aeg',
-	'MeasuredMemory'			=> 'Mälu',
 	'PoweredBy'					=> 'Powered by',
 
 	'MassRenaming'				=> 'Nimeta ümber kogu klastri',

@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Imposta un segnalibro per la pagina indicata',
 	'BookmarkAlreadyExists'		=> 'Il segnalibro esiste già.',
 
-	'MeasuredTime'				=> 'Tempo',
-	'MeasuredMemory'			=> 'Memoria',
 	'PoweredBy'					=> 'Offerto da',
 
 	'MassRenaming'				=> 'Rename entire cluster',

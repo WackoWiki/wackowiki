@@ -931,8 +931,6 @@ $wacko_translation = [
 	'BookmarksAddPage'			=> 'Définir un signet pour la page suivante',
 	'BookmarkAlreadyExists'		=> 'Le signet existe déjà.',
 
-	'MeasuredTime'				=> 'Temps',
-	'MeasuredMemory'			=> 'Mémoire',
 	'PoweredBy'					=> 'Motorisé par',
 
 	'MassRenaming'				=> 'Renommer tout le groupe',
