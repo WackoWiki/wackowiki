@@ -22,6 +22,7 @@ $lp_size	= $large_prefix ? '250' : '190';
 $alter_cache_r5_5_0 = "ALTER TABLE {$pref}cache CHANGE cache_time cache_time DATETIME NULL DEFAULT NULL";
 
 // CATEGORY
+$alter_category_r5_5_0 = "ALTER TABLE {$pref}category CHANGE category_lang category_lang VARCHAR(5) NOT NULL DEFAULT ''";
 
 // CATEGORY ASSIGNMENT
 
@@ -33,6 +34,7 @@ $update_config_r5_5_1 = "DELETE FROM {$pref}config WHERE config_name IN ('antidu
 // EXTERNAL LINK
 
 // FILE
+$alter_file_r5_5_0 = "ALTER TABLE {$pref}file CHANGE file_lang file_lang VARCHAR(5) NOT NULL DEFAULT ''";
 
 // FILE LINK
 
@@ -40,6 +42,7 @@ $update_config_r5_5_1 = "DELETE FROM {$pref}config WHERE config_name IN ('antidu
 $alter_log_r5_5_0 = "ALTER TABLE {$pref}log CHANGE log_time log_time DATETIME NULL DEFAULT NULL";
 
 // MENU
+$alter_menu_r5_5_0 = "ALTER TABLE {$pref}menu CHANGE menu_lang menu_lang VARCHAR(5) NOT NULL DEFAULT ''";
 
 $update_menu_r5_5_0 = "DELETE FROM {$pref}menu WHERE user_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT menu_lang = '" . _quote($config['language']) . "'";
 $update_menu_r5_5_1 = "DELETE m.* FROM {$pref}menu m LEFT JOIN {$pref}page p ON (m.page_id = p.page_id) WHERE p.page_id IS NULL";
@@ -47,6 +50,7 @@ $update_menu_r5_5_1 = "DELETE m.* FROM {$pref}menu m LEFT JOIN {$pref}page p ON 
 // PAGE
 $alter_page_r5_5_0 = "ALTER TABLE {$pref}page DROP supertag";
 $alter_page_r5_5_1 = "ALTER TABLE {$pref}page CHANGE tag tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT ''";
+$alter_page_r5_5_2 = "ALTER TABLE {$pref}page CHANGE page_lang page_lang VARCHAR(5) NOT NULL DEFAULT ''";
 
 $update_page_r5_5_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_5_1 = "UPDATE {$pref}page SET body_r = ''";
@@ -75,6 +79,8 @@ $alter_user_r5_5_1 = "ALTER TABLE {$pref}user DROP fingerprint";
 $insert_user_r5_5_0 = "INSERT INTO {$pref}user (user_name, password, email, account_type, signup_time) VALUES ('Deleted', '', '', '1', UTC_TIMESTAMP())";
 
 // USER SETTING
+$alter_user_setting_r5_5_0 = "ALTER TABLE {$pref}user_setting CHANGE user_lang user_lang VARCHAR(5) NOT NULL DEFAULT ''";
+
 $update_user_setting_r5_5_0 = "UPDATE {$pref}user_setting SET theme = 'default'";
 
 // USERGROUP

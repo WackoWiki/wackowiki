@@ -88,19 +88,27 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 // cache
 $upgrade['6.0.8'][]		= ['alter',		'cache',			$alter_cache_r5_5_0];
 
+// category
+$upgrade['6.0.8'][]		= ['alter',		'category',			$alter_category_r5_5_0];
+
 // config
 $upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_0];
 $upgrade['6.0.8'][]		= ['update',	'config',			$update_config_r5_5_1];
+
+// file
+$upgrade['6.0.10'][]	= ['alter',		'file',				$alter_file_r5_5_0];
 
 // log
 $upgrade['6.0.8'][]		= ['alter',		'log',				$alter_log_r5_5_0];
 
 // menu
+$upgrade['6.0.10'][]	= ['alter',		'menu',				$alter_menu_r5_5_0];
 $upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_0];
 
 // page
 $upgrade['5.5.14'][]	= ['alter',		'page',				$alter_page_r5_5_0];
 $upgrade['6.0.5'][]		= ['alter',		'page',				$alter_page_r5_5_1];
+$upgrade['6.0.10'][]	= ['alter',		'page',				$alter_page_r5_5_2];
 
 $upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_2];
 
@@ -123,6 +131,9 @@ $upgrade['5.5.14'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 $upgrade['6.0.0'][]		= ['insert',	'user',				$insert_user_r5_5_0];
 $upgrade['6.0.7'][]		= ['alter',		'user',				$alter_user_r5_5_0];
 $upgrade['6.0.8'][]		= ['alter',		'user',				$alter_user_r5_5_1];
+
+// user settings
+$upgrade['6.0.10'][]	= ['alter',		'user_settings',	$alter_user_setting_r5_5_0];
 
 // usergroup
 $upgrade['6.0.7'][]		= ['alter',		'usergroup',		$alter_usergroup_r5_5_0];
