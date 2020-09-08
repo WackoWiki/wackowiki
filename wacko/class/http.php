@@ -515,9 +515,9 @@ class Http
 		{
 			$list = [];
 
-			foreach (Ut::file_glob(LANG_DIR, 'wacko.[a-z][a-z].php') as $file)
+			foreach (Ut::file_glob(LANG_DIR, 'wacko.[a-z][a-z]{\-[a-z][a-z],}.php') as $file)
 			{
-				$lang = substr($file, -6, 2);
+				$lang = substr($file, 11, -4);
 				$list[$lang] = $lang;
 			}
 
