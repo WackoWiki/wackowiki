@@ -1250,6 +1250,7 @@ $wacko_translation = [
 		'pt' => 'Portuguese',
 		'ru' => 'Russian',
 		'zh' => 'Chinese',
+		'zh-tw' => 'Chinese',
 	],
 
 	'AccountStatus'				=> 'Account status',

@@ -719,7 +719,7 @@ $wacko_translation = [
 	'UsersLogins'				=> 'Logins',
 	'UsersRevisions'			=> 'リビジョン',
 	'UsersSignup'				=> 'Signup',
-	'UsersLastSession'			=> 'Last session',
+	'UsersLastSession'			=> '最後のセッション',
 	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'プロフィール',
 	'UsersContact'				=> 'コンタクト',
@@ -1188,7 +1188,7 @@ $wacko_translation = [
 	'PollsNone'					=> 'No active poll.',
 
 	'Timezone'					=> 'タイムゾーン',
-	'DST'						=> 'Daylight saving time',
+	'DST'						=> '夏時間',
 	'TzZoneArray'	=> [
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',
@@ -1250,6 +1250,7 @@ $wacko_translation = [
 		'pt' => 'ポルトガル語',
 		'ru' => 'ロシア語',
 		'zh' => '中国語',
+		'zh-tw' => '中国語',
 	],
 
 	'AccountStatus'				=> 'Account status',

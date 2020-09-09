@@ -89,7 +89,7 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 $upgrade['6.0.8'][]		= ['alter',		'cache',			$alter_cache_r5_5_0];
 
 // category
-$upgrade['6.0.8'][]		= ['alter',		'category',			$alter_category_r5_5_0];
+$upgrade['6.0.10'][]	= ['alter',		'category',			$alter_category_r5_5_0];
 
 // config
 $upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_0];
