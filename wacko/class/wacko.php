@@ -6353,7 +6353,7 @@ class Wacko
 		$user			= $this->get_user();
 
 		// update menu if guest client language has changed
-		if ($this->sess->menu_lang != $this->user_lang)
+		if (isset($this->sess->menu_lang) && $this->sess->menu_lang != $this->user_lang)
 		{
 			$menu_formatted = [];
 		}
