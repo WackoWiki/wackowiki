@@ -6,7 +6,7 @@ $lang = [
 */
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'zh',
-'LangName'	=> 'Chinese',
+'LangName'	=> '简体中文',
 
 /*
    Config Defaults

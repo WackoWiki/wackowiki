@@ -5,8 +5,8 @@ $lang = [
    Language Settings
 */
 'Charset'	=> 'utf-8',
-'LangISO'	=> 'en',
-'LangName'	=> 'English',
+'LangISO'	=> 'zh-tw',
+'LangName'	=> '正體中文',
 
 /*
    Config Defaults

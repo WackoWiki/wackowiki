@@ -1249,8 +1249,8 @@ $wacko_translation = [
 		'pl' =>'波蘭語',
 		'pt' =>'葡萄牙語',
 		'ru' =>'俄語',
-		'zh' =>'中文',
-		'zh-tw' => '中文',
+		'zh' =>'简体中文',
+		'zh-tw' => '正體中文',
 	],
 
 	'AccountStatus'				=> 'Account status',
