@@ -1,6 +1,6 @@
 <?php
 
-$page_lang = 'en';
+$page_lang = 'zh-tw';
 
 // insert these pages only for default language
 if ($config['language'] == $page_lang)

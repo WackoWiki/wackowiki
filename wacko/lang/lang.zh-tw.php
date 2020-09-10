@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 $wacko_language = [
 	'name'		=> 'Chinese',
-	'code'		=> 'zh',
+	'code'		=> 'zh-tw',
 	'dir'		=> 'ltr',
 	'charset'	=> 'utf-8',
 	'locale'	=> 'zh_TW.UTF-8',
