@@ -88,7 +88,7 @@ $lang = [
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
 'HomePage'						=> 'Home Page',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
-'HomePageDefault'				=> 'HomePage',
+'HomePageDefault'				=> '首頁',
 'MultiLang'						=> 'Multi Language Mode',
 'MultiLangDesc'					=> 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial menu items for all languages available in distribution.',
 'AllowedLang'					=> 'Allowed Languages',

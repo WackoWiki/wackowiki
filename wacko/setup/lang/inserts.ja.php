@@ -1,13 +1,13 @@
 <?php
 
-$page_lang = 'en';
+$page_lang = 'ja';
 
 // insert these pages only for default language
 if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**あなたの ((WackoWiki:Doc/English WackoWiki)) サイトへようこそ！**\n\nClick after you have ((Login logged in)) on the \"Edit this page\" link at the bottom to get started.\n\nDocumentation can be found at WackoWiki:Doc/English.\n\nUseful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((検索)).\n\n";
+		$home_page_body		= "file:/wacko_logo.png?right\n**あなたの ((WackoWiki:Doc/English WackoWiki)) サイトへようこそ！**\n\nClick after you have ((ログイン logged in)) on the \"Edit this page\" link at the bottom to get started.\n\nDocumentation can be found at WackoWiki:Doc/English.\n\nUseful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((検索)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], 'Home Page', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

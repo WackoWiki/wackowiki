@@ -30,7 +30,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['password_page'],		'Password',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Αναζήτηση',			'{{search}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['login_page'],			'Σύνδεση',				'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Settings',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Ρυθμίσεις',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 	insert_page($config['changes_page'],		'Πρόσφατες αλλαγές',	'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Αλλαγές');
 	insert_page($config['comments_page'],		'Recently Commented',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Σχόλια');
