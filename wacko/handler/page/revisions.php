@@ -40,7 +40,7 @@ if ($this->has_access('read'))
 		$this->context[++$this->current_context] = '';
 
 		$user			= $this->get_user();
-		$default_mode	= $user['diff_mode'] ?: $this->db->default_diff_mode;
+		$default_mode	= $user['diff_mode'] ?? $this->db->default_diff_mode;
 		$diff_modes		= $this->_t('DiffMode');
 		$diff_mode_list	= explode(',', $this->db->diff_modes);
 
