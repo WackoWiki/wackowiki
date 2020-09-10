@@ -13,9 +13,9 @@ $lang = [
 */
 'ConfigDefaults'	=> [
 	// pages
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
-	'users_page'		=> 'Users',
+	'category_page'		=> '카테고리',
+	'groups_page'		=> '그룹',
+	'users_page'		=> '사용자',
 
 	'search_page'		=> '검색',
 	'login_page'		=> '로그인',
@@ -23,12 +23,12 @@ $lang = [
 	'registration_page'	=> '계정만들기',
 	'password_page'		=> '비밀번호',
 
-	'changes_page'		=> 'RecentChanges',
-	'comments_page'		=> 'RecentlyCommented',
-	'index_page'		=> 'PageIndex',
+	'changes_page'		=> '최근바뀜',
+	'comments_page'		=> '최근댓글',
+	'index_page'		=> '페이지색인',
 
-	'random_page'		=> 'RandomPage',
-	#'help_page'			=> 'Help',
+	'random_page'		=> '임의의문서로',
+	#'help_page'		=> '도움말',
 	#'terms_page'		=> 'Terms',
 	#'privacy_page'		=> 'Privacy',
 
@@ -41,9 +41,9 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'WackoWiki Installation',
-'Continue'						=> 'Continue',
-'Back'							=> 'Back',
+'Title'							=> 'WackoWiki 설치',
+'Continue'						=> '계속',
+'Back'							=> '뒤로',
 'Recommended'					=> 'recommended',
 'InvalidAction'					=> 'Invalid action',
 
@@ -60,18 +60,18 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check'					=> 'System Requirements',
-'PhpVersion'					=> 'PHP Version',
+'version-check'					=> '시스템 요구사항',
+'PhpVersion'					=> 'PHP 버전',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
-'Database'						=> 'Database',
-'PhpExtensions'					=> 'PHP Extensions',
-'Permissions'					=> 'Permissions',
+'Database'						=> '데이터베이스',
+'PhpExtensions'					=> 'PHP 확장',
+'Permissions'					=> '사용자 권한',
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
-'Problem'						=> 'Problem',
+'Problem'						=> '문제',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Your PHP installation appears to be missing the noted PHP extensions which are required by WackoWiki.',
 'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
@@ -89,7 +89,7 @@ $lang = [
 'HomePage'						=> '홈페이지',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> '홈페이지',
-'MultiLang'						=> 'Multi Language Mode',
+'MultiLang'						=> '다국어 모드',
 'MultiLangDesc'					=> 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial menu items for all languages available in distribution.',
 'AllowedLang'					=> 'Allowed Languages',
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
@@ -104,7 +104,7 @@ $lang = [
 'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
 'Rewrite'						=> 'Rewrite Mode',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
-'Enabled'						=> 'Enabled:',
+'Enabled'						=> '사용:',
 'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
 'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
 'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
@@ -135,10 +135,10 @@ $lang = [
 /*
    Database Config Page
 */
-'config-database'				=> 'Database Configuration',
+'config-database'				=> '데이터베이스 구성',
 'DbDriver'						=> 'Driver',
 'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
-'DbCharset'						=> 'Charset',
+'DbCharset'						=> '문자셋',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
 'DbEngineDesc'					=> 'The database engine you want to use.',
@@ -146,12 +146,12 @@ $lang = [
 'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
 'DbPort'						=> 'Port (Optional)',
 'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
-'Db'							=> 'Database Name',
+'Db'							=> '데이터베이스 이름',
 'DbDesc'						=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
 'DbUserDesc'					=> 'Name of the user used to connect to your database.',
-'DbUser'						=> 'User Name',
+'DbUser'						=> '사용자 이름',
 'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
-'DbPassword'					=> 'Password',
+'DbPassword'					=> '암호',
 'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',
 'Prefix'						=> 'Table Prefix',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
@@ -163,7 +163,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'install-database'				=> 'Database Installation',
+'install-database'				=> '데이터베이스 설치',
 'TestingConfiguration'			=> 'Testing Configuration',
 'TestConnectionString'			=> 'Testing database connection settings',
 'TestDatabaseExists'			=> 'Checking if the database you specified exists',
@@ -213,12 +213,12 @@ $lang = [
    Write Config Page
 */
 'write-config'					=> 'Write Config File',
-'FinalStep'						=> 'Final Step',
+'FinalStep'						=> '마지막 단계',
 'Writing'						=> 'Writing Configuration File',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
-'InstallationComplete'			=> 'Installation Complete',
+'InstallationComplete'			=> '설치 완료',
 'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
-'SecurityConsiderations'		=> 'Security Considerations',
+'SecurityConsiderations'		=> '보안 고려 사항',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
 'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br>; don\'t forget to remove write access again later, i.e. %3.<br>If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
@@ -226,6 +226,6 @@ $lang = [
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
 'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
-'TryAgain'						=> 'Try Again',
+'TryAgain'						=> '다시 시도하십시오',
 
 ];

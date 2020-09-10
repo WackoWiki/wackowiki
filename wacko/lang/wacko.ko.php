@@ -530,7 +530,7 @@ $wacko_translation = [
 	'AccountDeleteHint'			=> 'Your account will be deleted from the system. Therefore, you will no longer be able to log in with your current credentials. If you choose to become a user of this application again, you can do so by using the means this application grants.',
 	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
 
-	'MarkRead'					=> 'Mark all as read',
+	'MarkRead'					=> '모두 읽은 상태로 표시',
 	'CurrentTime'				=> 'It is currently',
 	'Created'					=> '만듦',
 	'Modified'					=> '수정됨',

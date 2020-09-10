@@ -44,22 +44,26 @@ echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_
 ?>
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
-// https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+// available languages
 $lang_codes = [];
 $lang_codes['bg'] = 'български';
 $lang_codes['da'] = 'Dansk';
 $lang_codes['de'] = 'Deutsch';
-$lang_codes['et'] = 'Eesti';
-$lang_codes['en'] = 'English';
 $lang_codes['el'] = 'Ελληνικά';
+$lang_codes['en'] = 'English';
 $lang_codes['es'] = 'Español';
+$lang_codes['et'] = 'Eesti';
 $lang_codes['fr'] = 'Français';
 $lang_codes['hu'] = 'Magyar';
 $lang_codes['it'] = 'Italiano';
+$lang_codes['ja'] = '日本語';
+$lang_codes['ko'] = '한국어';
 $lang_codes['nl'] = 'Nederlands';
 $lang_codes['pl'] = 'Polski';
 $lang_codes['pt'] = 'Portugues';
 $lang_codes['ru'] = 'Русский';
+$lang_codes['zh'] = '简体中文';
+$lang_codes['zh-tw'] = '正體中文';
 
 foreach($lang_codes as $key => $value)
 {
