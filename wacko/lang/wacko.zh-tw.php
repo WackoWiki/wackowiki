@@ -182,7 +182,7 @@ $wacko_translation = [
 	'Nobody'					=> 'Nobody',
 	'TakeOwnership'				=> '成為所有者',
 	'FilesTip'					=> 'Manage attached files',
-	'FilesText'					=> 'Attachments',
+	'FilesText'					=> '附加檔案',
 	'DeleteConfirm'				=> 'Do you really want to DELETE page?' . "\n" . 'There is no undo for this action!.',
 	'DeleteTip'					=> 'Delete page, it\'s files and comments',
 	'DeleteCommentTip'			=> '刪除回應',
@@ -319,7 +319,7 @@ $wacko_translation = [
 	'GroupsDescription'			=> '說明',
 	'GroupsCreated'				=> '已建立',
 	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
-	'GroupsProfile'				=> 'Profile',
+	'GroupsProfile'				=> '個人資料',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupSpace'				=> 'Group space',
 
@@ -721,7 +721,7 @@ $wacko_translation = [
 	'UsersSignup'				=> 'Signup',
 	'UsersLastSession'			=> '上屆會議',
 	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
-	'UsersProfile'				=> 'Profile',
+	'UsersProfile'				=> 'P個人資料',
 	'UsersContact'				=> '聯絡',
 	'UsersList'					=> 'View the entire list of users',
 	'UsersNA'					=> '[not set]',
@@ -858,7 +858,7 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> '附加檔案',
-	'Attachment'				=> 'Attachment',
+	'Attachment'				=> '附加檔案',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsPerPage'		=> 'per page',
 	'AttachmentsByTime'			=> 'by time',
@@ -1083,7 +1083,7 @@ $wacko_translation = [
 	'ModerateSplitPageName'		=> 'Enter the name of the page / topic, where to move detachable comments, and select a separation schema',
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
-	'ModerateUserProfile'		=> 'profile',
+	'ModerateUserProfile'		=> '個人資料',
 	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'			=> 'moderate section',

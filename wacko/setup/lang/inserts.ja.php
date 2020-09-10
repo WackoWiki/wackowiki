@@ -10,7 +10,7 @@ if ($config['language'] == $page_lang)
 		$home_page_body		= "file:/wacko_logo.png?right\n**あなたの ((WackoWiki:Doc/English WackoWiki)) サイトへようこそ！**\n\nClick after you have ((ログイン logged in)) on the \"Edit this page\" link at the bottom to get started.\n\nDocumentation can be found at WackoWiki:Doc/English.\n\nUseful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((検索)).\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
-		insert_page($config['root_page'], 'Home Page', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
+		insert_page($config['root_page'], 'ホームページ', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
 	}
 	else

@@ -489,7 +489,7 @@ $ap_translation = [
 	'SecuritySettingsUpdated'	=> 'Updated security settings',
 
 	'AllowRegistration'			=> 'Register online',
-	'AllowRegistrationInfo'		=> 'Aprire la registrazione dell'utente. Disabilitando questa opzione si impedisce la registrazione gratuita, tuttavia, l'amministratore del sito potrà registrare personalmente gli altri utenti.',
+	'AllowRegistrationInfo'		=> 'Aprire la registrazione dell\'utente. Disabilitando questa opzione si impedisce la registrazione gratuita, tuttavia, l\'amministratore del sito potrà registrare personalmente gli altri utenti.',
 	'ApproveNewUser'			=> 'Approve new users',
 	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies',
