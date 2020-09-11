@@ -22,16 +22,16 @@ $ap_translation = [
 	// Admin panel
 	'AdminPanel'				=> 'Administration Control Panel',
 	'RecoveryMode'				=> 'Recovery Mode',
-	'Authorization'				=> 'Authorization',
+	'Authorization'				=> '권한 부여',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
 	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'FormSave'					=> 'Save',
+	'FormSave'					=> '저장',
 	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> 'Update',
+	'FormUpdate'				=> '업데이트',
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
@@ -49,14 +49,14 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
+	'Cancel'					=> '취소',
 	'Add'						=> 'Add',
 	'Edit'						=> 'Edit',
 	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
-	'On'						=> 'On',
-	'Off'						=> 'Off',
+	'On'						=> '켜기',
+	'Off'						=> '끄기',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 

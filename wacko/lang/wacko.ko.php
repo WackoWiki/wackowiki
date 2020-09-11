@@ -402,7 +402,7 @@ $wacko_translation = [
 	'CategoriesRemoved'			=> 'Pages categories deleted.',
 	'RatingRemoved'				=> 'Rating removed.',
 	'AclsRemoved'				=> 'Page acls removed.',
-	'BookmarksRemoved'			=> 'Bookmarks removed.',
+	'BookmarksRemoved'			=> '북마크가 제거되었습니다.',
 	'WatchesRemoved'			=> 'Watches removed.',
 	'CommentsRemoved'			=> 'Comments from page removed.',
 	'FilesRemoved'				=> 'Files from page removed.',
@@ -484,14 +484,14 @@ $wacko_translation = [
 	'UserName'					=> '사용자 이름',
 	'EmailAddress'				=> '이메일 주소',
 	'RealName'					=> '실명',
-	'MenuItemsShown'			=> 'Menu items shown',
-	'RecordsPerPage'			=> 'Records per page',
+	'MenuItemsShown'			=> '표시되는 메뉴 항목 수',
+	'RecordsPerPage'			=> '페이지 당 기록',
 	'DoShowComments'			=> 'Show comments by default',
 	'DoubleclickEditing'		=> '더블 클릭 편집',
 	'UpdateSettingsButton'		=> '업데이트 설정',
 
 	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
-	'WrongPassword'				=> 'Wrong password!',
+	'WrongPassword'				=> '잘못된 비밀번호!',
 	'YourLogin'					=> 'Your WikiName',
 	'ConfirmPassword'			=> '비밀번호 확인',
 	'Email'						=> '이메일 주소',
@@ -554,7 +554,7 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Unreadable page %1.',
 	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
-	'SortComment'				=> 'Sort comment by',
+	'SortComment'				=> '댓글 정렬 기준',
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',
 
@@ -709,7 +709,7 @@ $wacko_translation = [
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> '이름',
 	'UsersPages'				=> '페이지',
-	'UsersChanges'				=> 'Changes',
+	'UsersChanges'				=> '바뀜',
 	'UsersSubscription'			=> 'Subscription',
 	'UsersWatches'				=> 'Watches',
 	'UsersComments'				=> '댓글',
@@ -827,7 +827,7 @@ $wacko_translation = [
 	'SettingsLatex'				=> 'LaTeX version',
 	'SettingsXML'				=> 'Export to XML',
 	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
-	'SetLang'					=> 'Language of this page',
+	'SetLang'					=> '이 페이지의 언어',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
@@ -914,7 +914,7 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Chosen name is invalid',
 	'InvalidUserName'			=> 'Chosen user name is invalid',
 	'PleaseLogin'				=> '((Settings Login here,please))',
-	'Bookmarks'					=> 'Bookmarks',
+	'Bookmarks'					=> '북마크',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
 
 	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',
@@ -924,12 +924,12 @@ $wacko_translation = [
 	'BookmarkDeleteSelected'	=> 'Delete selected',
 	'BookmarkMark'				=> 'Mark',
 	'BookmarkNumber'			=> 'No.',
-	'BookmarkNone'				=> 'You have no bookmarks.',
-	'BookmarkTitle'				=> 'Bookmark title',
+	'BookmarkNone'				=> '당신은 더 북마크가 없습니다.',
+	'BookmarkTitle'				=> '북마크 제목',
 	'BookmarkPage'				=> '쪽',
 	'BookmarkSaveChanges'		=> 'Save changes',
 	'BookmarksAddPage'			=> 'Set a bookmark for the following page',
-	'BookmarkAlreadyExists'		=> 'The bookmark already exists.',
+	'BookmarkAlreadyExists'		=> '북마크가 이미 있습니다.',
 
 	'PoweredBy'					=> 'Powered by',
 
@@ -1127,7 +1127,7 @@ $wacko_translation = [
 
 
 	// password complexity
-	'PwdCplxShort'				=> 'Password is too short.',
+	'PwdCplxShort'				=> '비밀번호가 너무 짧습니다.',
 	'PwdCplxEquals'				=> 'Password contains the user name.',
 	'PwdCplxWeak'				=> 'Password does not meet complexity requirements.',
 	'PwdCplxDesc1'				=> 'Requirements for the password: ',
@@ -1139,7 +1139,7 @@ $wacko_translation = [
 	'PwdCplxDesc43'				=> 'uppercase and lowercase letters, digits and non-alphabetic characters',
 	'PwdCplxDesc5'				=> 'You can use any letters, numbers and special characters, but gaps.',
 
-	'PasswordTooShort'			=> 'Password too short.',
+	'PasswordTooShort'			=> '비밀번호가 너무 짧습니다.',
 	'PasswordTooCommon'			=> 'That password is too common.',
 	'PasswordSameAsUsername'	=> 'Your password is the same as your username.',
 	'PasswordSameAsEmail'		=> 'Your password is the same as your email.',

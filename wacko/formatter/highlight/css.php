@@ -66,6 +66,7 @@ $keywords = [
 	'font-variant',
 	'font-weight',
 	'letter-spacing',
+	'line-break',
 	'line-height',
 	'list-style-image',
 	'list-style-position',
@@ -118,6 +119,7 @@ $keywords = [
 	'volume',
 	'white-space',
 	'widows',
+	'word-break',
 	'word-spacing',
 	'z-index',
 ];

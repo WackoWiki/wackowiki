@@ -22,7 +22,7 @@ $ap_translation = [
 	// Admin panel
 	'AdminPanel'				=> 'Administration Control Panel',
 	'RecoveryMode'				=> 'Recovery Mode',
-	'Authorization'				=> 'Authorization',
+	'Authorization'				=> '授權',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
 	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',

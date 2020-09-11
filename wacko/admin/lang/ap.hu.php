@@ -11,7 +11,7 @@ $ap_translation = [
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferenciák',
-		'content'		=> 'Content',
+		'content'		=> 'Tartalom',
 		'users'			=> 'Felhasználók',
 		'maintenance'	=> 'Karbantartás',
 		'messages'		=> 'Messages',
@@ -29,11 +29,11 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'FormSave'					=> 'Save',
-	'FormReset'					=> 'Reset',
+	'FormSave'					=> 'Mentés',
+	'FormReset'					=> 'Alaphelyzet',
 	'FormUpdate'				=> 'Frissítés',
 
-	'ApHomePage'				=> 'Home Page',
+	'ApHomePage'				=> 'Címlap',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Kilépés',
 	'ApLogOutTip'				=> 'quit system administration',
@@ -41,20 +41,20 @@ $ap_translation = [
 	'TimeLeft'					=> 'Time left:  %1 minutes',
 	'ApVersion'					=> 'version',
 
-	'SiteOpen'					=> 'Open',
+	'SiteOpen'					=> 'Nyitott',
 	'SiteOpened'				=> 'site opened',
 	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'Close',
+	'SiteClose'					=> 'Bezár',
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
 	'Cancel'					=> 'Mégse',
-	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
-	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
+	'Add'						=> 'Hozzáadás',
+	'Edit'						=> 'Szerkesztés',
+	'Remove'					=> 'Eltávolítás',
+	'Enabled'					=> 'Engedélyezett',
+	'Disabled'					=> 'Tiltott',
 	'On'						=> 'Bekapcsolva',
 	'Off'						=> 'Kikapcsolva',
 	'Mandatory'					=> 'Mandatory',
@@ -112,7 +112,7 @@ $ap_translation = [
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> 'Oldalak',
 		'title'		=> 'Pages and site parameters',
 	],
 
@@ -178,7 +178,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> 'Visszaállítás',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -279,7 +279,7 @@ $ap_translation = [
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
 	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
-	'CommentSection'			=> 'Comments',
+	'CommentSection'			=> 'Hozzászólások',
 	'AllowComments'				=> 'Allow comments',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
@@ -525,7 +525,7 @@ $ap_translation = [
 	'Csp'						=> 'Content-Security-Policy (CSP)',
 	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'CspModes'	=> [
-		'0'		=> 'disabled',
+		'0'		=> 'tiltott',
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
@@ -717,11 +717,11 @@ $ap_translation = [
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
 	'CategoryPage'				=> 'Category',
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
-	'TagPage'					=> 'Tag',
+	'TagPage'					=> 'Címke',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
-	'GroupsPage'				=> 'Groups',
+	'GroupsPage'				=> 'Csoportok',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
-	'ChangesPage'				=> 'Recent changes',
+	'ChangesPage'				=> 'Friss változások',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
 	'CommentsPage'				=> 'Recent comments',
 	'CommentsPageInfo'			=> 'Page with a list of recent comment on the page (action %1).',
@@ -890,14 +890,14 @@ $ap_translation = [
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
 
 	// DB Convert module
-	'Convert'					=> 'Convert',
+	'Convert'					=> 'Átalakítás',
 	'NoColumnsToConvert'		=> 'No columns to convert.',
 	'NoTablesToConvert'			=> 'No tables to convert.',
 
 	'LogDatabaseConverted'		=> 'Database converted',
 	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
 
-	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
+	'LogColumnsToStrict'		=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
@@ -907,7 +907,7 @@ $ap_translation = [
 	'DbEngineOk'				=> 'InnoDB is available.',
 	'DbEngineMissing'			=> 'InnoDB is not available.',
 	'EngineTable'				=> 'Table',
-	'EngineDefault'				=> 'Default',
+	'EngineDefault'				=> 'Alapértelmezés',
 	'EngineColumn'				=> 'Column',
 	'EngineTyp'					=> 'Type',
 
@@ -925,7 +925,7 @@ $ap_translation = [
 	'LogNoMatch'				=> 'No events that meet the criteria',
 	'LogDate'					=> 'Date',
 	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Username',
+	'LogUsername'				=> 'Felhasználónév',
 	'LogLevels'	=> [
 		'1'		=> 'critical',
 		'2'		=> 'highest',
@@ -1070,8 +1070,8 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
-	'BackupRemove'				=> 'Remove',
+	'BackupRestore'				=> 'Visszaállítás',
+	'BackupRemove'				=> 'Eltávolítás',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1082,7 +1082,7 @@ $ap_translation = [
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'UserEditButton'			=> 'Szerkesztés',
-	'UserEnabled'				=> 'Enabled',
+	'UserEnabled'				=> 'Engedélyezett',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Biztosan el akarja távolítani az %1 felhasználót?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
@@ -1090,8 +1090,8 @@ $ap_translation = [
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
 	'UsersUpdated'				=> 'User successfully updated.',
 
-	'UserName'					=> 'Username',
-	'UserRealname'				=> 'Realname',
+	'UserName'					=> 'Felhasználónév',
+	'UserRealname'				=> 'Teljes név',
 	'UserEmail'					=> 'Email',
 	'UserIP'					=> 'IP',
 	'UserLanguage'				=> 'Nyelv',
@@ -1115,9 +1115,9 @@ $ap_translation = [
 
 	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'Leírás',
-	'GroupsModerator'			=> 'Moderator',
-	'GroupsOpen'				=> 'Open',
-	'GroupsActive'				=> 'Active',
+	'GroupsModerator'			=> 'Moderátor',
+	'GroupsOpen'				=> 'Nyitott',
+	'GroupsActive'				=> 'Aktív',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
 	'GroupsAlreadyExists'		=> 'This group already exists.',
@@ -1133,7 +1133,7 @@ $ap_translation = [
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsSaveButton'			=> 'Elküld',
 	'GroupsCancelButton'		=> 'Mégse',
-	'GroupsAddButton'			=> 'Add',
+	'GroupsAddButton'			=> 'Hozzáadás',
 	'GroupsEditButton'			=> 'Szerkesztés',
 	'GroupsRemoveButton'		=> 'Törlés',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
@@ -1187,7 +1187,7 @@ $ap_translation = [
 	'SessionPath'				=> 'Session path',
 	'PhpDefaultCharset'			=> 'PHP default charset',
 	'GZipCompression'			=> 'GZip compression',
-	'PhpExtensions'				=> 'PHP extensions',
+	'PhpExtensions'				=> 'PHP-kiterjesztések',
 	'ApacheModules'				=> 'Apache modules',
 
 	// DB repair module
@@ -1231,7 +1231,7 @@ $ap_translation = [
 
 	'BbSummary'					=> 'Summary',
 	'BbLog'						=> 'Log',
-	'BbSettings'				=> 'Settings',
+	'BbSettings'				=> 'Beállítások',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log
@@ -1243,7 +1243,7 @@ $ap_translation = [
 	'BbIp'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
 	'BbRecordsAll'				=> 'Displaying all %1 records',
-	'BbShow'					=> 'Show',
+	'BbShow'					=> 'Megjelenítés',
 	'BbIpDateStatus'			=> 'IP/Date/Status',
 	'BbHeaders'					=> 'Headers',
 	'BbEntity'					=> 'Entity',
