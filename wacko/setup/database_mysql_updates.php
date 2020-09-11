@@ -20,6 +20,7 @@ $lp_size	= $large_prefix ? '250' : '190';
 
 // CACHE
 $alter_cache_r5_5_0 = "ALTER TABLE {$pref}cache CHANGE cache_time cache_time DATETIME NULL DEFAULT NULL";
+$alter_cache_r5_5_1 = "ALTER TABLE {$pref}cache CHANGE cache_lang cache_lang VARCHAR(5) NOT NULL DEFAULT ''";
 
 // CATEGORY
 $alter_category_r5_5_0 = "ALTER TABLE {$pref}category CHANGE category_lang category_lang VARCHAR(5) NOT NULL DEFAULT ''";
@@ -69,6 +70,7 @@ $alter_rating_r5_5_0 = "ALTER TABLE {$pref}rating CHANGE rating_time rating_time
 
 // REVISION
 $alter_revision_r5_5_0 = "ALTER TABLE {$pref}revision DROP supertag";
+$alter_revision_r5_5_1 = "ALTER TABLE {$pref}revision CHANGE page_lang page_lang VARCHAR(5) NOT NULL DEFAULT ''";
 
 // TAG
 
