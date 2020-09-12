@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Poprzednia edycja',
 	'NextEdit'					=> 'Następna edycja',
 
-	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Pokaż zmiany pomiędzy',
 	'CancelDifferencesButton'	=> 'Powróć do węzła / Anuluj',
 	'Comparison'				=> 'Porównianie zmian zawartości strony %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Twoje konto może być wyłączone.',
 	'WrongPassword'				=> 'Nieprawidłowe hasło!',
-	'YourLogin'					=> 'Twoja NazwaWiki',
 	'ConfirmPassword'			=> 'Potwierdź hasło',
 	'Email'						=> 'Adres e-mail',
 	'MustBeWikiName'			=> 'Nazwa użytkownika musi być w formacie ((WackoWiki:Doc/Polish/NazwaWiki NazwyWiki))!',

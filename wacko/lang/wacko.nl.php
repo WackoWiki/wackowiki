@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Oudere bewerking',
 	'NextEdit'					=> 'Nieuwere bewerking',
 
-	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Laat wijzigingen zien',
 	'CancelDifferencesButton'	=> 'Terug naar pagina / Annuleren',
 	'Comparison'				=> 'Vergelijking tussen %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Uw account kan uitgeschakeld zijn.',
 	'WrongPassword'				=> 'Verkeerd wachtwoord!',
-	'YourLogin'					=> 'Uw wikinaam',
 	'ConfirmPassword'			=> 'Bevestig het wachtwoord',
 	'Email'						=> 'Email adres',
 	'MustBeWikiName'			=> 'Gebruikersnaam moet een ((WackoWiki:Doc/English/WikiName WikiNaam)) zijn!',

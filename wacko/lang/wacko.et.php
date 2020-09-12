@@ -282,7 +282,7 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
+	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
 	'CategoriesStoreButton'		=> 'Save Categories',
 	'CategoriesSaveButton'		=> 'Sisesta',
 	'CategoriesCancelButton' 	=> 'Loobu',
@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Vanem muudatus',
 	'NextEdit'					=> 'Uuem muudatus',
 
-	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> 'Näita erinevusi',
 	'CancelDifferencesButton'	=> 'Tagasi / Katkesta',
 	'Comparison'				=> 'võrdle %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Sinu kasutajakonto võib olla blokeeritud.',
 	'WrongPassword'				=> 'Vale parool!',
-	'YourLogin'					=> 'Sinu WikiNimi',
 	'ConfirmPassword'			=> 'Korda parooli',
 	'Email'						=> 'E-posti aadress',
 	'MustBeWikiName'			=> 'Kasutajanimi peab olema formaadis ((WackoWiki:Doc/English/WikiName WikiNimi))!',

@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Vorherige Änderung',
 	'NextEdit'					=> 'Nächste Änderung',
 
-	'RevisionsShowAll'			=> 'Alle Revisionen anzeigen...',
 	'ShowDifferencesButton'		=> 'Zeige Unterschiede',
 	'CancelDifferencesButton'	=> 'Abbrechen und zurück zur Seite',
 	'Comparison'				=> 'Versionsunterschiede von %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Dein Konto ist deaktiviert oder gesperrt.',
 	'WrongPassword'				=> 'Falsches Passwort!',
-	'YourLogin'					=> 'Benutzername',
 	'ConfirmPassword'			=> 'Passwort bestätigen',
 	'Email'						=> 'E-Mailadresse',
 	'MustBeWikiName'			=> 'Benutzername muss im ((WackoWiki:Doc/Deutsch/WikiName WikiName))-Format sein!',

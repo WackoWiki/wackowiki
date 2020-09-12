@@ -282,7 +282,7 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
+	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
 	'CategoriesStoreButton'		=> 'Αποθήκευση Κατηγορίες',
 	'CategoriesSaveButton'		=> 'Submit',
 	'CategoriesCancelButton'	=> 'Ακύρωση',
@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Προηγούμενη διαφορά',
 	'NextEdit'					=> 'Επόμενη διαφορά',
 
-	'RevisionsShowAll'			=> 'Εμφάνιση όλων των αναθεωρήσεων...',
 	'ShowDifferencesButton'		=> 'Εμφάνισε Διαφορές',
 	'CancelDifferencesButton'	=> 'Επέστρεψε στο Node / Ακύρωση',
 	'Comparison'				=> 'Σύγκριση για %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Ο λογαριασμός σας είναι απενεργοποιημένος ή αποκλεισμένος.',
 	'WrongPassword'				=> 'Λανθασμένο συνθηματικό!',
-	'YourLogin'					=> 'Το WikiName',
 	'ConfirmPassword'			=> 'Επιβεβαίωση συνθηματικού',
 	'Email'						=> 'Διεύθυνση Ηλεκτρονικού Ταχυδρομείου',
 	'MustBeWikiName'			=> 'Το όνομα χρήστη πρέπει να είναι σε ((WackoWiki:Doc/English/WikiName WikiName)) μορφή!',

@@ -282,7 +282,7 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
+	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
 	'CategoriesStoreButton'		=> 'Save Categories',
 	'CategoriesSaveButton'		=> '提交',
 	'CategoriesCancelButton'	=> '取消',
@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> '前一修订版',
 	'NextEdit'					=> '后一修订版',
 
-	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> '查看差异',
 	'CancelDifferencesButton'	=> 'Cancel and return to page',
 	'Comparison'				=> 'Difference between revisions for %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
 	'WrongPassword'				=> '密碼錯誤!',
-	'YourLogin'					=> 'Your WikiName',
 	'ConfirmPassword'			=> '再輸一次密碼',
 	'Email'						=> '電子郵件地址',
 	'MustBeWikiName'			=> '用戶名必須符合 ((WackoWiki:Doc/English/WikiName WikiName)) 格式!',

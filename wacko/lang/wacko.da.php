@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Gå til forrige forskel',
 	'NextEdit'					=> 'Gå til næste forskel',
 
-	'RevisionsShowAll'			=> 'Vis alle revisioner...',
 	'ShowDifferencesButton'		=> 'Vis ændringer',
 	'CancelDifferencesButton'	=> 'Tilbage til noden / Fortryd',
 	'Comparison'				=> 'Sammenligning for %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Din konto er måske deaktiveret.',
 	'WrongPassword'				=> 'Forkert password!',
-	'YourLogin'					=> 'Dit WikiNavn',
 	'ConfirmPassword'			=> 'Bekræft password',
 	'Email'						=> 'Emailadresse',
 	'MustBeWikiName'			=> 'Brugernavn skal være ((WackoWiki:Doc/English/WikiName WikiNavn)) formateret!',

@@ -15,7 +15,7 @@ if (array_key_exists('wacko_version', $config))
 	{
 		$config['is_update'] = null;
 		echo '<ul class="security"><li>' .
-			Ut::perc_replace($lang['PleaseUpgradeToR5'],
+			Ut::perc_replace($lang['PleaseUpgradeToR6'],
 				'<code class="version">' . $min_upgrade_version . '</code>',
 				'<code class="version">' . $min_upgrade_version . '</code>') .
 			"</li></ul>\n";

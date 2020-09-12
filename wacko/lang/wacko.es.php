@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Ir a diferencia anterior',
 	'NextEdit'					=> 'Ir a siguiente diferencia',
 
-	'RevisionsShowAll'			=> 'Mostrar todas las revisiones...',
 	'ShowDifferencesButton'		=> 'Mostrar Differencias',
 	'CancelDifferencesButton'	=> 'Vuelta al Nodo/ Cancelar',
 	'Comparison'				=> 'Diferencia entre revisiones de %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Su cuenta puede estar deshabilitada.',
 	'WrongPassword'				=> 'Contraseña erronea!',
-	'YourLogin'					=> 'Tu login (WikiName)',
 	'ConfirmPassword'			=> 'Confirmar contraseña',
 	'Email'						=> 'Email',
 	'MustBeWikiName'			=> 'El usuario debe tener un formato ((WackoWiki:Doc/English/WikiName WikiName))!',

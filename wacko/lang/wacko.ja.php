@@ -282,7 +282,7 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page select the checkboxes.',
+	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
 	'CategoriesStoreButton'		=> 'Save Categories',
 	'CategoriesSaveButton'		=> '送信',
 	'CategoriesCancelButton'	=> 'キャンセル',
@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> '前のリビジョン',
 	'NextEdit'					=> '次のリビジョン',
 
-	'RevisionsShowAll'			=> 'Show all revisions...',
 	'ShowDifferencesButton'		=> '差分を表示',
 	'CancelDifferencesButton'	=> 'キャンセルし、ページに戻ります',
 	'Comparison'				=> 'Difference between revisions for %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
 	'WrongPassword'				=> '間違ったパスワード！',
-	'YourLogin'					=> 'Your WikiName',
 	'ConfirmPassword'			=> 'パスワードの確認',
 	'Email'						=> 'メールアドレス',
 	'MustBeWikiName'			=> 'User name must be ((WackoWiki:Doc/English/WikiName WikiName)) formatted!',

@@ -365,7 +365,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Modification précédente',
 	'NextEdit'					=> 'Modification suivante',
 
-	'RevisionsShowAll'			=> 'Montrer toutes les révisions...',
 	'ShowDifferencesButton'		=> 'Montrer les différences',
 	'CancelDifferencesButton'	=> 'Annuler et revenir',
 	'Comparison'				=> 'Différences entre versions de %1',
@@ -492,7 +491,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Votre compte est peut être désactivé.',
 	'WrongPassword'				=> 'Mot de passe incorrect !',
-	'YourLogin'					=> 'Votre NomWiki',
 	'ConfirmPassword'			=> 'Confirmez votre mot de passe ',
 	'Email'						=> 'Adresse de messagerie ',
 	'MustBeWikiName'			=> 'Votre nom d’utilisateur doit prendre la forme d’un ((WackoWiki:Doc/Français/NomWiki NomWiki)) !',

@@ -366,7 +366,6 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Предыдущая правка',
 	'NextEdit'					=> 'Следующая правка',
 
-	'RevisionsShowAll'			=> 'Показать все редакции...',
 	'ShowDifferencesButton'		=> 'Сравнить',
 	'CancelDifferencesButton'	=> 'Вернуться / Отмена',
 	'Comparison'				=> 'Сравнение версий %1',
@@ -493,7 +492,6 @@ $wacko_translation = [
 
 	'AccountDisabled'			=> 'Ваш аккаунт запрещен или заблокирован.',
 	'WrongPassword'				=> 'Неправильный пароль!',
-	'YourLogin'					=> 'Ваше ВикиИмя',
 	'ConfirmPassword'			=> 'Подтверждение пароля',
 	'Email'						=> 'Адрес электронной почты',
 	'MustBeWikiName'			=> 'Имя пользователя должно быть ((WackoWiki:Doc/Русский/ВикиИмя ВикиИменем)) ',

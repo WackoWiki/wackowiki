@@ -51,7 +51,7 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Configuración de Idioma',
-'PleaseUpgradeToR5'				=> 'Usted está ejecutando una versión antigua (pre %1) de WackoWiki. Para actualizar a ésta  versión de WackoWiki debe realizar antes una actualización a versión %2.',
+'PleaseUpgradeToR6'				=> 'Usted está ejecutando una versión antigua (pre %1) de WackoWiki. Para actualizar a ésta  versión de WackoWiki debe realizar antes una actualización a versión %2.',
 'UpgradeFromWacko'				=> 'Bienvenido a WackoWiki, aparentemente está actualizando de WackoWiki %1 a %2. Las siguientes páginas le guiarán por el proceso de actualización.',
 'FreshInstall'					=> 'Bienvenido a WackoWiki, está a punto de instalar WackoWiki %1. Las siguientes páginas le guiarán por el proceso de actualización.',
 'PleaseBackup'					=> 'Favor, realíce una copia de respaldo de la base de datos, archivos de configuración, y todos los archivos modificados, hackeados o parcheados antes de iniciar el proceso de actualización. Esto le puedo salvar de un gran dolor de cabeza.',
