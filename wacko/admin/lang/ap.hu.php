@@ -14,8 +14,8 @@ $ap_translation = [
 		'content'		=> 'Tartalom',
 		'users'			=> 'Felhasználók',
 		'maintenance'	=> 'Karbantartás',
-		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
+		'messages'		=> 'Üzenetek',
+		'extension'		=> 'Kiterjesztés',
 		'database'		=> 'Adatbázis',
 	],
 
@@ -23,9 +23,9 @@ $ap_translation = [
 	'AdminPanel'				=> 'Adminisztrátori vezérlőpult',
 	'RecoveryMode'				=> 'Recovery Mode',
 	'Authorization'				=> 'Authorization',
-	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'AuthorizationTip'			=> 'Kérjük, adja meg az adminisztrátori jelszót (győződjön meg arról is, hogy a böngészőben engedélyezik a sütik használatát).',
+	'NoRecoveryPassword'		=> 'Az adminisztrációs jelszó nincs megadva!',
+	'NoRecoveryPasswordTip'		=> 'Megjegyzés: Az adminisztrációs jelszó hiánya veszélyezteti a biztonságot! Írja be jelszavát a konfigurációs fájlba, és futtassa újra a programot.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
@@ -38,8 +38,8 @@ $ap_translation = [
 	'ApLogOut'					=> 'Kilépés',
 	'ApLogOutTip'				=> 'quit system administration',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
-	'ApVersion'					=> 'version',
+	'TimeLeft'					=> 'Hátralévő idő:  %1 perc',
+	'ApVersion'					=> 'verzió',
 
 	'SiteOpen'					=> 'Nyitott',
 	'SiteOpened'				=> 'site opened',
@@ -57,7 +57,7 @@ $ap_translation = [
 	'Disabled'					=> 'Tiltott',
 	'On'						=> 'Bekapcsolva',
 	'Off'						=> 'Kikapcsolva',
-	'Mandatory'					=> 'Mandatory',
+	'Mandatory'					=> 'Kötelező',
 	'Admin'						=> 'Admin',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
@@ -76,14 +76,14 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
-		'title'		=> 'Basic parameters',
+		'name'		=> 'Alapvető',
+		'title'		=> 'Alapparaméterek',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
 		'name'		=> 'Kinézet',
-		'title'		=> 'Appearance settings',
+		'title'		=> 'Kinézet beállítások',
 	],
 
 	// Config Email module
@@ -94,8 +94,8 @@ $ap_translation = [
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'name'		=> 'Szűrő',
+		'title'		=> 'Szűrőbeállítások',
 	],
 
 	// Config Formatter module
@@ -106,14 +106,14 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
-		'title'		=> 'Notifications settings',
+		'name'		=> 'Értesítések',
+		'title'		=> 'Értesítések beállításai',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
 		'name'		=> 'Oldalak',
-		'title'		=> 'Pages and site parameters',
+		'title'		=> 'Oldalak és webhelyparaméterek',
 	],
 
 	// Config Permissions module
@@ -124,32 +124,32 @@ $ap_translation = [
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
-		'title'		=> 'Security subsystems settings',
+		'name'		=> 'Biztonság',
+		'title'		=> 'Biztonsági alrendszerek beállításai',
 	],
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
-		'title'		=> 'System options',
+		'name'		=> 'Rendszer',
+		'title'		=> 'Rendszeropciók',
 	],
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
+		'name'		=> 'Feltöltés',
 		'title'		=> 'Attachment settings',
 	],
 
 	// Deleted module
 	'content_deleted'		=> [
-		'name'		=> 'Deleted',
-		'title'		=> 'Newly deleted content',
+		'name'		=> 'Törölve',
+		'title'		=> 'Újonnan törölt tartalom',
 	],
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menu',
-		'title'		=> 'Add, edit or remove default menu items',
+		'name'		=> 'Menü',
+		'title'		=> 'Alapértelmezett menüelemek hozzáadása, szerkesztése vagy eltávolítása',
 	],
 
 	// Polls module
@@ -161,43 +161,43 @@ $ap_translation = [
 	// DB Backup module
 	'db_backup'		=> [
 		'name'		=> 'Kimentés',
-		'title'		=> 'Backing up data',
+		'title'		=> 'Adatok biztonsági mentése',
 	],
 
 	// DB Convert module
 	'db_convert'		=> [
-		'name'		=> 'Convert',
+		'name'		=> 'Átalakítás',
 		'title'		=> 'Converting Tables or Columns',
 	],
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Repair',
-		'title'		=> 'Repair and Optimize Database',
+		'name'		=> 'Javítás',
+		'title'		=> 'Javítás és optimalizálás adatbázisban',
 	],
 
 	// DB Restore module
 	'db_restore'		=> [
 		'name'		=> 'Visszaállítás',
-		'title'		=> 'Restoring backup data',
+		'title'		=> 'Visszaállítása mentési adatok',
 	],
 
 	// Dashboard module
 	'main'		=> [
-		'name'		=> 'Main Menu',
-		'title'		=> 'WackoWiki Administration',
+		'name'		=> 'Főmenü',
+		'title'		=> 'WackoWiki adminisztráció',
 	],
 
 	// Inconsistencies module
 	'maint_inconsistencies'		=> [
-		'name'		=> 'Inconsistencies',
-		'title'		=> 'Fixing Data Inconsistencies',
+		'name'		=> 'Következetlenségek',
+		'title'		=> 'Az adatok ellentmondásainak kijavítása',
 	],
 
 	// Data Synchronization module
 	'maint_resync'		=> [
-		'name'		=> 'Data Synchronization',
-		'title'		=> 'Synchronizing data',
+		'name'		=> 'Adatok szinkronizálása',
+		'title'		=> 'Adatok szinkronizálása',
 	],
 
 	// Mass email module
@@ -208,26 +208,26 @@ $ap_translation = [
 
 	// System message module
 	'messages'		=> [
-		'name'		=> 'System message',
-		'title'		=> 'System messages',
+		'name'		=> 'Rendszerüzenet',
+		'title'		=> 'Rendszerüzenetek',
 	],
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Information',
+		'name'		=> 'Rendszer információ',
+		'title'		=> 'Rendszer információ',
 	],
 
 	// System log module
 	'system_log'		=> [
-		'name'		=> 'System log',
-		'title'		=> 'Log of system events',
+		'name'		=> 'Rendszernapló',
+		'title'		=> 'A rendszeresemények naplója',
 	],
 
 	// Statistics module
 	'system_statistics'		=> [
 		'name'		=> 'Statisztika',
-		'title'		=> 'Show statistics',
+		'title'		=> 'Statisztikák megjelenítése',
 	],
 
 	// Bad Behavior module
@@ -238,8 +238,8 @@ $ap_translation = [
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
-		'title'		=> 'User registration approval',
+		'name'		=> 'Jóváhagy',
+		'title'		=> 'Felhasználói regisztráció jóváhagyása',
 	],
 
 	// Groups module
@@ -273,14 +273,14 @@ $ap_translation = [
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
 	'LanguageSection'			=> 'Nyelv',
-	'DefaultLanguage'			=> 'Default language',
+	'DefaultLanguage'			=> 'Alapértelmezett nyelv',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
-	'AllowedLanguages'			=> 'Allowed languages',
+	'AllowedLanguages'			=> 'Engedélyezett nyelvek',
 	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 	'CommentSection'			=> 'Hozzászólások',
-	'AllowComments'				=> 'Allow comments',
+	'AllowComments'				=> 'Hozzászólások engedélyezése',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
@@ -355,31 +355,31 @@ $ap_translation = [
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 
 	// Appearance settings
-	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
-	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+	'AppearanceSettingsInfo'	=> 'Állítsa be a webhely alapértelmezett kinézet beállításait.',
+	'AppearanceSettingsUpdated'	=> 'Frissített kinézet beállítások.',
 
-	'LogoOff'					=> 'Off',
-	'LogoOnly'					=> 'logo',
-	'LogoAndTitle'				=> 'logo and title',
+	'LogoOff'					=> 'ki',
+	'LogoOnly'					=> 'logó',
+	'LogoAndTitle'				=> 'logó és cím',
 
-	'LogoSection'				=> 'Logo',
+	'LogoSection'				=> 'Logó',
 	'SiteLogo'					=> 'Site Logo',
-	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
-	'LogoDimensions'			=> 'Logo dimensions',
-	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
-	'LogoDisplayMode'			=> 'Logo display mode',
-	'LogoDisplayModeInfo'		=> 'Defines the appearance of the Logo. Default is off.',
+	'SiteLogoInfo'				=> 'Logója általában az alkalmazás bal felső sarkában jelenik meg. A maximális méret 2 MiB. Optimális méretei 255 pixel széles 55 képpont magas.',
+	'LogoDimensions'			=> 'Logó méretek',
+	'LogoDimensionsInfo'		=> 'Szélessége és magassága a megjelenített Logó.',
+	'LogoDisplayMode'			=> 'Logó megjelenítési mód',
+	'LogoDisplayModeInfo'		=> 'Meghatározza a logó megjelenését. Alapban ki van kapcsolva.',
 	'FaviconSection'			=> 'Favicon',
-	'SiteFavicon'				=> 'Site Favicon',
-	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
+	'SiteFavicon'				=> 'Favicon webhely',
+	'SiteFaviconInfo'			=> 'A parancsikon favicon megjelenik a legtöbb böngésző címsorában, lapjain és könyvjelzőiben. Ez felülírja a favicon a témát.',
 	'SiteFaviconTooBig'			=> 'A Favicon nagyobb, mint 64 × 64px.',
-	'LayoutSection'				=> 'Layout',
-	'Theme'						=> 'Theme',
-	'ThemeInfo'					=> 'Template design the site uses by default.',
-	'ThemesAllowed'				=> 'Allowed Themes',
-	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
-	'ThemesPerPage'				=> 'Themes per page',
-	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+	'LayoutSection'				=> 'Elrendezés',
+	'Theme'						=> 'Sablon',
+	'ThemeInfo'					=> 'A webhely alapértelmezés szerint használt sablontervezése.',
+	'ThemesAllowed'				=> 'Engedélyezett sablonok',
+	'ThemesAllowedInfo'			=> 'Válassza ki a megengedett sablonok, amelyeket a felhasználó választhat, különben az összes elérhető sablonok engedélyezett.',
+	'ThemesPerPage'				=> 'Sablonok oldalanként',
+	'ThemesPerPageInfo'			=> 'Engedélyezzen sablonokat oldalanként, amelyeket az oldal tulajdonosa az oldal tulajdonságain keresztül választhat ki.',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
@@ -753,11 +753,11 @@ $ap_translation = [
 
 	'NotificationSection'		=> 'Default user notification settings',
 	'NotifyPageEdit'			=> 'Notify page edit',
-	'NotifyPageEditInfo'		=> 'Pending - Sending a email notification only for the first change until the user visits the page again.',
+	'NotifyPageEditInfo'		=> 'Függőben - Sending a email notification only for the first change until the user visits the page again.',
 	'NotifyMinorEdit'			=> 'Notify minor edit',
 	'NotifyMinorEditInfo'		=> 'Sends notifications also for minor edits.',
 	'NotifyNewComment'			=> 'Notify new comment',
-	'NotifyNewCommentInfo'		=> 'Pending - Sending a email notification only for the first comment until the user visits the page again.',
+	'NotifyNewCommentInfo'		=> 'Függőben - Sending a email notification only for the first comment until the user visits the page again.',
 
 	'NotifyUserAccount'			=> 'Notify new user account',
 	'NotifyUserAccountInfo'		=> 'The Admin will to be notified when a new user has been created using the signup form.',
@@ -808,7 +808,7 @@ $ap_translation = [
 	// Email settings
 	'EmaiSettingsInfo'			=> 'Az alábbi információkat használja a fórum e-mailek küldésekor. Kérünk, győződj meg róla, hogy az e-mail cím, amit megadsz, helyes, mivel minden nem kézbesíthető levél erre a címre fog menni. Ha a tárhelyszolgáltatód nem biztosítja a natív (PHP alapú) e-mail küldést, használhatsz helyette SMTP-t. Ehhez szükség van egy megfelelő szerver címére (ha szükséges, kérdezd meg a szolgáltatód). Ha (és csak ha) a szerver megköveteli az azonosítást, add meg a szükséges felhasználónevet, jelszót és azonosítási módot.',
 
-	'EmailSettingsUpdated'		=> 'Updated Email settings',
+	'EmailSettingsUpdated'		=> 'Frissített e-mail beállítások',
 
 	'EmailFunctionName'			=> 'E-mail függvény neve',
 	'EmailFunctionNameInfo'		=> 'A függvény neve, amivel e-mailt lehet küldeni PHP-n keresztül.',
@@ -826,7 +826,7 @@ $ap_translation = [
 	'AbuseEmail'				=> 'Email abuse service',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
-	'SendTestEmail'				=> 'Send a test email',
+	'SendTestEmail'				=> 'Küldjön teszt e-mailt',
 	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
@@ -987,8 +987,8 @@ $ap_translation = [
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
 	'Approve'					=> 'Approve',
 	'Deny'						=> 'Deny',
-	'Pending'					=> 'Pending',
-	'Approved'					=> 'Approved',
+	'Pending'					=> 'Függőben',
+	'Approved'					=> 'Engedélyezve',
 	'Denied'					=> 'Denied',
 
 	// DB Backup module
@@ -1072,8 +1072,8 @@ $ap_translation = [
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'Visszaállítás',
 	'BackupRemove'				=> 'Eltávolítás',
-	'RestoreYes'				=> 'Yes',
-	'RestoreNo'					=> 'No',
+	'RestoreYes'				=> 'Igen',
+	'RestoreNo'					=> 'Nem',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
@@ -1167,7 +1167,7 @@ $ap_translation = [
 
 	// Sysinfo module
 	'SysInfo'					=> 'Version informations',
-	'SysParameter'				=> 'Parameter',
+	'SysParameter'				=> 'Paraméter',
 	'SysValues'					=> 'Values',
 
 	'WackoVersion'				=> 'WackoWiki',
@@ -1191,8 +1191,8 @@ $ap_translation = [
 	'ApacheModules'				=> 'Apache modules',
 
 	// DB repair module
-	'DbRepairSection'			=> 'Repair Database',
-	'DbRepair'					=> 'Repair Database',
+	'DbRepairSection'			=> 'Javítási adatbázis',
+	'DbRepair'					=> 'Javítási adatbázis',
 	'DbRepairInfo'				=> 'This script can automatically look for some common database problems and repair them. Repairing can take a while, so please be patient.',
 
 	'DbOptimizeRepairSection'	=> 'Repair and Optimize Database',
@@ -1211,8 +1211,8 @@ $ap_translation = [
 
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
-	'Inconsistencies'			=> 'Inconsistencies',
-	'CheckDatabase'				=> 'Database',
+	'Inconsistencies'			=> 'Következetlenségek',
+	'CheckDatabase'				=> 'Adatbázis',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
 	'CheckFiles'				=> 'Files',
 	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',

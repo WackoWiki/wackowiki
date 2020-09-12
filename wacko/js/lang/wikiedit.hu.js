@@ -22,32 +22,32 @@ lang = {
 	Underline :				"Aláhúzott szöveg",
 	Strikethrough :			"Áthúzott szöveg",
 	Code :					"Forráskód",
-	Superscript :			"Superscript",
-	Subscript :				"Subscript",
+	Superscript :			"Felső index",
+	Subscript :				"Alsó index",
 	List :					"Felsorolásos lista elem",
 	NumberedList :			"Sorszámozott lista elem",
-	Left :					"Left",
-	Center :				"Center",
-	Right :					"Right",
-	Justify :				"Justify",
-	Outdent :				"Outdent",
-	Indent :				"Indent",
+	Left :					"Balra zárt",
+	Center :				"Középre zárt",
+	Right :					"Jobbra zárt",
+	Justify :				"Sorkizárt",
+	Outdent :				"Kihúzás",
+	Indent :				"Behúzás",
 	CodeWrapper :			"Code Wrapper",
 	HTML :					"HTML",
 	Action :				"Action",
 	Line :					"Vízszintes elválasztó vonal",
 	Signature :				"Aláírás beszúrása",
-	Quote :					"Quote",
+	Quote :					"Idézet",
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insert table",
 
-	Link :					"Link",
+	Link :					"Hivatkozás",
 	TextForLinking :		"Text for linking",
 
-	HelpAboutTip :			' Shortcuts:\n'+
+	HelpAboutTip :			' Gyorshivatkozások:\n'+
 							' Ctrl+B - Bold\n'+
 							' Ctrl+I - Italic\n'+
 							' Ctrl+U - Underline\n'+

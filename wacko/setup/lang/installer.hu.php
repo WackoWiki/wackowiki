@@ -30,7 +30,7 @@ $lang = [
 	'random_page'		=> 'LapTalálomra',
 	#'help_page'		=> 'Segítség',
 	#'terms_page'		=> 'Terms',
-	#'privacy_page'		=> 'Privacy',
+	#'privacy_page'		=> 'Adatvédelem',
 
 	// time
 	#'date_format'					=> 'd.m.Y',
@@ -213,12 +213,12 @@ $lang = [
    Write Config Page
 */
 'write-config'					=> 'Write Config File',
-'FinalStep'						=> 'Final Step',
+'FinalStep'						=> 'Végső lépés',
 'Writing'						=> 'Írás konfigurációs fájl',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
 'InstallationComplete'			=> 'Telepítés befejezve',
 'ThatsAll'						=> 'Ez minden! You can now <a href="%1">view your WackoWiki site</a>.',
-'SecurityConsiderations'		=> 'Security Considerations',
+'SecurityConsiderations'		=> 'Biztonsági szempontok',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
 'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br>; don\'t forget to remove write access again later, i.e. %3.<br>If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',

@@ -24,7 +24,7 @@ if ($config['language'] == $page_lang)
 
 	insert_page($config['help_page'],			'Segítség',				'',						$page_lang, 'Admins', false, false);
 	insert_page($config['terms_page'],			'Terms',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Adatvédelmi nyilatkozat',		'',				$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],		'Adatvédelem',			'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
