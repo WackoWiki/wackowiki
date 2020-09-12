@@ -38,7 +38,7 @@
 							</div>
 							<div>
 								<input type="radio" name="to" value="here" checked id="upload_to_page">
-								<label for="upload_to_page">[ ' _t: UploadHereText ' ]</label>
+								<label for="upload_to_page">[ ' _t: UploadLocalText ' ]</label>
 							</div>
 						</td>
 					</tr>
@@ -64,7 +64,6 @@
 						</td>
 					</tr>
 				=]
-				
 				<tr>
 					<td class="t-right">
 					</td>
@@ -82,7 +81,6 @@
 					</td>
 				</tr>
 			</table>
-			
 		</form>
 	=]
 	

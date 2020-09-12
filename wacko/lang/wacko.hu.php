@@ -835,7 +835,7 @@ $wacko_translation = [
 	'UploadButton'				=> 'Feltöltés',
 	'UploadGlobalText'			=> 'for public access',
 	'UploadGlobal'				=> 'globális',
-	'UploadHereText'			=> 'only for users allowed to view current page',
+	'UploadLocalText'			=> 'only for users allowed to view current page',
 	'UploadAsName'				=> 'Feltöltési név (elhagyható)',
 	'UploadOverwrite'			=> 'Meglévő fájlok felülírása',
 	'FileDesc'					=> 'Leírás',
@@ -914,7 +914,7 @@ $wacko_translation = [
 	'Bookmarks'					=> 'Kedvencek',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
 
-	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',
+	'RegistrationClosed'		=> 'Felhasználók regisztrációja jelenleg nem lehetséges. Try to contact site administrator.',
 	'AclForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
 

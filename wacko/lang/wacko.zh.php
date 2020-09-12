@@ -835,7 +835,7 @@ $wacko_translation = [
 	'UploadButton'				=> '上传',
 	'UploadGlobalText'			=> 'for public access',
 	'UploadGlobal'				=> '全局',
-	'UploadHereText'			=> 'only for users allowed to view current page',
+	'UploadLocalText'			=> '仅适用于被允许查看当前页面的用户',
 	'UploadAsName'				=> 'Name',
 	'UploadOverwrite'			=> '覆盖已存在的同名文件',
 	'FileDesc'					=> '描述',
@@ -914,7 +914,7 @@ $wacko_translation = [
 	'Bookmarks'					=> '收藏夹',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
 
-	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',
+	'RegistrationClosed'		=> '不开放用户注册。 Try to contact site administrator.',
 	'AclForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
 
@@ -935,7 +935,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
 
 	// pagination
-	'ToOverview'				=> 'Back to overview',
+	'ToOverview'				=> '返回总览',
 	'ToThePage'					=> 'To page',
 	'Next'						=> '下一页',
 	'Prev'						=> '上一页',

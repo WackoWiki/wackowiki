@@ -219,7 +219,7 @@ $wacko_translation = [
 	'AclRead'					=> 'Read:',
 	'AclWrite'					=> 'Write:',
 	'AclComment'				=> 'Comments:',
-	'AclCreate'					=> 'Create:',
+	'AclCreate'					=> '생성:',
 	'AclUpload'					=> 'Upload:',
 	'AclFor'					=> 'Access Control Lists for %1',
 	'SetOwner'					=> 'Set Owner:',
@@ -833,9 +833,9 @@ $wacko_translation = [
 	'UploadFiles'				=> '파일 업로드하다',
 	'UploadFor'					=> '파일 올리기',
 	'UploadButton'				=> '올리기',
-	'UploadGlobalText'			=> 'for public access',
+	'UploadGlobalText'			=> '대중의 접근을 위해',
 	'UploadGlobal'				=> '전역',
-	'UploadHereText'			=> 'only for users allowed to view current page',
+	'UploadLocalText'			=> 'only for users allowed to view current page',
 	'UploadAsName'				=> '이름',
 	'UploadOverwrite'			=> '기존 파일에 덮어쓰기',
 	'FileDesc'					=> '설명',
@@ -914,7 +914,7 @@ $wacko_translation = [
 	'Bookmarks'					=> '북마크',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
 
-	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',
+	'RegistrationClosed'		=> '사용자 등록이 중지되어 있습니다. Try to contact site administrator.',
 	'AclForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
 
@@ -935,7 +935,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
 
 	// pagination
-	'ToOverview'				=> 'Back to overview',
+	'ToOverview'				=> '개요로 돌아 가기',
 	'ToThePage'					=> 'To page',
 	'Next'						=> '다음',
 	'Prev'						=> '이전',

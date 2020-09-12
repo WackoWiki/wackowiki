@@ -16,7 +16,7 @@ $wacko_translation = [
 	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
 
 	// logged in panel
-	'YouAre'					=> 'You are ',
+	'YouAre'					=> 'あなたは ',
 	'AccountText'				=> 'アカウント',
 	'AccountTip'				=> 'アカウントの設定',
 	'AdminText'					=> '管理',
@@ -143,9 +143,9 @@ $wacko_translation = [
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'Typografica'				=> 'Autocorrect typografica when viewing',
 	'Comment'					=> 'コメント',
-	'Comments0'					=> 'Add your comment',
-	'Comments1'					=> 'Read comment (1 comment)',
-	'CommentsN'					=> 'Read comments (%1 comments)',
+	'Comments0'					=> 'コメントを追加',
+	'Comments1'					=> 'コメントを読む (1 コメント)',
+	'CommentsN'					=> 'コメントを読む (%1 コメント)',
 	'Comments'					=> 'コメント',
 	'CommentEdited'				=> 'edited',
 	'Links'						=> 'リンク',
@@ -163,7 +163,7 @@ $wacko_translation = [
 	'AddComment'				=> 'Attach a comment to this page:',
 	'AddCommentTitle'			=> 'コメントのタイトル:',
 	'CommentTitleRe'			=> 'Re:',
-	'AddCommentButton'			=> 'Attach Comment',
+	'AddCommentButton'			=> 'コメントを追加',
 	'HereLink'					=> 'here',
 	'PageHandlerMoreTip'		=> '続き',
 
@@ -833,9 +833,9 @@ $wacko_translation = [
 	'UploadFiles'				=> 'ファイルをアップロード',
 	'UploadFor'					=> 'ファイルアップロード',
 	'UploadButton'				=> 'アップロード',
-	'UploadGlobalText'			=> 'for public access',
+	'UploadGlobalText'			=> '公開アクセス用',
 	'UploadGlobal'				=> 'グローバル',
-	'UploadHereText'			=> 'only for users allowed to view current page',
+	'UploadLocalText'			=> '現在のページの閲覧を許可されたユーザーのみ',
 	'UploadAsName'				=> '名前',
 	'UploadOverwrite'			=> '既存のファイルを上書き',
 	'FileDesc'					=> '説明',
@@ -898,9 +898,9 @@ $wacko_translation = [
 	'FileUsageText'				=> '以下の​ ページがこのファイルを使用しています:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
-	'Files0'					=> 'Attach Files',
-	'Files1'					=> 'Show Files (1 file)',
-	'FilesN'					=> 'Show Files (%1 files)',
+	'Files0'					=> 'ファイルを添付',
+	'Files1'					=> 'ファイルを表示 (1 ファイル)',
+	'FilesN'					=> 'ファイルを表示 (%1 ファイル)',
 	'Files'						=> 'ファイル',
 	'File'						=> 'ファイル',
 	'ShowFiles'					=> 'Display files / form',
@@ -914,7 +914,7 @@ $wacko_translation = [
 	'Bookmarks'					=> 'ブックマーク',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
 
-	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',
+	'RegistrationClosed'		=> 'ユーザー登録は無効化されました。 Try to contact site administrator.',
 	'AclForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
 
@@ -935,7 +935,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
 
 	// pagination
-	'ToOverview'				=> 'Back to overview',
+	'ToOverview'				=> '概要に戻る',
 	'ToThePage'					=> 'To page',
 	'Next'						=> '次へ',
 	'Prev'						=> '前へ',

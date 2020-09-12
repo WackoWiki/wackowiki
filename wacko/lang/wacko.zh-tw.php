@@ -835,7 +835,7 @@ $wacko_translation = [
 	'UploadButton'				=> '上傳',
 	'UploadGlobalText'			=> 'for public access',
 	'UploadGlobal'				=> '全域',
-	'UploadHereText'			=> 'only for users allowed to view current page',
+	'UploadLocalText'			=> '僅適用於被允許查看當前頁面的用戶',
 	'UploadAsName'				=> '名稱',
 	'UploadOverwrite'			=> '覆蓋已存在的檔案',
 	'FileDesc'					=> '說明',
@@ -935,7 +935,7 @@ $wacko_translation = [
 	'MassNeedRedirect'			=> 'Create redirect to the new pages on the old pages',
 
 	// pagination
-	'ToOverview'				=> 'Back to overview',
+	'ToOverview'				=> '返回總覽',
 	'ToThePage'					=> 'To page',
 	'Next'						=> '下一頁',
 	'Prev'						=> '上一頁',
