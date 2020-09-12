@@ -913,7 +913,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> 'Ваш язык (your language)',
 	'InvalidWikiName'			=> 'Выбранное вами имя страницы неверно',
 	'InvalidUserName'			=> 'Выбранное вами имя страницы неверно',
-	'PleaseLogin'				=> '((Settings Введите имя пользователя и пароль))',
 	'Bookmarks'					=> 'Личное меню',
 	'ReallyDeleteComment'		=> 'Вы действительно хотите УДАЛИТЬ комментарий? <br>Восстановить его потом не удастся.',
 

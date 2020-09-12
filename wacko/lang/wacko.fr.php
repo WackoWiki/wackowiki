@@ -911,7 +911,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> 'Votre langue',
 	'InvalidWikiName'			=> 'Le nom choisi est invalide',
 	'InvalidUserName'			=> 'Le nom choisi est invalide',
-	'PleaseLogin'				=> '((Paramètres de connexion ici, s’il vous plait))',
 	'Bookmarks'					=> 'Signets',
 	'ReallyDeleteComment'		=> 'Voulez-vous vraiment effacer ce commentaire ?<br>Cet effacement est définitif !',
 

@@ -101,7 +101,7 @@ $lang = [
 'Mail'							=> 'Admin e-mail címe',
 'MailDesc'						=> 'Írja be az adminisztrátor e-mail címét.',
 'Base'							=> 'Base URL',
-'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Your WackoWiki site base URL. Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
 'Rewrite'						=> 'Rewrite Mode',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> 'Engedélyezett:',
@@ -157,7 +157,7 @@ $lang = [
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'Nincs kiválasztva adatbázis-illesztőprogram, kérjük, válasszon egyet a listából.',
 'DeleteTables'					=> 'Törli a meglévő táblázatokat?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
+'DeleteTablesDesc'				=> 'FIGYELEM! Ha folytatja ezt a beállítást, akkor az összes aktuális wiki adat törlődik az adatbázisból. Ezt nem lehet visszavonni, ha manuálisan nem állítja vissza az adatokat egy biztonsági másolatból.',
 'ConfirmTableDeletion'			=> 'Biztosan törli az összes jelenlegi wiki táblázatot?',
 
 /*

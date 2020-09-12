@@ -911,7 +911,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> 'Taal',
 	'InvalidWikiName'			=> 'De naam die u gekozen heeft is niet geldig',
 	'InvalidUserName'			=> 'De naam die u gekozen heeft is niet geldig',
-	'PleaseLogin'				=> '((Settings Hier inloggen))',
 	'Bookmarks'					=> 'Bladwijzers',
 	'ReallyDeleteComment'		=> 'Weet u zeker dat u deze reactie wilt verwijderen?<br>Deze handeling kan niet ongedaan gemaakt worden!',
 

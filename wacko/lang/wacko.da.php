@@ -911,7 +911,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> 'Dit sprog',
 	'InvalidWikiName'			=> 'Valgt navn er desværre ikke tilladt',
 	'InvalidUserName'			=> 'Valgt navn er desværre ikke tilladt',
-	'PleaseLogin'				=> '((login))',
 	'Bookmarks'					=> 'Bogmærker',
 	'ReallyDeleteComment'		=> 'Er du sikker på, at du vil slette kommentaren?',
 

@@ -911,7 +911,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> 'La tua lingua',
 	'InvalidWikiName'			=> 'Scelto il nome non è valido',
 	'InvalidUserName'			=> 'Scelto il nome non è valido',
-	'PleaseLogin'				=> '((Settings Login here, please))',
 	'Bookmarks'					=> 'Segnalibri',
 	'ReallyDeleteComment'		=> 'Vuoi davvero CANCELLARE il commento? <br>Non c\'è nessun annullamento per questa azione!',
 

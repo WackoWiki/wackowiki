@@ -911,7 +911,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> 'Twój język',
 	'InvalidWikiName'			=> 'Wybrane imię jest niepoprawne',
 	'InvalidUserName'			=> 'Wybrane imię jest niepoprawne',
-	'PleaseLogin'				=> '((Settings Zaloguj tutaj))',
 	'Bookmarks'					=> 'Zakładki',
 	'ReallyDeleteComment'		=> 'Czy na pewno chcesz USUNĄĆ komentarz??<br>Nie można tego cofnąć!',
 

@@ -911,7 +911,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> '你的語言',
 	'InvalidWikiName'			=> 'Chosen name is invalid',
 	'InvalidUserName'			=> 'Chosen user name is invalid',
-	'PleaseLogin'				=> '((Settings Login here,please))',
 	'Bookmarks'					=> '最愛',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
 

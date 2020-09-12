@@ -911,7 +911,6 @@ $wacko_translation = [
 	'RegistrationLang'			=> 'Sinu keel',
 	'InvalidWikiName'			=> 'Valitud nimi ei ole korrektne',
 	'InvalidUserName'			=> 'Valitud nimi ei ole korrektne',
-	'PleaseLogin'				=> '((Seaded Logi sisee siin, palun))',
 	'Bookmarks'					=> 'Kiirvalikud',
 	'ReallyDeleteComment'		=> 'Kas sa tõesti tahad KUSTUTADA kommentaari?<br>Seda ei saa siis enam taastada!',
 

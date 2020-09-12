@@ -35,7 +35,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['changes_page'],		'Friss változtatások',	'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Változtatások');
 	insert_page($config['comments_page'],		'Utolsó megjegyzések',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Megjegyzések');
 	insert_page($config['index_page'],			'Oldal Index',			'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
-	insert_page($config['random_page'],			'Lap találomra',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Random');
+	insert_page($config['random_page'],			'Lap találomra',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Véletlenszerű');
 }
 else
 {
