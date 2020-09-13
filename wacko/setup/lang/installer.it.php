@@ -108,7 +108,6 @@ $lang = [
 'ErrorAdminEmail'				=> 'Devi immettere un indirizzo email valido!',
 'ErrorAdminPasswordMismatch'	=> 'Le password non coincidono, reimmetti password!',
 'ErrorAdminPasswordShort'		=> 'The admin Password troppo corta, reimmetti un\'altra, the minimum length is %1 characters!',
-'WarningRewriteMode'			=> 'ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.',
 'ModRewriteStatusUnknown'		=> 'Il programma di installazione non può verificare che mod_rewrite sia abilitato, ma ciò non significa che sia disabilitato.',
 
 'LanguageArray'	=> [

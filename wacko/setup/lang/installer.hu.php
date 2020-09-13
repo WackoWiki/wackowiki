@@ -50,7 +50,7 @@ $lang = [
 /*
    Language Selection Page
 */
-'lang'							=> 'Nyelvi beállítások',
+'lang'							=> 'Nyelvi Beállítások',
 'PleaseUpgradeToR6'				=> 'Ön tisztában legyen fut egy régi (pre %1) felszabadulását WackoWiki. A WackoWiki ezen kiadásának frissítéséhez először frissítenie kell a telepítést %2-re.',
 'UpgradeFromWacko'				=> 'Üdvözöljük a WackoWiki! Úgy tűnik, hogy a (z) %1 WackoWiki verzióról %2-ra frissít. A következő néhány oldal végigvezeti Önt a frissítési folyamaton.',
 'FreshInstall'					=> 'Üdvözöljük a WackoWiki oldalán, a WackoWiki %1 telepítéséhez készül. A következő néhány oldal végigvezeti Önt a frissítési folyamaton.',
@@ -76,28 +76,28 @@ $lang = [
 'ErrorPhpExtensions'			=> 'Úgy tűnik, hogy a PHP telepítéséből hiányoznak a WackoWiki által megkövetelt megjegyzett PHP kiterjesztések.',
 'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
-'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
+'ErrorPermissions'				=> 'Úgy tűnik, hogy a telepítő nem tudja automatikusan beállítani a WackoWiki megfelelő működéséhez szükséges fájlengedélyeket. A telepítés folyamán később a rendszer kéri, hogy manuálisan állítsa be a szükséges fájlengedélyeket a szerveren.',
 'ErrorMinPhpVersion'			=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
 'Ready'							=> 'Gratulálunk, úgy tűnik, hogy a szerver képes futtatni a WackoWiki-t. A következő néhány oldalon végigvezet a konfigurációs folyamaton.',
 
 /*
    Site Config Page
 */
-'config-site'					=> 'Site Configuration',
+'config-site'					=> 'Honlap Konfiguráció',
 'SiteName'						=> 'Wiki neve',
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
 'HomePage'						=> 'Címlap',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> 'Címlap',
-'MultiLang'						=> 'Multi Language Mode',
-'MultiLangDesc'					=> 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial menu items for all languages available in distribution.',
+'MultiLang'						=> 'Többnyelvű mód',
+'MultiLangDesc'					=> 'A többnyelvű mód lehetővé teszi, hogy egyetlen telepítésen belül különböző nyelvi beállításokkal rendelkező oldalak jelenjenek meg. Ha ez a mód engedélyezve van, akkor a telepítő létrehozza a kezdeti menüelemeket a disztribúcióban elérhető összes nyelvhez.',
 'AllowedLang'					=> 'Engedélyezett nyelvek',
-'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc'				=> 'Javasoljuk, hogy csak azt a nyelvkészletet válassza, amelyet használni szeretne, egyébként minden nyelvet kiválasztva.',
 'Admin'							=> 'Admin neve',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'Password'						=> 'Admin jelszó',
-'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
-'Password2'						=> 'Repeat Password:',
+'PasswordDesc'					=> 'Válasszon egy jelszót az adminisztrátor számára, legalább %1 karakterrel.',
+'Password2'						=> 'Jelszó újra:',
 'Mail'							=> 'Admin e-mail címe',
 'MailDesc'						=> 'Írja be az adminisztrátor e-mail címét.',
 'Base'							=> 'Base URL',
@@ -107,8 +107,7 @@ $lang = [
 'Enabled'						=> 'Engedélyezett:',
 'ErrorAdminEmail'				=> 'Érvénytelen e-mail címet adott meg!',
 'ErrorAdminPasswordMismatch'	=> 'A jelszavak nem egyeznek!',
-'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
-'WarningRewriteMode'			=> 'ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.',
+'ErrorAdminPasswordShort'		=> 'Az admin jelszó túl rövid, a minimális hossz %1 karakter!',
 'ModRewriteStatusUnknown'		=> 'A telepítő nem tudja ellenőrizni, hogy a mod_rewrite engedélyezve van-e, de ez nem jelenti azt, hogy le van tiltva',
 
 'LanguageArray'	=> [
@@ -135,7 +134,7 @@ $lang = [
 /*
    Database Config Page
 */
-'config-database'				=> 'Adatbázis konfiguráció',
+'config-database'				=> 'Adatbázis Konfiguráció',
 'DbDriver'						=> 'Driver',
 'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DbCharset'						=> 'Charset',
@@ -163,7 +162,7 @@ $lang = [
 /*
    Database Installation Page
 */
-'install-database'				=> 'Adatbázis telepítés',
+'install-database'				=> 'Adatbázis Telepítés',
 'TestingConfiguration'			=> 'Tesztelés konfiguráció',
 'TestConnectionString'			=> 'Tesztelés adatbázis-kapcsolat beállításait',
 'TestDatabaseExists'			=> 'Ellenőrzése, ha a megadott adatbázis létezik',

@@ -108,7 +108,6 @@ $lang = [
 'ErrorAdminEmail'				=> '您输入的 email 地址无效。',
 'ErrorAdminPasswordMismatch'	=> '您输入的两个密码不一致。',
 'ErrorAdminPasswordShort'		=> '您输入的密码太短，请输入最少 %1 个字符。',
-'WarningRewriteMode'			=> 'ATTENTION!\nYour base URL and rewrite-mode settings looks suspicious. Usually there is no ? mark in the base URL if rewrite-mode is set - but in your case there is one.\n\nTo continue with these settings click OK.\nTo return to the form and change your settings click CANCEL.\n\nIf you are about to proceed with these settings, please note that they COULD cause problems with your WackoWiki installation.',
 'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
 'LanguageArray'	=> [

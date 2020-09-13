@@ -108,7 +108,6 @@ $lang = [
 'ErrorAdminEmail'				=> 'U moet een juist beheerders emailadres invullen!',
 'ErrorAdminPasswordMismatch'	=> 'Wachtwoorden komen niet overeen, vul het wachtwoord opnieuw in!',
 'ErrorAdminPasswordShort'		=> 'The admin Wachtwoord is te kort, vul het wachtwoord opnieuw in, the minimum length is %1 characters!',
-'WarningRewriteMode'			=> 'LET OP!\nMogelijk zit er een fout in uw basis-URL en instellingen van de rewrite-modus. In een basis-URL hoort geen vraagteken te staan als de rewrite-modus is ingeschakeld. In uw instellingen is dat wel het geval.\n\nKlik OK om met deze instellingen door te gaan.\nKlik Annuleren om terug te gaan en de instellingen te veranderen.\n\nU kunt doorgaan met deze instellingen, maar het is mogelijk dat er dan problemen ontstaan.',
 'ModRewriteStatusUnknown'		=> 'Het installatieprogramma kan niet controleren of mod_rewrite is ingeschakeld, maar dit betekent niet dat het is uitgeschakeld.',
 
 'LanguageArray'	=> [

@@ -65,17 +65,19 @@ $lang_codes['ru'] = 'Русский';
 $lang_codes['zh'] = '简体中文';
 $lang_codes['zh-tw'] = '正體中文';
 
+$n = 1;
+
+echo '<br><table class="checkbox_input">' . "\n\t<tr>\n";
+
 foreach($lang_codes as $key => $value)
 {
+	echo "\t\t<td>\n\t\t\t";
 	echo '<input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';
 
-	// Default or Selected Language
-	if (isset($_POST['config']['language']))
+	// default or selected language
+	if (isset($_POST['config']['language']) && $_POST['config']['language'] == $key)
 	{
-		if ($_POST['config']['language'] == $key)
-		{
-			echo ' checked ';
-		}
+		echo ' checked ';
 	}
 	else if ($config['language'] == $key)
 	{
@@ -83,8 +85,19 @@ foreach($lang_codes as $key => $value)
 	}
 
 	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
-	echo ' class="input_lang"><label for="lang_' . $key . '" class="label_lang">' . $value . ' (' . $key . ")</label><br>\n";
+	echo ' class="input_lang"><label for="lang_' . $key . '" class="label_lang">' . $value . ' (' . $key . ")</label>";
+	echo "\n\t\t</td>\n";
+
+	// modulus operator: every third loop add a break
+	if ($n % 3 == 0)
+	{
+		echo "\t</tr>\n\t<tr>\n";
+	}
+
+	$n++;
 }
+
+echo "\t</tr>\n</table>\n<br>\n";
 
 if (isset($config['is_update']))
 {

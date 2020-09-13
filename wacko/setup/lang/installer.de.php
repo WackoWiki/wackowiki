@@ -109,7 +109,6 @@ $lang = [
 'ErrorAdminEmail'				=> 'Du hast eine ungültige E-Mailadresse angegeben!',
 'ErrorAdminPasswordMismatch'	=> 'Die Passwörter stimmen nicht überein!',
 'ErrorAdminPasswordShort'		=> 'Das Verwalter Passwort ist zu kurz, die Mindestlänge ist %1 Zeichen!',
-'WarningRewriteMode'			=> 'ACHTUNG!\nDeine Basis-URL & die Umschreib-Rechte (rewrite-mode settings) schauen ungewöhnlich aus. Normalerweise ist da kein ? in der URL wenn Umschreibe-Rechte aktiviert sind - in deinem Fall ist da aber ein Fragezeichen.\n\nUm dennoch mit diesen Einstellungen fortzufahren drücke OK.\nZurück zu den Einstellungen (form & change settings) drücke ABBRECHEN.\n\nFalls du mit den Einstellungen fortfährst, kann diese Software-Installation zu unerwarteten Fehlern führen.',
 'ModRewriteStatusUnknown'		=> 'Der Installer kann nicht ermitteln ob mod_rewrite aktiviert ist, dies bedeutet jedoch nicht das es deaktiviert ist.',
 
 'LanguageArray'	=> [
