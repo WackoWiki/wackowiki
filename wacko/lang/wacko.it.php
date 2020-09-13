@@ -351,6 +351,7 @@ $wacko_translation = [
 	'PageSaved'					=> 'Versione %1 della pagina salvata.',
 	'CommentSaved'				=> 'Commento salvato.',
 
+	'RevisionsFor'				=> 'Storico di %1',
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
 		'0'		=> 'Full diff',

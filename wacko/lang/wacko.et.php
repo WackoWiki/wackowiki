@@ -351,6 +351,7 @@ $wacko_translation = [
 	'PageSaved'					=> 'Lehekülje versioon %1 salvestatud.',
 	'CommentSaved'				=> 'Kommentaar on salvestatud.',
 
+	'RevisionsFor'				=> 'Muudatuste ajalugu %1',
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
 		'0'		=> 'Täistekst erinevus',

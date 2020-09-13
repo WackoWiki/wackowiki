@@ -1,5 +1,6 @@
 [ === main === ]
 	[ ' message ' ]
+	<h3>[ ' head ' ]</h3>
 	[= r _ =
 		<form action="[ ' href: diff ' ]" method="get" name="diff_versions">
 			[ ' csrf: diff_versions ' ]

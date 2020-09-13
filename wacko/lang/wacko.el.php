@@ -351,6 +351,7 @@ $wacko_translation = [
 	'PageSaved'					=> 'Έκδοση %1 σελίδας αποθηκεύτηκε.',
 	'CommentSaved'				=> 'Σχόλιο σωθεί.',
 
+	'RevisionsFor'				=> 'Ιστορικό του %1',
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
 		'0'		=> 'Full diff',

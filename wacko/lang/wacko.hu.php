@@ -198,7 +198,7 @@ $wacko_translation = [
 	'EditComment'				=> 'Szerkessze ezt a megjegyzést',
 	'ReplyComment'				=> 'Válasz',
 	'ReplyCommentTip'			=> 'Válasz erre a megjegyzésre',
-	'RevisionTip'				=> 'View page revisions',
+	'RevisionTip'				=> 'Az oldal verzióinak megtekintése',
 	'RevisionText'				=> 'Változatok',
 	'RevisionXMLTip'			=> 'Click to view recent page revisions in XML format.',
 	'CommentsXMLTip'			=> 'Click to view recent comments in XML format.',
@@ -217,7 +217,7 @@ $wacko_translation = [
 	'YouAreNewOwner'			=> 'Former owner %1 transferred ownership ' . "\n" . 'of following page to you',
 	'PageOwnershipInfo'			=> '',
 	'AclRead'					=> 'Olvas:',
-	'AclWrite'					=> 'Write:',
+	'AclWrite'					=> 'Írási:',
 	'AclComment'				=> 'Hozzászólások:',
 	'AclCreate'					=> 'Létrehozás:',
 	'AclUpload'					=> 'Feltöltés:',
@@ -228,12 +228,12 @@ $wacko_translation = [
 	'AclCancelButton'			=> 'Mégsem',
 	'AclAccessDenied'			=> 'Ön nem az oldal tulajdonosa.',
 	'AclSyntaxError'			=> 'Hozzáférés-vezérlési lista szintaxis hibája',
-	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
-									'<code>$</code> - only registered users<br>' .
-									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
-									'<code>[UserName]</code> - names of allowed users<br>' .
-									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
-									'<code>(an empty list)</code> - only the page owner has access',
+	'AclHelp'					=> '<code>*</code> - mindenkinek megengedett<br>' .
+									'<code>$</code> - csak regisztrált felhasználók<br>' .
+									'<code>!</code> - egy megelőző felkiáltójel tagadja a megfelelő jogot<br>' .
+									'<code>[Felhasználónév]</code> - megengedett felhasználók neve<br>' .
+									'<code>[Csoport név]</code> - megengedett felhasználói csoport neve (alias)<br>' .
+									'<code>(egy üres lista)</code> - csak az oldal tulajdonosának van hozzáférése',
 
 	'AccessMode'				=> 'Láthatóság',
 	'AccessDenied'				=> 'denied',
@@ -351,6 +351,7 @@ $wacko_translation = [
 	'PageSaved'					=> 'Az oldal verziója %1 mentve.',
 	'CommentSaved'				=> 'Comment saved.',
 
+	'RevisionsFor'				=> 'Előzmények %1',
 	'DefaultDiffMode'			=> 'Default diff mode',
 	'DiffMode'		=> [
 		'0'		=> 'Full diff',

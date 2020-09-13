@@ -352,6 +352,7 @@ $wacko_translation = [
 	'PageSaved'					=> 'Сохранена версия %1 страницы.',
 	'CommentSaved'				=> 'Комментарий сохранен.',
 
+	'RevisionsFor'				=> 'История изменений %1',
 	'DefaultDiffMode'			=> 'Стандартный режим сравнения',
 	'DiffMode'		=> [
 		'0'		=> 'Вики-сравнение',

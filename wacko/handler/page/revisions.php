@@ -32,6 +32,8 @@ if ($this->page['deleted'])
 	$tpl->message = $this->show_message($this->_t('PageDeletedInfo'), 'note', false);
 }
 
+$tpl->head = Ut::perc_replace($this->_t('RevisionsFor'), $this->compose_link_to_page($this->tag, '', ''));
+
 if ($this->has_access('read'))
 {
 	// load revisions for this page
