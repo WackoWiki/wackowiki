@@ -225,7 +225,6 @@ $wacko_translation = [
 	'AclFor'					=> 'ACL за %1',
 	'SetOwner'					=> 'Установи собственика:',
 	'OwnerDontChange'			=> 'Не променяй',
-	'AclStoreButton'			=> 'Запази',
 	'AclAccessDenied'			=> 'Вие не сте собственик на тази страница.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .

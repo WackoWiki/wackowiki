@@ -225,7 +225,6 @@ $wacko_translation = [
 	'AclFor'					=> 'ACL\'s (rechten) voor %1',
 	'SetOwner'					=> 'Set Eigenaar:',
 	'OwnerDontChange'			=> 'Niet wijzigen',
-	'AclStoreButton'			=> 'Bewaar ACL\'s (rechten)',
 	'AclAccessDenied'			=> 'U ben niet de eigenaar van deze pagina.',
 	'AclSyntaxError'			=> 'Fout in de syntaxis van de toegangscontrolelijst',
 	'AclHelp'					=> '<code>*</code> - iedereen is toegestaan<br>' .

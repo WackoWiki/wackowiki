@@ -89,7 +89,7 @@
 					</th>
 					<td>
 						<br>
-						<input type="submit" class="OkBtn" id="submit" value="[ ' _t: AclStoreButton ' ]" accesskey="s"> &nbsp;
+						<input type="submit" class="OkBtn" id="submit" value="[ ' _t: StoreButton ' ]" accesskey="s"> &nbsp;
 						<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" id="button" value="[ ' _t: CancelButton ' ]"/></a>
 					</td>
 				</tr>

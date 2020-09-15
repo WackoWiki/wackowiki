@@ -225,7 +225,6 @@ $wacko_translation = [
 	'AclFor'					=> 'Access Control Lists for %1',
 	'SetOwner'					=> 'Meg a tulajdonos:',
 	'OwnerDontChange'			=> 'Ne változtass',
-	'AclStoreButton'			=> 'Mentés ACLs',
 	'AclAccessDenied'			=> 'Ön nem az oldal tulajdonosa.',
 	'AclSyntaxError'			=> 'Hozzáférés-vezérlési lista szintaxis hibája',
 	'AclHelp'					=> '<code>*</code> - mindenkinek megengedett<br>' .

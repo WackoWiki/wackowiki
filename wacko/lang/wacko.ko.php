@@ -225,7 +225,6 @@ $wacko_translation = [
 	'AclFor'					=> 'Access Control Lists for %1',
 	'SetOwner'					=> 'Set Owner:',
 	'OwnerDontChange'			=> 'Don\'t change',
-	'AclStoreButton'			=> 'Save ACLs',
 	'AclAccessDenied'			=> '이 페이지의 소유자가 아닙니다.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .

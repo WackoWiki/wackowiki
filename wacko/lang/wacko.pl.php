@@ -225,7 +225,6 @@ $wacko_translation = [
 	'AclFor'					=> 'Prawa dostępu do strony: %1',
 	'SetOwner'					=> 'Zmień autora:',
 	'OwnerDontChange'			=> 'Nie zmieniaj',
-	'AclStoreButton'			=> 'Zachowaj zmiany',
 	'AclAccessDenied'			=> 'Nie jesteś autorem tej strony.',
 	'AclSyntaxError'			=> 'Błąd składni listy kontroli dostępu',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .

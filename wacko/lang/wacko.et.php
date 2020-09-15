@@ -225,7 +225,6 @@ $wacko_translation = [
 	'AclFor'					=> '%1 kasutaja õiguste loend',
 	'SetOwner'					=> 'Sea omanik:',
 	'OwnerDontChange'			=> 'Ära muuda',
-	'AclStoreButton'			=> 'Salvesta KÕL',
 	'AclAccessDenied'			=> 'Sa ei ole selle lehe omanik.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
