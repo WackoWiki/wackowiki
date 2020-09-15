@@ -1081,7 +1081,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Επεξεργασία',
+	'EditButton'			=> 'Επεξεργασία',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Είστε βέβαιοι ότι θέλετε να καταργήσετε το χρήστη %1;',
@@ -1131,11 +1131,6 @@ $ap_translation = [
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Cancel',
-	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Επεξεργασία',
-	'GroupsRemoveButton'		=> 'Remove',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'GroupAddMember'			=> 'Add member',

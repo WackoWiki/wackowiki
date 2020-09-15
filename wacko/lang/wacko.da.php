@@ -8,9 +8,10 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'CreateButton'				=> 'Opret',
+	'StoreButton'				=> 'Gem',
 	'UpdateButton'				=> 'Update',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Fortryd',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'Den indsendte formular var ugyldig. Prøv at indsende igen.',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Angiv ejer:',
 	'OwnerDontChange'			=> 'Ingen ændringer',
 	'AclStoreButton'			=> 'Gem',
-	'AclCancelButton'			=> 'Fortryd',
 	'AclAccessDenied'			=> 'Du er ikke ejer af denne side.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -284,12 +284,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'For at tildele kategorier til en side markere afkrydsningsfelterne.',
 	'CategoriesStoreButton'		=> 'Gem Kategorier',
-	'CategoriesSaveButton'		=> 'Indsend',
-	'CategoriesCancelButton' 	=> 'Annuller',
-	'CategoriesAddButton'		=> 'Tilføj',
-	'CategoriesRenameButton'	=> 'Omdøb',
+	'SubmitButton'				=> 'Indsend',
+	'AddButton'					=> 'Tilføj',
 	'CategoriesGroupButton'		=> 'Gruppen',
-	'CategoriesRemoveButton'	=> 'Fjern',
+	'RemoveButton'				=> 'Fjern',
 	'CategoriesEditInfo'		=> 'For at redigere kategorilisten vælg alternativknappen.',
 	'NoCategoriesForThisLang'	=> 'Kategorier for dette sprog er ikke angivet.',
 	'PagesCategory'				=> 'Sider kategori',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Gruppe plads',
 
 	'MetaUpdated'				=> 'Meta data opdateret',
-	'MetaStoreButton'			=> 'Gem',
-	'MetaCancelButton'			=> 'Fortryd',
 
-	'EditStoreButton'			=> 'Gem',
-	'EditCancelButton'			=> 'Fortryd',
 	'EditPreviewButton'			=> 'Forhåndsvisning',
 	'EditPreview'				=> 'Forhåndsvisning',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Hov, den kan vi ikke finde',
 	'RedirectsToItself'			=> 'Webstedet omdirigerer til sig selv.',
 	'ReallyDelete'				=> 'Er du sikker på at du vil SLETTE siden?<br>Der er ingen fortrydelsesret!<br><br>ADVARSEL: Alle versioner af siden slettes.',
-	'RemoveButton'				=> 'Ja, slet!',
+	'DeleteButton'				=> 'Ja, slet!',
 	'RestoreButton'				=> 'Gendan',
 	'ArchiveButton'				=> 'Arkiv',
 	'CommentForWatchedPage'		=> 'Nye kommentarer til siden ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Opret en ny side.',
 
 	'CreateRandomPage'			=> 'Opret en tilfældig side',
-	'CreatePageButton'			=> 'Opret',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'Du har ikke de nødvendige adgangsrettigheder.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Importer til dette område',
 	'ImportWhat'				=> 'XML-fil til import',
-	'ImportButtonText'			=> 'Importer',
+	'ImportButton'				=> 'Importer',
 	'ImportSuccess'				=> 'Importen lykkedes.',
 	'ImportFailed'				=> 'Import mislykkedes.',
 	'ImportHint'				=> 'Angiv en klynge, du vil importere til, uden relativ adressering.',

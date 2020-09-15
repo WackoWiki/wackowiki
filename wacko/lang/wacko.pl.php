@@ -8,7 +8,8 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'CreateButton'				=> 'Create',
+	'StoreButton'				=> 'Zachowaj',
 	'UpdateButton'				=> 'Aktualizacja',
 	'CancelButton'				=> 'Anuluj',
 	'ConvertButton'				=> 'Convert',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Zmień autora:',
 	'OwnerDontChange'			=> 'Nie zmieniaj',
 	'AclStoreButton'			=> 'Zachowaj zmiany',
-	'AclCancelButton'			=> 'Anuluj',
 	'AclAccessDenied'			=> 'Nie jesteś autorem tej strony.',
 	'AclSyntaxError'			=> 'Błąd składni listy kontroli dostępu',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -284,12 +284,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Aby przypisać kategorie do strony, zaznacz pola wyboru.',
 	'CategoriesStoreButton' 	=> 'Zapisz kategorie',
-	'CategoriesSaveButton'		=> 'Wyślij',
-	'CategoriesCancelButton' 	=> 'Anuluj',
-	'CategoriesAddButton'		=> 'Add',
-	'CategoriesRenameButton'	=> 'Rename',
+	'SubmitButton'				=> 'Wyślij',
+	'AddButton'					=> 'Add',
 	'CategoriesGroupButton'		=> 'Group',
-	'CategoriesRemoveButton'	=> 'Remove',
+	'RemoveButton'				=> 'Remove',
 	'CategoriesEditInfo'		=> 'Aby edytować listę kategorii, wybierz przycisk radiowy.',
 	'NoCategoriesForThisLang'	=> 'Kategorie dla tego języka nie zostały określone.',
 	'PagesCategory'				=> 'Pages category',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Zaktualizowano meta data',
-	'MetaStoreButton'			=> 'Zachowaj',
-	'MetaCancelButton'			=> 'Anuluj',
 
-	'EditStoreButton'			=> 'Zachowaj',
-	'EditCancelButton'			=> 'Anuluj',
 	'EditPreviewButton'			=> 'Podgląd',
 	'EditPreview'				=> 'Podgląd',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Wykonanie przekierowania było niemożliwe, ponieważ podano nieprawidłowy parametr',
 	'RedirectsToItself'			=> 'Strona przekierowuje się do siebie.',
 	'ReallyDelete'				=> 'Czy na pewno USUNĄĆ tę stronę?<br>Tej czynności nie można cofnąć!<br><br>OSTRZEŻENIE: Usunięcie tej strony spowoduje usunięcie wszystkich zachowanych wersji strony, komentarzy, załączniki, odsyłaczy i list dostępu.',
-	'RemoveButton'				=> 'Usuń na pewno!',
+	'DeleteButton'				=> 'Usuń na pewno!',
 	'RestoreButton'				=> 'Restore',
 	'ArchiveButton'				=> 'Archiwum',
 	'CommentForWatchedPage'		=> 'Nowy komentarz na stronie ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Utwórz nową stronę.',
 
 	'CreateRandomPage'			=> 'Utwórz losową stronę',
-	'CreatePageButton'			=> 'Create',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'Nie masz niezbędnych praw dostępu.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import w klastrze',
 	'ImportWhat'				=> 'Plik XML do importu',
-	'ImportButtonText'			=> 'Import',
+	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Importowany z powodzeniem.',
 	'ImportFailed'				=> 'Import nie powiódł się.',
 	'ImportHint'				=> 'Proszę podać klaster, do którego chcesz zaimportować, bez adresowania względnego.',

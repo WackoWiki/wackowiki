@@ -1081,7 +1081,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Edit',
+	'EditButton'			=> 'Edit',
 	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Weet u zeker dat u gebruiker %1 wilt verwijderen?',
@@ -1131,11 +1131,6 @@ $ap_translation = [
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsIsSystem'			=> 'De groep %1 behoort tot het systeem en kan niet worden verwijderd.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Submit',
-	'GroupsCancelButton'		=> 'Cancel',
-	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Edit',
-	'GroupsRemoveButton'		=> 'Remove',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'GroupAddMember'			=> 'Lid toevoegen',

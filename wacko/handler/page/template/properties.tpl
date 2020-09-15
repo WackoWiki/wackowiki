@@ -91,8 +91,8 @@
 						<tr>
 							<th></th>
 							<td>
-								<input type="submit" class="OkBtn" name="extended" value="[ ' _t: MetaStoreButton ' ]" accesskey="s"> &nbsp;
-								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: MetaCancelButton ' ]"></a>
+								<input type="submit" class="OkBtn" name="extended" value="[ ' _t: StoreButton ' ]" accesskey="s"> &nbsp;
+								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: CancelButton ' ]"></a>
 							</td>
 						</tr>
 					</tbody>
@@ -209,8 +209,8 @@
 						<tr>
 							<th></th>
 							<td>
-								<input type="submit" class="OkBtn" value="[ ' _t: MetaStoreButton ' ]" accesskey="s"> &nbsp;
-								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: MetaCancelButton ' ]"></a>
+								<input type="submit" class="OkBtn" value="[ ' _t: StoreButton ' ]" accesskey="s"> &nbsp;
+								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: CancelButton ' ]"></a>
 							</td>
 						</tr>
 					</tbody>

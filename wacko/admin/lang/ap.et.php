@@ -1081,7 +1081,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Muuda',
+	'EditButton'			=> 'Muuda',
 	'UserEnabled'				=> 'Lubatud',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Kas soovite kindlasti kasutaja %1 eemaldada?',
@@ -1131,11 +1131,6 @@ $ap_translation = [
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Sisesta',
-	'GroupsCancelButton'		=> 'Loobu',
-	'GroupsAddButton'			=> 'Add',
-	'GroupsEditButton'			=> 'Muuda',
-	'GroupsRemoveButton'		=> 'Eemalda',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'GroupAddMember'			=> 'Add member',

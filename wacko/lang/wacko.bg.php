@@ -8,9 +8,10 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'CreateButton'				=> 'Create',
+	'StoreButton'				=> 'Запази',
 	'UpdateButton'				=> 'Update',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Отмени',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'Изпратената форма е невалидна, опитайте отново.',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Установи собственика:',
 	'OwnerDontChange'			=> 'Не променяй',
 	'AclStoreButton'			=> 'Запази',
-	'AclCancelButton'			=> 'Отмени',
 	'AclAccessDenied'			=> 'Вие не сте собственик на тази страница.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -284,12 +284,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'За да зададете категории на страница, поставете отметки в квадратчетата.',
 	'CategoriesStoreButton'		=> 'Запазване на категории',
-	'CategoriesSaveButton'		=> 'Submit',
-	'CategoriesCancelButton' 	=> 'Cancel',
-	'CategoriesAddButton'		=> 'Add',
-	'CategoriesRenameButton'	=> 'Rename',
+	'SubmitButton'				=> 'Submit',
+	'AddButton'					=> 'Add',
 	'CategoriesGroupButton'		=> 'Group',
-	'CategoriesRemoveButton'	=> 'Remove',
+	'RemoveButton'				=> 'Remove',
 	'CategoriesEditInfo'		=> 'За да редактирате списъка с категории, изберете радио бутона.',
 	'NoCategoriesForThisLang'	=> 'Категориите за този език не са посочени.',
 	'PagesCategory'				=> 'Pages category',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Meta data обновен',
-	'MetaStoreButton'			=> 'Запази',
-	'MetaCancelButton'			=> 'Отмени',
 
-	'EditStoreButton'			=> 'Запази',
-	'EditCancelButton'			=> 'Отмени',
 	'EditPreviewButton'			=> 'Предварителен преглед',
 	'EditPreview'				=> 'Предварителен преглед',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Преадресирането не е възможно поради неверни параметри на преадресацията',
 	'RedirectsToItself'			=> 'Сайтът се пренасочва към себе си.',
 	'ReallyDelete'				=> 'Вие действително ли искате да ИЗТРИЕТЕ страницата? <br>след това няма да можете да я Възстановите.<br><br>ВНИМАНИЕ: при изтриването на страницата ще бъдат изтрити всички нейни версии, коментари, прикачени файлове, референции и т.п.',
-	'RemoveButton'				=> 'Да, изтрий!',
+	'DeleteButton'				=> 'Да, изтрий!',
 	'RestoreButton'				=> 'Restore',
 	'ArchiveButton'				=> 'Archive',
 	'CommentForWatchedPage'		=> 'Коментар за страницата ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Създайте нова страница.',
 
 	'CreateRandomPage'			=> 'Create a random page',
-	'CreatePageButton'			=> 'Create',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'Нямате необходимите права за достъп.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Импортировать под адресом',
 	'ImportWhat'				=> 'Файл для импорта',
-	'ImportButtonText'			=> 'Импортировать',
+	'ImportButton'				=> 'Импортировать',
 	'ImportSuccess'				=> 'Импортировано успешно.',
 	'ImportFailed'				=> 'Импортирането не бе успешно.',
 	'ImportHint'				=> 'Моля, предоставете клъстер, в който искате да импортирате, без относително адресиране.',

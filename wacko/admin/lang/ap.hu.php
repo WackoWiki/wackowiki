@@ -137,7 +137,7 @@ $ap_translation = [
 	// Config Upload module
 	'config_upload'		=> [
 		'name'		=> 'Feltöltés',
-		'title'		=> 'Attachment settings',
+		'title'		=> 'Melléklet beállításai',
 	],
 
 	// Deleted module
@@ -848,30 +848,30 @@ $ap_translation = [
 
 	// Upload settings
 	'UploadSettingsInfo'		=> 'Itt a csatolmányok főbb beállításait adhatod meg, valamint a speciális kategóriák egyedi opcióit módosíthatod.',
-	'UploadSettingsUpdated'		=> 'Updated upload settings',
+	'UploadSettingsUpdated'		=> 'Frissített feltöltési beállítások',
 
-	'RightToUpload'				=> 'Right to the upload files',
+	'RightToUpload'				=> 'Fájlok feltöltési joga',
 	'RightToUploadInfo'			=> '<code>admins</code> means that only users belonging to the admins group can upload  files. <code>1</code> means that uploading is opened to registered users. <code>0</code> means that upload disabled.',
-	'UploadOnlyImages'			=> 'Allow only upload of images',
-	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
-	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Maximum állományméret',
+	'UploadOnlyImages'			=> 'Csak képek feltöltését engedélyezze',
+	'UploadOnlyImagesInfo'		=> 'Csak képfájlok feltöltését engedélyezze az oldalon.',
+	'FileUploads'				=> 'Fájl feltöltése',
+	'UploadMaxFilesize'			=> 'Maximális állományméret',
 	'UploadMaxFilesizeInfo'		=> 'Legfeljebb ekkorák lehetnek az állományok. A 0 érték kikapcsolja a korlátozást.',
 	'UploadQuota'				=> 'Csatolmányok tárhelye',
 	'UploadQuotaInfo'			=> 'Az egész fórumon a csatolmányok legfeljebb ekkora helyet foglalhatnak el összesen. A <code>0</code> érték kikapcsolja a korlátozást.',
-	'UploadQuotaUser'			=> 'Storage quota per user',
+	'UploadQuotaUser'			=> 'Tárolási kvóta felhasználónként',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
 	'CheckMimetype'				=> 'Csatolt állományok ellenőrzése',
 	'CheckMimetypeInfo'			=> 'Néhány böngésző rávehető, hogy a feltöltött állományokhoz helytelen MIME típust állapítson meg. Ezzel a beállítással az ennek okozására hajlamos állományok visszautasításra kerülnek.',
 	'TranslitFileName'			=> 'Transliterate file names',
-	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
+	'TranslitFileNameInfo'		=> 'Ha alkalmazható, és nincs szükség Unicode karakterekre, akkor nagyon ajánlott csak alfa-numerikus karaktereket elfogadni.',
 
 	'Thumbnails'				=> 'Thumbnails',
 	'CreateThumbnail'			=> 'Kiskép készítése',
 	'CreateThumbnailInfo'		=> 'Minden lehetséges esetben készítsen kisképet.',
-	'MaxThumbWidth'				=> 'Maximum kiskép szélesség pixelben',
+	'MaxThumbWidth'				=> 'Maximális kiskép szélesség pixelben',
 	'MaxThumbWidthInfo'			=> 'A generált kiskép nem fogja túllépni az itt megadott szélességet.',
-	'MinThumbFilesize'			=> 'Minimum kiskép állományméret',
+	'MinThumbFilesize'			=> 'Maximális kiskép állományméret',
 	'MinThumbFilesizeInfo'		=> 'Ennél kisebb képeknél nem lesz kiskép készítve.',
 
 	// Deleted module
@@ -1081,7 +1081,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'UserEditButton'			=> 'Szerkesztés',
+	'EditButton'			=> 'Szerkesztés',
 	'UserEnabled'				=> 'Engedélyezett',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Biztosan el akarja távolítani az %1 felhasználót?',
@@ -1131,11 +1131,6 @@ $ap_translation = [
 	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
-	'GroupsSaveButton'			=> 'Elküld',
-	'GroupsCancelButton'		=> 'Mégse',
-	'GroupsAddButton'			=> 'Hozzáadás',
-	'GroupsEditButton'			=> 'Szerkesztés',
-	'GroupsRemoveButton'		=> 'Törlés',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
 	'GroupAddMember'			=> 'Add member',

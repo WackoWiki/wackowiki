@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
+	'CreateButton'				=> 'Create',
 	'StoreButton'				=> 'Save',
 	'UpdateButton'				=> 'Update',
 	'CancelButton'				=> 'Cancel',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Set Owner:',
 	'OwnerDontChange'			=> 'Don\'t change',
 	'AclStoreButton'			=> 'Save ACLs',
-	'AclCancelButton'			=> 'Cancel',
 	'AclAccessDenied'			=> 'You are not the owner of this page.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -284,12 +284,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'CategoriesSaveButton'		=> 'Submit',
-	'CategoriesCancelButton'	=> 'Cancel',
-	'CategoriesAddButton'		=> 'Add',
-	'CategoriesRenameButton'	=> 'Rename',
+	'SubmitButton'				=> 'Submit',
+	'AddButton'					=> 'Add',
 	'CategoriesGroupButton'		=> 'Group',
-	'CategoriesRemoveButton'	=> 'Remove',
+	'RemoveButton'				=> 'Remove',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Meta data updated',
-	'MetaStoreButton'			=> 'Save',
-	'MetaCancelButton'			=> 'Cancel',
 
-	'EditStoreButton'			=> 'Save',
-	'EditCancelButton'			=> 'Cancel',
 	'EditPreviewButton'			=> 'Preview',
 	'EditPreview'				=> 'Preview',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
 	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
-	'RemoveButton'				=> 'Yes, delete!',
+	'DeleteButton'				=> 'Yes, delete!',
 	'RestoreButton'				=> 'Restore',
 	'ArchiveButton'				=> 'Archive',
 	'CommentForWatchedPage'		=> 'New comment for page ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Create a new page',
 
 	'CreateRandomPage'			=> 'Create a random page',
-	'CreatePageButton'			=> 'Create',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import in cluster',
 	'ImportWhat'				=> 'XML-file for import',
-	'ImportButtonText'			=> 'Import',
+	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',

@@ -34,9 +34,9 @@
 							<input type="radio" id="group0" name="group" value="0">
 							<label for="group0">[ ' _t: CategoriesAddGroupedNo ' ]</label><br><br>
 						=]
-						<input type="submit" id="submit" name="create" value="[ ' _t: CategoriesSaveButton ' ]">
+						<input type="submit" id="submit" name="create" value="[ ' _t: SubmitButton ' ]">
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
+							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
 						</a>
 					</td>
 				</tr>
@@ -68,9 +68,9 @@
 				<tr>
 					<td colspan="2">
 						<small>[ ' _t: CategoriesRenameInfo ' ]</small><br>
-						<input type="submit" name="rename" id="submit_new_name" value="[ ' _t: CategoriesSaveButton ' ]">
+						<input type="submit" name="rename" id="submit_new_name" value="[ ' _t: SubmitButton ' ]">
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
+							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
 						</a>
 					</td>
 				</tr>
@@ -92,9 +92,9 @@
 								<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category | e ' ]</option>
 							=]
 						</select>
-						<input type="submit" id="submit" name="ugroup" value="[ ' _t: CategoriesSaveButton ' ]">
+						<input type="submit" id="submit" name="ugroup" value="[ ' _t: SubmitButton ' ]">
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
+							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
 						</a>
 						<br><small>[ ' _t: CategoriesGroupInfo ' ]</small>
 					</td>
@@ -113,7 +113,7 @@
 						<label for="">[ ' category ' ]</label> 
 						<input type="submit" id="submit_delete" name="delete" value="[ ' _t: DeleteText ' ]">
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CategoriesCancelButton ' ]">
+							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
 						</a>
 						<br><small>[ ' _t: CategoriesDeleteInfo ' ]</small>
 					</td>

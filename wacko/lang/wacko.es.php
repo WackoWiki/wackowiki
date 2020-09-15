@@ -8,9 +8,10 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'CreateButton'				=> 'Crear',
+	'StoreButton'				=> 'Guardar',
 	'UpdateButton'				=> 'Update',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Cancelar',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'El formulario enviado era no válido. Intente enviarlo de nuevo.',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Cambiar Propietario:',
 	'OwnerDontChange'			=> 'No cambiar nada',
 	'AclStoreButton'			=> 'Guardar ACLs',
-	'AclCancelButton'			=> 'Cancelar',
 	'AclAccessDenied'			=> 'No eres el propietario de esta página.',
 	'AclSyntaxError'			=> 'Error de sintaxis de la lista de control de acceso',
 	'AclHelp'					=> '<code>*</code> - todo el mundo puede<br>' .
@@ -284,12 +284,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Observación: El cambio afectará a todas las páginas con la categoría asignada. Si la palabra contiene una subcategoría, no se eliminarán, pero se independizarán.',
 	'CategoriesStoreInfo'		=> 'Marque las casillas para asignar las categorías a una página.',
 	'CategoriesStoreButton'		=> 'Guardar Categorías',
-	'CategoriesSaveButton'		=> 'GUardar',
-	'CategoriesCancelButton'	=> 'Cancelar',
-	'CategoriesAddButton'		=> 'Agregar',
-	'CategoriesRenameButton'	=> 'Renombrar',
+	'SubmitButton'				=> 'GUardar',
+	'AddButton'					=> 'Agregar',
 	'CategoriesGroupButton'		=> 'Agrupar',
-	'CategoriesRemoveButton'	=> 'Remover',
+	'RemoveButton'				=> 'Remover',
 	'CategoriesEditInfo'		=> 'Marque el botón de radio para seleccionar la lista de categoría.',
 	'NoCategoriesForThisLang'	=> 'No se especificaron categorías para este idioma.',
 	'PagesCategory'				=> 'Categorías de páginas',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Estacio de grupos',
 
 	'MetaUpdated'				=> 'Meta data guardadas',
-	'MetaStoreButton'			=> 'Guardar',
-	'MetaCancelButton'			=> 'Cancelar',
 
-	'EditStoreButton'			=> 'Guardar',
-	'EditCancelButton'			=> 'Cancelar',
 	'EditPreviewButton'			=> 'Previsualizar',
 	'EditPreview'				=> 'Previsualización',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'No se puede efectuar la redirección.',
 	'RedirectsToItself'			=> 'La página se redirige a sí misma. ',
 	'ReallyDelete'				=> 'Seguro que quieres ELIMINAR la página?<br>Esta acción no se puede recuperar!<br><br>ADVERTENCIA: eliminar una página consiste en eliminar todas las versiones pasadas de la página, comentarios, archivos adjuntos, ACLs y referencias.',
-	'RemoveButton'				=> 'Eliminar',
+	'DeleteButton'				=> 'Eliminar',
 	'RestoreButton'				=> 'Restaurar',
 	'ArchiveButton'				=> 'Archivo',
 	'CommentForWatchedPage'		=> 'Nuevo comentario para esta página  ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Crear página nueva.',
 
 	'CreateRandomPage'			=> 'Crear página aleatoria',
-	'CreatePageButton'			=> 'Crear',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'No tiene los derechos suficientes.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Importar a',
 	'ImportWhat'				=> 'Fichero XML a importar',
-	'ImportButtonText'			=> 'Importar',
+	'ImportButton'				=> 'Importar',
 	'ImportSuccess'				=> 'Importado con exito.',
 	'ImportFailed'				=> 'La importación falló.',
 	'ImportHint'				=> 'Por favor, proporcione un grupo al que desee importar, sin dirección relativa.',

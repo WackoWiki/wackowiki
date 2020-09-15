@@ -28,7 +28,7 @@
 			<br>
 			<input type="submit" class="OkBtn" name="submit" value="[ ' _t: RenameButton ' ]"> &nbsp;
 			<a href="[ ' href: ' ]" class="btn-link">
-				<input type="button" class="CancelBtn" value="[ ' _t: EditCancelButton ' ]">
+				<input type="button" class="CancelBtn" value="[ ' _t: CancelButton ' ]">
 			</a>
 			<br>
 			<br>

@@ -8,7 +8,8 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'CreateButton'				=> 'Δημιουργώ',
+	'StoreButton'				=> 'Αποθήκευση',
 	'UpdateButton'				=> 'Update',
 	'CancelButton'				=> 'Ακύρωση',
 	'ConvertButton'				=> 'Convert',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Όρισε Ιδιοκτήτη:',
 	'OwnerDontChange'			=> 'Μην αλλάξεις',
 	'AclStoreButton'			=> 'Αποθήκευση ACLs',
-	'AclCancelButton'			=> 'Ακύρωση',
 	'AclAccessDenied'			=> 'Δεν είστε ο ιδιοκτήτης αυτής της σελίδα.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -282,14 +282,12 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
+	'CategoriesStoreInfo'		=> 'Για να αντιστοιχίσετε κατηγορίες σε μια σελίδα, επιλέξτε τα πλαίσια ελέγχου.',
 	'CategoriesStoreButton'		=> 'Αποθήκευση Κατηγορίες',
-	'CategoriesSaveButton'		=> 'Submit',
-	'CategoriesCancelButton'	=> 'Ακύρωση',
-	'CategoriesAddButton'		=> 'Add',
-	'CategoriesRenameButton'	=> 'Rename',
+	'SubmitButton'				=> 'Submit',
+	'AddButton'					=> 'Add',
 	'CategoriesGroupButton'		=> 'Group',
-	'CategoriesRemoveButton'	=> 'Remove',
+	'RemoveButton'				=> 'Remove',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Η λίστα δικαιωμάτων πρόσβασης ανανεώθηκε',
-	'MetaStoreButton'			=> 'Αποθήκευση',
-	'MetaCancelButton'			=> 'Ακύρωση',
 
-	'EditStoreButton'			=> 'Αποθήκευση',
-	'EditCancelButton'			=> 'Ακύρωση',
 	'EditPreviewButton'			=> 'Προβολή',
 	'EditPreview'				=> 'Προβολή',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Δεν είναι δυνατή η ανακατεύθυνση λόγω λάθος σε παράμετρο ανακατεύθυνσης',
 	'RedirectsToItself'			=> 'Ο ιστότοπος ανακατευθύνεται στον εαυτό του.',
 	'ReallyDelete'				=> 'Επιθυμείτε την ΔΙΑΓΡΑΦΗ της σελίδας;<br>Δεν υπάρχει αναίρεση για αυτή την ενέργεια!<br><br>ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Διαγράφοντας αυτήν σελίδα θα διαγράψετε και όλες τις εκδόσεις, σχόλια, συνημμένα, ACL και παραπομπές.',
-	'RemoveButton'				=> 'Ναι, διέγραψε!',
+	'DeleteButton'				=> 'Ναι, διέγραψε!',
 	'RestoreButton'				=> 'Restore',
 	'ArchiveButton'				=> 'Archive',
 	'CommentForWatchedPage'		=> 'Νέο σχόλιο στην σελίδα ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Δημιουργήστε μια νέα σελίδα.',
 
 	'CreateRandomPage'			=> 'Create a random page',
-	'CreatePageButton'			=> 'Δημιουργώ',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'Δεν έχετε τα απαραίτητα δικαιώματα πρόσβασης.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Εισαγωγή στο cluster',
 	'ImportWhat'				=> 'Αρχείο XML για εισαγωγή',
-	'ImportButtonText'			=> 'Εισαγωγή',
+	'ImportButton'				=> 'Εισαγωγή',
 	'ImportSuccess'				=> 'Επιτυχής εισαγωγή.',
 	'ImportFailed'				=> 'Η εισαγωγή απέτυχε.',
 	'ImportHint'				=> 'Καταχωρίστε ένα σύμπλεγμα στο οποίο θέλετε να εισαγάγετε, χωρίς σχετική διεύθυνση.',

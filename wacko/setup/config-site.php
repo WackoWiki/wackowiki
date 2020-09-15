@@ -88,10 +88,10 @@ else
 	$lang_list= [];
 }
 
-$_languages = $lang['LanguageArray'];
-$n = 1;
+$_languages	= $lang['LanguageArray'];
+$n			= 1;
 
-echo '<table  class="checkbox_input">' . "\n\t<tr>\n";
+echo '<table class="checkbox_input">' . "\n\t<tr>\n";
 
 foreach ($langs as $_lang)
 {

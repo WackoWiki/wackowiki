@@ -372,7 +372,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 				date('H:i:s') . ' - ' . $engine->_t('RestoreDone') . '</strong>';
 
 			$message = $engine->_t('BackupRestored') .
-					' <a href="' . $engine->href('', '', ['remove' => 1, 'backup_id' => Ut::html($pack)]) . '">' . $engine->_t('RemoveButton') . '</a>.';
+					' <a href="' . $engine->href('', '', ['remove' => 1, 'backup_id' => Ut::html($pack)]) . '">' . $engine->_t('DeleteButton') . '</a>.';
 			$engine->show_message($message, 'success');
 ?>
 			<div class="code">
@@ -512,7 +512,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 									<tr>
 										<td></td>
 										<td>
-											<br><a href="' . $engine->href('', '', ['remove' => 1, 'backup_id' => Ut::html($log['pack'])]) . '">' . $engine->_t('RemoveButton') . '</a>
+											<br><a href="' . $engine->href('', '', ['remove' => 1, 'backup_id' => Ut::html($log['pack'])]) . '">' . $engine->_t('DeleteButton') . '</a>
 										</td>
 									</tr>
 								</table>' .

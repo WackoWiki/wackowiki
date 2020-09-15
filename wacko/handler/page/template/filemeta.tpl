@@ -54,10 +54,10 @@
 				<br>
 			=]
 
-			<input type="submit" class="OkBtn" name="submit" value="[ ' _t: RemoveButton ' ]">
+			<input type="submit" class="OkBtn" name="submit" value="[ ' _t: DeleteButton ' ]">
 			&nbsp;
 			<a href="[ ' href: ' ]" class="btn-link">
-				<input type="button" class="CancelBtn" value="[ ' _t: EditCancelButton ' ]">
+				<input type="button" class="CancelBtn" value="[ ' _t: CancelButton ' ]">
 			</a>
 			<br>
 			<br>
@@ -243,10 +243,10 @@
 				<br>
 				<input type="hidden" name="edit" value="">
 				<input type="hidden" name="file_id" value="[ ' fileid ' ]">
-				<input type="submit" class="OkBtn" name="submit" value="[ ' _t: EditStoreButton ' ]">
+				<input type="submit" class="OkBtn" name="submit" value="[ ' _t: StoreButton ' ]">
 				&nbsp;
 				<a href="[ ' href: ' ]" class="btn-link">
-					<input type="button" class="CancelBtn" value="[ ' _t: EditCancelButton ' ]">
+					<input type="button" class="CancelBtn" value="[ ' _t: CancelButton ' ]">
 				</a>
 				<br>
 				<br>

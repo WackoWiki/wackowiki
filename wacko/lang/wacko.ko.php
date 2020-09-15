@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
+	'CreateButton'				=> '새로 추가',
 	'StoreButton'				=> '저장',
 	'UpdateButton'				=> '업데이트',
 	'CancelButton'				=> '취소',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Set Owner:',
 	'OwnerDontChange'			=> 'Don\'t change',
 	'AclStoreButton'			=> 'Save ACLs',
-	'AclCancelButton'			=> '취소',
 	'AclAccessDenied'			=> '이 페이지의 소유자가 아닙니다.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -282,14 +282,12 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
+	'CategoriesStoreInfo'		=> '페이지에 범주를 할당하려면 확인란을 선택합니다..',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'CategoriesSaveButton'		=> '전송',
-	'CategoriesCancelButton'	=> 'C취소',
-	'CategoriesAddButton'		=> '추가',
-	'CategoriesRenameButton'	=> '이름 바꾸기',
+	'SubmitButton'				=> '전송',
+	'AddButton'					=> '추가',
 	'CategoriesGroupButton'		=> '그룹',
-	'CategoriesRemoveButton'	=> '제거',
+	'RemoveButton'				=> '제거',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Meta data updated',
-	'MetaStoreButton'			=> '저장',
-	'MetaCancelButton'			=> '취소',
 
-	'EditStoreButton'			=> '저장',
-	'EditCancelButton'			=> '취소',
 	'EditPreviewButton'			=> '미리 보기',
 	'EditPreview'				=> '미리 보기',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
 	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
-	'RemoveButton'				=> 'Yes, delete!',
+	'DeleteButton'				=> 'Yes, delete!',
 	'RestoreButton'				=> 'Restore',
 	'ArchiveButton'				=> 'Archive',
 	'CommentForWatchedPage'		=> 'New comment for page ',
@@ -597,12 +591,11 @@ $wacko_translation = [
 	'ChooseTheme'				=> '테마 선택',
 
 	'CreatePage'				=> 'Create this page',
-	'CreateNewPage'				=> 'Create a new page',
+	'CreateNewPage'				=> '새 페이지 만들기',
 	'CreateNewPageText'			=> '새로 추가',
-	'CreateNewPageTip'			=> 'Create a new page',
+	'CreateNewPageTip'			=> '새 페이지 만들기',
 
 	'CreateRandomPage'			=> 'Create a random page',
-	'CreatePageButton'			=> '새로 추가',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import in cluster',
 	'ImportWhat'				=> 'XML-file for import',
-	'ImportButtonText'			=> '가져오기',
+	'ImportButton'				=> '가져오기',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',

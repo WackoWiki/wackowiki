@@ -8,9 +8,10 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'StoreButton'				=> 'Save',
+	'CreateButton'				=> 'Maak',
+	'StoreButton'				=> 'Bewaar',
 	'UpdateButton'				=> 'Update',
-	'CancelButton'				=> 'Cancel',
+	'CancelButton'				=> 'Annuleren',
 	'ConvertButton'				=> 'Convert',
 
 	'FormInvalid'				=> 'Het verstuurde formulier is ongeldig. Probeer opnieuw te versturen.',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Set Eigenaar:',
 	'OwnerDontChange'			=> 'Niet wijzigen',
 	'AclStoreButton'			=> 'Bewaar ACL\'s (rechten)',
-	'AclCancelButton'			=> 'Annuleren',
 	'AclAccessDenied'			=> 'U ben niet de eigenaar van deze pagina.',
 	'AclSyntaxError'			=> 'Fout in de syntaxis van de toegangscontrolelijst',
 	'AclHelp'					=> '<code>*</code> - iedereen is toegestaan<br>' .
@@ -284,12 +284,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Opmerking: Wijzigen is van invloed op alle pagina\'s die aan die categorie zijn toegewezen. Als het woord een subcategorie heeft, worden deze niet verwijderd, maar alleen gedebundeld.',
 	'CategoriesStoreInfo'		=> 'Om categorieën aan een pagina toe te wijzen, selecteert u de selectievakjes.',
 	'CategoriesStoreButton' 	=> 'Categorieën opslaan',
-	'CategoriesSaveButton'		=> 'Submit',
-	'CategoriesCancelButton' 	=> 'Annuleren',
-	'CategoriesAddButton'		=> 'Toevoegen',
-	'CategoriesRenameButton'	=> 'Hernoem',
+	'SubmitButton'				=> 'Submit',
+	'AddButton'					=> 'Toevoegen',
 	'CategoriesGroupButton'		=> 'Groep',
-	'CategoriesRemoveButton'	=> 'Verwijderen',
+	'RemoveButton'				=> 'Verwijderen',
 	'CategoriesEditInfo'		=> 'Om de Categorielijst te bewerken, selecteert u het keuzerondje.',
 	'NoCategoriesForThisLang'	=> 'Categorieën voor deze taal zijn niet gespecificeerd.',
 	'PagesCategory'				=> 'Categorie Pagina\'s',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Meta data zijn bijgewerkt',
-	'MetaStoreButton'			=> 'Bewaar',
-	'MetaCancelButton'			=> 'Annuleren',
 
-	'EditStoreButton'			=> 'Bewaar',
-	'EditCancelButton'			=> 'Annuleren',
 	'EditPreviewButton'			=> 'Voorbeeld',
 	'EditPreview'				=> 'Voorbeeld',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Kan niet doorlinken, pagina bestaat niet.',
 	'RedirectsToItself'			=> 'De pagina verwijst naar zichzelf.',
 	'ReallyDelete'				=> 'Weet u zeker dat u deze pagina wilt verwijderen?<br>Deze handeling kan niet ongedaan worden gemaakt!<br><br>WAARSCHUWING: Verwijderen van deze pagina betekent dat u alle revisies, reacties, bijlagen, ACL\'s (rechten) en verwijzigen van deze pagina ook verwijderd.',
-	'RemoveButton'				=> 'Ja, verwijder!',
+	'DeleteButton'				=> 'Ja, verwijder!',
 	'RestoreButton'				=> 'Herstellen',
 	'ArchiveButton'				=> 'Archief',
 	'CommentForWatchedPage'		=> 'Nieuwe reactie voor deze pagina ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Maak een nieuwe pagina.',
 
 	'CreateRandomPage'			=> 'Maak een willekeurige pagina',
-	'CreatePageButton'			=> 'Maak',
 	'CreateSubPage'				=> 'Maak een subpagina aan in het cluster:',
 	'CreatePageParentCluster'	=> 'Maak een pagina aan in het bovenliggende cluster',
 	'CreatePageDenied'			=> 'U hebt niet de nodige toegangsrechten.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Importeer in cluster',
 	'ImportWhat'				=> 'Te importeren XML-bestand',
-	'ImportButtonText'			=> 'Importeren',
+	'ImportButton'				=> 'Importeren',
 	'ImportSuccess'				=> 'Het importeren is gelukt.',
 	'ImportFailed'				=> 'De invoer is mislukt.',
 	'ImportHint'				=> 'Geef a.u.b. een cluster op waarin u wilt importeren, geen relatieve adressering.',

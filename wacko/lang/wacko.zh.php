@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
+	'CreateButton'				=> '创建',
 	'StoreButton'				=> '保存',
 	'UpdateButton'				=> '更新',
 	'CancelButton'				=> '取消',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> '設置擁有者:',
 	'OwnerDontChange'			=> '不改變',
 	'AclStoreButton'			=> 'Save ACLs',
-	'AclCancelButton'			=> '取消',
 	'AclAccessDenied'			=> '你是本頁的所有者',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -282,14 +282,12 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
+	'CategoriesStoreInfo'		=> '要将类别分配给页面，请选中复选框。',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'CategoriesSaveButton'		=> '提交',
-	'CategoriesCancelButton'	=> '取消',
-	'CategoriesAddButton'		=> '添加',
-	'CategoriesRenameButton'	=> '重命名',
+	'SubmitButton'				=> '提交',
+	'AddButton'					=> '添加',
 	'CategoriesGroupButton'		=> '组',
-	'CategoriesRemoveButton'	=> '删除',
+	'RemoveButton'				=> '删除',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Meta data updated',
-	'MetaStoreButton'			=> '保存',
-	'MetaCancelButton'			=> '取消',
 
-	'EditStoreButton'			=> '儲存',
-	'EditCancelButton'			=> '取消',
 	'EditPreviewButton'			=> '預覽',
 	'EditPreview'				=> '預覽',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
 	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
-	'RemoveButton'				=> 'Yes, delete!',
+	'DeleteButton'				=> 'Yes, delete!',
 	'RestoreButton'				=> '恢复',
 	'ArchiveButton'				=> 'Archive',
 	'CommentForWatchedPage'		=> 'New comment for page ',
@@ -597,12 +591,11 @@ $wacko_translation = [
 	'ChooseTheme'				=> '主题',
 
 	'CreatePage'				=> '创建该页面',
-	'CreateNewPage'				=> 'Create a new page',
+	'CreateNewPage'				=> '创建一个新的页面',
 	'CreateNewPageText'			=> '创建',
-	'CreateNewPageTip'			=> 'Create a new page',
+	'CreateNewPageTip'			=> '创建一个新的页面',
 
 	'CreateRandomPage'			=> 'Create a random page',
-	'CreatePageButton'			=> '创建',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import in cluster',
 	'ImportWhat'				=> 'XML-file for import',
-	'ImportButtonText'			=> '导入',
+	'ImportButton'				=> '导入',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',

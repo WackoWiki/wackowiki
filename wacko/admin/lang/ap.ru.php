@@ -1067,7 +1067,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'Пользователь добавлен',
 	'UsersDeleteInfo'			=> 'Удаление пользователя',
-	'UserEditButton'			=> 'Редактировать',
+	'EditButton'			=> 'Редактировать',
 	'UserEnabled'				=> 'Включено',
 	'UsersAddNew'				=> 'Добавить нового пользователя',
 	'UsersDelete'				=> 'Вы уверены, что хотите удалить пользователя %1?',
@@ -1117,11 +1117,6 @@ $ap_translation = [
 	'GroupsDeleteInfo'			=> '* Внимание: Изменения затронут всех пользователей, входящих в группу.',
 	'GroupsIsSystem'			=> 'Группа %1 принадлежит системе и не может быть удалена.',
 	'GroupsStoreButton'			=> 'Сохранить группы',
-	'GroupsSaveButton'			=> 'Отправить',
-	'GroupsCancelButton'		=> 'Отменить',
-	'GroupsAddButton'			=> 'Добавить',
-	'GroupsEditButton'			=> 'Изменить',
-	'GroupsRemoveButton'		=> 'Удалить',
 	'GroupsEditInfo'			=> 'Для редактирования списка групп выберите радио-кнопку.',
 
 	'GroupAddMember'			=> 'Добавить участника',

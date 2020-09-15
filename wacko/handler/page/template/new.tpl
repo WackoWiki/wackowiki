@@ -15,7 +15,7 @@
 					<label for="create_subpage">[ ' _t: CreateSubPage ' ]:</label><br>
 					<code>[ ' base ' ]/</code>
 					<input type="text" id="create_subpage" name="tag" value="[ ' tag | e attr ' ]" size="20" maxlength="255">
-					<input type="submit" id="submit_subpage" value="[ ' _t: CreatePageButton ' ]">
+					<input type="submit" id="submit_subpage" value="[ ' _t: CreateButton ' ]">
 				</form>
 				<br>
 			=]
@@ -32,7 +32,7 @@
 					<label for="create_pageparentcluster">[ ' _t: CreatePageParentCluster ' ]:</label><br>
 					<code>[ ' base ' ]/</code>
 					<input type="text" id="create_pageparentcluster" name="tag" value="[ ' tag | e attr ' ]" size="20" maxlength="255">
-					<input type="submit" id="submit_pageparentcluster" value="[ ' _t: CreatePageButton ' ]">
+					<input type="submit" id="submit_pageparentcluster" value="[ ' _t: CreateButton ' ]">
 				</form>
 				<br>
 			=]
@@ -42,6 +42,6 @@
 			<input type="hidden" name="option" value="3">
 			<label for="create_randompage">[ ' _t: CreateRandomPage ' ]:</label><br>
 			<input type="text" id="create_randompage" name="tag" value="[ ' tag | e attr ' ]" size="60" maxlength="255">
-			<input type="submit" id="submit_randompage" value="[ ' _t: CreatePageButton ' ]">
+			<input type="submit" id="submit_randompage" value="[ ' _t: CreateButton ' ]">
 		</form>
 	</div>

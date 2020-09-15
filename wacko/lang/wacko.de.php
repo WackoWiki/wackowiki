@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
+	'CreateButton'				=> 'Erstellen',
 	'StoreButton'				=> 'Speichern',
 	'UpdateButton'				=> 'Aktualisieren',
 	'CancelButton'				=> 'Abbrechen',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Besitzer:',
 	'OwnerDontChange'			=> 'keine Änderung',
 	'AclStoreButton'			=> 'Speichern',
-	'AclCancelButton'			=> 'Abbrechen',
 	'AclAccessDenied'			=> 'Du bist nicht der Besitzer dieser Seite.',
 	'AclSyntaxError'			=> 'Syntaxfehler in der Zugriffssteuerungsliste',
 	'AclHelp'					=> '<code>*</code> - jeder hat das Recht<br>' .
@@ -284,12 +284,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Hinweis: Die Änderung betrifft alle Seiten, die dieser Kategorie zugeordnet sind. Wenn das Wort eine Unterkategorie hat, wird diese nicht gelöscht, sondern nur entbündelt.',
 	'CategoriesStoreInfo' 		=> 'Um Kategorien zu einer Seite zuordnen, wähle die jeweiligen Kontrollkästchen.',
 	'CategoriesStoreButton'		=> 'Speichere Kategorien',
-	'CategoriesSaveButton'		=> 'Speichern',
-	'CategoriesCancelButton' 	=> 'Abbrechen',
-	'CategoriesAddButton'		=> 'Hinzufügen',
-	'CategoriesRenameButton'	=> 'Umbenennen',
+	'SubmitButton'				=> 'Speichern',
+	'AddButton'					=> 'Hinzufügen',
 	'CategoriesGroupButton'		=> 'Gruppieren',
-	'CategoriesRemoveButton'	=> 'Entfernen',
+	'RemoveButton'				=> 'Entfernen',
 	'CategoriesEditInfo'		=> 'Um die Kategorie-Liste zu bearbeiten, wähle das Optionsfeld.',
 	'NoCategoriesForThisLang'	=> 'Für diese Sprache wurden noch keine Kategorien definiert.',
 	'PagesCategory'				=> 'Seiten der Kategorie',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Gruppenseite',
 
 	'MetaUpdated'				=> 'Metadaten aktualisiert',
-	'MetaStoreButton'			=> 'Speichern',
-	'MetaCancelButton'			=> 'Abbrechen',
 
-	'EditStoreButton'			=> 'Speichern',
-	'EditCancelButton'			=> 'Abbrechen',
 	'EditPreviewButton'			=> 'Vorschau',
 	'EditPreview'				=> 'Vorschau',
 	'Chars'						=> 'Zeichen',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Umleitung funktioniert wegen falschen Umleitungsparametern nicht',
 	'RedirectsToItself'			=> 'Die Seite leitet auf auf sich selbst weiter.',
 	'ReallyDelete'				=> 'Willst du wirklich diese Seite löschen?<br>Diese Aktion kann nicht rückgängig gemacht werden!<br><br>WARNUNG: Mit dieser Seite werden alle zur Seite gehörigen Versionen, Kommentare, Anhänge, Berechtigungen und Verweise gelöscht.',
-	'RemoveButton'				=> 'Ja, löschen!',
+	'DeleteButton'				=> 'Ja, löschen!',
 	'RestoreButton'				=> 'Wiederherstellen',
 	'ArchiveButton'				=> 'Archivieren',
 	'CommentForWatchedPage'		=> 'neuer Kommentar zur Seite ',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Neue Seite erstellen',
 
 	'CreateRandomPage'			=> 'Beliebige Seite',
-	'CreatePageButton'			=> 'Erstellen',
 	'CreateSubPage'				=> 'Unterseite in diesem Cluster',
 	'CreatePageParentCluster'	=> 'Seite im übergeordneten Cluster',
 	'CreatePageDenied'			=> 'Du verfügst nicht über die erforderlichen Zugriffsrechte.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import in Cluster',
 	'ImportWhat'				=> 'XML-Datei die importiert werden soll',
-	'ImportButtonText'			=> 'Importieren',
+	'ImportButton'				=> 'Importieren',
 	'ImportSuccess'				=> 'Erfolgreich importiert.',
 	'ImportFailed'				=> 'Import fehlgeschlagen.',
 	'ImportHint'				=> 'Bitte gib einen Cluster an, in den du importieren möchtest, keine relative Adressierung.',

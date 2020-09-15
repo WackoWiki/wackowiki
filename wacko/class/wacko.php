@@ -8468,7 +8468,7 @@ class Wacko
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '"> ' .
-						'<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "<br>\n" .
+						'<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CancelButton') . '"></a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}
@@ -8480,17 +8480,17 @@ class Wacko
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CategoriesCancelButton') . '"></a>' . "\n";
+				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CancelButton') . '"></a>' . "\n";
 			}
 		}
 
 		// edit control buttons
 		if ($can_edit || ! $this->method == 'edit')
 		{
-			$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('CategoriesAddButton') . '"> ' .
-					'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('CategoriesRenameButton') . '"> ' .
+			$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('AddButton') . '"> ' .
+					'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('RenameButton') . '"> ' .
 					'<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '"> ' .
-					'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('CategoriesRemoveButton') . '"> ' .
+					'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('RemoveButton') . '"> ' .
 					'<small><br>' . $this->_t('CategoriesEditInfo') . '</small>';
 		}
 

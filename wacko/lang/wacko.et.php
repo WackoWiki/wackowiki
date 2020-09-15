@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
+	'CreateButton'				=> 'Loo',
 	'StoreButton'				=> 'Salvesta',
 	'UpdateButton'				=> 'Uuenda',
 	'CancelButton'				=> 'Loobun',
@@ -225,7 +226,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Sea omanik:',
 	'OwnerDontChange'			=> 'Ära muuda',
 	'AclStoreButton'			=> 'Salvesta KÕL',
-	'AclCancelButton'			=> 'Loobun',
 	'AclAccessDenied'			=> 'Sa ei ole selle lehe omanik.',
 	'AclSyntaxError'			=> 'Access control list syntax error',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -282,14 +282,12 @@ $wacko_translation = [
 	'CategoriesNoGroup'			=> '[no group]',
 	'CategoriesDelete'			=> 'Are you sure you want to remove category %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
-	'CategoriesStoreInfo'		=> 'To assign categories to a page, select the checkboxes.',
+	'CategoriesStoreInfo'		=> 'Lehele kategooriate määramiseks valige märkeruudud.',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'CategoriesSaveButton'		=> 'Sisesta',
-	'CategoriesCancelButton' 	=> 'Loobu',
-	'CategoriesAddButton'		=> 'Lisama',
-	'CategoriesRenameButton'	=> 'Rename',
+	'SubmitButton'				=> 'Sisesta',
+	'AddButton'					=> 'Lisama',
 	'CategoriesGroupButton'		=> 'Group',
-	'CategoriesRemoveButton'	=> 'Eemalda',
+	'RemoveButton'				=> 'Eemalda',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
@@ -324,11 +322,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Group space',
 
 	'MetaUpdated'				=> 'Meta data uuendatud',
-	'MetaStoreButton'			=> 'Salvesta',
-	'MetaCancelButton'			=> 'Loobu',
 
-	'EditStoreButton'			=> 'Salvesta',
-	'EditCancelButton'			=> 'Loobun',
 	'EditPreviewButton'			=> 'Eelvaade',
 	'EditPreview'				=> 'Eelvaade',
 	'Chars'						=> 'chars',
@@ -513,7 +507,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Ei saa ümber suunata, kuna tegemist on valede parameetritega',
 	'RedirectsToItself'			=> 'Sait suunab enda juurde.',
 	'ReallyDelete'				=> 'Kas tõesti tahad seda lehte kustutada?<br>Seda ei saa taastada!<br><br>TÄHELEPANU! Kustutades selle lehe kustutad kõik selle lehe versioonid, kommentaarid, manused, kasutajateloendid ja viited.',
-	'RemoveButton'				=> 'Jah, kustuta!',
+	'DeleteButton'				=> 'Jah, kustuta!',
 	'RestoreButton'				=> 'Restore',
 	'ArchiveButton'				=> 'Archive',
 	'CommentForWatchedPage'		=> 'Uus kommentaar jälgitud lehel',
@@ -602,7 +596,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Loo uus leht.',
 
 	'CreateRandomPage'			=> 'Looge juhuslik lehekülg',
-	'CreatePageButton'			=> 'Loo',
 	'CreateSubPage'				=> 'Create a sub page in the cluster',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> 'Teil pole vajalikke juurdepääsuõigusi.',
@@ -671,7 +664,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import klastrisse',
 	'ImportWhat'				=> 'XML-fail impordiks',
-	'ImportButtonText'			=> 'Import',
+	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Importimine õnnestus.',
 	'ImportFailed'				=> 'Importimine ebaõnnestus.',
 	'ImportHint'				=> 'Esitage klaster, kuhu soovite importida, ilma suhtelise aadressita.',

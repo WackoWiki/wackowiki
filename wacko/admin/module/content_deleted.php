@@ -126,7 +126,7 @@ else if ($type == OBJECT_FILE)
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . $engine->href('', '', ['remove' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RemoveButton') . '</a> ]' .
+						' [ <a href="' . $engine->href('', '', ['remove' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['archive' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['restore' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', $page['title']) .
@@ -166,7 +166,7 @@ else if ($type == OBJECT_FILE)
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . $engine->href('', '', ['remove' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RemoveButton') . '</a> ]' .
+						' [ <a href="' . $engine->href('', '', ['remove' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['archive' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['restore' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
 						'<span title="' . $file['file_description'] . '">' . $file['file_name'] . '</span>' .

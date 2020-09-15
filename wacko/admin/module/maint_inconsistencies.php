@@ -848,7 +848,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					?>
 					<br>
 					<input type="hidden" name="file_action" value="check_inconsistencies">
-					<input type="submit" name="file_solve" id="submit" value="<?php echo $engine->_t('RemoveButton');?>">
+					<input type="submit" name="file_solve" id="submit" value="<?php echo $engine->_t('DeleteButton');?>">
 					<?php
 					echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>';
 					echo $engine->form_close();

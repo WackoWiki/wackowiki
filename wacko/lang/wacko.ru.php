@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
+	'CreateButton'				=> 'Создать',
 	'StoreButton'				=> 'Сохранить',
 	'UpdateButton'				=> 'Обновить',
 	'CancelButton'				=> 'Отмена',
@@ -226,7 +227,6 @@ $wacko_translation = [
 	'SetOwner'					=> 'Установить владельца:',
 	'OwnerDontChange'			=> 'Не менять',
 	'AclStoreButton'			=> 'Сохранить',
-	'AclCancelButton'			=> 'Отмена',
 	'AclAccessDenied'			=> 'Вы не владелец этой страницы.',
 	'AclSyntaxError'			=> 'Контроль доступа синтаксическая ошибка списка',
 	'AclHelp'					=> '<code>*</code> - разрешено всем<br>' .
@@ -285,12 +285,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Внимание: изменение затронет все документы, которым присвоено это ключевое слово. Если слово имеет подкатегории, они не будут удалены, а только разгруппированы.',
 	'CategoriesStoreInfo' 		=> 'Присвоить документу ключевые слова, выделенные флажками.',
 	'CategoriesStoreButton' 	=> 'Сохранить категории',
-	'CategoriesSaveButton' 		=> 'готово',
-	'CategoriesCancelButton' 	=> 'Отмена',
-	'CategoriesAddButton'		=> 'добавить',
-	'CategoriesRenameButton'	=> 'переименовать',
+	'SubmitButton' 		=> 'готово',
+	'AddButton'					=> 'добавить',
 	'CategoriesGroupButton'		=> 'группировать',
-	'CategoriesRemoveButton'	=> 'удалить',
+	'RemoveButton'				=> 'удалить',
 	'CategoriesEditInfo'		=> 'Отредактировать список ключевых слов (нужное выделить переключателем).',
 	'NoCategoriesForThisLang'	=> 'Ключевые слова для данного языка не заданы.',
 	'PagesCategory'				=> 'Документы категории',
@@ -325,11 +323,7 @@ $wacko_translation = [
 	'GroupSpace'				=> 'Страничка группы',
 
 	'MetaUpdated'				=> 'Метаданные обновлены',
-	'MetaStoreButton'			=> 'Сохранить',
-	'MetaCancelButton'			=> 'Отмена',
 
-	'EditStoreButton'			=> 'Сохранить',
-	'EditCancelButton'			=> 'Отмена',
 	'EditPreviewButton'			=> 'Предварительный просмотр',
 	'EditPreview'				=> 'Предварительный просмотр',
 	'Chars'						=> 'Символы',
@@ -514,7 +508,7 @@ $wacko_translation = [
 	'WrongPage4Redirect'		=> 'Переадресация не удалась из-за неверных параметров переадресации',
 	'RedirectsToItself'			=> 'Страница перенаправляется на себя.',
 	'ReallyDelete'				=> 'Вы действительно хотите УДАЛИТЬ страницу? <br>Восстановить её потом не удастся.<br><br>ВНИМАНИЕ: при удалении страницы будут удалены все её версии, комментарии, вложений, ссылки и т. п.',
-	'RemoveButton'				=> 'Да, удалить!',
+	'DeleteButton'				=> 'Да, удалить!',
 	'RestoreButton'				=> 'Восстановить',
 	'ArchiveButton'				=> 'Архивировать',
 	'CommentForWatchedPage'		=> 'Комментарий к странице ',
@@ -603,7 +597,6 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Создать новую страницу',
 
 	'CreateRandomPage'			=> 'Создать произвольную страницу',
-	'CreatePageButton'			=> 'Создать',
 	'CreateSubPage'				=> 'Создать вложенную страницу в кластере',
 	'CreatePageParentCluster'	=> 'Создать страницу в родительском кластере',
 	'CreatePageDenied'			=> 'Недостаточно прав доступа.',
@@ -674,7 +667,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Импортировать в',
 	'ImportWhat'				=> 'Файл для импорта',
-	'ImportButtonText'			=> 'Импортировать',
+	'ImportButton'				=> 'Импортировать',
 	'ImportSuccess'				=> 'Импортировано успешно.',
 	'ImportFailed'				=> 'Импорт провалился.',
 	'ImportHint'				=> 'Пожалуйста, укажите кластер, в который вы хотите импортировать, без относительной адресации.',

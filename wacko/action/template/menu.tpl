@@ -56,5 +56,5 @@
 		[= lang _ =
 			[ ' select ' ]
 		=]
-		<input type="submit" name="add_menu_item" value="[ ' _t: CreatePageButton ' ]">
+		<input type="submit" name="add_menu_item" value="[ ' _t: CreateButton ' ]">
 	</form>

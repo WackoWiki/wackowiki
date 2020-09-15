@@ -13,7 +13,7 @@
 					<input type="file" id="importwhat" name="_import">
 				</p>
 				<p>
-					<input type="submit" value="[ ' _t: ImportButtonText ' ]">
+					<input type="submit" value="[ ' _t: ImportButton ' ]">
 				</p>
 			</div>
 		</form>
