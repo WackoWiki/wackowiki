@@ -173,7 +173,7 @@ $wacko_config_defaults = [
 
 	'rename_globalacl'				=> 'Admins',
 	'acl_lock'						=> 0,
-	'owners_can_change_categories'	=> 1,
+	'categories_handler'			=> 1,
 	'remove_onlyadmins'				=> 0,
 	'owners_can_remove_comments'	=> 1,
 	'user_can_delete_account'		=> 0,

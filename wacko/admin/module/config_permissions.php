@@ -44,7 +44,7 @@ function admin_config_permissions(&$engine, &$module)
 		$config['hide_locked']					= (int) ($_POST['hide_locked'] ?? 0);
 		$config['remove_onlyadmins']			= (int) ($_POST['remove_onlyadmins'] ?? 0);
 		$config['owners_can_remove_comments']	= (int) ($_POST['owners_can_remove_comments'] ?? 0);
-		$config['owners_can_change_categories']	= (int) ($_POST['owners_can_change_categories'] ?? 0);
+		$config['categories_handler']			= (int) ($_POST['categories_handler'] ?? 0);
 		$config['moders_can_edit']				= (int) $_POST['moders_can_edit'];
 
 		$engine->config->_set($config);
@@ -193,11 +193,13 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="owners_can_change_categories"><strong><?php echo $engine->_t('OwnersEditCategories');?>:</strong><br>
+					<label for="categories_handler"><strong><?php echo $engine->_t('OwnersEditCategories');?>:</strong><br>
 					<small><?php echo $engine->_t('OwnersEditCategoriesInfo');?></small></label>
 				</td>
 				<td>
-					<input type="checkbox" id="owners_can_change_categories" name="owners_can_change_categories" value="1"<?php echo ($engine->db->owners_can_change_categories ? ' checked' : '');?>>
+					<input type="radio" id="categories_handler_admin" name="categories_handler" value="0" <?php echo ($engine->db->categories_handler == 0 ? ' checked' : '');?>><label for="categories_handler_admin"><?php echo $engine->_t('Admin');?></label>
+					<input type="radio" id="categories_handler_owner" name="categories_handler" value="1" <?php echo ($engine->db->categories_handler == 1 ? ' checked' : '');?>><label for="categories_handler_owner"><?php echo $engine->_t('Owner');?></label>
+					<input type="radio" id="categories_handler_user" name="categories_handler" value="2" <?php echo ($engine->db->categories_handler == 2 ? ' checked' : '');?>><label for="categories_handler_user"><?php echo $engine->_t('Registered');?></label>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -215,8 +217,8 @@ function admin_config_permissions(&$engine, &$module)
 		</table>
 		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
+			<input type="submit" id="submit" value="<?php echo $engine->_t('SaveButton');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('ResetButton');?>">
 		</div>
 <?php
 	echo $engine->form_close();

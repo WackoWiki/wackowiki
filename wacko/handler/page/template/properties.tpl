@@ -19,26 +19,26 @@
 						<tr>
 							<th scope="row">[ ' _t: MetaComments ' ]</th>
 							<td>
-								<input type="radio" id="commentsOn"	name="footer_comments"[ ' comments | check 1 ' ]><label for="commentsOn">[ ' _t: MetaOn ' ]</label>
-								<input type="radio" id="commentsGuest" name="footer_comments"[ ' comments | check 2 ' ]><label for="commentsGuest">[ ' _t: MetaRegistered ' ]</label>
-								<input type="radio" id="commentsOff" name="footer_comments"[ ' comments | check 0 ' ]><label for="commentsOff">[ ' _t: MetaOff ' ]</label>
+								<input type="radio" id="commentsOn"	name="footer_comments"[ ' comments | check 1 ' ]><label for="commentsOn">[ ' _t: On ' ]</label>
+								<input type="radio" id="commentsGuest" name="footer_comments"[ ' comments | check 2 ' ]><label for="commentsGuest">[ ' _t: Registered ' ]</label>
+								<input type="radio" id="commentsOff" name="footer_comments"[ ' comments | check 0 ' ]><label for="commentsOff">[ ' _t: Off ' ]</label>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">[ ' _t: MetaFiles ' ]</th>
 							<td>
-								<input type="radio" id="filesOn" name="footer_files"[ ' files | check 1 ' ]><label for="filesOn">[ ' _t: MetaOn ' ]</label>
-								<input type="radio" id="filesGuest" name="footer_files"[ ' files | check 2 ' ]><label for="filesGuest">[ ' _t: MetaRegistered ' ]</label>
-								<input type="radio" id="filesOff" name="footer_files"[ ' files | check 0 ' ]><label for="filesOff">[ ' _t: MetaOff ' ]</label>
+								<input type="radio" id="filesOn" name="footer_files"[ ' files | check 1 ' ]><label for="filesOn">[ ' _t: On ' ]</label>
+								<input type="radio" id="filesGuest" name="footer_files"[ ' files | check 2 ' ]><label for="filesGuest">[ ' _t: Registered ' ]</label>
+								<input type="radio" id="filesOff" name="footer_files"[ ' files | check 0 ' ]><label for="filesOff">[ ' _t: Off ' ]</label>
 							</td>
 						</tr>
 						[= r _ =
 							<tr>
 								<th scope="row">[ ' _t: MetaRating ' ]</th>
 								<td>
-									<input type="radio" id="ratingOn" name="footer_rating"[ ' rating | check 1 ' ]><label for="ratingOn">[ ' _t: MetaOn ' ]</label>
-									<input type="radio" id="ratingGuest" name="footer_rating"[ ' rating | check 2 ' ]><label for="ratingGuest">[ ' _t: MetaRegistered ' ]</label>
-									<input type="radio" id="ratingOff" name="footer_rating"[ ' rating | check 0 ' ]><label for="ratingOff">[ ' _t: MetaOff ' ]</label>
+									<input type="radio" id="ratingOn" name="footer_rating"[ ' rating | check 1 ' ]><label for="ratingOn">[ ' _t: On ' ]</label>
+									<input type="radio" id="ratingGuest" name="footer_rating"[ ' rating | check 2 ' ]><label for="ratingGuest">[ ' _t: Registered ' ]</label>
+									<input type="radio" id="ratingOff" name="footer_rating"[ ' rating | check 0 ' ]><label for="ratingOff">[ ' _t: Off ' ]</label>
 								</td>
 							</tr>
 						=]
@@ -46,15 +46,15 @@
 						<tr>
 							<th scope="row">[ ' _t: MetaToc ' ]</th>
 							<td>
-								<input type="radio" id="tocOn" name="hide_toc"[ ' hidetoc | check 0 ' ]><label for="tocOn">[ ' _t: MetaOn ' ]</label>
-								<input type="radio" id="tocOff" name="hide_toc"[ ' hidetoc | check 1 ' ]><label for="tocOff">[ ' _t: MetaOff ' ]</label>
+								<input type="radio" id="tocOn" name="hide_toc"[ ' hidetoc | check 0 ' ]><label for="tocOn">[ ' _t: On ' ]</label>
+								<input type="radio" id="tocOff" name="hide_toc"[ ' hidetoc | check 1 ' ]><label for="tocOff">[ ' _t: Off ' ]</label>
 							</td>
 						</tr>
 						<tr>
 							<th scope="row">[ ' _t: MetaIndex ' ]</th>
 							<td>
-								<input type="radio" id="indexOn" name="hide_index"[ ' hideindex | check 0 ' ]><label for="indexOn">[ ' _t: MetaOn ' ]</label>
-								<input type="radio" id="indexOff" name="hide_index"[ ' hideindex | check 1 ' ]><label for="indexOff">[ ' _t: MetaOff ' ]</label>
+								<input type="radio" id="indexOn" name="hide_index"[ ' hideindex | check 0 ' ]><label for="indexOn">[ ' _t: On ' ]</label>
+								<input type="radio" id="indexOff" name="hide_index"[ ' hideindex | check 1 ' ]><label for="indexOff">[ ' _t: Off ' ]</label>
 							</td>
 						</tr>
 						<tr>
@@ -69,29 +69,29 @@
 							<tr>
 								<th scope="row">[ ' _t: MetaHtml ' ]</th>
 								<td>
-									<input type="radio" id="htmlOn" name="allow_rawhtml"[ ' raw | check 1 ' ]><label for="htmlOn">[ ' _t: MetaOn ' ]</label>
-									<input type="radio" id="htmlOff" name="allow_rawhtml"[ ' raw | check 0 ' ]><label for="htmlOff">[ ' _t: MetaOff ' ]</label>
+									<input type="radio" id="htmlOn" name="allow_rawhtml"[ ' raw | check 1 ' ]><label for="htmlOn">[ ' _t: On ' ]</label>
+									<input type="radio" id="htmlOff" name="allow_rawhtml"[ ' raw | check 0 ' ]><label for="htmlOff">[ ' _t: Off ' ]</label>
 								</td>
 							</tr>
 							<tr>
 								<th scope="row">[ ' _t: MetaSafeHtml ' ]</th>
 								<td>
-									<input type="radio" id="safehtmlOn" name="disable_safehtml"[ ' safe | check 0 ' ]><label for="safehtmlOn">[ ' _t: MetaOn ' ]</label>
-									<input type="radio" id="safehtmlOff" name="disable_safehtml"[ ' safe | check 1 ' ]><label for="safehtmlOff">[ ' _t: MetaOff ' ]</label>
+									<input type="radio" id="safehtmlOn" name="disable_safehtml"[ ' safe | check 0 ' ]><label for="safehtmlOn">[ ' _t: On ' ]</label>
+									<input type="radio" id="safehtmlOff" name="disable_safehtml"[ ' safe | check 1 ' ]><label for="safehtmlOff">[ ' _t: Off ' ]</label>
 								</td>
 							</tr>
 						=]
 						<tr>
 							<th scope="row">[ ' _t: MetaNoIndex ' ]</th>
 							<td>
-								<input type="radio" id="noindexOn" name="noindex"[ ' noindex | check 1 ' ]><label for="noindexOn">[ ' _t: MetaOn ' ]</label>
-								<input type="radio" id="noindexOff" name="noindex"[ ' noindex | check 0 ' ]><label for="noindexOff">[ ' _t: MetaOff ' ]</label>
+								<input type="radio" id="noindexOn" name="noindex"[ ' noindex | check 1 ' ]><label for="noindexOn">[ ' _t: On ' ]</label>
+								<input type="radio" id="noindexOff" name="noindex"[ ' noindex | check 0 ' ]><label for="noindexOff">[ ' _t: Off ' ]</label>
 							</td>
 						</tr>
 						<tr>
 							<th></th>
 							<td>
-								<input type="submit" class="OkBtn" name="extended" value="[ ' _t: StoreButton ' ]" accesskey="s"> &nbsp;
+								<input type="submit" class="OkBtn" name="extended" value="[ ' _t: SaveButton ' ]" accesskey="s"> &nbsp;
 								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: CancelButton ' ]"></a>
 							</td>
 						</tr>
@@ -159,8 +159,8 @@
 									<label for="show_menu_tag">[ ' _t: SetShowMenuLabel ' ]</label>
 								</th>
 								<td>
-									<input type="radio" id="menu_tag_on" name="show_menu_tag"[ ' page.show_menu_tag | check 1 ' ]><label for="menu_tag_on">[ ' _t: MetaOn ' ]</label>
-									<input type="radio" id="menu_tag_off" name="show_menu_tag"[ ' page.show_menu_tag | check 0 ' ]><label for="menu_tag_off">[ ' _t: MetaOff ' ]</label>
+									<input type="radio" id="menu_tag_on" name="show_menu_tag"[ ' page.show_menu_tag | check 1 ' ]><label for="menu_tag_on">[ ' _t: On ' ]</label>
+									<input type="radio" id="menu_tag_off" name="show_menu_tag"[ ' page.show_menu_tag | check 0 ' ]><label for="menu_tag_off">[ ' _t: Off ' ]</label>
 								</td>
 							</tr>
 						==]
@@ -209,7 +209,7 @@
 						<tr>
 							<th></th>
 							<td>
-								<input type="submit" class="OkBtn" value="[ ' _t: StoreButton ' ]" accesskey="s"> &nbsp;
+								<input type="submit" class="OkBtn" value="[ ' _t: SaveButton ' ]" accesskey="s"> &nbsp;
 								<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: CancelButton ' ]"></a>
 							</td>
 						</tr>

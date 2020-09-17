@@ -97,8 +97,8 @@ function admin_config_filter(&$engine, &$module)
 		</table>
 		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
+			<input type="submit" id="submit" value="<?php echo $engine->_t('SaveButton');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('ResetButton');?>">
 		</div>
 <?php
 	echo $engine->form_close();

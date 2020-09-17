@@ -29,10 +29,6 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'FormSave'					=> '저장',
-	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> '업데이트',
-
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Log out',
@@ -55,8 +51,6 @@ $ap_translation = [
 	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
-	'On'						=> '켜기',
-	'Off'						=> '끄기',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 

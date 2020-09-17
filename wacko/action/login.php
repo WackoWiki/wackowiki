@@ -53,7 +53,7 @@ if (($user = $this->get_user()))
 	$message .= $this->_t('BindSessionIp') . ' ' .
 		($user['validate_ip']
 			? Ut::perc_replace($this->_t('BindSessionIpOn'), '<code>' . $user['ip'] . '</code>')
-			: '<code>' . $this->_t('MetaOff') . '</code>') .
+			: '<code>' . $this->_t('Off') . '</code>') .
 		"<br>\n";
 
 	// show traffic protection
@@ -63,7 +63,7 @@ if (($user = $this->get_user()))
 			' <code>' .
 			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'
 				? ($_SERVER['SSL_CIPHER'] ?? '') . ' (' . ($_SERVER['SSL_PROTOCOL'] ?? '') . ')'
-				: $this->_t('MetaOff')
+				: $this->_t('Off')
 			) .
 			'</code>' . "<br>\n";
 	}

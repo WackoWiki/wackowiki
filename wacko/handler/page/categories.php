@@ -20,7 +20,9 @@ if (!$this->page)
 	$this->http->redirect($this->href());
 }
 
-if ($this->is_owner() || $this->is_admin())
+if (   $this->is_owner()
+	|| $this->is_admin()
+	|| ($this->get_user() && $this->db->categories_handler == 2))
 {
 	// indicate page language, categories were defined per lang
 	if ($this->db->multilanguage)
@@ -54,7 +56,7 @@ if ($this->is_owner() || $this->is_admin())
 			$this->set_message($this->_t('CategoriesUpdated'), 'success');
 			$this->http->redirect($this->href('properties'));
 		}
-		else if ($this->is_admin() || $this->db->owners_can_change_categories == true)
+		else if ($this->is_admin() || ($this->is_owner() && $this->db->categories_handler))
 		{
 			// get categories
 			if (isset($_POST['category_id']))
@@ -209,7 +211,7 @@ if ($this->is_owner() || $this->is_admin())
 		//   edit forms
 		/////////////////////////////////////////////
 
-		if ($this->is_admin() || $this->db->owners_can_change_categories == true)
+		if ($this->is_admin() || ($this->is_owner() && $this->db->categories_handler))
 		{
 			// add new item
 			if (isset($_POST['create']))
@@ -310,7 +312,7 @@ if ($this->is_owner() || $this->is_admin())
 	if (!$_POST)
 	{
 		$can_edit = isset($_GET['edit'])
-					&& ($this->is_admin() || $this->db->owners_can_change_categories == true);
+					&& ($this->is_admin() || ($this->is_owner() && $this->db->categories_handler));
 
 		if (isset($_GET['edit']))
 		{
@@ -320,7 +322,7 @@ if ($this->is_owner() || $this->is_admin())
 		{
 			$tpl->a_h_link	= $this->compose_link_to_page($this->tag, '', '');
 
-			if ($this->is_admin() || $this->db->owners_can_change_categories)
+			if ($this->is_admin() || $this->db->categories_handler)
 			{
 				$tpl->a_h_edit_href	= $this->href('categories', '', 'edit');
 			}

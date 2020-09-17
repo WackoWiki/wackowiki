@@ -177,8 +177,8 @@ function admin_system_log(&$engine, &$module)
 			?>
 			</select>
 
-			<input type="submit" name="update" id="submit" value="<?php echo $engine->_t('FormUpdate');?>">
-			<input type="submit" name="reset" id="submit" value="<?php echo $engine->_t('FormReset');?>">
+			<input type="submit" name="update" id="submit" value="<?php echo $engine->_t('UpdateButton');?>">
+			<input type="submit" name="reset" id="submit" value="<?php echo $engine->_t('ResetButton');?>">
 
 <?php
 		$engine->print_pagination($pagination);

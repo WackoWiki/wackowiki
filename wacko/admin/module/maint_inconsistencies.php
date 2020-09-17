@@ -372,7 +372,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				$message = $engine->_t('InconsistenciesNone');
 				$engine->show_message($message);
 
-				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
+				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
 			}
 			else
 			{
@@ -737,7 +737,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				$engine->show_message($message);
 			}
 
-			echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
+			echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
 		}
 	}
 
@@ -840,7 +840,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					$message = $engine->_t('InconsistenciesDone');
 					$engine->show_message($message, 'success');
 
-					echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
+					echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
 				}
 				else
 				{
@@ -859,7 +859,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				$message = $engine->_t('InconsistenciesNone');
 				$engine->show_message($message);
 
-				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('FormReset') . '"></a>';
+				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
 			}
 
 			#Ut::debug_print_r($abandoned);

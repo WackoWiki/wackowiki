@@ -29,10 +29,6 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'FormSave'					=> 'Mentés',
-	'FormReset'					=> 'Alaphelyzet',
-	'FormUpdate'				=> 'Frissítés',
-
 	'ApHomePage'				=> 'Címlap',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Kilépés',
@@ -55,8 +51,6 @@ $ap_translation = [
 	'Remove'					=> 'Eltávolítás',
 	'Enabled'					=> 'Engedélyezett',
 	'Disabled'					=> 'Tiltott',
-	'On'						=> 'Bekapcsolva',
-	'Off'						=> 'Kikapcsolva',
 	'Mandatory'					=> 'Kötelező',
 	'Admin'						=> 'Admin',
 

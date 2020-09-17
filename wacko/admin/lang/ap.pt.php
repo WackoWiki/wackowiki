@@ -29,10 +29,6 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Erro ao carregar o módulo admin %1: não existe.',
 
-	'FormSave'					=> 'Guardar',
-	'FormReset'					=> 'Reiniciar',
-	'FormUpdate'				=> 'Atualizar',
-
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Log out',
@@ -55,8 +51,6 @@ $ap_translation = [
 	'Remove'					=> 'Remover',
 	'Enabled'					=> 'Ativado',
 	'Disabled'					=> 'Disabled',
-	'On'						=> 'On',
-	'Off'						=> 'Off',
 	'Mandatory'					=> 'Obrigatório',
 	'Admin'						=> 'Admin',
 

@@ -256,7 +256,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="enable_comments_on" name="enable_comments" value="1" <?php echo ($engine->db->enable_comments == 1 ? ' checked' : '');?>><label for="enable_comments_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="enable_comments_guest" name="enable_comments" value="2" <?php echo ($engine->db->enable_comments == 2 ? ' checked' : '');?>><label for="enable_comments_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="enable_comments_guest" name="enable_comments" value="2" <?php echo ($engine->db->enable_comments == 2 ? ' checked' : '');?>><label for="enable_comments_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="enable_comments_off" name="enable_comments" value="0" <?php echo ($engine->db->enable_comments == 0 ? ' checked' : '');?>><label for="enable_comments_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -288,7 +288,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="footer_comments_on" name="footer_comments" value="1"<?php echo ($engine->db->footer_comments == 1 ? ' checked' : '');?>><label for="footer_comments_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="footer_comments_guest" name="footer_comments" value="2"<?php echo ($engine->db->footer_comments == 2 ? ' checked' : '');?>><label for="footer_comments_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="footer_comments_guest" name="footer_comments" value="2"<?php echo ($engine->db->footer_comments == 2 ? ' checked' : '');?>><label for="footer_comments_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="footer_comments_off" name="footer_comments" value="0"<?php echo ($engine->db->footer_comments == 0 ? ' checked' : '');?>><label for="footer_comments_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -302,7 +302,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="footer_files_on" name="footer_files" value="1"<?php echo ($engine->db->footer_files == 1 ? ' checked' : '');?>><label for="footer_files_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="footer_files_guest" name="footer_files" value="2"<?php echo ($engine->db->footer_files == 2 ? ' checked' : '');?>><label for="footer_files_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="footer_files_guest" name="footer_files" value="2"<?php echo ($engine->db->footer_files == 2 ? ' checked' : '');?>><label for="footer_files_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="footer_files_off" name="footer_files" value="0"<?php echo ($engine->db->footer_files == 0 ? ' checked' : '');?>><label for="footer_files_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -316,7 +316,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ($engine->db->footer_rating == 1 ? ' checked' : '');?>><label for="footer_rating_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="footer_rating_guest" name="footer_rating" value="2"<?php echo ($engine->db->footer_rating == 2 ? ' checked' : '');?>><label for="footer_rating_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="footer_rating_guest" name="footer_rating" value="2"<?php echo ($engine->db->footer_rating == 2 ? ' checked' : '');?>><label for="footer_rating_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="footer_rating_off" name="footer_rating" value="0"<?php echo ($engine->db->footer_rating == 0 ? ' checked' : '');?>><label for="footer_rating_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -330,7 +330,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="footer_tags_on" name="footer_tags" value="1"<?php echo ($engine->db->footer_tags == 1 ? ' checked' : '');?>><label for="footer_tags_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="footer_tags_guest" name="footer_tags" value="2"<?php echo ($engine->db->footer_tags == 2 ? ' checked' : '');?>><label for="footer_tags_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="footer_tags_guest" name="footer_tags" value="2"<?php echo ($engine->db->footer_tags == 2 ? ' checked' : '');?>><label for="footer_tags_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="footer_tags_off" name="footer_tags" value="0"<?php echo ($engine->db->footer_tags == 0 ? ' checked' : '');?>><label for="footer_tags_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -347,7 +347,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="show_permalink_on" name="show_permalink" value="1"<?php echo ($engine->db->show_permalink == 1 ? ' checked' : '');?>><label for="show_permalink_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="show_permalink_guest" name="show_permalink" value="2"<?php echo ($engine->db->show_permalink == 2 ? ' checked' : '');?>><label for="show_permalink_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="show_permalink_guest" name="show_permalink" value="2"<?php echo ($engine->db->show_permalink == 2 ? ' checked' : '');?>><label for="show_permalink_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="show_permalink_off" name="show_permalink" value="0"<?php echo ($engine->db->show_permalink == 0 ? ' checked' : '');?>><label for="show_permalink_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -416,7 +416,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="hide_revisions_on" name="hide_revisions" value="2"<?php echo ($engine->db->hide_revisions == 2 ? ' checked' : '');?>><label for="hide_revisions_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="hide_revisions_guest" name="hide_revisions" value="1"<?php echo ($engine->db->hide_revisions == 1 ? ' checked' : '');?>><label for="hide_revisions_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="hide_revisions_guest" name="hide_revisions" value="1"<?php echo ($engine->db->hide_revisions == 1 ? ' checked' : '');?>><label for="hide_revisions_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="hide_revisions_off" name="hide_revisions" value="0"<?php echo ($engine->db->hide_revisions == 0 ? ' checked' : '');?>><label for="hide_revisions_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -430,7 +430,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="attachments_handler_on" name="attachments_handler" value="1"<?php echo ($engine->db->attachments_handler == 1 ? ' checked' : '');?>><label for="attachments_handler_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="attachments_handler_guest" name="attachments_handler" value="2"<?php echo ($engine->db->attachments_handler == 2 ? ' checked' : '');?>><label for="attachments_handler_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="attachments_handler_guest" name="attachments_handler" value="2"<?php echo ($engine->db->attachments_handler == 2 ? ' checked' : '');?>><label for="attachments_handler_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="attachments_handler_off" name="attachments_handler" value="0"<?php echo ($engine->db->attachments_handler == 0 ? ' checked' : '');?>><label for="attachments_handler_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -444,7 +444,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="source_handler_on" name="source_handler" value="1"<?php echo ($engine->db->source_handler == 1 ? ' checked' : '');?>><label for="source_handler_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="source_handler_guest" name="source_handler" value="2"<?php echo ($engine->db->source_handler == 2 ? ' checked' : '');?>><label for="source_handler_guest"><?php echo $engine->_t('MetaRegistered');?></label>
+					<input type="radio" id="source_handler_guest" name="source_handler" value="2"<?php echo ($engine->db->source_handler == 2 ? ' checked' : '');?>><label for="source_handler_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="source_handler_off" name="source_handler" value="0"<?php echo ($engine->db->source_handler == 0 ? ' checked' : '');?>><label for="source_handler_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
@@ -702,8 +702,8 @@ function admin_config_basic(&$engine, &$module)
 		</table>
 		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('FormSave');?>">
-			<input type="reset" id="button" value="<?php echo $engine->_t('FormReset');?>">
+			<input type="submit" id="submit" value="<?php echo $engine->_t('SaveButton');?>">
+			<input type="reset" id="button" value="<?php echo $engine->_t('ResetButton');?>">
 		</div>
 <?php
 	echo $engine->form_close();

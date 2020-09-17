@@ -29,10 +29,6 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'FormSave'					=> '保存',
-	'FormReset'					=> 'Reset',
-	'FormUpdate'				=> '更新',
-
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Log out',
@@ -55,8 +51,6 @@ $ap_translation = [
 	'Remove'					=> '削除',
 	'Enabled'					=> '有効にする',
 	'Disabled'					=> '無効',
-	'On'						=> 'オン',
-	'Off'						=> 'オフ',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 

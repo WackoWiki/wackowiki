@@ -94,7 +94,7 @@ $upgrade['6.0.10'][]	= ['alter',		'category',			$alter_category_r5_5_0];
 
 // config
 $upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_0];
-$upgrade['6.0.8'][]		= ['update',	'config',			$update_config_r5_5_1];
+$upgrade['6.0.11'][]	= ['update',	'config',			$update_config_r5_5_1];
 
 // file
 $upgrade['6.0.10'][]	= ['alter',		'file',				$alter_file_r5_5_0];
