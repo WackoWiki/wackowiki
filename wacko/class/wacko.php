@@ -3512,7 +3512,7 @@ class Wacko
 
 			if ($text == $tag || (!$text && $scale))
 			{
-				return $this->image_link(str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)), $media_class, $text, $text, $scale);
+				return $this->image_link(str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)), $media_class, null, $text, $text, $scale);
 			}
 			else
 			{
@@ -3967,7 +3967,7 @@ class Wacko
 
 			if ($img_link)
 			{
-				$text		= $this->image_link($img_link, $media_class, $text, $text, $scale);
+				$text		= $this->image_link($img_link, $media_class, null, $text, $text, $scale);
 			}
 
 			if ($text)
