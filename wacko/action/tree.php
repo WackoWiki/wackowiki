@@ -11,6 +11,7 @@ if (!defined('IN_WACKO'))
  {{tree
 	[page="tag"]
 	[depth=3]
+	[title=1]
 	[nomark=0]
 	[legend=""]
 	[system=0|1]		// excludes system pages
@@ -213,7 +214,9 @@ if ($pages = $this->db->load_all(
 				# if ($cur_level == $root_level && $cur_level < 2)	echo '<strong>';
 
 				// displaying only the last word of tag OR title
-				$link_text = ($title == 0) ? mb_substr($page['tag'], mb_strrpos($page['tag'], '/') + 1) : $page['title'];
+				$link_text = ($title == 0)
+					? mb_substr($page['tag'], mb_strrpos($page['tag'], '/') + 1)
+					: $page['title'];
 
 				if ($this->tag == $page['tag'])
 				{
@@ -222,7 +225,6 @@ if ($pages = $this->db->load_all(
 				}
 				else
 				{
-
 					echo $this->link('/' . $page['tag'], '', $link_text, '', 0, 1, 0);
 				}
 

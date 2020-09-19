@@ -12,7 +12,7 @@ $logged_in	= $this->get_user();
 $tab_mode	= $_GET['mode'] ?? '';
 
 // display user profile
-if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private message can POST here
+if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal message can POST here
 {
 	// hide H1 article header
 	$this->hide_article_header = true;
@@ -179,12 +179,12 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so private mess
 
 					// compose headers
 					$headers				= [];
-					$headers['Message-ID']	= "<$msg_id>";
+					$headers['Message-ID']	= '<' . $msg_id . '>';
 
 					if (($ref = @$_POST['ref']))
 					{
-						$headers['In-Reply-To']	= "<$ref>";
-						$headers['References']	= "<$ref>";
+						$headers['In-Reply-To']	= '<' . $ref . '>';
+						$headers['References']	= '<' . $ref . '>';
 					}
 
 					// send notification

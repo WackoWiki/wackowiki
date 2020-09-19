@@ -1285,7 +1285,7 @@ $wacko_translation = [
 	// loading error
 	'UnknownAction'				=> 'Action inconnue',
 	'UnknownMethod'				=> 'Méthode inconnue',
-	'FormatterNotFound'			=> 'Formatter %1 n\'a pas trouvé',
+	'FormatterNotFound'			=> 'Formateur %1 n\'a pas trouvé',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Connexion réussie au panneau d’administration',

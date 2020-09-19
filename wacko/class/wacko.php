@@ -2405,7 +2405,7 @@ class Wacko
 			];
 		}
 
-		$save = $this->set_language($user['user_lang'], true, true);
+		$save		= $this->set_language($user['user_lang'], true, true);
 
 		$email_to	= $user['email'];
 		$name_to	= $user['user_name'];
@@ -2432,7 +2432,7 @@ class Wacko
 
 	function notify_approved_account($user)
 	{
-		$save = $this->set_language($user['user_lang'], true, true);
+		$save		= $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('RegistrationApproved');
 		$body		=	Ut::perc_replace($this->_t('UserApprovedInfo'), $this->db->site_name) . "\n\n" .
@@ -2466,7 +2466,7 @@ class Wacko
 
 	function notify_new_owner($user)
 	{
-		$save = $this->set_language($user['user_lang'], true, true);
+		$save		= $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('NewPageOwnership');
 		// STS TODO ou, pure shit message!
@@ -2486,7 +2486,7 @@ class Wacko
 	 */
 	function notify_user_signup($user, $verify = true)
 	{
-		$save = $this->set_language($user['user_lang'], true, true);
+		$save		= $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('EmailWelcome') . ' ' . $this->db->base_url; // TODO: customize!
 		$body		=	Ut::perc_replace(
@@ -2506,7 +2506,7 @@ class Wacko
 
 	function notify_password_reset($user, $code)
 	{
-		$save = $this->set_language($user['user_lang'], true, true);
+		$save		= $this->set_language($user['user_lang'], true, true);
 
 		$subject	=	$this->_t('EmailForgotSubject') . ' ' . $user['user_name'];
 		$body		=	Ut::perc_replace($this->_t('EmailForgotMessage'),
@@ -2520,7 +2520,7 @@ class Wacko
 
 	function notify_pm($user, $subject, $body, $header, $msg_id)
 	{
-		$save = $this->set_language($user['user_lang'], true, true);
+		$save		= $this->set_language($user['user_lang'], true, true);
 
 		$body		=	Ut::perc_replace($this->_t('UsersPMBody'),
 							$this->get_user_name()) . "\n\n" .
@@ -2593,7 +2593,7 @@ class Wacko
 				{
 					if ($this->db->enable_email && $this->db->enable_email_notification && $user['enabled'] && !$user['email_confirm'] && $user['send_watchmail'])
 					{
-						$save = $this->set_language($user['user_lang'], true, true);
+						$save		= $this->set_language($user['user_lang'], true, true);
 
 						$_subject	=	$this->_t($subject[0]) . " '$subject[1]'";
 
@@ -2751,9 +2751,9 @@ class Wacko
 					}
 					else
 					{
-						$subject	= $this->_t('WatchedPageChanged') . "'" . $title . "'";
+						$subject		= $this->_t('WatchedPageChanged') . "'" . $title . "'";
 
-						$patterns		= ['/%%SimpleDiffAdditions%%/u',			'/%%SimpleDiffDeletions%%/u'];
+						$patterns		= ['/%%SimpleDiffAdditions%%/u',		'/%%SimpleDiffDeletions%%/u'];
 						$replacements	= [$this->_t('SimpleDiffAdditions'),	$this->_t('SimpleDiffDeletions')];
 						$diff			= preg_replace($patterns, $replacements, $diff);
 
@@ -2800,13 +2800,13 @@ class Wacko
 		if (($user = $this->db->load_single(
 			"SELECT user_name, email " .
 			"FROM " . $this->db->user_table . " " .
-			"WHERE email_confirm = $hash " .
+			"WHERE email_confirm = " . $hash . " " .
 			"LIMIT 1")))
 		{
 			$this->db->sql_query(
 				"UPDATE " . $this->db->user_table . " SET " .
 					"email_confirm = '' " .
-				"WHERE email_confirm = $hash " .
+				"WHERE email_confirm = " . $hash . " " .
 				"LIMIT 1");
 
 			if ($this->get_user_name() == $user['user_name'])
