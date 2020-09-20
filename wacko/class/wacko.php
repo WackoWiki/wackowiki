@@ -3110,7 +3110,7 @@ class Wacko
 	* @param string $tag Page tag
 	* @return string
 	*/
-	function underscore_url($tag) : string
+	function underscore_url($tag) : ?string
 	{
 		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
 		if ($this->db->urls_underscores)
