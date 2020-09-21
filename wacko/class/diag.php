@@ -109,8 +109,8 @@ class Diag
 					echo '<p class="debug">Language data</p>' . "\n<ul>\n";
 					echo "\t<li>Multilanguage: " . ($config['multilanguage'] == 1 ? 'true' : 'false') . "</li>\n";
 					echo "\t<li>HTTP_ACCEPT_LANGUAGE set: " . (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false') . "</li>\n";
-					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] . "</li>\n";
-					echo "\t<li>HTTP_ACCEPT_LANGUAGE chopped value: " . strtolower(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)) . "</li>\n";
+					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: " . $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '' . "</li>\n";
+					echo "\t<li>User agent language: " . $http->user_agent_language() . "</li>\n";
 					echo "\t<li>User language set: " . (isset($user['user_lang']) ? 'true' : 'false') . "</li>\n";
 					echo "\t<li>User language value: " . ($user['user_lang'] ?? '') . "</li>\n";
 					echo "\t<li>Page language: " . ($engine->page['page_lang'] ?? '')  . "</li>\n";
