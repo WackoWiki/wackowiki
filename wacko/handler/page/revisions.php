@@ -68,7 +68,7 @@ if ($this->has_access('read'))
 		$this->parent_size	= 0;
 
 		// get size diff to parent version
-		$r_revisions = array_reverse($revisions);
+		$r_revisions		= array_reverse($revisions);
 
 		foreach ($r_revisions as $r)
 		{
@@ -101,10 +101,12 @@ if ($this->has_access('read'))
 			$tpl->modified		= $page['modified'];
 
 			$tpl->user			= $this->user_link($page['user_name'], true, false);
+
 			if ($page['edit_note'])
 			{
 				$tpl->n_note	= $page['edit_note'];
 			}
+
 			$tpl->m_minor		= ($page['minor_edit'] ? 'm' : null);
 
 			// review

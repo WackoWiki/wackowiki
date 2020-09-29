@@ -29,11 +29,11 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 {
 	// create new account if possible
 	// passing vars from user input
-	$user_name		= Ut::strip_spaces($_POST['user_name']);
-	$email			= Ut::strip_spaces($_POST['email']);
-	$password		= $_POST['password'];
-	$conf_password	= $_POST['conf_password'];
-	$user_lang		= $_POST['user_lang'] ?? $this->db->language;
+	$user_name		= Ut::strip_spaces(($_POST['user_name'] ?? ''));
+	$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
+	$password		= (string) ($_POST['password'] ?? '');
+	$conf_password	= (string) ($_POST['conf_password'] ?? '');
+	$user_lang		= (string) ($_POST['user_lang'] ?? $this->db->language);
 	$user_lang		= $this->known_language($user_lang) ? $user_lang : $this->db->language;
 	$complexity		= $this->password_complexity($user_name, $password);
 

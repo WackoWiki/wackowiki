@@ -91,7 +91,7 @@ $wacko_translation = [
 	'SessionEnds'				=> 'The current session ends',
 	'LastVisit'					=> 'Last visit was recorded',
 
-	'LoginIncorrect'			=> 'The username or password you have entered is invalid.',
+	'LoginIncorrect'			=> '입력 한 사용자 이름 또는 비밀번호가 유효하지 않습니다.',
 	'WelcomeBack'				=> 'Welcome back, %1',
 	'LoginAttemptsExceeded'		=> 'You exceeded the maximum allowed number of login attempts.<br>In addition to your username and password you now also have to solve the CAPTCHA below.',
 
@@ -219,9 +219,9 @@ $wacko_translation = [
 	'PageOwnershipInfo'			=> '',
 	'AclRead'					=> 'Read:',
 	'AclWrite'					=> 'Write:',
-	'AclComment'				=> 'Comments:',
+	'AclComment'				=> '댓글:',
 	'AclCreate'					=> '생성:',
-	'AclUpload'					=> 'Upload:',
+	'AclUpload'					=> '파일 올리기:',
 	'AclFor'					=> 'Access Control Lists for %1',
 	'SetOwner'					=> 'Set Owner:',
 	'OwnerDontChange'			=> 'Don\'t change',
@@ -444,7 +444,7 @@ $wacko_translation = [
 	'NotFound'					=> 'not found',
 	'NoResultsFor'				=> 'No results for ',
 	'SearchResultsFor'			=> 'Search results for ',
-	'SearchFor'					=> 'Search for',
+	'SearchFor'					=> '검색',
 	'TopicSearchResults'		=> 'Topics search results for ',
 	'NotFoundInTopics'			=> 'not found in topics',
 	'FilterLangNotAvailable'	=> 'The selected language is not available!',
@@ -1134,7 +1134,7 @@ $wacko_translation = [
 
 	// POLLS ADD-ON
 	'PollsTopic'				=> '제목',
-	'PollsVariant'				=> 'Reply',
+	'PollsVariant'				=> '답글',
 	'PollsPlural'				=> 'You can select multiple answers',
 	'PollsSingular'				=> 'You can select only one answer',
 	'PollsAddVariant'			=> 'add option',
