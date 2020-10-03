@@ -301,10 +301,9 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> 'Oldalforrás',
-	'SourceTip'					=> 'Oldalforrás megtekintése (no %%-formatters shown)',
+	'SourceTip'					=> 'Oldalforrás megtekintése',
 	'SourceCopyToClipboard'		=> 'másolja a vágólapra',
 	'SourceFor'					=> 'Kezdőlap forrásának megtekintése %1',
-	'SourceForInfo'				=> 'Megtekintheted és másolhatod a lap forrását.',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',

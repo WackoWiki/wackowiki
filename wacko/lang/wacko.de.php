@@ -33,8 +33,8 @@ $wacko_translation = [
 	'RegistrationButton'		=> 'Benutzer registrieren',
 	'RegistrationUserNameOwned'	=> 'Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.',
 	'SiteRegistered'			=> 'Du hast dich erfolgreich auf der Website %1 registriert.',
-	'RegistrationEmailInfo'		=> 'Eine gültige E-Mail-Adresse. Alle E-Mails der Website werden an diese Adresse gesendet werden. Die E-Mail-Adresse wird nicht veröffentlicht und wird nur verwendet, wenn ein neues Passwort anfordern wird oder wenn eingestellt wird, bestimmte Informationen oder Benachrichtigungen per E-Mail zu erhalten.',
-	'SiteEmailConfirm'			=> 'Bitte bestätige deine E-Mail-Adresse gemäß der dir zugesanden Anleitung. <br> Beachte, bei unbestätigter E-Mail-Adresse kann das vergessene Passwort nicht zurückgesetzt werden.',
+	'RegistrationEmailInfo'		=> 'Eine gültige E-Mail-Adresse. Alle E-Mails der Website werden an diese Adresse gesendet werden. Die E-Mail-Adresse wird nicht veröffentlicht und wird nur verwendet, wenn ein neues Passwort angefordert wird oder wenn eingestellt wird, bestimmte Informationen oder Benachrichtigungen per E-Mail zu erhalten.',
+	'SiteEmailConfirm'			=> 'Bitte bestätige deine E-Mail-Adresse gemäß der dir zugesanden Anleitung.<br> Beachte, bei unbestätigter E-Mail-Adresse kann das vergessene Passwort nicht zurückgesetzt werden.',
 	'NameTooShort'				=> 'Der Benutzername ist zu kurz, es sind mindestens %2 Zeichen erforderlich.',
 	'NameTooLong'				=> 'Der Benutzername ist zu lang, es sind maximal %2 Zeichen zulässig.',
 	'NameAlphanumOnly'			=> 'Der Benutzername muss zwischen %1 und %2 Zeichen lang sein und darf nur aus alphanumerischen Zeichen bestehen.',
@@ -42,7 +42,7 @@ $wacko_translation = [
 	'NewUserAccount'			=> 'neues Benutzerkonto',
 
 	'NewAccountSubject'			=> 'Konto Registrierung',
-	'NewAccountAdminCreated'	=> 'Der Benutzer %1 hat für dich ein Konto mit dem Benutzernamen "%2" angelegt. Um die Registrierung abzuschließen, besuchen die folgende URL (stelle sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setze dein eigenes Zugangskennwort:',
+	'NewAccountAdminCreated'	=> 'Der Benutzer %1 hat für dich ein Konto mit dem Benutzernamen "%2" angelegt. Um die Registrierung abzuschließen, besuche die folgende URL (stelle sicher, dass sie in einer einzigen Zeile eingegeben wurde) und setze dein eigenes Zugangskennwort:',
 	'NewAccountUsername'		=> 'Benutzername:',
 	'AccountLanguage'			=> 'Sprache:',
 	'NewAccountEmail'			=> 'E-Mail:',
@@ -301,14 +301,13 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> 'Quelltext',
-	'SourceTip'					=> 'Zeige den Wiki-Quelltext (no %%-formatters shown)',
+	'SourceTip'					=> 'Zeige den Wiki-Quelltext',
 	'SourceCopyToClipboard'		=> 'In die Zwischenablage speichern',
 	'SourceFor'					=> 'Quelltext der Seite %1',
-	'SourceForInfo'				=> 'You can view and copy the source of this page:',
 
 	// Groups action
 	'GroupsSearch'				=> 'Suche Gruppe',
-	'GroupsNoMatching'			=> 'Keine passenden Gruppen gefunden. Try a softer search criteria.',
+	'GroupsNoMatching'			=> 'Keine passenden Gruppen gefunden. Versuche es mit weniger strengen Suchkriterien.',
 	'GroupsFilter'				=> 'Suche',
 	'GroupsOpenProfile'			=> 'Profil anzeigen',
 	'GroupsName'				=> 'Gruppe',

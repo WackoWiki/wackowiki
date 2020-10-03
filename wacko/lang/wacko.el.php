@@ -301,10 +301,9 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> 'Κώδικας',
-	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
+	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'Αντιγραφή στο πρόχειρο',
 	'SourceFor'					=> 'Προβολή πηγαίου κώδικα για τη σελίδα %1',
-	'SourceForInfo'				=> 'Μπορείτε να δείτε και να αντιγράψετε τον κώδικα της σελίδας:',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',

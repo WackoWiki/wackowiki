@@ -301,10 +301,9 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> 'Source',
-	'SourceTip'					=> 'View the wiki-source (no %%-formatters shown)',
+	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'Kopier til udklipsholder',
 	'SourceFor'					=> 'Se kilde til %1',
-	'SourceForInfo'				=> 'Du kan se og kopiere kildeteksten for denne side :',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Grupper',

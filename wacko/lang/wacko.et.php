@@ -301,10 +301,9 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> 'Source',
-	'SourceTip'					=> 'Näita lehepõhja (no %%-formatters shown)',
+	'SourceTip'					=> 'Näita lehepõhja',
 	'SourceCopyToClipboard'		=> 'kopeerida lõikelauale',
 	'SourceFor'					=> 'Lehekülje %1 lähteteksti vaatamine',
-	'SourceForInfo'				=> 'Saad vaadata ja kopeerida selle lehekülje lähteteksti.',
 
 	// Groups action
 	'GroupsSearch'				=> 'Otsi gruppe',
