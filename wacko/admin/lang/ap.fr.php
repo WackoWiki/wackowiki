@@ -1075,7 +1075,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'Utilisateur ajouté',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'EditButton'			=> 'Éditer',
+	'EditButton'				=> 'Éditer',
 	'UserEnabled'				=> 'En fonction',
 	'UsersAddNew'				=> 'Ajouter un utilisateur',
 	'UsersDelete'				=> 'Êtes-vous sûr de vouloir supprimer l\'utilisateur %1 ?',

@@ -1075,7 +1075,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'EditButton'			=> 'Szerkesztés',
+	'EditButton'				=> 'Szerkesztés',
 	'UserEnabled'				=> 'Engedélyezett',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Biztosan el akarja távolítani az %1 felhasználót?',

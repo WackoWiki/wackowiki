@@ -12,7 +12,7 @@ $wacko_translation = [
 	'SaveButton'				=> 'Speichern',
 	'UpdateButton'				=> 'Aktualisieren',
 	'CancelButton'				=> 'Abbrechen',
-	'ConvertButton'				=> 'Convert',
+	'ConvertButton'				=> 'Konvertieren',
 
 	'FormInvalid'				=> 'Das übermittelte Formular war ungültig. Versuche erneut, das Formular abzusenden.',
 
@@ -28,7 +28,7 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Registrierung eines neuen Benutzers:',
-	'RegistrationRealName'		=> 'Show Name',
+	'RegistrationRealName'		=> 'Voller Name',
 	'RegistrationPassword'		=> 'Passwort',
 	'RegistrationButton'		=> 'Benutzer registrieren',
 	'RegistrationUserNameOwned'	=> 'Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.',
@@ -87,7 +87,7 @@ $wacko_translation = [
 	'ClearCookies'				=> 'Alle Cookies löschen',
 	'BindSessionIp'				=> 'Sitzung an die IP-Adresse binden',
 	'BindSessionIpOn'			=> 'aktiviert (aktuelle IP %1)',
-	'TrafficProtection'			=> 'Traffic Protection',
+	'TrafficProtection'			=> 'Verbindungssicherheit',
 	'SessionEnds'				=> 'Die aktuelle Sitzung endet',
 	'LastVisit'					=> 'Dein letzter Besuch',
 
@@ -96,7 +96,7 @@ $wacko_translation = [
 	'LoginAttemptsExceeded'		=> 'Du hast die maximal zulässige Zahl von Anmeldeversuchen überschritten.<br>Du musst nun deinen Benutzernamen und dein Passwort erneut eingeben sowie eine Sicherheitsabfrage beantworten.',
 
 	// session notice
-	'IPAddressChanged'			=> 'IP address changed to %1 (was %2)',
+	'IPAddressChanged'			=> 'IP-Adresse hat sich geändert zu %1 (war %2)',
 
 	'SessionReplay'				=> 'Die Sitzung wurde aufgrund von Wiederholung beendet.',
 	'SessionObsolete'			=> 'Die Sitzung ist veraltet.',
