@@ -22,9 +22,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'グループ',				'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'ユーザー',				'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'ヘルプ',				'',						$page_lang, 'Admins', false, false);
+	insert_page($config['help_page'],			'ヘルプ',					'',						$page_lang, 'Admins', false, false);
 	insert_page($config['terms_page'],			'利用規約',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'プライバシーについて',	'',						$page_lang, 'Admins', false, false);
+	insert_page($config['privacy_page'],		'プライバシーについて',		'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'アカウント作成',			'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'パスワード',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
@@ -35,14 +35,13 @@ if ($config['language'] == $page_lang)
 	insert_page($config['changes_page'],		'最近の変化',				'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, '変化');
 	insert_page($config['comments_page'],		'最近コメント',			'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'コメント');
 	insert_page($config['index_page'],			'ページインデックス',		'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'インデックス');
-	insert_page($config['random_page'],			'Random Page',			'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'ランダム');
+	insert_page($config['random_page'],			'ランダムページ',			'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'ランダム');
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Changes');
+	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, '変化');
 	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'コメント');
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'インデックス');
 	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'ランダム');
 }
-

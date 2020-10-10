@@ -29,8 +29,8 @@ $lang = [
 
 	'random_page'		=> '임의의문서로',
 	#'help_page'		=> '도움말',
-	#'terms_page'		=> 'Terms',
-	#'privacy_page'		=> 'Privacy',
+	#'terms_page'		=> '약관',
+	#'privacy_page'		=> '개인정보처리방침',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

@@ -45,4 +45,3 @@ else
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, '索引');
 	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, '随机条目');
 }
-

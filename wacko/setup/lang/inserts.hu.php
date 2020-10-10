@@ -23,7 +23,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['users_page'],			'Felhasználók',			'{{users}}',			$page_lang, 'Admins', false, false);
 
 	insert_page($config['help_page'],			'Segítség',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Terms',				'',						$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],			'Általános Szerződési Feltételek',	'',			$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],		'Adatvédelem',			'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
@@ -43,7 +43,5 @@ else
 	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Változtatások');
 	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Megjegyzések');
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
-	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Random');
-
+	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Véletlenszerű');
 }
-

@@ -27,7 +27,7 @@ $lang = [
 	'comments_page'		=> '最近コメント',
 	'index_page'		=> 'ページインデックス',
 
-	'random_page'		=> 'RandomPage',
+	'random_page'		=> 'ランダムページ',
 	#'help_page'		=> 'ヘルプ',
 	#'terms_page'		=> '利用規約',
 	#'privacy_page'		=> 'プライバシーについて',
