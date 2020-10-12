@@ -21,7 +21,7 @@ lang = {
 	Italic :				"Dőlt szöveg",
 	Underline :				"Aláhúzott szöveg",
 	Strikethrough :			"Áthúzott szöveg",
-	Small :					"Small",
+	Small :					"Kicsi",
 	Code :					"Forráskód",
 	Superscript :			"Felső index",
 	Subscript :				"Alsó index",

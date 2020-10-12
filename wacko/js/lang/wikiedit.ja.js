@@ -21,7 +21,7 @@ lang = {
 	Italic :				"イタリック",
 	Underline :				"下線",
 	Strikethrough :			"取り消し線",
-	Small :					"Small",
+	Small :					"小さい",
 	Code :					"等幅",
 	Superscript :			"上付き文字",
 	Subscript :				"添字",
@@ -43,7 +43,7 @@ lang = {
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
+	InsertTable :			"テーブルを挿入",
 
 	Link :					"リンク",
 	TextForLinking :		"Text for linking",

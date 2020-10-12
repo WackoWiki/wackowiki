@@ -21,7 +21,7 @@ lang = {
 	Italic :				"기울인 글씨",
 	Underline :				"밑줄 글씨",
 	Strikethrough :			"취소선 글씨",
-	Small :					"Small",
+	Small :					"작은",
 	Code :					"코드 글씨",
 	Superscript :			"위 첨자",
 	Subscript :				"아래 첨자",
@@ -43,7 +43,7 @@ lang = {
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
+	InsertTable :			"표 삽입",
 
 	Link :					"링크",
 	TextForLinking :		"Text for linking",

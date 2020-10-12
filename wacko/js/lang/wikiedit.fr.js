@@ -21,7 +21,7 @@ lang = {
 	Italic :				"Italique",
 	Underline :				"Soulignage",
 	Strikethrough :			"Barré",
-	Small :					"Small",
+	Small :					"Petit",
 	Code :					"Code",
 	Superscript :			"Exposant",
 	Subscript :				"Sous-script",

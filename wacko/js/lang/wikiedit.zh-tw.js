@@ -21,7 +21,7 @@ lang = {
 	Italic :				"斜體",
 	Underline :				"底線",
 	Strikethrough :			"刪除線",
-	Small :					"Small",
+	Small :					"小",
 	Code :					"程式碼",
 	Superscript :			"上標",
 	Subscript :				"下標",
@@ -43,7 +43,7 @@ lang = {
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
+	InsertTable :			"插入表格",
 
 	Link :					"連結",
 	TextForLinking :		"連結文字",
