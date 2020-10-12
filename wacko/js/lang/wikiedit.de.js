@@ -21,6 +21,7 @@ lang = {
 	Italic :				"Kursiv (Strg+I)",
 	Underline :				"Unterstrichen (Strg+U)",
 	Strikethrough :			"Durchgestrichen (Strg+Umschalt+S)",
+	Small :					"Klein",
 	Code :					"Quelltext",
 	Superscript :			"Hochgestellt",
 	Subscript :				"Tiefgestellt",

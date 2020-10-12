@@ -21,6 +21,7 @@ lang = {
 	Italic :				"Πλάγιο Κείμενο",
 	Underline :				"Υπογραμμισμένο Κείμενο",
 	Strikethrough :			"Διαγραμμισμένο Κείμενο",
+	Small :					"Small",
 	Code :					"Κείμενο κώδικα",
 	Superscript :			"Superscript",
 	Subscript :				"Subscript",

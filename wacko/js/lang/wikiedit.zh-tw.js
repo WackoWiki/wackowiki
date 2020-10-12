@@ -21,6 +21,7 @@ lang = {
 	Italic :				"斜體",
 	Underline :				"底線",
 	Strikethrough :			"刪除線",
+	Small :					"Small",
 	Code :					"程式碼",
 	Superscript :			"上標",
 	Subscript :				"下標",

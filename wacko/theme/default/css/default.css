@@ -1070,6 +1070,9 @@ a:target {
 .toolbar li.we-strike img {
 	background: url('../../../image/wikiedit/strike.svg') no-repeat;
 }
+.toolbar li.we-small img {
+	background: url('../../../image/wikiedit/small.svg') no-repeat;
+}
 .toolbar li.we-superscript img {
 	background: url('../../../image/wikiedit/superscript.svg') no-repeat;
 }
