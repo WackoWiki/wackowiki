@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{hashid}}
 
-// Import the Hashids class into the global namespace
+// import the Hashids class into the global namespace
 use Hashids\Hashids;
 
 if ($this->db->show_permalink == 1 || ($this->db->show_permalink == 2 && $this->get_user()) )
@@ -37,5 +37,4 @@ if ($this->db->show_permalink == 1 || ($this->db->show_permalink == 2 && $this->
 	// dbg('hashiding', $ids, '=>', $id);
 
 	$tpl->url = $this->href('', $id, '', '', '', false);
-
 }
