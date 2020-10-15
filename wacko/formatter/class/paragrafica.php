@@ -289,12 +289,18 @@ class Paragrafica
 		// 1. get all ^^ of this
 		$this->toc = [];
 		$what = preg_replace_callback( '!' .
-				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)" .	// 2=depth, 3=h-id, 4=name
+				// [2] = depth,
+				// [3] = h-id,
+				// [4] = name
+				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)" .
 					"|" .
-				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)" .												// 6=p-id
+				// [6] = p-id
+				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)" .
 					"|" .
-				"<\!--action:begin-->include\s+.*?page=\"([^\ ]+)\".*?(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .		// 7=tag, 8=notoc
-				// {{include page="TAG" notoc=1}}
+				// [7] = tag,
+				// [8] = notoc
+				"<\!--action:begin-->include\s+.*?page=\"([^\ ]+)\".*?(\s+notoc=\"?[^0]\"?)?.*?<\!--action:end-->" .
+				// {{include page="tag" notoc=1}}
 				"!ui", [&$this, 'add_toc_entry'], $what);
 
 		return $what;
@@ -306,8 +312,10 @@ class Paragrafica
 		if (!isset($matches[6])) $matches[6] = '';
 		if (!isset($matches[8])) $matches[8] = '';
 
+		// included page
 		if ((isset($matches[7])) && $matches[7] != '')
 		{
+			// notoc=0 (default)
 			if ($matches[8] == '')
 			{
 				$this->toc[] = [$this->wacko->unwrap_link(trim($matches[7], '"')), '(include)', 99999];

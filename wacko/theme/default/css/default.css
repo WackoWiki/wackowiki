@@ -2198,6 +2198,7 @@ table.forum td {
 
 /* system message ------------- */
 .sysmessage {
+	font-family: "Lucida Console", "Courier New", monospace;
 	background: rgba(51, 51, 51, 0.9) none repeat scroll 0 0;
 	bottom: 0;
 	color: #ccc;
@@ -2215,7 +2216,7 @@ table.forum td {
 }
 .marquee{
 	animation: marquee 50s linear infinite;
-	font-weight: 800;
+	/* font-weight: 800; */
 	white-space: nowrap;
 	box-sizing: border-box;
 	margin: 0 auto;

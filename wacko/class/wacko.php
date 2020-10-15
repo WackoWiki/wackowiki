@@ -5632,7 +5632,7 @@ class Wacko
 
 		if (($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
 		{
-			return (int) $page['owner_id'];
+			return (int) ($page['owner_id'] ?? null);
 		}
 	}
 

@@ -77,7 +77,7 @@ function admin_messages(&$engine, &$module)
 				<td>
 					<select id="system_message_type" name="system_message_type">
 <?php
-						$typs = ['info', 'warning', 'marquee'];
+						$typs = ['note', 'warning', 'marquee'];
 
 						foreach ($typs as $type)
 						{
