@@ -6,7 +6,7 @@ lang = {
 	SessionExpiredEditor :	"Your session has expired!\nYou\'ve been logged off due to long inactivity.\n1. Save your form edits to text file to prevent loss.\n2. Refresh the page.\n3. Log in again and re-submit.",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
+	HelpAbout :				"도움말 & 소개",
 	HelpFormatting :		"도움말",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",

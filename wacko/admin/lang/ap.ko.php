@@ -46,11 +46,11 @@ $ap_translation = [
 
 	// Generic
 	'Cancel'					=> '취소',
-	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
+	'Add'						=> '추가',
+	'Edit'						=> '편집',
+	'Remove'					=> '제거',
 	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
+	'Disabled'					=> '비활성화됨',
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
@@ -76,7 +76,7 @@ $ap_translation = [
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Appearance',
+		'name'		=> '보이기',
 		'title'		=> 'Appearance settings',
 	],
 
@@ -526,7 +526,7 @@ $ap_translation = [
 	'Csp'						=> 'Content-Security-Policy (CSP)',
 	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'CspModes'	=> [
-		'0'		=> 'disabled',
+		'0'		=> '비활성화됨',
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
