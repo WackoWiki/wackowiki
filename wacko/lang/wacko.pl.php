@@ -190,7 +190,7 @@ $wacko_translation = [
 	'DeleteText'				=> 'Usuń',
 	'AclText'					=> 'Prawa dostępu',
 	'AclTip'					=> 'Edytuj uprawnienia',
-	'EditPropertiesConfirm'		=> 'Czy na pewno opuścić stronę bez zapisywania wprowadzonych zmian?',
+
 	'PropertiesText'			=> 'Ustawienia',
 	'PropertiesTip'				=> 'Edytuj właściwości strony',
 	'EditTip'					=> 'Tę stronę możesz edytować.',

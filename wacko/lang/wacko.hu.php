@@ -190,7 +190,7 @@ $wacko_translation = [
 	'DeleteText'				=> 'Törlés',
 	'AclText'					=> 'Jogosultságok',
 	'AclTip'					=> 'Engedélyek szerkesztése',
-	'EditPropertiesConfirm'		=> 'Do you really want to leave without saving?',
+
 	'PropertiesText'			=> 'Tulajdonságok',
 	'PropertiesTip'				=> 'Az oldal tulajdonságainak szerkesztése',
 	'EditTip'					=> 'Az oldal szerkesztése.',

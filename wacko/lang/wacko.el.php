@@ -190,7 +190,7 @@ $wacko_translation = [
 	'DeleteText'				=> 'διαγραφή',
 	'AclText'					=> 'Επεξεργασία ACLs',
 	'AclTip'					=> 'Επεξεργασία δικαιωμάτων',
-	'EditPropertiesConfirm'		=> 'Θέλετε να φύγετε χωρίς να αποθηκεύσετε?',
+
 	'PropertiesText'			=> 'Επιλογές',
 	'PropertiesTip'				=> 'Επεξεργασία ιδιοτήτων',
 	'EditTip'					=> 'Πάτησε εδώ για να επεξεργαστείτε την σελίδα.',

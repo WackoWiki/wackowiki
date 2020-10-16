@@ -190,7 +190,7 @@ $wacko_translation = [
 	'DeleteText'				=> 'Slet',
 	'AclText'					=> 'Rediger tilladelser',
 	'AclTip'					=> 'Rediger Tilladelser',
-	'EditPropertiesConfirm'		=> 'Vil du ikke gemme ændringerne?',
+
 	'PropertiesText'			=> 'Egenskaber',
 	'PropertiesTip'				=> 'Rediger sideegenskaber',
 	'EditTip'					=> 'Klik her for at redigere siden.',

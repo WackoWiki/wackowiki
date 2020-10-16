@@ -190,7 +190,7 @@ $wacko_translation = [
 	'DeleteText'				=> 'Verwijder',
 	'AclText'					=> 'Bewerk ACL\'s (rechten)',
 	'AclTip'					=> 'Toestemming bewerken',
-	'EditPropertiesConfirm'		=> 'Wilt u afsluiten zonder te bewaren?',
+
 	'PropertiesText'			=> 'Eigenschappen',
 	'PropertiesTip'				=> 'Eigenschappen van de pagina bewerken',
 	'EditTip'					=> 'Klik om de pagina te bewerken.',

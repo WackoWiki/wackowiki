@@ -190,7 +190,7 @@ $wacko_translation = [
 	'DeleteText'				=> 'Delete',
 	'AclText'					=> 'Permissions',
 	'AclTip'					=> 'Edit Permissions',
-	'EditPropertiesConfirm'		=> 'Do you really want to leave without saving?',
+
 	'PropertiesText'			=> 'Properties',
 	'PropertiesTip'				=> 'Edit Page Properties',
 	'EditTip'					=> 'Edit this page.',

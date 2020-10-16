@@ -190,7 +190,7 @@ $wacko_translation = [
 	'DeleteText'				=> 'Kustuta',
 	'AclText'					=> 'Pääsuloend',
 	'AclTip'					=> 'Muuda õigusi',
-	'EditPropertiesConfirm'		=> 'Kas tõesti ei soovi muudatusi salvestada?',
+
 	'PropertiesText'			=> 'Omadused',
 	'PropertiesTip'				=> 'Redigeeri lehekülje omadusi',
 	'EditTip'					=> 'Lehe muutmiseks vajuta siia.',
