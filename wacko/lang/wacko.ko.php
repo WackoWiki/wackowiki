@@ -156,7 +156,7 @@ $wacko_translation = [
 	'ShowHideDetails'			=> '세부 사항',
 
 	'PrivacyPolicy'				=> '개인정보처리방침',
-	'TermsOfUse'				=> 'Terms of Use',
+	'TermsOfUse'				=> '서비스이용약관',
 	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of service of the site.',
 
 	'ShowComments'				=> 'Display comments / form',

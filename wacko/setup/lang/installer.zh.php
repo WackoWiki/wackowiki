@@ -86,6 +86,7 @@ $lang = [
 'config-site'					=> '设置网站',
 'SiteName'						=> 'Wiki Name',
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
+'SiteNameDefault'				=> '我的Wiki',
 'HomePage'						=> '主页',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> '首页',

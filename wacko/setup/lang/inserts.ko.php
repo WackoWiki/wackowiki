@@ -23,7 +23,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['users_page'],			'사용자',					'{{users}}',				$page_lang, 'Admins', false, false);
 
 	insert_page($config['help_page'],			'도움말',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'약관',					'',						$page_lang, 'Admins', false, false);
+	insert_page($config['terms_page'],			'서비스이용약관',			'',						$page_lang, 'Admins', false, false);
 	insert_page($config['privacy_page'],		'개인정보처리방침',			'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'계정 만들기',				'{{registration}}',		$page_lang, 'Admins', false, false);

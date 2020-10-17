@@ -86,6 +86,7 @@ $lang = [
 'config-site'					=> 'Configuration du site',
 'SiteName'						=> 'Nom Wiki',
 'SiteNameDesc'					=> 'Choisissez le nom de votre site Wiki.',
+'SiteNameDefault'				=> 'MonWiki',
 'HomePage'						=> 'Page d’accueil',
 'HomePageDesc'					=> 'Choissez le nom de votre page d’accueil. Ce doit être un <a href="https://wackowiki.org/doc/Doc/Français/NomWiki" title="Voir l’aide" target="_blank">NomWiki</a>.',
 'HomePageDefault'				=> 'PagePrincipale',

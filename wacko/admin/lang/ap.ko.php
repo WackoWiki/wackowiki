@@ -15,8 +15,8 @@ $ap_translation = [
 		'users'			=> 'Users',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'extension'		=> '확장 기능',
+		'database'		=> '데이터베이스',
 	],
 
 	// Admin panel
@@ -83,7 +83,7 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'Email',
-		'title'		=> 'Email settings',
+		'title'		=> '이메일 설정',
 	],
 
 	// Config Filter module

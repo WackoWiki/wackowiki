@@ -86,8 +86,8 @@ $lang = [
 */
 'config-site'					=> 'Παραμετροποίηση Site',
 'SiteName'						=> 'Όνομα του Wiki',
-'SiteNameDesc'					=> 'Παρακαλώ εισάγεται ένα όνομα για το Wiki site σας, αυτό πρέπει να είναι
-της μορφής <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'SiteNameDesc'					=> 'Παρακαλώ εισάγεται ένα όνομα για το Wiki site σας.',
+'SiteNameDefault'				=> 'MyWikiSite',
 'HomePage'						=> 'Αρχική Σελίδα',
 'HomePageDesc'					=> 'Πληκτρολογήστε το όνομα που θέλετε να έχει η αρχική σελίδα σας, αυτή θα είναι η προκαθορισμένη σελίδα που θα βλέπουν οι χρήστες όταν επισκέπτονται το site σας και θα πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> 'HomePage',

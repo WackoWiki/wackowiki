@@ -86,6 +86,7 @@ $lang = [
 'config-site'					=> 'Configuración del sitio',
 'SiteName'						=> 'Nombre Wiki',
 'SiteNameDesc'					=> 'Por favor ingrese el nombre de su sitio Wiki.',
+'SiteNameDefault'				=> 'MyWikiSite',
 'HomePage'						=> 'Página de inicio',
 'HomePageDesc'					=> 'Ingrese el nombre de la página de inicio del sitio, esto será la página por defecto que los visitantes verán y debería ser escrito de manera <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">NombreWiki</a>.',
 'HomePageDefault'				=> 'HomePage',

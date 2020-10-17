@@ -29,7 +29,7 @@ $lang = [
 
 	'random_page'		=> '임의의문서로',
 	#'help_page'		=> '도움말',
-	#'terms_page'		=> '약관',
+	#'terms_page'		=> '서비스이용약관',
 	#'privacy_page'		=> '개인정보처리방침',
 
 	// time
@@ -44,18 +44,18 @@ $lang = [
 'Title'							=> 'WackoWiki 설치',
 'Continue'						=> '계속',
 'Back'							=> '뒤로',
-'Recommended'					=> 'recommended',
+'Recommended'					=> '권장',
 'InvalidAction'					=> 'Invalid action',
 
 /*
    Language Selection Page
 */
-'lang'							=> 'Language Configuration',
+'lang'							=> '언어 설정',
 'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
 'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
 'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
-'LangDesc'						=> 'Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.',
+'LangDesc'						=> '설치 과정에서 사용할 언어를 선택하세요. This language will also be used as the default language of your WackoWiki installation.',
 
 /*
    System Requirements Page
@@ -84,21 +84,22 @@ $lang = [
    Site Config Page
 */
 'config-site'					=> 'Site Configuration',
-'SiteName'						=> 'Wiki Name',
-'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
+'SiteName'						=> '위키 이름',
+'SiteNameDesc'					=> '사이트 이름을 입력하세요.',
+'SiteNameDefault'				=> '내위키',
 'HomePage'						=> '홈페이지',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> '홈페이지',
 'MultiLang'						=> '다국어 모드',
 'MultiLangDesc'					=> 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial menu items for all languages available in distribution.',
-'AllowedLang'					=> 'Allowed Languages',
+'AllowedLang'					=> '허용되는 언어',
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
-'Admin'							=> 'Admin Name',
+'Admin'							=> '관리자 이름',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
-'Password'						=> 'Admin Password',
+'Password'						=> '관리자 비밀번호',
 'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
-'Password2'						=> 'Repeat Password:',
-'Mail'							=> 'Admin Email Address',
+'Password2'						=> '비밀번호 확인:',
+'Mail'							=> '관리자 이메일 주소',
 'MailDesc'						=> 'Enter the admins email address.',
 'Base'							=> 'Base URL',
 'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
@@ -106,7 +107,7 @@ $lang = [
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> '사용:',
 'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
-'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
+'ErrorAdminPasswordMismatch'	=> '입력한 비밀번호 두 개가 일치하지 않습니다!.',
 'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
 'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
@@ -139,11 +140,11 @@ $lang = [
 'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
 'DbCharset'						=> '문자셋',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
-'DbEngine'						=> 'Engine',
+'DbEngine'						=> '저장소 엔진',
 'DbEngineDesc'					=> 'The database engine you want to use.',
-'DbHost'						=> 'Host',
+'DbHost'						=> '데이터베이스 호스트',
 'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
-'DbPort'						=> 'Port (Optional)',
+'DbPort'						=> '포트 (선택 과목)',
 'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
 'Db'							=> '데이터베이스 이름',
 'DbDesc'						=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
@@ -152,7 +153,7 @@ $lang = [
 'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
 'DbPassword'					=> '암호',
 'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',
-'Prefix'						=> 'Table Prefix',
+'Prefix'						=> '테이블 접두어',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysql, mysqli or pdo extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
 'DeleteTables'					=> 'Delete Existing Tables?',

@@ -41,10 +41,10 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'WackoWiki Installation',
-'Continue'						=> 'Continue',
-'Back'							=> 'Back',
-'Recommended'					=> 'recommended',
+'Title'							=> 'WackoWiki のインストール',
+'Continue'						=> '続行',
+'Back'							=> '戻る',
+'Recommended'					=> '推奨',
 'InvalidAction'					=> 'Invalid action',
 
 /*
@@ -86,6 +86,7 @@ $lang = [
 'config-site'					=> 'Site Configuration',
 'SiteName'						=> 'Wiki Name',
 'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
+'SiteNameDefault'				=> 'マイウィキ',
 'HomePage'						=> 'ホームページ',
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> 'ホームページ',
@@ -97,7 +98,7 @@ $lang = [
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'Password'						=> 'Admin Password',
 'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
-'Password2'						=> 'Repeat Password:',
+'Password2'						=> 'パスワードの再入力:',
 'Mail'							=> 'Admin Email Address',
 'MailDesc'						=> 'Enter the admins email address.',
 'Base'							=> 'Base URL',
@@ -106,7 +107,7 @@ $lang = [
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> 'Enabled:',
 'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
-'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
+'ErrorAdminPasswordMismatch'	=> '入力された2つのパスワードが一致しません。',
 'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
 'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 

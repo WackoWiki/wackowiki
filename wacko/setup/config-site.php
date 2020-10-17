@@ -39,7 +39,7 @@ write_config_hidden_nodes([
 ?>
 	<label class="label_top" for="site_name"><?php echo $lang['SiteName'];?></label>
 	<p class="notop"><?php echo $lang['SiteNameDesc'];?></p>
-	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['site_name']; ?>" class="text_input" required>
+	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['is_update'] ? $config['site_name'] : ($lang['SiteNameDefault'] ?? $config['site_name']); ?>" class="text_input" required>
 <?php
 if ($config['is_update'] == false)
 {
