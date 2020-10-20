@@ -358,6 +358,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> '前のリビジョン',
 	'NextEdit'					=> '次のリビジョン',
 
+	'Diff'						=> '差分',
+	'PreviousVersion'			=> '古い版',
+	'LatestVersion'				=> '最新版',
+	'NextVersion'				=> '新しい版',
+
 	'ShowDifferencesButton'		=> '差分を表示',
 	'CancelDifferencesButton'	=> 'キャンセルし、ページに戻ります',
 	'Comparison'				=> 'Difference between revisions for %1',
@@ -497,7 +502,7 @@ $wacko_translation = [
 	'ListMyWatches'				=> 'List of watched pages',
 	'ListMyChangesWatches'		=> 'Changes among watched pages',
 	'SeeListOfPages'			=> 'See a list of pages you own (MyPages) and pages you\'ve edited (MyChanges).',
-	'AddBookmark'				=> 'Add current page to Bookmarks',
+	'AddBookmark'				=> 'Add current page to bookmarks',
 	'RemoveBookmark'			=> 'Remove from bookmarks',
 
 	'YourLanguage'				=> '言語を選択する',

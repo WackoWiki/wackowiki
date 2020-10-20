@@ -358,6 +358,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> '前一修订版',
 	'NextEdit'					=> '后一修订版',
 
+	'Diff'						=> '差异',
+	'PreviousVersion'			=> '上一修订',
+	'LatestVersion'				=> '最后版本',
+	'NextVersion'				=> '下一修订',
+
 	'ShowDifferencesButton'		=> '查看差异',
 	'CancelDifferencesButton'	=> 'Cancel and return to page',
 	'Comparison'				=> 'Difference between revisions for %1',
@@ -497,7 +502,7 @@ $wacko_translation = [
 	'ListMyWatches'				=> 'List of watched pages',
 	'ListMyChangesWatches'		=> 'Changes among watched pages',
 	'SeeListOfPages'			=> 'See a list of pages you own (MyPages) and pages you\'ve edited (MyChanges).',
-	'AddBookmark'				=> 'Add current page to Bookmarks',
+	'AddBookmark'				=> 'Add current page to bookmarks',
 	'RemoveBookmark'			=> 'Remove from bookmarks',
 
 	'YourLanguage'				=> '选择您的语言',

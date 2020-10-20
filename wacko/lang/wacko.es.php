@@ -358,6 +358,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Ir a diferencia anterior',
 	'NextEdit'					=> 'Ir a siguiente diferencia',
 
+	'Diff'						=> 'difs.',
+	'PreviousVersion'			=> 'Revisión anterior',
+	'LatestVersion'				=> 'Revisión actual',
+	'NextVersion'				=> 'Revisión siguiente',
+
 	'ShowDifferencesButton'		=> 'Mostrar Differencias',
 	'CancelDifferencesButton'	=> 'Vuelta al Nodo/ Cancelar',
 	'Comparison'				=> 'Diferencia entre revisiones de %1',

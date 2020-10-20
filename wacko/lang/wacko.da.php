@@ -358,6 +358,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Gå til forrige forskel',
 	'NextEdit'					=> 'Gå til næste forskel',
 
+	'Diff'						=> 'forskel',
+	'PreviousVersion'			=> 'Ældre version',
+	'LatestVersion'				=> 'Nuværende version',
+	'NextVersion'				=> 'Nyere version',
+
 	'ShowDifferencesButton'		=> 'Vis ændringer',
 	'CancelDifferencesButton'	=> 'Tilbage til noden / Fortryd',
 	'Comparison'				=> 'Sammenligning for %1',

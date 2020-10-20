@@ -359,6 +359,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Предыдущая правка',
 	'NextEdit'					=> 'Следующая правка',
 
+	'Diff'						=> 'разн.',
+	'PreviousVersion'			=> 'Предыдущая',
+	'LatestVersion'				=> 'Текущая версия',
+	'NextVersion'				=> 'Следующая',
+
 	'ShowDifferencesButton'		=> 'Сравнить',
 	'CancelDifferencesButton'	=> 'Вернуться / Отмена',
 	'Comparison'				=> 'Сравнение версий %1',

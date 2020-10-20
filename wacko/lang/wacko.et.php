@@ -358,6 +358,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Vanem muudatus',
 	'NextEdit'					=> 'Uuem muudatus',
 
+	'Diff'						=> 'erin',
+	'PreviousVersion'			=> 'Vanem redaktsioon',
+	'LatestVersion'				=> 'Viimane redaktsiooni',
+	'NextVersion'				=> 'Uuem redaktsioon',
+
 	'ShowDifferencesButton'		=> 'Näita erinevusi',
 	'CancelDifferencesButton'	=> 'Tagasi / Katkesta',
 	'Comparison'				=> 'võrdle %1',

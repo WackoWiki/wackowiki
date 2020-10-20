@@ -358,6 +358,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> '이전 판',
 	'NextEdit'					=> '다음 판',
 
+	'Diff'						=> '차이',
+	'PreviousVersion'			=> '이전 판',
+	'LatestVersion'				=> '최신판',
+	'NextVersion'				=> '다음 판',
+
 	'ShowDifferencesButton'		=> '변경 사항 보기',
 	'CancelDifferencesButton'	=> '취소하고 페이지로 돌아 가기',
 	'Comparison'				=> 'Difference between revisions for %1',
@@ -497,7 +502,7 @@ $wacko_translation = [
 	'ListMyWatches'				=> 'List of watched pages',
 	'ListMyChangesWatches'		=> 'Changes among watched pages',
 	'SeeListOfPages'			=> 'See a list of pages you own (MyPages) and pages you\'ve edited (MyChanges).',
-	'AddBookmark'				=> 'Add current page to Bookmarks',
+	'AddBookmark'				=> 'Add current page to bookmarks',
 	'RemoveBookmark'			=> 'Remove from bookmarks',
 
 	'YourLanguage'				=> '언어 선택',
@@ -833,7 +838,7 @@ $wacko_translation = [
 	'FileDesc'					=> '설명',
 	'UploadForbidden'			=> 'You are not allowed to upload files here.',
 	'UploadNoFile'				=> 'There was not file in form, for some reason.',
-	'UploadMaxSizeReached'		=> 'File size is over allowed limit!',
+	'UploadMaxSizeReached'		=> '파일 크기가 허용 한도를 초과했습니다!',
 	'UploadDirNotWritable'		=> 'File directory is not writable!',
 	'UploadNotAPicture'			=> 'There is allowed to upload pictures only, and what do you trying to upload?',
 	'UploadMaxFileQuota'		=> 'You have reached your upload limit, this file can not be uploaded',

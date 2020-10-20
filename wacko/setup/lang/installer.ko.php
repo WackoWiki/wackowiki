@@ -83,7 +83,7 @@ $lang = [
 /*
    Site Config Page
 */
-'config-site'					=> 'Site Configuration',
+'config-site'					=> '사이트 구성',
 'SiteName'						=> '위키 이름',
 'SiteNameDesc'					=> '사이트 이름을 입력하세요.',
 'SiteNameDefault'				=> '내위키',

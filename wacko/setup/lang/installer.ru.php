@@ -86,7 +86,7 @@ $lang = [
 'config-site'					=> 'Настройки сайта',
 'SiteName'						=> 'Название Wiki',
 'SiteNameDesc'					=> 'Пожалуйста, введите имя вашего сайта Wiki.',
-'SiteNameDefault'				=> 'MyWikiSite',
+'SiteNameDefault'				=> 'МояВики',
 'HomePage'						=> 'Главная страница',
 'HomePageDesc'					=> 'Введите имя домашней страницы — это будет страница по умолчанию, пользователи увидят её первой при посещении сайта; имя должно <a href="https://wackowiki.org/doc/Doc/Русский/ВикиИмя" title="View Help" target="_blank">ВикиИменем</a>.',
 'HomePageDefault'				=> 'Главная',

@@ -358,6 +358,11 @@ $wacko_translation = [
 	'PreviousEdit'				=> 'Régebbi szerkesztés',
 	'NextEdit'					=> 'Újabb szerkesztés',
 
+	'Diff'						=> 'eltér',
+	'PreviousVersion'			=> 'Régebbi változat',
+	'LatestVersion'				=> 'Aktuális változat ',
+	'NextVersion'				=> 'Újabb változat',
+
 	'ShowDifferencesButton'		=> 'Összehasonlítás módja',
 	'CancelDifferencesButton'	=> 'Megszakítás és visszatérés az oldal',
 	'Comparison'				=> 'Comparison for %1',
