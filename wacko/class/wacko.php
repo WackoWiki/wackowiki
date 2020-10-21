@@ -6614,7 +6614,7 @@ class Wacko
 		if (($days = $this->db->keep_deleted_time) > 0
 			&& $now > $this->db->maint_last_delpages)
 		{
-			list($pages, ) = $this->load_deleted_pages(1000, 0);
+			[$pages, ] = $this->load_deleted_pages(1000, 0);
 
 			$remove	= [];
 			$past	= $now - DAYSECS * $days;

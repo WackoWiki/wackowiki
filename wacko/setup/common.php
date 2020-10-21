@@ -15,7 +15,7 @@ function my_location()
 		$config['base_url'] =	str_replace('http://', 'https://', $config['base_url']);
 	}
 
-	list($url, ) = explode('?', $config['base_url']);
+	[$url, ] = explode('?', $config['base_url']);
 
 	return $url;
 }

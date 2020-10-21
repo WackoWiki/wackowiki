@@ -63,7 +63,7 @@ class Feed
 		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
 		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
-		if (list ($pages, $pagination) = $this->engine->load_changed())
+		if ([$pages, $pagination] = $this->engine->load_changed())
 		{
 			foreach ($pages as $i => $page)
 			{

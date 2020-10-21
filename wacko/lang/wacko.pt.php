@@ -359,9 +359,9 @@ $wacko_translation = [
 	'NextEdit'					=> 'Ver a alteração posterior',
 
 	'Diff'						=> 'dif',
-	'PreviousVersion'			=> 'Previous revision',
-	'LatestVersion'				=> 'Latest revision',
-	'NextVersion'				=> 'Next revision',
+	'PreviousVersion'			=> 'Versão anterior',
+	'LatestVersion'				=> 'Versão mais recente',
+	'NextVersion'				=> 'Seguinte versão',
 
 	'ShowDifferencesButton'		=> 'Mostrar Diferenças',
 	'CancelDifferencesButton'	=> 'Voltar ao Nó (Node) / Cancelar',

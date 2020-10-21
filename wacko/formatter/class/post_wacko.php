@@ -25,7 +25,7 @@ class PostWacko
 		// forced links ((link link == desc desc))
 		if (preg_match('/^<!--link:begin-->([^\n]+)==([^\n]*)<!--link:end-->$/u', $thing, $matches))
 		{
-			list (, $url, $text) = $matches;
+			[, $url, $text] = $matches;
 
 			if ($url)
 			{
@@ -42,7 +42,7 @@ class PostWacko
 		// image links
 		else if (preg_match('/^<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->$/u', $thing, $matches))
 		{
-			list (, $url, $img) = $matches;
+			[, $url, $img] = $matches;
 
 			if ($url && $img)
 			{

@@ -872,7 +872,7 @@ class WackoFormatter
 		else if (  preg_match('/^\(\?(.+?)(==|\|\|)(.*)\?\)$/u', $thing, $matches)
 				|| preg_match('/^\(\?(\S+)(\s+(.+))?\?\)$/u', $thing, $matches))
 		{
-			list (, $def, ,$text) = $matches;
+			[, $def, , $text] = $matches;
 
 			if ($def)
 			{

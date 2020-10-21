@@ -194,13 +194,17 @@ function admin_maint_resync(&$engine, &$module)
 				$engine->sess->resync_limit	= (in_array($page_limit, [10, 20, 30, 50, 100, 200, 300, 500])) ? $page_limit : 30;
 			}
 
-			$limit		= $engine->sess->resync_limit;
-			$recompile	= 0;
-			$redirects	= 10;
+			$limit							= $engine->sess->resync_limit;
+			$engine->sess->resync_batch		= $engine->sess->resync_batch ?? 1;
+			$recompile						= 0;
+			$redirects						= 10;
 
 			@set_time_limit(1800);
 
-			if (isset($_POST['recompile_page']) && $_POST['recompile_page'] == 1) $recompile = true;
+			if (isset($_POST['recompile_page']) && $_POST['recompile_page'] == 1)
+			{
+				$recompile = true;
+			}
 
 			if (isset($_REQUEST['i']))
 			{
@@ -236,7 +240,7 @@ function admin_maint_resync(&$engine, &$module)
 			"ORDER BY a.tag " .
 			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
-				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . $i . " #########################################\n\n";
+				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . ($i + 1) . " #########################################\n\n";
 
 				foreach ($pages as $n => $page)
 				{
@@ -250,6 +254,9 @@ function admin_maint_resync(&$engine, &$module)
 					$engine->db->allow_rawhtml		= ($page['comment_on_id'] ? $page['parent_allow_rawhtml']		: $page['allow_rawhtml']);
 					$engine->db->disable_safehtml	= ($page['comment_on_id'] ? $page['parent_disable_safehtml']	: $page['disable_safehtml']);
 
+					// setting context
+					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_tag'] : $page['tag']);
+
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
@@ -258,7 +265,6 @@ function admin_maint_resync(&$engine, &$module)
 					}
 
 					// rendering links
-					$engine->context[++$engine->current_context] = ($page['comment_on_id'] ? $page['comment_on_tag'] : $page['tag']);
 					$engine->update_link_table($page['page_id'], $page['body_r']);
 					$engine->current_context--;
 				}
