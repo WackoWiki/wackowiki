@@ -68,7 +68,7 @@ if ($_page)
 	}
 	else
 	{
-		if ($toc = $this->build_toc($context, $start_depth, $end_depth, $numerate, $link))
+		if ($toc = $this->build_toc($context, $start_depth, $end_depth, $link))
 		{
 			// ---------------------- toc numeration ------------------------
 			// find out which numbers are where

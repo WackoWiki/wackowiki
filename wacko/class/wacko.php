@@ -6963,7 +6963,7 @@ class Wacko
 		$this->body_toc = implode('<h-end>', $toc) . '<h-end>';
 	}
 
-	function build_toc($tag, $from, $to, $numerate, $link = -1)
+	function build_toc($tag, $from, $to, $link = -1)
 	{
 		$_toc = [];
 
@@ -7004,7 +7004,7 @@ class Wacko
 						if (!($toc_item[0] == $this->tag))
 						{
 							array_push($this->toc_context, $toc_item[0]);
-							$_toc = array_merge($_toc, $this->build_toc($toc_item[0], $from, $to, $numerate, $link));
+							$_toc = array_merge($_toc, $this->build_toc($toc_item[0], $from, $to, $link));
 							array_pop($this->toc_context);
 						}
 					}
