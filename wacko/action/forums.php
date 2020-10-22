@@ -46,7 +46,8 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 			"FROM " . $this->db->table_prefix . "page AS p, " .
 					  $this->db->table_prefix . "acl AS a " .
 			"WHERE p.page_id = a.page_id " .
-				"AND a.privilege = 'comment' AND a.list = '' ";
+				"AND a.privilege = 'comment' " .
+				"AND a.list = '' ";
 
 	if (!isset($subforum))
 	{
@@ -157,18 +158,18 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 					$tpl->closed	= true;
 				}
 
-				if (isset($user['last_mark'])
-					&& $comment['user_name'] != $user['user_name']
-					&& $comment['created'] > $user['last_mark'])
-				{
-					$tpl->updated	= true;
-				}
-
 				$tpl->link			= $this->link('/' . $forum['tag'], '', $forum['title'], '', 0, '');
 				$tpl->description	= $forum['description'];
 
 				if ($comment)
 				{
+					if (isset($user['last_mark'])
+						&& $comment['user_name'] != $user['user_name']
+						&& $comment['created'] > $user['last_mark'])
+					{
+						$tpl->updated	= true;
+					}
+
 					$tpl->enter('c_');
 
 					$tpl->comment	= $comment;
@@ -185,7 +186,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 						$tpl->title	= $comment['title'];
 					}
 
-					$tpl->leave();
+					$tpl->leave(); // c_
 				}
 				else
 				{
