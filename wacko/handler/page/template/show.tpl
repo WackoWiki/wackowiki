@@ -8,7 +8,9 @@
 		[= n _ =
 			[ ' message ' ]
 		=]
-
+		[= nav _ =
+			[ ' a revmeta ' ]
+		=]
 		[ ' restore ' ]
 		[ ' reedit ' ]
 
@@ -57,3 +59,45 @@
 	</form>
 </div>
 
+[= revmeta =]
+<!--<div class="msg notice">--><div class="msg notice">
+[= prev _ =
+	(<a href="[ ' diff ' ]">[ ' _t: Diff ' ]</a>) 
+	<a href="[ ' href ' ]">← [ ' _t: PreviousVersion ' ]</a> 
+	| 
+=]
+[= latest _ =
+	<a href="[ ' href ' ]">[ ' _t: LatestVersion ' ]</a> 
+	(<a href="[ ' diff ' ]">[ ' _t: Diff ' ]</a>) 
+=]
+[= next _ =
+	| 
+	<a href="[ ' href ' ]">[ ' _t: NextVersion ' ] →</a> 
+	(<a href="[ ' diff ' ]">[ ' _t: Diff ' ]</a>)
+=]
+<br>
+<div class="diffdown">
+	<span>[ ' version ' ]</span>
+	<a href="[ ' href ' ]">
+		[ ' modified | time_formatted ' ]
+		<span class="dropdown-arrow">▼</span>
+	</a>
+	<div class="diffdown-content">
+		[= r _ =
+			<a href="[ ' href ' ]" [ ' class ' ]>
+				<span><strong>[ ' version ' ]</strong></span>
+				[ ' modified | time_formatted ' ]
+				[ ' username ' ]
+				[ ' editnote | enclose " [" "]" ' ]
+			</a>
+		=]
+	</div><br>
+	[ ' username ' ]<br>
+	[= m _ =
+		<abbr class="minoredit" title="[ ' _t: EditMinor ' ]">[ ' minor ' ]</abbr>
+	=]
+	[= n _ =
+		<span class="editnote">[ ' note | enclose " [" "]" ' ]</span>
+	=]
+</div>
+<!--</div>--></div>

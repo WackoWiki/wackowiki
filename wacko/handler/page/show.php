@@ -96,7 +96,7 @@ if ($this->has_access('read'))
 				}
 				else
 				{
-					// reedit form
+					// re-edit form
 					$tpl->reedit_href		= $this->href('edit', '', ['revision_id' => (int) $this->page['revision_id']]);
 					$tpl->reedit_modified	= $latest['modified'];
 					$tpl->reedit_pageid		= $this->page['page_id'];
@@ -107,6 +107,78 @@ if ($this->has_access('read'))
 			{
 				$tpl->n_message = $this->show_message($message, 'revision-info', false);
 			}
+
+			// revision navigation
+			$tpl->enter('nav_');
+
+			[$revisions, $pagination] = $this->load_revisions($this->page['page_id'], 0, $this->is_admin());
+
+			$revision_menu = function ($side) use ($revisions, &$tpl)
+			{
+				$tpl->enter($side . '_');
+
+				$tpl->href		= $this->href('', '', ($this->page['revision_id'] > 0? ['revision_id' => $this->page['revision_id']] : ''));
+				$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $this->page['version_id'] . '</strong>');
+				$tpl->modified	= $this->page['modified'];
+				$tpl->username	= $this->user_link($this->page['user_name'], true, true);
+				$tpl->n_note	= $this->page['edit_note'] ?: null;
+				$tpl->m_minor	= $this->page['minor_edit'] ? 'm' : null;
+
+				// previous & next revision navigation
+				$revision_id	= $this->page['revision_id'];
+				$key			= array_search($revision_id, array_column($revisions, 'revision_id'));
+				$diffmode		= $this->db->default_diff_mode;
+
+				if (array_key_exists($key + 1, $revisions))
+				{
+					$tpl->prev_href	= $this->href('', '', ['revision_id' => $revisions[$key + 1]['revision_id']]);
+					$tpl->prev_diff	= $this->href('diff', '', ['a' => $revisions[$key + 1]['revision_id'], 'b' => $this->page['revision_id'], 'diffmode' => $diffmode]);
+				}
+
+				if (array_key_exists($key, $revisions))
+				{
+					$tpl->latest_href	= $this->href('', '', ['revision_id' => 0]);
+					$tpl->latest_diff	= $this->href('diff', '', ['a' => $this->page['revision_id'], 'b' => 0, 'diffmode' => $diffmode]);
+				}
+
+				if (array_key_exists($key - 1, $revisions))
+				{
+					$tpl->next_href	= $this->href('', '', ['revision_id' => $revisions[$key - 1]['revision_id']]);
+					$tpl->next_diff	= $this->href('diff', '', ['a' => $this->page['revision_id'], 'b' => $revisions[$key - 1]['revision_id'], 'diffmode' => $diffmode]);
+				}
+
+				// dropdown navigation
+				$tpl->enter('r_');
+
+				foreach ($revisions as $r)
+				{
+					if ($r['revision_id'] == $this->page['revision_id'])
+					{
+						$href	= '#';
+						$class	= ' class="active"';
+					}
+					else
+					{
+						$params	= ['revision_id' => $r['revision_id']];
+						$href	= $this->href('', '', $params);
+						$class	= '';
+					}
+
+					$tpl->href		= $href;
+					$tpl->class		= $class;
+					$tpl->version	= $r['version_id'];
+					$tpl->modified	= $r['modified'];
+					$tpl->username	= $r['user_name'];
+					$tpl->editnote	= $r['edit_note'] ?: null;
+				}
+
+				$tpl->leave();	// r_
+				$tpl->leave();	// side_
+			};
+
+			$revision_menu('a');
+
+			$tpl->leave();	// nav
 		}
 
 		// count page hit (we don't count for page owner)
