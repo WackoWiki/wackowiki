@@ -60,7 +60,7 @@ $width			= $this->db->img_max_thumb_width; // default: 150
 
 if (!isset($page))		$page		= '';
 if (!isset($title))		$nomark		= 1;
-if (!isset($target))	$target		= '';
+if (!isset($target))	$target		= 0;
 if (!isset($table))		$table		= 1;
 if (!isset($caption))	$caption	= 1;
 if (!isset($nomark))	$nomark		= 0;
@@ -305,7 +305,7 @@ if ($can_view)
 						#$tpl->title			= $file_description;
 						$tpl->alt			= $file_description;
 						#$tpl->token			= $param_token;
-						$tpl->datafancybox	= ' data-fancybox="'. $param_token .'"';
+						$tpl->datafancybox	= ' data-fancybox="'. $param_token . '"';
 						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
 					}
 					else
@@ -386,6 +386,11 @@ if ($can_view)
 			if (array_key_exists($key - 1, $files))
 			{
 				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key - 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+			}
+
+			if (array_key_exists($key - 1, $files) && array_key_exists($key + 1, $files))
+			{
+				$tpl->separator	= true;
 			}
 
 			if (array_key_exists($key + 1, $files))

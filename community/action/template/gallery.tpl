@@ -76,9 +76,13 @@
 [= navigation =]
 <nav class="pagination">
 	[= prev _ =
-		<a href="[ ' href ' ]">« [ ' _t: Back ' ]</a> 
+		<a href="[ ' href ' ]">« [ ' _t: Back ' ]</a>
+	=]
+	[= separator _ =
+		[ ' nonstatic ' ]
+		 | 
 	=]
 	[= next _ =
-		| <a href="[ ' href ' ]">[ ' _t: Next ' ] »</a>
+		<a href="[ ' href ' ]">[ ' _t: Next ' ] »</a>
 	=]
 </nav>
