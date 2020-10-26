@@ -34,7 +34,7 @@ if ($this->is_admin()
 		$comment_on		= $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
 	}
 
-	if (@$_POST['_action'] === 'remove_page')
+	if (isset($_POST['_action']) && $_POST['_action'] === 'remove_page')
 	{
 		$dontkeep = (isset($_POST['dontkeep']) && $this->is_admin());
 

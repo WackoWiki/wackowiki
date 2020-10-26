@@ -950,8 +950,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Your message',
 	'YourMessageInfo'			=> 'Please note that you may enter only plain text. All markup will be removed before sending.',
 
-	'MessageLanguage'			=> 'Language',
-	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
 	'NoUser'					=> 'No user',

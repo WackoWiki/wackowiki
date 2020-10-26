@@ -932,8 +932,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Текст сообщения',
 	'YourMessageInfo'			=> 'Можно использовать только обычный текст. Вся разметка будет удалена перед отправкой.',
 
-	'MessageLanguage'			=> 'Язык',
-	'MessageLanguageInfo'		=> 'Выбрать язык сообщения',
 	'SendMail'					=> 'Отправить',
 
 	'NoUser'					=> 'нет пользователя',

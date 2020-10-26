@@ -338,7 +338,7 @@ class Polls
 
 		foreach ($vars as $var)
 		{
-			foreach ($ballot as $vote => $vote_id)
+			foreach ($ballot as $vote_id)
 			{
 				if ($var['v_id'] == $vote_id)
 				{
@@ -348,7 +348,6 @@ class Polls
 						"SET votes = " . (int) $new_votes . " " .
 						"WHERE poll_id = " . (int) $poll_id . " " .
 							"AND v_id = " . (int) $vote_id);
-//					$total++;
 				}
 			}
 		}

@@ -54,7 +54,6 @@ function admin_massemail(&$engine, &$module)
 
 		$mail_subject	= (string) ($_POST['mail_subject'] ?? '');
 		$mail_body		= (string) ($_POST['mail_body'] ?? '');
-		$language		= (string) ($_POST['language'] ?? '');
 
 		if (empty($mail_subject))
 		{
@@ -214,26 +213,6 @@ function admin_massemail(&$engine, &$module)
 				<td class="label"><label for="mail_body"><strong><?php echo $engine->_t('YourMessage');?>:</strong><br>
 					<small><?php echo $engine->_t('YourMessageInfo');?></small></label></td>
 				<td><textarea style="width:500px; height:200px;" id="mail_body" name="mail_body" required><?php echo Ut::html($mail_body);?></textarea></td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label"><label for="language"><strong><?php echo $engine->_t('MessageLanguage');?>:</strong><br>
-					<small><?php echo $engine->_t('MessageLanguageInfo');?></small></label></td>
-				<td>
-					<select id="language" name="language">
-<?php
-						$languages	= $engine->_t('LanguageArray');
-						$langs		= $engine->http->available_languages();
-
-						foreach ($langs as $lang)
-						{
-							echo '<option value="' . $lang . '" ' . ($engine->db->language == $lang ? 'selected' : '') . '>' . $languages[$lang] . ' (' . $lang . ')</option>';
-						}
-?>
-					</select>
-				</td>
 			</tr>
 		</table>
 		<br>

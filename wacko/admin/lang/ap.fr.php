@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Votre message',
 	'YourMessageInfo'			=> 'Le message ne doit contenir que du texte brut. Toutes les balises seront automatiquement supprimées.',
 
-	'MessageLanguage'			=> 'Langue',
-	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Envoyer',
 
 	'NoUser'					=> 'Aucun utilisateur',

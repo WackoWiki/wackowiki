@@ -118,10 +118,6 @@ function admin_tool_badbehavior(&$engine, &$module)
 
 	function bb2_summary(&$engine)
 	{
-		$bb_table		= $engine->db->table_prefix . 'bad_behavior';
-		$settings		= bb2_read_settings();
-		$where			= '';
-
 		echo $engine->form_open('bb2_manage', ['form_more' => 'setting=bb2_manage']);
 		?>
 

@@ -23,7 +23,7 @@ function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
 	{
 		// Anchor the beginning of the pattern with a lookahead
 		// to avoid crazy backtracking when words are longer than $width
-		$pattern = '/(?=\s)(.{1,' . $width . '})(?:\s|$)/uS';
+		$search = '/(?=\s)(.{1,' . $width . '})(?:\s|$)/uS';
 		$replace = '$1' . $break;
 	}
 

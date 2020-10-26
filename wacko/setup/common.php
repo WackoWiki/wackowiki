@@ -85,7 +85,6 @@ function available_languages()
 // database install
 function test($text, $condition, $error_text = '', $dblink = '')
 {
-	global $lang;
 	global $config;
 
 	echo '<li>' . $text . '   ' . output_image($condition);

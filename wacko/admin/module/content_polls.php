@@ -37,13 +37,10 @@ function admin_content_polls(&$engine, &$module)
 	$admin		= true; #$engine->is_admin();
 	$mode		= $module['mode'];
 	$mode_http	= '';
-	$mode_file	= ['mode' => $module['mode']];
 
 	// processing input
 	if ($admin === true)
 	{
-		#$xml = new Feed($engine);
-
 		// selected year for archived polls
 		if (!isset($_GET['year']))	$year	= date('Y');
 		else						$year	= $_GET['year'];
@@ -116,12 +113,10 @@ function admin_content_polls(&$engine, &$module)
 		{
 			$moderation = true;
 		}
-
-		unset($xml);
 	}
 
 	// lists output
-	if ($admin === true && isset($install) === false)
+	if ($admin === true)
 	{
 		// show poll results
 		if (isset($_GET['poll_id']) && $_GET['results'] == 1)

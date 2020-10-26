@@ -946,8 +946,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Treść wiadomości',
 	'YourMessageInfo'			=> 'Treść wiadomości musi być wpisana zwykłym tekstem. Przed wysłaniem wiadomości wszystkie znaczniki zostaną usunięte.',
 
-	'MessageLanguage'			=> 'Language',
-	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
 	'NoUser'					=> 'No user',

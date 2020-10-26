@@ -3,12 +3,12 @@
 class SessionDbalStore extends Session
 {
 	// config options:
-	public $cf_dbal_table_name = 'sessions_pool';
-	public $cf_dbal_lock_timeout = 60;
+	public $cf_dbal_table_name		= 'sessions_pool';
+	public $cf_dbal_lock_timeout	= 60;
 
 	private $db;
-	private $created = false;
-	private $lock = null;
+	private $created	= false;
+	private $lock		= null;
 	private $id;
 
 	public function __construct(&$db)
@@ -100,7 +100,7 @@ class SessionDbalStore extends Session
 				session_expire = VALUES(session_expire)
 		');
 
-		//$this->db->affected_rows - 2 on update, 1 on insert
+		// $this->db->affected_rows - 2 on update, 1 on insert
 
 		return true;
 	}
@@ -136,8 +136,9 @@ class SessionDbalStore extends Session
 
 		if (@$res['q'] == 1)
 		{
-			$this->lock = $lock;
-			$this->id = $id;
+			$this->lock	= $lock;
+			$this->id	= $id;
+
 			return true;
 		}
 

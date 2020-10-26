@@ -63,9 +63,9 @@ class Feed
 		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
 		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
-		if ([$pages, $pagination] = $this->engine->load_changed())
+		if ([$pages, ] = $this->engine->load_changed())
 		{
-			foreach ($pages as $i => $page)
+			foreach ($pages as $page)
 			{
 				if ($this->engine->db->hide_locked)
 				{
@@ -195,7 +195,7 @@ class Feed
 							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n" .
 							'<pubDate>' . $pdate . '</pubDate>' . "\n";
 
-				foreach ($categories as $id => $category)
+				foreach ($categories as $category)
 				{
 					$xml .= '<category>' . $category['category'] . '</category>' . "\n";
 				}

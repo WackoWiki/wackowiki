@@ -18,7 +18,7 @@ $tpl->moderate =  ($this->forum
 // local functions
 function moderate_page_exists(&$engine, $tag)
 {
-	if ($page = $engine->db->load_single(
+	if ($engine->db->load_single(
 		"SELECT page_id " .
 		"FROM " . $engine->db->table_prefix . "page " .
 		"WHERE tag = " . $engine->db->q($tag) . " " .

@@ -23,8 +23,6 @@ $module[$_mode] = [
 
 function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 {
-	$order = '';
-	$error = '';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>

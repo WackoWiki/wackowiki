@@ -130,7 +130,7 @@ class Diag
 					{
 						echo "<p class=\"debug\">MySQL character set</p>\n<ul>\n";
 
-						foreach ($r as $k => $charset_item)
+						foreach ($r as $charset_item)
 						{
 							echo "\t<li>" . $charset_item['Variable_name'] . ": " . $charset_item['Value'] . "</li>\n";
 						}

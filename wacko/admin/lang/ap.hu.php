@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Your message',
 	'YourMessageInfo'			=> 'Kérjük, vedd figyelembe, csak sima szöveget adhatsz meg. Az elküldés előtt minden kód eltávolításra kerül.',
 
-	'MessageLanguage'			=> 'Nyelv',
-	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
 	'NoUser'					=> 'No user',

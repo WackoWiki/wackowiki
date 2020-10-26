@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Your message',
 	'YourMessageInfo'			=> 'Sa võid sisestada ainult puhast teksti, kõik koodi märgistused eemaldatakse enne saatmist.',
 
-	'MessageLanguage'			=> 'Language',
-	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
 	'NoUser'					=> 'No user',

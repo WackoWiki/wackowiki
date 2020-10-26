@@ -225,7 +225,7 @@ function move(&$engine, $old_page, $new_tag, $log)
 		}
 		else
 		{
-			if ($old_page['tag'] != $new_tag && $page = $engine->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
+			if ($old_page['tag'] != $new_tag && $engine->load_page($new_tag, 0, '', LOAD_CACHE, LOAD_META))
 			{
 				$log->log_n_l_message = Ut::perc_replace($engine->_t('AlreadyExists'), '<strong>' . $engine->link($new_tag) . '</strong>');
 			}

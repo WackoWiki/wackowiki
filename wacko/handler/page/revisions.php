@@ -16,7 +16,7 @@ $this->ensure_page(true);
 // show minor edits
 if ($this->db->minor_edit)
 {
-	$hide_minor_edit = (int) @$_GET['minor_edit'];
+	$hide_minor_edit = (int) ($_GET['minor_edit'] ?? 0);
 }
 else
 {

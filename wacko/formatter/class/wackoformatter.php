@@ -178,7 +178,7 @@ class WackoFormatter
 			// escaped text
 			"<!--escaped-->.*?<!--escaped-->|" .
 			// escaped html <#...#>
-			($this->object->db->allow_rawhtml == 1
+			($this->object->db->allow_rawhtml
 				? '\<\#.*?\#\>|'
 				: '') .
 			// html comments
@@ -186,7 +186,7 @@ class WackoFormatter
 			//? (?...?)
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|" .
 			// bracket links [[tag description]] or ((tag description))
-			($this->object->db->disable_bracketslinks == 1
+			($this->object->db->disable_bracketslinks
 				? ''
 				: "\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|" .
 				  "\(\((\S+?)([ \t]+([^\n]+?))?\)\)|" .
@@ -206,18 +206,18 @@ class WackoFormatter
 			"\?\?(\S.*?\S)\?\?|" .
 			// \\\\...
 			"\\\\\\\\[" . $object->language['ALPHANUM_P'] . "\-\_\\\!\.]+|" .
-			// **...**
+			// bold text **...**
 			"\*\*[^\n]*?\*\*|" .
-			// ##...##
+			// code ##...##
 			"\#\#[^\n]*?\#\#|" .
-			// ¹¹...¹¹
+			// code ¹¹...¹¹
 			"\¹\¹[^\n]*?\¹\¹|" .
-			// ''...'''
+			// note ''...'''
 			"\'\'.*?\'\'|" .
-			// !!...!!
+			// note !!...!!
 			"\!\!\S\!\!|" .
 			"\!\!(\S.*?\S)\!\!|" .
-			// __...__
+			// underline __...__
 			"__[^\n]*?__|" .
 			// upper and lower indexes ^^...^^ and vv...vv
 			"\^\^\S*?\^\^|" .
@@ -445,7 +445,7 @@ class WackoFormatter
 		{
 			return $matches[1];
 		}
-		// centered text
+		// centered text (depreciated)
 		else if (preg_match('/^>>(.*)<<$/us', $thing, $matches))
 		{
 			return '<!--escaped--><div class="center">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</div><!--escaped-->';

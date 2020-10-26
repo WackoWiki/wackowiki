@@ -94,7 +94,7 @@ function admin_system_info(&$engine, &$module)
 		$sysinfo['apache_modules']		= [$engine->_t('ApacheModules'), implode(', ',apache_get_modules())];
 	}
 
-	foreach ($sysinfo as $param => $value)
+	foreach ($sysinfo as $value)
 	{
 		echo
 			'<tr>' .

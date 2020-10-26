@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Il tuo messaggio',
 	'YourMessageInfo'			=> 'Puoi scrivere soltanto testo normale. Tutto il resto sarà rimosso prima della trasmissione.',
 
-	'MessageLanguage'			=> 'Language',
-	'MessageLanguageInfo'		=> '',
 	'SendMail'					=> 'Send',
 
 	'NoUser'					=> 'No user',
