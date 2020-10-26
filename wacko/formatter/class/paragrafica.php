@@ -201,7 +201,7 @@ class Paragrafica
 
 		if (isset($mark1))
 		{
-			$sizeof_mark1 = sizeof($mark1);
+			$sizeof_mark1 = count($mark1);
 		}
 		else
 		{
@@ -228,7 +228,7 @@ class Paragrafica
 					{
 						$pieces_inside = explode($this->mark3, $v);
 
-						if (sizeof($pieces_inside) < 3)
+						if (count($pieces_inside) < 3)
 						{
 							$insert_p = true;
 						}

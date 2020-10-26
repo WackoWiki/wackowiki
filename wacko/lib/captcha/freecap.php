@@ -213,7 +213,7 @@ $header_length = $big_endian ? 12 : 11;
 // read each font and get font character widths
 $font_widths = [];
 
-for ($i = 0; $i < sizeof($font_locations); $i++)
+for ($i = 0; $i < count($font_locations); $i++)
 {
 	$handle = fopen(__DIR__ . $font_locations[$i], 'r');
 	// read header of GD font, up to char width
@@ -231,7 +231,7 @@ for ($i = 0; $i < sizeof($font_locations); $i++)
 
 // modify image width depending on maximum possible length of word
 // you shouldn't need to use words > 6 chars in length really.
-$width		= ($max_word_length * (array_sum($font_widths) / sizeof($font_widths)) + 75);
+$width		= ($max_word_length * (array_sum($font_widths) / count($font_widths)) + 75);
 $height		= 90;
 
 $im			= ImageCreate($width, $height);
@@ -382,7 +382,7 @@ if ($use_dict == 1)
 {
 	// load dictionary and choose random word
 	$words	= @file($dict_location);
-	$word	= strtolower($words[$rand_func(0, sizeof($words) - 1)]);
+	$word	= strtolower($words[$rand_func(0, count($words) - 1)]);
 	// cut off line endings/other possible odd chars
 	$word	= preg_replace('/[^a-z]/', '', $word);
 	// might be large file so forget it now (frees memory)
@@ -543,14 +543,14 @@ if ($bg_type != 0)
 				$points[] = $rand_func(30, $height + 30);
 			}
 
-			ImagePolygon($temp_bg, $points, intval(sizeof($points) / 2), $text_colour3);
+			ImagePolygon($temp_bg, $points, intval(count($points) / 2), $text_colour3);
 		}
 	}
 	else if ($bg_type == 3)
 	{
 		// take random chunks of $bg_images and paste them onto the background
 
-		for ($i = 0; $i < sizeof($bg_images); $i++)
+		for ($i = 0; $i < count($bg_images); $i++)
 		{
 			// read each image and its size
 			$temp_im[$i]		= ImageCreateFromJPEG(__DIR__ . $bg_images[$i]);
@@ -565,7 +565,7 @@ if ($bg_type != 0)
 			// could randomise blocksize here... hardly matters
 			for ($j = 0; $j < $height * 2; $j += $blocksize)
 			{
-				$image_index	= $rand_func(0, sizeof($temp_im) - 1);
+				$image_index	= $rand_func(0, count($temp_im) - 1);
 				$cut_x			= $rand_func(0, $temp_width[$image_index] - $blocksize);
 				$cut_y			= $rand_func(0, $temp_height[$image_index] - $blocksize);
 
@@ -573,7 +573,7 @@ if ($bg_type != 0)
 			}
 		}
 
-		for ($i = 0; $i < sizeof($temp_im); $i++)
+		for ($i = 0; $i < count($temp_im); $i++)
 		{
 			// remove bgs from memory
 			ImageDestroy($temp_im[$i]);
@@ -667,7 +667,7 @@ for($i = 0 ; $i < strlen($word); $i++)
 		$text_colour2	= ImageColorAllocate($im2, $text_r, $text_g, $text_b);
 	}
 
-	$j		= $rand_func(0, sizeof($font_locations) - 1);
+	$j		= $rand_func(0, count($font_locations) - 1);
 	$font	= ImageLoadFont(__DIR__ . $font_locations[$j]);
 	ImageString($im2, $font, $word_start_x + ($font_widths[$j] * $i), $word_start_y, $word[$i], $text_colour2);
 }
@@ -798,7 +798,7 @@ ImageFilledRectangle($im2, 0, 0, $width, $height, $bg2);
 
 if (is_array($site_tags))
 {
-	for($i = 0; $i < sizeof($site_tags); $i++)
+	for($i = 0; $i < count($site_tags); $i++)
 	{
 		// ensure tags are centered
 		$tag_width = strlen($site_tags[$i]) * 6;

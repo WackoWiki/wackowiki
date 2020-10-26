@@ -166,7 +166,7 @@ class JavaHighlighter
 		// We're doing some verifications.
 		if (!is_array($array))		return false;
 		if (!strlen($this->code))	return false;
-		if (!sizeof($array))		return false;
+		if (!count($array))			return false;
 
 		// We will try to compare the current character with the 1st
 		// character of each first delimiter

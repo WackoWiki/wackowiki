@@ -29,7 +29,7 @@ class DiffFormatter
 			{
 				if (is_array($block))
 				{
-					if (sizeof($edit->orig) <= 0)
+					if (count($edit->orig) <= 0)
 					{
 						$block[] = $edit;
 					}
@@ -54,12 +54,12 @@ class DiffFormatter
 
 			if ($edit->orig)
 			{
-				$xi += sizeof($edit->orig);
+				$xi += count($edit->orig);
 			}
 
 			if ($edit->final)
 			{
-				$yi += sizeof($edit->final);
+				$yi += count($edit->final);
 			}
 		}
 

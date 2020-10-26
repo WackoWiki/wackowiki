@@ -26,8 +26,8 @@ class DiffEngine
 
 	function diff ($from_lines, $to_lines)
 	{
-		$n_from = sizeof($from_lines);
-		$n_to = sizeof($to_lines);
+		$n_from = count($from_lines);
+		$n_to = count($to_lines);
 
 		$this->xchanged = $this->ychanged = [];
 		$this->xv = $this->yv = [];
@@ -90,7 +90,7 @@ class DiffEngine
 		}
 
 		// Find the LCS.
-		$this->_compareseq(0, sizeof($this->xv), 0, sizeof($this->yv));
+		$this->_compareseq(0, count($this->xv), 0, count($this->yv));
 
 		// Merge edits when possible
 		$this->_shift_boundaries($from_lines, $this->xchanged, $this->ychanged);
@@ -386,9 +386,9 @@ class DiffEngine
 		$i = 0;
 		$j = 0;
 
-		$this::USE_ASSERTS && assert(sizeof($lines) == sizeof($changed));
-		$len = sizeof($lines);
-		$other_len = sizeof($other_changed);
+		$this::USE_ASSERTS && assert(count($lines) == count($changed));
+		$len = count($lines);
+		$other_len = count($other_changed);
 
 		while (1)
 		{
