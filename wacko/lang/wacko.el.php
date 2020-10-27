@@ -736,7 +736,6 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomSend'			=> 'Submit',
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
 									'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
 									'similar form on your profile page. ',

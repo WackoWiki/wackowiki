@@ -409,8 +409,8 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 	else
 	{
 		// delete backup
-		if ((isset($_POST['delete']) && $_POST['backup_id'] == true)
-			||   (isset($_GET['delete'])  && $_GET['backup_id']  == true))
+		if (   (isset($_POST['delete']) && $_POST['backup_id'] == true)
+			|| (isset($_GET['delete'])  && $_GET['backup_id']  == true))
 		{
 			if ($backup_id)
 			{

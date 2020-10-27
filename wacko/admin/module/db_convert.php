@@ -160,7 +160,7 @@ function admin_db_convert(&$engine, &$module, &$tables)
 			echo output_image($engine, false) . '<strong class="red">' . $engine->_t('DbEngineMissing') . '</strong>' .  "<br>\n";
 		}
 
-		if ($required_mysql_version === true && $required_engine = true)
+		if ($required_mysql_version && $required_engine)
 		{
 			$results = $engine->db->load_all(
 				"SELECT TABLE_NAME, ENGINE FROM INFORMATION_SCHEMA.TABLES

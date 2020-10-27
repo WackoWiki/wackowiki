@@ -113,7 +113,7 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td>
-									<input type="submit" id="submit" name="send_pm" value="[ ' _t: UsersIntercomSend ' ]">
+									<input type="submit" id="submit" name="send_pm" value="[ ' _t: SendButton ' ]">
 								</td>
 							</tr>
 							<tr>

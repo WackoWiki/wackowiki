@@ -343,7 +343,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			<?php
 			$matches = 0;
 
-			foreach ($inconsistencies as $param => $value)
+			foreach ($inconsistencies as $value)
 			{
 				if ($value[1] >= 1)
 				{
