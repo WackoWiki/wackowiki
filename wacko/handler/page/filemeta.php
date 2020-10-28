@@ -77,7 +77,7 @@ if ($this->is_admin()
 
 #Ut::debug_print_r($tabs);
 
-$mode	= @$_GET[$mod_selector];
+$mode	= $_GET[$mod_selector] ?? null;
 
 if (!array_key_exists($mode, $tabs))
 {

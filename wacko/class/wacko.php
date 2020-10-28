@@ -8162,7 +8162,7 @@ class Wacko
 		{
 			foreach($this->db->allowed_email_domains as $email_domain)
 			{
-				if( 0 == strcasecmp(email_domain, $domain))
+				if( 0 == strcasecmp($email_domain, $domain))
 				{
 					return true;
 				}

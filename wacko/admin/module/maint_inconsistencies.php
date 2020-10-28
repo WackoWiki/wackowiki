@@ -399,7 +399,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		if ($_REQUEST['db_action'] == 'check_inconsistencies')
 		{
 			// 1.1 usergroup_member without user
-			$usergroup_member = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					gm.*
 				FROM
@@ -411,7 +411,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['1.1'] = ['usergroup_member without user', $engine->config->affected_rows];
 
 			// 1.2. menu without user
-			$menu = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					m.*
 				FROM
@@ -432,7 +432,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					user_name = " . $engine->db->q($engine->db->admin_name) . "
 				LIMIT 1");
 
-			$upload = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"UPDATE
 					" . $prefix . "file f " .
 					"LEFT JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
@@ -444,7 +444,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['1.3'] = ['upload without user', $engine->config->affected_rows];
 
 			// 1.4. user_settings without user
-			$user_settings = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					us.*
 				FROM
@@ -456,7 +456,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['1.4'] = ['user_settings without user', $engine->config->affected_rows];
 
 			// 1.5. watches without user
-			$watches = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					w.*
 				FROM
@@ -469,7 +469,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 
 			// 2. without page
 			// 2.1. acl without page
-			$acl = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					a.*
 				FROM
@@ -481,7 +481,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.1'] = ['acl without page', $engine->config->affected_rows];
 
 			// 2.2. category_assignment without page
-			$category_assignment = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					ca.*
 				FROM
@@ -494,7 +494,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.2'] = ['category_assignment without page', $engine->config->affected_rows];
 
 			// 2.3. page_link without page
-			$page_link = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					l.*
 				FROM
@@ -506,7 +506,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.3'] = ['page_link without page', $engine->config->affected_rows];
 
 			// 2.4. menu without page
-			$menu2 = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					m.*
 				FROM
@@ -518,7 +518,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.4'] = ['menu without page', $engine->config->affected_rows];
 
 			// 2.5. rating without page
-			$rating = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					r.*
 				FROM
@@ -530,7 +530,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.5'] = ['rating without page', $engine->config->affected_rows];
 
 			// 2.6. referrer without page
-			$referrer = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					r.*
 				FROM
@@ -542,7 +542,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.6'] = ['referrer without page', $engine->config->affected_rows];
 
 			// 2.7. upload without page and not global
-			$upload2 = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					f.*
 				FROM
@@ -555,7 +555,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.7']	= ['upload without page and not global', $engine->config->affected_rows];
 
 			// 2.8. watch without page
-			$watch2 = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					w.*
 				FROM
@@ -567,7 +567,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.8'] = ['watch without page', $engine->config->affected_rows];
 
 			// 2.9. revision without page
-			$revision = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					r.*
 				FROM
@@ -579,7 +579,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.9'] = ['revision without page', $engine->config->affected_rows];
 
 			// 2.10. external_link without page
-			$external_link = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					l.*
 				FROM
@@ -591,7 +591,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.10'] = ['external_link without page', $engine->config->affected_rows];
 
 			// 2.11. file_link without page
-			$file_link = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					l.*
 				FROM
@@ -603,7 +603,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.11'] = ['file_link without page', $engine->config->affected_rows];
 
 			// 2.12. comment without page
-			$parent_page = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					c.*
 				FROM
@@ -616,7 +616,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['2.12'] = ['comment without parent page', $engine->config->affected_rows];
 
 			// 3.1. usergroup_member without group
-			$usergroup_member2 = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"DELETE
 					gm.*
 				FROM
@@ -638,7 +638,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					AND account_type = 1
 				LIMIT 1");
 
-			$page_user = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"UPDATE
 					" . $prefix . "page p
 					LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id)
@@ -651,7 +651,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['3.2'] = ['page without valid user_id', $engine->config->affected_rows];
 
 			// 3.3. page without valid ower_id (e.g. deleted user)
-			$page_owner = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"UPDATE
 					" . $prefix . "page p
 					LEFT JOIN " . $prefix . "user u ON (p.owner_id = u.user_id)
@@ -664,7 +664,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['3.3'] = ['page without valid owner_id', $engine->config->affected_rows];
 
 			// 3.4. revision without valid user_id (e.g. deleted user)
-			$page_owner = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"UPDATE
 					" . $prefix . "revision r
 					LEFT JOIN " . $prefix . "user u ON (r.user_id = u.user_id)
@@ -677,7 +677,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$_solved['3.4'] = ['revision without valid user_id', $engine->config->affected_rows];
 
 			// 3.5. revision without valid owner_id (e.g. deleted user)
-			$page_owner = $engine->db->sql_query(
+			$engine->db->sql_query(
 				"UPDATE
 					" . $prefix . "revision r
 					LEFT JOIN " . $prefix . "user u ON (r.owner_id = u.user_id)
