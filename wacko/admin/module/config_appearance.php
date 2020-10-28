@@ -31,7 +31,7 @@ function admin_config_appearance(&$engine, &$module)
 	</p>
 	<br>
 <?php
-	$remove_file = function ($file, $update_config = true) use ($engine)
+	$remove_file = function ($file) use ($engine)
 	{
 		if (!in_array($file, ['favicon', 'logo']))
 		{
@@ -71,7 +71,7 @@ function admin_config_appearance(&$engine, &$module)
 		}
 	};
 
-	$upload_file = function ($file, $update_config = true) use ($engine, $remove_file)
+	$upload_file = function ($file) use ($engine, $remove_file)
 	{
 		if (!in_array($file, ['favicon', 'logo']))
 		{
@@ -187,7 +187,7 @@ function admin_config_appearance(&$engine, &$module)
 	{
 		if (isset($_FILES['logo']['tmp_name']) && is_uploaded_file($_FILES['logo']['tmp_name']))
 		{
-			$upload_file('logo', '');
+			$upload_file('logo');
 		}
 		else
 		{
@@ -197,7 +197,7 @@ function admin_config_appearance(&$engine, &$module)
 
 		if (isset($_FILES['favicon']['tmp_name']) && is_uploaded_file($_FILES['favicon']['tmp_name']))
 		{
-			$upload_file('favicon', '');
+			$upload_file('favicon');
 		}
 
 		#Ut::debug_print_r($_POST);

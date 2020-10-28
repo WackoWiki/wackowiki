@@ -700,7 +700,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			<?php
 			$matches = 0;
 
-			foreach ($_solved as $param => $value)
+			foreach ($_solved as $value)
 			{
 				if ($value[1] >= 1)
 				{

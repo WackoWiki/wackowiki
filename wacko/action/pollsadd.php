@@ -289,7 +289,7 @@ else if ($stop_mod !== true)
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output
-	echo '<input type="submit" name="submit_poll" id="submit" value="' . $this->_t('PollsSubmit') . '"> ',
+	echo '<input type="submit" name="submit_poll" id="submit" value="' . $this->_t('SubmitButton') . '"> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
 		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn-link"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"></a>' : '') .

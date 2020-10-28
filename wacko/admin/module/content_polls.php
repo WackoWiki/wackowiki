@@ -134,7 +134,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><th>' . $engine->_t('PollsConfirmDelete') . '</th></tr>';
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>' .
-					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('PollsSubmit') . '"> ' .
+					'<input type="submit" name="yes" id="submit" value="' . $engine->_t('SubmitButton') . '"> ' .
 					'<a href="' . $engine->href('', '', $mode_http) . '" class="btn-link"><input type="button" name="cancel" id="button" value="' . $engine->_t('PollsCancel') . '"></a>' .
 				'</td></tr>';
 			echo '</table>';
