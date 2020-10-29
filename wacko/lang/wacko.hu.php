@@ -308,7 +308,6 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsFilter'				=> 'Keresés',
 	'GroupsOpenProfile'			=> 'Profil megtekintése',
 	'GroupsName'				=> 'Csoport',
 	'GroupsMembers'				=> 'Tagok',
@@ -699,7 +698,6 @@ $wacko_translation = [
 
 	// users action
 	'UsersSearch'				=> 'Felhasználók keresése',
-	'UsersFilter'				=> 'Keresés',
 	'UsersOpenProfile'			=> 'Profil megtekintése',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'Név',

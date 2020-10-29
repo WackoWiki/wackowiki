@@ -28,7 +28,7 @@ lang = {
 	List :					"Неномериран списък",
 	NumberedList :			"Номериран списък",
 	Left :					"Left",
-	Center :				"Center",
+	Center :				"Център",
 	Right :					"Right",
 	Justify :				"Justify",
 	Outdent :				"Outdent",

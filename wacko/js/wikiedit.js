@@ -108,8 +108,7 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 		+ 'onmouseout=\'this.className="btn- btn-text";\' class="btn- btn-text" '
 		+ 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.org/doc/' + lang.HelpFormattingPage + '\');" '
 		+ ' title="' + lang.HelpFormattingTip + '">'
-		+ '<img src="' + this.imagesPath + 'spacer.png" ' 
-		+ ' alt="' + lang.HelpFormatting + '" title="' + lang.HelpFormattingTip + '">'
+		+ '<img src="' + this.imagesPath + 'spacer.png"' + ' alt="' + lang.HelpFormatting + '" title="' + lang.HelpFormattingTip + '">'
 		+ '</div></li>');
 
 	try {

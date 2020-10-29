@@ -309,7 +309,6 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Искать группы',
 	'GroupsNoMatching'			=> 'Подходящие группы не найдены. Попробуйте смягчить критерий поиска.',
-	'GroupsFilter'				=> 'Искать',
 	'GroupsOpenProfile'			=> 'Перейти к профилю',
 	'GroupsName'				=> 'Группа',
 	'GroupsMembers'				=> 'Участник(ов)',
@@ -702,7 +701,6 @@ $wacko_translation = [
 
 	// users action
 	'UsersSearch'				=> 'Найти пользователя',
-	'UsersFilter'				=> 'поиск',
 	'UsersOpenProfile'			=> 'открыть профиль',
 	'UsersNoMatching'			=> 'Подходящих пользователей не найдено. Попробуйте более мягкий критерий поиска.',
 	'UsersName'					=> 'Имя',

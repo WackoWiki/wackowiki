@@ -210,7 +210,7 @@ first really BIG template written
 					</td>
 					<td>
 						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]"> ['' '']
-						<input type="submit" id="submit" value="[ ' _t: UsersFilter ' ]"> ['' '']
+						<input type="submit" id="submit" value="[ ' _t: SearchButton ' ]"> ['' '']
 					</td>
 				</tr>
 			</table><br>

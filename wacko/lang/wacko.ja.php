@@ -308,7 +308,6 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsFilter'				=> '検索',
 	'GroupsOpenProfile'			=> 'プロフィールを表示',
 	'GroupsName'				=> 'グループ',
 	'GroupsMembers'				=> 'Members',
@@ -699,7 +698,6 @@ $wacko_translation = [
 
 	// users action
 	'UsersSearch'				=> 'Find Users',
-	'UsersFilter'				=> '検索',
 	'UsersOpenProfile'			=> 'プロフィールを表示',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> '名前',

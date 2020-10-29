@@ -8,9 +8,9 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'CreateButton'				=> 'Create',
+	'CreateButton'				=> 'Създаване',
 	'SaveButton'				=> 'Запази',
-	'UpdateButton'				=> 'Update',
+	'UpdateButton'				=> 'Промени',
 	'CancelButton'				=> 'Отмени',
 	'ConvertButton'				=> 'Convert',
 
@@ -44,7 +44,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Регистрация на нов профил',
 	'NewAccountAdminCreated'	=> 'The user %1 has created an account for you with username "%2". In order to complete your registration, visit the following URL (make sure it is entered as the single line) and set your own access password:',
 	'NewAccountUsername'		=> 'Потребителско име:',
-	'AccountLanguage'			=> 'Language:',
+	'AccountLanguage'			=> 'Език:',
 	'NewAccountEmail'			=> 'Email:',
 	'NewAccountIP'				=> 'IP адрес:',
 	'NewAccountSignupInfo'		=> 'Създаден е следният профил:',
@@ -150,7 +150,7 @@ $wacko_translation = [
 	'Comments'					=> 'Коментари',
 	'CommentEdited'				=> 'edited',
 	'Links'						=> 'Links',
-	'Version'					=> 'Version',
+	'Version'					=> 'Версия',
 
 	// details formatter
 	'ShowHideDetails'			=> 'Детайли',
@@ -283,10 +283,10 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'За да зададете категории на страница, поставете отметки в квадратчетата.',
 	'CategoriesStoreButton'		=> 'Запазване на категории',
-	'SubmitButton'				=> 'Submit',
-	'AddButton'					=> 'Add',
-	'CategoriesGroupButton'		=> 'Group',
-	'RemoveButton'				=> 'Remove',
+	'SubmitButton'				=> 'Запис',
+	'AddButton'					=> 'Добави',
+	'CategoriesGroupButton'		=> 'Група',
+	'RemoveButton'				=> 'Премахни',
 	'CategoriesEditInfo'		=> 'За да редактирате списъка с категории, изберете радио бутона.',
 	'NoCategoriesForThisLang'	=> 'Категориите за този език не са посочени.',
 	'PagesCategory'				=> 'Pages category',
@@ -308,11 +308,10 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsFilter'				=> 'Search',
 	'GroupsOpenProfile'			=> 'View Profile',
-	'GroupsName'				=> 'Group',
+	'GroupsName'				=> 'Група',
 	'GroupsMembers'				=> 'Members',
-	'GroupsDescription'			=> 'Description',
+	'GroupsDescription'			=> 'Описание',
 	'GroupsCreated'				=> 'Created',
 	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'GroupsProfile'				=> 'Profile',
@@ -576,7 +575,7 @@ $wacko_translation = [
 	'NotifyMinorEdit'			=> 'Notify also minor edit',
 	'NotifyPageEdit'			=> 'Edit',
 	'NotifyComment'				=> 'Comment',
-	'NotifyOff'					=> 'Off',
+	'NotifyOff'					=> 'Изключи',
 	'NotifyAlways'				=> 'Always',
 	'NotifyPending'				=> 'Pending',
 	'NotifyDigest'				=> 'Digest',
@@ -699,7 +698,6 @@ $wacko_translation = [
 
 	// users action
 	'UsersSearch'				=> 'Find Users',
-	'UsersFilter'				=> 'Search',
 	'UsersOpenProfile'			=> 'View Profile',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'Name',
@@ -1004,7 +1002,7 @@ $wacko_translation = [
 	'AccessDeniedXML'			=> 'Нямате право да получите достъп до тази информация.',
 
 	'ChangesFeed'				=> 'Changes',
-	'CommentsFeed'				=> 'Comments',
+	'CommentsFeed'				=> 'Коментари',
 	'NewsFeed'					=> 'News',
 	'RevisionsFeed'				=> 'Revisions of ',
 
@@ -1098,11 +1096,11 @@ $wacko_translation = [
 	'ForumTopic'				=> 'Topic',
 	'ForumTopics'				=> 'Теми',
 	'ForumPosts'				=> 'Мнения',
-	'ForumReplies'				=> 'Replies',
-	'ForumAuthor'				=> 'Author',
-	'ForumViews'				=> 'Views',
+	'ForumReplies'				=> 'Отговори',
+	'ForumAuthor'				=> 'Автор',
+	'ForumViews'				=> 'Изгледи',
 	'ForumCreated'				=> 'Created',
-	'ForumComments'				=> 'Comments',
+	'ForumComments'				=> 'Коментари',
 	'ForumLastComment'			=> 'Last comment',
 	'ForumNoComments'			=> 'No comments',
 	'ForumNewTopic'				=> 'Start a new discussion',
