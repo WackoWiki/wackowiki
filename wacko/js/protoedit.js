@@ -80,7 +80,7 @@ ProtoEdit.prototype.insTag = function (Tag, Tag2)
 	return true;
 };
 
-ProtoEdit.prototype.createToolbar = function (id, width, height, readOnly)
+ProtoEdit.prototype.createToolbar = function (id)
 {
 	wh		= '';
 	html	= '<ul id="buttons_' + id + '" class="toolbar">' + '  ';
