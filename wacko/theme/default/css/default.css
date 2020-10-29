@@ -1023,13 +1023,6 @@ a:target {
 	width: 0;
 }
 
-.toolbar .btn-text {
-	font: 12px Arial;
-	text-decoration: underline;
-	height: 17px;
-	padding: 3px 3px 4px 4px;
-}
-
 .toolbar img, 
 .toolbar a img, 
 .toolbar span img {

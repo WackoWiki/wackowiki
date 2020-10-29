@@ -104,8 +104,8 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 	this.addButton('createtable',	lang.InsertTable,	'\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
 	this.addButton('customhtml',	separator);
 	this.addButton('about',			lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
-	this.addButton('customhtml',	'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover btn-text";\' '
-		+ 'onmouseout=\'this.className="btn- btn-text";\' class="btn- btn-text" '
+	this.addButton('customhtml',	'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
+		+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 		+ 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.org/doc/' + lang.HelpFormattingPage + '\');" '
 		+ ' title="' + lang.HelpFormattingTip + '">'
 		+ '<img src="' + this.imagesPath + 'spacer.png"' + ' alt="' + lang.HelpFormatting + '" title="' + lang.HelpFormattingTip + '">'
