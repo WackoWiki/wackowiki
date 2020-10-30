@@ -33,7 +33,10 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 			// making plural ballot
 			foreach ($_POST as $key => $value)
 			{
-				if (preg_match('/^[0-9]{1,2}$/', $key) && $value === '1') $ballot[] = (int) $key;
+				if (preg_match('/^[0-9]{1,2}$/', $key) && $value === '1')
+				{
+					$ballot[] = (int) $key;
+				}
 			}
 		}
 		else

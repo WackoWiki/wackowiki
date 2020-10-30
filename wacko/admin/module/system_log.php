@@ -23,7 +23,7 @@ $module[$_mode] = [
 
 function admin_system_log(&$engine, &$module)
 {
-	$whois = 'https://www.db.ripe.net/whois?searchtext=';
+	# $whois = 'https://www.db.ripe.net/whois?searchtext=';
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 <?php

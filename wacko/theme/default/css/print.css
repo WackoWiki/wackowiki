@@ -5,8 +5,8 @@
  */
  
 #print {
-	background-color:	#FFFFFF;
-	color:				#000000;
+	background-color:	#FFF;
+	color:				#000;
 	font-family:		Arial,Helvetica,sans-serif;
 	letter-spacing:		1px;
 	padding-bottom:		20px;
@@ -22,7 +22,7 @@ header {
 }
 
 header .container {
-	border-bottom:		1px dotted #000000;
+	border-bottom:		1px dotted #000;
 	margin-bottom:		20px;
 	padding-bottom:		5px;
 }
@@ -33,12 +33,12 @@ header h1 {
 	padding-bottom:		0;
 	margin-bottom:		0;
 	font-family:		Arial,Helvetica,FreeSans,sans-serif;
-	color:				#666666;
+	color:				#666;
 	font-weight:		bold;
 }
 
 footer {
-	border-top:			1px dotted #000000;
+	border-top:			1px dotted #000;
 	font-size:			0.75em;
 	line-height:		11px;
 	margin-top:			20px;

@@ -41,13 +41,13 @@ TODO: config settings
 	- fall back if no JS or Image manipulation library is available or disabled
 */
 
-// Include PHP Thumbnailer
+// include PHP Thumbnailer
 require_once 'lib/phpthumb/PHPThumb.php';
 require_once 'lib/phpthumb/GD.php';
 
-// Add jQuery library
+// add jQuery library
 $this->add_html('footer', '<script src="' . $this->db->base_path . 'js/jquery-3.5.1.min.js"></script>');
-// Add fancyBox
+// add fancyBox
 $this->add_html('footer', '<script src="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.js"></script>');
 $this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.css">');
 
@@ -148,7 +148,7 @@ if ($can_view)
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-		"WHERE f.page_id = '". ($global ? 0 : $file_page['page_id']) . "' " .
+		"WHERE f.page_id = '" . (int) ($global ? 0 : $file_page['page_id']) . "' " .
 			"AND f.picture_w <> 0 " .
 			"AND f.deleted <> 1 " .
 		($owner
@@ -302,10 +302,8 @@ if ($can_view)
 					{
 						$tpl->href			= $url;
 						$tpl->description	= $file_description;
-						#$tpl->title			= $file_description;
 						$tpl->alt			= $file_description;
-						#$tpl->token			= $param_token;
-						$tpl->datafancybox	= ' data-fancybox="'. $param_token . '"';
+						$tpl->datafancybox	= ' data-fancybox="' . $param_token . '"';
 						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
 					}
 					else
@@ -323,7 +321,6 @@ if ($can_view)
 					$tpl->description	= $file_description;
 					#$tpl->user			= $file['user'];
 					#$tpl->dimension	= $file['picture_w'] . 'x' . $file['picture_h'];
-					#$tpl->hits			= $file['hits'];	// we do exclude images from hit cout atm -> see file handler
 
 					$tpl->leave();
 				}

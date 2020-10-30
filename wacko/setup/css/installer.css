@@ -14,9 +14,9 @@ body {
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	background: #FFFFFF no-repeat scroll 0 0;
-	font: normal normal normal 12px Arial, Helvetica, sans-serif;
-	color: #333333;
+	background: #FFF no-repeat scroll 0 0;
+	font: normal 12px Arial, Helvetica, sans-serif;
+	color: #333;
 	text-align: center;
 }
 
@@ -65,7 +65,7 @@ label {
 }
 
 .white {
-	color: #666666;
+	color: #666;
 }
 
 p.notop {
@@ -128,7 +128,7 @@ hr {
 	margin: 0 auto;
 	padding: 4px 0 8px 0;
 	font-weight: 900;
-	color: #CCCCCC;
+	color: #CCC;
 	text-align: center;
 }
 
@@ -139,7 +139,7 @@ hr {
 }
 
 .item {
-	color: #333333;
+	color: #333;
 }
 
 .current {
