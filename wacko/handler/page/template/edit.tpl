@@ -76,7 +76,7 @@
 						[= autocomplete _ =
 							if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: edit ' ]" ); }
 						=]
-					wE.init('postText','WikiEdit','edname-w','[ ' wikiedit ' ]');
+					wE.init('postText', '[ ' wikiedit ' ]');
 					[= user _ =
 						var timeout = [ ' heartbeat ' ];
 						var name = 'edit_page';

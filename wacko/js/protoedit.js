@@ -85,11 +85,6 @@ ProtoEdit.prototype.createToolbar = function (id)
 	wh		= '';
 	html	= '<ul id="buttons_' + id + '" class="toolbar">' + '  ';
 
-	if (this.editorName)
-	{
-		html += '<li class="' + this.editorNameClass + '">' + this.editorName + '</li>';
-	}
-
 	for (var i = 0; i < this.buttons.length; i++)
 	{
 		var btn = this.buttons[i];
@@ -104,9 +99,9 @@ ProtoEdit.prototype.createToolbar = function (id)
 		}
 		else
 		{
-			html += ' <li class="btns- we-'+ btn.name + '"><div id="' + btn.name + '_' + id + '" onmouseover=\'this.className="btn-hover";\' '
+			html += ' <li class="we-'+ btn.name + '"><div id="' + btn.name + '_' + id + '" onmouseover=\'this.className="btn-hover";\' '
 				+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
-				+ 'onclick="this.className=\'btn-pressed\';' + btn.actionName + '(' //\'' + id + '\', ' 
+				+ 'onclick="this.className=\'btn-pressed\';' + btn.actionName + '('
 				+ btn.actionParams + ')"><img src="' + this.imagesPath
 				+ 'spacer.png" ' + wh + ' alt="' + btn.desc + '" title="' + btn.desc
 				+ '"></div></li>\n';

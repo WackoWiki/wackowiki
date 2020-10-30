@@ -8,7 +8,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-	color: #333333;
+	color: #333;
 	background-color: #FFFFFF;
 	cursor: default;
 	font-size: 100%;
@@ -37,8 +37,8 @@ small {
 	font-size: 0.75rem; /* 12px */
 	line-height: normal;
 }
-form small, 
-table.usertable small, 
+form small,
+table.usertable small,
 small small {
 	font-size: 0.6875rem; /* 11px */
 }
@@ -432,10 +432,10 @@ input#submit:active,
 textarea {
 	font-family: "Lucida Console", "Courier New", monospace;
 	font-size: 0.875rem; /* 14px */
-	color: #333333;
+	color: #333;
 	letter-spacing: 1px;
 	width: 100%;
-	border: 1px solid #999999;
+	border: 1px solid #999;
 }
 #postText {
 }
@@ -473,15 +473,15 @@ textarea {
 	height: 20px;
 }
 	#path a {
-		color: #333333;
+		color: #333;
 		text-decoration: none;
 	}
 	#path a:hover {
-		color: #333333;
+		color: #333;
 		text-decoration: underline;
 	}
 	#path a:active {
-		color: #333333;
+		color: #333;
 		text-decoration: none;
 	}
 	#path img {
@@ -507,7 +507,7 @@ textarea {
 		#pane div.middle h1 a,
 		#pane div.middle h1 a:hover,
 		#pane div.middle h1 a:active {
-			color: #666666;
+			color: #666;
 			font-family: "Lucida Console", "Courier New", monospace;
 			font-size: 1.125rem; /* 18px */
 			line-height: 18px;
@@ -733,7 +733,7 @@ span.tocnumber {
 }
 
 .menu li {
-	border-left: 1px dotted #CCCCCC;
+	border-left: 1px dotted #CCC;
 	float: left;
 	line-height: 1.2rem;
 	margin: 0 0.5em 0 -0.5rem;
@@ -756,7 +756,7 @@ span.tocnumber {
 	
 }
 #page {
-	color: #333333;
+	color: #333;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 0.875rem; /* 14px */
 	line-height: 18px;
@@ -832,9 +832,9 @@ span.tocnumber {
 /*	Footer layout	*/
 
 #footer {
-	color: #666666;
+	color: #666;
 	background-color: #F0F4F5;
-	border-top:1px dotted #CCCCCC;
+	border-top:1px dotted #CCC;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 0.625rem; /* 10px */
 	text-align: center;
@@ -842,21 +842,21 @@ span.tocnumber {
 	clear: both;
 }
 	#footer a {
-		color: #666666;
+		color: #666;
 		text-decoration: underline;
 	}
 	#footer a:hover {
-		color: #666666;
+		color: #666;
 		text-decoration: none;
 	}
 	#footer a:active {
-		color: #666666;
+		color: #666;
 		text-decoration: none;
 	}
 
 /*	 Debugging information 		*/
 .time {
-	color: #999999;
+	color: #999;
 	font-size: 0.5625rem; /* 9px */
 	margin: 5px 20px;
 }
@@ -869,7 +869,7 @@ span.tocnumber {
 #debug li, 
 #debug pre {
 	font-size: 0.6875rem; /* 11px */
-	color: #888888;
+	color: #888;
 }
 
 div#loginbox {
@@ -880,7 +880,7 @@ div#loginbox {
 	width:500px;
 	margin:50px auto;
 	padding: 30px;
-	border: 1px dotted #CCCCCC;
+	border: 1px dotted #CCC;
 }
 /*	Version Check Specific	*/
 .tickcross {

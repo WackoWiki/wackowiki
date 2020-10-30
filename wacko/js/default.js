@@ -8,6 +8,7 @@ function undef(param)
 // all_init() initializes all js features:
 //   * WikiEdit
 //   * Doubleclick editing
+//   * Session heart beat
 window.onload = function ()
 {
 	// alert('Load Test: OK');

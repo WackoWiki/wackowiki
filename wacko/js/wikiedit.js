@@ -35,13 +35,11 @@ WikiEdit.prototype				= new ProtoEdit();
 WikiEdit.prototype.constructor	= WikiEdit;
 
 // initialisation
-WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
+WikiEdit.prototype.init = function (id, imgPath)
 {
 	this._init(id);
 	// if (!this.area.id) this.area.id = "area_" + String(Math.floor(Math.random() * 10000));
 	this.imagesPath			= (imgPath ? imgPath : 'image/');
-	// this.editorName		= name;
-	this.editorNameClass	= nameClass;
 	this.actionName			= 'document.getElementById(\'' + this.id + '\')._owner.insTag';
 	separator				= '<li><div class="btn-separator"/></div></li>';
 
@@ -101,10 +99,10 @@ WikiEdit.prototype.init = function (id, name, nameClass, imgPath)
 		this.autocomplete.addButton();
 	}
 
-	this.addButton('createtable',	lang.InsertTable,	'\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
-	this.addButton('customhtml',	separator);
-	this.addButton('about',			lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
-	this.addButton('customhtml',	'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
+	this.addButton('createtable',		lang.InsertTable,	'\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
+	this.addButton('customhtml',		separator);
+	this.addButton('about',				lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
+	this.addButton('customhtml',		'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
 		+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 		+ 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.org/doc/' + lang.HelpFormattingPage + '\');" '
 		+ ' title="' + lang.HelpFormattingTip + '">'

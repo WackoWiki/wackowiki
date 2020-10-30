@@ -91,7 +91,7 @@
 								[= autocomplete _ =
 									if (AutoComplete) { wEaC = new AutoComplete( wE, "[ ' href: show ' ]" ); }
 								=]
-							wE.init('addcomment','WikiEdit','edname-w','[ ' wikiedit ' ]');
+							wE.init('addcomment', '[ ' wikiedit ' ]');
 							[= user _ =
 								var timeout = [ ' heartbeat ' ];
 								var name = 'add_comment';

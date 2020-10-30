@@ -1006,7 +1006,8 @@ a:target {
 	border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
 }
 
-.toolbar .btn-active, .toolbar .btn-pressed {
+.toolbar .btn-active,
+.toolbar .btn-pressed {
 	border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
 }
 
@@ -1125,28 +1126,6 @@ a:target {
 }
 .toolbar li.we-help img {
 	background: url('../../../image/wikiedit/help.svg') no-repeat;
-}
-
-.edname-w,
-.edname-r,
-.edname-s {
-	font: bold 14px Arial;
-	border: 3px solid #D4D0C8;
-	padding: 0 7px;
-	color: #ffffff;
-	vertical-align: middle;
-}
-
-.edname-w {
-	background: #1E9905;
-}
-
-.edname-r {
-	background: #2A45D0;
-}
-
-.edname-s {
-	background: #D08C2A;
 }
 
 .autocomplete-inplace {
