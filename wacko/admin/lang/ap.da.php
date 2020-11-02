@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Emailens tekst',
 	'YourMessageInfo'			=> 'Bemærk venligst at du kun bør skrive ren tekst. Al opmærkning vil blive fjernet inden afsendelse.',
 
-	'SendMail'					=> 'Send',
-
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 

@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Your message',
 	'YourMessageInfo'			=> 'Σημειώστε ότι μπορείτε να γράψετε μόνο απλό κείμενο. Οτιδήποτε άλλο θα αφαιρεθεί πριν την αποστολή.',
 
-	'SendMail'					=> 'Send',
-
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 

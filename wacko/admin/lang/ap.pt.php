@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'A sua Mensagem',
 	'YourMessageInfo'			=> 'A mensagem só pode conter texto puro. Todos os códigos serão removidos ao enviar.',
 
-	'SendMail'					=> 'Send',
-
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 

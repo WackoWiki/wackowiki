@@ -11,7 +11,7 @@
 				<input type="submit" name="update" id="submit" value="[ ' _t: UpdateButton ' ]">
 				<br><br>
 			=]
-			<table class="lined">
+			<table class="lined hl-line">
 				<tr>
 					<th>[ ' _t: BookmarkNumber ' ]</th>
 					<th>[ ' _t: BookmarkTitle ' ]</th>

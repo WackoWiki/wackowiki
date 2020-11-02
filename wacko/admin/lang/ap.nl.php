@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Je bericht',
 	'YourMessageInfo'			=> 'Het bericht wordt verzonden zonder tekst-opmaak. Alle opmaak wordt voor het verzenden verwijderd.',
 
-	'SendMail'					=> 'Send',
-
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 

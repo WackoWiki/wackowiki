@@ -945,8 +945,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Su mensaje',
 	'YourMessageInfo'			=> 'Por favor, ten en cuenta que solo puede insertarse texto plano. Se eliminará cualquier código antes de enviar.',
 
-	'SendMail'					=> 'Enviar',
-
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 

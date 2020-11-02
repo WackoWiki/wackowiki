@@ -958,8 +958,6 @@ $ap_translation = [
 	'YourMessage'				=> 'Deine Nachricht',
 	'YourMessageInfo'			=> 'Bitte beachte, dass du nur reinen Text verwenden kannst. Alle Auszeichnungen werden vor dem Versand entfernt.',
 
-	'SendMail'					=> 'Senden',
-
 	'NoUser'					=> 'kein Benutzer',
 	'NoUserGroup'				=> 'keine Benutzergruppe',
 
