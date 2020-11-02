@@ -474,8 +474,8 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'От съображения за сигурност сесията ви приключи. Моля, влезте отново.',
 
 	// user settings
-	'SettingsCodeResent'		=> 'Повторный код подтверждения email выслан на Ваш адрес.',
-	'SettingsCodeNotSent'		=> 'Невозможно отправить код подтверждения: email не указан!',
+	'EmailConfirmResent'		=> 'Повторный код подтверждения email выслан на Ваш адрес.',
+	'EmailConfirmNotSent'		=> 'Невозможно отправить код подтверждения: email не указан!',
 	'Hello'						=> 'Здравейте',
 	'UserName'					=> 'User name',
 	'EmailAddress'				=> 'Адрес на електонната поща',

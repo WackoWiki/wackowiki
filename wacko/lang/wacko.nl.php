@@ -474,8 +474,8 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'Voor de veiligheid is uw sessie beëindigd. Log opnieuw in.',
 
 	// user settings
-	'SettingsCodeResent'		=> 'Repeated email confirmation code sent to your address.',
-	'SettingsCodeNotSent'		=> 'De bevestigingscode kan niet worden verzonden: e-mail is niet opgegeven!',
+	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
+	'EmailConfirmNotSent'		=> 'De bevestigingscode kan niet worden verzonden: e-mail is niet opgegeven!',
 	'Hello'						=> 'Hallo',
 	'UserName'					=> 'Gebruikersnaam',
 	'EmailAddress'				=> 'Uw emailadres',

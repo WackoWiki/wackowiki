@@ -1099,6 +1099,7 @@ $ap_translation = [
 	'UserAccountNotify'			=> 'Notify user',
 	'UserNotifySignup'			=> 'inform the user about the new account',
 	'UserVerifyEmail'			=> 'set email confirm token and add link for email verification',
+	'UserReVerifyEmail'			=> 'Re-send email confirm token',
 
 	// Groups module
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',

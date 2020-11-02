@@ -1094,6 +1094,7 @@ $ap_translation = [
 	'UserAccountNotify'			=> 'Értesítse a felhasználót',
 	'UserNotifySignup'			=> 'tájékoztassa a felhasználót az új fiókról',
 	'UserVerifyEmail'			=> 'állítsa be az e-mail megerősítő tokent és adjon hozzá linket az e-mail ellenőrzéséhez',
+	'UserReVerifyEmail'			=> 'E-mail újraküldése megerősítés token',
 
 	// Groups module
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',

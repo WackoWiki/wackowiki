@@ -1108,6 +1108,7 @@ $ap_translation = [
 	'UserAccountNotify'			=> 'Benutzer benachrichtigen',
 	'UserNotifySignup'			=> 'den Benutzer über das neue Konto informieren',
 	'UserVerifyEmail'			=> 'setze E-Mail-Bestätigungstoken und füge einen Link zur E-Mail-Verifizierung hinzu',
+	'UserReVerifyEmail'			=> 'Sende E-Mail-Bestätigungstoken erneut',
 
 	// Groups module
 	'GroupsInfo'				=> 'Benutzergruppen verwalten. Hier können Gruppen erstellt, bearbeitet und gelöscht werden. Darüber hinaus lässt sich ein Gruppenleiter auswählen, der Status der Gruppe ändern und der Gruppenname und die Beschreibung festlegen.',

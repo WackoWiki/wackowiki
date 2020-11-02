@@ -474,8 +474,8 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'Dla bezpieczeństwa, twoja sesja się skończyła. Zaloguj się ponownie.',
 
 	// user settings
-	'SettingsCodeResent'		=> 'Repeated email confirmation code sent to your address.',
-	'SettingsCodeNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
+	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
+	'EmailConfirmNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
 	'Hello'						=> 'Witamy',
 	'UserName'					=> 'User name',
 	'EmailAddress'				=> 'Twój adres e-mail',

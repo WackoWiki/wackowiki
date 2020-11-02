@@ -474,8 +474,8 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'Votre session a été close par sécurité. merci de vous reconnecter.',
 
 	// user settings
-	'SettingsCodeResent'		=> 'code de confirmation du courriel répété envoyé à votre adresse.',
-	'SettingsCodeNotSent'		=> 'Envoi du code de confirmation impossible: adresse courriel non spécifiée!',
+	'EmailConfirmResent'		=> 'code de confirmation du courriel répété envoyé à votre adresse.',
+	'EmailConfirmNotSent'		=> 'Envoi du code de confirmation impossible: adresse courriel non spécifiée!',
 	'Hello'						=> 'Bonjour',
 	'UserName'					=> 'Nom d’utilisateur',
 	'EmailAddress'				=> 'Votre adresse de messagerie ',

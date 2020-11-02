@@ -12,7 +12,7 @@ $tabs			= [
 					'notification'	=> 'UserSettingsNotifications',
 					'extended'		=> 'UserSettingsExtended'
 				];
-$mode			= @$_GET[$mod_selector] ?? (@$_POST['_user_menu'] ? 'menu' : '');
+$mode			= $_GET[$mod_selector] ?? (@$_POST['_user_menu'] ? 'menu' : '');
 
 if (!array_key_exists($mode, $tabs))
 {
@@ -42,7 +42,7 @@ else if (($user = $this->get_user()))
 	$this->set_page_lang($this->user_lang);
 	$action			= @$_POST['_action']; // set by form_open
 	$email			= @$_POST['email'];
-	$resend_code	= @$_GET['resend_code'];
+	$resend_code	= (int) ($_GET['resend_code'] ?? null);
 
 	// is user trying to update?
 	if ($action == 'user_settings_general')
@@ -105,7 +105,7 @@ else if (($user = $this->get_user()))
 		"noid_pubs			= " . (int) isset($_POST['noid_pubs']) . ", " .
 		"session_length		= " . (int) @$_POST['session_length'] . " "; // @ to normalize possible discrepancy
 	}
-	else if	($action == 'user_settings_notifications')
+	else if ($action == 'user_settings_notifications')
 	{
 		$sql =
 		"send_watchmail		= " . (int) isset($_POST['send_watchmail']) . ", " .
@@ -115,7 +115,7 @@ else if (($user = $this->get_user()))
 		"notify_comment		= " . (int) @$_POST['notify_comment'] . ", ".	// @ to notify possible discrepancy
 		"allow_massemail	= " . (int) isset($_POST['allow_massemail']) . " ";
 	}
-	else if	($action == 'user_settings_general')
+	else if ($action == 'user_settings_general')
 	{
 		$sql =
 		"user_lang			= " . $this->db->q($_POST['user_lang']) . ", " .
@@ -147,33 +147,12 @@ else if (($user = $this->get_user()))
 	// (re)send email confirmation code
 	if ($this->db->enable_email && ($resend_code || $email_changed))
 	{
-		if ($resend_code)
+		if ($email_changed)
 		{
-			$email = $user['email'];
-		}
-
-		if ($email)
-		{
-			$save		=	$this->set_language($user['user_lang'], true);
-			$subject	=	$this->_t('EmailConfirm');
-			$body		=	Ut::perc_replace($this->_t('EmailReverify'),
-								$this->db->site_name,
-								$user['user_name'],
-								$this->user_email_confirm($user['user_id'])) . "\n\n";
-
 			$user['email'] = $email;
-
-			$this->send_user_email($user, $subject, $body);
-			$this->set_language($save, true);
-
-			$message = $this->_t('SettingsCodeResent');
-		}
-		else
-		{
-			$message = $this->_t('SettingsCodeNotSent');
 		}
 
-		$this->set_message($message, 'success');
+		$this->notify_email_confirm($user);
 	}
 
 	// reload user data

@@ -1094,6 +1094,7 @@ $ap_translation = [
 	'UserAccountNotify'			=> 'Underret bruger',
 	'UserNotifySignup'			=> 'informere brugeren om den nye konto',
 	'UserVerifyEmail'			=> 'angiv e-mail-bekræftelses-token og tilføj link til e-mail-verifikation',
+	'UserReVerifyEmail'			=> 'Send e-mail-bekræftelsestoken igen',
 
 	// Groups module
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',

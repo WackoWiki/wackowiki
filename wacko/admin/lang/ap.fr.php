@@ -1094,6 +1094,7 @@ $ap_translation = [
 	'UserAccountNotify'			=> 'Notifier l\'utilisateur',
 	'UserNotifySignup'			=> 'informer l\'utilisateur du nouveau compte',
 	'UserVerifyEmail'			=> 'configurer le jeton de confirmation de l\'email et ajouter un lien pour la vérification de l\'email',
+	'UserReVerifyEmail'			=> 'Renvoyer l\'e-mail de confirmation du jeton',
 
 	// Groups module
 	'GroupsInfo'				=> 'A partir de ce panneau, vous pouvez administrer tous vos groupes d\'utilisateurs. Vous pouvez supprimer, créer et modifier des groupes existants. En outre, vous pouvez choisir les chefs de groupe, basculer entre les statuts Ouvert/Masqué/Fermé et définir le nom et la description du groupe.',

@@ -474,8 +474,8 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
 
 	// user settings
-	'SettingsCodeResent'		=> 'Repeated email confirmation code sent to your address.',
-	'SettingsCodeNotSent'		=> '확인 코드를 보낼 수 없습니다. 이메일이 지정되지 않았습니다!',
+	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
+	'EmailConfirmNotSent'		=> '확인 코드를 보낼 수 없습니다. 이메일이 지정되지 않았습니다!',
 	'Hello'						=> 'Hello',
 	'UserName'					=> '사용자 이름',
 	'EmailAddress'				=> '이메일 주소',

@@ -110,7 +110,7 @@ function admin_user_users(&$engine, &$module)
 	if (isset($_GET['user_id']) || isset($_POST['user_id']))
 	{
 		$user = $engine->db->load_single(
-			"SELECT u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
+			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status, u.email_confirm " .
 			"FROM " . $prefix . "user u " .
 				"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE u.user_id = " . (int) $user_id . " " .
@@ -254,6 +254,11 @@ function admin_user_users(&$engine, &$module)
 			$engine->show_message($error, 'error');
 			$_POST['create']	= 1;
 		}
+	}
+	// re-confirm email address
+	else if (isset($_POST['confirm']) && $user_id )
+	{
+		$engine->notify_email_confirm($user);
 	}
 	// approve user processing
 	else if (isset($_POST['approve']) && $user_id )
@@ -711,6 +716,14 @@ function admin_user_users(&$engine, &$module)
 					'<th class="label">' . $engine->_t('AccountStatus') . '</th>' .
 					'<td>' . $status[$user['account_status']] . '</td>' .
 				'</tr>';
+
+		if ($user['email_confirm'])
+		{
+			echo '<tr>' . "\n" .
+					'<th class="label">' . $engine->_t('EmailNotVerified') . '</th>' .
+					'<td><input type="submit" id="button" name="confirm" value="' . $engine->_t('UserReVerifyEmail') . '"></td>' .
+				'</tr>';
+		}
 ?>
 		</table>
 		<?php

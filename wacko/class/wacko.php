@@ -2779,6 +2779,34 @@ class Wacko
 		}
 	}
 
+	// re-send email confirmation code
+	function notify_email_confirm($user)
+	{
+		if ($this->db->enable_email)
+		{
+			if ($user['email'])
+			{
+				$save		=	$this->set_language($user['user_lang'], true);
+				$subject	=	$this->_t('EmailConfirm');
+				$body		=	Ut::perc_replace($this->_t('EmailReverify'),
+									$this->db->site_name,
+									$user['user_name'],
+									$this->user_email_confirm($user['user_id'])) . "\n\n";
+
+				$this->send_user_email($user, $subject, $body);
+				$this->set_language($save, true);
+
+				$message	= $this->_t('EmailConfirmResent');
+			}
+			else
+			{
+				$message	= $this->_t('EmailConfirmNotSent');
+			}
+
+			$this->set_message($message, 'success');
+		}
+	}
+
 	// generate url for email confirmation, used for registration and email change
 	function user_email_confirm($user_id) : string
 	{
@@ -2790,7 +2818,7 @@ class Wacko
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
 
-		return $this->href('', '', ['confirm' => $token], null, null, null, true, true);
+		return $this->href('', $this->db->account_page, ['confirm' => $token], null, null, null, true, true);
 	}
 
 	function user_email_confirm_check($token)
@@ -3011,12 +3039,12 @@ class Wacko
 			if (!$tag)
 			{
 				$tag = 'admin.php';
-			}
 
-			// sets current AP module
-			if (isset($this->module) && !isset($params['mode']))
-			{
-				$params['mode'] = $this->module;
+				// sets current AP module
+				if (isset($this->module) && !isset($params['mode']))
+				{
+					$params['mode'] = $this->module;
+				}
 			}
 		}
 

@@ -474,8 +474,8 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'A biztonság kedvéért a munkamenet véget ért. Kérjük, jelentkezzen be újra.',
 
 	// user settings
-	'SettingsCodeResent'		=> 'Ismételt e-mail megerősítő kódot küldött az Ön címére.',
-	'SettingsCodeNotSent'		=> 'Nem sikerült elküldeni a megerősítő kódot: az e-mail nincs megadva!',
+	'EmailConfirmResent'		=> 'Ismételt e-mail megerősítő kódot küldött az Ön címére.',
+	'EmailConfirmNotSent'		=> 'Nem sikerült elküldeni a megerősítő kódot: az e-mail nincs megadva!',
 	'Hello'						=> 'Hello',
 	'UserName'					=> 'Felhasználónév',
 	'EmailAddress'				=> 'E-mail cím',

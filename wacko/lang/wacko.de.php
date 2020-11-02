@@ -474,8 +474,8 @@ $wacko_translation = [
 	'LoggedOutAuto'				=> 'Aus Sicherheitsgründen wurde deine Sitzung beendet. Bitte melde dich erneut an.',
 
 	// user settings
-	'SettingsCodeResent'		=> 'E-Mail-Bestätigungscode wurde erneut zugesand.',
-	'SettingsCodeNotSent'		=> 'Senden des Bestätigungscodes nicht möglich: E-Mail wurde nicht angegeben!',
+	'EmailConfirmResent'		=> 'E-Mail-Bestätigungscode wurde erneut zugesand.',
+	'EmailConfirmNotSent'		=> 'Senden des Bestätigungscodes nicht möglich: E-Mail wurde nicht angegeben!',
 	'Hello'						=> 'Hallo',
 	'UserName'					=> 'Benutzername',
 	'EmailAddress'				=> 'E-Mail-Adresse',
@@ -634,7 +634,7 @@ $wacko_translation = [
 	'EmailRegisteredLogin'		=> 'Bitte kehre zum Wiki zurück und melde dich mit deinem neuen Benutzernamen und Passwort an.',
 	'EmailRegisteredIgnore'		=> 'Wenn du dich nicht registriert hast, ignoriere diese Nachricht, es wird nichts passieren.',
 	'EmailDoNotReply'			=> 'NICHT AUF DIESE NACHRICHT ANTWORTEN',
-	'EmailReverify'				=> 'Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.' . "\n" . 'Dein Benutzername lautet: %2'."\n\n" . 'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem ' . "\n" . '%3' . "\n" . 'Link.'."\n\n" . '',
+	'EmailReverify'				=> 'Jemand (vielleicht du) hat deine E-Mailadresse als Bestätigungsadresse bei %1 angegeben.' . "\n" . 'Dein Benutzername lautet: %2'."\n\n" . 'Um Benachrichtigungen zu erhalten, bestätige bitte diese E-Mail. Folge diesem Link:' . "\n" . '%3' . "\n\n" . '',
 	'EmailConfirm'				=> 'Bitte bestätige deine E-Mail.',
 	'EmailConfirmed'			=> 'E-Mail wurde erfolgreich bestätigt.',
 	'EmailNotConfirmed'			=> 'E-Mail konnte nicht bestätigt werden. Dies könnte an einen falschen Bestätigung-Code liegen oder die E-Mail-Adresse wurde möglicherweise bereits bestätigt. Du kannst prüfen ob die E-Mail bereits bestätigt wurde indem du dich anmeldst und deinen Status auf deiner %1 Seite einsiehst.',
