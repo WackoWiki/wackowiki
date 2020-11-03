@@ -118,7 +118,7 @@ function admin_user_users(&$engine, &$module)
 			"LIMIT 1");
 	}
 
-	// add user processing
+	// add new user processing
 	if (isset($_POST['create']) && isset($_POST['user_name']))
 	{
 		// create new account if possible
@@ -289,7 +289,7 @@ function admin_user_users(&$engine, &$module)
 			$_POST['change']	= (int) $_POST['user_id'];
 			$_POST['edit']		= 1;
 		}
-		else if (!$engine->validate_email($_POST['newemail']))
+		else if (!$engine->validate_email($_POST['email']))
 		{
 			$engine->show_message($engine->_t('NotAEmail'));
 			$_POST['change']	= (int) $_POST['user_id'];
@@ -297,12 +297,18 @@ function admin_user_users(&$engine, &$module)
 		}
 		else
 		{
+			if($engine->db->enable_email && ($user['email'] != $_POST['email']))
+			{
+				$user['email'] = $_POST['email'];
+				$engine->notify_email_confirm($user);
+			}
+
 			$engine->db->sql_query(
 				"UPDATE " . $prefix . "user SET " .
 					"user_name		= " . $engine->db->q($_POST['user_name']) . ", " .
-					"email			= " . $engine->db->q($_POST['newemail']) . ", " .
+					"email			= " . $engine->db->q($_POST['email']) . ", " .
 					#"password		= " . $engine->db->q($engine->password_hash(['user_name' => $_POST['user_name']], $password)) . ", " .
-					"real_name		= " . $engine->db->q($_POST['newrealname']) . ", " .
+					"real_name		= " . $engine->db->q($_POST['realname']) . ", " .
 					"enabled		= " . (int) ($_POST['enabled'] ?? 0) . ", " .
 					"account_status	= " . (int) $_POST['account_status'] . " " .
 				"WHERE user_id		= " . (int) $_POST['user_id'] . " " .
@@ -528,7 +534,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newrealname">' . $engine->_t('RealName') . '</label> ' .
 					'</th>
 					<td>
-						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? $user['real_name'])) . '" size="50" maxlength="100">
+						<input type="text" id="realname" name="realname" value="' . Ut::html(($_POST['realname'] ?? $user['real_name'])) . '" size="50" maxlength="100">
 					</td>' .
 				'</tr>' .
 				'<tr>
@@ -536,7 +542,7 @@ function admin_user_users(&$engine, &$module)
 						<label for="newemail">' . $engine->_t('Email') . '</label> ' .
 					'</th>
 					<td>
-						<input type="email" id="newemail" name="newemail" value="' . Ut::html(($_POST['newemail'] ?? $user['email'])) . '" size="50" maxlength="100">
+						<input type="email" id="email" name="email" value="' . Ut::html(($_POST['email'] ?? $user['email'])) . '" size="50" maxlength="100">
 					</td>
 				</tr>' .
 				'<tr>

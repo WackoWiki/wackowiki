@@ -39,10 +39,13 @@ else if (($user = $this->get_user()))
 {
 	$email_changed	= false;
 	$user			= $this->load_user(0, $user['user_id']);
-	$this->set_page_lang($this->user_lang);
-	$action			= @$_POST['_action']; // set by form_open
-	$email			= @$_POST['email'];
+	$action			= $_POST['_action'] ?? null; // set by form_open
+	$realname		= $_POST['real_name'] ?? '';
+	$email			= $_POST['email'] ?? '';
 	$resend_code	= (int) ($_GET['resend_code'] ?? null);
+	$sql			= '';
+
+	$this->set_page_lang($this->user_lang);
 
 	// is user trying to update?
 	if ($action == 'user_settings_general')
@@ -71,12 +74,12 @@ else if (($user = $this->get_user()))
 			$email_changed = ($user['email'] != $email);
 
 			// store if email hasn't been changed otherwise request authorization
-			if ($email_changed || isset($_POST['real_name']))
+			if ($email_changed || $realname)
 			{
 				// update users table
 				$this->db->sql_query(
 					"UPDATE " . $this->db->user_table . " SET " .
-						"real_name		= " . $this->db->q(trim($_POST['real_name'])) . ", " .
+						"real_name		= " . $this->db->q(trim($realname)) . ", " .
 						"email			= " . $this->db->q($email) . " " .
 					"WHERE user_id = " . (int) $user['user_id'] . " " .
 					"LIMIT 1");
@@ -125,10 +128,6 @@ else if (($user = $this->get_user()))
 		"sorting_comments	= " . (int) $_POST['sorting_comments'] . ", " .
 		"menu_items			= " . (int) $_POST['menu_items'] . ", " .
 		"list_count			= " . (int) $_POST['list_count'] . " " ;
-	}
-	else
-	{
-		$sql = '';
 	}
 
 	if ($sql)
