@@ -13,24 +13,24 @@ $lang = [
 */
 'ConfigDefaults'	=> [
 	// pages
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
-	'users_page'		=> 'Users',
+	'category_page'		=> 'Κατηγορία',
+	'groups_page'		=> 'Ομάδες',
+	'users_page'		=> 'Χρήστες',
 
 	'search_page'		=> 'Αναζήτηση',
-	'login_page'		=> 'Login',
-	'account_page'		=> 'Settings',
-	'registration_page'	=> 'Registration',
-	'password_page'		=> 'Password',
+	'login_page'		=> 'Σύνδεση',
+	'account_page'		=> 'Ρυθμίσεις',
+	'registration_page'	=> 'Εγγραφή',
+	'password_page'		=> 'Συνθηματικό',
 
-	'changes_page'		=> 'RecentChanges',
-	'comments_page'		=> 'RecentlyCommented',
-	'index_page'		=> 'PageIndex',
+	'changes_page'		=> 'ΠρόσφατεςΑλλαγές',
+	'comments_page'		=> 'ΠρόσφαταΣχολιασμένες',
+	'index_page'		=> 'ΕυρετήριοΣελίδων',
 
-	'random_page'		=> 'RandomPage',
+	'random_page'		=> 'ΤυχαίαΣελίδα',
 	#'help_page'			=> 'Βοήθεια',
 	#'terms_page'		=> 'Terms',
-	#'privacy_page'		=> 'Privacy',
+	#'privacy_page'		=> 'Ιδιωτικότητα',
 
 	// time
 	#'date_format'					=> 'd.m.Y',
@@ -78,8 +78,7 @@ $lang = [
 'NotePermissions'				=> 'Το πρόγραμμα εγκατάστασης θα προσπαθήσεις να γράψει δεδομένα ρυθμίσεων στο αρχείο %1, το οποίο βρίσκετε στον κατάλογο του WackoWiki. Για να δουλέψει αυτό, πρέπει να βεβαιωθείτε ότι ο web server σας μπορεί να γράψει σε αυτό το αρχείο. Εάν δεν μπορεί να το κάνει αυτό, θα πρέπει να το επεξεργαστείτε με το χέρι (το πρόγραμμα εγκατάστασης θα σας πει πως).<br><br>Δείτε <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> για λεπτομέρειες.',
 'ErrorPermissions'				=> 'Όπως φαίνεται το πρόγραμμα εγκατάστασης δεν μπορεί αυτόματα να θέσει τις απαιτήσεις στα δικαιώματα αρχείων για το WackoWiki να δουλέψει σωστά. Θα προταθείτε αργότερα κατά την διαδικασία εγκατάστασης να τροποποιήσετε με το χέρι τις απαιτήσεις στα δικαιώματα των αρχείων στον διακομιστή σας.',
 'ErrorMinPhpVersion'			=> 'Η έκδοση της PHP πρέπει να είναι μεγαλύτερη της <strong>' . PHP_MIN_VERSION . '</strong>, ο διακομιστής σας φαίνεται να τρέχει σε προηγούμενη έκδοση. Πρέπει να αναβαθμίσετε σε μία πιο πρόσφατη PHP έκδοση για δουλέψει σωστά το WackoWiki.',
-'Ready'							=> 'Συγχαρητήρια, διαπιστώνεται ότι ο διακομιστής σας μπορεί να τρέξει το WackoWiki.
-Οι επόμενες σελίδες θα σας περιηγήσουν στην διαδικασία παραμετροποίησης.',
+'Ready'							=> 'Συγχαρητήρια, διαπιστώνεται ότι ο διακομιστής σας μπορεί να τρέξει το WackoWiki. Οι επόμενες σελίδες θα σας περιηγήσουν στην διαδικασία παραμετροποίησης.',
 
 /*
    Site Config Page

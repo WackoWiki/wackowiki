@@ -23,7 +23,7 @@ $lang = [
 	'registration_page'	=> 'Registrierung',
 	'password_page'		=> 'Passwort',
 
-	'changes_page'		=> 'LetzteAenderungen',
+	'changes_page'		=> 'LetzteÄnderungen',
 	'comments_page'		=> 'LetzteKommentare',
 	'index_page'		=> 'SeitenIndex',
 
