@@ -84,7 +84,7 @@ else
 	$tpl->p_d_message	= $this->show_message($message, 'note', false);
 }
 
-// create a child page. only inside a cluster
+// create a child page only inside a cluster
 if (mb_substr_count($this->tag, '/') > 0)
 {
 	$parent = mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'));
