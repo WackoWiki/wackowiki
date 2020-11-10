@@ -64,7 +64,7 @@ WikiEdit.prototype.init = function (id, imgPath)
 	this.addButton('underline',			lang.Underline,		'\'__\',\'__\'');
 	this.addButton('strike',			lang.Strikethrough,	'\'--\',\'--\'');
 	this.addButton('small',				lang.Small,			'\'++\',\'++\'');
-	this.addButton('code',				lang.Code,			"'##','##'");
+	this.addButton('code',				lang.Code,			'\'##\',\'##\'');
 	this.addButton('customhtml',		separator);
 
 	//this.addButton('superscript',		lang.Superscript,	"'^^','^^'");
@@ -73,7 +73,7 @@ WikiEdit.prototype.init = function (id, imgPath)
 	this.addButton('ul',				lang.List,			'\'  * \',\'\',0,1,1');
 	this.addButton('ol',				lang.NumberedList,	'\'  1. \',\'\',0,1,1');
 	this.addButton('customhtml',		separator);
-	//this.addButton('left',			lang.Left,			"'%%(wacko wrapper=text wrapper_align=left)','%%',2");
+	//this.addButton('left',			lang.Left,			'\'%%(wacko wrapper=text wrapper_align=left)\',\'%%\',2');
 	this.addButton('center',			lang.Center,		'\'%%(wacko wrapper=text wrapper_align=center)\',\'%%\',2');
 	this.addButton('right',				lang.Right,			'\'%%(wacko wrapper=text wrapper_align=right)\',\'%%\',2');
 	this.addButton('justify',			lang.Justify,		'\'%%(wacko wrapper=text wrapper_align=justify)\',\'%%\',2');
@@ -84,11 +84,11 @@ WikiEdit.prototype.init = function (id, imgPath)
 	this.addButton('customhtml',		separator);
 
 	this.addButton('quote',				lang.Quote,			'\'<[\',\']>\',2');
-	this.addButton('source',			lang.CodeWrapper,	"'%% ',' %%',2");
+	this.addButton('source',			lang.CodeWrapper,	'\'%% \',\' %%\',2');
 	// this.addButton('html',			lang.HTML,			"'<# ',' #>',2");
 	// this.addButton('action',			lang.Action,		"'{{ ',' }}',2");
 	this.addButton('hr',				lang.Line,			'\'\',\'\\n----\\n\',2');
-	this.addButton('signature',			lang.Signature,		"'::@::',' ',1");
+	this.addButton('signature',			lang.Signature,		'\'::@::\',\' \',1');
 	this.addButton('textred',			lang.MarkedText,	'\'!!\',\'!!\',2');
 	this.addButton('highlightcolor',	lang.HighlightText,	'\'??\',\'??\',2');
 	//this.addButton('shade',			lang.Shade,			"'%%(wacko wrapper="shade")','%%',2");
@@ -101,13 +101,13 @@ WikiEdit.prototype.init = function (id, imgPath)
 
 	this.addButton('createtable',		lang.InsertTable,	'\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
 	this.addButton('customhtml',		separator);
-	this.addButton('about',				lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
 	this.addButton('customhtml',		'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
 		+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 		+ 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.org/doc/' + lang.HelpFormattingPage + '\');" '
 		+ ' title="' + lang.HelpFormattingTip + '">'
 		+ '<img src="' + this.imagesPath + 'spacer.png"' + ' alt="' + lang.HelpFormatting + '" title="' + lang.HelpFormattingTip + '">'
 		+ '</div></li>');
+	this.addButton('about',				lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
 
 	try {
 		var toolbar			= document.createElement('div');
@@ -758,7 +758,7 @@ WikiEdit.prototype.createLink = function (isAlt)
 WikiEdit.prototype.help = function ()
 {
 	s = '				WikiEdit 3.20 \n';
-	s += '	(c) Roman Ivanov, WackoWiki Team 2003-2020	 \n';
+	s += '	© Roman Ivanov, WackoWiki Team 2003-2020	 \n';
 	s += '	https://wackowiki.org/doc/Dev/Projects/WikiEdit \n';
 	s += '\n';
 	s += lang.HelpAboutTip;
