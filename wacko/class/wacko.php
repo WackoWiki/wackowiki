@@ -4483,8 +4483,7 @@ class Wacko
 		$this->sanitize_page_tag($tag);
 
 		// - / ' _ .
-		// TODO: remove punctuations from language ALPHA* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if (!preg_match('#^([-/\'_.' . $this->language['ALPHANUM_P'] . ']+)$#u', $tag))
+		if (!preg_match('#^([-/_.' . $this->language['ALPHANUM_P'] . ']+)$#u', $tag))
 		{
 			return $this->_t('InvalidWikiName');
 		}
