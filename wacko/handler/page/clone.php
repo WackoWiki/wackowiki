@@ -24,7 +24,7 @@ if (@$_POST['_action'] === 'clone_page')
 {
 	$to = $_POST['clone_name'];
 
-	if ($error = $this->sanitize_new_pagename($to, $from))
+	if ($error = $this->sanitize_new_page_tag($to, $from))
 	{
 		$this->set_message($error, 'error');
 		$this->reload_me();

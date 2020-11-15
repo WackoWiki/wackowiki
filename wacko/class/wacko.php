@@ -4478,7 +4478,7 @@ class Wacko
 
 	// returns error text, or null on OK
 	// if old_tag specified - check also for already-namedness & already-existence
-	function sanitize_new_pagename(&$tag, $old_tag = false) : ?string
+	function sanitize_new_page_tag(&$tag, $old_tag = false) : ?string
 	{
 		$this->sanitize_page_tag($tag);
 

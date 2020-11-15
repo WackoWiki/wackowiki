@@ -26,40 +26,51 @@ function admin_config_pages(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
+	<p>
+		<?php echo $engine->_t('PagesSettingsInfo');?>
+	</p>
+	<br>
 <?php
+	$sanitize_tag = function ($tag) use ($engine)
+	{
+		$engine->sanitize_page_tag($tag);
+
+		return utf8_trim($tag, '/');
+	};
+
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
 		$config['list_count']				= (int) $_POST['list_count'];
-		$config['forum_cluster']			= utf8_trim((string) $_POST['forum_cluster'], '/');
+		$config['forum_cluster']			= (string) $sanitize_tag($_POST['forum_cluster']);
 		$config['forum_topics']				= (int) $_POST['forum_topics'];
 		$config['comments_count']			= (int) $_POST['comments_count'];
-		$config['news_cluster']				= utf8_trim((string) $_POST['news_cluster'], '/');
+		$config['news_cluster']				= (string) $sanitize_tag($_POST['news_cluster']);
 		$config['news_levels']				= (string) $_POST['news_levels'];
 		$config['enable_license']			= (int) $_POST['enable_license'];
 		$config['license']					= (string) $_POST['license'];
 		$config['allow_license_per_page']	= (int) $_POST['license_per_page'];
-		$config['root_page']				= utf8_trim((string) $_POST['root_page'], '/');
-		$config['help_page']				= utf8_trim((string) $_POST['help_page'], '/');
-		$config['privacy_page']				= utf8_trim((string) $_POST['privacy_page'], '/');
-		$config['terms_page']				= utf8_trim((string) $_POST['terms_page'], '/');
-		$config['search_page']				= utf8_trim((string) $_POST['search_page'], '/');
-		$config['registration_page']		= utf8_trim((string) $_POST['registration_page'], '/');
-		$config['login_page']				= utf8_trim((string) $_POST['login_page'], '/');
-		$config['account_page']				= utf8_trim((string) $_POST['account_page'], '/');
-		$config['password_page']			= utf8_trim((string) $_POST['password_page'], '/');
-		$config['users_page']				= utf8_trim((string) $_POST['users_page'], '/');
-		$config['category_page']			= utf8_trim((string) $_POST['category_page'], '/');
-		$config['tag_page']					= utf8_trim((string) $_POST['tag_page'], '/');
-		$config['groups_page']				= utf8_trim((string) $_POST['groups_page'], '/');
-		$config['changes_page']				= utf8_trim((string) $_POST['changes_page'], '/');
-		$config['comments_page']			= utf8_trim((string) $_POST['comments_page'], '/');
-		$config['index_page']				= utf8_trim((string) $_POST['index_page'], '/');
-		$config['random_page']				= utf8_trim((string) $_POST['random_page'], '/');
-		$config['removals_page']			= utf8_trim((string) $_POST['removals_page'], '/');
-		$config['wanted_page']				= utf8_trim((string) $_POST['wanted_page'], '/');
-		$config['orphaned_page']			= utf8_trim((string) $_POST['orphaned_page'], '/');
-		$config['sandbox']					= utf8_trim((string) $_POST['sandbox'], '/');
+		$config['root_page']				= (string) $sanitize_tag($_POST['root_page']);
+		$config['help_page']				= (string) $sanitize_tag($_POST['help_page']);
+		$config['privacy_page']				= (string) $sanitize_tag($_POST['privacy_page']);
+		$config['terms_page']				= (string) $sanitize_tag($_POST['terms_page']);
+		$config['search_page']				= (string) $sanitize_tag($_POST['search_page']);
+		$config['registration_page']		= (string) $sanitize_tag($_POST['registration_page']);
+		$config['login_page']				= (string) $sanitize_tag($_POST['login_page']);
+		$config['account_page']				= (string) $sanitize_tag($_POST['account_page']);
+		$config['password_page']			= (string) $sanitize_tag($_POST['password_page']);
+		$config['users_page']				= (string) $sanitize_tag($_POST['users_page']);
+		$config['category_page']			= (string) $sanitize_tag($_POST['category_page']);
+		$config['tag_page']					= (string) $sanitize_tag($_POST['tag_page']);
+		$config['groups_page']				= (string) $sanitize_tag($_POST['groups_page']);
+		$config['changes_page']				= (string) $sanitize_tag($_POST['changes_page']);
+		$config['comments_page']			= (string) $sanitize_tag($_POST['comments_page']);
+		$config['index_page']				= (string) $sanitize_tag($_POST['index_page']);
+		$config['random_page']				= (string) $sanitize_tag($_POST['random_page']);
+		$config['removals_page']			= (string) $sanitize_tag($_POST['removals_page']);
+		$config['wanted_page']				= (string) $sanitize_tag($_POST['wanted_page']);
+		$config['orphaned_page']			= (string) $sanitize_tag($_POST['orphaned_page']);
+		$config['sandbox']					= (string) $sanitize_tag($_POST['sandbox']);
 
 		$engine->config->_set($config);
 

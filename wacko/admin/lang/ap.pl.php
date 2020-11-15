@@ -659,7 +659,7 @@ $ap_translation = [
 	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
 
 	// Pages settings
-	'PagesSettingsInfo'			=> '',
+	'PagesSettingsInfo'			=> 'Tutaj możesz ustawić lub zmienić strony bazowe systemu używane w Wiki. Upewnij się, że nie zapomniałeś utworzyć lub zmienić odpowiednich stron w Wiki zgodnie z Twoimi ustawieniami tutaj.',
 	'PagesSettingsUpdated'		=> 'Updated settings base pages',
 
 	'ListCount'					=> 'Number of items per list',

@@ -89,7 +89,7 @@ $lang = [
 'SiteNameDefault'				=> 'MonWiki',
 'HomePage'						=> 'Page d’accueil',
 'HomePageDesc'					=> 'Choissez le nom de votre page d’accueil. Ce doit être un <a href="https://wackowiki.org/doc/Doc/Français/NomWiki" title="Voir l’aide" target="_blank">NomWiki</a>.',
-'HomePageDefault'				=> 'PagePrincipale',
+'HomePageDefault'				=> 'Accueil',
 'MultiLang'						=> 'Mode multilingue',
 'MultiLangDesc'					=> 'Le mode multilingue permet d’avoir des pages avec plusieurs réglages de langue sur le même site. Si ce mode est choisi, l’installeur crée un jeu de éléments de menu de base dans chacune des langues incluses dans la distribution.',
 'AllowedLang'					=> 'Langues autorisées',

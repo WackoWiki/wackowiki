@@ -41,7 +41,7 @@ if ($registered
 			$new_tag		= $_POST['new_tag'];
 			$old_tag		= $this->page['tag'];
 
-			if (($error = $this->sanitize_new_pagename($new_tag, $this->tag)))
+			if (($error = $this->sanitize_new_page_tag($new_tag, $this->tag)))
 			{
 				$this->set_message($error, 'error');
 				$this->reload_me();

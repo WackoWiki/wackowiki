@@ -666,7 +666,7 @@ $ap_translation = [
 	'YouareHereTextInfo'		=> 'Visualisiert Links zur selben Seite, bspw. <code>&lt;b&gt;####&lt;/b&gt;</code>, alle Links auf sich selbst werden nicht als Link, sondern als fetter Text dargestellt.',
 
 	// Pages settings
-	'PagesSettingsInfo'			=> '',
+	'PagesSettingsInfo'			=> 'Hier kann man die im Wiki verwendeten System-Basisseiten einstellen oder ändern. Bitte vergiss nicht, die entsprechenden Seiten im Wiki gemäß der Einstellungen hier anzulegen oder zu ändern.',
 	'PagesSettingsUpdated'		=> 'Einstellungen der Basisseiten aktualisiert',
 
 	'ListCount'					=> 'Anzahl der Datensätze pro Liste',
