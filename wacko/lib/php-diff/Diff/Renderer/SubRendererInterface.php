@@ -13,7 +13,7 @@ namespace PHPDiff\Diff\Renderer;
  * @author      Ferry Cools <info@DigiLive.nl>
  * @copyright   (c) 2020 Ferry Cools
  * @license     New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version     2.2.1
+ * @version     2.3.0
  * @link        https://github.com/JBlond/php-diff
  */
 interface SubRendererInterface
@@ -37,7 +37,7 @@ interface SubRendererInterface
      *
      * @param array $changes Contains the op-codes about the changes between two blocks of text.
      *
-     * @return string Start of the diff view.
+     * @return string Start of the block.
      */
     public function generateBlockHeader(array $changes): string;
 
