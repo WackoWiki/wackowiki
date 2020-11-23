@@ -200,7 +200,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				$tpl->link			= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
 
 				// show image
-				if (in_array($file['file_ext'], ['gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp']))
+				if (in_array($file['file_ext'], ['avif', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp']))
 				{
 					$tpl->i_href		= $href;
 					$tpl->i_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', false);

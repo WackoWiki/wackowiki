@@ -89,7 +89,7 @@ function admin_config_appearance(&$engine, &$module)
 		$ext					= strtolower($ext);
 
 		$image['favicon']		= ['gif', 'ico' , 'jpeg', 'jpe', 'jpg', 'png', 'svg'];
-		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp'];
+		$image['logo']			= ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp'];
 		// calculate reasonable filesize: Pixels * Bit Depth
 		// - GIF/PNG palette-based images (up to 8-bit)
 		// - Non-palette images (JPEG/PNG/TIFF/SVG) are 0, 8, or 16.
@@ -249,7 +249,7 @@ function admin_config_appearance(&$engine, &$module)
 				<input type="submit" id="remove_logo" name="remove_logo" value="<?php echo $engine->_t('Remove'); ?>">
 			<?php }
 				// SVG format is intentionally excluded ?>
-				<input type="file" name="logo" id="logo_upload" accept=".gif, .jpg, .png, .webp, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
+				<input type="file" name="logo" id="logo_upload" accept=".avif, .gif, .jpg, .png, .webp, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
 			</td>
 		</tr>
 		<?php

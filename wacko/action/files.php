@@ -254,7 +254,7 @@ if ($can_view)
 			$file_name	= $file['file_name'];
 			$shown_name	= $this->shorten_string($file_name, $file_name_maxlen);
 			$text		= ($media
-							? ($file['picture_w'] || in_array($file['file_ext'], ['m4a', 'mp3', 'ogg', 'opus', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp', 'mp4', 'ogv', 'webm'])
+							? ($file['picture_w'] || in_array($file['file_ext'], ['m4a', 'mp3', 'ogg', 'opus', 'avif', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp', 'mp4', 'ogv', 'webm'])
 								? ''					// parses image, audio and video links into their media tags
 								: $shown_name)			// shows file link
 							: $shown_name);
@@ -262,7 +262,7 @@ if ($can_view)
 
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
-			if (!in_array($file['file_ext'], ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp']))
+			if (!in_array($file['file_ext'], ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp']))
 			{
 				$hits	= $file['hits'] . ' ' . $this->_t('SettingsHits');
 			}

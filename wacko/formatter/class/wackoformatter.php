@@ -256,7 +256,7 @@ class WackoFormatter
 			// list including multilevel
 			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|" .
 			// media links
-			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
+			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
 			"\b[[:alnum:]]+[:][" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
@@ -733,7 +733,7 @@ class WackoFormatter
 		{
 			$url = mb_strtolower($matches[1]);
 
-			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/u', $url, $media))
+			if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(avif|gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/u', $url, $media))
 			{
 				// audio
 				if ($media[4])
@@ -1175,7 +1175,7 @@ class WackoFormatter
 			return $result;
 		}
 		// media file links
-		else if (preg_match('/^file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
+		else if (preg_match('/^file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jpg|jpe|jpeg|png|svg|webp)(\?[[:alnum:]\&]+)?$/us', $thing, $matches))
 		{
 			$caption = 0;
 			if(!empty($matches[4]) && preg_match('/caption/ui', $matches[4]))

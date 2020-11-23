@@ -52,7 +52,7 @@ if ($this->can_upload(true) === true)
 	// https://www.w3.org/TR/html5/forms.html#attr-input-accept
 	if ($this->db->upload_images_only)
 	{
-		$tpl->u_accecpt = 'accept=".gif,.jpg,.png,.svg,.webp,image/gif,image/jpeg,image/png,image/svg+xml,image/webp"';
+		$tpl->u_accecpt = 'accept=".avif,.gif,.jpg,.png,.svg,.webp,image/avif,image/gif,image/jpeg,image/png,image/svg+xml,image/webp"';
 	}
 
 	$tpl->u_size = $this->binary_multiples($maxfilesize, false, true, true);

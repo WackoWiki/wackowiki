@@ -3472,7 +3472,7 @@ class Wacko
 		}
 
 		// external media file
-		if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
+		if (preg_match('/^(http|https|ftp):\/\/([^\\s\"<>]+)\.((m4a|mp3|ogg|opus)|(avif|gif|jpg|jpe|jpeg|png|svg|webp)|(mp4|ogv|webm))$/ui', preg_replace('/<\/?nobr>/u', '', $text), $matches))
 		{
 			// remove typografica glue
 			$link = $text = preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3533,7 +3533,7 @@ class Wacko
 			$tpl	= 'anchor';
 		}
 		// external image
-		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $tag))
+		else if (preg_match('/^(http|https|ftp|file):\/\/([^\\s\"<>]+)\.(avif|gif|jpg|jpe|jpeg|png|svg|webp)$/ui', $tag))
 		{
 			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
@@ -3708,7 +3708,7 @@ class Wacko
 					$tpl		= 'localfile';
 
 					// media it is
-					if ((in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm', 'm4a', 'mp3', 'ogg', 'opus', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp'])) && !$noimg)
+					if ((in_array($file_data['file_ext'], ['mp4', 'ogv', 'webm', 'm4a', 'mp3', 'ogg', 'opus', 'avif', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp'])) && !$noimg)
 					{
 						if ($file_data['file_ext'] == 'svg')
 						{
