@@ -4590,7 +4590,7 @@ class Wacko
 		{
 			$query = '';
 
-			foreach ($link_table as $dummy => $to_tag) // discard strtolowered index
+			foreach ($link_table as $to_tag) // discard strtolowered index
 			{
 				$query .= "(" .
 						(int) $from_page_id . ", " .
@@ -4617,7 +4617,7 @@ class Wacko
 		{
 			$query = '';
 
-			foreach ($file_table as $file_id => $dummy) // index == value, BTW
+			foreach (array_keys($file_table) as $file_id) // index == value, BTW
 			{
 				$query .= "(	" . (int) $from_page_id . ",
 								" . (int) $file_id . "),";
@@ -4640,7 +4640,7 @@ class Wacko
 		{
 			$query = '';
 
-			foreach ($external_table as $dummy => $link) // discard strtolowered index
+			foreach ($external_table as $link) // discard strtolowered index
 			{
 				if (filter_var($link, FILTER_VALIDATE_URL))
 				{

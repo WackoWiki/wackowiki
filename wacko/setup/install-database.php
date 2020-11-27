@@ -270,7 +270,7 @@ switch ($config['database_driver'])
 						// The funny upgrading stuff. Make sure these are in order!
 						ksort($upgrade, SORT_STRING);
 
-						foreach ($upgrade as $to_version => $dummy)
+						foreach (array_keys($upgrade) as $to_version) // index == value, BTW
 						{
 							if (version_compare($version, $to_version, '<='))
 							{
@@ -454,7 +454,7 @@ switch ($config['database_driver'])
 					// The funny upgrading stuff. Make sure these are in order!
 					ksort($upgrade, SORT_STRING);
 
-					foreach ($upgrade as $to_version => $dummy)
+					foreach (array_keys($upgrade) as $to_version) // index == value, BTW
 					{
 						if (version_compare($version, $to_version, '<='))
 						{

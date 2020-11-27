@@ -15,4 +15,4 @@ $typo = new Typografica($this);
 // kuso: since dashglued cause rendering bugs in Firefox, this option is now turned off.
 $typo->settings['dashglue'] = false;
 
-echo $typo->correct($text, false);
+echo $typo->correct($text);
