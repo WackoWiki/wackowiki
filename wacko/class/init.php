@@ -24,12 +24,8 @@ switch (PHP_ERROR_REPORTING)
 	default:	error_reporting(E_ALL);
 }
 
-//  setting default timezone
-if (function_exists('date_default_timezone_set') && function_exists('date_default_timezone_get'))
-{
-	// Set the timezone to whatever date_default_timezone_get() returns.
-	date_default_timezone_set(@date_default_timezone_get());
-}
+// set the timezone to whatever date_default_timezone_get() returns.
+date_default_timezone_set(@date_default_timezone_get());
 
 ini_set('default_charset', 'UTF-8');
 
