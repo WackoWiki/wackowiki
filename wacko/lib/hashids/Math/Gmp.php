@@ -1,23 +1,16 @@
 <?php
 
-/*
- * This file is part of Hashids.
- *
- * (c) Ivan Akimov <ivan@barreleye.com>
+/**
+ * Copyright (c) Ivan Akimov.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @see https://github.com/vinkla/hashids
  */
 
 namespace Hashids\Math;
 
-/**
- * This is the Gmp math class.
- *
- * @author Vincent Klaiber <hello@doubledip.se>
- * @author Jakub Kramarz <lenwe@lenwe.net>
- * @author Johnson Page <jwpage@gmail.com>
- */
 class Gmp implements MathInterface
 {
     /**
@@ -30,7 +23,7 @@ class Gmp implements MathInterface
      */
     public function add($a, $b)
     {
-        return gmp_add($a, $b);
+        return \gmp_add($a, $b);
     }
 
     /**
@@ -43,7 +36,7 @@ class Gmp implements MathInterface
      */
     public function multiply($a, $b)
     {
-        return gmp_mul($a, $b);
+        return \gmp_mul($a, $b);
     }
 
     /**
@@ -56,7 +49,7 @@ class Gmp implements MathInterface
      */
     public function divide($a, $b)
     {
-        return gmp_div_q($a, $b);
+        return \gmp_div_q($a, $b);
     }
 
     /**
@@ -69,7 +62,7 @@ class Gmp implements MathInterface
      */
     public function mod($n, $d)
     {
-        return gmp_mod($n, $d);
+        return \gmp_mod($n, $d);
     }
 
     /**
@@ -82,7 +75,7 @@ class Gmp implements MathInterface
      */
     public function greaterThan($a, $b)
     {
-        return gmp_cmp($a, $b) > 0;
+        return \gmp_cmp($a, $b) > 0;
     }
 
     /**
@@ -94,7 +87,7 @@ class Gmp implements MathInterface
      */
     public function intval($a)
     {
-        return gmp_intval($a);
+        return \gmp_intval($a);
     }
 
     /**
@@ -106,7 +99,7 @@ class Gmp implements MathInterface
      */
     public function strval($a)
     {
-        return gmp_strval($a);
+        return \gmp_strval($a);
     }
 
     /**
@@ -118,6 +111,6 @@ class Gmp implements MathInterface
      */
     public function get($a)
     {
-        return gmp_init($a);
+        return \gmp_init($a);
     }
 }

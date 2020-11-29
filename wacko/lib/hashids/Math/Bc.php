@@ -1,23 +1,16 @@
 <?php
 
-/*
- * This file is part of Hashids.
- *
- * (c) Ivan Akimov <ivan@barreleye.com>
+/**
+ * Copyright (c) Ivan Akimov.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @see https://github.com/vinkla/hashids
  */
 
 namespace Hashids\Math;
 
-/**
- * This is the Bc math class.
- *
- * @author Vincent Klaiber <hello@doubledip.se>
- * @author Jakub Kramarz <lenwe@lenwe.net>
- * @author Johnson Page <jwpage@gmail.com>
- */
 class Bc implements MathInterface
 {
     /**
@@ -30,7 +23,7 @@ class Bc implements MathInterface
      */
     public function add($a, $b)
     {
-        return bcadd($a, $b, 0);
+        return \bcadd($a, $b, 0);
     }
 
     /**
@@ -43,7 +36,7 @@ class Bc implements MathInterface
      */
     public function multiply($a, $b)
     {
-        return bcmul($a, $b, 0);
+        return \bcmul($a, $b, 0);
     }
 
     /**
@@ -56,7 +49,7 @@ class Bc implements MathInterface
      */
     public function divide($a, $b)
     {
-        return bcdiv($a, $b, 0);
+        return \bcdiv($a, $b, 0);
     }
 
     /**
@@ -69,7 +62,7 @@ class Bc implements MathInterface
      */
     public function mod($n, $d)
     {
-        return bcmod($n, $d);
+        return \bcmod($n, $d);
     }
 
     /**
@@ -82,7 +75,7 @@ class Bc implements MathInterface
      */
     public function greaterThan($a, $b)
     {
-        return bccomp($a, $b, 0) > 0;
+        return \bccomp($a, $b, 0) > 0;
     }
 
     /**
@@ -94,7 +87,7 @@ class Bc implements MathInterface
      */
     public function intval($a)
     {
-        return intval($a);
+        return \intval($a);
     }
 
     /**
