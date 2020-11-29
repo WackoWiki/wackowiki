@@ -18,7 +18,7 @@ $lang = [
 	'users_page'		=> '用户',
 
 	'search_page'		=> '搜索',
-	'login_page'		=> '用户登录',
+	'login_page'		=> '登录',
 	'account_page'		=> '帐户',
 	'registration_page'	=> '创建账户',
 	'password_page'		=> '密码',

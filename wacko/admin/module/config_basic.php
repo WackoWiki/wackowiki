@@ -469,7 +469,7 @@ function admin_config_basic(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="xml_sitemap"><strong><?php echo $engine->_t('XmlSitemap');?>:</strong><br>
-					<small><?php echo Ut::perc_replace($engine->_t('XmlSitemapInfo'), '<code>' . SITEMAP_XML . '</code>');?>
+					<small><?php echo Ut::perc_replace($engine->_t('XmlSitemapInfo'), '<code>' . SITEMAP_XML . '</code>');?><br>
 					<code>Sitemap: <?php echo $engine->db->base_url . SITEMAP_XML;?></code></small></label>
 				</td>
 				<td>
