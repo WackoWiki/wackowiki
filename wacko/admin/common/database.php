@@ -278,7 +278,7 @@ function get_table(&$engine, $table, $drop = true)
 
 	$index			= [];
 	$schema_create	= "";
-	$field_query	= "SHOW FIELDS FROM $table";
+	$field_query	= "SHOW FULL COLUMNS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
 
 	if ($drop == true)
@@ -294,6 +294,12 @@ function get_table(&$engine, $table, $drop = true)
 	foreach ($result as $row)
 	{
 		$schema_create .= '	`' . $row['Field'] . '` ' . $row['Type'];
+
+		// set collation
+		if (!empty($row['Collation']))
+		{
+			$schema_create .= ' COLLATE ' . $row['Collation'] . '';
+		}
 
 		// provide timestamp with CURRENT_TIMESTAMP without quotes
 		if (!empty($row['Default'])
@@ -369,7 +375,7 @@ function get_table(&$engine, $table, $drop = true)
 		}
 	}
 
-	$schema_create .= "\n) ENGINE={$engine->db->database_engine} CHARSET={$engine->db->database_charset};"; // TODO: CHARSET per table
+	$schema_create .= "\n) ENGINE={$engine->db->database_engine} CHARSET={$engine->db->database_charset} COLLATE={$engine->db->database_collation};";
 
 	return ($schema_create);
 }

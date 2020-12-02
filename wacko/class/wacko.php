@@ -5661,6 +5661,8 @@ class Wacko
 		{
 			return (int) ($page['owner_id'] ?? null);
 		}
+
+		return null;
 	}
 
 	function set_page_owner($page_id, $user_id)
