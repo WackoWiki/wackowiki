@@ -96,21 +96,21 @@ if ($this->is_admin())
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}file
-					CHANGE file_name file_name VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE file_name file_name VARCHAR(191) NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}page
-					CHANGE title title VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '',
-					CHANGE tag tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE title title VARCHAR(191) NOT NULL DEFAULT '',
+					CHANGE tag tag VARCHAR(191) BINARY NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}page_link
-					CHANGE to_tag to_tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE to_tag to_tag VARCHAR(191) BINARY NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}revision
-					CHANGE title title VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '',
-					CHANGE tag tag VARCHAR(191) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE title title VARCHAR(191) NOT NULL DEFAULT '',
+					CHANGE tag tag VARCHAR(191) BINARY NOT NULL DEFAULT '';");
 
 			$results .=
 				'<strong>' . date('H:i:s') . ' - ' . 'Tables altered.' . "\n" .
