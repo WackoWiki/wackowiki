@@ -1682,7 +1682,7 @@ class Wacko
 	 *
 	 * @return string	$body_r
 	 */
-	function save_page($tag, $title = '', $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false) : ?string
+	function save_page($tag, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false) : ?string
 	{
 		$desc = '';
 

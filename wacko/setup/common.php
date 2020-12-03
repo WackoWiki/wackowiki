@@ -171,7 +171,7 @@ insert default pages, all related acls and menu item
 	$menu_title	=
 	$noindex	=
 */
-function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
+function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
 {
 	global $config_global, $dblink_global, $lang_global;
 
@@ -218,7 +218,14 @@ function insert_page($tag, $title = false, $body, $lang, $rights = 'Admins', $cr
 	switch ($config_global['database_driver'])
 	{
 		case 'mysqli_legacy':
-			if (0 == mysqli_num_rows(mysqli_query($dblink_global, $page_select)) || $set_menu == SET_MENU_ONLY)
+			$add_page = false;
+
+			if ($result = mysqli_query($dblink_global, $page_select))
+			{
+				$add_page = (0 == mysqli_num_rows($result));
+			}
+
+			if ($add_page || $set_menu == SET_MENU_ONLY)
 			{
 				foreach ($insert_data as $data)
 				{
