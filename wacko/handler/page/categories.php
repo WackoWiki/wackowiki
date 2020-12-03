@@ -328,7 +328,7 @@ if (   $this->is_owner()
 			}
 		}
 
-		$tpl->a_form	= $this->show_category_form($this->page['page_id'], OBJECT_PAGE, $this->page['page_lang'], $can_edit);
+		$tpl->a_form	= $this->show_category_form($this->page['page_lang'], $this->page['page_id'], OBJECT_PAGE, $can_edit);
 	}
 }
 else

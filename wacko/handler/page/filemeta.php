@@ -164,7 +164,7 @@ else if ($mode == 'label' && isset($file))
 			$path2 = str_replace('file:/', '_file:/', $path);
 
 			$tpl->link		= $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name']));
-			$tpl->category	= $this->show_category_form($file['file_id'], OBJECT_FILE, $file['file_lang'], false);
+			$tpl->category	= $this->show_category_form($file['file_lang'], $file['file_id'], OBJECT_FILE, false);
 			$tpl->fileid	= $file['file_id'];
 		}
 	}

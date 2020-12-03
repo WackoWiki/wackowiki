@@ -381,7 +381,7 @@ if ($this->has_access('read')
 
 	if (!$this->page && $words = $this->get_categories_list($this->page_lang, true))
 	{
-		$tpl->c_categories = $this->show_category_form('', OBJECT_PAGE, $this->page_lang, false);
+		$tpl->c_categories = $this->show_category_form($this->page_lang, '', OBJECT_PAGE, false);
 	}
 
 	if ($this->page? $this->db->captcha_edit_page : $this->db->captcha_new_page)

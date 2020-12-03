@@ -6562,7 +6562,7 @@ class Wacko
 	// user trail navigation
 	//		call this function in your theme header or footer
 	//		$separator	= &gt; »
-	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size) : string
+	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size = null) : string
 	{
 		// don't call this inside the run function, it will also writes all included pages
 		// in the user trail because the engine parses them before it includes them
@@ -8402,7 +8402,7 @@ class Wacko
 		}
 	}
 
-	function show_category_form($object_id = '', $type_id = '', $lang, $can_edit = false) : string
+	function show_category_form($lang, $object_id = '', $type_id = '', $can_edit = false) : string
 	{
 		$assigned	= [];
 		$selected	= [];
