@@ -213,8 +213,7 @@ if ($this->has_access('read')
 				// now we render it internally to the update the link tables.
 				$this->update_link_table($this->page['page_id'], $body_r);
 
-				$this->page_cache['tag'][$this->tag]					= '';
-				$this->page_cache['page_id'][$this->page['page_id']]	= '';
+				$this->page_cache[$this->page['page_id']]	= '';
 
 				// show success message (too much visual clutter)
 				/* $message	= $this->page['comment_on_id']

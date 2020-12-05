@@ -773,13 +773,13 @@ class Wacko
 			$page = $this->_load_page('', $page_id, $revision_id, $cache, $metadata_only, $deleted);
 		}
 
-		// 3. if not found, search for tag
+		// 2. if not found, search for tag
 		if (!$page)
 		{
 			$page = $this->_load_page($tag, 0, $revision_id, $cache, $metadata_only, $deleted);
 		}
 
-		// 4. still nothing? file under wanted
+		// 3. still nothing? file under wanted
 		if (!$page)
 		{
 			($page_id != 0
@@ -887,36 +887,25 @@ class Wacko
 	*
 	* @param string $tag Page tag
 	* @param int $page_id
-	* @param boolean $metadataonly Returns only page with equal metadataonly marker. Default value is 0.
+	* @param boolean $metadata_only Returns only page with equal metadata_only marker. Default value is 0.
 	*
 	* @return mixed Page from cache or FALSE if not found
 	*/
-	function get_cached_page($tag, $page_id = 0, $metadata_only = 0)
+	function get_cached_page($tag, $page_id = 0, $metadata_only = false)
 	{
+		if ($page_id == 0)
+		{
+			$page_id = $this->page_id_cache[$tag] ?? 0;
+		}
+
 		if ($page_id != 0)
 		{
-			if (isset($this->page_cache['page_id'][$page_id]))
+			if (isset($this->page_cache[$page_id]))
 			{
-				if (isset($this->page_cache['page_id'][$page_id]['mdonly'])
-					&& (   $this->page_cache['page_id'][$page_id]['mdonly'] == 0
-						|| $this->page_cache['page_id'][$page_id]['mdonly'] == $metadata_only))
+				if ($this->page_cache[$page_id]['mdonly'] == false
+					|| (isset($this->page_cache[$page_id]['mdonly']) && $this->page_cache[$page_id]['mdonly'] == $metadata_only))
 				{
-					return $this->page_cache['page_id'][$page_id];
-				}
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			if (isset($this->page_cache['tag'][$tag]))
-			{
-				if (   $this->page_cache['tag'][$tag]['mdonly'] == 0
-					|| $this->page_cache['tag'][$tag]['mdonly'] == $metadata_only)
-				{
-					return $this->page_cache['tag'][$tag];
+					return $this->page_cache[$page_id];
 				}
 			}
 			else
@@ -940,12 +929,12 @@ class Wacko
 			return;
 		}
 
-		// cache for both cases (page_id + tag) to avoid roundtrips
-		$this->page_cache['page_id'][$page['page_id']]				= $page;
-		$this->page_cache['page_id'][$page['page_id']]['mdonly']	= $metadata_only;
+		// cache page
+		$this->page_cache[$page['page_id']]				= $page;
+		$this->page_cache[$page['page_id']]['mdonly']	= $metadata_only;
 
-		$this->page_cache['tag'][$page['tag']]						= $page;
-		$this->page_cache['tag'][$page['tag']]['mdonly']			= $metadata_only;
+		// cache page_id to avoid roundtrips
+		$this->page_id_cache[$page['tag']] = $page['page_id'];
 	}
 
 	function cache_wanted_page($tag, $page_id = 0, $check = 0)
@@ -6810,7 +6799,7 @@ class Wacko
 				"LIMIT 1");
 
 			$revision_id	= $revision_id ? $revision_id['revision_id'] : 0;
-			$page			= $this->load_page('', $ids[0], $revision_id, '', '', $this->is_admin());
+			$page			= $this->load_page('', $ids[0], $revision_id, null, null, $this->is_admin());
 
 			if ($page)
 			{
@@ -6837,12 +6826,12 @@ class Wacko
 			$deleted		= $this->is_admin();
 
 			// load page
-			$page			= $this->load_page($tag, 0, $revision_id, '', '', $deleted);
+			$page			= $this->load_page($tag, 0, $revision_id, null, null, $deleted);
 
 			// no available revision
 			if ($revision_id && empty($page['tag']))
 			{
-				$page		= $this->load_page($tag, 0, 0, '', '', $deleted);
+				$page		= $this->load_page($tag, 0, 0, null, null, $deleted);
 			}
 
 			// invalid namespace
