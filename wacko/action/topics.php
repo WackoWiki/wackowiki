@@ -210,7 +210,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 				}
 				else
 				{
-					$comment = false;
+					$comment = null;
 				}
 
 				// check new comments

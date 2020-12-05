@@ -1,7 +1,7 @@
 
 WackoWiki
 
-Small, lightweight, handy, expandable Wiki written in PHP7.
+Small, lightweight, handy, expandable Wiki written in PHP.
 
 Please, subscribe to https://wackowiki.org/doc/xml/news_wackowiki.xml feed
 in order to receive notices when WackoWiki will be updated.
@@ -9,4 +9,4 @@ in order to receive notices when WackoWiki will be updated.
 Report every single bug that you encounter or know about into our bugs system:
 https://wackowiki.org/bugs/
 
-- WackoWiki Team <https://wackowiki.sourceforge.io>, 2018-01-20
+- WackoWiki Team <https://wackowiki.sourceforge.io>, 2020-12-05
