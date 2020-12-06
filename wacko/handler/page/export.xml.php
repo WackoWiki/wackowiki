@@ -16,11 +16,12 @@ if ($this->has_access('read'))
 	$num_slashes = mb_substr_count($this->tag, '/');
 
 	$pages = $this->db->load_all(
-		"SELECT page_id, owner_id, tag, title, created, body " .
-		"FROM " . $this->db->table_prefix . "page " .
+		"SELECT p.page_id, p.owner_id, p.tag, p.title, p.created, p.body, u.user_name " .
+		"FROM " . $this->db->table_prefix . "page p " .
+			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.owner_id = u.user_id) " .
 		"WHERE (tag = " . $this->db->q($this->tag) . " " .
-		" OR tag LIKE " . $this->db->q($this->tag . '/%') . ")" .
-		" AND comment_on_id = 0");
+			"OR tag LIKE " . $this->db->q($this->tag . '/%') . ") " .
+			"AND comment_on_id = 0");
 
 	$tpl->enter('p_');
 
@@ -31,21 +32,25 @@ if ($this->has_access('read'))
 		{
 			continue;
 		}
+
 		// output page
 		$tag = $page['tag'];
 
 		if ($num_slashes == mb_substr_count($tag, '/'))
 		{
-			$tag = '';
+			$tag	= '';
 		}
 		else
 		{
-			$_tag = explode('/', $tag);
-			$tag = '';
+			$_tag	= explode('/', $tag);
+			$tag	= '';
 
 			for ($i = 0; $i < count($_tag); $i++)
 			{
-				if ($i > $num_slashes) $tag .= $_tag[$i] . '/';
+				if ($i > $num_slashes)
+				{
+					$tag .= $_tag[$i] . '/';
+				}
 			}
 		}
 
@@ -53,7 +58,7 @@ if ($this->has_access('read'))
 		$tpl->title		= Ut::html($page['title']);
 		$tpl->ptag		= $page['tag'];
 		$tpl->body		= str_replace(']]>', ']]&gt;', $page['body']);
-		$tpl->owner		= $page['owner_id'];
+		$tpl->owner		= $page['user_name'];
 		$tpl->date		= Ut::http_date(strtotime($page['created']));
 	}
 
@@ -63,4 +68,3 @@ else
 {
 	$tpl->denied = true;
 }
-

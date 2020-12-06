@@ -16,7 +16,6 @@ if (!defined('IN_WACKO'))
 // TODO:
 //	add a step for warning / confirmation (do you want overwrite? / Will add Import under ... [submit] [cancel])
 //	add better description
-//	who is the new owner/user -> <author>[ ' owner ' ]</author>
 
 $t = '';
 
@@ -61,40 +60,49 @@ if ($this->is_admin())
 
 			array_shift($items);
 
-			foreach ($items as $item)
+			if ($items)
 			{
-				$root_tag	= utf8_trim($_POST['_to'], '/ ');
-				$rel_tag	= utf8_trim(Ut::untag($item, 'guid'), '/ ');
-				$tag		= $root_tag . ($root_tag && $rel_tag ? '/' : '') . $rel_tag;
-				$page_id	= $this->get_page_id($tag);
-				# $owner		= Ut::untag($item, 'author');
-				# $owner_id	= $this->get_user_id($owner);
-				$body		= str_replace(']]&gt;', ']]>', Ut::untag($item, 'description'));
-				$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
+				$sanitize_tag = function ($tag)
+				{
+					$this->sanitize_page_tag($tag);
 
-				$body_r		= $this->save_page($tag, $title, $body, '');
+					return utf8_trim($tag, '/ ');
+				};
 
-				# $this->set_page_owner($page_id, $owner_id);
+				$root_tag	= $sanitize_tag($_POST['_to']);
 
-				// now we render it internally in the context of imported
-				// page so we can write the updated link table
-				$this->context[++$this->current_context] = $tag;
-				$this->update_link_table($page_id, $body_r);
-				$this->current_context--;
+				foreach ($items as $item)
+				{
+					// get data
+					$rel_tag	= $sanitize_tag(Ut::untag($item, 'guid'));
+					$tag		= $root_tag . ($root_tag && $rel_tag ? '/' : '') . $rel_tag;
+					$page_id	= $this->get_page_id($tag);
+					$body		= str_replace(']]&gt;', ']]>', Ut::untag($item, 'description'));
+					$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
-				// log import
-				$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag));
+					// save imported page
+					$body_r		= $this->save_page($tag, $title, $body);
 
-				// count page
-				$t++;
-				$pages[] = $tag;
-			}
+					// now we render it internally in the context of imported
+					// page so we can write the updated link table
+					$this->context[++$this->current_context] = $tag;
+					$this->update_link_table($page_id, $body_r);
+					$this->current_context--;
 
-			$tpl->i_message = Ut::perc_replace($this->_t('ImportSuccess'), $t);
+					// log import
+					$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag));
 
-			foreach ($pages as $page)
-			{
-				$tpl->i_l_page = $this->link('/' . $page, '', '', '', 0);
+					// count page
+					$t++;
+					$pages[] = $tag;
+				}
+
+				$tpl->i_message = Ut::perc_replace($this->_t('ImportSuccess'), $t);
+
+				foreach ($pages as $page)
+				{
+					$tpl->i_l_page = $this->link('/' . $page, '', '', '', 0);
+				}
 			}
 		}
 		else

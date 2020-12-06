@@ -21,10 +21,10 @@
 	[= i _ =
 		<div class="msg success">
 			<em>[ ' message ' ]</em><br>
-			<ul>
+			<ol>
 				[= l _ =
 					<li>[ ' page ' ]</li>
 				=]
-			</ul>
+			</ol>
 		</div>
 	=]
