@@ -17,8 +17,6 @@ if (!defined('IN_WACKO'))
 //	add a step for warning / confirmation (do you want overwrite? / Will add Import under ... [submit] [cancel])
 //	add better description
 
-$t = '';
-
 if ($this->is_admin())
 {
 	// show FORM
@@ -70,18 +68,20 @@ if ($this->is_admin())
 				};
 
 				$root_tag	= $sanitize_tag($_POST['_to']);
+				$t			= 0;
 
 				foreach ($items as $item)
 				{
 					// get data
 					$rel_tag	= $sanitize_tag(Ut::untag($item, 'guid'));
 					$tag		= $root_tag . ($root_tag && $rel_tag ? '/' : '') . $rel_tag;
-					$page_id	= $this->get_page_id($tag);
+
 					$body		= str_replace(']]&gt;', ']]>', Ut::untag($item, 'description'));
 					$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 					// save imported page
 					$body_r		= $this->save_page($tag, $title, $body);
+					$page_id	= $this->get_page_id($tag);
 
 					// now we render it internally in the context of imported
 					// page so we can write the updated link table
@@ -89,20 +89,17 @@ if ($this->is_admin())
 					$this->update_link_table($page_id, $body_r);
 					$this->current_context--;
 
+					// summary link
+					$tpl->i_l_page = $this->link('/' . $tag, '', '', '', 0);
+
 					// log import
 					$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag));
 
 					// count page
 					$t++;
-					$pages[] = $tag;
 				}
 
 				$tpl->i_message = Ut::perc_replace($this->_t('ImportSuccess'), $t);
-
-				foreach ($pages as $page)
-				{
-					$tpl->i_l_page = $this->link('/' . $page, '', '', '', 0);
-				}
 			}
 		}
 		else

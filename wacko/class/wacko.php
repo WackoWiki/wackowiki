@@ -3369,8 +3369,6 @@ class Wacko
 	*/
 	function pre_link($tag, $text = '', $track = 1, $media_url = 0) : string
 	{
-		// if (!$text) $text = $this->add_spaces($tag);
-
 		if (preg_match('/^[\!\.' . $this->language['ALPHANUM_P'] . ']+$/u', $tag))
 		{
 			if ($track && $this->link_tracking())
@@ -7398,7 +7396,8 @@ class Wacko
 		}
 
 		if ($comments = $this->db->load_all(
-		"SELECT a.page_id FROM " . $this->db->table_prefix . "page a " .
+		"SELECT a.page_id " .
+		"FROM " . $this->db->table_prefix . "page a " .
 			"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
 		"WHERE b.tag = " . $this->db->q($tag) . " " .
 			($cluster === true
@@ -7472,7 +7471,8 @@ class Wacko
 		}
 
 		$pages = $this->db->load_all(
-			"SELECT page_id FROM " . $this->db->table_prefix . "page " .
+			"SELECT page_id " .
+			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
 				($cluster === true
 					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "

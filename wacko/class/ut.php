@@ -13,12 +13,12 @@ class Ut
 {
 	static function untag($xml, $tag)
 	{
-		$z = strpos ($xml, "<$tag>");
+		$z = strpos ($xml, '<' . $tag . '>');
 
 		if ($z !== false)
 		{
 			$z += strlen ($tag) + 2;
-			$z2 = strpos ($xml, "</$tag>");
+			$z2 = strpos ($xml, '</' . $tag . '>');
 
 			if ($z2 !== false)
 			{
