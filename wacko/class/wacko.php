@@ -7463,29 +7463,22 @@ class Wacko
 					: "") );
 	}
 
-	function remove_ratings($tag, $cluster = false) : bool
+	function remove_ratings($tag, $cluster = false)
 	{
 		if (!$tag)
 		{
 			return false;
 		}
 
-		$pages = $this->db->load_all(
-			"SELECT page_id " .
-			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE tag = " . $this->db->q($tag) . " " .
+		return $this->db->sql_query(
+			"DELETE " .
+				"r.* " .
+			"FROM " . $this->db->table_prefix . "rating r " .
+				"INNER JOIN " . $this->db->table_prefix . "page p ON (r.page_id = p.page_id) " .
+			"WHERE p.tag = " . $this->db->q($tag) . " " .
 				($cluster === true
-					? "OR tag LIKE " . $this->db->q($tag . '/%') . " "
+					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
 					: "") );
-
-		foreach ($pages as $page)
-		{
-			$this->db->sql_query(
-				"DELETE FROM " . $this->db->table_prefix . "rating " .
-				"WHERE page_id = " . (int) $page['page_id']);
-		}
-
-		return true;
 	}
 
 	// removes all associated page links
