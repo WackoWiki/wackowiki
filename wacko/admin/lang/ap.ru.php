@@ -310,6 +310,8 @@ $ap_translation = [
 	'AttachmentHandlerInfo'		=> 'Показывает обработчик вложений.',
 	'SourceHandler'				=> 'Включить обработчик показа исходного wiki-кода страницы',
 	'SourceHandlerInfo'			=> 'Разрешает показ исходного wiki-кода страницы.',
+	'ExportHandler'				=> 'Enable XML export handler',
+	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
 	'FeedsSection'				=> 'RSS-каналы',
 	'EnableFeeds'				=> 'Включить RSS-каналы',

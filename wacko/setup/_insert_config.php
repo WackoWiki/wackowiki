@@ -80,6 +80,7 @@ $config_db['enable_license']				= $config['enable_license'];
 $config_db['enable_referrers']				= $config['enable_referrers'];
 $config_db['enable_security_headers']		= $config['enable_security_headers'];
 $config_db['enable_system_message']			= 1;
+$config_db['export_handler']				= $config['export_handler'];
 $config_db['ext_bad_behavior']				= $config['ext_bad_behavior'];
 $config_db['footer_comments']				= $config['footer_comments'];
 $config_db['footer_files']					= $config['footer_files'];

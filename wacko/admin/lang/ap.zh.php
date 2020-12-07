@@ -310,6 +310,8 @@ $ap_translation = [
 	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
 	'SourceHandler'				=> 'Enable source handler',
 	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+	'ExportHandler'				=> 'Enable XML export handler',
+	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',

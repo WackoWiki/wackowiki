@@ -307,6 +307,8 @@ $ap_translation = [
 	'AttachmentHandlerInfo'		=> 'Permite mostrar el manejador de archivos adjuntos.',
 	'SourceHandler'				=> 'Enable source handler',
 	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
+	'ExportHandler'				=> 'Enable XML export handler',
+	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',

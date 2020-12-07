@@ -90,6 +90,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
 		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
 		$config['source_handler']				= (int) $_POST['source_handler'];
+		$config['export_handler']				= (int) $_POST['export_handler'];
 		$config['enable_comments']				= (int) $_POST['enable_comments'];
 		$config['sorting_comments']				= (int) $_POST['sorting_comments'];
 
@@ -446,6 +447,20 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="source_handler_on" name="source_handler" value="1"<?php echo ($engine->db->source_handler == 1 ? ' checked' : '');?>><label for="source_handler_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="source_handler_guest" name="source_handler" value="2"<?php echo ($engine->db->source_handler == 2 ? ' checked' : '');?>><label for="source_handler_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="source_handler_off" name="source_handler" value="0"<?php echo ($engine->db->source_handler == 0 ? ' checked' : '');?>><label for="source_handler_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for=""><strong><?php echo $engine->_t('ExportHandler');?>:</strong><br>
+					<small><?php echo $engine->_t('ExportHandlerInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="export_handler_on" name="export_handler" value="1"<?php echo ($engine->db->export_handler == 1 ? ' checked' : '');?>><label for="export_handler_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="export_handler_guest" name="export_handler" value="2"<?php echo ($engine->db->export_handler == 2 ? ' checked' : '');?>><label for="export_handler_guest"><?php echo $engine->_t('Registered');?></label>
+					<input type="radio" id="export_handler_off" name="export_handler" value="0"<?php echo ($engine->db->export_handler == 0 ? ' checked' : '');?>><label for="export_handler_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr>

@@ -310,6 +310,8 @@ $ap_translation = [
 	'AttachmentHandlerInfo'		=> 'Erlaubt das Anzeigen des Datei-Handlers für Gäste oder registrierte Benutzer.',
 	'SourceHandler'				=> 'Quelltext-Handler aktivieren',
 	'SourceHandlerInfo'			=> 'Erlaubt das Anzeigen des Quelltext-Handlers für Gäste oder registrierte Benutzer.',
+	'ExportHandler'				=> 'XML-Export-Handler aktivieren',
+	'ExportHandlerInfo'			=> 'Erlaubt das Anzeigen des XML-Export-Handler.',
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Aktiviere Feeds',

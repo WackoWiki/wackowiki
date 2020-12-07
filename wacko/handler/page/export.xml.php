@@ -11,7 +11,10 @@ $tpl->tag		= $this->tag;
 $tpl->date		= date('r');
 $tpl->lang		= $this->page_lang;
 
-if ($this->has_access('read'))
+if ($this->has_access('read')
+	&& ((	$this->db->export_handler == 2 && $this->get_user())
+		||	$this->db->export_handler == 1)
+)
 {
 	$num_slashes = mb_substr_count($this->tag, '/');
 

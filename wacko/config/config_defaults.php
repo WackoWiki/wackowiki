@@ -284,6 +284,7 @@ $wacko_config_defaults = [
 
 	'enable_referrers'				=> 0,
 	'attachments_handler'			=> 2,
+	'export_handler'				=> 2,
 	'source_handler'				=> 1,
 
 	'referrers_purge_time'			=> 1,
