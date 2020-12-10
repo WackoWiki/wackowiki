@@ -719,18 +719,6 @@ class Wacko
 		return $meta_keywords;
 	}
 
-	function get_description() : string
-	{
-		$meta_description = '';
-
-		if (!empty($this->page['description']))
-		{
-			$meta_description = $this->page['description'];
-		}
-
-		return $meta_description;
-	}
-
 	// wrapper for _load_page
 	/**
 	* Loads page-data from DB

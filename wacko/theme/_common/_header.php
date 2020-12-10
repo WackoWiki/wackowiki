@@ -29,7 +29,7 @@ if (!$tpl->norobots)
 if ($this->has_access('read'))
 {
 	$tpl->page_keywords		= $this->get_keywords();
-	$tpl->page_description	= $this->get_description();
+	$tpl->page_description	= $this->page['description'];
 }
 
 if ($this->db->allow_x11colors)
