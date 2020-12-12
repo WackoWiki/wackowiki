@@ -285,7 +285,7 @@ if ($can_view)
 				$tpl->r_p_name			= $this->shorten_string($file['file_name'], $file_name_maxlen);
 				$tpl->r_p_desc			= $desc;
 				$tpl->r_p_meta			= ($file['picture_w']
-											? number_format($file['picture_w'], 0, ',', '.') . ' &times; ' . number_format($file['picture_h'], 0, ',', '.') . ' px'
+											? number_format($file['picture_w'], 0, ',', '.') . ' × ' . number_format($file['picture_h'], 0, ',', '.') . ' px'
 											: $hits);
 				$tpl->r_p_size			= $file_size;
 				$tpl->r_p_user			= $this->user_link($file['user_name'], true, false);

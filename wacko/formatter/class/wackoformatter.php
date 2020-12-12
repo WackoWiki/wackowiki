@@ -709,9 +709,7 @@ class WackoFormatter
 			$this->br = 1;
 
 			if (isset($matches[3])
-				&& $color = ($this->object->db->allow_x11colors
-					? (in_array($matches[3], $this->x11_colors) ? $matches[3] : '')
-					: (in_array($matches[3], $this->colors) ? $matches[3] : '')))
+				&& $color = in_array($matches[3], ($this->object->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
 			{
 				return '<span class="cl-' . $color . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]) . '</span>';
 			}
@@ -724,9 +722,7 @@ class WackoFormatter
 			$this->br = 1;
 
 			if (isset($matches[3])
-				&& $color = ($this->object->db->allow_x11colors
-					? (in_array($matches[3], $this->x11_colors) ? $matches[3] : '')
-					: (in_array($matches[3], $this->colors) ? $matches[3] : '')))
+				&& $color = in_array($matches[3], ($this->object->db->allow_x11colors ? $this->x11_colors : $this->colors)) ? $matches[3] : '')
 			{
 				return '<mark class="mark-' . $color . '">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[4]) . '</mark>';
 			}
