@@ -29,7 +29,7 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error cargar admin module %1: no existe.',
 
-	'ApHomePage'				=> 'Home Page',
+	'ApHomePage'				=> 'Página de inicio',
 	'ApHomePageTip'				=> 'ir a la página home, sin salir de la administración',
 	'ApLogOut'					=> 'Log out',
 	'ApLogOutTip'				=> 'salir de la administración del sistema',
@@ -70,7 +70,7 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
+		'name'		=> 'Primario',
 		'title'		=> 'Parámetros básicos',
 	],
 
@@ -82,20 +82,20 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'Email',
-		'title'		=> 'Configuración Email',
+		'name'		=> 'Correo',
+		'title'		=> 'Configuración Correo',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
+		'name'		=> 'Filtros',
 		'title'		=> 'Configuración de Filtros',
 	],
 
 	// Config Formatter module
 	'config_formatter'		=> [
-		'name'		=> 'Formatter',
-		'title'		=> 'Opciones de Formatter',
+		'name'		=> 'Formateador',
+		'title'		=> 'Opciones de Formato',
 	],
 
 	// Config Notifications module
@@ -106,13 +106,13 @@ $ap_translation = [
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> 'Páginas',
 		'title'		=> 'Parámetros de páginas y del sitio',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Permisos',
 		'title'		=> 'Configuración de permisos',
 	],
 
@@ -148,19 +148,19 @@ $ap_translation = [
 
 	// Polls module
 	'content_polls'		=> [
-		'name'		=> 'Polls',
-		'title'		=> 'Editing, start and stop polls',
+		'name'		=> 'Encuestas',
+		'title'		=> 'Editar, iniciar y detener encuestas',
 	],
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
-		'title'		=> 'Backing up data',
+		'name'		=> 'Respaldo',
+		'title'		=> 'Copia de seguridad de datos',
 	],
 
 	// DB Convert module
 	'db_convert'		=> [
-		'name'		=> 'Convert',
+		'name'		=> 'Convertir',
 		'title'		=> 'Convertir tablas o columnas',
 	],
 
@@ -179,7 +179,7 @@ $ap_translation = [
 	// Dashboard module
 	'main'		=> [
 		'name'		=> 'Menu Principal',
-		'title'		=> 'WackoWiki Administration',
+		'title'		=> 'Administración WackoWiki',
 	],
 
 	// Inconsistencies module
@@ -190,20 +190,20 @@ $ap_translation = [
 
 	// Data Synchronization module
 	'maint_resync'		=> [
-		'name'		=> 'Data Synchronization',
+		'name'		=> 'Sincronización',
 		'title'		=> 'Sincronización de datos',
 	],
 
 	// Mass email module
 	'massemail'		=> [
-		'name'		=> 'Mass email',
-		'title'		=> 'Mass email',
+		'name'		=> 'Correo Electrónico',
+		'title'		=> 'Correo masivo',
 	],
 
 	// System message module
 	'messages'		=> [
-		'name'		=> 'System message',
-		'title'		=> 'Mensajes del sistema',
+		'name'		=> 'Mensajes del Sistema',
+		'title'		=> 'Mostrar Mensajes',
 	],
 
 	// System Info module
@@ -214,19 +214,19 @@ $ap_translation = [
 
 	// System log module
 	'system_log'		=> [
-		'name'		=> 'System log',
+		'name'		=> 'Registro del Sistema',
 		'title'		=> 'Log de eventos del sistema',
 	],
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Estadísticas',
 		'title'		=> 'Mostrar estadísticas',
 	],
 
 	// Bad Behavior module
 	'tool_badbehavior'		=> [
-		'name'		=> 'Bad Behavior',
+		'name'		=> 'Mal comportamiento',
 		'title'		=> 'Mal comportamiento',
 	],
 
