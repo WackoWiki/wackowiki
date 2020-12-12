@@ -23,14 +23,11 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
-if (!isset($nomark))	$nomark		= 0;
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;
 if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
 if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
-if (!isset($ppage))		$ppage		= '';
-if (!isset($legend))	$legend		= '';
 if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
 if (!isset($picture))	$picture	= 1;
@@ -88,7 +85,6 @@ if (!$global)
 	else
 	{
 		$page		= $this->unwrap_link($page);
-		$ppage		= '/' . $page;
 
 		if ($_page_id = $this->get_page_id($page))
 		{
@@ -154,11 +150,6 @@ if ($can_view)
 	else
 	{
 		$path2 = 'file:/';
-	}
-
-	if (!$nomark)
-	{
-		$title = $this->_t('UploadTitle'.($global ? 'Global' : '') ) . ' '.($page ? $this->link($ppage, '', $legend) : '');
 	}
 
 	if ($factor = count($files))
@@ -262,36 +253,36 @@ if ($can_view)
 
 		@keyframes slidy {
 
-		<?php
-		if ($slidy_direction == 'right')
-		{
-			echo "0% \t{ left: -" . (($img_count - 1) * 100) . "%; }\n";
-
-			for ($i = $img_count - 1; $i > 0; $i--)
+			<?php
+			if ($slidy_direction == 'right')
 			{
-				$position += $slide_ratio;
-				// make the keyframe the position of the image
-				echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
-				$position += $move_ratio;
-				// make the postion for the _next_ slide
-				echo "\t\t" . $position . "% \t{ left: -" . (($i - 1) * 100) . "%; }\n";
-			}
-		}
-		else
-		{
-			echo "0% \t{ left: 0%; }\n";
+				echo "0% \t{ left: -" . (($img_count - 1) * 100) . "%; }\n";
 
-			// the slider is moving to the left
-			for ($i = 0; $i < ($img_count - 1); $i++)
-			{
-				$position += $slide_ratio;
-				// make the keyframe the position of the image
-				echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
-				$position += $move_ratio;
-				// make the postion for the _next_ slide
-				echo "\t\t" . $position . "% \t{ left: -" . (($i + 1) * 100) . "%; }\n";
+				for ($i = $img_count - 1; $i > 0; $i--)
+				{
+					$position += $slide_ratio;
+					// make the keyframe the position of the image
+					echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
+					$position += $move_ratio;
+					// make the postion for the _next_ slide
+					echo "\t\t" . $position . "% \t{ left: -" . (($i - 1) * 100) . "%; }\n";
+				}
 			}
-		}?>
+			else
+			{
+				echo "0% \t{ left: 0%; }\n";
+
+				// the slider is moving to the left
+				for ($i = 0; $i < ($img_count - 1); $i++)
+				{
+					$position += $slide_ratio;
+					// make the keyframe the position of the image
+					echo "\t\t" . $position . "% \t{ left: -" . ($i * 100) . "%; }\n";
+					$position += $move_ratio;
+					// make the postion for the _next_ slide
+					echo "\t\t" . $position . "% \t{ left: -" . (($i + 1) * 100) . "%; }\n";
+				}
+			}?>
 
 		}
 
@@ -299,42 +290,40 @@ if ($can_view)
 
 		<div id="captioned-gallery">
 			<figure class="slider">
-		<?php
-		// adding at the end a clone of the first array for transition loop
-		$files[]	= $files[0];
-		$n			= 0;
-		#Ut::debug_print_r($files);
+			<?php
+			// adding at the end a clone of the first array for transition loop
+			$files[]	= $files[0];
+			$n			= 0;
+			#Ut::debug_print_r($files);
 
-		foreach($files as $file)
-		{
-			if ($file['picture_h']) // missing: svg!
+			foreach($files as $file)
 			{
-				$n++;
-
-				$this->files_cache[$file['page_id']][$file['file_name']] = $file;
-
-				$dt			= $file['uploaded_dt'];
-				$desc		= $this->format($file['file_description'], 'typografica' );
-
-				if ($desc == '')
+				if ($file['picture_h']) // missing: svg!
 				{
-					$desc = "\u{00A0}";	// \u{00A0} No-Break Space (NBSP)
+					$n++;
+
+					$this->files_cache[$file['page_id']][$file['file_name']] = $file;
+
+					$dt			= $file['uploaded_dt'];
+					$desc		= $this->format($file['file_description'], 'typografica' );
+
+					if ($desc == '')
+					{
+						$desc = "\u{00A0}";	// \u{00A0} No-Break Space (NBSP)
+					}
+
+					$file_name	= $file['file_name'];
+					$text		= ($picture == false) ? $file_name : '';
+					$link		= $this->link($path2 . $file_name, '', $text, '', $track);
+
+					?>
+					<figure>
+						<?php echo $link; ?>
+						<figcaption><?php echo $n . '/' . $count['n'] . ' ' . $desc; ?></figcaption>
+					</figure>
+		<?php
 				}
-
-				$file_id	= $file['file_id'];
-				$file_name	= $file['file_name'];
-				$text		= ($picture == false) ? $file_name : '';
-				$file_size	= $this->binary_multiples($file['file_size'], false, true, true);
-				$link		= $this->link($path2 . $file_name, '', $text, '', $track);
-
-				?>
-				<figure>
-				<?php echo $link; ?>
-					<figcaption><?php echo $n . '/' . $count['n'] . ' ' . $desc; ?></figcaption>
-				</figure>
-	<?php
-			}
-		}?>
+			}?>
 			</figure>
 		</div>
 	<?php
@@ -345,11 +334,6 @@ if ($can_view)
 	}
 
 	unset($files);
-
-	if (!$nomark)
-	{
-		#echo "</div>\n";
-	}
 }
 else
 {
