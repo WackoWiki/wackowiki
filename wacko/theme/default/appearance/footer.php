@@ -59,6 +59,8 @@ if ($this->page && $this->has_access('read'))
 	$tpl->perma_link = $this->action('hashid');
 }
 
+$tpl->enter('credits_');
+
 if ($this->get_user())
 {
 	$tpl->by_home = $this->link('WackoWiki:HomePage', '', 'WackoWiki');
@@ -96,6 +98,8 @@ if ($this->db->terms_page)
 {
 	$tpl->terms_href = $this->href('', $this->db->terms_page);
 }
+
+$tpl->leave(); // credits
 
 // load scripts
 $tpl->f_additions = $this->get_html_addition('footer');

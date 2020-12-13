@@ -33,6 +33,7 @@
 			</ul>
 		</div>
 	</nav>
+	[= credits =
 	<div id="credits">
 		[= by =
 			[ ' _t: PoweredBy ' ] [ ' home ' ] [ ' version ' ][ ' patchlevel ' ]
@@ -55,6 +56,7 @@
 			=]
 		</ul>
 	</div>
+	=]
 </footer>
 </div>
 
