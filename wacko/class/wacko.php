@@ -3513,7 +3513,7 @@ class Wacko
 			// remove typografica glue
 			$text	= preg_replace('/(<|\&lt\;)\/?span( class\=\"nobr\")?(>|\&gt\;)/u', '', $text);
 
-			if ($text == $tag || (!$text && $scale))
+			if ($text == $tag || (!$text && ($scale || $media_class)))
 			{
 				return $this->image_link(str_replace('&', '&amp;', str_replace('&amp;', '&', $tag)), $media_class, null, $text, $text, $scale);
 			}
