@@ -93,7 +93,7 @@ $upgrade['6.0.11'][]	= ['alter',		'cache',			$alter_cache_r5_5_1];
 $upgrade['6.0.10'][]	= ['alter',		'category',			$alter_category_r5_5_0];
 
 // config
-$upgrade['5.5.14'][]	= ['update',	'config',			$update_config_r5_5_0];
+$upgrade['5.5.17'][]	= ['update',	'config',			$update_config_r5_5_0];
 $upgrade['6.0.11'][]	= ['update',	'config',			$update_config_r5_5_1];
 
 // file
@@ -104,29 +104,29 @@ $upgrade['6.0.8'][]		= ['alter',		'log',				$alter_log_r5_5_0];
 
 // menu
 $upgrade['6.0.10'][]	= ['alter',		'menu',				$alter_menu_r5_5_0];
-$upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_0];
+$upgrade['5.5.17'][]	= ['update',	'menu',				$update_menu_r5_5_0];
 
 // page
-$upgrade['5.5.14'][]	= ['alter',		'page',				$alter_page_r5_5_0];
+$upgrade['5.5.17'][]	= ['alter',		'page',				$alter_page_r5_5_0];
 $upgrade['6.0.5'][]		= ['alter',		'page',				$alter_page_r5_5_1];
 $upgrade['6.0.10'][]	= ['alter',		'page',				$alter_page_r5_5_2];
 
-$upgrade['5.5.14'][]	= ['update',	'page',				$update_page_r5_5_2];
+$upgrade['5.5.17'][]	= ['update',	'page',				$update_page_r5_5_2];
 
 $upgrade['6.0.2'][]		= ['update',	'page',				$update_page_r5_5_0];
 $upgrade['6.0.2'][]		= ['update',	'page',				$update_page_r5_5_1];
 
 // keep this order, after $update_page_r5_5_2!
-$upgrade['5.5.14'][]	= ['update',	'menu',				$update_menu_r5_5_1];
+$upgrade['5.5.17'][]	= ['update',	'menu',				$update_menu_r5_5_1];
 
 // page link
-$upgrade['5.5.14'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
+$upgrade['5.5.17'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 
 // rating
 $upgrade['6.0.8'][]		= ['alter',		'rating',			$alter_rating_r5_5_0];
 
 // revision
-$upgrade['5.5.14'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
+$upgrade['5.5.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 $upgrade['6.0.11'][]	= ['alter',		'revision',			$alter_revision_r5_5_1];
 // user
 $upgrade['6.0.0'][]		= ['insert',	'user',				$insert_user_r5_5_0];

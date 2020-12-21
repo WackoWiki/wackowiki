@@ -58,7 +58,6 @@ $update_page_r5_5_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_5_2 = "DELETE FROM {$pref}page WHERE owner_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT page_lang = '" . _quote($config['language']) . "'";
 
 // PAGE LINK
-
 $alter_page_link_r5_5_0 = "ALTER TABLE {$pref}page_link DROP to_supertag";
 
 // POLL
