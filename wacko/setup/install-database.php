@@ -204,7 +204,9 @@ switch ($config['database_driver'])
 				else
 				{
 					// The funny upgrading stuff. Make sure these are in order!
-					ksort($upgrade, SORT_STRING);
+					uksort($upgrade, function($a, $b) {
+						return version_compare ($a, $b);
+					});
 
 					foreach ($upgrade as $to_version => $dummy)
 					{
@@ -352,7 +354,9 @@ switch ($config['database_driver'])
 				else
 				{
 					// The funny upgrading stuff. Make sure these are in order!
-					ksort($upgrade, SORT_STRING);
+					uksort($upgrade, function($a, $b) {
+						return version_compare ($a, $b);
+					});
 
 					foreach ($upgrade as $to_version => $dummy)
 					{
