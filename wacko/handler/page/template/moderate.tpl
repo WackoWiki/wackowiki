@@ -104,7 +104,7 @@
 					<br>
 					<input type="submit" name="set" id="submit" value="[ ' _t: ModerateSet ' ]">
 						[= set _ =
-							<input type="submit" name="reset" id="submit" value="[ ' _t: ModerateReset ' ]">
+							<input type="submit" name="reset" id="submit" value="[ ' _t: ResetButton ' ]">
 							&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
 						=]
 				</td>
@@ -297,7 +297,7 @@
 					<br>
 					<input type="submit" name="set" id="submit_set" value="[ ' _t: ModerateSet ' ]">
 					[= set _ =
-						<input type="submit" name="reset" id="submit_reset" value="[ ' _t: ModerateReset ' ]">
+						<input type="submit" name="reset" id="submit_reset" value="[ ' _t: ResetButton ' ]">
 						&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
 					=]
 				</td>

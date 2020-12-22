@@ -452,7 +452,7 @@ $ap_translation = [
 	],
 
 	'RewriteMode'				=> 'Verwende <code>mod_rewrite</code>',
-	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktivieren sie, um "schöne" Seitenadressen zu erhalten.<br>
+	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktiviere sie, um "schöne" Seitenadressen zu erhalten.<br>
 									<span class="cite">Der Wert wird möglicherweise zur Laufzeit von der Settings-Klasse überschrieben, obwohl er deaktiviert ist, wenn HTTP_MOD_REWRITE aktiviert ist.',
 
 	// Permissions settings
