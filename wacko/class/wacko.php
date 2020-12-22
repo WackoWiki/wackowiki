@@ -1050,6 +1050,7 @@ class Wacko
 
 		$exists		= [];
 		$pages		= [];
+		$spages		= [];
 		$p_ids		= [];
 		$user		= $this->get_user();
 		$lang		= $this->get_user_language();
