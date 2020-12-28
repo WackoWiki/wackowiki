@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$category_link = function ($word, $category_id, $type_id, $filter = [], $list)
+$category_link = function ($word, $category_id, $type_id, $list, $filter = [])
 {
 	$selected = (in_array($category_id, $filter));
 
@@ -212,14 +212,14 @@ if (!$ids)
 		{
 			$spacer = NBSP . NBSP . NBSP;	// No-Break Space (NBSP)
 
-			$tpl->l_link		= $category_link($word, $category_id, $type_id, $filter, $list);
+			$tpl->l_link		= $category_link($word, $category_id, $type_id, $list, $filter);
 
 			if (isset($word['child']) && $word['child'] == true)
 			{
 
 				foreach ($word['child'] as $category_id => $word)
 				{
-					$tpl->l_c_l_link	= $category_link($word, $category_id, $type_id, $filter, $list);
+					$tpl->l_c_l_link	= $category_link($word, $category_id, $type_id, $list, $filter);
 				}
 			}
 

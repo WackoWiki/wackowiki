@@ -8673,7 +8673,7 @@ class Wacko
 
 			if ($suffix === true)
 			{
-				$size= $size . NBSP . $norm[$x];
+				$size = $size . NBSP . $norm[$x];
 			}
 
 			return $size;
