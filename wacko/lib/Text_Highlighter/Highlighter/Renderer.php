@@ -1,9 +1,6 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 /**
  * Abstract base class for Highlighter renderers
- *
- * PHP versions 5
  *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
@@ -12,25 +9,12 @@
  * send a note to license@php.net so we can mail you a copy immediately.
  *
  * @category   Text
- * @package    Text_Highlighter
- * @author     Andrey Demenev <demenev@gmail.com>
+ * @package	Text_Highlighter
+ * @author	 Andrey Demenev <demenev@gmail.com>
  * @copyright  2004-2006 Andrey Demenev
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id$
- * @link       http://pear.php.net/package/Text_Highlighter
- */
-
-/**
- * Abstract base class for Highlighter renderers
- *
- * @author Andrey Demenev <demenev@gmail.com>
- * @category   Text
- * @package    Text_Highlighter
- * @copyright  2004-2006 Andrey Demenev
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.8.0
- * @link       http://pear.php.net/package/Text_Highlighter
- * @abstract
+ * @license	http://www.php.net/license/3_0.txt  PHP License
+ * @version	Release: 0.8.0
+ * @link	   http://pear.php.net/package/Text_Highlighter
  */
 
 class Text_Highlighter_Renderer
@@ -141,12 +125,3 @@ class Text_Highlighter_Renderer
 
 }
 
-/*
- * Local variables:
- * tab-width: 4
- * c-basic-offset: 4
- * c-hanging-comment-ender-p: nil
- * End:
- */
-
-?>

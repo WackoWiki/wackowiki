@@ -19,15 +19,13 @@
  * @author     Stoyan Stefanov <ssttoo@gmail.com>
  * @copyright  2006 Stoyan Stefanov
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id$
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
 /**
  * @ignore
  */
-
-# require_once 'Text/Highlighter/Renderer.php';
 
 /**
  * Array renderer, based on Andrey Demenev's HTML renderer.
@@ -39,20 +37,10 @@
  *     <li>enumerated - type of array produced, default FALSE,
  *                            meaning associative array</li>
  * </ul>
- *
- *
- * @author     Stoyan Stefanov <ssttoo@gmail.com>
- * @category   Text
- * @package    Text_Highlighter
- * @copyright  2006 Stoyan Stefanov
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.5.0
- * @link       http://pear.php.net/package/Text_Highlighter
  */
 
 class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 {
-
 	/**#@+
 	 * @access private
 	 */
@@ -98,11 +86,12 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 	function preprocess($str)
 	{
 		// normalize whitespace and tabs
-		$str = str_replace("\r\n","\n", $str);
-		$str = str_replace("\r","\n", $str);
+		$str = str_replace("\r\n", "\n", $str);
+		$str = str_replace("\r", "\n", $str);
 		// some browsers refuse to display empty lines
-		$str = preg_replace('~^$~m'," ", $str);
-		$str = str_replace("\t",str_repeat(' ', $this->_tabsize), $str);
+		$str = preg_replace('~^$~m', " ", $str);
+		$str = str_replace("\t", str_repeat(' ', $this->_tabsize), $str);
+
 		return rtrim($str);
 	}
 
@@ -119,13 +108,19 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 	{
 		$this->_output = [];
 		$this->_lastClass = 'default';
-		if (isset($this->_options['tabsize'])) {
+
+		if (isset($this->_options['tabsize']))
+		{
 			$this->_tabsize = $this->_options['tabsize'];
 		}
-		if (isset($this->_options['htmlspecialchars'])) {
+
+		if (isset($this->_options['htmlspecialchars']))
+		{
 			$this->_htmlspecialchars = $this->_options['htmlspecialchars'];
 		}
-		if (isset($this->_options['enumerated'])) {
+
+		if (isset($this->_options['enumerated']))
+		{
 			$this->_enumerated = $this->_options['enumerated'];
 		}
 	}
@@ -142,19 +137,23 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 	 */
 	function acceptToken($class, $content)
 	{
-
-
 		$theClass = $this->_getFullClassName($class);
-		if ($this->_htmlspecialchars) {
+
+		if ($this->_htmlspecialchars)
+		{
 			$content = htmlspecialchars($content);
 		}
-		if ($this->_enumerated) {
+
+		if ($this->_enumerated)
+		{
 			$this->_output[] = [$class, $content];
-		} else {
+		}
+		else
+		{
 			$this->_output[][$class] = $content;
 		}
-		$this->_lastClass = $class;
 
+		$this->_lastClass = $class;
 	}
 
 
@@ -168,11 +167,15 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 	 */
 	function _getFullClassName($class)
 	{
-		if (!empty($this->_options['use_language'])) {
+		if (!empty($this->_options['use_language']))
+		{
 			$theClass = $this->_language . '-' . $class;
-		} else {
+		}
+		else
+		{
 			$theClass = $class;
 		}
+
 		return $theClass;
 	}
 
@@ -188,5 +191,3 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 		return $this->_output;
 	}
 }
-
-?>

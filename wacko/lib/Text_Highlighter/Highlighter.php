@@ -3,8 +3,6 @@
 /**
  * Highlighter base class
  *
- * PHP versions 5
- *
  * LICENSE: This source file is subject to version 3.0 of the PHP license
  * that is available through the world-wide-web at the following URI:
  * http://www.php.net/license/3_0.txt.  If you did not receive a copy of
@@ -19,8 +17,6 @@
  * @version    CVS: $Id$
  * @link       http://pear.php.net/package/Text_Highlighter
  */
-
-include_once(dirname(__FILE__).'/Highlighter/Renderer.php');
 
 // {{{ BC constants
 
@@ -54,12 +50,6 @@ define ('HL_INFINITY',      1000000000);
 
 /**
  * Text highlighter base class
- *
- * @author     Andrey Demenev <demenev@gmail.com>
- * @copyright  2004-2006 Andrey Demenev
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.8.0
- * @link       http://pear.php.net/package/Text_Highlighter
  */
 
 // {{{ Text_Highlighter
@@ -87,7 +77,6 @@ define ('HL_INFINITY',      1000000000);
  *echo $hlSQL->highlight('SELECT * FROM table a WHERE id = 12');
  * </code>
  *
- * @author Andrey Demenev <demenev@gmail.com>
  * @package Text_Highlighter
  * @access public
  */
@@ -159,20 +148,32 @@ class Text_Highlighter
 	 */
 	function _checkDefines()
 	{
-		if (isset($this->_options['defines'])) {
+		if (isset($this->_options['defines']))
+		{
 			$defines = $this->_options['defines'];
-		} else {
+		}
+		else
+		{
 			$defines = [];
 		}
-		foreach ($this->_conditions as $name => $actions) {
-			foreach($actions as $action) {
+
+		foreach ($this->_conditions as $name => $actions)
+		{
+			foreach($actions as $action)
+			{
 				$present = in_array($name, $defines);
-				if (!$action[1]) {
+
+				if (!$action[1])
+				{
 					$present = !$present;
 				}
-				if ($present) {
+
+				if ($present)
+				{
 					unset($this->_disabled[$action[0]]);
-				} else {
+				}
+				else
+				{
 					$this->_disabled[$action[0]] = true;
 				}
 			}
@@ -203,7 +204,8 @@ class Text_Highlighter
 
 		$classname = 'Text_Highlighter_' . $lang;
 
-		if (!class_exists($classname)) {
+		if (!class_exists($classname))
+		{
 			# $error = 'Highlighter for ' . $lang . ' not found';
 			return $lang;
 		}
@@ -245,102 +247,155 @@ class Text_Highlighter
 
 	function _getToken()
 	{
-		if (!empty($this->_tokenStack)) {
+		if (!empty($this->_tokenStack))
+		{
 			return array_pop($this->_tokenStack);
 		}
-		if ($this->_pos >= $this->_len) {
+
+		if ($this->_pos >= $this->_len)
+		{
 			return NULL;
 		}
 
-		if ($this->_state != -1 && preg_match($this->_endpattern, $this->_str, $m, PREG_OFFSET_CAPTURE, $this->_pos)) {
-			$endpos = $m[0][1];
-			$endmatch = $m[0][0];
-		} else {
+		if ($this->_state != -1 && preg_match($this->_endpattern, $this->_str, $m, PREG_OFFSET_CAPTURE, $this->_pos))
+		{
+			$endpos		= $m[0][1];
+			$endmatch	= $m[0][0];
+		}
+		else
+		{
 			$endpos = -1;
 		}
+
 		preg_match ($this->_regs[$this->_state], $this->_str, $m, PREG_OFFSET_CAPTURE, $this->_pos);
 		$n = 1;
 
 
-		foreach ($this->_counts[$this->_state] as $i=>$count) {
-			if (!isset($m[$n])) {
+		foreach ($this->_counts[$this->_state] as $i => $count)
+		{
+			if (!isset($m[$n]))
+			{
 				break;
 			}
-			if ($m[$n][1]>-1 && ($endpos == -1 || $m[$n][1] < $endpos)) {
-				if ($this->_states[$this->_state][$i] != -1) {
+
+			if ($m[$n][1]>-1 && ($endpos == -1 || $m[$n][1] < $endpos))
+			{
+				if ($this->_states[$this->_state][$i] != -1)
+				{
 					$this->_tokenStack[] = [$this->_delim[$this->_state][$i], $m[$n][0]];
-				} else {
+				}
+				else
+				{
 					$inner = $this->_inner[$this->_state][$i];
-					if (isset($this->_parts[$this->_state][$i])) {
-						$parts = [];
-						$partpos = $m[$n][1];
-						for ($j=1; $j<=$count; $j++) {
-							if ($m[$j+$n][1] < 0) {
+
+					if (isset($this->_parts[$this->_state][$i]))
+					{
+						$parts		= [];
+						$partpos	= $m[$n][1];
+
+						for ($j = 1; $j <= $count; $j++)
+						{
+							if ($m[$j+$n][1] < 0)
+							{
 								continue;
 							}
-							if (isset($this->_parts[$this->_state][$i][$j])) {
-								if ($m[$j+$n][1] > $partpos) {
+
+							if (isset($this->_parts[$this->_state][$i][$j]))
+							{
+								if ($m[$j+$n][1] > $partpos)
+								{
 									array_unshift($parts, [$inner, substr($this->_str, $partpos, $m[$j+$n][1]-$partpos)]);
 								}
+
 								array_unshift($parts, [$this->_parts[$this->_state][$i][$j], $m[$j+$n][0]]);
 							}
+
 							$partpos = $m[$j+$n][1] + strlen($m[$j+$n][0]);
 						}
-						if ($partpos < $m[$n][1] + strlen($m[$n][0])) {
+
+						if ($partpos < $m[$n][1] + strlen($m[$n][0]))
+						{
 							array_unshift($parts, [$inner, substr($this->_str, $partpos, $m[$n][1] - $partpos + strlen($m[$n][0]))]);
 						}
+
 						$this->_tokenStack = array_merge($this->_tokenStack, $parts);
-					} else {
-						foreach ($this->_keywords[$this->_state][$i] as $g => $re) {
-							if (isset($this->_disabled[$g])) {
+					}
+					else
+					{
+						foreach ($this->_keywords[$this->_state][$i] as $g => $re)
+						{
+							if (isset($this->_disabled[$g]))
+							{
 								continue;
 							}
-							if (preg_match($re, $m[$n][0])) {
+
+							if (preg_match($re, $m[$n][0]))
+							{
 								$inner = $this->_kwmap[$g];
 								break;
 							}
 						}
+
 						$this->_tokenStack[] = [$inner, $m[$n][0]];
 					}
 				}
-				if ($m[$n][1] > $this->_pos) {
+
+				if ($m[$n][1] > $this->_pos)
+				{
 					$this->_tokenStack[] = [$this->_lastinner, substr($this->_str, $this->_pos, $m[$n][1]-$this->_pos)];
 				}
+
 				$this->_pos = $m[$n][1] + strlen($m[$n][0]);
-				if ($this->_states[$this->_state][$i] != -1) {
-					$this->_stack[] = [$this->_state, $this->_lastdelim, $this->_lastinner, $this->_endpattern];
-					$this->_lastinner = $this->_inner[$this->_state][$i];
-					$this->_lastdelim = $this->_delim[$this->_state][$i];
-					$l = $this->_state;
-					$this->_state = $this->_states[$this->_state][$i];
-					$this->_endpattern = $this->_end[$this->_state];
-					if ($this->_subst[$l][$i]) {
-						for ($k=0; $k<=$this->_counts[$l][$i]; $k++) {
-							if (!isset($m[$i+$k])) {
+
+				if ($this->_states[$this->_state][$i] != -1)
+				{
+					$this->_stack[]		= [$this->_state, $this->_lastdelim, $this->_lastinner, $this->_endpattern];
+					$this->_lastinner	= $this->_inner[$this->_state][$i];
+					$this->_lastdelim	= $this->_delim[$this->_state][$i];
+					$l					= $this->_state;
+					$this->_state		= $this->_states[$this->_state][$i];
+					$this->_endpattern	= $this->_end[$this->_state];
+
+					if ($this->_subst[$l][$i])
+					{
+						for ($k = 0; $k <= $this->_counts[$l][$i]; $k++)
+						{
+							if (!isset($m[$i+$k]))
+							{
 								break;
 							}
+
 							$quoted = preg_quote($m[$n+$k][0], '/');
 							$this->_endpattern = str_replace('%'.$k.'%', $quoted, $this->_endpattern);
 							$this->_endpattern = str_replace('%b'.$k.'%', $this->_matchingBrackets($quoted), $this->_endpattern);
 						}
 					}
 				}
+
 				return array_pop($this->_tokenStack);
 			}
+
 			$n += $count + 1;
 		}
 
-		if ($endpos > -1) {
+		if ($endpos > -1)
+		{
 			$this->_tokenStack[] = [$this->_lastdelim, $endmatch];
-			if ($endpos > $this->_pos) {
+
+			if ($endpos > $this->_pos)
+			{
 				$this->_tokenStack[] = [$this->_lastinner, substr($this->_str, $this->_pos, $endpos-$this->_pos)];
 			}
+
 			[$this->_state, $this->_lastdelim, $this->_lastinner, $this->_endpattern] = array_pop($this->_stack);
 			$this->_pos = $endpos + strlen($endmatch);
+
 			return array_pop($this->_tokenStack);
 		}
+
 		$p = $this->_pos;
 		$this->_pos = HL_INFINITY;
+
 		return [$this->_lastinner, substr($this->_str, $p)];
 	}
 
@@ -360,25 +415,30 @@ class Text_Highlighter
 
 	function highlight($str)
 	{
-		if (!($this->_renderer)) {
-			include_once(dirname(__FILE__).'/Highlighter/Renderer/Html.php');
+		if (!($this->_renderer))
+		{
 			$this->_renderer = new Text_Highlighter_Renderer_Html($this->_options);
 		}
-		$this->_state = -1;
-		$this->_pos = 0;
-		$this->_stack = [];
-		$this->_tokenStack = [];
-		$this->_lastinner = $this->_defClass;
-		$this->_lastdelim = $this->_defClass;
-		$this->_endpattern = '';
+
+		$this->_state		= -1;
+		$this->_pos			= 0;
+		$this->_stack		= [];
+		$this->_tokenStack	= [];
+		$this->_lastinner	= $this->_defClass;
+		$this->_lastdelim	= $this->_defClass;
+		$this->_endpattern	= '';
 		$this->_renderer->reset();
 		$this->_renderer->setCurrentLanguage($this->_language);
-		$this->_str = $this->_renderer->preprocess($str);
-		$this->_len = strlen($this->_str);
-		while ($token = $this->_getToken()) {
+		$this->_str			= $this->_renderer->preprocess($str);
+		$this->_len			= strlen($this->_str);
+
+		while ($token = $this->_getToken())
+		{
 			$this->_renderer->acceptToken($token[0], $token[1]);
 		}
+
 		$this->_renderer->finalize();
+
 		return $this->_renderer->getOutput();
 	}
 
@@ -388,5 +448,3 @@ class Text_Highlighter
 
 // }}}
 
-
-?>

@@ -16,27 +16,12 @@
  * @author     Stoyan Stefanov <ssttoo@gmail.com>
  * @copyright  2006 Stoyan Stefanov
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id$
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
 /**
  * @ignore
- */
-
-# require_once 'Text/Highlighter/Renderer.php';
-require_once (dirname(__FILE__).'/Array.php');
-
-/**
- * JSON renderer, based on Andrey Demenev's HTML renderer.
- *
- * @author     Stoyan Stefanov <ssttoo@gmail.com>
- * @category   Text
- * @package    Text_Highlighter
- * @copyright  2006 Stoyan Stefanov
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.5.0
- * @link       http://pear.php.net/package/Text_Highlighter
  */
 
 class Text_Highlighter_Renderer_JSON extends Text_Highlighter_Renderer_Array
@@ -50,17 +35,20 @@ class Text_Highlighter_Renderer_JSON extends Text_Highlighter_Renderer_Array
 	 */
 	function finalize()
 	{
-
 		parent::finalize();
 		$output = parent::getOutput();
 
 		$json_array = [];
 
-		foreach ($output AS $token) {
+		foreach ($output as $token)
+		{
 
-			if ($this->_enumerated) {
+			if ($this->_enumerated)
+			{
 				$json_array[] = '["' . $token[0] . '","' . $token[1] . '"]';
-			} else {
+			}
+			else
+			{
 				$key = key($token);
 				$json_array[] = '{"class": "' . $key . '","content":"' . $token[$key] . '"}';
 			}
@@ -74,5 +62,3 @@ class Text_Highlighter_Renderer_JSON extends Text_Highlighter_Renderer_Array
 
 
 }
-
-?>

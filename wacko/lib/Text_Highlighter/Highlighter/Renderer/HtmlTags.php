@@ -3,7 +3,7 @@
 /**
  * HTML renderer that uses only basic html tags
  *
- * PHP versions 5. Based on the "normal" HTML renderer by Andrey Demenev.
+ * Based on the "normal" HTML renderer by Andrey Demenev.
  * It's designed to work with user agents that support only a limited number of
  * HTML tags. Like the iPod which supports only b, i, u and a.
  *
@@ -18,16 +18,13 @@
  * @author     Stoyan Stefanov <ssttoo@gmail.com>
  * @copyright  2005 Stoyan Stefanov
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id$
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
 /**
  * @ignore
  */
-
-# require_once 'Text/Highlighter/Renderer.php';
-require_once (dirname(__FILE__).'/Array.php');
 
 /**
  * HTML basic tags renderer, based on Andrey Demenev's HTML renderer.
@@ -50,24 +47,15 @@ require_once (dirname(__FILE__).'/Array.php');
  * - 'builtin'    => 'b',
  * - 'reserved'   => 'u',
  * - 'inlinedoc'  => 'i',
- * - 'var'        => 'b',
- * - 'url'        => 'i',
+ * - 'var'		=> 'b',
+ * - 'url'		=> 'i',
  * - 'special'    => '',
  * - 'number'     => '',
  * - 'inlinetags' => ''
- *
- * @author Stoyan Stefanov <ssttoo@gmail.com>
- * @category   Text
- * @package    Text_Highlighter
- * @copyright  2005 Stoyan Stefanov
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.5.0
- * @link       http://pear.php.net/package/Text_Highlighter
  */
 
 class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 {
-
 	/**#@+
 	 * @access private
 	 */
@@ -85,22 +73,22 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 	 * @var array
 	 */
 	var $_hilite_tags = [
-        'default'    => '',
-        'code'       => '',
-        'brackets'   => 'b',
-        'comment'    => 'i',
-        'mlcomment'  => 'i',
-        'quotes'     => '',
-        'string'     => 'i',
-        'identifier' => 'b',
-        'builtin'    => 'b',
-        'reserved'   => 'u',
-        'inlinedoc'  => 'i',
-        'var'        => 'b',
-        'url'        => 'i',
-        'special'    => '',
-        'number'     => '',
-        'inlinetags' => '',
+		'default'		=> '',
+		'code'			=> '',
+		'brackets'		=> 'b',
+		'comment'		=> 'i',
+		'mlcomment'		=> 'i',
+		'quotes'		=> '',
+		'string' 		=> 'i',
+		'identifier'	=> 'b',
+		'builtin'		=> 'b',
+		'reserved'		=> 'u',
+		'inlinedoc'		=> 'i',
+		'var'			=> 'b',
+		'url'			=> 'i',
+		'special' 		=> '',
+		'number'		=> '',
+		'inlinetags'	=> '',
 	];
 
 	/**#@-*/
@@ -117,10 +105,14 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 	function reset()
 	{
 		parent::reset();
-		if (isset($this->_options['numbers'])) {
+
+		if (isset($this->_options['numbers']))
+		{
 			$this->_numbers = $this->_options['numbers'];
 		}
-		if (isset($this->_options['tags'])) {
+
+		if (isset($this->_options['tags']))
+		{
 			$this->_hilite_tags = array_merge($this->_tags, $this->_options['tags']);
 		}
 	}
@@ -135,7 +127,6 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 	 */
 	function finalize()
 	{
-
 		// get parent's output
 		parent::finalize();
 		$output = parent::getOutput();
@@ -143,37 +134,44 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 		$html_output = '';
 
 		// loop through each class=>content pair
-		foreach ($output AS $token) {
-
-			if ($this->_enumerated) {
-				$class = $token[0];
-				$content = $token[1];
-			} else {
-				$key = key($token);
-				$class = $key;
-				$content = $token[$key];
+		foreach ($output as $token)
+		{
+			if ($this->_enumerated)
+			{
+				$class		= $token[0];
+				$content	= $token[1];
+			}
+			else
+			{
+				$key		= key($token);
+				$class		= $key;
+				$content	= $token[$key];
 			}
 
 			$iswhitespace = ctype_space($content);
-			if (!$iswhitespace && !empty($this->_hilite_tags[$class])) {
+
+			if (!$iswhitespace && !empty($this->_hilite_tags[$class]))
+			{
 				$html_output .= '<'. $this->_hilite_tags[$class] . '>' . $content . '</'. $this->_hilite_tags[$class] . '>';
-			} else {
+			}
+			else
+			{
 				$html_output .= $content;
 			}
 		}
 
-
-		if ($this->_numbers) {
+		if ($this->_numbers)
+		{
 			/* additional whitespace for browsers that do not display
 			 empty list items correctly */
 			$html_output = '<li>&nbsp;' . str_replace("\n", "</li>\n<li>&nbsp;", $html_output) . '</li>';
 			$this->_output = '<ol>' . str_replace(' ', '&nbsp;', $html_output) . '</ol>';
-		} else {
+		}
+		else
+		{
 			$this->_output = '<pre>' . $html_output . '</pre>';
 		}
 	}
 
 
 }
-
-?>

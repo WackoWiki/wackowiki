@@ -16,7 +16,7 @@
  * @author     Stoyan Stefanov <ssttoo@gmail.com>
  * @copyright  2006 Stoyan Stefanov
  * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    CVS: $Id$
+ * @version    Release: 0.8.0
  * @link       http://pear.php.net/package/Text_Highlighter
  */
 
@@ -24,26 +24,10 @@
  * @ignore
  */
 
-# require_once 'Text/Highlighter/Renderer.php';
-require_once (dirname(__FILE__).'/Array.php');
 require_once 'XML/Serializer.php';
-
-/**
- * XML renderer, based on Andrey Demenev's HTML renderer.
- *
- * @author     Stoyan Stefanov <ssttoo@gmail.com>
- * @category   Text
- * @package    Text_Highlighter
- * @copyright  2006 Stoyan Stefanov
- * @license    http://www.php.net/license/3_0.txt  PHP License
- * @version    Release: 0.5.0
- * @link       http://pear.php.net/package/Text_Highlighter
- */
 
 class Text_Highlighter_Renderer_XML extends Text_Highlighter_Renderer_Array
 {
-
-
 	/**
 	 * Options for XML_Serializer
 	 *
@@ -64,7 +48,9 @@ class Text_Highlighter_Renderer_XML extends Text_Highlighter_Renderer_Array
 	function reset()
 	{
 		parent::reset();
-		if (isset($this->_options['xml_serializer'])) {
+
+		if (isset($this->_options['xml_serializer']))
+		{
 			$this->_serializer_options = $this->_options['xml_serializer'];
 		}
 	}
@@ -78,19 +64,17 @@ class Text_Highlighter_Renderer_XML extends Text_Highlighter_Renderer_Array
 	 */
 	function finalize()
 	{
-
 		// call parent's finalize(), then serialize array into XML
 		parent::finalize();
 		$output = parent::getOutput();
 
 		$serializer = new XML_Serializer($this->_serializer_options);
 		$result = $serializer->serialize($output);
-		if ($result === true) {
+
+		if ($result === true)
+		{
 			$this->_output = $serializer->getSerializedData();
 		}
 	}
 
-
 }
-
-?>
