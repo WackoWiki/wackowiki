@@ -170,112 +170,72 @@ else
 
 		$tpl->enter('i_');
 
-		if ($count_feeds > 1)
+		// go through all of the items in the feed
+		foreach ($feed->get_items() as $item)
 		{
-			foreach ($feed->get_items() as $item)
+			if ($item->get_date())
 			{
-				/* Here, we'll use the $item->get_feed() method to gain access to the parent feed-level data for the specified item. */
+				// should have proper Unix time - 'U'
+				$date = $item->get_date('U');
+			}
+			else
+			{
+				$date = 0;
+			}
+
+			if ($nomark)
+			{
+				$tpl->class		= $class;
+			}
+
+			// headline
+			$tpl->link		= $this->link($item->get_permalink(), '', $item->get_title(), '', 0, 1);
+
+			if ($count_feeds > 1)
+			{
+				// Here, we'll use the $item->get_feed() method to gain access to the parent feed-level data for the specified item.
 				$xfeed = $item->get_feed();
 
-				if ($item->get_date())
-				{
-					// should have proper Unix time - 'U'
-					$date = $item->get_date('U');
-				}
-				else
-				{
-					$date = 0;
-				}
-
-				if ($nomark)
-				{
-					$tpl->class		= $class;
-				}
-
-				$tpl->link		= $this->link($item->get_permalink(), '', $item->get_title(), '', 0, 1);
-				#$tpl->m_link	= $this->link($xfeed->get_permalink(), '', $xfeed->get_title(), '', 0, 1);
 				$tpl->m_href	= $xfeed->get_permalink();
 				$tpl->m_title	= $xfeed->get_title();
+			}
 
-				if (($time == 1) && ($date != 0))
+			if (($time == 1) && ($date != 0))
+			{
+				$tpl->t_date		= $item->get_date('d.m.Y G:i');
+				$tpl->t_utime		= $item->get_date('U');
+				$tpl->t_interval	= $this->get_time_interval($date);
+			}
+
+			$tpl->content = $item->get_content();
+
+			if ($enclosure = $item->get_enclosure())
+			{
+				if ($enclosure->get_link() && stristr($enclosure->get_type(), 'image/'))
 				{
-					$tpl->t_date		= $item->get_date('d.m.Y G:i');
-					$tpl->t_utime		= $item->get_date('U');
-					$tpl->t_interval	= $this->get_time_interval($date);
+					$tpl->e_img_link = $enclosure->get_link();
 				}
-
-				$tpl->content = $item->get_content();
-
-				if (($max) && ($current == $max))
+				else if (!empty($enclosure->get_link()))
 				{
-					break;
-				}
-				else
-				{
-					$current++;
+					$e_href		= str_replace(' ', '%20', $enclosure->get_link());
+					$e_title	= basename(parse_url($enclosure->get_link(), PHP_URL_PATH));
+
+					$tpl->e_f_link = $this->link($e_href, '', $e_title, '', 0, 1);
+					$tpl->e_f_size = $enclosure->get_size();
+					$tpl->e_f_type = $enclosure->get_type();
 				}
 			}
-		}
-		else
-		{
-			// go through all of the items in the feed
-			foreach ($feed->get_items() as $item)
+
+			if (($max) && ($current == $max))
 			{
-				// get strings
-				$href	= $item->get_permalink();
-				$title	= $item->get_title();
-
-				if ($item->get_date())
-				{
-					// should have proper Unix time - 'U'
-					$date = $item->get_date('U');
-				}
-				else
-				{
-					$date = 0;
-				}
-
-				// headline
-				$tpl->link = $this->link($href, '', $title, '', 0, 1);
-
-				if (($time == 1) && ($date != 0))
-				{
-					$tpl->t_date		= $item->get_date('d.m.Y G:i');
-					$tpl->t_utime		= $item->get_date('U');
-					$tpl->t_interval	= $this->get_time_interval($date);
-				}
-
-				$tpl->content = $item->get_content();
-
-				if ($enclosure = $item->get_enclosure())
-				{
-					if ($enclosure->get_link() && stristr($enclosure->get_type(), 'image/'))
-					{
-						$tpl->e_img_link = $enclosure->get_link();
-					}
-					else if (!empty($enclosure->get_link()))
-					{
-						$e_href		= str_replace(' ', '%20', $enclosure->get_link());
-						$e_title	= basename(parse_url($enclosure->get_link(), PHP_URL_PATH));
-
-						$tpl->e_f_link = $this->link($e_href, '', $e_title, '', 0, 1);
-						$tpl->e_f_size = $enclosure->get_size();
-						$tpl->e_f_type = $enclosure->get_type();
-					}
-				}
-
-				if (($max) && ($current == $max))
-				{
-					break;
-				}
-				else
-				{
-					$current++;
-				}
+				break;
+			}
+			else
+			{
+				$current++;
 			}
 		}
 
 		$tpl->leave();
 	}
 }
-
