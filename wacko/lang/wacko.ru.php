@@ -235,12 +235,12 @@ $wacko_translation = [
 									'<code>[GroupName]</code> - имена групп пользователей, которым разрешено<br>' .
 									'<code>(пустой список)</code> - разрешено только владельцу страницы',
 
-	'AccessMode'				=> 'Видимость',
-	'AccessDenied'				=> 'denied',
-	'AccessPublic'				=> 'public',
-	'AccessRegistered'			=> 'registered',
-	'AccessPrivate'				=> 'private',
-	'AccessCustom'				=> 'custom',
+	'AccessMode'				=> 'Доступ',
+	'AccessDenied'				=> 'запрещен',
+	'AccessPublic'				=> 'публичный',
+	'AccessRegistered'			=> 'зарегистрированным',
+	'AccessPrivate'				=> 'приватный',
+	'AccessCustom'				=> 'произвольный',
 
 	// purge handler
 	'PurgePage'					=> 'Чистка документа',
