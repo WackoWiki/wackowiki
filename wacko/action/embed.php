@@ -14,6 +14,7 @@ if (!defined('IN_WACKO'))
 		[url="file:the_movie.swf"]
 		[width="100"]
 		[height="100"]
+		[align="left|center|right"]
 
 		// Params
 		play
@@ -40,6 +41,7 @@ extract([
 
 if (!$width)	$width	= 550;
 if (!$height)	$height	= 100;
+if (!$align)	$align	= null;
 
 if (!$url)
 {
@@ -52,6 +54,11 @@ else
 	$tpl->url		= $url;
 	$tpl->width		= (int) $width;
 	$tpl->height	= (int) $height;
+
+	if (in_array($align, ['left', 'center', 'right']))
+	{
+		$tpl->align = ' class="media-' . $align . '"';
+	}
 
 	$tpl->leave();
 }
