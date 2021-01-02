@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$print_tag_cloud = function ($tags, $method = '') use (&$tpl)
+$print_tag_cloud = function ($tags, $method = '', $cluster = '') use (&$tpl)
 {
 	// TODO: add name space 'category'
 	$tag = $this->db->category_page;
@@ -34,6 +34,9 @@ $print_tag_cloud = function ($tags, $method = '') use (&$tpl)
 	// set the font-size increment
 	$step = ($max_size - $min_size) / ($spread);
 
+	// context
+	$c_tag = $cluster ? ['tag' => $cluster] : [];
+
 	// loop through the tag array
 	foreach ($tags as $key => $value)
 	{
@@ -42,7 +45,7 @@ $print_tag_cloud = function ($tags, $method = '') use (&$tpl)
 		// multiply by the font-size increment ($size)
 		// and add the $min_size set above
 
-		$tpl->a_href		= $this->href($method, $tag, ['category_id' => $key]);
+		$tpl->a_href		= $this->href($method, $tag, ['category_id' => $key] + $c_tag);
 		$tpl->a_size		= round($min_size + (($value['number'] - $min_qty) * $step));
 		$tpl->a_title		= Ut::perc_replace($this->_t('PagesTaggedWith'), $value['number'], $value['category']);
 		$tpl->a_category	= $value['category'];
@@ -120,7 +123,7 @@ if ($tags)
 		];
 	}
 
-	$print_tag_cloud($this->cloud);
+	$print_tag_cloud($this->cloud, null, $tag);
 	unset ($this->cloud);
 }
 else

@@ -8309,7 +8309,7 @@ class Wacko
 	// if root string value is passed, returns number of
 	// pages under each category and below defined root
 	// page
-	function get_categories_list($lang, $cache = true, $root = false)
+	function get_categories_list($lang, $cache = true, $root = false, $empty = true)
 	{
 		$categories = [];
 
@@ -8348,12 +8348,15 @@ class Wacko
 			// process categories names
 			foreach ($_categories as $word)
 			{
-				$categories[$word['category_id']] = [
-					'parent_id'	=> $word['parent_id'],
-					'lang'		=> $word['category_lang'],
-					'category'	=> $word['category'],
-					'n'			=> (isset($counts[$word['category_id']]) ? $counts[$word['category_id']] : ''),
-				];
+				if ($empty || $counts[$word['category_id']])
+				{
+					$categories[$word['category_id']] = [
+						'parent_id'	=> $word['parent_id'],
+						'lang'		=> $word['category_lang'],
+						'category'	=> $word['category'],
+						'n'			=> ($counts[$word['category_id']] ?? ''),
+					];
+				}
 			}
 
 			foreach ($categories as $id => $word)

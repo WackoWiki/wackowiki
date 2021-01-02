@@ -5,14 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$category_link = function ($word, $category_id, $type_id, $list, $filter = [])
+$category_link = function ($word, $category_id, $type_id, $list, $cluster = '', $filter = [])
 {
 	$selected = (in_array($category_id, $filter));
+	// context
+	$c_tag = $cluster ? ['tag' => $cluster] : [];
 
 	return ($list
 				? ($selected
 					? '<span rel="tag" class="tag">'
-					: '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id]) . '" rel="tag" class="tag">')
+					: '<a href="' . $this->href('', '', ['category_id' => $category_id, 'type_id' => $type_id] + $c_tag) . '" rel="tag" class="tag">')
 				: '') .
 			# Ut::html($word['category']) .
 			$word['category'] .
@@ -39,8 +41,8 @@ if (!isset($list))			$list		= 1;
 if (!isset($type_id))		$type_id	= OBJECT_PAGE;
 if (!isset($ids))			$ids		= '';
 if (!isset($lang))			$lang		= $this->page['page_lang'];
-if (!isset($nomark))		$nomark 	= 0;
-if (!isset($info))			$info 		= 0;
+if (!isset($nomark))		$nomark		= 0;
+if (!isset($info))			$info		= 0;
 if (isset($_REQUEST['category_lang']))
 {
 	$lang = ($this->db->multilanguage
@@ -57,7 +59,9 @@ if (!isset($sort) || !in_array($sort, ['abc', 'date']))
 $type_id	= (int) ($_GET['type_id'] ?? OBJECT_PAGE);
 $filter		= [];
 
-$tag = $this->unwrap_link($page);
+$page		= (string) ($_GET['tag'] ?? $page);
+$tag		= $this->unwrap_link($page);
+$this->sanitize_page_tag($tag);
 
 // show assigned objects
 if ($list && ($ids || isset($_GET['category_id'])))
@@ -106,6 +110,12 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		$tpl->mark			= true;
 		$tpl->mark_words	= $words;
 		$tpl->emark			= true;
+
+		if ($tag)
+		{
+			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', 0);
+			$tpl->mark_cluster	= $this->_t('CategoriesOfCluster');
+		}
 	}
 
 	if ($sort == 'abc')
@@ -143,9 +153,17 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 			foreach ($pages as $page)
 			{
+				$this->cache_page($page, true);
+				$page_ids[] = (int) $page['page_id'];
 				// cache page_id for for has_access validation in link function
 				$this->page_id_cache[$page['tag']] = $page['page_id'];
+			}
 
+			// cache acls
+			$this->preload_acl($page_ids);
+
+			foreach ($pages as $page)
+			{
 				if ($this->has_access('read', $page['page_id']) !== true)
 				{
 					continue;
@@ -202,7 +220,7 @@ if (!$ids)
 	}
 
 	// categories list
-	if ($categories = $this->get_categories_list($lang, true, $tag))
+	if ($categories = $this->get_categories_list($lang, true, $tag, false))
 	{
 		$filter[]	= (int) ($_GET['category_id'] ?? null);
 		$total		= ceil(count($categories) / 4); // TODO: without subcategories!
@@ -210,15 +228,13 @@ if (!$ids)
 
 		foreach ($categories as $category_id => $word)
 		{
-			$spacer = NBSP . NBSP . NBSP;	// No-Break Space (NBSP)
-
-			$tpl->l_link		= $category_link($word, $category_id, $type_id, $list, $filter);
+			$tpl->l_link		= $category_link($word, $category_id, $type_id, $list, $tag, $filter);
 
 			if (isset($word['child']) && $word['child'] == true)
 			{
 				foreach ($word['child'] as $category_id => $word)
 				{
-					$tpl->l_c_l_link	= $category_link($word, $category_id, $type_id, $list, $filter);
+					$tpl->l_c_l_link	= $category_link($word, $category_id, $type_id, $list, $tag, $filter);
 				}
 			}
 
