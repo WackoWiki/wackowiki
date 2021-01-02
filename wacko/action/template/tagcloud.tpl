@@ -2,7 +2,7 @@
 	[= mark _ =
 		<div class="layout-box">
 			<p>
-				<span>[ ' _t: TagCloud ' ]:</span>
+				<span>[ ' _t: TagCloud ' ] [ ' cluster ' ] [ ' link ' ]:</span>
 			</p>
 	=]
 	[= notaggedpages _ =

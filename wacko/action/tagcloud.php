@@ -49,7 +49,6 @@ $print_tag_cloud = function ($tags, $method = '') use (&$tpl)
 	}
 };
 
-
 // settings:
 //	page		- where to start counting from (defaults to current tag)
 //	lang		- categories language if necessary (defaults to current page lang)
@@ -101,6 +100,18 @@ $tags = $this->db->load_all($sql, true);
 
 if ($tags)
 {
+	if (!$nomark)
+	{
+		$tpl->mark		= true;
+		$tpl->emark		= true;
+
+		if ($tag)
+		{
+			$tpl->mark_link		= $this->link('/' . $tag, '', '', '', 0);
+			$tpl->mark_cluster	= $this->_t('CategoriesOfCluster');
+		}
+	}
+
 	foreach ($tags as $cat)
 	{
 		$this->cloud[$cat['category_id']] = [
@@ -109,13 +120,8 @@ if ($tags)
 		];
 	}
 
-	if (!$nomark)
-	{
-		$tpl->mark		= true;
-		$tpl->emark		= true;
-	}
-
 	$print_tag_cloud($this->cloud);
+	unset ($this->cloud);
 }
 else
 {

@@ -216,7 +216,6 @@ if (!$ids)
 
 			if (isset($word['child']) && $word['child'] == true)
 			{
-
 				foreach ($word['child'] as $category_id => $word)
 				{
 					$tpl->l_c_l_link	= $category_link($word, $category_id, $type_id, $list, $filter);
