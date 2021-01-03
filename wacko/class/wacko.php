@@ -8348,7 +8348,7 @@ class Wacko
 			// process categories names
 			foreach ($_categories as $word)
 			{
-				if ($empty || $counts[$word['category_id']])
+				if ($empty || !empty($counts[$word['category_id']]))
 				{
 					$categories[$word['category_id']] = [
 						'parent_id'	=> $word['parent_id'],
