@@ -49,12 +49,12 @@ else
 
 	if (count($urlset) == 1)
 	{
-		$urlset = $urlset[0];
-		$count_feeds = 1;
+		$urlset			= $urlset[0];
+		$count_feeds	= 1;
 	}
 	else
 	{
-		$count_feeds = count($urlset);
+		$count_feeds	= count($urlset);
 	}
 
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE)
@@ -67,13 +67,6 @@ else
 	// Make sure that we're sending the right character set headers, etc.
 	$feed->set_output_encoding($this->get_charset($this->db->language));
 	$feed->strip_comments(true);
-
-
-	// Experiments here
-
-	//$feed->force_feed(true); -- grab it all
-
-	// Experiments here ^
 
 	$feed->init();
 
@@ -131,9 +124,7 @@ else
 				}
 
 				$tpl->leave();
-
 			}
-
 			// default
 			else
 			{

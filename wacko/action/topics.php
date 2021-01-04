@@ -246,7 +246,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 				{
 					$tpl->enter('c_');
 
-					$tpl->style		= $updated ? ' style="font-weight:600;"' : '';
+					$tpl->style		= $updated ? ' style="font-weight: 600;"' : '';
 					$tpl->ip		= $admin ? $comment['ip'] : '';
 					$tpl->user		= $this->user_link($comment['user_name']);
 					$tpl->href		= $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]);

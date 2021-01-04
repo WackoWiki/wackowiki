@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 	The first three arguments here are required.  The rest are optional.
 
 	{{embed
-		[url="file:the_movie.swf"]
+		[url="file:the_movie.mp4"]
 		[width="100"]
 		[height="100"]
 		[align="left|center|right"]

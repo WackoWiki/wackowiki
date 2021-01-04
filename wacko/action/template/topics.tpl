@@ -36,7 +36,7 @@
 								<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">'
 							=]
 							[= updated =
-								<strong><span class="cite" title="[ ' _t: ForumNewPosts ' ]">[[ ' _t: ForumUpdated ' ]]</span> 
+								<strong><span class="cite" title="[ ' _t: ForumNewPosts ' ]">[[ ' _t: ForumUpdated ' ]]</span></strong> 
 							=]
 							<strong>[ ' title ' ]</strong>
 						</td>
