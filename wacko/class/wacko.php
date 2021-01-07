@@ -4281,7 +4281,7 @@ class Wacko
 	{
 		// inline element (paragrafica!)
 		return
-				'<img src="' . $src . '"' . $id . ' class="' . $class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . '>';
+				'<img src="' . $src . '" loading="lazy"' . $id . ' class="' . $class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . '>';
 	}
 
 	function audio_link($src, $class, $id, $title) : string

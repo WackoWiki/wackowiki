@@ -233,8 +233,10 @@ if ($can_view)
 				}
 
 				$tpl->img	= '<img src="' . $this->db->base_path . $tnb_path . '" ' .
+					'loading="lazy" ' .
 					($file['file_description'] ? 'alt="' . $file_description . '" title="' . $file_description . '"' : '') .
-					' width="' . $file_width . '" height="' . $file_height . '" ' . ($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
+					' width="' . $file_width . '" height="' . $file_height . '" ' .
+					($imgclass ? 'class="' . $imgclass . '"' : '') . '>';
 
 				if (!file_exists($tnb_path))
 				{
