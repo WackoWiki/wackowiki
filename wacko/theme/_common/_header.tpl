@@ -41,7 +41,7 @@ _common include file for themes
 		=]
 	=]
 	[ ' bb2 | ' ]
-	<script src="[ ' db: base_path ' ]js/default.js"></script>
+	<script src="[ ' db: base_path ' ]js/default.js" defer></script>
 	[= edit _ =
 		['' // autocomplete.js, protoedit & wikiedit.js contain classes for WikiEdit editor. We may include them only on method==edit pages. '']
 		<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
