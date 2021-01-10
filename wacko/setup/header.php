@@ -44,20 +44,23 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 	</head>
 	<body>
 		<div class="installer">
-			<h1><?php echo $lang['Title'];?><span class="white"> : </span><?php echo $install_action == 'lang' ? $lang['lang'] : $lang[$install_action]; ?></h1>
+			<h1><?php echo $lang['Title'];?><span class="white"> : </span><?php echo $lang[$install_action]; ?></h1>
 			<ul class="menu">
-				<li class="<?php echo $install_action == 'lang' ? 'current' : 'item'; ?>"><?php echo $lang['lang']; ?></li>
-				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'version-check' ? 'current' : 'item'; ?>"><?php echo $lang['version-check']; ?></li>
-				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'config-site' ? 'current' : 'item'; ?>"><?php echo $lang['config-site']; ?></li>
-				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'config-database' ? 'current' : 'item'; ?>"><?php echo $lang['config-database']; ?></li>
-				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'install-database' ? 'current' : 'item'; ?>"><?php echo $lang['install-database']; ?></li>
-				<li>&gt;</li>
-				<li class="<?php echo $install_action == 'write-config' ? 'current' : 'item'; ?>"><?php echo $lang['write-config']; ?></li>
+			<?php
+				$actions	= ['lang', 'version-check', 'config-site', 'config-database', 'install-database', 'write-config'];
+				$next		= '';
+
+				foreach ($actions as $i => $action)
+				{
+					if ($i > 0)
+					{
+						$next = '<span>&gt; </span>';
+					}
+
+					echo '<li class="' . ($install_action == $action ? 'current' : 'item') . '">' . $next . $lang[$action] . '</li>' . "\n";
+				}
+			?>
 			</ul>
 			<div class="fake_hr">
-			<hr>
-		</div>
+				<hr>
+			</div>

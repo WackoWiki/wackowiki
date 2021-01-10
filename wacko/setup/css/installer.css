@@ -128,14 +128,17 @@ hr {
 	margin: 0 auto;
 	padding: 4px 0 8px 0;
 	font-weight: 900;
-	color: #CCC;
 	text-align: center;
 }
 
-.menu li { /*  float: left;*/
+.menu li {
 	display: inline;
 	width: auto;
 	margin: 0 2px;
+}
+.menu li span {
+	color: #CCC;
+	margin: 0 4px 0 0;
 }
 
 .item {

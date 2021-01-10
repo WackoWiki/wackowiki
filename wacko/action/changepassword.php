@@ -126,24 +126,27 @@ if (@$_POST['_action'] === 'forgot_password')
 // POST processing complete, let's enforce GET method
 $_POST and $this->show_must_go_on($code? ['secret_code' => $code] : []);
 
-
 if ($user)
 {
+	$tpl->enter('c_');
+
 	if ($code)
 	{
-		$tpl->c_title		= $this->format(Ut::perc_replace($this->_t('ChangePasswordForUser'), $user['user_name']));
-		$tpl->c_secret_code	= $code;
+		$tpl->title			= $this->format(Ut::perc_replace($this->_t('ChangePasswordForUser'), $user['user_name']));
+		$tpl->secret_code	= $code;
 	}
 	else
 	{
-		$tpl->c_title		= $this->format_t('YouWantChangePassword');
-		$tpl->c_current		= true;
+		$tpl->title			= $this->format_t('YouWantChangePassword');
+		$tpl->current		= true;
 	}
 
-	$tpl->c_autocomplete	= $this->form_autocomplete_off();
-	$tpl->c_complexity		= $this->show_password_complexity();
-	$tpl->c_minchars		= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
-	$tpl->c_form			= $this->href();
+	$tpl->autocomplete		= $this->form_autocomplete_off();
+	$tpl->complexity		= $this->show_password_complexity();
+	$tpl->minchars			= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
+	$tpl->form				= $this->href();
+
+	$tpl->leave(); // c_
 }
 else
 {
