@@ -96,6 +96,8 @@ $lang = [
 'AllowedLangDesc'				=> 'Recomenda-se que seleccione apenas o conjunto de idiomas que pretende utilizar, caso contrário todos os idiomas são seleccionados.',
 'Admin'							=> 'Nome do Administrador',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'O Nome de Utilizador deve ser constituído por %1 a %2 caracteres e usar somente caracteres alfanuméricos.',
+'NameCamelCaseOnly'				=> 'O Nome de Utilizador deve ser constituído por %1 a %2 caracteres e WikiName formatted.',
 'Password'						=> 'Senha de Administrador',
 'PasswordDesc'					=> 'Escolha uma senha para o administrador com um mínimo de %1 caracteres.',
 'Password2'						=> 'Repetir Senha:',

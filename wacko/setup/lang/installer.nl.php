@@ -96,6 +96,8 @@ $lang = [
 'AllowedLangDesc'				=> 'Het wordt aanbevolen om alleen de set van talen te selecteren die u wilt gebruiken, anders worden alle talen geselecteerd.',
 'Admin'							=> 'Beheerders naam',
 'AdminDesc'						=> 'Geef de gebruikersnaam van de beheerder. Moet een <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> zijn (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'Gebruikersnaam moet tussen %1 en %2 tekens lang zijn. Gebruik hierbij alleen letters en cijfers.',
+'NameCamelCaseOnly'				=> 'Gebruikersnaam moet tussen %1 en %2 tekens lang zijn en een WikiNaam zijn.',
 'Password'						=> 'Geef wachtwoord voor de beheerder',
 'PasswordDesc'					=> 'Kies een wachtwoord voor de beheerder (%1 + tekens).',
 'Password2'						=> 'Herhaal wachtwoord:',

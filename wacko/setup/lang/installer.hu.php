@@ -96,6 +96,8 @@ $lang = [
 'AllowedLangDesc'				=> 'Javasoljuk, hogy csak azt a nyelvkészletet válassza, amelyet használni szeretne, egyébként minden nyelvet kiválasztva.',
 'Admin'							=> 'Admin neve',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters. Upper case characters are OK.',
+'NameCamelCaseOnly'				=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
 'Password'						=> 'Admin jelszó',
 'PasswordDesc'					=> 'Válasszon egy jelszót az adminisztrátor számára, legalább %1 karakterrel.',
 'Password2'						=> 'Jelszó újra:',

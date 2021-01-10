@@ -96,6 +96,8 @@ $lang = [
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin'							=> 'Nazwa admina',
 'AdminDesc'						=> 'Wpisz nazwę administratora. Powinna być <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">NaząWiki</a> (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'Login musi mieć min. %1, a maks. %2 znaków i składać się tylko z liter alfabetu łacińskiego oraz cyfr.',
+'NameCamelCaseOnly'				=> 'Login musi mieć min. %1, a maks. %2 znaków i WikiName formatted.',
 'Password'						=> 'Admina wpisz hasło',
 'PasswordDesc'					=> 'Wpisz hasło dla administratora (min. %1 znaków).',
 'Password2'						=> 'Powtórz hasło:',

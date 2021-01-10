@@ -113,11 +113,17 @@ echo "\t</tr>\n</table>\n";
 
 if ($config['is_update'] == false)
 {
-	echo $separator; ?>
+	echo $separator;
+
+	$name_pattern =
+		Ut::perc_replace(($config['disable_wikiname']? $lang['NameAlphanumOnly'] : $lang['NameCamelCaseOnly']),
+			$config['username_chars_min'],
+			$config['username_chars_max']);
+	?>
 
 	<label class="label_top" for="admin_nam"><?php echo $lang['Admin'];?></label>
 	<p class="notop"><?php echo $lang['AdminDesc'];?></p>
-	<input type="text" minlength="<?php echo $config['username_chars_min'] ?>" maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php if (isset($config['admin_name'])) echo $config['admin_name']; ?>" class="text_input" pattern="[\p{L}\p{Nd}]+" required>
+	<input type="text" minlength="<?php echo $config['username_chars_min'] ?>" maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php if (isset($config['admin_name'])) echo $config['admin_name']; ?>" class="text_input" pattern="[\p{L}\p{Nd}]+" title="<?php echo $name_pattern; ?>" required>
 	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="password"><?php echo $lang['Password'];?></label>

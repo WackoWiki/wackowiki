@@ -96,6 +96,8 @@ $lang = [
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin'							=> 'Име',
 'AdminDesc'						=> 'Изберете име. Нещо от тип <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (без кирилица).',
+'NameAlphanumOnly'				=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго и да използва само alphanumeric.',
+'NameCamelCaseOnly'				=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго and WikiName formatted.',
 'Password'						=> 'Име Парола',
 'PasswordDesc'					=> 'Изберете парола ( 9 и повече символа )',
 'Password2'						=> 'Подтвърждение на паролата:',

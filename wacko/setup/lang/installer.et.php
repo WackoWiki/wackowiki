@@ -96,6 +96,8 @@ $lang = [
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin'							=> 'Adminni nimi',
 'AdminDesc'						=> 'Sisesta administraatori kasutajanimi. Peaks olema <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiNimi</a> (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. Võid kasutada vaid kirjamärke.',
+'NameCamelCaseOnly'				=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. and WikiName formatted.',
 'Password'						=> 'Sisesta parool',
 'PasswordDesc'					=> 'Vali administraatorile parool (vähemalt %1 tähemärki)',
 'Password2'						=> 'Korda parooli:',

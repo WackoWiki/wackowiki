@@ -96,6 +96,8 @@ $lang = [
 'AllowedLangDesc'				=> 'Συνιστάται να επιλέξετε μόνο το σύνολο των γλωσσών που θέλετε να χρησιμοποιήσετε, άλλες σοφές επιλέγονται όλες οι γλώσσες.',
 'Admin'							=> 'Όνομα Διαχειριστή',
 'AdminDesc'						=> 'Εισάγεται το όνομα του διαχειριστή, αυτό πρέπει να είναι ένα <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
+'NameAlphanumOnly'				=> 'Το όνομα μέλους πρέπει να είναι από %1 έως %2 χαρακτήρες μακρύ και να περιέχει μόνο αλφαριθμητικούς χαρακτήρες.',
+'NameCamelCaseOnly'				=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
 'Password'						=> 'Συνθηματικό Διαχειριστή',
 'PasswordDesc'					=> 'Επέλεξε ένα συνθηματικό για τον διαχειριστή με τουλάχιστον %1 χαρακτήρες.',
 'Password2'						=> 'Επανέλαβε το συνθηματικό:',
