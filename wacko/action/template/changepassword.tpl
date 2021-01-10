@@ -39,7 +39,7 @@
 			<div class="cssform">
 			<p>
 				<label for="user_name">[ ' format_t: UserName ' ]:</label>
-				<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" required autofocus><br>
+				<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" pattern="[ ' pattern | e attr ' ]" title="[ ' only | e attr ' ]" required autofocus><br>
 			</p>
 			<p>
 				<label for="email">[ ' format_t: Email ' ]:</label>
