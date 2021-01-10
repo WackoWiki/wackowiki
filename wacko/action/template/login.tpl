@@ -27,7 +27,7 @@
 			[ ' csrf: login ' ]
 			<p>
 				<label for="user_name">[ ' format_t: LoginName ' ]:</label>
-				<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="[ ' username | e attr ' ]" tabindex="1" required autofocus>
+				<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="[ ' username | e attr ' ]" pattern="[ ' pattern | e attr ' ]" title="[ ' only | e attr ' ]" tabindex="1" required autofocus>
 			</p>
 			<p>
 				<label for="password">[ ' _t: LoginPassword ' ]:</label>

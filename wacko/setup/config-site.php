@@ -70,7 +70,7 @@ else
 
 <?php
 
-if ($config['multilanguage'] || $config['is_update'] == false)
+if (($config['is_update'] && $config['multilanguage']) || $config['is_update'] == false)
 {
 	$langs = available_languages();
 }
@@ -117,7 +117,7 @@ if ($config['is_update'] == false)
 
 	<label class="label_top" for="admin_nam"><?php echo $lang['Admin'];?></label>
 	<p class="notop"><?php echo $lang['AdminDesc'];?></p>
-	<input type="text" minlength="<?php echo $config['username_chars_min'] ?>"  maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php if (isset($config['admin_name'])) echo $config['admin_name']; ?>" class="text_input" required>
+	<input type="text" minlength="<?php echo $config['username_chars_min'] ?>" maxlength="<?php echo $config['username_chars_max'] ?>" id="admin_nam" name="config[admin_name]" value="<?php if (isset($config['admin_name'])) echo $config['admin_name']; ?>" class="text_input" pattern="[\p{L}\p{Nd}]+" required>
 	<br>
 <?php echo $separator; ?>
 	<label class="label_top" for="password"><?php echo $lang['Password'];?></label>
