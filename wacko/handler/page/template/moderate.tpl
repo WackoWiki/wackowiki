@@ -102,7 +102,7 @@
 					<input type="submit" name="lock" id="submit_lock" value="[ ' _t: ModerateLock ' ]">
 					<input type="submit" name="unlock" id="submit_unlock" value="[ ' _t: ModerateUnlock ' ]">
 					<br>
-					<input type="submit" name="set" id="submit" value="[ ' _t: ModerateSet ' ]">
+					<input type="submit" name="set" id="submit" value="[ ' _t: SetButton ' ]">
 						[= set _ =
 							<input type="submit" name="reset" id="submit" value="[ ' _t: ResetButton ' ]">
 							&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
@@ -295,7 +295,7 @@
 					<input type="submit" name="posts_delete" id="submit_delete" value="[ ' _t: ModerateDeletePosts ' ]">
 					<input type="submit" name="posts_split" id="submit_split" value="[ ' _t: ModerateSplit ' ]">
 					<br>
-					<input type="submit" name="set" id="submit_set" value="[ ' _t: ModerateSet ' ]">
+					<input type="submit" name="set" id="submit_set" value="[ ' _t: SetButton ' ]">
 					[= set _ =
 						<input type="submit" name="reset" id="submit_reset" value="[ ' _t: ResetButton ' ]">
 						&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>

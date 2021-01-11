@@ -326,9 +326,9 @@ function admin_user_approve(&$engine, &$module)
 						'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> ' .
 						'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 						'<br>' . "\n" .
-							'<input type="submit" name="set" id="submit" value="' . $engine->_t('ModerateSet') . '"> ' .
+							'<input type="submit" name="set" id="submit" value="' . $engine->_t('SetButton') . '"> ' .
 							($set
-								? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ModerateReset') . '"> ' .
+								? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ResetButton') . '"> ' .
 								  '<small>ids: ' . implode(', ', $set) . '</small>'
 								: ''
 							); */
