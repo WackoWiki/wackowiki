@@ -60,16 +60,15 @@ write_config_hidden_nodes([
 
 echo '   <input type="hidden" name="password" value="' . ($_POST['password'] ?? '') . '">' . "\n";
 
-	// If none of the PHP SQL extensions are loaded then let the user know there is a problem
-	if (!extension_loaded('mysqli') && !extension_loaded('pdo'))
-	{
+// If none of the PHP SQL extensions are loaded then let the user know there is a problem
+if (!extension_loaded('mysqli') && !extension_loaded('pdo'))
+{
 ?>
 	<p class="notop"><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
 <?php
-	}
-	else
-	{
-
+}
+else
+{
 ?>
 	<h2><?php echo $lang['DbDriver'];?></h2>
 	<p class="notop"><?php echo $lang['DbDriverDesc']; ?></p>
@@ -89,28 +88,18 @@ $drivers[]	= ['pdo',		'mysql_pdo',		'PDO MySQL'];
 // $drivers[]	= ['pdo',		'pgsql',		'PDO PostgreSQL'];
 // $drivers[]	= ['pdo',		'sqlite3',		'PDO SQLite3'];
 
-$detected = 0;
-
 foreach ($drivers as $k => $driver)
 {
 	if (extension_loaded($driver[0]))
 	{
-		if ($config['is_update'] == false)
-		{
-			echo '<li>
-						<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" ' . ($detected == 0 ? 'checked' : '') . '>
-						<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
-					</li>\n";
-		}
-		else
-		{
-			echo '<li>
-						<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" ' . ($config['database_driver'] == $driver[1] ? 'checked' : '') . '>
-						<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
-					</li>\n";
-		}
-
-		$detected++;
+		echo '<li>
+					<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" ' .
+						($config['is_update']
+							? ($config['database_driver'] == $driver[1]		? 'checked' : '')
+							: ($k == 0										? 'checked' : '')
+						) . '>
+					<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
+				</li>\n";
 	}
 }
 ?>
@@ -132,15 +121,8 @@ foreach ($drivers as $k => $driver)
 
 $charsets	= [];
 $charsets[]	= ['utf8mb4',	'utf8mb4',	'utf8mb4 (' . $lang['Recommended'] . ')'];	// default
-#$charsets[]	= ['utf8',		'utf8',		'utf8mb3'];	// XXX: Do not use, only for testing!
 
 echo '	<select id="database_charset" name="config[database_charset]" required>';
-
-// set default database charset to utf8 when innodb_large_prefix option is NOT enabled
-/* if ($config['is_update'] == false && $config['innodb_large_prefix'] == true)
-{
-	$config['database_charset'] = 'utf8';
-} */
 
 foreach ($charsets as $charset)
 {
