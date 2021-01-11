@@ -268,15 +268,16 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 		{
 			$tpl->mark_href = $this->href('', '', ['markread' => 1]);
 		}
+
+		// display new topic form when applicable
+		if ($create_access)
+		{
+			$tpl->form_href = $this->href();
+		}
+
+		$tpl->leave(); // t_
 	}
 
-	// display new topic form when applicable
-	if ($create_access)
-	{
-		$tpl->form_href = $this->href();
-	}
-
-	$tpl->leave(); // t_
 	$tpl->leave(); // topics_
 }
 else
