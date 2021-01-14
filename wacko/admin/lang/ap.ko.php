@@ -656,7 +656,7 @@ $ap_translation = [
 	'Noreferrer'				=> 'noreferrer',
 	'NoreferrerInfo'			=> 'Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.',
 	'Nofollow'					=> 'nofollow',
-	'NofollowInfo'				=> 'Instruir a algunos motores de búsqueda que el hipervínculo no debe influir en el ranking del objetivo de los enlaces en el índice de los motores de búsqueda. Añade <code>rel="nofollow"</code> a la sintaxis del enlace.',
+	'NofollowInfo'				=> 'Tells search engines that the hyperlinks should not affect the page ranking of the target page in the search engine index. Adds <code>rel="nofollow"</code> to the link syntax.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
