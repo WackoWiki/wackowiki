@@ -70,7 +70,7 @@ function new_freecap()
 	document.getElementById('freecap').src = thesrc + separator + Math.round(Math.random() * 100000);
 }
 
-var dbclick = "page";
+var dbclick = 'page';
 
 function dclick(frame)
 {
@@ -114,7 +114,7 @@ function set_modified(e, strict_e)
 {
 	if (window.event && !strict_e)
 	{
-		var el = window.event.srcElement;
+		var el = window.event.target;
 	}
 	else if (e != null)
 	{

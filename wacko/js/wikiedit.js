@@ -366,7 +366,7 @@ WikiEdit.prototype.keyDown = function (e)
 	var noscroll = false;
 	var t = this.area;
 	var Key = e.keyCode;
-	if (Key == 0) Key = e.charCode;
+	if (Key == 0) Key = e.key;
 	if (Key == 8 || Key == 13 || Key == 32 || (Key > 45 && Key < 91) || (Key > 93 && Key < 112) 
 		|| (Key > 123 && Key < 144) || (Key > 145 && Key < 255))
 	{

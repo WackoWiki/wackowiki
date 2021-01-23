@@ -287,7 +287,7 @@ if ($can_view)
 				{
 					if ($cur == 0)
 					{
-						$tpl->row	= ($table ? '<tr>' : '');
+						$tpl->row	= '<tr>';
 					}
 
 					$tpl->table = true;
