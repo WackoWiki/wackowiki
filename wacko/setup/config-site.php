@@ -158,5 +158,5 @@ else
 	<input type="checkbox" id="wiki_rewrite" name="config[rewrite_mode]"  value="1" <?php echo isset($config['rewrite_mode']) ? 'checked' : '' ?> class="checkbox_input">
 	<br>
 <?php echo $separator; ?>
-	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" onclick="return check();">
+	<button type="submit" class="next" onclick="return check();"><?php echo $lang['Continue'];?></button>
 </form>

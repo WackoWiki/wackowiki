@@ -16,7 +16,7 @@
 							<label for="[ ' label ' ]">[ ' value ' ]</label>
 						=]
 						&nbsp;&nbsp;
-						<input type="submit" name="rate" id="submit" value="[ ' _t: SubmitButton ' ]">
+						<button type="submit" name="rate" id="submit">[ ' _t: SubmitButton ' ]</button>
 					</form>
 				</div>
 			=]

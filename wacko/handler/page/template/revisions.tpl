@@ -6,7 +6,7 @@
 			[ ' csrf: diff_versions ' ]
 			[ ' href: diff | hide_page ' ]
 			<p>
-				<input type="submit" value="[ ' _t: ShowDifferencesButton ' ]">
+				<button type="submit">[ ' _t: ShowDifferencesButton ' ]</button>
 				[= d _ =
 					[ '' placeholder '' ]
 					<input type="radio" id="diff_mode_[ ' mode ' ]" name="diffmode" value="[ ' mode ' ]" [ ' checked ' ]>
@@ -61,7 +61,7 @@
 			</ul><br>
 			[''' pagination ''']
 			<a href="[ ' href: ' ]" class="btn-link">
-				<input type="button" value="[ ' _t: CancelDifferencesButton ' ]">
+				<button type="button">[ ' _t: CancelDifferencesButton ' ]</button>
 			</a>
 		</form>
 	=]

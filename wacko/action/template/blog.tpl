@@ -52,7 +52,7 @@
 							<td class="label"><label for="posttitle">[ ' _t: ForumTopicName ' ]:</label></td>
 							<td>
 								<input type="text" id="posttitle" name="title" size="50" maxlength="250" value="">
-								<input type="submit" id="submit" value="[ ' _t: ForumTopicSubmit ' ]">
+								<button type="submit" id="submit">[ ' _t: ForumTopicSubmit ' ]</button>
 							</td>
 						</tr>
 					</table>

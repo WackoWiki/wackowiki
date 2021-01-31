@@ -20,8 +20,8 @@
 
 			<input type="checkbox" id="purge_thumb_cache" name="thumb_cache">
 			<label for="purge_thumb_cache">[ ' _t: ThumbCache ' ]</label><br><br>
-			
-			<input type="submit" name="clear_cache" value="[ ' _t: ClearCache ' ]">
+
+			<button type="submit" name="clear_cache">[ ' _t: ClearCache ' ]</button>
 		</div>
 	</form>
 

@@ -90,9 +90,9 @@
 
 
 [= buttons =]
-<input type="submit" class="btn-ok" form="edit_page" name="save" value="[ ' _t: SaveButton ' ]">&nbsp;
-<input type="submit" class="btn-ok" form="edit_page" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
-<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="btn-cancel" value="[ ' _t: CancelButton ' ]"></a>
+<button type="submit" class="btn-ok" form="edit_page" name="save">[ ' _t: SaveButton ' ]</button>&nbsp;
+<button type="submit" class="btn-ok" form="edit_page" name="preview">[ ' _t: EditPreviewButton ' ]</button>&nbsp;
+<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
 
 [ === similarTags === ]
 <ol>

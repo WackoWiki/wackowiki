@@ -216,7 +216,7 @@ else
 	echo '<input type="hidden" value="off" name="config[DeleteTables]">';
 }
 ?>
-	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next" onclick="return check();">
+	<button type="submit" class="next" onclick="return check();"><?php echo $lang['Continue'];?></button>
 <?php
 	}
 ?>

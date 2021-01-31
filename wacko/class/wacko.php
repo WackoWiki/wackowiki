@@ -8470,8 +8470,8 @@ class Wacko
 			// control buttons
 			if (!($can_edit || $this->method == 'edit'))
 			{
-				$out .= '<input type="submit" id="submit" name="save" value="' . $this->_t('CategoriesStoreButton') . '"> ' .
-						'<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CancelButton') . '"></a>' . "<br>\n" .
+				$out .= '<button type="submit" id="submit" name="save">' . $this->_t('CategoriesStoreButton') . '</button> ' .
+						'<a href="' . $this->href('') . '" class="btn-link"><button type="button" id="button">' . $this->_t('CancelButton') . '</button></a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}
@@ -8483,17 +8483,17 @@ class Wacko
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><input type="button" id="button" value="' . $this->_t('CancelButton') . '"></a>' . "\n";
+				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><button type="button" id="button">' . $this->_t('CancelButton') . '</button></a>' . "\n";
 			}
 		}
 
 		// edit control buttons
 		if ($can_edit || ! $this->method == 'edit')
 		{
-			$out .= '<input type="submit" id="add-button" name="create" value="' . $this->_t('AddButton') . '"> ' .
-					'<input type="submit" id="rename-button" name="rename" value="' . $this->_t('RenameButton') . '"> ' .
-					'<input type="submit" id="group-button" name="ugroup" value="' . $this->_t('CategoriesGroupButton') . '"> ' .
-					'<input type="submit" id="remove-button" name="delete" value="' . $this->_t('RemoveButton') . '"> ' .
+			$out .= '<button type="submit" id="add-button" name="create">' . $this->_t('AddButton') . '</button> ' .
+					'<button type="submit" id="rename-button" name="rename">' . $this->_t('RenameButton') . '</button> ' .
+					'<button type="submit" id="group-button" name="ugroup">' . $this->_t('CategoriesGroupButton') . '</button> ' .
+					'<button type="submit" id="remove-button" name="delete">' . $this->_t('RemoveButton') . '</button> ' .
 					'<small><br>' . $this->_t('CategoriesEditInfo') . '</small>';
 		}
 

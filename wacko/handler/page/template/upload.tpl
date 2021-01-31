@@ -8,5 +8,5 @@
 	[ ' upload ' ]
 	<br><br>
 	<a href="[ ' href: ' ]" class="btn-link">
-		<input type="button" value="[ ' _t: CancelDifferencesButton ' ]">
+		<button type="button">[ ' _t: CancelDifferencesButton ' ]</button>
 	</a>

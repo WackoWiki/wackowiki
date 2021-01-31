@@ -372,7 +372,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				$message = $engine->_t('InconsistenciesNone');
 				$engine->show_message($message);
 
-				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
+				echo '<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('ResetButton') . '</button></a>';
 			}
 			else
 			{
@@ -380,9 +380,9 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				?>
 				<br>
 				<input type="hidden" name="db_action" value="check_inconsistencies">
-				<input type="submit" name="db_solve" id="submit" value="<?php echo $engine->_t('Solve');?>">
+				<button type="submit" name="db_solve" id="submit"><?php echo $engine->_t('Solve');?></button>
 				<?php
-				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>';
+				echo '<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a>';
 				echo $engine->form_close();
 			}
 ?>
@@ -737,7 +737,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				$engine->show_message($message);
 			}
 
-			echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
+			echo '<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('ResetButton') . '</button></a>';
 		}
 	}
 
@@ -840,7 +840,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					$message = $engine->_t('InconsistenciesDone');
 					$engine->show_message($message, 'success');
 
-					echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
+					echo '<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('ResetButton') . '</button></a>';
 				}
 				else
 				{
@@ -848,9 +848,9 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					?>
 					<br>
 					<input type="hidden" name="file_action" value="check_inconsistencies">
-					<input type="submit" name="file_solve" id="submit" value="<?php echo $engine->_t('DeleteButton');?>">
+					<button type="submit" name="file_solve" id="submit"><?php echo $engine->_t('DeleteButton');?></button>
 					<?php
-					echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>';
+					echo '<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a>';
 					echo $engine->form_close();
 				}
 			}
@@ -859,7 +859,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				$message = $engine->_t('InconsistenciesNone');
 				$engine->show_message($message);
 
-				echo '<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('ResetButton') . '"></a>';
+				echo '<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('ResetButton') . '</button></a>';
 			}
 
 			#Ut::debug_print_r($abandoned);
@@ -875,7 +875,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		echo $engine->form_open('check_db_inconsistencies');
 		?>
 		<input type="hidden" name="db_action" value="check_inconsistencies">
-		<input type="submit" name="db_check" id="submit" value="<?php echo $engine->_t('Check');?>">
+		<button type="submit" name="db_check" id="submit"><?php echo $engine->_t('Check');?></button>
 		<?php
 		echo $engine->form_close();
 		?>
@@ -886,7 +886,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 		echo $engine->form_open('check_file_inconsistencies');
 		?>
 		<input type="hidden" name="file_action" value="check_inconsistencies">
-		<input type="submit" name="file_check" id="submit" value="<?php echo $engine->_t('Check');?>">
+		<button type="submit" name="file_check" id="submit"><?php echo $engine->_t('Check');?></button>
 		<?php
 		echo $engine->form_close();
 	}

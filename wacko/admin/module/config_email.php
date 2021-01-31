@@ -162,7 +162,7 @@ function admin_config_email(&$engine, &$module)
 					<small><?php echo $engine->_t('SendTestEmailInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="submit" id="send_test_email" name="send_test_email" value="<?php echo $engine->_t('SendTestEmail'); ?>">
+					<button type="submit" id="send_test_email" name="send_test_email"><?php echo $engine->_t('SendTestEmail'); ?></button>
 				</td>
 			</tr>
 			<tr>
@@ -249,7 +249,7 @@ function admin_config_email(&$engine, &$module)
 		</table>
 		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('SaveButton');?>">
+			<button type="submit" id="submit"><?php echo $engine->_t('SaveButton');?></button>
 			<input type="reset" id="button" value="<?php echo $engine->_t('ResetButton');?>">
 		</div>
 <?php

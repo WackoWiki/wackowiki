@@ -210,8 +210,8 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 				echo	'<input type="hidden" name="backup_id" value="' . Ut::html($backup_id) . '">' . "\n" .
 						'<input type="hidden" name="start" value="true">' . "\n" .
 						Ut::perc_replace($engine->_t('ConfirmDbRestore'), ' <code>' . Ut::html($backup_id) . '</code>') . '<br><br>' .
-						'<input type="submit" id="submit" name="restore" value="' . $engine->_t('RestoreYes') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
+						'<button type="submit" id="submit" name="restore">' . $engine->_t('RestoreYes') . '</button> ' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('RestoreNo') . '</button></a>' .
 						'<br><small>' . $engine->_t('ConfirmDbRestoreInfo') . '</small>';
 
 				echo '<br><br>
@@ -398,8 +398,8 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 		echo '<input type="hidden" name="backup_id" value="' . Ut::html($backup_id) . '">' . "\n" .
 			'<div class="msg warning">' .
 				Ut::perc_replace($engine->_t('BackupDelete'), ' <code>' . Ut::html($backup_id) . '</code>') . '<br><br>' .
-				'<input type="submit" id="submit_delete" name="delete" value="' . $engine->_t('RestoreYes') . '"> ' .
-				'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('RestoreNo') . '"></a>' .
+				'<button type="submit" id="submit_delete" name="delete">' . $engine->_t('RestoreYes') . '</button> ' .
+				'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('RestoreNo') . '</button></a>' .
 				'<br><small>' . $engine->_t('BackupDeleteInfo') . '</small>' .
 			'</div>
 			<br>';
@@ -441,8 +441,8 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 <?php
 			echo $engine->form_open('restore');
 
-			$control_buttons =	'<input type="submit" name="restore" id="restore-submit" value="' . $engine->_t('BackupRestore') . '">' .
-								'<input type="submit" name="remove" id="remove-submit" value="' . $engine->_t('BackupRemove') . '">';
+			$control_buttons =	'<button type="submit" name="restore" id="restore-submit">' . $engine->_t('BackupRestore') . '</button>' .
+								'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('BackupRemove') . '</button>';
 
 			#$dir = UPLOAD_BACKUP_DIR . '/';
 

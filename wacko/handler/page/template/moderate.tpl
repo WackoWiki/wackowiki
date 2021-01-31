@@ -15,9 +15,9 @@
 				<tr><th>[ ' _t: ModerateDeleteConfirm ' ]</th></tr>
 				<tr><td>
 					<em>[ ' text ' ]</em><br>
-					<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
+					<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
 					<a href="[ ' href: moderate ' ]" class="btn-link">
-						<input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]">
+						<button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button>
 					</a>
 				</td></tr>
 			</table><br>
@@ -37,9 +37,9 @@
 								<option value="[ ' tag ' ]">[ ' title | e ' ]</option>
 							=]
 						</select>
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						<a href="[ ' href: moderate ' ]" class="btn-link">
-							<input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]">
+							<button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button>
 						</a>
 				</td></tr>
 			</table><br>
@@ -54,9 +54,9 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]">
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						<a href="[ ' href: moderate ' ]" class="btn-link">
-							<input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]">
+							<button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button>
 						</a>
 						[= onlyone _ =
 							<br><small>[ ' _t: ModerateRename1Only ' ]</small>
@@ -81,9 +81,9 @@
 								<option value="[ ' topic ' ]">[ ' text ' ]</option>
 							=]
 						</select>
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						<a href="[ ' href: moderate ' ]" class="btn-link">
-							<input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]">
+							<button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button>
 						</a>
 					</td>
 				</tr>
@@ -95,16 +95,16 @@
 		<table>
 			<tr class="lined">
 				<td colspan="5">
-					<input type="submit" name="delete" id="submit_delete" value="[ ' _t: ModerateDelete ' ]">
-					<input type="submit" name="move" id="submit_move" value="[ ' _t: ModerateMove ' ]"> 
-					<input type="submit" name="rename" id="submit_rename" value="[ ' _t: RenameButton ' ]">
-					<input type="submit" name="merge" id="submit_merge" value="[ ' _t: ModerateMerge ' ]">
-					<input type="submit" name="lock" id="submit_lock" value="[ ' _t: ModerateLock ' ]">
-					<input type="submit" name="unlock" id="submit_unlock" value="[ ' _t: ModerateUnlock ' ]">
+					<button type="submit" name="delete" id="submit_delete">[ ' _t: ModerateDelete ' ]</button>
+					<button type="submit" name="move" id="submit_move">[ ' _t: ModerateMove ' ]</button> 
+					<button type="submit" name="rename" id="submit_rename">[ ' _t: RenameButton ' ]</button>
+					<button type="submit" name="merge" id="submit_merge">[ ' _t: ModerateMerge ' ]</button>
+					<button type="submit" name="lock" id="submit_lock">[ ' _t: ModerateLock ' ]</button>
+					<button type="submit" name="unlock" id="submit_unlock">[ ' _t: ModerateUnlock ' ]</button>
 					<br>
-					<input type="submit" name="set" id="submit" value="[ ' _t: SetButton ' ]">
+					<button type="submit" name="set" id="submit">[ ' _t: SetButton ' ]</button>
 						[= set _ =
-							<input type="submit" name="reset" id="submit" value="[ ' _t: ResetButton ' ]">
+							<button type="submit" name="reset" id="submit">[ ' _t: ResetButton ' ]</button>
 							&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
 						=]
 				</td>
@@ -150,8 +150,8 @@
 				<tr>
 					<td>
 						<em>[ ' text ' ]</em><br>
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
-						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]"></a>
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
+						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 					</td>
 				</tr>
 			</table><br>
@@ -173,8 +173,8 @@
 									<option value="[ ' tag ' ]">[ ' title | e ' ]</option>
 								=]
 							</select> or <input type="text" name="cluster" size="50" maxlength="250"><br>
-							<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-							<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]"></a>
+							<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+							<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 						</td>
 					</tr>
 				</table><br>
@@ -190,8 +190,8 @@
 							=]
 						<em>[ ' text ' ]</em><br>
 						<input type="text" name="cluster" size="50" maxlength="250">
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]">
-						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]"></a>
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
+						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 					</td></tr>
 				</table><br>
 			=]
@@ -206,8 +206,8 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]"> 
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]"></a>
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 					</td>
 				</tr>
 			</table><br>
@@ -222,8 +222,8 @@
 						[= e _ =
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]"></a>
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 					</td>
 				</tr>
 			</table><br>
@@ -240,8 +240,8 @@
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
 						<input type="text" name="new_tag" size="50" maxlength="250" value=""> 
-						<input type="submit" name="accept" id="submit" value="[ ' _t: ModerateAccept ' ]"> 
-						<a href="[ ' href: moderate ' ]" class="btn-link"><input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]"></a>
+						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
+						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 						<br>
 						<small>
 						<input type="radio" name="scheme" value="after" id="after" [ ' after | checkbox ' ]> 
@@ -259,15 +259,15 @@
 		<table>
 			<tr class="lined">
 				<td colspan="2">
-					<input type="submit" name="topic_delete" id="delete-submit" value="[ ' _t: ModerateDeleteTopic ' ]">
-					<input type="submit" name="topic_move" id="move-submit" value="[ ' _t: ModerateMove ' ]">
+					<button type="submit" name="topic_delete" id="delete-submit">[ ' _t: ModerateDeleteTopic ' ]</button>
+					<button type="submit" name="topic_move" id="move-submit">[ ' _t: ModerateMove ' ]</button>
 					[= forum _ =
-						<input type="submit" name="topic_rename" id="submit" value="[ ' _t: RenameButton ' ]">
+						<button type="submit" name="topic_rename" id="submit">[ ' _t: RenameButton ' ]</button>
 						[= unlocked _ =
-							<input type="submit" name="topic_lock" id="submit" value="[ ' _t: ModerateLock ' ]">
+							<button type="submit" name="topic_lock" id="submit">[ ' _t: ModerateLock ' ]</button>
 						=]
 						[= locked _ =
-							<input type="submit" name="topic_unlock" id="submit" value="[ ' _t: ModerateUnlock ' ]">
+							<button type="submit" name="topic_unlock" id="submit">[ ' _t: ModerateUnlock ' ]</button>
 						=]
 					=]
 				</td>
@@ -292,12 +292,12 @@
 		[= comments _ =
 			<tr class="lined">
 				<td colspan="2">
-					<input type="submit" name="posts_delete" id="submit_delete" value="[ ' _t: ModerateDeletePosts ' ]">
-					<input type="submit" name="posts_split" id="submit_split" value="[ ' _t: ModerateSplit ' ]">
+					<button type="submit" name="posts_delete" id="submit_delete">[ ' _t: ModerateDeletePosts ' ]</button>
+					<button type="submit" name="posts_split" id="submit_split">[ ' _t: ModerateSplit ' ]</button>
 					<br>
-					<input type="submit" name="set" id="submit_set" value="[ ' _t: SetButton ' ]">
+					<button type="submit" name="set" id="submit_set">[ ' _t: SetButton ' ]</button>
 					[= set _ =
-						<input type="submit" name="reset" id="submit_reset" value="[ ' _t: ResetButton ' ]">
+						<button type="submit" name="reset" id="submit_reset">[ ' _t: ResetButton ' ]</button>
 						&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
 					=]
 				</td>

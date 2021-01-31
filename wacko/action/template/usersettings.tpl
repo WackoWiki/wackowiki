@@ -77,7 +77,7 @@
 						<tr>
 							<td>&nbsp;</td>
 							<td>
-								<input type="submit" class="OkBtn" id="submit" name="submit" value="[ ' _t: UpdateSettingsButton ' ]">
+								<button type="submit" class="OkBtn" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							</td>
 						</tr>
 					</tbody>
@@ -199,7 +199,7 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td>
-						<input type="submit" class="OkBtn" id="submit" name="submit" value="[ ' _t: UpdateSettingsButton ' ]">
+						<button type="submit" class="OkBtn" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 					</td>
 				</tr>
 			</tbody>
@@ -238,7 +238,7 @@
 							<a href="[ ' href ' ]">[ ' _t: YouWantChangePassword ' ]</a>
 						</th>
 						<td>
-							<a href="[ ' href ' ]" class="btn-link"><input type="button" id="button" value="[ ' _t: YouWantChangePassword ' ]" name="_password"></a>
+							<a href="[ ' href ' ]" class="btn-link"><button type="button" id="button" name="_password">[ ' _t: YouWantChangePassword ' ]</button></a>
 						</td>
 					</tr>
 					<tr>
@@ -338,9 +338,9 @@
 					<tr>
 						<td>&nbsp;</td>
 						<td>
-							<input type="submit" class="OkBtn" id="submit" name="submit" value="[ ' _t: UpdateSettingsButton ' ]">
+							<button type="submit" class="OkBtn" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							&nbsp;
-							<a href="[ ' logout ' ]" class="btn-link"><input type="button" class="CancelBtn" id="logout" name="logout" value="[ ' _t: LogoutButton ' ]"></a>
+							<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="CancelBtn" id="logout" name="logout">[ ' _t: LogoutButton ' ]</button></a>
 						</td>
 					</tr>
 				</tbody>

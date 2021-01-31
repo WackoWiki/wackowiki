@@ -87,7 +87,7 @@ else
 // create a child page only inside a cluster
 if (mb_substr_count($this->tag, '/') > 0)
 {
-	$parent = mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'));
+	$parent				= mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'));
 
 	if ($this->has_access('create', $this->get_page_id($parent)))
 	{

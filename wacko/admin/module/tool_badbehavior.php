@@ -485,7 +485,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 			</tr>
 		</table>
 		<br>
-		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('UpdateButton');?>"></div>
+		<div class="center"><button type="submit" class="button" name="submit"><?php echo $engine->_t('UpdateButton');?></button></div>
 
 	<?php
 		echo $engine->form_close();
@@ -817,7 +817,7 @@ function bb2_options(&$engine)
 		</tr>
 	</table>
 	<br>
-	<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('UpdateButton');?>"></div>
+	<div class="center"><button type="submit" class="button" name="submit"><?php echo $engine->_t('UpdateButton');?></button></div>
 	<?php
 		echo $engine->form_close();
 	?>
@@ -922,7 +922,7 @@ function bb2_options(&$engine)
 			</tbody>
 		</table>
 		<br>
-		<div class="center"><input type="submit" class="button" name="submit" value="<?php echo $engine->_t('UpdateButton');?> "></div>
+		<div class="center"><button type="submit" class="button" name="submit"><?php echo $engine->_t('UpdateButton');?></button></div>
 	<?php
 		echo $engine->form_close();
 	}

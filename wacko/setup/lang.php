@@ -102,7 +102,7 @@ echo "\t</tr>\n</table>\n<br>\n";
 if (isset($config['is_update']))
 {
 ?>
-	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
+	<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
 <?php
 }?>
 </form>

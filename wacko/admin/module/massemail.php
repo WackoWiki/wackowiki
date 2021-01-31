@@ -217,7 +217,7 @@ function admin_massemail(&$engine, &$module)
 		</table>
 		<br>
 		<div class="center">
-			<input type="submit" id="submit" value="<?php echo $engine->_t('SendButton');?>">
+			<button type="submit" id="submit"><?php echo $engine->_t('SendButton');?></button>
 			<input type="reset" id="button" value="<?php echo $engine->_t('ResetButton');?>">
 		</div>
 <?php

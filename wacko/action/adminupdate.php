@@ -50,7 +50,7 @@ if ($this->is_admin())
 	{
 		echo $this->form_open('set_title');
 		?>
-		<input type="submit" name="set_title"  value="<?php echo $this->_t('SubmitButton');?>">
+		<button type="submit" name="set_title"><?php echo $this->_t('SubmitButton');?></button>
 		<?php
 		echo $this->form_close();
 	}
@@ -109,7 +109,7 @@ if ($this->is_admin())
 	{
 		echo $this->form_open('set_depth');
 		?>
-		<input type="submit" name="set_depth"  value="<?php echo $this->_t('SubmitButton');?>">
+		<button type="submit" name="set_depth"><?php echo $this->_t('SubmitButton');?></button>
 		<?php
 		echo $this->form_close();
 	}
@@ -161,7 +161,7 @@ if ($this->is_admin())
 	{
 		echo $this->form_open('set_version_id');
 		?>
-		<input type="submit" name="set_version_id" value="<?php echo $this->_t('SubmitButton');?>">
+		<button type="submit" name="set_version_id"><?php echo $this->_t('SubmitButton');?></button>
 		<?php
 		echo $this->form_close();
 	}
@@ -219,7 +219,7 @@ if ($this->is_admin())
 	{
 		echo $this->form_open('set_missing_permissions');
 		?>
-		<input type="submit" name="set_missing_permissions" value="<?php echo $this->_t('UpdateButton');?>">
+		<button type="submit" name="set_missing_permissions"><?php echo $this->_t('UpdateButton');?></button>
 		<?php
 		echo $this->form_close();
 	}
@@ -294,7 +294,7 @@ if ($this->is_admin())
 		if (!isset($_POST['set_large_prefix_tables']))
 		{
 			echo $this->form_open('large_prefix');
-			echo '<input type="submit" name="set_large_prefix_tables" value="' . $this->_t('UpdateButton') . '">';
+			echo '<button type="submit" name="set_large_prefix_tables">' . $this->_t('UpdateButton') . '</button>';
 			echo $this->form_close();
 		}
 		else if (isset($_POST['set_large_prefix_tables']))
@@ -351,7 +351,7 @@ if ($this->is_admin())
 			echo "<h3>7. Migrates acls to new scheme:</h3>";
 			echo $this->form_open('migrate_acls');
 			?>
-			<input type="submit" name="migrate_acls" value="<?php echo $this->_t('SubmitButton');?>">
+			<button type="submit" name="migrate_acls"><?php echo $this->_t('SubmitButton');?></button>
 			<?php
 			echo $this->form_close();
 		}

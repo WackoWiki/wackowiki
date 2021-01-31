@@ -298,7 +298,7 @@ function admin_user_approve(&$engine, &$module)
 						'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 						$engine->_t('UsersSearch') . ': </td><td>' .
 						'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(($_GET['user'] ?? '')) . '"> ' .
-						'<input type="submit" id="submit" value="' . $engine->_t('SearchButton') . '"> ' .
+						'<button type="submit" id="submit">' . $engine->_t('SearchButton') . '</button> ' .
 						$engine->form_close();
 	$filter_status =	'<p class="right">' .
 						(($account_status == 1 || $account_status == -1)
@@ -322,13 +322,13 @@ function admin_user_approve(&$engine, &$module)
 	/////////////////////////////////////////////
 
 	/* $control_buttons =	'<br>' .
-						'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> ' .
-						'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('Deny') . '"> ' .
+						'<button type="submit" id="approve-button" name="approve">' . $engine->_t('Approve') . '</button> ' .
+						'<button type="submit" id="remove-button" name="remove">' . $engine->_t('Deny') . '</button> ' .
 						'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 						'<br>' . "\n" .
-							'<input type="submit" name="set" id="submit" value="' . $engine->_t('SetButton') . '"> ' .
+							'<button type="submit" name="set" id="submit">' . $engine->_t('SetButton') . '</button> ' .
 							($set
-								? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ResetButton') . '"> ' .
+								? '<button type="submit" name="reset" id="submit">' . $engine->_t('ResetButton') . '</button> ' .
 								  '<small>ids: ' . implode(', ', $set) . '</small>'
 								: ''
 							); */

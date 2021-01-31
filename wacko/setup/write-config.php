@@ -129,7 +129,7 @@ echo "		</ul>\n";
 	}
 	else
 	{
-		?> <input type="submit" value="<?php echo $lang['TryAgain'];?>" class="next">
+		?> <button type="submit" class="next"><?php echo $lang['TryAgain'];?></button>
 		<?php
 	}
 	?></form>

@@ -8,7 +8,7 @@
 			<div class="cssform">
 				<h3>[ ' _t: Hello ' ], [ ' link ' ]!</h3>
 				<p>
-					<a href="[ ' logout ' ]" class="btn-link"><input type="button" class="CancelBtn" value="[ ' _t: LogoutButton ' ]"></a>
+					<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="CancelBtn">[ ' _t: LogoutButton ' ]</button></a>
 				</p>
 				<p>
 					[ ' account ' ] | <a href="[ ' cookies ' ]">[ ' _t: ClearCookies ' ]</a>
@@ -45,7 +45,7 @@
 				</p>
 			=]
 			<p>
-				<input type="submit" class="OkBtn" value="[ ' _t: LoginButton ' ]" tabindex="4">
+				<button type="submit" class="OkBtn" tabindex="4">[ ' _t: LoginButton ' ]</button>
 			</p>
 			<p><a href="[ ' pwhref ' ]">[ ' _t: ForgotPassword ' ]</a></p>
 			[= welcome _ =

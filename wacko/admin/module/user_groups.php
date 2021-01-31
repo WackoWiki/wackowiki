@@ -144,8 +144,8 @@ function admin_user_groups(&$engine, &$module)
 					'<tr>
 						<td>
 							<br>
-							<input type="submit" id="submit" name="add_member" value="' . $engine->_t('AddButton') . '"> ' .
-							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('CancelButton') . '"></a>' .
+							<button type="submit" id="submit" name="add_member">' . $engine->_t('AddButton') . '</button> ' .
+							'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
 						'</td>
 					</tr>' .
 				'</table>
@@ -172,8 +172,8 @@ function admin_user_groups(&$engine, &$module)
 						'<tr>
 							<td>' .
 								Ut::perc_replace($engine->_t('MembersRemove'), '<code>' . Ut::html($member['user_name']) . '</code>') . ' ' .
-								'<input type="submit" id="submit" name="remove_member" value="' . $engine->_t('Remove') . '"> ' .
-								'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>' .
+								'<button type="submit" id="submit" name="remove_member">' . $engine->_t('Remove') . '</button> ' .
+								'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a>' .
 								'<br><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
@@ -342,8 +342,8 @@ function admin_user_groups(&$engine, &$module)
 				'<tr>
 					<td colspan="2">
 	 					<br>
-	 					<input type="submit" id="submit" name="create" value="' . $engine->_t('SubmitButton') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('CancelButton') . '"></a>' .
+	 					<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button> ' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 			'</table>
@@ -420,8 +420,8 @@ function admin_user_groups(&$engine, &$module)
 					<td colspan="2">
 						<br><small>' . $engine->_t('GroupsRenameInfo') . '</small>
 						<br><br>
-						<input type="submit" id="submit" name="edit" value="' . $engine->_t('SubmitButton') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('CancelButton') . '"></a>' .
+						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button> ' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 				'</table><br>';
@@ -452,8 +452,8 @@ function admin_user_groups(&$engine, &$module)
 						'<tr>
 							<td>' .
 								Ut::perc_replace($engine->_t('GroupsDelete'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . ' ' .
-								'<input type="submit" id="submit" name="delete" value="' . $engine->_t('Remove') . '"> ' .
-								'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a>' .
+								'<button type="submit" id="submit" name="delete">' . $engine->_t('Remove') . '</button> ' .
+								'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a>' .
 								'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
@@ -523,9 +523,9 @@ function admin_user_groups(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		echo '<br>' .
-			 '<input type="submit" id="button_add" name="add_member" value="' . $engine->_t('AddButton') . '"> ' .
-			 '<input type="submit" id="button_remove" name="remove_member" value="' . $engine->_t('RemoveButton') . '"> ' .
-			 '<a href="' . $engine->href() . '" class="btn-link"><input type="button" value="' . $engine->_t('CancelButton') . '"></a>';
+			 '<button type="submit" id="button_add" name="add_member">' . $engine->_t('AddButton') . '</button> ' .
+			 '<button type="submit" id="button_remove" name="remove_member">' . $engine->_t('RemoveButton') . '</button> ' .
+			 '<a href="' . $engine->href() . '" class="btn-link"><button type="button">' . $engine->_t('CancelButton') . '</button></a>';
 
 		echo $engine->form_close();
 	}
@@ -618,9 +618,9 @@ function admin_user_groups(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		$control_buttons =	'<br>' .
-							'<input type="submit" id="create-button" name="create" value="' . $engine->_t('AddButton') . '"> ' .
-							'<input type="submit" id="edit-button" name="edit" value="' . $engine->_t('EditButton') . '"> ' .
-							'<input type="submit" id="delete-button" name="delete" value="' . $engine->_t('RemoveButton') . '"> ';
+							'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
+							'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
+							'<button type="submit" id="delete-button" name="delete">' . $engine->_t('RemoveButton') . '</button> ';
 
 		echo $control_buttons;
 

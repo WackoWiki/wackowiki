@@ -199,21 +199,21 @@ write_config_hidden_nodes(['none' => '']);
 		?>
 <p><?php echo $lang['Ready'];?></p>
 <p class="warning"><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>');?></p>
-<input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
+<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
 <?php
 	}
 	else if (!$php_version_result)
 	{
 ?>
 <p><?php echo $lang['ErrorMinPhpVersion']; ?></p>
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
+<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
 <?php
 	}
 	else if (!$database_result)
 	{
 ?>
 <p><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
+<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
 <?php
 	}
 	else if (!$file_permissions_result)
@@ -221,8 +221,8 @@ write_config_hidden_nodes(['none' => '']);
 ?>
 <p class="warning"><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>'); ?></p>
 <p class="security"><?php echo $lang['ErrorPermissions']; ?></p>
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
-<input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
+<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
+<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
 <?php
 	}
 ?>

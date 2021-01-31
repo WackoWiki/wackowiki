@@ -98,8 +98,8 @@
 								var name = 'add_comment';
 							=]
 						</script>
-						<input type="submit" class="btn-ok" name="save" value="[ ' _t: AddCommentButton ' ]" accesskey="s">
-						<input type="submit" class="btn-ok" name="preview" value="[ ' _t: EditPreviewButton ' ]">
+						<button type="submit" class="btn-ok" name="save" accesskey="s">[ ' _t: AddCommentButton ' ]</button>
+						<button type="submit" class="btn-ok" name="preview">[ ' _t: EditPreviewButton ' ]</button>
 					</form>
 				</div>
 			=]

@@ -509,15 +509,15 @@ if (!$fatal_error)
 <?php
 	write_config_hidden_nodes(['DeleteTables' => '']);
 ?>
-	<input type="submit" value="<?php echo $lang['Continue'];?>" class="next">
+	<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
 </form>
 <?php
 }
 else
 {
 ?>
-<input type="submit" value="<?php echo $lang['Back'];?>" class="next" onclick="history.go(-1);">
-<input type="button" value="<?php echo $lang['TryAgain'];?>" class="next" onClick="window.location.reload( true );">
+<button type="submit" class="next" onclick="history.go(-1);"><?php echo $lang['Back'];?></button>
+<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
 <?php
 }
 ?>

@@ -89,8 +89,8 @@
 					</th>
 					<td>
 						<br>
-						<input type="submit" class="OkBtn" id="submit" value="[ ' _t: SaveButton ' ]" accesskey="s"> &nbsp;
-						<a href="[ ' href: ' ]" class="btn-link"><input type="button" class="CancelBtn" id="button" value="[ ' _t: CancelButton ' ]"/></a>
+						<button type="submit" class="OkBtn" id="submit" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
+						<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="CancelBtn" id="button">[ ' _t: CancelButton ' ]</button></a>
 					</td>
 				</tr>
 			</tbody>

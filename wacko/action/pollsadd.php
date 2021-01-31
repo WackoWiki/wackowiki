@@ -273,12 +273,12 @@ else if ($stop_mod !== true)
 
 		if ($total_vars < 20)
 		{
-			echo '<input type="submit" name="addvar" id="submit" value="' . $this->_t('PollsAddVariant') . '"> ';
+			echo '<button type="submit" name="addvar" id="submit">' . $this->_t('PollsAddVariant') . '</button> ';
 		}
 
 		if ($total_vars > 5)
 		{
-			echo '<input type="submit" name="delvar" id="submit" value="' . $this->_t('PollsDelVariant') . '">';
+			echo '<button type="submit" name="delvar" id="submit">' . $this->_t('PollsDelVariant') . '</button>';
 		}
 
 		echo '</td>';
@@ -289,10 +289,10 @@ else if ($stop_mod !== true)
 		'</td></tr>';
 	echo '<tr><td colspan="2">';
 	// begin captcha output
-	echo '<input type="submit" name="submit_poll" id="submit" value="' . $this->_t('SubmitButton') . '"> ',
+	echo '<button type="submit" name="submit_poll" id="submit">' . $this->_t('SubmitButton') . '</button> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn-link"><input type="button" name="cancel" id="button" value="' . $this->_t('PollsCancel') . '"></a>' : '') .
+		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn-link"><button type="button" name="cancel" id="button">' . $this->_t('PollsCancel') . '</button></a>' : '') .
 			($admin ? NBSP . NBSP . NBSP . NBSP .'<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked ' : ' ') . '> ' .
 			'<label for="startmod">' . $this->_t('PollsStartMod') . '</label>' : '') .
 			'</td></tr>';

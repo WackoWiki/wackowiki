@@ -39,7 +39,7 @@
 					[ ' csrf: add_topic ' ]
 					<label for="news-title">[ ' _t: NewsName ' ]:</label>
 					<input type="text" id="news-title" name="title" size="50" maxlength="250" value="">
-					<input type="submit" id="submit" value="[ ' _t: NewsSubmit ' ]">
+					<button type="submit" id="submit">[ ' _t: NewsSubmit ' ]</button>
 				</form>
 			=]
 		</section>

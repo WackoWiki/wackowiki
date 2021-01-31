@@ -40,9 +40,9 @@
 		[ ' csrf: edit_revision ' ]
 		<input type="hidden" name="previous" value="[ ' modified ' ]">
 		<input type="hidden" name="id" value="[ ' pageid ' ]">
-		<input type="submit" value="[ ' _t: ReEditOldRevision ' ]">
+		<button type="submit">[ ' _t: ReEditOldRevision ' ]</button>
 		<a href="[ ' href: ' ]" class="btn-link">
-			<input type="button" name="cancel" id="button" value="[ ' _t: CancelButton ' ]">
+			<button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button>
 		</a>
 	</form>
 </div>
@@ -54,7 +54,7 @@
 	<form action="[ ' href: restore ' ]" method="post" name="restore_page">
 		[ ' csrf: restore_page ' ]
 		<input type="hidden" name="id" value="[ ' pageid ' ]">
-		<input type="submit" value="[ ' _t: RestoreButton ' ]">
+		<button type="submit">[ ' _t: RestoreButton ' ]</button>
 	</form>
 </div>
 

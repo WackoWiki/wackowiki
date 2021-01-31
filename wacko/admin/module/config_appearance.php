@@ -246,7 +246,7 @@ function admin_config_appearance(&$engine, &$module)
 			<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_logo)) && $engine->db->site_logo)
 			{?>
 				<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_logo); ?>" alt="" height="<?php echo $engine->db->logo_height; ?>" width="<?php echo $engine->db->logo_width; ?>"><br>
-				<input type="submit" id="remove_logo" name="remove_logo" value="<?php echo $engine->_t('Remove'); ?>">
+				<button type="submit" id="remove_logo" name="remove_logo"><?php echo $engine->_t('Remove'); ?></button>
 			<?php }
 				// SVG format is intentionally excluded ?>
 				<input type="file" name="logo" id="logo_upload" accept=".avif, .gif, .jpg, .png, .webp, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
@@ -303,7 +303,7 @@ function admin_config_appearance(&$engine, &$module)
 			<?php if (file_exists(Ut::join_path(IMAGE_DIR, $engine->db->site_favicon)) && $engine->db->site_favicon)
 			{?>
 				<img src="<?php echo Ut::join_path(IMAGE_DIR, $engine->db->site_favicon); ?>" alt="Site Favicon" class="favicon"><br>
-				<input type="submit" id="remove_favicon" name="remove_favicon" value="<?php echo $engine->_t('Remove'); ?>">
+				<button type="submit" id="remove_favicon" name="remove_favicon"><?php echo $engine->_t('Remove'); ?></button>
 			<?php }?>
 				<input type="file" name="favicon" id="favicon_upload" accept=".gif, .ico, .jpg, .png, .svg, .webp, image/gif, image/x-icon, image/jpeg, image/png, image/svg+xml, image/webp">
 			</td>
@@ -389,7 +389,7 @@ function admin_config_appearance(&$engine, &$module)
 	</table>
 	<br>
 	<div class="center">
-		<input type="submit" id="submit" value="<?php echo $engine->_t('SaveButton');?>">
+		<button type="submit" id="submit"><?php echo $engine->_t('SaveButton');?></button>
 		<input type="reset" id="button" value="<?php echo $engine->_t('ResetButton');?>">
 	</div>
 <?php

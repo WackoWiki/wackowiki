@@ -34,7 +34,7 @@
 						[ ' href | hide_page ' ]
 						[ ' _t: GroupsSearch ' ]: ['' // </td><td> ??? '']
 						<input type="search" name="group" maxchars="40" size="40" value="[ ' group | e attr ' ]"> ['' '']
-						<input type="submit" id="submit" value="[ ' _t: SearchButton ' ]"> ['' '']
+						<button type="submit" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
 					</form>
 				</td>
 			</tr>

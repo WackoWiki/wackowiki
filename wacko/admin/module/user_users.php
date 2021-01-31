@@ -498,8 +498,8 @@ function admin_user_users(&$engine, &$module)
 				'<tr>
 					<td colspan="2">
 						<br>
-						<input type="submit" id="submit" name="create" value="' . $engine->_t('SubmitButton') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('CancelButton') . '"></a>' .
+						<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button> ' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 			'</table><br>';
@@ -617,8 +617,8 @@ function admin_user_users(&$engine, &$module)
 						<br>
 						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
 						'<br><br>
-						<input type="submit" id="submit" name="edit" value="' . $engine->_t('SubmitButton') . '"> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('CancelButton') . '"></a>' .
+						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button> ' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 			'</table>
@@ -669,8 +669,8 @@ function admin_user_users(&$engine, &$module)
 					'<tr>
 						<td>' .
 							Ut::perc_replace($engine->_t('UsersDelete'), ' ' . $users) . ' ' .
-							'<input type="submit" id="submit" name="delete" value="' . $engine->_t('Remove') . '"> ' .
-							'<a href="' . $engine->href() . '" class="btn-link"><input type="button" id="button" value="' . $engine->_t('Cancel') . '"></a><br>' .
+							'<button type="submit" id="submit" name="delete">' . $engine->_t('Remove') . '</button> ' .
+							'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a><br>' .
 							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
 						'</td>
 					</tr>' .
@@ -727,7 +727,7 @@ function admin_user_users(&$engine, &$module)
 		{
 			echo '<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('EmailNotVerified') . '</th>' .
-					'<td><input type="submit" id="button" name="confirm" value="' . $engine->_t('UserReVerifyEmail') . '"></td>' .
+					'<td><button type="submit" id="button" name="confirm">' . $engine->_t('UserReVerifyEmail') . '</button></td>' .
 				'</tr>';
 		}
 ?>
@@ -738,9 +738,9 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		echo '<br><input type="submit" id="button" name="edit" value="' . $engine->_t('EditButton') . '"> ';
-		echo '<input type="submit" id="button" name="remove" value="' . $engine->_t('RemoveButton') . '"> ';
-		echo '<a href="' . $engine->href() . '" class="cancel" ><input type="button" id="button" value="' . $engine->_t('CancelButton') . '"></a>';
+		echo '<br><button type="submit" id="button" name="edit">' . $engine->_t('EditButton') . '</button> ';
+		echo '<button type="submit" id="button" name="remove">' . $engine->_t('RemoveButton') . '</button> ';
+		echo '<a href="' . $engine->href() . '" class="cancel" ><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>';
 		echo $engine->form_close();
 	}
 	else
@@ -921,7 +921,7 @@ function admin_user_users(&$engine, &$module)
 					'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
 					$engine->_t('UsersSearch') . ': </td><td>' .
 					'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(trim(($_GET['user'] ?? ''))) . '"> ' .
-					'<input type="submit" id="submit" value="' . $engine->_t('SearchButton') . '"> ' .
+					'<button type="submit" id="submit">' . $engine->_t('SearchButton') . '</button> ' .
 					$engine->form_close();
 
 		echo '<span style="float: right;">' . $search . '</span>';
@@ -933,15 +933,15 @@ function admin_user_users(&$engine, &$module)
 		/////////////////////////////////////////////
 
 		$control_buttons =	'<br>' .
-							'<input type="submit" id="create-button" name="create" value="' . $engine->_t('AddButton') . '"> ' .
-							'<input type="submit" id="edit-button" name="edit" value="' . $engine->_t('EditButton') . '"> ' .
-							#'<input type="submit" id="approve-button" name="approve" value="' . $engine->_t('Approve') . '"> ' .
-							'<input type="submit" id="remove-button" name="remove" value="' . $engine->_t('RemoveButton') . '"> ' .
+							'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
+							'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
+							#'<button type="submit" id="approve-button" name="approve">' . $engine->_t('Approve') . '</button> ' .
+							'<button type="submit" id="remove-button" name="remove">' . $engine->_t('RemoveButton') . '</button> ' .
 							'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
 							'<br>' . "\n" .
-								'<input type="submit" name="set" id="submit" value="' . $engine->_t('SetButton') . '"> ' .
+								'<button type="submit" name="set" id="submit">' . $engine->_t('SetButton') . '</button> ' .
 								($set
-										? '<input type="submit" name="reset" id="submit" value="' . $engine->_t('ResetButton') . '"> ' .
+										? '<button type="submit" name="reset" id="submit">' . $engine->_t('ResetButton') . '</button> ' .
 										'<small>ids: ' . implode(', ', $set) . '</small>'
 										: ''
 								);

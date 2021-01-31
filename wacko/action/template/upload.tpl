@@ -76,7 +76,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<div style="padding-top: 5px;">
-							<input type="submit" value="[ ' _t: UploadButton ' ]">
+							<button type="submit">[ ' _t: UploadButton ' ]</button>
 						</div>
 					</td>
 				</tr>

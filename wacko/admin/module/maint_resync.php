@@ -311,7 +311,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('usersupdate');
 ?>
 		<input type="hidden" name="action" value="userstats">
-		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
+		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
 <?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('PageStats');?></h2>
@@ -320,7 +320,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('pageupdate');
 ?>
 		<input type="hidden" name="action" value="pagestats">
-		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
+		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
 <?php		echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('Feeds');?></h2>
@@ -329,7 +329,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('feedupdate');
 ?>
 		<input type="hidden" name="action" value="rssfeeds">
-		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
+		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
 <?php		echo $engine->form_close();?>
 
 <?php
@@ -345,7 +345,7 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_open('sitemap_update');
 ?>
 		<input type="hidden" name="action" value="xml_sitemap">
-		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
+		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
 <?php		echo $engine->form_close();
 }?>
 
@@ -356,7 +356,7 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_open('reparse_body');
 ?>
 		<input type="hidden" name="action" value="reparse_body">
-		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
+		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
 <?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('WikiLinksResync');?></h2>
@@ -380,7 +380,7 @@ if ($engine->db->xml_sitemap)
 		<label for="page_limit"><small><?php echo $engine->_t('RecompilePageLimit');?></small></label><br><br>
 		<input type="checkbox" id="recompile_page" name="recompile_page" value="1">
 		<label for="recompile_page"><small><?php echo $engine->_t('RecompilePage');?></small></label><br><br>
-		<input type="submit" name="start" id="submit" value="<?php echo $engine->_t('Synchronize');?>">
+		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
 <?php
 	echo $engine->form_close();
 }

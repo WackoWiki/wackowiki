@@ -34,9 +34,9 @@
 							<input type="radio" id="group0" name="group" value="0">
 							<label for="group0">[ ' _t: CategoriesAddGroupedNo ' ]</label><br><br>
 						=]
-						<input type="submit" id="submit" name="create" value="[ ' _t: SubmitButton ' ]">
+						<button type="submit" id="submit" name="create">[ ' _t: SubmitButton ' ]</button>
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
+							<button type="button" id="button">[ ' _t: CancelButton ' ]</button>
 						</a>
 					</td>
 				</tr>
@@ -68,9 +68,9 @@
 				<tr>
 					<td colspan="2">
 						<small>[ ' _t: CategoriesRenameInfo ' ]</small><br>
-						<input type="submit" name="rename" id="submit_new_name" value="[ ' _t: SubmitButton ' ]">
+						<button type="submit" name="rename" id="submit_new_name">[ ' _t: SubmitButton ' ]</button>
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
+							<button type="button" id="button">[ ' _t: CancelButton ' ]</button>
 						</a>
 					</td>
 				</tr>
@@ -92,9 +92,9 @@
 								<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category | e ' ]</option>
 							=]
 						</select>
-						<input type="submit" id="submit" name="ugroup" value="[ ' _t: SubmitButton ' ]">
+						<button type="submit" id="submit" name="ugroup">[ ' _t: SubmitButton ' ]</button>
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
+							<button type="button" id="button">[ ' _t: CancelButton ' ]</button>
 						</a>
 						<br><small>[ ' _t: CategoriesGroupInfo ' ]</small>
 					</td>
@@ -111,9 +111,9 @@
 				<tr>
 					<td>
 						<label for="">[ ' category ' ]</label> 
-						<input type="submit" id="submit_delete" name="delete" value="[ ' _t: DeleteText ' ]">
+						<button type="submit" id="submit_delete" name="delete">[ ' _t: DeleteText ' ]</button>
 						<a href="[ ' href: categories ' ]" class="btn-link">
-							<input type="button" id="button" value="[ ' _t: CancelButton ' ]">
+							<button type="button" id="button">[ ' _t: CancelButton ' ]</button>
 						</a>
 						<br><small>[ ' _t: CategoriesDeleteInfo ' ]</small>
 					</td>
