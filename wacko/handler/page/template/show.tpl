@@ -32,7 +32,6 @@
 
 	</article>
 
-
 [= reedit =]
 <div class="msg revision-info">
 	[ ' message ' ]

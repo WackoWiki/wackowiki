@@ -7,21 +7,21 @@
 				<div class="page-properties">[ ' accessmode ' ]<br><br><br>
 				<span title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]&nbsp;&nbsp;</span></div>
 			=]
-			<form action="[ ' href: edit ' ]" method="post" name="edit_page" cf="true">
+			[= p _ =
+				[ '' buttons '' ]
+				<section id="preview" class="preview">
+					<p class="preview"><span>[ ' _t: EditPreview ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
+					<h1>[ ' title | e ' ]</h1>
+					[ ' preview | pre ' ]
+				</section>
+				<br>
+			=]
+			<form action="[ ' href: edit ' ]" method="post" id="edit_page" name="edit_page" cf="true">
 				[ ' csrf: edit_page ' ]
 				[= new _ =
 					<input type="hidden" name="page_lang" value="[ ' lang | e attr ' ]">
 					<input type="hidden" name="tag" value="[ ' tag | e attr ' ]">
 					<input type="hidden" name="add" value="1">
-				=]
-				[= p _ =
-					[ '' buttons '' ]
-					<section id="preview" class="preview">
-						<p class="preview"><span>[ ' _t: EditPreview ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
-						<h1>[ ' title | e ' ]</h1>
-						[ ' preview | pre ' ]
-					</section>
-					<br>
 				=]
 				[ '' buttons '' ]
 				<br>
@@ -36,11 +36,11 @@
 					<br>
 					<h1>[ ' title | e ' ]</h1>
 				=]
-	
+
 				<input type="hidden" name="previous" value="[ ' previous | e attr ' ]"><br>
 				<textarea id="postText" class="textarea-page" name="body" rows="40" cols="60" required>[ ' body | pre ' ]</textarea>
 				<br>
-	
+
 				[= n _ =
 					<label for="edit_note">[ ' _t: EditNote ' ]:</label><br>
 					<input type="text" id="edit_note" class="input-summary" maxlength="200" value="[ ' note | e attr ' ]" size="100" name="edit_note">
@@ -90,8 +90,8 @@
 
 
 [= buttons =]
-<input type="submit" class="btn-ok" name="save" value="[ ' _t: SaveButton ' ]">&nbsp;
-<input type="submit" class="btn-ok" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
+<input type="submit" class="btn-ok" form="edit_page" name="save" value="[ ' _t: SaveButton ' ]">&nbsp;
+<input type="submit" class="btn-ok" form="edit_page" name="preview" value="[ ' _t: EditPreviewButton ' ]">&nbsp;
 <a href="[ ' href: ' ]" class="btn-link"><input type="button" class="btn-cancel" value="[ ' _t: CancelButton ' ]"></a>
 
 [ === similarTags === ]

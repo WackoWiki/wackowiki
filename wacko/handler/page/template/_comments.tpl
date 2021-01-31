@@ -47,21 +47,22 @@
 			[''' pagination ''']
 			[= f _ =
 				<div class="commentform" id="commentform">
+					[= p _ =
+						<div id="preview" class="preview">
+							<p class="preview"><span>[ ' _t: EditPreview ' ]</span></p>
+							<div class="comment-preview">
+								<header class="comment-title">
+									<h2>[ ' title | e ' ]</h2>
+								</header>
+								[ ' preview ' ]
+							</div>
+						</div>
+						<br>
+					=]
 					<form action="[ ' href: addcomment ' ]" method="post" name="add_comment">
 						[ ' csrf: add_comment ' ]
 						<input type="hidden" name="parent_id" value="[ ' parent ' ]">
-						[= p _ =
-							<div id="preview" class="preview">
-								<p class="preview"><span>[ ' _t: EditPreview ' ]</span></p>
-								<div class="comment-preview">
-									<header class="comment-title">
-										<h2>[ ' title | e ' ]</h2>
-									</header>
-									[ ' preview ' ]
-								</div>
-							</div>
-							<br>
-						=]
+
 						['' // load WikiEdit '']
 						<script src="[ ' db: base_path ' ]js/protoedit.js"></script>
 						<script src="[ ' db: base_path ' ]js/lang/wikiedit.[ ' userlang ' ].js"></script>
