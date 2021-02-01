@@ -250,7 +250,7 @@ function admin_config_email(&$engine, &$module)
 		<br>
 		<div class="center">
 			<button type="submit" id="submit"><?php echo $engine->_t('SaveButton');?></button>
-			<input type="reset" id="button" value="<?php echo $engine->_t('ResetButton');?>">
+			<button type="reset" id="button"><?php echo $engine->_t('ResetButton');?></button>
 		</div>
 <?php
 	echo $engine->form_close();
