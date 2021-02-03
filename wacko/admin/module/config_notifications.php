@@ -122,14 +122,15 @@ function admin_config_notifications(&$engine, &$module)
 						 *	2	Source			(text/plain)
 						 *	3	Side by side
 						 *	4	Inline
-						 *	5	Unified			(text/plain)
-						 *	6	Context			(text/plain)
+						 *	5	Merged
+						 *	6	Unified			(text/plain)
+						 *	7	Context			(text/plain)
 						 */
 						$diff_modes = $engine->_t('DiffMode');
 
 						foreach ($diff_modes as $mode => $diff_mode)
 						{
-							if (in_array($mode, [2, 5, 6]))
+							if (in_array($mode, [2, 6, 7]))
 							{
 								echo '<option value="' . $mode . '" ' . ( (int) $engine->db->notify_diff_mode == $mode ? 'selected' : '') . '>' . $diff_mode . ' (' . $mode . ')</option>' . "\n";
 							}

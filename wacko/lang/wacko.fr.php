@@ -350,8 +350,9 @@ $wacko_translation = [
 		'2'		=> 'Source',
 		'3'		=> 'Côte à côte',
 		'4'		=> 'En ligne',
-		'5'		=> 'Unifié',
-		'6'		=> 'Contextuel',
+		'5'		=> 'Fusionné',
+		'6'		=> 'Unifié',
+		'7'		=> 'Contextuel',
 	],
 
 	'PreviousEdit'				=> 'Modification précédente',

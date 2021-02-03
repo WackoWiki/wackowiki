@@ -350,8 +350,9 @@ $wacko_translation = [
 		'2'		=> '원본',
 		'3'		=> '다중 창 방식',
 		'4'		=> '직렬 방식',
-		'5'		=> 'Unified',
-		'6'		=> 'Context',
+		'5'		=> 'Merged',
+		'6'		=> 'Unified',
+		'7'		=> 'Context',
 	],
 
 	'PreviousEdit'				=> '이전 판',

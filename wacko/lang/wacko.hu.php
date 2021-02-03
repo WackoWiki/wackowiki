@@ -350,8 +350,9 @@ $wacko_translation = [
 		'2'		=> 'Source',
 		'3'		=> 'Egymás mellett',
 		'4'		=> 'Sorok között',
-		'5'		=> 'Unified',
-		'6'		=> 'Context',
+		'5'		=> 'Merged',
+		'6'		=> 'Unified',
+		'7'		=> 'Context',
 	],
 
 	'PreviousEdit'				=> 'Régebbi szerkesztés',

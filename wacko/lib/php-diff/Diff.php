@@ -5,11 +5,6 @@ declare(strict_types=1);
 namespace PHPDiff;
 
 use InvalidArgumentException;
-use PHPDiff\Diff\Renderer\Html\Inline;
-use PHPDiff\Diff\Renderer\Html\SideBySide;
-use PHPDiff\Diff\Renderer\Html\Unified as UnifiedHtml;
-use PHPDiff\Diff\Renderer\Text\Context;
-use PHPDiff\Diff\Renderer\Text\Unified;
 use PHPDiff\Diff\SequenceMatcher;
 use PHPDiff\Diff\Similarity;
 use OutOfRangeException;
@@ -20,7 +15,7 @@ use OutOfRangeException;
  * A comprehensive library for comparing two strings and generating the differences between them in multiple formats.
  * (unified, side by side, inline, HTML, etc.)
  *
- * PHP version 7.2 or greater
+ * PHP version 7.3 or greater
  *
  * @package         jblond
  * @author          Chris Boulton <chris.boulton@interspire.com>
@@ -179,8 +174,7 @@ class Diff
     /**
      * Render a diff-view using a rendering class and get its results.
      *
-     * @param   object|Context|Unified|UnifiedHtml|Inline|SideBySide  $renderer  An instance of the rendering object,
-     *                                                                           used for generating the diff-view.
+     * @param   object  $renderer  An instance of the rendering object, used for generating the diff-view.
      *
      * @return mixed The generated diff-view. The type of the return value depends on the applied renderer.
      */

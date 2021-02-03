@@ -9,7 +9,7 @@ use PHPDiff\Diff\SequenceMatcher;
 /**
  * Base renderer for rendering diffs for PHP DiffLib.
  *
- * PHP version 7.2 or greater
+ * PHP version 7.3 or greater
  *
  * @package       jblond\Diff\Renderer\Html
  * @author        Chris Boulton <chris.boulton@interspire.com>
@@ -310,26 +310,24 @@ class MainRenderer extends MainRendererAbstract
 
             // Determine the start and end position of the line difference.
             [$start, $end] = $this->getOuterChange($oldString, $newString);
-            if ($start != 0 || $end != 0) {
-                // Changes between the lines exist.
-                // Add markers around the changed character sequence in the old string.
-                $sequenceEnd = mb_strlen($oldString) + $end;
-                $oldString   =
-                    mb_substr($oldString, 0, $start) . "\0" .
-                    mb_substr($oldString, $start, $sequenceEnd - $start) . "\1" .
-                    mb_substr($oldString, $sequenceEnd);
+            // Changes between the lines exist.
+            // Add markers around the changed character sequence in the old string.
+            $sequenceEnd = mb_strlen($oldString) + $end;
+            $oldString
+                         = mb_substr($oldString, 0, $start) . "\0" .
+                mb_substr($oldString, $start, $sequenceEnd - $start) . "\1" .
+                mb_substr($oldString, $sequenceEnd);
 
-                // Add markers around the changed character sequence in the new string.
-                $sequenceEnd = mb_strlen($newString) + $end;
-                $newString   =
-                    mb_substr($newString, 0, $start) . "\0" .
-                    mb_substr($newString, $start, $sequenceEnd - $start) . "\1" .
-                    mb_substr($newString, $sequenceEnd);
+            // Add markers around the changed character sequence in the new string.
+            $sequenceEnd = mb_strlen($newString) + $end;
+            $newString
+                         = mb_substr($newString, 0, $start) . "\0" .
+                mb_substr($newString, $start, $sequenceEnd - $start) . "\1" .
+                mb_substr($newString, $sequenceEnd);
 
-                // Overwrite the strings in the old and new text so the changed lines include the markers.
-                $oldText[$startOld + $iterator] = $oldString;
-                $newText[$startNew + $iterator] = $newString;
-            }
+            // Overwrite the strings in the old and new text so the changed lines include the markers.
+            $oldText[$startOld + $iterator] = $oldString;
+            $newText[$startNew + $iterator] = $newString;
         }
     }
 
@@ -381,10 +379,10 @@ class MainRenderer extends MainRendererAbstract
      *
      * The index of the last element of the array is always returned.
      *
-     * @param   array    $blocks     The array which keeps the changes for the HTML renderer.
-     * @param   string   $tag        Kind of difference.
-     * @param   integer  $lineInOld  Start of block in "old".
-     * @param   integer  $lineInNew  Start of block in "new".
+     * @param   array   $blocks     The array which keeps the changes for the HTML renderer.
+     * @param   string  $tag        Kind of difference.
+     * @param   int     $lineInOld  Start of block in "old".
+     * @param   int     $lineInNew  Start of block in "new".
      *
      * @return int The index of the last element.
      */
@@ -437,7 +435,7 @@ class MainRenderer extends MainRendererAbstract
             // Convert special characters to HTML entities
             $strings = array_map(
                 function ($line) {
-                    return htmlspecialchars($line, ENT_NOQUOTES, 'UTF-8');
+                    return htmlspecialchars($line, ENT_NOQUOTES);
                 },
                 $strings
             );
@@ -447,7 +445,7 @@ class MainRenderer extends MainRendererAbstract
                 $line = preg_replace_callback(
                     '/(^[ \0\1]*)/',
                     function ($matches) {
-                        return str_replace(' ', "&nbsp;", $matches[0]);
+                        return str_replace(' ', '&nbsp;', $matches[0]);
                     },
                     $line
                 );

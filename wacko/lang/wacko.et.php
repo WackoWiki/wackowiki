@@ -350,8 +350,9 @@ $wacko_translation = [
 		'2'		=> 'Lähtekoodi-põhine',
 		'3'		=> 'Külg-külje-kõrval',
 		'4'		=> 'Jooksvalt',
-		'5'		=> 'Ühtlustatud',
-		'6'		=> 'Context',
+		'5'		=> 'Merged',
+		'6'		=> 'Ühtlustatud',
+		'7'		=> 'Context',
 	],
 
 	'PreviousEdit'				=> 'Vanem muudatus',

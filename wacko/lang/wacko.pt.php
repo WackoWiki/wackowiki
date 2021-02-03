@@ -350,8 +350,9 @@ $wacko_translation = [
 		'2'		=> 'Source',
 		'3'		=> 'Side by side',
 		'4'		=> 'Inline',
-		'5'		=> 'Unified',
-		'6'		=> 'Context',
+		'5'		=> 'Merged',
+		'6'		=> 'Unified',
+		'7'		=> 'Context',
 	],
 
 	'PreviousEdit'				=> 'Ver a alteração anterior',

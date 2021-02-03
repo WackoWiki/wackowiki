@@ -8,10 +8,11 @@ if (!defined('IN_WACKO'))
 // Import the PHPDiff class into the global namespace
 use PHPDiff\ {
 	Diff,
-	Diff\Renderer\Html\Inline,
+	Diff\Renderer\Html\Merged,
 	Diff\Renderer\Html\SideBySide,
+	Diff\Renderer\Html\Unified,
 	Diff\Renderer\Text\Context,
-	Diff\Renderer\Text\Unified,
+	Diff\Renderer\Text\Unified as TextUnified,
 };
 
 /*
@@ -21,8 +22,9 @@ use PHPDiff\ {
  *	2	Source				(text/plain)		...
  *	3	Side by side		(text/html)			php-diff library
  *	4	Inline				(text/html)			...
- *	5	Unified				(text/plain)		...
- *	6	Context				(text/plain)		...
+ *	5	Merged				(text/html)			...
+ *	6	Unified				(text/plain)		...
+ *	7	Context				(text/plain)		...
  *
  * default setting
  *	page/revisions.xml		=> 2
@@ -322,6 +324,7 @@ if ($page_a && $page_b
 		case 4:
 		case 5:
 		case 6:
+		case 7:
 			$this->add_html('header', '<link rel="stylesheet" href="' . $this->db->theme_url . 'css/diff.css">'); // STS
 
 			// using nice lib/php-diff library..
@@ -342,16 +345,22 @@ if ($page_a && $page_b
 			}
 			else if ($diffmode == 4)
 			{
-				$renderer = new Inline;
+				$renderer = new Unified;
+				// patched header
+				$tpl->m6_diff = $diff->render($renderer);
+			}
+			else if ($diffmode == 5)
+			{
+				$renderer = new Merged;
 				// patched header
 				$tpl->m6_diff = $diff->render($renderer);
 			}
 			else
 			{
-				if ($diffmode == 5)
+				if ($diffmode == 6)
 				{
 					// standard unified diff, useful for sending in emails or what
-					$renderer = new Unified;
+					$renderer = new TextUnified;
 				}
 				else
 				{
