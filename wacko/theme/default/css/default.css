@@ -408,7 +408,6 @@ header {
 @media (min-width: 700px) {
 	#mainwrapper {
 	width: 980px;
-
 	}
 }
 
@@ -784,10 +783,6 @@ a.btn-link {
 	table-layout: fixed;
 }
 
-.file img {
-
-}
-
 .file tr:hover {
 	background: #CCFFCC;
 }
@@ -867,10 +862,6 @@ td.file- {
 	vertical-align: top;
 }
 
-.filemeta ol {
-	/* padding: 0; */
-}
-
 .filemeta li {
 	list-style-type: none;
 	padding-bottom: 5px;
@@ -905,9 +896,7 @@ td.file- {
 	color: #1d1d1d;
 	font-size: 12px;
 }
-.caption-sub {
-	
-}
+
 .caption-license {
 	color: #888;
 }
@@ -1438,10 +1427,6 @@ a:target {
 	margin: 1em 0;
 }
 
-#search-results li div {
-	/*padding-left: 20px;*/
-}
-
 #search-results h3 {
 	font-size: 14px;
 	border-bottom: 0 none;
@@ -1482,7 +1467,6 @@ a:target {
 
 .ul-letters li.active   {
 	background: #CCFFCC;
-
 }
 
 /* settings */
@@ -1704,10 +1688,6 @@ table.formation td {
 	padding-bottom: 0;
 }
 
-#page-handler li:hover {
-	/* background-color: #FFFFFF; */
-}
-
 #page-handler li.active {
 	border: 1px solid #AAAAAA;
 	border-bottom-width: 0;
@@ -1733,7 +1713,6 @@ table.formation td {
 	width: auto;
 	border: 1px solid #CCCCCC;
 	border-top-width: 0;
-
 }
 #menu-user ol ul a,
 #page-handler ul ul a {
@@ -1790,9 +1769,6 @@ table.formation td {
 	z-index: 20;
 }
 	
-#page-handler #more-icon {
-}
-
 .page-handler{
 	list-style: none;
 }
@@ -2167,10 +2143,6 @@ table.forum td {
 	white-space: nowrap;
 }
 
-.tag:hover {
-	/* background: #e7f9ff none repeat scroll 0 0; */
-}
-
 /* system message ------------- */
 .sysmessage {
 	font-family: "Lucida Console", "Courier New", monospace;
@@ -2215,7 +2187,6 @@ table.forum td {
 /* category handles ------------- */
 .set-category {
 	border: 1px solid #eeeeee;
-/*	font-size:11px; */
 	max-height: 400px;
 	padding: 10px 0;
 	margin-bottom: 27px;
