@@ -31,7 +31,7 @@ $this->ensure_page(true); // TODO: upload for forums?
 // check who u are, can u upload?
 if (isset($_POST['upload']) & $can_upload)
 {
-	// 2.c PROCESS FILE UPLOAD
+	// PROCESS FILE UPLOAD
 
 	$user		= $this->get_user();
 
@@ -50,7 +50,7 @@ if (isset($_POST['upload']) & $can_upload)
 
 	// Checks
 
-	// 1. upload quota
+	// upload quota
 	if ((!$this->db->upload_quota_per_user
 			|| ($user_files['used_user_quota'] < $this->db->upload_quota_per_user))
 		 && (!$this->db->upload_quota
@@ -59,7 +59,7 @@ if (isset($_POST['upload']) & $can_upload)
 		// file there is
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name']))
 		{
-			// 1. check out $data
+			// check out $data
 			#$ext = pathinfo($filename, PATHINFO_EXTENSION);
 			$src		= $_FILES['file']['tmp_name'];
 			$mime_type	= mime_content_type($src);
@@ -143,7 +143,7 @@ if (isset($_POST['upload']) & $can_upload)
 				$t_name	= $name;
 			}
 
-			// 1.5. +write @page_id@ to name
+			// +write @page_id@ to name
 			if (isset($_POST['to']) && $_POST['to'] != 'global')
 			{
 				$is_global	= 0;
@@ -209,7 +209,7 @@ if (isset($_POST['upload']) & $can_upload)
 				$result_name	= $fs_name . '.' . $ext;
 				$file_size		= $_FILES['file']['size'];
 
-				// 1.6. check filesize
+				// check filesize
 				$max_filesize	= $this->db->upload_max_size;
 
 				if (isset($_POST['maxsize']))
@@ -223,7 +223,7 @@ if (isset($_POST['upload']) & $can_upload)
 				// Admins can upload unlimited
 				if (($file_size < $max_filesize) || $this->is_admin())
 				{
-					// 1.7. check is image, if asked
+					// check is image, if asked
 					$forbid		= 0;
 					$size		= [0, 0];
 					$src		= $_FILES['file']['tmp_name'];
@@ -243,12 +243,12 @@ if (isset($_POST['upload']) & $can_upload)
 
 					if (!$forbid)
 					{
-						// 3. save to permanent location
+						// save to permanent location
 						move_uploaded_file($_FILES['file']['tmp_name'], $dir . $result_name);
 						chmod($dir . $result_name, CHMOD_FILE);
 
 						// replace
-						#clearstatcache();
+						# clearstatcache();
 
 						if ($is_global)
 						{
@@ -293,15 +293,13 @@ if (isset($_POST['upload']) & $can_upload)
 									"uploaded_dt		= " . $this->db->q($uploaded_dt) . ", " .
 									"modified_dt		= UTC_TIMESTAMP() " .
 								"WHERE " .
-									(!$is_global
-										? "page_id		= " . (int) $this->page['page_id'] . " AND "
-										: "" ) .
+									"page_id			= " . (int) $page_id . " AND " .
 									"file_name			= " . $this->db->q($file_name) . " " .
 								"LIMIT 1");
 						}
 						else
 						{
-							// 5. insert line into DB
+							// insert line into DB
 							$this->db->sql_query(
 								"INSERT INTO " . $this->db->table_prefix . "file SET " .
 									"page_id			= " . (int) $page_id . ", " .
@@ -322,10 +320,13 @@ if (isset($_POST['upload']) & $can_upload)
 							$this->update_files_count($page_id, $user['user_id']);
 						}
 
+						// get file_id of uploaded file
 						$file = $this->db->load_single(
 							"SELECT file_id " .
 							"FROM " . $this->db->table_prefix . "file " .
-							"WHERE file_name = " . $this->db->q($file_name) . " " .
+							"WHERE " .
+								"file_name		= " . $this->db->q($file_name) . " AND " .
+								"page_id		= " . (int) $page_id . " " .
 							"LIMIT 1");
 
 						$this->set_message($this->_t('UploadDone'), 'success');
@@ -357,7 +358,7 @@ if (isset($_POST['upload']) & $can_upload)
 			{
 				$error = $this->_t('UploadDirNotWritable');
 			}
-		} //!is_uploaded_file
+		} // !is_uploaded_file
 		else
 		{
 			if (isset($_FILES['file']['error']) && ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE))
