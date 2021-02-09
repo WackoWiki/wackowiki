@@ -3674,8 +3674,8 @@ class Wacko
 				// check 403 here!
 				if ($_global || $file_access)
 				{
-					$title		= $file_data['file_description'] . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
-					$alt		= $file_data['file_description'];
+					$title		= Ut::html($file_data['file_description']) . ' (' . $this->binary_multiples($file_data['file_size'], false, true, true) . ')';
+					$alt		= Ut::html($file_data['file_description']);
 					$src		= '';
 					$width		= '';
 					$height		= '';
@@ -3798,13 +3798,13 @@ class Wacko
 								if (!empty($file_data['caption']) && $param['caption'])
 								{
 									$caption	=
-										'<span class="caption-sub">' . $file_data['caption'] . '</span>' . ' ' .
+										'<span class="caption-sub">' . Ut::html($file_data['caption']) . '</span>' . ' ' .
 										($file_data['author']
 											? '<br><span class="caption-license"><small>' .
 												'(' . $this->_t('FileSource') . ': ' .
 												($file_data['source_url']
-													? '<a href="' . $file_data['source_url'] . '" rel="nofollow" target="_blank">' . $file_data['author'] . '</a>'
-													: $file_data['author']) .
+													? '<a href="' . $file_data['source_url'] . '" rel="nofollow" target="_blank">' . Ut::html($file_data['author']) . '</a>'
+													: Ut::html($file_data['author'])) .
 												($file_data['license_id']
 													? ' /' .
 														// FIXME; bad .tpl hack to remove line feed and indent stuff
