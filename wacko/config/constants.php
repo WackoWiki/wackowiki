@@ -96,4 +96,4 @@ const DB_MIN_VERSION				= ['mariadb' => '10.0.5', 'mysql' => '5.6.4'];		// large
 
 const PHP_MIN_VERSION				= '7.2.0';				// minimum required PHP version
 const PHP_MAX_VERSION				= '8.0';				// maximum required PHP version
-const PHP_ERROR_REPORTING			= 6;					// PHP error reporting: 0 - off, 6 - all
+const PHP_ERROR_REPORTING			= 0;					// PHP error reporting: 0 - off, 6 - all

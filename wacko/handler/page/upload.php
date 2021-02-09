@@ -400,7 +400,7 @@ if (isset($_POST['upload']) & $can_upload)
 }
 else
 {
-	// 1.d UPLOAD FILES
+	// UPLOAD FILES
 
 	// show navigation for attachments handler
 	if ((  $this->db->attachments_handler == 2 && $this->get_user())

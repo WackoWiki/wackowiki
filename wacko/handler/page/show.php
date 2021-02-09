@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-#$include_tail = '</article>';
-
 // redirect from comment page to the commented one
 if (isset($this->page['latest']) && $this->page['comment_on_id'] && !$this->page['deleted'])
 {
@@ -257,7 +255,7 @@ if ($this->forum
 {
 	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
 	{
-		$tpl->p_category = $categories;
+		$tpl->p_category		= $categories;
 	}
 }
 
@@ -293,7 +291,7 @@ if ($this->method == 'show' && (isset($this->page['latest']) && $this->page['lat
 			require_once Ut::join_path(HANDLER_DIR, 'page/_files.php');
 		}
 
-		// comments form output  starts
+		// comments form output starts
 		if (($this->db->footer_comments == 1 || ($this->db->footer_comments == 2 && $this->get_user()) ) && $this->user_allowed_comments())
 		{
 			require_once Ut::join_path(HANDLER_DIR, 'page/_comments.php');

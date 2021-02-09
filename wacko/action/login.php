@@ -59,10 +59,11 @@ if (($user = $this->get_user()))
 	// show traffic protection
 	if ($this->db->tls)
 	{
+		// https://httpd.apache.org/docs/2.4/mod/mod_ssl.html#envvars
 		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
 			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'
-				? ($_SERVER['SSL_CIPHER'] ?? '') . ' (' . ($_SERVER['SSL_PROTOCOL'] ?? '') . ')'
+				? $this->_t('On') . ' :: '. ($_SERVER['SSL_CIPHER'] ?? '') . ' (' . ($_SERVER['SSL_PROTOCOL'] ?? '') . ')'
 				: $this->_t('Off')
 			) .
 			'</code>' . "<br>\n";
