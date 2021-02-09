@@ -5441,7 +5441,7 @@ class Wacko
 	// end auth token stuff
 
 	// Increment the failed login count by 1
-	function set_failed_user_login_count($user_id)
+	function set_failed_login_count($user_id)
 	{
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .

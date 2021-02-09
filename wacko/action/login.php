@@ -152,7 +152,7 @@ else // login
 				// check password
 				if (!$this->password_verify($user, $password))
 				{
-					$this->set_failed_user_login_count($user['user_id']);
+					$this->set_failed_login_count($user['user_id']);
 				}
 				else
 				{
