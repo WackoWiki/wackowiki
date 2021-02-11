@@ -25,7 +25,6 @@ $page_id = '';
 
 if (!isset($order))		$order		= '';
 if (!isset($global))	$global		= 0;
-if (!isset($tag))		$tag		= ''; // FIXME: $tag == $page
 if (!isset($owner))		$owner		= '';
 if (!isset($page))		$page		= '';
 if (!isset($deleted))	$deleted	= 0;
@@ -74,19 +73,19 @@ $caption_size			= '1.6rem';
 // same units
 $caption_padding		= '.6rem';
 
-// do we allowed to see?
 if (!$global)
 {
 	if ($page == '')
 	{
-		$page		= $this->tag;
+		$tag		= $this->tag;
 		$page_id	= $this->page['page_id'];
 	}
 	else
 	{
-		$page		= $this->unwrap_link($page);
+		$tag		= $this->unwrap_link($page);
+		$ppage		= '/' . $tag;
 
-		if ($_page_id = $this->get_page_id($page))
+		if ($_page_id = $this->get_page_id($tag))
 		{
 			$page_id	= $_page_id;
 		}
@@ -97,18 +96,18 @@ if (!$global)
 else
 {
 	$can_view	= 1;
-	$page		= $this->tag;
+	$tag		= $this->tag;
 }
 
 if ($can_view)
 {
-	if ($global || ($tag == $page))
+	if ($global || ($tag == $this->tag))
 	{
 		$filepage = $this->page;
 	}
 	else
 	{
-		$filepage = $this->load_page($page);
+		$filepage = $this->load_page($tag);
 	}
 
 	if (!$global && !isset($filepage['page_id']))
@@ -119,7 +118,7 @@ if ($can_view)
 	$selector =
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.page_id = " . ($global ? 0 : $filepage['page_id']) . " " .
+		"WHERE f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " " .
 			"AND f.picture_w <> 0 " .
 			($owner
 				? "AND u.user_name = " . $this->db->q($owner) . " "
@@ -142,10 +141,9 @@ if ($can_view)
 		"LIMIT {$pagination['offset']}, {$limit}", true);
 
 	// display
-
 	if (!$global)
 	{
-		$path2 = 'file:/' . $page . '/';
+		$path2 = 'file:/' . $tag . '/';
 	}
 	else
 	{

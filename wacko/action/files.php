@@ -86,7 +86,6 @@ if (!$global)
 	}
 
 	$can_view	= $this->has_access('read', $page_id) || $this->is_admin() || $this->is_owner($page_id);
-	$can_delete	= $this->is_admin() || $this->is_owner($page_id);
 }
 else
 {
