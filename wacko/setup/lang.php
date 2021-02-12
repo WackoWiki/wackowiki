@@ -1,11 +1,6 @@
 <form action="<?php echo my_location() ?>?installAction=version-check" method="post">
 <?php
 
-write_config_hidden_nodes([
-	'language'		=> 0,
-	'is_update'		=> '']
-);
-
 // Check if Upgrade or Fresh Install
 if (array_key_exists('wacko_version', $config))
 {

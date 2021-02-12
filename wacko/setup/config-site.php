@@ -23,18 +23,7 @@
 
 <form action="<?php echo my_location() ?>?installAction=config-database" method="post" name="form1">
 <?php
-
-write_config_hidden_nodes([
-	'site_name'			=> '',
-	'root_page'			=> '',
-	'multilanguage'		=> '',
-	'allowed_languages'	=> '',
-	'admin_name'		=> '',
-	'password'			=> '',
-	'admin_email'		=> '',
-	'base_url'			=> '',
-	'rewrite_mode'		=> '']
-);
+write_config_hidden_nodes($config_parameters);
 
 ?>
 	<label class="label_top" for="site_name"><?php echo $lang['SiteName'];?></label>

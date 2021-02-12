@@ -11,6 +11,16 @@ if ($config['database_collation'] == '0')
 	$config['database_collation'] = 'utf8mb4_unicode_520_ci';
 }
 
+if (!$config['system_seed'])
+{
+	$config['system_seed'] = Ut::random_token(20, 3);
+}
+
+if (!$config['hashid_seed'])
+{
+	$config['hashid_seed'] = Ut::random_token(20, 3);
+}
+
 // set version to current version, yay!
 $config['wacko_version'] = WACKO_VERSION;
 
@@ -45,7 +55,7 @@ $config_file['wacko_version']			= $config['wacko_version'];
 
 // convert config array into PHP code
 $config_code  = "<?php\n// config.php " . $lang['WrittenAt'] . strftime('%c') . "\n// " . $lang['ConfigDescription'] . "\n// " . $lang['DontChange'] . "\n\n";
-$config_code .= array_to_str($config_file) . "\n";
+$config_code .= array_to_str($config_file);
 
 // try to write configuration file
 echo "		<h2>" . $lang['FinalStep'] . "</h2>\n";
@@ -116,27 +126,22 @@ if ($write_file == false)
 
 echo "		</ul>\n";
 
-?>
-<form action="<?php echo my_location() ?>?installAction=write-config" method="post">
-<?php
-	write_config_hidden_nodes(['none' => '']);
+// If there was a problem then show the "Try Again" button.
+if ($write_file)
+{
+	echo "		<h2>" . $lang['InstallationComplete'] . "</h2>\n";
+	echo "		<p>" . Ut::perc_replace($lang['ThatsAll'], $config['base_url']) . "</p>\n";
+}
+else
+{
+	echo '		<form action="' . my_location() . '?installAction=write-config" method="post">' . "\n";
+					write_config_hidden_nodes($config_parameters);
+	echo '			<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n";
+	echo '		</form>' . "\n";
 
-	// If there was a problem then show the "Try Again" button.
-	if ($write_file == true)
-	{
-		echo "		<h2>" . $lang['InstallationComplete'] . "</h2>\n";
-		echo "		<p>" . Ut::perc_replace($lang['ThatsAll'], $config['base_url']) . "</p>\n";
-	}
-	else
-	{
-		?> <button type="submit" class="next"><?php echo $lang['TryAgain'];?></button>
-		<?php
-	}
-	?></form>
-	<?php
-	if ($write_file == false)
-	{
-		echo '		<div id="config_code" class="config_code"><pre>' . htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . "</pre></div>\n";
-	}
-	?>
+	echo '		<div id="config_code" class="config_code"><pre>' .
+					htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
+				"</pre></div>\n";
+}
+?>
 <br>

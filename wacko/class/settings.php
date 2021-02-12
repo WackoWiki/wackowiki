@@ -25,7 +25,8 @@ class Settings extends Dbal implements ArrayAccess
 			&& ($this->config = Ut::unserialize($text))))
 		{
 			// for config_defaults
-			$found_rewrite_extension = ((function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) || ((getenv('HTTP_MOD_ENV') === 'on') && (getenv('HTTP_MOD_REWRITE') === 'on')));
+			$found_rewrite_extension = ((function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules()))
+										|| ((getenv('HTTP_MOD_ENV') === 'on') && (getenv('HTTP_MOD_REWRITE') === 'on')));
 
 			require_once CONFIG_DEFAULTS;
 

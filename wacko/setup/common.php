@@ -21,12 +21,8 @@ function my_location()
 }
 
 // setup header
-function write_config_hidden_nodes($skip_values)
+function write_config_hidden_nodes($config_parameters)
 {
-	global $config;
-
-	$config_parameters = array_diff_key($config, $skip_values, ['aliases' => '', 'groups' => '']);
-
 	if (is_array($config_parameters))
 	{
 		foreach ($config_parameters as $key => $value)
@@ -36,7 +32,7 @@ function write_config_hidden_nodes($skip_values)
 				$value = implode(',', $value);
 			}
 
-			echo '<input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
+			echo "\t" . '<input type="hidden" name="config[' . $key . ']" value="' . $value . '">' . "\n";
 		}
 	}
 }

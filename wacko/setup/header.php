@@ -12,7 +12,8 @@ global $config;
 // If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.
 if (isset($_POST['config']))
 {
-	$config = $_POST['config'];
+	$config_parameters = $_POST['config'];
+	$config = array_merge ($config, $config_parameters);
 }
 
 if (!isset($config['language']) || !@file_exists('setup/lang/installer.' . $config['language'] . '.php'))
