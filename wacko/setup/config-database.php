@@ -149,48 +149,43 @@ if ($config['is_update'] == false)
 					<label for="db_engine_' . $engine[0] . '">' . $engine[2] . "</label>
 				</li>\n";
 	}
-?>
+	?>
 	</ul>
 	<br>
-<?php
-}
-else
-{
-	echo '<input type="hidden" value="' . $config['database_engine'] . '" name="config[database_engine]">';
-}
-?>
-<?php echo $separator; ?>
+
+	<?php echo $separator; ?>
 	<label class="label_top" for="database_host"><?php echo $lang['DbHost'];?></label>
 	<p class="notop"><?php echo $lang['DbHostDesc']; ?></p>
 	<input type="text" maxlength="1000" id="database_host" name="config[database_host]" value="<?php echo $config['database_host'] ?>" placeholder="localhost" class="text_input" required>
 	<br>
-<?php echo $separator; ?>
+	<?php echo $separator; ?>
 	<label class="label_top" for="database_port"><?php echo $lang['DbPort'];?></label>
 	<p class="notop"><?php echo $lang['DbPortDesc']; ?></p>
 	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input">
 	<br>
-<?php echo $separator; ?>
+	<?php echo $separator; ?>
 	<label class="label_top" for="database_database"><?php echo $lang['Db'];?></label>
 	<p class="notop"><?php echo $lang['DbDesc']; ?></p>
 	<input type="text" maxlength="64" id="database_database" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input" required>
 	<br>
-<?php echo $separator; ?>
+	<?php echo $separator; ?>
 	<label class="label_top" for="database_user"><?php echo $lang['DbUser'];?></label>
 	<p class="notop"><?php echo $lang['DbUserDesc']; ?></p>
 	<input type="text" maxlength="50" id="database_user" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input" required>
 	<br>
-<?php echo $separator; ?>
+	<?php echo $separator; ?>
 	<label class="label_top" for="database_password"><?php echo $lang['DbPassword'];?></label>
 	<p class="notop"><?php echo $lang['DbPasswordDesc']; ?></p>
 	<input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input">
 	<br>
-<?php echo $separator; ?>
+	<?php echo $separator; ?>
 	<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
 	<p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
 	<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input">
 	<br>
-<?php echo $separator; ?>
-<?php
+	<?php echo $separator;
+}
+
 if ($config['is_update'] == false)
 {?>
 	<h2><?php echo $lang['DeleteTables'];?></h2>
