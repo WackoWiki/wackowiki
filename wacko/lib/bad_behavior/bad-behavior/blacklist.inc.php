@@ -46,6 +46,7 @@ function bb2_blacklist($package) {
 		"Mozilla/4.0(",		// from honeypot
 		"Mozilla/4.0+(compatible;+",	// suspicious harvester
 		"Mozilla/4.0 (Hydra)",	// brute force tool
+		"Mozilla/5.0 (compatible; Adsbot/3.1)",	// ignores robots.txt and hammers server
 		"MSIE",			// malicious software
 		"MVAClient",		// automated hacking attempts
 		"Nessus",		// vulnerability scanner
