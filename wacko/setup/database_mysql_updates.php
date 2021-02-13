@@ -66,6 +66,7 @@ $alter_page_link_r5_5_0 = "ALTER TABLE {$pref}page_link DROP to_supertag";
 $alter_rating_r5_5_0 = "ALTER TABLE {$pref}rating CHANGE rating_time rating_time DATETIME NULL DEFAULT NULL";
 
 // REFERRER
+$alter_referrer_r5_5_0 = "ALTER TABLE {$pref}referrer CHANGE referrer referrer VARCHAR(2083) NOT NULL DEFAULT ''";
 
 // REVISION
 $alter_revision_r5_5_0 = "ALTER TABLE {$pref}revision DROP supertag";

@@ -125,6 +125,9 @@ $upgrade['5.5.17'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
 // rating
 $upgrade['6.0.8'][]		= ['alter',		'rating',			$alter_rating_r5_5_0];
 
+// referrer
+$upgrade['6.0.16'][]	= ['alter',		'referrer',			$alter_referrer_r5_5_0];
+
 // revision
 $upgrade['5.5.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 $upgrade['6.0.11'][]	= ['alter',		'revision',			$alter_revision_r5_5_1];

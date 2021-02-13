@@ -243,7 +243,7 @@ $tbl_rating = "CREATE TABLE {$pref}rating (
 $tbl_referrer = "CREATE TABLE {$pref}referrer (
 					referrer_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 					page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-					referrer VARCHAR(255) NOT NULL DEFAULT '',
+					referrer VARCHAR(2083) NOT NULL DEFAULT '',
 					referrer_time DATETIME DEFAULT NULL,
 					ip VARCHAR(45) COLLATE utf8_bin NOT NULL DEFAULT '',
 					user_agent VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',
