@@ -818,7 +818,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($page_id || !preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', $tag))
+			if ($page_id || !preg_match('/[^' . $this->language['ALPHANUM_P'] . '\.]/u', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .
@@ -3850,7 +3850,7 @@ class Wacko
 			unset($file_data);
 		}
 		// user link -> user:UserName
-		else if (preg_match('/^(user)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^(user)[:](' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3866,7 +3866,7 @@ class Wacko
 			$tpl	= 'userlink';
 		}
 		// group link -> group:UserGroup
-		else if (preg_match('/^(group)[:]([' . $this->language['ALPHANUM_P'] . '\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^(group)[:](' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3882,7 +3882,7 @@ class Wacko
 			$tpl	= 'grouplink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3897,7 +3897,7 @@ class Wacko
 			$tpl	= 'interwiki';
 		}
 		// wiki link
-		else if (preg_match('/^([\!\.\-' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . '\_\-]+)?$/u', $tag, $matches))
+		else if (preg_match('/^([\!\.' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
 		{
 			$aname			= '';
 			$match			= '';
@@ -4459,7 +4459,7 @@ class Wacko
 		$this->sanitize_page_tag($tag);
 
 		// - / ' _ .
-		if (!preg_match('#^([-/_.' . $this->language['ALPHANUM_P'] . ']+)$#u', $tag))
+		if (!preg_match('#^([' . $this->language['ALPHANUM_P'] . '.]+)$#u', $tag))
 		{
 			return $this->_t('InvalidWikiName');
 		}
@@ -6807,7 +6807,7 @@ class Wacko
 			$tag = Ut::normalize($tag);
 
 			$tag = str_replace(['\\', '_'], '', $tag);
-			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', '', $tag);
+			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\.]/u', '', $tag);
 
 			$revision_id	= (int) ($_GET['revision_id'] ?? '');
 			$deleted		= $this->is_admin();

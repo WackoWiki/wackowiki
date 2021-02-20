@@ -711,7 +711,7 @@ function admin_user_users(&$engine, &$module)
 					'<td>' . $user['user_lang'] . '</td>' .
 				'</tr>' .
 				'<tr>' . "\n" .
-					'<th class="label">' . $engine->_t('ChooseTheme') . '</th>' .
+					'<th class="label">' . $engine->_t('Theme') . '</th>' .
 					'<td>' . $user['theme'] . '</td>' .
 				'</tr>' .
 				'<tr>' . "\n" .

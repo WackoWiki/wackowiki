@@ -13,8 +13,7 @@ if (!isset($_GET['get']) || (!isset($_GET['global']) && !$this->page))
 $file_path		= '';
 $file_name		= $_GET['get'];
 
-#if (!preg_match('/[^' . $this->language['ALPHANUM_P'] . '\_\-\.]/u', $file_name))
-if (!preg_match('#^([-/_.' . $this->language['ALPHANUM_P'] . ']+)$#u', $file_name))
+if (!preg_match('/^([' . $this->language['ALPHANUM_P'] . '\.]+)$/u', $file_name))
 {
 	// invalid file name
 	$this->http->sendfile(404);

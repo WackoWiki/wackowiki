@@ -134,13 +134,13 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			$this->db->sql_query(
 				"INSERT INTO " . $this->db->user_table . " " .
 				"SET " .
-					"signup_time	= UTC_TIMESTAMP(), " .
-					"user_name		= " . $this->db->q($user_name) . ", " .
-					"email			= " . $this->db->q($email) . ", " .
-					"password		= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", " .
-					"account_status	= " . (int) $account_status . ", " .
-					"enabled		= " . (int) $account_enabled . ", " .
-					"user_ip		= " . $this->db->q($user_ip) . " ");
+					"signup_time		= UTC_TIMESTAMP(), " .
+					"user_name			= " . $this->db->q($user_name) . ", " .
+					"email				= " . $this->db->q($email) . ", " .
+					"password			= " . $this->db->q($this->password_hash(['user_name' => $user_name], $password)) . ", " .
+					"account_status		= " . (int) $account_status . ", " .
+					"enabled			= " . (int) $account_enabled . ", " .
+					"user_ip			= " . $this->db->q($user_ip) . " ");
 
 			// get new user_id
 			$_user_id = $this->db->load_single(

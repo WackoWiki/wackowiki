@@ -25,7 +25,7 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 
 	$this->sanitize_page_tag($new_tag);
 
-	if (!preg_match('#^([-/_.' . $this->language['ALPHANUM_P'] . ']+)$#u', $new_tag))
+	if (!preg_match('/^([' . $this->language['ALPHANUM_P'] . '\.]+)$/u', $new_tag))
 	{
 		$this->set_message($this->_t('InvalidWikiName'));
 	}
@@ -94,8 +94,8 @@ if (mb_substr_count($this->tag, '/') > 0)
 		// hide users cluster
 		if ($parent != $this->db->users_page)
 		{
-			$tpl->c_f_base	= (mb_strlen($parent) > 50 ? '...' . mb_substr($parent, -50) : $parent);
-			$tpl->c_f_tag	= (isset($_POST['option']) && $_POST['option'] === 2 ? $new_tag : '');
+			$tpl->c_f_base		= (mb_strlen($parent) > 50 ? '...' . mb_substr($parent, -50) : $parent);
+			$tpl->c_f_tag		= (isset($_POST['option']) && $_POST['option'] === 2 ? $new_tag : '');
 		}
 	}
 	else
