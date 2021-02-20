@@ -26,11 +26,11 @@
 		<form action="[ ' href ' ]" method="post" name="login">
 			[ ' csrf: login ' ]
 			<p>
-				<label for="user_name">[ ' format_t: LoginName ' ]:</label>
+				<label for="user_name">[ ' format_t: LoginName ' ]</label>
 				<input type="text" id="user_name" name="user_name" size="25" maxlength="80" value="[ ' username | e attr ' ]" pattern="[ ' pattern | e attr ' ]" title="[ ' only | e attr ' ]" tabindex="1" required autofocus>
 			</p>
 			<p>
-				<label for="password">[ ' _t: LoginPassword ' ]:</label>
+				<label for="password">[ ' _t: LoginPassword ' ]</label>
 				<input type="password" id="password" name="password" size="25" tabindex="2" autocomplete="off" required>
 				[== // input.verify -> display: none --- anti-bot dummy field feature ==]
 				<input type="text" id="email" name="email" class="verify">
