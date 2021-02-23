@@ -140,8 +140,7 @@ function bb2_db_escape($string)
 {
 	global $db;
 
-	return $db->quote($string);
-#	return $string;	// No-op when database not in use.
+	return $db->quote($string);	// No-op when database not in use.
 }
 
 // Return the number of rows in a particular query.

@@ -1216,6 +1216,7 @@ $ap_translation = [
 	'BbPermitted'				=> 'Разрешено',
 	'BbIp'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
+	'BbUri'						=> 'URI',
 	'BbRecordsAll'				=> 'Отображаются все %1 записи',
 	'BbShow'					=> 'Показать',
 	'BbIpDateStatus'			=> 'IP/Дата/Состояние',

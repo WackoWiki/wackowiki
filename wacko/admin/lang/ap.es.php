@@ -412,24 +412,24 @@ $ap_translation = [
 	'ReverseProxySection'		=> 'Proxy inverso',
 	'ReverseProxy'				=> 'Usar proxy inverso',
 	'ReverseProxyInfo'			=> 'Habilite esta configuración para determinar la dirección IP correcta del control remoto
-									cliente examinando la información almacenada en los encabezados X-Fordered-For. 
+									cliente examinando la información almacenada en los encabezados X-Fordered-For.
 									Los encabezados X-Fordered-For son un mecanismo estándar para identificar los sistemas cliente
-									que se conectan a través de un servidor proxy inverso, como Squid o Pound. Los servidores 
-									proxy inversos se utilizan a menudo para mejorar el rendimiento de sitios muy visitados y 
-									también pueden proporcionar otros beneficios de cifrado, seguridad o almacenamiento en caché 
-									del sitio. Si esta instalación de WackoWiki opera detrás de un proxy inverso, esta configuración 
-									debe estar habilitada para que la información correcta de la dirección IP sea capturada en los 
-									sistemas de administración de sesión, registro, estadísticas y administración de acceso de 
-									WackoWiki; Si no está seguro de esta configuración, no tiene un proxy inverso o WackoWiki 
+									que se conectan a través de un servidor proxy inverso, como Squid o Pound. Los servidores
+									proxy inversos se utilizan a menudo para mejorar el rendimiento de sitios muy visitados y
+									también pueden proporcionar otros beneficios de cifrado, seguridad o almacenamiento en caché
+									del sitio. Si esta instalación de WackoWiki opera detrás de un proxy inverso, esta configuración
+									debe estar habilitada para que la información correcta de la dirección IP sea capturada en los
+									sistemas de administración de sesión, registro, estadísticas y administración de acceso de
+									WackoWiki; Si no está seguro de esta configuración, no tiene un proxy inverso o WackoWiki
 									funciona en un entorno de alojamiento compartido, esta configuración debe permanecer desactivada.',
 	'ReverseProxyHeader'		=> 'Encabezado de proxy inverso',
 	'ReverseProxyHeaderInfo'	=> 'Establezca este valor si su servidor proxy envía la IP del cliente en un encabezado que no sea X-Fordered-For.
-									El encabezado "X-Fordered-For" es una lista de direcciones IP separadas por coma+espacio, solo se utilizará 
+									El encabezado "X-Fordered-For" es una lista de direcciones IP separadas por coma+espacio, solo se utilizará
 									la última (la más a la izquierda).',
 	'ReverseProxyAddresses'		=> 'reverse_proxy acepta una matriz de direcciones IP',
-	'ReverseProxyAddressesInfo'	=> 'El elemento de esta matriz es la dirección IP de cualquiera de sus proxies inversos. Al llenar esta matriz, 
-									WackoWiki confiará en la información almacenada en los encabezados X-Forwarded-For solo si la dirección IP remota 
-									es una de estas, es decir, la solicitud llega al servidor web desde uno de sus proxies inversos. De lo contrario, 
+	'ReverseProxyAddressesInfo'	=> 'El elemento de esta matriz es la dirección IP de cualquiera de sus proxies inversos. Al llenar esta matriz,
+									WackoWiki confiará en la información almacenada en los encabezados X-Forwarded-For solo si la dirección IP remota
+									es una de estas, es decir, la solicitud llega al servidor web desde uno de sus proxies inversos. De lo contrario,
 									el cliente podría conectarse directamente a su servidor web falsificando los encabezados X-Fordered-For.',
 
 	'SessionSection'				=> 'Manejo de sesiones',
@@ -1227,6 +1227,7 @@ $ap_translation = [
 	'BbPermitted'				=> 'Permitted',
 	'BbIp'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
+	'BbUri'						=> 'URI',
 	'BbRecordsAll'				=> 'Mostrando todos los registros %1',
 	'BbShow'					=> 'Mostrar',
 	'BbIpDateStatus'			=> 'IP/Fecha/Estado',

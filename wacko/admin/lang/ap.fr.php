@@ -1230,6 +1230,7 @@ $ap_translation = [
 	'BbPermitted'				=> 'Autorisé',
 	'BbIp'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
+	'BbUri'						=> 'URI',
 	'BbRecordsAll'				=> 'Displaying all %1 records',
 	'BbShow'					=> 'Afficher',
 	'BbIpDateStatus'			=> 'IP/Date/Status',

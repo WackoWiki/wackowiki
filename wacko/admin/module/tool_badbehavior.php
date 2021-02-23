@@ -182,15 +182,15 @@ function admin_tool_badbehavior(&$engine, &$module)
 					if ($argument == 'status_key')
 					{
 						$status_key	= bb2_get_response($result['group_type']);
-						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;status_key=' . $result['group_type'] . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'status_key' => $result['group_type']]) . '" title="' . '[' . $status_key['response'] . '] ' . $status_key['explanation'] . '">' . $status_key['log'] . "</a>\n";
 					}
 					else if ($argument == 'request_uri')
 					{
-						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['request_uri_hash'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', $argument => $result['request_uri_hash']]) . '">' . $result['group_type'] . "</a>\n";
 					}
 					else
 					{
-						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;' . $argument . '=' . $result['group_type'] . '" title="' .'['.''.'] '.''. '">' . $result['group_type'] . "</a>\n";
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', $argument => $result['group_type']]) . '">' . $result['group_type'] . "</a>\n";
 					}
 
 					echo '<td>' . $link . "</td>\n";
@@ -281,6 +281,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 			if (!empty($_GET['ip']))				echo '<strong>' . $engine->_t('BbIp')			. '</strong> ' . $link . ' ';
 			if (!empty($_GET['user_agent']))		echo '<strong>' . $engine->_t('BbUserAgent')	. '</strong> ' . $link . ' ';
 			if (!empty($_GET['request_method']))	echo '<strong>' . $engine->_t('BbGetPost')		. '</strong> ' . $link . ' ';
+			if (!empty($_GET['request_uri']))		echo '<strong>' . $engine->_t('BbUri')			. '</strong> ' . $link . ' ';
 		}
 
 		if (!isset($_GET['status_key']))

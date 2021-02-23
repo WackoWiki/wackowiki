@@ -1235,6 +1235,7 @@ $ap_translation = [
 	'BbPermitted'				=> 'Permitted',
 	'BbIp'						=> 'IP',
 	'BbGetPost'					=> 'GET/POST',
+	'BbUri'						=> 'URI',
 	'BbRecordsAll'				=> 'Displaying all %1 records',
 	'BbShow'					=> 'Show',
 	'BbIpDateStatus'			=> 'IP/Date/Status',
