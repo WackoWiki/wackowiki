@@ -96,7 +96,7 @@ write_config_hidden_nodes($config_parameters);
 	 Check for required PHP Extensions
 	 */
 
-	// check for mb_string, iconv, bcmath, pcre, ctype, gd, JSON, SPL extension
+	// check for bcmath, ctype, gd, iconv, intl, JSON, mb_string, openssl, pcre, SPL extension
 	$php_extension = [
 		'bcmath',
 		'ctype',
