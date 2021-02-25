@@ -14,6 +14,7 @@ if (!defined('IN_WACKO'))
 	[title=1]
 	[nomark=0]
 	[legend=""]
+	[sort="asc|desc"]
 	[system=0|1]		// excludes system pages
 	[lang="ru"]			// show pages only in specified language
  }}
@@ -28,6 +29,7 @@ $limit	= 500;
 // input
 if (!isset($page))		$page	= '/' . $this->page['tag'];
 if (!isset($title))		$title	= 1;
+if (!isset($sort))		$sort	= '';
 if (!isset($system))	$system	= 0;
 if (!isset($lang))		$lang	= '';
 
@@ -76,7 +78,10 @@ if ($pages = $this->db->load_all(
 			? "AND page_lang = " . $this->db->q($lang) . " "
 			: "") .
 		"AND deleted <> 1 " .
-	"ORDER BY tag", true))
+	"ORDER BY tag " .
+		($sort == 'desc'
+			? "DESC"
+			: ""), true))
 {
 	// pick all subpages up to the desired depth level
 	if ($depth > 0)
