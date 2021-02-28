@@ -107,7 +107,7 @@ write_config_hidden_nodes($config_parameters);
 		'mbstring',
 		'openssl',
 		'pcre',
-		'spl','madeupone','madeuptwo',
+		'spl',
 	];
 
 	$php_extension_result	= true;
@@ -182,7 +182,6 @@ write_config_hidden_nodes($config_parameters);
 		if (!$result)
 		{
 			$file_permissions_result = false;
-			# echo "\t<li>" . 'File permissions: <code>' . decoct(fileperms($permission[0])) . "</code></li>\n";
 		}
 
 		echo "\t<li>" . $permission[0] . '   ' . output_image($result) . "</li>\n";
