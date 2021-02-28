@@ -73,7 +73,7 @@ $lang = [
 'OK'							=> 'OK',
 'Problem'						=> 'Problem',
 'NotePhpExtensions'				=> '',
-'ErrorPhpExtensions'			=> 'Your PHP installation appears to be missing the noted PHP extensions which are required by WackoWiki.',
+'ErrorPhpExtensions'			=> 'Wygląda na to, że w Twojej instalacji PHP brakuje wymienionych rozszerzeń PHP, które są wymagane przez WackoWiki.',
 'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
 'NotePermissions'				=> 'Instalator spróbuje zapisać dane z konfiguracji do pliku %1, umieszczonego w katalogu WackoWiki. Aby to się udało, musisz mieć pewność, że serwer posiada prawo zapisu do tego pliku! Jeżeli nie możesz tego zrobić, będziesz musiał edytować plik ręcznie (instalator powie Ci jak).<br><br>Zaglądnij na <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> po więcej informacji.',
 'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.',

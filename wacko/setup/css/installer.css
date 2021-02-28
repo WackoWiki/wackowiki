@@ -171,6 +171,7 @@ hr {
 	padding: 10px 10px 10px 40px;
 	position: relative;
 }
+div.security,
 p.security {
 	border: 1px solid #d893a1;
 	width: auto;
@@ -198,6 +199,12 @@ p.security {
 	background-size: 16px 16px;
 	height: 16px;
 	width: 16px;
+}
+
+.security ul {
+	list-style: square;
+	padding: 5px 0 0 20px;
+	left: 0;
 }
 
 /*

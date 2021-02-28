@@ -69,7 +69,7 @@ write_config_hidden_nodes($config_parameters);
 		for ($count = 0; $count < count($drivers); $count++)
 		{
 			// If you want to find the name out
-			// print $drivers[$count];
+			// echo $drivers[$count];
 
 			if (in_array($drivers[$count], $accepted_pdo_drivers))
 			{
@@ -107,8 +107,11 @@ write_config_hidden_nodes($config_parameters);
 		'mbstring',
 		'openssl',
 		'pcre',
-		'spl',
+		'spl','madeupone','madeuptwo',
 	];
+
+	$php_extension_result	= true;
+	$missing_php_extension	= [];
 	?>
 <h2><?php echo $lang['PhpExtensions']; ?></h2>
 <ul class="column-3">
@@ -119,7 +122,8 @@ write_config_hidden_nodes($config_parameters);
 
 		if (!$result)
 		{
-			$php_extension_result = false;
+			$php_extension_result		= false;
+			$missing_php_extension[]	= $extension;
 		}
 
 		echo "\t<li>" . $extension . ' ' . output_image($result) . "</li>\n";
@@ -189,39 +193,48 @@ write_config_hidden_nodes($config_parameters);
 	/*
 		End of checks, are we ready to install?
 	*/
+
+	$btn_try_again	= '<button type="button" class="next" onClick="window.location.reload( true );">' . $lang['TryAgain'] . '</button>';
+	$btn_continue	= '<button type="submit" class="next">' . $lang['Continue'] . '</button>';
 	?>
 <h2><?php echo $lang['ReadyToInstall']; ?></h2>
-	<?php
-	if ($php_version_result && $database_result && $file_permissions_result)
-	{
-		?>
-<p><?php echo $lang['Ready'];?></p>
-<p class="warning"><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>');?></p>
-<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
 <?php
+	if (   $php_version_result
+		&& $database_result
+		&& $php_extension_result
+		&& $file_permissions_result)
+	{
+		echo '<p>' . $lang['Ready'] . '</p>';
+		echo '<p class="warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
+		echo $btn_continue;
 	}
 	else if (!$php_version_result)
 	{
-?>
-<p><?php echo $lang['ErrorMinPhpVersion']; ?></p>
-<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
-<?php
+		echo '<p class="security">' . $lang['ErrorMinPhpVersion'] . '</p>';
+		echo $btn_try_again;
 	}
 	else if (!$database_result)
 	{
-?>
-<p><?php echo $lang['ErrorNoDbDriverDetected']; ?></p>
-<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
-<?php
+		echo '<p>' . $lang['ErrorNoDbDriverDetected'] . '</p>';
+		echo $btn_try_again;
+	}
+	else if (!$php_extension_result)
+	{
+		echo '<div class="security">' . $lang['ErrorPhpExtensions'];
+		echo '<ul>';
+		foreach ($missing_php_extension as $php_extension)
+		{
+			echo '<li><code>' . $php_extension . "</code></li>\n";
+		}
+		echo '</ul></div>';
+		echo $btn_try_again;
 	}
 	else if (!$file_permissions_result)
 	{
-?>
-<p class="warning"><?php echo Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>'); ?></p>
-<p class="security"><?php echo $lang['ErrorPermissions']; ?></p>
-<button type="button" class="next" onClick="window.location.reload( true );"><?php echo $lang['TryAgain'];?></button>
-<button type="submit" class="next"><?php echo $lang['Continue'];?></button>
-<?php
+		echo '<p class="warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
+		echo '<p class="security">' . $lang['ErrorPermissions'] . '</p>';
+		echo $btn_try_again;
+		echo $btn_continue;
 	}
 ?>
 </form>
