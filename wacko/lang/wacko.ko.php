@@ -628,13 +628,13 @@ $wacko_translation = [
 	'NewPassword'				=> '새 비밀번호',
 	'YouWantChangePassword'		=> '비밀번호 변경',
 	'ChangePasswordButton'		=> '비밀번호 변경',
-	'PasswordChanged'			=> 'Password changed',
+	'PasswordChanged'			=> '비밀번호가 변경되었습니다.',
 	'EmailWelcome'				=> 'You\'ve registered at ',
 	'EmailRegistered'			=> 'You\'ve successfully registered at %1.' . "\n" . 'Your username: %2' . "\n\n",
 	'EmailVerify'				=> 'If you want to receive notifications, you must verify your email address. Please click on or copy the following link to a web browser: ' . "\n" . '%1',
 	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
 	'EmailRegisteredIgnore'		=> 'If you did not request this registration, ignore this message and nothing will happen.',
-	'EmailDoNotReply'			=> 'Do not reply to this message.',
+	'EmailDoNotReply'			=> '이 메시지에 회신하지 마십시오.',
 	'EmailReverify'				=> 'Someone (maybe you) submitted your email as notification address at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want receive notifications, you need to approve your email. Please follow the link to do this.' . "\n" . '%3' . "\n\n",
 	'EmailConfirm'				=> 'Please verify your email',
 	'EmailConfirmed'			=> '이메일이 성공적으로 확인되었습니다.',
@@ -1002,7 +1002,7 @@ $wacko_translation = [
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
 
-	'ChangesFeed'				=> 'Changes',
+	'ChangesFeed'				=> '바뀜',
 	'CommentsFeed'				=> '댓글',
 	'NewsFeed'					=> '뉴스',
 	'RevisionsFeed'				=> 'Revisions of ',
@@ -1011,7 +1011,7 @@ $wacko_translation = [
 
 	// Captcha
 	'Captcha'					=> '그림에 보이는 글을 입력하세요',
-	'CaptchaFailed'				=> 'You have entered the captcha word incorrectly. Please try again.',
+	'CaptchaFailed'				=> 'You have entered the captcha word incorrectly. 다시 시도하십시오. ',
 	'CaptchaReload'				=> '새로운 보안 문자',
 	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
 
@@ -1117,7 +1117,7 @@ $wacko_translation = [
 
 	// password complexity
 	'PwdCplxShort'				=> '비밀번호가 너무 짧습니다.',
-	'PwdCplxEquals'				=> 'Password contains the user name.',
+	'PwdCplxEquals'				=> '암호에는 사용자 이름이 포함됩니다. ',
 	'PwdCplxWeak'				=> 'Password does not meet complexity requirements.',
 	'PwdCplxDesc1'				=> '암호 요구 사항: ',
 	'PwdCplxDesc2'				=> 'password should not be less than %1 characters',

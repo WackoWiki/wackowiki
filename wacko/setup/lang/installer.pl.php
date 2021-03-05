@@ -160,7 +160,7 @@ $lang = [
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
 'DeleteTables'					=> 'Usuwanie istniejących tabel?',
 'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
+'ConfirmTableDeletion'			=> 'Czy na pewno chcesz usunąć wszystkie obecne tabele wiki?',
 
 /*
    Database Installation Page

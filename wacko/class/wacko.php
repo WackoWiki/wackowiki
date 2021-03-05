@@ -7289,8 +7289,7 @@ class Wacko
 
 	function delete_pages($pages)
 	{
-		$remove	= [];
-		$rev	= array_flip($this->page_id_cache);
+		$rev	= count($this->page_id_cache) > 1 ? array_flip($this->page_id_cache) : false;
 
 		foreach ($pages as $page_id)
 		{
