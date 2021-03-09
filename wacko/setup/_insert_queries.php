@@ -132,6 +132,7 @@ $upgrade['5.5.17'][]	= ['update',	'menu',				$update_menu_r5_5_1];
 
 // page link
 $upgrade['5.5.17'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_0];
+$upgrade['6.0.17'][]	= ['alter',		'page_link',		$alter_page_link_r5_5_1];
 
 // rating
 $upgrade['6.0.8'][]		= ['alter',		'rating',			$alter_rating_r5_5_0];
