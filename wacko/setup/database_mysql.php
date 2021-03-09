@@ -323,7 +323,7 @@ $tbl_user = "CREATE TABLE {$pref}user (
 					user_name VARCHAR(80) NOT NULL DEFAULT '',
 					real_name VARCHAR(80) NOT NULL DEFAULT '',
 					password VARCHAR(255) NOT NULL DEFAULT '',
-					email VARCHAR(100) NOT NULL DEFAULT '',
+					email VARCHAR(254) NOT NULL DEFAULT '',
 					account_status TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 					account_type TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 					enabled TINYINT(1) UNSIGNED NOT NULL DEFAULT '1',

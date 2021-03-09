@@ -153,6 +153,7 @@ $upgrade['6.0.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_7];
 $upgrade['6.0.0'][]		= ['insert',	'user',				$insert_user_r5_5_0];
 $upgrade['6.0.7'][]		= ['alter',		'user',				$alter_user_r5_5_0];
 $upgrade['6.0.8'][]		= ['alter',		'user',				$alter_user_r5_5_1];
+$upgrade['6.0.17'][]	= ['alter',		'user',				$alter_user_r5_5_2];
 
 // user settings
 $upgrade['6.0.10'][]	= ['alter',		'user_settings',	$alter_user_setting_r5_5_0];

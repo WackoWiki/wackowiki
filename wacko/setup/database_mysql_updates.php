@@ -93,6 +93,7 @@ $alter_revision_r5_5_7 = "ALTER TABLE {$pref}revision CHANGE keywords keywords V
 // USER
 $alter_user_r5_5_0 = "ALTER TABLE {$pref}user DROP account_lang";
 $alter_user_r5_5_1 = "ALTER TABLE {$pref}user DROP fingerprint";
+$alter_user_r5_5_2 = "ALTER TABLE {$pref}user CHANGE email email VARCHAR(254) NOT NULL DEFAULT ''";
 
 $insert_user_r5_5_0 = "INSERT INTO {$pref}user (user_name, password, email, account_type, signup_time) VALUES ('Deleted', '', '', '1', UTC_TIMESTAMP())";
 
