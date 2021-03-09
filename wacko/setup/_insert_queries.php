@@ -98,18 +98,29 @@ $upgrade['6.0.11'][]	= ['update',	'config',			$update_config_r5_5_1];
 
 // file
 $upgrade['6.0.10'][]	= ['alter',		'file',				$alter_file_r5_5_0];
+$upgrade['6.0.17'][]	= ['alter',		'file',				$alter_file_r5_5_1];
+$upgrade['6.0.17'][]	= ['alter',		'file',				$alter_file_r5_5_2];
+$upgrade['6.0.17'][]	= ['alter',		'file',				$alter_file_r5_5_3];
+$upgrade['6.0.17'][]	= ['alter',		'file',				$alter_file_r5_5_4];
 
 // log
 $upgrade['6.0.8'][]		= ['alter',		'log',				$alter_log_r5_5_0];
 
 // menu
 $upgrade['6.0.10'][]	= ['alter',		'menu',				$alter_menu_r5_5_0];
+$upgrade['6.0.17'][]	= ['alter',		'menu',				$alter_menu_r5_5_1];
+
 $upgrade['5.5.17'][]	= ['update',	'menu',				$update_menu_r5_5_0];
 
 // page
 $upgrade['5.5.17'][]	= ['alter',		'page',				$alter_page_r5_5_0];
-$upgrade['6.0.5'][]		= ['alter',		'page',				$alter_page_r5_5_1];
-$upgrade['6.0.10'][]	= ['alter',		'page',				$alter_page_r5_5_2];
+$upgrade['6.0.10'][]	= ['alter',		'page',				$alter_page_r5_5_1];
+$upgrade['6.0.17'][]	= ['alter',		'page',				$alter_page_r5_5_2];
+$upgrade['6.0.17'][]	= ['alter',		'page',				$alter_page_r5_5_3];
+$upgrade['6.0.17'][]	= ['alter',		'page',				$alter_page_r5_5_4];
+$upgrade['6.0.17'][]	= ['alter',		'page',				$alter_page_r5_5_5];
+$upgrade['6.0.17'][]	= ['alter',		'page',				$alter_page_r5_5_6];
+$upgrade['6.0.17'][]	= ['alter',		'page',				$alter_page_r5_5_7];
 
 $upgrade['5.5.17'][]	= ['update',	'page',				$update_page_r5_5_2];
 
@@ -131,6 +142,13 @@ $upgrade['6.0.16'][]	= ['alter',		'referrer',			$alter_referrer_r5_5_0];
 // revision
 $upgrade['5.5.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_0];
 $upgrade['6.0.11'][]	= ['alter',		'revision',			$alter_revision_r5_5_1];
+$upgrade['6.0.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_2];
+$upgrade['6.0.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_3];
+$upgrade['6.0.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_4];
+$upgrade['6.0.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_5];
+$upgrade['6.0.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_6];
+$upgrade['6.0.17'][]	= ['alter',		'revision',			$alter_revision_r5_5_7];
+
 // user
 $upgrade['6.0.0'][]		= ['insert',	'user',				$insert_user_r5_5_0];
 $upgrade['6.0.7'][]		= ['alter',		'user',				$alter_user_r5_5_0];
