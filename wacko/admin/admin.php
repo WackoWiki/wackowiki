@@ -320,10 +320,11 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 			<div class="left"></div>
 			<div class="middle">
 				<h1>
-					<a href="<?php echo $engine->href(); ?>">
+					<a href="<?php echo $engine->href(); ?>" title="<?php echo $engine->_t('AdminPanel'); ?>">
 					<?php
-						echo '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
+						# echo '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
 						# echo '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
+						echo $engine->db->site_name ?? '';
 						# echo $engine->_t('AdminPanel');
 						?>
 					</a>

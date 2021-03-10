@@ -2121,10 +2121,15 @@ table.forum td {
 
 #newtopic:target {
 	background-color: #ffeeee;
+	display: block;
 }
 
 .search-box-right {
 	float: right;
+}
+
+form.add-topic {
+	display: none;
 }
 
 /* categories tag ------------- */

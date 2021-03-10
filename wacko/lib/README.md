@@ -23,7 +23,7 @@ The version and status of each is summarized below:
 
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
-| js				| clipboard.js		| 2.0.6		| unpatched |
+| js				| clipboard.js		| 2.0.7		| unpatched |
 | js				| WikiEdit			| 3.20		| unpatched |
 
 Upstream projects

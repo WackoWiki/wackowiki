@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
-if (!isset($page))		$page = '';
+if (!isset($page))		$page = '/' . $this->tag;
 
 $tag			= $this->unwrap_link($page);
 $error			= '';
@@ -24,13 +24,12 @@ if (!empty($blog_cluster))
 	}
 	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
-	if (!isset($noxml))	$noxml = 0;
+	if (!isset($noxml))	$noxml = 1;
 
 	$pages				= [];
 	$p_mode				= [];
 	$prefix				= $this->db->table_prefix;
-	#$blog_cluster		= $blog_cluster;
-	$blog_levels		= $this->db->news_levels;
+	$blog_levels		= '/.+'; //see $this->db->news_levels;
 
 	// hide article H1 header
 	$this->hide_article_header = true;
@@ -86,7 +85,7 @@ if (!empty($blog_cluster))
 			// .date('Y/').date('m/')				- 2011/07 (default)
 			// .date('Y/').date('m/').date('d/')	- 2011/07/14
 			// .date('Y/').date('W/')				- 2011/29
-			$blog_cluster_structure = date('Y/').date('m/');
+			$blog_cluster_structure = '';
 
 			$this->http->redirect($this->href('edit', $blog_cluster . '/' . $blog_cluster_structure . $name, '', 1));
 		}
