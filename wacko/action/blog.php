@@ -245,13 +245,14 @@ if (!empty($blog_cluster))
 
 		foreach ($pages as $page)
 		{
-			$_category = $this->get_categories($page['page_id'], OBJECT_PAGE);
-			$_category = !empty($_category) ? $this->_t('Category') . ': ' . $_category . ' | ' : '';
+			$_category		= $this->get_categories($page['page_id'], OBJECT_PAGE);
+			$_category		= !empty($_category) ? $_category . ' | ' : '';
 
 			$tpl->page		= $page;
 			$tpl->href		= $this->href('', $page['tag'], '');
 			$tpl->user		= $this->user_link($page['owner'], true, false);
 			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1);
+			$tpl->icon		= !empty($_category) ? true : false;
 			$tpl->category	= $_category;
 			$tpl->edit		= ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ' : '');
 			$tpl->comments	= $this->href('', $page['tag'], ['show_comments' => 1]);

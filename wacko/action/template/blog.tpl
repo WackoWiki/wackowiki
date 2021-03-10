@@ -52,7 +52,7 @@
 					</div>
 					<div class="newscontent">[ ' include | pre ' ]</div>
 					<footer class="news-meta">
-						[ ' category ' ] [ ' edit ' ] <a href="[ ' comments ' ]#header-comments" title="[ ' _t: NewsDiscuss ' ] [ ' page.title ' ]">[ ' page.comments ' ] [ ' _t: Comments ' ] »</a>
+						[ '' icon '' ] [ ' category ' ] [ ' edit ' ] <a href="[ ' comments ' ]#header-comments" title="[ ' _t: NewsDiscuss ' ] [ ' page.title ' ]">[ ' page.comments ' ] [ ' _t: Comments ' ] »</a>
 					</footer>
 				</article>
 			=]
@@ -63,3 +63,6 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
+
+[ === icon === ]
+<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: Categories ' ]" title="[ ' _t: Categories ' ]" class="btn-tag">
