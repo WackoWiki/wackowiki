@@ -25,7 +25,7 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 
 	$this->sanitize_page_tag($new_tag);
 
-	if (!preg_match('/^([' . $this->language['ALPHANUM_P'] . '\.]+)$/u', $new_tag))
+	if (!preg_match('/^([' . $this->language['TAG_P'] . ']+)$/u', $new_tag))
 	{
 		$this->set_message($this->_t('InvalidWikiName'));
 	}

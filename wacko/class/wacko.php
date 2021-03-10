@@ -562,7 +562,13 @@ class Wacko
 			require $lang_file;
 
 			$wacko_language['LANG']			= $lang;
-			$wacko_language['USER_NAME']	= '[\p{L}\p{Nd}\-\.]+';
+
+			$wacko_language['USER_NAME']	= '[\p{L}\p{Nd}\.\-]+';
+			$wacko_language['USER_NAME_P']	= '\p{L}\p{Nd}\.\-';
+
+			$wacko_language['TAG']			= '[\p{L}\p{M}\p{Nd}\.\-\/]';
+			$wacko_language['TAG_P']		= '\p{L}\p{M}\p{Nd}\.\-\/';
+
 			$wacko_language['UPPER']		= '[\p{Lu}]';
 			$wacko_language['UPPERNUM']		= '[\p{Lu}\p{Nd}]';
 			$wacko_language['LOWER']		= '[\p{Ll}\/]';
@@ -818,7 +824,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($page_id || !preg_match('/[^' . $this->language['ALPHANUM_P'] . '\.]/u', $tag))
+			if ($page_id || !preg_match('/[^' . $this->language['TAG_P'] . ']/u', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .
@@ -4449,7 +4455,7 @@ class Wacko
 				return @$x[1]? '/' : '';
 			}, $tag);
 
-		$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\.]/u', '', $tag);
+		$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
 	}
 
 	// returns error text, or null on OK
@@ -4459,7 +4465,7 @@ class Wacko
 		$this->sanitize_page_tag($tag);
 
 		// - / ' _ .
-		if (!preg_match('#^([' . $this->language['ALPHANUM_P'] . '.]+)$#u', $tag))
+		if (!preg_match('/^([' . $this->language['TAG_P'] . ']+)$/u', $tag))
 		{
 			return $this->_t('InvalidWikiName');
 		}
@@ -5665,7 +5671,7 @@ class Wacko
 
 		foreach ($lines as $line)
 		{
-			if (!( preg_match('/^([(\!)?' . $this->language['ALPHANUM_P'] . ']*)$/u', $line)
+			if (!( preg_match('/^([(\!)?' . $this->language['USER_NAME_P'] . ']*)$/u', $line)
 				|| preg_match('/^((\!)?[(\*|\$)])$/u', $line) ))
 			{
 				$error	.= '<code>' . $line . '</code><br>';
@@ -6806,8 +6812,8 @@ class Wacko
 			// normalize tag name
 			$tag = Ut::normalize($tag);
 
-			$tag = str_replace(['\\', '_'], '', $tag);
-			$tag = preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\.]/u', '', $tag);
+			$tag = str_replace(['\\'], '', $tag);
+			$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
 
 			$revision_id	= (int) ($_GET['revision_id'] ?? '');
 			$deleted		= $this->is_admin();
