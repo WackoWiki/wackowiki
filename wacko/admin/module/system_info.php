@@ -35,6 +35,12 @@ function admin_system_info(&$engine, &$module)
 		</tr>
 <?php
 
+	// get TLS mode			-> https://httpd.apache.org/docs/2.4/mod/mod_ssl.html#envvars
+	$tls_mode				= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'
+									? $engine->_t('On') . ', '. ($_SERVER['SSL_CIPHER'] ?? '') . ' (' . ($_SERVER['SSL_PROTOCOL'] ?? '') . ')'
+									: $engine->_t('Off')
+								);
+
 	// get MariaDB / mysql version
 	$_db_version			= $engine->db->load_single("SELECT version()");
 	$db_version				= $_db_version['version()'];
@@ -50,14 +56,7 @@ function admin_system_info(&$engine, &$module)
 	$post_max_size			= trim(str_replace('M', '', get_cfg_var('post_max_size')));
 
 	// check if gzip compression is enabled // @extension_loaded('zlib')
-	if (function_exists('ob_gzhandler') || ini_get('zlib.output_compression'))
-	{
-		$gzip_compression = $engine->_t('On');
-	}
-	else
-	{
-		$gzip_compression = $engine->_t('Off');
-	}
+	$gzip_compression = (function_exists('ob_gzhandler') || ini_get('zlib.output_compression') ? $engine->_t('On') : $engine->_t('Off'));
 
 	$memory = trim(str_replace('M', '', ini_get('memory_limit')));
 
@@ -76,6 +75,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['server_name']			= [$engine->_t('ServerName'), $_SERVER['SERVER_NAME']];
 	$sysinfo['server_software']		= [$engine->_t('WebServer'), $_SERVER['SERVER_SOFTWARE']];
 	$sysinfo['server_protocol']		= [$engine->_t('HttpProtocol'), $_SERVER['SERVER_PROTOCOL']];
+	$sysinfo['tls_mode']			= [$engine->_t('TrafficProtection'), $tls_mode];
 	$sysinfo['db_version']			= [$engine->_t('DbVersion'), $db_version];
 	$sysinfo['sql_mode_global']		= [$engine->_t('SqlModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
 	$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
@@ -84,7 +84,7 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
 	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->binary_multiples($post_max_size * 1024 * 1024, false, true, true)];
 	$sysinfo['max_execution_time']	= [$engine->_t('MaxExecutionTime'), get_cfg_var('max_execution_time') . ' seconds'];
-	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), CACHE_SESSION_DIR];
+	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), CACHE_SESSION_DIR];	// ini_get('session.save_path')
 	$sysinfo['default_charset']		= [$engine->_t('PhpDefaultCharset'), ini_get('default_charset')];
 	$sysinfo['gzip_compression']	= [$engine->_t('GZipCompression'), $gzip_compression];
 	$sysinfo['php_extensions']		= [$engine->_t('PhpExtensions'), implode(', ',get_loaded_extensions())];
