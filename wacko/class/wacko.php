@@ -4456,6 +4456,9 @@ class Wacko
 			}, $tag);
 
 		$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
+
+		// strip full stop and hyphen-minus from the beginning and end of the string
+		$tag = utf8_trim($tag, '.-');
 	}
 
 	// returns error text, or null on OK
@@ -6809,11 +6812,8 @@ class Wacko
 				$this->method = 'show';
 			}
 
-			// normalize tag name
-			$tag = Ut::normalize($tag);
-
-			$tag = str_replace(['\\'], '', $tag);
-			$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
+			// normalize & sanitize tag name
+			$this->sanitize_page_tag($tag);
 
 			$revision_id	= (int) ($_GET['revision_id'] ?? '');
 			$deleted		= $this->is_admin();
