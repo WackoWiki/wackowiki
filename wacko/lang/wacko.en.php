@@ -1018,11 +1018,14 @@ $wacko_translation = [
 	// news
 	'News'						=> 'News',
 	'NewsName'					=> 'Title',
-	'NewsSubmit'				=> 'add',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
 	'NewsDiscuss'				=> 'Discuss this article...',
+
+	// blog
+	'BlogNewTopic'				=> 'Create a new post',
+	'NoPostAvailable'			=> 'No post available yet.',
 
 	// Review
 	'Reviewer'					=> 'Reviewer',
@@ -1113,7 +1116,6 @@ $wacko_translation = [
 	'ForumUpdated'				=> 'updated',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',
-
 
 	// password complexity
 	'PwdCplxShort'				=> 'Password is too short.',

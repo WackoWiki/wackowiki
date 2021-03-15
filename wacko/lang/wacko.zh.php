@@ -1018,11 +1018,14 @@ $wacko_translation = [
 	// news
 	'News'						=> '新闻动态',
 	'NewsName'					=> '标题',
-	'NewsSubmit'				=> '添加',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
 	'NewsDiscuss'				=> 'Discuss this article...',
+
+	// blog
+	'BlogNewTopic'				=> 'Create a new post',
+	'NoPostAvailable'			=> 'No post available yet.',
 
 	// Review
 	'Reviewer'					=> 'Reviewer',

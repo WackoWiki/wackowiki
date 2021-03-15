@@ -1018,11 +1018,14 @@ $wacko_translation = [
 	// news
 	'News'						=> 'Nyheder',
 	'NewsName'					=> 'Titel',
-	'NewsSubmit'				=> 'tilføje',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'Ingen nyheder til rådighed.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
 	'NewsDiscuss'				=> 'Diskuter denne artikel...',
+
+	// blog
+	'BlogNewTopic'				=> 'Create a new post',
+	'NoPostAvailable'			=> 'No post available yet.',
 
 	// Review
 	'Reviewer'					=> 'Reviewer',

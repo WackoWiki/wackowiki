@@ -1020,11 +1020,14 @@ $wacko_translation = [
 	// news
 	'News'						=> 'Новости',
 	'NewsName'					=> 'Заголовок',
-	'NewsSubmit'				=> 'добавить',
 	'NewsNoName'				=> 'Вы забыли указать заголовок добавляемой новости.',
 	'NewsNotAvailable'			=> 'Новостей нет.',
 	'NewsNoClusterDefined'		=> 'Кластер новостей не задан.',
 	'NewsDiscuss'				=> 'Обсудить новость...',
+
+	// blog
+	'BlogNewTopic'				=> 'Создать новый пост',
+	'NoPostAvailable'			=> 'No post available yet.',
 
 	// Review
 	'Reviewer'					=> 'Проверяющий',

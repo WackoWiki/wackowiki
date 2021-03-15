@@ -1018,11 +1018,14 @@ $wacko_translation = [
 	// news
 	'News'						=> 'Ειδήσεις',
 	'NewsName'					=> 'Τίτλος',
-	'NewsSubmit'				=> 'προσθήκη',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'Δεν υπάρχουν νέα.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
 	'NewsDiscuss'				=> 'Discuss this article...',
+
+	// blog
+	'BlogNewTopic'				=> 'Create a new post',
+	'NoPostAvailable'			=> 'No post available yet.',
 
 	// Review
 	'Reviewer'					=> 'Reviewer',

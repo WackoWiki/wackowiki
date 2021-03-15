@@ -1018,11 +1018,14 @@ $wacko_translation = [
 	// news
 	'News'						=> 'Nieuws',
 	'NewsName'					=> 'Title',
-	'NewsSubmit'				=> 'Toevoegen',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
 	'NewsDiscuss'				=> 'Discuss this article...',
+
+	// blog
+	'BlogNewTopic'				=> 'Maak een nieuw bericht',
+	'NoPostAvailable'			=> 'No post available yet.',
 
 	// Review
 	'Reviewer'					=> 'Reviewer',
