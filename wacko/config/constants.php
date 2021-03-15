@@ -28,7 +28,7 @@ const CACHE_FEED_DIR				= '_cache/feed';
 const CACHE_PAGE_DIR				= '_cache/page';
 const CACHE_SQL_DIR					= '_cache/query';
 const CACHE_TEMPLATE_DIR			= '_cache/template';
-const CACHE_SESSION_DIR				= '/tmp';				// '_cache/session'
+const CACHE_SESSION_DIR				= '/tmp';				// '/tmp', '_cache/session'
 
 const CHMOD_SAFE					= 0640;					// better to use 0600 in production
 const CHMOD_FILE					= 0644;					// file creation mode
@@ -83,7 +83,7 @@ const SQL_MODE_STRICT				= 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_B
 const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
 
 // Do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.0.17';
+const WACKO_VERSION					= '6.0.18';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
