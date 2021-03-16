@@ -31,9 +31,6 @@ if (!empty($blog_cluster))
 	$prefix				= $this->db->table_prefix;
 	$blog_levels		= '/.+'; //see $this->db->news_levels;
 
-	// hide article H1 header
-	$this->hide_article_header = true;
-
 	// check privilege
 	$access = $this->has_access('create');
 
@@ -197,6 +194,9 @@ if (!empty($blog_cluster))
 
 	if ($title == 1)
 	{
+		// hide article H1 header
+		$this->hide_article_header = true;
+
 		if (isset($category_title))
 		{
 			$_category_title = ' ' . $this->_t('For') . ' ' . $this->_t('Category') . ' «' . $category_title['category'] . '»';
