@@ -8,14 +8,27 @@ if (!defined('IN_WACKO'))
 $viewed = '';
 
 if (!isset($page))		$page = '';
-if (!isset($date))		$date = @$_GET['date'];
-if (!isset($hide_minor_edit)) $hide_minor_edit = @$_GET['minor_edit'];
+if (!isset($date))		$date = $_GET['date'] ?? '';
+if (!isset($hide_minor_edit)) $hide_minor_edit = (int) ($_GET['minor_edit'] ?? 0);
 if (!isset($noxml))		$noxml = 0;
 if (!isset($title))		$title = 0;
 if (!isset($max))		$max = null;
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
+
+// check and validate YYYY-MM-DD date
+$is_valid_date = function($date)
+{
+	return preg_match("/^(\d{4})-(\d{1,2})-(\d{1,2})$/", $date, $m)
+		? checkdate(intval($m[2]), intval($m[3]), intval($m[1]))
+		: false;
+};
+
+if ($date && !$is_valid_date($date))
+{
+	$date = '';
+}
 
 // process 'mark read' - reset session time
 if (isset($_GET['markread']) && $user)
