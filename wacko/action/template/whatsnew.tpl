@@ -21,13 +21,15 @@
 				<ul class="hl-line">
 					[= l _ =
 						<li[ ' viewed ' ]>
-							<span class="dt">[ ' revisions ' ]</span> — [ ' page ' ]
-							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' alt ' ]" class="[ ' class ' ]">
+							<span class="dt">[ ' revisions ' ]</span> — 
+							[ ' i icon ' ]
 							[ ' link ' ]
 								[= to =
 									[ ' _t: To ' ]&nbsp;&nbsp;[ ' link ' ]
 								=]
-							<span title="[ ' _t: Cluster ' ]">→ [ ' cluster ' ]</span>
+							[= cluster =
+								<span title="[ ' _t: Cluster ' ]">→ [ ' link ' ]</span>
+							=]
 							 . . . . . . . . . . . . . . . . 
 							<small>
 								[ ' user ' ]
@@ -50,3 +52,6 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
+
+[= icon =]
+<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' title | e attr ' ]" alt="[ ' alt ' ]" class="[ ' class ' ]">

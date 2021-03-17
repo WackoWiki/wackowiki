@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 
  {{whatsnew page="Cluster"}}
 
- TODO: RSS feed
+ TODO: table layout may suite visual orientation better, RSS feed
 */
 
 if (!isset($page))		$page = '';
@@ -146,10 +146,21 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 		}
 	}
 
-	$get_cluster = function ($page_tag){
+	// get cluster the tag resides in
+	$get_cluster = function ($page_tag) use ($tag)
+	{
+		// adapt base to cluster context
+		if ($tag && mb_substr($page_tag, 0, mb_strlen($tag)) == $tag)
+		{
+			$page_tag = utf8_trim(mb_substr($page_tag, mb_strlen($tag)), '/');
+		}
+
 		preg_match('/^[^\/]+/u', $page_tag, $sub_tag);
 
-		return $sub_tag[0];
+		if ($sub_tag[0] != $page_tag)
+		{
+			return $sub_tag[0];
+		}
 	};
 
 	$tpl->pagination_text = $pagination['text'];
@@ -211,20 +222,20 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			{
 				if ($page['page_id']) // !$global
 				{
-					$path2				= '_file:/' . $page['tag'] . '/';
-					$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
-					$tpl->cluster		= $get_cluster($page['comment_on_page']);
+					$path2			= '_file:/' . $page['tag'] . '/';
+					$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
+					$tpl->cluster_link	= $get_cluster($page['comment_on_page']);
 				}
 				else
 				{
-					$path2				= '_file:/';
-					$tpl->cluster		= $this->_t('UploadGlobal');
+					$path2			= '_file:/';
+					$tpl->cluster	= $this->_t('UploadGlobal');
 				}
 
-				$tpl->title		= $page['deleted'] ? $this->_t('FileDeleted') : $this->_t('NewFileAdded');
-				$tpl->alt		= 'file';
-				$tpl->class		= $page['deleted'] ? 'btn-delete' : 'btn-attachment';
-				$tpl->link		= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1);
+				$tpl->i_title		= $page['deleted'] ? $this->_t('FileDeleted') : $this->_t('NewFileAdded');
+				$tpl->i_alt			= 'file';
+				$tpl->i_class		= $page['deleted'] ? 'btn-delete' : 'btn-attachment';
+				$tpl->link			= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1);
 			}
 			// deleted
 			else if ($page['deleted'])
@@ -234,39 +245,39 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
 				}
 
-				$tpl->title		= $page['comment_on_page'] ? $this->_t('CommentDeleted') : $this->_t('PageDeleted');
-				$tpl->alt		= 'deleted';
-				$tpl->class		= 'btn-delete';
-				$tpl->link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
-				$tpl->cluster	= $get_cluster($page['comment_on_page'] ?? $page['tag']);
+				$tpl->i_title		= $page['comment_on_page'] ? $this->_t('CommentDeleted') : $this->_t('PageDeleted');
+				$tpl->i_alt			= 'deleted';
+				$tpl->i_class		= 'btn-delete';
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->cluster_link	= $get_cluster($page['comment_on_page'] ?? $page['tag']);
 			}
 			// new comment
 			else if ($page['comment_on_id'])
 			{
-				$tpl->title		= $this->_t('NewCommentAdded');
-				$tpl->alt		= 'comment';
-				$tpl->class		= 'btn-comment';
-				$tpl->link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
-				$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
-				$tpl->cluster	= $get_cluster($page['comment_on_page']);
+				$tpl->i_title		= $this->_t('NewCommentAdded');
+				$tpl->i_alt			= 'comment';
+				$tpl->i_class		= 'btn-comment';
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
+				$tpl->cluster_link	= $get_cluster($page['comment_on_page']);
 			}
 			// new page
 			else if ($page['created'] == $page['date'])
 			{
-				$tpl->title		= $this->_t('NewPageCreated');
-				$tpl->alt		= 'new';
-				$tpl->class		= 'btn-add-page';
-				$tpl->link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
-				$tpl->cluster	= $get_cluster($page['tag']);
+				$tpl->i_title		= $this->_t('NewPageCreated');
+				$tpl->i_alt			= 'new';
+				$tpl->i_class		= 'btn-add-page';
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->cluster_link	= $get_cluster($page['tag']);
 			}
 			// new revision
 			else
 			{
-				$tpl->title		= $this->_t('NewRevisionAdded');
-				$tpl->alt		= 'changed';
-				$tpl->class		= 'btn-edit';
-				$tpl->link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
-				$tpl->cluster	= $get_cluster($page['tag']);
+				$tpl->i_title		= $this->_t('NewRevisionAdded');
+				$tpl->i_alt			= 'changed';
+				$tpl->i_class		= 'btn-edit';
+				$tpl->link			= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+				$tpl->cluster_link	= $get_cluster($page['tag']);
 			}
 
 			$tpl->leave();	// l_
