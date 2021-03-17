@@ -12,9 +12,8 @@ if (!isset($page))		$page = '/' . $this->tag;
 $tag			= $this->unwrap_link($page);
 $error			= '';
 $feed_tag		= '';
-$blog_cluster	= $tag;
 
-if (!empty($blog_cluster))
+if (!empty($tag))
 {
 	if (!isset($max))	$max = 10;
 	if (isset($_GET['category_id']))
@@ -84,7 +83,7 @@ if (!empty($blog_cluster))
 			// .date('Y/').date('W/')				- 2011/29
 			$blog_cluster_structure = '';
 
-			$this->http->redirect($this->href('edit', $blog_cluster . '/' . $blog_cluster_structure . $name, '', 1));
+			$this->http->redirect($this->href('edit', $tag . '/' . $blog_cluster_structure . $name, '', 1));
 		}
 	}
 
@@ -107,7 +106,7 @@ if (!empty($blog_cluster))
 		$p_mode = ['mode' => 'latest'];
 
 		$selector =
-			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+			"WHERE tag REGEXP '^{$tag}{$blog_levels}$' " .
 				"AND comment_on_id = 0 " .
 				"AND deleted <> 1 ";
 
@@ -126,7 +125,7 @@ if (!empty($blog_cluster))
 
 		$selector =
 				"INNER JOIN {$prefix}category_assignment c ON (c.object_id = p.page_id) " .
-			"WHERE p.tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+			"WHERE p.tag REGEXP '^{$tag}{$blog_levels}$' " .
 				"AND c.category_id = " . (int) $category_id . " " .
 				"AND c.object_type_id = 1 " .
 				"AND p.comment_on_id = 0 " .
@@ -151,7 +150,7 @@ if (!empty($blog_cluster))
 		$p_mode = ['mode' => 'week'];
 
 		$selector =
-			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+			"WHERE tag REGEXP '^{$tag}{$blog_levels}$' " .
 				"AND created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
 				"AND comment_on_id = 0 " .
 				"AND deleted <> 1 ";
@@ -171,7 +170,7 @@ if (!empty($blog_cluster))
 		$date	= $this->db->date($date);
 
 		$selector =
-			"WHERE tag REGEXP '^{$blog_cluster}{$blog_levels}$' " .
+			"WHERE tag REGEXP '^{$tag}{$blog_levels}$' " .
 				"AND created > " . $this->db->q($date) . " " .
 				"AND comment_on_id = 0 " .
 				"AND deleted <> 1 ";
@@ -206,13 +205,13 @@ if (!empty($blog_cluster))
 			$_category_title = '';
 		}
 
-		if ($this->page['tag'] == $blog_cluster)
+		if ($this->page['tag'] == $tag)
 		{
-			$_title = $this->_t('News') . $_category_title;
+			$_title = $this->page['title'] . $_category_title;
 		}
 		else
 		{
-			$_title = $this->compose_link_to_page($blog_cluster, '', $this->_t('News')) . $_category_title;
+			$_title = $this->compose_link_to_page($tag, '', $this->page['title']) . $_category_title;
 		}
 
 		$tpl->n_title = $_title;
