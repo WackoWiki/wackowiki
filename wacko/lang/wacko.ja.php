@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'You aren\'t allowed to read this page.',
 	'ReadAccessDeniedHintGuest'	=> 'To read this page, you should log in.',
 	'PageDeletedInfo'			=> 'このページは削除されました。',
+	'CommentDeletedInfo'		=> 'このコメントは削除されました。',
 
 	'LastEditedBy'				=> 'Last edited by',
 	'YouAreOwner'				=> 'あなたはこのページの所有者です。',

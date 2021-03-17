@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Sul pole õigusi seda lehte lugeda.',
 	'ReadAccessDeniedHintGuest'	=> 'Selle lehe lugemiseks peate sisse logima.',
 	'PageDeletedInfo'			=> 'See leht on kustutatud.',
+	'CommentDeletedInfo'		=> 'See kommentaar on kustutatud.',
 
 	'LastEditedBy'				=> 'Viimati redigeerinud',
 	'YouAreOwner'				=> 'Sa oled selle lehe omanik.',

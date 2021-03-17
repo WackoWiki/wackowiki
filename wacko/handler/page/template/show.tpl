@@ -49,7 +49,7 @@
 
 [= restore =]
 <div class="msg warning">
-	[ ' _t: PageDeletedInfo ' ]
+	[ ' message ' ]
 	<br><br>
 	<form action="[ ' href: restore ' ]" method="post" name="restore_page">
 		[ ' csrf: restore_page ' ]

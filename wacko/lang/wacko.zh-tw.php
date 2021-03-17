@@ -175,7 +175,8 @@ $wacko_translation = [
 	'RevisionHint'				=> 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied'			=> '您無權閱讀此頁面。',
 	'ReadAccessDeniedHintGuest'	=> 'To read this page, you should log in.',
-	'PageDeletedInfo'			=> 'This page has been deleted.',
+	'PageDeletedInfo'			=> '此頁面已被刪除。 ',
+	'CommentDeletedInfo'		=> '該評論已被刪除。',
 
 	'LastEditedBy'				=> 'Last edited by',
 	'YouAreOwner'				=> '你是本頁的所有者.',

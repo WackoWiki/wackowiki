@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'U heeft geen leesrechten op deze pagina.',
 	'ReadAccessDeniedHintGuest'	=> 'Om deze pagina te lezen, moet je inloggen.',
 	'PageDeletedInfo'			=> 'Deze pagina is verwijderd.',
+	'CommentDeletedInfo'		=> 'Deze opmerking is verwijderd.',
 
 	'LastEditedBy'				=> 'Laatst bewerkt door',
 	'YouAreOwner'				=> 'U bent de eigenaar van deze pagina.',

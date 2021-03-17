@@ -175,7 +175,8 @@ $wacko_translation = [
 	'RevisionHint'				=> '這是一個舊版本的 of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied'			=> '您沒有閱讀該頁的權限.',
 	'ReadAccessDeniedHintGuest'	=> 'To read this page, you should log in.',
-	'PageDeletedInfo'			=> 'This page has been deleted.',
+	'PageDeletedInfo'			=> '本页已被删除。',
+	'CommentDeletedInfo'		=> '此评论已被删除。',
 
 	'LastEditedBy'				=> 'Last edited by',
 	'YouAreOwner'				=> '你是本页的所有者.',

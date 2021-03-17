@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Vous n’êtes pas autorisé(e) à  voir cette page.',
 	'ReadAccessDeniedHintGuest'	=> 'Pour lire cette page, vous devez vous connecter.',
 	'PageDeletedInfo'			=> 'Cette page a été supprimée".',
+	'CommentDeletedInfo'		=> 'Ce commentaire a été supprimé.',
 
 	'LastEditedBy'				=> 'Dernière édition par',
 	'YouAreOwner'				=> 'Vous êtes le propriétaire de cette page.',

@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Δεν επιτρέπετε να αναγνώσετε αυτή την σελίδα.',
 	'ReadAccessDeniedHintGuest'	=> 'Για να διαβάσετε αυτήν τη σελίδα, θα πρέπει να συνδεθείτε.',
 	'PageDeletedInfo'			=> 'Αυτή η σελίδα έχει διαγραφεί.',
+	'CommentDeletedInfo'		=> 'Αυτό το σχόλιο έχει διαγραφεί.',
 
 	'LastEditedBy'				=> 'Τελευταία επεξεργασία από',
 	'YouAreOwner'				=> 'Δεν είσαι ο ιδιοκτήτης αυτής της σελίδας.',

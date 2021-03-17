@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Przepraszamy! Nie masz dostępu do tej strony.',
 	'ReadAccessDeniedHintGuest'	=> 'Aby przeczytać tę stronę, należy się zalogować.',
 	'PageDeletedInfo'			=> 'Ta strona została usunięta.',
+	'CommentDeletedInfo'		=> 'Ten komentarz został usunięty.',
 
 	'LastEditedBy'				=> 'Ostatnio edytowane przez',
 	'YouAreOwner'				=> 'Jesteś autorem tej strony.',

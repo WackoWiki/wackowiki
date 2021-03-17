@@ -59,10 +59,12 @@ if ($this->has_access('read'))
 			{
 				$tpl->restore			= true;
 				$tpl->restore_pageid	= $this->page['page_id'];
+				$tpl->restore_message	= $this->page['comment_on_id'] ? $this->_t('CommentDeletedInfo') : $this->_t('PageDeletedInfo');
 			}
 			else
 			{
-				$message = $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
+				// TODO: it never reaches this point, currently only admins can see pages/comments marked as deleted
+				$message = $this->page['comment_on_id'] ? $this->_t('CommentDeletedInfo') : $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
 				$message .= '<br>';
 				$tpl->n_message = $this->show_message($message, 'warning', false);
 

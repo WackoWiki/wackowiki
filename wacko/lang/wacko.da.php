@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Du har ikke lov til at se denne side.',
 	'ReadAccessDeniedHintGuest'	=> 'For at læse denne side skal du logge ind.',
 	'PageDeletedInfo'			=> 'Denne side er blevet slettet.',
+	'CommentDeletedInfo'		=> 'Denne kommentar er blevet slettet.',
 
 	'LastEditedBy'				=> 'Senest redigeret af',
 	'YouAreOwner'				=> 'Du ejer denne side.',

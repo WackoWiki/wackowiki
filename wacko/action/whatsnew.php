@@ -195,8 +195,8 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 									&& $page['date'] > $user['last_mark']
 										? ' class="viewed"'
 										: '' );
-			$tpl->revisions		= ($page['ctype'] != 2 || $page['comment_on_id'] === 0)
-									? ($this->hide_revisions
+			$tpl->revisions		= ($page['ctype'] != 2)
+									? ($this->hide_revisions || $page['comment_on_id']
 										? $time
 										: $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')))
 									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
@@ -221,9 +221,9 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					$tpl->cluster		= $this->_t('UploadGlobal');
 				}
 
-				$tpl->title		= $this->_t('NewFileAdded');
+				$tpl->title		= $page['deleted'] ? $this->_t('FileDeleted') : $this->_t('NewFileAdded');
 				$tpl->alt		= 'file';
-				$tpl->class		= 'btn-attachment';
+				$tpl->class		= $page['deleted'] ? 'btn-delete' : 'btn-attachment';
 				$tpl->link		= $this->link($path2 . $page['title'], '', $this->shorten_string($page['title']), '', 0, 1);
 			}
 			// deleted
@@ -234,7 +234,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 					$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
 				}
 
-				$tpl->title		= $this->_t('NewCommentAdded');
+				$tpl->title		= $page['comment_on_page'] ? $this->_t('CommentDeleted') : $this->_t('PageDeleted');
 				$tpl->alt		= 'deleted';
 				$tpl->class		= 'btn-delete';
 				$tpl->link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);

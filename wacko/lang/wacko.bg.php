@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Вие нямате права за да четете тази страница.',
 	'ReadAccessDeniedHintGuest'	=> 'За да прочетете тази страница, трябва да влезете.',
 	'PageDeletedInfo'			=> 'Тази страница е изтрита.',
+	'CommentDeletedInfo'		=> 'Този коментар е изтрит.',
 
 	'LastEditedBy'				=> 'Последна редакция на',
 	'YouAreOwner'				=> 'Собственик: Вие. ',

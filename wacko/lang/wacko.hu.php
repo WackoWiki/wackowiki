@@ -176,6 +176,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Nem olvashatja el ezt az oldalt.',
 	'ReadAccessDeniedHintGuest'	=> 'Az oldal elolvasásához be kell jelentkeznie.',
 	'PageDeletedInfo'			=> 'Ezt az oldalt törölték.',
+	'CommentDeletedInfo'		=> 'Ezt a megjegyzést törölték.',
 
 	'LastEditedBy'				=> 'Utoljára szerkesztette',
 	'YouAreOwner'				=> 'Ön a tulajdonosa ennek az oldalnak.',
