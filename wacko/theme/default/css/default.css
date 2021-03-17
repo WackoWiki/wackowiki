@@ -1566,6 +1566,7 @@ article.newsarticle:hover {
 	border-bottom: 1px dotted #666666;
 	height: 30px;
 	margin-top: 15px;
+	width: 100%;
 }
 
 .pagination {

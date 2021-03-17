@@ -198,20 +198,13 @@ if (!empty($tag))
 
 		if (isset($category_title))
 		{
-			$_category_title = ' ' . $this->_t('For') . ' ' . $this->_t('Category') . ' «' . $category_title['category'] . '»';
+			$_category_title	= ' ' . $this->_t('For') . ' ' . $this->_t('Category') . ' «' . $category_title['category'] . '»';
+			$_title				= $this->compose_link_to_page($tag, '', $this->page['title']) . $_category_title;
 		}
 		else
 		{
-			$_category_title = '';
-		}
-
-		if ($this->page['tag'] == $tag)
-		{
-			$_title = $this->page['title'] . $_category_title;
-		}
-		else
-		{
-			$_title = $this->compose_link_to_page($tag, '', $this->page['title']) . $_category_title;
+			$_category_title	= '';
+			$_title				= $this->page['title'] . $_category_title;
 		}
 
 		$tpl->n_title = $_title;
