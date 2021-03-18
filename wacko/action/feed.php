@@ -24,7 +24,6 @@ if (!defined('IN_WACKO'))
 
 */
 // TODO:
-//   * pagination
 //   * local image cache
 //   * feed_acl
 
@@ -33,6 +32,8 @@ if (!isset($nomark))	$nomark	= 0;
 if (!isset($title))		$title	= '';
 if (!isset($max))		$max	= 5;
 if (!isset($time))		$time	= 1;
+
+$p_mode				= [];
 
 // Include SimplePie
 include_once 'lib/SimplePie/autoloader.php';
@@ -157,12 +158,16 @@ else
 			}
 		}
 
-		$current = 1;
+		$count		= $feed->get_item_quantity();
+		$pagination	= $this->pagination(($count ?? null), $max, 'p', $p_mode);
+
+		// pagination
+		$tpl->pagination_text = $pagination['text'];
 
 		$tpl->enter('i_');
 
 		// go through all of the items in the feed
-		foreach ($feed->get_items() as $item)
+		foreach ($feed->get_items($pagination['offset'], $max) as $item)
 		{
 			if ($item->get_date())
 			{
@@ -215,15 +220,6 @@ else
 					$tpl->e_f_size = $enclosure->get_size();
 					$tpl->e_f_type = $enclosure->get_type();
 				}
-			}
-
-			if (($max) && ($current == $max))
-			{
-				break;
-			}
-			else
-			{
-				$current++;
 			}
 		}
 

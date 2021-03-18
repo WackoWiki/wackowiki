@@ -48,4 +48,8 @@
 		[ ' nonstatic ' ]
 		</div>
 	=]
+	[''' pagination ''']
+
+[= pagination =]
+<nav class="pagination">[ ' text ' ]</nav>
 	
