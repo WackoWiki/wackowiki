@@ -252,7 +252,7 @@ $highlight_this = function ($text, $words)
 		else
 		{
 			// escape bad regex characters
-			$word		= preg_quote($word);
+			$word		= preg_quote($word, '/');
 
 			// highlight uppercase and lowercase correctly
 			$text		= preg_replace('/(' . $word . ')/ui', '<mark class="highlight">$1</mark>', $text, -1 , $count);
