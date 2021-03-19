@@ -4791,19 +4791,20 @@ class Wacko
 		return "</form>\n";
 	}
 
-	function validate_post_token() : bool
+	function validate_post_token($tag = null) : bool
 	{
 		if ($_POST
 			&& !$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
 		{
 			$form_name	= (string) ($_POST['_action'] ?? '');
+			$tag		= $tag ? ' -> <code>' . $tag . '</code>' : '';
 			$_POST		= [];
 			$_REQUEST	= $_GET;
 
 			$this->set_message($this->_t('FormInvalid'), 'error');
 			$this->log(1, Ut::perc_replace(
 				$this->_t('LogInvalidFormToken', SYSTEM_LANG),
-				'<code>' . $form_name . '</code>'));
+				'<code>' . $form_name . '</code>' . $tag));
 
 			return false;
 		}
@@ -6718,7 +6719,7 @@ class Wacko
 		}
 
 		// clean _POST if no csrf token
-		$this->validate_post_token();
+		$this->validate_post_token($tag);
 
 		$user	= [];
 
