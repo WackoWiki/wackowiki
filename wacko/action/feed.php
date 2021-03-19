@@ -15,6 +15,7 @@ if (!defined('IN_WACKO'))
 			"text" - displayed as title
 			"no" - means show no title
 			empty title - title taken from feed
+		[images=0] - text only for better readability
 		[max=x]
 		[time=1]
 		[nomark=1]
@@ -30,6 +31,7 @@ if (!defined('IN_WACKO'))
 if (!isset($url))		$url	= null;
 if (!isset($nomark))	$nomark	= 0;
 if (!isset($title))		$title	= '';
+if (!isset($images))	$images	= 1;
 if (!isset($max))		$max	= 5;
 if (!isset($time))		$time	= 1;
 
@@ -57,6 +59,13 @@ else
 	{
 		$count_feeds	= count($urlset);
 	}
+
+	// strip images from an item, do profanity censoring, customize it for your requirements
+	$item_content = function ($content)
+	{
+		// replace all images in the content
+		return preg_replace('/<img([^>]*)>/ui', '', $content);
+	};
 
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE)
 	// Thus all configs will be same for all RSS-feeds
@@ -203,7 +212,9 @@ else
 				$tpl->t_interval	= $this->get_time_interval($date);
 			}
 
-			$tpl->content = $item->get_content();
+			$tpl->content = $images
+				? $item->get_content()
+				: $item_content($item->get_content());
 
 			if ($enclosure = $item->get_enclosure())
 			{
