@@ -222,14 +222,14 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			{
 				if ($page['page_id']) // !$global
 				{
-					$path2			= '_file:/' . $page['tag'] . '/';
-					$tpl->to_link	= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
+					$path2				= '_file:/' . $page['tag'] . '/';
+					$tpl->to_link		= $this->link('/' . $page['comment_on_page'], '', $page['title_on_page'], '', 0, 1);
 					$tpl->cluster_link	= $get_cluster($page['comment_on_page']);
 				}
 				else
 				{
-					$path2			= '_file:/';
-					$tpl->cluster	= $this->_t('UploadGlobal');
+					$path2				= '_file:/';
+					$tpl->cluster_link	= $this->_t('UploadGlobal');
 				}
 
 				$tpl->i_title		= $page['deleted'] ? $this->_t('FileDeleted') : $this->_t('NewFileAdded');

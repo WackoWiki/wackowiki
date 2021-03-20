@@ -369,6 +369,9 @@ function admin_user_users(&$engine, &$module)
 					$engine->db->sql_query(
 						"DELETE FROM " . $prefix . "watch " .
 						"WHERE user_id = " . (int) $user_id);
+					$engine->db->sql_query(
+						"DELETE FROM " . $prefix . "auth_token " .
+						"WHERE user_id = " . (int) $user_id);
 
 					// remove user space
 					$user_space = $engine->db->users_page . '/' . $user['user_name'];
