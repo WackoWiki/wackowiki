@@ -63,7 +63,10 @@ if (($user = $this->get_user()))
 		$message .= $this->_t('TrafficProtection') .
 			' <code>' .
 			(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'
-				? $this->_t('On') . ' :: '. ($_SERVER['SSL_CIPHER'] ?? '') . ' (' . ($_SERVER['SSL_PROTOCOL'] ?? '') . ')'
+				? $this->_t('On') .
+					(isset($_SERVER['SSL_PROTOCOL'])
+						? ', '. $_SERVER['SSL_PROTOCOL'] . ' (' . ($_SERVER['SSL_CIPHER'] ?? '') . ')'
+						: '')
 				: $this->_t('Off')
 			) .
 			'</code>' . "<br>\n";
@@ -71,7 +74,7 @@ if (($user = $this->get_user()))
 
 	if (!empty($message))
 	{
-		$this->set_message($message);
+		$this->set_message($message , 'notice');
 	}
 
 	$tpl->u_logout	= $this->href('', '', 'action=logout');
