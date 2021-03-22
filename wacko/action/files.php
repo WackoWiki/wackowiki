@@ -25,12 +25,10 @@ $ppage		= '';
 $files		= [];
 $object_ids	= [];
 
-if (!isset($picture))	$picture	= null;	// depreciated
-$media				= $picture;				// replaces picture with media
-
 if (!isset($nomark))	$nomark		= 0;
 if (!isset($form))		$form		= 0;	// show search form
 if (!isset($order))		$order		= '';
+if (!isset($cluster))	$cluster	= 0;	// cluster attachments
 if (!isset($global))	$global		= 0;	// global attachments
 if (!isset($all))		$all		= 0;	// all attachments
 if (!isset($linked))	$linked		= '';	// file link in page
@@ -41,7 +39,7 @@ if (!isset($method))	$method		= '';	// for use in page handler
 if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
 if (!isset($deleted))	$deleted	= 0;
 if (!isset($track))		$track		= 0;
-if (!isset($media))		$media		= null;
+if (!isset($media))		$media		= ($picture ?? null); // replaces depreciated picture with media
 if (!isset($max))		$max		= null;
 if (!isset($type_id))	$type_id	= null;
 
@@ -119,7 +117,10 @@ if ($can_view)
 			"WHERE ".
 		($all || $file_link
 			? "f.page_id IS NOT NULL "
-			: "f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " "
+			: ($cluster
+				? "p.tag LIKE " . $this->db->q($tag . '/%') . " "
+				: "f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " "
+				)
 			) . " " .
 		($phrase
 			? "AND (f.file_name LIKE " . $this->db->q('%' . $phrase . '%') . " " .
@@ -146,6 +147,7 @@ if ($can_view)
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .
 		"FROM " . $this->db->table_prefix . "file f " .
+			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		$selector, true);
 
@@ -199,7 +201,7 @@ if ($can_view)
 	if ($results && $form)
 	{
 		// search
-		$files_filter		= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? $_GET['files'] : '';
+		$files_filter		= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'cluster', 'global', 'linked'])) ? $_GET['files'] : '';
 
 		$tpl->s_filter		= $files_filter;
 		$tpl->s_phrase		= Ut::html(($_GET['phrase'] ?? ''));
@@ -270,33 +272,35 @@ if ($can_view)
 				$hits	= '';
 			}
 
+			$tpl->enter('r_');
+
 			// display file
-			$tpl->r_link = $link;
+			$tpl->link = $link;
 
 			if ($media)
 			{
 				// get context for filter
-				$method_filter	= $this->method == 'show' ? '' : $this->method;
-				$param_filter	= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'global', 'linked'])) ? ['files' => $_GET['files']] : [];
+				$method_filter		= $this->method == 'show' ? '' : $this->method;
+				$param_filter		= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'cluster', 'global', 'linked'])) ? ['files' => $_GET['files']] : [];
 
 				// display picture meta data
-				#$tpl->r_p_file			= $file; // result array: [ ' file.file_id ' ]
-				$tpl->r_p_name			= $this->shorten_string($file['file_name'], $file_name_maxlen);
-				$tpl->r_p_desc			= $desc;
-				$tpl->r_p_meta			= ($file['picture_w']
-											? number_format($file['picture_w'], 0, ',', '.') . ' × ' . number_format($file['picture_h'], 0, ',', '.') . ' px'
-											: $hits);
-				$tpl->r_p_size			= $file_size;
-				$tpl->r_p_user			= $this->user_link($file['user_name'], true, false);
-				$tpl->r_p_dt			= $dt;
-				$tpl->r_p_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter);
+				#$tpl->p_file		= $file; // result array: [ ' file.file_id ' ]
+				$tpl->p_name		= $this->shorten_string($file['file_name'], $file_name_maxlen);
+				$tpl->p_desc		= $desc;
+				$tpl->p_meta		= ($file['picture_w']
+										? number_format($file['picture_w'], 0, ',', '.') . ' × ' . number_format($file['picture_h'], 0, ',', '.') . ' px'
+										: $hits);
+				$tpl->p_size		= $file_size;
+				$tpl->p_user		= $this->user_link($file['user_name'], true, false);
+				$tpl->p_dt			= $dt;
+				$tpl->p_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter);
 			}
 			else
 			{
 				// display file meta data
-				$tpl->r_g_desc			= $desc;
-				$tpl->r_g_meta			= $file_size . ($hits ? ', ' . $hits : '');
-				$tpl->r_g_dt			= $dt;
+				$tpl->g_desc		= $desc;
+				$tpl->g_meta		= $file_size . ($hits ? ', ' . $hits : '');
+				$tpl->g_dt			= $dt;
 			}
 
 			// icons ['handler' => ['title, class]]
@@ -314,10 +318,12 @@ if ($can_view)
 
 			foreach ($icons as $handler => $icon)
 			{
-				$tpl->r_i_info		= $this->href('filemeta', $page, ['m' => $handler, 'file_id' => $file_id]);
-				$tpl->r_i_title		= $this->_t($icon[0]);
-				$tpl->r_i_class		= $icon[1];
+				$tpl->i_info		= $this->href('filemeta', $page, ['m' => $handler, 'file_id' => $file_id]);
+				$tpl->i_title		= $this->_t($icon[0]);
+				$tpl->i_class		= $icon[1];
 			}
+
+			$tpl->leave(); // r_
 
 			unset($link);
 			unset($desc);

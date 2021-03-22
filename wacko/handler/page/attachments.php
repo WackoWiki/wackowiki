@@ -19,6 +19,7 @@ if ($this->has_access('read')
 	$tabs			= [
 				''			=> 'AttachmentsLinked',
 				'local'		=> 'AttachmentsToPage',
+				/* 'cluster'	=> 'AttachmentsToCluster', */
 				'global'	=> 'AttachmentsGlobal',
 				'all'		=> 'AttachmentsAll',
 			];
@@ -37,20 +38,24 @@ if ($this->has_access('read')
 
 	if ($mode == 'global')
 	{
-		$tpl->files	= $this->action('files', ['global' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'global']]);
+		$tpl->files	= $this->action('files', ['global' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'global']]);
 	}
 	else if ($mode == 'all')
 	{
-		$tpl->files	= $this->action('files', ['all' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'all']]);
+		$tpl->files	= $this->action('files', ['all' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'all']]);
 	}
 	else if ($mode == 'local')
 	{
-		$tpl->files	= $this->action('files', ['picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'local']]);
+		$tpl->files	= $this->action('files', ['media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'local']]);
 	}
+	/* else if ($mode == 'cluster')
+	{
+		$tpl->files	= $this->action('files', ['cluster' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'cluster']]);
+	} */
 	else
 	{
 		// to page
-		$tpl->files	= $this->action('files', ['linked' => 1, 'picture' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1]);
+		$tpl->files	= $this->action('files', ['linked' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1]);
 	}
 
 	$tpl->leave();
