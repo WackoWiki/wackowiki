@@ -365,7 +365,7 @@ $wacko_translation = [
 	'NextVersion'				=> 'Nyere version',
 
 	'ShowDifferencesButton'		=> 'Vis ændringer',
-	'CancelDifferencesButton'	=> 'Tilbage til noden / Fortryd',
+	'CancelReturnButton'		=> 'Tilbage til noden / Fortryd',
 	'Comparison'				=> 'Sammenligning for %1',
 	'RevisionAsOf'				=> 'Version %1 i',
 	'SimpleDiffAdditions'		=> 'Tilføjelser:',

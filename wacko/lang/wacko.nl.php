@@ -365,7 +365,7 @@ $wacko_translation = [
 	'NextVersion'				=> 'Nieuwere versie',
 
 	'ShowDifferencesButton'		=> 'Laat wijzigingen zien',
-	'CancelDifferencesButton'	=> 'Terug naar pagina / Annuleren',
+	'CancelReturnButton'		=> 'Terug naar pagina / Annuleren',
 	'Comparison'				=> 'Vergelijking tussen %1',
 	'RevisionAsOf'				=> 'Versie %1 van',
 	'SimpleDiffAdditions'		=> 'Aanvullingen:',

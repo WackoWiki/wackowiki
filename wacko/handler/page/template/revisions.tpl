@@ -61,7 +61,7 @@
 			</ul><br>
 			[''' pagination ''']
 			<a href="[ ' href: ' ]" class="btn-link">
-				<button type="button">[ ' _t: CancelDifferencesButton ' ]</button>
+				<button type="button">[ ' _t: CancelReturnButton ' ]</button>
 			</a>
 		</form>
 	=]

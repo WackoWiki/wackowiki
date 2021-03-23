@@ -365,7 +365,7 @@ $wacko_translation = [
 	'NextVersion'				=> '下一修訂',
 
 	'ShowDifferencesButton'		=> '檢視差異',
-	'CancelDifferencesButton'	=> '取消並返回頁面',
+	'CancelReturnButton'		=> '取消並返回頁面',
 	'Comparison'				=> 'Difference between revisions for %1',
 	'RevisionAsOf'				=> 'Revision %1 as of',
 	'SimpleDiffAdditions'		=> '新增內容:',

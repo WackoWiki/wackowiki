@@ -365,7 +365,7 @@ $wacko_translation = [
 	'NextVersion'				=> 'Újabb változat',
 
 	'ShowDifferencesButton'		=> 'Összehasonlítás módja',
-	'CancelDifferencesButton'	=> 'Megszakítás és visszatérés az oldal',
+	'CancelReturnButton'		=> 'Megszakítás és visszatérés az oldal',
 	'Comparison'				=> 'Comparison for %1',
 	'RevisionAsOf'				=> 'Revision %1 as of',
 	'SimpleDiffAdditions'		=> 'Additions:',
