@@ -4,7 +4,7 @@
 		<em>[ ' _t: SourcePageDoesntExist ' ] ([ ' link ' ])</em>
 	=]
 	[= forbidden _ =
-		<em>[ ' _t: NoAccessToSourcePage ' ]</em>
+		<em>[ ' _t: ReadAccessDenied ' ]</em>
 	=]
 	[= mark =
 		[ ' nonstatic ' ]
