@@ -562,19 +562,6 @@ footer {
 	visibility: visible;
 }
 
-/* Comment author and date */
-.comment-meta {
-	color: #AAAAAA;
-	padding-bottom: 20px;
-	float: right;
-	list-style-type: none;
-}
-
-.comment-tools img {
-	float: right;
-	padding: 2px;
-}
-
 li.comment {
 	overflow: hidden;
 }
@@ -595,11 +582,23 @@ ol#comments ul ul ul {
 	list-style: square;
 }
 
+/* Comment author and date */
+.comment-meta {
+	color: #AAAAAA;
+	padding-bottom: 20px;
+	float: right;
+}
 .comment-meta li {
 	border: medium none;
 	margin: 0;
 	padding: 0;
 	width: 320px;
+	list-style-type: none;
+}
+
+.comment-tools img {
+	float: right;
+	padding: 2px;
 }
 
 .comment-tool,
