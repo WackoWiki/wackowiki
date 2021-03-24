@@ -22,7 +22,7 @@ $edit_note	= Ut::perc_replace($this->_t('ClonedFrom'), $this->tag);
 
 if (@$_POST['_action'] === 'clone_page')
 {
-	$to = $_POST['clone_name'];
+	$to = (string) ($_POST['clone_name'] ?? '');
 
 	if ($error = $this->sanitize_new_page_tag($to, $from))
 	{

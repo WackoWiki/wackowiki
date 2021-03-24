@@ -80,7 +80,7 @@ if ($this->is_admin())
 					$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 					// save imported page
-					$body_r		= $this->save_page($tag, $title, $body);
+					$body_r		= $this->save_page($tag, $body, $title);
 					$page_id	= $this->get_page_id($tag);
 
 					// now we render it internally in the context of imported

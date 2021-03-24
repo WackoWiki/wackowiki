@@ -1666,7 +1666,7 @@ class Wacko
 	 *
 	 * @return string	$body_r
 	 */
-	function save_page($tag, $title, $body, $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false) : ?string
+	function save_page($tag, $body, $title = '', $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false) : ?string
 	{
 		$desc = '';
 
@@ -2333,7 +2333,7 @@ class Wacko
 		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
 		{
 			// profile title = user_name
-			$this->save_page($tag, $user_name, $user_page_template, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
+			$this->save_page($tag, $user_page_template, $user_name, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
 		}
 	}
 
@@ -7224,7 +7224,7 @@ class Wacko
 
 		return
 			// save
-			$this->save_page($new_tag, $page['title'], $page['body'], $edit_note, 0, 0, 0, 0, $page['page_lang'], false, false);
+			$this->save_page($new_tag, $page['body'], $page['title'], $edit_note, 0, 0, 0, 0, $page['page_lang'], false, false);
 	}
 
 	function rename_page($tag, $new_tag)
