@@ -211,7 +211,15 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					$tpl->m_image		= $this->link($path . $file['file_name'], '', '', '', '', '', '', false);
 				}
 
-				$tpl->syntax		= $path . $file['file_name'];
+				if ($file['page_id'])
+				{
+					// relative path
+					$tpl->s_syntax	= 'file:' . $file['file_name'];
+				}
+
+				// absolute path
+				$tpl->s_syntax		= $path . $file['file_name'];
+
 				$tpl->desc			= $format_desc($file['file_description']);
 				$tpl->caption		= $format_desc($file['caption']);
 				$tpl->size			= $this->binary_multiples($file['file_size'], false, true, true);

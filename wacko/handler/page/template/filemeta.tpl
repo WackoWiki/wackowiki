@@ -86,7 +86,11 @@
 			<table class="filemeta tbl-fixed">
 				<tr>
 					<th scope="row">[ ' _t: FileSyntax ' ]:</th>
-					<td><code>[ ' syntax ' ]</code></td>
+					<td>
+					[= s _ =
+						<code>[ ' syntax ' ]</code><br>
+					=]
+					</td>
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: FileDesc ' ]:</th>
