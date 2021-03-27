@@ -105,6 +105,7 @@ $keywords = [
 	'speak-numeral',
 	'speak-punctuation',
 	'speech-rate',
+	'src',
 	'stress',
 	'table-layout',
 	'text-align',

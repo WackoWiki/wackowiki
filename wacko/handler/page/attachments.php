@@ -23,7 +23,8 @@ if ($this->has_access('read')
 				'global'	=> 'AttachmentsGlobal',
 				'all'		=> 'AttachmentsAll',
 			];
-	$mode			= @$_GET[$mod_selector];
+	$mode			= (string) ($_GET[$mod_selector] ?? '');
+	$phrase			= (string) ($_GET['phrase'] ?? '');
 
 	if (!array_key_exists($mode, $tabs))
 	{
@@ -34,7 +35,7 @@ if ($this->has_access('read')
 
 	$tpl->upload	= $this->can_upload();
 	$tpl->header	= $this->_t($tabs[$mode]);
-	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', [], $mod_selector);
+	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', ['phrase' => $phrase], $mod_selector);
 
 	if ($mode == 'global')
 	{

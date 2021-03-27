@@ -47,8 +47,8 @@ $order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
 
 // filter categories
-$phrase 			= (string) ($_GET['phrase'] ?? '');
-$type_id			= (int) ($_GET['type_id'] ?? $type_id);
+$phrase				= (string)	($_GET['phrase'] ?? '');
+$type_id			= (int)		($_GET['type_id'] ?? $type_id);
 $category_id		= (int) @$_GET['category_id'];
 $file_link			= (int) $linked;
 
@@ -198,13 +198,13 @@ if ($can_view)
 
 	$results = count($files);
 
-	if ($results && $form)
+	if (($results || $phrase) && $form)
 	{
 		// search
 		$files_filter		= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'cluster', 'global', 'linked'])) ? $_GET['files'] : '';
 
 		$tpl->s_filter		= $files_filter;
-		$tpl->s_phrase		= Ut::html(($_GET['phrase'] ?? ''));
+		$tpl->s_phrase		= Ut::html($phrase);
 	}
 
 	if (!$nomark)
