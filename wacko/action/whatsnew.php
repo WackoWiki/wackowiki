@@ -212,9 +212,9 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 										: $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')))
 									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
 
-			if (($edit_note = $page['edit_note']))
+			if ($page['edit_note'])
 			{
-				$tpl->edit_note = $edit_note;
+				$tpl->edit_note = $page['edit_note'];
 			}
 
 			// new file

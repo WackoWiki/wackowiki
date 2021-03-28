@@ -30,7 +30,13 @@ function admin_config_appearance(&$engine, &$module)
 		<?php echo $engine->_t('AppearanceSettingsInfo');?>
 	</p>
 	<br>
-<?php
+	<?php
+	// functions
+	$valid_theme = function ($theme) use ($engine)
+	{
+		return in_array($theme, $engine->available_themes()) ? $theme : $engine->db->theme;
+	};
+
 	$remove_file = function ($file) use ($engine)
 	{
 		if (!in_array($file, ['favicon', 'logo']))
@@ -191,8 +197,8 @@ function admin_config_appearance(&$engine, &$module)
 		}
 		else
 		{
-			$config['logo_height']			= (int) $_POST['logo_height'];
-			$config['logo_width']			= (int) $_POST['logo_width'];
+			$config['logo_height']			= (int) ($_POST['logo_height']	?? null);
+			$config['logo_width']			= (int) ($_POST['logo_width']	?? null);
 		}
 
 		if (isset($_FILES['favicon']['tmp_name']) && is_uploaded_file($_FILES['favicon']['tmp_name']))
@@ -201,8 +207,8 @@ function admin_config_appearance(&$engine, &$module)
 		}
 
 		#Ut::debug_print_r($_POST);
-		$config['logo_display']				= (int) $_POST['logo_display'];
-		$config['theme']					= (string) $_POST['theme'];
+		$config['logo_display']				= (int) ($_POST['logo_display'] ?? null);
+		$config['theme']					= (string) $valid_theme(($_POST['theme'] ?? null));
 
 		if (isset($_POST['allow_themes']) && is_array($_POST['allow_themes']))
 		{
@@ -213,7 +219,7 @@ function admin_config_appearance(&$engine, &$module)
 			$config['allow_themes'] = '0';
 		}
 
-		$config['allow_themes_per_page']	= (int) $_POST['themes_per_page'];
+		$config['allow_themes_per_page']	= (int) ($_POST['themes_per_page'] ?? null);
 
 		$engine->config->_set($config);
 

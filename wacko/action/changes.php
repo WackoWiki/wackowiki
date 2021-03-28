@@ -101,16 +101,16 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 				$tpl->l_review_href = $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'));
 			}
 
-			if (($edit_note = $page['edit_note']))
+			if (($page['edit_note']))
 			{
-				$tpl->l_edit_note = $edit_note;
+				$tpl->l_edit_note = $page['edit_note'];
 			}
 
 			# $tpl->l_delta =  $this->delta_formatted($size_delta); // TODO: looks odd here
 		}
 	}
 
-	$tpl->leave();
+	$tpl->leave(); // page_
 }
 else
 {

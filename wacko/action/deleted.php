@@ -43,9 +43,9 @@ if ($this->is_admin())
 					$tpl->day = $curday = $day;
 				}
 
-				if (($edit_note = $page['edit_note']) !== '')
+				if ($page['edit_note'])
 				{
-					$tpl->l_n_text = $edit_note;
+					$tpl->l_n_text = $page['edit_note'];
 				}
 
 				// print entry
