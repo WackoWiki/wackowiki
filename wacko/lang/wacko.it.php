@@ -730,6 +730,8 @@ $wacko_translation = [
 	'UsersRevisionsMade'		=> 'Revisioni fatte',
 	'UsersDocsSortName'			=> '[Ordina per nome]',
 	'UsersDocsSortDate'			=> '[Ordina per data di creazione]',
+	'UsersChangesSortAsc'		=> '[Sort ascending]',
+	'UsersChangesSortDesc'		=> '[Sort descending]',
 	'UsersSessionNA'			=> '[non registrato]',
 	'UsersSessionHidden'		=> '[nascosto]',
 	'UsersIntercomSubject'		=> 'Soggetto',
@@ -995,9 +997,9 @@ $wacko_translation = [
 	// XML / RSS autodiscovery
 	'ChangesTitleXML'			=> ' - Ultimi modifiche',
 	'ChangesXML'				=> 'Recent changes to the ',
-	'CommentsTitleXML'			=> ' - Recent comments',
+	'CommentsTitleXML'			=> ' - Commenti recenti',
 	'CommentsXML'				=> 'Recent comments to the ',
-	'NewsTitleXML'				=> ' - Recent news',
+	'NewsTitleXML'				=> ' - Notizie recenti',
 	'NewsXML'					=> 'Recent news to the ',
 	'PageRevisionsXML'			=> 'Revisioni di ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
@@ -1005,7 +1007,7 @@ $wacko_translation = [
 
 	'ChangesFeed'				=> 'Modifiche',
 	'CommentsFeed'				=> 'Commenti',
-	'NewsFeed'					=> 'News',
+	'NewsFeed'					=> 'Notizie',
 	'RevisionsFeed'				=> 'Revisioni di ',
 
 	'LastModification'			=> 'Ultima modifica',

@@ -31,7 +31,7 @@ $selector =
 		  "LEFT JOIN " . $this->db->table_prefix . "category c ON (k.category_id = c.category_id) "
 		: "") . " " .
 		"WHERE ".
-		"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
+			"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
 		"AND f.deleted <> 1 " .
 	($owner
 		? "AND u.user_name = " . $this->db->q($owner) . " "
@@ -49,16 +49,16 @@ $selector =
 
 $count = $this->db->load_single(
 	"SELECT COUNT(f.file_id) AS n " .
-		"FROM " . $this->db->table_prefix . "file f " .
+	"FROM " . $this->db->table_prefix . "file f " .
 	$selector, true);
 
 if ($count['n'])
 {
 	$file = $this->db->load_single(
 		"SELECT f.file_id, f.page_id, f.file_name, p.tag " .
-			"FROM " . $this->db->table_prefix . "file f " .
-				"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"FROM " . $this->db->table_prefix . "file f " .
+			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 		$selector .
 		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
 		, true);

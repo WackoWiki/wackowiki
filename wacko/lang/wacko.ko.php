@@ -730,6 +730,8 @@ $wacko_translation = [
 	'UsersRevisionsMade'		=> 'Revisions made',
 	'UsersDocsSortName'			=> '[Sort by name]',
 	'UsersDocsSortDate'			=> '[Sort by creation date]',
+	'UsersChangesSortAsc'		=> '[Sort ascending]',
+	'UsersChangesSortDesc'		=> '[Sort descending]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[숨김]',
 	'UsersIntercomSubject'		=> '제목',
@@ -966,7 +968,7 @@ $wacko_translation = [
 	],
 	'LicenseMeta'				=> [
 		'1'		=> '퍼블릭 도메인',
-		'2'		=> 'Some rights reserved',
+		'2'		=> '일부 권리가 보호되어 있습니다.',
 		'3'		=> 'All Rights Reserved',
 	],
 

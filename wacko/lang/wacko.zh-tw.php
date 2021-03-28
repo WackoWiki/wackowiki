@@ -730,6 +730,8 @@ $wacko_translation = [
 	'UsersRevisionsMade'		=> 'Revisions made',
 	'UsersDocsSortName'			=> '[Sort by name]',
 	'UsersDocsSortDate'			=> '[Sort by creation date]',
+	'UsersChangesSortAsc'		=> '[Sort ascending]',
+	'UsersChangesSortDesc'		=> '[Sort descending]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[隱藏]',
 	'UsersIntercomSubject'		=> '標題',
@@ -965,9 +967,9 @@ $wacko_translation = [
 		'10'	=> 'All Rights Reserved',
 	],
 	'LicenseMeta'				=> [
-		'1'		=> 'Public domain',
-		'2'		=> 'Some rights reserved',
-		'3'		=> 'All Rights Reserved',
+		'1'		=> '公共網域',
+		'2'		=> '保留部分權利',
+		'3'		=> '版權所有 不得轉載',
 	],
 
 	// Cache
