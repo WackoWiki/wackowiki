@@ -60,8 +60,6 @@ class Feed
 		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
 		$xml .= '</image>' . "\n";
 		$xml .= '<language>' . $this->lang . '</language>' . "\n";
-		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
-		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
 		if ([$pages, ] = $this->engine->load_changed())
 		{
@@ -160,8 +158,6 @@ class Feed
 		$xml .= '<width>' . $this->engine->db->logo_width . '</width>' . "\n";
 		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
 		$xml .= '</image>' . "\n";
-		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
-		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
 		$i = 0;
 
@@ -245,8 +241,6 @@ class Feed
 		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
 		$xml .= '</image>' . "\n";
 		$xml .= '<language>' . $this->lang . '</language>' . "\n";
-		#$xml .= '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
-		#$xml .= '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
 
 		if ($comments = $this->engine->load_comment())
 		{

@@ -20,9 +20,6 @@ $tpl->date		= date('r');
 $tpl->lang		= $this->page_lang;
 $tpl->logo		= Ut::join_path(IMAGE_DIR, $this->db->site_logo);
 
-#echo '<docs>http://www.rssboard.org/rss-specification</docs>' . "\n";
-#echo '<generator>WackoWiki ' . WACKO_VERSION . '</generator>' . "\n";
-
 if ($this->has_access('read'))
 {
 	// load revisions for this page except minor edits
