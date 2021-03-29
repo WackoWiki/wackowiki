@@ -1550,6 +1550,7 @@ tr.lined:hover {
 	width: 100%;
 }
 
+article.feed:hover,
 article.newsarticle:hover {
 	background: #E7F9FF;
 }

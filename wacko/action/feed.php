@@ -83,6 +83,12 @@ else
 	// Handle it all - goes after init()
 	$feed->handle_content_type();
 
+
+	if ($feed->error())
+	{
+		$error = $feed->error();
+	}
+
 	if (!$nomark)
 	{
 		$tpl->mark		= true;
@@ -91,10 +97,13 @@ else
 
 	if (!$feed->get_title() && $count_feeds == 1)
 	{
-		$tpl->error		= true;
+		$tpl->error			= true;
+		$tpl->error_message	= $error;
 	}
 	else
 	{
+		$tpl->error_message	= $error;
+
 		$class = ' class="feed-element-title"';
 
 		if ($title != 'no')
@@ -107,7 +116,6 @@ else
 						: Ut::perc_replace($this->_t('FeedLastItems'), $max));
 			}
 
-			// make nice if $nomark == 1
 			if ($nomark)
 			{
 				$tpl->enter('nomark_');
@@ -167,11 +175,14 @@ else
 			}
 		}
 
-		$count		= $feed->get_item_quantity();
-		$pagination	= $this->pagination(($count ?? null), $max, 'p', $p_mode);
+		// we using a parameter token here to sort out multiple instances
+		$param_token	= substr(hash('sha1', $url . $nomark . $time . $max), 0, 8);
+		$count			= $feed->get_item_quantity();
+		$pagination		= $this->pagination(($count ?? null), $max, 'p', $p_mode + ['#' => $param_token]);
 
 		// pagination
-		$tpl->pagination_text = $pagination['text'];
+		$tpl->pagination_text	= $pagination['text'];
+		$tpl->token				= $param_token;
 
 		$tpl->enter('i_');
 

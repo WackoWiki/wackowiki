@@ -2,7 +2,7 @@
 	[= nourl _ =
 		<p><em>[ ' _t: FeedNoURL ' ]</em></p>
 	=]
-
+	<a id="[ ' token ' ]"></a>
 	[= mark _ =
 		<div class="layout-box" style="display: table;">
 			<p>
@@ -11,7 +11,7 @@
 	=]
 
 	[= error _ =
-		<p><em>[ ' _t: FeedError ' ]</em></p>
+		<p><em>[ ' _t: FeedError ' ]</em><br>[ ' message ' ]</p>
 	=]
 
 	[= nomark _ =
@@ -52,4 +52,3 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
-	

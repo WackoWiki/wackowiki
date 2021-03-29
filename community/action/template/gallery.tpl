@@ -43,7 +43,7 @@
 		</div>
 	=]
 	[= item _ =
-		<a id="[ ' token ' ]"></a> <a href="[ ' href ' ]">← [ ' _t: ToOverview ' ]</a>
+		<a id="[ ' token ' ]" href="[ ' href ' ]">← [ ' _t: ToOverview ' ]</a>
 		[''' navigation ''']
 		<br><br>
 		<figure class="t-center">
