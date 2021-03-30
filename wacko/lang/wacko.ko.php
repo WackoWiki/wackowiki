@@ -324,6 +324,7 @@ $wacko_translation = [
 	'EditPreviewButton'			=> '미리 보기',
 	'EditPreview'				=> '미리 보기',
 	'Chars'						=> 'chars',
+	'PageBody'					=> 'Page body',
 	'EditNote'					=> '편집 요약',
 	'EditNoteMissing'			=> 'Edit summary missing',
 	'EditMinor'					=> '사소한 바뀜',

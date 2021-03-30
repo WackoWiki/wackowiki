@@ -4362,7 +4362,7 @@ class Wacko
 	* @param string $text Text with WikiWords
 	* @return string Text with Wiki Words
 	*/
-	function add_spaces($text) : string
+	function add_spaces($text) : ?string
 	{
 		if (($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces)
 		{

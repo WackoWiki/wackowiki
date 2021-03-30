@@ -324,6 +324,7 @@ $wacko_translation = [
 	'EditPreviewButton'			=> 'Προβολή',
 	'EditPreview'				=> 'Προβολή',
 	'Chars'						=> 'chars',
+	'PageBody'					=> 'Page body',
 	'EditNote' 					=> 'Σύνοψη επεξεργασίας',
 	'EditNoteMissing'			=> 'Επεξεργασία περίληψη που λείπουν',
 	'EditMinor'					=> 'Μικρή αλλαγή',

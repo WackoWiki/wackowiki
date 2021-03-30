@@ -324,6 +324,7 @@ $wacko_translation = [
 	'EditPreviewButton'			=> 'Aperçu',
 	'EditPreview'				=> 'Aperçu',
 	'Chars'						=> 'caractères',
+	'PageBody'					=> 'Page body',
 	'EditNote'					=> 'Éditer le sommaire',
 	'EditNoteMissing'			=> 'Éditer le sommaire manquant',
 	'EditMinor'					=> 'Édition mineure',

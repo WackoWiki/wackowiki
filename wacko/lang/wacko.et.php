@@ -324,6 +324,7 @@ $wacko_translation = [
 	'EditPreviewButton'			=> 'Eelvaade',
 	'EditPreview'				=> 'Eelvaade',
 	'Chars'						=> 'chars',
+	'PageBody'					=> 'Page body',
 	'EditNote'					=> 'Redigeeri kokkuvõte',
 	'EditNoteMissing'			=> 'Edit summary missing',
 	'EditMinor'					=> 'Minor edit',

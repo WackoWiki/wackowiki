@@ -29,7 +29,7 @@
 				[= e _ =
 					<br>
 					<label for="page_title">[ ' label ' ]</label><br>
-					<input type="text" id="page_title" class="input-title" maxlength="250" value="[ ' title | e attr ' ]" size="100" name="title" >
+					<input type="text" id="page_title" name="title" class="input-title" maxlength="250" value="[ ' title | e attr ' ]" size="100">
 					<br>
 				=]
 				[= r _ =
@@ -38,12 +38,13 @@
 				=]
 
 				<input type="hidden" name="previous" value="[ ' previous | e attr ' ]"><br>
-				<textarea id="postText" class="textarea-page" name="body" rows="40" cols="60" required>[ ' body | pre ' ]</textarea>
+				<label for="postText" class="visuallyhidden">[ ' _t: PageBody ' ]</label>
+				<textarea id="postText" name="body" class="textarea-page" rows="40" cols="60" required>[ ' body | pre ' ]</textarea>
 				<br>
 
 				[= n _ =
 					<label for="edit_note">[ ' _t: EditNote ' ]:</label><br>
-					<input type="text" id="edit_note" class="input-summary" maxlength="200" value="[ ' note | e attr ' ]" size="100" name="edit_note">
+					<input type="text" id="edit_note" name="edit_note" class="input-summary" maxlength="200" value="[ ' note | e attr ' ]" size="100">
 					<br>
 				=]
 				[= minor _ =
@@ -52,17 +53,17 @@
 					<br>
 				=]
 				[= reviewed _ =
-					<input type="checkbox" id="reviewed" value="1" name="reviewed">
+					<input type="checkbox" id="reviewed" name="reviewed" value="1">
 					<label for="reviewed">[ ' _t: Reviewed ' ]</label>
 					<br>
 				=]
 				[= a _ =
-					<input type="checkbox" name="noid_publication" id="noid_publication" value="[ ' pageid ' ]" [ ' checked ' ]>
+					<input type="checkbox" id="noid_publication" name="noid_publication" value="[ ' pageid ' ]" [ ' checked ' ]>
 					<label for="noid_publication">[ ' _t: PostAnonymously ' ]</label>
 					<br>
 				=]
 				[= w _ =
-					<input type="checkbox" name="watchpage" id="watchpage" value="1" [ ' checked ' ]>
+					<input type="checkbox" id="watchpage" name="watchpage" value="1" [ ' checked ' ]>
 					<label for="watchpage">[ ' _t: NotifyMe ' ]</label>
 					<br>
 				=]
