@@ -35,6 +35,7 @@ if (!isset($images))	$images	= 1;
 if (!isset($max))		$max	= 5;
 if (!isset($time))		$time	= 1;
 
+$error				= null;
 $p_mode				= [];
 
 // Include SimplePie

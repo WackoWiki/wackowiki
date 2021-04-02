@@ -4986,7 +4986,7 @@ class Wacko
 	}
 
 	/**
-	* Invokes {@link WackoWiki:/Dev/Actions Action} and returns its output.
+	* Invokes Action and returns its output.
 	*
 	* @param string $action Action name
 	* @param array $params Action parameters
