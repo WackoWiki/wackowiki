@@ -73,22 +73,22 @@ input {
 	display:			none;
 }
 
-/* Hide all buttons */
-.debug {
-	display:			none;
-}
-
 /* Display no images in print out */
 img {
 	/*display:			none;*/
 	max-width:			100%;
 	height:				auto;
 }
+/* Invert and adjust the colours of the image */
+.graph {
+	filter: invert(100%) hue-rotate(180deg) brightness(120%) contrast(150%);
+}
 
 /** Styles for the main content in the page. *********************************/
 
 /* Debugging information (not shown) */
-.time {
+#debug,
+.debug {
 	display:			none;
 }
 
@@ -220,9 +220,9 @@ span.tocnumber {
 
 /* Horizontal rulers: SYNTAX --- */
 hr {
-	background-color:	#000; /* Mozilla 1.4 */
-	border:				#000; /* Opera 7.11 */
-	color:				#000; /* IE 6 */
+	background-color:	#000;
+	border:				#000;
+	color:				#000;
 	height:				1px;
 }
 
@@ -350,7 +350,7 @@ ol, ul {
 div .wrapper {
 	border:				1px dotted #000;
 	margin:				5px;
-	/*-moz-border-radius:	5px;		/* Mozilla, Firefox only */
+	/*border-radius:	5px; */
 }
 div .wrapper-content {
 	padding:			7px;
@@ -442,6 +442,14 @@ div .wrapper-content {
 }
 
 /* Hiding Unfriendly Content *************************************************/
+.no-print, 
+.no-print * {
+	display:			none !important;
+}
+
+.footer,
+.breadcrumb,
+.menu-main,
 .pagination {
 	display:			none !important;
 }

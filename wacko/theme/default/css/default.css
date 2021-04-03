@@ -326,12 +326,6 @@ form input.submitinput {
 }
 
 /* Debugging information */
-.time {
-	color: #999999;
-	font-size: 9px;
-	margin: 5px 20px;
-}
-
 #debug {
 	padding: 0 20px 20px 20px;
 	float: left;

@@ -73,7 +73,7 @@
 			<div class="clearfix">
 				<p>
 					[= mark _ =
-						<small><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
+						<small class="no-print"><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 					=]
 				</p>
 				[''' pagination ''']

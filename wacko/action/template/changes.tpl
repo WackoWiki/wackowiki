@@ -1,7 +1,7 @@
 [ === main === ]
 	[ ' message ' ]
 	[= mark _ =
-		<small><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
+		<small class="no-print"><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 	=]
 	[= xml =
 		<span class="desc-rss-feed">

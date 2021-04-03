@@ -54,7 +54,7 @@
 			<br>
 
 			[= mark _ =
-				<small><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
+				<small class="no-print"><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 			=]
 		=]
 		[= xml =
