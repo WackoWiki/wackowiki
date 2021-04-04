@@ -3603,7 +3603,8 @@ class Wacko
 			}
 			else
 			{
-				// 2a -> file:some.zip or file:/cluster/some.zip (local)
+				// 2a -> file:some.zip (local relative)
+				// 2b -> file:/cluster/some.zip (local absolute)
 				$local_file	= $file_array;
 				$_global	= false;
 				$file_name	= $local_file[count($local_file) - 1];
@@ -3639,30 +3640,6 @@ class Wacko
 					|| ($file_data['user_id'] == $this->get_user_id()))
 					{
 						$file_access = true;
-					}
-				}
-
-				// check for global file
-				if (!$href)
-				{
-					// 2b -> file:some.zip (global)
-					if (count($file_array) == 1)
-					{
-						$file_name	= $_file_name;
-						$param		= $this->parse_media_param($file_name);
-
-						// no local file available, take the global file instead
-						if ($file_data = $this->check_file_record($param['src'], 0))
-						{
-							$href		= ($this->canonical ? $this->db->base_url : $this->db->base_path) . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_name);
-							$_global	= true;
-
-							// tracking file link
-							if ($track && isset($file_data['file_id']))
-							{
-								$this->track_link($file_data['file_id'], LINK_FILE);
-							}
-						}
 					}
 				}
 			}
