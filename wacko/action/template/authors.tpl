@@ -1,4 +1,4 @@
-[ === backlinks === ]
+[ === main === ]
 	<small>
 		[= hint _ =
 			<em>[ ' _t: AuthorsDisplayHint ' ]</em>

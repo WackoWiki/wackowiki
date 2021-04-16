@@ -10,7 +10,7 @@ function _parse_query_string()
 {
 	$get = [];
 
-	foreach ($_GET as $k=>$v)
+	foreach ($_GET as $k => $v)
 	{
 		$k = _unescape($k);
 		$v = _unescape($v);
@@ -37,11 +37,11 @@ function _unescape_callback($p)
 	if ($p[1])
 	{
 		$u = pack('n', $dec=hexdec($p[1]));
-		$c = @iconv('UCS-2BE', "UTF-8", $u);
+		$c = @iconv('UCS-2BE', 'UTF-8', $u);
 
 		if (!strlen($c) && $SCRIPT_DECODE_MODE == 'entities')
 		{
-			$c = '&#' . $dec.';';
+			$c = '&#' . $dec . ';';
 		}
 	}
 	else
@@ -61,6 +61,7 @@ function _unescape_callback($p)
 
 // Getting a query
 _parse_query_string();
+
 if(isset($_GET['q']) && isset($_GET['ta_id']))
 {
 	// Working for autocomplete
@@ -115,8 +116,8 @@ if ($pages1)
 
 		if ($access)
 		{
-			$pages[$page['tag']] = $page;
-			$pages[$page['tag']]['>local'] = true;
+			$pages[$page['tag']]			= $page;
+			$pages[$page['tag']]['>local']	= true;
 			$cnt++;
 		}
 
@@ -141,8 +142,8 @@ if ($pages2)
 		{
 			if (!isset($pages[$page['tag']]))
 			{
-				$pages[$page['tag']] = $page;
-				$pages[$page['tag']]['>local'] = false;
+				$pages[$page['tag']]			= $page;
+				$pages[$page['tag']]['>local']	= false;
 				$cnt++;
 			}
 		}

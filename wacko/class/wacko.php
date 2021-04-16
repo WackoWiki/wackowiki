@@ -6416,7 +6416,7 @@ class Wacko
 				$menu_page_ids[]	= $this->page['page_id'];
 				$menu_formatted[]	= [
 										$this->page['page_id'],
-										($title? $title : $this->tag),
+										($title ?: $this->tag),
 										$this->format('((' . $this->tag . ($title? ' ' . $title : '') . '))', 'wacko'),
 										$lang,
 									];

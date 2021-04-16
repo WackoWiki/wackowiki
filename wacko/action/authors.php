@@ -33,7 +33,7 @@ if (!isset($add))			$add		= '';
 if (!isset($add_only))		$add_only	= 0;
 if (!isset($license))		$license	= '';
 if (!isset($license_id))	$license_id	= null;
-if (!isset($cluster))		$cluster	= '';
+if (!isset($cluster))		$cluster	= 0;
 
 $copysign	= '©';
 
