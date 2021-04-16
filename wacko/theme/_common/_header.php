@@ -19,7 +19,12 @@ $tpl->charset		= $this->get_charset();
 $this->method == 'show' or $tpl->method = $this->method;
 
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
-$tpl->norobots = ($this->method != 'show' || $this->db->noindex || !$this->page || !$this->page['latest'] || $this->page['noindex']);
+$tpl->norobots = (
+		   $this->method != 'show'
+		|| $this->db->noindex
+		|| !$this->page
+		|| !$this->page['latest']
+		|| $this->page['noindex']);
 
 if (!$tpl->norobots)
 {
@@ -37,14 +42,9 @@ if ($this->db->allow_x11colors)
 	$tpl->x11_colors = $this->db->base_path . Ut::join_path(THEME_DIR, '_common/X11colors.css');
 }
 
-if ($this->db->site_favicon)
-{
-	$tpl->favicon = $this->db->base_path . Ut::join_path(IMAGE_DIR, $this->db->site_favicon);
-}
-else
-{
-	$tpl->favicon = $this->db->theme_url . 'icon/favicon.ico';
-}
+$tpl->favicon = $this->db->site_favicon
+	? $this->db->base_path . Ut::join_path(IMAGE_DIR, $this->db->site_favicon)
+	: $this->db->theme_url . 'icon/favicon.ico';
 
 if ($this->db->terms_page)
 {
@@ -55,6 +55,8 @@ if ($this->db->license)
 {
 	# $tpl->license_href = $this->href('', $this->db->terms_page);
 }
+
+$tpl->os_href = $this->db->base_path . XML_DIR . '/';
 
 if ($this->db->enable_feeds)
 {

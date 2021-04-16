@@ -156,6 +156,9 @@ function admin_maint_resync(&$engine, &$module)
 				$xml->feed();
 			}
 
+			// update OpenSearch XML description file
+			$xml->open_search();
+
 			unset($xml);
 
 			$engine->log(1, $engine->_t('LogFeedsUpdated', SYSTEM_LANG));

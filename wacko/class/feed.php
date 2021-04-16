@@ -49,7 +49,7 @@ class Feed
 		$xml .= '<channel>' . "\n";
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n";
 		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
-		$xml .= '<description>' . $this->engine->_t('ChangesXML') . $this->engine->db->site_name . ' </description>' . "\n";
+		$xml .= '<description>' . $this->engine->_t('ChangesXML') . $this->engine->db->site_name . '</description>' . "\n";
 		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
 		$xml .= '<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
 		$xml .= '<image>' . "\n";
@@ -96,7 +96,7 @@ class Feed
 		}
 
 		$xml .= '</channel>' . "\n";
-		$xml .= '</rss>' . "\n";
+		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
 		$this->engine->canonical = false;
@@ -207,8 +207,8 @@ class Feed
 			}
 		}
 
-		$xml .= 	'</channel>' . "\n" .
-				'</rss>';
+		$xml .= 	'</channel>' . "\n";
+		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
 		$this->engine->canonical = false;
@@ -230,7 +230,7 @@ class Feed
 		$xml .= '<channel>' . "\n";
 		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . "</title>\n";
 		$xml .= '<link>' . $this->engine->db->base_url . "</link>\n";
-		$xml .= '<description>' . $this->engine->_t('CommentsXML') . $this->engine->db->site_name." </description>\n";
+		$xml .= '<description>' . $this->engine->_t('CommentsXML') . $this->engine->db->site_name . "</description>\n";
 		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
 		$xml .= '<lastBuildDate>' . date('r') . "</lastBuildDate>\n";
 		$xml .= '<image>' . "\n";
@@ -285,7 +285,7 @@ class Feed
 		}
 
 		$xml .= '</channel>' . "\n";
-		$xml .= '</rss>' . "\n";
+		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
 		$this->engine->canonical = false;
@@ -350,9 +350,33 @@ class Feed
 			}
 		}
 
-		$xml .= '</urlset>' . "\n";
+		$xml .= '</urlset>';
 
 		file_put_contents(SITEMAP_XML, $xml);
 		@chmod(SITEMAP_XML, CHMOD_FILE);
+	}
+
+	// OpenSearch XML description file
+	function open_search()
+	{
+		$this->engine->canonical = true;
+
+		$xml  = '<?xml version="1.0"?>' . "\n";
+		$xml .= '<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">' . "\n";
+		$xml .= '<ShortName>' . $this->engine->db->site_name . '</ShortName>' . "\n";
+		$xml .= '<Description>' /*.  $this->engine->_t('Search') .  ' '*/ . $this->engine->db->site_name . '</Description>' . "\n";
+		$xml .= '<InputEncoding>UTF-8</InputEncoding>' . "\n";
+		$xml .= '<Image height="16" width="16" type="image/x-icon">' .
+			($this->engine->db->site_favicon
+				? $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_favicon)
+				: $this->engine->db->base_url . Ut::join_path(THEME_DIR, $this->engine->db->theme) . '/' . 'icon/favicon.ico')
+			. '</Image>' . "\n";
+		$xml .= '<Url type="text/html" method="get" template="' . $this->engine->href('', $this->engine->db->search_page) . '?phrase={searchTerms}" />' . "\n";
+		$xml .= '</OpenSearchDescription>';
+
+		$file_name = Ut::join_path(XML_DIR, 'opensearch.xml');
+		file_put_contents($file_name, $xml);
+		@chmod('opensearch.xml', CHMOD_FILE);
+		$this->engine->canonical = false;
 	}
 }

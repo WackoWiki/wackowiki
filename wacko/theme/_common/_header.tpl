@@ -21,7 +21,7 @@ _common include file for themes
 	[= x11 _ =
 		<link rel="stylesheet" href="[ ' colors ' ]">
 	=]
-	<link media="print" rel="stylesheet" href="[ ' db: theme_url ' ]css/print.css">
+	<link rel="stylesheet" media="print" href="[ ' db: theme_url ' ]css/print.css">
 	<link rel="icon" href="[ ' favicon ' ]" type="image/x-icon">
 	<link rel="start" title="[ ' db: root_page ' ]" href="[ ' db: base_path ' ]">
 	[= index _ =
@@ -29,6 +29,9 @@ _common include file for themes
 	=]
 	[= license _ =
 		<link rel="license" href="[ ' href ' ]">
+	=]
+	[= os _ =
+		<link rel="search" type="application/opensearchdescription+xml" title="[ ' db: site_name | e ' ]" href="[ ' href ' ]opensearch.xml">
 	=]
 	[= rss _ =
 		<link rel="alternate" type="application/rss+xml" title="[ ' _t: ChangesFeed ' ]" href="[ ' url.0 ' ]changes[ ' url.1 ' ]">
