@@ -213,6 +213,7 @@ $wacko_config_defaults = [
 	'news_levels'					=> '',
 
 	'noindex'						=> 0,
+	'opensearch'					=> 0,
 
 	'xml_sitemap'					=> 0,
 	'xml_sitemap_time'				=> 1,

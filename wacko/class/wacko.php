@@ -2109,7 +2109,7 @@ class Wacko
 
 		// update user statistics for revisions made
 		$user = $this->get_user();
-		$this->update_revisions_count($page['page_id'], $user['user_id']);
+		$this->update_revisions_count($page['page_id'], $user['user_id'] ?? null);
 	}
 
 	function update_sitemap()
@@ -5174,7 +5174,7 @@ class Wacko
 	// extract user data from the session array
 	function get_user()
 	{
-		return @$this->sess->userprofile;
+		return $this->sess->userprofile ?? null;
 	}
 
 	// insert user data into the session array

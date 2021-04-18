@@ -56,7 +56,10 @@ if ($this->db->license)
 	# $tpl->license_href = $this->href('', $this->db->terms_page);
 }
 
-$tpl->os_href = $this->db->base_path . XML_DIR . '/';
+if ($this->db->opensearch)
+{
+	$tpl->os_href = $this->db->base_path . XML_DIR . '/';
+}
 
 if ($this->db->enable_feeds)
 {
