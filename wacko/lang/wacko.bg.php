@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Промени',
 	'CancelButton'				=> 'Отмени',
 	'ConvertButton'				=> 'Convert',
+	'SearchButton'				=> 'Търси',
+	'SubmitButton'				=> 'Запис',
+	'AddButton'					=> 'Добави',
+	'RemoveButton'				=> 'Премахни',
 
 	'FormInvalid'				=> 'Изпратената форма е невалидна, опитайте отново.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Отказан достъп до действието',
 	'TocTitle'					=> 'Заглавие на документа',
-	'SearchButton'				=> 'Търси',
 	'OuterLink2'				=> 'Външна препратка',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'За да зададете категории на страница, поставете отметки в квадратчетата.',
 	'CategoriesStoreButton'		=> 'Запазване на категории',
-	'SubmitButton'				=> 'Запис',
-	'AddButton'					=> 'Добави',
 	'CategoriesGroupButton'		=> 'Група',
-	'RemoveButton'				=> 'Премахни',
 	'CategoriesEditInfo'		=> 'За да редактирате списъка с категории, изберете радио бутона.',
 	'NoCategoriesForThisLang'	=> 'Категориите за този език не са посочени.',
 	'PagesCategory'				=> 'Pages category',

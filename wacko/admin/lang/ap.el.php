@@ -317,6 +317,13 @@ $ap_translation = [
 	'XmlSitemapInfo'			=> 'Create an XML file called %1 inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder. On the other hand you can also add the path to the sitemap in the robots.txt file in your root directory as follows:',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
 	'XmlSitemapTimeInfo'		=> 'Δημιουργεί το Χάρτη ιστοτόπου μόνο μία φορά στον δεδομένο αριθμό ημερών, μηδέν μέσα σε κάθε σελίδα αλλαγή.',
+
+	'SearchSection'				=> 'Αναζήτηση',
+	'OpenSearch'				=> 'OpenSearch',
+	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
+	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
+
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Default diff mode',
 	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
@@ -347,8 +354,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
 	'ReferrersPurgeTimeInfo'	=> 'Κρατήστε το ιστορικό των εξωτερικών σελίδων παραπομπής όχι περισσότερο από δεδομένο αριθμό ημερών. Το μηδέν σημαίνει αιώνια αποθήκευση, αλλά για έναν ιστότοπο που επισκέπτεται ενεργά αυτό μπορεί να οδηγήσει σε υπερχείλιση βάσης δεδομένων.',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',

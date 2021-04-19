@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> '업데이트',
 	'CancelButton'				=> '취소',
 	'ConvertButton'				=> '변환',
+	'SearchButton'				=> '검색',
+	'SubmitButton'				=> '전송',
+	'AddButton'					=> '추가',
+	'RemoveButton'				=> '제거',
 
 	'FormInvalid'				=> '제출 된 양식이 유효하지 않습니다. 다시 제출하십시오.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Action is denied here.',
 	'TocTitle'					=> '목차 ',
-	'SearchButton'				=> '검색',
 	'OuterLink2'				=> 'Outgoing link',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> '페이지에 범주를 할당하려면 확인란을 선택합니다..',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'SubmitButton'				=> '전송',
-	'AddButton'					=> '추가',
 	'CategoriesGroupButton'		=> '그룹',
-	'RemoveButton'				=> '제거',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',

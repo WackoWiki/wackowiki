@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Обновить',
 	'CancelButton'				=> 'Отмена',
 	'ConvertButton'				=> 'Преобразовать',
+	'SearchButton'				=> 'Поиск',
+	'SubmitButton'				=> 'Готово',
+	'AddButton'					=> 'Добавить',
+	'RemoveButton'				=> 'Удалить',
 
 	'FormInvalid'				=> 'Ошибка отправки формы. Попробуйте ещё раз.',
 
@@ -128,7 +132,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Вызов действия запрещён',
 	'TocTitle'					=> 'Оглавление ',
-	'SearchButton'				=> 'Поиск',
 	'OuterLink2'				=> 'Внешняя ссылка',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'Документ PDF',
@@ -285,10 +288,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Внимание: изменение затронет все документы, которым присвоено это ключевое слово. Если слово имеет подкатегории, они не будут удалены, а только разгруппированы.',
 	'CategoriesStoreInfo' 		=> 'Присвоить документу ключевые слова, выделенные флажками.',
 	'CategoriesStoreButton' 	=> 'Сохранить категории',
-	'SubmitButton'				=> 'готово',
-	'AddButton'					=> 'добавить',
 	'CategoriesGroupButton'		=> 'группировать',
-	'RemoveButton'				=> 'удалить',
 	'CategoriesEditInfo'		=> 'Отредактировать список ключевых слов (нужное выделить переключателем).',
 	'NoCategoriesForThisLang'	=> 'Ключевые слова для данного языка не заданы.',
 	'PagesCategory'				=> 'Документы категории',

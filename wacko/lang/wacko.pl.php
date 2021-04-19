@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Aktualizacja',
 	'CancelButton'				=> 'Anuluj',
 	'ConvertButton'				=> 'Convert',
+	'SearchButton'				=> 'Znajdź',
+	'SubmitButton'				=> 'Wyślij',
+	'AddButton'					=> 'Add',
+	'RemoveButton'				=> 'Remove',
 
 	'FormInvalid'				=> 'Wysłany formularz był nieprawidłowy. Spróbuj wysłać ponownie.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Ta czynność nie może zostać wykonana.',
 	'TocTitle'					=> 'Spis treści dokumentu: ',
-	'SearchButton'				=> 'Znajdź',
 	'OuterLink2'				=> 'Odnośnik do zewnętrznej witryny',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
@@ -283,11 +286,8 @@ $wacko_translation = [
 	'CategoriesDelete'			=> 'Na pewno chcesz usunąć kategorię %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Aby przypisać kategorie do strony, zaznacz pola wyboru.',
-	'CategoriesStoreButton' 	=> 'Zapisz kategorie',
-	'SubmitButton'				=> 'Wyślij',
-	'AddButton'					=> 'Add',
+	'CategoriesStoreButton'		=> 'Zapisz kategorie',
 	'CategoriesGroupButton'		=> 'Group',
-	'RemoveButton'				=> 'Remove',
 	'CategoriesEditInfo'		=> 'Aby edytować listę kategorii, wybierz przycisk radiowy.',
 	'NoCategoriesForThisLang'	=> 'Kategorie dla tego języka nie zostały określone.',
 	'PagesCategory'				=> 'Pages category',

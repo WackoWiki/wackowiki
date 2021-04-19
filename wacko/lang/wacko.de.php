@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Aktualisieren',
 	'CancelButton'				=> 'Abbrechen',
 	'ConvertButton'				=> 'Konvertieren',
+	'SearchButton'				=> 'Suche',
+	'SubmitButton'				=> 'Speichern',
+	'AddButton'					=> 'Hinzufügen',
+	'RemoveButton'				=> 'Entfernen',
 
 	'FormInvalid'				=> 'Das übermittelte Formular war ungültig. Versuche erneut, das Formular abzusenden.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Diese Aktion ist hier nicht erlaubt.',
 	'TocTitle'					=> 'Inhalt ',
-	'SearchButton'				=> 'Suche',
 	'OuterLink2'				=> 'externer Verweis',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Dokument',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Hinweis: Die Änderung betrifft alle Seiten, die dieser Kategorie zugeordnet sind. Wenn das Wort eine Unterkategorie hat, wird diese nicht gelöscht, sondern nur entbündelt.',
 	'CategoriesStoreInfo' 		=> 'Um Kategorien zu einer Seite zuordnen, wähle die jeweiligen Kontrollkästchen.',
 	'CategoriesStoreButton'		=> 'Speichere Kategorien',
-	'SubmitButton'				=> 'Speichern',
-	'AddButton'					=> 'Hinzufügen',
 	'CategoriesGroupButton'		=> 'Gruppieren',
-	'RemoveButton'				=> 'Entfernen',
 	'CategoriesEditInfo'		=> 'Um die Kategorie-Liste zu bearbeiten, wähle das Optionsfeld.',
 	'NoCategoriesForThisLang'	=> 'Für diese Sprache wurden noch keine Kategorien definiert.',
 	'PagesCategory'				=> 'Seiten der Kategorie',

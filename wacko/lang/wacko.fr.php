@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Mise à jour',
 	'CancelButton'				=> 'Annuler',
 	'ConvertButton'				=> 'Convert',
+	'SearchButton'				=> 'Rechercher',
+	'SubmitButton'				=> 'Sauvegarder',
+	'AddButton'					=> 'Ajouter',
+	'RemoveButton'				=> 'Enlever',
 
 	'FormInvalid'				=> 'Le formulaire que vous avez envoyé est incorrect. Veuillez essayer de le renvoyer.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Action non autorisée ici.',
 	'TocTitle'					=> 'Contenu ',
-	'SearchButton'				=> 'Rechercher',
 	'OuterLink2'				=> 'Lien externe',
 	'FileLink'					=> 'Fichier',
 	'PDFLink'					=> 'Document PDF',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: la modification affectera toutes les pages auxquelles ce mot clef est attaché. Si le mot a une sous-catégorie, ses membres ne seront pas effacés mais seulement dégroupés.',
 	'CategoriesStoreInfo'		=> 'Pour attacher des mots clefs à une page cochez-les.',
 	'CategoriesStoreButton'		=> 'Sauvegarder les mots clefs',
-	'SubmitButton'				=> 'Sauvegarder',
-	'AddButton'					=> 'Ajouter',
 	'CategoriesGroupButton'		=> 'Grouper',
-	'RemoveButton'				=> 'Enlever',
 	'CategoriesEditInfo'		=> 'Pour éditer la liste de mots clefs choisissez le bouton radio.',
 	'NoCategoriesForThisLang'	=> 'Les mots clefs pour cette langue ne sont pas définis.',
 	'PagesCategory'				=> 'Catégorie de pages',

@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Update',
 	'CancelButton'				=> 'Fortryd',
 	'ConvertButton'				=> 'Convert',
+	'SearchButton'				=> 'Søg',
+	'SubmitButton'				=> 'Indsend',
+	'AddButton'					=> 'Tilføj',
+	'RemoveButton'				=> 'Fjern',
 
 	'FormInvalid'				=> 'Den indsendte formular var ugyldig. Prøv at indsende igen.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Nej, nej, nej, det må du ikke!',
 	'TocTitle'					=> 'Indhold ',
-	'SearchButton'				=> 'Søg',
 	'OuterLink2'				=> 'Udgående link',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Dokument',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'For at tildele kategorier til en side markere afkrydsningsfelterne.',
 	'CategoriesStoreButton'		=> 'Gem Kategorier',
-	'SubmitButton'				=> 'Indsend',
-	'AddButton'					=> 'Tilføj',
 	'CategoriesGroupButton'		=> 'Gruppen',
-	'RemoveButton'				=> 'Fjern',
 	'CategoriesEditInfo'		=> 'For at redigere kategorilisten vælg alternativknappen.',
 	'NoCategoriesForThisLang'	=> 'Kategorier for dette sprog er ikke angivet.',
 	'PagesCategory'				=> 'Sider kategori',

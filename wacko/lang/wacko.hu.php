@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Frissítés',
 	'CancelButton'				=> 'Mégse',
 	'ConvertButton'				=> 'Átalakítás',
+	'SearchButton'				=> 'Keresés',
+	'SubmitButton'				=> 'Elküld',
+	'AddButton'					=> 'Hozzáadás',
+	'RemoveButton'				=> 'Törlés',
 
 	'FormInvalid'				=> 'A benyújtott űrlap érvénytelen. Próbáld meg újra benyújtani.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Action is denied here.',
 	'TocTitle'					=> 'Tartalomjegyzék ',
-	'SearchButton'				=> 'Keresés',
 	'OuterLink2'				=> 'Outgoing link',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Ha kategóriákat szeretne rendelni egy oldalhoz, jelölje be a jelölőnégyzeteket.',
 	'CategoriesStoreButton'		=> 'Kategóriák mentése',
-	'SubmitButton'				=> 'Elküld',
-	'AddButton'					=> 'Hozzáadás',
 	'CategoriesGroupButton'		=> 'Csoport',
-	'RemoveButton'				=> 'Törlés',
 	'CategoriesEditInfo'		=> 'A Kategória lista szerkesztéséhez válassza a választógombot.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',

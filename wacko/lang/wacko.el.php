@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Ενημέρωση',
 	'CancelButton'				=> 'Ακύρωση',
 	'ConvertButton'				=> 'Convert',
+	'SearchButton'				=> 'Αναζήτηση',
+	'SubmitButton'				=> 'Υποβολή',
+	'AddButton'					=> 'Add',
+	'RemoveButton'				=> 'Αφαίρεση',
 
 	'FormInvalid'				=> 'Η υποβληθείσα μορφή ήταν άκυρη. Προσπαθήστε πάλι.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Η ενέργεια δεν επιτρέπετε εδώ.',
 	'TocTitle'					=> 'Περιεχόμενα ',
-	'SearchButton'				=> 'Αναζήτηση',
 	'OuterLink2'				=> 'Εξωτερικός σύνδεσμος',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'Έγγραφο PDF',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Για να αντιστοιχίσετε κατηγορίες σε μια σελίδα, επιλέξτε τα πλαίσια ελέγχου.',
 	'CategoriesStoreButton'		=> 'Αποθήκευση Κατηγορίες',
-	'SubmitButton'				=> 'Υποβολή',
-	'AddButton'					=> 'Add',
 	'CategoriesGroupButton'		=> 'Ομάδα',
-	'RemoveButton'				=> 'Αφαίρεση',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',

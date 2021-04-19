@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> '更新',
 	'CancelButton'				=> 'キャンセル',
 	'ConvertButton'				=> '変換',
+	'SearchButton'				=> '検索',
+	'SubmitButton'				=> '送信',
+	'AddButton'					=> 'Add',
+	'RemoveButton'				=> '削除',
 
 	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Action is denied here.',
 	'TocTitle'					=> '目次 ',
-	'SearchButton'				=> '検索',
 	'OuterLink2'				=> 'Outgoing link',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'ページにカテゴリを割り当てるには、チェックボックスを選択します。',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'SubmitButton'				=> '送信',
-	'AddButton'					=> 'Add',
 	'CategoriesGroupButton'		=> 'グループ',
-	'RemoveButton'				=> '削除',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',

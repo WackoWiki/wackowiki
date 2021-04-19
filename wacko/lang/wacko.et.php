@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Uuenda',
 	'CancelButton'				=> 'Loobun',
 	'ConvertButton'				=> 'Convert',
+	'SearchButton'				=> 'Otsi',
+	'SubmitButton'				=> 'Sisesta',
+	'AddButton'					=> 'Lisama',
+	'RemoveButton'				=> 'Eemalda',
 
 	'FormInvalid'				=> 'Esitatud avaldus oli ebakorrektne. Proovi see uuesti esitada.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'See tegevus on keelatud.',
 	'TocTitle'					=> 'Sisukord ',
-	'SearchButton'				=> 'Otsi',
 	'OuterLink2'				=> 'Väline viide',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
@@ -284,10 +287,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Lehele kategooriate määramiseks valige märkeruudud.',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'SubmitButton'				=> 'Sisesta',
-	'AddButton'					=> 'Lisama',
 	'CategoriesGroupButton'		=> 'Group',
-	'RemoveButton'				=> 'Eemalda',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',

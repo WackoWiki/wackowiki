@@ -13,6 +13,10 @@ $wacko_translation = [
 	'UpdateButton'				=> 'Update',
 	'CancelButton'				=> 'Annuleren',
 	'ConvertButton'				=> 'Convert',
+	'SearchButton'				=> 'Zoeken',
+	'SubmitButton'				=> 'Submit',
+	'AddButton'					=> 'Toevoegen',
+	'RemoveButton'				=> 'Verwijderen',
 
 	'FormInvalid'				=> 'Het verstuurde formulier is ongeldig. Probeer opnieuw te versturen.',
 
@@ -127,7 +131,6 @@ $wacko_translation = [
 
 	'ActionDenied'				=> 'Deze handeling is hier niet toegestaan.',
 	'TocTitle'					=> 'Inhoudsopgave ',
-	'SearchButton'				=> 'Zoeken',
 	'OuterLink2'				=> 'Uitgaande link',
 	'FileLink'					=> '',
 	'PDFLink'					=> 'PDF Document',
@@ -283,11 +286,8 @@ $wacko_translation = [
 	'CategoriesDelete'			=> 'Weet u zeker dat u categorie %1 wilt verwijderen?',
 	'CategoriesDeleteInfo'		=> '* Opmerking: Wijzigen is van invloed op alle pagina\'s die aan die categorie zijn toegewezen. Als het woord een subcategorie heeft, worden deze niet verwijderd, maar alleen gedebundeld.',
 	'CategoriesStoreInfo'		=> 'Om categorieën aan een pagina toe te wijzen, selecteert u de selectievakjes.',
-	'CategoriesStoreButton' 	=> 'Categorieën opslaan',
-	'SubmitButton'				=> 'Submit',
-	'AddButton'					=> 'Toevoegen',
+	'CategoriesStoreButton'		=> 'Categorieën opslaan',
 	'CategoriesGroupButton'		=> 'Groep',
-	'RemoveButton'				=> 'Verwijderen',
 	'CategoriesEditInfo'		=> 'Om de Categorielijst te bewerken, selecteert u het keuzerondje.',
 	'NoCategoriesForThisLang'	=> 'Categorieën voor deze taal zijn niet gespecificeerd.',
 	'PagesCategory'				=> 'Categorie Pagina\'s',

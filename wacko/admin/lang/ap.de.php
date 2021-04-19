@@ -321,6 +321,12 @@ $ap_translation = [
 	'XmlSitemapTime'			=> 'XML Sitemap Erstellungszeit',
 	'XmlSitemapTimeInfo'		=> 'Erzeugt die Sitemap nur einmal in der angegebenen Anzahl von Tagen, Null bedeutet bei jeder Seitenänderung.',
 
+	'SearchSection'				=> 'Suche',
+	'OpenSearch'				=> 'OpenSearch',
+	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
+	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
+
 	'DiffModeSection'			=> 'Diff-Modi',
 	'DefaultDiffModeSetting'	=> 'Standard Diff-Modus',
 	'DefaultDiffModeSettingInfo'=> 'Vorausgewählter Diff-Modus.',
@@ -352,9 +358,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Ermöglicht das Speichern und Anzeigen externer Verweise.',
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
 	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, kann zu einer hohen Auslastung der Datenbank führen.',
-
-	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
-	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Die Darstellung der Webseite ändern',

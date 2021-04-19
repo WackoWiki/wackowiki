@@ -317,6 +317,13 @@ $ap_translation = [
 	'XmlSitemapInfo'			=> 'Cree un archivo XML llamado %1 dentro de la carpeta xml. Genere un archivo XML compatible con el formato XML de mapa del sitio. Es posible que desee cambiar la ruta para generarlo en su carpeta raíz, ya que ese es uno de los requisitos, es decir, que el archivo XML esté en la carpeta raíz. Por otro lado, también puede agregar la ruta al mapa del sitio en el archivo robots.txt en su directorio raíz de la siguiente manera:',
 	'XmlSitemapTime'			=> 'Tiempo de generación de mapa del sitio XML',
 	'XmlSitemapTimeInfo'		=> 'Genera el mapa del sitio sólo una vez en el número de días dado, cero significa en cada cambio de página.',
+
+	'SearchSection'				=> 'Buscar',
+	'OpenSearch'				=> 'OpenSearch',
+	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility)',
+	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
+
 	'DiffModeSection'			=> 'Modos de Diferencia',
 	'DefaultDiffModeSetting'	=> 'Modo diferencial predeterminado',
 	'DefaultDiffModeSettingInfo'=> 'Modo diff preseleccionado.',
@@ -347,8 +354,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Permite almacenar y mostrar referencias externas.',
 	'ReferrersPurgeTime'		=> 'Tiempo de almacenamiento de los referidos.',
 	'ReferrersPurgeTimeInfo'	=> 'Mantener el historial de remisión de páginas externas no más allá de un número determinado de días. Cero significa almacenamiento eterno, pero para un sitio visitado activamente esto puede llevar a un desbordamiento de la base de datos.',
-	'SearchEngineVisibility'	=> 'Bloquear los motores de búsqueda (Search Engine Visibility)',
-	'SearchEngineVisibilityInfo'=> 'Bloquee los motores de búsqueda, pero permita que los visitantes normales. Anula la configuración de la página. <br>Desalentar a los motores de búsqueda para que no indexen este sitio, es responsabilidad de los motores de búsqueda cumplir con esta petición.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Configuración predeterminada de visualización para el sitio.',

@@ -317,6 +317,13 @@ $ap_translation = [
 	'XmlSitemapInfo'			=> 'Créez un fichier XML appelé %1 dans le dossier xml. Générer un fichier XML compatible avec le format Sitemaps XML. Vous pouvez modifier le chemin d\'accès pour le placer dans votre dossier racine, car c\'est l\'une des conditions requises, à savoir que le fichier XML se trouve dans le dossier racine. D\'autre part, vous pouvez également ajouter le chemin d\'accès au plan du site dans le fichier robots.txt de votre répertoire racine comme suit :',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
 	'XmlSitemapTimeInfo'		=> 'Génère le Sitemap une seule fois dans le nombre de jours donné, zéro signifie à chaque changement de page.',
+
+	'SearchSection'				=> 'Recherche',
+	'OpenSearch'				=> 'OpenSearch',
+	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'SearchEngineVisibility'	=> 'Bloquer les moteurs de recherche (Visibilité sur les moteurs de recherche)',
+	'SearchEngineVisibilityInfo'=> 'Bloquer les moteurs de recherche, mais permettre aux visiteurs normaux. Remplace les paramètres de page. <br>Décourager les moteurs de recherche d\'indexer ce site, c\'est aux moteurs de recherche d\'honorer cette demande.',
+
 	'DiffModeSection'			=> 'Diff Modes',
 	'DefaultDiffModeSetting'	=> 'Mode diff par défaut',
 	'DefaultDiffModeSettingInfo'=> 'Mode diff présélectionné.',
@@ -347,8 +354,6 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Permet de stocker et d\'afficher les références externes.',
 	'ReferrersPurgeTime'		=> 'Temps de stockage des référents',
 	'ReferrersPurgeTimeInfo'	=> 'L\'historique des renvois de pages externes ne doit pas dépasser un nombre de jours donné. Zéro signifie stockage éternel, mais pour un site activement visité, cela peut entraîner un débordement de la base de données.',
-	'SearchEngineVisibility'	=> 'Bloquer les moteurs de recherche (Visibilité sur les moteurs de recherche)',
-	'SearchEngineVisibilityInfo'=> 'Bloquer les moteurs de recherche, mais permettre aux visiteurs normaux. Remplace les paramètres de page. <br>Décourager les moteurs de recherche d\'indexer ce site, c\'est aux moteurs de recherche d\'honorer cette demande.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Contrôlez les paramètres d\'affichage par défaut de votre site.',
