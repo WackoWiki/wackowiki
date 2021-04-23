@@ -11,9 +11,6 @@ $charset	= 'DEFAULT CHARSET=' . $config['database_charset'];
 $collation	= 'COLLATE ' . $config['database_collation'];
 $engine		= 'ENGINE=' . $config['database_engine'];
 
-// custom large_prefix size for VARCHAR
-$lp_size	= $large_prefix ? '255' : '191';
-
 // ACL
 
 // AUTH TOKEN
@@ -36,7 +33,7 @@ $update_config_r5_5_1 = "DELETE FROM {$pref}config WHERE config_name IN ('antidu
 
 // FILE
 $alter_file_r5_5_0 = "ALTER TABLE {$pref}file CHANGE file_lang file_lang VARCHAR(5) NOT NULL DEFAULT ''";
-$alter_file_r5_5_1 = "ALTER TABLE {$pref}file CHANGE file_name file_name VARCHAR({$lp_size}) NOT NULL DEFAULT ''";
+$alter_file_r5_5_1 = "ALTER TABLE {$pref}file CHANGE file_name file_name VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_file_r5_5_2 = "ALTER TABLE {$pref}file CHANGE file_description file_description VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_file_r5_5_3 = "ALTER TABLE {$pref}file CHANGE author author VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_file_r5_5_4 = "ALTER TABLE {$pref}file CHANGE source source VARCHAR(255) NOT NULL DEFAULT ''";
@@ -56,8 +53,8 @@ $update_menu_r5_5_1 = "DELETE m.* FROM {$pref}menu m LEFT JOIN {$pref}page p ON 
 // PAGE
 $alter_page_r5_5_0 = "ALTER TABLE {$pref}page DROP supertag";
 $alter_page_r5_5_1 = "ALTER TABLE {$pref}page CHANGE page_lang page_lang VARCHAR(5) NOT NULL DEFAULT ''";
-$alter_page_r5_5_2 = "ALTER TABLE {$pref}page CHANGE tag tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT ''";
-$alter_page_r5_5_3 = "ALTER TABLE {$pref}page CHANGE title title VARCHAR({$lp_size}) NOT NULL DEFAULT ''";
+$alter_page_r5_5_2 = "ALTER TABLE {$pref}page CHANGE tag tag VARCHAR(255) BINARY NOT NULL DEFAULT ''";
+$alter_page_r5_5_3 = "ALTER TABLE {$pref}page CHANGE title title VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_page_r5_5_4 = "ALTER TABLE {$pref}page CHANGE menu_tag menu_tag VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_page_r5_5_5 = "ALTER TABLE {$pref}page CHANGE edit_note edit_note VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_page_r5_5_6 = "ALTER TABLE {$pref}page CHANGE description description VARCHAR(255) NOT NULL DEFAULT ''";
@@ -69,7 +66,7 @@ $update_page_r5_5_2 = "DELETE FROM {$pref}page WHERE owner_id = (SELECT user_id 
 
 // PAGE LINK
 $alter_page_link_r5_5_0 = "ALTER TABLE {$pref}page_link DROP to_supertag";
-$alter_page_link_r5_5_1 = "ALTER TABLE {$pref}page_link CHANGE to_tag to_tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT ''";
+$alter_page_link_r5_5_1 = "ALTER TABLE {$pref}page_link CHANGE to_tag to_tag VARCHAR(255) BINARY NOT NULL DEFAULT ''";
 
 // POLL
 
@@ -82,8 +79,8 @@ $alter_referrer_r5_5_0 = "ALTER TABLE {$pref}referrer CHANGE referrer referrer V
 // REVISION
 $alter_revision_r5_5_0 = "ALTER TABLE {$pref}revision DROP supertag";
 $alter_revision_r5_5_1 = "ALTER TABLE {$pref}revision CHANGE page_lang page_lang VARCHAR(5) NOT NULL DEFAULT ''";
-$alter_revision_r5_5_2 = "ALTER TABLE {$pref}revision CHANGE tag tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT ''";
-$alter_revision_r5_5_3 = "ALTER TABLE {$pref}revision CHANGE title title VARCHAR({$lp_size}) NOT NULL DEFAULT ''";
+$alter_revision_r5_5_2 = "ALTER TABLE {$pref}revision CHANGE tag tag VARCHAR(255) BINARY NOT NULL DEFAULT ''";
+$alter_revision_r5_5_3 = "ALTER TABLE {$pref}revision CHANGE title title VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_revision_r5_5_4 = "ALTER TABLE {$pref}revision CHANGE menu_tag menu_tag VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_revision_r5_5_5 = "ALTER TABLE {$pref}revision CHANGE edit_note edit_note VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_revision_r5_5_6 = "ALTER TABLE {$pref}revision CHANGE description description VARCHAR(255) NOT NULL DEFAULT ''";

@@ -11,9 +11,6 @@ $charset	= 'DEFAULT CHARSET=' . $config['database_charset'];
 $collation	= 'COLLATE ' . $config['database_collation'];
 $engine		= 'ENGINE=' . $config['database_engine'];
 
-// custom large_prefix size for VARCHAR
-$lp_size	= $large_prefix ? '255' : '191';
-
 $tbl_acl = "CREATE TABLE {$pref}acl (
 					page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					privilege VARCHAR(10) NOT NULL DEFAULT '',
@@ -86,7 +83,7 @@ $tbl_file = "CREATE TABLE {$pref}file (
 					file_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 					page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-					file_name VARCHAR({$lp_size}) NOT NULL DEFAULT '',
+					file_name VARCHAR(255) NOT NULL DEFAULT '',
 					file_lang VARCHAR(5) NOT NULL DEFAULT '',
 					file_description VARCHAR(255) NOT NULL DEFAULT '',
 					caption TEXT NOT NULL,
@@ -149,8 +146,8 @@ $tbl_page = "CREATE TABLE {$pref}page (
 					version_id INT(10) UNSIGNED NOT NULL DEFAULT '1',
 					owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-					tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT '',
-					title VARCHAR({$lp_size}) NOT NULL DEFAULT '',
+					tag VARCHAR(255) BINARY NOT NULL DEFAULT '',
+					title VARCHAR(255) NOT NULL DEFAULT '',
 					menu_tag VARCHAR(255) NOT NULL DEFAULT '',
 					depth INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					parent_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -211,7 +208,7 @@ $tbl_page_link = "CREATE TABLE {$pref}page_link (
 					link_id INT(10) UNSIGNED NOT NULL  AUTO_INCREMENT,
 					from_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					to_page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-					to_tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT '',
+					to_tag VARCHAR(255) BINARY NOT NULL DEFAULT '',
 					PRIMARY KEY (link_id),
 					KEY idx_from_tag (from_page_id, to_tag),
 					KEY idx_from_page_id (from_page_id),
@@ -258,8 +255,8 @@ $tbl_revision = "CREATE TABLE {$pref}revision (
 					version_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					owner_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-					tag VARCHAR({$lp_size}) BINARY NOT NULL DEFAULT '',
-					title VARCHAR({$lp_size}) NOT NULL DEFAULT '',
+					tag VARCHAR(255) BINARY NOT NULL DEFAULT '',
+					title VARCHAR(255) NOT NULL DEFAULT '',
 					menu_tag VARCHAR(255) NOT NULL DEFAULT '',
 					created DATETIME NULL DEFAULT NULL,
 					modified DATETIME NULL DEFAULT NULL,

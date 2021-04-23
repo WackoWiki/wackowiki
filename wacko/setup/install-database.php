@@ -80,7 +80,6 @@ if ($config['is_update'] == false || version_compare($config['wacko_version'], '
 
 $port			= trim($config['database_port']);
 $fatal_error	= false;
-$large_prefix	= false;
 
 // check WackoWiki version
 if (!isset($config['wacko_version']))
@@ -168,16 +167,6 @@ switch ($config['database_driver'])
 			$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
 				? true
 				: false;
-
-			// MySQL versions prior to 5.7.7 or MariaDB 10.2.2 do not support index key prefixes up to 3072 bytes by default.
-			$lp_db_version = preg_match('/MariaDB/', $db_version, $matches)
-				? '10.2.2'
-				: '5.7.7';
-
-			if (version_compare($db_version, $lp_db_version , '>='))
-			{
-				$large_prefix = true;
-			}
 
 			echo '<li>' . ($valid_db_version
 				? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
@@ -362,16 +351,6 @@ switch ($config['database_driver'])
 		$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
 			? true
 			: false;
-
-		// MySQL versions prior to 5.7.7 or MariaDB 10.2.2 do not support index key prefixes up to 3072 bytes by default.
-		$lp_db_version = preg_match('/MariaDB/', $db_version, $matches)
-			? '10.2.2'
-			: '5.7.7';
-
-		if (version_compare($db_version, $lp_db_version , '>='))
-		{
-			$large_prefix = true;
-		}
 
 		echo '<li>' . ($valid_db_version
 			? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
