@@ -25,7 +25,7 @@ $wacko_translation = [
 	'AccountText'				=> '我的帐户',
 	'AccountTip'				=> '帐户设置',
 	'AdminText'					=> '管理',
-	'AdminTip'					=> 'Administrative Panel',
+	'AdminTip'					=> '管理面板',
 	'LogoutLink'				=> '退出',
 	'LogoutButton'				=> '退出',
 	'LogoutAreYouSure'			=> 'Do you really want to log out?',
@@ -739,9 +739,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomDesc'			=> '发送电子邮件地址收件人携带的个人消息，而不会泄露您的地址。收件人可以使用您个人资料页面上的类似表格来回复您。',
 	'UsersPMOversized'			=> 'The length of the message exceeds the maximum allowed size by %1. Please shorten your message and submit again.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',

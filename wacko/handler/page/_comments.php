@@ -143,10 +143,7 @@ if ($this->has_access('read'))
 					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], false, true);
 				}
 
-				# $user_stats = $handler_show_get_user_stats($comment['user_id']);
-
 				$tpl->comment	= $this->format($comment['body_r'], 'post_wacko', ['stripnotypo' => true]);
-
 				$tpl->owner		= $this->user_link($comment['owner_name']);
 				$tpl->created	= $comment['created'];
 
