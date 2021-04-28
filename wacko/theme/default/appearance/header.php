@@ -261,7 +261,7 @@ else
 	}
 
 	// attachments tab
-	if (!$this->forum && $readable
+	if ($readable
 		&& ((	$this->db->attachments_handler == 2 && $logged_in)
 			||	$this->db->attachments_handler == 1))
 	{
@@ -269,7 +269,7 @@ else
 	}
 
 	// upload tab
-	if (!$this->forum && $this->can_upload())
+	if ($this->can_upload())
 	{
 		$echo_tab('upload', 'UploadFiles', 'UploadFile', 2, '', 'u');
 	}
