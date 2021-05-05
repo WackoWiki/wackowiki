@@ -127,17 +127,21 @@ first really BIG template written
 			=]
 		=]
 
-		<h2 id="pages">[ ' _t: UsersPages ' ]</h2>
-		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages | number 0 , . ' ]
-			&nbsp;&nbsp;&nbsp; [ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions | number 0 , . ' ]</small></div><br>
+		<h2 id="changes">[ ' _t: UsersChanges ' ]</h2>
+		<div class="indent"><small>[ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions | number 0 , . ' ]</small></div><br>
 
-		[ ''' nopages UsersNA2 ''' ]
-		[= pages _ =
-			<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
+		[ ''' nochanges UsersNA2 ''' ]
+		[= changes _ =
+			<small>[ '' desc userChangesDesc '' ][ '' asc userChangesAsc '' ]</small>
 			['' pagination '']<br>
 			<ul class="ul-list hl-line">
 				[= li _ =
-					<li><small>[ ' created | time_formatted ' ]</small>  — [ ' link ' ]</li>
+					<li>
+						<small>[ ' modified | time_formatted ' ]</small>  — [ ' link ' ]
+						[= edit =
+							<small><span class="editnote">[[ ' note ' ]]</span></small>
+						=]
+					</li>
 				=]
 			</ul>
 		=]
@@ -157,6 +161,20 @@ first really BIG template written
 					=]
 				</ul>
 			=]
+		=]
+
+		<h2 id="pages">[ ' _t: UsersPages ' ]</h2>
+		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages | number 0 , . ' ]</small></div><br>
+
+		[ ''' nopages UsersNA2 ''' ]
+		[= pages _ =
+			<small>[ '' date userPagesByDate '' ][ '' name userPagesByName '' ]</small>
+			['' pagination '']<br>
+			<ul class="ul-list hl-line">
+				[= li _ =
+					<li><small>[ ' created | time_formatted ' ]</small>  — [ ' link ' ]</li>
+				=]
+			</ul>
 		=]
 
 		[= up _ =
@@ -186,6 +204,10 @@ first really BIG template written
 <a href="[ ' href ' ]#pages">[ ' _t: UsersDocsSortDate ' ]</a>
 [ === userPagesByName === ]
 <a href="[ ' href ' ]#pages">[ ' _t: UsersDocsSortName ' ]</a>
+[ === userChangesAsc === ]
+<a href="[ ' href ' ]#changes">[ ' _t: UsersChangesSortAsc ' ]</a>
+[ === userChangesDesc === ]
+<a href="[ ' href ' ]#changes">[ ' _t: UsersChangesSortDesc ' ]</a>
 
 
 

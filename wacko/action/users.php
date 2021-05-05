@@ -347,6 +347,73 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 				$tpl->nopages = true;
 			}
 
+			// user-changed pages
+			if ($user['total_revisions'])
+			{
+				$sort_modified	= (isset($_GET['sort']) && $_GET['sort'] == 'modified');
+				$pagination	= $this->pagination($user['total_pages'], 10, 'e',
+					$profile + ['sort' => ($sort_modified? 'modified' : ''), '#' => 'changes']);
+
+				$pages = $this->db->load_all(
+					"SELECT page_id, tag, title, modified, page_lang, edit_note " .
+					"FROM " . $this->db->table_prefix . "page " .
+					"WHERE user_id = " . (int) $user['user_id'] . " " .
+						"AND comment_on_id = 0 " .
+						"AND deleted <> 1 " .
+					"ORDER BY " .
+						($sort_modified
+							? 'modified ASC'
+							: 'modified DESC') . " " .
+					$pagination['limit']);
+
+				$page_ids = [];
+
+				foreach ($pages as $page)
+				{
+					$page_ids[]	= $page['page_id'];
+					// cache page_id for for has_access validation in link function
+					$this->page_id_cache[$page['tag']] = $page['page_id'];
+				}
+
+				// cache acls
+				$this->preload_acl($page_ids);
+
+				$tpl->enter('changes_');
+
+				// sorting and pagination
+				if ($sort_modified)
+				{
+					$tpl->desc_href = $this->href('', '', $profile);
+				}
+				else
+				{
+					$tpl->asc_href = $this->href('', '', $profile + ['sort' => 'modified']);
+				}
+
+				$tpl->pagination_text = $pagination['text'];
+
+				// pages list itself
+				foreach ($pages as $page)
+				{
+					if (!$this->db->hide_locked || $this->has_access('read', $page['page_id'], $this->get_user_name()))
+					{
+						$tpl->li_modified	= $page['modified'];
+						$tpl->li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
+
+						if (($page['edit_note']))
+						{
+							$tpl->li_edit_note	= $page['edit_note'];
+						}
+					}
+				}
+
+				$tpl->leave();	// changes_
+			}
+			else
+			{
+				$tpl->nochanges = true;
+			}
+
 			// last user comments
 			if ($this->user_allowed_comments())
 			{
