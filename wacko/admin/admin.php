@@ -85,7 +85,7 @@ if (!$engine->db->recovery_password)
 }
 
 // recovery preauthorization
-if (@$_POST['_action'] === 'emergency')
+if (@$_POST['_action'] === 'ap_login')
 {
 	if (password_verify(
 			base64_encode(
@@ -136,9 +136,6 @@ if (@$_POST['_action'] === 'emergency')
 }
 
 // check authorization
-$user		= '';
-$_title		= '';
-
 if (!isset($engine->sess->ap_created))
 {
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
@@ -160,7 +157,7 @@ if (!isset($engine->sess->ap_created))
 				<strong><?php echo $engine->_t('Authorization'); ?></strong><br>
 				<?php echo $engine->_t('AuthorizationTip'); ?>
 				<br><br>
-				<?php echo $engine->form_open('emergency', ['tag' => 'admin.php']); ?>
+				<?php echo $engine->form_open('ap_login', ['tag' => 'admin.php']); ?>
 					<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
 					<?php echo $engine->form_autocomplete_off(); ?>
 					<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" autofocus>
@@ -250,6 +247,7 @@ else
 }
 
 // add main page to menu
+$title = '';
 $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['main']['cat']] .
 			($mode == 'main' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
@@ -273,7 +271,7 @@ foreach ($module as $row)
 			if ($mode == $row['mode'])
 			{
 				$menu .= '<li class="active">';
-				$_title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $row['name'];
+				$title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $row['name'];
 			}
 			else
 			{
@@ -306,7 +304,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 <html lang="<?php echo $engine->db->language; ?>">
 	<head>
 		<meta charset="<?php echo $engine->get_charset(); ?>">
-		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $_title; ?></title>
+		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $title; ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<meta http-equiv="Content-Type" content="text/html;">
 		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/wiki.css" media="screen">
@@ -322,10 +320,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 				<h1>
 					<a href="<?php echo $engine->href(); ?>" title="<?php echo $engine->_t('AdminPanel'); ?>">
 					<?php
-						# echo '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, 'wacko_logo.png') . '" alt="WackoWiki" title="' . $engine->_t('AdminPanel') . '" width="108" height="50">';
-						# echo '<img src="' . $engine->db->base_path . Ut::join_path(IMAGE_DIR, $engine->db->site_logo) . '" alt="' . $engine->db->site_name . '" width="' . $engine->db->logo_width . '" height="' . $engine->db->logo_height . '">';
-						echo $engine->db->site_name ?? '';
-						# echo $engine->_t('AdminPanel');
+						echo $engine->db->site_name ?? $engine->_t('AdminPanel');
 						?>
 					</a>
 				</h1>
