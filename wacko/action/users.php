@@ -481,7 +481,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 
 					if ($user['total_uploads'])
 					{
-						$pagination = $this->pagination($user['total_uploads'], 10, 'u', $profile + ['#' => 'comments']);
+						$pagination = $this->pagination($user['total_uploads'], 10, 'u', $profile + ['#' => 'uploads']);
 
 						$tpl->u_u2_pagination_text = $pagination['text'];
 

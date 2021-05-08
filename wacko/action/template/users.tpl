@@ -66,7 +66,7 @@ first really BIG template written
 		</table>
 
 		[= pm _ =
-			<h2>[ ' _t: UsersContact ' ]</h2>
+			<h2 class="heading">[ ' _t: UsersContact ' ]</h2>
 			[= not _ =
 				<table class="formation">
 					<tr>
@@ -127,7 +127,7 @@ first really BIG template written
 			=]
 		=]
 
-		<h2 id="changes">[ ' _t: UsersChanges ' ]</h2>
+		<h2 id="changes" class="heading">[ ' _t: UsersChanges ' ]</h2>
 		<div class="indent"><small>[ ' _t: UsersRevisionsMade ' ]: [ ' user.total_revisions | number 0 , . ' ]</small></div><br>
 
 		[ ''' nochanges UsersNA2 ''' ]
@@ -146,7 +146,7 @@ first really BIG template written
 			</ul>
 		=]
 
-		<h2 id="comments">[ ' _t: UsersComments ' ]</h2>
+		<h2 id="comments" class="heading">[ ' _t: UsersComments ' ]</h2>
 		[= cmtdisabled =
 			[ ' _t: CommentsDisabled ' ]
 		=]
@@ -163,7 +163,7 @@ first really BIG template written
 			=]
 		=]
 
-		<h2 id="pages">[ ' _t: UsersPages ' ]</h2>
+		<h2 id="pages" class="heading">[ ' _t: UsersPages ' ]</h2>
 		<div class="indent"><small>[ ' _t: UsersOwnedPages ' ]: [ ' user.total_pages | number 0 , . ' ]</small></div><br>
 
 		[ ''' nopages UsersNA2 ''' ]
@@ -178,7 +178,7 @@ first really BIG template written
 		=]
 
 		[= up _ =
-			<h2 id="uploads">[ ' _t: UsersUploads ' ]</h2>
+			<h2 id="uploads" class="heading">[ ' _t: UsersUploads ' ]</h2>
 			[= u _ =
 				<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ]: [ ' n | number 0 , . ' ]</small></div>
 				[ ''' none UsersNA2 ''' ]
