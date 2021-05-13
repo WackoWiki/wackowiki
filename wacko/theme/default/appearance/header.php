@@ -18,7 +18,7 @@ if ($this->db->site_logo && $this->db->logo_display >= 1)
 	$tpl->site_logo_path	= $this->db->base_path . Ut::join_path(IMAGE_DIR, $this->db->site_logo);
 }
 
-if ($this->db->logo_display == 0
+if (   $this->db->logo_display == 0
 	|| $this->db->logo_display == 2
 	#|| (!$this->db->site_logo && $this->db->logo_display >= 1)
 )

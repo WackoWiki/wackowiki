@@ -94,7 +94,7 @@ if ($this->method == 'edit')
 
 // Doubleclick edit feature.
 // Enabled only for registered users who don't switch it off (requires class=page in show handler).
-if (($user = $this->get_user()))
+if ($user = $this->get_user())
 {
 	$doubleclick = @$user['doubleclick_edit'];
 }
@@ -103,7 +103,7 @@ else
 	$doubleclick = $this->has_access('write');
 }
 
-if ($doubleclick)
+if ($doubleclick && $this->method == 'show')
 {
 	$tpl->doubleclick_href = $this->href('edit');
 }

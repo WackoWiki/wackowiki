@@ -93,7 +93,7 @@
 		[ === // control tabs menu === ]
 		<div id="page-handler">
 			<ul class="submenu">
-			
+
 				[= tab TabList =
 					<li class="[ ' class ' ][ ' active ' ]">
 						[= in _ =
