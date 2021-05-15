@@ -156,8 +156,11 @@ function admin_maint_resync(&$engine, &$module)
 				$xml->feed();
 			}
 
-			// update OpenSearch XML description file
-			$xml->open_search();
+			// update OpenSearch description file
+			if ($engine->db->opensearch)
+			{
+				$xml->open_search();
+			}
 
 			unset($xml);
 
