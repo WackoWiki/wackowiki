@@ -83,7 +83,7 @@ const SQL_MODE_STRICT				= 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_B
 const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
 
 // Do not change this three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.0.19';
+const WACKO_VERSION					= '6.0.20';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
@@ -92,7 +92,7 @@ const HTML_FILTERING				= null;					// safehtml, htmlpurifier
 
 const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
-const DB_MIN_VERSION				= ['mariadb' => '10.2.2', 'mysql' => '5.7.7'];		// large prefix
+const DB_MIN_VERSION				= ['mariadb' => '10.2.2', 'mysql' => '5.7.7'];
 
 const PHP_MIN_VERSION				= '7.2.0';				// minimum required PHP version
 const PHP_MAX_VERSION				= '8.0';				// maximum required PHP version
