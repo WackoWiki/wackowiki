@@ -323,7 +323,7 @@ $ap_translation = [
 
 	'SearchSection'				=> '検索',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'OpenSearchInfo'			=> 'XMLフォルダにOpenSearch記述ファイルを作成し、HTMLヘッダで検索プラグインの自動検出を有効にします。',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 

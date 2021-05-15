@@ -320,7 +320,7 @@ $ap_translation = [
 
 	'SearchSection'				=> 'Otsi',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'OpenSearchInfo'			=> 'Loob OpenSearchi kirjeldusfaili XML-kaustas ja lubab otsinguplugina automaatse avastamise HTML-pealkirjas.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 

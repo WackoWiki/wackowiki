@@ -323,7 +323,7 @@ $ap_translation = [
 
 	'SearchSection'				=> 'Suche',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'OpenSearchInfo'			=> 'Legt die OpenSearch-Beschreibungsdatei im XML-Ordner an und aktiviert die automatische Erkennung des Such-Plugins im HTML-Header.',
 	'SearchEngineVisibility'	=> 'Suchmaschinen blockieren (Suchmaschinen-Sichtbarkeit)',
 	'SearchEngineVisibilityInfo'=> 'Suchmaschinen blockieren, aber normale Besucher erlauben. Überschreibt die Seiteneinstellungen. Hiermit wird erklärt, keine Indexierung durch Suchmaschinen zu erlauben.',
 

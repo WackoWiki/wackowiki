@@ -91,6 +91,14 @@ function admin_config_basic(&$engine, &$module)
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
 		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
 		$config['source_handler']				= (int) $_POST['source_handler'];
+
+		// create OpenSearch description file
+		if ($engine->db->opensearch == 0 && $config['source_handler'])
+		{
+			$xml = new Feed($engine);
+			$xml->open_search();
+		}
+
 		$config['export_handler']				= (int) $_POST['export_handler'];
 		$config['enable_comments']				= (int) $_POST['enable_comments'];
 		$config['sorting_comments']				= (int) $_POST['sorting_comments'];

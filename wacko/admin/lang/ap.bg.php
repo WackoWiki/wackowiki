@@ -320,7 +320,7 @@ $ap_translation = [
 
 	'SearchSection'				=> 'Търси',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'OpenSearchInfo'			=> 'Създава файла с описанието на OpenSearch в папката XML и активира функцията за автоматично откриване на приставката за търсене в заглавието на HTML.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 

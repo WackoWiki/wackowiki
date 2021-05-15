@@ -323,7 +323,7 @@ $ap_translation = [
 
 	'SearchSection'				=> 'Поиск',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'OpenSearchInfo'			=> 'Создает файл описания OpenSearch в папке XML и включает автообнаружение поискового плагина в заголовке HTML.',
 	'SearchEngineVisibility'	=> 'Блокировать поисковые боты',
 	'SearchEngineVisibilityInfo'=> 'Блокировать поисковые боты но разрешает визит обычных пользователей. Преобладает над установками страниц. <br>Не дает поисковым ботом индексировать сайт. Поисковые боты могут игнорировать эту директиву.',
 

@@ -320,7 +320,7 @@ $ap_translation = [
 
 	'SearchSection'				=> 'Søg',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'OpenSearchInfo'			=> 'Opretter OpenSearch-beskrivelsesfilen i XML-mappen og aktiverer Autodiscovery of search plugin i HTML-headeren.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 

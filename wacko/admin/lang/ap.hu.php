@@ -320,7 +320,7 @@ $ap_translation = [
 
 	'SearchSection'				=> 'Keresés',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'OpenSearch ...',
+	'OpenSearchInfo'			=> 'Létrehozza az OpenSearch leíró fájlt az XML mappában, és engedélyezi a keresési bővítmény automatikus felfedezését a HTML fejlécben.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 
