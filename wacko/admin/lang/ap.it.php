@@ -31,7 +31,7 @@ $ap_translation = [
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Log out',
+	'ApLogOut'					=> 'Esci',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
@@ -45,9 +45,9 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
+	'Cancel'					=> 'Annulla',
 	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
+	'Edit'						=> 'Modifica',
 	'Remove'					=> 'Remove',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
@@ -563,7 +563,7 @@ $ap_translation = [
 		'2'		=> 'password does not contain username',
 	],
 
-	'LoginSection'				=> 'Login',
+	'LoginSection'				=> 'Entra',
 	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username',
 	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
 	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address',
@@ -772,7 +772,7 @@ $ap_translation = [
 	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
 
 	// Resync settings
-	'Synchronize'				=> 'sincronizzare',
+	'Synchronize'				=> 'Sincronizzare',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',

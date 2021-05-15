@@ -85,12 +85,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['referrers_purge_time']			= (int) $_POST['referrers_purge_time'];
 		$config['noindex']						= (int) ($_POST['noindex'] ?? 0);
 		$config['opensearch']					= (int) ($_POST['opensearch'] ?? 0);
-		$config['xml_sitemap']					= (int) ($_POST['xml_sitemap'] ?? 0);
-		$config['xml_sitemap_time']				= (int) $_POST['xml_sitemap_time'];
-		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
-		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
-		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
-		$config['source_handler']				= (int) $_POST['source_handler'];
 
 		// create OpenSearch description file
 		if ($engine->db->opensearch == 0 && $config['source_handler'])
@@ -99,6 +93,12 @@ function admin_config_basic(&$engine, &$module)
 			$xml->open_search();
 		}
 
+		$config['xml_sitemap']					= (int) ($_POST['xml_sitemap'] ?? 0);
+		$config['xml_sitemap_time']				= (int) $_POST['xml_sitemap_time'];
+		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
+		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
+		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
+		$config['source_handler']				= (int) $_POST['source_handler'];
 		$config['export_handler']				= (int) $_POST['export_handler'];
 		$config['enable_comments']				= (int) $_POST['enable_comments'];
 		$config['sorting_comments']				= (int) $_POST['sorting_comments'];

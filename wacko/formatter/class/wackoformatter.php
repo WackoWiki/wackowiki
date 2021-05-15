@@ -1063,7 +1063,7 @@ class WackoFormatter
 			// new line
 			$result .= ($this->br ? "<br>\n" : "\n");
 
-			//intable or not?
+			// intable or not?
 			if ($this->intable)
 			{
 				$closers	= &$this->tdindent_closers;
