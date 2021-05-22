@@ -89,6 +89,12 @@
 					<td>
 					[= s _ =
 						<code>[ ' syntax ' ]</code><br>
+						[= d _ =
+							<details>
+								<summary>[ ' _t: FileAbsolutePath ' ]</summary>
+								<code>[ ' syntax ' ]</code><br>
+							</details>
+						=]
 					=]
 					</td>
 				</tr>

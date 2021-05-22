@@ -888,6 +888,10 @@ td.file- {
 	margin: 0;
 }
 
+.filemeta summary {
+	color: #444444;
+}
+
 .file-info {
 	overflow-wrap: break-word;
 }
