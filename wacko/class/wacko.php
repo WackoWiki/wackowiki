@@ -444,7 +444,7 @@ class Wacko
 	 */
 	function set_language($lang, $set_translation = false, $get_translation = false)
 	{
-		$old_lang	= @$this->language['LANG'];
+		$old_lang	= $this->language['LANG'] ?? null;
 
 		if ($old_lang != $lang && $this->known_language($lang))
 		{

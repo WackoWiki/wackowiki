@@ -88,14 +88,16 @@ $pages1 = $this->db->load_all(
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE tag LIKE " . $this->db->q($tag1 . '%') . " " .
 		"AND comment_on_id = 0 " .
-	"ORDER BY tag ASC LIMIT $limit");
+	"ORDER BY tag ASC " .
+	"LIMIT " . (int) $limit);
 
 $pages2 = $this->db->load_all(
 	"SELECT page_id, tag " .
 	"FROM " . $this->db->table_prefix . "page " .
-	"WHERE  tag LIKE " . $this->db->q($tag2 . '%') . " " .
+	"WHERE tag LIKE " . $this->db->q($tag2 . '%') . " " .
 		"AND comment_on_id = 0 " .
-	"ORDER BY tag ASC LIMIT $limit");
+	"ORDER BY tag ASC " .
+	"LIMIT " . (int) $limit);
 
 // 3. stripping by rights
 $pages	= [];
@@ -156,8 +158,8 @@ if ($pages2)
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 $local_tag_sliced		= explode('/', $this->page['tag']);
 $local_tag				= $this->page['tag'] . '/';
-$local_context_sliced	= array_slice( $local_tag_sliced, 0, count($local_tag_sliced) - 1 );
-$local_context			= implode('/', $local_context_sliced ) . '/';
+$local_context_sliced	= array_slice($local_tag_sliced, 0, count($local_tag_sliced) - 1);
+$local_context			= implode('/', $local_context_sliced) . '/';
 
 // preparing to output
 $out = [];
@@ -166,17 +168,17 @@ foreach ($pages as $page)
 {
 	if ($page['>local'])
 	{
-		$tag_sliced = explode('/', $page['tag'] );
+		$tag_sliced = explode('/', $page['tag']);
 
-		if (mb_strpos( $page['tag'], $local_tag ) === 0)
+		if (mb_strpos($page['tag'], $local_tag) === 0)
 		{
-			$out[] = '!/' . implode('/', array_slice( $tag_sliced, count($local_tag_sliced) ));
+			$out[] = '!/' . implode('/', array_slice($tag_sliced, count($local_tag_sliced)));
 		}
 		else
 		{
 			if (mb_strpos( $page['tag'], $local_context ) === 0)
 			{
-				$out[] = implode('/', array_slice( $tag_sliced, count($local_context_sliced) ));
+				$out[] = implode('/', array_slice($tag_sliced, count($local_context_sliced)));
 			}
 			else
 			{
