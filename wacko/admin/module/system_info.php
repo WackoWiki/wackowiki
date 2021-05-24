@@ -37,7 +37,10 @@ function admin_system_info(&$engine, &$module)
 
 	// get TLS mode			-> https://httpd.apache.org/docs/2.4/mod/mod_ssl.html#envvars
 	$tls_mode				= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on'
-									? $engine->_t('On') . ', '. ($_SERVER['SSL_CIPHER'] ?? '') . ' (' . ($_SERVER['SSL_PROTOCOL'] ?? '') . ')'
+									? $engine->_t('On') .
+										(isset($_SERVER['SSL_PROTOCOL'])
+											? ', '. $_SERVER['SSL_PROTOCOL'] . ' (' . ($_SERVER['SSL_CIPHER'] ?? '') . ')'
+											: '')
 									: $engine->_t('Off')
 								);
 
@@ -55,6 +58,9 @@ function admin_system_info(&$engine, &$module)
 	$upload_max_filesize	= trim(str_replace('M', '', get_cfg_var('upload_max_filesize')));
 	$post_max_size			= trim(str_replace('M', '', get_cfg_var('post_max_size')));
 
+	// PHP session.save_path
+	$session_save_path		= current(array_reverse(explode(';', ini_get('session.save_path'))));
+
 	// check if gzip compression is enabled // @extension_loaded('zlib')
 	$gzip_compression = (function_exists('ob_gzhandler') || ini_get('zlib.output_compression') ? $engine->_t('On') : $engine->_t('Off'));
 
@@ -65,8 +71,6 @@ function admin_system_info(&$engine, &$module)
 	{
 		$memory = trim(str_replace('M', '', get_cfg_var('memory_limit')));
 	}
-
-	$_php_ram = $memory;
 
 	// Sysinfo in array
 	$sysinfo['app_version']			= [$engine->_t('WackoVersion'), $engine->db->wacko_version];
@@ -80,11 +84,11 @@ function admin_system_info(&$engine, &$module)
 	$sysinfo['sql_mode_global']		= [$engine->_t('SqlModesGlobal'), wordwrap($sql_mode_global, 80, "\n", true)];
 	$sysinfo['sql_mode_session']	= [$engine->_t('SqlModesSession'), wordwrap($sql_mode_session, 80, "\n", true)];
 	$sysinfo['php_version']			= [$engine->_t('PhpVersion'), PHP_VERSION];
-	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->binary_multiples($_php_ram * 1024 * 1024, false, true, true)];
+	$sysinfo['memory']				= [$engine->_t('MemoryLimit'), $engine->binary_multiples($memory * 1024 * 1024, false, true, true)];
 	$sysinfo['upload_max_filesize']	= [$engine->_t('UploadFilesizeMax'), $engine->binary_multiples($upload_max_filesize * 1024 * 1024, false, true, true)];
 	$sysinfo['post_max_size']		= [$engine->_t('PostMaxSize'), $engine->binary_multiples($post_max_size * 1024 * 1024, false, true, true)];
 	$sysinfo['max_execution_time']	= [$engine->_t('MaxExecutionTime'), get_cfg_var('max_execution_time') . ' seconds'];
-	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), CACHE_SESSION_DIR];	// ini_get('session.save_path')
+	$sysinfo['session_save_path']	= [$engine->_t('SessionPath'), CACHE_SESSION_DIR . ' (PHP default: ' . $session_save_path . ')'];
 	$sysinfo['default_charset']		= [$engine->_t('PhpDefaultCharset'), ini_get('default_charset')];
 	$sysinfo['gzip_compression']	= [$engine->_t('GZipCompression'), $gzip_compression];
 	$sysinfo['php_extensions']		= [$engine->_t('PhpExtensions'), implode(', ',get_loaded_extensions())];
