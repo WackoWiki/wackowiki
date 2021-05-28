@@ -62,7 +62,7 @@ $load_diff_page = function ($revision_id)
 	if ($revision_id > 0)
 	{
 		return $this->db->load_single(
-			"SELECT r.page_id, r.version_id, r.revision_id, r.modified, r.body, r.edit_note, r.minor_edit, r.page_lang, u.user_name " .
+			"SELECT r.page_id, r.version_id, r.revision_id, r.modified, r.body, r.edit_note, r.minor_edit, r.page_size, r.page_lang, u.user_name " .
 			"FROM " . $this->db->table_prefix . "revision r " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
 			"WHERE r.revision_id = " . (int) $revision_id . " " .
@@ -71,7 +71,7 @@ $load_diff_page = function ($revision_id)
 	else
 	{
 		return $this->db->load_single(
-			"SELECT p.page_id, p.version_id, 0 AS revision_id, p.modified, p.body, p.edit_note, p.minor_edit, p.page_lang, u.user_name " .
+			"SELECT p.page_id, p.version_id, 0 AS revision_id, p.modified, p.body, p.edit_note, p.minor_edit, p.page_size, p.page_lang, u.user_name " .
 			"FROM " . $this->db->table_prefix . "page p " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 			"WHERE p.page_id = " . (int) $this->get_page_id() . " " .
@@ -100,6 +100,13 @@ if ($page_a && $page_b
 			$tpl->href		= $this->href('', '', ($page['revision_id'] > 0? ['revision_id' => $page['revision_id']] : ''));
 			$tpl->version	= Ut::perc_replace($this->_t('RevisionAsOf'), '<strong>' . $page['version_id'] . '</strong>');
 			$tpl->modified	= $page['modified'];
+			$tpl->size		= $this->binary_multiples($page['page_size'], false, true, true);
+
+			if ($side == 'b')
+			{
+				$tpl->delta		= $this->delta_formatted($page_b['page_size'] - $page_a['page_size']);
+			}
+
 			$tpl->username	= $this->user_link($page['user_name'], true, true);
 			$tpl->n_note	= $page['edit_note'] ?: null;
 			$tpl->m_minor	= $page['minor_edit'] ? 'm' : null;

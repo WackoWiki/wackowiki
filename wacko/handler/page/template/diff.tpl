@@ -89,6 +89,7 @@
 			</a>
 		=]
 	</div><br>
+	([ ' size ' ]) [ ' delta ' ]<br>
 	[ ' username ' ]<br>
 	[= m _ =
 		<abbr class="minoredit" title="[ ' _t: EditMinor ' ]">[ ' minor ' ]</abbr>
