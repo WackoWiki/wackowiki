@@ -53,7 +53,7 @@
 						[= e _ =
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
-						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]">
+						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]" required>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						<a href="[ ' href: moderate ' ]" class="btn-link">
 							<button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button>
@@ -189,7 +189,7 @@
 								<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 							=]
 						<em>[ ' text ' ]</em><br>
-						<input type="text" name="cluster" size="50" maxlength="250">
+						<input type="text" name="cluster" size="50" maxlength="250" required>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
 						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 					</td></tr>
@@ -205,7 +205,7 @@
 						[= e _ =
 							<span class="cite"><strong>[ ' text ' ]</strong></span><br>
 						=]
-						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]"> 
+						<input type="text" name="new_tag" size="50" maxlength="250" value="[ ' title | e attr ' ]" required> 
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button> 
 						<a href="[ ' href: moderate ' ]" class="btn-link"><button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button></a>
 					</td>

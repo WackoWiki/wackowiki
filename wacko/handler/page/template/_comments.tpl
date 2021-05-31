@@ -74,7 +74,7 @@
 						<input type="text" id="addcomment_title" name="title" class="input-title" size="100" maxlength="250" value="[ ' title | e attr ' ]"><br>
 						<br>
 						<label for="addcomment">[ ' _t: AddComment ' ]</label><br>
-						<textarea id="addcomment" name="body" class="textarea-comment" rows="6" cols="7">[ ' payload | pre ' ]</textarea>
+						<textarea id="addcomment" name="body" class="textarea-comment" rows="6" cols="7" required>[ ' payload | pre ' ]</textarea>
 						[= a _ =
 							<input type="checkbox" name="noid_publication" id="noid_publication" value="[ ' pageid ' ]" [ ' checked ' ]>
 							<label for="noid_publication">[ ' _t: PostAnonymously ' ]</label>

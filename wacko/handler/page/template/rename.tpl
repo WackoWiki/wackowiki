@@ -10,7 +10,7 @@
 		[ ' _t: NewName ' ]
 		<form action="[ ' href: rename ' ]" method="post" name="rename_page">
 			[ ' csrf: rename_page ' ]
-			<input type="text" maxlength="250" name="new_tag" value="[ ' tag | e attr ' ]" size="60">
+			<input type="text" maxlength="250" name="new_tag" value="[ ' tag | e attr ' ]" size="60" required>
 			<br>
 			<br>
 			<input type="checkbox" id="redirect" name="redirect"[ ' checked ' ]>

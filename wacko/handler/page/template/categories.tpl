@@ -15,7 +15,7 @@
 						<label for="new_category">[ ' _t: CategoriesAdd ' ]</label>
 					</td>
 					<td>
-						<input type="text" name="category" id="new_category" value="[ ' category | e attr ' ]" size="40" maxlength="100">
+						<input type="text" name="category" id="new_category" value="[ ' category | e attr ' ]" size="40" maxlength="100" required>
 					</td>
 				</tr>
 				<tr>
@@ -54,7 +54,7 @@
 						<label for="new_name">[ ' newname ' ]</label>
 					</td>
 					<td>
-						<input type="text" name="category" id="new_name" value="[ ' category | e attr ' ]" size="40" maxlength="100">
+						<input type="text" name="category" id="new_name" value="[ ' category | e attr ' ]" size="40" maxlength="100" required>
 					</td>
 				</tr>
 				<tr>

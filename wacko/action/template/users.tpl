@@ -100,7 +100,7 @@ first really BIG template written
 							<tr>
 								<td colspan="2">
 									<label for="mail_subject">[ ' _t: UsersIntercomSubject ' ]:</label><br>
-									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200">
+									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200" required>
 									[= ref _ =
 										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
 									=]
@@ -108,7 +108,7 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td colspan="2">
-									<textarea name="mail_body" cols="80" rows="15">[ ' body | e ' ]</textarea>
+									<textarea name="mail_body" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
 								</td>
 							</tr>
 							<tr>
@@ -231,7 +231,7 @@ first really BIG template written
 						<label for="search_user">[ ' _t: UsersSearch ' ]:</label>
 					</td>
 					<td>
-						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]"> ['' '']
+						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" required> ['' '']
 						<button type="submit" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
 					</td>
 				</tr>
@@ -257,13 +257,6 @@ first really BIG template written
 			</tr>
 		</thead>
 		<tbody>
-		[= none _ =
-			<tr>
-				<td colspan="5" class="t-center">
-					<small><em>[ ' _t: UsersNoMatching ' ]</em></small>
-				</td>
-			</tr>
-		=]
 		[= u _ =
 			<tr>
 				<td>[ ' link ' ]</td>
@@ -279,6 +272,9 @@ first really BIG template written
 		=]
 		</tbody>
 	</table>
+	[= none _ =
+		<br>[ ' _t: UsersNoMatching ' ]
+	=]
 	['' pagination '']
 
 [== sortsArr ==]

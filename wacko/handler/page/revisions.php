@@ -126,7 +126,7 @@ if ($this->has_access('read'))
 			}
 		}
 
-		$tpl->leave();
+		$tpl->leave(); // r_l_
 	}
 
 	$this->current_context--;

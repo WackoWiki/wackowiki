@@ -516,7 +516,7 @@ class Wacko
 			}
 			else
 			{
-				// TODO: only default and users theme's language loaded.... need to fix for themes_per_page sites w/ nonempty theme lang files
+				// TODO: only default and users theme's language loaded... need to fix for themes_per_page sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
 				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.' . $lang . '.php');
 
@@ -8078,8 +8078,7 @@ class Wacko
 			$out .= '<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
 			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
 			$out .= '<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n";
-			// $out .= $inline ? '' : "<br>\n";
-			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6">';
+			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6" required>';
 			$out .= $inline ? '' : "<br>\n";
 		}
 
