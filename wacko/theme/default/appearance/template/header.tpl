@@ -115,30 +115,31 @@
 					</li>
 				=]
 				<li class="search">
-				<div id="search-box">
-					<form action="[ ' search ' ]" method="get" name="search">
-						[ ' // search | hide_page ' ]
-						[ ' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 ' ]
-						<span class="search nobr">
-							<label for="phrase">[ ' _t: SearchText ' ]</label>
-							<input type="search" name="phrase" id="phrase" size="20" title="[ ' _t: SearchButton ' ]">
-							<button type="submit" title="[ ' _t: SearchButton ' ]" value="[ ' _t: SearchButton ' ]">
-								<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButton ' ]" class="btn-search">
-							</button>
-						</span>
-					</form>
-				</div>
+					<div id="search-box">
+						<form action="[ ' search ' ]" method="get" name="search">
+							[ ' // search | hide_page ' ]
+							[ ' search | regex /^[^?]*\?page=([^&]+).*?$/ '<input type="hidden" name="page" value="\1">' 1 1 ' ]
+							<span class="search nobr">
+								<label for="phrase">[ ' _t: SearchText ' ]</label>
+								<input type="search" name="phrase" id="phrase" size="20" title="[ ' _t: SearchButton ' ]">
+								<button type="submit" title="[ ' _t: SearchButton ' ]" value="[ ' _t: SearchButton ' ]">
+									<img src="[ ' db: theme_url ' ]icon/spacer.png" alt="[ ' _t: SearchButton ' ]" class="btn-search">
+								</button>
+							</span>
+						</form>
+					</div>
 				</li>
 			</ul>
 		</div>
 	</nav>
-[ === #------------------------------ === ]
+	[ === #------------------------------ === ]
 	<nav class="breadcrumb">
 		[ ' breadcrumbs ' ]
 		[ ' // usertrail ' ]
 	</nav>
+	[ === #------------------------------ === ]
 </header>
-[ === #------------------------------ === ]
+
 <main>
 [= msg _ =
 	<div id="output_messages">

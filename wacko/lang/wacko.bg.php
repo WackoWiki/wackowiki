@@ -187,7 +187,7 @@ $wacko_translation = [
 	'Nobody'					=> 'Никой',
 	'TakeOwnership'				=> 'Стани собственик',
 	'FilesTip'					=> 'Manage attached files',
-	'FilesText'					=> 'Attachments',
+	'FilesText'					=> 'Прикачени файлове',
 	'DeleteConfirm'				=> 'Действително ли искате да ИЗТРИЕТЕ този текст? ' . "\n" . 'По-късно няма да можете да го възстановите.',
 	'DeleteTip'					=> 'Кликнете, за да изтриете.',
 	'DeleteCommentTip'			=> 'Click here to delete comment.',
@@ -201,7 +201,7 @@ $wacko_translation = [
 	'EditText'					=> 'Редактиране' ,
 	'EditCommentTip'			=> 'Edit comment',
 	'EditComment'				=> 'Edit this comment',
-	'ReplyComment'				=> 'Reply',
+	'ReplyComment'				=> 'Отговор',
 	'ReplyCommentTip'			=> 'Reply this comment',
 	'RevisionTip'				=> 'Кликнете, за да видите списъка на промените',
 	'RevisionText'				=> 'Версии',
@@ -212,7 +212,7 @@ $wacko_translation = [
 	'ReferrersTip'				=> 'Кликнете, за да видите списъка на страниците, препращащи на тази',
 	'ReferrersText'				=> 'Препратки',
 	'ModerateTip'				=> 'Модериране на теми и публикации във форума',
-	'ModerateText'				=> 'Moderate',
+	'ModerateText'				=> 'Модерирай',
 	'SearchText'				=> 'Търсене: ',
 
 	'AclUpdated'				=> 'ACL обновен',
@@ -513,7 +513,7 @@ $wacko_translation = [
 	'RedirectsToItself'			=> 'Сайтът се пренасочва към себе си.',
 	'ReallyDelete'				=> 'Вие действително ли искате да ИЗТРИЕТЕ страницата? <br>след това няма да можете да я Възстановите.<br><br>ВНИМАНИЕ: при изтриването на страницата ще бъдат изтрити всички нейни версии, коментари, прикачени файлове, референции и т.п.',
 	'DeleteButton'				=> 'Да, изтрий!',
-	'RestoreButton'				=> 'Restore',
+	'RestoreButton'				=> 'Възстановяване',
 	'ArchiveButton'				=> 'Archive',
 	'CommentForWatchedPage'		=> 'Коментар за страницата ',
 	'SomeoneCommented'			=> ' коментирал гледаната от вас страница: ',
@@ -528,7 +528,7 @@ $wacko_translation = [
 	'AccountDeleteHint'			=> 'Акаунта ще бъдат изтрити от системата. Следователно вие няма да можете да влезете с вашите текущи идентификационни данни. Ако решите да станете потребител на това приложение отново, можете да го направите с помощта на средствата, които предоставя това приложение.',
 	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
 
-	'MarkRead'					=> 'Mark all as read',
+	'MarkRead'					=> 'Маркирай всички като прочетени',
 	'CurrentTime'				=> 'current time',
 	'Created'					=> 'created',
 	'Modified'					=> 'modified',
@@ -624,7 +624,7 @@ $wacko_translation = [
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'Преместено на адрес',
-	'RedirectedFrom'			=> 'Пренасочен от',
+	'RedirectedFrom'			=> 'Пренасочен от %1',
 	'RedirectedTo'				=> 'Пренасочен към',
 	'CurrentPassword'			=> 'Въведете текущата парола',
 	'NewPassword'				=> 'Нова парола',
@@ -731,11 +731,11 @@ $wacko_translation = [
 	'UsersRevisionsMade'		=> 'Revisions made',
 	'UsersDocsSortName'			=> '[Sort by name]',
 	'UsersDocsSortDate'			=> '[Sort by creation date]',
-	'UsersChangesSortAsc'		=> '[Sort ascending]',
-	'UsersChangesSortDesc'		=> '[Sort descending]',
+	'UsersChangesSortAsc'		=> '[Възходящо сортиране]',
+	'UsersChangesSortDesc'		=> '[Низходящо сортиране]',
 	'UsersSessionNA'			=> '[not recorded]',
-	'UsersSessionHidden'		=> '[hidden]',
-	'UsersIntercomSubject'		=> 'Subject',
+	'UsersSessionHidden'		=> '[скрит]',
+	'UsersIntercomSubject'		=> 'Заглавие',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -809,10 +809,10 @@ $wacko_translation = [
 	'MassRename'				=> 'для всех страниц кластера',
 	'SettingsRemove'			=> 'Изртиване',
 	'SettingsPurge'				=> 'Изчистване',
-	'SettingsModerate'			=> 'Moderate',
+	'SettingsModerate'			=> 'Модерирай',
 	'SettingsPermissions'		=> 'Достъп',
 	'AclForEntireCluster'		=> 'Права за целия СЕКТОР',
-	'SettingsAttachments'		=> 'Attachments',
+	'SettingsAttachments'		=> 'Прикачени файлове',
 	'SettingsUpload'			=> 'Качване на файлове',
 	'SettingsCategories'		=> 'Категории',
 	'SettingsLanguages'			=> 'Езици',
@@ -853,8 +853,8 @@ $wacko_translation = [
 	'UploadUsedStorage'			=> 'Storage in use ',
 
 	// attachments
-	'Attachments'				=> 'Attachments',
-	'Attachment'				=> 'Attachment',
+	'Attachments'				=> 'Прикачени файлове',
+	'Attachment'				=> 'Прикачен файл',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsToCluster'		=> 'cluster',
 	'AttachmentsByTime'			=> 'by time',
@@ -919,7 +919,7 @@ $wacko_translation = [
 	'AclAreYouSure'				=> 'Ще се сменят правата за тази страница и всички подстраници. Продължение?',
 
 	'BookmarkDeleteSelected'	=> 'Delete Selected',
-	'BookmarkMark'				=> 'Mark',
+	'BookmarkMark'				=> 'Маркирай',
 	'BookmarkNumber'			=> 'No.',
 	'BookmarkNone'				=> 'You have no bookmarks.',
 	'BookmarkTitle'				=> 'Bookmark Title',
@@ -941,7 +941,7 @@ $wacko_translation = [
 	'Prev'						=> 'Назад',
 	'NextAcr'					=> 'Next',
 	'PrevAcr'					=> 'Prev',
-	'Back'						=> 'обратно',
+	'Back'						=> 'Обратно',
 
 	// filter
 	'Any'						=> 'Any',
@@ -949,7 +949,7 @@ $wacko_translation = [
 	// My Groups
 	'UserGroups'				=> 'Группы пользователей',
 	'MyGroups'					=> 'Group Associations',
-	'Group'						=> 'group',
+	'Group'						=> 'Група',
 	'Groups'					=> 'Групи',
 
 	// license action
@@ -1010,7 +1010,7 @@ $wacko_translation = [
 
 	'ChangesFeed'				=> 'Changes',
 	'CommentsFeed'				=> 'Коментари',
-	'NewsFeed'					=> 'News',
+	'NewsFeed'					=> 'Новини',
 	'RevisionsFeed'				=> 'Revisions of ',
 
 	'LastModification'			=> 'Last Modification',
@@ -1022,7 +1022,7 @@ $wacko_translation = [
 	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
 
 	// news
-	'News'						=> 'News',
+	'News'						=> 'Новини',
 	'NewsName'					=> 'Title',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
@@ -1047,21 +1047,21 @@ $wacko_translation = [
 	'PotentialSpam'				=> 'Identified Potential Spam',
 
 	// moderation handler
-	'Moderation'				=> 'Moderation',
-	'Topics'					=> 'topics',
+	'Moderation'				=> 'Модерация',
+	'Topics'					=> 'Теми',
 	'ModerateSection'			=> 'section / page ',
 
 	'NotModerator'				=> 'You do not have authority to moderate this page / chapter',
-	'ModerateDelete'			=> 'Delete',
+	'ModerateDelete'			=> 'Изтрий',
 	'ModerateDeleteTopic'		=> 'Delete topic / page',
 	'ModerateDeletePosts'		=> 'Delete comments',
-	'ModerateMove'				=> 'Move',
+	'ModerateMove'				=> 'Премести',
 	'ModerateSplit'				=> 'Split / Move comments',
-	'ModerateMerge'				=> 'Merge',
+	'ModerateMerge'				=> 'Свържи',
 	'ModerateLock'				=> 'Lock',
 	'ModerateUnlock'			=> 'Unlock',
 	'SetButton'					=> 'Set',
-	'ResetButton'				=> 'Reset',
+	'ResetButton'				=> 'Изчисти',
 	'ModerateAccept'			=> 'Accept',
 	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
 	'ModerateRenameConfirm'		=> 'Enter a new title for the selected page',
@@ -1102,8 +1102,8 @@ $wacko_translation = [
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
-	'ForumSubforums'			=> 'Forum',
-	'ForumTopic'				=> 'Topic',
+	'ForumSubforums'			=> 'Форум',
+	'ForumTopic'				=> 'Тема',
 	'ForumTopics'				=> 'Теми',
 	'ForumPosts'				=> 'Мнения',
 	'ForumReplies'				=> 'Отговори',
@@ -1142,8 +1142,8 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Паролата ви е същата като вашата електронна поща.',
 
 	// POLLS ADD-ON
-	'PollsTopic'				=> 'Topic',
-	'PollsVariant'				=> 'Reply',
+	'PollsTopic'				=> 'Тема',
+	'PollsVariant'				=> 'Отговор',
 	'PollsPlural'				=> 'You can select multiple answers',
 	'PollsSingular'				=> 'You can select only one answer',
 	'PollsAddVariant'			=> 'add option',
@@ -1165,7 +1165,7 @@ $wacko_translation = [
 	'PollsAlreadyVoted'			=> 'You have already participated in this survey.',
 	'PollsAlreadyEnded'			=> 'This survey has been completed.',
 	'PollsDone'					=> 'Thank you for your participation! Your vote is taken.',
-	'PollsReset'				=> 'reset',
+	'PollsReset'				=> 'Изчисти',
 	'PollsRemove'				=> 'remove',
 	'PollsStop'					=> 'stop',
 	'PollsActivate'				=> 'activate',

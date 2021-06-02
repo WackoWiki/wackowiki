@@ -27,7 +27,11 @@ if (($page = $this->unwrap_link($to)))
 			// shows redirect hint on target page
 			if (!$mute)
 			{
-				$this->set_message($this->_t('RedirectedFrom') . ' ' . $this->compose_link_to_page($this->tag, '', $this->page['title'], $this->tag, false, ['redirect' => 'no']));
+				$this->set_message(
+					Ut::perc_replace(
+						$this->_t('RedirectedFrom'),
+						$this->compose_link_to_page($this->tag, '', $this->page['title'], $this->tag, false, ['redirect' => 'no'])
+					));
 			}
 
 			// do not redirect a page to itself

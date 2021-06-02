@@ -212,7 +212,7 @@ $wacko_translation = [
 	'ReferrersTip'				=> '查看連接到本頁的網址',
 	'ReferrersText'				=> '來源',
 	'ModerateTip'				=> 'Moderation of topics and forum posts',
-	'ModerateText'				=> 'Moderate',
+	'ModerateText'				=> '管理',
 	'SearchText'				=> '搜尋: ',
 
 	'AclUpdated'				=> '權限設置已經更新',
@@ -302,9 +302,9 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> '來源',
-	'SourceTip'					=> 'View the wiki-source',
+	'SourceTip'					=> '檢視原始碼',
 	'SourceCopyToClipboard'		=> '複製到剪貼板',
-	'SourceFor'					=> 'View source for %1',
+	'SourceFor'					=> '檢視 %1 的原始碼',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -624,8 +624,8 @@ $wacko_translation = [
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'This page moved. You can find it at',
-	'RedirectedFrom'			=> 'Redirected from',
-	'RedirectedTo'				=> 'Redirected to',
+	'RedirectedFrom'			=> '重新導向自%1',
+	'RedirectedTo'				=> '重新導向至',
 	'CurrentPassword'			=> '現有密碼',
 	'NewPassword'				=> '新密碼',
 	'YouWantChangePassword'		=> '更改密碼',
@@ -731,8 +731,8 @@ $wacko_translation = [
 	'UsersRevisionsMade'		=> 'Revisions made',
 	'UsersDocsSortName'			=> '[Sort by name]',
 	'UsersDocsSortDate'			=> '[Sort by creation date]',
-	'UsersChangesSortAsc'		=> '[Sort ascending]',
-	'UsersChangesSortDesc'		=> '[Sort descending]',
+	'UsersChangesSortAsc'		=> '[昇冪排序]',
+	'UsersChangesSortDesc'		=> '[降冪排序]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[隱藏]',
 	'UsersIntercomSubject'		=> '標題',
@@ -809,7 +809,7 @@ $wacko_translation = [
 	'MassRename'				=> 'for entire cluster',
 	'SettingsRemove'			=> '移除',
 	'SettingsPurge'				=> 'Purge',
-	'SettingsModerate'			=> 'Moderate',
+	'SettingsModerate'			=> '管理',
 	'SettingsPermissions'		=> '權限',
 	'AclForEntireCluster'		=> 'for entire cluster',
 	'SettingsAttachments'		=> '附加檔案',

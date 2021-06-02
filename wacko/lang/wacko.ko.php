@@ -302,9 +302,9 @@ $wacko_translation = [
 
 	// source handler
 	'SourceText'				=> '출처',
-	'SourceTip'					=> 'View the wiki-source',
+	'SourceTip'					=> '원본 보기',
 	'SourceCopyToClipboard'		=> '클립 보드에 복사',
-	'SourceFor'					=> 'View source for %1',
+	'SourceFor'					=> '%1 문서 원본 보기',
 
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
@@ -624,8 +624,8 @@ $wacko_translation = [
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
 	'PageMoved'					=> 'This page moved. You can find it at',
-	'RedirectedFrom'			=> 'Redirected from',
-	'RedirectedTo'				=> 'Redirected to',
+	'RedirectedFrom'			=> '%1에서 넘어옴',
+	'RedirectedTo'				=> '넘겨줄 대상',
 	'CurrentPassword'			=> '현재 비밀번호 확인',
 	'NewPassword'				=> '새 비밀번호',
 	'YouWantChangePassword'		=> '비밀번호 변경',
@@ -731,8 +731,8 @@ $wacko_translation = [
 	'UsersRevisionsMade'		=> 'Revisions made',
 	'UsersDocsSortName'			=> '[Sort by name]',
 	'UsersDocsSortDate'			=> '[Sort by creation date]',
-	'UsersChangesSortAsc'		=> '[Sort ascending]',
-	'UsersChangesSortDesc'		=> '[Sort descending]',
+	'UsersChangesSortAsc'		=> '[오름차순 정렬]',
+	'UsersChangesSortDesc'		=> '[내림차순 정렬]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[숨김]',
 	'UsersIntercomSubject'		=> '제목',
