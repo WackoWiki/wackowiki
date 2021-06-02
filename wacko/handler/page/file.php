@@ -62,7 +62,8 @@ else
 
 $type = $this->http->mime_type($file_path);
 
-if (strncmp($type, 'image/', 6)) // do not count images
+if ($this->db->enable_counters
+	&& strncmp($type, 'image/', 6)) // do not count images
 {
 	// count file download
 	$this->db->sql_query(

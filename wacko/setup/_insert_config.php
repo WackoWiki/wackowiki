@@ -74,6 +74,7 @@ $config_db['email_priority']				= $config['email_priority'];
 $config_db['email_from']					= $config['email_from'];
 $config_db['enable_captcha']				= $config['enable_captcha'];
 $config_db['enable_comments']				= $config['enable_comments'];
+$config_db['enable_counters']				= $config['enable_counters'];
 $config_db['enable_email']					= $config['enable_email'];
 $config_db['enable_email_notification']		= $config['enable_email_notification'];
 $config_db['enable_feeds']					= $config['enable_feeds'];

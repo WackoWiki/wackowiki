@@ -182,7 +182,8 @@ if ($this->has_access('read'))
 		}
 
 		// count page hit (we don't count for page owner)
-		if ($this->get_user_id() != $this->page['owner_id'])
+		if ($this->db->enable_counters
+			&& ($this->get_user_id() != $this->page['owner_id']))
 		{
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page SET " .
