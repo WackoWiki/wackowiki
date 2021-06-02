@@ -15,7 +15,7 @@ $wacko_translation = [
 	'ConvertButton'				=> 'Convert',
 	'SearchButton'				=> 'Αναζήτηση',
 	'SubmitButton'				=> 'Υποβολή',
-	'AddButton'					=> 'Add',
+	'AddButton'					=> 'Προσθήκη',
 	'RemoveButton'				=> 'Αφαίρεση',
 
 	'FormInvalid'				=> 'Η υποβληθείσα μορφή ήταν άκυρη. Προσπαθήστε πάλι.',
@@ -256,7 +256,7 @@ $wacko_translation = [
 	'FilesPurged'				=> 'All attached files were removed.',
 	'PurgeRevisions'			=> 'Κατάργηση όλων των αναθεωρήσεων',
 	'RevisionsPurged'			=> 'Revisions were purged.',
-	'PurgeButton'				=> 'Purge',
+	'PurgeButton'				=> 'Εκκαθάριση',
 
 	// categories handler
 	'Categories'				=> 'Κατηγορίες',
@@ -301,7 +301,7 @@ $wacko_translation = [
 	'TaggedWithTip'				=> 'εμφάνιση σελίδων με %1',
 
 	// source handler
-	'SourceText'				=> 'Κώδικας',
+	'SourceText'				=> 'Πηγή',
 	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'Αντιγραφή στο πρόχειρο',
 	'SourceFor'					=> 'Προβολή πηγαίου κώδικα για τη σελίδα %1',
@@ -776,7 +776,7 @@ $wacko_translation = [
 	'MetaDescription'			=> 'Περιγραφή Κλειδί',
 	'On'						=> 'Ανοικτό',
 	'Off'						=> 'Κλειστό',
-	'Registered'				=> 'Registered',
+	'Registered'				=> 'Εγγεγραμμένοι',
 	'MetaComments'				=> 'Εμφάνιση σχολίων',
 	'MetaFiles'					=> 'Show files panel',
 	'MetaRating'				=> 'Show rating panel',
@@ -808,7 +808,7 @@ $wacko_translation = [
 	'SettingsRename'			=> 'Μετονομασία',
 	'MassRename'				=> 'για ολόκληρο το cluster',
 	'SettingsRemove'			=> 'Αφαίρεση',
-	'SettingsPurge'				=> 'Purge',
+	'SettingsPurge'				=> 'Εκκαθάριση',
 	'SettingsModerate'			=> 'Moderate',
 	'SettingsPermissions'		=> 'Δικαιώματα',
 	'AclForEntireCluster'		=> 'για ολόκληρο το cluster',

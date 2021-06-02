@@ -10,7 +10,7 @@ $wacko_translation = [
 	// common
 	'CreateButton'				=> 'Maak',
 	'SaveButton'				=> 'Bewaar',
-	'UpdateButton'				=> 'Update',
+	'UpdateButton'				=> 'Bijwerken',
 	'CancelButton'				=> 'Annuleren',
 	'ConvertButton'				=> 'Convert',
 	'SearchButton'				=> 'Zoeken',
@@ -241,7 +241,7 @@ $wacko_translation = [
 	'AccessMode'				=> 'Zichtbaarheid',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
-	'AccessRegistered'			=> 'registered',
+	'AccessRegistered'			=> 'geregistreerd',
 	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
@@ -301,7 +301,7 @@ $wacko_translation = [
 	'TaggedWithTip'				=> 'pagina\'s met een %1 tag tonen',
 
 	// source handler
-	'SourceText'				=> 'Source',
+	'SourceText'				=> 'Bron',
 	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'Kopieer naar klembord',
 	'SourceFor'					=> 'Brontekst bekijken van %1',
@@ -776,7 +776,7 @@ $wacko_translation = [
 	'MetaDescription'			=> 'Meta-beschrijving',
 	'On'						=> 'Aan',
 	'Off'						=> 'Uit',
-	'Registered'				=> 'Registered',
+	'Registered'				=> 'Geregistreerd',
 	'MetaComments'				=> 'Commentaars tonen',
 	'MetaFiles'					=> 'Toon bestanden paneel',
 	'MetaRating'				=> 'Beoordelingspaneel tonen',
@@ -797,7 +797,7 @@ $wacko_translation = [
 	'SettingsTotalRevs'			=> 'Revisions',
 	'SettingsTotalComs'			=> 'Commentaars',
 	'SettingsWatchers'			=> 'Hoeders',
-	'SettingsHits'				=> 'Views',
+	'SettingsHits'				=> 'Weergaven',
 	'SettingsRating'			=> 'Readers rating',
 	'SettingsText'				=> 'Instellingen',
 	'SettingsTip'				=> 'Overige instellingen en eigenschappen van deze pagina',

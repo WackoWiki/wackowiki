@@ -241,7 +241,7 @@ $wacko_translation = [
 	'AccessMode'				=> 'Visibilidade',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
-	'AccessRegistered'			=> 'registered',
+	'AccessRegistered'			=> 'registrado',
 	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
@@ -256,7 +256,7 @@ $wacko_translation = [
 	'FilesPurged'				=> 'Todos os arquivos anexados foram removidos.',
 	'PurgeRevisions'			=> 'Purge all revisions of the page',
 	'RevisionsPurged'			=> 'Revisions were purged.',
-	'PurgeButton'				=> 'Purge',
+	'PurgeButton'				=> 'Purgar',
 
 	// categories handler
 	'Categories'				=> 'Categorias',
@@ -301,7 +301,7 @@ $wacko_translation = [
 	'TaggedWithTip'				=> 'mostrar páginas marcadas %1',
 
 	// source handler
-	'SourceText'				=> 'Source',
+	'SourceText'				=> 'Origem',
 	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'copiar para prancheta',
 	'SourceFor'					=> 'Mostrar código-fonte de %1',
@@ -797,7 +797,7 @@ $wacko_translation = [
 	'SettingsTotalRevs'			=> 'Revisões',
 	'SettingsTotalComs'			=> 'Comentários',
 	'SettingsWatchers'			=> 'Observadores',
-	'SettingsHits'				=> 'Views',
+	'SettingsHits'				=> 'Vistas',
 	'SettingsRating'			=> 'Readers rating',
 	'SettingsText'				=> 'Parâmetros',
 	'SettingsTip'				=> 'Outros parâmetros e propriedades desta página',
@@ -808,7 +808,7 @@ $wacko_translation = [
 	'SettingsRename'			=> 'Renomear',
 	'MassRename'				=> 'para todo o cluster',
 	'SettingsRemove'			=> 'Remover',
-	'SettingsPurge'				=> 'Purge',
+	'SettingsPurge'				=> 'Purgar',
 	'SettingsModerate'			=> 'Moderado',
 	'SettingsPermissions'		=> 'ACLs',
 	'AclForEntireCluster'		=> 'ACLs para todo cluster',

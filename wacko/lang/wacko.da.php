@@ -10,7 +10,7 @@ $wacko_translation = [
 	// common
 	'CreateButton'				=> 'Opret',
 	'SaveButton'				=> 'Gem',
-	'UpdateButton'				=> 'Update',
+	'UpdateButton'				=> 'Opdatér',
 	'CancelButton'				=> 'Fortryd',
 	'ConvertButton'				=> 'Convert',
 	'SearchButton'				=> 'Søg',
@@ -241,7 +241,7 @@ $wacko_translation = [
 	'AccessMode'				=> 'Sigtbarhed',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
-	'AccessRegistered'			=> 'registered',
+	'AccessRegistered'			=> 'registrerede',
 	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
@@ -301,7 +301,7 @@ $wacko_translation = [
 	'TaggedWithTip'				=> 'Vis sider mærket med %1',
 
 	// source handler
-	'SourceText'				=> 'Source',
+	'SourceText'				=> 'Kilde',
 	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'Kopier til udklipsholder',
 	'SourceFor'					=> 'Se kilde til %1',
@@ -776,7 +776,7 @@ $wacko_translation = [
 	'MetaDescription'			=> 'Meta Description (beskrivelse)',
 	'On'						=> 'På',
 	'Off'						=> 'Af',
-	'Registered'				=> 'Registered',
+	'Registered'				=> 'Registrerede',
 	'MetaComments'				=> 'Vis kommentarer',
 	'MetaFiles'					=> 'Vis filer panel',
 	'MetaRating'				=> 'Vis bedømmelsespanel',

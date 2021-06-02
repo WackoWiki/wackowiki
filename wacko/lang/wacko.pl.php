@@ -8,15 +8,15 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'CreateButton'				=> 'Create',
+	'CreateButton'				=> 'Utwórz',
 	'SaveButton'				=> 'Zachowaj',
 	'UpdateButton'				=> 'Aktualizacja',
 	'CancelButton'				=> 'Anuluj',
 	'ConvertButton'				=> 'Convert',
 	'SearchButton'				=> 'Znajdź',
 	'SubmitButton'				=> 'Wyślij',
-	'AddButton'					=> 'Add',
-	'RemoveButton'				=> 'Remove',
+	'AddButton'					=> 'Dodaj',
+	'RemoveButton'				=> 'Usuń',
 
 	'FormInvalid'				=> 'Wysłany formularz był nieprawidłowy. Spróbuj wysłać ponownie.',
 
@@ -241,7 +241,7 @@ $wacko_translation = [
 	'AccessMode'				=> 'Widoczność',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
-	'AccessRegistered'			=> 'registered',
+	'AccessRegistered'			=> 'zarejestrowani',
 	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
@@ -301,7 +301,7 @@ $wacko_translation = [
 	'TaggedWithTip'				=> 'pokazuj strony oznaczone symbolem %1',
 
 	// source handler
-	'SourceText'				=> 'Source',
+	'SourceText'				=> 'Źródło',
 	'SourceTip'					=> 'View the wiki-source',
 	'SourceCopyToClipboard'		=> 'skopiuj do schowka',
 	'SourceFor'					=> 'Tekst źródłowy strony %1',
@@ -325,9 +325,9 @@ $wacko_translation = [
 	'EditPreview'				=> 'Podgląd',
 	'Chars'						=> 'chars',
 	'PageBody'					=> 'Page body',
-	'EditNote'					=> 'Edit summary',
+	'EditNote'					=> 'Opis zmian ',
 	'EditNoteMissing'			=> 'Edit summary missing',
-	'EditMinor'					=> 'Minor edit',
+	'EditMinor'					=> 'Drobna zmiana',
 	'MinorEditHide'				=> 'Hide minor edit',
 	'MinorEditShow'				=> 'Show minor edit',
 	'PostAnonymously'			=> 'Publikuj anonimowo, nie podając swojego nazwiska',
@@ -597,7 +597,7 @@ $wacko_translation = [
 
 	'CreatePage'				=> 'Utwórz stronę',
 	'CreateNewPage'				=> 'Utwórz nową stronę',
-	'CreateNewPageText'			=> 'Create',
+	'CreateNewPageText'			=> 'Utwórz',
 	'CreateNewPageTip'			=> 'Utwórz nową stronę.',
 
 	'CreateRandomPage'			=> 'Utwórz losową stronę',
@@ -776,7 +776,7 @@ $wacko_translation = [
 	'MetaDescription'			=> 'Opis Meta',
 	'On'						=> 'Włączony',
 	'Off'						=> 'Wyłączony',
-	'Registered'				=> 'Registered',
+	'Registered'				=> 'Zarejestrowani',
 	'MetaComments'				=> 'Pokaż komentarze',
 	'MetaFiles'					=> 'Pokaż panel plików',
 	'MetaRating'				=> 'Pokaż panel oceny',
@@ -882,7 +882,7 @@ $wacko_translation = [
 	'UploadBy'					=> 'Uploaded by',
 	'FileAdded'					=> 'Added',
 	'FileModified'				=> 'Modified',
-	'FileSize'					=> 'Size',
+	'FileSize'					=> 'Rozmiar pliku',
 	'FileDimension'				=> 'Wymiary',
 	'MimeType'					=> 'Typ MIME',
 	'FileName'					=> 'Name',

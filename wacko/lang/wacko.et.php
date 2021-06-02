@@ -301,7 +301,7 @@ $wacko_translation = [
 	'TaggedWithTip'				=> 'kuva lehed märksõnaga %1',
 
 	// source handler
-	'SourceText'				=> 'Source',
+	'SourceText'				=> 'Allikas',
 	'SourceTip'					=> 'Näita lehepõhja',
 	'SourceCopyToClipboard'		=> 'kopeerida lõikelauale',
 	'SourceFor'					=> 'Lehekülje %1 lähteteksti vaatamine',
@@ -327,7 +327,7 @@ $wacko_translation = [
 	'PageBody'					=> 'Page body',
 	'EditNote'					=> 'Redigeeri kokkuvõte',
 	'EditNoteMissing'			=> 'Edit summary missing',
-	'EditMinor'					=> 'Minor edit',
+	'EditMinor'					=> 'Pisimuudatus',
 	'MinorEditHide'				=> 'Hide minor edit',
 	'MinorEditShow'				=> 'Show minor edit',
 	'PostAnonymously'			=> 'Postitage anonüümselt ilma oma nime andmata',
