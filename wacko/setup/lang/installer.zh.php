@@ -41,7 +41,7 @@ $lang = [
 /*
    Generic Page Text
 */
-'Title'							=> 'WackoWiki Installation',
+'Title'							=> 'WackoWiki 配置',
 'Continue'						=> '继续',
 'Back'							=> '后退',
 'Recommended'					=> '建议',
@@ -74,7 +74,7 @@ $lang = [
 'Problem'						=> 'Problem',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> '你的PHP安装似乎缺少WackoWiki所需要的PHP扩展。',
-'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
+'PcreWithoutUtf8'				=> 'PHP的PCRE模块在编译时可能没有包含PCRE_UTF8支持。',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
 'ErrorMinPhpVersion'			=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',

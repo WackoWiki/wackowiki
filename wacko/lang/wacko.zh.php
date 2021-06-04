@@ -964,12 +964,12 @@ $wacko_translation = [
 		'6'		=> 'Attribution',
 		'7'		=> 'CC0 1.0 Universal',
 		'8'		=> 'GNU Free Documentation License',
-		'9'		=> 'Public Domain / Free Use',
+		'9'		=> '公有领域',
 		'10'	=> 'All Rights Reserved',
 	],
 	'LicenseMeta'				=> [
-		'1'		=> 'Public domain',
-		'2'		=> 'Some rights reserved',
+		'1'		=> '公有领域',
+		'2'		=> '保留部分權利',
 		'3'		=> 'All Rights Reserved',
 	],
 
