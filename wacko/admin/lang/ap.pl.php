@@ -354,6 +354,8 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
 	'ReferrersPurgeTimeInfo'	=> 'Przechowuj historię odsyłania stron zewnętrznych nie dłużej niż przez określoną liczbę dni. Zero oznacza wieczne przechowywanie, ale dla aktywnie odwiedzanej strony może to prowadzić do przepełnienia bazy danych.',
+	'EnableCounters'			=> 'Hit Counters',
+	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -531,6 +533,8 @@ $ap_translation = [
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
+	'PermissionsPolicy'			=> 'Permissions Policy',
+	'PermissionsPolicyInfo'		=> 'Nagłówek HTTP Permissions-Policy udostępnia mechanizm wyraźnego włączania lub wyłączania różnych zaawansowanych funkcji przeglądarki.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [
@@ -1068,7 +1072,7 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
+	'BackupRestore'				=> 'Przywracanie',
 	'BackupRemove'				=> 'Remove',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',

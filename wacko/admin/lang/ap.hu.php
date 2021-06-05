@@ -354,6 +354,8 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
 	'ReferrersPurgeTimeInfo'	=> 'Tartsa a hivatkozott külső oldalak történetét nem több, mint egy megadott napnál. A nulla az örök tárolást jelenti, de egy aktívan meglátogatott webhelyhez ez az adatbázis túlcsordulásához vezethet.',
+	'EnableCounters'			=> 'Hit Counters',
+	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Állítsa be a webhely alapértelmezett kinézet beállításait.',
@@ -530,6 +532,8 @@ $ap_translation = [
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
+	'PermissionsPolicy'			=> 'Permissions Policy',
+	'PermissionsPolicyInfo'		=> 'The HTTP Permissions-Policy header provides a mechanism to explicitly enable or disable various powerful browser features.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [

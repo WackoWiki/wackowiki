@@ -358,6 +358,8 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Ermöglicht das Speichern und Anzeigen externer Verweise.',
 	'ReferrersPurgeTime'		=> 'Aufbewahrungszeit der Verweise',
 	'ReferrersPurgeTimeInfo'	=> 'Verlauf der Aufrufe externer Seiten nicht länger als diese Anzahl von Tagen aufbewahren. Null bedeutet unbegrenzte Aufbewahrungszeit, aber die Seite aktiv zu besuchen, kann zu einer hohen Auslastung der Datenbank führen.',
+	'EnableCounters'			=> 'Seitenzugriffszähler',
+	'EnableCountersInfo'		=> 'Erlaubt die Zählung der Zugriffe pro Seite und ermöglicht die Anzeige von einfachen Statistiken. Aufrufe des Seitenbesitzers werden nicht gezählt.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Die Darstellung der Webseite ändern',
@@ -535,6 +537,8 @@ $ap_translation = [
 		'1'		=> 'strikt',
 		'2'		=> 'benutzerdefiniert',
 	],
+	'PermissionsPolicy'			=> 'Permissions Policy',
+	'PermissionsPolicyInfo'		=> 'Der HTTP Permissions-Policy-Header bietet einen Mechanismus zum expliziten Aktivieren oder Deaktivieren verschiedener leistungsstarker Browserfunktionen.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'Der Referrer-Policy-HTTP-Header bestimmt, welche Referrer-Informationen, die im Referer-Header gesendet werden, in die Anfragen aufgenommen werden sollen.',
 	'ReferrerPolicyModes'	=> [

@@ -354,6 +354,8 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Permet de stocker et d\'afficher les références externes.',
 	'ReferrersPurgeTime'		=> 'Temps de stockage des référents',
 	'ReferrersPurgeTimeInfo'	=> 'L\'historique des renvois de pages externes ne doit pas dépasser un nombre de jours donné. Zéro signifie stockage éternel, mais pour un site activement visité, cela peut entraîner un débordement de la base de données.',
+	'EnableCounters'			=> 'Hit Counters',
+	'EnableCountersInfo'		=> 'Permet de compter les hits par page et d\'afficher des statistiques simples. Les appels du propriétaire de la page ne sont pas comptabilisés.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Contrôlez les paramètres d\'affichage par défaut de votre site.',
@@ -530,6 +532,8 @@ $ap_translation = [
 		'1'		=> 'rigoureux',
 		'2'		=> 'personnalisée',
 	],
+	'PermissionsPolicy'			=> 'Permissions Policy',
+	'PermissionsPolicyInfo'		=> 'L'en-tête HTTP Permissions-Policy fournit un mécanisme permettant d'activer ou de désactiver explicitement diverses fonctionnalités puissantes du navigateur.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [

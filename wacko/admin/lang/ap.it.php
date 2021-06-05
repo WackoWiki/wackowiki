@@ -22,10 +22,10 @@ $ap_translation = [
 	// Admin panel
 	'AdminPanel'				=> 'Pannello di Controllo Amministrazione',
 	'RecoveryMode'				=> 'Modalità di recupero',
-	'Authorization'				=> 'Authorization',
-	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'Authorization'				=> 'Autorizzazione',
+	'AuthorizationTip'			=> 'Inserisci la password amministrativa (assicurati anche che i cookie siano ammessi nel tuo browser).',
+	'NoRecoveryPassword'		=> 'La password amministrativa non è specificata!',
+	'NoRecoveryPasswordTip'		=> 'Nota: l\'assenza di una password amministrativa è una minaccia alla sicurezza! Inserisci la tua password nel file di configurazione ed esegui nuovamente il programma.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
@@ -34,7 +34,7 @@ $ap_translation = [
 	'ApLogOut'					=> 'Esci',
 	'ApLogOutTip'				=> 'quit system administration',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeft'					=> 'Tempo rimasto: %1 minuti',
 	'ApVersion'					=> 'version',
 
 	'SiteOpen'					=> 'Open',
@@ -46,12 +46,12 @@ $ap_translation = [
 
 	// Generic
 	'Cancel'					=> 'Annulla',
-	'Add'						=> 'Add',
+	'Add'						=> 'Aggiungi',
 	'Edit'						=> 'Modifica',
-	'Remove'					=> 'Remove',
-	'Enabled'					=> 'Enabled',
-	'Disabled'					=> 'Disabled',
-	'Mandatory'					=> 'Mandatory',
+	'Remove'					=> 'Rimuovere',
+	'Enabled'					=> 'Abilitata',
+	'Disabled'					=> 'Disabilitata',
+	'Mandatory'					=> 'Obbligatorio',
 	'Admin'						=> 'Admin',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
@@ -172,7 +172,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> 'Ripristina',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -249,7 +249,7 @@ $ap_translation = [
 	],
 
 	// Main module
-	'PurgeSessions'				=> 'Purge',
+	'PurgeSessions'				=> 'Purga',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
@@ -354,6 +354,8 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
 	'ReferrersPurgeTimeInfo'	=> 'Conservare la cronologia delle pagine esterne di riferimento non più di un determinato numero di giorni. Zero significa conservazione eterna, ma per un sito visitato attivamente questo può portare ad un overflow del database.',
+	'EnableCounters'			=> 'Hit Counters',
+	'EnableCountersInfo'		=> 'Permette il conteggio delle visite per pagina e la visualizzazione di semplici statistiche. Le chiamate del proprietario della pagina non vengono contate.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -530,6 +532,8 @@ $ap_translation = [
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
+	'PermissionsPolicy'			=> 'Permissions Policy',
+	'PermissionsPolicyInfo'		=> 'L\'intestazione HTTP Permissions-Policy fornisce un meccanismo per abilitare o disabilitare esplicitamente varie potenti caratteristiche del browser.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [
@@ -1067,7 +1071,7 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
+	'BackupRestore'				=> 'Ripristina',
 	'BackupRemove'				=> 'Remove',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',

@@ -172,7 +172,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> 'Επαναφορά',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -354,6 +354,8 @@ $ap_translation = [
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
 	'ReferrersPurgeTimeInfo'	=> 'Κρατήστε το ιστορικό των εξωτερικών σελίδων παραπομπής όχι περισσότερο από δεδομένο αριθμό ημερών. Το μηδέν σημαίνει αιώνια αποθήκευση, αλλά για έναν ιστότοπο που επισκέπτεται ενεργά αυτό μπορεί να οδηγήσει σε υπερχείλιση βάσης δεδομένων.',
+	'EnableCounters'			=> 'Hit Counters',
+	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
@@ -530,6 +532,8 @@ $ap_translation = [
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
+	'PermissionsPolicy'			=> 'Permissions Policy',
+	'PermissionsPolicyInfo'		=> 'The HTTP Permissions-Policy header provides a mechanism to explicitly enable or disable various powerful browser features.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [
@@ -1067,7 +1071,7 @@ $ap_translation = [
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
+	'BackupRestore'				=> 'Επαναφορά',
 	'BackupRemove'				=> 'Remove',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',

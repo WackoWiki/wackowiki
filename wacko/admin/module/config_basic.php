@@ -83,6 +83,7 @@ function admin_config_basic(&$engine, &$module)
 		$config['keep_deleted_time']			= (int) $_POST['keep_deleted_time'];
 		$config['pages_purge_time']				= (int) $_POST['pages_purge_time'];
 		$config['referrers_purge_time']			= (int) $_POST['referrers_purge_time'];
+		$config['enable_counters']				= (int) ($_POST['enable_counters'] ?? 0);
 		$config['noindex']						= (int) ($_POST['noindex'] ?? 0);
 		$config['opensearch']					= (int) ($_POST['opensearch'] ?? 0);
 
@@ -736,6 +737,19 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="number" min="0" maxlength="4" id="referrers_purge_time" name="referrers_purge_time" value="<?php echo (int) $engine->db->referrers_purge_time;?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="enable_counters"><strong><?php echo $engine->_t('EnableCounters');?>:</strong><br>
+					<small><?php echo $engine->_t('EnableCountersInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="enable_counters_on" name="enable_counters" value="1"<?php echo ($engine->db->enable_counters ? ' checked' : '');?>><label for="enable_counters_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="enable_counters_off" name="enable_counters" value="0"<?php echo (!$engine->db->enable_counters ? ' checked' : '');?>><label for="enable_counters_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 		</table>
