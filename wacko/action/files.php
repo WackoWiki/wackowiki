@@ -155,7 +155,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, f.hits, p.owner_id, p.tag, u.user_name " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, p.owner_id, p.tag, u.user_name " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
@@ -263,15 +263,6 @@ if ($can_view)
 
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
-			if (!in_array($file['file_ext'], ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp']))
-			{
-				$hits	= $file['hits'] . ' ' . $this->_t('SettingsHits');
-			}
-			else
-			{
-				$hits	= '';
-			}
-
 			$tpl->enter('r_');
 
 			// display file
@@ -289,7 +280,7 @@ if ($can_view)
 				$tpl->p_desc		= $desc;
 				$tpl->p_meta		= ($file['picture_w']
 										? number_format($file['picture_w'], 0, ',', '.') . ' × ' . number_format($file['picture_h'], 0, ',', '.') . ' px'
-										: $hits);
+										: '');
 				$tpl->p_size		= $file_size;
 				$tpl->p_user		= $this->user_link($file['user_name'], true, false);
 				$tpl->p_dt			= $dt;
@@ -299,7 +290,7 @@ if ($can_view)
 			{
 				// display file meta data
 				$tpl->g_desc		= $desc;
-				$tpl->g_meta		= $file_size . ($hits ? ', ' . $hits : '');
+				$tpl->g_meta		= $file_size;
 				$tpl->g_dt			= $dt;
 			}
 

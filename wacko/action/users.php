@@ -486,13 +486,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						$tpl->u_u2_pagination_text = $pagination['text'];
 
 						$uploads = $this->db->load_all(
-							"SELECT u.file_id, u.page_id, u.user_id, u.file_name, u.file_description, u.uploaded_dt, u.hits, u.file_size, u.file_lang, c.tag file_on_page, c.title file_on_title " .
-							"FROM " . $this->db->table_prefix . "file u " .
-								"LEFT JOIN " . $this->db->table_prefix . "page c ON (u.page_id = c.page_id) " .
-							"WHERE u.user_id = " . (int) $user['user_id'] . " " .
-								"AND u.deleted <> 1 " .
+							"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.uploaded_dt, f.file_size, f.file_lang, p.tag file_on_page, p.title file_on_title " .
+							"FROM " . $this->db->table_prefix . "file f " .
+								"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+							"WHERE f.user_id = " . (int) $user['user_id'] . " " .
+								"AND f.deleted <> 1 " .
 							// "AND p.deleted <> 1 " .
-							"ORDER BY u.uploaded_dt DESC " .
+							"ORDER BY f.uploaded_dt DESC " .
 							$pagination['limit']);
 
 						$page_ids = [];

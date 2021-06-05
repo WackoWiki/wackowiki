@@ -37,6 +37,7 @@ $alter_file_r5_5_1 = "ALTER TABLE {$pref}file CHANGE file_name file_name VARCHAR
 $alter_file_r5_5_2 = "ALTER TABLE {$pref}file CHANGE file_description file_description VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_file_r5_5_3 = "ALTER TABLE {$pref}file CHANGE author author VARCHAR(255) NOT NULL DEFAULT ''";
 $alter_file_r5_5_4 = "ALTER TABLE {$pref}file CHANGE source source VARCHAR(255) NOT NULL DEFAULT ''";
+$alter_file_r5_5_5 = "ALTER TABLE {$pref}file DROP hits";
 
 // FILE LINK
 

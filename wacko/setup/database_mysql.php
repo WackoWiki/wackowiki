@@ -98,7 +98,6 @@ $tbl_file = "CREATE TABLE {$pref}file (
 					picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					file_ext VARCHAR(10) NOT NULL DEFAULT '',
 					mime_type VARCHAR(255) NOT NULL DEFAULT '',
-					hits INT(10) UNSIGNED NOT NULL DEFAULT '0',
 					deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',
 					PRIMARY KEY (file_id),
 					UNIQUE idx_page_id (page_id, file_name),

@@ -24,7 +24,7 @@ if (!preg_match('/^([' . $this->language['ALPHANUM_P'] . '\.]+)$/u', $file_name)
 $page_id = isset($_GET['global'])? 0 : $this->page['page_id'];
 
 $file = $this->db->load_single(
-	"SELECT u.user_name AS user, f.user_id, f.file_id, f.file_name, f.file_ext, f.file_size, f.file_description, f.hits " .
+	"SELECT u.user_name AS user, f.user_id, f.file_id, f.file_name, f.file_ext, f.file_size, f.file_description " .
 	"FROM " . $this->db->table_prefix . "file f " .
 		"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 	"WHERE f.page_id = " . (int) $page_id . " " .
@@ -59,19 +59,5 @@ else
 }
 
 // 3. passthru
-
-$type = $this->http->mime_type($file_path);
-
-if ($this->db->enable_counters
-	&& strncmp($type, 'image/', 6)) // do not count images
-{
-	// count file download
-	$this->db->sql_query(
-		"UPDATE " . $this->db->table_prefix . "file SET " .
-			"hits = " . (int) ($file['hits'] + 1) . " " .
-		"WHERE file_id = " . (int) $file['file_id'] . " " .
-		"LIMIT 1");
-}
-
 $this->http->sendfile($file_path, $file['file_name']);
 $this->http->terminate();

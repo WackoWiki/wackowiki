@@ -714,7 +714,7 @@ $wacko_translation = [
 	'UploadQuotaTip'			=> 'Upload Space Quota',
 	'UsersLogins'				=> 'Logins',
 	'UsersRevisions'			=> '次修改',
-	'UsersSignup'				=> 'Signup',
+	'UsersSignup'				=> '註冊',
 	'UsersLastSession'			=> '上屆會議',
 	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'P個人資料',
