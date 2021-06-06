@@ -124,7 +124,8 @@ if ($can_view)
 			) . " " .
 		($phrase
 			? "AND (f.file_name LIKE " . $this->db->q('%' . $phrase . '%') . " " .
-				"OR f.file_description LIKE " . $this->db->q('%' . $phrase . '%') . ") "
+				"OR f.file_description LIKE " . $this->db->q('%' . $phrase . '%') . " " .
+				"OR f.caption LIKE " . $this->db->q('%' . $phrase . '%') . ") "
 			: '') .
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "
