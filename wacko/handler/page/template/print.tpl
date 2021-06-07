@@ -31,10 +31,11 @@
 			<header class="linksheader">
 				[ ' _t: Links ' ]
 			</header>
+			<ul class="reflink">
 			[= link _ =
-				[ ' delim | default '<br><br>' ' ]
-				<span class="reflink"><sup>[ ' n ' ]</sup>[ ' l ' ]</span>
+				<li><span>[ ' n ' ]</span> [ ' l ' ]</li>
 			=]
+			</ul>
 		</section>
 	=]
 	</article>

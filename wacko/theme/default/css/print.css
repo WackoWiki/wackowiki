@@ -434,9 +434,11 @@ div .wrapper-content {
 
 .reflink {
 	font-size:			small;
+	list-style:			none;
+	padding: 			0;
 }
 
-.reflink sup {
+.reflink li span {
 	font-weight:		bold;
 	font-size:			x-small;
 }

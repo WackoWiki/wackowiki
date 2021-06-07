@@ -62,11 +62,9 @@ if ((@$this->sess->show_comments[$this->page['page_id']] || $this->forum))
 if ($this->numerate_links)
 {
 	$tpl->enter('n_link_');
-	$i = 0;
 
 	foreach ($this->numerate_links as $l => $n)
 	{
-		$i++ or $tpl->delim = '';
 		$tpl->n = $n;
 		$tpl->l = $l;
 	}
