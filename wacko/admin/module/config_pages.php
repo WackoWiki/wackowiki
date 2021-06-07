@@ -92,7 +92,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="list-count"><strong><?php echo $engine->_t('ListCount');?>:</strong><br>
+					<label for="list_count"><strong><?php echo $engine->_t('ListCount');?>:</strong><br>
 					<small><?php echo $engine->_t('ListCountInfo');?></small></label>
 				</td>
 				<td>

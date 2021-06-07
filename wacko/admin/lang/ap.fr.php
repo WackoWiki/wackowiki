@@ -533,7 +533,7 @@ $ap_translation = [
 		'2'		=> 'personnalisée',
 	],
 	'PermissionsPolicy'			=> 'Permissions Policy',
-	'PermissionsPolicyInfo'		=> 'L'en-tête HTTP Permissions-Policy fournit un mécanisme permettant d'activer ou de désactiver explicitement diverses fonctionnalités puissantes du navigateur.',
+	'PermissionsPolicyInfo'		=> 'L\'en-tête HTTP Permissions-Policy fournit un mécanisme permettant d\'activer ou de désactiver explicitement diverses fonctionnalités puissantes du navigateur.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [
@@ -550,9 +550,9 @@ $ap_translation = [
 
 	'UserPasswordSection'		=> 'Persistence of user passwords',
 	'PwdMinChars'				=> 'Minimum password length',
-	'PwdMinCharsInfo'			=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 12 to 16 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'PwdMinCharsInfo'			=> 'Les mots de passe longs sont nécessairement plus sûrs que les mots de passe courts (par exemple 12 à 16 caractères).<br>L\'utilisation de phrases de passe au lieu de mots de passe est encouragée.',
 	'AdminPwdMinChars'			=> 'Minimum Admin password length',
-	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
+	'AdminPwdMinCharsInfo'		=> 'Les mots de passe longs sont nécessairement plus sûrs que les mots de passe courts (par exemple 12 à 16 caractères).<br>L\'utilisation de phrases de passe au lieu de mots de passe est encouragée.',
 	'PwdCharComplexity'			=> 'The required password complexity',
 	'PwdCharClasses'	=> [
 		'0'		=> 'not tested',
@@ -623,9 +623,9 @@ $ap_translation = [
 	'Paragrafica'				=> 'Paragrafica markings',
 	'ParagraficaInfo'			=> 'Similar to the previous option, but will lead to disconnection of inoperable automatic table of contents: <code>{{toc}}</code>.',
 	'AllowRawhtml'				=> 'Global HTML Support',
-	'AllowRawhtmlInfo'			=> 'This option is potentially unsafe for an open site.',
+	'AllowRawhtmlInfo'			=> 'Cette option est potentiellement dangereuse pour un site ouvert.',
 	'SafeHtml'					=> 'Filtering HTML',
-	'SafeHtmlInfo'				=> 'Prevents saving of dangerous HTML-objects. Turning off the filter on an open site with HTML support is <span class="underline">extremely</span> undesirable!',
+	'SafeHtmlInfo'				=> 'Empêche l\'enregistrement d\'objets HTML dangereux. Désactiver le filtre sur un site ouvert avec support HTML est <span class="underline">extrêmement</span> indésirable !',
 
 	'WackoFormatterSection'		=> 'Mise en forme de texte Wiki (Wacko Formatter)',
 	'X11colors'					=> 'X11 Colors Usage',
@@ -681,7 +681,7 @@ $ap_translation = [
 	'ForumTopics'				=> 'Number of topics per page',
 	'ForumTopicsInfo'			=> 'Number of topics displayed on each page of the list in the forum sections (action %1).',
 	'CommentsCount'				=> 'Number of comments per page',
-	'CommentsCountInfo'			=> 'Number of comments displayed on each page list of comments. This applies to all the comments on the site, and not just posted in the forum.',
+	'CommentsCountInfo'			=> 'Nombre de commentaires affichés sur chaque page de la liste des commentaires. Ceci s\'applique à tous les commentaires du site, et pas seulement à ceux postés dans le forum.',
 
 	'NewsSection'				=> 'Section News',
 	'NewsCluster'				=> 'Cluster for the News',

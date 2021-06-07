@@ -7,10 +7,10 @@
 		<div class="msg warning">[ ' warning ' ]</div>
 	=]
 	[= f _ =
-		[ ' _t: NewName ' ]
 		<form action="[ ' href: rename ' ]" method="post" name="rename_page">
 			[ ' csrf: rename_page ' ]
-			<input type="text" maxlength="250" name="new_tag" value="[ ' tag | e attr ' ]" size="60" required>
+			<label for="new_tag">[ ' _t: NewName ' ]</label><br>
+			<input type="text" id="new_tag" name="new_tag" maxlength="250" value="[ ' tag | e attr ' ]" size="60" required>
 			<br>
 			<br>
 			<input type="checkbox" id="redirect" name="redirect"[ ' checked ' ]>

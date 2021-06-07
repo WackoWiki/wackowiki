@@ -108,7 +108,7 @@ function admin_config_notifications(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="default_diff_mode"><strong><?php echo $engine->_t('NotifyDiffMode');?>:</strong><br>
+					<label for="notify_diff_mode"><strong><?php echo $engine->_t('NotifyDiffMode');?>:</strong><br>
 					<small><?php echo $engine->_t('NotifyDiffModeInfo');?><br>(Content-Type: text/plain;)</small></label>
 				</td>
 				<td>

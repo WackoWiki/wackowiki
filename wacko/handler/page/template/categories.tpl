@@ -85,8 +85,8 @@
 			<table class="formation">
 				<tr>
 					<td>
-						<label for="">[ ' group ' ]</label>
-						<select name="parent_id">
+						<label for="parent_id">[ ' group ' ]</label>
+						<select id="parent_id" name="parent_id">
 							<option value="0">[ ' _t: CategoriesNoGroup ' ]</option>
 							[= o _ =
 								<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category | e ' ]</option>

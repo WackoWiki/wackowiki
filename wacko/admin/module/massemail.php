@@ -148,7 +148,7 @@ function admin_massemail(&$engine, &$module)
 					<small><?php echo $engine->_t('SendToUserInfo');?></small></label>
 			</td>
 			<td>
-				<select id="nuser_id" name="user_id[]" multiple size="8">
+				<select id="user_id" name="user_id[]" multiple size="8">
 					<option value="">[<?php echo $engine->_t('NoUser');?>]</option>
 <?php
 			$users = $engine->db->load_all(
@@ -199,11 +199,12 @@ function admin_massemail(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl-setting">
-				<td class="label"><strong><?php echo $engine->_t('MessageSubject'); ?>:</strong><br>
-					<small><?php echo $engine->_t('MessageSubjectInfo');?></small></td>
+				<td class="label">
+					<label for="mail_subject"><strong><?php echo $engine->_t('MessageSubject'); ?>:</strong><br>
+					<small><?php echo $engine->_t('MessageSubjectInfo');?></small></label></td>
 				</td>
 				<td>
-					<input type="text" name="mail_subject" value="<?php echo Ut::html(($_POST['mail_subject'] ?? '')); ?>" size="60" maxlength="200"  required>
+					<input type="text" id="mail_subject" name="mail_subject" value="<?php echo Ut::html(($_POST['mail_subject'] ?? '')); ?>" size="60" maxlength="200"  required>
 				</td>
 			</tr>
 			<tr class="lined">

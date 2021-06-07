@@ -196,12 +196,20 @@
 				[ ' csrf: edit_file ' ]
 				<table class="filemeta">
 					<tr>
-						<th scope="row">[ ' _t: FileDesc ' ]:</th>
-						<td><input type="text" maxlength="250" name="file_description" id="UploadDesc" size="80" value="[ ' desc | e attr ' ]"></td>
+						<th scope="row">
+							<label for="UploadDesc">[ ' _t: FileDesc ' ]:</label>
+						</th>
+						<td>
+							<input type="text" id="UploadDesc" name="file_description" maxlength="250" size="80" value="[ ' desc | e attr ' ]">
+						</td>
 					</tr>
 					<tr>
-						<th scope="row">[ ' _t: FileCaption ' ]:</th>
-						<td><textarea id="file_caption" name="caption" rows="6" cols="70">[ ' caption | pre ' ]</textarea></td>
+						<th scope="row">
+							<label for="file_caption">[ ' _t: FileCaption ' ]:</label>
+						</th>
+						<td>
+							<textarea id="file_caption" name="caption" rows="6" cols="70">[ ' caption | pre ' ]</textarea>
+						</td>
 					</tr>
 					<tr>
 						<th scope="row">
@@ -216,26 +224,26 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="author">[ ' _t: FileAuthor ' ]</label>
+							<label for="UploadAuthor">[ ' _t: FileAuthor ' ]</label>
 						</th>
 						<td>
-							<input type="text" maxlength="250" name="author" id="UploadAuthor" size="80" value="[ ' author | e attr ' ]">
+							<input type="text" id="UploadAuthor" name="author" maxlength="255" size="80" value="[ ' author | e attr ' ]">
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="source">[ ' _t: FileSource ' ]</label>
+							<label for="UploadSource">[ ' _t: FileSource ' ]</label>
 						</th>
 						<td>
-							<input type="text" maxlength="250" name="source" id="UploadSource" size="80" value="[ ' source | e attr ' ]">
+							<input type="text" id="UploadSource" name="source" maxlength="255" size="80" value="[ ' source | e attr ' ]">
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="source_url">[ ' _t: FileSourceUrl ' ]</label>
+							<label for="UploadSourceUrl">[ ' _t: FileSourceUrl ' ]</label>
 						</th>
 						<td>
-							<input type="url" maxlength="255" name="source_url" id="UploadSourceUrl" size="80" value="[ ' url | e attr ' ]">
+							<input type="url" id="UploadSourceUrl" name="source_url" maxlength="255" size="80" value="[ ' url | e attr ' ]">
 						</td>
 					</tr>
 					<tr>

@@ -345,7 +345,7 @@ function get_table(&$engine, $table, $drop = true)
 			$kname = "FULLTEXT|$kname";
 		}
 
-		if (!is_array(isset($index[$kname]) ? $index[$kname] : null))
+		if (!is_array($index[$kname] ?? null))
 		{
 			$index[$kname] = [];
 		}

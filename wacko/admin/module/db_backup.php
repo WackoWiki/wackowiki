@@ -207,8 +207,8 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 ?>
 			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">
 				<tr>
-					<th class="t-right"><?php echo $engine->_t('BackupCluster'); ?>:</th>
-					<th colspan="2"><input type="text" name="root" size="30" value=""></th>
+					<th class="t-right"><label for="root"><?php echo $engine->_t('BackupCluster'); ?>:</label></th>
+					<th colspan="2"><input type="text" id="root" name="root" size="30" value=""></th>
 				</tr>
 				<tr>
 					<th><?php echo $engine->_t('BackupTable'); ?></th>

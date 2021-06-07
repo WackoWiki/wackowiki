@@ -591,7 +591,7 @@ function admin_config_basic(&$engine, &$module)
 					{
 						echo	"\t\t<td>\n\t\t\t" .
 								'<input type="checkbox" name="diff_modes[' . $n . ']" id="mode_' . $mode . '" value="' . $mode . '" ' . (in_array($mode, $diff_mode_list) ? ' checked' : ''). '>' . "\n\t\t\t" .
-								'<label for="mode_' . $mode . '">' . $diff_modes[$mode] . ' (' . $mode . ')</label>' . "\n\t\t</td>\n";
+								'<label for="mode_' . $mode . '">' . $diff_mode . ' (' . $mode . ')</label>' . "\n\t\t</td>\n";
 
 						// modulus operator: every third loop add a break
 						if ($n % 3 == 0)

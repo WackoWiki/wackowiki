@@ -3,10 +3,10 @@
 		<form action="[ ' href ' ]" method="get" name="search">
 			[ ' href | hide_page ' ]
 			<label for="searchfor">[ ' _t: SearchFor ' ]:</label><br>
-			<input type="search" name="phrase" id="searchfor" size="40" value="[ ' phrase | e attr ' ]" required>
+			<input type="search" id="searchfor" name="phrase" size="40" value="[ ' phrase | e attr ' ]" required>
 			<button type="submit">[ ' _t: SearchButton ' ]</button><br>
 			[= options _ =
-				<input type="checkbox" name="topic"[ ' topic | format ' checked' ' ] id="checkboxSearch">
+				<input type="checkbox" id="checkboxSearch" name="topic"[ ' topic | format ' checked' ' ]>
 				<label for="checkboxSearch">[ ' _t: TopicSearchText ' ]</label>
 			=]
 		</form>
