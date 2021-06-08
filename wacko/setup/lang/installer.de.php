@@ -105,7 +105,7 @@ $lang = [
 'Mail'							=> 'E-Mail Adresse des Verwalters',
 'MailDesc'						=> 'Gib die E-Mail Adresse des Verwalters ein.',
 'Base'							=> 'Basis-URL',
-'BaseDesc'						=> 'Die Basis-URL deines WackoWikis. Die Seitennamen werden an diese angehängt. Falls mod_rewrite verfügbar ist, muß die URL mit einen Schrägstrich abschließen:</p><ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'Die Basis-URL deines WackoWikis. Die Seitennamen werden an diese angehängt. Falls mod_rewrite verfügbar ist, muß die URL mit einen Schrägstrich abschließen:</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
 'Rewrite'						=> 'Umschreiben',
 'RewriteDesc'					=> '<a href="https://wackowiki.org/doc/Doc/Deutsch/RewriteModus" target="_blank">Umschreiben</a> sollte aktiviert sein, falls du WackoWiki mit URL-Umschreiben verwenden willst.',
 'Enabled'						=> 'Aktiviert:',

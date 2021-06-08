@@ -281,7 +281,7 @@ function admin_config_formatter(&$engine, &$module)
 					<strong><?php echo $engine->_t('Canonical');?>:</strong><br>
 					<small><?php echo Ut::perc_replace(
 									$engine->_t('CanonicalInfo'),
-									'<code>http://host/path</code>',
+									'<code>https://host/path</code>',
 									'<code>/path</code>');?></small>
 				</td>
 				<td>
@@ -333,8 +333,8 @@ function admin_config_formatter(&$engine, &$module)
 					<label for="enable_urls_underscores"><strong><?php echo $engine->_t('UrlsUnderscores');?>:</strong><br>
 					<small><?php echo Ut::perc_replace(
 									$engine->_t('UrlsUnderscoresInfo'),
-									'<code>http://[...]/WackoWiki</code>',
-									'<code>http://[...]/Wacko_Wiki</code>');?></small></label>
+									'<code>https://[...]/WackoWiki</code>',
+									'<code>https://[...]/Wacko_Wiki</code>');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="enable_urls_underscores" name="urls_underscores" value="1"<?php echo ($engine->db->urls_underscores ? ' checked' : '');?>>

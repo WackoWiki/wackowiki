@@ -307,8 +307,6 @@ function _quote($string)
 
 			return mysqli_real_escape_string($dblink_global, $string);
 
-		break;
-
 		default:
 		// return $dblink->quote($string);
 
@@ -324,8 +322,6 @@ function _quote($string)
 			'"'		=> '\"',
 			"\x1a"	=> '\x1a'
 		]);
-
-		break;
 	}
 }
 

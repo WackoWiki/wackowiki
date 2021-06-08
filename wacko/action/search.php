@@ -166,7 +166,7 @@ $get_context = function($phrase, $string, $position, $padding, $hellip = true)
 };
 
 // returns only the first $position match as intended
-$mb_strpos_array = function($content, $keywords, $offset=0)
+$strpos_array = function($content, $keywords, $offset=0)
 {
 	if(!is_array($keywords)) $keywords = [$keywords];
 
@@ -182,9 +182,8 @@ $mb_strpos_array = function($content, $keywords, $offset=0)
 };
 
 // return the part of the content where the keyword was matched
-$get_line_with_phrase = function ($content, $phrase, $padding, $insensitive = true) use ($get_context, $mb_strpos_array)
+$get_line_with_phrase = function ($content, $phrase, $padding = 75, $insensitive = true) use ($get_context, $strpos_array)
 {
-	$_padding	= 75;
 	$_keywords	= explode(' ', $phrase);
 	$lines		= explode("\n", $content);
 	$result		= '';
@@ -195,10 +194,10 @@ $get_line_with_phrase = function ($content, $phrase, $padding, $insensitive = tr
 	{
 		if ($matches > 3) break; // enough berries, go home!
 
-		if (($position	= $mb_strpos_array($string, $_keywords)) !== false)
+		if (($position	= $strpos_array($string, $_keywords)) !== false)
 		{
 			#echo '##' . $position . '<br><br><br>';
-			$result .= $get_context($phrase, $string, $position, $_padding);
+			$result .= $get_context($phrase, $string, $position, $padding);
 
 			$matches++;
 		}
@@ -276,7 +275,7 @@ if (!isset($phrase))	$phrase		= '';
 if (!isset($options))	$options	= 1;
 if (!isset($lang))		$lang		= '';
 if (!isset($max))		$max		= 10;	// (null) 50 -> 10 overwrites system default value!
-if (!isset($padding))	$padding	= 250;
+if (!isset($padding))	$padding	= 75;
 
 if ($lang && !$this->known_language($lang))
 {

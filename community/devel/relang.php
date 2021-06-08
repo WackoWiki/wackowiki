@@ -254,21 +254,21 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 				{
 					foreach ($diff->GetB($j1, $j2) as $line)
 					{
-						$output .= !$line? "\n"
-							: (isset($cache[$line])? $cache[$line]
-							: ((($old = @$rerenames[$line]) && isset($b1[$old]))? renamer($b1[$old], $old, $line)
-							: $b1[$line]));
+						$output .= !$line
+							? "\n"
+							: ($cache[$line] ?? ((($old = @$rerenames[$line]) && isset($b1[$old]))
+								? renamer($b1[$old], $old, $line)
+								: $b1[$line]));
 					}
 				}
 				else if ($tag == 'replace' || $tag == 'insert')
 				{
 					foreach ($diff->GetB($j1, $j2) as $line)
 					{
-						$output .= !$line? "\n"
-							: (isset($cache[$line])? $cache[$line]
+						$output .= !$line
+							? "\n"
+							: ($cache[$line] ?? ($b1[$line] ?? $a1[$line]));
 							// : ((($old = @$rerenames[$line]) && isset($b1[$old]))? renamer($b1[$old], $old, $line)
-							: (isset($b1[$line])? $b1[$line]
-							: $a1[$line]));
 					}
 				}
 			}

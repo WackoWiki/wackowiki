@@ -104,7 +104,7 @@ $lang = [
 'Mail'							=> 'Email dell\'amministratore.',
 'MailDesc'						=> 'Inserisci l\'indirizzo e-mail degli amministratori.',
 'Base'							=> 'URL di base',
-'BaseDesc'						=> 'La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l\'oggetto-parametro "?page=" se la modalità di riscrittura di URL non funziona sul tuo server. <ul><li><strong><code>http://example.com/</code></strong></li><li><strong><code>http://example.com/wiki/</code></strong></li></ul>',
+'BaseDesc'						=> 'La tua URL di base per il sito WackoWiki. I nomi di pagina sono stati aggiunti, ora sarà incluso l\'oggetto-parametro "?page=" se la modalità di riscrittura di URL non funziona sul tuo server. <ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
 'Rewrite'						=> 'Modalità Rewrite',
 'RewriteDesc'					=> 'La modalità Rewrite sarà attivata se si sta usando WackoWiki per la riscrittura d\'URL.',
 'Enabled'						=> 'Attivato:',

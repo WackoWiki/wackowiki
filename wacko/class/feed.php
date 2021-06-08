@@ -83,9 +83,7 @@ class Feed
 					$xml .= '<guid>' . $this->engine->href('', $page['tag']) . '</guid>' . "\n";
 					$xml .= '<pubDate>' . date('r', strtotime($page['modified'])) . '</pubDate>' . "\n";
 					$xml .= '<description>' . $page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
-						($page['user_name']
-							? $page['user_name']
-							: $this->engine->_t('Guest')) .
+						($page['user_name'] ?: $this->engine->_t('Guest')) .
 						($page['edit_note']
 							? ' [' . $page['edit_note'] . ']'
 							: '') .
@@ -266,9 +264,7 @@ class Feed
 
 					$xml .= '<item>' . "\n";
 					$xml .= '<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
-						($comment['user_name']
-							? $comment['user_name']
-							: $this->engine->_t('Guest')) .
+						($comment['user_name'] ?: $this->engine->_t('Guest')) .
 						'</title>' . "\n";
 					$xml .= '<link>' . $this->engine->href('', $comment['tag']) . '</link>' . "\n";
 					$xml .= '<guid>' . $this->engine->href('', $comment['tag']) . '</guid>' . "\n";
