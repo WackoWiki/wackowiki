@@ -146,7 +146,7 @@ function bb2_db_escape($string)
 // Return the number of rows in a particular query.
 function bb2_db_num_rows($result)
 {
-	if ($result !== FALSE)
+	if ($result !== false)
 	{
 		return count($result);
 	}
@@ -243,7 +243,7 @@ function bb2_insert_stats($force = false)
 		$blocked = bb2_db_query("SELECT COUNT(log_id) as n FROM " . $settings['log_table'] . " WHERE `status_key` NOT LIKE '00000000'");
 		$blocked = bb2_db_rows($blocked);
 
-		if ($blocked !== FALSE)
+		if ($blocked !== false)
 		{
 			return $blocked[0]['n'];
 		}

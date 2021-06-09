@@ -27,7 +27,7 @@ $lang = [
 	'comments_page'		=> 'LetzteKommentare',
 	'index_page'		=> 'SeitenIndex',
 
-	'random_page'		=> 'RandomPage',
+	'random_page'		=> 'ZufälligeSeite',
 
 	#'help_page'			=> 'Hilfe',
 	#'terms_page'		=> 'Nutzungsbedingungen',

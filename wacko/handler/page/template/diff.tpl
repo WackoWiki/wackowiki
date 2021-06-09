@@ -55,9 +55,10 @@
 				<div class="deletions">[ ' diff | pre ' ]</div>
 			=]
 		=]
-		[= m6 _ =
+		[= m3 _ =
 			<br><br>
 			[ ' nodiff ' ]
+			[ ' // stats ' ]<br><br>
 			[ ' diff ' ]
 		=]
 	=]

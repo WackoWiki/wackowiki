@@ -181,7 +181,7 @@ if ($page_a && $page_b
 					: '<li class="active">' . $diff_modes[$mode]) . '</li>';
 		}
 
-		$tpl->leave();	// nav
+		$tpl->leave();	// nav_
 	}
 
 	$tpl->enter('diff_');
@@ -228,7 +228,7 @@ if ($page_a && $page_b
 				$tpl->nodiff = true;
 			}
 
-			$tpl->leave();
+			$tpl->leave(); // m2_
 
 			break;
 
@@ -337,10 +337,12 @@ if ($page_a && $page_b
 			// using nice lib/php-diff library..
 			$diff = new Diff(explode("\n", $page_a['body']), explode("\n", $page_b['body']));
 
+			$tpl->enter('m3_');
+
 			// the compared versions are identical
 			if ($diff->isIdentical())
 			{
-				$tpl->m6_nodiff = true;
+				$tpl->nodiff = true;
 				break;
 			}
 
@@ -348,19 +350,19 @@ if ($page_a && $page_b
 			{
 				$renderer = new SideBySide;
 				// patched header
-				$tpl->m6_diff = $diff->render($renderer);
+				$tpl->diff = $diff->render($renderer);
 			}
 			else if ($diffmode == 4)
 			{
 				$renderer = new Unified;
 				// patched header
-				$tpl->m6_diff = $diff->render($renderer);
+				$tpl->diff = $diff->render($renderer);
 			}
 			else if ($diffmode == 5)
 			{
 				$renderer = new Merged;
 				// patched header
-				$tpl->m6_diff = $diff->render($renderer);
+				$tpl->diff = $diff->render($renderer);
 			}
 			else
 			{
@@ -374,12 +376,13 @@ if ($page_a && $page_b
 					$renderer = new Context;
 				}
 
-				$tpl->m6_diff =
+				$tpl->diff =
 					'<pre>' .
 						htmlspecialchars($diff->render($renderer), ENT_NOQUOTES | ENT_HTML5, HTML_ENTITIES_CHARSET) .
 					'</pre>';
 			}
 
+			$tpl->leave(); // m3_
 			break;
 	}
 

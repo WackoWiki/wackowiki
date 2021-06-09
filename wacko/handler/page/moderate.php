@@ -451,7 +451,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				// in case no errors, move...
-				if ($error == true)
+				if ($error)
 				{
 					$error = Ut::perc_replace($this->_t('ModerateMoveExists'), implode(', ', $error));
 				}
