@@ -918,7 +918,7 @@ $wacko_translation = [
 	'AclForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
 
-	'BookmarkDeleteSelected'	=> 'Delete selected',
+	'BookmarkDeleteSelected'	=> '선택 삭제',
 	'BookmarkMark'				=> 'Mark',
 	'BookmarkNumber'			=> 'No.',
 	'BookmarkNone'				=> '당신은 더 북마크가 없습니다.',

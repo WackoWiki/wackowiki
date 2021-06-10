@@ -918,7 +918,7 @@ $wacko_translation = [
 	'AclForCluster'				=> 'Контрол на достъп  за  целия  СЕКТОР %1',
 	'AclAreYouSure'				=> 'Ще се сменят правата за тази страница и всички подстраници. Продължение?',
 
-	'BookmarkDeleteSelected'	=> 'Delete Selected',
+	'BookmarkDeleteSelected'	=> 'Изтрий избраните',
 	'BookmarkMark'				=> 'Маркирай',
 	'BookmarkNumber'			=> 'No.',
 	'BookmarkNone'				=> 'You have no bookmarks.',

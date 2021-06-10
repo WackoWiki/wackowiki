@@ -918,7 +918,7 @@ $wacko_translation = [
 	'AclForCluster'				=> 'Lista de Permissões para TODO o cluster %1',
 	'AclAreYouSure'				=> 'Vai alterar aas permissões desta página e todas as suas subpáginas. Quer continuar?',
 
-	'BookmarkDeleteSelected'	=> 'Delete Selected',
+	'BookmarkDeleteSelected'	=> 'Excluir Selecionado(s)',
 	'BookmarkMark'				=> 'Mark',
 	'BookmarkNumber'			=> 'No.',
 	'BookmarkNone'				=> 'Você não tem favoritos.',

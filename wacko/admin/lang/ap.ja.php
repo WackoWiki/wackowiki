@@ -70,7 +70,7 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
+		'name'		=> '基本',
 		'title'		=> 'Basic settings',
 	],
 
@@ -100,8 +100,8 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
-		'title'		=> 'Notifications settings',
+		'name'		=> '通知',
+		'title'		=> '通知設定',
 	],
 
 	// Config Pages module
