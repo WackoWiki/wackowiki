@@ -69,11 +69,11 @@ class Http
 	// Get page content from cache
 	private function load_page(&$timestamp)
 	{
-		$this->lang		= $this->user_agent_language();
+		$this->lang					= $this->user_agent_language();
 
 		// store data for save_page()
-		[$this->page, $this->hash] = $this->normalize_page($this->page);
-		$this->file		= $this->construct_id($this->page, $this->method, $this->query, $this->lang);
+		[$this->page, $this->hash]	= $this->normalize_page($this->page);
+		$this->file					= $this->construct_id($this->page, $this->method, $this->query, $this->lang);
 
 		clearstatcache();
 
@@ -326,39 +326,57 @@ class Http
 	}
 
 	// Set security headers (frame busting, clickjacking/XSS/CSRF protection)
-	//		Content-Security-Policy:
-	//		Referrer-Policy:
-	//		Strict-Transport-Security:
+	//		1. Content-Security-Policy:
+	//		2. Permissions-Policy:
+	//		3. Referrer-Policy:
+	//		4. Strict-Transport-Security:
+	//		5. X-Frame-Options:
+	//		6. X-Content-Type-Options:
 	public function http_security_headers()
 	{
 		if ($this->db->enable_security_headers && !headers_sent())
 		{
-			// http://www.w3.org/TR/CSP2/
-			switch ($this->db->csp)
-			{
-				// default
-				case 1:
-					$file_name	= 'csp_defaults.conf';
-					break;
-
-				// custom
-				case 2:
-					$file_name	= 'csp_custom.conf';
-					break;
-			}
-
-			// TODO: cache, validate, strip possible comments, move to additional function
-			//		throw error if
+			// 1. Content-Security-Policy: http://www.w3.org/TR/CSP2/
 			if ($this->db->csp)
 			{
-				$file_path		= Ut::join_path(CONFIG_DIR, $file_name);
-				$csp_config		= file_get_contents($file_path);
-				$csp_header		= str_replace(["\r", "\n", "\t"], '', $csp_config);
+				switch ($this->db->csp)
+				{
+					// default
+					case 1:
+						$file_name	= 'csp.conf';
+						break;
 
+					// custom
+					case 2:
+						$file_name	= 'csp_custom.conf';
+						break;
+				}
+
+				$csp_header = $this->get_header_conf($file_name);
 				header($csp_header);
 			}
 
-			// https://www.w3.org/TR/referrer-policy/
+			// 2. Permissions-Policy: https://www.w3.org/TR/permissions-policy/
+			if ($this->db->permissions_policy)
+			{
+				switch ($this->db->permissions_policy)
+				{
+					// default
+					case 1:
+						$file_name	= 'permissions_policy.conf';
+						break;
+
+					// custom
+					case 2:
+						$file_name	= 'permissions_policy_custom.conf';
+						break;
+				}
+
+				$pp_header = $this->get_header_conf($file_name);
+				header($pp_header);
+			}
+
+			// 3. Referrer-Policy: https://www.w3.org/TR/referrer-policy/
 			if ($this->db->referrer_policy)
 			{
 				static $policy = [
@@ -376,19 +394,28 @@ class Http
 				header('Referrer-Policy: ' . $policy[$this->db->referrer_policy]);
 			}
 
+			// 4. Strict-Transport-Security:
 			if ($this->tls_session)
 			{
 				// HSTS
 				header('Strict-Transport-Security: max-age=7776000');
 			}
 
-			// prevent clickjacking
+			// 5. X-Frame-Options: prevent clickjacking
 			// TODO configure?
 			header('X-Frame-Options: SAMEORIGIN');
 
-			// prevents the browser from doing MIME-type sniffing
+			// 6. X-Content-Type-Options: prevents the browser from doing MIME-type sniffing
 			header('X-Content-Type-Options: nosniff');
 		}
+	}
+
+	// TODO: cache, validate, strip possible comments
+	function get_header_conf($file_name)
+	{
+		$csp_config		= file_get_contents(Ut::join_path(CONFIG_DIR, $file_name));
+
+		return			str_replace(["\r", "\n", "\t"], '', $csp_config);
 	}
 
 	/**

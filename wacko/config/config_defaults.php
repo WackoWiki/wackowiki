@@ -259,6 +259,7 @@ $wacko_config_defaults = [
 
 	'enable_security_headers'		=> 1,
 	'csp'							=> 1,
+	'permissions_policy'			=> 1,
 	'referrer_policy'				=> 6,
 
 	'form_token_time'				=> 7200,

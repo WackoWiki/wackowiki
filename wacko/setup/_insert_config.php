@@ -145,6 +145,7 @@ $config_db['owners_can_remove_comments']	= $config['owners_can_remove_comments']
 $config_db['pages_purge_time']				= $config['pages_purge_time'];
 $config_db['paragrafica']					= $config['paragrafica'];
 $config_db['password_page']					= $config['password_page'];
+$config_db['permissions_policy']			= $config['permissions_policy'];
 $config_db['phpmailer_method']				= $config['phpmailer_method'];
 $config_db['privacy_page']					= $config['privacy_page'];
 $config_db['publish_anonymously']			= $config['publish_anonymously'];

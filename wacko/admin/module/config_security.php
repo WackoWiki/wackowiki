@@ -55,6 +55,7 @@ function admin_config_security(&$engine, &$module)
 		$config['intercom_delay']				= (int) $_POST['intercom_delay'];
 		$config['enable_security_headers']		= (int) $_POST['enable_security_headers'];
 		$config['csp']							= (int) $_POST['csp'];
+		$config['permissions_policy']			= (int) $_POST['permissions_policy'];
 		$config['referrer_policy']				= (int) $_POST['referrer_policy'];
 		$config['max_login_attempts']			= (int) $_POST['max_login_attempts'];
 		$config['ip_login_limit_max']			= (int) $_POST['ip_login_limit_max'];
@@ -269,7 +270,7 @@ function admin_config_security(&$engine, &$module)
 				<td>
 					<select id="csp" name="csp">
 						<?php
-						$csp_modes = $engine->_t('CspModes');
+						$csp_modes = $engine->_t('PolicyModes');
 
 						foreach ($csp_modes as $mode => $csp_mode)
 						{
@@ -287,7 +288,7 @@ function admin_config_security(&$engine, &$module)
 					{
 						// default
 						case 1:
-							$file_name	= 'csp_defaults.conf';
+							$file_name	= 'csp.conf';
 							break;
 
 						// custom
@@ -311,6 +312,60 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<?php
 				} // close CSP file display
+			?>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="csp"><strong><?php echo $engine->_t('PermissionsPolicy');?>:</strong><br>
+					<small><?php echo $engine->_t('PermissionsPolicyInfo');?></small></label>
+				</td>
+				<td>
+					<select id="permissions_policy" name="permissions_policy">
+						<?php
+						$pp_modes = $engine->_t('PolicyModes');
+
+						foreach ($pp_modes as $mode => $pp_mode)
+						{
+							echo '<option value="' . $mode . '" ' . ( (int) $engine->db->permissions_policy === $mode ? 'selected' : '') . '>' . $mode . ': ' . $pp_mode . '</option>' . "\n";
+						}
+					?>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<?php
+				if ($engine->db->permissions_policy)
+				{
+					switch ($engine->db->permissions_policy)
+					{
+						// default
+						case 1:
+							$file_name	= 'permissions_policy.conf';
+							break;
+
+						// custom
+						case 2:
+							$file_name	= 'permissions_policy_custom.conf';
+							break;
+					}
+
+					$file_path	= Ut::join_path(CONFIG_DIR, $file_name);
+					$pp_header	= file_get_contents($file_path);
+
+					?>
+				<th colspan="2">
+					Permissions-Policy header <?php echo $file_name; ?>
+				</th>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<textarea style="width: 100%; min-height: 200px;" id="csp_header" name="pp_header"><?php echo Ut::html($pp_header);?></textarea>
+				</td>
+			</tr>
+			<?php
+				} // close Permissions-Policy file display
 			?>
 			<tr class="lined">
 				<td colspan="2"></td>
@@ -486,7 +541,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="intercom_delay"><strong><?php echo $engine->_t('RegistrationDelay');?>:</strong><br>
+					<label for="registration_delay"><strong><?php echo $engine->_t('RegistrationDelay');?>:</strong><br>
 					<small><?php echo $engine->_t('RegistrationDelayInfo');?></small></label>
 				</td>
 				<td>
