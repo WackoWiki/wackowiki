@@ -408,6 +408,7 @@ div .wrapper-content {
 	padding-left:		10px;
 	padding-right:		10px;
 	white-space:		nowrap;
+	clear:				both;
 }
 
 .comment-meta {

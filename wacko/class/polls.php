@@ -200,7 +200,7 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user_name	= (!$header['user_id'] ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name']);
+		$user_name	= (!$header['user_id'] ? '<em>' . $this->engine->_t('Guest') . '</em>' : $header['user_name']);
 
 		if (!$header['start'])
 		{	// non-existent or not moderated poll
@@ -248,7 +248,7 @@ class Polls
 		$header		= $this->get_poll_title($poll_id);
 		$vars		= $this->get_poll_vars($poll_id, 1);
 		$duration	= $this->poll_time($header['start'], (!$header['end'] ? time() : $header['end']));
-		$user_name	= (!$header['user_id'] ? '<em>' . $this->engine->_t('PollsGuest') . '</em>' : $header['user_name'] );
+		$user_name	= (!$header['user_id'] ? '<em>' . $this->engine->_t('Guest') . '</em>' : $header['user_name'] );
 		$voters		= $header['votes'];
 
 		if ($header['plural'] != 1)		$total  = $header['votes'];

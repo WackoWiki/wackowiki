@@ -135,7 +135,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>' .
 					'<button type="submit" name="yes" id="submit">' . $engine->_t('SubmitButton') . '</button> ' .
-					'<a href="' . $engine->href('', '', $mode_http) . '" class="btn-link"><button type="button" name="cancel" id="button">' . $engine->_t('PollsCancel') . '</button></a>' .
+					'<a href="' . $engine->href('', '', $mode_http) . '" class="btn-link"><button type="button" name="cancel" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();
@@ -178,8 +178,8 @@ function admin_content_polls(&$engine, &$module)
 
 			echo '<tr><td colspan="4">' .
 					'<button type="submit" name="stop" id="stop-submit">' . $engine->_t('PollsStop') . '</button> ' .
-					'<button type="submit" name="reset" id="reset-submit">' . $engine->_t('PollsReset') . '</button> ' .
-					'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('PollsRemove') . '</button>' .
+					'<button type="submit" name="reset" id="reset-submit">' . $engine->_t('ResetButton') . '</button> ' .
+					'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('RemoveButton') . '</button>' .
 				'</td></tr>';
 		}
 
@@ -228,7 +228,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><td colspan="3">' .
 					'<button type="submit" name="activate" id="activate-submit">' . $engine->_t('PollsActivate') . '</button> ' .
 					'<button type="submit" name="edit" id="edit-submit">' . $engine->_t('PollsEdit') . '</button> ' .
-					'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('PollsRemove') . '</button>' .
+					'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('RemoveButton') . '</button>' .
 				'</td></tr>';
 		}
 
@@ -300,7 +300,7 @@ function admin_content_polls(&$engine, &$module)
 		if (!empty($list))
 		{
 			echo '<tr><td colspan="4">' .
-					'<button type="submit" name="remove" id="submit">' . $engine->_t('PollsRemove') . '</button>' .
+					'<button type="submit" name="remove" id="submit">' . $engine->_t('RemoveButton') . '</button>' .
 				'</td></tr>';
 		}
 
