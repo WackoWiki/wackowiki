@@ -51,8 +51,8 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Ρυθμίσεις Γλώσσας',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
+'PleaseUpgradeToR6'				=> 'Εκτελείτε μια παλιά (προ %1) έκδοση του WackoWiki (%1). Για να ενημερώσετε σε αυτή τη νέα έκδοση του WackoWiki, πρέπει πρώτα να ενημερώσετε την εγκατάστασή σας σε %2.',
+'UpgradeFromWacko'				=> 'Καλώς ήρθατε στο WackoWiki, φαίνεται ότι κάνετε αναβάθμιση από το WackoWiki %1 σε %2.  Οι επόμενες σελίδες θα σας καθοδηγήσουν στη διαδικασία αναβάθμισης.',
 'FreshInstall'					=> 'Καλώς ορίσατε στο WackoWiki, πρόκειται να εγκαταστήσετε το WackoWiki %1. Οι επόμενες σελίδες θα σας καθοδηγήσουν στη διαδικασία εγκατάστασης.',
 'PleaseBackup'					=> 'Παρακαλώ, πάρτε αντίγραφο της βάσης, του αρχείου ρυθμίσεων και όλα τα τροποποιημένα αρχεία όπως αυτά που έχουν αλλαγές σε κώδικα και προσθήκες επιρραμάτων πριν την εκκίνηση της διαδικασίας ανάβάθμισης. Αυτό θα σας προτρέψει από έναν μεγάλο πονοκέφαλο.',
 'LangDesc'						=> 'Παρακαλώ επιλέξτε μια γλώσσα για την διαδικασία εγκατάστασης. Η γλώσσα αυτή θα χρησιμοποιηθεί επίσης και ως προκαθορισμένη γλώσσα για την εγκατάσταση του WackoWiki.',
@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Ρυθμίσεις Βάσης',
 'DbDriver'						=> 'Οδηγός',
-'DbDriverDesc'					=> 'Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε. Θα πρέπει να είναι ένας παραδοσιακός οδηγός εάν δεν έχετε εγκατεστημένο <a href="http://gr.php.net/pdo" target="_blank">PDO</a>.',
+'DbDriverDesc'					=> 'Ο οδηγός της βάσης που θέλετε να χρησιμοποιήσετε.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
@@ -147,8 +148,7 @@ $lang = [
 'DbHost'						=> 'Διακομιστής',
 'DbHostDesc'					=> 'Το όνομα του διακομιστή βάσεων δεδομένων που τρέχει σε αυτό. Συνήθως είναι <code>127.0.0.1</code> ή <code>localhost</code> (π.χ., το ίδιο όνομα που είναι το WackoWiki site σας).',
 'DbPort'						=> 'Πόρτα (Προαιρετικό)',
-'DbPortDesc'					=> 'Ο αριθμός της πόρτας του διακομιστή βάσεων δεδομένων σας αν είναι προσβάσιμος σε αυτή, αφήστε το κενό εάν χρησιμοποιείτε
-τον προκαθορισμένο αριθμό πόρτας.',
+'DbPortDesc'					=> 'Ο αριθμός της πόρτας του διακομιστή βάσεων δεδομένων σας αν είναι προσβάσιμος σε αυτή, αφήστε το κενό εάν χρησιμοποιείτε τον προκαθορισμένο αριθμό πόρτας.',
 'Db'							=> 'Το όνομα της Βάσης',
 'DbDesc'						=> 'Η βάση δεδομένων που θα χρησιμοποιήσει το WackoWiki. Αυτή η βάση πρέπει να υπάρχει ήδη για να προχωρήσουμε!',
 'DbUserDesc'					=> 'Το όνομα και το συνθηματικό του χρήστη που χρησιμοποιείται για να συνδέεστε στην βάση σας.',
@@ -159,9 +159,9 @@ $lang = [
 'Prefix'						=> 'Πρόθεμα Πίνακα',
 'ErrorNoDbDriverDetected'		=> 'Δεν εντοπίστηκε οδηγός βάσεων δεδομένων, παρακαλώ είτε ενεργοποιήστε μία εκ των επεκτάσεων mysqli ή pdo_mysql στο php.ini αρχείο σας.',
 'ErrorNoDbDriverSelected'		=> 'Δεν εντοπίστηκε οδηγός βάσεων δεδομένων, παρακαλώ επιλέξτε έναν από την λίστα.',
-'DeleteTables'					=> 'Delete Existing Tables?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database. This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
+'DeleteTables'					=> 'Διαγραφή υπαρχόντων πινάκων?',
+'DeleteTablesDesc'				=> 'ΠΡΟΣΟΧΗ! Εάν προχωρήσετε με αυτή την επιλογή επιλεγμένη, όλα τα τρέχοντα δεδομένα του wiki θα διαγραφούν από τη βάση δεδομένων σας. Αυτό δεν μπορεί να αναιρεθεί, εκτός αν επαναφέρετε τα δεδομένα χειροκίνητα από ένα αντίγραφο ασφαλείας.',
+'ConfirmTableDeletion'			=> 'Είστε σίγουροι ότι θέλετε να διαγράψετε όλους τους τρέχοντες πίνακες wiki?',
 
 /*
    Database Installation Page

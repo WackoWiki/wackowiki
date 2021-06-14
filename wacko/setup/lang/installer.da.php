@@ -51,9 +51,9 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Sprogkonfiguration',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
+'PleaseUpgradeToR6'				=> 'Du kører en gammel (før %1) version af WackoWiki (%1). For at opdatere til denne nye version af WackoWiki, skal du først opdatere din installation til %2.',
+'UpgradeFromWacko'				=> 'Velkommen til WackoWiki, det ser ud til, at du opgraderer fra WackoWiki %1 til %2.  De næste par sider vil guide dig gennem opgraderingsprocessen.',
+'FreshInstall'					=> 'Velkommen til WackoWiki, du er ved at installere WackoWiki %1.  De næste par sider vil guide dig gennem installationsprocessen.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
 'LangDesc'						=> 'Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.',
 
@@ -91,7 +91,7 @@ $lang = [
 'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
 'HomePageDefault'				=> 'Startside',
 'MultiLang'						=> 'Multi Language Mode',
-'MultiLangDesc'					=> 'Multilanguage mode allows to have pages with different language settings within single installation. If this mode is enabled, installer will create initial menu items for all languages available in distribution.',
+'MultiLangDesc'					=> '"Flersproget" tilstand giver mulighed for at have sider med forskellige sprogindstillinger i en enkelt installation. Når denne tilstand er aktiveret, opretter installationsprogrammet indledende menupunkter for alle sprog, der er tilgængelige i distributionen.',
 'AllowedLang'					=> 'Allowed Languages',
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 'Admin'							=> 'Admin Name',
@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Database Configuration',
 'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
+'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
@@ -158,9 +159,9 @@ $lang = [
 'Prefix'						=> 'Table Prefix',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
-'DeleteTables'					=> 'Delete Existing Tables?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
+'DeleteTables'					=> 'Slet eksisterende tabeller?',
+'DeleteTablesDesc'				=> 'OPMÆRKSOMHED! Hvis du fortsætter med denne indstilling valgt, vil alle nuværende wiki-data blive slettet fra din database. Dette kan ikke fortrydes, medmindre du manuelt gendanner dataene fra en sikkerhedskopi.',
+'ConfirmTableDeletion'			=> 'Er du sikker på, at du vil slette alle nuværende wiki-tabeller?',
 
 /*
    Database Installation Page

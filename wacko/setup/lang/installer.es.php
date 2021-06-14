@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Configuración de Base de Datos',
 'DbDriver'						=> 'Controlador',
-'DbDriverDesc'					=> 'Controlador de base de datos a utilizar. Debe elegir un controlador legacy si no tiene <a href="https://secure.php.net/pdo" target="_blank">PDO</a> instalado.',
+'DbDriverDesc'					=> 'Controlador de base de datos a utilizar.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'El conjunto de caracteres de la base de datos que desea utilizar.',
 'DbEngine'						=> 'Engine',

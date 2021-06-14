@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Настройки базы данных',
 'DbDriver'						=> 'Драйвер',
-'DbDriverDesc'					=> 'Драйвер базы данных, который вы хотите использовать. Нужно выбрать legacy-драйвер, если не используется установленным <a href="https://secure.php.net/pdo" target="_blank">PDO</a>.',
+'DbDriverDesc'					=> 'Драйвер базы данных, который вы хотите использовать.',
 'DbCharset'						=> 'Кодировка',
 'DbCharsetDesc'					=> 'Кодировка записей базы данных.',
 'DbEngine'						=> 'Движок базы данных',

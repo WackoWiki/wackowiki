@@ -51,9 +51,9 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Konfiguracja Języka',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
+'PleaseUpgradeToR6'				=> 'Używana jest stara (sprzed %1) wersja WackoWiki (%1). Aby zaktualizować WackoWiki do nowej wersji, należy najpierw zaktualizować instalację do wersji %2.',
+'UpgradeFromWacko'				=> 'Witamy w WackoWiki. Wygląda na to, że dokonujesz aktualizacji z wersji %1 WackoWiki do wersji %2.  Następne kilka stron poprowadzi Cię przez proces aktualizacji.',
+'FreshInstall'					=> 'Witamy w WackoWiki. Za chwilę nastąpi instalacja %1 WackoWiki.  Następne kilka stron poprowadzi Cię przez proces instalacji.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
 'LangDesc'						=> 'Wybierz język do procesu instalacji. Ten sam język będzie domyślnym językiem dla Twojej instalacji WackoWiki.',
 
@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Konfiguracja Bazy Danych',
 'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
+'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
@@ -159,7 +160,7 @@ $lang = [
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
 'DeleteTables'					=> 'Usuwanie istniejących tabel?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
+'DeleteTablesDesc'				=> 'UWAGA! Jeśli wybierzesz tę opcję, wszystkie aktualne dane wiki zostaną usunięte z bazy danych. To nie może być cofnięte, chyba że ręcznie przywrócisz dane z kopii zapasowej.',
 'ConfirmTableDeletion'			=> 'Czy na pewno chcesz usunąć wszystkie obecne tabele wiki?',
 
 /*

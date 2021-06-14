@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Andmebaasi konfigureerimine',
 'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
+'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
@@ -158,9 +159,9 @@ $lang = [
 'Prefix'						=> 'Tabeli prefiks',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
-'DeleteTables'					=> 'Delete Existing Tables?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
+'DeleteTables'					=> 'Olemasolevate tabelite kustutamine?',
+'DeleteTablesDesc'				=> 'TÄHELEPANU! Kui te jätkate selle valikuga, kustutatakse kõik praegused wiki andmed teie andmebaasist. Seda ei saa tühistada, kui te ei taastata andmeid käsitsi varukoopiast.',
+'ConfirmTableDeletion'			=> 'Kas olete kindel, et soovite kustutada kõik praegused wiki tabelid?',
 
 /*
    Database Installation Page

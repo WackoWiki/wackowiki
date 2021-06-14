@@ -13,9 +13,9 @@ $lang = [
 */
 'ConfigDefaults'	=> [
 	// pages
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
-	'users_page'		=> 'Users',
+	'category_page'		=> 'Categorie',
+	'groups_page'		=> 'Groepen',
+	'users_page'		=> 'Gebruikers',
 
 	'search_page'		=> 'Zoeken',
 	'login_page'		=> 'Inloggen',
@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Database Configuratie',
 'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
+'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'De database karakterset die u wilt gebruiken.',
 'DbEngine'						=> 'Engine',

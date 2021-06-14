@@ -18,7 +18,7 @@ if ($config['language'] == $page_lang)
 		// ...
 	}
 
-	insert_page($config['category_page'],		'категория',			'{{category}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],		'Категория',			'{{category}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['groups_page'],			'Групи',				'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Потребители',			'{{users}}',			$page_lang, 'Admins', false, false);
 
@@ -27,10 +27,10 @@ if ($config['language'] == $page_lang)
 	insert_page($config['privacy_page'],		'Поверителност',		'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Регистрация',			'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Password',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
+	insert_page($config['password_page'],		'Парола',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Търсене',				'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'влизане',				'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Settings',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['login_page'],			'Влизане',				'{{login}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Настройки',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 	insert_page($config['changes_page'],		'Последни Промени',		'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Промени');
 	insert_page($config['comments_page'],		'Нови Коментари',		'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Коментари');

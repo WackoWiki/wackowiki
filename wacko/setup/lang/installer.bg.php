@@ -13,15 +13,15 @@ $lang = [
 */
 'ConfigDefaults'	=> [
 	// pages
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
-	'users_page'		=> 'Users',
+	'category_page'		=> 'Категория',
+	'groups_page'		=> 'Групи',
+	'users_page'		=> 'Потребители',
 
 	'search_page'		=> 'Търсене',
-	'login_page'		=> 'влизане',
-	'account_page'		=> 'Settings',
+	'login_page'		=> 'Влизане',
+	'account_page'		=> 'Настройки',
 	'registration_page'	=> 'Регистрация',
-	'password_page'		=> 'Password',
+	'password_page'		=> 'Парола',
 
 	'changes_page'		=> 'ПоследниПромени',
 	'comments_page'		=> 'НовиКоментари',
@@ -51,9 +51,9 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Езикови настройки',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
+'PleaseUpgradeToR6'				=> 'Използвате стара (преди %1) версия на WackoWiki (%1). За да актуализирате до тази нова версия на WackoWiki, първо трябва да актуализирате инсталацията си до %2.',
+'UpgradeFromWacko'				=> 'Добре дошли в WackoWiki, изглежда, че преминавате от WackoWiki %1 към %2.  Следващите няколко страници ще ви преведат през процеса на обновяване.',
+'FreshInstall'					=> 'Добре дошли в WackoWiki, предстои ви да инсталирате WackoWiki %1.  Следващите няколко страници ще ви преведат през процеса на инсталиране.',
 'PleaseBackup'					=> 'Моля, съхранете си копие на базата данни (БД) от, конфигурационния файл и другите, променени от вас файлове (например,  теми),  докато още НЕ Е КЪСНО!',
 'LangDesc'						=> 'Изберете език. Той ще се използува за инсталацията, а също и ще стане език по подразбиране на новия WackoWiki.',
 
@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Настройка на БД',
 'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
+'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
@@ -158,9 +159,9 @@ $lang = [
 'Prefix'						=> 'Префикс на таблиците',
 'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
 'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
-'DeleteTables'					=> 'Delete Existing Tables?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
+'DeleteTables'					=> 'Изтриване на съществуващи таблици?',
+'DeleteTablesDesc'				=> 'ВНИМАНИЕ! Ако продължите с тази опция, всички текущи данни за уикито ще бъдат изтрити от базата данни. Това не може да бъде отменено, освен ако не възстановите ръчно данните от резервно копие.',
+'ConfirmTableDeletion'			=> 'Сигурни ли сте, че искате да изтриете всички текущи уикитаблици?',
 
 /*
    Database Installation Page

@@ -30,7 +30,7 @@ if ($config['language'] == $page_lang)
 	insert_page($config['password_page'],		'Password',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
 	insert_page($config['search_page'],			'Buscar',					'{{search}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['login_page'],			'Entrar',					'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Settings',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
+	insert_page($config['account_page'],		'Configurações',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
 	insert_page($config['changes_page'],		'Alterações Recentes',		'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Alterações');
 	insert_page($config['comments_page'],		'Recentemente Comentadas',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Comentadas');

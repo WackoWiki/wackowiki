@@ -13,8 +13,8 @@ $lang = [
 */
 'ConfigDefaults'	=> [
 	// pages
-	'category_page'		=> 'Category',
-	'groups_page'		=> 'Groups',
+	'category_page'		=> 'Categoria',
+	'groups_page'		=> 'Gruppi',
 	'users_page'		=> 'Utenti',
 
 	'search_page'		=> 'Ricerca',
@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Configurazione del database',
 'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
+'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
@@ -214,13 +215,13 @@ $lang = [
 /*
    Write Config Page
 */
-'write-config'					=> 'Write Config File',
+'write-config'					=> 'Scrivi file di configurazione',
 'FinalStep'						=> 'Final Step',
 'Writing'						=> 'Scrittura del file di configurazione',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
 'InstallationComplete'			=> 'Installazione completata',
 'ThatsAll'						=> 'È tutto! Adesso puoi <a href="%1">view your WackoWiki site</a>.',
-'SecurityConsiderations'		=> 'Security Considerations',
+'SecurityConsiderations'		=> 'Considerazioni di sicurezza',
 'SecurityRisk'					=> 'Infine, ti consigliamo di escludere l\'opzione di scrittura su %1 ora che è stata scritta. Lasciare il file aperto alla scrittura è un rischio per la tua sicurezza!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'Dovreste cancellare la directory %1 ora che il processo di installazione è stato completato.',
 'ErrorGivePrivileges'			=> 'Il file di configurazione %1 non si è potuto scrivere. Si dovrà rendere temporaneamente accessibile alla scrittura il tuo server e la tua directory WackoWiki, o un file vuoto col nome di %1<br>%2<br>; don\'t forget to remove write access again later, i.e. %3.<br>Se, per qualche motivo, non puoi farlo, dovrai copiare il testo in basso in un nuovo file e salvarlo/immetterlo come %1 nella directory WackoWiki. Ciò fatto, il tuo sito WackoWiki è pronto per funzionare. Altrimenti, visita <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',

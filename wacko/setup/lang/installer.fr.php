@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Configuration de la base de données',
 'DbDriver'						=> 'Pilote',
-'DbDriverDesc'					=> 'Choisissez le pilote de base de données que vous souhaitez utiliser. Pour utiliser un pilote PDO vous devez avoir <a href="http://fr.php.net/pdo" target="_blank">PDO</a> installés.',
+'DbDriverDesc'					=> 'Choisissez le pilote de base de données que vous souhaitez utiliser.',
 'DbCharset'						=> 'Jeu de caractères',
 'DbCharsetDesc'					=> 'Le jeu de caractères que vous voulez utiliser pour la base de données.',
 'DbEngine'						=> 'Moteur',

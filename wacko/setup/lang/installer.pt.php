@@ -19,7 +19,7 @@ $lang = [
 
 	'search_page'		=> 'Buscar',
 	'login_page'		=> 'Entrar',
-	'account_page'		=> 'Settings',
+	'account_page'		=> 'Configurações',
 	'registration_page'	=> 'Registration',
 	'password_page'		=> 'Senha',
 
@@ -51,9 +51,9 @@ $lang = [
    Language Selection Page
 */
 'lang'							=> 'Configuração de idioma',
-'PleaseUpgradeToR6'				=> 'You aware to be running an old (pre %1) release of WackoWiki. To update to this release of WackoWiki, you must first update your installation to %2.',
-'UpgradeFromWacko'				=> 'Welcome to WackoWiki, it appears that you are upgrading from WackoWiki %1 to %2.  The next few pages will guide you through the upgrade process.',
-'FreshInstall'					=> 'Welcome to WackoWiki, you are about to install WackoWiki %1.  The next few pages will guide you through the installation process.',
+'PleaseUpgradeToR6'				=> 'Está a correr uma versão antiga (pré %1) do WackoWiki (%1). Para actualizar para esta nova versão do WackoWiki, deve primeiro actualizar a sua instalação para %2.',
+'UpgradeFromWacko'				=> 'Bem-vindo a WackoWiki, parece que está a passar de WackoWiki %1 para %2.  As próximas páginas irão guiá-lo através do processo de actualização.',
+'FreshInstall'					=> 'Bem-vindo ao WackoWiki, está prestes a instalar o WackoWiki %1.  As próximas páginas irão guiá-lo através do processo de instalação.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
 'LangDesc'						=> 'Escolha um idioma para o processo de instalação. Este idioma também será usado como o idioma padrão da sua instalação do WackoWiki.',
 
@@ -122,6 +122,7 @@ $lang = [
 	'es' => 'Español',
 	'et' => 'Eesti',
 	'fr' => 'Français',
+	'hi' => 'हिन्दी',
 	'hu' => 'Magyar',
 	'it' => 'Italiano',
 	'ja' => '日本語',
@@ -139,7 +140,7 @@ $lang = [
 */
 'config-database'				=> 'Configuração do banco de dados',
 'DbDriver'						=> 'Driver',
-'DbDriverDesc'					=> 'The database driver you want to use. You must choose a legacy driver if you do not have <a href="https://secure.php.net/pdo" target="_blank">PDO</a> installed.',
+'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
 'DbCharsetDesc'					=> 'The database charset you want to use.',
 'DbEngine'						=> 'Engine',
@@ -147,20 +148,20 @@ $lang = [
 'DbHost'						=> 'Host',
 'DbHostDesc'					=> 'The host your database server is running on. Usually <code>127.0.0.1</code> or <code>localhost</code> (ie, the same machine your WackoWiki site is on).',
 'DbPort'						=> 'Port (Optional)',
-'DbPortDesc'					=> 'The port number your database server is accessible through, leave it blank to use the default port number.',
+'DbPortDesc'					=> 'O número da porta pela qual o seu servidor de base de dados está acessível, deixe-o em branco para usar o número da porta padrão.',
 'Db'							=> 'Database Name',
-'DbDesc'						=> 'The database WackoWiki should use. This database needs to exist already once you continue!',
-'DbUserDesc'					=> 'Name of the user used to connect to your database.',
+'DbDesc'						=> 'A base de dados WackoWiki deve ser utilizada. Esta base de dados precisa de existir já depois de continuar!',
+'DbUserDesc'					=> 'Nome do utilizador utilizado para se ligar à sua base de dados.',
 'DbUser'						=> 'User Name',
-'DbPasswordDesc'				=> 'Password of the user used to connect to your database.',
+'DbPasswordDesc'				=> 'Senha do utilizador utilizada para se ligar à sua base de dados.',
 'DbPassword'					=> 'Password',
 'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',
 'Prefix'						=> 'Table Prefix',
-'ErrorNoDbDriverDetected'		=> 'No database driver has been detected, please enable either the mysqli or pdo_mysql extension in your php.ini file.',
-'ErrorNoDbDriverSelected'		=> 'No database driver has been selected, please pick one from the list.',
+'ErrorNoDbDriverDetected'		=> 'Nenhum driver de base de dados foi detectado, por favor active ou a extensão mysqli ou pdo_mysql no seu ficheiro php.ini.',
+'ErrorNoDbDriverSelected'		=> 'Não foi seleccionado nenhum condutor de base de dados, por favor escolha um da lista.',
 'DeleteTables'					=> 'Eliminar tabelas existentes?',
-'DeleteTablesDesc'				=> 'ATTENTION! If you proceed with this option selected all current wiki data will be erased from your database.  This cannot be undone unless you manually restore the data from a backup.',
-'ConfirmTableDeletion'			=> 'Are you sure you want to delete all current wiki tables?',
+'DeleteTablesDesc'				=> 'ATENÇÃO! Se proceder com esta opção seleccionada, todos os dados wiki actuais serão apagados da sua base de dados.  Isto não pode ser desfeito a menos que restaure manualmente os dados a partir de uma cópia de segurança.',
+'ConfirmTableDeletion'			=> 'Tem a certeza de que quer apagar todas as tabelas wiki actuais?',
 
 /*
    Database Installation Page
