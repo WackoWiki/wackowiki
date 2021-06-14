@@ -449,7 +449,6 @@ $wacko_translation = [
 	'SearchResults'				=> '搜尋 的結果 ',
 	'NotFound'					=> 'not found',
 	'NoResultsFor'				=> 'No results for ',
-	'SearchResultsFor'			=> '搜尋 的結果 ',
 	'SearchFor'					=> '搜尋',
 	'TopicSearchResults'		=> 'Topics search results for ',
 	'NotFoundInTopics'			=> 'not found in topics',

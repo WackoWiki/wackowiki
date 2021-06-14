@@ -450,7 +450,6 @@ $wacko_translation = [
 	'SearchResults'				=> 'Resultados de la búsqueda para ',
 	'NotFound'					=> 'no encontrado',
 	'NoResultsFor'				=> 'No hay resultado para ',
-	'SearchResultsFor'			=> 'Resultados para ',
 	'SearchFor'					=> 'Buscar',
 	'TopicSearchResults'		=> 'Resultado de búsqueda en los topicos para ',
 	'NotFoundInTopics'			=> 'no encontrado en los topicos',

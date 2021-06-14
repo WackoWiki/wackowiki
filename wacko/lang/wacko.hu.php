@@ -449,7 +449,6 @@ $wacko_translation = [
 	'SearchResults'				=> 'Keresés eredménye',
 	'NotFound'					=> 'not found',
 	'NoResultsFor'				=> 'No results for ',
-	'SearchResultsFor'			=> 'Keresés eredménye ',
 	'SearchFor'					=> 'Keresése',
 	'TopicSearchResults'		=> 'Topics search results for ',
 	'NotFoundInTopics'			=> 'not found in topics',

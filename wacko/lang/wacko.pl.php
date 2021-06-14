@@ -449,7 +449,6 @@ $wacko_translation = [
 	'SearchResults'				=> 'Wyniki wyszukiwania słowa: ',
 	'NotFound'					=> 'nie zostało odnalezione',
 	'NoResultsFor'				=> 'Nie odnaleziono żadnych stron zawierających wyszukiwane słowo: ',
-	'SearchResultsFor'			=> 'Wyniki wyszukiwania słowa: ',
 	'SearchFor'					=> 'Znajdź',
 	'TopicSearchResults'		=> 'Tematy - wyniki wyszukiwania: ',
 	'NotFoundInTopics'			=> 'wyszukiwanego słowa nie odnaleziono w tematach',

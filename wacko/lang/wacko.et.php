@@ -449,7 +449,6 @@ $wacko_translation = [
 	'SearchResults'				=> 'Otsi tulemusi ',
 	'NotFound'					=> 'ei leitud',
 	'NoResultsFor'				=> 'Tulemusi ei leidunud ',
-	'SearchResultsFor'			=> 'Otsi tulemusi ',
 	'SearchFor'					=> 'Otsi',
 	'TopicSearchResults'		=> 'Otsingu tulemused ',
 	'NotFoundInTopics'			=> 'Ei leidunud',
