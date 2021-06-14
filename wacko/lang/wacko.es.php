@@ -373,6 +373,7 @@ $wacko_translation = [
 	'SimpleDiffDeletions'		=> 'Borrado:',
 	'NoDifferences'				=> 'No hay differencias.',
 	'ReEditOldRevision'			=> 'Reeditar esta antigua version',
+	'DiffStats'					=> 'Stats: %1 changes, %2 additions and %3 deletions. (%4 Not modified)',
 
 	'ExternalPages'				=> 'Enlaces externos vinculados con %1 (%2) (<a href="%3">ver lista de dominios</a>):',
 	'ExternalPagesGlobal'		=> 'Webs vinculados con este Wacko (%2) (<a href="%1">ver lista de dominios</a>):',
@@ -736,6 +737,7 @@ $wacko_translation = [
 	'UsersSessionNA'			=> '[no registrado]',
 	'UsersSessionHidden'		=> '[oculto]',
 	'UsersIntercomSubject'		=> 'Título',
+	'UsersIntercomMessage'		=> 'Mensaje',
 	'UsersIntercomSubjectN'		=> '[iniciar nuevo tema]',
 	'UsersIntercomDisabled'		=> 'Perdón, no desea o no puede recibir mensajes privados.',
 	'UsersIntercomHint'			=> 'Por favor, identifíquese primero y siga el enlace de nuevo, si desea responder el mensaje personal que ha recibido.',
@@ -1233,6 +1235,7 @@ $wacko_translation = [
 		'es' => 'español',
 		'et' => 'estonio',
 		'fr' => 'francés',
+		'hi' => 'hindi',
 		'hu' => 'húngaro',
 		'it' => 'italiano',
 		'ja' => 'japonés',

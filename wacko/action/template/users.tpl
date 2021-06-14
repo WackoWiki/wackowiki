@@ -108,7 +108,8 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td colspan="2">
-									<textarea name="mail_body" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
+									<label for="mail_body" class="visuallyhidden">[ ' _t: UsersIntercomMessage ' ]:</label>
+									<textarea id="mail_body" name="mail_body" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
 								</td>
 							</tr>
 							<tr>
