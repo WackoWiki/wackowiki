@@ -23,7 +23,7 @@ $ap_translation = [
 	'AdminPanel'				=> 'Administration Control Panel',
 	'RecoveryMode'				=> 'Recovery Mode',
 	'Authorization'				=> 'Authorization',
-	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
+	'AuthorizationTip'			=> 'कृपया प्रशासनिक पासवर्ड दर्ज करें (यह भी सुनिश्चित करें कि आपके ब्राउज़र में कुकीज़ की अनुमति है)।',
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
 	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
 
@@ -32,7 +32,7 @@ $ap_translation = [
 	'ApHomePage'				=> 'मुख पृष्ठ',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'लॉगआउट',
-	'ApLogOutTip'				=> 'quit system administration',
+	'ApLogOutTip'				=> 'सिस्टम प्रशासन छोड़ो',
 
 	'TimeLeft'					=> 'बचा हुआ:  %1 मिनट',
 	'ApVersion'					=> 'संस्करण',
@@ -154,7 +154,7 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
+		'name'		=> 'बैकअप',
 		'title'		=> 'Backing up data',
 	],
 
@@ -1014,7 +1014,7 @@ $ap_translation = [
 									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
 									'To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
-	'Backup'					=> 'Backup',
+	'Backup'					=> 'बैकअप',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
