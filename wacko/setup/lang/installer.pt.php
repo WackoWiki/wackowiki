@@ -20,7 +20,7 @@ $lang = [
 	'search_page'		=> 'Buscar',
 	'login_page'		=> 'Entrar',
 	'account_page'		=> 'Configurações',
-	'registration_page'	=> 'Registration',
+	'registration_page'	=> 'CriarConta',
 	'password_page'		=> 'Senha',
 
 	'changes_page'		=> 'AlteraçõesRecentes',
@@ -152,7 +152,7 @@ $lang = [
 'Db'							=> 'Database Name',
 'DbDesc'						=> 'A base de dados WackoWiki deve ser utilizada. Esta base de dados precisa de existir já depois de continuar!',
 'DbUserDesc'					=> 'Nome do utilizador utilizado para se ligar à sua base de dados.',
-'DbUser'						=> 'User Name',
+'DbUser'						=> 'Nome de utilizador',
 'DbPasswordDesc'				=> 'Senha do utilizador utilizada para se ligar à sua base de dados.',
 'DbPassword'					=> 'Password',
 'PrefixDesc'					=> 'Prefix of all tables used by WackoWiki. This allows you to run multiple WackoWiki installations using the same database by configuring them to use different table prefixes (e.g. wacko_).',
