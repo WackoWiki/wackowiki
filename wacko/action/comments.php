@@ -31,8 +31,8 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 		$pagination = $this->pagination($count['n'], $limit);
 
 		$comments = $this->db->load_all(
-			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag as comment_on_tag, b.title as page_title, b.page_lang,
-				a.title AS comment_title, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id " .
+			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag AS comment_on_tag, b.title AS page_title, b.page_lang,
+				a.title AS comment_title, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id, b.owner_id AS page_owner_id " .
 			"FROM " . $this->db->table_prefix . "page a " .
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
@@ -64,6 +64,7 @@ if ($this->user_allowed_comments())
 			$page_ids[]	= $page['comment_on_id'];
 			$this->cache_page($page, true);
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
+			$this->owner_id_cache[$page['comment_on_id']] = $page['page_owner_id'];
 		}
 
 		$this->preload_acl($page_ids);

@@ -40,9 +40,9 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 
 		// load complete comments
 		$comments = $this->db->load_all(
-			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag as comment_on_tag, b.title as page_title, b.page_lang, a.comment_on_id,
-				a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, a.user_id,
-				u.user_name AS comment_user_name, o.user_name as comment_owner_name, a.created AS comment_time " .
+			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag AS comment_on_tag, b.title AS page_title, b.page_lang, a.comment_on_id,
+				a.tag AS comment_tag, a.title AS comment_title, a.page_lang AS comment_lang, b.owner_id AS page_owner_id,
+				u.user_name AS comment_user_name, o.user_name AS comment_owner_name, a.created AS comment_time " .
 			"FROM " . $this->db->table_prefix . "page a " .
 				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
@@ -85,6 +85,7 @@ if ($this->user_allowed_comments())
 				$page_ids[]	= $page['comment_on_id'];
 				$this->cache_page($page, true);
 				$this->page_id_cache[$page['tag']] = $page['page_id'];
+				$this->owner_id_cache[$page['comment_on_id']] = $page['page_owner_id'];
 			}
 
 			$this->preload_acl($page_ids);

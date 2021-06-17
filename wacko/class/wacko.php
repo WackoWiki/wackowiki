@@ -5620,7 +5620,11 @@ class Wacko
 			}
 		}
 
-		if (($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
+		if (isset($this->owner_id_cache[$page_id]))
+		{
+			return (int) $this->owner_id_cache[$page_id];
+		}
+		else if (($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
 		{
 			return (int) ($page['owner_id'] ?? null);
 		}
