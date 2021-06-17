@@ -136,6 +136,10 @@ a:target {
 	visibility: hidden;
 }
 
+.heading{
+	clear: both;
+}
+
 .heading:hover > a.self-link::before {
 	content: "§";
 	visibility: visible;
