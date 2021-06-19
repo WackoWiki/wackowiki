@@ -135,7 +135,7 @@ function admin_content_polls(&$engine, &$module)
 			echo '<tr><td><em>&quot;' . $title.'&quot;</em></td></tr>';
 			echo '<tr><td>' .
 					'<button type="submit" name="yes" id="submit">' . $engine->_t('SubmitButton') . '</button> ' .
-					'<a href="' . $engine->href('', '', $mode_http) . '" class="btn-link"><button type="button" name="cancel" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
+					'<a href="' . $engine->href('', '', $mode_http) . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
 				'</td></tr>';
 			echo '</table>';
 			echo $engine->form_close();

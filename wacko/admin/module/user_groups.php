@@ -145,7 +145,7 @@ function admin_user_groups(&$engine, &$module)
 						<td>
 							<br>
 							<button type="submit" id="submit" name="add_member">' . $engine->_t('AddButton') . '</button> ' .
-							'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
+							'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
 						'</td>
 					</tr>' .
 				'</table>
@@ -343,7 +343,7 @@ function admin_user_groups(&$engine, &$module)
 					<td colspan="2">
 	 					<br>
 	 					<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 			'</table>
@@ -421,7 +421,7 @@ function admin_user_groups(&$engine, &$module)
 						<br><small>' . $engine->_t('GroupsRenameInfo') . '</small>
 						<br><br>
 						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 				'</table><br>';
@@ -525,7 +525,7 @@ function admin_user_groups(&$engine, &$module)
 		echo '<br>' .
 			 '<button type="submit" id="button_add" name="add_member">' . $engine->_t('AddButton') . '</button> ' .
 			 '<button type="submit" id="button_remove" name="remove_member">' . $engine->_t('RemoveButton') . '</button> ' .
-			 '<a href="' . $engine->href() . '" class="btn-link"><button type="button">' . $engine->_t('CancelButton') . '</button></a>';
+			 '<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>';
 
 		echo $engine->form_close();
 	}

@@ -292,7 +292,7 @@ else if ($stop_mod !== true)
 	echo '<button type="submit" name="submit_poll" id="submit">' . $this->_t('SubmitButton') . '</button> ',
 		( $this->get_user() ? false : true );
 	// end captcha output
-		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn-link"><button type="button" name="cancel" id="button">' . $this->_t('CancelButton') . '</button></a>' : '') .
+		echo ($moderation === true ? '<a href="' . $this->href('', $mode_file, $mode_http) . '" class="btn-link"><button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button></a>' : '') .
 			($admin ? NBSP . NBSP . NBSP . NBSP .'<input type="checkbox" name="startmod" id="startmod" value="1"' . ($startmod == 1 ? ' checked ' : ' ') . '> ' .
 			'<label for="startmod">' . $this->_t('PollsStartMod') . '</label>' : '') .
 			'</td></tr>';

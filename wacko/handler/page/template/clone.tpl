@@ -41,7 +41,7 @@ leave it as is for the memories
 	<br><br>
 	<button type="submit" name="submit">[' _t: CloneButton ']</button>
 	&nbsp;
-	<a href="[' show ']" class="btn-link"><button type="button">[' _t: CancelButton | replace "\n" " " ']</button></a>
+	<a href="[' show ']" class="btn-link"><button type="button" class="btn-cancel">[' _t: CancelButton | replace "\n" " " ']</button></a>
 </form>
 [ ====================================== editNote =================================== ]
 <br>

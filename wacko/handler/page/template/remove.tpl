@@ -49,9 +49,9 @@
 				=]
 			=]
 			<br>
-			<button type="submit" class="OkBtn" name="submit">[ ' _t: DeleteButton ' ]</button> &nbsp;
+			<button type="submit" class="btn-ok" name="submit">[ ' _t: DeleteButton ' ]</button> &nbsp;
 			<a href="[ ' href: ' ]" class="btn-link">
-				<button type="button" class="CancelBtn">[ ' _t: CancelButton ' ]</button>
+				<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
 			</a>
 			<br>
 		</form>

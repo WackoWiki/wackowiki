@@ -502,7 +502,7 @@ function admin_user_users(&$engine, &$module)
 					<td colspan="2">
 						<br>
 						<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 			'</table><br>';
@@ -621,7 +621,7 @@ function admin_user_users(&$engine, &$module)
 						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
 						'<br><br>
 						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>' .
+						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
 					'</td>
 				</tr>' .
 			'</table>
@@ -743,7 +743,7 @@ function admin_user_users(&$engine, &$module)
 
 		echo '<br><button type="submit" id="button" name="edit">' . $engine->_t('EditButton') . '</button> ';
 		echo '<button type="submit" id="button" name="remove">' . $engine->_t('RemoveButton') . '</button> ';
-		echo '<a href="' . $engine->href() . '" class="cancel" ><button type="button" id="button">' . $engine->_t('CancelButton') . '</button></a>';
+		echo '<a href="' . $engine->href() . '" class="cancel" ><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>';
 		echo $engine->form_close();
 	}
 	else

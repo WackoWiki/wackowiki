@@ -8457,7 +8457,7 @@ class Wacko
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<button type="submit" id="submit" name="save">' . $this->_t('CategoriesStoreButton') . '</button> ' .
-						'<a href="' . $this->href('') . '" class="btn-link"><button type="button" id="button">' . $this->_t('CancelButton') . '</button></a>' . "<br>\n" .
+						'<a href="' . $this->href('') . '" class="btn-link"><button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button></a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}
@@ -8469,7 +8469,7 @@ class Wacko
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><button type="button" id="button">' . $this->_t('CancelButton') . '</button></a>' . "\n";
+				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button></a>' . "\n";
 			}
 		}
 

@@ -77,7 +77,7 @@
 						<tr>
 							<td>&nbsp;</td>
 							<td>
-								<button type="submit" class="OkBtn" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+								<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							</td>
 						</tr>
 					</tbody>
@@ -199,7 +199,7 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td>
-						<button type="submit" class="OkBtn" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+						<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 					</td>
 				</tr>
 			</tbody>
@@ -338,9 +338,9 @@
 					<tr>
 						<td>&nbsp;</td>
 						<td>
-							<button type="submit" class="OkBtn" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
+							<button type="submit" class="btn-ok" id="submit" name="submit">[ ' _t: UpdateSettingsButton ' ]</button>
 							&nbsp;
-							<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="CancelBtn" id="logout" name="logout">[ ' _t: LogoutButton ' ]</button></a>
+							<a href="[ ' logout ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: LogoutButton ' ]</button></a>
 						</td>
 					</tr>
 				</tbody>

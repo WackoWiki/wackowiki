@@ -61,7 +61,7 @@
 					</th>
 					<td>
 						<input type="checkbox" id="massacls" name="massacls">
-						<label for="massacls">[ ' _t: AclForEntireCluster ' ]</label>
+						<label for="massacls" title="[ ' _t: AclAreYouSure ' ]">[ ' _t: AclForEntireCluster ' ]</label>
 					</td>
 				</tr>
 				<tr>
@@ -89,8 +89,8 @@
 					</th>
 					<td>
 						<br>
-						<button type="submit" class="OkBtn" id="submit" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
-						<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="CancelBtn" id="button">[ ' _t: CancelButton ' ]</button></a>
+						<button type="submit" class="btn-ok" id="submit" accesskey="s">[ ' _t: SaveButton ' ]</button> &nbsp;
+						<a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
 					</td>
 				</tr>
 			</tbody>

@@ -42,7 +42,7 @@
 		<input type="hidden" name="id" value="[ ' pageid ' ]">
 		<button type="submit">[ ' _t: ReEditOldRevision ' ]</button>
 		<a href="[ ' href: ' ]" class="btn-link">
-			<button type="button" name="cancel" id="button">[ ' _t: CancelButton ' ]</button>
+			<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
 		</a>
 	</form>
 </div>

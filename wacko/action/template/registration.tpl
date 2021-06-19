@@ -46,7 +46,7 @@
 			[= captcha _ =
 				<p>[ ' show ' ]</p>
 			=]
-			<p><button type="submit" class="OkBtn">[ ' _t: RegistrationButton ' ]</button></p>
+			<p><button type="submit" class="btn-ok">[ ' _t: RegistrationButton ' ]</button></p>
 		</form>
 		</div>
 	=]
