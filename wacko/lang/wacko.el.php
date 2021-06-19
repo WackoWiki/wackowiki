@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Θέλετε σίγουρα να διαγράψετε αυτό το σχόλιο;<br>Δεν υπάρχει ενέργεια αναίρεσης για αυτό!',
 
 	'RegistrationClosed'		=> 'Η εγγραφή δεν είναι δυνατή εδώ, Προσπαθήστε να επικοινωνήστε με τον διαχειριστή.',
-	'AclForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
 
 	'BookmarkDeleteSelected'	=> 'Διαγραφή επιλεγμένων',

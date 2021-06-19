@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Vuoi davvero CANCELLARE il commento? <br>Non c\'è nessun annullamento per questa azione!',
 
 	'RegistrationClosed'		=> 'La registrazione non è disponibile qui. Prova a contattare l\'amministratore del sito.',
-	'AclForCluster'				=> 'Access Control Lists for ENTIRE cluster %1',
 	'AclAreYouSure'				=> 'Cambierete le ACL di questa pagina e di tutte le sue sottopagine. Continuare?',
 
 	'BookmarkDeleteSelected'	=> 'Elimina selezionato',

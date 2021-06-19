@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Kas sa tõesti tahad KUSTUTADA kommentaari?<br>Seda ei saa siis enam taastada!',
 
 	'RegistrationClosed'		=> 'Registreerimine ei ole võimalik. Proovi kontakteeruda administraatoriga.',
-	'AclForCluster'				=> 'Kasutaja õiguste loend üle kogu %1 grupi',
 	'AclAreYouSure'				=> 'Sa asud nüüd muutma nii selle lehe, kui kõigi selle lehe alamlehtede kasutaja  õiguste loendit. Kas jätkad?',
 
 	'BookmarkDeleteSelected'	=> 'Kustuta valitud',

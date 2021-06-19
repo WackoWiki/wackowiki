@@ -70,25 +70,25 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
-		'title'		=> 'Basic settings',
+		'name'		=> 'मूल',
+		'title'		=> 'मूल सेटिंग्स',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Appearance',
+		'name'		=> 'भेष',
 		'title'		=> 'Appearance settings',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'ई-मेल',
-		'title'		=> 'Email settings',
+		'title'		=> 'ईमेल सेटिंग',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
+		'name'		=> 'फिल्टर',
 		'title'		=> 'Filter settings',
 	],
 
@@ -101,7 +101,7 @@ $ap_translation = [
 	// Config Notifications module
 	'config_notifications'		=> [
 		'name'		=> 'सूचनाएं',
-		'title'		=> 'Notifications settings',
+		'title'		=> 'सूचना सेटिंग',
 	],
 
 	// Config Pages module
@@ -118,7 +118,7 @@ $ap_translation = [
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
+		'name'		=> 'सुरक्षा',
 		'title'		=> 'Security subsystems settings',
 	],
 
@@ -142,7 +142,7 @@ $ap_translation = [
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menu',
+		'name'		=> 'सूची',
 		'title'		=> 'Add, edit or remove default menu items',
 	],
 
@@ -179,7 +179,7 @@ $ap_translation = [
 	// Dashboard module
 	'main'		=> [
 		'name'		=> 'Main Menu',
-		'title'		=> 'WackoWiki Administration',
+		'title'		=> 'WackoWiki प्रशासन',
 	],
 
 	// Inconsistencies module
@@ -190,7 +190,7 @@ $ap_translation = [
 
 	// Data Synchronization module
 	'maint_resync'		=> [
-		'name'		=> 'Data Synchronization',
+		'name'		=> 'डेटा तुल्यकालन',
 		'title'		=> 'Synchronizing data',
 	],
 
@@ -202,25 +202,25 @@ $ap_translation = [
 
 	// System message module
 	'messages'		=> [
-		'name'		=> 'System message',
+		'name'		=> 'सिस्टम संदेश',
 		'title'		=> 'System messages',
 	],
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
+		'name'		=> 'व्यवस्था की सूचना',
 		'title'		=> 'System Information',
 	],
 
 	// System log module
 	'system_log'		=> [
-		'name'		=> 'System log',
+		'name'		=> 'सिस्टम लॉग',
 		'title'		=> 'Log of system events',
 	],
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'आँकड़े',
 		'title'		=> 'Show statistics',
 	],
 
@@ -238,13 +238,13 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'समूह',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> 'प्रयोक्ता',
 		'title'		=> 'User management',
 	],
 
@@ -267,7 +267,7 @@ $ap_translation = [
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
 
-	'LanguageSection'			=> 'Language',
+	'LanguageSection'			=> 'भाषा',
 	'DefaultLanguage'			=> 'Default language',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',

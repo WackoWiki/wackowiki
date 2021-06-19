@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Czy na pewno chcesz USUNĄĆ komentarz??<br>Nie można tego cofnąć!',
 
 	'RegistrationClosed'		=> 'Rejestracja nie jest dostępna tutaj. Spróbuj skontaktować się z administratorem strony.',
-	'AclForCluster'				=> 'Lista Praw Dostępu dla CAŁEGO klastra %1',
 	'AclAreYouSure'				=> 'Zamierzasz zmienić prawa dostępu dla tej strony i wszystkich jej podstron. Kontynuować?',
 
 	'BookmarkDeleteSelected'	=> 'Usuń zaznaczone',

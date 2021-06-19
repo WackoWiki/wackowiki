@@ -918,7 +918,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Estás seguro de querer BORRAR el comentario?<br>Esta acción no se puede deshacer!',
 
 	'RegistrationClosed'		=> 'No es posible registrarse. Contacte con el administrador del sitio.',
-	'AclForCluster'				=> 'Lista de control de acceso completa para el cluster %1',
 	'AclAreYouSure'				=> 'Vas a modificar las ACLs de esta página y todas sus subpáginas. Quieres continuar?',
 
 	'BookmarkDeleteSelected'	=> 'Eliminar seleccionados',

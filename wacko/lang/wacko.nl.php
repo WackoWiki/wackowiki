@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Weet u zeker dat u deze reactie wilt verwijderen?<br>Deze handeling kan niet ongedaan gemaakt worden!',
 
 	'RegistrationClosed'		=> 'Registratie is hier niet mogelijk. Neem contact op met de beheerder.',
-	'AclForCluster'				=> 'ACL\'s (rechten) voor de GEHELE cluster %1',
 	'AclAreYouSure'				=> 'U gaat de rechten (ACL\'s) voor deze pagina en alle subpagina\'s veranderen. Wilt u doorgaan?',
 
 	'BookmarkDeleteSelected'	=> 'Geselecteerde verwijderen',

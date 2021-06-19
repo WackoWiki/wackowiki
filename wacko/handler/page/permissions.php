@@ -15,12 +15,12 @@ if (!($this->is_owner() || $this->is_admin()))
 }
 
 // check if upload is allowed for user
-$upload = $this->db->upload;
-$upload_allowed = ($upload === true || $upload == 1 || $this->check_acl($this->get_user_name(), $upload));
+$upload			= $this->db->upload;
+$upload_allowed	= ($upload === true || $upload == 1 || $this->check_acl($this->get_user_name(), $upload));
 
-if (@$_POST['_action'] === 'set_permissions')
+if (isset($_POST['_action']) && $_POST['_action'] === 'set_permissions')
 {
-	if (($uid = $_POST['new_owner_id']))
+	if (($user_id = $_POST['new_owner_id']))
 	{
 		if ($this->is_admin())
 		{
@@ -29,17 +29,17 @@ if (@$_POST['_action'] === 'set_permissions')
 				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang " .
 				"FROM " . $this->db->user_table . " u " .
 					"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
-				"WHERE u.user_id = " . (int) $uid . " " .
+				"WHERE u.user_id = " . (int) $user_id . " " .
 				"LIMIT 1");
 		}
 		else
 		{
-			$new_owner = $this->load_user('', $uid);
+			$new_owner = $this->load_user('', $user_id);
 		}
 
 		if (!$new_owner)
 		{
-			$this->set_message(Ut::perc_replace($this->_t('AclNoNewOwner'), $uid), 'error');
+			$this->set_message(Ut::perc_replace($this->_t('AclNoNewOwner'), $user_id), 'error');
 			$this->reload_me();
 		}
 
@@ -58,21 +58,21 @@ if (@$_POST['_action'] === 'set_permissions')
 		$new_owner = false;
 	}
 
-	$uid = $this->get_user_id();
+	$user_id = $this->get_user_id();
 
-	$update_page = function ($page) use (&$new_owner, $upload_allowed, $uid)
+	$update_page_acls = function ($page) use (&$new_owner, $upload_allowed, $user_id)
 	{
-		$pid = $page['page_id'];
+		$page_id = $page['page_id'];
 
 		// store lists
-		$this->save_acl($pid, 'read',		$_POST['read_acl']);
-		$this->save_acl($pid, 'write',		$_POST['write_acl']);
-		$this->save_acl($pid, 'comment',	$_POST['comment_acl']);
-		$this->save_acl($pid, 'create',		$_POST['create_acl']);
+		$this->save_acl($page_id, 'read',		$_POST['read_acl']);
+		$this->save_acl($page_id, 'write',		$_POST['write_acl']);
+		$this->save_acl($page_id, 'comment',	$_POST['comment_acl']);
+		$this->save_acl($page_id, 'create',		$_POST['create_acl']);
 
 		if ($upload_allowed)
 		{
-			$this->save_acl($pid, 'upload', $_POST['upload_acl']);
+			$this->save_acl($page_id, 'upload', $_POST['upload_acl']);
 		}
 
 		// log event
@@ -83,8 +83,8 @@ if (@$_POST['_action'] === 'set_permissions')
 		$comments = $this->db->load_all(
 			"SELECT page_id " .
 			"FROM " . $this->db->table_prefix . "page " .
-			"WHERE comment_on_id = " . (int) $pid . " " .
-				"AND owner_id= " . (int) $uid); // STS ?? for admin too?
+			"WHERE comment_on_id = " . (int) $page_id . " " .
+				"AND owner_id = " . (int) $user_id); // STS ?? for admin too?
 
 		foreach ($comments as $comment)
 		{
@@ -102,7 +102,8 @@ if (@$_POST['_action'] === 'set_permissions')
 		}
 
 		// change owner?
-		if ($new_owner && ($new_id = (int) $new_owner['user_id']) != ($former_id = (int) $page['owner_id']))
+		if ($new_owner
+			&& ($new_id = (int) $new_owner['user_id']) != ($former_id = (int) $page['owner_id']))
 		{
 			// update user statistics
 			$this->db->sql_query(
@@ -120,23 +121,24 @@ if (@$_POST['_action'] === 'set_permissions')
 			// set new owner
 			$this->db->sql_query(
 				"UPDATE " . $this->db->table_prefix . "page SET " .
-					"owner_id = " . (int) $new_id . " " .
-				"WHERE page_id = " . (int) $pid . " " .
+					"owner_id		= " . (int) $new_id . " " .
+				"WHERE page_id		= " . (int) $page_id . " " .
 				"LIMIT 1");
 
 			$new_owner['owned_page'] .= $this->href('', $page['tag'], null, null, null, null, true, true) . "\n";
 
 			// log event
-			$this->log(2, Ut::perc_replace($this->_t('LogOwnershipChanged', SYSTEM_LANG),
-					$page['tag'] . ' ' . $page['title'],
-					$new_owner['user_name']));
+			$this->log(2, Ut::perc_replace(
+				$this->_t('LogOwnershipChanged', SYSTEM_LANG),
+				$page['tag'] . ' ' . $page['title'],
+				$new_owner['user_name']));
 		}
 	};
 
 
 	if (!isset($_POST['massacls']))
 	{
-		$update_page($this->page);
+		$update_page_acls($this->page);
 	}
 	else
 	{
@@ -148,11 +150,11 @@ if (@$_POST['_action'] === 'set_permissions')
 				") " .
 			($this->is_admin()
 				? ""
-				: "AND owner_id = " . (int) $uid));
+				: "AND owner_id = " . (int) $user_id));
 
 		foreach ($pages as $page)
 		{
-			$update_page($page);
+			$update_page_acls($page);
 		}
 	}
 
@@ -178,21 +180,23 @@ if (@$_POST['_action'] === 'set_permissions')
 	$this->show_must_go_on();
 }
 
-$pid = $this->page['page_id'];
+$page_id = $this->page['page_id'];
 
 // load acls
-$read_acl		= $this->load_acl($pid, 'read',		1, 0);
-$write_acl		= $this->load_acl($pid, 'write',	1, 0);
-$comment_acl	= $this->load_acl($pid, 'comment',	1, 0);
-$create_acl		= $this->load_acl($pid, 'create',	1, 0);
+$read_acl		= $this->load_acl($page_id, 'read',		1, 0);
+$write_acl		= $this->load_acl($page_id, 'write',	1, 0);
+$comment_acl	= $this->load_acl($page_id, 'comment',	1, 0);
+$create_acl		= $this->load_acl($page_id, 'create',	1, 0);
 
 if ($upload_allowed)
 {
-	$upload_acl	= $this->load_acl($pid, 'upload',	1, 0);
+	$upload_acl	= $this->load_acl($page_id, 'upload',	1, 0);
 }
 
 // show form
-$tpl->title		= Ut::perc_replace($this->_t('AclFor'), $this->compose_link_to_page($this->tag, '', ''));
+$tpl->title		= Ut::perc_replace(
+					$this->_t('AclFor'),
+					$this->compose_link_to_page($this->tag, '', ''));
 
 $tpl->read		= Ut::html($read_acl['list']);
 $tpl->write		= Ut::html($write_acl['list']);
@@ -213,4 +217,3 @@ if (($users = $this->load_users()))
 		$tpl->l_user = $user;
 	}
 }
-

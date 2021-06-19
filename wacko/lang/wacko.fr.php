@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Voulez-vous vraiment effacer ce commentaire ?<br>Cet effacement est définitif !',
 
 	'RegistrationClosed'		=> 'Enregistrement non autorisé ici. Contactez l’administrateur du site.',
-	'AclForCluster'				=> 'Contrôle d’accès pour LA TOTALITÉ du groupe %1',
 	'AclAreYouSure'				=> 'Vous allez changer les droits relatifs à cette page et à toutes ses pages subordonnées ou sous-pages. Continuer ?',
 
 	'BookmarkDeleteSelected'	=> 'Effacer les signet sélectionnés',

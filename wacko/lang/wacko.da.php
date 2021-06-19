@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Er du sikker på, at du vil slette kommentaren?',
 
 	'RegistrationClosed'		=> 'Registrering ikke mulig. Kontakt Administrator.',
-	'AclForCluster'				=> 'Tilladelser for %1',
 	'AclAreYouSure'				=> 'Du ændrer nu adgangstilladelser for denne side og alle dens undersider. Vil du fortsætte?',
 
 	'BookmarkDeleteSelected'	=> 'Slet valgt',

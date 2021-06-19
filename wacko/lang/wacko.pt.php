@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Quer mesmo apagar comentário?<br>Depois não poderá voltar atrás!',
 
 	'RegistrationClosed'		=> 'O registo não está disponível. Tente contactar o administrador.',
-	'AclForCluster'				=> 'Lista de Permissões para TODO o cluster %1',
 	'AclAreYouSure'				=> 'Vai alterar aas permissões desta página e todas as suas subpáginas. Quer continuar?',
 
 	'BookmarkDeleteSelected'	=> 'Excluir Selecionado(s)',

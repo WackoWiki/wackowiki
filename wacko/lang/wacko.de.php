@@ -917,7 +917,6 @@ $wacko_translation = [
 	'ReallyDeleteComment'		=> 'Willst du den Kommentar wirklich löschen?<br>Diese Aktion kann nicht rückgängig gemacht werden!',
 
 	'RegistrationClosed'		=> 'Registrierung ist nicht verfügbar. Kontaktiere bei Interesse den Administrator.',
-	'AclForCluster'				=> 'Berechtigungen für gesamten Cluster %1',
 	'AclAreYouSure'				=> 'Du bist dabei die ACLs von dieser Seite und aller ihrer Unterseiten zu ändern. Fortfahren?',
 
 	'BookmarkDeleteSelected'	=> 'Lösche Ausgewählte',
