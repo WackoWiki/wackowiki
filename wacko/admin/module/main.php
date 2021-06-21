@@ -43,9 +43,7 @@ function admin_main(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
-	<p>
-		<?php echo $engine->_t('MainNote');?>
-	</p>
+	<p><?php echo $engine->_t('MainNote');?></p>
 	<br>
 	<?php
 	echo $engine->form_open('lock');
@@ -53,8 +51,14 @@ function admin_main(&$engine, &$module)
 	<input type="hidden" name="action" value="lock">
 	<table style="max-width: 200px;" class="formation">
 		<tr class="hl-setting">
-			<td class="label" style="white-space:nowrap;"><?php echo ($engine->db->is_locked() === true ? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>' : '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?></td>
-			<td class="t-center"><button type="submit" id="submit"><?php echo ($engine->db->is_locked() === true ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?></button></td>
+			<td class="label" style="white-space:nowrap;">
+				<?php echo ($engine->db->is_locked()
+					? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>'
+					: '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?>
+			</td>
+			<td class="t-center">
+				<button type="submit" id="submit"><?php echo ($engine->db->is_locked() ? $engine->_t('SiteOpen') : $engine->_t('SiteClose')); ?></button>
+			</td>
 		</tr>
 	</table>
 <?php
@@ -66,9 +70,12 @@ function admin_main(&$engine, &$module)
 		<input type="hidden" name="action" value="purge_sessions">
 		<table style="max-width: 200px;" class="formation">
 			<tr class="hl-setting">
-				<td class="label nowrap"><?php echo $engine->_t('PurgeSessionsTip');?>
-				<br><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
-				<td class="t-center"><?php echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<button type="submit" id="submit">' . $engine->_t('PurgeSessions') . '</button>');?></td>
+				<td class="label nowrap">
+					<?php echo $engine->_t('PurgeSessionsTip');?>
+					<br><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
+				<td class="t-center">
+					<?php echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<button type="submit" id="submit">' . $engine->_t('PurgeSessions') . '</button>');?>
+				</td>
 			</tr>
 		</table>
 <?php

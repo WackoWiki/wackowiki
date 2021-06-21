@@ -42,7 +42,6 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 	padding: 0;
 	font-weight: normal;
-	/* overflow: hidden; */
 }
 
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
@@ -305,9 +304,8 @@ blockquote {
 	color: #444444;
 	padding: 25px 30px;
 	font-family: sans-serif;
-	/* background: #f5f5f5; */
 }
-blockquote p { padding: 0;  margin: 5px 0; }
+blockquote p { padding: 0; margin: 5px 0; }
 
 /* Paragraphs */
 p.auto { margin: 0; padding: 0; font-size: 100%; }
@@ -332,7 +330,7 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 
 /* SYNTAX %%(hl xyz)%% */
 
-.hl-main {font-family: monospace; font-size:14px;}
+.hl-main {font-family: monospace; font-size: 14px;}
 .hl-gutter {
 	background-color: #CCCCCC;
 	padding-right: 10px;
@@ -642,7 +640,6 @@ a[href $='.webm'] .icon {
 .wrapper.type-warning > .wrapper-title::before {
 	color: #ff9100;
 	content: "⚠";
-	/* content: url('./../icon/warning.svg') " "; */
 }
 
 /* 4. success */
@@ -700,9 +697,6 @@ a[href $='.webm'] .icon {
 .wrapper.type-error > .wrapper-title::before {
 	color: #ff5252;
 	content: "✕";
-	/* content: url('./../icon/cross.svg') " ";
-	height: 1rem;
-	width: 1rem; */
 }
 
 /* 7. example */
@@ -768,14 +762,12 @@ a[href $='.webm'] .icon {
 .info-content {
 	margin: 0;
 	padding: .4rem .6rem .4rem 4.4rem;
-	/* font-weight: 700; */
 }
 .info > .info-content::before {
 	position: absolute;
 	left: 1rem;
 	top: .4rem;
 	color: #939a45;
-	/* font-weight: bold; */
 	font-size: 3rem;
 	content: "i";
 	height: 3rem;
@@ -783,5 +775,4 @@ a[href $='.webm'] .icon {
 	text-align: center;
 	line-height: normal;
 	font-family: "Times New Roman", Times, serif;
-	/* opacity: 0.4; */
 }

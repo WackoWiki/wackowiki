@@ -308,7 +308,7 @@ function admin_config_system(&$engine, &$module)
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="rewrite_mode"><strong><?php echo $engine->_t('RewriteMode');?>:</strong><br>
-					<small><?php echo $engine->_t('RewriteModeInfo');?></span></small></label>
+					<small><?php echo $engine->_t('RewriteModeInfo');?></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="rewrite_mode" name="rewrite_mode" value="1" <?php echo ($engine->db->rewrite_mode == 1 ? ' checked' : '');?>>

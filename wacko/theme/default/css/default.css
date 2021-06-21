@@ -372,7 +372,6 @@ form input.submitinput {
 
 header {
 	padding: 0;
-	/* float: left; */
 	width: 96%;
 }
 
@@ -387,7 +386,6 @@ header {
 
 .menu-main {
 	float: left;
-	/* height: 25px; */
 	background: #FFFFFF;
 	width: 100%;
 	padding-top: 5px;
@@ -670,7 +668,6 @@ ol#comments ul ul ul {
 .commentform {
 	padding: 10px 20px;
 	margin: 0 -20px;
-	/* border-top: 1px solid #CCCCCC; */
 	background-color: #FCFCFC;
 	float: left;
 	width: 100%;
@@ -1280,7 +1277,6 @@ a:target {
 
 #menu-user {
 	margin: 0 auto 0;
-	/* overflow: hidden; */
 	float: left;
 	text-align: left;
 	position: relative;
@@ -1439,7 +1435,7 @@ a:target {
 }
 
 #search-results li:hover {
-	background-color: #E7F9FF; /* #CCFFCC */
+	background-color: #E7F9FF;
 }
 
 #search-results li {
@@ -1546,7 +1542,6 @@ tr.lined:hover {
 }
 
 .menu li.active {
-	/* background: none repeat scroll 0 0 #CCFFCC; */
 	font-weight: bold;
 }
 
@@ -1747,10 +1742,10 @@ table.formation td {
 
 #menu-user ol ul li,
 #page-handler ul ul li {
-	left:auto;  /*resets the left: on the parent li */
-	margin:0; /* Reset the 1px margin from the top menu */
-	clear:left;
-	width:100%;
+	left: auto;  /*resets the left: on the parent li */
+	margin: 0; /* Reset the 1px margin from the top menu */
+	clear: left;
+	width: 100%;
 	padding: 0 20px 0 0;
 	white-space: nowrap;
 	vertical-align: baseline;
@@ -2155,7 +2150,6 @@ form.add-topic {
 
 /* categories tag ------------- */
 .tag {
-	/* background: #f0f4f5; */
 	background: white none repeat scroll 0 0;
 	border: 1px solid lightgray;
 	border-radius: 3px;
@@ -2247,7 +2241,6 @@ form.add-topic {
 .hide-radio li input[type="radio"]:checked
 {
 	visibility: visible;
-	/* display: inline; */
 }
 
 /* authors action ------------- */
@@ -2351,8 +2344,6 @@ table.diff td {
 }
 
 .diffbtn {
-	/*background-color: #4CAF50;*/
-	/*color: white;*/
 	padding: 2px 6px;
 	font-size: 12px;
 	border: none;
@@ -2361,7 +2352,6 @@ table.diff td {
 
 .diffdown {
 	position: relative;
-	/* display: inline-block; */
 	margin-right: 20px;
 }
 
@@ -2380,7 +2370,7 @@ table.diff td {
 	display: block;
 }
 
-.diffdown-content a:hover {background-color: #CCFFCC;} /* #f1f1f1 */
+.diffdown-content a:hover {background-color: #CCFFCC;}
 
 .diffdown-content span {
 	display: inline-block; 
