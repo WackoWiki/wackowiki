@@ -165,7 +165,7 @@ if ($config['is_update'] == false)
 	<br>
 	<?php echo $separator; ?>
 	<label class="label_top" for="db_name"><?php echo $lang['DbName'];?></label>
-	<p class="notop"><?php echo $lang['DbDesc']; ?></p>
+	<p class="notop"><?php echo $lang['DbNameDesc']; ?></p>
 	<input type="text" maxlength="64" id="db_name" name="config[db_name]" value="<?php echo $config['db_name'] ?>" class="text_input" required>
 	<br>
 	<?php echo $separator; ?>
