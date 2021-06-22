@@ -8,11 +8,11 @@
 			var db_driver_selected = false;
 
 			// If there is no value property then we have an array of possible database driver radio boxes
-			if(f.elements["config[database_driver]"].value == undefined)
+			if(f.elements["config[db_driver]"].value == undefined)
 			{
-				for (var i = 0; i < f.elements["config[database_driver]"].length; i++)
+				for (var i = 0; i < f.elements["config[db_driver]"].length; i++)
 				{
-					if(f.elements["config[database_driver]"][i].checked)
+					if(f.elements["config[db_driver]"][i].checked)
 					{
 						db_driver_selected = true;
 						break;
@@ -82,9 +82,9 @@ foreach ($drivers as $k => $driver)
 	if (extension_loaded($driver[0]))
 	{
 		echo '<li>
-					<input type="radio" id="db_driver_' . $driver[0] . '" name="config[database_driver]" value="' . $driver[1] . '" ' .
+					<input type="radio" id="db_driver_' . $driver[0] . '" name="config[db_driver]" value="' . $driver[1] . '" ' .
 						($config['is_update']
-							? ($config['database_driver'] == $driver[1]		? 'checked' : '')
+							? ($config['db_driver'] == $driver[1]		? 'checked' : '')
 							: ($k == 0										? 'checked' : '')
 						) . '>
 					<label for="db_driver_' . $driver[0] . '">' . $driver[2] . "</label>
@@ -95,7 +95,7 @@ foreach ($drivers as $k => $driver)
 	</ul>
 	<br>
 <?php echo $separator; ?>
-	<label class="label_top" for="database_charset"><?php echo $lang['DbCharset'];?></label>
+	<label class="label_top" for="db_charset"><?php echo $lang['DbCharset'];?></label>
 	<p class="notop"><?php echo $lang['DbCharsetDesc']; ?></p>
 
 <?php
@@ -111,11 +111,11 @@ foreach ($drivers as $k => $driver)
 $charsets	= [];
 $charsets[]	= ['utf8mb4',	'utf8mb4',	'utf8mb4 (' . $lang['Recommended'] . ')'];	// default
 
-echo '	<select id="database_charset" name="config[database_charset]" required>';
+echo '	<select id="db_charset" name="config[db_charset]" required>';
 
 foreach ($charsets as $charset)
 {
-	echo '<option value="' . $charset[1] . '" ' . ($config['database_charset'] == $charset[1] ? 'selected' : '') . '>' . $charset[2] . "</option>\n";
+	echo '<option value="' . $charset[1] . '" ' . ($config['db_charset'] == $charset[1] ? 'selected' : '') . '>' . $charset[2] . "</option>\n";
 }
 
 echo "</select>\n";
@@ -145,7 +145,7 @@ if ($config['is_update'] == false)
 	foreach ($engines as $k => $engine)
 	{
 		echo '<li>
-					<input type="radio" id="db_engine_' . $engine[0] . '" name="config[database_engine]" value="' . $engine[1] . '" ' . ($k == 0 ? 'checked' : '') . '>
+					<input type="radio" id="db_engine_' . $engine[0] . '" name="config[db_engine]" value="' . $engine[1] . '" ' . ($k == 0 ? 'checked' : '') . '>
 					<label for="db_engine_' . $engine[0] . '">' . $engine[2] . "</label>
 				</li>\n";
 	}
@@ -154,29 +154,29 @@ if ($config['is_update'] == false)
 	<br>
 
 	<?php echo $separator; ?>
-	<label class="label_top" for="database_host"><?php echo $lang['DbHost'];?></label>
+	<label class="label_top" for="db_host"><?php echo $lang['DbHost'];?></label>
 	<p class="notop"><?php echo $lang['DbHostDesc']; ?></p>
-	<input type="text" maxlength="1000" id="database_host" name="config[database_host]" value="<?php echo $config['database_host'] ?>" placeholder="localhost" class="text_input" required>
+	<input type="text" maxlength="1000" id="db_host" name="config[db_host]" value="<?php echo $config['db_host'] ?>" placeholder="localhost" class="text_input" required>
 	<br>
 	<?php echo $separator; ?>
-	<label class="label_top" for="database_port"><?php echo $lang['DbPort'];?></label>
+	<label class="label_top" for="db_port"><?php echo $lang['DbPort'];?></label>
 	<p class="notop"><?php echo $lang['DbPortDesc']; ?></p>
-	<input type="number" maxlength="10" id="database_port" name="config[database_port]" value="<?php echo $config['database_port'] ?>" class="text_input">
+	<input type="number" maxlength="10" id="db_port" name="config[db_port]" value="<?php echo $config['db_port'] ?>" class="text_input">
 	<br>
 	<?php echo $separator; ?>
-	<label class="label_top" for="database_database"><?php echo $lang['Db'];?></label>
+	<label class="label_top" for="db_name"><?php echo $lang['DbName'];?></label>
 	<p class="notop"><?php echo $lang['DbDesc']; ?></p>
-	<input type="text" maxlength="64" id="database_database" name="config[database_database]" value="<?php echo $config['database_database'] ?>" class="text_input" required>
+	<input type="text" maxlength="64" id="db_name" name="config[db_name]" value="<?php echo $config['db_name'] ?>" class="text_input" required>
 	<br>
 	<?php echo $separator; ?>
-	<label class="label_top" for="database_user"><?php echo $lang['DbUser'];?></label>
+	<label class="label_top" for="db_user"><?php echo $lang['DbUser'];?></label>
 	<p class="notop"><?php echo $lang['DbUserDesc']; ?></p>
-	<input type="text" maxlength="50" id="database_user" name="config[database_user]" value="<?php echo $config['database_user'] ?>" class="text_input" required>
+	<input type="text" maxlength="50" id="db_user" name="config[db_user]" value="<?php echo $config['db_user'] ?>" class="text_input" required>
 	<br>
 	<?php echo $separator; ?>
-	<label class="label_top" for="database_password"><?php echo $lang['DbPassword'];?></label>
+	<label class="label_top" for="db_password"><?php echo $lang['DbPassword'];?></label>
 	<p class="notop"><?php echo $lang['DbPasswordDesc']; ?></p>
-	<input type="password" maxlength="50" id="database_password" name="config[database_password]" autocomplete="off" value="<?php echo $config['database_password'] ?>" class="text_input">
+	<input type="password" maxlength="50" id="db_password" name="config[db_password]" autocomplete="off" value="<?php echo $config['db_password'] ?>" class="text_input">
 	<br>
 	<?php echo $separator; ?>
 	<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>

@@ -164,7 +164,7 @@ function admin_db_convert(&$engine, &$module, &$tables)
 		{
 			$results = $engine->db->load_all(
 				"SELECT TABLE_NAME, ENGINE FROM INFORMATION_SCHEMA.TABLES
-				WHERE TABLE_SCHEMA = '{$engine->db->database_database}'
+				WHERE TABLE_SCHEMA = '{$engine->db->db_name}'
 					AND ENGINE = 'MyISAM'
 				");
 

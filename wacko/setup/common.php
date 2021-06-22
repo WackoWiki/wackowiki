@@ -91,7 +91,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 		{
 			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . '<br>';
 
-			if ($config['database_driver'] == 'mysqli_legacy')
+			if ($config['db_driver'] == 'mysqli_legacy')
 			{
 				$error_output .= mysqli_error($dblink);
 			}
@@ -211,7 +211,7 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 		$insert_data[]		= [$default_menu_item,	$lang_global['ErrorInsertDefaultMenuItem']];
 	}
 
-	switch ($config_global['database_driver'])
+	switch ($config_global['db_driver'])
 	{
 		case 'mysqli_legacy':
 			$add_page = false;
@@ -301,7 +301,7 @@ function _quote($string)
 {
 	global $config_global, $dblink_global;
 
-	switch ($config_global['database_driver'])
+	switch ($config_global['db_driver'])
 	{
 		case 'mysqli_legacy':
 

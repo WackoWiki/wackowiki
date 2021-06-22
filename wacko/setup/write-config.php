@@ -1,14 +1,14 @@
 <?php
 
 // config values
-if (($config['database_driver'] == ('mysqli_legacy' || 'mysql_pdo')) && empty($config['database_port']))
+if (($config['db_driver'] == ('mysqli_legacy' || 'mysql_pdo')) && empty($config['db_port']))
 {
-	$config['database_port'] = '3306';
+	$config['db_port'] = '3306';
 }
 
-if ($config['database_collation'] == '0')
+if ($config['db_collation'] == '0')
 {
-	$config['database_collation'] = 'utf8mb4_unicode_520_ci';
+	$config['db_collation'] = 'utf8mb4_unicode_520_ci';
 }
 
 if (!$config['system_seed'])
@@ -29,25 +29,25 @@ $config_file = [];
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	BEGIN MANDATORY CONFIGURATION
 ///////////////////////////////////////////////////////////////////////////////////////////
-$config_file['base_url']				= $config['base_url'];
+$config_file['base_url']			= $config['base_url'];
 // database connection
-$config_file['database_charset']		= $config['database_charset'];
-$config_file['database_collation']		= $config['database_collation'];
-$config_file['database_driver']			= $config['database_driver'];
-$config_file['database_engine']			= $config['database_engine'];
-$config_file['database_host']			= $config['database_host'];
-$config_file['database_port']			= $config['database_port'];
-$config_file['database_database']		= $config['database_database'];
-$config_file['database_user']			= $config['database_user'];
-$config_file['database_password']		= $config['database_password'];
-$config_file['sql_mode_strict']			= $config['sql_mode_strict'];
-$config_file['table_prefix']			= $config['table_prefix'];
+$config_file['db_charset']			= $config['db_charset'];
+$config_file['db_collation']		= $config['db_collation'];
+$config_file['db_driver']			= $config['db_driver'];
+$config_file['db_engine']			= $config['db_engine'];
+$config_file['db_host']				= $config['db_host'];
+$config_file['db_port']				= $config['db_port'];
+$config_file['db_name']				= $config['db_name'];
+$config_file['db_user']				= $config['db_user'];
+$config_file['db_password']			= $config['db_password'];
+$config_file['sql_mode_strict']		= $config['sql_mode_strict'];
+$config_file['table_prefix']		= $config['table_prefix'];
 // security values
-$config_file['system_seed']				= $config['system_seed'];
-$config_file['recovery_password']		= $config['recovery_password'];
-$config_file['hashid_seed']				= $config['hashid_seed'];
+$config_file['system_seed']			= $config['system_seed'];
+$config_file['recovery_password']	= $config['recovery_password'];
+$config_file['hashid_seed']			= $config['hashid_seed'];
 // version
-$config_file['wacko_version']			= $config['wacko_version'];
+$config_file['wacko_version']		= $config['wacko_version'];
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 //	END MANDATORY CONFIGURATION

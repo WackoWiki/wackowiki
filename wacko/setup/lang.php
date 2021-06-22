@@ -49,6 +49,7 @@ $lang_codes['en'] = 'English';
 $lang_codes['es'] = 'Español';
 $lang_codes['et'] = 'Eesti';
 $lang_codes['fr'] = 'Français';
+$lang_codes['hi'] = 'हिन्दी';
 $lang_codes['hu'] = 'Magyar';
 $lang_codes['it'] = 'Italiano';
 $lang_codes['ja'] = '日本語';

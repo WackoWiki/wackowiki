@@ -11,15 +11,15 @@ if (!defined('IN_WACKO'))
 // These default settings are used when config.php is not present.
 
 $wacko_config_defaults = [
-	'database_driver'				=> '',
-	'database_host'					=> 'localhost',
-	'database_port'					=> '',
-	'database_database'				=> 'wacko',
-	'database_user'					=> '',
-	'database_password'				=> '',
-	'database_collation'			=> 'utf8mb4_unicode_520_ci',
-	'database_charset'				=> 'utf8mb4',
-	'database_engine'				=> 'InnoDB',
+	'db_driver'						=> '',
+	'db_host'						=> 'localhost',
+	'db_port'						=> '',
+	'db_name'						=> 'wacko',
+	'db_user'						=> '',
+	'db_password'					=> '',
+	'db_collation'					=> 'utf8mb4_unicode_520_ci',
+	'db_charset'					=> 'utf8mb4',
+	'db_engine'						=> 'InnoDB',
 
 	'session_store'					=> 1,
 	'sql_mode_strict'				=> 0,
@@ -260,7 +260,7 @@ $wacko_config_defaults = [
 	'enable_security_headers'		=> 1,
 	'csp'							=> 1,
 	'permissions_policy'			=> 1,
-	'referrer_policy'				=> 6,
+	'referrer_policy'				=> 7,
 
 	'form_token_time'				=> 7200,
 

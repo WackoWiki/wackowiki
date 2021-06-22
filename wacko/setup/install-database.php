@@ -78,7 +78,7 @@ if ($config['is_update'] == false || version_compare($config['wacko_version'], '
  or pdo
  */
 
-$port			= trim($config['database_port']);
+$port			= trim($config['db_port']);
 $fatal_error	= false;
 
 // check WackoWiki version
@@ -109,18 +109,18 @@ else
 	$sql_modes = SQL_MODE_PERMISSIVE;
 }
 
-switch ($config['database_driver'])
+switch ($config['db_driver'])
 {
 	case 'mysqli_legacy':
 
-		if (!isset($config['database_port']))			$config['database_port']	= '3306';
-		if (!$port = trim($config['database_port']))	$port						= '3306';
+		if (!isset($config['db_port']))			$config['db_port']	= '3306';
+		if (!$port = trim($config['db_port']))	$port						= '3306';
 
 		echo '<ul>' . "\n";
 
 		if (!test(
 			$lang['TestConnectionString'],
-			$dblink = @mysqli_connect($config['database_host'], $config['database_user'], $config['database_password'], null, $port),
+			$dblink = @mysqli_connect($config['db_host'], $config['db_user'], $config['db_password'], null, $port),
 			$lang['ErrorDbConnection'])
 		)
 		{
@@ -133,7 +133,7 @@ switch ($config['database_driver'])
 
 			$fatal_error = true;
 		}
-		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['database_database']), $lang['ErrorDbExists'], $dblink))
+		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['db_name']), $lang['ErrorDbExists'], $dblink))
 		{
 			/*
 			 There was a problem with the specified database name
@@ -151,7 +151,7 @@ switch ($config['database_driver'])
 			 */
 
 			// set charset
-			mysqli_set_charset($dblink, $config['database_charset']);
+			mysqli_set_charset($dblink, $config['db_charset']);
 
 			// set SESSION sql_mode
 			mysqli_query($dblink, "SET SESSION sql_mode='$sql_modes'");
@@ -308,16 +308,16 @@ switch ($config['database_driver'])
 
 	default:
 		$dsn = '';
-		switch ($config['database_driver'])
+		switch ($config['db_driver'])
 		{
 			/* case 'sqlite3': */
 
 			case 'mysql_pdo':
-				$dsn = "mysql:host=" . $config['database_host'] . ($config['database_port'] != '' ? ";port=" . $config['database_port'] : '') . ";dbname=" . $config['database_database'] . ($config['database_charset'] != '' ? ";charset=" . $config['database_charset'] : '');
+				$dsn = "mysql:host=" . $config['db_host'] . ($config['db_port'] != '' ? ";port=" . $config['db_port'] : '') . ";dbname=" . $config['db_name'] . ($config['db_charset'] != '' ? ";charset=" . $config['db_charset'] : '');
 				break;
 
 			/* case 'pgsql':
-				$dsn = $config['database_driver'] . ":dbname=" . $config['database_database'] . ";host=" . $config['database_host'].($config['database_port'] != "" ? ";port=" . $config['database_port'] : "");
+				$dsn = $config['db_driver'] . ":dbname=" . $config['db_name'] . ";host=" . $config['db_host'].($config['db_port'] != "" ? ";port=" . $config['db_port'] : "");
 				break; */
 		}
 
@@ -328,7 +328,7 @@ switch ($config['database_driver'])
 		// Do the initial database connection test separately as it is a special case.
 		try
 		{
-			test($lang['TestConnectionString'], $dblink = @new PDO($dsn, $config['database_user'], $config['database_password']), $lang['ErrorDbConnection']);
+			test($lang['TestConnectionString'], $dblink = @new PDO($dsn, $config['db_user'], $config['db_password']), $lang['ErrorDbConnection']);
 			$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e)

@@ -21,8 +21,8 @@ echo '<h2>Upgrade Utilities</h2>';
 
 $info[] = ['WackoWiki version', $this->format('**!!(green)' . $this->db->wacko_version . '!!**', 'wacko')];
 $info[] = ['MariaDB / MySQL version', $db_version];
-$info[] = ['Database charset', $this->db->database_charset];
-$info[] = ['Database collation', $this->db->database_collation];
+$info[] = ['Database charset', $this->db->db_charset];
+$info[] = ['Database collation', $this->db->db_collation];
 
 echo '<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">' . "\n";
 

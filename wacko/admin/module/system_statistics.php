@@ -39,7 +39,7 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 			<th class="t-left"><?php echo $engine->_t('DbOverhead');?></th>
 		</tr>
 <?php
-	$results	= $engine->db->load_all("SHOW TABLE STATUS FROM `{$engine->db->database_database}`", true);
+	$results	= $engine->db->load_all("SHOW TABLE STATUS FROM `{$engine->db->db_name}`", true);
 	$trows		= 0;
 	$tdata		= 0;
 	$tindex		= 0;

@@ -113,7 +113,7 @@ $ap_translation = [
 	// Config Permissions module
 	'config_permissions'		=> [
 		'name'		=> 'अनुमतियाँ',
-		'title'		=> 'Permissions settings',
+		'title'		=> 'अनुमतियाँ सेटिंग',
 	],
 
 	// Config Security module

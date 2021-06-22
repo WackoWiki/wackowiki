@@ -22,14 +22,14 @@ abstract class Dbal // need to be extended by Settings to be usable
 	{
 		if (!$this->db)
 		{
-			switch ($this->database_driver)
+			switch ($this->db_driver)
 			{
 				case 'mysql_pdo':
 					$this->db = new DbPDO($this);
 					break;
 
 				default:
-					$this->database_driver = 'mysqli_legacy';
+					$this->db_driver = 'mysqli_legacy';
 					// FALLTHRU
 				case 'mysqli_legacy':
 					$this->db = new DbMysqli($this);
@@ -41,9 +41,9 @@ abstract class Dbal // need to be extended by Settings to be usable
 			$this->db->query("SET SESSION sql_mode = '$sql_modes'");
 
 			// Set database collation
-			if ($this->database_collation)
+			if ($this->db_collation)
 			{
-				$this->db->query("SET collation_connection = '$this->database_collation'");
+				$this->db->query("SET collation_connection = '$this->db_collation'");
 			}
 		}
 	}

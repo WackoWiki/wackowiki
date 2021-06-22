@@ -13,7 +13,7 @@ class DbPDO implements DbInterface
 	function __construct(&$config)
 	{
 		$this->config = & $config;
-		$driver = $config->database_driver;
+		$driver = $config->db_driver;
 
 		if ($driver == 'mysql_pdo')
 		{
@@ -25,22 +25,22 @@ class DbPDO implements DbInterface
 		switch ($driver)
 		{
 			case 'pgsql': // host=localhost;port=5432;dbname=testdb;user=bruce;password=mypass
-				$dsn .= "host=" . $config->database_host . ";port=" . $config->database_port . ";dbname=" . $config->database_database;
+				$dsn .= "host=" . $config->db_host . ";port=" . $config->db_port . ";dbname=" . $config->db_name;
 				break;
 			case 'sqlite':
-				$dsn .= $config->database_database;
+				$dsn .= $config->db_name;
 				break;
 			default:
-				$dsn .= "host=" . $config->database_host .
-					($config->database_port? ";port=" . $config->database_port  : '') .
-					";dbname=" . $config->database_database .
-					($config->database_charset? ";charset=" . $config->database_charset : '');
+				$dsn .= "host=" . $config->db_host .
+					($config->db_port? ";port=" . $config->db_port  : '') .
+					";dbname=" . $config->db_name .
+					($config->db_charset? ";charset=" . $config->db_charset : '');
 				break;
 		}
 
 		try
 		{
-			$this->dblink = new PDO($dsn, $config->database_user, $config->database_password);
+			$this->dblink = new PDO($dsn, $config->db_user, $config->db_password);
 		}
 		catch (PDOException $e)
 		{

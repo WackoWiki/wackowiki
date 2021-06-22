@@ -14,16 +14,16 @@ class DbMysqli implements DbInterface
 	{
 		$this->config = & $config;
 
-		$this->dblink = mysqli_connect($config->database_host, $config->database_user, $config->database_password, $config->database_database, $config->database_port);
+		$this->dblink = mysqli_connect($config->db_host, $config->db_user, $config->db_password, $config->db_name, $config->db_port);
 
 		if (!$this->dblink)
 		{
 			die('Error loading WackoWiki DBAL: could not establish database connection.');
 		}
 
-		if ($config->database_charset)
+		if ($config->db_charset)
 		{
-			mysqli_set_charset($this->dblink, $config->database_charset);
+			mysqli_set_charset($this->dblink, $config->db_charset);
 		}
 	}
 
