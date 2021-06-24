@@ -31,6 +31,7 @@ if (!defined('IN_WACKO'))
 if (!isset($url))		$url	= null;
 if (!isset($nomark))	$nomark	= 0;
 if (!isset($title))		$title	= '';
+if (!isset($noxml))		$noxml	= 0;
 if (!isset($images))	$images	= 1;
 if (!isset($max))		$max	= 5;
 if (!isset($time))		$time	= 1;
@@ -180,6 +181,11 @@ else
 		$param_token	= substr(hash('sha1', $url . $nomark . $time . $max), 0, 8);
 		$count			= $feed->get_item_quantity();
 		$pagination		= $this->pagination(($count ?? null), $max, 'p', $p_mode + ['#' => $param_token]);
+
+		if (!(int) $noxml && $count_feeds == 1)
+		{
+			$tpl->xml_href = $urlset;
+		}
 
 		// pagination
 		$tpl->pagination_text	= $pagination['text'];
