@@ -555,7 +555,7 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Unreadable page %1.',
 	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
-	'SortComment'				=> 'Sort comment by',
+	'SortComment'				=> 'Sort comments by',
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',
 
@@ -997,6 +997,7 @@ $wacko_translation = [
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
 	'FeedLastItem'				=> 'last item',
+	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
 	'ChangesTitleXML'			=> ' - 近期變動',

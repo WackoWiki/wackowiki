@@ -3,22 +3,28 @@
 		<p><em>[ ' _t: FeedNoURL ' ]</em></p>
 	=]
 	<a id="[ ' token ' ]"></a>
+	[= xml =
+		<span class="desc-rss-feed">
+			<a href="[ ' href ' ]">
+				<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: FeedXMLTip ' ]" alt="XML" class="btn-feed">
+			</a>
+		</span>
+		<br>
+	=]
 	[= mark _ =
 		<div class="layout-box" style="display: table;">
 			<p>
 				<span>[ ' header ' ]: <strong>[ ' title ' ]</strong> [ ' lastitems ' ]</span>
 			</p>
 	=]
-
 	[= error _ =
 		<p><em>[ ' _t: FeedError ' ]</em><br>[ ' message ' ]</p>
 	=]
-
 	[= nomark _ =
 		<h1[ ' class ' ]>[ ' header ' ]</h1>
 		[ ' lastitems ' ]
 	=]
-
+	[ '' pagination '' ]<br>
 	[= i _ =
 		<article class="feed">
 			<h2[ ' class ' ]>[ ' link ' ]</h2>
@@ -43,12 +49,11 @@
 			=]
 		</article>
 	=]
-
+	[ '' pagination '' ]
 	[= emark _ =
 		[ ' nonstatic ' ]
 		</div>
 	=]
-	[''' pagination ''']
 
-[= pagination =]
+[ == pagination == ]
 <nav class="pagination">[ ' text ' ]</nav>

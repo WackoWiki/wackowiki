@@ -999,6 +999,7 @@ $wacko_translation = [
 	'FeedSource'				=> 'Источник:',
 	'FeedLastItems'				=> 'Последних элементов: %1',
 	'FeedLastItem'				=> 'Последний пункт',
+	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
 	'ChangesTitleXML'			=> ' - последние изменения',

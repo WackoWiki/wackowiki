@@ -997,6 +997,7 @@ $wacko_translation = [
 	'FeedSource'				=> 'Quelle:',
 	'FeedLastItems'				=> 'Letzte %1 Beiträge',
 	'FeedLastItem'				=> 'Letzter Beitrag',
+	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
 	'ChangesTitleXML'			=> ' - Letzte Änderungen',

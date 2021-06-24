@@ -185,7 +185,7 @@ $wacko_translation = [
 	'RevisionHint'				=> 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied'			=> 'आपको इस पृष्ठ को देखने की अनुमति नहीं है|',
 	'ReadAccessDeniedHintGuest'	=> 'To read this page, you should log in.',
-	'PageDeletedInfo'			=> 'This page has been deleted.',
+	'PageDeletedInfo'			=> 'इस पेज को हटाया जा चुका है।',
 	'CommentDeletedInfo'		=> 'This comment has been deleted.',
 
 	'LastEditedBy'				=> 'Last edited by',
@@ -531,7 +531,7 @@ $wacko_translation = [
 	'AccountDeleteHint'			=> 'Your account will be deleted from the system. Therefore, you will no longer be able to log in with your current credentials. If you choose to become a user of this application again, you can do so by using the means this application grants.',
 	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
 
-	'MarkRead'					=> 'Mark all as read',
+	'MarkRead'					=> 'सभी को पढ़ा हुआ मार्क करें',
 	'CurrentTime'				=> 'It is currently',
 	'Created'					=> 'बनाया',
 	'Modified'					=> 'संशोधित',
@@ -555,7 +555,7 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Unreadable page %1.',
 	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
-	'SortComment'				=> 'Sort comment by',
+	'SortComment'				=> 'Sort comments by',
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',
 
@@ -636,14 +636,14 @@ $wacko_translation = [
 	'EmailWelcome'				=> 'You\'ve registered at ',
 	'EmailRegistered'			=> 'You\'ve successfully registered at %1.' . "\n" . 'Your username: %2' . "\n\n",
 	'EmailVerify'				=> 'If you want to receive notifications, you must verify your email address. Please click on or copy the following link to a web browser: ' . "\n" . '%1',
-	'EmailRegisteredLogin'		=> 'Please return to the Wiki and login with your new username and password.',
+	'EmailRegisteredLogin'		=> 'कृपया विकी पर वापस लौटें और अपने नए उपयोगकर्ता नाम और पासवर्ड के साथ लॉगिन करें।',
 	'EmailRegisteredIgnore'		=> 'If you did not request this registration, ignore this message and nothing will happen.',
 	'EmailDoNotReply'			=> 'Do not reply to this message.',
 	'EmailReverify'				=> 'Someone (maybe you) submitted your email as notification address at %1.' . "\n" . 'Your username: %2'."\n\n" . 'If you want receive notifications, you need to approve your email. Please follow the link to do this.' . "\n" . '%3' . "\n\n",
-	'EmailConfirm'				=> 'Please verify your email',
-	'EmailConfirmed'			=> 'Email successfully confirmed.',
+	'EmailConfirm'				=> 'कृपया अपना ईमेल सत्यापित करें',
+	'EmailConfirmed'			=> 'ईमेल सफलतापूर्वक पुष्टि की गई।',
 	'EmailNotConfirmed'			=> 'Email cannot be confirmed. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
-	'EmailNotVerified'			=> 'Email not verified!',
+	'EmailNotVerified'			=> 'ईमेल सत्यापित नहीं!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
 									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
 									'until your email-address was confirmed, by following the link in the email sent to you. ' .
@@ -997,6 +997,7 @@ $wacko_translation = [
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
 	'FeedLastItem'				=> 'last item',
+	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
 	'ChangesTitleXML'			=> ' - हाल में हुए परिवर्तन',

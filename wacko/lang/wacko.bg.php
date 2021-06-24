@@ -555,7 +555,7 @@ $wacko_translation = [
 	'CloneCannotRead'			=> 'Unreadable page %1.',
 	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
-	'SortComment'				=> 'Sort comment by',
+	'SortComment'				=> 'Сортирайте коментарите по',
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',
 
@@ -573,7 +573,7 @@ $wacko_translation = [
 	'RenameCharsetConflict'		=> 'Change your user language %1 to the same language as this page %2 to avoid a charset conflict when renaming. Otherwise, the links to this page may no longer be valid and the page may become inaccessible.',
 	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
-	'UserSettings'				=> 'User settings',
+	'UserSettings'				=> 'Потребителски настройки',
 	'UserSettingsGeneral'		=> 'General',
 	'UserSettingsNotifications'	=> 'Notifications',
 
@@ -997,6 +997,7 @@ $wacko_translation = [
 	'FeedSource'				=> 'Source:',
 	'FeedLastItems'				=> 'last %1 items',
 	'FeedLastItem'				=> 'last item',
+	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
 	'ChangesTitleXML'			=> ' - Recent changes',
