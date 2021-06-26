@@ -319,7 +319,7 @@ $wacko_translation = [
 	'GroupsName'				=> 'Grupa',
 	'GroupsMembers'				=> 'Członkowie',
 	'GroupsDescription'			=> 'Opis',
-	'GroupsCreated'				=> 'Created',
+	'GroupsCreated'				=> 'Utworzono',
 	'GroupsNotFound'			=> 'Grupa %2 nie znaleziono. Kliknij <a href="%1">tutaj</a>, aby przejść do listy głównej.',
 	'GroupsProfile'				=> 'Profile',
 	'GroupsList'				=> 'Wyświetl całą listę grup',
@@ -420,7 +420,7 @@ $wacko_translation = [
 	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Wersja do druku',
-	'PrintText'					=> 'Print',
+	'PrintText'					=> 'Drukuj',
 	'LinkedPages'				=> 'Linkowane strony',
 	'NoLinkedPages'				=> 'Nie ma stron z linkami',
 	'ReferringPages'			=> 'Dokumenty Wiki, zawierające odnośnik tej strony',
@@ -463,9 +463,9 @@ $wacko_translation = [
 	'PostedBy'					=> 'posted by',
 	'ThisIsCommentOn'			=> 'This is a comment on',
 	'At'						=> 'at',
-	'To'						=> 'to',
+	'To'						=> 'do',
 	'By'						=> 'by',
-	'From'						=> 'from',
+	'From'						=> 'od',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
 	'AbandonedComment'			=> 'Strona, do której należy ten komentarz, już nie istnieje!',
@@ -532,7 +532,7 @@ $wacko_translation = [
 
 	'MarkRead'					=> 'Oznacz jako przeczytane',
 	'CurrentTime'				=> 'bieżący czas',
-	'Created'					=> 'tworzony',
+	'Created'					=> 'utworzono',
 	'Modified'					=> 'zmodyfikowany',
 
 	'EditIcon'					=> 'edytuj',
@@ -573,11 +573,11 @@ $wacko_translation = [
 	'SkipCharsetConflict'		=> 'Strona %1 bez zmiany nazwy, inny zestaw znaków %2.',
 
 	'UserSettings'				=> 'Ustawienia użytkownika',
-	'UserSettingsGeneral'		=> 'General',
+	'UserSettingsGeneral'		=> 'Główne',
 	'UserSettingsNotifications'	=> 'Powiadomienia',
 
 	'NotifyMinorEdit'			=> 'Notify also minor edit',
-	'NotifyPageEdit'			=> 'Edit',
+	'NotifyPageEdit'			=> 'Edycja',
 	'NotifyComment'				=> 'Komentarz',
 	'NotifyOff'					=> 'Off',
 	'NotifyAlways'				=> 'Zawsze',
@@ -705,7 +705,7 @@ $wacko_translation = [
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'Name',
 	'UsersPages'				=> 'Strony',
-	'UsersChanges'				=> 'Changes',
+	'UsersChanges'				=> 'Zmiany',
 	'UsersSubscription'			=> 'Subscription',
 	'UsersWatches'				=> 'Watches',
 	'UsersComments'				=> 'Komentarze',
@@ -729,7 +729,7 @@ $wacko_translation = [
 	'UsersCommentsPosted'		=> 'Comments posted',
 	'UsersFilesUploaded'		=> 'Files uploaded',
 	'UsersRevisionsMade'		=> 'Revisions made',
-	'UsersDocsSortName'			=> '[Sort by name]',
+	'UsersDocsSortName'			=> '[Sortuj według nazwy]',
 	'UsersDocsSortDate'			=> '[Sort by creation date]',
 	'UsersChangesSortAsc'		=> '[Sortuj rosnąco]',
 	'UsersChangesSortDesc'		=> '[Sortuj malejąco]',
@@ -740,9 +740,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[rozpocznij nowy temat]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Zaloguj się najpierw i kliknij ponownie na link, jeśli chcesz odpowiedzieć na otrzymaną osobistą wiadomość.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-									'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-									'similar form on your profile page. ',
+	'UsersIntercomDesc'			=> 'Uwaga: Wysyłanie osobistych wiadomości przenoszonych na adres e-mail odbiorcy bez ujawniania swojego adresu. Odbiorca będzie mógł Ci odpowiedzieć, korzystając z podobnego formularza na stronie Twojego profilu.',
 	'UsersPMOversized'			=> 'Długość komunikatu przekracza maksymalną dopuszczalną wielkość o %1. Proszę skrócić wiadomość i przesłać ją ponownie.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
@@ -813,7 +811,7 @@ $wacko_translation = [
 	'SettingsModerate'			=> 'Umiarkowany',
 	'SettingsPermissions'		=> 'Prawa dostępu',
 	'AclForEntireCluster'		=> 'for entire cluster',
-	'SettingsAttachments'		=> 'Attachments',
+	'SettingsAttachments'		=> 'Załączniki',
 	'SettingsUpload'			=> 'Wgraj plik',
 	'SettingsCategories'		=> 'Kategorie',
 	'SettingsLanguages'			=> 'Languages',
@@ -855,12 +853,12 @@ $wacko_translation = [
 
 	// attachments
 	'Attachments'				=> 'Załączniki',
-	'Attachment'				=> 'Attachment',
+	'Attachment'				=> 'Załącznik',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsToCluster'		=> 'cluster',
 	'AttachmentsByTime'			=> 'by time',
 	'AttachmentsGlobal'			=> 'global',
-	'AttachmentsAll'			=> 'all',
+	'AttachmentsAll'			=> 'wszystkie',
 	'AttachmentsLinked'			=> 'used',
 
 	'FileViewProperties'		=> 'View',
@@ -936,7 +934,7 @@ $wacko_translation = [
 
 	// pagination
 	'ToOverview'				=> 'Powrót do przeglądu',
-	'ToThePage'					=> 'To page',
+	'ToThePage'					=> 'Idź do strony',
 	'Next'						=> 'Następna',
 	'Prev'						=> 'Poprzednia',
 	'NextAcr'					=> 'Następna',
@@ -999,11 +997,11 @@ $wacko_translation = [
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
-	'ChangesTitleXML'			=> ' - Recent changes',
+	'ChangesTitleXML'			=> ' - Ostatnie Zmiany',
 	'ChangesXML'				=> 'Recent changes to the ',
 	'CommentsTitleXML'			=> ' - Recent comments',
 	'CommentsXML'				=> 'Recent comments to the ',
-	'NewsTitleXML'				=> ' - Recent news',
+	'NewsTitleXML'				=> ' - Najnowsze wiadomości',
 	'NewsXML'					=> 'Recent news to the ',
 	'PageRevisionsXML'			=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
@@ -1101,18 +1099,18 @@ $wacko_translation = [
 
 	// forum
 	'ForumSubforums'			=> 'Dział',
-	'ForumTopic'				=> 'Topic',
+	'ForumTopic'				=> 'Temat',
 	'ForumTopics'				=> 'Wątki',
 	'ForumPosts'				=> 'Posty',
 	'ForumReplies'				=> 'Replies',
 	'ForumAuthor'				=> 'Author',
 	'ForumViews'				=> 'Widoki',
-	'ForumCreated'				=> 'Created',
+	'ForumCreated'				=> 'Utworzono',
 	'ForumComments'				=> 'Komentarze',
 	'ForumLastComment'			=> 'Ostatni komentarz',
 	'ForumNoComments'			=> 'Brak komentarzy',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumTopicName'			=> 'Nazwa tematu',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',
@@ -1140,7 +1138,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Twoje hasło jest takie samo jak twój e-mail.',
 
 	// POLLS ADD-ON
-	'PollsTopic'		=> 'Topic',
+	'PollsTopic'		=> 'Temat',
 	'PollsVariant'		=> 'Reply',
 	'PollsPlural'		=> 'You can select multiple answers',
 	'PollsSingular'		=> 'You can select only one answer',
@@ -1172,7 +1170,7 @@ $wacko_translation = [
 	'PollsAdded'		=> 'Added',
 	'PollsTotalVotes'	=> 'Total votes',
 	'PollsShow'			=> 'Show',
-	'PollsAll'			=> 'All',
+	'PollsAll'			=> 'Wszystkie',
 	'PollsNotifySubj'	=> 'Added a new poll',
 	'PollsNotifyBody'	=> 'User %1 added a new poll. To view details, confirm or reject the poll go to this link:',
 	'PollsNone'			=> 'No active poll.',
@@ -1287,7 +1285,7 @@ $wacko_translation = [
 	'BinaryPrefixLong'			=> ['Byte', 'Kibibyte', 'Mebibyte', 'Gibibyte', 'Tebibyte', 'Pebibyte', 'Exbibyte', 'Zebibyte', 'Yobibyte'],
 
 	// loading error
-	'UnknownAction'				=> 'Unknown action',
+	'UnknownAction'				=> 'Nieznana akcja',
 	'UnknownMethod'				=> 'Unknown method',
 	'FormatterNotFound'			=> 'Formatter %1 not found',
 

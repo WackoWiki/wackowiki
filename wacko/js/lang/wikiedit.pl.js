@@ -6,7 +6,7 @@ lang = {
 	SessionExpiredEditor :	"Twoja sesja wygasła!\nZostałeś wylogowany z powodu długiej nieaktywności.\n1. Zapisz edycję formularza w pliku tekstowym, żeby zapobiec utracie.\n2. Odśwież stronę.\n3. Zaloguj się ponownie i prześlij ponownie.",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
+	HelpAbout :				"Help & Około",
 	HelpFormatting :		"Pomoc",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
