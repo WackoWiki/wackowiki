@@ -39,7 +39,6 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'खाता बनाएँ:',
-	'RegistrationRealName'		=> 'असली नाम',
 	'RegistrationPassword'		=> 'कूटशब्द',
 	'RegistrationButton'		=> 'Register me!',
 	'RegistrationUserNameOwned'	=> 'यह यूसर नामे पहल से ही दर्ज़। कृपया दूसरा चुनें।',

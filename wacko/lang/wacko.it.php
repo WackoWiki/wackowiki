@@ -39,7 +39,6 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Nuovo utente:',
-	'RegistrationRealName'		=> 'Show Name',
 	'RegistrationPassword'		=> ' Password',
 	'RegistrationButton'		=> 'Registrami!',
 	'RegistrationUserNameOwned'	=> 'Il nome è già utilizzato, scegline un altro.',

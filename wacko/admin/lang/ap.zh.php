@@ -1087,7 +1087,6 @@ $ap_translation = [
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'EditButton'				=> 'Edit',
-	'UserEnabled'				=> 'Enabled',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
@@ -1095,9 +1094,6 @@ $ap_translation = [
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
 	'UsersUpdated'				=> 'User successfully updated.',
 
-	'UserName'					=> 'Username',
-	'UserRealname'				=> 'Realname',
-	'UserEmail'					=> 'Email',
 	'UserIP'					=> 'IP',
 	'UserLanguage'				=> 'Language',
 	'UserSignuptime'			=> 'Signuptime',

@@ -39,7 +39,6 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Εγγραφή Νέου Χρήστη:',
-	'RegistrationRealName'		=> 'Show Name',
 	'RegistrationPassword'		=> 'Συνθηματικό',
 	'RegistrationButton'		=> 'Έγγραψέ με!',
 	'RegistrationUserNameOwned'	=> 'Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.',

@@ -359,11 +359,11 @@ function admin_user_approve(&$engine, &$module)
 				<!--<th></th>-->
 				<th>ID</th>
 				<th><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
-				<th><?php echo $engine->_t('UserEmail'); ?></th>
+				<th><?php echo $engine->_t('Email'); ?></th>
 				<th><?php echo $engine->_t('UserIP'); ?></th>
-				<th><?php echo $engine->_t('UserLanguage'); ?></th>
+				<th><?php echo $engine->_t('Language'); ?></th>
 				<th><a href="<?php echo $engine->href('', '', ['order' => $signup_time, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserSignuptime'); ?></a></th>
-				<th><?php echo $engine->_t('UserEnabled'); ?></th>
+				<th><?php echo $engine->_t('Enabled'); ?></th>
 				<th><?php echo $engine->_t('AccountStatus'); ?></th>
 				<th><?php echo $engine->_t('UserActions'); ?></th>
 			</tr>

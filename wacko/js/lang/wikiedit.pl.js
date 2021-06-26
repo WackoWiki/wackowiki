@@ -49,10 +49,10 @@ lang = {
 	TextForLinking :		"Text for linking",
 
 	HelpAboutTip :			' Shortcuts:\n'+
-							' Ctrl+B - Bold\n'+
-							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
+							' Ctrl+B - Pogrubienie\n'+
+							' Ctrl+I - Pochylenie\n'+
+							' Ctrl+U - Podkreślenie\n'+
+							' Ctrl+Shift+S - Przekreślenie\n'+
 							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
 							' Alt+I or Ctrl+T - Indent\n'+
 							' Alt+U or Ctrl+Shift+T - Unindent\n'+
@@ -64,7 +64,7 @@ lang = {
 							' Ctrl+Shift+N - Ordered List\n'+
 							' Ctrl+Shift+O - Ordered List\n'+
 							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
+							' Ctrl+Shift+Minus - Linia pozioma\n'+
 							' \n'
 
 };

@@ -39,7 +39,6 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> '계정 만들기:',
-	'RegistrationRealName'		=> '실명',
 	'RegistrationPassword'		=> '비밀번호',
 	'RegistrationButton'		=> '계정 만들기',
 	'RegistrationUserNameOwned'	=> '이 사용자 이름은 이미 등록되었습니다. 다른 것을 선택하십시오.',

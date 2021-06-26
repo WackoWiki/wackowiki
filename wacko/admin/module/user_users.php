@@ -481,7 +481,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>' .
 				'<tr>
 					<th class="label">
-						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
+						<label for="enabled">' . $engine->_t('Enabled') . '</label>
 					</th>' .
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (!isset($_POST['enabled']) ? ' checked' : '') . '>
@@ -588,7 +588,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>' .
 				'<tr>
 					<th class="label">
-						<label for="enabled">' . $engine->_t('UserEnabled') . '</label>
+						<label for="enabled">' . $engine->_t('Enabled') . '</label>
 					</th>' .
 					'<td>
 						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . '>
@@ -718,7 +718,7 @@ function admin_user_users(&$engine, &$module)
 					'<td>' . $user['theme'] . '</td>' .
 				'</tr>' .
 				'<tr>' . "\n" .
-					'<th class="label">' . $engine->_t('UserEnabled') . '</th>' .
+					'<th class="label">' . $engine->_t('Enabled') . '</th>' .
 					'<td>' . $user['enabled'] . '</td>' .
 				'</tr>' .
 				'<tr>' . "\n" .
@@ -984,7 +984,7 @@ function admin_user_users(&$engine, &$module)
 					<th><a href="<?php echo $engine->href('', '', ['order' => $order_comments]); ?>"><?php echo $engine->_t('UsersComments');?></a></th>
 					<th><a href="<?php echo $engine->href('', '', ['order' => $order_revisions]); ?>"><?php echo $engine->_t('UsersRevisions');?></a></th>
 					<th><a href="<?php echo $engine->href('', '', ['order' => $order_uploads]); ?>"><?php echo $engine->_t('UsersUploads');?></a></th>
-					<th><?php echo $engine->_t('UserLanguage');?></th>
+					<th><?php echo $engine->_t('Language');?></th>
 					<th><?php echo $engine->_t('Enabled');?></th>
 					<th><?php echo $engine->_t('AccountStatus'); ?></th>
 					<th><a href="<?php echo $engine->href('', '', ['order' => $signup_time]); ?>"><?php echo $engine->_t('UsersSignup');?></a></th>

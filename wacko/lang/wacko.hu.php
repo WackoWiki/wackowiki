@@ -39,7 +39,6 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Új felhasználó regisztráció:',
-	'RegistrationRealName'		=> 'Teljes név',
 	'RegistrationPassword'		=> 'Jelszó',
 	'RegistrationButton'		=> 'Felhasználói fiók létrehozása',
 	'RegistrationUserNameOwned'	=> 'Ez a felhasználónév már regisztrált. Kérjük, válasszon másik.',

@@ -18,7 +18,7 @@ $wacko_translation = [
 	'AddButton'					=> 'Dodaj',
 	'RemoveButton'				=> 'Usuń',
 	'SetButton'					=> 'Set',
-	'ResetButton'				=> 'Reset',
+	'ResetButton'				=> 'Resetuj',
 	'RenameButton'				=> 'Zmień nazwę',
 	'DeleteButton'				=> 'Usuń',
 	'RestoreButton'				=> 'Odtwórz',
@@ -39,7 +39,6 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Rejestracja nowego użytkownika:',
-	'RegistrationRealName'		=> 'Show Name',
 	'RegistrationPassword'		=> 'Hasło',
 	'RegistrationButton'		=> 'Zarejestruj!',
 	'RegistrationUserNameOwned'	=> 'Przepraszamy! Ta nazwa jest już zajęta. Prosimy o wybranie innej nazwy użytkownika.',
@@ -231,7 +230,7 @@ $wacko_translation = [
 	'AclRead'					=> 'Odczyt:',
 	'AclWrite'					=> 'Zapis:',
 	'AclComment'				=> 'Komentarze:',
-	'AclCreate'					=> 'Create:',
+	'AclCreate'					=> 'Utwórz:',
 	'AclUpload'					=> 'Upload:',
 	'AclFor'					=> 'Prawa dostępu do strony: %1',
 	'SetOwner'					=> 'Zmień autora:',
@@ -486,10 +485,10 @@ $wacko_translation = [
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
 	'EmailConfirmNotSent'		=> 'Unable to send the confirmation code: email is not specified!',
 	'Hello'						=> 'Witamy',
-	'UserName'					=> 'User name',
+	'UserName'					=> 'Użytkownik',
 	'EmailAddress'				=> 'Twój adres e-mail',
-	'RealName'					=> 'Real name',
-	'MenuItemsShown'			=> 'Menu items shown',
+	'RealName'					=> 'Imię i nazwisko',
+	'MenuItemsShown'			=> 'Wyświetlane pozycje menu',
 	'RecordsPerPage'			=> 'Zapisy na stronie',
 	'DoShowComments'			=> 'Domyślnie wyświetlaj komentarze',
 	'DoubleclickEditing'		=> 'Włącz edycję przez podwójne kliknięcie',
@@ -556,8 +555,8 @@ $wacko_translation = [
 	'CloneCannotCreate'			=> 'Uncreatable page %1.',
 
 	'SortComment'				=> 'Sortowanie komentarza przez',
-	'SortCommentAsc'			=> 'Most recent on bottom',
-	'SortCommentDesc'			=> 'Most recent on top',
+	'SortCommentAsc'			=> 'Najnowsze na dole',
+	'SortCommentDesc'			=> 'Najnowsze na górze',
 
 	'RenamePage'				=> 'Zmień nazwę strony',
 	'RenameText'				=> 'Zmień nazwę strony',
@@ -593,7 +592,7 @@ $wacko_translation = [
 	'UserSettingsEmailMe'		=> 'Email me when ...',
 
 	'UserSettingsExtended'		=> 'Rozszerzony',
-	'UserSettingsOther'			=> 'Other settings',
+	'UserSettingsOther'			=> 'Inne ustawienia',
 	'UserSpace'					=> 'User space',
 	'ChooseTheme'				=> 'Zmień schemat',
 
@@ -716,7 +715,7 @@ $wacko_translation = [
 	'UsersLogins'				=> 'Logins',
 	'UsersRevisions'			=> 'Revisions',
 	'UsersSignup'				=> 'Signup',
-	'UsersLastSession'			=> 'Last session',
+	'UsersLastSession'			=> 'Ostatnia sesja',
 	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
 	'UsersProfile'				=> 'Profile',
 	'UsersContact'				=> 'Kontakt',
