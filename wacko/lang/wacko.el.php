@@ -327,8 +327,8 @@ $wacko_translation = [
 
 	'MetaUpdated'				=> 'Η λίστα δικαιωμάτων πρόσβασης ανανεώθηκε',
 
-	'EditPreviewButton'			=> 'Προβολή',
-	'EditPreview'				=> 'Προβολή',
+	'PreviewButton'				=> 'Προβολή',
+	'Preview'					=> 'Προβολή',
 	'Chars'						=> 'chars',
 	'PageBody'					=> 'Page body',
 	'EditNote' 					=> 'Σύνοψη επεξεργασίας',

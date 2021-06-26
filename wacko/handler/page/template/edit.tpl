@@ -10,7 +10,7 @@
 			[= p _ =
 				[ '' buttons '' ]
 				<section id="preview" class="preview">
-					<p class="preview"><span>[ ' _t: EditPreview ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
+					<p class="preview"><span>[ ' _t: Preview ' ] ([ ' chars ' ] [ ' _t: Chars ' ])</span></p>
 					<h1>[ ' title | e ' ]</h1>
 					[ ' preview | pre ' ]
 				</section>
@@ -92,7 +92,7 @@
 
 [= buttons =]
 <button type="submit" class="btn-ok" form="edit_page" name="save">[ ' _t: SaveButton ' ]</button>&nbsp;
-<button type="submit" class="btn-ok" form="edit_page" name="preview">[ ' _t: EditPreviewButton ' ]</button>&nbsp;
+<button type="submit" class="btn-ok" form="edit_page" name="preview">[ ' _t: PreviewButton ' ]</button>&nbsp;
 <a href="[ ' href: ' ]" class="btn-link"><button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button></a>
 
 [ === similarTags === ]

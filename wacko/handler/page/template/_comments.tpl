@@ -49,7 +49,7 @@
 				<div class="commentform" id="commentform">
 					[= p _ =
 						<div id="preview" class="preview">
-							<p class="preview"><span>[ ' _t: EditPreview ' ]</span></p>
+							<p class="preview"><span>[ ' _t: Preview ' ]</span></p>
 							<div class="comment-preview">
 								<header class="comment-title">
 									<h2>[ ' title | e ' ]</h2>
@@ -99,7 +99,7 @@
 							=]
 						</script>
 						<button type="submit" class="btn-ok" name="save" accesskey="s">[ ' _t: AddCommentButton ' ]</button>
-						<button type="submit" class="btn-ok" name="preview">[ ' _t: EditPreviewButton ' ]</button>
+						<button type="submit" class="btn-ok" name="preview">[ ' _t: PreviewButton ' ]</button>
 					</form>
 				</div>
 			=]

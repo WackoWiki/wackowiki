@@ -328,8 +328,8 @@ $wacko_translation = [
 
 	'MetaUpdated'				=> 'Метаданные обновлены',
 
-	'EditPreviewButton'			=> 'Предварительный просмотр',
-	'EditPreview'				=> 'Предварительный просмотр',
+	'PreviewButton'				=> 'Предварительный просмотр',
+	'Preview'					=> 'Предварительный просмотр',
 	'Chars'						=> 'Символы',
 	'PageBody'					=> 'Page body',
 	'EditNote'					=> 'Описание изменений',

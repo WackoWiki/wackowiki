@@ -327,8 +327,8 @@ $wacko_translation = [
 
 	'MetaUpdated'				=> 'A metaadatok frissítve',
 
-	'EditPreviewButton'			=> 'Előnézet',
-	'EditPreview'				=> 'Előnézet',
+	'PreviewButton'				=> 'Előnézet',
+	'Preview'					=> 'Előnézet',
 	'Chars'						=> 'chars',
 	'PageBody'					=> 'Page body',
 	'EditNote'					=> 'A változások összefoglalása',

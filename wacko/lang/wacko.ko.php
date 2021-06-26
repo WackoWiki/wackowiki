@@ -327,8 +327,8 @@ $wacko_translation = [
 
 	'MetaUpdated'				=> 'Meta data updated',
 
-	'EditPreviewButton'			=> '미리 보기',
-	'EditPreview'				=> '미리 보기',
+	'PreviewButton'				=> '미리 보기',
+	'Preview'					=> '미리 보기',
 	'Chars'						=> 'chars',
 	'PageBody'					=> 'Page body',
 	'EditNote'					=> '편집 요약',
