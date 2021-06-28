@@ -45,10 +45,7 @@ $closes	= preg_match_all('/<\/table/u', $text, $matches);
 
 if (1 * $closes < 1 * $opens)
 {
-	for ($i = 0; $i < (1 * $opens - 1 * $closes); $i++)
-	{
-		$text .= '</table>';
-	}
+	$text .= str_repeat('</table>', (1 * $opens - 1 * $closes));
 }
 
 //format footnote content
