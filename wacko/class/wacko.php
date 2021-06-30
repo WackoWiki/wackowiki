@@ -8479,7 +8479,7 @@ class Wacko
 			$out .= '<button type="submit" id="add-button" name="create">' . $this->_t('AddButton') . '</button> ' .
 					'<button type="submit" id="rename-button" name="rename">' . $this->_t('RenameButton') . '</button> ' .
 					'<button type="submit" id="group-button" name="ugroup">' . $this->_t('CategoriesGroupButton') . '</button> ' .
-					'<button type="submit" id="remove-button" name="delete">' . $this->_t('RemoveButton') . '</button> ' .
+					'<button type="submit" id="remove-button" name="delete" class="btn-danger">' . $this->_t('RemoveButton') . '</button> ' .
 					'<small><br>' . $this->_t('CategoriesEditInfo') . '</small>';
 		}
 

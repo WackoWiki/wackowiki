@@ -524,7 +524,7 @@ function admin_user_groups(&$engine, &$module)
 
 		echo '<br>' .
 			 '<button type="submit" id="button_add" name="add_member">' . $engine->_t('AddButton') . '</button> ' .
-			 '<button type="submit" id="button_remove" name="remove_member">' . $engine->_t('RemoveButton') . '</button> ' .
+			 '<button type="submit" id="button_remove" name="remove_member" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ' .
 			 '<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>';
 
 		echo $engine->form_close();
@@ -620,7 +620,7 @@ function admin_user_groups(&$engine, &$module)
 		$control_buttons =	'<br>' .
 							'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
 							'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
-							'<button type="submit" id="delete-button" name="delete">' . $engine->_t('RemoveButton') . '</button> ';
+							'<button type="submit" id="delete-button" name="delete" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ';
 
 		echo $control_buttons;
 

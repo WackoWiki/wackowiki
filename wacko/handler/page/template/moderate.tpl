@@ -95,7 +95,7 @@
 		<table>
 			<tr class="lined">
 				<td colspan="5">
-					<button type="submit" name="delete" id="submit_delete">[ ' _t: DeleteButton ' ]</button>
+					<button type="submit" name="delete" id="submit_delete" class="btn-danger">[ ' _t: DeleteButton ' ]</button>
 					<button type="submit" name="move" id="submit_move">[ ' _t: ModerateMove ' ]</button> 
 					<button type="submit" name="rename" id="submit_rename">[ ' _t: RenameButton ' ]</button>
 					<button type="submit" name="merge" id="submit_merge">[ ' _t: ModerateMerge ' ]</button>
