@@ -14,7 +14,7 @@ if ($this->db->footer_rating != 0 && ($this->db->footer_rating != 2 || $this->ge
 		$cookie	= $engine->sess->get_cookie('rating');
 		$ids	= explode(';', $cookie);
 
-		if ($page_id = array_search($page_id, $ids))
+		if (array_search($page_id, $ids))
 		{
 			return true;
 		}

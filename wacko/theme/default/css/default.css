@@ -448,7 +448,6 @@ article,
 #section-content,
 #page {
 	padding: 5px 0 20px 0;
-	
 }
 
 #page-edit {
@@ -466,6 +465,10 @@ article,
 .input-title,
 .input-summary {
 	width: 100%;
+}
+
+.source-handler {
+	min-height: 200px;
 }
 
 footer {

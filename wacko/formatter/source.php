@@ -20,7 +20,7 @@ if ($copy_button)
 		'</button>';
 }
 
-echo '<pre id="' . $div_id . '" class="code">';
+echo '<pre id="' . $div_id . '" class="code source-handler">';
 
 switch ($default)
 {
