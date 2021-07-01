@@ -43,7 +43,7 @@ $lang = [
 */
 'Title'							=> 'Instalacja WackoWiki',
 'Continue'						=> 'Kontynuuj',
-'Back'							=> 'Plecy',
+'Back'							=> 'Wstecz',
 'Recommended'					=> 'zalecane',
 'InvalidAction'					=> 'Nieprawidłowe działanie',
 
@@ -61,7 +61,7 @@ $lang = [
    System Requirements Page
 */
 'version-check'					=> 'Wymagania systemowe',
-'PhpVersion'					=> 'PHP Version',
+'PhpVersion'					=> 'Wersja PHP',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
