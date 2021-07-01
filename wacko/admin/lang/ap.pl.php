@@ -24,7 +24,7 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Tryb odzyskiwania',
 	'Authorization'				=> 'Authorization',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
+	'NoRecoveryPassword'		=> 'Hasło administracyjne nie zostało określone!',
 	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
@@ -34,8 +34,8 @@ $ap_translation = [
 	'ApLogOut'					=> 'Wyloguj',
 	'ApLogOutTip'				=> 'quit system administration',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
-	'ApVersion'					=> 'version',
+	'TimeLeft'					=> 'Pozostały czas: %1 minut',
+	'ApVersion'					=> 'wersja',
 
 	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
@@ -51,7 +51,7 @@ $ap_translation = [
 	'Remove'					=> 'Usuń',
 	'Enabled'					=> 'Odblokuj',
 	'Disabled'					=> 'Zablokuj',
-	'Mandatory'					=> 'Mandatory',
+	'Mandatory'					=> 'Obowiązkowe',
 	'Admin'						=> 'Admin',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
@@ -77,19 +77,19 @@ $ap_translation = [
 	// Config Appearance module
 	'config_appearance'		=> [
 		'name'		=> 'Wygląd',
-		'title'		=> 'Appearance settings',
+		'title'		=> 'Ustawienia Wygląd',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-mail',
-		'title'		=> 'Email settings',
+		'title'		=> 'Ustawienia E-mail',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'name'		=> 'Filtr',
+		'title'		=> 'Ustawienia filtra',
 	],
 
 	// Config Formatter module
@@ -101,19 +101,19 @@ $ap_translation = [
 	// Config Notifications module
 	'config_notifications'		=> [
 		'name'		=> 'Powiadomienia',
-		'title'		=> 'Notifications settings',
+		'title'		=> 'Ustawienia powiadomień',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> 'Strony',
 		'title'		=> 'Pages and site parameters',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
 		'name'		=> 'Uprawnienia',
-		'title'		=> 'Permissions settings',
+		'title'		=> 'Ustawienia uprawnień',
 	],
 
 	// Config Security module
@@ -143,7 +143,7 @@ $ap_translation = [
 	// Menu module
 	'content_menu'		=> [
 		'name'		=> 'Menu',
-		'title'		=> 'Add, edit or remove default menu items',
+		'title'		=> 'Dodawanie, edytowanie lub usuwanie domyślnych elementów menu',
 	],
 
 	// Polls module
@@ -332,7 +332,7 @@ $ap_translation = [
 	'NotifyDiffMode'			=> 'Notify diff mode',
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
-	'EditingSection'			=> 'Editing',
+	'EditingSection'			=> 'Edytowanie',
 	'EditSummary'				=> 'Edit summary',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Minor edit',
@@ -367,7 +367,7 @@ $ap_translation = [
 	'LogoAndTitle'				=> 'logo and title',
 
 	'LogoSection'				=> 'Logo',
-	'SiteLogo'					=> 'Site Logo',
+	'SiteLogo'					=> 'Logo strony',
 	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
 	'LogoDimensions'			=> 'Logo dimensions',
 	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
@@ -676,7 +676,7 @@ $ap_translation = [
 	'ListCount'					=> 'Number of items per list',
 	'ListCountInfo'				=> 'Number of items displayed on each list for guest or as default value for new users.',
 
-	'ForumSection'				=> 'Options Forum',
+	'ForumSection'				=> 'Ustawienia forum',
 	'ForumCluster'				=> 'Cluster Forum',
 	'ForumClusterInfo'			=> 'Root cluster for forum section (action %1).',
 	'ForumTopics'				=> 'Number of topics per page',

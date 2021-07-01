@@ -152,7 +152,7 @@
 						<th scope="row">[ ' _t: FileSource ' ]:</th>
 						<td>
 						[= url _ =
-							<a href="[ ' href | e ' ]" title="[ ' db: site_desc | e ' ]">
+							<a href="[ ' href | e ' ]">
 						=]
 							[ ' source ' ]
 						[= chref _ =
