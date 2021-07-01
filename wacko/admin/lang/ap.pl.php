@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'				=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
@@ -16,7 +16,7 @@ $ap_translation = [
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'database'		=> 'Baza danych',
 	],
 
 	// Admin panel
@@ -45,10 +45,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
+	'Cancel'					=> 'Anuluj',
 	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
+	'Edit'						=> 'Edytuj',
+	'Remove'					=> 'Usuń',
 	'Enabled'					=> 'Odblokuj',
 	'Disabled'					=> 'Zablokuj',
 	'Mandatory'					=> 'Mandatory',
@@ -179,7 +179,7 @@ $ap_translation = [
 	// Dashboard module
 	'main'		=> [
 		'name'		=> 'Main Menu',
-		'title'		=> 'WackoWiki Administration',
+		'title'		=> 'WackoWiki Administracja',
 	],
 
 	// Inconsistencies module
@@ -232,13 +232,13 @@ $ap_translation = [
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
-		'title'		=> 'User registration approval',
+		'name'		=> 'Zatwierdź',
+		'title'		=> 'Zatwierdzenie rejestracji użytkownika',
 	],
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'Grupy',
 		'title'		=> 'Group management',
 	],
 
@@ -725,7 +725,7 @@ $ap_translation = [
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
-	'GroupsPage'				=> 'Groups',
+	'GroupsPage'				=> 'Grupy',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'ChangesPage'				=> 'Ostatnie Zmiany',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
@@ -739,7 +739,7 @@ $ap_translation = [
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
 	'SandboxPage'				=> 'Sandbox',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
-	'HelpPage'					=> 'Help',
+	'HelpPage'					=> 'Pomoc',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index',
 	'IndexPageInfo'				=> 'Strona z listą wszystkich stron (action %1).',
@@ -832,11 +832,11 @@ $ap_translation = [
 	'AbuseEmail'				=> 'Email abuse service',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
-	'SendTestEmail'				=> 'Send a test email',
-	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
-	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
-	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
-	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your emails configuration.',
+	'SendTestEmail'				=> 'Wyślij testową wiadomość e-mail',
+	'SendTestEmailInfo'			=> 'Spowoduje to wysłanie testowej wiadomości e-mail na adres zdefiniowany na Twoim koncie.',
+	'TestEmailSubject'			=> 'Twoja Wiki jest poprawnie skonfigurowana do wysyłania e-maili',
+	'TestEmailBody'				=> 'Jeśli otrzymałeś tę wiadomość e-mail, oznacza to, że Twój serwis Wiki jest poprawnie skonfigurowany do wysyłania wiadomości e-mail.',
+	'TestEmailMessage'			=> 'Email testowy został wysłany.<br>Jeśli nie otrzymałeś go, sprawdź konfigurację swojej poczty.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
@@ -903,7 +903,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Database converted',
 	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
 
-	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
+	'LogColumnsToStrict'		=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
@@ -987,7 +987,7 @@ $ap_translation = [
 	'LogUserUpdated'			=> 'Updated User ##%1##',
 
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
-	'Approve'					=> 'Approve',
+	'Approve'					=> 'Zatwierdź',
 	'Deny'						=> 'Deny',
 	'Pending'					=> 'Pending',
 	'Approved'					=> 'Approved',
@@ -1066,7 +1066,7 @@ $ap_translation = [
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'all',
+	'FilesAll'					=> 'Wszystko',
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
