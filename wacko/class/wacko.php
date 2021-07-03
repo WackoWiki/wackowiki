@@ -1370,8 +1370,8 @@ class Wacko
 		return $this->db->load_all(
 			"SELECT " .
 			(!is_null($page_ids)
-				? "page_id, link, count(link) AS num "
-				: "link, count(link) AS num ") .
+				? "page_id, link, COUNT(link) AS num "
+				: "link, COUNT(link) AS num ") .
 			"FROM " . $this->db->table_prefix . "external_link " .
 			(!is_null($page_ids)
 				? "WHERE page_id IN (" . $this->ids_string($page_ids) . ") "

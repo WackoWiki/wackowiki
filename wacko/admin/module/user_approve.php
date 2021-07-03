@@ -274,7 +274,7 @@ function admin_user_approve(&$engine, &$module)
 
 	// count records by status
 	$account_stati = $engine->db->load_all(
-		"SELECT account_status, count(account_status) AS n
+		"SELECT account_status, COUNT(account_status) AS n
 		FROM " . $prefix . "user
 		WHERE account_type = 0
 			AND user_name <> " . $engine->db->q($engine->db->admin_name) . "

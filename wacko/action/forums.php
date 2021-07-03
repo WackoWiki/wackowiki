@@ -112,7 +112,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 			{
 				// count total topics and posts
 				$counter = $this->db->load_single(
-					"SELECT count(a.page_id) as topics_total, sum(a.comments) as posts_total " .
+					"SELECT COUNT(a.page_id) as topics_total, sum(a.comments) as posts_total " .
 					"FROM " . $this->db->table_prefix . "page a " .
 					"WHERE a.tag LIKE " . $this->db->q($forum['tag'] . '/%') . " " .
 						"AND a.deleted <> 1 ", true);
