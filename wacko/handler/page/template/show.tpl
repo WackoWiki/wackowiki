@@ -12,7 +12,7 @@
 			[ ' a revmeta ' ]
 		=]
 		[ ' restore ' ]
-		[ ' reedit ' ]
+		[ ' tools ' ]
 
 		[= h _ =
 			<header>
@@ -32,19 +32,28 @@
 
 	</article>
 
-[= reedit =]
+[= tools =]
 <div class="msg revision-info">
 	[ ' message ' ]
 	<br><br>
-	<form action="[ ' href ' ]" method="post" name="edit_revision">
-		[ ' csrf: edit_revision ' ]
-		<input type="hidden" name="previous" value="[ ' modified ' ]">
-		<input type="hidden" name="id" value="[ ' pageid ' ]">
-		<button type="submit">[ ' _t: ReEditOldRevision ' ]</button>
-		<a href="[ ' href: ' ]" class="btn-link">
-			<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-		</a>
-	</form>
+	[= reedit _ =
+		<form action="[ ' href ' ]" method="post" name="edit_revision">
+			[ ' csrf: edit_revision ' ]
+			<input type="hidden" name="previous" value="[ ' modified ' ]">
+			<input type="hidden" name="id" value="[ ' pageid ' ]">
+			<button type="submit">[ ' _t: ReEditOldRevision ' ]</button>
+		</form>
+	=]
+	[= remove _ =
+		<form action="[ ' href ' ]" method="post" name="delete_revision">
+			[ ' csrf: delete_revision ' ]
+			<input type="hidden" name="id" value="[ ' pageid ' ]">
+			<button type="submit" class="btn-danger">[ ' _t: RemoveButton ' ]</button>
+		</form>
+	=]
+	<a href="[ ' href: ' ]" class="btn-link">
+		<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+	</a>
 </div>
 
 [= restore =]
@@ -53,7 +62,8 @@
 	<br><br>
 	<form action="[ ' href: restore ' ]" method="post" name="restore_page">
 		[ ' csrf: restore_page ' ]
-		<input type="hidden" name="id" value="[ ' pageid ' ]">
+		<input type="hidden" name="page_id" value="[ ' pageid ' ]">
+		<input type="hidden" name="revision_id" value="[ ' revisionid ' ]">
 		<button type="submit">[ ' _t: RestoreButton ' ]</button>
 	</form>
 </div>

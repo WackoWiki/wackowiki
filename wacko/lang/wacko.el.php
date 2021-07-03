@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Αυτή η σελίδα δεν υπάρχει ακόμα.',
 	'PromptCreate'				=> 'Ίσως θέλετε να την <a href="%1">δημιουργήσετε</a> ?',
-	'RevisionHint'				=> 'Αυτή είναι μία παλαιότερη έκδοση της <a href="%1">%2</a> από %3.',
+	'RevisionHint'				=> 'Αυτή είναι μία παλαιότερη έκδοση της <a href="%1">%2</a> από %3 επιμελήθηκε ο %4.',
 	'ReadAccessDenied'			=> 'Δεν επιτρέπετε να αναγνώσετε αυτή την σελίδα.',
 	'ReadAccessDeniedHintGuest'	=> 'Για να διαβάσετε αυτήν τη σελίδα, θα πρέπει να συνδεθείτε.',
 	'PageDeletedInfo'			=> 'Αυτή η σελίδα έχει διαγραφεί.',
+	'RevisionDeletedInfo'		=> 'Η αναθεώρηση αυτή έχει διαγραφεί.',
 	'CommentDeletedInfo'		=> 'Αυτό το σχόλιο έχει διαγραφεί.',
 
 	'LastEditedBy'				=> 'Τελευταία επεξεργασία από',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Remove page',
+	'RemoveRevision'			=> 'Remove revision',
 	'RemoveComment'				=> 'Delete comment',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepRevision'	=> 'Μην αποθηκεύετε αντίγραφο της αναθεώρησης που έχει αφαιρεθεί',
 	'RemoveDontKeepComment'		=> 'Μην αποθηκεύσετε ένα αντίγραφο του αφαιρεθέντος σχολίου',
 	'RemoveDontKeepFile'		=> 'Μην αποθηκεύσετε ένα αντίγραφο του αφαιρεθέντος αρχείου',
 	'ReferrersRemoved'			=> 'Οι παραπομπές σε αυτήν την σελίδα αφαιρέθηκαν.',
@@ -414,9 +417,13 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Η σελίδα αφαιρέθηκε.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
+	'RevisionRemoved'			=> 'Revision %1 removed.',
 	'RevisionsRemoved'			=> 'Revisions from page αφαιρέθηκαν.',
 	'ActionHaveNoUndo'			=> 'Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.',
+
+	// restore
 	'PageRestored'				=> 'Page restored.',
+	'RevisionRestored'			=> 'Revision restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Έκδοση προς εκτύπωση',
@@ -914,9 +921,10 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Το επιλεγμένο όνομα είναι άκυρο',
 	'Bookmarks'					=> 'Σύνδεσμοι',
 	'ReallyDeleteComment'		=> 'Θέλετε σίγουρα να διαγράψετε αυτό το σχόλιο;<br>Δεν υπάρχει ενέργεια αναίρεσης για αυτό!',
+	'ReallyDeleteRevision'		=> 'Θέλετε πραγματικά να ΔΙΑΓΡΑΦΕΤΕ αυτή την έκδοση;<br>Δεν υπάρχει ενέργεια αναίρεσης για αυτό!',
 
 	'RegistrationClosed'		=> 'Η εγγραφή δεν είναι δυνατή εδώ, Προσπαθήστε να επικοινωνήστε με τον διαχειριστή.',
-	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
+	'AclAreYouSure'				=> 'Θα αλλάξετε τις ACLs αυτής της σελίδας και όλων των υποσελίδων της. Συνεχίστε;',
 
 	'BookmarkDeleteSelected'	=> 'Διαγραφή επιλεγμένων',
 	'BookmarkMark'				=> 'Mark',
@@ -1300,6 +1308,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

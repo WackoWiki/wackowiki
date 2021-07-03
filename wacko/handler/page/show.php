@@ -59,12 +59,23 @@ if ($this->has_access('read'))
 			{
 				$tpl->restore			= true;
 				$tpl->restore_pageid	= $this->page['page_id'];
-				$tpl->restore_message	= $this->page['comment_on_id'] ? $this->_t('CommentDeletedInfo') : $this->_t('PageDeletedInfo');
+
+				if ($this->page['latest'] == 0)
+				{
+					$tpl->restore_revisionid	= $this->page['revision_id'];
+				}
+
+				$tpl->restore_message	= $this->page['comment_on_id']
+											? $this->_t('CommentDeletedInfo')
+											: (!$this->page['latest']
+												? $this->_t('RevisionDeletedInfo')
+												: $this->_t('PageDeletedInfo'));
 			}
 			else
 			{
 				// TODO: it never reaches this point, currently only admins can see pages/comments marked as deleted
-				$message = $this->page['comment_on_id'] ? $this->_t('CommentDeletedInfo') : $this->_t('PageDeletedInfo'); // TODO: add description: to restore the page you ...
+				// TODO: add description: to restore the page you ...
+				$message = $this->page['comment_on_id'] ? $this->_t('CommentDeletedInfo') : $this->_t('PageDeletedInfo');
 				$message .= '<br>';
 				$tpl->n_message = $this->show_message($message, 'warning', false);
 
@@ -96,11 +107,26 @@ if ($this->has_access('read'))
 				}
 				else
 				{
+					$tpl->enter('tools_');
+					$tpl->message			= $message;
+
 					// re-edit form
 					$tpl->reedit_href		= $this->href('edit', '', ['revision_id' => (int) $this->page['revision_id']]);
 					$tpl->reedit_modified	= $latest['modified'];
 					$tpl->reedit_pageid		= $this->page['page_id'];
-					$tpl->reedit_message	= $message;
+
+					// delete revision form
+					if (($this->is_admin()
+						|| (!$this->db->remove_onlyadmins
+							&& ($this->get_page_owner_id($this->page['page_id']) == $this->get_user_id())))
+						&& !$this->page['deleted']
+					)
+					{
+						$tpl->remove_href		= $this->href('remove', '', ['revision_id' => (int) $this->page['revision_id']]);
+						$tpl->remove_pageid		= $this->page['page_id'];
+					}
+
+					$tpl->leave();	// tools_
 				}
 			}
 			else

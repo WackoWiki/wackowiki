@@ -83,12 +83,6 @@ if ($this->has_access('read'))
 
 		foreach ($revisions as $num => $page)
 		{
-			if ($page['deleted'])
-			{
-				$tpl->del	= true;
-				$tpl->edel	= true;
-			}
-
 			$tpl->value			= (!$num && !$pagination['offset'] ? '-1' : $page['revision_id']);
 			$tpl->checkedA		= $num == 1 ? 'checked' : '';
 			$tpl->checkedB		= $num == 0 ? 'checked' : '';
@@ -123,6 +117,12 @@ if ($this->has_access('read'))
 						$tpl->r_review = true;
 					}
 				}
+			}
+
+			if ($page['deleted'])
+			{
+				$tpl->del	= true;
+				$tpl->edel	= true;
 			}
 		}
 

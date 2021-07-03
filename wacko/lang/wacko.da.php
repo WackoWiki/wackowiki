@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Denne side eksisterer endnu ikke.',
 	'PromptCreate'				=> 'Vil du <a href="%1">oprette</a> den?',
-	'RevisionHint'				=> 'Dette er en ældre version af <a href="%1">%2</a> fra %3.',
+	'RevisionHint'				=> 'Dette er en ældre version af <a href="%1">%2</a> fra %3 redigeret af %4.',
 	'ReadAccessDenied'			=> 'Du har ikke lov til at se denne side.',
 	'ReadAccessDeniedHintGuest'	=> 'For at læse denne side skal du logge ind.',
 	'PageDeletedInfo'			=> 'Denne side er blevet slettet.',
+	'RevisionDeletedInfo'		=> 'Denne revision er blevet slettet.',
 	'CommentDeletedInfo'		=> 'Denne kommentar er blevet slettet.',
 
 	'LastEditedBy'				=> 'Senest redigeret af',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Fjern side',
+	'RemoveRevision'			=> 'Fjern revision',
 	'RemoveComment'				=> 'Slet kommentar',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepRevision'	=> 'Gem ikke en kopi af den fjernede revision',
 	'RemoveDontKeepComment'		=> 'Gem ikke en kopi af den fjernede kommentar',
 	'RemoveDontKeepFile'		=> 'Gem ikke en kopi af den fjernede fil',
 	'ReferrersRemoved'			=> 'Links til er fjernet.',
@@ -414,10 +417,14 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Siden fjernet.',
 	'PageCachePurged'			=> 'Cache renset.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
+	'RevisionRemoved'			=> 'Revision %1 fjernet.',
 	'RevisionsRemoved'			=> 'Revisions from page fjernet.',
 	'ActionHaveNoUndo'			=> 'Denne handling kan du ikke fortryde!',
+
+	// restore
 	'PageRestored'				=> 'Side gendannet.',
-	'LocalFilesRestored'		=> 'Local files restored.',
+	'RevisionRestored'			=> 'Revision gendannet.',
+	'LocalFilesRestored'		=> 'Lokale filer gendannet.',
 
 	'PrintVersion'				=> 'Udskrivningsversion',
 	'PrintText'					=> 'Udskrivning',
@@ -914,6 +921,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Valgt navn er desværre ikke tilladt',
 	'Bookmarks'					=> 'Bogmærker',
 	'ReallyDeleteComment'		=> 'Er du sikker på, at du vil slette kommentaren?',
+	'ReallyDeleteRevision'		=> 'Er du sikker på, at du vil slette denne revision?',
 
 	'RegistrationClosed'		=> 'Registrering ikke mulig. Kontakt Administrator.',
 	'AclAreYouSure'				=> 'Du ændrer nu adgangstilladelser for denne side og alle dens undersider. Vil du fortsætte?',
@@ -1300,6 +1308,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Esta página ainda não existe.',
 	'PromptCreate'				=> 'Talvez a queira <a href="%1">criar</a> agora?',
-	'RevisionHint'				=> 'Esta é uma revisão antiga de <a href="%1">%2</a> de %3.',
+	'RevisionHint'				=> 'Esta é uma revisão antiga de <a href="%1">%2</a> de %3 editado por %4.',
 	'ReadAccessDenied'			=> 'Não está autorizado a ver esta página.',
 	'ReadAccessDeniedHintGuest'	=> 'Para ler esta página, deve iniciar sessão.',
 	'PageDeletedInfo'			=> 'Esta página foi eliminada.',
+	'RevisionDeletedInfo'		=> 'Esta revisão foi eliminada.',
 	'CommentDeletedInfo'		=> 'Este comentário foi eliminado.',
 
 	'LastEditedBy'				=> 'Última edição por',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Remover página',
+	'RemoveRevision'			=> 'Remover revisão',
 	'RemoveComment'				=> 'Excluir comentário',
 	'RemoveCluster'				=> 'Remover todas as páginas do cluster',
 	'RemoveDontKeep'			=> 'Não guarde uma cópia de uma página removida e comentários',
+	'RemoveDontKeepRevision'	=> 'Não guardar uma cópia da revisão removida',
 	'RemoveDontKeepComment'		=> 'Não guarde uma cópia do comentário removido',
 	'RemoveDontKeepFile'		=> 'Não guardar uma cópia do ficheiro removido',
 	'ReferrersRemoved'			=> 'Referenciadores para a página removidos.',
@@ -414,9 +417,13 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Página removida.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
+	'RevisionRemoved'			=> 'Revisão %1 removida.',
 	'RevisionsRemoved'			=> 'Revisions from page removidos.',
 	'ActionHaveNoUndo'			=> 'Esta acção não pode ser anulada.',
+
+	// restore
 	'PageRestored'				=> 'Página restaurada.',
+	'RevisionRestored'			=> 'Revisão restaurada.',
 	'LocalFilesRestored'		=> 'Arquivos locais restaurados.',
 
 	'PrintVersion'				=> 'Versão Impressora',
@@ -914,6 +921,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Nome escolhido não é válido',
 	'Bookmarks'					=> 'Favoritos',
 	'ReallyDeleteComment'		=> 'Quer mesmo apagar comentário?<br>Depois não poderá voltar atrás!',
+	'ReallyDeleteRevision'		=> 'Quer realmente APAGAR esta revisão?<br>Depois não poderá voltar atrás!',
 
 	'RegistrationClosed'		=> 'O registo não está disponível. Tente contactar o administrador.',
 	'AclAreYouSure'				=> 'Vai alterar aas permissões desta página e todas as suas subpáginas. Quer continuar?',
@@ -1292,6 +1300,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

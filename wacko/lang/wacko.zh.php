@@ -185,6 +185,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> '您沒有閱讀該頁的權限.',
 	'ReadAccessDeniedHintGuest'	=> 'To read this page, you should log in.',
 	'PageDeletedInfo'			=> '本页已被删除。',
+	'RevisionDeletedInfo'		=> 'This revision has been deleted.',
 	'CommentDeletedInfo'		=> '此评论已被删除。',
 
 	'LastEditedBy'				=> 'Last edited by',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> '刪除該頁',
+	'RemoveRevision'			=> 'Remove revision',
 	'RemoveComment'				=> '删除评论',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepRevision'	=> 'Do not save a copy of the removed revision',
 	'RemoveDontKeepComment'		=> 'Do not save a copy of the removed comment',
 	'RemoveDontKeepFile'		=> 'Do not save a copy of the removed file',
 	'ReferrersRemoved'			=> 'Referrers removed.',
@@ -414,9 +417,13 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Page removed.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
+	'RevisionRemoved'			=> 'Revision %1 removed.',
 	'RevisionsRemoved'			=> 'Revisions removed.',
 	'ActionHaveNoUndo'			=> '此动作无法恢复。',
+
+	// restore
 	'PageRestored'				=> 'Page restored.',
+	'RevisionRestored'			=> 'Revision restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
 	'PrintVersion'				=> 'Print version',
@@ -912,6 +919,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Chosen user name is invalid',
 	'Bookmarks'					=> '收藏夹',
 	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
+	'ReallyDeleteRevision'		=> 'Do you really want to DELETE this revision?<br>There is no undo for this action!',
 
 	'RegistrationClosed'		=> '不开放用户注册。 Try to contact site administrator.',
 	'AclAreYouSure'				=> 'You are going to change ACLs of this page and all of its subpages. Continue?',
@@ -1299,6 +1307,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

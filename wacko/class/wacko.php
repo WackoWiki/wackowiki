@@ -7334,6 +7334,34 @@ class Wacko
 		return true;
 	}
 
+	function remove_revision($page_id, $revision_id, $dontkeep = 0) : bool
+	{
+		if (!$page_id)
+		{
+			return false;
+		}
+
+		if ($this->db->store_deleted_pages && !$dontkeep)
+		{
+			$this->db->sql_query(
+				"UPDATE " . $this->db->table_prefix . "revision SET " .
+					"deleted	= 1 " .
+				"WHERE page_id = " . (int) $page_id . " " .
+					"AND revision_id = " . (int) $revision_id . " " .
+				"LIMIT 1");
+		}
+		else
+		{
+			$this->db->sql_query(
+				"DELETE FROM " . $this->db->table_prefix . "revision " .
+				"WHERE page_id = " . (int) $page_id . " " .
+					"AND revision_id = " . (int) $revision_id . " " .
+				"LIMIT 1");
+		}
+
+		return true;
+	}
+
 	function remove_revisions($tag, $cluster = false, $dontkeep = 0) : bool
 	{
 		if (!$tag)
@@ -7711,6 +7739,7 @@ class Wacko
 		return true;
 	}
 
+	// RESTORE
 	function restore_page($page_id)
 	{
 		if (!$page_id)
@@ -7723,6 +7752,25 @@ class Wacko
 				"deleted	= 0 " .
 			"WHERE page_id = " . (int) $page_id . " " .
 			"LIMIT 1");
+
+		return true;
+	}
+
+	function restore_revision($page_id, $revision_id)
+	{
+		if (!$page_id)
+		{
+			return false;
+		}
+
+		$this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "revision SET " .
+				"deleted	= 0 " .
+			"WHERE page_id = " . (int) $page_id . " " .
+				"AND revision_id = " . (int) $revision_id . " " .
+			"LIMIT 1");
+
+		return true;
 	}
 
 	function restore_file($file_id)
@@ -7750,6 +7798,8 @@ class Wacko
 			"UPDATE " . $this->db->table_prefix . "file SET " .
 				"deleted	= 0 " .
 			"WHERE page_id = " . (int) $page_id);
+
+		return true;
 	}
 
 	// ADDITIONAL METHODS

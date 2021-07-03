@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Seda lehte ei eksisteeri veel.',
 	'PromptCreate'				=> 'Soovid sa seda <a href="%1">luua</a>?',
-	'RevisionHint'				=> 'See on varasem redigeering <a href="%1">%2</a> %3.',
+	'RevisionHint'				=> 'See on varasem redigeering <a href="%1">%2</a> %3 edited by %4.',
 	'ReadAccessDenied'			=> 'Sul pole õigusi seda lehte lugeda.',
 	'ReadAccessDeniedHintGuest'	=> 'Selle lehe lugemiseks peate sisse logima.',
 	'PageDeletedInfo'			=> 'See leht on kustutatud.',
+	'RevisionDeletedInfo'		=> 'See muudatus on välja jäetud.',
 	'CommentDeletedInfo'		=> 'See kommentaar on kustutatud.',
 
 	'LastEditedBy'				=> 'Viimati redigeerinud',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Eemalda leht',
+	'RemoveRevision'			=> 'Remove revision',
 	'RemoveComment'				=> 'Kustuta kommentaar',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepRevision'	=> 'Do not save a copy of the removed revision',
 	'RemoveDontKeepComment'		=> 'Ärge salvestage eemaldatud kommentaari koopiat',
 	'RemoveDontKeepFile'		=> 'Ärge salvestage eemaldatud faili koopiat',
 	'ReferrersRemoved'			=> 'Lehe viited kustutatud.',
@@ -414,10 +417,14 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Leht eemaldatud.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
+	'RevisionRemoved'			=> 'Revisioon %1 eemaldatud.',
 	'RevisionsRemoved'			=> 'Revisions from page eemaldatud.',
 	'ActionHaveNoUndo'			=> 'See tegevus pole taastatav.',
-	'PageRestored'				=> 'Page restored.',
-	'LocalFilesRestored'		=> 'Local files restored.',
+
+	// restore
+	'PageRestored'				=> 'Lehekülg taastati.',
+	'RevisionRestored'			=> 'Revisioon taastatud.',
+	'LocalFilesRestored'		=> 'Kohalikud failid taastatud.',
 
 	'PrintVersion'				=> 'Prindiversioon',
 	'PrintText'					=> 'Prindi',
@@ -914,6 +921,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Valitud nimi ei ole korrektne',
 	'Bookmarks'					=> 'Kiirvalikud',
 	'ReallyDeleteComment'		=> 'Kas sa tõesti tahad KUSTUTADA kommentaari?<br>Seda ei saa siis enam taastada!',
+	'ReallyDeleteRevision'		=> 'Kas te tõesti tahate selle muudatuse KUSTUTADA?<br>Seda ei saa siis enam taastada!',
 
 	'RegistrationClosed'		=> 'Registreerimine ei ole võimalik. Proovi kontakteeruda administraatoriga.',
 	'AclAreYouSure'				=> 'Sa asud nüüd muutma nii selle lehe, kui kõigi selle lehe alamlehtede kasutaja  õiguste loendit. Kas jätkad?',
@@ -1300,6 +1308,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

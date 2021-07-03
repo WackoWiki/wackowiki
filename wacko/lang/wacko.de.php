@@ -185,6 +185,7 @@ $wacko_translation = [
 	'ReadAccessDenied'			=> 'Du bist nicht berechtigt, diese Seite zu lesen.',
 	'ReadAccessDeniedHintGuest'	=> 'Um diese Seite zu lesen, solltest du dich anmelden.',
 	'PageDeletedInfo'			=> 'Diese Seite wurde gelöscht.',
+	'RevisionDeletedInfo'		=> 'Diese Revision wurde gelöscht.',
 	'CommentDeletedInfo'		=> 'Dieser Kommentar wurde gelöscht.',
 
 	'LastEditedBy'				=> 'Zuletzt bearbeitet von',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Seite löschen',
+	'RemoveRevision'			=> 'Revision löschen',
 	'RemoveComment'				=> 'Kommentar löschen',
 	'RemoveCluster'				=> 'Lösche alle Seiten des Clusters',
 	'RemoveDontKeep'			=> 'Speichere keine Sicherungs-Kopie der entfernten Seiten und Kommentare',
+	'RemoveDontKeepRevision'	=> 'Speichere keine Sicherungs-Kopie der entfernten Revision',
 	'RemoveDontKeepComment'		=> 'Speichere keine Sicherungs-Kopie des entfernten Kommentars',
 	'RemoveDontKeepFile'		=> 'Speichere keine Sicherungs-Kopie der entfernten Datei',
 	'ReferrersRemoved'			=> 'Referenzen gelöscht.',
@@ -414,9 +417,13 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Seite gelöscht.',
 	'PageCachePurged'			=> 'Cache bereinigt.',
 	'ClusterRemoved'			=> 'Alle Seiten des Cluster gelöscht.',
+	'RevisionRemoved'			=> 'Revision %1 entfernt.',
 	'RevisionsRemoved'			=> 'Revisionen gelöscht.',
 	'ActionHaveNoUndo'			=> 'Diese Aktion kann nicht rückgängig gemacht werden.',
+
+	// restore
 	'PageRestored'				=> 'Seite wiederhergestellt.',
+	'RevisionRestored'			=> 'Revision wiederhergestellt.',
 	'LocalFilesRestored'		=> 'Angehängte Dateien wiederhergestellt.',
 
 	'PrintVersion'				=> 'Druckversion',
@@ -914,6 +921,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Benutzername ist ungültig',
 	'Bookmarks'					=> 'Lesezeichen',
 	'ReallyDeleteComment'		=> 'Willst du den Kommentar wirklich löschen?<br>Diese Aktion kann nicht rückgängig gemacht werden!',
+	'ReallyDeleteRevision'		=> 'Willst du diese Revision wirklich löschen?<br>Diese Aktion kann nicht rückgängig gemacht werden!',
 
 	'RegistrationClosed'		=> 'Registrierung ist nicht verfügbar. Kontaktiere bei Interesse den Administrator.',
 	'AclAreYouSure'				=> 'Du bist dabei die ACLs von dieser Seite und aller ihrer Unterseiten zu ändern. Fortfahren?',
@@ -1300,6 +1308,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Seite entfernt ##%1## (Nutzer %2)!!',
 	'LogRemovedCluster'			=> '!!**Cluster** ##%1## entfernt (Nutzer %2)!!',
+	'LogRemovedRevision'		=> '!!Revision ##%3## der Seite [[/%1]] entfernt (Nutzer %2)!!',
 	'LogRemovedComment'			=> '!!Kommentar von %3 auf Seite [[/%1]] entfernt (Nutzer %2)!!',
 	'LogRemovedFile'			=> '!!Datei ##%2## von Seite [[/%1]] entfernt!!',
 	'LogRemovedPoll'			=> '!!Umfrage mit ID %1 entfernt!!',

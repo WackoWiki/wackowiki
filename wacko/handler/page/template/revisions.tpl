@@ -26,21 +26,17 @@
 			<ul class="revisions">
 				[= l _ =
 					<li>
+						[= del _ =
+							[ ' nonstatic ' ]
+							<del>
+						=]
 						<span class="rev-version">[ ' version ' ]</span>
 						<input type="radio" name="a" value="[ ' value ' ]" [ ' checkedA ' ]>
 						[ '' placeholder '' ]
 						<input type="radio" name="b" value="[ ' value ' ]" [ ' checkedB ' ]>
 						[ '' placeholder '' ]&nbsp;
-						[= del _ =
-							[ ' nonstatic ' ]
-							<del>
-						=]
 						<a href="[ ' href ' ]">[ ' modified | time_formatted ' ]</a>
 						<span class="rev-size"> — ([ ' size ' ]) [ ' delta ' ]</span>
-						[= edel _ =
-							[ ' nonstatic ' ]
-							</del>
-						=]
 						[ '' placeholder '' ] [ ' _t: By ' ] [ ' user ' ] 
 						[= n _ =
 							<span class="editnote">[[ ' note ' ]]</span>
@@ -55,6 +51,10 @@
 							[= review _ =
 								<span class="review">[ ' _t: Review ' ]</span>
 							=]
+						=]
+						[= edel _ =
+							[ ' nonstatic ' ]
+							</del>
 						=]
 					</li>
 				=]

@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Такава страница не съществува.',
 	'PromptCreate'				=> 'Искате ли <a href="%1">да я съзадете</a> ?',
-	'RevisionHint'				=> 'Това е стара версия на <a href="%1">%2</a> от %3.',
+	'RevisionHint'				=> 'Това е стара версия на <a href="%1">%2</a> от %3 редактиран от %4.',
 	'ReadAccessDenied'			=> 'Вие нямате права за да четете тази страница.',
 	'ReadAccessDeniedHintGuest'	=> 'За да прочетете тази страница, трябва да влезете.',
 	'PageDeletedInfo'			=> 'Тази страница е изтрита.',
+	'RevisionDeletedInfo'		=> 'Тази редакция е заличена.',
 	'CommentDeletedInfo'		=> 'Този коментар е изтрит.',
 
 	'LastEditedBy'				=> 'Последна редакция на',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Remove page',
+	'RemoveRevision'			=> 'Remove revision',
 	'RemoveComment'				=> 'Delete comment',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
 	'RemoveDontKeep'			=> 'Do not save a copy of a removed page and comments',
+	'RemoveDontKeepRevision'	=> 'Не запазвайте копие на премахнатата редакция',
 	'RemoveDontKeepComment'		=> 'Не запазвайте копие на премахнатия коментар',
 	'RemoveDontKeepFile'		=> 'Не запазвайте копие на премахвания файл',
 	'ReferrersRemoved'			=> 'Външните препратки изтрити.',
@@ -414,10 +417,14 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Страница изтрита.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
+	'RevisionRemoved'			=> 'Ревизия %1 е премахната.',
 	'RevisionsRemoved'			=> 'Revisions from page изтрити.',
 	'ActionHaveNoUndo'			=> 'Изтриването не може да се отмени.',
-	'PageRestored'				=> 'Page restored.',
-	'LocalFilesRestored'		=> 'Local files restored.',
+
+	// restore
+	'PageRestored'				=> 'Страницата е възстановена.',
+	'RevisionRestored'			=> 'Ревизия е възстановена.',
+	'LocalFilesRestored'		=> 'Локални файлове са възстановени.',
 
 	'PrintVersion'				=> 'Версия за печат',
 	'PrintText'					=> 'Версия за печат',
@@ -913,7 +920,8 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Избраното име е неправилно',
 	'InvalidUserName'			=> 'Избраното име е неправилно',
 	'Bookmarks'					=> 'Предпочитано',
-	'ReallyDeleteComment'		=> 'Наистина  ИЗТРИВАНЕ на комментара? <br>Възстановяването след това е невъзможно.',
+	'ReallyDeleteComment'		=> 'Наистина ИЗТРИВАНЕ на комментара? <br>Възстановяването след това е невъзможно.',
+	'ReallyDeleteRevision'		=> 'Наистина ли искате да ИЗТРИЕТЕ тази ревизия?<br>Възстановяването след това е невъзможно.',
 
 	'RegistrationClosed'		=> 'Регистрацията на тази страница е невъзможна. Свържете се с администратора.',
 	'AclAreYouSure'				=> 'Ще се сменят правата за тази страница и всички подстраници. Продължение?',
@@ -1300,6 +1308,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

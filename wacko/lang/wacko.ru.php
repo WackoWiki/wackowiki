@@ -182,10 +182,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Такой страницы не существует.',
 	'PromptCreate'				=> 'Хотите <a href="%1">создать</a>?',
-	'RevisionHint'				=> 'Это старая версия <a href="%1">%2</a> за %3.',
+	'RevisionHint'				=> 'Это старая версия <a href="%1">%2</a> за %3 под редакцией %4.',
 	'ReadAccessDenied'			=> 'У вас нет прав на чтение этой страницы.',
 	'ReadAccessDeniedHintGuest'	=> 'Чтобы прочитать эту страницу, вы должны войти в систему.',
 	'PageDeletedInfo'			=> 'Эта страница удалена.',
+	'RevisionDeletedInfo'		=> 'Эта редакция была удалена.',
 	'CommentDeletedInfo'		=> 'Этот комментарий был удален.',
 
 	'LastEditedBy'				=> 'Последний раз редактировалось',
@@ -398,9 +399,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Удалить страницу',
+	'RemoveRevision'			=> 'Удалить ревизию',
 	'RemoveComment'				=> 'Удалить комментарий',
 	'RemoveCluster'				=> 'Удалить все страницы кластера',
 	'RemoveDontKeep'			=> 'Не сохранять копию удаленной страницы и комментариев',
+	'RemoveDontKeepRevision'	=> 'Не сохраняйте копию удаленной ревизии',
 	'RemoveDontKeepComment'		=> 'Не сохранять копию удаленного комментария',
 	'RemoveDontKeepFile'		=> 'Не сохранять копию удаленного файла',
 	'ReferrersRemoved'			=> 'Внешние ссылки на страницу удалены.',
@@ -415,9 +418,13 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Страница удалена.',
 	'PageCachePurged'			=> 'Кэш очищен.',
 	'ClusterRemoved'			=> 'Все страницы кластера удалены.',
+	'RevisionRemoved'			=> 'Ревизия %1 удалена.',
 	'RevisionsRemoved'			=> 'Версии страницы удалены.',
 	'ActionHaveNoUndo'			=> 'Удаление нельзя отменить.',
+
+	// restore
 	'PageRestored'				=> 'Страница восстановлена.',
+	'RevisionRestored'			=> 'Ревизия восстановлена.',
 	'LocalFilesRestored'		=> 'Локальные файлы восстановлены.',
 
 	'PrintVersion'				=> 'Версия для печати',
@@ -916,6 +923,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Выбранное вами имя страницы неверно',
 	'Bookmarks'					=> 'Личное меню',
 	'ReallyDeleteComment'		=> 'Вы действительно хотите УДАЛИТЬ комментарий? <br>Восстановить его потом не удастся.',
+	'ReallyDeleteRevision'		=> 'Вы действительно хотите УДАЛИТЬ эту ревизию?<br>Восстановить его потом не удастся.',
 
 	'RegistrationClosed'		=> 'Регистрация на данном сайте невозможна. Попробуйте связаться с администратором.',
 	'AclAreYouSure'				=> 'Вы собираетесь сменить права этой страницы и всех подстраниц. Продолжить?',
@@ -1302,6 +1310,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Удалена страница ##%1## (автор %2)!!',
 	'LogRemovedCluster'			=> '!!Удален **кластер** ##%1## (автор %2)!!',
+	'LogRemovedRevision'		=> '!!Удалена ревизия ##%3## страницы [[/%1]] (автор %2)!!',
 	'LogRemovedComment'			=> '!!Удален комментарий от %3 на странице [[/%1]] (автор %2)!!',
 	'LogRemovedFile'			=> '!!Удален файл ##%2## на странице [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Удален опрос ID %1!!',

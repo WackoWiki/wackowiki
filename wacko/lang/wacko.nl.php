@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Deze pagina bestaat nog niet.',
 	'PromptCreate'				=> 'Wil je deze <a href="%1">aanmaken</a>?',
-	'RevisionHint'				=> 'Dit is een oude revisie van <a href="%1">%2</a> from %3.',
+	'RevisionHint'				=> 'Dit is een oude revisie van <a href="%1">%2</a> from %3 bewerkt door %4.',
 	'ReadAccessDenied'			=> 'U heeft geen leesrechten op deze pagina.',
 	'ReadAccessDeniedHintGuest'	=> 'Om deze pagina te lezen, moet je inloggen.',
 	'PageDeletedInfo'			=> 'Deze pagina is verwijderd.',
+	'RevisionDeletedInfo'		=> 'Deze revisie is verwijderd.',
 	'CommentDeletedInfo'		=> 'Deze opmerking is verwijderd.',
 
 	'LastEditedBy'				=> 'Laatst bewerkt door',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Pagina verwijderen',
+	'RemoveRevision'			=> 'Revisie verwijderen',
 	'RemoveComment'				=> 'Commentaar verwijderen',
 	'RemoveCluster'				=> 'Alle pagina\'s van het cluster verwijderen',
 	'RemoveDontKeep'			=> 'Sla geen kopie van een verwijderde pagina en commentaar op',
+	'RemoveDontKeepRevision'	=> 'Do not save a copy of the removed revision',
 	'RemoveDontKeepComment'		=> 'Bewaar geen kopie van het verwijderde commentaar',
 	'RemoveDontKeepFile'		=> 'Sla geen kopie van het verwijderde bestand op',
 	'ReferrersRemoved'			=> 'Verwijzingen naar pagina zijn verwijderd.',
@@ -414,9 +417,13 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Pagina is verwijderd.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'Alle pagina\'s van het cluster verwijderd.',
+	'RevisionRemoved'			=> 'Revisie %1 verwijderd.',
 	'RevisionsRemoved'			=> 'Revisies van pagina zijn verwijderd.',
 	'ActionHaveNoUndo'			=> 'Deze handeling kan niet ongedaan worden gemaakt.',
+
+	// restore
 	'PageRestored'				=> 'Pagina hersteld.',
+	'RevisionRestored'			=> 'Revisie hersteld.',
 	'LocalFilesRestored'		=> 'Lokale bestanden hersteld.',
 
 	'PrintVersion'				=> 'Print versie',
@@ -914,6 +921,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'De naam die u gekozen heeft is niet geldig',
 	'Bookmarks'					=> 'Bladwijzers',
 	'ReallyDeleteComment'		=> 'Weet u zeker dat u deze reactie wilt verwijderen?<br>Deze handeling kan niet ongedaan gemaakt worden!',
+	'ReallyDeleteRevision'		=> 'Weet u zeker dat u deze revisie wilt verwijderen?<br>Deze handeling kan niet ongedaan gemaakt worden!',
 
 	'RegistrationClosed'		=> 'Registratie is hier niet mogelijk. Neem contact op met de beheerder.',
 	'AclAreYouSure'				=> 'U gaat de rechten (ACL\'s) voor deze pagina en alle subpagina\'s veranderen. Wilt u doorgaan?',
@@ -1300,6 +1308,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

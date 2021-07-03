@@ -14,8 +14,13 @@ if (!$this->page)
 	$this->http->redirect($this->href());
 }
 
-$title		= $this->page['comment_on_id'] ? 'RemoveComment' : 'RemovePage';
-$tpl->page	= $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, '', '');
+$revision_id	= (int) ($_GET['revision_id'] ?? ($_POST['revision_id'] ?? null));
+$title			= $this->page['comment_on_id']
+					? 'RemoveComment'
+					: ($revision_id
+						? 'RemoveRevision'
+						: 'RemovePage');
+$tpl->page		= $this->_t($title) . ' ' . $this->compose_link_to_page($this->tag, '', '');
 
 // check user permissions to delete
 if ($this->is_admin()
@@ -28,16 +33,41 @@ if ($this->is_admin()
 	)
 )
 {
+	$action			= (string) ($_POST['_action'] ?? null);
+	$dontkeep		= (isset($_POST['dontkeep']) && $this->is_admin());
+	$cluster		= (int) ($_POST['cluster'] ?? null);
+
+	if ($revision_id)
+	{
+		$revision		= $this->load_page('', $this->page['page_id'], $revision_id);
+	}
+
 	if ($this->page['comment_on_id'])
 	{
 		$comment_on_id	= $this->page['comment_on_id'];
 		$comment_on		= $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
 	}
 
-	if (isset($_POST['_action']) && $_POST['_action'] === 'remove_page')
+	if ($action === 'remove_revision')
 	{
-		$dontkeep = (isset($_POST['dontkeep']) && $this->is_admin());
+		// remove SINGLE revision
+		if ($this->remove_revision($this->page['page_id'], $revision_id, $dontkeep))
+		{
+			$tpl->noundo		= $dontkeep;
+			$tpl->r_tag			= $this->tag;
+			$tpl->r_l_notice	= Ut::perc_replace($this->_t('RevisionRemoved'), '<code>' . $revision['version_id'] . '</code>');
+			$tpl->r_return		= $this->compose_link_to_page('revisions', '', '« ' . $this->_t('CancelReturnButton'), '', false);
 
+			// log event
+			$this->log(1, Ut::perc_replace(
+				$this->_t('LogRemovedRevision', SYSTEM_LANG),
+				$this->tag,
+				$revision['user_name'],
+				$revision['version_id']));
+		}
+	}
+	else if ($action === 'remove_page')
+	{
 		$tpl->r_tag = $this->tag;
 
 		// remove SINGLE page or comment
@@ -123,7 +153,7 @@ if ($this->is_admin()
 		}
 
 		// remove ENTIRE cluster
-		if ($this->is_admin() && isset($_POST['cluster']))
+		if ($this->is_admin() && $cluster)
 		{
 			$this->remove_referrers				($this->tag, true);
 			$this->remove_links					($this->tag, true);
@@ -180,12 +210,16 @@ if ($this->is_admin()
 		// log event
 		if (!$comment_on_id)
 		{
-			$mode = (isset($_POST['cluster'])? 'LogRemovedCluster' : 'LogRemovedPage');
-			$this->log(1, Ut::perc_replace($this->_t($mode, SYSTEM_LANG), $this->tag, $this->page['user_name']));
+			$mode = ($cluster? 'LogRemovedCluster' : 'LogRemovedPage');
+			$this->log(1, Ut::perc_replace(
+				$this->_t($mode, SYSTEM_LANG),
+				$this->tag,
+				$this->page['user_name']));
 		}
 		else
 		{
-			$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
+			$this->log(1, Ut::perc_replace(
+				$this->_t('LogRemovedComment', SYSTEM_LANG),
 				($comment_on['tag'] . ' ' . $comment_on['title']),
 				$this->page['user_name'],
 				$this->get_time_formatted($this->page['created'])));
@@ -206,55 +240,90 @@ if ($this->is_admin()
 	{
 		$tpl->enter('f_');
 
-		// show warning
-		if ($comment_on_id)
+		if ($revision_id)
 		{
-			$message = $this->msg_is_comment_on(
-				$comment_on['tag'],
-				$comment_on['title'],
-				$this->page['user_name'],
-				$this->page['modified']);
+			$tpl->enter('revision_');
 
-			$tpl->preview_meta	= $this->show_message($message, 'comment-info', false);
-			$tpl->preview_text	= $this->format(mb_substr($this->page['body'], 0, 500), 'cleanwacko');
-			$tpl->preview_title	= $this->page['title'];
+			$message = Ut::perc_replace($this->_t('RevisionHint'),
+				$this->href(),
+				$this->tag,
+				$this->get_time_formatted($revision['modified']),
+				$this->user_link($revision['user_name'], true, false));
 
-			$message = $this->_t('ReallyDeleteComment');
+			$tpl->meta			= $this->show_message($message, 'revision-info', false);
+			$tpl->warning		= $this->show_message($this->_t('ReallyDeleteRevision'), 'warning', false);
+			$tpl->revisionid	= $revision_id;
+
+			if ($this->is_admin())
+			{
+				if ($this->db->store_deleted_pages)
+				{
+					$tpl->dontkeep = true;
+				}
+			}
+
+			$tpl->leave();	// revision_
 		}
 		else
 		{
-			$message = $this->_t('ReallyDelete');
-		}
+			$tpl->enter('page_');
 
-		$tpl->warning	= $this->show_message($message, 'warning', false);
-		$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
-
-		// any sub-pages
-		if (!$this->page['comment_on_id'])
-		{
-			$tpl->tree_subpages	= $this->action('tree', ['depth' => 3]);
-		}
-
-		// admin privileged removal options
-		if ($this->is_admin())
-		{
-			if (!$comment_on_id)
+			// show warning
+			if ($comment_on_id)
 			{
-				// remove cluster
-				$tpl->admin_p = true;
+				$message = $this->msg_is_comment_on(
+					$comment_on['tag'],
+					$comment_on['title'],
+					$this->page['user_name'],
+					$this->page['modified']);
 
-				if ($this->db->store_deleted_pages)
-				{
-					$tpl->admin_p_dontkeep = true;
-				}
+				$tpl->preview_meta	= $this->show_message($message, 'comment-info', false);
+				$tpl->preview_text	= $this->format(mb_substr($this->page['body'], 0, 500), 'cleanwacko');
+				$tpl->preview_title	= $this->page['title'];
+
+				$message = $this->_t('ReallyDeleteComment');
 			}
 			else
 			{
-				if ($this->db->store_deleted_pages)
-				{
-					$tpl->admin_c_dontkeep = true;
-				}
+				$message = $this->_t('ReallyDelete');
 			}
+
+			$tpl->warning	= $this->show_message($message, 'warning', false);
+			$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
+
+			// any sub-pages
+			if (!$this->page['comment_on_id'])
+			{
+				$tpl->tree_subpages	= $this->action('tree', ['depth' => 3]);
+			}
+
+			// admin privileged removal options
+			if ($this->is_admin())
+			{
+				$tpl->enter('admin_');
+
+				if (!$comment_on_id)
+				{
+					// remove cluster
+					$tpl->p = true;
+
+					if ($this->db->store_deleted_pages)
+					{
+						$tpl->p_dontkeep = true;
+					}
+				}
+				else
+				{
+					if ($this->db->store_deleted_pages)
+					{
+						$tpl->c_dontkeep = true;
+					}
+				}
+
+				$tpl->leave();	// admin_
+			}
+
+			$tpl->leave();	// page_
 		}
 
 		$tpl->leave();	// f_

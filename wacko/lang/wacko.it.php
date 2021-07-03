@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Questa pagina non esiste al momento.',
 	'PromptCreate'				=> 'Vuoi forse <a href="%1">crearla</a>?',
-	'RevisionHint'				=> 'Questa è una vecchia versione di <a href="%1">%2</a> da %3.',
+	'RevisionHint'				=> 'Questa è una vecchia versione di <a href="%1">%2</a> da %3 editato da %4.',
 	'ReadAccessDenied'			=> 'Non ti è consentito vedere questa pagina.',
 	'ReadAccessDeniedHintGuest'	=> 'Per leggere questa pagina, è necessario effettuare il login.',
 	'PageDeletedInfo'			=> 'Questa pagina è stata cancellata.',
+	'RevisionDeletedInfo'		=> 'Questa revisione è stata cancellata.',
 	'CommentDeletedInfo'		=> 'Questo commento è stato cancellato.',
 
 	'LastEditedBy'				=> 'Ultima modifica di',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Rimuovi pagina',
+	'RemoveRevision'			=> 'Rimuovi revisione',
 	'RemoveComment'				=> 'Elimina commento',
 	'RemoveCluster'				=> 'Rimuovi tutte le pagine del cluster',
 	'RemoveDontKeep'			=> 'Non salvare una copia di una pagina e di commenti rimossi',
+	'RemoveDontKeepRevision'	=> 'Non salvare una copia della revisione rimossa',
 	'RemoveDontKeepComment'		=> 'Non salvare una copia del commento rimosso',
 	'RemoveDontKeepFile'		=> 'Non salvare una copia del file rimosso',
 	'ReferrersRemoved'			=> ' Riferimenti rimossi.',
@@ -414,10 +417,14 @@ $wacko_translation = [
 	'PageRemoved'				=> ' Pagina rimossa.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
+	'RevisionRemoved'			=> 'Revisione %1 rimossa.',
 	'RevisionsRemoved'			=> 'Revisions from page rimossi.',
 	'ActionHaveNoUndo'			=> 'Questa azione non può essere annullata.',
-	'PageRestored'				=> 'Page restored.',
-	'LocalFilesRestored'		=> 'Local files restored.',
+
+	// restore
+	'PageRestored'				=> 'Pagina ripristinata.',
+	'RevisionRestored'			=> 'Revisione ripristinata.',
+	'LocalFilesRestored'		=> 'File locali ripristinati.',
 
 	'PrintVersion'				=> 'Versione di stampa',
 	'PrintText'					=> 'Stampa',
@@ -913,7 +920,8 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Scelto il nome non è valido',
 	'InvalidUserName'			=> 'Scelto il nome non è valido',
 	'Bookmarks'					=> 'Segnalibri',
-	'ReallyDeleteComment'		=> 'Vuoi davvero CANCELLARE il commento? <br>Non c\'è nessun annullamento per questa azione!',
+	'ReallyDeleteComment'		=> 'Vuoi davvero CANCELLARE il commento?<br>Non c\'è nessun annullamento per questa azione!',
+	'ReallyDeleteRevision'		=> 'Vuoi davvero CANCELLARE questa revisione?<br>Non c\'è nessun annullamento per questa azione!',
 
 	'RegistrationClosed'		=> 'La registrazione non è disponibile qui. Prova a contattare l\'amministratore del sito.',
 	'AclAreYouSure'				=> 'Cambierete le ACL di questa pagina e di tutte le sue sottopagine. Continuare?',
@@ -1299,6 +1307,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!Removed page ##%1## (user %2)!!',
 	'LogRemovedCluster'			=> '!!Removed **cluster** ##%1## (user %2)!!',
+	'LogRemovedRevision'		=> '!!Removed revision ##%3## of page [[/%1]] (user %2)!!',
 	'LogRemovedComment'			=> '!!Removed comment from %3 on page [[/%1]] (user %2)!!',
 	'LogRemovedFile'			=> '!!Removed file ##%2## from page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Removed poll with ID %1!!',

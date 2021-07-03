@@ -181,10 +181,11 @@ $wacko_translation = [
 	'InvalidNamespace'			=> 'Invalid namespace given.',
 	'DoesNotExists'				=> 'Cette page n’existe pas encore.',
 	'PromptCreate'				=> 'Peut-être voulez-vous la <a href="%1">créer</a> ?',
-	'RevisionHint'				=> 'Ceci est une ancienne version de <a href="%1">%2</a> de %3.',
+	'RevisionHint'				=> 'Ceci est une ancienne version de <a href="%1">%2</a> de %3 édité par %4.',
 	'ReadAccessDenied'			=> 'Vous n’êtes pas autorisé(e) à  voir cette page.',
 	'ReadAccessDeniedHintGuest'	=> 'Pour lire cette page, vous devez vous connecter.',
 	'PageDeletedInfo'			=> 'Cette page a été supprimée".',
+	'RevisionDeletedInfo'		=> 'Cette révision a été supprimée.',
 	'CommentDeletedInfo'		=> 'Ce commentaire a été supprimé.',
 
 	'LastEditedBy'				=> 'Dernière édition par',
@@ -397,9 +398,11 @@ $wacko_translation = [
 
 	// remove
 	'RemovePage'				=> 'Supprimer la page',
+	'RemoveRevision'			=> 'Supprimer la révision',
 	'RemoveComment'				=> 'supprimer le commentaire',
 	'RemoveCluster'				=> 'Supprimer toutes les pages du groupe',
 	'RemoveDontKeep'			=> 'Ne pas garder une copie d’une page supprimée et des commentaires',
+	'RemoveDontKeepRevision'	=> 'Ne pas conserver une copie de la révision supprimée',
 	'RemoveDontKeepComment'		=> 'Ne pas conserver une copie du commentaire supprimé',
 	'RemoveDontKeepFile'		=> 'Ne pas conserver une copie du fichier supprimé',
 	'ReferrersRemoved'			=> 'Référents enlevés.',
@@ -414,9 +417,13 @@ $wacko_translation = [
 	'PageRemoved'				=> 'Page effacée.',
 	'PageCachePurged'			=> 'Cache purgé.',
 	'ClusterRemoved'			=> 'Toutes le pages du groupe ont été effacées.',
+	'RevisionRemoved'			=> 'Révision %1 supprimée.',
 	'RevisionsRemoved'			=> 'Anciennes versions de la page effacées.',
 	'ActionHaveNoUndo'			=> 'Cette action ne peut être annulée.',
+
+	// restore
 	'PageRestored'				=> 'Page restaurée.',
+	'RevisionRestored'			=> 'Révision restaurée.',
 	'LocalFilesRestored'		=> 'Fichiers locaux restaurés.',
 
 	'PrintVersion'				=> 'Version pour impression',
@@ -914,6 +921,7 @@ $wacko_translation = [
 	'InvalidUserName'			=> 'Le nom choisi est invalide',
 	'Bookmarks'					=> 'Signets',
 	'ReallyDeleteComment'		=> 'Voulez-vous vraiment effacer ce commentaire ?<br>Cet effacement est définitif !',
+	'ReallyDeleteRevision'		=> 'Voulez-vous vraiment EFFACER cette révision ?<br>Cet effacement est définitif !',
 
 	'RegistrationClosed'		=> 'Enregistrement non autorisé ici. Contactez l’administrateur du site.',
 	'AclAreYouSure'				=> 'Vous allez changer les droits relatifs à cette page et à toutes ses pages subordonnées ou sous-pages. Continuer ?',
@@ -1300,6 +1308,7 @@ $wacko_translation = [
 	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
 	'LogRemovedPage'			=> '!!page ##%1##  supprimée (utilisateur %2)!!',
 	'LogRemovedCluster'			=> '!!**Groupe** supprimé ##%1## (utilisateur %2)!!',
+	'LogRemovedRevision'		=> '!!Révision ##%3## supprimée de la page [[/%1]] (utilisateur %2)!!',
 	'LogRemovedComment'			=> '!!Commentaire effacé de %3 sur la page [[/%1]] (utilisateur %2)!!',
 	'LogRemovedFile'			=> '!!Fichier ##%2## enlevé de la page [[/%1]]!!',
 	'LogRemovedPoll'			=> '!!Sondage avec l’ID %1 enlevé!!',
