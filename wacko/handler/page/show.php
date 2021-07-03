@@ -110,10 +110,13 @@ if ($this->has_access('read'))
 					$tpl->enter('tools_');
 					$tpl->message			= $message;
 
-					// re-edit form
-					$tpl->reedit_href		= $this->href('edit', '', ['revision_id' => (int) $this->page['revision_id']]);
-					$tpl->reedit_modified	= $latest['modified'];
-					$tpl->reedit_pageid		= $this->page['page_id'];
+					if(!$this->page['deleted'])
+					{
+						// re-edit form
+						$tpl->reedit_href		= $this->href('edit', '', ['revision_id' => (int) $this->page['revision_id']]);
+						$tpl->reedit_modified	= $latest['modified'];
+						$tpl->reedit_pageid		= $this->page['page_id'];
+					}
 
 					// delete revision form
 					if (($this->is_admin()

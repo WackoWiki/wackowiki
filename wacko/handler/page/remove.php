@@ -56,7 +56,7 @@ if ($this->is_admin()
 			$tpl->noundo		= $dontkeep;
 			$tpl->r_tag			= $this->tag;
 			$tpl->r_l_notice	= Ut::perc_replace($this->_t('RevisionRemoved'), '<code>' . $revision['version_id'] . '</code>');
-			$tpl->r_return		= $this->compose_link_to_page('revisions', '', '« ' . $this->_t('CancelReturnButton'), '', false);
+			$tpl->r_return		= $this->compose_link_to_page('', 'revisions', '« ' . $this->_t('CancelReturnButton'), '', false);
 
 			// log event
 			$this->log(1, Ut::perc_replace(
