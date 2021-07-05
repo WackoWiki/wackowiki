@@ -83,6 +83,10 @@ input.captcha {
 /* hides dummy field for bots and autocomplete */
 input.verify { display: none; }
 
+fieldset {
+	padding: 10px;
+}
+
 body {
 	font-family: Verdana, sans-serif;
 	font-size: 14px;
@@ -90,6 +94,36 @@ body {
 	color: #000000;
 	background-color: #fcfcfc;
 	margin: 0;
+}
+
+img,
+svg,
+video {
+	border-width: 0;
+	vertical-align: middle;
+	max-width: 100%;
+	height: auto;
+}
+
+audio {
+	min-width: 100%;
+	max-width: 100%;
+}
+
+kbd {
+	background-color: #f7f7f7;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
+	color: #333;
+	display: inline-block;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 11px;
+	line-height: 1.4;
+	margin: 0 0.1em;
+	padding: 0.1em 0.6em;
+	text-shadow: 0 1px 0 #fff;
+	white-space: nowrap;
 }
 
 .visuallyhidden {
@@ -165,36 +199,6 @@ a.self-link:hover {
 	content: "\00b6"; 
 } */
 
-img,
-svg,
-video {
-	border-width: 0;
-	vertical-align: middle;
-	max-width: 100%;
-	height: auto;
-}
-
-audio {
-	min-width: 100%;
-	max-width: 100%;
-}
-
-kbd {
-	background-color: #f7f7f7;
-	border: 1px solid #ccc;
-	border-radius: 3px;
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
-	color: #333;
-	display: inline-block;
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 11px;
-	line-height: 1.4;
-	margin: 0 0.1em;
-	padding: 0.1em 0.6em;
-	text-shadow: 0 1px 0 #fff;
-	white-space: nowrap;
-}
-
 .clearfix:after,
 #mainwrapper:after {
 	content: "";
@@ -205,7 +209,6 @@ kbd {
 form input.submitinput {
 	color: #000;
 }
-
 
 #header-site,
 #header-site h1,
@@ -339,7 +342,6 @@ form input.submitinput {
 #debug pre {
 	font-size: 11px;
 	color: #888888;
-	/* font-family:"Lucida Console","Courier New",monospace; */
 }
 
 .sqllog {
@@ -458,6 +460,10 @@ article,
 #page-edit form textarea {
 	height: 400px;
 	min-height: 5em;
+}
+
+#edit_page {
+	clear: both;
 }
 
 .textarea-page,
@@ -729,10 +735,6 @@ ol#comments ul ul ul {
 	color: #990000;
 }
 
-fieldset {
-	padding: 10px;
-}
-
 .missingpage {
 	border-bottom: 1px dashed orange;
 }
@@ -925,11 +927,12 @@ td.file- {
 }
 
 .preview {
-	margin: .8em 2px 2px;
+	margin: .8em 2px 20px;
 	padding: 10px;
 	border: red 2px solid;
 	display: table;
 	width: 98%;
+	float: left;
 }
 
 p.preview {
@@ -942,7 +945,8 @@ p.preview {
 
 .preview p span {
 	background: #FFF;
-	padding: 0 1px;
+	padding: 0 3px;
+	margin-left: -3px;
 }
 
 .layout-box {
