@@ -463,7 +463,7 @@ article,
 }
 
 #edit_page {
-	clear: both;
+	clear: left;
 }
 
 .textarea-page,
