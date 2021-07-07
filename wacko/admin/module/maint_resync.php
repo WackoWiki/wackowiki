@@ -240,7 +240,8 @@ function admin_maint_resync(&$engine, &$module)
 				"b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml " .
 			"FROM " . $prefix . "page a " .
 				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
-			"WHERE a.owner_id <> " . (int) $engine->db->system_user_id . " " .
+			"WHERE 1=1 " .
+				#"AND a.owner_id <> " . (int) $engine->db->system_user_id . " " . // XXX: special legacy case
 			"ORDER BY a.tag " .
 			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
