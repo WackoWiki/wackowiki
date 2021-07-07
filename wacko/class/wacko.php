@@ -30,6 +30,7 @@ class Wacko
 	var $category_cache			= [];
 	var $file_cache				= [];
 	var $page_id_cache			= [];
+	var $page_tag_cache			= [];
 	var $context				= [];		// page context, used for correct processing of inclusions
 	var $current_context		= 0;		// current context level
 	var $header_count			= 0;
@@ -125,13 +126,25 @@ class Wacko
 		}
 		else
 		{
-			$page = $this->db->load_single(
-				"SELECT tag " .
-				"FROM " . $this->db->table_prefix . "page " .
-				"WHERE page_id = " . (int) $page_id . " " .
-				"LIMIT 1", true);
+			if (!isset($this->page_tag_cache[$page_id]))
+			{
+				$page = $this->db->load_single(
+					"SELECT tag " .
+					"FROM " . $this->db->table_prefix . "page " .
+					"WHERE page_id = " . (int) $page_id . " " .
+					"LIMIT 1", true);
 
-			return $page['tag'] ?? null;
+				$tag = $page['tag'] ?? null;
+
+				// cache it
+				$this->page_tag_cache[$page_id] = $page['tag'];
+			}
+			else
+			{
+				$tag = $this->page_tag_cache[$page_id];
+			}
+
+			return $tag;
 		}
 	}
 
@@ -8692,7 +8705,7 @@ class Wacko
 				$factor = 1024;
 			}
 
-			$count	= count($norm) -1;
+			$count	= 8; // count($norm) -1;
 			$x		= 0;
 
 			while ($size >= $factor && $x < $count)
@@ -8721,7 +8734,7 @@ class Wacko
 
 	function binary_multiples_factor ($size, $prefix = true) : int
 	{
-		$count	= 9; #count($norm) -1;
+		$count	= 9; // count($norm) -1;
 		$x		= 0;
 
 		if ($prefix === true)
