@@ -578,9 +578,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 		}
 
 		$this->_element['innerGroup']		= $attribs['innerGroup'];
-		$this->_element['delimGroup']		= isset($attribs['delimGroup'])
-												? $attribs['delimGroup']
-												: $attribs['innerGroup'];
+		$this->_element['delimGroup']		= $attribs['delimGroup'] ?? $attribs['innerGroup'];
 		$this->_element['start']			= $this->_makeRE(@$attribs['start'], $this->_element['case']);
 		$this->_element['end']				= $this->_makeRE(@$attribs['end'], $this->_element['case']);
 		$this->_element['contained']		= @$attribs['contained'] == 'yes';

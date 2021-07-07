@@ -560,7 +560,7 @@ class GPG
 		}
 		else foreach ($status as $index => $code)
 		{
-			if ($status[$index][0] == 'IMPORTED')
+			if ($code[0] == 'IMPORTED')
 			{
 				$i++;
 
@@ -581,13 +581,13 @@ class GPG
 					unset($output[$i--]);
 				}
 			}
-			else if ($status[$index][0] == 'IMPORT_RES')
+			else if ($code[0] == 'IMPORT_RES')
 			{
 				// check how many keys was imported to determine
 				// function's resulting output
-				if		((int) $status[$index][1] === 0)	$result = false;
-				else if	((int) $status[$index][1] === 1)	$result = true;
-				else if	((int) $status[$index][1]  >  1)	$result = $output;
+				if		((int) $code[1] === 0)	$result = false;
+				else if	((int) $code[1] === 1)	$result = true;
+				else if	((int) $code[1]  >  1)	$result = $output;
 			}
 		}
 
@@ -877,4 +877,3 @@ class GPG
 		}
 	}
 }
-
