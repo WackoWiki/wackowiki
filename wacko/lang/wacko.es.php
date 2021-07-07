@@ -457,7 +457,8 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'comentario mas reciente por',
 	'NoRecentlyCommented'		=> 'No hay páginas comentadas recientemente.',
 	'NoDeletedPages'			=> 'No se encontraron páginas eliminados.',
-	'NoDeletedFiles'			=> 'No deleted files found.',
+	'NoDeletedRevisions'		=> 'No se encontraron revisiones eliminadas.',
+	'NoDeletedFiles'			=> 'No se encontraron archivos eliminados. ',
 	'CommentsDisabled'			=> 'Los comentarios no están disponibles.',
 
 	'SearchResults'				=> 'Resultados de la búsqueda para ',
@@ -498,7 +499,7 @@ $wacko_translation = [
 	'RealName'					=> 'Nombre real',
 	'MenuItemsShown'			=> 'Menu items shown',
 	'RecordsPerPage'			=> 'Registros por página',
-	'DoShowComments'				=> 'Mostrar comentarios por defecto',
+	'DoShowComments'			=> 'Mostrar comentarios por defecto',
 	'DoubleclickEditing'		=> 'Editar haciendo doble-click en la página',
 	'UpdateSettingsButton'		=> 'Guardar preferencias',
 

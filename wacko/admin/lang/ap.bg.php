@@ -880,8 +880,8 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'Не създавайте галерия на изображения по-малки от размера тук.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages and files.
-									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
+	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
+									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
 	// Filter module

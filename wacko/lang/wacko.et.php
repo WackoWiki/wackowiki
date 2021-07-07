@@ -456,6 +456,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'viimati kommenteeris',
 	'NoRecentlyCommented'		=> 'Viimati kommenteeritud lehti pole.',
 	'NoDeletedPages'			=> 'Kustutatud lehti ei leitud.',
+	'NoDeletedRevisions'		=> 'Kustutatud parandusi ei leitud.',
 	'NoDeletedFiles'			=> 'Kustutatud faile ei leitud.',
 	'CommentsDisabled'			=> 'Kommentaarid pole saadaval.',
 

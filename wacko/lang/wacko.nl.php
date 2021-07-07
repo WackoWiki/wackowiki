@@ -456,6 +456,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'laatste reactie door',
 	'NoRecentlyCommented'		=> 'Geen pagina\'s met recente wijzigingen.',
 	'NoDeletedPages'			=> 'Geen verwijderde pagina\'s gevonden.',
+	'NoDeletedRevisions'		=> 'Geen verwijderde revisies gevonden.',
 	'NoDeletedFiles'			=> 'Geen verwijderde bestanden gevonden.',
 	'CommentsDisabled'			=> 'Opmerkingen zijn niet beschikbaar.',
 

@@ -456,6 +456,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'latest comment by',
 	'NoRecentlyCommented'		=> 'Nincs nemrégiben kommentelt oldal.',
 	'NoDeletedPages'			=> 'Nem törölt oldalak talált.',
+	'NoDeletedRevisions'		=> 'No deleted revisions found.',
 	'NoDeletedFiles'			=> 'Nem található törölt fájl.',
 	'CommentsDisabled'			=> 'Megjegyzések nem állnak rendelkezésre.',
 

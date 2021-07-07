@@ -456,6 +456,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'Dernier commentaire par',
 	'NoRecentlyCommented'		=> 'Aucune page commentée récemment.',
 	'NoDeletedPages'			=> 'Aucune page effacée n’a été trouvée.',
+	'NoDeletedRevisions'		=> 'Aucune révision supprimée trouvée.',
 	'NoDeletedFiles'			=> 'Aucun fichier supprimé n’a été trouvé.',
 	'CommentsDisabled'			=> 'Les commentaires sont désactivés.',
 

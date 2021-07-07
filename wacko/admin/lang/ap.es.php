@@ -877,8 +877,8 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'No crear vista en miniatura para imágenes más pequeñas que esto.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'Lista de páginas y archivos eliminados.
-									Finalmente elimine o restaure las páginas o archivos de la base de datos haciendo clic en el enlace <em>Remove</em>
+	'DeletedObjectsInfo'		=> 'Lista de páginas, revisiones y archivos eliminados.
+									Finalmente elimine o restaure las páginas, revisiones o archivos de la base de datos haciendo clic en el enlace <em>Remove</em>
 									or <em>Restore</em> en la fila correspondiente. (¡Tenga cuidado, no se solicita confirmación de eliminación!)',
 
 	// Filter module

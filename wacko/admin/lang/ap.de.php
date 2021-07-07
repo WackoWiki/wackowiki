@@ -890,8 +890,8 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'Erstellt keine Vorschaubilder bei Bildern, die kleiner sind als dieser Wert.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten und Dateien.
-									Um die Seiten und Dateien endgültig aus der Datenbank zu löschen oder wiederherzustellen klicke in der entsprechenden Zeile auf <em>Entfernen</em> oder <em>Wiederherstellen</em>.
+	'DeletedObjectsInfo'		=> 'Liste der entfernten Seiten, Revisionen und Dateien.
+									Um die Seiten, Revisionen und Dateien endgültig aus der Datenbank zu löschen oder wiederherzustellen klicke in der entsprechenden Zeile auf <em>Entfernen</em> oder <em>Wiederherstellen</em>.
 									(Achtung, es ist keine Löschbestätigung erforderlich!)',
 
 	// Filter module

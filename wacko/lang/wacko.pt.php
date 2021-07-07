@@ -456,6 +456,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'último comentário por',
 	'NoRecentlyCommented'		=> 'Nenhuma página comentada recentemente.',
 	'NoDeletedPages'			=> 'Nenhuma página excluída encontrada.',
+	'NoDeletedRevisions'		=> 'Não foram encontradas revisões apagadas.',
 	'NoDeletedFiles'			=> 'Nenhum arquivo excluído foi encontrado.',
 	'CommentsDisabled'			=> 'Comentários não estão disponíveis.',
 

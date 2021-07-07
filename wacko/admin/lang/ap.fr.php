@@ -880,8 +880,8 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'Si la taille des images est inférieure à cette valeur, ces dernières ne seront pas miniaturisées.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'Liste des pages et fichiers supprimés.
-									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
+	'DeletedObjectsInfo'		=> 'Liste des pages, révisions et fichiers supprimés.
+									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
 	// Filter module

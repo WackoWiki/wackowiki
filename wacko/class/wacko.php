@@ -1574,6 +1574,35 @@ class Wacko
 		return [$deleted, $pagination];
 	}
 
+	function load_deleted_revisions($limit = 50, $cache = true) : array
+	{
+		$deleted	= [];
+		$pagination	= [];
+
+		$count_deleted = $this->db->load_single(
+			"SELECT COUNT(revision_id) AS n " .
+			"FROM " . $this->db->table_prefix . "revision " .
+			"WHERE deleted = 1 LIMIT 1"
+			, $cache);
+
+		if ($count_deleted['n'])
+		{
+			$pagination = $this->pagination($count_deleted['n'], $limit);
+
+			$deleted = $this->db->load_all(
+				"SELECT r.revision_id, r.page_id, r.version_id, r.owner_id, r.user_id, r.tag, r.created, r.modified, r.edit_note,
+						r.minor_edit, r.latest, r.handler, r.comment_on_id, r.page_lang, r.title, r.keywords,
+						r.description, u.user_name " .
+				"FROM " . $this->db->table_prefix . "revision r " .
+					"LEFT JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
+				"WHERE r.deleted = 1 " .
+				"ORDER BY r.modified DESC, r.tag ASC " .
+				$pagination['limit'], $cache);
+		}
+
+		return [$deleted, $pagination];
+	}
+
 	function load_categories($object_id = 0, $type_id = OBJECT_PAGE, $cache = false) : array
 	{
 		if (isset($this->category_cache[$object_id][$type_id]))

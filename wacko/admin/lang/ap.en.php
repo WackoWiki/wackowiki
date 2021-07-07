@@ -884,8 +884,8 @@ $ap_translation = [
 	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
 
 	// Deleted module
-	'DeletedObjectsInfo'		=> 'List of removed pages and files.
-									Finally remove or restore the pages or files from the database by clicking on the link <em>Remove</em>
+	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
+									Finally remove or restore the pages, revisions or files from the database by clicking on the link <em>Remove</em>
 									or <em>Restore</em> in the corresponding row. (Be careful, no delete confirmation is requested!)',
 
 	// Filter module

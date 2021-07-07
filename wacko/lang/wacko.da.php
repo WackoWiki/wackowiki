@@ -456,6 +456,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'seneste kommentar af ',
 	'NoRecentlyCommented'		=> 'Ingen sider med nye kommentarer.',
 	'NoDeletedPages'			=> 'No deleted pages found.',
+	'NoDeletedRevisions'		=> 'Ingen slettede revisioner fundet.',
 	'NoDeletedFiles'			=> 'No deleted files found.',
 	'CommentsDisabled'			=> 'Kommentarer er ikke tilgængelige.',
 

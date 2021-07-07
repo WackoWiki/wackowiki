@@ -456,6 +456,7 @@ $wacko_translation = [
 	'LatestCommentBy'			=> 'τελευταία σχόλια από',
 	'NoRecentlyCommented'		=> 'Δεν υπάρχουν πρόσφατες σελίδες με σχόλια',
 	'NoDeletedPages'			=> 'Δεν βρέθηκαν διαγραμμένες σελίδες.',
+	'NoDeletedRevisions'		=> 'No deleted revisions found.',
 	'NoDeletedFiles'			=> 'Δεν βρέθηκαν διαγραμμένα αρχεία.',
 	'CommentsDisabled'			=> 'Comments are not available.',
 
