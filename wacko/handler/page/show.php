@@ -248,7 +248,7 @@ if ($this->has_access('read'))
 		}
 
 		// parse page body
-		$data = $this->format($this->page['body_r'], 'post_wacko', ['stripnotypo' => true]);
+		$data = $this->format($this->page['body_r'], 'post_wacko', ['strip_notypo' => true]);
 		$data = $this->numerate_toc($data); //  numerate toc if needed
 
 		// display page title (action & theme wacko.all options)

@@ -143,7 +143,7 @@ if ($this->has_access('read'))
 					$comment['body_r'] = $this->compile_body($comment['body'], $comment['page_id'], false, true);
 				}
 
-				$tpl->comment	= $this->format($comment['body_r'], 'post_wacko', ['stripnotypo' => true]);
+				$tpl->comment	= $this->format($comment['body_r'], 'post_wacko', ['strip_notypo' => true]);
 				$tpl->owner		= $this->user_link($comment['owner_name']);
 				$tpl->created	= $comment['created'];
 
@@ -212,7 +212,7 @@ if ($this->has_access('read'))
 			{
 				$preview = $this->format($preview, 'pre_wacko');
 				$preview = $this->format($preview, 'wacko');
-				$preview = $this->format($preview, 'post_wacko');
+				$preview = $this->format($preview, 'post_wacko', ['strip_notypo' => true, 'strip_ignore' => true]);
 
 				$tpl->p_title		= $title ?? '';
 				$tpl->p_preview		= $preview;

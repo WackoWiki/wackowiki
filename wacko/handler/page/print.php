@@ -34,7 +34,7 @@ $data = $this->format($this->page['body'], 'wacko');
 $data = str_replace(['<ignore>', '</ignore>'], '', $data);
 
 // display page
-$data		= $this->format($data, 'post_wacko', ['stripnotypo' => true]);
+$data		= $this->format($data, 'post_wacko', ['strip_notypo' => true]);
 $tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
 
 // display comments
