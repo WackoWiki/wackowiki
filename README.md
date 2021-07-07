@@ -1,7 +1,7 @@
 # WackoWiki
 
 WackoWiki is a light and easy to install multilingual Wiki-engine. 
-Supports WYTIWYG-editing, page rights (ACLs), design themes (skins), file upload, email notification and much more. Compatible with PHP 7.2 / 8.0 and MariaDB / MySQL.
+Supports WYTIWYG-editing, page rights (ACLs), design themes (skins), file upload, email notification and much more. Compatible with PHP 7.3 - 8.0 and MariaDB / MySQL.
 
 ## Instructions and help
 

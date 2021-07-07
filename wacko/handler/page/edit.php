@@ -120,8 +120,7 @@ if ($this->has_access('read')
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])
 			{
-				$message = $this->_t('OverwriteAlert');
-				$this->set_message($message , 'error');
+				$this->set_message($this->_t('OverwriteAlert'), 'error');
 				$error = true;
 			}
 
@@ -136,8 +135,7 @@ if ($this->has_access('read')
 			// check for edit note
 			if (($this->db->edit_summary == 2) && $_POST['edit_note'] == '' && $this->page['comment_on_id'] == 0)
 			{
-				$message = $this->_t('EditNoteMissing');
-				$this->set_message($message , 'error');
+				$this->set_message($this->_t('EditNoteMissing'), 'error');
 				$error = true;
 			}
 
@@ -162,8 +160,7 @@ if ($this->has_access('read')
 			// You're not allowed to have empty comments as they would be kinda pointless.
 			if (!$body && $this->page['comment_on_id'] != 0)
 			{
-				$message = $this->_t('EmptyComment');
-				$this->set_message($message , 'error');
+				$this->set_message($this->_t('EmptyComment'), 'error');
 				$error = true;
 			}
 
