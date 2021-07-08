@@ -71,6 +71,7 @@ const LINK_EXTERNAL					= 2;
 
 const OBJECT_PAGE					= 1;
 const OBJECT_FILE					= 2;
+const OBJECT_REVISION				= 3;
 
 const NBSP							= ' ';					// \u{00A0} No-Break Space (NBSP)
 

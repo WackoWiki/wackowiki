@@ -28,15 +28,16 @@ function admin_content_deleted(&$engine, &$module)
 	<br>
 <?php
 
-$type = (int) ($_GET['type'] ?? OBJECT_PAGE);
+$type			= (int)		($_GET['type'] ?? OBJECT_PAGE);
+$action			= (string)	($_GET['action'] ?? null);
+$page_id		= (int)		($_GET['page_id'] ?? null);
+$revision_id	= (int)		($_GET['revision_id'] ?? null);
+$file_id		= (int)		($_GET['file_id'] ?? null);
 
-if ($type == OBJECT_PAGE)
+if ($type == OBJECT_PAGE && $page_id)
 {
-	// remove specific page, revisions and attached files
-	if (isset($_GET['remove']))
+	if ($action == 'delete')
 	{
-		$page_id = (int) $_GET['remove'];
-
 		$engine->delete_pages([$page_id]);
 		$engine->delete_acls([$page_id], true);
 		// page_id -> tag -> page_id (really)
@@ -44,28 +45,31 @@ if ($type == OBJECT_PAGE)
 		$engine->remove_revisions($tag, false, true);
 		$engine->remove_files_perpage($tag, false, true);
 	}
-
-	// restore a specific page
-	if (isset($_GET['restore']))
+	else if ($action == 'restore')
 	{
-		$page_id = (int) $_GET['restore'];
 		$engine->restore_page($page_id);
 		$engine->restore_files_perpage($page_id);
 	}
 }
-else if ($type == OBJECT_FILE)
+else if ($type == OBJECT_REVISION && $revision_id)
 {
-	if (isset($_GET['remove']))
+	if ($action == 'delete')
 	{
-		$file_id = (int) $_GET['remove'];
-
+		$engine->remove_revision($page_id, $revision_id, true);
+	}
+	else if ($action == 'restore')
+	{
+		$engine->restore_revision($page_id, $revision_id);
+	}
+}
+else if ($type == OBJECT_FILE && $file_id)
+{
+	if ($action == 'delete')
+	{
 		$engine->remove_file($file_id, true);
 	}
-
-	// restore specific file
-	if (isset($_GET['restore']))
+	else if ($action == 'restore')
 	{
-		$file_id = (int) $_GET['restore'];
 		$engine->restore_file($file_id);
 	}
 }
@@ -81,6 +85,9 @@ else if ($type == OBJECT_FILE)
 		($type == OBJECT_PAGE
 			? '<span class="active">' . $engine->_t('UsersPages') . '</span>'
 			: '<a href="' . $engine->href('', '', ['type' => OBJECT_PAGE]) . '">' . $engine->_t('UsersPages') . '</a>' ) .
+		($type == OBJECT_REVISION
+			? ' | <span class="active">' . $engine->_t('UsersRevisions') . '</span>'
+			: ' | <a href="' . $engine->href('', '', ['type' => OBJECT_REVISION]) . '">' . $engine->_t('UsersRevisions') . '</a>' ) .
 		($type == OBJECT_FILE
 			? ' | <span class="active">' . $engine->_t('Files') . '</span>'
 			: ' | <a href="' . $engine->href('', '', ['type' => OBJECT_FILE]) . '">' . $engine->_t('Files') . '</a>') .
@@ -90,6 +97,10 @@ else if ($type == OBJECT_FILE)
 	if ($type == OBJECT_FILE)
 	{
 		[$files, $pagination] = $engine->load_deleted_files(50, false);
+	}
+	else if  ($type == OBJECT_REVISION)
+	{
+		[$revisions, $pagination] = $engine->load_deleted_revisions(50, false);
 	}
 	else
 	{
@@ -126,10 +137,50 @@ else if ($type == OBJECT_FILE)
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . $engine->href('', '', ['remove' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
-						# ' [ <a href="' . $engine->href('', '', ['archive' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
-						' [ <a href="' . $engine->href('', '', ['restore' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
+						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
+						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
+						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
 						$engine->compose_link_to_page($page['tag'], 'revisions', '', $page['title']) .
+					'</td>' .
+				"</tr>\n";
+		}
+
+		echo '</table>';
+
+		$engine->print_pagination($pagination);
+	}
+	else if (!empty($revisions))
+	{
+		$engine->print_pagination($pagination);
+
+		echo '<table>';
+
+		$curday	= '';
+
+		foreach ($revisions as $revision)
+		{
+			// day header
+			[$day, $time] = explode(' ', $revision['modified']);
+
+			if ($day != $curday)
+			{
+				if ($curday)
+				{
+					echo "\n";
+				}
+
+				echo '<tr><td colspan="2"><br><strong>' . date($engine->db->date_format, strtotime($day)) . ":</strong></td></tr>\n";
+				$curday = $day;
+			}
+
+			// print entry
+			echo '<tr>' .
+					'<td class="lined">' .
+						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
+						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
+						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
+						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
+						$engine->compose_link_to_page($revision['tag'], '', '', $revision['title'], '', ['revision_id' => $revision['revision_id']]) . ' (' . $engine->_t('Version') . ' <strong>' . $revision['version_id'] . '</strong>)' .
 					'</td>' .
 				"</tr>\n";
 		}
@@ -166,9 +217,9 @@ else if ($type == OBJECT_FILE)
 			echo '<tr>' .
 					'<td class="lined">' .
 						'<small>' . date($engine->db->time_format_seconds, strtotime($time)) . ' - ' .
-						' [ <a href="' . $engine->href('', '', ['remove' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
-						# ' [ <a href="' . $engine->href('', '', ['archive' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
-						' [ <a href="' . $engine->href('', '', ['restore' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
+						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
+						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
+						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
 						'<span title="' . $file['file_description'] . '">' . $file['file_name'] . '</span>' .
 						#$engine->shorten_string($file['file_name']))
 					'</td>' .
@@ -184,6 +235,10 @@ else if ($type == OBJECT_FILE)
 		if ($type == OBJECT_PAGE)
 		{
 			echo '<br><p>' . $engine->_t('NoDeletedPages') . '</p>';
+		}
+		if ($type == OBJECT_REVISION)
+		{
+			echo '<br><p>' . $engine->_t('NoDeletedRevisions') . '</p>';
 		}
 		else if ($type == OBJECT_FILE)
 		{
