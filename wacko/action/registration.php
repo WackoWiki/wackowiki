@@ -80,7 +80,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			$error .= Ut::perc_replace($this->_t('UserReservedWord'), $result);
 		}
 		// if user name already exists
-		else if ($this->user_name_exists($user_name) === true)
+		else if ($this->user_name_exists($user_name))
 		{
 			$error .= $this->_t('RegistrationUserNameOwned');
 

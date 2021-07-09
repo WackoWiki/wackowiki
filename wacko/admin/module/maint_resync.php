@@ -30,7 +30,9 @@ function admin_maint_resync(&$engine, &$module)
 <?php
 	if (isset($_REQUEST['start']))
 	{
-		if ($_REQUEST['action'] == 'userstats')
+		$action = $_REQUEST['action'] ?? null;
+
+		if ($action == 'userstats')
 		{
 			// reset stats
 			$sql[] = "UPDATE " . $engine->db->user_table . " SET
@@ -97,7 +99,7 @@ function admin_maint_resync(&$engine, &$module)
 			$engine->log(1, $engine->_t('LogUserStatsSynched', SYSTEM_LANG));
 			$engine->show_message($engine->_t('UserStatsSynched'), 'success');
 		}
-		else if ($_REQUEST['action'] == 'pagestats')
+		else if ($action == 'pagestats')
 		{
 			// reset stats
 			$sql[] = "UPDATE " . $prefix . "page SET
@@ -142,7 +144,7 @@ function admin_maint_resync(&$engine, &$module)
 			$message = $engine->_t('PageStatsSynched');
 			$engine->show_message($message, 'success');
 		}
-		else if ($_REQUEST['action'] == 'rssfeeds')
+		else if ($action == 'rssfeeds')
 		{
 			$engine->module	= null;
 
@@ -167,21 +169,21 @@ function admin_maint_resync(&$engine, &$module)
 			$engine->log(1, $engine->_t('LogFeedsUpdated', SYSTEM_LANG));
 			$engine->show_message($engine->_t('FeedsUpdated'), 'success');
 		}
-		else if ($_REQUEST['action'] == 'xml_sitemap')
+		else if ($action == 'xml_sitemap')
 		{
 			// update sitemap
 			$engine->write_sitemap(true, false);
 
 			$engine->show_message($engine->_t('SiteMapCreated'), 'success');
 		}
-		else if ($_REQUEST['action'] == 'reparse_body')
+		else if ($action == 'reparse_body')
 		{
 			// purge body_r field to enforce page re-compiling
 			$engine->db->sql_query("UPDATE " . $prefix . "page SET body_r = ''");
 
 			$engine->show_message($engine->_t('PreparsedBodyPurged'), 'success');
 		}
-		else if ($_REQUEST['action'] == 'wikilinks')
+		else if ($action == 'wikilinks')
 		{
 			/* TODO:	1) dies if a rendered page throws a fatal error (e.g. action) -> fix broken page, its the last page shown in the list
 						2) Browser will stop after 20 redirects with: ERR_TOO_MANY_REDIRECTS: There were too many redirects. -> load recent url again after error,
@@ -232,7 +234,7 @@ function admin_maint_resync(&$engine, &$module)
 				}
 			}
 
-			// do not allow automatic redirection by action redirect
+			// do not allow automatic redirection by action {{redirect}}
 			$engine->set_user_setting('dont_redirect', 1, 0);
 
 			if ($pages = $engine->db->load_all(
@@ -240,8 +242,6 @@ function admin_maint_resync(&$engine, &$module)
 				"b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml " .
 			"FROM " . $prefix . "page a " .
 				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
-			"WHERE 1=1 " .
-				#"AND a.owner_id <> " . (int) $engine->db->system_user_id . " " . // XXX: special legacy case
 			"ORDER BY a.tag " .
 			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
@@ -318,7 +318,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('usersupdate');
 ?>
 		<input type="hidden" name="action" value="userstats">
-		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
+		<button type="submit" name="start" id="submit_userstats"><?php echo $engine->_t('Synchronize');?></button>
 <?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('PageStats');?></h2>
@@ -327,7 +327,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('pageupdate');
 ?>
 		<input type="hidden" name="action" value="pagestats">
-		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
+		<button type="submit" name="start" id="submit_pagestats"><?php echo $engine->_t('Synchronize');?></button>
 <?php		echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('Feeds');?></h2>
@@ -336,7 +336,7 @@ function admin_maint_resync(&$engine, &$module)
 	echo $engine->form_open('feedupdate');
 ?>
 		<input type="hidden" name="action" value="rssfeeds">
-		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
+		<button type="submit" name="start" id="submit_rssfeeds"><?php echo $engine->_t('Synchronize');?></button>
 <?php		echo $engine->form_close();?>
 
 <?php
@@ -352,7 +352,7 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_open('sitemap_update');
 ?>
 		<input type="hidden" name="action" value="xml_sitemap">
-		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
+		<button type="submit" name="start" id="submit_sitemap"><?php echo $engine->_t('Synchronize');?></button>
 <?php		echo $engine->form_close();
 }?>
 
@@ -363,7 +363,7 @@ if ($engine->db->xml_sitemap)
 	echo $engine->form_open('reparse_body');
 ?>
 		<input type="hidden" name="action" value="reparse_body">
-		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
+		<button type="submit" name="start" id="submit_reparse"><?php echo $engine->_t('Synchronize');?></button>
 <?php	echo $engine->form_close();?>
 
 	<h2><?php echo $engine->_t('WikiLinksResync');?></h2>
@@ -387,8 +387,7 @@ if ($engine->db->xml_sitemap)
 		<label for="page_limit"><small><?php echo $engine->_t('RecompilePageLimit');?></small></label><br><br>
 		<input type="checkbox" id="recompile_page" name="recompile_page" value="1">
 		<label for="recompile_page"><small><?php echo $engine->_t('RecompilePage');?></small></label><br><br>
-		<button type="submit" name="start" id="submit"><?php echo $engine->_t('Synchronize');?></button>
+		<button type="submit" name="start" id="submit_wikilinks"><?php echo $engine->_t('Synchronize');?></button>
 <?php
 	echo $engine->form_close();
 }
-

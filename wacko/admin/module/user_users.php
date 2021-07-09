@@ -155,12 +155,12 @@ function admin_user_users(&$engine, &$module)
 			$error .= $engine->_t('InvalidUserName') . " ";
 		}
 		// check if reserved word
-		else if (($result = $engine->validate_reserved_words($user_name)))
+		else if ($result = $engine->validate_reserved_words($user_name))
 		{
 			$error .= Ut::perc_replace($engine->_t('UserReservedWord'), $result);
 		}
 		// if user name already exists
-		else if ($engine->user_name_exists($user_name) === true)
+		else if ($engine->user_name_exists($user_name))
 		{
 			$error .= $engine->_t('RegistrationUserNameOwned');
 
@@ -334,7 +334,7 @@ function admin_user_users(&$engine, &$module)
 			$error = $engine->_t('ModerateNoItemChosen'); // no user selected
 			$engine->show_message($error, 'error');
 		}
-			//(int) $_POST['user_id']
+
 		if ($error != true || !empty($user_id))
 		{
 			if (!empty($user_id))
@@ -432,7 +432,6 @@ function admin_user_users(&$engine, &$module)
 						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? '')) . '" size="20" maxlength="100">
 					</td>
 				</tr>' . */
-
 				'<tr>
 					<th class="label">
 						<label for="password">' . $engine->_t('RegistrationPassword') . '</label>' .
@@ -450,7 +449,6 @@ function admin_user_users(&$engine, &$module)
 						<p>' . $engine->show_password_complexity() . '</p>
 					</td>
 				</tr>' .
-
 				'<tr>
 					<th class="label">
 						<label for="email">' . $engine->_t('Email') . '</label>
@@ -658,7 +656,6 @@ function admin_user_users(&$engine, &$module)
 					WHERE user_id = " . (int) $user_id . "
 					LIMIT 1"))
 				{
-
 					$users	.= '<code>' . Ut::html($user['user_name']) . '</code>';
 				}
 
@@ -1038,4 +1035,3 @@ function admin_user_users(&$engine, &$module)
 		echo $engine->form_close();
 	}
 }
-
