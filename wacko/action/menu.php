@@ -32,10 +32,8 @@ $load_user_menu = function ($user_id, $lang = '')
 		"ORDER BY m.menu_position", false);
 };
 
-if (!isset($system))
-{
-	$system = 0;
-}
+
+$system			??= 0;
 
 $message		= '';
 $user			= [];

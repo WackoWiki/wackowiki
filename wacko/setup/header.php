@@ -29,7 +29,8 @@ $separator =
 global $lang;
 require_once 'setup/lang/installer.' . $config['language'] . '.php';
 
-if (!isset($lang[$install_action])) $lang[$install_action] = '';
+// set default install action
+$lang[$install_action] ??= '';
 
 // HTTP header with right Charset settings
 header('Content-Type: text/html; charset=' . $lang['Charset']);

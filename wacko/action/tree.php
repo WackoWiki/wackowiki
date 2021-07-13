@@ -180,7 +180,7 @@ if ($pages = $this->db->load_all(
 
 				// check page level
 				$cur_level	= mb_substr_count($page['tag'], '/');
-				if (!isset($prev_level)) $prev_level	= 0;
+				$prev_level	??= 0;
 
 				// indents (sublevels)
 				if ($i > 0)

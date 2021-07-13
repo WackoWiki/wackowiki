@@ -180,10 +180,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 			$access = true;
 		}
 
-		if (!isset($printed[$page['tag']]))
-		{
-			$printed[$page['tag']] = '';
-		}
+		$printed[$page['tag']] ??= '';
 
 		if ($access && $printed[$page['tag']] != $page['date'] && ($count++ < $max))
 		{

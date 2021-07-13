@@ -127,15 +127,9 @@ if (isset($_POST['submit_poll']))
 	// in case no errors found submit poll or changes to the db
 	if (!$error)
 	{
-		if (!isset($user_id))
-		{
-			$user_id	= $this->get_user_id();
-		}
-
-		if (!isset($edit_id))
-		{
-			$edit_id	= $polls_obj->get_last_poll_id() + 1;
-		}
+		// set defaults
+		$user_id	??= $this->get_user_id();
+		$edit_id	??= $polls_obj->get_last_poll_id() + 1;
 
 		// remove moderated poll
 		if ($moderation === true)

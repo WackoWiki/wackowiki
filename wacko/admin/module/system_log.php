@@ -116,9 +116,9 @@ function admin_system_log(&$engine, &$module)
 	$limit = 100;
 
 	// set default level
-	if (!isset($level)) $level = $engine->db->log_default_show;
-	if (!isset($where)) $where = '';
-	if (!isset($order)) $order = '';
+	$level	??= $engine->db->log_default_show;
+	$where	??= '';
+	$order	??= '';
 
 	// collecting data
 	$count = $engine->db->load_single(

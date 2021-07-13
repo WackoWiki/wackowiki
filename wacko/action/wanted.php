@@ -79,7 +79,7 @@ else
 	$cluster	= $tag;
 	$user		= $this->get_user();
 
-	if (!isset($max))		$max = null;
+	$max		??= null;
 
 	if ([$pages, $pagination] = $load_wanted($tag, $max))
 	{

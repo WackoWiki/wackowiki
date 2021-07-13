@@ -50,7 +50,7 @@ $config['multilanguage']		??= 0;
 $config['rewrite_mode']			??= 0;
 $config['wacko_version']		??= '';
 
-if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
+if (!isset($config['noreply_email']) || empty($config['noreply_email']))
 {
 	$config['noreply_email'] = $config['admin_email'];
 }

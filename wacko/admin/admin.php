@@ -114,10 +114,8 @@ if (@$_POST['_action'] === 'ap_login')
 	{
 		$engine->log_user_delay();
 
-		if (!isset($engine->sess->ap_failed_login_count))
-		{
-			$engine->sess->ap_failed_login_count = 0;
-		}
+		// set default login count
+		$engine->sess->ap_failed_login_count ??= 0;
 
 		$engine->config->set('ap_failed_login_count', $engine->db->ap_failed_login_count + 1);
 		$engine->log(1, $engine->_t('LogAdminLoginFailed', SYSTEM_LANG));
