@@ -2361,10 +2361,8 @@ class Wacko
 
 	function add_user_page($user_name, $user_lang = null, $mute = true)
 	{
-		if (!isset($user_lang))
-		{
-			$user_lang = $this->db->language;
-		}
+
+		$user_lang			??= $this->db->language;
 
 		$tag				= $this->db->users_page . '/' . $user_name;
 		// add your user page template here
@@ -3938,10 +3936,7 @@ class Wacko
 			{
 				$handler	= $match[2];
 
-				if (!isset($_ptag))
-				{
-					$_ptag = ''; // XXX: ???
-				}
+				$_ptag		??= ''; // XXX: ???
 
 				$ptag		= $match[1];
 				$unwtag		= '/' . $unwtag . '/';
@@ -4268,12 +4263,8 @@ class Wacko
 		// numerated wiki-links, initialize property as an array to make it work
 		if (is_array($this->numerate_links))
 		{
-			$refnum = &$this->numerate_links[$url];
-
-			if (!isset($refnum))
-			{
-				$refnum = '[link' . count($this->numerate_links) . ']';
-			}
+			$refnum		= &$this->numerate_links[$url];
+			$refnum		??= '[link' . count($this->numerate_links) . ']';
 
 			return '<sup class="refnum">' . $refnum . '</sup>';
 		}

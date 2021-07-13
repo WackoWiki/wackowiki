@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 // If user has rights to edit page, show Edit link
 // {{edit [page="yourPage"] [text="your text"]}}
 
-if (!isset($page))		$page = '';
-if (!isset($text))		$text = '';
+$page	??= '';
+$text	??= '';
 
 $href = $this->href('edit', $page);
 

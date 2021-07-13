@@ -21,12 +21,12 @@ if (!defined('IN_WACKO'))
  toc is generated in paragrafica format
 */
 
-if (!isset($page))		$page		= '';
-if (!isset($nomark))	$nomark		= 0;
-if (!isset($numerate))	$numerate	= 0;
-if (!isset($from))		$from		= '';
-if (!isset($to))		$to			= '';
-if (!isset($legend))	$legend		= '';
+$page		??= '';
+$nomark		??= 0;
+$numerate	??= 0;
+$from		??= '';
+$to			??= '';
+$legend		??= '';
 
 if ($page)
 {

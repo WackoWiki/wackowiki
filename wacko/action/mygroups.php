@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // action/mygroups.php
 
-if (!isset($nomark)) $nomark = 0;
+$nomark		??= 0;
 
 $my_groups = function ($user_id, $groups)
 {

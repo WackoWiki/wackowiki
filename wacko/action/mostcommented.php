@@ -20,13 +20,13 @@ if (!defined('IN_WACKO'))
  }}
  */
 
-if (!isset($page))			$page = '';
-if (!isset($nomark))		$nomark = 0;
-if (!isset($lang))			$lang = '';
-if (!isset($max))			$max = null;
-if (!isset($legend))		$legend = '';
-if (!isset($title))			$title = 0;
-if (!isset($dontrecurse))	$dontrecurse = false;
+$page			??= '';
+$nomark			??= 0;
+$lang			??= '';
+$max			??= null;
+$legend			??= '';
+$title			??= 0;
+$dontrecurse	??= false;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;

@@ -12,7 +12,8 @@ if (!defined('IN_WACKO'))
 //								useful with "moderation='true'" .
 //								Default: null
 
-if (!isset($moderation)) $moderation = '';
+$moderation	??= '';
+
 $stop_mod	= '';
 $error		= '';
 $message	= '';

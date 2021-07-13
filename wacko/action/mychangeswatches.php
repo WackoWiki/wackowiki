@@ -7,8 +7,8 @@ if (!defined('IN_WACKO'))
 
 // TODO: add user and change notes
 
-if (!isset($profile))	$profile = ''; // user action
-if (!isset($max))		$max = null;
+$profile	??= ''; // user action
+$max		??= null;
 
 if ($user_id = $this->get_user_id())
 {

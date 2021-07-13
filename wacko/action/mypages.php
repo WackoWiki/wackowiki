@@ -6,11 +6,12 @@ if (!defined('IN_WACKO'))
 }
 
 // action/mypages.php
-if (!isset($title))		$title		= 0;
-if (!isset($bydate))	$bydate		= '';
-if (!isset($profile))	$profile	= ''; // user action
-if (!isset($max))		$max		= null;
-if (!isset($bychange))	$bychange	= '';
+$title		??= 0;
+$bydate		??= '';
+$profile	??= ''; // user action
+$max		??= null;
+$bychange	??= '';
+
 $current_char	= '';
 $title			= (int) $title;
 

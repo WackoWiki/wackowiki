@@ -13,8 +13,8 @@ $text = preg_replace_callback('/(<!--link:begin-->(\S+?)([^\n]*?)==([^\n]*?)<!--
 
 [&$parser, 'postcallback'], $text);
 
-if (!isset($options['strip_ignore'])) $options['strip_ignore'] = false;
-if (!isset($options['strip_notypo'])) $options['strip_notypo'] = false;
+$options['strip_ignore'] ??= false;
+$options['strip_notypo'] ??= false;
 
 
 if ($options['strip_notypo'])

@@ -29,11 +29,11 @@ print page and revisions authors.
 	https://en.wikipedia.org/wiki/Creative_Commons_license
 */
 
-if (!isset($add))			$add		= '';
-if (!isset($add_only))		$add_only	= 0;
-if (!isset($license))		$license	= '';
-if (!isset($license_id))	$license_id	= null;
-if (!isset($cluster))		$cluster	= 0;
+$add		??= '';
+$add_only	??= 0;
+$license	??= '';
+$license_id	??= null;
+$cluster	??= 0;
 
 $copysign	= '©';
 

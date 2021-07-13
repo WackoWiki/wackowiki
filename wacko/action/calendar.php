@@ -23,13 +23,13 @@ if (!defined('IN_WACKO'))
 	.calendar-hl		(highlight)
 */
 
-if (!isset($year))		$year		= '';
-if (!isset($month))		$month		= '';
-if (!isset($days))		$days		= '';
-if (!isset($daywidth))	$daywidth	= '';
-if (!isset($range))		$range		= 1;
-if (!isset($firstday))	$firstday	= 1;
-if (!isset($highlight))	$highlight	= 'today';
+$year		??= '';
+$month		??= '';
+$days		??= '';
+$daywidth	??= '';
+$range		??= 1;
+$firstday	??= 1;
+$highlight	??= 'today';
 
 $time			= time();
 $current_year	= date('Y', $time);

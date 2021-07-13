@@ -12,9 +12,9 @@
 
 $align_class = '';
 
-if (!isset($options['wrapper_align']))	$options['wrapper_align']	= 'left';
-if (!isset($options['clear']))			$options['clear']			= false;
-if (!isset($options['col']))			$options['col']				= false;
+$options['wrapper_align']	??= 'left';
+$options['clear']			??= false;
+$options['col']				??= false;
 
 if (in_array($options['wrapper_align'], ['center', 'justify', 'left', 'right']))
 {

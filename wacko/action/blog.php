@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
-if (!isset($page))		$page = '/' . $this->tag;
+$page ??= '/' . $this->tag;
 
 $tag			= $this->unwrap_link($page);
 $error			= '';
@@ -15,15 +15,18 @@ $feed_tag		= '';
 
 if (!empty($tag))
 {
-	if (!isset($max))	$max = 10;
+
+
 	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';
 		$category_id	= (int) $_GET['category_id'];
 	}
-	if (!isset($mode))	$mode = 'latest';
-	if (!isset($title))	$title = 1;
-	if (!isset($noxml))	$noxml = 1;
+
+	$max	??= 10;
+	$mode	??= 'latest';
+	$title	??= 1;
+	$noxml	??= 1;
 
 	$pages				= [];
 	$p_mode				= [];

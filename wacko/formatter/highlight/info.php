@@ -15,10 +15,10 @@ $style_class	= 'info';
 $type_class		= '';
 $types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quote', 'success', 'warning'];
 
-if (!isset($options['type']))		$options['type']	= 'default';
-if (!isset($options['title']))		$options['title']	= '';
-if (!isset($options['icon']))		$options['icon']	= 1;
-if (!isset($options['style']))		$options['style']	= false;
+$options['type']	??= 'default';
+$options['title']	??= '';
+$options['icon']	??= 1;
+$options['style']	??= false;
 
 if (in_array($options['type'], $types))
 {

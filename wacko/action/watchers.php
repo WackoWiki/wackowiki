@@ -5,8 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($page))		$page = '';
-if (!isset($nomark))	$nomark = false;
+$page		??= '';
+$nomark		??= false;
 
 if ($page)
 {

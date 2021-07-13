@@ -17,14 +17,14 @@ if (!defined('IN_WACKO'))
  }}
  */
 
-if (!isset($page))		$page	= '';
-if (!isset($title))		$title	= 0;
-if (!isset($letter))	$letter	= '';
-if (!isset($system))	$system	= 0;
-if (!isset($lang))		$lang	= '';
-if (!isset($max))		$max	= null;
+$page		??= '';
+$title		??= 0;
+$letter		??= '';
+$system		??= 0;
+$lang		??= '';
+$max		??= null;
 
-$system == true
+$system
 	? $user_id		= $this->db->system_user_id
 	: $user_id		= null;
 

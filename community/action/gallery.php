@@ -58,17 +58,17 @@ $thumb_prefix	= 'tn_';
 $imgclass		= '';
 $width			= $this->db->img_max_thumb_width; // default: 150
 
-if (!isset($page))		$page		= '';
-if (!isset($title))		$nomark		= 1;
-if (!isset($target))	$target		= 0;
-if (!isset($table))		$table		= 1;
-if (!isset($caption))	$caption	= 1;
-if (!isset($nomark))	$nomark		= 0;
+$page		??= '';
+$nomark		??= 1;
+$target		??= 0;
+$table		??= 1;
+$caption	??= 1;
+$nomark		??= 0;
 
-if (!isset($order))		$order		= '';
-if (!isset($global))	$global		= 0;
-if (!isset($owner))		$owner		= '';
-if (!isset($max))		$max		= '';
+$order		??= '';
+$global		??= 0;
+$owner		??= '';
+$max		??= '';
 
 if ($max)
 {

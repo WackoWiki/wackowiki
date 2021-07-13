@@ -9,15 +9,16 @@ if (!defined('IN_WACKO'))
 
 if (!empty($this->db->news_cluster))
 {
-	if (!isset($max))	$max = 10;
 	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';
 		$category_id	= (int) $_GET['category_id'];
 	}
-	if (!isset($mode))	$mode = 'latest';
-	if (!isset($title))	$title = 1;
-	if (!isset($noxml))	$noxml = 0;
+
+	$max	??= 10;
+	$mode	??= 'latest';
+	$title	??= 1;
+	$noxml	??= 0;
 
 	$pages				= [];
 	$p_mode				= [];

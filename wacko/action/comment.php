@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 // enables you to click comments inside from wikipages
 //{{comment [page="CommentThisPage"] [text="your text"]}}
 
-if (!isset($page))		$page	= '';
-if (!isset($text))		$text	= '';
+$page	??= '';
+$text	??= '';
 
 if (!$page) {$page = '';}
 

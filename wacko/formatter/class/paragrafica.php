@@ -309,8 +309,8 @@ class Paragrafica
 	// for further TOC creation routines
 	function add_toc_entry($matches)
 	{
-		if (!isset($matches[6])) $matches[6] = '';
-		if (!isset($matches[8])) $matches[8] = '';
+		$matches[6] ??= '';
+		$matches[8] ??= '';
 
 		// included page
 		if ((isset($matches[7])) && $matches[7] != '')

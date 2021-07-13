@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 //				  considered subforums, so topics under these cluster subpages
 //				  will not be displayed. tags must be absolute
 
-if (!isset($pages))		$pages = '';
+$pages		??= '';
 
 // ensure that we're executing inside the forum cluster
 if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)

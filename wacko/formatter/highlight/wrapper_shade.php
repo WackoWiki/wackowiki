@@ -13,9 +13,9 @@
 $type_class		= '';
 $types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quote', 'success', 'warning'];
 
-if (!isset($options['wrapper_type']))	$options['wrapper_type']	= 'default';
-if (!isset($options['wrapper_title']))	$options['wrapper_title']	= null;
-if (!isset($options['col']))			$options['col']				= false;
+$options['wrapper_type']	??= 'default';
+$options['wrapper_title']	??= null;
+$options['col']				??= false;
 
 if (in_array($options['wrapper_type'], $types))
 {

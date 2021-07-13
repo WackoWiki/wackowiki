@@ -25,23 +25,23 @@ $ppage		= '';
 $files		= [];
 $object_ids	= [];
 
-if (!isset($nomark))	$nomark		= 0;
-if (!isset($form))		$form		= 0;	// show search form
-if (!isset($order))		$order		= '';
-if (!isset($cluster))	$cluster	= 0;	// cluster attachments
-if (!isset($global))	$global		= 0;	// global attachments
-if (!isset($all))		$all		= 0;	// all attachments
-if (!isset($linked))	$linked		= '';	// file link in page
-if (!isset($owner))		$owner		= '';
-if (!isset($page))		$page		= '';
-if (!isset($legend))	$legend		= '';
-if (!isset($method))	$method		= '';	// for use in page handler
-if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
-if (!isset($deleted))	$deleted	= 0;
-if (!isset($track))		$track		= 0;
-if (!isset($media))		$media		= ($picture ?? null); // replaces depreciated picture with media
-if (!isset($max))		$max		= null;
-if (!isset($type_id))	$type_id	= null;
+$nomark		??= 0;
+$form		??= 0;	// show search form
+$order		??= '';
+$cluster	??= 0;	// cluster attachments
+$global		??= 0;	// global attachments
+$all		??= 0;	// all attachments
+$linked		??= '';	// file link in page
+$owner		??= '';
+$page		??= '';
+$legend		??= '';
+$method		??= '';	// for use in page handler
+$params		??= null;	// for $_GET parameters to be passed with the page link
+$deleted	??= 0;
+$track		??= 0;
+$media		??= ($picture ?? null); // replaces depreciated picture with media
+$max		??= null;
+$type_id	??= null;
 
 $order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
@@ -49,8 +49,8 @@ $file_name_maxlen	= 80;
 // filter categories
 $phrase				= (string)	($_GET['phrase'] ?? '');
 $type_id			= (int)		($_GET['type_id'] ?? $type_id);
-$category_id		= (int) @$_GET['category_id'];
-$file_link			= (int) $linked;
+$category_id		= (int)		@$_GET['category_id'];
+$file_link			= (int)		$linked;
 
 
 if ($order == 'time')		$order_by = "uploaded_dt DESC";

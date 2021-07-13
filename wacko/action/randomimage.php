@@ -16,10 +16,10 @@ Random Image Action
  }}
  */
 
-if (!isset($category))	$category	= '';
-if (!isset($global))	$global		= 0;	// global attachments
-if (!isset($owner))		$owner		= '';
-if (!isset($caption))	$caption	= 0;
+$category	??= '';
+$global		??= 0;	// global attachments
+$owner		??= '';
+$caption	??= 0;
 
 if ($caption)	$param[]	= 'caption';
 

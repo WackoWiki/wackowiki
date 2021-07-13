@@ -22,15 +22,15 @@ if (!defined('IN_WACKO'))
  }}
  */
 
-if (!isset($system))		$system = 1;
-if (!isset($page))			$page = '';
-if (!isset($nomark))		$nomark = 0;
-if (!isset($lang))			$lang = '';
-if (!isset($max))			$max = null;
-if (!isset($legend))		$legend = '';
-if (!isset($title))			$title = 0;
-if (!isset($dontrecurse))	$dontrecurse = false;
-if (!isset($counter))		$counter = 1;
+$system			??= 1;
+$page			??= '';
+$nomark			??= 0;
+$lang			??= '';
+$max			??= null;
+$legend			??= '';
+$title			??= 0;
+$dontrecurse	??= false;
+$counter		??= 1;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;

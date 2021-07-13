@@ -28,13 +28,13 @@ if (!defined('IN_WACKO'))
 //   * local image cache
 //   * feed_acl
 
-if (!isset($url))		$url	= null;
-if (!isset($nomark))	$nomark	= 0;
-if (!isset($title))		$title	= '';
-if (!isset($noxml))		$noxml	= 0;
-if (!isset($images))	$images	= 1;
-if (!isset($max))		$max	= 5;
-if (!isset($time))		$time	= 1;
+$url	??= null;
+$nomark	??= 0;
+$title	??= '';
+$noxml	??= 0;
+$images	??= 1;
+$max	??= 5;
+$time	??= 1;
 
 $error				= null;
 $p_mode				= [];

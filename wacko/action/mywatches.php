@@ -7,10 +7,10 @@ if (!defined('IN_WACKO'))
 
 if ($user_id = $this->get_user_id())
 {
-	if (!isset($profile))		$profile = ''; // user action
-	if (!isset($max))			$max = null;
-	if (!isset($title))			$title = 0;
-	if (!isset($current_char))	$current_char = '';
+	$profile		??= ''; // user action
+	$max			??= null;
+	$title			??= 0;
+	$current_char	??= '';
 
 	$profile		= ($profile? ['profile' => $profile] : []);
 	$profile_mode	= Ut::html(@$_GET['mode']);

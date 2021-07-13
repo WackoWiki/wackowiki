@@ -36,13 +36,14 @@ $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', 
 //	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
 //	info		- display category description
 
-if (!isset($page))			$page		= '/';
-if (!isset($list))			$list		= 1;
-if (!isset($type_id))		$type_id	= OBJECT_PAGE;
-if (!isset($ids))			$ids		= '';
-if (!isset($lang))			$lang		= $this->page['page_lang'];
-if (!isset($nomark))		$nomark		= 0;
-if (!isset($info))			$info		= 0;
+$page		??= '/';
+$list		??= 1;
+$type_id	??= OBJECT_PAGE;
+$ids		??= '';
+$lang		??= $this->page['page_lang'];
+$nomark		??= 0;
+$info		??= 0;
+
 if (isset($_REQUEST['category_lang']))
 {
 	$lang = ($this->db->multilanguage

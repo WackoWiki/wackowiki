@@ -45,20 +45,10 @@ $upgrade_msg = [
 // set back theme to default, just a precaution
 $config['theme'] = 'default';
 
-if (!isset($config['allowed_languages']))
-{
-	$config['allowed_languages'] = '';
-}
-
-if (!isset($config['multilanguage']))
-{
-	$config['multilanguage'] = 0;
-}
-
-if (!isset($config['rewrite_mode']))
-{
-	$config['rewrite_mode'] = 0;
-}
+$config['allowed_languages']	??= '';
+$config['multilanguage']		??= 0;
+$config['rewrite_mode']			??= 0;
+$config['wacko_version']		??= '';
 
 if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
 {
@@ -82,11 +72,6 @@ $port			= trim($config['db_port']);
 $fatal_error	= false;
 
 // check WackoWiki version
-if (!isset($config['wacko_version']))
-{
-	$config['wacko_version'] = '';
-}
-
 if (!$version = trim($config['wacko_version']))
 {
 	$version = '0';
@@ -113,7 +98,7 @@ switch ($config['db_driver'])
 {
 	case 'mysqli_legacy':
 
-		if (!isset($config['db_port']))			$config['db_port']	= '3306';
+		$config['db_port']						??= '3306';
 		if (!$port = trim($config['db_port']))	$port						= '3306';
 
 		echo '<ul>' . "\n";

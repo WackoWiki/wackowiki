@@ -27,13 +27,16 @@ if (!defined('IN_WACKO'))
 $limit	= 500;
 
 // input
-if (!isset($page))		$page	= '/' . $this->page['tag'];
-if (!isset($title))		$title	= 1;
-if (!isset($sort))		$sort	= '';
-if (!isset($system))	$system	= 0;
-if (!isset($lang))		$lang	= '';
+$page		??= '/' . $this->page['tag'];
+$title		??= 1;
+$sort		??= '';
+$system		??= 0;
+$lang		??= '';
+$nomark		??= 0;
+$legend		??= '';
+$depth		??= '';
 
-$system == true
+$system
 	? $user_id		= $this->db->system_user_id
 	: $user_id		= null;
 
@@ -47,7 +50,6 @@ if ($page == '/')		$page	= '';
 $tag	= $this->unwrap_link($page);
 $root	= $tag . '/';
 
-if (!isset($depth)) $depth = '';
 // TODO: set default depth level via config
 // TODO: show missing sublevels
 // TODO: add paging
@@ -59,9 +61,6 @@ else
 {
 	$depth	= (int) $depth;
 }
-
-if (!isset($nomark)) $nomark = 0;
-if (!isset($legend)) $legend = '';
 
 // collect pages
 if ($pages = $this->db->load_all(

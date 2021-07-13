@@ -12,11 +12,12 @@ if (!defined('IN_WACKO'))
 // page -
 // label -
 
-if (!isset($list))		$list		= 0;
-if (!isset($type_id))	$type_id	= OBJECT_PAGE;
-if (!isset($label))		$label		= true;
+$list		??= 0;
+$type_id	??= OBJECT_PAGE;
+$label		??= true;
+$nomark		??= 0;
+
 if (empty($page))		$page		= $this->db->category_page;
-if (!isset($nomark))	$nomark		= 0;
 
 #$category_id = (int) ($_GET['category_id'] ?? 0);
 

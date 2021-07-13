@@ -5,17 +5,17 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($page))			$page			= null;
+$page			??= null;
 if (!isset($page))			return;
-if (!isset($nomark))		$nomark			= 0;
-if (!isset($nowarning))		$nowarning		= 0;
-if (!isset($revision_id))	$revision_id	= null;
+$nomark			??= 0;
+$nowarning		??= 0;
+$revision_id	??= null;
 
 $tag = $this->unwrap_link($page);
 
-if (!isset($first_anchor))	$first_anchor	= '';
-if (!isset($last_anchor))	$last_anchor	= '';
-if (!isset($track))			$track			= 0;
+$first_anchor	??= '';
+$last_anchor	??= '';
+$track			??= 0;
 
 if ($track && $this->link_tracking())
 {

@@ -25,10 +25,10 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($usergroup))	$usergroup	= '';
-if (!isset($username))	$username	= '';
-if (!isset($text))		$text		= '';
-if (!isset($alt))		$alt		= '';
+$usergroup	??= '';
+$username	??= '';
+$text		??= '';
+$alt		??= '';
 
 if ($usergroup !== '' || $username !== '')
 {

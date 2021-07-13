@@ -60,10 +60,11 @@ $print_tag_cloud = function ($tags, $method = '', $cluster = '') use (&$tpl)
 //	nomark		- display header and fieldset (1) or 0 (default))
 
 
-if (!isset($page))			$page	= '/';
-if (!isset($nomark))		$nomark = 0;
-if (!isset($lang))			$lang	= $this->page['page_lang'];
-if (!isset($owner))			$owner	= '';
+$page		??= '/';
+$nomark		??= 0;
+$lang		??= $this->page['page_lang'];
+$owner		??= '';
+
 if (!isset($sort) || !in_array($sort, ['abc', 'number']))
 {
 	$sort = 'abc';

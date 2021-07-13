@@ -7,11 +7,11 @@ if (!defined('IN_WACKO'))
 
 // {{backlinks [page="PageName"] [max=Number] [nomark=1] [title=0]}}
 
-if (!isset($page))		$page		= '';
-if (!isset($nomark))	$nomark		= 0;
-if (!isset($title))		$title		= '';
-if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
-if (!isset($max))		$max		= null;
+$page		??= '';
+$nomark		??= 0;
+$title		??= '';
+$params		??= null;	// for $_GET parameters to be passed with the page link
+$max		??= null;
 
 $tag = $page ? $this->unwrap_link($page) : $this->tag;
 

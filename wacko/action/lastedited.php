@@ -15,9 +15,9 @@ if (!defined('IN_WACKO'))
 	note	= show edit note
 */
 
-if (!isset($icon))		$icon		= false;
-if (!isset($label))		$label		= true;
-if (!isset($note))		$note		= false;
+$icon		??= false;
+$label		??= true;
+$note		??= false;
 
 if (($mtime = $this->page['modified']))
 {

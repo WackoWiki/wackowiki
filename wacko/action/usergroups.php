@@ -7,8 +7,8 @@ if (!defined('IN_WACKO'))
 
 // You have to be logged in to use this action
 
-if (!isset($nomark))	$nomark = 0;
-if (!isset($cols))		$cols = '';
+$nomark		??= 0;
+$cols		??= '';
 
 if ($user = $this->get_user())
 {

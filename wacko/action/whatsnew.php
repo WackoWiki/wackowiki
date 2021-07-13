@@ -14,10 +14,10 @@ if (!defined('IN_WACKO'))
  TODO: table layout may suite visual orientation better, RSS feed
 */
 
-if (!isset($page))		$page = '';
-if (!isset($max))		$max		= null;
-if (!isset($noxml))		$noxml		= 0;
-if (!isset($printed))	$printed	= [];
+$page		??= '';
+$max		??= null;
+$noxml		??= 0;
+$printed	??= [];
 
 if (!$max || $max > 100) $max = 100;
 

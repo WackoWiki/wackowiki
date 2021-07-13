@@ -969,18 +969,12 @@ class WackoFormatter
 						$text = mb_substr($url, 1);
 					}
 
-					if (!isset($this->auto_fn['count']))
-					{
-						$this->auto_fn['count'] = 0;
-					}
+					$this->auto_fn['count'] ??= 0;
 
 					$this->auto_fn['count']++;
 					$footnote_count = $this->auto_fn['count'];
 
-					if (!isset($this->auto_fn['content']))
-					{
-						$this->auto_fn['content'] = null;
-					}
+					$this->auto_fn['content'] ??= null;
 
 					$this->auto_fn['content'][$footnote_count] = trim($text);
 

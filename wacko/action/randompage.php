@@ -17,7 +17,7 @@ Random Page Action
 // do not cache random page!
 $this->http->no_cache(false);
 
-if (!isset($page))		$page		= '';
+$page		??= '';
 
 $tag = $this->unwrap_link($page);
 

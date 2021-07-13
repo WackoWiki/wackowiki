@@ -7,11 +7,11 @@ if (!defined('IN_WACKO'))
 
 // {{filelinks [page="PageName"] [max=Number] [nomark=1] [title=0]}}
 
-if (!isset($file_id))	$file_id	= null;
-if (!isset($nomark))	$nomark		= 0;
-if (!isset($title))		$title		= '';
-if (!isset($params))	$params		= null;	// for $_GET parameters to be passed with the page link
-if (!isset($max))		$max		= null;
+$file_id	??= null;
+$nomark		??= 0;
+$title		??= '';
+$params		??= null;	// for $_GET parameters to be passed with the page link
+$max		??= null;
 
 if ($file_id)
 {

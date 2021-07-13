@@ -7,12 +7,12 @@ if (!defined('IN_WACKO'))
 
 $viewed = '';
 
-if (!isset($page))		$page = '';
-if (!isset($date))		$date = $_GET['date'] ?? '';
-if (!isset($hide_minor_edit)) $hide_minor_edit = (int) ($_GET['minor_edit'] ?? 0);
-if (!isset($noxml))		$noxml = 0;
-if (!isset($title))		$title = 0;
-if (!isset($max))		$max = null;
+$page				??= '';
+$date				??= $_GET['date'] ?? '';
+$hide_minor_edit	??= (int) ($_GET['minor_edit'] ?? 0);
+$noxml				??= 0;
+$title				??= 0;
+$max				??= null;
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();

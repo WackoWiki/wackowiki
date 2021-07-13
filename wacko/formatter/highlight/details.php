@@ -9,8 +9,8 @@
 	%%
 */
 
-if (!isset($options['title']))		$options['title']	= null;
-if (!isset($options['open']))		$options['open']	= 0;
+$options['title']	??= null;
+$options['open']	??= 0;
 
 $title	= $options['title'] ?? $this->_t('ShowHideDetails');
 $open	= $options['open'] ? ' open' : '';

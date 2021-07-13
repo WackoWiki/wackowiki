@@ -23,14 +23,14 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
-if (!isset($order))		$order		= '';
-if (!isset($global))	$global		= 0;
-if (!isset($owner))		$owner		= '';
-if (!isset($page))		$page		= '';
-if (!isset($deleted))	$deleted	= 0;
-if (!isset($track))		$track		= 0;
-if (!isset($picture))	$picture	= 1;
-if (!isset($max))		$max		= null;
+$order		??= '';
+$global		??= 0;
+$owner		??= '';
+$page		??= '';
+$deleted	??= 0;
+$track		??= 0;
+$picture	??= 1;
+$max		??= null;
 
 if ($max)
 {

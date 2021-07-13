@@ -11,8 +11,8 @@
 	%%
  */
 
-if (!isset($options['type']))		$options['type']	= 'div';
-if (!isset($options['user']))		$options['user']	= 0;
+$options['type']	??= 'div';
+$options['user']	??= 0;
 
 // sanitize $text
 $text		= htmlspecialchars($text);

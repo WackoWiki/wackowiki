@@ -5,8 +5,8 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($top))		$top	= 5;
-if (!isset($bottom))	$bottom	= 5;
+$top	??= 5;
+$bottom	??= 5;
 
 if ($top > 20)			$top	= 20;
 if ($bottom > 20)		$bottom	= 20;

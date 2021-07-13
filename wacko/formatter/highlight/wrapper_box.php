@@ -17,12 +17,12 @@ $align_class	= '';
 $type_class		= '';
 $types			= ['default', 'error', 'example', 'important', 'note', 'question', 'quote', 'success', 'warning'];
 
-if (!isset($options['wrapper_type']))	$options['wrapper_type']	= 'default';
-if (!isset($options['wrapper_title']))	$options['wrapper_title']	= null;
-if (!isset($options['wrapper_align']))	$options['wrapper_align']	= 'right';
-if (!isset($options['wrapper_width']))	$options['wrapper_width']	= 250;
-if (!isset($options['clear']))			$options['clear']			= false;
-if (!isset($options['col']))			$options['col']				= false;
+$options['wrapper_type']	??= 'default';
+$options['wrapper_title']	??= null;
+$options['wrapper_align']	??= 'right';
+$options['wrapper_width']	??= 250;
+$options['clear']			??= false;
+$options['col']				??= false;
 
 if (in_array($options['wrapper_align'], ['center', 'left', 'right']))
 {

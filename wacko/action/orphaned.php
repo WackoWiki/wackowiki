@@ -44,7 +44,8 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 	}
 };
 
-if (!isset($page))		$page	= ''; // depreciated
+$max	??= null;
+$page	??= ''; // depreciated
 
 if (! $page)
 {
@@ -54,8 +55,6 @@ else
 {
 	$tag = $this->unwrap_link($page);
 }
-
-if (!isset($max))		$max = null;
 
 $user	= $this->get_user();
 

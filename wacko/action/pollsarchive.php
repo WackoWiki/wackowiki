@@ -15,8 +15,9 @@ if (!defined('IN_WACKO'))
 $polls_obj = new Polls($this);
 
 // parameters
-if (!isset($nomark))		$nomark	= 0;
-if (!isset($style))			$style	= 'ul';
+$nomark	??=		0;
+$style	??=		'ul';
+
 if (!isset($_GET['year']))	$year	= date('Y');
 else						$year	= (int) $_GET['year'];
 

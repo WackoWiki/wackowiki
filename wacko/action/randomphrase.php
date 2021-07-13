@@ -7,7 +7,7 @@ if (!defined('IN_WACKO'))
 $use_empty_string	= (int) ($useemptystring ?? 0);
 $revision_id		= (int) ($_GET['revision_id'] ?? 0);
 
-if (!isset($page)) $page = '';
+$page		??= '';
 
 $tag		= $this->unwrap_link($page);
 $page_id	= $this->get_page_id($tag);
