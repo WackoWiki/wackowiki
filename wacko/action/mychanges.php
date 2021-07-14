@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{mychanges [max=Number] [bydate=1]}}
 
+// set defaults
 $title		??= 0;
 $bydate		??= '';
 $profile	??= null; // user action

@@ -5,8 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$viewed = '';
-
+// set defaults
 $page				??= '';
 $date				??= $_GET['date'] ?? '';
 $hide_minor_edit	??= (int) ($_GET['minor_edit'] ?? 0);
@@ -65,8 +64,6 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 			{
 				$tpl->day = $curday = $day;
 			}
-
-			$review = $viewed = '';
 
 			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];

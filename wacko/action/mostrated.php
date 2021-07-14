@@ -5,8 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$top	??= 5;
-$bottom	??= 5;
+// set defaults
+$top		??= 5;
+$bottom		??= 5;
 
 if ($top > 20)			$top	= 20;
 if ($bottom > 20)		$bottom	= 20;

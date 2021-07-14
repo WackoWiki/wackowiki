@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Sinu lehtede nimekiri (tähestikulises järjekorras)',
 	'ListOwnedPages2'			=> 'Sinu lehtede nimekiri (ajalises järjekorras)',
 	'ListOwnedPages3'			=> 'Sinu lehtede nimekiri (muudatuste järjekorras)',
-	'YouDontOwn'				=> 'Sa ei oma ühtegi lehte.',
 	'NotLoggedInThusOwned'		=> 'Sa pole sisse loginud, seega ei suuda sinu lehti otsida!.',
 	'NoOrphaned'				=> 'Üksikuid lehti pole. Hästi!',
 	'NoRecentComments'			=> 'Viimaseid kommentaare pole.',

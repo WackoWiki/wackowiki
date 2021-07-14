@@ -7,7 +7,8 @@ if (!defined('IN_WACKO'))
 
 // {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
 
-$page ??= '/' . $this->tag;
+// set defaults
+$page			??= '/' . $this->tag;
 
 $tag			= $this->unwrap_link($page);
 $error			= '';

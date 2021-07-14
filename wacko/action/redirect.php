@@ -9,6 +9,7 @@ if (!defined('IN_WACKO'))
 
 if (isset($page))		$to = $page;
 
+// set defaults
 $to			??= '';
 $temporary	??= 0;
 $mute		??= 0;

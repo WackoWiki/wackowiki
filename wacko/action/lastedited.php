@@ -15,6 +15,7 @@ if (!defined('IN_WACKO'))
 	note	= show edit note
 */
 
+// set defaults
 $icon		??= false;
 $label		??= true;
 $note		??= false;

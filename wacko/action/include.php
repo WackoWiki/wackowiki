@@ -5,8 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$page			??= null;
 if (!isset($page))			return;
+
+// set defaults
 $nomark			??= 0;
 $nowarning		??= 0;
 $revision_id	??= null;

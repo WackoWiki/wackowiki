@@ -26,7 +26,7 @@ if (!defined('IN_WACKO'))
 // constants
 $limit	= 500;
 
-// input
+// set defaults
 $page		??= '/' . $this->page['tag'];
 $title		??= 1;
 $sort		??= '';

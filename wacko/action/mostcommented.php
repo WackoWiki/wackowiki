@@ -20,6 +20,7 @@ if (!defined('IN_WACKO'))
  }}
  */
 
+// set defaults
 $page			??= '';
 $nomark			??= 0;
 $lang			??= '';

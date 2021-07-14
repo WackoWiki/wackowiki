@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Liste deiner Seiten (alphabetisch sortiert)',
 	'ListOwnedPages2'			=> 'Liste deiner Seiten (nach Datum sortiert)',
 	'ListOwnedPages3'			=> 'Liste deiner Seiten (nach Änderung sortiert)',
-	'YouDontOwn'				=> 'Du besitzt keine Seiten.',
 	'NotLoggedInThusOwned'		=> 'Um die Liste deiner Seiten zu sehen, musst du dich anmelden.',
 	'NoOrphaned'				=> 'Keine verwaisten Seiten gefunden. Gut.',
 	'NoRecentComments'			=> 'Keine neuen Kommentare.',

@@ -8,8 +8,9 @@ if (!defined('IN_WACKO'))
 // {{hits}}
 // take $this->page['hits'] in the first place
 
-$page	??= '';
-$result	= 0;
+// set defaults
+$page		??= '';
+$result		= 0;
 
 if ($page)
 {

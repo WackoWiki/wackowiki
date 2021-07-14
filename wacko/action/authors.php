@@ -29,6 +29,7 @@ print page and revisions authors.
 	https://en.wikipedia.org/wiki/Creative_Commons_license
 */
 
+// set defaults
 $add		??= '';
 $add_only	??= 0;
 $license	??= '';

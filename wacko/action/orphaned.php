@@ -44,6 +44,7 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 	}
 };
 
+// set defaults
 $max	??= null;
 $page	??= ''; // depreciated
 

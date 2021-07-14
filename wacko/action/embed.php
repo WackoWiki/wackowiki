@@ -25,23 +25,24 @@ if (!defined('IN_WACKO'))
 	}}
 */
 extract([
-	'play'		=> '',
-	'loop'		=> '',
-	'menu'		=> '',
-	'quality'	=> '',
-	'bgcolor'	=> '',
-	'allowfullscreen' => '',
-	'url'		=> '',
-	'width'		=> '',
-	'height'	=> '',
-	'name'		=> '',
-	'styleclass' => '',
-	'align'		=> '',
+	'play'				=> '',
+	'loop'				=> '',
+	'menu'				=> '',
+	'quality'			=> '',
+	'bgcolor'			=> '',
+	'allowfullscreen'	=> '',
+	'url'				=> '',
+	'width'				=> '',
+	'height'			=> '',
+	'name'				=> '',
+	'styleclass'		=> '',
+	'align'				=> '',
 ], EXTR_SKIP);
 
-if (!$width)	$width	= 550;
-if (!$height)	$height	= 100;
-if (!$align)	$align	= null;
+// set defaults
+$width		??= 550;
+$height		??= 100;
+$align		??= null;
 
 if (!$url)
 {

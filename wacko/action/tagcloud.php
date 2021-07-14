@@ -59,7 +59,7 @@ $print_tag_cloud = function ($tags, $method = '', $cluster = '') use (&$tpl)
 //	sort		- order categories alphabetically or by number ('abc'| 'number')
 //	nomark		- display header and fieldset (1) or 0 (default))
 
-
+// set defaults
 $page		??= '/';
 $nomark		??= 0;
 $lang		??= $this->page['page_lang'];

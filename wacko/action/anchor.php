@@ -5,11 +5,11 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$name					??= ''; // depreciated, legacy support
-if ($name)				$href	= $name;
+$name		??= ''; // depreciated, legacy support
+if ($name)	$href	= $name;
 
-$text	??= '';
-$title	??= '';
+$text		??= '';
+$title		??= '';
 
 // Param name
 if (isset($href))

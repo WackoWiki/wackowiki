@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Esta é a lista de páginas das quais é dono (por ordem alfabética)',
 	'ListOwnedPages2'			=> 'Esta é a lista de páginas das quais é dono (por datas)',
 	'ListOwnedPages3'			=> 'Esta é a lista de páginas das quais é dono (por ordem de alterações)',
-	'YouDontOwn'				=> 'Não é dono de nenhuma página.',
 	'NotLoggedInThusOwned'		=> 'Não efectuou o login, por isso não podemos recolher as suas páginas!.',
 	'NoOrphaned'				=> 'Nenhuma página órfã.',
 	'NoRecentComments'			=> 'Nenhum comentário recente.',

@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 // If user has rights to edit page, show Edit link
 // {{edit [page="yourPage"] [text="your text"]}}
 
+// set defaults
 $page	??= '';
 $text	??= '';
 

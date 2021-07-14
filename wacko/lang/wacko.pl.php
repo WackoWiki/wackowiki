@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Lista stron, których jesteś autorem. Sortowanie alfabetycznie',
 	'ListOwnedPages2'			=> 'Lista stron, których jesteś autorem. Sortowanie według daty',
 	'ListOwnedPages3'			=> 'Lista stron, których jesteś autorem. Sortowanie według wprowadzonych zmian',
-	'YouDontOwn'				=> 'Nie jesteś autorem żadnej ze stron.',
 	'NotLoggedInThusOwned'		=> 'Lista stron, których jesteś autorem może zostać wyświetlona po zalogowaniu się.',
 	'NoOrphaned'				=> 'Wszystkie strony mają przypisanego autora.',
 	'NoRecentComments'			=> 'Nie zostały dodane żadne nowe komentarze.',

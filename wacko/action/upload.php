@@ -13,6 +13,7 @@ if (!defined('IN_WACKO'))
 	}}
 */
 
+// set defaults
 $global				??= 0;
 $maxsize			??= '';
 $hide_description	??= '';

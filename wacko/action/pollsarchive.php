@@ -14,7 +14,7 @@ if (!defined('IN_WACKO'))
 // create polls object
 $polls_obj = new Polls($this);
 
-// parameters
+// set defaults
 $nomark	??=		0;
 $style	??=		'ul';
 

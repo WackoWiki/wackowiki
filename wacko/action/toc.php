@@ -21,6 +21,7 @@ if (!defined('IN_WACKO'))
  toc is generated in paragrafica format
 */
 
+// set defaults
 $page		??= '';
 $nomark		??= 0;
 $numerate	??= 0;

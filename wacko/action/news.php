@@ -15,10 +15,11 @@ if (!empty($this->db->news_cluster))
 		$category_id	= (int) $_GET['category_id'];
 	}
 
-	$max	??= 10;
-	$mode	??= 'latest';
-	$title	??= 1;
-	$noxml	??= 0;
+	// set defaults
+	$max				??= 10;
+	$mode				??= 'latest';
+	$title				??= 1;
+	$noxml				??= 0;
 
 	$pages				= [];
 	$p_mode				= [];

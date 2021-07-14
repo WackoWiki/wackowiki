@@ -27,10 +27,11 @@ print page or file license.
 	https://en.wikipedia.org/wiki/Creative_Commons_license
 	https://creativecommons.org/about/downloads - icons
 */
+
+// set defaults
 $intro		??= 1;
 $license	??= '';
 $icon		??= 0;
-#$license_id	??= '';
 
 // check for license_id
 if (empty($license) && !isset($license_id) && $this->db->enable_license)
@@ -96,4 +97,3 @@ if ($license || $license_id)
 
 	$tpl->leave();
 }
-

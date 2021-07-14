@@ -6,11 +6,13 @@ if (!defined('IN_WACKO'))
 }
 
 // action/mypages.php
-$title		??= 0;
-$bydate		??= '';
-$profile	??= ''; // user action
-$max		??= null;
-$bychange	??= '';
+
+// set defaults
+$title			??= 0;
+$bydate			??= '';
+$profile		??= ''; // user action
+$max			??= null;
+$bychange		??= '';
 
 $current_char	= '';
 $title			= (int) $title;
@@ -205,12 +207,6 @@ if ($user_id = $this->get_user_id())
 		{
 			$tpl->nopages = true;
 		}
-	}
-
-	// obsolete case
-	if ($pages == false)
-	{
-		# echo $this->_t('YouDontOwn');
 	}
 
 	$tpl->leave();

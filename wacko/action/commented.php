@@ -55,6 +55,7 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 	return [$comments, $pagination];
 };
 
+// set defaults
 $page	??= '';
 $title	??= 0;
 $noxml	??= 0;

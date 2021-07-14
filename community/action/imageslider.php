@@ -23,6 +23,7 @@ if (!defined('IN_WACKO'))
 
 $page_id = '';
 
+// set defaults
 $order		??= '';
 $global		??= 0;
 $owner		??= '';

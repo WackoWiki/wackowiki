@@ -44,6 +44,7 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 
 };
 
+// set defaults
 $page		??= '';
 
 if (! $page)

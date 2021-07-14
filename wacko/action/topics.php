@@ -12,6 +12,7 @@ if (!defined('IN_WACKO'))
 //				  considered subforums, so topics under these cluster subpages
 //				  will not be displayed. tags must be absolute
 
+// set defaults
 $pages		??= '';
 
 // ensure that we're executing inside the forum cluster

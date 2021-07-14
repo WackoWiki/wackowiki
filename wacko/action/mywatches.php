@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 if ($user_id = $this->get_user_id())
 {
+	// set defaults
 	$profile		??= ''; // user action
 	$max			??= null;
 	$title			??= 0;
@@ -127,8 +128,8 @@ if ($user_id = $this->get_user_id())
 		$skip			= 0;
 		$break			= 1;
 
-		$r_count	= count($pages);
-		$total		= ceil($r_count / 3);
+		$r_count		= count($pages);
+		$total			= ceil($r_count / 3);
 
 		$tpl->enter('w_page_');
 

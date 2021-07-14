@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Dit is een lijst van pagina\'s waarvan u eigenaar bent (op alfabet)',
 	'ListOwnedPages2'			=> 'Dit is een lijst van pagina\'s waarvan u eigenaar bent (op datum)',
 	'ListOwnedPages3'			=> 'Dit is een lijst van pagina\'s waarvan u eigenaar bent (op wijzigingen)',
-	'YouDontOwn'				=> 'U bent van geen enkele pagina de eigenaar.',
 	'NotLoggedInThusOwned'		=> 'U bent niet ingelogd, de lijst met uw pagina\'s kon dus niet worden gemaakt.',
 	'NoOrphaned'				=> 'Geen losstaande pagina\'s. Zo hoort dat!',
 	'NoRecentComments'			=> 'Geen recente reacties.',

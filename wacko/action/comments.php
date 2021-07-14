@@ -44,6 +44,7 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 	}
 };
 
+// set defaults
 $page	??= '';
 $title	??= 0;
 $noxml	??= 0;

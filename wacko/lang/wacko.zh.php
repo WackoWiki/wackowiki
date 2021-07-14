@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'This is the list of pages you own (ordered alphabetically)',
 	'ListOwnedPages2'			=> 'This is the list of pages you own (ordered by date)',
 	'ListOwnedPages3'			=> 'This is the list of pages you own (ordered by change)',
-	'YouDontOwn'				=> '沒有頁面是屬於您的.',
 	'NotLoggedInThusOwned'		=> '因為您尚未登入,所以無法得知您擁有的頁面.',
 	'NoOrphaned'				=> '沒有頁面被孤立,好極了!',
 	'NoRecentComments'			=> 'No recent comments.',

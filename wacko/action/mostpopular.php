@@ -22,6 +22,7 @@ if (!defined('IN_WACKO'))
  }}
  */
 
+// set defaults
 $system			??= 1;
 $page			??= '';
 $nomark			??= 0;

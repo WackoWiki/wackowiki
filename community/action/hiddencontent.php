@@ -25,6 +25,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// set defaults
 $usergroup	??= '';
 $username	??= '';
 $text		??= '';

@@ -12,6 +12,7 @@ if (!defined('IN_WACKO'))
 // page -
 // label -
 
+// set defaults
 $list		??= 0;
 $type_id	??= OBJECT_PAGE;
 $label		??= true;

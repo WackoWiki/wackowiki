@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Questa è la lista di pagine che possiedi (in ordine alfabetico)',
 	'ListOwnedPages2'			=> 'Questa è la lista di pagine che possiedi (in ordine di data)',
 	'ListOwnedPages3'			=> 'Questa è la lista di pagine che possiedi (in ordine di modifica)',
-	'YouDontOwn'				=> 'Non possiedi alcuna pagina.',
 	'NotLoggedInThusOwned'		=> 'Non sei connesso, perciò la lista delle tue pagine non può essere richiamata.',
 	'NoOrphaned'				=> 'Nessuna pagina orfana. Bene!',
 	'NoRecentComments'			=> 'Nessun commento recente.',

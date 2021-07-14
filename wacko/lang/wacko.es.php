@@ -450,7 +450,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Tu lista de páginas (por orden alfabético)',
 	'ListOwnedPages2'			=> 'Tu lista de páginas (ordenadas por fecha)',
 	'ListOwnedPages3'			=> 'Tu lista de páginas (ordenadas por cambio)',
-	'YouDontOwn'				=> 'No eres el propietario de ninguna página.',
 	'NotLoggedInThusOwned'		=> 'No estás autenticado, por lo que no puedo mostrar la lista de tus páginas.',
 	'NoOrphaned'				=> 'No hay páginas huerfanas.',
 	'NoRecentComments'			=> 'No hay comentarios recientes.',

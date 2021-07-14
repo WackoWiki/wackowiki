@@ -16,6 +16,7 @@ Random Image Action
  }}
  */
 
+// set defaults
 $category	??= '';
 $global		??= 0;	// global attachments
 $owner		??= '';

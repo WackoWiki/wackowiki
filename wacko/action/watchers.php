@@ -5,6 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+// set defaults
 $page		??= '';
 $nomark		??= false;
 

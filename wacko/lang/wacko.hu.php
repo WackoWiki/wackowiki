@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Ez az Ön tulajdonában lévő oldalak listája (ordered alphabetically)',
 	'ListOwnedPages2'			=> 'Ez az Ön tulajdonában lévő oldalak listája (ordered by date)',
 	'ListOwnedPages3'			=> 'Ez az Ön tulajdonában lévő oldalak listája (ordered by change)',
-	'YouDontOwn'				=> 'You don\'t own any pages.',
 	'NotLoggedInThusOwned'		=> 'Nincs bejelentkezve, ezért nem tudtuk beolvasni az oldalait.',
 	'NoOrphaned'				=> 'No orphaned pages. Good.',
 	'NoRecentComments'			=> 'No recent comments.',

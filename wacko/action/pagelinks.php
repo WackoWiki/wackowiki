@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 // {{pagelinks [page="PageName"] [max=Number] [nomark=1] [title=0]}}
 
+// set defaults
 $page		??= '';
 $nomark		??= 0;
 $title		??= '';

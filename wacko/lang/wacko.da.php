@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Her er de sider som du ejer (alfabetisk)',
 	'ListOwnedPages2'			=> 'Her er de sider som du ejer (kronologisk)',
 	'ListOwnedPages3'			=> 'Her er de sider som du ejer (opdateringer)',
-	'YouDontOwn'				=> 'Du ejer ikke nogle sider.',
 	'NotLoggedInThusOwned'		=> 'Du er ikke logget ind, og derfor kan vi ikke finde dine sider!.',
 	'NoOrphaned'				=> 'Ingen forældreløse sider. Godt!',
 	'NoRecentComments'			=> 'Ingen nylige kommentarer.',

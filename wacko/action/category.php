@@ -36,6 +36,7 @@ $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', 
 //	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
 //	info		- display category description
 
+// set defaults
 $page		??= '/';
 $list		??= 1;
 $type_id	??= OBJECT_PAGE;

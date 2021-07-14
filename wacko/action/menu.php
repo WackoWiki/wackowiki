@@ -32,7 +32,7 @@ $load_user_menu = function ($user_id, $lang = '')
 		"ORDER BY m.menu_position", false);
 };
 
-
+// set defaults
 $system			??= 0;
 
 $message		= '';

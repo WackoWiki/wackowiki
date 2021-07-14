@@ -28,16 +28,17 @@ if (!defined('IN_WACKO'))
 //   * local image cache
 //   * feed_acl
 
-$url	??= null;
-$nomark	??= 0;
-$title	??= '';
-$noxml	??= 0;
-$images	??= 1;
-$max	??= 5;
-$time	??= 1;
+// set defaults
+$url		??= null;
+$nomark		??= 0;
+$title		??= '';
+$noxml		??= 0;
+$images		??= 1;
+$max		??= 5;
+$time		??= 1;
 
-$error				= null;
-$p_mode				= [];
+$error		= null;
+$p_mode		= [];
 
 // Include SimplePie
 include_once 'lib/SimplePie/autoloader.php';

@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 // action/mygroups.php
 
+// set defaults
 $nomark		??= 0;
 
 $my_groups = function ($user_id, $groups)

@@ -17,6 +17,7 @@ if (!defined('IN_WACKO'))
  }}
  */
 
+// set defaults
 $page		??= '';
 $title		??= 0;
 $letter		??= '';

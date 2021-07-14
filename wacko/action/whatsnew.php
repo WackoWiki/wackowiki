@@ -14,6 +14,7 @@ if (!defined('IN_WACKO'))
  TODO: table layout may suite visual orientation better, RSS feed
 */
 
+// set defaults
 $page		??= '';
 $max		??= null;
 $noxml		??= 0;
@@ -22,7 +23,6 @@ $printed	??= [];
 if (!$max || $max > 100) $max = 100;
 
 $tag	= $this->unwrap_link($page);
-$admin	= $this->is_admin();
 $user	= $this->get_user();
 
 // process 'mark read' - reset session time

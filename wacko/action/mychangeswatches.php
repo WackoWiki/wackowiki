@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 // TODO: add user and change notes
 
+// set defaults
 $profile	??= ''; // user action
 $max		??= null;
 

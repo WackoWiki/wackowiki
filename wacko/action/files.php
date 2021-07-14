@@ -25,6 +25,7 @@ $ppage		= '';
 $files		= [];
 $object_ids	= [];
 
+// set defaults
 $nomark		??= 0;
 $form		??= 0;	// show search form
 $order		??= '';
