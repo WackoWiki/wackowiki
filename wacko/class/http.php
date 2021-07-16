@@ -339,7 +339,7 @@ class Http
 			// 1. Content-Security-Policy: http://www.w3.org/TR/CSP2/
 			if ($this->db->csp)
 			{
-				$file_name = match ($this->db->csp)
+				$file_name = match ((int) $this->db->csp)
 				{
 					1 => 'csp.conf',
 					2 => 'csp_custom.conf',
@@ -352,7 +352,7 @@ class Http
 			// 2. Permissions-Policy: https://www.w3.org/TR/permissions-policy/
 			if ($this->db->permissions_policy)
 			{
-				$file_name = match ($this->db->permissions_policy)
+				$file_name = match ((int) $this->db->permissions_policy)
 				{
 					1 => 'permissions_policy.conf',
 					2 => 'permissions_policy_custom.conf',

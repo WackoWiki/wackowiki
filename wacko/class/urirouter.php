@@ -196,6 +196,7 @@ class UriRouter
 							'tolower'	=> strtolower($val),
 							'toupper'	=> strtoupper($val),
 							'int'		=> (int)$val,
+							default		=> $val,
 						};
 
 						$env[$varname][$varidx] = $val;
