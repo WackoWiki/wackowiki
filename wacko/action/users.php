@@ -237,7 +237,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					{
 						$ref0 = @gzinflate(Ut::http64_decode($ref0)); // suppress ALL errors on parsing user supplied data!
 
-						if ($ref0 && strpos($ref0, '@@') !== false)
+						if ($ref0 && str_contains($ref0, '@@'))
 						{
 							// TODO sanitize? someone can inject something into
 							[$ref, $subject] = explode('@@', Ut::strip_controls($ref0), 2);

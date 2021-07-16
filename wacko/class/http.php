@@ -232,7 +232,7 @@ class Http
 
 				echo $cached_page;
 
-				if (strpos($this->method, '.xml') === false)
+				if (!str_contains($this->method, '.xml'))
 				{
 					echo "\n<!-- WackoWiki Caching Engine: page cached at " . date('Y-m-d H:i:s', $mtime) . " -->\n";
 					echo "</body>\n</html>";
@@ -339,18 +339,11 @@ class Http
 			// 1. Content-Security-Policy: http://www.w3.org/TR/CSP2/
 			if ($this->db->csp)
 			{
-				switch ($this->db->csp)
+				$file_name = match ($this->db->csp)
 				{
-					// default
-					case 1:
-						$file_name	= 'csp.conf';
-						break;
-
-					// custom
-					case 2:
-						$file_name	= 'csp_custom.conf';
-						break;
-				}
+					1 => 'csp.conf',
+					2 => 'csp_custom.conf',
+				};
 
 				$csp_header = $this->get_header_conf($file_name);
 				header($csp_header);
@@ -359,18 +352,11 @@ class Http
 			// 2. Permissions-Policy: https://www.w3.org/TR/permissions-policy/
 			if ($this->db->permissions_policy)
 			{
-				switch ($this->db->permissions_policy)
+				$file_name = match ($this->db->permissions_policy)
 				{
-					// default
-					case 1:
-						$file_name	= 'permissions_policy.conf';
-						break;
-
-					// custom
-					case 2:
-						$file_name	= 'permissions_policy_custom.conf';
-						break;
-				}
+					1 => 'permissions_policy.conf',
+					2 => 'permissions_policy_custom.conf',
+				};
 
 				$pp_header = $this->get_header_conf($file_name);
 				header($pp_header);
@@ -908,7 +894,7 @@ class Http
 
 		foreach (['x-gzip', 'gzip'] as $x)
 		{
-			if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && strpos($_SERVER['HTTP_ACCEPT_ENCODING'], $x) !== false)
+			if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], $x))
 			{
 				$text = gzencode(ob_get_contents(), 4);
 				ob_end_clean();

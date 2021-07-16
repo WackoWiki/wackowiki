@@ -20,7 +20,7 @@ function bb2_run_whitelist($package)
 		}
 	}
 	if (@!empty($whitelists['url'])) {
-		if (strpos($package['request_uri'], "?") === FALSE) {
+		if (!str_contains($package['request_uri'], "?")) {
 			$request_uri = $package['request_uri'];
 		} else {
 			$request_uri = substr($package['request_uri'], 0, strpos($package['request_uri'], "?"));

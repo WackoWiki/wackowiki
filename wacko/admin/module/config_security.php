@@ -284,18 +284,11 @@ function admin_config_security(&$engine, &$module)
 				<?php
 				if ($engine->db->csp)
 				{
-					switch ($engine->db->csp)
+					$file_name = match ($engine->db->csp)
 					{
-						// default
-						case 1:
-							$file_name	= 'csp.conf';
-							break;
-
-						// custom
-						case 2:
-							$file_name	= 'csp_custom.conf';
-							break;
-					}
+						1 => 'csp.conf',
+						2 => 'csp_custom.conf',
+					};
 
 					$file_path	= Ut::join_path(CONFIG_DIR, $file_name);
 					$csp_header	= file_get_contents($file_path);
@@ -338,18 +331,11 @@ function admin_config_security(&$engine, &$module)
 				<?php
 				if ($engine->db->permissions_policy)
 				{
-					switch ($engine->db->permissions_policy)
+					$file_name = match ($engine->db->permissions_policy)
 					{
-						// default
-						case 1:
-							$file_name	= 'permissions_policy.conf';
-							break;
-
-						// custom
-						case 2:
-							$file_name	= 'permissions_policy_custom.conf';
-							break;
-					}
+						1 => 'permissions_policy.conf',
+						2 => 'permissions_policy_custom.conf',
+					};
 
 					$file_path	= Ut::join_path(CONFIG_DIR, $file_name);
 					$pp_header	= file_get_contents($file_path);

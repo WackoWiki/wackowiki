@@ -17,7 +17,7 @@ class Diag
 	{
 		chdir($cwd);
 
-		if ($config['debug'] >= 1 && strpos($http->method, '.xml') === false && $http->method != 'print' && $http->method != 'wordprocessor')
+		if ($config['debug'] >= 1 && !str_contains($http->method, '.xml') && $http->method != 'print' && $http->method != 'wordprocessor')
 		{
 			if (($config['debug_admin_only'] == true && $engine->is_admin()) || $config['debug_admin_only'] == false)
 			{

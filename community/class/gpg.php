@@ -492,7 +492,7 @@ class GPG
 			else if ($row[0] == 'sub')
 			{
 				if ( ($row[1] != 'r' && $row[1] != 'e') &&					// check for revocation/expiry status
-				(strpos($row[11], 'e') !== false) &&						// check that subkey is intended for encryption
+				(str_contains($row[11], 'e')) &&						// check that subkey is intended for encryption
 				($row[5] < time() && ($row[6] == '' || $row[6] > time())) )	// check creation and expiration dates
 				{
 					$subkey = true;
@@ -828,13 +828,13 @@ class GPG
 				{
 					if (++$n > $max) break;		// break flooding searches
 
-					switch ($cells[2])
+					$type = match ($cells[2])
 					{
-						case '1':	$type = 'RSA';		break;
-						case '3':	$type = 'RSA-S';	break;
-						case '17':	$type = 'DSA';		break;
-						default:	$type = 'Undefined';
-					}
+						'1'		=> 'RSA',
+						'3'		=> 'RSA-S',
+						'17'		=> 'DSA',
+						default	=> 'Undefined',
+					};
 
 					$results[$key_id = $cells[1]] = [
 						0 => $type,

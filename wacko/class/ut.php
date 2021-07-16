@@ -24,7 +24,7 @@ class Ut
 			{
 				$final = substr ($xml, $z, $z2 - $z);
 
-				if (strpos($final, '<![CDATA[') === 0)
+				if (str_starts_with($final, '<![CDATA['))
 				{
 					$final = substr($final, 9);
 					$final = substr($final, 0, strlen($final) - 3);
@@ -178,7 +178,7 @@ class Ut
 		if ($running)
 		{
 			$trace	= debug_backtrace();
-			$callee	= (strpos($trace[0]['file'], 'class/ut.php') !== false)? $trace[1] : $trace[0];
+			$callee	= (str_contains($trace[0]['file'], 'class/ut.php'))? $trace[1] : $trace[0];
 			$dir	= dirname(dirname(__FILE__)) . '/';
 			$tag	= str_replace($dir, '', $callee['file']) . ':' . $callee['line'] . ': ';
 

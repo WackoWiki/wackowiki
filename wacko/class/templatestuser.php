@@ -218,7 +218,7 @@ class TemplatestUser extends TemplatestSetter
 				}
 				else if (is_string($name))
 				{
-					if (strpos($name, '_') !== false)
+					if (str_contains($name, '_'))
 					{
 						$args = array_merge(explode('_', $name), $args);
 					}

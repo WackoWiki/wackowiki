@@ -39,7 +39,7 @@ if (count(@$argv) < 3)
 	die("usage: relang.php parent.lang.php other.lang.php [....]\n");
 }
 
-define('IN_WACKO', 1);
+const IN_WACKO = 1;
 require_once $wacko . 'class/ut.php';
 function v($x) { echo Ut::stringify($x) . "\n"; }
 

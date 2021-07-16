@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $name		??= ''; // depreciated, legacy support
 if ($name)	$href	= $name;
 
+// set defaults
 $text		??= '';
 $title		??= '';
 

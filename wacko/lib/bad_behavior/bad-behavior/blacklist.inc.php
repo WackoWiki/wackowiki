@@ -175,7 +175,7 @@ function bb2_blacklist($package) {
 	}
 
 	foreach ($bb2_spambots as $spambot) {
-		if (strpos($ua, $spambot) !== FALSE) {
+		if (str_contains($ua, $spambot)) {
 			return "17f4e8c8";
 		}
 	}

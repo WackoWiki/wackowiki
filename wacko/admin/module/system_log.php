@@ -48,18 +48,12 @@ function admin_system_log(&$engine, &$module)
 		$_level		= (int) ($_POST['level']		?? ($_GET['level']		?? ''));
 
 		// level filtering
-		switch ($_level_mod)
+		$mod = match ($_level_mod)
 		{
-			case 1:
-				$mod = '<=';	// not_lower
-				break;
-			case 2:
-				$mod = '>=';	// not_higher
-				break;
-			case 3:
-				$mod = '=';		// equal
-				break;
-		}
+			1 => '<=',	// not_lower
+			2 => '>=',	// not_higher
+			3 => '=',	// equal
+		};
 
 		$where = "WHERE l.level " . $mod . " " . (int) $_level . " ";
 	}

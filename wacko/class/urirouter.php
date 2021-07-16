@@ -156,7 +156,7 @@ class UriRouter
 					}
 
 					// substitute vars into value
-					if (strpos($val, '$') !== false)
+					if (str_contains($val, '$'))
 					{
 						$val = preg_replace_callback('#@?(\$[0-9a-j])|@?\$\{([\w&]+)\}|\$\$|\$\@#',
 							function ($x) use (&$env)
@@ -191,18 +191,12 @@ class UriRouter
 							continue;
 						}
 
-						switch ($func)
+						$val = match ($func)
 						{
-							case 'tolower':
-								$val = strtolower($val);
-								break;
-							case 'toupper':
-								$val = strtoupper($val);
-								break;
-							case 'int':
-								$val = (int) $val;
-								break;
-						}
+							'tolower'	=> strtolower($val),
+							'toupper'	=> strtoupper($val),
+							'int'		=> (int)$val,
+						};
 
 						$env[$varname][$varidx] = $val;
 						$env['changed'][$varname][$varidx] = $val;

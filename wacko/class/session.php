@@ -51,7 +51,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		$ua = $_SERVER['HTTP_USER_AGENT'] ?? null;
 
-		if (strpos($ua, 'Trident') !== false)
+		if (str_contains($ua, 'Trident'))
 		{
 			// microsoft changing ua string anytime
 			$ua = 'IE';

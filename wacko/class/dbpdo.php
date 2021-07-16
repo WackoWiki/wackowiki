@@ -22,21 +22,15 @@ class DbPDO implements DbInterface
 
 		$dsn = $driver . ':';
 
-		switch ($driver)
+		$dsn .= match ($driver)
 		{
-			case 'pgsql': // host=localhost;port=5432;dbname=testdb;user=bruce;password=mypass
-				$dsn .= "host=" . $config->db_host . ";port=" . $config->db_port . ";dbname=" . $config->db_name;
-				break;
-			case 'sqlite':
-				$dsn .= $config->db_name;
-				break;
-			default:
-				$dsn .= "host=" . $config->db_host .
-					($config->db_port? ";port=" . $config->db_port  : '') .
-					";dbname=" . $config->db_name .
-					($config->db_charset? ";charset=" . $config->db_charset : '');
-				break;
-		}
+			'pgsql'	=> "host=" . $config->db_host . ";port=" . $config->db_port . ";dbname=" . $config->db_name,
+			'sqlite'	=> $config->db_name,
+			default	=> "host=" . $config->db_host .
+						($config->db_port ? ";port=" . $config->db_port : '') .
+						";dbname=" . $config->db_name .
+						($config->db_charset ? ";charset=" . $config->db_charset : ''),
+		};
 
 		try
 		{

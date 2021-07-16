@@ -32,7 +32,7 @@ function bb2_mozilla($package)
 	// Google Desktop fixed it, but apparently some old versions are
 	// still out there. :(
 	// Always check accept header for Mozilla user agents
-	if (strpos($package['headers_mixed']['User-Agent'], "Google Desktop") === FALSE && strpos($package['headers_mixed']['User-Agent'], "PLAYSTATION 3") === FALSE) {
+	if (!str_contains($package['headers_mixed']['User-Agent'], "Google Desktop") && !str_contains($package['headers_mixed']['User-Agent'], "PLAYSTATION 3")) {
 		if (!array_key_exists('Accept', $package['headers_mixed'])) {
 			return "17566707";
 		}
@@ -49,14 +49,14 @@ function bb2_msie($package)
 	}
 
 	// MSIE does NOT send "Windows ME" or "Windows XP" in the user agent
-	if (strpos($package['headers_mixed']['User-Agent'], "Windows ME") !== FALSE || strpos($package['headers_mixed']['User-Agent'], "Windows XP") !== FALSE || strpos($package['headers_mixed']['User-Agent'], "Windows 2000") !== FALSE || strpos($package['headers_mixed']['User-Agent'], "Win32") !== FALSE) {
+	if (str_contains($package['headers_mixed']['User-Agent'], "Windows ME") || str_contains($package['headers_mixed']['User-Agent'], "Windows XP") || str_contains($package['headers_mixed']['User-Agent'], "Windows 2000") || str_contains($package['headers_mixed']['User-Agent'], "Win32")) {
 		return "a1084bad";
 	}
 
 	// MSIE does NOT send Connection: TE but Akamai does
 	// Bypass this test when Akamai detected
 	// The latest version of IE for Windows CE also uses Connection: TE
-	if (!array_key_exists('Akamai-Origin-Hop', $package['headers_mixed']) && strpos($package['headers_mixed']['User-Agent'], "IEMobile") === FALSE && @preg_match('/\bTE\b/i', $package['headers_mixed']['Connection'])) {
+	if (!array_key_exists('Akamai-Origin-Hop', $package['headers_mixed']) && !str_contains($package['headers_mixed']['User-Agent'], "IEMobile") && @preg_match('/\bTE\b/i', $package['headers_mixed']['Connection'])) {
 		return "2b90f772";
 	}
 

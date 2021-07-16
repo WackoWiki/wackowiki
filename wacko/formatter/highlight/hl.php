@@ -11,18 +11,12 @@ if ($options['_default'])
 	if (!empty($options['numbers']))
 	{
 		// HL_NUMBERS_LI HL_NUMBERS_TABLE FALSE -> 1 2 0
-		switch ($options['numbers'])
+		$numbers = match ($options['numbers'])
 		{
-			case 1:
-				$numbers = HL_NUMBERS_LI;
-				break;
-			case 2:
-				$numbers = HL_NUMBERS_TABLE;
-				break;
-			default:
-				$numbers = false;
-				break;
-		}
+			1		=> HL_NUMBERS_LI,
+			2		=> HL_NUMBERS_TABLE,
+			default	=> false,
+		};
 	}
 
 	$table = $numbers == HL_NUMBERS_TABLE ? true: false;

@@ -16,7 +16,7 @@ register_shutdown_function(function () use (&$db, &$http, &$engine, $cwd)
 //register_shutdown_function(['Diag', 'full_disclosure'], $db, $http, $engine, getcwd());
 
 // closing tags
-if (strpos($http->method, '.xml') === false)
+if (!str_contains($http->method, '.xml'))
 {
 	register_shutdown_function(function () { echo "\n</body>\n</html>"; });
 }

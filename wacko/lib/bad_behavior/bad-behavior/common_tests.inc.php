@@ -12,7 +12,7 @@ function bb2_protocol($settings, $package)
 	// Is it claiming to be HTTP/1.1?  Then it shouldn't do HTTP/1.0 things
 	// Blocks some common corporate proxy servers in strict mode
 	if ($settings['strict'] && !strcmp($package['server_protocol'], "HTTP/1.1")) {
-		if (array_key_exists('Pragma', $package['headers_mixed']) && strpos($package['headers_mixed']['Pragma'], "no-cache") !== FALSE && !array_key_exists('Cache-Control', $package['headers_mixed'])) {
+		if (array_key_exists('Pragma', $package['headers_mixed']) && str_contains($package['headers_mixed']['Pragma'], "no-cache") && !array_key_exists('Cache-Control', $package['headers_mixed'])) {
 			return "41feed15";
 		}
 	}
@@ -27,7 +27,7 @@ function bb2_cookies($settings, $package)
 	// First-gen Amazon Kindle is broken; Amazon has been notified 9/24/08
 	// NOTE: RFC 2965 is obsoleted by RFC 6265. Current software MUST NOT
 	// use Cookie2 or $Version in Cookie.
-	if (@strpos($package['headers_mixed']['Cookie'], '$Version=0') !== FALSE && !array_key_exists('Cookie2', $package['headers_mixed']) && strpos($package['headers_mixed']['User-Agent'], "Kindle/") === FALSE) {
+	if (@str_contains($package['headers_mixed']['Cookie'], '$Version=0') && !array_key_exists('Cookie2', $package['headers_mixed']) && !str_contains($package['headers_mixed']['User-Agent'], "Kindle/")) {
 		return '6c502ff1';
 	}
 	return false;
@@ -46,11 +46,11 @@ function bb2_misc_headers($settings, $package)
 	// Worse yet, some Javascript client-side apps do the same in
 	// blatant violation of the protocol and good sense.
 	// if (strpos($package['request_uri'], "#") !== FALSE || strpos($package['headers_mixed']['Referer'], "#") !== FALSE) {
-	if ($settings['strict'] && strpos($package['request_uri'], "#") !== FALSE) {
+	if ($settings['strict'] && str_contains($package['request_uri'], "#")) {
 		return "dfd9b1ad";
 	}
 	// A pretty nasty SQL injection attack on IIS servers
-	if (strpos($package['request_uri'], ";DECLARE%20@") !== FALSE) {
+	if (str_contains($package['request_uri'], ";DECLARE%20@")) {
 		return "dfd9b1ad";
 	}
 
@@ -59,7 +59,7 @@ function bb2_misc_headers($settings, $package)
 	// NOTE: this blocks the whois.sc bot. No big loss.
 	// Exceptions: MT (not fixable); LJ (refuses to fix; may be
 	// blocked again in the future); Facebook
-	if ($settings['strict'] && array_key_exists('Range', $package['headers_mixed']) && strpos($package['headers_mixed']['Range'], "=0-") !== FALSE) {
+	if ($settings['strict'] && array_key_exists('Range', $package['headers_mixed']) && str_contains($package['headers_mixed']['Range'], "=0-")) {
 		if (strncmp($ua, "MovableType", 11) && strncmp($ua, "URI::Fetch", 10) && strncmp($ua, "php-openid/", 11) && strncmp($ua, "facebookexternalhit", 19)) {
 			return "7ad04a8a";
 		}
@@ -75,8 +75,8 @@ function bb2_misc_headers($settings, $package)
 	// may be blocked again in the future)
 	if ($settings['strict'] &&
 		array_key_exists('via', $package['headers']) &&
-		strpos($package['headers']['via'],'Clearswift') === FALSE &&
-		strpos($ua,'CoralWebPrx') === FALSE) {
+		!str_contains($package['headers']['via'], 'Clearswift') &&
+		!str_contains($ua, 'CoralWebPrx')) {
 		return "9c9e4979";
 	}
 
@@ -137,7 +137,7 @@ function bb2_misc_headers($settings, $package)
 		// Referer, if it exists, must contain a :
 		// While a relative URL is technically valid in Referer, all known
 		// legitimate user-agents send an absolute URL
-		if (strpos($package['headers_mixed']['Referer'], ":") === FALSE) {
+		if (!str_contains($package['headers_mixed']['Referer'], ":")) {
 			return "45b35e30";
 		}
 	}

@@ -25,18 +25,12 @@ if ($options['_default'])
 	{
 		$numbers = $options['numbers'] ? GESHI_NORMAL_LINE_NUMBERS : GESHI_NO_LINE_NUMBERS;
 
-		switch ($options['numbers'])
+		$header = match ($options['numbers'])
 		{
-			case 1:
-				$header = GESHI_HEADER_PRE_VALID;
-				break;
-			case 2:
-				$header = GESHI_HEADER_PRE_TABLE;
-				break;
-			default:
-				$header = false;
-				break;
-		}
+			1		=> GESHI_HEADER_PRE_VALID,
+			2		=> GESHI_HEADER_PRE_TABLE,
+			default	=> false,
+		};
 	}
 
 	$geshi->enable_classes();			// use classes for highlighting (must be first after creating object)

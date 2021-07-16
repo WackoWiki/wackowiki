@@ -295,12 +295,12 @@ class SafeHTML
 			{
 				$name = strtolower($name);
 
-				if (strpos($name, 'on') === 0)
+				if (str_starts_with($name, 'on'))
 				{
 					continue;
 				}
 
-				if (strpos($name, 'data') === 0)
+				if (str_starts_with($name, 'data'))
 				{
 					continue;
 				}
@@ -370,7 +370,7 @@ class SafeHTML
 				);
 
 				if ((in_array($name, $this->protocolAttributes))
-					&& (strpos($tempval, ':') !== false)
+					&& (str_contains($tempval, ':'))
 				)
 				{
 					if ($this->protocolFiltering == 'black')

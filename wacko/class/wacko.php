@@ -264,7 +264,7 @@ class Wacko
 
 	static function get_file_extension($file_name)
 	{
-		if (strpos($file_name, '.') === false)
+		if (!str_contains($file_name, '.'))
 		{
 			return '';
 		}
@@ -4722,13 +4722,13 @@ class Wacko
 			// tls'ing internal links
 			if ($this->db->tls)
 			{
-				if (isset($this->db->open_url) && strpos($url, $this->db->open_url) !== false)
+				if (isset($this->db->open_url) && str_contains($url, $this->db->open_url))
 				{
 					$url = str_replace($this->db->open_url, $this->db->base_url, $url);
 				}
 			}
 
-			if (strpos($url, $this->db->base_url) !== false)
+			if (str_contains($url, $this->db->base_url))
 			{
 				$sub = mb_substr($url, mb_strlen($this->db->base_url));
 				$url = $this->db->base_url . $sub;

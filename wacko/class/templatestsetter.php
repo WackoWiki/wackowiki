@@ -38,7 +38,7 @@ class TemplatestSetter extends TemplatestFilters
 		{
 			$filter = array_shift($act) ?: '';
 
-			if (strpos($filter, '.') !== false)
+			if (str_contains($filter, '.'))
 			{
 				array_unshift($act, $filter);
 				$filter = 'index';
