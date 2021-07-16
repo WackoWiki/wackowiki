@@ -51,20 +51,6 @@ class Settings extends Dbal implements ArrayAccess
 
 			$this->system_seed_hash = hash('sha1', $this->system_seed);
 
-			// support legacy database setting names, XXX: remove it with next major 6.1 release
-			if (isset($this->config['wacko_version']) && version_compare($this->config['wacko_version'], '6.0.22', '<'))
-			{
-				$this->db_driver	= $this->database_driver;
-				$this->db_host		= $this->database_host;
-				$this->db_port		= $this->database_port;
-				$this->db_name		= $this->database_database;
-				$this->db_user		= $this->database_user;
-				$this->db_password	= $this->database_password;
-				$this->db_collation	= $this->database_collation;
-				$this->db_charset	= $this->database_charset;
-				$this->db_engine	= $this->database_engine;
-			}
-
 			if (!RECOVERY_MODE)
 			{
 				// connecting to db
