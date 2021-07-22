@@ -3,11 +3,16 @@
  * File content:
  * Includes all styles that forces the look of the page for print out
  */
- 
+
+:root {
+	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
+	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
+}
+
 #print {
 	background-color:	#FFF;
 	color:				#000;
-	font-family:		Arial,Helvetica,sans-serif;
+	font-family:		var(--ww-font-sans-serif);
 	letter-spacing:		1px;
 	padding-bottom:		20px;
 	padding-top:		10px;
@@ -15,7 +20,7 @@
 
 /* Specifies the wikiname on top */
 header {
-	font-family:		"Lucida Console","Courier New",monospace;
+	font-family:		var(--ww-font-monospace);
 	letter-spacing:		1px;
 	font-size:			0.75em;
 	margin-bottom:		30px;
@@ -32,7 +37,7 @@ header h1 {
 	margin-top:			0;
 	padding-bottom:		0;
 	margin-bottom:		0;
-	font-family:		Arial,Helvetica,FreeSans,sans-serif;
+	font-family:		var(--ww-font-sans-serif);
 	color:				#666;
 	font-weight:		bold;
 }
@@ -52,7 +57,7 @@ footer {
 body {
 	background-color:	#fff;
 	color:				#000;
-	font-family:		Verdana, "Bitstream Vera Sans", sans, sans-serif;
+	font-family:		var(--ww-font-sans-serif);
 	font-size:			small;
 	margin:				0 auto;
 	padding:			10px;
@@ -107,7 +112,7 @@ hr {
 
 /* Monospaced code */
 pre {
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-family:		var(--ww-font-monospace);
 }
 
 
@@ -180,7 +185,7 @@ sup a:hover {
 
 /* Fixed width text: SYNTAX ##monospace## */
 code {
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-family:		var(--ww-font-monospace);
 	font-size:			0.9em;
 	padding:			2px 5px;
 }
@@ -192,12 +197,12 @@ code {
 
 /* Code areas: SYNTAX %%code%% */
 code {
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-family:		var(--ww-font-monospace);
 	font-size:			0.9em;
 }
 .code, .hl-main pre {
 	border:				dashed 1px #000;
-	font-family:		"Bitstream Vera Sans Mono", "Courier New", monospace;
+	font-family:		var(--ww-font-monospace);
 	font-size:			0.9em;
 	padding:			5px;
 }
@@ -248,7 +253,7 @@ hr {
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
 
 h1, h2, h3, h4, h5, h6 {
-	font-family:		Verdana, "Luxi Sans", "Trebuchet MS", sans, sans-serif;
+	font-family:		var(--ww-font-sans-serif);
 	font-weight:		900;
 	padding:			0;
 }
