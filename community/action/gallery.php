@@ -301,18 +301,14 @@ if ($can_view)
 				else
 				{
 					// show file via JS with data-attributes
+					$tpl->href			= $url;
+
 					if ($target == 2)
 					{
-						$tpl->href			= $url;
 						$tpl->description	= $file_description;
 						$tpl->alt			= $file_description;
 						$tpl->datafancybox	= ' data-fancybox="' . $param_token . '"';
 						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
-					}
-					else
-					{
-						// show file itself
-						$tpl->href	= $url;
 					}
 				}
 

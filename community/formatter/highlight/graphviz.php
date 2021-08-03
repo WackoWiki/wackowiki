@@ -107,19 +107,14 @@ else
 		$mapcmd		= $GraphVizSettings['bin'] . " -Tcmap $tmpname.dot";
 		$map		= `{$mapcmd}`;
 
-		if ($map == '')
-		{
-			// output without no image map
-			echo '<img border="0" usemap="#' . $gname . '" ' . $imagesize[3] . ' src="' . $imgurl . '">' . "\n";
-		}
-		else
-		{
+		if ($map != '') {
 			$map = iconv('utf-8', $this->get_charset(), $map);
 
 			// output with image map
 			echo '<map name="' . $gname . '">' . $map . '</map>';
-			echo '<img border="0" usemap="#' . $gname . '" ' . $imagesize[3] . ' src="' . $imgurl . '">' . "\n";
 		}
+
+		echo '<img border="0" usemap="#' . $gname . '" ' . $imagesize[3] . ' src="' . $imgurl . '">' . "\n";
 
 		// clear the directory and vars
 		unset($cmdOut); // maybe this can cause trouble if un-unsetted

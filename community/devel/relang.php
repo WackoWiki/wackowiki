@@ -131,7 +131,7 @@ function parse($fname)
 					return '';
 			}, $line));
 
-			if (substr($clean, -1) == ',')
+			if (str_ends_with($clean, ','))
 			{
 				if (array_key_exists($cur, $data)) die("dupe $cur in $fname\n");
 				$data[$cur] = $accum;
@@ -275,7 +275,7 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 		}
 
 		$output = trim($output);
-		if (substr($output, -2) == '?>')
+		if (str_ends_with($output, '?>'))
 		{
 			$output = trim(substr($output, 0, -2));
 		}

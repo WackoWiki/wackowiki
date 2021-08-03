@@ -50,9 +50,10 @@ function admin_config_appearance(&$engine, &$module)
 
 		$file_name = Ut::join_path(IMAGE_DIR, $yeah[$file]);
 
+		clearstatcache();
+
 		if (unlink($file_name))
 		{
-			clearstatcache();
 			$engine->set_message($engine->_t('FileRemovedFromFS'), 'success');
 			# $engine->set_message($engine->_t('LogoRemoved'), 'success');
 
@@ -69,7 +70,6 @@ function admin_config_appearance(&$engine, &$module)
 		}
 		else
 		{
-			clearstatcache();
 			$permissions = substr(sprintf('%o', fileperms($file_name)), -4);
 			$engine->set_message('File permissions <code>' . $file_name . '</code> ' . $permissions, 'error');
 

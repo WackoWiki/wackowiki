@@ -144,7 +144,6 @@ else
 					$tpl->header	= $this->_t('FeedMulti');
 				}
 
-				$tpl->leave();
 			}
 			// default
 			else
@@ -174,8 +173,9 @@ else
 					$tpl->header	= $this->_t('FeedMulti');
 				}
 
-				$tpl->leave();
 			}
+
+			$tpl->leave();
 		}
 
 		// we using a parameter token here to sort out multiple instances

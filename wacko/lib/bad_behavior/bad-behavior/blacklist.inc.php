@@ -4,7 +4,7 @@ function bb2_blacklist($package) {
 
 	// Blacklisted user agents
 	// These user agent strings occur at the beginning of the line.
-	$bb2_spambots_0 = array(
+	$bb2_spambots_0 = [
 		"-",	// brute force password attempts, malicious botnet
 		"8484 Boston Project",	// video poker/porn spam
 		"ArchiveTeam",	// ignores robots.txt and hammers server
@@ -73,10 +73,10 @@ function bb2_blacklist($package) {
 		"Winnie Poh",		// Automated Coppermine hacks
 		"Wordpress",		// malicious software
 		"\"",			// malicious software
-	);
+	];
 
 	// These user agent strings occur anywhere within the line.
-	$bb2_spambots = array(
+	$bb2_spambots = [
 		"\r",			// A really dumb bot
 		"<sc",			// XSS exploit attempts
 		"; Widows ",		// misc comment/email spam
@@ -129,20 +129,20 @@ function bb2_blacklist($package) {
 		"Xedant Human Emulator",// spammer script engine
 		"ZmEu",			// exploit scanner
 		"\\\\)",		// spam harvester
-	);
+	];
 
 	// These are regular expression matches.
-	$bb2_spambots_regex = array(
+	$bb2_spambots_regex = [
 		"/^[A-Z]{10}$/",	// misc email spam
 		"/[bcdfghjklmnpqrstvwxz ]{8,}/",
 //		"/(;\){1,2}$/",		// misc spammers/harvesters
 		"/MSIE.*Windows XP/",	// misc comment spam
 		"/MSIE [2345]/",	// too old; assumed robot
-	);
+	];
 
 	// Blacklisted URL strings
 	// These strings are considered case-insensitive.
-	$bb2_spambots_url = array(
+	$bb2_spambots_url = [
 		"0x31303235343830303536",	// Havij
 		"../",				// path traversal
 		"..\\",				// path traversal
@@ -160,7 +160,7 @@ function bb2_blacklist($package) {
 		"union+select",			// SQL injection probe
 		"waitfor+delay+",		// SQL injection probe
 		"w00tw00t",			// vulnerability scanner
-	);
+	];
 
 	// Do not edit below this line.
 

@@ -340,7 +340,7 @@ class GPG
 
 			foreach ($rows as $row)
 			{
-				if ($row && substr($row, 0, 3) != 'tru')
+				if ($row && !str_starts_with($row, 'tru'))
 				{
 					$matrix[] = explode(':', $row);
 				}
@@ -807,7 +807,7 @@ class GPG
 		}
 
 		// correcting search string
-		if (substr($string = trim($string), 0, 2) == '0x')
+		if (str_starts_with($string = trim($string), '0x'))
 		{
 			$string = '=' . $string;
 		}

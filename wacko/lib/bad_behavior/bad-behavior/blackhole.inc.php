@@ -11,20 +11,20 @@ function bb2_blackhole($package) {
 	bb2_db_query("SET @@session.wait_timeout = 90");
 
 	// Only conservative lists
-	$bb2_blackhole_lists = array(
+	$bb2_blackhole_lists = [
 		"sbl-xbl.spamhaus.org",	// All around nasties
 //		"dnsbl.sorbs.net",	// Old useless data.
 //		"list.dsbl.org",	// Old useless data.
 //		"dnsbl.ioerror.us",	// Bad Behavior Blackhole
-	);
+	];
 	
 	// Things that shouldn't be blocked, from aggregate lists
-	$bb2_blackhole_exceptions = array(
-		"sbl-xbl.spamhaus.org" => array("127.0.0.4"),	// CBL is problematic
-		"dnsbl.sorbs.net" => array("127.0.0.10",),	// Dynamic IPs only
-		"list.dsbl.org" => array(),
-		"dnsbl.ioerror.us" => array(),
-	);
+	$bb2_blackhole_exceptions = [
+		"sbl-xbl.spamhaus.org" => ["127.0.0.4"],	// CBL is problematic
+		"dnsbl.sorbs.net" => ["127.0.0.10",],	// Dynamic IPs only
+		"list.dsbl.org" => [],
+		"dnsbl.ioerror.us" => [],
+	];
 
 	// Check the blackhole lists
 	$ip = $package['ip'];

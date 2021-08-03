@@ -45,14 +45,14 @@ if (($user_id = $this->get_user_id()))
 
 	$prefix		= $this->db->table_prefix;
 
+	$selector =
+		"FROM {$prefix}page " .
+		"WHERE user_id = " . (int) $user_id . " " .
+			"AND deleted <> 1 " .
+			"AND comment_on_id = 0 ";
+
 	if ($mode == 'byname')
 	{
-		$selector =
-			"FROM {$prefix}page " .
-			"WHERE user_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 ";
-
 		$count	= $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
 			$selector, true);
@@ -103,12 +103,6 @@ if (($user_id = $this->get_user_id()))
 	}
 	else
 	{
-		$selector =
-			"FROM {$prefix}page " .
-			"WHERE user_id = " . (int) $user_id . " " .
-				"AND deleted <> 1 " .
-				"AND comment_on_id = 0 ";
-
 		$count	= $this->db->load_single(
 			"SELECT COUNT(tag) AS n " .
 			$selector, true);
