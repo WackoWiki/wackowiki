@@ -11,7 +11,7 @@ $options['color']['other']				= '#A6A6A6';
 $options['color']['comment']			= 'gray';
 $options['color']['attributevalues']	= 'blue';
 $options['color']['entities']			= 'orange';
-$options['line_numbers']				= false;
+$options['line_numbers']				= $options['numbers'] ?? false;
 
 $html_tags = [
 	'!DOCTYPE',

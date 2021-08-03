@@ -104,7 +104,7 @@ if (($user_id = $this->get_user_id()))
 	else
 	{
 		$count	= $this->db->load_single(
-			"SELECT COUNT(tag) AS n " .
+			"SELECT COUNT(page_id) AS n " .
 			$selector, true);
 
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));

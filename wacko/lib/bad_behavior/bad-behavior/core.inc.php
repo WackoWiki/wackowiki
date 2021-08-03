@@ -70,7 +70,7 @@ function bb2_reverse_proxy($settings, $headers_mixed)
 # FIXME: Bug #12. But this code doesn't currently work.
 function bb2_unpack_php_post_array($key, $value)
 {
-	$unpacked = array();
+	$unpacked = [];
 	foreach ($value as $k => $v) {
 		$i = $key. '[' . $k . ']';
 		if (is_array($v))
@@ -87,7 +87,7 @@ function bb2_start($settings)
 	$headers = bb2_load_headers();
 	// Postprocess the headers to mixed-case
 	// TODO: get the world to stop using PHP as CGI
-	$headers_mixed = array();
+	$headers_mixed = [];
 	foreach ($headers as $h => $v) {
 		$headers_mixed[uc_all($h)] = $v;
 	}
@@ -96,7 +96,7 @@ function bb2_start($settings)
 	$_SERVER['REMOTE_ADDR'] = preg_replace("/^::ffff:/", "", $_SERVER['REMOTE_ADDR']);
 
 	// Reconstruct the HTTP entity, if present.
-	$request_entity = array();
+	$request_entity = [];
 	if (isset($_SERVER['REQUEST_METHOD']) && (!strcasecmp($_SERVER['REQUEST_METHOD'], "POST") || !strcasecmp($_SERVER['REQUEST_METHOD'], "PUT"))) {
 		foreach ($_POST as $h => $v) {
 			if (is_array($v)) {
@@ -117,7 +117,7 @@ function bb2_start($settings)
 		$ip = $_SERVER['REMOTE_ADDR'];
 	}
 
-	@$package = array('ip' => $ip, 'headers' => $headers, 'headers_mixed' => $headers_mixed, 'request_method' => $_SERVER['REQUEST_METHOD'], 'request_uri' => $request_uri, 'server_protocol' => $_SERVER['SERVER_PROTOCOL'], 'request_entity' => $request_entity, 'user_agent' => $_SERVER['HTTP_USER_AGENT'], 'is_browser' => false,);
+	@$package = ['ip' => $ip, 'headers' => $headers, 'headers_mixed' => $headers_mixed, 'request_method' => $_SERVER['REQUEST_METHOD'], 'request_uri' => $request_uri, 'server_protocol' => $_SERVER['SERVER_PROTOCOL'], 'request_entity' => $request_entity, 'user_agent' => $_SERVER['HTTP_USER_AGENT'], 'is_browser' => false,];
 
 	$result = bb2_screen($settings, $package);
 	if ($result && !defined('BB2_TEST')) bb2_banned($settings, $package, $result);

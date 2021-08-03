@@ -12,7 +12,7 @@ $options['color']['comment']			= 'gray';
 $options['color']['attributevalues']	= 'blue';
 $options['color']['entities']			= 'orange';
 $options['color']['digits']				= 'green';
-$options['line_numbers']				= false;
+$options['line_numbers']				= $options['numbers'] ?? false;
 
 if (isset($options['notypo']) && $options['notypo'] !== false) $options['notypo'] = true;
 
