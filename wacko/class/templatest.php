@@ -192,7 +192,7 @@ class Templatest
 			else if ($part)
 			{
 				$line = static::sanitize($line);
-				if (substr($line, -1) !== "\n")
+				if (!str_ends_with($line, "\n"))
 				{
 					$line .= "\n";
 				}

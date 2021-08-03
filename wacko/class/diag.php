@@ -202,7 +202,7 @@ class Diag
 				&& ($callee = (@$trace[0]['file'] === __FILE__)? @$trace[1] : @$trace[0])
 				&& @$callee['file'])
 			{
-				$dir = dirname(dirname(__FILE__)) . '/';
+				$dir = dirname(__FILE__, 2) . '/';
 				$callee = str_replace($dir, '', $callee['file']) . ':' . $callee['line'];
 			}
 			else

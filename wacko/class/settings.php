@@ -259,7 +259,7 @@ class Settings extends Dbal implements ArrayAccess
 	// CHECK WEBSITE LOCKING
 	function is_locked($file = SITE_LOCK)
 	{
-		return substr(@file_get_contents($file), 0, 1) === '1';
+		return str_starts_with(@file_get_contents($file), '1');
 	}
 
 	// lock / unlock

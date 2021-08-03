@@ -108,7 +108,7 @@ class TemplatestSetter extends TemplatestFilters
 				$text = implode("\n", $lines);
 			}
 
-			if ($text && substr($text, -1) !== "\n")
+			if ($text && !str_ends_with($text, "\n"))
 			{
 				$text .= "\n";
 			}

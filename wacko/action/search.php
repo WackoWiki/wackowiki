@@ -166,7 +166,7 @@ $get_context = function($phrase, $string, $position, $padding, $hellip = true)
 };
 
 // returns only the first $position match as intended
-$strpos_array = function($content, $keywords, $offset=0)
+$strpos_array = function($content, $keywords, $offset = 0)
 {
 	if(!is_array($keywords)) $keywords = [$keywords];
 
@@ -254,7 +254,7 @@ $highlight_this = function ($text, $words)
 			$word		= preg_quote($word, '/');
 
 			// highlight uppercase and lowercase correctly
-			$text		= preg_replace('/(' . $word . ')/ui', '<mark class="highlight">$1</mark>', $text, -1 , $count);
+			$text		= preg_replace('/(' . $word . ')/ui', '<mark class="highlight">$1</mark>', $text, -1, $count);
 			$the_count	= $count + $the_count;
 		}
 	}

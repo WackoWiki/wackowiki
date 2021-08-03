@@ -564,8 +564,6 @@ class WackoFormatter
 				}
 
 				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
-				$output	.= $this->indent_close();
-				$output	.= '</th>';
 			}
 			else
 			{
@@ -578,9 +576,10 @@ class WackoFormatter
 				}
 
 				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<th class="userhead">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
-				$output	.= $this->indent_close();
-				$output	.= '</th>';
 			}
+
+			$output	.= $this->indent_close();
+			$output	.= '</th>';
 
 			$output .= '</tr>';
 
@@ -632,8 +631,6 @@ class WackoFormatter
 				}
 
 				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell" colspan="' . ($this->cols - $count + 1) . '">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
-				$output	.= $this->indent_close();
-				$output	.= '</td>';
 			}
 			else
 			{
@@ -646,9 +643,10 @@ class WackoFormatter
 				}
 
 				$output	.= str_replace("\u{2592}", '', str_replace("\u{2592}" . "<br>\n", '', '<td class="usercell">' . preg_replace_callback($this->LONGREGEXP, $callback, "\u{2592}\n" . $cells[$count])));
-				$output	.= $this->indent_close();
-				$output	.= '</td>';
 			}
+
+			$output	.= $this->indent_close();
+			$output	.= '</td>';
 
 			$output	.= '</tr>';
 

@@ -989,25 +989,11 @@ class Wacko
 	{
 		if ($page_id != 0)
 		{
-			if (isset($this->wanted_cache['page_id'][$page_id]))
-			{
-				return $this->wanted_cache['page_id'][$page_id];
-			}
-			else
-			{
-				return '';
-			}
+			return $this->wanted_cache['page_id'][$page_id] ?? '';
 		}
 		else
 		{
-			if (isset($this->wanted_cache['tag'][$this->language['code']][$tag]))
-			{
-				return $this->wanted_cache['tag'][$this->language['code']][$tag];
-			}
-			else
-			{
-				return '';
-			}
+			return $this->wanted_cache['tag'][$this->language['code']][$tag] ?? '';
 		}
 	}
 
@@ -1605,22 +1591,15 @@ class Wacko
 
 	function load_categories($object_id = 0, $type_id = OBJECT_PAGE, $cache = false) : array
 	{
-		if (isset($this->category_cache[$object_id][$type_id]))
-		{
-			return $this->category_cache[$object_id][$type_id];
-		}
-		else
-		{
-			return $this->db->load_all(
+		return $this->category_cache[$object_id][$type_id] ?? $this->db->load_all(
 				"SELECT c.category_id, c.category, c.category_lang " .
 				"FROM " . $this->db->table_prefix . "category c " .
-					"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
-				"WHERE ca.object_id  = " . (int) $object_id . " " .
+				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
+				"WHERE ca.object_id  = " . (int)$object_id . " " .
 				($type_id != 0
-					? "AND ca.object_type_id = " . (int) $type_id . " "
-					: "AND ca.object_type_id = " . (int) $type_id . " " ) // TODO: explode array IN
+					? "AND ca.object_type_id = " . (int)$type_id . " "
+					: "AND ca.object_type_id = " . (int)$type_id . " ") // TODO: explode array IN
 				, $cache);
-		}
 	}
 
 	/**
@@ -5614,14 +5593,7 @@ class Wacko
 		{
 			if (!$revision_id)
 			{
-				if (isset($this->page['owner_name']))
-				{
-					return $this->page['owner_name'];
-				}
-				else
-				{
-					return false;
-				}
+				return $this->page['owner_name'] ?? false;
 			}
 			else
 			{
@@ -5746,14 +5718,7 @@ class Wacko
 	*/
 	function get_cached_acl($page_id, $privilege, $use_defaults)
 	{
-		if (isset( $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ))
-		{
-			return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults];
-		}
-		else
-		{
-			return '';
-		}
+		return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ?? '';
 	}
 
 	/**
@@ -8308,8 +8273,7 @@ class Wacko
 	{
 		if ($tabs)
 		{
-			$out  = '';
-			$out .= '<ul class="menu">' . "\n";
+			$out = '<ul class="menu">' . "\n";
 
 			foreach ($tabs as $i => $text)
 			{

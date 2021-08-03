@@ -50,15 +50,10 @@ if ($this->has_access('read'))
 
 	if (isset($_GET['show_comments']))
 	{
-		switch ($_GET['show_comments'])
-		{
-			case 0:
-				$this->sess->show_comments[$this->page['page_id']] = 0;
-				break;
-			case 1:
-				$this->sess->show_comments[$this->page['page_id']] = 1;
-				break;
-		}
+		$this->sess->show_comments[$this->page['page_id']] = match ($_GET['show_comments']) {
+			0 => 0,
+			1 => 1,
+		};
 	}
 
 	// display comments

@@ -160,7 +160,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_index($value, $path)
 	{
-		if (substr($path, 0, 1) == '.')
+		if (str_starts_with($path, '.'))
 		{
 			$path = substr($path, 1);
 		}
@@ -298,7 +298,7 @@ class TemplatestFilters extends TemplatestEscaper
 					}
 					else
 					{
-						if (substr($html, -1) === ' ' && ($spaces = strspn($content, " \t\r\n\x0b")) > 0)
+						if (str_ends_with($html, ' ') && ($spaces = strspn($content, " \t\r\n\x0b")) > 0)
 						{
 							$content = substr($content, $spaces);
 						}

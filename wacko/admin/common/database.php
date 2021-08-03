@@ -361,11 +361,11 @@ function get_table(&$engine, $table, $drop = true)
 		{
 			$schema_create .= '	PRIMARY KEY (' . implode(', ', $columns) . ')';
 		}
-		else if (substr($x,0,6) == 'UNIQUE')
+		else if (str_starts_with($x, 'UNIQUE'))
 		{
 			$schema_create .= '	UNIQUE `' . substr($x,7) . '` (' . implode(', ', $columns) . ')';
 		}
-		else if (substr($x,0,8) == 'FULLTEXT')
+		else if (str_starts_with($x, 'FULLTEXT'))
 		{
 			$schema_create .= '	FULLTEXT KEY `' . substr($x,9) . '` (' . implode(', ', $columns) . ')';
 		}
