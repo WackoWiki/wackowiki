@@ -42,15 +42,16 @@ if ($this->has_access('read'))
 	$sort_comment	= $this->get_user_setting('sorting_comments');
 	$sort_comment	??= $this->db->sorting_comments;
 
+	$show_comments	= (int) ($_GET['show_comments'] ?? null);
+
 	$tpl->enter('cp_s_');
 
 	// store comments display in session
 	$this->sess->show_comments[$this->page['page_id']] ??= ($this->get_user_setting('show_comments') ? 1 : 0);
 
-
-	if (isset($_GET['show_comments']))
+	if (isset($show_comments))
 	{
-		$this->sess->show_comments[$this->page['page_id']] = match ($_GET['show_comments']) {
+		$this->sess->show_comments[$this->page['page_id']] = match ($show_comments) {
 			0 => 0,
 			1 => 1,
 		};
