@@ -16,8 +16,6 @@ $feed_tag		= '';
 
 if (!empty($tag))
 {
-
-
 	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';

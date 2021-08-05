@@ -310,7 +310,7 @@ $forum_cluster = '';
 if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 {
 	$accept_action	= '';
-	$error			= '';
+	$error			= null;
 
 	if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 	{

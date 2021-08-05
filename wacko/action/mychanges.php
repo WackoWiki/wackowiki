@@ -51,12 +51,12 @@ if (($user_id = $this->get_user_id()))
 			"AND deleted <> 1 " .
 			"AND comment_on_id = 0 ";
 
+	$count	= $this->db->load_single(
+		"SELECT COUNT(page_id) AS n " .
+		$selector, true);
+
 	if ($mode == 'byname')
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
-			$selector, true);
-
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('byname'));
 
 		if ($pages = $this->db->load_all(
@@ -103,10 +103,6 @@ if (($user_id = $this->get_user_id()))
 	}
 	else
 	{
-		$count	= $this->db->load_single(
-			"SELECT COUNT(page_id) AS n " .
-			$selector, true);
-
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
 		if (($pages = $this->db->load_all(

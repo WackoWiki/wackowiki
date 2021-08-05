@@ -40,7 +40,7 @@ $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', 
 $page		??= '/';
 $list		??= 1;
 $type_id	??= OBJECT_PAGE;
-$ids		??= '';
+$ids		??= null;
 $lang		??= $this->page['page_lang'];
 $nomark		??= 0;
 $info		??= 0;

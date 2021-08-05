@@ -434,7 +434,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 				$whitelists['useragent'] = [];
 			}
 
-			update_option('bad_behavior_whitelist', $whitelists);
+			#update_option('bad_behavior_whitelist', $whitelists);
 		?>
 		<div id="message" class="updated fade"><p><strong><?php echo $engine->_t('BbOptionsSaved');?></strong></p></div>
 		<?php
@@ -622,7 +622,7 @@ function bb2_options(&$engine)
 
 		if ($_POST['reverse_proxy_header'])
 		{
-			$settings['reverse_proxy_header'] = sanitize_text_field(uc_all($_POST['reverse_proxy_header']));
+			$settings['reverse_proxy_header'] = uc_all($_POST['reverse_proxy_header']);
 		}
 		else
 		{
