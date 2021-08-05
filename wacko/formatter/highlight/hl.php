@@ -11,7 +11,7 @@ if ($options['_default'])
 	if (!empty($options['numbers']))
 	{
 		// HL_NUMBERS_LI HL_NUMBERS_TABLE FALSE -> 1 2 0
-		$numbers = match ($options['numbers'])
+		$numbers = match ((int) $options['numbers'])
 		{
 			1		=> HL_NUMBERS_LI,
 			2		=> HL_NUMBERS_TABLE,
@@ -19,7 +19,7 @@ if ($options['_default'])
 		};
 	}
 
-	$table = $numbers == HL_NUMBERS_TABLE ? true: false;
+	$table = $numbers == HL_NUMBERS_TABLE ? true : false;
 
 	$hl =& Text_Highlighter::factory(strtoupper($language), ['numbers' => $numbers, 'numbers_start' => $start]);
 

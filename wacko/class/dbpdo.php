@@ -24,9 +24,9 @@ class DbPDO implements DbInterface
 
 		$dsn .= match ($driver)
 		{
-			'pgsql'	=> "host=" . $config->db_host . ";port=" . $config->db_port . ";dbname=" . $config->db_name,
+			'pgsql'		=> "host=" . $config->db_host . ";port=" . $config->db_port . ";dbname=" . $config->db_name,
 			'sqlite'	=> $config->db_name,
-			default	=> "host=" . $config->db_host .
+			default		=> "host=" . $config->db_host .
 						($config->db_port ? ";port=" . $config->db_port : '') .
 						";dbname=" . $config->db_name .
 						($config->db_charset ? ";charset=" . $config->db_charset : ''),

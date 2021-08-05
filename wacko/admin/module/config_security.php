@@ -284,7 +284,7 @@ function admin_config_security(&$engine, &$module)
 				<?php
 				if ($engine->db->csp)
 				{
-					$file_name = match ($engine->db->csp)
+					$file_name = match ((int) $engine->db->csp)
 					{
 						1 => 'csp.conf',
 						2 => 'csp_custom.conf',
@@ -331,7 +331,7 @@ function admin_config_security(&$engine, &$module)
 				<?php
 				if ($engine->db->permissions_policy)
 				{
-					$file_name = match ($engine->db->permissions_policy)
+					$file_name = match ((int) $engine->db->permissions_policy)
 					{
 						1 => 'permissions_policy.conf',
 						2 => 'permissions_policy_custom.conf',
