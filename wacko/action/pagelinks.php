@@ -36,7 +36,8 @@ if ([$pages, $pagination] = $this->load_page_links($tag, null, $max))
 	$this->preload_acl($page_ids);
 
 	// display navigation
-	$tpl->pagination_text = $pagination['text'];
+	$tpl->pagination_text	= $pagination['text'];
+	$tpl->offset			= $pagination['offset'] + 1;
 
 	foreach ($pages as $page)
 	{
