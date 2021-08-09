@@ -9,7 +9,7 @@
 	[= nolinks _ =
 		[ ' _t: NoLinkedPages ' ]
 	=]
-		<ol>
+		<ol start="[ ' offset ' ]">
 			[= l _ =
 				<li>[ ' link ' ]</li>
 			=]

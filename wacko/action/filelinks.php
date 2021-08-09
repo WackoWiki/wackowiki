@@ -37,7 +37,8 @@ if ($file_id)
 		$anchor = 'a-' . $file_id;
 
 		// display navigation
-		$tpl->pagination_text = $pagination['text'];
+		$tpl->pagination_text	= $pagination['text'];
+		$tpl->offset			= $pagination['offset'] + 1;
 
 		foreach ($pages as $page)
 		{

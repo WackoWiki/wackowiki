@@ -37,7 +37,8 @@ if ([$pages, $pagination] = $this->load_pages_linking($tag, null, $max))
 	$anchor = 'a-' . $this->get_page_id($tag);
 
 	// display navigation
-	$tpl->pagination_text = $pagination['text'];
+	$tpl->pagination_text	= $pagination['text'];
+	$tpl->offset			= $pagination['offset'] + 1;
 
 	foreach ($pages as $page)
 	{
