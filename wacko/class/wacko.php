@@ -1396,7 +1396,7 @@ class Wacko
 			"ORDER BY num DESC");
 	}
 
-	function load_file_links($file_id, $tag = '', $limit = 100)
+	function load_file_links($file_id, $tag = '', $limit = 100, $params = [])
 	{
 		$selector =
 			"FROM " . $this->db->table_prefix . "file_link l " .
@@ -1413,7 +1413,7 @@ class Wacko
 			$selector
 			);
 
-		$pagination = $this->pagination($count_pages['n'], $limit);
+		$pagination = $this->pagination($count_pages['n'], $limit, 'f', $params);
 
 		if ($pages = $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .

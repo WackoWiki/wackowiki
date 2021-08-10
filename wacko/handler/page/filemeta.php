@@ -263,7 +263,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				}
 
 				$tpl->location		= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
-				$tpl->fileusage		= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1]);
+				$tpl->fileusage		= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1, 'params' => ['file_id' => $file['file_id'], 'm' => 'show']]);
 				$tpl->c_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
 			}
 
