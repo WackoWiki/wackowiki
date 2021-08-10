@@ -54,7 +54,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		"FROM " . $this->db->table_prefix . "page a " .
 		$selector, true);
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
+	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase, 'lang' => $lang]);
 
 	// load search results
 	$results = $this->db->load_all(
@@ -123,7 +123,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 		"FROM " . $this->db->table_prefix . "page a " .
 		$selector, true);
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
+	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase, 'lang' => $lang]);
 
 	// load search results
 	$results = $this->db->load_all(
@@ -166,7 +166,7 @@ $get_context = function($phrase, $string, $position, $padding, $hellip = true)
 };
 
 // returns only the first $position match as intended
-$strpos_array = function($content, $keywords, $offset=0)
+$strpos_array = function($content, $keywords, $offset = 0)
 {
 	if(!is_array($keywords)) $keywords = [$keywords];
 
@@ -254,7 +254,7 @@ $highlight_this = function ($text, $words)
 			$word		= preg_quote($word, '/');
 
 			// highlight uppercase and lowercase correctly
-			$text		= preg_replace('/(' . $word . ')/ui', '<mark class="highlight">$1</mark>', $text, -1 , $count);
+			$text		= preg_replace('/(' . $word . ')/ui', '<mark class="highlight">$1</mark>', $text, -1, $count);
 			$the_count	= $count + $the_count;
 		}
 	}
@@ -276,6 +276,8 @@ if (!isset($options))	$options	= 1;
 if (!isset($lang))		$lang		= '';
 if (!isset($max))		$max		= 10;	// (null) 50 -> 10 overwrites system default value!
 if (!isset($padding))	$padding	= 75;
+
+$lang		= (string) ($_GET['lang'] ?? ($lang ?? ''));
 
 if ($lang && !$this->known_language($lang))
 {
@@ -315,14 +317,35 @@ $phrase or $phrase = trim(@$_GET['phrase']);
 
 if ($form)
 {
-	$tpl->form_href		= $this->href();
-	$tpl->form_phrase	= $phrase;
+	$tpl->enter('form_');
+	$tpl->href		= $this->href();
+	$tpl->phrase	= $phrase;
 
 	if ($options)
 	{
-		$tpl->form_options			= true;
-		$tpl->form_options_topic	= ($mode == 'topic');
+		$tpl->options		= true;
+		$tpl->options_topic	= ($mode == 'topic');
+
+		if ($this->db->multilanguage)
+		{
+			$languages	= $this->_t('LanguageArray');
+			$langs		= $this->http->available_languages();
+			$tpl->options_l_selected = $lang ? null : ' selected';
+
+			foreach ($langs as $iso)
+			{
+				$tpl->options_l_o_iso	= $iso;
+				$tpl->options_l_o_lang	= $languages[$iso];
+
+				if ($iso == $lang)
+				{
+					$tpl->options_l_o_selected	= ' selected';
+				}
+			}
+		}
 	}
+
+	$tpl->leave(); // form_
 }
 
 $n = 0;
