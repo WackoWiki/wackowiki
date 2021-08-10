@@ -22,7 +22,7 @@ if ($file_id)
 		$tpl->emark		= true;
 	}
 
-	if ([$pages, $pagination] = $this->load_file_links($file_id, null, $max))
+	if ([$pages, $pagination] = $this->load_file_links($file_id, null, $max, $params))
 	{
 		foreach ($pages as $page)
 		{
