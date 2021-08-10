@@ -278,6 +278,8 @@ $lang		??= '';
 $max		??= 10;	// (null) 50 -> 10 overwrites system default value!
 $padding	??= 75;
 
+$lang		= (string) ($_GET['lang'] ?? ($lang ?? ''));
+
 if ($lang && !$this->known_language($lang))
 {
 	$lang = '';
@@ -316,14 +318,35 @@ $phrase or $phrase = trim(@$_GET['phrase']);
 
 if ($form)
 {
-	$tpl->form_href		= $this->href();
-	$tpl->form_phrase	= $phrase;
+	$tpl->enter('form_');
+	$tpl->href		= $this->href();
+	$tpl->phrase	= $phrase;
 
 	if ($options)
 	{
-		$tpl->form_options			= true;
-		$tpl->form_options_topic	= ($mode == 'topic');
+		$tpl->options		= true;
+		$tpl->options_topic	= ($mode == 'topic');
+
+		if ($this->db->multilanguage)
+		{
+			$languages	= $this->_t('LanguageArray');
+			$langs		= $this->http->available_languages();
+			$tpl->options_l_selected = $lang ? null : ' selected';
+
+			foreach ($langs as $iso)
+			{
+				$tpl->options_l_o_iso	= $iso;
+				$tpl->options_l_o_lang	= $languages[$iso];
+
+				if ($iso == $lang)
+				{
+					$tpl->options_l_o_selected	= ' selected';
+				}
+			}
+		}
 	}
+
+	$tpl->leave(); // form_
 }
 
 $n = 0;

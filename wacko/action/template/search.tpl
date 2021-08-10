@@ -6,8 +6,17 @@
 			<input type="search" id="searchfor" name="phrase" size="40" value="[ ' phrase | e attr ' ]" required>
 			<button type="submit">[ ' _t: SearchButton ' ]</button><br>
 			[= options _ =
+				[= l _ =
+					<label for="language">[ ' _t: AccountLanguage ' ]</label><br>
+					<select name="lang">
+						<option value=""[ ' selected ' ]>[ ' _t: Any ' ]</option>
+						[= o _ =
+							<option value="[ ' iso ' ]"[ ' selected ' ]>[ ' lang ' ] ([ ' iso ' ])</option>
+						=]
+					</select><br>
+				=]
 				<input type="checkbox" id="checkboxSearch" name="topic"[ ' topic | format ' checked' ' ]>
-				<label for="checkboxSearch">[ ' _t: TopicSearchText ' ]</label>
+				<label for="checkboxSearch">[ ' _t: TopicSearchText ' ]</label><br>
 			=]
 		</form>
 		<br>
