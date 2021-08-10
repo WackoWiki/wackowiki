@@ -54,7 +54,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		"FROM " . $this->db->table_prefix . "page a " .
 		$selector, true);
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
+	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase, 'lang' => $lang]);
 
 	// load search results
 	$results = $this->db->load_all(
@@ -123,7 +123,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 		"FROM " . $this->db->table_prefix . "page a " .
 		$selector, true);
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]);
+	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase, 'lang' => $lang]);
 
 	// load search results
 	$results = $this->db->load_all(
