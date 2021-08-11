@@ -1,4 +1,4 @@
-[ === news === ]
+[ === main === ]
 	[= nocluster _ =
 		<br><br>[ ' _t: NewsNoClusterDefined ' ]
 	=]
@@ -17,21 +17,21 @@
 				<br><br>[ ' _t: NoPostAvailable ' ]
 			=]
 			<div style="width:100%;">
-				<p>
-					[= access _ =
+				[= access _ =
+					<p>
 						<strong><small class="cite">
 							<a href="#newtopic">[ ' _t: BlogNewTopic ' ]</a>
 						</small></strong>
-					=]
-				</p>
+					</p>
+				=]
 			[= f =
 				<form id="newtopic" class="add-topic" action="[ ' href ' ]" method="post" name="add_topic">
 					[ ' csrf: add_topic ' ]
 					<table class="formation">
 						<tr>
-							<td class="label"><label for="posttitle">[ ' _t: ForumTopicName ' ]:</label></td>
+							<td class="label"><label for="post-title">[ ' _t: ForumTopicName ' ]:</label></td>
 							<td>
-								<input type="text" id="posttitle" name="title" size="50" maxlength="250" value="">
+								<input type="text" id="post-title" name="title" size="50" maxlength="250" value="">
 								<button type="submit" id="submit">[ ' _t: CreateButton ' ]</button>
 							</td>
 						</tr>
@@ -41,7 +41,7 @@
 				[''' pagination ''']
 				<br style="clear:both;">
 			</div>	
-			
+
 			[= l =
 				<article class="newsarticle">
 					<h2 class="news-title">

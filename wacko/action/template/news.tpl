@@ -16,7 +16,32 @@
 			[= nopages _ =
 				<br><br>[ ' _t: NewsNotAvailable ' ]
 			=]
-			[''' pagination ''']
+			<div style="width:100%;">
+				[= access _ =
+					<p>
+						<strong><small class="cite">
+							<a href="#newtopic">[ ' _t: BlogNewTopic ' ]</a>
+						</small></strong>
+					</p>
+				=]
+			[= f =
+				<form id="newtopic" class="add-topic" action="[ ' href ' ]" method="post" name="add_topic">
+					[ ' csrf: add_topic ' ]
+					<table class="formation">
+						<tr>
+							<td class="label"><label for="news-title">[ ' _t: NewsName ' ]:</label></td>
+							<td>
+								<input type="text" id="news-title" name="title" size="50" maxlength="250" value="">
+								<button type="submit" id="submit">[ ' _t: CreateButton ' ]</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			=]
+				[''' pagination ''']
+				<br style="clear:both;">
+			</div>	
+
 			[= l =
 				<article class="newsarticle">
 					<h2 class="news-title">
@@ -32,16 +57,7 @@
 				</article>
 			=]
 			[''' pagination ''']
-			[= f =
-				<br><br>
-				<a id="newtopic"></a><br>
-				<form action="[ ' href ' ]" method="post" name="add_topic">
-					[ ' csrf: add_topic ' ]
-					<label for="news-title">[ ' _t: NewsName ' ]:</label>
-					<input type="text" id="news-title" name="title" size="50" maxlength="250" value="">
-					<button type="submit" id="submit">[ ' _t: CreateButton ' ]</button>
-				</form>
-			=]
+
 		</section>
 	=]
 

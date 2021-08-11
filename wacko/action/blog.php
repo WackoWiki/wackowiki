@@ -70,11 +70,6 @@ if (!empty($tag))
 			$this->sess->body	= $template;
 			$this->sess->title	= $namehead;
 
-			if ($this->db->enable_feeds)
-			{
-				#$this->sess->feed	= true;
-			}
-
 			// needs to be numeric for ordering
 			// TODO: add this as config option to Admin panel
 			// .date('Y/')							- 2011

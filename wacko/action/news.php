@@ -74,7 +74,7 @@ if (!empty($this->db->news_cluster))
 			// .date('Y/').date('m/')				- 2011/07 (default)
 			// .date('Y/').date('m/').date('d/')	- 2011/07/14
 			// .date('Y/').date('W/')				- 2011/29
-			$blog_cluster_structure = date('Y/').date('m/');
+			$blog_cluster_structure = date('Y/') . date('m/');
 
 			$this->http->redirect($this->href('edit', $news_cluster . '/' . $blog_cluster_structure . $name, '', 1));
 		}
@@ -241,8 +241,8 @@ if (!empty($this->db->news_cluster))
 			$tpl->href		= $this->href('', $page['tag'], '');
 			$tpl->user		= $this->user_link($page['owner'], true, false);
 			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1);
-			$tpl->category	= $_category;
 			$tpl->icon		= !empty($_category) ? true : false;
+			$tpl->category	= $_category;
 			$tpl->edit		= ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ' : '');
 			$tpl->comments	= $this->href('', $page['tag'], ['show_comments' => 1]);
 
@@ -258,6 +258,7 @@ if (!empty($this->db->news_cluster))
 
 	if ($access)
 	{
+		$tpl->n_access = true;
 		$tpl->n_f_href = $this->href();
 	}
 }
