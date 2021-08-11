@@ -243,8 +243,8 @@ if (!empty($this->db->news_cluster))
 			$tpl->href		= $this->href('', $page['tag'], '');
 			$tpl->user		= $this->user_link($page['owner'], true, false);
 			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1);
-			$tpl->category	= $_category;
 			$tpl->icon		= !empty($_category) ? true : false;
+			$tpl->category	= $_category;
 			$tpl->edit		= ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ' : '');
 			$tpl->comments	= $this->href('', $page['tag'], ['show_comments' => 1]);
 
@@ -260,6 +260,7 @@ if (!empty($this->db->news_cluster))
 
 	if ($access)
 	{
+		$tpl->n_access = true;
 		$tpl->n_f_href = $this->href();
 	}
 }
