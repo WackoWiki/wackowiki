@@ -42,8 +42,8 @@ if (!empty($tag))
 		{
 			$name		= utf8_trim($_POST['title'], ". \t");
 			$namehead	= $name;
-			$this->sanitize_page_tag($name);
 			$name		= utf8_ucwords($name);
+			$this->sanitize_page_tag($name);
 			$name		= preg_replace('/[^- \\w]/u', '', $name);
 			$name		= str_replace([' ', "\t"], '', $name);
 

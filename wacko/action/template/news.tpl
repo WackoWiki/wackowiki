@@ -17,13 +17,13 @@
 				<br><br>[ ' _t: NewsNotAvailable ' ]
 			=]
 			<div style="width:100%;">
-				<p>
-					[= access _ =
+				[= access _ =
+					<p>
 						<strong><small class="cite">
 							<a href="#newtopic">[ ' _t: BlogNewTopic ' ]</a>
 						</small></strong>
-					=]
-				</p>
+					</p>
+				=]
 			[= f =
 				<form id="newtopic" class="add-topic" action="[ ' href ' ]" method="post" name="add_topic">
 					[ ' csrf: add_topic ' ]

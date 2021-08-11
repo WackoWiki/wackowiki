@@ -40,8 +40,8 @@ if (!empty($this->db->news_cluster))
 		{
 			$name		= utf8_trim($_POST['title'], ". \t");
 			$namehead	= $name;
-			$this->sanitize_page_tag($name);
 			$name		= utf8_ucwords($name);
+			$this->sanitize_page_tag($name);
 			$name		= preg_replace('/[^- \\w]/u', '', $name);
 			$name		= str_replace([' ', "\t"], '', $name);
 
@@ -76,7 +76,7 @@ if (!empty($this->db->news_cluster))
 			// .date('Y/').date('m/')				- 2011/07 (default)
 			// .date('Y/').date('m/').date('d/')	- 2011/07/14
 			// .date('Y/').date('W/')				- 2011/29
-			$blog_cluster_structure = date('Y/').date('m/');
+			$blog_cluster_structure = date('Y/') . date('m/');
 
 			$this->http->redirect($this->href('edit', $news_cluster . '/' . $blog_cluster_structure . $name, '', 1));
 		}
