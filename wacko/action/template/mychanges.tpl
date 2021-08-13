@@ -14,7 +14,7 @@
 		<ul class="ul-list">
 			[= page _ =
 				<li><strong>[ ' day ' ][ ' char ' ]</strong>
-					<ul>
+					<ul class="hl-line">
 						[= l _ =
 							<li>
 								[= t _ =

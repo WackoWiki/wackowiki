@@ -16,7 +16,7 @@
 	[= w =
 		[''' pagination ''']
 
-		<ol start="[ ' offset ' ]">
+		<ol start="[ ' offset ' ]" class="hl-line">
 			[= l _ =
 				<li>[ ' link ' ]  (<a href="[ ' href ' ]">[ ' count ' ]</a>)</li>
 			=]

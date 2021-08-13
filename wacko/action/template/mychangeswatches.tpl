@@ -13,7 +13,7 @@
 		=]
 		
 		[''' pagination ''']
-		<ul class="ul-list">
+		<ul class="ul-list hl-line">
 			[= l _ =
 				<li>
 					<small>([ ' time ' ])</small> [ ' link ' ]
