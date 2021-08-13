@@ -5,7 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
+/* USAGE:
+	{{news
+		[page=cluster]
+		[mode=latest|week|from]
+		[date=YYYY-MM-DD]
+		[max=Number]
+		[title=1]
+		[noxml=1]
+	}}
+*/
 
 if (!empty($this->db->news_cluster))
 {

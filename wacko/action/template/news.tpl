@@ -11,7 +11,7 @@
 						<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: NewsXMLTip ' ]" alt="XML" class="btn-feed">
 					</a>
 				</span>
-				<br><br>
+				<br>
 			=]
 			[= nopages _ =
 				<br><br>[ ' _t: NewsNotAvailable ' ]
@@ -39,7 +39,7 @@
 				</form>
 			=]
 				[''' pagination ''']
-				<br style="clear:both;">
+				<br style="clear:both; display: none;">
 			</div>	
 
 			[= l =

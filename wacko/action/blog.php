@@ -5,7 +5,16 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
+/* USAGE:
+	{{blog
+		[page=cluster]
+		[mode=latest|week|from]
+		[date=YYYY-MM-DD]
+		[max=Number]
+		[title=1]
+		[noxml=1]
+	}}
+*/
 
 // set defaults
 $page			??= '/' . $this->tag;

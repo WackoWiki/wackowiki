@@ -116,7 +116,7 @@ class BbCode
 				else if	(stristr($substring[2], 'blue')		== true)	return '!!(blue)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
 				else if	(stristr($substring[2], 'grey')		== true)	return '!!(grey)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
 			}
-			else if (preg_match('/^([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})$/', $substring[2], $color))
+			else if (preg_match('/^([:xdigit:]{2})([:xdigit:]{2})([:xdigit:]{2})$/', $substring[2], $color))
 			{
 				$r = hexdec($color[1]);
 				$g = hexdec($color[2]);

@@ -8,7 +8,6 @@ if (!defined('IN_WACKO'))
 // action/feed.php - WackoWiki Action to integrate RSS/Atom Feeds
 // requires SimplePie: http://simplepie.org
 /* USAGE:
-
 	{{feed
 		url="http://...[|http://...|http://...]"
 		[title="News feed title|no"]
@@ -22,8 +21,8 @@ if (!defined('IN_WACKO'))
 			1 - makes feed header h3 and feed-items headers h4
 			0 - makes it all default
 	}}
-
 */
+
 // TODO:
 //   * local image cache
 //   * feed_acl
