@@ -9,7 +9,7 @@
 	[= nobacklinks _ =
 		[ ' _t: NoReferringPages ' ]
 	=]
-		<ol start="[ ' offset ' ]">
+		<ol start="[ ' offset ' ]" class="hl-line">
 			[= l _ =
 				<li>[ ' link ' ]</li>
 			=]

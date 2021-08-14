@@ -1,13 +1,27 @@
 <?php
 
-// TODO:
-// - too much loose ends, read thoroughly and refactor
-// - search also for attachments
-
 if (!defined('IN_WACKO'))
 {
 	exit;
 }
+
+/* USAGE:
+	{{search
+		[phrase="Term"]
+		[page="PageName"]
+		[topic=1]
+		[options=1]
+		[lang="en"]
+		[form=1]
+		[nomark=1]
+		[style=one of ("br","ul","ol","comma") ]
+		[scope=one of ("pages", "all")]
+	}}
+*/
+
+// TODO:
+// - too much loose ends, read thoroughly and refactor
+// - search also for attachments
 
 $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 0)
 {
@@ -265,7 +279,7 @@ $highlight_this = function ($text, $words)
 // --------------------------------------------------------------------------------
 
 if (!isset($page))		$page		= '';
-if (!isset($topic))		$topic		= '';
+if (!isset($topic))		$topic		= 0;
 if (!isset($title))		$title		= 0;
 
 if (!isset($style))		$style		= '';

@@ -21,7 +21,7 @@
 	<ul class="ul-list">
 	[= page _ =
 		<li><strong>[ ' ch | e ' ]</strong>
-			<ul>
+			<ul class="hl-line">
 				[= l _ =
 					<li>[ ' link ' ]</li>
 				=]

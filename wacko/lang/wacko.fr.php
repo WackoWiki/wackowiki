@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Ceci est la liste des pages dont vous êtes le propriétaire, dans l’ordre alphabétique',
 	'ListOwnedPages2'			=> 'Ceci est la liste des pages dont vous êtes le propriétaire, dans l’ordre chronologique',
 	'ListOwnedPages3'			=> 'Ceci est la liste des pages dont vous êtes le propriétaire, dans l’ordre des modifications effectuées',
-	'YouDontOwn'				=> 'Vous n’êtes propriétaire d’aucune page.',
 	'NotLoggedInThusOwned'		=> 'Vous n’êtes pas connecté(e], nous ne savons donc pas quelles sont vos pages !',
 	'NoOrphaned'				=> 'Aucune pages orpheline. Bien !',
 	'NoRecentComments'			=> 'Aucun commentaire récent.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Merci de spécifier un flux avec l’url en paramètre (p.ex. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Impossible de charger ou d’analyser le flux',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'Derniers %1 items',
-	'FeedLastItem'				=> 'Dernier item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

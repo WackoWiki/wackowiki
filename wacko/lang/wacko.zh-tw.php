@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'This is the list of pages you own (ordered alphabetically)',
 	'ListOwnedPages2'			=> 'This is the list of pages you own (ordered by date)',
 	'ListOwnedPages3'			=> 'This is the list of pages you own (ordered by change)',
-	'YouDontOwn'				=> 'You don\'t own any pages.',
 	'NotLoggedInThusOwned'		=> 'You\'re not logged in, hence we couldn\'t retrieve your pages.',
 	'NoOrphaned'				=> 'No orphaned pages. Good.',
 	'NoRecentComments'			=> 'No recent comments.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

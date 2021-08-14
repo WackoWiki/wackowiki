@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Ez az Ön tulajdonában lévő oldalak listája (ordered alphabetically)',
 	'ListOwnedPages2'			=> 'Ez az Ön tulajdonában lévő oldalak listája (ordered by date)',
 	'ListOwnedPages3'			=> 'Ez az Ön tulajdonában lévő oldalak listája (ordered by change)',
-	'YouDontOwn'				=> 'You don\'t own any pages.',
 	'NotLoggedInThusOwned'		=> 'Nincs bejelentkezve, ezért nem tudtuk beolvasni az oldalait.',
 	'NoOrphaned'				=> 'No orphaned pages. Good.',
 	'NoRecentComments'			=> 'No recent comments.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

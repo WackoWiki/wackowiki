@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Страници, ваша собственост (в азбучен ред)',
 	'ListOwnedPages2'			=> 'Страници, ваша собственост (по начална дата)',
 	'ListOwnedPages3'			=> 'Страници, ваша собственост (по дата на промяна)',
-	'YouDontOwn'				=> 'Вие не сте собственик на страница.',
 	'NotLoggedInThusOwned'		=> 'Вие не сте регистрирани в системата и затова Вашите страници не могат да бъдат намерени.',
 	'NoOrphaned'				=> 'Няма загубени страници. Отлично!',
 	'NoRecentComments'			=> 'Коментари отдавна не е имало.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

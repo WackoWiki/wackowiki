@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Esta é a lista de páginas das quais é dono (por ordem alfabética)',
 	'ListOwnedPages2'			=> 'Esta é a lista de páginas das quais é dono (por datas)',
 	'ListOwnedPages3'			=> 'Esta é a lista de páginas das quais é dono (por ordem de alterações)',
-	'YouDontOwn'				=> 'Não é dono de nenhuma página.',
 	'NotLoggedInThusOwned'		=> 'Não efectuou o login, por isso não podemos recolher as suas páginas!.',
 	'NoOrphaned'				=> 'Nenhuma página órfã.',
 	'NoRecentComments'			=> 'Nenhum comentário recente.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Por favor especifique um Feed com a url do Parâmetro. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

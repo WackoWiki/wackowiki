@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Αυτή είναι η λίστα των σελίδων που σας ανήκουν (ταξινομημένες αλφαβητικά)',
 	'ListOwnedPages2'			=> 'Αυτή είναι η λίστα των σελίδων που σας ανήκουν (ταξινομημένες με βάση την ημερομηνία)',
 	'ListOwnedPages3'			=> 'Αυτή είναι η λίστα των σελίδων που σας ανήκουν (ταξινομημένες με βάση την επεξεργασία)',
-	'YouDontOwn'				=> ' Δεν σας ανήκει καμία σελίδα.',
 	'NotLoggedInThusOwned'		=> 'Δεν έχετε συνδεθεί, ως εκ τούτου δεν μπορούμε να επαναφέρουμε τις σελίδες σας!.',
 	'NoOrphaned'				=> 'Μη ορφανές σελίδες. Καλώς!',
 	'NoRecentComments'			=> 'Μη πρόσφατα σχόλια.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Sinu lehtede nimekiri (tähestikulises järjekorras)',
 	'ListOwnedPages2'			=> 'Sinu lehtede nimekiri (ajalises järjekorras)',
 	'ListOwnedPages3'			=> 'Sinu lehtede nimekiri (muudatuste järjekorras)',
-	'YouDontOwn'				=> 'Sa ei oma ühtegi lehte.',
 	'NotLoggedInThusOwned'		=> 'Sa pole sisse loginud, seega ei suuda sinu lehti otsida!.',
 	'NoOrphaned'				=> 'Üksikuid lehti pole. Hästi!',
 	'NoRecentComments'			=> 'Viimaseid kommentaare pole.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

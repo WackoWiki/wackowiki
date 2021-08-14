@@ -8,7 +8,6 @@ if (!defined('IN_WACKO'))
 // action/feed.php - WackoWiki Action to integrate RSS/Atom Feeds
 // requires SimplePie: http://simplepie.org
 /* USAGE:
-
 	{{feed
 		url="http://...[|http://...|http://...]"
 		[title="News feed title|no"]
@@ -22,8 +21,8 @@ if (!defined('IN_WACKO'))
 			1 - makes feed header h3 and feed-items headers h4
 			0 - makes it all default
 	}}
-
 */
+
 // TODO:
 //   * local image cache
 //   * feed_acl
@@ -110,19 +109,9 @@ else
 
 		if ($title != 'no')
 		{
-			if (($max) && ($max > 0))
-			{
-				$last_items =
-					($max == 1
-						? $this->_t('FeedLastItem')
-						: Ut::perc_replace($this->_t('FeedLastItems'), $max));
-			}
-
 			if ($nomark)
 			{
 				$tpl->enter('nomark_');
-
-				$tpl->lastitems = $last_items;
 
 				if ($title != '' && $count_feeds == 1)
 				{
@@ -143,14 +132,11 @@ else
 					$tpl->header	= $this->_t('FeedMulti');
 				}
 
-				$tpl->leave();
 			}
 			// default
 			else
 			{
 				$tpl->enter('mark_');
-
-				$tpl->lastitems = $last_items;
 
 				if ($title != '' && $count_feeds == 1)
 				{
@@ -172,9 +158,9 @@ else
 				{
 					$tpl->header	= $this->_t('FeedMulti');
 				}
-
-				$tpl->leave();
 			}
+
+			$tpl->leave();
 		}
 
 		// we using a parameter token here to sort out multiple instances

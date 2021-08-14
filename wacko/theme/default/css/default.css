@@ -1,4 +1,9 @@
 /* basic -------------------------------------------------- */
+:root {
+	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
+	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
+}
+
 p,
 td,
 th,
@@ -88,7 +93,7 @@ fieldset {
 }
 
 body {
-	font-family: Verdana, sans-serif;
+	font-family: var(--ww-font-sans-serif);
 	font-size: 14px;
 	line-height: 1.3;
 	color: #000000;
@@ -117,7 +122,7 @@ kbd {
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px #fff inset;
 	color: #333;
 	display: inline-block;
-	font-family: Arial,Helvetica,sans-serif;
+	font-family: var(--ww-font-sans-serif);
 	font-size: 11px;
 	line-height: 1.4;
 	margin: 0 0.1em;
@@ -230,7 +235,7 @@ form input.submitinput {
 }
 
 .print {
-	font-family: Verdana, sans-serif;
+	font-family: var(--ww-font-sans-serif);
 	font-size: 12px;
 }
 
@@ -2177,7 +2182,7 @@ form.add-topic {
 
 /* system message ------------- */
 .sysmessage {
-	font-family: "Lucida Console", "Courier New", monospace;
+	font-family: var(--ww-font-monospace);
 	background: rgba(51, 51, 51, 0.9) none repeat scroll 0 0;
 	bottom: 0;
 	color: #ccc;
@@ -2209,7 +2214,7 @@ form.add-topic {
 /* noscript ------------- */
 .errorbox-js {
 	border: 1px solid red;
-	font-family: "Courier New",Courier,monospace;
+	font-family: var(--ww-font-monospace);
 	margin: 0.5em 0;
 	padding: 1em 0.5em;
 	text-align: center;

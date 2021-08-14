@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Her er de sider som du ejer (alfabetisk)',
 	'ListOwnedPages2'			=> 'Her er de sider som du ejer (kronologisk)',
 	'ListOwnedPages3'			=> 'Her er de sider som du ejer (opdateringer)',
-	'YouDontOwn'				=> 'Du ejer ikke nogle sider.',
 	'NotLoggedInThusOwned'		=> 'Du er ikke logget ind, og derfor kan vi ikke finde dine sider!.',
 	'NoOrphaned'				=> 'Ingen forældreløse sider. Godt!',
 	'NoRecentComments'			=> 'Ingen nylige kommentarer.',
@@ -1003,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

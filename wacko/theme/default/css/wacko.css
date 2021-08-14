@@ -47,18 +47,17 @@ h1, h2, h3, h4, h5, h6 {
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
 
 h1 {
-	font-family: Verdana, sans-serif;
 	font-size: 24px;
 	padding-top: 5px;
 	padding-bottom: 7px;
 	line-height: 110%;
 	color: #235e9a;
 }
-h2 { font-family: Verdana, sans-serif; font-size: 20px; margin-top: 20px; margin-bottom: 5px; border-bottom: 3px dotted #ddd; color: #204a87;}
-h3 { font-family: Verdana, sans-serif; font-size: 17px; margin-top: 15px; margin-bottom: 5px; border-bottom: 2px dotted #ddd;}
-h4 { font-family: Arial, sans-serif;   font-size: 16px; margin-top: 15px; margin-bottom: 5px; border-bottom: 1px #999 solid;}
-h5 { font-family: Arial, sans-serif;   font-size: 14px; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px #bbbbbb solid;}
-h6 { font-family: Arial, sans-serif;   font-size: 12px; }
+h2 { font-size: 20px; margin-top: 20px; margin-bottom: 5px; border-bottom: 3px dotted #ddd; color: #204a87;}
+h3 { font-size: 17px; margin-top: 15px; margin-bottom: 5px; border-bottom: 2px dotted #ddd;}
+h4 { font-size: 16px; margin-top: 15px; margin-bottom: 5px; border-bottom: 1px #999 solid;}
+h5 { font-size: 14px; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px #bbbbbb solid;}
+h6 { font-size: 12px; }
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{ text-align: center;}
@@ -110,7 +109,7 @@ del.diff {
 div.hl-main {
 	background: #FCFCFC;
 	border: 1px lightgray solid;
-	font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
+	font-family: var(--ww-font-monospace);
 	font-size: 14px;
 	margin: 1em 1.75em;
 	padding: 0.25em;
@@ -142,7 +141,7 @@ div.hl-main {
 	color: #eee;
 	background: #000;
 	border: solid #888888 2px;
-	font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
+	font-family: var(--ww-font-monospace);
 	margin: 1em 1.75em;
 	padding: 0.25em;
 	overflow: auto;
@@ -303,7 +302,7 @@ blockquote {
 	border-left: 3px solid #729fcf;
 	color: #444444;
 	padding: 25px 30px;
-	font-family: sans-serif;
+	font-family: var(--ww-font-sans-serif);
 }
 blockquote p { padding: 0; margin: 5px 0; }
 
@@ -330,11 +329,11 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 
 /* SYNTAX %%(hl xyz)%% */
 
-.hl-main {font-family: monospace; font-size: 14px;}
+.hl-main {font-family: var(--ww-font-monospace); font-size: 14px;}
 .hl-gutter {
 	background-color: #CCCCCC;
 	padding-right: 10px;
-	font-family: monospace;
+	font-family: var(--ww-font-monospace);
 	font-size: 14px;
 }
 .hl-table {border: solid 1px lightgray; }
@@ -405,7 +404,7 @@ code {
 	background: #ffffcc;
 	padding: 1px 5px;
 		/* font-size: 90%; */
-	font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
+	font-family: var(--ww-font-monospace);
 }
 
 /* Important text: SYNTAX !!text!! */

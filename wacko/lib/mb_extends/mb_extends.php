@@ -37,7 +37,7 @@ function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
 * Note: you only need to use this if you are supplying the charlist
 * optional arg and it contains UTF-8 characters. Otherwise ltrim will
 * work normally on a UTF-8 string
-* @see http://www.php.net/ltrim
+* @see https://www.php.net/ltrim
 * @return string
 */
 function utf8_ltrim($str, $charlist = false)
@@ -55,7 +55,7 @@ function utf8_ltrim($str, $charlist = false)
 * Note: you only need to use this if you are supplying the charlist
 * optional arg and it contains UTF-8 characters. Otherwise rtrim will
 * work normally on a UTF-8 string
-* @see http://www.php.net/rtrim
+* @see https://www.php.net/rtrim
 * @return string
 */
 function utf8_rtrim($str, $charlist = false)
@@ -75,7 +75,7 @@ function utf8_rtrim($str, $charlist = false)
 * @param string $pad_str
 * @param int $type ( same constants as str_pad )
 * @return string
-* @see http://www.php.net/str_pad
+* @see https://www.php.net/str_pad
 */
 function utf8_str_pad($input, $length, $pad_str = ' ', $type = STR_PAD_RIGHT)
 {
@@ -125,7 +125,7 @@ function utf8_str_pad($input, $length, $pad_str = ' ', $type = STR_PAD_RIGHT)
 * Note: you only need to use this if you are supplying the charlist
 * optional arg and it contains UTF-8 characters. Otherwise trim will
 * work normally on a UTF-8 string
-* @see http://www.php.net/trim
+* @see https://www.php.net/trim
 * @return string
 */
 function utf8_trim($str, $charlist = false)
@@ -161,7 +161,7 @@ function utf8_ucfirst($str)
 * Note: requires utf8_substr_replace
 * @param string
 * @return string with first char of each word uppercase
-* @see http://www.php.net/ucwords
+* @see https://www.php.net/ucwords
 */
 function utf8_ucwords($str)
 {
@@ -280,4 +280,19 @@ function utf8_count_chars($string, $mode = 0)
 	}
 
 	return $result;
+}
+
+/**
+* UTF-8 aware replacement for str_word_count()
+* Counts number of words in the UTF-8 string
+* @param    string $string The input string
+* @return   int The number of words in the string
+* @see https://www.php.net/str_word_count
+*/
+function utf8_word_count($string)
+{
+	$string	= preg_replace( '/[^\\p{L}\\p{Nd}\-_]+/u' , '-' , $string );
+	$string	= trim( $string , '_-' );
+
+	return count( explode( '-' , $string ) );
 }

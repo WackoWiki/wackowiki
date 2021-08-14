@@ -6,7 +6,7 @@
 			</p>
 	=]
 		[ ' denied ' ][ ' none ' ]
-		<ol>
+		<ol class="hl-line">
 			[= l _ =
 				<li>[ ' link ' ]</li>
 			=]

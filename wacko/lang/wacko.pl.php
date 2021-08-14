@@ -449,7 +449,6 @@ $wacko_translation = [
 	'ListOwnedPages'			=> 'Lista stron, których jesteś autorem. Sortowanie alfabetycznie',
 	'ListOwnedPages2'			=> 'Lista stron, których jesteś autorem. Sortowanie według daty',
 	'ListOwnedPages3'			=> 'Lista stron, których jesteś autorem. Sortowanie według wprowadzonych zmian',
-	'YouDontOwn'				=> 'Nie jesteś autorem żadnej ze stron.',
 	'NotLoggedInThusOwned'		=> 'Lista stron, których jesteś autorem może zostać wyświetlona po zalogowaniu się.',
 	'NoOrphaned'				=> 'Wszystkie strony mają przypisanego autora.',
 	'NoRecentComments'			=> 'Nie zostały dodane żadne nowe komentarze.',
@@ -1001,8 +1000,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

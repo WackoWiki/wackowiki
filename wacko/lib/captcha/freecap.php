@@ -2,8 +2,8 @@
 /************************************************************\
 *
 *     freeCap v1.4.4 Copyright
-*     2005 Howard Yeend (www.puremango.co.uk),
-*     2008 - 2017 WackoWiki Team
+*     2005 Howard Yeend (solidred.co.uk),
+*     2008 - 2021 WackoWiki Team
 *
 *    This file is part of freeCap.
 *
@@ -391,8 +391,6 @@ if ($use_dict == 1)
 }
 else
 {
-	// based on code originally by breakzero at hotmail dot com
-	// (http://uk.php.net/manual/en/function.rand.php)
 	// generate pseudo-random string
 	// doesn't use ijtf as are easily mistaken
 
@@ -810,7 +808,7 @@ if (is_array($site_tags))
 			ImageString($im2, 2, intval($width / 2) - intval($tag_width / 2), (10 * $i), $site_tags[$i], $site_tag_col2);
 		}
 
-		if ($tag_pos==1 || $tag_pos==2)
+		if ($tag_pos == 1 || $tag_pos == 2)
 		{
 			// write at bottom
 			ImageString($im2, 2, intval($width / 2) - intval($tag_width / 2), ($height - 34 + ($i * 10)), $site_tags[$i], $site_tag_col2);
