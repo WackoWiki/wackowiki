@@ -110,19 +110,9 @@ else
 
 		if ($title != 'no')
 		{
-			if (($max) && ($max > 0))
-			{
-				$last_items =
-					($max == 1
-						? $this->_t('FeedLastItem')
-						: Ut::perc_replace($this->_t('FeedLastItems'), $max));
-			}
-
 			if ($nomark)
 			{
 				$tpl->enter('nomark_');
-
-				$tpl->lastitems = $last_items;
 
 				if ($title != '' && $count_feeds == 1)
 				{
@@ -149,8 +139,6 @@ else
 			{
 				$tpl->enter('mark_');
 
-				$tpl->lastitems = $last_items;
-
 				if ($title != '' && $count_feeds == 1)
 				{
 					$tpl->header	= $this->_t('FeedTitle');
@@ -171,7 +159,6 @@ else
 				{
 					$tpl->header	= $this->_t('FeedMulti');
 				}
-
 			}
 
 			$tpl->leave();

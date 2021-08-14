@@ -1002,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Por favor especifique um Feed com a url do Parâmetro. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'last %1 items',
-	'FeedLastItem'				=> 'last item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery

@@ -14,7 +14,7 @@
 	[= mark _ =
 		<div class="layout-box" style="display: table;">
 			<p>
-				<span>[ ' header ' ]: <strong>[ ' title ' ]</strong> [ ' lastitems ' ]</span>
+				<span>[ ' header ' ]: <strong>[ ' title ' ]</strong></span>
 			</p>
 	=]
 	[= error _ =
@@ -22,7 +22,6 @@
 	=]
 	[= nomark _ =
 		<h1[ ' class ' ]>[ ' header ' ]</h1>
-		[ ' lastitems ' ]
 	=]
 	[ '' pagination '' ]<br>
 	[= i _ =

@@ -1002,8 +1002,6 @@ $wacko_translation = [
 	'FeedNoURL'					=> 'Merci de spécifier un flux avec l’url en paramètre (p.ex. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Impossible de charger ou d’analyser le flux',
 	'FeedSource'				=> 'Source:',
-	'FeedLastItems'				=> 'Derniers %1 items',
-	'FeedLastItem'				=> 'Dernier item',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
