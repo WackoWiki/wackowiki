@@ -235,19 +235,15 @@ AutoComplete.prototype.keyDown = function (key, shiftKey)
 				}
 				this.insertFound();
 				return true;
-				break;
 			case 27: // Escape
 				this.reset();
 				return true;
-				break;
 			case 38: // Up
 				this.selectInplace(this.found_patterns_selected - 1);
 				return true;
-				break;
 			case 40: // Down
 				this.selectInplace(this.found_patterns_selected + 1);
 				return true;
-				break;
 		}
 	}
 
