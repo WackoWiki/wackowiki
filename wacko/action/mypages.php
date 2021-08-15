@@ -206,12 +206,6 @@ if ($user_id = $this->get_user_id())
 		}
 	}
 
-	// obsolete case
-	if ($pages == false)
-	{
-		# echo $this->_t('YouDontOwn');
-	}
-
 	$tpl->leave();
 }
 else
