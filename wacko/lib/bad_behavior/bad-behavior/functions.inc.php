@@ -22,7 +22,7 @@ if (!function_exists('str_split')) {
 			return false;
 		}
 
-		for ($pos=0, $chunks = array(); $pos < strlen($string); $pos+=$split_length) {
+		for ($pos=0, $chunks = []; $pos < strlen($string); $pos+=$split_length) {
 			$chunks[] = substr($string, $pos, $split_length);
 		}
 		return $chunks;
@@ -60,14 +60,14 @@ function match_cidr($addr, $cidr) {
 
 // Determine if an IP address is reserved by RFC 1918.
 function is_rfc1918($addr) {
-	return match_cidr($addr, array("10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"));
+	return match_cidr($addr, ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]);
 }
 // Obtain all the HTTP headers.
 // NB: on PHP-CGI we have to fake it out a bit, since we can't get the REAL
 // headers. Run PHP as Apache 2.0 module if possible for best results.
 function bb2_load_headers() {
 	if (!is_callable('getallheaders')) {
-		$headers = array();
+		$headers = [];
 		foreach ($_SERVER as $h => $v)
 			if (preg_match('/HTTP_(.+)/', $h, $hp))
 				$headers[str_replace("_", "-", uc_all($hp[1]))] = $v;
