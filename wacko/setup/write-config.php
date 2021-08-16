@@ -54,13 +54,16 @@ $config_file['wacko_version']		= $config['wacko_version'];
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // convert config array into PHP code
-$config_code  = "<?php\n// config.php " . $lang['WrittenAt'] . strftime('%c') . "\n// " . $lang['ConfigDescription'] . "\n// " . $lang['DontChange'] . "\n\n";
+$config_code  = '<?php' . "\n" .
+				'// config.php ' . $lang['WrittenAt'] . strftime('%c') . "\n" .
+				'// ' . $lang['ConfigDescription'] . "\n" .
+				'// ' . $lang['DontChange'] . "\n\n";
 $config_code .= array_to_str($config_file);
 
 // try to write configuration file
-echo "		<h2>" . $lang['FinalStep'] . "</h2>\n";
-echo "		<ul>\n";
-echo "			<li>" . $lang['Writing'] . "   ";
+echo '<h2>' . $lang['FinalStep'] . '</h2>' . "\n";
+echo '<ul>' . "\n";
+echo	'<li>' . $lang['Writing'] . '   ';
 
 $perm_changed	= true;
 $file_name		= CONFIG_FILE;
@@ -75,24 +78,24 @@ if (is_writable($file_name))
 		@chmod($file_name, CHMOD_SAFE);
 		$perm_changed = !is_writable($file_name);
 
-		echo output_image(true) . "</li>\n";
+		echo output_image(true) . '</li>' . "\n";
 
-		echo "			<li>" . $lang['RemovingWritePrivilege'] . "   " . output_image($perm_changed) . "</li>\n";
+		echo '<li>' . $lang['RemovingWritePrivilege'] . '   ' . output_image($perm_changed) . '</li>' . "\n";
 	}
 	else
 	{
 		// Problem saving file
-		echo output_image(false) . "</li>\n";
+		echo output_image(false) . '</li>' . "\n";
 	}
 }
 else
 {
 	// Folder is non-writable
 	$write_file = false;
-	echo output_image(false) . "</li>\n";
+	echo output_image(false) . '</li>' . "\n";
 }
 
-echo "		</ul>\n";
+echo '</ul>' . "\n";
 
 // purge old cache files
 Ut::purge_directory(CACHE_PAGE_DIR);
@@ -100,48 +103,51 @@ Ut::purge_directory(CACHE_SQL_DIR);
 Ut::purge_directory(CACHE_CONFIG_DIR);
 Ut::purge_directory(CACHE_TEMPLATE_DIR);
 
-echo "		<h2>" . $lang['SecurityConsiderations'] . "</h2>\n";
-echo "		<ul class=\"security\">\n";
+echo '<h2>' . $lang['SecurityConsiderations'] . '</h2>' . "\n";
+echo '<ul class="security">' . "\n";
 
 if (!$perm_changed)
 {
-	echo "			<li>" . Ut::perc_replace($lang['SecurityRisk'],
-							'<code>' . CONFIG_FILE . '</code>',
-							'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
-					"</li>\n";
+	echo	'<li>' .
+				Ut::perc_replace($lang['SecurityRisk'],
+					'<code>' . CONFIG_FILE . '</code>',
+					'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
+			'</li>' . "\n";
 }
 
-echo "			<li>" . Ut::perc_replace($lang['RemoveSetupDirectory'],
-						'<code>setup/</code>') .
-				"</li>\n";
+echo		'<li>' .
+				Ut::perc_replace($lang['RemoveSetupDirectory'],
+					'<code>setup/</code>') .
+			'</li>' . "\n";
 
 if ($write_file == false)
 {
-	echo "			<li>" . Ut::perc_replace($lang['ErrorGivePrivileges'],
-							'<code>' . CONFIG_FILE . '</code>',
-							'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod 666 ' . CONFIG_FILE . '</code>',
-							'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
-					"</li>\n";
+	echo	'<li>' .
+				Ut::perc_replace($lang['ErrorGivePrivileges'],
+					'<code>' . CONFIG_FILE . '</code>',
+					'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod 666 ' . CONFIG_FILE . '</code>',
+					'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
+			'</li>' . "\n";
 }
 
-echo "		</ul>\n";
+echo		'</ul>' . "\n";
 
 // If there was a problem then show the "Try Again" button.
 if ($write_file)
 {
-	echo "		<h2>" . $lang['InstallationComplete'] . "</h2>\n";
-	echo "		<p>" . Ut::perc_replace($lang['ThatsAll'], $config['base_url']) . "</p>\n";
+	echo	'<h2>' . $lang['InstallationComplete'] . '</h2>' . "\n";
+	echo	'<p>' . Ut::perc_replace($lang['ThatsAll'], $config['base_url']) . '</p>' . "\n";
 }
 else
 {
-	echo '		<form action="' . my_location() . '?installAction=write-config" method="post">' . "\n";
-					write_config_hidden_nodes($config_parameters);
-	echo '			<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n";
-	echo '		</form>' . "\n";
+	echo	'<form action="' . my_location() . '?installAction=write-config" method="post">' . "\n";
+				write_config_hidden_nodes($config_parameters);
+	echo		'<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n";
+	echo	'</form>' . "\n";
 
-	echo '		<div id="config_code" class="config_code"><pre>' .
-					htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
-				"</pre></div>\n";
+	echo	'<div id="config_code" class="config_code"><pre>' .
+				htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
+			'</pre></div>' . "\n";
 }
 ?>
 <br>

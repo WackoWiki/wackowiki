@@ -3,7 +3,7 @@
 // run in tls mode?
 if ($config['tls'] && ((isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ))
 {
-	$config['base_url'] =	str_replace('http://', 'https://', $config['base_url']);
+	$config['base_url']	= str_replace('http://', 'https://', $config['base_url']);
 }
 
 require_once 'setup/common.php';
@@ -12,8 +12,8 @@ global $config;
 // If we have any config data in the _POST then it means they have somehow navigated backwards so we should preserve their updated values.
 if (isset($_POST['config']))
 {
-	$config_parameters = $_POST['config'];
-	$config = array_merge ($config, $config_parameters);
+	$config_parameters	= $_POST['config'];
+	$config				= array_merge ($config, $config_parameters);
 }
 
 if (!isset($config['language']) || !@file_exists('setup/lang/installer.' . $config['language'] . '.php'))
@@ -48,8 +48,15 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 			<h1><?php echo $lang['Title'];?><span class="white"> : </span><?php echo $lang[$install_action]; ?></h1>
 			<ul class="menu">
 			<?php
-				$actions	= ['lang', 'version-check', 'config-site', 'config-database', 'install-database', 'write-config'];
-				$next		= '';
+				$actions = [
+					'lang',
+					'version-check',
+					'config-site',
+					'config-database',
+					'install-database',
+					'write-config'
+				];
+				$next = '';
 
 				foreach ($actions as $i => $action)
 				{
@@ -58,7 +65,10 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 						$next = '<span>&gt; </span>';
 					}
 
-					echo '<li class="' . ($install_action == $action ? 'current' : 'item') . '">' . $next . $lang[$action] . '</li>' . "\n";
+					echo
+						'<li class="' . ($install_action == $action ? 'current' : 'item') . '">' .
+							$next . $lang[$action] .
+						'</li>' . "\n";
 				}
 			?>
 			</ul>
