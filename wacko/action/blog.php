@@ -21,7 +21,6 @@ $page			??= '/' . $this->tag;
 
 $tag			= $this->unwrap_link($page);
 $error			= '';
-$feed_tag		= '';
 
 if (!empty($tag))
 {

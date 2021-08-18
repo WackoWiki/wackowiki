@@ -95,7 +95,7 @@ else
 	echo output_image(false) . '</li>' . "\n";
 }
 
-echo "</ul>\n";
+echo '</ul>' . "\n";
 
 // purge old cache files
 Ut::purge_directory(CACHE_PAGE_DIR);
