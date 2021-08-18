@@ -4232,11 +4232,17 @@ class Wacko
 		return $text;
 	}
 
-	private function numerate_link($url)
+	private function numerate_link($url, $decode = true)
 	{
 		// numerated wiki-links, initialize property as an array to make it work
 		if (is_array($this->numerate_links))
 		{
+			// for better readability in print output
+			if ($decode)
+			{
+				$url = rawurldecode($url);
+			}
+
 			$refnum		= &$this->numerate_links[$url];
 			$refnum		??= '[link' . count($this->numerate_links) . ']';
 
