@@ -79,11 +79,22 @@ input {
 }
 
 /* Display no images in print out */
-img {
+img,
+svg,
+video {
 	/*display:			none;*/
-	max-width:			100%;
-	height:				auto;
+	border-width: 0;
+	vertical-align: middle;
+	max-width: 100%;
+	height: auto;
 }
+
+audio {
+	/*display:			none;*/
+	min-width: 100%;
+	max-width: 100%;
+}
+
 /* Invert and adjust the colours of the image */
 .graph {
 	filter: invert(100%) hue-rotate(180deg) brightness(120%) contrast(150%);
