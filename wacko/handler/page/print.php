@@ -28,6 +28,9 @@ if ((($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate
 	$this->numerate_links = [];
 }
 
+// set absolute URL
+$this->canonical = true;
+
 // build html body
 $data = $this->format($this->page['body'], 'wacko');
 // remove obsolete <ignore> tags
@@ -57,6 +60,8 @@ if ((@$this->sess->show_comments[$this->page['page_id']] || $this->forum))
 
 	$tpl->leave();
 }
+
+$this->canonical = false;
 
 // numerated links
 if ($this->numerate_links)
