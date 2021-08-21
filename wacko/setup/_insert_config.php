@@ -129,6 +129,7 @@ $config_db['multilanguage']					= $config['multilanguage'];
 $config_db['name_date_macro']				= $config['name_date_macro'];
 $config_db['news_cluster']					= $config['news_cluster'];
 $config_db['news_levels']					= $config['news_levels'];
+$config_db['news_structure']				= $config['news_structure'];
 $config_db['nofollow']						= $config['nofollow'];
 $config_db['noindex']						= $config['noindex'];
 $config_db['noreferrer']					= $config['noreferrer'];

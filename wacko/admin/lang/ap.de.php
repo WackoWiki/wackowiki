@@ -691,10 +691,10 @@ $ap_translation = [
 	'CommentsCountInfo'			=> 'Die Anzahl der Kommentare, welche auf jeder Seite der in der Kommentarliste angezeigt werden. Dies gilt für alle Kommentare auf der Website und nicht nur für die im Forum.',
 
 	'NewsSection'				=> 'Nachrichten',
-	'NewsCluster'				=> 'Nachrichten Cluster',
+	'NewsCluster'				=> 'Nachrichten-Cluster',
 	'NewsClusterInfo'			=> 'Root-Cluster für den Nachrichtenbereich (Aktion %1).',
-	'NewsLevels'				=> 'Tiefe der Nachrichtenseiten aus dem Root-Cluster',
-	'NewsLevelsInfo'			=> 'Regulärer Ausdruck (SQL regexp-slang), der die Anzahl der Zwischenstufen des Nachrichten-Wurzelclusters direkt zu den Namen der Seiten der Nachrichtenberichte angibt. (e.g. <code>[cluster]/[jahr]/[monat]</code> -> <code>/.+/.+/.+</code>)',
+	'NewsStructure'				=> 'Aufbau des Nachrichten-Clusters',
+	'NewsStructureInfo'			=> 'Legt die Beiträge wahlweise in Sub-Cluster nach Jahr/Monat oder Woche ab. (e.g. <code>[Cluster]/[Jahr]/[Monat]</code>).',
 
 	'LicenseSection'			=> 'Lizenz',
 	'DefaultLicense'			=> 'Standard-Lizenz',

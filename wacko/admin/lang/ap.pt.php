@@ -686,8 +686,8 @@ $ap_translation = [
 	'NewsSection'				=> 'Section News',
 	'NewsCluster'				=> 'Cluster for the News',
 	'NewsClusterInfo'			=> 'Root cluster for news section (action %1).',
-	'NewsLevels'				=> 'Depth of news pages from the root cluster',
-	'NewsLevelsInfo'			=> 'Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster directly to the names of pages of news reports. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
+	'NewsStructure'				=> 'News cluster structure',
+	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
 	'LicenseSection'			=> 'Licença',
 	'DefaultLicense'			=> 'Default license',

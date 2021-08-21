@@ -80,12 +80,16 @@ if (!empty($this->db->news_cluster))
 			$this->sess->title	= $namehead;
 
 			// needs to be numeric for ordering
-			// TODO: add this as config option to Admin panel
-			// .date('Y/')							- 2011
-			// .date('Y/').date('m/')				- 2011/07 (default)
-			// .date('Y/').date('m/').date('d/')	- 2011/07/14
-			// .date('Y/').date('W/')				- 2011/29
-			$blog_cluster_structure = date('Y/') . date('m/');
+			$blog_cluster_structure	= match($this->db->news_structure) {
+				'Y/'		=> date('Y/'),
+				'Y/m/'		=> date('Y/') . date('m/'),
+				'Y/W/'		=> date('Y/') . date('W/'),
+				default		=> '',
+			};
+
+			// TODO: determine news_levels
+			// $structure_levels	= get_page_depth($this->db->news_cluster . $this->db->news_structure);
+			// $news_levels			= str_repeat('/.+', $levels);
 
 			$this->http->redirect($this->href('edit', $news_cluster . '/' . $blog_cluster_structure . $name, '', 1));
 		}

@@ -38,6 +38,13 @@ function admin_config_pages(&$engine, &$module)
 		return utf8_trim($tag, '/');
 	};
 
+	$count_levels = function ($tag, $sub) use ($engine)
+	{
+		$engine->sanitize_page_tag($tag);
+		$levels = $engine->get_page_depth($tag . $sub);
+		return str_repeat('/.+', $levels);
+	};
+
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
@@ -46,7 +53,8 @@ function admin_config_pages(&$engine, &$module)
 		$config['forum_topics']				= (int) $_POST['forum_topics'];
 		$config['comments_count']			= (int) $_POST['comments_count'];
 		$config['news_cluster']				= (string) $sanitize_tag($_POST['news_cluster']);
-		$config['news_levels']				= (string) $_POST['news_levels'];
+		$config['news_structure']			= (string) $_POST['news_structure'];
+		$config['news_levels']				= (string) $count_levels($_POST['news_cluster'], $_POST['news_structure']);
 		$config['enable_license']			= (int) $_POST['enable_license'];
 		$config['license']					= (string) $_POST['license'];
 		$config['allow_license_per_page']	= (int) $_POST['license_per_page'];
@@ -155,11 +163,26 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="news_levels"><strong><?php echo $engine->_t('NewsLevels');?>:</strong><br>
-					<small><?php echo $engine->_t('NewsLevelsInfo');?></small></label>
+					<label for="news_structure"><strong><?php echo $engine->_t('NewsStructure');?>:</strong><br>
+					<small><?php echo $engine->_t('NewsStructureInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="news_levels" name="news_levels" value="<?php echo Ut::html($engine->db->news_levels);?>">
+					<select id="news_structure" name="news_structure">
+						<option value=""<?php		echo ($engine->db->news_structure == ''		? ' selected' : '');?>>--</option>
+						<option value="Y/"<?php		echo ($engine->db->news_structure == 'Y/'	? ' selected' : '');?>>Y</option>
+						<option value="Y/m/"<?php	echo ($engine->db->news_structure == 'Y/m/'	? ' selected' : '');?>>Y/m</option>
+						<option value="Y/W/"<?php	echo ($engine->db->news_structure == 'Y/W/'	? ' selected' : '');?>>Y/W</option>
+					</select>
+					<?php
+					// needs to be numeric for ordering
+					$news_structure	= match($engine->db->news_structure) {
+						'Y/'		=> date('Y/'),
+						'Y/m/'		=> date('Y/') . date('m/'),
+						'Y/W/'		=> date('Y/') . date('W/'),
+						default		=> '',
+					};
+					echo '<br><code>' . $engine->db->news_cluster . '/' . $news_structure . '*</code><br>';
+					?>
 				</td>
 			</tr>
 			<tr>

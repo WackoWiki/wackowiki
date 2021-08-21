@@ -211,6 +211,7 @@ $wacko_config_defaults = [
 
 	'news_cluster'					=> '',
 	'news_levels'					=> '',
+	'news_structure'				=> '',
 
 	'noindex'						=> 0,
 	'opensearch'					=> 0,

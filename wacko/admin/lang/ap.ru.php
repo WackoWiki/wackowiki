@@ -672,8 +672,8 @@ $ap_translation = [
 	'NewsSection'				=> 'Раздел новостей',
 	'NewsCluster'				=> 'Кластер раздела новостей',
 	'NewsClusterInfo'			=> 'Корень кластера новостного раздела (действие %1).',
-	'NewsLevels'				=> 'Глубина новостных страниц от корня кластера',
-	'NewsLevelsInfo'			=> 'Регулярное выражение (regexp-слэнг SQL), определяющее количество промежуточных разделов от корня новостного кластера непосредственно до имен страниц новостных сообщений. (e.g. <code>[cluster]/[year]/[month]</code> -> <code>/.+/.+/.+</code>)',
+	'NewsStructure'				=> 'News cluster structure',
+	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
 	'LicenseSection'			=> 'Лицензия',
 	'DefaultLicense'			=> 'Лицензия по умолчанию',
