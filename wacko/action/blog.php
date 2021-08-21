@@ -38,7 +38,7 @@ if (!empty($tag))
 	$pages				= [];
 	$p_mode				= [];
 	$prefix				= $this->db->table_prefix;
-	$blog_levels		= '/.+'; //see $this->db->news_levels;
+	$blog_levels		= '/.+'; // see $this->db->news_levels;
 
 	// check privilege
 	$access = $this->has_access('create');
@@ -80,15 +80,7 @@ if (!empty($tag))
 			$this->sess->body	= $template;
 			$this->sess->title	= $namehead;
 
-			// needs to be numeric for ordering
-			// TODO: add this as config option to Admin panel
-			// .date('Y/')							- 2011
-			// .date('Y/').date('m/')				- 2011/07 (default)
-			// .date('Y/').date('m/').date('d/')	- 2011/07/14
-			// .date('Y/').date('W/')				- 2011/29
-			$blog_cluster_structure = '';
-
-			$this->http->redirect($this->href('edit', $tag . '/' . $blog_cluster_structure . $name, '', 1));
+			$this->http->redirect($this->href('edit', $tag . '/' . $name, '', 1));
 		}
 	}
 
