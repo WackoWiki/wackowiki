@@ -5,16 +5,26 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{news [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
+/* USAGE:
+	{{news
+		[page=cluster]
+		[mode=latest|week|from]
+		[date=YYYY-MM-DD]
+		[max=Number]
+		[title=1]
+		[noxml=1]
+	}}
+*/
 
 if (!empty($this->db->news_cluster))
 {
-	if (!isset($max))	$max = 10;
 	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';
 		$category_id	= (int) $_GET['category_id'];
 	}
+
+	if (!isset($max))	$max = 10;
 	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
 	if (!isset($noxml))	$noxml = 0;
@@ -69,14 +79,22 @@ if (!empty($this->db->news_cluster))
 			$this->sess->title	= $namehead;
 
 			// needs to be numeric for ordering
-			// TODO: add this as config option to Admin panel
-			// .date('Y/')							- 2011
-			// .date('Y/').date('m/')				- 2011/07 (default)
-			// .date('Y/').date('m/').date('d/')	- 2011/07/14
-			// .date('Y/').date('W/')				- 2011/29
-			$blog_cluster_structure = date('Y/') . date('m/');
+			switch ($engine->db->news_structure)
+			{
+				case 'Y/':
+					$news_structure = date('Y/');
+					break;
+				case 'Y/m/':
+					$news_structure = date('Y/') . date('m/');
+					break;
+				case 'Y/W/':
+					$news_structure = date('Y/') . date('W/');
+					break;
+				default
+					$news_structure = '';
+			}
 
-			$this->http->redirect($this->href('edit', $news_cluster . '/' . $blog_cluster_structure . $name, '', 1));
+			$this->http->redirect($this->href('edit', $news_cluster . '/' . $news_structure . $name, '', 1));
 		}
 	}
 

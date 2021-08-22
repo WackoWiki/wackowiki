@@ -521,11 +521,6 @@ class Wacko
 			{
 				// ap.xy.php $ap_translation[]
 				$lang_file = 'admin/lang/ap.' . $lang . '.php';
-
-				if (@file_exists($lang_file))
-				{
-					include $lang_file;
-				}
 			}
 			else
 			{
@@ -543,11 +538,11 @@ class Wacko
 				// wacko.all theme
 				$theme_translation = [];
 				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.all.php');
+			}
 
-				if (@file_exists($lang_file))
-				{
-					include $lang_file;
-				}
+			if (@file_exists($lang_file))
+			{
+				include $lang_file;
 			}
 
 			$this->translations[$lang] = array_merge(
@@ -3761,14 +3756,14 @@ class Wacko
 							if ($_global)
 							{
 								$src	= ($this->canonical ? $this->db->base_url : $this->db->base_path) . Ut::join_path(UPLOAD_GLOBAL_DIR, $file_data['file_name']);
-								$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
 							else
 							{
 								// no direct file access for local files, the file handler checks the access right first
 								$src	= $this->href('file', utf8_trim($page_tag, '/'), ['get' => $file_data['file_name']]);
-								$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 							}
+
+							$href	= $this->href('filemeta', utf8_trim($page_tag, '/'), ['m' => 'show', 'file_id' => $file_data['file_id']]);
 
 							switch ($param['linking'])
 							{
@@ -7691,8 +7686,6 @@ class Wacko
 					"UPDATE " . $this->db->table_prefix . "file SET " .
 						"deleted	= 1 " .
 					"WHERE page_id = " . (int) $page['page_id']);
-
-				$this->update_files_count($page['page_id'], 0);
 			}
 			else
 			{
@@ -7714,9 +7707,9 @@ class Wacko
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "file " .
 					"WHERE page_id = " . (int) $page['page_id']);
-
-				$this->update_files_count($page['page_id'], 0);
 			}
+
+			$this->update_files_count($page['page_id'], 0);
 		}
 
 		return true;
@@ -8323,8 +8316,7 @@ class Wacko
 	{
 		if ($tabs)
 		{
-			$out  = '';
-			$out .= '<ul class="menu">' . "\n";
+			$out = '<ul class="menu">' . "\n";
 
 			foreach ($tabs as $i => $text)
 			{

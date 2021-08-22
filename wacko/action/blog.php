@@ -5,22 +5,31 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{blog [page=cluster] [mode=latest|week|from] [date=YYYY-MM-DD] [max=Number] [title=1] [noxml=1]}}
+/* USAGE:
+	{{blog
+		[page=cluster]
+		[mode=latest|week|from]
+		[date=YYYY-MM-DD]
+		[max=Number]
+		[title=1]
+		[noxml=1]
+	}}
+*/
 
 if (!isset($page))		$page = '/' . $this->tag;
 
 $tag			= $this->unwrap_link($page);
 $error			= '';
-$feed_tag		= '';
 
 if (!empty($tag))
 {
-	if (!isset($max))	$max = 10;
 	if (isset($_GET['category_id']))
 	{
 		$mode			= 'category';
 		$category_id	= (int) $_GET['category_id'];
 	}
+
+	if (!isset($max))	$max = 10;
 	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
 	if (!isset($noxml))	$noxml = 1;
@@ -28,7 +37,7 @@ if (!empty($tag))
 	$pages				= [];
 	$p_mode				= [];
 	$prefix				= $this->db->table_prefix;
-	$blog_levels		= '/.+'; //see $this->db->news_levels;
+	$blog_levels		= '/.+'; // see $this->db->news_levels;
 
 	// check privilege
 	$access = $this->has_access('create');
@@ -70,15 +79,7 @@ if (!empty($tag))
 			$this->sess->body	= $template;
 			$this->sess->title	= $namehead;
 
-			// needs to be numeric for ordering
-			// TODO: add this as config option to Admin panel
-			// .date('Y/')							- 2011
-			// .date('Y/').date('m/')				- 2011/07 (default)
-			// .date('Y/').date('m/').date('d/')	- 2011/07/14
-			// .date('Y/').date('W/')				- 2011/29
-			$blog_cluster_structure = '';
-
-			$this->http->redirect($this->href('edit', $tag . '/' . $blog_cluster_structure . $name, '', 1));
+			$this->http->redirect($this->href('edit', $tag . '/' . $name, '', 1));
 		}
 	}
 
