@@ -38,10 +38,13 @@ function admin_config_pages(&$engine, &$module)
 		return utf8_trim($tag, '/');
 	};
 
+	// Regular expression (SQL regexp-slang), specifying the number of intermediate levels of the news root cluster
+	// directly to the names of pages of news reports (e.g. [cluster]/[year]/[month] -> /.+/.+/.+).
 	$count_levels = function ($tag, $sub) use ($engine)
 	{
 		$engine->sanitize_page_tag($tag);
 		$levels = $engine->get_page_depth($tag . $sub);
+
 		return str_repeat('/.+', $levels);
 	};
 

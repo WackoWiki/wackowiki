@@ -80,18 +80,14 @@ if (!empty($this->db->news_cluster))
 			$this->sess->title	= $namehead;
 
 			// needs to be numeric for ordering
-			$blog_cluster_structure	= match($this->db->news_structure) {
+			$news_structure	= match($this->db->news_structure) {
 				'Y/'		=> date('Y/'),
 				'Y/m/'		=> date('Y/') . date('m/'),
 				'Y/W/'		=> date('Y/') . date('W/'),
 				default		=> '',
 			};
 
-			// TODO: determine news_levels
-			// $structure_levels	= get_page_depth($this->db->news_cluster . $this->db->news_structure);
-			// $news_levels			= str_repeat('/.+', $levels);
-
-			$this->http->redirect($this->href('edit', $news_cluster . '/' . $blog_cluster_structure . $name, '', 1));
+			$this->http->redirect($this->href('edit', $news_cluster . '/' . $news_structure . $name, '', 1));
 		}
 	}
 
