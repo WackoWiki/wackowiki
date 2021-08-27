@@ -9,7 +9,7 @@ if ($config['language'] == $page_lang)
 	{
 		$home_page_body		=
 			'file:/wacko_logo.png?right' . "\n" .
-			'**당신의 ((WackoWiki:Doc/English WackoWiki)) 사이트에 오신 것을 환영합니다!**' . "\n\n" .
+			'**당신의 ((WackoWiki:Doc/English WackoWiki)) 사이트에 오신 것을 환영합니다!**' . "n\n" .
 			'Click after you have ((로그인 logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((검색)).' . "\n\n";
