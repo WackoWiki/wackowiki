@@ -7,7 +7,12 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Καλώς ήλθατε στο ((WackoWiki:Doc/English WackoWiki)) site σας!**\n\nΠατήστε στον σύνδεμο \"Επεξεργασία Σελίδας\" στο κάτω μέρος της σελίδας για να ξεκινήσετε.\n\nΗ τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.\n\nΧρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).\n\n";
+		$home_page_body		=
+			'file:/wacko_logo.png?right' . "\n" .
+			'**Καλώς ήλθατε στο ((WackoWiki:Doc/English WackoWiki)) site σας!**' . "\n\n" .
+			'Πατήστε στον σύνδεμο "Επεξεργασία Σελίδας" στο κάτω μέρος της σελίδας για να ξεκινήσετε.' . "\n\n" .
+			'Η τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.' . "\n" .
+			'Χρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).' . "\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], 'Αρχική σελίδα', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

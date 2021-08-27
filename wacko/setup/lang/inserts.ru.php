@@ -7,7 +7,12 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Добро пожаловать в волшебный мир ((WackoWiki:Doc/Русский WackoWiki)).**\n\nНажмите \"Правка\" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).\n\nДокументация по WackoWiki доступна на WackoWiki:Doc/Русский.\n\nПолезные страницы: ((WackoWiki:Doc/Русский/WackoСинтаксис Форматирование)), ((Поиск)).\n";
+		$home_page_body		=
+			'file:/wacko_logo.png?right' . "\n" .
+			'**Добро пожаловать в волшебный мир ((WackoWiki:Doc/Русский WackoWiki)).**" ."' . "\n\n" .
+			'Нажмите "Правка" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).' . "\n\n" .
+			'Документация по WackoWiki доступна на WackoWiki:Doc/Русский.' . "\n" .
+			'Полезные страницы: ((WackoWiki:Doc/Русский/WackoСинтаксис Форматирование)), ((Поиск)).' . "\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], 'Стартовая страница', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
