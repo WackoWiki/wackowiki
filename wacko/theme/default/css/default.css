@@ -1,5 +1,7 @@
 /* basic -------------------------------------------------- */
 :root {
+	--ww-hover-primary: #ccffcc;
+	--ww-hover-secondary: #e7f9ff;
 	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
 	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
 }
@@ -204,8 +206,8 @@ a.self-link:hover {
 	content: "\00b6"; 
 } */
 
-.clearfix:after,
-#mainwrapper:after {
+.clearfix::after,
+#mainwrapper::after {
 	content: "";
 	display: table;
 	clear: both;
@@ -316,7 +318,6 @@ form input.submitinput {
 
 .success {
 	background: #e9ffd9;
-	/* border: 1px solid #adde5c; */
 	color: #008000;
 	font-weight: bold;
 }
@@ -574,7 +575,7 @@ footer {
 }
 
 .comment:hover {
-	background-color: #E7F9FF;
+	background-color: var(--ww-hover-secondary);
 }
 
 /* comments and files actions (only visible on hover) */
@@ -815,7 +816,7 @@ a.btn-link {
 }
 
 .file tr:hover {
-	background: #CCFFCC;
+	background: var(--ww-hover-primary);
 }
 
 .file th{
@@ -877,7 +878,7 @@ td.file- {
 }
 
 .filemeta tr:hover {
-	background: #CCFFCC;
+	background: var(--ww-hover-primary);
 }
 
 .filemeta th{
@@ -1231,7 +1232,7 @@ a:target {
 
 /* calendar action */
 .calendar { margin: 10px;}
-.calendar:hover { background-color: #E7F9FF;}
+.calendar:hover { background-color: var(--ww-hover-secondary);}
 .calendar-month {}
 .calendar th {padding: 5px;}
 .calendar td {padding: 5px; text-align: right;}
@@ -1280,7 +1281,7 @@ a:target {
 }
 
 .gallery figure:hover {
-	background-color: #CCFFCC;
+	background-color: var(--ww-hover-primary);
 }
 
 .gallery figcaption {
@@ -1452,7 +1453,7 @@ a:target {
 }
 
 #search-results li:hover {
-	background-color: #E7F9FF;
+	background-color: var(--ww-hover-secondary);
 }
 
 #search-results li {
@@ -1498,7 +1499,7 @@ a:target {
 }
 
 .ul-letters li.active   {
-	background: #CCFFCC;
+	background: var(--ww-hover-primary);
 }
 
 /* settings */
@@ -1525,7 +1526,7 @@ a:target {
 .hl-line li:hover,
 .hl-line tr:hover,
 tr.lined:hover {
-	background: #CCFFCC;
+	background: var(--ww-hover-primary);
 }
 
 .page-settings {
@@ -1573,7 +1574,7 @@ tr.lined:hover {
 
 article.feed:hover,
 article.newsarticle:hover {
-	background: #E7F9FF;
+	background: var(--ww-hover-secondary);
 }
 
 .news-title {
@@ -2149,7 +2150,7 @@ table.forum td {
 }
 
 .forum tr.topic:hover {
-	background-color: #E7F9FF;
+	background-color: var(--ww-hover-secondary);
 }
 
 #newtopic:target {
@@ -2387,7 +2388,7 @@ table.diff td {
 	display: block;
 }
 
-.diffdown-content a:hover {background-color: #CCFFCC;}
+.diffdown-content a:hover {background-color: var(--ww-hover-primary);}
 
 .diffdown-content span {
 	display: inline-block; 
