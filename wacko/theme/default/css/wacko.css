@@ -169,7 +169,7 @@ div.hl-main {
 }
 
 .usertable tr:hover {
-	background-color: #CCFFCC;
+	background-color: var(--ww-hover-primary);
 }
 
 /* .usertable > tbody > tr:nth-of-type(2n+1) {
