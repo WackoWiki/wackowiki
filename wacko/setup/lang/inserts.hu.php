@@ -7,7 +7,12 @@ if ($config['language'] == $page_lang)
 {
 	if ($config['is_update'] == false)
 	{
-		$home_page_body		= "file:/wacko_logo.png?right\n**Üdvözöljük ((WackoWiki:Doc/English WackoWiki)) webhelyén!**\n\nA kezdéshez kattintson a ((Bejelentkezés Bejelentkezés)) gombra az alján található \"Szerkesztés\" linkre.\n\nA dokumentáció a következő címen található WackoWiki:Doc/English.\n\nHasznos oldalak: ((WackoWiki:Doc/English/Formatting Formatting)), ((Keresés)).\n\n";
+		$home_page_body		=
+			'file:/wacko_logo.png?right' . "\n" .
+			'**Üdvözöljük ((WackoWiki:Doc/English WackoWiki)) webhelyén!**' . "\n\n" .
+			'A kezdéshez kattintson a ((Bejelentkezés Bejelentkezés)) gombra az alján található "Szerkesztés" linkre.' . "\n\n" .
+			'A dokumentáció a következő címen található WackoWiki:Doc/English.' . "\n" .
+			'Hasznos oldalak: ((WackoWiki:Doc/English/Formatting Formatting)), ((Keresés)).' . "\n\n";
 		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
 
 		insert_page($config['root_page'], 'Kezdőlap', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
