@@ -184,7 +184,7 @@ function admin_config_pages(&$engine, &$module)
 						'Y/W/'		=> date('Y/') . date('W/'),
 						default		=> '',
 					};
-					echo '<br><code>' . $engine->db->news_cluster . '/' . $news_structure . '*</code><br>';
+					echo '<br><small><code>' . $engine->db->news_cluster . '/' . $news_structure . '*</code></small><br>';
 					?>
 				</td>
 			</tr>
