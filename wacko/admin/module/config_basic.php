@@ -95,6 +95,7 @@ function admin_config_basic(&$engine, &$module)
 		}
 
 		$config['xml_sitemap']					= (int) ($_POST['xml_sitemap'] ?? 0);
+		$config['xml_sitemap_gz']				= (int) ($_POST['xml_sitemap_gz'] ?? 0);
 		$config['xml_sitemap_time']				= (int) $_POST['xml_sitemap_time'];
 		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
@@ -495,10 +496,22 @@ function admin_config_basic(&$engine, &$module)
 				<td class="label">
 					<label for="xml_sitemap"><strong><?php echo $engine->_t('XmlSitemap');?>:</strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('XmlSitemapInfo'), '<code>' . SITEMAP_XML . '</code>');?><br>
-					<code>Sitemap: <?php echo $engine->db->base_url . SITEMAP_XML;?></code></small></label>
+					<code>Sitemap: <?php echo $engine->db->base_url . SITEMAP_XML . ($engine->db->xml_sitemap_gz ? '.gz' : '');?></code></small></label>
 				</td>
 				<td>
 					<input type="checkbox" id="xml_sitemap" name="xml_sitemap" value="1"<?php echo ($engine->db->xml_sitemap ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="xml_sitemap_gz"><strong><?php echo $engine->_t('XmlSitemapGz');?>:</strong><br>
+					<small><?php echo $engine->_t('XmlSitemapGzInfo');?></small></label>
+				</td>
+				<td>
+					<input type="checkbox" id="xml_sitemap_gz" name="xml_sitemap_gz" value="1"<?php echo ($engine->db->xml_sitemap_gz ? ' checked' : '');?>>
 				</td>
 			</tr>
 			<tr class="lined">

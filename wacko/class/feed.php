@@ -287,6 +287,7 @@ class Feed
 		$this->engine->canonical = false;
 	}
 
+	// Sitemaps XML file: http://www.sitemaps.org
 	function site_map()
 	{
 		$prefix		= $this->engine->db->table_prefix;
@@ -304,7 +305,9 @@ class Feed
 			"ORDER BY p.modified DESC, BINARY p.tag");
 
 		$xml  = '<?xml version="1.0" encoding="utf-8"?>' . "\n";
-		$xml .= '<?xml-stylesheet type="text/xsl" href="' . $this->engine->db->base_url . Ut::join_path(THEME_DIR, '_common/sitemap.xsl') . '"?>' . "\n";
+		$xml .= $this->engine->db->xml_sitemap_gz
+				? ''
+				: '<?xml-stylesheet type="text/xsl" href="' . $this->engine->db->base_url . Ut::join_path(THEME_DIR, '_common/sitemap.xsl') . '"?>' . "\n";
 		$xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
 
 		if ($pages)
@@ -340,16 +343,29 @@ class Feed
 
 				$xml .= '<changefreq>' . $freq . '</changefreq>' . "\n";
 
-				// The only thing I'm not sure about how to handle dynamically...
-				$xml .= '<priority>0.8</priority>' . "\n";
+				// TODO: The only thing I'm not sure about how to handle dynamically...
+				# $xml .= '<priority>0.8</priority>' . "\n";
+
 				$xml .= '</url>' . "\n";
 			}
 		}
 
 		$xml .= '</urlset>';
 
-		file_put_contents(SITEMAP_XML, $xml);
-		@chmod(SITEMAP_XML, CHMOD_FILE);
+		if ($this->engine->db->xml_sitemap_gz)
+		{
+			$file_name	= SITEMAP_XML . '.gz';
+			$file		= gzopen($file_name, 'wb' . BACKUP_COMPRESSION_RATE);
+			gzwrite($file, $xml);
+			gzclose($file);
+		}
+		else
+		{
+			$file_name	= SITEMAP_XML;
+			file_put_contents($file_name, $xml);
+		}
+
+		@chmod($file_name, CHMOD_FILE);
 	}
 
 	// OpenSearch XML description file

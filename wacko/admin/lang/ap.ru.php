@@ -316,8 +316,11 @@ $ap_translation = [
 	'FeedsSection'				=> 'RSS-каналы',
 	'EnableFeeds'				=> 'Включить RSS-каналы',
 	'EnableFeedsInfo'			=> 'Включить или выключить RSS-каналы для сайта.',
+
 	'XmlSitemap'				=> 'XML Карта сайта (Sitemap)',
 	'XmlSitemapInfo'			=> 'Создавать карту сайта в файле %1 в папке xml.',
+	'XmlSitemapGz'				=> 'XML Sitemap compression',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
 	'XmlSitemapTime'			=> 'Периодичность создания XML карты сайта',
 	'XmlSitemapTimeInfo'		=> 'Периодичность создания XML карты сайта в днях. Значение 0 задает создание карты при каждом изменении страниц.',
 

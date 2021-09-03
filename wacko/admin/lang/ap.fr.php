@@ -313,8 +313,11 @@ $ap_translation = [
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Activer les flux',
 	'EnableFeedsInfo'			=> 'Active ou désactive les flux RSS pour l\'ensemble du wiki.',
+
 	'XmlSitemap'				=> 'XML Sitemap',
 	'XmlSitemapInfo'			=> 'Créez un fichier XML appelé %1 dans le dossier xml. Générer un fichier XML compatible avec le format Sitemaps XML. Vous pouvez modifier le chemin d\'accès pour le placer dans votre dossier racine, car c\'est l\'une des conditions requises, à savoir que le fichier XML se trouve dans le dossier racine. D\'autre part, vous pouvez également ajouter le chemin d\'accès au plan du site dans le fichier robots.txt de votre répertoire racine comme suit :',
+	'XmlSitemapGz'				=> 'XML Sitemap compression',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
 	'XmlSitemapTimeInfo'		=> 'Génère le Sitemap une seule fois dans le nombre de jours donné, zéro signifie à chaque changement de page.',
 

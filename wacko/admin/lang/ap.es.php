@@ -313,8 +313,11 @@ $ap_translation = [
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Habilitar feeds',
 	'EnableFeedsInfo'			=> 'Activa o desactiva las fuentes Sindicación RSS de toda la wiki.',
+
 	'XmlSitemap'				=> 'Mapa del sitio XML',
 	'XmlSitemapInfo'			=> 'Cree un archivo XML llamado %1 dentro de la carpeta xml. Genere un archivo XML compatible con el formato XML de mapa del sitio. Es posible que desee cambiar la ruta para generarlo en su carpeta raíz, ya que ese es uno de los requisitos, es decir, que el archivo XML esté en la carpeta raíz. Por otro lado, también puede agregar la ruta al mapa del sitio en el archivo robots.txt en su directorio raíz de la siguiente manera:',
+	'XmlSitemapGz'				=> 'XML Sitemap compression',
+	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
 	'XmlSitemapTime'			=> 'Tiempo de generación de mapa del sitio XML',
 	'XmlSitemapTimeInfo'		=> 'Genera el mapa del sitio sólo una vez en el número de días dado, cero significa en cada cambio de página.',
 

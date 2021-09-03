@@ -217,6 +217,7 @@ $wacko_config_defaults = [
 	'opensearch'					=> 0,
 
 	'xml_sitemap'					=> 0,
+	'xml_sitemap_gz'				=> 0,
 	'xml_sitemap_time'				=> 1,
 
 	'cache'							=> 0,
