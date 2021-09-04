@@ -315,7 +315,7 @@ $ap_translation = [
 	'EnableFeedsInfo'			=> 'Schakelt RSS-feeds in of uit voor de hele wiki.',
 
 	'XmlSitemap'				=> 'XML Sitemap',
-	'XmlSitemapInfo'			=> 'Create an XML file called %1 inside the xml folder. Generate a Sitemaps XML format compatible XML file. You might want to change the path to output it in your root folder as that is one of the requirements i.e. that the XML file is in the root folder. On the other hand you can also add the path to the sitemap in the robots.txt file in your root directory as follows:',
+	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
 	'XmlSitemapGz'				=> 'XML Sitemap compression',
 	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',

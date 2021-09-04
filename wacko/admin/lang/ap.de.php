@@ -318,7 +318,7 @@ $ap_translation = [
 	'EnableFeedsInfo'			=> 'Aktiviert oder deaktiviert RSS-Feeds für das gesamte Wiki.',
 
 	'XmlSitemap'				=> 'XML-Sitemap',
-	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Die XML-Datei ist mit dem XML-Sitemaps Format kompatibel und muss im Hauptverzeichnis des Servers gespeichert werden. Andererseits kann der Pfad zur Sitemap auch in der robots.txt-Datei im Stammverzeichnis wie folgt hinzufügt werden:',
+	'XmlSitemapInfo'			=> 'Erstellt eine XML-Datei namens %1. Der Pfad zur Sitemap kann in der robots.txt-Datei im Stammverzeichnis wie folgt hinzufügt werden:',
 	'XmlSitemapGz'				=> 'XML-Sitemap-Komprimierung',
 	'XmlSitemapGzInfo'			=> 'Wenn gewünscht, kann man die Sitemap-Textdatei mit gzip komprimieren, um den Bandbreitenbedarf zu verringern.',
 	'XmlSitemapTime'			=> 'XML-Sitemap-Erstellungszeit',
