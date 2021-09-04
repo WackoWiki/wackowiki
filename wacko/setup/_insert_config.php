@@ -209,6 +209,7 @@ $config_db['username_chars_max']			= $config['username_chars_max'];
 $config_db['user_can_delete_account']		= $config['user_can_delete_account'];
 $config_db['users_page']					= $config['users_page'];
 $config_db['xml_sitemap']					= $config['xml_sitemap'];
+$config_db['xml_sitemap_gz']				= $config['xml_sitemap_gz'];
 $config_db['xml_sitemap_time']				= $config['xml_sitemap_time'];
 $config_db['xml_sitemap_update']			= null;
 $config_db['youarehere_text']				= $config['youarehere_text'];

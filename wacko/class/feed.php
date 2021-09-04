@@ -354,14 +354,14 @@ class Feed
 
 		if ($this->engine->db->xml_sitemap_gz)
 		{
-			$file_name	= SITEMAP_XML . '.gz';
+			$file_name	= Ut::join_path(XML_DIR, SITEMAP_XML . '.gz');
 			$file		= gzopen($file_name, 'wb' . BACKUP_COMPRESSION_RATE);
 			gzwrite($file, $xml);
 			gzclose($file);
 		}
 		else
 		{
-			$file_name	= SITEMAP_XML;
+			$file_name	= Ut::join_path(XML_DIR, SITEMAP_XML);
 			file_put_contents($file_name, $xml);
 		}
 
