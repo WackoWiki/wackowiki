@@ -162,7 +162,6 @@ write_config_hidden_nodes($config_parameters);
 		[UPLOAD_PER_PAGE_DIR,	CHMOD_DIR],
 		[THUMB_DIR,				CHMOD_DIR],
 		[XML_DIR,				CHMOD_DIR],
-		[SITEMAP_XML,			CHMOD_FILE],
 	];
 
 	$file_permissions_result = true;
