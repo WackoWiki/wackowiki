@@ -346,7 +346,7 @@ if ($engine->db->xml_sitemap)
 	<p><?php echo $engine->_t('XmlSiteMapInfo');?><br>
 		<?php echo Ut::perc_replace($engine->_t('XmlSiteMapPeriod'),
 				'<strong>' . $engine->db->xml_sitemap_time . '</strong>',
-				'<a href="' . $engine->db->base_url . SITEMAP_XML . '" title="' . $engine->_t('XmlSiteMapView') . '" target="_blank" rel="noopener">' . date('Y-m-d H:i:s', ($engine->db->maint_last_xml_sitemap - $engine->db->xml_sitemap_time * DAYSECS)) . '</a>'); ?>
+				'<a href="' . $engine->db->base_url . Ut::join_path(XML_DIR, SITEMAP_XML) . ($engine->db->xml_sitemap_gz ? '.gz' : '') . '" title="' . $engine->_t('XmlSiteMapView') . '" target="_blank" rel="noopener">' . date('Y-m-d H:i:s', ($engine->db->maint_last_xml_sitemap - $engine->db->xml_sitemap_time * DAYSECS)) . '</a>'); ?>
 	</p>
 <?php
 	echo $engine->form_open('sitemap_update');
