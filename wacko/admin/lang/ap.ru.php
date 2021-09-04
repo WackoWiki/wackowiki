@@ -319,8 +319,8 @@ $ap_translation = [
 
 	'XmlSitemap'				=> 'XML Карта сайта (Sitemap)',
 	'XmlSitemapInfo'			=> 'Создавать карту сайта в файле %1 в папке xml.',
-	'XmlSitemapGz'				=> 'XML Sitemap compression',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapGz'				=> 'Сжатие XML Sitemap',
+	'XmlSitemapGzInfo'			=> 'Если хотите, можете сжать XML-файл Sitemap с помощью gzip, чтобы снизить требования к пропускной способности канала связи.',
 	'XmlSitemapTime'			=> 'Периодичность создания XML карты сайта',
 	'XmlSitemapTimeInfo'		=> 'Периодичность создания XML карты сайта в днях. Значение 0 задает создание карты при каждом изменении страниц.',
 
