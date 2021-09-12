@@ -6,10 +6,14 @@ if (!defined('IN_WACKO'))
 }
 
 /*
-	{{paragraphs style="BEFORE|after|left|right"		// table-type "left/right" not implemented yet
-														// styles can be found in /class/wacko.php
-		name="absolute|toc-relative|document-relative"	// "toc-relative" not implemented yet
+	{{paragraphs
+		style="before|after|left|right"
+		name="absolute|toc-relative|document-relative"
 	}}
+
+	table-type "left/right" not implemented yet
+	styles can be found in /class/wacko.php
+	"toc-relative" not implemented yet
 */
 
 $name			??= 'document-relative';

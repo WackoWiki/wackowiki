@@ -12,12 +12,9 @@ if (!defined('IN_WACKO'))
 $page	??= '';
 $text	??= '';
 
-$href = $this->href('edit', $page);
+$tag	= $page ? $this->unwrap_link($page) : $this->tag;
 
-if (!$page)
-{
-	$href = $this->href('edit');
-}
+$href	= $this->href('edit', $tag);
 
 if (!$text)
 {

@@ -11,12 +11,11 @@ if (!isset($page))			return;
 $nomark			??= 0;
 $nowarning		??= 0;
 $revision_id	??= null;
-
-$tag = $this->unwrap_link($page);
-
 $first_anchor	??= '';
 $last_anchor	??= '';
 $track			??= 0;
+
+$tag = $this->unwrap_link($page);
 
 if ($track && $this->link_tracking())
 {

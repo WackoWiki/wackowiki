@@ -46,16 +46,9 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 
 // set defaults
 $max	??= null;
-$page	??= ''; // depreciated
+$page	??= '';
 
-if (! $page)
-{
-	$tag = $this->page['tag'];
-}
-else
-{
-	$tag = $this->unwrap_link($page);
-}
+$tag	= $page ? $this->unwrap_link($page) : $this->tag;
 
 $user	= $this->get_user();
 
