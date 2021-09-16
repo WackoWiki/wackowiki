@@ -47,9 +47,7 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 // set defaults
 $page	??= '';
 
-$tag	= !$page
-	? $this->page['tag']
-	: $this->unwrap_link($page);
+$tag	= $page ? $this->unwrap_link($page) : $tag;
 
 if ($linking_to = $_GET['linking_to'] ?? '')
 {

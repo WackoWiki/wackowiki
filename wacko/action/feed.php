@@ -132,7 +132,6 @@ else
 				{
 					$tpl->header	= $this->_t('FeedMulti');
 				}
-
 			}
 			// default
 			else
