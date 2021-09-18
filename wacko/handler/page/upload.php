@@ -105,7 +105,7 @@ if (isset($_POST['upload']) & $can_upload)
 				$ext = $ext . '.txt';
 			}
 
-			$image = ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'png', 'webp'];
+			$image = ['avif', 'gif', 'jpeg', 'jpe', 'jpg', 'jxl', 'png', 'webp'];
 
 			if (in_array($ext, $image))
 			{

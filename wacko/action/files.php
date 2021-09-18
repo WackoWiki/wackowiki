@@ -257,7 +257,7 @@ if ($can_view)
 			$file_name	= $file['file_name'];
 			$shown_name	= $this->shorten_string($file_name, $file_name_maxlen);
 			$text		= ($media
-							? ($file['picture_w'] || in_array($file['file_ext'], ['m4a', 'mp3', 'ogg', 'opus', 'avif', 'gif', 'jpg', 'jpe', 'jpeg', 'png', 'svg', 'webp', 'mp4', 'ogv', 'webm'])
+							? ($file['picture_w'] || in_array($file['file_ext'], ['m4a', 'mp3', 'ogg', 'opus', 'avif', 'gif', 'jpg', 'jpe', 'jpeg', 'jxl', 'png', 'svg', 'webp', 'mp4', 'ogv', 'webm'])
 								? ''					// parses image, audio and video links into their media tags
 								: $shown_name)			// shows file link
 							: $shown_name);
