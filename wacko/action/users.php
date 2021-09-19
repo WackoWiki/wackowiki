@@ -297,7 +297,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$profile + ['sort' => ($sort_name? 'name' : 'date'), '#' => 'pages']);
 
 				$pages = $this->db->load_all(
-					"SELECT page_id, tag, title, created, page_lang " .
+					"SELECT page_id, owner_id, user_id, tag, title, created, page_lang " .
 					"FROM " . $this->db->table_prefix . "page " .
 					"WHERE owner_id = " . (int) $user['user_id'] . " " .
 						"AND comment_on_id = 0 " .
@@ -313,8 +313,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 				foreach ($pages as $page)
 				{
 					$page_ids[]	= $page['page_id'];
-					// cache page_id for for has_access validation in link function
+
+					$this->cache_page($page, true);
 					$this->page_id_cache[$page['tag']] = $page['page_id'];
+					$this->owner_id_cache[$page['page_id']] = $page['owner_id'];
 				}
 
 				// cache acls
@@ -355,7 +357,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$profile + ['sort' => ($sort_modified? 'modified' : ''), '#' => 'changes']);
 
 				$pages = $this->db->load_all(
-					"SELECT page_id, tag, title, modified, page_lang, edit_note " .
+					"SELECT page_id, owner_id, user_id, tag, title, modified, page_lang, edit_note " .
 					"FROM " . $this->db->table_prefix . "page " .
 					"WHERE user_id = " . (int) $user['user_id'] . " " .
 						"AND comment_on_id = 0 " .
@@ -371,8 +373,10 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 				foreach ($pages as $page)
 				{
 					$page_ids[]	= $page['page_id'];
-					// cache page_id for for has_access validation in link function
+
+					$this->cache_page($page, true);
 					$this->page_id_cache[$page['tag']] = $page['page_id'];
+					$this->owner_id_cache[$page['page_id']] = $page['owner_id'];
 				}
 
 				// cache acls
@@ -425,7 +429,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$tpl->cmt_c_pagination_text = $pagination['text'];
 
 					$comments = $this->db->load_all(
-						"SELECT c.page_id, c.tag, c.title, c.created, c.comment_on_id, p.title AS page_title, p.tag AS page_tag, c.page_lang " .
+						"SELECT c.page_id, c.owner_id, c.user_id, c.tag, c.title, c.created, c.comment_on_id, c.page_lang, p.title AS page_title, p.tag AS page_tag, p.owner_id AS page_owner_id " .
 						"FROM " . $this->db->table_prefix . "page c " .
 							"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
 						"WHERE c.owner_id = " . (int) $user['user_id'] . " " .
@@ -442,8 +446,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						$page_ids[]	= $comment['comment_on_id'];	// page
 						$page_ids[]	= $comment['page_id'];			// comment
 
-						// cache page_id for for has_access validation in link function
+						$this->cache_page($comment, true);
 						$this->page_id_cache[$comment['tag']] = $comment['page_id'];
+						$this->owner_id_cache[$comment['comment_on_id']] = $comment['page_owner_id'];
 					}
 
 					// cache acls
@@ -485,8 +490,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 
 						$tpl->u_u2_pagination_text = $pagination['text'];
 
-						$uploads = $this->db->load_all(
-							"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.uploaded_dt, f.file_size, f.file_lang, p.tag file_on_page, p.title file_on_title " .
+						$files = $this->db->load_all(
+							"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.uploaded_dt, f.file_size, f.file_lang, p.owner_id, p.tag file_on_page, p.title file_on_title " .
 							"FROM " . $this->db->table_prefix . "file f " .
 								"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 							"WHERE f.user_id = " . (int) $user['user_id'] . " " .
@@ -497,14 +502,15 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 
 						$page_ids = [];
 
-						foreach ($uploads as $upload)
+						foreach ($files as $file)
 						{
-							if ($upload['page_id'] && ! in_array($upload['page_id'], $page_ids))
+							if ($file['page_id'] && ! in_array($file['page_id'], $page_ids))
 							{
-								$page_ids[]	= $upload['page_id'];
+								$page_ids[]	= $file['page_id'];
 
-								// cache page_id for for has_access validation in link function
-								$this->page_id_cache[$upload['file_on_page']] = $upload['page_id'];
+								#$this->cache_page($file, true);
+								$this->page_id_cache[$file['file_on_page']] = $file['page_id'];
+								$this->owner_id_cache[$file['page_id']] = $file['owner_id'];
 							}
 						}
 
@@ -512,26 +518,26 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						$this->preload_acl($page_ids);
 
 						// uploads list itself
-						foreach ($uploads as $upload)
+						foreach ($files as $file)
 						{
 							if (!$this->db->hide_locked
-								|| !$upload['page_id']
-								|| $this->has_access('read', $upload['page_id']))
+								|| !$file['page_id']
+								|| $this->has_access('read', $file['page_id']))
 							{
-								if (($file_description = $upload['file_description']) !== '')
+								if (($file_description = $file['file_description']) !== '')
 								{
 									$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
 								}
 
-								preg_match('/^[^\/]+/u', $upload['file_on_page'], $sub_tag);
+								preg_match('/^[^\/]+/u', $file['file_on_page'], $sub_tag);
 
 								// TODO needs to be redone, moving to tpl
-								if ($upload['page_id']) // !$global
+								if ($file['page_id']) // !$global
 								{
-									$path2		= '_file:/' . $upload['file_on_page'] . '/';
-									$on_tag		= $upload['file_on_page'];
+									$path2		= '_file:/' . $file['file_on_page'] . '/';
+									$on_tag		= $file['file_on_page'];
 									$on_page	= $this->_t('To') . ' ' .
-												  $this->link('/' . $upload['file_on_page'], '', $upload['file_on_title'], '', 0, 1) .
+												  $this->link('/' . $file['file_on_page'], '', $file['file_on_title'], '', 0, 1) .
 												  ' ' . NBSP . NBSP . '<span title="' . $this->_t('Cluster') . '">→ ' . $sub_tag[0];
 								}
 								else
@@ -541,9 +547,9 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 									$on_page	= '<span title="">→ ' . $this->_t('UploadGlobal');
 								}
 
-								$tpl->u_u2_li_t			= $upload['uploaded_dt'];
+								$tpl->u_u2_li_t			= $file['uploaded_dt'];
 								# $tpl->u_u2_li_link	= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
-								$tpl->u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $upload['file_id']]) . '">' . $this->shorten_string($upload['file_name']) . '</a>';
+								$tpl->u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $file['file_id']]) . '">' . $this->shorten_string($file['file_name']) . '</a>';
 								$tpl->u_u2_li_onpage	= $on_page;
 								$tpl->u_u2_li_descr		= $file_description;
 							}
