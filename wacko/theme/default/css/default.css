@@ -964,6 +964,7 @@ p.preview {
 	margin: .8em 2px 2px;
 	padding: 10px;
 	border: #CCCCCC 1px dotted;
+	border-radius: .1rem;
 	background-color: #fcfcfc;
 }
 
@@ -1884,7 +1885,6 @@ li.m-source img {
 
 .desc-rss-feed {
 	float: right;
-	margin-right: 20px;
 }
 
 .review1 img,
