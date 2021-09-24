@@ -18,6 +18,14 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 		default	=> '',
 	};
 
+	$title = $new_tag;
+
+	// uppercase the first character of each word only when there are multiple words seperate by spaces
+	if (preg_match('/^\w+( +\w+)*$/u', $new_tag))
+	{
+		$new_tag = utf8_ucwords($new_tag);
+	}
+
 	$this->sanitize_page_tag($new_tag);
 
 	if (!preg_match('/^([' . $this->language['TAG_P'] . ']+)$/u', $new_tag))
@@ -55,7 +63,7 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 		if ($this->has_access('create', $this->get_page_id($prefix . $new_tag)))
 		{
 			// keep the original input for page title
-			$this->sess->title = $this->create_title_from_tag($new_tag);
+			$this->sess->title = $this->create_title_from_tag($title);
 
 			// str_replace: fixes newPage&amp;add=1
 			$this->http->redirect(str_replace('&amp;', '&', ($this->href('edit', $prefix . $new_tag, '', 1))));
