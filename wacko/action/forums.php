@@ -132,6 +132,10 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 				foreach ($comments as $_comment)
 				{
+					$this->cache_page($_comment, true);
+					$this->page_id_cache[$_comment['tag']] = $_comment['page_id'];
+					$this->owner_id_cache[$_comment['page_id']] = $_comment['owner_id'];
+
 					if ($this->db->hide_locked)
 					{
 						if ($this->has_access('read', $_comment['page_id']))
