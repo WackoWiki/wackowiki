@@ -73,7 +73,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	if ($ids)
 	{
 		$category_ids[]	= preg_replace('/[^\d, ]/', '', $ids);
-		$filter			= implode(',', $ids);
+		$filter			= explode(',', $ids);
 	}
 	else
 	{
