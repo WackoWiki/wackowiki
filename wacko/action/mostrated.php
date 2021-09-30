@@ -71,8 +71,6 @@ if (isset($top))
 	$tpl->leave(); // top_
 }
 
-#if (isset($top, $bottom)) echo '<br>';
-
 // max negative rating
 if (isset($bottom))
 {
