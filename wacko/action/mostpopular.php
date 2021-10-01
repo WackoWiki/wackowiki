@@ -144,36 +144,28 @@ if (!empty($pages))
 
 	foreach ($pages as $page)
 	{
-		if ($this->db->hide_locked)
+		if ($this->db->hide_locked && !$this->has_access('read', $page['page_id']))
 		{
-			$access = $this->has_access('read', $page['page_id']);
+			continue;
+		}
+
+		$num++;
+
+		if ($title == 1)
+		{
+			$_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0);
 		}
 		else
 		{
-			$access = true;
+			$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0);
 		}
 
-		if ($access)
+		$tpl->l_num		= $num;
+		$tpl->l_link	= $_link;
+
+		if ($counter)
 		{
-			// print entry
-			$num++;
-
-			if ($title == 1)
-			{
-				$_link = $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1, 0);
-			}
-			else
-			{
-				$_link = $this->link('/' . $page['tag'], '', $page['tag'], $page['title'], 0, 1, 0);
-			}
-
-			$tpl->l_num		= $num;
-			$tpl->l_link	= $_link;
-
-			if ($counter)
-			{
-				$tpl->l_counter_hits	= $page['hits'];
-			}
+			$tpl->l_counter_hits	= $page['hits'];
 		}
 	}
 }

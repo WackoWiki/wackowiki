@@ -18,7 +18,7 @@ $min = 3;
 if (isset($top))
 {
 	$pages = $this->db->load_all(
-		"SELECT p.tag AS pagetag, p.title AS title, MAX(r.value) AS rate, " .
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang, MAX(r.value) AS rate, " .
 			"r.voters AS votes, (r.value / r.voters) AS ratio " .
 		"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->table_prefix . "rating AS r " .
 		"WHERE p.deleted <> 1 " .
@@ -29,35 +29,52 @@ if (isset($top))
 		"ORDER BY ratio DESC, votes DESC " .
 		"LIMIT " . (int) $top, true);
 
-	echo '<div class="layout-box"><p><span>' . $this->_t('RatingTopPages') . ":</span></p>\n";
+	$tpl->enter('top_');
+
+	if (!$nomark)
+	{
+		$tpl->mark			= true;
+		$tpl->emark			= true;
+	}
 
 	if ($pages)
 	{
-		echo '<table class="lined">' . "\n";
+		foreach ($pages as $page)
+		{
+			$page_ids[] = (int) $page['page_id'];
+			// cache page_id for for has_access validation in link function
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+			$this->cache_page($page, true);
+		}
+
+		// cache acls
+		$this->preload_acl($page_ids);
 
 		foreach ($pages as $page)
 		{
-			echo '<tr><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title']) . '</td>' .
-				 '<td class="nowrap" style="width:10px;">' . NBSP . '<strong>+' . round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
-		}
+			if ($this->db->hide_locked && !$this->has_access('read', $page['page_id']))
+			{
+				continue;
+			}
 
-		echo '</table>' . "\n";
+			$tpl->n_l_num		= $num;
+			$tpl->n_l_link		= $this->compose_link_to_page($page['tag'], '', $page['title']);
+			$tpl->n_l_rating	= round($page['rate'] / $page['votes'], 2);
+		}
 	}
 	else
 	{
-		echo '<em>' . $this->_t('RatingNoPagesRated') . '</em>' . "\n";
+		$tpl->none = true;
 	}
 
-	echo "</div>\n";
+	$tpl->leave(); // top_
 }
-
-if (isset($top, $bottom)) echo '<br>';
 
 // max negative rating
 if (isset($bottom))
 {
 	$pages = $this->db->load_all(
-		"SELECT p.tag AS pagetag, p.title AS title, MAX(r.value) AS rate, " .
+		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang, MAX(r.value) AS rate, " .
 			"r.voters AS votes, (r.value / r.voters) AS ratio " .
 		"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->table_prefix . "rating AS r " .
 		"WHERE p.deleted <> 1 " .
@@ -68,24 +85,43 @@ if (isset($bottom))
 		"ORDER BY ratio DESC, votes DESC " .
 		"LIMIT " . (int) $bottom, true);
 
-	echo '<div class="layout-box"><p><span>' . $this->_t('RatingBottomPages') . ":</span></p>\n";
+	$tpl->enter('bottom_');
+
+	if (!$nomark)
+	{
+		$tpl->mark			= true;
+		$tpl->emark			= true;
+	}
 
 	if ($pages)
 	{
-		echo '<table class="lined">' . "\n";
+		foreach ($pages as $page)
+		{
+			$page_ids[] = (int) $page['page_id'];
+			// cache page_id for for has_access validation in link function
+			$this->page_id_cache[$page['tag']] = $page['page_id'];
+			$this->cache_page($page, true);
+		}
+
+		// cache acls
+		$this->preload_acl($page_ids);
 
 		foreach ($pages as $page)
 		{
-			echo '<tr><td>' . $this->compose_link_to_page($page['pagetag'], '', $page['title']) . '</td>' .
-				 '<td class="nowrap" style="width:10px;">' . NBSP . '<strong>' . round($page['rate'] / $page['votes'], 2) . '</strong></td></tr>' . "\n";
-		}
+			if ($this->db->hide_locked && !$this->has_access('read', $page['page_id']))
+			{
+				continue;
+			}
 
-		echo '</table>' . "\n";
+			$tpl->n_l_num		= $num;
+			$tpl->n_l_link		= $this->compose_link_to_page($page['tag'], '', $page['title']);
+			$tpl->n_l_rating	= round($page['rate'] / $page['votes'], 2);
+		}
 	}
 	else
 	{
-		echo '<em>' . $this->_t('RatingNoPagesRated') . '</em>' . "\n";
+		$tpl->none = true;
 	}
 
-	echo "</div>\n";
+	$tpl->leave(); // bottom_
 }
