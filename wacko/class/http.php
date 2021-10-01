@@ -794,6 +794,12 @@ class Http
 			header('Pragma: no-cache');
 		}
 
+		// protecting against XSS in SVG
+		if ($type == 'image/svg+xml')
+		{
+			header("Content-Security-Policy: default-src self; script-src 'none'; script-src-elem 'none'; script-src-attr 'none'");
+		}
+
 		// nosniff only applies to "script" and "style" types.
 		if (preg_match('/^text|xml|javascript/i', $type))
 		{
