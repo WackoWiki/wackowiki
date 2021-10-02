@@ -783,7 +783,7 @@ class Http
 		// protecting against XSS in SVG
 		if ($type == 'image/svg+xml')
 		{
-			header("Content-Security-Policy: default-src self; script-src 'none'; script-src-elem 'none'; script-src-attr 'none'");
+			header("Content-Security-Policy: default-src self; script-src 'none'");
 		}
 
 		// nosniff only applies to "script" and "style" types.

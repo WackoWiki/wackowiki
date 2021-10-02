@@ -13,7 +13,7 @@ if ($top > 20)			$top	= 20;
 if ($bottom > 20)		$bottom	= 20;
 
 // min votes to be included in the list
-$min = 1;
+$min = 3;
 
 // max positive rating
 if (isset($top))
@@ -114,7 +114,6 @@ if (isset($bottom))
 				continue;
 			}
 
-			$tpl->n_l_num		= $num;
 			$tpl->n_l_link		= $this->compose_link_to_page($page['tag'], '', $page['title']);
 			$tpl->n_l_rating	= round($page['rate'] / $page['votes'], 2);
 		}
