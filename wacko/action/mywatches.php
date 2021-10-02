@@ -112,10 +112,10 @@ if ($user_id = $this->get_user_id())
 	{
 		foreach ($pages as $page)
 		{
-			$this->cache_page($page, true);
 			$page_ids[] = (int) $page['page_id'];
-			// cache page_id for for has_access validation in link function
+
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
+			$this->cache_page($page, true);
 		}
 
 		// cache acls
@@ -127,8 +127,8 @@ if ($user_id = $this->get_user_id())
 		$skip			= 0;
 		$break			= 1;
 
-		$r_count	= count($pages);
-		$total		= ceil($r_count / 3);
+		$r_count		= count($pages);
+		$total			= ceil($r_count / 3);
 
 		$tpl->enter('w_page_');
 

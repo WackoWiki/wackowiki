@@ -80,7 +80,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	foreach ($forums as $forum)
 	{
 		$page_ids[]	= $forum['page_id'];
-		// cache page_id for for has_access validation in link function
+
 		$this->page_id_cache[$forum['tag']] = $forum['page_id'];
 		$this->cache_page($forum, true);
 	}

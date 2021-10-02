@@ -22,7 +22,6 @@ if (!isset($printed))	$printed	= [];
 if (!$max || $max > 100) $max = 100;
 
 $tag	= $this->unwrap_link($page);
-$admin	= $this->is_admin();
 $user	= $this->get_user();
 
 // process 'mark read' - reset session time
@@ -118,11 +117,10 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 		}
 		else
 		{
-			$this->cache_page($page, true);
 			$page_ids[] = $page['page_id'];
 
-			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
+			$this->cache_page($page, true);
 		}
 	}
 

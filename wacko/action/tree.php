@@ -33,7 +33,7 @@ if (!isset($sort))		$sort	= '';
 if (!isset($system))	$system	= 0;
 if (!isset($lang))		$lang	= '';
 
-$system == true
+$system
 	? $user_id		= $this->db->system_user_id
 	: $user_id		= null;
 
@@ -118,7 +118,6 @@ if ($pages = $this->db->load_all(
 		{
 			foreach ($links as $link)
 			{
-				// cache page_id for for has_access validation in link function
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
 				$this->cache_page($link, true);
 			}

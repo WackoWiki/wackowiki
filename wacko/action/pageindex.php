@@ -24,7 +24,7 @@ if (!isset($system))	$system	= 0;
 if (!isset($lang))		$lang	= '';
 if (!isset($max))		$max	= null;
 
-$system == true
+$system
 	? $user_id		= $this->db->system_user_id
 	: $user_id		= null;
 
@@ -149,7 +149,7 @@ if (($pages = $this->db->load_all(
 	foreach ($pages as $page)
 	{
 		$page_ids[] = (int) $page['page_id'];
-		// cache page_id for for has_access validation in link function
+
 		$this->page_id_cache[$page['tag']] = $page['page_id'];
 		$this->cache_page($page, true);
 	}

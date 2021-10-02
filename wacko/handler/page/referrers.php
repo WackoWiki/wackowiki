@@ -161,7 +161,6 @@ $check_ref = function ($ref)
 	}
 	else
 	{
-		// cache page_id for for has_access validation in link function
 		$this->page_id_cache[$ref['tag']] = $page_id;
 
 		$link = $this->link('/' . $ref['tag'], '', $ref['title'], '', '', 1, 0);
