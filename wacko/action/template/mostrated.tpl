@@ -38,7 +38,6 @@
 <table class="hl-line most-col-num most-col-value">
 	[= l _ =
 		<tr>
-			<td>[ ' num ' ]</td>
 			<td>[ ' link ' ]</td>
 			<td>[ ' rating | number 0 , . ' ]</td>
 		</tr>

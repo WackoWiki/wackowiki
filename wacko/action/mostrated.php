@@ -113,7 +113,6 @@ if (isset($bottom))
 				continue;
 			}
 
-			$tpl->n_l_num		= $num;
 			$tpl->n_l_link		= $this->compose_link_to_page($page['tag'], '', $page['title']);
 			$tpl->n_l_rating	= round($page['rate'] / $page['votes'], 2);
 		}
