@@ -26,10 +26,10 @@ if ([$pages, $pagination] = $this->load_pages_linking($tag, null, $max))
 {
 	foreach ($pages as $page)
 	{
-		$this->cache_page($page, true);
 		$page_ids[] = (int) $page['page_id'];
-		// cache page_id for for has_access validation in link function
+
 		$this->page_id_cache[$page['tag']] = $page['page_id'];
+		$this->cache_page($page, true);
 	}
 
 	// cache acls

@@ -117,7 +117,6 @@ if ($pages = $this->db->load_all(
 		{
 			foreach ($links as $link)
 			{
-				// cache page_id for for has_access validation in link function
 				$this->page_id_cache[$link['tag']] = $link['page_id'];
 				$this->cache_page($link, true);
 			}

@@ -65,7 +65,6 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 				$tpl->day = $curday = $day;
 			}
 
-			// cache page_id for for has_access validation in link function
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
 
 			// page_size change
