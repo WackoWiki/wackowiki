@@ -5,22 +5,25 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// shows all categories assigned to an particular object (page, file)
-//	{{categories}} [one], [two], [tree]
-// list -
-// nomark -
-// page -
-// label -
+/* shows all categories assigned to an particular object (page, file)
+	[one], [two], [tree]
+   USAGE:
+	{{categories
+		[page="cluster"]
+		[list=1] -
+		[nomark=1] -
+		[label=0|1] -
+	}}
+ */
 
 if (!isset($list))		$list		= 0;
 if (!isset($type_id))	$type_id	= OBJECT_PAGE;
 if (!isset($label))		$label		= true;
-if (empty($page))		$page		= $this->db->category_page;
 if (!isset($nomark))	$nomark		= 0;
 
-#$category_id = (int) ($_GET['category_id'] ?? 0);
+if (empty($page))		$page		= $this->db->category_page;
 
-$i			= '';
+$i			= 0;
 
 if (isset($this->categories))
 {

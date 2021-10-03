@@ -27,14 +27,17 @@ $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', 
 				: '');
 };
 
-// {{category}}
-//	page		- where to start counting from (defaults to current tag)
-//	list		- make categories clickable links which display pages of a given category (1 (default) or 0)
-//	ids			- display pages which belong to these comma-separated categories ids (default none)
-//	lang		- categories language if necessary (defaults to current page lang)
-//	sort		- order pages alphabetically ('abc', default) or creation date ('date')
-//	nomark		- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
-//	info		- display category description
+/* USAGE:
+	{{category
+		[page="cluster"]	- where to start counting from (defaults to current tag)
+		[list=0]			- make categories clickable links which display pages of a given category (1 (default) or 0)
+		[ids="1,2,3"]		- display pages which belong to these comma-separated categories ids (default none)
+		[lang="fr"]			- categories language if necessary (defaults to current page lang)
+		[sort="abc|date"]	- order pages alphabetically ('abc', default) or creation date ('date')
+		[nomark=1]			- display header and fieldset (1, 2 (no header even in 'categories' mode) or 0 (default))
+		[info=0|1]			- display category description
+	}}
+*/
 
 if (!isset($page))			$page		= '/';
 if (!isset($list))			$list		= 1;
@@ -254,4 +257,3 @@ if (!$ids)
 
 	$tpl->leave(); // c_
 }
-

@@ -1,7 +1,7 @@
 <?php
 /*
 
-Typografica library: paragrafica class.
+Typografica library: Paragrafica class.
 
 https://wackowiki.org/doc/Dev/Projects/Typografica
 

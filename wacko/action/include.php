@@ -5,17 +5,29 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if (!isset($page))			$page			= null;
+/* USAGE:
+	{{include
+		[page="cluster"]
+		[nomark=1]
+		[notoc=1]
+		[nowarning=1]
+		[first_anchor="anchor1"]
+		[last_anchor="anchor2"]
+	}}
+*/
+
 if (!isset($page))			return;
+
 if (!isset($nomark))		$nomark			= 0;
 if (!isset($nowarning))		$nowarning		= 0;
 if (!isset($revision_id))	$revision_id	= null;
-
-$tag = $this->unwrap_link($page);
-
 if (!isset($first_anchor))	$first_anchor	= '';
 if (!isset($last_anchor))	$last_anchor	= '';
 if (!isset($track))			$track			= 0;
+
+// notoc=1 gets processed via regex in Paragrafica class
+
+$tag = $this->unwrap_link($page);
 
 if ($track && $this->link_tracking())
 {
@@ -52,20 +64,19 @@ else
 	{
 		if (!empty($inc_page['body_r']))
 		{
-			$strings = $inc_page['body_r'];
+			$body = $inc_page['body_r'];
 		}
 		else
 		{
-			// recompile body
-			// build html body
-			$strings = $this->compile_body($inc_page['body'], null, false, false);
+			// recompile body, build HTML body
+			$body = $this->compile_body($inc_page['body'], null, false, false);
 		}
 
 		// cleaning up
-		$strings = preg_replace('/<!--action:begin-->toc(.*?)<!--action:end-->/ui', '', $strings);
-		$strings = preg_replace('/<!--action:begin-->paragraphs(.*?)<!--action:end-->/ui', '', $strings);
-		$strings = preg_replace('/<!--action:begin-->redirect(.*?)<!--action:end-->/ui', '', $strings);
-		$strings = preg_replace("/.*<!--action:begin-->anchor name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->anchor name=\"?$last_anchor\"?<!--action:end-->.*$/uis", "\$1", $strings);
+		$body = preg_replace('/<!--action:begin-->toc(.*?)<!--action:end-->/ui', '', $body);
+		$body = preg_replace('/<!--action:begin-->paragraphs(.*?)<!--action:end-->/ui', '', $body);
+		$body = preg_replace('/<!--action:begin-->redirect(.*?)<!--action:end-->/ui', '', $body);
+		$body = preg_replace("/.*<!--action:begin-->anchor name=\"?$first_anchor\"?<!--action:end-->(.*)<!--action:begin-->anchor name=\"?$last_anchor\"?<!--action:end-->.*$/uis", "\$1", $body);
 
 		// header
 		if (($this->method != 'print')
@@ -89,7 +100,7 @@ else
 		$this->stop_link_tracking();
 		$this->context[++$this->current_context] = $inc_page['tag'];
 
-		$tpl->data = $this->format($strings, 'post_wacko');
+		$tpl->data = $this->format($body, 'post_wacko');
 
 		$this->context[$this->current_context] = '~~'; // clean stack
 		$this->current_context--;
