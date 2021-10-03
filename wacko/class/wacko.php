@@ -945,7 +945,7 @@ class Wacko
 		{
 			($page_id != 0
 				? $this->wanted_cache['page_id'][$page_id] = 1
-				: $this->wanted_cache['tag'][$this->language['code']][$tag] = 1
+				: $this->wanted_cache['tag'][$tag] = 1
 			);
 
 		}
@@ -953,7 +953,7 @@ class Wacko
 		{
 			($page_id != 0
 				? $this->wanted_cache['page_id'][$page_id] = 1
-				: $this->wanted_cache['tag'][$this->language['code']][$tag] = 1
+				: $this->wanted_cache['tag'][$tag] = 1
 			);
 		}
 	}
@@ -968,7 +968,7 @@ class Wacko
 	{
 		($page_id != 0
 			? $this->wanted_cache['page_id'][$page_id] = 0
-			: $this->wanted_cache['tag'][$this->language['code']][$tag] = 0
+			: $this->wanted_cache['tag'][$tag] = 0
 		);
 	}
 
@@ -995,9 +995,9 @@ class Wacko
 		}
 		else
 		{
-			if (isset($this->wanted_cache['tag'][$this->language['code']][$tag]))
+			if (isset($this->wanted_cache['tag'][$tag]))
 			{
-				return $this->wanted_cache['tag'][$this->language['code']][$tag];
+				return $this->wanted_cache['tag'][$tag];
 			}
 			else
 			{
