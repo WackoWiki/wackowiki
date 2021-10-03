@@ -7,9 +7,9 @@ if (!defined('IN_WACKO'))
 
 /* USAGE:
 	{{blog
-		[page=cluster]
-		[mode=latest|week|from]
-		[date=YYYY-MM-DD]
+		[page="cluster"]
+		[mode="latest|week|from"]
+		[date="YYYY-MM-DD"]
 		[max=Number]
 		[title=1]
 		[noxml=1]
