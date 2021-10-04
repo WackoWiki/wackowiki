@@ -170,7 +170,7 @@ if ($user_id = $this->get_user_id())
 		if (($pages = $this->db->load_all(
 			"SELECT page_id, owner_id, user_id, tag, title, modified, page_lang " .
 			$selector .
-			"ORDER BY tag ASC " .
+			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .
 			$pagination['limit'], true)))
 		{
 			$tpl->pagination_text = $pagination['text'];

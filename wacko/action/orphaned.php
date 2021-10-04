@@ -37,7 +37,7 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 		$orphaned = $this->db->load_all(
 			"SELECT DISTINCT page_id, owner_id, tag, title " .
 			$selector .
-			"ORDER BY tag " .
+			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci " .
 			$pagination['limit']);
 
 		return [$orphaned, $pagination];

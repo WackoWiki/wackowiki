@@ -123,7 +123,7 @@ $selector =
 				($title
 					? "title "
 					: "tag ") .
-				"LIKE " . $this->db->q($letter . '%') . " "
+				"COLLATE utf8mb4_unicode_520_ci LIKE " . $this->db->q($letter . '%') . " "
 			: "");
 
 $count = $this->db->load_single(
@@ -142,8 +142,9 @@ if (($pages = $this->db->load_all(
 	$selector .
 	"ORDER BY " .
 		($title
-			? "title ASC "
-			: "tag ASC ") .
+			? "title "
+			: "tag ") .
+		"COLLATE utf8mb4_unicode_520_ci ASC " .
 	$pagination['limit'], true)))
 {
 	foreach ($pages as $page)
