@@ -124,7 +124,7 @@ $selector =
 				($title
 					? "title "
 					: "tag ") .
-				"COLLATE utf8mb4_unicode_520_ci LIKE " . $this-> [max=Anzahl] [ledb->q($letter . '%') . " "
+				"COLLATE utf8mb4_unicode_520_ci LIKE " . $this->db->q($letter . '%') . " "
 			: "");
 
 $count = $this->db->load_single(
