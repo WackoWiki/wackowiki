@@ -88,7 +88,7 @@ $pages1 = $this->db->load_all(
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE tag LIKE " . $this->db->q($tag1 . '%') . " " .
 		"AND comment_on_id = 0 " .
-	"ORDER BY tag ASC " .
+	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .
 	"LIMIT " . (int) $limit);
 
 $pages2 = $this->db->load_all(
@@ -96,7 +96,7 @@ $pages2 = $this->db->load_all(
 	"FROM " . $this->db->table_prefix . "page " .
 	"WHERE tag LIKE " . $this->db->q($tag2 . '%') . " " .
 		"AND comment_on_id = 0 " .
-	"ORDER BY tag ASC " .
+	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .
 	"LIMIT " . (int) $limit);
 
 // 3. stripping by rights

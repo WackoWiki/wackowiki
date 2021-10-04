@@ -1319,7 +1319,7 @@ class Wacko
 		if ($pages = $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 			$selector .
-			"ORDER BY tag " .
+			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci " .
 			$pagination['limit'], true))
 		{
 			return [$pages, $pagination];
@@ -1347,7 +1347,7 @@ class Wacko
 		if ($pages = $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 			$selector .
-			"ORDER BY tag " .
+			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci " .
 			$pagination['limit'], true))
 		{
 			return [$pages, $pagination];
@@ -1399,7 +1399,7 @@ class Wacko
 		if ($pages = $this->db->load_all(
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
 			$selector .
-			"ORDER BY tag " .
+			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci " .
 			$pagination['limit'], true))
 		{
 			return [$pages, $pagination];
@@ -4430,7 +4430,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "page " .
 			"WHERE tag = " . $this->db->q($tag) . " " .
 				"COLLATE utf8mb4_general_ci " .
-			"ORDER BY tag");
+			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci");
 	}
 
 	function sanitize_page_tag(&$tag, $normalize = false)

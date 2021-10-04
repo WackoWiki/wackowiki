@@ -147,7 +147,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) " .
 		$selector .
-		"ORDER BY a.tag " .
+		"ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci " .
 		$pagination['limit']);
 
 	return [$results, $pagination, $count['n']];

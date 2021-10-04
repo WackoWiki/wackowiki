@@ -304,7 +304,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						"AND deleted <> 1 " .
 					"ORDER BY " .
 						($sort_name
-							? 'tag ASC'
+							? 'tag COLLATE utf8mb4_unicode_520_ci ASC'
 							: 'created DESC') . " " .
 					$pagination['limit']);
 

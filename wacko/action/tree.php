@@ -77,7 +77,7 @@ if ($pages = $this->db->load_all(
 			? "AND page_lang = " . $this->db->q($lang) . " "
 			: "") .
 		"AND deleted <> 1 " .
-	"ORDER BY tag " .
+	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci " .
 		($sort == 'desc'
 			? "DESC"
 			: ""), true))

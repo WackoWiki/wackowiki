@@ -242,7 +242,7 @@ function admin_maint_resync(&$engine, &$module)
 				"b.tag AS comment_on_tag, b.allow_rawhtml AS parent_allow_rawhtml, b.disable_safehtml AS parent_disable_safehtml " .
 			"FROM " . $prefix . "page a " .
 				"LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
-			"ORDER BY a.tag " .
+			"ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci " .
 			"LIMIT " . ($i * $limit) . ", $limit"))
 			{
 				$engine->sess->resync_links .= '<br>##### ' . date('H:i:s') . ' --> ' . ($i + 1) . " #########################################\n\n";
