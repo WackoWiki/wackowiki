@@ -14,7 +14,7 @@
 	[= nopages _ =
 		[ ' _t: NoRecentlyCommented ' ]
 	=]
-	[''' pagination ''']
+	[ '' pagination '' ]
 	<ul class="ul-list">
 		[= page _ =
 			<li><strong>[ ' day ' ]</strong>
@@ -34,7 +34,7 @@
 		=]
 	</ul>
 
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 
 [= pagination =]

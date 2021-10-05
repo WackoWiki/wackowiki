@@ -15,7 +15,7 @@
 						</strong>
 					=]
 				</p>
-				[''' pagination ''']
+				[ '' pagination '' ]
 			</div>
 
 			<table class="forum">
@@ -76,7 +76,7 @@
 						<small class="no-print"><a href="[ ' href ' ]">[ ' _t: MarkRead ' ]</a></small>
 					=]
 				</p>
-				[''' pagination ''']
+				[ '' pagination '' ]
 			</div>
 
 			[= form _ =

@@ -5,7 +5,7 @@
 	[ ' moderate ' ]
 
 	[= subforum _ =
-		[''' pagination ''']
+		[ '' pagination '' ]
 		<form action="[ ' href: moderate ' ]" method="post" name="moderate_subforum">
 			[ ' csrf: moderate_subforum ' ]
 
@@ -135,11 +135,11 @@
 
 			</table>
 		</form>
-		[''' pagination ''']
+		[ '' pagination '' ]
 	=]
 
 	[= forum _ =
-		[''' pagination ''']
+		[ '' pagination '' ]
 		<form action="[ ' href: moderate ' ]" method="post" name="moderate_topic">
 			[ ' csrf: moderate_topic ' ]
 
@@ -323,7 +323,7 @@
 		=]
 		</table>
 		</form>
-		[''' pagination ''']
+		[ '' pagination '' ]
 	=]
 
 [= pagination =]

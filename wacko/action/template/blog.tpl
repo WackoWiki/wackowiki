@@ -38,7 +38,7 @@
 					</table>
 				</form>
 			=]
-				[''' pagination ''']
+				[ '' pagination '' ]
 				<br style="clear:both; display: none;">
 			</div>	
 
@@ -56,7 +56,7 @@
 					</footer>
 				</article>
 			=]
-			[''' pagination ''']
+			[ '' pagination '' ]
 
 		</section>
 	=]

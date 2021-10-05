@@ -23,7 +23,7 @@
 		[ ' nonstatic ' ]
 		</div>
 	=]
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 
 [= pagination =]

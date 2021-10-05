@@ -1587,14 +1587,14 @@ class Wacko
 	function load_categories($object_id = 0, $type_id = OBJECT_PAGE, $cache = false) : array
 	{
 		return $this->category_cache[$object_id][$type_id] ?? $this->db->load_all(
-				"SELECT c.category_id, c.category, c.category_lang " .
-				"FROM " . $this->db->table_prefix . "category c " .
+			"SELECT c.category_id, c.category, c.category_lang " .
+			"FROM " . $this->db->table_prefix . "category c " .
 				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
-				"WHERE ca.object_id  = " . (int)$object_id . " " .
-				($type_id != 0
-					? "AND ca.object_type_id = " . (int)$type_id . " "
-					: "AND ca.object_type_id = " . (int)$type_id . " ") // TODO: explode array IN
-				, $cache);
+			"WHERE ca.object_id  = " . (int) $object_id . " " .
+			($type_id != 0
+				? "AND ca.object_type_id = " . (int) $type_id . " "
+				: "AND ca.object_type_id = " . (int) $type_id . " ") // TODO: explode array IN
+			, $cache);
 	}
 
 	/**
@@ -8339,8 +8339,7 @@ class Wacko
 
 	// load categories for the page's particular language.
 	// if root string value is passed, returns number of
-	// pages under each category and below defined root
-	// page
+	// pages under each category and below defined root page
 	function get_categories_list($lang, $cache = true, $root = false, $empty = true)
 	{
 		$categories = [];

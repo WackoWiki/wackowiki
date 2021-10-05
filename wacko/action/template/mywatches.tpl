@@ -45,7 +45,7 @@
 		</table>
 		<br>
 	
-		[''' pagination ''']
+		[ '' pagination '' ]
 	=]
 
 [= pagination =]

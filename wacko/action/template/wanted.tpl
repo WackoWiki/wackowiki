@@ -14,7 +14,7 @@
 		=]
 	=]
 	[= w =
-		[''' pagination ''']
+		[ '' pagination '' ]
 
 		<ol start="[ ' offset ' ]" class="hl-line">
 			[= l _ =
@@ -22,7 +22,7 @@
 			=]
 		</ol>
 
-		[''' pagination ''']
+		[ '' pagination '' ]
 	=]
 
 [= pagination =]

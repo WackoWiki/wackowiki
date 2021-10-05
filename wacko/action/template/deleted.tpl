@@ -2,7 +2,7 @@
 	[= nopages _ =
 		[ ' _t: NoDeletedPages ' ]
 	=]
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 	<ul class="ul-list">
 	[= page _ =
@@ -25,7 +25,7 @@
 		=]
 	</ul>
 
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>

@@ -31,7 +31,7 @@
 			=]
 		</ul>
 
-		[''' pagination ''']
+		[ '' pagination '' ]
 	=]
 
 [= pagination =]
