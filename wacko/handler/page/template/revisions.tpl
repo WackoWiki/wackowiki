@@ -22,7 +22,7 @@
 					<a href="[ ' href ' ]">[ ' text ' ]</a>
 				=]
 			</p>
-			[''' pagination ''']
+			[ '' pagination '' ]
 			<ul class="revisions">
 				[= l _ =
 					<li>
@@ -59,7 +59,7 @@
 					</li>
 				=]
 			</ul><br>
-			[''' pagination ''']
+			[ '' pagination '' ]
 			<a href="[ ' href: ' ]" class="btn-link">
 				<button type="button">[ ' _t: CancelReturnButton ' ]</button>
 			</a>

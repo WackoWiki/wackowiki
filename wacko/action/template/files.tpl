@@ -1,6 +1,6 @@
 [ === main === ]
 	[ ' message ' ]
-	[''' pagination ''']
+	[ '' pagination '' ]
 	[= s =
 		<form action="[ ' href: attachments ' ]" method="get" name="file_search">
 			[ ' csrf: file_search ' ]
@@ -58,7 +58,7 @@
 		[ ' nonstatic ' ]
 		</div>
 	=]
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>

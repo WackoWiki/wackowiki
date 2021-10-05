@@ -9,7 +9,7 @@
 
 	<strong>[ ' title ' ]</strong><br><br>
 
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 	<ul class="ul-list">
 		[= p _ =
@@ -58,7 +58,7 @@
 		=]
 	</ul>
 
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 
 [= pagination =]

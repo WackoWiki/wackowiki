@@ -12,7 +12,7 @@
 			<em>[ ' _t: NoChangesWatches ' ]</em>
 		=]
 		
-		[''' pagination ''']
+		[ '' pagination '' ]
 		<ul class="ul-list hl-line">
 			[= l _ =
 				<li>
@@ -20,7 +20,7 @@
 				</li>
 			=]
 		</ul>
-		[''' pagination ''']
+		[ '' pagination '' ]
 	=]
 
 

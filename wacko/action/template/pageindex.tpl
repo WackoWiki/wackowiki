@@ -1,6 +1,6 @@
 
 [ === main ===]
-	[''' pagination ''']
+	[ '' pagination '' ]
 	[= letter _ =
 		<ul class="ul-letters">
 		[= l _ =
@@ -29,7 +29,7 @@
 		</li>
 	=]
 	</ul>
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 [============================== // assorted utilities ==============================]
 

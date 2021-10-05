@@ -2,7 +2,7 @@
 	[= none _ =
 		[ ' _t: NoOrphaned ' ]
 	=]
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 	<ol start="[ ' offset ' ]">
 		[= l _ =
@@ -10,7 +10,7 @@
 		=]
 	</ol>
 
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 
 [= pagination =]

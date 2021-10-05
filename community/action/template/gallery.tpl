@@ -1,5 +1,5 @@
 [ === main === ]
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 	[= mark _ =
 		<div class="layout-box">
@@ -62,7 +62,7 @@
 		</div>
 	=]
 
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 	[= noaccess _ =
 		[ ' _t: ActionDenied ' ]

@@ -2,7 +2,7 @@
 	[= s _ =
 		<section id="section-comments">
 			<header id="header-comments">
-				[''' pagination ''']
+				[ '' pagination '' ]
 				<h1><a href="[ ' href ' ]" title="[ ' title | e attr ' ]">[ ' text ' ]</a></h1>
 			</header>
 			[= ol _ =
@@ -44,7 +44,7 @@
 					=]
 				</ol>
 			=]
-			[''' pagination ''']
+			[ '' pagination '' ]
 			[= f _ =
 				<div class="commentform" id="commentform">
 					[= p _ =

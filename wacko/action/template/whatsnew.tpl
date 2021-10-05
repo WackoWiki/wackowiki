@@ -14,7 +14,7 @@
 	[= nopages _ =
 		[ ' _t: NoPagesFound ' ]
 	=]
-	[''' pagination ''']
+	[ '' pagination '' ]
 	<ul class="ul-list">
 		[= page _ =
 			<li><strong>[ ' day ' ]</strong>
@@ -47,7 +47,7 @@
 		=]
 	</ul>
 
-	[''' pagination ''']
+	[ '' pagination '' ]
 
 
 [= pagination =]
