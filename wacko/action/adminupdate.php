@@ -396,10 +396,6 @@ if ($this->is_admin())
 					"UPDATE " . $this->db->table_prefix . "user SET " .
 						"password	= " . $this->db->q($hash) . " " .
 					"WHERE user_id = " . (int) $user['user_id']);
-
-				// remove obsolete salt field
-				$this->db->sql_query(
-					"ALTER TABLE " . $this->db->table_prefix . "user DROP salt");
 			}
 			else
 			{
@@ -423,9 +419,18 @@ if ($this->is_admin())
 
 		echo '</table>' . "\n";
 
-		echo $this->form_open('reset_password');
-		echo '<button type="submit" name="reset_password">' . $this->_t('ResetButton') . '</button>' . "\n";
-		echo $this->form_close();
+		if (isset($_POST['reset_password']))
+		{
+			// remove obsolete salt field
+			$this->db->sql_query(
+				"ALTER TABLE " . $this->db->table_prefix . "user DROP salt");
+		}
+		else
+		{
+			echo $this->form_open('reset_password');
+			echo '<button type="submit" name="reset_password">' . $this->_t('ResetButton') . '</button>' . "\n";
+			echo $this->form_close();
+		}
 	}
 	else
 	{
