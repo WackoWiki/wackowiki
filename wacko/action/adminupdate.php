@@ -44,14 +44,12 @@ if ($this->is_admin())
 	##            Set page title based on tag             ##
 	########################################################
 
-	echo "<h4>6. Set page title based on tag if empty:</h4>";
+	echo "<h4>1. Set page title based on tag if empty:</h4>";
 
 	if (!isset($_POST['set_title']))
 	{
 		echo $this->form_open('set_title');
-		?>
-		<button type="submit" name="set_title"><?php echo $this->_t('SubmitButton');?></button>
-		<?php
+		echo '<button type="submit" name="set_title">' . $this->_t('SubmitButton') . '</button>';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['set_title']))
@@ -103,14 +101,12 @@ if ($this->is_admin())
 	##            Set depth based on tag                  ##
 	########################################################
 
-	echo "<h4>7. Set page depth and parent_id based on tag:</h4>";
+	echo "<h4>2. Set page depth and parent_id based on tag:</h4>";
 
 	if (!isset($_POST['set_depth']))
 	{
 		echo $this->form_open('set_depth');
-		?>
-		<button type="submit" name="set_depth"><?php echo $this->_t('SubmitButton');?></button>
-		<?php
+		echo '<button type="submit" name="set_depth">' . $this->_t('SubmitButton') . '</button>';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['set_depth']))
@@ -155,14 +151,12 @@ if ($this->is_admin())
 	##            Set version_id for revision             ##
 	########################################################
 
-	echo "<h4>8. Set version_id for revisions:</h4>";
+	echo "<h4>3. Set version_id for revisions:</h4>";
 
 	if (!isset($_POST['set_version_id']))
 	{
 		echo $this->form_open('set_version_id');
-		?>
-		<button type="submit" name="set_version_id"><?php echo $this->_t('SubmitButton');?></button>
-		<?php
+		echo '<button type="submit" name="set_version_id">' . $this->_t('SubmitButton') . '</button>';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['set_version_id']))
@@ -213,14 +207,12 @@ if ($this->is_admin())
 	##            Set missing ACL sets                    ##
 	########################################################
 
-	echo "<h4>8. Set missing ACL permissions:</h4>";
+	echo "<h4>4. Set missing ACL permissions:</h4>";
 
 	if (!isset($_POST['set_missing_permissions']))
 	{
 		echo $this->form_open('set_missing_permissions');
-		?>
-		<button type="submit" name="set_missing_permissions"><?php echo $this->_t('UpdateButton');?></button>
-		<?php
+		echo '<button type="submit" name="set_missing_permissions">' .  $this->_t('UpdateButton') . '</button>';
 		echo $this->form_close();
 	}
 	else if (isset($_POST['set_missing_permissions']))
@@ -289,7 +281,7 @@ if ($this->is_admin())
 
 	if ($large_prefix)
 	{
-		echo '<h4>9. Alter tables to work with key prefixes longer than 767 bytes:</h4>';
+		echo '<h4>1. Alter tables to work with key prefixes longer than 767 bytes:</h4>';
 
 		if (!isset($_POST['set_large_prefix_tables']))
 		{
@@ -337,6 +329,110 @@ if ($this->is_admin())
 	}
 
 	########################################################
+	##            Replace legacy format passwords         ##
+	########################################################
+
+	echo '<h4>2. Reset and regenerate the password & password hash for legacy password formats:</h4>';
+
+	/* replaces legacy format password with a random new password hash
+	 *
+	 * This only affects wikis that were already in use before R5.5.
+	 * This mainly serves the purpose that these password hashes are not exploitable for bad actors.
+	 *
+	 * Affected users must use the password recovery function to reset their password,
+	 * this is however only possible for users with a confirmed email address.
+	 *
+	 * TODO:
+	 * add deactivate accounts option
+	 *		$user['enabled'] = 0
+	 *		$user['account_status'] = 2 (denied /disabled)
+	 * add option to inform users about password reset
+	 */
+
+	$users = $this->db->load_all(
+		"SELECT user_id, user_name, LENGTH(password) AS password, email, email_confirm, signup_time, last_visit, total_pages, total_revisions, total_comments, total_uploads " .
+		"FROM " . $this->db->user_table . " " .
+		"WHERE  LENGTH(password) = 32 OR LENGTH(password) = 64");
+
+	if ($users)
+	{
+		echo '<table class="usertable">' . "\n";
+		echo
+			'<tr class="userrow">
+				<th>user_id</th>
+				<th>user_name</th>
+				<th>algo</th>
+				<th>email</th>
+				<th>email_confirm</th>
+				<th>signup_time</th>
+				<th>last_visit</th>
+				<th>pages</th>
+				<th>revisions</th>
+				<th>comments</th>
+				<th>uploads</th>
+			</tr>' . "\n";
+
+
+		foreach ($users as $user)
+		{
+			// check for old password formats
+			if ($user['password'] == 32)
+			{
+				$algo = 'md5';
+			}
+			else
+			{
+				$algo = 'sha256';
+			}
+
+			if (isset($_POST['reset_password']))
+			{
+				// generate random password
+				$password	= Ut::random_token(20, 3);
+				$hash		= $this->password_hash($user, $password);
+
+				// update database with the new password hash
+				$this->db->sql_query(
+					"UPDATE " . $this->db->table_prefix . "user SET " .
+						"password	= " . $this->db->q($hash) . " " .
+					"WHERE user_id = " . (int) $user['user_id']);
+
+				// remove obsolete salt field
+				$this->db->sql_query(
+					"ALTER TABLE " . $this->db->table_prefix . "user DROP salt");
+			}
+			else
+			{
+				// show affected users
+				echo
+					'<tr class="userrow">
+						<td>' . $user['user_id'] .	'</td>
+						<td>' . $user['user_name'] . '</td>
+						<td>' . $algo . '</td>
+						<td>' . $user['email'] . '</td>
+						<td>' . ($user['email_confirm'] ? 'No' : 'Yes') . '</td>
+						<td>' . $user['signup_time'] . '</td>
+						<td>' . $user['last_visit'] . '</td>
+						<td>' . $user['total_pages'] . '</td>
+						<td>' . $user['total_revisions'] . '</td>
+						<td>' . $user['total_comments'] . '</td>
+						<td>' . $user['total_uploads'] . '</td>
+					</tr>' . "\n";
+			}
+		}
+
+		echo '</table>' . "\n";
+
+		echo $this->form_open('reset_password');
+		echo '<button type="submit" name="reset_password">' . $this->_t('ResetButton') . '</button>' . "\n";
+		echo $this->form_close();
+	}
+	else
+	{
+		echo 'All good. No legacy password hashes found.';
+	}
+
+	########################################################
 	##            MIGRATE ACLs to new scheme              ##
 	########################################################
 
@@ -350,9 +446,7 @@ if ($this->is_admin())
 		{
 			echo "<h3>7. Migrates acls to new scheme:</h3>";
 			echo $this->form_open('migrate_acls');
-			?>
-			<button type="submit" name="migrate_acls"><?php echo $this->_t('SubmitButton');?></button>
-			<?php
+			echo '<button type="submit" name="migrate_acls">' . $this->_t('SubmitButton') . '</button>';
 			echo $this->form_close();
 		}
 		// migrate acls to new acl and acl_privilege table
