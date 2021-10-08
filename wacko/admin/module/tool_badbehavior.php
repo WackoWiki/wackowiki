@@ -366,12 +366,12 @@ function admin_tool_badbehavior(&$engine, &$module)
 
 				$headers = str_replace("\n", "<br>\n", Ut::html($result['http_headers']));
 
-				if (@strpos($headers, $result['user_agent']) !== false)
+				if (@str_contains($headers, $result['user_agent']))
 				{
 					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'user_agent' => rawurlencode($result['user_agent_hash'])]) . '">' . $result['user_agent'] . '</a>', strpos($headers, $result['user_agent']), strlen($result['user_agent']));
 				}
 
-				if (@strpos($headers, $result['request_method']) !== false)
+				if (@str_contains($headers, $result['request_method']))
 				{
 					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'request_method' => rawurlencode($result['request_method'])]) . '">' . $result['request_method'] . '</a>', strpos($headers, $result['request_method']), strlen($result['request_method']));
 				}
