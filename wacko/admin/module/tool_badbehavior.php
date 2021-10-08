@@ -175,26 +175,26 @@ function admin_tool_badbehavior(&$engine, &$module)
 			{
 				foreach ($results as $result)
 				{
-					echo '<tr id="request-' . '' . '" class="lined">' . "\n";
-					echo '<td class="label">' . $result['n'] . "</td>\n";
-					# echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
+					echo '<tr class="lined">' . "\n";
+					echo '<td class="label">' . $result['n'] . '</td>' . "\n";
+					# echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . '</td>' . "\n";
 
 					if ($argument == 'status_key')
 					{
 						$status_key	= bb2_get_response($result['group_type']);
-						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'status_key' => $result['group_type']]) . '" title="' . '[' . $status_key['response'] . '] ' . $status_key['explanation'] . '">' . $status_key['log'] . "</a>\n";
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'status_key' => $result['group_type']]) . '" title="' . '[' . $status_key['response'] . '] ' . $status_key['explanation'] . '">' . $status_key['log'] . '</a>';
 					}
 					else if ($argument == 'request_uri')
 					{
-						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', $argument => $result['request_uri_hash']]) . '">' . $result['group_type'] . "</a>\n";
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', $argument => $result['request_uri_hash']]) . '">' . $result['group_type'] . '</a>';
 					}
 					else
 					{
-						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', $argument => $result['group_type']]) . '">' . $result['group_type'] . "</a>\n";
+						$link		= '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', $argument => $result['group_type']]) . '">' . $result['group_type'] . '</a>';
 					}
 
-					echo '<td>' . $link . "</td>\n";
-					echo "</tr>\n";
+					echo '<td>' . $link . '</td>' . "\n";
+					echo '</tr>' . "\n";
 				}
 			}
 	?>
@@ -300,7 +300,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 		</div>
 
 		<?php
-				$engine->print_pagination($pagination);
+		$engine->print_pagination($pagination);
 		?>
 		<table class="formation">
 			<thead>
@@ -353,32 +353,32 @@ function admin_tool_badbehavior(&$engine, &$module)
 
 				echo '<td>' .
 						'<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'ip' => $result['ip']]) . '">' . $result['ip'] . '</a><br>' .
-						$host . "<br>\n" .
+						$host . '<br>' . "\n" .
 						$time_tz . '<br><br>' .
-						'<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'status_key' => $result['status_key']]) . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . "</a>\n";
+						'<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'status_key' => $result['status_key']]) . '" title="' .'[' . $status_key['response'] . '] ' . $status_key['explanation']. '">' . $status_key['log'] . '</a>' . "\n";
 
 				if ($httpbl)
 				{
 					echo "<br><br><a href=\"https://www.projecthoneypot.org/ip_{$result['ip']}\">http:BL</a>:<br>$httpbl\n";
 				}
 
-				echo "</td>\n";
+				echo '</td>' . "\n";
 
 				$headers = str_replace("\n", "<br>\n", Ut::html($result['http_headers']));
 
-				if (@strpos($headers, $result['user_agent']) !== FALSE)
+				if (@strpos($headers, $result['user_agent']) !== false)
 				{
-					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;user_agent=' . rawurlencode($result['user_agent_hash']) . '">' . $result['user_agent'] . '</a>', strpos($headers, $result['user_agent']), strlen($result['user_agent']));
+					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'user_agent' => rawurlencode($result['user_agent_hash'])]) . '">' . $result['user_agent'] . '</a>', strpos($headers, $result['user_agent']), strlen($result['user_agent']));
 				}
 
-				if (@strpos($headers, $result['request_method']) !== FALSE)
+				if (@strpos($headers, $result['request_method']) !== false)
 				{
-					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage']) . '&amp;request_method=' . rawurlencode($result['request_method']) . '">' . $result['request_method'] . '</a>', strpos($headers, $result['request_method']), strlen($result['request_method']));
+					$headers = substr_replace($headers, '<a href="' . $engine->href('', '', ['setting' => 'bb2_manage', 'request_method' => rawurlencode($result['request_method'])]) . '">' . $result['request_method'] . '</a>', strpos($headers, $result['request_method']), strlen($result['request_method']));
 				}
 
-				echo '<td>' . $headers . "</td>\n";
-				echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . "</td>\n";
-				echo "</tr>\n";
+				echo '<td>' . $headers . '</td>' . "\n";
+				echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . '</td>' . "\n";
+				echo '</tr>' . "\n";
 			}
 		}
 	?>
