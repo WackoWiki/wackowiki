@@ -6118,10 +6118,8 @@ class Wacko
 				if ( $this->db->upload === true
 						|| $this->db->upload == 1
 						|| $this->check_acl($user_name, $this->db->upload)
-						#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
 						)
 				{
-					#echo '[debug] TRUE global';
 					return true;
 				}
 				else
@@ -6139,10 +6137,9 @@ class Wacko
 						&& $this->has_access('read')
 						|| $this->is_owner()
 						|| $this->is_admin() )
-						|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
+						|| (isset($_POST['upload_to']) && $_POST['upload_to'] == 'global') // for action -> upload handler
 					)
 				{
-					#echo '[debug] TRUE local';
 					return true;
 				}
 				else

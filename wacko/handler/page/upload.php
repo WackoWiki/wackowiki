@@ -91,10 +91,6 @@ if (isset($_POST['upload']) & $can_upload)
 				'application/x-php', 'text/x-php',
 				// Other types that may be interpreted by some servers
 				'text/x-python', 'text/x-perl', 'text/x-bash', 'text/x-sh', 'text/x-csh',
-				// Client-side hazards on Internet Explorer
-				'text/scriptlet', 'application/x-msdownload',
-				// Windows metafile, client-side vulnerability on some systems
-				'application/x-msmetafile',
 			]; */
 
 			$ext	= mb_strtolower($ext);
@@ -144,7 +140,7 @@ if (isset($_POST['upload']) & $can_upload)
 			}
 
 			// +write @page_id@ to name
-			if (isset($_POST['to']) && $_POST['to'] != 'global')
+			if (isset($_POST['upload_to']) && $_POST['upload_to'] != 'global')
 			{
 				$is_global	= 0;
 				$fs_name	= '@' . $this->page['page_id'] . '@' . $t_name;
@@ -187,7 +183,6 @@ if (isset($_POST['upload']) & $can_upload)
 				if (file_exists($dir . $fs_name . '.' . $ext)
 					&& $replace)
 				{
-
 					// TODO:
 					// + do file revision (add config option)
 				}
@@ -277,9 +272,7 @@ if (isset($_POST['upload']) & $can_upload)
 						{
 							$this->db->sql_query(
 								"UPDATE " . $this->db->table_prefix . "file SET " .
-									#"page_id			= " . (int) $page_id . ", " .
 									"user_id			= " . (int) $user['user_id'] . "," .
-									#"file_name			= " . $this->db->q(file_name) . ", " .
 									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
 									(!empty($description)
 										? "file_description	= " . $this->db->q($description) . ", "
