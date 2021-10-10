@@ -44,7 +44,7 @@ if ($this->is_admin())
 	##            Set page title based on tag             ##
 	########################################################
 
-	echo "<h4>1. Set page title based on tag if empty</h4>";
+	echo '<h4>1. Set page title based on tag if empty</h4>';
 
 	if (!isset($_POST['set_title']))
 	{
@@ -61,7 +61,12 @@ if ($this->is_admin())
 
 		if (!empty($pages))
 		{
-			echo "<table><tr><th>page_id</th><th>tag</th><th>new title</th></tr>";
+			echo '<table>
+					<tr>
+						<th>page_id</th>
+						<th>tag</th>
+						<th>new title</th>
+					</tr>' . "\n";
 
 			foreach ($pages as $page)
 			{
@@ -80,7 +85,11 @@ if ($this->is_admin())
 						"WHERE page_id = " . (int) $page['page_id'] . " " .
 						"LIMIT 1");
 
-					echo "<tr><td>" . $page['page_id'] . "</td><td>" . $page['tag'] . "</td><td>" . $title . "</td></tr>";
+					echo '<tr>
+							<td>' . $page['page_id'] . '</td>
+							<td>' . $page['tag'] . '</td>
+							<td>' . $title . '</td>
+						</tr>' . "\n";
 				}
 			}
 
@@ -88,12 +97,12 @@ if ($this->is_admin())
 			$this->set_translation($this->user_lang);
 			$this->set_language($this->user_lang);
 
-			echo "</table>";
-			echo "<br>Titles set";
+			echo '</table>';
+			echo '<br>Titles set';
 		}
 		else
 		{
-			echo "No empty title field found.";
+			echo 'No empty title field found.';
 		}
 	}
 
@@ -101,7 +110,7 @@ if ($this->is_admin())
 	##            Set depth based on tag                  ##
 	########################################################
 
-	echo "<h4>2. Set page depth and parent_id based on tag</h4>";
+	echo '<h4>2. Set page depth and parent_id based on tag</h4>';
 
 	if (!isset($_POST['set_depth']))
 	{
@@ -118,7 +127,13 @@ if ($this->is_admin())
 
 		if (!empty($pages))
 		{
-			echo "<table><tr><th>page_id</th><th>tag</th><th>depth</th><th>parent_id</th></tr>";
+			echo '<table>
+					<tr>
+						<th>page_id</th>
+						<th>tag</th>
+						<th>depth</th>
+						<th>parent_id</th>
+					</tr>' . "\n";
 
 			foreach ($pages as $page)
 			{
@@ -135,15 +150,20 @@ if ($this->is_admin())
 					"WHERE page_id = " . (int) $page['page_id'] . " " .
 					"LIMIT 1");
 
-				echo "<tr><td>" . $page['page_id'] . "</td><td>" . $page['tag'] . "</td><td>" . $depth . "</td><td>" . $parent_id . "</td></tr>";
+				echo '<tr>
+						<td>' . $page['page_id'] . '</td>
+						<td>' . $page['tag'] . '</td>
+						<td>' . $depth . '</td>
+						<td>' . $parent_id . '</td>
+					</tr>' . "\n";
 			}
 
-			echo "</table>";
-			echo "<br>Depth set";
+			echo '</table>';
+			echo '<br>Depth set';
 		}
 		else
 		{
-			echo "No pages found.";
+			echo 'No pages found.';
 		}
 	}
 
@@ -151,7 +171,7 @@ if ($this->is_admin())
 	##            Set version_id for revision             ##
 	########################################################
 
-	echo "<h4>3. Set version_id for revisions</h4>";
+	echo '<h4>3. Set version_id for revisions</h4>';
 
 	if (!isset($_POST['set_version_id']))
 	{
@@ -168,7 +188,12 @@ if ($this->is_admin())
 
 		if (!empty($pages))
 		{
-			echo "<table><tr><th>page_id</th><th>revision_id</th><th>version</th></tr>";
+			echo '<table>
+					<tr>
+						<th>page_id</th>
+						<th>revision_id</th>
+						<th>version</th>
+					</tr>' . "\n";
 
 			foreach ($pages as $page)
 			{
@@ -190,11 +215,15 @@ if ($this->is_admin())
 						"WHERE revision_id = " . (int) $_revision['revision_id'] . " " .
 						"LIMIT 1");
 
-					echo "<tr><td>" . $_revision['page_id'] . "</td><td>" . $_revision['revision_id'] . "</td><td>" . $version_id . "</td></tr>";
+					echo '<tr>
+							<td>' . $_revision['page_id'] . '</td>
+							<td>' . $_revision['revision_id'] . '</td>
+							<td>' . $version_id . '</td>
+						</tr>' . "\n";
 				}
 			}
 
-			echo "</table>";
+			echo '</table>';
 			echo '<br>Version_id set in revisions';
 		}
 		else
@@ -207,7 +236,7 @@ if ($this->is_admin())
 	##            Set missing ACL sets                    ##
 	########################################################
 
-	echo "<h4>4. Set missing ACL permissions</h4>";
+	echo '<h4>4. Set missing ACL permissions</h4>';
 
 	if (!isset($_POST['set_missing_permissions']))
 	{
@@ -229,7 +258,12 @@ if ($this->is_admin())
 
 		if (!empty($pages))
 		{
-			echo "<table><tr><th>page_id</th><th>tag</th><th>sets</th></tr>";
+			echo '<table>
+					<tr>
+						<th>page_id</th>
+						<th>tag</th>
+						<th>sets</th>
+					</tr>' . "\n";
 
 			foreach ($pages as $page)
 			{
@@ -248,11 +282,19 @@ if ($this->is_admin())
 				$this->save_acl($page['page_id'], 'create',		$acl['create']['list']);
 				$this->save_acl($page['page_id'], 'upload',		$acl['upload']['list']);
 
-				echo "<tr><td>" . $page['page_id'] . "</td><td>" . $page['tag'] . "</td><td>" . $page['n'] . "</td></tr>";
-				echo "<tr><td>create: " . $acl['create']['list'] . "</td><td>upload: " . $acl['upload']['list'] . "</td><td>" . $page['n'] . "</td></tr>";
+				echo '<tr>
+						<td>' . $page['page_id'] . '</td>
+						<td>' . $page['tag'] . '</td>
+						<td>' . $page['n'] . '</td>
+					</tr>
+					<tr>
+						<td>create: ' . $acl['create']['list'] . '</td>
+						<td>upload: ' . $acl['upload']['list'] . '</td>
+						<td>' . $page['n'] . '</td>
+					</tr>' . "\n";
 			}
 
-			echo "</table>";
+			echo '</table>';
 			echo '<br>Missing permissions set.';
 		}
 		else
@@ -448,7 +490,7 @@ if ($this->is_admin())
 	{
 		if (!isset($_POST['migrate_acls']))
 		{
-			echo "<h3>7. Migrates acls to new scheme:</h3>";
+			echo '<h3>7. Migrates acls to new scheme:</h3>';
 			echo $this->form_open('migrate_acls');
 			echo '<button type="submit" name="migrate_acls">' . $this->_t('SubmitButton') . '</button>';
 			echo $this->form_close();
