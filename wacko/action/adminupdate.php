@@ -44,7 +44,7 @@ if ($this->is_admin())
 	##            Set page title based on tag             ##
 	########################################################
 
-	echo "<h4>1. Set page title based on tag if empty:</h4>";
+	echo "<h4>1. Set page title based on tag if empty</h4>";
 
 	if (!isset($_POST['set_title']))
 	{
@@ -101,7 +101,7 @@ if ($this->is_admin())
 	##            Set depth based on tag                  ##
 	########################################################
 
-	echo "<h4>2. Set page depth and parent_id based on tag:</h4>";
+	echo "<h4>2. Set page depth and parent_id based on tag</h4>";
 
 	if (!isset($_POST['set_depth']))
 	{
@@ -151,7 +151,7 @@ if ($this->is_admin())
 	##            Set version_id for revision             ##
 	########################################################
 
-	echo "<h4>3. Set version_id for revisions:</h4>";
+	echo "<h4>3. Set version_id for revisions</h4>";
 
 	if (!isset($_POST['set_version_id']))
 	{
@@ -207,7 +207,7 @@ if ($this->is_admin())
 	##            Set missing ACL sets                    ##
 	########################################################
 
-	echo "<h4>4. Set missing ACL permissions:</h4>";
+	echo "<h4>4. Set missing ACL permissions</h4>";
 
 	if (!isset($_POST['set_missing_permissions']))
 	{
@@ -281,7 +281,7 @@ if ($this->is_admin())
 
 	if ($large_prefix)
 	{
-		echo '<h4>1. Alter tables to work with key prefixes longer than 767 bytes:</h4>';
+		echo '<h4>1. Alter tables to work with key prefixes longer than 767 bytes</h4>';
 
 		if (!isset($_POST['set_large_prefix_tables']))
 		{
@@ -332,7 +332,7 @@ if ($this->is_admin())
 	##            Replace legacy format passwords         ##
 	########################################################
 
-	echo '<h4>2. Reset and regenerate the password & password hash for legacy password formats:</h4>';
+	echo '<h4>2. Reset and regenerate the password & password hash for legacy password formats</h4>';
 
 	/* replaces legacy format password with a random new password hash
 	 *
@@ -371,7 +371,6 @@ if ($this->is_admin())
 				<th>comments</th>
 				<th>uploads</th>
 			</tr>' . "\n";
-
 
 		foreach ($users as $user)
 		{

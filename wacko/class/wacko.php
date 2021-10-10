@@ -6113,7 +6113,23 @@ class Wacko
 
 		if ($registered)
 		{
-			if ($global == false)
+			if ($global)
+			{
+				if ( $this->db->upload === true
+						|| $this->db->upload == 1
+						|| $this->check_acl($user_name, $this->db->upload)
+						#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
+						)
+				{
+					#echo '[debug] TRUE global';
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
 			{
 				if ( ( $this->db->upload === true
 						|| $this->db->upload == 1
@@ -6133,22 +6149,6 @@ class Wacko
 				{
 					return false;
 				}
-			}
-			else if ($global == true)
-			{
-				if ( $this->db->upload === true
-						|| $this->db->upload == 1
-						|| $this->check_acl($user_name, $this->db->upload)
-						#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
-						)
-				{
-					#echo '[debug] TRUE global';
-					return true;
-				}
-			}
-			else
-			{
-				return false;
 			}
 		}
 		else
