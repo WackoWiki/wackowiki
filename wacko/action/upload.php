@@ -20,7 +20,7 @@ if (!isset($hide_description))	$hide_description = '';
 if ($global) $global = 'global';
 
 // check who u are, can u upload?
-if ($this->can_upload(true) === true)
+if ($this->can_upload(true))
 {
 	if ($maxsize)
 	{
@@ -76,4 +76,3 @@ else
 	$message		= '<em>' . $this->_t('UploadForbidden') . '</em>';
 	$tpl->message	= $this->show_message($message, 'note', false);
 }
-

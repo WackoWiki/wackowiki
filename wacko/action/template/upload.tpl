@@ -21,10 +21,8 @@
 					<tr>
 						<td>&nbsp;</td>
 						<td>
-							<div>
-								<input type="radio" name="_to" disabled checked value="global" id="upload_global_disabled">
-								<input type="hidden" name="to" value="global"> [ ' _t: UploadGlobalText ' ]
-							</div>
+							<input type="radio" name="_upload_to" disabled checked value="global" id="upload_global_disabled">
+							<input type="hidden" name="upload_to" value="global"> [ ' _t: UploadGlobalText ' ]
 						</td>
 					</tr>
 				=]
@@ -32,14 +30,10 @@
 					<tr>
 						<td>&nbsp;</td>
 						<td>
-							<div>
-								<input type="radio" name="to" value="global" id="upload_global">
-								<label for="upload_global">[ ' _t: UploadGlobalText ' ]</label>
-							</div>
-							<div>
-								<input type="radio" name="to" value="here" checked id="upload_to_page">
-								<label for="upload_to_page">[ ' _t: UploadLocalText ' ]</label>
-							</div>
+							<input type="radio" name="upload_to" value="global" id="upload_global">
+							<label for="upload_global">[ ' _t: UploadGlobalText ' ]</label><br>
+							<input type="radio" name="upload_to" value="here" checked id="upload_to_page">
+							<label for="upload_to_page">[ ' _t: UploadLocalText ' ]</label>
 						</td>
 					</tr>
 				=]

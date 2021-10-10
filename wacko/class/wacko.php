@@ -984,25 +984,11 @@ class Wacko
 	{
 		if ($page_id != 0)
 		{
-			if (isset($this->wanted_cache['page_id'][$page_id]))
-			{
-				return $this->wanted_cache['page_id'][$page_id];
-			}
-			else
-			{
-				return '';
-			}
+			return $this->wanted_cache['page_id'][$page_id] ?? '';
 		}
 		else
 		{
-			if (isset($this->wanted_cache['tag'][$tag]))
-			{
-				return $this->wanted_cache['tag'][$tag];
-			}
-			else
-			{
-				return '';
-			}
+			return $this->wanted_cache['tag'][$tag] ?? '';
 		}
 	}
 
@@ -1600,22 +1586,15 @@ class Wacko
 
 	function load_categories($object_id = 0, $type_id = OBJECT_PAGE, $cache = false) : array
 	{
-		if (isset($this->category_cache[$object_id][$type_id]))
-		{
-			return $this->category_cache[$object_id][$type_id];
-		}
-		else
-		{
-			return $this->db->load_all(
-				"SELECT c.category_id, c.category, c.category_lang " .
-				"FROM " . $this->db->table_prefix . "category c " .
-					"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
-				"WHERE ca.object_id  = " . (int) $object_id . " " .
-				($type_id != 0
-					? "AND ca.object_type_id = " . (int) $type_id . " "
-					: "AND ca.object_type_id = " . (int) $type_id . " ") // TODO: explode array IN
-				, $cache);
-		}
+		return $this->category_cache[$object_id][$type_id] ?? $this->db->load_all(
+			"SELECT c.category_id, c.category, c.category_lang " .
+			"FROM " . $this->db->table_prefix . "category c " .
+				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
+			"WHERE ca.object_id  = " . (int) $object_id . " " .
+			($type_id != 0
+				? "AND ca.object_type_id = " . (int) $type_id . " "
+				: "AND ca.object_type_id = " . (int) $type_id . " ") // TODO: explode array IN
+			, $cache);
 	}
 
 	/**
@@ -5624,14 +5603,7 @@ class Wacko
 		{
 			if (!$revision_id)
 			{
-				if (isset($this->page['owner_name']))
-				{
-					return $this->page['owner_name'];
-				}
-				else
-				{
-					return false;
-				}
+				return $this->page['owner_name'] ?? false;
 			}
 			else
 			{
@@ -5756,14 +5728,7 @@ class Wacko
 	*/
 	function get_cached_acl($page_id, $privilege, $use_defaults)
 	{
-		if (isset( $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ))
-		{
-			return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults];
-		}
-		else
-		{
-			return '';
-		}
+		return $this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] ?? '';
 	}
 
 	/**
@@ -6157,7 +6122,21 @@ class Wacko
 
 		if ($registered)
 		{
-			if ($global == false)
+			if ($global)
+			{
+				if ( $this->db->upload === true
+						|| $this->db->upload == 1
+						|| $this->check_acl($user_name, $this->db->upload)
+						)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else
 			{
 				if ( ( $this->db->upload === true
 						|| $this->db->upload == 1
@@ -6167,32 +6146,15 @@ class Wacko
 						&& $this->has_access('read')
 						|| $this->is_owner()
 						|| $this->is_admin() )
-						|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
+						|| (isset($_POST['upload_to']) && $_POST['upload_to'] == 'global') // for action -> upload handler
 					)
 				{
-					#echo '[debug] TRUE local';
 					return true;
 				}
 				else
 				{
 					return false;
 				}
-			}
-			else if ($global == true)
-			{
-				if ( $this->db->upload === true
-						|| $this->db->upload == 1
-						|| $this->check_acl($user_name, $this->db->upload)
-						#	|| (isset($_POST['to']) && $_POST['to'] == 'global') // for action -> upload handler
-						)
-				{
-					#echo '[debug] TRUE global';
-					return true;
-				}
-			}
-			else
-			{
-				return false;
 			}
 		}
 		else
@@ -8383,8 +8345,7 @@ class Wacko
 
 	// load categories for the page's particular language.
 	// if root string value is passed, returns number of
-	// pages under each category and below defined root
-	// page
+	// pages under each category and below defined root page
 	function get_categories_list($lang, $cache = true, $root = false, $empty = true)
 	{
 		$categories = [];
