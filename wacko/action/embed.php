@@ -15,31 +15,11 @@ if (!defined('IN_WACKO'))
 		[width="100"]
 		[height="100"]
 		[align="left|center|right"]
-
-		// Params
-		play
-		loop
-		menu
-		quality
-
 	}}
 */
-extract([
-	'play'				=> '',
-	'loop'				=> '',
-	'menu'				=> '',
-	'quality'			=> '',
-	'bgcolor'			=> '',
-	'allowfullscreen'	=> '',
-	'url'				=> '',
-	'width'				=> '',
-	'height'			=> '',
-	'name'				=> '',
-	'styleclass'		=> '',
-	'align'				=> '',
-], EXTR_SKIP);
 
 // set defaults
+$url		??= null;
 $width		??= 550;
 $height		??= 100;
 $align		??= null;
