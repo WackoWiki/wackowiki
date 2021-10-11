@@ -49,11 +49,8 @@ $site_tags = null;
 // 2 = both
 $tag_pos = 1;
 
-// functions to call for random number generation
-// mt_rand produces 'better' random numbers
-// but if your server doesn't support it, it's fine to use rand instead
+// function to call for random number generation
 $rand_func = function ($mi, $ma) {return Ut::rand($mi, $ma);};
-$seed_func = 'mt_srand';
 
 // which type of hash to use?
 // possible values: 'sha1', 'md5', 'crc32'
@@ -184,10 +181,6 @@ $bg_images = [
 ////// Create Images + initialise a few things
 //////////////////////////////////////////////////////
 
-// seed random number generator
-// PHP 4.2.0+ doesn't need this, but lower versions will
-$seed_func(make_seed());
-
 // how faded should the bg be? (100 = totally gone, 0 = bright as the day)
 // to test how much protection the bg noise gives, take a screenshot of the freeCap image
 // and take it into a photo editor. play with contrast and brightness.
@@ -280,13 +273,6 @@ else
 //////////////////////////////////////////////////////
 ////// Functions:
 //////////////////////////////////////////////////////
-function make_seed()
-{
-	// from http://php.net/srand
-	[$usec, $sec] = explode(' ', microtime());
-	return (float) $sec + ((float) $usec * 100000);
-}
-
 function rand_color()
 {
 	global $bg_type, $rand_func;
