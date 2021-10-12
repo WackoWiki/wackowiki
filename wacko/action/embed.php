@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
 	Embed Action
 
-	The first three arguments here are required.  The rest are optional.
+	The first three arguments here are required. The rest are optional.
 
 	{{embed
 		[url="file:the_movie.mp4"]

@@ -6,6 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 // set defaults
+$nomark		??= 0;
 $top		??= 5;
 $bottom		??= 5;
 
