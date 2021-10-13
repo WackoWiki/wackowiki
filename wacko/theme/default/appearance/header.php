@@ -277,7 +277,7 @@ else
 $tpl->leave();
 
 $tpl->search		= $this->href('', $this->db->search_page);
-$tpl->breadcrumbs	= $this->get_page_path(false, ' &gt; ', true, true);
+$tpl->breadcrumbs	= $this->get_page_path(null, false, ' &gt; ', true, true);
 # $tpl->usertrail	= $this->get_user_trail(true, ' &gt; ', true, $size = 8);
 
 if (!isset($this->sess->php_version))

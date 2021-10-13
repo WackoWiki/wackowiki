@@ -7092,28 +7092,29 @@ class Wacko
 	}
 
 	// BREADCRUMBS -- navigation inside WackoClusters
-	function get_page_path($titles = false, $separator = '/', $linking = true, $root_page = false) : string
+	function get_page_path($tag = '', $titles = false, $separator = '/', $linking = true, $root_page = false) : string
 	{
-		$result = '';
-		$_root_page = false;
+		$tag		??= $this->tag;
+		$result		= '';
+		$is_root	= false;
 
 		// check if current page is home page
 		if (mb_strtolower($this->config['root_page']) == mb_strtolower($this->tag))
 		{
-			$_root_page = true;
+			$is_root = true;
 		}
 
 		// adds home page in front of breadcrumbs or current page is home page
-		if ($_root_page || $root_page)
+		if ($is_root || $root_page)
 		{
 			$result .= $this->compose_link_to_page($this->db->root_page);
 		}
 
-		if (!$_root_page)
+		if (!$is_root)
 		{
 			$link = '';
 
-			foreach (explode('/', $this->tag) as $n => $step)
+			foreach (explode('/', $tag) as $n => $step)
 			{
 				# Diag::dbg('GOLD', $n, $step);
 
