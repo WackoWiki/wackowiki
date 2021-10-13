@@ -8,37 +8,18 @@ if (!defined('IN_WACKO'))
 /*
 	Embed Action
 
-	The first three arguments here are required.  The rest are optional.
+	The first three arguments here are required. The rest are optional.
 
 	{{embed
 		[url="file:the_movie.mp4"]
 		[width="100"]
 		[height="100"]
 		[align="left|center|right"]
-
-		// Params
-		play
-		loop
-		menu
-		quality
-
 	}}
 */
-extract([
-	'play'		=> '',
-	'loop'		=> '',
-	'menu'		=> '',
-	'quality'	=> '',
-	'bgcolor'	=> '',
-	'allowfullscreen' => '',
-	'url'		=> '',
-	'width'		=> '',
-	'height'	=> '',
-	'name'		=> '',
-	'styleclass' => '',
-	'align'		=> '',
-], EXTR_SKIP);
 
+// set defaults
+if (!$url)	$url	= null;
 if (!$width)	$width	= 550;
 if (!$height)	$height	= 100;
 if (!$align)	$align	= null;

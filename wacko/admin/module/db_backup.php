@@ -140,7 +140,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 				unlink($filename);
 			}
 
-			// open file with writa access
+			// open file with write access
 			$file = fopen($filename, 'w');
 
 			// write data (strip last semicolon
