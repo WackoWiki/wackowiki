@@ -1318,7 +1318,7 @@ class GD extends PHPThumb
             }
         }
 
-        $mimeType = isset($formatInfo['mime']) ? $formatInfo['mime'] : null;
+        $mimeType = $formatInfo['mime'] ?? null;
 
         switch ($mimeType) {
             case 'image/gif':

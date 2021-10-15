@@ -296,24 +296,15 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 	}
 }
 
-// TODO: refactor -> same function as in dbal class
+// TODO: refactor -> same function as in dbpdo class
+// default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
 function _quote($string)
 {
 	global $config_global, $dblink_global;
 
-	switch ($config_global['db_driver'])
-	{
-		case 'mysqli_legacy':
-
-			return mysqli_real_escape_string($dblink_global, $string);
-
-		default:
-		// return $dblink->quote($string);
-
-		// Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
-		// Got this from: http://www.gamedev.net/community/forums/topic.asp?topic_id=448909
-		// More reading: http://www.sitepoint.com/forums/showthread.php?t=337881
-		return strtr($string, [
+	return match ($config_global['db_driver']) {
+		'mysqli_legacy'	=> mysqli_real_escape_string($dblink_global, $string),
+		default			=> strtr($string, [
 			"\x00"	=> '\x00',
 			"\n"	=> '\n',
 			"\r"	=> '\r',
@@ -321,7 +312,7 @@ function _quote($string)
 			"'"		=> "\'",
 			'"'		=> '\"',
 			"\x1a"	=> '\x1a'
-		]);
-	}
+		]),
+	};
 }
 

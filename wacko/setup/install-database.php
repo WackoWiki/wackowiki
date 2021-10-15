@@ -292,19 +292,12 @@ switch ($config['db_driver'])
 		break;
 
 	default:
-		$dsn = '';
-		switch ($config['db_driver'])
-		{
-			/* case 'sqlite3': */
-
-			case 'mysql_pdo':
-				$dsn = "mysql:host=" . $config['db_host'] . ($config['db_port'] != '' ? ";port=" . $config['db_port'] : '') . ";dbname=" . $config['db_name'] . ($config['db_charset'] != '' ? ";charset=" . $config['db_charset'] : '');
-				break;
-
-			/* case 'pgsql':
-				$dsn = $config['db_driver'] . ":dbname=" . $config['db_name'] . ";host=" . $config['db_host'].($config['db_port'] != "" ? ";port=" . $config['db_port'] : "");
-				break; */
-		}
+		$dsn = match ($config['db_driver']) {
+			'mysql_pdo'	=> "mysql:host=" . $config['db_host'] . ($config['db_port'] != '' ? ";port=" . $config['db_port'] : '') . ";dbname=" . $config['db_name'] . ($config['db_charset'] != '' ? ";charset=" . $config['db_charset'] : ''),
+			# 'pgsql'	=> $config['db_driver'] . ":dbname=" . $config['db_name'] . ";host=" . $config['db_host'].($config['db_port'] != "" ? ";port=" . $config['db_port'] : ""),
+			# 'sqlite3'	=> '',
+			default		=> '',
+		};
 
 		echo '<ul>' . "\n";
 

@@ -156,14 +156,7 @@ class Text_Highlighter_Renderer_Console extends Text_Highlighter_Renderer
 	 */
 	function acceptToken($class, $content)
 	{
-		if (isset($this->_colors[$class]))
-		{
-			$color = $this->_colors[$class];
-		}
-		else
-		{
-			$color = $this->_colors['default'];
-		}
+		$color = $this->_colors[$class] ?? $this->_colors['default'];
 
 		if ($this->_lastClass != $class)
 		{
