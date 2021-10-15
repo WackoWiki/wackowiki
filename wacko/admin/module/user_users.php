@@ -214,7 +214,7 @@ function admin_user_users(&$engine, &$module)
 			$engine->db->sql_query(
 				"INSERT INTO " . $prefix . "user_setting SET " .
 					"user_id			= " . (int) $_user_id['user_id'] . ", " .
-					"typografica		= " . (($engine->db->default_typografica == 1) ? 1 : 0) . ", " .
+					"typografica		= " . (int) $engine->db->default_typografica . ", " .
 					"user_lang			= " . $engine->db->q(($user_lang ?: $engine->db->language)) . ", " .
 					"list_count			= " . (int) $engine->db->list_count . ", " .
 					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
