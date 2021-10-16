@@ -12,7 +12,7 @@ th,
 li,
 select,
 textarea {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-family: var(--ww-font-sans-serif);
 	font-size: 14px;
 	line-height: 1.3em;
 }
