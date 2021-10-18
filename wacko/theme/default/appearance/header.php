@@ -33,7 +33,7 @@ if (@$this->page['tag'] !== $this->db->root_page)
 }
 
 // if user are logged, shows "You are UserName"
-if (($logged_in = $this->get_user()))
+if ($logged_in = $this->get_user())
 {
 	$tpl->uare_link		= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
 	$tpl->uare_account	= $this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'), $this->_t('AccountTip'));
@@ -165,7 +165,7 @@ else
 	}
 
 	// revisions tab
-	if (!$this->forum && $readable && !$this->hide_revisions)
+	if ($readable && !$this->hide_revisions)
 	{
 		$echo_tab('revisions', 'RevisionTip', 'RevisionText', 1, '', 'r');
 	}
