@@ -329,7 +329,11 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 
 /* SYNTAX %%(hl xyz)%% */
 
-.hl-main {font-family: var(--ww-font-monospace); font-size: 14px;}
+.hl-main {
+	font-family: var(--ww-font-monospace); 
+	font-size: 14px; 
+	margin: 5px 0;
+}
 .hl-gutter {
 	background-color: #CCCCCC;
 	padding-right: 10px;
