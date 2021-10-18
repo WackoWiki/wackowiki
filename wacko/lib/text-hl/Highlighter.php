@@ -148,14 +148,7 @@ class Text_Highlighter
 	 */
 	function _checkDefines()
 	{
-		if (isset($this->_options['defines']))
-		{
-			$defines = $this->_options['defines'];
-		}
-		else
-		{
-			$defines = [];
-		}
+		$defines = $this->_options['defines'] ?? [];
 
 		foreach ($this->_conditions as $name => $actions)
 		{
