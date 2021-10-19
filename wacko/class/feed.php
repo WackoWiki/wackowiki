@@ -378,11 +378,7 @@ class Feed
 		$xml .= '<ShortName>' . $this->engine->db->site_name . '</ShortName>' . "\n";
 		$xml .= '<Description>' /*.  $this->engine->_t('Search') .  ' '*/ . $this->engine->db->site_name . '</Description>' . "\n";
 		$xml .= '<InputEncoding>UTF-8</InputEncoding>' . "\n";
-		$xml .= '<Image height="16" width="16" type="image/x-icon">' .
-			($this->engine->db->site_favicon
-				? $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_favicon)
-				: $this->engine->db->base_url . Ut::join_path(THEME_DIR, $this->engine->db->theme) . '/' . 'icon/favicon.ico')
-			. '</Image>' . "\n";
+		$xml .= '<Image height="16" width="16" type="image/x-icon">' . $this->engine->get_favicon() . '</Image>' . "\n";
 		$xml .= '<Url type="text/html" method="get" template="' . $this->engine->href('', $this->engine->db->search_page) . '?phrase={searchTerms}" />' . "\n";
 		$xml .= '</OpenSearchDescription>';
 

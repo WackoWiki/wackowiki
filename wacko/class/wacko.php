@@ -708,6 +708,13 @@ class Wacko
 		return @$this->languages[$lang]['charset'];
 	}
 
+	function get_favicon()
+	{
+		return $this->db->site_favicon
+			? $this->db->base_path . Ut::join_path(IMAGE_DIR, $this->db->site_favicon)
+			: $this->db->theme_url . 'icon/favicon.ico';
+	}
+
 	// PAGES
 
 	function get_keywords() : string
