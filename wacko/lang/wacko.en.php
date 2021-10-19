@@ -994,27 +994,6 @@ $wacko_translation = [
 	// Embed
 	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
 
-	// language links
-	'LangLinks'					=> 'Language links',
-	'LangLinksFor'				=> 'Language links for %1',
-	'LangLinksEdit'				=> 'Edit language links',
-	'LangEditLinks'				=> 'Edit links',
-	'LangEditLinksTitle'		=> 'Edit interlanguage links',
-	'LangDeleteSelected'		=> 'Delete selected',
-	'LangMark'					=> 'Mark',
-	'LangNoLinks'				=> 'There are no language links.',
-	'LangTitle'					=> 'Title',
-	'LangPage'					=> 'Page',
-	'LangSaveChanges'			=> 'Save changes',
-	'LangAddPage'				=> 'Set a language link for the following page',
-	'LangSameLanguage'			=> 'The target page has the same language.',
-	'LangLanguageAlreadyExists'	=> 'A language link for %1 already exists.',
-	'LangLinkAlreadyExists'		=> 'The language link already exists.',
-	'LangAvailable'				=> 'Also available in',
-	'Language'					=> 'Language',
-	'Languages'					=> 'Languages',
-	'LanguagesOther'			=> 'Languages',
-
 	// Feed
 	'FeedTitle'					=> 'Feed Title',
 	'FeedMulti'					=> 'Multi-Feed',
