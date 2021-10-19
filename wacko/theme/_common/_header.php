@@ -42,9 +42,7 @@ if ($this->db->allow_x11colors)
 	$tpl->x11_colors = $this->db->base_path . Ut::join_path(THEME_DIR, '_common/X11colors.css');
 }
 
-$tpl->favicon = $this->db->site_favicon
-	? $this->db->base_path . Ut::join_path(IMAGE_DIR, $this->db->site_favicon)
-	: $this->db->theme_url . 'icon/favicon.ico';
+$tpl->favicon = $this->get_favicon();
 
 if ($this->db->terms_page)
 {
