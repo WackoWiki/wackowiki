@@ -16,7 +16,7 @@ namespace PHPDiff\Diff;
  * @author          Ferry Cools <info@DigiLive.nl>
  * @copyright   (c) 2020 Ferry Cools
  * @license         New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version         2.3.2
+ * @version         2.3.3
  * @link            https://github.com/JBlond/php-diff
  */
 class Similarity extends SequenceMatcher
@@ -106,7 +106,7 @@ class Similarity extends SequenceMatcher
         $aLength = count($this->old);
         for ($iterator = 0; $iterator < $aLength; ++$iterator) {
             $char         = $this->old[$iterator];
-            $numb         = isset($avail[$char]) ? $avail[$char] : $this->uniqueCount2[$char] ?? 0;
+            $numb         = $avail[$char] ?? ($this->uniqueCount2[$char] ?? 0);
             $avail[$char] = $numb - 1;
             if ($numb > 0) {
                 ++$matches;
