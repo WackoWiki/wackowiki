@@ -387,8 +387,6 @@ $wacko_translation = [
 	'LastDays'					=> 'last %1 days',
 	'DomainsSitesPages'			=> 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domains/sites linking to this WackoWiki (<a href="%1">see list of different URLs</a>):',
-	'ViewReferringSites'		=> '<a href="%1">View referring sites for %2 only</a> ',
-	'ViewReferringSitesGlobal'	=> '<a href="%1">View global referring sites</a>',
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'by time',
@@ -995,6 +993,27 @@ $wacko_translation = [
 
 	// Embed
 	'EmbedNoURL'				=> 'Please specify a address of the resource with the Parameter url. (e.g. {{embed url="https://example.com/embed/video.mp4"}} )',
+
+	// language links
+	'LangLinks'					=> 'Language links',
+	'LangLinksFor'				=> 'Language links for %1',
+	'LangLinksEdit'				=> 'Edit language links',
+	'LangEditLinks'				=> 'Edit links',
+	'LangEditLinksTitle'		=> 'Edit interlanguage links',
+	'LangDeleteSelected'		=> 'Delete selected',
+	'LangMark'					=> 'Mark',
+	'LangNoLinks'				=> 'There are no language links.',
+	'LangTitle'					=> 'Title',
+	'LangPage'					=> 'Page',
+	'LangSaveChanges'			=> 'Save changes',
+	'LangAddPage'				=> 'Set a language link for the following page',
+	'LangSameLanguage'			=> 'The target page has the same language.',
+	'LangLanguageAlreadyExists'	=> 'A language link for %1 already exists.',
+	'LangLinkAlreadyExists'		=> 'The language link already exists.',
+	'LangAvailable'				=> 'Also available in',
+	'Language'					=> 'Language',
+	'Languages'					=> 'Languages',
+	'LanguagesOther'			=> 'Languages',
 
 	// Feed
 	'FeedTitle'					=> 'Feed Title',

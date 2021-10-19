@@ -387,8 +387,6 @@ $wacko_translation = [
 	'LastDays'					=> 'last %1 days',
 	'DomainsSitesPages'			=> 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domains/sites linking to this WackoWiki (<a href="%1">see list of different URLs</a>):',
-	'ViewReferringSites'		=> '<a href="%1">View referring sites for %2 only</a> ',
-	'ViewReferringSitesGlobal'	=> '<a href="%1">View global referring sites</a>',
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'by time',

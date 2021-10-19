@@ -387,8 +387,6 @@ $wacko_translation = [
 	'LastDays'					=> 'за последните %1 дни',
 	'DomainsSitesPages'			=> 'Сайтове, на които има препратки %1<br> (%2)  (<a href="%3">списък на отделните страници</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Сайтове, на които има препратки<br> (<a href="%1">списък на отделните страници</a>):',
-	'ViewReferringSites'		=> '<a href="%1">Сайтове, препращащи на %2</a>',
-	'ViewReferringSitesGlobal'	=> '<a href="%1">Сайтове, препращащи</a>',
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'от време',
