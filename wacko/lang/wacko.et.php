@@ -387,8 +387,6 @@ $wacko_translation = [
 	'LastDays'					=> 'viimased %1 paeva',
 	'DomainsSitesPages'			=> 'Domeenide/saitide lehed on lingitud  %1 (%2)  (<a href="%3">vaata erinevate URL\'ide nimekirja</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domeenid/saidid on lingitud Wiki lehele (<a href="%1">vaata erinevate URL\'ide nimekirja</a>):',
-	'ViewReferringSites'		=> '<a href="%1">Vaata viidatud saite ainult %2 </a> ',
-	'ViewReferringSitesGlobal'	=> '<a href="%1">Vaata globaalselt viidatud saite</a>',
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'by time',

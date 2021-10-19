@@ -62,7 +62,7 @@ if ($mode == 'perpage')
 		"FROM " . $px . "referrer r " .
 			"LEFT JOIN " . $px . "page p ON ( p.page_id = r.page_id ) " .
 		"GROUP BY r.page_id " .
-		"ORDER BY num DESC";
+		"ORDER BY num DESC, p.tag ASC";
 }
 else if ($mode == 'bytime')
 {
@@ -78,7 +78,7 @@ else if ($mode == 'global')
 		"SELECT referrer, COUNT(referrer) AS num " .
 		"FROM " . $px . "referrer " .
 		"GROUP BY referrer " .
-		"ORDER BY num DESC";
+		"ORDER BY num DESC, referrer ASC";
 }
 else
 {

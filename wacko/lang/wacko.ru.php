@@ -388,8 +388,6 @@ $wacko_translation = [
 	'LastDays'					=> 'за последние %1 дней',
 	'DomainsSitesPages'			=> 'Сайты, на которых есть ссылки на %1<br> (%2)  (<a href="%3">список отдельных страниц</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Сайты, на которых есть ссылки <br> (<a href="%1">список отдельных страниц</a>):',
-	'ViewReferringSites'		=> '<a href="%1">Сайты, ссылающиеся на %2</a>',
-	'ViewReferringSitesGlobal'	=> '<a href="%1">Сайты, ссылающиеся</a>',
 	'ViewReferrersPage'			=> 'to page',
 	'ViewReferrersPerPage'		=> 'на странице',
 	'ViewReferrersByTime'		=> 'по времени',

@@ -388,8 +388,6 @@ $wacko_translation = [
 	'LastDays'					=> 'últimos %1 dias',
 	'DomainsSitesPages'			=> 'Dominios/páginas vinculadas con  %1 (%2)  (<a href="%3">ver lista de URLs diferentes</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Dominios/páginas vinculadas con este Wacko (<a href="%1">ver lista de URLs diferentes</a>):',
-	'ViewReferringSites'		=> '<a href="%1">Ver Webs referenciadas para %2 solo</a> ',
-	'ViewReferringSitesGlobal'	=> '<a href="%1">Ver Webs referenciadas globales</a>',
 	'ViewReferrersPage'			=> 'a la página',
 	'ViewReferrersPerPage'		=> 'por página',
 	'ViewReferrersByTime'		=> 'por el tiempo',

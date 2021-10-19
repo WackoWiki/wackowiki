@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// TODO: remove or reuse ?obsolete? message sets: ViewReferringSitesGlobal, ViewReferringSites
-
 $this->ensure_page(true); // allow forums
 
 if ((  $this->db->enable_referrers == 0)
