@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// HTTP header with right Charset settings
+// HTTP header with right charset settings
 header('Content-Type: text/html; charset=' . $this->get_charset());
 header_remove('X-Powered-By');
 

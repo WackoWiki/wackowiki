@@ -16,7 +16,7 @@
 			[= nopages _ =
 				<br><br>[ ' _t: NewsNotAvailable ' ]
 			=]
-			<div style="width:100%;">
+			<div class="no-print" style="width:100%;">
 				[= access _ =
 					<p>
 						<strong><small class="cite">
