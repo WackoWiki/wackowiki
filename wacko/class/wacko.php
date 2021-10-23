@@ -415,9 +415,9 @@ class Wacko
 	}
 
 	// e.g. <time datetime="2017-03-17T12:34:26+01:00" title="17 March 2017 12:34">3 hours ago</time>
-	function get_time_interval($text, $strip = false)
+	function get_time_interval($time, $strip = false)
 	{
-		$ago = time() - $text;
+		$ago = time() - $time;
 		$out = 0 . $this->_t('MinutesAgo');
 
 		foreach ($this->time_intervals as $val => $name)
@@ -7111,7 +7111,7 @@ class Wacko
 	function get_page_path($tag = '', $titles = false, $separator = '/', $linking = true, $root_page = false) : string
 	{
 		if (!isset($tag))
-		{ 
+		{
 			$tag	= $this->tag;
 		}
 
