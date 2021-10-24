@@ -216,7 +216,8 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 				// check new comments
 				$updated = (isset($user['last_mark'])
-							&& (($comment['user_name'] != $user['user_name']
+							&& ((isset($comment['user_name'])
+									&& $comment['user_name'] != $user['user_name']
 									&& $comment['created'] > $user['last_mark'])
 								|| ($topic['owner_name'] != $user['user_name']
 									&& $topic['created'] > $user['last_mark']) ));
@@ -224,8 +225,8 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 				$topic['description'] = Ut::html($topic['description']); // replaces -> [ ' topic.description | e ' ]
 
 				// load related categories
-				$_category = $this->get_categories($topic['page_id'], OBJECT_PAGE);
-				$tpl->category = !empty($_category) ? '<br>' . $_category : '';
+				$category		= $this->get_categories($topic['page_id'], OBJECT_PAGE);
+				$tpl->category	= !empty($category) ? '<br>' . $category : '';
 
 				// print
 				if ($user && !$this->has_access('comment', $topic['page_id']))
