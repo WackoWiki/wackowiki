@@ -41,7 +41,7 @@ if ($user_id = $this->get_user_id())
 			"ORDER BY p.modified DESC, p.tag ASC " .
 			$pagination['limit'], true);
 
-	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages == true)
+	if ((isset($_GET['reset']) && $_GET['reset'] == 1) && $pages)
 	{
 		foreach ($pages as $page)
 		{
@@ -58,7 +58,7 @@ if ($user_id = $this->get_user_id())
 
 	$tpl->pagination_text = $pagination['text'];
 
-	if ($pages == true)
+	if ($pages)
 	{
 		foreach ($pages as $page)
 		{

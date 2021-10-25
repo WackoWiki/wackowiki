@@ -17,7 +17,7 @@ if ($this->has_access('write') && $this->method != 'edit')
 
 if ($this->page && $this->has_access('read'))
 {
-	if (($mtime = $this->page['modified']))
+	if ($mtime = $this->page['modified'])
 	{
 		// Revisions link
 		if ($this->hide_revisions)

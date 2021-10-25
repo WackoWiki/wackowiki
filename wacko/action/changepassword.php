@@ -10,7 +10,7 @@ $this->no_way_back = true; // prevent goback'ing that page
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
-if (($code = (string) @$_REQUEST['secret_code']))
+if ($code = (string) @$_REQUEST['secret_code'])
 {
 	$user = $this->db->load_single(
 		"SELECT user_id, user_name " .
@@ -124,7 +124,7 @@ if (@$_POST['_action'] === 'forgot_password')
 }
 
 // POST processing complete, let's enforce GET method
-$_POST and $this->show_must_go_on($code? ['secret_code' => $code] : []);
+$_POST && $this->show_must_go_on($code? ['secret_code' => $code] : []);
 
 if ($user)
 {

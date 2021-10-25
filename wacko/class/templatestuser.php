@@ -88,7 +88,7 @@ class TemplatestUser extends TemplatestSetter
 			{
 				foreach ($subs as $sub)
 				{
-					if (($data = $sub[5]))
+					if ($data = $sub[5])
 					{
 						$this->assign($pat, $sub, $this->commit($data), $data['prefix']);
 					}
@@ -239,7 +239,7 @@ class TemplatestUser extends TemplatestSetter
 			{
 				foreach ($pat['sub'][$name] as &$child)
 				{
-					if (($err = $rec($pat, $child, $args, $path1)))
+					if ($err = $rec($pat, $child, $args, $path1))
 					{
 						return $err;
 					}
@@ -276,7 +276,7 @@ class TemplatestUser extends TemplatestSetter
 		};
 
 		// main show
-		if (($err = $rec($this->root, $this->root['sub'][''][0], $args)))
+		if ($err = $rec($this->root, $this->root['sub'][''][0], $args))
 		{
 			$this->error('template set: ', $err);
 		}
@@ -286,7 +286,7 @@ class TemplatestUser extends TemplatestSetter
 	{
 		$n = (int) @$this->sets[$var];
 
-		if (($lvar = strlen($var)))
+		if ($lvar = strlen($var))
 		{
 			foreach ($this->sets as $svar => $scnt)
 			{

@@ -60,8 +60,8 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 	function date($t = null)
 	{
-		Ut::is_empty($t) and $t = time();
-		is_string($t) and $t = strtotime($t);
+		Ut::is_empty($t) && $t = time();
+		is_string($t) && $t = strtotime($t);
 
 		return gmdate(self::SQL_DATE_FORMAT, (int) $t);
 	}
@@ -111,7 +111,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 		// retrieving from cache
 		if ($this->cache_sql && $docache)
 		{
-			if (($data = $this->get_cache($query)))
+			if ($data = $this->get_cache($query))
 			{
 				return $data;
 			}
@@ -120,9 +120,9 @@ abstract class Dbal // need to be extended by Settings to be usable
 		$data = [];
 
 		// retrieving from db
-		if (($result = $this->sql_query($query)))
+		if ($result = $this->sql_query($query))
 		{
-			while (($row = $this->db->fetch_assoc($result)))
+			while ($row = $this->db->fetch_assoc($result))
 			{
 				$data[] = $row;
 			}
@@ -141,7 +141,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 	function load_single($query, $docache = false)
 	{
-		if (($data = $this->load_all($query, $docache)))
+		if ($data = $this->load_all($query, $docache))
 		{
 			return $data[0];
 		}
@@ -159,11 +159,11 @@ abstract class Dbal // need to be extended by Settings to be usable
 
 		clearstatcache();
 
-		if (($timestamp = @filemtime($this->sqlfile)))
+		if ($timestamp = @filemtime($this->sqlfile))
 		{
 			if (time() - $timestamp <= $this->cache_sql_ttl)
 			{
-				if (($text = file_get_contents($this->sqlfile)))
+				if ($text = file_get_contents($this->sqlfile))
 				{
 					$data = Ut::unserialize($text);
 					// re @: if unserialize fails - it's OK and need not propagate further

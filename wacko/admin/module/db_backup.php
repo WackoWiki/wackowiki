@@ -76,18 +76,18 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 			$val = substr($val, 7);
 
 			// collect table names for sql recreation query
-			if ($key == 'structure' && $val == true)
+			if ($key == 'structure' && $val)
 			{
 				$structure[] = $val;
 			}
 			// extract table data
-			else if ($key == 'data' && $val == true)
+			else if ($key == 'data' && $val)
 			{
 				$data[] = $val;
 				get_data($engine, $tables, $pack, $val, $root);
 			}
 			// compress files
-			else if ($key == 'files' && $val == true)
+			else if ($key == 'files' && $val)
 			{
 				$files[] = $val;
 				get_files($engine, $pack, $val, $root);
@@ -95,7 +95,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 		}
 
 		// write sql for recreating selected tables
-		if ($structure == true)
+		if ($structure)
 		{
 			foreach ($structure as $table)
 			{
@@ -129,7 +129,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 		}
 
 		// save sql to the disk
-		if ($sql == true)
+		if ($sql)
 		{
 			// check file existence
 			clearstatcache();
@@ -228,10 +228,10 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 				echo '<tr>' .
 						'<td class="label">' . $table['name'] . '</td>' .
 						'<td class="t-center">
-							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] == true ? ' checked' : '') . '>
+							<input type="checkbox" name="__str__' . $table['name'] . '" value="structure"' . ( isset($scheme['structure']) && $scheme['structure'] ? ' checked' : '') . '>
 						</td>' .
 						'<td class="t-center">
-							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] == true ? ' checked' : '') . '>
+							<input type="checkbox" name="__dat__' . $table['name'] . '" value="data"' . ( $check === true && isset($scheme['data']) && $scheme['data'] ? ' checked' : '') . '>
 						</td>' .
 					'</tr>' . "\n";
 			}
@@ -260,7 +260,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 							'<label for="dir_' . $i . '"><strong>' . $dir . '</strong></label>' .
 						'</td>' .
 						'<td class="t-center">  ' .
-							'<input type="checkbox" id="dir_' . $i . '" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files'] == true) ? ' checked' : '') . '>' .
+							'<input type="checkbox" id="dir_' . $i . '" name="__dir__' . $dir . '" value="files"' . ( $check === true && (isset($scheme['files']) && $scheme['files']) ? ' checked' : '') . '>' .
 						'</td>' .
 					'</tr>' . "\n";
 			}

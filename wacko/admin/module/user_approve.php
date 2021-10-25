@@ -151,7 +151,7 @@ function admin_user_approve(&$engine, &$module)
 		}
 	}
 	// approve user
-	else if (isset($_POST['approve']) && ($user_id || $set == true))
+	else if (isset($_POST['approve']) && ($user_id || $set))
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{

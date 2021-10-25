@@ -449,7 +449,7 @@ class Templatest
 		}
 
 		$meta['chunks'] = $chunks;
-		$static and $meta['static'] = 1;
+		$static && $meta['static'] = 1;
 	}
 
 	private static function inline_static_subs(&$store)
@@ -532,7 +532,7 @@ class Templatest
 		for ($i = 0; $i < $len; $i = $eol + 1)
 		{
 			$eol = strpos($text, "\n", $i);
-			$eol !== false or $eol = $len;
+			$eol !== false || $eol = $len;
 
 			// we have no interest in empty or all-whitespace lines
 			if ($i + ($ws = strspn($text, " \t", $i)) < $eol)

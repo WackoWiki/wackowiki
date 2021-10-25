@@ -307,7 +307,7 @@ class GPG
 
 		if ($errorcodes)
 		{
-			if ($this->engine->db->gpg_debug == true)
+			if ($this->engine->db->gpg_debug)
 			{
 				return nl2br("WackoWiki-GPG terminated, error output follows:\n------\n" .
 				str_replace("\r", '', $errorcodes));

@@ -19,7 +19,7 @@ if (!isset($icon))		$icon		= false;
 if (!isset($label))		$label		= true;
 if (!isset($note))		$note		= false;
 
-if (($mtime = $this->page['modified']))
+if ($mtime = $this->page['modified'])
 {
 	// revisions link
 	if ($this->hide_revisions)

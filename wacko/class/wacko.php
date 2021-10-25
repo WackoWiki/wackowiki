@@ -639,7 +639,7 @@ class Wacko
 			{
 				$this->load_translation($lang);
 
-				if (($text = @$this->translations[$lang][$name]))
+				if ($text = @$this->translations[$lang][$name])
 				{
 					return $text;
 				}
@@ -1269,7 +1269,7 @@ class Wacko
 
 		if ($revisions && !$pagination['offset'])
 		{
-			if (($cur = $this->db->load_single(
+			if ($cur = $this->db->load_single(
 				"SELECT 0 AS revision_id, " . $page_meta . " " .
 				"FROM " . $this->db->table_prefix . "page p " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
@@ -1282,7 +1282,7 @@ class Wacko
 						? "AND p.deleted <> 1 "
 						: "") .
 				"ORDER BY p.modified DESC " .
-				"LIMIT 1")))
+				"LIMIT 1"))
 			{
 				array_unshift($revisions, $cur);
 			}
@@ -1658,7 +1658,7 @@ class Wacko
 		if ($this->db->spam_filter)
 		{
 			// TODO: read table word and cache it
-			if (($spam = file(Ut::join_path(CONFIG_DIR, 'antispam.conf'))))
+			if ($spam = file(Ut::join_path(CONFIG_DIR, 'antispam.conf')))
 			{
 				foreach ($spam as $one)
 				{
@@ -1758,7 +1758,7 @@ class Wacko
 			|| (!$this->page && $this->has_access('create', '', $user_name, '', $tag))
 				# || $this->is_admin() // XXX: Only for testing - comment out afterwards! (moderate handler)
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
-			|| $user_page == true)
+			|| $user_page)
 		{
 			// for forum topic prepare description
 			if (!$comment_on_id && $this->forum)
@@ -2832,11 +2832,11 @@ class Wacko
 	{
 		$hash = $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash));
 
-		if (($user = $this->db->load_single(
+		if ($user = $this->db->load_single(
 			"SELECT user_name, email " .
 			"FROM " . $this->db->user_table . " " .
 			"WHERE email_confirm = " . $hash . " " .
-			"LIMIT 1")))
+			"LIMIT 1"))
 		{
 			$this->db->sql_query(
 				"UPDATE " . $this->db->user_table . " SET " .
@@ -3061,7 +3061,7 @@ class Wacko
 			$alter			= false;
 		}
 
-		$href = ($absolute or $this->canonical) ? $this->db->base_url : $this->db->base_path;
+		$href = ($absolute || $this->canonical) ? $this->db->base_url : $this->db->base_path;
 
 		if ($this->db->rewrite_mode)
 		{
@@ -3771,7 +3771,7 @@ class Wacko
 							{
 								$media_class = 'media-' . $param['align'];
 
-								if (($file_data['picture_w'] || $file_data['file_ext'] == 'svg'))
+								if ($file_data['picture_w'] || $file_data['file_ext'] == 'svg')
 								{
 									$text	= $this->image_link($src, $media_class, $aname, $title, $alt, $scale);
 								}
@@ -3907,7 +3907,7 @@ class Wacko
 		{
 			$aname			= '';
 			$match			= '';
-			$tag			= $otag		= $matches[1];
+			$tag			= $matches[1];
 			$untag			= $unwtag	= $this->unwrap_link($tag);
 
 			$regex_handlers	= '/^(.*?)\/(' . $this->db->standard_handlers . ')\/(.*)$/ui';
@@ -4479,7 +4479,7 @@ class Wacko
 			return $this->_t('InvalidWikiName');
 		}
 
-		if (($result = $this->validate_reserved_words($tag)))
+		if ($result = $this->validate_reserved_words($tag))
 		{
 			return Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result .'</code>');
 		}
@@ -4697,7 +4697,7 @@ class Wacko
 		{
 			$inter_wiki = [];
 
-			if (($lines = file(Ut::join_path(CONFIG_DIR, 'interwiki.conf'))))
+			if ($lines = file(Ut::join_path(CONFIG_DIR, 'interwiki.conf')))
 			{
 				foreach ($lines as $line)
 				{
@@ -4710,7 +4710,7 @@ class Wacko
 			}
 		}
 
-		if (($url = @$inter_wiki[mb_strtolower($name)]))
+		if ($url = @$inter_wiki[mb_strtolower($name)])
 		{
 			// xhtmlisation
 			$url = str_replace('&', '&amp;', $url);
@@ -4947,7 +4947,7 @@ class Wacko
 				{
 					$output = (string) $tpl;
 
-					if (($spare = ob_get_contents()))
+					if ($spare = ob_get_contents())
 					{
 						trigger_error('templated ' . $__pathname . ' also produce echo-output', E_USER_WARNING);
 						$output .= $spare;
@@ -5312,7 +5312,7 @@ class Wacko
 
 	function check_auth_token()
 	{
-		if (($token = $this->sess->get_cookie(AUTH_TOKEN)))
+		if ($token = $this->sess->get_cookie(AUTH_TOKEN))
 		{
 			$selector		= substr($token, 0, 12);
 			$authenticator	= substr($token, 12);
@@ -5340,7 +5340,7 @@ class Wacko
 					FROM " . $this->db->table_prefix . "auth_token
 					WHERE auth_token_id = " . (int) $token['auth_token_id']);
 
-				if (($user = $this->load_user(0, $token['user_id'])))
+				if ($user = $this->load_user(0, $token['user_id']))
 				{
 					$this->create_auth_token($user);
 					return $user;
@@ -5422,7 +5422,7 @@ class Wacko
 	// explicitly end user session and free session vars
 	function log_user_out() : void
 	{
-		if (($user = $this->get_user()))
+		if ($user = $this->get_user())
 		{
 			// we destroy ALL user's auth tokens - effectively enforce user to re-login thru password auth
 			$this->delete_auth_token($user['user_id']);
@@ -5618,7 +5618,7 @@ class Wacko
 			}
 		}
 
-		if (($page = $this->load_page($tag, $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
+		if ($page = $this->load_page($tag, $page_id, $revision_id, LOAD_CACHE, LOAD_META))
 		{
 			return $page['owner_name'];
 		}
@@ -5646,7 +5646,7 @@ class Wacko
 		{
 			return (int) $this->owner_id_cache[$page_id];
 		}
-		else if (($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META)))
+		else if ($page = $this->load_page('', $page_id, $revision_id, LOAD_CACHE, LOAD_META))
 		{
 			return (int) ($page['owner_id'] ?? null);
 		}
@@ -5921,7 +5921,7 @@ class Wacko
 		$this->_acl	= $acl;
 
 		// locked down to read only
-		if ($this->db->acl_lock == true && $privilege != 'read')
+		if ($this->db->acl_lock && $privilege != 'read')
 		{
 			return false;
 		}
@@ -6176,7 +6176,7 @@ class Wacko
 		if (!$tag)		$tag		= $this->page['tag']		?? null;
 
 		$user		= $this->get_user();
-		$access		= $this->has_access($privilege, $page_id);
+		#$access		= $this->has_access($privilege, $page_id);
 		$link		= $this->href('permissions', $tag);
 
 		$acl_modes = [
@@ -6562,7 +6562,7 @@ class Wacko
 					{
 						$result .= $this->link($link[1], '', $link[1]) . $separator;
 					}
-					else if ($linking == true)
+					else if ($linking)
 					{
 						$result .= $this->link($link[1], '', $link[2]) . $separator;
 					}
@@ -7006,7 +7006,7 @@ class Wacko
 				{
 					if (!in_array($toc_item[0], $this->toc_context))
 					{
-						if (!($toc_item[0] == $this->tag))
+						if ($toc_item[0] != $this->tag)
 						{
 							array_push($this->toc_context, $toc_item[0]);
 							$_toc = array_merge($_toc, $this->build_toc($toc_item[0], $from, $to, $link));
@@ -8023,7 +8023,7 @@ class Wacko
 			$span		= ' ... ' . $sep;
 			$total		-= 1;
 			$pages		= ($total - $total % $perpage) / $perpage + 1;
-			$page		= @$_GET[$name];
+			$page		= $_GET[$name] ?? '';
 			$page		= ($page == 'last')? $pages : (int) $page;
 
 			if ($page <= 0 || $page > $pages)
@@ -8473,7 +8473,7 @@ class Wacko
 							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '> ' . "\n\t") .
 						'<label for="category' . $category_id . '"><strong>' . Ut::html($word['category']) . '</strong></label>' . "\n";
 
-				if (isset($word['child']) && $word['child'] == true)
+				if (isset($word['child']) && $word['child'])
 				{
 					foreach ($word['child'] as $category_id => $word)
 					{
@@ -8596,7 +8596,6 @@ class Wacko
 	function show_select_license($name, $license, $label = false) : string
 	{
 		$out		= '';
-		$langs		= [];
 		$licenses	= [];
 
 		if ($label)
@@ -8826,7 +8825,7 @@ class Wacko
 
 	function go_back($to)
 	{
-		if (($back = @$this->sess->sticky_goback))
+		if ($back = @$this->sess->sticky_goback)
 		{
 			$to = $back;
 			unset($this->sess->sticky_goback);

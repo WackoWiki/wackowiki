@@ -283,7 +283,7 @@ class Polls
 					$this->engine->form_close();
 		}
 
-		if ($header == true)
+		if ($header)
 		{
 			return $poll;
 		}

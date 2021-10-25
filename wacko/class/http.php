@@ -77,11 +77,11 @@ class Http
 
 		clearstatcache();
 
-		if (($timestamp = @filemtime($this->file)))
+		if ($timestamp = @filemtime($this->file))
 		{
 			if (time() - $timestamp <= $this->db->cache_ttl)
 			{
-				if (($contents = file_get_contents($this->file)))
+				if ($contents = file_get_contents($this->file))
 				{
 					return $contents;
 				}
@@ -184,7 +184,7 @@ class Http
 		$this->query = $query;
 
 		// check cache
-		if (($cached_page = $this->load_page($mtime)))
+		if ($cached_page = $this->load_page($mtime))
 		{
 			// Ut::dbg('check_http_request', $this->page, $this->method, $this->query, 'found!');
 
@@ -192,7 +192,7 @@ class Http
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
 			$lastm	= @$_SERVER['HTTP_IF_MODIFIED_SINCE'];
 
-			if (($p = strpos($lastm, ';')))
+			if ($p = strpos($lastm, ';'))
 			{
 				$lastm = substr($lastm, 0, $p);
 			}
@@ -578,7 +578,7 @@ class Http
 		$reverse_proxy_addresses = preg_split('/[\s,]+/', $this->db->reverse_proxy_addresses, -1, PREG_SPLIT_NO_EMPTY);
 
 		$x = trim($this->db->reverse_proxy_header);
-		$x or $x = 'X-Forwarded-For';
+		$x || $x = 'X-Forwarded-For';
 		$reverse_proxy_header = 'HTTP_' . strtoupper(strtr($x, '-', '_'));
 
 		foreach (['HTTP_X_CLUSTER_CLIENT_IP', $reverse_proxy_header, 'HTTP_CLIENT_IP', 'HTTP_X_REMOTE_ADDR', 'REMOTE_ADDR'] as $ip)
@@ -695,10 +695,10 @@ class Http
 	{
 		header_remove();
 		set_time_limit(0);
-		isset($this->sess)  and  $this->sess->write_close();
+		isset($this->sess)  &&  $this->sess->write_close();
 
 		// allow to be called sendfile(404)
-		if (($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename, $age))))
+		if ($code = (defined('HTTP_' . $path)? $path : $this->sendfile0($path, $filename, $age)))
 		{
 			$this->status($code);
 
@@ -762,7 +762,7 @@ class Http
 				else
 				{
 					$from = (int) $m[1];
-					$m[2] === ''  or  $to = (int) $m[2] + 1;
+					$m[2] === ''  ||  $to = (int) $m[2] + 1;
 				}
 			}
 
@@ -812,7 +812,7 @@ class Http
 		{
 			readfile($path);
 			// gzip only text files
-			preg_match('/^text|xml|javascript/i', $type) and $this->gzip();
+			preg_match('/^text|xml|javascript/i', $type) && $this->gzip();
 		}
 		else
 		{
@@ -880,7 +880,7 @@ class Http
 
 		$path = $this->cut_prefix($base, $path);
 
-		isset($uri[1])  and  $path .= '?' . $uri[1];
+		isset($uri[1])  &&  $path .= '?' . $uri[1];
 
 		return $path;
 	}

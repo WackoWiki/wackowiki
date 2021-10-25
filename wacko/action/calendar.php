@@ -146,7 +146,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	for ($day = 1, $days_in_month = gmdate('t', $first_of_month); $day <= $days_in_month; $day++, $weekday++)
 	{
-		if (isset($days[$day]) and is_array($days[$day]))
+		if (isset($days[$day]) && is_array($days[$day]))
 		{
 			[$link, $classes, $content] = $days[$day];
 
@@ -189,7 +189,7 @@ for ($month; $month <= $_range; $month++)
 	$generate_calendar($year, $month, $days, $daywidth, null, $firstday, []);
 	$days = []; // reset highlight array as we highlight only once per range
 
-	if ($n % 3 == 0 and $month < $_range)
+	if ($n % 3 == 0 && $month < $_range)
 	{
 		$tpl->next = true;
 	}

@@ -5,8 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-$viewed = '';
-
 if (!isset($page))		$page = '';
 if (!isset($date))		$date = $_GET['date'] ?? '';
 if (!isset($hide_minor_edit)) $hide_minor_edit = (int) ($_GET['minor_edit'] ?? 0);
@@ -98,7 +96,7 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 				$tpl->l_review_href = $this->compose_link_to_page($page['tag'], 'revisions', $this->_t('Review'));
 			}
 
-			if (($page['edit_note']))
+			if ($page['edit_note'])
 			{
 				$tpl->l_edit_note = $page['edit_note'];
 			}

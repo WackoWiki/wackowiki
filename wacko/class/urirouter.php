@@ -376,7 +376,7 @@ class UriRouter
 				$regex = preg_replace_callback('#\{((\w+?)[:=])?([^}\d]*)\}#',
 					function ($x) use (&$re_place)
 					{
-						if (($repl = @$re_place[strtolower($x[3])]))
+						if ($repl = @$re_place[strtolower($x[3])])
 						{
 							return '(' . (empty($x[2])? '' : '?P<' . $x[2] . '>') . $repl . ')';
 						}
@@ -446,7 +446,7 @@ class UriRouter
 			$varidx = ord($var[1]) - ord('a');
 			$varname = 'sub'; // submatch
 		}
-		else if (($varname = @self::GLOBALS[$var[0]]))
+		else if ($varname = @self::GLOBALS[$var[0]])
 		{
 			$varidx = substr($var, 1);	 // _GET/etc vars
 		}

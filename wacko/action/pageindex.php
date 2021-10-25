@@ -137,7 +137,7 @@ $pagination = $this->pagination($count['n'], $max, 'p', ($letter !== ''? ['lette
 $pages_to_display	= [];
 $page_ids			= [];
 
-if (($pages = $this->db->load_all(
+if ($pages = $this->db->load_all(
 	"SELECT page_id, owner_id, user_id, tag, title, page_lang " .
 	$selector .
 	"ORDER BY " .
@@ -145,7 +145,7 @@ if (($pages = $this->db->load_all(
 			? "title "
 			: "tag ") .
 		"COLLATE utf8mb4_unicode_520_ci ASC " .
-	$pagination['limit'], true)))
+	$pagination['limit'], true))
 {
 	foreach ($pages as $page)
 	{

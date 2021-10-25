@@ -108,7 +108,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 		$tpl->enter('prof_');
 
 		// user profile
-		if ($default_tab == true)
+		if ($default_tab)
 		{
 			$tpl->user	= $user;
 
@@ -181,7 +181,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$headers				= [];
 					$headers['Message-ID']	= '<' . $msg_id . '>';
 
-					if (($ref = @$_POST['ref']))
+					if ($ref = @$_POST['ref'])
 					{
 						$headers['In-Reply-To']	= '<' . $ref . '>';
 						$headers['References']	= '<' . $ref . '>';
@@ -233,7 +233,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					$body		= (string) ($_POST['mail_body']		?? '');
 
 					// decompose reply referrer
-					if (($ref0 = @$_GET['ref']))
+					if ($ref0 = @$_GET['ref'])
 					{
 						$ref0 = @gzinflate(Ut::http64_decode($ref0)); // suppress ALL errors on parsing user supplied data!
 
@@ -280,7 +280,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 				{
 					$tpl->not = true;
 
-					if (($ref0 = @$_GET['ref']))
+					if ($ref0 = @$_GET['ref'])
 					{
 						$tpl->hint = true;
 					}
@@ -404,7 +404,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						$tpl->li_modified	= $page['modified'];
 						$tpl->li_link		= $this->link('/' . $page['tag'], '', $page['title'], '', 0, 1);
 
-						if (($page['edit_note']))
+						if ($page['edit_note'])
 						{
 							$tpl->li_edit_note	= $page['edit_note'];
 						}

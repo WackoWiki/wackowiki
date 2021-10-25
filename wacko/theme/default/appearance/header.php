@@ -121,8 +121,8 @@ $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_k
 		}
 	}
 
-	$image == 1 or $tpl->t_title	= $this->_t($title);
-	$image == 0 or $tpl->t_im_title	= $this->_t($title);
+	$image == 1 || $tpl->t_title	= $this->_t($title);
+	$image == 0 || $tpl->t_im_title	= $this->_t($title);
 	$tpl->leave();
 };
 

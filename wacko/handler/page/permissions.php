@@ -20,7 +20,7 @@ $upload_allowed	= ($upload === true || $upload == 1 || $this->check_acl($this->g
 
 if (isset($_POST['_action']) && $_POST['_action'] === 'set_permissions')
 {
-	if (($user_id = $_POST['new_owner_id']))
+	if ($user_id = $_POST['new_owner_id'])
 	{
 		if ($this->is_admin())
 		{
@@ -209,7 +209,7 @@ if ($upload_allowed)
 	$tpl->u_upload = $upload_acl['list'];
 }
 
-if (($users = $this->load_users()))
+if ($users = $this->load_users())
 {
 	// TODO and if there're TONS of users? maybe simple text entry, not menu?
 	foreach ($users as $user)

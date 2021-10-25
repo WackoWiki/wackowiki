@@ -39,7 +39,7 @@ if (count(@$argv) < 3)
 	die("usage: relang.php parent.lang.php other.lang.php [....]\n");
 }
 
-define('IN_WACKO', 1);
+const IN_WACKO = 1;
 require_once $wacko . 'class/ut.php';
 function v($x) { echo Ut::stringify($x) . "\n"; }
 
@@ -230,7 +230,7 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 
 	$diff = new Diff($b, $a, ['context' => 1000000]);
 
-	if (($edits = $diff->getGroupedOpcodes()))
+	if ($edits = $diff->getGroupedOpcodes())
 	{
 		$output = '';
 		foreach ($edits as $group)

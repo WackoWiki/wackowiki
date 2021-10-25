@@ -51,11 +51,11 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = [];
 
-	if (isset($_POST['backup_id']) && $_POST['backup_id'] == true)
+	if (isset($_POST['backup_id']) && $_POST['backup_id'])
 	{
 		$backup_id = $_POST['backup_id'];
 	}
-	else if (isset($_GET['backup_id']) && $_GET['backup_id'] == true)
+	else if (isset($_GET['backup_id']) && $_GET['backup_id'])
 	{
 		$backup_id = $_GET['backup_id'];
 	}
@@ -65,7 +65,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 	}
 
 	// RESTORE backup
-	if (isset($_POST['restore']) && (isset($_POST['backup_id']) && $_POST['backup_id'] == true))
+	if (isset($_POST['restore']) && (isset($_POST['backup_id']) && $_POST['backup_id']))
 	{
 		// confirm restore backup
 		if (((isset($_POST['restore']) && isset($_POST['backup_id']))
@@ -125,7 +125,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" class="t-left nowrap">' .
-								$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+								$engine->_t('BackupCluster') . ': ' . ($log[2] ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
 						echo '<tr>' .
@@ -245,9 +245,9 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 				$engine->_t('RestoreParameters') . ':' . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedKeys') . ': ' . ($ikeys === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedFiles') . ': ' . ($ifiles === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n\n" .
-				$engine->_t('SavedCluster') . ': ' . ($log[2] == true ? $log[2] : $engine->_t('RestoreNo')) . "\n" .
+				$engine->_t('SavedCluster') . ': ' . ($log[2] ? $log[2] : $engine->_t('RestoreNo')) . "\n" .
 				"\t" . Ut::perc_replace($engine->_t(
-					($log[2] == true
+					($log[2]
 						? 'DataProtection'
 						: 'AssumeDropTable'), SYSTEM_LANG), 'DROP TABLE') . "\n" .
 				'</strong>' . "\n\n";
@@ -256,7 +256,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreTableStructure') . "\n" .
 				'================================================</strong>' . "\n";
 
-			if ($log[3] == true)
+			if ($log[3])
 			{
 				$results .= '<strong>' . $engine->_t('RunSqlQueries') . ':</strong>' . "\n\n";
 				$results .= file_get_contents($dir . $pack . '/' . BACKUP_FILE_STRUCTURE) . "\n\n";
@@ -275,7 +275,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoreRecords') . "\n" .
 				'================================================</strong>' . "\n";
 
-			if ($log[4] == true)
+			if ($log[4])
 			{
 				$list = explode(';', $log[4]);
 
@@ -320,7 +320,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 			$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RestoringFiles') . "\n" .
 				'================================================</strong>' . "\n";
 
-			if (isset($log[5]) && $log[5] == true)
+			if (isset($log[5]) && $log[5])
 			{
 				$list = explode(';', $log[5]);
 
@@ -409,8 +409,8 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 	else
 	{
 		// delete backup
-		if (   (isset($_POST['delete']) && $_POST['backup_id'] == true)
-			|| (isset($_GET['delete'])  && $_GET['backup_id']  == true))
+		if (   (isset($_POST['delete']) && $_POST['backup_id'])
+			|| (isset($_GET['delete'])  && $_GET['backup_id']))
 		{
 			if ($backup_id)
 			{
@@ -522,7 +522,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 						echo '<td><table>';
 							// cluster root
 							echo '<tr><th colspan="3" class="t-left nowrap">' .
-									$engine->_t('BackupCluster') . ': ' . ($log[2] == true ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+									$engine->_t('BackupCluster') . ': ' . ($log[2] ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents
 							echo '<tr>' .

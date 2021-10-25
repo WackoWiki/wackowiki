@@ -194,7 +194,7 @@ if ($mode == 'perpage')
 
 	foreach ($referrers as $referrer)
 	{
-		if (($link = $check_ref($referrer)))
+		if ($link = $check_ref($referrer))
 		{
 			$tpl->link	= $link;
 			$tpl->num	= $referrer['num'];
@@ -223,7 +223,7 @@ else if ($mode == 'bytime')
 
 	foreach ($referrers as $referrer)
 	{
-		if (($link = $check_ref($referrer)))
+		if ($link = $check_ref($referrer))
 		{
 			$this->sql2datetime($referrer['referrer_time'], $day, $time);
 

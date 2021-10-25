@@ -15,8 +15,8 @@ $tpl->lang			= $this->page_lang;
 $tpl->dir			= $this->languages[$this->page_lang]['dir'];
 $tpl->charset		= $this->get_charset();
 
-!Ut::is_empty($tpl->title = @$this->page['title']) or $tpl->tag = $this->add_spaces($this->tag);
-$this->method == 'show' or $tpl->method = $this->method;
+!Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);
+$this->method == 'show' || $tpl->method = $this->method;
 
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 $tpl->norobots = (

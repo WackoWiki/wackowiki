@@ -24,7 +24,7 @@ $by = function ($by) use ($profile, $mod_selector)
 	return $profile + ['mode' => 'mychanges', $mod_selector => $by, '#' => 'list'];
 };
 
-if (($user_id = $this->get_user_id()))
+if ($user_id = $this->get_user_id())
 {
 	$tpl->enter('u_');
 
@@ -104,11 +104,11 @@ if (($user_id = $this->get_user_id()))
 	{
 		$pagination = $this->pagination($count['n'], $max, 'p', $by('date'));
 
-		if (($pages = $this->db->load_all(
+		if ($pages = $this->db->load_all(
 			"SELECT page_id, owner_id, user_id, tag, title, modified, edit_note, page_lang " .
 			$selector .
 			"ORDER BY modified DESC, tag ASC " .
-			$pagination['limit'], true)))
+			$pagination['limit'], true))
 		{
 			$tpl->pagination_text = $pagination['text'];
 

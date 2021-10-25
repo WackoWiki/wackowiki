@@ -533,7 +533,7 @@ function get_files(&$engine, $pack, $dir, $root)
 					$r			= 0; // round number
 
 					// compress and write data
-					while (($data = fread($filep, BACKUP_MEMORY_STEP)))
+					while ($data = fread($filep, BACKUP_MEMORY_STEP))
 					{
 						gzwrite($filez, $data);
 						fseek($filep, (++$r) * BACKUP_MEMORY_STEP);
@@ -718,7 +718,7 @@ function put_files($pack, $dir, $keep = false)
 				$r		= 0; // round number
 
 				// decompress and write data
-				while (($data = gzread($filez, BACKUP_MEMORY_STEP)))
+				while ($data = gzread($filez, BACKUP_MEMORY_STEP))
 				{
 					fwrite($filep, $data);
 					gzseek($filez, (++$r) * BACKUP_MEMORY_STEP);

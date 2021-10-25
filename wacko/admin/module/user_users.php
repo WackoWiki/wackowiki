@@ -214,7 +214,7 @@ function admin_user_users(&$engine, &$module)
 			$engine->db->sql_query(
 				"INSERT INTO " . $prefix . "user_setting SET " .
 					"user_id			= " . (int) $_user_id['user_id'] . ", " .
-					"typografica		= " . (($engine->db->default_typografica == 1) ? 1 : 0) . ", " .
+					"typografica		= " . (int) $engine->db->default_typografica . ", " .
 					"user_lang			= " . $engine->db->q(($user_lang ?: $engine->db->language)) . ", " .
 					"list_count			= " . (int) $engine->db->list_count . ", " .
 					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
@@ -327,7 +327,7 @@ function admin_user_users(&$engine, &$module)
 	}
 	// delete user processing
 	// TODO: reassign acls, uploads, pages and revisions, delete user page
-	else if (isset($_POST['delete']) && ($user_id || $set == true))
+	else if (isset($_POST['delete']) && ($user_id || $set))
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{
@@ -629,7 +629,7 @@ function admin_user_users(&$engine, &$module)
 		}
 	}
 	// delete user form
-	else if (isset($_POST['remove']) && (isset($user_id) || $set == true))
+	else if (isset($_POST['remove']) && (isset($user_id) || $set))
 	{
 		$users	= '';
 		$i		= 0;

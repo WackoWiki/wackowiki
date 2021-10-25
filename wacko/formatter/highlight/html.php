@@ -11,7 +11,7 @@ $options['color']['other']				= '#A6A6A6';
 $options['color']['comment']			= 'gray';
 $options['color']['attributevalues']	= 'blue';
 $options['color']['entities']			= 'orange';
-$options['line_numbers']				= false;
+$options['line_numbers']				= $options['numbers'] ?? false;
 
 $html_tags = [
 	'!DOCTYPE',
@@ -210,7 +210,7 @@ $html_tags = [
 			$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
 			$source = preg_replace("/&amp;([a-z0-9]*?;)/ui", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
 
-	if ($options['line_numbers'] == true)
+	if ($options['line_numbers'])
 	{
 		$lines		= preg_split("/(\n|<br \/>)/us", $source);
 		$source		= '<ol>';

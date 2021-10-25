@@ -179,7 +179,7 @@ class Ut
 		{
 			$trace	= debug_backtrace();
 			$callee	= (strpos($trace[0]['file'], 'class/ut.php') !== false)? $trace[1] : $trace[0];
-			$dir	= dirname(dirname(__FILE__)) . '/';
+			$dir	= dirname(__FILE__, 2) . '/';
 			$tag	= str_replace($dir, '', $callee['file']) . ':' . $callee['line'] . ': ';
 
 			$args	= func_get_args();
@@ -198,10 +198,10 @@ class Ut
 
 	static function backtrace($trace = null)
 	{
-		$trace or $trace = debug_backtrace();
+		$trace || $trace = debug_backtrace();
 
 		$list = [];
-		$dir = dirname(dirname(__FILE__)) . '/';
+		$dir = dirname(__FILE__, 2) . '/';
 
 		foreach ($trace as $i => $frame)
 		{
@@ -223,7 +223,7 @@ class Ut
 	static function callee($class_filter)
 	{
 		$bt		= debug_backtrace();
-		$dir	= dirname(dirname(__FILE__)) . '/';
+		$dir	= dirname(__FILE__, 2) . '/';
 		$res	= '?';
 
 		foreach ($bt as $frame)
@@ -396,7 +396,7 @@ class Ut
 			}
 		}
 
-		if (($fp = @fopen('/dev/urandom', 'rb')))
+		if ($fp = @fopen('/dev/urandom', 'rb'))
 		{
 			$sha .= fread($fp, $length);
 			fclose($fp);

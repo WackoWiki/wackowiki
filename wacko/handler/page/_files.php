@@ -20,7 +20,7 @@ if ($this->has_access('read'))
 		$show_files = !!$_GET['show_files'];
 	}
 
-	if (($user_name = mb_strtolower($this->get_user_name())))
+	if ($user_name = mb_strtolower($this->get_user_name()))
 	{
 		$registered = true;
 	}

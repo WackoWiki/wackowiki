@@ -34,7 +34,7 @@ if (isset($route['session']))
 if (isset($route['engine']))
 {
 	$engine = new Wacko($db, $http);
-	$http->sess and $engine->session_notice($http->sess->message());
+	$http->sess && $engine->session_notice($http->sess->message());
 }
 
 switch ($route['route'])

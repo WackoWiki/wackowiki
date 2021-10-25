@@ -22,7 +22,7 @@ if (!$this->page['latest'])
 		$this->user_link($this->page['user_name'], true, false));
 }
 
-if ((($user = $this->get_user()))? $user['numerate_links'] : $this->db->numerate_links)
+if (($user = $this->get_user())? $user['numerate_links'] : $this->db->numerate_links)
 {
 	// start enumerating links
 	$this->numerate_links = [];
@@ -41,7 +41,7 @@ $data		= $this->format($data, 'post_wacko', ['strip_notypo' => true]);
 $tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
 
 // display comments
-if ((@$this->sess->show_comments[$this->page['page_id']] || $this->forum))
+if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
 {
 	$tpl->enter('c_cmt_');
 
@@ -54,7 +54,7 @@ if ((@$this->sess->show_comments[$this->page['page_id']] || $this->forum))
 
 		$tpl->user		= $this->user_link($comment['user_name']);
 		$tpl->created	= $comment['created'];
-		$comment['modified'] == $comment['created'] or $tpl->edit_time = $comment['modified'];
+		$comment['modified'] == $comment['created'] || $tpl->edit_time = $comment['modified'];
 		$tpl->body		= $this->format($comment['body_r'], 'post_wacko');
 	}
 

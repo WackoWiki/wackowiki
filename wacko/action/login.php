@@ -85,7 +85,7 @@ else // login
 {
 	// user is not logged in
 	$logins = &$this->sess->sticky_login_count;
-	isset($logins) or $logins = 0;
+	isset($logins) || $logins = 0;
 
 	if (@$_POST['_action'] === 'login')
 	{

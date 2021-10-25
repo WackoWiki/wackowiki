@@ -327,7 +327,7 @@ else
 	$form	= 1;
 }
 
-$phrase or $phrase = trim(@$_GET['phrase']);
+$phrase || $phrase = trim(@$_GET['phrase']);
 
 if ($form)
 {
@@ -446,6 +446,6 @@ if (mb_strlen($phrase) >= 3)
 		}
 	}
 
-	$nomark or $n or $tpl->none_phrase = $phrase;
+	$nomark || $n || $tpl->none_phrase = $phrase;
 }
 
