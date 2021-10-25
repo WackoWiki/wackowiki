@@ -288,7 +288,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if (!isset($this->__started))
 		{
 			$now = time();
-			isset($this->sticky__created)  or  $this->sticky__created = $now;
+			isset($this->sticky__created)  ||  $this->sticky__created = $now;
 
 			$this->__started =
 			$this->__regenerated = $now;
