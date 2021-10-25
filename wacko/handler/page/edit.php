@@ -19,7 +19,7 @@ if ($this->has_access('read')
 	|| (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word
-	if (($result = $this->validate_reserved_words($this->tag)))
+	if ($result = $this->validate_reserved_words($this->tag))
 	{
 		// $this->tag is reserved word
 		$message = Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>');
@@ -299,7 +299,7 @@ if ($this->has_access('read')
 		$title				= $this->sess->title;
 		$this->sess->title	= '';
 	}
-	else if (isset($_POST['title']) && $_POST['title'] == true)
+	else if (isset($_POST['title']) && $_POST['title'])
 	{
 		$title				= $_POST['title'];
 	}

@@ -99,9 +99,9 @@ function admin_massemail(&$engine, &$module)
 		{
 			foreach ($members as $user)
 			{
-				if ($engine->db->enable_email == true
-					&& $engine->db->enable_email_notification == true
-					&& $user['enabled'] == true
+				if ($engine->db->enable_email
+					&& $engine->db->enable_email_notification
+					&& $user['enabled']
 					&& $user['email_confirm'] == ''
 					&& $user['allow_massemail'] != 0)
 				{

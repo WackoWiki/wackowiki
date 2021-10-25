@@ -300,7 +300,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 // END FUNCTIONS
 
 // redirect to show method if page doesn't exists
-if (!$this->page || $this->page['comment_on_id'] == true)
+if (!$this->page || $this->page['comment_on_id'])
 {
 	$this->http->redirect($this->href());
 }
@@ -403,7 +403,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		// PROCESS INPUT
 		// delete selected topic(s)
-		if (isset($_POST['delete']) && $set == true)
+		if (isset($_POST['delete']) && $set)
 		{
 			$accept_action	= 'delete';
 
@@ -430,7 +430,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// move selected topics elsewhere
-		else if (isset($_POST['move']) && $set == true)
+		else if (isset($_POST['move']) && $set)
 		{
 			$accept_action	= 'move';
 
@@ -480,7 +480,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// rename topics
-		else if (isset($_POST['rename']) && $set == true)
+		else if (isset($_POST['rename']) && $set)
 		{
 			$accept_action	= 'rename';
 
@@ -521,7 +521,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// merge several topics into a single topic
-		else if (isset($_POST['merge']) && $set == true)
+		else if (isset($_POST['merge']) && $set)
 		{
 			$accept_action	= 'merge';
 
@@ -555,7 +555,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// lock topics
-		else if (isset($_POST['lock']) && $set == true)
+		else if (isset($_POST['lock']) && $set)
 		{
 			foreach ($set as $page_id)
 			{
@@ -573,7 +573,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$this->http->redirect($this->href('moderate'));
 		}
 		// unlock topics
-		else if (isset($_POST['unlock']) && $set == true)
+		else if (isset($_POST['unlock']) && $set)
 		{
 			foreach ($set as $page_id)
 			{
@@ -823,7 +823,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				// in case no errors, move...
-				if ($error == true)
+				if ($error)
 				{
 					if ($forum_cluster === true && $_POST['section'])
 					{
@@ -914,7 +914,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$this->http->redirect($this->href('moderate'));
 		}
 		// delete selected comments
-		else if (isset($_POST['posts_delete']) && $set == true)
+		else if (isset($_POST['posts_delete']) && $set)
 		{
 			$accept_action	= 'posts_delete';
 
@@ -960,7 +960,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// split topic
-		else if (isset($_POST['posts_split']) && $set == true)
+		else if (isset($_POST['posts_split']) && $set)
 		{
 			$accept_action	= 'posts_split';
 

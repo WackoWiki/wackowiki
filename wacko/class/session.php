@@ -293,8 +293,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			$this->__started =
 			$this->__regenerated = $now;
 			$this->__user_agent = $this->user_agent;
-			isset($this->cf_tls)  and  $this->__user_tls = $this->cf_tls;
-			isset($this->cf_ip)  and  $this->__user_ip = $this->cf_ip;
+			isset($this->cf_tls)  &&  $this->__user_tls = $this->cf_tls;
+			isset($this->cf_ip)   &&  $this->__user_ip  = $this->cf_ip;
 		}
 	}
 
@@ -424,7 +424,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		$index = static::nonce_index($action, $code);
 
-		if (($ret = isset($nonces[$index])))
+		if ($ret = isset($nonces[$index]))
 		{
 			if ($protect)
 			{
@@ -558,11 +558,11 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			return;
 		}
 
-		isset($path)		or $path		= $this->cf_cookie_path;
-		isset($domain)		or $domain		= $this->cf_cookie_domain;
-		isset($secure)		or $secure		= $this->cf_cookie_secure;
-		isset($httponly)	or $httponly	= $this->cf_cookie_httponly;
-		isset($samesite)	or $samesite	= $this->cf_cookie_samesite;
+		isset($path)		|| $path		= $this->cf_cookie_path;
+		isset($domain)		|| $domain		= $this->cf_cookie_domain;
+		isset($secure)		|| $secure		= $this->cf_cookie_secure;
+		isset($httponly)	|| $httponly	= $this->cf_cookie_httponly;
+		isset($samesite)	|| $samesite	= $this->cf_cookie_samesite;
 
 		// cookie name must be rfc2616 2.2 token:
 		$name = Ut::urlencode('/[\x7F\x00-\x1F\s()<>@,;:\\\\"\/\[\]?={}%]/', $name);
@@ -592,11 +592,11 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 			}
 		}
 
-		$path		and $cookie .= '; path=' . $path;
-		$domain		and $cookie .= '; domain=' . $domain;
-		$secure		and $cookie .= '; secure';
-		$httponly	and $cookie .= '; httponly';
-		$samesite	and $cookie .= '; SameSite=' . $samesite;
+		$path		&& $cookie .= '; path=' . $path;
+		$domain		&& $cookie .= '; domain=' . $domain;
+		$secure		&& $cookie .= '; secure';
+		$httponly	&& $cookie .= '; httponly';
+		$samesite	&& $cookie .= '; SameSite=' . $samesite;
 
 		header($cookie, false); // false -- add, not replace
 

@@ -41,7 +41,7 @@ if ($registered
 			$new_tag		= $_POST['new_tag'];
 			$old_tag		= $this->page['tag'];
 
-			if (($error = $this->sanitize_new_page_tag($new_tag, $this->tag)))
+			if ($error = $this->sanitize_new_page_tag($new_tag, $this->tag))
 			{
 				$this->set_message($error, 'error');
 				$this->reload_me();
@@ -212,8 +212,8 @@ function move(&$engine, $old_page, $new_tag, $log)
 	$user		= $engine->get_user();
 	$user_id	= $engine->get_user_id();
 
-	if (($engine->check_acl($user['user_name'], $engine->db->rename_globalacl)
-	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id))
+	if ($engine->check_acl($user['user_name'], $engine->db->rename_globalacl)
+	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id)
 	{
 		if (!preg_match('/^([' . $engine->language['TAG_P'] . ']+)$/u', $new_tag))
 		{

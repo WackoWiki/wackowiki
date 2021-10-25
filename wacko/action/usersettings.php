@@ -35,7 +35,7 @@ else if (@$_GET['action'] === 'logout')
 	$this->log_user_out();
 	$this->show_must_go_on();
 }
-else if (($user = $this->get_user()))
+else if ($user = $this->get_user())
 {
 	$email_changed	= false;
 	$user			= $this->load_user(0, $user['user_id']);

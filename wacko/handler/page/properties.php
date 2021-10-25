@@ -112,7 +112,7 @@ else
 		$tpl->enter('g_f_');
 		$tpl->page = $this->page;
 
-		if (($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1)))
+		if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
 		{
 			$tpl->categories_html = $categories;
 		}

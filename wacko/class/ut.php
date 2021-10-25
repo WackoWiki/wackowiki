@@ -198,7 +198,7 @@ class Ut
 
 	static function backtrace($trace = null)
 	{
-		$trace or $trace = debug_backtrace();
+		$trace || $trace = debug_backtrace();
 
 		$list = [];
 		$dir = dirname(__FILE__, 2) . '/';
@@ -396,7 +396,7 @@ class Ut
 			}
 		}
 
-		if (($fp = @fopen('/dev/urandom', 'rb')))
+		if ($fp = @fopen('/dev/urandom', 'rb'))
 		{
 			$sha .= fread($fp, $length);
 			fclose($fp);

@@ -16,7 +16,7 @@ $usergroups		= '';
 $error			= '';
 
 // display usergroup profile
-if (($group = @$_GET['profile']))
+if ($group = @$_GET['profile'])
 {
 	// hide article H1 header
 	$this->hide_article_header = true;
@@ -44,7 +44,7 @@ else
 
 	// defining WHERE and ORDER clauses
 	// $param is passed to the pagination links
-	if (($group = (string) @$_GET['group']))
+	if ($group = (string) @$_GET['group'])
 	{
 		// goto usergroup profile directly if so desired
 		if (isset($_GET['gotoprofile']) && $this->load_usergroup($group))

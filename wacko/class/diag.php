@@ -19,7 +19,7 @@ class Diag
 
 		if ($config['debug'] >= 1 && !str_contains($http->method, '.xml') && $http->method != 'print' && $http->method != 'wordprocessor')
 		{
-			if (($config['debug_admin_only'] == true && $engine->is_admin()) || $config['debug_admin_only'] == false)
+			if (($config['debug_admin_only'] && $engine->is_admin()) || $config['debug_admin_only'] == false)
 			{
 				$overall_time = microtime(1) - WACKO_STARTED;
 
@@ -161,7 +161,7 @@ class Diag
 					echo "\t<li>IP-address: " . $http->ip . "</li>\n";
 					echo "\t<li>SERVER_PORT: " . $_SERVER['SERVER_PORT'] . "</li>\n";
 					echo "\t<li>TLS: " . (isset($config['tls']) ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>TLS implicit: " . (($config['tls_implicit'] == true) ? 'on' : 'off') . "</li>\n";
+					echo "\t<li>TLS implicit: " . (($config['tls_implicit']) ? 'on' : 'off') . "</li>\n";
 					echo "\t<li>Cookie path: " . $config['cookie_path'] . "</li>\n";
 					// echo "\t<li>GZIP: " . (@extension_loaded('zlib') ? 'On' : 'Off') . "</li>\n";
 					echo "</ul>\n";
@@ -196,7 +196,7 @@ class Diag
 	{
 		static $code = ['BLACK' => 0, 'BLUE' => 1, 'GOLD' => 2, 'ORANGE' => 3, 'RED' => 4];
 
-		if (($args = func_get_args()))
+		if ($args = func_get_args())
 		{
 			if (($trace = debug_backtrace())
 				&& ($callee = (@$trace[0]['file'] === __FILE__)? @$trace[1] : @$trace[0])

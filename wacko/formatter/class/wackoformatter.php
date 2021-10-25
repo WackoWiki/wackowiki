@@ -553,7 +553,7 @@ class WackoFormatter
 				$output	.= '</th>';
 			}
 
-			if (($this->cols <> 0) and ($count < $this->cols))
+			if (($this->cols <> 0) && ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
 				$this->tdindent_closers		= [];
@@ -620,7 +620,7 @@ class WackoFormatter
 				$output	.= '</td>';
 			}
 
-			if (($this->cols <> 0) and ($count < $this->cols))
+			if (($this->cols <> 0) && ($count < $this->cols))
 			{
 				$this->tdold_indent_level	= 0;
 				$this->tdindent_closers		= [];

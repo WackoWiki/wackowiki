@@ -72,7 +72,7 @@ if (is_writable($file_name))
 {
 	$write_file		= file_put_contents($file_name, $config_code);
 
-	if ($write_file == true)
+	if ($write_file)
 	{
 		// Try and make it non-writable
 		@chmod($file_name, CHMOD_SAFE);

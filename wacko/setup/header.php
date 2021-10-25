@@ -1,7 +1,7 @@
 <?php
 
 // run in tls mode?
-if ($config['tls'] && ((isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443') ))
+if ($config['tls'] && (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443'))
 {
 	$config['base_url']	= str_replace('http://', 'https://', $config['base_url']);
 }

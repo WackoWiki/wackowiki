@@ -113,7 +113,7 @@ class TemplatestFilters extends TemplatestEscaper
 
 	function filter_default($value, $default)
 	{
-		($value === null || $value === false) and $value = $default;
+		($value === null || $value === false) && $value = $default;
 		return $value;
 	}
 
@@ -211,7 +211,7 @@ class TemplatestFilters extends TemplatestEscaper
 		{
 			$option = strtoupper($option);
 
-			strncmp($option, 'JSON_', 5) and $option = 'JSON_' . $option;
+			strncmp($option, 'JSON_', 5) && $option = 'JSON_' . $option;
 
 			if (defined($option))
 			{

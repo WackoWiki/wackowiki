@@ -26,7 +26,7 @@ $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
 // process 'mark read' - reset session time
-if (isset($_GET['markread']) && $user == true)
+if (isset($_GET['markread']) && $user)
 {
 	$this->update_last_mark($user);
 	$this->set_user_setting('last_mark', date('Y-m-d H:i:s', time()));
@@ -75,7 +75,7 @@ $files = $this->db->load_all(
 	"ORDER BY f.uploaded_dt DESC " .
 	"LIMIT " . ($max * 2), true);
 
-if (($pages = array_merge($pages1, $pages2, $files)))
+if ($pages = array_merge($pages1, $pages2, $files))
 {
 	// sort by dates
 	$sort_dates = function($a, $b)
@@ -92,7 +92,7 @@ if (($pages = array_merge($pages1, $pages2, $files)))
 
 	$count	= 0;
 
-	if ($user == true)
+	if ($user)
 	{
 		$tpl->mark_href = $this->href('', '', ['markread' => 1]);
 	}

@@ -20,7 +20,7 @@ $icon		??= false;
 $label		??= true;
 $note		??= false;
 
-if (($mtime = $this->page['modified']))
+if ($mtime = $this->page['modified'])
 {
 	// revisions link
 	if ($this->hide_revisions)

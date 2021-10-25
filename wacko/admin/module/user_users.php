@@ -327,7 +327,7 @@ function admin_user_users(&$engine, &$module)
 	}
 	// delete user processing
 	// TODO: reassign acls, uploads, pages and revisions, delete user page
-	else if (isset($_POST['delete']) && ($user_id || $set == true))
+	else if (isset($_POST['delete']) && ($user_id || $set))
 	{
 		if (array_filter($set) == false && empty($user_id))
 		{
@@ -629,7 +629,7 @@ function admin_user_users(&$engine, &$module)
 		}
 	}
 	// delete user form
-	else if (isset($_POST['remove']) && (isset($user_id) || $set == true))
+	else if (isset($_POST['remove']) && (isset($user_id) || $set))
 	{
 		$users	= '';
 		$i		= 0;

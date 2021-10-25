@@ -194,7 +194,7 @@ $css = preg_replace_callback(
 $css = str_replace('##oct##', $options['color']['tags'], $css);
 $css = str_replace('##ocv##', $options['color']['attributevalues'], $css);
 
-if ($options['line_numbers'] == true)
+if ($options['line_numbers'])
 {
 	$lines		= preg_split("/(\n|<br \/>)/us", $css);
 	$source		= '<ol>';

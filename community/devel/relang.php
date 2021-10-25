@@ -230,7 +230,7 @@ for ($arg = 2; isset($argv[$arg]); ++$arg)
 
 	$diff = new Diff($b, $a, ['context' => 1000000]);
 
-	if (($edits = $diff->getGroupedOpcodes()))
+	if ($edits = $diff->getGroupedOpcodes())
 	{
 		$output = '';
 		foreach ($edits as $group)

@@ -49,7 +49,7 @@ if ($moderation === true)
 		$plural			= $header['plural'];
 	}
 
-	if ($mode == true && $_REQUEST['mode'] == $mode)
+	if ($mode && $_REQUEST['mode'] == $mode)
 	{
 		$mode_http	= 'mode=' . $mode.'&amp;';
 		$mode_file	= $_SERVER['PHP_SELF'];
@@ -172,7 +172,7 @@ if (isset($_POST['submit_poll']))
 		$user = $this->get_user_name();
 
 		// notify wiki owner & log event
-		if ($this->db->enable_email == true && $user != $this->db->admin_name && $moderation !== true)
+		if ($this->db->enable_email && $user != $this->db->admin_name && $moderation !== true)
 		{
 			$subject =	$this->_t('PollsNotifySubj');
 			$body	 =	Ut::perc_replace($this->_t('PollsNotifyBody'), $user) . "\n" .

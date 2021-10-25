@@ -75,7 +75,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			$error .= $this->_t('InvalidUserName') . ' ';
 		}
 		// check if reserved word
-		else if (($result = $this->validate_reserved_words($user_name)))
+		else if ($result = $this->validate_reserved_words($user_name))
 		{
 			$error .= Ut::perc_replace($this->_t('UserReservedWord'), $result);
 		}
@@ -226,7 +226,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 }
 
 // enough for POSTs
-$_POST and $this->show_must_go_on();
+$_POST && $this->show_must_go_on();
 
 
 if (!(($this->db->allow_registration && !$this->get_user()) || $this->is_admin()))
