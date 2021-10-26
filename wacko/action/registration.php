@@ -254,7 +254,7 @@ else
 	$this->sess->registration_delay	= time();
 
 	$tpl->form		= $this->href();
-	$tpl->approve	= !!$this->db->approve_new_user;
+	$tpl->approve	= (bool) $this->db->approve_new_user;
 
 	if ($this->db->multilanguage)
 	{

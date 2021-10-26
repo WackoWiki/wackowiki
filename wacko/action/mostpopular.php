@@ -49,7 +49,7 @@ else
 	$ppage		= '';
 }
 
-$system == true
+$system
 	? $user_id		= $this->db->system_user_id
 	: $user_id		= null;
 

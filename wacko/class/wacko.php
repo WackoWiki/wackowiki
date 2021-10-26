@@ -5137,7 +5137,7 @@ class Wacko
 	// check whether email is already registered as one of user's email
 	function email_exists($email)
 	{
-		return !!$this->db->load_single(
+		return (bool) $this->db->load_single(
 			"SELECT user_id " .
 			"FROM " . $this->db->user_table . " " .
 			"WHERE email = " . $this->db->q($email) . " " .
@@ -6899,7 +6899,7 @@ class Wacko
 
 		// forum page
 		$this->forum =
-			!! (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->tag)
+			(bool) (  preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->tag)
 			|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id']
 				? preg_match('/' . $this->db->forum_cluster . '\/.+?\/.+/u', $this->get_page_tag($this->page['comment_on_id']))
 				: ''));

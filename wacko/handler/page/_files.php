@@ -9,11 +9,11 @@ if ($this->has_access('read'))
 {
 	// 'show files' status are stored in session
 	$show_files		= &$this->sess->show_files[$this->page['page_id']];
-	$show_files		??= !!$this->get_user_setting('show_files');
+	$show_files		??= (bool) $this->get_user_setting('show_files');
 
 	if (isset($_GET['show_files']))
 	{
-		$show_files = !!$_GET['show_files'];
+		$show_files = (bool) $_GET['show_files'];
 	}
 
 	if ($user_name = mb_strtolower($this->get_user_name()))

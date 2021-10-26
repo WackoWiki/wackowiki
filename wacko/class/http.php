@@ -556,7 +556,7 @@ class Http
 			$lang_list[true] = $list;
 		}
 
-		return $lang_list[!!$subset];
+		return $lang_list[(bool) $subset];
 	}
 
 	private function real_ip()

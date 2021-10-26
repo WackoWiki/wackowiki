@@ -269,7 +269,7 @@ class UriRouter
 								$env['sub'] = $match2;
 							}
 
-							$ok = (!!$ok) === ($op == '~');
+							$ok = ((bool) $ok) === ($op == '~');
 							break;
 
 						case '==':
