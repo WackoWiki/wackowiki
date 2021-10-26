@@ -55,7 +55,7 @@ if ($this->has_access('read')
 	}
 
 	// revision header
-	if (isset($this->page['latest']) && $this->page['latest'] == 0 && !!$this->page)
+	if (isset($this->page['latest']) && $this->page['latest'] == 0 && (bool) $this->page)
 	{
 		$message = Ut::perc_replace($this->_t('RevisionHint'),
 			$this->href(),
