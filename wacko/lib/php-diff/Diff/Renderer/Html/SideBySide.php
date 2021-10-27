@@ -18,7 +18,7 @@ use PHPDiff\Diff\Renderer\SubRendererInterface;
  * @author          Ferry Cools <info@DigiLive.nl>
  * @copyright   (c) 2009 Chris Boulton
  * @license         New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version         2.3.3
+ * @version         2.4.0
  * @link            https://github.com/JBlond/php-diff
  */
 class SideBySide extends MainRenderer implements SubRendererInterface
@@ -26,7 +26,7 @@ class SideBySide extends MainRenderer implements SubRendererInterface
     /**
      * @var array   Associative array containing the default options available for this renderer and their default
      *              value.
-     *              - format            Format of the texts.
+     *              - format            The Format of the texts.
      *              - insertMarkers     Markers for inserted text.
      *              - deleteMarkers     Markers for removed text.
      *              - title1            Title of the 1st version of text.
@@ -275,5 +275,71 @@ HTML;
     public function generateDiffFooter(): string
     {
         return '</table>';
+    }
+
+    /**
+     * @inheritDoc
+     *
+     * @return string Html code representing table rows showing ignored text.
+     */
+    public function generateLinesIgnore(array $changes): string
+    {
+        $html = '';
+
+        // Is below comparison result ever false?
+        if (count($changes['base']['lines']) >= count($changes['changed']['lines'])) {
+            foreach ($changes['base']['lines'] as $lineNo => $line) {
+                $fromLine    = $changes['base']['offset'] + $lineNo + 1;
+                $toLine      = '&nbsp;';
+                $changedLine = '&nbsp;';
+                if (isset($changes['changed']['lines'][$lineNo])) {
+                    $toLine      = $changes['changed']['offset'] + $lineNo + 1;
+                    $changedLine = $changes['changed']['lines'][$lineNo];
+                }
+
+                $html .= <<<HTML
+<tr>
+    <th>$fromLine</th>
+    <td class="Left">
+        <span>$line</span>
+    </td>
+    <th>$toLine</th>
+    <td class="Right Ignore">
+        <span>$changedLine</span>
+    </td>
+</tr>
+HTML;
+            }
+
+            return $html;
+        }
+
+        foreach ($changes['changed']['lines'] as $lineNo => $changedLine) {
+            $toLine   = $changes['changed']['offset'] + $lineNo + 1;
+            $fromLine = '&nbsp;';
+            $line     = '&nbsp;';
+            if (isset($changes['base']['lines'][$lineNo])) {
+                $fromLine = $changes['base']['offset'] + $lineNo + 1;
+                $line     = $changes['base']['lines'][$lineNo];
+            }
+
+            $line        = str_replace(["\0", "\1"], $this->options['deleteMarkers'], $line);
+            $changedLine = str_replace(["\0", "\1"], $this->options['insertMarkers'], $changedLine);
+
+            $html .= <<<HTML
+<tr>
+    <th>$fromLine</th>
+    <td class="Left Ignore">
+        <span>$line</span>
+    </td>
+    <th>$toLine</th>
+    <td class="Right">
+        <span>$changedLine</span>
+    </td>
+</tr>
+HTML;
+        }
+
+        return $html;
     }
 }

@@ -17,7 +17,7 @@ use PHPDiff\Diff\SequenceMatcher;
  * @author        Ferry Cools <info@DigiLive.nl>
  * @copyright (c) 2009 Chris Boulton
  * @license       New BSD License http://www.opensource.org/licenses/bsd-license.php
- * @version       2.3.3
+ * @version       2.4.0
  * @link          https://github.com/JBlond/php-diff
  */
 class MainRenderer extends MainRendererAbstract
@@ -65,7 +65,23 @@ class MainRenderer extends MainRendererAbstract
                 strlen($this->options['equalityMarkers'][1])
             );
 
+            $deprecationTriggered = false;
             foreach ($blocks as $change) {
+                if (
+                    $subRenderer instanceof MainRenderer &&
+                    !method_exists($subRenderer, 'generateLinesIgnore') &&
+                    $change['tag'] == 'ignore'
+                ) {
+                    if (!$deprecationTriggered) {
+                        trigger_error(
+                            'The use of a subRenderer without method generateLinesIgnore() is deprecated!',
+                            E_USER_DEPRECATED
+                        );
+                        $deprecationTriggered = true;
+                    }
+                    $change['tag'] =
+                        (count($change['base']['lines']) > count($change['changed']['lines'])) ? 'delete' : 'insert';
+                }
                 $output .= $subRenderer->generateBlockHeader($change);
                 switch ($change['tag']) {
                     case 'equal':
@@ -79,6 +95,10 @@ class MainRenderer extends MainRendererAbstract
                         break;
                     case 'replace':
                         $output .= $subRenderer->generateLinesReplace($change);
+                        break;
+                    case 'ignore':
+                        // TODO: Keep backward compatible with renderers?
+                        $output .= $subRenderer->generateLinesIgnore($change);
                         break;
                 }
 
@@ -116,7 +136,7 @@ class MainRenderer extends MainRendererAbstract
             foreach ($group as $code) {
                 [$tag, $startOld, $endOld, $startNew, $endNew] = $code;
                 /**
-                 * $code is an array describing a op-code which includes:
+                 * $code is an array describing an op-code which includes:
                  * 0 - The type of tag (as described below) for the op code.
                  * 1 - The beginning line in the first sequence.
                  * 2 - The end line in the first sequence.
@@ -124,12 +144,14 @@ class MainRenderer extends MainRendererAbstract
                  * 4 - The end line in the second sequence.
                  *
                  * The different types of tags include:
-                 * replace - The string from $startOld to $endOld in $oldText should be replaced by
+                 * replace - The string in $oldText from $startOld to $endOld, should be replaced by
                  *           the string in $newText from $startNew to $endNew.
                  * delete  - The string in $oldText from $startOld to $endNew should be deleted.
                  * insert  - The string in $newText from $startNew to $endNew should be inserted at $startOld in
                  *           $oldText.
                  * equal   - The two strings with the specified ranges are equal.
+                 * ignore  - The string in $oldText from $startOld to $endOld and
+                 *           the string in $newText from $startNew to $endNew are different, but considered to be equal.
                  */
 
                 $blockSizeOld = $endOld - $startOld;
@@ -146,23 +168,23 @@ class MainRenderer extends MainRendererAbstract
                 $oldBlock = $this->formatLines(array_slice($oldText, $startOld, $blockSizeOld));
                 $newBlock = $this->formatLines(array_slice($newText, $startNew, $blockSizeNew));
 
-                if ($tag == 'equal') {
-                    // Old block equals New block
+                if ($tag != 'delete' && $tag != 'insert') {
+                    // Old block "equals" New block or is replaced.
                     $blocks[$lastBlock]['base']['lines']    += $oldBlock;
                     $blocks[$lastBlock]['changed']['lines'] += $newBlock;
                     continue;
                 }
 
-                if ($tag == 'replace' || $tag == 'delete') {
-                    // Inline differences or old block doesn't exist in the new text.
+                if ($tag == 'delete') {
+                    // Block of version1 doesn't exist in version2.
                     $blocks[$lastBlock]['base']['lines'] += $oldBlock;
+                    continue;
                 }
 
-                if ($tag == 'replace' || $tag == 'insert') {
-                    // Inline differences or the new block doesn't exist in the old text.
-                    $blocks[$lastBlock]['changed']['lines'] += $newBlock;
-                }
+                // Block of version2 doesn't exist in version1.
+                $blocks[$lastBlock]['changed']['lines'] += $newBlock;
             }
+
             $changes[] = $blocks;
         }
 
@@ -291,7 +313,7 @@ class MainRenderer extends MainRendererAbstract
      * E.g.
      * <pre>
      *         1234567
-     * OLd => "abcdefg" Start marker inserted at position 3
+     * Old => "abcdefg" Start marker inserted at position 3
      * New => "ab123fg"   End marker inserted at position 6
      * </pre>
      *
@@ -351,7 +373,7 @@ class MainRenderer extends MainRendererAbstract
         $limit = min(mb_strlen($oldString), mb_strlen($newString));
 
         // Find the position of the first character which is different between old and new.
-        // Starts at the begin of the strings.
+        // Starts at the beginning of the strings.
         // Stops at the end of the shortest string.
         while ($start < $limit && mb_substr($oldString, $start, 1) == mb_substr($newString, $start, 1)) {
             ++$start;
@@ -375,7 +397,7 @@ class MainRenderer extends MainRendererAbstract
 
     /**
      * Helper function that will fill the changes-array for the renderer with default values.
-     * Every time a operation changes (specified by $tag) , a new element will be appended to this array.
+     * Every time an operation changes (specified by $tag) , a new element will be appended to this array.
      *
      * The index of the last element of the array is always returned.
      *

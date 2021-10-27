@@ -38,15 +38,15 @@ $pagination = $this->pagination($this->page['comments'], $this->db->comments_cou
 if ($this->has_access('read'))
 {
 	// sorting comments ASC / DESC
-	$sort_comment = null;
-	$sort_comment = $this->get_user_setting('sorting_comments');
-
-	$tpl->enter('cp_s_');
+	$sort_comment	= null;
+	$sort_comment	= $this->get_user_setting('sorting_comments');
 
 	if (!isset($sort_comment))
 	{
 		$sort_comment	= $this->db->sorting_comments;
 	}
+
+	$tpl->enter('cp_s_');
 
 	// store comments display in session
 	if (!isset($this->sess->show_comments[$this->page['page_id']]))
