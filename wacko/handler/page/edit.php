@@ -30,7 +30,7 @@ if ($this->has_access('read')
 	// invoke autocomplete if needed
 	if ((isset($_GET['_autocomplete'])) && $_GET['_autocomplete'])
 	{
-		include dirname(__FILE__) . '/_autocomplete.php';
+		include __DIR__ . '/_autocomplete.php';
 		return;
 	}
 
