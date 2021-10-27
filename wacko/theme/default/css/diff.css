@@ -76,6 +76,19 @@ del {
 	background: #FFDD88;
 }
 
+.DifferencesSideBySide .ChangeIgnore .Left,
+.DifferencesSideBySide .ChangeIgnore .Right {
+	background: #FBF2BF;
+}
+
+.DifferencesSideBySide .ChangeIgnore .Left.Ignore {
+	background: #F7F7F7;
+}
+
+.DifferencesSideBySide .ChangeIgnore .Right.Ignore {
+	background: #F7F7F7;
+}
+
 .Differences ins,
 .Differences del {
 	text-decoration: none;
@@ -105,6 +118,19 @@ del {
 
 .DifferencesUnified .ChangeReplace del {
 	background: #EE9999;
+}
+
+.DifferencesUnified .ChangeIgnore .Left,
+.DifferencesUnified .ChangeIgnore .Right {
+	background: #FBF2BF;
+}
+
+.DifferencesUnified .ChangeIgnore .Left.Ignore {
+	background: #F7F7F7;
+}
+
+.DifferencesUnified .ChangeIgnore .Right.Ignore {
+	background: #F7F7F7;
 }
 
 /*
