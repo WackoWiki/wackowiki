@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPDiff;
 
 use InvalidArgumentException;
+use PHPDiff\Diff\ConstantsInterface;
 use PHPDiff\Diff\SequenceMatcher;
 use PHPDiff\Diff\Similarity;
 use OutOfRangeException;
