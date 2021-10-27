@@ -5,7 +5,7 @@ const BB2_VERSION = "2.2.24";
 // If you're reading this, you are probably lost.
 // Go read the bad-behavior-generic.php file.
 
-define('BB2_CORE', dirname(__FILE__));
+define('BB2_CORE', __DIR__);
 
 require_once(BB2_CORE . "/functions.inc.php");
 
@@ -47,7 +47,7 @@ function bb2_reverse_proxy($settings, $headers_mixed)
 	if (!array_key_exists($header, $headers_mixed)) {
 		return false;
 	}
-	
+
 	$addrs = @array_reverse(preg_split("/[\s,]+/", $headers_mixed[$header]));
 	# Skip our known reverse proxies and private addresses
 	if (!empty($settings['reverse_proxy_addresses'])) {

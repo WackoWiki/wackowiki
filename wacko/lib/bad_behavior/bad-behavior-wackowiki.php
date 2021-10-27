@@ -35,7 +35,7 @@ if (!defined('IN_WACKO'))
 
 $bb2_timer_start = microtime(1);
 
-define('BB2_CWD', dirname(__FILE__));
+define('BB2_CWD', __DIR__);
 
 // Settings you can adjust for Bad Behavior.
 // Most of these are unused in non-database mode.

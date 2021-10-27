@@ -193,7 +193,7 @@ class Text_Highlighter
 	static function &factory($lang, $options = [])
 	{
 		$lang = strtoupper($lang);
-		@include_once (dirname(__FILE__).'/Highlighter/' . $lang . '.php');
+		@include_once (__DIR__ . '/Highlighter/' . $lang . '.php');
 
 		$classname = 'Text_Highlighter_' . $lang;
 
