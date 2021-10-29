@@ -153,19 +153,12 @@ function crit_init()
 {
 	if (undef() == root.onbeforeunload) root.onbeforeunload = check_cf;
 	else return;
-	
-	var thisformcf;
+
+	var thisformcf, oCurrForm;
 
 	for (var i = 0; oCurrForm = document.forms[i]; i++)
 	{
-		if (oCurrForm.getAttribute('cf'))
-		{
-			thisformcf = true;
-		}
-		else
-		{
-			thisformcf = false;
-		}
+		thisformcf = !!oCurrForm.getAttribute('cf');
 
 		if (oCurrForm.getAttribute('nocf'))
 		{

@@ -772,7 +772,7 @@ class WikiEdit extends ProtoEdit
 	{
 		var s = '';
 
-		s = '				WikiEdit 3.20 \n';
+		s = '				WikiEdit 3.21 \n';
 		s += '	© Roman Ivanov, WackoWiki Team 2003-2021	 \n';
 		s += '	https://wackowiki.org/doc/Dev/Projects/WikiEdit \n';
 		s += '\n';
