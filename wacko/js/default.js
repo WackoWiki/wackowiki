@@ -24,7 +24,7 @@ function sign(x)
 }
 
 var wikiedit;
-var dbclick;
+var dbclick = 'page';
 var edit;
 var timeout;
 var name;
@@ -53,8 +53,8 @@ function all_init()
 // freecap
 function new_freecap()
 {
-	separator	= '?';
-	thesrc		= document.getElementById('freecap').src;
+	var separator	= '?';
+	var thesrc		= document.getElementById('freecap').src;
 
 	// routing with rewrite OFF
 	if (thesrc.indexOf('?page=') !== - 1)
@@ -70,9 +70,7 @@ function new_freecap()
 	document.getElementById('freecap').src = thesrc + separator + Math.round(Math.random() * 100000);
 }
 
-var dbclick = 'page';
-
-function dclick(frame)
+function dclick()
 {
 	if (edit)
 	{
@@ -82,7 +80,7 @@ function dclick(frame)
 
 function mouseClick(event)
 {
-	op = event.target;
+	var op = event.target;
 
 	while (op != null && op.className != dbclick && op.tagName != 'BODY')
 	{
@@ -115,13 +113,15 @@ var cf_modified = false;
 
 function set_modified(e, strict_e)
 {
+	var el;
+
 	if (window.event && !strict_e)
 	{
-		var el = window.event.target;
+		el = window.event.target;
 	}
 	else if (e != null)
 	{
-		var el = e.currentTarget;
+		el = e.currentTarget;
 	}
 
 	if (el != null)
@@ -230,13 +230,14 @@ function userSessionHeartbeat(duration, name)
 				alert(lang.SessionExpiredEditor);
 				document.getElementsByName(name)['0'].prepend(div);
 
-				var list = document.getElementsByClassName('btn-ok');
+				var list;
+				list = document.getElementsByClassName('btn-ok');
 				for (let value of list)
 				{
 					value.disabled = true;
 				}
 
-				var list = document.getElementsByClassName('btn-cancel');
+				list = document.getElementsByClassName('btn-cancel');
 				for (let value of list)
 				{
 					value.disabled = true;
