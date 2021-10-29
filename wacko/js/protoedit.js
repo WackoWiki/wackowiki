@@ -82,12 +82,12 @@ ProtoEdit.prototype.insTag = function (Tag, Tag2)
 
 ProtoEdit.prototype.createToolbar = function (id)
 {
-	wh		= '';
-	html	= '<ul id="buttons_' + id + '" class="toolbar">' + '  ';
+	let wh		= '';
+	let html	= '<ul id="buttons_' + id + '" class="toolbar">' + '  ';
 
-	for (var i = 0; i < this.buttons.length; i++)
+	for (let value of this.buttons)
 	{
-		var btn = this.buttons[i];
+		var btn = value;
 
 		if (btn.name == ' ')
 		{

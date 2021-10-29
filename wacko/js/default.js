@@ -75,8 +75,9 @@ var dbclick = 'page';
 function dclick(frame)
 {
 	if (edit)
-
-	document.addEventListener('dblclick', mouseClick, true);
+	{
+		document.addEventListener('dblclick', mouseClick, true);
+	}
 }
 
 function mouseClick(event)
@@ -84,7 +85,9 @@ function mouseClick(event)
 	op = event.target;
 
 	while (op != null && op.className != dbclick && op.tagName != 'BODY')
-	op = op.parentNode;
+	{
+		op = op.parentNode;
+	}
 
 	if (op != null && op.className == dbclick)
 	{
@@ -172,25 +175,26 @@ function crit_init()
 		for (var j = 0; oCurrFormElem = oCurrForm.elements[j]; j++)
 		{
 			if (thisformcf || oCurrFormElem.getAttribute('cf'))
-
-			if (!oCurrFormElem.getAttribute('nocf'))
 			{
-				if (oCurrFormElem.addEventListener)
+				if (!oCurrFormElem.getAttribute('nocf'))
 				{
-					oCurrFormElem.addEventListener('change', set_modified, false);
-				}
-				else if (oCurrFormElem.attachEvent)
-				{
-					oCurrFormElem.attachEvent('onchange', set_modified);
-				}
-
-				if (oCurrFormElem.addEventListener)
-				{
-					oCurrFormElem.addEventListener('keypress', set_modified, false);
-				}
-				else if (oCurrFormElem.attachEvent)
-				{
-					oCurrFormElem.attachEvent('onkeypress', set_modified);
+					if (oCurrFormElem.addEventListener)
+					{
+						oCurrFormElem.addEventListener('change', set_modified, false);
+					}
+					else if (oCurrFormElem.attachEvent)
+					{
+						oCurrFormElem.attachEvent('onchange', set_modified);
+					}
+	
+					if (oCurrFormElem.addEventListener)
+					{
+						oCurrFormElem.addEventListener('keypress', set_modified, false);
+					}
+					else if (oCurrFormElem.attachEvent)
+					{
+						oCurrFormElem.attachEvent('onkeypress', set_modified);
+					}
 				}
 			}
 		}
@@ -227,15 +231,15 @@ function userSessionHeartbeat(duration, name)
 				document.getElementsByName(name)['0'].prepend(div);
 
 				var list = document.getElementsByClassName('btn-ok');
-				for (var i = 0; i < list.length; i++)
+				for (let value of list)
 				{
-					list[i].disabled = true;
+					value.disabled = true;
 				}
 
 				var list = document.getElementsByClassName('btn-cancel');
-				for (var i = 0; i < list.length; i++)
+				for (let value of list)
 				{
-					list[i].disabled = true;
+					value.disabled = true;
 				}
 
 				clearInterval(sessioncounter);

@@ -463,28 +463,29 @@ AutoComplete.prototype.requestPattern = function (pattern)
 	req.onreadystatechange = function ()
 	{
 		if (req)
-
-		if (req.readyState == 4)
 		{
-			var items	= req.responseText.split('~~~');
-			var _items	= [];
-
-			for (var i = 1; i < items.length; i++)
+			if (req.readyState == 4)
 			{
-				_items[i - 1] = items[i];
+				var items	= req.responseText.split('~~~');
+				var _items	= [];
+	
+				for (var i = 1; i < items.length; i++)
+				{
+					_items[i - 1] = items[i];
+				}
+	
+				if (items.length < 2)
+				{
+					_items[0]	= false;
+					_items2		= [];
+				}
+				else
+				{
+					_items2 = _items;
+				}
+	
+				launchFinishComplete(items[0], _items[0], _items2);
 			}
-
-			if (items.length < 2)
-			{
-				_items[0]	= false;
-				_items2		= [];
-			}
-			else
-			{
-				_items2 = _items;
-			}
-
-			launchFinishComplete(items[0], _items[0], _items2);
 		}
 	};
 

@@ -420,13 +420,15 @@ WikiEdit.prototype.keyDown = function (e)
 		case 4181: // U
 		case 4169: // I
 			if (this.tab || Key != 9)
-			if (e.shiftKey || Key == 4181)
 			{
-				res = this.unindent();
-			}
-			else
-			{
-				res = this.insTag('  ', '', 0, 1);
+				if (e.shiftKey || Key == 4181)
+				{
+					res = this.unindent();
+				}
+				else
+				{
+					res = this.insTag('  ', '', 0, 1);
+				}
 			}
 			break;
 		case 2097: // 1
@@ -686,9 +688,9 @@ WikiEdit.prototype.unindent = function ()
 	var lines	= this.str.split('\n');
 	var rbeginb	= new RegExp('^' + this.begin);
 
-	for (var i = 0; i < lines.length; i++)
+	for (let value of lines)
 	{
-		var line = lines[i];
+		var line = value;
 
 		if (this.rbegin.test(line))
 		{
