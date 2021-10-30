@@ -1,14 +1,11 @@
 /* 
 ////////////////////////////////////////////////////////////////////////
 // ProtoEdit														  //
-// v. 2.21															//
+// v. 2.21															  //
 ////////////////////////////////////////////////////////////////////////
 
 For license see LICENSE.TXT
 */
-var isDOM		= document.getElementById; // DOM1 browser
-var ua			= navigator.userAgent.toLowerCase();
-
 class ProtoEdit
 {
 	constructor()
@@ -81,8 +78,8 @@ class ProtoEdit
 		else
 		{
 			this.area.focus();
-			let sel = document.selection.createRange();
-			sel.text = Tag + sel.text + Tag2;
+			let sel				= document.selection.createRange();
+			sel.text			= Tag + sel.text + Tag2;
 			this.area.focus();
 		}
 
@@ -140,11 +137,11 @@ class ProtoEdit
 
 	checkKey(k)
 	{
-		return k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 || k == 53 + 2048 || k == 54 + 2048 ||
-			k == 76 + 4096 || k == 76 + 2048 || k == 78 + 2048 || k == 79 + 2048 || k == 66 + 2048 || k == 83 + 2048 ||
-			k == 85 + 2048 || k == 72 + 2048 || k == 73 + 2048 || k == 74 + 2048 || k == 84 + 2048 || k == 2109 ||
-			k == 2124 + 32 || k == 2126 + 32 || k == 2127 + 32 || k == 2114 + 32 || k == 2131 + 32 ||
-			k == 2133 + 32 || k == 2121 + 32 || k == 2120 + 32 || k == 2122 + 32;
+		return	k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 || k == 53 + 2048 || k == 54 + 2048 ||
+				k == 76 + 4096 || k == 76 + 2048 || k == 78 + 2048 || k == 79 + 2048 || k == 66 + 2048 || k == 83 + 2048 ||
+				k == 85 + 2048 || k == 72 + 2048 || k == 73 + 2048 || k == 74 + 2048 || k == 84 + 2048 || k == 2109 ||
+				k == 2124 + 32 || k == 2126 + 32 || k == 2127 + 32 || k == 2114 + 32 || k == 2131 + 32 ||
+				k == 2133 + 32 || k == 2121 + 32 || k == 2120 + 32 || k == 2122 + 32;
 	}
 
 	addEvent(el, evname, func)

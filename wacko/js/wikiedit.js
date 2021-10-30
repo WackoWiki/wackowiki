@@ -1,11 +1,11 @@
 /*
 ////////////////////////////////////////////////////////////////////////
-// WikiEdit														   //
-// v. 3.21															//
-// supported:														 //
-//																	//
-// (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2021			 //
-//	 based on AutoIndent for textarea								 //
+// WikiEdit															  //
+// v. 3.21															  //
+// supported:														  //
+//																	  //
+// (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2021			  //
+//	 based on AutoIndent for textarea								  //
 //	 (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003				  //
 // Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko	  //
 //						 and Nikolay Jaremko						  //
@@ -132,7 +132,7 @@ class WikiEdit extends ProtoEdit
 	{
 		if (Skip)
 		{
-			var bb	= new RegExp('^([ ]*)([*][*])(.*)$');
+			var bb	= /^([ ]*)([*][*])(.*)$/;
 			q		= Text.match(bb);
 
 			if (q != null)
@@ -142,17 +142,18 @@ class WikiEdit extends ProtoEdit
 				return Text;
 			}
 
-			var w	= new RegExp('^([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$');
+			var w	= /^([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$/;
 			q		= Text.match(w);
 
-			if (q != null) {
+			if (q != null)
+			{
 				Text = q[1] + q[2] + Tag + q[7];
 
 				return Text;
 			}
 		}
 
-		var w	= new RegExp('^([ ]*)(.*)$');
+		var w	= /^([ ]*)(.*)$/;
 		var q	= Text.match(w);
 		Text	= q[1] + Tag + q[2];
 
@@ -161,7 +162,7 @@ class WikiEdit extends ProtoEdit
 
 	_RSum(Text, Tag)
 	{
-		var w	= new RegExp('^(.*)([ ]*)$');
+		var w	= /^(.*)([ ]*)$/;
 		var q	= Text.match(w);
 		Text	= q[1] + Tag + q[2];
 
@@ -234,8 +235,8 @@ class WikiEdit extends ProtoEdit
 		var fOut	= false;
 		var add		= 0;
 		var f		= false;
-		var w		= new RegExp('^  ( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))');
-		Text		= Text.replace(new RegExp('\r', 'g'), '');
+		var w		= /^  ( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))/;
+		Text		= Text.replace(/\r/g, '');
 		var lines	= Text.split('\n');
 
 		for (var i = 0; i < lines.length; i++)
@@ -384,7 +385,7 @@ class WikiEdit extends ProtoEdit
 		{
 			e.preventDefault();
 			e.stopPropagation();
-			
+
 			return false;
 		}
 
@@ -531,7 +532,8 @@ class WikiEdit extends ProtoEdit
 					// Shift + Enter
 					res = false;
 				}
-				else {
+				else
+				{
 					var text	= t.value;
 					text		= text.replace(/\r/g, '');
 					var sel1	= text.substr(0, t.selectionStart);
@@ -540,7 +542,8 @@ class WikiEdit extends ProtoEdit
 					re = new RegExp('(^|\n)(( +)((([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$');
 					q = sel1.match(re);
 
-					if (q != null) {
+					if (q != null)
+					{
 						if (!this.enterpressed)
 						{
 							if (q[3].length % 2 == 1)
@@ -549,7 +552,7 @@ class WikiEdit extends ProtoEdit
 							}
 							else
 							{
-								re = new RegExp('([1-9][0-9]*)([.]|[)])');
+								re = /([1-9][0-9]*)([.]|[)])/;
 								q2 = q[2].match(re);
 
 								if (q2 != null)
@@ -646,10 +649,10 @@ class WikiEdit extends ProtoEdit
 	setAreaContent(str)
 	{
 		var t		= this.area;
-		var q			= str.match(new RegExp('((.|\n)*)' + this.begin)); //?:
-		var l			= q[1].length;
+		var q		= str.match(new RegExp('((.|\n)*)' + this.begin)); //?:
+		var l		= q[1].length;
 		q			= str.match(new RegExp(this.begin + '((.|\n)*)' + this.end));
-		var l1			= q[1].length;
+		var l1		= q[1].length;
 		str			= str.replace(this.rbegin, '');
 		str			= str.replace(this.rend, '');
 		t.value		= str;
@@ -743,7 +746,7 @@ class WikiEdit extends ProtoEdit
 		var t = this.area;
 		t.focus();
 		this.getDefines();
-		var n = new RegExp('\n');
+		var n = /\n/;
 
 		if (!n.test(this.sel))
 		{
@@ -758,7 +761,7 @@ class WikiEdit extends ProtoEdit
 				this.sel = lnk + ' ' + sl;
 			}
 
-			let str			= this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
+			let str		= this.sel1 + '((' + this.trim(this.sel) + '))' + this.sel2;
 			t.value		= str;
 			t.setSelectionRange(this.sel1.length, str.length - this.sel2.length);
 

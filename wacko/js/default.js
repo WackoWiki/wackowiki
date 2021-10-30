@@ -1,5 +1,3 @@
-var isDOM	= document.getElementById;
-
 function undef(param)
 {
 	return param;
@@ -219,7 +217,7 @@ function userSessionHeartbeat(duration, name)
 				//alert(xhr.status + ': ' + (xhr.statusText ? xhr.statusText : 'Unknown')); // E.g.: 404: Not Found
 				var div = document.createElement('div');
 				div.className = 'msg error';
-				div.innerHTML = lang.SessionExpiredEditor.replace(new RegExp('\n', 'g'), '<br>');
+				div.innerHTML = lang.SessionExpiredEditor.replace(/\n/g, '<br>');
 				alert(lang.SessionExpiredEditor);
 				document.getElementsByName(name)['0'].prepend(div);
 

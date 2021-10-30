@@ -99,9 +99,9 @@ class AutoComplete
 		{
 			var pattern	= this.found_patterns[i];
 			var div		= '<div id=\'' + this.wikiedit.id + '_item_' + i + '\'' +
-				' onmouseover=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.selectInplace(' + '"' + i + '"' + ');\' ' +
-				' onclick=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.insertFound(' + '"' + pattern + '"' + ');\'>' +
-				'<img align=right src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
+							' onmouseover=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.selectInplace(' + '"' + i + '"' + ');\' ' +
+							' onclick=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.insertFound(' + '"' + pattern + '"' + ');\'>' +
+							'<img align=right src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
 			contents += div;
 		}
 
@@ -467,7 +467,7 @@ class AutoComplete
 	requestPattern(pattern)
 	{
 		var href	= this.handler + (this.handler.indexOf('?') >= 0 ? '&' : '?') + 'q=' + escape(pattern)
-			+ '&ta_id=' + escape(this.wikiedit.area.id) + '&_autocomplete=1&rnd=' + Math.random();
+					+ '&ta_id=' + escape(this.wikiedit.area.id) + '&_autocomplete=1&rnd=' + Math.random();
 		req			= new XMLHttpRequest();
 
 		req.onreadystatechange = function()
@@ -477,7 +477,8 @@ class AutoComplete
 				if (req.readyState == 4)
 				{
 					var items	= req.responseText.split('~~~');
-					var _items, _items2	= [];
+					var _items	= [];
+					var _items2;
 
 					for (var i = 1; i < items.length; i++)
 					{
