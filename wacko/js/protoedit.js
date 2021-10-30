@@ -6,8 +6,6 @@
 
 For license see LICENSE.TXT
 */
-var isDOM		= document.getElementById; // DOM1 browser
-var ua			= navigator.userAgent.toLowerCase();
 var ProtoEdit	= function () {
 	this.enabled	= true;
 	this.buttons	= [];

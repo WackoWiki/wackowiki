@@ -1,5 +1,3 @@
-var isDOM	= document.getElementById;
-
 function undef(param)
 {
 	return param;
