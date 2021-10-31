@@ -130,9 +130,11 @@ class WikiEdit extends ProtoEdit
 	// internal functions ----------------------------------------------------
 	_LSum(Tag, Text, Skip)
 	{
+		var q, w;
+		
 		if (Skip)
 		{
-			var bb	= /^([ ]*)([*][*])(.*)$/;
+			let bb	= /^([ ]*)([*][*])(.*)$/;
 			q		= Text.match(bb);
 
 			if (q != null)
@@ -142,7 +144,7 @@ class WikiEdit extends ProtoEdit
 				return Text;
 			}
 
-			var w	= /^([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$/;
+			w		= /^([ ]*)(([*]|([1-9]\d*|[a-zA-Z])([.]|[)]))( |))(.*)$/;
 			q		= Text.match(w);
 
 			if (q != null)
@@ -153,8 +155,8 @@ class WikiEdit extends ProtoEdit
 			}
 		}
 
-		var w	= /^([ ]*)(.*)$/;
-		var q	= Text.match(w);
+		w		= /^([ ]*)(.*)$/;
+		q		= Text.match(w);
 		Text	= q[1] + Tag + q[2];
 
 		return Text;
@@ -172,7 +174,8 @@ class WikiEdit extends ProtoEdit
 	_TSum(Text, Tag, Tag2, Skip)
 	{
 		var bb	= new RegExp('^([ ]*)' + this.begin + '([ ]*)([*][*])(.*)$');
-		var q		= Text.match(bb);
+		var q	= Text.match(bb);
+		var w;
 
 		if (q != null)
 		{
@@ -180,8 +183,8 @@ class WikiEdit extends ProtoEdit
 		}
 		else
 		{
-			var w	= new RegExp('^([ ]*)' + this.begin + '([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$');
-			q		= Text.match(w);
+			w	= new RegExp('^([ ]*)' + this.begin + '([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$');
+			q	= Text.match(w);
 
 			if (Skip && q != null)
 			{
@@ -189,8 +192,8 @@ class WikiEdit extends ProtoEdit
 			}
 			else
 			{
-				var w	= new RegExp('^(.*)' + this.begin + '([ ]*)(.*)$');
-				q		= Text.match(w);
+				w	= new RegExp('^(.*)' + this.begin + '([ ]*)(.*)$');
+				q	= Text.match(w);
 
 				if (q != null)
 				{
@@ -199,8 +202,8 @@ class WikiEdit extends ProtoEdit
 			}
 		}
 
-		var w	= new RegExp('([ ]*)' + this.end + '(.*)$');
-		q		= Text.match(w);
+		w	= new RegExp('([ ]*)' + this.end + '(.*)$');
+		q	= Text.match(w);
 
 		if (q != null)
 		{
@@ -235,7 +238,7 @@ class WikiEdit extends ProtoEdit
 		var fOut	= false;
 		var add		= 0;
 		var f		= false;
-		var w		= /^  ( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))/;
+		var w		= /^ {2}( *)(([*]|([1-9]\d*|[a-zA-Z])([.]|[)]))( |))/;
 		Text		= Text.replace(/\r/g, '');
 		var lines	= Text.split('\n');
 
@@ -313,8 +316,8 @@ class WikiEdit extends ProtoEdit
 					if first and last, then replacing both
 					else concatenating
 					 */
-					//	alert(lines[i].replace(new RegExp("\n", "g"), "|").replace(new RegExp(" ", "g"), "_"));
-					//	alert(lines[i+1].replace(new RegExp("\n", "g"), "|").replace(new RegExp(" ", "g"), "_"));
+					//	alert(lines[i].replace(/\n/g, '|').replace(/ /g, '_'));
+					//	alert(lines[i+1].replace(/\n/g, '|').replace(/ /g, '_'));
 					var l = this._TSum(lines[i], Tag, Tag2, skip);
 
 					if (add != 0 && onNewLine != 2)
@@ -352,16 +355,14 @@ class WikiEdit extends ProtoEdit
 		if (!this.enabled)
 			return;
 		if (!e)
-			var e = window.event;
+			e = window.event;
 		var q,
 			lines,
 			totalLines,
 			re,
 			str,
 			sel,
-			t,
 			q2,
-			e,
 			z;
 		var justenter	= false;
 		var wasEvent	= false;
@@ -552,7 +553,7 @@ class WikiEdit extends ProtoEdit
 							}
 							else
 							{
-								re = /([1-9][0-9]*)([.]|[)])/;
+								re = /([1-9]\d*)([.]|[)])/;
 								q2 = q[2].match(re);
 
 								if (q2 != null)
@@ -723,7 +724,7 @@ class WikiEdit extends ProtoEdit
 
 			if (fIn)
 			{
-				r += line.replace(/^(  )|\t/, '');
+				r += line.replace(/^(( {2})|\t)/, '');
 			}
 			else
 			{

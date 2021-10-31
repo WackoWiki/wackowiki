@@ -37,7 +37,7 @@ function all_init()
 
 	if (dbclick)
 	{
-		dclick(dbclick);
+		dclick();
 	}
 
 	if (timeout)
@@ -103,8 +103,6 @@ var DOTS = '#define x_width 2\n#define x_height 1\nstatic char x_bits[]={0x01}';
 // -----------------------------------------------------------------------------------------------
 // Confirms leaving the page when there are unsaved changes
 // Courtesy of http://htmlcoder.visions.ru/JavaScript/?26
-// slightly modified by Kuso Mendokusee
-// slightly modified by Kukutz
 var root = window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null;
 var cf_modified = false;
 //var WIN_CLOSE_MSG = '\n' + lang.NotSavedWarning + '\n';
@@ -201,7 +199,7 @@ if (root)
 	else if (root.attachEvent) root.attachEvent('onload', crit_init);
 }
 
-function userSessionHeartbeat(duration, name)
+function userSessionHeartbeat(duration, ename)
 {
 	var sessioncounter = setInterval(function ()
 	{
@@ -219,7 +217,7 @@ function userSessionHeartbeat(duration, name)
 				div.className = 'msg error';
 				div.innerHTML = lang.SessionExpiredEditor.replace(/\n/g, '<br>');
 				alert(lang.SessionExpiredEditor);
-				document.getElementsByName(name)['0'].prepend(div);
+				document.getElementsByName(ename)['0'].prepend(div);
 
 				var list;
 				list = document.getElementsByClassName('btn-ok');

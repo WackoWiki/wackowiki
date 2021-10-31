@@ -22,7 +22,7 @@ class AutoComplete
 		this.found_patterns_selected	= -1;
 		this.magic_mode					= false;
 
-		this.regexp_LinkLetter			= /[[~a-zA-ZёЁа-яА-Я\!\-\.\(\[\/0-9]/;
+		this.regexp_LinkLetter			= /[[~a-zA-ZёЁа-яА-Я\!\-\.\(\/0-9]/;
 
 		this.regexp_LinkWhole			= /^(([\(\[]){2})?((\!\/)|[A-ZЁА-Я\/])[a-zA-ZёЁа-яА-Я\-\.\/0-9]+$/;
 		this.regexp_LinkCamel			= /[a-zёа-я\.0-9][A-ZЁА-Я]/;
@@ -58,10 +58,11 @@ class AutoComplete
 		if (this.found_patterns === false)
 			return;
 		var _pos = this.found_patterns_selected;
+		var _item;
 
 		if (_pos >= 0)
 		{
-			var _item = document.getElementById(this.wikiedit.id + '_item_' + _pos);
+			_item = document.getElementById(this.wikiedit.id + '_item_' + _pos);
 
 			if (_item)
 			{
@@ -76,13 +77,13 @@ class AutoComplete
 
 		if (pos >= 0)
 		{
-			var _item = document.getElementById(this.wikiedit.id + '_item_' + pos);
+			_item							= document.getElementById(this.wikiedit.id + '_item_' + pos);
 			if (_item)
-				_item.className = 'ac-over-';
-			this.found_pattern = this.found_patterns[pos];
-			this.found_patterns_selected = pos;
-			var ac = document.getElementById(this.id);
-			ac.innerHTML = this.found_pattern;
+				_item.className				= 'ac-over-';
+			this.found_pattern				= this.found_patterns[pos];
+			this.found_patterns_selected	= pos;
+			var ac							= document.getElementById(this.id);
+			ac.innerHTML					= this.found_pattern;
 		}
 	}
 
@@ -257,10 +258,11 @@ class AutoComplete
 			}
 		}
 
+		var pattern;
 		// it is magic key (Ctrl + Space)
 		if (!this.found_pattern && key == 2080)
 		{
-			var pattern = this.checkPattern(this.getPattern(), 'magic');
+			pattern = this.checkPattern(this.getPattern(), 'magic');
 
 			if (pattern !== false)
 			{
@@ -280,8 +282,8 @@ class AutoComplete
 			// we will work only if user just stopped typing
 			// these lines-o-logic should be rewritten to use "timeout entity" feature of setTimeout
 			this.wait++;
-			var _pattern	= this.getPattern();
-			var pattern		= this.checkPattern(_pattern, this.magic_mode);
+			let _pattern	= this.getPattern();
+			pattern			= this.checkPattern(_pattern, this.magic_mode);
 
 			if (pattern !== false)
 			{
@@ -305,12 +307,13 @@ class AutoComplete
 		if (this.request_pattern === false)
 		{
 			this.reset();
+
 			return;
 		}
 
-		this.request_pattern = false;
-		var _pattern = this.getPattern();
-		var pattern = this.checkPattern(_pattern, magic_button_mode);
+		this.request_pattern	= false;
+		var _pattern			= this.getPattern();
+		var pattern				= this.checkPattern(_pattern, magic_button_mode);
 
 		if (pattern !== false)
 		{
@@ -405,8 +408,8 @@ class AutoComplete
 	// some "range" magic
 	getPattern()
 	{
-		var start = this.wikiedit.area.selectionStart;
-		var end = this.wikiedit.area.selectionEnd;
+		var start	= this.wikiedit.area.selectionStart;
+		var end		= this.wikiedit.area.selectionEnd;
 
 		// go left
 		var f = 1;
