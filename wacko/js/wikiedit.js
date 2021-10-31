@@ -144,7 +144,7 @@ class WikiEdit extends ProtoEdit
 				return Text;
 			}
 
-			w		= /^([ ]*)(([*]|([1-9]\d*|[a-zA-Z])([.]|[)]))( |))(.*)$/;
+			w		= /^([ ]*)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))(.*)$/u;
 			q		= Text.match(w);
 
 			if (q != null)
@@ -183,7 +183,7 @@ class WikiEdit extends ProtoEdit
 		}
 		else
 		{
-			w	= new RegExp('^([ ]*)' + this.begin + '([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$');
+			w	= new RegExp('^([ ]*)' + this.begin + '([ ]*)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))(.*)$', 'u');
 			q	= Text.match(w);
 
 			if (Skip && q != null)
@@ -238,7 +238,7 @@ class WikiEdit extends ProtoEdit
 		var fOut	= false;
 		var add		= 0;
 		var f		= false;
-		var w		= /^ {2}( *)(([*]|([1-9]\d*|[a-zA-Z])([.]|[)]))( |))/;
+		var w		= /^ {2}( *)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))/u;
 		Text		= Text.replace(/\r/g, '');
 		var lines	= Text.split('\n');
 
@@ -433,8 +433,8 @@ class WikiEdit extends ProtoEdit
 					{
 						res = this.unindent();
 					}
-
-					else {
+					else
+					{
 						res = this.insTag('  ', '', 0, 1);
 					}
 				}
@@ -540,8 +540,8 @@ class WikiEdit extends ProtoEdit
 					var sel1	= text.substr(0, t.selectionStart);
 					var sel2	= text.substr(t.selectionEnd);
 
-					re = new RegExp('(^|\n)(( +)((([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$');
-					q = sel1.match(re);
+					re			= new RegExp('(^|\n)(( +)((([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$', 'u');
+					q			= sel1.match(re);
 
 					if (q != null)
 					{
