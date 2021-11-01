@@ -80,12 +80,12 @@ ProtoEdit.prototype.insTag = function (Tag, Tag2)
 
 ProtoEdit.prototype.createToolbar = function (id)
 {
-	wh		= '';
-	html	= '<ul id="buttons_' + id + '" class="toolbar">' + '  ';
+	let wh		= '';
+	let html	= '<ul id="buttons_' + id + '" class="toolbar">' + '  ';
 
-	for (var i = 0; i < this.buttons.length; i++)
+	for (let value of this.buttons)
 	{
-		var btn = this.buttons[i];
+		var btn = value;
 
 		if (btn.name == ' ')
 		{
@@ -97,7 +97,8 @@ ProtoEdit.prototype.createToolbar = function (id)
 		}
 		else
 		{
-			html += ' <li class="we-'+ btn.name + '"><div id="' + btn.name + '_' + id + '" onmouseover=\'this.className="btn-hover";\' '
+			html += ' <li class="we-' + btn.name + '"><div id="' + btn.name + '_' + id + '" '
+				+ 'onmouseover=\'this.className="btn-hover";\' '
 				+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 				+ 'onclick="this.className=\'btn-pressed\';' + btn.actionName + '('
 				+ btn.actionParams + ')"><img src="' + this.imagesPath
@@ -128,18 +129,11 @@ ProtoEdit.prototype.addButton = function (name, desc, actionParams, actionName)
 
 ProtoEdit.prototype.checkKey = function (k)
 {
-	if (k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 || k == 53 + 2048 || k == 54 + 2048 ||
-		k == 76 + 4096 || k == 76 + 2048 || k == 78 + 2048 || k == 79 + 2048 || k == 66 + 2048 || k == 83 + 2048 ||
-		k == 85 + 2048 || k == 72 + 2048 || k == 73 + 2048 || k == 74 + 2048 || k == 84 + 2048 || k == 2109 ||
-		k == 2124 + 32 || k == 2126 + 32 || k == 2127 + 32 || k == 2114 + 32 || k == 2131 + 32 ||
-		k == 2133 + 32 || k == 2121 + 32 || k == 2120 + 32 || k == 2122 + 32)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+	return	k == 85 + 4096 || k == 73 + 4096 || k == 49 + 2048 || k == 50 + 2048 || k == 51 + 2048 || k == 52 + 2048 || k == 53 + 2048 || k == 54 + 2048 ||
+			k == 76 + 4096 || k == 76 + 2048 || k == 78 + 2048 || k == 79 + 2048 || k == 66 + 2048 || k == 83 + 2048 ||
+			k == 85 + 2048 || k == 72 + 2048 || k == 73 + 2048 || k == 74 + 2048 || k == 84 + 2048 || k == 2109 ||
+			k == 2124 + 32 || k == 2126 + 32 || k == 2127 + 32 || k == 2114 + 32 || k == 2131 + 32 ||
+			k == 2133 + 32 || k == 2121 + 32 || k == 2120 + 32 || k == 2122 + 32;
 };
 
 ProtoEdit.prototype.addEvent = function (el, evname, func)

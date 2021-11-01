@@ -142,7 +142,7 @@ WikiEdit.prototype._LSum = function (Tag, Text, Skip)
 			return Text;
 		}
 
-		var w	= new RegExp('^([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$');
+		var w	= new RegExp('^([ ]*)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))(.*)$', 'u');
 		q		= Text.match(w);
 
 		if (q != null)
@@ -172,7 +172,8 @@ WikiEdit.prototype._RSum = function (Text, Tag)
 WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 {
 	var bb	= new RegExp('^([ ]*)' + this.begin + '([ ]*)([*][*])(.*)$');
-	q		= Text.match(bb);
+	var q	= Text.match(bb);
+	var w;
 
 	if (q != null)
 	{
@@ -180,8 +181,8 @@ WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 	}
 	else
 	{
-		var w	= new RegExp('^([ ]*)' + this.begin + '([ ]*)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))(.*)$');
-		q		= Text.match(w);
+		w	= new RegExp('^([ ]*)' + this.begin + '([ ]*)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))(.*)$', 'u');
+		q	= Text.match(w);
 
 		if (Skip && q != null)
 		{
@@ -189,8 +190,8 @@ WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 		} 
 		else
 		{
-			var w = new RegExp('^(.*)' + this.begin + '([ ]*)(.*)$');
-			var q = Text.match(w);
+			w = new RegExp('^(.*)' + this.begin + '([ ]*)(.*)$');
+			q = Text.match(w);
 
 			if (q != null)
 			{
@@ -199,18 +200,18 @@ WikiEdit.prototype._TSum = function (Text, Tag, Tag2, Skip)
 		}
 	}
 
-	var w = new RegExp('([ ]*)' + this.end + '(.*)$');
-	var q = Text.match(w);
+	w = new RegExp('([ ]*)' + this.end + '(.*)$');
+	q = Text.match(w);
 
 	if (q != null)
 	{
-		var w	= new RegExp('^(.*)' + this.end);
+		w		= new RegExp('^(.*)' + this.end);
 		var q1	= Text.match(w);
 
 		if (q1 != null)
 		{
 			var s	= q1[1];
-			ch		= s.substring(s.length - 1, s.length);
+			var ch	= s.substring(s.length - 1, s.length);
 
 			while (ch == ' ')
 			{
@@ -234,7 +235,7 @@ WikiEdit.prototype.MarkUp = function (Tag, Text, Tag2, onNewLine, expand, strip)
 	var fOut 	= false;
 	var add		= 0;
 	var f		= false;
-	var w		= new RegExp('^  ( *)(([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))');
+	var w		= new RegExp('^ {2}( *)(([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))', 'u');
 	Text		= Text.replace(new RegExp('\r', 'g'), '');
 	var lines	= Text.split('\n');
 
@@ -348,24 +349,21 @@ WikiEdit.prototype.keyDown = function (e)
 {
 	if (!this.enabled) return;
 	if (!e) var e = window.event;
-	var l,
-		q,
-		l1,
+	var q,
+		lines,
+		totalLines,
 		re,
-		tr,
 		str,
-		t,
-		tr2,
-		tr1,
-		r1,
-		re,
-		q,
-		e;
-	var justenter = false;
-	var wasEvent = remundo = res = false;
-	var noscroll = false;
-	var t = this.area;
-	var Key = e.keyCode;
+		sel,
+		q2,
+		z;
+	var justenter	= false;
+	var wasEvent	= false;
+	var res			= false;
+	var remundo		= false;
+	var noscroll	= false;
+	var t			= this.area;
+	var Key			= e.keyCode;
 	if (Key == 0) Key = e.key;
 	if (Key == 8 || Key == 13 || Key == 32 || (Key > 45 && Key < 91) || (Key > 93 && Key < 112) 
 		|| (Key > 123 && Key < 144) || (Key > 145 && Key < 255))
@@ -387,10 +385,10 @@ WikiEdit.prototype.keyDown = function (e)
 		return false;
 	}
 
-	var scroll	= t.scrollTop;
-	undotext	= t.value;
-	undosels	= t.selectionStart;
-	undosele	= t.selectionEnd;
+	var scroll		= t.scrollTop;
+	var undotext	= t.value;
+	var undosels	= t.selectionStart;
+	var undosele	= t.selectionEnd;
 
 	str	= t.value.substr(t.selectionStart, t.selectionEnd - t.selectionStart);
 	sel	= (str.length > 0);
@@ -528,7 +526,7 @@ WikiEdit.prototype.keyDown = function (e)
 				var sel1	= text.substr(0, t.selectionStart);
 				var sel2	= text.substr(t.selectionEnd);
 
-				re			= new RegExp('(^|\n)(( +)((([*]|([1-9][0-9]*|[a-zA-Z])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$');
+				re			= new RegExp('(^|\n)(( +)((([*]|([1-9]\d*|[\p{Ll}\p{Lu}])([.]|[)]))( |))|))(' + (this.enterpressed ? '\\s' : '[^\r\n]') + '*)' + '$', 'u');
 				q			= sel1.match(re);
 
 				if (q != null)
@@ -585,7 +583,7 @@ WikiEdit.prototype.keyDown = function (e)
 					res = true;
 				}
 
-				var justenter = true;
+				justenter = true;
 			}
 
 			break;
@@ -641,7 +639,7 @@ WikiEdit.prototype.setAreaContent = function (str)
 	q		= str.match(new RegExp('((.|\n)*)' + this.begin)); //?:
 	l		= q[1].length;
 	q		= str.match(new RegExp(this.begin + '((.|\n)*)' + this.end));
-	l1		= q[1].length;
+	var l1	= q[1].length;
 	str		= str.replace(this.rbegin, '');
 	str		= str.replace(this.rend, '');
 	t.value	= str;
@@ -670,7 +668,7 @@ WikiEdit.prototype.insTag = function (Tag, Tag2, onNewLine, expand, strip)
 	t.focus();
 	this.getDefines();
 	// alert(Tag + " | " + Tag2 + " | " + onNewLine + " | " + expand + " | " + strip);
-	str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
+	var str = this.MarkUp(Tag, this.str, Tag2, onNewLine, expand, strip);
 	this.setAreaContent(str);
 
 	return true;
@@ -686,22 +684,22 @@ WikiEdit.prototype.unindent = function ()
 	var lines	= this.str.split('\n');
 	var rbeginb	= new RegExp('^' + this.begin);
 
-	for (var i = 0; i < lines.length; i++)
+	for (let value of lines)
 	{
-		var line = lines[i];
+		var line = value;
 
 		if (this.rbegin.test(line))
 		{
-			fIn				= true;
-			var rbeginb		= new RegExp('^' + this.begin + '([ ]*)');
-			line			= line.replace(rbeginb, '$1' + this.begin); // catch first line
+			fIn			= true;
+			rbeginb		= new RegExp('^' + this.begin + '([ ]*)');
+			line		= line.replace(rbeginb, '$1' + this.begin); // catch first line
 		}
 
 		if (this.rendb.test(line))
 		{
 			fIn = false;
 		}
-		
+
 		if (r != '')
 		{
 			r += '\n';
@@ -709,7 +707,7 @@ WikiEdit.prototype.unindent = function ()
 
 		if (fIn)
 		{
-			r += line.replace(/^(  )|\t/, '');
+			r += line.replace(/^(( {2})|\t)/, '');
 		}
 		else
 		{

@@ -22,7 +22,7 @@ function sign(x)
 }
 
 var wikiedit;
-var dbclick;
+var dbclick = 'page';
 var edit;
 var timeout;
 var name;
@@ -37,7 +37,7 @@ function all_init()
 
 	if (dbclick)
 	{
-		dclick(dbclick);
+		dclick();
 	}
 
 	if (timeout)
@@ -51,8 +51,8 @@ function all_init()
 // freecap
 function new_freecap()
 {
-	separator	= '?';
-	thesrc		= document.getElementById('freecap').src;
+	var separator	= '?';
+	var thesrc		= document.getElementById('freecap').src;
 
 	// routing with rewrite OFF
 	if (thesrc.indexOf('?page=') !== - 1)
@@ -68,21 +68,22 @@ function new_freecap()
 	document.getElementById('freecap').src = thesrc + separator + Math.round(Math.random() * 100000);
 }
 
-var dbclick = 'page';
-
-function dclick(frame)
+function dclick()
 {
 	if (edit)
-
-	document.addEventListener('dblclick', mouseClick, true);
+	{
+		document.addEventListener('dblclick', mouseClick, true);
+	}
 }
 
 function mouseClick(event)
 {
-	op = event.target;
+	var op = event.target;
 
 	while (op != null && op.className != dbclick && op.tagName != 'BODY')
-	op = op.parentNode;
+	{
+		op = op.parentNode;
+	}
 
 	if (op != null && op.className == dbclick)
 	{
@@ -102,21 +103,21 @@ var DOTS = '#define x_width 2\n#define x_height 1\nstatic char x_bits[]={0x01}';
 // -----------------------------------------------------------------------------------------------
 // Confirms leaving the page when there are unsaved changes
 // Courtesy of http://htmlcoder.visions.ru/JavaScript/?26
-// slightly modified by Kuso Mendokusee
-// slightly modified by Kukutz
 var root = window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null;
 var cf_modified = false;
 //var WIN_CLOSE_MSG = '\n' + lang.NotSavedWarning + '\n';
 
 function set_modified(e, strict_e)
 {
+	var el;
+
 	if (window.event && !strict_e)
 	{
-		var el = window.event.target;
+		el = window.event.target;
 	}
 	else if (e != null)
 	{
-		var el = e.currentTarget;
+		el = e.currentTarget;
 	}
 
 	if (el != null)
@@ -148,19 +149,12 @@ function crit_init()
 {
 	if (undef() == root.onbeforeunload) root.onbeforeunload = check_cf;
 	else return;
-	
-	var thisformcf;
+
+	var thisformcf, oCurrForm;
 
 	for (var i = 0; oCurrForm = document.forms[i]; i++)
 	{
-		if (oCurrForm.getAttribute('cf'))
-		{
-			thisformcf = true;
-		}
-		else
-		{
-			thisformcf = false;
-		}
+		thisformcf = !!oCurrForm.getAttribute('cf');
 
 		if (oCurrForm.getAttribute('nocf'))
 		{
@@ -170,25 +164,26 @@ function crit_init()
 		for (var j = 0; oCurrFormElem = oCurrForm.elements[j]; j++)
 		{
 			if (thisformcf || oCurrFormElem.getAttribute('cf'))
-
-			if (!oCurrFormElem.getAttribute('nocf'))
 			{
-				if (oCurrFormElem.addEventListener)
+				if (!oCurrFormElem.getAttribute('nocf'))
 				{
-					oCurrFormElem.addEventListener('change', set_modified, false);
-				}
-				else if (oCurrFormElem.attachEvent)
-				{
-					oCurrFormElem.attachEvent('onchange', set_modified);
-				}
-
-				if (oCurrFormElem.addEventListener)
-				{
-					oCurrFormElem.addEventListener('keypress', set_modified, false);
-				}
-				else if (oCurrFormElem.attachEvent)
-				{
-					oCurrFormElem.attachEvent('onkeypress', set_modified);
+					if (oCurrFormElem.addEventListener)
+					{
+						oCurrFormElem.addEventListener('change', set_modified, false);
+					}
+					else if (oCurrFormElem.attachEvent)
+					{
+						oCurrFormElem.attachEvent('onchange', set_modified);
+					}
+	
+					if (oCurrFormElem.addEventListener)
+					{
+						oCurrFormElem.addEventListener('keypress', set_modified, false);
+					}
+					else if (oCurrFormElem.attachEvent)
+					{
+						oCurrFormElem.attachEvent('onkeypress', set_modified);
+					}
 				}
 			}
 		}
@@ -204,7 +199,7 @@ if (root)
 	else if (root.attachEvent) root.attachEvent('onload', crit_init);
 }
 
-function userSessionHeartbeat(duration, name)
+function userSessionHeartbeat(duration, ename)
 {
 	var sessioncounter = setInterval(function ()
 	{
@@ -220,9 +215,9 @@ function userSessionHeartbeat(duration, name)
 				//alert(xhr.status + ': ' + (xhr.statusText ? xhr.statusText : 'Unknown')); // E.g.: 404: Not Found
 				var div = document.createElement('div');
 				div.className = 'msg error';
-				div.innerHTML = lang.SessionExpiredEditor.replace(new RegExp('\n', 'g'), '<br>');
+				div.innerHTML = lang.SessionExpiredEditor.replace(/\n/g, '<br>');
 				alert(lang.SessionExpiredEditor);
-				document.getElementsByName(name)['0'].prepend(div);
+				document.getElementsByName(ename)['0'].prepend(div);
 
 				var list = document.getElementsByClassName('btn-ok');
 				for (var i = 0; i < list.length; i++)
