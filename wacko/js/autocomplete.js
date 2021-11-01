@@ -22,10 +22,10 @@ class AutoComplete
 		this.found_patterns_selected	= -1;
 		this.magic_mode					= false;
 
-		this.regexp_LinkLetter			= /[[~\p{Ll}\p{Lu}\p{Ll}\p{Lu}!\-.(\/0-9]/u;
+		this.regexp_LinkLetter			= /[[~\p{Ll}\p{Lu}!\-.(\/0-9]/u;
 
-		this.regexp_LinkWhole			= /^(([(\[]){2})?((!\/)|[\p{Lu}\/])[\p{Ll}\p{Lu}\p{Ll}\p{Lu}\-.\/0-9]+$/u;
-		this.regexp_LinkCamel			= /[\p{Ll}.0-9]\p{Lu}/u;
+		this.regexp_LinkWhole			= /^(([(\[]){2})?((!\/)|[\p{Lu}\/])[\p{Ll}\p{Lu}\-.\/0-9]+$/u;
+		this.regexp_LinkCamel			= /[\p{Ll}.0-9][\p{Lu}]/u;
 		this.regexp_LinkStrict			= /^([(\[]){2}.{2,}/;
 		this.regexp_LinkSubpage			= /^!\/.{2,}/;
 	}
