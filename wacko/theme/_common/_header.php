@@ -85,25 +85,27 @@ if (!empty($this->db->ext_bad_behavior))
 	$tpl->bb2 = bb2_timer();
 }
 
-if ($this->method == 'edit')
-{
-	$tpl->edit_lang = $this->user_lang;
-}
-
 // Doubleclick edit feature.
-// Enabled only for registered users who don't switch it off (requires class=page in show handler).
-if ($user = $this->get_user())
-{
-	$doubleclick = @$user['doubleclick_edit'];
-}
-else
-{
-	$doubleclick = $this->has_access('write');
-}
+// Enabled only for registered users who don't turn it off (requires class=page in show handler).
+$user = $this->get_user();
+$doubleclick = $user
+	? @$user['doubleclick_edit']
+	: $this->has_access('write');
 
 if ($doubleclick && $this->method == 'show')
 {
 	$tpl->doubleclick_href = $this->href('edit');
+}
+
+if ($this->method == 'edit')
+{
+	$tpl->edit_lang	= $this->user_lang;
+
+	// Autocomplete, enabled only for registered users who turn it on.
+	if ($user['autocomplete'])
+	{
+		$tpl->edit_ac = true;
+	}
 }
 
 $tpl->additions = $this->get_html_addition('header');
