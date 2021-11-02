@@ -6,10 +6,10 @@ if (!defined('IN_WACKO'))
 }
 
 // action/feed.php - WackoWiki Action to integrate RSS/Atom Feeds
-// requires SimplePie: http://simplepie.org
+// requires SimplePie: https://simplepie.org
 /* USAGE:
 	{{feed
-		url="http://...[|http://...|http://...]"
+		url="https://...[|https://...|https://...]"
 		[title="News feed title|no"]
 			"text" - displayed as title
 			"no" - means show no title
