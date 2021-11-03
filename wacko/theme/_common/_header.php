@@ -102,7 +102,7 @@ if ($this->method == 'edit')
 	$tpl->edit_lang	= $this->user_lang;
 
 	// Autocomplete, enabled only for registered users who turn it on.
-	if ($user['autocomplete'])
+	if (@$user['autocomplete'])
 	{
 		$tpl->edit_ac = true;
 	}
