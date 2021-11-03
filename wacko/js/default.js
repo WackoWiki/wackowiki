@@ -219,16 +219,17 @@ function userSessionHeartbeat(duration, ename)
 				alert(lang.SessionExpiredEditor);
 				document.getElementsByName(ename)['0'].prepend(div);
 
-				var list = document.getElementsByClassName('btn-ok');
-				for (var i = 0; i < list.length; i++)
+				var list;
+				list = document.getElementsByClassName('btn-ok');
+				for (let value of list)
 				{
-					list[i].disabled = true;
+					value.disabled = true;
 				}
 
-				var list = document.getElementsByClassName('btn-cancel');
-				for (var i = 0; i < list.length; i++)
+				list = document.getElementsByClassName('btn-cancel');
+				for (let value of list)
 				{
-					list[i].disabled = true;
+					value.disabled = true;
 				}
 
 				clearInterval(sessioncounter);
