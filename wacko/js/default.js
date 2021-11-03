@@ -12,22 +12,15 @@ window.onload = function ()
 	// alert('Load Test: OK');
 	all_init();
 };
+
 var ok;
-
-function sign(x)
-{
-	if (x > 0) return 1;
-	if (x < 0) return - 1;
-	return 0;
-}
-
 var wikiedit;
 var dbclick = 'page';
 var edit;
 var timeout;
 var name;
 
-//initialization everything
+// initialize everything
 function all_init()
 {
 	if (wikiedit)
