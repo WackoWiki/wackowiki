@@ -29,22 +29,19 @@ if ($this->can_upload(true))
 	}
 
 	// if you have no write access and you are not admin, you can upload only "global" file
-	if (!($this->has_access('read') && $this->has_access('write') && $this->has_access('upload')))
+	if (!(	$this->has_access('read')
+		 && $this->has_access('write')
+		 && $this->has_access('upload'))
+		&& !$this->is_admin())
 	{
-		if (!$this->is_admin())
-		{
-			$global = 'global';
-		}
+		$global = 'global';
 	}
 
 	$maxfilesize = $this->db->upload_max_size;
 
-	if ($maxsize)
+	if ($maxsize && ($maxfilesize > 1 * $maxsize))
 	{
-		if ($maxfilesize > 1 * $maxsize)
-		{
-			$maxfilesize = 1 * $maxsize;
-		}
+		$maxfilesize = 1 * $maxsize;
 	}
 
 	$tpl->u_maxfilesize = $maxfilesize;
