@@ -12,7 +12,7 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
+		'users'			=> 'Utenti',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
@@ -35,7 +35,7 @@ $ap_translation = [
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Tempo rimasto: %1 minuti',
-	'ApVersion'					=> 'version',
+	'ApVersion'					=> 'versione',
 
 	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
@@ -82,7 +82,7 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'Email',
+		'name'		=> 'E-mail',
 		'title'		=> 'Email settings',
 	],
 
@@ -100,19 +100,19 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
+		'name'		=> 'Notifiche',
 		'title'		=> 'Notifications settings',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> 'Pagine',
 		'title'		=> 'Pages and site parameters',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Permessi',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -130,7 +130,7 @@ $ap_translation = [
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
+		'name'		=> 'Carica',
 		'title'		=> 'Attachment settings',
 	],
 
@@ -238,13 +238,13 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> 'Gruppi',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> 'Utenti',
 		'title'		=> 'User management',
 	],
 
@@ -266,18 +266,21 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
-	'LanguageSection'			=> 'Language',
+
+	'LanguageSection'			=> 'Lingua',
 	'DefaultLanguage'			=> 'Default language',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
-	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
-	'CommentSection'			=> 'Comments',
+	'AllowedLanguagesInfo'		=> 'Si consiglia di selezionare solo l\'insieme delle lingue che si desidera utilizzare, altre saggiamente tutte le lingue sono selezionate.',
+
+	'CommentSection'			=> 'Commenti',
 	'AllowComments'				=> 'Allow comments',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel',
 	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
@@ -338,7 +341,7 @@ $ap_translation = [
 	'EditingSection'			=> 'Editing',
 	'EditSummary'				=> 'Edit summary',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
-	'MinorEdit'					=> 'Minor edit',
+	'MinorEdit'					=> 'Modifica minore',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
@@ -364,7 +367,7 @@ $ap_translation = [
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
 	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
 
-	'LogoOff'					=> 'Off',
+	'LogoOff'					=> 'Spento',
 	'LogoOnly'					=> 'logo',
 	'LogoAndTitle'				=> 'logo and title',
 
@@ -516,7 +519,7 @@ $ap_translation = [
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
 	'CaptchaEdit'				=> 'Edit page',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
-	'CaptchaRegistration'		=> 'Registration',
+	'CaptchaRegistration'		=> 'Registrazione',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
@@ -649,7 +652,7 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Timezone',
+	'Timezone'					=> 'Fuso orario',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
@@ -664,7 +667,7 @@ $ap_translation = [
 	'NofollowInfo'				=> 'Istruire alcuni motori di ricerca che il link ipertestuale non deve influenzare il posizionamento dei link target nell\'indice dei motori di ricerca. Aggiunge <code>rel="nofollow"</code> alla sintassi del link.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
-	'ShowSpaces'				=> 'Show spaces in WikiNames',
+	'ShowSpaces'				=> 'Mostra gli spazi nei NomiWiki',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
@@ -695,7 +698,6 @@ $ap_translation = [
 	'LicenseSection'			=> 'Licenza',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
-
 	'EnableLicense'				=> 'Enable License',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
 	'LicensePerPage'			=> 'License per page',
@@ -705,15 +707,15 @@ $ap_translation = [
 	'RootPage'					=> 'Home page',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Privacy Policy',
+	'PrivacyPage'				=> 'Informativa sulla privacy',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
 	'TermsPage'					=> 'Policies and Regulations',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
-	'SearchPage'				=> 'Search',
+	'SearchPage'				=> 'Ricerca',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
-	'RegistrationPage'			=> 'Registration',
+	'RegistrationPage'			=> 'Registrazione',
 	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
 	'LoginPage'					=> 'User login',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
@@ -723,11 +725,11 @@ $ap_translation = [
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list',
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
-	'CategoryPage'				=> 'Category',
+	'CategoryPage'				=> 'Categoria',
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
-	'GroupsPage'				=> 'Groups',
+	'GroupsPage'				=> 'Gruppi',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'ChangesPage'				=> 'Recent changes',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
@@ -747,7 +749,6 @@ $ap_translation = [
 	'IndexPageInfo'				=> 'Pagina con l\'elenco di tutte le pagine (action %1).',
 	'RandomPage'				=> 'Casuale',
 	'RandomPageInfo'			=> 'Carica una pagina casuale  (action %1).',
-
 
 
 	// Notification settings
@@ -905,7 +906,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Database converted',
 	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
 
-	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
+	'LogColumnsToStrict'		=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
@@ -933,7 +934,7 @@ $ap_translation = [
 	'LogNoMatch'				=> 'No events that meet the criteria',
 	'LogDate'					=> 'Date',
 	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Username',
+	'LogUsername'				=> 'Nome utente',
 	'LogLevels'	=> [
 		'1'		=> 'critical',
 		'2'		=> 'highest',
@@ -954,7 +955,7 @@ $ap_translation = [
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MassemailSection'			=> 'Mass email',
-	'MessageSubject'			=> 'Subject',
+	'MessageSubject'			=> 'Soggetto',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Il tuo messaggio',
 	'YourMessageInfo'			=> 'Puoi scrivere soltanto testo normale. Tutto il resto sarà rimosso prima della trasmissione.',
@@ -1068,14 +1069,14 @@ $ap_translation = [
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'all',
+	'FilesAll'					=> 'tutti',
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'Ripristina',
-	'BackupRemove'				=> 'Remove',
+	'BackupRemove'				=> 'Rimuovere',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1085,7 +1086,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'EditButton'				=> 'Edit',
+	'EditButton'				=> 'Modificare',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Sei sicuro di voler rimuovere l\'utente %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
@@ -1115,7 +1116,7 @@ $ap_translation = [
 
 	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'Descrizione',
-	'GroupsModerator'			=> 'Moderator',
+	'GroupsModerator'			=> 'Moderatore',
 	'GroupsOpen'				=> 'Open',
 	'GroupsActive'				=> 'Active',
 	'GroupsTip'					=> 'Click to edit Group',
@@ -1128,7 +1129,7 @@ $ap_translation = [
 	'GroupsRename'				=> 'Rename the group %1 to',
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
 	'GroupsDelete'				=> 'Sei sicuro di voler rimuovere il gruppo %1?',
-	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+	'GroupsDeleteInfo'			=> '* Nota: Le modifiche riguardano tutti i membri assegnati a quel gruppo.',
 	'GroupsIsSystem'			=> 'Il gruppo %1 appartiene al sistema e non può essere rimosso.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
@@ -1226,7 +1227,7 @@ $ap_translation = [
 
 	'BbSummary'					=> 'Summary',
 	'BbLog'						=> 'Log',
-	'BbSettings'				=> 'Settings',
+	'BbSettings'				=> 'Preferenze',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log
@@ -1277,6 +1278,5 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Enable Reverse Proxy',
 	'BbReverseProxyHeader'		=> 'Header containing Internet clients IP address',
 	'BbReverseProxyAddresses'	=> 'IP address or CIDR format address ranges for your proxy servers (one per line)',
-
 
 ];

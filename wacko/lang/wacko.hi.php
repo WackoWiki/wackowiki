@@ -20,7 +20,7 @@ $wacko_translation = [
 	'SetButton'					=> 'Set',
 	'ResetButton'				=> 'पुनरस्थापित',
 	'RenameButton'				=> 'Rename',
-	'DeleteButton'				=> 'Delete',
+	'DeleteButton'				=> 'मिटाएँ',
 	'RestoreButton'				=> 'पुनर्स्थापित',
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> 'भेजिए',
@@ -387,7 +387,7 @@ $wacko_translation = [
 	'LastDays'					=> 'last %1 days',
 	'DomainsSitesPages'			=> 'Domains/sites pages linking to  %1 (%2)  (<a href="%3">see list of different URLs</a>):',
 	'DomainsSitesPagesGlobal'	=> 'Domains/sites linking to this WackoWiki (<a href="%1">see list of different URLs</a>):',
-	'ViewReferrersPage'			=> 'to page',
+	'ViewReferrersPage'			=> 'पृष्ठ पर जाएँ',
 	'ViewReferrersPerPage'		=> 'per page',
 	'ViewReferrersByTime'		=> 'by time',
 	'ViewReferrersGlobal'		=> 'वैश्विक',
@@ -424,7 +424,7 @@ $wacko_translation = [
 	'RevisionRestored'			=> 'Revision restored.',
 	'LocalFilesRestored'		=> 'Local files restored.',
 
-	'PrintVersion'				=> 'Print version',
+	'PrintVersion'				=> 'छापा',
 	'PrintText'					=> 'छापिए',
 	'LinkedPages'				=> 'Linked pages',
 	'NoLinkedPages'				=> 'There are no linked pages',
@@ -861,7 +861,7 @@ $wacko_translation = [
 	// attachments
 	'Attachments'				=> 'संलग्नक',
 	'Attachment'				=> 'संलग्नी',
-	'AttachmentsToPage'			=> 'to page',
+	'AttachmentsToPage'			=> 'पृष्ठ पर जाएँ',
 	'AttachmentsToCluster'		=> 'cluster',
 	'AttachmentsByTime'			=> 'by time',
 	'AttachmentsGlobal'			=> 'वैश्विक',
@@ -1053,7 +1053,7 @@ $wacko_translation = [
 
 	// moderation handler
 	'Moderation'				=> 'Moderation',
-	'Topics'					=> 'topics',
+	'Topics'					=> 'विषय',
 	'ModerateSection'			=> 'section / page ',
 
 	'NotModerator'				=> 'You do not have authority to moderate this page / chapter',

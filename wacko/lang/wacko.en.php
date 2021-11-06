@@ -40,7 +40,7 @@ $wacko_translation = [
 	// registration panel
 	'RegistrationWelcome'		=> 'New user registration:',
 	'RegistrationPassword'		=> 'Password',
-	'RegistrationButton'		=> 'Register me!',
+	'RegistrationButton'		=> 'Register me',
 	'RegistrationUserNameOwned'	=> 'This username is already registered. Please choose another.',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
@@ -1330,7 +1330,7 @@ $wacko_translation = [
 	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
 	'LogPageCreated'			=> 'Created new page [[/%1]]',
 	'LogPagePropertiesUpdated'	=> 'Updated page properties [[/%1]]',
-	'LogPageOwnershipClaimed'	=> 'The user got ownership of the page [[/%1]]', // please correct
+	'LogPageOwnershipClaimed'	=> 'The user got ownership of the page [[/%1]]',
 	'LogPollCreated'			=> 'A new poll with ID %1',
 	'LogPollChanged'			=> 'Changed content of the poll with ID %1',
 	'LogPollStarted'			=> 'Started poll with ID %1',

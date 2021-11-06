@@ -29,13 +29,13 @@ $ap_translation = [
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
-	'ApHomePage'				=> 'Home Page',
+	'ApHomePage'				=> 'KoduLeht',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Logi välja',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
-	'ApVersion'					=> 'version',
+	'ApVersion'					=> 'versioon',
 
 	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
@@ -45,10 +45,10 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
-	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
+	'Cancel'					=> 'Loobun',
+	'Add'						=> 'Lisama',
+	'Edit'						=> 'Muuda',
+	'Remove'					=> 'Eemalda',
 	'Enabled'					=> 'Lubatud',
 	'Disabled'					=> 'Keelatud',
 	'Mandatory'					=> 'Mandatory',
@@ -82,7 +82,7 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'Email',
+		'name'		=> 'E-post',
 		'title'		=> 'Email settings',
 	],
 
@@ -100,13 +100,13 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
+		'name'		=> 'Teated',
 		'title'		=> 'Notifications settings',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> 'Leheküljed',
 		'title'		=> 'Pages and site parameters',
 	],
 
@@ -130,7 +130,7 @@ $ap_translation = [
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
+		'name'		=> 'Üleslaadimine',
 		'title'		=> 'Attachment settings',
 	],
 
@@ -266,18 +266,21 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
-	'LanguageSection'			=> 'Language',
+
+	'LanguageSection'			=> 'Keel',
 	'DefaultLanguage'			=> 'Default language',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
 	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
-	'CommentSection'			=> 'Comments',
+
+	'CommentSection'			=> 'Kommentaarid',
 	'AllowComments'				=> 'Allow comments',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+
 	'ToolbarSection'			=> 'Toolbar',
 	'CommentsPanel'				=> 'Comments panel',
 	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
@@ -336,9 +339,9 @@ $ap_translation = [
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
 	'EditingSection'			=> 'Editing',
-	'EditSummary'				=> 'Edit summary',
+	'EditSummary'				=> 'Redigeeri kokkuvõte',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
-	'MinorEdit'					=> 'Minor edit',
+	'MinorEdit'					=> 'Pisimuudatus',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
@@ -449,8 +452,8 @@ $ap_translation = [
 	'SessionStorage'				=> 'Session storage',
 	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
 	'SessionModes'	=> [
-		'1'		=> 'File',
-		'2'		=> 'Database',
+		'1'		=> 'Fail',
+		'2'		=> 'Andmebaas',
 	],
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
@@ -516,7 +519,7 @@ $ap_translation = [
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
 	'CaptchaEdit'				=> 'Edit page',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
-	'CaptchaRegistration'		=> 'Registration',
+	'CaptchaRegistration'		=> 'Registreerimine',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
@@ -649,7 +652,7 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Timezone',
+	'Timezone'					=> 'Ajatsoon',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
@@ -664,7 +667,7 @@ $ap_translation = [
 	'NofollowInfo'				=> 'Juhendage mõnda otsimootorit, et hüperlink ei tohiks mõjutada linkide sihtimist otsingumootorite registris. Lisab lingi süntaksisse <code>rel="nofollow"</code>.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
-	'ShowSpaces'				=> 'Show spaces in WikiNames',
+	'ShowSpaces'				=> 'Näita WikiNimedes tühikuid',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
@@ -695,7 +698,6 @@ $ap_translation = [
 	'LicenseSection'			=> 'Litsents',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
-
 	'EnableLicense'				=> 'Enable License',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
 	'LicensePerPage'			=> 'License per page',
@@ -711,9 +713,9 @@ $ap_translation = [
 	'TermsPage'					=> 'Policies and Regulations',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
-	'SearchPage'				=> 'Search',
+	'SearchPage'				=> 'Otsi',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
-	'RegistrationPage'			=> 'Registration',
+	'RegistrationPage'			=> 'Registreerimine',
 	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
 	'LoginPage'					=> 'User login',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
@@ -723,11 +725,11 @@ $ap_translation = [
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list',
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
-	'CategoryPage'				=> 'Category',
+	'CategoryPage'				=> 'Kategooria',
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
-	'GroupsPage'				=> 'Groups',
+	'GroupsPage'				=> 'Grupid',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'ChangesPage'				=> 'Recent changes',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
@@ -747,7 +749,6 @@ $ap_translation = [
 	'IndexPageInfo'				=> 'Lehekülg koos kõigi lehtede loendiga (action %1).',
 	'RandomPage'				=> 'Juhuslik',
 	'RandomPageInfo'			=> 'Laadib juhusliku lehe (action %1).',
-
 
 
 	// Notification settings
@@ -905,7 +906,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Database converted',
 	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
 
-	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
+	'LogColumnsToStrict'		=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
@@ -933,7 +934,7 @@ $ap_translation = [
 	'LogNoMatch'				=> 'No events that meet the criteria',
 	'LogDate'					=> 'Date',
 	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Username',
+	'LogUsername'				=> 'Kasutajanimi',
 	'LogLevels'	=> [
 		'1'		=> 'critical',
 		'2'		=> 'highest',
@@ -954,7 +955,7 @@ $ap_translation = [
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MassemailSection'			=> 'Mass email',
-	'MessageSubject'			=> 'Subject',
+	'MessageSubject'			=> 'Teema',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Your message',
 	'YourMessageInfo'			=> 'Sa võid sisestada ainult puhast teksti, kõik koodi märgistused eemaldatakse enne saatmist.',
@@ -1001,7 +1002,7 @@ $ap_translation = [
 	'BackupFolder'				=> 'Folder',
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster',
-	'BackupFiles'				=> 'Files',
+	'BackupFiles'				=> 'Failid',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1013,7 +1014,7 @@ $ap_translation = [
 									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
 									'To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
-	'Backup'					=> 'Backup',
+	'Backup'					=> 'Varukoopia',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
@@ -1064,18 +1065,18 @@ $ap_translation = [
 	'HomonymicFiles'			=> 'homonymic files',
 	'RestoreSkip'				=> 'skip',
 	'RestoreReplace'			=> 'replace',
-	'RestoreFile'				=> 'File',
+	'RestoreFile'				=> 'Fail',
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'all',
+	'FilesAll'					=> 'kõik',
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'Restore',
-	'BackupRemove'				=> 'Remove',
+	'BackupRemove'				=> 'Eemalda',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1149,15 +1150,15 @@ $ap_translation = [
 	'DbStatSection'				=> 'Database Statistics',
 	'DbTable'					=> 'Table',
 	'DbRecords'					=> 'Records',
-	'DbSize'					=> 'Size',
+	'DbSize'					=> 'Suurus',
 	'DbIndex'					=> 'Index',
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
-	'FileFiles'					=> 'Files',
-	'FileSize'					=> 'Size',
+	'FileFiles'					=> 'Failid',
+	'FileSize'					=> 'Suurus',
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
@@ -1207,9 +1208,9 @@ $ap_translation = [
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
 	'Inconsistencies'			=> 'Inconsistencies',
-	'CheckDatabase'				=> 'Database',
+	'CheckDatabase'				=> 'Andmebaas',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
-	'CheckFiles'				=> 'Files',
+	'CheckFiles'				=> 'Failid',
 	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
 	'Records'					=> 'Records',
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',

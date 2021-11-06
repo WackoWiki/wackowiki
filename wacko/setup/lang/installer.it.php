@@ -43,7 +43,7 @@ $lang = [
 */
 'Title'							=> 'Installazione di WackoWiki',
 'Continue'						=> 'Continua',
-'Back'							=> 'Back',
+'Back'							=> 'Indietro',
 'Recommended'					=> 'raccomandato',
 'InvalidAction'					=> 'Invalid action',
 
@@ -67,7 +67,7 @@ $lang = [
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
 'Database'						=> 'Database',
 'PhpExtensions'					=> 'PHP Extensions',
-'Permissions'					=> 'Permissions',
+'Permissions'					=> 'Permessi',
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Il vostro server deve soddisfare i requisiti elencati di seguito.',
 'OK'							=> 'OK',

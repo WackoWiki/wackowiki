@@ -112,7 +112,7 @@ $ap_translation = [
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> 'Droits',
 		'title'		=> 'Paramètres des permissions',
 	],
 
@@ -249,7 +249,7 @@ $ap_translation = [
 	],
 
 	// Main module
-	'PurgeSessions'				=> 'Purge',
+	'PurgeSessions'				=> 'Purger',
 	'PurgeSessionsTip'			=> 'Purger toutes les sessions',
 	'PurgeSessionsConfirm'		=> 'Êtes-vous sûr de vouloir purger toutes les sessions ? Tous les utilisateurs seront déconnectés.',
 	'PurgeSessionsExplain'		=> 'Purgez toutes les sessions. Tous les utilisateurs seront déconnectés en tronquant la table auth_token.',
@@ -266,6 +266,7 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Complément au titre du site qui apparaît dans l\'en-tête des pages pour expliquer en quelques mots, en quoi consiste ce site.',
 	'AdminName'					=> 'Admin du site',
 	'AdminNameInfo'				=> 'Nom d\'utilisateur, qui est responsable du support global du site. Ce nom n\'est pas utilisé pour déterminer les droits d\'accès, mais il est souhaitable de se conformer au nom de l\'administrateur en chef du site.',
+
 	'LanguageSection'			=> 'Langue',
 	'DefaultLanguage'			=> 'Langue par défaut',
 	'DefaultLanguageInfo'		=> 'Spécifie la langue des messages affichés aux invités non enregistrés, ainsi que les paramètres locaux.',
@@ -273,11 +274,13 @@ $ap_translation = [
 	'MultiLanguageInfo'			=> 'Permet de sélectionner une langue page par page.',
 	'AllowedLanguages'			=> 'Langues autorisées',
 	'AllowedLanguagesInfo'		=> 'Il est recommandé de ne sélectionner que l\'ensemble des langues que vous souhaitez utiliser, sinon toutes les langues sont sélectionnées.',
-	'CommentSection'			=> 'Comments',
+
+	'CommentSection'			=> 'Commentaires',
 	'AllowComments'				=> 'Permettre les commentaires',
 	'AllowCommentsInfo'			=> 'Activer les commentaires pour les utilisateurs invités ou enregistrés uniquement ou les désactiver sur l\'ensemble du site.',
 	'SortingComments'			=> 'Tri des commentaires',
 	'SortingCommentsInfo'		=> 'Modifie l\'ordre dans lequel les commentaires de la page sont présentés, soit avec le commentaire le plus récent OU le plus ancien en haut.',
+
 	'ToolbarSection'			=> 'Barre d\'outils',
 	'CommentsPanel'				=> 'Comments panel',
 	'CommentsPanelInfo'			=> 'L\'affichage par défaut des commentaires en bas de la page.',
@@ -336,7 +339,7 @@ $ap_translation = [
 	'NotifyDiffModeInfo'		=> 'Mode Diff utilisé pour les notifications dans le corps de l\'email.',
 
 	'EditingSection'			=> 'Rédaction',
-	'EditSummary'				=> 'Edit summary',
+	'EditSummary'				=> 'Éditer le sommaire',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Édition mineure',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
@@ -570,7 +573,7 @@ $ap_translation = [
 		'2'		=> 'password does not contain username',
 	],
 
-	'LoginSection'				=> 'Login',
+	'LoginSection'				=> 'Connexion',
 	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username',
 	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
 	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address',
@@ -617,7 +620,7 @@ $ap_translation = [
 	'RegistrationDelayInfo'		=> 'The minimum time threshold for filling out the registration form to tell away bots from humans (in seconds).',
 
 	// Formatter settings
-	'FormatterSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
+	'FormatterSettingsInfo'		=> 'Groupe de paramètres responsable de la plate-forme de réglage fin. Ne les changez pas à moins d\'avoir confiance en leurs actions.',
 	'FormatterSettingsUpdated'	=> 'Mise à jour des paramètres de formatage',
 
 	'TextHandlerSection'		=> 'Text Handler ',
@@ -649,7 +652,7 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Timezone',
+	'Timezone'					=> 'Fuseau horaire',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
@@ -664,9 +667,9 @@ $ap_translation = [
 	'NofollowInfo'				=> 'Indiquez à certains moteurs de recherche que l\'hyperlien ne doit pas influencer le classement des liens ciblés dans l\'index des moteurs de recherche. Ajoute <code>rel="nofollow"</code> à la syntaxe du lien.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
-	'ShowSpaces'				=> 'Show spaces in WikiNames',
+	'ShowSpaces'				=> 'Insérer des espaces dans les NomWiki ',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
-	'NumerateLinks'				=> 'Numerate links in print view',
+	'NumerateLinks'				=> 'Numérotation des liens en vue d’impression',
 	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
 	'YouareHereText'			=> 'Disable and visualize self-referencing links',
 	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
@@ -695,7 +698,6 @@ $ap_translation = [
 	'LicenseSection'			=> 'Licence',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
-
 	'EnableLicense'				=> 'Enable License',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
 	'LicensePerPage'			=> 'License per page',
@@ -747,7 +749,6 @@ $ap_translation = [
 	'IndexPageInfo'				=> 'Page avec une liste de toutes les pages (action %1).',
 	'RandomPage'				=> 'Au hasard',
 	'RandomPageInfo'			=> 'Charge une page aléatoire  (action %1).',
-
 
 
 	// Notification settings
@@ -905,7 +906,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Base de données convertie',
 	'ConversionTablesOk'		=> 'Conversion des tables sélectionnées avec succès.',
 
-	'LogColumnsToStrict'			=> 'Colonnes converties pour se conformer au mode strict SQL',
+	'LogColumnsToStrict'		=> 'Colonnes converties pour se conformer au mode strict SQL',
 	'ConversionColumnsOk'		=> 'Conversion des colonnes sélectionnées avec succès.',
 
 	'ConvertTablesEngine'		=> 'Conversion des tables de MyISAM en InnoDB',
@@ -1064,11 +1065,11 @@ $ap_translation = [
 	'HomonymicFiles'			=> 'homonymic files',
 	'RestoreSkip'				=> 'skip',
 	'RestoreReplace'			=> 'replace',
-	'RestoreFile'				=> 'File',
+	'RestoreFile'				=> 'Fichier',
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'all',
+	'FilesAll'					=> 'tous',
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
@@ -1149,15 +1150,15 @@ $ap_translation = [
 	'DbStatSection'				=> 'Statistiques de la base de données',
 	'DbTable'					=> 'Table',
 	'DbRecords'					=> 'Records',
-	'DbSize'					=> 'Size',
+	'DbSize'					=> 'Taille',
 	'DbIndex'					=> 'Index',
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
-	'FileFiles'					=> 'Files',
-	'FileSize'					=> 'Size',
+	'FileFiles'					=> 'Fichiers',
+	'FileSize'					=> 'Taille',
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
@@ -1260,7 +1261,7 @@ $ap_translation = [
 	'BbLogVerbose'				=> 'Verbose',
 	'BbLogNormal'				=> 'Normal (recommended)',
 	'BbLogOff'					=> 'Do not log (not recommended)',
-	'BbSecurity'				=> 'Security',
+	'BbSecurity'				=> 'Sécurité',
 	'BbStrict'					=> 'Strict checking',
 	'BbStrictInfo'				=> 'blocks more spam but may block some people',
 	'BbOffsiteForms'			=> 'Allow form postings from other web sites',
@@ -1277,6 +1278,5 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Enable Reverse Proxy',
 	'BbReverseProxyHeader'		=> 'Header containing Internet clients IP address',
 	'BbReverseProxyAddresses'	=> 'IP address or CIDR format address ranges for your proxy servers (one per line)',
-
 
 ];

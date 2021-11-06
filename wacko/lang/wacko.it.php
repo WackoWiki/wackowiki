@@ -289,12 +289,12 @@ $wacko_translation = [
 	'CategoriesRenameInfo'		=> '* Nota: Il cambiamento avrà effetto su tutte le pagine assegnate a quella categoria.',
 	'CategoriesGroup'			=> 'Group categories %1 with',
 	'CategoriesGroupInfo'		=> '* Select [no group], to debundled the category.',
-	'CategoriesNoGroup'			=> '[no group]',
+	'CategoriesNoGroup'			=> '[nessun gruppo]',
 	'CategoriesDelete'			=> 'Siete sicuri di voler rimuovere la categoria %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Per assegnare categorie a una pagina seleziona le caselle di controllo.',
-	'CategoriesStoreButton' 	=> 'Save Categories',
-	'CategoriesGroupButton'		=> 'Group',
+	'CategoriesStoreButton'		=> 'Save Categories',
+	'CategoriesGroupButton'		=> 'Gruppo',
 	'CategoriesEditInfo'		=> 'Per modificare l\'elenco delle categorie, selezionare il pulsante di opzione.',
 	'NoCategoriesForThisLang'	=> 'Le categorie per questa lingua non sono specificate.',
 	'PagesCategory'				=> 'Pages category',
@@ -316,7 +316,7 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Trova gruppi',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsOpenProfile'			=> 'View Profile',
+	'GroupsOpenProfile'			=> 'Guarda il profilo',
 	'GroupsName'				=> 'Gruppo',
 	'GroupsMembers'				=> 'Membri',
 	'GroupsDescription'			=> 'Descrizione',
@@ -356,7 +356,7 @@ $wacko_translation = [
 	'DiffMode'		=> [
 		'0'		=> 'Full diff',
 		'1'		=> 'Semplice diff',
-		'2'		=> 'Source',
+		'2'		=> 'Sorgente',
 		'3'		=> 'Side by side',
 		'4'		=> 'Inline',
 		'5'		=> 'Merged',
@@ -614,7 +614,7 @@ $wacko_translation = [
 	'PageAlreadyExists'			=> 'Secondo l\'indirizzo della pagina %1 già esistente.',
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
 	'PageAlreadyExistsEdit2'	=> 'modificare',
-	'PageAlreadyExistsEditDenied' => 'Non puoi modificarlo.',
+	'PageAlreadyExistsEditDenied'	=> 'Non puoi modificarlo.',
 
 	'SimilarPagesExists'		=> 'Pagine simili a %1 esistono già:',
 	'SimilarPagesHint'			=> 'Esistono pagine simili a %1:',
@@ -663,7 +663,7 @@ $wacko_translation = [
 	'WrongCode'					=> 'Wrong code',
 	'ChangePasswordForUser'		=> '%1\'s password change',
 
-	'Watchers' 					=> 'List of watchers for %1',
+	'Watchers'					=> 'List of watchers for %1',
 	'WatchersFor'				=> 'Osservatori per',
 	'NoWatchers'				=> 'There are no watchers for %1',
 	'NotOwnerToViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
@@ -863,7 +863,7 @@ $wacko_translation = [
 	'Attachment'				=> 'Allegato',
 	'AttachmentsToPage'			=> 'alla pagina',
 	'AttachmentsToCluster'		=> 'cluster',
-	'AttachmentsByTime'			=> 'by time',
+	'AttachmentsByTime'			=> 'da tempo',
 	'AttachmentsGlobal'			=> 'globale',
 	'AttachmentsAll'			=> 'tutti',
 	'AttachmentsLinked'			=> 'usato',
@@ -894,7 +894,7 @@ $wacko_translation = [
 	'FileName'					=> 'Nome',
 	'FileCaption'				=> 'Didascalia',
 	'FileAuthor'				=> 'Autore',
-	'FileSource'				=> 'Source',
+	'FileSource'				=> 'Sorgente',
 	'FileSourceUrl'				=> 'URL',
 	'FileAttachedTo'			=> 'Allegato a',
 	'FileSyntax'				=> 'Sintassi',
@@ -973,7 +973,7 @@ $wacko_translation = [
 		'7'		=> 'CC0 1.0 Universal',
 		'8'		=> 'GNU Free Documentation License',
 		'9'		=> 'Public Domain / Free Use',
-		'10'	=> 'All Rights Reserved',
+		'10'	=> 'Tutti i diritti riservati ',
 	],
 	'LicenseMeta'				=> [
 		'1'		=> 'Di dominio pubblico',
@@ -999,7 +999,7 @@ $wacko_translation = [
 	'FeedMulti'					=> 'Multi-Feed',
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
-	'FeedSource'				=> 'Source:',
+	'FeedSource'				=> 'Sorgente:',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
@@ -1083,7 +1083,7 @@ $wacko_translation = [
 	'ModerateSplitPageName'		=> 'Enter the name of the page / topic, where to move detachable comments, and select a separation schema',
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
-	'ModerateUserProfile'		=> 'profile',
+	'ModerateUserProfile'		=> 'profilo',
 	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'			=> 'moderate section',
@@ -1144,7 +1144,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'La password coincide con l\'email.',
 
 	// POLLS ADD-ON
-	'PollsTopic'				=> 'Topic',
+	'PollsTopic'				=> 'Argomento',
 	'PollsVariant'				=> 'Reply',
 	'PollsPlural'				=> 'You can select multiple answers',
 	'PollsSingular'				=> 'You can select only one answer',
@@ -1169,11 +1169,11 @@ $wacko_translation = [
 	'PollsDone'					=> 'Thank you for your participation! Your vote is taken.',
 	'PollsStop'					=> 'stop',
 	'PollsActivate'				=> 'activate',
-	'PollsEdit'					=> 'edit',
+	'PollsEdit'					=> 'edizione',
 	'PollsResults'				=> 'results',
 	'PollsLasts'				=> 'Poll is (days)',
 	'PollsLasted'				=> 'Poll went (days)',
-	'PollsAdded'				=> 'Added',
+	'PollsAdded'				=> 'Aggiunto',
 	'PollsTotalVotes'			=> 'Total votes',
 	'PollsShow'					=> 'Show',
 	'PollsAll'					=> 'All',
@@ -1213,6 +1213,7 @@ $wacko_translation = [
 		'6.5'	=> '[UTC +6:30] Myanmar',
 		'7'		=> '[UTC +7] Indonesia occidentale, Thailandia, Vietnam',
 		'8'		=> '[UTC +8] Cina, Hong Kong, Singapore, Taiwan, Perth',
+		'8.75'	=> '[UTC + 8:45] Southeastern Western Australia Standard Time',
 		'9'		=> '[UTC +9] Giappone, Corea, Indonesia orientale',
 		'9.5'	=> '[UTC +9:30] Adelaide',
 		'10'	=> '[UTC +10] Sydney, Papua Nuova Guinea',
@@ -1222,7 +1223,7 @@ $wacko_translation = [
 		'12'	=> '[UTC +12] Nuova Zelanda, Figi',
 		'12.75'	=> '[UTC +12:45] Isole Chatham',
 		'13'	=> '[UTC +13] Tonga',
-		'14'	=> '[UTC +14] Isole della linea'
+		'14'	=> '[UTC +14] Isole della linea',
 	],
 
 	'LanguageArray'	=> [
@@ -1368,7 +1369,7 @@ $wacko_translation = [
 	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
 
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION .
+	'ErrorMinPHPVersion'		=> 'La versione di PHP deve essere maggiore di <strong>' . PHP_MIN_VERSION .
 									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.' .
 									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
 

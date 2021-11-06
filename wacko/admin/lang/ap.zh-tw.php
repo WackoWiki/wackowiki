@@ -12,7 +12,7 @@ $ap_translation = [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Users',
+		'users'			=> '使用者',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
@@ -31,11 +31,11 @@ $ap_translation = [
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Log out',
+	'ApLogOut'					=> '註銷',
 	'ApLogOutTip'				=> 'quit system administration',
 
 	'TimeLeft'					=> 'Time left:  %1 minutes',
-	'ApVersion'					=> 'version',
+	'ApVersion'					=> '版本',
 
 	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
@@ -45,14 +45,14 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Cancel',
-	'Add'						=> 'Add',
-	'Edit'						=> 'Edit',
-	'Remove'					=> 'Remove',
+	'Cancel'					=> '取消',
+	'Add'						=> '新增',
+	'Edit'						=> '編輯',
+	'Remove'					=> '移除',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
 	'Mandatory'					=> 'Mandatory',
-	'Admin'						=> 'Admin',
+	'Admin'						=> '管理',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
 	'MainSection'				=> 'General Options',
@@ -82,7 +82,7 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'Email',
+		'name'		=> '電郵',
 		'title'		=> 'Email settings',
 	],
 
@@ -100,19 +100,19 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifications',
+		'name'		=> '通知',
 		'title'		=> '提醒設定',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pages',
+		'name'		=> '頁面',
 		'title'		=> 'Pages and site parameters',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permissions',
+		'name'		=> '權限',
 		'title'		=> 'Permissions settings',
 	],
 
@@ -130,7 +130,7 @@ $ap_translation = [
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
+		'name'		=> '上傳',
 		'title'		=> 'Attachment settings',
 	],
 
@@ -160,7 +160,7 @@ $ap_translation = [
 
 	// DB Convert module
 	'db_convert'		=> [
-		'name'		=> 'Convert',
+		'name'		=> '轉換',
 		'title'		=> 'Converting Tables or Columns',
 	],
 
@@ -172,7 +172,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> '復原',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -238,13 +238,13 @@ $ap_translation = [
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Groups',
+		'name'		=> '群組',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Users',
+		'name'		=> '使用者',
 		'title'		=> 'User management',
 	],
 
@@ -267,7 +267,7 @@ $ap_translation = [
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
 
-	'LanguageSection'			=> 'Language',
+	'LanguageSection'			=> '語言',
 	'DefaultLanguage'			=> 'Default language',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
@@ -275,7 +275,7 @@ $ap_translation = [
 	'AllowedLanguages'			=> 'Allowed languages',
 	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 
-	'CommentSection'			=> 'Comments',
+	'CommentSection'			=> '回應',
 	'AllowComments'				=> 'Allow comments',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
@@ -339,9 +339,9 @@ $ap_translation = [
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
 	'EditingSection'			=> 'Editing',
-	'EditSummary'				=> 'Edit summary',
+	'EditSummary'				=> '編輯摘要',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
-	'MinorEdit'					=> 'Minor edit',
+	'MinorEdit'					=> '小修改',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
@@ -367,7 +367,7 @@ $ap_translation = [
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
 	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
 
-	'LogoOff'					=> 'Off',
+	'LogoOff'					=> '關閉',
 	'LogoOnly'					=> 'logo',
 	'LogoAndTitle'				=> 'logo and title',
 
@@ -455,7 +455,7 @@ $ap_translation = [
 	'SessionStorage'				=> 'Session storage',
 	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
 	'SessionModes'	=> [
-		'1'		=> 'File',
+		'1'		=> '檔案',
 		'2'		=> 'Database',
 	],
 
@@ -522,7 +522,7 @@ $ap_translation = [
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
 	'CaptchaEdit'				=> 'Edit page',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
-	'CaptchaRegistration'		=> 'Registration',
+	'CaptchaRegistration'		=> '建立帳號',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
@@ -576,7 +576,7 @@ $ap_translation = [
 		'2'		=> 'password does not contain username',
 	],
 
-	'LoginSection'				=> 'Login',
+	'LoginSection'				=> '登入',
 	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username',
 	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
 	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address',
@@ -655,7 +655,7 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Timezone',
+	'Timezone'					=> '時區',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
@@ -716,9 +716,9 @@ $ap_translation = [
 	'TermsPage'					=> 'Policies and Regulations',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
-	'SearchPage'				=> 'Search',
+	'SearchPage'				=> '搜尋',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
-	'RegistrationPage'			=> 'Registration',
+	'RegistrationPage'			=> '建立帳號',
 	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
 	'LoginPage'					=> 'User login',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
@@ -728,11 +728,11 @@ $ap_translation = [
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list',
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
-	'CategoryPage'				=> 'Category',
+	'CategoryPage'				=> '分類',
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
-	'TagPage'					=> 'Tag',
+	'TagPage'					=> '標籤',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
-	'GroupsPage'				=> 'Groups',
+	'GroupsPage'				=> '群組',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'ChangesPage'				=> 'Recent changes',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
@@ -746,7 +746,7 @@ $ap_translation = [
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
 	'SandboxPage'				=> 'Sandbox',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
-	'HelpPage'					=> 'Help',
+	'HelpPage'					=> '說明',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index',
 	'IndexPageInfo'				=> 'Page with a list of all pages (action %1).',
@@ -902,14 +902,14 @@ $ap_translation = [
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
 
 	// DB Convert module
-	'Convert'					=> 'Convert',
+	'Convert'					=> '轉換',
 	'NoColumnsToConvert'		=> 'No columns to convert.',
 	'NoTablesToConvert'			=> 'No tables to convert.',
 
 	'LogDatabaseConverted'		=> 'Database converted',
 	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
 
-	'LogColumnsToStrict'			=> 'Converted columns to comply with the SQL strict mode',
+	'LogColumnsToStrict'		=> 'Converted columns to comply with the SQL strict mode',
 	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
 
 	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
@@ -937,7 +937,7 @@ $ap_translation = [
 	'LogNoMatch'				=> 'No events that meet the criteria',
 	'LogDate'					=> 'Date',
 	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Username',
+	'LogUsername'				=> '用户名',
 	'LogLevels'	=> [
 		'1'		=> 'critical',
 		'2'		=> 'highest',
@@ -958,7 +958,7 @@ $ap_translation = [
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MassemailSection'			=> 'Mass email',
-	'MessageSubject'			=> 'Subject',
+	'MessageSubject'			=> '標題',
 	'MessageSubjectInfo'		=> '',
 	'YourMessage'				=> 'Your message',
 	'YourMessageInfo'			=> 'Please note that you may enter only plain text. All markup will be removed before sending.',
@@ -1005,7 +1005,7 @@ $ap_translation = [
 	'BackupFolder'				=> 'Folder',
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster',
-	'BackupFiles'				=> 'Files',
+	'BackupFiles'				=> '檔案',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1068,18 +1068,18 @@ $ap_translation = [
 	'HomonymicFiles'			=> 'homonymic files',
 	'RestoreSkip'				=> 'skip',
 	'RestoreReplace'			=> 'replace',
-	'RestoreFile'				=> 'File',
+	'RestoreFile'				=> '檔案',
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'all',
+	'FilesAll'					=> '所有',
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Restore',
-	'BackupRemove'				=> 'Remove',
+	'BackupRestore'				=> '復原',
+	'BackupRemove'				=> '移除',
 	'RestoreYes'				=> 'Yes',
 	'RestoreNo'					=> 'No',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
@@ -1089,7 +1089,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'EditButton'				=> 'Edit',
+	'EditButton'				=> '編輯',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
@@ -1118,8 +1118,8 @@ $ap_translation = [
 	'LogGroupRemoved'			=> 'Removed group ##%1##',
 
 	'GroupsMembersFor'			=> 'Members for Group',
-	'GroupsDescription'			=> 'Description',
-	'GroupsModerator'			=> 'Moderator',
+	'GroupsDescription'			=> '說明',
+	'GroupsModerator'			=> '版主',
 	'GroupsOpen'				=> 'Open',
 	'GroupsActive'				=> 'Active',
 	'GroupsTip'					=> 'Click to edit Group',
@@ -1153,15 +1153,15 @@ $ap_translation = [
 	'DbStatSection'				=> 'Database Statistics',
 	'DbTable'					=> 'Table',
 	'DbRecords'					=> 'Records',
-	'DbSize'					=> 'Size',
+	'DbSize'					=> '大小',
 	'DbIndex'					=> 'Index',
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
-	'FileFiles'					=> 'Files',
-	'FileSize'					=> 'Size',
+	'FileFiles'					=> '檔案',
+	'FileSize'					=> '大小',
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
@@ -1213,7 +1213,7 @@ $ap_translation = [
 	'Inconsistencies'			=> 'Inconsistencies',
 	'CheckDatabase'				=> 'Database',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
-	'CheckFiles'				=> 'Files',
+	'CheckFiles'				=> '檔案',
 	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
 	'Records'					=> 'Records',
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
@@ -1230,7 +1230,7 @@ $ap_translation = [
 
 	'BbSummary'					=> 'Summary',
 	'BbLog'						=> 'Log',
-	'BbSettings'				=> 'Settings',
+	'BbSettings'				=> '設定',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log

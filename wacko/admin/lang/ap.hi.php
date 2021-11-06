@@ -339,7 +339,7 @@ $ap_translation = [
 	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
 
 	'EditingSection'			=> 'Editing',
-	'EditSummary'				=> 'Edit summary',
+	'EditSummary'				=> 'सारांश',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
 	'MinorEdit'					=> 'Minor edit',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
@@ -455,8 +455,8 @@ $ap_translation = [
 	'SessionStorage'				=> 'Session storage',
 	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
 	'SessionModes'	=> [
-		'1'		=> 'File',
-		'2'		=> 'Database',
+		'1'		=> 'फ़ाइल',
+		'2'		=> 'डेटाबेस',
 	],
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
@@ -655,7 +655,7 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Timezone',
+	'Timezone'					=> 'क्षेत्रीय समय',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
@@ -710,7 +710,7 @@ $ap_translation = [
 	'RootPage'					=> 'मुख पृष्ठ',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Privacy Policy',
+	'PrivacyPage'				=> 'गोपनीयता नीति',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
 	'TermsPage'					=> 'Policies and Regulations',
@@ -732,7 +732,7 @@ $ap_translation = [
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
-	'GroupsPage'				=> 'Groups',
+	'GroupsPage'				=> 'समूह',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
 	'ChangesPage'				=> 'Recent changes',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
@@ -974,8 +974,8 @@ $ap_translation = [
 	'SystemMessageInfo'			=> '',
 	'SysMsgUpdated'				=> 'Updated system message',
 
-	'SysMsgSection'				=> 'System message',
-	'SysMsg'					=> 'System message',
+	'SysMsgSection'				=> 'सिस्टम संदेश',
+	'SysMsg'					=> 'सिस्टम संदेश',
 	'SysMsgInfo'				=> 'Your text here',
 
 	'SysMsgType'				=> 'Type',
@@ -1005,7 +1005,7 @@ $ap_translation = [
 	'BackupFolder'				=> 'Folder',
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster',
-	'BackupFiles'				=> 'Files',
+	'BackupFiles'				=> 'फ़ाइलें',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1068,11 +1068,11 @@ $ap_translation = [
 	'HomonymicFiles'			=> 'homonymic files',
 	'RestoreSkip'				=> 'skip',
 	'RestoreReplace'			=> 'replace',
-	'RestoreFile'				=> 'File',
+	'RestoreFile'				=> 'फ़ाइल',
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'all',
+	'FilesAll'					=> 'सभी',
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
@@ -1089,7 +1089,7 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'EditButton'				=> 'Edit',
+	'EditButton'				=> 'सम्पादन',
 	'UsersAddNew'				=> 'Add new user',
 	'UsersDelete'				=> 'Are you sure you want to remove user %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
@@ -1120,7 +1120,7 @@ $ap_translation = [
 	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'विवरण',
 	'GroupsModerator'			=> 'Moderator',
-	'GroupsOpen'				=> 'Open',
+	'GroupsOpen'				=> 'खुला',
 	'GroupsActive'				=> 'Active',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
@@ -1153,15 +1153,15 @@ $ap_translation = [
 	'DbStatSection'				=> 'Database Statistics',
 	'DbTable'					=> 'Table',
 	'DbRecords'					=> 'Records',
-	'DbSize'					=> 'Size',
+	'DbSize'					=> 'आकार',
 	'DbIndex'					=> 'Index',
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
-	'FileFiles'					=> 'Files',
-	'FileSize'					=> 'Size',
+	'FileFiles'					=> 'फ़ाइलें',
+	'FileSize'					=> 'आकार',
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
@@ -1211,9 +1211,9 @@ $ap_translation = [
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
 	'Inconsistencies'			=> 'Inconsistencies',
-	'CheckDatabase'				=> 'Database',
+	'CheckDatabase'				=> 'डेटाबेस',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
-	'CheckFiles'				=> 'Files',
+	'CheckFiles'				=> 'फ़ाइलें',
 	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
 	'Records'					=> 'Records',
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
@@ -1243,7 +1243,7 @@ $ap_translation = [
 	'BbGetPost'					=> 'GET/POST',
 	'BbUri'						=> 'URI',
 	'BbRecordsAll'				=> 'Displaying all %1 records',
-	'BbShow'					=> 'Show',
+	'BbShow'					=> 'दिखाये',
 	'BbIpDateStatus'			=> 'IP/Date/स्थिति',
 	'BbHeaders'					=> 'Headers',
 	'BbEntity'					=> 'Entity',
@@ -1264,7 +1264,7 @@ $ap_translation = [
 	'BbLogVerbose'				=> 'Verbose',
 	'BbLogNormal'				=> 'Normal (recommended)',
 	'BbLogOff'					=> 'Do not log (not recommended)',
-	'BbSecurity'				=> 'Security',
+	'BbSecurity'				=> 'सुरक्षा',
 	'BbStrict'					=> 'Strict checking',
 	'BbStrictInfo'				=> 'blocks more spam but may block some people',
 	'BbOffsiteForms'			=> 'Allow form postings from other web sites',
