@@ -1057,7 +1057,6 @@ $wacko_translation = [
 	'ModerateSection'			=> 'section / page ',
 
 	'NotModerator'				=> 'You do not have authority to moderate this page / chapter',
-	'ModerateDelete'			=> '削除',
 	'ModerateDeleteTopic'		=> 'Delete topic / page',
 	'ModerateDeletePosts'		=> 'Delete comments',
 	'ModerateMove'				=> '移動',
@@ -1125,7 +1124,6 @@ $wacko_translation = [
 	'ForumUpdated'				=> '更新',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',
-
 
 	// password complexity
 	'PwdCplxShort'				=> 'パスワードが短すぎます。',

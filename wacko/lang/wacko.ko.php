@@ -208,7 +208,7 @@ $wacko_translation = [
 	'EditText'					=> '편집',
 	'EditCommentTip'			=> 'Edit comment',
 	'EditComment'				=> 'Edit this comment',
-	'ReplyComment'				=> 'Reply',
+	'ReplyComment'				=> '답글',
 	'ReplyCommentTip'			=> 'Reply this comment',
 	'RevisionTip'				=> 'View page revisions',
 	'RevisionText'				=> '수정복사본',
@@ -316,7 +316,7 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsOpenProfile'			=> 'View Profile',
+	'GroupsOpenProfile'			=> '프로필 보기',
 	'GroupsName'				=> '그룹',
 	'GroupsMembers'				=> 'Members',
 	'GroupsDescription'			=> '설명',
@@ -430,8 +430,8 @@ $wacko_translation = [
 	'NoLinkedPages'				=> 'There are no linked pages',
 	'ReferringPages'			=> 'Referring pages',
 	'NoReferringPages'			=> 'There are no referring pages',
-	'Footnotes'					=> 'Footnotes',
-	'Footnote'					=> 'Footnote',
+	'Footnotes'					=> '각주',
+	'Footnote'					=> '각주',
 	'MostPopularPages'			=> '가장 인기있는 페이지',
 	'MostCommentedPages'		=> 'Most commented pages',
 	'NoAccessToSourcePage'		=> 'You aren\'t allowed to read action source page.',
@@ -999,7 +999,7 @@ $wacko_translation = [
 	'FeedMulti'					=> 'Multi-Feed',
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
-	'FeedSource'				=> 'Source:',
+	'FeedSource'				=> '출처:',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
@@ -1125,7 +1125,6 @@ $wacko_translation = [
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',
 
-
 	// password complexity
 	'PwdCplxShort'				=> '비밀번호가 너무 짧습니다.',
 	'PwdCplxEquals'				=> '암호에는 사용자 이름이 포함됩니다. ',
@@ -1174,7 +1173,7 @@ $wacko_translation = [
 	'PollsResults'				=> 'results',
 	'PollsLasts'				=> 'Poll is (days)',
 	'PollsLasted'				=> 'Poll went (days)',
-	'PollsAdded'				=> 'Added',
+	'PollsAdded'				=> '추가함',
 	'PollsTotalVotes'			=> 'Total votes',
 	'PollsShow'					=> '표시하기',
 	'PollsAll'					=> '전체',

@@ -61,17 +61,17 @@ $lang = [
    System Requirements Page
 */
 'version-check'					=> 'System Requirements',
-'PhpVersion'					=> 'PHP Version',
+'PhpVersion'					=> 'PHP 版本',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
 'Database'						=> 'Database',
-'PhpExtensions'					=> 'PHP Extensions',
+'PhpExtensions'					=> 'PHP 擴充',
 'Permissions'					=> 'Permissions',
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
-'Problem'						=> 'Problem',
+'Problem'						=> '問題',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> '您的PHP安裝似乎缺少WackoWiki所要求的PHP擴展名。 ',
 'PcreWithoutUtf8'				=> 'PHP 的 PCRE 模組在編譯時未包含 PCRE_UTF8 支援。',
@@ -105,7 +105,7 @@ $lang = [
 'MailDesc'						=> 'Enter the admins email address.',
 'Base'							=> 'Base URL',
 'BaseDesc'						=> 'Your WackoWiki site base URL.  Page names get appended to it, so if you are using mod_rewrite the address should end with a forward slash i.e.</p><ul><li><strong><code>https://example.com/</code></strong></li><li><strong><code>https://example.com/wiki/</code></strong></li></ul>',
-'Rewrite'						=> 'Rewrite Mode',
+'Rewrite'						=> '重寫模式',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> 'Enabled:',
 'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
@@ -138,7 +138,7 @@ $lang = [
 /*
    Database Config Page
 */
-'config-database'				=> 'Database Configuration',
+'config-database'				=> '資料庫設定',
 'DbDriver'						=> 'Driver',
 'DbDriverDesc'					=> 'The database driver you want to use.',
 'DbCharset'						=> 'Charset',
@@ -185,7 +185,7 @@ $lang = [
 'InstallPagesEnd'				=> 'Finished Adding Default Pages',
 'InstallSystemAccount'			=> 'Adding <code>System</code> User',
 'InstallDeletedAccount'			=> 'Adding <code>Deleted</code> User',
-'InstallAdmin'					=> 'Adding Admin User',
+'InstallAdmin'					=> '新增管理員',
 'InstallAdminSetting'			=> 'Adding Admin User Preferences',
 'InstallAdminGroup'				=> 'Adding Admins Group',
 'InstallAdminGroupMember'		=> 'Adding Admins Group Member',
@@ -207,7 +207,7 @@ $lang = [
 'CreatingTable'					=> 'Creating %1 table',
 'ErrorAlreadyExists'			=> 'The %1 already exists',
 'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
-'DeletingTables'				=> 'Deleting Tables',
+'DeletingTables'				=> '刪除表',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
 'DeletingTable'					=> 'Deleting %1 table',
@@ -216,10 +216,10 @@ $lang = [
    Write Config Page
 */
 'write-config'					=> 'Write Config File',
-'FinalStep'						=> 'Final Step',
-'Writing'						=> 'Writing Configuration File',
+'FinalStep'						=> '最後一步',
+'Writing'						=> '寫入設定檔',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
-'InstallationComplete'			=> 'Installation Complete',
+'InstallationComplete'			=> '安装完成',
 'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
@@ -229,6 +229,6 @@ $lang = [
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
 'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
-'TryAgain'						=> 'Try Again',
+'TryAgain'						=> '再试一次',
 
 ];

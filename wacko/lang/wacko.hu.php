@@ -248,7 +248,7 @@ $wacko_translation = [
 	'AccessMode'				=> 'Láthatóság',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
-	'AccessRegistered'			=> 'registered',
+	'AccessRegistered'			=> 'bejegyzett',
 	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
@@ -356,7 +356,7 @@ $wacko_translation = [
 	'DiffMode'		=> [
 		'0'		=> 'Full diff',
 		'1'		=> 'Simple diff',
-		'2'		=> 'Source',
+		'2'		=> 'Oldalforrás',
 		'3'		=> 'Egymás mellett',
 		'4'		=> 'Sorok között',
 		'5'		=> 'Merged',
@@ -926,7 +926,7 @@ $wacko_translation = [
 
 	'BookmarkDeleteSelected'	=> 'Kiválasztottak törlése',
 	'BookmarkMark'				=> 'Kijelölés',
-	'BookmarkNumber'			=> 'No.',
+	'BookmarkNumber'			=> 'Nem.',
 	'BookmarkNone'				=> 'Nincs könyvjelző.',
 	'BookmarkTitle'				=> 'Könyvjelző címe',
 	'BookmarkPage'				=> 'Oldal',
@@ -999,7 +999,7 @@ $wacko_translation = [
 	'FeedMulti'					=> 'Multi-Feed',
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
-	'FeedSource'				=> 'Source:',
+	'FeedSource'				=> 'Oldalforrás:',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
@@ -1053,7 +1053,7 @@ $wacko_translation = [
 
 	// moderation handler
 	'Moderation'				=> 'Moderation',
-	'Topics'					=> 'topics',
+	'Topics'					=> 'témák',
 	'ModerateSection'			=> 'section / page ',
 
 	'NotModerator'				=> 'You do not have authority to moderate this page / chapter',
@@ -1144,7 +1144,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'A jelszó ugyanaz, mint az e-mail.',
 
 	// POLLS ADD-ON
-	'PollsTopic'				=> 'Topic',
+	'PollsTopic'				=> 'Téma',
 	'PollsVariant'				=> 'Válasz',
 	'PollsPlural'				=> 'You can select multiple answers',
 	'PollsSingular'				=> 'You can select only one answer',

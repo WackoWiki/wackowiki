@@ -316,13 +316,13 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Find Groups',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsOpenProfile'			=> 'View Profile',
+	'GroupsOpenProfile'			=> '查看用户资料',
 	'GroupsName'				=> '组',
 	'GroupsMembers'				=> '用户列表',
 	'GroupsDescription'			=> '描述',
 	'GroupsCreated'				=> '创建',
 	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
-	'GroupsProfile'				=> 'Profile',
+	'GroupsProfile'				=> '用户信息',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupSpace'				=> 'Group space',
 
@@ -708,9 +708,9 @@ $wacko_translation = [
 	'UsersSearch'				=> 'Find Users',
 	'UsersOpenProfile'			=> '查看用户资料',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
-	'UsersName'					=> 'Name',
+	'UsersName'					=> '文件名',
 	'UsersPages'				=> '页面',
-	'UsersChanges'				=> 'Changes',
+	'UsersChanges'				=> '更改',
 	'UsersSubscription'			=> 'Subscription',
 	'UsersWatches'				=> 'Watches',
 	'UsersComments'				=> '评论',
@@ -838,7 +838,7 @@ $wacko_translation = [
 	'UploadGlobalText'			=> 'for public access',
 	'UploadGlobal'				=> '全局',
 	'UploadLocalText'			=> '仅适用于被允许查看当前页面的用户',
-	'UploadAsName'				=> 'Name',
+	'UploadAsName'				=> '文件名',
 	'UploadOverwrite'			=> '覆盖已存在的同名文件',
 	'FileDesc'					=> '描述',
 	'UploadForbidden'			=> 'You are not allowed to upload files here.',
@@ -997,7 +997,7 @@ $wacko_translation = [
 	'FeedMulti'					=> 'Multi-Feed',
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
-	'FeedSource'				=> 'Source:',
+	'FeedSource'				=> '来源:',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
@@ -1081,7 +1081,7 @@ $wacko_translation = [
 	'ModerateSplitPageName'		=> 'Enter the name of the page / topic, where to move detachable comments, and select a separation schema',
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
-	'ModerateUserProfile'		=> 'profile',
+	'ModerateUserProfile'		=> '用户信息',
 	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'			=> 'moderate section',
@@ -1122,7 +1122,6 @@ $wacko_translation = [
 	'ForumUpdated'				=> '已更新',
 	'ForumNoClusterDefined'		=> 'No Forum cluster defined.',
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',
-
 
 	// password complexity
 	'PwdCplxShort'				=> '密碼太短了。',

@@ -119,7 +119,7 @@ $wacko_translation = [
 
 	// other
 	'Guest'						=> 'Külalised',
-	'Help'						=> 'Help',
+	'Help'						=> 'Abi',
 	'TopicSearchText'			=> 'Otsi pealkirjades',
 	'WordprocessorVersion'		=> 'Tekstitöötlusprogramm versioon',
 
@@ -248,7 +248,7 @@ $wacko_translation = [
 	'AccessMode'				=> 'Nähtavus',
 	'AccessDenied'				=> 'denied',
 	'AccessPublic'				=> 'public',
-	'AccessRegistered'			=> 'registered',
+	'AccessRegistered'			=> 'registreeritud',
 	'AccessPrivate'				=> 'private',
 	'AccessCustom'				=> 'custom',
 
@@ -268,7 +268,7 @@ $wacko_translation = [
 	// categories handler
 	'Categories'				=> 'Kategooriad',
 	'CategoriesAssign'			=> 'assign',
-	'CategoriesEdit'			=> 'edit',
+	'CategoriesEdit'			=> 'redigeeri',
 	'Category'					=> 'Kategooria',
 	'CategoriesFor'				=> 'Categories for',
 	'CategoriesTip'				=> 'Muuda kategooriaid',
@@ -294,7 +294,7 @@ $wacko_translation = [
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Lehele kategooriate määramiseks valige märkeruudud.',
 	'CategoriesStoreButton'		=> 'Save Categories',
-	'CategoriesGroupButton'		=> 'Group',
+	'CategoriesGroupButton'		=> 'Grupp',
 	'CategoriesEditInfo'		=> 'To edit the Category list select the radio button.',
 	'NoCategoriesForThisLang'	=> 'Categories for this language are not specified.',
 	'PagesCategory'				=> 'Pages category',
@@ -322,7 +322,7 @@ $wacko_translation = [
 	'GroupsDescription'			=> 'Kirjeldus',
 	'GroupsCreated'				=> 'Loodud',
 	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
-	'GroupsProfile'				=> 'Profile',
+	'GroupsProfile'				=> 'Profiil',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupSpace'				=> 'Group space',
 
@@ -480,7 +480,7 @@ $wacko_translation = [
 	'NoWantedPages'				=> 'Soovitud lehti ei ole. Hästi!',
 	'RemoveWatch'				=> 'Lõpeta selle lehe jälgimine',
 	'SetWatch'					=> 'Jälgi seda lehte',
-	'WatchText'					=> 'Watch',
+	'WatchText'					=> 'Jälgi',
 	'UnwatchText'				=> 'Not follow',
 	'UserSettingsStored'		=> 'Kasutaja seaded salvesatud!',
 	'LoggedOut'					=> 'Oled välja logitud.',
@@ -537,8 +537,8 @@ $wacko_translation = [
 
 	'MarkRead'					=> 'Mark all as read',
 	'CurrentTime'				=> 'current time',
-	'Created'					=> 'created',
-	'Modified'					=> 'modified',
+	'Created'					=> 'loodud',
+	'Modified'					=> 'muudetud',
 
 	'EditIcon'					=> 'redigeeri',
 	'TreeClusterTitle'			=> 'Grupi %1 puu',
@@ -613,8 +613,8 @@ $wacko_translation = [
 	'CreatePageDeniedAddress'	=> 'Teil pole õigust sellel aadressil lehte luua.',
 	'PageAlreadyExists'			=> 'Vastavalt esitatud aadressile on leht %1 juba olemas.',
 	'PageAlreadyExistsEdit'		=> 'Do you want %1 it?',
-	'PageAlreadyExistsEdit2'	=> 'edit',
-	'PageAlreadyExistsEditDenied' => 'Te ei saa seda redigeerida.',
+	'PageAlreadyExistsEdit2'	=> 'redigeeri',
+	'PageAlreadyExistsEditDenied'	=> 'Te ei saa seda redigeerida.',
 
 	'SimilarPagesExists'		=> 'Sarnased lehed %1-ga on juba olemas:',
 	'SimilarPagesHint'			=> '%1-ga on sarnaseid lehti:',
@@ -718,7 +718,7 @@ $wacko_translation = [
 	'UploadQuota'				=> 'Used space',
 	'UploadQuotaTip'			=> 'Upload Space Quota',
 	'UsersLogins'				=> 'Logins',
-	'UsersRevisions'			=> 'Revisions',
+	'UsersRevisions'			=> 'Läbivaatamine',
 	'UsersSignup'				=> 'Signup',
 	'UsersLastSession'			=> 'Viimane seanss',
 	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
@@ -800,7 +800,7 @@ $wacko_translation = [
 	'SettingsSizeTip'			=> 'source / compiled',
 	'SettingsCreated'			=> 'Loodud',
 	'SettingsCurrent'			=> 'Muudetud',
-	'SettingsTotalRevs'			=> 'Revisions',
+	'SettingsTotalRevs'			=> 'Läbivaatamine',
 	'SettingsTotalComs'			=> 'Kommentaarid',
 	'SettingsWatchers'			=> 'Vaatlejad',
 	'SettingsHits'				=> 'Vaated',
@@ -838,7 +838,7 @@ $wacko_translation = [
 	'UploadFor'					=> 'Faili üleslaadimine',
 	'UploadButton'				=> 'Nõus',
 	'UploadGlobalText'			=> 'üldise juurdepääsuga',
-	'UploadGlobal'				=> 'global',
+	'UploadGlobal'				=> 'globaalne',
 	'UploadLocalText'			=> 'ainult kasutajad tohivad seda lehte näha',
 	'UploadAsName'				=> 'Siseta oma Wikinimi (soovituslik)',
 	'UploadOverwrite'			=> 'Asenda olemasolevad failid',
@@ -955,8 +955,8 @@ $wacko_translation = [
 	// My Groups
 	'UserGroups'				=> 'Groups of users',
 	'MyGroups'					=> 'Group Associations',
-	'Group'						=> 'group',
-	'Groups'					=> 'groups',
+	'Group'						=> 'grupp',
+	'Groups'					=> 'grupid',
 
 	// license action
 	'DistributedUnder'			=> 'Material is distributed under',
@@ -1014,7 +1014,7 @@ $wacko_translation = [
 	'AccessDeniedXML'			=> 'Teil pole sellele infole juurde pääseda.',
 
 	'ChangesFeed'				=> 'Changes',
-	'CommentsFeed'				=> 'Comments',
+	'CommentsFeed'				=> 'Kommentaarid',
 	'NewsFeed'					=> 'Uudised',
 	'RevisionsFeed'				=> 'Revisions of ',
 
@@ -1028,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Uudised',
-	'NewsName'					=> 'Title',
+	'NewsName'					=> 'Pealkiri',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1053,7 +1053,7 @@ $wacko_translation = [
 
 	// moderation handler
 	'Moderation'				=> 'Moderation',
-	'Topics'					=> 'topics',
+	'Topics'					=> 'teemad',
 	'ModerateSection'			=> 'section / page ',
 
 	'NotModerator'				=> 'You do not have authority to moderate this page / chapter',
@@ -1083,7 +1083,7 @@ $wacko_translation = [
 	'ModerateSplitPageName'		=> 'Enter the name of the page / topic, where to move detachable comments, and select a separation schema',
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
-	'ModerateUserProfile'		=> 'profile',
+	'ModerateUserProfile'		=> 'profiil',
 	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'			=> 'mõõdukas sektsioon',
@@ -1110,8 +1110,8 @@ $wacko_translation = [
 	'ForumPosts'				=> 'Posts',
 	'ForumReplies'				=> 'Replies',
 	'ForumAuthor'				=> 'Autor',
-	'ForumViews'				=> 'Views',
-	'ForumCreated'				=> 'Created',
+	'ForumViews'				=> 'Vaated',
+	'ForumCreated'				=> 'Loodud',
 	'ForumComments'				=> 'Kommentaarid',
 	'ForumLastComment'			=> 'Viimane kommentaar',
 	'ForumNoComments'			=> 'No comments',
@@ -1169,11 +1169,11 @@ $wacko_translation = [
 	'PollsDone'					=> 'Thank you for your participation! Your vote is taken.',
 	'PollsStop'					=> 'stop',
 	'PollsActivate'				=> 'activate',
-	'PollsEdit'					=> 'edit',
+	'PollsEdit'					=> 'redigeeri',
 	'PollsResults'				=> 'results',
 	'PollsLasts'				=> 'Poll is (days)',
 	'PollsLasted'				=> 'Poll went (days)',
-	'PollsAdded'				=> 'Added',
+	'PollsAdded'				=> 'Lisatud',
 	'PollsTotalVotes'			=> 'Total votes',
 	'PollsShow'					=> 'Show',
 	'PollsAll'					=> 'All',

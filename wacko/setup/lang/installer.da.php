@@ -43,7 +43,7 @@ $lang = [
 */
 'Title'							=> 'WackoWiki Installation',
 'Continue'						=> 'Continue',
-'Back'							=> 'Back',
+'Back'							=> 'Tilbage',
 'Recommended'					=> 'anbefales',
 'InvalidAction'					=> 'Invalid action',
 
