@@ -9,12 +9,12 @@ $ap_translation = [
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
-		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
-		'content'		=> 'Content',
+		'basics'		=> 'Βασικές λειτουργίες',
+		'preferences'	=> 'Προτιμήσεις',
+		'content'		=> 'Περιεχόμενο',
 		'users'			=> 'Μέλη',
 		'maintenance'	=> 'Συντήρηση',
-		'messages'		=> 'Messages',
+		'messages'		=> 'Μηνύματα',
 		'extension'		=> 'Επεκτάσεις',
 		'database'		=> 'Βάση δεδομένων',
 	],
@@ -22,7 +22,7 @@ $ap_translation = [
 	// Admin panel
 	'AdminPanel'				=> 'Πίνακας Ελέγχου Διαχειριστή',
 	'RecoveryMode'				=> 'Λειτουργία ανάκτησης',
-	'Authorization'				=> 'Authorization',
+	'Authorization'				=> 'Εξουσιοδότηση',
 	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
 	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
 	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
@@ -32,17 +32,17 @@ $ap_translation = [
 	'ApHomePage'				=> 'Αρχική Σελίδα',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
 	'ApLogOut'					=> 'Αποσύνδεση',
-	'ApLogOutTip'				=> 'quit system administration',
+	'ApLogOutTip'				=> 'εγκατάλειψη διαχείρισης συστήματος',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeft'					=> 'Χρόνος που απομένει:  %1 λεπτά',
 	'ApVersion'					=> 'έκδοση',
 
-	'SiteOpen'					=> 'Open',
-	'SiteOpened'				=> 'site opened',
-	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'Close',
-	'SiteClosed'				=> 'site closed',
-	'SiteClosedTip'				=> 'The site is closed',
+	'SiteOpen'					=> 'Άνοιγμα',
+	'SiteOpened'				=> 'ο ιστότοπος άνοιξε',
+	'SiteOpenedTip'				=> 'Ο ιστότοπος είναι ανοιχτός',
+	'SiteClose'					=> 'Κλείσιμο',
+	'SiteClosed'				=> 'ο ιστότοπος έκλεισε',
+	'SiteClosedTip'				=> 'Ο ιστότοπος είναι κλειστός',
 
 	// Generic
 	'Cancel'					=> 'Ακύρωση',
@@ -50,14 +50,14 @@ $ap_translation = [
 	'Edit'						=> 'Επεξεργασία',
 	'Remove'					=> 'Αφαίρεση',
 	'Enabled'					=> 'Ενεργοποίηση',
-	'Disabled'					=> 'Disabled',
-	'Mandatory'					=> 'Mandatory',
+	'Disabled'					=> 'Απενεργοποιημένο',
+	'Mandatory'					=> 'Υποχρεωτικό',
 	'Admin'						=> 'Διαχειριστής',
 
-	'MiscellaneousSection'		=> 'Miscellaneous',
+	'MiscellaneousSection'		=> 'Διάφορα',
 	'MainSection'				=> 'Basic Parameters',
 
-	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'DirNotWritable'			=> 'Ο κατάλογος %1 δεν είναι εγγράψιμος.',
 
 	/**
 	 * AP MENU
@@ -70,26 +70,26 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
+		'name'		=> 'Βασικό',
 		'title'		=> 'Basic parameters',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Appearance',
-		'title'		=> 'Appearance settings',
+		'name'		=> 'Εμφάνιση',
+		'title'		=> 'Ρυθμίσεις εμφάνισης',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-mail',
-		'title'		=> 'Email settings',
+		'title'		=> 'Ρυθμίσεις Email',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'name'		=> 'Φίλτρο',
+		'title'		=> 'Ρυθμίσεις φίλτρου',
 	],
 
 	// Config Formatter module
