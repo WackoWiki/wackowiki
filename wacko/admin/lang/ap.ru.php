@@ -310,8 +310,8 @@ $ap_translation = [
 	'AttachmentHandlerInfo'		=> 'Показывает обработчик вложений.',
 	'SourceHandler'				=> 'Включить обработчик показа исходного wiki-кода страницы',
 	'SourceHandlerInfo'			=> 'Разрешает показ исходного wiki-кода страницы.',
-	'ExportHandler'				=> 'Enable XML export handler',
-	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
+	'ExportHandler'				=> 'Включить обработчик экспорта XML',
+	'ExportHandlerInfo'			=> 'Позволяет показать обработчик экспорта XML.',
 
 	'FeedsSection'				=> 'RSS-каналы',
 	'EnableFeeds'				=> 'Включить RSS-каналы',
@@ -335,7 +335,6 @@ $ap_translation = [
 	'DefaultDiffModeSettingInfo'=> 'Предварительно выбранный режим сравнения',
 	'AllowedDiffMode'			=> 'Разрешенные режимы сравнения',
 	'AllowedDiffModeInfo'		=> 'Рекомендуется выбирать только те режимы которые будут использоваться. Иначе будут показаны все режимы',
-
 	'NotifyDiffMode'			=> 'Режим сравнения для уведомлений',
 	'NotifyDiffModeInfo'		=> 'Режим сравнения для уведомлений отправляемых по Email.',
 
@@ -379,7 +378,7 @@ $ap_translation = [
 	'LogoDimensionsInfo'		=> 'Ширина и высота изображения Лого.',
 	'LogoDisplayMode'			=> 'Режим отображения Лого',
 	'LogoDisplayModeInfo'		=> 'Задает как будет показано Лого. По умолчанию показ Лого отключён.',
-	'FaviconSection'			=> 'Favicon',
+	'FaviconSection'			=> 'Иконка для закладок (favicon)',
 	'SiteFavicon'				=> 'Favicon - иконка сайта',
 	'SiteFaviconInfo'			=> 'Favicon - иконка сайта показывается в адресной строке, заголовках вкладок и закладках в большинстве браузеров. Эта установка имеет приоритет перед иконкой, выбранной в вашей теме.',
 	'SiteFaviconTooBig'			=> 'Favicon больше 64 × 64px.',
@@ -521,7 +520,7 @@ $ap_translation = [
 		'1'		=> 'строгая',
 		'2'		=> 'пользовательская',
 	],
-	'PermissionsPolicy'			=> 'Permissions Policy',
+	'PermissionsPolicy'			=> 'Политика прав доступа',
 	'PermissionsPolicyInfo'		=> 'Заголовок HTTP Permissions-Policy предоставляет механизм для явного включения или отключения различных мощных функций браузера.',
 	'ReferrerPolicy'			=> 'Политика заголовка Referrer',
 	'ReferrerPolicyInfo'		=> 'HTTP-заголовок Referrer-Policy определяет, какая информация о реферере, отправленная в заголовке Referer, должна быть включена в сделанные запросы.',
@@ -681,7 +680,6 @@ $ap_translation = [
 	'LicenseSection'			=> 'Лицензия',
 	'DefaultLicense'			=> 'Лицензия по умолчанию',
 	'DefaultLicenseInfo'		=> 'Содержимое сайта будет публиковаться по условиям указанной лицензии.',
-
 	'EnableLicense'				=> 'Включить лицензию',
 	'EnableLicenseInfo'			=> 'Включить отображение информации о лицензии.',
 	'LicensePerPage'			=> 'Лицензия для страницы',
@@ -733,7 +731,6 @@ $ap_translation = [
 	'IndexPageInfo'				=> 'Страница со списком всех страниц (действие %1).',
 	'RandomPage'				=> 'Случайный',
 	'RandomPageInfo'			=> 'Загрузка случайной страницы (действие %1).',
-
 
 
 	// Notification settings
@@ -891,7 +888,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'База данных преобразована',
 	'ConversionTablesOk'		=> 'Преобразование выбранных таблиц выполнено успешно.',
 
-	'LogColumnsToStrict'			=> 'Преобразование столбцов в соответствии с режимом SQL strict.',
+	'LogColumnsToStrict'		=> 'Преобразование столбцов в соответствии с режимом SQL strict.',
 	'ConversionColumnsOk'		=> 'Преобразование выбранных столбцов выполнено успешно.',
 
 	'ConvertTablesEngine'		=> 'Преобразование таблиц из MyISAM в InnoDB',
@@ -1262,6 +1259,5 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Разрешить обратный прокси',
 	'BbReverseProxyHeader'		=> 'Заголовок, содержащий IP-адрес клиента из сети Интернет',
 	'BbReverseProxyAddresses'	=> 'IP-адреса или диапазоны IP-адресов в формате CIDR ваших прокси-серверов (каждый в отдельной строке)',
-
 
 ];
