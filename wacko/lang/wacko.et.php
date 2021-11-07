@@ -12,7 +12,7 @@ $wacko_translation = [
 	'SaveButton'				=> 'Salvesta',
 	'UpdateButton'				=> 'Uuenda',
 	'CancelButton'				=> 'Loobun',
-	'ConvertButton'				=> 'Convert',
+	'ConvertButton'				=> 'Konverteeri',
 	'SearchButton'				=> 'Otsi',
 	'SubmitButton'				=> 'Sisesta',
 	'AddButton'					=> 'Lisama',
@@ -21,7 +21,7 @@ $wacko_translation = [
 	'ResetButton'				=> 'Lähtesta',
 	'RenameButton'				=> 'Nimeta ümber',
 	'DeleteButton'				=> 'Kustuta',
-	'RestoreButton'				=> 'Restore',
+	'RestoreButton'				=> 'Taasta',
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> 'Saada',
 
@@ -32,8 +32,8 @@ $wacko_translation = [
 	'AccountText'				=> 'Minu andmed',
 	'AccountTip'				=> 'Konto seaded',
 	'AdminText'					=> 'Admin',
-	'AdminTip'					=> 'Administrative Panel',
-	'LogoutLink'				=> 'Logout',
+	'AdminTip'					=> 'Administratsiooni paneel',
+	'LogoutLink'				=> 'Logi välja',
 	'LogoutButton'				=> 'Logi välja',
 	'LogoutAreYouSure'			=> 'Kas oled kindel, et tahad välja logida?',
 
@@ -125,7 +125,7 @@ $wacko_translation = [
 
 	// notifications
 	'EmailHello'				=> 'Tere ',
-	'EmailModerator'			=> 'Moderator',
+	'EmailModerator'			=> 'Moderaator',
 	'EmailGoodbye'				=> 'Tervitades, ',
 	'WatchedPageChanged'		=> 'Jälgitul leht oli muudetud ',
 	'SomeoneChangedThisPage'	=> ' muudetud vaadatav leht: ',
@@ -165,7 +165,7 @@ $wacko_translation = [
 	'ShowHideDetails'			=> 'Üksikasjad',
 
 	'PrivacyPolicy'				=> 'Andmekaitse',
-	'TermsOfUse'				=> 'Terms of Use',
+	'TermsOfUse'				=> 'Kasutustingimused',
 	'AcceptTermsOfUse'			=> ' I accept',
 
 	'ShowComments'				=> 'Näita kommentaare ja vastuse blanketti',
@@ -246,10 +246,10 @@ $wacko_translation = [
 									'<code>(an empty list)</code> - only the page owner has access',
 
 	'AccessMode'				=> 'Nähtavus',
-	'AccessDenied'				=> 'denied',
-	'AccessPublic'				=> 'public',
+	'AccessDenied'				=> 'keelatud',
+	'AccessPublic'				=> 'avalik',
 	'AccessRegistered'			=> 'registreeritud',
-	'AccessPrivate'				=> 'private',
+	'AccessPrivate'				=> 'privaatne',
 	'AccessCustom'				=> 'custom',
 
 	// purge handler
@@ -316,7 +316,7 @@ $wacko_translation = [
 	// Groups action
 	'GroupsSearch'				=> 'Otsi gruppe',
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
-	'GroupsOpenProfile'			=> 'View Profile',
+	'GroupsOpenProfile'			=> 'Vaata profiili',
 	'GroupsName'				=> 'Grupp',
 	'GroupsMembers'				=> 'Liikmed',
 	'GroupsDescription'			=> 'Kirjeldus',
@@ -535,7 +535,7 @@ $wacko_translation = [
 	'AccountDeleteHint'			=> 'Sinu konto kustutatakse süsteemist. Seetõttu ei saa sa enam sisse logida oma praeguste kasutajatunnustega. Küll aga võid sa registreerida end uuesti rakenduse kasutajaks.',
 	'AccountDeleteVerify'		=> 'Enter your login %1 to verify the deletion. Once submitted, you will be asked to confirm your password.',
 
-	'MarkRead'					=> 'Mark all as read',
+	'MarkRead'					=> 'Märgi kõik loetuks',
 	'CurrentTime'				=> 'current time',
 	'Created'					=> 'loodud',
 	'Modified'					=> 'muudetud',
@@ -674,7 +674,7 @@ $wacko_translation = [
 	// import action
 	'ImportTo'					=> 'Import klastrisse',
 	'ImportWhat'				=> 'XML-fail impordiks',
-	'ImportButton'				=> 'Import',
+	'ImportButton'				=> 'Impordi',
 	'ImportSuccess'				=> 'Importimine õnnestus.',
 	'ImportFailed'				=> 'Importimine ebaõnnestus.',
 	'ImportHint'				=> 'Esitage klaster, kuhu soovite importida, ilma suhtelise aadressita.',
@@ -700,13 +700,13 @@ $wacko_translation = [
 	'NewPageCreated'			=> 'Created a new page',
 	'NewRevisionAdded'			=> 'Changed page',
 	'Cluster'					=> 'cluster',
-	'PageDeleted'				=> 'Page deleted',
+	'PageDeleted'				=> 'Leht kustutatud',
 	'CommentDeleted'			=> 'Comment deleted',
 	'FileDeleted'				=> 'File deleted',
 
 	// users action
 	'UsersSearch'				=> 'Otsige kasutajaid',
-	'UsersOpenProfile'			=> 'View Profile',
+	'UsersOpenProfile'			=> 'Vaata profiili',
 	'UsersNoMatching'			=> 'Matching users not found. Try a softer search criteria.',
 	'UsersName'					=> 'Kasutajanimi',
 	'UsersPages'				=> 'Leheküljed',
@@ -795,7 +795,7 @@ $wacko_translation = [
 	'MetaHtml'					=> 'HTML support for page',
 	'MetaSafeHtml'				=> 'Ebaturvalise HTML-i filtreerimine',
 	'MetaNoIndex'				=> 'Block search engines',
-	'SettingsID'				=> 'Page ID',
+	'SettingsID'				=> 'Lehe ID',
 	'SettingsSize'				=> 'Suurus',
 	'SettingsSizeTip'			=> 'source / compiled',
 	'SettingsCreated'			=> 'Loodud',
@@ -821,7 +821,7 @@ $wacko_translation = [
 	'SettingsAttachments'		=> 'Manused',
 	'SettingsUpload'			=> 'Üleslaadimine',
 	'SettingsCategories'		=> 'Kategooriad',
-	'SettingsLanguages'			=> 'Languages',
+	'SettingsLanguages'			=> 'Keeled',
 	'SettingsReferrers'			=> 'Viitamine',
 	'SettingsWatch'				=> 'Jälgi',
 	'SettingsPrint'				=> 'Printimise versioon',
@@ -830,11 +830,11 @@ $wacko_translation = [
 	'SettingsXML'				=> 'Export to XML',
 	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
 	'SetLang'					=> 'Selle lehe keel',
-	'SetMenuLabel'				=> 'Menu label',
+	'SetMenuLabel'				=> 'Menüü silt',
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
-	'UploadFiles'				=> 'Upload files',
+	'UploadFiles'				=> 'Lae failid üles',
 	'UploadFor'					=> 'Faili üleslaadimine',
 	'UploadButton'				=> 'Nõus',
 	'UploadGlobalText'			=> 'üldise juurdepääsuga',
@@ -863,7 +863,7 @@ $wacko_translation = [
 	'Attachment'				=> 'Manus',
 	'AttachmentsToPage'			=> 'to page',
 	'AttachmentsToCluster'		=> 'cluster',
-	'AttachmentsByTime'			=> 'by time',
+	'AttachmentsByTime'			=> 'aja järgi',
 	'AttachmentsGlobal'			=> 'globaalne',
 	'AttachmentsAll'			=> 'kõik',
 	'AttachmentsLinked'			=> 'kasutatud',
@@ -961,7 +961,7 @@ $wacko_translation = [
 	// license action
 	'DistributedUnder'			=> 'Material is distributed under',
 	'AuthorsDisplayHint'		=> 'The list of authors will be displayed when saving the page.',
-	'AnonymousUsers'			=> 'Anonymous users',
+	'AnonymousUsers'			=> 'Anonüümsed kasutajad',
 	'License'					=> 'Litsents',
 	'LicenseArray'				=> [
 		'1'		=> 'Attribution-NoDerivatives.',
@@ -973,12 +973,12 @@ $wacko_translation = [
 		'7'		=> 'CC0 1.0 Universal',
 		'8'		=> 'GNU Free Documentation License',
 		'9'		=> 'Public Domain / Free Use',
-		'10'	=> 'All Rights Reserved',
+		'10'	=> 'Kõik õigused kaitstud',
 	],
 	'LicenseMeta'				=> [
 		'1'		=> 'Public domain',
 		'2'		=> 'Some rights reserved',
-		'3'		=> 'All Rights Reserved',
+		'3'		=> 'Kõik õigused kaitstud',
 	],
 
 	// Cache
@@ -999,13 +999,13 @@ $wacko_translation = [
 	'FeedMulti'					=> 'Multi-Feed',
 	'FeedNoURL'					=> 'Please specify a Feed with the Parameter url. (e.g. {{feed url="https://example.com/feed.xml"}} )',
 	'FeedError'					=> 'Could not load or parse feed',
-	'FeedSource'				=> 'Source:',
+	'FeedSource'				=> 'Allikas:',
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
-	'ChangesTitleXML'			=> ' - Recent changes',
+	'ChangesTitleXML'			=> ' - Viimased muudatused',
 	'ChangesXML'				=> 'Recent changes to the ',
-	'CommentsTitleXML'			=> ' - Recent comments',
+	'CommentsTitleXML'			=> ' - Viimased kommentaarid',
 	'CommentsXML'				=> 'Recent comments to the ',
 	'NewsTitleXML'				=> ' - Recent news',
 	'NewsXML'					=> 'Recent news to the ',
@@ -1104,11 +1104,11 @@ $wacko_translation = [
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
-	'ForumSubforums'			=> 'Forum',
+	'ForumSubforums'			=> 'Foorum',
 	'ForumTopic'				=> 'Teema',
 	'ForumTopics'				=> 'Teemad',
 	'ForumPosts'				=> 'Posts',
-	'ForumReplies'				=> 'Replies',
+	'ForumReplies'				=> 'Vastused',
 	'ForumAuthor'				=> 'Autor',
 	'ForumViews'				=> 'Vaated',
 	'ForumCreated'				=> 'Loodud',
@@ -1250,7 +1250,7 @@ $wacko_translation = [
 
 	'AccountStatus'				=> 'Account status',
 	'AccountStatusArray' => [
-		'0' => 'active',
+		'0' => 'aktiivne',
 		'1' => 'pending',
 		'2' => 'blocked',
 		'3' => 'inactive',
