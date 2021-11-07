@@ -45,7 +45,7 @@ $lang = [
 'Continue'						=> 'Jätka',
 'Back'							=> 'Tagasi',
 'Recommended'					=> 'soovitatav',
-'InvalidAction'					=> 'Invalid action',
+'InvalidAction'					=> 'Kehtetu tegevus',
 
 /*
    Language Selection Page
@@ -61,17 +61,17 @@ $lang = [
    System Requirements Page
 */
 'version-check'					=> 'Nõuded süsteemile',
-'PhpVersion'					=> 'PHP Version',
+'PhpVersion'					=> 'PHP versioon',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
 'Database'						=> 'Andmebaas',
-'PhpExtensions'					=> 'PHP Extensions',
+'PhpExtensions'					=> 'PHP laiendid',
 'Permissions'					=> 'Õigused',
 'ReadyToInstall'				=> 'Valmis installida?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
-'Problem'						=> 'Problem',
+'Problem'						=> 'Probleem',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Teie PHP installil puuduvad märgitud PHP laiendused, mida WackoWiki nõuab. ',
 'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',

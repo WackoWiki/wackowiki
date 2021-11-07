@@ -6,12 +6,12 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'				=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
-		'content'		=> 'Content',
+		'content'		=> 'Sisu',
 		'users'			=> 'Kasutajad',
 		'maintenance'	=> 'Hooldamine',
 		'messages'		=> 'Sõnumid',
@@ -37,10 +37,10 @@ $ap_translation = [
 	'TimeLeft'					=> 'Time left:  %1 minutes',
 	'ApVersion'					=> 'versioon',
 
-	'SiteOpen'					=> 'Open',
+	'SiteOpen'					=> 'Ava',
 	'SiteOpened'				=> 'site opened',
 	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'Close',
+	'SiteClose'					=> 'Sulge',
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
 
@@ -51,7 +51,7 @@ $ap_translation = [
 	'Remove'					=> 'Eemalda',
 	'Enabled'					=> 'Lubatud',
 	'Disabled'					=> 'Keelatud',
-	'Mandatory'					=> 'Mandatory',
+	'Mandatory'					=> 'Kohustuslik',
 	'Admin'						=> 'Admin',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
@@ -76,7 +76,7 @@ $ap_translation = [
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Appearance',
+		'name'		=> 'Välimus',
 		'title'		=> 'Appearance settings',
 	],
 
@@ -88,7 +88,7 @@ $ap_translation = [
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
+		'name'		=> 'Filtreeri',
 		'title'		=> 'Filter settings',
 	],
 
@@ -118,13 +118,13 @@ $ap_translation = [
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
+		'name'		=> 'Turvalisus',
 		'title'		=> 'Security subsystems settings',
 	],
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
+		'name'		=> 'Süsteem',
 		'title'		=> 'System options',
 	],
 
@@ -142,7 +142,7 @@ $ap_translation = [
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menu',
+		'name'		=> 'Menüü',
 		'title'		=> 'Add, edit or remove default menu items',
 	],
 
@@ -160,7 +160,7 @@ $ap_translation = [
 
 	// DB Convert module
 	'db_convert'		=> [
-		'name'		=> 'Convert',
+		'name'		=> 'Konverteeri',
 		'title'		=> 'Converting Tables or Columns',
 	],
 
@@ -172,13 +172,13 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Restore',
+		'name'		=> 'Taasta',
 		'title'		=> 'Restoring backup data',
 	],
 
 	// Dashboard module
 	'main'		=> [
-		'name'		=> 'Main Menu',
+		'name'		=> 'Peamenüü',
 		'title'		=> 'WackoWiki Administration',
 	],
 
@@ -208,8 +208,8 @@ $ap_translation = [
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Information',
+		'name'		=> 'Süsteemi Info',
+		'title'		=> 'Süsteemi informatsioon',
 	],
 
 	// System log module
@@ -221,7 +221,7 @@ $ap_translation = [
 	// Statistics module
 	'system_statistics'		=> [
 		'name'		=> 'Statistika',
-		'title'		=> 'Show statistics',
+		'title'		=> 'Kuva statistika',
 	],
 
 	// Bad Behavior module
@@ -245,7 +245,7 @@ $ap_translation = [
 	// User module
 	'user_users'		=> [
 		'name'		=> 'Kasutajad',
-		'title'		=> 'User management',
+		'title'		=> 'Kasutajate haldus',
 	],
 
 	// Main module
@@ -281,7 +281,7 @@ $ap_translation = [
 	'SortingComments'			=> 'Sorting comments',
 	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
 
-	'ToolbarSection'			=> 'Toolbar',
+	'ToolbarSection'			=> 'Tööriistariba',
 	'CommentsPanel'				=> 'Comments panel',
 	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
 	'FilePanel'					=> 'File panel',
@@ -418,7 +418,7 @@ $ap_translation = [
 	'CacheSqlTtl'				=> 'Term relevance Cache Database',
 	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
 
-	'PrivacySection'			=> 'Privacy',
+	'PrivacySection'			=> 'Privaatsus',
 	'AnonymizeIp'				=> 'Anonymize users IP addresses',
 	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
 
@@ -513,11 +513,11 @@ $ap_translation = [
 	'CaptchaSection'			=> 'CAPTCHA',
 	'EnableCaptcha'				=> 'Enable Captcha',
 	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
-	'CaptchaComment'			=> 'New comment',
+	'CaptchaComment'			=> 'Uus kommentaar',
 	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
-	'CaptchaPage'				=> 'New page',
+	'CaptchaPage'				=> 'Uus leht',
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
-	'CaptchaEdit'				=> 'Edit page',
+	'CaptchaEdit'				=> 'Muuda lehte',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
 	'CaptchaRegistration'		=> 'Registreerimine',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
@@ -534,7 +534,7 @@ $ap_translation = [
 	'Csp'						=> 'Content-Security-Policy (CSP)',
 	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
-		'0'		=> 'disabled',
+		'0'		=> 'keelatud',
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
@@ -573,7 +573,7 @@ $ap_translation = [
 		'2'		=> 'password does not contain username',
 	],
 
-	'LoginSection'				=> 'Login',
+	'LoginSection'				=> 'Logi sisse',
 	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username',
 	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
 	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address',
@@ -696,7 +696,7 @@ $ap_translation = [
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
 	'LicenseSection'			=> 'Litsents',
-	'DefaultLicense'			=> 'Default license',
+	'DefaultLicense'			=> 'Vaikimisi litsents',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 	'EnableLicense'				=> 'Enable License',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
@@ -707,7 +707,7 @@ $ap_translation = [
 	'RootPage'					=> 'Home page',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Privacy Policy',
+	'PrivacyPage'				=> 'Andmekaitse',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
 	'TermsPage'					=> 'Policies and Regulations',
@@ -717,11 +717,11 @@ $ap_translation = [
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
 	'RegistrationPage'			=> 'Registreerimine',
 	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
-	'LoginPage'					=> 'User login',
+	'LoginPage'					=> 'Kasutajanimi',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
-	'SettingsPage'				=> 'User Settings',
+	'SettingsPage'				=> 'Kasutaja Seaded',
 	'SettingsPageInfo'			=> 'Page customize the user profile (action %1).',
-	'PasswordPage'				=> 'Change Password',
+	'PasswordPage'				=> 'Muuda Parooli',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list',
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
@@ -731,9 +731,9 @@ $ap_translation = [
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
 	'GroupsPage'				=> 'Grupid',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
-	'ChangesPage'				=> 'Recent changes',
+	'ChangesPage'				=> 'Viimased muudatused',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
-	'CommentsPage'				=> 'Recent comments',
+	'CommentsPage'				=> 'Viimased kommentaarid',
 	'CommentsPageInfo'			=> 'Page with a list of recent comment on the page (action %1).',
 	'RemovalsPage'				=> 'Deleted pages',
 	'RemovalsPageInfo'			=> 'Page with a list of recently deleted pages (action %1).',
@@ -741,11 +741,11 @@ $ap_translation = [
 	'WantedPageInfo'			=> 'Page with a list of missing pages that are referenced (action %1).',
 	'OrphanedPage'				=> 'Orphaned pages',
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
-	'SandboxPage'				=> 'Sandbox',
+	'SandboxPage'				=> 'Liivakast',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
 	'HelpPage'					=> 'Abi',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
-	'IndexPage'					=> 'Index',
+	'IndexPage'					=> 'Indeks',
 	'IndexPageInfo'				=> 'Lehekülg koos kõigi lehtede loendiga (action %1).',
 	'RandomPage'				=> 'Juhuslik',
 	'RandomPageInfo'			=> 'Laadib juhusliku lehe (action %1).',
@@ -899,7 +899,7 @@ $ap_translation = [
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
 
 	// DB Convert module
-	'Convert'					=> 'Convert',
+	'Convert'					=> 'Konverteeri',
 	'NoColumnsToConvert'		=> 'No columns to convert.',
 	'NoTablesToConvert'			=> 'No tables to convert.',
 
@@ -915,9 +915,9 @@ $ap_translation = [
 	'DbVersionMin'				=> 'Requires at least MySQL 5.6.4, available version',
 	'DbEngineOk'				=> 'InnoDB is available.',
 	'DbEngineMissing'			=> 'InnoDB is not available.',
-	'EngineTable'				=> 'Table',
-	'EngineDefault'				=> 'Default',
-	'EngineColumn'				=> 'Column',
+	'EngineTable'				=> 'Tabel',
+	'EngineDefault'				=> 'Vaikimisi',
+	'EngineColumn'				=> 'Veerg',
 	'EngineTyp'					=> 'Type',
 
 	'ConvertColumnsToStrict'	=> 'Converting Columns to SQL strict',
@@ -936,9 +936,9 @@ $ap_translation = [
 	'LogEvent'					=> 'Event',
 	'LogUsername'				=> 'Kasutajanimi',
 	'LogLevels'	=> [
-		'1'		=> 'critical',
-		'2'		=> 'highest',
-		'3'		=> 'high',
+		'1'		=> 'kriitiline',
+		'2'		=> 'kõrgeim',
+		'3'		=> 'kõrge',
 		'4'		=> 'medium',
 		'5'		=> 'low',
 		'6'		=> 'lowest',
@@ -994,13 +994,13 @@ $ap_translation = [
 	'Deny'						=> 'Deny',
 	'Pending'					=> 'Pending',
 	'Approved'					=> 'Approved',
-	'Denied'					=> 'Denied',
+	'Denied'					=> 'Keelatud',
 
 	// DB Backup module
-	'BackupStructure'			=> 'Structure',
+	'BackupStructure'			=> 'Struktuur',
 	'BackupData'				=> 'Data',
 	'BackupFolder'				=> 'Folder',
-	'BackupTable'				=> 'Table',
+	'BackupTable'				=> 'Tabel',
 	'BackupCluster'				=> 'Cluster',
 	'BackupFiles'				=> 'Failid',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
@@ -1077,8 +1077,8 @@ $ap_translation = [
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'Restore',
 	'BackupRemove'				=> 'Eemalda',
-	'RestoreYes'				=> 'Yes',
-	'RestoreNo'					=> 'No',
+	'RestoreYes'				=> 'Jah',
+	'RestoreNo'					=> 'Ei',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
@@ -1116,9 +1116,9 @@ $ap_translation = [
 
 	'GroupsMembersFor'			=> 'Members for Group',
 	'GroupsDescription'			=> 'Kirjeldus',
-	'GroupsModerator'			=> 'Moderator',
-	'GroupsOpen'				=> 'Open',
-	'GroupsActive'				=> 'Active',
+	'GroupsModerator'			=> 'Moderaator',
+	'GroupsOpen'				=> 'Ava',
+	'GroupsActive'				=> 'Aktiivne',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
 	'GroupsAlreadyExists'		=> 'This group already exists.',
@@ -1148,10 +1148,10 @@ $ap_translation = [
 
 	// Statistics module
 	'DbStatSection'				=> 'Database Statistics',
-	'DbTable'					=> 'Table',
+	'DbTable'					=> 'Tabel',
 	'DbRecords'					=> 'Records',
 	'DbSize'					=> 'Suurus',
-	'DbIndex'					=> 'Index',
+	'DbIndex'					=> 'Indeks',
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
@@ -1183,7 +1183,7 @@ $ap_translation = [
 	'SessionPath'				=> 'Session path',
 	'PhpDefaultCharset'			=> 'PHP default charset',
 	'GZipCompression'			=> 'GZip compression',
-	'PhpExtensions'				=> 'PHP extensions',
+	'PhpExtensions'				=> 'PHP laiendid',
 	'ApacheModules'				=> 'Apache modules',
 
 	// DB repair module
@@ -1225,9 +1225,9 @@ $ap_translation = [
 	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
 	'BbStats'					=> 'Bad Behavior has blocked %1 access attempts in the last 7 days.',
 
-	'BbSummary'					=> 'Summary',
+	'BbSummary'					=> 'Kokkuvõte',
 	'BbLog'						=> 'Log',
-	'BbSettings'				=> 'Settings',
+	'BbSettings'				=> 'Seadistused',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log
@@ -1259,9 +1259,9 @@ $ap_translation = [
 	'BbSettingsUpdated'			=> 'Updated Bad Behavior settings',
 	'BbLogRequest'				=> 'Logging HTTP request',
 	'BbLogVerbose'				=> 'Verbose',
-	'BbLogNormal'				=> 'Normal (recommended)',
+	'BbLogNormal'				=> 'Tavaline (soovitatud)',
 	'BbLogOff'					=> 'Do not log (not recommended)',
-	'BbSecurity'				=> 'Security',
+	'BbSecurity'				=> 'Turvalisus',
 	'BbStrict'					=> 'Strict checking',
 	'BbStrictInfo'				=> 'blocks more spam but may block some people',
 	'BbOffsiteForms'			=> 'Allow form postings from other web sites',
