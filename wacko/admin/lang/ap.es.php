@@ -895,7 +895,6 @@ $ap_translation = [
 	'WordListInfo'				=> 'Palabra o frase <code>fragmento</code> a incluir en la lista negra (una por línea)',
 
 	// DB Convert module
-	'Convert'					=> 'Convertir',
 	'NoColumnsToConvert'		=> 'No hay columnas que convertir.',
 	'NoTablesToConvert'			=> 'No hay tablas que convertir.',
 

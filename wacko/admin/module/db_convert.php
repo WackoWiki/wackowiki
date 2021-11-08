@@ -198,7 +198,7 @@ function admin_db_convert(&$engine, &$module, &$tables)
 				}
 ?>
 				</table>
-				<button type="submit" name="start-convert_tables" id="submit"><?php echo $engine->_t('Convert');?></button>
+				<button type="submit" name="start-convert_tables" id="submit"><?php echo $engine->_t('ConvertButton');?></button>
 <?php
 				echo $engine->form_close();
 			}
@@ -281,7 +281,7 @@ function admin_db_convert(&$engine, &$module, &$tables)
 			{
 				$engine->sess->sql_strict_queries = $sql_log;
 
-				echo '<button type="submit" name="start-convert_columns" id="submit">' . $engine->_t('Convert') . '</button>';
+				echo '<button type="submit" name="start-convert_columns" id="submit">' . $engine->_t('ConvertButton') . '</button>';
 			}
 			else
 			{
@@ -307,7 +307,7 @@ function admin_db_convert(&$engine, &$module, &$tables)
 		echo $engine->form_open('convert_tables');
 		?>
 			<input type="hidden" name="action" value="convert_tables">
-			<button type="submit" name="start" id="submit"><?php echo $engine->_t('Convert');?></button>
+			<button type="submit" name="start" id="submit"><?php echo $engine->_t('ConvertButton');?></button>
 		<?php
 		echo $engine->form_close();?>
 
@@ -320,7 +320,7 @@ function admin_db_convert(&$engine, &$module, &$tables)
 		echo $engine->form_open('convert_columns');
 		?>
 			<input type="hidden" name="action" value="convert_columns">
-			<button type="submit" name="start" id="submit"><?php echo $engine->_t('Convert');?></button>
+			<button type="submit" name="start" id="submit"><?php echo $engine->_t('ConvertButton');?></button>
 		<?php
 		echo $engine->form_close();
 	}
