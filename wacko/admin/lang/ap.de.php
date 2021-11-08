@@ -908,7 +908,6 @@ $ap_translation = [
 	'WordListInfo'				=> 'Wort oder Phrase <code>fragment</code> welches auf die schwarze Liste gesetzt wird (eins pro Zeile)',
 
 	// DB Convert module
-	'Convert'					=> 'Konvertieren',
 	'NoColumnsToConvert'		=> 'Keine Spalten zum Konvertieren.',
 	'NoTablesToConvert'			=> 'Keine Tabellen zum Konvertieren.',
 

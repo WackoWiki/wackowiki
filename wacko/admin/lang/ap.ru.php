@@ -881,7 +881,6 @@ $ap_translation = [
 	'WordListInfo'				=> 'Чёрный список слов или предложений, по одному в строке',
 
 	// DB Convert module
-	'Convert'					=> 'Преобразовать',
 	'NoColumnsToConvert'		=> 'Нет столбцов для преобразования.',
 	'NoTablesToConvert'			=> 'Нет таблиц для преобразования.',
 
