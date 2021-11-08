@@ -1,9 +1,9 @@
-//
-//
-//	autocomplete for WikiEdit
-//
-//	(c) 2005 Kuso Mendokusee, WackoWikiTeam
-//	
+/*!
+ * autocomplete for WikiEdit
+ *
+ * Licensed BSD © Kuso Mendokusee, WackoWiki Team
+ */
+
 class AutoComplete
 {
 	constructor(wikiedit, handler)
