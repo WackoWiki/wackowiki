@@ -4,8 +4,6 @@
  * Licensed BSD © WackoWiki Team
  */
 
-For license see LICENSE.TXT
-*/
 class ProtoEdit
 {
 	constructor()
