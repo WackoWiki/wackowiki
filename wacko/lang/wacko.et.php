@@ -643,7 +643,7 @@ $wacko_translation = [
 	'EmailRegisteredLogin'		=> 'Naaske Wiki ja logige sisse oma uue kasutajanime ja parooliga.',
 	'EmailRegisteredIgnore'		=> 'Kui sa pole taodelnud registreerimist, ignoreeri seda teadet ja midagi ei juhtu.',
 	'EmailDoNotReply'			=> 'äRA VASTA SELLELE TEATELE',
-	'EmailReverify'				=> 'Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.' . "\n" . 'Sinu kasutajanimi: %2'."\n\n" . 'Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata ' . "\n" . '%3' . "\n" . 'seda, et seda teha.'."\n\n" . '',
+	'EmailReverify'				=> 'Keegi (võib-olla sa ise) on edastanud su e-posti aadressi, et saada sellele teateid %1.' . "\n" . 'Sinu kasutajanimi: %2'."\n\n" . 'Kui sa tahad saada teateid, pead sa lubama selleks oma e-posti aadressi. Vaata ' . "\n" . '%3' . "\n" . 'seda, et seda teha.'."\n\n",
 	'EmailConfirm'				=> 'Palun kontrolli oma e-posti aadressi',
 	'EmailConfirmed'			=> 'E-posti aadressi õigsus on kinnitust leidnud.',
 	'EmailNotConfirmed'			=> 'E-posti aadress ei leidnud kinnitust. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -746,8 +746,8 @@ $wacko_translation = [
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-									'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-									'similar form on your profile page. ',
+								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
+								   'similar form on your profile page. ',
 	'UsersPMOversized'			=> 'Sõnumi pikkus ületab maksimaalse suuruse %1 võrra. Lühendage oma sõnumit ja saatke see uuesti.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
@@ -755,8 +755,8 @@ $wacko_translation = [
 	'UsersPMBody'				=> 'Selle teate on teile saatnud kasutaja %1.',
 	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
-									'violates the rules of the site, please send it (using the button Forward /' .
-									'Forward your mail program) to address %1.',
+								   'violates the rules of the site, please send it (using the button Forward /' .
+								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'Te pole süsteemi sisse logitud ega saa kasutajatele isiklikke sõnumeid saata.',
 
 	// rating handler

@@ -644,7 +644,7 @@ $wacko_translation = [
 	'EmailRegisteredLogin'		=> 'Por favor vuelva a loguearse en el Wiki con su nuevo usuario y contraseña.',
 	'EmailRegisteredIgnore'		=> 'Si usted no solicitó el registro, ignore este mensaje y nada ocurrirá.',
 	'EmailDoNotReply'			=> 'NO RESPONDA A ESTE MENSAJE',
-	'EmailReverify'				=> 'Alguien (quizas tu) ha sometido tu email como dirección de notificación en %1.' . "\n" . 'Tu nombre de usuario: %2'."\n\n" . 'Si quieres recibir notificaciones, tienes que confirmar tu email. Sigue ' . "\n" . '%3' . "\n" . 'este link para hacerlo.'."\n\n" . '',
+	'EmailReverify'				=> 'Alguien (quizas tu) ha sometido tu email como dirección de notificación en %1.' . "\n" . 'Tu nombre de usuario: %2'."\n\n" . 'Si quieres recibir notificaciones, tienes que confirmar tu email. Sigue ' . "\n" . '%3' . "\n" . 'este link para hacerlo.'."\n\n",
 	'EmailConfirm'				=> 'Verifica tu email',
 	'EmailConfirmed'			=> 'Email confirmado con éxito.',
 	'EmailNotConfirmed'			=> 'El Email no se ha podido confirmar. La causa puede ser un código de confirmación incorrecto o la dirección de email podrá ya estar confirmado. Puede verificar si la dirección de email ya fue confirmada, si se luguéa y entra en la página %1 para ver su estado.',
@@ -667,7 +667,7 @@ $wacko_translation = [
 	'Watchers'					=> 'Lista de vigilantes de %1',
 	'WatchersFor'				=> 'Observadores de',
 	'NoWatchers'				=> 'No hay vigilantes para %1',
-	'NotOwnerToViewWatchers'	=>'No eres el propietario de esta página y no puedes ver la lista de vigilantes.',
+	'NotOwnerToViewWatchers'	=> 'No eres el propietario de esta página y no puedes ver la lista de vigilantes.',
 
 	// admin_recovery action
 	'GenerateRecoveryHash'		=> 'Genere el hash de contraseña para su <code>recovery_password</code>',

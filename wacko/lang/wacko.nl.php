@@ -643,7 +643,7 @@ $wacko_translation = [
 	'EmailRegisteredLogin'		=> 'Ga terug naar de Wiki en log in met je nieuwe gebruikersnaam en wachtwoord.',
 	'EmailRegisteredIgnore'		=> 'Als u zich niet hebt aangemeld, dan kunt u dit bericht negeren. Dan gebeurt er niets.',
 	'EmailDoNotReply'			=> 'Verstuur geen antwoord op dit bericht',
-	'EmailReverify'				=> 'Iemand (vermoedelijk uzelf) heeft uw emailadres als notificatie-adres ingevuld op %1.' . "\n" . 'Uw gebruikersnaam: %2'."\n\n" . 'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik ' . "\n" . '%3' . "\n" . 'hier om dit te doen.'."\n\n" . '',
+	'EmailReverify'				=> 'Iemand (vermoedelijk uzelf) heeft uw emailadres als notificatie-adres ingevuld op %1.' . "\n" . 'Uw gebruikersnaam: %2'."\n\n" . 'Als u notificaties wilt ontvangen moet u bevestigen dat dit emailadres van u is. Klik ' . "\n" . '%3' . "\n" . 'hier om dit te doen.'."\n\n",
 	'EmailConfirm'				=> 'Controleer uw emailadres',
 	'EmailConfirmed'			=> 'Emailadres is gecontroleerd.',
 	'EmailNotConfirmed'			=> 'Emailadres kon niet worden gecontroleerd. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
@@ -746,8 +746,8 @@ $wacko_translation = [
 	'UsersIntercomDisabled'		=> 'Sorry, u wilt of kunt geen persoonlijke berichten ontvangen.',
 	'UsersIntercomHint'			=> 'Log eerst in en volg de link opnieuw, als je het persoonlijke bericht dat je hebt ontvangen wilt beantwoorden.',
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-									'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-									'similar form on your profile page. ',
+								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
+								   'similar form on your profile page. ',
 	'UsersPMOversized'			=> 'De lengte van het bericht overschrijdt de maximaal toegestane grootte met %1. Gelieve uw bericht in te korten en opnieuw te verzenden.',
 	'UsersPMFlooded'			=> 'Het interval tussen het verzenden van persoonlijke berichten mag niet korter zijn dan %1 seconde.',
 	'UsersPMSent'				=> 'Een persoonlijk bericht werd met succes naar de gebruiker verzonden.',
@@ -755,8 +755,8 @@ $wacko_translation = [
 	'UsersPMBody'				=> 'Dit bericht is door de gebruiker naar u verzonden %1.',
 	'UsersPMReply'				=> 'Om deze e-mail te beantwoorden, klik op de volgende link (gebruik niet de Reply-knop / Reply in mailer):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
-									'violates the rules of the site, please send it (using the button Forward /' .
-									'Forward your mail program) to address %1.',
+								   'violates the rules of the site, please send it (using the button Forward /' .
+								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'U bent niet geregistreerd in het systeem en kunt geen persoonlijke berichten naar gebruikers sturen.',
 
 	// rating handler

@@ -350,7 +350,6 @@ $ap_translation = [
 
 	'DefaultRenameRedirect'		=> 'Bei Umbenennung einer Seite eine Umleitung setzen',
 	'DefaultRenameRedirectInfo'	=> 'Standardmäßig erfolgt eine Umleitung an die alte Adresse der umbenannten Seite.',
-
 	'StoreDeletedPages'			=> 'Gelöschte Seiten behalten',
 	'StoreDeletedPagesInfo'		=> 'Wenn eine Seite, einen Kommentar oder eine Datei gelöscht wird, steht diese noch in einen gesonderten Bereich für eine bestimmte Zeit (siehe nächster Punkt) zur die Wiederherstellung und Anzeige zur Verfügung.',
 	'KeepDeletedTime'			=> 'Aufbewahrungszeit für gelöschten Seiten',
@@ -459,8 +458,8 @@ $ap_translation = [
 		'2'		=> 'Datenbank',
 	],
 
-	'RewriteMode'				=> 'Verwende <code>mod_rewrite</code>',
-	'RewriteModeInfo'			=> 'Wenn der Webserver diese Funktion unterstützt, aktiviere sie, um "schöne" Seitenadressen zu erhalten.<br>
+	'RewriteMode'					=> 'Verwende <code>mod_rewrite</code>',
+	'RewriteModeInfo'				=> 'Wenn der Webserver diese Funktion unterstützt, aktiviere sie, um "schöne" Seitenadressen zu erhalten.<br>
 									<span class="cite">Der Wert wird möglicherweise zur Laufzeit von der Settings-Klasse überschrieben, obwohl er deaktiviert ist, wenn HTTP_MOD_REWRITE aktiviert ist.',
 
 	// Permissions settings
@@ -479,6 +478,7 @@ $ap_translation = [
 	'UploadRightsInfo'			=> 'Diese werden sowohl den erstellten Wurzelseiten als auch Seiten zugeordnet, für die keine Elternrechte definiert werden können.',
 	'RenameRights'				=> 'Globale Berechtigung Seiten umzubenennen',
 	'RenameRightsInfo'			=> 'Liste von Benutzern mit Berechtigung, Seiten umzubenennen (zu verschieben).',
+
 	'LockAcl'					=> 'Beschränke alle Berechtigungen auf Nur Lesen',
 	'LockAclInfo'				=> '<span class="cite">Überschreibt die Berechtigungen für alle Seiten zu Nur Lesen.</span><br>Dies kann nützlich sein, wenn ein Projekt beendet wurde oder aus Sicherheitsgründen die Bearbeitung von Seiten zeitweise ausgesetzt werden muss oder als Notfallmaßnahme.',
 	'HideLocked'				=> 'Nicht zugängliche Seiten ausblenden',
@@ -504,7 +504,6 @@ $ap_translation = [
 	'ApproveNewUserInfo'		=> 'Ermöglicht Administratoren, Benutzer nach der Registrierung zuzulassen. Nur zugelassene Benutzer dürfen sich auf der Site anmelden.',
 	'PersistentCookies'			=> 'Dauerhafte Cookies',
 	'PersistentCookiesInfo'		=> 'Erlaube dauerhafte Cookies.',
-
 	'DisableWikiName'			=> 'Deaktiviere WikiName',
 	'DisableWikiNameInfo'		=> 'Deaktiviert die die obligatorische Verwendung von WikiNamen. Ermöglicht die Registrierung von Benutzern mit traditionellen Spitznamen, NameVorname ist nicht zwingend.',
 	'AllowEmailReuse'			=> 'Erlaubt die Wiederverwendung von E-Mail-Adressen',
@@ -559,7 +558,6 @@ $ap_translation = [
 	'UserPasswordSection'		=> 'Passwortschutz-Einstellungen',
 	'PwdMinChars'				=> 'Minimale Passwortlänge',
 	'PwdMinCharsInfo'			=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 12 bis 16 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
-
 	'AdminPwdMinChars'			=> 'Minimale Admin Passwortlänge',
 	'AdminPwdMinCharsInfo'		=> 'Längere Passwörter bieten notwendigerweise mehr Schutz als kürzere Passwörter (z.B. 15 bis 20 Zeichen).<br>Anstelle eines einzelnen Passwortes wird die Verwendung einer Passphrase empfohlen.',
 	'PwdCharComplexity'			=> 'Die erforderliche Kennwortkomplexität',
@@ -685,7 +683,6 @@ $ap_translation = [
 	'ListCountInfo'				=> 'Anzahl der Zeilen, die in jeder Liste für Gäste angezeigt werden, oder als Standardwert für neue Benutzer.',
 
 	'ForumSection'				=> 'Options Forum',
-
 	'ForumCluster'				=> 'Cluster Forum',
 	'ForumClusterInfo'			=> 'Root-Cluster für den Forumbereich (Aktion %1).',
 	'ForumTopics'				=> 'Anzahl der Themen pro Seite',
@@ -702,14 +699,12 @@ $ap_translation = [
 	'LicenseSection'			=> 'Lizenz',
 	'DefaultLicense'			=> 'Standard-Lizenz',
 	'DefaultLicenseInfo'		=> 'Unter welcher Lizenz sollen deine Inhalte veröffentlicht werden?',
-
 	'EnableLicense'				=> 'Aktiviere Lizenz',
 	'EnableLicenseInfo'			=> 'Aktivieren, um Lizenzinformationen anzuzeigen.',
 	'LicensePerPage'			=> 'Lizenz pro Seite',
 	'LicensePerPageInfo'		=> 'Erlaube Lizenz pro Seite, die der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
 
 	'ServicePagesSection'		=> 'Standardseiten',
-
 	'RootPage'					=> 'Hauptseite',
 	'RootPageInfo'				=> 'Der Tag der Hauptseite, welcher automatisch aufgerufen wird, wenn ein Nutzer die Website besucht.',
 
@@ -725,7 +720,6 @@ $ap_translation = [
 	'RegistrationPageInfo'		=> 'Seite für neue Benutzerregistrierung (Aktion %1).',
 	'LoginPage'					=> 'Benutzer-Anmeldung',
 	'LoginPageInfo'				=> 'Seite zur Anmeldung (Aktion %1).',
-
 	'SettingsPage'				=> 'Benutzereinstellungen',
 	'SettingsPageInfo'			=> 'Seite zum Anpassen des Benutzerprofils (Aktion %1).',
 	'PasswordPage'				=> 'Passwort ändern',
@@ -736,7 +730,6 @@ $ap_translation = [
 	'CategoryPageInfo'			=> 'Seite mit einer Liste von kategorisierten Seiten (Aktion %1).',
 	'TagPage'					=> 'Schlagworte',
 	'TagPageInfo'				=> 'Seite mit einer Liste von verschlagworteten Seiten (Aktion %1).',
-
 	'GroupsPage'				=> 'Gruppen',
 	'GroupsPageInfo'			=> 'Seite mit einer Liste von Arbeitsgruppen (Aktion %1).',
 	'ChangesPage'				=> 'Letzte Änderungen',
@@ -771,7 +764,6 @@ $ap_translation = [
 	'NotificationSection'		=> 'Benachrichtigungen',
 	'NotifyPageEdit'			=> 'Seitenänderung mitteilen',
 	'NotifyPageEditInfo'		=> 'Ausstehend - Es wird nur für die erste Änderung einer beobachteten Seite eine Benachrichtigung gesendet. Die Benachrichtigung wird automatisch wieder aktiviert, wenn die aktuelle Version der Seite aufgerufen wird.',
-	//
 	'NotifyMinorEdit'			=> 'Kleine Änderung mitteilen',
 	'NotifyMinorEditInfo'		=> 'Sende Mitteilungen auch bei kleinen Änderungen.',
 	'NotifyNewComment'			=> 'Neuen Kommentar mitteilen',
@@ -914,7 +906,7 @@ $ap_translation = [
 	'LogDatabaseConverted'		=> 'Datenbank konvertiert',
 	'ConversionTablesOk'		=> 'Konvertierung der ausgewählten Tabellen erfolgreich.',
 
-	'LogColumnsToStrict'			=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
+	'LogColumnsToStrict'		=> 'Spalten konvertiert, um dem strikten SQL-Modus zu entsprechen',
 	'ConversionColumnsOk'		=> 'Konvertierung der ausgewählten Spalten erfolgreich.',
 
 	'ConvertTablesEngine'		=> 'Konvertiere Tabellen von MyISAM zu InnoDB',
@@ -930,7 +922,6 @@ $ap_translation = [
 
 	'ConvertColumnsToStrict'	=> 'Konvertiere Spalten für den SQL-Strikt-Modus',
 	'ConvertTablesStrictInfo'	=> 'Wenn man über vorhandene Tabellen verfügt, welche man konvertieren möchte, um dem strikten SQL-Modus zu entsprechen, verwende die folgende Routine.',
-	//
 
 	// Log module
 	'LogFilterTip'				=> 'Filtere Ereignisse nach Kriterien',
@@ -1065,7 +1056,6 @@ $ap_translation = [
 	'NoTableStructure'			=> 'Die Struktur der Tabellen wurde nicht gespeichert - überspringen',
 	'RestoreRecords'			=> 'Tabelleninhalte wiederherstellen',
 	'ProcessTablesDump'			=> 'Tabellen-Dump entpacken und verarbeiten',
-
 	'Instruction'				=> 'Anweisung',
 	'RestoredRecords'			=> 'Datensätze',
 	'RecordsRestoreDone'		=> 'Abgeschlossen. Gesamtzahl der Datensätze',
@@ -1178,7 +1168,7 @@ $ap_translation = [
 
 	'WackoVersion'				=> 'WackoWiki',
 	'LastWackoUpdate'			=> 'Letzte Aktualisierung',
-	'ServerOS'					=> 'OS',
+	'ServerOS'					=> 'Betriebssystem',
 	'ServerName'				=> 'Servername',
 	'WebServer'					=> 'Webserver',
 	'HttpProtocol'				=> 'HTTP-Protokoll',
@@ -1288,6 +1278,5 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Reverse-Proxy aktivieren',
 	'BbReverseProxyHeader'		=> 'Kopfzeile mit der IP-Adresse des Internet-Clients',
 	'BbReverseProxyAddresses'	=> 'IP-Adressbereiche oder Adressbereiche im CIDR-Format für die Proxy-Server (eine pro Zeile)',
-
 
 ];

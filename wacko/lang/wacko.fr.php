@@ -178,7 +178,7 @@ $wacko_translation = [
 	'PageHandlerMoreTip'		=> 'davantage',
 
 	'ThemeCorrupt'				=> 'Ce Thème est corrompu',
-	'InvalidNamespace'			=> 'Invalid namespace given.',
+	'InvalidNamespace'			=> 'Espace de noms non valide.',
 	'DoesNotExists'				=> 'Cette page n’existe pas encore.',
 	'PromptCreate'				=> 'Peut-être voulez-vous la <a href="%1">créer</a> ?',
 	'RevisionHint'				=> 'Ceci est une ancienne version de <a href="%1">%2</a> de %3 édité par %4.',
@@ -643,7 +643,7 @@ $wacko_translation = [
 	'EmailRegisteredLogin'		=> 'Merci de revenir au wiki et de vous connecter avec vos nouveaux identifiant et mot de passe.',
 	'EmailRegisteredIgnore'		=> 'Si vous n’aviez fait aucune demande d’enregistrement, ignorez ce message et rien ne sera fait.',
 	'EmailDoNotReply'			=> 'NE PAS RÉPONDRE À CE MESSAGE',
-	'EmailReverify'				=> 'Quelqu’un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.' . "\n" . 'Votre nom d’utilisateur (NomWiki) : %2'."\n\n" . 'Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour cela suivez ' . "\n" . '%3' . "\n" . 'ce lien.'."\n\n" . '',
+	'EmailReverify'				=> 'Quelqu’un (peut-être vous) a donné votre adresse de messagerie pour recevoir des notifications des modifications ou commentaires sur %1.' . "\n" . 'Votre nom d’utilisateur (NomWiki) : %2'."\n\n" . 'Si vous voulez recevoir des notifications, vous devez confirmer votre adresse de messagerie. Pour cela suivez ' . "\n" . '%3' . "\n" . 'ce lien.'."\n\n",
 	'EmailConfirm'				=> 'Merci de vérifier votre adresse de messagerie',
 	'EmailConfirmed'			=> 'Adresse de messagerie confirmée.',
 	'EmailNotConfirmed'			=> 'Adresse de messagerie non confirmée. Ceci peut être dû à un code de confirmation erroné, mais cette adresse peut aussi avoir été déjà confirmée. Identifiez-vous et vérifiez-le sur votre page %1.',
@@ -961,7 +961,7 @@ $wacko_translation = [
 	// license action
 	'DistributedUnder'			=> 'La contenu est distribué sous',
 	'AuthorsDisplayHint'		=> 'La liste des auteurs sera affichée quand la page sera enregistrée.',
-	'AnonymousUsers'			=> 'Anonymous users',
+	'AnonymousUsers'			=> 'Utilisateurs anonymes',
 	'License'					=> 'Licence',
 	'LicenseArray'				=> [
 		'1'		=> 'Attribution-NoDerivatives.',
@@ -1301,7 +1301,7 @@ $wacko_translation = [
 	'LogAdminLoginFailed'		=> '!!Échec de la connexion au panneau d’administration!!',
 	'LogAdminLoginLocked'		=> 'connexion verrouillée dans le panneau d’administration',
 	'LogUserCookieForged'		=> '!!**tentative de connexion avec un cookie piraté à ##%1##**!!',
-	'LogInvalidFormToken'		=> 'Potential CSRF attack in progress detected: %1',
+	'LogInvalidFormToken'		=> 'Attaque potentielle CSRF détectée en cours: %1',
 	'LogRemovedPage'			=> '!!page ##%1##  supprimée (utilisateur %2)!!',
 	'LogRemovedCluster'			=> '!!**Groupe** supprimé ##%1## (utilisateur %2)!!',
 	'LogRemovedRevision'		=> '!!Révision ##%3## supprimée de la page [[/%1]] (utilisateur %2)!!',

@@ -746,8 +746,8 @@ $wacko_translation = [
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
 	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-									'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-									'similar form on your profile page. ',
+								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
+								   'similar form on your profile page. ',
 	'UsersPMOversized'			=> 'Το μήκος του μηνύματος υπερβαίνει το μέγιστο μέγεθος κατά %1. Συντομεύστε το μήνυμά σας και υποβάλετε ξανά.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
@@ -755,8 +755,8 @@ $wacko_translation = [
 	'UsersPMBody'				=> 'Αυτό το μήνυμα σας έχει σταλεί από τον χρήστη %1.',
 	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
-									'violates the rules of the site, please send it (using the button Forward /' .
-									'Forward your mail program) to address %1.',
+								   'violates the rules of the site, please send it (using the button Forward /' .
+								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'Δεν είστε συνδεδεμένοι στο σύστημα και δεν μπορείτε να στείλετε προσωπικά μηνύματα στους χρήστες.',
 
 	// rating handler

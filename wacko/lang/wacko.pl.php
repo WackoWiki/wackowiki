@@ -513,7 +513,7 @@ $wacko_translation = [
 	'ListMyChanges'				=> 'List your changes',
 	'ListMyWatches'				=> 'List of watched pages',
 	'ListMyChangesWatches'		=> 'Changes among watched pages',
-	'SeeListOfPages' 			=> 'Wyświetl listę stron, których jesteś autorem (MyPages) lub ostatnio były edytowane przez Ciebie (MyChanges).',
+	'SeeListOfPages'			=> 'Wyświetl listę stron, których jesteś autorem (MyPages) lub ostatnio były edytowane przez Ciebie (MyChanges).',
 	'AddBookmark'				=> 'Dodaj bieżącą stronę do listy szybkiego dostępu',
 	'RemoveBookmark'			=> 'Usuń z listy szybkiego dostępu',
 
@@ -658,7 +658,7 @@ $wacko_translation = [
 	'UserNotFound'				=> 'Użytkownik z tą nazwą lub adresem e-mail nie został znaleziony.',
 	'NotConfirmedEmail'			=> 'Twój adres e-mail nie został potwierdzony.<br>Mail nie może być wysyłany na niepotwierdzony adres.',
 	'EmailForgotSubject'		=> 'Ponowienie hasła dla ',
-	'EmailForgotMessage'		=> 'Ktoś (prawdopodobnie Ty) zapomniał swojego hasła do %1' . "\n" . 'Twój login: %2'."\n\n" . 'Kliknij na ' . "\n" . '%3' . "\n" . ' albo skopiuj adres do przeglądarki, aby zmienić swoje hasło.'."\n\n" . '',
+	'EmailForgotMessage'		=> 'Ktoś (prawdopodobnie Ty) zapomniał swojego hasła do %1' . "\n" . 'Twój login: %2'."\n\n" . 'Kliknij na ' . "\n" . '%3' . "\n" . ' albo skopiuj adres do przeglądarki, aby zmienić swoje hasło.'."\n\n",
 	'CodeWasSent'				=> 'Instrukcje odzyskiwania hasła zostały wysłane do ciebie przez e-mail',
 	'WrongCode'					=> 'Zły kod',
 	'ChangePasswordForUser'		=> 'Zmiana hasła %1',
@@ -753,8 +753,8 @@ $wacko_translation = [
 	'UsersPMBody'				=> 'Ta wiadomość została wysłana do Ciebie przez użytkownika %1.',
 	'UsersPMReply'				=> 'Aby odpowiedzieć na ten e-mail, kliknij na poniższy link (nie używaj przycisku Odpowiedz / Odpowiadaj w mailerze):',
 	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
-									'violates the rules of the site, please send it (using the button Forward /' .
-									'Forward your mail program) to address %1.',
+								   'violates the rules of the site, please send it (using the button Forward /' .
+								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'Nie jesteś zalogowany do systemu i nie możesz wysyłać osobistych wiadomości do użytkowników.',
 
 	// rating handler
