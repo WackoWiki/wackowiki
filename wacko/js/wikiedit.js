@@ -1,20 +1,9 @@
-/*
-////////////////////////////////////////////////////////////////////////
-// WikiEdit															  //
-// v. 3.21															  //
-// supported:														  //
-//																	  //
-// (c) Roman "Kukutz" Ivanov <thingol@mail.ru>, 2003-2021			  //
-//	 based on AutoIndent for textarea								  //
-//	 (c) Roman "Kukutz" Ivanov, Evgeny Nedelko, 2003				  //
-// Many thanks to Alexander Babaev, Sergey Kruglov, Evgeny Nedelko	  //
-//						 and Nikolay Jaremko						  //
-// https://wackowiki.org/doc/Dev/Projects/WikiEdit					  //
-//																	  //
-////////////////////////////////////////////////////////////////////////
-
-For license see LICENSE.TXT
-*/
+/*!
+ * WikiEdit v3.21
+ * https://wackowiki.org/doc/Dev/Projects/WikiEdit
+ *
+ * Licensed BSD © Roman Ivanov, Evgeny Nedelko, WackoWiki Team
+ */
 
 class WikiEdit extends ProtoEdit
 {
