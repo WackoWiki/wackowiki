@@ -14,7 +14,7 @@ $ap_translation = [
 		'content'		=> 'Content',
 		'users'			=> 'Gebruikers',
 		'maintenance'	=> 'Onderhoud',
-		'messages'		=> 'Messages',
+		'messages'		=> 'Berichten',
 		'extension'		=> 'Extensies',
 		'database'		=> 'Database',
 	],
@@ -34,8 +34,8 @@ $ap_translation = [
 	'ApLogOut'					=> 'Log uit',
 	'ApLogOutTip'				=> 'quit system administration',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
-	'ApVersion'					=> 'version',
+	'TimeLeft'					=> 'Resterende tijd:  %1 minuten',
+	'ApVersion'					=> 'versie',
 
 	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
@@ -54,7 +54,7 @@ $ap_translation = [
 	'Mandatory'					=> 'Mandatory',
 	'Admin'						=> 'Admin',
 
-	'MiscellaneousSection'		=> 'Miscellaneous',
+	'MiscellaneousSection'		=> 'Overige',
 	'MainSection'				=> 'Basic Parameters',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
@@ -83,13 +83,13 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-mailadres',
-		'title'		=> 'Email settings',
+		'title'		=> 'Email instellingen',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
 		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'title'		=> 'Filter instellingen',
 	],
 
 	// Config Formatter module
@@ -124,7 +124,7 @@ $ap_translation = [
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
+		'name'		=> 'Systeem',
 		'title'		=> 'System options',
 	],
 
@@ -208,13 +208,13 @@ $ap_translation = [
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Information',
+		'name'		=> 'Systeem Info',
+		'title'		=> 'Systeeminformatie',
 	],
 
 	// System log module
 	'system_log'		=> [
-		'name'		=> 'System log',
+		'name'		=> 'Systeem log',
 		'title'		=> 'Log of system events',
 	],
 
@@ -267,12 +267,12 @@ $ap_translation = [
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
 
-	'LanguageSection'			=> 'Language',
-	'DefaultLanguage'			=> 'Default language',
+	'LanguageSection'			=> 'Taal',
+	'DefaultLanguage'			=> 'Standaard taal',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
-	'AllowedLanguages'			=> 'Allowed languages',
+	'AllowedLanguages'			=> 'Toegestane talen',
 	'AllowedLanguagesInfo'		=> 'Het wordt aanbevolen om alleen de set van talen te selecteren die u wilt gebruiken, anders worden alle talen geselecteerd.',
 
 	'CommentSection'			=> 'Reacties',
@@ -383,9 +383,9 @@ $ap_translation = [
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
 	'SiteFaviconTooBig'			=> 'Favicon is groter dan 64 × 64px.',
 	'LayoutSection'				=> 'Layout',
-	'Theme'						=> 'Theme',
+	'Theme'						=> 'Thema',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
-	'ThemesAllowed'				=> 'Allowed Themes',
+	'ThemesAllowed'				=> 'Toegestane thema\'s',
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
@@ -507,7 +507,7 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
 	'AllowEmailReuse'			=> 'Allow email address re-use',
 	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
-	'UsernameLength'			=> 'Username length',
+	'UsernameLength'			=> 'Gebruikersnaam lengte',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
 
 	'CaptchaSection'			=> 'CAPTCHA',
@@ -515,14 +515,14 @@ $ap_translation = [
 	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
 	'CaptchaComment'			=> 'New comment',
 	'CaptchaCommentInfo'		=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before posting the comment.',
-	'CaptchaPage'				=> 'New page',
+	'CaptchaPage'				=> 'Nieuwe pagina',
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
 	'CaptchaEdit'				=> 'Edit page',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
 	'CaptchaRegistration'		=> 'Registratie',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
 
-	'TlsSection'				=> 'TLS Settings',
+	'TlsSection'				=> 'TLS instellingen',
 	'TlsConnection'				=> 'TLS-Connection',
 	'TlsConnectionInfo'			=> 'Use TLS-secured connection. <span class="cite">Activate the required pre-installed TLS-certificate on the server, otherwise you will lose access to the admin panel!</span><br>It also determines if the the Cookie Secure Flag is set, the <code>secure</code> flag specifies whether cookies should only be sent over secure connections.',
 	'TlsImplicit'				=> 'Mandatory TLS',
@@ -534,7 +534,7 @@ $ap_translation = [
 	'Csp'						=> 'Content-Security-Policy (CSP)',
 	'CspInfo'					=> 'Configuring Content Security Policy involves deciding what policies you want to enforce, and then configuring them and using Content-Security-Policy to establish your policy.',
 	'PolicyModes'	=> [
-		'0'		=> 'disabled',
+		'0'		=> 'uitgeschakeld',
 		'1'		=> 'strict',
 		'2'		=> 'custom',
 	],
@@ -561,14 +561,14 @@ $ap_translation = [
 	'AdminPwdMinCharsInfo'		=> 'Longer passwords are necessarily more secure than shorter passwords (e.g. 15 to 20 characters).<br>The use of passphrases instead of passwords is encouraged.',
 	'PwdCharComplexity'			=> 'The required password complexity',
 	'PwdCharClasses'	=> [
-		'0'		=> 'not tested',
+		'0'		=> 'niet getest',
 		'1'		=> 'any letters + numbers',
 		'2'		=> 'uppercase and lowercase + numbers',
 		'3'		=> 'uppercase and lowercase + numbers + characters',
 	],
 	'PwdUnlikeLogin'			=> 'Additional complication',
 	'PwdUnlikes'	=> [
-		'0'		=> 'not tested',
+		'0'		=> 'niet getest',
 		'1'		=> 'password is not identical to the login',
 		'2'		=> 'password does not contain username',
 	],
@@ -696,11 +696,11 @@ $ap_translation = [
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
 	'LicenseSection'			=> 'Licentie',
-	'DefaultLicense'			=> 'Default license',
+	'DefaultLicense'			=> 'Standaard licentie',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 	'EnableLicense'				=> 'Enable License',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
-	'LicensePerPage'			=> 'License per page',
+	'LicensePerPage'			=> 'Licentie per pagina',
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
 	'ServicePagesSection'		=> 'Service pages',
@@ -915,7 +915,7 @@ $ap_translation = [
 	'DbEngineOk'				=> 'InnoDB is available.',
 	'DbEngineMissing'			=> 'InnoDB is not available.',
 	'EngineTable'				=> 'Table',
-	'EngineDefault'				=> 'Default',
+	'EngineDefault'				=> 'Standaard',
 	'EngineColumn'				=> 'Column',
 	'EngineTyp'					=> 'Type',
 
@@ -931,7 +931,7 @@ $ap_translation = [
 		'3'		=> 'equal',
 	],
 	'LogNoMatch'				=> 'No events that meet the criteria',
-	'LogDate'					=> 'Date',
+	'LogDate'					=> 'Datum',
 	'LogEvent'					=> 'Event',
 	'LogUsername'				=> 'Gebruikersnaam',
 	'LogLevels'	=> [
@@ -959,8 +959,8 @@ $ap_translation = [
 	'YourMessage'				=> 'Je bericht',
 	'YourMessageInfo'			=> 'Het bericht wordt verzonden zonder tekst-opmaak. Alle opmaak wordt voor het verzenden verwijderd.',
 
-	'NoUser'					=> 'No user',
-	'NoUserGroup'				=> 'No user group',
+	'NoUser'					=> 'Geen gebruiker',
+	'NoUserGroup'				=> 'Geen gebruikersgroep',
 
 	'SendToGroup'				=> 'Verstuur naar groep',
 	'SendToUser'				=> 'Verstuur naar gebruikers',
@@ -968,10 +968,10 @@ $ap_translation = [
 
 	// System message module
 	'SystemMessageInfo'			=> '',
-	'SysMsgUpdated'				=> 'Updated system message',
+	'SysMsgUpdated'				=> 'Systeembericht bijgewerkt',
 
-	'SysMsgSection'				=> 'System message',
-	'SysMsg'					=> 'System message',
+	'SysMsgSection'				=> 'Systeemmelding',
+	'SysMsg'					=> 'Systeemmelding',
 	'SysMsgInfo'				=> 'Your text here',
 
 	'SysMsgType'				=> 'Type',
@@ -1055,7 +1055,7 @@ $ap_translation = [
 	'NoTableStructure'			=> 'The structure of the tables was not saved - skip',
 	'RestoreRecords'			=> 'Restore the contents of tables',
 	'ProcessTablesDump'			=> 'Just download and process tables dump',
-	'Instruction'				=> 'Instruction',
+	'Instruction'				=> 'Instructie',
 	'RestoredRecords'			=> 'records',
 	'RecordsRestoreDone'		=> 'Completed. Total entries',
 	'SkippedRecords'			=> 'Data not saved - skip',
@@ -1076,14 +1076,14 @@ $ap_translation = [
 	'BackupPackageContents'		=> 'The contents of the package',
 	'BackupRestore'				=> 'Herstellen',
 	'BackupRemove'				=> 'Verwijderen',
-	'RestoreYes'				=> 'Yes',
-	'RestoreNo'					=> 'No',
+	'RestoreYes'				=> 'Ja',
+	'RestoreNo'					=> 'Nee',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
 	'UsersInfo'					=> 'Here you can change your users information and certain specific options.',
 
-	'UsersAdded'				=> 'User added',
+	'UsersAdded'				=> 'Gebruiker toegevoegd',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
 	'EditButton'				=> 'Bewerk',
 	'UsersAddNew'				=> 'Add new user',
@@ -1117,7 +1117,7 @@ $ap_translation = [
 	'GroupsDescription'			=> 'Beschrijving',
 	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
-	'GroupsActive'				=> 'Active',
+	'GroupsActive'				=> 'Actief',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
 	'GroupsAlreadyExists'		=> 'This group already exists.',
@@ -1152,16 +1152,16 @@ $ap_translation = [
 	'DbSize'					=> 'Grootte',
 	'DbIndex'					=> 'Index',
 	'DbOverhead'				=> 'Overhead',
-	'DbTotal'					=> 'Total',
+	'DbTotal'					=> 'Totaal',
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
 	'FileFiles'					=> 'Bestanden',
 	'FileSize'					=> 'Grootte',
-	'FileTotal'					=> 'Total',
+	'FileTotal'					=> 'Totaal',
 
 	// Sysinfo module
-	'SysInfo'					=> 'Version informations',
+	'SysInfo'					=> 'Versie informatie',
 	'SysParameter'				=> 'Parameter',
 	'SysValues'					=> 'Values',
 
@@ -1206,7 +1206,7 @@ $ap_translation = [
 
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
-	'Inconsistencies'			=> 'Inconsistencies',
+	'Inconsistencies'			=> 'Inconsistenties',
 	'CheckDatabase'				=> 'Database',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
 	'CheckFiles'				=> 'Bestanden',
