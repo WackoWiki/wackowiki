@@ -12,7 +12,7 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
-	// pages
+	// pages (tag)
 	'category_page'		=> '类别',
 	'groups_page'		=> '群组',
 	'users_page'		=> '用户',
@@ -28,9 +28,9 @@ $lang = [
 	'index_page'		=> '页面索引',
 
 	'random_page'		=> '随机条目',
-	#'help_page'		=> '帮助',
-	#'terms_page'		=> '条款',
-	#'privacy_page'		=> '隐私',
+	'help_page'			=> '帮助',
+	'terms_page'		=> '条款',
+	'privacy_page'		=> '隐私',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

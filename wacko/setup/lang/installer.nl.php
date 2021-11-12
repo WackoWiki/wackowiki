@@ -12,7 +12,7 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
-	// pages
+	// pages (tag)
 	'category_page'		=> 'Categorie',
 	'groups_page'		=> 'Groepen',
 	'users_page'		=> 'Gebruikers',
@@ -28,9 +28,9 @@ $lang = [
 	'index_page'		=> 'PaginaIndex',
 
 	'random_page'		=> 'WillekeurigePagina',
-	#'help_page'			=> 'Hulp',
-	#'terms_page'		=> 'Terms',
-	#'privacy_page'		=> 'Privacy',
+	'help_page'			=> 'Hulp',
+	'terms_page'		=> 'Terms',
+	'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

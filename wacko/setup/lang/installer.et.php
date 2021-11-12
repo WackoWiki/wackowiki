@@ -12,7 +12,7 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
-	// pages
+	// pages (tag)
 	'category_page'		=> 'Kategooria',
 	'groups_page'		=> 'Grupid',
 	'users_page'		=> 'Kasutajad',
@@ -28,9 +28,9 @@ $lang = [
 	'index_page'		=> 'SisuKord',
 
 	'random_page'		=> 'JuhuslikLehekülg',
-	#'help_page'			=> 'Help',
-	#'terms_page'		=> 'Terms',
-	#'privacy_page'		=> 'Privacy',
+	'help_page'			=> 'Help',
+	'terms_page'		=> 'Terms',
+	'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

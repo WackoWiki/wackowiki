@@ -12,7 +12,7 @@ $lang = [
    Config Defaults
 */
 'ConfigDefaults'	=> [
-	// pages
+	// pages (tag)
 	'category_page'		=> 'वर्ग',
 	'groups_page'		=> 'समूह',
 	'users_page'		=> 'उपयोगकर्ताओं',
@@ -28,9 +28,9 @@ $lang = [
 	'index_page'		=> 'PageIndex',
 
 	'random_page'		=> 'यादृच्छिकपृष्ठ',
-	#'help_page'			=> 'सहायता',
-	#'terms_page'		=> 'Terms',
-	#'privacy_page'		=> 'Privacy',
+	'help_page'			=> 'सहायता',
+	'terms_page'		=> 'Terms',
+	'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',
