@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'				=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
@@ -47,7 +47,7 @@ $ap_translation = [
 	// Generic
 	'Cancel'					=> 'Fortryd',
 	'Add'						=> 'Tilføj',
-	'Edit'						=> 'Edit',
+	'Edit'						=> 'Rediger',
 	'Remove'					=> 'Fjern',
 	'Enabled'					=> 'Enabled',
 	'Disabled'					=> 'Disabled',
@@ -130,7 +130,7 @@ $ap_translation = [
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Upload',
+		'name'		=> 'Fortsæt',
 		'title'		=> 'Attachment settings',
 	],
 

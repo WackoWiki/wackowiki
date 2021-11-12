@@ -6,7 +6,7 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'				=> 'Observación: Antes de realizar actividades de administración se recomienda bloquear el acceso al sitio!',
+	'MainNote'					=> 'Observación: Antes de realizar actividades de administración se recomienda bloquear el acceso al sitio!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Funciones básicas',
@@ -266,6 +266,7 @@ $ap_translation = [
 	'SiteDescInfo'				=> 'Suplemento al título del sitio que aparece en la cabecera de las páginas para explicar en pocas palabras de qué se trata este sitio.',
 	'AdminName'					=> 'Administrador del sitio',
 	'AdminNameInfo'				=> 'Nombre de usuario, que es responsable del soporte general del sitio. Este nombre no se utiliza para determinar los derechos de acceso, pero es deseable que se corresponda con el nombre del administrador jefe del sitio.',
+
 	'LanguageSection'			=> 'Idioma',
 	'DefaultLanguage'			=> 'Idioma por defecto',
 	'DefaultLanguageInfo'		=> 'Especifica el idioma de los mensajes que se muestran a los invitados no registrados, así como la configuración de la ubicación.',
@@ -273,11 +274,13 @@ $ap_translation = [
 	'MultiLanguageInfo'			=> 'Permita la posibilidad de seleccionar un idioma página por página.',
 	'AllowedLanguages'			=> 'Idiomas permitidos',
 	'AllowedLanguagesInfo'		=> 'Se recomienda seleccionar sólo el conjunto de idiomas que desea utilizar, de lo contrario se seleccionan todos los idiomas.',
+
 	'CommentSection'			=> 'Comentarios',
 	'AllowComments'				=> 'Permitir comentarios',
 	'AllowCommentsInfo'			=> 'Habilitar comentarios sólo para usuarios invitados o registrados o deshabilitarlos en todo el sitio.',
 	'SortingComments'			=> 'Ordenar comentarios',
 	'SortingCommentsInfo'		=> 'Cambia el orden en que se presentan los comentarios de la página, ya sea con el comentario más reciente O el más antiguo en la parte superior.',
+
 	'ToolbarSection'			=> 'Barra de herramientas',
 	'CommentsPanel'				=> 'Panel de comentarios',
 	'CommentsPanelInfo'			=> 'La visualización por defecto de los comentarios en la parte inferior de la página.',
@@ -692,7 +695,6 @@ $ap_translation = [
 	'LicenseSection'			=> 'Licencia',
 	'DefaultLicense'			=> 'Licencia por defecto',
 	'DefaultLicenseInfo'		=> '¿Bajo qué licencia se debe publicar su contenido?.',
-
 	'EnableLicense'				=> 'Habilitar licencia',
 	'EnableLicenseInfo'			=> 'Habilitar para mostrar información de licencia.',
 	'LicensePerPage'			=> 'Licencia por página',
@@ -744,7 +746,6 @@ $ap_translation = [
 	'IndexPageInfo'				=> 'Página con una lista de todas las páginas (action %1).',
 	'RandomPage'				=> 'Aleatoria',
 	'RandomPageInfo'			=> 'Carga una página aleatoria (action %1).',
-
 
 
 	// Notification settings
@@ -1273,6 +1274,5 @@ $ap_translation = [
 	'BbReverseProxyEnable'		=> 'Habilitar proxy inverso',
 	'BbReverseProxyHeader'		=> 'Encabezado que contiene la dirección IP de los clientes de Internet',
 	'BbReverseProxyAddresses'	=> 'Dirección IP o rangos de direcciones en formato CIDR para sus servidores proxy (uno por línea)',
-
 
 ];

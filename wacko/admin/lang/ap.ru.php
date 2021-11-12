@@ -82,7 +82,7 @@ $ap_translation = [
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'Email',
+		'name'		=> 'Адрес электронной почты',
 		'title'		=> 'Настройки Email',
 	],
 

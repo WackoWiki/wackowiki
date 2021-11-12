@@ -698,7 +698,6 @@ $ap_translation = [
 	'LicenseSection'			=> 'Licencja',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
-
 	'EnableLicense'				=> 'Enable License',
 	'EnableLicenseInfo'			=> 'Enable to show license information.',
 	'LicensePerPage'			=> 'License per page',

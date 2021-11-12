@@ -282,7 +282,7 @@ $ap_translation = [
 	'SortingCommentsInfo'		=> 'Modifie l\'ordre dans lequel les commentaires de la page sont présentés, soit avec le commentaire le plus récent OU le plus ancien en haut.',
 
 	'ToolbarSection'			=> 'Barre d\'outils',
-	'CommentsPanel'				=> 'Comments panel',
+	'CommentsPanel'				=> 'Panneau des commentaires',
 	'CommentsPanelInfo'			=> 'L\'affichage par défaut des commentaires en bas de la page.',
 	'FilePanel'					=> 'Panneau de fichiers',
 	'FilePanelInfo'				=> 'L\'affichage par défaut des fichiers joints en bas de la page.',
@@ -707,7 +707,7 @@ $ap_translation = [
 	'RootPage'					=> 'Page d\'accueil',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Privacy Policy',
+	'PrivacyPage'				=> 'Politique de confidentialité',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
 	'TermsPage'					=> 'Policies and Regulations',
@@ -1044,7 +1044,7 @@ $ap_translation = [
 
 	'RestoreStarted'			=> 'Initiated Restoration',
 	'RestoreParameters'			=> 'Using parameters',
-	'IgnoreDuplicatedKeys'		=> 'Ignore duplicated keys',
+	'IgnoreDuplicatedKeys'		=> 'Ignorer les clés dupliquées',
 	'IgnoreDuplicatedFiles'		=> 'Ignore duplicated files',
 	'SavedCluster'				=> 'Saved cluster',
 	'DataProtection'			=> 'Data Protection - %1 omitted',
