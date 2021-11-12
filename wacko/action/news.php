@@ -90,7 +90,7 @@ if (!empty($this->db->news_cluster))
 				case 'Y/W/':
 					$news_structure = date('Y/') . date('W/');
 					break;
-				default
+				default:
 					$news_structure = '';
 			}
 
