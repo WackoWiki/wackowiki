@@ -22,7 +22,7 @@ lang = {
 	Underline :				"Underline",
 	Strikethrough :			"Strikethrough",
 	Small :					"Small",
-	Code :					"Code",
+	Code :					"Inline code",
 	Superscript :			"Superscript",
 	Subscript :				"Subscript",
 	List :					"List",
