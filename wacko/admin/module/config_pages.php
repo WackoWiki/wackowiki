@@ -189,7 +189,7 @@ function admin_config_pages(&$engine, &$module)
 						case 'Y/W/':
 							$news_structure = date('Y/') . date('W/');
 							break;
-						default
+						default:
 							$news_structure = '';
 					}
 
