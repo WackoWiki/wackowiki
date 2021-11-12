@@ -318,8 +318,7 @@ if ($can_view)
 
 			$tpl->leave(); // r_
 
-			unset($link);
-			unset($desc);
+			unset($link, $desc);
 		}
 	}
 	else

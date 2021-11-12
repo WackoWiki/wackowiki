@@ -28,9 +28,7 @@ $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 	if ($count = $this->db->load_single(
 		"SELECT DISTINCT COUNT(page_id) AS n " .
 		$selector
-		, true));
-
-	if ($count)
+		, true))
 	{
 		$pagination = $this->pagination($count['n'], $limit);
 
