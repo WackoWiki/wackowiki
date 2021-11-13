@@ -114,28 +114,6 @@ $lang = [
 'ErrorAdminPasswordShort'		=> '您输入的密码太短，请输入最少 %1 个字符。',
 'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
-'LanguageArray'	=> [
-	'bg' => 'Български',
-	'da' => 'Dansk',
-	'de' => 'Deutsch',
-	'el' => 'Ελληνικά',
-	'en' => 'English',
-	'es' => 'Español',
-	'et' => 'Eesti',
-	'fr' => 'Français',
-	'hi' => 'हिन्दी',
-	'hu' => 'Magyar',
-	'it' => 'Italiano',
-	'ja' => '日本語',
-	'ko' => '한국어',
-	'nl' => 'Nederlands',
-	'pl' => 'Polski',
-	'pt' => 'Português',
-	'ru' => 'Русский',
-	'zh' => '简体中文',
-	'zh-tw' => '正體中文',
-],
-
 /*
    Database Config Page
 */
