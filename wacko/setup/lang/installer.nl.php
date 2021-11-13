@@ -114,28 +114,6 @@ $lang = [
 'ErrorAdminPasswordShort'		=> 'The admin Wachtwoord is te kort, vul het wachtwoord opnieuw in, the minimum length is %1 characters!',
 'ModRewriteStatusUnknown'		=> 'Het installatieprogramma kan niet controleren of mod_rewrite is ingeschakeld, maar dit betekent niet dat het is uitgeschakeld.',
 
-'LanguageArray'	=> [
-	'bg' => 'Български',
-	'da' => 'Dansk',
-	'de' => 'Deutsch',
-	'el' => 'Ελληνικά',
-	'en' => 'English',
-	'es' => 'Español',
-	'et' => 'Eesti',
-	'fr' => 'Français',
-	'hi' => 'हिन्दी',
-	'hu' => 'Magyar',
-	'it' => 'Italiano',
-	'ja' => '日本語',
-	'ko' => '한국어',
-	'nl' => 'Nederlands',
-	'pl' => 'Polski',
-	'pt' => 'Português',
-	'ru' => 'Русский',
-	'zh' => '简体中文',
-	'zh-tw' => '正體中文',
-],
-
 /*
    Database Config Page
 */

@@ -114,28 +114,6 @@ $lang = [
 'ErrorAdminPasswordShort'		=> 'Le mot de passe de l’administrateur est trop court, il doit avoir au moins %1 caractères !',
 'ModRewriteStatusUnknown'		=> 'L’installeur ne peut pas confirmer que "mod_rewrite" soit activé, il est cependant possible qu’il le soit.',
 
-'LanguageArray'	=> [
-	'bg' => 'Български',
-	'da' => 'Dansk',
-	'de' => 'Deutsch',
-	'el' => 'Ελληνικά',
-	'en' => 'English',
-	'es' => 'Español',
-	'et' => 'Eesti',
-	'fr' => 'Français',
-	'hi' => 'हिन्दी',
-	'hu' => 'Magyar',
-	'it' => 'Italiano',
-	'ja' => '日本語',
-	'ko' => '한국어',
-	'nl' => 'Nederlands',
-	'pl' => 'Polski',
-	'pt' => 'Português',
-	'ru' => 'Русский',
-	'zh' => '简体中文',
-	'zh-tw' => '正體中文',
-],
-
 /*
    Database Config Page
 */

@@ -27,7 +27,9 @@ $separator =
 </div>';
 
 global $lang;
+require_once 'setup/lang/installer.all.php';
 require_once 'setup/lang/installer.' . $config['language'] . '.php';
+$lang				= array_merge ($lang, $lang_all);
 
 // set default install action
 $lang[$install_action] ??= '';
