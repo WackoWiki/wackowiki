@@ -35,7 +35,7 @@ if (!isset($lang[$install_action])) $lang[$install_action] = '';
 header('Content-Type: text/html; charset=' . $lang['Charset']);
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $config['language']; ?>">
+<html dir="<?php echo $lang['LangDir']; ?>" lang="<?php echo $config['language']; ?>">
 	<head>
 		<meta charset="<?php echo $lang['Charset']; ?>">
 		<title><?php echo $lang['Title'] . ': ' . WACKO_VERSION . ' - ' . $lang[$install_action]; ?></title>

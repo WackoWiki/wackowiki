@@ -7,6 +7,7 @@ $lang = [
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'bg',
 'LangName'	=> 'Bulgarian',
+'LangDir'	=> 'ltr',
 
 /*
    Config Defaults

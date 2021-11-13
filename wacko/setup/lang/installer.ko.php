@@ -7,6 +7,7 @@ $lang = [
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'ko',
 'LangName'	=> '한국어',
+'LangDir'	=> 'ltr',
 
 /*
    Config Defaults

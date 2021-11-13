@@ -7,6 +7,7 @@ $lang = [
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'pt',
 'LangName'	=> 'Portugues',
+'LangDir'	=> 'ltr',
 
 /*
    Config Defaults
