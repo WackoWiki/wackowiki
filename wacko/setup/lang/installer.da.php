@@ -7,6 +7,7 @@ $lang = [
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'da',
 'LangName'	=> 'Dansk',
+'LangDir'	=> 'ltr',
 
 /*
    Config Defaults

@@ -7,6 +7,7 @@ $lang = [
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'nl',
 'LangName'	=> 'Dutch',
+'LangDir'	=> 'ltr',
 
 /*
    Config Defaults

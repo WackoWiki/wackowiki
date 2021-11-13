@@ -7,6 +7,7 @@ $lang = [
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'hi',
 'LangName'	=> 'हिन्दी',
+'LangDir'	=> 'ltr',
 
 /*
    Config Defaults

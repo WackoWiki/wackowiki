@@ -7,6 +7,7 @@ $lang = [
 'Charset'	=> 'utf-8',
 'LangISO'	=> 'es',
 'LangName'	=> 'Español',
+'LangDir'	=> 'ltr',
 
 /*
    Config Defaults
