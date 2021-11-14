@@ -33,15 +33,15 @@ if ($config['language'] == $page_lang)
 	insert_page($config['login_page'],			'ورود به سامانه',		'{{login}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['account_page'],		'تنظیمات',				'{{usersettings}}',		$page_lang, 'Admins', false, false);
 
-	insert_page($config['changes_page'],		'تغییرات اخیر',			'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Changes');
-	insert_page($config['comments_page'],		'دیدگاه‌های اخیر',		'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Comments');
+	insert_page($config['changes_page'],		'تغییرات اخیر',			'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'تغییرات');
+	insert_page($config['comments_page'],		'دیدگاه‌های اخیر',		'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'دیدگاه');
 	insert_page($config['index_page'],			'Page Index',			'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'شاخص');
 	insert_page($config['random_page'],			'صفحه تصادفی',			'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'تصادفی');
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Changes');
+	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'تغییرات');
 	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'دیدگاه');
 	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'شاخص');
 	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'تصادفی');

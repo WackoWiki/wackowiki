@@ -46,7 +46,7 @@ $lang = [
 'Continue'						=> 'ادامه',
 'Back'							=> 'برگشت',
 'Recommended'					=> 'توصیه‌شده',
-'InvalidAction'					=> 'Invalid action',
+'InvalidAction'					=> 'اقدام نامعتبر',
 
 /*
    Language Selection Page
@@ -69,7 +69,7 @@ $lang = [
 'Database'						=> 'پایگاه داده',
 'PhpExtensions'					=> 'PHP Extensions',
 'Permissions'					=> 'مجوزها',
-'ReadyToInstall'				=> 'Ready to Install?',
+'ReadyToInstall'				=> 'آماده برای نصب?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
 'Problem'						=> 'Problem',
@@ -95,7 +95,7 @@ $lang = [
 'MultiLangDesc'					=> 'Multilingual mode allows you to have pages with different language settings within a single installation. When this mode is enabled, the installer creates initial menu items for all languages available in the distribution.',
 'AllowedLang'					=> 'Allowed Languages',
 'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
-'Admin'							=> 'Admin Name',
+'Admin'							=> 'نام ادمین',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'NameAlphanumOnly'				=> 'Username must be between %1 and %2 chars long and use only alphanumeric characters. Upper case characters are OK.',
 'NameCamelCaseOnly'				=> 'Username must be between %1 and %2 chars long and WikiName formatted.',
