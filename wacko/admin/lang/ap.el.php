@@ -118,13 +118,13 @@ $ap_translation = [
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
+		'name'		=> 'Ασφάλεια',
 		'title'		=> 'Security subsystems settings',
 	],
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
+		'name'		=> 'Σύστημα',
 		'title'		=> 'System options',
 	],
 
@@ -142,7 +142,7 @@ $ap_translation = [
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menu',
+		'name'		=> 'Μενού',
 		'title'		=> 'Add, edit or remove default menu items',
 	],
 
@@ -160,13 +160,13 @@ $ap_translation = [
 
 	// DB Convert module
 	'db_convert'		=> [
-		'name'		=> 'Convert',
-		'title'		=> 'Converting Tables or Columns',
+		'name'		=> 'Μετατροπή',
+		'title'		=> 'Μετατροπή πινάκων ή στηλών',
 	],
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Repair',
+		'name'		=> 'Επισκευή',
 		'title'		=> 'Repair and Optimize Database',
 	],
 
@@ -190,7 +190,7 @@ $ap_translation = [
 
 	// Data Synchronization module
 	'maint_resync'		=> [
-		'name'		=> 'Data Synchronization',
+		'name'		=> 'Συγχρονισμός Δεδομένων',
 		'title'		=> 'Synchronizing data',
 	],
 
@@ -202,8 +202,8 @@ $ap_translation = [
 
 	// System message module
 	'messages'		=> [
-		'name'		=> 'System message',
-		'title'		=> 'System messages',
+		'name'		=> 'Μήνυμα συστήματος',
+		'title'		=> 'Μηνύματα συστήματος',
 	],
 
 	// System Info module
@@ -220,7 +220,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'Στατιστικά',
 		'title'		=> 'Show statistics',
 	],
 
@@ -268,11 +268,11 @@ $ap_translation = [
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
 
 	'LanguageSection'			=> 'Γλώσσα',
-	'DefaultLanguage'			=> 'Default language',
+	'DefaultLanguage'			=> 'Προεπιλεγμένη γλώσσα',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
-	'AllowedLanguages'			=> 'Allowed languages',
+	'AllowedLanguages'			=> 'Επιτρεπόμενες γλώσσες',
 	'AllowedLanguagesInfo'		=> 'Συνιστάται να επιλέξετε μόνο το σύνολο των γλωσσών που θέλετε να χρησιμοποιήσετε, άλλες σοφές επιλέγονται όλες οι γλώσσες.',
 
 	'CommentSection'			=> 'Σχόλια',
@@ -368,10 +368,10 @@ $ap_translation = [
 	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
 
 	'LogoOff'					=> 'Κλειστό',
-	'LogoOnly'					=> 'logo',
-	'LogoAndTitle'				=> 'logo and title',
+	'LogoOnly'					=> 'λογότυπο',
+	'LogoAndTitle'				=> 'λογότυπο και τίτλος',
 
-	'LogoSection'				=> 'Logo',
+	'LogoSection'				=> 'Λογότυπο',
 	'SiteLogo'					=> 'Site Logo',
 	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
 	'LogoDimensions'			=> 'Logo dimensions',
@@ -383,7 +383,7 @@ $ap_translation = [
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
 	'SiteFaviconTooBig'			=> 'Το Favicon είναι μεγαλύτερο από 64 × 64px.',
 	'LayoutSection'				=> 'Layout',
-	'Theme'						=> 'Theme',
+	'Theme'						=> 'Θέμα',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
 	'ThemesAllowed'				=> 'Allowed Themes',
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
