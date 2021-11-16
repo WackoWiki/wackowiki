@@ -26,7 +26,6 @@ code {
 	background-color: #ffffcc;
 	padding: 0 2px;
 	color: #666600;
-
 }
 pre {
 	font-family: "Lucida Console", "Courier New", monospace;
@@ -401,34 +400,6 @@ sup, sub {
 
 
 /*	Form elements	*/
-
-form, input, select {
-
-}
-input, select {
-
-}
-input, select, textarea {
-
-}
-input#button,
-input#submit,
-.btnlite,
-.btnmain {
-
-}
-input#button:hover,
-input#submit:hover,
-.btnlite:hover,
-.btnmain:hover {
-	
-}
-input#button:active,
-input#submit:active,
-.btnlite:active,
-.btnmain:active {
-
-}
 textarea {
 	font-family: "Lucida Console", "Courier New", monospace;
 	font-size: 0.875rem; /* 14px */

@@ -6,36 +6,36 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+	'MainNote'					=> 'Note: It is recommended that access to the site be temporarily blocked for administrative maintenance.',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
 		'preferences'	=> 'Preferences',
 		'content'		=> 'Content',
-		'users'			=> 'Utenti',
+		'users'			=> 'کاربران',
 		'maintenance'	=> 'Maintenance',
 		'messages'		=> 'Messages',
 		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'database'		=> 'پایگاه داده',
 	],
 
 	// Admin panel
-	'AdminPanel'				=> 'Pannello di Controllo Amministrazione',
-	'RecoveryMode'				=> 'Modalità di recupero',
-	'Authorization'				=> 'Autorizzazione',
-	'AuthorizationTip'			=> 'Inserisci la password amministrativa (assicurati anche che i cookie siano ammessi nel tuo browser).',
-	'NoRecoveryPassword'		=> 'La password amministrativa non è specificata!',
-	'NoRecoveryPasswordTip'		=> 'Nota: l\'assenza di una password amministrativa è una minaccia alla sicurezza! Inserisci la tua password nel file di configurazione ed esegui nuovamente il programma.',
+	'AdminPanel'				=> 'Administration Control Panel',
+	'RecoveryMode'				=> 'Recovery Mode',
+	'Authorization'				=> 'Authorization',
+	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
+	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
+	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
 
 	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
 
 	'ApHomePage'				=> 'Home Page',
 	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
-	'ApLogOut'					=> 'Esci',
+	'ApLogOut'					=> 'خروج',
 	'ApLogOutTip'				=> 'quit system administration',
 
-	'TimeLeft'					=> 'Tempo rimasto: %1 minuti',
-	'ApVersion'					=> 'versione',
+	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'ApVersion'					=> 'نسخه',
 
 	'SiteOpen'					=> 'Open',
 	'SiteOpened'				=> 'site opened',
@@ -45,17 +45,17 @@ $ap_translation = [
 	'SiteClosedTip'				=> 'The site is closed',
 
 	// Generic
-	'Cancel'					=> 'Annulla',
-	'Add'						=> 'Aggiungi',
-	'Edit'						=> 'Modifica',
-	'Remove'					=> 'Rimuovere',
-	'Enabled'					=> 'Abilitata',
-	'Disabled'					=> 'Disabilitata',
-	'Mandatory'					=> 'Obbligatorio',
-	'Admin'						=> 'Admin',
+	'Cancel'					=> 'لغو',
+	'Add'						=> 'افزودن',
+	'Edit'						=> 'ویرایش',
+	'Remove'					=> 'حذف',
+	'Enabled'					=> 'فعال',
+	'Disabled'					=> 'غیرفعال',
+	'Mandatory'					=> 'Mandatory',
+	'Admin'						=> 'مدیر',
 
 	'MiscellaneousSection'		=> 'Miscellaneous',
-	'MainSection'				=> 'Basic Parameters',
+	'MainSection'				=> 'General Options',
 
 	'DirNotWritable'			=> 'The %1 directory is not writable.',
 
@@ -70,26 +70,26 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
-		'title'		=> 'Basic parameters',
+		'name'		=> 'پایه',
+		'title'		=> 'Basic settings',
 	],
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Aspetto',
+		'name'		=> 'ظاهر',
 		'title'		=> 'Appearance settings',
 	],
 
 	// Config Email module
 	'config_email'		=> [
-		'name'		=> 'E-mail',
-		'title'		=> 'Email settings',
+		'name'		=> 'رایانامه',
+		'title'		=> 'پیکربندی پست الکترونیکی',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'name'		=> 'فیلتر',
+		'title'		=> 'تنظیمات فیلتر',
 	],
 
 	// Config Formatter module
@@ -100,38 +100,38 @@ $ap_translation = [
 
 	// Config Notifications module
 	'config_notifications'		=> [
-		'name'		=> 'Notifiche',
-		'title'		=> 'Notifications settings',
+		'name'		=> 'اعلانات',
+		'title'		=> 'تنظیمات اطلاع‌رسانی',
 	],
 
 	// Config Pages module
 	'config_pages'		=> [
-		'name'		=> 'Pagine',
+		'name'		=> 'صفحه‌ها',
 		'title'		=> 'Pages and site parameters',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
-		'name'		=> 'Permessi',
+		'name'		=> 'مجوزها',
 		'title'		=> 'Permissions settings',
 	],
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
+		'name'		=> 'امنیتی',
 		'title'		=> 'Security subsystems settings',
 	],
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
+		'name'		=> 'سیستم',
 		'title'		=> 'System options',
 	],
 
 	// Config Upload module
 	'config_upload'		=> [
-		'name'		=> 'Carica',
-		'title'		=> 'Attachment settings',
+		'name'		=> 'بارگذاری',
+		'title'		=> 'تنظیمات ضمیمه',
 	],
 
 	// Deleted module
@@ -142,7 +142,7 @@ $ap_translation = [
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menu',
+		'name'		=> 'منو',
 		'title'		=> 'Add, edit or remove default menu items',
 	],
 
@@ -154,7 +154,7 @@ $ap_translation = [
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
+		'name'		=> 'پشتیبان‌گیری',
 		'title'		=> 'Backing up data',
 	],
 
@@ -172,7 +172,7 @@ $ap_translation = [
 
 	// DB Restore module
 	'db_restore'		=> [
-		'name'		=> 'Ripristina',
+		'name'		=> 'Restore',
 		'title'		=> 'Restoring backup data',
 	],
 
@@ -220,7 +220,7 @@ $ap_translation = [
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
+		'name'		=> 'آمار',
 		'title'		=> 'Show statistics',
 	],
 
@@ -232,24 +232,24 @@ $ap_translation = [
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
+		'name'		=> 'موافقت',
 		'title'		=> 'User registration approval',
 	],
 
 	// Groups module
 	'user_groups'		=> [
-		'name'		=> 'Gruppi',
+		'name'		=> 'گروه‌ها',
 		'title'		=> 'Group management',
 	],
 
 	// User module
 	'user_users'		=> [
-		'name'		=> 'Utenti',
+		'name'		=> 'کاربران',
 		'title'		=> 'User management',
 	],
 
 	// Main module
-	'PurgeSessions'				=> 'Purga',
+	'PurgeSessions'				=> 'Purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
 	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
@@ -260,22 +260,22 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> 'Updated basic settings',
 	'LogBasicSettingsUpdated'	=> 'Updated basic settings',
 
-	'SiteName'					=> 'Site Name',
+	'SiteName'					=> 'نام سایت',
 	'SiteNameInfo'				=> 'The title of this site, appears on browser title, theme header, email-notification, etc.',
 	'SiteDesc'					=> 'Site Description:',
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
 	'AdminName'					=> 'Admin of Site',
 	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
 
-	'LanguageSection'			=> 'Lingua',
+	'LanguageSection'			=> 'زبان',
 	'DefaultLanguage'			=> 'Default language',
 	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
 	'MultiLanguage'				=> 'Multilanguage support',
 	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
 	'AllowedLanguages'			=> 'Allowed languages',
-	'AllowedLanguagesInfo'		=> 'Si consiglia di selezionare solo l\'insieme delle lingue che si desidera utilizzare, altre saggiamente tutte le lingue sono selezionate.',
+	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
 
-	'CommentSection'			=> 'Commenti',
+	'CommentSection'			=> 'دیدگاه',
 	'AllowComments'				=> 'Allow comments',
 	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
 	'SortingComments'			=> 'Sorting comments',
@@ -315,18 +315,18 @@ $ap_translation = [
 
 	'FeedsSection'				=> 'Feeds',
 	'EnableFeeds'				=> 'Enable feeds',
-	'EnableFeedsInfo'			=> 'Attiva o disattiva i feed RSS per l\'intero wiki.',
+	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
 
 	'XmlSitemap'				=> 'XML Sitemap',
 	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
 	'XmlSitemapGz'				=> 'XML Sitemap compression',
 	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
-	'XmlSitemapTimeInfo'		=> 'Genera la Sitemap una sola volta nel numero di giorni indicato, zero significa ad ogni cambio di pagina.',
+	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
 
-	'SearchSection'				=> 'Ricerca',
+	'SearchSection'				=> 'جستجو',
 	'OpenSearch'				=> 'OpenSearch',
-	'OpenSearchInfo'			=> 'Crea il file di descrizione di OpenSearch nella cartella XML e abilita l\'Autodiscovery del plugin di ricerca nell\'intestazione HTML.',
+	'OpenSearchInfo'			=> 'Creates the OpenSearch description file in the XML folder and enables Autodiscovery of search plugin in the HTML header.',
 	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
 	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
 
@@ -341,7 +341,7 @@ $ap_translation = [
 	'EditingSection'			=> 'Editing',
 	'EditSummary'				=> 'Edit summary',
 	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
-	'MinorEdit'					=> 'Modifica minore',
+	'MinorEdit'					=> 'ویرایش‌های خُرد',
 	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
 	'ReviewSettings'			=> 'Review',
 	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
@@ -359,19 +359,19 @@ $ap_translation = [
 	'EnableReferrers'			=> 'Enable Referrers',
 	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
 	'ReferrersPurgeTime'		=> 'Storage time of referrers',
-	'ReferrersPurgeTimeInfo'	=> 'Conservare la cronologia delle pagine esterne di riferimento non più di un determinato numero di giorni. Zero significa conservazione eterna, ma per un sito visitato attivamente questo può portare ad un overflow del database.',
+	'ReferrersPurgeTimeInfo'	=> 'Keep the history of referring external pages no longer than a given number of days. Zero means eternal storage, but for an actively visited site this can lead to database overflow.',
 	'EnableCounters'			=> 'Hit Counters',
-	'EnableCountersInfo'		=> 'Permette il conteggio delle visite per pagina e la visualizzazione di semplici statistiche. Le chiamate del proprietario della pagina non vengono contate.',
+	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
 	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
 
-	'LogoOff'					=> 'Spento',
-	'LogoOnly'					=> 'logo',
+	'LogoOff'					=> 'خاموش',
+	'LogoOnly'					=> 'آرم',
 	'LogoAndTitle'				=> 'logo and title',
 
-	'LogoSection'				=> 'Logo',
+	'LogoSection'				=> 'آرم',
 	'SiteLogo'					=> 'Site Logo',
 	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
 	'LogoDimensions'			=> 'Logo dimensions',
@@ -381,16 +381,19 @@ $ap_translation = [
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> 'Site Favicon',
 	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
-	'SiteFaviconTooBig'			=> 'Favicon è più grande di 64 × 64px.',
+	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 × 64px.',
 	'LayoutSection'				=> 'Layout',
 	'Theme'						=> 'Theme',
 	'ThemeInfo'					=> 'Template design the site uses by default.',
+	'ResetUserTheme'			=> 'Reset all user themes',
+	'ResetUserThemeInfo'		=> 'Resets all user themes. Warning: This action will set back all user selected themes to the global default theme.',
+	'SetBackUserTheme'			=> 'Set back all user themes to %1 theme.',
 	'ThemesAllowed'				=> 'Allowed Themes',
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
-	'ThemeColor'				=> 'Colore del tema per la barra degli indirizzi',
-	'ThemeColorInfo'			=> 'Il browser imposterà il colore della barra degli indirizzi di ogni pagina secondo il colore CSS fornito.',
+	'ThemeColor'				=> 'رنگ تم برای نوار آدرس',
+	'ThemeColorInfo'			=> 'مرورگر رنگ نوار آدرس هر صفحه را با توجه به رنگ CSS ارائه شده تنظیم می کند.',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
@@ -454,8 +457,8 @@ $ap_translation = [
 	'SessionStorage'				=> 'Session storage',
 	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
 	'SessionModes'	=> [
-		'1'		=> 'File',
-		'2'		=> 'Database',
+		'1'		=> 'فایل',
+		'2'		=> 'پایگاه داده',
 	],
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
@@ -491,16 +494,16 @@ $ap_translation = [
 	'OwnersEditCategories'		=> 'Owners can edit page categories',
 	'OwnersEditCategoriesInfo'	=> 'Allow owners to modify the pages category list of your site (add words, delete words), assigns to a page.',
 	'TermHumanModeration'		=> 'Term human moderation',
-	'TermHumanModerationInfo'	=> 'I moderatori possono modificare i commenti solo se sono stati creati non più di questo numero di giorni fa (questa limitazione non si applica all\'ultimo commento nell\'argomento).',
+	'TermHumanModerationInfo'	=> 'Moderators can only edit comments if they were created no more than this number of days ago (this limitation does not apply to the last comment in the topic).',
 
-	'UserCanDeleteAccount'		=> 'Gli utenti possono eliminare il proprio account',
+	'UserCanDeleteAccount'		=> 'Allow users to delete their accounts',
 
 	// Security settings
 	'SecuritySettingsInfo'		=> 'Parameters responsible for the overall safety of the platform, safety restrictions and additional security subsystems.',
 	'SecuritySettingsUpdated'	=> 'Updated security settings',
 
 	'AllowRegistration'			=> 'Register online',
-	'AllowRegistrationInfo'		=> 'Aprire la registrazione dell\'utente. Disabilitando questa opzione si impedisce la registrazione gratuita, tuttavia, l\'amministratore del sito potrà registrare personalmente gli altri utenti.',
+	'AllowRegistrationInfo'		=> 'Open user registration. Disabling this option will prevent free registration, however, the site administrator will be able to register other users himself.',
 	'ApproveNewUser'			=> 'Approve new users',
 	'ApproveNewUserInfo'		=> 'Allows Administrators to approve users once they register. Only approved users will be allowed to log in the site.',
 	'PersistentCookies'			=> 'Persistent cookies',
@@ -512,7 +515,7 @@ $ap_translation = [
 	'UsernameLength'			=> 'Username length',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
 
-	'CaptchaSection'			=> 'CAPTCHA',
+	'CaptchaSection'			=> 'کپچا',
 	'EnableCaptcha'				=> 'Enable Captcha',
 	'EnableCaptchaInfo'			=> 'If enabled, Captcha will be shown in the following cases or if a security threshold is reached.',
 	'CaptchaComment'			=> 'New comment',
@@ -521,7 +524,7 @@ $ap_translation = [
 	'CaptchaPageInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before creating a new pages.',
 	'CaptchaEdit'				=> 'Edit page',
 	'CaptchaEditInfo'			=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before editing pages.',
-	'CaptchaRegistration'		=> 'Registrazione',
+	'CaptchaRegistration'		=> 'نام‌نویسی',
 	'CaptchaRegistrationInfo'	=> 'As a measure of protection against spam publications require unregistered users a single solution of the test before registering.',
 
 	'TlsSection'				=> 'TLS Settings',
@@ -541,7 +544,7 @@ $ap_translation = [
 		'2'		=> 'custom',
 	],
 	'PermissionsPolicy'			=> 'Permissions Policy',
-	'PermissionsPolicyInfo'		=> 'L\'intestazione HTTP Permissions-Policy fornisce un meccanismo per abilitare o disabilitare esplicitamente varie potenti caratteristiche del browser.',
+	'PermissionsPolicyInfo'		=> 'The HTTP Permissions-Policy header provides a mechanism to explicitly enable or disable various powerful browser features.',
 	'ReferrerPolicy'			=> 'Referrer Policy',
 	'ReferrerPolicyInfo'		=> 'The Referrer-Policy HTTP header governs which referrer information, sent in the Referer header, should be included with requests made.',
 	'ReferrerPolicyModes'	=> [
@@ -575,7 +578,7 @@ $ap_translation = [
 		'2'		=> 'password does not contain username',
 	],
 
-	'LoginSection'				=> 'Entra',
+	'LoginSection'				=> 'ورود',
 	'MaxLoginAttempts'			=> 'Maximum number of login attempts per username',
 	'MaxLoginAttemptsInfo'		=> 'The number of login attempts allowed for a single account before the anti-spambot task is triggered. Enter 0 to prevent the anti-spambot task from being triggered for distinct user accounts.',
 	'IpLoginLimitMax'			=> 'Maximum number of login attempts per IP address',
@@ -610,7 +613,7 @@ $ap_translation = [
 
 	'FormsSection'				=> 'Forms',
 	'FormTokenTime'				=> 'Maximum time to submit forms',
-	'FormTokenTimeInfo'			=> 'Il tempo che un utente deve inviare un modulo (in secondi).<br> Si noti che un modulo potrebbe diventare non valido se la sessione scade, indipendentemente da questa impostazione.',
+	'FormTokenTimeInfo'			=> 'The time a user has to submit a form (in seconds).<br> Note that a form might become invalid if the session expires, regardless of this setting.',
 
 	'SessionLength'				=> 'Term login cookie',
 	'SessionLengthInfo'			=> 'The lifetime of the user cookie login by default (in days).',
@@ -654,22 +657,22 @@ $ap_translation = [
 	'TimeFormatSecondsInfo'		=> '(hours, minutes, seconds)',
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
-	'Timezone'					=> 'Fuso orario',
+	'Timezone'					=> 'ناحیه زمانی',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
 
-	'Canonical'					=> 'Usa URL canoniche',
-	'CanonicalInfo'				=> 'Tutti i link vengono creati come URL assoluti nella forma %1. Sono da preferire gli URL relativi alla radice del server nella forma %2.',
+	'Canonical'					=> 'Use fully canonical URLs',
+	'CanonicalInfo'				=> 'All links are created as absolute URLs in the form %1. URLs relative to the server root in the form %2 should be preferred.',
 	'LinkTarget'				=> 'Where external links open',
-	'LinkTargetInfo'			=> 'Apre ogni link esterno in una nuova finestra del browser. Aggiunge <code>target="_blank"</code> alla sintassi del link.',
+	'LinkTargetInfo'			=> 'Opens each external link in a new browser window. Adds <code>target="_blank"</code> to the link syntax.',
 	'Noreferrer'				=> 'noreferrer',
-	'NoreferrerInfo'			=> 'Richiede che il browser non invii un header di riferimento HTTP se l\'utente segue il collegamento ipertestuale. Aggiunge <code>rel="noreferrer"</code> alla sintassi del link.',
+	'NoreferrerInfo'			=> 'Requires that the browser should not send an HTTP referer header if the user follows the hyperlink. Adds <code>rel="noreferrer"</code> to the link syntax.',
 	'Nofollow'					=> 'nofollow',
-	'NofollowInfo'				=> 'Istruire alcuni motori di ricerca che il link ipertestuale non deve influenzare il posizionamento dei link target nell\'indice dei motori di ricerca. Aggiunge <code>rel="nofollow"</code> alla sintassi del link.',
+	'NofollowInfo'				=> 'Tells search engines that the hyperlinks should not affect the page ranking of the target page in the search engine index. Adds <code>rel="nofollow"</code> to the link syntax.',
 	'UrlsUnderscores'			=> 'Form addresses (URLs) with underscores',
 	'UrlsUnderscoresInfo'		=> 'For example %1 becames %2 with this option.',
-	'ShowSpaces'				=> 'Mostra gli spazi nei NomiWiki',
+	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'ShowSpacesInfo'			=> 'Show spaces in WikiNames, e.g. <code>MyName</code> being displayed as <code>My Name</code> with this option.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'NumerateLinksInfo'			=> 'Numerates and lists all links at the bottom of the print view with this option.',
@@ -677,7 +680,7 @@ $ap_translation = [
 	'YouareHereTextInfo'		=> 'Visualizing links to the same page, try to <code>&lt;b&gt;####&lt;/b&gt;</code>, all links-to-self became not links, but bold text.',
 
 	// Pages settings
-	'PagesSettingsInfo'			=> 'Qui è possibile impostare o modificare le pagine base del sistema utilizzate all\'interno del Wiki. Non dimenticate di creare o modificare le pagine corrispondenti nel Wiki in base alle vostre impostazioni.',
+	'PagesSettingsInfo'			=> 'Here you can set or change the system base pages used within the Wiki. Please ensure you not forget to create or change the corresponding pages in the Wiki according your settings here.',
 	'PagesSettingsUpdated'		=> 'Updated settings base pages',
 
 	'ListCount'					=> 'Number of items per list',
@@ -697,7 +700,7 @@ $ap_translation = [
 	'NewsStructure'				=> 'News cluster structure',
 	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
 
-	'LicenseSection'			=> 'Licenza',
+	'LicenseSection'			=> 'License',
 	'DefaultLicense'			=> 'Default license',
 	'DefaultLicenseInfo'		=> 'Under which license should your content be released.',
 	'EnableLicense'				=> 'Enable License',
@@ -709,33 +712,33 @@ $ap_translation = [
 	'RootPage'					=> 'Home page',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
-	'PrivacyPage'				=> 'Informativa sulla privacy',
+	'PrivacyPage'				=> 'سیاست محرمانگی',
 	'PrivacyPageInfo'			=> 'The page with the Privacy Policy of the site.',
 
 	'TermsPage'					=> 'Policies and Regulations',
 	'TermsPageInfo'				=> 'The page with the rules of the site.',
 
-	'SearchPage'				=> 'Ricerca',
+	'SearchPage'				=> 'جستجو',
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
-	'RegistrationPage'			=> 'Registrazione',
+	'RegistrationPage'			=> 'نام‌نویسی',
 	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
 	'LoginPage'					=> 'User login',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
-	'SettingsPage'				=> 'User Settings',
+	'SettingsPage'				=> 'تنظیمات کاربری',
 	'SettingsPageInfo'			=> 'Page customize the user profile (action %1).',
 	'PasswordPage'				=> 'Change Password',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list',
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
-	'CategoryPage'				=> 'Categoria',
+	'CategoryPage'				=> 'دسته',
 	'CategoryPageInfo'			=> 'Page with a list of categorized pages (action %1).',
 	'TagPage'					=> 'Tag',
 	'TagPageInfo'				=> 'Page with a list of tagged pages (action %1).',
-	'GroupsPage'				=> 'Gruppi',
+	'GroupsPage'				=> 'گروه‌ها',
 	'GroupsPageInfo'			=> 'Page with a list of working groups (action %1).',
-	'ChangesPage'				=> 'Recent changes',
+	'ChangesPage'				=> 'تغییرات اخیر',
 	'ChangesPageInfo'			=> 'Page with a list of the last modified pages (action %1).',
-	'CommentsPage'				=> 'Recent comments',
+	'CommentsPage'				=> 'دیدگاه‌های اخیر',
 	'CommentsPageInfo'			=> 'Page with a list of recent comment on the page (action %1).',
 	'RemovalsPage'				=> 'Deleted pages',
 	'RemovalsPageInfo'			=> 'Page with a list of recently deleted pages (action %1).',
@@ -745,12 +748,12 @@ $ap_translation = [
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
 	'SandboxPage'				=> 'Sandbox',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
-	'HelpPage'					=> 'Aiuto',
+	'HelpPage'					=> 'راهنما',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
 	'IndexPage'					=> 'Index',
-	'IndexPageInfo'				=> 'Pagina con l\'elenco di tutte le pagine (action %1).',
-	'RandomPage'				=> 'Casuale',
-	'RandomPageInfo'			=> 'Carica una pagina casuale  (action %1).',
+	'IndexPageInfo'				=> 'Page with a list of all pages (action %1).',
+	'RandomPage'				=> 'تصادفی',
+	'RandomPageInfo'			=> 'Loads a random page (action %1).',
 
 
 	// Notification settings
@@ -775,14 +778,14 @@ $ap_translation = [
 	'NotifyUpload'				=> 'Notify file upload',
 	'NotifyUploadInfo'			=> 'The Moderators will to be notified when a file has been uploaded.',
 
-	'PersonalMessagesSection'	=> 'Messaggi personali',
+	'PersonalMessagesSection'	=> 'Personal messages',
 	'AllowIntercomDefault'		=> 'Allow Intercom',
 	'AllowIntercomDefaultInfo'	=> 'Enable this option allows other users sending personal messages to the recipient email-address without disclosing the address.',
 	'AllowMassemailDefault'		=> 'Allow Massemail',
 	'AllowMassemailDefaultInfo'	=> 'It send only messages to those user who allowed Administrators to email them information.',
 
 	// Resync settings
-	'Synchronize'				=> 'Sincronizzare',
+	'Synchronize'				=> 'Synchronize',
 	'UserStatsSynched'			=> 'User Statistics synchronized.',
 	'PageStatsSynched'			=> 'Page Statistics synchronized.',
 	'FeedsUpdated'				=> 'RSS-feeds updated.',
@@ -812,18 +815,18 @@ $ap_translation = [
 
 	'WikiLinksResync'			=> 'Wiki-links',
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
-	'RecompilePage'				=> 'Ricompilazione di tutte le pagine (estremamente costose)',
-	'ResyncOptions'				=> 'Opzioni aggiuntive',
+	'RecompilePage'				=> 'Re-compiling all pages (extremely costly)',
+	'ResyncOptions'				=> 'Additional options',
 	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
-	'EmaiSettingsInfo'			=> 'Questo modulo viene usato quando si inviano email ai propri utenti dalla Board. Assicurati che l\'indirizzo email specificato sia valido; ogni messaggio respinto o non consegnato, verrà inviato a questo indirizzo. Se il tuo server non fornisce un servizio email (basato su PHP) puoi in alternativa inviare messaggi direttamente via SMTP. Questo richiede l\'indirizzo di un server appropriato (chiedi al tuo provider, se necessario). Non specificare nomi vecchi qui. Se il server richiede autenticazione (e solo se lo fa) inserisci nome utente e password.',
+	'EmaiSettingsInfo'			=> 'This information is used when the engine sends emails to your users. Please ensure the email address you specify is valid, any bounced or undeliverable messages will likely be sent to that address. If your host does not provide a native (PHP based) email service you can instead send messages directly using SMTP. This requires the address of an appropriate server (ask your provider if necessary). If the server requires authentication (and only if it does) enter the necessary username, password and authentication method.',
 
 	'EmailSettingsUpdated'		=> 'Updated Email settings',
 
-	'EmailFunctionName'			=> 'Nome funzione email',
-	'EmailFunctionNameInfo'		=> 'Funzione email usata per spedire mail attraverso PHP.',
-	'UseSmtpInfo'				=> 'Scegli <code>SMTP</code> se vuoi o devi inviare email attraverso un server specifico invece di usare la funzione mail locale.',
+	'EmailFunctionName'			=> 'Email function name',
+	'EmailFunctionNameInfo'		=> 'The email function used to send mails through PHP.',
+	'UseSmtpInfo'				=> 'Select <code>SMTP</code> if you want or have to send email via a named server instead of the local mail function.',
 
 	'EnableEmail'				=> 'Enable emails',
 	'EnableEmailInfo'			=> 'Enabling emails',
@@ -837,28 +840,28 @@ $ap_translation = [
 	'AbuseEmail'				=> 'Email abuse service',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
-	'SendTestEmail'				=> 'Invia email di prova',
-	'SendTestEmailInfo'			=> 'Questo invierà un\'email di prova all\'indirizzo specificato sul tuo account.',
+	'SendTestEmail'				=> 'Send a test email',
+	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
 	'TestEmailMessage'			=> 'The test email has been sent.<br>If you don\'t receive it, please check your emails configuration.',
 
 	'SmtpAutoTls'				=> 'Opportunistic TLS',
 	'SmtpAutoTlsInfo'			=> 'Enables encryption automatically, if it sees that the server is advertising TLS encryption (after you have connected to the server), even if you have not set the connection mode for <code>SMTPSecure</code>.',
-	'SmtpConnectionMode'		=> 'Metodo autenticazione per SMTP',
-	'SmtpConnectionModeInfo'	=> 'Si usa solo se un nome utente o una password sono impostati. Chiedi al tuo provider se non sei sicuro del metodo da usare.',
-	'SmtpPassword'				=> 'Password SMTP',
-	'SmtpPasswordInfo'			=> 'Inserisci una password solo se il tuo server SMTP la richiede. <br><em><strong>Attenzione:</strong> questa password è conservata come testo in chiaro nel database.</em>',
-	'SmtpPort'					=> 'Porta del server SMTP',
-	'SmtpPortInfo'				=> 'Modifica questo parametro solo se sai che il tuo server SMTP si trova su una porta diversa. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
-	'SmtpServer'				=> 'Indirizzo server SMTP',
-	'SmtpServerInfo'			=> 'Tieni presente che è necessario fornire il protocollo che il server utilizza. Se si utilizza il protocollo SSL, questo deve essere <code>ssl://mail.example.com</code>',
-	'SmtpSettings'				=> 'Impostazioni SMTP',
-	'SmtpUsername'				=> 'Nome utente SMTP',
-	'SmtpUsernameInfo'			=> 'Inserisci un nome utente solo se il tuo server SMTP lo richiede.',
+	'SmtpConnectionMode'		=> 'Connection mode for SMTP',
+	'SmtpConnectionModeInfo'	=> 'Only used if a username/password is set, ask your provider if you are unsure which method to use.',
+	'SmtpPassword'				=> 'SMTP password',
+	'SmtpPasswordInfo'			=> 'Only enter a password if your SMTP server requires it.<br><em><strong>Warning:</strong> This password will be stored as plain text in the database, visible to everybody who can access your database or who can view this configuration page.</em>',
+	'SmtpPort'					=> 'SMTP server port',
+	'SmtpPortInfo'				=> 'Only change this if you know your SMTP server is on a different port. <br>(default: <code>tls</code> on port 587 (or possibly 25) and <code>ssl</code> on port 465)',
+	'SmtpServer'				=> 'SMTP server address',
+	'SmtpServerInfo'			=> 'Note that you have to provide the protocol that your server uses. If you are using SSL, this has to be <code>ssl://mail.example.com</code>',
+	'SmtpSettings'				=> 'SMTP settings',
+	'SmtpUsername'				=> 'SMTP username',
+	'SmtpUsernameInfo'			=> 'Only enter a username if your SMTP server requires it.',
 
 	// Upload settings
-	'UploadSettingsInfo'		=> 'Da qui puoi configurare le caratteristiche principali degli allegati e delle categorie speciali collegate.',
+	'UploadSettingsInfo'		=> 'Here you can configure the main settings for attachments and the associated special categories.',
 	'UploadSettingsUpdated'		=> 'Updated upload settings',
 
 	'RightToUpload'				=> 'Right to the upload files',
@@ -866,24 +869,24 @@ $ap_translation = [
 	'UploadOnlyImages'			=> 'Allow only upload of images',
 	'UploadOnlyImagesInfo'		=> 'Allow only uploading of image files on the page.',
 	'FileUploads'				=> 'File uploads',
-	'UploadMaxFilesize'			=> 'Dimensione massima',
-	'UploadMaxFilesizeInfo'		=> 'Dimensione massima di ogni file. Se questo valore è uguale a 0, la dimensione del file inviabile sarà limitata solo dalla configurazione PHP.',
-	'UploadQuota'				=> 'Quota massima allegati',
-	'UploadQuotaInfo'			=> 'Dimensione massima riservata su disco per tutti gli allegati; <code>0</code> = illimitata.',
+	'UploadMaxFilesize'			=> 'Maximum file size',
+	'UploadMaxFilesizeInfo'		=> 'Maximum size of each file. If this value is 0, the uploadable filesize is only limited by your PHP configuration.',
+	'UploadQuota'				=> 'Total attachment quota',
+	'UploadQuotaInfo'			=> 'Maximum drive space available for attachments for the whole wiki, with <code>0</code> being unlimited.',
 	'UploadQuotaUser'			=> 'Storage quota per user',
 	'UploadQuotaUserInfo'		=> 'Restriction on the quota of storage that can be uploaded by one user, with <code>0</code> being unlimited.',
-	'CheckMimetype'				=> 'Controlla allegati',
-	'CheckMimetypeInfo'			=> 'Alcuni browser possono essere ingannati nell\'accettare un mimetype incorretto per i file da caricare. Questa opzione garantisce che i file che possono causare questo problema vengano respinti.',
+	'CheckMimetype'				=> 'Check attachment files',
+	'CheckMimetypeInfo'			=> 'Some browsers can be tricked to assume an incorrect mimetype for uploaded files. This option ensures that such files likely to cause this are rejected.',
 	'TranslitFileName'			=> 'Transliterate file names',
-	'TranslitFileNameInfo'		=> 'Se è applicabile e non è necessario avere caratteri Unicode, si raccomanda vivamente di accettare solo caratteri alfanumerici.',
+	'TranslitFileNameInfo'		=> 'If it is applicable and there is no need to have Unicode characters, it is highly recommended to only accept Alpha-Numeric characters.',
 
 	'Thumbnails'				=> 'Thumbnails',
-	'CreateThumbnail'			=> 'Crea miniatura',
-	'CreateThumbnailInfo'		=> 'Crea miniatura in tutte le situazioni possibili.',
-	'MaxThumbWidth'				=> 'Larghezza massima miniatura in pixel',
-	'MaxThumbWidthInfo'			=> 'La miniatura generata non avrà una larghezza superiore a quella impostata qui.',
-	'MinThumbFilesize'			=> 'Dimensioni minime per miniatura',
-	'MinThumbFilesizeInfo'		=> 'Non crea miniature per immagini con dimensioni inferiori a queste.',
+	'CreateThumbnail'			=> 'Create thumbnail',
+	'CreateThumbnailInfo'		=> 'Create a thumbnail in all possible situations.',
+	'MaxThumbWidth'				=> 'Maximum thumbnail width in pixel',
+	'MaxThumbWidthInfo'			=> 'A generated thumbnail will not exceed the width set here.',
+	'MinThumbFilesize'			=> 'Minimum thumbnail file size',
+	'MinThumbFilesizeInfo'		=> 'Do not create a thumbnail for images smaller than this.',
 
 	// Deleted module
 	'DeletedObjectsInfo'		=> 'List of removed pages, revisions and files.
@@ -933,9 +936,9 @@ $ap_translation = [
 		'3'		=> 'equal',
 	],
 	'LogNoMatch'				=> 'No events that meet the criteria',
-	'LogDate'					=> 'Date',
+	'LogDate'					=> 'تاریخ',
 	'LogEvent'					=> 'Event',
-	'LogUsername'				=> 'Nome utente',
+	'LogUsername'				=> 'Username',
 	'LogLevels'	=> [
 		'1'		=> 'critical',
 		'2'		=> 'highest',
@@ -947,25 +950,25 @@ $ap_translation = [
 	],
 
 	// Massemail module
-	'MassemailInfo'				=> 'Da qui puoi inviare messaggi email a tutti gli utenti o a quelli di un gruppo specifico, <strong>purché abbiano l\'opzione di ricevere email di massa dall\'amministratore abilitata</strong>. L\'email verrà inviata all\'indirizzo amministrativo del Forum, e i destinatari la riceveranno come copia di conoscenza nascosta (CCN). Le impostazioni predefinite prevedono un massimo di 20 destinatari per ciascuna email, quindi se il numero è maggiore, verranno spedite diverse email; pertanto abbi pazienza dopo l\'invio e non bloccare il procedimento in corso, in quanto potrebbe durare anche diversi minuti se il numero di destinatari è molto elevato. Al termine dell\'operazione verrai informato dell\'avvenuto invio.',
+	'MassemailInfo'				=> 'Here you can email a message to either all of your users or all users of a specific group having the option to receive mass emails enabled. To achieve this an email will be sent out to the administrative email address supplied, with a blind carbon copy sent to all recipients. The default setting is to only include 20 recipients in such an email, for more recipients more emails will be sent. If you are emailing a large group of people please be patient after submitting and do not stop the page halfway through. It is normal for a mass emailing to take a long time, you will be notified when the script has completed.',
 	'LogMassemail'				=> 'Messemail send %1 to group / user ',
 	'MassemailSend'				=> 'Massemail send',
 
-	'NoEmailMessage'			=> 'Devi scrivere il messaggio.',
-	'NoEmailSubject'			=> 'Devi specificare un titolo per il tuo messaggio.',
+	'NoEmailMessage'			=> 'You must enter a message.',
+	'NoEmailSubject'			=> 'You must specify a subject for your message.',
 	'NoEmailRecipient'			=> 'You must specify at least one user or user group.',
 
 	'MassemailSection'			=> 'Mass email',
-	'MessageSubject'			=> 'Soggetto',
+	'MessageSubject'			=> 'موضوع',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Il tuo messaggio',
-	'YourMessageInfo'			=> 'Puoi scrivere soltanto testo normale. Tutto il resto sarà rimosso prima della trasmissione.',
+	'YourMessage'				=> 'Your message',
+	'YourMessageInfo'			=> 'Please note that you may enter only plain text. All markup will be removed before sending.',
 
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 
-	'SendToGroup'				=> 'Invia a gruppo',
-	'SendToUser'				=> 'Invia a utenti',
+	'SendToGroup'				=> 'Send to group',
+	'SendToUser'				=> 'Send to user',
 	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
@@ -991,19 +994,19 @@ $ap_translation = [
 	'LogUserUpdated'			=> 'Updated User ##%1##',
 
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
-	'Approve'					=> 'Approve',
+	'Approve'					=> 'موافقت',
 	'Deny'						=> 'Deny',
 	'Pending'					=> 'Pending',
 	'Approved'					=> 'Approved',
 	'Denied'					=> 'Denied',
 
 	// DB Backup module
-	'BackupStructure'			=> 'Structure',
+	'BackupStructure'			=> 'ساختار',
 	'BackupData'				=> 'Data',
 	'BackupFolder'				=> 'Folder',
 	'BackupTable'				=> 'Table',
 	'BackupCluster'				=> 'Cluster',
-	'BackupFiles'				=> 'Files',
+	'BackupFiles'				=> 'فایل‌ها',
 	'BackupSettings'			=> 'Specify the desired scheme of Backup.<br>' .
 									'The root cluster does not affect the global files backup and cache files backup (being chosen they are always saved in full).<br>' .
 									'<br>' .
@@ -1011,18 +1014,18 @@ $ap_translation = [
 									'same when backing up only table structure without saving the data. ' .
 									'To make a complete conversion of the tables to the backup format you must make the <em> full database backup (structure and data) without specifying the cluster</em>.',
 	'BackupCompleted'			=> 'Backing up and archiving completed.<br>' .
-									'The Backup package files were stored in the following sub-directory %1.<br>' .
+									'The Backup package files were stored in the sub-directory %1.<br>' .
 									'To download it use FTP (maintain the directory structure and file names when copying).<br>' .
 									'To restore a backup copy or remove a package, go to <a href="%2">Restore database</a>.',
 	'LogSavedBackup'			=> 'Saved backup database ##%1##',
-	'Backup'					=> 'Backup',
+	'Backup'					=> 'پشتیبان‌گیری',
 
 	// DB Restore module
 	'RestoreInfo'				=> 'You can restore any of the backup packages found or remove it from the server.',
-	'ConfirmDbRestore'			=> 'Si desidera ripristinare il backup %1?',
-	'ConfirmDbRestoreInfo'		=> 'Per favore, aspetta che ci vorrà qualche minuto.',
+	'ConfirmDbRestore'			=> 'Do you want to restore backup %1?',
+	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
-	'BackupDelete'				=> 'Sei sicuro di voler rimuovere il backup %1?',
+	'BackupDelete'				=> 'Are you sure you want to remove backup %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',
 	'RestoreOptionsInfo'		=> '* Before restoring the <strong>cluster backup</strong>, ' .
@@ -1066,20 +1069,20 @@ $ap_translation = [
 	'HomonymicFiles'			=> 'homonymic files',
 	'RestoreSkip'				=> 'skip',
 	'RestoreReplace'			=> 'replace',
-	'RestoreFile'				=> 'File',
+	'RestoreFile'				=> 'فایل',
 	'Restored'					=> 'restored',
 	'Skipped'					=> 'skipped',
 	'FileRestoreDone'			=> 'Completed. Total files',
-	'FilesAll'					=> 'tutti',
+	'FilesAll'					=> 'همه',
 	'SkipFiles'					=> 'Files are not stored - skip',
 	'RestoreDone'				=> 'RESTORATION COMPLETED',
 
 	'BackupCreationDate'		=> 'Creation Date',
 	'BackupPackageContents'		=> 'The contents of the package',
-	'BackupRestore'				=> 'Ripristina',
-	'BackupRemove'				=> 'Rimuovere',
-	'RestoreYes'				=> 'Yes',
-	'RestoreNo'					=> 'No',
+	'BackupRestore'				=> 'Restore',
+	'BackupRemove'				=> 'حذف',
+	'RestoreYes'				=> 'بله',
+	'RestoreNo'					=> 'خیر',
 	'LogDbRestored'				=> 'Backup ##%1## of the database restored.',
 
 	// User module
@@ -1087,9 +1090,9 @@ $ap_translation = [
 
 	'UsersAdded'				=> 'User added',
 	'UsersDeleteInfo'			=> '[User delete Info here..]',
-	'EditButton'				=> 'Modificare',
+	'EditButton'				=> 'ویرایش',
 	'UsersAddNew'				=> 'Add new user',
-	'UsersDelete'				=> 'Sei sicuro di voler rimuovere l\'utente %1?',
+	'UsersDelete'				=> 'Are you sure you want to remove user %1?',
 	'UsersDeleted'				=> 'The user %1 was deleted from the database.',
 	'UsersRename'				=> 'Rename the user %1 to',
 	'UsersRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that user.',
@@ -1100,10 +1103,10 @@ $ap_translation = [
 	'UserActions'				=> 'Actions',
 	'NoMatchingUser'			=> 'No users that meet the criteria',
 
-	'UserAccountNotify'			=> 'Notifica utente',
-	'UserNotifySignup'			=> 'informare l\'utente del nuovo account',
-	'UserVerifyEmail'			=> 'imposta il token di conferma e-mail e aggiungi link per la verifica e-mail',
-	'UserReVerifyEmail'			=> 'Invia di nuovo il token di conferma dell\'e-mail',
+	'UserAccountNotify'			=> 'Notify user',
+	'UserNotifySignup'			=> 'inform the user about the new account',
+	'UserVerifyEmail'			=> 'set email confirm token and add link for email verification',
+	'UserReVerifyEmail'			=> 'Re-send email confirm token',
 
 	// Groups module
 	'GroupsInfo'				=> 'From this panel you can administrate all your usergroups. You can delete, create and edit existing groups. Furthermore, you may choose group leaders, toggle open/hidden/closed group status and set the group name and description.',
@@ -1116,50 +1119,50 @@ $ap_translation = [
 	'LogGroupRemoved'			=> 'Removed group ##%1##',
 
 	'GroupsMembersFor'			=> 'Members for Group',
-	'GroupsDescription'			=> 'Descrizione',
-	'GroupsModerator'			=> 'Moderatore',
+	'GroupsDescription'			=> 'توضیحات',
+	'GroupsModerator'			=> 'Moderator',
 	'GroupsOpen'				=> 'Open',
 	'GroupsActive'				=> 'Active',
 	'GroupsTip'					=> 'Click to edit Group',
 	'GroupsUpdated'				=> 'Groups updated',
-	'GroupsAlreadyExists'		=> 'Questo gruppo esiste già.',
-	'GroupsAdded'				=> 'Gruppo aggiunto con successo.',
-	'GroupsRenamed'				=> 'Gruppo rinominato con successo.',
+	'GroupsAlreadyExists'		=> 'This group already exists.',
+	'GroupsAdded'				=> 'Group added successfully.',
+	'GroupsRenamed'				=> 'Group successfully renamed.',
 	'GroupsDeleted'				=> 'The group %1 was deleted from the database and all pages.',
-	'GroupsAdd'					=> 'Aggiungere un nuovo gruppo',
+	'GroupsAdd'					=> 'Add a new group',
 	'GroupsRename'				=> 'Rename the group %1 to',
 	'GroupsRenameInfo'			=> '* Note: Change will affect all pages that are assigned to that group.',
-	'GroupsDelete'				=> 'Sei sicuro di voler rimuovere il gruppo %1?',
-	'GroupsDeleteInfo'			=> '* Nota: Le modifiche riguardano tutti i membri assegnati a quel gruppo.',
-	'GroupsIsSystem'			=> 'Il gruppo %1 appartiene al sistema e non può essere rimosso.',
+	'GroupsDelete'				=> 'Are you sure you want to remove group %1?',
+	'GroupsDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
+	'GroupsIsSystem'			=> 'The group %1 belongs to the system and cannot be removed.',
 	'GroupsStoreButton'			=> 'Save Groups',
 	'GroupsEditInfo'			=> 'To edit the groups list select the radio button.',
 
-	'GroupAddMember'			=> 'Aggiungi membro',
-	'GroupRemoveMember'			=> 'Rimuovi Membro',
-	'GroupAddNew'				=> 'Aggiungi gruppo',
-	'GroupEdit'					=> 'Modifica gruppo',
-	'GroupDelete'				=> 'Rimuovi gruppo',
+	'GroupAddMember'			=> 'Add member',
+	'GroupRemoveMember'			=> 'Remove Member',
+	'GroupAddNew'				=> 'Add group',
+	'GroupEdit'					=> 'Edit Group',
+	'GroupDelete'				=> 'Remove Group',
 
-	'MembersAddNew'				=> 'Aggiungere un nuovo membro',
-	'MembersAdded'				=> 'Aggiunto con successo un nuovo membro del gruppo.',
-	'MembersRemove'				=> 'Sei sicuro di voler rimuovere un membro %1?',
-	'MembersRemoved'			=> 'Il membro è stato allontanato dal gruppo.',
-	'MembersDeleteInfo'			=> '* Nota: Le modifiche riguardano tutti i membri assegnati a quel gruppo.',
+	'MembersAddNew'				=> 'Add new member',
+	'MembersAdded'				=> 'Added new member to the group successfully.',
+	'MembersRemove'				=> 'Are you sure you want to remove member %1?',
+	'MembersRemoved'			=> 'The member was removed from the group.',
+	'MembersDeleteInfo'			=> '* Note: Change will affect all members that are assigned to that group.',
 
 	// Statistics module
 	'DbStatSection'				=> 'Database Statistics',
 	'DbTable'					=> 'Table',
 	'DbRecords'					=> 'Records',
-	'DbSize'					=> 'Size',
+	'DbSize'					=> 'اندازه',
 	'DbIndex'					=> 'Index',
 	'DbOverhead'				=> 'Overhead',
 	'DbTotal'					=> 'Total',
 
 	'FileStatSection'			=> 'File system Statistics',
 	'FileFolder'				=> 'Folder',
-	'FileFiles'					=> 'Files',
-	'FileSize'					=> 'Size',
+	'FileFiles'					=> 'فایل‌ها',
+	'FileSize'					=> 'اندازه',
 	'FileTotal'					=> 'Total',
 
 	// Sysinfo module
@@ -1168,7 +1171,7 @@ $ap_translation = [
 	'SysValues'					=> 'Values',
 
 	'WackoVersion'				=> 'WackoWiki',
-	'LastWackoUpdate'			=> 'Last update',
+	'LastWackoUpdate'			=> 'آخرین به‌روزرسانی',
 	'ServerOS'					=> 'OS',
 	'ServerName'				=> 'Server name',
 	'WebServer'					=> 'Web server',
@@ -1209,9 +1212,9 @@ $ap_translation = [
 	// Inconsistencies module
 	'InconsistenciesInfo'		=> 'Show and fix inconsistencies, delete or assign orphaned records to a new user / value.',
 	'Inconsistencies'			=> 'Inconsistencies',
-	'CheckDatabase'				=> 'Database',
+	'CheckDatabase'				=> 'پایگاه داده',
 	'CheckDatabaseInfo'			=> 'Checks for record inconsistencies in the database.',
-	'CheckFiles'				=> 'Files',
+	'CheckFiles'				=> 'فایل‌ها',
 	'CheckFilesInfo'			=> 'Checks for abandoned files, files with no reference left in the file table.',
 	'Records'					=> 'Records',
 	'InconsistenciesNone'		=> 'No Data Inconsistencies found.',
@@ -1228,11 +1231,11 @@ $ap_translation = [
 
 	'BbSummary'					=> 'Summary',
 	'BbLog'						=> 'Log',
-	'BbSettings'				=> 'Preferenze',
+	'BbSettings'				=> 'تنظیمات',
 	'BbWhitelist'				=> 'Whitelist',
 
 	// --> Log
-	'BbHits'					=> 'Hits',
+	'BbHits'					=> 'بازدیدها',
 	'BbRecordsFiltered'			=> 'Displaying %1 of %2 records filtered by',
 	'BbStatus'					=> 'Status',
 	'BbBlocked'					=> 'Blocked',
@@ -1260,9 +1263,9 @@ $ap_translation = [
 	'BbSettingsUpdated'			=> 'Updated Bad Behavior settings',
 	'BbLogRequest'				=> 'Logging HTTP request',
 	'BbLogVerbose'				=> 'Verbose',
-	'BbLogNormal'				=> 'Normal (recommended)',
+	'BbLogNormal'				=> 'Normal (توصیه‌شده)',
 	'BbLogOff'					=> 'Do not log (not recommended)',
-	'BbSecurity'				=> 'Security',
+	'BbSecurity'				=> 'امنیتی',
 	'BbStrict'					=> 'Strict checking',
 	'BbStrictInfo'				=> 'blocks more spam but may block some people',
 	'BbOffsiteForms'			=> 'Allow form postings from other web sites',

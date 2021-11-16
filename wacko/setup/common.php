@@ -60,11 +60,11 @@ function available_languages()
 	{
 		while (false !== ($file = readdir($handle)))
 		{
-			if ($file != '.'
-			&& $file != '..'
-			&& $file != 'wacko.all.php'
-			&& !is_dir('lang/' . $file)
-			&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
+			if (   $file != '.'
+				&& $file != '..'
+				&& $file != 'wacko.all.php'
+				&& !is_dir('lang/' . $file)
+				&& 1 == preg_match('/^wacko\.(.*?)\.php$/', $file, $match))
 			{
 				$lang_list[] = $match[1];
 			}

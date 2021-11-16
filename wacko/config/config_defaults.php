@@ -90,6 +90,7 @@ $wacko_config_defaults = [
 	'theme'							=> 'default',
 	'allow_themes'					=> 0,
 	'allow_themes_per_page'			=> 0,
+	'theme_color'					=> '',
 
 	'site_logo'						=> 'wacko_logo.png',
 	'logo_display'					=> 0,

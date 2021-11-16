@@ -6,7 +6,7 @@ lang = {
 	SessionExpiredEditor :	"Din session er udløbet!\nDu er logget af på grund af lang inaktivitet.\n1. Gem dine formændringer i tekstfilen for at forhindre tab.\n2. Opdater siden.\n3. Log ind igen og indsend igen.",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
+	HelpAbout :				"Hjælp & Om",
 	HelpFormatting :		"Hjælp",
 	HelpFormattingTip :		"Help on Wiki-formatting",
 	HelpFormattingPage :	"Doc/English/Formatting",
@@ -66,5 +66,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

@@ -94,7 +94,7 @@ class Wacko
 	* Crates an instance of Wacko object
 	* @param array $config Current configuration as map key=value
 	*
-	* @return Wacko
+	* @return void
 	*/
 	function __construct(&$config, &$http)
 	{

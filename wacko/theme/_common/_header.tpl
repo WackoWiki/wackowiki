@@ -7,6 +7,9 @@ _common include file for themes
 	<meta charset="[ ' charset ' ]">
 	<title>[ ' title | e ' ][ ' tag ' ][ ' method | enclose " (" ")" ' ] - [ ' db: site_name | e ' ]</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	[= theme _ =
+		<meta name="theme-color" content="[ ' color | e ' ]">
+	=]
 	[= norobots _ =
 		['' nonstatic // dummy to make pattern non-static '']
 		<meta name="robots" content="noindex, nofollow">

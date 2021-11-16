@@ -34,8 +34,7 @@ if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 
 	foreach ($lang_list as $_lang)
 	{
-		unset($page_lang);
-		unset($languages);
+		unset($page_lang, $languages);
 		$inserts_file = 'setup/lang/inserts.' . $_lang . '.php';
 
 		if (@file_exists($inserts_file))

@@ -22,7 +22,7 @@ lang = {
 	Underline :				"Underline",
 	Strikethrough :			"Strikethrough",
 	Small :					"Small",
-	Code :					"Code",
+	Code :					"Inline code",
 	Superscript :			"Superscript",
 	Subscript :				"Subscript",
 	List :					"List",
@@ -66,5 +66,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

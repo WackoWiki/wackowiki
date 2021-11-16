@@ -389,6 +389,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Válassza ki a megengedett sablonok, amelyeket a felhasználó választhat, különben az összes elérhető sablonok engedélyezett.',
 	'ThemesPerPage'				=> 'Sablonok oldalanként',
 	'ThemesPerPageInfo'			=> 'Engedélyezzen sablonokat oldalanként, amelyeket az oldal tulajdonosa az oldal tulajdonságain keresztül választhat ki.',
+	'ThemeColor'				=> 'Theme color for address bar',
+	'ThemeColorInfo'			=> 'A böngésző minden oldal címsorának színét a megadott CSS-színnek megfelelően állítja be.',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',

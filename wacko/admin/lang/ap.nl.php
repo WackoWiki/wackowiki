@@ -389,6 +389,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+	'ThemeColor'				=> 'Thema kleur voor adresbalk',
+	'ThemeColorInfo'			=> 'De browser zal de kleur van de adresbalk van elke pagina instellen volgens de opgegeven CSS kleur.',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',

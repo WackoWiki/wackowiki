@@ -37,6 +37,17 @@ function admin_config_appearance(&$engine, &$module)
 		return in_array($theme, $engine->available_themes()) ? $theme : $engine->db->theme;
 	};
 
+	$valid_color = function ($color)
+	{
+		if (preg_match('/^(
+			(\#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}))|        # color value
+				(rgb\(([0-9]{1,3}%?,){2}[0-9]{1,3}%?\))        # rgb triplet
+			)$/x', $color))
+		{
+			return $color;
+		}
+	};
+
 	$remove_file = function ($file) use ($engine)
 	{
 		if (!in_array($file, ['favicon', 'logo']))
@@ -44,7 +55,6 @@ function admin_config_appearance(&$engine, &$module)
 			return;
 		}
 
-		// $engine->{'db->site_' . $file} no way! - more Spaghetti
 		$yeah['favicon']	= $engine->db->site_favicon;
 		$yeah['logo']		= $engine->db->site_logo;
 
@@ -55,7 +65,6 @@ function admin_config_appearance(&$engine, &$module)
 		if (unlink($file_name))
 		{
 			$engine->set_message($engine->_t('FileRemovedFromFS'), 'success');
-			# $engine->set_message($engine->_t('LogoRemoved'), 'success');
 
 			$config['site_' . $file]		= '';
 
@@ -206,8 +215,8 @@ function admin_config_appearance(&$engine, &$module)
 			$upload_file('favicon');
 		}
 
-		#Ut::debug_print_r($_POST);
 		$config['logo_display']				= (int) ($_POST['logo_display'] ?? null);
+		$config['theme_color']				= (string) $valid_color(($_POST['theme_color'] ?? null));
 		$config['theme']					= (string) $valid_theme(($_POST['theme'] ?? null));
 
 		if (isset($_POST['allow_themes']) && is_array($_POST['allow_themes']))
@@ -312,6 +321,18 @@ function admin_config_appearance(&$engine, &$module)
 				<button type="submit" id="remove_favicon" name="remove_favicon"><?php echo $engine->_t('Remove'); ?></button>
 			<?php }?>
 				<input type="file" name="favicon" id="favicon_upload" accept=".gif, .ico, .jpg, .png, .svg, .webp, image/gif, image/x-icon, image/jpeg, image/png, image/svg+xml, image/webp">
+			</td>
+		</tr>
+		<tr class="lined">
+			<td colspan="2"></td>
+		</tr>
+		<tr class="hl-setting">
+			<td class="label">
+				<label for="theme_color"><strong><?php echo $engine->_t('ThemeColor');?>:</strong><br>
+				<small><?php echo $engine->_t('ThemeColorInfo');?></small></label>
+			</td>
+			<td>
+				<input type="color" id="theme_color" name="theme_color" value="<?php echo Ut::html($engine->db->theme_color);?>">
 			</td>
 		</tr>
 		<tr>

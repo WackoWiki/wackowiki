@@ -882,17 +882,18 @@ ImageString($im, 2, $width - $tag_width, $height - 13, $tag_str, $tag_col);
 unset($word);
 // the below aren't really essential, but might aid an OCR attack if discovered.
 // so we unset them
-unset($use_dict);
-unset($dict_location);
-unset($max_word_length);
-unset($bg_type);
-unset($bg_images);
-unset($merge_type);
-unset($bg_fade_pct);
-unset($morph_bg);
-unset($col_type);
-unset($max_attempts);
-unset($font_locations);
+unset(
+	$use_dict,
+	$dict_location,
+	$max_word_length,
+	$bg_type,
+	$bg_images,
+	$merge_type,
+	$bg_fade_pct,
+	$morph_bg,
+	$col_type,
+	$max_attempts,
+	$font_locations);
 
 
 // output final image :-)

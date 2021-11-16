@@ -43,7 +43,7 @@ lang = {
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
 	Hyperlink :				"Hyperlink",
-	InsertTable :			"Insert table",
+	InsertTable :			"Táblázat beillesztése",
 
 	Link :					"Hivatkozás",
 	TextForLinking :		"Text for linking",
@@ -66,5 +66,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

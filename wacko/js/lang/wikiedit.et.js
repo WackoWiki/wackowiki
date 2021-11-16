@@ -37,7 +37,7 @@ lang = {
 	HTML :					"HTML",
 	Action :				"Action",
 	Line :					"Horisontaalne vahejoon",
-	Signature :				"Signature",
+	Signature :				"Allkiri",
 	Quote :					"Quote",
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
@@ -66,5 +66,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };

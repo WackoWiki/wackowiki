@@ -392,6 +392,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+	'ThemeColor'				=> '地址栏的主题颜色',
+	'ThemeColorInfo'			=> '浏览器会根据所提供的CSS颜色来设置每个页面的地址栏颜色。',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',

@@ -1234,6 +1234,7 @@ $wacko_translation = [
 		'en' => 'angol',
 		'es' => 'spanyol',
 		'et' => 'észt',
+		'fa' => 'Persian',
 		'fr' => 'francia',
 		'hi' => 'hindi',
 		'hu' => 'magyar',

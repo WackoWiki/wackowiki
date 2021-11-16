@@ -231,7 +231,7 @@ function admin_config_formatter(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl-setting">
-				<td class="label" scope="row">
+				<td class="label">
 					<label for="timezone"><strong><?php echo $engine->_t('Timezone');?></strong><br>
 					<small><?php echo $engine->_t('TimezoneInfo');?></small></label>
 				</td>
