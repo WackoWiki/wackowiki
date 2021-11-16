@@ -66,5 +66,4 @@ lang = {
 							' Ctrl+= - Mały tekst\n'+
 							' Ctrl+Shift+Minus - Linia pozioma\n'+
 							' \n'
-
 };

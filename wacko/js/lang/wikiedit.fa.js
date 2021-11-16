@@ -22,7 +22,7 @@ lang = {
 	Underline :				"زیرنویس شده",
 	Strikethrough :			"خط خورده",
 	Small :					"Small",
-	Code :					"Inline code",
+	Code :					"کد درون خطی",
 	Superscript :			"بالانویس",
 	Subscript :				"زیرنویس",
 	List :					"لیست نامرتب",
@@ -66,5 +66,4 @@ lang = {
 							' Ctrl+= - Small text\n'+
 							' Ctrl+Shift+Minus - Horizontal line\n'+
 							' \n'
-
 };
