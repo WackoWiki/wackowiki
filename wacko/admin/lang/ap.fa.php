@@ -392,6 +392,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+	'ThemeColor'				=> 'رنگ تم برای نوار آدرس',
+	'ThemeColorInfo'			=> 'مرورگر رنگ نوار آدرس هر صفحه را با توجه به رنگ CSS ارائه شده تنظیم می کند.',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',

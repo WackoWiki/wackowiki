@@ -389,6 +389,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Sélectionnez les thèmes autorisés, que l\'utilisateur peut choisir, sinon tous les thèmes disponibles sont autorisés.',
 	'ThemesPerPage'				=> 'Thèmes par page',
 	'ThemesPerPageInfo'			=> 'Autoriser les thèmes par page, que le propriétaire de la page peut choisir via les propriétés de la page.',
+	'ThemeColor'				=> 'Couleur du thème pour la barre d\'adresse',
+	'ThemeColorInfo'			=> 'Le navigateur définira la couleur de la barre d\'adresse de chaque page en fonction de la couleur CSS fournie.',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Groupe de paramètres responsable de la plate-forme de réglage fin. Ne les changez pas à moins d\'avoir confiance en leurs actions.',

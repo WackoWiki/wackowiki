@@ -392,6 +392,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
 	'ThemesPerPage'				=> 'Themes per page',
 	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+	'ThemeColor'				=> 'पता बार के लिए थीम रंग',
+	'ThemeColorInfo'			=> 'ब्राउज़र दिए गए CSS रंग के अनुसार हर पेज के एड्रेस बार का रंग सेट करेगा। ',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',

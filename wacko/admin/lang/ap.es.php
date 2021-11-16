@@ -389,6 +389,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Seleccione los temas permitidos, que el usuario puede elegir, de lo contrario se permiten todos los temas disponibles.',
 	'ThemesPerPage'				=> 'Temas por página',
 	'ThemesPerPageInfo'			=> 'Permitir temas por página, que el propietario de la página puede elegir a través de las propiedades de la página.',
+	'ThemeColor'				=> 'Color del tema para la barra de direcciones',
+	'ThemeColorInfo'			=> 'El navegador establecerá el color de la barra de direcciones de cada página de acuerdo con el color CSS proporcionado.',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Grupo de parámetros responsables de la plataforma de ajuste fino. No los cambie a menos que tenga confianza en sus acciones.',

@@ -389,6 +389,8 @@ $ap_translation = [
 	'ThemesAllowedInfo'			=> 'Wähle die zulässigen Layouts aus, die der Benutzer verwenden kann, andernfalls sind alle verfügbaren Layouts zulässig.',
 	'ThemesPerPage'				=> 'Layouts pro Seite',
 	'ThemesPerPageInfo'			=> 'Erlaube Layouts pro Seite, welche der Seitenbesitzer über Seiteneigenschaften auswählen kann.',
+	'ThemeColor'				=> 'Themenfarbe für die Adressleiste',
+	'ThemeColorInfo'			=> 'Der Browser setzt die Farbe der Adressleiste auf allen Seiten entsprechend der angegebenen CSS-Farbe. ',
 
 	// System settings
 	'SystemSettingsInfo'		=> 'Systemeinstellungen der Webseite. Verändere hier nichts, außer wenn Du sicher über die Folgen bist.',

@@ -18,6 +18,8 @@ $tpl->charset		= $this->get_charset();
 !Ut::is_empty($tpl->title = @$this->page['title']) || $tpl->tag = $this->add_spaces($this->tag);
 $this->method == 'show' || $tpl->method = $this->method;
 
+$tpl->theme_color	= $this->db->theme_color;
+
 // We don't need search robots to index subordinate pages, if indexing is disabled globally or per page
 $tpl->norobots = (
 		   $this->method != 'show'
