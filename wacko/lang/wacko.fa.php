@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 $wacko_translation = [
 
 	// common
-	'CreateButton'				=> 'Create',
+	'CreateButton'				=> 'ایجاد',
 	'SaveButton'				=> 'ذخیره',
 	'UpdateButton'				=> 'به‌روزرسانی',
 	'CancelButton'				=> 'لغو',
@@ -19,11 +19,11 @@ $wacko_translation = [
 	'RemoveButton'				=> 'حذف',
 	'SetButton'					=> 'Set',
 	'ResetButton'				=> 'بازنشاندن',
-	'RenameButton'				=> 'Rename',
+	'RenameButton'				=> 'تغییر نام',
 	'DeleteButton'				=> 'حذف',
-	'RestoreButton'				=> 'Restore',
+	'RestoreButton'				=> 'احیا',
 	'ArchiveButton'				=> 'Archive',
-	'SendButton'				=> 'Send',
+	'SendButton'				=> 'بفرست',
 
 	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
 
@@ -231,7 +231,7 @@ $wacko_translation = [
 	'AclRead'					=> 'Read:',
 	'AclWrite'					=> 'Write:',
 	'AclComment'				=> 'دیدگاه:',
-	'AclCreate'					=> 'Create:',
+	'AclCreate'					=> 'ایجاد:',
 	'AclUpload'					=> 'بارگذاری:',
 	'AclFor'					=> 'Access Control Lists for %1',
 	'SetOwner'					=> 'Set Owner:',
@@ -318,7 +318,7 @@ $wacko_translation = [
 	'GroupsNoMatching'			=> 'Matching groups not found. Try a softer search criteria.',
 	'GroupsOpenProfile'			=> 'مشاهده پروفایل',
 	'GroupsName'				=> 'گروه',
-	'GroupsMembers'				=> 'Members',
+	'GroupsMembers'				=> 'اعضا',
 	'GroupsDescription'			=> 'توضیحات',
 	'GroupsCreated'				=> 'ایجاد شد',
 	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
@@ -564,7 +564,7 @@ $wacko_translation = [
 	'SortCommentDesc'			=> 'Most recent on top',
 
 	'RenamePage'				=> 'تغیرنام صفحه',
-	'RenameText'				=> 'Rename',
+	'RenameText'				=> 'تغییر نام',
 	'RenameTip'					=> 'تغیرنام صفحه',
 	'NewName'					=> 'Enter new name for this page',
 	'AlreadyExists'				=> 'Page %1 already exists.',
@@ -603,7 +603,7 @@ $wacko_translation = [
 
 	'CreatePage'				=> 'Create this page',
 	'CreateNewPage'				=> 'Create a new page',
-	'CreateNewPageText'			=> 'Create',
+	'CreateNewPageText'			=> 'ایجاد',
 	'CreateNewPageTip'			=> 'Create a new page',
 
 	'CreateRandomPage'			=> 'Create a random page',
@@ -811,7 +811,7 @@ $wacko_translation = [
 	'SettingsEdit'				=> 'ویرایش',
 	'SettingsRevisions'			=> 'بازبینی‌ها',
 	'SettingsClone'				=> 'Clone',
-	'SettingsRename'			=> 'Rename',
+	'SettingsRename'			=> 'تغییر نام',
 	'MassRename'				=> 'for entire cluster',
 	'SettingsRemove'			=> 'حذف',
 	'SettingsPurge'				=> 'Purge',
@@ -820,7 +820,7 @@ $wacko_translation = [
 	'AclForEntireCluster'		=> 'for entire cluster',
 	'SettingsAttachments'		=> 'پیوست‌ها',
 	'SettingsUpload'			=> 'بارگذاری',
-	'SettingsCategories'		=> 'Categories',
+	'SettingsCategories'		=> 'رده‌ها',
 	'SettingsLanguages'			=> 'زبان‌ها',
 	'SettingsReferrers'			=> 'Referrers',
 	'SettingsWatch'				=> 'Watch',
@@ -834,8 +834,8 @@ $wacko_translation = [
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
 	// upload
-	'UploadFiles'				=> 'Upload files',
-	'UploadFor'					=> 'File upload',
+	'UploadFiles'				=> 'بارگذاری پرونده',
+	'UploadFor'					=> 'بارگذاری پرونده',
 	'UploadButton'				=> 'بارگذاری',
 	'UploadGlobalText'			=> 'for public access',
 	'UploadGlobal'				=> 'global',
