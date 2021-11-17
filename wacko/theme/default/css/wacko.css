@@ -18,8 +18,8 @@ del a:link { color: #999; }
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-	border: 0 none #cccccc;
-	border-top: 1px solid #cccccc;
+	border: 0 none #ccc;
+	border-top: 1px solid #ccc;
 }
 
 /* No line break */
@@ -56,7 +56,7 @@ h1 {
 h2 { font-size: 20px; margin-top: 20px; margin-bottom: 5px; border-bottom: 3px dotted #ddd; color: #204a87;}
 h3 { font-size: 17px; margin-top: 15px; margin-bottom: 5px; border-bottom: 2px dotted #ddd;}
 h4 { font-size: 16px; margin-top: 15px; margin-bottom: 5px; border-bottom: 1px #999 solid;}
-h5 { font-size: 14px; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px #bbbbbb solid;}
+h5 { font-size: 14px; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px #bbb solid;}
 h6 { font-size: 12px; }
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
@@ -76,10 +76,10 @@ h6 { font-size: 12px; }
 
 /* Simple differences */
 .additions {
-	background-color: #EEFFEE;
+	background-color: #eeffee;
 }
 .deletions {
-	background-color: #FFEEEE;
+	background-color: #ffeeee;
 }
 .additions, 
 .deletions {
@@ -107,7 +107,7 @@ del.diff {
 .code,
 .code-break,
 div.hl-main {
-	background: #FCFCFC;
+	background: #fcfcfc;
 	border: 1px lightgray solid;
 	font-family: var(--ww-font-monospace);
 	font-size: 14px;
@@ -132,7 +132,7 @@ div.hl-main {
 }
 
 .code code{
-	background: #FFFFFF;
+	background: #fff;
 }
 
 .notes { color: #888800; }
@@ -140,7 +140,7 @@ div.hl-main {
 .cl {
 	color: #eee;
 	background: #000;
-	border: solid #888888 2px;
+	border: solid #888 2px;
 	font-family: var(--ww-font-monospace);
 	border-radius: .1rem;
 	padding: 0.25em;
@@ -154,16 +154,16 @@ div.hl-main {
 .usertable {
 	border: 1px none;
 	border-collapse: collapse;
-	background-color: #FFFFFF;
+	background-color: #fff;
 }
 
 .usertable th {
-	background-color: #EEEEEE;
+	background-color: #eee;
 }
 
 .usertable td,
 .usertable th {
-	border: 1px solid #CCCCCC;
+	border: 1px solid #ccc;
 	padding: 4px;
 	vertical-align: top;
 }
@@ -299,19 +299,32 @@ img.media-right,
 /* Quotes: SYNTAX <[text]> */
 blockquote {
 	border: 1px solid #f5f5f5;
-	border-left: 3px solid #729fcf;
-	color: #444444;
-	padding: 25px 30px;
+	color: #444;
+	margin: 0;
+	padding: 1.5rem 1.875rem 1.5rem 4rem;
 	font-family: var(--ww-font-sans-serif);
+}
+blockquote::before {
+	color: #9e9e9e;
+	content: "❝";
+	position: absolute;
+	font-size: 3rem;
+	height: 3rem;
+	width: 3rem;
+	text-align: center;
+	line-height: normal;
+	font-family: var(--ww-font-serif);
+	margin-left: -3.5rem;
+	margin-top: -0.6rem;
 }
 blockquote p { padding: 0; margin: 5px 0; }
 
 /* Paragraphs */
 p.auto { margin: 0; padding: 0; font-size: 100%; }
-.pmark { color: #cccccc; font: 10px Arial; }
+.pmark { color: #ccc; font: 10px var(--ww-font-sans-serif); }
 
 .pmark a:link,
-.pmark a:visited { color: #cccccc; }
+.pmark a:visited { color: #ccc; }
 
 .pmark a:hover,
 .pmark a:active  { color: #cc3300; }
@@ -335,29 +348,29 @@ p.auto { margin: 0; padding: 0; font-size: 100%; }
 	margin: 5px 0;
 }
 .hl-gutter {
-	background-color: #CCCCCC;
+	background-color: #ccc;
 	padding-right: 10px;
 	font-family: var(--ww-font-monospace);
 	font-size: 14px;
 }
 .hl-table {border: solid 1px lightgray; }
 
-	td.hl-main pre{	margin-left: 1em; }
+	td.hl-main pre{ margin-left: 1em; }
 
 .hl-default { color: #000; }
 .hl-code { color: #7f7f33; }
 .hl-brackets { color: #009966; }
-.hl-comment { color: #7F7F7F; }
-.hl-quotes { color: #00007F; }
-.hl-string { color: #7F0000; }
+.hl-comment { color: #7f7f7f; }
+.hl-quotes { color: #00007f; }
+.hl-string { color: #7f0000; }
 .hl-identifier { color: #000; }
-.hl-reserved { color: #7F007F; }
-.hl-inlinedoc { color: #0000FF; }
-.hl-var { color: #0066FF; }
-.hl-url { color: #FF0000; }
-.hl-special { color: #0000FF; }
-.hl-number { color: #007F00; }
-.hl-inlinetags { color: #FF0000; }
+.hl-reserved { color: #7f007f; }
+.hl-inlinedoc { color: #0000ff; }
+.hl-var { color: #0066ff; }
+.hl-url { color: #ff0000; }
+.hl-special { color: #0000ff; }
+.hl-number { color: #007f00; }
+.hl-inlinetags { color: #ff0000; }
 .hl-builtin    { color: #996633; }
 
 /** Wrapper-related **********************************************************/
@@ -391,15 +404,15 @@ div.wrapper,
 aside.wrapper {
 	margin: 2px;
 	background: #f6f7ed;
-	border: 1px dotted #CCCCCC;
+	border: 1px dotted #ccc;
 	max-width: 100%;
 }
 div.wrapper-content { padding: 10px 10px 25px 10px; }
 
 /* Important colored text: SYNTAX !!(red)text!! */
-.cl-red {color: #CC0000;}
+.cl-red {color: #cc0000;}
 .cl-green {color: #008000;}
-.cl-blue {color: #0000CC;}
+.cl-blue {color: #0000cc;}
 .cl-yellow {color: #ffff00;}
 
 /* Fixed width text: SYNTAX ##monospace## */
@@ -519,6 +532,7 @@ a[href $='.ico'] .icon,
 a[href $='.jpe'] .icon,
 a[href $='.jpeg'] .icon,
 a[href $='.jpg'] .icon,
+a[href $='.jxl'] .icon,
 a[href $='.png'] .icon, 
 a[href $='.webp'] .icon {
 	background: rgba(0, 0, 0, 0) url('./../icon/image.svg') no-repeat scroll left center;
@@ -777,5 +791,5 @@ a[href $='.webm'] .icon {
 	width: 3rem;
 	text-align: center;
 	line-height: normal;
-	font-family: "Times New Roman", Times, serif;
+	font-family: var(--ww-font-serif);
 }
