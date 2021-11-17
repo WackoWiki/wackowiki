@@ -5,12 +5,13 @@
  */
 
 :root {
+	--ww-font-serif: "Bitstream Vera Serif", "Times New Roman", Times, serif;
 	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
 	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
 }
 
 #print {
-	background-color:	#FFF;
+	background-color:	#fff;
 	color:				#000;
 	font-family:		var(--ww-font-sans-serif);
 	letter-spacing:		1px;
@@ -110,7 +111,7 @@ audio {
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-	border: 0 none #CCCCCC;
+	border: 0 none #ccc;
 	border-top: 1px solid;
 }
 
@@ -135,7 +136,7 @@ blockquote {
 	border: 1px solid #000;
 	border-left-width: 3px;
 	color:				#000;
-	font-family:		"Bitstream Vera Serif", "Times New Roman", sans-serif;
+	font-family:		var(--ww-font-serif);
 	padding:			3px;
 }
 
@@ -418,7 +419,7 @@ div .wrapper-content {
 
 /* comments header */
 .header-comments, .header-files, .linksheader {
-	border-bottom:		1px solid #BABFC7;
+	border-bottom:		1px solid #babfc7;
 	letter-spacing:		2px;
 	margin-bottom:		10px;
 	padding-left:		10px;
@@ -428,7 +429,7 @@ div .wrapper-content {
 }
 
 .comment-meta {
-	border-bottom:		1px solid #BABFC7;
+	border-bottom:		1px solid #babfc7;
 	font-size:			0.75em;
 	letter-spacing:		1px;
 	line-height:		14px;

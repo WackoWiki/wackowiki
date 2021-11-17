@@ -6,16 +6,16 @@ p { margin: 0 0 3px 0; padding: 0; }
 img { border-width: 0; vertical-align: middle; max-width: 100%; height: auto; }
 
 /* for include */
-.name { text-align: right; font-size: 60%; padding: 1px; border: 1px dotted #cccccc; }
+.name { text-align: right; font-size: 60%; padding: 1px; border: 1px dotted #ccc; }
 .include { padding: 4px; }
 
 /* Horizontal rule: SYNTAX ---- */
 hr {
-	border: 0 none #CCCCCC;
+	border: 0 none #ccc;
 	border-top: 1px solid;
 }
 
 .nobr {white-space: nowrap;}
 
-div.wrapper				{ margin: 2px; background: #F6F7ED; }
+div.wrapper				{ margin: 2px; background: #f6f7ed; }
 div.wrapper-content		{ padding: 10px 10px 25px 10px; }
