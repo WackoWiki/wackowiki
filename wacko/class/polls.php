@@ -180,7 +180,7 @@ class Polls
 		return true;
 	}
 
-	// remove a given poll from the datebase
+	// remove a given poll from the database
 	function remove_poll($poll_id)
 	{
 		return $this->engine->db->sql_query(

@@ -7123,8 +7123,6 @@ class Wacko
 
 			foreach (explode('/', $tag) as $n => $step)
 			{
-				$item = '';
-
 				if ($link)
 				{
 					$link .= '/';
@@ -7140,14 +7138,14 @@ class Wacko
 
 				if ($linking && $link != $this->tag)
 				{
-					$item .= '<bdi>' . $this->link($link, '', ($titles? $this->get_page_title($link) : $step)) . '</bdi>';
+					$item = $this->link($link, '', ($titles? $this->get_page_title($link) : $step));
 				}
 				else
 				{
-					$item .= '<bdi>' . ($titles? $this->get_page_title($link) : $step) . '</bdi>';
+					$item = $titles? $this->get_page_title($link) : $step;
 				}
 
-				$result[] = $item;
+				$result[] = '<bdi>' . $item . '</bdi>';
 			}
 		}
 
