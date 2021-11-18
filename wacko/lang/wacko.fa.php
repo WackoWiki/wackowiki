@@ -120,7 +120,7 @@ $wacko_translation = [
 	// other
 	'Guest'						=> 'مهمان',
 	'Help'						=> 'راهنما',
-	'TopicSearchText'			=> 'Search in titles only',
+	'TopicSearchText'			=> 'جستجو فقط در عناوین',
 	'WordprocessorVersion'		=> 'Word processor version',
 
 	// notifications
@@ -155,7 +155,7 @@ $wacko_translation = [
 	'Comment'					=> 'دیدگاه',
 	'Comments0'					=> 'نظرتان را اضافه کنید',
 	'Comments1'					=> 'خواندن نظر (1 نظر)',
-	'CommentsN'					=> 'خواندن نظرات (% 1 نظر)',
+	'CommentsN'					=> 'خواندن نظرات (%1 نظر)',
 	'Comments'					=> 'دیدگاه',
 	'CommentEdited'				=> 'ویرایش شده',
 	'Links'						=> 'پیوندها',
@@ -189,7 +189,7 @@ $wacko_translation = [
 	'CommentDeletedInfo'		=> 'This comment has been deleted.',
 
 	'LastEditedBy'				=> 'Last edited by',
-	'YouAreOwner'				=> 'You are the owner of this page.',
+	'YouAreOwner'				=> 'شما صاحب این صفحه هستید.',
 	'Owner'						=> 'مالک',
 	'Nobody'					=> 'هیچ‌کس',
 	'TakeOwnership'				=> 'Take Ownership',
@@ -222,22 +222,22 @@ $wacko_translation = [
 	'ModerateText'				=> 'Moderate',
 	'SearchText'				=> 'جستجو: ',
 
-	'AclUpdated'				=> 'Access control lists updated',
+	'AclUpdated'				=> 'لیست های کنترل دسترسی به روز شد',
 	'AclGaveOwnership'			=> ' and gave ownership to ',
 	'AclNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
 	'NewPageOwnership'			=> 'Transferred page ownership',
 	'YouAreNewOwner'			=> 'Former owner %1 transferred ownership ' . "\n" . 'of following page to you',
 	'PageOwnershipInfo'			=> '',
-	'AclRead'					=> 'Read:',
-	'AclWrite'					=> 'Write:',
+	'AclRead'					=> 'خواندن:',
+	'AclWrite'					=> 'نوشتن:',
 	'AclComment'				=> 'دیدگاه:',
 	'AclCreate'					=> 'ایجاد:',
 	'AclUpload'					=> 'بارگذاری:',
-	'AclFor'					=> 'Access Control Lists for %1',
+	'AclFor'					=> 'لیست های کنترل دسترسی برای %1',
 	'SetOwner'					=> 'Set Owner:',
 	'OwnerDontChange'			=> 'Don\'t change',
-	'AclAccessDenied'			=> 'You are not the owner of this page.',
-	'AclSyntaxError'			=> 'Access control list syntax error',
+	'AclAccessDenied'			=> 'شما مالک این صفحه نیستید.',
+	'AclSyntaxError'			=> 'خطای دستوری لیست کنترل دسترسی',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
 									'<code>$</code> - only registered users<br>' .
 									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
@@ -344,10 +344,10 @@ $wacko_translation = [
 	'WriteAccessDenied'			=> 'You don\'t have write access to this page.',
 	'EmptyPage'					=> 'Page body was empty - not saved!',
 	'EmptyComment'				=> 'Comment body was empty - not saved!',
-	'CommentAccessDenied'		=> 'Sorry, you\'re not allowed to post comments to this page.',
+	'CommentAccessDenied'		=> 'با عرض پوزش، شما مجاز به ارسال نظر در این صفحه نیستید.',
 	'CommentFlooded'			=> 'The interval between the publication of the messages shall not be less than %1 seconds.',
 	'CommentAdded'				=> 'Comment added.',
-	'YouAreNowTheOwner'			=> 'You are now the owner of this page.',
+	'YouAreNowTheOwner'			=> 'شما اکنون مالک این صفحه هستید.',
 	'PageSaved'					=> 'Page version %1 saved.',
 	'CommentSaved'				=> 'Comment saved.',
 
@@ -392,7 +392,7 @@ $wacko_translation = [
 	'ViewReferrersByTime'		=> 'by time',
 	'ViewReferrersGlobal'		=> 'global',
 	'NoneReferrers'				=> 'هیچ',
-	'NotOwnerCantDelete'		=> 'You aren\'t owner of this page and can\'t delete it',
+	'NotOwnerCantDelete'		=> 'شما مالک این صفحه نیستید و نمی توانید آن را حذف کنید',
 
 	// remove
 	'RemovePage'				=> 'حذف صفحه',
@@ -438,7 +438,7 @@ $wacko_translation = [
 	'SourcePageDoesntExist'		=> 'Action source page doesn\'t exist yet',
 	'NotLoggedInThusEdited'		=> 'You are not logged in, hence we couldn\'t identify the pages you\'ve edited.',
 	'DidntEditAnyPage'			=> 'You haven\'t edited any pages yet.',
-	'NoPagesFound'				=> 'No pages found.',
+	'NoPagesFound'				=> 'هیچ صفحه ای یافت نشد.',
 	'MyChangesTitle1'			=> 'This is the list of pages you\'ve edited, ordered by the time of your last change',
 	'MyChangesTitle2'			=> 'This is the list of pages you\'ve edited, along with the time of your last change',
 	'OrderABC'					=> 'alphabetically',
@@ -455,15 +455,15 @@ $wacko_translation = [
 	'NoDeletedPages'			=> 'No deleted pages found.',
 	'NoDeletedRevisions'		=> 'No deleted revisions found.',
 	'NoDeletedFiles'			=> 'No deleted files found.',
-	'CommentsDisabled'			=> 'Comments are not available.',
+	'CommentsDisabled'			=> 'نظرات در دسترس نیست.',
 
 	'SearchResults'				=> 'نتایج جستجو برای ',
 	'NotFound'					=> 'not found',
 	'NoResultsFor'				=> 'No results for ',
-	'SearchFor'					=> 'Search for',
+	'SearchFor'					=> 'جستجو برای',
 	'TopicSearchResults'		=> 'Topics search results for ',
 	'NotFoundInTopics'			=> 'not found in topics',
-	'FilterLangNotAvailable'	=> 'The selected language is not available!',
+	'FilterLangNotAvailable'	=> 'زبان انتخاب شده در دسترس نیست!',
 
 	'PostedBy'					=> 'ارسال‌شده توسط',
 	'ThisIsCommentOn'			=> 'This is a comment on',
@@ -507,7 +507,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> 'You must specify an email address.',
 	'NotAEmail'					=> 'That doesn\'t look like a valid email address.',
 	'EmailTaken'				=> 'The entered email address is already in use.',
-	'PasswordsDidntMatch'		=> 'Passwords didn\'t match.',
+	'PasswordsDidntMatch'		=> 'گذرواژه‌ها مطابقت نداشتند.',
 	'SpacesArentAllowed'		=> 'Spaces aren\'t allowed in passwords.',
 	'ListMyPages'				=> 'List your pages',
 	'ListMyChanges'				=> 'List your changes',
@@ -795,7 +795,7 @@ $wacko_translation = [
 	'MetaHtml'					=> 'HTML support for page',
 	'MetaSafeHtml'				=> 'فیلتر کردن HTML ناامن',
 	'MetaNoIndex'				=> 'Block search engines',
-	'SettingsID'				=> 'Page ID',
+	'SettingsID'				=> 'شناسهٔ صفحه',
 	'SettingsSize'				=> 'اندازه',
 	'SettingsSizeTip'			=> 'source / compiled',
 	'SettingsCreated'			=> 'ایجاد شد',
@@ -906,7 +906,7 @@ $wacko_translation = [
 
 	'Files0'					=> 'فایل ها را ضمیمه کنید',
 	'Files1'					=> 'نمایش فایلها (1 فایل)',
-	'FilesN'					=> 'نمایش فایلها (% 1 فایل)',
+	'FilesN'					=> 'نمایش فایلها (%1 فایل)',
 	'Files'						=> 'فایل‌ها',
 	'File'						=> 'فایل',
 	'ShowFiles'					=> 'Display files / form',
@@ -950,7 +950,7 @@ $wacko_translation = [
 	'Back'						=> 'برگشت',
 
 	// filter
-	'Any'						=> 'Any',
+	'Any'						=> 'هر',
 
 	// My Groups
 	'UserGroups'				=> 'Groups of users',
@@ -962,7 +962,7 @@ $wacko_translation = [
 	'DistributedUnder'			=> 'Material is distributed under',
 	'AuthorsDisplayHint'		=> 'The list of authors will be displayed when saving the page.',
 	'AnonymousUsers'			=> 'کاربران ناشناس',
-	'License'					=> 'License',
+	'License'					=> 'مجوز',
 	'LicenseArray'				=> [
 		'1'		=> 'Attribution-NoDerivatives',
 		'2'		=> 'Attribution-NonCommercial-ShareAlike',
@@ -1007,15 +1007,15 @@ $wacko_translation = [
 	'ChangesXML'				=> 'Recent changes to the ',
 	'CommentsTitleXML'			=> ' - دیدگاه‌های اخیر',
 	'CommentsXML'				=> 'Recent comments to the ',
-	'NewsTitleXML'				=> ' - Recent news',
+	'NewsTitleXML'				=> ' - اخبار اخیر',
 	'NewsXML'					=> 'Recent news to the ',
 	'PageRevisionsXML'			=> 'Revisions of ',
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
-	'AccessDeniedXML'			=> 'You\'re not allowed to access this information.',
+	'AccessDeniedXML'			=> 'شما مجاز به دسترسی به این اطلاعات نیستید.',
 
 	'ChangesFeed'				=> 'تغییرات',
 	'CommentsFeed'				=> 'دیدگاه',
-	'NewsFeed'					=> 'News',
+	'NewsFeed'					=> 'اخبار',
 	'RevisionsFeed'				=> 'Revisions of ',
 
 	'LastModification'			=> 'Last Modification',
@@ -1027,7 +1027,7 @@ $wacko_translation = [
 	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
 
 	// news
-	'News'						=> 'News',
+	'News'						=> 'اخبار',
 	'NewsName'					=> 'عنوان',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
