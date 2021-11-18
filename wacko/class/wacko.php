@@ -7102,7 +7102,7 @@ class Wacko
 	function get_page_path($tag = '', $titles = false, $separator = '/', $linking = true, $root_page = false) : string
 	{
 		$tag		??= $this->tag;
-		$result		= '';
+		$result		= [];
 		$is_root	= false;
 
 		// check if current page is home page
@@ -7114,7 +7114,7 @@ class Wacko
 		// adds home page in front of breadcrumbs or current page is home page
 		if ($is_root || $root_page)
 		{
-			$result .= $this->compose_link_to_page($this->db->root_page);
+			$result[] = $this->compose_link_to_page($this->db->root_page);
 		}
 
 		if (!$is_root)
@@ -7123,7 +7123,7 @@ class Wacko
 
 			foreach (explode('/', $tag) as $n => $step)
 			{
-				# Diag::dbg('GOLD', $n, $step);
+				$item = '';
 
 				if ($link)
 				{
@@ -7138,23 +7138,20 @@ class Wacko
 					continue;
 				}
 
-				if ($result)
-				{
-					$result .= $separator;
-				}
-
 				if ($linking && $link != $this->tag)
 				{
-					$result .= $this->link($link, '', ($titles? $this->get_page_title($link) : $step));
+					$item .= '<bdi>' . $this->link($link, '', ($titles? $this->get_page_title($link) : $step)) . '</bdi>';
 				}
 				else
 				{
-					$result .= $titles? $this->get_page_title($link) : $step;
+					$item .= '<bdi>' . ($titles? $this->get_page_title($link) : $step) . '</bdi>';
 				}
+
+				$result[] = $item;
 			}
 		}
 
-		return $result;
+		return implode($separator, $result);
 	}
 
 	// $page_id is preferred, $tag next
