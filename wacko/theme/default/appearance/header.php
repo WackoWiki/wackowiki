@@ -11,6 +11,12 @@ if (!defined('IN_WACKO'))
 
 require Ut::join_path(THEME_DIR, '_common/_header.php');
 
+// user lang dir
+#if ($this->languages[$this->page_lang]['dir'] != $this->user_lang_dir)
+{
+	$tpl->dir	= $this->user_lang_dir;
+}
+
 // site logo and title
 if ($this->db->site_logo && $this->db->logo_display >= 1)
 {

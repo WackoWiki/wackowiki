@@ -41,6 +41,7 @@ class Wacko
 	var $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
 	var $language				= null;
 	var $languages				= null;
+	var $user_lang				= null;
 	var $translations			= null;
 	var $wanted_cache			= null;
 	var $page_cache				= null;
@@ -6747,8 +6748,9 @@ class Wacko
 			$this->db->theme_url	= $this->db->base_path . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
 		}
 
-		$this->user_lang = $this->get_user_language();
+		$this->user_lang		= $this->get_user_language();
 		$this->set_language($this->user_lang, true);
+		$this->user_lang_dir	= $this->languages[$this->user_lang]['dir'];
 
 		// SEO
 		if (isset($_SERVER['HTTP_USER_AGENT']))

@@ -60,7 +60,7 @@ if (!$engine->db->recovery_password)
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
 	?>
 	<!DOCTYPE html>
-	<html dir="<?php echo $engine->languages[$engine->user_lang]['dir']; ?>" lang="<?php echo $engine->db->language; ?>">
+	<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->db->language; ?>">
 		<head>
 			<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 			<meta name="robots" content="noindex, nofollow, noarchive">
@@ -139,7 +139,7 @@ if (!isset($engine->sess->ap_created))
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
-<html dir="<?php echo $engine->languages[$engine->user_lang]['dir']; ?>" lang="<?php echo $engine->db->language; ?>">
+<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->db->language; ?>">
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
@@ -299,7 +299,7 @@ unset($category);
 header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
-<html dir="<?php echo $engine->languages[$engine->user_lang]['dir']; ?>" lang="<?php echo $engine->db->language; ?>">
+<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->db->language; ?>">
 	<head>
 		<meta charset="<?php echo $engine->get_charset(); ?>">
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $title; ?></title>

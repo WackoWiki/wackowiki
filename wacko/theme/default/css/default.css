@@ -532,7 +532,12 @@ footer {
 	padding: 0 .5em 0 .5em;
 	white-space: nowrap;
 }
-
+[dir="rtl"] .page-meta li {
+	border: dotted #ccc;
+	border-width: 0 1px 0 0;
+	float: right;
+	margin: 0 -.5em 0 .5em;
+}
 .page-meta ul li form {
 	display: inline;
 }
@@ -543,6 +548,10 @@ footer {
 	text-align: right;
 	float: right;
 	width: 30%;
+}
+[dir="rtl"] .page-properties {
+	text-align: left;
+	float: left;
 }
 .page-properties a {
 	color: #aaa;
@@ -717,6 +726,11 @@ ol#comments ul ul ul {
 	float: left;
 	width: 100%;
 }
+[dir=rtl] #credits {
+	text-align: left;
+	padding: 5px 0 0 20px;
+	float: right;
+}
 
 #credits a {
 	color: #aaa;
@@ -756,9 +770,11 @@ ol#comments ul ul ul {
 	border-bottom: 1px dashed orange;
 }
 
+/* search box */
 .search input {
 	width: 200px;
 	padding-right: 25px;
+	background-color: transparent;
 }
 .search button
 {
@@ -767,6 +783,10 @@ ol#comments ul ul ul {
 	border-width: 0px;
 	background-color: transparent;
 	margin-left: -30px;
+}
+[dir=rtl] .search button
+{
+	margin: 0 -30px 0 0;
 }
 .search button img {
 	padding-bottom: 3px;
@@ -882,6 +902,9 @@ td.file- {
 	text-align: left;
 	width: 130px;
 }
+[dir=rtl] .filemeta th{
+	text-align: right;
+}
 
 .filemeta td,
 .filemeta th {
@@ -892,7 +915,7 @@ td.file- {
 .filemeta li {
 	list-style-type: none;
 	padding-bottom: 5px;
-	text-align: left;
+	/* text-align: left; */
 	overflow-wrap: break-word;
 }
 
@@ -1001,12 +1024,18 @@ a:target {
 	float: left;
 	padding: 0 0 0 0;
 }
+[dir=rtl] #buttons_1 {
+	float: right;
+}
 
 #buttons_1 li {
 	float: left;
 	padding-right: 0.3em;
 	white-space: nowrap;
 	list-style: none outside none;
+}
+[dir=rtl] #buttons_1 li {
+	float: right;
 }
 
 .toolbar li {
@@ -1208,6 +1237,9 @@ a:target {
 	text-align: left;
 	vertical-align: top;
 }
+[dir=rtl] .form-tbl td {
+	text-align: right;
+}
 
 .form-tbl td label {
 	color: #666;
@@ -1301,6 +1333,10 @@ a:target {
 	text-align: left;
 	position: relative;
 }
+[dir=rtl] #menu-user {
+	float: right;
+	text-align: right;
+}
 
 #menu-user ol,
 #menu-user ol ul {
@@ -1313,6 +1349,10 @@ a:target {
 	border-left: 1px none;
 	padding: 1px 6px 4px 0;
 }
+[dir=rtl] #menu-user li:first-child {
+	border-right: 1px none;
+	padding: 1px 0 4px 6px;
+}
 
 #menu-user li {
 	border-left: 1px dotted #aaa;
@@ -1322,6 +1362,10 @@ a:target {
 	padding: 0 .5em 0 .5em;
 	white-space: nowrap;
 }
+[dir=rtl] #menu-user li {
+	border: dotted #aaa;
+	border-width: 0 1px 0 0;
+}
 
 #menu-user ol ul li {
 	border-left: 0;
@@ -1330,6 +1374,11 @@ a:target {
 #menu-user li:first-child.active {
 	margin-left: -6px;
 	padding-left: 6px;
+}
+[dir=rtl] #menu-user li:first-child.active {
+	margin-left: unset;
+	margin-right: -6px;
+	padding-right: 6px;
 }
 
 #menu-user li.active {
@@ -1376,6 +1425,10 @@ a:target {
 	position: relative;
 	font-size: 1.3em;
 }
+[dir=rtl] #header-site {
+	float: right;
+	text-align: left;
+}
 
 #login-box {
 	font-size: 12px;
@@ -1384,6 +1437,10 @@ a:target {
 	float: right;
 	text-align: left;
 	position: relative;
+}
+[dir=rtl] #login-box {
+	float: left;
+	text-align: left;
 }
 
 #login-box form {
@@ -1535,9 +1592,15 @@ tr.lined:hover {
 	float: left;
 	width: 60%;
 }
+[dir="rtl"] .page-settings {
+	float: right;
+}
 .page-tools {
 	float: right;
 	padding: 0 10px 10px 10px;
+}
+[dir="rtl"] .page-tools {
+	float: left;
 }
 
 .menu
@@ -1547,9 +1610,16 @@ tr.lined:hover {
 	margin: 0;
 	padding: 0;
 }
+[dir="rtl"] .menu
+{
+	float: left;
+}
 
 .menu li:first-child {
 	border-left: 1px none;
+}
+[dir="rtl"] .menu li:first-child {
+	border-right: 1px none;
 }
 
 .menu li {
@@ -1559,6 +1629,11 @@ tr.lined:hover {
 	margin: 0 0.5em 0 -0.5em;
 	padding: 0 0.5em;
 	white-space: nowrap;
+}
+[dir="rtl"] .menu li {
+	border: dotted #ccc;
+	border-width: 0 1px 0 0;
+	float: right;
 }
 
 .menu li.active {
@@ -1606,6 +1681,9 @@ article.newsarticle:hover {
 
 .pagination {
 	float: right;
+}
+[dir=rtl] .pagination {
+	float: left;
 }
 
 table.formation {
@@ -1697,12 +1775,19 @@ table.formation td {
 	z-index: 1000;
 	position: relative;
 }
+[dir=rtl] #page-handler {
+	float: left;
+	text-align: right;
+}
 #page-handler ul {
 	list-style: none outside none;
 	float: right;
 	position: relative;
 	margin: 0;
 	padding: 0;
+}
+[dir=rtl] #page-handler ul {
+	float: left;
 }
 
 #menu-user ol li,
@@ -1713,6 +1798,10 @@ table.formation td {
 	margin: 0;
 	padding: 1px 6px 4px;
 	white-space: nowrap;
+}
+[dir=rtl] #menu-user ol li,
+[dir=rtl] #page-handler ul li {
+	float: right;
 }
 
 #menu-user ol li a,
@@ -1750,6 +1839,11 @@ table.formation td {
 	border: 1px solid #ccc;
 	border-top-width: 0;
 }
+[dir=rtl] #menu-user ol ul, 
+[dir=rtl] #page-handler ul ul {
+	right: -1px;
+	left: auto;
+}
 #menu-user ol ul a,
 #page-handler ul ul a {
 	background: none repeat scroll 0 0 transparent;
@@ -1768,7 +1862,10 @@ table.formation td {
 	width: 100%;
 	padding: 0 20px 0 0;
 	white-space: nowrap;
-	vertical-align: baseline;
+}
+[dir=rtl] #menu-user ol ul li,
+[dir=rtl] #page-handler ul ul li {
+	padding: 0 0 0 20px;
 }
 
 #menu-user ol ul li.active,
@@ -1793,9 +1890,23 @@ table.formation td {
 	margin: 0;
 	padding: 0.25em 20px 0.2em 0.5em;
 }
+[dir=rtl] #menu-user ol ul li a,
+[dir=rtl] #menu-user ol li.active li a,
+[dir=rtl] #menu-user ol li:hover ul li a,
+[dir=rtl] #menu-user ol ul li.active span,
+[dir=rtl] #page-handler ul ul li a,
+[dir=rtl] #page-handler ul li.active li a,
+[dir=rtl] #page-handler ul li:hover ul li a,
+[dir=rtl] #page-handler ul ul li span {
+	float: right;
+	padding: 0.25em 0.5em 0.2em 20px;
+}
 
 #page-handler ul ul li.active {
 	margin-left: -1px;
+}
+[dir=rtl] #page-handler ul ul li.active {
+	margin: 0 -1px 0 0;
 }
 
 /* make the sub menus appear on hover */

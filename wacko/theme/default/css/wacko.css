@@ -234,6 +234,12 @@ img.media-left,
 .media-left figcaption {
 	margin: .2em 1em .2em 0;
 }
+[dir=rtl] img.media-default,
+[dir=rtl] img.media-left,
+[dir=rtl] .media-default figcaption,
+[dir=rtl] .media-left figcaption {
+	margin: .2em 0 .2em 1em;
+}
 
 .media-center {
 	display: block;
@@ -260,6 +266,10 @@ div.figure-center-wrp .media-center {
 img.media-right,
 .media-right figcaption {
 	margin: .2em 0 .2em 1em;
+}
+[dir=rtl] img.media-right,
+[dir=rtl] .media-right figcaption {
+	margin: .2em 1em .2em 0;
 }
 
 /** Chat-related *************************************************************/
