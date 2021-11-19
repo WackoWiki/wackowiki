@@ -15,13 +15,13 @@ $lang = [
 'ConfigDefaults'	=> [
 	// pages (tag)
 	'category_page'		=> 'دسته',
-	'groups_page'		=> 'گروه‌ها',
+	'groups_page'		=> 'گروهها',
 	'users_page'		=> 'کاربران',
 
 	'search_page'		=> 'جستجو',
 	'login_page'		=> 'ورود',
 	'account_page'		=> 'تنظیمات',
-	'registration_page'	=> 'نام‌نویسی',
+	'registration_page'	=> 'نامنویسی',
 	'password_page'		=> 'گذرواژه',
 
 	'changes_page'		=> 'RecentChanges',
@@ -189,7 +189,7 @@ $lang = [
 'DeletingTables'				=> 'Deleting Tables',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
 'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
-'DeletingTable'					=> 'حذف جدول %1%',
+'DeletingTable'					=> 'حذف جدول %1',
 
 /*
    Write Config Page

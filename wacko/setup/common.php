@@ -50,7 +50,7 @@ function output_image($ok)
 	return '<img src="' . my_location() . 'setup/image/spacer.png" width="20" height="20" alt="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" title="' . ($ok ? $lang['OK'] : $lang['Problem']) . '" class="tickcross ' . ($ok ? 'tick' : 'cross') . '">';
 }
 
-// TODO: refactor -> same function as in wacko class
+// TODO: same function as in wacko class
 // site config
 function available_languages()
 {
@@ -76,6 +76,25 @@ function available_languages()
 	sort($lang_list, SORT_STRING);
 
 	return $lang_list;
+}
+
+// TODO: same function as in wacko class
+function sanitize_page_tag(&$tag, $normalize = false)
+{
+	// normalizing tag name
+	$tag = Ut::normalize($tag);
+
+	// remove starting/trailing slashes, spaces, and minimize multi-slashes
+	$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
+		function ($x)
+		{
+			return @$x[1]? '/' : '';
+		}, $tag);
+
+	$tag = preg_replace('/[^\p{L}\p{M}\p{Nd}\.\-\/]/u', '', $tag);
+
+	// strip full stop and hyphen-minus from the beginning and end of the string
+	$tag = utf8_trim($tag, '.-');
 }
 
 // database install
@@ -170,6 +189,8 @@ insert default pages, all related acls and menu item
 function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
 {
 	global $config_global, $dblink_global, $lang_global;
+
+	sanitize_page_tag($tag);
 
 	$prefix				= $config_global['table_prefix'];
 	$page_select		= "SELECT page_id FROM " . $prefix . "page WHERE tag='" . _quote($tag) . "'";
@@ -296,7 +317,7 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 	}
 }
 
-// TODO: refactor -> same function as in dbpdo class
+// TODO: same function as in dbpdo class
 // default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
 function _quote($string)
 {
