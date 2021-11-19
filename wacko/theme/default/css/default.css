@@ -354,6 +354,9 @@ form input.submitinput {
 	padding: 0 20px 20px 20px;
 	float: left;
 }
+[dir=rtl] #debug {
+	float: right;
+}
 .debug,
 #debug li,
 #debug pre {
@@ -2220,7 +2223,7 @@ li.m-source img {
 	border-collapse: separate;
 }
 
-.user-profile th{
+.user-profile th {
 	color: #444;
 	font-weight: bold;
 	width: 100px;
@@ -2228,6 +2231,10 @@ li.m-source img {
 	vertical-align: top;
 	padding-right: 20px;
 	text-align: left;
+}
+[dir=rtl] .user-profile th {
+	padding: 0 0 0 20px;
+	text-align: right;
 }
 
 .user-table {
