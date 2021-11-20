@@ -93,12 +93,6 @@ if (!isset($tables, $directories))
 			'order'	=> 'from_page_id',
 			'limit'	=> 1000
 		],
-		$prefix . 'poll' => [
-			'name'	=> $prefix . 'poll',
-			'where'	=> false,
-			'order'	=> 'poll_id, v_id',
-			'limit'	=> 1000
-		],
 		$prefix . 'rating' => [
 			'name'	=> $prefix . 'rating',
 			'where'	=> false,

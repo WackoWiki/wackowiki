@@ -8220,7 +8220,7 @@ class Wacko
 	//		3. high		- page renaming/moving/splitting/merging,
 	//					  user password change/reminder, successful
 	//					  user login
-	//		4. medium	- page creation (settings change), poll action,
+	//		4. medium	- page creation (settings change),
 	//					  file upload, pm sending, user registration and
 	//					  email activation, page ownership claim
 	//		5. low		- comment posting, user logout
