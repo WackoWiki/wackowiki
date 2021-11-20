@@ -19,7 +19,7 @@ if ($config['language'] == $page_lang)
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
 	}
 
-	insert_page($config['category_page'],		'वर्ग',						'{{category}}',				$page_lang, 'Admins', false, false);
+	insert_page($config['category_page'],		'वर्ग',						'{{category}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['groups_page'],			'समूह',					'{{groups}}',				$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'उपयोगकर्ताओं',				'{{users}}',				$page_lang, 'Admins', false, false);
 

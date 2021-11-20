@@ -30,7 +30,7 @@ if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 	$lang_list = array_diff($lang_list, [$config['language']]);
 
 	// system language is mandatory and must be the first include
-	array_unshift($lang_list , $config['language']);
+	array_unshift($lang_list, $config['language']);
 
 	foreach ($lang_list as $_lang)
 	{
