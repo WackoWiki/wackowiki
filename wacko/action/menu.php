@@ -52,7 +52,7 @@ if ($this->is_admin() && $system)
 
 	if (!$this->known_language($menu_lang))
 	{
-		//language doesn't have any language files so use the admin set language instead
+		// language doesn't have any language files so use the admin set language instead
 		$menu_lang = $this->db->language;
 	}
 
@@ -127,8 +127,8 @@ if (isset($_POST['_user_menu']))
 				$_page_id		= $this->get_page_id($new_tag);
 				$_user_lang		= $_POST['lang_new'] ?? $user['user_lang'];
 
-				// check existing page write access
-				if ($this->has_access('write', $_page_id)) // TODO: why we need write access here?
+				// check existing page read access
+				if ($this->has_access('read', $_page_id))
 				{
 					// check if menu item already exists
 					if ($this->db->load_single(
@@ -250,6 +250,7 @@ if ($_user_id)
 
 	if ($default_menu)
 	{
-		$tpl->lang_select = $this->show_select_lang('lang_new', $menu_lang, false);
+		$tpl->lang_select	= $this->show_select_lang('lang_new', $menu_lang, false);
+		$tpl->menulang		= $menu_lang;
 	}
 }
