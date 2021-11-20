@@ -146,12 +146,6 @@ $ap_translation = [
 		'title'		=> 'Hinzufügen, Bearbeiten oder Entfernen von Standard-Menüpunkten',
 	],
 
-	// Polls module
-	'content_polls'		=> [
-		'name'		=> 'Umfragen',
-		'title'		=> 'Bearbeiten, Starten und Beenden von Abstimmungen',
-	],
-
 	// DB Backup module
 	'db_backup'		=> [
 		'name'		=> 'Datensicherung',

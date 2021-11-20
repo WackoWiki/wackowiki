@@ -43,8 +43,6 @@ $engine		= 'ENGINE=' . $config['db_engine'];
 
 // PAGE LINK
 
-// POLL
-
 // RATING
 
 // REFERRER

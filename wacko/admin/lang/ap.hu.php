@@ -146,12 +146,6 @@ $ap_translation = [
 		'title'		=> 'Alapértelmezett menüelemek hozzáadása, szerkesztése vagy eltávolítása',
 	],
 
-	// Polls module
-	'content_polls'		=> [
-		'name'		=> 'Polls',
-		'title'		=> 'Editing, start and stop polls',
-	],
-
 	// DB Backup module
 	'db_backup'		=> [
 		'name'		=> 'Kimentés',

@@ -146,12 +146,6 @@ $ap_translation = [
 		'title'		=> 'Ajouter, modifier ou supprimer des éléments de menu par défaut',
 	],
 
-	// Polls module
-	'content_polls'		=> [
-		'name'		=> 'Polls',
-		'title'		=> 'Editing, start and stop polls',
-	],
-
 	// DB Backup module
 	'db_backup'		=> [
 		'name'		=> 'Sauvegarde',

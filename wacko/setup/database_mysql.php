@@ -228,20 +228,6 @@ $tbl_page_link =
 		KEY idx_to (to_tag)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
-$tbl_poll =
-	"CREATE TABLE {$pref}poll (
-		poll_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		v_id TINYINT(3) UNSIGNED NOT NULL DEFAULT '0',
-		text VARCHAR(255) NOT NULL DEFAULT '',
-		user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		plural TINYINT(1) NOT NULL DEFAULT '0',
-		votes SMALLINT(5) UNSIGNED NOT NULL DEFAULT '0',
-		start DATETIME NULL DEFAULT NULL,
-		end DATETIME NULL DEFAULT NULL,
-		KEY idx_poll_id (poll_id),
-		KEY idx_time_frame (start, end)
-	) {$engine} COMMENT='' {$charset} {$collation}";
-
 $tbl_rating =
 	"CREATE TABLE {$pref}rating (
 		page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -456,7 +442,6 @@ $tbl_file_link_drop				= "DROP TABLE IF EXISTS {$pref}file_link";
 $tbl_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
 $tbl_page_drop					= "DROP TABLE IF EXISTS {$pref}page";
 $tbl_page_link_drop				= "DROP TABLE IF EXISTS {$pref}page_link";
-$tbl_poll_drop					= "DROP TABLE IF EXISTS {$pref}poll";
 $tbl_rating_drop				= "DROP TABLE IF EXISTS {$pref}rating";
 $tbl_referrer_drop				= "DROP TABLE IF EXISTS {$pref}referrer";
 $tbl_revision_drop				= "DROP TABLE IF EXISTS {$pref}revision";
