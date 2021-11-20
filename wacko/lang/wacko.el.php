@@ -931,8 +931,8 @@ $wacko_translation = [
 	'BookmarkTitle'				=> 'Bookmark Title',
 	'BookmarkPage'				=> 'Σελίδα',
 	'BookmarkSaveChanges'		=> 'Save Changes',
-	'BookmarksAddPage'			=> 'Set a bookmark for the following page',
-	'BookmarkAlreadyExists'		=> 'The bookmark already exists.',
+	'BookmarksAddPage'			=> 'Ορίστε έναν σελιδοδείκτη για την επόμενη σελίδα',
+	'BookmarkAlreadyExists'		=> 'Ο σελιδοδείκτης υπάρχει ήδη.',
 
 	'PoweredBy'					=> 'Δημιουργήθηκε από',
 
@@ -1104,7 +1104,7 @@ $wacko_translation = [
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
-	'ForumSubforums'			=> 'Forum',
+	'ForumSubforums'			=> 'Φόρουμ',
 	'ForumTopic'				=> 'Θέμα',
 	'ForumTopics'				=> 'Θέματα',
 	'ForumPosts'				=> 'Δημοσιεύσεις',
@@ -1113,10 +1113,10 @@ $wacko_translation = [
 	'ForumViews'				=> 'Εμφανίσεις',
 	'ForumCreated'				=> 'Δημιουργημένο',
 	'ForumComments'				=> 'Σχόλια',
-	'ForumLastComment'			=> 'Last comment',
+	'ForumLastComment'			=> 'Τελευταίο σχόλιο',
 	'ForumNoComments'			=> 'No comments',
-	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumNewTopic'				=> 'Ξεκινήστε νέα συζήτηση',
+	'ForumTopicName'			=> 'Όνομα θέματος',
 	'ForumTopicSubmit'			=> 'Υποβολή θέματος',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

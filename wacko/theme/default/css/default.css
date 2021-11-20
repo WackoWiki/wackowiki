@@ -485,6 +485,9 @@ article,
 #edit_page {
 	clear: left;
 }
+[dir=rtl] #edit_page {
+	clear: right;
+}
 
 .textarea-page,
 .textarea-comment,
@@ -778,6 +781,9 @@ ol#comments ul ul ul {
 	width: 200px;
 	padding-right: 25px;
 	background-color: transparent;
+}
+[dir="rtl"] .search input {
+	padding: 0 2px 0 25px;
 }
 .search button
 {
@@ -1209,12 +1215,21 @@ a:target {
 	/*width of left column containing the label elements*/
 	height: 1%;
 }
+[dir=rtl] .cssform p {
+	clear: right;
+	padding: 5px 155px 8px 0;
+}
 
 .cssform label {
 	float: left;
 	margin-left: -155px; /*width of left column*/
 	width: 150px;
 	/*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+[dir=rtl] .cssform label {
+	float: right;
+	margin-left: unset;
+	margin-right: -155px;
 }
 
 .cssform input[type="text"] {
