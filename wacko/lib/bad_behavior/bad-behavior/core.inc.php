@@ -5,7 +5,7 @@ const BB2_VERSION = "2.2.24";
 // If you're reading this, you are probably lost.
 // Go read the bad-behavior-generic.php file.
 
-define('BB2_CORE', __DIR__);
+const BB2_CORE = __DIR__;
 
 require_once(BB2_CORE . "/functions.inc.php");
 
