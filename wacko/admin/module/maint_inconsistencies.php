@@ -170,19 +170,6 @@ function admin_maint_inconsistencies(&$engine, &$module)
 			$inconsistencies['2.4'] = ['menu without page', count($menu2)];
 				// -> DELETE
 
-			// 2.5 rating without page
-			$rating = $engine->db->load_all(
-				"SELECT
-					r.*
-				FROM
-					" . $prefix . "rating r
-					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
-				WHERE
-					p.page_id IS NULL");
-
-			$inconsistencies['2.5'] = ['rating without page', count($rating)];
-				// -> DELETE
-
 			// 2.6 referrer without page
 			$referrer = $engine->db->load_all(
 				"SELECT
@@ -541,18 +528,6 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					p.page_id IS NULL");
 
 			$_solved['2.4'] = ['menu without page', $engine->config->affected_rows];
-
-			// 2.5 rating without page
-			$engine->db->sql_query(
-				"DELETE
-					r.*
-				FROM
-					" . $prefix . "rating r
-					LEFT JOIN " . $prefix . "page p ON (r.page_id = p.page_id)
-				WHERE
-					p.page_id IS NULL");
-
-			$_solved['2.5'] = ['rating without page', $engine->config->affected_rows];
 
 			// 2.6 referrer without page
 			$engine->db->sql_query(

@@ -328,11 +328,5 @@ if ($this->method == 'show' && (isset($this->page['latest']) && $this->page['lat
 		{
 			require_once Ut::join_path(HANDLER_DIR, 'page/_comments.php');
 		}
-
-		// rating form output begins
-		if ($this->has_access('read') && $this->page && $this->db->footer_rating == 1 || ($this->db->footer_rating == 2 && $this->get_user()))
-		{
-			require_once Ut::join_path(HANDLER_DIR, 'page/_rating.php');
-		}
 	}
 }

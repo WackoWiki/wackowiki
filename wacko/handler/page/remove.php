@@ -103,11 +103,6 @@ if ($this->is_admin()
 				$message[] = $this->_t('WatchesRemoved');
 			}
 
-			if ($this->remove_ratings($this->tag))
-			{
-				$message[] = $this->_t('RatingRemoved');
-			}
-
 			if ($this->remove_comments($this->tag, false, $dontkeep))
 			{
 				$message[] = $this->_t('CommentsRemoved');
@@ -161,7 +156,6 @@ if ($this->is_admin()
 			$this->remove_acls					($this->tag, true);
 			$this->remove_menu_items			($this->tag, true);
 			$this->remove_watches				($this->tag, true);
-			$this->remove_ratings				($this->tag, true);
 			$this->remove_comments				($this->tag, true, $dontkeep);
 			$this->remove_files_perpage			($this->tag, true);
 			// done with remove_page()

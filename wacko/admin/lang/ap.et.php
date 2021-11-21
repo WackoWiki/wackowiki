@@ -280,8 +280,6 @@ $ap_translation = [
 	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
 	'FilePanel'					=> 'File panel',
 	'FilePanelInfo'				=> 'The default display of attachments in the bottom of the page.',
-	'RatingPanel'				=> 'Rating panel',
-	'RatingPanelInfo'			=> 'The default display of the rating panel in the bottom of the page.',
 	'TagsPanel'					=> 'Tags panel',
 	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
 

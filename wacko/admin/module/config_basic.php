@@ -66,7 +66,6 @@ function admin_config_basic(&$engine, &$module)
 
 		$config['footer_comments']				= (int) $_POST['footer_comments'];
 		$config['footer_files']					= (int) $_POST['footer_files'];
-		$config['footer_rating']				= (int) $_POST['footer_rating'];
 		$config['footer_tags']					= (int) $_POST['footer_tags'];
 		$config['hide_revisions']				= (int) $_POST['hide_revisions'];
 		$config['show_permalink']				= (int) $_POST['show_permalink'];
@@ -316,20 +315,6 @@ function admin_config_basic(&$engine, &$module)
 					<input type="radio" id="footer_files_on" name="footer_files" value="1"<?php echo ($engine->db->footer_files == 1 ? ' checked' : '');?>><label for="footer_files_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="footer_files_guest" name="footer_files" value="2"<?php echo ($engine->db->footer_files == 2 ? ' checked' : '');?>><label for="footer_files_guest"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="footer_files_off" name="footer_files" value="0"<?php echo ($engine->db->footer_files == 0 ? ' checked' : '');?>><label for="footer_files_off"><?php echo $engine->_t('Off');?></label>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<label for=""><strong><?php echo $engine->_t('RatingPanel');?>:</strong><br>
-					<small><?php echo $engine->_t('RatingPanelInfo');?></small></label>
-				</td>
-				<td>
-					<input type="radio" id="footer_rating_on" name="footer_rating" value="1"<?php echo ($engine->db->footer_rating == 1 ? ' checked' : '');?>><label for="footer_rating_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="footer_rating_guest" name="footer_rating" value="2"<?php echo ($engine->db->footer_rating == 2 ? ' checked' : '');?>><label for="footer_rating_guest"><?php echo $engine->_t('Registered');?></label>
-					<input type="radio" id="footer_rating_off" name="footer_rating" value="0"<?php echo ($engine->db->footer_rating == 0 ? ' checked' : '');?>><label for="footer_rating_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>
 			<tr class="lined">

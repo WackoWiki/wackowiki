@@ -115,7 +115,6 @@ $wacko_config_defaults = [
 
 	'footer_comments'				=> 1,
 	'footer_files'					=> 1,
-	'footer_rating'					=> 0,
 	'footer_tags'					=> 1,
 
 	'show_spaces'					=> 1,

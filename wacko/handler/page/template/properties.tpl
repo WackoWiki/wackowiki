@@ -32,16 +32,6 @@
 								<input type="radio" id="filesOff" name="footer_files"[ ' files | check 0 ' ]><label for="filesOff">[ ' _t: Off ' ]</label>
 							</td>
 						</tr>
-						[= r _ =
-							<tr>
-								<th scope="row">[ ' _t: MetaRating ' ]</th>
-								<td>
-									<input type="radio" id="ratingOn" name="footer_rating"[ ' rating | check 1 ' ]><label for="ratingOn">[ ' _t: On ' ]</label>
-									<input type="radio" id="ratingGuest" name="footer_rating"[ ' rating | check 2 ' ]><label for="ratingGuest">[ ' _t: Registered ' ]</label>
-									<input type="radio" id="ratingOff" name="footer_rating"[ ' rating | check 0 ' ]><label for="ratingOff">[ ' _t: Off ' ]</label>
-								</td>
-							</tr>
-						=]
 						[= // hide_toc, hide_index, tree_level: used in custom theme menus =]
 						<tr>
 							<th scope="row">[ ' _t: MetaToc ' ]</th>
@@ -280,12 +270,6 @@
 				<th scope="row">[ ' _t: SettingsHits ' ]</th>
 				<td>[ ' page.hits | number 0 , . ' ]</td>
 			</tr>
-			[= rat _ =
-				<tr>
-					<th scope="row">[ ' _t: SettingsRating ' ]</th>
-					<td>[ ' ratio ' ] ([ ' _t: RatingVoters ' ]: [ ' voters ' ])</td>
-				</tr>
-			=]
 		</table>
 		<br>
 

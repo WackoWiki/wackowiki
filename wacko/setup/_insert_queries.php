@@ -49,7 +49,6 @@ $create_table[]			= ['file_link',				$tbl_file_link];
 $create_table[]			= ['log',					$tbl_log];
 $create_table[]			= ['page',					$tbl_page];
 $create_table[]			= ['page_link',				$tbl_page_link];
-$create_table[]			= ['rating',				$tbl_rating];
 $create_table[]			= ['referrer',				$tbl_referrer];
 $create_table[]			= ['revision',				$tbl_revision];
 #$create_table[]		= ['tag',					$tbl_tag];
@@ -88,7 +87,7 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 // category
 
 // config
-#$upgrade['6.0.11'][]	= ['update',	'config',			$update_config_r5_5_1];
+$upgrade['6.1.2'][]	= ['update',	'config',			$update_config_r6_0_1];
 
 // file
 
@@ -97,13 +96,15 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 // menu
 
 // page
-#$upgrade['5.5.17'][]	= ['alter',		'page',				$alter_page_r5_5_0];
+$upgrade['6.1.2'][]	= ['alter',		'page',				$alter_page_r6_0_1];
 
 #$upgrade['6.0.2'][]	= ['update',	'page',				$update_page_r5_5_0];
 
 // page link
+$upgrade['6.1.2'][]	= ['delete',	'poll',				$delete_poll_r6_0_1];
 
 // rating
+$upgrade['6.1.2'][]	= ['delete',	'rating',			$delete_rating_r6_0_1];
 
 // referrer
 

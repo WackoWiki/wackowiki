@@ -234,8 +234,7 @@ form input.submitinput {
 }
 
 #header-files h1,
-#header-comments h1,
-#header-rating h1 {
+#header-comments h1 {
 	font-size: 14px;
 	line-height: 1.3;
 	font-weight: normal;
@@ -567,8 +566,7 @@ footer {
 /** File and comment-related *************************************************/
 	/* Headers (always visible) */
 #header-files,
-#header-comments,
-#header-rating {
+#header-comments {
 	background-color: #f0f4f5;
 	padding: 2px 20px;
 	margin: 0 -20px;
@@ -580,7 +578,6 @@ footer {
 
 .files,
 .comment,
-.rating,
 .category {
 	background-color: #fff;
 	padding: 10px 20px;

@@ -280,8 +280,6 @@ $ap_translation = [
 	'CommentsPanelInfo'			=> 'Die Standardanzeige von Kommentaren im unteren Bereich der Seite.',
 	'FilePanel'					=> 'Dateien',
 	'FilePanelInfo'				=> 'Die Standardanzeige von Anhängen im unteren Bereich der Seite.',
-	'RatingPanel'				=> 'Bewertung',
-	'RatingPanelInfo'			=> 'Die Standardanzeige für das Bewertungsfeld im unteren Bereich der Seite.',
 	'TagsPanel'					=> 'Schlagworte',
 	'TagsPanelInfo'				=> 'Die Standardanzeige für Schlagworte im unteren Bereich der Seite.',
 

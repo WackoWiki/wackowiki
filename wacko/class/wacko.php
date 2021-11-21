@@ -835,7 +835,7 @@ class Wacko
 				$what_r =	'p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.version_id, ' .
 							'p.body, p.body_r, p.formatting, p.edit_note, p.minor_edit, p.page_size, p.reviewed, p.reviewed_time, ' .
 							'p.reviewer_id, p.ip, p.latest, p.deleted, p.handler, p.comment_on_id, p.page_lang, ' .
-							'p.description, p.keywords, s.revisions , s.footer_comments, s.footer_files, s.footer_rating, s.hide_toc, ' .
+							'p.description, p.keywords, s.revisions , s.footer_comments, s.footer_files, s.hide_toc, ' .
 							's.hide_index, s.tree_level, s.allow_rawhtml, s.disable_safehtml, s.noindex, s.theme, ' .
 							'u.user_name, o.user_name AS owner_name';
 			}
@@ -6844,7 +6844,6 @@ class Wacko
 			$page_options = [
 				'footer_comments',
 				'footer_files',
-				'footer_rating',
 				'hide_toc',
 				'hide_index',
 				'tree_level',
@@ -7462,24 +7461,6 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "watch w " .
 				"LEFT JOIN " . $this->db->table_prefix . "page p " .
 					"ON (w.page_id = p.page_id) " .
-			"WHERE p.tag = " . $this->db->q($tag) . " " .
-				($cluster === true
-					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "
-					: "") );
-	}
-
-	function remove_ratings($tag, $cluster = false)
-	{
-		if (!$tag)
-		{
-			return false;
-		}
-
-		return $this->db->sql_query(
-			"DELETE " .
-				"r.* " .
-			"FROM " . $this->db->table_prefix . "rating r " .
-				"INNER JOIN " . $this->db->table_prefix . "page p ON (r.page_id = p.page_id) " .
 			"WHERE p.tag = " . $this->db->q($tag) . " " .
 				($cluster === true
 					? "OR p.tag LIKE " . $this->db->q($tag . '/%') . " "

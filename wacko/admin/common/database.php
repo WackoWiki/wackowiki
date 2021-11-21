@@ -93,12 +93,6 @@ if (!isset($tables, $directories))
 			'order'	=> 'from_page_id',
 			'limit'	=> 1000
 		],
-		$prefix . 'rating' => [
-			'name'	=> $prefix . 'rating',
-			'where'	=> false,
-			'order'	=> 'page_id',
-			'limit'	=> 1000
-		],
 		$prefix . 'referrer' => [
 			'name'	=> $prefix . 'referrer',
 			'where'	=> 'page_id',

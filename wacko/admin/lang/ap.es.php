@@ -280,8 +280,6 @@ $ap_translation = [
 	'CommentsPanelInfo'			=> 'La visualización por defecto de los comentarios en la parte inferior de la página.',
 	'FilePanel'					=> 'Panel de archivos',
 	'FilePanelInfo'				=> 'La visualización predeterminada de los archivos adjuntos en la parte inferior de la página.',
-	'RatingPanel'				=> 'Panel de calificación',
-	'RatingPanelInfo'			=> 'La pantalla predeterminada del panel de clasificación en la parte inferior de la página.',
 	'TagsPanel'					=> 'Panel de etiquetas',
 	'TagsPanelInfo'				=> 'La visualización por defecto del panel de etiquetas en la parte inferior de la página.',
 

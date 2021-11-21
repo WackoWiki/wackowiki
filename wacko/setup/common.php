@@ -203,9 +203,9 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 		// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
 		// the additional parentheses around $owner_id and $page_id are necessary for the sub-select queries
 		$page_insert		= "INSERT INTO " .
-									$prefix . "page (tag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, footer_rating, noindex)
+									$prefix . "page (tag, title, body, body_r, body_toc, user_id, owner_id, created, modified, latest, page_size, page_lang, footer_comments, footer_files, noindex)
 								VALUES
-									('" . _quote($tag) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, 0, " . $noindex . ")";
+									('" . _quote($tag) . "', '" . _quote($title) . "' , '" . _quote($body) . "', '', '', (" . $owner_id . "), (" . $owner_id . "), UTC_TIMESTAMP(), UTC_TIMESTAMP(), 1, " . strlen($body) . ", '" . _quote($lang) . "', 0, 0, " . $noindex . ")";
 
 		$perm_insert		= "INSERT INTO " .
 									$prefix . "acl (page_id, privilege, list)

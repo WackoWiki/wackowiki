@@ -25,8 +25,6 @@ if (@$_POST['_action'] === 'extended_properties')
 		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"footer_comments	= " . (int) $_POST['footer_comments'] . ", " .
 			"footer_files		= " . (int) $_POST['footer_files'] . ", " .
-			"footer_rating		= " . (int) $_POST['footer_rating'] . ", " .
-
 			"hide_toc			= " . (int) $_POST['hide_toc'] . ", " .
 			"hide_index			= " . (int) $_POST['hide_index'] . ", " .
 			"tree_level			= " . (int) $_POST['tree_level'] . ", " .
@@ -77,11 +75,6 @@ if (isset($_GET['extended']))
 		$tpl->enter('e_x_');
 		$tpl->comments	= (int) $this->db->footer_comments;
 		$tpl->files		= (int) $this->db->footer_files;
-
-		#if ($this->db->footer_rating)
-		#{
-			$tpl->r_rating = (int) $this->db->footer_rating;
-		#}
 
 		// hide_toc, hide_index, tree_level: used in custom theme menus
 		$tpl->hidetoc	= (int) $this->db->hide_toc;
@@ -175,23 +168,6 @@ $watchers = $this->db->load_single(
 		"LIMIT 1", true);
 
 $tpl->wat_number	= $watchers['n'];
-
-if ($this->db->footer_rating)
-{
-	// load rating
-	$rating = $this->db->load_single(
-		"SELECT page_id, value, voters " .
-		"FROM " . $this->db->table_prefix . "rating " .
-		"WHERE page_id = {$this->page['page_id']} " .
-		"LIMIT 1", true);
-
-	if ($rating['voters'] > 0)			$rating['ratio'] = $rating['value'] / $rating['voters'];
-	if (is_float($rating['ratio']))		$rating['ratio'] = round($rating['ratio'], 2);
-	if ($rating['ratio'] > 0)			$rating['ratio'] = '+' . $rating['ratio'];
-
-	$tpl->rat_ratio		= $rating['ratio'];
-	$tpl->rat_voters	= (int) $rating['voters'];
-}
 
 $tpl->i = true; // turn on icon
 

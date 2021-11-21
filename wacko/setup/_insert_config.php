@@ -86,7 +86,6 @@ $config_db['export_handler']				= $config['export_handler'];
 $config_db['ext_bad_behavior']				= $config['ext_bad_behavior'];
 $config_db['footer_comments']				= $config['footer_comments'];
 $config_db['footer_files']					= $config['footer_files'];
-$config_db['footer_rating']					= $config['footer_rating'];
 $config_db['footer_tags']					= $config['footer_tags'];
 $config_db['form_token_time']				= $config['form_token_time'];
 $config_db['forum_cluster']					= $config['forum_cluster'];

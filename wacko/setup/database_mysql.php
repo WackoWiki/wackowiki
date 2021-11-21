@@ -191,7 +191,6 @@ $tbl_page =
 		keywords VARCHAR(255) BINARY NOT NULL DEFAULT '',
 		footer_comments TINYINT(1) UNSIGNED NULL DEFAULT NULL,
 		footer_files TINYINT(1) UNSIGNED NULL DEFAULT NULL,
-		footer_rating TINYINT(1) UNSIGNED NULL DEFAULT NULL,
 		hide_toc TINYINT(1) UNSIGNED NULL DEFAULT NULL,
 		hide_index TINYINT(1) UNSIGNED NULL DEFAULT NULL,
 		tree_level TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
@@ -226,16 +225,6 @@ $tbl_page_link =
 		KEY idx_from_tag (from_page_id, to_tag),
 		KEY idx_from_page_id (from_page_id),
 		KEY idx_to (to_tag)
-	) {$engine} COMMENT='' {$charset} {$collation}";
-
-$tbl_rating =
-	"CREATE TABLE {$pref}rating (
-		page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		value INT(11) NOT NULL DEFAULT '0',
-		voters INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		rating_time DATETIME NULL DEFAULT NULL,
-		PRIMARY KEY (page_id),
-		KEY idx_voters_rate (voters)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_referrer =
@@ -442,7 +431,6 @@ $tbl_file_link_drop				= "DROP TABLE IF EXISTS {$pref}file_link";
 $tbl_log_drop					= "DROP TABLE IF EXISTS {$pref}log";
 $tbl_page_drop					= "DROP TABLE IF EXISTS {$pref}page";
 $tbl_page_link_drop				= "DROP TABLE IF EXISTS {$pref}page_link";
-$tbl_rating_drop				= "DROP TABLE IF EXISTS {$pref}rating";
 $tbl_referrer_drop				= "DROP TABLE IF EXISTS {$pref}referrer";
 $tbl_revision_drop				= "DROP TABLE IF EXISTS {$pref}revision";
 $tbl_tag_drop					= "DROP TABLE IF EXISTS {$pref}tag";
