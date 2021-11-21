@@ -60,7 +60,8 @@ class Polls
 		return $this->engine->db->load_all(
 			"SELECT poll_id, v_id, text, votes " .
 			"FROM " . $this->engine->db->table_prefix . "poll " .
-			"WHERE poll_id = " . (int) $poll_id . " AND v_id <> 0 " .
+			"WHERE poll_id = " . (int) $poll_id . " " .
+				"AND v_id <> 0 " .
 			"ORDER BY " . ($votes == 1 ? "votes DESC, " : "") . "v_id ASC");
 	}
 
@@ -344,8 +345,8 @@ class Polls
 				{
 					$new_votes = $var['votes'] + 1;
 					$this->engine->db->sql_query(
-						"UPDATE " . $this->engine->db->table_prefix . "poll " .
-						"SET votes = " . (int) $new_votes . " " .
+						"UPDATE " . $this->engine->db->table_prefix . "poll SET " .
+							"votes = " . (int) $new_votes . " " .
 						"WHERE poll_id = " . (int) $poll_id . " " .
 							"AND v_id = " . (int) $vote_id);
 				}
@@ -355,8 +356,8 @@ class Polls
 		$new_votes = $header['votes'] + 1; //$total;
 
 		$this->engine->db->sql_query(
-			"UPDATE " . $this->engine->db->table_prefix . "poll " .
-			"SET votes = " . (int) $new_votes . " " .
+			"UPDATE " . $this->engine->db->table_prefix . "poll SET " .
+				"votes = " . (int) $new_votes . " " .
 			"WHERE poll_id = " . (int) $poll_id . " " .
 				"AND v_id = 0");
 

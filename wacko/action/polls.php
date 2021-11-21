@@ -14,8 +14,10 @@ if (!defined('IN_WACKO'))
 //					or vertical.
 //					Default: 'h'
 
-$align		= '';
-$results	= '';
+
+if (!isset($id))		$id			= null;
+if (!isset($results))	$results	= 0;
+if (!isset($align))		$page		= 'h';
 $vote		= '';
 
 // create polls object
@@ -42,11 +44,11 @@ if (isset($_POST['vote']) && isset($_POST['poll']))
 		else
 		{
 			// making singular ballot
-			$ballot = (int) $_POST['id'];
+			$ballot = [(int) $_POST['id']];
 		}
 
 		// checking ballot: we need at least one vote
-		if ($ballot && count($ballot) > 0)
+		if ($ballot && is_countable($ballot) && count($ballot) > 0)
 		{
 			// putting ballot into the ballot-box
 			$polls_obj->vote_poll($header['poll_id'], $ballot);
