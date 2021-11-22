@@ -281,6 +281,9 @@ form input.submitinput {
 	top: .6rem;
 	left: .6rem;
 }
+[dir=rtl] .msg::after {
+	right: .6rem;
+}
 
 .error {
 	background: #f8d4cc;
