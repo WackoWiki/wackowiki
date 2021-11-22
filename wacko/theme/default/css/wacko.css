@@ -314,6 +314,9 @@ blockquote {
 	padding: 1.5rem 1.875rem 1.5rem 4rem;
 	font-family: var(--ww-font-sans-serif);
 }
+[dir=rtl] blockquote {
+	padding: 1.5rem 4rem 1.5rem 1.875rem;
+}
 blockquote::before {
 	color: #9e9e9e;
 	content: "❝";
@@ -326,6 +329,9 @@ blockquote::before {
 	font-family: var(--ww-font-serif);
 	margin-left: -3.5rem;
 	margin-top: -0.6rem;
+}
+[dir=rtl] blockquote::before {
+	margin-right: -3.5rem;
 }
 blockquote p { padding: 0; margin: 5px 0; }
 

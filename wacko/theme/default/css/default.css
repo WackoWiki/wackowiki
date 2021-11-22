@@ -23,6 +23,14 @@ textarea {
 	line-height: 1.3em;
 }
 
+/* language specifics */
+ol:lang(fa) li {
+	list-style-type: persian;
+}
+ol:lang(hi) li  {
+	list-style-type: devanagari;
+}
+
 /* cellspacing */
 table {
 	border-collapse: collapse;
@@ -200,6 +208,11 @@ a.self-link {
 	margin-left: -15px;
 	padding-right: 4px;
 }
+[dir="rtl"] a.self-link {
+	float: right;
+	margin-right: -15px;
+	padding-left: 4px;
+}
 a.self-link:hover {
 	text-decoration: none;
 }
@@ -207,9 +220,8 @@ a.self-link:hover {
 	font-size: 83%;
 }
 
-/* ¶ UTF-8 escape sequences */
 /* a.self-link::before {
-	content: "\00b6"; 
+	content: "¶"; 
 } */
 
 .clearfix::after,
@@ -1008,6 +1020,9 @@ p.preview {
 	margin: -20px 0 0 50px;
 	padding: 0;
 	line-height: 25px;
+}
+[dir="rtl"] .layout-box dd {
+	margin: -20px 50px 0 0;
 }
 
 *.heading:target,
