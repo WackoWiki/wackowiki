@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'A benyújtott űrlap érvénytelen. Próbáld meg újra benyújtani.',
 
 	// logged in panel
-	'YouAre'					=> 'Belépett felhasználó ',
 	'AccountText'				=> 'Fiók',
 	'AccountTip'				=> 'Fiók beállítások',
 	'AdminText'					=> 'Admin',

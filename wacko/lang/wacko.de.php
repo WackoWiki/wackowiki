@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Das übermittelte Formular war ungültig. Versuche erneut, das Formular abzusenden.',
 
 	// logged in panel
-	'YouAre'					=> 'Du bist ',
 	'AccountText'				=> 'Konto',
 	'AccountTip'				=> 'Konto-Einstellungen',
 	'AdminText'					=> 'Verwaltung',

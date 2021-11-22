@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Изпратената форма е невалидна, опитайте отново.',
 
 	// logged in panel
-	'YouAre'					=> 'Вие сте ',
 	'AccountText'				=> 'Личен профил',
 	'AccountTip'				=> 'Account Settings',
 	'AdminText'					=> 'Admin',

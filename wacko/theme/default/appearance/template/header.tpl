@@ -31,7 +31,7 @@
 		<div id="login-box">
 			[== // if user are logged, shows "You are UserName" ==]
 			[= uare _ =
-				<span class="nobr">[ ' _t: YouAre ' ] [ ' link ' ]</span>
+				<span class="nobr">[ ' link ' ]</span>
 				<small> (
 					<span class="nobr Tune">
 						[ ' account ' ]

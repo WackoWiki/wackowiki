@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Campo inválido. Tente submeter novamente.',
 
 	// logged in panel
-	'YouAre'					=> 'Voçê é ',
 	'AccountText'				=> 'Conta Pessoal',
 	'AccountTip'				=> 'Configurações da conta',
 	'AdminText'					=> 'Admin',

@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Η υποβληθείσα μορφή ήταν άκυρη. Προσπαθήστε πάλι.',
 
 	// logged in panel
-	'YouAre'					=> 'Είσαι ο ',
 	'AccountText'				=> 'Ο λογαριασμός μου',
 	'AccountTip'				=> 'Ρυθμίσεις λογαριασμού',
 	'AdminText'					=> 'Διαχειριστής',

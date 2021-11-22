@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Ошибка отправки формы. Попробуйте ещё раз.',
 
 	// logged in panel
-	'YouAre'					=> 'Вы ',
 	'AccountText'				=> 'Профиль',
 	'AccountTip'				=> 'Профиль',
 	'AdminText'					=> 'Администратор',
