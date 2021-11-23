@@ -3,7 +3,7 @@
 
 [ === DefaultFoot === ]
 </main>
-<footer dir="[ ' dir | e ' ]">
+<footer[ ' dir ' ]>
 	<nav class="footer">
 		<div class="page-meta">
 			<ul>

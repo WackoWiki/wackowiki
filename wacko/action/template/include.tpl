@@ -8,7 +8,7 @@
 	=]
 	[= mark =
 		[ ' nonstatic ' ]
-		<section class="include-page">
+		<section class="include-page"[ ' dir ' ][ ' lang ' ]>
 	=]
 		[ ' nav ' ]
 		[ ' data | pre ' ]

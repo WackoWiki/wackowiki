@@ -7,7 +7,7 @@
 [''' h HtmlHead ''']
 <body>
 <div id="mainwrapper">
-<header dir="[ ' dir | e ' ]">
+<header[ ' dir ' ]>
 	<div id="header-main">
 		<div id="header-site">
 			<h1>

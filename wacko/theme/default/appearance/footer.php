@@ -10,7 +10,10 @@ if (!defined('IN_WACKO'))
 }
 
 // user lang dir
-$tpl->dir = $this->user_lang_dir;
+if ($this->language[$this->page_lang]['dir'] != $this->user_lang_dir)
+{
+	$tpl->dir	= ' dir="' . $this->user_lang_dir . '"';
+}
 
 // If User has rights to edit page, show Edit link
 if ($this->has_access('write') && $this->method != 'edit')

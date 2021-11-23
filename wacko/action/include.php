@@ -85,6 +85,13 @@ else
 			&& ($nomark != 2 || $this->has_access('write', $page_id)))
 		{
 			$tpl->mark		= true;
+
+			if ($this->page['page_lang'] != $inc_page['page_lang'])
+			{
+				$tpl->mark_lang	= ' lang="' . $inc_page['page_lang'] . '"';
+				$tpl->mark_dir	= ' dir="' . $this->get_direction($inc_page['page_lang']) . '"';
+			}
+
 			$tpl->emark		= true;
 
 			// show page link

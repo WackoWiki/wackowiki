@@ -586,7 +586,7 @@ class Wacko
 			$wacko_language['ALPHANUM_P']	= '\p{L}\p{M}\p{Nd}\_\-\/';
 			#$wacko_language['ALPHANUM_Q']	= '\p{L}\p{M}*+\p{Nd}\_\-\/';	// Grapheme Quantifier
 
-			$this->languages[$lang] = $wacko_language;
+			$this->languages[$lang]			= $wacko_language;
 		}
 	}
 
@@ -707,6 +707,12 @@ class Wacko
 		$this->load_lang($lang);
 
 		return @$this->languages[$lang]['charset'];
+	}
+
+	// shortcut for getting 'dir' for not loaded language
+	function get_direction($lang = '') : string
+	{
+		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
 	}
 
 	function get_favicon()
@@ -5205,7 +5211,8 @@ class Wacko
 
 		$this->set_user_setting('ip', $this->http->ip);
 
-		$this->user_lang = $this->get_user_language();
+		$this->user_lang		= $this->get_user_language();
+		$this->user_lang_dir	= $this->get_direction($this->user_lang);
 		$this->set_language($this->user_lang, true);
 
 		$this->set_menu(MENU_USER);
@@ -6749,8 +6756,8 @@ class Wacko
 		}
 
 		$this->user_lang		= $this->get_user_language();
+		$this->user_lang_dir	= $this->get_direction($this->user_lang);
 		$this->set_language($this->user_lang, true);
-		$this->user_lang_dir	= $this->languages[$this->user_lang]['dir'];
 
 		// SEO
 		if (isset($_SERVER['HTTP_USER_AGENT']))

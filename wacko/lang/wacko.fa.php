@@ -25,7 +25,7 @@ $wacko_translation = [
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> 'بفرست',
 
-	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+	'FormInvalid'				=> 'فرم ارسال شده نامعتبر بود دوباره ارسال را امتحان کنید.',
 
 	// logged in panel
 	'AccountText'				=> 'حساب',
@@ -467,7 +467,7 @@ $wacko_translation = [
 	'ThisIsCommentOn'			=> 'This is a comment on',
 	'At'						=> 'at',
 	'To'						=> 'to',
-	'By'						=> 'by',
+	'By'						=> 'توسط',
 	'From'						=> 'from',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
@@ -482,7 +482,7 @@ $wacko_translation = [
 	'UnwatchText'				=> 'Not follow',
 	'UserSettingsStored'		=> 'تنظیمات کاربر ذخیره شد.',
 	'LoggedOut'					=> 'شما از سیستم خارج شدید.',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> 'برای امنیت، جلسه شما به پایان رسیده است. لطفا دوباره وارد شوید.',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
