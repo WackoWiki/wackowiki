@@ -25,7 +25,7 @@ $wacko_translation = [
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> 'بفرست',
 
-	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+	'FormInvalid'				=> 'فرم ارسال شده نامعتبر بود دوباره ارسال را امتحان کنید.',
 
 	// logged in panel
 	'YouAre'					=> 'You are ',
@@ -469,7 +469,7 @@ $wacko_translation = [
 	'ThisIsCommentOn'			=> 'This is a comment on',
 	'At'						=> 'at',
 	'To'						=> 'to',
-	'By'						=> 'by',
+	'By'						=> 'توسط',
 	'From'						=> 'from',
 	'For'						=> 'for',
 	'ReturnToCommented'			=> 'Return to commented page',
@@ -482,9 +482,9 @@ $wacko_translation = [
 	'SetWatch'					=> 'Watch this page',
 	'WatchText'					=> 'Watch',
 	'UnwatchText'				=> 'Not follow',
-	'UserSettingsStored'		=> 'User settings saved.',
+	'UserSettingsStored'		=> 'تنظیمات کاربر ذخیره شد.',
 	'LoggedOut'					=> 'شما از سیستم خارج شدید.',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> 'برای امنیت، جلسه شما به پایان رسیده است. لطفا دوباره وارد شوید.',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
@@ -497,7 +497,7 @@ $wacko_translation = [
 	'RecordsPerPage'			=> 'Records per page',
 	'DoShowComments'			=> 'Show comments by default',
 	'DoubleclickEditing'		=> 'Doubleclick Editing',
-	'UpdateSettingsButton'		=> 'Update Settings',
+	'UpdateSettingsButton'		=> 'تنظیمات را ذخیره کن',
 
 	'AccountDisabled'			=> 'Your account may be disabled or blocked.',
 	'WrongPassword'				=> 'Wrong password!',
@@ -1182,7 +1182,7 @@ $wacko_translation = [
 	'PollsNone'					=> 'No active poll.',
 
 	'Timezone'					=> 'ناحیه زمانی',
-	'DST'						=> 'Daylight saving time',
+	'DST'						=> 'ساعت تابستانی',
 	'TzZoneArray'	=> [
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',

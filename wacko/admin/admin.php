@@ -27,7 +27,8 @@ if (!($engine->is_admin() || $db->is_locked() || RECOVERY_MODE))
 }
 
 // register locale resources
-$engine->user_lang = $engine->get_user_language();
+$engine->user_lang		= $engine->get_user_language();
+$engine->user_lang_dir	= $engine->get_direction($engine->user_lang);
 $engine->set_language($engine->user_lang, true);
 
 // reconnect securely in tls mode
@@ -60,7 +61,7 @@ if (!$engine->db->recovery_password)
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
 	?>
 	<!DOCTYPE html>
-	<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->db->language; ?>">
+	<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
 		<head>
 			<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 			<meta name="robots" content="noindex, nofollow, noarchive">
@@ -141,7 +142,7 @@ if (!isset($engine->sess->ap_created))
 	header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
-<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->db->language; ?>">
+<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
 		<meta name="robots" content="noindex, nofollow, noarchive">
@@ -301,7 +302,7 @@ unset($category);
 header('Content-Type: text/html; charset=' . $engine->get_charset());
 ?>
 <!DOCTYPE html>
-<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->db->language; ?>">
+<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
 	<head>
 		<meta charset="<?php echo $engine->get_charset(); ?>">
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $title; ?></title>

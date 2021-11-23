@@ -391,7 +391,7 @@ class Wacko
 	{
 		$local_time = $this->sql2localtime($text);
 
-		// TODO: made format depended from localization and user preferences?
+		// TODO: make format depended from localization and user preferences?
 		// default: d.m.Y H:i
 
 		if ($relative)
@@ -586,7 +586,7 @@ class Wacko
 			$wacko_language['ALPHANUM_P']	= '\p{L}\p{M}\p{Nd}\_\-\/';
 			#$wacko_language['ALPHANUM_Q']	= '\p{L}\p{M}*+\p{Nd}\_\-\/';	// Grapheme Quantifier
 
-			$this->languages[$lang] = $wacko_language;
+			$this->languages[$lang]			= $wacko_language;
 		}
 	}
 
@@ -707,6 +707,12 @@ class Wacko
 		$this->load_lang($lang);
 
 		return @$this->languages[$lang]['charset'];
+	}
+
+	// shortcut for getting 'dir' for not loaded language
+	function get_direction($lang = '') : string
+	{
+		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
 	}
 
 	function get_favicon()
@@ -5214,7 +5220,8 @@ class Wacko
 
 		$this->set_user_setting('ip', $this->http->ip);
 
-		$this->user_lang = $this->get_user_language();
+		$this->user_lang		= $this->get_user_language();
+		$this->user_lang_dir	= $this->get_direction($this->user_lang);
 		$this->set_language($this->user_lang, true);
 
 		$this->set_menu(MENU_USER);
@@ -5509,7 +5516,7 @@ class Wacko
 		if ($page_id)
 		{
 			return $this->db->load_all(
-				"SELECT p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, u.user_name, o.user_name as owner_name " .
+				"SELECT p.page_id, parent_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.modified, p.body, p.body_r, p.page_lang, u.user_name, o.user_name as owner_name " .
 				"FROM " . $this->db->table_prefix . "page p " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
@@ -6758,8 +6765,8 @@ class Wacko
 		}
 
 		$this->user_lang		= $this->get_user_language();
+		$this->user_lang_dir	= $this->get_direction($this->user_lang);
 		$this->set_language($this->user_lang, true);
-		$this->user_lang_dir	= $this->languages[$this->user_lang]['dir'];
 
 		// SEO
 		if (isset($_SERVER['HTTP_USER_AGENT']))
