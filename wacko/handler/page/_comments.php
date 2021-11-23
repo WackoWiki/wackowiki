@@ -157,32 +157,6 @@ if ($this->has_access('read'))
 					$tpl->s_pages		= $user_stats['pages'];
 					$tpl->s_revisions	= $user_stats['revisions'];
 				} */
-
-				// comment footer
-				/* echo '<div class="comment-tool">' . "\n";
-				echo '<ul class="" style="padding-left: 0;">' . "\n" .
-						'<li class="voting">
-							<a title="Vote up" class="vote-up  count-0" href="' . $this->href('rate', '', ['vote' => 1]) . '">
-								<span class="updatable count">0</span>
-								<span class="control">&and;</span>
-							</a>
-							<a title="Vote down" class="vote-down  count-0" href="' . $this->href('rate', '', ['vote' => 0]) . '">
-								<span class="control">&or;</span>
-							</a>
-						</li>
-						<li class="bullet">.</li>
-						<li class="reply">';
-
-						// reply button
-						if ($this->is_admin() || $this->is_owner($comment['page_id']))
-						{
-							echo '<a href="' . $this->href('', '', ['parent_id' => $comment['page_id'], '#' => 'commentform']) . '">' . $this->_t('ReplyComment') . '</a>';
-						}
-
-						echo '</li>' .
-						"</ul>\n";
-
-				echo "</div>\n"; */
 			}
 
 			$tpl->leave(); // ol_l_
