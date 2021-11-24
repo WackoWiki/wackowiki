@@ -618,7 +618,7 @@ a[href $='.webm'] .icon {
 	content: "i";
 	height: 1rem;
 	width: 1rem;
-	font-family: "Times New Roman", Times, serif;
+	font-family: var(--ww-font-serif);
 }
 
 /* 2. note */

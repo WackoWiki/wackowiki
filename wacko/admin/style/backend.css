@@ -20,7 +20,7 @@ body {
 	font-size: 100%;
 }
 h1, h2, h3, h4, h5, h6 {
-	text-align: left;
+	/* text-align: left; */
 	margin-bottom: 0;
 }
 p {
@@ -681,7 +681,7 @@ span.tocnumber {
 	width: 150px;
 }
 
-#menu .active{
+#menu .active {
 	font-weight: bold;
 }
 
