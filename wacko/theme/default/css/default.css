@@ -648,6 +648,9 @@ ol#comments ul ul ul {
 	padding-bottom: 20px;
 	float: right;
 }
+[dir=rtl] .comment-meta {
+	float: left;
+}
 .comment-meta li {
 	border: medium none;
 	margin: 0;
@@ -659,6 +662,9 @@ ol#comments ul ul ul {
 .comment-tools img {
 	float: right;
 	padding: 2px;
+}
+[dir=rtl] .comment-tools img {
+	float: left;
 }
 
 .comment-tool,
@@ -674,17 +680,17 @@ ol#comments ul ul ul {
 	list-style-type: none;
 	margin: 0 7px 0 0;
 }
-
-.vote-down {
-	border-color: rgba(0, 39, 59, 0.08);
-	border-left: 2px solid rgba(0, 39, 59, 0.08);
-	padding-left: 6px;
-	padding-right: 0;
+[dir=rtl] .comment-tool li {
+	float: right;
 }
 
 .comment-text,
 .comment-tool {
 	float: left;
+}
+[dir=rtl] .comment-text,
+[dir=rtl] .comment-tool {
+	float: right;
 }
 
 .comment-text p {

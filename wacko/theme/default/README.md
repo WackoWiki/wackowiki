@@ -5,9 +5,8 @@ Default is a theme (a.k.a. template) for WackoWiki.
 
 ## Download and Installation
 
-* Download Default as ZIP- or TAR.GZ archive, unzip it and copy the
-  `default` directory to your theme folder of the WackoWiki
-  installation.
+* Download Default and copy the `default` directory
+  to your theme folder of the WackoWiki installation.
 * Edit your secondary config (or Admin panel) and set
   `'theme' => 'default'`.
 * Your wacko user may also select this theme on the Settings page.
@@ -20,6 +19,7 @@ contains a small main navigation including the input field for the keyword
 search. At the header you find the link to the login or registration page 
 or if logged in links to the user page, account settings and logout. 
 
+* RTL support
 
 ## Customization
 
@@ -63,11 +63,10 @@ For bug reports and feature requests you can write to [Bugtracker](https://wacko
 
 ## License
 
-The Default Theme is part of the WackoWiki package.
+The Default Theme is part of the WackoWiki package.  
 BSD licence.
 
-Icons were taken from the Breeze (Plasma 5 icon theme) icons set.
-[Breeze Icons](https://github.com/KDE/breeze-icons)
-Icons are licensed under the LGPLv3
+Icons were taken from the [Breeze Icons](https://github.com/KDE/breeze-icons) set.  
+Icons are licensed under the LGPLv3.
 
 
