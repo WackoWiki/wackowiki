@@ -34,6 +34,9 @@ body {
 	padding: 0;
 	text-align: left;
 }
+[dir=rtl] .installer {
+	text-align: right;
+}
 
 /*
    Generic Text Elements
@@ -47,6 +50,11 @@ h1 {
 	font: normal normal normal 24px var(--ww-font-sans-serif);
 	color: #333;
 }
+[dir=rtl] h1 {
+	float: right;
+	left: unset;
+	right: 43px;
+}
 
 h2,
 .label_top {
@@ -56,6 +64,11 @@ h2,
 	padding: 0;
 	font: normal normal 900 14px var(--ww-font-sans-serif);
 	color: #333;
+}
+[dir=rtl] h2,
+[dir=rtl] .label_top {
+	left: unset;
+	right: 43px;
 }
 
 p {
@@ -90,6 +103,12 @@ ul, ol, select {
 	left: 43px;
 	margin: 0;
 	padding: 0;
+}
+[dir=rtl] ul,
+[dir=rtl] ol,
+[dir=rtl] select {
+	left: unset;
+	right: 43px;
 }
 
 ul.install_error {
@@ -161,11 +180,19 @@ hr {
 	position: relative;
 	left: 90px;
 }
+[dir=rtl] .input_lang {
+	left: unset;
+	right: 90px;
+}
 
 .label_lang {
 	position: relative;
 	left: 90px;
 	margin: 10px 0 0 5px;
+}
+[dir=rtl] .label_lang {
+	left: unset;
+	right: 90px;
 }
 
 .warning {
@@ -223,6 +250,10 @@ p.security {
 	font-weight: 900;
 	color: #666;
 }
+[dir=rtl] .indented_label {
+	left: unset;
+	right: 43px;
+}
 
 .label_password2 {
 	position: relative;
@@ -231,6 +262,10 @@ p.security {
 	font-size: 12px;
 	font-weight: 900;
 	text-align: right;
+}
+[dir=rtl] .label_password2 {
+	left: unset;
+	right: 43px;
 }
 
 /*
@@ -256,10 +291,18 @@ ul.security li {
 	width: 300px;
 	margin-top: 0;
 }
+[dir=rtl] .text_input {
+	left: unset;
+	right: 43px;
+}
 
 .checkbox_input {
 	position: relative;
 	left: 43px;
+}
+[dir=rtl] .checkbox_input {
+	left: unset;
+	right: 43px;
 }
 
 .column-3 {
@@ -273,6 +316,10 @@ ul.security li {
 	left: 450px;
 	margin: 10px;
 }
+[dir=rtl] .next {
+	left: unset;
+	right: 450px;
+}
 
 .config_code {
 	position: relative;
@@ -282,6 +329,10 @@ ul.security li {
 	padding: 10px;
 	background-color: #eee;
 	overflow-x: scroll;
+}
+[dir=rtl] .config_code {
+	left: unset;
+	right: 43px;
 }
 
 .version {

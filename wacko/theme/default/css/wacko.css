@@ -193,7 +193,6 @@ div.hl-main {
 #toc {
 	margin: 0;
 	padding: 0;
-	text-align: left;
 }
 #toc li {
 	list-style: none;
@@ -207,7 +206,10 @@ div.hl-main {
 	font-weight: normal;
 }
 span.tocnumber {
-	margin-right: 0.3em;
+	margin: 0 0.3em 0 0;
+}
+[dir="rtl"] span.tocnumber {
+	margin: 0 0 0 0.3em;
 }
 
 /** File-related ************************************************************/
@@ -233,6 +235,12 @@ img.media-left,
 .media-default figcaption,
 .media-left figcaption {
 	margin: .2em 1em .2em 0;
+}
+[dir=rtl] img.media-default,
+[dir=rtl] img.media-left,
+[dir=rtl] .media-default figcaption,
+[dir=rtl] .media-left figcaption {
+	margin: .2em 0 .2em 1em;
 }
 
 .media-center {
@@ -260,6 +268,10 @@ div.figure-center-wrp .media-center {
 img.media-right,
 .media-right figcaption {
 	margin: .2em 0 .2em 1em;
+}
+[dir=rtl] img.media-right,
+[dir=rtl] .media-right figcaption {
+	margin: .2em 1em .2em 0;
 }
 
 /** Chat-related *************************************************************/
@@ -304,6 +316,9 @@ blockquote {
 	padding: 1.5rem 1.875rem 1.5rem 4rem;
 	font-family: var(--ww-font-sans-serif);
 }
+[dir=rtl] blockquote {
+	padding: 1.5rem 4rem 1.5rem 1.875rem;
+}
 blockquote::before {
 	color: #9e9e9e;
 	content: "❝";
@@ -316,6 +331,9 @@ blockquote::before {
 	font-family: var(--ww-font-serif);
 	margin-left: -3.5rem;
 	margin-top: -0.6rem;
+}
+[dir=rtl] blockquote::before {
+	margin-right: -3.5rem;
 }
 blockquote p { padding: 0; margin: 5px 0; }
 
@@ -596,11 +614,18 @@ a[href $='.webm'] .icon {
 	min-height: 5em;
 	overflow: auto;
 }
+[dir=rtl] .info,
+[dir=rtl] .wrapper {
+	
+}
 
 .wrapper-title {
 	margin: -.4rem -.6rem .4rem -.6rem;
 	padding: .4rem .6rem .4rem 2rem;
 	font-weight: 700;
+}
+[dir=rtl] .wrapper-title {
+	padding: .4rem 2rem .4rem .6rem;
 }
 .info.type-default,
 .wrapper.type-default,
@@ -619,6 +644,9 @@ a[href $='.webm'] .icon {
 	height: 1rem;
 	width: 1rem;
 	font-family: var(--ww-font-serif);
+}
+[dir=rtl] .wrapper > .wrapper-title::before {
+	right: .6rem;
 }
 
 /* 2. note */
@@ -780,6 +808,9 @@ a[href $='.webm'] .icon {
 	margin: 0;
 	padding: .4rem .6rem .4rem 4.4rem;
 }
+[dir=rtl] .info-content {
+	padding: .4rem 4.4rem .4rem .6rem;
+}
 .info > .info-content::before {
 	position: absolute;
 	left: 1rem;
@@ -792,4 +823,7 @@ a[href $='.webm'] .icon {
 	text-align: center;
 	line-height: normal;
 	font-family: var(--ww-font-serif);
+}
+[dir=rtl] .info > .info-content::before {
+	right: 1rem;
 }

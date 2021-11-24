@@ -90,7 +90,10 @@ ul, ol {
 	margin: 0;
 	padding-left: 30px;
 }
-
+[dir=rtl] ul, [dir=rtl] ol {
+	padding-left: unset;
+	padding-right: 30px;
+}
 
 /*	Image styles	*/
 
@@ -210,6 +213,14 @@ th.label {
 	padding-right: 5px;
 	border-right: 1px solid #cc0000;
 	/* border-bottom: 0 !important; */
+}
+[dir=rtl] td.label,
+[dir=rtl] th.label {
+	padding-right: unset;
+	border-right: unset;
+	text-align: left;
+	padding-left: 5px;
+	border-left: 1px solid #cc0000;
 }
 
 .lined td {
@@ -408,22 +419,6 @@ textarea {
 	border: 1px solid #999;
 }
 
-/*	Forum styles	*/
-
-.forum .description {
-	background-color: #ededed;
-	padding-left: 3px;
-	padding-right: 3px;
-}
-.forum .description small {
-	letter-spacing: normal;
-}
-.forum .lined {
-	border-bottom-width: 2px;
-}
-
-
-
 /*	Header layout	*/
 
 #header {
@@ -470,6 +465,9 @@ textarea {
 		min-width: 153px;
 		height: 60px;
 		float: left;
+	}
+	[dir=rtl] #pane div.middle {
+		float: right;
 	}
 		#pane div.middle h1,
 		#pane div.middle h1 a,
@@ -519,6 +517,9 @@ textarea {
 		height: 30px;
 		float: right;
 	}
+	[dir=rtl] #tools {
+		float: left;
+	}
 		#tools a {
 			color: #073d69;
 			text-decoration: none;
@@ -563,6 +564,9 @@ textarea {
 		padding-right: 20px;
 		height: 21px;
 		float: right;
+	}
+	[dir=rtl] #sections {
+		float: left;
 	}
 		#sections a {
 			color: #ededed;
@@ -675,6 +679,11 @@ span.tocnumber {
 	left: 187px;
 
 }
+[dir=rtl] #menu {
+	left: unset;
+	float: left;
+	right: 187px;
+}
 #user_menu {
 	border-top: 1px solid #073d69;
 	margin-top: -10px;
@@ -719,6 +728,9 @@ span.tocnumber {
 	padding-left: 20px;
 	padding-right: 20px;
 	
+}
+[dir=rtl] #content {
+	float: right;
 }
 #page {
 	color: #333;

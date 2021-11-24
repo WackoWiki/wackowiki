@@ -181,7 +181,7 @@ if ($config['is_update'] == false)
 	<?php echo $separator; ?>
 	<label class="label_top" for="table_prefix"><?php echo $lang['Prefix'];?></label>
 	<p class="notop"><?php echo $lang['PrefixDesc']; ?></p>
-	<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" class="text_input">
+	<input type="text" maxlength="64" id="table_prefix" name="config[table_prefix]" value="<?php echo $config['table_prefix'] ?>" pattern="[\p{L}\p{Nd}\_]+" class="text_input">
 	<br>
 	<?php echo $separator;
 }
