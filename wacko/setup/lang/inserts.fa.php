@@ -9,7 +9,7 @@ if ($config['language'] == $page_lang)
 	{
 		$home_page_body		=
 			'file:/wacko_logo.png?left' . "\n" .
-			'**!به سایت ((WackoWiki:Doc/English WackoWiki)) خود خوش آمدید!**' . "\n\n" .
+			'**به سایت ((WackoWiki:Doc/English WackoWiki)) خود خوش آمدید!**' . "\n\n" .
 			'Click after you have ((ورود logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'صفحات مفید: ((WackoWiki:Doc/English/Formatting Formatting)), ((جستجو)).' . "\n\n";

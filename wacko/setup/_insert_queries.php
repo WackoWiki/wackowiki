@@ -20,7 +20,6 @@ $delete_table[]			= ['file_link',				$tbl_file_link_drop];
 $delete_table[]			= ['log',					$tbl_log_drop];
 $delete_table[]			= ['page',					$tbl_page_drop];
 $delete_table[]			= ['page_link',				$tbl_page_link_drop];
-$delete_table[]			= ['rating',				$tbl_rating_drop];
 $delete_table[]			= ['referrer',				$tbl_referrer_drop];
 $delete_table[]			= ['revision',				$tbl_revision_drop];
 #$delete_table[]		= ['tag',					$tbl_tag_drop];
