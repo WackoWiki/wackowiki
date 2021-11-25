@@ -668,7 +668,7 @@ $wacko_translation = [
 	'NotOwnerToViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
+	'GenerateRecoveryHash'		=> 'هش رمز عبور را برای <code>recovery_password</code> خود ایجاد کنید',
 
 	// import action
 	'ImportTo'					=> 'Import in cluster',
