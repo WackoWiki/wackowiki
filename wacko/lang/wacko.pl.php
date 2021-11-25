@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Wysłany formularz był nieprawidłowy. Spróbuj wysłać ponownie.',
 
 	// logged in panel
-	'YouAre'					=> '',
 	'AccountText'				=> 'Moje konto',
 	'AccountTip'				=> 'Ustawienia konta',
 	'AdminText'					=> 'Admin',

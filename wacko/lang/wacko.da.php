@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Den indsendte formular var ugyldig. Prøv at indsende igen.',
 
 	// logged in panel
-	'YouAre'					=> 'Du er ',
 	'AccountText'				=> 'Min konto',
 	'AccountTip'				=> 'Bruger indstillinger',
 	'AdminText'					=> 'Admin',

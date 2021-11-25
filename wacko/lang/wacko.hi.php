@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
 
 	// logged in panel
-	'YouAre'					=> 'आप तोह ',
 	'AccountText'				=> 'खाता',
 	'AccountTip'				=> 'खाता संचालन',
 	'AdminText'					=> 'प्रशासन',

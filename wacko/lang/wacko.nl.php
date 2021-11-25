@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Het verstuurde formulier is ongeldig. Probeer opnieuw te versturen.',
 
 	// logged in panel
-	'YouAre'					=> 'Jij bent ',
 	'AccountText'				=> 'Mijn gebruiker',
 	'AccountTip'				=> 'Account Settings',
 	'AdminText'					=> 'Admin',

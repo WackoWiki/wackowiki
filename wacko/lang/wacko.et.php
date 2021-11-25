@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Esitatud avaldus oli ebakorrektne. Proovi see uuesti esitada.',
 
 	// logged in panel
-	'YouAre'					=> 'Tere tulemast, ',
 	'AccountText'				=> 'Minu andmed',
 	'AccountTip'				=> 'Konto seaded',
 	'AdminText'					=> 'Admin',

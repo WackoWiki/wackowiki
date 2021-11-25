@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'فرم ارسال شده نامعتبر بود دوباره ارسال را امتحان کنید.',
 
 	// logged in panel
-	'YouAre'					=> 'You are ',
 	'AccountText'				=> 'حساب',
 	'AccountTip'				=> 'تنظیمات حساب',
 	'AdminText'					=> 'مدیر',

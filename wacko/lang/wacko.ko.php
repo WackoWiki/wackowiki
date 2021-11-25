@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> '제출 된 양식이 유효하지 않습니다. 다시 제출하십시오.',
 
 	// logged in panel
-	'YouAre'					=> '너는 ',
 	'AccountText'				=> '계정',
 	'AccountTip'				=> '계정 설정',
 	'AdminText'					=> '관리',

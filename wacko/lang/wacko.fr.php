@@ -28,7 +28,6 @@ $wacko_translation = [
 	'FormInvalid'				=> 'Le formulaire que vous avez envoyé est incorrect. Veuillez essayer de le renvoyer.',
 
 	// logged in panel
-	'YouAre'					=> 'Vous êtes ',
 	'AccountText'				=> 'Mon compte',
 	'AccountTip'				=> 'Réglages du compte',
 	'AdminText'					=> 'Admin',
