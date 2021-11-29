@@ -242,8 +242,14 @@ if (!empty($tag))
 			$tpl->include	= $this->action('include', ['page' => '/' . $page['tag'], 'notoc' => 0, 'nomark' => 1], 1);
 			$tpl->icon		= !empty($_category) ? true : false;
 			$tpl->category	= $_category;
-			$tpl->edit		= ($this->has_access('write', $page['page_id']) ? $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ' : '');
 			$tpl->comments	= $this->href('', $page['tag'], ['show_comments' => 1]);
+
+			// show edit link & button
+			if ($this->has_access('write', $page['page_id']))
+			{
+				$tpl->edit		= $this->compose_link_to_page($page['tag'], 'edit', $this->_t('EditText')) . ' | ';
+				$tpl->b_href	= $this->href('edit', $page['tag']);
+			}
 
 			unset ($_category);
 		}

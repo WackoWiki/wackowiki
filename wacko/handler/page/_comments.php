@@ -5,32 +5,6 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// get number of user's pages, revisions and comments
-$get_user_stats = function ($user_id)
-{
-	if ($user_id == 0)
-	{
-		return [];
-	}
-	else if (isset($this->cached_stats[$user_id]))
-	{
-		return $this->cached_stats[$user_id];
-	}
-
-	$stats = $this->db->load_single(
-		"SELECT user_name, " .
-			"total_pages AS pages, " .
-			"total_revisions AS revisions, " .
-			"total_comments AS comments " .
-		"FROM {$this->db->user_table} " .
-		"WHERE user_id = " . (int) $user_id . " " .
-		"LIMIT 1");
-
-	$this->cached_stats[$user_id] = $stats;
-
-	return $stats;
-};
-
 // pagination
 $pagination = $this->pagination($this->page['comments'], $this->db->comments_count, 'p', ['show_comments' => 1, '#' => 'header-comments']);
 
@@ -150,13 +124,6 @@ if ($this->has_access('read'))
 				($comment['modified'] != $comment['created']
 					? $tpl->m_modified = $comment['modified']
 					: '');
-
-				/* if ($user_stats = $get_user_stats($comment['owner_id']))
-				{
-					$tpl->s_comments	= $user_stats['comments'];
-					$tpl->s_pages		= $user_stats['pages'];
-					$tpl->s_revisions	= $user_stats['revisions'];
-				} */
 			}
 
 			$tpl->leave(); // ol_l_

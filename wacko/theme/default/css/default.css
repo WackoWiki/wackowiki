@@ -616,13 +616,25 @@ footer {
 
 /* comments and files actions (only visible on hover) */
 .comment-tools,
-.file-tools {
+.file-tools,
+.page-tools {
 	visibility: hidden;
 }
 
+.newsarticle:hover .page-tools,
 .comment:hover .comment-tools,
 .file tr:hover .file-tools {
 	visibility: visible;
+}
+
+.page-tools img,
+.comment-tools img {
+	float: right;
+	padding: 2px;
+}
+[dir=rtl] .page-tools img,
+[dir=rtl] .comment-tools img {
+	float: left;
 }
 
 li.comment {
@@ -660,31 +672,6 @@ ol#comments ul ul ul {
 	padding: 0;
 	width: 320px;
 	list-style-type: none;
-}
-
-.comment-tools img {
-	float: right;
-	padding: 2px;
-}
-[dir=rtl] .comment-tools img {
-	float: left;
-}
-
-.comment-tool,
-.comment-tool a {
-	color: #7f919e;
-}
-.comment-tool li {
-	border: medium none;
-	padding: 0;
-	float: left;
-	font-size: 14px;
-	line-height: 15px;
-	list-style-type: none;
-	margin: 0 7px 0 0;
-}
-[dir=rtl] .comment-tool li {
-	float: right;
 }
 
 .comment-text,
@@ -1637,11 +1624,11 @@ tr.lined:hover {
 [dir="rtl"] .page-settings {
 	float: right;
 }
-.page-tools {
+.sidebar {
 	float: right;
 	padding: 0 10px 10px 10px;
 }
-[dir="rtl"] .page-tools {
+[dir="rtl"] .sidebar {
 	float: left;
 }
 

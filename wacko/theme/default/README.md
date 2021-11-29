@@ -23,10 +23,10 @@ overwrite your changes during a update or rollback.
 
 To alternate the HTML just edit `header.tpl` and `footer.tpl` at the `appearance/template/`
 folder. To change colors/etc and typographical formatting you can edit
-`default.css` and `wacko.css` at the layout folder.
+`default.css` and `wacko.css` at the `css/` folder.
 
 You can add i18n features when you add those menu targets and their names to the
-translation files which you find at `lang` folder.
+translation files which you find at `lang/` folder.
 
 ```PHP
 <?php
