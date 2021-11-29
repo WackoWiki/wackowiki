@@ -230,7 +230,7 @@
 		</div>
 	=]
 
-	<aside class="page-tools">
+	<aside class="sidebar">
 		<table class="form-tbl lined">
 			<tr>
 				<th scope="row">[ ' _t: SettingsID ' ]</th>

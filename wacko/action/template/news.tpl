@@ -44,6 +44,11 @@
 
 			[= l =
 				<article class="newsarticle">
+					[= b _ =
+						<nav class="page-tools">
+							<a href="[ ' href ' ]"><img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: EditTip ' ]" alt="[ ' _t: EditText ' ]" class="btn-edit"></a>
+						</nav>
+					=]
 					<h2 class="news-title">
 						<a href="[ ' href ' ]">[ ' page.title ' ]</a>
 					</h2>
