@@ -1125,7 +1125,7 @@ $wacko_translation = [
 	'PasswordSameAsEmail'		=> 'Your password is the same as your email.',
 
 	'Timezone'					=> 'क्षेत्रीय समय',
-	'DST'						=> 'Daylight saving time',
+	'DST'						=> 'डेलाइट सेविंग टइम',
 	'TzZoneArray'	=> [
 		'-12'	=> '[UTC - 12] Baker Island Time',
 		'-11'	=> '[UTC - 11] Niue Time, Samoa Standard Time',
