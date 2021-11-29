@@ -110,6 +110,7 @@ $upgrade['6.1.2'][]	= ['delete',	'rating',			$delete_rating_r6_0_1];
 // revision
 
 // user
+$upgrade['6.1.3'][]	= ['alter',		'page',				$alter_user_r6_0_1];
 
 // user settings
 

@@ -56,6 +56,7 @@ $delete_rating_r6_0_1 = "DROP TABLE {$pref}rating";
 // TAG
 
 // USER
+$alter_user_r6_0_1 = "ALTER TABLE {$pref}user CHANGE lost_password_request_count password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0'";
 
 // USER SETTING
 

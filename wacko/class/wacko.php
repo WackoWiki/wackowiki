@@ -5165,7 +5165,7 @@ class Wacko
 			"SELECT
 				u.user_id, u.user_name, u.real_name, u.password, u.email, u.account_status, u.account_type,
 				u.enabled, u.signup_time, u.change_password, u.user_ip, u.email_confirm, u.last_visit,
-				u.last_mark, u.login_count, u.lost_password_request_count, u.failed_login_count, u.total_pages,
+				u.last_mark, u.login_count, u.password_request_count, u.failed_login_count, u.total_pages,
 				u.total_revisions, u.total_comments, u.total_uploads,
 				s.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.typografica,
 				s.theme, s.autocomplete, s.numerate_links, s.diff_mode, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
@@ -5374,13 +5374,13 @@ class Wacko
 
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .
-				"last_visit						= UTC_TIMESTAMP(), " .
-				"change_password				= '', " .
-				"login_count					= login_count + 1, " .
-				"failed_login_count				= 0, " .
-				"lost_password_request_count	= 0 " . // STS value unused
+				"last_visit					= UTC_TIMESTAMP(), " .
+				"change_password			= '', " .
+				"login_count				= login_count + 1, " .
+				"failed_login_count			= 0, " .
+				"password_request_count		= 0 " . // STS value unused
 			"WHERE " .
-				"user_id						= " . (int) $user['user_id'] . " " .
+				"user_id					= " . (int) $user['user_id'] . " " .
 			"LIMIT 1");
 	}
 

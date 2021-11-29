@@ -104,8 +104,8 @@ if (@$_POST['_action'] === 'forgot_password')
 		// update table
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .
-				"lost_password_request_count = lost_password_request_count + 1, ". // value unused
-				"change_password = " . $this->db->q($code_hash) . " " .
+				"password_request_count	= password_request_count + 1, ". // value unused
+				"change_password		= " . $this->db->q($code_hash) . " " .
 			"WHERE user_id = " . (int) $user['user_id'] . " " .
 			"LIMIT 1");
 

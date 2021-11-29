@@ -326,7 +326,7 @@ $tbl_user =
 		last_visit DATETIME NULL DEFAULT NULL,
 		last_mark DATETIME NULL DEFAULT NULL,
 		login_count INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		lost_password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',
+		password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',
 		failed_login_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0',
 		total_pages INT(10) UNSIGNED NOT NULL DEFAULT '0',
 		total_revisions INT(10) UNSIGNED NOT NULL DEFAULT '0',
