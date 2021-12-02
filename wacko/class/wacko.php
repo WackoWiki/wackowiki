@@ -5935,30 +5935,23 @@ class Wacko
 		}
 
 		// if current user is owner or admin, return true. they can do anything!
-		if (!in_array($user_name, ['', GUEST]))
+		if (!in_array($user_name, ['', GUEST])
+			&& ($this->is_owner($page_id) || $this->is_admin()))
 		{
-			if ($this->is_owner($page_id) || $this->is_admin())
+			#Ut::debug_print_r($this->_acl['list']);
+			$acl = explode("\n", $this->_acl['list']);
+
+			if (!in_array('*', $acl) && !in_array('$', $acl))
 			{
-				#Ut::debug_print_r($this->_acl['list']);
-				$acl = explode("\n", $this->_acl['list']);
-
-				if (!in_array('*', $acl) && !in_array('$', $acl))
-				{
-					$this->_acl['list']	.= (!empty($this->_acl['list']) ? "\n" : '') . $user_name;
-				}
-
-				return true;
+				$this->_acl['list']	.= (!empty($this->_acl['list']) ? "\n" : '') . $user_name;
 			}
+
+			return true;
 		}
 
-		if (isset($acl['list']))
-		{
-			return $this->check_acl($user_name, $acl['list'], true);
-		}
-		else
-		{
-			return false;
-		}
+		return isset($acl['list'])
+			? $this->check_acl($user_name, $acl['list'], true)
+			: false;
 	}
 
 	/**
@@ -6219,7 +6212,10 @@ class Wacko
 			$mode = 'custom';
 		}
 
-		return '<a href="' . $link . '" title="' . $this->_t('AccessMode') . '" class="tag acl-' . $mode . '">' . $this->_t($acl_modes[$mode]) . '</a>';
+		return
+			'<a href="' . $link . '" title="' . $this->_t('AccessMode') . '" class="tag acl-' . $mode . '">' .
+				$this->_t($acl_modes[$mode]) .
+			'</a>';
 	}
 
 	// WATCHES
