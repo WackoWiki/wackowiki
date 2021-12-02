@@ -1828,7 +1828,7 @@ class Wacko
 				// create appropriate acls
 				if (mb_strstr($this->context[$this->current_context], '/') && !$comment_on_id)
 				{
-					$root			= preg_replace( '/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context] );
+					$root			= preg_replace('/^(.*)\\/([^\\/]+)$/u', '$1', $this->context[$this->current_context]);
 					$root_id		= $this->get_page_id($root);
 					$write_acl		= $this->load_acl($root_id, 'write');
 
@@ -2357,7 +2357,7 @@ class Wacko
 		$tag				= $this->db->users_page . '/' . $user_name;
 		// add your user page template here
 		$user_page_template	= '**((user:' . $user_name . ' ' . $user_name . '))** (' . $this->format('::+::', 'pre_wacko') . ')';
-		$change_summary		= $this->_t('NewUserAccount'); //'auto created';
+		$change_summary		= $this->_t('NewUserAccount');
 
 		// add user page
 		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
@@ -4550,7 +4550,7 @@ class Wacko
 	{
 		if (isset($this->linktable)) // no linktable? we are not tracking!
 		{
-			$this->linktable[$link_type][mb_strtolower($tag)] = $tag;
+			$this->linktable[$link_type][$tag] = $tag;
 		}
 	}
 
@@ -5852,12 +5852,12 @@ class Wacko
 					// work correctly.
 					if (!empty($page_id))
 					{
-						$tag = mb_strtolower($this->get_page_tag($page_id));
+						$tag = $this->get_page_tag($page_id);
 					}
 					else
 					{
 						// new page which is to be created
-						$tag = mb_strtolower($new_tag);
+						$tag = $new_tag;
 					}
 
 					if ($parent_id = $this->get_parent_id($tag))
@@ -7128,7 +7128,7 @@ class Wacko
 		$is_root	= false;
 
 		// check if current page is home page
-		if (mb_strtolower($this->config['root_page']) == mb_strtolower($this->tag))
+		if ($this->config['root_page'] == $this->tag)
 		{
 			$is_root = true;
 		}
