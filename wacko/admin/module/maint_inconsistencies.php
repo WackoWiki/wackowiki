@@ -260,7 +260,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					c.comment_on_id <> 0 AND
 					p.page_id IS NULL");
 
-			$inconsistencies['2.8'] = ['comment without parent page', count($parent_page)];
+			$inconsistencies['2.12'] = ['comment without parent page', count($parent_page)];
 				// -> DELETE
 
 			// 3.1 usergroup_member without group
