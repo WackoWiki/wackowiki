@@ -1123,7 +1123,7 @@ class WackoFormatter
 				for ($i = 0; $i < $new_indent_level - $old_level; $i++)
 				{
 					$result .= $opener;
-					array_push($closers, $closer);
+					$closers[] = $closer;
 				}
 			}
 			else if ($new_indent_level < $old_level)
@@ -1137,7 +1137,7 @@ class WackoFormatter
 			{
 				$result .= array_pop($closers);
 				$result .= $opener;
-				array_push($closers, $closer);
+				$closers[] = $closer;
 			}
 
 			$old_level	= $new_indent_level;
