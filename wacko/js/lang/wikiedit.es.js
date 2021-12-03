@@ -9,7 +9,7 @@ lang = {
 	HelpAbout :				"Ayuda & Acerca de",
 	HelpFormatting :		"Ayuda",
 	HelpFormattingTip :		"Ayuda de formatear el Wiki",
-	HelpFormattingPage :	"Doc/English/Formatting",
+	HelpFormattingPage :	"Doc/Español/ReglasFormato",
 
 	Heading1 :				"Título 1",
 	Heading2 :				"Título 2",
