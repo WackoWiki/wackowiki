@@ -418,7 +418,7 @@ class SafeHTML
 
 		if (in_array($name, $this->deleteTagsContent))
 		{
-			array_push($this->dcStack, $name);
+			$this->dcStack[] = $name;
 			$this->dcCounter[$name] = isset($this->dcCounter[$name])
 				? $this->dcCounter[$name] + 1
 				: 1;
@@ -488,13 +488,13 @@ class SafeHTML
 
 		if ($name == 'li')
 		{
-			array_push($this->liStack, $this->listScope);
+			$this->liStack[] = $this->listScope;
 		}
 
 		$this->xhtml .= '<' . $name;
 		$this->writeAttrs($attrs);
 		$this->xhtml .= '>';
-		array_push($this->stack, $name);
+		$this->stack[] = $name;
 		$this->counter[$name] = isset($this->counter[$name])
 			? ($this->counter[$name] + 1)
 			: 1;

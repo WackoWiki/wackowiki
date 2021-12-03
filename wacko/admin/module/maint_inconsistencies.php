@@ -13,7 +13,7 @@ $_mode = 'maint_inconsistencies';
 $module[$_mode] = [
 		'order'	=> 600,
 		'cat'	=> 'maintenance',
-		'status'=> (RECOVERY_MODE ? false : true),
+		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Inconsistencies
 		'title'	=> $engine->_t($_mode)['title'],	// Fixing Data Inconsistencies
@@ -113,7 +113,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id is NULL");
 
-			$inconsistencies['1.5'] = ['auth_token without user', count($watches)];
+			$inconsistencies['1.6'] = ['auth_token without user', count($watches)];
 				// -> DELETE
 
 			// 2. without page
@@ -273,7 +273,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 					c.comment_on_id <> 0 AND
 					p.page_id IS NULL");
 
-			$inconsistencies['2.8'] = ['comment without parent page', count($parent_page)];
+			$inconsistencies['2.12'] = ['comment without parent page', count($parent_page)];
 				// -> DELETE
 
 			// 3.1 usergroup_member without group
@@ -490,7 +490,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id is NULL");
 
-			$_solved['1.5'] = ['auth_token without user', $engine->config->affected_rows];
+			$_solved['1.6'] = ['auth_token without user', $engine->config->affected_rows];
 
 			// 2. without page
 			// 2.1 acl without page

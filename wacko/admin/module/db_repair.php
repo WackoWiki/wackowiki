@@ -96,7 +96,7 @@ function admin_db_repair(&$engine, &$module, &$tables)
 
 		if ($problems)
 		{
-			echo '<p>' . $engine->_t('TableNotRepaired') . '</p>' .   '';
+			echo '<p>' . $engine->_t('TableNotRepaired') . '</p>';
 			$problem_output = '';
 
 			foreach ($problems as $table => $problem)

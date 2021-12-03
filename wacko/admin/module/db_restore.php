@@ -125,7 +125,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" class="t-left nowrap">' .
-								$engine->_t('BackupCluster') . ': ' . ($log[2] ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+								$engine->_t('BackupCluster') . ': ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
 						echo '<tr>' .
@@ -245,7 +245,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 				$engine->_t('RestoreParameters') . ':' . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedKeys') . ': ' . ($ikeys === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n" .
 				"\t" . $engine->_t('IgnoreDuplicatedFiles') . ': ' . ($ifiles === true ? $engine->_t('RestoreYes') : $engine->_t('RestoreNo') ) . "\n\n" .
-				$engine->_t('SavedCluster') . ': ' . ($log[2] ? $log[2] : $engine->_t('RestoreNo')) . "\n" .
+				$engine->_t('SavedCluster') . ': ' . ($log[2] ?: $engine->_t('RestoreNo')) . "\n" .
 				"\t" . Ut::perc_replace($engine->_t(
 					($log[2]
 						? 'DataProtection'
@@ -522,7 +522,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 						echo '<td><table>';
 							// cluster root
 							echo '<tr><th colspan="3" class="t-left nowrap">' .
-									$engine->_t('BackupCluster') . ': ' . ($log[2] ? $log[2] : '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+									$engine->_t('BackupCluster') . ': ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents
 							echo '<tr>' .

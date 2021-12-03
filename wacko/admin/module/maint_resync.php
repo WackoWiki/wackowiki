@@ -13,7 +13,7 @@ $_mode = 'maint_resync';
 $module[$_mode] = [
 		'order'	=> 620,
 		'cat'	=> 'maintenance',
-		'status'=> (RECOVERY_MODE ? false : true),
+		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Data Synchronization
 		'title'	=> $engine->_t($_mode)['title'],	// Synchronizing data
@@ -265,7 +265,7 @@ function admin_maint_resync(&$engine, &$module)
 					// recompile if necessary
 					if ($page['body_r'] == '')
 					{
-						$paragrafica	= ($page['comment_on_id'] ? false : true);
+						$paragrafica	= !$page['comment_on_id'];
 						$page['body_r']	= $engine->compile_body($page['body'], $page['page_id'], $paragrafica, true);
 					}
 

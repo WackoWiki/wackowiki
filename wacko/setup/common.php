@@ -6,10 +6,8 @@ function my_location()
 	global $config;
 
 	// run in tls mode?
-	if (($config['tls']
-		&& (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443'))
-		|| ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
-			|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443'))
+	if (((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
+		|| (isset($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == '443'))
 	)
 	{
 		$config['base_url'] =	str_replace('http://', 'https://', $config['base_url']);

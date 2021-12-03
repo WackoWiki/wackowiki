@@ -1778,7 +1778,7 @@ class Wacko
 			$body			= $this->format($body, 'pre_wacko');
 
 			// making page body components
-			$paragrafica	= ($comment_on_id ? false : true);
+			$paragrafica	= !$comment_on_id;
 			$body_r			= $this->compile_body($body, $page_id, $paragrafica, false);
 			$body_toc		= $this->body_toc ?? null;
 
@@ -7008,7 +7008,7 @@ class Wacko
 					{
 						if ($toc_item[0] != $this->tag)
 						{
-							array_push($this->toc_context, $toc_item[0]);
+							$this->toc_context[] = $toc_item[0];
 							$_toc = array_merge($_toc, $this->build_toc($toc_item[0], $from, $to, $link));
 							array_pop($this->toc_context);
 						}

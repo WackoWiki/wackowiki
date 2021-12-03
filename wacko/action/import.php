@@ -20,7 +20,7 @@ if (!defined('IN_WACKO'))
 if ($this->is_admin())
 {
 	// show FORM
-	if (!isset($_POST['_to']) || empty($_POST['_to']))
+	if (empty($_POST['_to']))
 	{
 		if (isset($_POST['_to']))
 		{

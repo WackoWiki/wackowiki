@@ -37,9 +37,7 @@ write_config_hidden_nodes($config_parameters);
 		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 			? DB_MIN_VERSION['mariadb']
 			: DB_MIN_VERSION['mysql'];
-		$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
-			? true
-			: false;
+		$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
 	}
 
 	/*

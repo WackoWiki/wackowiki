@@ -164,9 +164,7 @@ switch ($config['db_driver'])
 			$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 				? DB_MIN_VERSION['mariadb']
 				: DB_MIN_VERSION['mysql'];
-			$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
-				? true
-				: false;
+			$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
 
 			echo '<li>' . ($valid_db_version
 				? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
@@ -177,7 +175,7 @@ switch ($config['db_driver'])
 					output_image($valid_db_version)
 				) . '</li>';
 
-			$fatal_error = $valid_db_version ? false : true;
+			$fatal_error = !$valid_db_version;
 
 			echo '</ul>' . "\n";
 			echo '<br>' . "\n";
@@ -348,9 +346,7 @@ switch ($config['db_driver'])
 		$min_db_version		= preg_match('/MariaDB/', $db_version, $matches)
 			? DB_MIN_VERSION['mariadb']
 			: DB_MIN_VERSION['mysql'];
-		$valid_db_version	= version_compare($db_version, $min_db_version , '>=')
-			? true
-			: false;
+		$valid_db_version	= (bool) version_compare($db_version, $min_db_version, '>=');
 
 		echo '<li>' . ($valid_db_version
 			? $lang['TestDatabaseVersion'] . ' ' . output_image($valid_db_version)
@@ -361,7 +357,7 @@ switch ($config['db_driver'])
 				output_image($valid_db_version)
 			) . '</li>';
 
-		$fatal_error = $valid_db_version ? false : true;
+		$fatal_error = !$valid_db_version;
 
 		echo '</ul>' . "\n";
 		echo '<br>' . "\n";
