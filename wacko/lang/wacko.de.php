@@ -125,7 +125,6 @@ $wacko_translation = [
 	// notifications
 	'EmailHello'				=> 'Hallo ',
 	'EmailModerator'			=> 'Moderator',
-	'EmailGoodbye'				=> 'MfG, ',
 	'WatchedPageChanged'		=> 'Seite wurde geändert ',
 	'SomeoneChangedThisPage'	=> ' änderte eine von dir beobachtete Seite: ',
 	'NewPageCreatedSubj'		=> 'Eine neue Seite',
@@ -753,9 +752,6 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',
 	'UsersPMBody'				=> 'Diese Nachricht wurde dir durch den Benutzer %1 geschickt.',
 	'UsersPMReply'				=> 'Um auf diese Email-Nachricht zu antworten, klicke den folgenden Link (verwende nicht die Schaltfläche \'Antworten\' in deinem Mailprogramm):',
-	'PMAbuseInfo'				=> 'Hinweis: Falls diese Nachricht Spam enthält, beleidigt oder anderweitig gegen die Regeln der Seite verstößt, ' .
-								   'dann sende sie bitte (unter Verwendung der Schaltfläche \'Weiterleiten\' ' .
-								   'in deinem Mailprogramm) an diese Adresse %1.',
 	'UsersPMNotLoggedIn'		=> 'Du bist nicht im System angemeldet und kannst daher keine persönlichen Nachrichten an andere Nutzer übermitteln.',
 
 	// rating handler

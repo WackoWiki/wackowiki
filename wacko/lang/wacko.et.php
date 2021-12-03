@@ -125,7 +125,6 @@ $wacko_translation = [
 	// notifications
 	'EmailHello'				=> 'Tere ',
 	'EmailModerator'			=> 'Moderaator',
-	'EmailGoodbye'				=> 'Tervitades, ',
 	'WatchedPageChanged'		=> 'Jälgitul leht oli muudetud ',
 	'SomeoneChangedThisPage'	=> ' muudetud vaadatav leht: ',
 	'NewPageCreatedSubj'		=> 'A new page',
@@ -753,9 +752,6 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'Selle teate on teile saatnud kasutaja %1.',
 	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
-	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
-								   'violates the rules of the site, please send it (using the button Forward /' .
-								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'Te pole süsteemi sisse logitud ega saa kasutajatele isiklikke sõnumeid saata.',
 
 	// rating handler

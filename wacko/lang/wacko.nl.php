@@ -125,7 +125,6 @@ $wacko_translation = [
 	// notifications
 	'EmailHello'				=> 'Hallo ',
 	'EmailModerator'			=> 'Moderator',
-	'EmailGoodbye'				=> 'Met vriendelijke groet, ',
 	'WatchedPageChanged'		=> 'Pagina veranderd ',
 	'SomeoneChangedThisPage'	=> ' heeft deze pagina aangepast: ',
 	'NewPageCreatedSubj'		=> 'Een nieuwe pagina',
@@ -753,9 +752,6 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Persoonlijk bericht dat in platte tekst naar de gebruiker wordt gestuurd.',
 	'UsersPMBody'				=> 'Dit bericht is door de gebruiker naar u verzonden %1.',
 	'UsersPMReply'				=> 'Om deze e-mail te beantwoorden, klik op de volgende link (gebruik niet de Reply-knop / Reply in mailer):',
-	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
-								   'violates the rules of the site, please send it (using the button Forward /' .
-								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'U bent niet geregistreerd in het systeem en kunt geen persoonlijke berichten naar gebruikers sturen.',
 
 	// rating handler
