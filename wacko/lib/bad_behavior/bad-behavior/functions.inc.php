@@ -4,7 +4,7 @@
 
 // Quick and dirty check for an IPv6 address
 function is_ipv6($address) {
-	return (strpos($address, ":")) ? TRUE : FALSE;
+	return (bool)strpos($address, ":");
 }
 
 // stripos() needed because stripos is only present on PHP 5

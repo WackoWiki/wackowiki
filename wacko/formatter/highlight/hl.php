@@ -19,7 +19,7 @@ if ($options['_default'])
 		};
 	}
 
-	$table = $numbers == HL_NUMBERS_TABLE ? true : false;
+	$table = $numbers == HL_NUMBERS_TABLE;
 
 	$hl =& Text_Highlighter::factory(strtoupper($language), ['numbers' => $numbers, 'numbers_start' => $start]);
 

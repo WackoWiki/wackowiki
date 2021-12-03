@@ -240,7 +240,7 @@ if ($this->has_access('read'))
 			|| (($this->page['body_toc'] == '') && $this->db->paragrafica))
 		{
 			// store to DB (0 -> revision)
-			$store					= ($this->page['latest'] ? true : false);
+			$store					= (bool) $this->page['latest'];
 			$this->page['body_r']	= $this->compile_body($this->page['body'], $this->page['page_id'], true, $store);
 
 			$this->http->invalidate_page($this->tag);

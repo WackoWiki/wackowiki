@@ -1778,7 +1778,7 @@ class Wacko
 			$body			= $this->format($body, 'pre_wacko');
 
 			// making page body components
-			$paragrafica	= ($comment_on_id ? false : true);
+			$paragrafica	= !$comment_on_id;
 			$body_r			= $this->compile_body($body, $page_id, $paragrafica, false);
 			$body_toc		= $this->body_toc ?? null;
 
@@ -3532,7 +3532,7 @@ class Wacko
 			$tpl	= 'jabber';
 		}
 		// HTML anchor #...
-		else if (preg_match('/^#/', $tag))
+		else if (str_starts_with($tag, '#'))
 		{
 			$href	= $tag;
 			$tpl	= 'anchor';
