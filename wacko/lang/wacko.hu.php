@@ -125,7 +125,6 @@ $wacko_translation = [
 	// notifications
 	'EmailHello'				=> 'Hello ',
 	'EmailModerator'			=> 'Moderátor',
-	'EmailGoodbye'				=> 'Yours, ',
 	'WatchedPageChanged'		=> 'Page changed ',
 	'SomeoneChangedThisPage'	=> ' changed a page that you are watching: ',
 	'NewPageCreatedSubj'		=> 'Egy új oldal',
@@ -752,9 +751,6 @@ $wacko_translation = [
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'Ezt az üzenetet a %1 felhasználó küldte neked.',
 	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
-	'PMAbuseInfo'				=> 'Note: If this message is spam, contains abusive or otherwise ' .
-								   'violates the rules of the site, please send it (using the button Forward /' .
-								   'Forward your mail program) to address %1.',
 	'UsersPMNotLoggedIn'		=> 'Nincs bejelentkezve a rendszerbe, és nem küldhet személyes üzenetet a felhasználóknak.',
 
 	// Properties

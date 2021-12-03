@@ -2429,12 +2429,10 @@ class Wacko
 					Ut::amp_decode($body) . "\n\n" .
 
 					$this->_t('EmailDoNotReply') . "\n\n" .
-					# $this->_t('EmailGoodbye') . "\n" .
 					$this->db->site_name . "\n" .
 					$this->db->base_url;
 
 		$charset	= $this->get_charset($user['user_lang']);
-		# Diag::dbg('ORANGE', $user['user_name'], $user['user_lang'], $charset);
 
 		$this->set_language($save, true);
 
@@ -2547,9 +2545,6 @@ class Wacko
 							'ref'		=> Ut::http64_encode(gzdeflate($msg_id . '@@' . $subject, 9)),
 							'#'			=> 'contacts'],
 							null, null, null, true, true)) . "\n\n";
-
-						// XXX: do we really need this, less clutter we want
-						# Ut::perc_replace($this->_t('PMAbuseInfo'), $this->db->abuse_email);
 
 		$this->send_user_email($user, $subject, $body, $header);
 		$this->set_language($save, true);
