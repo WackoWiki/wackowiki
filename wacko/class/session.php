@@ -160,7 +160,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		$id_from_cookie = (!$id && ($id = $this->get_cookie($this->name)));
 
 		if ($id && $this->cf_referer_check
-			&& strstr($_SERVER['HTTP_REFERER'], $this->cf_referer_check) === false)
+			&& !str_contains($_SERVER['HTTP_REFERER'], $this->cf_referer_check))
 		{
 			$id = null;
 		}

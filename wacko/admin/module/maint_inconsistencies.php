@@ -113,7 +113,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id is NULL");
 
-			$inconsistencies['1.5'] = ['auth_token without user', count($watches)];
+			$inconsistencies['1.6'] = ['auth_token without user', count($watches)];
 				// -> DELETE
 
 			// 2. without page
@@ -477,7 +477,7 @@ function admin_maint_inconsistencies(&$engine, &$module)
 				WHERE
 					u.user_id is NULL");
 
-			$_solved['1.5'] = ['auth_token without user', $engine->config->affected_rows];
+			$_solved['1.6'] = ['auth_token without user', $engine->config->affected_rows];
 
 			// 2. without page
 			// 2.1 acl without page
