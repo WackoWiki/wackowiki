@@ -19,7 +19,7 @@ class Diag
 
 		if ($config['debug'] >= 1 && !str_contains($http->method, '.xml') && $http->method != 'print' && $http->method != 'wordprocessor')
 		{
-			if (($config['debug_admin_only'] && $engine->is_admin()) || $config['debug_admin_only'] == false)
+			if (($config['debug_admin_only'] && $engine->is_admin()) || !$config['debug_admin_only'])
 			{
 				$overall_time = microtime(1) - WACKO_STARTED;
 

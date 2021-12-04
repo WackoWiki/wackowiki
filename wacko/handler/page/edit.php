@@ -334,7 +334,7 @@ if ($this->has_access('read')
 	// -> workaround: [ ' body | pre ' ]
 	$tpl->body		= Ut::html($body);  // -> [ ' body | pre ' ]
 
-	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] == false)
+	if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 	{
 		// edit note
 		if ($this->db->edit_summary != 0)

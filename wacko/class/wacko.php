@@ -918,7 +918,7 @@ class Wacko
 		{
 			if (isset($this->page_cache[$page_id]))
 			{
-				if ($this->page_cache[$page_id]['mdonly'] == false
+				if (!$this->page_cache[$page_id]['mdonly']
 					|| (isset($this->page_cache[$page_id]['mdonly']) && $this->page_cache[$page_id]['mdonly'] == $metadata_only))
 				{
 					return $this->page_cache[$page_id];
@@ -6548,7 +6548,7 @@ class Wacko
 			{
 				if ($i < $size && $this->page['page_id'] != $link[0])
 				{
-					if ($titles == false)
+					if (!$titles)
 					{
 						$result .= $this->link($link[1], '', $link[1]) . $separator;
 					}
@@ -6565,7 +6565,7 @@ class Wacko
 				$i++;
 			}
 
-			if ($titles == false)
+			if (!$titles)
 			{
 				$result .= $this->page['tag'];
 			}

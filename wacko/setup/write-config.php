@@ -120,7 +120,7 @@ echo		'<li>' .
 					'<code>setup/</code>') .
 			'</li>' . "\n";
 
-if ($write_file == false)
+if (!$write_file)
 {
 	echo	'<li>' .
 				Ut::perc_replace($lang['ErrorGivePrivileges'],

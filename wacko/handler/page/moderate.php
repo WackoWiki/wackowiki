@@ -92,7 +92,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$forum_context	= $engine->forum;
 	$engine->forum	= true;
 
-	if ($topics == false || $base == false)
+	if (!$topics || !$base)
 	{
 		return false;
 	}
@@ -225,7 +225,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$new_page_id	= $engine->get_page_id($new_tag);
 
 	// bug-resistent check: has page been really resaved?
-	if ($new_page_id != true)
+	if (!$new_page_id)
 	{
 		$engine->forum = $forum_context;
 		return false;
@@ -502,7 +502,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				// ok, then rename page
-				if ($tag != '' && $error != true)
+				if ($tag != '' && !$error)
 				{
 					moderate_rename_topic($this, $old_tag, $this->tag . '/' . $tag, $title);
 					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $this->tag . '/' . $tag . ' ' . $title));
@@ -871,7 +871,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 
 				// ok, then rename page
-				if ($tag != '' && $error != true)
+				if ($tag != '' && !$error)
 				{
 					moderate_rename_topic($this, $old_tag, $new_tag, $title);
 					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $new_tag . ' ' . $title));
@@ -920,12 +920,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			// actually remove topics
 			if (isset($_POST['accept']))
 			{
-				if (array_filter($set) == false)
+				if (!array_filter($set))
 				{
 					$error = $this->_t('ModerateNoItemChosen');
 				}
 
-				if ($error != true)
+				if (!$error)
 				{
 					foreach ($set as $page_id)
 					{
@@ -992,14 +992,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					{
 						$error = $this->_t('ModerateMoveNotExists');
 					}
-					else if (array_filter($set) == false)
+					else if (!array_filter($set))
 					{
 						$error = $this->_t('ModerateNoItemChosen');
 					}
 				}
 
 				// split topic or move comments
-				if ($tag != '' && $error != true)
+				if ($tag != '' && !$error)
 				{
 					// get comments ids according to the splitting scheme
 					if (isset($_POST['scheme']) && $_POST['scheme'] == 'selected')
