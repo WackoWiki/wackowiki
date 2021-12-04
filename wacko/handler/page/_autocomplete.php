@@ -208,7 +208,7 @@ foreach ($pages as $page)
 
 $found = false;
 
-if (count($out) > 0)
+if (!empty($out))
 {
 	$found = $out[0];
 }
