@@ -122,7 +122,7 @@ echo "</select>\n";
 ?>
 	<br>
 <?php
-if ($config['is_update'] == false)
+if (!$config['is_update'])
 {
 	echo $separator;
 	?>
@@ -186,7 +186,7 @@ if ($config['is_update'] == false)
 	<?php echo $separator;
 }
 
-if ($config['is_update'] == false)
+if (!$config['is_update'])
 {?>
 	<h2><?php echo $lang['DeleteTables'];?></h2>
 	<p class="notop"><?php echo $lang['DeleteTablesDesc']; ?></p>

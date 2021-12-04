@@ -32,7 +32,7 @@ if (@$_GET['action'] === 'logout')
 	$this->go_back($this->db->root_page);
 }
 
-if (($user = $this->get_user()))
+if ($user = $this->get_user())
 {
 	// user is logged in; display logout form
 	$tpl->u_href	= $this->href();

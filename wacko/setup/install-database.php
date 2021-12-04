@@ -56,7 +56,7 @@ if (empty($config['noreply_email']))
 }
 
 // check for language related default values
-if ($config['is_update'] == false)
+if (!$config['is_update'])
 {
 	$config = array_merge($config, $lang['ConfigDefaults']);
 }

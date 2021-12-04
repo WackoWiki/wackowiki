@@ -30,7 +30,7 @@ write_config_hidden_nodes($config_parameters);
 	<p class="notop"><?php echo $lang['SiteNameDesc'];?></p>
 	<input type="text" maxlength="250" id="site_name" name="config[site_name]" value="<?php echo $config['is_update'] ? $config['site_name'] : ($lang['SiteNameDefault'] ?? $config['site_name']); ?>" class="text_input" required>
 <?php
-if ($config['is_update'] == false)
+if (!$config['is_update'])
 {
 	echo $separator; ?>
 	<label class="label_top" for="root_page"><?php echo $lang['HomePage'];?></label>
@@ -59,7 +59,7 @@ else
 
 <?php
 
-if (($config['is_update'] && $config['multilanguage']) || $config['is_update'] == false)
+if (($config['is_update'] && $config['multilanguage']) || !$config['is_update'])
 {
 	$langs = available_languages();
 }
@@ -100,7 +100,7 @@ foreach ($langs as $_lang)
 
 echo "\t</tr>\n</table>\n";
 
-if ($config['is_update'] == false)
+if (!$config['is_update'])
 {
 	echo $separator;
 
