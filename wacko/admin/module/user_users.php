@@ -102,12 +102,11 @@ function admin_user_users(&$engine, &$module)
 	//   list change/update processing
 	/////////////////////////////////////////////
 
-	#$user_id = (int) ($_POST['user_id'] ?? ($_GET['user_id'] ?? ''));
 	$user_id	= (int) ($_REQUEST['user_id'] ?? '');
 	$_order		= $_GET['order'] ?? '';
 
 	// get user
-	if (isset($_GET['user_id']) || isset($_POST['user_id']))
+	if ($user_id)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status, u.email_confirm " .
@@ -329,13 +328,13 @@ function admin_user_users(&$engine, &$module)
 	// TODO: reassign acls, uploads, pages and revisions, delete user page
 	else if (isset($_POST['delete']) && ($user_id || $set))
 	{
-		if (array_filter($set) == false && empty($user_id))
+		if (!array_filter($set) && empty($user_id))
 		{
 			$error = $engine->_t('ModerateNoItemChosen'); // no user selected
 			$engine->show_message($error, 'error');
 		}
 
-		if ($error != true || !empty($user_id))
+		if (!$error || !empty($user_id))
 		{
 			if (!empty($user_id))
 			{

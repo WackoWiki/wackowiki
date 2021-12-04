@@ -296,7 +296,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					if (($table == $tables[$engine->db->table_prefix . 'acl']['name']
 					||   $table == $tables[$engine->db->table_prefix . 'file_link']['name']
 					||   $table == $tables[$engine->db->table_prefix . 'page_link']['name'])
-					&& $ikeys == false)
+					&& !$ikeys)
 					{
 						$mode = 'REPLACE';
 					}

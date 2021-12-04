@@ -5,7 +5,7 @@ $page_lang = 'fr';
 // insert these pages only for default language
 if ($config['language'] == $page_lang)
 {
-	if ($config['is_update'] == false)
+	if (!$config['is_update'])
 	{
 		$home_page_body		=
 			'file:/wacko_logo.png?right' . "\n" .

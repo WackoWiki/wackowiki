@@ -6557,7 +6557,7 @@ class Wacko
 			{
 				if ($i < $size && $this->page['page_id'] != $link[0])
 				{
-					if ($titles == false)
+					if (!$titles)
 					{
 						$result .= $this->link($link[1], '', $link[1]) . $separator;
 					}
@@ -6574,7 +6574,7 @@ class Wacko
 				$i++;
 			}
 
-			if ($titles == false)
+			if (!$titles)
 			{
 				$result .= $this->page['tag'];
 			}

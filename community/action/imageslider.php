@@ -8,7 +8,9 @@ if (!defined('IN_WACKO'))
 /*
 	Showing images as slider for uploaded by {{upload}} files
 
-	version: 0.6
+	The sole condition is that all the images must be exactly the same size.
+
+	version: 0.7
 
 	{{imageslider
 		[page="PageName" or global=1]
@@ -17,9 +19,9 @@ if (!defined('IN_WACKO'))
 		[picture=1]
 		[max=number]
 	}}
- */
 
-// The sole condition is that all the images must be exactly the same size.
+	https://wackowiki.org/doc/Dev/PatchesHacks/ImageSlider
+ */
 
 $page_id = '';
 
@@ -311,7 +313,7 @@ if ($can_view)
 					}
 
 					$file_name	= $file['file_name'];
-					$text		= ($picture == false) ? $file_name : '';
+					$text		= (!$picture) ? $file_name : '';
 					$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
 					?>

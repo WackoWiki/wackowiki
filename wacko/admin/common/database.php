@@ -259,7 +259,7 @@ function get_table(&$engine, $table, $drop = true)
 	$field_query	= "SHOW FULL COLUMNS FROM $table";
 	$key_query		= "SHOW KEYS FROM $table";
 
-	if ($drop == true)
+	if ($drop)
 	{
 		$schema_create .= "DROP TABLE IF EXISTS `$table`;\n";
 	}
@@ -367,7 +367,7 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 	$result = '';
 
 	// sql clauses
-	if ($root == true && $tables[$table]['where'] == true)
+	if ($root && $tables[$table]['where'])
 	{
 		// all cluster related page_id's
 		static $cluster_pages;
@@ -511,7 +511,7 @@ function get_files(&$engine, $pack, $dir, $root)
 		while (false !== ($file_name = readdir($dh)))
 		{
 			// for cluster backup process only affected cluster files
-			if ($root == true && $cluster == true
+			if ($root && $cluster
 				&& (preg_match('/@{1}((d*[0-9])+)@{1}/sm', $file_name, $matches)
 					&& !in_array($matches[1], $engine->cluster_pages[$root]))
 			)

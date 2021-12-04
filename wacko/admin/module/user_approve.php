@@ -153,13 +153,13 @@ function admin_user_approve(&$engine, &$module)
 	// approve user
 	else if (isset($_POST['approve']) && ($user_id || $set))
 	{
-		if (array_filter($set) == false && empty($user_id))
+		if (!array_filter($set) && empty($user_id))
 		{
 			$error = $engine->_t('ApproveNotExists');
 			$engine->show_message($error);
 		}
 
-		if ($error != true || !empty($user_id))
+		if (!$error || !empty($user_id))
 		{
 			if (!empty($user_id))
 			{

@@ -95,7 +95,7 @@ if ($mode == 'remove' && isset($file))
 	// 1.a REMOVE FILE CONFIRMATION
 	$tpl->enter('r_');
 
-	if (count($file) > 0)
+	if (!empty($file))
 	{
 		if ($this->is_admin()
 			|| ($file['page_id']
@@ -144,7 +144,7 @@ else if ($mode == 'label' && isset($file))
 	// 1.b LABEL FILE
 	$tpl->enter('l_');
 
-	if (count($file) > 0)
+	if (!empty($file))
 	{
 		if ($this->is_admin()
 			|| ($file['page_id']
@@ -177,7 +177,7 @@ else if ($mode == 'label' && isset($file))
 }
 else if (($mode == 'edit' || $mode == 'show') && isset($file))
 {
-	if (count($file) > 0)
+	if (!empty($file))
 	{
 		if ($file['page_id'])
 		{
@@ -323,7 +323,7 @@ else
 		$dontkeep	= (isset($_POST['dontkeep']) && $this->is_admin());
 		$file		= $get_file((int) $_POST['file_id']);
 
-		if (count($file) > 0)
+		if (!empty($file))
 		{
 			if ($this->is_admin()
 				|| ($file['page_id']
@@ -369,7 +369,7 @@ else
 
 		$file = $get_file((int) $_POST['file_id']);
 
-		if (count($file) > 0)
+		if (!empty($file))
 		{
 			if ($this->is_admin()
 				|| ($file['page_id']

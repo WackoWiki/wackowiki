@@ -9,7 +9,6 @@ function undef(param)
 //   * Session heart beat
 window.onload = function ()
 {
-	// alert('Load Test: OK');
 	all_init();
 };
 
@@ -18,7 +17,7 @@ var wikiedit;
 var dbclick = 'page';
 var edit;
 var timeout;
-var name;
+var ename;
 
 // initialize everything
 function all_init()
@@ -35,7 +34,7 @@ function all_init()
 
 	if (timeout)
 	{
-		userSessionHeartbeat(timeout, name);
+		userSessionHeartbeat(timeout, ename);
 	}
 
 	crit_init();
@@ -92,13 +91,9 @@ function weSave()
 	}
 }
 
-var DOTS = '#define x_width 2\n#define x_height 1\nstatic char x_bits[]={0x01}';
-// -----------------------------------------------------------------------------------------------
-// Confirms leaving the page when there are unsaved changes
-// Courtesy of http://htmlcoder.visions.ru/JavaScript/?26
+// confirms leaving the page when there are unsaved changes
 var root = window.addEventListener || window.attachEvent ? window : document.addEventListener ? document : null;
 var cf_modified = false;
-//var WIN_CLOSE_MSG = '\n' + lang.NotSavedWarning + '\n';
 
 function set_modified(e, strict_e)
 {
@@ -134,7 +129,7 @@ function check_cf()
 {
 	if (cf_modified)
 	{
-		return '\n' + lang.NotSavedWarning + '\n'; // WIN_CLOSE_MSG
+		return '\n' + lang.NotSavedWarning + '\n';
 	}
 }
 
@@ -143,7 +138,7 @@ function crit_init()
 	if (undef() == root.onbeforeunload) root.onbeforeunload = check_cf;
 	else return;
 
-	var thisformcf, oCurrForm;
+	var thisformcf, oCurrForm, oCurrFormElem;
 
 	for (var i = 0; oCurrForm = document.forms[i]; i++)
 	{

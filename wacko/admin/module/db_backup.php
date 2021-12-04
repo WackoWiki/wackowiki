@@ -100,7 +100,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 			foreach ($structure as $table)
 			{
 				// check whether table data was backed up
-				if (in_array($table, $data) && $root == false)
+				if (in_array($table, $data) && !$root)
 				{
 					$drop = 1;
 				}

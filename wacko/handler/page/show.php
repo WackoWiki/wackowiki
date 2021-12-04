@@ -101,7 +101,7 @@ if ($this->has_access('read'))
 					$latest['modified'] = date('Y-m-d H:i:s');
 				}
 
-				if ($latest['deleted'] && $this->is_admin() == false)
+				if ($latest['deleted'] && !$this->is_admin())
 				{
 					$message .= $this->_t('PageDeletedInfo');
 				}

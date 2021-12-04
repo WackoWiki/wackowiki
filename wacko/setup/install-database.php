@@ -66,7 +66,7 @@ if (!isset ($config['noreply_email']) || empty($config['noreply_email']))
 }
 
 // check for language related default values
-if ($config['is_update'] == false || version_compare($config['wacko_version'], '6.0.alpha1', '<'))
+if (!$config['is_update'] || version_compare($config['wacko_version'], '6.0.alpha1', '<'))
 {
 	$config = array_merge($config, $lang['ConfigDefaults']);
 }
