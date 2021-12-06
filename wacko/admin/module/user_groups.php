@@ -121,12 +121,12 @@ function admin_user_groups(&$engine, &$module)
 				echo $engine->form_open('add_group_member');
 
 				echo '<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
-				'<table class="formation">' .
-					'<tr>
+				'<table class="formation">
+					<tr>
 						<td>
 							<label for="new_member_id">' . $engine->_t('MembersAddNew') . '</label>
-						</td>' .
-						'<td>
+						</td>
+						<td>
 							<select id="new_member_id" name="new_member_id">
 								<option value=""></option>';
 
@@ -140,15 +140,15 @@ function admin_user_groups(&$engine, &$module)
 
 						echo '</select>
 						</td>
-					</tr>' .
-					'<tr>
+					</tr>
+					<tr>
 						<td>
 							<br>
-							<button type="submit" id="submit" name="add_member">' . $engine->_t('AddButton') . '</button> ' .
-							'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
-						'</td>
-					</tr>' .
-				'</table>
+							<button type="submit" id="submit" name="add_member">' . $engine->_t('AddButton') . '</button>
+							<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+						</td>
+					</tr>
+				</table>
 				<br>';
 
 				echo $engine->form_close();
@@ -230,8 +230,8 @@ function admin_user_groups(&$engine, &$module)
 				"LIMIT 1"))
 			{
 				$engine->set_message($engine->_t('GroupsAlreadyExists'));
-				$_POST['change'] = $_POST['group_id'];
-				$_POST['edit'] = 1;
+				$_POST['change']	= $_POST['group_id'];
+				$_POST['edit']		= 1;
 			}
 			else
 			{
@@ -287,28 +287,28 @@ function admin_user_groups(&$engine, &$module)
 		echo '<h2>' . $engine->_t('GroupAddNew') . '</h2>';
 		echo $engine->form_open('add_group');
 
-		echo '<table class="formation lined">' .
-				'<tr>
+		echo '<table class="formation lined">
+				<tr>
 					<th>
 						<label for="new_group_name">' . $engine->_t('GroupsAdd') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? '')) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" maxlength="100">
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="description">' . $engine->_t('GroupsDescription') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<input type="text" id="description" name="description" value="' . Ut::html(($_POST['description'] ?? '')) . '" size="50" maxlength="100">
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="moderator_id">' . $engine->_t('GroupsModerator') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<select id="moderator_id" name="moderator_id">
 							<option value=""></option>';
 
@@ -322,31 +322,31 @@ function admin_user_groups(&$engine, &$module)
 
 					echo '</select>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="open">' . $engine->_t('GroupsOpen') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<input type="checkbox" id="open" name="open" value="1" ' . (!isset($_POST['open']) ? ' checked' : '') . '>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="active">' . $engine->_t('GroupsActive') . '</label>
-	 				</th>' .
-					'<td>
+	 				</th>
+					<td>
 	 					<input type="checkbox" id="active" name="active" value="1" ' . (!isset($_POST['active']) ? ' checked' : '') . '>
 	 				</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<td colspan="2">
 	 					<br>
-	 					<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
-					'</td>
-				</tr>' .
-			'</table>
+	 					<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button>
+						<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+					</td>
+				</tr>
+			</table>
 			<br>';
 
 		echo $engine->form_close();
@@ -364,30 +364,30 @@ function admin_user_groups(&$engine, &$module)
 			echo $engine->form_open('edit_group');
 
 			echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
-				'<table class="formation lined">' .
-				'<tr>
+				'<table class="formation lined">
+				<tr>
 					<th>
 						<label for="new_group_name">' . Ut::perc_replace($engine->_t('GroupsRename'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<input type="text" id="new_group_name" name="new_group_name" value="' . Ut::html(($_POST['new_group_name'] ?? $usergroup['group_name'])) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" maxlength="100">
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="new_description">' . $engine->_t('GroupsDescription') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<input type="text" id="new_description" name="new_description" value="' . Ut::html(($_POST['new_description'] ?? $usergroup['description'])) . '" size="50" maxlength="100">
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="moderator_id">' . $engine->_t('GroupsModerator') . '</label>
-					</th>' .
-				'<td>
-					<select id="moderator_id" name="moderator_id">' .
-						'<option value=""></option> ';
+					</th>
+				<td>
+					<select id="moderator_id" name="moderator_id">
+						<option value=""></option>';
 
 				if ($users = $engine->load_users())
 				{
@@ -399,32 +399,32 @@ function admin_user_groups(&$engine, &$module)
 
 			echo '</select>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="open">' . $engine->_t('GroupsOpen') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<input type="checkbox" id="open" name="open" value="1" ' . (isset($_POST['open']) || $usergroup['open'] == 1 ? ' checked' : '') . '>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th>
 						<label for="active">' . $engine->_t('GroupsActive') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<input type="checkbox" id="active" name="active" value="1" ' . (isset($_POST['active']) || $usergroup['active'] == 1 ? ' checked' : '') . '>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<td colspan="2">
 						<br><small>' . $engine->_t('GroupsRenameInfo') . '</small>
 						<br><br>
-						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
-					'</td>
-				</tr>' .
-				'</table><br>';
+						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button>
+						<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+					</td>
+				</tr>
+				</table><br>';
 
 			echo $engine->form_close();
 		}
@@ -448,23 +448,21 @@ function admin_user_groups(&$engine, &$module)
 				echo $engine->form_open('delete_group');
 
 				echo '<input type="hidden" name="group_id" value="' . (int) $_POST['change'] . '">' . "\n" .
-					'<table class="formation lined">' .
-						'<tr>
+					'<table class="formation lined">
+						<tr>
 							<td>' .
 								Ut::perc_replace($engine->_t('GroupsDelete'), ' <code>' . Ut::html($usergroup['group_name']) . '</code>') . ' ' .
 								'<button type="submit" id="submit" name="delete">' . $engine->_t('Remove') . '</button> ' .
 								'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a>' .
-								'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>' .
-							'</td>
-						</tr>' .
-					'</table>
+								'<br><small>' . $engine->_t('GroupsDeleteInfo') . '</small>
+							</td>
+						</tr>
+					</table>
 					<br>';
 
 				echo $engine->form_close();
 			}
 		}
-
-		echo '<!-- end trying to delete group -->';
 	}
 	/////////////////////////////////////////////
 	//   building lists
@@ -617,10 +615,11 @@ function admin_user_groups(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons =	'<br>' .
-							'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
-							'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
-							'<button type="submit" id="delete-button" name="delete" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ';
+		$control_buttons =
+			'<br>' .
+			'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
+			'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
+			'<button type="submit" id="delete-button" name="delete" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ';
 
 		echo $control_buttons;
 
@@ -658,8 +657,7 @@ function admin_user_groups(&$engine, &$module)
 			foreach ($groups as $row)
 			{
 				echo '<tr>' . "\n" .
-						'<td>
-							<input type="radio" name="change" value="' . $row['group_id'] . '"></td>' .
+						'<td><input type="radio" name="change" value="' . $row['group_id'] . '"></td>' .
 						'<td>' . $row['group_id'] . '</td>' .
 						'<td class="t-left" style="padding: 0px 5px;"><strong><a href="' . $engine->href('', '', ['group_id' => $row['group_id']]) . '">' . $row['group_name'] . '</a></strong></td>' .
 						'<td>' . $row['description'] . '</td>' .
@@ -689,4 +687,3 @@ function admin_user_groups(&$engine, &$module)
 		echo $engine->form_close();
 	}
 }
-
