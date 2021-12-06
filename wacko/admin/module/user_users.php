@@ -104,6 +104,7 @@ function admin_user_users(&$engine, &$module)
 
 	$user_id	= (int) ($_REQUEST['user_id'] ?? '');
 	$_order		= $_GET['order'] ?? '';
+	$action		= $_POST['_action'] ?? null;
 
 	// get user
 	if ($user_id)
@@ -117,20 +118,26 @@ function admin_user_users(&$engine, &$module)
 			"LIMIT 1");
 	}
 
-	// add new user processing
-	if (isset($_POST['create']) && isset($_POST['user_name']))
+	if (isset($_POST['create']) || isset($_POST['edit']))
 	{
-		// create new account if possible
 		// passing vars from user input
 		$user_name		= Ut::strip_spaces($_POST['user_name']);
+		$realname		= (string) $_POST['realname'] ?? '';
 		$email			= Ut::strip_spaces($_POST['email']);
-		$password		= $_POST['password'];
-		$conf_password	= $_POST['conf_password'];
+		$password		= (string) $_POST['password'] ?? '';
+		$conf_password	= (string) $_POST['conf_password'] ?? '';
 		$user_lang		= $_POST['user_lang'] ?? $engine->db->language;
 		$user_lang		= $engine->known_language($user_lang) ? $user_lang : $engine->db->language;
 		$complexity		= $engine->password_complexity($user_name, $password);
 		$notify_signup	= (int) ($_POST['notify_signup'] ?? 0);
 		$verify_email	= (int) ($_POST['verify_email'] ?? 0);
+		$enabled		= (int) ($_POST['enabled'] ?? 0);
+	}
+
+	// add new user processing
+	if ($action == 'add_user' && $user_name)
+	{
+		// create new account if possible
 
 		// strip \-\_\'\.\/\\
 		$user_name	= $engine->sanitize_username($user_name);
@@ -198,8 +205,7 @@ function admin_user_users(&$engine, &$module)
 					"signup_time		= UTC_TIMESTAMP(), " .
 					"email				= " . $engine->db->q($email) . ", " .
 					"password			= " . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ", " .
-					#"real_name			= " . $engine->db->q($_POST['newrealname']) . ", " .
-					"enabled			= " . (int) ($_POST['enabled'] ?? 0) . ", " .
+					"enabled			= " . (int) $enabled . ", " .
 					"user_name			= " . $engine->db->q($user_name) . " ");
 
 			// get new user_id
@@ -214,7 +220,7 @@ function admin_user_users(&$engine, &$module)
 				"INSERT INTO " . $prefix . "user_setting SET " .
 					"user_id			= " . (int) $_user_id['user_id'] . ", " .
 					"typografica		= " . (int) $engine->db->default_typografica . ", " .
-					"user_lang			= " . $engine->db->q(($user_lang ?: $engine->db->language)) . ", " .
+					"user_lang			= " . $engine->db->q($user_lang) . ", " .
 					"list_count			= " . (int) $engine->db->list_count . ", " .
 					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
 					"diff_mode			= " . (int) $engine->db->default_diff_mode . ", " .
@@ -243,9 +249,9 @@ function admin_user_users(&$engine, &$module)
 				$engine->notify_user_signup($new_user, $verify_email);
 			}
 
-			$engine->show_message($engine->_t('UsersAdded'), 'success');
+			$engine->set_message($engine->_t('UsersAdded'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogUserCreated', SYSTEM_LANG), $user_name));
-			unset($_POST['create']);
+			$engine->http->redirect($engine->href('', '', ['user_id' => $_user_id['user_id']]));
 		}
 
 		if ($error)
@@ -255,12 +261,12 @@ function admin_user_users(&$engine, &$module)
 		}
 	}
 	// re-confirm email address
-	else if (isset($_POST['confirm']) && $user_id )
+	else if (isset($_POST['confirm']) && $user_id)
 	{
 		$engine->notify_email_confirm($user);
 	}
 	// approve user processing
-	else if (isset($_POST['approve']) && $user_id )
+	else if (isset($_POST['approve']) && $user_id)
 	{
 		$user = $engine->db->load_single(
 			"SELECT u.user_id, u.user_name, u.real_name, u.email, s.theme, s.user_lang, u.enabled, u.account_status " .
@@ -274,59 +280,59 @@ function admin_user_users(&$engine, &$module)
 		$engine->add_user_page($user['user_name'], $user['user_lang']);
 	}
 	// edit user processing
-	else if (isset($_POST['edit']) && $user_id && (isset($_POST['user_name']) || isset($_POST['moderator_id'])))
+	else if ($action == 'edit_user' && $user_id && $user_name )
 	{
 		// do we have identical names?
 		if ($engine->db->load_single(
 			"SELECT user_id " .
 			"FROM " . $prefix . "user " .
-			"WHERE user_name = " . $engine->db->q($_POST['user_name']) . " " .
-				"AND user_id <> " . (int) $_POST['user_id'] . " " .
+			"WHERE user_name = " . $engine->db->q($user_name) . " " .
+				"AND user_id <> " . (int) $user_id . " " .
 			"LIMIT 1"))
 		{
 			$engine->set_message($engine->_t('RegistrationUserNameOwned'));
-			$_POST['change']	= (int) $_POST['user_id'];
+			$_POST['change']	= (int) $user_id;
 			$_POST['edit']		= 1;
 		}
-		else if (!$engine->validate_email($_POST['email']))
+		else if (!$engine->validate_email($email))
 		{
 			$engine->show_message($engine->_t('NotAEmail'));
-			$_POST['change']	= (int) $_POST['user_id'];
+			$_POST['change']	= (int) $user_id;
 			$_POST['edit'] 		= 1;
 		}
 		else
 		{
-			if($engine->db->enable_email && ($user['email'] != $_POST['email']))
+			if($engine->db->enable_email && ($user['email'] != $email))
 			{
-				$user['email'] = $_POST['email'];
+				$user['email'] = $email;
 				$engine->notify_email_confirm($user);
 			}
 
 			$engine->db->sql_query(
 				"UPDATE " . $prefix . "user SET " .
-					"user_name		= " . $engine->db->q($_POST['user_name']) . ", " .
-					"email			= " . $engine->db->q($_POST['email']) . ", " .
-					#"password		= " . $engine->db->q($engine->password_hash(['user_name' => $_POST['user_name']], $password)) . ", " .
-					"real_name		= " . $engine->db->q($_POST['realname']) . ", " .
-					"enabled		= " . (int) ($_POST['enabled'] ?? 0) . ", " .
+					"user_name		= " . $engine->db->q($user_name) . ", " .
+					"email			= " . $engine->db->q($email) . ", " .
+					"real_name		= " . $engine->db->q($realname) . ", " .
+					"enabled		= " . (int) $enabled . ", " .
 					"account_status	= " . (int) $_POST['account_status'] . " " .
-				"WHERE user_id		= " . (int) $_POST['user_id'] . " " .
+				"WHERE user_id		= " . (int) $user_id . " " .
 				"LIMIT 1");
 
 			$engine->db->sql_query(
 				"UPDATE " . $prefix . "user_setting SET " .
-					"user_lang		= " . $engine->db->q($_POST['user_lang']) . ", " .
+					"user_lang		= " . $engine->db->q($user_lang) . ", " .
 					"theme			= " . $engine->db->q($_POST['theme']) . " " .
-				"WHERE user_id		= " . (int) $_POST['user_id'] . " " .
+				"WHERE user_id		= " . (int) $user_id . " " .
 				"LIMIT 1");
 
-			$engine->show_message($engine->_t('UsersUpdated'), 'success');
+			$engine->set_message($engine->_t('UsersUpdated'), 'success');
 			$engine->log(4, Ut::perc_replace($engine->_t('LogUserUpdated', SYSTEM_LANG), $user['user_name']));
+			$engine->http->redirect($engine->href('', '', ['user_id' => $user_id]));
 		}
 	}
 	// delete user processing
 	// TODO: reassign acls, uploads, pages and revisions, delete user page
-	else if (isset($_POST['delete']) && ($user_id || $set))
+	else if ($action == 'delete_user' && ($user_id || $set))
 	{
 		if (!array_filter($set) && empty($user_id))
 		{
@@ -412,54 +418,46 @@ function admin_user_users(&$engine, &$module)
 		echo $engine->form_open('add_user');
 
 		echo '<h2>' . $engine->_t('UsersAddNew') . '</h2>';
-		echo '<table class="formation lined">' .
-				'<tr>
+		echo '<table class="formation lined">
+				<tr>
 					<th class="label">
-						<label for="user_name">' . $engine->_t('UserName') . '</label>' .
-					'</th>
+						<label for="user_name">' . $engine->_t('UserName') . '</label>
+					</th>
 					<td>
-						<input type="text" id="user_name" name="user_name" value="' . Ut::html(($_POST['user_name'] ?? '')) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
+						<input type="text" id="user_name" name="user_name" value="' . Ut::html($user_name) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
 						<p>' . Ut::perc_replace($engine->_t($engine->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'), $engine->db->username_chars_min, $engine->db->username_chars_max) . '</p>
 					</td>
-				</tr>' .
-				/* '<tr>
+				</tr>
+				<tr>
 					<th class="label">
-						<label for="newrealname">' . $engine->_t('RealName') . '</label>' .
-					'</th>
+						<label for="password">' . $engine->_t('RegistrationPassword') . '</label>
+					</th>
 					<td>
-						<input type="text" id="newrealname" name="newrealname" value="' . Ut::html(($_POST['newrealname'] ?? '')) . '" size="20" maxlength="100">
+						<input type="password" id="password" name="password" size="24" minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html($password) . '" autocomplete="off" required>
 					</td>
-				</tr>' . */
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
-						<label for="password">' . $engine->_t('RegistrationPassword') . '</label>' .
-					'</th>
+						<label for="conf_password">' . $engine->_t('ConfirmPassword') . '</label>
+					</th>
 					<td>
-						<input type="password" id="password" name="password" size="24" minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html(($_POST['password'] ?? '')) . '" autocomplete="off" required>
-					</td>
-				</tr>' .
-				'<tr>
-					<th class="label">
-						<label for="conf_password">' . $engine->_t('ConfirmPassword') . '</label>' .
-					'</th>
-					<td>
-						<input type="password" id="conf_password" name="conf_password" size="24"  minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html(($_POST['conf_password'] ?? '')) . '" autocomplete="off" required>
+						<input type="password" id="conf_password" name="conf_password" size="24"  minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html($conf_password) . '" autocomplete="off" required>
 						<p>' . $engine->show_password_complexity() . '</p>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
 						<label for="email">' . $engine->_t('Email') . '</label>
-					</th>' .
-					'<td>
-						<input type="email" id="email" name="email" value="' . Ut::html(($_POST['email'] ?? '')) . '" size="50" maxlength="100">
+					</th>
+					<td>
+						<input type="email" id="email" name="email" value="' . Ut::html(($email ?? '')) . '" size="50" maxlength="100">
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
-					</th>' .
-					'<td>
+					</th>
+					<td>
 						<select id="user_lang" name="user_lang">';
 
 				$languages = $engine->_t('LanguageArray');
@@ -474,34 +472,34 @@ function admin_user_users(&$engine, &$module)
 
 				echo '</select>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
 						<label for="enabled">' . $engine->_t('Enabled') . '</label>
-					</th>' .
-					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (!isset($_POST['enabled']) ? ' checked' : '') . '>
+					</th>
+					<td>
+						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (!isset($enabled) ? ' checked' : '') . '>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
 						<label>' . $engine->_t('UserAccountNotify') . '</label>
-					</th>' .
-					'<td>
-						<input type="checkbox" id="notify_signup" name="notify_signup" value="1" ' . (!isset($_POST['notify_signup']) ? '' : ' checked') . '>
+					</th>
+					<td>
+						<input type="checkbox" id="notify_signup" name="notify_signup" value="1" ' . (!isset($notify_signup) ? '' : ' checked') . '>
 						<label for="notify_signup">' . $engine->_t('UserNotifySignup') . '</label><br>
-						<input type="checkbox" id="verify_email" name="verify_email" value="1" ' . (!isset($_POST['verify_email']) ? '' : ' checked') . '>
+						<input type="checkbox" id="verify_email" name="verify_email" value="1" ' . (!isset($verify_email) ? '' : ' checked') . '>
 						<label for="verify_email">' . $engine->_t('UserVerifyEmail') . '</label>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<td colspan="2">
 						<br>
-						<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
-					'</td>
-				</tr>' .
-			'</table><br>';
+						<button type="submit" id="submit" name="create">' . $engine->_t('SubmitButton') . '</button>
+						<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+					</td>
+				</tr>
+			</table><br>';
 
 		echo $engine->form_close();
 	}
@@ -518,33 +516,33 @@ function admin_user_users(&$engine, &$module)
 		{
 			echo $engine->form_open('edit_user');
 
-			echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">' . "\n" .
-				'<table class="formation lined">' .
-				'<tr>
+			echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">
+				<table class="formation lined">
+				<tr>
 					<th class="label">
 						<label for="user_name">' . Ut::perc_replace($engine->_t('UsersRename'), ' ' . '<code>' . Ut::html($user['user_name']) . '</code>') . ' *</label>
-					</th>' .
-					'<td>
-						<input type="text" id="user_name" name="user_name" value="' . Ut::html(($_POST['user_name'] ?? $user['user_name'])) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
-					</td>
-				</tr>' .
-				'<tr>
-					<th class="label">
-						<label for="newrealname">' . $engine->_t('RealName') . '</label> ' .
-					'</th>
+					</th>
 					<td>
-						<input type="text" id="realname" name="realname" value="' . Ut::html(($_POST['realname'] ?? $user['real_name'])) . '" size="50" maxlength="100">
-					</td>' .
-				'</tr>' .
-				'<tr>
-					<th class="label">
-						<label for="newemail">' . $engine->_t('Email') . '</label> ' .
-					'</th>
-					<td>
-						<input type="email" id="email" name="email" value="' . Ut::html(($_POST['email'] ?? $user['email'])) . '" size="50" maxlength="100">
+						<input type="text" id="user_name" name="user_name" value="' . Ut::html(($user_name ?: $user['user_name'])) . '" pattern="' . $engine->language['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
+					<th class="label">
+						<label for="newrealname">' . $engine->_t('RealName') . '</label>
+					</th>
+					<td>
+						<input type="text" id="realname" name="realname" value="' . Ut::html(($realname ?: $user['real_name'])) . '" size="50" maxlength="100">
+					</td>
+				</tr>
+				<tr>
+					<th class="label">
+						<label for="newemail">' . $engine->_t('Email') . '</label>
+					</th>
+					<td>
+						<input type="email" id="email" name="email" value="' . Ut::html(($email ?: $user['email'])) . '" size="50" maxlength="100">
+					</td>
+				</tr>
+				<tr>
 					<th class="label">
 						<label for="user_lang">' . $engine->_t('YourLanguage') . '</label>
 					</th>
@@ -564,8 +562,8 @@ function admin_user_users(&$engine, &$module)
 
 					echo '</select>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
 						<label for="theme">' . $engine->_t('ChooseTheme') . '</label>
 					</th>
@@ -581,16 +579,16 @@ function admin_user_users(&$engine, &$module)
 
 					echo '</select>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
 						<label for="enabled">' . $engine->_t('Enabled') . '</label>
-					</th>' .
-					'<td>
-						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (isset($_POST['enabled']) || $user['enabled'] == 1  ? ' checked' : '') . '>
+					</th>
+					<td>
+						<input type="checkbox" id="enabled" name="enabled" value="1" ' . (isset($enabled) || $user['enabled'] == 1  ? ' checked' : '') . '>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<th class="label">
 						<label for="account_status">' . $engine->_t('AccountStatus') . '</label>
 					</th>
@@ -610,17 +608,17 @@ function admin_user_users(&$engine, &$module)
 
 					echo '</select>
 					</td>
-				</tr>' .
-				'<tr>
+				</tr>
+				<tr>
 					<td colspan="2">
 						<br>
-						<small>' . $engine->_t('UsersRenameInfo') . '</small>' .
-						'<br><br>
-						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button> ' .
-						'<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>' .
-					'</td>
-				</tr>' .
-			'</table>
+						<small>' . $engine->_t('UsersRenameInfo') . '</small>
+						<br><br>
+						<button type="submit" id="submit" name="edit">' . $engine->_t('SubmitButton') . '</button>
+						<a href="' . $engine->href() . '" class="btn-link"><button type="button" class="btn-cancel">' . $engine->_t('CancelButton') . '</button></a>
+					</td>
+				</tr>
+			</table>
 			<br>';
 
 			echo $engine->form_close();
@@ -663,16 +661,16 @@ function admin_user_users(&$engine, &$module)
 
 		echo '<input type="hidden" name="user_id" value="' . (int) $user_id . '">' . "\n" .
 			 '<input type="hidden" name="ids" value="' . implode('-', $set) . '">' . "\n" .
-				'<table class="formation">' .
-					'<tr>
+				'<table class="formation">
+					<tr>
 						<td>' .
 							Ut::perc_replace($engine->_t('UsersDelete'), ' ' . $users) . ' ' .
 							'<button type="submit" id="submit" name="delete">' . $engine->_t('Remove') . '</button> ' .
 							'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a><br>' .
-							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>' .
-						'</td>
-					</tr>' .
-				'</table>
+							'<small>' . $engine->_t('UsersDeleteInfo') . '</small>
+						</td>
+					</tr>
+				</table>
 				<br>';
 
 		echo $engine->form_close();
@@ -858,34 +856,20 @@ function admin_user_users(&$engine, &$module)
 		}
 		else
 		{
-			$order_user		= 'user_desc';
+			$order_user			= 'user_desc';
 		}
 
-		// set real_name ordering
-		if ($_order == 'name_asc')
-		{
-			$order				= 'ORDER BY real_name DESC ';
-			$order_name			= 'name_desc';
-		}
-		else if ($_order == 'name_desc')
-		{
-			$order				= 'ORDER BY real_name ASC ';
-			$order_name			= 'name_asc';
-		}
-		else
-		{
-			$order_name		= 'name_desc';
-		}
 
 		// filter by account_status
 		if (isset($_GET['account_status']))
 		{
-			$where			= "WHERE u.account_status = " . (int) $_GET['account_status'] . " ";
+			$where				= "WHERE u.account_status = " . (int) $_GET['account_status'] . " ";
 		}
+
 		// filter by lang
 		if (isset($_GET['user_lang']))
 		{
-			$where			= "WHERE s.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
+			$where				= "WHERE s.user_lang = " . $engine->db->q($_GET['user_lang']) . " ";
 		}
 
 		// entries to display
@@ -930,19 +914,20 @@ function admin_user_users(&$engine, &$module)
 		//   control buttons
 		/////////////////////////////////////////////
 
-		$control_buttons =	'<br>' .
-							'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
-							'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
-							#'<button type="submit" id="approve-button" name="approve">' . $engine->_t('Approve') . '</button> ' .
-							'<button type="submit" id="remove-button" name="remove" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ' .
-							'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
-							'<br>' . "\n" .
-								'<button type="submit" name="set" id="submit">' . $engine->_t('SetButton') . '</button> ' .
-								($set
-										? '<button type="submit" name="reset" id="submit">' . $engine->_t('ResetButton') . '</button> ' .
-										'<small>ids: ' . implode(', ', $set) . '</small>'
-										: ''
-								);
+		$control_buttons =
+			'<br>' .
+			'<button type="submit" id="create-button" name="create">' . $engine->_t('AddButton') . '</button> ' .
+			'<button type="submit" id="edit-button" name="edit">' . $engine->_t('EditButton') . '</button> ' .
+			#'<button type="submit" id="approve-button" name="approve">' . $engine->_t('Approve') . '</button> ' .
+			'<button type="submit" id="remove-button" name="remove" class="btn-danger">' . $engine->_t('RemoveButton') . '</button> ' .
+			'<input type="hidden" name="ids" value="' . implode('-', $set) . '">' .
+			'<br>' . "\n" .
+				'<button type="submit" name="set" id="submit">' . $engine->_t('SetButton') . '</button> ' .
+				($set
+						? '<button type="submit" name="reset" id="submit">' . $engine->_t('ResetButton') . '</button> ' .
+						'<small>ids: ' . implode(', ', $set) . '</small>'
+						: ''
+				);
 
 
 
@@ -973,7 +958,6 @@ function admin_user_users(&$engine, &$module)
 					<th></th>
 					<th>ID</th>
 					<th><a href="<?php echo $engine->href('', '', ['order' => $order_user]); ?>"><?php echo $engine->_t('UsersName');?></a></th>
-					<!--<th style="width:150px;"><a href="<?php echo $engine->href('', '', ['order' => $order_name]); ?>"><?php echo $engine->_t('RealName');?></a></th>-->
 					<th><?php echo $engine->_t('Email');?></th>
 					<th><a href="<?php echo $engine->href('', '', ['order' => $order_pages]); ?>"><?php echo $engine->_t('UsersPages');?></a></th>
 					<th><a href="<?php echo $engine->href('', '', ['order' => $order_comments]); ?>"><?php echo $engine->_t('UsersComments');?></a></th>
@@ -992,27 +976,26 @@ function admin_user_users(&$engine, &$module)
 		{
 			foreach ($users as $row)
 			{
-				echo '<tr>' . "\n" .
-						'<td class="label a-middle" style="width:10px;">
+				echo '<tr>
+						<td class="label a-middle" style="width:10px;">
 							<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
-						</td>' .
-						'<td>
+						</td>
+						<td>
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '">
-						</td>' .
-						'<td>' . $row['user_id'] . '</td>' .
-						'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
-						#'<td style="padding-left:5px; padding-right:5px;">' . $row['real_name'] . '</td>' .
-						'<td>' . $row['email'] . '</td>' .
-						'<td>' . $row['total_pages'] . '</td>' .
-						'<td>' . $row['total_comments'] . '</td>' .
-						'<td>' . $row['total_revisions'] . '</td>' .
-						'<td>' . $row['total_uploads'] . '</td>' .
-						'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang']]) . '">' . $row['user_lang'] . '</a></small></td>' .
-						'<td>' . $row['enabled'] . '</td>' .
-						'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
-						'<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>' .
-						'<td><small>' . $engine->get_time_formatted($row['last_visit']) . '</small></td>' .
-					'</tr>';
+						</td>
+						<td>' . $row['user_id'] . '</td>
+						<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>
+						<td>' . $row['email'] . '</td>
+						<td>' . $row['total_pages'] . '</td>
+						<td>' . $row['total_comments'] . '</td>
+						<td>' . $row['total_revisions'] . '</td>
+						<td>' . $row['total_uploads'] . '</td>
+						<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang']]) . '">' . $row['user_lang'] . '</a></small></td>
+						<td>' . $row['enabled'] . '</td>
+						<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>
+						<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>
+						<td><small>' . $engine->get_time_formatted($row['last_visit']) . '</small></td>
+					</tr>';
 			}
 		}
 		else
