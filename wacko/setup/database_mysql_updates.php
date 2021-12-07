@@ -59,6 +59,7 @@ $delete_rating_r6_0_1 = "DROP TABLE {$pref}rating";
 $alter_user_r6_0_1 = "ALTER TABLE {$pref}user CHANGE lost_password_request_count password_request_count SMALLINT(6) UNSIGNED NOT NULL DEFAULT '0'";
 
 // USER SETTING
+$alter_user_setting_r6_0_1 = "ALTER TABLE {$pref}user_setting DROP typografica";
 
 // USERGROUP
 

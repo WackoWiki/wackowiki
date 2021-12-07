@@ -156,7 +156,6 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 				"INSERT INTO " . $this->db->table_prefix . "user_setting " .
 				"SET " .
 					"user_id			= " . (int) $user_id . ", " .
-					"typografica		= " . (int) $this->db->default_typografica . ", " .
 					"user_lang			= " . $this->db->q($user_lang) . ", " .
 					"list_count			= " . (int) $this->db->list_count . ", " .
 					"theme				= " . $this->db->q($this->db->theme) . ", " .
