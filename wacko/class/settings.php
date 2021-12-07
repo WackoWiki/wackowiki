@@ -162,22 +162,22 @@ class Settings extends Dbal implements ArrayAccess
 	// { $config['ttt'] = 1; } === { $config->ttt = 1; }
 	// furthermore: all [] and -> accesses - get/set/isset/unset - are identical
 
-	public function offsetSet($i, $value)
+	public function offsetSet($i, $value): void
 	{
 		$this->__set($i, $value);
 	}
 
-	public function offsetExists($i)
+	public function offsetExists($i): bool
 	{
 		return $this->__isset($i);
 	}
 
-	public function offsetUnset($i)
+	public function offsetUnset($i): void
 	{
 		$this->__unset($i);
 	}
 
-	public function offsetGet($i)
+	public function offsetGet($i): mixed
 	{
 		return $this->__get($i);
 	}

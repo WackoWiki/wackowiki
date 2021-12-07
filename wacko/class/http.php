@@ -192,7 +192,7 @@ class Http
 			$etag	= @$_SERVER['HTTP_IF_NONE_MATCH'];
 			$lastm	= @$_SERVER['HTTP_IF_MODIFIED_SINCE'];
 
-			if ($p = strpos($lastm, ';'))
+			if ($lastm && $p = strpos($lastm, ';'))
 			{
 				$lastm = substr($lastm, 0, $p);
 			}
