@@ -4389,8 +4389,8 @@ class Wacko
 		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
 		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
 		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//u', '\\1' . NBSP . '/', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . '' . NBSP . '' . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . '' . NBSP . '\/)/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . NBSP . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . NBSP . '\/)/u', '\\1', $text);
 		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
 		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')' . NBSP . '(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
 		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
