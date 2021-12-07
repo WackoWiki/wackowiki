@@ -14,11 +14,12 @@ if (!($this->is_owner() || $this->is_admin()))
 	$this->show_must_go_on();
 }
 
+$action			= $_POST['_action'] ?? null;
 // check if upload is allowed for user
 $upload			= $this->db->upload;
 $upload_allowed	= ($upload === true || $upload == 1 || $this->check_acl($this->get_user_name(), $upload));
 
-if (isset($_POST['_action']) && $_POST['_action'] === 'set_permissions')
+if ($action === 'set_permissions')
 {
 	if ($user_id = $_POST['new_owner_id'])
 	{

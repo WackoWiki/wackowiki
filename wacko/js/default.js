@@ -5,7 +5,7 @@ function undef(param)
 
 // all_init() initializes all js features:
 //   * WikiEdit
-//   * Doubleclick editing
+//   * Double click editing
 //   * Session heart beat
 window.onload = function ()
 {
@@ -17,6 +17,7 @@ var wikiedit;
 var dbclick = 'page';
 var edit;
 var timeout;
+var ename;
 
 // initialize everything
 function all_init()

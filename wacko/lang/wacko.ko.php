@@ -149,7 +149,6 @@ $wacko_translation = [
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs'		=> 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
 	'NumerateLinks'				=> 'Numerate links in print view',
-	'Typografica'				=> 'Autocorrect typografica when viewing',
 	'Comment'					=> '댓글',
 	'Comments0'					=> '코멘트를 남겨주세요',
 	'Comments1'					=> '댓글 읽기 (댓글 1 개)',

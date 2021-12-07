@@ -35,6 +35,7 @@ if (!empty($this->db->news_cluster))
 	$prefix				= $this->db->table_prefix;
 	$news_cluster		= $this->db->news_cluster;
 	$news_levels		= $this->db->news_levels;
+	$action				= $_POST['_action'] ?? null;
 
 	// hide article H1 header
 	$this->hide_article_header = true;
@@ -42,7 +43,7 @@ if (!empty($this->db->news_cluster))
 	// check privilege
 	$access = $this->has_access('create');
 
-	if (@$_POST['_action'] === 'add_topic' && $access)
+	if ($action === 'add_topic' && $access)
 	{
 		// checking user input
 		if (isset($_POST['title']))

@@ -39,7 +39,7 @@ else if ($user = $this->get_user())
 {
 	$email_changed	= false;
 	$user			= $this->load_user(0, $user['user_id']);
-	$action			= $_POST['_action'] ?? null; // set by form_open
+	$action			= $_POST['_action'] ?? null;
 	$realname		= $_POST['real_name'] ?? '';
 	$email			= $_POST['email'] ?? '';
 	$resend_code	= (int) ($_GET['resend_code'] ?? null);
@@ -97,7 +97,6 @@ else if ($user = $this->get_user())
 		"doubleclick_edit	= " . (int) isset($_POST['doubleclick_edit']) . ", " .
 		"show_comments		= " . (int) isset($_POST['show_comments']) . ", " .
 		"show_spaces		= " . (int) isset($_POST['show_spaces']) . ", " .
-		// "typografica		= " . (int) isset($_POST['typografica']) . ", " .
 		"autocomplete		= " . (int) isset($_POST['autocomplete']) . ", " .
 		"numerate_links		= " . (int) isset($_POST['numerate_links']) . ", " .
 		"diff_mode			= " . (int) $_POST['diff_mode'] . ", " .
@@ -230,7 +229,6 @@ else if ($user = $this->get_user())
 		$tpl->validateip		= $user['validate_ip'];
 		$tpl->hidesession		= $user['hide_lastsession'];
 		$tpl->sessionlength		= $user['session_length'];
-		# $tpl->typografica		= $user['typografica'];
 
 		if ($this->db->publish_anonymously)
 		{

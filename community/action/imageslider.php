@@ -16,7 +16,7 @@ if (!defined('IN_WACKO'))
 		[page="PageName" or global=1]
 		[order="time|FILENAME|size|size_desc|ext"]
 		[owner="UserName"]
-		[picture=1]
+		[media=1]
 		[max=number]
 	}}
 
@@ -32,7 +32,7 @@ $owner		??= '';
 $page		??= '';
 $deleted	??= 0;
 $track		??= 0;
-$picture	??= 1;
+$media		??= 1;
 $max		??= null;
 
 if ($max)
@@ -314,7 +314,7 @@ if ($can_view)
 					}
 
 					$file_name	= $file['file_name'];
-					$text		= (!$picture) ? $file_name : '';
+					$text		= $media ? '' : $file_name;
 					$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
 					?>

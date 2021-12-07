@@ -4796,14 +4796,14 @@ class Wacko
 			&& !$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
 		{
 			$form_name	= (string) ($_POST['_action'] ?? '');
-			$tag		= $tag ? ' -> <code>' . $tag . '</code>' : '';
+			$used_tag	= $tag ? ' -> <code>' . $tag . '</code>' : '';
 			$_POST		= [];
 			$_REQUEST	= $_GET;
 
 			$this->set_message($this->_t('FormInvalid'), 'error');
 			$this->log(1, Ut::perc_replace(
 				$this->_t('LogInvalidFormToken', SYSTEM_LANG),
-				'<code>' . $form_name . '</code>' . $tag));
+				'<code>' . $form_name . '</code>' . $used_tag));
 
 			return false;
 		}

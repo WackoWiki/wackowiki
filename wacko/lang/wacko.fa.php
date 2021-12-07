@@ -149,7 +149,6 @@ $wacko_translation = [
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs'		=> 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
 	'NumerateLinks'				=> 'Numerate links in print view',
-	'Typografica'				=> 'Autocorrect typografica when viewing',
 	'Comment'					=> 'دیدگاه',
 	'Comments0'					=> 'نظرتان را اضافه کنید',
 	'Comments1'					=> 'خواندن نظر (1 نظر)',

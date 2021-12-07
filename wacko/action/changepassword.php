@@ -10,7 +10,7 @@ $this->no_way_back = true; // prevent goback'ing that page
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
-if ($code = (string) @$_REQUEST['secret_code'])
+if ($code = (string) ($_REQUEST['secret_code'] ?? null))
 {
 	$user = $this->db->load_single(
 		"SELECT user_id, user_name " .
@@ -28,8 +28,10 @@ else
 	$user = $this->get_user();
 }
 
+$action = $_POST['_action'] ?? null;
+
 // both change password forms processed here: usual password change, and forgotten password reset
-if (@$_POST['_action'] === 'change_password' && $user)
+if ($action === 'change_password' && $user)
 {
 	if (!$code && !$this->password_verify($user, $_POST['password']))
 	{
@@ -76,7 +78,7 @@ if (@$_POST['_action'] === 'change_password' && $user)
 }
 
 // guest user, password forgotten, send mail
-if (@$_POST['_action'] === 'forgot_password')
+if ($action === 'forgot_password')
 {
 	$user_name	= Ut::strip_spaces($_POST['user_name']);
 	$email		= Ut::strip_spaces($_POST['email']);

@@ -11,9 +11,10 @@ if (!defined('IN_WACKO'))
 
 if ($this->is_admin())
 {
-	$error			= '';
+	$error		= '';
+	$action		= $_POST['_action'] ?? null;
 
-	if (@$_POST['_action'] === 'generate_hash')
+	if ($action === 'generate_hash')
 	{
 		// passing vars from user input
 		$user_name			= $this->get_user_name();

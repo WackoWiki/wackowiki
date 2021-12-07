@@ -149,7 +149,6 @@ $wacko_translation = [
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs'		=> 'For at kunne bruge WikiEdit skal du aktivere JavaScript i din browser.',
 	'NumerateLinks'				=> 'Numerate links in print view',
-	'Typografica'				=> 'Autokorriger typografi ved visning',
 	'Comment'					=> 'Kommentar',
 	'Comments0'					=> 'Ingen kommentarer til denne side.',
 	'Comments1'					=> 'En kommentar til denne side.',
