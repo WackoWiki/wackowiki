@@ -84,26 +84,23 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 
 	$day_names = []; // generate all the day names according to the current locale
 
-	#$day_pattern = ($day_name_length == 2
-	#	? "cccccc"	// cccccc - 2-letter textual day name
-	#	: "ccc");	// ccc    - 3-letter textual day name, see http://userguide.icu-project.org/formatparse/datetime
+	$day_pattern = ($day_name_length == 2
+		? "cccccc"	// cccccc - 2-letter textual day name
+		: "ccc");	// ccc    - 3-letter textual day name, see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
 
-	#$make_day = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, $day_pattern);
+	$fmt = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, $day_pattern);
 
 	for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t += DAYSECS) // January 4, 1970 was a Sunday
 	{
-		#$day_names[$n] = utf8_ucfirst($make_day->format($t));
-		$day_names[$n] = utf8_ucfirst(gmstrftime('%A',$t)); // %A means full textual day name
+		$day_names[$n] = utf8_ucfirst($fmt->format($t));
 	}
 
-	// https://bugs.php.net/bug.php?id=76123
-	# $make_date = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "MM,yyyy,LLLL,c");
-	# [$month, $year, $month_name, $weekday] = explode(',', $make_date->format($first_of_month));
-	[$month, $year, $month_name, $weekday] = explode(',', gmstrftime('%m,%Y,%B,%w', $first_of_month));
+	$fmt = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "MM,yyyy,LLLL");
+	[$month, $year, $month_name]	= explode(',', $fmt->format($first_of_month));
+	$weekday						= date('w', $first_of_month);
 
-	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
-	$title		= htmlentities(utf8_ucfirst($month_name), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) . NBSP . $year;  // note that some locales don't capitalize month and day names
-
+	#$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
+	$title		= Ut::html(utf8_ucfirst($month_name)) . NBSP . $year;
 	// begin calendar
 
 	// TODO: fix navigation array handling
