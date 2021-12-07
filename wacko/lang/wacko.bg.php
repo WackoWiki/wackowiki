@@ -149,7 +149,6 @@ $wacko_translation = [
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs'		=> 'За да можете да използвате WikiEdit, моля, активирайте JavaScript във вашия браузър.',
 	'NumerateLinks'				=> 'Numerate links in print view',
-	'Typografica'				=> 'Корекция на типографика при прегледа',
 	'Comment'					=> 'Коментар',
 	'Comments0'					=> 'Коментар няма.',
 	'Comments1'					=> 'Един коментар.',

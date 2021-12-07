@@ -149,7 +149,6 @@ $wacko_translation = [
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs'		=> 'A WikiEdit használatához engedélyezze a JavaScriptet böngészőjében.',
 	'NumerateLinks'				=> 'Numerate links in print view',
-	'Typografica'				=> 'Autocorrect typografica when viewing',
 	'Comment'					=> 'Hozzászólás',
 	'Comments0'					=> 'Adja hozzá megjegyzését',
 	'Comments1'					=> 'Megjegyzés olvasása (1 megjegyzés)',

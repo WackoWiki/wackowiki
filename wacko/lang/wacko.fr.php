@@ -149,7 +149,6 @@ $wacko_translation = [
 	'WikieditAutocomplete'		=> 'Confirmer les liens Wiki ou wikilinks par Ctrl+Espace',
 	'WikiEditInactiveJs'		=> 'Pour pouvoir utiliser WikiEdit, merci d’activer JavaScript dans votre navigateur.',
 	'NumerateLinks'				=> 'Numérotation des liens en vue d’impression',
-	'Typografica'				=> 'Correction automatique de la typographie lors de l’affichage',
 	'Comment'					=> 'Commentaire',
 	'Comments0'					=> 'Cette page n’a pas été commentée.',
 	'Comments1'					=> 'Cette page a suscité un commentaire.',

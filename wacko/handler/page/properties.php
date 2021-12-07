@@ -16,9 +16,10 @@ if (!($this->is_owner() || $this->is_admin() || $this->has_access('write', $this
 	$this->show_must_go_on();
 }
 
-$mode = '';
+$mode 	= '';
+$action	= $_POST['_action'] ?? null;
 
-if (@$_POST['_action'] === 'extended_properties')
+if ($action === 'extended_properties')
 {
 	$mode = 'extended';
 	$this->db->sql_query(
@@ -39,7 +40,7 @@ if (@$_POST['_action'] === 'extended_properties')
 		"LIMIT 1");
 }
 
-if (@$_POST['_action'] === 'general_properties')
+if ($action === 'general_properties')
 {
 	$this->db->sql_query(
 		"UPDATE " . $this->db->table_prefix . "page SET " .
@@ -87,6 +88,7 @@ if (isset($_GET['extended']))
 		$tpl->hidetoc	= (int) $this->db->hide_toc;
 		$tpl->hideindex	= (int) $this->db->hide_index;
 		$tpl->treelevel	= (int) $this->db->tree_level;
+
 		$tpl->noindex	= (int) $this->page['noindex'];
 
 		if ($this->is_admin())

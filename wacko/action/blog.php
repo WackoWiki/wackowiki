@@ -38,11 +38,12 @@ if (!empty($tag))
 	$p_mode				= [];
 	$prefix				= $this->db->table_prefix;
 	$blog_levels		= '/.+'; // see $this->db->news_levels;
+	$action				= $_POST['_action'] ?? null;
 
 	// check privilege
 	$access = $this->has_access('create');
 
-	if (@$_POST['_action'] === 'add_topic' && $access)
+	if ($action === 'add_topic' && $access)
 	{
 		// checking user input
 		if (isset($_POST['title']))

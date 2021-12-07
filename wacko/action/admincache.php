@@ -7,7 +7,9 @@ if (!defined('IN_WACKO'))
 
 if ($this->is_admin())
 {
-	if (@$_POST['_action'] === 'purge_cache')
+	$action = $_POST['_action'] ?? null;
+
+	if ($action === 'purge_cache')
 	{
 		@set_time_limit(0);
 

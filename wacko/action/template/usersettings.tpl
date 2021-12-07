@@ -187,15 +187,6 @@
 						<input type="radio" id="duration30" name="session_length" value="30"[ ' sessionlength | check 30 ' ]><label for="duration30">[ ' _t: SessionDurationMonth ' ]</label>
 					</td>
 				</tr>
-				[== CommentedOut _ =
-					<tr>
-						<td>&nbsp;</td>
-						<td>
-							<input type="checkbox" id="typografica" name="typografica"[ ' typografica | checkbox ' ]>
-							<label for="typografica">[ ' _t: Typografica ' ]</label>
-						</td>
-					</tr>
-				==]
 				<tr>
 					<td>&nbsp;</td>
 					<td>

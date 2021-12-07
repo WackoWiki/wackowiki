@@ -149,7 +149,6 @@ $wacko_translation = [
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
 	'WikiEditInactiveJs'		=> 'WikiEditi kasutamiseks peaksite oma brauseris lubama JavaScripti.',
 	'NumerateLinks'				=> 'Numerate links in print view',
-	'Typografica'				=> 'Trükivea autokorrektuur',
 	'Comment'					=> 'Kommentaar',
 	'Comments0'					=> 'Sellel lehel puudub kommentaar.',
 	'Comments1'					=> 'Sellel lehel on üks kommentaar.',
