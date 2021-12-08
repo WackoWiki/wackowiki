@@ -358,64 +358,61 @@ class Wacko
 	}
 
 	// TIME FUNCTIONS
-	function utc2localtime($utc)
+	function utc2time($utc)
 	{
-		$user	= $this->get_user();
-		$tz		= ($user
-					? $user['timezone'] + $user['dst']
-					: $this->db->timezone + $this->db->dst);
+		// strtotime requirers UTC for IntlDateFormatter
+		$tz = date_default_timezone_get();
+		date_default_timezone_set('UTC');
 
-		return $utc + $tz * 3600;
+		$time = strtotime($utc);
+
+		date_default_timezone_set($tz);
+
+		return $time;
 	}
 
-	function sql2localtime($text)
+	function sql2time($text)
 	{
-		return $this->db->is_null_date($text)? 0 : (int) $this->utc2localtime(strtotime($text));
+		return $this->db->is_null_date($text)? 0 : (int) $this->utc2time($text);
 	}
 
 	function sql2datetime($text, &$date, &$time)
 	{
-		$local	= $this->sql2localtime($text);
-		$date	= date($this->db->date_format, $local);
-		$time	= date($this->db->time_format, $local);
+		$date	= $this->date_formatted($text, $this->db->date_format);
+		$time	= $this->date_formatted($text, $this->db->time_format);
 	}
 
 	function sql2precisetime($text)
 	{
-		$local	= $this->sql2localtime($text);
-
-		return date($this->db->date_format . ' ' . $this->db->time_format_seconds, $local);
+		return $this->date_formatted($text, $this->db->date_format . ' ' . $this->db->time_format_seconds);
 	}
 
-	function get_time_formatted($text, $relative = false) // STS: rename to sql_time_formatted
+	// TODO: make format pattern depended from localization and user preferences?
+	function get_time_formatted($text) // STS: rename to sql_time_formatted
 	{
-		$local_time = $this->sql2localtime($text);
-
-		// TODO: make format depended from localization and user preferences?
-		// default: d.m.Y H:i
-
-		if ($relative)
-		{
-			return $this->get_time_interval($local_time);
-		}
-		else
-		{
-			return date($this->db->date_format . ' ' . $this->db->time_format, $local_time);
-			// https://www.php.net/manual/en/function.strftime.php
-			#return strftime('%d. %b %y' . ' ' . '%H:%M', $local_time);
-		}
-
-		// TODO: add options for ..
-		# return $this->get_unix_time_formatted($this->sql2localtime($text));
-		# return $this->get_time_interval($local_time, false);
+		return $this->date_formatted($text, $this->db->date_format . ' ' . $this->db->time_format);
 	}
 
-	function get_unix_time_formatted($local)
+	// unix time formatted
+	function date_formatted($text, $pattern)
 	{
-		return date($this->db->date_format . ' ' . $this->db->time_format_seconds, $local);
+		$user		= $this->get_user();
+		$tz			= $user ? $user['timezone'] : $this->db->timezone;
+		$unix_time	= $this->sql2time($text);
+
+		$fmt = new IntlDateFormatter(
+			$this->language['locale'],
+			IntlDateFormatter::FULL,
+			IntlDateFormatter::FULL,
+			$tz,
+			null,
+			$pattern
+		);
+
+		return $fmt->format($unix_time);
 	}
 
-	// e.g. <time datetime="2017-03-17T12:34:26+01:00" title="17 March 2017 12:34">3 hours ago</time>
+	// e.g. <time datetime="2021-03-17T12:34:26+01:00" title="17 March 2021 12:34">3 hours ago</time>
 	function get_time_interval($time, $strip = false)
 	{
 		$ago = time() - $time;
@@ -439,6 +436,46 @@ class Wacko
 		}
 
 		return $out;
+	}
+
+	function timezone_list()
+	{
+		static $timezones = null;
+
+		if ($timezones === null)
+		{
+			$timezones	= [];
+			$offsets	= [];
+			$now		= new DateTime('now', new DateTimeZone('UTC'));
+
+			foreach (DateTimeZone::listIdentifiers() as $timezone)
+			{
+				$now->setTimezone(new DateTimeZone($timezone));
+				$offsets[]				= $offset = $now->getOffset();
+				$timezones[$timezone]	= '[' . $this->format_GMT_offset($offset) . '] ' . $this->format_timezone_name($timezone);
+			}
+
+			array_multisort($offsets, $timezones);
+		}
+
+		return $timezones;
+	}
+
+	function format_GMT_offset($offset)
+	{
+		$hours		= intval($offset / 3600);
+		$minutes	= abs(intval($offset % 3600 / 60));
+
+		return 'UTC ' . ($offset ? sprintf('%+03d:%02d', $hours, $minutes) : '');
+	}
+
+	function format_timezone_name($name)
+	{
+		$name = str_replace('/', ', ', $name);
+		$name = str_replace('_', ' ', $name);
+		$name = str_replace('St ', 'St. ', $name);
+
+		return $name;
 	}
 
 	// LANG FUNCTIONS
@@ -5165,7 +5202,7 @@ class Wacko
 				s.doubleclick_edit, s.show_comments, s.list_count, s.menu_items, s.user_lang, s.show_spaces, s.theme,
 				s.autocomplete, s.numerate_links, s.diff_mode, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
 				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
-				s.session_length, s.timezone, s.dst, s.sorting_comments " .
+				s.session_length, s.timezone, s.sorting_comments " .
 			"FROM " . $this->db->user_table . " u " .
 				"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE " . ($user_id
