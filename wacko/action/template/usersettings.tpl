@@ -286,15 +286,6 @@
 					</tr>
 					<tr>
 						<th>
-							<label for="dst">[ ' _t: DST ' ]</label>
-						</th>
-						<td>
-							<input type="radio" id="dst0" name="dst"[ ' dst | check 0 ' ]><label for="dst0">[ ' _t: Off ' ]</label>
-							<input type="radio" id="dst1" name="dst"[ ' dst | check 1 ' ]><label for="dst1">[ ' _t: On ' ]</label>
-						</td>
-					</tr>
-					<tr>
-						<th>
 							<label for="sorting_comments">[ ' _t: SortComment ' ]</label>
 						</th>
 						<td>

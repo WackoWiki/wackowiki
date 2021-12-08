@@ -275,8 +275,7 @@ $wacko_config_defaults = [
 	'time_format'					=> 'H:i',
 	'time_format_seconds'			=> 'H:i:s',
 	'name_date_macro'				=> '%s (%s)',
-	'timezone'						=> 0.00,
-	'dst'							=> 0,
+	'timezone'						=> 'UTC',
 
 	'debug'							=> 0,
 	'debug_admin_only'				=> 0,

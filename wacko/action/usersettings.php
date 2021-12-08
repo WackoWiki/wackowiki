@@ -122,8 +122,7 @@ else if ($user = $this->get_user())
 		$sql =
 		"user_lang			= " . $this->db->q($_POST['user_lang']) . ", " .
 		"theme				= " . $this->db->q($_POST['theme']) . ", " .
-		"timezone			= '" . (float) $_POST['timezone'] . "', " .
-		"dst				= " . (int) $_POST['dst'] . ", " .
+		"timezone			= " . $this->db->q($_POST['timezone']) . ", " .
 		"sorting_comments	= " . (int) $_POST['sorting_comments'] . ", " .
 		"menu_items			= " . (int) $_POST['menu_items'] . ", " .
 		"list_count			= " . (int) $_POST['list_count'] . " " ;
@@ -295,7 +294,7 @@ else if ($user = $this->get_user())
 		}
 
 		$a_zone			= $user['timezone'] ?: $this->db->timezone;
-		$timezones		= $this->_t('TzZoneArray');
+		$timezones		= $this->timezone_list();
 
 		foreach ($timezones as $offset => $timezone)
 		{
@@ -304,7 +303,6 @@ else if ($user = $this->get_user())
 			$tpl->z_offset		= $offset;
 		}
 
-		$tpl->dst			= $user['dst'];
 		$tpl->sortcomments	= $user['sorting_comments'];
 		$tpl->menuitems		= $user['menu_items'];
 		$tpl->listcount		= $user['list_count'];

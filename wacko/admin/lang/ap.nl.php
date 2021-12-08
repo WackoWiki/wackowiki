@@ -648,8 +648,6 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Tijdszone',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
-	'EnableDst'					=> 'Enable Summer Time/DST',
-	'EnableDstInfo'				=> '',
 
 	'Canonical'					=> 'Herleid URL\'s tot hun basisvorm',
 	'CanonicalInfo'				=> 'Alle links worden als absolute URL\'s aangemaakt in de vorm %1. URL\'s ten opzichte van de server root in de vorm %2 verdienen de voorkeur.',

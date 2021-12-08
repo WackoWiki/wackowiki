@@ -648,8 +648,6 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Fuseau horaire',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
-	'EnableDst'					=> 'Enable Summer Time/DST',
-	'EnableDstInfo'				=> '',
 
 	'Canonical'					=> 'Utiliser des URL canoniques',
 	'CanonicalInfo'				=> 'Tous les liens sont créés sous forme d\'URL absolues sous la forme %1. Les URL relatives à la racine du serveur sous la forme %2 doivent être préférées.',

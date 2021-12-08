@@ -68,7 +68,6 @@ $config_db['disable_formatters']			= $config['disable_formatters'];
 $config_db['disable_safehtml']				= $config['disable_safehtml'];
 $config_db['disable_wikilinks']				= $config['disable_wikilinks'];
 $config_db['disable_wikiname']				= $config['disable_wikiname'];
-$config_db['dst']							= $config['dst'];
 $config_db['edit_summary']					= $config['edit_summary'];
 $config_db['email_priority']				= $config['email_priority'];
 $config_db['email_from']					= $config['email_from'];

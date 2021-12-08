@@ -648,8 +648,6 @@ $ap_translation = [
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Ωρολογιακή ζώνη',
 	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
-	'EnableDst'					=> 'Enable Summer Time/DST',
-	'EnableDstInfo'				=> '',
 
 	'Canonical'					=> 'Πλήρη και κανονικοποιημένα URLs',
 	'CanonicalInfo'				=> 'Όλοι οι σύνδεσμοι δημιουργούνται ως απόλυτα URL με τη μορφή %1. Οι διευθύνσεις URL που σχετίζονται με τη ρίζα του διακομιστή με τη μορφή %2 θα πρέπει να προτιμώνται.',

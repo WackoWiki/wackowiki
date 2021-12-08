@@ -47,8 +47,7 @@ function admin_config_formatter(&$engine, &$module)
 		$config['time_format']				= (string) $_POST['time_format'];
 		$config['time_format_seconds']		= (string) $_POST['time_format_seconds'];
 		$config['name_date_macro']			= (string) $_POST['name_date_macro'];
-		$config['timezone']					= (float)$_POST['timezone'];
-		$config['dst']						= (int) $_POST['dst'];
+		$config['timezone']					= (string) $_POST['timezone'];
 		$config['link_target']				= (int) ($_POST['link_target'] ?? 0);
 		$config['noreferrer']				= (int) ($_POST['noreferrer'] ?? 0);
 		$config['nofollow']					= (int) ($_POST['nofollow'] ?? 0);
@@ -238,7 +237,7 @@ function admin_config_formatter(&$engine, &$module)
 				<td>
 					<select id="timezone" name="timezone">
 					<?php
-					$timezones = $engine->_t('TzZoneArray');
+					$timezones = $engine->timezone_list();
 
 					foreach ($timezones as $offset => $timezone)
 					{
@@ -255,19 +254,6 @@ function admin_config_formatter(&$engine, &$module)
 					}
 					?>
 					</select>
-				</td>
-			</tr>
-			<tr class="lined">
-				<td colspan="2"></td>
-			</tr>
-			<tr class="hl-setting">
-				<td class="label">
-					<strong><?php echo $engine->_t('EnableDst');?>:</strong><br>
-					<small><?php echo $engine->_t('EnableDstInfo');?></small>
-				</td>
-				<td>
-					<input type="radio" id="dst_off" name="dst" value="0"<?php echo ($engine->db->dst == 0 ? ' checked' : '');?>><label for="dst_off"><?php echo $engine->_t('Off');?></label>
-					<input type="radio" id="dst_on" name="dst" value="1"<?php echo ($engine->db->dst == 1 ? ' checked' : '');?>><label for="dst_on"><?php echo $engine->_t('On');?></label>
 				</td>
 			</tr>
 			<tr>
