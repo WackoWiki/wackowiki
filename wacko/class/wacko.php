@@ -4574,7 +4574,7 @@ class Wacko
 		{
 			$query = '';
 
-			foreach ($link_table as $to_tag) // discard strtolowered index
+			foreach ($link_table as $to_tag)
 			{
 				$query .= "(" .
 						(int) $from_page_id . ", " .
@@ -4624,7 +4624,7 @@ class Wacko
 		{
 			$query = '';
 
-			foreach ($external_table as $link) // discard strtolowered index
+			foreach ($external_table as $link)
 			{
 				if (filter_var($link, FILTER_VALIDATE_URL))
 				{

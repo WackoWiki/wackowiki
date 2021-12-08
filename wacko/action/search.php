@@ -328,7 +328,7 @@ else
 	$form	= 1;
 }
 
-$phrase || $phrase = trim(@$_GET['phrase']);
+$phrase || $phrase = trim(($_GET['phrase'] ?? ''));
 
 if ($form)
 {

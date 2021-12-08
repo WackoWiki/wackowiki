@@ -450,7 +450,7 @@ if ($bg_type != 0)
 	// generate noisy background, to be merged with CAPTCHA later
 	// any suggestions on how best to do this much appreciated
 	// sample code would be even better!
-	// I'm not an OCR expert (hell, I'm not even an image expert; puremango.co.uk was designed in MsPaint)
+	// I'm not an OCR expert (hell, I'm not even an image expert)
 	// so the noise models are based around my -guesswork- as to what would make it hard for an OCR prog
 	// ideally, the character obfuscation would be strong enough not to need additional background noise
 	// in any case, I hope at least one of the options given here provide some extra security!

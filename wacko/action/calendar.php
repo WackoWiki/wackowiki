@@ -95,8 +95,8 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		$day_names[$n] = utf8_ucfirst($fmt->format($t));
 	}
 
-	$fmt = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "MM,yyyy,LLLL");
-	[$month, $year, $month_name]	= explode(',', $fmt->format($first_of_month));
+	$fmt = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "yyyy,LLLL");
+	[$year, $month_name]	= explode(',', $fmt->format($first_of_month));
 	$weekday						= date('w', $first_of_month);
 
 	#$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
