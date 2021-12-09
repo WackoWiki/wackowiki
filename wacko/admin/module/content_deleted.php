@@ -168,7 +168,7 @@ function admin_content_deleted(&$engine, &$module)
 		foreach ($pages as $page)
 		{
 			// day header
-			[$day, $time] = explode(' ', $page['modified']);
+			$engine->sql2datetime($page['modified'], $day, $time);
 
 			if ($day != $curday)
 			{
@@ -177,14 +177,14 @@ function admin_content_deleted(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br><strong>' . $engine->date_format($day, $engine->db->date_format) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . $day . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
-						'<small>' . $engine->date_format($time, $engine->db->time_format_seconds) . ' - ' .
+						'<small>' . $time . ' - ' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
@@ -208,7 +208,7 @@ function admin_content_deleted(&$engine, &$module)
 		foreach ($revisions as $revision)
 		{
 			// day header
-			[$day, $time] = explode(' ', $revision['modified']);
+			$engine->sql2datetime($revision['modified'], $day, $time);
 
 			if ($day != $curday)
 			{
@@ -217,14 +217,14 @@ function admin_content_deleted(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br><strong>' . $engine->date_format($day, $engine->db->date_format) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . $day . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
-						'<small>' . $engine->date_format($time, $engine->db->time_format_seconds) . ' - ' .
+						'<small>' . $time . ' - ' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
@@ -248,7 +248,7 @@ function admin_content_deleted(&$engine, &$module)
 		foreach ($files as $file)
 		{
 			// day header
-			[$day, $time] = explode(' ', $file['modified_dt']);
+			$engine->sql2datetime($file['modified_dt'], $day, $time);
 
 			if ($day != $curday)
 			{
@@ -257,14 +257,14 @@ function admin_content_deleted(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br><strong>' . $engine->date_format($day, $engine->db->date_format) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . $day . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
-						'<small>' . $engine->date_format($time, $engine->db->time_format_seconds) . ' - ' .
+						'<small>' . $time . ' - ' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .

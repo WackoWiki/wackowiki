@@ -103,7 +103,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 									'</td>
 									<th class="t-left nowrap">' .
-										date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
+										$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
 									'</th>
 								</tr>
 								<tr>
@@ -494,7 +494,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 											'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 										'</td>
 										<th class="t-left nowrap">' .
-											date($engine->db->date_format . ' ' . $engine->db->time_format_seconds, $log[0]) .
+											$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
 										'</th>
 									</tr>
 									<tr>
