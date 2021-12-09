@@ -23,10 +23,10 @@ $engine		= 'ENGINE=' . $config['db_engine'];
 
 // CONFIG
 $update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('footer_rating', 'dst')";
-$update_config_r6_0_2 = "UPDATE {$pref}config SET config_value = '" . _quote('UTC') . "' WHERE config_name = 'timezone'";
-$update_config_r6_0_3 = "UPDATE {$pref}config SET config_value = '" . _quote('dd.MM.Y') . "' WHERE config_name = 'date_format'";
-$update_config_r6_0_4 = "UPDATE {$pref}config SET config_value = '" . _quote('HH:mm') . "' WHERE config_name = 'time_format'";
-$update_config_r6_0_5 = "UPDATE {$pref}config SET config_value = '" . _quote('HH:mm:ss') . "' WHERE config_name = 'time_format_seconds'";
+$update_config_r6_0_2 = "UPDATE {$pref}config SET config_value = " . _quote('UTC') . " WHERE config_name = 'timezone'";
+$update_config_r6_0_3 = "UPDATE {$pref}config SET config_value = " . _quote('dd.MM.Y') . " WHERE config_name = 'date_format'";
+$update_config_r6_0_4 = "UPDATE {$pref}config SET config_value = " . _quote('HH:mm') . " WHERE config_name = 'time_format'";
+$update_config_r6_0_5 = "UPDATE {$pref}config SET config_value = " . _quote('HH:mm:ss') . " WHERE config_name = 'time_format_seconds'";
 
 // EXTERNAL LINK
 
