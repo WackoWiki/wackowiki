@@ -35,9 +35,9 @@ $lang = [
 	'privacy_page'		=> 'Datenschutz',
 
 	// time
-	#'date_format'					=> 'd.m.Y',
-	#'time_format'					=> 'H:i',
-	#'time_format_seconds'			=> 'H:i:s',
+	#'date_format'					=> 'dd.MM.Y',
+	#'time_format'					=> 'HH:mm',
+	#'time_format_seconds'			=> 'HH:mm:ss',
 ],
 
 /*

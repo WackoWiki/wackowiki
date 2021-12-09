@@ -177,14 +177,14 @@ function admin_content_deleted(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br><strong>' . $engine->date_formatted($day, $engine->db->date_format) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . $engine->date_format($day, $engine->db->date_format) . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
-						'<small>' . $engine->date_formatted($time, $engine->db->time_format_seconds) . ' - ' .
+						'<small>' . $engine->date_format($time, $engine->db->time_format_seconds) . ' - ' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'page_id' => $page['page_id'], 'type' => OBJECT_PAGE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
@@ -217,14 +217,14 @@ function admin_content_deleted(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br><strong>' . $engine->date_formatted($day, $engine->db->date_format) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . $engine->date_format($day, $engine->db->date_format) . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
-						'<small>' . $engine->date_formatted($time, $engine->db->time_format_seconds) . ' - ' .
+						'<small>' . $engine->date_format($time, $engine->db->time_format_seconds) . ' - ' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'page_id' => $revision['page_id'], 'revision_id' => $revision['revision_id'], 'type' => OBJECT_REVISION]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .
@@ -257,14 +257,14 @@ function admin_content_deleted(&$engine, &$module)
 					echo "\n";
 				}
 
-				echo '<tr><td colspan="2"><br><strong>' . $engine->date_formatted($day, $engine->db->date_format) . ":</strong></td></tr>\n";
+				echo '<tr><td colspan="2"><br><strong>' . $engine->date_format($day, $engine->db->date_format) . ":</strong></td></tr>\n";
 				$curday = $day;
 			}
 
 			// print entry
 			echo '<tr>' .
 					'<td class="lined">' .
-						'<small>' . $engine->date_formatted($time, $engine->db->time_format_seconds) . ' - ' .
+						'<small>' . $engine->date_format($time, $engine->db->time_format_seconds) . ' - ' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'delete', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('DeleteButton') . '</a> ]' .
 						# ' [ <a href="' . $engine->href('', '', ['action' => 'archive', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('ArchiveButton') . '</a> ]' .
 						' [ <a href="' . $engine->href('', '', ['action' => 'restore', 'file_id' => $file['file_id'], 'type' => OBJECT_FILE]) . '">' . $engine->_t('RestoreButton') . '</a> ]</small> ' .

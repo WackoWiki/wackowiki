@@ -88,18 +88,15 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 		? "cccccc"	// cccccc - 2-letter textual day name
 		: "ccc");	// ccc    - 3-letter textual day name, see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
 
-	$fmt = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, $day_pattern);
-
 	for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t += DAYSECS) // January 4, 1970 was a Sunday
 	{
-		$day_names[$n] = utf8_ucfirst($fmt->format($t));
+		$day_names[$n] = utf8_ucfirst($this->date_format($t, $day_pattern));
 	}
 
-	$fmt = new IntlDateFormatter($this->language['locale'], IntlDateFormatter::FULL, IntlDateFormatter::FULL, null, null, "yyyy,LLLL");
-	[$year, $month_name]	= explode(',', $fmt->format($first_of_month));
+	[$year, $month_name]	= explode(',', $this->date_format($first_of_month, "yyyy,LLLL"));
 	$weekday				= date('w', $first_of_month);
 
-	#$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
+	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
 	$title		= Ut::html(utf8_ucfirst($month_name)) . NBSP . $year;
 	// begin calendar
 
@@ -153,8 +150,8 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 				$content = $day;
 			}
 
-			$tpl->class		= $classes ? ' class="' . Ut::html($classes) . '"' : '';
-			$content		= ($link ? '<a href="' . Ut::html($link) . '">' . $content . '</a>' : $content);
+			$tpl->class		= $classes	? ' class="' . Ut::html($classes) . '"' : '';
+			$content		= $link		? '<a href="' . Ut::html($link) . '">' . $content . '</a>' : $content;
 			$tpl->content	= '<span class="calendar-hl">' . $content . '</span>';
 		}
 		else

@@ -34,9 +34,9 @@ $lang = [
 	'privacy_page'		=> '개인정보처리방침',
 
 	// time
-	#'date_format'					=> 'd.m.Y',
-	#'time_format'					=> 'H:i',
-	#'time_format_seconds'			=> 'H:i:s',
+	#'date_format'					=> 'dd.MM.Y',
+	#'time_format'					=> 'HH:mm',
+	#'time_format_seconds'			=> 'HH:mm:ss',
 ],
 
 /*

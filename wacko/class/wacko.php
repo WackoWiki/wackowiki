@@ -378,27 +378,26 @@ class Wacko
 
 	function sql2datetime($text, &$date, &$time)
 	{
-		$date	= $this->date_formatted($text, $this->db->date_format);
-		$time	= $this->date_formatted($text, $this->db->time_format);
+		$date	= $this->date_format($this->sql2time($text), $this->db->date_format);
+		$time	= $this->date_format($this->sql2time($text), $this->db->time_format);
 	}
 
 	function sql2precisetime($text)
 	{
-		return $this->date_formatted($text, $this->db->date_format . ' ' . $this->db->time_format_seconds);
+		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format_seconds);
 	}
 
 	// TODO: make format pattern depended from localization and user preferences?
 	function get_time_formatted($text) // STS: rename to sql_time_formatted
 	{
-		return $this->date_formatted($text, $this->db->date_format . ' ' . $this->db->time_format);
+		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format);
 	}
 
 	// unix time formatted
-	function date_formatted($text, $pattern)
+	function date_format($unix_time, $pattern)
 	{
-		$user		= $this->get_user();
-		$tz			= $user ? $user['timezone'] : $this->db->timezone;
-		$unix_time	= $this->sql2time($text);
+		$user	= $this->get_user();
+		$tz		= $user ? $user['timezone'] : $this->db->timezone;
 
 		$fmt = new IntlDateFormatter(
 			$this->language['locale'],
