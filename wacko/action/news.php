@@ -95,8 +95,8 @@ if (!empty($this->db->news_cluster))
 	// collect data
 	// heavy lifting here (watch out for REGEXPs!)
 	$select_count =
-		"SELECT COUNT(page_id) AS n " .
-			"FROM {$prefix}page ";
+		"SELECT COUNT(p.page_id) AS n " .
+			"FROM {$prefix}page p ";
 
 	$select_mode =
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
@@ -111,9 +111,9 @@ if (!empty($this->db->news_cluster))
 		$p_mode = ['mode' => 'latest'];
 
 		$selector =
-			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND comment_on_id = 0 " .
-				"AND deleted <> 1 ";
+			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
+				"AND p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 ";
 
 		$sql_count	=
 			$select_count .
@@ -155,10 +155,10 @@ if (!empty($this->db->news_cluster))
 		$p_mode = ['mode' => 'week'];
 
 		$selector =
-			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
-				"AND comment_on_id = 0 " .
-				"AND deleted <> 1 ";
+			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
+				"AND p.created > DATE_SUB( UTC_TIMESTAMP(), INTERVAL 7 DAY ) " .
+				"AND p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 ";
 
 		$sql_count	=
 			$select_count .
@@ -175,10 +175,10 @@ if (!empty($this->db->news_cluster))
 		$date	= $this->db->date($date);
 
 		$selector =
-			"WHERE tag REGEXP '^{$news_cluster}{$news_levels}$' " .
-				"AND created > " . $this->db->q($date) . " " .
-				"AND comment_on_id = 0 " .
-				"AND deleted <> 1 ";
+			"WHERE p.tag REGEXP '^{$news_cluster}{$news_levels}$' " .
+				"AND p.created > " . $this->db->q($date) . " " .
+				"AND p.comment_on_id = 0 " .
+				"AND p.deleted <> 1 ";
 
 		$sql_count	=
 			$select_count .
