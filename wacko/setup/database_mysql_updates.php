@@ -22,8 +22,11 @@ $engine		= 'ENGINE=' . $config['db_engine'];
 // CATEGORY ASSIGNMENT
 
 // CONFIG
-#$update_config_r6_x_0 = "UPDATE {$pref}config SET config_value = '" . _quote('addcomment|admin\.php|categories|claim|clone|diff|edit|export\.xml|file|latex|moderate|new|permissions|purge|print|properties|rate|referrers|referrers_sites|remove|rename|review|revisions|revisions\.xml|robots\.txt|sitemap\.xml|show|source|upload|watch|watchers|wordprocessor') . "' WHERE config_name = 'standard_handlers'";
 $update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('footer_rating', 'dst')";
+$update_config_r6_0_2 = "UPDATE {$pref}config SET config_value = '" . _quote('UTC') . "' WHERE config_name = 'timezone'";
+$update_config_r6_0_3 = "UPDATE {$pref}config SET config_value = '" . _quote('dd.MM.Y') . "' WHERE config_name = 'date_format'";
+$update_config_r6_0_4 = "UPDATE {$pref}config SET config_value = '" . _quote('HH:mm') . "' WHERE config_name = 'time_format'";
+$update_config_r6_0_5 = "UPDATE {$pref}config SET config_value = '" . _quote('HH:mm:ss') . "' WHERE config_name = 'time_format_seconds'";
 
 // EXTERNAL LINK
 
@@ -62,6 +65,8 @@ $alter_user_r6_0_1 = "ALTER TABLE {$pref}user CHANGE lost_password_request_count
 $alter_user_setting_r6_0_1 = "ALTER TABLE {$pref}user_setting DROP typografica";
 $alter_user_setting_r6_0_2 = "ALTER TABLE {$pref}user_setting DROP dst";
 $alter_user_setting_r6_0_3 = "ALTER TABLE {$pref}user_setting CHANGE timezone timezone VARCHAR(100) NOT NULL DEFAULT 'UTC'";
+
+$update_user_setting_r6_0_1 = "UPDATE {$pref}user_setting SET timezone = 'UTC'";
 
 // USERGROUP
 
