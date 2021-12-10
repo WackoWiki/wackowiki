@@ -294,9 +294,8 @@ else if ($user = $this->get_user())
 		}
 
 		$a_zone			= $user['timezone'] ?: $this->db->timezone;
-		$timezones		= $this->timezone_list();
 
-		foreach ($timezones as $offset => $timezone)
+		foreach ($this->timezone_list() as $offset => $timezone)
 		{
 			$tpl->z_timezone	= $timezone;
 			$tpl->z_sel			= (int) (isset($a_zone) && $a_zone == $offset);

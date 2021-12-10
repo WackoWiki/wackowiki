@@ -237,9 +237,7 @@ function admin_config_formatter(&$engine, &$module)
 				<td>
 					<select id="timezone" name="timezone">
 					<?php
-					$timezones = $engine->timezone_list();
-
-					foreach ($timezones as $offset => $timezone)
+					foreach ($engine->timezone_list() as $offset => $timezone)
 					{
 						if (mb_strlen($timezone) > 50)
 						{
@@ -371,4 +369,3 @@ function admin_config_formatter(&$engine, &$module)
 <?php
 	echo $engine->form_close();
 }
-

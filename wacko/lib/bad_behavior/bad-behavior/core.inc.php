@@ -158,7 +158,7 @@ function bb2_screen($settings, $package)
 		if ($r = bb2_misc_headers($settings, $package)) return $r;
 
 		// Specific checks
-		@$ua = $package['user_agent'];
+		$ua = $package['user_agent'] ?? '';
 		// Search engine checks come first
 		if (stripos($ua, "bingbot") !== FALSE || stripos($ua, "msnbot") !== FALSE || stripos($ua, "MS Search") !== FALSE) {
 			require_once(BB2_CORE . "/searchengine.inc.php");
