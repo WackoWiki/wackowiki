@@ -35,6 +35,8 @@ function admin_config_formatter(&$engine, &$module)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
+		$timezone = $engine->validate_timezone($_POST['timezone']);
+
 		$config['allow_x11colors']			= (int) ($_POST['allow_x11colors'] ?? 0);
 		$config['default_typografica']		= (int) ($_POST['default_typografica'] ?? 0);
 		$config['paragrafica']				= (int) ($_POST['paragrafica'] ?? 0);
@@ -47,7 +49,7 @@ function admin_config_formatter(&$engine, &$module)
 		$config['time_format']				= (string) $_POST['time_format'];
 		$config['time_format_seconds']		= (string) $_POST['time_format_seconds'];
 		$config['name_date_macro']			= (string) $_POST['name_date_macro'];
-		$config['timezone']					= (string) $_POST['timezone'];
+		$config['timezone']					= (string) $timezone;
 		$config['link_target']				= (int) ($_POST['link_target'] ?? 0);
 		$config['noreferrer']				= (int) ($_POST['noreferrer'] ?? 0);
 		$config['nofollow']					= (int) ($_POST['nofollow'] ?? 0);

@@ -397,7 +397,7 @@ class Wacko
 	function date_format($unix_time, $pattern)
 	{
 		$user	= $this->get_user();
-		$tz		= $user ? $user['timezone'] : $this->db->timezone;
+		$tz		= $user['timezone'] ?: $this->db->timezone;
 
 		$fmt = new IntlDateFormatter(
 			$this->language['locale'],
@@ -475,6 +475,11 @@ class Wacko
 		$name = str_replace('St ', 'St. ', $name);
 
 		return $name;
+	}
+
+	function validate_timezone($timezone) : string
+	{
+		return in_array($timezone, DateTimeZone::listIdentifiers()) ? $timezone : 'UTC';
 	}
 
 	// LANG FUNCTIONS

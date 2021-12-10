@@ -12,7 +12,7 @@ if (!defined('IN_WACKO'))
 require Ut::join_path(THEME_DIR, '_common/_header.php');
 
 // user lang dir
-if ($this->language[$this->page_lang]['dir'] != $this->user_lang_dir)
+if ($this->languages[$this->page_lang]['dir'] != $this->user_lang_dir)
 {
 	$tpl->dir	= ' dir="' . $this->user_lang_dir . '"';
 }

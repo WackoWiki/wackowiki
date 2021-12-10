@@ -248,7 +248,7 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 
 					/*
 						We flag some pages as critical in the insert.**.php file, if these don't get inserted
-						then we have aserious problem and should indicate that to the user.
+						then we have a serious problem and should indicate that to the user.
 					*/
 					if ($critical)
 					{
