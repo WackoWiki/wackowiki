@@ -191,7 +191,7 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 	sanitize_page_tag($tag);
 
 	$prefix				= $config_global['table_prefix'];
-	$page_select		= "SELECT page_id FROM " . $prefix . "page WHERE tag='" . _quote($tag) . "'";
+	$page_select		= "SELECT page_id FROM " . $prefix . "page WHERE tag ='" . _quote($tag) . "'";
 	$owner_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
 	$page_id			= "SELECT page_id FROM " . $prefix . "page WHERE tag = '" . _quote($tag) . "' LIMIT 1";
 
@@ -247,8 +247,8 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 					mysqli_query($dblink_global, $data[0]);
 
 					/*
-						We flag some pages as critical in the insert.**.php file, if these don't get inserted then we have a
-						serious problem and should indicate that to the user.
+						We flag some pages as critical in the insert.**.php file, if these don't get inserted
+						then we have aserious problem and should indicate that to the user.
 					*/
 					if ($critical)
 					{
