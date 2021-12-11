@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'hu',
-'LangName'	=> 'Magyar',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'hu',
+'LangLocale'	=> 'hu_HU',
+'LangName'		=> 'Magyar',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults
@@ -34,7 +35,7 @@ $lang = [
 	'privacy_page'		=> 'Adatvédelem',
 
 	// time
-	#'date_format'					=> 'dd.MM.Y',
+	#'date_format'					=> 'dd.MM.yyyy',
 	#'time_format'					=> 'HH:mm',
 	#'time_format_seconds'			=> 'HH:mm:ss',
 ],

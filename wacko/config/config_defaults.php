@@ -271,7 +271,7 @@ $wacko_config_defaults = [
 	'recovery_password'				=> '',
 	'trusted_domains'				=> '',	// not in use
 
-	'date_format'					=> 'dd.MM.Y',
+	'date_format'					=> 'dd.MM.yyyy',
 	'time_format'					=> 'HH:mm',
 	'time_format_seconds'			=> 'HH:mm:ss',
 	'name_date_macro'				=> '%s (%s)',

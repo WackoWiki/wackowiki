@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'et',
-'LangName'	=> 'Estonian',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'et',
+'LangLocale'	=> 'et_EE',
+'LangName'		=> 'Estonian',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults
@@ -34,7 +35,7 @@ $lang = [
 	'privacy_page'		=> 'Privacy',
 
 	// time
-	#'date_format'					=> 'dd.MM.Y',
+	#'date_format'					=> 'dd.MM.yyyy',
 	#'time_format'					=> 'HH:mm',
 	#'time_format_seconds'			=> 'HH:mm:ss',
 ],

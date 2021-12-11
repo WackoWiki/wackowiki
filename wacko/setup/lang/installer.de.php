@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'de',
-'LangName'	=> 'Deutsch',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'de',
+'LangLocale'	=> 'de_DE',
+'LangName'		=> 'Deutsch',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults
@@ -35,7 +36,7 @@ $lang = [
 	'privacy_page'		=> 'Datenschutz',
 
 	// time
-	#'date_format'					=> 'dd.MM.Y',
+	#'date_format'					=> 'dd.MM.yyyy',
 	#'time_format'					=> 'HH:mm',
 	#'time_format_seconds'			=> 'HH:mm:ss',
 ],

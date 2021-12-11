@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'fa',
-'LangName'	=> 'Farsi',
-'LangDir'	=> 'rtl',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'fa',
+'LangLocale'	=> 'fa_IR',
+'LangName'		=> 'Farsi',
+'LangDir'		=> 'rtl',
 
 /*
    Config Defaults
@@ -34,7 +35,7 @@ $lang = [
 	'privacy_page'		=> 'Privacy',
 
 	// time
-	#'date_format'					=> 'dd.MM.Y',
+	#'date_format'					=> 'dd.MM.yyyy',
 	#'time_format'					=> 'HH:mm',
 	#'time_format_seconds'			=> 'HH:mm:ss',
 ],
