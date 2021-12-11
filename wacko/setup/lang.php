@@ -15,7 +15,7 @@ if (array_key_exists('wacko_version', $config))
 				'<code class="version">' . $min_upgrade_version . '</code>') .
 			"</li></ul>\n";
 		// https://sourceforge.net/projects/wackowiki/files/
-		// https://wackowiki.org/doc/Dev/Release/R6.0/Upgrade
+		// https://wackowiki.org/doc/Dev/Release/R6.1/Upgrade
 	}
 	else
 	{

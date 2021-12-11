@@ -397,7 +397,7 @@ class Wacko
 	function date_format($unix_time, $pattern)
 	{
 		$user	= $this->get_user();
-		$tz		= $user['timezone'] ?: $this->db->timezone;
+		$tz		= $user['timezone'] ?? $this->db->timezone;
 
 		$fmt = new IntlDateFormatter(
 			$this->language['locale'],
