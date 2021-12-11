@@ -6,6 +6,7 @@ $lang = [
 */
 'Charset'		=> 'utf-8',
 'LangISO'		=> 'es',
+'LangLocale'	=> 'es_ES',
 'LangName'		=> 'Español',
 'LangDir'		=> 'ltr',
 
