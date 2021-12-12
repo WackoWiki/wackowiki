@@ -1585,6 +1585,9 @@ a:target {
 	padding: 0 0.5em;
 	white-space: nowrap;
 }
+.ul-letters li:first-child {
+	border-left: 1px none;
+}
 
 .ul-letters li.active   {
 	background: var(--ww-hover-primary);

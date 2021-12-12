@@ -98,7 +98,7 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	[$month, $year, $month_name]	= explode(',', $fmt->format($first_of_month));
 	$weekday						= date('w', $first_of_month);
 
-	#$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
+	$weekday	= ($weekday + 7 - $first_day) % 7; // adjust for $first_day
 	$title		= Ut::html(utf8_ucfirst($month_name)) . NBSP . $year;
 	// begin calendar
 
