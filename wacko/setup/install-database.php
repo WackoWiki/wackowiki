@@ -66,7 +66,7 @@ if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.4', '
 {
 	// set timezone and new ICU formats
 	$config['timezone']				= 'UTC';
-	$config['date_format']			= 'dd.MM.Y';
+	$config['date_format']			= 'dd.MM.yyyy';
 	$config['time_format']			= 'HH:mm';
 	$config['time_format_seconds']	= 'HH:mm:ss';
 }
