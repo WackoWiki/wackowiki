@@ -61,6 +61,16 @@ if (!$config['is_update'])
 	$config = array_merge($config, $lang['ConfigDefaults']);
 }
 
+// update config values
+if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.4', '<'))
+{
+	// set timezone and new ICU formats
+	$config['timezone']				= 'UTC';
+	$config['date_format']			= 'dd.MM.Y';
+	$config['time_format']			= 'HH:mm';
+	$config['time_format_seconds']	= 'HH:mm:ss';
+}
+
 /*
  Setup the tables depending on which database we selected
 

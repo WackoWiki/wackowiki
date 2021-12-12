@@ -87,10 +87,6 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 
 // config
 $upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_1];
-$upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_2];
-$upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_3];
-$upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_4];
-$upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_5];
 
 // file
 
