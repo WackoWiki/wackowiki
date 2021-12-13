@@ -17,7 +17,10 @@ class Diag
 	{
 		chdir($cwd);
 
-		if ($config['debug'] >= 1 && strpos($http->method, '.xml') === false && $http->method != 'print' && $http->method != 'wordprocessor')
+		if ($config['debug'] >= 1
+			&& strpos($http->method, '.xml') === false 
+			&& $http->method != 'print'
+			&& $http->method != 'wordprocessor')
 		{
 			if (($config['debug_admin_only'] && $engine->is_admin()) || !$config['debug_admin_only'])
 			{
@@ -105,20 +108,29 @@ class Diag
 
 				if ($config['debug'] >= 2)
 				{
-					$user = $engine->get_user();
+					$user		= $engine->get_user();
+					$lang_data	= [
+						'Multilanguage: ' . 				($config['multilanguage'] == 1 ? 'true' : 'false'),
+						'HTTP_ACCEPT_LANGUAGE set: ' .		(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false'),
+						'HTTP_ACCEPT_LANGUAGE value: ' .	($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? ''),
+						'User agent language: ' .			$http->user_agent_language(),
+						'User language set: ' .				(isset($user['user_lang']) ? 'true' : 'false'),
+						'User language value: ' .			($user['user_lang'] ?? ''),
+						'Page language: ' .					($engine->page['page_lang'] ?? ''),
+						'Config language: ' .				$config['language'],
+						'User selected language: ' .		($engine->user_lang ?? ''),
+						'Charset: ' .						$engine->get_charset(),
+						'HTML Entities Charset: ' .			HTML_ENTITIES_CHARSET,
+						// 'Disable cache: ' .				($engine->disable_cache === true ? 'true' : 'false'),
+					];
+
 					echo '<p class="debug">Language data</p>' . "\n<ul>\n";
-					echo "\t<li>Multilanguage: " . ($config['multilanguage'] == 1 ? 'true' : 'false') . "</li>\n";
-					echo "\t<li>HTTP_ACCEPT_LANGUAGE set: " . (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? 'true' : 'false') . "</li>\n";
-					echo "\t<li>HTTP_ACCEPT_LANGUAGE value: " . ($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '') . "</li>\n";
-					echo "\t<li>User agent language: " . $http->user_agent_language() . "</li>\n";
-					echo "\t<li>User language set: " . (isset($user['user_lang']) ? 'true' : 'false') . "</li>\n";
-					echo "\t<li>User language value: " . ($user['user_lang'] ?? '') . "</li>\n";
-					echo "\t<li>Page language: " . ($engine->page['page_lang'] ?? '')  . "</li>\n";
-					echo "\t<li>Config language: " . $config['language'] . "</li>\n";
-					echo "\t<li>User selected language: " . ($engine->user_lang ?? '') . "</li>\n";
-					echo "\t<li>Charset: " . $engine->get_charset() . "</li>\n";
-					echo "\t<li>HTML Entities Charset: " . HTML_ENTITIES_CHARSET . "</li>\n";
-					// echo "\t<li>Disable cache: " . ($engine->disable_cache === true ? 'true' : 'false') . "</li>\n";
+
+					foreach ($lang_data as $lang_item)
+					{
+						echo "\t<li>" . $lang_item . "</li>\n";
+					}
+
 					echo "</ul>\n";
 				}
 
@@ -151,19 +163,28 @@ class Diag
 
 				if ($config['debug'] >= 3)
 				{
+					$session_data	= [
+						'session_id(): ' .		$engine->sess->id(),
+						'Base URL: ' .			$config['base_url'],
+						'Rewrite Mode: ' .		($config['rewrite_mode'] ? 'on' : 'off'),
+						'HTTP_MOD_ENV: ' .		((getenv('HTTP_MOD_ENV') === 'on') ? 'on' : 'off'),
+						'HTTP_MOD_REWRITE: ' .	((getenv('HTTP_MOD_REWRITE') === 'on') ? 'on' : 'off'),
+						'HTTPS: ' .				($_SERVER['HTTPS'] ?? 'off'),
+						'IP-address: ' .		$http->ip,
+						'SERVER_PORT: ' .		$_SERVER['SERVER_PORT'],
+						'TLS: ' .				(isset($config['tls']) ? 'on' : 'off'),
+						'TLS implicit: ' .		($config['tls_implicit'] ? 'on' : 'off'),
+						'Cookie path: ' .		$config['cookie_path'],
+						// 'GZIP: ' .			(@extension_loaded('zlib') ? 'On' : 'Off'),
+					];
+
 					echo '<p class="debug">Session data</p>' . "\n<ul>\n";
-					echo "\t<li>session_id(): " . $engine->sess->id() . "</li>\n";
-					echo "\t<li>Base URL: " . $config['base_url'] . "</li>\n";
-					echo "\t<li>Rewrite Mode: " . ($config['rewrite_mode'] ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>HTTP_MOD_ENV: " . ((getenv('HTTP_MOD_ENV') === 'on') ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>HTTP_MOD_REWRITE: " . ((getenv('HTTP_MOD_REWRITE') === 'on') ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>HTTPS: " . ($_SERVER['HTTPS'] ?? 'off') . "</li>\n";
-					echo "\t<li>IP-address: " . $http->ip . "</li>\n";
-					echo "\t<li>SERVER_PORT: " . $_SERVER['SERVER_PORT'] . "</li>\n";
-					echo "\t<li>TLS: " . (isset($config['tls']) ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>TLS implicit: " . (($config['tls_implicit']) ? 'on' : 'off') . "</li>\n";
-					echo "\t<li>Cookie path: " . $config['cookie_path'] . "</li>\n";
-					// echo "\t<li>GZIP: " . (@extension_loaded('zlib') ? 'On' : 'Off') . "</li>\n";
+
+					foreach ($session_data as $session_item)
+					{
+						echo "\t<li>" . $session_item . "</li>\n";
+					}
+
 					echo "</ul>\n";
 				}
 
@@ -202,12 +223,12 @@ class Diag
 				&& ($callee = (@$trace[0]['file'] === __FILE__)? @$trace[1] : @$trace[0])
 				&& @$callee['file'])
 			{
-				$dir = dirname(__FILE__, 2) . '/';
-				$callee = str_replace($dir, '', $callee['file']) . ':' . $callee['line'];
+				$dir	= dirname(__FILE__, 2) . '/';
+				$callee	= str_replace($dir, '', $callee['file']) . ':' . $callee['line'];
 			}
 			else
 			{
-				$callee = '';
+				$callee	= '';
 			}
 
 			$type = (is_string($args[0]) && isset($code[$args[0]]))? $code[array_shift($args)] : 0;
@@ -256,9 +277,9 @@ EOD;
 			foreach ($log as $one)
 			{
 				echo '<tr class="logtype' . (int) $one[1] . '">';
-				echo '<td>' . number_format($one[0] - WACKO_STARTED, 4) . '</td>';
-				echo '<td><code>' . Ut::html($one[3]) . '</code></td>';
-				echo '<td>' .  Ut::html($one[2]) .  '</td>';
+				echo '<td>' .		number_format($one[0] - WACKO_STARTED, 4) . '</td>';
+				echo '<td><code>' .	Ut::html($one[3]) . '</code></td>';
+				echo '<td>' . 		Ut::html($one[2]) .  '</td>';
 				echo '</tr>';
 			}
 

@@ -5,7 +5,7 @@ const BB2_VERSION = "2.2.24";
 // If you're reading this, you are probably lost.
 // Go read the bad-behavior-generic.php file.
 
-define('BB2_CORE', __DIR__);
+const BB2_CORE = __DIR__;
 
 require_once(BB2_CORE . "/functions.inc.php");
 
@@ -158,7 +158,7 @@ function bb2_screen($settings, $package)
 		if ($r = bb2_misc_headers($settings, $package)) return $r;
 
 		// Specific checks
-		@$ua = $package['user_agent'];
+		$ua = $package['user_agent'] ?? '';
 		// Search engine checks come first
 		if (stripos($ua, "bingbot") !== FALSE || stripos($ua, "msnbot") !== FALSE || stripos($ua, "MS Search") !== FALSE) {
 			require_once(BB2_CORE . "/searchengine.inc.php");
