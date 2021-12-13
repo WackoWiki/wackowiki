@@ -456,7 +456,7 @@ if ($bg_type != 0)
 	// in any case, I hope at least one of the options given here provide some extra security!
 
 	$im3			= ImageCreateTrueColor($width, $height);
-	$temp_bg		= ImageCreateTrueColor($width * 1.5, $height * 1.5);
+	$temp_bg		= ImageCreateTrueColor(round($width * 1.5), round($height * 1.5));
 	$bg3			= ImageColorAllocate($im3, 255, 255, 255);
 
 	ImageFill($im3, 0, 0, $bg3);

@@ -5480,7 +5480,7 @@ class Wacko
 		$exec_limit = ini_get('max_execution_time');
 		set_time_limit(0);
 
-		while (($sleep = $login_delay - (microtime(1) - WACKO_STARTED)) > 0)
+		while (($sleep = round($login_delay - (microtime(1) - WACKO_STARTED))) > 0)
 		{
 			// Stall next login for a bit.
 			// This will considerably slow down brute force attackers.
