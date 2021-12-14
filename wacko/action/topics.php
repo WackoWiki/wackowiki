@@ -142,37 +142,38 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 		$pagination['limit'];
 
 	// load topics data
-	$topics = $this->db->load_all($sql);
-
-	$page_ids = [];
-
-	foreach ($topics as $page)
+	if ($topics = $this->db->load_all($sql))
 	{
-		$page_ids[]	= $page['page_id'];
-		$this->cache_page($page, true);
-	}
+		$page_ids = [];
 
-	// cache acls and categories
-	$this->preload_acl($page_ids, ['read', 'comment']);
-	$this->preload_categories($page_ids);
+		foreach ($topics as $page)
+		{
+			$page_ids[]	= $page['page_id'];
+			$this->cache_page($page, true);
+		}
 
-	// load latest topic comment
-	$sql_comments =
-		"SELECT p.tag, p.ip, p.created, p.comment_on_id, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name " .
-		"FROM " . $this->db->table_prefix . "page p " .
-			"LEFT JOIN " . $this->db->table_prefix . "page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) " .
-			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
-		"WHERE p.comment_on_id IN (" . $this->ids_string($page_ids) . ") " .
-			"AND p2.page_id IS NULL " .
-			"AND p.comment_on_id <> 0 " .
-			"AND p.deleted <> 1";
+		// cache acls and categories
+		$this->preload_acl($page_ids, ['read', 'comment']);
+		$this->preload_categories($page_ids);
 
-	$comments = $this->db->load_all($sql_comments);
+		// load latest topic comment
+		$sql_comments =
+			"SELECT p.tag, p.ip, p.created, p.comment_on_id, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name " .
+			"FROM " . $this->db->table_prefix . "page p " .
+				"LEFT JOIN " . $this->db->table_prefix . "page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) " .
+				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+			"WHERE p.comment_on_id IN (" . $this->ids_string($page_ids) . ") " .
+				"AND p2.page_id IS NULL " .
+				"AND p.comment_on_id <> 0 " .
+				"AND p.deleted <> 1";
 
-	foreach ($comments as $comment)
-	{
-		$topic_comments[$comment['comment_on_id']] = $comment;
+		$comments = $this->db->load_all($sql_comments);
+
+		foreach ($comments as $comment)
+		{
+			$topic_comments[$comment['comment_on_id']] = $comment;
+		}
 	}
 
 	$tpl->enter('topics_');
