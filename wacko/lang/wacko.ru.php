@@ -1093,6 +1093,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'Сообщения',
 	'ForumLastComment'			=> 'Последние сообщения',
 	'ForumNoComments'			=> 'Сообщений нет',
+	'ForumNoTopics'				=> 'В этом форуме нет тем и сообщений.',
 	'ForumNewTopic'				=> 'Начать новое обсуждение',
 	'ForumTopicName'			=> 'Название темы',
 	'ForumTopicSubmit'			=> 'создать тему',

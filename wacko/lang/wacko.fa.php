@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'دیدگاه',
 	'ForumLastComment'			=> 'آخرین دیدگاه',
 	'ForumNoComments'			=> 'No comments',
+	'ForumNoTopics'				=> 'هیچ موضوع و یا پستی در این انجمن موجود نیست.',
 	'ForumNewTopic'				=> 'Start a new discussion',
 	'ForumTopicName'			=> 'Topic name',
 	'ForumTopicSubmit'			=> 'Submit topic',

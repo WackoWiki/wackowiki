@@ -197,79 +197,86 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 			$tpl->create = true;
 		}
 
-		$tpl->pagination_text = $pagination['text'];
-
-		$tpl->enter('r_');
-
-		foreach ($topics as $topic)
+		if ($topics)
 		{
-			if (!$this->db->hide_locked || $this->has_access('read', $topic['page_id']))
+			$tpl->pagination_text = $pagination['text'];
+
+			$tpl->enter('r_');
+
+			foreach ($topics as $topic)
 			{
-				// load latest comment
-				if ($topic['comments'] > 0)
+				if (!$this->db->hide_locked || $this->has_access('read', $topic['page_id']))
 				{
-					$comment = $topic_comments[$topic['page_id']];
-				}
-				else
-				{
-					$comment = null;
-				}
+					// load latest comment
+					if ($topic['comments'] > 0)
+					{
+						$comment = $topic_comments[$topic['page_id']];
+					}
+					else
+					{
+						$comment = null;
+					}
 
-				// check new comments
-				$updated = (isset($user['last_mark'])
-							&& ((isset($comment['user_name'])
-									&& $comment['user_name'] != $user['user_name']
-									&& $comment['created'] > $user['last_mark'])
-								|| ($topic['owner_name'] != $user['user_name']
-									&& $topic['created'] > $user['last_mark']) ));
+					// check new comments
+					$updated = (isset($user['last_mark'])
+								&& ((isset($comment['user_name'])
+										&& $comment['user_name'] != $user['user_name']
+										&& $comment['created'] > $user['last_mark'])
+									|| ($topic['owner_name'] != $user['user_name']
+										&& $topic['created'] > $user['last_mark']) ));
 
-				$topic['description'] = Ut::html($topic['description']); // replaces -> [ ' topic.description | e ' ]
+					$topic['description'] = Ut::html($topic['description']); // replaces -> [ ' topic.description | e ' ]
 
-				// load related categories
-				$category		= $this->get_categories($topic['page_id'], OBJECT_PAGE);
-				$tpl->category	= !empty($category) ? '<br>' . $category : '';
+					// load related categories
+					$category		= $this->get_categories($topic['page_id'], OBJECT_PAGE);
+					$tpl->category	= !empty($category) ? '<br>' . $category : '';
 
-				// print
-				if ($user && !$this->has_access('comment', $topic['page_id']))
-				{
-					$tpl->closed	= true;
-				}
+					// print
+					if ($user && !$this->has_access('comment', $topic['page_id']))
+					{
+						$tpl->closed	= true;
+					}
 
-				if ($updated)
-				{
-					$tpl->updated	= true;
-				}
+					if ($updated)
+					{
+						$tpl->updated	= true;
+					}
 
-				$tpl->topic		= $topic;
-				$tpl->title		= $this->compose_link_to_page($topic['tag'], '', $topic['title'], '', true);
-				$tpl->ip		= $admin ? $topic['ip'] : '';
-				$tpl->owner		= $this->user_link($topic['owner_name']);
+					$tpl->topic		= $topic;
+					$tpl->title		= $this->compose_link_to_page($topic['tag'], '', $topic['title'], '', true);
+					$tpl->ip		= $admin ? $topic['ip'] : '';
+					$tpl->owner		= $this->user_link($topic['owner_name']);
 
-				if ($comment)
-				{
-					$tpl->enter('c_');
+					if ($comment)
+					{
+						$tpl->enter('c_');
 
-					$tpl->style		= $updated ? ' style="font-weight: 600;"' : '';
-					$tpl->ip		= $admin ? $comment['ip'] : '';
-					$tpl->user		= $this->user_link($comment['user_name']);
-					$tpl->href		= $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]);
-					$tpl->created	= $comment['created'];
+						$tpl->style		= $updated ? ' style="font-weight: 600;"' : '';
+						$tpl->ip		= $admin ? $comment['ip'] : '';
+						$tpl->user		= $this->user_link($comment['user_name']);
+						$tpl->href		= $this->href('', $topic['tag'], ['p' => 'last', '#' => $comment['tag']]);
+						$tpl->created	= $comment['created'];
 
-					$tpl->leave(); // c_
-				}
-				else
-				{
-					$tpl->none_created = $topic['created'];
+						$tpl->leave(); // c_
+					}
+					else
+					{
+						$tpl->none_created = $topic['created'];
+					}
 				}
 			}
+
+			$tpl->leave(); // r_
+
+			// mark all topis read
+			if ($user)
+			{
+				$tpl->mark_href = $this->href('', '', ['markread' => 1]);
+			}
 		}
-
-		$tpl->leave(); // r_
-
-		// mark all topis read
-		if ($user)
+		else
 		{
-			$tpl->mark_href = $this->href('', '', ['markread' => 1]);
+			$tpl->notopics = true;
 		}
 
 		// display new topic form when applicable

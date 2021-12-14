@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'Comentários',
 	'ForumLastComment'			=> 'Último comentário',
 	'ForumNoComments'			=> 'Não existem comentários.',
+	'ForumNoTopics'				=> 'Não há mensagens ou tópicos neste fórum.',
 	'ForumNewTopic'				=> 'Iniciar uma nova discussão',
 	'ForumTopicName'			=> 'Nome do tópico',
 	'ForumTopicSubmit'			=> 'Enviar tópico',

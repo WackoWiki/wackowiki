@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> '댓글',
 	'ForumLastComment'			=> '마지막 댓글',
 	'ForumNoComments'			=> '댓글이 없습니다.',
+	'ForumNoTopics'				=> '이 포럼에는 주제나 게시물이 없습니다.',
 	'ForumNewTopic'				=> '새로운 토론 시작',
 	'ForumTopicName'			=> 'Topic name',
 	'ForumTopicSubmit'			=> 'Submit topic',

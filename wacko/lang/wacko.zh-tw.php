@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> '回應',
 	'ForumLastComment'			=> '最新回應',
 	'ForumNoComments'			=> '沒有最新的評論。',
+	'ForumNoTopics'				=> '這個版面還沒有主題或文章。',
 	'ForumNewTopic'				=> 'Start a new discussion',
 	'ForumTopicName'			=> 'Topic name',
 	'ForumTopicSubmit'			=> 'Submit topic',

@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'コメント',
 	'ForumLastComment'			=> '最新のコメント',
 	'ForumNoComments'			=> 'コメントはありません。',
+	'ForumNoTopics'				=> 'フォーラムに投稿されたトピックはありません',
 	'ForumNewTopic'				=> 'Start a new discussion',
 	'ForumTopicName'			=> 'Topic name',
 	'ForumTopicSubmit'			=> 'Submit topic',

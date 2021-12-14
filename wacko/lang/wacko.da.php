@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'Kommentarer',
 	'ForumLastComment'			=> 'Sidste kommentar',
 	'ForumNoComments'			=> 'Ingen kommentarer',
+	'ForumNoTopics'				=> 'Der er ingen emner eller indlæg i dette forum.',
 	'ForumNewTopic'				=> 'Start en ny diskussion',
 	'ForumTopicName'			=> 'Emne navn',
 	'ForumTopicSubmit'			=> 'Indsend emne',

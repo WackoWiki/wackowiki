@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'Hozzászólások',
 	'ForumLastComment'			=> 'Utolsó hozzászólás',
 	'ForumNoComments'			=> 'Nincs megjeleníthető hozzászólás.',
+	'ForumNoTopics'				=> 'A fórum nem tartalmaz témákat, illetve hozzászólásokat.',
 	'ForumNewTopic'				=> 'Start a new discussion',
 	'ForumTopicName'			=> 'Téma neve',
 	'ForumTopicSubmit'			=> 'Küldje téma',

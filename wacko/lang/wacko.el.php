@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'Σχόλια',
 	'ForumLastComment'			=> 'Τελευταίο σχόλιο',
 	'ForumNoComments'			=> 'No comments',
+	'ForumNoTopics'				=> 'Δεν υπάρχουν θέματα ή δημοσιεύσεις σε αυτή τη Δ. Συζήτηση.',
 	'ForumNewTopic'				=> 'Ξεκινήστε νέα συζήτηση',
 	'ForumTopicName'			=> 'Όνομα θέματος',
 	'ForumTopicSubmit'			=> 'Υποβολή θέματος',

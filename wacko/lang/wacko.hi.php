@@ -1091,6 +1091,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'टिप्पणियाँ',
 	'ForumLastComment'			=> 'पिछली टिप्पणी',
 	'ForumNoComments'			=> 'कोई कमेन्ट',
+	'ForumNoTopics'				=> 'इस फ़ोरम में कोई विषय या पोस्ट नहीं है।',
 	'ForumNewTopic'				=> 'एक नई चर्चा शुरू करें',
 	'ForumTopicName'			=> 'Topic name',
 	'ForumTopicSubmit'			=> 'Submit topic',
