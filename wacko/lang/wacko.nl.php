@@ -1109,6 +1109,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'Opmerkingen',
 	'ForumLastComment'			=> 'Laatste opmerking',
 	'ForumNoComments'			=> 'Geen opmerkingen',
+	'ForumNoTopics'				=> 'Er zijn geen onderwerpen of berichten in dit forum.',
 	'ForumNewTopic'				=> 'Start een nieuwe discussie',
 	'ForumTopicName'			=> 'Onderwerpnaam',
 	'ForumTopicSubmit'			=> 'Submit topic',

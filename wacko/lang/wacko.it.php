@@ -175,7 +175,7 @@ $wacko_translation = [
 	'PageHandlerMoreTip'		=> 'altro',
 
 	'ThemeCorrupt'				=> 'Theme is corrupt',
-	'InvalidNamespace'			=> 'Invalid namespace given.',
+	'InvalidNamespace'			=> 'Spazio dei nomi non valido.',
 	'DoesNotExists'				=> 'Questa pagina non esiste al momento.',
 	'PromptCreate'				=> 'Vuoi forse <a href="%1">crearla</a>?',
 	'RevisionHint'				=> 'Questa è una vecchia versione di <a href="%1">%2</a> da %3 editato da %4.',
@@ -267,7 +267,7 @@ $wacko_translation = [
 	'CategoriesAssign'			=> 'assign',
 	'CategoriesEdit'			=> 'modificare',
 	'Category'					=> 'Categoria',
-	'CategoriesFor'				=> 'Categories for',
+	'CategoriesFor'				=> 'Categorie per',
 	'CategoriesTip'				=> 'Modifica categorie',
 	'CategoriesText'			=> 'Categorie',
 	'CategoriesUpdated'			=> 'Categorie aggiornate',
@@ -282,15 +282,15 @@ $wacko_translation = [
 	'CategoryDescription'		=> 'Descrizione',
 	'CategoriesAddGrouped'		=> 'Grouped with the category',
 	'CategoriesAddGroupedNo'	=> 'Nessun gruppo.',
-	'CategoriesRename'			=> 'Rename the category %1 to',
+	'CategoriesRename'			=> 'Rinomina la categoria %1 in',
 	'CategoriesRenameInfo'		=> '* Nota: Il cambiamento avrà effetto su tutte le pagine assegnate a quella categoria.',
 	'CategoriesGroup'			=> 'Group categories %1 with',
-	'CategoriesGroupInfo'		=> '* Select [no group], to debundled the category.',
+	'CategoriesGroupInfo'		=> '* Select [nessun gruppo], to debundled the category.',
 	'CategoriesNoGroup'			=> '[nessun gruppo]',
 	'CategoriesDelete'			=> 'Siete sicuri di voler rimuovere la categoria %1?',
 	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
 	'CategoriesStoreInfo'		=> 'Per assegnare categorie a una pagina seleziona le caselle di controllo.',
-	'CategoriesStoreButton'		=> 'Save Categories',
+	'CategoriesStoreButton'		=> 'Salva categorie',
 	'CategoriesGroupButton'		=> 'Gruppo',
 	'CategoriesEditInfo'		=> 'Per modificare l\'elenco delle categorie, selezionare il pulsante di opzione.',
 	'NoCategoriesForThisLang'	=> 'Le categorie per questa lingua non sono specificate.',
@@ -405,15 +405,15 @@ $wacko_translation = [
 	'CategoriesRemoved'			=> 'Cancellate le categorie di pagine.',
 	'RatingRemoved'				=> 'Rating removed.',
 	'AclsRemoved'				=> ' Permessi pagina rimossi.',
-	'BookmarksRemoved'			=> 'Bookmarks from page rimossi.',
-	'WatchesRemoved'			=> 'Watches from page rimossi.',
-	'CommentsRemoved'			=> 'Comments from page rimossi.',
-	'FilesRemoved'				=> 'Files from page rimossi.',
+	'BookmarksRemoved'			=> 'Segnalibri dalla pagina rimossi.',
+	'WatchesRemoved'			=> 'Watches from page removed.',
+	'CommentsRemoved'			=> 'Commenti dalla pagina rimossi.',
+	'FilesRemoved'				=> 'File dalla pagina rimossi.',
 	'PageRemoved'				=> ' Pagina rimossa.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
 	'RevisionRemoved'			=> 'Revisione %1 rimossa.',
-	'RevisionsRemoved'			=> 'Revisions from page rimossi.',
+	'RevisionsRemoved'			=> 'Revisioni dalla pagina rimossa.',
 	'ActionHaveNoUndo'			=> 'Questa azione non può essere annullata.',
 
 	// restore
@@ -655,7 +655,7 @@ $wacko_translation = [
 	'UserNotFound'				=> 'L\'utente con questo nome o indirizzo e-mail non è stato trovato.',
 	'NotConfirmedEmail'			=> 'Il tuo indirizzo e-mail non è confermato.<br>Mail non può essere inviato ad un indirizzo non confermato.',
 	'EmailForgotSubject'		=> 'Password renewal for ',
-	'EmailForgotMessage'		=> 'Someone (maybe you) forgot your password for %1.' . "\n" . 'Your login: %2'."\n\n" . 'Click the link or copy it to the browser address line to change your password.' . "\n" . '%3'."\n\n" . '',
+	'EmailForgotMessage'		=> 'Someone (maybe you) forgot your password for %1.' . "\n" . 'Your login: %2'."\n\n" . 'Click the link or copy it to the browser address line to change your password.' . "\n" . '%3' . "\n\n",
 	'CodeWasSent'				=> 'Le istruzioni per il recupero della password vi sono state inviate via e-mail.',
 	'WrongCode'					=> 'Wrong code',
 	'ChangePasswordForUser'		=> '%1\'s password change',
@@ -1025,12 +1025,12 @@ $wacko_translation = [
 	'NewsName'					=> 'Titolo',
 	'NewsNoName'				=> 'Hai dimenticato di aggiungere il titolo delle notizie.',
 	'NewsNotAvailable'			=> 'Nessuna notizia disponibile.',
-	'NewsNoClusterDefined'		=> 'No News cluster defined.',
+	'NewsNoClusterDefined'		=> 'Nessun cluster di notizie definito.',
 	'NewsDiscuss'				=> 'Discuti questo articolo...',
 
 	// blog
-	'BlogNewTopic'				=> 'Create a new post',
-	'NoPostAvailable'			=> 'No post available yet.',
+	'BlogNewTopic'				=> 'Creare un nuovo articolo',
+	'NoPostAvailable'			=> 'Nessun articolo ancora disponibile.',
 
 	// Review
 	'Reviewer'					=> 'Reviewer',
@@ -1078,7 +1078,7 @@ $wacko_translation = [
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
 	'ModerateUserProfile'		=> 'profilo',
-	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
+	'ModerateNoItemChosen'		=> 'Si prega di selezionare almeno un elemento tramite il pulsante Set.',
 
 	'ModerateSection2'			=> 'moderate section',
 	'ModerateTopicsDeleted'		=> 'Selected topics successfully deleted.',
@@ -1109,6 +1109,7 @@ $wacko_translation = [
 	'ForumComments'				=> 'Commenti',
 	'ForumLastComment'			=> 'Ultimo commento',
 	'ForumNoComments'			=> 'Non ci sono commenti',
+	'ForumNoTopics'				=> 'Non ci sono argomenti o messaggi in questo forum.',
 	'ForumNewTopic'				=> 'Inizia una nuova discussione',
 	'ForumTopicName'			=> 'Nome dell\'argomento',
 	'ForumTopicSubmit'			=> 'Invia argomento',
@@ -1228,7 +1229,7 @@ $wacko_translation = [
 		'en' => 'Inglese',
 		'es' => 'Spagnolo',
 		'et' => 'Estone',
-		'fa' => 'Persian',
+		'fa' => 'Persiano',
 		'fr' => 'Francese',
 		'hi' => 'Hindi',
 		'hu' => 'Ungherese',
@@ -1287,7 +1288,7 @@ $wacko_translation = [
 
 	// loading error
 	'UnknownAction'				=> 'Sconosciuto azione',
-	'UnknownMethod'				=> 'Unknown method',
+	'UnknownMethod'				=> 'Metodo sconosciuto',
 	'FormatterNotFound'			=> 'Formattatore %1 non trovato',
 
 	// log
@@ -1365,7 +1366,7 @@ $wacko_translation = [
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
 
 	'ErrorMinPHPVersion'		=> 'La versione di PHP deve essere maggiore di <strong>' . PHP_MIN_VERSION .
-									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.' .
-									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
+									'</strong>, il tuo server sembra eseguire con la versione <strong>' . PHP_VERSION . '</strong>.' .
+									'  Dovresti aggiornare ad una versione più recente di PHP perché WackoWiki funzioni correttamente.',
 
 ];
