@@ -82,7 +82,7 @@ else
 			$this->db->sql_query(
 				"DELETE FROM " . $this->db->table_prefix . "file " .
 				"WHERE page_id		= " . (int) $this->get_page_id() . " " .
-				"AND file_name		= " . $this->db->q($gname . '.png') . "");
+				"AND file_name		= " . $this->db->q($gname . '.png'));
 		}
 
 		$imgurl		= $this->db->base_path . $this->page['tag'] . '/file?get=' . $gname . '.png';

@@ -358,7 +358,7 @@ class Wacko
 	}
 
 	// TIME FUNCTIONS
-	function utc2time($utc)
+	function utc2time($utc) : int|false
 	{
 		// strtotime requirers UTC for IntlDateFormatter
 		$tz = date_default_timezone_get();
@@ -382,19 +382,19 @@ class Wacko
 		$time	= $this->date_format($this->sql2time($text), $this->db->time_format);
 	}
 
-	function sql2precisetime($text)
+	function sql2precisetime($text) : string
 	{
 		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format_seconds);
 	}
 
 	// TODO: make format pattern depended from localization and user preferences?
-	function get_time_formatted($text) // STS: rename to sql_time_formatted
+	function get_time_formatted($text) : string // STS: rename to sql_time_formatted
 	{
 		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format);
 	}
 
 	// unix time formatted
-	function date_format($unix_time, $pattern)
+	function date_format($unix_time, $pattern) : string
 	{
 		$user	= $this->get_user();
 		$tz		= $user['timezone'] ?? $this->db->timezone;
@@ -412,7 +412,7 @@ class Wacko
 	}
 
 	// e.g. <time datetime="2021-03-17T12:34:26+01:00" title="17 March 2021 12:34">3 hours ago</time>
-	function get_time_interval($time, $strip = false)
+	function get_time_interval($time, $strip = false) : string
 	{
 		$ago = time() - $time;
 		$out = 0 . $this->_t('MinutesAgo');
@@ -437,7 +437,7 @@ class Wacko
 		return $out;
 	}
 
-	function timezone_list()
+	function timezone_list() : array
 	{
 		static $timezones = null;
 
@@ -451,7 +451,7 @@ class Wacko
 			{
 				$now->setTimezone(new DateTimeZone($timezone));
 				$offsets[]				= $offset = $now->getOffset();
-				$timezones[$timezone]	= '[' . $this->format_GMT_offset($offset) . '] ' . $this->format_timezone_name($timezone);
+				$timezones[$timezone]	= '[' . $this->format_UTC_offset($offset) . '] ' . $this->format_timezone_name($timezone);
 			}
 
 			array_multisort($offsets, $timezones);
@@ -460,7 +460,7 @@ class Wacko
 		return $timezones;
 	}
 
-	function format_GMT_offset($offset)
+	function format_UTC_offset($offset) : string
 	{
 		$hours		= intval($offset / 3600);
 		$minutes	= abs(intval($offset % 3600 / 60));
@@ -3158,7 +3158,7 @@ class Wacko
 	*/
 	function mini_href($method = '', $tag = '', $alter = true, $encode = true) : string
 	{
-		if (!($tag = trim($tag)))
+		if (!($tag = trim($tag ?? '')))
 		{
 			$tag = $this->tag;
 		}
