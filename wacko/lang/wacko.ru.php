@@ -1367,8 +1367,8 @@ $wacko_translation = [
 	'LogCategoryGrouped'		=> 'Категория ##%1## сгруппированa со словом ##%2##',
 	'LogCategoryRemoved'		=> 'Категория ##%1## удалена из базы данных',
 
-	'ErrorMinPHPVersion'		=> 'WackoWiki требуется версия php не ниже <strong>' . PHP_MIN_VERSION .
-									'</strong>, на вашем же сервере используется <strong>' . PHP_VERSION . '</strong>.' .
+	'ErrorMinPHPVersion'		=> 'WackoWiki требуется версия php не ниже <strong>' . PHP_MIN_VERSION . '</strong>,' .
+									' на вашем же сервере используется <strong>' . PHP_VERSION . '</strong>.' .
 									'  Для корректной работы системы рекомендуется обновление версии php.',
 
 ];
