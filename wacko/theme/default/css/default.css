@@ -499,9 +499,6 @@ article,
 #edit_page {
 	clear: left;
 }
-[dir=rtl] #edit_page {
-	clear: right;
-}
 
 .textarea-page,
 .textarea-comment,
