@@ -1260,8 +1260,8 @@ $wacko_translation = [
 	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
 
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION .
-									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.' .
-									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
+	'ErrorMinPHPVersion'		=> 'PHP versioon peab olema suurem kui <strong>' . PHP_MIN_VERSION . '</strong>,' .
+									' teie serveril näib olevat <strong>' . PHP_VERSION . '</strong>.' .
+									'  WackoWiki korrektseks toimimiseks peaksite uuema PHP-versiooni peale uuendama.',
 
 ];

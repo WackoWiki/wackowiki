@@ -1260,8 +1260,8 @@ $wacko_translation = [
 	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
 
-	'ErrorMinPHPVersion'		=> 'Η έκδοση της PHP πρέπει να είναι μεγαλύτερη της <strong>' . PHP_MIN_VERSION .
-									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.' .
-									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
+	'ErrorMinPHPVersion'		=> 'Η έκδοση της PHP πρέπει να είναι μεγαλύτερη της <strong>' . PHP_MIN_VERSION . '</strong>,' .
+									' ο διακομιστής σας φαίνεται να τρέχει μια <strong>' . PHP_VERSION . '</strong>.' .
+									'  Θα πρέπει να αναβαθμίσετε σε μια πιο πρόσφατη έκδοση PHP για να λειτουργήσει σωστά το WackoWiki.',
 
 ];

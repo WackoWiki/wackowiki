@@ -404,10 +404,10 @@ $wacko_translation = [
 	'LinksRemoved'				=> 'Links fra siden fjernet.',
 	'CategoriesRemoved'			=> 'Sider kategorier slettet.',
 	'AclsRemoved'				=> 'Sidetilladelser for fjernet.',
-	'BookmarksRemoved'			=> 'Bookmarks from page fjernet.',
-	'WatchesRemoved'			=> 'Watches from page fjernet.',
-	'CommentsRemoved'			=> 'Comments from page fjernet.',
-	'FilesRemoved'				=> 'Files from page fjernet.',
+	'BookmarksRemoved'			=> 'Bookmarks from page removed.',
+	'WatchesRemoved'			=> 'Watches from page removed.',
+	'CommentsRemoved'			=> 'Comments from page removed.',
+	'FilesRemoved'				=> 'Files from page removed.',
 	'PageRemoved'				=> 'Siden fjernet.',
 	'PageCachePurged'			=> 'Cache renset.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
@@ -1260,8 +1260,8 @@ $wacko_translation = [
 	'LogCategoryGrouped'		=> 'Category ##%1## grouped with the word ##%2##',
 	'LogCategoryRemoved'		=> 'Category ##%1## removed from the database',
 
-	'ErrorMinPHPVersion'		=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION .
-									'</strong>, your server appears to be running an <strong>' . PHP_VERSION . '</strong>.' .
-									'  You should upgrade to a more recent PHP version for WackoWiki to work correctly.',
+	'ErrorMinPHPVersion'		=> 'PHP-versionen skal være større end <strong>' . PHP_MIN_VERSION . '</strong>,' .
+									' din server ser ud til at køre en <strong>' . PHP_VERSION . '</strong>.' .
+									'  Du bør opgradere til en nyere PHP-version for at få WackoWiki til at fungere korrekt.',
 
 ];
