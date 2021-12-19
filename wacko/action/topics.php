@@ -201,7 +201,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 		{
 			$tpl->pagination_text = $pagination['text'];
 
-			$tpl->enter('r_');
+			$tpl->enter('f_r_');
 
 			foreach ($topics as $topic)
 			{

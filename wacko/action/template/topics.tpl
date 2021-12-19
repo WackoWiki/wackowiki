@@ -17,7 +17,7 @@
 				</p>
 				[ '' pagination '' ]
 			</div>
-			[= r =
+			[= f =
 			<table class="forum">
 				<thead>
 					<tr>
@@ -28,6 +28,7 @@
 						<th>[ ' _t: ForumLastComment ' ]</th>
 					</tr>
 				</thead>
+				[= r =
 				<tbody>
 					<tr class="topic">
 						<td>
@@ -66,6 +67,7 @@
 						</td>
 					</tr>
 				</tbody>
+				=]
 			</table>
 			=]
 			[= notopics _ =
