@@ -475,12 +475,11 @@ a.iw-source .icon {
 
 /* Wiki links: SYNTAX (prefix://) */
 span.icon{
-/* 	background-size: 16px 16px;*/
 	/* ! required for span width -> inline element */
 	display: inline-block;
 	height: 16px;
 	width: 0;
-	vertical-align: text-bottom; /* middle */
+	vertical-align: text-bottom;
 }
 
 a.external-link .icon {
@@ -611,12 +610,14 @@ a[href $='.webm'] .icon {
 	border: .05rem solid rgb(147, 154, 69,.1);
 	border-left: .2rem solid #939a45;
 	border-radius: .1rem;
-	min-height: 5em;
 	overflow: auto;
 }
-[dir=rtl] .info,
-[dir=rtl] .wrapper {
-	
+[dir=rtl] .info {
+	border-left: unset;
+	border-right: .2rem solid #939a45;
+}
+.info div {
+	min-height: 4em;
 }
 
 .wrapper-title {
@@ -654,6 +655,10 @@ a[href $='.webm'] .icon {
 	border-color: rgba(68,138,255,.1);
 	border-left-color: #448aff;
 }
+[dir="rtl"] .info.type-note {
+	border-left-color: unset;
+	border-right-color: #448aff;
+}
 .info.type-note,
 .wrapper.type-note,
 .wrapper.type-note > .wrapper-title {
@@ -672,6 +677,10 @@ a[href $='.webm'] .icon {
 .info.type-warning {
 	border-color: rgba(255,145,0,.1);
 	border-left-color: #ff9100;
+}
+[dir="rtl"] .info.type-warning {
+	border-left-color: unset;
+	border-right-color: #ff9100;
 }
 .info.type-warning,
 .wrapper.type-warning,
@@ -692,6 +701,10 @@ a[href $='.webm'] .icon {
 	border-color: rgba(100,221,23,.1);
 	border-left-color: #64dd17;
 }
+[dir="rtl"] .info.type-success {
+	border-left-color: unset;
+	border-right-color: #64dd17;
+}
 .info.type-success,
 .wrapper.type-success,
 .wrapper.type-success > .wrapper-title {
@@ -710,6 +723,10 @@ a[href $='.webm'] .icon {
 .info.type-question {
 	border-color: rgba(224, 203, 82,.1);
 	border-left-color: #e0cb52;
+}
+[dir="rtl"] .info.type-question {
+	border-left-color: unset;
+	border-right-color: #e0cb52;
 }
 .info.type-question,
 .wrapper.type-question,
@@ -730,6 +747,10 @@ a[href $='.webm'] .icon {
 	border-color: rgba(255,82,82,.1);
 	border-left-color: #ff5252;
 }
+[dir="rtl"] .info.type-error {
+	border-left-color: unset;
+	border-right-color: #ff5252;
+}
 .info.type-error,
 .wrapper.type-error,
 .wrapper.type-error > .wrapper-title {
@@ -747,6 +768,10 @@ a[href $='.webm'] .icon {
 /* 7. example */
 .info.type-example {
 	border-left-color: #651fff;
+}
+[dir="rtl"] .info.type-example {
+	border-left-color: unset;
+	border-right-color: #651fff;
 }
 .info.type-example,
 .wrapper.type-example,
@@ -766,6 +791,10 @@ a[href $='.webm'] .icon {
 .info.type-quote {
 	border-left-color: #9e9e9e;
 }
+[dir="rtl"] .info.type-quote {
+	border-left-color: unset;
+	border-right-color: #9e9e9e;
+}
 .info.type-quote,
 .wrapper.type-quote,
 .wrapper.type-quote > .wrapper-title {
@@ -783,6 +812,10 @@ a[href $='.webm'] .icon {
 .info.type-important {
 	border-color: rgba(255,23,68,.1);
 	border-left-color: #ff1744;
+}
+[dir="rtl"] .info.type-important {
+	border-left-color: unset;
+	border-right-color: #ff1744;
 }
 .info.type-important,
 .wrapper.type-important,
