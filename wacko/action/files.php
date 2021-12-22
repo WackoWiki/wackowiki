@@ -49,14 +49,14 @@ $file_name_maxlen	= 80;
 // filter categories
 $phrase				= (string)	($_GET['phrase'] ?? '');
 $type_id			= (int)		($_GET['type_id'] ?? $type_id);
-$category_id		= (int) @$_GET['category_id'];
-$file_link			= (int) $linked;
+$category_id		= (int)		@$_GET['category_id'];
+$file_link			= (int)		$linked;
 
-
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'time')		$order_by = "uploaded_dt DESC";
 
 // check against standard_handlers
 #if (! in_array($method, ))
@@ -213,7 +213,7 @@ if ($can_view)
 		$tpl->mark			= true;
 		$tpl->emark			= true;
 		$title				= $this->_t('UploadTitle' . ($global ? 'Global' : '') ) . ' ' . ($page ? $this->link($ppage, '', $legend) : '');
-		$tpl->mark_results	= $results . ' of ' . '' . $count['n'] . ' ' . $title;
+		$tpl->mark_results	= $results . ' of ' . $count['n'] . ' ' . $title;
 	}
 
 	$tpl->style = $style;
@@ -317,8 +317,7 @@ if ($can_view)
 
 			$tpl->leave(); // r_
 
-			unset($link);
-			unset($desc);
+			unset($link, $desc);
 		}
 	}
 	else
