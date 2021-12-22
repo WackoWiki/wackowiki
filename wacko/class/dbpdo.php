@@ -32,9 +32,16 @@ class DbPDO implements DbInterface
 						($config->db_charset ? ";charset=" . $config->db_charset : ''),
 		};
 
+		$options = match (DB_ERROR_MODE)
+		{
+			0	=> [PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT],
+			1	=> [PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING],
+			2	=> [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],
+		};
+
 		try
 		{
-			$this->dblink = new PDO($dsn, $config->db_user, $config->db_password);
+			$this->dblink = new PDO($dsn, $config->db_user, $config->db_password, $options);
 		}
 		catch (PDOException $e)
 		{
