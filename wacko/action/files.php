@@ -53,11 +53,11 @@ $type_id			= (int)		($_GET['type_id'] ?? $type_id);
 $category_id		= (int)		@$_GET['category_id'];
 $file_link			= (int)		$linked;
 
-
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'time')		$order_by = "uploaded_dt DESC";
 
 // check against standard_handlers
 #if (! in_array($method, ))
