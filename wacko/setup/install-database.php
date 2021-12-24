@@ -118,33 +118,28 @@ switch ($config['db_driver'])
 
 		echo '<ul>' . "\n";
 
-		if (!test(
-			$lang['TestConnectionString'],
-			$dblink = @mysqli_connect($config['db_host'], $config['db_user'], $config['db_password'], null, $port),
-			$lang['ErrorDbConnection'])
-		)
+		global $dblink;
+
+		// Do the initial database connection test separately as it is a special case.
+		try
 		{
-			/*
-			 There was a problem with the connection string
-			 */
-
-			echo '</ul>' . "\n";
-			echo '<br>' . "\n";
-
+			mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+			test(
+				$lang['TestConnectionString'],
+				$dblink = new mysqli($config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'], $port),
+				$lang['ErrorDbConnection']);
+		}
+		catch (\mysqli_sql_exception $e)
+		{
+			// There was a problem with the connection string
+			test(
+				$lang['TestConnectionString'],
+				false,
+				$lang['ErrorDbConnection'] . '<br>' . 'MySQLi Error: ' . $e->getMessage());
 			$fatal_error = true;
 		}
-		else if (!test($lang['TestDatabaseExists'], @mysqli_select_db($dblink, $config['db_name']), $lang['ErrorDbExists'], $dblink))
-		{
-			/*
-			 There was a problem with the specified database name
-			 */
 
-			echo '</ul>' . "\n";
-			echo '<br>' . "\n";
-
-			$fatal_error = true;
-		}
-		else
+		if (!$fatal_error)
 		{
 			/*
 			 The connection string and the database name are ok, proceed
@@ -176,129 +171,123 @@ switch ($config['db_driver'])
 				) . '</li>';
 
 			$fatal_error = !$valid_db_version;
+		}
 
-			echo '</ul>' . "\n";
-			echo '<br>' . "\n";
+		echo '</ul>' . "\n";
+		echo '<br>' . "\n";
 
-			if (!$fatal_error)
+		if (!$fatal_error)
+		{
+			// mariadb / mysql only
+			require_once 'setup/_insert_default.php';
+			require_once 'setup/_insert_config.php';
+			require_once 'setup/database_mysql.php';
+			require_once 'setup/database_mysql_updates.php';
+			require_once 'setup/_insert_queries.php';
+
+			if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
 			{
-				// mariadb / mysql only
-				require_once 'setup/_insert_default.php';
-				require_once 'setup/_insert_config.php';
-				require_once 'setup/database_mysql.php';
-				require_once 'setup/database_mysql_updates.php';
-				require_once 'setup/_insert_queries.php';
+				echo '<h2>' . $lang['DeletingTables'] . '</h2>' . "\n";
+				echo '<ol>' . "\n";
 
-				if (isset($config['DeleteTables']) && $config['DeleteTables'] == 'on')
+				foreach ($delete_table as $value)
 				{
-					echo '<h2>' . $lang['DeletingTables'] . '</h2>' . "\n";
-					echo '<ol>' . "\n";
-
-					foreach ($delete_table as $value)
-					{
-						test(
-							Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
-							@mysqli_query($dblink, $value[1]),
-							Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>'),
-							$dblink
-						);
-
-						/* echo '<pre>';
-						print_r($value);
-						echo '</pre>'; */
-					}
-
-					echo '<li>' . $lang['DeletingTablesEnd'] . '</li>' . "\n";
-					echo '</ol>' . "\n";
-					echo '<br>' . "\n";
-
-					$version = 0;
-				}
-
-				if (!is_null($version))
-				{
-					// new installation
-					if ($version == '0')
-					{
-						echo '<h2>' . $lang['InstallTables'] . '</h2>' . "\n";
-						echo '<ol>' . "\n";
-
-						foreach ($create_table as $value)
-						{
-							test(
-								Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
-								@mysqli_query($dblink, $value[1]),
-								Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>'),
-								$dblink
-							);
-						}
-
-						foreach ($insert_records as $value)
-						{
-							test(
-								$value[0],
-								@mysqli_query($dblink, $value[1]),
-								Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>'),
-								$dblink
-							);
-						}
-
-						test(
-							$lang['InstallLogoImage'],
-							@mysqli_query($dblink, $insert_logo_image),
-							Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage']),
-							$dblink
-						);
-
-						echo '</ol>' . "\n";
-					}
-					else
-					{
-						// The funny upgrading stuff. Make sure these are in order!
-						uksort($upgrade, function($a, $b) {
-							return version_compare ($a, $b);
-						});
-
-						foreach (array_keys($upgrade) as $to_version) // index == value, BTW
-						{
-							if (version_compare($version, $to_version, '<='))
-							{
-								echo '<h2>Wacko ' . $to_version . ' ' . $lang['To'] . ' ' . WACKO_VERSION . '</h2>' . "\n";
-								echo '<ol>' . "\n";
-
-								foreach ($upgrade[$to_version] as $value)
-								{
-									test(
-										Ut::perc_replace($upgrade_msg[$value[0]]['ok'], '<code>' . $value[1] . '</code>'),
-										@mysqli_query($dblink, $value[2]),
-										Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>'),
-										$dblink
-									);
-								}
-
-								echo '</ol>' . "\n";
-							}
-						}
-					}
-
-					echo '<br>' . "\n";
-					echo '<h2>' . $lang['InstallDefaultData'] . '</h2>' . "\n";
-					echo '<ul>' . "\n";
-
-					// inserting config values
-					test(
-						$lang['InstallConfigValues'],
-						@mysqli_query($dblink, $insert_config),
-						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues']),
-						$dblink
+					test_mysqli(
+						Ut::perc_replace($lang['DeletingTable'], '<code>' . $value[0] . '</code>'),
+						$value[1],
+						Ut::perc_replace($lang['ErrorDeletingTable'], '<code>' . $value[0] . '</code>')
 					);
 
-					echo '<li>' . $lang['InstallPagesBegin'];
-					require_once 'setup/insert_pages.php';
-					echo '</li>' . "\n";
-					echo '<li>' . $lang['InstallPagesEnd'] . '</li>' . "\n";
-					echo '</ul>' . "\n";
+					/* echo '<pre>';
+					print_r($value);
+					echo '</pre>'; */
 				}
+
+				echo '<li>' . $lang['DeletingTablesEnd'] . '</li>' . "\n";
+				echo '</ol>' . "\n";
+				echo '<br>' . "\n";
+
+				$version = 0;
+			}
+
+			if (!is_null($version))
+			{
+				// new installation
+				if ($version == '0')
+				{
+					echo '<h2>' . $lang['InstallTables'] . '</h2>' . "\n";
+					echo '<ol>' . "\n";
+
+					foreach ($create_table as $value)
+					{
+						test_mysqli(
+							Ut::perc_replace($lang['CreatingTable'], '<code>' . $value[0] . '</code>'),
+							$value[1],
+							Ut::perc_replace($lang['ErrorCreatingTable'], '<code>' . $value[0] . '</code>')
+						);
+					}
+
+					foreach ($insert_records as $value)
+					{
+						test_mysqli(
+							$value[0],
+							$value[1],
+							Ut::perc_replace($lang['ErrorAlreadyExists'], '<code>' . $value[2] . '</code>')
+						);
+					}
+
+					test_mysqli(
+						$lang['InstallLogoImage'],
+						$insert_logo_image,
+						Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['LogoImage'])
+					);
+
+					echo '</ol>' . "\n";
+				}
+				else
+				{
+					// The funny upgrading stuff. Make sure these are in order!
+					uksort($upgrade, function($a, $b) {
+						return version_compare ($a, $b);
+					});
+
+					foreach (array_keys($upgrade) as $to_version) // index == value, BTW
+					{
+						if (version_compare($version, $to_version, '<='))
+						{
+							echo '<h2>Wacko ' . $to_version . ' ' . $lang['To'] . ' ' . WACKO_VERSION . '</h2>' . "\n";
+							echo '<ol>' . "\n";
+
+							foreach ($upgrade[$to_version] as $value)
+							{
+								test_mysqli(
+									Ut::perc_replace($upgrade_msg[$value[0]]['ok'], '<code>' . $value[1] . '</code>'),
+									$value[2],
+									Ut::perc_replace($upgrade_msg[$value[0]]['error'], '<code>' . $value[1] . '</code>')
+								);
+							}
+
+							echo '</ol>' . "\n";
+						}
+					}
+				}
+
+				echo '<br>' . "\n";
+				echo '<h2>' . $lang['InstallDefaultData'] . '</h2>' . "\n";
+				echo '<ul>' . "\n";
+
+				// inserting config values
+				test_mysqli(
+					$lang['InstallConfigValues'],
+					$insert_config,
+					Ut::perc_replace($lang['ErrorAlreadyExists'], $lang['ConfigValues'])
+				);
+
+				echo '<li>' . $lang['InstallPagesBegin'];
+				require_once 'setup/insert_pages.php';
+				echo '</li>' . "\n";
+				echo '<li>' . $lang['InstallPagesEnd'] . '</li>' . "\n";
+				echo '</ul>' . "\n";
 			}
 		}
 
@@ -326,12 +315,18 @@ switch ($config['db_driver'])
 		// Do the initial database connection test separately as it is a special case.
 		try
 		{
-			test($lang['TestConnectionString'], $dblink = @new PDO($dsn, $config['db_user'], $config['db_password']), $lang['ErrorDbConnection']);
+			test(
+				$lang['TestConnectionString'],
+				$dblink = @new PDO($dsn, $config['db_user'], $config['db_password']),
+				$lang['ErrorDbConnection']);
 			$dblink->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}
 		catch (PDOException $e)
 		{
-			test($lang['TestConnectionString'], false, "PDO Error: " . $e->getMessage());
+			test(
+				$lang['TestConnectionString'],
+				false,
+				$lang['ErrorDbConnection'] . '<br>' . 'PDO Error: ' . $e->getMessage());
 			$fatal_error = true;
 		}
 

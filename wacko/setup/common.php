@@ -106,15 +106,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	{
 		if ($error_text)
 		{
-			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . '<br>';
-
-			if ($config['db_driver'] == 'mysqli_legacy')
-			{
-				$error_output .= mysqli_error($dblink);
-			}
-
-			$error_output .= '</li></ul>';
-			echo $error_output;
+			echo "\n" . '<ul class="install_error"><li>' . $error_text . '</li></ul>';
 		}
 
 		echo "</li>\n";
@@ -124,6 +116,24 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	echo "</li>\n";
 
 	return true;
+}
+
+function test_mysqli($text, $query, $errorText = '')
+{
+	global $dblink;
+
+	try
+	{
+		test($text, @mysqli_query($dblink, $query), $errorText);
+	}
+	catch (\mysqli_sql_exception $e)
+	{
+		test($text, false, $errorText . '<br>' . $e->getMessage());
+	}
+	catch (Exception $e)
+	{
+		test($text, false, $errorText);
+	}
 }
 
 function test_pdo($text, $query, $errorText = '')
@@ -136,7 +146,7 @@ function test_pdo($text, $query, $errorText = '')
 	}
 	catch (PDOException $e)
 	{
-		test($text, false, $errorText);
+		test($text, false, $errorText . '<br>' . $e->getMessage());
 	}
 	catch (Exception $e)
 	{
@@ -191,7 +201,7 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 	sanitize_page_tag($tag);
 
 	$prefix				= $config_global['table_prefix'];
-	$page_select		= "SELECT page_id FROM " . $prefix . "page WHERE tag='" . _quote($tag) . "'";
+	$page_select		= "SELECT page_id FROM " . $prefix . "page WHERE tag ='" . _quote($tag) . "'";
 	$owner_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
 	$page_id			= "SELECT page_id FROM " . $prefix . "page WHERE tag = '" . _quote($tag) . "' LIMIT 1";
 
@@ -247,8 +257,8 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 					mysqli_query($dblink_global, $data[0]);
 
 					/*
-						We flag some pages as critical in the insert.**.php file, if these don't get inserted then we have a
-						serious problem and should indicate that to the user.
+						We flag some pages as critical in the insert.**.php file, if these don't get inserted
+						then we have a serious problem and should indicate that to the user.
 					*/
 					if ($critical)
 					{
@@ -315,7 +325,8 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 	}
 }
 
-// TODO: refactor -> same function as in dbal class
+// TODO: same function as in dbpdo class
+// default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
 function _quote($string)
 {
 	global $config_global, $dblink_global;

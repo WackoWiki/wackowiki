@@ -108,46 +108,50 @@ echo '<ul class="security">' . "\n";
 
 if (!$perm_changed)
 {
-	echo	'<li>' .
-				Ut::perc_replace($lang['SecurityRisk'],
-					'<code>' . CONFIG_FILE . '</code>',
-					'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
-			'</li>' . "\n";
+	echo
+		'<li>' .
+			Ut::perc_replace($lang['SecurityRisk'],
+				'<code>' . CONFIG_FILE . '</code>',
+				'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
+		'</li>' . "\n";
 }
 
-echo		'<li>' .
-				Ut::perc_replace($lang['RemoveSetupDirectory'],
-					'<code>setup/</code>') .
-			'</li>' . "\n";
+echo	'<li>' .
+			Ut::perc_replace($lang['RemoveSetupDirectory'],
+				'<code>setup/</code>') .
+		'</li>' . "\n";
 
 if (!$write_file)
 {
-	echo	'<li>' .
-				Ut::perc_replace($lang['ErrorGivePrivileges'],
-					'<code>' . CONFIG_FILE . '</code>',
-					'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod 666 ' . CONFIG_FILE . '</code>',
-					'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
-			'</li>' . "\n";
+	echo
+		'<li>' .
+			Ut::perc_replace($lang['ErrorGivePrivileges'],
+				'<code>' . CONFIG_FILE . '</code>',
+				'<code>touch ' . CONFIG_FILE . '</code><br><code>chmod 666 ' . CONFIG_FILE . '</code>',
+				'<code>chmod ' . decoct(CHMOD_SAFE) . ' ' . CONFIG_FILE . '</code>') .
+		'</li>' . "\n";
 }
 
-echo		'</ul>' . "\n";
+echo	'</ul>' . "\n";
 
 // If there was a problem then show the "Try Again" button.
 if ($write_file)
 {
-	echo	'<h2>' . $lang['InstallationComplete'] . '</h2>' . "\n";
-	echo	'<p>' . Ut::perc_replace($lang['ThatsAll'], $config['base_url']) . '</p>' . "\n";
+	echo
+		'<h2>' . $lang['InstallationComplete'] . '</h2>' . "\n" .
+		'<p>' . Ut::perc_replace($lang['ThatsAll'], $config['base_url']) . '</p>' . "\n";
 }
 else
 {
-	echo	'<form action="' . my_location() . '?installAction=write-config" method="post">' . "\n";
-				write_config_hidden_nodes($config_parameters);
-	echo		'<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n";
-	echo	'</form>' . "\n";
+	echo
+		'<form action="' . my_location() . '?installAction=write-config" method="post">' . "\n";
+			write_config_hidden_nodes($config_parameters) .
+			'<button type="submit" class="next">' . $lang['TryAgain'] . '</button>' . "\n" .
+		'</form>' . "\n" .
 
-	echo	'<div id="config_code" class="config_code"><pre>' .
-				htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
-			'</pre></div>' . "\n";
+		'<div id="config_code" class="config_code"><pre>' .
+			htmlentities($config_code, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET) .
+		'</pre></div>' . "\n";
 }
 ?>
 <br>
