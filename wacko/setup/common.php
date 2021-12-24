@@ -106,15 +106,7 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	{
 		if ($error_text)
 		{
-			$error_output = "\n" . '<ul class="install_error"><li>' . $error_text . '<br>';
-
-			if ($config['db_driver'] == 'mysqli_legacy')
-			{
-				$error_output .= mysqli_error($dblink);
-			}
-
-			$error_output .= '</li></ul>';
-			echo $error_output;
+			echo "\n" . '<ul class="install_error"><li>' . $error_text . '</li></ul>';
 		}
 
 		echo "</li>\n";
@@ -124,6 +116,24 @@ function test($text, $condition, $error_text = '', $dblink = '')
 	echo "</li>\n";
 
 	return true;
+}
+
+function test_mysqli($text, $query, $errorText = '')
+{
+	global $dblink;
+
+	try
+	{
+		test($text, @mysqli_query($dblink, $query), $errorText);
+	}
+	catch (\mysqli_sql_exception $e)
+	{
+		test($text, false, $errorText . '<br>' . $e->getMessage());
+	}
+	catch (Exception $e)
+	{
+		test($text, false, $errorText);
+	}
 }
 
 function test_pdo($text, $query, $errorText = '')
@@ -136,7 +146,7 @@ function test_pdo($text, $query, $errorText = '')
 	}
 	catch (PDOException $e)
 	{
-		test($text, false, $errorText);
+		test($text, false, $errorText . '<br>' . $e->getMessage());
 	}
 	catch (Exception $e)
 	{
