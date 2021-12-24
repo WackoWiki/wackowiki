@@ -33,9 +33,10 @@ $update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('footer
 // LOG
 
 // MENU
-$alter_menu_r6_0_1 = "ALTER TABLE {$pref}menu ADD INDEX idx_user_id (user_id)";
-$alter_menu_r6_0_2 = "ALTER TABLE {$pref}menu ADD INDEX idx_page_id (page_id)";
-$alter_menu_r6_0_3 = "ALTER TABLE {$pref}menu ADD INDEX idx_lang (menu_lang)";
+$alter_menu_r6_0_1 = "ALTER TABLE {$pref}menu DROP INDEX idx_user_id, ADD UNIQUE idx_menu (user_id, page_id, menu_lang) USING BTREE";
+$alter_menu_r6_0_2 = "ALTER TABLE {$pref}menu ADD INDEX idx_user_id (user_id)";
+$alter_menu_r6_0_3 = "ALTER TABLE {$pref}menu ADD INDEX idx_page_id (page_id)";
+$alter_menu_r6_0_4 = "ALTER TABLE {$pref}menu ADD INDEX idx_lang (menu_lang)";
 
 // PAGE
 $alter_page_r6_0_1 = "ALTER TABLE {$pref}page DROP footer_rating";

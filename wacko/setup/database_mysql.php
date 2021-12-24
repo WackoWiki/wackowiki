@@ -152,7 +152,7 @@ $tbl_menu =
 		KEY idx_user_id (user_id),
 		KEY idx_page_id (page_id),
 		KEY idx_lang (menu_lang),
-		UNIQUE KEY idx_user_id (user_id, page_id, menu_lang)
+		UNIQUE KEY idx_menu (user_id, page_id, menu_lang)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_page =
