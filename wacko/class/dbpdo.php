@@ -75,6 +75,8 @@ class DbPDO implements DbInterface
 
 	function quote($string)
 	{
+		$string ??= '';
+
 		// return $dblink->quote($string);
 
 		// Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos

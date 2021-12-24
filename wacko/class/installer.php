@@ -19,8 +19,10 @@ class Installer
 			die('WackoWiki fatal error: setup/ folder is missing or empty. Please add the missing setup folder in order to upgrade your WackoWiki installation.');
 		}
 
+		$install_action = trim((string) ($_REQUEST['installAction'] ?? ''));
+
 		// call installer
-		if (!($install_action = trim(@$_REQUEST['installAction'])))
+		if (!$install_action)
 		{
 			$install_action = 'lang';
 		}
@@ -45,5 +47,4 @@ class Installer
 
 		exit;
 	}
-
 }

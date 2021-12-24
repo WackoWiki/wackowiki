@@ -329,6 +329,7 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 // default: mysql_pdo -> Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
 function _quote($string)
 {
+	$string ??= '';
 	global $config_global, $dblink_global;
 
 	return match ($config_global['db_driver']) {
