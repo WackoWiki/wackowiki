@@ -149,6 +149,9 @@ $tbl_menu =
 		menu_title VARCHAR(255) NOT NULL DEFAULT '',
 		menu_position SMALLINT(2) UNSIGNED NOT NULL DEFAULT '0',
 		PRIMARY KEY (menu_id),
+		KEY idx_user_id (user_id),
+		KEY idx_page_id (page_id),
+		KEY idx_lang (menu_lang),
 		UNIQUE KEY idx_user_id (user_id, page_id, menu_lang)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
@@ -401,7 +404,9 @@ $tbl_watch =
 		comment_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 		pending TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
 		watch_time DATETIME NULL DEFAULT NULL,
-		PRIMARY KEY (watch_id)
+		PRIMARY KEY (watch_id),
+		KEY idx_user_id (user_id),
+		KEY idx_page_id (page_id)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
 $tbl_word =

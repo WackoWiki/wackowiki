@@ -93,6 +93,9 @@ $upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_1];
 // log
 
 // menu
+$upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_1];
+$upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_2];
+$upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_3];
 
 // page
 $upgrade['6.1.2'][]	= ['alter',		'page',				$alter_page_r6_0_1];
@@ -122,4 +125,6 @@ $upgrade['6.1.3'][]	= ['update',	'user_settings',	$update_user_setting_r6_0_1];
 // usergroup
 
 // watch
+$upgrade['6.1.4'][]	= ['alter',		'watch',	$alter_watch_r6_0_1];
+$upgrade['6.1.4'][]	= ['alter',		'watch',	$alter_watch_r6_0_2];
 

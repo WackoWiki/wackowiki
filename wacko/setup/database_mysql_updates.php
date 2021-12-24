@@ -33,6 +33,9 @@ $update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('footer
 // LOG
 
 // MENU
+$alter_menu_r6_0_1 = "ALTER TABLE {$pref}menu ADD INDEX idx_user_id (user_id)";
+$alter_menu_r6_0_2 = "ALTER TABLE {$pref}menu ADD INDEX idx_page_id (page_id)";
+$alter_menu_r6_0_3 = "ALTER TABLE {$pref}menu ADD INDEX idx_lang (menu_lang)";
 
 // PAGE
 $alter_page_r6_0_1 = "ALTER TABLE {$pref}page DROP footer_rating";
@@ -67,6 +70,8 @@ $update_user_setting_r6_0_1 = "UPDATE {$pref}user_setting SET timezone = 'UTC'";
 // USERGROUP
 
 // WATCH
+$alter_watch_r6_0_1 = "ALTER TABLE {$pref}watch ADD INDEX idx_user_id (user_id)";
+$alter_watch_r6_0_2 = "ALTER TABLE {$pref}watch ADD INDEX idx_page_id (page_id)";
 
 // WORD
 
