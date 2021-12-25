@@ -30,9 +30,9 @@ $lang = [
 	'index_page'		=> 'ページインデックス',
 
 	'random_page'		=> 'ランダムページ',
-	'help_page'			=> 'ヘルプ',
-	'terms_page'		=> '利用規約',
-	'privacy_page'		=> 'プライバシーについて',
+	#'help_page'			=> 'ヘルプ',
+	#'terms_page'		=> '利用規約',
+	#'privacy_page'		=> 'プライバシーについて',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',

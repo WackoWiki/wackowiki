@@ -30,9 +30,9 @@ $lang = [
 	'index_page'		=> '페이지색인',
 
 	'random_page'		=> '임의의문서로',
-	'help_page'		=> '도움말',
-	'terms_page'		=> '서비스이용약관',
-	'privacy_page'		=> '개인정보처리방침',
+	#'help_page'		=> '도움말',
+	#'terms_page'		=> '서비스이용약관',
+	#'privacy_page'		=> '개인정보처리방침',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',

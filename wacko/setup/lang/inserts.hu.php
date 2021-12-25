@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'Csoportok',			'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Felhasználók',			'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'Segítség',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Általános Szerződési Feltételek',	'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Adatvédelem',			'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'Segítség',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'Általános Szerződési Feltételek',	'',			$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'Adatvédelem',			'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);

@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'群组',					'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'用户',					'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'帮助',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'使用条款',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'隐私政策',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'帮助',					'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'使用条款',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'隐私政策',				'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'创建账户',				'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'密码',					'{{changepassword}}',	$page_lang, 'Admins', false, false);

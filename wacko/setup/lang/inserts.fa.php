@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'گروه‌ها',				'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'کاربران',				'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'راهنما',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'شرایط خدمات',			'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'سیاست محرمانگی',		'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'راهنما',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'شرایط خدمات',			'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'سیاست محرمانگی',		'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'نام‌نویسی',				'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'گذرواژه',				'{{changepassword}}',	$page_lang, 'Admins', false, false);

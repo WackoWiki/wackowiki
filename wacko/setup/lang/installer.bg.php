@@ -30,9 +30,9 @@ $lang = [
 	'index_page'		=> 'Каталог',
 
 	'random_page'		=> 'СлучайнаСтраница',
-	'help_page'			=> 'Помощ',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Privacy',
+	#'help_page'			=> 'Помощ',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',

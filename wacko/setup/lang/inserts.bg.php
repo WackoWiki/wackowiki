@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'Групи',				'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Потребители',			'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'Помощ',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Условия за ползване',	'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Поверителност',		'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'Помощ',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'Условия за ползване',	'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'Поверителност',		'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Регистрация',			'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Парола',				'{{changepassword}}',	$page_lang, 'Admins', false, false);

@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'Grupos',					'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Usuarios',					'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'Ayuda',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Terms',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Normativa de privacidad',	'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'Ayuda',					'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'Terms',					'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'Normativa de privacidad',	'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Registrarse',				'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Password',					'{{changepassword}}',	$page_lang, 'Admins', false, false);

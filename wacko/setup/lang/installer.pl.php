@@ -30,9 +30,9 @@ $lang = [
 	'index_page'		=> 'IndexStron',
 
 	'random_page'		=> 'LosowąStrona',
-	'help_page'			=> 'Pomoc',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Privacy',
+	#'help_page'			=> 'Pomoc',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',

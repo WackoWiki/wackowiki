@@ -31,9 +31,9 @@ $lang = [
 
 	'random_page'		=> 'ZufälligeSeite',
 
-	'help_page'			=> 'Hilfe',
-	'terms_page'		=> 'Nutzungsbedingungen',
-	'privacy_page'		=> 'Datenschutz',
+	#'help_page'			=> 'Hilfe',
+	#'terms_page'		=> 'Nutzungsbedingungen',
+	#'privacy_page'		=> 'Datenschutz',
 
 	// time
 	#'date_format'					=> 'dd.MM.yyyy',
