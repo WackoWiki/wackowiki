@@ -13,7 +13,7 @@ if ($config['language'] == $page_lang)
 			'Connectez-vous, puis cliquez sur le lien "Editer cette page" en bas à gauche pour commencer.' . "\n\n" .
 			'Une documentation sommaire peut être trouvée ici : WackoWiki:Doc/Français.' . "\n" .
 			'Pages utiles: ((WackoWiki:Doc/Français/MiseEnForme MiseEnForme)), ((Recherche)).' . "\n\n";
-		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Page d\'accueil', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
