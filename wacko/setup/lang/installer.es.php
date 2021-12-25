@@ -153,7 +153,6 @@ $lang = [
 'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
 'InstallTables'					=> 'Instalando tablas',
 'ErrorDbConnection'				=> 'Ocurrió un problema con la configuración de la conexión con la base de datos, por favor retroceda para verificar.',
-'ErrorDbExists'					=> 'Base de datos no encontrada. Recuerde que debe existir ya, para poder instalar/actualizar WackoWiki!',
 'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',
 'To'							=> 'a',
 'AlterTable'					=> 'Alterando %1 Tabla',

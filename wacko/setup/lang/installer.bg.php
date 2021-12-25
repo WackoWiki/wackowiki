@@ -153,7 +153,6 @@ $lang = [
 'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
 'InstallTables'					=> 'Installing Tables',
 'ErrorDbConnection'				=> 'There was a problem with the database connection details you specified, please go back and check they are correct.',
-'ErrorDbExists'					=> 'Не е открита такава БД. Проверете дали е създадена предварително!',
 'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',
 'To'							=> '->',
 'AlterTable'					=> 'Altering %1 table',

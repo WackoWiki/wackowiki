@@ -153,7 +153,6 @@ $lang = [
 'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
 'InstallTables'					=> 'Tabelite installimine',
 'ErrorDbConnection'				=> 'There was a problem with the database connection details you specified, please go back and check they are correct.',
-'ErrorDbExists'					=> 'Andmebaasi, mida sa konfigureerisid, ei leita. See peab olemas olema, kui sa tahad WackoWikit installeerida voi sellesse täiendusi sisse viia!',
 'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',
 'To'							=> '->',
 'AlterTable'					=> 'Altering %1 table',
