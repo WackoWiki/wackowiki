@@ -37,7 +37,7 @@ function write_config_hidden_nodes($config_parameters)
 
 function output_error($error_text = '')
 {
-	echo '<ul class="install_error"><li>' . $error_text . "</li></ul>";
+	echo '<ul class="install_error"><li>' . $error_text . '</li></ul>' . "\n";
 }
 
 // Draws a tick or cross next to a result
@@ -96,25 +96,22 @@ function sanitize_page_tag(&$tag, $normalize = false)
 }
 
 // database install
-function test($text, $condition, $error_text = '', $dblink = '')
+function test($text, $condition, $error_text = '')
 {
-	global $config;
-
 	echo '<li>' . $text . '   ' . output_image($condition);
 
 	if (!$condition)
 	{
 		if ($error_text)
 		{
-			echo "\n" . '<ul class="install_error"><li>' . $error_text . '</li></ul>';
+			output_error($error_text);
 		}
 
-		echo "</li>\n";
+		echo '</li>' . "\n";
 		return false;
 	}
 
-	echo "</li>\n";
-
+	echo '</li>' . "\n";
 	return true;
 }
 
