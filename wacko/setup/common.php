@@ -37,7 +37,7 @@ function write_config_hidden_nodes($config_parameters)
 
 function output_error($error_text = '')
 {
-	echo '<ul class="install_error"><li>' . $error_text . "</li></ul>";
+	echo '<ul class="install_error"><li>' . $error_text . '</li></ul>' . "\n";
 }
 
 // Draws a tick or cross next to a result
@@ -96,25 +96,22 @@ function sanitize_page_tag(&$tag, $normalize = false)
 }
 
 // database install
-function test($text, $condition, $error_text = '', $dblink = '')
+function test($text, $condition, $error_text = '')
 {
-	global $config;
-
 	echo '<li>' . $text . '   ' . output_image($condition);
 
 	if (!$condition)
 	{
 		if ($error_text)
 		{
-			echo "\n" . '<ul class="install_error"><li>' . $error_text . '</li></ul>';
+			output_error($error_text);
 		}
 
-		echo "</li>\n";
+		echo '</li>' . "\n";
 		return false;
 	}
 
-	echo "</li>\n";
-
+	echo '</li>' . "\n";
 	return true;
 }
 
@@ -340,9 +337,6 @@ function _quote($string)
 		default:
 		// return $dblink->quote($string);
 
-		// Manually string quoting since pdo::quote is double escaping single quotes which is causing chaos
-		// Got this from: http://www.gamedev.net/community/forums/topic.asp?topic_id=448909
-		// More reading: http://www.sitepoint.com/forums/showthread.php?t=337881
 		return strtr($string, [
 			"\x00"	=> '\x00',
 			"\n"	=> '\n',
