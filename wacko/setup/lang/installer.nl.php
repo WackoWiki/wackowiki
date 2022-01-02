@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'PaginaIndex',
 
 	'random_page'		=> 'WillekeurigePagina',
-	'help_page'			=> 'Hulp',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Privacy',
+	#'help_page'			=> 'Hulp',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

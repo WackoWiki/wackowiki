@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'PageIndex',
 
 	'random_page'		=> 'यादृच्छिकपृष्ठ',
-	'help_page'			=> 'सहायता',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Privacy',
+	#'help_page'			=> 'सहायता',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

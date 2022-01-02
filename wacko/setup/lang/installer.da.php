@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'Indhold',
 
 	'random_page'		=> 'TilfældigSide',
-	'help_page'			=> 'Hjælp',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Privacy',
+	#'help_page'			=> 'Hjælp',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

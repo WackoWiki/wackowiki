@@ -80,9 +80,10 @@ class PostWacko
 			{
 				$action		= mb_substr($matches[1], 0, $sep);
 				$p			= ' ' . mb_substr($matches[1], $sep) . ' ';
-				$paramcount	= preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $_matches, PREG_SET_ORDER);
 				$params		= [];
 				$c			= 0;
+
+				preg_match_all('/(([^\s=]+)(\=((\"(.*?)\")|([^\"\s]+)))?)\s/u', $p, $_matches, PREG_SET_ORDER);
 
 				foreach ($_matches as $m)
 				{

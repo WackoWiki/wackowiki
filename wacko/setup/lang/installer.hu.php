@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'OldalIndex',
 
 	'random_page'		=> 'LapTalálomra',
-	'help_page'		=> 'Segítség',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Adatvédelem',
+	#'help_page'		=> 'Segítség',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Adatvédelem',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

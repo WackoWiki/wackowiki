@@ -13,7 +13,7 @@ if ($config['language'] == $page_lang)
 			'Klik nadat je bent ingelogd op de "Bewerk deze pagina" link onderaan om te beginnen.' . "\n\n" .
 			'Documentatie is te vinden op WackoWiki:Doc/English.' . "\n" .
 			'Nuttige pagina\'s: ((WackoWiki:Doc/English/Formatting Formatting)), ((Zoeken)).' . "\n\n";
-		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Startpagina', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'Groepen',				'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Gebruikers',			'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'Hulp',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Gebruiksvoorwaarden',	'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Privacybeleid',		'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'Hulp',					'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'Gebruiksvoorwaarden',	'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'Privacybeleid',		'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Registratie',			'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Paswoord',				'{{changepassword}}',	$page_lang, 'Admins', false, false);

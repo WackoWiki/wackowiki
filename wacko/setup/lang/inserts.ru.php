@@ -13,7 +13,7 @@ if ($config['language'] == $page_lang)
 			'Нажмите "Правка" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).' . "\n\n" .
 			'Документация по WackoWiki доступна на WackoWiki:Doc/Русский.' . "\n" .
 			'Полезные страницы: ((WackoWiki:Doc/Русский/WackoСинтаксис Форматирование)), ((Поиск)).' . "\n\n";
-		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Стартовая страница', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'Группы',				'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Пользователи',			'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'Справка',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Условия использования',		'',				$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Политика конфиденциальности',		'',			$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'Справка',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'Условия использования',		'',				$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'Политика конфиденциальности',		'',			$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Регистрация',			'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Пароль',				'{{changepassword}}',	$page_lang, 'Admins', false, false);

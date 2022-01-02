@@ -706,7 +706,7 @@ class Wacko
 
 		$this->load_lang($lang);
 
-		return @$this->languages[$lang]['charset'];
+		return $this->languages[$lang]['charset'] ?? '';
 	}
 
 	// shortcut for getting 'dir' for not loaded language
@@ -3119,7 +3119,7 @@ class Wacko
 	*/
 	function mini_href($method = '', $tag = '', $alter = true, $encode = true) : string
 	{
-		if (!($tag = trim($tag)))
+		if (!($tag = trim($tag ?? '')))
 		{
 			$tag = $this->tag;
 		}
@@ -3371,7 +3371,6 @@ class Wacko
 			'align'		=> $align,
 			'width'		=> $w,
 			'height'	=> $h,
-			#'cache'		=> $cache,
 			'linking'	=> $linking,
 		];
 	}

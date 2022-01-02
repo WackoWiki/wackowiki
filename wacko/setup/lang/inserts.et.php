@@ -13,7 +13,7 @@ if ($config['language'] == $page_lang)
 			'Click after you have ((Login logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((Otsing)).' . "\n\n";
-		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Home Page', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'Grupid',					'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Kasutajad',				'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'Abi',						'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Terms',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Andmekaitse',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'Abi',						'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'Terms',					'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'Andmekaitse',				'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Registreerimine',			'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Parool',					'{{changepassword}}',	$page_lang, 'Admins', false, false);

@@ -13,7 +13,7 @@ if ($config['language'] == $page_lang)
 			'Click after you have ((登入 logged in)) on the "編輯" link at the bottom to get started.' . "\n\n" .
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((搜尋)).' . "\n\n";
-		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], '首頁', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
@@ -21,11 +21,11 @@ if ($config['language'] == $page_lang)
 
 	insert_page($config['category_page'],		'分類',					'{{category}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['groups_page'],			'群組',					'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],			'使用者',					'{{users}}',			$page_lang, 'Admins', false, false);
+	insert_page($config['users_page'],			'使用者',				'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'說明',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'條款',					'',						$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'隱私政策',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'說明',					'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'條款',					'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'隱私政策',				'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'建立帳號',				'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'密碼',					'{{changepassword}}',	$page_lang, 'Admins', false, false);

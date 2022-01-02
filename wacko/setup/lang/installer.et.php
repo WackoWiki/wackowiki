@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'SisuKord',
 
 	'random_page'		=> 'JuhuslikLehekülg',
-	'help_page'			=> 'Help',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Privacy',
+	#'help_page'			=> 'Help',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Privacy',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

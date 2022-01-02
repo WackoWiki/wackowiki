@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'ΕυρετήριοΣελίδων',
 
 	'random_page'		=> 'ΤυχαίαΣελίδα',
-	'help_page'			=> 'Βοήθεια',
-	'terms_page'		=> 'Terms',
-	'privacy_page'		=> 'Ιδιωτικότητα',
+	#'help_page'			=> 'Βοήθεια',
+	#'terms_page'		=> 'Terms',
+	#'privacy_page'		=> 'Ιδιωτικότητα',
 
 	// time
 	#'date_format'					=> 'd.m.Y',

@@ -13,7 +13,7 @@ if ($config['language'] == $page_lang)
 			'A kezdéshez kattintson a ((Bejelentkezés Bejelentkezés)) gombra az alján található "Szerkesztés" linkre.' . "\n\n" .
 			'A dokumentáció a következő címen található WackoWiki:Doc/English.' . "\n" .
 			'Hasznos oldalak: ((WackoWiki:Doc/English/Formatting Formatting)), ((Keresés)).' . "\n\n";
-		$admin_page_body	= sprintf($config['name_date_macro'], '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))', date($config['date_format'] . ' ' . $config['time_format']));
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Kezdőlap', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
@@ -23,9 +23,9 @@ if ($config['language'] == $page_lang)
 	insert_page($config['groups_page'],			'Csoportok',			'{{groups}}',			$page_lang, 'Admins', false, false);
 	insert_page($config['users_page'],			'Felhasználók',			'{{users}}',			$page_lang, 'Admins', false, false);
 
-	insert_page($config['help_page'],			'Segítség',				'',						$page_lang, 'Admins', false, false);
-	insert_page($config['terms_page'],			'Általános Szerződési Feltételek',	'',			$page_lang, 'Admins', false, false);
-	insert_page($config['privacy_page'],		'Adatvédelem',			'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['help_page'],			'Segítség',				'',						$page_lang, 'Admins', false, false);
+	# insert_page($config['terms_page'],			'Általános Szerződési Feltételek',	'',			$page_lang, 'Admins', false, false);
+	# insert_page($config['privacy_page'],		'Adatvédelem',			'',						$page_lang, 'Admins', false, false);
 
 	insert_page($config['registration_page'],	'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
 	insert_page($config['password_page'],		'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);

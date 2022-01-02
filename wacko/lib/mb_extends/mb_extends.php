@@ -12,19 +12,19 @@ if (!defined('IN_WACKO'))
 // taken from https://www.php.net/manual/en/function.wordwrap.php#107570
 function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
 {
-	if($cut)
+	if ($cut)
 	{
 		// Match anything 1 to $width chars long followed by whitespace or EOS,
 		// otherwise match anything $width chars long
-		$search = '/(.{1,' . $width . '})(?:\s|$)|(.{' . $width . '})/uS';
-		$replace = '$1$2' . $break;
+		$search		= '/(.{1,' . $width . '})(?:\s|$)|(.{' . $width . '})/uS';
+		$replace	= '$1$2' . $break;
 	}
 	else
 	{
 		// Anchor the beginning of the pattern with a lookahead
 		// to avoid crazy backtracking when words are longer than $width
-		$search = '/(?=\s)(.{1,' . $width . '})(?:\s|$)/uS';
-		$replace = '$1' . $break;
+		$search		= '/(?=\s)(.{1,' . $width . '})(?:\s|$)/uS';
+		$replace	= '$1' . $break;
 	}
 
 	return preg_replace($search, $replace, $string);
@@ -42,7 +42,10 @@ function utf8_wordwrap($string, $width = 75, $break = "\n", $cut = false)
 */
 function utf8_ltrim($str, $charlist = false)
 {
-	if($charlist === false) return ltrim($str);
+	if ($charlist === false)
+	{
+		return ltrim($str);
+	}
 
 	//quote charlist for use in a characterclass
 	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
@@ -60,7 +63,10 @@ function utf8_ltrim($str, $charlist = false)
 */
 function utf8_rtrim($str, $charlist = false)
 {
-	if($charlist === false) return rtrim($str);
+	if ($charlist === false)
+	{
+		return rtrim($str ?? '');
+	}
 
 	//quote charlist for use in a characterclass
 	$charlist = preg_replace('!([\\\\\\-\\]\\[/^])!', '\\\${1}', $charlist);
@@ -130,7 +136,10 @@ function utf8_str_pad($input, $length, $pad_str = ' ', $type = STR_PAD_RIGHT)
 */
 function utf8_trim($str, $charlist = false)
 {
-	if($charlist === false) return trim($str);
+	if ($charlist === false)
+	{
+		return trim($str);
+	}
 
 	return utf8_ltrim(utf8_rtrim($str, $charlist), $charlist);
 }
@@ -196,7 +205,7 @@ function utf8_substr_replace($str, $repl, $start , $length = null )
 	preg_match_all('/./us', $str, $ar);
 	preg_match_all('/./us', $repl, $rar);
 
-	if( $length === null )
+	if ($length === null)
 	{
 		$length = mb_strlen($str);
 	}
@@ -251,25 +260,25 @@ function utf8_count_chars($string, $mode = 0)
 			}
 			break;
 		case 3: // a string containing all unique characters is returned.
-			$buildString = '';
+			$build_string = '';
 			foreach ($result as $key => $value)
 			{
 				if ($value > 0)
 				{
-					$buildString .= chr($key);
+					$build_string .= chr($key);
 				}
 			}
-			return $buildString;
+			return $build_string;
 		case 4: // a string containing all not used characters is returned.
-			$buildString = '';
+			$build_string = '';
 			foreach ($result as $key => $value)
 			{
 				if ($value == 0)
 				{
-					$buildString .= chr($key);
+					$build_string .= chr($key);
 				}
 			}
-			return $buildString;
+			return $build_string;
 	}
 
 	// change key names...

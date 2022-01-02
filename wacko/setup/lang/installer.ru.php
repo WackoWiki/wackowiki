@@ -29,9 +29,9 @@ $lang = [
 	'index_page'		=> 'Каталог',
 
 	'random_page'		=> 'СлучайнаяСтраница',
-	'help_page'			=> 'Помощь',
-	'terms_page'		=> 'УсловияИспользования',
-	'privacy_page'		=> 'Конфиденциальность',
+	#'help_page'			=> 'Помощь',
+	#'terms_page'		=> 'УсловияИспользования',
+	#'privacy_page'		=> 'Конфиденциальность',
 
 	// time
 	#'date_format'					=> 'd.m.Y',
