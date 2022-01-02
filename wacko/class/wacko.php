@@ -746,7 +746,7 @@ class Wacko
 
 		$this->load_lang($lang);
 
-		return @$this->languages[$lang]['charset'];
+		return $this->languages[$lang]['charset'] ?? '';
 	}
 
 	// shortcut for getting 'dir' for not loaded language
@@ -3409,7 +3409,6 @@ class Wacko
 			'align'		=> $align,
 			'width'		=> $w,
 			'height'	=> $h,
-			#'cache'		=> $cache,
 			'linking'	=> $linking,
 		];
 	}
