@@ -11,12 +11,7 @@ class PreFormatter
 	function __construct(&$object)
 	{
 		$this->object		= &$object;
-		$this->PREREGEXP	= '/(\%\%.*?\%\%|\"\".*?\"\"|::(\S)?::' .
-			(isset($this->object->user_lang) && isset($this->object->page_lang)
-			 && $this->object->user_lang != $this->object->page_lang
-				? '|\[\[(\S+?)([ \t]+([^\n]+?))?\]\]|\(\((\S+?)([ \t]+([^\n]+?))?\)\)'
-				: '') .
-			')/usm';
+		$this->PREREGEXP	= '/(\%\%.*?\%\%|\"\".*?\"\"|::(\S)?::)/usm';
 	}
 
 	function precallback($things)
