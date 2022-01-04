@@ -205,7 +205,7 @@ function utf8_substr_replace($str, $repl, $start , $length = null )
 	preg_match_all('/./us', $str, $ar);
 	preg_match_all('/./us', $repl, $rar);
 
-	if ( $length === null )
+	if ($length === null)
 	{
 		$length = mb_strlen($str);
 	}

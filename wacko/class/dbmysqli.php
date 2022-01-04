@@ -24,7 +24,12 @@ class DbMysqli implements DbInterface
 
 		try
 		{
-			$this->dblink = new mysqli($config->db_host, $config->db_user, $config->db_password, $config->db_name, $config->db_port);
+			$this->dblink = new mysqli(
+				$config->db_host,
+				$config->db_user,
+				$config->db_password,
+				$config->db_name,
+				$config->db_port);
 
 			if ($config->db_charset)
 			{

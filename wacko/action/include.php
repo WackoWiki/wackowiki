@@ -115,4 +115,3 @@ else
 		$this->start_link_tracking();
 	}
 }
-

@@ -41,7 +41,11 @@ class DbPDO implements DbInterface
 
 		try
 		{
-			$this->dblink = new PDO($dsn, $config->db_user, $config->db_password, $options);
+			$this->dblink = new PDO(
+				$dsn,
+				$config->db_user,
+				$config->db_password,
+				$options);
 		}
 		catch (PDOException $e)
 		{
