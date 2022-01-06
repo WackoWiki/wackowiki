@@ -9,7 +9,7 @@ class TemplatestEscaper
 
 	function setEncoding($encoding)
 	{
-		$encoding = strtolower($encoding);
+		$encoding = strtolower($encoding ?? '');
 
 		// List of all encoding supported by htmlspecialchars
 		static $supportedEncodings =
