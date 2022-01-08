@@ -70,7 +70,7 @@ else
 		else
 		{
 			// recompile body, build HTML body
-			$body = $this->compile_body($inc_page['body'], null, false, false);
+			$body = $this->compile_body($inc_page['body'], null, false, false) ?? '';
 		}
 
 		// cleaning up
