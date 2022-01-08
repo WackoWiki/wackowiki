@@ -35,7 +35,7 @@ if ($this->is_admin()
 {
 	$action			= (string) ($_POST['_action'] ?? null);
 	$dontkeep		= (isset($_POST['dontkeep']) && $this->is_admin());
-	$cluster		= (int) ($_POST['cluster'] ?? null);
+	$cluster		= (bool) ($_POST['cluster'] ?? false);
 
 	if ($revision_id)
 	{
