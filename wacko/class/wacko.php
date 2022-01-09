@@ -5075,12 +5075,12 @@ class Wacko
 
 	function _format($text, $formatter, &$options) : string
 	{
-		$err	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
-		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $err, compact('text', 'options'));
+		$error	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
+		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $error, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->db->default_typografica)
 		{
-			$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, 'typografica.php'), $err, compact('text'));
+			$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, 'typografica.php'), $error, compact('text'));
 		}
 
 		return $text;

@@ -6,7 +6,7 @@
 			<div class="cssform">
 				<p>
 					<label for="importto">[ ' _t: ImportTo ' ]:</label>
-					<input type="text" id="importto" name="_to" size="40" value="">
+					<input type="text" id="importto" name="_to" size="40" value="" required>
 				</p>
 				<p>
 					<label for="importwhat">[ ' _t: ImportWhat ' ]:</label>
