@@ -7,7 +7,7 @@
 		[= t =
 			<table class="forum lined">
 				<colgroup>
-					<col span="1" style="width:60%;">
+					<col span="1">
 					<col span="1">
 					<col span="1">
 					<col span="1">
@@ -23,7 +23,7 @@
 				[= f =
 					<tbody>
 						<tr>
-							<td class="a-top">
+							<td>
 								[= closed =
 									<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">'
 								=]
@@ -33,19 +33,19 @@
 								<strong>[ ' link ' ]</strong><br>
 								<small>[ ' description ' ]</small>
 							</td>
-							<td class="t-center">&nbsp;[ ' counter.topics_total | number 0 , . ' ]&nbsp;&nbsp;</td>
-							<td class="t-center">&nbsp;[ ' counter.posts_total | number 0 , . ' ]&nbsp;&nbsp;</td>
-								[= c =
-									<td class="a-top">
-										<small>
-											<a href="[ ' href ' ]">[ ' title | e ' ]</a><br>
-											[ ' user ' ] ([ ' comment.created | time_formatted ' ])
-										</small>
-								=]
-								[= none =
-									<td>
-										<small><em>[ ' _t: ForumNoComments ' ]</em></small>
-								=]
+							<td>&nbsp;[ ' counter.topics_total | number 0 , . ' ]&nbsp;&nbsp;</td>
+							<td>&nbsp;[ ' counter.posts_total | number 0 , . ' ]&nbsp;&nbsp;</td>
+							[= c =
+								<td>
+									<small>
+										<a href="[ ' href ' ]">[ ' title | e ' ]</a><br>
+										[ ' user ' ] ([ ' comment.created | time_formatted ' ])
+									</small>
+							=]
+							[= none =
+								<td>
+									<small><em>[ ' _t: ForumNoComments ' ]</em></small>
+							=]
 							</td>
 						</tr>
 					</tbody>
@@ -65,6 +65,4 @@
 			</span>
 			<br><br>
 		=]
-	=]
-
-	
+	=]	

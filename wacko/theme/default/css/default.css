@@ -1605,7 +1605,7 @@ a:target {
 	padding: 0;
 }
 
-.forum tbody:hover,
+.topics tbody:hover,
 .revisions li:hover,
 .form-tbl tr:hover,
 .hl-line li:hover,
@@ -2278,7 +2278,8 @@ li.m-source img {
 
 /* forum extension ******************************************* */
 
-table.forum {
+table.forum,
+table.topics {
 	border: 0 none;
 	margin: 0;
 	padding: 0;
@@ -2286,22 +2287,35 @@ table.forum {
 	border-spacing: 3px;
 	border-collapse: separate;
 }
-
-table.forum th {
+.forum col:nth-child(1) {
+	width: 60%;
+}
+.forum td:nth-child(1),
+.forum td:nth-child(4){
+	vertical-align: top;
+}
+.forum td:nth-child(2),
+.forum td:nth-child(3),
+.topics td:nth-child(n+2) {
+	text-align: center;
+}
+table.forum th,
+table.topics th {
 	font-size: 12px;
 	text-align: center;
 	white-space: nowrap;
 	padding: 5px;
 }
 
-table.forum td {
+table.forum td,
+table.topics td {
 	padding: 5px;
 }
-.forum tr.topic {
+.topics tr.topic {
 	background-color: #f9f9f9;
 }
 
-.forum tr.topic:hover {
+.topics tr.topic:hover {
 	background-color: var(--ww-hover-secondary);
 }
 
