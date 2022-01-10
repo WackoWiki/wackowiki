@@ -2272,6 +2272,10 @@ li.m-source img {
 	border-collapse: separate;
 }
 
+.user-table td:nth-child(n+2){
+	text-align: center;
+}
+
 /* forum extension ******************************************* */
 
 table.forum {

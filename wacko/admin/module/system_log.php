@@ -191,30 +191,14 @@ function admin_system_log(&$engine, &$module)
 		foreach ($log as $row)
 		{
 			// level highlighting
-			if ($row['level'] == 1)
-			{
-				$row['level'] = '<strong class="red">' . $engine->_t('LogLevels')[1] . '</strong>';
-			}
-			else if ($row['level'] == 2)
-			{
-				$row['level'] = '<span class="red">' . $engine->_t('LogLevels')[2] . '</span>';
-			}
-			else if ($row['level'] == 3)
-			{
-				$row['level'] = '<strong>' . $engine->_t('LogLevels')[3] . '</strong>';
-			}
-			else if ($row['level'] == 4)
-			{
-				$row['level'] = $engine->_t('LogLevels')[$row['level']];
-			}
-			else if ($row['level'] == 5)
-			{
-				$row['level'] = '<small>' . $engine->_t('LogLevels')[$row['level']] . '</small>';
-			}
-			else if ($row['level'] > 5)
-			{
-				$row['level'] = '<small class="grey">' . $engine->_t('LogLevels')[$row['level']] . '</small>';
-			}
+			$row['level'] = match((int) $row['level']) {
+				1		=> '<strong class="red">' . $engine->_t('LogLevels')[1] . '</strong>',
+				2		=> '<span class="red">' . $engine->_t('LogLevels')[2] . '</span>',
+				3		=> '<strong>' . $engine->_t('LogLevels')[3] . '</strong>',
+				4		=> $engine->_t('LogLevels')[$row['level']],
+				5		=> '<small>' . $engine->_t('LogLevels')[$row['level']] . '</small>',
+				6, 7	=> '<small class="grey">' . $engine->_t('LogLevels')[$row['level']] . '</small>',
+			};
 
 			// tz offset
 			$time_tz = $engine->sql2precisetime($row['log_time']);

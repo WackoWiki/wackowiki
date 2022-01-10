@@ -68,7 +68,6 @@ if (!$engine->db->recovery_password)
 			<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
 			<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
 		</head>
-
 		<body>
 			<div id="mainwrapper">
 				<div id="loginbox">
@@ -124,7 +123,8 @@ if (@$_POST['_action'] === 'ap_login')
 		++$engine->sess->ap_failed_login_count;
 
 		// RECOVERY_MODE ON || RECOVERY_MODE OFF
-		if (($engine->sess->ap_failed_login_count >= 4) || ($engine->db->ap_failed_login_count >= $engine->db->ap_max_login_attempts))
+		if (   ($engine->sess->ap_failed_login_count >= 4)
+			|| ($engine->db->ap_failed_login_count >= $engine->db->ap_max_login_attempts))
 		{
 			$db->lock(AP_LOCK);
 			$engine->log(1, $engine->_t('LogAdminLoginLocked', SYSTEM_LANG));
@@ -148,7 +148,6 @@ if (!isset($engine->sess->ap_created))
 		<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
 		<?php if (RECOVERY_MODE) echo '<style>input.verify { display: none; }</style>'; // TODO: fix routing for static files ?>
 	</head>
-
 	<body>
 		<div id="mainwrapper">
 		<?php $engine->output_messages(); ?>
@@ -310,7 +309,6 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
 	</head>
-
 	<body>
 	<header id="header">
 		<div id="pane">
@@ -318,9 +316,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 			<div class="middle">
 				<h1>
 					<a href="<?php echo $engine->href(); ?>" title="<?php echo $engine->_t('AdminPanel'); ?>">
-					<?php
-						echo $engine->db->site_name ?? $engine->_t('AdminPanel');
-						?>
+						<?php echo $engine->db->site_name ?? $engine->_t('AdminPanel'); ?>
 					</a>
 				</h1>
 			</div>
@@ -329,14 +325,10 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 					<?php
 					$time_left = round(($session_length - (time() - $engine->sess->ap_created)) / 60);
 
-					echo (RECOVERY_MODE ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') .
-						NBSP . NBSP .
-						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) .
-						NBSP . NBSP .
-						$engine->compose_link_to_page('/', '', $engine->db->base_url, '/') .
-						NBSP . NBSP .
-						($db->is_locked() || RECOVERY_MODE ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) .
-						NBSP . NBSP .
+					echo (RECOVERY_MODE ? '<strong>' . $engine->_t('RecoveryMode') . '</strong>' : '') . NBSP . NBSP .
+						Ut::perc_replace($engine->_t('TimeLeft'), $time_left) . NBSP . NBSP .
+						$engine->compose_link_to_page('/', '', $engine->db->base_url, '/') . NBSP . NBSP .
+						($db->is_locked() || RECOVERY_MODE ? '<strong>' . $engine->_t('SiteClosed') . '</strong>' : $engine->_t('SiteOpened')) . NBSP . NBSP .
 						$engine->_t('ApVersion') . ' ' . $engine->db->wacko_version;
 					?>
 				</span>
@@ -406,8 +398,7 @@ if (isset($mode) === true && ($_GET || $_POST))
 }
 else if (!($_GET && $_POST))
 {
-	$exec = 'admin_main';
-	$exec($engine, $module['main']);
+	admin_main($engine, $module['main']);
 }
 
 ########################################################

@@ -259,13 +259,13 @@ first really BIG template written
 		[= u _ =
 			<tr>
 				<td>[ ' link ' ]</td>
-				<td class="t-center">[ ' user.total_pages | number 0 , . ' ]</td>
-				<td class="t-center">[ ' user.total_comments | number 0 , . ' ]</td>
-				<td class="t-center">[ ' user.total_revisions | number 0 , . ' ]</td>
+				<td>[ ' user.total_pages | number 0 , . ' ]</td>
+				<td>[ ' user.total_comments | number 0 , . ' ]</td>
+				<td>[ ' user.total_revisions | number 0 , . ' ]</td>
 				[= reg _ =
-					<td class="t-center">[ ' user.total_uploads | number 0 , . ' ]</td>
-					<td class="t-center">[ ' user.signup_time | time_formatted ' ]</td>
-					<td class="t-center">[ ' sess lastSession ' ]</td>
+					<td>[ ' user.total_uploads | number 0 , . ' ]</td>
+					<td>[ ' user.signup_time | time_formatted ' ]</td>
+					<td>[ ' sess lastSession ' ]</td>
 				=]
 			</tr>
 		=]
