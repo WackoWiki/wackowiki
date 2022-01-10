@@ -238,6 +238,32 @@ table.forum th {
 	border-spacing: 3px;
 	border-collapse: separate;
 }
+/* syslog table */
+.syslog th:nth-child(1){
+	width: 5px;
+}
+.syslog th:nth-child(2),
+.syslog th:nth-child(3),
+.syslog th:nth-child(5){
+	width: 20px;
+}
+.syslog td:nth-child(n+1){
+	
+	vertical-align: top;
+}
+.syslog td:nth-child(2),
+.syslog td:nth-child(3),
+.syslog td:nth-child(5){
+	text-align: center;
+}
+.syslog td:nth-child(3){
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.setting col:nth-child(n) {
+	width: 50%;
+}
 
 #content fieldset {
 	font-size: 0.75rem; /* 12px */
@@ -926,4 +952,10 @@ a.cancel:active{
 }
 .t-left {
 	text-align: left;
+}
+.a-top {
+	vertical-align: top;
+}
+.a-middle {
+	vertical-align: middle;
 }

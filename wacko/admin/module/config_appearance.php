@@ -241,10 +241,10 @@ function admin_config_appearance(&$engine, &$module)
 
 	?>
 	<input type="hidden" name="action" value="update">
-	<table class="formation">
+	<table class="setting formation">
 		<colgroup>
-			<col span="1" style="width: 50%;">
-			<col span="1" style="width: 50%;">
+			<col span="1">
+			<col span="1">
 		</colgroup>
 		<tr>
 			<th colspan="2">

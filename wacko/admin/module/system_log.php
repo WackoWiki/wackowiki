@@ -39,7 +39,6 @@ function admin_system_log(&$engine, &$module)
 
 		// queries
 		$engine->config->invalidate_sql_cache();
-
 	}
 
 	if (isset($_POST['update']) || isset($_GET['level_mod']))
@@ -118,7 +117,7 @@ function admin_system_log(&$engine, &$module)
 	$count = $engine->db->load_single(
 		"SELECT COUNT(log_id) AS n " .
 		"FROM " . $engine->db->table_prefix . "log l " .
-		( $where ?: 'WHERE level <= ' . (int) $level . ' ' ));
+		($where ?: 'WHERE level <= ' . (int) $level . ' '));
 
 	$order_pagination		= !empty($_order)		? ['order' => Ut::html($_order)] : [];
 	$level_pagination		= !empty($_level)		? ['level' => (int) $_level] : [];
@@ -130,12 +129,11 @@ function admin_system_log(&$engine, &$module)
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip " .
 		"FROM " . $engine->db->table_prefix . "log l " .
 			"LEFT JOIN " . $engine->db->table_prefix . "user u ON (l.user_id = u.user_id) " .
-		( $where ?: 'WHERE l.level <= ' . (int) $level . ' ' ) .
-		( $order ?: 'ORDER BY l.log_id DESC ' ) .
+		($where ?: 'WHERE l.level <= ' . (int) $level . ' ') .
+		($order ?: 'ORDER BY l.log_id DESC ') .
 		$pagination['limit']);
 
 	echo $engine->form_open('systemlog');
-
 ?>
 		<div>
 			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br>
@@ -177,13 +175,13 @@ function admin_system_log(&$engine, &$module)
 <?php
 		$engine->print_pagination($pagination);
 ?>
-		<table class="formation lined">
+		<table class="syslog formation lined">
 			<tr>
-				<th style="width:5px;">ID</th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $ordertime]); ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
-				<th style="width:20px;"><a href="<?php echo $engine->href('', '', ['order' => $orderlevel]); ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th>ID</th>
+				<th><a href="<?php echo $engine->href('', '', ['order' => $ordertime]); ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th><a href="<?php echo $engine->href('', '', ['order' => $orderlevel]); ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
 				<th><?php echo $engine->_t('LogEvent'); ?></th>
-				<th style="width:20px;"><?php echo $engine->_t('LogUsername'); ?></th>
+				<th><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>
 <?php
 	if ($log)
@@ -203,12 +201,13 @@ function admin_system_log(&$engine, &$module)
 			// tz offset
 			$time_tz = $engine->sql2precisetime($row['log_time']);
 
-			echo '<tr>' . "\n" .
-					'<td class="t-center a-top">' . $row['log_id'] . '</td>' .
-					'<td class="t-center a-top"><small>' . $time_tz . '</small></td>' .
-					'<td class="t-center a-top" style="padding-left:5px; padding-right:5px;">' . $row['level'] . '</td>' .
-					'<td class="a-top">' . $engine->format($row['message'], 'post_wacko') . '</td>' .
-					'<td class="t-center a-top"><small>' .
+			echo
+				'<tr>' . "\n" .
+					'<td>' . $row['log_id'] . '</td>' .
+					'<td><small>' . $time_tz . '</small></td>' .
+					'<td>' . $row['level'] . '</td>' .
+					'<td>' . $engine->format($row['message'], 'post_wacko') . '</td>' .
+					'<td><small>' .
 						'<a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . ($row['user_id'] == 0 ? '<em>' . $engine->_t('Guest') . '</em>' : $row['user_name'] ) . '</a>' . '<br>' .
 						'<a href="' . $engine->href('', '', ['ip' => $row['ip']]) . '">' . $row['ip'] . '</a>' .
 					'</small></td>' .
@@ -217,11 +216,10 @@ function admin_system_log(&$engine, &$module)
 	}
 	else
 	{
-		echo '<tr><td colspan="5" class="t-center"><br><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
+		echo '<tr><td colspan="5"><br><em>' . $engine->_t('LogNoMatch') . '</em></td></tr>';
 	}
 ?>
 		</table>
 <?php
 	$engine->print_pagination($pagination);
 }
-
