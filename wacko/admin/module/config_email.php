@@ -70,10 +70,10 @@ function admin_config_email(&$engine, &$module)
 	echo $engine->form_open('email');
 ?>
 		<input type="hidden" name="action" value="update">
-		<table class="formation">
+		<table class="setting formation">
 			<colgroup>
-				<col span="1" style="width:50%;">
-				<col span="1" style="width:50%;">
+				<col span="1">
+				<col span="1">
 			</colgroup>
 			<tr>
 				<th colspan="2"><?php echo $engine->_t('MainSection'); ?></th>

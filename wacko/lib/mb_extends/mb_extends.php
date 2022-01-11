@@ -63,9 +63,11 @@ function utf8_ltrim($str, $charlist = false)
 */
 function utf8_rtrim($str, $charlist = false)
 {
+	$str ??= '';
+
 	if ($charlist === false)
 	{
-		return rtrim($str ?? '');
+		return rtrim($str);
 	}
 
 	//quote charlist for use in a characterclass

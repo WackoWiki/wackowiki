@@ -62,7 +62,7 @@ class UriRouter
 	{
 		// predefined vars
 		$vars['_uri']		= explode('?', $this->http->request_uri)[0];
-		$vars['_method']	= $_SERVER['REQUEST_METHOD'];
+		$vars['_method']	= $_SERVER['REQUEST_METHOD'] ?? '';
 		$vars['_rewrite']	= $this->db->rewrite_mode;
 		$vars['_tls']		= $this->http->tls_session;
 		$vars['_ip']		= $this->http->ip;

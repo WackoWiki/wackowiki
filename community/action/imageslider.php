@@ -313,7 +313,7 @@ if ($can_view)
 					}
 
 					$file_name	= $file['file_name'];
-					$text		= media ? '' : $file_name;
+					$text		= $media ? '' : $file_name;
 					$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
 					?>

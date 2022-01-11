@@ -34,7 +34,7 @@ for ($i = 0; $i < count($wtexts); $i++)
 }
 
 $text	= str_replace("\u{2592}" . "<br>\n", '', $text);
-$text	= str_replace("\u{2592}" . "", '', $text);
+$text	= str_replace("\u{2592}", '', $text);
 
 // we're cutting the last <br>
 $text	= preg_replace('/<br>$/u', '', $text);

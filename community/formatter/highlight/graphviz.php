@@ -34,12 +34,11 @@ fclose($tmpfile);
 // check who u are, can u upload?
 if ($user = $this->get_user())
 {
-	$user_name	= strtolower($this->get_user_name());
 	$user_id	= $user['user_id'];
 }
 else
 {
-	$user_name	= GUEST;
+	$user_id	= 0;
 }
 
 // check user and upload access
@@ -75,14 +74,15 @@ else
 
 		// delelte dublicate images
 		if (count($this->db->load_single(
-			"SELECT upload_id FROM " . $this->db->table_prefix . "file WHERE " .
-				"page_id		= " . (int) $this->get_page_id() . " AND " .
-				"file_name		= " . $this->db->q($gname . '.png') . "")) > 0)
+			"SELECT upload_id " .
+			"FROM " . $this->db->table_prefix . "file " .
+			"WHERE page_id		= " . (int) $this->get_page_id() . " " .
+			"AND file_name		= " . $this->db->q($gname . '.png') . "")) > 0)
 		{
 			$this->db->sql_query(
-				"DELETE FROM " . $this->db->table_prefix . "file WHERE " .
-					"page_id		= " . (int) $this->get_page_id() . " AND " .
-					"file_name		= " . $this->db->q($gname . '.png') . "");
+				"DELETE FROM " . $this->db->table_prefix . "file " .
+				"WHERE page_id		= " . (int) $this->get_page_id() . " " .
+				"AND file_name		= " . $this->db->q($gname . '.png'));
 		}
 
 		$imgurl		= $this->db->base_path . $this->page['tag'] . '/file?get=' . $gname . '.png';
@@ -107,19 +107,15 @@ else
 		$mapcmd		= $GraphVizSettings['bin'] . " -Tcmap $tmpname.dot";
 		$map		= `{$mapcmd}`;
 
-		if ($map == '')
-		{
-			// output without no image map
-			echo '<img border="0" usemap="#' . $gname . '" ' . $imagesize[3] . ' src="' . $imgurl . '">' . "\n";
-		}
-		else
+		if ($map != '')
 		{
 			$map = iconv('utf-8', $this->get_charset(), $map);
 
 			// output with image map
 			echo '<map name="' . $gname . '">' . $map . '</map>';
-			echo '<img border="0" usemap="#' . $gname . '" ' . $imagesize[3] . ' src="' . $imgurl . '">' . "\n";
 		}
+
+		echo '<img border="0" usemap="#' . $gname . '" ' . $imagesize[3] . ' src="' . $imgurl . '">' . "\n";
 
 		// clear the directory and vars
 		unset($cmdOut); // maybe this can cause trouble if un-unsetted

@@ -9,8 +9,8 @@ if ($options['_default'])
 {
 	$language	= $options['_default'];
 	$lines		= [];
-	$numbers	= GESHI_NO_LINE_NUMBERS; //
-	$start		= (int)($options['start'] ?? 1);
+	$numbers	= GESHI_NO_LINE_NUMBERS;
+	$start		= (int) ($options['start'] ?? 1);
 	$header		= GESHI_HEADER_PRE_VALID;
 
 	$geshi = new GeSHi($text, $language);
@@ -43,7 +43,7 @@ if ($options['_default'])
 	$geshi->set_overall_class('code');	// enables using a single stylesheet for multiple code fragments
 	$geshi->set_tab_width(4);			// default: 8
 
-	$geshi->set_header_type($header); // GESHI_HEADER_DIV GESHI_HEADER_PRE_VALID GESHI_HEADER_PRE_TABLE GESHI_HEADER_NONE
+	$geshi->set_header_type($header);	// GESHI_HEADER_DIV GESHI_HEADER_PRE_VALID GESHI_HEADER_PRE_TABLE GESHI_HEADER_NONE
 
 	$geshi->enable_line_numbers((bool) $numbers); // GESHI_NORMAL_LINE_NUMBERS GESHI_FANCY_LINE_NUMBERS, 2 GESHI_NO_LINE_NUMBERS
 	$geshi->start_line_numbers_at((int) abs($start));

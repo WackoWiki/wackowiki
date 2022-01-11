@@ -918,7 +918,7 @@ class Wacko
 		{
 			if (isset($this->page_cache[$page_id]))
 			{
-				if ($this->page_cache[$page_id]['mdonly'] == false
+				if (!$this->page_cache[$page_id]['mdonly']
 					|| (isset($this->page_cache[$page_id]['mdonly']) && $this->page_cache[$page_id]['mdonly'] == $metadata_only))
 				{
 					return $this->page_cache[$page_id];
@@ -4397,8 +4397,8 @@ class Wacko
 		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
 		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
 		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//u', '\\1' . NBSP . '/', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . '' . NBSP . '' . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . '' . NBSP . '\/)/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . NBSP . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . NBSP . '\/)/u', '\\1', $text);
 		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
 		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')' . NBSP . '(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
 		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
@@ -4632,7 +4632,7 @@ class Wacko
 		{
 			$query = '';
 
-			foreach ($external_table as $link) // discard strtolowered index
+			foreach ($external_table as $link)
 			{
 				if (filter_var($link, FILTER_VALIDATE_URL))
 				{
@@ -5044,12 +5044,12 @@ class Wacko
 
 	function _format($text, $formatter, &$options) : string
 	{
-		$err	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
-		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $err, compact('text', 'options'));
+		$error	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
+		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $error, compact('text', 'options'));
 
 		if ($formatter == 'wacko' && $this->db->default_typografica)
 		{
-			$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, 'typografica.php'), $err, compact('text'));
+			$text = $this->include_buffered(Ut::join_path(FORMATTER_DIR, 'typografica.php'), $error, compact('text'));
 		}
 
 		return $text;

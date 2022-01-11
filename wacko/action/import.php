@@ -43,7 +43,7 @@ if ($this->is_admin())
 				echo '<pre>';
 				print_r($_FILES);
 				print_r($_POST);
-				die('</pre><br>'. $this->_t('ImportFailed'));
+				die('</pre><br>' . $this->_t('ImportFailed'));
 			}
 
 			// check for false and empty strings
@@ -68,7 +68,6 @@ if ($this->is_admin())
 				};
 
 				$root_tag	= $sanitize_tag($_POST['_to']);
-				$t			= 0;
 
 				foreach ($items as $item)
 				{
@@ -94,12 +93,7 @@ if ($this->is_admin())
 
 					// log import
 					$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag));
-
-					// count page
-					$t++;
 				}
-
-				$tpl->i_message = Ut::perc_replace($this->_t('ImportSuccess'), $t);
 			}
 		}
 		else

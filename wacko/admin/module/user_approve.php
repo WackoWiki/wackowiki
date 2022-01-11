@@ -393,10 +393,10 @@ function admin_user_approve(&$engine, &$module)
 				'<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>' .
 				'<td>' .
 					(($account_status > 0) || $account_status == -1
-						? '<a href="' . $engine->href('', '', ['approve' => 1, 'user_id' => $row['user_id']]) . '">' . $approve_icon . '' . $engine->_t('Approve') . '</a>'
+						? '<a href="' . $engine->href('', '', ['approve' => 1, 'user_id' => $row['user_id']]) . '">' . $approve_icon . $engine->_t('Approve') . '</a>'
 						: '') .
 					(($account_status < 2) || $account_status == -1
-						? '<a href="' . $engine->href('', '', ['approve' => 2, 'user_id' => $row['user_id']]) . '">' . $deny_icon . '' . $engine->_t('Deny') . '</a>'
+						? '<a href="' . $engine->href('', '', ['approve' => 2, 'user_id' => $row['user_id']]) . '">' . $deny_icon . $engine->_t('Deny') . '</a>'
 						: '') .
 				'</td>' .
 			'</tr>';

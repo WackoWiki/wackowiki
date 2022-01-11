@@ -18,7 +18,7 @@
 				[ '' pagination '' ]
 			</div>
 			[= f =
-			<table class="forum">
+			<table class="topics">
 				<thead>
 					<tr>
 						<th>[ ' _t: ForumTopic ' ]</th>
@@ -40,15 +40,15 @@
 							=]
 							<strong>[ ' title ' ]</strong>
 						</td>
-						<td class="t-center nowrap">
+						<td class="nowrap">
 							<small title="[ ' ip ' ]">
 								&nbsp;&nbsp;[ ' owner ' ]&nbsp;&nbsp;<br>
 								&nbsp;&nbsp;[ ' topic.created | time_formatted ' ]&nbsp;&nbsp;
 							</small>
 						</td>
-						<td class="t-center"><small>[ ' topic.comments | number 0 , . ' ]</small></td>
-						<td class="t-center"><small>[ ' topic.hits | number 0 , . ' ]</small></td>
-						<td class="t-center">
+						<td><small>[ ' topic.comments | number 0 , . ' ]</small></td>
+						<td><small>[ ' topic.hits | number 0 , . ' ]</small></td>
+						<td>
 							[= c =
 								<small[ ' style ' ] title="[ ' ip ' ]">
 									[ ' user ' ]<br>
