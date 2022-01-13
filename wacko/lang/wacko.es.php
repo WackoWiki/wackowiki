@@ -1233,6 +1233,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'Se registraron intentos de registrar el nombre de usuario ya existente: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'El correo electrónico ##%1## no está en la lista de dominios permitidos',
+	'LogRegisterTiming'			=> 'Registro fallido, el umbral de tiempo del formulario es ##%1## segundos (era ##%2##)',
 	'LogUserRegistered'			=> 'Usuario nuevo registrado con éxito ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Email activado con éxito ##%1## de usuario ##%2##',
 	'LogCommentPosted'			=> 'Agregado [[/%1 nuevo comentario]] a página [[/%2]]',
