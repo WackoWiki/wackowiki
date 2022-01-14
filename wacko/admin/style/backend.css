@@ -90,7 +90,8 @@ ul, ol {
 	margin: 0;
 	padding-left: 30px;
 }
-[dir=rtl] ul, [dir=rtl] ol {
+[dir=rtl] ul,
+[dir=rtl] ol {
 	padding-left: unset;
 	padding-right: 30px;
 }
@@ -276,16 +277,14 @@ table.forum th {
 .syslog th:nth-child(1){
 	width: 5px;
 }
-.syslog th:nth-child(2),
-.syslog th:nth-child(3),
+.syslog th:nth-child(n+2):nth-child(-n+3),
 .syslog th:nth-child(5) {
 	width: 20px;
 }
 .syslog td:nth-child(n+1) {
 	vertical-align: top;
 }
-.syslog td:nth-child(2),
-.syslog td:nth-child(3),
+.syslog td:nth-child(n+2):nth-child(-n+3),
 .syslog td:nth-child(5){
 	text-align: center;
 }
@@ -326,6 +325,19 @@ table.forum th {
 .users col:nth-child(4),
 .users col:nth-child(n+6) {
 	width: 20px;
+}
+.users td:nth-child(4) {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.permissions {
+	width: 200px;
+	height: 50px;
+}
+.sec-header {
+	width: 100%;
+	min-height: 200px;
 }
 
 #content fieldset {

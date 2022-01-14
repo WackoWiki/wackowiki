@@ -300,7 +300,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea style="width: 100%; min-height: 200px;" id="csp_header" name="csp_header"><?php echo Ut::html($csp_header);?></textarea>
+					<textarea class="sec-header" id="csp_header" name="csp_header"><?php echo Ut::html($csp_header);?></textarea>
 				</td>
 			</tr>
 			<?php
@@ -347,7 +347,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr>
 				<td colspan="2">
-					<textarea style="width: 100%; min-height: 200px;" id="csp_header" name="pp_header"><?php echo Ut::html($pp_header);?></textarea>
+					<textarea class="sec-header" id="csp_header" name="pp_header"><?php echo Ut::html($pp_header);?></textarea>
 				</td>
 			</tr>
 			<?php

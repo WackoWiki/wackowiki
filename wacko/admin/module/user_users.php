@@ -984,7 +984,7 @@ function admin_user_users(&$engine, &$module)
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '">
 						</td>
 						<td>' . $row['user_id'] . '</td>
-						<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>
+						<td><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>
 						<td>' . $row['email'] . '</td>
 						<td>' . $row['total_pages'] . '</td>
 						<td>' . $row['total_comments'] . '</td>
