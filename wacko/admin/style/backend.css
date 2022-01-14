@@ -298,6 +298,36 @@ table.forum th {
 	width: 50%;
 }
 
+/* approve users table */
+.approve col:nth-child(1) {
+	width: 5px;
+}
+.approve col:nth-child(3),
+.approve col:nth-child(n+5) {
+	width: 20px;
+}
+.approve col:nth-child(9) {
+	width: 200px;
+}
+
+/* groups table */
+.groups col:nth-child(n+1):nth-child(-n+2) {
+	width: 5px;
+}
+.groups col:nth-child(3),
+.groups col:nth-child(n+5) {
+	width: 20px;
+}
+
+/* users table */
+.users col:nth-child(n+1):nth-child(-n+3) {
+	width: 5px;
+}
+.users col:nth-child(4),
+.users col:nth-child(n+6) {
+	width: 20px;
+}
+
 #content fieldset {
 	font-size: 0.75rem; /* 12px */
 	padding: 0 0 0 30px;

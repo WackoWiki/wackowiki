@@ -341,22 +341,20 @@ function admin_user_approve(&$engine, &$module)
 
 	$engine->print_pagination($pagination);
 ?>
-	<table class="formation listcenter lined">
+	<table class="approve formation listcenter lined">
 		<colgroup>
-			<col span="1" style="width:5px;">
-			<col span="1" style="width:20px;">
 			<col span="1">
 			<col span="1">
-			<col span="1" style="width:20px;">
-			<col span="1" style="width:20px;">
-			<col span="1" style="width:20px;">
-			<col span="1" style="width:20px;">
-			<col span="1" style="width:200px;">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
+			<col span="1">
 		</colgroup>
 		<thead>
 			<tr>
-				<!--<th></th>-->
-				<!--<th></th>-->
 				<th>ID</th>
 				<th><a href="<?php echo $engine->href('', '', ['order' => $order_user, 'account_status' => $account_status]); ?>"><?php echo $engine->_t('UserName'); ?></a></th>
 				<th><?php echo $engine->_t('Email'); ?></th>

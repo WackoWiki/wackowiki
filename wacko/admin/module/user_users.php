@@ -935,22 +935,22 @@ function admin_user_users(&$engine, &$module)
 
 		$engine->print_pagination($pagination);
 ?>
-		<table class="formation listcenter lined">
+		<table class="users formation listcenter lined">
 			<colgroup>
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:20px;">
 				<col span="1">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
 			</colgroup>
 			<thead>
 				<tr>
