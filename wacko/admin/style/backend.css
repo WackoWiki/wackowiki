@@ -238,17 +238,50 @@ table.forum th {
 	border-spacing: 3px;
 	border-collapse: separate;
 }
+
+/* db-stats table */
+.db-stats {
+	max-width: 600px;
+}
+.db-stats th:nth-child(1) {
+	width: 50px;
+}
+.db-stats td:nth-child(2) {
+	text-align: right;
+}
+.db-stats td:nth-child(n+3) {
+	text-align: center;
+}
+
+/* file-stats table */
+.file-stats {
+	max-width: 300px;
+}
+.file-stats td:nth-child(2) {
+	text-align: right;
+}
+.file-stats td:nth-child(3) {
+	text-align: center;
+}
+
+/* sysinfo table */
+.sysinfo {
+	max-width: 800px;
+}
+.sysinfo th:nth-child(1) {
+	width: 120px;
+}
+
 /* syslog table */
 .syslog th:nth-child(1){
 	width: 5px;
 }
 .syslog th:nth-child(2),
 .syslog th:nth-child(3),
-.syslog th:nth-child(5){
+.syslog th:nth-child(5) {
 	width: 20px;
 }
-.syslog td:nth-child(n+1){
-	
+.syslog td:nth-child(n+1) {
 	vertical-align: top;
 }
 .syslog td:nth-child(2),
@@ -256,7 +289,7 @@ table.forum th {
 .syslog td:nth-child(5){
 	text-align: center;
 }
-.syslog td:nth-child(3){
+.syslog td:nth-child(3) {
 	padding-left: 5px;
 	padding-right: 5px;
 }
