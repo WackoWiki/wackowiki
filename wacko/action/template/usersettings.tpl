@@ -346,7 +346,7 @@
 					<td>[ ' user.last_visit | time_formatted ' ]</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: UploadQuota ' ]&nbsp;&nbsp;</th>
+					<th scope="row">[ ' _t: UploadQuota ' ]</th>
 					<td title="[ ' _t: UploadQuotaTip ' ]"><div class="meter"><span style="width: 25%;">[ ' quota ' ] ([ ' percentage ' ])</span></div></td>
 				</tr>
 				<tr>

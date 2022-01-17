@@ -103,4 +103,3 @@ function admin_config_filter(&$engine, &$module)
 <?php
 	echo $engine->form_close();
 }
-

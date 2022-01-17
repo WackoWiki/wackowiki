@@ -249,7 +249,7 @@
 				<td>[ ' page.modified | time_formatted ' ]</td>
 			</tr>
 			<tr>
-				<th scope="row">[ ' _t: SettingsSize ' ]&nbsp;&nbsp;</th>
+				<th scope="row">[ ' _t: SettingsSize ' ]</th>
 				<td title="[ ' _t: SettingsSizeTip ' ]">[ ' bodylen ' ] / [ ' bodyrlen ' ]</td>
 			</tr>
 			<tr>
