@@ -70,7 +70,7 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 ?>
 		<tr>
 			<td class="label"><strong><?php echo $engine->_t('DbTotal');?>:</strong></td>
-			<td><strong>&nbsp;&nbsp;&nbsp;<?php echo number_format($trows, 0, ',', '.'); ?></strong></td>
+			<td><strong><?php echo number_format($trows, 0, ',', '.'); ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tdata, false, true, true); ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tindex, false, true, true); ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tfrag, false, true, true); ?></strong></td>
