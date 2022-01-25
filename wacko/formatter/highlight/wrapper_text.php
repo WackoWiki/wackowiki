@@ -32,7 +32,7 @@ $col_class	= $options['col'] ? ' wrapper-col' . (int) $options['col'] : '';
 // output wrapper
 echo	'<ignore><div class="' . $align_class . $col_class . '"' . $text_align . '>' . "\n" .
 			$text .
-		"</div></ignore>\n";
+		'</div></ignore>' . "\n";
 
 if ($options['clear'])
 {

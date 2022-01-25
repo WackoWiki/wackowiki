@@ -33,5 +33,5 @@ echo	'<ignore><div class="wrapper' . $type_class . '">' . "\n" .
 				: '') .
 			'<div class="wrapper-content' . $col_class . '">' . "\n" .
 				$text .
-			"</div>\n" .
-		"</div></ignore>\n";
+			'</div>' . "\n" .
+		'</div></ignore>' . "\n";

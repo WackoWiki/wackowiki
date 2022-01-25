@@ -20,7 +20,7 @@ $modes			= [
 					''			=> 'ViewReferrersPage',
 					'global'	=> 'ViewReferrersGlobal',
 				];
-$mode			= @$_GET[$mod_selector];
+$mode			= $_GET[$mod_selector] ?? '';
 
 if (!ctype_lower($mode))
 {
@@ -28,8 +28,6 @@ if (!ctype_lower($mode))
 }
 
 // let's start: print header
-// TODO: rewrite with template
-
 foreach ($modes as $i => $text)
 {
 	if ($mode == $i)
