@@ -19,13 +19,13 @@ $wacko_translation = [
 	'RemoveButton'				=> 'निकालें',
 	'SetButton'					=> 'Set',
 	'ResetButton'				=> 'पुनरस्थापित',
-	'RenameButton'				=> 'Rename',
+	'RenameButton'				=> 'नाम बदलें',
 	'DeleteButton'				=> 'मिटाएँ',
 	'RestoreButton'				=> 'पुनर्स्थापित',
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> 'भेजिए',
 
-	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+	'FormInvalid'				=> 'जमा किया गया फॉर्म अमान्य था। पुन: सबमिट करने का प्रयास करें।',
 
 	// logged in panel
 	'AccountText'				=> 'खाता',
@@ -39,7 +39,7 @@ $wacko_translation = [
 	// registration panel
 	'RegistrationWelcome'		=> 'खाता बनाएँ:',
 	'RegistrationPassword'		=> 'कूटशब्द',
-	'RegistrationButton'		=> 'Register me!',
+	'RegistrationButton'		=> 'अपना खाता बनाएँ',
 	'RegistrationUserNameOwned'	=> 'यह यूसर नामे पहल से ही दर्ज़। कृपया दूसरा चुनें।',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
@@ -176,7 +176,7 @@ $wacko_translation = [
 
 	'ThemeCorrupt'				=> 'Theme is corrupt',
 	'InvalidNamespace'			=> 'Invalid namespace given.',
-	'DoesNotExists'				=> 'This page doesn\'t exist.',
+	'DoesNotExists'				=> 'यह पृष्ठ मौजूद नहीं है।',
 	'PromptCreate'				=> 'Maybe you want to <strong><a href="%1">create</a></strong> it?',
 	'RevisionHint'				=> 'This is an old revision of <a href="%1">%2</a> from %3 edited by %4.',
 	'ReadAccessDenied'			=> 'आपको इस पृष्ठ को देखने की अनुमति नहीं है|',
@@ -201,7 +201,7 @@ $wacko_translation = [
 
 	'PropertiesText'			=> 'Properties',
 	'PropertiesTip'				=> 'Edit Page Properties',
-	'EditTip'					=> 'Edit this page.',
+	'EditTip'					=> 'इस पृष्ठ को संपादित करें',
 	'EditText'					=> 'सम्पादन',
 	'EditCommentTip'			=> 'Edit comment',
 	'EditComment'				=> 'Edit this comment',
@@ -232,7 +232,7 @@ $wacko_translation = [
 	'AclUpload'					=> 'अपलोड:',
 	'AclFor'					=> '%1 के लिए अभिगम नियंत्रण सूचियाँ',
 	'SetOwner'					=> 'Set Owner:',
-	'OwnerDontChange'			=> 'Don\'t change',
+	'OwnerDontChange'			=> 'मत बदलो',
 	'AclAccessDenied'			=> 'आप इस पृष्ठ के स्वामी नहीं हैं। ',
 	'AclSyntaxError'			=> 'अभिगम नियंत्रण सूची सिंटैक्स त्रुटि ',
 	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
@@ -560,21 +560,21 @@ $wacko_translation = [
 	'SortCommentDesc'			=> 'Most recent on top',
 
 	'RenamePage'				=> 'पृष्ठ का नाम बदले',
-	'RenameText'				=> 'Rename',
+	'RenameText'				=> 'नाम बदलें',
 	'RenameTip'					=> 'पृष्ठ का नाम बदले',
-	'NewName'					=> 'Enter new name for this page',
-	'AlreadyExists'				=> 'Page %1 already exists.',
+	'NewName'					=> 'इस पेज के लिए नया नाम दर्ज करें',
+	'AlreadyExists'				=> 'पेज %1 पहले से मौजूद है।',
 	'AlreadyNamed'				=> 'This page already named %1.',
-	'PageRenamed'				=> 'Page renamed.',
-	'NewNameOfPage'				=> 'New name of this page: ',
-	'NotOwnerCantRename'		=> 'You aren\'t owner of this page and hence can\'t rename it',
+	'PageRenamed'				=> 'पृष्ठ का नाम बदला।',
+	'NewNameOfPage'				=> 'इस पेज का नया नाम:',
+	'NotOwnerCantRename'		=> 'आप इस पृष्ठ के स्वामी नहीं हैं और इसलिए इसका नाम नहीं बदल सकते',
 	'NeedRedirect'				=> 'Create redirect to the new page on the old page',
 	'RedirectCreated'			=> 'In the page %1 created redirect to the new one',
 	'RenameCharsetConflict'		=> 'Change your user language %1 to the same language as this page %2 to avoid a charset conflict when renaming. Otherwise, the links to this page may no longer be valid and the page may become inaccessible.',
 	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
 	'UserSettings'				=> 'सदस्य संचालन निर्देश',
-	'UserSettingsGeneral'		=> 'General',
+	'UserSettingsGeneral'		=> 'सामान्य',
 	'UserSettingsNotifications'	=> 'सूचनाएं',
 
 	'NotifyMinorEdit'			=> 'Notify also minor edit',
@@ -590,10 +590,10 @@ $wacko_translation = [
 
 	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
 
-	'UserSettingsEmailMe'		=> 'Email me when ...',
+	'UserSettingsEmailMe'		=> 'मुझे ईमेल करें जब...',
 
-	'UserSettingsExtended'		=> 'Extended',
-	'UserSettingsOther'			=> 'Other settings',
+	'UserSettingsExtended'		=> 'विस्तारित',
+	'UserSettingsOther'			=> 'अन्य सेटिंग',
 	'UserSpace'					=> 'User space',
 	'ChooseTheme'				=> 'Choose theme',
 
@@ -619,9 +619,9 @@ $wacko_translation = [
 	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
-	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
-	'AllowIntercom'				=> 'Allow personal messages from users of the system',
-	'AllowMassemail'			=> 'Administrators can email me information',
+	'SendWatchEmail'			=> 'जब कोई (आपके अलावा) आपके द्वारा देखे जा रहे किसी भी पेज को बदल दे, तो सूचना ईमेल भेजें',
+	'AllowIntercom'				=> 'सिस्टम के उपयोगकर्ताओं से व्यक्तिगत संदेशों की अनुमति दें',
+	'AllowMassemail'			=> 'व्यवस्थापक मुझे जानकारी ईमेल कर सकते हैं',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
@@ -652,7 +652,7 @@ $wacko_translation = [
 	'ForgotPasswordHint'		=> 'Enter your login and email address,' . "\n" . 'then email with instructions will be send to you.',
 	'ForgotPassword'			=> 'अपना पासवर्ड भूल गए?',
 	'UserNotFound'				=> 'User with this name or email address was not found.',
-	'NotConfirmedEmail'			=> 'Your email address is not confirmed.<br>Mail can\'t be send to non-confirmed address.',
+	'NotConfirmedEmail'			=> 'आपके ईमेल पते की पुष्टि नहीं हुई है।<br>मेल को अपुष्ट पते पर नहीं भेजा जा सकता है।',
 	'EmailForgotSubject'		=> 'Password renewal for ',
 	'EmailForgotMessage'		=> 'Someone (maybe you) forgot your password for %1.' . "\n" . 'Your login: %2'."\n\n" . 'Click the link or copy it to the browser address line to change your password.' . "\n" . '%3' . "\n\n",
 	'CodeWasSent'				=> 'Password recovery instruction was sent to you by email.',
@@ -787,7 +787,7 @@ $wacko_translation = [
 	'SettingsEdit'				=> 'सम्पादन',
 	'SettingsRevisions'			=> 'संशोधन',
 	'SettingsClone'				=> 'Clone',
-	'SettingsRename'			=> 'Rename',
+	'SettingsRename'			=> 'नाम बदलें',
 	'MassRename'				=> 'पूरे क्लस्टर के लिए',
 	'SettingsRemove'			=> 'निकालें',
 	'SettingsPurge'				=> 'Purge',

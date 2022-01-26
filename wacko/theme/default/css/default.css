@@ -2315,6 +2315,7 @@ table.topics td {
 	background-color: #f9f9f9;
 }
 
+.forum tbody tr:hover,
 .topics tr.topic:hover {
 	background-color: var(--ww-hover-secondary);
 }
