@@ -10,9 +10,9 @@ if ($config['language'] == $page_lang)
 		$home_page_body		=
 			'file:/wacko_logo.png?right' . "\n" .
 			'**Willkommen zu Deiner ((WackoWiki:Doc/Deutsch WackoWiki)) Installation!**' . "\n\n" .
-			'Klicke nach der ((Anmeldung)) unten auf den Punkt "Editieren" um zu beginnen.' . "\n\n" .
+			'Klicke nach der ((/Anmeldung Anmeldung)) unten auf den Punkt "Editieren" um zu beginnen.' . "\n\n" .
 			'Die Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.' . "\n" .
-			'Nützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((Suche)).' . "\n\n";
+			'Nützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((/Suche Suche)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Startseite', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

@@ -12,7 +12,7 @@ if ($config['language'] == $page_lang)
 			'**Добро пожаловать в волшебный мир ((WackoWiki:Doc/Русский WackoWiki)).**' . "\n\n" .
 			'Нажмите "Правка" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).' . "\n\n" .
 			'Документация по WackoWiki доступна на WackoWiki:Doc/Русский.' . "\n" .
-			'Полезные страницы: ((WackoWiki:Doc/Русский/WackoСинтаксис Форматирование)), ((Поиск)).' . "\n\n";
+			'Полезные страницы: ((WackoWiki:Doc/Русский/WackoСинтаксис Форматирование)), ((/Поиск Поиск)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Стартовая страница', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

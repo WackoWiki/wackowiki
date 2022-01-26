@@ -12,7 +12,7 @@ if ($config['language'] == $page_lang)
 			'**Benvenuto sul tuo sito ((WackoWiki:Doc/English WackoWiki)) site!**' . "\n\n" .
 			'Per cominciare clicca su "Edita questa pagina" nella pagina in basso.' . "\n\n" .
 			'La documentazione, in inglese, può essere trovata  in WackoWiki:Doc/English.' . "\n" .
-			'Pagine utili: ((WackoWiki:Doc/English/Formatting Formatting)), ((Ricerca)).' . "\n\n";
+			'Pagine utili: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Ricerca Ricerca)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Home Page', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

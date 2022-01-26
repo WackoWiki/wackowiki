@@ -12,7 +12,7 @@ if ($config['language'] == $page_lang)
 			'**Velkommen til din ((WackoWiki:Doc/English WackoWiki)) installation!**' . "\n\n" .
 			'Klik på "Rediger siden" linket nederst for at rette denne side.' . "\n\n" .
 			'Dokumentation finder du på WackoWiki:Doc/English.' . "\n" .
-			'Særlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), ((Søgning)).' . "\n\n";
+			'Særlige wikisider: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Søgning Søgning)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Startside', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

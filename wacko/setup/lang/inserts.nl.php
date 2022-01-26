@@ -12,7 +12,7 @@ if ($config['language'] == $page_lang)
 			'Welkom op uw ((WackoWiki:Doc/English WackoWiki)) site!**' . "\n\n" .
 			'Klik nadat je bent ingelogd op de "Bewerk deze pagina" link onderaan om te beginnen.' . "\n\n" .
 			'Documentatie is te vinden op WackoWiki:Doc/English.' . "\n" .
-			'Nuttige pagina\'s: ((WackoWiki:Doc/English/Formatting Formatting)), ((Zoeken)).' . "\n\n";
+			'Nuttige pagina\'s: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Zoeken Zoeken)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'Startpagina', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

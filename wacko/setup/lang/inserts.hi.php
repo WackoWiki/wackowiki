@@ -9,13 +9,13 @@ if ($config['language'] == $page_lang)
 	{
 		$home_page_body		=
 			'file:/wacko_logo.png?right' . "\n" .
-			'**Welcome to your ((WackoWiki:Doc/English WackoWiki)) site!**' . "\n\n" .
-			'Click after you have ((प्रवेश logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
-			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
-			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((खोजें)).' . "\n\n";
+			'**आपकी ((WackoWiki:Doc/English WackoWiki)) साइट पर आपका स्वागत है!**' . "\n\n" .
+			'आरंभ करने के लिए नीचे "इस पृष्ठ को संपादित करें" लिंक पर लॉग इन करने के बाद क्लिक करें।' . "\n\n" .
+			'दस्तावेज़ीकरण यहां पाया जा सकता है  WackoWiki:Doc/English.' . "\n" .
+			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/खोजें खोजें)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
-		insert_page($config['root_page'], 'Home Page', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
+		insert_page($config['root_page'], 'मुख पृष्ठ', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
 	}
 
