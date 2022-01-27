@@ -741,9 +741,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[alustada uut teemat]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomDesc'			=> 'Märkus: Isiklike sõnumite saatmine saaja e-posti aadressile ilma oma aadressi avaldamata. Vastuvõtjal on võimalus teile vastata, kasutades sama vormi teie profiili lehel. ',
 	'UsersPMOversized'			=> 'Sõnumi pikkus ületab maksimaalse suuruse %1 võrra. Lühendage oma sõnumit ja saatke see uuesti.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',

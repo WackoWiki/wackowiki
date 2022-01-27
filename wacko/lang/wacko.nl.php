@@ -741,9 +741,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[een nieuw onderwerp starten]',
 	'UsersIntercomDisabled'		=> 'Sorry, u wilt of kunt geen persoonlijke berichten ontvangen.',
 	'UsersIntercomHint'			=> 'Log eerst in en volg de link opnieuw, als je het persoonlijke bericht dat je hebt ontvangen wilt beantwoorden.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomDesc'			=> 'Opmerking: Het versturen van persoonlijke berichten naar het e-mailadres van de ontvanger zonder uw adres bekend te maken. De ontvanger heeft de mogelijkheid om u te antwoorden via hetzelfde formulier op uw profielpagina. ',
 	'UsersPMOversized'			=> 'De lengte van het bericht overschrijdt de maximaal toegestane grootte met %1. Gelieve uw bericht in te korten en opnieuw te verzenden.',
 	'UsersPMFlooded'			=> 'Het interval tussen het verzenden van persoonlijke berichten mag niet korter zijn dan %1 seconde.',
 	'UsersPMSent'				=> 'Een persoonlijk bericht werd met succes naar de gebruiker verzonden.',

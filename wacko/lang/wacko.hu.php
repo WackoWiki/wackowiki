@@ -740,16 +740,14 @@ $wacko_translation = [
 	'UsersIntercomMessage'		=> 'Üzenet',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sajnáljuk, de nem akar vagy nem tud személyes üzeneteket fogadni.',
-	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomHint'			=> 'Kérjük, először jelentkezzen be, és kövesse újra a linket, ha válaszolni szeretne a kapott személyes üzenetre.',
+	'UsersIntercomDesc'			=> 'Megjegyzés: Személyes üzenetek küldése a címzett e-mail címére az Ön címének felfedése nélkül. A címzettnek lehetősége van válaszolni Önnek a profiloldalán található űrlap segítségével. ',
 	'UsersPMOversized'			=> 'Az üzenet hossza %1-rel meghaladja a maximális méretet. Kérjük, rövidítse le üzenetét, és küldje el újra.',
-	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
+	'UsersPMFlooded'			=> 'A személyes üzenetek küldése közötti időköz nem lehet kevesebb, mint %1 másodperc.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'Ezt az üzenetet a %1 felhasználó küldte neked.',
-	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'UsersPMReply'				=> 'Ha válaszolni szeretne erre az e-mail üzenetre, kattintson az alábbi linkre (ne használja a \'Válasz\' gombot a levelezőprogramjában):',
 	'UsersPMNotLoggedIn'		=> 'Nincs bejelentkezve a rendszerbe, és nem küldhet személyes üzenetet a felhasználóknak.',
 
 	// Properties

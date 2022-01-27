@@ -742,9 +742,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[iniciar nuevo tema]',
 	'UsersIntercomDisabled'		=> 'Perdón, no desea o no puede recibir mensajes privados.',
 	'UsersIntercomHint'			=> 'Por favor, identifíquese primero y siga el enlace de nuevo, si desea responder el mensaje personal que ha recibido.',
-	'UsersIntercomDesc'			=> 'Observación: Mensaje privado enviado al email del destinatario ' .
-								   'sin revelar su dirección de email. El recipiente podrá responderle usando ' .
-								   'un formulario similar en la página del perfil de usted. ',
+	'UsersIntercomDesc'			=> 'Observación: Mensaje privado enviado al email del destinatario sin revelar su dirección de email. El recipiente podrá responderle usando un formulario similar en la página del perfil de usted. ',
 	'UsersPMOversized'			=> 'La longitud del mensaje excede el tamaño máximo permitido en un %1. Por favor acorte su mensaje y vuelva a enviar.',
 	'UsersPMFlooded'			=> 'El intervalo entre mensajes personales debe ser mayor de %1 segundos.',
 	'UsersPMSent'				=> 'Mensaje personal enviado exitosamente al usuario.',

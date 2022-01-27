@@ -739,17 +739,15 @@ $wacko_translation = [
 	'UsersIntercomSubject'		=> 'Emne',
 	'UsersIntercomMessage'		=> 'Besked',
 	'UsersIntercomSubjectN'		=> '[Start et nyt emne]',
-	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
-	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomDisabled'		=> 'Beklager, du ønsker ikke eller kan ikke modtage personlige beskeder.',
+	'UsersIntercomHint'			=> 'Du skal først logge ind og følge linket igen, hvis du vil svare på den personlige besked, du har modtaget.',
+	'UsersIntercomDesc'			=> 'Bemærk: At sende personlige beskeder til modtagerens e-mailadresse uden at oplyse din adresse. Modtageren har mulighed for at svare dig ved hjælp af den samme formular på din profilside. ',
 	'UsersPMOversized'			=> 'Længden på meddelelsen overstiger den maksimale størrelse med %1. Forkort din besked, og send den igen.',
-	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
-	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
-	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
+	'UsersPMFlooded'			=> 'Intervallet mellem afsendelse af personlige meddelelser bør ikke være mindre end %1 sekunder.',
+	'UsersPMSent'				=> 'Den personlige meddelelse er blevet sendt til brugeren.',
+	'UsersPMPlnSent'			=> 'Personlig besked til brugeren sendt i almindelig tekst.',
 	'UsersPMBody'				=> 'Denne meddelelse er blevet sendt til dig af brugeren %1.',
-	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'UsersPMReply'				=> 'Hvis du vil besvare denne e-mail, skal du klikke på følgende link (du må ikke bruge \'Svar\'-knappen i dit mailprogram):',
 	'UsersPMNotLoggedIn'		=> 'Du er ikke logget ind på systemet og kan ikke sende nogen personlige beskeder til brugerne.',
 
 	// Properties
