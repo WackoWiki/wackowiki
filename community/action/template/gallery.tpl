@@ -9,17 +9,17 @@
 	=]
 
 	[= div _ =
-		<div class="gallery t-center">
-			[ ' nonstatic ' ]
+		<div class="gallery">
+		[ ' nonstatic ' ]
 	=]
 	[= table _ =
-		<table class="t-center" style="width:100%;">
+		<table class="gallery">
 		[ ' nonstatic ' ]
 	=]
 	[= items _ =
 		[ ' row ' ]
 		[= table _ =
-			<td class="t-center">
+			<td>
 			[ ' nonstatic ' ]
 		=]
 		<figure class="zoom">
@@ -44,7 +44,7 @@
 	=]
 	[= item _ =
 		<a id="[ ' token ' ]" href="[ ' href ' ]">← [ ' _t: ToOverview ' ]</a>
-		[''' navigation ''']
+		[ '' navigation '' ]
 		<br><br>
 		<figure class="t-center">
 			[ ' img ' ]
@@ -55,7 +55,7 @@
 			</figcaption>
 			<br>
 		</figure>
-		[''' navigation ''']
+		[ '' navigation '' ]
 	=]
 	[= emark _ =
 		[ ' nonstatic ' ]
