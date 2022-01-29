@@ -516,7 +516,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
-	'ReallyDelete'				=> 'Do you really want to DELETE this page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
+	'ReallyDeletePage'			=> 'Do you really want to DELETE this page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
 	'CommentForWatchedPage'		=> 'New comment for page ',
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
@@ -891,7 +891,7 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Chosen name is invalid',
 	'InvalidUserName'			=> 'Chosen user name is invalid',
 	'Bookmarks'					=> 'نشانک ها',
-	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
+	'ReallyDeleteComment'		=> 'Do you really want to DELETE this comment?<br>There is no undo for this action!',
 	'ReallyDeleteRevision'		=> 'Do you really want to DELETE this revision?<br>There is no undo for this action!',
 
 	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',

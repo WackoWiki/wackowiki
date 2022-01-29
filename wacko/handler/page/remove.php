@@ -279,7 +279,7 @@ if ($this->is_admin()
 			}
 			else
 			{
-				$message = $this->_t('ReallyDelete');
+				$message = $this->_t('ReallyDeletePage');
 			}
 
 			$tpl->warning	= $this->show_message($message, 'warning', false);
