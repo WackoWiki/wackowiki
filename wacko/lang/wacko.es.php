@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Apropiatela',
 	'FilesTip'					=> 'Gestionar archivos adjuntos',
 	'FilesText'					=> 'Archivos',
-	'DeleteConfirm'				=> 'Estas seguro/a de querer ELIMINAR esta página?' . "\n" . 'Esta acción no se puede recuperar!.',
 	'DeleteTip'					=> 'Pulsa aquí para eliminar la página.',
 	'DeleteCommentTip'			=> 'Pulsa aquí para eliminar comentario.',
 	'DeleteText'				=> 'Eliminar',

@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Przejmij autorstwo',
 	'FilesTip'					=> 'Zarządzanie załączonymi plikami',
 	'FilesText'					=> 'Załączniki',
-	'DeleteConfirm'				=> 'Czy na pewno USUNĄĆ tę stronę?' . "\n" . 'Tej czynności nie można cofnąć!.',
 	'DeleteTip'					=> 'Usuń bieżącą stronę...',
 	'DeleteCommentTip'			=> 'Kliknij tutaj, aby usunąć komentarz.',
 	'DeleteText'				=> 'Usuń',

@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'S’approprier',
 	'FilesTip'					=> 'gérer les fichiers attachés',
 	'FilesText'					=> 'Fichiers',
-	'DeleteConfirm'				=> 'Êtes-vous sûr de vouloir supprimer cette page ?\\vous ne pourrez pas revenir en arrière !.',
 	'DeleteTip'					=> 'Cliquez ici pour supprimer cette page.',
 	'DeleteCommentTip'			=> 'Cliquez ici pour supprimer ce commentaire.',
 	'DeleteText'				=> 'Supprimer',

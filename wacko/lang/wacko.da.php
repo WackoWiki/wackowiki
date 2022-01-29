@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Overtag ejerskabet',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Vedhæftede filer',
-	'DeleteConfirm'				=> 'Er du sikker på, at du vil SLETTE denne side?' . "\n" . 'Den vil ikke kunne genskabes!.',
 	'DeleteTip'					=> 'Klik her for at slette siden.',
 	'DeleteCommentTip'			=> 'Klik her for at slette kommentar.',
 	'DeleteText'				=> 'Slet',

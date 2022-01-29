@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Omasta',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Manused',
-	'DeleteConfirm'				=> 'Kas tõesti soovid selle lehe KUSTUTADA?' . "\n" . 'Taastamise võimalust enam pole!.',
 	'DeleteTip'					=> 'Lehe kustutamiseks vajuta siia.',
 	'DeleteCommentTip'			=> 'Kommentaari kustutamiseks klõpsake siin.',
 	'DeleteText'				=> 'Kustuta',

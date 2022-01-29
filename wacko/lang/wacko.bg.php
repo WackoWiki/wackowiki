@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Стани собственик',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Прикачени файлове',
-	'DeleteConfirm'				=> 'Действително ли искате да ИЗТРИЕТЕ този текст? ' . "\n" . 'По-късно няма да можете да го възстановите.',
 	'DeleteTip'					=> 'Кликнете, за да изтриете.',
 	'DeleteCommentTip'			=> 'Click here to delete comment.',
 	'DeleteText'				=> 'Изтрий',

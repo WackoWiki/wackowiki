@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> '첨부',
-	'DeleteConfirm'				=> 'Do you really want to DELETE page?' . "\n" . 'There is no undo for this action!.',
 	'DeleteTip'					=> 'Delete page, it\'s files and comments',
 	'DeleteCommentTip'			=> '댓글 삭제',
 	'DeleteText'				=> '삭제',
@@ -517,7 +516,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
-	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
+	'ReallyDelete'				=> 'Do you really want to DELETE this page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
 	'CommentForWatchedPage'		=> 'New comment for page ',
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
@@ -620,8 +619,8 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
-	'AllowIntercom'				=> 'Allow personal messages from users of the system',
-	'AllowMassemail'			=> 'Administrators can email me information',
+	'AllowIntercom'				=> '시스템 사용자의 개인 메시지 허용',
+	'AllowMassemail'			=> '관리자가 나에게 정보를 이메일로 보낼 수 있음',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
@@ -996,7 +995,7 @@ $wacko_translation = [
 
 	// Captcha
 	'Captcha'					=> '그림에 보이는 글을 입력하세요',
-	'CaptchaFailed'				=> 'You have entered the captcha word incorrectly. 다시 시도하십시오. ',
+	'CaptchaFailed'				=> '보안문자 단어를 잘못 입력했습니다. 다시 시도하십시오. ',
 	'CaptchaReload'				=> '새로운 보안 문자',
 	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
 

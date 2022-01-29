@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Seite übernehmen',
 	'FilesTip'					=> 'Dateianhänge verwalten',
 	'FilesText'					=> 'Anhänge',
-	'DeleteConfirm'				=> 'Willst du wirklich diese Seite löschen?' . "\n" . 'Diese Aktion kann nicht rückgängig gemacht werden!',
 	'DeleteTip'					=> 'Seite löschen.',
 	'DeleteCommentTip'			=> 'Kommentar löschen.',
 	'DeleteText'				=> 'Löschen',

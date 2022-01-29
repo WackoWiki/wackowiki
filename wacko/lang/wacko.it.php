@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Prendine il controllo',
 	'FilesTip'					=> 'Gestisci i file allegati',
 	'FilesText'					=> 'Allegati',
-	'DeleteConfirm'				=> 'Vuoi proprio CANCELLARE la pagina?' . "\n" . 'Non sarà più possibile tornare indietro!',
 	'DeleteTip'					=> 'Clicca qui per cancellare la pagina.',
 	'DeleteCommentTip'			=> 'Clicca qui per cancellare commento.',
 	'DeleteText'				=> 'Cancella',

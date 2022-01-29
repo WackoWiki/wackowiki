@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Tomar Posse',
 	'FilesTip'					=> 'Gerenciar arquivos anexados',
 	'FilesText'					=> 'Anexos',
-	'DeleteConfirm'				=> 'Quer mesmo APAGAR a página?' . "\n" . 'Não poderá voltar atrás!.',
 	'DeleteTip'					=> 'Clique aqui para apagar.',
 	'DeleteCommentTip'			=> 'Clique aqui para comentário.',
 	'DeleteText'				=> 'Apagar',

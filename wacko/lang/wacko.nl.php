@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Wordt eigenaar',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Bijlagen',
-	'DeleteConfirm'				=> 'Wilt u deze pagina echt verwijderen?' . "\n" . 'U kunt deze handeling niet ongedaan maken!.',
 	'DeleteTip'					=> 'Klik hier om deze pagina te verwijderen.',
 	'DeleteCommentTip'			=> 'Klik hier om deze reactie te verwijderen.',
 	'DeleteText'				=> 'Verwijder',
