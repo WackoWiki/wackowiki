@@ -73,7 +73,7 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
-	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+	'RegistrationThreshold'		=> 'Времето за попълване на формуляра трябва да е не по-малко от %1 секунди.',
 
 	// login panel
 	'LoginWelcome'				=> 'Вход',
@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Стани собственик',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Прикачени файлове',
-	'DeleteConfirm'				=> 'Действително ли искате да ИЗТРИЕТЕ този текст? ' . "\n" . 'По-късно няма да можете да го възстановите.',
 	'DeleteTip'					=> 'Кликнете, за да изтриете.',
 	'DeleteCommentTip'			=> 'Click here to delete comment.',
 	'DeleteText'				=> 'Изтрий',
@@ -518,7 +517,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Покажи празните символи в УикиИмента',
 	'WrongPage4Redirect'		=> 'Преадресирането не е възможно поради неверни параметри на преадресацията',
 	'RedirectsToItself'			=> 'Сайтът се пренасочва към себе си.',
-	'ReallyDelete'				=> 'Вие действително ли искате да ИЗТРИЕТЕ страницата? <br>след това няма да можете да я Възстановите.<br><br>ВНИМАНИЕ: при изтриването на страницата ще бъдат изтрити всички нейни версии, коментари, прикачени файлове, референции и т.п.',
+	'ReallyDeletePage'			=> 'Вие действително ли искате да ИЗТРИЕТЕ страницата? <br>след това няма да можете да я Възстановите.<br><br>ВНИМАНИЕ: при изтриването на страницата ще бъдат изтрити всички нейни версии, коментари, прикачени файлове, референции и т.п.',
 	'CommentForWatchedPage'		=> 'Коментар за страницата ',
 	'SomeoneCommented'			=> ' коментирал гледаната от вас страница: ',
 	'AlertReferringPages'		=> 'Препратка на дадената страница е на страница',
@@ -742,9 +741,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomDesc'			=> 'Бележка: Изпращане на лични съобщения до имейл адреса на получателя, без да се разкрива вашият адрес. Получателят има възможност да ви отговори, като използва същия формуляр на страницата на профила ви. ',
 	'UsersPMOversized'			=> 'Дължината на съобщението надвишава максималния размер с %1. Моля, съкратете съобщението си и го изпратете отново.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
@@ -1337,6 +1334,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## not in allowed domains list',
+	'LogRegisterTiming'			=> 'Регистрацията е неуспешна, прагът за време на формата е ##%1## секунди (беше ##%2##)',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
 	'LogCommentPosted'			=> 'Added [[/%1 new comment]] to page [[/%2]]',

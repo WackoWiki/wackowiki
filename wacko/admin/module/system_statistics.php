@@ -30,13 +30,13 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 	<?php echo $engine->_t('DbStatSection');?>:
 	<br>
 	<br>
-	<table style="max-width: 600px;" class="formation lined">
+	<table class="db-stats formation lined">
 		<tr>
-			<th style="width:50px;"><?php echo $engine->_t('DbTable');?></th>
-			<th class="t-left"><?php echo $engine->_t('DbRecords');?></th>
-			<th class="t-left"><?php echo $engine->_t('DbSize');?></th>
-			<th class="t-left"><?php echo $engine->_t('DbIndex');?></th>
-			<th class="t-left"><?php echo $engine->_t('DbOverhead');?></th>
+			<th><?php echo $engine->_t('DbTable');?></th>
+			<th><?php echo $engine->_t('DbRecords');?></th>
+			<th><?php echo $engine->_t('DbSize');?></th>
+			<th><?php echo $engine->_t('DbIndex');?></th>
+			<th><?php echo $engine->_t('DbOverhead');?></th>
 		</tr>
 <?php
 	$results	= $engine->db->load_all("SHOW TABLE STATUS FROM `{$engine->db->db_name}`", true);
@@ -51,15 +51,14 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 		{
 			if ($table['Name'] == $wtable['name'])
 			{
-				echo '<tr>' .
+				echo
+					'<tr>' .
 						'<th class="label"><strong>' . $table['Name'] . '</strong></th>' .
-						'<td>&nbsp;&nbsp;&nbsp;' . number_format($table['Rows'], 0, ',', '.') . '</td>' .
+						'<td>' . number_format($table['Rows'], 0, ',', '.') . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Data_length'], false, true, true) . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Index_length'], false, true, true) . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Data_free'], false, true, true) . '</td>' .
-					'</tr>' .
-					#'<tr class="lined"><td colspan="5"></td></tr>' .
-					"\n";
+					'</tr>' . "\n";
 
 				$trows	+= $table['Rows'];
 				$tdata	+= $table['Data_length'];
@@ -71,7 +70,7 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 ?>
 		<tr>
 			<td class="label"><strong><?php echo $engine->_t('DbTotal');?>:</strong></td>
-			<td><strong>&nbsp;&nbsp;&nbsp;<?php echo number_format($trows, 0, ',', '.'); ?></strong></td>
+			<td><strong><?php echo number_format($trows, 0, ',', '.'); ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tdata, false, true, true); ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tindex, false, true, true); ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tfrag, false, true, true); ?></strong></td>
@@ -81,11 +80,11 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 	<?php echo $engine->_t('FileStatSection');?>:
 	<br>
 	<br>
-	<table style="max-width:300px;" class="formation lined">
+	<table class="file-stats formation lined">
 		<tr>
-			<th style=""><?php echo $engine->_t('FileFolder');?></th>
-			<th class="t-left"><?php echo $engine->_t('FileFiles');?></th>
-			<th class="t-left"><?php echo $engine->_t('FileSize');?></th>
+			<th><?php echo $engine->_t('FileFolder');?></th>
+			<th><?php echo $engine->_t('FileFiles');?></th>
+			<th><?php echo $engine->_t('FileSize');?></th>
 		</tr>
 <?php
 	clearstatcache();
@@ -109,9 +108,10 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 			$tfiles += $files;
 			$tsize += $size;
 
-			echo '<tr>' .
+			echo
+				'<tr>' .
 					'<td class="label"><strong>' . $dir . '</strong></td>' .
-					'<td>&nbsp;&nbsp;&nbsp;' . $files . '</td>' .
+					'<td>' . $files . '</td>' .
 					'<td>' . $engine->binary_multiples($size, false, true, true) . '</td>' .
 				'</tr>' . "\n";
 		}
@@ -119,7 +119,7 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 ?>
 		<tr>
 			<td class="label"><strong><?php echo $engine->_t('FileTotal');?>:</strong></td>
-			<td>&nbsp;&nbsp;&nbsp;<strong><?php echo $tfiles; ?></strong></td>
+			<td><strong><?php echo $tfiles; ?></strong></td>
 			<td><strong><?php echo $engine->binary_multiples($tsize, false, true, true); ?></strong></td>
 		</tr>
 	</table>

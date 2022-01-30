@@ -54,11 +54,18 @@ $config_file['wacko_version']		= $config['wacko_version'];
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 // convert config array into PHP code
-$config_code  = '<?php' . "\n" .
-				'// config.php ' . $lang['WrittenAt'] . strftime('%c') . "\n" .
+$fmt			= new IntlDateFormatter(
+					$lang['LangLocale'],
+					IntlDateFormatter::FULL,
+					IntlDateFormatter::FULL,
+					null,
+					null,
+					'EEEEEE dd MMM yyyy HH:mm:ss zzz');
+$config_code	= '<?php' . "\n" .
+				'// config.php ' . $lang['WrittenAt'] . $fmt->format(time()) . "\n" .
 				'// ' . $lang['ConfigDescription'] . "\n" .
-				'// ' . $lang['DontChange'] . "\n\n";
-$config_code .= array_to_str($config_file);
+				'// ' . $lang['DontChange'] . "\n\n" .
+				array_to_str($config_file);
 
 // try to write configuration file
 echo '<h2>' . $lang['FinalStep'] . '</h2>' . "\n";

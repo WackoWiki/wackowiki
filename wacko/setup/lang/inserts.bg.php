@@ -12,7 +12,7 @@ if ($config['language'] == $page_lang)
 			'**Добре дошли във вълшебния свят на ((WackoWiki:Doc/English WackoWiki)).**' . "\n\n" .
 			'Кликнете на линка долу, за да редактирате тази страница (става също и само с двойно кликане на мишката някъде на страницата).' . "\n\n" .
 			'Документация (на английски) има на WackoWiki:Doc/English.' . "\n" .
-			'Полезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), ((Search)).' . "\n\n";
+			'Полезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Търсене Търсене)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], '', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

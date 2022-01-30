@@ -90,7 +90,8 @@ ul, ol {
 	margin: 0;
 	padding-left: 30px;
 }
-[dir=rtl] ul, [dir=rtl] ol {
+[dir=rtl] ul,
+[dir=rtl] ol {
 	padding-left: unset;
 	padding-right: 30px;
 }
@@ -238,31 +239,105 @@ table.forum th {
 	border-spacing: 3px;
 	border-collapse: separate;
 }
+
+/* db-stats table */
+.db-stats {
+	max-width: 600px;
+}
+.db-stats th:nth-child(1) {
+	width: 50px;
+}
+.db-stats td:nth-child(2) {
+	text-align: right;
+}
+.db-stats td:nth-child(n+3) {
+	text-align: center;
+}
+
+/* file-stats table */
+.file-stats {
+	max-width: 300px;
+}
+.file-stats td:nth-child(2) {
+	text-align: right;
+}
+.file-stats td:nth-child(3) {
+	text-align: center;
+}
+
+/* sysinfo table */
+.sysinfo {
+	max-width: 800px;
+}
+.sysinfo th:nth-child(1) {
+	width: 120px;
+}
+
 /* syslog table */
 .syslog th:nth-child(1){
 	width: 5px;
 }
-.syslog th:nth-child(2),
-.syslog th:nth-child(3),
-.syslog th:nth-child(5){
+.syslog th:nth-child(n+2):nth-child(-n+3),
+.syslog th:nth-child(5) {
 	width: 20px;
 }
-.syslog td:nth-child(n+1){
-	
+.syslog td:nth-child(n+1) {
 	vertical-align: top;
 }
-.syslog td:nth-child(2),
-.syslog td:nth-child(3),
+.syslog td:nth-child(n+2):nth-child(-n+3),
 .syslog td:nth-child(5){
 	text-align: center;
 }
-.syslog td:nth-child(3){
+.syslog td:nth-child(3) {
 	padding-left: 5px;
 	padding-right: 5px;
 }
 
 .setting col:nth-child(n) {
 	width: 50%;
+}
+
+/* approve users table */
+.approve col:nth-child(1) {
+	width: 5px;
+}
+.approve col:nth-child(3),
+.approve col:nth-child(n+5) {
+	width: 20px;
+}
+.approve col:nth-child(9) {
+	width: 200px;
+}
+
+/* groups table */
+.groups col:nth-child(n+1):nth-child(-n+2) {
+	width: 5px;
+}
+.groups col:nth-child(3),
+.groups col:nth-child(n+5) {
+	width: 20px;
+}
+
+/* users table */
+.users col:nth-child(n+1):nth-child(-n+3) {
+	width: 5px;
+}
+.users col:nth-child(4),
+.users col:nth-child(n+6) {
+	width: 20px;
+}
+.users td:nth-child(4) {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.permissions {
+	width: 200px;
+	height: 50px;
+}
+.sec-header {
+	width: 100%;
+	min-height: 200px;
 }
 
 #content fieldset {

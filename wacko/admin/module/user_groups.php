@@ -491,7 +491,7 @@ function admin_user_groups(&$engine, &$module)
 ?>
 		<input type="hidden" name="group_id" value="<?php echo (int) $group_id; ?>">
 
-		<table class="formation listcenter lined">
+		<table class="members formation listcenter lined">
 			<colgroup>
 				<col span="1" style="width:5px;">
 				<col span="1" style="width:5px;">
@@ -625,17 +625,17 @@ function admin_user_groups(&$engine, &$module)
 
 		$engine->print_pagination($pagination);
 ?>
-		<table class="formation listcenter lined">
+		<table class="groups formation listcenter lined">
 			<colgroup>
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:20px;">
 				<col span="1">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
 			</colgroup>
 			<thead>
 				<tr>

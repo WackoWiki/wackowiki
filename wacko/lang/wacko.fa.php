@@ -73,7 +73,7 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
-	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+	'RegistrationThreshold'		=> 'زمان پر کردن فرم نباید کمتر از %1 ثانیه باشد.',
 
 	// login panel
 	'LoginWelcome'				=> 'ورود به سامانه',
@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'پیوست‌ها',
-	'DeleteConfirm'				=> 'Do you really want to DELETE page?' . "\n" . 'There is no undo for this action!.',
 	'DeleteTip'					=> 'Delete page, it\'s files and comments',
 	'DeleteCommentTip'			=> 'حذف دیدگاه',
 	'DeleteText'				=> 'حذف',
@@ -518,7 +517,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
-	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
+	'ReallyDeletePage'			=> 'Do you really want to DELETE this page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
 	'CommentForWatchedPage'		=> 'New comment for page ',
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
@@ -742,9 +741,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address recipient without disclosing your address. The recipient will be able to respond to you, using similar form on your profile page. ',
 	'UsersPMOversized'			=> 'The length of the message exceeds the maximum allowed size by %1. Please shorten your message and submit again.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
@@ -912,7 +909,7 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Chosen name is invalid',
 	'InvalidUserName'			=> 'Chosen user name is invalid',
 	'Bookmarks'					=> 'نشانک ها',
-	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
+	'ReallyDeleteComment'		=> 'Do you really want to DELETE this comment?<br>There is no undo for this action!',
 	'ReallyDeleteRevision'		=> 'Do you really want to DELETE this revision?<br>There is no undo for this action!',
 
 	'RegistrationClosed'		=> 'Registration is not available here. Try to contact site administrator.',
@@ -1337,6 +1334,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## not in allowed domains list',
+	'LogRegisterTiming'			=> 'Registration failed, form time threshold is ##%1## seconds (was ##%2##)',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
 	'LogCommentPosted'			=> 'Added [[/%1 new comment(s)]] to page [[/%2]]',

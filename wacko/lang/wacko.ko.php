@@ -73,7 +73,7 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
-	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+	'RegistrationThreshold'		=> '양식을 채우는 시간은 %1 초 이상이어야합니다.',
 
 	// login panel
 	'LoginWelcome'				=> '로그인',
@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> '첨부',
-	'DeleteConfirm'				=> 'Do you really want to DELETE page?' . "\n" . 'There is no undo for this action!.',
 	'DeleteTip'					=> 'Delete page, it\'s files and comments',
 	'DeleteCommentTip'			=> '댓글 삭제',
 	'DeleteText'				=> '삭제',
@@ -518,7 +517,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
-	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
+	'ReallyDeletePage'			=> 'Do you really want to DELETE this page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
 	'CommentForWatchedPage'		=> 'New comment for page ',
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
@@ -621,8 +620,8 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
-	'AllowIntercom'				=> 'Allow personal messages from users of the system',
-	'AllowMassemail'			=> 'Administrators can email me information',
+	'AllowIntercom'				=> '시스템 사용자의 개인 메시지 허용',
+	'AllowMassemail'			=> '관리자가 나에게 정보를 이메일로 보낼 수 있음',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
@@ -742,9 +741,7 @@ $wacko_translation = [
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomDesc'			=> '참고: 귀하의 주소를 공개하지 않고 수신자의 이메일 주소로 개인 메시지를 보내는 것. 수신자는 귀하의 프로필 페이지에서 동일한 양식을 사용하여 귀하에게 회신할 수 있는 옵션이 있습니다. ',
 	'UsersPMOversized'			=> 'The length of the message exceeds the maximum allowed size by %1. Please shorten your message and submit again.',
 	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
@@ -912,7 +909,7 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Chosen name is invalid',
 	'InvalidUserName'			=> 'Chosen user name is invalid',
 	'Bookmarks'					=> '북마크',
-	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
+	'ReallyDeleteComment'		=> 'Do you really want to DELETE this comment?<br>There is no undo for this action!',
 	'ReallyDeleteRevision'		=> 'Do you really want to DELETE this revision?<br>There is no undo for this action!',
 
 	'RegistrationClosed'		=> '사용자 등록이 중지되어 있습니다. Try to contact site administrator.',
@@ -1016,7 +1013,7 @@ $wacko_translation = [
 
 	// Captcha
 	'Captcha'					=> '그림에 보이는 글을 입력하세요',
-	'CaptchaFailed'				=> 'You have entered the captcha word incorrectly. 다시 시도하십시오. ',
+	'CaptchaFailed'				=> '보안문자 단어를 잘못 입력했습니다. 다시 시도하십시오. ',
 	'CaptchaReload'				=> '새로운 보안 문자',
 	'CaptchaReloadWarning'		=> 'Sorry, cannot reload the captcha image, you will have to reload the page to do that',
 
@@ -1337,6 +1334,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## not in allowed domains list',
+	'LogRegisterTiming'			=> 'Registration failed, form time threshold is ##%1## seconds (was ##%2##)',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
 	'LogCommentPosted'			=> 'Added [[/%1 new comment(s)]] to page [[/%2]]',

@@ -31,8 +31,8 @@ if ($options['_default'])
 
 	if (!is_object($hl))
 	{
-		$err = '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>Highlighter/' . $hl . '</code>') . '</em>';
-		echo $this->show_message($err, 'error', false);
+		$error = '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>Highlighter/' . $hl . '</code>') . '</em>';
+		echo $this->show_message($error, 'error', false);
 	}
 	else
 	{

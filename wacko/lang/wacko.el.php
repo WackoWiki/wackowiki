@@ -73,7 +73,7 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
-	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+	'RegistrationThreshold'		=> 'Ο χρόνος συμπλήρωσης της φόρμας δεν πρέπει να είναι μικρότερος από %1 δευτερόλεπτα.',
 
 	// login panel
 	'LoginWelcome'				=> 'Σύνδεση',
@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Πάρε Ιδιοκτησία',
 	'FilesTip'					=> 'Διαχείριση συνημμένων αρχείων',
 	'FilesText'					=> 'Αρχεία',
-	'DeleteConfirm'				=> 'Επιθυμείτε την ΔΙΑΓΡΑΦΗ της σελίδας;' . "\n" . 'Δεν υπάρχει αναίρεση για αυτή την ενέργεια!.',
 	'DeleteTip'					=> 'Πατήστε για να διαγράψετε την σελίδα.',
 	'DeleteCommentTip'			=> 'Πατήστε εδώ για την διαγραφή του σχόλιου.',
 	'DeleteText'				=> 'διαγραφή',
@@ -518,7 +517,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Εμφάνιση κενών στα WikiNames',
 	'WrongPage4Redirect'		=> 'Δεν είναι δυνατή η ανακατεύθυνση λόγω λάθος σε παράμετρο ανακατεύθυνσης',
 	'RedirectsToItself'			=> 'Ο ιστότοπος ανακατευθύνεται στον εαυτό του.',
-	'ReallyDelete'				=> 'Επιθυμείτε την ΔΙΑΓΡΑΦΗ της σελίδας;<br>Δεν υπάρχει αναίρεση για αυτή την ενέργεια!<br><br>ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Διαγράφοντας αυτήν σελίδα θα διαγράψετε και όλες τις εκδόσεις, σχόλια, συνημμένα, ACL και παραπομπές.',
+	'ReallyDeletePage'			=> 'Επιθυμείτε την ΔΙΑΓΡΑΦΗ της σελίδας;<br>Δεν υπάρχει αναίρεση για αυτή την ενέργεια!<br><br>ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Διαγράφοντας αυτήν σελίδα θα διαγράψετε και όλες τις εκδόσεις, σχόλια, συνημμένα, ACL και παραπομπές.',
 	'CommentForWatchedPage'		=> 'Νέο σχόλιο στην σελίδα ',
 	'SomeoneCommented'			=> ' η σελίδα που παρακολουθείτε έχει σχολιαστεί: ',
 	'AlertReferringPages'		=> 'Αυτή η σελίδα αναφέρεται από αυτές τις σελίδες',
@@ -739,18 +738,16 @@ $wacko_translation = [
 	'UsersSessionHidden'		=> '[κρυμμένο]',
 	'UsersIntercomSubject'		=> 'Θέμα',
 	'UsersIntercomMessage'		=> 'Μήνυμα',
-	'UsersIntercomSubjectN'		=> '[start a new topic]',
-	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
-	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomSubjectN'		=> '[Ξεκινήστε νέο θέμα]',
+	'UsersIntercomDisabled'		=> 'Δεν θέλετε ή δεν μπορείτε να λαμβάνετε προσωπικά μηνύματα.',
+	'UsersIntercomHint'			=> 'Παρακαλούμε συνδεθείτε πρώτα και ακολουθήστε ξανά τον σύνδεσμο αν θέλετε να απαντήσετε στο προσωπικό μήνυμα που λάβατε.',
+	'UsersIntercomDesc'			=> 'Σημείωση: Αποστολή προσωπικών μηνυμάτων στη διεύθυνση ηλεκτρονικού ταχυδρομείου του παραλήπτη χωρίς να αποκαλύπτεται η διεύθυνσή σας. Ο παραλήπτης έχει τη δυνατότητα να σας απαντήσει χρησιμοποιώντας την ίδια φόρμα στη σελίδα του προφίλ σας. ',
 	'UsersPMOversized'			=> 'Το μήκος του μηνύματος υπερβαίνει το μέγιστο μέγεθος κατά %1. Συντομεύστε το μήνυμά σας και υποβάλετε ξανά.',
-	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
+	'UsersPMFlooded'			=> 'Το διάστημα μεταξύ της αποστολής προσωπικών μηνυμάτων δεν πρέπει να είναι μικρότερο από %1 δευτερόλεπτα.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'Αυτό το μήνυμα σας έχει σταλεί από τον χρήστη %1.',
-	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'UsersPMReply'				=> 'Για να απαντήσετε σε αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου, κάντε κλικ στον ακόλουθο σύνδεσμο (μην χρησιμοποιήσετε το κουμπί \'Απάντηση\' στο πρόγραμμα ηλεκτρονικού ταχυδρομείου σας):',
 	'UsersPMNotLoggedIn'		=> 'Δεν είστε συνδεδεμένοι στο σύστημα και δεν μπορείτε να στείλετε προσωπικά μηνύματα στους χρήστες.',
 
 	// rating handler
@@ -1337,6 +1334,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## not in allowed domains list',
+	'LogRegisterTiming'			=> 'Η εγγραφή απέτυχε, το όριο χρόνου φόρμας είναι ##%1## δευτερόλεπτα (ήταν ##%2##)',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
 	'LogCommentPosted'			=> 'Added [[/%1 new comment]] to page [[/%2]]',

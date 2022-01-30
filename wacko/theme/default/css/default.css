@@ -1330,6 +1330,16 @@ a:target {
 }
 
 /* gallery action */
+div.gallery,
+table.gallery {
+	width: 100%;
+	text-align: center;
+}
+
+.gallery td:nth-child(n) {
+	text-align: center;
+}
+
 .gallery figure {
 	display: inline-table;
 }
@@ -2318,6 +2328,7 @@ table.topics td {
 	background-color: #f9f9f9;
 }
 
+.forum tbody tr:hover,
 .topics tr.topic:hover {
 	background-color: var(--ww-hover-secondary);
 }

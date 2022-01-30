@@ -151,7 +151,7 @@ first really BIG template written
 		[= cmtdisabled =
 			[ ' _t: CommentsDisabled ' ]
 		=]
-		[= cmt _ =
+		[= comments _ =
 			<div class="indent"><small>[ ' _t: UsersCommentsPosted ' ]: [ ' n | number 0 , . ' ]</small></div>
 			[ ''' none UsersNA2 ''' ]
 			[= c _ =
@@ -178,7 +178,7 @@ first really BIG template written
 			</ul>
 		=]
 
-		[= up _ =
+		[= files _ =
 			<h2 id="uploads" class="heading">[ ' _t: UsersUploads ' ]</h2>
 			[= u _ =
 				<div class="indent"><small>[ ' _t: UsersFilesUploaded ' ]: [ ' n | number 0 , . ' ]</small></div>

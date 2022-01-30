@@ -10,9 +10,9 @@ if ($config['language'] == $page_lang)
 		$home_page_body		=
 			'file:/wacko_logo.png?right' . "\n" .
 			'**あなたの ((WackoWiki:Doc/English WackoWiki)) サイトへようこそ！**' . "\n\n" .
-			'Click after you have ((ログイン logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
+			'Click after you have ((/ログイン logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
-			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((検索)).' . "\n\n";
+			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/検索 検索)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], 'ホームページ', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

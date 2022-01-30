@@ -73,7 +73,7 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
-	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+	'RegistrationThreshold'		=> '填写表格的时间不应少于%1秒。',
 
 	// login panel
 	'LoginWelcome'				=> '登录',
@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> '成为所有者',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> '附件',
-	'DeleteConfirm'				=> 'Do you really want to DELETE page?' . "\n" . 'There is no undo for this action!.',
 	'DeleteTip'					=> 'Delete page, it\'s files and comments',
 	'DeleteCommentTip'			=> '删除评论',
 	'DeleteText'				=> '删除',
@@ -518,7 +517,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Cannot redirect because of wrong redirect parameter',
 	'RedirectsToItself'			=> 'The page redirects to itself.',
-	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
+	'ReallyDeletePage'			=> 'Do you really want to DELETE this page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
 	'CommentForWatchedPage'		=> 'New comment for page ',
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
@@ -910,7 +909,7 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Chosen name is invalid',
 	'InvalidUserName'			=> 'Chosen user name is invalid',
 	'Bookmarks'					=> '收藏夹',
-	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
+	'ReallyDeleteComment'		=> 'Do you really want to DELETE this comment?<br>There is no undo for this action!',
 	'ReallyDeleteRevision'		=> 'Do you really want to DELETE this revision?<br>There is no undo for this action!',
 
 	'RegistrationClosed'		=> '不开放用户注册。 Try to contact site administrator.',
@@ -1335,6 +1334,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## not in allowed domains list',
+	'LogRegisterTiming'			=> '注册失败，表单时间阈值为##%1##秒（原为##%2##）。',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
 	'LogCommentPosted'			=> 'Added [[/%1 new comment(s)]] to page [[/%2]]',

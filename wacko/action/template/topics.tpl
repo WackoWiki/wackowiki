@@ -42,8 +42,8 @@
 						</td>
 						<td class="nowrap">
 							<small title="[ ' ip ' ]">
-								&nbsp;&nbsp;[ ' owner ' ]&nbsp;&nbsp;<br>
-								&nbsp;&nbsp;[ ' topic.created | time_formatted ' ]&nbsp;&nbsp;
+								[ ' owner ' ]<br>
+								[ ' topic.created | time_formatted ' ]
 							</small>
 						</td>
 						<td><small>[ ' topic.comments | number 0 , . ' ]</small></td>

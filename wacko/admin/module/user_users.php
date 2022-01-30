@@ -936,22 +936,22 @@ function admin_user_users(&$engine, &$module)
 
 		$engine->print_pagination($pagination);
 ?>
-		<table class="formation listcenter lined">
+		<table class="users formation listcenter lined">
 			<colgroup>
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:20px;">
 				<col span="1">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
-				<col span="1" style="width:20px;">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
+				<col span="1">
 			</colgroup>
 			<thead>
 				<tr>
@@ -985,7 +985,7 @@ function admin_user_users(&$engine, &$module)
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '">
 						</td>
 						<td>' . $row['user_id'] . '</td>
-						<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>
+						<td><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>
 						<td>' . $row['email'] . '</td>
 						<td>' . $row['total_pages'] . '</td>
 						<td>' . $row['total_comments'] . '</td>

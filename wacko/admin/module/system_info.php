@@ -28,10 +28,10 @@ function admin_system_info(&$engine, &$module)
 	<br>
 	<?php echo $engine->_t('SysInfo');?>:<br>
 	<br>
-	<table style="max-width:800px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">
+	<table class="sysinfo formation lined">
 		<tr>
-			<th style="width:120px;"><?php echo $engine->_t('SysParameter');?></th>
-			<th class="t-left"><?php echo $engine->_t('SysValues');?></th>
+			<th><?php echo $engine->_t('SysParameter');?></th>
+			<th><?php echo $engine->_t('SysValues');?></th>
 		</tr>
 <?php
 
@@ -62,9 +62,9 @@ function admin_system_info(&$engine, &$module)
 	$session_save_path		= current(array_reverse(explode(';', ini_get('session.save_path'))));
 
 	// check if gzip compression is enabled // @extension_loaded('zlib')
-	$gzip_compression = (function_exists('ob_gzhandler') || ini_get('zlib.output_compression') ? $engine->_t('On') : $engine->_t('Off'));
+	$gzip_compression		= (function_exists('ob_gzhandler') || ini_get('zlib.output_compression') ? $engine->_t('On') : $engine->_t('Off'));
 
-	$memory = trim(str_replace('M', '', ini_get('memory_limit')));
+	$memory					= trim(str_replace('M', '', ini_get('memory_limit')));
 
 	// fallback if ini_get doesn't work
 	if (intval($memory) == 0)
@@ -111,15 +111,14 @@ function admin_system_info(&$engine, &$module)
 
 <?php
 
-# Ut::debug_print_r(ini_get_all());
-/*
-if ($action == 'phpinfo')
-{
-	// output phpinfo
+	# Ut::debug_print_r(ini_get_all());
 
-	phpinfo();
+	/* if ($action == 'phpinfo')
+	{
+		// output phpinfo
 
-	exit();
-}*/
+		phpinfo();
 
+		exit();
+	} */
 }

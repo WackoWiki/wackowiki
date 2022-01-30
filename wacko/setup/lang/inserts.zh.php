@@ -10,9 +10,9 @@ if ($config['language'] == $page_lang)
 		$home_page_body		=
 			'file:/wacko_logo.png?right' . "\n" .
 			'**欢迎来到您的 ((WackoWiki:Doc/English WackoWiki)) 网站！**' . "\n\n" .
-			'Click after you have ((登录 logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
-			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
-			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((搜索)).' . "\n\n";
+			'Click after you have ((/登录 logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
+			'文件可在以下网址找到 WackoWiki:Doc/English.' . "\n" .
+			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/搜索 搜索)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
 		insert_page($config['root_page'], '首页', $home_page_body, $page_lang, 'Admins', true, false, null, 0);

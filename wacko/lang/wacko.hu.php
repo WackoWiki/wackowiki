@@ -73,7 +73,7 @@ $wacko_translation = [
 	'UserApprovedInfo'			=> 'You have been approved to access %1.',
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
-	'RegistrationThreshold'		=> 'The time for filling in the form should not be less than %1 seconds.',
+	'RegistrationThreshold'		=> 'Az űrlap kitöltésének ideje nem lehet kevesebb, mint %1 másodperc.',
 
 	// login panel
 	'LoginWelcome'				=> 'Bejelentkezés',
@@ -192,7 +192,6 @@ $wacko_translation = [
 	'TakeOwnership'				=> 'Take Ownership',
 	'FilesTip'					=> 'Manage attached files',
 	'FilesText'					=> 'Fájlok',
-	'DeleteConfirm'				=> 'Do you really want to DELETE page?' . "\n" . 'There is no undo for this action!.',
 	'DeleteTip'					=> 'Oldal törlése',
 	'DeleteCommentTip'			=> 'Megjegyzés törlése',
 	'DeleteText'				=> 'Törlés',
@@ -518,7 +517,7 @@ $wacko_translation = [
 	'ShowSpaces'				=> 'Show spaces in WikiNames',
 	'WrongPage4Redirect'		=> 'Helytelen átirányítási paraméter miatt nem lehet átirányítani',
 	'RedirectsToItself'			=> 'A webhely átirányítja magához.',
-	'ReallyDelete'				=> 'Do you really want to DELETE page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
+	'ReallyDeletePage'			=> 'Do you really want to DELETE this page?<br>There is no undo for this action!<br><br>WARNING: Deleting this page will delete all page versions, comments, attachments, ACLs and referrers.',
 	'CommentForWatchedPage'		=> 'New comment for page ',
 	'SomeoneCommented'			=> ' commented this page that you are watching: ',
 	'AlertReferringPages'		=> 'This page is referred to by these pages',
@@ -741,16 +740,14 @@ $wacko_translation = [
 	'UsersIntercomMessage'		=> 'Üzenet',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sajnáljuk, de nem akar vagy nem tud személyes üzeneteket fogadni.',
-	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
-	'UsersIntercomDesc'			=> 'Note: Sending personal messages carried on the email-address ' .
-								   'recipient without disclosing your address. The recipient will be able to respond to you, using ' .
-								   'similar form on your profile page. ',
+	'UsersIntercomHint'			=> 'Kérjük, először jelentkezzen be, és kövesse újra a linket, ha válaszolni szeretne a kapott személyes üzenetre.',
+	'UsersIntercomDesc'			=> 'Megjegyzés: Személyes üzenetek küldése a címzett e-mail címére az Ön címének felfedése nélkül. A címzettnek lehetősége van válaszolni Önnek a profiloldalán található űrlap segítségével. ',
 	'UsersPMOversized'			=> 'Az üzenet hossza %1-rel meghaladja a maximális méretet. Kérjük, rövidítse le üzenetét, és küldje el újra.',
-	'UsersPMFlooded'			=> 'The interval between sending personal messages should not be less than %1 seconds.',
+	'UsersPMFlooded'			=> 'A személyes üzenetek küldése közötti időköz nem lehet kevesebb, mint %1 másodperc.',
 	'UsersPMSent'				=> 'Personal message was successfully sent to the user.',
 	'UsersPMPlnSent'			=> 'Personal message sent to the user in plain text.',
 	'UsersPMBody'				=> 'Ezt az üzenetet a %1 felhasználó küldte neked.',
-	'UsersPMReply'				=> 'To answer this email, click on the following link (do not use the Reply button / Reply in mailer):',
+	'UsersPMReply'				=> 'Ha válaszolni szeretne erre az e-mail üzenetre, kattintson az alábbi linkre (ne használja a \'Válasz\' gombot a levelezőprogramjában):',
 	'UsersPMNotLoggedIn'		=> 'Nincs bejelentkezve a rendszerbe, és nem küldhet személyes üzenetet a felhasználóknak.',
 
 	// rating handler
@@ -912,7 +909,7 @@ $wacko_translation = [
 	'InvalidWikiName'			=> 'Chosen name is invalid',
 	'InvalidUserName'			=> 'Chosen user name is invalid',
 	'Bookmarks'					=> 'Kedvencek',
-	'ReallyDeleteComment'		=> 'Do you really want to DELETE comment?<br>There is no undo for this action!',
+	'ReallyDeleteComment'		=> 'Do you really want to DELETE this comment?<br>There is no undo for this action!',
 	'ReallyDeleteRevision'		=> 'Do you really want to DELETE this revision?<br>There is no undo for this action!',
 
 	'RegistrationClosed'		=> 'Felhasználók regisztrációja jelenleg nem lehetséges. Try to contact site administrator.',
@@ -1337,6 +1334,7 @@ $wacko_translation = [
 	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
 	'LogUserSimilarName'		=> 'There were attempts to register under the same user name: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'Email ##%1## not in allowed domains list',
+	'LogRegisterTiming'			=> 'A regisztráció sikertelen, az űrlap időhatára ##%1## másodperc (volt ##%2##)',
 	'LogUserRegistered'			=> 'Successfully registered a new user ##%1## (##%2##)',
 	'LogUserEmailActivated'		=> 'Successfully activated email ##%1## of user ##%2##',
 	'LogCommentPosted'			=> 'Added [[/%1 new comment(s)]] to page [[/%2]]',
