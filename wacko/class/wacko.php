@@ -7017,7 +7017,7 @@ class Wacko
 			$_link = $link;
 		}
 
-		$page['body_toc']	= $page['body_toc'] ?? null;
+		$page['body_toc']	= $page['body_toc'] ?? '';
 		#$toc				= unserialize($page['body_toc']); //json_decode
 		$toc				= explode('<h-end>', $page['body_toc']);
 
