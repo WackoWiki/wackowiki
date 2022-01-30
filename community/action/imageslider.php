@@ -10,11 +10,11 @@ if (!defined('IN_WACKO'))
 
 	The sole condition is that all the images must be exactly the same size.
 
-	version: 0.7
+	version: 0.8
 
 	{{imageslider
 		[page="PageName" or global=1]
-		[order="time|FILENAME|size|size_desc|ext"]
+		[order="time|name_desc|size|size_desc|ext"]
 		[owner="UserName"]
 		[media=1]
 		[max=number]
@@ -44,11 +44,12 @@ else
 	$limit	= 50;
 }
 
-$order_by = "file_name ASC";
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+							$order_by = "file_name ASC";
+if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'time')		$order_by = "created DESC";
 
 $width_settings			= '100%'; // 100%, 300px, etc.
 $files					= [];
@@ -138,7 +139,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, u.user_name AS user " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.created, u.user_name AS user " .
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}", true);
@@ -305,7 +306,6 @@ if ($can_view)
 
 					$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
-					$dt			= $file['uploaded_dt'];
 					$desc		= $this->format($file['file_description'], 'typografica' );
 
 					if ($desc == '')

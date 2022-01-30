@@ -248,7 +248,7 @@ function admin_content_deleted(&$engine, &$module)
 		foreach ($files as $file)
 		{
 			// day header
-			$engine->sql2datetime($file['modified_dt'], $day, $time);
+			$engine->sql2datetime($file['modified'], $day, $time);
 
 			if ($day != $curday)
 			{

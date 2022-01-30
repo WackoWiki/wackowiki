@@ -1568,12 +1568,12 @@ class Wacko
 			$pagination = $this->pagination($count_deleted['n'], $limit);
 
 			$deleted = $this->db->load_all(
-				"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.uploaded_dt, f.modified_dt, f.file_description,
+				"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.created, f.modified, f.file_description,
 						f.file_lang, f.caption, u.user_name " .
 				"FROM " . $this->db->table_prefix . "file f " .
 					"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 				"WHERE f.deleted = 1 " .
-				"ORDER BY f.modified_dt DESC, f.file_name ASC " .
+				"ORDER BY f.modified DESC, f.file_name ASC " .
 				$pagination['limit'], $cache);
 		}
 

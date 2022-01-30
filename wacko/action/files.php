@@ -44,7 +44,6 @@ $media		??= ($picture ?? null); // replaces depreciated picture with media
 $max		??= null;
 $type_id	??= null;
 
-$order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
 
 // filter categories
@@ -53,11 +52,12 @@ $type_id			= (int)		($_GET['type_id'] ?? $type_id);
 $category_id		= (int)		@$_GET['category_id'];
 $file_link			= (int)		$linked;
 
+							$order_by = "file_name ASC";
 if ($order == 'ext')		$order_by = "file_ext ASC";
 if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+if ($order == 'time')		$order_by = "created DESC";
 
 // check against standard_handlers
 #if (! in_array($method, ))
@@ -157,7 +157,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, p.owner_id, p.tag, u.user_name " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.created, p.owner_id, p.tag, u.user_name " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
@@ -245,7 +245,7 @@ if ($can_view)
 				$path2	= $path1;
 			}
 
-			$dt			= $this->get_time_formatted($file['uploaded_dt']);
+			$created	= $this->get_time_formatted($file['created']);
 			$desc		= $this->format($file['file_description'], 'typografica' );
 
 			if ($desc == '')
@@ -285,7 +285,7 @@ if ($can_view)
 										: '');
 				$tpl->p_size		= $file_size;
 				$tpl->p_user		= $this->user_link($file['user_name'], true, false);
-				$tpl->p_dt			= $dt;
+				$tpl->p_created		= $created;
 				$tpl->p_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, $method_filter, '', $param_filter);
 			}
 			else
@@ -293,7 +293,7 @@ if ($can_view)
 				// display file meta data
 				$tpl->g_desc		= $desc;
 				$tpl->g_meta		= $file_size;
-				$tpl->g_dt			= $dt;
+				$tpl->g_created		= $created;
 			}
 
 			// icons ['handler' => ['title, class]]

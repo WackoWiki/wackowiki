@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: FileAdded ' ]:</th>
-					<td>[ ' file.uploaded_dt | time_formatted ' ]</td>
+					<td>[ ' file.created | time_formatted ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
@@ -132,7 +132,7 @@
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: FileAdded ' ]:</th>
-					<td>[ ' time ' ]</td>
+					<td>[ ' created ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>

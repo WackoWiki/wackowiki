@@ -100,8 +100,8 @@ $tbl_file =
 		source VARCHAR(255) NOT NULL DEFAULT '',
 		source_url VARCHAR(255) NOT NULL DEFAULT '',
 		license_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		uploaded_dt DATETIME NULL DEFAULT NULL,
-		modified_dt DATETIME NULL DEFAULT NULL,
+		created DATETIME NULL DEFAULT NULL,
+		modified DATETIME NULL DEFAULT NULL,
 		file_size INT(10) UNSIGNED NOT NULL DEFAULT '0',
 		picture_w INT(10) UNSIGNED NOT NULL DEFAULT '0',
 		picture_h INT(10) UNSIGNED NOT NULL DEFAULT '0',
@@ -110,7 +110,7 @@ $tbl_file =
 		deleted TINYINT(1) UNSIGNED NULL DEFAULT '0',
 		PRIMARY KEY (file_id),
 		UNIQUE idx_page_id (page_id, file_name),
-		KEY idx_page_id_2 (page_id, uploaded_dt),
+		KEY idx_page_id_2 (page_id, created),
 		KEY idx_deleted (deleted),
 		KEY idx_user_id (user_id)
 	) {$engine} COMMENT='' {$charset} {$collation}";

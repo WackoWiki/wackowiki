@@ -232,7 +232,7 @@ if (isset($_POST['upload']) & $can_upload)
 						}
 
 						$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
-						$uploaded_dt	= $this->db->date();
+						$created		= $this->db->date();
 						$page_id		= $is_global ? 0 : $this->page['page_id'];
 
 						// replace option: keep old data if new entry is empty
@@ -255,8 +255,8 @@ if (isset($_POST['upload']) & $can_upload)
 									"picture_h			= " . (int) $size[1] . "," .
 									"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
-									"uploaded_dt		= " . $this->db->q($uploaded_dt) . ", " .
-									"modified_dt		= UTC_TIMESTAMP() " .
+									"created			= " . $this->db->q($created) . ", " .
+									"modified			= UTC_TIMESTAMP() " .
 								"WHERE " .
 									"page_id			= " . (int) $page_id . " AND " .
 									"file_name			= " . $this->db->q($file_name) . " " .
@@ -278,8 +278,8 @@ if (isset($_POST['upload']) & $can_upload)
 									"picture_h			= " . (int) $size[1] . "," .
 									"file_ext			= " . $this->db->q(mb_substr($ext, 0, 10)) . "," .
 									"mime_type			= " . $this->db->q($mime_type) . "," .
-									"uploaded_dt		= " . $this->db->q($uploaded_dt) . "," .
-									"modified_dt		= UTC_TIMESTAMP() ");
+									"created			= " . $this->db->q($created) . "," .
+									"modified			= UTC_TIMESTAMP() ");
 
 							// update user uploads count
 							$this->update_files_count($page_id, $user['user_id']);

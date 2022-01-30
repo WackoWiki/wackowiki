@@ -35,7 +35,7 @@
 							[ ' meta ' ]<br>
 							[ ' size ' ]<br><br>
 							[ ' user ' ]<br>
-							[ ' dt ' ]<br><br>
+							[ ' created ' ]<br><br>
 							[ ' categories ' ]
 						</td>
 					=]
@@ -45,7 +45,7 @@
 							<span class="size2-">[ ' meta ' ]</span>&nbsp;
 						</td>
 						<td class="dt-">
-							<span class="dt2-">[ ' dt ' ]</span>&nbsp;
+							<span class="dt2-">[ ' created ' ]</span>&nbsp;
 						</td>
 					=]
 				<td class="tool-">

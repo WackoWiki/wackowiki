@@ -14,7 +14,7 @@ if (!defined('IN_WACKO'))
 $get_file = function ($file_id)
 {
 	return $this->db->load_single(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.created, f.modified, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title " .
 		"FROM " . $this->db->table_prefix . "file f " .
 			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
@@ -238,7 +238,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 				$tpl->mime			= $file['mime_type'];
 				$tpl->user			= $this->user_link($file['user_name'], true, false);
-				$tpl->time			= $this->get_time_formatted($file['uploaded_dt']);
+				$tpl->created		= $this->get_time_formatted($file['created']);
 
 				if ($file['license_id'])
 				{
@@ -395,7 +395,7 @@ else
 						"source				= " . $this->db->q($source) . ", " .
 						"source_url			= " . $this->db->q($source_url) . ", " .
 						"license_id			= " . (int) $license_id . ", " .
-						"modified_dt		= UTC_TIMESTAMP() " .
+						"modified			= UTC_TIMESTAMP() " .
 					"WHERE file_id = " . (int) $file['file_id'] . " " .
 					"LIMIT 1");
 

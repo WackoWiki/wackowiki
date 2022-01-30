@@ -26,7 +26,7 @@ if (!defined('IN_WACKO'))
 	[nomark		= 1] - hide external border
 	[table		= 1] - pictures in table
 
-	[order		= "time|FILENAME|size|size_desc|ext"]
+	[order		= "time|name_desc|size|size_desc|ext"]
 	[owner		= "UserName"]
 	[max		= number]
 }}
@@ -95,10 +95,11 @@ $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner
 $nav_offset		= (int) ($_GET[$param_token] ?? '');
 
 							$order_by = "file_name ASC";
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'time')		$order_by = "created DESC";
 
 // do we allowed to see?
 if (!$global)
@@ -165,7 +166,7 @@ if ($can_view)
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.uploaded_dt, u.user_name AS user, p.tag " .
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.caption, f.created, u.user_name AS user, p.tag " .
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		"LIMIT {$pagination['offset']}, {$limit}", true);

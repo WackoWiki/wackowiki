@@ -89,6 +89,8 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 $upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_1];
 
 // file
+$upgrade['6.1.5'][]	= ['alter',		'file',				$alter_file_r6_0_1];
+$upgrade['6.1.5'][]	= ['alter',		'file',				$alter_file_r6_0_2];
 
 // log
 

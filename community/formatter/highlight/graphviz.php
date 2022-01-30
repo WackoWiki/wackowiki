@@ -100,8 +100,8 @@ else
 				"picture_h			= " . (int) $imagesize[1] . ", " .
 				"file_ext			= " . $this->db->q('png') . ", ".
 				"mime_type			= " . $this->db->q($mime_type) . "," .
-				"uploaded_dt		= UTC_TIMESTAMP(), " .
-				"modified_dt		= UTC_TIMESTAMP()");
+				"created			= UTC_TIMESTAMP(), " .
+				"modified			= UTC_TIMESTAMP()");
 
 		// step 3: prepare and run the map command
 		$mapcmd		= $GraphVizSettings['bin'] . " -Tcmap $tmpname.dot";

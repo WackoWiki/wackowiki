@@ -491,13 +491,13 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						$tpl->u_u2_pagination_text = $pagination['text'];
 
 						$files = $this->db->load_all(
-							"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.uploaded_dt, f.file_size, f.file_lang, p.owner_id, p.tag file_on_page, p.title file_on_title " .
+							"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.created, f.file_size, f.file_lang, p.owner_id, p.tag file_on_page, p.title file_on_title " .
 							"FROM " . $this->db->table_prefix . "file f " .
 								"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 							"WHERE f.user_id = " . (int) $user['user_id'] . " " .
 								"AND f.deleted <> 1 " .
 							// "AND p.deleted <> 1 " .
-							"ORDER BY f.uploaded_dt DESC " .
+							"ORDER BY f.created DESC " .
 							$pagination['limit']);
 
 						$page_ids = [];
@@ -529,7 +529,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 									$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
 								}
 
-								preg_match('/^[^\/]+/u', $file['file_on_page'], $sub_tag);
+								preg_match('/^[^\/]+/u', ($file['file_on_page'] ?? ''), $sub_tag);
 
 								// TODO needs to be redone, moving to tpl
 								if ($file['page_id']) // !$global
@@ -547,7 +547,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 									$on_page	= '<span title="">→ ' . $this->_t('UploadGlobal');
 								}
 
-								$tpl->u_u2_li_t			= $file['uploaded_dt'];
+								$tpl->u_u2_li_t			= $file['created'];
 								# $tpl->u_u2_li_link	= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
 								$tpl->u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $file['file_id']]) . '">' . $this->shorten_string($file['file_name']) . '</a>';
 								$tpl->u_u2_li_onpage	= $on_page;
