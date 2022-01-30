@@ -12,11 +12,10 @@ $text = preg_replace_callback(
 	  '<!--imglink:begin-->([^\n]+)==(file:[^\n]+)<!--imglink:end-->|' .
 	  '<!--action:begin-->[^\n]+?<!--action:end-->)/usm',
 	[&$parser, 'postcallback'],
-	$text);
+	($text ?? ''));
 
 $options['strip_ignore'] ??= false;
 $options['strip_notypo'] ??= false;
-
 
 if ($options['strip_notypo'])
 {

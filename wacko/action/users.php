@@ -421,12 +421,14 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 			// last user comments
 			if ($this->user_allowed_comments())
 			{
-				$tpl->cmt_n = $user['total_comments'];
+				$tpl->enter('comments_');
+
+				$tpl->n = $user['total_comments'];
 
 				if ($user['total_comments'])
 				{
 					$pagination = $this->pagination($user['total_comments'], 10, 'c', $profile + ['#' => 'comments']);
-					$tpl->cmt_c_pagination_text = $pagination['text'];
+					$tpl->c_pagination_text = $pagination['text'];
 
 					$comments = $this->db->load_all(
 						"SELECT c.page_id, c.owner_id, c.user_id, c.tag, c.title, c.created, c.comment_on_id, c.page_lang, p.title AS page_title, p.tag AS page_tag, p.owner_id AS page_owner_id " .
@@ -459,15 +461,17 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 					{
 						if (!$this->db->hide_locked || $this->has_access('read', $comment['comment_on_id'], $this->get_user_name()))
 						{
-							$tpl->cmt_c_li_created	= $comment['created'];
-							$tpl->cmt_c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1);
+							$tpl->c_li_created	= $comment['created'];
+							$tpl->c_li_link		= $this->link('/' . $comment['tag'], '', $comment['title'], $comment['page_tag'], 0, 1);
 						}
 					}
 				}
 				else
 				{
-					$tpl->cmt_none = true;
+					$tpl->none = true;
 				}
+
+				$tpl->leave();	// comments_
 			}
 			else
 			{
@@ -480,7 +484,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 			{
 				if ($this->db->attachments_handler == 2 || $this->db->upload == 1 || $this->is_admin())
 				{
-					$tpl->enter('up_');
+					$tpl->enter('files_');
 
 					$tpl->u_n = $user['total_uploads'];
 
@@ -547,7 +551,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 									$on_page	= '<span title="">→ ' . $this->_t('UploadGlobal');
 								}
 
-								$tpl->u_u2_li_t			= $file['created'];
+								$tpl->u_u2_li_created	= $file['created'];
 								# $tpl->u_u2_li_link	= $this->link($path2 . $upload['file_name'], '', $this->shorten_string($upload['file_name']), '', 0, 1);
 								$tpl->u_u2_li_link		= '<a href="' . $this->href('filemeta', $on_tag, ['m' => 'show', 'file_id' => (int) $file['file_id']]) . '">' . $this->shorten_string($file['file_name']) . '</a>';
 								$tpl->u_u2_li_onpage	= $on_page;
@@ -560,11 +564,11 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 						$tpl->u_none = true;
 					}
 
-					$tpl->leave();	// up_
+					$tpl->leave();	// files_
 				}
 				else
 				{
-					$tpl->up = true;
+					$tpl->files = true;
 				}
 			}
 		}
