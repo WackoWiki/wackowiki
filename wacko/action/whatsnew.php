@@ -63,7 +63,7 @@ $pages2 = $this->db->load_all(
 
 // loading uloads
 $files = $this->db->load_all(
-	"SELECT f.page_id, p.owner_id, p.user_id, p.tag, f.created AS created, f.created AS modified, f.file_name AS title, f.file_id AS comment_on_id, 0 AS ip, f.created AS date, f.file_description AS edit_note, p.page_lang, f.file_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 2 AS ctype, f.deleted " .
+	"SELECT f.page_id, p.owner_id, p.user_id, p.tag, f.created, f.modified, f.file_name AS title, f.file_id AS comment_on_id, 0 AS ip, f.created AS date, f.file_description AS edit_note, p.page_lang, f.file_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 2 AS ctype, f.deleted " .
 	"FROM " . $this->db->table_prefix . "file f " .
 		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 		"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
@@ -206,7 +206,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 									? ($this->hide_revisions || $page['comment_on_id']
 										? $time
 										: $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')))
-									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
+									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('FileViewPropertiesTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
 
 			if ($page['edit_note'])
 			{
