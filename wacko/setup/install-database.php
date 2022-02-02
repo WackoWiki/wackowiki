@@ -134,7 +134,6 @@ switch ($config['db_driver'])
 			$fatal_error = true;
 		}
 
-
 		if (!$fatal_error)
 		{
 			/*

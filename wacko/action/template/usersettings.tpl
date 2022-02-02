@@ -10,10 +10,10 @@
 		<form action="[ ' href: ' ]" method="post" name="user_settings_notifications">
 			[ ' csrf: user_settings_notifications ' ]
 			<div class="page-settings">
-				<table class="form-tbl">
+				<table class="account form-tbl">
 					<colgroup>
-						<col span="1" width="30%">
-						<col span="1" width="70%">
+						<col span="1">
+						<col span="1">
 					</colgroup>
 					<tbody>
 						[= e _ =
@@ -89,10 +89,10 @@
 		<form action="[ ' href: ' ]" method="post" name="user_settings_extended">
 			[ ' csrf: user_settings_extended ' ]
 			<div class="page-settings">
-			<table class="form-tbl">
+			<table class="account form-tbl">
 				<colgroup>
-					<col span="1" width="30%">
-					<col span="1" width="70%">
+					<col span="1">
+					<col span="1">
 				</colgroup>
 			<tbody>
 				<tr>
@@ -202,10 +202,10 @@
 		<form action="[ ' href: ' ]" method="post" name="user_settings_general">
 			[ ' csrf: user_settings_general ' ]
 			<div class="page-settings">
-				<table class="form-tbl">
+				<table class="account form-tbl">
 					<colgroup>
-						<col span="1" width="30%">
-						<col span="1" width="70%">
+						<col span="1">
+						<col span="1">
 					</colgroup>
 				<tbody>
 					<tr>

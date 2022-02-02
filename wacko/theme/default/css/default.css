@@ -1276,6 +1276,22 @@ a:target {
 	padding-right: 20px;
 }
 
+.permissions col:nth-child(1) {
+	width: 10%;
+}
+.permissions col:nth-child(2) {
+	width: 70%;
+}
+
+.account col:nth-child(1),
+.properties col:nth-child(1) {
+	width: 30%;
+}
+.account col:nth-child(2),
+.properties col:nth-child(2) {
+	width: 70%;
+}
+
 /* Actions --------------------------------------------------*/
 .smaller {
 	font-size: 0.8em;

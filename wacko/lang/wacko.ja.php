@@ -619,8 +619,8 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',
-	'AllowIntercom'				=> 'Allow personal messages from users of the system',
-	'AllowMassemail'			=> 'Administrators can email me information',
+	'AllowIntercom'				=> 'システムのユーザーからの個人的なメッセージを許可する',
+	'AllowMassemail'			=> '管理者は情報をメールで送ることができる',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
 	'ProfileAnonymousPub'		=> 'Preferably, published anonymously (to hide the name)',
@@ -802,7 +802,7 @@ $wacko_translation = [
 	'SettingsLatex'				=> 'LaTeX version',
 	'SettingsXML'				=> 'Export to XML',
 	'NeedToChangeLang'			=> 'Unsupported page language %1 needs to be changed.',
-	'SetLang'					=> 'Language of this page',
+	'SetLang'					=> 'このページの言語',
 	'SetMenuLabel'				=> 'Menu label',
 	'SetShowMenuLabel'			=> 'Show in navigation',
 
