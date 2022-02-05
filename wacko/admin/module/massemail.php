@@ -31,8 +31,9 @@ function admin_massemail(&$engine, &$module)
 	</p>
 	<br>
 	<?php
-	$mail_body	= '';
-	$error		= false;
+	$mail_subject	= (string) ($_POST['mail_subject'] ?? '');
+	$mail_body		= (string) ($_POST['mail_body'] ?? '');
+	$error			= false;
 
 	// send massmail
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
@@ -51,9 +52,6 @@ function admin_massemail(&$engine, &$module)
 		{
 			$engine->show_message($engine->_t('NoEmailRecipient'), 'error');
 		}
-
-		$mail_subject	= (string) ($_POST['mail_subject'] ?? '');
-		$mail_body		= (string) ($_POST['mail_body'] ?? '');
 
 		if (empty($mail_subject))
 		{
@@ -204,7 +202,7 @@ function admin_massemail(&$engine, &$module)
 					<small><?php echo $engine->_t('MessageSubjectInfo');?></small></label></td>
 				</td>
 				<td>
-					<input type="text" id="mail_subject" name="mail_subject" value="<?php echo Ut::html(($_POST['mail_subject'] ?? '')); ?>" size="60" maxlength="200"  required>
+					<input type="text" id="mail_subject" name="mail_subject" value="<?php echo Ut::html($mail_subject); ?>" size="60" maxlength="200"  required>
 				</td>
 			</tr>
 			<tr class="lined">

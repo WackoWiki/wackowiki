@@ -38,7 +38,7 @@ if ($registered
 		if (@$_POST['_action'] === 'rename_page')
 		{
 			$log			= $tpl->massLog();
-			$new_tag		= $_POST['new_tag'];
+			$new_tag		= $_POST['new_tag'] ?? '';
 			$old_tag		= $this->page['tag'];
 
 			if ($error = $this->sanitize_new_page_tag($new_tag, $this->tag))
