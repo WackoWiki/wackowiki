@@ -7,10 +7,6 @@
 
 	Shows hidden content based on user group or user name
 
-	1.1 - Added optional alt attribute which shows content to users who don't meet the login requirements
-	1.2 - Updated to work with Wacko r5.0
-	1.3 - Updated to work with Wacko r5.5 and R.6.0
-
 	[$username	=<comma deliminated list of user names>] - optional - $username="TannSan,BillyBob"
 	[$usergroup	=a single user group name] - optional - $usergroup="Admins"
 	[$text		=text to display if user meets login requirements]

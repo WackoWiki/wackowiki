@@ -276,7 +276,7 @@ function get_table(&$engine, $table, $drop = true)
 		// set collation
 		if (!empty($row['Collation']))
 		{
-			$schema_create .= ' COLLATE ' . $row['Collation'] . '';
+			$schema_create .= ' COLLATE ' . $row['Collation'];
 		}
 
 		// provide timestamp with CURRENT_TIMESTAMP without quotes
@@ -284,7 +284,7 @@ function get_table(&$engine, $table, $drop = true)
 			&& (($row['Type'] == 'timestamp' && ($row['Default'] == 'CURRENT_TIMESTAMP' || $row['Default'] == 'current_timestamp()'))
 				|| ($row['Type'] == 'tinyint' && $row['Default'] == 'NULL')))
 		{
-			$schema_create .= ' DEFAULT ' . $row['Default'] . '';
+			$schema_create .= ' DEFAULT ' . $row['Default'];
 		}
 		else if (isset($row['Default']) && $row['Default'] !== '')
 		{
@@ -642,7 +642,7 @@ function put_data(&$engine, $pack, $table, $mode)
 				}
 				else
 				{
-					$row[$j++] = $engine->db->q($cell); //( $cell == 'null' ? $cell : $engine->db->q($cell) );
+					$row[$j++] = $engine->db->q($cell);
 				}
 			}
 

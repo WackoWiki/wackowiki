@@ -5,10 +5,11 @@
 
 // ported to WackoWiki 5.1.0 by varaha@zaporogom.info 2012/08/27
 // ported to WackoWiki 5.5 2019/06/20 - untested
+// ported to WackoWiki 6.0 2022/02/05 - untested
 
 // if set to "" we test is the file in PATH
-$GraphVizSettings['bindir']		= '';
-$GraphVizSettings['filedir']	= UPLOAD_PER_PAGE_DIR;
+$gv_settings['bindir']	= '';
+$gv_settings['filedir']	= UPLOAD_PER_PAGE_DIR;
 
 // check, if there should be another tool than dot used
 if (isset($options['neato']))		$bin = 'neato';
@@ -17,14 +18,12 @@ else if (isset($options['twopi']))	$bin = 'twopi';
 else if (isset($options['fdp']))	$bin = 'sfdp';
 else if (isset($options['sfdp']))	$bin = 'sfdp';
 else if (isset($options['osage']))	$bin = 'osage';
-else 								$bin = 'dot';
+else								$bin = 'dot';
 
-$GraphVizSettings['bin'] = $GraphVizSettings['bindir'] . $bin;
+$gv_settings['bin'] = $gv_settings['bindir'] . $bin;
 
-// recode from  page charset to utf8
-$text		= iconv($this->get_charset(), 'utf-8', $text);
 // write graphviz code to temporary text-file
-$tmpname	= tempnam ($GraphVizSettings['filedir'], 'temp');
+$tmpname	= tempnam ($gv_settings['filedir'], 'temp');
 $tmpfile	= fopen($tmpname, 'w');
 
 fwrite($tmpfile, $text);
@@ -51,7 +50,7 @@ else
 	### here starts the big code block ###
 
 	// step 1: convert the source-code to generated source code
-	$cmd	= $GraphVizSettings['bin'] . " -Tdot -o$tmpname.dot $tmpname 2>&1";
+	$cmd	= $gv_settings['bin'] . " -Tdot -o$tmpname.dot $tmpname 2>&1";
 	$cmdOut	= `{$cmd}`;
 
 	if ($cmdOut != '')
@@ -66,10 +65,10 @@ else
 		$gname		= explode(' ', $gname[0]);
 		$gname		= strtolower($gname[1]);
 		// the basename is generated in the same way like the upload-handler do this
-		$fname		= $GraphVizSettings['filedir'] . '/@' . $this->get_page_id() . '@' . $gname;
+		$fname		= $gv_settings['filedir'] . '/@' . $this->get_page_id() . '@' . $gname;
 
 		// step 2: prepare and run the image command and put the image in the upload dir and database
-		$imagecmd	= $GraphVizSettings['bin'] . ' -Tpng -o $fname.png $tmpname.dot';
+		$imagecmd	= $gv_settings['bin'] . ' -Tpng -o $fname.png $tmpname.dot';
 		$cmdOut		= `{$imagecmd}`;
 
 		// delelte dublicate images
@@ -100,11 +99,11 @@ else
 				"picture_h			= " . (int) $imagesize[1] . ", " .
 				"file_ext			= " . $this->db->q('png') . ", ".
 				"mime_type			= " . $this->db->q($mime_type) . "," .
-				"uploaded_dt		= UTC_TIMESTAMP(), " .
-				"modified_dt		= UTC_TIMESTAMP()");
+				"created			= UTC_TIMESTAMP(), " .
+				"modified			= UTC_TIMESTAMP()");
 
 		// step 3: prepare and run the map command
-		$mapcmd		= $GraphVizSettings['bin'] . " -Tcmap $tmpname.dot";
+		$mapcmd		= $gv_settings['bin'] . " -Tcmap $tmpname.dot";
 		$map		= `{$mapcmd}`;
 
 		if ($map != '')

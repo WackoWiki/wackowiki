@@ -64,7 +64,8 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 
 		$time		= time();
 		$pack		= set_pack_dir($time);	// backup directory
-		$root		= $_POST['root'];
+		$root		= $_POST['root'] ?? '';
+		$engine->sanitize_page_tag($root);
 		$data		= [];
 		$structure	= [];
 		$files		= [];
@@ -272,4 +273,3 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 		}
 	}
 }
-

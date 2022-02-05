@@ -37,12 +37,14 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 	$user_lang		= $this->known_language($user_lang) ? $user_lang : $this->db->language;
 	$complexity		= $this->password_complexity($user_name, $password);
 
-	if (isset($this->sess->registration_delay) && time() - $this->sess->registration_delay < $this->db->registration_delay)
+	if (isset($this->sess->registration_delay)
+		&& ($tdiff = time() - $this->sess->registration_delay) < $this->db->registration_delay)
 	{
 		// mitigate bots from creating accounts
 		$this->sess->registration_delay	= time();
 
 		$error .= Ut::perc_replace($this->_t('RegistrationThreshold'), $this->db->registration_delay);
+		$this->log(2, Ut::perc_replace($this->_t('LogRegisterTiming', SYSTEM_LANG), $this->db->registration_delay, $tdiff));
 	}
 
 	if (!$this->is_admin() && $this->db->captcha_registration && !$this->validate_captcha())
@@ -83,8 +85,6 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		else if ($this->user_name_exists($user_name))
 		{
 			$error .= $this->_t('RegistrationUserNameOwned');
-
-			// log event
 			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
 		}
 		// no email given

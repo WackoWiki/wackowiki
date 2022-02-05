@@ -43,7 +43,6 @@ if (!isset($media))		$media		= ($picture ?? null); // replaces depreciated pictu
 if (!isset($max))		$max		= null;
 if (!isset($type_id))	$type_id	= null;
 
-$order_by			= "file_name ASC";
 $file_name_maxlen	= 80;
 
 // filter categories
@@ -52,6 +51,7 @@ $type_id			= (int)		($_GET['type_id'] ?? $type_id);
 $category_id		= (int)		@$_GET['category_id'];
 $file_link			= (int)		$linked;
 
+							$order_by = "file_name ASC";
 if ($order == 'ext')		$order_by = "file_ext ASC";
 if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";

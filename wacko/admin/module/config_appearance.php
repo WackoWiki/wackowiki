@@ -146,17 +146,18 @@ function admin_config_appearance(&$engine, &$module)
 					}
 
 					$result_name	= $file . '.' . $ext;
+					$tmp_name		= $_FILES[$file]['tmp_name'];
 
 					if ($file == 'logo')
 					{
 						$size			= [0, 0];
-						$size			= @getimagesize($_FILES[$file]['tmp_name']);
+						$size			= @getimagesize($tmp_name);
 
 						$config['logo_height']			= (int) $size[1];
 						$config['logo_width']			= (int) $size[0];
 					}
 
-					move_uploaded_file($_FILES[$file]['tmp_name'], Ut::join_path(IMAGE_DIR, $result_name));
+					move_uploaded_file($tmp_name, Ut::join_path(IMAGE_DIR, $result_name));
 					chmod(Ut::join_path(IMAGE_DIR, $result_name), CHMOD_FILE);
 
 					$config['site_' . $file]		= $result_name;

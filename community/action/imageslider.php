@@ -14,7 +14,7 @@ if (!defined('IN_WACKO'))
 
 	{{imageslider
 		[page="PageName" or global=1]
-		[order="time|FILENAME|size|size_desc|ext"]
+		[order="time|name_desc|size|size_desc|ext"]
 		[owner="UserName"]
 		[media=1]
 		[max=number]
@@ -43,11 +43,12 @@ else
 	$limit	= 50;
 }
 
-$order_by = "file_name ASC";
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+							$order_by = "file_name ASC";
+if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'time')		$order_by = "uploaded_dt DESC";
 
 $width_settings			= '100%'; // 100%, 300px, etc.
 $files					= [];
@@ -304,7 +305,6 @@ if ($can_view)
 
 					$this->files_cache[$file['page_id']][$file['file_name']] = $file;
 
-					$dt			= $file['uploaded_dt'];
 					$desc		= $this->format($file['file_description'], 'typografica' );
 
 					if ($desc == '')

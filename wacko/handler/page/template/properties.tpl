@@ -10,10 +10,10 @@
 			<div class="page-settings">
 			<form action="[ ' href: properties ' ]" method="post" name="extended_properties">
 				[ ' csrf: extended_properties ' ]
-				<table class="form-tbl">
+				<table class="properties form-tbl">
 					<colgroup>
-						<col span="1" width="30%">
-						<col span="1" width="70%">
+						<col span="1">
+						<col span="1">
 					</colgroup>
 					<tbody>
 						<tr>
@@ -111,10 +111,10 @@
 		[= f GenOwner =
 			<form action="[ ' href: properties ' ]" method="post" name="general_properties">
 				[' csrf: general_properties ']
-				<table class="form-tbl">
+				<table class="properties form-tbl">
 					<colgroup>
-						<col span="1" width="30%">
-						<col span="1" width="70%">
+						<col span="1">
+						<col span="1">
 					</colgroup>
 					<tbody>
 						<tr>
@@ -259,7 +259,7 @@
 				<td>[ ' page.modified | time_formatted ' ]</td>
 			</tr>
 			<tr>
-				<th scope="row">[ ' _t: SettingsSize ' ]&nbsp;&nbsp;</th>
+				<th scope="row">[ ' _t: SettingsSize ' ]</th>
 				<td title="[ ' _t: SettingsSizeTip ' ]">[ ' bodylen ' ] / [ ' bodyrlen ' ]</td>
 			</tr>
 			<tr>

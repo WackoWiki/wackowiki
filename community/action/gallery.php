@@ -26,7 +26,7 @@ if (!defined('IN_WACKO'))
 	[nomark		= 1] - hide external border
 	[table		= 1] - pictures in table
 
-	[order		= "time|FILENAME|size|size_desc|ext"]
+	[order		= "time|name_desc|size|size_desc|ext"]
 	[owner		= "UserName"]
 	[max		= number]
 }}
@@ -94,10 +94,11 @@ $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner
 $nav_offset		= (int) ($_GET[$param_token] ?? '');
 
 							$order_by = "file_name ASC";
-if ($order == 'time')		$order_by = "uploaded_dt DESC";
+if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
+if ($order == 'time')		$order_by = "uploaded_dt DESC";
 
 // do we allowed to see?
 if (!$global)

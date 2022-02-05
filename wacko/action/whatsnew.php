@@ -208,7 +208,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 									? ($this->hide_revisions || $page['comment_on_id']
 										? $time
 										: $this->compose_link_to_page($page['tag'], 'revisions', $time, $this->_t('RevisionTip')))
-									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('RevisionTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
+									: $this->compose_link_to_page($page['tag'], 'filemeta', $time, $this->_t('FileViewPropertiesTip'), false, ['m' => 'show', 'file_id' => $page['comment_on_id']]);
 
 			if ($page['edit_note'])
 			{

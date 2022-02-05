@@ -193,11 +193,11 @@ if (isset($_POST['upload']) & $can_upload)
 					// check is image, if asked
 					$forbid		= 0;
 					$size		= [0, 0];
-					$src		= $_FILES['file']['tmp_name'];
+					$tmp_name	= $_FILES['file']['tmp_name'];
 
 					if ($is_image === true)
 					{
-						$size	= @getimagesize($src);
+						$size	= @getimagesize($tmp_name);
 					}
 
 					if ($this->db->upload_images_only)
@@ -211,7 +211,7 @@ if (isset($_POST['upload']) & $can_upload)
 					if (!$forbid)
 					{
 						// save to permanent location
-						move_uploaded_file($_FILES['file']['tmp_name'], $dir . $result_name);
+						move_uploaded_file($tmp_name, $dir . $result_name);
 						chmod($dir . $result_name, CHMOD_FILE);
 
 						// replace
