@@ -60,11 +60,11 @@ if (isset($_POST['upload']) & $can_upload)
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name']))
 		{
 			// check out $data
-			#$ext = pathinfo($filename, PATHINFO_EXTENSION);
-			$src		= $_FILES['file']['tmp_name'];
-			$mime_type	= mime_content_type($src);
+			$orig_name	= basename($_FILES['file']['name']);
+			$tmp_name	= $_FILES['file']['tmp_name'];
+			$mime_type	= mime_content_type($tmp_name);
 
-			$_data		= explode('.', $_FILES['file']['name']);
+			$_data		= explode('.', $orig_name);
 			$ext		= $_data[count($_data) - 1];
 			unset($_data[count($_data) - 1]);
 
@@ -88,7 +88,7 @@ if (isset($_POST['upload']) & $can_upload)
 
 			if ($dest_name && $dest_name != '')
 			{
-				$name = $dest_name;
+				$name	= basename($dest_name);
 			}
 			else
 			{
@@ -193,7 +193,6 @@ if (isset($_POST['upload']) & $can_upload)
 					// check is image, if asked
 					$forbid		= 0;
 					$size		= [0, 0];
-					$tmp_name	= $_FILES['file']['tmp_name'];
 
 					if ($is_image === true)
 					{

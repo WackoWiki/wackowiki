@@ -93,10 +93,12 @@ function admin_config_appearance(&$engine, &$module)
 			return;
 		}
 
-		$error	= '';
+		$error		= '';
+		$orig_name	= basename($_FILES[$file]['name']);
+		$tmp_name	= $_FILES[$file]['tmp_name'];
 
 		// 1. check out $data
-		$_data	= explode('.', $_FILES[$file]['name']);
+		$_data	= explode('.', $orig_name);
 		$ext	= $_data[count($_data) - 1];
 		unset($_data[count($_data) - 1]);
 
@@ -121,7 +123,7 @@ function admin_config_appearance(&$engine, &$module)
 				}
 
 				$size			= [0, 0];
-				$size			= @getimagesize($_FILES[$file]['tmp_name']);
+				$size			= @getimagesize($tmp_name);
 
 				if ($file == 'logo')
 				{
@@ -146,7 +148,6 @@ function admin_config_appearance(&$engine, &$module)
 					}
 
 					$result_name	= $file . '.' . $ext;
-					$tmp_name		= $_FILES[$file]['tmp_name'];
 
 					if ($file == 'logo')
 					{

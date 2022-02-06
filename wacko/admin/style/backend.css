@@ -185,7 +185,6 @@ input.verify { display: none; }
 .error {
 	color: #ff9999;
 	font-weight: 600;
-	text-align: center;
 }
 .nobr {
 	white-space: nowrap;
@@ -425,7 +424,6 @@ sup, sub {
 }
 .error {
 	background: #f8d4cc;
-	margin: 10px;
 	color: #cc3333;
 	font-weight: bold;
 }
