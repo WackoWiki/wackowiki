@@ -32,11 +32,9 @@ if ($this->has_access('read'))
 	}
 
 	// display comments
-	if ($this->page && $this->sess->show_comments[$this->page['page_id']] || $this->forum === true)
+	if ($this->page && $this->sess->show_comments[$this->page['page_id']] || $this->forum)
 	{
 		$user			= $this->get_user();
-		$admin			= $this->is_admin();
-		$moder			= $this->is_moderator();
 		$noid_protect	= $this->get_user_setting('noid_protect');
 
 		// load comments for this page
@@ -183,7 +181,7 @@ if ($this->has_access('read'))
 			}
 
 			// WikiEdit
-			if ($user = $this->get_user())
+			if ($user)
 			{
 				if ($user['autocomplete'])
 				{

@@ -630,7 +630,7 @@ function put_data(&$engine, $pack, $table, $mode)
 				}
 				else
 				{
-					$row[$j++] = $engine->db->q($cell); //( $cell == 'null' ? $cell : $engine->db->q($cell) );
+					$row[$j++] = $engine->db->q($cell);
 				}
 			}
 
