@@ -35,7 +35,9 @@ class AutoComplete
 	{
 		var we	= this.wikiedit;
 		this.id	= 'autocomplete_' + this.wikiedit.id;
-		we.addButton('customhtml', '<li id="' + this.id + '_li" style="display:none;"><div style="font:bold 12px Arial; margin:0; padding: 3px 3px 4px 4px;" id="' + this.id + '" '
+		we.addButton('customhtml', 
+			  '<li id="' + this.id + '_li" style="display:none;">'
+			+ '<div style="font:bold 12px Arial; margin:0; padding: 3px 3px 4px 4px;" id="' + this.id + '" '
 			+ ' onmouseover=\'this.className="btn-pressed";\' '
 			+ ' onmouseout=\'this.className="btn-";\' class="btn-" '
 			+ ' onclick="document.getElementById(' + '\'' + we.id + '\')._owner.autocomplete.insertFound();return false;' + '" '
@@ -108,8 +110,6 @@ class AutoComplete
 
 		// now we place out stuff form
 		var d		= document.body;
-		if ((document.compatMode) && (document.compatMode == 'CSS1Compat'))
-			d = document.documentElement;
 		var d_left	= d.scrollLeft;
 		var d_top	= d.scrollTop;
 		var ta		= this.wikiedit.area;
@@ -134,8 +134,8 @@ class AutoComplete
 		}
 
 		this.wikiedit.setAreaContent(_str);
-		var sel2		= document.selection;
-		var sel2_range	= sel2.createRange();
+		var sel2		= window;
+		var sel2_range	= sel2.getSelection();
 		// -- calc x y of ta
 		var z			= ta;
 		var x			= 0;
@@ -182,8 +182,6 @@ class AutoComplete
 		if (this.request_pattern === false)
 			return;
 		var d = document.body;
-		if ((document.compatMode) && (document.compatMode == 'CSS1Compat'))
-			d = document.documentElement;
 		var d_left	= d.scrollLeft;
 		var d_top	= d.scrollTop;
 		this.wikiedit.area.focus();

@@ -62,7 +62,14 @@ class ProtoEdit
 
 	insTag(Tag, Tag2)
 	{
-		if (isMZ)
+		if (isIE)
+		{
+			this.area.focus();
+			let sel				= window.getSelection();
+			sel.text			= Tag + sel.text + Tag2;
+			this.area.focus();
+		}
+		else
 		{
 			let ss				= this.area.scrollTop;
 			let sel1			= this.area.value.substr(0, this.area.selectionStart);
@@ -72,13 +79,6 @@ class ProtoEdit
 			let selPos			= Tag.length + sel1.length + sel.length + Tag2.length;
 			this.area.setSelectionRange(sel1.length, selPos);
 			this.area.scrollTop = ss;
-		}
-		else
-		{
-			this.area.focus();
-			let sel				= document.selection.createRange();
-			sel.text			= Tag + sel.text + Tag2;
-			this.area.focus();
 		}
 
 		return true;
