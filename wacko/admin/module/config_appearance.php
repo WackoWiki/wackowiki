@@ -13,7 +13,7 @@ $_mode = 'config_appearance';
 $module[$_mode] = [
 		'order'	=> 202,
 		'cat'	=> 'preferences',
-		'status'=> (RECOVERY_MODE ? false : true),
+		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
 		'name'	=> $engine->_t($_mode)['name'],		// Appearance
 		'title'	=> $engine->_t($_mode)['title'],	// Appearance settings
@@ -31,24 +31,23 @@ function admin_config_appearance(&$engine, &$module)
 	</p>
 	<br>
 <?php
-	$remove_file = function ($file, $update_config = true) use ($engine)
+	$remove_file = function ($file) use ($engine)
 	{
 		if (!in_array($file, ['favicon', 'logo']))
 		{
 			return;
 		}
 
-		// $engine->{'db->site_' . $file} no way! - more Spaghetti
 		$yeah['favicon']	= $engine->db->site_favicon;
 		$yeah['logo']		= $engine->db->site_logo;
 
 		$file_name = Ut::join_path(IMAGE_DIR, $yeah[$file]);
 
+		clearstatcache();
+
 		if (unlink($file_name))
 		{
-			clearstatcache();
 			$engine->set_message($engine->_t('FileRemovedFromFS'), 'success');
-			# $engine->set_message($engine->_t('LogoRemoved'), 'success');
 
 			$config['site_' . $file]		= '';
 
@@ -63,7 +62,6 @@ function admin_config_appearance(&$engine, &$module)
 		}
 		else
 		{
-			clearstatcache();
 			$permissions = substr(sprintf('%o', fileperms($file_name)), -4);
 			$engine->set_message('File permissions <code>' . $file_name . '</code> ' . $permissions, 'error');
 
@@ -71,17 +69,19 @@ function admin_config_appearance(&$engine, &$module)
 		}
 	};
 
-	$upload_file = function ($file, $update_config = true) use ($engine, $remove_file)
+	$upload_file = function ($file) use ($engine, $remove_file)
 	{
 		if (!in_array($file, ['favicon', 'logo']))
 		{
 			return;
 		}
 
-		$error	= '';
+		$error		= '';
+		$orig_name	= basename($_FILES[$file]['name']);
+		$tmp_name	= $_FILES[$file]['tmp_name'];
 
 		// 1. check out $data
-		$_data	= explode('.', $_FILES[$file]['name']);
+		$_data	= explode('.', $orig_name);
 		$ext	= $_data[count($_data) - 1];
 		unset($_data[count($_data) - 1]);
 
@@ -90,7 +90,7 @@ function admin_config_appearance(&$engine, &$module)
 
 		$image['favicon']		= ['gif', 'ico' , 'jpeg', 'jpe', 'jpg', 'png', 'svg'];
 		$image['logo']			= ['gif', 'jpeg', 'jpe', 'jpg', 'png', 'svg', 'webp'];
-		// calculate resonable filesize: Pixels * Bit Depth
+		// calculate reasonable filesize: Pixels * Bit Depth
 		// - GIF/PNG palette-based images (up to 8-bit)
 		// - Non-palette images (JPEG/PNG/TIFF/SVG) are 0, 8, or 16.
 		$max_size['favicon']	= 64 * 64 * 8;
@@ -106,7 +106,7 @@ function admin_config_appearance(&$engine, &$module)
 				}
 
 				$size			= [0, 0];
-				$size			= @getimagesize($_FILES[$file]['tmp_name']);
+				$size			= @getimagesize($tmp_name);
 
 				if ($file == 'logo')
 				{
@@ -116,7 +116,6 @@ function admin_config_appearance(&$engine, &$module)
 				else if ($file == 'favicon'
 					&& ($size[0] > 64 || $size[1] > 64))
 				{
-					#$error = $engine->_t('UploadMaxSizeReached');
 					$error = 'Favicon is bigger than 64 &times; 64px. <code>' . (int) $size[0] . ' &times; ' . (int) $size[1] .'px</code>';
 				}
 
@@ -136,13 +135,13 @@ function admin_config_appearance(&$engine, &$module)
 					if ($file == 'logo')
 					{
 						$size			= [0, 0];
-						$size			= @getimagesize($_FILES[$file]['tmp_name']);
+						$size			= @getimagesize($tmp_name);
 
 						$config['logo_height']			= (int) $size[1];
 						$config['logo_width']			= (int) $size[0];
 					}
 
-					move_uploaded_file($_FILES[$file]['tmp_name'], Ut::join_path(IMAGE_DIR, $result_name));
+					move_uploaded_file($tmp_name, Ut::join_path(IMAGE_DIR, $result_name));
 					chmod(Ut::join_path(IMAGE_DIR, $result_name), CHMOD_FILE);
 
 					$config['site_' . $file]		= $result_name;
@@ -172,7 +171,7 @@ function admin_config_appearance(&$engine, &$module)
 	{
 		$remove_file('logo');
 
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	// remove favicon
@@ -180,7 +179,7 @@ function admin_config_appearance(&$engine, &$module)
 	{
 		$remove_file('favicon');
 
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	// update settings
@@ -188,7 +187,7 @@ function admin_config_appearance(&$engine, &$module)
 	{
 		if (isset($_FILES['logo']['tmp_name']) && is_uploaded_file($_FILES['logo']['tmp_name']))
 		{
-			$upload_file('logo', '');
+			$upload_file('logo');
 		}
 		else
 		{
@@ -198,10 +197,9 @@ function admin_config_appearance(&$engine, &$module)
 
 		if (isset($_FILES['favicon']['tmp_name']) && is_uploaded_file($_FILES['favicon']['tmp_name']))
 		{
-			$upload_file('favicon', '');
+			$upload_file('favicon');
 		}
 
-		#Ut::debug_print_r($_POST);
 		$config['logo_display']				= (int) $_POST['logo_display'];
 		$config['theme']					= (string) $_POST['theme'];
 
@@ -220,7 +218,7 @@ function admin_config_appearance(&$engine, &$module)
 
 		$engine->log(1, $engine->_t('AppearanceSettingsUpdated', SYSTEM_LANG));
 		$engine->set_message($engine->_t('AppearanceSettingsUpdated'), 'success');
-		$engine->http->redirect(rawurldecode($engine->href()));
+		$engine->http->redirect($engine->href());
 	}
 
 	echo $engine->form_open('basic', ['form_more' => ' enctype="multipart/form-data" ']);
@@ -266,7 +264,7 @@ function admin_config_appearance(&$engine, &$module)
 				<small><?php echo $engine->_t('LogoDimensionsInfo');?></small></label>
 			</td>
 			<td>
-			<?php	// TODO: add option to reset dimentions to default image size
+			<?php	// TODO: add option to reset dimensions to default image size
 					// + option to 'readonly / disable' input fields
 			?>
 				<input type="number" min="16" max="500" maxlength="3" style="width: 50px;" id="logo_width" name="logo_width" value="<?php echo (int) $engine->db->logo_width;?>">&nbsp;&times;&nbsp;<input type="number" min="16" max="500" maxlength="3" style="width:50px;" id="logo_height" name="logo_height" value="<?php echo (int) $engine->db->logo_height;?>"> pix

@@ -17,7 +17,6 @@ $clean_text = function ($string)
 	$string = $this->format($string, 'pre_wacko');
 	$string = $this->format($string, 'wacko'); //
 	$string = $this->format($string, 'safehtml'); //
-	#$string = Ut::html($string, true); // breaks html unicode chars
 
 	return $string;
 };
@@ -60,43 +59,14 @@ if (isset($_POST['upload']) & $can_upload)
 		// file there is
 		if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name']))
 		{
-			// 1. check out $data
-			#$ext = pathinfo($filename, PATHINFO_EXTENSION);
-			$src		= $_FILES['file']['tmp_name'];
-			$mime_type	= mime_content_type($src);
+			// check out $data
+			$orig_name	= basename($_FILES['file']['name']);
+			$tmp_name	= $_FILES['file']['tmp_name'];
+			$mime_type	= mime_content_type($tmp_name);
 
-			$_data		= explode('.', $_FILES['file']['name']);
+			$_data		= explode('.', $orig_name);
 			$ext		= $_data[count($_data) - 1];
 			unset($_data[count($_data) - 1]);
-
-			// TODO: filter against banned and then allowed file extentions / mime type
-			// see file_extension_check()
-			#php5", ".pht", ".phtml", ".shtml", ".asa", ".cer", ".asax", ".swf", or ".xap"
-			/*
-			// 3. extensions
-			$upload_banned_exts = [
-				// HTML may contain cookie-stealing JavaScript and web bugs
-				'html', 'htm', 'js', 'jsb', 'mhtml', 'mht', 'xhtml', 'xht',
-				// PHP scripts may execute arbitrary code on the server
-				'php', 'phtml', 'php3', 'php4', 'php5', 'phps',
-				// Other types that may be interpreted by some servers
-				'shtml', 'jhtml', 'pl', 'py', 'cgi',
-				// May contain harmful executables for Windows victims
-				'exe', 'scr', 'dll', 'msi', 'vbs', 'bat', 'com', 'pif', 'cmd', 'vxd', 'cpl'
-			];
-
-			$upload_banned_mime = [
-				// HTML may contain cookie-stealing JavaScript and web bugs
-				'text/html', 'text/javascript', 'text/x-javascript', 'application/x-shellscript',
-				// PHP scripts may execute arbitrary code on the server
-				'application/x-php', 'text/x-php',
-				// Other types that may be interpreted by some servers
-				'text/x-python', 'text/x-perl', 'text/x-bash', 'text/x-sh', 'text/x-csh',
-				// Client-side hazards on Internet Explorer
-				'text/scriptlet', 'application/x-msdownload',
-				// Windows metafile, client-side vulnerability on some systems
-				'application/x-msmetafile',
-			]; */
 
 			$ext	= strtolower($ext);
 			$banned	= explode('|', $this->db->upload_banned_exts);
@@ -113,13 +83,10 @@ if (isset($_POST['upload']) & $can_upload)
 				$is_image = true;
 			}
 
-			// TODO: check MIME for extension, e.g.
-			// File extension ".pdf" does not match the detected MIME type of the file (image/jpeg).
-
 			// user given file name
 			if (isset($_POST['file_dest_name']) && $_POST['file_dest_name'] != '')
 			{
-				$name = $_POST['file_dest_name'];
+				$name	= basename($_POST['file_dest_name']);
 			}
 			else
 			{
@@ -178,7 +145,6 @@ if (isset($_POST['upload']) & $can_upload)
 				if (file_exists($dir . $fs_name . '.' . $ext)
 					&& $replace)
 				{
-
 					// TODO:
 					// + do file revision (add config option)
 				}
@@ -217,11 +183,10 @@ if (isset($_POST['upload']) & $can_upload)
 					// 1.7. check is image, if asked
 					$forbid		= 0;
 					$size		= [0, 0];
-					$src		= $_FILES['file']['tmp_name'];
 
 					if ($is_image === true)
 					{
-						$size	= @getimagesize($src);
+						$size	= @getimagesize($tmp_name);
 					}
 
 					if ($this->db->upload_images_only)
@@ -235,11 +200,11 @@ if (isset($_POST['upload']) & $can_upload)
 					if (!$forbid)
 					{
 						// 3. save to permanent location
-						move_uploaded_file($_FILES['file']['tmp_name'], $dir . $result_name);
+						move_uploaded_file($tmp_name, $dir . $result_name);
 						chmod($dir . $result_name, CHMOD_FILE);
 
 						// replace
-						#clearstatcache();
+						# clearstatcache();
 
 						if ($is_global)
 						{
@@ -313,10 +278,13 @@ if (isset($_POST['upload']) & $can_upload)
 							$this->update_files_count($page_id, $user['user_id']);
 						}
 
+						// get file_id of uploaded file
 						$file = $this->db->load_single(
 							"SELECT file_id " .
 							"FROM " . $this->db->table_prefix . "file " .
-							"WHERE file_name = " . $this->db->q($file_name) . " " .
+							"WHERE " .
+								"file_name		= " . $this->db->q($file_name) . " AND " .
+								"page_id		= " . (int) $page_id . " " .
 							"LIMIT 1");
 
 						$this->set_message($this->_t('UploadDone'), 'success');
@@ -348,14 +316,18 @@ if (isset($_POST['upload']) & $can_upload)
 			{
 				$error = $this->_t('UploadDirNotWritable');
 			}
-		} //!is_uploaded_file
+		} // !is_uploaded_file
 		else
 		{
-			if (isset($_FILES['file']['error']) && ($_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE || $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE))
+			if (isset($_FILES['file']['error'])
+				&& (   $_FILES['file']['error'] == UPLOAD_ERR_INI_SIZE
+					|| $_FILES['file']['error'] == UPLOAD_ERR_FORM_SIZE))
 			{
 				$error = $this->_t('UploadMaxSizeReached');
 			}
-			else if (isset($_FILES['file']['error']) && ($_FILES['file']['error'] == UPLOAD_ERR_PARTIAL || $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE))
+			else if (isset($_FILES['file']['error'])
+				&& (   $_FILES['file']['error'] == UPLOAD_ERR_PARTIAL
+					|| $_FILES['file']['error'] == UPLOAD_ERR_NO_FILE))
 			{
 				$error = $this->_t('UploadNoFile');
 			}
@@ -369,16 +341,18 @@ if (isset($_POST['upload']) & $can_upload)
 	{
 		if ($this->db->upload_quota_per_user > 0)
 		{
-			$error = $this->_t('UploadMaxFileQuota') . '. <br>' .
-					 $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) .
-					' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
+			$error =
+				$this->_t('UploadMaxFileQuota') . '. <br>' .
+				$this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($user_files['used_user_quota'], false, true, true) .
+				' (' . round(($user_files['used_user_quota'] / ($this->db->upload_quota_per_user) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota_per_user), true, true, true);
 		}
 
 		if ($this->db->upload_quota > 0)
 		{
-			$error .= '<br>' . $this->_t('UploadMaxFileQuota') . '. <br>' .
-					  $this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($files['used_quota'], false, true, true) .
-					' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota), true, true, true);
+			$error .=
+				'<br>' . $this->_t('UploadMaxFileQuota') . '. <br>' .
+				$this->_t('UploadUsedStorage') . ' ' . $this->binary_multiples($files['used_quota'], false, true, true) .
+				' (' . round(($files['used_quota'] / ($this->db->upload_quota) * 100), 2) . '%) of ' . $this->binary_multiples(($this->db->upload_quota), true, true, true);
 		}
 	}
 
