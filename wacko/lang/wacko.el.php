@@ -221,8 +221,8 @@ $wacko_translation = [
 	'AclUpdated'				=> 'Η λίστα δικαιωμάτων πρόσβασης ανανεώθηκε',
 	'AclGaveOwnership'			=> ' και δόθηκε ιδιοκτησία στον ',
 	'AclNoNewOwner'				=> ', but ownership is not transferred, because the user %1 was not found.',
-	'NewPageOwnership'			=> 'Transferred page ownership',
-	'YouAreNewOwner'			=> 'Former owner %1 transferred ownership ' . "\n" . 'of following page to you',
+	'NewPageOwnership'			=> 'Η ιδιοκτησία της σελίδας μεταβιβάστηκε',
+	'YouAreNewOwner'			=> 'former owner %1 transferred ownership ' . "\n" . 'of following page to you',
 	'PageOwnershipInfo'			=> '',
 	'AclRead'					=> 'Ανάγνωση:',
 	'AclWrite'					=> 'Εγγραφή:',
@@ -341,7 +341,7 @@ $wacko_translation = [
 	'EmptyPage'					=> 'Page body was empty - δεν αποθηκεύτηκε!',
 	'EmptyComment'				=> 'Το κύριο μέρος του σχόλιου είναι κενό - δεν αποθηκεύτηκε!',
 	'CommentAccessDenied'		=> 'Λυπάμαι, δεν μπορείτε να αναρτήσετε σχόλια σε αυτή την σελίδα.',
-	'CommentFlooded'			=> 'The interval between the publication of the messages shall not be less than %1 seconds.',
+	'CommentFlooded'			=> 'Το διάστημα μεταξύ της δημοσίευσης των συνεισφορών δεν πρέπει να είναι μικρότερο από %1 δευτερόλεπτα.',
 	'CommentAdded'				=> 'Σχόλιο προστέθηκε.',
 	'YouAreNowTheOwner'			=> 'Είστε ο ιδιοκτήτης της σελίδας.',
 	'PageSaved'					=> 'Έκδοση %1 σελίδας αποθηκεύτηκε.',
@@ -619,7 +619,7 @@ $wacko_translation = [
 
 	'DontRedirect'				=> 'Να μην επιτρέπονται αυτόματες ανακατευθύνσεις από ενέργεια Ανακατεύθυνσης.',
 	'SendWatchEmail'			=> 'Απόστειλε ηλεκτρονικό μήνυμα ενημέρωσης όταν κάποιος <br> (εκτός από εσένα) τροποποιεί τις σελίδες που παρακολουθείς',
-	'AllowIntercom'				=> 'Allow personal messages from users of the system',
+	'AllowIntercom'				=> 'Να επιτρέπεται η αποστολή προσωπικών μηνυμάτων από τους χρήστες του συστήματος',
 	'AllowMassemail'			=> 'Οι Διαχειριστές μπορούν να μου στείλουν πληροφορίες χρησιμοποιώντας μήνυμα ηλεκτρονικού ταχυδρομείου',
 	'HideLastSession'			=> 'Hide last session',
 	'ValidateIP'				=> 'Tying session to IP',
@@ -1100,7 +1100,7 @@ $wacko_translation = [
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',
 
 	// password complexity
-	'PwdCplxShort'				=> 'Password is too short.',
+	'PwdCplxShort'				=> 'Το συνθηματικό είναι μικρό.',
 	'PwdCplxEquals'				=> 'Ο κωδικός πρόσβασης περιέχει το όνομα χρήστη.',
 	'PwdCplxWeak'				=> 'Password does not meet complexity requirements.',
 	'PwdCplxDesc1'				=> 'Απαιτήσεις κωδικού πρόσβασης: ',
