@@ -234,12 +234,12 @@ $wacko_translation = [
 	'OwnerDontChange'			=> 'ne pas changer',
 	'AclAccessDenied'			=> 'Vous n’êtes pas le propriétaire de cette page.',
 	'AclSyntaxError'			=> 'Erreur de syntaxe dans la liste de contrôle d’accès',
-	'AclHelp'					=> '<code>*</code> - everyone is allowed<br>' .
-									'<code>$</code> - only registered users<br>' .
-									'<code>!</code> - a preceding exclamation mark denies the respective right<br>' .
-									'<code>[UserName]</code> - names of allowed users<br>' .
-									'<code>[GroupName]</code> - names of allowed usergroup (alias)<br>' .
-									'<code>(an empty list)</code> - only the page owner has access',
+	'AclHelp'					=> '<code>*</code> - tout le monde est autorisé<br>' .
+									'<code>$</code> - seuls les utilisateurs enregistrés<br>' .
+									'<code>!</code> - un point d\'exclamation précédent nie le droit respectif<br>' .
+									'<code>[UserName]</code> - noms des utilisateurs autorisés<br>' .
+									'<code>[GroupName]</code> - noms des groupes d\'utilisateurs autorisés (alias)<br>' .
+									'<code>(une liste vide)</code> - seul le propriétaire de la page a accès',
 
 	'AccessMode'				=> 'Visibilité',
 	'AccessDenied'				=> 'refusé',
@@ -739,12 +739,11 @@ $wacko_translation = [
 	'UsersIntercomMessage'		=> 'Message',
 	'UsersIntercomSubjectN'		=> '[commencer un nouveau sujet]',
 	'UsersIntercomDisabled'		=> 'Désolé, vous ne souhaitez pas ou ne pouvez pas recevoir de messages privés.',
-	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
+	'UsersIntercomHint'			=> 'Veuillez d\'abord vous connecter et suivre le lien à nouveau, si vous voulez répondre au message personnel que vous avez reçu.',
 	'UsersIntercomDesc'			=> 'Note: Envoi de messages personnel à l’adresse courriel du destinataire sans dévoiler votre adresse. Le destinataire pourra vous répondre en utilisant un formulaire similaire sur votre page de profil. ',
 	'UsersPMOversized'			=> 'La longueur du message dépasse la taille maximale autorisée de %1. Merci de raccourcir votre le message et de le soumettre à nouveau.',
 	'UsersPMFlooded'			=> 'L’intervalle séparant l’envoi de messages personnels doit être d’au moins %1 secondes.',
-	'UsersPMSent'				=> 'le message personnel a été transmis à l’utilisateur.',
-	'UsersPMPlnSent'			=> 'Le message personnel a été transmis à l’utilisateur en texte brut.',
+	'UsersPMSent'				=> 'Le message personnel a été transmis à l’utilisateur.',
 	'UsersPMBody'				=> 'Ce message vous a été envoyé par l’utilisateur %1.',
 	'UsersPMReply'				=> 'Pour répondre à ce courriel, cliquez sur le lien suivant (n’utilisez pas  le bouton "répondre" de votre logiciel de courriel):',
 	'UsersPMNotLoggedIn'		=> 'Vous n’êtes pas enregistré dans le système et ne pouvez envoyer de messages privés aux utilisateurs.',

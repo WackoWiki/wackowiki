@@ -744,7 +744,6 @@ $wacko_translation = [
 	'UsersPMOversized'			=> 'De lengte van het bericht overschrijdt de maximaal toegestane grootte met %1. Gelieve uw bericht in te korten en opnieuw te verzenden.',
 	'UsersPMFlooded'			=> 'Het interval tussen het verzenden van persoonlijke berichten mag niet korter zijn dan %1 seconde.',
 	'UsersPMSent'				=> 'Een persoonlijk bericht werd met succes naar de gebruiker verzonden.',
-	'UsersPMPlnSent'			=> 'Persoonlijk bericht dat in platte tekst naar de gebruiker wordt gestuurd.',
 	'UsersPMBody'				=> 'Dit bericht is door de gebruiker naar u verzonden %1.',
 	'UsersPMReply'				=> 'Om deze e-mail te beantwoorden, klik op de volgende link (gebruik niet de Reply-knop / Reply in mailer):',
 	'UsersPMNotLoggedIn'		=> 'U bent niet geregistreerd in het systeem en kunt geen persoonlijke berichten naar gebruikers sturen.',

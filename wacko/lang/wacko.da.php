@@ -744,7 +744,6 @@ $wacko_translation = [
 	'UsersPMOversized'			=> 'Længden på meddelelsen overstiger den maksimale størrelse med %1. Forkort din besked, og send den igen.',
 	'UsersPMFlooded'			=> 'Intervallet mellem afsendelse af personlige meddelelser bør ikke være mindre end %1 sekunder.',
 	'UsersPMSent'				=> 'Den personlige meddelelse er blevet sendt til brugeren.',
-	'UsersPMPlnSent'			=> 'Personlig besked til brugeren sendt i almindelig tekst.',
 	'UsersPMBody'				=> 'Denne meddelelse er blevet sendt til dig af brugeren %1.',
 	'UsersPMReply'				=> 'Hvis du vil besvare denne e-mail, skal du klikke på følgende link (du må ikke bruge \'Svar\'-knappen i dit mailprogram):',
 	'UsersPMNotLoggedIn'		=> 'Du er ikke logget ind på systemet og kan ikke sende nogen personlige beskeder til brugerne.',

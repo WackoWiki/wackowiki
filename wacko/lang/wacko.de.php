@@ -744,7 +744,6 @@ $wacko_translation = [
 	'UsersPMOversized'			=> 'Die Länge der Nachricht überschreitet die maximal zulässige Größe um %1. Bitte kürze deine Mitteilung und übermittle sie erneut.',
 	'UsersPMFlooded'			=> 'Der Abstand zwischen dem Senden von persönlichen Nachrichten sollte nicht kleiner sein als %1 Sekunden.',
 	'UsersPMSent'				=> 'Persönliche Nachricht wurde erfolgreich an den Nutzer gesendet.',
-	'UsersPMPlnSent'			=> 'Persönliche Nachricht für den Benutzer im Klartext gesendet.',
 	'UsersPMBody'				=> 'Diese Nachricht wurde dir durch den Benutzer %1 geschickt.',
 	'UsersPMReply'				=> 'Um auf diese Email-Nachricht zu antworten, klicke den folgenden Link (verwende nicht die Schaltfläche \'Antworten\' in deinem Mailprogramm):',
 	'UsersPMNotLoggedIn'		=> 'Du bist nicht im System angemeldet und kannst daher keine persönlichen Nachrichten an andere Nutzer übermitteln.',

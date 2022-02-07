@@ -744,7 +744,6 @@ $wacko_translation = [
 	'UsersPMOversized'			=> 'O comprimento da mensagem excede em %1 o tamanho máximo permitido. Por favor, encurte a sua mensagem e envie-a novamente.',
 	'UsersPMFlooded'			=> 'O intervalo entre o envio de mensagens pessoais não deve ser inferior a %1 segundos.',
 	'UsersPMSent'				=> 'A mensagem pessoal foi enviada com sucesso para o usuário.',
-	'UsersPMPlnSent'			=> 'Mensagem pessoal enviada ao usuário em texto simples.',
 	'UsersPMBody'				=> 'Esta mensagem foi-lhe enviada pelo utilizador %1.',
 	'UsersPMReply'				=> 'Para responder a este e-mail, clique no seguinte link (não use o botão Responder / Responder no mailer):',
 	'UsersPMNotLoggedIn'		=> 'Você não está registrado no sistema e não pode enviar mensagens pessoais aos usuários.',
