@@ -62,7 +62,7 @@ $lang = [
 /*
    System Requirements Page
 */
-'version-check'					=> 'System Requirements',
+'version-check'					=> 'Системни изисквания',
 'PhpVersion'					=> 'PHP Version',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (Optional)',
@@ -71,16 +71,16 @@ $lang = [
 'PhpExtensions'					=> 'PHP Extensions',
 'Permissions'					=> 'Права',
 'ReadyToInstall'				=> 'Ready to Install?',
-'Requirements'					=> 'Your server must meet the requirements listed below.',
+'Requirements'					=> 'Вашият сървър трябва да отговаря на изброените по-долу изисквания.',
 'OK'							=> 'OK',
-'Problem'						=> 'Problem',
+'Problem'						=> 'Проблем',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Изглежда, че във вашата PHP инсталация липсват отбелязаните PHP разширения, които се изискват от WackoWiki. ',
 'PcreWithoutUtf8'				=> 'Модулът PCRE на PHP изглежда е компилиран без поддръжка на PCRE_UTF8.',
 'NotePermissions'				=> 'Програмата за инсталиране ще опита да запише настройките във файл %1, разположен в главната директория, където е WackoWiki. За да стане това, този файл трябва да е достъпен за запис чрез системата сървър/скрипт! За да няма проблеми, трябва сега временно да се променят правата за достъп до (мястото на) този файл.<br><br>Вж. <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
 'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion'			=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
-'Ready'							=> 'Congratulations, it appears that your server is capable of running WackoWiki.  The next few pages will take you through the configuration process.',
+'ErrorMinPhpVersion'			=> 'Версията на PHP трябва да е по-голяма от <strong>' . PHP_MIN_VERSION . '</strong>, изглежда, че сървърът ви работи с по-ранна версия. Трябва да преминете към по-нова версия на PHP, за да работи WackoWiki правилно.',
+'Ready'							=> 'Поздравления, изглежда, че вашият сървър може да работи с WackoWiki. Следващите няколко страници ще ви преведат през процеса на конфигуриране.',
 
 /*
    Site Config Page
@@ -95,7 +95,7 @@ $lang = [
 'MultiLang'						=> '«Многоезичен» режим',
 'MultiLangDesc'					=> 'Многоезичен режим, позволяващ работа на няколко езика. Ако е включен, инсталаторът ще инициализира елементи от менюто на няколко различни езика.',
 'AllowedLang'					=> 'Allowed Languages',
-'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc'				=> 'Препоръчително е да изберете само набора от езици, които искате да използвате, в противен случай се избират всички езици.',
 'Admin'							=> 'Име',
 'AdminDesc'						=> 'Изберете име. Нещо от тип <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (без кирилица).',
 'NameAlphanumOnly'				=> 'Потребителското име трябва да е м/у %1 и %2 символа дълго и да използва само alphanumeric.',
@@ -112,8 +112,8 @@ $lang = [
 'Enabled'						=> 'Включен:',
 'ErrorAdminEmail'				=> 'Въведете истински адрес!',
 'ErrorAdminPasswordMismatch'	=> 'Паролата на администратора не съвпадна нещо!',
-'ErrorAdminPasswordShort'		=> 'The admin много е кратка, the minimum length is %1 characters!',
-'ModRewriteStatusUnknown'		=> 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
+'ErrorAdminPasswordShort'		=> 'The admin много е кратка, минималната дължина е %1 символа!',
+'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
 /*
    Database Config Page
@@ -199,7 +199,7 @@ $lang = [
 'Writing'						=> 'Запис на конфигурационния файл',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
 'InstallationComplete'			=> 'Installation Complete',
-'ThatsAll'						=> 'Ура! Изглежда успешно. Сега можете <a href="%1">WackoWiki site</a>.',
+'ThatsAll'						=> 'Ура! Изглежда успешно. Сега можете <a href="%1">да видите своя сайт WackoWiki</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
 'SecurityRisk'					=> 'Не забравяйте накрая да промените обратно правата за достъп на %1 на сървъра. Въпрос на "сигурност"!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',

@@ -71,15 +71,15 @@ $lang = [
 'PhpExtensions'					=> 'PHP laiendid',
 'Permissions'					=> 'Õigused',
 'ReadyToInstall'				=> 'Valmis installida?',
-'Requirements'					=> 'Your server must meet the requirements listed below.',
+'Requirements'					=> 'Teie server peab vastama allpool loetletud nõuetele.',
 'OK'							=> 'OK',
 'Problem'						=> 'Probleem',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Teie PHP installil puuduvad märgitud PHP laiendused, mida WackoWiki nõuab. ',
-'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
+'PcreWithoutUtf8'				=> 'PCRE ei ole kompileeritud UTF-8 toega.',
 'NotePermissions'				=> 'Üritatakse konfiguratsiooni andmeid kirjutada faili nimega %1, mis asub sinu  WackoWiki kataloogis. Et see töötaks, pead sa olema kindel, et veebi serveril on kirjutamisõigused sellesse faili! Kui kirjutamisoigust ei ole, pead sa käsitsi seda faili muutma (installeerimise käigus üteldakse kuidas see käib).<br><br>Vaata seda, et saada täpsemaid juhiseid: <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>.',
 'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion'			=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version. You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
+'ErrorMinPhpVersion'			=> 'PHP versioon peab olema suurem kui <strong>' . PHP_MIN_VERSION . '</strong>, teie serveril näib olevat kasutusel varasem versioon. WackoWiki korrektseks toimimiseks peate uuema PHP-versiooni peale uuendama.',
 'Ready'							=> 'Congratulations, it appears that your server is capable of running WackoWiki.  The next few pages will take you through the configuration process.',
 
 /*
@@ -95,7 +95,7 @@ $lang = [
 'MultiLang'						=> 'Mitmekeelne režiim',
 'MultiLangDesc'					=> 'Mitmekeelne režiim võimaldab ühe installatsiooni sees kasutada erinevatel lehtedele erinevaid keelte määranguid. Kui see režiim on lubatud, siis installeerimise käigus tekitatakse kõigi võimalike keelte jaoks, mis paketiga kaasas on, ühesugused menüü üksused erinevates keeltes.',
 'AllowedLang'					=> 'Allowed Languages',
-'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc'				=> 'Soovitatav on valida ainult need keeled, mida soovite kasutada, vastasel juhul on valitud kõik keeled.',
 'Admin'							=> 'Adminni nimi',
 'AdminDesc'						=> 'Sisesta administraatori kasutajanimi. Peaks olema <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiNimi</a> (e.g. <code>WikiAdmin</code>).',
 'NameAlphanumOnly'				=> 'Kasutajanimi peab olema vahemikus %1 ja %2 sümbolit pikk. Võid kasutada vaid kirjamärke.',
@@ -113,7 +113,7 @@ $lang = [
 'ErrorAdminEmail'				=> 'Pead sisestama korrektse adminni e-posti aadressi!',
 'ErrorAdminPasswordMismatch'	=> 'Parool ei kõlba. Sisesta see uuesti!',
 'ErrorAdminPasswordShort'		=> 'The admin Parool on liiga lühike, sisesta uuesti, the minimum length is %1 characters!',
-'ModRewriteStatusUnknown'		=> 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
+'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
 /*
    Database Config Page
@@ -199,7 +199,7 @@ $lang = [
 'Writing'						=> 'Kirjutan konfiguratsioonifaili',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
 'InstallationComplete'			=> 'Paigaldamine on lõppenud',
-'ThatsAll'						=> 'Ja ongi kõik! Nüüd võid sa <a href="%1">view your WackoWiki site</a>.',
+'ThatsAll'						=> 'See on kõik! Nüüd saate <a href="%1">vaadata oma WackoWiki saiti</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
 'SecurityRisk'					=> 'Soovitan sul eemaldada kirjutamisõigus %1 failile. Kirjutamisõiguse allesjätmine on riskantne turvalisuse seisukohast!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',

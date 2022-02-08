@@ -199,7 +199,7 @@ $lang = [
 'Writing'						=> 'Zapisywanie pliku konfiguracyjnego',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
 'InstallationComplete'			=> 'Instalacja zakończona',
-'ThatsAll'						=> 'To wszystko! Możesz teraz <a href="%1">view your WackoWiki site</a>.',
+'ThatsAll'						=> 'To wszystko! Możesz teraz <a href="%1">przeglądać witrynę WackoWiki</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
 'SecurityRisk'					=> 'Jednak, doradzamy usunięcie praw zapisu do pliku %1 po tym jak został on zapisany. Zagrożeniem dla bezpieczeństwa jest pozostawienie pliku z prawem do zapisu!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',

@@ -79,7 +79,7 @@ $lang = [
 'PcreWithoutUtf8'				=> 'Úgy tűnik, hogy a PHP PRCE modulja PRCE_UTF8 támogatás nélkül lett fordítva.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'ErrorPermissions'				=> 'Úgy tűnik, hogy a telepítő nem tudja automatikusan beállítani a WackoWiki megfelelő működéséhez szükséges fájlengedélyeket. A telepítés folyamán később a rendszer kéri, hogy manuálisan állítsa be a szükséges fájlengedélyeket a szerveren.',
-'ErrorMinPhpVersion'			=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
+'ErrorMinPhpVersion'			=> 'A PHP verziónak nagyobbnak kell lennie, mint a <strong>' . PHP_MIN_VERSION . '</strong>, úgy tűnik, hogy a szerverén egy korábbi verzió fut. A WackoWiki helyes működéséhez frissítenie kell egy újabb PHP verzióra.',
 'Ready'							=> 'Gratulálunk, úgy tűnik, hogy a szerver képes futtatni a WackoWiki-t. A következő néhány oldalon végigvezet a konfigurációs folyamaton.',
 
 /*
@@ -199,7 +199,7 @@ $lang = [
 'Writing'						=> 'Írás konfigurációs fájl',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
 'InstallationComplete'			=> 'Telepítés befejezve',
-'ThatsAll'						=> 'Ez minden! You can now <a href="%1">view your WackoWiki site</a>.',
+'ThatsAll'						=> 'Ez minden! Most már <a href="%1">megtekintheted a WackoWiki oldaladat</a>.',
 'SecurityConsiderations'		=> 'Biztonsági szempontok',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
