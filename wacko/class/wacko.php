@@ -670,7 +670,7 @@ class Wacko
 	{
 		if (@$this->method === 'edit' && @$_GET['add'] == 1)
 		{
-			$lang = @$_REQUEST['lang'];
+			$lang = $_REQUEST['lang'] ?? '';
 		}
 		else
 		{
@@ -1221,15 +1221,18 @@ class Wacko
 			$this->tag = $this->page['tag'];
 		}
 
+		$lang	= $_REQUEST['lang']	?? '';
+		$add	= $_REQUEST['add']	?? null;
+
 		if (isset($page['page_lang']) && $this->known_language($page['page_lang']))
 		{
 			$this->page_lang = $page['page_lang'];
 		}
-		else if (@$_REQUEST['add'] && $this->known_language(@$_REQUEST['lang']))
+		else if ($add && $this->known_language($lang))
 		{
-			$this->page_lang = $_REQUEST['lang'];
+			$this->page_lang = $lang;
 		}
-		else if (@$_REQUEST['add'])
+		else if ($add)
 		{
 			$this->page_lang = $this->user_lang;
 		}
@@ -1795,7 +1798,7 @@ class Wacko
 			{
 				if (empty($lang))
 				{
-					$lang = @$_REQUEST['lang'];
+					$lang = $_REQUEST['lang'] ?? '';
 
 					if (!$this->known_language($lang))
 					{

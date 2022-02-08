@@ -15,8 +15,8 @@ $clean_text = function ($string)
 
 	// Make HTML in the description redundant
 	$string = $this->format($string, 'pre_wacko');
-	$string = $this->format($string, 'wacko'); //
-	$string = $this->format($string, 'safehtml'); //
+	$string = $this->format($string, 'wacko');
+	$string = $this->format($string, 'safehtml');
 
 	return $string;
 };
