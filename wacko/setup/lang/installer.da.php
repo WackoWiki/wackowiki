@@ -43,10 +43,10 @@ $lang = [
    Generic Page Text
 */
 'Title'							=> 'WackoWiki Installation',
-'Continue'						=> 'Continue',
+'Continue'						=> 'Fortsæt',
 'Back'							=> 'Tilbage',
 'Recommended'					=> 'anbefales',
-'InvalidAction'					=> 'Invalid action',
+'InvalidAction'					=> 'Ugyldig handling',
 
 /*
    Language Selection Page
@@ -56,7 +56,7 @@ $lang = [
 'UpgradeFromWacko'				=> 'Velkommen til WackoWiki, det ser ud til, at du opgraderer fra WackoWiki %1 til %2.  De næste par sider vil guide dig gennem opgraderingsprocessen.',
 'FreshInstall'					=> 'Velkommen til WackoWiki, du er ved at installere WackoWiki %1.  De næste par sider vil guide dig gennem installationsprocessen.',
 'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
-'LangDesc'						=> 'Please choose a language for the installation process. This language will also be used as the default language of your WackoWiki installation.',
+'LangDesc'						=> 'Vælg venligst et sprog til installationsprocessen. Dette sprog vil også blive brugt som standardsprog i din WackoWiki-installation.',
 
 /*
    System Requirements Page
@@ -69,17 +69,17 @@ $lang = [
 'Database'						=> 'Database',
 'PhpExtensions'					=> 'PHP Extensions',
 'Permissions'					=> 'Permissions',
-'ReadyToInstall'				=> 'Ready to Install?',
-'Requirements'					=> 'Your server must meet the requirements listed below.',
+'ReadyToInstall'				=> 'Klar til installation?',
+'Requirements'					=> 'Din server skal opfylde nedenstående krav.',
 'OK'							=> 'OK',
 'Problem'						=> 'Problem',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> 'Din PHP-installation synes at mangle de bemærkede PHP-udvidelser, som kræves af WackoWiki. ',
-'PcreWithoutUtf8'				=> 'PCRE is not compiled with UTF-8 support.',
+'PcreWithoutUtf8'				=> 'PCRE er ikke kompileret med UTF-8-understøttelse.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
-'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly.  You will be prompted later in the installation process to manually configure the required file permissions on your server.',
-'ErrorMinPhpVersion'			=> 'The PHP Version must be greater than <strong>' . PHP_MIN_VERSION . '</strong>, your server appears to be running an earlier version.  You must upgrade to a more recent PHP version for WackoWiki to work correctly.',
-'Ready'							=> 'Congratulations, it appears that your server is capable of running WackoWiki.  The next few pages will take you through the configuration process.',
+'ErrorPermissions'				=> 'Det ser ud til, at installationsprogrammet ikke automatisk kan indstille de nødvendige filtilladelser for at WackoWiki kan fungere korrekt. Du vil senere i installationsprocessen blive bedt om manuelt at konfigurere de nødvendige filtilladelser på din server.',
+'ErrorMinPhpVersion'			=> 'PHP-versionen skal være større end <strong>' . PHP_MIN_VERSION . '</strong>, det ser ud til, at din server kører en tidligere version. Du skal opgradere til en nyere PHP-version for at WackoWiki kan fungere korrekt.',
+'Ready'							=> 'Tillykke, det ser ud til, at din server kan køre WackoWiki. De næste par sider vil føre dig gennem konfigurationsprocessen.',
 
 /*
    Site Config Page
@@ -94,14 +94,14 @@ $lang = [
 'MultiLang'						=> 'Multi Language Mode',
 'MultiLangDesc'					=> '"Flersproget" tilstand giver mulighed for at have sider med forskellige sprogindstillinger i en enkelt installation. Når denne tilstand er aktiveret, opretter installationsprogrammet indledende menupunkter for alle sprog, der er tilgængelige i distributionen.',
 'AllowedLang'					=> 'Allowed Languages',
-'AllowedLangDesc'				=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+'AllowedLangDesc'				=> 'Det anbefales, at du kun vælger det sæt sprog, du ønsker at bruge, ellers er alle sprog valgt.',
 'Admin'							=> 'Admin Name',
 'AdminDesc'						=> 'Enter the admins username, this should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a> (e.g. <code>WikiAdmin</code>).',
 'NameAlphanumOnly'				=> 'Brugernavn skal være mellem %1 og %2 tegn langt og brug kun alfanumeriske tegn.',
 'NameCamelCaseOnly'				=> 'Brugernavn skal være mellem %1 og %2 tegn langt og WikiNavn formateret.',
 'Password'						=> 'Admin Password',
 'PasswordDesc'					=> 'Choose a password for the admin with a minimum of %1 characters.',
-'Password2'						=> 'Repeat Password:',
+'PasswordConfirm'				=> 'Repeat Password:',
 'Mail'							=> 'Admin Email Address',
 'MailDesc'						=> 'Enter the admins email address.',
 'Base'							=> 'Base URL',
@@ -109,10 +109,10 @@ $lang = [
 'Rewrite'						=> 'Rewrite Mode',
 'RewriteDesc'					=> 'Rewrite mode should be enabled if you are using WackoWiki with URL rewriting.',
 'Enabled'						=> 'Enabled:',
-'ErrorAdminEmail'				=> 'You have entered an invalid email address!',
+'ErrorAdminEmail'				=> 'Du har indtastet en ugyldig e-mailadresse!',
 'ErrorAdminPasswordMismatch'	=> 'The passwords do not match!.',
-'ErrorAdminPasswordShort'		=> 'The admin password is too short, the minimum length is %1 characters!',
-'ModRewriteStatusUnknown'		=> 'The installer cannot veriry that mod_rewrite is enabled, however this does not mean it is disabled',
+'ErrorAdminPasswordShort'		=> 'Admin-adgangskoden er for kort, minimumslængden er %1 tegn!',
+'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
 
 /*
    Database Config Page
@@ -198,8 +198,8 @@ $lang = [
 'FinalStep'						=> 'Final Step',
 'Writing'						=> 'Writing Configuration File',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
-'InstallationComplete'			=> 'Installation Complete',
-'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
+'InstallationComplete'			=> 'Installation færdig',
+'ThatsAll'						=> 'Det er det hele! Du kan nu <a href="%1">se dit WackoWiki-websted</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
 'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
@@ -208,6 +208,6 @@ $lang = [
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
 'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
-'TryAgain'						=> 'Try Again',
+'TryAgain'						=> 'Prøv igen',
 
 ];

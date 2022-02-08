@@ -118,7 +118,7 @@ if (!$config['is_update'])
 	<label class="label_top" for="password"><?php echo $lang['Password'];?></label>
 	<p class="notop"><?php echo Ut::perc_replace($lang['PasswordDesc'], $config['pwd_admin_min_chars']);?></p>
 	<input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="password" name="password" value="" class="text_input" required>
-	<label class="label_password2" for="wiki_admin_password2"><?php echo $lang['Password2'];?></label>
+	<label class="label_password2" for="wiki_admin_password2"><?php echo $lang['PasswordConfirm'];?></label>
 	<input type="password" minlength="<?php echo $config['pwd_admin_min_chars'] ?>" id="wiki_admin_password2" name="password2" value="" class="text_input" required>
 	<br>
 <?php echo $separator; ?>
