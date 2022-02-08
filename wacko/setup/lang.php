@@ -40,27 +40,28 @@ echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
 // available languages
-$lang_codes = [];
-$lang_codes['bg'] = 'български';
-$lang_codes['da'] = 'Dansk';
-$lang_codes['de'] = 'Deutsch';
-$lang_codes['el'] = 'Ελληνικά';
-$lang_codes['en'] = 'English';
-$lang_codes['es'] = 'Español';
-$lang_codes['et'] = 'Eesti';
-$lang_codes['fa'] = 'فارسی';
-$lang_codes['fr'] = 'Français';
-$lang_codes['hi'] = 'हिन्दी';
-$lang_codes['hu'] = 'Magyar';
-$lang_codes['it'] = 'Italiano';
-$lang_codes['ja'] = '日本語';
-$lang_codes['ko'] = '한국어';
-$lang_codes['nl'] = 'Nederlands';
-$lang_codes['pl'] = 'Polski';
-$lang_codes['pt'] = 'Português';
-$lang_codes['ru'] = 'Русский';
-$lang_codes['zh'] = '简体中文';
-$lang_codes['zh-tw'] = '正體中文';
+$lang_codes = [
+	'bg' => 'български',
+	'da' => 'Dansk',
+	'de' => 'Deutsch',
+	'el' => 'Ελληνικά',
+	'en' => 'English',
+	'es' => 'Español',
+	'et' => 'Eesti',
+	'fa' => 'فارسی',
+	'fr' => 'Français',
+	'hi' => 'हिन्दी',
+	'hu' => 'Magyar',
+	'it' => 'Italiano',
+	'ja' => '日本語',
+	'ko' => '한국어',
+	'nl' => 'Nederlands',
+	'pl' => 'Polski',
+	'pt' => 'Português',
+	'ru' => 'Русский',
+	'zh' => '简体中文',
+	'zh-tw' => '正體中文',
+];
 
 $n = 1;
 

@@ -16,7 +16,9 @@ if (isset($_POST['config']))
 	$config				= array_merge ($config, $config_parameters);
 }
 
-if (!isset($config['language']) || !@file_exists('setup/lang/installer.' . $config['language'] . '.php'))
+if (   !isset($config['language'])
+	|| !preg_match('/^([a-z]{2}(-[a-z]{2})?)$/', $config['language'])
+	|| !@file_exists('setup/lang/installer.' . $config['language'] . '.php'))
 {
 	$config['language'] = 'en';
 }

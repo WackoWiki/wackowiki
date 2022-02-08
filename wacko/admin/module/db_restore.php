@@ -51,15 +51,10 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 	// IDs PROCESSING (COMMON PROCEDURES)
 	$set = [];
 
-	if (isset($_POST['backup_id']) && $_POST['backup_id'])
-	{
-		$backup_id = $_POST['backup_id'];
-	}
-	else if (isset($_GET['backup_id']) && $_GET['backup_id'])
-	{
-		$backup_id = $_GET['backup_id'];
-	}
-	else
+	$backup_id = $_POST['backup_id'] ?? ($_GET['backup_id'] ?? false);
+
+	// validate directory format 2022_0208_145128
+	if (!preg_match('/^([0-9]{4}_[0-9]{4}_[0-9]{6})$/', $backup_id))
 	{
 		$backup_id = false;
 	}
@@ -230,7 +225,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 			set_time_limit(3600);
 
 			// $dir see above
-			$pack	= $_POST['backup_id'];
+			$pack	= $backup_id;
 
 			// set parameters
 			if (isset($_POST['ignore_keys']) && $_POST['ignore_keys']	== 1) $ikeys	= true;
