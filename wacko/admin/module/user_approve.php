@@ -28,9 +28,6 @@ function admin_user_approve(&$engine, &$module)
 	$signup_time	= '';
 	$error			= '';
 	$prefix			= $engine->db->table_prefix;
-
-	#Ut::debug_print_r($_POST);
-	#Ut::debug_print_r($_REQUEST);
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
@@ -417,4 +414,3 @@ function admin_user_approve(&$engine, &$module)
 	# echo $control_buttons;
 	echo $engine->form_close();
 }
-

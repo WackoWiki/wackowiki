@@ -321,6 +321,10 @@ table.forum th {
 .groups col:nth-child(n+5) {
 	width: 20px;
 }
+.groups td:nth-child(3) {
+	padding: 0 5px;
+	font-weight: bold;
+}
 
 /* users table */
 .users col:nth-child(n+1):nth-child(-n+3) {
@@ -330,9 +334,13 @@ table.forum th {
 .users col:nth-child(n+6) {
 	width: 20px;
 }
+.users td:nth-child(-n+2) {
+	width: 10px;
+	vertical-align: middle;
+}
 .users td:nth-child(4) {
-	padding-left: 5px;
-	padding-right: 5px;
+	padding: 0 5px;
+	font-weight: bold;
 }
 /* restore table */
 table.restore {
@@ -998,8 +1006,8 @@ div#loginbox {
 }
 
 .listcenter td {
-	vertical-align:top;
-	text-align:center;
+	vertical-align: top;
+	text-align: center;
 }
 
 a.button {
