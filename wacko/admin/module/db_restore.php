@@ -74,32 +74,32 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 
 					// pack
 					'<td>
-							<table>
-								<tr>' .
-									'<td class="label a-middle" style="width:10px;">' .
-									#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . (in_array($log['pack'], $set) ? ' checked' : '') . '>
-									#</td>' .
-									#'<td style="width:10px;">' .
-									#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
-									'</td>
-									<th class="t-left nowrap">' .
-										$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
-									'</th>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										' . ($log[6] ?? null) . '
-									</td>
-								</tr>
-								<tr>
-									<td></td>
-									<td>
-										' . (isset($log[7]) ? $engine->binary_multiples($log[7], false, true, true) : null) . '
-									</td>
-								</tr>
-							</table>' .
-						"</td>\n";
+						<table>
+							<tr>
+								<td class="label a-middle" style="width:10px;">' .
+								#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . (in_array($log['pack'], $set) ? ' checked' : '') . '>
+								#</td>' .
+								#'<td style="width:10px;">' .
+								#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
+								'</td>
+								<th class="t-left nowrap">' .
+									$engine->date_format($log[0], $engine->db->date_format . ' ' . $engine->db->time_format_seconds) .
+								'</th>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									' . ($log[6] ?? null) . '
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									' . (isset($log[7]) ? $engine->binary_multiples($log[7], false, true, true) : null) . '
+								</td>
+							</tr>
+						</table>' .
+					'</td>' . "\n";
 
 					// description
 					echo '<td><table>';

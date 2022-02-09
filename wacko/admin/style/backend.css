@@ -340,6 +340,12 @@ table.restore {
 	border-collapse: separate;
 	padding: 4px;
 }
+table.backup {
+	max-width: 350px;
+	border-spacing: 1px;
+	border-collapse: separate;
+	padding: 4px;
+}
 
 .permissions {
 	width: 200px;

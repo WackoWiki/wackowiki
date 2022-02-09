@@ -193,7 +193,10 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 	{
 		if (!is_writable(UPLOAD_BACKUP_DIR . '/'))
 		{
-			echo output_image($engine, false) . '<strong class="red">' . Ut::perc_replace($engine->_t('DirNotWritable'), '<code>' . UPLOAD_BACKUP_DIR . '</code>') . '</strong>' . "<br>\n";
+			echo output_image($engine, false) .
+				'<strong class="red">' .
+					Ut::perc_replace($engine->_t('DirNotWritable'), '<code>' . UPLOAD_BACKUP_DIR . '</code>') .
+				'</strong><br>' . "\n";
 		}
 		else
 		{
@@ -206,7 +209,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 <?php
 		echo $engine->form_open('backup');
 ?>
-			<table style="max-width:350px; border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation lined">
+			<table class="backup formation lined">
 				<tr>
 					<th class="t-right"><label for="root"><?php echo $engine->_t('BackupCluster'); ?>:</label></th>
 					<th colspan="2"><input type="text" id="root" name="root" size="30" value=""></th>
