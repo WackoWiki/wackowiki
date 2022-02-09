@@ -1012,6 +1012,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Wilt u back-up %1 herstellen?',
 	'ConfirmDbRestoreInfo'		=> 'Wacht alstublieft even, dit kan enkele minuten duren.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'De map %1 is niet uitvoerbaar.',
 	'BackupDelete'				=> 'Weet u zeker dat u back-up %1 wilt verwijderen?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

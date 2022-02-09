@@ -1012,6 +1012,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Chcesz przywrócić kopię zapasową %1?',
 	'ConfirmDbRestoreInfo'		=> 'Proszę poczekać, to może potrwać kilka minut.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'Katalog %1 nie jest wykonywalny.',
 	'BackupDelete'				=> 'Na pewno chcesz usunąć kopię zapasową %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

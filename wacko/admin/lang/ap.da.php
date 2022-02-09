@@ -1012,6 +1012,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Vil du gendanne sikkerhedskopi %1?',
 	'ConfirmDbRestoreInfo'		=> 'Vent venligst, dette kan tage nogle minutter.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'Mappen %1 er ikke eksekverbar.',
 	'BackupDelete'				=> 'Er du sikker på, at du vil fjerne backup %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

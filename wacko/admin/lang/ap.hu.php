@@ -1012,6 +1012,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Vissza szeretné állítani az %1 biztonsági mentést?',
 	'ConfirmDbRestoreInfo'		=> 'Kérjük, várjon, ez néhány percet vehet igénybe.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'A %1 könyvtár nem futtatható.',
 	'BackupDelete'				=> 'Biztosan el akarja távolítani az %1 biztonsági mentést?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

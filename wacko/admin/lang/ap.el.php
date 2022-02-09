@@ -1012,6 +1012,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Θέλετε να επαναφέρετε το αντίγραφο ασφαλείας %1;',
 	'ConfirmDbRestoreInfo'		=> 'Περιμένετε να διαρκέσει μερικά λεπτά.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'Ο κατάλογος %1 δεν είναι εκτελέσιμος.',
 	'BackupDelete'				=> 'Είστε βέβαιοι ότι θέλετε να καταργήσετε το backup %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

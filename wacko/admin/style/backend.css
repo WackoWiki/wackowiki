@@ -207,6 +207,11 @@ table.forum th {
 	background-color: #fff;
 	border-bottom: solid 1px #babfc7;
 }
+.formation > tbody > tr:nth-of-type(2n+1),
+.formation > tbody > th:nth-of-type(2n+1) {
+	background-color: #f9f9f9;
+}
+
 td.label,
 th.label {
 	text-align: right;
@@ -328,6 +333,12 @@ table.forum th {
 .users td:nth-child(4) {
 	padding-left: 5px;
 	padding-right: 5px;
+}
+/* restore table */
+table.restore {
+	border-spacing: 1px;
+	border-collapse: separate;
+	padding: 4px;
 }
 
 .permissions {
@@ -983,11 +994,6 @@ div#loginbox {
 .listcenter td {
 	vertical-align:top;
 	text-align:center;
-}
-
-.formation > tbody > tr:nth-of-type(2n+1),
-.formation > tbody > th:nth-of-type(2n+1) {
-	background-color: #f9f9f9;
 }
 
 a.button {

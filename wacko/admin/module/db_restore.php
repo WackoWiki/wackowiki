@@ -24,7 +24,7 @@ $module[$_mode] = [
 function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 {
 
-//$dir = $engine->db->upload_path_backup.'/2007_06_27_20_53_bd57f009381325efff2d684d4c2fbd54';
+//$dir = UPLOAD_BACKUP_DIR . '/2007_06_27_20_53_bd57f009381325efff2d684d4c2fbd54';
 //if ($dh = opendir($dir))
 //{
 //	while (false !== ($file = readdir($dh)))
@@ -38,7 +38,6 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 //	chmod($dir, CHMOD_DIR);
 //}
 
-#Ut::debug_print_r($_REQUEST);
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
@@ -60,7 +59,8 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 	}
 
 	// RESTORE backup
-	if (isset($_POST['restore']) && (isset($_POST['backup_id']) && $_POST['backup_id']))
+	if (isset($_POST['restore'])
+		&& (isset($_POST['backup_id']) && $_POST['backup_id']))
 	{
 		// confirm restore backup
 		if (((isset($_POST['restore']) && isset($_POST['backup_id']))
@@ -334,12 +334,12 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 				$overall[0]		= 0;
 				$overall[1]		= 0;
 
-				foreach ($list as $dir)
+				foreach ($list as $sub_dir)
 				{
-					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $dir . "\n" .
+					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $sub_dir . "\n" .
 						"\t" . '==========================</strong>' . "\n";
 
-					$total		= put_files($pack, $dir, $keep);
+					$total		= put_files($pack, $sub_dir, $keep);
 
 					$overall[0]	+= $total[0] ?? null;
 					$overall[1]	+= $total[1] ?? null;
@@ -410,23 +410,25 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 			if ($backup_id)
 			{
 				remove_pack($backup_id);
-				$engine->log(1, Ut::perc_replace($engine->_t('LogRemovedBackup', SYSTEM_LANG), $backup_id));
-			}
 
-			$message = $engine->_t('BackupRemoved');
-			$engine->show_message($message, 'success');
+				$engine->log(1, Ut::perc_replace($engine->_t('LogRemovedBackup', SYSTEM_LANG), $backup_id));
+				$engine->show_message($engine->_t('BackupRemoved'), 'success');
+			}
 		}
 
 		// SHOW backups
 ?>
-				<p>
-					<?php echo $engine->_t('RestoreInfo'); ?>
-				</p>
+		<p>
+			<?php echo $engine->_t('RestoreInfo'); ?>
+		</p>
 <?php
-		if (!is_executable(UPLOAD_BACKUP_DIR . '/'))
+		if (!is_executable($dir))
 		{
-			echo substr(sprintf('%o', fileperms(UPLOAD_BACKUP_DIR . '/')), -4) . "<br>\n";
-			echo output_image($engine, false) . '<strong class="red">The ' . UPLOAD_BACKUP_DIR . '/' . ' directory is not executable.</strong>' .  "<br>\n";
+			echo substr(sprintf('%o', fileperms($dir)), -4) . "<br>\n";
+			echo output_image($engine, false) .
+				'<strong class="red">' .
+					Ut::perc_replace($engine->_t('DirectoryNotExecutable'), ' <code>' . Ut::html($dir) . '</code>') .
+				'</strong><br>' . "\n";
 		}
 		else
 		{
@@ -436,10 +438,9 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 <?php
 			echo $engine->form_open('restore');
 
-			$control_buttons =	'<button type="submit" name="restore" id="restore-submit">' . $engine->_t('BackupRestore') . '</button>' .
-								'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('BackupRemove') . '</button>';
-
-			#$dir = UPLOAD_BACKUP_DIR . '/';
+			$control_buttons =
+				'<button type="submit" name="restore" id="restore-submit">' . $engine->_t('BackupRestore') . '</button>' .
+				'<button type="submit" name="remove" id="remove-submit">' . $engine->_t('BackupRemove') . '</button>';
 
 			// open backups dir and run through all subdirs
 			if ($dh = opendir(rtrim($dir, '/')))
@@ -464,7 +465,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 				{
 					echo $control_buttons;
 	?>
-					<table style="border-spacing: 1px; border-collapse: separate; padding: 4px;" class="formation">
+					<table class="restore formation">
 						<tr>
 							<th><?php echo $engine->_t('BackupCreationDate');?></th>
 							<th><?php echo $engine->_t('BackupPackageContents');?></th>
