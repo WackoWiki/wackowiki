@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	'RegistrationThreshold'		=> 'The time for filling out the form should not be less than %1 seconds.',
+	'Language'					=> 'Language',
 
 	// login panel
 	'LoginWelcome'				=> 'Login',

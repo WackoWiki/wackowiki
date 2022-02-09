@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	'RegistrationThreshold'		=> 'Vormi täitmiseks kuluv aeg ei tohiks olla alla %1 sekundi.',
+	'Language'					=> 'Keel',
 
 	// login panel
 	'LoginWelcome'				=> 'Logi sisse',

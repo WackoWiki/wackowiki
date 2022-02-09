@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	'RegistrationThreshold'		=> '填写表格的时间不应少于%1秒。',
+	'Language'					=> '语言',
 
 	// login panel
 	'LoginWelcome'				=> '登录',
