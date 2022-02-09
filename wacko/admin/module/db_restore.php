@@ -23,21 +23,6 @@ $module[$_mode] = [
 
 function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 {
-
-//$dir = UPLOAD_BACKUP_DIR . '/2007_06_27_20_53_bd57f009381325efff2d684d4c2fbd54';
-//if ($dh = opendir($dir))
-//{
-//	while (false !== ($file = readdir($dh)))
-//	{
-//		if (is_dir($dir . '/' . $file) !== true)
-//		{
-//			chmod($dir . '/' . $file, CHMOD_DIR);
-//		}
-//	}
-//	closedir($dh);
-//	chmod($dir, CHMOD_DIR);
-//}
-
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
@@ -88,7 +73,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					'<tr class="hl-setting">' . "\n" .
 
 					// pack
-					 '<td>
+					'<td>
 							<table>
 								<tr>' .
 									'<td class="label a-middle" style="width:10px;">' .
@@ -219,9 +204,6 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 
 		if (isset($_POST['start']))
 		{
-
-			#echo '<progress></progress>';
-
 			set_time_limit(3600);
 
 			// $dir see above
