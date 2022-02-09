@@ -1023,6 +1023,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Möchtest du die Datensicherung %1 wiederherstellen?',
 	'ConfirmDbRestoreInfo'		=> 'Bitte warte, dies kann einige Minuten benötigen.',
 	'RestoreWrongVersion'		=> 'WackoWiki Version stimmt nicht überein!',
+	'DirectoryNotExecutable'	=> 'Das Verzeichnis %1 ist nicht ausführbar.',
 	'BackupDelete'				=> 'Willst du die Datensicherung %1 wirklich entfernen?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Zusätzliche Otionen zur Daten-Wiederherstellung',

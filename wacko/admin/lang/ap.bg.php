@@ -1022,6 +1022,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Искате ли да възстановите архивното копиране %1?',
 	'ConfirmDbRestoreInfo'		=> 'Моля, изчакайте това може да отнеме няколко минути.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'Директорията %1 не е изпълнима.',
 	'BackupDelete'				=> 'Сигурни ли сте, че искате да премахнете архивното копие %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

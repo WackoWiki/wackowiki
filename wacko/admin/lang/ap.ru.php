@@ -1004,6 +1004,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Вы хотите восстановить резервную копию %1?',
 	'ConfirmDbRestoreInfo'		=> 'Пожалуйста, подождите. Это может занять несколько минут.',
 	'RestoreWrongVersion'		=> 'Неправильная версия WackoWiki!',
+	'DirectoryNotExecutable'	=> 'Каталог %1 не является исполняемым.',
 	'BackupDelete'				=> 'Вы уверены, что хотите удалить резервную копию %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Дополнительные опции для восстановления',

@@ -232,7 +232,7 @@ $ap_translation = [
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
+		'name'		=> '승인',
 		'title'		=> 'User registration approval',
 	],
 
@@ -994,8 +994,8 @@ $ap_translation = [
 	'LogUserUpdated'			=> 'Updated User ##%1##',
 
 	'UserApproveInfo'			=> 'Approve new users before they are able to login to the site.',
-	'Approve'					=> 'Approve',
-	'Deny'						=> 'Deny',
+	'Approve'					=> '승인',
+	'Deny'						=> '거절',
 	'Pending'					=> 'Pending',
 	'Approved'					=> 'Approved',
 	'Denied'					=> 'Denied',
@@ -1025,6 +1025,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Do you want to restore backup %1?',
 	'ConfirmDbRestoreInfo'		=> 'Please wait this can take some minutes.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'The %1 directory is not executable.',
 	'BackupDelete'				=> 'Are you sure you want to remove backup %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

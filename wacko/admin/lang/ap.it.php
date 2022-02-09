@@ -9,12 +9,12 @@ $ap_translation = [
 	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
-		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
-		'content'		=> 'Content',
+		'basics'		=> 'Funzioni base',
+		'preferences'	=> 'Preferenze',
+		'content'		=> 'Contenuto',
 		'users'			=> 'Utenti',
-		'maintenance'	=> 'Maintenance',
-		'messages'		=> 'Messages',
+		'maintenance'	=> 'Manutenzione',
+		'messages'		=> 'Messaggi',
 		'extension'		=> 'Extension',
 		'database'		=> 'Database',
 	],
@@ -70,8 +70,8 @@ $ap_translation = [
 
 	// Config Basic module
 	'config_basic'		=> [
-		'name'		=> 'Basic',
-		'title'		=> 'Basic parameters',
+		'name'		=> 'Base',
+		'title'		=> 'Parametri base',
 	],
 
 	// Config Appearance module
@@ -83,7 +83,7 @@ $ap_translation = [
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> 'E-mail',
-		'title'		=> 'Email settings',
+		'title'		=> 'Impostazioni e-mail',
 	],
 
 	// Config Filter module
@@ -1022,6 +1022,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Si desidera ripristinare il backup %1?',
 	'ConfirmDbRestoreInfo'		=> 'Per favore, aspetta che ci vorrà qualche minuto.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'La directory %1 non è eseguibile.',
 	'BackupDelete'				=> 'Sei sicuro di voler rimuovere il backup %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

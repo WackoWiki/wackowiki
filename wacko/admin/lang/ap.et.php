@@ -1022,6 +1022,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Kas soovite taastada varukoopia %1?',
 	'ConfirmDbRestoreInfo'		=> 'Oodake, see võib võtta mõni minut.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'Kataloog %1 ei ole käivitatav.',
 	'BackupDelete'				=> 'Kas soovite kindlasti %1 varukoopia eemaldada??',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',

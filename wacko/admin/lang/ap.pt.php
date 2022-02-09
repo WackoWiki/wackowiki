@@ -1022,6 +1022,7 @@ $ap_translation = [
 	'ConfirmDbRestore'			=> 'Você quer restaurar o backup %1?',
 	'ConfirmDbRestoreInfo'		=> 'Aguarde, isso pode levar alguns minutos.',
 	'RestoreWrongVersion'		=> 'Wrong WackoWiki version!',
+	'DirectoryNotExecutable'	=> 'O directório %1 não é executável.',
 	'BackupDelete'				=> 'Tens a certeza que queres remover o backup %1?',
 	'BackupDeleteInfo'			=> '',
 	'RestoreOptions'			=> 'Additional restore options',
