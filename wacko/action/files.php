@@ -221,6 +221,8 @@ if ($can_view)
 
 	if ($results)
 	{
+		$tpl->enter('r_');
+
 		foreach ($files as $file)
 		{
 			// check for local file
@@ -265,7 +267,7 @@ if ($can_view)
 
 			$link		= $this->link($path2 . $file_name, '', $text, '', $track);
 
-			$tpl->enter('r_');
+			$tpl->enter('n_');
 
 			// display file
 			$tpl->link = $link;
@@ -316,14 +318,16 @@ if ($can_view)
 				$tpl->i_class		= $icon[1];
 			}
 
-			$tpl->leave(); // r_
+			$tpl->leave(); // n_
 
 			unset($link, $desc);
 		}
+
+		$tpl->leave(); // r_
 	}
 	else
 	{
-		$tpl->message = '<em>' . $this->_t('NoAttachments') . '</em><br><br>';
+		$tpl->message = '<em>' . $this->_t('NoAttachments') . '</em><br>';
 	}
 
 	unset($files);
