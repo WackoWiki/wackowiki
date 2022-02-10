@@ -50,6 +50,7 @@ $file_name_maxlen	= 80;
 $phrase				= (string)	($_GET['phrase'] ?? '');
 $type_id			= (int)		($_GET['type_id'] ?? $type_id);
 $category_id		= (int)		@$_GET['category_id'];
+$filter				= $_GET['files'] ?? null;
 $file_link			= (int)		$linked;
 
 							$order_by = "file_name ASC";
@@ -203,7 +204,7 @@ if ($can_view)
 	if (($results || $phrase) && $form)
 	{
 		// search
-		$files_filter		= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'cluster', 'global', 'linked'])) ? $_GET['files'] : '';
+		$files_filter		= (isset($filter) && in_array($filter, ['all', 'cluster', 'global', 'linked'])) ? $filter : '';
 
 		$tpl->s_filter		= $files_filter;
 		$tpl->s_phrase		= Ut::html($phrase);
@@ -217,11 +218,10 @@ if ($can_view)
 		$tpl->mark_results	= $results . ' of ' . $count['n'] . ' ' . $title;
 	}
 
-	$tpl->style = $style;
-
 	if ($results)
 	{
 		$tpl->enter('r_');
+		$tpl->style = $style;
 
 		foreach ($files as $file)
 		{
@@ -276,7 +276,7 @@ if ($can_view)
 			{
 				// get context for filter
 				$method_filter		= $this->method == 'show' ? '' : $this->method;
-				$param_filter		= (isset($_GET['files']) && in_array($_GET['files'], ['all', 'cluster', 'global', 'linked'])) ? ['files' => $_GET['files']] : [];
+				$param_filter		= (isset($filter) && in_array($filter, ['all', 'cluster', 'global', 'linked'])) ? ['files' => $filter] : [];
 
 				// display picture meta data
 				#$tpl->p_file		= $file; // result array: [ ' file.file_id ' ]
