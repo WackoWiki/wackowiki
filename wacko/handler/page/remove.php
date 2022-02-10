@@ -53,7 +53,7 @@ if ($this->is_admin()
 		// remove SINGLE revision
 		if ($this->remove_revision($this->page['page_id'], $revision_id, $dontkeep))
 		{
-			$tpl->noundo		= $dontkeep;
+			$tpl->r_noundo		= $dontkeep;
 			$tpl->r_tag			= $this->tag;
 			$tpl->r_l_notice	= Ut::perc_replace($this->_t('RevisionRemoved'), '<code>' . $revision['version_id'] . '</code>');
 			$tpl->r_return		= $this->compose_link_to_page('', 'revisions', '« ' . $this->_t('CancelReturnButton'), '', false);
