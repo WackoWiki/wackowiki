@@ -7,11 +7,12 @@ if (!defined('IN_WACKO'))
 
 // TODO: exclude service and system pages
 //		either by user 'SYSTEM' or better via service: namespace
+$option = (int) ($_POST['option'] ?? 0);
 
 // process input
 if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 {
-	switch ((int) $_POST['option'])
+	switch ($option)
 	{
 		case 1:
 			$prefix = $this->tag . '/';
@@ -80,11 +81,21 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 	}
 }
 
-// create a peer page
+// create a sub-page
 if ($this->has_access('create', $this->get_page_id($this->tag)))
 {
-	$tpl->p_f_base		= (mb_strlen($this->tag) > 50 ? '...' . mb_substr($this->tag, -50) : $this->tag);
-	$tpl->p_f_tag		= (isset($_POST['option']) && $_POST['option'] === 1 ? $new_tag : '');
+	if ($this->tag != $this->db->root_page)
+	{
+		$tpl->p_f_base		= (mb_strlen($this->tag) > 50 ? '...' . mb_substr($this->tag, -50) : $this->tag);
+		$tpl->p_f_tag		= ($option === 1 ? $new_tag : '');
+		#$tpl->p_f_pattern	= $this->language['TAG'] . '+';
+	}
+	else
+	{
+		$tpl->p = true; // Why does it fail without it?
+		// TODO: show message
+		// users adding sub pages to HomePage/subpage, possible but probably misguided and on the wrong path
+	}
 }
 else
 {
@@ -92,7 +103,7 @@ else
 	$tpl->p_d_message	= $this->show_message($message, 'note', false);
 }
 
-// create a child page only inside a cluster
+// create a peer-page, only inside a cluster
 if (mb_substr_count($this->tag, '/') > 0)
 {
 	$parent				= mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'));
@@ -103,7 +114,8 @@ if (mb_substr_count($this->tag, '/') > 0)
 		if ($parent != $this->db->users_page)
 		{
 			$tpl->c_f_base		= (mb_strlen($parent) > 50 ? '...' . mb_substr($parent, -50) : $parent);
-			$tpl->c_f_tag		= (isset($_POST['option']) && $_POST['option'] === 2 ? $new_tag : '');
+			$tpl->c_f_tag		= ($option === 2 ? $new_tag : '');
+			#$tpl->c_f_pattern	= $this->language['TAG'] . '+';
 		}
 	}
 	else
@@ -114,5 +126,5 @@ if (mb_substr_count($this->tag, '/') > 0)
 }
 
 // create a random page
-$tpl->tag;
-
+$tpl->tag	= ($option === 3 ? $new_tag : '');
+#$tpl->pattern		= $this->language['TAG'] . '+';

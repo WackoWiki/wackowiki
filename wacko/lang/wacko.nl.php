@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'Je hebt geen toegang tot %1.',
 
 	'RegistrationThreshold'		=> 'De tijd voor het invullen van het formulier mag niet korter zijn dan %1 seconden.',
+	'Language'					=> 'Taal',
 
 	// login panel
 	'LoginWelcome'				=> 'Inloggen',

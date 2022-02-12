@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	'RegistrationThreshold'		=> 'Ο χρόνος συμπλήρωσης της φόρμας δεν πρέπει να είναι μικρότερος από %1 δευτερόλεπτα.',
+	'Language'					=> 'Γλώσσα',
 
 	// login panel
 	'LoginWelcome'				=> 'Σύνδεση',

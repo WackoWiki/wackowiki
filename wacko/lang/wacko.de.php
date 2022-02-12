@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'Der Zugang zu %1 wurde abgelehnt.',
 
 	'RegistrationThreshold'		=> 'Die Zeit zum Ausfüllen des Formulars sollte nicht %1 Sekunden unterschreiten.',
+	'Language'					=> 'Sprache',
 
 	// login panel
 	'LoginWelcome'				=> 'Anmeldung',

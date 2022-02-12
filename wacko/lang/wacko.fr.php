@@ -53,7 +53,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Enregistrement de compte',
 	'NewAccountAdminCreated'	=> 'L’utilisateur %1 vous a créé un compte avec le nom d’utilisateur « %2 ». Pour terminer la création, visitez l’URL suivante (soyez sûr qu’elle soit entrée comme une seule ligne) et définissez votre mot de passe :',
 	'NewAccountUsername'		=> 'Utilisateur :',
-	'AccountLanguage'			=> 'Langue:',
+	'AccountLanguage'			=> 'Langue :',
 	'NewAccountEmail'			=> 'Courriel :',
 	'NewAccountIP'				=> 'Adresse IP distante :',
 	'NewAccountSignupInfo'		=> 'Le compte suivant a été créé :',
@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'Votre accès à %1 a été refusé.',
 
 	'RegistrationThreshold'		=> 'Le temps nécessaire pour remplir le formulaire ne doit pas être inférieur à %1 secondes.',
+	'Language'					=> 'Langue',
 
 	// login panel
 	'LoginWelcome'				=> 'Connexion',

@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'Ti è stato negato l\'accesso %1.',
 
 	'RegistrationThreshold'		=> 'Il tempo di compilazione del modulo non deve essere inferiore a %1 secondi.',
+	'Language'					=> 'Lingua',
 
 	// login panel
 	'LoginWelcome'				=> 'Connessione',

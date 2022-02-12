@@ -659,7 +659,7 @@ function admin_user_groups(&$engine, &$module)
 				echo '<tr>' . "\n" .
 						'<td><input type="radio" name="change" value="' . $row['group_id'] . '"></td>' .
 						'<td>' . $row['group_id'] . '</td>' .
-						'<td class="t-left" style="padding: 0px 5px;"><strong><a href="' . $engine->href('', '', ['group_id' => $row['group_id']]) . '">' . $row['group_name'] . '</a></strong></td>' .
+						'<td><a href="' . $engine->href('', '', ['group_id' => $row['group_id']]) . '">' . $row['group_name'] . '</a></td>' .
 						'<td>' . $row['description'] . '</td>' .
 						'<td><small><a href="' . $engine->href('', '', ['moderator' => $row['moderator_id']]) . '">' . $row['user_name'] . '</a></small></td>' .
 						'<td>' . $row['members'] . '</td>' .

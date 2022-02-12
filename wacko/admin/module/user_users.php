@@ -970,7 +970,7 @@ function admin_user_users(&$engine, &$module)
 					<th><a href="<?php echo $engine->href('', '', ['order' => $signup_time]); ?>"><?php echo $engine->_t('UsersSignup');?></a></th>
 					<th><a href="<?php echo $engine->href('', '', ['order' => $last_visit]); ?>"><?php echo $engine->_t('UsersLastSession');?></a></th>
 				</tr>
-			<thead>
+			</thead>
 			<tbody>
 <?php
 		if ($users)
@@ -978,14 +978,14 @@ function admin_user_users(&$engine, &$module)
 			foreach ($users as $row)
 			{
 				echo '<tr>
-						<td class="label a-middle" style="width:10px;">
-							<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '/>
+						<td class="label">
+							<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . (in_array($row['user_id'], $set) ? ' checked' : '') . '/>
 						</td>
 						<td>
 							<input type="radio" name="user_id" value="' . $row['user_id'] . '">
 						</td>
 						<td>' . $row['user_id'] . '</td>
-						<td><strong><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>
+						<td><a href="' . $engine->href('', '', ['user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></td>
 						<td>' . $row['email'] . '</td>
 						<td>' . $row['total_pages'] . '</td>
 						<td>' . $row['total_comments'] . '</td>

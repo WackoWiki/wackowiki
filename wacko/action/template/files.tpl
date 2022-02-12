@@ -1,5 +1,4 @@
 [ === main === ]
-	[ ' message ' ]
 	[ '' pagination '' ]
 	[= s =
 		<form action="[ ' href: attachments ' ]" method="get" name="file_search">
@@ -24,8 +23,10 @@
 		<div class="layout-box">
 			<p><span>[ ' results ' ]: </span></p>
 	=]
+	[ ' message ' ]
+	[= r =
 	<table class="[ ' style ' ]">
-		[= r =
+		[= n =
 			<tr>
 				<td class="file-">[ ' link ' ]</td>
 					[= p =
@@ -54,6 +55,7 @@
 			</tr>
 		=]
 	</table>
+	=]
 	[= emark _ =
 		[ ' nonstatic ' ]
 		</div>

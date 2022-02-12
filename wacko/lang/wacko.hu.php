@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'You have been denied access to %1.',
 
 	'RegistrationThreshold'		=> 'Az űrlap kitöltésének ideje nem lehet kevesebb, mint %1 másodperc.',
+	'Language'					=> 'Nyelv',
 
 	// login panel
 	'LoginWelcome'				=> 'Bejelentkezés',

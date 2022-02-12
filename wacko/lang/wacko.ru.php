@@ -74,6 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'В доступе к %1 отказано.',
 
 	'RegistrationThreshold'		=> 'Время заполнения анкеты должно составлять не менее %1 секунд.',
+	'Language'					=> 'Язык',
 
 	// login panel
 	'LoginWelcome'				=> 'Вход',
