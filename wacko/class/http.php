@@ -562,7 +562,7 @@ class Http
 	private function real_ip()
 	{
 		$proxy_addresses			= $this->db->reverse_proxy_addresses ?? '';
-		$proxy_header				= this->db->reverse_proxy_header ?? '';
+		$proxy_header				= $this->db->reverse_proxy_header ?? '';
 
 		$reverse_proxy_addresses	= preg_split('/[\s,]+/', $proxy_addresses, -1, PREG_SPLIT_NO_EMPTY);
 
