@@ -480,7 +480,7 @@ $wacko_translation = [
 	'UnwatchText'				=> 'ウォッチ解除',
 	'UserSettingsStored'		=> 'User settings saved.',
 	'LoggedOut'					=> 'あなたはログアウトしました。',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> 'セキュリティのため、お客様のセッションは終了しました。再度ログインしてください。',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',

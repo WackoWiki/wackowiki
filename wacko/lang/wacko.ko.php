@@ -18,7 +18,7 @@ $wacko_translation = [
 	'AddButton'					=> '추가',
 	'RemoveButton'				=> '제거',
 	'SetButton'					=> 'Set',
-	'ResetButton'				=> '재',
+	'ResetButton'				=> '재설정',
 	'RenameButton'				=> '이름 바꾸기',
 	'DeleteButton'				=> '삭제',
 	'RestoreButton'				=> '복구',
@@ -148,7 +148,7 @@ $wacko_translation = [
 	'ShowTip'					=> 'Return in view mode',
 	'ShowText'					=> '보기',
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
-	'WikiEditInactiveJs'		=> 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
+	'WikiEditInactiveJs'		=> 'WikiEdit를 사용하려면 브라우저에서 JavaScript를 활성화하십시오.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'Comment'					=> '댓글',
 	'Comments0'					=> '코멘트를 남겨주세요',
@@ -164,7 +164,7 @@ $wacko_translation = [
 
 	'PrivacyPolicy'				=> '개인정보처리방침',
 	'TermsOfUse'				=> '서비스이용약관',
-	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of service of the site.',
+	'AcceptTermsOfUse'			=> '나는 사이트의 서비스 약관을 읽고 이해했으며 동의합니다.',
 
 	'ShowComments'				=> 'Display comments / form',
 	'HideComments'				=> 'Hide comments / form',
@@ -336,10 +336,10 @@ $wacko_translation = [
 	'MinorEditShow'				=> '사소한 편집 보이기',
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> '페이지의 새 댓글 및 변경 사항에 대해 알림',
-	'OverwriteAlert'			=> 'OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br>Please copy your changes and re-edit this page.',
+	'OverwriteAlert'			=> '덮어쓰기 경고: 이 페이지를 수정하는 동안 다른 사람이 수정했습니다.<br>변경 사항을 복사하고 이 페이지를 다시 수정하십시오.',
 	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
-	'WriteAccessDenied'			=> 'You don\'t have write access to this page.',
-	'EmptyPage'					=> 'Page body was empty - not saved!',
+	'WriteAccessDenied'			=> '이 페이지에 대한 쓰기 권한이 없습니다.',
+	'EmptyPage'					=> '페이지 본문이 비어 있어 저장되지 않았습니다!',
 	'EmptyComment'				=> 'Comment body was empty - not saved!',
 	'CommentAccessDenied'		=> 'Sorry, you\'re not allowed to post comments to this page.',
 	'CommentFlooded'			=> 'The interval between the publication of the posts shall not be less than %1 seconds.',
@@ -480,7 +480,7 @@ $wacko_translation = [
 	'UnwatchText'				=> '주시 해제',
 	'UserSettingsStored'		=> 'User settings saved.',
 	'LoggedOut'					=> '이제 로그 아웃되었습니다.',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> '보안을 위해 세션이 종료되었습니다. 다시 로그인하십시오. ',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
@@ -612,7 +612,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> '편집',
 	'PageAlreadyExistsEditDenied'	=> '당신은 그것을 편집 할 수 없습니다.',
 
-	'SimilarPagesExists'		=> 'Similar pages to %1 already exists:',
+	'SimilarPagesExists'		=> '%1과(와) 유사한 페이지가 이미 있습니다:',
 	'SimilarPagesHint'			=> 'There are existing similar pages to %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
@@ -655,7 +655,7 @@ $wacko_translation = [
 	'NotConfirmedEmail'			=> 'Your email address is not confirmed.<br>Mail can\'t be send to non-confirmed address.',
 	'EmailForgotSubject'		=> 'Password renewal for ',
 	'EmailForgotMessage'		=> 'Someone (maybe you) forgot your password for %1.' . "\n" . 'Your login: %2'."\n\n" . 'Click the link or copy it to the browser address line to change your password.' . "\n" . '%3' . "\n\n",
-	'CodeWasSent'				=> 'Password recovery instruction was sent to you by email.',
+	'CodeWasSent'				=> '비밀번호 복구 지침이 이메일로 전송되었습니다.',
 	'WrongCode'					=> 'Wrong code',
 	'ChangePasswordForUser'		=> '%1\'s password change',
 
@@ -665,7 +665,7 @@ $wacko_translation = [
 	'NotOwnerToViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
+	'GenerateRecoveryHash'		=> '<code>recovery_password</code> 에 대한 비밀번호 해시 생성',
 
 	// import action
 	'ImportTo'					=> 'Import in cluster',
