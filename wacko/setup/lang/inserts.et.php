@@ -13,36 +13,50 @@ if ($config['language'] == $page_lang)
 			'Pärast sisselogimist klõpsake allosas olevale lingile "Muuda lehte", et alustada.' . "\n\n" .
 			'Dokumentatsioon on kättesaadav aadressil WackoWiki:Doc/English.' . "\n" .
 			'Kasulikud leheküljed: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Otsing Otsing)).' . "\n\n";
-		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
+		$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
 
-		insert_page($config['root_page'], 'Koduleht', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
-		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
+		$critical_pages = [
+			$config['root_page']		=> ['Koduleht',				$home_page_body,		true, false, null, 0],
+			$admin_page					=> [$config['admin_name'],	$admin_page_body,		true, false, null, 0],
+		];
 	}
 
-	insert_page($config['category_page'],		'Kategooria',				'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],			'Grupid',					'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],			'Kasutajad',				'{{users}}',			$page_lang, 'Admins', false, false);
+	$pages = [
+		$config['category_page']		=> ['Kategooria',				'{{category}}',			false, false],
+		$config['groups_page']			=> ['Grupid',					'{{groups}}',			false, false],
+		$config['users_page']			=> ['Kasutajad',				'{{users}}',			false, false],
 
-	# insert_page($config['help_page'],			'Abi',						'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['terms_page'],			'Terms',					'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['privacy_page'],		'Andmekaitse',				'',						$page_lang, 'Admins', false, false);
+		# $config['help_page']			=> ['Abi',						'',						false, false],
+		# $config['terms_page']			=> ['Terms',					'',						false, false],
+		# $config['privacy_page']		=> ['Andmekaitse',				'',						false, false],
 
-	insert_page($config['registration_page'],	'Registreerimine',			'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Parool',					'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'Otsing',					'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'Login',					'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Settings',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
+		$config['registration_page']	=> ['Registreerimine',			'{{registration}}',		false, false],
+		$config['password_page']		=> ['Parool',					'{{changepassword}}',	false, false],
+		$config['search_page']			=> ['Otsing',					'{{search}}',			false, false],
+		$config['login_page']			=> ['Login',					'{{login}}',			false, false],
+		$config['account_page']			=> ['Settings',					'{{usersettings}}',		false, false],
 
-	insert_page($config['changes_page'],		'Viimased Muudatused',		'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Muudatused');
-	insert_page($config['comments_page'],		'Viimati Kommenteeritud',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Kommenteeritud');
-	insert_page($config['index_page'],			'Sisu Kord',				'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
-	insert_page($config['random_page'],			'Juhuslik lehekülg',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Juhuslik');
+		$config['changes_page']			=> ['Viimased Muudatused',		'{{changes}}',			false, SET_MENU, 'Muudatused'],
+		$config['comments_page']		=> ['Viimati Kommenteeritud',	'{{commented}}',		false, SET_MENU, 'Kommenteeritud'],
+		$config['index_page']			=> ['Sisu Kord',				'{{pageindex}}',		false, SET_MENU, 'Index'],
+		$config['random_page']			=> ['Juhuslik lehekülg',		'{{randompage}}',		false, SET_MENU, 'Juhuslik'],
+	];
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Muudatused');
-	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Kommenteeritud');
-	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
-	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Juhuslik');
+	$pages = [
+		$config['changes_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Muudatused'],
+		$config['comments_page']		=> ['',		'',		'', false, SET_MENU_ONLY, 'Kommenteeritud'],
+		$config['index_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Index'],
+		$config['random_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Juhuslik'],
+	];
 }
+
+if (!empty($critical_pages))
+{
+	$pages = array_merge($critical_pages, $pages);
+}
+
+insert_pages($pages, $page_lang);

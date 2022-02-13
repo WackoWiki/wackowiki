@@ -13,36 +13,50 @@ if ($config['language'] == $page_lang)
 			'Нажмите "Правка" внизу страницы, чтобы изменить её (между прочим, вы можете просто совершить двойной щелчок мышкой -- это приведёт к тому же результату).' . "\n\n" .
 			'Документация по WackoWiki доступна на WackoWiki:Doc/Русский.' . "\n" .
 			'Полезные страницы: ((WackoWiki:Doc/Русский/WackoСинтаксис Форматирование)), ((/Поиск Поиск)).' . "\n\n";
-		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
+		$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
 
-		insert_page($config['root_page'], 'Стартовая страница', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
-		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
+		$critical_pages = [
+			$config['root_page']		=> ['Стартовая страница',	$home_page_body,		true, false, null, 0],
+			$admin_page					=> [$config['admin_name'],	$admin_page_body,		true, false, null, 0],
+		];
 	}
 
-	insert_page($config['category_page'],		'Категории',			'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],			'Группы',				'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],			'Пользователи',			'{{users}}',			$page_lang, 'Admins', false, false);
+	$pages = [
+		$config['category_page']		=> ['Категории',			'{{category}}',			false, false],
+		$config['groups_page']			=> ['Группы',				'{{groups}}',			false, false],
+		$config['users_page']			=> ['Пользователи',			'{{users}}',			false, false],
 
-	# insert_page($config['help_page'],			'Справка',				'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['terms_page'],			'Условия использования',		'',				$page_lang, 'Admins', false, false);
-	# insert_page($config['privacy_page'],		'Политика конфиденциальности',		'',			$page_lang, 'Admins', false, false);
+		# $config['help_page']			=> ['Справка',				'',						false, false],
+		# $config['terms_page']			=> ['Условия использования',		'',				false, false],
+		# $config['privacy_page']		=> ['Политика конфиденциальности',		'',			false, false],
 
-	insert_page($config['registration_page'],	'Регистрация',			'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Пароль',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'Поиск',				'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'Вход',					'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Настройки',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
+		$config['registration_page']	=> ['Регистрация',			'{{registration}}',		false, false],
+		$config['password_page']		=> ['Пароль',				'{{changepassword}}',	false, false],
+		$config['search_page']			=> ['Поиск',				'{{search}}',			false, false],
+		$config['login_page']			=> ['Вход',					'{{login}}',			false, false],
+		$config['account_page']			=> ['Настройки',			'{{usersettings}}',		false, false],
 
-	insert_page($config['changes_page'],		'Изменения',			'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Изменения');
-	insert_page($config['comments_page'],		'Новые Комментарии',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Комментарии');
-	insert_page($config['index_page'],			'Каталог',				'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Каталог');
-	insert_page($config['random_page'],			'Случайная страница',	'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Случайный');
+		$config['changes_page']			=> ['Изменения',			'{{changes}}',			false, SET_MENU, 'Изменения'],
+		$config['comments_page']		=> ['Новые Комментарии',	'{{commented}}',		false, SET_MENU, 'Комментарии'],
+		$config['index_page']			=> ['Каталог',				'{{pageindex}}',		false, SET_MENU, 'Каталог'],
+		$config['random_page']			=> ['Случайная страница',	'{{randompage}}',		false, SET_MENU, 'Случайный'],
+	];
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Изменения');
-	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Комментарии');
-	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Каталог');
-	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Случайный');
+	$pages = [
+		$config['changes_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Изменения'],
+		$config['comments_page']		=> ['',		'',		'', false, SET_MENU_ONLY, 'Комментарии'],
+		$config['index_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Каталог'],
+		$config['random_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Случайный'],
+	];
 }
+
+if (!empty($critical_pages))
+{
+	$pages = array_merge($critical_pages, $pages);
+}
+
+insert_pages($pages, $page_lang);

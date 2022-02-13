@@ -13,36 +13,50 @@ if ($config['language'] == $page_lang)
 			'A kezdéshez kattintson a ((/Bejelentkezés Bejelentkezés)) gombra az alján található "Szerkesztés" linkre.' . "\n\n" .
 			'A dokumentáció a következő címen található WackoWiki:Doc/English.' . "\n" .
 			'Hasznos oldalak: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Keresés Keresés)).' . "\n\n";
-		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
+		$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
 
-		insert_page($config['root_page'], 'Kezdőlap', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
-		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
+		$critical_pages = [
+			$config['root_page']		=> ['Kezdőlap',				$home_page_body,		true, false, null, 0],
+			$admin_page					=> [$config['admin_name'],	$admin_page_body,		true, false, null, 0],
+		];
 	}
 
-	insert_page($config['category_page'],		'Kategória',			'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],			'Csoportok',			'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],			'Felhasználók',			'{{users}}',			$page_lang, 'Admins', false, false);
+	$pages = [
+		$config['category_page']		=> ['Kategória',			'{{category}}',			false, false],
+		$config['groups_page']			=> ['Csoportok',			'{{groups}}',			false, false],
+		$config['users_page']			=> ['Felhasználók',			'{{users}}',			false, false],
 
-	# insert_page($config['help_page'],			'Segítség',				'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['terms_page'],			'Általános Szerződési Feltételek',	'',			$page_lang, 'Admins', false, false);
-	# insert_page($config['privacy_page'],		'Adatvédelem',			'',						$page_lang, 'Admins', false, false);
+		# $config['help_page']			=> ['Segítség',				'',						false, false],
+		# $config['terms_page']			=> ['Általános Szerződési Feltételek',	'',			false, false],
+		# $config['privacy_page']		=> ['Adatvédelem',			'',						false, false],
 
-	insert_page($config['registration_page'],	'Fiók létrehozása',		'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Jelszó',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'Keresés',				'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'Bejelentkezés',		'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Beállítások',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
+		$config['registration_page']	=> ['Fiók létrehozása',		'{{registration}}',		false, false],
+		$config['password_page']		=> ['Jelszó',				'{{changepassword}}',	false, false],
+		$config['search_page']			=> ['Keresés',				'{{search}}',			false, false],
+		$config['login_page']			=> ['Bejelentkezés',		'{{login}}',			false, false],
+		$config['account_page']			=> ['Beállítások',			'{{usersettings}}',		false, false],
 
-	insert_page($config['changes_page'],		'Friss változtatások',	'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Változtatások');
-	insert_page($config['comments_page'],		'Utolsó megjegyzések',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Megjegyzések');
-	insert_page($config['index_page'],			'Oldal Index',			'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
-	insert_page($config['random_page'],			'Lap találomra',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Véletlenszerű');
+		$config['changes_page']			=> ['Friss változtatások',	'{{changes}}',			false, SET_MENU, 'Változtatások'],
+		$config['comments_page']		=> ['Utolsó megjegyzések',	'{{commented}}',		false, SET_MENU, 'Megjegyzések'],
+		$config['index_page']			=> ['Oldal Index',			'{{pageindex}}',		false, SET_MENU, 'Index'],
+		$config['random_page']			=> ['Lap találomra',		'{{randompage}}',		false, SET_MENU, 'Véletlenszerű'],
+	];
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Változtatások');
-	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Megjegyzések');
-	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
-	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Véletlenszerű');
+	$pages = [
+		$config['changes_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Változtatások'],
+		$config['comments_page']		=> ['',		'',		'', false, SET_MENU_ONLY, 'Megjegyzések'],
+		$config['index_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Index'],
+		$config['random_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Véletlenszerű'],
+	];
 }
+
+if (!empty($critical_pages))
+{
+	$pages = array_merge($critical_pages, $pages);
+}
+
+insert_pages($pages, $page_lang);

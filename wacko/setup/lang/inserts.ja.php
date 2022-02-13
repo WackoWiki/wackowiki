@@ -13,36 +13,50 @@ if ($config['language'] == $page_lang)
 			'Click after you have ((/ログイン logged in)) on the "Edit this page" link at the bottom to get started.' . "\n\n" .
 			'Documentation can be found at WackoWiki:Doc/English.' . "\n" .
 			'Useful pages: ((WackoWiki:Doc/English/Formatting Formatting)), ((/検索 検索)).' . "\n\n";
-		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
+		$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
 
-		insert_page($config['root_page'], 'ホームページ', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
-		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
+		$critical_pages = [
+			$config['root_page']		=> ['ホームページ',			$home_page_body,		true, false, null, 0],
+			$admin_page					=> [$config['admin_name'],	$admin_page_body,		true, false, null, 0],
+		];
 	}
 
-	insert_page($config['category_page'],		'カテゴリー',				'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],			'グループ',				'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],			'ユーザー',				'{{users}}',			$page_lang, 'Admins', false, false);
+	$pages = [
+		$config['category_page']		=> ['カテゴリー',				'{{category}}',			false, false],
+		$config['groups_page']			=> ['グループ',				'{{groups}}',			false, false],
+		$config['users_page']			=> ['ユーザー',				'{{users}}',			false, false],
 
-	# insert_page($config['help_page'],			'ヘルプ',					'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['terms_page'],			'利用規約',				'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['privacy_page'],		'プライバシーについて',		'',						$page_lang, 'Admins', false, false);
+		# $config['help_page']			=> ['ヘルプ',				'',						false, false],
+		# $config['terms_page']			=> ['利用規約',				'',						false, false],
+		# $config['privacy_page']		=> ['プライバシーについて',	'',						false, false],
 
-	insert_page($config['registration_page'],	'アカウント作成',			'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'パスワード',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'検索',					'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'ログイン',				'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'設定',					'{{usersettings}}',		$page_lang, 'Admins', false, false);
+		$config['registration_page']	=> ['アカウント作成',			'{{registration}}',		false, false],
+		$config['password_page']		=> ['パスワード',				'{{changepassword}}',	false, false],
+		$config['search_page']			=> ['検索',					'{{search}}',			false, false],
+		$config['login_page']			=> ['ログイン',				'{{login}}',			false, false],
+		$config['account_page']			=> ['設定',					'{{usersettings}}',		false, false],
 
-	insert_page($config['changes_page'],		'最近の変化',				'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, '変化');
-	insert_page($config['comments_page'],		'最近コメント',			'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'コメント');
-	insert_page($config['index_page'],			'ページインデックス',		'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'インデックス');
-	insert_page($config['random_page'],			'ランダムページ',			'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'ランダム');
+		$config['changes_page']			=> ['最近の変化',				'{{changes}}',			false, SET_MENU, '変化'],
+		$config['comments_page']		=> ['最近コメント',			'{{commented}}',		false, SET_MENU, 'コメント'],
+		$config['index_page']			=> ['ページインデックス',		'{{pageindex}}',		false, SET_MENU, 'インデックス'],
+		$config['random_page']			=> ['ランダムページ',			'{{randompage}}',		false, SET_MENU, 'ランダム'],
+	];
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, '変化');
-	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'コメント');
-	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'インデックス');
-	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'ランダム');
+	$pages = [
+		$config['changes_page']			=> ['',		'',		'', false, SET_MENU_ONLY, '変化'],
+		$config['comments_page']		=> ['',		'',		'', false, SET_MENU_ONLY, 'コメント'],
+		$config['index_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'インデックス'],
+		$config['random_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'ランダム'],
+	];
 }
+
+if (!empty($critical_pages))
+{
+	$pages = array_merge($critical_pages, $pages);
+}
+
+insert_pages($pages, $page_lang);
