@@ -324,6 +324,9 @@ table.forum th {
 .approve col:nth-child(9) {
 	width: 200px;
 }
+.approve td:nth-child(2) {
+	padding: 0 5px;
+}
 
 /* groups table */
 .groups col:nth-child(n+1):nth-child(-n+2) {
@@ -336,6 +339,13 @@ table.forum th {
 .groups td:nth-child(3) {
 	padding: 0 5px;
 	font-weight: bold;
+}
+/* members table */
+.members col:nth-child(n+1):nth-child(-n+2) {
+	width: 5px;
+}
+.members td:nth-child(3) {
+	padding: 0 5px;
 }
 
 /* users table */
@@ -366,6 +376,7 @@ table.backup {
 	border-collapse: separate;
 	padding: 4px;
 }
+/* end tables */
 
 .permissions {
 	width: 200px;
