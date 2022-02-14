@@ -69,30 +69,39 @@ function admin_user_groups(&$engine, &$module)
 		// get group
 		if (isset($_GET['group_id']) || isset($_POST['add_member'])|| isset($_POST['remove_member']))
 		{
+			$p_group_id	= (int) ($_POST['group_id'] ?? null);
+			$p_user_id	= (int) ($_POST['member_id'] ?? null);
+
+			$member = $engine->db->load_single(
+				"SELECT user_id, user_name " .
+				"FROM " . $prefix . "user " .
+				"WHERE user_id = " . (int) $p_user_id . " " .
+				"LIMIT 1");
+
 			// add member into group
-			if (isset($_POST['add_member']) && isset($_POST['new_member_id']))
+			if (isset($_POST['add_member']) && $member['user_id'] && $p_group_id)
 			{
 				$engine->db->sql_query(
 					"INSERT INTO " . $prefix . "usergroup_member SET " .
-						"group_id	= " . (int) $_POST['group_id'] . ", " .
-						"user_id	= " . (int) $_POST['new_member_id']);
+						"group_id	= " . (int) $p_group_id . ", " .
+						"user_id	= " . (int) $member['user_id']);
 
 					$engine->config->invalidate_config_cache();
 					$engine->show_message($engine->_t('MembersAdded'), 'success');
-					$engine->log(4, Ut::perc_replace($engine->_t('LogMemberAdded', SYSTEM_LANG), $_POST['new_member_id'], $usergroup['group_name']));
+					$engine->log(4, Ut::perc_replace($engine->_t('LogMemberAdded', SYSTEM_LANG), $member['user_name'], $usergroup['group_name']));
 					unset($_POST['add_member']);
 			}
 			// remove member from group
-			else if (isset($_POST['remove_member']) && isset($_POST['member_id']) && isset($_POST['group_id']))
+			else if (isset($_POST['remove_member']) && $member['user_id'] && $p_group_id)
 			{
 				$engine->db->sql_query(
 					"DELETE FROM " . $prefix . "usergroup_member " .
-					"WHERE group_id = " . (int) $_POST['group_id'] . " " .
-						"AND user_id = " . (int) $_POST['member_id']);
+					"WHERE group_id = " . (int) $p_group_id . " " .
+						"AND user_id = " . (int) $member['user_id']);
 
 				$engine->config->invalidate_config_cache();
 				$engine->show_message($engine->_t('MembersRemoved'), 'success');
-				$engine->log(4, Ut::perc_replace($engine->_t('LogMemberRemoved', SYSTEM_LANG), $_POST['member_id'], $usergroup['group_name']));
+				$engine->log(4, Ut::perc_replace($engine->_t('LogMemberRemoved', SYSTEM_LANG), $member['user_name'], $usergroup['group_name']));
 			}
 
 			/////////////////////////////////////////////
@@ -124,10 +133,10 @@ function admin_user_groups(&$engine, &$module)
 				'<table class="formation">
 					<tr>
 						<td>
-							<label for="new_member_id">' . $engine->_t('MembersAddNew') . '</label>
+							<label for="member_id">' . $engine->_t('MembersAddNew') . '</label>
 						</td>
 						<td>
-							<select id="new_member_id" name="new_member_id">
+							<select id="member_id" name="member_id">
 								<option value=""></option>';
 
 						if ($available_users)
@@ -158,7 +167,7 @@ function admin_user_groups(&$engine, &$module)
 			if (isset($_POST['remove_member']) && isset($_POST['change_member']))
 			{
 				if ($member = $engine->db->load_single(
-					"SELECT user_name " .
+					"SELECT user_id, user_name " .
 					"FROM " . $prefix . "user " .
 					"WHERE user_id = " . (int) $_POST['change_member'] . " " .
 					"LIMIT 1"))
@@ -167,14 +176,13 @@ function admin_user_groups(&$engine, &$module)
 					echo $engine->form_open('remove_group_member');
 
 					echo '<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
-						'<input type="hidden" name="member_id" value="' . (int) $_POST['change_member'] . '">' . "\n" .
+						'<input type="hidden" name="member_id" value="' . (int) $member['user_id'] . '">' . "\n" .
 					'<table class="formation">' .
 						'<tr>
 							<td>' .
 								Ut::perc_replace($engine->_t('MembersRemove'), '<code>' . Ut::html($member['user_name']) . '</code>') . ' ' .
 								'<button type="submit" id="submit" name="remove_member">' . $engine->_t('Remove') . '</button> ' .
 								'<a href="' . $engine->href() . '" class="btn-link"><button type="button" id="button">' . $engine->_t('Cancel') . '</button></a>' .
-								'<br><small>' . $engine->_t('MembersDeleteInfo') . '</small>' .
 							'</td>
 						</tr>' .
 					'</table><br>';
@@ -493,15 +501,18 @@ function admin_user_groups(&$engine, &$module)
 
 		<table class="members formation listcenter lined">
 			<colgroup>
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:5px;">
-				<col span="1" style="width:20px;">
+				<col span="1">
+				<col span="1">
+				<col span="1">
 			</colgroup>
-			<tr>
-				<th></th>
-				<th>ID</th>
-				<th><a href="<?php echo $engine->href() . $orderuser; ?>"><?php echo $engine->_t('UserName');?></a></th>
-			</tr>
+			<thead>
+				<tr>
+					<th></th>
+					<th>ID</th>
+					<th><a href="<?php echo $engine->href() . $orderuser; ?>"><?php echo $engine->_t('UserName');?></a></th>
+				</tr>
+			</thead>
+			<tbody>
 <?php
 		foreach ($members as $member)
 		{
@@ -509,10 +520,11 @@ function admin_user_groups(&$engine, &$module)
 					'<td>
 						<input type="radio" name="change_member" value="' . $member['user_id'] . '"></td>' .
 					'<td>' . $member['user_id'] . '</td>' .
-					'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $member['user_id']]) . '">' . $member['user_name'] . '</a></strong></td>' .
+					'<td><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $member['user_id']]) . '">' . $member['user_name'] . '</a></strong></td>' .
 				'</tr>';
 		}
 			?>
+			</tbody>
 		</table>
 		<?php
 

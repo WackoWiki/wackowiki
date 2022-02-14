@@ -64,6 +64,7 @@ if (!$engine->db->recovery_password)
 	<html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
 		<head>
 			<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
+			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta name="robots" content="noindex, nofollow, noarchive">
 			<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
 			<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
@@ -145,6 +146,7 @@ if (!isset($engine->sess->ap_created))
 <html dir="<?php echo $engine->user_lang_dir; ?>" lang="<?php echo $engine->user_lang; ?>">
 	<head>
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $engine->_t('Authorization'); ?></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/backend.css" media="screen">
 		<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
@@ -305,6 +307,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 	<head>
 		<meta charset="<?php echo $engine->get_charset(); ?>">
 		<title><?php echo $engine->_t('AdminPanel') . ' : ' . $title; ?></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<meta http-equiv="Content-Type" content="text/html;">
 		<link rel="stylesheet" href="<?php echo $engine->db->base_path; ?>admin/style/wiki.css" media="screen">
@@ -312,6 +315,7 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 		<link rel="icon" href="<?php echo $engine->get_favicon(); ?>" type="image/x-icon">
 	</head>
 	<body>
+	<div class="wrapper">
 	<header id="header">
 		<div id="pane">
 			<div class="left"></div>
@@ -344,38 +348,19 @@ header('Content-Type: text/html; charset=' . $engine->get_charset());
 			</div>
 		</div>
 	</header>
-
 <?php
-
-########################################################
-##                     Main Menu                      ##
-########################################################
-
-?>
-	<nav id="menu">
-		<div class="sub">
-<?php
-			echo $menu;
-?>
-		</div>
-	</nav>
-<?php
-
 ########################################################
 ##                  Execute module                    ##
 ########################################################
-
 ?>
-
-<main id="content">
-	<div id="page">
+	<main id="content">
+		<div id="page">
 <?php
 // here we show messages
 $engine->output_messages();
 
 ?>
 <!-- begin page output -->
-
 <?php
 
 if (isset($mode) === true && ($_GET || $_POST))
@@ -402,20 +387,31 @@ else if (!($_GET && $_POST))
 {
 	admin_main($engine, $module['main']);
 }
-
+?>
+	<br>
+	<!-- end page output -->
+		</div>
+	</main>
+<?php
+########################################################
+##                     Main Menu                      ##
+########################################################
+?>
+	<nav id="menu">
+		<div class="sub">
+<?php
+			echo $menu;
+?>
+		</div>
+	</nav>
+<?php
 ########################################################
 ##                     Page footer                    ##
 ########################################################
-
 ?>
-
-<br>
-<!-- end page output -->
+	<footer id="footer">System <a href="https://wackowiki.org/">WackoWiki</a></footer>
+	<!-- end wrapper -->
 	</div>
-</main>
-
-<footer id="footer">System <a href="https://wackowiki.org/">WackoWiki</a></footer>
-
 <?php
 
 // that's all

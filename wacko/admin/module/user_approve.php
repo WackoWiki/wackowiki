@@ -28,9 +28,6 @@ function admin_user_approve(&$engine, &$module)
 	$signup_time	= '';
 	$error			= '';
 	$prefix			= $engine->db->table_prefix;
-
-	#Ut::debug_print_r($_POST);
-	#Ut::debug_print_r($_REQUEST);
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
@@ -315,7 +312,7 @@ function admin_user_approve(&$engine, &$module)
 	echo '<span class="right">' . $search . '</span><br>';
 	echo $filter_status;
 
-	echo $engine->form_open('approve');
+	# echo $engine->form_open('approve');
 
 	/////////////////////////////////////////////
 	//   control buttons
@@ -365,7 +362,7 @@ function admin_user_approve(&$engine, &$module)
 				<th><?php echo $engine->_t('AccountStatus'); ?></th>
 				<th><?php echo $engine->_t('UserActions'); ?></th>
 			</tr>
-		<thead>
+		</thead>
 		<tbody>
 <?php
 	if ($users)
@@ -374,7 +371,7 @@ function admin_user_approve(&$engine, &$module)
 		{
 			echo
 			'<tr>' . "\n" .
-				'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
+				#'<input type="hidden" name="user_id" value="' . $row['user_id'] . '">' .
 				#'<td class="label a-middle" style="width:10px;">' .
 				#	'<input type="checkbox" name="' . $row['user_id'] . '" value="id" ' . ( in_array($row['user_id'], $set) ? ' checked' : '') . '>' .
 				#'</td>' .
@@ -382,7 +379,7 @@ function admin_user_approve(&$engine, &$module)
 				#	'<input type="radio" name="user_id" value="' . $row['user_id'] . '">' .
 				#'</td>' . <a href="' . $engine->href() . '&amp;mode=db_restore">Restore database</a>
 				'<td>' . $row['user_id'] . '</td>' .
-				'<td style="padding-left:5px; padding-right:5px;"><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
+				'<td><strong><a href="' . $engine->href('', '', ['mode' => 'user_users', 'user_id' => $row['user_id']]) . '">' . $row['user_name'] . '</a></strong></td>' .
 				'<td>' . $row['email'] . '</td>' .
 				'<td>' . $row['user_ip'] . '</td>' .
 				'<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang'], 'account_status' => $account_status]) . '">' . $row['user_lang'] . '</a></small></td>' .
@@ -415,6 +412,5 @@ function admin_user_approve(&$engine, &$module)
 	/////////////////////////////////////////////
 
 	# echo $control_buttons;
-	echo $engine->form_close();
+	# echo $engine->form_close();
 }
-

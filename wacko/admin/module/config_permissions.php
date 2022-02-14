@@ -74,7 +74,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small><?php echo $engine->_t('ReadRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:200px; height:50px;" id="default_read_acl" name="default_read_acl"><?php echo Ut::html($engine->db->default_read_acl);?></textarea>
+					<textarea class="permissions" id="default_read_acl" name="default_read_acl"><?php echo Ut::html($engine->db->default_read_acl);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -86,7 +86,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small><?php echo $engine->_t('WriteRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:200px; height:50px;" id="default_write_acl" name="default_write_acl"><?php echo Ut::html($engine->db->default_write_acl);?></textarea>
+					<textarea class="permissions" id="default_write_acl" name="default_write_acl"><?php echo Ut::html($engine->db->default_write_acl);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -98,7 +98,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small><?php echo $engine->_t('CommentRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:200px; height:50px;" id="default_comment_acl" name="default_comment_acl"><?php echo Ut::html($engine->db->default_comment_acl);?></textarea>
+					<textarea class="permissions" id="default_comment_acl" name="default_comment_acl"><?php echo Ut::html($engine->db->default_comment_acl);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -110,7 +110,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small><?php echo $engine->_t('CreateRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:200px; height:50px;" id="default_create_acl" name="default_create_acl"><?php echo Ut::html($engine->db->default_create_acl);?></textarea>
+					<textarea class="permissions" id="default_create_acl" name="default_create_acl"><?php echo Ut::html($engine->db->default_create_acl);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -122,7 +122,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small><?php echo $engine->_t('UploadRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:200px; height:50px;" id="default_upload_acl" name="default_upload_acl"><?php echo Ut::html($engine->db->default_upload_acl);?></textarea>
+					<textarea class="permissions" id="default_upload_acl" name="default_upload_acl"><?php echo Ut::html($engine->db->default_upload_acl);?></textarea>
 				</td>
 			</tr>
 			<tr class="lined">
@@ -134,7 +134,7 @@ function admin_config_permissions(&$engine, &$module)
 					<small><?php echo $engine->_t('RenameRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea style="width:200px; height:50px;" id="rename_globalacl" name="rename_globalacl"><?php echo Ut::html($engine->db->rename_globalacl);?></textarea>
+					<textarea class="permissions" id="rename_globalacl" name="rename_globalacl"><?php echo Ut::html($engine->db->rename_globalacl);?></textarea>
 				</td>
 			</tr>
 			<tr class="hl-setting">
