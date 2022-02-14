@@ -6,43 +6,43 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Note: It is recommended that access to the site be temporarily blocked for administrative maintenance.',
+	'MainNote'					=> '注意：建议暂时禁止访问该站点以进行管理维护。',
 
 	'CategoryArray'		=> [
-		'basics'		=> 'Basic functions',
-		'preferences'	=> 'Preferences',
-		'content'		=> 'Content',
+		'basics'		=> '基本功能',
+		'preferences'	=> '偏好',
+		'content'		=> '内容',
 		'users'			=> '用户',
-		'maintenance'	=> 'Maintenance',
-		'messages'		=> 'Messages',
-		'extension'		=> 'Extension',
+		'maintenance'	=> '维护',
+		'messages'		=> '消息',
+		'extension'		=> '扩展',
 		'database'		=> '数据库',
 	],
 
 	// Admin panel
-	'AdminPanel'				=> 'Administration Control Panel',
-	'RecoveryMode'				=> 'Recovery Mode',
-	'Authorization'				=> 'Authorization',
-	'AuthorizationTip'			=> 'Please enter the administrative password (make also sure that cookies are allowed in your browser).',
-	'NoRecoveryPassword'		=> 'The administrative password is not specified!',
-	'NoRecoveryPasswordTip'		=> 'Note: The absence of an administrative password is threat to security! Enter your password in the configuration file and run the program again.',
+	'AdminPanel'				=> '管理面板',
+	'RecoveryMode'				=> '恢复模式',
+	'Authorization'				=> '身份认证',
+	'AuthorizationTip'			=> '请输入管理密码 （同时确保您的浏览器中允许的 cookie）。',
+	'NoRecoveryPassword'		=> '未指定管理密码 ！',
+	'NoRecoveryPasswordTip'		=> '注意：没有管理密码会对安全构成威胁！请在配置文件中输入您的密码，然后再次运行程序。',
 
-	'ErrorLoadingModule'		=> 'Error loading admin module %1: does not exists.',
+	'ErrorLoadingModule'		=> '加载管理模块 %1时出错：不存在。',
 
 	'ApHomePage'				=> '主页',
-	'ApHomePageTip'				=> 'open the home page, you do not quit administration',
+	'ApHomePageTip'				=> '打开主页，您不会退出管理',
 	'ApLogOut'					=> '退出',
-	'ApLogOutTip'				=> 'quit system administration',
+	'ApLogOutTip'				=> '退出管理',
 
-	'TimeLeft'					=> 'Time left:  %1 minutes',
+	'TimeLeft'					=> '剩余时间:  %1 分钟',
 	'ApVersion'					=> '版本',
 
-	'SiteOpen'					=> 'Open',
-	'SiteOpened'				=> 'site opened',
-	'SiteOpenedTip'				=> 'The site is open',
-	'SiteClose'					=> 'Close',
-	'SiteClosed'				=> 'site closed',
-	'SiteClosedTip'				=> 'The site is closed',
+	'SiteOpen'					=> '打开',
+	'SiteOpened'				=> '站点已开启',
+	'SiteOpenedTip'				=> '该站点已启用',
+	'SiteClose'					=> '关闭',
+	'SiteClosed'				=> '网站已关闭',
+	'SiteClosedTip'				=> '网站已关闭',
 
 	// Generic
 	'Cancel'					=> '取消',
@@ -50,14 +50,14 @@ $ap_translation = [
 	'Edit'						=> '編輯',
 	'Remove'					=> '删除',
 	'Enabled'					=> '启用',
-	'Disabled'					=> 'Disabled',
-	'Mandatory'					=> 'Mandatory',
+	'Disabled'					=> '禁用',
+	'Mandatory'					=> '必填',
 	'Admin'						=> '管理',
 
-	'MiscellaneousSection'		=> 'Miscellaneous',
-	'MainSection'				=> 'General Options',
+	'MiscellaneousSection'		=> '杂项',
+	'MainSection'				=> '常规',
 
-	'DirNotWritable'			=> 'The %1 directory is not writable.',
+	'DirNotWritable'			=> '%1 目录不可写.',
 
 	/**
 	 * AP MENU
@@ -76,26 +76,26 @@ $ap_translation = [
 
 	// Config Appearance module
 	'config_appearance'		=> [
-		'name'		=> 'Appearance',
-		'title'		=> 'Appearance settings',
+		'name'		=> '外观',
+		'title'		=> '外观设置',
 	],
 
 	// Config Email module
 	'config_email'		=> [
 		'name'		=> '电子邮件',
-		'title'		=> 'Email settings',
+		'title'		=> '邮件设置',
 	],
 
 	// Config Filter module
 	'config_filter'		=> [
-		'name'		=> 'Filter',
-		'title'		=> 'Filter settings',
+		'name'		=> '过滤',
+		'title'		=> '过滤设置',
 	],
 
 	// Config Formatter module
 	'config_formatter'		=> [
-		'name'		=> 'Formatter',
-		'title'		=> 'Formatting options',
+		'name'		=> '格式化',
+		'title'		=> '格式化选项',
 	],
 
 	// Config Notifications module
@@ -107,345 +107,326 @@ $ap_translation = [
 	// Config Pages module
 	'config_pages'		=> [
 		'name'		=> '页面',
-		'title'		=> 'Pages and site parameters',
+		'title'		=> '页面和站点参数',
 	],
 
 	// Config Permissions module
 	'config_permissions'		=> [
 		'name'		=> '权限',
-		'title'		=> 'Permissions settings',
+		'title'		=> '权限设置',
 	],
 
 	// Config Security module
 	'config_security'		=> [
-		'name'		=> 'Security',
-		'title'		=> 'Security subsystems settings',
+		'name'		=> '安全',
+		'title'		=> '安全子项设置',
 	],
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
-		'title'		=> 'System options',
+		'name'		=> '系统',
+		'title'		=> '系统选项',
 	],
 
 	// Config Upload module
 	'config_upload'		=> [
 		'name'		=> '上传',
-		'title'		=> 'Attachment settings',
+		'title'		=> '附件设置',
 	],
 
 	// Deleted module
 	'content_deleted'		=> [
-		'name'		=> 'Deleted',
-		'title'		=> 'Newly deleted content',
+		'name'		=> '刪除',
+		'title'		=> '新删除的内容',
 	],
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menu',
-		'title'		=> 'Add, edit or remove default menu items',
-	],
-
-	// Polls module
-	'content_polls'		=> [
-		'name'		=> 'Polls',
-		'title'		=> 'Editing, start and stop polls',
+		'name'		=> '菜单',
+		'title'		=> '添加、编辑或删除默认菜单项',
 	],
 
 	// DB Backup module
 	'db_backup'		=> [
-		'name'		=> 'Backup',
-		'title'		=> 'Backing up data',
+		'name'		=> '备份',
+		'title'		=> '正在备份数据',
 	],
 
 	// DB Convert module
 	'db_convert'		=> [
 		'name'		=> '转换',
-		'title'		=> 'Converting Tables or Columns',
+		'title'		=> '转换表或列',
 	],
 
 	// DB Repair module
 	'db_repair'		=> [
-		'name'		=> 'Repair',
-		'title'		=> 'Repair and Optimize Database',
+		'name'		=> '修复',
+		'title'		=> '修复和优化数据库',
 	],
 
 	// DB Restore module
 	'db_restore'		=> [
 		'name'		=> '恢复',
-		'title'		=> 'Restoring backup data',
+		'title'		=> '正在恢复备份数据',
 	],
 
 	// Dashboard module
 	'main'		=> [
-		'name'		=> 'Main Menu',
-		'title'		=> 'WackoWiki Administration',
+		'name'		=> '主菜单',
+		'title'		=> 'WackoWiki 管理',
 	],
 
 	// Inconsistencies module
 	'maint_inconsistencies'		=> [
-		'name'		=> 'Inconsistencies',
-		'title'		=> 'Fixing Data Inconsistencies',
+		'name'		=> '不一致',
+		'title'		=> '修复数据不一致问题',
 	],
 
 	// Data Synchronization module
 	'maint_resync'		=> [
-		'name'		=> 'Data Synchronization',
-		'title'		=> 'Synchronizing data',
+		'name'		=> '数据同步',
+		'title'		=> '正在同步',
 	],
 
 	// Mass email module
 	'massemail'		=> [
-		'name'		=> 'Mass email',
-		'title'		=> 'Mass email',
+		'name'		=> '群发邮件',
+		'title'		=> '群发邮件',
 	],
 
 	// System message module
 	'messages'		=> [
-		'name'		=> 'System message',
-		'title'		=> 'System messages',
+		'name'		=> '系统消息',
+		'title'		=> '系统消息',
 	],
 
 	// System Info module
 	'system_info'		=> [
-		'name'		=> 'System Info',
-		'title'		=> 'System Information',
+		'name'		=> '系统信息',
+		'title'		=> '系统信息',
 	],
 
 	// System log module
 	'system_log'		=> [
-		'name'		=> 'System log',
-		'title'		=> 'Log of system events',
+		'name'		=> '系统日志',
+		'title'		=> '系统事件记录',
 	],
 
 	// Statistics module
 	'system_statistics'		=> [
-		'name'		=> 'Statistics',
-		'title'		=> 'Show statistics',
+		'name'		=> '统计',
+		'title'		=> '显示统计信息',
 	],
 
 	// Bad Behavior module
 	'tool_badbehavior'		=> [
-		'name'		=> 'Bad Behavior',
-		'title'		=> 'Bad Behavior',
+		'name'		=> '错误行为',
+		'title'		=> '错误行为',
 	],
 
 	// Registration Approval module
 	'user_approve'		=> [
-		'name'		=> 'Approve',
-		'title'		=> 'User registration approval',
+		'name'		=> '审核',
+		'title'		=> '用户注册审核',
 	],
 
 	// Groups module
 	'user_groups'		=> [
 		'name'		=> '群组',
-		'title'		=> 'Group management',
+		'title'		=> '组管理',
 	],
 
 	// User module
 	'user_users'		=> [
 		'name'		=> '用户',
-		'title'		=> 'User management',
+		'title'		=> '用户管理',
 	],
 
 	// Main module
-	'PurgeSessions'				=> 'Purge',
-	'PurgeSessionsTip'			=> 'Purge all sessions',
-	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',
-	'PurgeSessionsExplain'		=> 'Purge all sessions. This will log out all users by truncating the auth_token table.',
-	'PurgeSessionsDone'			=> 'Sessions successfully purged.',
+	'PurgeSessions'				=> '清除',
+	'PurgeSessionsTip'			=> '清除所有会话',
+	'PurgeSessionsConfirm'		=> '您确定要清除所有会话吗？这将注销所有用户。',
+	'PurgeSessionsExplain'		=> '清除所有会话。这将通过截断auth_token 表来注销所有用户。',
+	'PurgeSessionsDone'			=> '会话已成功清除。',
 
 	// Basic settings
 	'BasicSettingsInfo'			=> '',
-	'BasicSettingsUpdated'		=> 'Updated basic settings',
-	'LogBasicSettingsUpdated'	=> 'Updated basic settings',
+	'BasicSettingsUpdated'		=> '已更新基本设置',
+	'LogBasicSettingsUpdated'	=> '已更新基本设置',
 
-	'SiteName'					=> 'Site Name',
-	'SiteNameInfo'				=> 'The title of this site, appears on browser title, theme header, email-notification, etc.',
-	'SiteDesc'					=> 'Site Description:',
-	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
-	'AdminName'					=> 'Admin of Site',
-	'AdminNameInfo'				=> 'User name, which is responsible for overall support of the site. This name is not used to determine access rights, but it is desirable to conform to the name of the chief administrator of the site.',
+	'SiteName'					=> '站点名称',
+	'SiteNameInfo'				=> '网站名称将显示在浏览器标题、主题标题、电子邮件通知等。',
+	'SiteDesc'					=> '站点描述',
+	'SiteDescInfo'				=> '补充页面头部中显示的站点标题，用几个字解释这个站点是什么。',
+	'AdminName'					=> '站点管理',
+	'AdminNameInfo'				=> '用户名，负责网站的整体支持。 此名称不用于确定访问权限，但最好与站点首席管理员的名称一致。',
 
 	'LanguageSection'			=> '语言',
-	'DefaultLanguage'			=> 'Default language',
-	'DefaultLanguageInfo'		=> 'Specifies the language of messages displayed to unregistered guests, as well as the locale settings.',
-	'MultiLanguage'				=> 'Multilanguage support',
-	'MultiLanguageInfo'			=> 'Enable the ability to select a language on a page-by-page basis.',
-	'AllowedLanguages'			=> 'Allowed languages',
-	'AllowedLanguagesInfo'		=> 'It is recommended to select only the set of languages you want to use, other wise all languages are selected.',
+	'DefaultLanguage'			=> '默认语言',
+	'DefaultLanguageInfo'		=> '指定未注册访客以及区域设置中显示的消息语言。',
+	'MultiLanguage'				=> '多语言支持',
+	'MultiLanguageInfo'			=> '启用按页面选择语言的功能。',
+	'AllowedLanguages'			=> '允许使用的语言',
+	'AllowedLanguagesInfo'		=> '建议仅选择您要使用的语言集，否则选择所有语言。',
 
 	'CommentSection'			=> '评论',
-	'AllowComments'				=> 'Allow comments',
-	'AllowCommentsInfo'			=> 'Enable comments for guest or registered users only or disable them on the entire site.',
-	'SortingComments'			=> 'Sorting comments',
-	'SortingCommentsInfo'		=> 'Changes the order the page comments are presented, either with the most recent OR the oldest comment at the top.',
+	'AllowComments'				=> '允许评论',
+	'AllowCommentsInfo'			=> '仅为访客或注册用户启用评论或在整个站点禁用它们。',
+	'SortingComments'			=> '评论排序',
+	'SortingCommentsInfo'		=> '更改页面评论的顺序，或者是最新的或是最老的评论在顶部。',
 
-	'ToolbarSection'			=> 'Toolbar',
-	'CommentsPanel'				=> 'Comments panel',
-	'CommentsPanelInfo'			=> 'The default display of comments in the bottom of the page.',
-	'FilePanel'					=> 'File panel',
-	'FilePanelInfo'				=> 'The default display of attachments in the bottom of the page.',
+	'ToolbarSection'			=> '工具栏',
+	'CommentsPanel'				=> '评论面板',
+	'CommentsPanelInfo'			=> '附件默认显示在页面底部。',
+	'FilePanel'					=> '文件面板',
+	'FilePanelInfo'				=> '附件默认显示在页面底部。',
 	'RatingPanel'				=> 'Rating panel',
 	'RatingPanelInfo'			=> 'The default display of the rating panel in the bottom of the page.',
-	'TagsPanel'					=> 'Tags panel',
-	'TagsPanelInfo'				=> 'The default display of the tags panel in the bottom of the page.',
+	'TagsPanel'					=> '标签面板',
+	'TagsPanelInfo'				=> '标签面板默认显示在页面底部。',
 
-	'NavigationSection'			=> 'Navigation',
-	'ShowPermalink'				=> 'Show Permalink',
-	'ShowPermalinkInfo'			=> 'The default display of the permalink for the current version of the page.',
-	'TocPanel'					=> 'Table of contents panel',
-	'TocPanelInfo'				=> 'The default display table of contents panel of a page (may need support in the templates).',
-	'SectionsPanel'				=> 'Sections panel',
-	'SectionsPanelInfo'			=> 'By default display the panel of adjacent pages (requires support in the templates).',
-	'DisplayingSections'		=> 'Displaying sections',
-	'DisplayingSectionsInfo'	=> 'When the previous options, whether to display only subpages of page (<em>lower</em>), only neighbor (<em>top</em>) or both, and other (<em>tree</em>).',
-	'MenuItems'					=> 'Menu items',
-	'MenuItemsInfo'				=> 'Default number of shown menu items (may need support in the templates).',
+	'NavigationSection'			=> '导航',
+	'ShowPermalink'				=> '显示永久链接',
+	'ShowPermalinkInfo'			=> '当前版本的永久链接默认显示.',
+	'TocPanel'					=> '目录面板',
+	'TocPanelInfo'				=> '页面的默认显示目录面板（可能需要模板支持）。',
+	'SectionsPanel'				=> '区段面板',
+	'SectionsPanelInfo'			=> '默认显示相邻页面的面板（需要模板支持）。',
+	'DisplayingSections'		=> '显示部分',
+	'DisplayingSectionsInfo'	=> '当上一个选项时，是否只显示页面的子页面(<em>较低</em>) 只有邻居(<em>顶部</em>)或两者和其他(<em>tree</em>)。',
+	'MenuItems'					=> '菜单项',
+	'MenuItemsInfo'				=> '默认显示菜单项数量 (可能需要模板中的支持)。',
 
-	'HandlerSection'			=> 'Handler',
-	'HideRevisions'				=> 'Hide Revisions',
-	'HideRevisionsInfo'			=> 'The default display of revisions of the page.',
-	'AttachmentHandler'			=> 'Enable attachments handler',
-	'AttachmentHandlerInfo'		=> 'Allows to show the attachments handler.',
-	'SourceHandler'				=> 'Enable source handler',
-	'SourceHandlerInfo'			=> 'Allows to show the source handler.',
-	'ExportHandler'				=> 'Enable XML export handler',
-	'ExportHandlerInfo'			=> 'Allows to show the XML export handler.',
+	'HandlerSection'			=> '处理器',
+	'HideRevisions'				=> '隐藏修订版本',
+	'HideRevisionsInfo'			=> '默认显示页面的修订版。',
+	'AttachmentHandler'			=> '启用附件处理程序',
+	'AttachmentHandlerInfo'		=> '允许显示附件处理程序。',
+	'SourceHandler'				=> '启用源代码处理器',
+	'SourceHandlerInfo'			=> '允许显示源代码处理器。',
+	'ExportHandler'				=> '启用 XML 导出处理器',
+	'ExportHandlerInfo'			=> '允许显示附件处理程序。',
 
-	'FeedsSection'				=> 'Feeds',
-	'EnableFeeds'				=> 'Enable feeds',
-	'EnableFeedsInfo'			=> 'Turns RSS feeds on or off  for the entire wiki.',
+	'FeedsSection'				=> '订阅',
+	'EnableFeeds'				=> '启用Feeds',
+	'EnableFeedsInfo'			=> '打开或关闭整个维基的 RSS 源.',
 
-	'XmlSitemap'				=> 'XML Sitemap',
-	'XmlSitemapInfo'			=> 'Creates an XML file called %1 inside the xml folder. You can add the path to the sitemap in the robots.txt file in your root directory as follows:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
-	'XmlSitemapTime'			=> 'XML Sitemap generation time',
-	'XmlSitemapTimeInfo'		=> 'Generates the Sitemap only once in the given number of days, zero means on every page change.',
+	'XmlSitemap'				=> 'XML 网站地图',
+	'XmlSitemapInfo'			=> '在 xml 文件夹中创建名为 %1 的 XML 文件。 您可以在您的根目录中的 roots.txt 文件中将路径添加到站点地图：',
+	'XmlSitemapGz'				=> 'XML 网站地图压缩',
+	'XmlSitemapGzInfo'			=> '如果你愿意，你可以使用 gzip 压缩你的站点地图文本文件，以减少你的带宽要求。',
+	'XmlSitemapTime'			=> 'XML 网站地图生成时间',
+	'XmlSitemapTimeInfo'		=> '在给定的天数内仅生成一次站点地图，零表示每次页面更改均生成。',
 
 	'SearchSection'				=> '搜尋',
-	'OpenSearch'				=> 'OpenSearch',
+	'OpenSearch'				=> '开放搜索',
 	'OpenSearchInfo'			=> '在XML文件夹中创建OpenSearch描述文件，并在HTML标题中启用搜索插件的Autodiscovery。',
-	'SearchEngineVisibility'	=> 'Block search engines (Search Engine Visibility)',
-	'SearchEngineVisibilityInfo'=> 'Block search engines, but allow normal visitors. Overrides page settings. <br>Discourage search engines from indexing this site, It is up to search engines to honor this request.',
+	'SearchEngineVisibility'	=> '屏蔽搜索引擎 (搜索引擎可见性)',
+	'SearchEngineVisibilityInfo'=> '屏蔽搜索引擎，但允许正常访客。覆盖页面设置。 <br>阻止搜索引擎索引此站点。它取决于搜索引擎来满足此请求。',
 
-	'DiffModeSection'			=> 'Diff Modes',
-	'DefaultDiffModeSetting'	=> 'Default diff mode',
-	'DefaultDiffModeSettingInfo'=> 'Preselected diff mode.',
-	'AllowedDiffMode'			=> 'Allowed Diff modes',
-	'AllowedDiffModeInfo'		=> 'It is recommended to select only the set of diff modes you want to use, other wise all diff modes are selected.',
-	'NotifyDiffMode'			=> 'Notify diff mode',
-	'NotifyDiffModeInfo'		=> 'Diff mode used for notifications in the email body.',
+	'DiffModeSection'			=> '差异模式',
+	'DefaultDiffModeSetting'	=> '默认差异模式',
+	'DefaultDiffModeSettingInfo'=> '预选的差异模式。',
+	'AllowedDiffMode'			=> '允许的差异模式',
+	'AllowedDiffModeInfo'		=> '建议仅选择您要使用的差异模式集，否则将选择所有差异模式。',
+	'NotifyDiffMode'			=> '通知差异模式',
+	'NotifyDiffModeInfo'		=> '用于电子邮件正文中通知的差异模式。',
 
-	'EditingSection'			=> 'Editing',
+	'EditingSection'			=> '编辑中',
 	'EditSummary'				=> '簡述您的修改',
-	'EditSummaryInfo'			=> 'Shows change summary in the edit mode.',
+	'EditSummaryInfo'			=> '在编辑模式下显示修改摘要。',
 	'MinorEdit'					=> '這是一個細微的更改v',
-	'MinorEditInfo'				=> 'Enables minor edit option in the edit mode.',
-	'ReviewSettings'			=> 'Review',
-	'ReviewSettingsInfo'		=> 'Enables review option in the edit mode.',
-	'PublishAnonymously'		=> 'Allow anonymous publishing',
-	'PublishAnonymouslyInfo'	=> 'Allow users to published preferably anonymously (to hide the name).',
+	'MinorEditInfo'				=> '在编辑模式下启用次要的编辑选项。',
+	'ReviewSettings'			=> '审阅',
+	'ReviewSettingsInfo'		=> '在编辑模式下启用次要的编辑选项。',
+	'PublishAnonymously'		=> '允许匿名发布',
+	'PublishAnonymouslyInfo'	=> '允许用户匿名发布(隐藏名称)。',
 
-	'DefaultRenameRedirect'		=> 'When renaming put redirection',
-	'DefaultRenameRedirectInfo'	=> 'By default, offer to set a redirect to the old address of the page being renamed.',
-	'StoreDeletedPages'			=> 'Keep deleted pages',
-	'StoreDeletedPagesInfo'		=> 'When you delete a page, a comment or a file, keep it in a special section, where it will be available for review and recovery for some more time (as described below).',
-	'KeepDeletedTime'			=> 'Storage time of deleted pages',
-	'KeepDeletedTimeInfo'		=> 'The period in days. It makes sense only with the previous option. Zero indicates the eternal possession (in this case the administrator can clear the "cart" manually).',
-	'PagesPurgeTime'			=> 'Storage time of page revisions',
-	'PagesPurgeTimeInfo'		=> 'Automatically deletes the older versions within the given number of days. If you enter zero, the older versions will not be removed.',
-	'EnableReferrers'			=> 'Enable Referrers',
-	'EnableReferrersInfo'		=> 'Allows to store and show external referrers.',
-	'ReferrersPurgeTime'		=> 'Storage time of referrers',
-	'ReferrersPurgeTimeInfo'	=> 'Keep the history of referring external pages no longer than a given number of days. Zero means eternal storage, but for an actively visited site this can lead to database overflow.',
-	'EnableCounters'			=> 'Hit Counters',
-	'EnableCountersInfo'		=> 'Allows per page hit counters and enables display of simple statistics. Views of the page owner are not counted.',
+	'DefaultRenameRedirect'		=> '重命名时重定向',
+	'DefaultRenameRedirectInfo'	=> '默认情况下，要设置重定向到重定向页面的旧地址。',
+	'StoreDeletedPages'			=> '保留已删除页面',
+	'StoreDeletedPagesInfo'		=> '当您删除一个页面、一个评论或一个文件时，将其保留在一个特殊的章节中。 如上文所述，将在更长的时间内进行审查和追回(见下文)。',
+	'KeepDeletedTime'			=> '已删除页面的存储时间',
+	'KeepDeletedTimeInfo'		=> '这段时间是几天后的时间。仅仅对前一个选项是有意义的。 零表示永久占有权（在这种情况下，管理员可以手动清除“购物车”）。',
+	'PagesPurgeTime'			=> '页面修订的存储时间',
+	'PagesPurgeTimeInfo'		=> '在给定天数内自动删除旧版本。如果您输入零，旧版本将不会被删除。',
+	'EnableReferrers'			=> '启用来源项',
+	'EnableReferrersInfo'		=> '允许存储和显示外部引用。',
+	'ReferrersPurgeTime'		=> '引用的存储时间',
+	'ReferrersPurgeTimeInfo'	=> '保持引用外部页面的历史不超过给定的天数。 零意味着永久存储，但对于一个积极访问的站点，这可能导致数据库溢出。',
+	'EnableCounters'			=> '点击计数器',
+	'EnableCountersInfo'		=> '允许每个页面点击计数器并允许显示简单的统计数据。页面所有者的视图不被计数。',
 
 	// Appearance settings
-	'AppearanceSettingsInfo'	=> 'Control default display settings for your site.',
-	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+	'AppearanceSettingsInfo'	=> '控制网站默认显示设置。',
+	'AppearanceSettingsUpdated'	=> '更新外观设置。',
 
 	'LogoOff'					=> '关闭',
-	'LogoOnly'					=> 'logo',
-	'LogoAndTitle'				=> 'logo and title',
+	'LogoOnly'					=> '网站标志(Logo)',
+	'LogoAndTitle'				=> 'LOGO和标题',
 
-	'LogoSection'				=> 'Logo',
-	'SiteLogo'					=> 'Site Logo',
-	'SiteLogoInfo'				=> 'Your logo will appear typically at the top left corner of the application. Max size is 2 MiB. Optimal dimensions are 255 pixels wide by 55 pixels high.',
-	'LogoDimensions'			=> 'Logo dimensions',
-	'LogoDimensionsInfo'		=> 'Width and height of the displayed Logo.',
-	'LogoDisplayMode'			=> 'Logo display mode',
-	'LogoDisplayModeInfo'		=> 'Defines the appearance of the Logo. Default is off.',
+	'LogoSection'				=> '标识logo',
+	'SiteLogo'					=> '站点LOGO',
+	'SiteLogoInfo'				=> '您的LOGO一般会出现在左上角。 最大2 MiB。最优尺寸为 255 X55 像素。',
+	'LogoDimensions'			=> 'LOGO尺寸',
+	'LogoDimensionsInfo'		=> '显示的 Logo 的宽度和高度',
+	'LogoDisplayMode'			=> 'LOGO显示模式',
+	'LogoDisplayModeInfo'		=> '定义Logo的外观。默认关闭。',
 	'FaviconSection'			=> 'Favicon',
-	'SiteFavicon'				=> 'Site Favicon',
-	'SiteFaviconInfo'			=> 'Your shortcut icon, or favicon, is displayed in the address bar, tabs and bookmarks of most browsers. This will override the favicon of your theme.',
-	'SiteFaviconTooBig'			=> 'Favicon is bigger than 64 × 64px.',
-	'LayoutSection'				=> 'Layout',
-	'Theme'						=> 'Theme',
-	'ThemeInfo'					=> 'Template design the site uses by default.',
-	'ResetUserTheme'			=> 'Reset all user themes',
-	'ResetUserThemeInfo'		=> 'Resets all user themes. Warning: This action will set back all user selected themes to the global default theme.',
-	'SetBackUserTheme'			=> 'Set back all user themes to %1 theme.',
-	'ThemesAllowed'				=> 'Allowed Themes',
-	'ThemesAllowedInfo'			=> 'Select the allowed themes, which the user can choose, otherwise all available themes are allowed.',
-	'ThemesPerPage'				=> 'Themes per page',
-	'ThemesPerPageInfo'			=> 'Allow themes per page, which the page owner can choose via page properties.',
+	'SiteFavicon'				=> '网站Favicon',
+	'SiteFaviconInfo'			=> '您的快捷图标或收藏夹显示在大多数浏览器的地址栏、标签和书签中。这将覆盖您主题的图标。',
+	'SiteFaviconTooBig'			=> 'Favicon 大于 64 × 64px。',
+	'LayoutSection'				=> '布局',
+	'Theme'						=> '界面主题',
+	'ThemeInfo'					=> '默认情况下的模板设计。',
+	'ResetUserTheme'			=> '重置所有用户主题',
+	'ResetUserThemeInfo'		=> '重置所有用户主题。警告：此操作将将所有用户选择的主题恢复到全局默认主题。',
+	'SetBackUserTheme'			=> '将所有用户主题设为 %1 主题。',
+	'ThemesAllowed'				=> '允许的主题',
+	'ThemesAllowedInfo'			=> '选择用户可以选择的允许主题，否则允许所有可用主题。',
+	'ThemesPerPage'				=> '每页主题数',
+	'ThemesPerPageInfo'			=> '允许每页主题，页面所有者可以通过页面属性选择主题。',
 	'ThemeColor'				=> '地址栏的主题颜色',
 	'ThemeColorInfo'			=> '浏览器会根据所提供的CSS颜色来设置每个页面的地址栏颜色。',
 
 	// System settings
-	'SystemSettingsInfo'		=> 'Group of parameters responsible for the fine tuning platform. Do not change them unless you are confident in their actions.',
-	'SystemSettingsUpdated'		=> 'Updated system settings',
+	'SystemSettingsInfo'		=> '负责微调平台的参数组。除非您对其操作有信心，否则不改变它们。',
+	'SystemSettingsUpdated'		=> '更新系统设置',
 
-	'DebugModeSection'			=> 'Debug mode',
-	'DebugMode'					=> 'Debug mode',
-	'DebugModeInfo'				=> 'Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.',
+	'DebugModeSection'			=> '调试模式',
+	'DebugMode'					=> '调试模式',
+	'DebugModeInfo'				=> '程序时间确定和撤回遥测数据。 注：该制度的全部细节对现有的记忆提出了很高的要求，特别是要求进行诸如备份和恢复数据库等操作。',
 	'DebugModes'	=> [
-		'0'		=> 'debugging is off',
-		'1'		=> 'only the total execution time',
+		'0'		=> '调试功能已关闭',
+		'1'		=> '仅执行时间',
 		'2'		=> 'full-time',
-		'3'		=> 'full detail (DBMS, cache, etc.)',
+		'3'		=> '完整详细信息 (DBMS，缓存等)',
 	],
-	'DebugSqlThreshold'			=> 'Threshold performance RDBMS',
-	'DebugSqlThresholdInfo'		=> 'In the detailed debug mode to record only the queries take longer than the number of seconds.',
-	'DebugAdminOnly'			=> 'Closed diagnosis',
-	'DebugAdminOnlyInfo'		=> 'Show debug data of the program (and DBMS) only for the administrator.',
+	'DebugSqlThreshold'			=> '临界值 RDBMS',
+	'DebugSqlThresholdInfo'		=> '在详细的调试模式中，只有查询需要更长时间才能记录。',
+	'DebugAdminOnly'			=> '已关闭的诊断程序',
+	'DebugAdminOnlyInfo'		=> '仅为管理员显示程序的调试数据 (和 DBMS)。',
 
-	'CachingSection'			=> 'Caching Options',
-	'Cache'						=> 'Cache rendered pages',
-	'CacheInfo'					=> 'Save rendered pages in the local cache to speed up the subsequent boot. Valid only for unregistered visitors.',
-	'CacheTtl'					=> 'Term relevance cached pages',
-	'CacheTtlInfo'				=> 'Cache pages no more than a specified number of seconds.',
-	'CacheSql'					=> 'Cache DBMS queries',
-	'CacheSqlInfo'				=> 'Maintain a local cache the results of certain resource-SQL-queries.',
-	'CacheSqlTtl'				=> 'Term relevance Cache Database',
-	'CacheSqlTtlInfo'			=> 'Cache results of SQL-queries for no more than the specified number of seconds. Using the values of more than 1200 is not desirable.',
+	'CachingSection'			=> '缓存设置',
+	'Cache'						=> '缓存已呈现页面',
+	'CacheInfo'					=> '在本地缓存中保存呈现的页面以加速后续引导。仅对未注册访客有效。',
+	'CacheTtl'					=> '字段相关缓存页面',
+	'CacheTtlInfo'				=> '缓存页面不超过指定的秒数。',
+	'CacheSql'					=> '缓存 DBMS 查询',
+	'CacheSqlInfo'				=> '保持本地缓存某些资源 SQL 查询的结果。',
+	'CacheSqlTtl'				=> '字段相关缓存数据库',
+	'CacheSqlTtlInfo'			=> '缓存不超过指定秒数的 SQL 查询结果。使用超过 1200 的值是不可取的。',
 
-	'PrivacySection'			=> 'Privacy',
-	'AnonymizeIp'				=> 'Anonymize users IP addresses',
-	'AnonymizeIpInfo'			=> 'Anonymize IP addresses where applicable like page, revision or referrers.',
+	'PrivacySection'			=> '隐私政策',
+	'AnonymizeIp'				=> '匿名用户 IP 地址',
+	'AnonymizeIpInfo'			=> '匿名IP地址，如页面、修订或推荐。',
 
-	'ReverseProxySection'		=> 'Reverse Proxy',
-	'ReverseProxy'				=> 'Use Reverse proxy',
-	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
-									 client by examining information stored in the X-Forwarded-For headers.
-									 X-Forwarded-For headers are a standard mechanism for identifying client
-									 systems connecting through a reverse proxy server, such as Squid or
-									 Pound. Reverse proxy servers are often used to enhance the performance
-									 of heavily visited sites and may also provide other site caching,
-									 security or encryption benefits. If this WackoWiki installation operates
-									 behind a reverse proxy, this setting should be enabled so that correct
-									 IP address information is captured in WackoWiki\'s session management,
-									 logging, statistics and access management systems; if you are unsure
-									 about this setting, do not have a reverse proxy, or WackoWiki operates in
-									 a shared hosting environment, this setting should remain disabled.',
-	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
-	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
+	'ReverseProxySection'		=> '反向代理',
+	'ReverseProxy'				=> '使用反向代理',
+	'ReverseProxyInfo'			=> '启用此设置以确定远程的正确 IP 地址客户端通过检查存储在 X-Forwarded-For 标头中的信息。X-Forwarded-For 标头是识别客户端的标准机制通过反向代理服务器连接的系统，例如 Squid 或磅。 反向代理服务器通常用于增强性能访问量大的站点，还可能提供其他站点缓存，安全或加密的好处。 如果此 WackoWiki 安装运行在反向代理之后，应启用此设置，以便正确IP 地址信息在 WackoWiki 的会话管理中捕获，日志、统计和访问管理系统； 如果你不确定关于这个设置，没有反向代理，或者 ackoWiki 在共享主机环境，此设置应保持禁用状态。',
+	'ReverseProxyHeader'		=> '反向代理标头',
+	'ReverseProxyHeaderInfo'	=> '如果您的代理服务器将客户端IP发送到一个信头除X-For以外，则设置此值。 “X-转发-For”头是一个逗号+空格分隔的 IP列表，只有最后一个地址（左边）将被使用。',
+	'ReverseProxyAddresses'		=> 'reverse_proxy 接受IP地址数组',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored
 									 in the X-Forwarded-For headers only if Remote IP address is one of
@@ -453,33 +434,33 @@ $ap_translation = [
 									 reverse proxies. Otherwise, the client could directly connect to
 									 your web server spoofing the X-Forwarded-For headers.',
 
-	'SessionSection'				=> 'Session handling',
-	'SessionStorage'				=> 'Session storage',
-	'SessionStorageInfo'			=> 'This option defines where the the session data is stored. By default either file or database session storage is selected.',
+	'SessionSection'				=> '会话处理',
+	'SessionStorage'				=> '会话存储',
+	'SessionStorageInfo'			=> '此选项定义会话数据存储的位置。默认情况下选择文件或数据库会话存储。',
 	'SessionModes'	=> [
 		'1'		=> '文件',
 		'2'		=> '数据库',
 	],
 
-	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
-	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
-										<span class="cite">The value might be  overwritten by the Settings class at runtime, regardless of whether it is switched off, if HTTP_MOD_REWRITE is on.',
+	'RewriteMode'					=> '使用 <code>mod_rewrite</code>',
+	'RewriteModeInfo'				=> '如果您的网络服务器支持此功能，请转而获取“漂亮”的页面地址。<br>
+<span class="cite">该值可能在运行时被设置类覆盖，无论它是否被关闭，如果 HTTP_MOD_REWRITE 是打开的。',
 
 	// Permissions settings
-	'PermissionsSettingsInfo'		=> 'Parameters responsible for Access control and permissions.',
-	'PermissionsSettingsUpdated'	=> 'Updated permissions settings',
+	'PermissionsSettingsInfo'		=> '负责进出控制和权限的参数。',
+	'PermissionsSettingsUpdated'	=> '已更新权限设置',
 
-	'PermissionsSection'		=> 'Rights and privileges',
-	'ReadRights'				=> 'Read rights by default',
-	'ReadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
-	'WriteRights'				=> 'Write rights by default',
-	'WriteRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
-	'CommentRights'				=> 'Comment rights by default',
-	'CommentRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
-	'CreateRights'				=> 'Create rights of a sub page by default',
+	'PermissionsSection'		=> '权利和豁免',
+	'ReadRights'				=> '默认阅读权利',
+	'ReadRightsInfo'			=> '他们被分配到创建的根页以及不能确定上级权利的页面。',
+	'WriteRights'				=> '默认阅读权利',
+	'WriteRightsInfo'			=> '他们被分配到创建的根页以及不能确定上级权利的页面。',
+	'CommentRights'				=> '默认阅读权利',
+	'CommentRightsInfo'			=> '他们被分配到创建的根页以及不能确定上级权利的页面。',
+	'CreateRights'				=> '默认创建子页面的权限',
 	'CreateRightsInfo'			=> 'Define the right for creating root pages and assign them to pages for which parental rights cannot be defined.',
-	'UploadRights'				=> 'Upload rights by default',
-	'UploadRightsInfo'			=> 'They are assigned to the created root pages, as well as pages for which parental rights cannot be defined.',
+	'UploadRights'				=> '默认上传权限',
+	'UploadRightsInfo'			=> '他们被分配到创建的根页以及不能确定上级权利的页面。',
 	'RenameRights'				=> 'Global rename right',
 	'RenameRightsInfo'			=> 'The list of permissions to freely rename (move) pages.',
 
