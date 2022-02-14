@@ -13,36 +13,50 @@ if ($config['language'] == $page_lang)
 			'Πατήστε στον σύνδεμο "Επεξεργασία Σελίδας" στο κάτω μέρος της σελίδας για να ξεκινήσετε.' . "\n\n" .
 			'Η τεκμηρίωση μπορεί να βρεθεί στο WackoWiki:Doc/English.' . "\n" .
 			'Χρήσιμες Σελίδες: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Αναζήτηση Αναζήτηση)).' . "\n\n";
-		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
+		$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
 
-		insert_page($config['root_page'], 'Αρχική σελίδα', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
-		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
+		$critical_pages = [
+			$config['root_page']		=> ['Αρχική σελίδα',		$home_page_body,		true, false, null, 0],
+			$admin_page					=> [$config['admin_name'],	$admin_page_body,		true, false, null, 0],
+		];
 	}
 
-	insert_page($config['category_page'],		'Κατηγορία',			'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],			'Ομάδες',				'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],			'Χρήστες',				'{{users}}',			$page_lang, 'Admins', false, false);
+	$pages = [
+		$config['category_page']		=> ['Κατηγορία',			'{{category}}',			false, false],
+		$config['groups_page']			=> ['Ομάδες',				'{{groups}}',			false, false],
+		$config['users_page']			=> ['Χρήστες',				'{{users}}',			false, false],
 
-	# insert_page($config['help_page'],			'Βοήθεια',				'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['terms_page'],			'Όροι Χρήσης',			'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['privacy_page'],		'Πολιτική προσωπικών δεδομένων',	'',			$page_lang, 'Admins', false, false);
+		# $config['help_page']			=> ['Βοήθεια',				'',						false, false],
+		# $config['terms_page']			=> ['Όροι Χρήσης',			'',						false, false],
+		# $config['privacy_page']		=> ['Πολιτική προσωπικών δεδομένων',	'',			false, false],
 
-	insert_page($config['registration_page'],	'Εγγραφή',				'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Συνθηματικό',			'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'Αναζήτηση',			'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'Σύνδεση',				'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Ρυθμίσεις',			'{{usersettings}}',		$page_lang, 'Admins', false, false);
+		$config['registration_page']	=> ['Εγγραφή',				'{{registration}}',		false, false],
+		$config['password_page']		=> ['Συνθηματικό',			'{{changepassword}}',	false, false],
+		$config['search_page']			=> ['Αναζήτηση',			'{{search}}',			false, false],
+		$config['login_page']			=> ['Σύνδεση',				'{{login}}',			false, false],
+		$config['account_page']			=> ['Ρυθμίσεις',			'{{usersettings}}',		false, false],
 
-	insert_page($config['changes_page'],		'Πρόσφατες αλλαγές',	'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Αλλαγές');
-	insert_page($config['comments_page'],		'Πρόσφατα σχολιασμένες',	'{{commented}}',	$page_lang, 'Admins', false, SET_MENU, 'Σχόλια');
-	insert_page($config['index_page'],			'Ευρετήριο σελίδων',	'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Ευρετήριο');
-	insert_page($config['random_page'],			'Τυχαία σελίδα',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Τυχαία');
+		$config['changes_page']			=> ['Πρόσφατες αλλαγές',	'{{changes}}',			false, SET_MENU, 'Αλλαγές'],
+		$config['comments_page']		=> ['Πρόσφατα σχολιασμένες',	'{{commented}}',	false, SET_MENU, 'Σχόλια'],
+		$config['index_page']			=> ['Ευρετήριο σελίδων',	'{{pageindex}}',		false, SET_MENU, 'Ευρετήριο'],
+		$config['random_page']			=> ['Τυχαία σελίδα',		'{{randompage}}',		false, SET_MENU, 'Τυχαία'],
+	];
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Αλλαγές');
-	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Σχόλια');
-	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Ευρετήριο');
-	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Τυχαία');
+	$pages = [
+		$config['changes_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Αλλαγές'],
+		$config['comments_page']		=> ['',		'',		'', false, SET_MENU_ONLY, 'Σχόλια'],
+		$config['index_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Ευρετήριο'],
+		$config['random_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Τυχαία'],
+	];
 }
+
+if (!empty($critical_pages))
+{
+	$pages = array_merge($critical_pages, $pages);
+}
+
+insert_pages($pages, $page_lang);

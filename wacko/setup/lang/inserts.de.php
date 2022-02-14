@@ -13,36 +13,50 @@ if ($config['language'] == $page_lang)
 			'Klicke nach der ((/Anmeldung Anmeldung)) unten auf den Punkt "Editieren" um zu beginnen.' . "\n\n" .
 			'Die Dokumentation ist unter WackoWiki:Doc/Deutsch zu finden.' . "\n" .
 			'Nützliche Seiten: ((WackoWiki:Doc/Deutsch/Formatierung Formatierung)), ((/Suche Suche)).' . "\n\n";
-		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
+		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
+		$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
 
-		insert_page($config['root_page'], 'Startseite', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
-		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
+		$critical_pages = [
+			$config['root_page']		=> ['Startseite',			$home_page_body,		true, false, null, 0],
+			$admin_page					=> [$config['admin_name'],	$admin_page_body,		true, false, null, 0],
+		];
 	}
 
-	insert_page($config['category_page'],		'Kategorie',			'{{category}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['groups_page'],			'Gruppen',				'{{groups}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['users_page'],			'Benutzer',				'{{users}}',			$page_lang, 'Admins', false, false);
+	$pages = [
+		$config['category_page']		=> ['Kategorie',			'{{category}}',			false, false],
+		$config['groups_page']			=> ['Gruppen',				'{{groups}}',			false, false],
+		$config['users_page']			=> ['Benutzer',				'{{users}}',			false, false],
 
-	# insert_page($config['help_page'],			'Hilfe',				'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['terms_page'],			'Nutzungsbedingungen',	'',						$page_lang, 'Admins', false, false);
-	# insert_page($config['privacy_page'],		'Datenschutzerklärung',	'',						$page_lang, 'Admins', false, false);
+		# $config['help_page'			=> ['Hilfe',				'',						false, false],
+		# $config['terms_page'			=> ['Nutzungsbedingungen',	'',						false, false],
+		# $config['privacy_page'		=> ['Datenschutzerklärung',	'',						false, false],
 
-	insert_page($config['registration_page'],	'Registrierung',		'{{registration}}',		$page_lang, 'Admins', false, false);
-	insert_page($config['password_page'],		'Passwort',				'{{changepassword}}',	$page_lang, 'Admins', false, false);
-	insert_page($config['search_page'],			'Suche',				'{{search}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['login_page'],			'Anmeldung',			'{{login}}',			$page_lang, 'Admins', false, false);
-	insert_page($config['account_page'],		'Einstellungen',		'{{usersettings}}',		$page_lang, 'Admins', false, false);
+		$config['registration_page']	=> ['Registrierung',		'{{registration}}',		false, false],
+		$config['password_page']		=> ['Passwort',				'{{changepassword}}',	false, false],
+		$config['search_page']			=> ['Suche',				'{{search}}',			false, false],
+		$config['login_page']			=> ['Anmeldung',			'{{login}}',			false, false],
+		$config['account_page']			=> ['Einstellungen',		'{{usersettings}}',		false, false],
 
-	insert_page($config['changes_page'],		'Letzte Änderungen',	'{{changes}}',			$page_lang, 'Admins', false, SET_MENU, 'Änderungen');
-	insert_page($config['comments_page'],		'Letzte Kommentare',	'{{commented}}',		$page_lang, 'Admins', false, SET_MENU, 'Kommentare');
-	insert_page($config['index_page'],			'Seiten Index',			'{{pageindex}}',		$page_lang, 'Admins', false, SET_MENU, 'Index');
-	insert_page($config['random_page'],			'Zufällige Seite',		'{{randompage}}',		$page_lang, 'Admins', false, SET_MENU, 'Zufall');
+		$config['changes_page']			=> ['Letzte Änderungen',	'{{changes}}',			false, SET_MENU, 'Änderungen'],
+		$config['comments_page']		=> ['Letzte Kommentare',	'{{commented}}',		false, SET_MENU, 'Kommentare'],
+		$config['index_page']			=> ['Seiten Index',			'{{pageindex}}',		false, SET_MENU, 'Index'],
+		$config['random_page']			=> ['Zufällige Seite',		'{{randompage}}',		false, SET_MENU, 'Zufall'],
+	];
 }
 else
 {
 	// set only bookmarks
-	insert_page($config['changes_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Änderungen');
-	insert_page($config['comments_page'],		'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Kommentare');
-	insert_page($config['index_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Index');
-	insert_page($config['random_page'],			'',		'',		$page_lang, '', false, SET_MENU_ONLY, 'Zufall');
+	$pages = [
+		$config['changes_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Änderungen'],
+		$config['comments_page']		=> ['',		'',		'', false, SET_MENU_ONLY, 'Kommentare'],
+		$config['index_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Index'],
+		$config['random_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Zufall'],
+	];
 }
+
+if (!empty($critical_pages))
+{
+	$pages = array_merge($critical_pages, $pages);
+}
+
+insert_pages($pages, $page_lang);
