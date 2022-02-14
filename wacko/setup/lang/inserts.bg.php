@@ -15,7 +15,7 @@ if ($config['language'] == $page_lang)
 			'Полезни неща: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Търсене Търсене)).' . "\n\n";
 		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))';
 
-		insert_page($config['root_page'], '', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
+		insert_page($config['root_page'], 'Начална страница', $home_page_body, $page_lang, 'Admins', true, false, null, 0);
 		insert_page($config['users_page'] . '/' . $config['admin_name'], $config['admin_name'], $admin_page_body . "\n\n", $page_lang, $config['admin_name'], true, false, null, 0);
 	}
 
