@@ -1136,7 +1136,6 @@ $ap_translation = [
 	'MembersAdded'				=> 'Aggiunto con successo un nuovo membro del gruppo.',
 	'MembersRemove'				=> 'Sei sicuro di voler rimuovere un membro %1?',
 	'MembersRemoved'			=> 'Il membro è stato allontanato dal gruppo.',
-	'MembersDeleteInfo'			=> '* Nota: Le modifiche riguardano tutti i membri assegnati a quel gruppo.',
 
 	// Statistics module
 	'DbStatSection'				=> 'Database Statistics',
