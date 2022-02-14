@@ -287,7 +287,7 @@ form input.submitinput {
 
 .error {
 	background: #f8d4cc;
-	color: #CC3333;
+	color: #cc3333;
 	font-weight: bold;
 }
 .error::after {
@@ -429,8 +429,8 @@ header {
 
 .breadcrumb {
 	background-color: #fcfcfc;
-	border-bottom: 1px dotted #B2B0B0;
-	border-top: 1px dotted #B2B0B0;
+	border-bottom: 1px dotted #b2b0b0;
+	border-top: 1px dotted #b2b0b0;
 	color: #333;
 	font-size: 0.75em;
 	font-weight: normal;
