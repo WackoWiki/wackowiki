@@ -1,62 +1,36 @@
 <?php
 
-$page_lang = 'pl';
+$insert = [
+	'lang'				=> 'pl',
 
-// insert these pages only for default language
-if ($config['language'] == $page_lang)
-{
-	if (!$config['is_update'])
-	{
-		$home_page_body		=
-			'file:/wacko_logo.png?right' . "\n" .
+	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
 			'**Witaj na swojej stronie ((WackoWiki:Doc/English WackoWiki))!**' . "\n\n" .
 			'Klinkij na link "Edytuj stronę" na dole by rozpocząć.' . "\n\n" .
 			'Dokumentacja dostępna jest w WackoWiki:Doc/English.' . "\n" .
-			'Przydatne strony: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Szukaj Szukaj)).' . "\n\n";
-		$admin_page_body	= '((user:' . $config['admin_name'] . ' ' . $config['admin_name'] . '))' . "\n\n";
-		$admin_page			= $config['users_page'] . '/' . $config['admin_name'];
+			'Przydatne strony: ((WackoWiki:Doc/English/Formatting Formatting)), ((/Szukaj Szukaj)).',
+	'root_page'			=> 'Strona startowa',
 
-		$critical_pages = [
-			$config['root_page']		=> ['Strona startowa',		$home_page_body,		true, false, null, 0],
-			$admin_page					=> [$config['admin_name'],	$admin_page_body,		true, false, null, 0],
-		];
-	}
+	'category_page'		=> 'Kategoria',
+	'groups_page'		=> 'Grupy',
+	'users_page'		=> 'Użytkownicy',
 
-	$pages = [
-		$config['category_page']		=> ['Kategoria',				'{{category}}',			false, false],
-		$config['groups_page']			=> ['Grupy',					'{{groups}}',			false, false],
-		$config['users_page']			=> ['Użytkownicy',				'{{users}}',			false, false],
+	'help_page'			=> 'Pomoc',
+	'terms_page'		=> 'Warunki użytkowania',
+	'privacy_page'		=> 'Polityka ochrony prywatności',
 
-		# $config['help_page']			=> ['Pomoc',					'',						false, false],
-		# $config['terms_page']			=> ['Warunki użytkowania',		'',						false, false],
-		# $config['privacy_page']		=> ['Polityka ochrony prywatności',		'',				false, false],
+	'registration_page'	=> 'Rejestracja',
+	'password_page'		=> 'Hasło',
+	'search_page'		=> 'Szukaj',
+	'login_page'		=> 'Login',
+	'account_page'		=> 'Ustawienia',
 
-		$config['registration_page']	=> ['Rejestracja',				'{{registration}}',		false, false],
-		$config['password_page']		=> ['Hasło',					'{{changepassword}}',	false, false],
-		$config['search_page']			=> ['Szukaj',					'{{search}}',			false, false],
-		$config['login_page']			=> ['Login',					'{{login}}',			false, false],
-		$config['account_page']			=> ['Ustawienia',				'{{usersettings}}',		false, false],
+	'changes_page'		=> 'Ostatnie Zmiany',
+	'comments_page'		=> 'Ostatnio Komentowane',
+	'index_page'		=> 'Index Stron',
+	'random_page'		=> 'Losową strona',
 
-		$config['changes_page']			=> ['Ostatnie Zmiany',			'{{changes}}',			false, SET_MENU, 'Zmiany'],
-		$config['comments_page']		=> ['Ostatnio Komentowane',		'{{commented}}',		false, SET_MENU, 'Komentowane'],
-		$config['index_page']			=> ['Index Stron',				'{{pageindex}}',		false, SET_MENU, 'Index'],
-		$config['random_page']			=> ['Losową strona',			'{{randompage}}',		false, SET_MENU, 'Losową'],
-	];
-}
-else
-{
-	// set only bookmarks
-	$pages = [
-		$config['changes_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Zmiany'],
-		$config['comments_page']		=> ['',		'',		'', false, SET_MENU_ONLY, 'Komentowane'],
-		$config['index_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Index'],
-		$config['random_page']			=> ['',		'',		'', false, SET_MENU_ONLY, 'Losową'],
-	];
-}
-
-if (!empty($critical_pages))
-{
-	$pages = array_merge($critical_pages, $pages);
-}
-
-insert_pages($pages, $page_lang);
+	'changes_page_bm'	=> 'Zmiany',
+	'comments_page_bm'	=> 'Komentowane',
+	'index_page_bm'		=> 'Index',
+	'random_page_bm'	=> 'Losową',
+];

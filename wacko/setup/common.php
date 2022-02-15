@@ -177,37 +177,6 @@ function array_to_str ($arr, $name = '')
 	return $str;
 }
 
-// insert pages
-function insert_pages($pages, $page_lang)
-{
-	/**
-	 * [key] $tag,
-	 * [0] $title,
-	 * [1] $body,
-	 * [default] $page_lang,
-	 * [default] $rights		= 'Admins',
-	 * [2] $critical	= false,
-	 * [3] $set_menu	= 0,
-	 * [4] $menu_title	= false,
-	 * [5] $noindex		= 1
-	 */
-
-	foreach ($pages as $tag => $value)
-	{
-		insert_page(
-			$tag,
-			$value[0],
-			$value[1],
-			$page_lang,
-			'Admins',
-			$value[2],
-			$value[3],
-			$value[4],
-			$value[5] ?? 1, // it won't accept null
-		);
-	}
-}
-
 /*
 insert default pages, all related acls and menu item
 	$tag		=
