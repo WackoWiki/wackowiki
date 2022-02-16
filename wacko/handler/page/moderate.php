@@ -433,16 +433,18 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['move']) && $set)
 		{
 			$accept_action	= 'move';
+			$section		= $_POST['section'] ?? '';
+			$this->sanitize_page_tag($section);
 
 			// processing...
-			if (isset($_POST['accept']) && isset($_POST['section']))
+			if (isset($_POST['accept']) && $section)
 			{
 				$i = 0;
 
 				foreach ($set as $page_id)
 				{
 					$old_tags[] = $this->get_page_tag($page_id);
-					$new_tags[] = $_POST['section'] . mb_substr($old_tags[$i], mb_strrpos($old_tags[$i], '/'));
+					$new_tags[] = $section . mb_substr($old_tags[$i], mb_strrpos($old_tags[$i], '/'));
 
 					if (moderate_page_exists($this, $new_tags[$i++]) === true)
 					{
@@ -524,6 +526,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['merge']) && $set)
 		{
 			$accept_action	= 'merge';
+			$base		= $_POST['base'] ?? '';
+			$this->sanitize_page_tag($base);
 
 			if (count($set) < 2)
 			{
@@ -531,16 +535,16 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 
 			// perform accepted action
-			if (isset($_POST['accept']) && isset($_POST['base']) && !$error)
+			if (isset($_POST['accept']) && $base && !$error)
 			{
 				foreach ($set as $page_id)
 				{
 					$topics[] = $this->get_page_tag($page_id);
 				}
 
-				moderate_merge_topics($this, $_POST['base'], $topics);
+				moderate_merge_topics($this, $base, $topics);
 				$this->log(3, Ut::perc_replace($this->_t('LogMergedPages', SYSTEM_LANG),
-							'##' . implode('##, ##', $topics) . '##', $_POST['base']));
+							'##' . implode('##, ##', $topics) . '##', $base));
 
 				unset($accept_action, $topics);
 
@@ -621,7 +625,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			"ORDER BY commented DESC " .
 			$pagination['limit'];
 
-		// FORMS
+		// FORMS SUBFORUM
 
 		// load topics data
 		$topics	= $this->db->load_all($sql);
@@ -643,6 +647,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// confirm deletion
 		if ($accept_action == 'delete')
 		{
+			$tpl->enter('delete_');
+
 			foreach ($set as $page_id)
 			{
 				$accept_text[] = '<code>' . $this->get_page_title('', $page_id) . '</code>';
@@ -650,10 +656,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->action	= $accept_action;
 			$tpl->text		= implode('<br>', $accept_text);
+
+			$tpl->leave();	// delete_
 		}
 		// select target forum section
 		else if ($accept_action == 'move')
 		{
+			$tpl->enter('move_');
+
 			foreach ($set as $page_id)
 			{
 				$accept_text[] = '<code>' . $this->get_page_title('', $page_id) . '</code>';
@@ -678,31 +688,39 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
 			$tpl->text		= implode('<br>', $accept_text);
+
+			$tpl->leave();	// move_
 		}
 		// enter a new name for the renamed topic
 		else if ($accept_action == 'rename')
 		{
+			$tpl->enter('rename_');
+
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
 			$tpl->title		= $this->get_page_title('', $set[0]);
 			$tpl->onlyone	= count($set) > 1;
+
+			$tpl->leave();	// rename_
 		}
 		// select base for merging topics
 		else if ($accept_action == 'merge')
 		{
+			$tpl->enter('merge_');
+
 			$i = 0;
 
 			foreach ($set as $page_id)
 			{
 				$options[$i]['accept_text']	= '«' . $this->get_page_title('', $page_id) . '»';
-				$options[$i]['topic']		= $this->get_page_tag($page_id);
+				$options[$i]['tag']			= $this->get_page_tag($page_id);
 				$i++;
 			}
 
 			foreach ($options as $option)
 			{
-				$tpl->o_topic	= $option['topic'];
-				$tpl->o_text	= $option['accept_text'];
+				$tpl->o_tag		= $option['tag'];
+				$tpl->o_topic	= $option['accept_text'];
 
 				$accept_text[]	= $option['accept_text'];
 			}
@@ -710,6 +728,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
 			$tpl->text		= implode('<br>', $accept_text);
+
+			$tpl->leave();	// merge_
 		}
 
 		$tpl->hids		= implode('-', $set);
@@ -782,31 +802,35 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['topic_move']))
 		{
 			$accept_action	= 'topic_move';
+			$cluster		= $_POST['cluster'] ?? '';
+			$this->sanitize_page_tag($cluster);
+			$section		= $_POST['section'] ?? '';
+			$this->sanitize_page_tag($section);
 
 			// processing...
-			if (isset($_POST['accept']) && (isset($_POST['section']) || isset($_POST['cluster'])))
+			if (isset($_POST['accept']) && ($section || $cluster))
 			{
 				$pos		= mb_strrpos($this->tag, '/');
 				$sub_tag	= mb_substr($this->tag, ($pos ? $pos + 1 : 0));
 				$old_tag	= $this->tag;
-				$new_tag	= ($_POST['cluster']
-								? ($_POST['cluster'] == '/'
+				$new_tag	= ($cluster
+								? ($cluster == '/'
 									? ''
-									: utf8_trim($_POST['cluster'], '/') . '/'
+									: utf8_trim($cluster, '/') . '/'
 									)
-								: $_POST['section'] . '/'
+								: $section . '/'
 								) . $sub_tag;
 
 				if ($forum_cluster)
 				{
-					if (!empty($_POST['cluster']) && $_POST['cluster'] != '/')
+					if (!empty($cluster) && $cluster != '/')
 					{
-						if (moderate_page_exists($this, $_POST['cluster']) === false)
+						if (moderate_page_exists($this, $cluster) === false)
 						{
-							$error = $this->_t('ModerateMoveNotExists') . ' <code>' . Ut::html($_POST['cluster']) . '</code>';
+							$error = $this->_t('ModerateMoveNotExists') . ' <code>' . Ut::html($cluster) . '</code>';
 						}
 					}
-					else if (!empty($_POST['section']))
+					else if (!empty($section))
 					{
 						if (moderate_page_exists($this, $new_tag) === true)
 						{
@@ -814,9 +838,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						}
 					}
 				}
-				else if ($_POST['cluster'] != '/')
+				else if ($cluster != '/')
 				{
-					if (moderate_page_exists($this, $_POST['cluster']) === false)
+					if (moderate_page_exists($this, $cluster) === false)
 					{
 						$error = $this->_t('ModerateMoveNotExists');
 					}
@@ -825,7 +849,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// in case no errors, move...
 				if ($error)
 				{
-					if ($forum_cluster && $_POST['section'])
+					if ($forum_cluster && $section)
 					{
 						$error = Ut::perc_replace($this->_t('ModerateMoveExists'), $error);
 					}
