@@ -81,7 +81,7 @@ function insert_pages($insert, $config)
 			'Admins',
 			$value[2],
 			$value[3],
-			$value[4],
+			$value[4] ?? false,
 			$value[5] ?? 1, // it won't accept null
 		);
 	}

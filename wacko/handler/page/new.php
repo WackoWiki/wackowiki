@@ -85,7 +85,12 @@ if ($this->has_access('create', $this->get_page_id($this->tag)))
 		$tpl->p_f_tag		= ($option === 1 ? $new_tag : '');
 		#$tpl->p_f_pattern	= $this->language['TAG'] . '+';
 	}
-	else $tpl->p = true;
+	else
+	{
+		$tpl->p = true; // Why does it fail without it?
+		// TODO: show message
+		// users adding sub pages to HomePage/subpage, possible but probably misguided and on the wrong path
+	}
 }
 else
 {
