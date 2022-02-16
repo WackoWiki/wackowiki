@@ -1333,6 +1333,9 @@ a:target {
 .feed h2 {
 	font-size: 14px;
 	border-bottom: none;
+	/* background-color: beige;
+	height: 30px;
+	line-height: 2.1;*/
 }
 
 /* search action */
@@ -2300,6 +2303,29 @@ li.m-source img {
 
 .user-table td:nth-child(n+2){
 	text-align: center;
+}
+
+/* moderate handler ------------- */
+table.moderate {
+	width: 100%;
+	border-spacing: 1px; 
+	border-collapse: separate;
+}
+table.moderate td {
+	padding: 4px;
+}
+.moderate td:nth-child(1) {
+	vertical-align: middle;
+	width: 10px;
+}
+.moderate td:nth-child(2) {
+	padding-left: 5px;
+}
+.moderate td:nth-child(n+3) {
+	text-align: center;
+}
+.moderate td:nth-child(4) {
+	white-space: nowrap;
 }
 
 /* forum extension ******************************************* */

@@ -120,7 +120,7 @@
 			<tbody>
 			[= n _ =
 				<tr class="lined">
-					<td class="label a-middle">
+					<td>
 						<input type="checkbox" name="[ ' pageid ' ]" value="id" [ ' set | checkbox ' ]>
 					</td>
 					<td>
@@ -129,9 +129,9 @@
 						=]
 						[ ' moderate ' ] <strong>[ ' topic ' ]</strong>
 					</td>
-					<td class="t-center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' user ' ]&nbsp;&nbsp;</small></td>
-					<td class="t-center"><small>[ ' comments | number 0 , . ' ]</small></td>
-					<td class="t-center nowrap"><small>&nbsp;&nbsp;[ ' created | time_formatted ' ]</small></td>
+					<td title="[ ' ip ' ]"><small>[ ' user ' ]</small></td>
+					<td><small>[ ' comments | number 0 , . ' ]</small></td>
+					<td><small>[ ' created | time_formatted ' ]</small></td>
 				</tr>
 			=]
 			</tbody>
@@ -286,7 +286,7 @@
 			</thead>
 			<tbody>
 				<tr class="lined">
-					<td colspan="2" style="padding-bottom:30px;">
+					<td colspan="2" style="padding-bottom: 30px;">
 						<strong><small>
 							[ ' user ' ]
 							 ([ ' created | time_formatted ' ])</small></strong>
@@ -318,15 +318,15 @@
 			<tbody>
 			[= n _ =
 				<tr class="lined">
-					<td class="label a-middle">
+					<td>
 						<input type="checkbox" name="[ ' comment.page_id ' ]" value="id" [ ' set | checkbox ' ]>
 					</td>
 					<td>
 						<strong>[ ' clink ' ]</strong>
 						<br>[ ' desc ' ]
 					</td>
-					<td class="t-center" title="[ ' ip ' ]"><small>&nbsp;&nbsp;[ ' ulink ' ]&nbsp;&nbsp;</small></td>
-					<td class="t-center nowrap"><small>&nbsp;&nbsp; [ ' comment.created | time_formatted ' ]</small></td>
+					<td title="[ ' ip ' ]"><small>[ ' ulink ' ]</small></td>
+					<td><small>[ ' comment.created | time_formatted ' ]</small></td>
 				</tr>
 			=]
 			</tbody>
