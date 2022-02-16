@@ -907,7 +907,7 @@ function admin_user_users(&$engine, &$module)
 					'<button type="submit" id="submit">' . $engine->_t('SearchButton') . '</button> ' .
 					$engine->form_close();
 
-		echo '<span style="float: right;">' . $search . '</span>';
+		echo '<span class="search-box-right">' . $search . '</span>';
 
 		echo $engine->form_open('users');
 
