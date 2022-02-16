@@ -78,7 +78,7 @@
 						<select name="base">
 							<option selected></option>
 							[= o _ =
-								<option value="[ ' topic ' ]">[ ' text ' ]</option>
+								<option value="[ ' tag ' ]">[ ' topic ' ]</option>
 							=]
 						</select>
 						<button type="submit" name="accept" id="submit">[ ' _t: ModerateAccept ' ]</button>
