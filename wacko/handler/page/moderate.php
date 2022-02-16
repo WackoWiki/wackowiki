@@ -393,7 +393,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	$xml = new Feed($this);
 
 	////// BEGIN SUBFORUM MODERATION //////
-	if ($this->forum !== true && $forum_cluster === true)
+	if ($this->forum !== true && $forum_cluster)
 	{
 		$tpl->enter('subforum_');
 
@@ -796,7 +796,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								: $_POST['section'] . '/'
 								) . $sub_tag;
 
-				if ($forum_cluster === true)
+				if ($forum_cluster)
 				{
 					if (!empty($_POST['cluster']) && $_POST['cluster'] != '/')
 					{
@@ -824,7 +824,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// in case no errors, move...
 				if ($error)
 				{
-					if ($forum_cluster === true && $_POST['section'])
+					if ($forum_cluster && $_POST['section'])
 					{
 						$error = Ut::perc_replace($this->_t('ModerateMoveExists'), $error);
 					}
@@ -851,7 +851,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$accept_action	= 'topic_rename';
 
 			// perform accepted rename
-			if (isset($_POST['accept']) && $forum_cluster === true)
+			if (isset($_POST['accept']) && $forum_cluster)
 			{
 				$pos		= mb_strrpos($this->tag, '/');
 				$section	= mb_substr($this->tag, 0, ($pos ?: null));
@@ -888,7 +888,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			}
 		}
 		// lock topic
-		else if (isset($_POST['topic_lock']) && $forum_cluster === true)
+		else if (isset($_POST['topic_lock']) && $forum_cluster)
 		{
 			// DON'T USE BLANK PRIVILEGE LIST!!! Only "negative all" - '!*'
 			$this->save_acl($this->page['page_id'], 'comment', '!*');
@@ -901,7 +901,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			$this->http->redirect($this->href('moderate'));
 		}
 		// unlock topic
-		else if (isset($_POST['topic_unlock']) && $forum_cluster === true)
+		else if (isset($_POST['topic_unlock']) && $forum_cluster)
 		{
 			$this->save_acl($this->page['page_id'], 'comment', $this->db->default_comment_acl);
 
@@ -976,7 +976,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
 
-				if ($forum_cluster === true)
+				if ($forum_cluster)
 				{
 					// check new tag existence
 					if ($old_tag != $section . '/' . $tag
@@ -1031,7 +1031,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						unset($first_comment, $_set, $_comments, $_comment);
 					}
 
-					if ($forum_cluster === true)
+					if ($forum_cluster)
 					{
 						if (moderate_split_topic($this, $comment_ids, $old_tag, $section . '/' . $tag, $title) === true)
 						{
@@ -1180,7 +1180,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		{
 			$tpl->enter('move_');
 
-			if ($forum_cluster === true)
+			if ($forum_cluster)
 			{
 				$tpl->enter('forum_');
 
@@ -1317,7 +1317,7 @@ else
 }
 
 // set forum context
-if ($forum_cluster === true)
+if ($forum_cluster)
 {
 	$this->forum = true;
 }

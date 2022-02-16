@@ -92,30 +92,32 @@
 
 		<input type="hidden" name="ids" value="[ ' hids ' ]">
 		<input type="hidden" name="p" value="[ ' p ' ]">
-		<table>
-			<tr class="lined">
-				<td colspan="5">
-					<button type="submit" name="delete" id="submit_delete" class="btn-danger">[ ' _t: DeleteButton ' ]</button>
-					<button type="submit" name="move" id="submit_move">[ ' _t: ModerateMove ' ]</button> 
-					<button type="submit" name="rename" id="submit_rename">[ ' _t: RenameButton ' ]</button>
-					<button type="submit" name="merge" id="submit_merge">[ ' _t: ModerateMerge ' ]</button>
-					<button type="submit" name="lock" id="submit_lock">[ ' _t: ModerateLock ' ]</button>
-					<button type="submit" name="unlock" id="submit_unlock">[ ' _t: ModerateUnlock ' ]</button>
-					<br>
-					<button type="submit" name="set" id="submit">[ ' _t: SetButton ' ]</button>
-						[= set _ =
-							<button type="submit" name="reset" id="submit">[ ' _t: ResetButton ' ]</button>
-							&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
-						=]
-				</td>
-			</tr>
-			<tr class="formation">
-				<th colspan="2">[ ' _t: ForumTopic ' ]</th>
-				<th>[ ' _t: ForumAuthor ' ]</th>
-				<th>[ ' _t: ForumReplies ' ]</th>
-				<th>[ ' _t: ForumCreated ' ]</th>
-			</tr>
-
+		<table class="moderate">
+			<thead>
+				<tr class="lined">
+					<td colspan="5">
+						<button type="submit" name="delete" id="submit_delete" class="btn-danger">[ ' _t: DeleteButton ' ]</button>
+						<button type="submit" name="move" id="submit_move">[ ' _t: ModerateMove ' ]</button> 
+						<button type="submit" name="rename" id="submit_rename">[ ' _t: RenameButton ' ]</button>
+						<button type="submit" name="merge" id="submit_merge">[ ' _t: ModerateMerge ' ]</button>
+						<button type="submit" name="lock" id="submit_lock">[ ' _t: ModerateLock ' ]</button>
+						<button type="submit" name="unlock" id="submit_unlock">[ ' _t: ModerateUnlock ' ]</button>
+						<br>
+						<button type="submit" name="set" id="submit">[ ' _t: SetButton ' ]</button>
+							[= set _ =
+								<button type="submit" name="reset" id="submit">[ ' _t: ResetButton ' ]</button>
+								&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
+							=]
+					</td>
+				</tr>
+				<tr class="formation">
+					<th colspan="2">[ ' _t: ForumTopic ' ]</th>
+					<th>[ ' _t: ForumAuthor ' ]</th>
+					<th>[ ' _t: ForumReplies ' ]</th>
+					<th>[ ' _t: ForumCreated ' ]</th>
+				</tr>
+			</thead>
+			<tbody>
 			[= n _ =
 				<tr class="lined">
 					<td class="label a-middle">
@@ -132,8 +134,8 @@
 					<td class="t-center nowrap"><small>&nbsp;&nbsp;[ ' created | time_formatted ' ]</small></td>
 				</tr>
 			=]
-
-			</table>
+			</tbody>
+		</table>
 		</form>
 		[ '' pagination '' ]
 	=]
@@ -256,57 +258,64 @@
 
 		<input type="hidden" name="ids" value="[ ' hids ' ]">
 		<input type="hidden" name="p" value="[ ' p ' ]">
-		<table>
-			<tr class="lined">
-				<td colspan="2">
-					<button type="submit" name="topic_delete" id="delete-submit">[ ' _t: ModerateDeleteTopic ' ]</button>
-					<button type="submit" name="topic_move" id="move-submit">[ ' _t: ModerateMove ' ]</button>
-					[= forum _ =
-						<button type="submit" name="topic_rename" id="submit">[ ' _t: RenameButton ' ]</button>
-						[= unlocked _ =
-							<button type="submit" name="topic_lock" id="submit">[ ' _t: ModerateLock ' ]</button>
+		<table class="moderate">
+			<thead>
+				<tr class="lined">
+					<td colspan="2">
+						<button type="submit" name="topic_delete" id="delete-submit">[ ' _t: ModerateDeleteTopic ' ]</button>
+						<button type="submit" name="topic_move" id="move-submit">[ ' _t: ModerateMove ' ]</button>
+						[= forum _ =
+							<button type="submit" name="topic_rename" id="submit">[ ' _t: RenameButton ' ]</button>
+							[= unlocked _ =
+								<button type="submit" name="topic_lock" id="submit">[ ' _t: ModerateLock ' ]</button>
+							=]
+							[= locked _ =
+								<button type="submit" name="topic_unlock" id="submit">[ ' _t: ModerateUnlock ' ]</button>
+							=]
 						=]
+					</td>
+				</tr>
+				<tr class="formation">
+					<th colspan="2">
 						[= locked _ =
-							<button type="submit" name="topic_unlock" id="submit">[ ' _t: ModerateUnlock ' ]</button>
+							<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">
 						=]
-					=]
-				</td>
-			</tr>
-			<tr class="formation">
-				<th colspan="2">
-					[= locked _ =
-						<img src="[ ' db: theme_url ' ]icon/spacer.png" title="[ ' _t: DeleteCommentTip ' ]" alt="[ ' _t: DeleteText ' ]" class="btn-locked">
-					=]
-					[ ' _t: ForumTopic ' ]
-				</th>
-			</tr>
-			<tr class="lined">
-				<td colspan="2" style="padding-bottom:30px;">
-					<strong><small>
-						[ ' user ' ]
-						 ([ ' created | time_formatted ' ])</small></strong>
-					<br>[ ' body ' ]
-				</td>
-			</tr>
+						[ ' _t: ForumTopic ' ]
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="lined">
+					<td colspan="2" style="padding-bottom:30px;">
+						<strong><small>
+							[ ' user ' ]
+							 ([ ' created | time_formatted ' ])</small></strong>
+						<br>[ ' body ' ]
+					</td>
+				</tr>
+			</tbody>
 
 		[= comments _ =
-			<tr class="lined">
-				<td colspan="2">
-					<button type="submit" name="posts_delete" id="submit_delete">[ ' _t: ModerateDeletePosts ' ]</button>
-					<button type="submit" name="posts_split" id="submit_split">[ ' _t: ModerateSplit ' ]</button>
-					<br>
-					<button type="submit" name="set" id="submit_set">[ ' _t: SetButton ' ]</button>
-					[= set _ =
-						<button type="submit" name="reset" id="submit_reset">[ ' _t: ResetButton ' ]</button>
-						&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
-					=]
-				</td>
-			</tr>
-			<tr class="formation">
-				<th colspan="2"> [ ' _t: ForumComments ' ]</th>
-				<th> [ ' _t: ForumAuthor ' ]</th>
-				<th> [ ' _t: ForumCreated ' ]</th>
-			</tr>
+			<thead>
+				<tr class="lined">
+					<td colspan="4">
+						<button type="submit" name="posts_delete" id="submit_delete">[ ' _t: ModerateDeletePosts ' ]</button>
+						<button type="submit" name="posts_split" id="submit_split">[ ' _t: ModerateSplit ' ]</button>
+						<br>
+						<button type="submit" name="set" id="submit_set">[ ' _t: SetButton ' ]</button>
+						[= set _ =
+							<button type="submit" name="reset" id="submit_reset">[ ' _t: ResetButton ' ]</button>
+							&nbsp;&nbsp;&nbsp;<small>ids: [ ' ids ' ]</small>
+						=]
+					</td>
+				</tr>
+				<tr class="formation">
+					<th colspan="2"> [ ' _t: ForumComments ' ]</th>
+					<th> [ ' _t: ForumAuthor ' ]</th>
+					<th> [ ' _t: ForumCreated ' ]</th>
+				</tr>
+			</thead>
+			<tbody>
 			[= n _ =
 				<tr class="lined">
 					<td class="label a-middle">
@@ -320,6 +329,7 @@
 					<td class="t-center nowrap"><small>&nbsp;&nbsp; [ ' comment.created | time_formatted ' ]</small></td>
 				</tr>
 			=]
+			</tbody>
 		=]
 		</table>
 		</form>
