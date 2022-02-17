@@ -113,7 +113,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				"WHERE comment_on_id = " . (int) $topic_id);
 
 			// for the forum moderation only
-			if ($move_topics === true)
+			if ($move_topics)
 			{
 				// find latest number
 				$status	= $engine->db->load_all("SHOW TABLE STATUS");
@@ -122,7 +122,7 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 				{
 					if ($row['Name'] == $engine->db->table_prefix . 'page')
 					{
-						$num = $row['Auto_increment'];
+						$num = (int) $row['Auto_increment'];
 					}
 				}
 
@@ -228,6 +228,7 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	if (!$new_page_id)
 	{
 		$engine->forum = $forum_context;
+
 		return false;
 	}
 
@@ -733,9 +734,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 		$tpl->hids		= implode('-', $set);
 		$tpl->p			= (int) ($_GET['p'] ?? '');
-		$tpl->set		= $set;
 		$tpl->set_ids	= implode(', ', $set);
-
 
 		// print moderation controls...
 
