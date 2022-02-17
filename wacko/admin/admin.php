@@ -262,6 +262,11 @@ foreach ($module as $row)
 {
 	if ($row['status'] === true) // exclude disabled modules
 	{
+		if ($mode == $row['mode'] || $row['mode'] == 'main')
+		{
+			$title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $row['name'];
+		}
+
 		if ($row['mode'] != 'main')
 		{
 			$menu .= ($row['cat'] != $category
@@ -271,7 +276,6 @@ foreach ($module as $row)
 			if ($mode == $row['mode'])
 			{
 				$menu .= '<li class="active">';
-				$title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $row['name'];
 			}
 			else
 			{
