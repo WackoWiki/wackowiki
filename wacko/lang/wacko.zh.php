@@ -271,7 +271,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edit categories',
 	'CategoriesText'			=> '类别',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> 'This category is already there.',
+	'CategoriesAlreadyExists'	=> '此类别已存在。',
 	'CategoriesAdded'			=> 'Category added successfully.',
 	'CategoriesRenamed'			=> 'Category successfully renamed.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -481,7 +481,7 @@ $wacko_translation = [
 	'UnwatchText'				=> '取消监视',
 	'UserSettingsStored'		=> 'User settings saved.',
 	'LoggedOut'					=> '您已經成功註銷.',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> '为安全起见，您的会话已结束。 请重新登录。',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',

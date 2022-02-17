@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'el',
-'LangName'	=> 'Greek',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'el',
+'LangLocale'	=> 'el_GR',
+'LangName'		=> 'Greek',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults

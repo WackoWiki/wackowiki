@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'bg',
-'LangName'	=> 'Bulgarian',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'bg',
+'LangLocale'	=> 'bg_BG',
+'LangName'		=> 'Bulgarian',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults

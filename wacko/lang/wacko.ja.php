@@ -271,7 +271,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edit categories',
 	'CategoriesText'			=> 'カテゴリー',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> 'This category is already there.',
+	'CategoriesAlreadyExists'	=> 'このカテゴリはすでに存在しています。',
 	'CategoriesAdded'			=> 'Category added successfully.',
 	'CategoriesRenamed'			=> 'Category successfully renamed.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -481,7 +481,7 @@ $wacko_translation = [
 	'UnwatchText'				=> 'ウォッチ解除',
 	'UserSettingsStored'		=> 'User settings saved.',
 	'LoggedOut'					=> 'あなたはログアウトしました。',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> 'セキュリティのため、お客様のセッションは終了しました。再度ログインしてください。',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
@@ -1107,7 +1107,7 @@ $wacko_translation = [
 	'ForumNoTopics'				=> 'フォーラムに投稿されたトピックはありません',
 	'ForumNewTopic'				=> 'Start a new discussion',
 	'ForumTopicName'			=> 'Topic name',
-	'ForumTopicSubmit'			=> 'Submit topic',
+	'ForumTopicSubmit'			=> 'トピックを送信',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> '新しい記事',
 	'ForumLocked'				=> 'section blocked',

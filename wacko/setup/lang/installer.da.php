@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'da',
-'LangName'	=> 'Dansk',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'da',
+'LangLocale'	=> 'da_DK',
+'LangName'		=> 'Dansk',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults

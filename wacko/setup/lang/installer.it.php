@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'it',
-'LangName'	=> 'Italian',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'it',
+'LangLocale'	=> 'it_IT',
+'LangName'		=> 'Italian',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults
@@ -46,7 +47,7 @@ $lang = [
 'Continue'						=> 'Continua',
 'Back'							=> 'Indietro',
 'Recommended'					=> 'raccomandato',
-'InvalidAction'					=> 'Invalid action',
+'InvalidAction'					=> 'Azione non valida',
 
 /*
    Language Selection Page
@@ -69,7 +70,7 @@ $lang = [
 'Database'						=> 'Database',
 'PhpExtensions'					=> 'PHP Extensions',
 'Permissions'					=> 'Permessi',
-'ReadyToInstall'				=> 'Ready to Install?',
+'ReadyToInstall'				=> 'Pronto per l\'installazione?',
 'Requirements'					=> 'Il vostro server deve soddisfare i requisiti elencati di seguito.',
 'OK'							=> 'OK',
 'Problem'						=> 'Problema',
@@ -111,7 +112,7 @@ $lang = [
 'Enabled'						=> 'Attivato:',
 'ErrorAdminEmail'				=> 'Devi immettere un indirizzo email valido!',
 'ErrorAdminPasswordMismatch'	=> 'Le password non coincidono, reimmetti password!',
-'ErrorAdminPasswordShort'		=> 'The admin Password troppo corta, reimmetti un\'altra, the minimum length is %1 characters!',
+'ErrorAdminPasswordShort'		=> 'La password dell\'amministratore è troppo corta, la lunghezza minima è %1 caratteri!',
 'ModRewriteStatusUnknown'		=> 'Il programma di installazione non può verificare che mod_rewrite sia abilitato, ma ciò non significa che sia disabilitato.',
 
 /*
@@ -207,7 +208,7 @@ $lang = [
 'NextStep'						=> 'Nel passo successivo, l\'installatore tenterà di scrivere il nuovo file di configurazione, %1. Verifica che il server del web abbia accesso alla scrittura sul file, o che tu possa editarlo manualmente.  Ancora una volta, consulta  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> per i dettagli.',
 'WrittenAt'						=> 'scritto a ',
 'DontChange'					=> 'non modificare manualmente la wacko_version!',
-'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'descrizione dettagliata https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> 'Riprova',
 
 ];

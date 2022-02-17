@@ -25,7 +25,7 @@ $wacko_translation = [
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> '發送',
 
-	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+	'FormInvalid'				=> '提交的表格無效。 嘗試再次提交。',
 
 	// logged in panel
 	'AccountText'				=> '帳',
@@ -271,7 +271,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edit categories',
 	'CategoriesText'			=> '分類目錄',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> 'This category is already there.',
+	'CategoriesAlreadyExists'	=> '此類別已存在。',
 	'CategoriesAdded'			=> 'Category added successfully.',
 	'CategoriesRenamed'			=> 'Category successfully renamed.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -481,7 +481,7 @@ $wacko_translation = [
 	'UnwatchText'				=> '取消監視',
 	'UserSettingsStored'		=> 'User settings saved.',
 	'LoggedOut'					=> '您已經成功註銷.',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> '為安全起見，您的會話已結束。 請重新登錄。',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',

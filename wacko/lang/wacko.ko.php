@@ -18,7 +18,7 @@ $wacko_translation = [
 	'AddButton'					=> '추가',
 	'RemoveButton'				=> '제거',
 	'SetButton'					=> 'Set',
-	'ResetButton'				=> '재',
+	'ResetButton'				=> '재설정',
 	'RenameButton'				=> '이름 바꾸기',
 	'DeleteButton'				=> '삭제',
 	'RestoreButton'				=> '복구',
@@ -87,7 +87,7 @@ $wacko_translation = [
 	'PersistentCookie'			=> '로그인 상태를 유지하기',
 	'Session'					=> '세션',
 	'SessionTip'				=> 'parameters of current session',
-	'SessionDuration'			=> 'Session duration',
+	'SessionDuration'			=> '세션 지속 시간',
 	'SessionDurationSession'	=> '브라우저 세션',
 	'SessionDurationDay'		=> '1 일',
 	'SessionDurationWeek'		=> '1 주',
@@ -110,7 +110,7 @@ $wacko_translation = [
 
 	'SessionReplay'				=> 'Session terminated due to replay.',
 	'SessionObsolete'			=> 'Session is outdated.',
-	'SessionExpired'			=> 'Session has expired.',
+	'SessionExpired'			=> '세션 만료됨.',
 	'SessionTimeout'			=> 'Session terminated due to timeout.',
 	'SessionInactivity'			=> 'Session terminated due to inactivity.',
 	'SessionUaChange'			=> 'Session terminated due to user agent change.',
@@ -138,7 +138,7 @@ $wacko_translation = [
 	'TocTitle'					=> '목차 ',
 	'OuterLink2'				=> 'Outgoing link',
 	'FileLink'					=> '',
-	'PDFLink'					=> 'PDF Document',
+	'PDFLink'					=> 'PDF 문서',
 	'RDFLink'					=> 'RDF Document',
 	'EmailLink'					=> 'Write an email (mail client launch)',
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
@@ -148,14 +148,14 @@ $wacko_translation = [
 	'ShowTip'					=> 'Return in view mode',
 	'ShowText'					=> '보기',
 	'WikieditAutocomplete'		=> 'Complete wikilinks by Ctrl+Space',
-	'WikiEditInactiveJs'		=> 'In order to be able to use WikiEdit, please enable JavaScript in your browser.',
+	'WikiEditInactiveJs'		=> 'WikiEdit를 사용하려면 브라우저에서 JavaScript를 활성화하십시오.',
 	'NumerateLinks'				=> 'Numerate links in print view',
 	'Comment'					=> '댓글',
 	'Comments0'					=> '코멘트를 남겨주세요',
 	'Comments1'					=> '댓글 읽기 (댓글 1 개)',
 	'CommentsN'					=> '댓글 읽기 (%1 개의 댓글)',
 	'Comments'					=> '댓글',
-	'CommentEdited'				=> 'edited',
+	'CommentEdited'				=> '수정됨',
 	'Links'						=> '링크',
 	'Version'					=> '버전',
 
@@ -164,7 +164,7 @@ $wacko_translation = [
 
 	'PrivacyPolicy'				=> '개인정보처리방침',
 	'TermsOfUse'				=> '서비스이용약관',
-	'AcceptTermsOfUse'			=> 'I have read, understood and agree to the Terms of service of the site.',
+	'AcceptTermsOfUse'			=> '나는 사이트의 서비스 약관을 읽고 이해했으며 동의합니다.',
 
 	'ShowComments'				=> 'Display comments / form',
 	'HideComments'				=> 'Hide comments / form',
@@ -317,9 +317,9 @@ $wacko_translation = [
 	'GroupsName'				=> '그룹',
 	'GroupsMembers'				=> 'Members',
 	'GroupsDescription'			=> '설명',
-	'GroupsCreated'				=> 'Created',
+	'GroupsCreated'				=> '생성 시각',
 	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
-	'GroupsProfile'				=> 'Profile',
+	'GroupsProfile'				=> '사용자 프로필',
 	'GroupsList'				=> 'View the entire list of groups',
 	'GroupSpace'				=> 'Group space',
 
@@ -336,10 +336,10 @@ $wacko_translation = [
 	'MinorEditShow'				=> '사소한 편집 보이기',
 	'PostAnonymously'			=> 'Post anonymously without giving your name',
 	'NotifyMe'					=> '페이지의 새 댓글 및 변경 사항에 대해 알림',
-	'OverwriteAlert'			=> 'OVERWRITE ALERT: This page was modified by someone else while you were editing it.<br>Please copy your changes and re-edit this page.',
+	'OverwriteAlert'			=> '덮어쓰기 경고: 이 페이지를 수정하는 동안 다른 사람이 수정했습니다.<br>변경 사항을 복사하고 이 페이지를 다시 수정하십시오.',
 	'EditingRevisionWarning'	=> 'You are editing an old revision of this page. If you publish it, any changes made since then will be removed. <br>You may wish to edit the current revision instead.',
-	'WriteAccessDenied'			=> 'You don\'t have write access to this page.',
-	'EmptyPage'					=> 'Page body was empty - not saved!',
+	'WriteAccessDenied'			=> '이 페이지에 대한 쓰기 권한이 없습니다.',
+	'EmptyPage'					=> '페이지 본문이 비어 있어 저장되지 않았습니다!',
 	'EmptyComment'				=> 'Comment body was empty - not saved!',
 	'CommentAccessDenied'		=> 'Sorry, you\'re not allowed to post comments to this page.',
 	'CommentFlooded'			=> 'The interval between the publication of the posts shall not be less than %1 seconds.',
@@ -481,7 +481,7 @@ $wacko_translation = [
 	'UnwatchText'				=> '주시 해제',
 	'UserSettingsStored'		=> 'User settings saved.',
 	'LoggedOut'					=> '이제 로그 아웃되었습니다.',
-	'LoggedOutAuto'				=> 'For security, your session has ended. Please log in again.',
+	'LoggedOutAuto'				=> '보안을 위해 세션이 종료되었습니다. 다시 로그인하십시오. ',
 
 	// user settings
 	'EmailConfirmResent'		=> 'Repeated email confirmation code sent to your address.',
@@ -613,7 +613,7 @@ $wacko_translation = [
 	'PageAlreadyExistsEdit2'	=> '편집',
 	'PageAlreadyExistsEditDenied'	=> '당신은 그것을 편집 할 수 없습니다.',
 
-	'SimilarPagesExists'		=> 'Similar pages to %1 already exists:',
+	'SimilarPagesExists'		=> '%1과(와) 유사한 페이지가 이미 있습니다:',
 	'SimilarPagesHint'			=> 'There are existing similar pages to %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
@@ -656,7 +656,7 @@ $wacko_translation = [
 	'NotConfirmedEmail'			=> 'Your email address is not confirmed.<br>Mail can\'t be send to non-confirmed address.',
 	'EmailForgotSubject'		=> 'Password renewal for ',
 	'EmailForgotMessage'		=> 'Someone (maybe you) forgot your password for %1.' . "\n" . 'Your login: %2'."\n\n" . 'Click the link or copy it to the browser address line to change your password.' . "\n" . '%3' . "\n\n",
-	'CodeWasSent'				=> 'Password recovery instruction was sent to you by email.',
+	'CodeWasSent'				=> '비밀번호 복구 지침이 이메일로 전송되었습니다.',
 	'WrongCode'					=> 'Wrong code',
 	'ChangePasswordForUser'		=> '%1\'s password change',
 
@@ -666,7 +666,7 @@ $wacko_translation = [
 	'NotOwnerToViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
 
 	// admin_recovery action
-	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
+	'GenerateRecoveryHash'		=> '<code>recovery_password</code> 에 대한 비밀번호 해시 생성',
 
 	// import action
 	'ImportTo'					=> 'Import in cluster',
@@ -873,7 +873,7 @@ $wacko_translation = [
 	'FileRemoveDenied'			=> 'You are not allowed to remove this file',
 	'FileNotFound'				=> '파일을 찾을 수 없습니다.',
 
-	'FileSearch'				=> 'Find File',
+	'FileSearch'				=> '파일 찾기',
 	'UploadBy'					=> 'Uploaded by',
 	'FileAdded'					=> '추가함',
 	'FileModified'				=> '수정됨',
@@ -1072,7 +1072,7 @@ $wacko_translation = [
 	'ModerateSplitPageName'		=> 'Enter the name of the page / topic, where to move detachable comments, and select a separation schema',
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
-	'ModerateUserProfile'		=> 'profile',
+	'ModerateUserProfile'		=> '사용자 프로필',
 	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'			=> 'moderate section',
@@ -1106,8 +1106,8 @@ $wacko_translation = [
 	'ForumNoComments'			=> '댓글이 없습니다.',
 	'ForumNoTopics'				=> '이 포럼에는 주제나 게시물이 없습니다.',
 	'ForumNewTopic'				=> '새로운 토론 시작',
-	'ForumTopicName'			=> 'Topic name',
-	'ForumTopicSubmit'			=> 'Submit topic',
+	'ForumTopicName'			=> '주제 이름',
+	'ForumTopicSubmit'			=> '주제 제출',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',
 	'ForumLocked'				=> 'section blocked',
@@ -1224,7 +1224,7 @@ $wacko_translation = [
 		'en' => '영어',
 		'es' => '스페인어',
 		'et' => '에스토니아어',
-		'fa' => 'Persian',
+		'fa' => '페르시아어',
 		'fr' => '프랑스어',
 		'hi' => '힌디어',
 		'hu' => '헝가리어',

@@ -392,7 +392,7 @@ $wacko_translation = [
 	'NotOwnerCantDelete'		=> 'Вие не сте собственик на тази страница и затова не можете да я изтриете',
 
 	// remove
-	'RemovePage'				=> 'Remove page',
+	'RemovePage'				=> 'Премахване на страницата',
 	'RemoveRevision'			=> 'Remove revision',
 	'RemoveComment'				=> 'Delete comment',
 	'RemoveCluster'				=> 'Remove all pages of the cluster',
@@ -405,10 +405,10 @@ $wacko_translation = [
 	'CategoriesRemoved'			=> 'Категориите страници са изтрити.',
 	'RatingRemoved'				=> 'Rating removed.',
 	'AclsRemoved'				=> 'Правата за достъп изтрити.',
-	'BookmarksRemoved'			=> 'Bookmarks from page изтрити.',
-	'WatchesRemoved'			=> 'Watches from page изтрити.',
-	'CommentsRemoved'			=> 'Comments from page изтрити.',
-	'FilesRemoved'				=> 'Files from page изтрити.',
+	'BookmarksRemoved'			=> 'Bookmarks from page removed.',
+	'WatchesRemoved'			=> 'Watches from page removed.',
+	'CommentsRemoved'			=> 'Comments from page removed.',
+	'FilesRemoved'				=> 'Files from page removed.',
 	'PageRemoved'				=> 'Страница изтрита.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
@@ -449,7 +449,7 @@ $wacko_translation = [
 	'NoRecentComments'			=> 'Коментари отдавна не е имало.',
 	'LatestCommentBy'			=> 'последен коментирал',
 	'NoRecentlyCommented'		=> 'Коментари отдавна не е имало.',
-	'NoDeletedPages'			=> 'No deleted pages found.',
+	'NoDeletedPages'			=> 'Не са намерени изтрити страници.',
 	'NoDeletedRevisions'		=> 'Не са намерени изтрити ревизии.',
 	'NoDeletedFiles'			=> 'No deleted files found.',
 	'CommentsDisabled'			=> 'Comments are not available.',
@@ -560,7 +560,7 @@ $wacko_translation = [
 	'SortCommentAsc'			=> 'Most recent on bottom',
 	'SortCommentDesc'			=> 'Most recent on top',
 
-	'RenamePage'				=> 'Rename page',
+	'RenamePage'				=> 'Преименуване на страница',
 	'RenameText'				=> 'Преименувай',
 	'RenameTip'					=> 'Rename page',
 	'NewName'					=> 'Въведете ново име за тази страница',
@@ -992,9 +992,9 @@ $wacko_translation = [
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
-	'ChangesTitleXML'			=> ' - Recent changes',
+	'ChangesTitleXML'			=> ' - Последни Промени',
 	'ChangesXML'				=> 'Recent changes to the ',
-	'CommentsTitleXML'			=> ' - Recent comments',
+	'CommentsTitleXML'			=> ' - Нови Коментари',
 	'CommentsXML'				=> 'Recent comments to the ',
 	'NewsTitleXML'				=> ' - Recent news',
 	'NewsXML'					=> 'Recent news to the ',
@@ -1002,7 +1002,7 @@ $wacko_translation = [
 	'ExportClusterXML'			=> 'Export of entire cluster of ',
 	'AccessDeniedXML'			=> 'Нямате право да получите достъп до тази информация.',
 
-	'ChangesFeed'				=> 'Changes',
+	'ChangesFeed'				=> 'Промени',
 	'CommentsFeed'				=> 'Коментари',
 	'NewsFeed'					=> 'Новини',
 	'RevisionsFeed'				=> 'Revisions of ',

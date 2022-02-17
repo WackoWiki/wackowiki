@@ -4,10 +4,11 @@ $lang = [
 /*
    Language Settings
 */
-'Charset'	=> 'utf-8',
-'LangISO'	=> 'es',
-'LangName'	=> 'Español',
-'LangDir'	=> 'ltr',
+'Charset'		=> 'utf-8',
+'LangISO'		=> 'es',
+'LangLocale'	=> 'es_ES',
+'LangName'		=> 'Español',
+'LangDir'		=> 'ltr',
 
 /*
    Config Defaults
