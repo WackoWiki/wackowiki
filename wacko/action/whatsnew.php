@@ -37,7 +37,7 @@ $pages1 = $this->db->load_all(
 	"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, u.user_name, 1 AS ctype, p.deleted " .
 	"FROM " . $this->db->table_prefix . "page p " .
 		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
-		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.owner_id = u.user_id) " .
 	"WHERE (u.account_type = 0 OR p.user_id = 0) " .
 		($tag
 			? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
