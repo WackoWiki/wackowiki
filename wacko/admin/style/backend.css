@@ -1,4 +1,3 @@
-
 /*	Basic tag styles	*/
 
 :root {
@@ -51,16 +50,16 @@ pre {
 	text-align: left;
 }
 small {
-	font-size: 0.75rem; /* 12px */
+	font-size: 0.75rem;
 	line-height: normal;
 }
 form small,
 table.usertable small,
 small small {
-	font-size: 0.6875rem; /* 11px */
+	font-size: 0.6875rem;
 }
 sub, sup {
-	font-size: 0.6875rem; /* 11px */
+	font-size: 0.6875rem;
 	letter-spacing: normal;
 	margin-left: 1px;
 	margin-right: 1px;
@@ -112,7 +111,7 @@ ul, ol {
 
 img {
 	font-family: var(--ww-font-sans-serif);
-	font-size: 0.625rem; /* 10px */
+	font-size: 0.625rem;
 	height: auto;
 	max-width: 100%;
 }
@@ -208,7 +207,7 @@ input.verify { display: none; }
 
 
 table.formation {
-	font-size: 0.75rem; /* 12px */
+	font-size: 0.75rem;
 	padding: 3px;
 }
 table.formation th,
@@ -244,12 +243,13 @@ th.label {
 	border-bottom: 1px dotted #babfc7;
 }
 .lined tr:hover,
+.hl-line tr:hover,
 .hl-setting:hover {
-	background:none repeat scroll 0 0 #CCFFCC !important;
+	background: none repeat scroll 0 0 #ccffcc !important;
 }
 
 table.forum th {
-	font-size: 0.75rem; /* 12px */
+	font-size: 0.75rem;
 	text-align: center;
 	white-space: nowrap;
 	border-spacing: 3px;
@@ -364,6 +364,11 @@ table.forum th {
 	padding: 0 5px;
 	font-weight: bold;
 }
+
+.bb-summary col:nth-child(1) {
+	width: 5%;
+}
+
 /* restore table */
 table.restore {
 	border-spacing: 1px;
@@ -388,13 +393,13 @@ table.backup {
 }
 
 #content fieldset {
-	font-size: 0.75rem; /* 12px */
+	font-size: 0.75rem;
 	padding: 0 0 0 30px;
 	margin: 0;
 	border: none;
 }
 #content fieldset legend {
-	font-size: 0.6875rem; /* 11px */
+	font-size: 0.6875rem;
 	letter-spacing: 2px;
 	padding-left: 10px;
 	padding-right: 100px;
@@ -420,11 +425,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-	font-size: 1.1875rem; /* 19px */
+	font-size: 1.1875rem;
 	margin-top: 0;
 }
 h2 {
-	font-size: 1.0625rem; /* 17px */
+	font-size: 1.0625rem;
 	margin-top: 30px;
 	padding-top: 3px;
 }
@@ -432,10 +437,10 @@ h3 {
 	font-size: 1rem;
 }
 h4 {
-	font-size: 0.875rem; /* 14px */
+	font-size: 0.875rem;
 }
 h5, h6 {
-	font-size: 0.6875rem; /* 11px */
+	font-size: 0.6875rem;
 }
 small {
 	word-spacing: 2px;
@@ -632,7 +637,7 @@ textarea {
 		}
 	#nav {
 		font-weight: bold;
-		font-size: 0.6875rem; /* 11px */
+		font-size: 0.6875rem;
 		margin-right: 30px;
 		padding-left: 15px;
 		padding-top: 2px;
@@ -704,7 +709,7 @@ textarea {
 				border: 1px solid #5083a6;
 			}
 	#sections {
-		font-size: 0.75rem; /* 12px */
+		font-size: 0.75rem;
 		text-align: right;
 		margin-top: 5px;
 		padding-right: 20px;
@@ -897,7 +902,7 @@ span.tocnumber {
 }
 	div.owner {
 		color: #b00202;
-		font-size: 0.625rem; /* 10px */
+		font-size: 0.625rem;
 		text-align: right;
 		padding-right: 20px;
 	}
@@ -914,7 +919,7 @@ span.tocnumber {
 			text-decoration: none;
 		}
 	#tabs div.controls {
-		font-size: 0.6875rem; /* 11px */
+		font-size: 0.6875rem;
 		font-weight: bold;
 		background-color: #b00202;
 		padding-left: 20px;
@@ -974,10 +979,10 @@ span.tocnumber {
 		text-decoration: none;
 	}
 
-/*	 Debugging information 		*/
+/*	 Debugging information		*/
 .time {
 	color: #999;
-	font-size: 0.5625rem; /* 9px */
+	font-size: 0.5625rem;
 	margin: 5px 20px;
 }
 
@@ -988,7 +993,7 @@ span.tocnumber {
 .debug, 
 #debug li, 
 #debug pre {
-	font-size: 0.6875rem; /* 11px */
+	font-size: 0.6875rem;
 	color: #888;
 }
 

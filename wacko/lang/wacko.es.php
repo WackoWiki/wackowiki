@@ -53,7 +53,7 @@ $wacko_translation = [
 	'NewAccountSubject'			=> 'Registro de nueva cuenta',
 	'NewAccountAdminCreated'	=> 'El usuario %1 ha creado una cuenta para Ud. con el nombre de usuario "%2". Para completar el registro, visite la siguiente URL (Asegúrese de ingresarla como una única línea) y defina su propia contraseña de acceso:',
 	'NewAccountUsername'		=> 'Usuario:',
-	'AccountLanguage'			=> 'Language:',
+	'AccountLanguage'			=> 'Idioma:',
 	'NewAccountEmail'			=> 'Correo electrónico:',
 	'NewAccountIP'				=> 'Dirección IP remota:',
 	'NewAccountSignupInfo'		=> 'La siguiente cuenta ha sido creada:',
@@ -74,7 +74,7 @@ $wacko_translation = [
 	'UserDeniedInfo'			=> 'Se le denegó permiso para acceder %1.',
 
 	'RegistrationThreshold'		=> 'El tiempo para rellenar el formulario no debe ser inferior a %1 segundos.',
-	'Language'					=> 'Language',
+	'Language'					=> 'Idioma',
 
 	// login panel
 	'LoginWelcome'				=> 'Conectar',
@@ -85,7 +85,7 @@ $wacko_translation = [
 	'LoginButton'				=> 'Conectar',
 	'LoginLink'					=> 'Conectar',
 	'PersistentCookie'			=> 'No cerrar sesión',
-	'Session'					=> 'Session',
+	'Session'					=> 'Sesión',
 	'SessionTip'				=> 'Parámetros de la sesión actual',
 	'SessionDuration'			=> 'Duración de la sesión',
 	'SessionDurationSession'	=> 'sesión de navegador',
@@ -125,7 +125,7 @@ $wacko_translation = [
 
 	// notifications
 	'EmailHello'				=> 'Hola ',
-	'EmailModerator'			=> 'Moderator',
+	'EmailModerator'			=> 'Moderador',
 	'WatchedPageChanged'		=> 'Página modificada ',
 	'SomeoneChangedThisPage'	=> ' ha cambiado esta página, que tu estas vigilando: ',
 	'NewPageCreatedSubj'		=> 'Una nueva página',
@@ -264,7 +264,7 @@ $wacko_translation = [
 
 	// categories handler
 	'Categories'				=> 'Categorías',
-	'CategoriesAssign'			=> 'assign',
+	'CategoriesAssign'			=> 'asignar',
 	'CategoriesEdit'			=> 'editar',
 	'Category'					=> 'Categoria',
 	'CategoriesFor'				=> 'Categorías para',
@@ -279,14 +279,14 @@ $wacko_translation = [
 	'NoMultilevelGrouping'		=> 'No es posible agrupar categorías en multiples niveles.',
 	'CategoriesDeleted'			=> 'Eliminada la categoría de la base de datos y todas las páginas.',
 	'CategoriesAdd'				=> 'Agregar nueva categoría',
-	'CategoryDescription'		=> 'Description',
+	'CategoryDescription'		=> 'Descripción',
 	'CategoriesAddGrouped'		=> 'Agrupar con categoría',
 	'CategoriesAddGroupedNo'	=> 'Sin grupo.',
 	'CategoriesRename'			=> 'Renombrar categoría %1',
 	'CategoriesRenameInfo'		=> '* Observación: El cambio afectará a todas las páginas con la categoría asignada.',
 	'CategoriesGroup'			=> 'Grupos de categorías %1 with',
 	'CategoriesGroupInfo'		=> '* Select [no group], to debundled the category.',
-	'CategoriesNoGroup'			=> '[no group]',
+	'CategoriesNoGroup'			=> '[sin grupo]',
 	'CategoriesDelete'			=> 'Está seguro que desea eliminar la categoría %1?',
 	'CategoriesDeleteInfo'		=> '* Observación: El cambio afectará a todas las páginas con la categoría asignada. Si la palabra contiene una subcategoría, no se eliminarán, pero se independizarán.',
 	'CategoriesStoreInfo'		=> 'Marque las casillas para asignar las categorías a una página.',
@@ -300,7 +300,7 @@ $wacko_translation = [
 	'NoCategorySelected'		=> 'Ninguna categoría seleccionada.',
 	'NoCategoriesAssigned'		=> 'No hay categorías asignadas para este idioma.',
 	'TagCloud'					=> 'Nube de palabras',
-	'PagesTaggedWith'			=> '%1 pages tagged with %2',
+	'PagesTaggedWith'			=> '%1 páginas etiquetadas con %2',
 	'CategoriesOfCluster'		=> 'de cluster',
 	'TaggedWithTip'				=> 'mostrar páginas etiquetadas %1',
 
@@ -328,7 +328,7 @@ $wacko_translation = [
 	'PreviewButton'				=> 'Previsualizar',
 	'Preview'					=> 'Previsualización',
 	'Chars'						=> 'caracteres',
-	'PageBody'					=> 'Page body',
+	'PageBody'					=> 'Cuerpo de página',
 	'EditNote'					=> 'Resumen de edición',
 	'EditNoteMissing'			=> 'Falta resumen de edición',
 	'EditMinor'					=> 'Cambio menor',
@@ -377,7 +377,6 @@ $wacko_translation = [
 	'SimpleDiffDeletions'		=> 'Borrado:',
 	'NoDifferences'				=> 'No hay differencias.',
 	'ReEditOldRevision'			=> 'Reeditar esta antigua version',
-	'DiffStats'					=> 'Stats: %1 changes, %2 additions and %3 deletions. (%4 Not modified)',
 
 	'ExternalPages'				=> 'Enlaces externos vinculados con %1 (%2) (<a href="%3">ver lista de dominios</a>):',
 	'ExternalPagesGlobal'		=> 'Webs vinculados con este Wacko (%2) (<a href="%1">ver lista de dominios</a>):',
@@ -491,7 +490,7 @@ $wacko_translation = [
 	'UserName'					=> 'Nombre de usuario',
 	'EmailAddress'				=> 'Tu email',
 	'RealName'					=> 'Nombre real',
-	'MenuItemsShown'			=> 'Menu items shown',
+	'MenuItemsShown'			=> 'Elementos de menú mostrados',
 	'RecordsPerPage'			=> 'Registros por página',
 	'DoShowComments'			=> 'Mostrar comentarios por defecto',
 	'DoubleclickEditing'		=> 'Editar haciendo doble-click en la página',
@@ -543,7 +542,7 @@ $wacko_translation = [
 	'TreeSiteTitle'				=> 'Arbol de web',
 	'TreeEmpty'					=> '%1 no tiene sub-páginas',
 	'TreeEmptyLevels'			=> '%1 no tiene sub-páginas para el nivel indicado. Aumente el valor de nivel.',
-	'TreeTooBig'				=> 'too many subpages',
+	'TreeTooBig'				=> 'demasiadas subpáginas',
 
 	// clone handler
 	'ClonePage'					=> 'Clonar página',
@@ -580,7 +579,7 @@ $wacko_translation = [
 	'UserSettingsNotifications'	=> 'Notificaciones',
 
 	'NotifyMinorEdit'			=> 'Notificar tambén modificación menor',
-	'NotifyPageEdit'			=> 'Edit',
+	'NotifyPageEdit'			=> 'Editar',
 	'NotifyComment'				=> 'Comentario',
 	'NotifyOff'					=> 'Apagada',
 	'NotifyAlways'				=> 'Siempre',
@@ -605,8 +604,8 @@ $wacko_translation = [
 	'CreateNewPageTip'			=> 'Crear página nueva.',
 
 	'CreateRandomPage'			=> 'Crear página aleatoria',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateSubPage'				=> 'Crear una subpágina en el clúster',
+	'CreatePageParentCluster'	=> 'Crear una página en el clúster padre',
 	'CreatePageDenied'			=> 'No tiene los derechos suficientes.',
 	'CreatePageDeniedAddress'	=> 'No tiene derechos de crear una página en esta dirección.',
 	'PageAlreadyExists'			=> 'Ya existe una página %1 en esta dirección.',
@@ -811,13 +810,13 @@ $wacko_translation = [
 	'SettingsAttachments'		=> 'Adjuntos',
 	'SettingsUpload'			=> 'Subir',
 	'SettingsCategories'		=> 'Categorías',
-	'SettingsLanguages'			=> 'Languages',
+	'SettingsLanguages'			=> 'Idiomas',
 	'SettingsReferrers'			=> 'Referencias',
 	'SettingsWatch'				=> 'Vigilar',
 	'SettingsPrint'				=> 'Versión para impresora',
 	'SettingsWordprocessor'		=> 'Versión Procesador de texto',
 	'SettingsLatex'				=> 'Versión LaTeX',
-	'SettingsXML'				=> 'Export to XML',
+	'SettingsXML'				=> 'Exportar a XML',
 	'NeedToChangeLang'			=> 'No soportado para idioma %1 debe cambiar.',
 	'SetLang'					=> 'Idioma de esta página',
 	'SetMenuLabel'				=> 'Etiqueta del menú',
@@ -1039,7 +1038,7 @@ $wacko_translation = [
 	'SetAsUnreviewed'			=> 'Setear página como pendiente de revisar',
 
 	// word filter
-	'PotentialSpam'				=> 'Identified Potential Spam',
+	'PotentialSpam'				=> 'Spam potencia identificada',
 
 	// moderation handler
 	'Moderation'				=> 'Moderación',
@@ -1319,7 +1318,7 @@ $wacko_translation = [
 	'LogUserPasswordMismatch'	=> '!!Usuario ##%1## fallo de cambiar la contraseña: Contraseña actual no coincide!!',
 	'LogUserIPSwitched'			=> 'Cambio de dirección IP no autorizado de usuario %1 de %2 a %3',
 	'LogPageImported'			=> 'Página importada [[/%1]]',
-	'LogSaveNoRights'			=> 'No appropriate rights to save the page [[/%1]]',
+	'LogSaveNoRights'			=> 'No hay permisos apropiados para guardar la página [[/%1]]',
 	'LogPageCreated'			=> 'Nueva página creada [[/%1]]',
 	'LogPagePropertiesUpdated'	=> 'Metadatos de página actualizada [[/%1]]',
 	'LogPageOwnershipClaimed'	=> 'Usted solicitó propiedad de página [[/%1]]',
@@ -1330,7 +1329,7 @@ $wacko_translation = [
 	'LogPollStopped'			=> 'Encuesta detenida con ID %1',
 	'LogFileUploadedLocal'		=> 'A la página [[/%1]] fue subido archivo nuevo ##%2## (tamaño %3)',
 	'LogFileUploadedGlobal'		=> 'Subido archivo nuevo a carpeta global ##%2## (tamaño %3)',
-	'LogPMSent'					=> 'Personal message ##%1## -> ##%2## successfully sent',
+	'LogPMSent'					=> 'Mensaje personal ##%1## -> ##%2## enviado correctamente',
 	'LogUserSimilarName'		=> 'Se registraron intentos de registrar el nombre de usuario ya existente: ##%1##',
 	'LogUserEmailNotAllowed'	=> 'El correo electrónico ##%1## no está en la lista de dominios permitidos',
 	'LogRegisterTiming'			=> 'Registro fallido, el umbral de tiempo del formulario es ##%1## segundos (era ##%2##)',
