@@ -156,9 +156,9 @@ function admin_tool_badbehavior(&$engine, &$module)
 		// Display rows to the user
 
 		?>
-		<table class="formation">
+		<table class="bb-summary formation lined">
 			<colgroup>
-				<col span="1" style="width: 5%;">
+				<col span="1">
 				<col span="1">
 			</colgroup>
 			<thead>
@@ -175,7 +175,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 			{
 				foreach ($results as $result)
 				{
-					echo '<tr class="lined">' . "\n";
+					echo '<tr>' . "\n";
 					echo '<td class="label">' . $result['n'] . '</td>' . "\n";
 					# echo '<td>' . str_replace("\n", "<br>\n", Ut::html($result['request_entity'])) . '</td>' . "\n";
 
@@ -302,7 +302,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 		<?php
 		$engine->print_pagination($pagination);
 		?>
-		<table class="formation">
+		<table class="formation hl-line">
 			<thead>
 				<tr>
 					<th scope="col" class="check-column"></th>
@@ -320,7 +320,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 			{
 				$status_key = bb2_get_response($result['status_key']);
 
-				echo '<tr id="request-' . $result['log_id'] . '" class="lined">' . "\n";
+				echo '<tr id="request-' . $result['log_id'] . '">' . "\n";
 				echo '<td scope="row" class="check-column label">' .
 						'<input type="checkbox" name="submit[]" value="' . $result['log_id'] . '">' .
 					'</td>' . "\n";
@@ -444,7 +444,11 @@ function admin_tool_badbehavior(&$engine, &$module)
 		?>
 		<p><?php echo $engine->_t('BbWhitelistHint');?></p>
 
-		<table class="formation">
+		<table class="setting formation">
+			<colgroup>
+				<col span="1">
+				<col span="1">
+			</colgroup>
 			<tr>
 				<th colspan="2">
 					<br>
@@ -652,7 +656,11 @@ function bb2_options(&$engine)
 ?>
 	<input type="hidden" name="action" value="bb2_options">
 
-	<table class="formation">
+	<table class="setting formation">
+		<colgroup>
+			<col span="1">
+			<col span="1">
+		</colgroup>
 		<tr class="lined">
 			<td colspan="2"></td>
 		</tr>
