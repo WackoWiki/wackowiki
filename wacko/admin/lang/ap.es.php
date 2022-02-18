@@ -16,7 +16,7 @@ $ap_translation = [
 		'maintenance'	=> 'Mantenimiento',
 		'messages'		=> 'Mensajes',
 		'extension'		=> 'Extension',
-		'database'		=> 'Database',
+		'database'		=> 'Base de datos',
 	],
 
 	// Admin panel
@@ -31,11 +31,11 @@ $ap_translation = [
 
 	'ApHomePage'				=> 'Página de inicio',
 	'ApHomePageTip'				=> 'ir a la página home, sin salir de la administración',
-	'ApLogOut'					=> 'Log out',
+	'ApLogOut'					=> 'Desconectar',
 	'ApLogOutTip'				=> 'salir de la administración del sistema',
 
 	'TimeLeft'					=> 'Tiempo restante:  %1 minutos',
-	'ApVersion'					=> 'version',
+	'ApVersion'					=> 'versión',
 
 	'SiteOpen'					=> 'abrir',
 	'SiteOpened'				=> 'sitio abierto',
@@ -142,7 +142,7 @@ $ap_translation = [
 
 	// Menu module
 	'content_menu'		=> [
-		'name'		=> 'Menu',
+		'name'		=> 'Menú',
 		'title'		=> 'Agregar, editar o eliminar itemes del menu',
 	],
 
@@ -311,8 +311,8 @@ $ap_translation = [
 
 	'XmlSitemap'				=> 'Mapa del sitio XML',
 	'XmlSitemapInfo'			=> 'Cree un archivo XML llamado %1 dentro de la carpeta xml. Genere un archivo XML compatible con el formato XML de mapa del sitio. Es posible que desee cambiar la ruta para generarlo en su carpeta raíz, ya que ese es uno de los requisitos, es decir, que el archivo XML esté en la carpeta raíz. Por otro lado, también puede agregar la ruta al mapa del sitio en el archivo robots.txt en su directorio raíz de la siguiente manera:',
-	'XmlSitemapGz'				=> 'XML Sitemap compression',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapGz'				=> 'Compresión XML Sitemap',
+	'XmlSitemapGzInfo'			=> 'Si lo desea, puede comprimir su archivo de texto de Sitemap usando gzip para reducir su ancho de banda.',
 	'XmlSitemapTime'			=> 'Tiempo de generación de mapa del sitio XML',
 	'XmlSitemapTimeInfo'		=> 'Genera el mapa del sitio sólo una vez en el número de días dado, cero significa en cada cambio de página.',
 
@@ -357,7 +357,7 @@ $ap_translation = [
 
 	// Appearance settings
 	'AppearanceSettingsInfo'	=> 'Configuración predeterminada de visualización para el sitio.',
-	'AppearanceSettingsUpdated'	=> 'Updated appearance settings.',
+	'AppearanceSettingsUpdated'	=> 'Configuración de apariencia actualizada.',
 
 	'LogoOff'					=> 'Apagado',
 	'LogoOnly'					=> 'logo',
@@ -681,8 +681,8 @@ $ap_translation = [
 	'NewsSection'				=> 'Sección de Noticias',
 	'NewsCluster'				=> 'Clúster de noticias',
 	'NewsClusterInfo'			=> 'Clúster raíz de la sección de noticias (action %1).',
-	'NewsStructure'				=> 'News cluster structure',
-	'NewsStructureInfo'			=> 'Stores the articles optionally in sub-clusters by year/month or week (e.g. <code>[cluster]/[year]/[month]</code>).',
+	'NewsStructure'				=> 'Estructura del clúster de noticias',
+	'NewsStructureInfo'			=> 'Almacena los artículos opcionalmente en subclústeres por año/mes o semana (por ejemplo, <code>[cluster]/[year]/[month]</code>).',
 
 	'LicenseSection'			=> 'Licencia',
 	'DefaultLicense'			=> 'Licencia por defecto',
@@ -861,7 +861,7 @@ $ap_translation = [
 	'UploadQuotaUserInfo'		=> 'Restricción de la cuota de almacenamiento que puede ser cargada por un usuario, siendo <code>0</code> ilimitado.',
 	'CheckMimetype'				=> 'Comprobar archivos adjuntos',
 	'CheckMimetypeInfo'			=> 'Algunos navegadores pueden ser engañados para que asuman un mimetype de archivos subibles incorrecto. Esta opción previene que tales archivos que puedan causar eso sean rechazados.',
-	'TranslitFileName'			=> 'Transliterate file names',
+	'TranslitFileName'			=> 'Transliterar nombres de archivo',
 	'TranslitFileNameInfo'		=> 'Si es aplicable y no hay necesidad de tener caracteres Unicode, se recomienda encarecidamente aceptar sólo caracteres alfanuméricos.',
 
 	'Thumbnails'				=> 'Miniaturas',
@@ -989,7 +989,7 @@ $ap_translation = [
 	'BackupData'				=> 'Datos',
 	'BackupFolder'				=> 'Carpeta',
 	'BackupTable'				=> 'Tabla',
-	'BackupCluster'				=> 'Cluster',
+	'BackupCluster'				=> 'Clúster',
 	'BackupFiles'				=> 'Archivos',
 	'BackupSettings'			=> 'Indique el esquema de backup deseado.<br>' .
 									'El cluster de root no afecta al backup global de archivos y al backup de archivos de cache (al seleccionar siempre se guardan por completo).<br>' .
@@ -1100,7 +1100,7 @@ $ap_translation = [
 	'LogMemberAdded'			=> 'Añadido miembro ##%1## al grupo ##%2##',
 	'LogMemberRemoved'			=> 'Eliminado miembro ##%1## del grupo ##%2##',
 	'LogGroupCreated'			=> 'Creó un nuevo grupo ##%1##',
-	'LogGroupRenamed'			=> 'Group ##%1## renamed to ##%2##',
+	'LogGroupRenamed'			=> 'Grupo ##%1## renombrado a ##%2##',
 	'LogGroupRemoved'			=> 'Grupo eliminado ##%1##',
 
 	'GroupsMembersFor'			=> 'Miembros del grupo',

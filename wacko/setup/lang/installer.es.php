@@ -47,7 +47,7 @@ $lang = [
 'Continue'						=> 'Continuar',
 'Back'							=> 'Volver',
 'Recommended'					=> 'recomendado',
-'InvalidAction'					=> 'Invalid action',
+'InvalidAction'					=> 'Acción no válida',
 
 /*
    Language Selection Page
@@ -150,10 +150,10 @@ $lang = [
 'TestingConfiguration'			=> 'Comprobando la configuración',
 'TestConnectionString'			=> 'Comprobando configuración de la conexión con la base de datos',
 'TestDatabaseExists'			=> 'Verificando si existe la base de datos especificada',
-'TestDatabaseVersion'			=> 'Checking database minimum version requirements',
+'TestDatabaseVersion'			=> 'Comprobando los requisitos mínimos de versión de la base de datos',
 'InstallTables'					=> 'Instalando tablas',
 'ErrorDbConnection'				=> 'Ocurrió un problema con la configuración de la conexión con la base de datos, por favor retroceda para verificar.',
-'ErrorDatabaseVersion'			=> 'The database version is %1 but requires at least %2.',
+'ErrorDatabaseVersion'			=> 'La versión de la base de datos es %1 pero requiere al menos %2.',
 'To'							=> 'a',
 'AlterTable'					=> 'Alterando %1 Tabla',
 'InsertRecord'					=> 'Inserting Record into %1 table',
@@ -207,7 +207,7 @@ $lang = [
 'NextStep'						=> 'En el paso siguiente el instalador intentará guardar el archivo con las configuraciones actualizadas, %1. Por favor asegurese que el servidor web tenga acceso de escritura al archivo, o lo tendrá que editar manualmente. Vea <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> por detalles.',
 'WrittenAt'						=> 'Guardado ',
 'DontChange'					=> 'no cambie manualmente wacko_version!',
-'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'descripción detallada https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> 'Intente de Nuevo',
 
 ];
