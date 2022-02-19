@@ -631,7 +631,7 @@ $ap_translation = [
 	'X11colors'					=> 'X11 Colors Usage',
 	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
 	'WikiLinks'					=> 'Disable Wikilinks',
-	'WikiLinksInfo'				=> 'Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page. This is useful when you work across different namespaces aks clusters. By default it is off.',
+	'WikiLinksInfo'				=> 'Lülitab <code>CamelCaseWords</code> linkimise välja, teie CamelCase Words ei linki enam otse uuele lehele. See on kasulik, kui töötate erinevates nimeruumides aks klastrites. Vaikimisi on see välja lülitatud.',
 	'BracketsLinks'				=> 'Disable bracketslinks',
 	'BracketsLinksInfo'			=> 'Disables <code>[[link]]</code> and <code>((link))</code> syntax.',
 	'Formatters'				=> 'Disable Formatters',
@@ -647,7 +647,7 @@ $ap_translation = [
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Ajatsoon',
-	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
+	'TimezoneInfo'				=> 'Ajavöönd, mida kasutatakse kellaaegade kuvamiseks kasutajatele, kes ei ole sisse logitud (külalised). Sisselogitud kasutajad määravad ja saavad oma ajavööndit muuta oma kasutaja seadetes.',
 
 	'Canonical'					=> 'Kasutage täielikult kanoonilisi URL-e',
 	'CanonicalInfo'				=> 'Kõik lingid luuakse absoluutsete URL-idena kujul %1. Eelistada tuleks URL-e serveri juure suhtes vormis %2.',

@@ -631,7 +631,7 @@ $ap_translation = [
 	'X11colors'					=> 'X11 Colors Usage',
 	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
 	'WikiLinks'					=> 'Disable Wikilinks',
-	'WikiLinksInfo'				=> 'Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page. This is useful when you work across different namespaces aks clusters. By default it is off.',
+	'WikiLinksInfo'				=> 'Деактивира свързването за <code>CamelCaseWords</code>, вашите CamelCase Words вече няма да бъдат свързвани директно към нова страница. Това е полезно, когато работите в различни пространства от имена aks клъстери. По подразбиране е изключено.',
 	'BracketsLinks'				=> 'Disable bracketslinks',
 	'BracketsLinksInfo'			=> 'Disables <code>[[link]]</code> and <code>((link))</code> syntax.',
 	'Formatters'				=> 'Disable Formatters',
@@ -647,7 +647,7 @@ $ap_translation = [
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Времева зона',
-	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
+	'TimezoneInfo'				=> 'Времева зона, която да се използва за показване на времето на потребители, които не са влезли в системата (гости). Влезлите в системата потребители задават и могат да променят часовата си зона в потребителските си настройки.',
 
 	'Canonical'					=> 'Ползване на напълно уеднаквени URL адреси',
 	'CanonicalInfo'				=> 'Всички връзки са създадени като абсолютни URL адреси във формата %1. Трябва да се предпочитат URL адреси, свързани с корена на сървъра във формата %2.',

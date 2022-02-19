@@ -631,7 +631,7 @@ $ap_translation = [
 	'X11colors'					=> 'X11 Colors Usage',
 	'X11colorsInfo'				=> 'Extents the available colors for <code>??(color) background??</code> and <code>!!(color) text!!</code>Unsetting slightly speeds up the process of adding comments and saving of pages.',
 	'WikiLinks'					=> 'Désactiver les Wikilinks',
-	'WikiLinksInfo'				=> 'Disables linking for <code>CamelCaseWords</code>, your CamelCase Words will no longer be linked directly to a new page. This is useful when you work across different namespaces aks clusters. By default it is off.',
+	'WikiLinksInfo'				=> 'Désactive les liens pour <code>CamelCaseWords</code>, vos CamelCase Words ne seront plus liés directement à une nouvelle page. Ceci est utile lorsque vous travaillez sur différents espaces de noms et clusters. Par défaut, il est désactivé.',
 	'BracketsLinks'				=> 'Désactiver les liens entre parenthèses',
 	'BracketsLinksInfo'			=> 'Désactive <code>[[lien]]</code> et <code>((lien))</code> syntaxe.',
 	'Formatters'				=> 'Désactiver les Formateurs',
@@ -647,7 +647,7 @@ $ap_translation = [
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Fuseau horaire',
-	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
+	'TimezoneInfo'				=> 'Fuseau horaire à utiliser pour afficher les heures aux utilisateurs qui ne sont pas connectés (invités). Les utilisateurs connectés définissent et peuvent modifier leur fuseau horaire dans leurs paramètres d\'utilisateur.',
 
 	'Canonical'					=> 'Utiliser des URL canoniques',
 	'CanonicalInfo'				=> 'Tous les liens sont créés sous forme d\'URL absolues sous la forme %1. Les URL relatives à la racine du serveur sous la forme %2 doivent être préférées.',
