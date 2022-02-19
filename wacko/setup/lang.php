@@ -39,35 +39,12 @@ echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_
 ?>
 	<p><?php echo $lang['LangDesc'];?></p>
 <?php
-// available languages
-$lang_codes = [
-	'bg' => 'български',
-	'da' => 'Dansk',
-	'de' => 'Deutsch',
-	'el' => 'Ελληνικά',
-	'en' => 'English',
-	'es' => 'Español',
-	'et' => 'Eesti',
-	'fa' => 'فارسی',
-	'fr' => 'Français',
-	'hi' => 'हिन्दी',
-	'hu' => 'Magyar',
-	'it' => 'Italiano',
-	'ja' => '日本語',
-	'ko' => '한국어',
-	'nl' => 'Nederlands',
-	'pl' => 'Polski',
-	'pt' => 'Português',
-	'ru' => 'Русский',
-	'zh' => '简体中文',
-	'zh-tw' => '正體中文',
-];
-
 $n = 1;
 
 echo '<br><table class="checkbox_input">' . "\n\t<tr>\n";
 
-foreach($lang_codes as $key => $value)
+// available languages
+foreach($lang['LanguageArray'] as $key => $value)
 {
 	echo "\t\t<td>\n\t\t\t";
 	echo '<input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';
