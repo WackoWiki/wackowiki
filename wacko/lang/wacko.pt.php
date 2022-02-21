@@ -176,7 +176,7 @@ $wacko_translation = [
 	'PageHandlerMoreTip'		=> 'mais',
 
 	'ThemeCorrupt'				=> 'Theme is corrupt',
-	'InvalidNamespace'			=> 'Invalid namespace given.',
+	'InvalidNamespace'			=> 'Espaço de nomes inválido dado.',
 	'DoesNotExists'				=> 'Esta página ainda não existe.',
 	'PromptCreate'				=> 'Talvez a queira <a href="%1">criar</a> agora?',
 	'RevisionHint'				=> 'Esta é uma revisão antiga de <a href="%1">%2</a> de %3 editado por %4.',
@@ -288,7 +288,7 @@ $wacko_translation = [
 	'CategoriesGroupInfo'		=> '* Select [nenhum grupo], to debundled the category.',
 	'CategoriesNoGroup'			=> '[nenhum grupo]',
 	'CategoriesDelete'			=> 'Tens a certeza que queres remover a categoria %1?',
-	'CategoriesDeleteInfo'		=> '* Note: Change will affect all pages that are assigned to that category. If the word has a sub-category, they will not be deleted, but only debundled.',
+	'CategoriesDeleteInfo'		=> '* Nota: A alteração afectará todas as páginas que são atribuídas a essa categoria. Se a palavra tiver uma subcategoria, não serão eliminadas, mas apenas desagregadas.',
 	'CategoriesStoreInfo'		=> 'Para atribuir categorias a uma página, selecione as caixas de seleção.',
 	'CategoriesStoreButton'		=> 'Salvar Categorias',
 	'CategoriesGroupButton'		=> 'Grupo',
@@ -319,7 +319,7 @@ $wacko_translation = [
 	'GroupsDescription'			=> 'Descrição',
 	'GroupsCreated'				=> 'Criado',
 	'GroupsNotFound'			=> 'Group %2 not found. Click <a href="%1">here</a>, to go to the main list.',
-	'GroupsProfile'				=> 'Profile',
+	'GroupsProfile'				=> 'Perfil',
 	'GroupsList'				=> 'Ver a lista completa de grupos',
 	'GroupSpace'				=> 'Group space',
 
@@ -404,10 +404,10 @@ $wacko_translation = [
 	'LinksRemoved'				=> 'Ligações da página removidas.',
 	'CategoriesRemoved'			=> 'Categorias de páginas eliminadas.',
 	'AclsRemoved'				=> 'Permissões da página removidas.',
-	'BookmarksRemoved'			=> 'Bookmarks from page removidos.',
-	'WatchesRemoved'			=> 'Watches from page removidos.',
-	'CommentsRemoved'			=> 'Comments from page removidos.',
-	'FilesRemoved'				=> 'Files from page removidos.',
+	'BookmarksRemoved'			=> 'Bookmarks from page removed.',
+	'WatchesRemoved'			=> 'Watches from page removed.',
+	'CommentsRemoved'			=> 'Comments from page removed.',
+	'FilesRemoved'				=> 'Files from page removed.',
 	'PageRemoved'				=> 'Página removida.',
 	'PageCachePurged'			=> 'Cache purged.',
 	'ClusterRemoved'			=> 'All pages of the cluster removed.',
@@ -642,7 +642,7 @@ $wacko_translation = [
 	'EmailReverify'				=> 'Alguém (talvez voçê) submeteu o seu email como alvo de notificação no site  %1.' . "\n" . 'O seu username: %2'."\n\n" . 'Se quiser receber notificações , é necessário aprovar o seu email. Siga este ' . "\n" . '%3' . "\n" . 'link para o fazer.'."\n\n",
 	'EmailConfirm'				=> 'Por favor verifique o seu email',
 	'EmailConfirmed'			=> 'Email confirmado com sucesso.',
-	'EmailNotConfirmed'			=> 'Email não confirmado. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
+	'EmailNotConfirmed'			=> 'Email não confirmado. Isto pode dever-se a um código de confirmação incorrecto ou o endereço de correio electrónico pode já estar confirmado. Pode verificar se o endereço de correio electrónico já está confirmado fazendo o login e vendo o seu estado na sua página %1.',
 	'EmailNotVerified'			=> 'E-mail não confirmado!',
 	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
 									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
@@ -656,7 +656,7 @@ $wacko_translation = [
 	'EmailForgotSubject'		=> 'Renovação de Password para ',
 	'EmailForgotMessage'		=> 'Alguém (talvez voçê) esqueceu-se da password para  %1.' . "\n" . 'O seu login: %2'."\n\n" . 'Clique no link ou copie para a linha de endereço do seu browser para mudar a sua password.' . "\n" . '%3' . "\n\n",
 	'CodeWasSent'				=> 'Instruções para recuperação de Password foram-lhe enviadas por e-mail.',
-	'WrongCode'					=> 'Wrong code',
+	'WrongCode'					=> 'Código errado',
 	'ChangePasswordForUser'		=> '%1 viu a sua password alterada',
 
 	'Watchers'					=> 'Lista de quem acompanha %1',
@@ -718,7 +718,7 @@ $wacko_translation = [
 	'UsersSignup'				=> 'Signup',
 	'UsersLastSession'			=> 'Última sessão',
 	'UsersNotFound'				=> 'User %2 not found. Click <a href="%1">here</a>, to go to the main list.',
-	'UsersProfile'				=> 'Profile',
+	'UsersProfile'				=> 'Perfil',
 	'UsersContact'				=> 'Contato',
 	'UsersList'					=> 'Ver a lista completa de usuários',
 	'UsersNA'					=> '[not set]',
@@ -792,13 +792,13 @@ $wacko_translation = [
 	'SettingsAttachments'		=> 'Anexos',
 	'SettingsUpload'			=> 'Enviar',
 	'SettingsCategories'		=> 'Categorias',
-	'SettingsLanguages'			=> 'Languages',
+	'SettingsLanguages'			=> 'Idiomas',
 	'SettingsReferrers'			=> 'Referências',
 	'SettingsWatch'				=> 'Acompanhe',
 	'SettingsPrint'				=> 'Versão Impressora',
 	'SettingsWordprocessor'		=> 'Versão Processador de texto',
 	'SettingsLatex'				=> 'Versão LaTeX',
-	'SettingsXML'				=> 'Export to XML',
+	'SettingsXML'				=> 'Exportar para XML',
 	'NeedToChangeLang'			=> 'A linguagem de página não suportada %1 precisa ser alterada.',
 	'SetLang'					=> 'Idioma para esta página',
 	'SetMenuLabel'				=> 'Menu label',
@@ -974,9 +974,9 @@ $wacko_translation = [
 	'FeedXMLTip'				=> '',
 
 	// XML / RSS autodiscovery
-	'ChangesTitleXML'			=> ' - Recent changes',
+	'ChangesTitleXML'			=> ' - Alterações recentes',
 	'ChangesXML'				=> 'Recent changes to the ',
-	'CommentsTitleXML'			=> ' - Recent comments',
+	'CommentsTitleXML'			=> ' - Recentemente comentadas',
 	'CommentsXML'				=> 'Recent comments to the ',
 	'NewsTitleXML'				=> ' - Recent news',
 	'NewsXML'					=> 'Recent news to the ',
@@ -989,7 +989,7 @@ $wacko_translation = [
 	'NewsFeed'					=> 'Notícia',
 	'RevisionsFeed'				=> 'Revisions of ',
 
-	'LastModification'			=> 'Last Modification',
+	'LastModification'			=> 'Última modificação',
 
 	// Captcha
 	'Captcha'					=> 'Por favor, digite a palavra que você lê na imagem',
@@ -1032,13 +1032,13 @@ $wacko_translation = [
 	'ModerateDeletePosts'		=> 'Delete comments',
 	'ModerateMove'				=> 'Mover',
 	'ModerateSplit'				=> 'Split / Move comments',
-	'ModerateMerge'				=> 'Merge',
+	'ModerateMerge'				=> 'Fundir',
 	'ModerateLock'				=> 'Lock',
 	'ModerateUnlock'			=> 'Unlock',
 	'ModerateAccept'			=> 'Accept',
 	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
 	'ModerateRenameConfirm'		=> 'Enter a new title for the selected page',
-	'ModerateRenameExists'		=> 'Page same name already exists! Choose a different name.',
+	'ModerateRenameExists'		=> 'Já existe uma página com o mesmo nome! Escolha um nome diferente.',
 	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',
@@ -1054,7 +1054,7 @@ $wacko_translation = [
 	'ModerateSplitPageName'		=> 'Enter the name of the page / topic, where to move detachable comments, and select a separation schema',
 	'ModerateSplitAllAfter'		=> 'Detach all the comments after the first selected (and including)',
 	'ModerateSplitSelected'		=> 'Separated only selected comments (total %1)',
-	'ModerateUserProfile'		=> 'profile',
+	'ModerateUserProfile'		=> 'Perfil',
 	'ModerateNoItemChosen'		=> 'Please select at least one item via the Set button.',
 
 	'ModerateSection2'			=> 'moderate section',
@@ -1075,11 +1075,11 @@ $wacko_translation = [
 	'ModerateCommentsMoved'		=> 'Selected comments successfully migrated to the given page.',
 
 	// forum
-	'ForumSubforums'			=> 'Forum',
-	'ForumTopic'				=> 'Topic',
+	'ForumSubforums'			=> 'Fórum',
+	'ForumTopic'				=> 'Tópico',
 	'ForumTopics'				=> 'Tópicos',
 	'ForumPosts'				=> 'Mensagens',
-	'ForumReplies'				=> 'Replies',
+	'ForumReplies'				=> 'Respostas',
 	'ForumAuthor'				=> 'Autor',
 	'ForumViews'				=> 'Vistas',
 	'ForumCreated'				=> 'Criado',
@@ -1184,8 +1184,8 @@ $wacko_translation = [
 
 	// loading error
 	'UnknownAction'				=> 'Acção desconhecida',
-	'UnknownMethod'				=> 'Unknown method',
-	'FormatterNotFound'			=> 'Formatter %1 not found',
+	'UnknownMethod'				=> 'Método desconhecido',
+	'FormatterNotFound'			=> 'Formatter %1 não encontrada',
 
 	// log
 	'LogAdminLoginSuccess'		=> 'Successful login into the administrative panel',

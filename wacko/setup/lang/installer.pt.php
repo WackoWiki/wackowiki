@@ -56,7 +56,7 @@ $lang = [
 'PleaseUpgradeToR6'				=> 'Está a correr uma versão antiga (pré %1) do WackoWiki (%1). Para actualizar para esta nova versão do WackoWiki, deve primeiro actualizar a sua instalação para %2.',
 'UpgradeFromWacko'				=> 'Bem-vindo a WackoWiki, parece que está a passar de WackoWiki %1 para %2.  As próximas páginas irão guiá-lo através do processo de actualização.',
 'FreshInstall'					=> 'Bem-vindo ao WackoWiki, está prestes a instalar o WackoWiki %1.  As próximas páginas irão guiá-lo através do processo de instalação.',
-'PleaseBackup'					=> 'Please, <strong>backup</strong> your database, config file and all changed files such as those which have hacks and patches applied to them before starting upgrade process. This can save you from big headache.',
+'PleaseBackup'					=> 'Por favor, <strong>backup</strong> a sua base de dados, ficheiro de configuração e todos os ficheiros alterados, tais como os que têm hacks e patches aplicados a eles antes de iniciar o processo de actualização. Isto pode salvá-lo de uma grande dor de cabeça.',
 'LangDesc'						=> 'Escolha um idioma para o processo de instalação. Este idioma também será usado como o idioma padrão da sua instalação do WackoWiki.',
 
 /*
@@ -78,7 +78,7 @@ $lang = [
 'ErrorPhpExtensions'			=> 'A sua instalação PHP parece estar a faltar as extensões de PHP assinaladas que são requeridas por WackoWiki.',
 'PcreWithoutUtf8'				=> 'O módulo PCRE do PHP parece ter sido compilado sem suporte PCRE_UTF8.',
 'NotePermissions'				=> 'This installer will try to write the configuration data to the file %1, located in your WackoWiki directory. In order for this to work, you must make sure the web server has write access to that file.  If you can\'t do this, you will have to edit the file manually (the installer will tell you how).<br><br>See <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
-'ErrorPermissions'				=> 'It would appear that the installer cannot automatically set the required file permissions for WackoWiki to work correctly. You will be prompted later in the installation process to manually configure the required file permissions on your server.',
+'ErrorPermissions'				=> 'Parece que o instalador não pode definir automaticamente as permissões de arquivo necessárias para que o WackoWiki funcione correctamente. Ser-lhe-á pedido mais tarde no processo de instalação para configurar manualmente as permissões de ficheiro necessárias no seu servidor.',
 'ErrorMinPhpVersion'			=> 'A Versão PHP deve ser maior que <strong>' . PHP_MIN_VERSION . '</strong>, o seu servidor parece estar a correr uma versão anterior. Tem de actualizar para uma versão mais recente do PHP para que o WackoWiki funcione correctamente.',
 'Ready'							=> 'Parabéns, parece que o seu servidor é capaz de executar o WackoWiki. As próximas páginas irão levá-lo através do processo de configuração.',
 
@@ -87,10 +87,10 @@ $lang = [
 */
 'config-site'					=> 'Configuração do Site',
 'SiteName'						=> 'Nome da wiki',
-'SiteNameDesc'					=> 'Please enter the name of your Wiki site.',
+'SiteNameDesc'					=> 'Por favor, introduza o nome do seu sítio Wiki.',
 'SiteNameDefault'				=> 'AMinhaWiki',
 'HomePage'						=> 'Home Page',
-'HomePageDesc'					=> 'Enter the name you would like your home page to have, this will be the default page users will see when they visit your site and should be a <a href="https://wackowiki.org/doc/Doc/English/WikiName" title="View Help" target="_blank">WikiName</a>.',
+'HomePageDesc'					=> 'Introduza o nome que gostaria que a sua página inicial tivesse, esta será a página padrão que os utilizadores verão quando visitarem o seu site.',
 'HomePageDefault'				=> 'HomePage',
 'MultiLang'						=> 'Multi Language Mode',
 'MultiLangDesc'					=> 'O modo multilíngüe permite ter páginas com configurações de idioma diferentes em uma única instalação. Se este modo estiver ativado, o instalador criará itens de menu iniciais para todos os idiomas disponíveis na distribuição.',
@@ -113,7 +113,7 @@ $lang = [
 'ErrorAdminEmail'				=> 'Você digitou um endereço de e-mail inválido!',
 'ErrorAdminPasswordMismatch'	=> 'As senhas não coincidem!',
 'ErrorAdminPasswordShort'		=> 'A senha do administrador é muito curta, o comprimento mínimo é de %1 caracteres!',
-'ModRewriteStatusUnknown'		=> 'The installer cannot verify that mod_rewrite is enabled, however this does not mean it is disabled',
+'ModRewriteStatusUnknown'		=> 'O instalador não pode verificar se o mod_rewrite está activado, mas isso não significa que esteja desactivado',
 
 /*
    Database Config Page
@@ -188,7 +188,7 @@ $lang = [
 'ErrorCreatingTable'			=> 'Error creating %1 table, does it already exist?',
 'DeletingTables'				=> 'Excluindo Tabelas',
 'DeletingTablesEnd'				=> 'Finished Deleting Tables',
-'ErrorDeletingTable'			=> 'Error deleting %1 table, the most likely reason is that the table does not exist in which case you can ignore this warning.',
+'ErrorDeletingTable'			=> 'Erro ao eliminar a tabela %1, a razão mais provável é que a tabela não existe, caso em que se pode ignorar este aviso.',
 'DeletingTable'					=> 'Deleting %1 table',
 
 /*
@@ -202,12 +202,12 @@ $lang = [
 'ThatsAll'						=> 'E é tudo! Pode agora <a href="%1">ver o seu site WackoWiki</a>.',
 'SecurityConsiderations'		=> 'Considerações de segurança',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
-'RemoveSetupDirectory'			=> 'You should delete the %1 directory now that the installation process has been completed.',
+'RemoveSetupDirectory'			=> 'Deve eliminar o directório %1 agora que o processo de instalação foi concluído.',
 'ErrorGivePrivileges'			=> 'The configuration file %1 could not be written. You will need to give your web server temporary write access to either your WackoWiki directory, or a blank file called %1<br>%2<br>; don\'t forget to remove write access again later, i.e. %3.<br>If, for any reason, you can\'t do this, you\'ll have to copy the text below into a new file and save/upload it as %1 into the WackoWiki directory. Once you\'ve done this, your WackoWiki site should work. If not, please visit <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a>',
 'NextStep'						=> 'In the next step, the installer will try to write the updated configuration file, %1.  Please make sure the web server has write access to the file, or you will have to edit it manually.  Once again, see  <a href="https://wackowiki.org/doc/Doc/English/Installation" target="_blank">WackoWiki:Doc/English/Installation</a> for details.',
 'WrittenAt'						=> 'written at ',
 'DontChange'					=> 'do not change wacko_version manually!',
-'ConfigDescription'				=> 'detailed description https://wackowiki.org/doc/Doc/English/Configuration',
+'ConfigDescription'				=> 'descrição detalhada https://wackowiki.org/doc/Doc/English/Configuration',
 'TryAgain'						=> 'Tente novamente',
 
 ];
