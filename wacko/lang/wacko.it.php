@@ -108,9 +108,9 @@ $wacko_translation = [
 	// session notice
 	'IPAddressChanged'			=> 'Indirizzo IP cambiato in %1 (was %2)',
 
-	'SessionReplay'				=> 'Session terminated due to replay.',
-	'SessionObsolete'			=> 'Session is outdated.',
-	'SessionExpired'			=> 'Session has expired.',
+	'SessionReplay'				=> 'Sessione terminata a causa di riproduzione.',
+	'SessionObsolete'			=> 'La sessione è obsoleta.',
+	'SessionExpired'			=> 'La sessione è scaduta.',
 	'SessionTimeout'			=> 'Sessione terminata a causa di timeout.',
 	'SessionInactivity'			=> 'Sessione terminata a causa di inactivity.',
 	'SessionUaChange'			=> 'Sessione terminata a causa di user agent change.',
@@ -205,7 +205,7 @@ $wacko_translation = [
 	'EditText'					=> 'Edita questa pagina',
 	'EditCommentTip'			=> 'Modifica commento',
 	'EditComment'				=> 'Modifica questo commento',
-	'ReplyComment'				=> 'Reply',
+	'ReplyComment'				=> 'Rispondi',
 	'ReplyCommentTip'			=> 'Reply this comment',
 	'RevisionTip'				=> 'Clicca per vedere le ultime revisioni della pagina',
 	'RevisionText'				=> 'Revisioni',
@@ -252,7 +252,7 @@ $wacko_translation = [
 	// purge handler
 	'PurgePage'					=> 'Pagina di purga',
 	'NotOwnerAndCantPurge'		=> 'Non sei il proprietario della pagina e non puoi purgarla.',
-	'ReallyPurge'				=> 'ATTENTION: Purging the page is irreversible!',
+	'ReallyPurge'				=> 'ATTENZIONE: Purgare la pagina è irreversibile!',
 	'SelectPurgeOptions'		=> 'Seleziona le opzioni di spurgo necessarie:',
 	'PurgeComments'				=> 'Elimina tutti i commenti della pagina',
 	'CommentsPurged'			=> 'Tutti i commenti sono stati cancellati.',
@@ -264,7 +264,7 @@ $wacko_translation = [
 
 	// categories handler
 	'Categories'				=> 'Categorie',
-	'CategoriesAssign'			=> 'assign',
+	'CategoriesAssign'			=> 'assegna',
 	'CategoriesEdit'			=> 'modificare',
 	'Category'					=> 'Categoria',
 	'CategoriesFor'				=> 'Categorie per',
@@ -275,12 +275,12 @@ $wacko_translation = [
 	'CategoriesAdded'			=> 'Categoria aggiunta con successo.',
 	'CategoriesRenamed'			=> 'Categoria rinominata con successo.',
 	'CategoriesUngrouped'		=> 'La categoria è stata disaggregata con successo.',
-	'CategoriesGrouped'			=> 'The category entered in the new group.',
+	'CategoriesGrouped'			=> 'La categoria inserita nel nuovo gruppo.',
 	'NoMultilevelGrouping'		=> 'Non è possibile raggruppare le categorie su più livelli.',
 	'CategoriesDeleted'			=> 'La categoria è stata cancellata dal database e da tutte le pagine.',
 	'CategoriesAdd'				=> 'Aggiungi una nuova categoria',
 	'CategoryDescription'		=> 'Descrizione',
-	'CategoriesAddGrouped'		=> 'Grouped with the category',
+	'CategoriesAddGrouped'		=> 'Raggruppato con la categoria',
 	'CategoriesAddGroupedNo'	=> 'Nessun gruppo.',
 	'CategoriesRename'			=> 'Rinomina la categoria %1 in',
 	'CategoriesRenameInfo'		=> '* Nota: Il cambiamento avrà effetto su tutte le pagine assegnate a quella categoria.',
@@ -294,7 +294,7 @@ $wacko_translation = [
 	'CategoriesGroupButton'		=> 'Gruppo',
 	'CategoriesEditInfo'		=> 'Per modificare l\'elenco delle categorie, selezionare il pulsante di opzione.',
 	'NoCategoriesForThisLang'	=> 'Le categorie per questa lingua non sono specificate.',
-	'PagesCategory'				=> 'Pages category',
+	'PagesCategory'				=> 'Categoria pagine',
 	'CategoryNotExists'			=> 'La categoria non esiste.',
 	'CategoryEmpty'				=> 'Categoria vuota.',
 	'NoCategorySelected'		=> 'Nessuna categoria selezionata.',
@@ -588,9 +588,9 @@ $wacko_translation = [
 	'NotifyPendingCommentTip'	=> 'Only one notification is sent for the first comment to a page you are watching.',
 	'NotifyPendingTip'			=> 'Notification is automatically re-enabled when you visit the current version of the page.',
 
-	'FurtherPending'			=> 'There will be no other notifications in case of further changes unless you visit this page.',
+	'FurtherPending'			=> 'Non ci saranno altre notifiche in caso di ulteriori modifiche a meno che non si visita questa pagina.',
 
-	'UserSettingsEmailMe'		=> 'Email me when ...',
+	'UserSettingsEmailMe'		=> 'Inviami un\'email quando...',
 
 	'UserSettingsExtended'		=> 'Estesa',
 	'UserSettingsOther'			=> 'Altre impostazioni',
@@ -644,10 +644,10 @@ $wacko_translation = [
 	'EmailConfirmed'			=> 'Conferma dell\'email riuscita.',
 	'EmailNotConfirmed'			=> 'L\'email non può essere confermata. This may be due to an incorrect confirmation code or the email address may already be confirmed. You can check if the email address is already confirmed by logging in and viewing its status on your %1 page.',
 	'EmailNotVerified'			=> 'Email non verificata!',
-	'EmailNotVerifiedDesc'		=> 'You will not receive notification of changes or comments of watched pages, ' .
-									'messages from other users, as well you <strong>will not be able to recover a forgotten password</strong>, ' .
-									'until your email-address was confirmed, by following the link in the email sent to you. ' .
-									'If, within days after registration You never got a email, ask for it again by clicking ',
+	'EmailNotVerifiedDesc'		=> 'Non riceverai notifica di modifiche o commenti alle pagine osservate, ' .
+									'messaggi da altri utenti, così anche tu <strong>non sarà in grado di recuperare una password dimenticata</strong>, ' .
+									'fino alla conferma del tuo indirizzo email, seguendo il link nell\'email che ti è stata inviata. ' .
+									'Se, entro giorni dalla registrazione Non hai mai ricevuto una e-mail, chiedi di nuovo cliccando ',
 
 	'ForgotPasswordHint'		=> 'Inserisci il tuo login e indirizzo e-mail,' . "\n" . 'quindi verrà inviata una e-mail con le istruzioni.',
 	'ForgotPassword'			=> 'Password dimenticata?',
@@ -659,7 +659,7 @@ $wacko_translation = [
 	'WrongCode'					=> 'Codice errato',
 	'ChangePasswordForUser'		=> 'cambio di password di %1',
 
-	'Watchers'					=> 'List of watchers for %1',
+	'Watchers'					=> 'Elenco di osservatori per %1',
 	'WatchersFor'				=> 'Osservatori per',
 	'NoWatchers'				=> 'There are no watchers for %1',
 	'NotOwnerToViewWatchers'	=> 'You are not the owner of this page and you can\'t see list of watchers for it.',
@@ -878,7 +878,7 @@ $wacko_translation = [
 	'Files0'					=> 'Non vi è alcun file in questa pagina.',
 	'Files1'					=> 'Vi è un file in questa pagina.',
 	'FilesN'					=> 'Ci sono %1 files in questa pagina.',
-	'Files'						=> 'Files',
+	'Files'						=> 'File',
 	'File'						=> 'File',
 	'ShowFiles'					=> 'Visualizzare files/form',
 	'HideFiles'					=> 'Nascondere files/form',
@@ -1035,10 +1035,10 @@ $wacko_translation = [
 	'ModerateMerge'				=> 'Merge',
 	'ModerateLock'				=> 'Lock',
 	'ModerateUnlock'			=> 'Unlock',
-	'ModerateAccept'			=> 'Accept',
-	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
+	'ModerateAccept'			=> 'Accetta',
+	'ModerateDeleteConfirm'		=> 'Sei sicuro di voler <strong>rimuovere</strong> i seguenti argomenti?',
 	'ModerateRenameConfirm'		=> 'Inserisci un nuovo titolo per la pagina selezionata',
-	'ModerateRenameExists'		=> 'Esiste già una pagina con lo stesso nome! Scegli un nome diverso.',
+	'ModerateRenameExists'		=> 'Lo stesso nome della pagina esiste già! Scegli un altro nome.',
 	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',

@@ -827,7 +827,7 @@ $ap_translation = [
 	'AbuseEmail'				=> 'Email abuse service',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
-	'SendTestEmail'				=> 'Send a test email',
+	'SendTestEmail'				=> 'Saada testimiseks e-kiri',
 	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',

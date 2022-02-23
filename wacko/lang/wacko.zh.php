@@ -25,7 +25,7 @@ $wacko_translation = [
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> 'Send',
 
-	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+	'FormInvalid'				=> '提交的表格无效。请尝试再次提交。',
 
 	// logged in panel
 	'AccountText'				=> '我的帐户',
