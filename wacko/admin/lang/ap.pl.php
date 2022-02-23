@@ -655,7 +655,7 @@ $ap_translation = [
 	'NameDateMacro'				=> 'The format of the <code>::@::</code> macro',
 	'NameDateMacroInfo'			=> '(name, time), e.g. <code>UserName (17.11.2016 16:48)</code>',
 	'Timezone'					=> 'Strefa czasowa',
-	'TimezoneInfo'				=> 'Timezone to use for displaying times to users who are not logged in (guests). Logged in users set and can change their timezone it in their user settings.',
+	'TimezoneInfo'				=> 'Strefa czasowa, która ma być używana do wyświetlania czasu niezalogowanym użytkownikom (gościom). Zalogowani użytkownicy ustawiają i mogą zmieniać swoją strefę czasową w ustawieniach użytkownika.',
 	'EnableDst'					=> 'Enable Summer Time/DST',
 	'EnableDstInfo'				=> '',
 

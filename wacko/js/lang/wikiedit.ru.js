@@ -1,8 +1,8 @@
 lang = {
 	// default.js
 	ReallySave :			"Действительно сохранить?",
-	ModifiedHint :			"Field has changed, do not forget to save the changes.",
-	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
+	ModifiedHint :			"Поле изменилось, не забудьте сохранить изменения.",
+	NotSavedWarning :		"Вы не сохранили изменения. Вы уверены, что хотите уйти?",
 	SessionExpiredEditor :	"Ваша сессия истекла!\nВаш сеанс работы с системой завершен из-за долгой неактивности.\n1. Сохраните введенные данные в текстовый файл, чтобы избежать их потери.\n2. Обновите страницу.\n3. Войдите в систему и отправьте данные повторно.",
 
 	// wikiedit.js

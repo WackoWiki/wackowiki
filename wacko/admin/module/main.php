@@ -51,7 +51,7 @@ function admin_main(&$engine, &$module)
 	<input type="hidden" name="action" value="lock">
 	<table style="max-width: 200px;" class="formation">
 		<tr class="hl-setting">
-			<td class="label" style="white-space:nowrap;">
+			<td class="label" style="white-space: nowrap;">
 				<?php echo ($engine->db->is_locked()
 					? '<span class="red">' . $engine->_t('SiteClosedTip') . '</span>'
 					: '<span class="green">' . $engine->_t('SiteOpenedTip') . '</span>'); ?>

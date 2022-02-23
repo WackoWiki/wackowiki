@@ -25,7 +25,7 @@ $wacko_translation = [
 	'ArchiveButton'				=> 'Archive',
 	'SendButton'				=> 'Send',
 
-	'FormInvalid'				=> 'The submitted form was invalid. Try submitting again.',
+	'FormInvalid'				=> '提交的表格无效。请尝试再次提交。',
 
 	// logged in panel
 	'AccountText'				=> '我的帐户',
@@ -1056,7 +1056,7 @@ $wacko_translation = [
 	'ModerateAccept'			=> 'Accept',
 	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
 	'ModerateRenameConfirm'		=> 'Enter a new title for the selected page',
-	'ModerateRenameExists'		=> 'Page same name already exists! Choose a different name.',
+	'ModerateRenameExists'		=> '已经有一个同名的页面存在! 选择一个不同的名字。',
 	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',

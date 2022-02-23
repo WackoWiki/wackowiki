@@ -6,9 +6,9 @@ lang = {
 	SessionExpiredEditor :	"La tua sessione è scaduta!\nSei stato disconnesso a causa di una lunga inattività.\n1. Salva il tuo modulo modificato in un file di testo per evitare perdite.\n2. Aggiorna la pagina.\n3. Effettuare di nuovo il login e ripresentarsi.",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
+	HelpAbout :				"Aiuto & Informazioni",
 	HelpFormatting :		"Aiuto",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpFormattingTip :		"Aiuto nella formattazione Wiki",
 	HelpFormattingPage :	"Doc/English/Formatting",
 
 	Heading1 :				"Intestazione 1",

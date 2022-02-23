@@ -124,7 +124,7 @@ $ap_translation = [
 
 	// Config System module
 	'config_system'		=> [
-		'name'		=> 'System',
+		'name'		=> '시스템',
 		'title'		=> 'System options',
 	],
 
@@ -709,7 +709,7 @@ $ap_translation = [
 	'LicensePerPageInfo'		=> 'Allow license per page, which the page owner can choose via page properties.',
 
 	'ServicePagesSection'		=> 'Service pages',
-	'RootPage'					=> 'Home page',
+	'RootPage'					=> '홈페이지',
 	'RootPageInfo'				=> 'Tag of your main page, opens automatically when a user visits your site.',
 
 	'PrivacyPage'				=> '개인정보처리방침',
@@ -722,11 +722,11 @@ $ap_translation = [
 	'SearchPageInfo'			=> 'Page with the search form (action %1).',
 	'RegistrationPage'			=> '계정 만들기',
 	'RegistrationPageInfo'		=> 'Page new user registration (action %1).',
-	'LoginPage'					=> 'User login',
+	'LoginPage'					=> '사용자 로그인',
 	'LoginPageInfo'				=> 'Login page on the site (action %1).',
-	'SettingsPage'				=> 'User Settings',
+	'SettingsPage'				=> '사용자 설정',
 	'SettingsPageInfo'			=> 'Page customize the user profile (action %1).',
-	'PasswordPage'				=> 'Change Password',
+	'PasswordPage'				=> '비밀번호 변경',
 	'PasswordPageInfo'			=> 'Page with a form to change / query user password (action %1).',
 	'UsersPage'					=> 'User list',
 	'UsersPageInfo'				=> 'Page with a list of registered users (action %1).',
@@ -746,7 +746,7 @@ $ap_translation = [
 	'WantedPageInfo'			=> 'Page with a list of missing pages that are referenced (action %1).',
 	'OrphanedPage'				=> 'Orphaned pages',
 	'OrphanedPageInfo'			=> 'Page with a list of existing pages are not related links with the rest (action %1).',
-	'SandboxPage'				=> 'Sandbox',
+	'SandboxPage'				=> '샌드박스',
 	'SandboxPageInfo'			=> 'Page where users can be trained in the use of wiki-markup.',
 	'HelpPage'					=> '도움말',
 	'HelpPageInfo'				=> 'The documentation section for working with site tools.',
@@ -816,7 +816,7 @@ $ap_translation = [
 	'WikiLinksResync'			=> 'Wiki-links',
 	'WikiLinksResyncInfo'		=> 'Performs a re-rendering for all intrasite links and restores the contents of the table <code>page_link</code> and <code>file_link</code> in the event of damage or relocation (this can take considerable time).',
 	'RecompilePage'				=> 'Re-compiling all pages (extremely costly)',
-	'ResyncOptions'				=> 'Additional options',
+	'ResyncOptions'				=> '추가 옵션',
 	'RecompilePageLimit'		=> 'Number of pages to parse at once.',
 
 	// Email settings
@@ -840,7 +840,7 @@ $ap_translation = [
 	'AbuseEmail'				=> 'Email abuse service',
 	'AbuseEmailInfo'			=> 'Address requests for urgent matters: registration for a foreign email, etc. It may coincide with the previous.',
 
-	'SendTestEmail'				=> 'Send a test email',
+	'SendTestEmail'				=> '테스트 메일 보내기',
 	'SendTestEmailInfo'			=> 'This will send a test email to the address defined in your account.',
 	'TestEmailSubject'			=> 'Your Wiki is correctly configured to send emails',
 	'TestEmailBody'				=> 'If you received this email, your Wiki is correctly configured to send emails.',
