@@ -41,7 +41,7 @@ function admin_config_appearance(&$engine, &$module)
 	{
 		if (preg_match('/^(
 			(\#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}))|        # color value
-				(rgb\(([0-9]{1,3}%?,){2}[0-9]{1,3}%?\))        # rgb triplet
+				(rgb\((\d{1,3}%?,){2}\d{1,3}%?\))        # rgb triplet
 			)$/x', $color))
 		{
 			return $color;

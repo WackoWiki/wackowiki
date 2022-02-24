@@ -38,7 +38,7 @@ if ($this->has_access('comment') && $this->has_access('read'))
 		ORDER BY page_id DESC
 		LIMIT 1"))
 	{
-		preg_match('/^Comment([0-9]+)$/', $latest_comment['tag'], $matches);
+		preg_match('/^Comment(\d+)$/', $latest_comment['tag'], $matches);
 		$num = $matches[1] + 1;
 	}
 	else

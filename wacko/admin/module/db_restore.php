@@ -38,7 +38,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 	$backup_id = $_POST['backup_id'] ?? ($_GET['backup_id'] ?? false);
 
 	// validate directory format 2022_0208_145128
-	if (!preg_match('/^([0-9]{4}_[0-9]{4}_[0-9]{6})$/', $backup_id))
+	if (!preg_match('/^(\d{4}_\d{4}_\d{6})$/', $backup_id))
 	{
 		$backup_id = false;
 	}

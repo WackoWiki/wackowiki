@@ -512,7 +512,7 @@ function get_files(&$engine, $pack, $dir, $root)
 		{
 			// for cluster backup process only affected cluster files
 			if ($root && $cluster
-				&& (preg_match('/@{1}((d*[0-9])+)@{1}/sm', $file_name, $matches)
+				&& (preg_match('/@{1}((d*\d)+)@{1}/sm', $file_name, $matches)
 					&& !in_array($matches[1], $engine->cluster_pages[$root]))
 			)
 			{
