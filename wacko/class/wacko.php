@@ -481,6 +481,13 @@ class Wacko
 		return in_array($timezone, DateTimeZone::listIdentifiers()) ? $timezone : 'UTC';
 	}
 
+	// check and validate YYYY-MM-DD date
+	function validate_date($date) : bool
+	{
+		return preg_match("/^(\d{4})-(\d{1,2})-(\d{1,2})$/", $date, $m)
+			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
+	}
+
 	// LANG FUNCTIONS
 	function set_translation($lang)
 	{
@@ -5978,8 +5985,7 @@ class Wacko
 		}
 
 		return isset($acl['list'])
-			? $this->check_acl($user_name, $acl['list'], true)
-			: false;
+			&& $this->check_acl($user_name, $acl['list'], true);
 	}
 
 	/**

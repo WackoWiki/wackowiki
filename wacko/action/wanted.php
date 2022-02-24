@@ -28,9 +28,7 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 		FROM ( " .
 			$selector .
 		") AS src"
-		, true));
-
-	if ($count)
+		, true))
 	{
 		$pagination = $this->pagination($count['n'], $limit);
 
@@ -41,7 +39,6 @@ $load_wanted = function ($cluster, $limit, $deleted = 0)
 
 		return [$wanted, $pagination];
 	}
-
 };
 
 // set defaults

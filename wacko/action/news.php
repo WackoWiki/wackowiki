@@ -25,6 +25,7 @@ if (!empty($this->db->news_cluster))
 	}
 
 	// set defaults
+	$date				??= $_GET['date'] ?? '';
 	$max				??= 10;
 	$mode				??= 'latest';
 	$title				??= 1;
@@ -36,6 +37,11 @@ if (!empty($this->db->news_cluster))
 	$news_cluster		= $this->db->news_cluster;
 	$news_levels		= $this->db->news_levels;
 	$action				= $_POST['_action'] ?? null;
+
+	if ($date && !$this->validate_date($date))
+	{
+		$date			= '';
+	}
 
 	// hide article H1 header
 	$this->hide_article_header = true;

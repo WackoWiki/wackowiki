@@ -16,15 +16,7 @@ $max				??= null;
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
-// check and validate YYYY-MM-DD date
-$is_valid_date = function($date)
-{
-	return preg_match("/^(\d{4})-(\d{1,2})-(\d{1,2})$/", $date, $m)
-		? checkdate(intval($m[2]), intval($m[3]), intval($m[1]))
-		: false;
-};
-
-if ($date && !$is_valid_date($date))
+if ($date && !$this->validate_date($date))
 {
 	$date = '';
 }

@@ -18,9 +18,15 @@ if (!defined('IN_WACKO'))
 
 // set defaults
 $page			??= '/' . $this->tag;
+$date			??= $_GET['date'] ?? '';
 
 $tag			= $this->unwrap_link($page);
 $error			= '';
+
+if ($date && !$this->validate_date($date))
+{
+	$date		= '';
+}
 
 if (!empty($tag))
 {
