@@ -254,7 +254,7 @@ class WackoFormatter
 			"--\S--|" .
 			"--(\S.*?[^- \t\n\r])--|" .
 			// list including multilevel
-			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|([0-9]{1,3}))[\.\)](\#[0-9]{1,3})?)?|" .
+			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|(\d{1,3}))[\.\)](\#\d{1,3})?)?|" .
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
@@ -853,7 +853,7 @@ class WackoFormatter
 			return $result . '<h1 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h1>';
 		}
 		// separators
-		else if (preg_match('/^[-]{4,}$/u', $thing))
+		else if (preg_match('/^-{4,}$/u', $thing))
 		{
 			$this->br = 0;
 
@@ -1051,7 +1051,7 @@ class WackoFormatter
 			}
 		}
 		// indented text
-		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|[0-9]{1,3})[\.\)](\#[0-9]{1,3})?)?(\n|$)/us', $thing, $matches))
+		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|\d{1,3})[\.\)](\#\d{1,3})?)?(\n|$)/us', $thing, $matches))
 		{
 			// new line
 			$result .= ($this->br ? "<br>\n" : "\n");

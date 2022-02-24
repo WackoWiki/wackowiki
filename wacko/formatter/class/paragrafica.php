@@ -292,10 +292,10 @@ class Paragrafica
 				// [2] = depth,
 				// [3] = h-id,
 				// [4] = name
-				"(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)" .
+				"(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h\d+-\d+\"></a></h\\2>)" .
 					"|" .
 				// [6] = p-id
-				"(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">)" .
+				"(<p id=\"(p\d+-\d+)\" class=\"auto\">)" .
 					"|" .
 				// [7] = tag,
 				// [8] = notoc

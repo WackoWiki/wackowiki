@@ -24,7 +24,7 @@ if (isset($options['text_html']))
 	$text = preg_replace('/<a .*?href="(https?:\/\/.*?)" class="".*?>(.*?)<\/a>/u', '$2 ($1)', $text);
 
 	// remove tags from the links that contain dates
-	$text = preg_replace('/<a .*?href="http:\/\/.*?">((?:0[1-9]|[12][0-9]|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19|20)[0-9]{2} [0-2][0-3][-\/.:][0-5][0-9])<\/a>/u', '$1', $text);
+	$text = preg_replace('/<a .*?href="http:\/\/.*?">((?:0[1-9]|[12]\d|3[01])[-\/.](?:0[1-9]|1[012])[-\/.](?:19|20)\d{2} [0-2][0-3][-\/.:][0-5]\d)<\/a>/u', '$1', $text);
 
 	// remove references to the creation of new pages
 	$text = preg_replace('/<a .*?href="https?:\/\/.*?edit\\?add=1" title="' . $this->_t('CreatePage') . '">.*?<\/a>/u', '', $text);

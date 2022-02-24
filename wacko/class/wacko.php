@@ -3289,7 +3289,7 @@ class Wacko
 			{
 				$width = 'auto';
 			}
-			else if (preg_match('/^[0-9]+$/', $width))
+			else if (preg_match('/^\d+$/', $width))
 			{
 				$width .= 'px';
 			}
@@ -3298,7 +3298,7 @@ class Wacko
 			{
 				$height = 'auto';
 			}
-			else if (preg_match('/^[0-9]+$/', $height))
+			else if (preg_match('/^\d+$/', $height))
 			{
 				$height .= 'px';
 			}
@@ -3563,7 +3563,7 @@ class Wacko
 		}
 
 		// Email -> mailto:info@example.com
-		if (preg_match('/^(mailto[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
+		if (preg_match('/^(mailto:)?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
 			$href	= (isset($matches[1]) && $matches[1] == 'mailto:' ? $tag : 'mailto:' . $tag);
 			$title	= $this->_t('EmailLink');
@@ -3572,7 +3572,7 @@ class Wacko
 			$tpl	= 'email';
 		}
 		// XMPP address -> xmpp:info@example.com
-		else if (preg_match('/^(xmpp[:])?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
+		else if (preg_match('/^(xmpp:)?[^\\s\"<>&\:]+\@[^\\s\"<>&\:]+\.[^\\s\"<>&\:]+$/u', $tag, $matches))
 		{
 			$href	= (isset($matches[1]) && $matches[1] == 'xmpp:' ? $tag : 'xmpp:' . $tag);
 			$title	= $this->_t('JabberLink');
@@ -4442,10 +4442,10 @@ class Wacko
 		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . NBSP . '\/)/u', '\\1', $text);
 		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
 		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')' . NBSP . '(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
-		$text = preg_replace('/([0-9])(' . $this->language['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->language['ALPHA'] . ')([0-9])/u', '\\1' . NBSP . '\\2', $text);
-		// $text = preg_replace('/([0-9])' . NBSP . '(?=[0-9])/u', '\\1', $text);
-		$text = preg_replace('/([0-9])' . NBSP . '(?!' . $this->language['ALPHA'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(\d)(' . $this->language['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->language['ALPHA'] . ')(\d)/u', '\\1' . NBSP . '\\2', $text);
+		// $text = preg_replace('/(\d)' . NBSP . '(?=\d)/u', '\\1', $text);
+		$text = preg_replace('/(\d)' . NBSP . '(?!' . $this->language['ALPHA'] . ')/u', '\\1', $text);
 
 		return $text;
 	}
@@ -4471,7 +4471,7 @@ class Wacko
 		if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 		{
 			// disallow pages with Comment[0-9] and all sub pages, we do not want sub pages on a comment.
-			if (preg_match( '/\b(Comment([0-9]+))\b/ui', $_data, $match ))
+			if (preg_match( '/\b(Comment(\d+))\b/ui', $_data, $match ))
 			{
 				return 'Comment([0-9]+)';
 			}
@@ -7099,7 +7099,7 @@ class Wacko
 		{
 			// #2. find all <hX id="h1249-1" class="heading"></hX> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<h([0-9]) id=\"(h[0-9]+-[0-9]+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h[0-9]+-[0-9]+\"></a></h\\2>)!i",
+			$what = preg_replace_callback("!(<h(\d) id=\"(h\d+-\d+)\" class=\"heading\">(.*?)<a class=\"self-link\" href=\"#h\d+-\d+\"></a></h\\2>)!i",
 				[&$this, 'numerate_toc_callback_toc'], $what);
 		}
 
@@ -7107,7 +7107,7 @@ class Wacko
 		{
 			// #2. find all <p id="p1249-1" class="auto"> & guide them in subroutine
 			//     notice that complex regexp is copied & duplicated in formatter/paragrafica (subject to refactor)
-			$what = preg_replace_callback("!(<p id=\"(p[0-9]+-[0-9]+)\" class=\"auto\">(.+?)</p>)!is",
+			$what = preg_replace_callback("!(<p id=\"(p\d+-\d+)\" class=\"auto\">(.+?)</p>)!is",
 				[&$this, 'numerate_toc_callback_p'], $what);
 		}
 
@@ -8573,7 +8573,7 @@ class Wacko
 		// what's selected
 		foreach ($_POST as $key => $val)
 		{
-			if (preg_match('/^category([0-9]+)$/', $key, $ids) && $val == 'set')
+			if (preg_match('/^category(\d+)$/', $key, $ids) && $val == 'set')
 			{
 				// category id
 				$set[] = $ids[1];
