@@ -202,12 +202,9 @@ if ($this->has_access('read'))
 	{
 		$c = $this->page['comments'];
 
-		if ($c < 1)
+		if (($c < 1) && $this->has_access('comment'))
 		{
-			if ($this->has_access('comment'))
-			{
-				$show_comments = $this->_t('Comments0');
-			}
+			$show_comments = $this->_t('Comments0');
 		}
 		else if	($c == 1)
 		{
