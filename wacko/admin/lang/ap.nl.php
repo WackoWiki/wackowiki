@@ -152,12 +152,6 @@ $ap_translation = [
 		'title'		=> 'Backing up data',
 	],
 
-	// DB Convert module
-	'db_convert'		=> [
-		'name'		=> 'Convert',
-		'title'		=> 'Converting Tables or Columns',
-	],
-
 	// DB Repair module
 	'db_repair'		=> [
 		'name'		=> 'Repair',
@@ -889,30 +883,6 @@ $ap_translation = [
 	'SPAMFilterInfo'			=> 'Enabling SPAM Filter',
 	'WordList'					=> 'Word list',
 	'WordListInfo'				=> 'Word or phrase <code>fragment</code> to be blacklisted (one per line)',
-
-	// DB Convert module
-	'NoColumnsToConvert'		=> 'No columns to convert.',
-	'NoTablesToConvert'			=> 'No tables to convert.',
-
-	'LogDatabaseConverted'		=> 'Database converted',
-	'ConversionTablesOk'		=> 'Conversion of the selected tables successfully.',
-
-	'LogColumnsToStrict'		=> 'Converted columns to comply with the SQL strict mode',
-	'ConversionColumnsOk'		=> 'Conversion of the selected columns successfully.',
-
-	'ConvertTablesEngine'		=> 'Converting Tables from MyISAM to InnoDB',
-	'ConvertTablesEngineInfo'	=> 'If you have existing tables, that you want to convert to InnoDB for better reliability and scalability, use the following routine. These tables were originally MyISAM, which was formerly the default.',
-
-	'DbVersionMin'				=> 'Requires at least MySQL 5.6.4, available version',
-	'DbEngineOk'				=> 'InnoDB is available.',
-	'DbEngineMissing'			=> 'InnoDB is not available.',
-	'EngineTable'				=> 'Table',
-	'EngineDefault'				=> 'Standaard',
-	'EngineColumn'				=> 'Column',
-	'EngineTyp'					=> 'Type',
-
-	'ConvertColumnsToStrict'	=> 'Converting Columns to SQL strict',
-	'ConvertTablesStrictInfo'	=> 'If you have existing tables, that you want to convert to comply with the SQL strict mode, use the following routine.',
 
 	// Log module
 	'LogFilterTip'				=> 'Filter events by criteria',

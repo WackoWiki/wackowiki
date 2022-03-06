@@ -152,12 +152,6 @@ $ap_translation = [
 		'title'		=> 'Резервное копирование данных',
 	],
 
-	// DB Convert module
-	'db_convert'		=> [
-		'name'		=> 'Преобразование',
-		'title'		=> 'Преобразование таблиц или столбцов',
-	],
-
 	// DB Repair module
 	'db_repair'		=> [
 		'name'		=> 'Восстановление таблиц',
@@ -871,30 +865,6 @@ $ap_translation = [
 	'SPAMFilterInfo'			=> 'Включение спам-фильтра',
 	'WordList'					=> 'Список слов',
 	'WordListInfo'				=> 'Чёрный список слов или предложений, по одному в строке',
-
-	// DB Convert module
-	'NoColumnsToConvert'		=> 'Нет столбцов для преобразования.',
-	'NoTablesToConvert'			=> 'Нет таблиц для преобразования.',
-
-	'LogDatabaseConverted'		=> 'База данных преобразована',
-	'ConversionTablesOk'		=> 'Преобразование выбранных таблиц выполнено успешно.',
-
-	'LogColumnsToStrict'		=> 'Преобразование столбцов в соответствии с режимом SQL strict.',
-	'ConversionColumnsOk'		=> 'Преобразование выбранных столбцов выполнено успешно.',
-
-	'ConvertTablesEngine'		=> 'Преобразование таблиц из MyISAM в InnoDB',
-	'ConvertTablesEngineInfo'	=> 'Если в вашей базе есть таблицы старого движка MyISAM вы можете преобразовать их в таблицы InnoDB для повышения надежности и масштабируемости. Для этого нажмите кнопку Преобразовать.',
-
-	'DbVersionMin'				=> 'Требуется версия минимум MySQL 5.6.4',
-	'DbEngineOk'				=> 'InnoDB доступна.',
-	'DbEngineMissing'			=> 'InnoDB недоступна.',
-	'EngineTable'				=> 'Таблица',
-	'EngineDefault'				=> 'По умолчанию',
-	'EngineColumn'				=> 'Столбец',
-	'EngineTyp'					=> 'Тип',
-
-	'ConvertColumnsToStrict'	=> 'Преобразование столбцов в соответствии с режимом SQL strict.',
-	'ConvertTablesStrictInfo'	=> 'Если в вашей базе есть таблицы которые надо привести в соответствии с режимом SQL strict нажмите кнопку Преобразовать.',
 
 	// Log module
 	'LogFilterTip'				=> 'Отфильтровать события по критериям',
