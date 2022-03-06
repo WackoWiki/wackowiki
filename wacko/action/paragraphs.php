@@ -20,7 +20,6 @@ $name			??= 'document-relative';
 $style			??= 'before';
 $start_depth	= '';
 $end_depth		= '';
-$numerate		= '';
 $link			= '';
 
 $context		= $this->tag;

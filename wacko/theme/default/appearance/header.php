@@ -14,7 +14,7 @@ require Ut::join_path(THEME_DIR, '_common/_header.php');
 // user lang dir
 if ($this->languages[$this->page_lang]['dir'] != $this->user_lang_dir)
 {
-	$tpl->dir	= ' dir="' . $this->user_lang_dir . '"';
+	$tpl->dir				= ' dir="' . $this->user_lang_dir . '"';
 }
 
 // site logo and title
@@ -38,12 +38,12 @@ if (@$this->page['tag'] !== $this->db->root_page)
 	$tpl->site_clink		= true;
 }
 
-// if user are logged, shows "You are UserName"
+// if user are logged, shows 'UserName'
 if ($logged_in = $this->get_user())
 {
-	$tpl->uare_link		= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
-	$tpl->uare_account	= $this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'), $this->_t('AccountTip'));
-	$tpl->uare_logout	= $this->href('', $this->db->login_page, ['action' => 'logout']);
+	$tpl->uare_link			= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());
+	$tpl->uare_account		= $this->compose_link_to_page($this->db->account_page, '', $this->_t('AccountText'), $this->_t('AccountTip'));
+	$tpl->uare_logout		= $this->href('', $this->db->login_page, ['action' => 'logout']);
 
 	if ($this->is_admin())
 	{
@@ -54,7 +54,7 @@ if ($logged_in = $this->get_user())
 else
 {
 	// show register / login link
-	$tpl->login_link	= $this->compose_link_to_page($this->db->login_page, '', $this->_t('LoginLink'), '');
+	$tpl->login_link		= $this->compose_link_to_page($this->db->login_page, '', $this->_t('LoginLink'), '');
 
 	if ($this->db->allow_registration)
 	{
@@ -62,8 +62,8 @@ else
 	}
 }
 
-$max_items = $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
-$i = 0;
+$max_items	= $logged_in ? $logged_in['menu_items'] : $this->db->menu_items;
+$i			= 0;
 
 $tpl->enter('menu_');
 
@@ -72,7 +72,7 @@ foreach ((array) $this->get_menu() as $menu_item)
 	if ($i++ == $max_items)
 	{
 		// start dropdown menu for bookmarks over max_items
-		$tpl->leave();
+		$tpl->leave(); // menu_
 		$tpl->enter('dropmenu_menu_');
 	}
 
@@ -88,7 +88,7 @@ foreach ((array) $this->get_menu() as $menu_item)
 	}
 }
 
-$tpl->leave();
+$tpl->leave(); // menu_ / dropmenu_menu_
 
 if ($logged_in)
 {
@@ -104,7 +104,10 @@ if ($logged_in)
 }
 
 // defining tabs constructor
-//	$image = 0 text only, 1 image only, 2 image and text
+//	$image =
+//		0 text only,
+//		1 image only,
+//		2 image and text
 $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = null) use (&$tpl)
 {
 	$tpl->class = $tab_class ?: ('m-' . $method);
@@ -129,7 +132,7 @@ $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_k
 
 	$image == 1 || $tpl->t_title	= $this->_t($title);
 	$image == 0 || $tpl->t_im_title	= $this->_t($title);
-	$tpl->leave();
+	$tpl->leave(); // in_ / out_
 };
 
 $tpl->enter('tab_');
@@ -183,7 +186,7 @@ else
 	}
 
 	// show more tab
-	$tpl->leave();
+	$tpl->leave(); // tab_
 	$tpl->enter('droptab_tab_');
 
 	// print tab
@@ -280,7 +283,8 @@ else
 		$echo_tab('upload', 'UploadFiles', 'UploadFile', 2, '', 'u');
 	}
 }
-$tpl->leave();
+
+$tpl->leave(); // droptab_tab_
 
 $tpl->search		= $this->href('', $this->db->search_page);
 $tpl->breadcrumbs	= $this->get_page_path(null, false, ' &gt; ', true, true);
