@@ -177,18 +177,7 @@ function array_to_str ($arr, $name = '')
 	return $str;
 }
 
-/*
-insert default pages, all related acls and menu item
-	$tag		=
-	$title		=
-	$body		=
-	$lang		=
-	$rights		=
-	$critical	=
-	$set_menu	=
-	$menu_title	=
-	$noindex	=
-*/
+// insert default pages, all related acls and menu items
 function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
 {
 	global $config_global, $dblink_global, $lang_global;
