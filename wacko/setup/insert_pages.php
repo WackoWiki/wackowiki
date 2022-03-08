@@ -2,9 +2,6 @@
 
 // Default Pages Inserts
 
-// Inserting default pages
-$error_inserting_pages = false;
-
 function insert_pages($insert, $config)
 {
 	// insert these pages only for default language
@@ -87,6 +84,177 @@ function insert_pages($insert, $config)
 	}
 }
 
+// insert default page, all related acls and menu items
+function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical = false, $set_menu = 0, $menu_title = false, $noindex = 1)
+{
+	global $config_global, $dblink_global, $lang_global;
+
+	sanitize_page_tag($tag);
+
+	$prefix				= $config_global['table_prefix'];
+	$owner_id			= "SELECT user_id FROM " . $prefix . "user WHERE user_name = 'System' LIMIT 1";
+	$page_id			= "SELECT page_id FROM " . $prefix . "page WHERE tag = '" . _quote($tag) . "' LIMIT 1";
+	$page_select		= $page_id;
+
+	if ($set_menu != SET_MENU_ONLY)
+	{
+		// user_id for user 'System'
+		// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
+		// the additional parentheses around $owner_id and $page_id are necessary for the sub-select queries
+		$page_insert	= "INSERT INTO " .
+								$prefix . "page (
+									tag,
+									title,
+									body,
+									body_r,
+									body_toc,
+									user_id,
+									owner_id,
+									created,
+									modified,
+									latest,
+									page_size,
+									page_lang,
+									footer_comments,
+									footer_files,
+									noindex
+								)
+							VALUES (
+								'" . _quote($tag) . "',
+								'" . _quote($title) . "' ,
+								'" . _quote($body) . "',
+								'',
+								'',
+								(" . $owner_id . "),
+								(" . $owner_id . "),
+								UTC_TIMESTAMP(),
+								UTC_TIMESTAMP(),
+								1,
+								" . strlen($body) . ",
+								'" . _quote($lang) . "',
+								0,
+								0,
+								" . (int) $noindex . "
+							)";
+
+		$perm_insert	= "INSERT INTO " .
+								$prefix . "acl (
+									page_id, privilege, list
+								)
+							VALUES
+								((" . $page_id . "), 'read',		'*'),
+								((" . $page_id . "), 'write',		'" . _quote($rights) . "'),
+								((" . $page_id . "), 'comment',		'$'),
+								((" . $page_id . "), 'create',		'$'),
+								((" . $page_id . "), 'upload',		'')";
+
+		$insert_data[]	= [$page_insert,	$lang_global['ErrorInsertPage']];
+		$insert_data[]	= [$perm_insert,	$lang_global['ErrorInsertPagePermission']];
+	}
+
+	$default_menu_item	= "INSERT INTO " .
+								$prefix . "menu (user_id, page_id, menu_lang, menu_title)
+							VALUES (
+								(" . $owner_id . "),
+								(" . $page_id . "),
+								'" . _quote($lang) . "',
+								'" . _quote($menu_title) . "'
+							)
+							ON DUPLICATE KEY UPDATE
+								menu_title = '" . _quote($menu_title) . "'";
+
+	if ($set_menu)
+	{
+		$insert_data[]	= [$default_menu_item,	$lang_global['ErrorInsertDefaultMenuItem']];
+	}
+
+	switch ($config_global['db_driver'])
+	{
+		case 'mysqli_legacy':
+			$add_page = false;
+
+			if ($result = mysqli_query($dblink_global, $page_select))
+			{
+				$add_page = (0 == mysqli_num_rows($result));
+			}
+
+			if ($add_page || $set_menu == SET_MENU_ONLY)
+			{
+				foreach ($insert_data as $data)
+				{
+					mysqli_query($dblink_global, $data[0]);
+
+					/*
+						We flag some pages as critical in the insert.**.php file, if these don't get inserted
+						then we have a serious problem and should indicate that to the user.
+					*/
+					if ($critical)
+					{
+						if (mysqli_errno($dblink_global) != 0)
+						{
+							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . mysqli_error($dblink_global));
+						}
+					}
+				}
+			}
+			else if ($critical)
+			{
+				output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+			}
+
+			break;
+
+		default:
+			$page_exists = false;
+
+			if ($result = @$dblink_global->query($page_select))
+			{
+				if ($result->fetchColumn() > 0)
+				{
+					$page_exists = true;
+
+					if ($critical)
+					{
+						output_error(Ut::perc_replace($lang_global['ErrorPageAlreadyExists'], $tag));
+					}
+				}
+
+				$result->closeCursor();
+			}
+
+			if (!$page_exists || $set_menu == SET_MENU_ONLY)
+			{
+				foreach ($insert_data as $data)
+				{
+					@$dblink_global->query($data[0]);
+
+					/* try
+					{
+						@$dblink_global->query($data[0]);
+					}
+					catch(PDOException $error)
+					{
+						echo $error->getMessage() . '<br>';
+					} */
+
+					if ($critical)
+					{
+						$error = $dblink_global->errorInfo();
+
+						if ($error[0] != '00000')
+						{
+							output_error(Ut::perc_replace($data[1], $tag) . ' - ' . ($error[2]));
+						}
+					}
+				}
+			}
+
+			break;
+	}
+}
+
+// Inserting default pages
+
 if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 {
 	if ($config['allowed_languages'])
@@ -99,7 +267,7 @@ if (isset($config['multilanguage']) && $config['multilanguage'] == 1)
 		{
 			while (false !== ($file = readdir($handle)))
 			{
-				if (1 == preg_match('/^inserts\.(.*?)\.php$/', $file, $match))
+				if (1 == preg_match('/^inserts\.([a-z]{2}(-[a-z]{2})?)\.php$/', $file, $match))
 				{
 					$lang_list[] = $match[1];
 				}
