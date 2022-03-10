@@ -153,7 +153,12 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 	}
 
 	$default_menu_item	= "INSERT INTO " .
-								$prefix . "menu (user_id, page_id, menu_lang, menu_title)
+								$prefix . "menu (
+									user_id,
+									page_id,
+									menu_lang,
+									menu_title
+								)
 							VALUES (
 								(" . $owner_id . "),
 								(" . $page_id . "),

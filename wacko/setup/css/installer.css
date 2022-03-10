@@ -20,7 +20,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background: #FFF no-repeat scroll 0 0;
-	font: normal 14px var(--ww-font-sans-serif);
+	font: normal 87.5% var(--ww-font-sans-serif);
 	color: #333;
 	text-align: center;
 }
@@ -47,7 +47,7 @@ h1 {
 	left: 43px;
 	margin: 0;
 	padding: 0;
-	font: normal normal normal 24px var(--ww-font-sans-serif);
+	font: normal normal normal 1.5rem var(--ww-font-sans-serif);
 	color: #333;
 }
 [dir=rtl] h1 {
@@ -62,7 +62,7 @@ h2,
 	left: 43px;
 	margin: 20px 0 0 0;
 	padding: 0;
-	font: normal normal 900 14px var(--ww-font-sans-serif);
+	font: normal normal 900 0.875rem var(--ww-font-sans-serif);
 	color: #333;
 }
 [dir=rtl] h2,
@@ -78,7 +78,7 @@ p {
 }
 
 label {
-	font-size: 14px;
+	font-size: 0.875rem;
 	color: #333;
 }
 
@@ -151,6 +151,7 @@ hr {
 	list-style: none;
 	margin: 0 auto;
 	padding: 4px 0 8px 0;
+	font-size: 0.75rem;
 	font-weight: 900;
 	text-align: center;
 }
@@ -246,7 +247,7 @@ p.security {
 	position: relative;
 	left: 43px;
 	width: 300px;
-	font-size: 12px;
+	font-size: 0.75rem;
 	font-weight: 900;
 	color: #666;
 }
@@ -259,7 +260,7 @@ p.security {
 	position: relative;
 	left: 43px;
 	margin: 0 10px 0 20px;
-	font-size: 12px;
+	font-size: 0.75rem;
 	font-weight: 900;
 	text-align: right;
 }
