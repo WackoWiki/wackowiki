@@ -6173,7 +6173,6 @@ class Wacko
 		if (!$tag)		$tag		= $this->page['tag']		?? null;
 
 		$user		= $this->get_user();
-		#$access		= $this->has_access($privilege, $page_id);
 		$link		= $this->href('permissions', $tag);
 
 		$acl_modes = [
@@ -6184,8 +6183,10 @@ class Wacko
 			'custom'		=> 'AccessCustom',
 		];
 
-		$acl = [];
-		$acl = explode("\n", $this->_acl['list']);
+		// load $this->_acl['list'] for specified privilege
+		$access		= $this->has_access($privilege, $page_id);
+		$acl		= [];
+		$acl		= explode("\n", $this->_acl['list']);
 
 		if (in_array('', $acl))
 		{

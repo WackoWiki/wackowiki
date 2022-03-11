@@ -16,7 +16,6 @@ $name			= '';
 $style			= '';
 $start_depth	= '';
 $end_depth		= '';
-$numerate		= '';
 $link			= '';
 
 $context		= $this->tag;
