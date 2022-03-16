@@ -580,6 +580,11 @@ class Ut
 	// TODO not utf8 compatible! :)
 	static function urlencode($regex, $text)
 	{
+		if (empty($text))
+		{
+			return '';
+		}
+
 		// is_array() hack is for some strange php behaviour calling callback
 		// with ['x'] instead of 'x' when matching single non-ascii char, i.e. russian letter
 		return preg_replace_callback(
