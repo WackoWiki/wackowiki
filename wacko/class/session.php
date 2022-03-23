@@ -571,8 +571,8 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 		if (Ut::is_empty($value))
 		{
-			$expires = 1;
-			$value = 'deleted';
+			$expires	= 1;
+			$value		= 'deleted';
 		}
 
 		// rfc6265 4.1.1 cookie-octet

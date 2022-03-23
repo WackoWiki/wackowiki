@@ -85,8 +85,8 @@ $generate_calendar = function ($year, $month, $days = [], $day_name_length = 3, 
 	$day_names = []; // generate all the day names according to the current locale
 
 	$day_pattern = ($day_name_length == 2
-		? "cccccc"	// cccccc - 2-letter textual day name
-		: "ccc");	// ccc    - 3-letter textual day name, see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
+		? 'cccccc'	// cccccc - 2-letter textual day name
+		: 'ccc');	// ccc    - 3-letter textual day name, see https://unicode-org.github.io/icu/userguide/format_parse/datetime/
 
 	for ($n = 0, $t = (3 + $first_day) * DAYSECS; $n < 7; $n++, $t += DAYSECS) // January 4, 1970 was a Sunday
 	{
