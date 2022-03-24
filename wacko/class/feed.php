@@ -262,7 +262,9 @@ class Feed
 
 					// set page context
 					$this->engine->tag = $comment['page_tag'];
+					$this->engine->context[++$this->engine->current_context] = $comment['page_tag'];
 					$text = $this->engine->format($comment['body_r'], 'post_wacko', ['strip_notypo' => true]);
+					$this->engine->current_context--;
 
 					$xml .= '<item>' . "\n";
 					$xml .= '<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
