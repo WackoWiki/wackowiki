@@ -181,7 +181,9 @@ class Feed
 				}
 
 				// TODO: format -> add ['feed' => true]
+				$this->engine->context[++$this->engine->current_context] = $page['tag'];
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
+				$this->engine->current_context--;
 
 				// check current page lang for different charset to do_unicode_entities() against
 				if ($this->lang != $page['page_lang'])
@@ -267,7 +269,9 @@ class Feed
 
 					// set page context
 					$this->engine->tag = $comment['page_tag'];
+					$this->engine->context[++$this->engine->current_context] = $comment['page_tag'];
 					$text = $this->engine->format($comment['body_r'], 'post_wacko', ['stripnotypo' => true]);
+					$this->engine->current_context--;
 
 					// check current page lang for different charset to do_unicode_entities() against
 					if ($this->lang != $comment['page_lang'])
