@@ -77,6 +77,10 @@ p {
 	color: #000;
 }
 
+code {
+	font-size: 0.875rem;
+}
+
 label {
 	font-size: 0.875rem;
 	color: #333;
