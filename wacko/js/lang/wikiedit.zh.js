@@ -1,14 +1,14 @@
 lang = {
 	// default.js
-	ReallySave :			"Really save?",
-	ModifiedHint :			"Field has changed, do not forget to save the changes.",
-	NotSavedWarning :		"You did not save changes. Are you sure you want to leave?",
-	SessionExpiredEditor :	"Your session has expired!\nYou\'ve been logged off due to long inactivity.\n1. Save your form edits to text file to prevent loss.\n2. Refresh the page.\n3. Log in again and re-submit.",
+	ReallySave :			"真的保存？",
+	ModifiedHint :			"字段已改变，不要忘记保存更改。",
+	NotSavedWarning :		"您有未保存的修改，确定要离开吗？",
+	SessionExpiredEditor :	"您的会话已过期！\n您因为长期不活动而被注销。\n1。 保存您的表单编辑到文本文件以防止丢失。\n2. 刷新页面。\n3. 再次登录并重新提交。",
 
 	// wikiedit.js
-	HelpAbout :				"Help & About",
+	HelpAbout :				"帮助 & 关于",
 	HelpFormatting :		"帮助",
-	HelpFormattingTip :		"Help on Wiki-formatting",
+	HelpFormattingTip :		"Wiki-格式化帮助",
 	HelpFormattingPage :	"Doc/English/Formatting",
 
 	Heading1 :				"标题 1",
@@ -33,19 +33,19 @@ lang = {
 	Justify :				"两端对齐",
 	Outdent :				"行缩进段落",
 	Indent :				"缩进",
-	CodeWrapper :			"Code Wrapper",
+	CodeWrapper :			"代码",
 	HTML :					"HTML 区块格式",
 	Action :				"动作",
 	Line :					"水平线",
 	Signature :				"插入签名",
 	Quote :					"引用",
-	MarkedText :			"Marked text",
-	HighlightText :			"Highlight text",
-	Shade :					"Shade",
-	Hyperlink :				"连接",
+	MarkedText :			"已标记文本",
+	HighlightText :			"高亮文本",
+	Shade :					"阴影",
+	Hyperlink :				"链接",
 	InsertTable :			"插入表格",
 
-	Link :					"Link",
+	Link :					"链接",
 	TextForLinking :		"Text for linking",
 
 	HelpAboutTip :			' 快捷方式:\n'+
