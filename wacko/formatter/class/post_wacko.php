@@ -66,7 +66,7 @@ class PostWacko
 			}
 		}
 		// actions
-		else if (preg_match('/^<!--action:begin-->\s*([^\n]+?)<!--action:end-->$/us', $thing, $matches))
+		else if (preg_match('/^<!--action:begin-->\s*(.*?)<!--action:end-->$/us', $thing, $matches))
 		{
 			// check for action parameters
 			$sep = mb_strpos($matches[1], ' ');
