@@ -192,7 +192,7 @@ class WackoFormatter
 				  "\(\((\S+?)([ \t]+([^\n]+?))?\)\)|" .
 				  "\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]|" .
 				  "\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)|") .
-			// ?
+			// citated  > ... or  >> ...
 			"\n[ \t]*>+[^\n]*|" .
 			// cite text <[...]>
 			"<\[.*?\]>|" .
@@ -269,18 +269,26 @@ class WackoFormatter
 			"\n)/usm";
 
 		$this->NOTLONGREGEXP =
+			// formatter  %%...%%
 			"/(" . ($this->object->db->disable_formatters
 				? ''
 				: "\%\%.*?\%\%|") .
+			// escaped  ~...
 			"~([^ \t\n]+)|" .
+			// escaped  ""...""
 			"\"\".*?\"\"|" .
+			// action  {{...}}
 			"\{\{[^\n]*?\}\}|" .
+			// escaped text
 			"<!--escaped-->.*?<!--escaped-->" .
 			")/usm";
 
 		$this->MOREREGEXP =
+			// centered text  >>...<< (depreciated)
 			"/(>>.*?<<|" .
+			// escaped  ~...
 			"~([^ \t\n]+)|" .
+			// escaped text
 			"<!--escaped-->.*?<!--escaped-->" .
 			")/usm";
 	}
@@ -338,12 +346,15 @@ class WackoFormatter
 		{
 			return $matches[1];
 		}
-		// escaped text
+		// escaped  ""...""
 		else if (preg_match('/^\"\"(.*)\"\"$/us', $thing, $matches))
 		{
-			return '<!--escaped--><!--notypo-->' . str_replace("\n", '<br>', Ut::html($matches[1])) . '<!--/notypo--><!--escaped-->';
+			return
+				'<!--escaped--><!--notypo-->' .
+					str_replace("\n", '<br>', Ut::html($matches[1])) .
+				'<!--/notypo--><!--escaped-->';
 		}
-		// code text
+		// formatter text  %%...%%
 		else if (preg_match('/^\%\%(.*)\%\%$/us', $thing, $matches))
 		{
 			// check if a formatter has been specified
@@ -416,11 +427,14 @@ class WackoFormatter
 
 			return '<!--escaped-->' . $output . '<!--escaped-->';
 		}
-		// actions
+		// action  {{...}}
 		else if (preg_match('/^\{\{(.*?)\}\}$/us', $thing, $matches))
 		{
 			// used in paragrafica, too
-			return '<!--escaped--><ignore><!--notypo--><!--action:begin-->' . $matches[1] . '<!--action:end--><!--/notypo--></ignore><!--escaped-->';
+			return
+				'<!--escaped--><ignore><!--notypo--><!--action:begin-->' .
+					$matches[1] . 
+				'<!--action:end--><!--/notypo--></ignore><!--escaped-->';
 		}
 
 		// if we reach this point, it must have been an accident
@@ -449,7 +463,10 @@ class WackoFormatter
 		// centered text (depreciated)
 		else if (preg_match('/^>>(.*)<<$/us', $thing, $matches))
 		{
-			return '<!--escaped--><div class="center">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</div><!--escaped-->';
+			return
+				'<!--escaped--><div class="center">' .
+					preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) .
+				'</div><!--escaped-->';
 		}
 
 		return $thing;
@@ -772,7 +789,10 @@ class WackoFormatter
 		// citated
 		else if (preg_match('/^\n[ \t]*(>+)(.*)$/us', $thing, $matches))
 		{
-			return '<div class="email' . strlen($matches[1]) . ' email-' . (strlen($matches[1]) % 2 ? 'odd' : 'even') . '">' . Ut::html($matches[1]) . preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]) . '</div>';
+			return
+				'<div class="email' . strlen($matches[1]) . ' email-' . (strlen($matches[1]) % 2 ? 'odd' : 'even') . '">' .
+					Ut::html($matches[1]) . preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]) .
+				'</div>';
 		}
 		// blockquote
 		else if (preg_match('/^<\[(.*)\]>$/us', $thing, $matches))
@@ -797,60 +817,20 @@ class WackoFormatter
 		{
 			return '<sub>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</sub>';
 		}
-		// headers
-		else if (preg_match('/\n[ \t]*=======(.*?)={2,7}$/', $thing, $matches))
+		// headers (h1 - h6)
+		else if (preg_match('/\n[ \t]*(={2,7})(.*?)={2,7}$/', $thing, $matches))
 		{
+			$h_level	= substr_count($matches[1], '=') - 1;
 			$result		= $this->indent_close();
 			$this->br	= 0;
 			$wacko->header_count++;
 			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
 
-			return $result . '<h6 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h6>';
-		}
-		else if (preg_match('/\n[ \t]*======(.*?)={2,7}$/', $thing, $matches))
-		{
-			$result		= $this->indent_close();
-			$this->br	= 0;
-			$wacko->header_count++;
-			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
-
-			return $result . '<h5 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h5>';
-		}
-		else if (preg_match('/\n[ \t]*=====(.*?)={2,7}$/', $thing, $matches))
-		{
-			$result		= $this->indent_close();
-			$this->br	= 0;
-			$wacko->header_count++;
-			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
-
-			return $result . '<h4 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h4>';
-		}
-		else if (preg_match('/\n[ \t]*====(.*?)={2,7}$/', $thing, $matches))
-		{
-			$result		= $this->indent_close();
-			$this->br	= 0;
-			$wacko->header_count++;
-			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
-
-			return $result . '<h3 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h3>';
-		}
-		else if (preg_match('/\n[ \t]*===(.*?)={2,7}$/', $thing, $matches))
-		{
-			$result		= $this->indent_close();
-			$this->br	= 0;
-			$wacko->header_count++;
-			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
-
-			return $result . '<h2 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h2>';
-		}
-		else if (preg_match('/\n[ \t]*==(.*?)={2,7}$/', $thing, $matches))
-		{
-			$result		= $this->indent_close();
-			$this->br	= 0;
-			$wacko->header_count++;
-			$header_id	= 'h' . $this->page_id . '-' . $wacko->header_count;
-
-			return $result . '<h1 id="' . $header_id . '" class="heading">' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '<a class="self-link" href="#' . $header_id . '"></a></h1>';
+			return $result .
+				'<h' . $h_level . ' id="' . $header_id . '" class="heading">' .
+					preg_replace_callback($this->LONGREGEXP, $callback, $matches[2]) .
+					'<a class="self-link" href="#' . $header_id . '"></a>' .
+				'</h' . $h_level . '>';
 		}
 		// separators
 		else if (preg_match('/^-{4,}$/u', $thing))

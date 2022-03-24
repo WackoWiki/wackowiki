@@ -63,7 +63,7 @@ $lang = [
    System Requirements Page
 */
 'version-check'					=> '系统要求',
-'PhpVersion'					=> 'PHP Version',
+'PhpVersion'					=> 'PHP 版本',
 'PhpDetected'					=> 'Detected PHP',
 'ModRewrite'					=> 'Apache Rewrite Extension (可选)',
 'ModRewriteInstalled'			=> 'Rewrite Extension (mod_rewrite) Installed?',
@@ -73,7 +73,7 @@ $lang = [
 'ReadyToInstall'				=> 'Ready to Install?',
 'Requirements'					=> 'Your server must meet the requirements listed below.',
 'OK'							=> 'OK',
-'Problem'						=> 'Problem',
+'Problem'						=> '问题',
 'NotePhpExtensions'				=> '',
 'ErrorPhpExtensions'			=> '你的PHP安装似乎缺少WackoWiki所需要的PHP扩展。',
 'PcreWithoutUtf8'				=> 'PHP的PCRE模块在编译时可能没有包含PCRE_UTF8支持。',
@@ -199,7 +199,7 @@ $lang = [
 'FinalStep'						=> 'Final Step',
 'Writing'						=> 'Writing Configuration File',
 'RemovingWritePrivilege'		=> 'Removing Write Privilege',
-'InstallationComplete'			=> 'Installation Complete',
+'InstallationComplete'			=> '安装完成',
 'ThatsAll'						=> 'That\'s all! You can now <a href="%1">view your WackoWiki site</a>.',
 'SecurityConsiderations'		=> 'Security Considerations',
 'SecurityRisk'					=> 'You are advised to remove write access to %1 again now that it\'s been written. Leaving the file writable can be a security risk!<br>i.e. %2',
