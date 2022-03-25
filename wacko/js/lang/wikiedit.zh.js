@@ -1,6 +1,6 @@
 lang = {
 	// default.js
-	ReallySave :			"真的保存？",
+	ReallySave :			"确定保存？",
 	ModifiedHint :			"字段已改变，不要忘记保存更改。",
 	NotSavedWarning :		"您有未保存的修改，确定要离开吗？",
 	SessionExpiredEditor :	"您的会话已过期！\n您因为长期不活动而被注销。\n1。 保存您的表单编辑到文本文件以防止丢失。\n2. 刷新页面。\n3. 再次登录并重新提交。",
@@ -46,24 +46,24 @@ lang = {
 	InsertTable :			"插入表格",
 
 	Link :					"链接",
-	TextForLinking :		"Text for linking",
+	TextForLinking :		"链接文本",
 
 	HelpAboutTip :			' 快捷方式:\n'+
-							' Ctrl+B - Bold\n'+
-							' Ctrl+I - Italic\n'+
-							' Ctrl+U - Underline\n'+
-							' Ctrl+Shift+S - Strikethrough\n'+
-							' Ctrl+Shift+1 .. 4 - Heading 1..4\n'+
-							' Alt+I or Ctrl+T - Indent\n'+
-							' Alt+U or Ctrl+Shift+T - Unindent\n'+
+							' Ctrl+B - 粗体\n'+
+							' Ctrl+I - 斜体\n'+
+							' Ctrl+U - 下划线\n'+
+							' Ctrl+Shift+S - 删除线\n'+
+							' Ctrl+Shift+1 .. 4 - 标题 1..4\n'+
+							' Alt+I 或 Ctrl+T - 缩进\n'+
+							' Alt+U 或 Ctrl+Shift+T - 取消缩进\n'+
 							' Ctrl+J - MarkUp (!!)\n'+
 							' Ctrl+H - MarkUp (??)\n'+
-							' Alt+L - Link\n'+
-							' Ctrl+L - Link with description\n'+
-							' Ctrl+Shift+L - Unordered List\n'+
-							' Ctrl+Shift+N - Ordered List\n'+
-							' Ctrl+Shift+O - Ordered List\n'+
-							' Ctrl+= - Small text\n'+
-							' Ctrl+Shift+Minus - Horizontal line\n'+
+							' Alt+L - 链接\n'+
+							' Ctrl+L - 带描述的链接\n'+
+							' Ctrl+Shift+L - 无序列表\n'+
+							' Ctrl+Shift+N - 顺序列表\n'+
+							' Ctrl+Shift+O - 排序列表\n'+
+							' Ctrl+= - 小文本\n'+
+							' Ctrl+Shift+Minus - 水平线\n'+
 							' \n'
 };
