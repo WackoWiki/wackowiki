@@ -236,7 +236,7 @@ $wacko_translation = [
 	'AclAccessDenied'			=> '你不是本页的所有者',
 	'AclSyntaxError'			=> '访问控制列表语法错误',
 	'AclHelp'					=> '<code>*</code> - 每个人都可以<br>' .
-									'<code>$</code> - 仅限注册拥护<br>' .
+									'<code>$</code> - 仅限注册用户<br>' .
 									'<code>!</code> - 前面的感叹号否定了相应的权利<br>' .
 									'<code>[UserName]</code> - 允许用户的名称<br>' .
 									'<code>[GroupName]</code> - 允许的用户组的名称（别名）<br>' .
