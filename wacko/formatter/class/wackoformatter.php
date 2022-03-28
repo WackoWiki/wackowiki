@@ -240,12 +240,7 @@ class WackoFormatter
 			// italic //...//
 			"\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|" .
 			// headers
-			"\n[ \t]*=======.*?={2,7}|" .
-			"\n[ \t]*======.*?={2,7}|" .
-			"\n[ \t]*=====.*?={2,7}|" .
-			"\n[ \t]*====.*?={2,7}|" .
-			"\n[ \t]*===.*?={2,7}|" .
-			"\n[ \t]*==.*?={2,7}|" .
+			"\n[ \t]*={2,7}.*?={2,7}|" .
 			// separator
 			"[-]{4,}|" .
 			// line break
@@ -433,7 +428,7 @@ class WackoFormatter
 			// used in paragrafica, too
 			return
 				'<!--escaped--><ignore><!--notypo--><!--action:begin-->' .
-					$matches[1] . 
+					$matches[1] .
 				'<!--action:end--><!--/notypo--></ignore><!--escaped-->';
 		}
 
