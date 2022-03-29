@@ -363,7 +363,7 @@ $ap_translation = [
 	'LogoDimensions'			=> 'Logo尺寸',
 	'LogoDimensionsInfo'		=> '显示的 Logo 的宽度和高度。',
 	'LogoDisplayMode'			=> 'Logo显示模式',
-	'LogoDisplayModeInfo'		=> '定义 Logo 的外观. 默认为关闭。',
+	'LogoDisplayModeInfo'		=> '定义 Logo 的外观。 默认为关闭。',
 	'FaviconSection'			=> 'Favicon',
 	'SiteFavicon'				=> '站点Favicon',
 	'SiteFaviconInfo'			=> '您的快捷方式图标或网站图标显示在大多数浏览器的地址栏、选项卡和书签中。 这将覆盖您主题的图标。',
@@ -504,7 +504,7 @@ $ap_translation = [
 	'EnableSecurityHeaders'		=> '启用HTTP 安全标头',
 	'EnableSecurityHeadersinfo'	=> '设置安全标头（帧破坏、点击劫持/XSS/CSRF 保护）。 <br>CSP 可能会在某些情况下（例如在开发期间）或在使用依赖于外部托管资源（例如图像或脚本）的插件时引起问题。 <br>禁用内容安全策略是一种安全风险！',
 	'Csp'						=> '内容安全策略 (CSP)',
-	'CspInfo'					=> '配置内容安全策略涉及决定您要执行哪些策略，然后配置它们并使用 Content-Security-Policy 来建立您的策略.',
+	'CspInfo'					=> '配置内容安全策略涉及决定您要执行哪些策略，然后配置它们并使用 Content-Security-Policy 来建立您的策略。',
 	'PolicyModes'	=> [
 		'0'		=> '禁用',
 		'1'		=> '严格的',
@@ -580,7 +580,7 @@ $ap_translation = [
 
 	'FormsSection'				=> '表单',
 	'FormTokenTime'				=> '提交表单的最长时',
-	'FormTokenTimeInfo'			=> '用户必须提交表单的时间（以秒为单位）。<br>请注意，如果会话过期，表单可能会变为无效，无论此设置如何.',
+	'FormTokenTimeInfo'			=> '用户必须提交表单的时间（以秒为单位）。<br>请注意，如果会话过期，表单可能会变为无效，无论此设置如何。',
 
 	'SessionLength'				=> '登录 cookie期限',
 	'SessionLengthInfo'			=> '默认情况下，用户 cookie 登录的生命周期（以天为单位）。',
@@ -962,7 +962,7 @@ $ap_translation = [
 	// DB Restore module
 	'RestoreInfo'				=> '您可以恢复找到的任何备份包或将其从服务器中删除。',
 	'ConfirmDbRestore'			=> '是否要还原备份 %1？',
-	'ConfirmDbRestoreInfo'		=> '请稍候，这可能需要几分钟.',
+	'ConfirmDbRestoreInfo'		=> '请稍候，这可能需要几分钟。',
 	'RestoreWrongVersion'		=> '错误的 WackoWiki 版本！',
 	'DirectoryNotExecutable'	=> '%1 目录不可写。',
 	'BackupDelete'				=> '您确定要删除备份 %1 吗？',
@@ -1163,7 +1163,7 @@ $ap_translation = [
 	'Solve'						=> '解决',
 
 	// Bad Behavior module
-	'BbInfo'					=> '检测并阻止不需要的 Web 访问，拒绝自动垃圾邮件程序访问<br>有关详细信息，请访问 %1 主页.',
+	'BbInfo'					=> '检测并阻止不需要的 Web 访问，拒绝自动垃圾邮件程序访问<br>有关详细信息，请访问 %1 主页。',
 	'BbEnable'					=> '启用不良行为',
 	'BbEnableInfo'				=> '所有其他设置都可以在配置文件夹 %1 中更改。',
 	'BbStats'					=> '不良行为在过去 7 天内阻止了 %1 次访问尝试。',
