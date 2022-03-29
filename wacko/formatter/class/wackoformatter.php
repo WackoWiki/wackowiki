@@ -211,8 +211,8 @@ class WackoFormatter
 			"\*\*[^\n]*?\*\*|" .
 			// code ##...##
 			"\#\#[^\n]*?\#\#|" .
-			// code ¹¹...¹¹
-			"\¹\¹[^\n]*?\¹\¹|" .
+			// code ï¿½ï¿½...ï¿½ï¿½
+			"\ï¿½\ï¿½[^\n]*?\ï¿½\ï¿½|" .
 			// note ''...''
 			"\'\'.*?\'\'|" .
 			// note !!...!!
@@ -241,12 +241,7 @@ class WackoFormatter
 			// italic //...//
 			"\/\/[^\n]*?(?<!http:|https:|ftp:|file:|nntp:)\/\/|" .
 			// headers
-			"\n[ \t]*=======.*?={2,7}|" .
-			"\n[ \t]*======.*?={2,7}|" .
-			"\n[ \t]*=====.*?={2,7}|" .
-			"\n[ \t]*====.*?={2,7}|" .
-			"\n[ \t]*===.*?={2,7}|" .
-			"\n[ \t]*==.*?={2,7}|" .
+			"\n[ \t]*={2,7}.*?={2,7}|" .
 			// separator
 			"[-]{4,}|" .
 			// line break
@@ -713,7 +708,7 @@ class WackoFormatter
 		}
 		// code
 		else if (  preg_match('/^\#\#(.*?)\#\#$/', $thing, $matches)
-				|| preg_match('/^\¹\¹(.*?)\¹\¹$/', $thing, $matches))
+				|| preg_match('/^\ï¿½\ï¿½(.*?)\ï¿½\ï¿½$/', $thing, $matches))
 		{
 			return '<code>' . preg_replace_callback($this->LONGREGEXP, $callback, $matches[1]) . '</code>';
 		}
