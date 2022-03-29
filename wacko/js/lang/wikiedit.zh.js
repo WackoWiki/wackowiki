@@ -48,7 +48,7 @@ lang = {
 	Link :					"链接",
 	TextForLinking :		"链接文本",
 
-	HelpAboutTip :			' 快捷方式:\n'+
+	HelpAboutTip :			' 快捷方式：\n'+
 							' Ctrl+B - 粗体\n'+
 							' Ctrl+I - 斜体\n'+
 							' Ctrl+U - 下划线\n'+
