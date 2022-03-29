@@ -653,7 +653,7 @@ $ap_translation = [
 
 	'ForumSection'				=> '论坛选项',
 	'ForumCluster'				=> '集群选项',
-	'ForumClusterInfo'			=> '论坛部分的根集群 (操作 %1)。',
+	'ForumClusterInfo'			=> '论坛部分的根集群 （操作 %1）。',
 	'ForumTopics'				=> '每页的主题数',
 	'ForumTopicsInfo'			=> '在论坛部分列表的每一页上显示的主题数（操作 %1）。',
 	'CommentsCount'				=> '每页评论数',
