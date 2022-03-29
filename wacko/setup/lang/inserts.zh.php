@@ -6,8 +6,8 @@ $insert = [
 	'home_page_body'	=> 'file:/wacko_logo.png?right' . "\n" .
 			'**欢迎来到您的 ((WackoWiki:Doc/简体中文 WackoWiki)) 网站！**' . "\n\n" .
 			'点击后在底部"编辑此页面"链接((/登录 登录)) 开始操作。' . "\n\n" .
-			'文件可在以下网址找到 WackoWiki:Doc/简体中文.' . "\n" .
-			'有用的页面：((WackoWiki:Doc/简体中文/格式化 格式化)), ((/搜索 搜索)).',
+			'文件可在以下网址找到 WackoWiki:Doc/简体中文。' . "\n" .
+			'有用的页面：((WackoWiki:Doc/简体中文/格式化 格式化)), ((/搜索 搜索))。',
 	'root_page'			=> '首页',
 
 	'category_page'		=> '分类',
