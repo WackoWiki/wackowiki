@@ -990,43 +990,6 @@ class WackoFormatter
 
 			return '';
 		}
-		// experimental: backported from openSpace
-		// image link (*(http://example.com file:image.png)*)
-		else if (  preg_match('/^\[\*\[(\S+?)([ \t]+(file:[^\n]+?))?\]\*\]$/u', $thing, $matches)
-				|| preg_match('/^\(\*\((\S+?)([ \t]+(file:[^\n]+?))?\)\*\)$/u', $thing, $matches)
-				)
-		{
-			$url	= $matches[1] ?? '';
-			$img	= $matches[3] ?? '';
-
-			if ($url && $img)
-			{
-				if ($url != ($url = (preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(/u', '', $url))))
-				{
-					$result	= '</span>';
-				}
-
-				if ($url[0] == '(')
-				{
-					$url	 = mb_substr($url, 1);
-					$result	.= '(';
-				}
-
-				if ($url[0] == '[')
-				{
-					$url	 = mb_substr($url, 1);
-					$result	.= '[';
-				}
-
-				$img		= preg_replace('/<!--imgprelink:begin-->|<!--imgprelink:end-->|\[\*\[|\(\*\(|/u', '', $img);
-
-				return $result . $wacko->pre_link($url, $img, 1, 1);
-			}
-			else
-			{
-				return '';
-			}
-		}
 		// indented text
 		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|\d{1,3})[\.\)](\#\d{1,3})?)?(\n|$)/us', $thing, $matches))
 		{

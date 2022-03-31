@@ -55,7 +55,7 @@ class PostWacko
 				}
 
 				$img	= str_replace(' ', '', $img);
-				$img	= trim(preg_replace('/<!--imgprelink:[\w]+-->|__|\[\*\[|\(\*\(/u', '', $img));
+				$img	= trim(preg_replace('/<!--markup:1:[\w]+-->|__|\[\[|\(\(/u', '', $img));
 				$img	= $wacko->link($img, '', '', '', 1, 1);
 
 				return '<a href="' . $url . '">' . $img . '</a>';

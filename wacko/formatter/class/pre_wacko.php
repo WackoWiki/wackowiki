@@ -18,8 +18,8 @@ class PreFormatter
 			// escaped  ""...""
 			'\"\".*?\"\"|' .
 			// macro  ::...::
-			'::(\S)?::)' .
-			'/usm';
+			'::(\S)?::' .
+			')/usm';
 	}
 
 	function precallback($things)
