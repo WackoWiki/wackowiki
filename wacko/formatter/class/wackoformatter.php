@@ -183,7 +183,7 @@ class WackoFormatter
 				: '') .
 			// html comments
 			#"<!--.*-->|" .
-			//? (?...?)
+			// definition  (?...?)
 			"\(\?(\S+?)([ \t]+([^\n]+?))?\?\)|" .
 			// bracket links [[tag description]] or ((tag description))
 			($this->object->db->disable_bracketslinks
@@ -264,8 +264,9 @@ class WackoFormatter
 			"\n)/usm";
 
 		$this->NOTLONGREGEXP =
+			"/(" .
 			// formatter  %%...%%
-			"/(" . ($this->object->db->disable_formatters
+			($this->object->db->disable_formatters
 				? ''
 				: "\%\%.*?\%\%|") .
 			// escaped  ~...
@@ -279,8 +280,9 @@ class WackoFormatter
 			")/usm";
 
 		$this->MOREREGEXP =
+			"/(" .
 			// centered text  >>...<< (depreciated)
-			"/(>>.*?<<|" .
+			">>.*?<<|" .
 			// escaped  ~...
 			"~([^ \t\n]+)|" .
 			// escaped text
