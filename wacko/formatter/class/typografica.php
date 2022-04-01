@@ -121,13 +121,16 @@ class Typografica
 
 		if ($this->skip_tags)
 		{
-			$re		= '/<\/?[a-z0-9]+(' . // tag name
-									'\s+(' . // repeatable statement: if only one delimiter and little body
-									'[a-z]+(' . // alpha-composed attribute, could be followed by equals character
-											'=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))' . //
+			$re		= '/<\/?[a-z0-9]+(' .			// tag name
+									'\s+(' .		// repeatable statement: if only one delimiter and little body
+									'[a-z]+(' .		// alpha-composed attribute, could be followed by equals character
+											'=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))' .
 											')?' .
 										')?' .
-									")*\/?>|<\!--link:begin-->[^\n]*?==/ui";
+									')*\/?>|' .
+						'<\!--link:begin-->[^\n]*?==|' .
+						'<\!--imglink:begin-->[^\n]*?==|' .
+					'/ui';
 			$total	= preg_match_all($re, $data, $matches);
 			$data	= preg_replace($re, '{:typo:markup:1:}', $data);
 
