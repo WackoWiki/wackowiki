@@ -25,7 +25,7 @@ class Feed
 	{
 		$this->engine	= & $engine;
 		$this->lang		= $this->engine->db->language;
-		$this->engine->load_translation($this->lang);
+		$this->engine->set_language($this->lang, true, true);
 		$this->charset	= $this->engine->get_charset($this->lang);
 	}
 
