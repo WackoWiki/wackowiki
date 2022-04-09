@@ -9,11 +9,11 @@
 	=]
 
 	[= div _ =
-		<div class="gallery">
+		<div class="gallery" id="gallery--[ ' token ' ]">
 		[ ' nonstatic ' ]
 	=]
 	[= table _ =
-		<table class="gallery">
+		<table class="gallery" id="gallery--[ ' token ' ]">
 		[ ' nonstatic ' ]
 	=]
 	[= items _ =
@@ -23,7 +23,7 @@
 			[ ' nonstatic ' ]
 		=]
 		<figure class="zoom">
-			<a href="[ ' href ' ]"[ ' datafancybox ' ][ ' datacaption ' ] alt="[ ' alt ' ]" title="[ ' description ' ]">[ ' img ' ]</a>
+			<a href="[ ' href ' ]"[ ' datawidth ' ][ ' dataheight ' ][ ' target ' ] alt="[ ' alt ' ]" title="[ ' description ' ]">[ ' img ' ]</a>
 			[= caption _ =
 				<figcaption>
 					<span>[ ' description ' ]</span>

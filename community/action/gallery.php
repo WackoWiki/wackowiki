@@ -10,8 +10,7 @@ if (!defined('IN_WACKO'))
  * modify the script for your needs, please conribute your improvements
  *
  * requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
- * optional jQuery <https://jquery.com/>
- * optional fancyBox <http://fancyapps.com/fancybox/3/>
+ * optional PhotoSwipe <https://photoswipe.com/>
  *
  * {{gallery
 
@@ -45,13 +44,7 @@ TODO: config settings
 require_once 'lib/phpthumb/PHPThumb.php';
 require_once 'lib/phpthumb/GD.php';
 
-// add jQuery library
-$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/jquery-3.6.0.min.js" defer></script>');
-// add fancyBox
-$this->add_html('footer', '<script src="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.js" defer></script>');
-$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/fancybox/jquery.fancybox.min.css">');
-
-// Loading parameters
+// loading parameters
 $file_id		= (int) ($_GET['file_id'] ?? null);
 $files			= [];
 $thumb_prefix	= 'tn_';
@@ -64,6 +57,7 @@ $nomark			??= 1;
 $target			??= 0;
 $table			??= 1;
 $caption		??= 1;
+$title			??= '';
 $nomark			??= 0;
 
 $order			??= '';
@@ -91,6 +85,30 @@ else
 
 // we using a parameter token here to sort out multiple instances
 $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
+
+// add PhotoSwipe
+if ($target == 2)
+{
+	$script = <<<EOD
+// Include Lightbox
+import PhotoSwipeLightbox from '{$this->db->base_path}js/photoswipe/photoswipe-lightbox.esm.min.js';
+
+const lightbox = new PhotoSwipeLightbox({
+  // may select multiple "galleries"
+  gallery: '#gallery--$param_token',
+
+  // Elements within gallery (slides)
+  children: 'a',
+
+  // setup PhotoSwipe Core dynamic import
+  pswpModule: () => import('{$this->db->base_path}js/photoswipe/photoswipe.esm.min.js')
+});
+lightbox.init();
+EOD;
+
+	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe.css">');
+	$this->add_html('footer', '<script type="module">' . $script . '</script>');
+}
 
 $nav_offset		= (int) ($_GET[$param_token] ?? '');
 
@@ -191,11 +209,13 @@ if ($can_view)
 			if ($table)
 			{
 				$tpl->table		= true;
+				$tpl->table_token	= $param_token;
 				$tpl->etable	= true;
 			}
 			else
 			{
 				$tpl->div		= true;
+				$tpl->div_token	= $param_token;
 				$tpl->ediv		= true;
 			}
 
@@ -308,7 +328,9 @@ if ($can_view)
 					{
 						$tpl->description	= $file_description;
 						$tpl->alt			= $file_description;
-						$tpl->datafancybox	= ' data-fancybox="' . $param_token . '"';
+						$tpl->datawidth		= ' data-pswp-width="' . $file['picture_w'] . '"';
+						$tpl->dataheight	= ' data-pswp-height="' . $file['picture_h'] . '"';
+						$tpl->target		= ' target="_blank"';
 						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
 					}
 				}
