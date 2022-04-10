@@ -61,27 +61,13 @@ $title			??= '';
 $nomark			??= 0;
 
 $order			??= '';
+$perrow			??= 5;
 $global			??= 0;
 $owner			??= '';
-$max			??= '';
+$max			??= 50;
 
-if ($max)
-{
-	$limit = $max;
-}
-else
-{
-	$limit	= 50;
-}
-
-if (!isset($perrow))
-{
-	$images_row = 5;
-}
-else
-{
-	$images_row = $perrow;
-}
+$limit			= (int) $max;
+$images_row		= (int) $perrow;
 
 // we using a parameter token here to sort out multiple instances
 $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner . $order . $max), 0, 8);
@@ -94,14 +80,14 @@ if ($target == 2)
 import PhotoSwipeLightbox from '{$this->db->base_path}js/photoswipe/photoswipe-lightbox.esm.min.js';
 
 const lightbox = new PhotoSwipeLightbox({
-  // may select multiple "galleries"
-  gallery: '#gallery--$param_token',
+	// may select multiple "galleries"
+	gallery: '#gallery--$param_token',
 
-  // Elements within gallery (slides)
-  children: 'a',
+	// Elements within gallery (slides)
+	children: 'a',
 
-  // setup PhotoSwipe Core dynamic import
-  pswpModule: () => import('{$this->db->base_path}js/photoswipe/photoswipe.esm.min.js')
+	// setup PhotoSwipe Core dynamic import
+	pswpModule: () => import('{$this->db->base_path}js/photoswipe/photoswipe.esm.min.js')
 });
 lightbox.init();
 EOD;
@@ -321,9 +307,9 @@ if ($can_view)
 				}
 				else
 				{
-					// show file via JS with data-attributes
 					$tpl->href			= $url;
 
+					// show file in lightbox via JS with data-attributes
 					if ($target == 2)
 					{
 						$tpl->description	= $file_description;
@@ -331,7 +317,7 @@ if ($can_view)
 						$tpl->datawidth		= ' data-pswp-width="' . $file['picture_w'] . '"';
 						$tpl->dataheight	= ' data-pswp-height="' . $file['picture_h'] . '"';
 						$tpl->target		= ' target="_blank"';
-						$tpl->datacaption	= ' data-caption="' . $file_description . '"';
+						#$tpl->datacaption	= ' data-caption="' . $file_description . '"';
 					}
 				}
 
