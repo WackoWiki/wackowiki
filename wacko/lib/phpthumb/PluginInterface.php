@@ -5,8 +5,8 @@ namespace PHPThumb;
 interface PluginInterface
 {
     /**
-     * @param  PHPThumb $phpthumb
+     * @param PHPThumb $phpthumb
      * @return PHPThumb
      */
-    public function execute($phpthumb);
+    public function execute(PHPThumb $phpthumb): PHPThumb;
 }

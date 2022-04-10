@@ -25,27 +25,27 @@ abstract class PHPThumb
      *
      * @var string
      */
-    protected $fileName;
+    protected string $fileName;
 
     /**
      * What the file format is (mime-type)
      *
      * @var string
      */
-    protected $format;
+    protected string $format;
 
     /**
      * Whether or not the image is hosted remotely
      *
      * @var bool
      */
-    protected $remoteImage;
+    protected bool $remoteImage;
 
     /**
      * An array of attached plugins to execute in order.
      * @var array
      */
-    protected $plugins;
+    protected array $plugins;
 
     /**
      * @param $fileName
@@ -76,7 +76,7 @@ abstract class PHPThumb
      * @param $filename
      * @return bool
      */
-    protected function validateRequestedResource($filename)
+    protected function validateRequestedResource($filename): bool
     {
         if(false !== filter_var($filename, FILTER_VALIDATE_URL)) {
             $this->remoteImage = true;
@@ -94,7 +94,7 @@ abstract class PHPThumb
      * Returns the filename.
      * @return string
      */
-    public function getFileName()
+    public function getFileName(): string
     {
         return $this->fileName;
     }
@@ -104,7 +104,7 @@ abstract class PHPThumb
      * @param $fileName
      * @return PHPThumb
      */
-    public function setFileName($fileName)
+    public function setFileName($fileName): PHPThumb
     {
         $this->fileName = $fileName;
 
@@ -115,7 +115,7 @@ abstract class PHPThumb
      * Returns the format.
      * @return string
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return $this->format;
     }
@@ -125,7 +125,7 @@ abstract class PHPThumb
      * @param $format
      * @return PHPThumb
      */
-    public function setFormat($format)
+    public function setFormat($format): PHPThumb
     {
         $this->format = $format;
 
@@ -136,7 +136,7 @@ abstract class PHPThumb
      * Returns whether the image exists remotely, i.e. it was loaded via a URL.
      * @return bool
      */
-    public function getIsRemoteImage()
+    public function getIsRemoteImage(): bool
     {
         return $this->remoteImage;
     }
