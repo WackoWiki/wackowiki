@@ -23,10 +23,15 @@
 			[ ' nonstatic ' ]
 		=]
 		<figure class="zoom">
-			<a href="[ ' href ' ]"[ ' datawidth ' ][ ' dataheight ' ][ ' target ' ] alt="[ ' alt ' ]" title="[ ' description ' ]">[ ' img ' ]</a>
+			<a href="[ ' href ' ]"[ ' datawidth ' ][ ' dataheight ' ][ ' target ' ]>
+				[ ' img ' ]
+				[= data _ =
+				<span class="pswp-caption-content">[ ' caption ' ]</span>
+				=]
+			</a>
 			[= caption _ =
 				<figcaption>
-					<span>[ ' description ' ]</span>
+					<span>[ ' caption ' ]</span>
 				</figcaption>
 			=]
 		</figure>
@@ -50,7 +55,7 @@
 			[ ' img ' ]
 			<figcaption>
 				<span>
-					[ ' description ' ]
+					[ ' caption ' ]
 				</span>
 			</figcaption>
 			<br>

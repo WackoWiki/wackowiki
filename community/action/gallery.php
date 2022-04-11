@@ -65,6 +65,7 @@ $perrow			??= 5;
 $global			??= 0;
 $owner			??= '';
 $max			??= 50;
+$nav_offset		??= 1;
 
 $limit			= (int) $max;
 $images_row		= (int) $perrow;
@@ -94,6 +95,8 @@ const lightbox = new PhotoSwipeLightbox({
 const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
 	// Plugins options, for example:
 	type: 'auto',
+
+	captionContent: '.pswp-caption-content',
 });
 
 lightbox.init();
@@ -104,7 +107,7 @@ EOD;
 	$this->add_html('footer', '<script type="module">' . $script . '</script>');
 }
 
-$nav_offset		= (int) ($_GET[$param_token] ?? '');
+$nav_offset		= (int) ($_GET[$param_token] ?? 1);
 
 							$order_by = "file_name ASC";
 if ($order == 'ext')		$order_by = "file_ext ASC";
@@ -227,14 +230,15 @@ if ($can_view)
 
 				if ($caption == 1)
 				{
-					$file_description	= $file['file_description'];
+					$file_caption	= $file['file_description'];
 				}
 				else if ($caption == 2)
 				{
-					$file_description	= $file['caption'];
+					$file_caption	= $file['caption'];
 				}
 
-				$file_description	= $this->format(Ut::html($file_description), 'typografica' );
+				$file_description	= $this->format(Ut::html($file['file_description']), 'typografica' );
+				$file_caption		= $this->format(Ut::html($file_caption), 'typografica' );
 
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
@@ -311,7 +315,7 @@ if ($can_view)
 
 				if (!$target)
 				{
-					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+					$tpl->href	= $this->href('', $this->tag, ['file_id' => $file['file_id'], $param_token => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 				}
 				else
 				{
@@ -320,12 +324,14 @@ if ($can_view)
 					// show file in lightbox via JS with data-attributes
 					if ($target == 2)
 					{
-						$tpl->description	= $file_description;
-						$tpl->alt			= $file_description;
 						$tpl->datawidth		= ' data-pswp-width="' . $file['picture_w'] . '"';
 						$tpl->dataheight	= ' data-pswp-height="' . $file['picture_h'] . '"';
 						$tpl->target		= ' target="_blank"';
-						#$tpl->datacaption	= ' data-caption="' . $file_description . '"';
+
+						if ($file_caption)
+						{
+							$tpl->data_caption	= $file_caption;
+						}
 					}
 				}
 
@@ -334,7 +340,7 @@ if ($can_view)
 				{
 					$tpl->enter('caption_');
 
-					$tpl->description	= $file_description;
+					$tpl->caption		= $file_caption;
 					#$tpl->user			= $file['user'];
 					#$tpl->dimension	= $file['picture_w'] . 'x' . $file['picture_h'];
 
@@ -364,15 +370,15 @@ if ($can_view)
 
 			if ($caption == 1)
 			{
-				$file_description	= $file['file_description'];
+				$file_caption	= $file['file_description'];
 			}
 			else if ($caption == 2)
 			{
-				$file_description	= $file['caption'];
+				$file_caption	= $file['caption'];
 			}
 
 			$tpl->token			= $param_token;
-			$tpl->description	= $this->format(Ut::html($file_description), 'typografica' );
+			$tpl->caption		= $this->format(Ut::html($file_caption), 'typografica' );
 
 			if ($file['page_id'])
 			{
@@ -386,17 +392,17 @@ if ($can_view)
 			// show image
 			if ($file['picture_w'] || $file['file_ext'] == 'svg')
 			{
-				$tpl->img		=  $this->link($path . $file['file_name']);
+				$tpl->img		= $this->link($path . $file['file_name']);
 			}
 
 			// backlink
-			$tpl->href		= $this->href('', $this->tag, [$param_token  => $nav_offset]);
+			$tpl->href		= $this->href('', $this->tag, [$param_token => $nav_offset, '#' => 'gallery--' . $param_token]);
 
 			$tpl->enter('navigation_');
 
 			if (array_key_exists($key - 1, $files))
 			{
-				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key - 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->prev_href	= $this->href('', $this->tag, ['file_id' => $files[$key - 1]['file_id'], $param_token => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			if (array_key_exists($key - 1, $files) && array_key_exists($key + 1, $files))
@@ -406,7 +412,7 @@ if ($can_view)
 
 			if (array_key_exists($key + 1, $files))
 			{
-				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key + 1]['file_id'], $param_token  => $nav_offset, 'token' => $param_token, '#' => $param_token]);
+				$tpl->next_href	= $this->href('', $this->tag, ['file_id' => $files[$key + 1]['file_id'], $param_token => $nav_offset, 'token' => $param_token, '#' => $param_token]);
 			}
 
 			$tpl->leave();	// navigation
