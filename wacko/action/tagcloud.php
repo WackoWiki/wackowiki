@@ -131,4 +131,3 @@ else
 {
 	$tpl->notaggedpages = true;
 }
-

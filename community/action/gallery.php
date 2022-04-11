@@ -5,7 +5,9 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* gallery action:
+/* Shows image gallery
+ *
+ * gallery action:
  * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
  * modify the script for your needs, please conribute your improvements
  *
@@ -13,8 +15,6 @@ if (!defined('IN_WACKO'))
  * optional PhotoSwipe <https://photoswipe.com/>
  *
  * {{gallery
-
-	Shows image gallery
 
 	[page		= "page_tag"] - call image from another page
 	[global		= 0|1] - call global images

@@ -31,7 +31,7 @@ $selector =
 		? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = f.file_id) " .
 		  "LEFT JOIN " . $this->db->table_prefix . "category c ON (k.category_id = c.category_id) "
 		: "") . " " .
-		"WHERE ".
+		"WHERE " .
 			"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
 		"AND f.deleted <> 1 " .
 	($owner
@@ -71,7 +71,6 @@ if ($count['n'])
 	{
 		// absolute file path: file:/path/
 		$path2	= $path1 . $file['tag'] . '/';
-		$page	= $file['tag'];
 	}
 	else
 	{
