@@ -78,6 +78,7 @@ if ($target == 2)
 	$script = <<<EOD
 // Include Lightbox
 import PhotoSwipeLightbox from '{$this->db->base_path}js/photoswipe/photoswipe-lightbox.esm.min.js';
+import PhotoSwipeDynamicCaption from '{$this->db->base_path}js/photoswipe/photoswipe-dynamic-caption-plugin.esm.js';
 
 const lightbox = new PhotoSwipeLightbox({
 	// may select multiple "galleries"
@@ -89,10 +90,17 @@ const lightbox = new PhotoSwipeLightbox({
 	// setup PhotoSwipe Core dynamic import
 	pswpModule: () => import('{$this->db->base_path}js/photoswipe/photoswipe.esm.min.js')
 });
+
+const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+	// Plugins options, for example:
+	type: 'auto',
+});
+
 lightbox.init();
 EOD;
 
 	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe.css">');
+	$this->add_html('header', '<link rel="stylesheet" media="screen" href="' . $this->db->base_path . 'js/photoswipe/photoswipe-dynamic-caption-plugin.css">');
 	$this->add_html('footer', '<script type="module">' . $script . '</script>');
 }
 
@@ -226,7 +234,7 @@ if ($can_view)
 					$file_description	= $file['caption'];
 				}
 
-				$file_description	= $this->format($file_description, 'typografica' );
+				$file_description	= $this->format(Ut::html($file_description), 'typografica' );
 
 				// check for upload location: global / per page
 				if ($file['page_id'] == '0')
@@ -363,10 +371,8 @@ if ($can_view)
 				$file_description	= $file['caption'];
 			}
 
-			$file_description	= $this->format($file_description, 'typografica' );
-
 			$tpl->token			= $param_token;
-			$tpl->description	= $file_description;
+			$tpl->description	= $this->format(Ut::html($file_description), 'typografica' );
 
 			if ($file['page_id'])
 			{
