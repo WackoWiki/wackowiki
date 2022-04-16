@@ -111,10 +111,10 @@ class BbCode
 		{
 			if (!$substring[1])
 			{
-				if		(stristr($substring[2], 'red')		== true)	return '!!' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
-				else if	(stristr($substring[2], 'green')	== true)	return '!!(green)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
-				else if	(stristr($substring[2], 'blue')		== true)	return '!!(blue)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
-				else if	(stristr($substring[2], 'grey')		== true)	return '!!(grey)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				if		(stristr($substring[2], 'red'))		return '!!' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	(stristr($substring[2], 'green'))	return '!!(green)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	(stristr($substring[2], 'blue'))	return '!!(blue)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
+				else if	(stristr($substring[2], 'grey'))	return '!!(grey)' . preg_replace_callback($this->template, $rewrite, $substring[3]) . '!!';
 			}
 			else if (preg_match('/^([:xdigit:]{2})([:xdigit:]{2})([:xdigit:]{2})$/', $substring[2], $color))
 			{
