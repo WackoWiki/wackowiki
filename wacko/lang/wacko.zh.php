@@ -485,7 +485,7 @@ $wacko_translation = [
 	// user settings
 	'EmailConfirmResent'		=> '重复的电子邮件确认代码发送到您的地址。',
 	'EmailConfirmNotSent'		=> '无法发送确认码：未指定电子邮件！',
-	'Hello'						=> 'Hello',
+	'Hello'						=> '你好',
 	'UserName'					=> '用户名',
 	'EmailAddress'				=> '您的邮箱',
 	'RealName'					=> '全名',

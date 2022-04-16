@@ -2408,7 +2408,7 @@ class Wacko
 		$change_summary		= $this->_t('NewUserAccount');
 
 		// add user page
-		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
+		if (!$this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 		{
 			// profile title = user_name
 			$this->save_page($tag, $user_page_template, $user_name, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
@@ -4078,7 +4078,7 @@ class Wacko
 				{
 					$access		= true;
 
-					if ($this->has_access('read', $page_id) == false)
+					if (!$this->has_access('read', $page_id))
 					{
 						$this->_acl['list'] = '';
 					}
@@ -6959,11 +6959,11 @@ class Wacko
 		}
 		else
 		{
-			if (preg_match('/print$/', $this->method))
+			if (str_ends_with($this->method, 'print'))
 			{
 				$mod = 'print';
 			}
-			else if (preg_match('/wordprocessor$/', $this->method))
+			else if (str_ends_with($this->method, 'wordprocessor'))
 			{
 				$mod = 'wordprocessor';
 			}
