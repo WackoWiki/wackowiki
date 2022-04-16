@@ -39,10 +39,8 @@ $time		??= 1;
 $error		= null;
 $p_mode		= [];
 
-// Include SimplePie
+// load SimplePie classes
 include_once 'lib/SimplePie/autoloader.php';
-// see autoload.conf
-// include_once 'lib/SimplePie/simplepie.class.php';
 
 if (!$url)
 {

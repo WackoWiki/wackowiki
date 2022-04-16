@@ -40,9 +40,9 @@ TODO: config settings
 	- fall back if no JS or Image manipulation library is available or disabled
 */
 
-// include PHP Thumbnailer
-require_once 'lib/phpthumb/PHPThumb.php';
-require_once 'lib/phpthumb/GD.php';
+// include PHP Thumbnailer (see autoload.conf)
+#require_once 'lib/phpthumb/PHPThumb.php';
+#require_once 'lib/phpthumb/GD.php';
 
 // loading parameters
 $file_id		= (int) ($_GET['file_id'] ?? null);
