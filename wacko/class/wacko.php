@@ -6953,7 +6953,7 @@ class Wacko
 				: ''));
 
 		// display page contents
-		if (preg_match('/(\.xml)$/', $this->method))
+		if (str_ends_with($this->method, '.xml'))
 		{
 			echo $this->method($this->method);
 		}
