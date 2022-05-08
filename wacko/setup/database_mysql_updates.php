@@ -29,6 +29,7 @@ $update_config_r6_0_1 = "DELETE FROM {$pref}config WHERE config_name IN ('footer
 // FILE
 $alter_file_r6_0_1 = "ALTER TABLE {$pref}file CHANGE uploaded_dt created DATETIME NULL DEFAULT NULL";
 $alter_file_r6_0_2 = "ALTER TABLE {$pref}file CHANGE modified_dt modified DATETIME NULL DEFAULT NULL";
+$alter_file_r6_0_3 = "ALTER TABLE {$pref}file CHANGE caption caption TEXT NULL DEFAULT NULL;
 
 // FILE LINK
 

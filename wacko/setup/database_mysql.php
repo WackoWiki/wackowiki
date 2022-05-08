@@ -95,7 +95,7 @@ $tbl_file =
 		file_name VARCHAR(255) NOT NULL DEFAULT '',
 		file_lang VARCHAR(5) NOT NULL DEFAULT '',
 		file_description VARCHAR(255) NOT NULL DEFAULT '',
-		caption TEXT NOT NULL,
+		caption TEXT DEFAULT NULL,
 		author VARCHAR(255) NOT NULL DEFAULT '',
 		source VARCHAR(255) NOT NULL DEFAULT '',
 		source_url VARCHAR(255) NOT NULL DEFAULT '',
@@ -346,7 +346,7 @@ $tbl_user_setting =
 	"CREATE TABLE {$pref}user_setting (
 		setting_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 		user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		theme VARCHAR(20) DEFAULT NULL DEFAULT '',
+		theme VARCHAR(20) DEFAULT NULL,
 		user_lang VARCHAR(5) NOT NULL DEFAULT '',
 		list_count INT(10) UNSIGNED NOT NULL DEFAULT '50',
 		menu_items INT(2) UNSIGNED NOT NULL DEFAULT '5',
