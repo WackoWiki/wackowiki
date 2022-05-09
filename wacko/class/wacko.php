@@ -2129,9 +2129,11 @@ class Wacko
 				"edit_note		= " . $this->db->q($page['edit_note']) . ", " .
 				"minor_edit		= " . (int) $page['minor_edit'] . ", " .
 				"page_size		= " . (int) $page['page_size'] . ", " .
-				"reviewed		= " . (int) $page['reviewed'] . ", " .
-				"reviewed_time	= " . $this->db->q($page['reviewed_time']) . ", " .
-				"reviewer_id	= " . (int) $page['reviewer_id'] . ", " .
+				($page['reviewed_time']
+					?	"reviewed		= " . (int) $page['reviewed'] . ", " .
+						"reviewed_time	= " . $this->db->q($page['reviewed_time']) . ", " .
+						"reviewer_id	= " . (int) $page['reviewer_id'] . ", "
+					:	"") .
 				"latest			= 0, " . // 0 - old page
 				"ip				= " . $this->db->q($page['ip']) . ", " .
 				"handler		= " . $this->db->q($page['handler']) . ", " .
