@@ -31,7 +31,7 @@ if ($user_id = $this->get_user_id())
 	$pagination = $this->pagination($count['n'], $max, 'p', $profile);
 
 	$pages = $this->db->load_all(
-			"SELECT p.page_id, p.tag, p.modified, p.page_lang, w.user_id " .
+			"SELECT p.page_id, p.tag, p.modified, w.user_id " .
 			"FROM {$pref}page AS p, {$pref}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .

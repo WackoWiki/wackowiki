@@ -138,7 +138,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 		{
 			if ($argument == 'request_uri')
 			{
-				$additional_fields = 'request_uri_hash, ';
+				$additional_fields = 'MAX(request_uri_hash) as request_uri_hash, ';
 			}
 			else
 			{
@@ -147,9 +147,9 @@ function admin_tool_badbehavior(&$engine, &$module)
 
 			// Query the DB based on variables selected
 			$results = $engine->db->load_all(
-				"SELECT {$argument} as group_type, {$additional_fields} COUNT(log_id) AS n " .
+				"SELECT BINARY {$argument} as group_type, {$additional_fields} COUNT({$argument}) AS n " .
 				"FROM " . $engine->db->table_prefix . "bad_behavior " .
-				"GROUP BY {$argument} " .
+				"GROUP BY BINARY {$argument} " .
 				"ORDER BY n DESC " .
 				"LIMIT 10", true);
 

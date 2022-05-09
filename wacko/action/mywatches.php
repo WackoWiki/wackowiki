@@ -66,7 +66,7 @@ if ($user_id = $this->get_user_id())
 			$selector;
 
 		$sql =
-			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
+			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title " .
 			$selector .
 			"ORDER BY p.tag ASC ";
 	}
@@ -90,7 +90,7 @@ if ($user_id = $this->get_user_id())
 			$selector;
 
 		$sql =
-			"SELECT w.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang " .
+			"SELECT MAX(w.page_id) AS page_id, p.owner_id, p.user_id, p.tag, p.title " .
 			"FROM {$prefix}watch AS w " .
 				"LEFT JOIN {$prefix}page AS p " .
 					"ON (p.page_id = w.page_id) " .
