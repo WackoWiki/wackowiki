@@ -51,7 +51,7 @@ class Ut
 			{
 				return ($i = $x[0][1]) < count($args)? $args[$i] : $x[0];
 			},
-			$args[0]);
+			$args[0] ?? '');
 	}
 
 	// Generate random token of defined $length that satisfy the complexity rules:
