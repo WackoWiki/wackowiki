@@ -138,7 +138,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 		{
 			if ($argument == 'request_uri')
 			{
-				$additional_fields = 'max(request_uri_hash) as request_uri_hash, ';
+				$additional_fields = 'MAX(request_uri_hash) as request_uri_hash, ';
 			}
 			else
 			{
