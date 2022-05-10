@@ -56,6 +56,7 @@ $delete_poll_r6_0_1 = "DROP TABLE {$pref}poll";
 $delete_rating_r6_0_1 = "DROP TABLE {$pref}rating";
 
 // REFERRER
+$alter_referrer_r6_0_1 = "ALTER TABLE {$pref}referrer CHANGE user_agent user_agent TEXT NULL DEFAULT NULL";
 
 // REVISION
 

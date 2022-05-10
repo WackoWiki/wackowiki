@@ -236,8 +236,8 @@ $tbl_referrer =
 		page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 		referrer VARCHAR(2083) NOT NULL DEFAULT '',
 		referrer_time DATETIME DEFAULT NULL,
-		ip VARCHAR(45) COLLATE utf8_bin NOT NULL DEFAULT '',
-		user_agent VARCHAR(150) COLLATE utf8_bin NOT NULL DEFAULT '',
+		ip VARCHAR(45) NOT NULL DEFAULT '',
+		user_agent TEXT DEFAULT NULL,
 		PRIMARY KEY (referrer_id),
 		KEY idx_page_id (page_id),
 		KEY idx_referrer_time (referrer_time)

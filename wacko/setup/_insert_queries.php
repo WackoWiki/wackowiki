@@ -113,6 +113,7 @@ $upgrade['6.1.2'][]	= ['delete',	'poll',				$delete_poll_r6_0_1];
 $upgrade['6.1.2'][]	= ['delete',	'rating',			$delete_rating_r6_0_1];
 
 // referrer
+$upgrade['6.1.9'][]	= ['alter',		'referrer',			$alter_referrer_r6_0_1];
 
 // revision
 
