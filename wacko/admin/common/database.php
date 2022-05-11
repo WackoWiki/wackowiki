@@ -279,6 +279,11 @@ function get_table(&$engine, $table, $drop = true)
 			$schema_create .= ' COLLATE ' . $row['Collation'];
 		}
 
+		if ($row['Null'] != 'YES')
+		{
+			$schema_create .= ' NOT NULL';
+		}
+
 		// provide timestamp with CURRENT_TIMESTAMP without quotes
 		if (!empty($row['Default'])
 			&& (($row['Type'] == 'timestamp' && ($row['Default'] == 'CURRENT_TIMESTAMP' || $row['Default'] == 'current_timestamp()'))
@@ -286,14 +291,9 @@ function get_table(&$engine, $table, $drop = true)
 		{
 			$schema_create .= ' DEFAULT ' . $row['Default'];
 		}
-		else if (isset($row['Default']) && $row['Default'] !== '')
+		else if (isset($row['Default']))
 		{
 			$schema_create .= ' DEFAULT \'' . $row['Default'] . '\'';
-		}
-
-		if ($row['Null'] != 'YES')
-		{
-			$schema_create .= ' NOT NULL';
 		}
 
 		if ($row['Extra'] != '')
