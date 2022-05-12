@@ -16,6 +16,7 @@ $engine		= 'ENGINE=' . $config['db_engine'];
 // AUTH TOKEN
 
 // CACHE
+$alter_cache_r6_0_1 = "ALTER TABLE {$pref}cache CHANGE query query VARCHAR(255) NOT NULL DEFAULT ''";
 
 // CATEGORY
 
