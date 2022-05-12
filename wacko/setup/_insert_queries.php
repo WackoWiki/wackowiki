@@ -88,6 +88,7 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 // cache
 $upgrade['6.0.8'][]		= ['alter',		'cache',			$alter_cache_r5_5_0];
 $upgrade['6.0.11'][]	= ['alter',		'cache',			$alter_cache_r5_5_1];
+$upgrade['6.0.30'][]	= ['alter',		'cache',			$alter_cache_r5_5_2];
 
 // category
 $upgrade['6.0.10'][]	= ['alter',		'category',			$alter_category_r5_5_0];
