@@ -939,8 +939,6 @@ class WackoFormatter
 				else if (  mb_substr($url, 0, 2) == 'fn' // legacy support for experimental syntax [[fn footnote here]]
 						|| $url[0] == '^')
 				{
-					$sup = 1;
-
 					if (!$text)
 					{
 						$text = mb_substr($url, 1);
@@ -949,13 +947,18 @@ class WackoFormatter
 					$this->auto_fn['count'] ??= 0;
 
 					$this->auto_fn['count']++;
-					$footnote_count = $this->auto_fn['count'];
+					$fn_count = $this->auto_fn['count'];
 
 					$this->auto_fn['content'] ??= null;
 
-					$this->auto_fn['content'][$footnote_count] = trim($text);
+					$this->auto_fn['content'][$fn_count] = trim($text);
 
-					return ($sup ? '<sup class="footnote">' : '') . '<a href="#footnote-' . $footnote_count . '" id="footnote-' . $footnote_count . '-ref" title="footnote ' . $footnote_count . '" >[' . $footnote_count . ']</a>' . ($sup ? '</sup>' : '');
+					return
+						'<sup class="footnote">' .
+							'<a href="#footnote-' . $fn_count . '" id="footnote-' . $fn_count . '-ref" title="footnote ' . $fn_count . '" >' .
+								'[' . $fn_count . ']' .
+							'</a>' .
+						'</sup>';
 				}
 				// forced links
 				else
