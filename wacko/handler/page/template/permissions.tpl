@@ -68,7 +68,10 @@
 					<th scope="row">
 					</th>
 					<td>
-						<div class="msg hint">[ ' _t: AclHelp ' ]</div>
+						<details>
+							<summary>[ ' _t: Help ' ]</summary>
+							<div class="msg hint">[ ' _t: AclHelp ' ]</div>
+						</details>
 					</td>
 				</tr>
 				<tr>
