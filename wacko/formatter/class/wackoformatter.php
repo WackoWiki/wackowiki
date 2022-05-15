@@ -906,7 +906,10 @@ class WackoFormatter
 						$text = mb_substr($url, 1);
 					}
 
-					return ($sup ? '<sup>' : '') . '<a href="#o' . $aname . '" id="' . $aname . '">' . $text . '</a>' . ($sup ? '</sup>' : '');
+					return
+						($sup ? '<sup>' : '') .
+							'<a href="#o' . $aname . '" id="' . $aname . '">' . $text . '</a>' .
+						($sup ? '</sup>' : '');
 				}
 				// footnote [[#*]], [[#**]], [[#1]], [[#2]]
 				else if ($url[0] == '#')
@@ -933,7 +936,10 @@ class WackoFormatter
 						$text = mb_substr($url, 1);
 					}
 
-					return ($sup ? '<sup>' : '') . '<a href="#' . $ahref . '" id="o' . $ahref . '">' . $text . '</a>' . ($sup ? '</sup>' : '');
+					return
+						($sup ? '<sup>' : '') .
+							'<a href="#' . $ahref . '" id="o' . $ahref . '">' . $text . '</a>' .
+						($sup ? '</sup>' : '');
 				}
 				// auto-generated footnote [[^ footnote here]]
 				else if (  mb_substr($url, 0, 2) == 'fn' // legacy support for experimental syntax [[fn footnote here]]
@@ -955,7 +961,7 @@ class WackoFormatter
 
 					return
 						'<sup class="footnote">' .
-							'<a href="#footnote-' . $fn_count . '" id="footnote-' . $fn_count . '-ref" title="footnote ' . $fn_count . '" >' .
+							'<a href="#footnote-' . $fn_count . '" id="footnote-' . $fn_count . '-ref" title="footnote ' . $fn_count . '">' .
 								'[' . $fn_count . ']' .
 							'</a>' .
 						'</sup>';
