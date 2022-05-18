@@ -1009,6 +1009,7 @@ p.preview {
 	padding: 0 1px;
 }
 
+/* auto-generated footnotes */
 .layout-box dd {
 	margin: -20px 0 0 50px;
 	padding: 0;
@@ -1023,6 +1024,11 @@ p.preview {
 .footnote *:target,
 a:target {
 	background-color: var(--ww-a-target-bg);
+}
+
+#footnotes dd:hover,
+#footnotes dt:hover + dd {
+	background-color: var(--ww-hover-secondary);
 }
 
 .buttonsspacer {
