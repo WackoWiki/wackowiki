@@ -48,7 +48,7 @@ if (1 * $closes < 1 * $opens)
 	$text .= str_repeat('</table>', (1 * $opens - 1 * $closes));
 }
 
-//format footnote content
+// format footnote content
 if (!empty($parser->auto_fn['content']))
 {
 	$footnotes = '';

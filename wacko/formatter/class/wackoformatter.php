@@ -942,28 +942,40 @@ class WackoFormatter
 						($sup ? '</sup>' : '');
 				}
 				// auto-generated footnote [[^ footnote here]]
-				else if (  mb_substr($url, 0, 2) == 'fn' // legacy support for experimental syntax [[fn footnote here]]
-						|| $url[0] == '^')
+				else if ($url[0] == '^')
 				{
-					if (!$text)
+					$anchor = mb_substr($url, 1);
+
+					// validate and sanitize $anchor
+					if (!preg_match('/^([\p{L},\d,*,†,‡,§,‖])*$/u', $anchor))
 					{
-						$text = mb_substr($url, 1);
+						$anchor = '';
 					}
 
-					if (!isset($this->auto_fn['count']))
+					// just discard them, simple and neat
+					if (isset($this->auto_fn['content'][$anchor]) && $text)
 					{
-						$this->auto_fn['count'] = 0;
+						$anchor = '';
 					}
 
-					$this->auto_fn['count']++;
-					$fn_count = $this->auto_fn['count'];
-
-					if (!isset($this->auto_fn['content']))
+					// set denominator
+					if ($anchor)
 					{
-						$this->auto_fn['content'] = null;
+						$fn_count = $anchor;
+					}
+					else
+					{
+						$this->auto_fn['count'] ??= 0;
+						$this->auto_fn['count']++;
+
+						$fn_count = $this->auto_fn['count'];
 					}
 
-					$this->auto_fn['content'][$fn_count] = trim($text);
+					if ($text)
+					{
+						$this->auto_fn['content'] ??= null;
+						$this->auto_fn['content'][$fn_count] = trim($text);
+					}
 
 					return
 						'<sup class="footnote">' .
