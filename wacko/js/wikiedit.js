@@ -82,6 +82,7 @@ class WikiEdit extends ProtoEdit
 		this.addButton('textred',			lang.MarkedText, '\'!!\',\'!!\',2');
 		this.addButton('highlightcolor',	lang.HighlightText, '\'??\',\'??\',2');
 		//this.addButton('shade',			lang.Shade,			"'%%(wacko wrapper="shade")','%%',2");
+		this.addButton('footnote',			lang.Footnote, '\'[[^ \',\']]\',2');
 		this.addButton('createlink',		lang.Hyperlink, '', 'document.getElementById(\'' + this.id + '\')._owner.createLink');
 
 		if (this.autocomplete)

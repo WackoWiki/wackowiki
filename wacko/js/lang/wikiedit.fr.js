@@ -42,6 +42,7 @@ lang = {
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Note de bas de page",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Insérer tableau",
 
