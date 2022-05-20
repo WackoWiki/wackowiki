@@ -65,6 +65,8 @@ $alter_page_r5_5_7 = "ALTER TABLE {$pref}page CHANGE keywords keywords VARCHAR(2
 $update_page_r5_5_0 = "UPDATE {$pref}page SET body_toc = ''";
 $update_page_r5_5_1 = "UPDATE {$pref}page SET body_r = ''";
 $update_page_r5_5_2 = "DELETE FROM {$pref}page WHERE owner_id = (SELECT user_id FROM {$pref}user WHERE user_name = 'System' LIMIT 1) AND NOT page_lang = '" . _quote($config['language']) . "'";
+$update_page_r5_5_3 = "UPDATE {$pref}page SET body = REPLACE(body, '[[fn ', '[[^ ');";
+$update_page_r5_5_4 = "UPDATE {$pref}page SET body = REPLACE(body, '((fn ', '((^ ');";
 
 // PAGE LINK
 $alter_page_link_r5_5_0 = "ALTER TABLE {$pref}page_link DROP to_supertag";

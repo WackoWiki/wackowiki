@@ -128,6 +128,8 @@ $upgrade['5.5.17'][]	= ['update',	'page',				$update_page_r5_5_2];
 
 $upgrade['6.0.2'][]		= ['update',	'page',				$update_page_r5_5_0];
 $upgrade['6.0.2'][]		= ['update',	'page',				$update_page_r5_5_1];
+$upgrade['6.0.30'][]	= ['update',	'page',				$update_page_r5_5_3];
+$upgrade['6.0.30'][]	= ['update',	'page',				$update_page_r5_5_4];
 
 // keep this order, after $update_page_r5_5_2!
 $upgrade['5.5.17'][]	= ['update',	'menu',				$update_menu_r5_5_1];
