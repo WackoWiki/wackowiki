@@ -946,14 +946,19 @@ class WackoFormatter
 				{
 					$anchor = mb_substr($url, 1);
 
+					// #18 syntax support
+					if (preg_match('/^\#\d{1,3}$/u', $anchor))
+					{
+						$this->auto_fn['count'] = mb_substr($anchor, 1);
+					}
+
 					// validate and sanitize $anchor
 					if (!preg_match('/^([\p{L},\d,*,†,‡,§,‖])*$/u', $anchor))
 					{
 						$anchor = '';
 					}
-
-					// just discard them, simple and neat
-					if (isset($this->auto_fn['content'][$anchor]) && $text)
+					// discard already set denominators, simple and neat
+					else if (isset($this->auto_fn['content'][$anchor]) && $text)
 					{
 						$anchor = '';
 					}
