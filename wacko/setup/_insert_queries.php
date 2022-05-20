@@ -105,9 +105,12 @@ $upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_4];
 // page
 $upgrade['6.1.2'][]	= ['alter',		'page',				$alter_page_r6_0_1];
 
-#$upgrade['6.0.2'][]	= ['update',	'page',				$update_page_r5_5_0];
+$upgrade['6.1.9'][]	= ['update',	'page',				$update_page_r6_0_1];
+$upgrade['6.1.9'][]	= ['update',	'page',				$update_page_r6_0_2];
 
 // page link
+
+// poll
 $upgrade['6.1.2'][]	= ['delete',	'poll',				$delete_poll_r6_0_1];
 
 // rating
