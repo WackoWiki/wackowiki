@@ -77,25 +77,17 @@ $param_token = substr(hash('sha1', $global . $page . $caption . $target . $owner
 if ($target == 2)
 {
 	$script = <<<EOD
-// Include Lightbox
 import PhotoSwipeLightbox from '{$this->db->base_path}js/photoswipe/photoswipe-lightbox.esm.min.js';
 import PhotoSwipeDynamicCaption from '{$this->db->base_path}js/photoswipe/photoswipe-dynamic-caption-plugin.esm.js';
 
 const lightbox = new PhotoSwipeLightbox({
-	// may select multiple "galleries"
 	gallery: '#gallery--$param_token',
-
-	// Elements within gallery (slides)
 	children: 'a',
-
-	// setup PhotoSwipe Core dynamic import
 	pswpModule: () => import('{$this->db->base_path}js/photoswipe/photoswipe.esm.min.js')
 });
 
 const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
-	// Plugins options, for example:
 	type: 'auto',
-
 	captionContent: '.pswp-caption-content',
 });
 
