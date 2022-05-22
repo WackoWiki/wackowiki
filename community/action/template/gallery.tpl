@@ -22,7 +22,7 @@
 			<td>
 			[ ' nonstatic ' ]
 		=]
-		<figure class="zoom">
+		<figure>
 			<a href="[ ' href ' ]"[ ' datawidth ' ][ ' dataheight ' ][ ' target ' ]>
 				[ ' img ' ]
 				[= data _ =

@@ -150,7 +150,8 @@ if ($_page)
 			// cache similar version
 			$this->tocs[$context] = &$toc;
 
-			// it is now necessary to set flag about the fact that good to in post_wacko source
+			// it is now necessary to set flag about the fact that good to in post_wacko source,
+			// adding the numbers there
 			if (!$ppage)
 			{
 				$this->post_wacko_toc			= &$toc;
