@@ -42,6 +42,7 @@ lang = {
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Lábjegyzet",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Táblázat beillesztése",
 

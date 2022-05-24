@@ -42,6 +42,7 @@ lang = {
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Voetnoot",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"Tafel invoegen",
 

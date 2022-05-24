@@ -1053,7 +1053,7 @@ a:target {
 
 #buttons_1 li {
 	float: left;
-	padding-right: 0.3em;
+	padding-right: 0.25em;
 	white-space: nowrap;
 	list-style: none outside none;
 }
@@ -1183,6 +1183,9 @@ a:target {
 }
 .toolbar li.we-code img {
 	background: url('../../../image/wikiedit/code.svg') no-repeat;
+}
+.toolbar li.we-footnote img {
+	background: url('../../../image/wikiedit/footnote.svg') no-repeat;
 }
 .toolbar li.we-createlink img {
 	background: url('../../../image/wikiedit/link.svg') no-repeat;

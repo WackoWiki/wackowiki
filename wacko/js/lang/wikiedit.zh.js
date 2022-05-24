@@ -42,6 +42,7 @@ lang = {
 	MarkedText :			"已标记文本",
 	HighlightText :			"高亮文本",
 	Shade :					"阴影",
+	Footnote :				"脚注",
 	Hyperlink :				"链接",
 	InsertTable :			"插入表格",
 

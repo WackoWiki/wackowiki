@@ -42,6 +42,7 @@ lang = {
 	MarkedText :			"Marked text",
 	HighlightText :			"Highlight text",
 	Shade :					"Shade",
+	Footnote :				"Footnote",
 	Hyperlink :				"Hyperlink",
 	InsertTable :			"표 삽입",
 

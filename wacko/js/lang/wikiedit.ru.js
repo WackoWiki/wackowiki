@@ -42,6 +42,7 @@ lang = {
 	MarkedText :			"Красный текст",
 	HighlightText :			"Выделенный желтым текст",
 	Shade :					"Тень",
+	Footnote :				"Сноска",
 	Hyperlink :				"Гиперссылка",
 	InsertTable :			"Вставить таблицу",
 
