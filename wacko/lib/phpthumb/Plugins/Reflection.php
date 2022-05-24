@@ -2,6 +2,9 @@
 
 namespace PHPThumb\Plugins;
 
+use PHPThumb\PHPThumb;
+use PHPThumb\PluginInterface;
+
 /**
  * GD Reflection Lib Plugin Definition File
  *
@@ -33,14 +36,14 @@ namespace PHPThumb\Plugins;
  * @package PhpThumb
  * @subpackage Plugins
  */
-class Reflection implements \PHPThumb\PluginInterface
+class Reflection implements PluginInterface
 {
-    protected $currentDimensions;
+    protected array $currentDimensions;
     protected $workingImage;
-    protected $newImage;
-    protected $options;
+    protected object $newImage;
+    protected array $options;
 
-    protected $percent;
+    protected int $percent;
     protected $reflection;
     protected $white;
     protected $border;
@@ -56,10 +59,10 @@ class Reflection implements \PHPThumb\PluginInterface
     }
 
     /**
-     * @param \PHPThumb\PHPThumb $phpthumb
-     * @return \PHPThumb\PHPThumb
+     * @param PHPThumb $phpthumb
+     * @return PHPThumb
      */
-    public function execute($phpthumb)
+    public function execute(PHPThumb $phpthumb):PHPThumb
     {
         $this->currentDimensions = $phpthumb->getCurrentDimensions();
         $this->workingImage      = $phpthumb->getWorkingImage();
@@ -68,8 +71,8 @@ class Reflection implements \PHPThumb\PluginInterface
 
         $width                  = $this->currentDimensions['width'];
         $height                 = $this->currentDimensions['height'];
-        $this->reflectionHeight = intval($height * ($this->reflection / 100));
-        $newHeight              = $height + $this->reflectionHeight;
+        $reflectionHeight = intval($height * ($this->reflection / 100));
+        $newHeight              = $height + $reflectionHeight;
         $reflectedPart          = $height * ($this->percent / 100);
 
         $this->workingImage = imagecreatetruecolor($width, $newHeight);
@@ -101,7 +104,7 @@ class Reflection implements \PHPThumb\PluginInterface
             0,
             $reflectedPart,
             $width,
-            $this->reflectionHeight,
+            $reflectionHeight,
             $width,
             ($height - $reflectedPart)
         );
@@ -121,13 +124,13 @@ class Reflection implements \PHPThumb\PluginInterface
 
         imagealphablending($this->workingImage, true);
 
-        for ($i = 0; $i < $this->reflectionHeight; $i++) {
+        for ($i = 0; $i < $reflectionHeight; $i++) {
             $colorToPaint = imagecolorallocatealpha(
                 $this->workingImage,
                 255,
                 255,
                 255,
-                ($i / $this->reflectionHeight * -1 + 1) * $this->white
+                ($i / $reflectionHeight * -1 + 1) * $this->white
             );
 
             imagefilledrectangle(
