@@ -61,6 +61,7 @@ class SimplePie_Sanitize
 	var $strip_htmltags = array('base', 'blink', 'body', 'doctype', 'embed', 'font', 'form', 'frame', 'frameset', 'html', 'iframe', 'input', 'marquee', 'meta', 'noscript', 'object', 'param', 'script', 'style');
 	var $encode_instead_of_strip = false;
 	var $strip_attributes = array('bgsound', 'expr', 'id', 'style', 'onclick', 'onerror', 'onfinish', 'onmouseover', 'onmouseout', 'onfocus', 'onblur', 'lowsrc', 'dynsrc');
+	var $rename_attributes = array();
 	var $add_attributes = array('audio' => array('preload' => 'none'), 'iframe' => array('sandbox' => 'allow-scripts allow-same-origin'), 'video' => array('preload' => 'none'));
 	var $strip_comments = false;
 	var $output_encoding = 'UTF-8';
@@ -169,6 +170,25 @@ class SimplePie_Sanitize
 		$this->encode_instead_of_strip = (bool) $encode;
 	}
 
+	public function rename_attributes($attribs = array())
+	{
+		if ($attribs)
+		{
+			if (is_array($attribs))
+			{
+				$this->rename_attributes = $attribs;
+			}
+			else
+			{
+				$this->rename_attributes = explode(',', $attribs);
+			}
+		}
+		else
+		{
+			$this->rename_attributes = false;
+		}
+	}
+
 	public function strip_attributes($attribs = array('bgsound', 'expr', 'id', 'style', 'onclick', 'onerror', 'onfinish', 'onmouseover', 'onmouseout', 'onfocus', 'onblur', 'lowsrc', 'dynsrc'))
 	{
 		if ($attribs)
@@ -221,9 +241,9 @@ class SimplePie_Sanitize
 	 * Set element/attribute key/value pairs of HTML attributes
 	 * containing URLs that need to be resolved relative to the feed
 	 *
-	 * Defaults to |a|@href, |area|@href, |blockquote|@cite, |del|@cite,
-	 * |form|@action, |img|@longdesc, |img|@src, |input|@src, |ins|@cite,
-	 * |q|@cite
+	 * Defaults to |a|@href, |area|@href, |audio|@src, |blockquote|@cite,
+	 * |del|@cite, |form|@action, |img|@longdesc, |img|@src, |input|@src,
+	 * |ins|@cite, |q|@cite, |source|@src, |video|@src
 	 *
 	 * @since 1.0
 	 * @param array|null $element_attribute Element/attribute key/value pairs, null for default
@@ -235,6 +255,7 @@ class SimplePie_Sanitize
 			$element_attribute = array(
 				'a' => 'href',
 				'area' => 'href',
+				'audio' => 'src',
 				'blockquote' => 'cite',
 				'del' => 'cite',
 				'form' => 'action',
@@ -244,7 +265,12 @@ class SimplePie_Sanitize
 				),
 				'input' => 'src',
 				'ins' => 'cite',
-				'q' => 'cite'
+				'q' => 'cite',
+				'source' => 'src',
+				'video' => array(
+					'poster',
+					'src'
+				)
 			);
 		}
 		$this->replace_url_attributes = (array) $element_attribute;
@@ -374,6 +400,14 @@ class SimplePie_Sanitize
 					}
 				}
 
+				if ($this->rename_attributes)
+				{
+					foreach ($this->rename_attributes as $attrib)
+					{
+						$this->rename_attr($attrib, $xpath);
+					}
+				}
+
 				if ($this->strip_attributes)
 				{
 					foreach ($this->strip_attributes as $attrib)
@@ -447,6 +481,8 @@ class SimplePie_Sanitize
 				{
 					$data = preg_replace('/^<div' . SIMPLEPIE_PCRE_XML_ATTRIBUTE . '>/', '<div>', $data);
 				}
+
+				$data = str_replace('</source>', '', $data);
 			}
 
 			if ($type & SIMPLEPIE_CONSTRUCT_IRI)
@@ -638,6 +674,17 @@ class SimplePie_Sanitize
 
 		foreach ($elements as $element)
 		{
+			$element->removeAttribute($attrib);
+		}
+	}
+
+	protected function rename_attr($attrib, $xpath)
+	{
+		$elements = $xpath->query('//*[@' . $attrib . ']');
+
+		foreach ($elements as $element)
+		{
+			$element->setAttribute('data-sanitized-' . $attrib, $element->getAttribute($attrib));
 			$element->removeAttribute($attrib);
 		}
 	}
