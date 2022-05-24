@@ -1196,8 +1196,8 @@ a:target {
 .toolbar li.we-textred img {
 	background: url('../../../image/wikiedit/textcolor.svg') no-repeat;
 }
-.toolbar li.we-highlightcolor img {
-	background: url('../../../image/wikiedit/highlightcolor.svg') no-repeat;
+.toolbar li.we-highlight img {
+	background: url('../../../image/wikiedit/highlight.svg') no-repeat;
 }
 .toolbar li.we-about img {
 	background: url('../../../image/wikiedit/about.svg') no-repeat;
