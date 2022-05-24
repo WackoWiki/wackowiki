@@ -193,19 +193,19 @@ if ($can_view)
 		if (!empty($files))
 		{
 			// pagination
-			$tpl->pagination_text = $pagination['text'];
+			$tpl->pagination_text	= $pagination['text'];
 
 			if ($table)
 			{
-				$tpl->table		= true;
+				$tpl->table			= true;
 				$tpl->table_token	= $param_token;
-				$tpl->etable	= true;
+				$tpl->etable		= true;
 			}
 			else
 			{
-				$tpl->div		= true;
-				$tpl->div_token	= $param_token;
-				$tpl->ediv		= true;
+				$tpl->div			= true;
+				$tpl->div_token		= $param_token;
+				$tpl->ediv			= true;
 			}
 
 			$tpl->enter('items_');
