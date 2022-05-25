@@ -129,7 +129,7 @@ class Typografica
 										')?' .
 									')*\/?>|' .
 						'<\!--link:begin-->[^\n]*?==|' .
-						'<\!--imglink:begin-->[^\n]*?==|' .
+						'<\!--imglink:begin-->[^\n]*?==' .
 					'/ui';
 			$total	= preg_match_all($re, $data, $matches);
 			$data	= preg_replace($re, '{:typo:markup:1:}', $data);
