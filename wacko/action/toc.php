@@ -13,6 +13,7 @@ if (!defined('IN_WACKO'))
 		from="h2"
 		to="h4"
 		numerate=[0|1]
+		start=[0|100]
 		legend="alternate legend"
 		nomark=[0|1]
 	}}
@@ -25,6 +26,7 @@ if (!defined('IN_WACKO'))
 $page		??= '';
 $nomark		??= 0;
 $numerate	??= 0;
+$start		??= 0;
 $from		??= '';
 $to			??= '';
 $legend		??= '';
@@ -47,6 +49,8 @@ else
 	$_page		= $this->page;
 	$link		= '';
 }
+
+if ($start)		$start	= (int) $start;
 
 if (!$from)		$from	= 'h2';
 if (!$to)		$to		= 'h9';
@@ -92,7 +96,15 @@ if ($_page)
 						// if dive deeper, reset the meter for new depths
 						while ($_level > $depth)
 						{
-							$numbers[$_level] = 0;
+							// uses $start for numbering
+							if ($start && $numbers[$_level] == $numbers[1])
+							{
+								$numbers[$_level] = $start - 1;
+							}
+							else
+							{
+								$numbers[$_level] = 0;
+							}
 
 							$_level--;
 						}
