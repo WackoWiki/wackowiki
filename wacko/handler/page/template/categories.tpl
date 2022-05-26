@@ -92,7 +92,7 @@
 								<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category | e ' ]</option>
 							=]
 						</select>
-						<button type="submit" id="submit" name="ugroup">[ ' _t: SubmitButton ' ]</button>
+						<button type="submit" id="submit" name="ungroup">[ ' _t: SubmitButton ' ]</button>
 						<a href="[ ' href: categories ' ]" class="btn-link">
 							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
 						</a>

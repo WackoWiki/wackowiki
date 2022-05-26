@@ -141,7 +141,7 @@ if (   $this->is_owner()
 				$this->http->redirect($this->href('categories', '', 'edit'));
 			}
 			// (un)group item
-			else if (isset($_POST['ugroup']) && $parent_id && $category_id)
+			else if (isset($_POST['ungroup']) && $parent_id && $category_id)
 			{
 				// in or out?
 				if ($parent_id == 0)
@@ -256,7 +256,7 @@ if (   $this->is_owner()
 				}
 			}
 			// (un)group item
-			else if (isset($_POST['ugroup']) && $change_id)
+			else if (isset($_POST['ungroup']) && $change_id)
 			{
 				if ($word = $this->db->load_single(
 					"SELECT category_id, parent_id, category, category_lang
