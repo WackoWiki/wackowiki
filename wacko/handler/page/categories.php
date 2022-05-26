@@ -36,8 +36,8 @@ if (   $this->is_owner()
 
 	if (isset($_POST))
 	{
-		$_category				= $this->sanitize_text_field(($_POST['category'] ?? ''), true);
-		$_category_description	= $this->sanitize_text_field(($_POST['category_description'] ?? ''));
+		$category				= $this->sanitize_text_field(($_POST['category'] ?? ''), true);
+		$category_description	= $this->sanitize_text_field(($_POST['category_description'] ?? ''));
 
 		/////////////////////////////////////////////
 		//   list change/update
@@ -76,7 +76,7 @@ if (   $this->is_owner()
 				if ($this->db->load_single(
 					"SELECT category_id " .
 					"FROM " . $this->db->table_prefix . "category " .
-					"WHERE category = " . $this->db->q($_category) . " " .
+					"WHERE category = " . $this->db->q($category) . " " .
 						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 					"LIMIT 1"))
 				{
@@ -96,10 +96,10 @@ if (   $this->is_owner()
 								: ''
 							) .
 							"category_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
-							"category				= " . $this->db->q($_category) . ", " .
-							"category_description	= " . $this->db->q($_category_description) . " ");
+							"category				= " . $this->db->q($category) . ", " .
+							"category_description	= " . $this->db->q($category_description) . " ");
 
-					$this->set_message($this->_t('CategoriesAdded'), 'success');
+					$this->set_message(Ut::perc_replace($this->_t('CategoriesAdded'), '<code>' . $category . '</code>'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryCreated', SYSTEM_LANG), $_POST['category']));
 					unset($_POST['create']);
 				}
@@ -113,7 +113,7 @@ if (   $this->is_owner()
 				if ($this->db->load_single(
 					"SELECT category_id " .
 					"FROM " . $this->db->table_prefix . "category " .
-					"WHERE category = " . $this->db->q($_category) . " " .
+					"WHERE category = " . $this->db->q($category) . " " .
 						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 						"AND category_id <> " . (int) $_POST['category_id'] . " " .
 					"LIMIT 1"))
@@ -126,8 +126,8 @@ if (   $this->is_owner()
 				{
 					$this->db->sql_query(
 						"UPDATE " . $this->db->table_prefix . "category SET " .
-							"category				= " . $this->db->q($_category) . ", " .
-							"category_description	= " . $this->db->q($_category_description) . " " .
+							"category				= " . $this->db->q($category) . ", " .
+							"category_description	= " . $this->db->q($category_description) . " " .
 						"WHERE category_id = " . (int) $_POST['category_id'] . " " .
 						"LIMIT 1");
 

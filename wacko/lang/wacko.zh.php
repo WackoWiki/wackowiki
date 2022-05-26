@@ -272,7 +272,7 @@ $wacko_translation = [
 	'CategoriesText'			=> '类别',
 	'CategoriesUpdated'			=> '分类更新',
 	'CategoriesAlreadyExists'	=> '这个类别已经存在。',
-	'CategoriesAdded'			=> '分类添加成功',
+	'CategoriesAdded'			=> '分类%1添加成功',
 	'CategoriesRenamed'			=> '分类重命名成功',
 	'CategoriesUngrouped'		=> '类别解绑成功。',
 	'CategoriesGrouped'			=> '在新组中输入的类别。',
@@ -486,7 +486,7 @@ $wacko_translation = [
 	// user settings
 	'EmailConfirmResent'		=> '重复的电子邮件确认代码发送到您的地址。',
 	'EmailConfirmNotSent'		=> '无法发送确认码：未指定电子邮件！',
-	'Hello'						=> 'Hello',
+	'Hello'						=> '你好',
 	'UserName'					=> '用户名',
 	'EmailAddress'				=> '您的邮箱',
 	'RealName'					=> '全名',
