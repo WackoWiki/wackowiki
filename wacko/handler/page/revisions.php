@@ -36,6 +36,12 @@ $tpl->head = Ut::perc_replace($this->_t('RevisionsFor'), $this->compose_link_to_
 
 if ($this->has_access('read'))
 {
+	// purge link (shows only for page owner if allowed or Admin)
+	if (($this->is_owner() && !$this->db->remove_onlyadmins) || $this->is_admin())
+	{
+		$tpl->remove = true;
+	}
+
 	// load revisions for this page
 	if ([$revisions, $pagination] = $this->load_revisions($this->page['page_id'], $hide_minor_edit, $show_deleted))
 	{

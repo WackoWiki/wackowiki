@@ -1,5 +1,10 @@
 [ === main === ]
 	[ ' message ' ]
+	<ul class="menu">
+		[= remove _ =
+			<li><a href="[ ' href: purge ' ]">[ ' _t: SettingsPurge ' ]</a></li>
+		=]
+	</ul>
 	<h3>[ ' head ' ]</h3>
 	[= r _ =
 		<form action="[ ' href: diff ' ]" method="get" name="diff_versions">
