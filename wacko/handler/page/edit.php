@@ -120,6 +120,7 @@ if ($this->has_access('read')
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])
 			{
+				$this->http->status(409);
 				$this->set_message($this->_t('OverwriteAlert'), 'error');
 				$error = true;
 			}
@@ -225,8 +226,7 @@ if ($this->has_access('read')
 		// saving blank document
 		else if (isset($_POST['body']) && $_POST['body'] == '')
 		{
-			$message = $this->_t('EmptyPage');
-			$this->set_message($message, 'error');
+			$this->set_message($this->_t('EmptyPage'), 'error');
 			$this->http->redirect($this->href());
 		}
 	}
