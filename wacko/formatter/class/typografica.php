@@ -168,8 +168,8 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{1,2})(\s+)([^\\s$])/ui', "\\1\\2\u{00A0}\\4", $data);	// \u{00A0} No-Break Space (NBSP)
-				$data	= preg_replace('/(\s+)([a-zà-ÿÀ-ß]{3})(\s+)([^\\s$])/ui',   "\\1\\2\u{00A0}\\4", $data);
+				$data	= preg_replace('/(\s+)([a-zÀ-ÿ]{1,2})(\s+)([^\\s$])/ui', "\\1\\2\u{00A0}\\4", $data);	// \u{00A0} No-Break Space (NBSP)
+				$data	= preg_replace('/(\s+)([a-zÀ-ÿ]{3})(\s+)([^\\s$])/ui',   "\\1\\2\u{00A0}\\4", $data);
 			}
 
 			foreach ($this->glueleft as $i)
@@ -186,7 +186,7 @@ class Typografica
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
 		if ($this->settings['dashglue'])
 		{
-			$data = preg_replace('/([a-zà-ÿÀ-ß0-9]+(\-[a-zà-ÿÀ-ß0-9]+)+)/ui', "<nobr>\\1</nobr>", $data);
+			$data = preg_replace('/([a-zÀ-ÿ0-9]+(\-[a-zÀ-ÿ0-9]+)+)/ui', "<nobr>\\1</nobr>", $data);
 		}
 
 		// 6. Macros
