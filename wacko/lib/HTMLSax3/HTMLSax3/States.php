@@ -29,14 +29,14 @@
 /**
  * Define parser states
  */
-define('XML_HTMLSAX3_STATE_STOP', 0);
-define('XML_HTMLSAX3_STATE_START', 1);
-define('XML_HTMLSAX3_STATE_TAG', 2);
-define('XML_HTMLSAX3_STATE_OPENING_TAG', 3);
-define('XML_HTMLSAX3_STATE_CLOSING_TAG', 4);
-define('XML_HTMLSAX3_STATE_ESCAPE', 6);
-define('XML_HTMLSAX3_STATE_JASP', 7);
-define('XML_HTMLSAX3_STATE_PI', 8);
+const XML_HTMLSAX3_STATE_STOP = 0;
+const XML_HTMLSAX3_STATE_START = 1;
+const XML_HTMLSAX3_STATE_TAG = 2;
+const XML_HTMLSAX3_STATE_OPENING_TAG = 3;
+const XML_HTMLSAX3_STATE_CLOSING_TAG = 4;
+const XML_HTMLSAX3_STATE_ESCAPE = 6;
+const XML_HTMLSAX3_STATE_JASP = 7;
+const XML_HTMLSAX3_STATE_PI = 8;
 /**
  * StartingState searches for the start of any XML tag
  * @package XML_HTMLSax3

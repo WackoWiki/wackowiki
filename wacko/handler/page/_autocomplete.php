@@ -22,13 +22,11 @@ function _parse_query_string()
 // Undo JS's escape() function.
 function _unescape($s)
 {
-	$s = preg_replace_callback(
+	return preg_replace_callback(
 		'/% (?: u([A-F0-9]{1,4}) | ([A-F0-9]{1,2})) /sxi',
 		"_unescape_callback",
 		$s
 	);
-
-	return $s;
 }
 
 // Inplace entity replacement.

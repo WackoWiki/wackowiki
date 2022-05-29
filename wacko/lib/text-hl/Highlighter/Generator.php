@@ -31,18 +31,18 @@ require_once 'XML/Parser.php';
 
 // {{{ error codes
 
-define ('TEXT_HIGHLIGHTER_EMPTY_RE',			1);
-define ('TEXT_HIGHLIGHTER_INVALID_RE',			2);
-define ('TEXT_HIGHLIGHTER_EMPTY_OR_MISSING',	3);
-define ('TEXT_HIGHLIGHTER_EMPTY',				4);
-define ('TEXT_HIGHLIGHTER_REGION_REGION',		5);
-define ('TEXT_HIGHLIGHTER_REGION_BLOCK',		6);
-define ('TEXT_HIGHLIGHTER_BLOCK_REGION',		7);
-define ('TEXT_HIGHLIGHTER_KEYWORD_BLOCK',		8);
-define ('TEXT_HIGHLIGHTER_KEYWORD_INHERITS',	9);
-define ('TEXT_HIGHLIGHTER_PARSE',				10);
-define ('TEXT_HIGHLIGHTER_FILE_WRITE',			11);
-define ('TEXT_HIGHLIGHTER_FILE_READ',			12);
+const TEXT_HIGHLIGHTER_EMPTY_RE = 1;
+const TEXT_HIGHLIGHTER_INVALID_RE = 2;
+const TEXT_HIGHLIGHTER_EMPTY_OR_MISSING = 3;
+const TEXT_HIGHLIGHTER_EMPTY = 4;
+const TEXT_HIGHLIGHTER_REGION_REGION = 5;
+const TEXT_HIGHLIGHTER_REGION_BLOCK = 6;
+const TEXT_HIGHLIGHTER_BLOCK_REGION = 7;
+const TEXT_HIGHLIGHTER_KEYWORD_BLOCK = 8;
+const TEXT_HIGHLIGHTER_KEYWORD_INHERITS = 9;
+const TEXT_HIGHLIGHTER_PARSE = 10;
+const TEXT_HIGHLIGHTER_FILE_WRITE = 11;
+const TEXT_HIGHLIGHTER_FILE_READ = 12;
 // }}}
 
 /**
@@ -233,7 +233,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	function _formatError($code, $params, $fileName, $lineNo)
 	{
 		$template = $this->_templates[$code];
-		$ret = call_user_func_array('sprintf', array_merge(array($template), $params));
+		$ret = call_user_func_array('sprintf', array_merge([$template], $params));
 
 		if ($fileName)
 		{

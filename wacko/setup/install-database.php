@@ -124,7 +124,7 @@ switch ($config['db_driver'])
 				$dblink = new mysqli($config['db_host'], $config['db_user'], $config['db_password'], $config['db_name'], $port),
 				$lang['ErrorDbConnection']);
 		}
-		catch (\mysqli_sql_exception $e)
+		catch (mysqli_sql_exception $e)
 		{
 			// There was a problem with the connection string
 			test(

@@ -22,7 +22,7 @@
  * @ignore
  */
 
-define ('HL_CONSOLE_DEFCOLOR', "\033[0m");
+const HL_CONSOLE_DEFCOLOR = "\033[0m";
 
 /**
  * Console renderer

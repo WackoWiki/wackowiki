@@ -47,11 +47,11 @@ if (!defined('HL_NUMBERS_LI')) {
 /**
  * Use numbered list
  */
-define ('HL_NUMBERS_OL',    1);
+const HL_NUMBERS_OL = 1;
 /**
  * Use non-numbered list
  */
-define ('HL_NUMBERS_UL',    3);
+const HL_NUMBERS_UL = 3;
 /**#@-*/
 
 

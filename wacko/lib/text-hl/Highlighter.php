@@ -44,7 +44,7 @@ if (!defined('HL_NUMBERS_LI')) {
 /**
  * for our purpose, it is infinity
  */
-define ('HL_INFINITY',      1000000000);
+const HL_INFINITY = 1000000000;
 
 // }}}
 

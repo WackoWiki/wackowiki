@@ -36,7 +36,7 @@ class DbMysqli implements DbInterface
 				$this->dblink->set_charset($config->db_charset);
 			}
 		}
-		catch (\mysqli_sql_exception $e)
+		catch (mysqli_sql_exception $e)
 		{
 			die('Error loading WackoWiki DBAL: could not establish database connection.');
 

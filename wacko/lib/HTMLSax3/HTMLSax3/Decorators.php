@@ -111,7 +111,7 @@ class XML_HTMLSax3_CaseFolding {
 	 * @param array tag attributes
 	 * @access protected
 	 */
-	function foldOpen(&$parser, $tag, $attrs=array(), $empty = FALSE) {
+	function foldOpen(&$parser, $tag, $attrs= [], $empty = FALSE) {
 		$this->orig_obj->{$this->orig_open_method}($parser, strtoupper($tag), $attrs, $empty);
 	}
 	/**
@@ -332,7 +332,7 @@ class XML_HTMLSax3_Escape_Stripper {
 	 */
 	function strip(&$parser, $data) {
 		// Check for HTML comments first
-		if ( substr($data,0,2) == '--' ) {
+		if (str_starts_with($data, '--')) {
 			$patterns = [
 				'/^\-\-/',				// Opening comment: --
 				'/\-\-$/',				// Closing comment: --
@@ -340,7 +340,7 @@ class XML_HTMLSax3_Escape_Stripper {
 			$data = preg_replace($patterns,'',$data);
 
 			// Check for XML CDATA sections (note: don't do both!)
-		} else if ( substr($data,0,1) == '[' ) {
+		} else if (str_starts_with($data, '[')) {
 			$patterns = [
 				'/^\[.*CDATA.*\[/s',	// Opening CDATA
 				'/\].*\]$/s',			// Closing CDATA
