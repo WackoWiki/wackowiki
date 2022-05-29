@@ -425,9 +425,9 @@ $ap_translation = [
 									 about this setting, do not have a reverse proxy, or WackoWiki operates in
 									 a shared hosting environment, this setting should remain disabled.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
+	'ReverseProxyHeaderInfo'	=> 'Määrake see väärtus, kui teie proxy-server saadab kliendi IP-aadressi muus päises
+									kui X-Forwarded-For. Pealkiri "X-Forwarded-For" on koma + tühikuga eraldatud IP-aadresside
+									nimekiri, millest kasutatakse ainult viimast (vasakpoolseimat).',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored

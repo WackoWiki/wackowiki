@@ -412,22 +412,20 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
 	'ReverseProxy'				=> 'Use Reverse proxy',
-	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
-									 client by examining information stored in the X-Forwarded-For headers.
-									 X-Forwarded-For headers are a standard mechanism for identifying client
-									 systems connecting through a reverse proxy server, such as Squid or
-									 Pound. Reverse proxy servers are often used to enhance the performance
-									 of heavily visited sites and may also provide other site caching,
-									 security or encryption benefits. If this WackoWiki installation operates
-									 behind a reverse proxy, this setting should be enabled so that correct
-									 IP address information is captured in WackoWiki\'s session management,
-									 logging, statistics and access management systems; if you are unsure
-									 about this setting, do not have a reverse proxy, or WackoWiki operates in
-									 a shared hosting environment, this setting should remain disabled.',
+	'ReverseProxyInfo'			=> 'Włącz to ustawienie, aby określić prawidłowy adres IP zdalnego klienta, analizując informacje z
+									apisane w nagłówkach X-Forwarded-For. Nagłówki X-Forwarded-For są standardowym mechanizmem
+									identyfikacji systemów klienckich łączących się przez odwrotny serwer proxy, taki jak Squid lub Pound.
+									Odwrócone serwery proxy są często używane w celu zwiększenia wydajności często odwiedzanych witryn,
+									a także w celu zapewnienia innych korzyści związanych z buforowaniem, bezpieczeństwem lub szyfrowaniem.
+									Jeśli instalacja WackoWiki działa za pośrednictwem serwera proxy, ustawienie to powinno być włączone,
+									aby poprawne informacje o adresie IP były przechwytywane przez systemy zarządzania sesjami,
+									logowania, statystyk i zarządzania dostępem w WackoWiki; jeśli nie masz pewności co do tego ustawienia,
+									nie masz serwera proxy lub WackoWiki działa w środowisku hostingu współdzielonego,
+									ustawienie to powinno pozostać wyłączone.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
+	'ReverseProxyHeaderInfo'	=> 'Ustaw tę wartość, jeśli Twój serwer proxy wysyła IP klienta w nagłówku innym
+									niż X-Forwarded-For. Nagłówek "X-Forwarded-For" to lista adresów IP oddzielonych
+									przecinkami i spacjami, z których tylko ostatni (najbardziej wysunięty w lewo) będzie używany.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored

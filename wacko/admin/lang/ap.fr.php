@@ -306,7 +306,7 @@ $ap_translation = [
 	'XmlSitemap'				=> 'XML Sitemap',
 	'XmlSitemapInfo'			=> 'Créez un fichier XML appelé %1 dans le dossier xml. Générer un fichier XML compatible avec le format Sitemaps XML. Vous pouvez modifier le chemin d\'accès pour le placer dans votre dossier racine, car c\'est l\'une des conditions requises, à savoir que le fichier XML se trouve dans le dossier racine. D\'autre part, vous pouvez également ajouter le chemin d\'accès au plan du site dans le fichier robots.txt de votre répertoire racine comme suit :',
 	'XmlSitemapGz'				=> 'XML Sitemap compression',
-	'XmlSitemapGzInfo'			=> 'If you would like, you may compress your Sitemap text file using gzip to reduce your bandwidth requirement.',
+	'XmlSitemapGzInfo'			=> 'Si vous le souhaitez, vous pouvez compresser votre fichier texte Sitemap à l\'aide de gzip afin de réduire votre besoin en bande passante.',
 	'XmlSitemapTime'			=> 'XML Sitemap generation time',
 	'XmlSitemapTimeInfo'		=> 'Génère le Sitemap une seule fois dans le nombre de jours donné, zéro signifie à chaque changement de page.',
 
@@ -412,22 +412,21 @@ $ap_translation = [
 
 	'ReverseProxySection'		=> 'Reverse Proxy',
 	'ReverseProxy'				=> 'Use Reverse proxy',
-	'ReverseProxyInfo'			=> 'Enable this setting to determine the correct IP address of the remote
-									 client by examining information stored in the X-Forwarded-For headers.
-									 X-Forwarded-For headers are a standard mechanism for identifying client
-									 systems connecting through a reverse proxy server, such as Squid or
-									 Pound. Reverse proxy servers are often used to enhance the performance
-									 of heavily visited sites and may also provide other site caching,
-									 security or encryption benefits. If this WackoWiki installation operates
-									 behind a reverse proxy, this setting should be enabled so that correct
-									 IP address information is captured in WackoWiki\'s session management,
-									 logging, statistics and access management systems; if you are unsure
-									 about this setting, do not have a reverse proxy, or WackoWiki operates in
-									 a shared hosting environment, this setting should remain disabled.',
+	'ReverseProxyInfo'			=> 'Activez ce paramètre pour déterminer l\'adresse IP correcte du client distant en examinant
+									les informations stockées dans les en-têtes X-Forwarded-For. Les en-têtes X-Forwarded-For sont
+									un mécanisme standard d\'identification des systèmes clients se connectant via un serveur proxy inverse,
+									tel que Squid ou Pound. Les serveurs proxy inversés sont souvent utilisés pour améliorer
+									les performances des sites très visités et peuvent également fournir d\'autres avantages en matière
+									de mise en cache, de sécurité ou de cryptage. Si cette installation de WackoWiki fonctionne derrière
+									un proxy inverse, ce paramètre doit être activé afin que les informations correctes sur l\'adresse IP
+									soient capturées dans les systèmes de gestion de session, de journalisation, de statistiques et
+									de gestion des accès de WackoWiki ; si vous n\'êtes pas sûr de ce paramètre, si vous n\'avez pas
+									de proxy inverse ou si WackoWiki fonctionne dans un environnement d\'hébergement partagé,
+									ce paramètre doit rester désactivé.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
+	'ReverseProxyHeaderInfo'	=> 'Définissez cette valeur si votre serveur proxy envoie l\'IP du client dans
+									un en-tête autre que X-Forwarded-For. L\'en-tête "X-Forwarded-For" est une
+									liste d\'adresses IP séparées par des virgules et des espaces, seule la dernière (la plus à gauche) sera utilisée.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored
@@ -786,7 +785,7 @@ $ap_translation = [
 	'Feeds'						=> 'Feeds',
 	'FeedsInfo'					=> 'In the case of direct editing of pages in the database, the content of RSS-feeds may not reflect the changes made. <br>This function synchronizes the RSS-channels with the current state of the database.',
 	'XmlSiteMap'				=> 'XML-Sitemap',
-	'XmlSiteMapInfo'			=> 'This function synchronizes the XML-Sitemap with the current state of the database.',
+	'XmlSiteMapInfo'			=> 'Cette fonction synchronise le plan du site XML avec l\'état actuel de la base de données.',
 	'XmlSiteMapPeriod'			=> 'Period %1 days. Last written %2.',
 	'XmlSiteMapView'			=> 'Show Sitemap in a new window.',
 
