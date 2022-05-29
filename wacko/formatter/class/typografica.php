@@ -265,8 +265,8 @@ class Typografica
 		// 1. English quotes
 		if ($this->settings['quotes'])
 		{
-			$data	= preg_replace('/\"\"/ui', '&quot;&quot;', $data);
-			$data	= preg_replace('/\"\.\"/ui', '&quot;.&quot;', $data);
+			$data	= preg_replace('/\"\"/u', '&quot;&quot;', $data);
+			$data	= preg_replace('/\"\.\"/u', '&quot;.&quot;', $data);
 			$_data	= "\"\"";
 
 			while ($_data != $data)
@@ -280,7 +280,7 @@ class Typografica
 		// 2. angle quotes
 		if ($this->settings['laquo'])
 		{
-			$data	= preg_replace('/\"\"/ui', '&quot;&quot;', $data);
+			$data	= preg_replace('/\"\"/u', '&quot;&quot;', $data);
 			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
 			// nb: wacko only regexp follows:
 			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/\u{00A0}|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
@@ -345,7 +345,7 @@ class Typografica
 		// 5. +/-
 		if ($this->settings['+-'])
 		{
-			$data = preg_replace('/\+\-/ui', '±', $data);				// \u{00B1}
+			$data = preg_replace('/\+\-/u', '±', $data);				// \u{00B1}
 		}
 
 		// 5a. 12°C
@@ -378,8 +378,8 @@ class Typografica
 		// 2. Paragpaph indent (indented line)
 		if ($this->settings['[--]'])
 		{
-			$data = preg_replace('/\[--\]/ui', $this->indent1, $data);
-			$data = preg_replace('/\[---\]/ui', $this->indent2, $data);
+			$data = preg_replace('/\[--\]/u', $this->indent1, $data);
+			$data = preg_replace('/\[---\]/u', $this->indent2, $data);
 		}
 
 		// 3. mailto:
