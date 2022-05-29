@@ -953,7 +953,7 @@ class WackoFormatter
 					}
 
 					// validate and sanitize $anchor
-					if (!preg_match('/^([\p{L},\d,*,†,‡,§,‖])*$/u', $anchor))
+					if (!preg_match('/^([\p{L}\d*†‡§‖])*$/u', $anchor))
 					{
 						$anchor = '';
 					}
