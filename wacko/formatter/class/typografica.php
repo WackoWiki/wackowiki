@@ -121,10 +121,10 @@ class Typografica
 
 		if ($this->skip_tags)
 		{
-			$re		= '/<\/?[a-z0-9]+(' .			// tag name
+			$re		= '/<\/?[a-z\d]+(' .			// tag name
 									'\s+(' .		// repeatable statement: if only one delimiter and little body
 									'[a-z]+(' .		// alpha-composed attribute, could be followed by equals character
-											'=((\'[^\']*\')|(\"[^\"]*\")|([0-9@\-_a-z:\/?&=\.]+))' .
+											'=((\'[^\']*\')|(\"[^\"]*\")|([\d@\-_a-z:\/?&=\.]+))' .
 											')?' .
 										')?' .
 									')*\/?>|' .
@@ -174,19 +174,19 @@ class Typografica
 
 			foreach ($this->glueleft as $i)
 			{
-				$data = preg_replace('/([\\s]+)(' . $i . ')(\s+)/ui', "\\1\\2\u{00A0}", $data);
+				$data = preg_replace('/(\s+)(' . $i . ')(\s+)/ui', "\\1\\2\u{00A0}", $data);
 			}
 
 			foreach ($this->glueright as $i)
 			{
-				$data = preg_replace('/([\\s]+)(' . $i . ')(\s+)/ui', "\u{00A0}\\2\\3", $data);
+				$data = preg_replace('/(\s+)(' . $i . ')(\s+)/ui', "\u{00A0}\\2\\3", $data);
 			}
 		}
 
 		// 5. Sticking flippers together. Psaw! Concatenation of hyphens
 		if ($this->settings['dashglue'])
 		{
-			$data = preg_replace('/([a-zÀ-ÿ0-9]+(\-[a-zÀ-ÿ0-9]+)+)/ui', "<nobr>\\1</nobr>", $data);
+			$data = preg_replace('/([a-zÀ-ÿ\d]+(\-[a-zÀ-ÿ\d]+)+)/ui', "<nobr>\\1</nobr>", $data);
 		}
 
 		// 6. Macros
@@ -259,7 +259,7 @@ class Typografica
 		// 0a. apostroph
 		if ($this->settings['apostroph'])
 		{
-			$data = preg_replace("/([\s\"][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+)'([~ºª³²¿¯àÀåÅèÈîÎóÓþÞÿß][~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+[\s\.,:;\)<=\"])/ui", "\\1’\\2", $data );
+			$data = preg_replace("/([\s\"][~\d¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+)'([~ºª³²¿¯àÀåÅèÈîÎóÓþÞÿß][~\d¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.]+[\s\.,:;\)<=\"])/ui", "\\1’\\2", $data );
 		}
 
 		// 1. English quotes
@@ -272,8 +272,8 @@ class Typografica
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace('/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([0-9A-Za-z\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|\u{0094}))/ui', "\\1\u{0093}\\2", $data);			// \u{0093} <Set Transmit State>
-				$data	= preg_replace('/(\u{0093}([A-Za-z0-9\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z0-9][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/ui', "\\1\u{0094}", $data);	// \u{0094} <Cancel Character>
+				$data	= preg_replace('/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>)\"([A-Za-z\d\'\!\s\.\?\,\-\&\;\:\_{:typo:markup:1:}{:typo:markup:2:}]+(\"|\u{0094}))/ui', "\\1\u{0093}\\2", $data);			// \u{0093} <Set Transmit State>
+				$data	= preg_replace('/(\u{0093}([A-Za-z\d\'\!\s\.\?\,\-\&\;\:{:typo:markup:1:}{:typo:markup:2:}\_]*).*[A-Za-z\d][{:typo:markup:1:}{:typo:markup:2:}\?\.\!\,]*)\"/ui', "\\1\u{0094}", $data);	// \u{0094} <Cancel Character>
 			}
 		}
 
@@ -281,18 +281,18 @@ class Typografica
 		if ($this->settings['laquo'])
 		{
 			$data	= preg_replace('/\"\"/u', '&quot;&quot;', $data);
-			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~0-9¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
+			$data	= preg_replace("/(^|\s|{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:})*[~\d¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
 			// nb: wacko only regexp follows:
-			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/\u{00A0}|\/|\!)*[~0-9¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
+			$data	= preg_replace("/(^|\s|\{:typo:markup:2:}|{:typo:markup:1:}|>|\()\"(({:typo:markup:2:}|{:typo:markup:1:}|\/\u{00A0}|\/|\!)*[~\d¸¨´¥ºª³²’'A-Za-zÀ-ßà-ÿ\-:\/\.])/ui", "\\1«\\2", $data);
 			$_data	= "\"\"";
 
 			while ($_data != $data)
 			{
 				$_data	= $data;
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1»", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\d\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1»", $data);
 				// nb: wacko only regexps follows:
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1»", $data);
-				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ0-9\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/usi", "\\1»", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\d\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:})*\?({:typo:markup:2:}|{:typo:markup:1:})*)\"/usi", "\\1»", $data);
+				$data	= preg_replace("/(\&laquo\;([^\"]*)[¸¨´¥ºª³²¿¯’'A-Za-zÀ-ßà-ÿ\d\.\-:\/](\{:typo:markup:2:}|{:typo:markup:1:}|\/|\!)*)\"/usi", "\\1»", $data);
 			}
 		}
 
@@ -303,7 +303,7 @@ class Typografica
 		// 2b. angle and English quotes together
 		if (($this->settings['quotes']) && (($this->settings['laquo']) || ($this->settings['farlaquo'])))
 		{
-			$data = preg_replace("/(\u{0093}(([A-Za-z0-9'!\.?,\-&;:]|\s|{:typo:markup:1:}|{:typo:markup:2:})*)«(.*)»)»/ui", "\\1\u{0094}", $data);		// \u{0094} <Cancel Character>
+			$data = preg_replace("/(\u{0093}(([A-Za-z\d'!\.?,\-&;:]|\s|{:typo:markup:1:}|{:typo:markup:2:})*)«(.*)»)»/ui", "\\1\u{0094}", $data);		// \u{0094} <Cancel Character>
 		}
 
 		// 3. dash

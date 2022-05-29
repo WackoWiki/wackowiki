@@ -40,7 +40,7 @@ function admin_config_appearance(&$engine, &$module)
 	$valid_color = function ($color)
 	{
 		if (preg_match('/^(
-			(\#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}))|        # color value
+			(\#([a-fA-F\d]{3}|[a-fA-F\d]{6}))|        # color value
 				(rgb\((\d{1,3}%?,){2}\d{1,3}%?\))        # rgb triplet
 			)$/x', $color))
 		{

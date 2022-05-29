@@ -67,7 +67,7 @@ $text = preg_replace('/--([^ ])/u',						'[\\1',	$text); // strikethrough; not t
 $text = preg_replace('/([^ ])--/u',						'\\1]',	$text); // strikethrough; not to be confused with the long dashes
 
 // Links
-$text = preg_replace('/(?:\\[\\[|\\(\\()([^\\s]+?) (.*?)(?:\\]\\]|\\)\\))/u',	'\\2 (\\1)',	$text); // complex
-$text = preg_replace('/(?:\\[\\[|\\(\\()([^\\s]+?)(?:\\]\\]|\\)\\))/u',			'\\1',			$text); // simple
+$text = preg_replace('/(?:\\[\\[|\\(\\()(\S+?) (.*?)(?:\\]\\]|\\)\\))/u',	'\\2 (\\1)',	$text); // complex
+$text = preg_replace('/(?:\\[\\[|\\(\\()(\S+?)(?:\\]\\]|\\)\\))/u',			'\\1',			$text); // simple
 
 echo $text;

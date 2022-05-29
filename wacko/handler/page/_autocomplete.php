@@ -23,7 +23,7 @@ function _parse_query_string()
 function _unescape($s)
 {
 	return preg_replace_callback(
-		'/% (?: u([A-F0-9]{1,4}) | ([A-F0-9]{1,2})) /sxi',
+		'/% (?: u([A-F\d]{1,4}) | ([A-F\d]{1,2})) /sxi',
 		"_unescape_callback",
 		$s
 	);

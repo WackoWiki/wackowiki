@@ -1155,7 +1155,7 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', 1, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
+		else if (preg_match('/^([[:alnum:]]+:[' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];

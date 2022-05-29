@@ -208,7 +208,7 @@ $html_tags = [
 			'/([a-z-]+)=(&quot;|\')(.*?)\\2/ui',
 			'<span style="color: ' . $options['color']['attributes'] . ';font-weight:bold;">$1=</span><span style="color: ' .
 			$options['color']['attributevalues'] . ';">$2$3$2</span>', $source);
-			$source = preg_replace("/&amp;([a-z0-9]*?;)/ui", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
+			$source = preg_replace("/&amp;([a-z\d]*?;)/ui", '&amp;<span style="color: ' . $options['color']['entities'] . ';">$1</span>', $source);
 
 	if ($options['line_numbers'])
 	{

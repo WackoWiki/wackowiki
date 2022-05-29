@@ -31,7 +31,7 @@ if (isset($options['text_html']))
 }
 
 // sanitizing remaining tags
-$text = preg_replace('/<\/?[a-z][a-z0-9]*[^<>]*?>|<!--.*?-->/u', '', $text);
+$text = preg_replace('/<\/?[a-z][a-z\d]*[^<>]*?>|<!--.*?-->/u', '', $text);
 
 // convert html-entities in plain text
 $text = html_entity_decode($text, ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);

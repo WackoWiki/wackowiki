@@ -31,7 +31,7 @@ class Feed
 
 	function write_file($name, $body)
 	{
-		$file_name = Ut::join_path(XML_DIR, $name . '_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml');
+		$file_name = Ut::join_path(XML_DIR, $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml');
 		@file_put_contents($file_name, $body);
 		@chmod($file_name, CHMOD_FILE);
 	}

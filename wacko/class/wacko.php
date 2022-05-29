@@ -3256,7 +3256,7 @@ class Wacko
 		$trim		= 0;
 
 		$text = preg_replace_callback(
-			'/\s*\b([a-z]+)=([0-9a-z%]+)/i',
+			'/\s*\b([a-z]+)=([a-z\d%]+)/i',
 			function ($mat) use (&$align, &$height, &$width, &$trim)
 			{
 				if ($mat[1] == 'height')
@@ -3907,7 +3907,7 @@ class Wacko
 			unset($file_data);
 		}
 		// user link -> user:UserName
-		else if (preg_match('/^(user)[:](' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(user):(' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3923,7 +3923,7 @@ class Wacko
 			$tpl	= 'userlink';
 		}
 		// group link -> group:UserGroup
-		else if (preg_match('/^(group)[:](' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(group):(' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3939,7 +3939,7 @@ class Wacko
 			$tpl	= 'grouplink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+):([' . $this->language['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -7925,26 +7925,26 @@ class Wacko
 		switch ($char_classes)
 		{
 			case 1:
-				if (   !preg_match('/[\p{N}]+/',				$pwd)
-					|| !preg_match('/[\p{L}]+/u',				$pwd))
+				if (   !preg_match('/\p{N}+/',				$pwd)
+					|| !preg_match('/\p{L}+/u',				$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 2:
-				if (   !preg_match('/[\pN]+/',					$pwd)
-					|| !preg_match('/[\p{Lu}]+/u',				$pwd)
-					|| !preg_match('/[\p{Ll}]+/u',				$pwd))
+				if (   !preg_match('/\pN+/',					$pwd)
+					|| !preg_match('/\p{Lu}+/u',				$pwd)
+					|| !preg_match('/\p{Ll}+/u',				$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 3:
-				if (   !preg_match('/[\p{N}]+/',				$pwd)
-					|| !preg_match('/[\p{Lu}]+/u',				$pwd)
-					|| !preg_match('/[\p{Ll}]+/u',				$pwd)
+				if (   !preg_match('/\p{N}+/',				$pwd)
+					|| !preg_match('/\p{Lu}+/u',				$pwd)
+					|| !preg_match('/\p{Ll}+/u',				$pwd)
 					|| !preg_match('/[\p{Z}|\p{S}|\p{P}]+/',	$pwd))
 				{
 					++$error;
@@ -8204,8 +8204,8 @@ class Wacko
 		{
 			// Use the pattern given by the HTML5 spec for 'email' type form input elements
 			// http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
-			$HTML5_email_pattern = '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' .
-								'[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/sD';
+			$HTML5_email_pattern = '/^[a-zA-Z\d.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}' .
+								'[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/sD';
 
 			return (boolean) preg_match($HTML5_email_pattern, $email_address);
 		}

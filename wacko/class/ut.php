@@ -600,7 +600,7 @@ class Ut
 	// query uri part assignment encoder, strictly on rfc3986 3.4 charset, without = and & and + (possible space) and ' (possible quote:)
 	static function qencode($name, $value)
 	{
-		static $rfc3986 = '#[^a-zA-Z0-9._~/?:@!$()*,;-]#';
+		static $rfc3986 = '#[^a-zA-Z\d._~/?:@!$()*,;-]#';
 		return static::urlencode($rfc3986, $name) . '=' . static::urlencode($rfc3986, $value);
 	}
 

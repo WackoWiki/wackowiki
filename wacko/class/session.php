@@ -147,7 +147,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 		if ($name || !$this->name)
 		{
 			// filter name
-			$name = preg_replace('/[^0-9a-zA-Z_\-]+/', '', $name);
+			$name = preg_replace('/[^a-zA-Z\d_\-]+/', '', $name);
 
 			if (!$name || ctype_digit($name))
 			{
@@ -456,7 +456,7 @@ abstract class Session extends ArrayObject // for concretization extend by some 
 
 	protected function store_validate_id($id)
 	{
-		return preg_match('/^[0-9a-zA-Z]{21}$/', $id);
+		return preg_match('/^[a-zA-Z\d]{21}$/', $id);
 	}
 
 	// clean vars on hard reset, leave sticky_ vars in place

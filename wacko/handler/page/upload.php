@@ -106,7 +106,7 @@ if (isset($_POST['upload']) & $can_upload)
 			if ($this->db->upload_translit)
 			{
 				$t_name	= Ut::translit($name);
-				$t_name	= preg_replace('/[\p{Z}]+/u', '_', $t_name);
+				$t_name	= preg_replace('/\p{Z}+/u', '_', $t_name);
 			}
 			else
 			{
