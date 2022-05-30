@@ -38,227 +38,235 @@ use PHPThumb\PluginInterface;
  */
 class Reflection implements PluginInterface
 {
-    protected array $currentDimensions;
-    protected $workingImage;
-    protected object $newImage;
-    protected array $options;
+	protected array $currentDimensions;
+	protected $workingImage;
+	protected object $newImage;
+	protected array $options;
 
-    protected int $percent;
-    protected $reflection;
-    protected $white;
-    protected $border;
-    protected $borderColor;
+	protected int $percent;
+	protected $reflection;
+	protected $white;
+	protected $border;
+	protected $borderColor;
 
-    public function __construct($percent, $reflection, $white, $border, $borderColor)
-    {
-        $this->percent     = $percent;
-        $this->reflection  = $reflection;
-        $this->white       = $white;
-        $this->border      = $border;
-        $this->borderColor = $borderColor;
-    }
+	public function __construct($percent, $reflection, $white, $border, $borderColor)
+	{
+		$this->percent		= $percent;
+		$this->reflection	= $reflection;
+		$this->white		= $white;
+		$this->border		= $border;
+		$this->borderColor	= $borderColor;
+	}
 
-    /**
-     * @param PHPThumb $phpthumb
-     * @return PHPThumb
-     */
-    public function execute(PHPThumb $phpthumb):PHPThumb
-    {
-        $this->currentDimensions = $phpthumb->getCurrentDimensions();
-        $this->workingImage      = $phpthumb->getWorkingImage();
-        $this->newImage          = $phpthumb->getOldImage();
-        $this->options           = $phpthumb->getOptions();
+	/**
+	 * @param PHPThumb $phpthumb
+	 * @return PHPThumb
+	 */
+	public function execute(PHPThumb $phpthumb):PHPThumb
+	{
+		$this->currentDimensions	= $phpthumb->getCurrentDimensions();
+		$this->workingImage			= $phpthumb->getWorkingImage();
+		$this->newImage				= $phpthumb->getOldImage();
+		$this->options				= $phpthumb->getOptions();
 
-        $width                  = $this->currentDimensions['width'];
-        $height                 = $this->currentDimensions['height'];
-        $reflectionHeight = intval($height * ($this->reflection / 100));
-        $newHeight              = $height + $reflectionHeight;
-        $reflectedPart          = $height * ($this->percent / 100);
+		$width						= $this->currentDimensions['width'];
+		$height						= $this->currentDimensions['height'];
+		$reflectionHeight			= intval($height * ($this->reflection / 100));
+		$newHeight					= $height + $reflectionHeight;
+		$reflectedPart				= $height * ($this->percent / 100);
 
-        $this->workingImage = imagecreatetruecolor($width, $newHeight);
+		$this->workingImage = imagecreatetruecolor($width, $newHeight);
 
-        imagealphablending($this->workingImage, true);
+		imagealphablending($this->workingImage, true);
 
-        $colorToPaint = imagecolorallocatealpha(
-            $this->workingImage,
-            255,
-            255,
-            255,
-            0
-        );
+		$colorToPaint = imagecolorallocatealpha(
+			$this->workingImage,
+			255,
+			255,
+			255,
+			0
+		);
 
-        imagefilledrectangle(
-            $this->workingImage,
-            0,
-            0,
-            $width,
-            $newHeight,
-            $colorToPaint
-        );
+		imagefilledrectangle(
+			$this->workingImage,
+			0,
+			0,
+			$width,
+			$newHeight,
+			$colorToPaint
+		);
 
-        imagecopyresampled(
-            $this->workingImage,
-            $this->newImage,
-            0,
-            0,
-            0,
-            $reflectedPart,
-            $width,
-            $reflectionHeight,
-            $width,
-            ($height - $reflectedPart)
-        );
+		imagecopyresampled(
+			$this->workingImage,
+			$this->newImage,
+			0,
+			0,
+			0,
+			$reflectedPart,
+			$width,
+			$reflectionHeight,
+			$width,
+			($height - $reflectedPart)
+		);
 
-        $this->imageFlipVertical();
+		$this->imageFlipVertical();
 
-        imagecopy(
-            $this->workingImage,
-            $this->newImage,
-            0,
-            0,
-            0,
-            0,
-            $width,
-            $height
-        );
+		imagecopy(
+			$this->workingImage,
+			$this->newImage,
+			0,
+			0,
+			0,
+			0,
+			$width,
+			$height
+		);
 
-        imagealphablending($this->workingImage, true);
+		imagealphablending($this->workingImage, true);
 
-        for ($i = 0; $i < $reflectionHeight; $i++) {
-            $colorToPaint = imagecolorallocatealpha(
-                $this->workingImage,
-                255,
-                255,
-                255,
-                ($i / $reflectionHeight * -1 + 1) * $this->white
-            );
+		for ($i = 0; $i < $reflectionHeight; $i++)
+		{
+			$colorToPaint = imagecolorallocatealpha(
+				$this->workingImage,
+				255,
+				255,
+				255,
+				($i / $reflectionHeight * -1 + 1) * $this->white
+			);
 
-            imagefilledrectangle(
-                $this->workingImage,
-                0,
-                $height + $i,
-                $width,
-                $height + $i,
-                $colorToPaint
-            );
-        }
+			imagefilledrectangle(
+				$this->workingImage,
+				0,
+				$height + $i,
+				$width,
+				$height + $i,
+				$colorToPaint
+			);
+		}
 
-        if ($this->border) {
-            $rgb          = $this->hex2rgb($this->borderColor, false);
-            $colorToPaint = imagecolorallocate($this->workingImage, $rgb[0], $rgb[1], $rgb[2]);
+		if ($this->border)
+		{
+			$rgb		  = $this->hex2rgb($this->borderColor, false);
+			$colorToPaint = imagecolorallocate($this->workingImage, $rgb[0], $rgb[1], $rgb[2]);
 
-            //top line
-            imageline(
-                $this->workingImage,
-                0,
-                0,
-                $width,
-                0,
-                $colorToPaint
-            );
+			//top line
+			imageline(
+				$this->workingImage,
+				0,
+				0,
+				$width,
+				0,
+				$colorToPaint
+			);
 
-            //bottom line
-            imageline(
-                $this->workingImage,
-                0,
-                $height,
-                $width,
-                $height,
-                $colorToPaint
-            );
+			//bottom line
+			imageline(
+				$this->workingImage,
+				0,
+				$height,
+				$width,
+				$height,
+				$colorToPaint
+			);
 
-            //left line
-            imageline(
-                $this->workingImage,
-                0,
-                0,
-                0,
-                $height,
-                $colorToPaint
-            );
+			//left line
+			imageline(
+				$this->workingImage,
+				0,
+				0,
+				0,
+				$height,
+				$colorToPaint
+			);
 
-            //right line
-            imageline(
-                $this->workingImage,
-                $width - 1,
-                0,
-                $width - 1,
-                $height,
-                $colorToPaint
-            );
-        }
+			//right line
+			imageline(
+				$this->workingImage,
+				$width - 1,
+				0,
+				$width - 1,
+				$height,
+				$colorToPaint
+			);
+		}
 
-        if ($phpthumb->getFormat() == 'PNG') {
-            $colorTransparent = imagecolorallocatealpha(
-                $this->workingImage,
-                $this->options['alphaMaskColor'][0],
-                $this->options['alphaMaskColor'][1],
-                $this->options['alphaMaskColor'][2],
-                0
-            );
+		if ($phpthumb->getFormat() == 'PNG')
+		{
+			$colorTransparent = imagecolorallocatealpha(
+				$this->workingImage,
+				$this->options['alphaMaskColor'][0],
+				$this->options['alphaMaskColor'][1],
+				$this->options['alphaMaskColor'][2],
+				0
+			);
 
-            imagefill($this->workingImage, 0, 0, $colorTransparent);
-            imagesavealpha($this->workingImage, true);
-        }
+			imagefill($this->workingImage, 0, 0, $colorTransparent);
+			imagesavealpha($this->workingImage, true);
+		}
 
-        $phpthumb->setOldImage($this->workingImage);
-        $this->currentDimensions['width']  = $width;
-        $this->currentDimensions['height'] = $newHeight;
-        $phpthumb->setCurrentDimensions($this->currentDimensions);
+		$phpthumb->setOldImage($this->workingImage);
+		$this->currentDimensions['width']  = $width;
+		$this->currentDimensions['height'] = $newHeight;
+		$phpthumb->setCurrentDimensions($this->currentDimensions);
 
-        return $phpthumb;
-    }
+		return $phpthumb;
+	}
 
-    /**
-     * Flips the image vertically
-     *
-     */
-    protected function imageFlipVertical ()
-    {
-        $x_i = imagesx($this->workingImage);
-        $y_i = imagesy($this->workingImage);
+	/**
+	 * Flips the image vertically
+	 *
+	 */
+	protected function imageFlipVertical ()
+	{
+		$x_i = imagesx($this->workingImage);
+		$y_i = imagesy($this->workingImage);
 
-        for ($x = 0; $x < $x_i; $x++) {
-            for ($y = 0; $y < $y_i; $y++) {
-                imagecopy(
-                    $this->workingImage,
-                    $this->workingImage,
-                    $x,
-                    $y_i - $y - 1,
-                    $x,
-                    $y,
-                    1,
-                    1
-                );
-            }
-        }
-    }
+		for ($x = 0; $x < $x_i; $x++)
+		{
+			for ($y = 0; $y < $y_i; $y++)
+			{
+				imagecopy(
+					$this->workingImage,
+					$this->workingImage,
+					$x,
+					$y_i - $y - 1,
+					$x,
+					$y,
+					1,
+					1
+				);
+			}
+		}
+	}
 
-    /**
-     * Converts a hex color to rgb tuples
-     *
-     * @return mixed
-     * @param  string $hex
-     * @param  bool   $asString
-     */
-    protected function hex2rgb ($hex, $asString = false)
-    {
-        // strip off any leading #
-        if (0 === strpos($hex, '#')) {
-           $hex = substr($hex, 1);
-        } elseif (0 === strpos($hex, '&H')) {
-           $hex = substr($hex, 2);
-        }
+	/**
+	 * Converts a hex color to rgb tuples
+	 *
+	 * @return mixed
+	 * @param  string $hex
+	 * @param  bool   $asString
+	 */
+	protected function hex2rgb ($hex, $asString = false)
+	{
+		// strip off any leading #
+		if (0 === strpos($hex, '#'))
+		{
+			$hex = substr($hex, 1);
+		}
+		elseif (0 === strpos($hex, '&H'))
+		{
+			$hex = substr($hex, 2);
+		}
 
-        // break into hex 3-tuple
-        $cutpoint = ceil(strlen($hex) / 2)-1;
-        $rgb      = explode(':', wordwrap($hex, $cutpoint, ':', $cutpoint), 3);
+		// break into hex 3-tuple
+		$cutpoint	= ceil(strlen($hex) / 2)-1;
+		$rgb		= explode(':', wordwrap($hex, $cutpoint, ':', $cutpoint), 3);
 
-        // convert each tuple to decimal
-        $rgb[0] = (isset($rgb[0]) ? hexdec($rgb[0]) : 0);
-        $rgb[1] = (isset($rgb[1]) ? hexdec($rgb[1]) : 0);
-        $rgb[2] = (isset($rgb[2]) ? hexdec($rgb[2]) : 0);
+		// convert each tuple to decimal
+		$rgb[0] = (isset($rgb[0]) ? hexdec($rgb[0]) : 0);
+		$rgb[1] = (isset($rgb[1]) ? hexdec($rgb[1]) : 0);
+		$rgb[2] = (isset($rgb[2]) ? hexdec($rgb[2]) : 0);
 
-        return ($asString ? "{$rgb[0]} {$rgb[1]} {$rgb[2]}" : $rgb);
-    }
+		return ($asString ? "{$rgb[0]} {$rgb[1]} {$rgb[2]}" : $rgb);
+	}
 }

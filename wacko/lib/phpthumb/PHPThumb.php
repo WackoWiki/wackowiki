@@ -19,125 +19,128 @@ namespace PHPThumb;
 
 abstract class PHPThumb
 {
-    /**
-     * The name of the file we're manipulating
-     * This must include the path to the file (absolute paths recommended)
-     *
-     * @var string
-     */
-    protected string $fileName;
+	/**
+	 * The name of the file we're manipulating
+	 * This must include the path to the file (absolute paths recommended)
+	 *
+	 * @var string
+	 */
+	protected string $fileName;
 
-    /**
-     * What the file format is (mime-type)
-     *
-     * @var string
-     */
-    protected string $format;
+	/**
+	 * What the file format is (mime-type)
+	 *
+	 * @var string
+	 */
+	protected string $format;
 
-    /**
-     * Whether or not the image is hosted remotely
-     *
-     * @var bool
-     */
-    protected bool $remoteImage;
+	/**
+	 * Whether or not the image is hosted remotely
+	 *
+	 * @var bool
+	 */
+	protected bool $remoteImage;
 
-    /**
-     * An array of attached plugins to execute in order.
-     * @var array
-     */
-    protected array $plugins;
+	/**
+	 * An array of attached plugins to execute in order.
+	 * @var array
+	 */
+	protected array $plugins;
 
-    /**
-     * @param $fileName
-     * @param array $options
-     * @param array $plugins
-     */
-    public function __construct($fileName, array $options = [], array $plugins = [])
-    {
-        $this->fileName    = $fileName;
-        $this->remoteImage = false;
+	/**
+	 * @param $fileName
+	 * @param array $options
+	 * @param array $plugins
+	 */
+	public function __construct($fileName, array $options = [], array $plugins = [])
+	{
+		$this->fileName		= $fileName;
+		$this->remoteImage	= false;
 
-        if(!$this->validateRequestedResource($fileName)) {
-            throw new \InvalidArgumentException("Image file not found: {$fileName}");
-        }
+		if(!$this->validateRequestedResource($fileName))
+		{
+			throw new \InvalidArgumentException("Image file not found: {$fileName}");
+		}
 
-        $this->setOptions($options);
+		$this->setOptions($options);
 
-        $this->plugins = $plugins;
-    }
+		$this->plugins = $plugins;
+	}
 
-    abstract public function setOptions(array $options = []);
+	abstract public function setOptions(array $options = []);
 
-    /**
-     * Check the provided filename/url. If it is an url, validate that it is properly
-     * formatted. If it is a file, check to make sure that it actually exists on
-     * the filesystem.
-     *
-     * @param $filename
-     * @return bool
-     */
-    protected function validateRequestedResource($filename): bool
-    {
-        if(false !== filter_var($filename, FILTER_VALIDATE_URL)) {
-            $this->remoteImage = true;
-            return true;
-        }
+	/**
+	 * Check the provided filename/url. If it is an url, validate that it is properly
+	 * formatted. If it is a file, check to make sure that it actually exists on
+	 * the filesystem.
+	 *
+	 * @param $filename
+	 * @return bool
+	 */
+	protected function validateRequestedResource($filename): bool
+	{
+		if (false !== filter_var($filename, FILTER_VALIDATE_URL))
+		{
+			$this->remoteImage = true;
+			return true;
+		}
 
-        if(file_exists($filename)) {
-            return true;
-        }
+		if (file_exists($filename))
+		{
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Returns the filename.
-     * @return string
-     */
-    public function getFileName(): string
-    {
-        return $this->fileName;
-    }
+	/**
+	 * Returns the filename.
+	 * @return string
+	 */
+	public function getFileName(): string
+	{
+		return $this->fileName;
+	}
 
-    /**
-     * Sets the filename.
-     * @param $fileName
-     * @return PHPThumb
-     */
-    public function setFileName($fileName): PHPThumb
-    {
-        $this->fileName = $fileName;
+	/**
+	 * Sets the filename.
+	 * @param $fileName
+	 * @return PHPThumb
+	 */
+	public function setFileName($fileName): PHPThumb
+	{
+		$this->fileName = $fileName;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns the format.
-     * @return string
-     */
-    public function getFormat(): string
-    {
-        return $this->format;
-    }
+	/**
+	 * Returns the format.
+	 * @return string
+	 */
+	public function getFormat(): string
+	{
+		return $this->format;
+	}
 
-    /**
-     * Sets the format.
-     * @param $format
-     * @return PHPThumb
-     */
-    public function setFormat($format): PHPThumb
-    {
-        $this->format = $format;
+	/**
+	 * Sets the format.
+	 * @param $format
+	 * @return PHPThumb
+	 */
+	public function setFormat($format): PHPThumb
+	{
+		$this->format = $format;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Returns whether the image exists remotely, i.e. it was loaded via a URL.
-     * @return bool
-     */
-    public function getIsRemoteImage(): bool
-    {
-        return $this->remoteImage;
-    }
+	/**
+	 * Returns whether the image exists remotely, i.e. it was loaded via a URL.
+	 * @return bool
+	 */
+	public function getIsRemoteImage(): bool
+	{
+		return $this->remoteImage;
+	}
 }
