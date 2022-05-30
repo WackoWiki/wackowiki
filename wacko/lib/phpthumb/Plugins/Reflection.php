@@ -249,11 +249,11 @@ class Reflection implements PluginInterface
 	protected function hex2rgb ($hex, $asString = false)
 	{
 		// strip off any leading #
-		if (0 === strpos($hex, '#'))
+		if (str_starts_with($hex, '#'))
 		{
 			$hex = substr($hex, 1);
 		}
-		elseif (0 === strpos($hex, '&H'))
+		elseif (str_starts_with($hex, '&H'))
 		{
 			$hex = substr($hex, 2);
 		}

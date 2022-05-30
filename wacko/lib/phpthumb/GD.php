@@ -183,9 +183,9 @@ class GD extends PHPThumb
 		);
 
 		// update all the variables and resources to be correct
-		$this->oldImage					= $this->workingImage;
-		$this->currentDimensions['width']  = $width;
-		$this->currentDimensions['height'] = $height;
+		$this->oldImage						= $this->workingImage;
+		$this->currentDimensions['width']	= $width;
+		$this->currentDimensions['height']	= $height;
 
 		return $this;
 	}
@@ -230,9 +230,12 @@ class GD extends PHPThumb
 		$this->calcImageSize($this->currentDimensions['width'], $this->currentDimensions['height']);
 
 		// create the working image
-		if (function_exists('imagecreatetruecolor')) {
+		if (function_exists('imagecreatetruecolor'))
+		{
 			$this->workingImage = imagecreatetruecolor($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
-		} else {
+		}
+		else
+		{
 			$this->workingImage = imagecreate($this->newDimensions['newWidth'], $this->newDimensions['newHeight']);
 		}
 
@@ -816,20 +819,23 @@ class GD extends PHPThumb
 
 		switch ($this->format) {
 			case 'GIF':
-				if ($rawData === false) {
+				if ($rawData === false)
+				{
 					header('Content-type: image/gif');
 				}
 				imagegif($this->oldImage);
 				break;
 			case 'JPG':
-				if ($rawData === false) {
+				if ($rawData === false)
+				{
 					header('Content-type: image/jpeg');
 				}
 				imagejpeg($this->oldImage, null, $this->options['jpegQuality']);
 				break;
 			case 'PNG':
 			case 'STRING':
-				if ($rawData === false) {
+				if ($rawData === false)
+				{
 					header('Content-type: image/png');
 				}
 				imagepng($this->oldImage);
@@ -877,7 +883,7 @@ class GD extends PHPThumb
 
 		if (!in_array($format, $validFormats))
 		{
-			throw new \InvalidArgumentException("Invalid format type specified in save function: ".$format);
+			throw new \InvalidArgumentException("Invalid format type specified in save function: " . $format);
 		}
 
 		// make sure the directory is writeable
@@ -891,12 +897,12 @@ class GD extends PHPThumb
 				// throw an exception if not writeable
 				if (!is_writeable(dirname($fileName)))
 				{
-					throw new \RuntimeException("File is not writeable, and could not correct permissions: ".$fileName);
+					throw new \RuntimeException("File is not writeable, and could not correct permissions: " . $fileName);
 				}
 			}
 			else
 			{ // throw an exception if not writeable
-				throw new \RuntimeException("File not writeable: ".$fileName);
+				throw new \RuntimeException("File not writeable: " . $fileName);
 			}
 		}
 
@@ -940,14 +946,14 @@ class GD extends PHPThumb
 		if (sizeof($this->options) == 0)
 		{
 			$defaultOptions = [
-				'resizeUp'			  => false,
-				'jpegQuality'		   => 100,
+				'resizeUp'				=> false,
+				'jpegQuality'			=> 100,
 				'correctPermissions'	=> false,
-				'preserveAlpha'		 => true,
+				'preserveAlpha'			=> true,
 				'alphaMaskColor'		=> [255, 255, 255],
-				'preserveTransparency'  => true,
-				'transparencyMaskColor' => [0, 0, 0],
-				'interlace'			 => null
+				'preserveTransparency'	=> true,
+				'transparencyMaskColor'	=> [0, 0, 0],
+				'interlace'				=> null
 			];
 		}
 		else
@@ -1133,7 +1139,7 @@ class GD extends PHPThumb
 	/**
 	 * Calculates a new width and height for the image based on $this->maxWidth and the provided dimensions
 	 *
-	 * @param  int   $width
+	 * @param int $width
 	 * @param int $height
 	 *@return array
 	 */
@@ -1151,14 +1157,14 @@ class GD extends PHPThumb
 	/**
 	 * Calculates a new width and height for the image based on $this->maxWidth and the provided dimensions
 	 *
-	 * @param int   $width
+	 * @param int $width
 	 * @param int $height
 	 *@return array
 	 */
 	protected function calcHeight(int $width, int $height): array
 	{
-		$newHeightPercentage = (100 * $this->maxHeight) / $height;
-		$newWidth			= ($width * $newHeightPercentage) / 100;
+		$newHeightPercentage	= (100 * $this->maxHeight) / $height;
+		$newWidth				= ($width * $newHeightPercentage) / 100;
 
 		return [
 			'newWidth'	=> ceil($newWidth),
@@ -1169,7 +1175,7 @@ class GD extends PHPThumb
 	/**
 	 * Calculates a new width and height for the image based on $this->percent and the provided dimensions
 	 *
-	 * @param  int   $width
+	 * @param int $width
 	 * @param int $height
 	 *@return array
 	 */
@@ -1309,11 +1315,11 @@ class GD extends PHPThumb
 		{
 			if ($this->remoteImage)
 			{
-				throw new \Exception("Could not determine format of remote image: ".$this->fileName);
+				throw new \Exception("Could not determine format of remote image: " . $this->fileName);
 			}
 			else
 			{
-				throw new \Exception("File is not a valid image: ".$this->fileName);
+				throw new \Exception("File is not a valid image: " . $this->fileName);
 			}
 		}
 
@@ -1350,7 +1356,7 @@ class GD extends PHPThumb
 
 			if (!$isCompatible)
 			{
-				throw new \Exception("Your GD installation does not support ".$this->format." image types");
+				throw new \Exception("Your GD installation does not support " . $this->format . " image types");
 			}
 		}
 	}
