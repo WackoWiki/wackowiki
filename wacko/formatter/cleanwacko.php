@@ -59,7 +59,7 @@ $text = str_replace('&&&&&', '-----',	$text);
 
 // cut or parse a complex layout
 $text = preg_replace('/!!(?:\\([\\w]+?\\))*(.+?)!!/u',	'\\1',	$text); // !!(color)text!!
-$text = preg_replace('/\\^\\^([^\\s]+?)\\^\\^/u',		'^\\1',	$text); // ^^123^^
+$text = preg_replace('/\\^\\^(\S+?)\\^\\^/u',			'^\\1',	$text); // ^^123^^
 $text = preg_replace('/{{.+?}}[\s]*/u',					'',		$text); // {{action}}
 $text = preg_replace('/[\n]{2,}/u',						"\n\n",	$text); // more than two transfers
 $text = preg_replace('/\\n[ ]{1}/u',					'',		$text); // gap in the beginning of the line

@@ -3,7 +3,7 @@
 namespace PHPThumb;
 
 /**
- * PhpThumb : PHP Thumb Library <http://phpthumb.gxdlabs.com>
+ * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
  *
  * Author(s): Ian Selby <ian@gen-x-design.com>
@@ -11,9 +11,9 @@ namespace PHPThumb;
  * Licensed under the MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @author Ian Selby <ian@gen-x-design.com>
+ * @author Ian Selby <ianrselby@gmail.com>
  * @copyright Copyright (c) 2009 Gen X Design
- * @link http://phpthumb.gxdlabs.com
+ * @link https://github.com/masterexploder/PHPThumb
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
@@ -69,7 +69,7 @@ abstract class PHPThumb
     abstract public function setOptions(array $options = []);
 
     /**
-     * Check the provided filename/url. If it is a url, validate that it is properly
+     * Check the provided filename/url. If it is an url, validate that it is properly
      * formatted. If it is a file, check to make sure that it actually exists on
      * the filesystem.
      *

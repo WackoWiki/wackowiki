@@ -35,7 +35,7 @@ Upstream projects
 - htmlsax3			- https://pear.php.net/package/XML_HTMLSax3/
 - php-diff			- https://github.com/JBlond/php-diff
 - phpmailer			- https://github.com/PHPMailer/PHPMailer
-- phpthumb			- https://github.com/masterexploder/PHPThumb
+- phpthumb			- https://github.com/PHPThumb/PHPThumb
 - safehtml			- https://wackowiki.org/doc/Dev/Projects/SafeHTML
 - simplepie			- https://github.com/simplepie/simplepie
 - text_highlighter	- https://pear.php.net/package/Text_Highlighter/

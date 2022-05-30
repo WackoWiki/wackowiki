@@ -3,17 +3,17 @@
 namespace PHPThumb;
 
 /**
- * PhpThumb : PHP Thumb Library <http://phpthumb.gxdlabs.com>
+ * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
  *
- * Author(s): Ian Selby <ian@gen-x-design.com>
+ * Author(s): Ian Selby <ianrselby@gmail.com>
  *
  * Licensed under the MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @author Ian Selby <ian@gen-x-design.com>
+ * @author Ian Selby <ianrselby@gmail.com>
  * @copyright Copyright (c) 2009 Gen X Design
- * @link http://phpthumb.gxdlabs.com
+ * @link https://github.com/masterexploder/PHPThumb
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 
@@ -345,7 +345,7 @@ class GD extends PHPThumb
      * A percentage of 50 would crop the image to the center which would be the same as using
      * adaptiveResizeQuadrant() with $quadrant = 'C', or even the original adaptiveResize()
      *
-     * A percentage of 100 would crop the image to the image all the way to the right, etc, etc.
+     * A percentage of 100 would crop the image to the image all the way to the right, etc., etc.
      * Note that you can use any percentage between 1 and 100.
      *
      * For Portrait images:
@@ -452,7 +452,7 @@ class GD extends PHPThumb
      * +---+---+---+
      *
      * Note that if your image is Landscape and you choose either of the Top or Bottom quadrants (which won't
-     * make sence since only the Left and Right would be available, then the Center quadrant will be used
+     * make sense since only the Left and Right would be available, then the Center quadrant will be used
      * to crop. This would have exactly the same result as using adaptiveResize().
      * The same goes if your image is portrait and you choose either the Left or Right quadrants.
      *
