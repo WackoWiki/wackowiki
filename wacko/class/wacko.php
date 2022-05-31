@@ -9,8 +9,8 @@ if (!defined('IN_WACKO'))
 class Wacko
 {
 	public $charset;
-	public $config;							// @deprecated, but will live for a looong time
-	public $db;								// new config
+	public $config;								// @deprecated, but will live for a looong time
+	public $db;									// new config
 	public $http;
 	public $sess;
 	public $dblink;
@@ -22,7 +22,7 @@ class Wacko
 	public $canonical				= false;
 	public $categories;
 	public $watch					= [];
-	public $notify_lang			= null;
+	public $notify_lang				= null;
 	public $is_watched				= false;
 	public $hide_revisions			= false;
 	public $_acl					= [];
@@ -31,13 +31,13 @@ class Wacko
 	public $file_cache				= [];
 	public $page_id_cache			= [];
 	public $page_tag_cache			= [];
-	public $context				= [];		// page context, used for correct processing of inclusions
-	public $current_context		= 0;		// current context level
+	public $context					= [];		// page context, used for correct processing of inclusions
+	public $current_context			= 0;		// current context level
 	public $header_count			= 0;
 	public $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
-	public $first_inclusion		= [];		// for backlinks
-	public $format_safe			= true;		// for htmlspecialchars() in pre_link
-	public $toc_context			= [];
+	public $first_inclusion			= [];		// for backlinks
+	public $format_safe				= true;		// for htmlspecialchars() in pre_link
+	public $toc_context				= [];
 	public $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
 	public $language				= null;
 	public $languages				= null;
@@ -50,8 +50,8 @@ class Wacko
 	public $post_wacko_action		= null;
 	public $page_lang		 		= null;
 	public $html_addition			= [];
-	public $hide_article_header	= false;
-	public $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
+	public $hide_article_header		= false;
+	public $no_way_back				= false;	// set to true to prevent saving page as the goback-after-login
 	public $paragrafica_styles		= [
 		'before'	=> [
 						'_before'	=> '',
