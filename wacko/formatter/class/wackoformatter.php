@@ -1161,7 +1161,7 @@ class WackoFormatter
 			return $wacko->pre_link($matches[1]) . $matches[2];
 		}
 		// wacko links!
-		else if ((!$wacko->_formatter_noautolinks)
+		else if ((!$wacko->noautolinks)
 				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . '+' . $wacko->language['UPPERNUM'] . $wacko->language['ALPHANUM'] . '*)$/us', $thing, $matches)))
 		{
 			if ($matches[1] == '~')

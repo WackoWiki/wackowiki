@@ -25,8 +25,8 @@ class Wacko
 	public $notify_lang				= null;
 	public $is_watched				= false;
 	public $hide_revisions			= false;
-	public $_acl					= [];
-	public $acl_cache				= [];
+	private $acl					= [];
+	private $acl_cache				= [];
 	public $category_cache			= [];
 	public $file_cache				= [];
 	public $page_id_cache			= [];
@@ -38,14 +38,14 @@ class Wacko
 	public $first_inclusion			= [];		// for backlinks
 	public $format_safe				= true;		// for htmlspecialchars() in pre_link
 	public $toc_context				= [];
-	public $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
+	public $search_engines			= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 	public $language				= null;
 	public $languages				= null;
 	public $user_lang				= null;
 	public $translations			= null;
 	public $wanted_cache			= null;
 	public $page_cache				= null;
-	public $_formatter_noautolinks	= null;
+	public $noautolinks				= null;		// formatter
 	public $numerate_links			= null;
 	public $post_wacko_action		= null;
 	public $page_lang		 		= null;
@@ -4082,14 +4082,14 @@ class Wacko
 
 					if (!$this->has_access('read', $page_id))
 					{
-						$this->_acl['list'] = '';
+						$this->acl['list'] = '';
 					}
 				}
 
-				#Ut::debug_print_r($this->_acl['list']);
-				$acl = explode("\n", $this->_acl['list']);
+				#Ut::debug_print_r($this->acl['list']);
+				$acl = explode("\n", $this->acl['list']);
 
-				if (!$access || $this->_acl['list'] == '')
+				if (!$access || $this->acl['list'] == '')
 				{
 					$class		= 'acl-denied';
 					$rel		= 'nofollow';
@@ -5963,7 +5963,7 @@ class Wacko
 		// load acl
 		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent, $new_tag);
 		// cache
-		$this->_acl	= $acl;
+		$this->acl	= $acl;
 
 		// locked down to read only
 		if ($this->db->acl_lock && $privilege != 'read')
@@ -5975,12 +5975,12 @@ class Wacko
 		if (!in_array($user_name, ['', GUEST])
 			&& ($this->is_owner($page_id) || $this->is_admin()))
 		{
-			#Ut::debug_print_r($this->_acl['list']);
-			$acl = explode("\n", $this->_acl['list']);
+			#Ut::debug_print_r($this->acl['list']);
+			$acl = explode("\n", $this->acl['list']);
 
 			if (!in_array('*', $acl) && !in_array('$', $acl))
 			{
-				$this->_acl['list']	.= (!empty($this->_acl['list']) ? "\n" : '') . $user_name;
+				$this->acl['list']	.= (!empty($this->acl['list']) ? "\n" : '') . $user_name;
 			}
 
 			return true;
@@ -6017,7 +6017,7 @@ class Wacko
 
 		if ($copy_to_this_acl)
 		{
-			$this->_acl['list'] = $acl;
+			$this->acl['list'] = $acl;
 		}
 
 		$acls = "\n" . $acl . "\n";
@@ -6223,10 +6223,10 @@ class Wacko
 			'custom'		=> 'AccessCustom',
 		];
 
-		// load $this->_acl['list'] for specified privilege
+		// load $this->acl['list'] for specified privilege
 		$access		= $this->has_access($privilege, $page_id);
 		$acl		= [];
-		$acl		= explode("\n", $this->_acl['list']);
+		$acl		= explode("\n", $this->acl['list']);
 
 		if (in_array('', $acl))
 		{
@@ -8154,15 +8154,16 @@ class Wacko
 
 			$this->sess->freecap_shown = 1;
 
-			$out .= $inline ? '' : "<br>\n";
-			$out .= '<label for="captcha">' . $this->_t('Captcha') . ":</label>\n";
-			$out .= $inline ? '' : "<br>\n";
-			// href('', '.freecap') won't work, because mini_href() would strip DOT
-			$out .= '<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
-			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
-			$out .= '<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n";
-			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6" required>';
-			$out .= $inline ? '' : "<br>\n";
+			$out .=
+				($inline ? '' : "<br>\n") .
+				'<label for="captcha">' . $this->_t('Captcha') . ":</label>\n" .
+				($inline ? '' : "<br>\n") .
+				// href('', '.freecap') won't work, because mini_href() would strip the DOT
+				'<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n" .
+				'<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">' .
+				'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n" .
+				'<input type="text" id="captcha" name="captcha" maxlength="6" required>' .
+				($inline ? '' : "<br>\n");
 		}
 
 		return $out;
