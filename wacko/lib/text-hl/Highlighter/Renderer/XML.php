@@ -34,7 +34,7 @@ class Text_Highlighter_Renderer_XML extends Text_Highlighter_Renderer_Array
 	 * @access private
 	 * @var array
 	 */
-	public $_serializer_options = [];
+	private array $_serializer_options = [];
 
 
 	/**

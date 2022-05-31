@@ -50,28 +50,28 @@ class Text_Highlighter_Renderer_Array extends Text_Highlighter_Renderer
 	 *
 	 * @var integer
 	 */
-	var $_tabsize = 4;
+	public int $_tabsize = 4;
 
 	/**
 	 * Should htmlentities() will be called
 	 *
 	 * @var boolean
 	 */
-	var $_htmlspecialchars = true;
+	public bool $_htmlspecialchars = true;
 
 	/**
 	 * Enumerated or associative array
 	 *
 	 * @var integer
 	 */
-	var $_enumerated = false;
+	public int $_enumerated = false;
 
 	/**
 	 * Array containing highlighting rules
 	 *
 	 * @var array
 	 */
-	var $_output = [];
+	public array $_output = [];
 
 	/**#@-*/
 

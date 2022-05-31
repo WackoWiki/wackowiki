@@ -4,7 +4,7 @@
 
 class BbCode
 {
-	var $object;
+	protected $object;
 
 	function __construct(&$object)
 	{

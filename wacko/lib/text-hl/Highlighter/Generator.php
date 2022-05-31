@@ -73,7 +73,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 *
 	 * @var  boolean
 	 */
-	var $folding = false;
+	public bool $folding = false;
 
 	/**
 	 * Holds name of file with highlighting rules
@@ -81,7 +81,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access private
 	 */
-	var $_syntaxFile;
+	private string $_syntaxFile;
 
 	/**
 	 * Current element being processed
@@ -89,7 +89,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_element;
+	private array $_element;
 
 	/**
 	 * List of regions
@@ -97,7 +97,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_regions = [];
+	private array $_regions = [];
 
 	/**
 	 * List of blocks
@@ -105,7 +105,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_blocks = [];
+	private array $_blocks = [];
 
 	/**
 	 * List of keyword groups
@@ -113,7 +113,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_keywords = [];
+	private array $_keywords = [];
 
 	/**
 	 * List of authors
@@ -121,7 +121,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_authors = [];
+	private array $_authors = [];
 
 	/**
 	 * Name of language
@@ -129,7 +129,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access public
 	 */
-	var $language = '';
+	public string $language = '';
 
 	/**
 	 * Generated code
@@ -145,7 +145,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access private
 	 */
-	var $_defClass = 'default';
+	private string $_defClass = 'default';
 
 	/**
 	 * Comment
@@ -153,7 +153,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access private
 	 */
-	var $_comment = '';
+	private string $_comment = '';
 
 	/**
 	 * Flag for comment processing
@@ -161,7 +161,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var boolean
 	 * @access private
 	 */
-	var $_inComment = false;
+	private bool $_inComment = false;
 
 	/**
 	 * Sorting order of current block/region
@@ -169,7 +169,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var integer
 	 * @access private
 	 */
-	var $_blockOrder = 0;
+	private int $_blockOrder = 0;
 
 	/**
 	 * Generation errors
@@ -177,7 +177,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	var $_errors;
+	private array $_errors;
 
 	// }}}
 	// {{{ constructor
@@ -1258,12 +1258,12 @@ CODE;
 
 
 		$this->_code .= <<<CODE
-		* @category   Text
-		* @package	Text_Highlighter
-		* @copyright  2004-2006 Andrey Demenev
-		* @license	http://www.php.net/license/3_0.txt  PHP License
-		* @version	Release: 0.8.0
-		* @link	   http://pear.php.net/package/Text_Highlighter
+		* @category		Text
+		* @package		Text_Highlighter
+		* @copyright	2004-2006 Andrey Demenev
+		* @license		http://www.php.net/license/3_0.txt  PHP License
+		* @version		Release: 0.8.0
+		* @link			http://pear.php.net/package/Text_Highlighter
 		*/
 		class Text_Highlighter_{$this->language} extends Text_Highlighter
 {

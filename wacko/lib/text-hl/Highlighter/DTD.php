@@ -20,7 +20,7 @@
 
 class Text_Highlighter_DTD extends Text_Highlighter
 {
-	var $_language = 'dtd';
+	public $_language = 'dtd';
 
 	/**
 	 *  Constructor

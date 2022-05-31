@@ -72,14 +72,14 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var boolean
 	 */
-	public $_numbers = false;
+	public bool $_numbers = false;
 
 	/**
 	 * BB tags to be used
 	 *
 	 * @var array
 	 */
-	public $_bb_tags = [
+	public array $_bb_tags = [
 		'color'		=> 'color',
 		'list'		=> 'list',
 		'list_item'	=> '*',
@@ -91,7 +91,7 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var array
 	 */
-	public $_tag_brackets = ['start' => '[', 'end' => ']'];
+	public array $_tag_brackets = ['start' => '[', 'end' => ']'];
 
 	/**
 	 * Colors map

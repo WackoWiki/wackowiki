@@ -26,7 +26,7 @@
 
 class Text_Highlighter_CPP extends Text_Highlighter
 {
-	var $_language = 'cpp';
+	public $_language = 'cpp';
 
 	/**
 	 *  Constructor

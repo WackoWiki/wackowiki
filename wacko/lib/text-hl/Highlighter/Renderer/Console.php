@@ -49,34 +49,34 @@ class Text_Highlighter_Renderer_Console extends Text_Highlighter_Renderer
 	 *
 	 * @var string
 	 */
-	var $_lastClass;
+	public $_lastClass;
 
 	/**
 	 * Line numbering
 	 *
 	 * @var boolean
 	 */
-	var $_numbers = false;
+	public $_numbers = false;
 
 	/**
 	 * Tab size
 	 *
 	 * @var integer
 	 */
-	var $_tabsize = 4;
+	public $_tabsize = 4;
 
 	/**
 	 * Highlighted code
 	 *
 	 * @var string
 	 */
-	var $_output = '';
+	public $_output = '';
 
 	/**#@-*/
 
-	var $_colors = [];
+	public $_colors = [];
 
-	var $_defColors = [
+	public $_defColors = [
 		'default'		=> "\033[0m",
 		'inlinetags'	=> "\033[31m",
 		'brackets'		=> "\033[36m",

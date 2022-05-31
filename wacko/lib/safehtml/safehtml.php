@@ -51,70 +51,70 @@ class SafeHTML
 	 *
 	 * @var string
 	 */
-	protected $xhtml = '';
+	protected string $xhtml = '';
 
 	/**
 	 * Array of counters for each tag
 	 *
 	 * @var array
 	 */
-	protected $counter = [];
+	protected array $counter = [];
 
 	/**
 	 * Stack of unclosed tags
 	 *
 	 * @var array
 	 */
-	protected $stack = [];
+	protected array $stack = [];
 
 	/**
 	 * Array of counters for tags that must be deleted with all content
 	 *
 	 * @var array
 	 */
-	protected $dcCounter = [];
+	protected array $dcCounter = [];
 
 	/**
 	 * Stack of unclosed tags that must be deleted with all content
 	 *
 	 * @var array
 	 */
-	protected $dcStack = [];
+	protected array $dcStack = [];
 
 	/**
 	 * Stores level of list (ol/ul) nesting
 	 *
 	 * @var int
 	 */
-	protected $listScope = 0;
+	protected int $listScope = 0;
 
 	/**
 	 * Stack of unclosed list tags
 	 *
 	 * @var array
 	 */
-	protected $liStack = [];
+	protected array $liStack = [];
 
 	/**
 	 * Array of prepared regular expressions for protocols (schemas) matching
 	 *
 	 * @var array
 	 */
-	protected $protoRegexps = [];
+	protected array $protoRegexps = [];
 
 	/**
 	 * Array of prepared regular expressions for CSS matching
 	 *
 	 * @var array
 	 */
-	protected $cssRegexps = [];
+	protected array $cssRegexps = [];
 
 	/**
 	 * Allowed tags
 	 *
 	 * @var array
 	 */
-	protected $allowTags = [];
+	protected array $allowTags = [];
 
 
 	/**
@@ -122,14 +122,14 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $singleTags = ['area', 'br', 'img', 'input', 'hr', 'wbr', ];
+	public array $singleTags = ['area', 'br', 'img', 'input', 'hr', 'wbr', ];
 
 	/**
 	 * List of dangerous tags (such tags will be deleted)
 	 *
 	 * @var array
 	 */
-	public $deleteTags = [
+	public array $deleteTags = [
 		'applet', 'base',   'basefont', 'bgsound', 'blink',  'body',
 		'embed',  'frame',  'frameset', 'head',    'html',   'ilayer',
 		'iframe', 'layer',  'link',     'meta',    'object', 'style',
@@ -142,21 +142,21 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $deleteTagsContent = ['script', 'style', 'title', 'xml', ];
+	public array $deleteTagsContent = ['script', 'style', 'title', 'xml', ];
 
 	/**
 	 * Type of protocols filtering ('white' or 'black')
 	 *
 	 * @var string
 	 */
-	public $protocolFiltering = 'white';
+	public string $protocolFiltering = 'white';
 
 	/**
 	 * List of "dangerous" protocols (used for blacklist-filtering)
 	 *
 	 * @var array
 	 */
-	public $blackProtocols = [
+	public array $blackProtocols = [
 		'about',   'chrome',     'data',       'disk',     'hcp',
 		'help',    'javascript', 'livescript', 'lynxcgi',  'lynxexec',
 		'ms-help', 'ms-its',     'mhtml',      'mocha',    'opera',
@@ -169,7 +169,7 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $whiteProtocols = [
+	public array $whiteProtocols = [
 		'ed2k',   'file', 'ftp',  'gopher', 'http',   'https',
 		'irc',    'mailto', 'news', 'nntp', 'telnet', 'webcal',
 		'xmpp',   'callto',
@@ -180,7 +180,7 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $protocolAttributes = [
+	public array $protocolAttributes = [
 		'action', 'background', 'codebase', 'dynsrc', 'href', 'lowsrc', 'src',
 	];
 
@@ -192,7 +192,7 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $cssKeywords = [
+	public array $cssKeywords = [
 		'absolute', 'behavior',       'behaviour',   'content', 'expression',
 		'fixed',    'include-source', 'moz-binding',
 	];
@@ -203,7 +203,7 @@ class SafeHTML
 	 * @var array
 	 * @deprecated XHTML does not allow such tags
 	 */
-	public $noClose = [];
+	public array $noClose = [];
 
 	/**
 	 * List of block-level tags that terminates paragraph
@@ -212,7 +212,7 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $closeParagraph = [
+	public array $closeParagraph = [
 		'address',	'article',	'aside',		'blockquote',	'details',	'div',
 		'dl',		'fieldset',	'figcaption',	'figure',		'footer',	'form',
 		'h1',		'h2',		'h3',			'h4',			'h5',		'h6',
@@ -225,7 +225,7 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $tableTags = [
+	public array $tableTags = [
 		'caption', 'col', 'colgroup', 'tbody', 'td', 'tfoot', 'th',
 		'thead',   'tr',
 	];
@@ -235,21 +235,21 @@ class SafeHTML
 	 *
 	 * @var array
 	 */
-	public $listTags = ['menu', 'ol', 'ul', 'dl', ];
+	public array $listTags = ['menu', 'ol', 'ul', 'dl', ];
 
 	/**
 	 * List of dangerous attributes
 	 *
 	 * @var array
 	 */
-	public $attributes = ['dynsrc', 'id', 'name', ];
+	public array $attributes = ['dynsrc', 'id', 'name', ];
 
 	/**
 	 * List of allowed "namespaced" attributes
 	 *
 	 * @var array
 	 */
-	public $attributesNS = ['xml:lang', ];
+	public array $attributesNS = ['xml:lang', ];
 
 	/**
 	 * Constructs class

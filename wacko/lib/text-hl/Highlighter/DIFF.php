@@ -20,7 +20,7 @@
 
 class Text_Highlighter_DIFF extends Text_Highlighter
 {
-	var $_language = 'diff';
+	public $_language = 'diff';
 
 	/**
 	 *  Constructor

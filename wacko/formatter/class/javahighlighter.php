@@ -25,8 +25,8 @@ class JavaHighlighter
 	/****************************************************************/
 	/* The variables that define the behavior of the analyzer       */
 	/****************************************************************/
-	var $case_sensitive	= true;						// case sensitive language or not
-	var $tokdelimiters	= " []()=+-/*:;,.\n\t\r  ";	// word delimiters
+	public $case_sensitive	= true;						// case sensitive language or not
+	public $tokdelimiters	= " []()=+-/*:;,.\n\t\r  ";	// word delimiters
 
 	/***************************************************/
 	/* The colors associated with each type of data    */
@@ -44,7 +44,7 @@ class JavaHighlighter
 	/*************************************************/
 	public $stylekeyword	= ['<strong>', '</strong>'];
 	public $styletext		= ['', ''];
-	//var $stylestring	= ['<span style="background-color: yellow">', '</span>');
+	//public $stylestring	= ['<span style="background-color: yellow">', '</span>');
 	public $stylestring	= ['', ''];
 	public $stylecomment	= ['<em>', '</em>'];
 	public $stylesymbol	= ['', ''];
