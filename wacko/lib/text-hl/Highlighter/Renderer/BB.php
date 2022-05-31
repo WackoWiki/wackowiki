@@ -72,14 +72,14 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var boolean
 	 */
-	var $_numbers = false;
+	public $_numbers = false;
 
 	/**
 	 * BB tags to be used
 	 *
 	 * @var array
 	 */
-	var $_bb_tags = [
+	public $_bb_tags = [
 		'color'		=> 'color',
 		'list'		=> 'list',
 		'list_item'	=> '*',
@@ -91,14 +91,14 @@ class Text_Highlighter_Renderer_BB extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var array
 	 */
-	var $_tag_brackets = ['start' => '[', 'end' => ']'];
+	public $_tag_brackets = ['start' => '[', 'end' => ']'];
 
 	/**
 	 * Colors map
 	 *
 	 * @var boolean
 	 */
-	var $_colors = [
+	public $_colors = [
 		'default'		=> 'Black',
 		'code'			=> 'Gray',
 		'brackets'		=> 'Olive',

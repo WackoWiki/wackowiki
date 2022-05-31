@@ -8,25 +8,25 @@
 
 class WackoFormatter
 {
-	var $object;
-	var $page_id;
-	var $table_scope;
-	var $old_indent_level	= 0;
-	var $indent_closers		= [];
-	var $tdold_indent_level	= 0;
-	var $auto_fn			= [];
-	var $tdindent_closers	= [];
-	var $br					= 1;
-	var $intable			= 0;
-	var $intablebr			= 0;
-	var $cols				= 0;
-	var $colors				= [
+	public $object;
+	public $page_id;
+	public $table_scope;
+	public $old_indent_level	= 0;
+	public $indent_closers		= [];
+	public $tdold_indent_level	= 0;
+	public $auto_fn			= [];
+	public $tdindent_closers	= [];
+	public $br					= 1;
+	public $intable			= 0;
+	public $intablebr			= 0;
+	public $cols				= 0;
+	public $colors				= [
 		'blue',
 		'green',
 		'red',
 		'yellow',
 	];
-	var $x11_colors			= [
+	public $x11_colors			= [
 		'aliceblue',
 		'antiquewhite',
 		'aqua',

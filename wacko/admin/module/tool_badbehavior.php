@@ -321,7 +321,7 @@ function admin_tool_badbehavior(&$engine, &$module)
 				$status_key = bb2_get_response($result['status_key']);
 
 				echo '<tr id="request-' . $result['log_id'] . '">' . "\n";
-				echo '<td scope="row" class="check-column label">' .
+				echo '<td class="check-column label">' .
 						'<input type="checkbox" name="submit[]" value="' . $result['log_id'] . '">' .
 					'</td>' . "\n";
 

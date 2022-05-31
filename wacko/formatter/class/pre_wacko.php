@@ -6,7 +6,7 @@
 
 class PreFormatter
 {
-	var $object;
+	public $object;
 
 	function __construct(&$object)
 	{

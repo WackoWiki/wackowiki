@@ -6,7 +6,7 @@
 
 class PostWacko
 {
-	var $object;
+	public $object;
 
 	function __construct(&$object, &$options)
 	{

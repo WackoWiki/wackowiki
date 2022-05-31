@@ -20,7 +20,7 @@
 
 class Text_Highlighter_VBSCRIPT extends Text_Highlighter
 {
-	var $_language = 'vbscript';
+	public $_language = 'vbscript';
 
 	/**
 	 *  Constructor

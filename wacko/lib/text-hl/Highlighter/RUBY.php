@@ -28,7 +28,7 @@
 
 class Text_Highlighter_RUBY extends Text_Highlighter
 {
-	var $_language = 'ruby';
+	public $_language = 'ruby';
 
 	/**
 	 *  Constructor

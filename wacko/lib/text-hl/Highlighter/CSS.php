@@ -20,7 +20,7 @@
 
 class Text_Highlighter_CSS extends Text_Highlighter
 {
-	var $_language = 'css';
+	public $_language = 'css';
 
 	/**
 	 *  Constructor

@@ -24,7 +24,7 @@
 
 class Text_Highlighter_SH extends Text_Highlighter
 {
-	var $_language = 'sh';
+	public $_language = 'sh';
 
 	/**
 	 *  Constructor

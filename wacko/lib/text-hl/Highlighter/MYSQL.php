@@ -20,7 +20,7 @@
 
 class Text_Highlighter_MYSQL extends Text_Highlighter
 {
-	var $_language = 'mysql';
+	public $_language = 'mysql';
 
 	/**
 	 *  Constructor

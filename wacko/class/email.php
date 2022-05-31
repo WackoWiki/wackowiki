@@ -20,7 +20,7 @@ use PHPMailer\PHPMailer\Exception;
 class Email
 {
 	// VARIABLES
-	var $engine;
+	public $engine;
 
 	// CONSTRUCTOR
 	function __construct(&$engine)

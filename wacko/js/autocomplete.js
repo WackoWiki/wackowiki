@@ -104,7 +104,7 @@ class AutoComplete
 			var div		= '<div id=\'' + this.wikiedit.id + '_item_' + i + '\'' +
 							' onmouseover=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.selectInplace(' + '"' + i + '"' + ');\' ' +
 							' onclick=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.insertFound(' + '"' + pattern + '"' + ');\'>' +
-							'<img align=right src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
+							'<img src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
 			contents += div;
 		}
 

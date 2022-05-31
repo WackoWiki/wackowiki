@@ -9,14 +9,14 @@ https://wackowiki.org/doc/Dev/Projects/Typografica
 
 class Paragrafica
 {
-	var $ignore			= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
+	public $ignore			= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
 	// paragpaph is a chicken-feed like this: <t->text, text, just text<-t>
-	var $wacko;
-	var $t0 			= [ // terminators like <-t>$1<t->
+	public $wacko;
+	public $t0 			= [ // terminators like <-t>$1<t->
 		'/(<br[^>]*>)(\s*<br[^>]*>)+/usi',
 		'/(<hr[^>]*>)/usi',
 	];
-	var $t1				= [ // terminators like <-t>$1
+	public $t1				= [ // terminators like <-t>$1
 		[
 			// rightinators
 			'!(<(o|u)l)!si',
@@ -54,7 +54,7 @@ class Paragrafica
 			'!(</li>)!si',
 		],
 	];
-	var $t2				= [ // terminators like $1<t->
+	public $t2				= [ // terminators like $1<t->
 		[
 			// rightinators
 			'!(</(o|u)l>)!si',
@@ -93,20 +93,20 @@ class Paragrafica
 		],
 	];
 
-	var $mark_prefix	= '{:typo:markup:1:}';
-	var $mark1			= '{:typo:markup:1:}<:-t>'; // <-t>
-	var $mark2			= '{:typo:markup:1:}<:t->'; // <t->
-	var $mark3			= '{:typo:markup:1:}<:::>'; // (*) wronginator mark:
+	public $mark_prefix	= '{:typo:markup:1:}';
+	public $mark1			= '{:typo:markup:1:}<:-t>'; // <-t>
+	public $mark2			= '{:typo:markup:1:}<:t->'; // <t->
+	public $mark3			= '{:typo:markup:1:}<:::>'; // (*) wronginator mark:
 
 	// within constructions like <t->(*).....<-t>
 	// & vice versa -- paragraphs should be placed
 	// but within <t->(*)....(*)<-t> -- shouldn't
-	var $mark4			= '{:typo:markup:1:}<:-:>'; // (!) ultimate wronginator mark:
+	public $mark4			= '{:typo:markup:1:}<:-:>'; // (!) ultimate wronginator mark:
 	// paragraphs shouldn't be placed regardless to <t->(!).....<-t>
 
-	var $prefix1		= '<p id="p';
-	var $prefix2		= '" class="auto">';
-	var $postfix		= '</p>';
+	public $prefix1		= '<p id="p';
+	public $prefix2		= '" class="auto">';
+	public $postfix		= '</p>';
 
 	function __construct(&$wacko)
 	{

@@ -25,7 +25,7 @@ class Text_Highlighter_Renderer
 	 * @var array
 	 * @access protected
 	 */
-	var $_options = [];
+	public $_options = [];
 
 	/**
 	 * Current language
@@ -33,7 +33,7 @@ class Text_Highlighter_Renderer
 	 * @var string
 	 * @access protected
 	 */
-	var $_language = '';
+	public $_language = '';
 
 	/**
 	 * Constructor

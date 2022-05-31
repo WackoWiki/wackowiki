@@ -26,7 +26,7 @@
 
 class Text_Highlighter_PERL extends Text_Highlighter
 {
-	var $_language = 'perl';
+	public $_language = 'perl';
 
 	/**
 	 *  Constructor

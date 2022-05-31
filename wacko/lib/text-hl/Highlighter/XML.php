@@ -20,7 +20,7 @@
 
 class Text_Highlighter_XML extends Text_Highlighter
 {
-	var $_language = 'xml';
+	public $_language = 'xml';
 
 	/**
 	 *  Constructor

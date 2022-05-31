@@ -20,7 +20,7 @@
 
 class Text_Highlighter_ABAP extends Text_Highlighter
 {
-	var $_language = 'abap';
+	public $_language = 'abap';
 
 	/**
 	 *  Constructor

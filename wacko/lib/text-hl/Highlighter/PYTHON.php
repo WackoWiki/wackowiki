@@ -20,7 +20,7 @@
 
 class Text_Highlighter_PYTHON extends Text_Highlighter
 {
-	var $_language = 'python';
+	public $_language = 'python';
 
 	/**
 	 *  Constructor

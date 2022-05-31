@@ -146,8 +146,8 @@ class Reflection implements PluginInterface
 
 		if ($this->border)
 		{
-			$rgb		  = $this->hex2rgb($this->borderColor, false);
-			$colorToPaint = imagecolorallocate($this->workingImage, $rgb[0], $rgb[1], $rgb[2]);
+			$rgb			= $this->hex2rgb($this->borderColor, false);
+			$colorToPaint	= imagecolorallocate($this->workingImage, $rgb[0], $rgb[1], $rgb[2]);
 
 			//top line
 			imageline(

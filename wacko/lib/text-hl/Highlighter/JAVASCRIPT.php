@@ -20,7 +20,7 @@
 
 class Text_Highlighter_JAVASCRIPT extends Text_Highlighter
 {
-	var $_language = 'javascript';
+	public $_language = 'javascript';
 
 	/**
 	 *  Constructor

@@ -8,51 +8,51 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
-	var $charset;
-	var $config;							// @deprecated, but will live for a looong time
-	var $db;								// new config
-	var $http;
-	var $sess;
-	var $dblink;
-	var $page;								// requested page
-	var $tag;
-	var $module;
-	var $method					= '';
-	var $forum					= false;
-	var $canonical				= false;
-	var $categories;
-	var $watch					= [];
-	var $notify_lang			= null;
-	var $is_watched				= false;
-	var $hide_revisions			= false;
-	var $_acl					= [];
-	var $acl_cache				= [];
-	var $category_cache			= [];
-	var $file_cache				= [];
-	var $page_id_cache			= [];
-	var $page_tag_cache			= [];
-	var $context				= [];		// page context, used for correct processing of inclusions
-	var $current_context		= 0;		// current context level
-	var $header_count			= 0;
-	var $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
-	var $first_inclusion		= [];		// for backlinks
-	var $format_safe			= true;		// for htmlspecialchars() in pre_link
-	var $toc_context			= [];
-	var $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
-	var $language				= null;
-	var $languages				= null;
-	var $user_lang				= null;
-	var $translations			= null;
-	var $wanted_cache			= null;
-	var $page_cache				= null;
-	var $_formatter_noautolinks	= null;
-	var $numerate_links			= null;
-	var $post_wacko_action		= null;
-	var $page_lang		 		= null;
-	var $html_addition			= [];
-	var $hide_article_header	= false;
-	var $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
-	var $paragrafica_styles		= [
+	public $charset;
+	public $config;							// @deprecated, but will live for a looong time
+	public $db;								// new config
+	public $http;
+	public $sess;
+	public $dblink;
+	public $page;								// requested page
+	public $tag;
+	public $module;
+	public $method					= '';
+	public $forum					= false;
+	public $canonical				= false;
+	public $categories;
+	public $watch					= [];
+	public $notify_lang			= null;
+	public $is_watched				= false;
+	public $hide_revisions			= false;
+	public $_acl					= [];
+	public $acl_cache				= [];
+	public $category_cache			= [];
+	public $file_cache				= [];
+	public $page_id_cache			= [];
+	public $page_tag_cache			= [];
+	public $context				= [];		// page context, used for correct processing of inclusions
+	public $current_context		= 0;		// current context level
+	public $header_count			= 0;
+	public $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
+	public $first_inclusion		= [];		// for backlinks
+	public $format_safe			= true;		// for htmlspecialchars() in pre_link
+	public $toc_context			= [];
+	public $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
+	public $language				= null;
+	public $languages				= null;
+	public $user_lang				= null;
+	public $translations			= null;
+	public $wanted_cache			= null;
+	public $page_cache				= null;
+	public $_formatter_noautolinks	= null;
+	public $numerate_links			= null;
+	public $post_wacko_action		= null;
+	public $page_lang		 		= null;
+	public $html_addition			= [];
+	public $hide_article_header	= false;
+	public $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
+	public $paragrafica_styles		= [
 		'before'	=> [
 						'_before'	=> '',
 						'_after'	=> '',
@@ -74,13 +74,13 @@ class Wacko
 						'before'	=> '',
 						'after'		=> ''],
 	];
-	var $paragrafica_patches = [
+	public $paragrafica_patches = [
 		'before'	=> ['before'],
 		'after'		=> ['after'],
 		'right'		=> ['_before'],
 		'left'		=> ['_before'],
 	];
-	var $time_intervals = [
+	public $time_intervals = [
 		365*DAYSECS	=> 'Year',
 		30*DAYSECS	=> 'Month',
 		7*DAYSECS	=> 'Week',

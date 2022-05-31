@@ -24,7 +24,7 @@
 
 class Text_Highlighter_AVRC extends Text_Highlighter
 {
-	var $_language = 'avrc';
+	public $_language = 'avrc';
 
 	/**
 	 *  Constructor

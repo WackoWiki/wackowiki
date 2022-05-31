@@ -16,9 +16,9 @@ if (!defined('IN_WACKO'))
 class Feed
 {
 	// VARIABLES
-	var $engine;
-	var $lang;
-	var $charset;
+	public $engine;
+	public $lang;
+	public $charset;
 
 	// CONSTRUCTOR
 	function __construct(&$engine)

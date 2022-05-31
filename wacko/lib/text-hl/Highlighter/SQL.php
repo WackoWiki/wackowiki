@@ -22,7 +22,7 @@
 
 class Text_Highlighter_SQL extends Text_Highlighter
 {
-	var $_language = 'sql';
+	public $_language = 'sql';
 
 	/**
 	 *  Constructor

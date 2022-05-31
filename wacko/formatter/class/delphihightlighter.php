@@ -14,44 +14,44 @@
 
 class DelphiHightlighter
 {
-	var $code = '';		// the code to be hightlighed
-	var $newcode = '';	// generated code
-	var $tok;			// word being cut out
-	var $char;			// current character
-	var $i;				// current position in the code
-	var $codelength;	// length of the code string
+	public $code = '';		// the code to be hightlighed
+	public $newcode = '';	// generated code
+	public $tok;			// word being cut out
+	public $char;			// current character
+	public $i;				// current position in the code
+	public $codelength;	// length of the code string
 	/****************************************************************/
 	/* The variables that define the behavior of the analyzer       */
 	/****************************************************************/
-	var $case_sensitive	= false;                   // case sensitive language or not
-	var $tokdelimiters	= " []()=+-/*:;,.\n\t\r  "; // word delimiters
+	public $case_sensitive	= false;                   // case sensitive language or not
+	public $tokdelimiters	= " []()=+-/*:;,.\n\t\r  "; // word delimiters
 
 	/***************************************************/
 	/* The colors associated with each type of data    */
 	/***************************************************/
-	var $colorkeyword	= '';
-	var $colortext		= '';
-	var $colorstring	= '#000000';
-	var $colorcomment	= '#FF0000';
-	var $colorsymbol	= '';
-	var $colornumber	= '#000080';
-	var $colorpreproc	= '#008000';
+	public $colorkeyword	= '';
+	public $colortext		= '';
+	public $colorstring	= '#000000';
+	public $colorcomment	= '#FF0000';
+	public $colorsymbol	= '';
+	public $colornumber	= '#000080';
+	public $colorpreproc	= '#008000';
 
 	/*************************************************/
 	/* Data styles for each data type                */
 	/*************************************************/
-	var $stylekeyword	= ['<strong>', '</strong>'];
-	var $styletext		= ['', ''];
-	var $stylestring	= ['<span style="background-color: yellow;">', '</span>'];
-	var $stylecomment	= ['<em>', '</em>'];
-	var $stylesymbol	= ['', ''];
-	var $stylenumber	= ['', ''];
-	var $stylepreproc	= ['<em>', '</em>'];
+	public $stylekeyword	= ['<strong>', '</strong>'];
+	public $styletext		= ['', ''];
+	public $stylestring	= ['<span style="background-color: yellow;">', '</span>'];
+	public $stylecomment	= ['<em>', '</em>'];
+	public $stylesymbol	= ['', ''];
+	public $stylenumber	= ['', ''];
+	public $stylepreproc	= ['<em>', '</em>'];
 
 	/*****************/
 	/* The keywords  */
 	/*****************/
-	var $keywords = [
+	public $keywords = [
 	'unit','interface','implementation','initialization','finalization','uses',
 	'type','var','begin','end','with','do','function','procedure','property',
 	'to','as','is','while','loop','for','repeat','until','use','class','private',
@@ -66,7 +66,7 @@ class DelphiHightlighter
 	/***********************************/
 	/* Delimiters for comment */
 	/***********************************/
-	var $commentdelimiters = [
+	public $commentdelimiters = [
 		["//", "\n"],
 		["{", "}"],
 		["(*", "*)"]
@@ -75,14 +75,14 @@ class DelphiHightlighter
 	/********************************************/
 	/* Delimiters for Strings */
 	/********************************************/
-	var $stringdelimiters = [
+	public $stringdelimiters = [
 		["'", "'"]
 	];
 
 	/********************************************************/
 	/* Delimiters for pre-processor-instructions */
 	/********************************************************/
-	var $preprocdelimiters = [
+	public $preprocdelimiters = [
 		["(*\$", "*)"],
 		["{\$", "}"]
 	];

@@ -9,18 +9,18 @@ https://wackowiki.org/doc/Dev/Projects/Typografica
 
 class Typografica
 {
-	var $wacko;
-	var $skip_tags	= true;
-	var $p_prefix	= '<p class="typo">';
-	var $p_postfix	= '</p>';
-	var $asoft		= true;
-	var $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
-	var $indent2	= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
-	var $fixed_size	= 80; // maximum width
-	var $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
-	var $de_nobr	= true;
+	public $wacko;
+	public $skip_tags	= true;
+	public $p_prefix	= '<p class="typo">';
+	public $p_postfix	= '</p>';
+	public $asoft		= true;
+	public $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
+	public $indent2	= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
+	public $fixed_size	= 80; // maximum width
+	public $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
+	public $de_nobr	= true;
 
-	var $phonemasks	= [
+	public $phonemasks	= [
 							[
 								"/(\d{4})\-(\d{2})\-(\d{2}) (\d{2}):(\d{2}):(\d{2})/",
 								"/(\d{4})\-(\d{2})\-(\d{2})/",
@@ -49,10 +49,10 @@ class Typografica
 							]
 						];
 
-	var $glueleft	= ["рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\."]; // contains some Russian abberviations, also see below
-	var $glueright	= ["руб\.", "коп\.", "у\.е\.", "мин\."];
+	public $glueleft	= ["рис\.", "табл\.", "см\.", "им\.", "ул\.", "пер\.", "кв\.", "офис", "оф\.", "г\."]; // contains some Russian abberviations, also see below
+	public $glueright	= ["руб\.", "коп\.", "у\.е\.", "мин\."];
 
-	var $settings	= [
+	public $settings	= [
 							'inches'	=> 1, // convert inches into &quot;
 							'apostroph'	=> 1, // apostroph converter
 							'laquo'		=> 0, // angle quotes

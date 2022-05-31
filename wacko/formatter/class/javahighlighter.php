@@ -16,12 +16,12 @@
 
 class JavaHighlighter
 {
-	var $code = '';		// the code to be hightlighed
-	var $newcode = '';	// the generated code
-	var $tok;			// word being cut out
-	var $char;			// current character
-	var $i;				// current position in the code
-	var $codelength;	// length of the code string
+	public $code = '';		// the code to be hightlighed
+	public $newcode = '';	// the generated code
+	public $tok;			// word being cut out
+	public $char;			// current character
+	public $i;				// current position in the code
+	public $codelength;	// length of the code string
 	/****************************************************************/
 	/* The variables that define the behavior of the analyzer       */
 	/****************************************************************/
@@ -31,30 +31,30 @@ class JavaHighlighter
 	/***************************************************/
 	/* The colors associated with each type of data    */
 	/***************************************************/
-	var $colorkeyword	= '#0000CC';
-	var $colortext		= '';
-	var $colorstring	= '#000000';
-	var $colorcomment	= '#006600';
-	var $colorsymbol	= '';
-	var $colornumber	= '#000080';
-	var $colorpreproc	= '#008000';
+	public $colorkeyword	= '#0000CC';
+	public $colortext		= '';
+	public $colorstring	= '#000000';
+	public $colorcomment	= '#006600';
+	public $colorsymbol	= '';
+	public $colornumber	= '#000080';
+	public $colorpreproc	= '#008000';
 
 	/*************************************************/
 	/* Data styles for each data type                */
 	/*************************************************/
-	var $stylekeyword	= ['<strong>', '</strong>'];
-	var $styletext		= ['', ''];
+	public $stylekeyword	= ['<strong>', '</strong>'];
+	public $styletext		= ['', ''];
 	//var $stylestring	= ['<span style="background-color: yellow">', '</span>');
-	var $stylestring	= ['', ''];
-	var $stylecomment	= ['<em>', '</em>'];
-	var $stylesymbol	= ['', ''];
-	var $stylenumber	= ['', ''];
-	var $stylepreproc	= ['<em>', '</em>'];
+	public $stylestring	= ['', ''];
+	public $stylecomment	= ['<em>', '</em>'];
+	public $stylesymbol	= ['', ''];
+	public $stylenumber	= ['', ''];
+	public $stylepreproc	= ['<em>', '</em>'];
 
 	/*****************/
 	/* Keywords */
 	/*****************/
-	var $keywords = [
+	public $keywords = [
 	'abstract','double','double','strictfp','boolean','else',
 	'interface','super','break','extends','long','switch','byte','final','native',
 	'synchronized','case','finally','new','this','catch','float','package','throw','char','for',
@@ -66,7 +66,7 @@ class JavaHighlighter
 	/***********************************/
 	/* Delimiters for comment */
 	/***********************************/
-	var $commentdelimiters = [
+	public $commentdelimiters = [
 		["//", "\n"],
 		["/*", "*/"],
 		["/**", "*/"]
@@ -75,14 +75,14 @@ class JavaHighlighter
 	/********************************************/
 	/* Delimiters for Strings */
 	/********************************************/
-	var $stringdelimiters = [
+	public $stringdelimiters = [
 		["\"", "\""]
 	];
 
 	/********************************************************/
 	/* Delimiters for pre-processor-instructions */
 	/********************************************************/
-	var $preprocdelimiters = [
+	public $preprocdelimiters = [
 		["(*\$", "*)"],
 		["{\$", "}"]
 	];
