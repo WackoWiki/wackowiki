@@ -32,7 +32,7 @@
  *
  *//// NB /*...*/ comments in language files not supported!
 
-$wacko = __DIR__ . '/../../wacko/'; // <---- up yours!
+$wacko = __DIR__ . '/../../src/'; // <---- up yours!
 
 if (count(@$argv) < 3)
 {
