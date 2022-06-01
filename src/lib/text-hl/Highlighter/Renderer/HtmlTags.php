@@ -65,14 +65,14 @@ class Text_Highlighter_Renderer_HtmlTags extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var boolean
 	 */
-	public bool $_numbers = false;
+	public $_numbers = false;
 
 	/**
 	 * HTML tags map
 	 *
 	 * @var array
 	 */
-	public array $_hilite_tags = [
+	public $_hilite_tags = [
 		'default'		=> '',
 		'code'			=> '',
 		'brackets'		=> 'b',

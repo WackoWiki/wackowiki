@@ -73,7 +73,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 *
 	 * @var  boolean
 	 */
-	public bool $folding = false;
+	public $folding = false;
 
 	/**
 	 * Holds name of file with highlighting rules
@@ -81,7 +81,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access private
 	 */
-	private string $_syntaxFile;
+	private $_syntaxFile;
 
 	/**
 	 * Current element being processed
@@ -89,7 +89,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	private array $_element;
+	private $_element;
 
 	/**
 	 * List of regions
@@ -97,7 +97,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	private array $_regions = [];
+	private $_regions = [];
 
 	/**
 	 * List of blocks
@@ -105,7 +105,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	private array $_blocks = [];
+	private $_blocks = [];
 
 	/**
 	 * List of keyword groups
@@ -113,7 +113,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	private array $_keywords = [];
+	private $_keywords = [];
 
 	/**
 	 * List of authors
@@ -121,7 +121,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	private array $_authors = [];
+	private $_authors = [];
 
 	/**
 	 * Name of language
@@ -129,7 +129,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access public
 	 */
-	public string $language = '';
+	public $language = '';
 
 	/**
 	 * Generated code
@@ -137,7 +137,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access private
 	 */
-	var $_code = '';
+	private $_code = '';
 
 	/**
 	 * Default class
@@ -145,7 +145,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access private
 	 */
-	private string $_defClass = 'default';
+	private $_defClass = 'default';
 
 	/**
 	 * Comment
@@ -153,7 +153,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var string
 	 * @access private
 	 */
-	private string $_comment = '';
+	private $_comment = '';
 
 	/**
 	 * Flag for comment processing
@@ -161,7 +161,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var boolean
 	 * @access private
 	 */
-	private bool $_inComment = false;
+	private $_inComment = false;
 
 	/**
 	 * Sorting order of current block/region
@@ -169,7 +169,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var integer
 	 * @access private
 	 */
-	private int $_blockOrder = 0;
+	private $_blockOrder = 0;
 
 	/**
 	 * Generation errors
@@ -177,7 +177,7 @@ class Text_Highlighter_Generator extends  XML_Parser
 	 * @var array
 	 * @access private
 	 */
-	private array $_errors;
+	private $_errors;
 
 	// }}}
 	// {{{ constructor

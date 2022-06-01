@@ -93,7 +93,7 @@ class Text_Highlighter
 	 * @see _init
 	 * @var array
 	 */
-	public array $_syntax;
+	protected $_syntax;
 
 	/**
 	 * Renderer object.
@@ -101,7 +101,7 @@ class Text_Highlighter
 	 * @access private
 	 * @var array
 	 */
-	public array $_renderer;
+	private $_renderer;
 
 	/**
 	 * Options. Keeped for BC
@@ -109,7 +109,7 @@ class Text_Highlighter
 	 * @access protected
 	 * @var array
 	 */
-	public array $_options = [];
+	protected $_options = [];
 
 	/**
 	 * Conditionds
@@ -117,7 +117,7 @@ class Text_Highlighter
 	 * @access protected
 	 * @var array
 	 */
-	public array $_conditions = [];
+	protected $_conditions = [];
 
 	/**
 	 * Disabled keywords
@@ -125,7 +125,7 @@ class Text_Highlighter
 	 * @access protected
 	 * @var array
 	 */
-	public array $_disabled = [];
+	protected $_disabled = [];
 
 	/**
 	 * Language
@@ -133,7 +133,7 @@ class Text_Highlighter
 	 * @access protected
 	 * @var string
 	 */
-	public string $_language = '';
+	protected $_language = '';
 
 	// }}}
 	// {{{ _checkDefines

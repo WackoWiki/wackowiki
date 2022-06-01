@@ -125,42 +125,42 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var integer
 	 */
-	public int $_numbers = 0;
+	public $_numbers = 0;
 
 	/**
 	 * For numberered lines - where to start
 	 *
 	 * @var integer
 	 */
-	public int $_numbers_start = 0;
+	public $_numbers_start = 0;
 
 	/**
 	 * Tab size
 	 *
 	 * @var integer
 	 */
-	public int $_tabsize = 4;
+	public $_tabsize = 4;
 
 	/**
 	 * Highlighted code
 	 *
 	 * @var string
 	 */
-	public string $_output = '';
+	public $_output = '';
 
 	/**
 	 * Mapping of keywords to formatting rules using inline styles
 	 *
 	 * @var array
 	 */
-	public array $_style_map = [];
+	public $_style_map = [];
 
 	/**
 	 * Mapping of keywords to formatting rules using class names
 	 *
 	 * @var array
 	 */
-	public array $_class_map = [
+	public $_class_map = [
 		'main'			=> 'hl-main',
 		'table'			=> 'hl-table',
 		'gutter'		=> 'hl-gutter',
@@ -194,7 +194,7 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 	 *
 	 * @var array
 	 */
-	public array $_doclinks = [];
+	public $_doclinks = [];
 
 	/**#@-*/
 
