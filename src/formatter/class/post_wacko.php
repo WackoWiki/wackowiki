@@ -7,6 +7,8 @@
 class PostWacko
 {
 	public $object;
+	private array $action;
+	private $options;
 
 	function __construct(&$object, &$options)
 	{

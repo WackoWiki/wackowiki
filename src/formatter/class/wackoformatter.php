@@ -14,19 +14,24 @@ class WackoFormatter
 	public $old_indent_level	= 0;
 	public $indent_closers		= [];
 	public $tdold_indent_level	= 0;
-	public $auto_fn			= [];
-	public $tdindent_closers	= [];
+	public array $auto_fn			= [];
+	public array $tdindent_closers	= [];
 	public $br					= 1;
 	public $intable			= 0;
 	public $intablebr			= 0;
 	public $cols				= 0;
-	public $colors				= [
+	public string $LONGREGEXP;
+	public string $MOREREGEXP;
+	public string $NOTLONGREGEXP;
+	private $tdold_indent_type;
+	private $old_indent_type;
+	public array $colors				= [
 		'blue',
 		'green',
 		'red',
 		'yellow',
 	];
-	public $x11_colors			= [
+	public array $x11_colors			= [
 		'aliceblue',
 		'antiquewhite',
 		'aqua',
@@ -290,7 +295,7 @@ class WackoFormatter
 			")/usm";
 	}
 
-	function indent_close()
+	function indent_close(): string
 	{
 		$result = '';
 
