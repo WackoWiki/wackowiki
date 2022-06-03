@@ -110,8 +110,8 @@ class Ut
 	//		$some = eval("return $str;")
 	static function stringify($x, $compact = 0, $full = 1)
 	{
-		if (is_null($x))				return "NULL";
-		if (is_bool($x))				return $x? "true" : "false";
+		if (is_null($x))				return 'NULL';
+		if (is_bool($x))				return $x? 'true' : 'false';
 		if (is_int($x) || is_float($x)) return (string) $x;
 		if (is_array($x))
 		{

@@ -144,7 +144,7 @@ class Diag
 
 						foreach ($r as $charset_item)
 						{
-							echo "\t<li>" . $charset_item['Variable_name'] . ": " . $charset_item['Value'] . "</li>\n";
+							echo "\t<li>" . $charset_item['Variable_name'] . ': ' . $charset_item['Value'] . "</li>\n";
 						}
 
 						echo "</ul>\n";
@@ -155,8 +155,8 @@ class Diag
 					if ($r = $engine->db->load_single($query, true))
 					{
 						echo "<p class=\"debug\">SQL mode set</p>\n<ul>\n";
-						echo "\t<li>" . 'GLOBAL' . ": " . $r['@@GLOBAL.sql_mode'] . "</li>\n";
-						echo "\t<li>" . 'SESSION' . ": " . $r['@@SESSION.sql_mode'] . "</li>\n";
+						echo "\t<li>" . 'GLOBAL' . ': ' . $r['@@GLOBAL.sql_mode'] . "</li>\n";
+						echo "\t<li>" . 'SESSION' . ': ' . $r['@@SESSION.sql_mode'] . "</li>\n";
 						echo "</ul>\n";
 					}
 				}
@@ -295,7 +295,7 @@ EOD;
 		foreach ($log as $one)
 		{
 			$time = (int) $one[0];
-			$output .= date('ymdHis', $time) . sprintf(".%04d ", ($one[0] - $time) * 10000)
+			$output .= date('ymdHis', $time) . sprintf('.%04d ', ($one[0] - $time) * 10000)
 				. $one[3] . ': ' . $one[2] . "\n";
 		}
 
