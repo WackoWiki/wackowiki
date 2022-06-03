@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
  * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
  * modify the script for your needs, please conribute your improvements
  *
- * requires PHP Thumb Library <https://github.com/masterexploder/PHPThumb>
+ * requires PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * optional PhotoSwipe <https://photoswipe.com/>
  *
  * {{gallery
