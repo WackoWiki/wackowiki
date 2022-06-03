@@ -59,7 +59,7 @@ abstract class PHPThumb
 
 		if(!$this->validateRequestedResource($fileName))
 		{
-			throw new \InvalidArgumentException("Image file not found: {$fileName}");
+			throw new \InvalidArgumentException('Image file not found: ' . $fileName);
 		}
 
 		$this->setOptions($options);

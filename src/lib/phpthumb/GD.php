@@ -503,7 +503,7 @@ class GD extends PHPThumb
 	public function adaptiveResizeQuadrant(int $width, int $height, string $quadrant = 'C'): GD
 	{
 		// make sure our arguments are valid
-		if ($width  == 0)
+		if ($width == 0)
 		{
 			throw new \InvalidArgumentException('$width must be numeric and greater than zero');
 		}
@@ -903,7 +903,7 @@ class GD extends PHPThumb
 
 		if (!in_array($format, $validFormats))
 		{
-			throw new \InvalidArgumentException("Invalid format type specified in save function: " . $format);
+			throw new \InvalidArgumentException('Invalid format type specified in save function: ' . $format);
 		}
 
 		// make sure the directory is writeable
@@ -917,12 +917,12 @@ class GD extends PHPThumb
 				// throw an exception if not writeable
 				if (!is_writeable(dirname($fileName)))
 				{
-					throw new \RuntimeException("File is not writeable, and could not correct permissions: " . $fileName);
+					throw new \RuntimeException('File is not writeable, and could not correct permissions: ' . $fileName);
 				}
 			}
 			else
 			{ // throw an exception if not writeable
-				throw new \RuntimeException("File not writeable: " . $fileName);
+				throw new \RuntimeException('File not writeable: ' . $fileName);
 			}
 		}
 
@@ -1343,21 +1343,23 @@ class GD extends PHPThumb
 		{
 			if ($this->remoteImage)
 			{
-				throw new \Exception("Could not determine format of remote image: " . $this->fileName);
+				throw new \Exception('Could not determine format of remote image: ' . $this->fileName);
 			}
 			else
 			{
-				throw new \Exception("File is not a valid image: " . $this->fileName);
+				throw new \Exception('File is not a valid image: ' . $this->fileName);
 			}
 		}
 
 		$mimeType = $formatInfo['mime'] ?? null;
 
 		$this->format = match ($mimeType) {
+			'image/avif' => 'AVIF',
 			'image/gif'  => 'GIF',
 			'image/jpeg' => 'JPG',
 			'image/png'  => 'PNG',
-			default      => throw new \Exception("Image format not supported: " . $mimeType),
+			'image/webp' => 'WEBP',
+			default      => throw new \Exception('Image format not supported: ' . $mimeType),
 		};
 	}
 
@@ -1375,19 +1377,18 @@ class GD extends PHPThumb
 			'GIF'	=> $gdInfo['GIF Create Support'],
 			'JPG'	=> isset($gdInfo['JPG Support']) || isset($gdInfo['JPEG Support']),
 			'PNG'	=> $gdInfo[$this->format . ' Support'],
-			'WEBP'	=> $gdInfo[$this->format . ' Support'],
+			'WEBP'	=> $gdInfo['WebP Support'],
 			default	=> false,
 		};
 
+		$suffix		= strtolower($this->format);
+		$compiled	= function_exists('image' . $suffix) && function_exists('imagecreatefrom' . $suffix);
+
+		$isCompatible = $isCompatible & $compiled;
+
 		if (!$isCompatible)
 		{
-			// one last check for "JPEG" instead
-			$isCompatible = $gdInfo['JPEG Support'];
-
-			if (!$isCompatible)
-			{
-				throw new \Exception("Your GD installation does not support " . $this->format . " image types");
-			}
+			throw new \Exception('Your GD installation does not support ' . $this->format . ' image types');
 		}
 	}
 
