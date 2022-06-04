@@ -11,7 +11,7 @@ if (!defined('IN_WACKO'))
 
 class Ut
 {
-	static function untag($xml, $tag)
+	static function untag($xml, $tag): string
 	{
 		$z = strpos ($xml, '<' . $tag . '>');
 
@@ -60,7 +60,7 @@ class Ut
 	//		$token_complexity = 2 -- token consists of uppercase, lowercase, digits
 	//		$token_complexity = 3 -- token consists of uppercase, lowercase, digits and symbols
 	// default complexity is safe alphanumeric
-	static function random_token($length = 10, $token_complexity = 2)
+	static function random_token($length = 10, $token_complexity = 2): string
 	{
 		static $syms = [
 			'abcdefghijklmnopqrstuvwxyz',
@@ -171,14 +171,14 @@ class Ut
 	}
 
 	// legacy from wacko class
-	static function debug_print_r($array)
+	static function debug_print_r($array): void
 	{
 		echo '<pre>';
 		print_r($array);
 		echo '</pre>' . "\n";
 	}
 
-	static function dbg()
+	static function dbg(): void
 	{
 		static $running = 1;
 
@@ -203,7 +203,7 @@ class Ut
 		}
 	}
 
-	static function backtrace($trace = null)
+	static function backtrace($trace = null): string
 	{
 		$trace || $trace = debug_backtrace();
 
@@ -227,7 +227,7 @@ class Ut
 	}
 
 	// helper for error diags in classes: return file:line from where class method called from out of class
-	static function callee($class_filter)
+	static function callee($class_filter): string
 	{
 		$bt		= debug_backtrace();
 		$dir	= dirname(__FILE__, 2) . '/';
@@ -310,7 +310,7 @@ class Ut
 			});
 	}
 
-	static function expand_braces($text)
+	static function expand_braces($text): array
 	{
 		if (preg_match('/^(.*?)\{([^{}]*)\}(.*)$/', $text, $match))
 		{
@@ -328,7 +328,7 @@ class Ut
 	}
 
 	// delete all (or older than $ttl seconds) files in directory
-	static function purge_directory($directory, $ttl = 0, $mask = '*')
+	static function purge_directory($directory, $ttl = 0, $mask = '*'): int
 	{
 		$n		= 0;
 		$past	= time() - $ttl;
@@ -350,7 +350,7 @@ class Ut
 	 * For the purposes of this function, the encodings ISO-8859-1, ISO-8859-15, UTF-8, cp866, cp1251, cp1252, and KOI8-R are effectively equivalent,
 	 * provided the string itself is valid for the encoding, as the characters affected by htmlspecialchars() occupy the same positions in all of these encodings.
 	 */
-	static function html($string, $double_encode = true, $charset = HTML_ENTITIES_CHARSET)
+	static function html($string, $double_encode = true, $charset = HTML_ENTITIES_CHARSET): string
 	{
 		$string ??= '';
 
@@ -376,7 +376,7 @@ class Ut
 				: json_decode($text, true);
 	}
 
-	static function random_bytes($length)
+	static function random_bytes($length): string
 	{
 		if ($length <= 0)
 		{
@@ -424,17 +424,17 @@ class Ut
 	}
 
 	// checks if the parameter is an empty string or a string containing only whitespace
-	static function is_blank($str)
+	static function is_blank($str): bool
 	{
 		return ctype_space($str) || $str === '';
 	}
 
-	static function is_empty($val)
+	static function is_empty($val): bool
 	{
 		return $val === '' || $val === null || $val === false;
 	}
 
-	static function intval($number, $fail_open = false)
+	static function intval($number, $fail_open = false): int
 	{
 		if (is_numeric($number))
 		{
@@ -461,7 +461,7 @@ class Ut
 
 	// from Random_* Compatibility Library
 	// Copyright (c) 2015 Paragon Initiative Enterprises
-	static function rand($min, $max)
+	static function rand($min, $max): int
 	{
 		$min = Ut::intval($min);
 		$max = Ut::intval($max);
@@ -532,13 +532,13 @@ class Ut
 
 	// rfc822/rfc1123 UTC date format used everywhere in http
 	// current time by default, or looong ago date for -1
-	static function http_date($time = null)
+	static function http_date($time = null): string
 	{
 		return gmdate('D, d M Y H:i:s',
 			Ut::is_empty($time)? time() : ($time < 0? 444444444 : (int) $time)) . ' GMT';
 	}
 
-	static function http64_encode($data)
+	static function http64_encode($data): string
 	{
 		return strtr(rtrim(base64_encode($data), '='), '+/', '-_');
 	}
@@ -554,7 +554,7 @@ class Ut
 		return str_replace('&amp;', '&', $text);
 	}
 
-	static function strip_all_tags($string, $remove_nl = false)
+	static function strip_all_tags($string, $remove_nl = false): string
 	{
 		$string = preg_replace('@<(script|style)[^>]*?>.*?</\\1>@usi', '', $string);
 		$string = strip_tags($string);
@@ -598,7 +598,7 @@ class Ut
 	}
 
 	// query uri part assignment encoder, strictly on rfc3986 3.4 charset, without = and & and + (possible space) and ' (possible quote:)
-	static function qencode($name, $value)
+	static function qencode($name, $value): string
 	{
 		static $rfc3986 = '#[^a-zA-Z\d._~/?:@!$()*,;-]#';
 		return static::urlencode($rfc3986, $name) . '=' . static::urlencode($rfc3986, $value);

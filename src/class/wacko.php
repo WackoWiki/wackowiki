@@ -8,16 +8,16 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
-	private array $acl					= [];
-	private array $acl_cache				= [];
-	private array $category_cache			= [];
-	private array $file_cache				= [];
+	private array $acl				= [];
+	private array $acl_cache		= [];
+	private array $category_cache	= [];
+	private array $file_cache		= [];
 	private $page_cache				= null;
-	private array $page_id_cache			= [];
-	private array $page_tag_cache			= [];
+	private array $page_id_cache	= [];
+	private array $page_tag_cache	= [];
 	private $wanted_cache			= null;
-	private bool $format_safe			= true;		// for htmlspecialchars() in pre_link
-	private array $search_engines			= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
+	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
+	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
 	public $charset;
 	public $config;								// @deprecated, but will live for a looong time
@@ -29,19 +29,19 @@ class Wacko
 	public $tag;
 	public $module;
 	public $method					= '';
-	public $forum					= false;
-	public $canonical				= false;
+	public bool $forum				= false;
+	public bool $canonical			= false;
 	public $categories;
 	public $watch					= [];
 	public $notify_lang				= null;
-	public $is_watched				= false;
-	public $hide_revisions			= false;
-	public $context					= [];		// page context, used for correct processing of inclusions
+	public bool $is_watched			= false;
+	public bool $hide_revisions		= false;
+	public array $context			= [];		// page context, used for correct processing of inclusions
 	public $current_context			= 0;		// current context level
 	public $header_count			= 0;
-	public $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
-	public $first_inclusion			= [];		// for backlinks
-	public $toc_context				= [];
+	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
+	public array $first_inclusion	= [];		// for backlinks
+	public array $toc_context		= [];
 	public $language				= null;
 	public $languages				= null;
 	public $user_lang				= null;
@@ -50,10 +50,10 @@ class Wacko
 	public $numerate_links			= null;
 	public $post_wacko_action		= null;
 	public $page_lang				= null;
-	public $html_addition			= [];
-	public $hide_article_header		= false;
-	public $no_way_back				= false;	// set to true to prevent saving page as the goback-after-login
-	public array $paragrafica_styles		= [
+	public array $html_addition			= [];
+	public bool $hide_article_header	= false;
+	public bool $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
+	public array $paragrafica_styles	= [
 		'before'	=> [
 						'_before'	=> '',
 						'_after'	=> '',
@@ -281,7 +281,7 @@ class Wacko
 	 * @param string $file_name File name.
 	 * @return boolean
 	 */
-	function file_extension_check($file_name)
+	function file_extension_check($file_name): bool
 	{
 		$allowed_list	= $this->db->upload_allowed_exts;
 		$banned_list	= $this->db->upload_banned_exts;
@@ -377,7 +377,7 @@ class Wacko
 		return $this->db->is_null_date($text)? 0 : (int) $this->utc2time($text);
 	}
 
-	function sql2datetime($text, &$date, &$time)
+	function sql2datetime($text, &$date, &$time): void
 	{
 		$date	= $this->date_format($this->sql2time($text), $this->db->date_format);
 		$time	= $this->date_format($this->sql2time($text), $this->db->time_format);
@@ -663,7 +663,7 @@ class Wacko
 	 *
 	 * @return string Message set
 	 */
-	function _t($name, $lang = '')
+	function _t($name, $lang = ''): string|array
 	{
 		if ($this->db->multilanguage)
 		{
@@ -988,7 +988,8 @@ class Wacko
 	function cache_page($page, $metadata_only = false): void
 	{
 		// do not override current page
-		if ((isset($this->page['page_id']) && isset($page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only) || empty($page))
+		if ((isset($this->page['page_id']) && isset($page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only)
+			|| empty($page))
 		{
 			return;
 		}
@@ -2145,7 +2146,7 @@ class Wacko
 					{
 						if (mb_substr($this->tag, 0, mb_strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
 						{
-							$xml->feed(); // $this->tag
+							$xml->feed();
 						}
 					}
 				}
@@ -2444,8 +2445,6 @@ class Wacko
 
 		if ($account_status === false)
 		{
-			// $this->add_user_page($user['user_name'], $user['user_lang']);
-
 			// send email
 			if ($this->db->enable_email)
 			{
@@ -2657,8 +2656,7 @@ class Wacko
 
 						$_subject	=	$this->_t($subject[0]) . " '$subject[1]'";
 
-						$_body		=	# $this->_t('EmailModerator') . ".\n\n" .
-										Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n\n" .
+						$_body		=	Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n\n" .
 										"'" . $body[2] . "'" . "\n" .
 										$body[3] . "\n\n";
 
@@ -5571,7 +5569,7 @@ class Wacko
 	}
 
 	// ACCESS CONTROL
-	function is_admin()
+	function is_admin(): int
 	{
 		if (isset($this->sess->admin_it_is))
 		{
@@ -6332,7 +6330,7 @@ class Wacko
 	}
 
 	// MENUS
-	function get_default_menu($lang = '')
+	function get_default_menu($lang = ''): array
 	{
 		if (!$lang)
 		{
@@ -6344,7 +6342,7 @@ class Wacko
 		return $this->get_user_menu($user_id, $lang, true);
 	}
 
-	function get_user_menu($user_id, $lang = '', $public = false)
+	function get_user_menu($user_id, $lang = '', $public = false): array
 	{
 		$user_menu_formatted = [];
 
@@ -7926,8 +7924,8 @@ class Wacko
 		switch ($char_classes)
 		{
 			case 1:
-				if (   !preg_match('/\p{N}+/',				$pwd)
-					|| !preg_match('/\p{L}+/u',				$pwd))
+				if (   !preg_match('/\p{N}+/',					$pwd)
+					|| !preg_match('/\p{L}+/u',					$pwd))
 				{
 					++$error;
 				}
@@ -7943,7 +7941,7 @@ class Wacko
 				break;
 
 			case 3:
-				if (   !preg_match('/\p{N}+/',				$pwd)
+				if (   !preg_match('/\p{N}+/',					$pwd)
 					|| !preg_match('/\p{Lu}+/u',				$pwd)
 					|| !preg_match('/\p{Ll}+/u',				$pwd)
 					|| !preg_match('/[\p{Z}|\p{S}|\p{P}]+/',	$pwd))
@@ -8003,7 +8001,7 @@ class Wacko
 	//		$params		= $_GET parameters to be passed with the page link (as href-formatted array or string)
 	// returns an array with 'text' (navigation) and 'offset' (offset value
 	// for SQL queries) elements.
-	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = '')
+	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = ''): array
 	{
 		$total		= (int) $total;
 		$name		= 'p';
@@ -8269,7 +8267,7 @@ class Wacko
 		// check event level: do we have to log it?
 		if (    (int) $this->db->log_level === 0
 			|| ((int) $this->db->log_level !== 7
-			&& $level > (int) $this->db->log_level))
+				&& $level > (int) $this->db->log_level))
 		{
 			return true;
 		}
