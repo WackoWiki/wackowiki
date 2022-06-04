@@ -13,7 +13,7 @@ class Diag
 	}
 
 	// DEBUG INFO
-	static function full_disclosure(&$config, &$http, &$engine, $cwd)
+	static function full_disclosure(&$config, &$http, &$engine, $cwd): void
 	{
 		chdir($cwd);
 
@@ -213,7 +213,7 @@ class Diag
 	static $log = [];
 
 	// add some debug output to DEBUG file and popup-window in browser
-	static function dbg()
+	static function dbg(): void
 	{
 		static $code = ['BLACK' => 0, 'BLUE' => 1, 'GOLD' => 2, 'ORANGE' => 3, 'RED' => 4];
 
@@ -250,7 +250,7 @@ class Diag
 		}
 	}
 
-	private static function dbg_console($debug)
+	private static function dbg_console($debug): void
 	{
 		if (!($log = static::$log))
 		{
