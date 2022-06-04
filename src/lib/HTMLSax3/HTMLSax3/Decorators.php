@@ -21,7 +21,6 @@
 /**
  * Decorators for dealing with parser options
  * @package XML_HTMLSax3
- * @version $Id: Decorators.php,v 1.2 2007/10/29 21:41:35 hfuecks Exp $
  * @see XML_HTMLSax3::set_option
  */
 /**
@@ -63,7 +62,9 @@ class XML_HTMLSax3_Trim
 	function trimData(&$parser, $data): void
 	{
 		$data = trim($data);
-		if ($data != '') {
+
+		if ($data != '')
+		{
 			$this->orig_obj->{$this->orig_method}($parser, $data);
 		}
 	}
@@ -167,8 +168,10 @@ class XML_HTMLSax3_Linefeed
 	 */
 	function breakData(&$parser, $data): void
 	{
-		$data = explode("\n",$data);
-		foreach ( $data as $chunk ) {
+		$data = explode("\n", $data);
+
+		foreach ($data as $chunk)
+		{
 			$this->orig_obj->{$this->orig_method}($parser, $chunk);
 		}
 	}
@@ -212,9 +215,10 @@ class XML_HTMLSax3_Tab
 	 */
 	function breakData(&$parser, $data): void
 	{
-		$data = explode("\t",$data);
+		$data = explode("\t", $data);
 
-		foreach ( $data as $chunk ) {
+		foreach ($data as $chunk)
+		{
 			$this->orig_obj->{$this->orig_method}($this, $chunk);
 		}
 	}
@@ -259,9 +263,10 @@ class XML_HTMLSax3_Entities_Parsed
 	 */
 	function breakData(&$parser, $data): void
 	{
-		$data = preg_split('/(&.+?;)/',$data,-1,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+		$data = preg_split('/(&.+?;)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
-		foreach ( $data as $chunk ) {
+		foreach ($data as $chunk)
+		{
 			$chunk = html_entity_decode($chunk, ENT_NOQUOTES, HTML_ENTITIES_CHARSET);
 			$this->orig_obj->{$this->orig_method}($this, $chunk);
 		}
@@ -306,9 +311,10 @@ class XML_HTMLSax3_Entities_Unparsed
 	 */
 	function breakData(&$parser, $data): void
 	{
-		$data = preg_split('/(&.+?;)/',$data,-1,PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+		$data = preg_split('/(&.+?;)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
-		foreach ( $data as $chunk ) {
+		foreach ($data as $chunk)
+		{
 			$this->orig_obj->{$this->orig_method}($this, $chunk);
 		}
 	}
@@ -354,20 +360,22 @@ class XML_HTMLSax3_Escape_Stripper
 	function strip(&$parser, $data): void
 	{
 		// Check for HTML comments first
-		if (str_starts_with($data, '--')) {
+		if (str_starts_with($data, '--'))
+		{
 			$patterns = [
 				'/^\-\-/',				// Opening comment: --
 				'/\-\-$/',				// Closing comment: --
 			];
-			$data = preg_replace($patterns,'',$data);
-
-			// Check for XML CDATA sections (note: don't do both!)
-		} else if (str_starts_with($data, '[')) {
+			$data = preg_replace($patterns, '', $data);
+		}
+		// Check for XML CDATA sections (note: don't do both!)
+		else if (str_starts_with($data, '['))
+		{
 			$patterns = [
 				'/^\[.*CDATA.*\[/s',	// Opening CDATA
 				'/\].*\]$/s',			// Closing CDATA
 			];
-			$data = preg_replace($patterns,'',$data);
+			$data = preg_replace($patterns, '', $data);
 		}
 
 		$this->orig_obj->{$this->orig_method}($this, $data);

@@ -21,19 +21,18 @@
 /**
  * Parsing states.
  * @package XML_HTMLSax3
- * @version $Id: States.php,v 1.3 2007/10/29 21:41:35 hfuecks Exp $
  */
 /**
  * Define parser states
  */
-const XML_HTMLSAX3_STATE_STOP = 0;
-const XML_HTMLSAX3_STATE_START = 1;
-const XML_HTMLSAX3_STATE_TAG = 2;
-const XML_HTMLSAX3_STATE_OPENING_TAG = 3;
-const XML_HTMLSAX3_STATE_CLOSING_TAG = 4;
-const XML_HTMLSAX3_STATE_ESCAPE = 6;
-const XML_HTMLSAX3_STATE_JASP = 7;
-const XML_HTMLSAX3_STATE_PI = 8;
+const XML_HTMLSAX3_STATE_STOP			= 0;
+const XML_HTMLSAX3_STATE_START			= 1;
+const XML_HTMLSAX3_STATE_TAG			= 2;
+const XML_HTMLSAX3_STATE_OPENING_TAG	= 3;
+const XML_HTMLSAX3_STATE_CLOSING_TAG	= 4;
+const XML_HTMLSAX3_STATE_ESCAPE			= 6;
+const XML_HTMLSAX3_STATE_JASP			= 7;
+const XML_HTMLSAX3_STATE_PI				= 8;
 /**
  * StartingState searches for the start of any XML tag
  * @package XML_HTMLSax3
@@ -49,11 +48,15 @@ class XML_HTMLSax3_StartingState
 	function parse(&$context)
 	{
 		$data = $context->scanUntilString('<');
-		if ($data != '') {
+
+		if ($data != '')
+		{
 			$context->handler_object_data->
 			{$context->handler_method_data}($context->htmlsax, $data);
 		}
+
 		$context->IgnoreCharacter();
+
 		return XML_HTMLSAX3_STATE_TAG;
 	}
 }
@@ -105,14 +108,21 @@ class XML_HTMLSax3_ClosingTagState
 	function parse(&$context)
 	{
 		$tag = $context->scanUntilCharacters('/>');
-		if ($tag != '') {
+
+		if ($tag != '')
+		{
 			$char = $context->scanCharacter();
-			if ($char == '/') {
+
+			if ($char == '/')
+			{
 				$char = $context->scanCharacter();
-				if ($char != '>') {
+
+				if ($char != '>')
+				{
 					$context->unscanCharacter();
 				}
 			}
+
 			$context->handler_object_element->
 			{$context->handler_method_closing}($context->htmlsax, $tag, FALSE);
 		}
@@ -141,28 +151,40 @@ class XML_HTMLSax3_OpeningTagState
 
 		$context->ignoreWhitespace();
 		$attributename = $context->scanUntilCharacters("=/> \n\r\t");
+
 		while ($attributename != '') {
 			$attributevalue = null;
 			$context->ignoreWhitespace();
 			$char = $context->scanCharacter();
-			if ($char == '=') {
+
+			if ($char == '=')
+			{
 				$context->ignoreWhitespace();
 				$char = $context->ScanCharacter();
-				if ($char == '"') {
+
+				if ($char == '"')
+				{
 					$attributevalue= $context->scanUntilString('"');
 					$context->IgnoreCharacter();
-				} else if ($char == "'") {
+				}
+				else if ($char == "'")
+				{
 					$attributevalue = $context->scanUntilString("'");
 					$context->IgnoreCharacter();
-				} else {
+				}
+				else
+				{
 					$context->unscanCharacter();
 					$attributevalue =
 					$context->scanUntilCharacters("> \n\r\t");
 				}
-			} else if ($char !== null) {
+			}
+			else if ($char !== null)
+			{
 				$attributevalue = null;
 				$context->unscanCharacter();
 			}
+
 			$Attributes[$attributename] = $attributevalue;
 
 			$context->ignoreWhitespace();
@@ -180,25 +202,34 @@ class XML_HTMLSax3_OpeningTagState
 	function parse(&$context)
 	{
 		$tag = $context->scanUntilCharacters("/> \n\r\t");
-		if ($tag != '') {
-			$this->attrs = [];
-			$Attributes = $this->parseAttributes($context);
-			$char = $context->scanCharacter();
-			if ($char == '/') {
+
+		if ($tag != '')
+		{
+			$this->attrs	= [];
+			$Attributes		= $this->parseAttributes($context);
+			$char			= $context->scanCharacter();
+
+			if ($char == '/')
+			{
 				$char = $context->scanCharacter();
-				if ($char != '>') {
+
+				if ($char != '>')
+				{
 					$context->unscanCharacter();
 				}
+
 				$context->handler_object_element->
 				{$context->handler_method_opening}($context->htmlsax, $tag,
-				$Attributes, TRUE);
+				$Attributes, true);
 				$context->handler_object_element->
 				{$context->handler_method_closing}($context->htmlsax, $tag,
-				TRUE);
-			} else {
+				true);
+			}
+			else
+			{
 				$context->handler_object_element->
 				{$context->handler_method_opening}($context->htmlsax, $tag,
-				$Attributes, FALSE);
+				$Attributes, false);
 			}
 		}
 
@@ -221,29 +252,40 @@ class XML_HTMLSax3_EscapeState
 	function parse(&$context)
 	{
 		$char = $context->ScanCharacter();
-		if ($char == '-') {
+
+		if ($char == '-')
+		{
 			$char = $context->ScanCharacter();
-			if ($char == '-') {
+
+			if ($char == '-')
+			{
 				$context->unscanCharacter();
 				$context->unscanCharacter();
 				$text = $context->scanUntilString('-->');
 				$text .= $context->scanCharacter();
 				$text .= $context->scanCharacter();
-			} else {
+			}
+			else
+			{
 				$context->unscanCharacter();
 				$text = $context->scanUntilString('>');
 			}
-		} else if ( $char == '[') {
+		}
+		else if ($char == '[') {
 			$context->unscanCharacter();
 			$text = $context->scanUntilString(']>');
 			$text.= $context->scanCharacter();
-		} else {
+		}
+		else
+		{
 			$context->unscanCharacter();
 			$text = $context->scanUntilString('>');
 		}
 
 		$context->IgnoreCharacter();
-		if ($text != '') {
+
+		if ($text != '')
+		{
 			$context->handler_object_escape->
 			{$context->handler_method_escape}($context->htmlsax, $text);
 		}
@@ -266,10 +308,13 @@ class XML_HTMLSax3_JaspState
 	function parse(&$context)
 	{
 		$text = $context->scanUntilString('%>');
-		if ($text != '') {
+
+		if ($text != '')
+		{
 			$context->handler_object_jasp->
 			{$context->handler_method_jasp}($context->htmlsax, $text);
 		}
+
 		$context->IgnoreCharacter();
 		$context->IgnoreCharacter();
 
@@ -290,12 +335,15 @@ class XML_HTMLSax3_PiState
 	 */
 	function parse(&$context)
 	{
-		$target = $context->scanUntilCharacters(" \n\r\t");
-		$data = $context->scanUntilString('?>');
-		if ($data != '') {
+		$target	= $context->scanUntilCharacters(" \n\r\t");
+		$data	= $context->scanUntilString('?>');
+
+		if ($data != '')
+		{
 			$context->handler_object_pi->
 			{$context->handler_method_pi}($context->htmlsax, $target, $data);
 		}
+
 		$context->IgnoreCharacter();
 		$context->IgnoreCharacter();
 

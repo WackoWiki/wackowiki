@@ -21,14 +21,15 @@
 /**
  * Main parser components
  * @package XML_HTMLSax3
- * @version $Id: HTMLSax3.php,v 1.2 2007/10/29 21:41:34 hfuecks Exp $
  */
 /**
  * Required classes
  */
-if (!defined('XML_HTMLSAX3')){
+if (!defined('XML_HTMLSAX3'))
+{
 	define('XML_HTMLSAX3', 'XML/');
 }
+
 require_once(XML_HTMLSAX3 . 'HTMLSax3/States.php');
 require_once(XML_HTMLSAX3 . 'HTMLSax3/Decorators.php');
 
@@ -157,15 +158,15 @@ class XML_HTMLSax3_StateParser
 	function __construct (& $htmlsax)
 	{
 		$this->htmlsax = & $htmlsax;
-		$this->State[XML_HTMLSAX3_STATE_START] = new XML_HTMLSax3_StartingState();
+		$this->State[XML_HTMLSAX3_STATE_START]			= new XML_HTMLSax3_StartingState();
 
-		$this->State[XML_HTMLSAX3_STATE_CLOSING_TAG] = new XML_HTMLSax3_ClosingTagState();
-		$this->State[XML_HTMLSAX3_STATE_TAG] = new XML_HTMLSax3_TagState();
-		$this->State[XML_HTMLSAX3_STATE_OPENING_TAG] = new XML_HTMLSax3_OpeningTagState();
+		$this->State[XML_HTMLSAX3_STATE_CLOSING_TAG]	= new XML_HTMLSax3_ClosingTagState();
+		$this->State[XML_HTMLSAX3_STATE_TAG]			= new XML_HTMLSax3_TagState();
+		$this->State[XML_HTMLSAX3_STATE_OPENING_TAG]	= new XML_HTMLSax3_OpeningTagState();
 
-		$this->State[XML_HTMLSAX3_STATE_PI] = new XML_HTMLSax3_PiState();
-		$this->State[XML_HTMLSAX3_STATE_JASP] = new XML_HTMLSax3_JaspState();
-		$this->State[XML_HTMLSAX3_STATE_ESCAPE] = new XML_HTMLSax3_EscapeState();
+		$this->State[XML_HTMLSAX3_STATE_PI]				= new XML_HTMLSax3_PiState();
+		$this->State[XML_HTMLSAX3_STATE_JASP]			= new XML_HTMLSax3_JaspState();
+		$this->State[XML_HTMLSAX3_STATE_ESCAPE]			= new XML_HTMLSax3_EscapeState();
 	}
 
 	/**
@@ -195,7 +196,8 @@ class XML_HTMLSax3_StateParser
 	 */
 	function scanCharacter(): mixed
 	{
-		if ($this->position < $this->length) {
+		if ($this->position < $this->length)
+		{
 			return $this->rawtext[$this->position++];
 		}
 	}
@@ -211,7 +213,9 @@ class XML_HTMLSax3_StateParser
 	{
 		$start = $this->position;
 		$this->position = strpos($this->rawtext, $string, $start);
-		if ($this->position === FALSE) {
+
+		if ($this->position === false)
+		{
 			$this->position = $this->length;
 		}
 
@@ -247,14 +251,17 @@ class XML_HTMLSax3_StateParser
 	 */
 	function parse($data): void
 	{
-		if ($this->parser_options['XML_OPTION_TRIM_DATA_NODES'] == 1) {
+		if ($this->parser_options['XML_OPTION_TRIM_DATA_NODES'] == 1)
+		{
 			$decorator = new XML_HTMLSax3_Trim(
 			$this->handler_object_data,
 			$this->handler_method_data);
 			$this->handler_object_data =& $decorator;
 			$this->handler_method_data = 'trimData';
 		}
-		if ($this->parser_options['XML_OPTION_CASE_FOLDING'] == 1) {
+
+		if ($this->parser_options['XML_OPTION_CASE_FOLDING'] == 1)
+		{
 			$open_decor = new XML_HTMLSax3_CaseFolding(
 			$this->handler_object_element,
 			$this->handler_method_opening,
@@ -263,42 +270,53 @@ class XML_HTMLSax3_StateParser
 			$this->handler_method_opening ='foldOpen';
 			$this->handler_method_closing ='foldClose';
 		}
-		if ($this->parser_options['XML_OPTION_LINEFEED_BREAK'] == 1) {
+
+		if ($this->parser_options['XML_OPTION_LINEFEED_BREAK'] == 1)
+		{
 			$decorator = new XML_HTMLSax3_Linefeed(
 			$this->handler_object_data,
 			$this->handler_method_data);
 			$this->handler_object_data =& $decorator;
 			$this->handler_method_data = 'breakData';
 		}
-		if ($this->parser_options['XML_OPTION_TAB_BREAK'] == 1) {
+
+		if ($this->parser_options['XML_OPTION_TAB_BREAK'] == 1)
+		{
 			$decorator = new XML_HTMLSax3_Tab(
 			$this->handler_object_data,
 			$this->handler_method_data);
 			$this->handler_object_data =& $decorator;
 			$this->handler_method_data = 'breakData';
 		}
-		if ($this->parser_options['XML_OPTION_ENTITIES_UNPARSED'] == 1) {
+
+		if ($this->parser_options['XML_OPTION_ENTITIES_UNPARSED'] == 1)
+		{
 			$decorator = new XML_HTMLSax3_Entities_Unparsed(
 			$this->handler_object_data,
 			$this->handler_method_data);
 			$this->handler_object_data =& $decorator;
 			$this->handler_method_data = 'breakData';
 		}
-		if ($this->parser_options['XML_OPTION_ENTITIES_PARSED'] == 1) {
+
+		if ($this->parser_options['XML_OPTION_ENTITIES_PARSED'] == 1)
+		{
 			$decorator = new XML_HTMLSax3_Entities_Parsed(
 			$this->handler_object_data,
 			$this->handler_method_data);
 			$this->handler_object_data =& $decorator;
 			$this->handler_method_data = 'breakData';
 		}
+
 		// Note switched on by default
-		if ($this->parser_options['XML_OPTION_STRIP_ESCAPES'] == 1) {
+		if ($this->parser_options['XML_OPTION_STRIP_ESCAPES'] == 1)
+		{
 			$decorator = new XML_HTMLSax3_Escape_Stripper(
 			$this->handler_object_escape,
 			$this->handler_method_escape);
 			$this->handler_object_escape =& $decorator;
 			$this->handler_method_escape = 'strip';
 		}
+
 		$this->rawtext = $data;
 		$this->length = strlen($data);
 		$this->position = 0;
@@ -338,13 +356,13 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	function __construct(& $htmlsax)
 	{
 		parent::__construct($htmlsax);
-		$this->parser_options['XML_OPTION_TRIM_DATA_NODES'] = 0;
-		$this->parser_options['XML_OPTION_CASE_FOLDING'] = 0;
-		$this->parser_options['XML_OPTION_LINEFEED_BREAK'] = 0;
-		$this->parser_options['XML_OPTION_TAB_BREAK'] = 0;
-		$this->parser_options['XML_OPTION_ENTITIES_PARSED'] = 0;
-		$this->parser_options['XML_OPTION_ENTITIES_UNPARSED'] = 0;
-		$this->parser_options['XML_OPTION_STRIP_ESCAPES'] = 0;
+		$this->parser_options['XML_OPTION_TRIM_DATA_NODES']		= 0;
+		$this->parser_options['XML_OPTION_CASE_FOLDING']		= 0;
+		$this->parser_options['XML_OPTION_LINEFEED_BREAK']		= 0;
+		$this->parser_options['XML_OPTION_TAB_BREAK']			= 0;
+		$this->parser_options['XML_OPTION_ENTITIES_PARSED']		= 0;
+		$this->parser_options['XML_OPTION_ENTITIES_UNPARSED']	= 0;
+		$this->parser_options['XML_OPTION_STRIP_ESCAPES']		= 0;
 	}
 	/**
 	 * Returns a string from the current position until the first instance of
@@ -355,8 +373,8 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 */
 	function scanUntilCharacters($string)
 	{
-		$startpos = $this->position;
-		$length = strcspn($this->rawtext, $string, $startpos);
+		$startpos	= $this->position;
+		$length		= strcspn($this->rawtext, $string, $startpos);
 		$this->position += $length;
 
 		return substr($this->rawtext, $startpos, $length);
@@ -399,8 +417,7 @@ class XML_HTMLSax3_NullHandler
 	 * @return void
 	 */
 	function DoNothing(): void
-	{
-	}
+	{}
 }
 
 /**
@@ -454,10 +471,14 @@ class XML_HTMLSax3
 	 */
 	function set_object(&$object): mixed
 	{
-		if ( is_object($object) ) {
+		if (is_object($object))
+		{
 			$this->state_parser->handler_default =& $object;
+
 			return true;
-		} else {
+		}
+		else
+		{
 			require_once('PEAR.php');
 			PEAR::raiseError('XML_HTMLSax3::set_object requires '.
 				'an object instance');
@@ -493,12 +514,16 @@ class XML_HTMLSax3
 	 */
 	function set_option($name, $value=1): bool
 	{
-		if ( array_key_exists($name,$this->state_parser->parser_options) ) {
+		if ( array_key_exists($name,$this->state_parser->parser_options) )
+		{
 			$this->state_parser->parser_options[$name] = $value;
+
 			return true;
-		} else {
+		}
+		else
+		{
 			require_once('PEAR.php');
-			PEAR::raiseError('XML_HTMLSax3::set_option('.$name.') illegal');
+			PEAR::raiseError('XML_HTMLSax3::set_option(' . $name . ') illegal');
 		}
 	}
 
@@ -527,7 +552,7 @@ class XML_HTMLSax3
 	 * <br />The open handler method must accept three arguments; the parser,
 	 * the tag name and an array of attributes e.g.
 	 * <pre>
-	 * function myOpenHander(& $parser,$tagname,$attrs=array()){}
+	 * function myOpenHander(& $parser, $tagname, $attrs=[]){}
 	 * </pre>
 	 * The close handler method must accept two arguments; the parser and
 	 * the tag name e.g.
@@ -609,7 +634,7 @@ class XML_HTMLSax3
 	 * <br />Intended for use from within a user defined handler called
 	 * via the $parser reference e.g.
 	 * <pre>
-	 * function myDataHandler(& $parser,$data) {
+	 * function myDataHandler(& $parser, $data) {
 	 *     echo( 'Current position: '.$parser->get_current_position() );
 	 * }
 	 * </pre>
