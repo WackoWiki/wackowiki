@@ -6,7 +6,7 @@ function bb2_run_whitelist($package)
 	if (function_exists('bb2_read_whitelist')) {
 		$whitelists = bb2_read_whitelist();
 	} else {
-		$whitelists = @parse_ini_file(dirname(BB2_CORE) . "/whitelist.ini");
+		$whitelists = @parse_ini_file(dirname(BB2_CORE) . '/whitelist.ini');
 	}
 
 	if (@!empty($whitelists['ip'])) {
@@ -20,10 +20,10 @@ function bb2_run_whitelist($package)
 		}
 	}
 	if (@!empty($whitelists['url'])) {
-		if (!str_contains($package['request_uri'], "?")) {
+		if (!str_contains($package['request_uri'], '?')) {
 			$request_uri = $package['request_uri'];
 		} else {
-			$request_uri = substr($package['request_uri'], 0, strpos($package['request_uri'], "?"));
+			$request_uri = substr($package['request_uri'], 0, strpos($package['request_uri'], '?'));
 		}
 		foreach (array_filter($whitelists['url']) as $url) {
 			$pos = strpos($request_uri, $url);

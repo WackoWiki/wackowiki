@@ -1,5 +1,5 @@
-<?php if (!defined('BB2_CWD')) die("I said no cheating!");
-const BB2_VERSION = "2.2.24";
+<?php if (!defined('BB2_CWD')) die('I said no cheating!');
+const BB2_VERSION = '2.2.24';
 
 // Bad Behavior entry point is bb2_start()
 // If you're reading this, you are probably lost.
@@ -7,15 +7,15 @@ const BB2_VERSION = "2.2.24";
 
 const BB2_CORE = __DIR__;
 
-require_once(BB2_CORE . "/functions.inc.php");
+require_once(BB2_CORE . '/functions.inc.php');
 
 // Kill 'em all!
-function bb2_banned($settings, $package, $key, $previous_key=false)
+function bb2_banned($settings, $package, $key, $previous_key = false)
 {
 	// Some spambots hit too hard. Slow them down a bit.
 	sleep(2);
 
-	require_once(BB2_CORE . "/banned.inc.php");
+	require_once(BB2_CORE . '/banned.inc.php');
 	bb2_display_denial($settings, $package, $key, $previous_key);
 	bb2_log_denial($settings, $package, $key, $previous_key);
 	if (is_callable('bb2_banned_callback')) {
@@ -35,7 +35,7 @@ function bb2_approved($settings, $package)
 
 	// Decide what to log on approved requests.
 	if (($settings['verbose'] && $settings['logging']) || empty($package['user_agent'])) {
-		bb2_db_query(bb2_insert($settings, $package, "00000000"));
+		bb2_db_query(bb2_insert($settings, $package, '00000000'));
 	}
 }
 
@@ -48,7 +48,7 @@ function bb2_reverse_proxy($settings, $headers_mixed)
 		return false;
 	}
 
-	$addrs = @array_reverse(preg_split("/[\s,]+/", $headers_mixed[$header]));
+	$addrs = @array_reverse(preg_split('/[\s,]+/', $headers_mixed[$header]));
 	# Skip our known reverse proxies and private addresses
 	if (!empty($settings['reverse_proxy_addresses'])) {
 		foreach ($addrs as $addr) {
@@ -93,21 +93,21 @@ function bb2_start($settings)
 	}
 
 	// IPv6 - IPv4 compatibility mode hack
-	$_SERVER['REMOTE_ADDR'] = preg_replace("/^::ffff:/", "", $_SERVER['REMOTE_ADDR']);
+	$_SERVER['REMOTE_ADDR'] = preg_replace('/^::ffff:/', '', $_SERVER['REMOTE_ADDR']);
 
 	// Reconstruct the HTTP entity, if present.
 	$request_entity = [];
-	if (isset($_SERVER['REQUEST_METHOD']) && (!strcasecmp($_SERVER['REQUEST_METHOD'], "POST") || !strcasecmp($_SERVER['REQUEST_METHOD'], "PUT"))) {
+	if (isset($_SERVER['REQUEST_METHOD']) && (!strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') || !strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT'))) {
 		foreach ($_POST as $h => $v) {
 			if (is_array($v)) {
 				# Workaround, see Bug #12
-				$v = "Array";
+				$v = 'Array';
 			}
 			$request_entity[$h] = $v;
 		}
 	}
 
-	$request_uri = $_SERVER["REQUEST_URI"];
+	$request_uri = $_SERVER['REQUEST_URI'];
 	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
 
 	if ($settings['reverse_proxy'] && $ip = bb2_reverse_proxy($settings, $headers_mixed)) {
@@ -132,27 +132,27 @@ function bb2_screen($settings, $package)
 	// CloudFlare-specific checks not handled by reverse proxy code
 	// Thanks to butchs at Simple Machines
 	if (array_key_exists('Cf-Connecting-Ip', $package['headers_mixed'])) {
-		require_once(BB2_CORE . "/cloudflare.inc.php");
+		require_once(BB2_CORE . '/cloudflare.inc.php');
 		$r = bb2_cloudflare($package);
 		if ($r !== false && $r != $package['ip']) return $r;
 	}
 
 	// First check the whitelist
-	require_once(BB2_CORE . "/whitelist.inc.php");
+	require_once(BB2_CORE . '/whitelist.inc.php');
 	if (!bb2_run_whitelist($package)) {
 		// Now check the blacklist
-		require_once(BB2_CORE . "/blacklist.inc.php");
+		require_once(BB2_CORE . '/blacklist.inc.php');
 		if ($r = bb2_blacklist($package)) return $r;
 
 		// Check the http:BL
-		require_once(BB2_CORE . "/blackhole.inc.php");
+		require_once(BB2_CORE . '/blackhole.inc.php');
 		if ($r = bb2_httpbl($settings, $package)) {
 			if ($r == 1) return false;	# whitelisted
 			return $r;
 		}
 
 		// Check for common stuff
-		require_once(BB2_CORE . "/common_tests.inc.php");
+		require_once(BB2_CORE . '/common_tests.inc.php');
 		if ($r = bb2_protocol($settings, $package)) return $r;
 		if ($r = bb2_cookies($settings, $package)) return $r;
 		if ($r = bb2_misc_headers($settings, $package)) return $r;
@@ -160,29 +160,29 @@ function bb2_screen($settings, $package)
 		// Specific checks
 		$ua = $package['user_agent'] ?? '';
 		// Search engine checks come first
-		if (stripos($ua, "bingbot") !== FALSE || stripos($ua, "msnbot") !== FALSE || stripos($ua, "MS Search") !== FALSE) {
-			require_once(BB2_CORE . "/searchengine.inc.php");
+		if (stripos($ua, 'bingbot') !== false || stripos($ua, 'msnbot') !== false || stripos($ua, 'MS Search') !== false) {
+			require_once(BB2_CORE . '/searchengine.inc.php');
 			if ($r = bb2_msnbot($package)) {
 				if ($r == 1) return false;	# whitelisted
 				return $r;
 			}
 			return false;
-		} elseif (stripos($ua, "Googlebot") !== FALSE || stripos($ua, "Mediapartners-Google") !== FALSE || stripos($ua, "Google Web Preview") !== FALSE) {
-			require_once(BB2_CORE . "/searchengine.inc.php");
+		} elseif (stripos($ua, 'Googlebot') !== false || stripos($ua, 'Mediapartners-Google') !== false || stripos($ua, 'Google Web Preview') !== false) {
+			require_once(BB2_CORE . '/searchengine.inc.php');
 			if ($r = bb2_google($package)) {
 				if ($r == 1) return false;	# whitelisted
 				return $r;
 			}
 			return false;
-		} elseif (stripos($ua, "Yahoo! Slurp") !== FALSE || stripos($ua, "Yahoo! SearchMonkey") !== FALSE) {
-			require_once(BB2_CORE . "/searchengine.inc.php");
+		} elseif (stripos($ua, 'Yahoo! Slurp') !== false || stripos($ua, 'Yahoo! SearchMonkey') !== false) {
+			require_once(BB2_CORE . '/searchengine.inc.php');
 			if ($r = bb2_yahoo($package)) {
 				if ($r == 1) return false;	# whitelisted
 				return $r;
 			}
 			return false;
-		} elseif (stripos($ua, "Baidu") !== FALSE) {
-			require_once(BB2_CORE . "/searchengine.inc.php");
+		} elseif (stripos($ua, 'Baidu') !== false) {
+			require_once(BB2_CORE . '/searchengine.inc.php');
 			if ($r = bb2_baidu($package)) {
 				if ($r == 1) return false;	# whitelisted
 				return $r;
@@ -190,42 +190,42 @@ function bb2_screen($settings, $package)
 			return false;
 		}
 		// MSIE checks
-		if (stripos($ua, "; MSIE") !== FALSE) {
+		if (stripos($ua, '; MSIE') !== false) {
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . "/browser.inc.php");
-			if (stripos($ua, "Opera") !== FALSE) {
+			require_once(BB2_CORE . '/browser.inc.php');
+			if (stripos($ua, 'Opera') !== false) {
 				if ($r = bb2_opera($package)) return $r;
 			} else {
 				if ($r = bb2_msie($package)) return $r;
 			}
-		} elseif (stripos($ua, "Konqueror") !== FALSE) {
+		} elseif (stripos($ua, 'Konqueror') !== false) {
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . "/browser.inc.php");
+			require_once(BB2_CORE . '/browser.inc.php');
 			if ($r = bb2_konqueror($package)) return $r;
-		} elseif (stripos($ua, "Opera") !== FALSE) {
+		} elseif (stripos($ua, 'Opera') !== false) {
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . "/browser.inc.php");
+			require_once(BB2_CORE . '/browser.inc.php');
 			if ($r = bb2_opera($package)) return $r;
-		} elseif (stripos($ua, "Safari") !== FALSE) {
+		} elseif (stripos($ua, 'Safari') !== false) {
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . "/browser.inc.php");
+			require_once(BB2_CORE . '/browser.inc.php');
 			if ($r = bb2_safari($package)) return $r;
-		} elseif (stripos($ua, "Lynx") !== FALSE) {
+		} elseif (stripos($ua, 'Lynx') !== false) {
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . "/browser.inc.php");
+			require_once(BB2_CORE . '/browser.inc.php');
 			if ($r = bb2_lynx($package)) return $r;
-		} elseif (stripos($ua, "MovableType") !== FALSE) {
-			require_once(BB2_CORE . "/movabletype.inc.php");
+		} elseif (stripos($ua, 'MovableType') !== false) {
+			require_once(BB2_CORE . '/movabletype.inc.php');
 			if ($r = bb2_movabletype($package)) return $r;
-		} elseif (stripos($ua, "Mozilla") !== FALSE && stripos($ua, "Mozilla") == 0) {
+		} elseif (stripos($ua, 'Mozilla') !== false && stripos($ua, 'Mozilla') == 0) {
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . "/browser.inc.php");
+			require_once(BB2_CORE . '/browser.inc.php');
 			if ($r = bb2_mozilla($package)) return $r;
 		}
 
 		// More intensive screening applies to POST requests
 		if (!strcasecmp('POST', $package['request_method'])) {
-			require_once(BB2_CORE . "/post.inc.php");
+			require_once(BB2_CORE . '/post.inc.php');
 			if ($r = bb2_post($settings, $package)) return $r;
 		}
 	}

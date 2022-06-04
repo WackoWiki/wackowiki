@@ -3,7 +3,7 @@
 // Functions called when a request has been denied
 // This part can be gawd-awful slow, doesn't matter :)
 
-require_once(BB2_CORE . "/responses.inc.php");
+require_once(BB2_CORE . '/responses.inc.php');
 
 function bb2_housekeeping($settings, $package)
 {
@@ -24,22 +24,22 @@ function bb2_display_denial($settings, $package, $key, $previous_key = false)
 {
 	define('DONOTCACHEPAGE', true);	// WP Super Cache
 	if (!$previous_key) $previous_key = $key;
-	if ($key == "e87553e1") {
+	if ($key == 'e87553e1') {
 		// FIXME: lookup the real key
 	}
 	// Create support key
-	$ip = explode(".", $package['ip']);
-	$ip_hex = "";
+	$ip = explode('.', $package['ip']);
+	$ip_hex = '';
 	foreach ($ip as $octet) {
 		$ip_hex .= str_pad(dechex((int) $octet), 2, 0, STR_PAD_LEFT);
 	}
-	$support_key = implode("-", str_split("$ip_hex$key", 4));
+	$support_key = implode('-', str_split("$ip_hex$key", 4));
 
 	// Get response data
 	$response = bb2_get_response($previous_key);
-	header("HTTP/1.1 " . $response['response'] . " Bad Behavior");
-	header("Status: " . $response['response'] . " Bad Behavior");
-	$request_uri = $_SERVER["REQUEST_URI"];
+	header('HTTP/1.1 ' . $response['response'] . ' Bad Behavior');
+	header('Status: ' . $response['response'] . ' Bad Behavior');
+	$request_uri = $_SERVER['REQUEST_URI'];
 	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -54,7 +54,7 @@ function bb2_display_denial($settings, $package, $key, $previous_key = false)
 <p><?php echo $response['explanation']; ?></p>
 <p>Your technical support key is: <strong><?php echo $support_key; ?></strong></p>
 <p>You can use this key to <a href="https://www.ioerror.us/bb2-support-key?key=<?php echo $support_key; ?>">fix this problem yourself</a>.</p>
-<p>If you are unable to fix the problem yourself, please contact <a href="mailto:<?php echo htmlspecialchars(str_replace("@", "+nospam@nospam.", bb2_email())); ?>"><?php echo htmlspecialchars(str_replace("@", " at ", bb2_email())); ?></a> and be sure to provide the technical support key shown above.</p>
+<p>If you are unable to fix the problem yourself, please contact <a href="mailto:<?php echo htmlspecialchars(str_replace('@', '+nospam@nospam.', bb2_email())); ?>"><?php echo htmlspecialchars(str_replace('@', ' at ', bb2_email())); ?></a> and be sure to provide the technical support key shown above.</p>
 <?php
 }
 

@@ -2,7 +2,7 @@
 
 // Analyze requests claiming to be from CloudFlare
 
-require_once(BB2_CORE . "/roundtripdns.inc.php");
+require_once(BB2_CORE . '/roundtripdns.inc.php');
 
 function bb2_cloudflare($package)
 {

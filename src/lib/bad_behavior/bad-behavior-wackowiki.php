@@ -230,7 +230,7 @@ function bb2_timer()
 {
 	global $bb2_timer_total;
 
-	return "<!-- Bad Behavior " . BB2_VERSION . " run time: " . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n";
+	return '<!-- Bad Behavior ' . BB2_VERSION . ' run time: ' . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n";
 }
 
 // Display stats? This is optional.

@@ -1,16 +1,16 @@
-<?php if (!defined('BB2_CORE')) die("I said no cheating!");
+<?php if (!defined('BB2_CORE')) die('I said no cheating!');
 
 // Miscellaneous helper functions.
 
 // Quick and dirty check for an IPv6 address
 function is_ipv6($address) {
-	return (bool)strpos($address, ":");
+	return (bool)strpos($address, ':');
 }
 
 // stripos() needed because stripos is only present on PHP 5
 if (!function_exists('stripos')) {
-	function stripos($haystack,$needle,$offset = 0) {
-		return(strpos(strtolower($haystack),strtolower($needle),$offset));
+	function stripos($haystack, $needle, $offset = 0) {
+		return(strpos(strtolower($haystack), strtolower($needle), $offset));
 	}
 }
 
@@ -31,8 +31,8 @@ if (!function_exists('str_split')) {
 
 // Convert a string to mixed-case on word boundaries.
 function uc_all($string) {
-	$temp = preg_split('/(\W)/', str_replace("_", "-", $string), -1, PREG_SPLIT_DELIM_CAPTURE);
-	foreach ($temp as $key=>$word) {
+	$temp = preg_split('/(\W)/', str_replace('_', '-', $string), -1, PREG_SPLIT_DELIM_CAPTURE);
+	foreach ($temp as $key => $word) {
 		$temp[$key] = ucfirst(strtolower($word));
 	}
 	return join ('', $temp);
@@ -60,7 +60,7 @@ function match_cidr($addr, $cidr) {
 
 // Determine if an IP address is reserved by RFC 1918.
 function is_rfc1918($addr) {
-	return match_cidr($addr, ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]);
+	return match_cidr($addr, ['10.0.0.0/8', '172.16.0.0/12', '192.168.0.0/16']);
 }
 // Obtain all the HTTP headers.
 // NB: on PHP-CGI we have to fake it out a bit, since we can't get the REAL
@@ -70,7 +70,7 @@ function bb2_load_headers() {
 		$headers = [];
 		foreach ($_SERVER as $h => $v)
 			if (preg_match('/HTTP_(.+)/', $h, $hp))
-				$headers[str_replace("_", "-", uc_all($hp[1]))] = $v;
+				$headers[str_replace('_', '-', uc_all($hp[1]))] = $v;
 	} else {
 		$headers = getallheaders();
 	}

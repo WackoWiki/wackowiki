@@ -12,25 +12,25 @@ function bb2_blackhole($package) {
 
 	// Only conservative lists
 	$bb2_blackhole_lists = [
-		"sbl-xbl.spamhaus.org",	// All around nasties
-//		"dnsbl.sorbs.net",	// Old useless data.
-//		"list.dsbl.org",	// Old useless data.
-//		"dnsbl.ioerror.us",	// Bad Behavior Blackhole
+		'sbl-xbl.spamhaus.org',	// All around nasties
+//		'dnsbl.sorbs.net',	// Old useless data.
+//		'list.dsbl.org',	// Old useless data.
+//		'dnsbl.ioerror.us',	// Bad Behavior Blackhole
 	];
-	
+
 	// Things that shouldn't be blocked, from aggregate lists
 	$bb2_blackhole_exceptions = [
-		"sbl-xbl.spamhaus.org" => ["127.0.0.4"],	// CBL is problematic
-		"dnsbl.sorbs.net" => ["127.0.0.10",],	// Dynamic IPs only
-		"list.dsbl.org" => [],
-		"dnsbl.ioerror.us" => [],
+		'sbl-xbl.spamhaus.org' => ['127.0.0.4'],	// CBL is problematic
+		'dnsbl.sorbs.net' => ['127.0.0.10',],	// Dynamic IPs only
+		'list.dsbl.org' => [],
+		'dnsbl.ioerror.us' => [],
 	];
 
 	// Check the blackhole lists
 	$ip = $package['ip'];
 	$find = implode('.', array_reverse(explode('.', $ip)));
 	foreach ($bb2_blackhole_lists as $dnsbl) {
-		$result = gethostbynamel($find . "." . $dnsbl . ".");
+		$result = gethostbynamel($find . '.' . $dnsbl . '.');
 		if (!empty($result)) {
 			// Got a match and it isn't on the exception list
 			$result = @array_diff($result, $bb2_blackhole_exceptions[$dnsbl]);

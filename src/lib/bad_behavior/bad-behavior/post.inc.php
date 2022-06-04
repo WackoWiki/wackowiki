@@ -17,8 +17,8 @@ function bb2_trackback($package)
 	// Real ones do not contain Accept:, and have a charset defined
 	// Real WP trackbacks may contain Accept: depending on the HTTP
 	// transport being used by the sending host
-	if (str_contains($package['headers_mixed']['User-Agent'], "WordPress/")) {
-		if (!str_contains($package['headers_mixed']['Content-Type'], "charset=")) {
+	if (str_contains($package['headers_mixed']['User-Agent'], 'WordPress/')) {
+		if (!str_contains($package['headers_mixed']['Content-Type'], 'charset=')) {
 			return 'e3990b47';
 		}
 	}
@@ -33,9 +33,9 @@ function bb2_post($settings, $package)
 	// if ($r = bb2_blackhole($package)) return $r;
 
 	// MovableType needs specialized screening
-	if (stripos($package['headers_mixed']['User-Agent'], "MovableType") !== FALSE) {
-		if (strcmp($package['headers_mixed']['Range'], "bytes=0-99999")) {
-			return "7d12528e";
+	if (stripos($package['headers_mixed']['User-Agent'], 'MovableType') !== FALSE) {
+		if (strcmp($package['headers_mixed']['Range'], 'bytes=0-99999')) {
+			return '7d12528e';
 		}
 	}
 
@@ -47,9 +47,9 @@ function bb2_post($settings, $package)
 
 	// Catch a few completely broken spambots
 	foreach ($request_entity as $key => $value) {
-		$pos = strpos($key, "	document.write");
+		$pos = strpos($key, '	document.write');
 		if ($pos !== FALSE) {
-			return "dfd9b1ad";
+			return 'dfd9b1ad';
 		}
 	}
 
@@ -61,7 +61,7 @@ function bb2_post($settings, $package)
 		# Strip port
 		$host = preg_replace('|:\d+$|', '', $host);
 		if (strcasecmp($host, $url['host'])) {
-			return "cd361abb";
+			return 'cd361abb';
 		}
 	}
 
