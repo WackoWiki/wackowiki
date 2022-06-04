@@ -37,7 +37,7 @@ class Email
 	// $email_from			- place specific address into the 'From:' field
 	// $charset				- send message in specific charset (w/o actual re-encoding)
 	// $xtra_headers		- (array) insert additional mail headers
-	function send_mail($email_to, $name_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = [])
+	function send_mail($email_to, $name_to, $subject, $body, $email_from = '', $charset = '', $xtra_headers = []): void
 	{
 		if (!$this->engine->db->enable_email || ( !$email_to || !$subject || !$body) )
 		{
@@ -60,7 +60,7 @@ class Email
 		$this->php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset, $xtra_headers);
 	}
 
-	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset = '', $xtra_headers = '')
+	function php_mailer($email_to, $name_to, $email_from, $name_from, $subject, $body, $charset = '', $xtra_headers = ''): bool
 	{
 		$mail = new PHPMailer(true); // the true param means it will throw exceptions on errors, which we need to catch
 

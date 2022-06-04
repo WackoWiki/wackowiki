@@ -29,14 +29,14 @@ class Feed
 		$this->charset	= $this->engine->get_charset($this->lang);
 	}
 
-	function write_file($name, $body)
+	function write_file($name, $body): void
 	{
 		$file_name = Ut::join_path(XML_DIR, $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml');
 		@file_put_contents($file_name, $body);
 		@chmod($file_name, CHMOD_FILE);
 	}
 
-	function changes()
+	function changes(): void
 	{
 		$limit	= 30;
 		$name	= 'changes';
@@ -102,7 +102,7 @@ class Feed
 		$this->engine->canonical = false;
 	}
 
-	function feed($feed_cluster = '')
+	function feed($feed_cluster = ''): void
 	{
 		$limit			= 10;
 		$name			= 'news';
@@ -217,7 +217,7 @@ class Feed
 		$this->engine->canonical = false;
 	}
 
-	function comments()
+	function comments(): void
 	{
 		$limit	= 20;
 		$name	= 'comments';
@@ -296,7 +296,7 @@ class Feed
 	}
 
 	// Sitemaps XML file: http://www.sitemaps.org
-	function site_map()
+	function site_map(): void
 	{
 		$prefix		= $this->engine->db->table_prefix;
 
@@ -368,7 +368,7 @@ class Feed
 	}
 
 	// OpenSearch XML description file
-	function open_search()
+	function open_search(): void
 	{
 		$this->engine->canonical = true;
 

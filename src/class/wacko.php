@@ -663,7 +663,7 @@ class Wacko
 	 *
 	 * @return string Message set
 	 */
-	function _t($name, $lang = ''): string|array
+	function _t($name, $lang = '')
 	{
 		if ($this->db->multilanguage)
 		{
