@@ -65,7 +65,7 @@ class DbMysqli implements DbInterface
 		return $result;
 	}
 
-	function quote($string)
+	function quote($string): string
 	{
 		$string ??= '';
 

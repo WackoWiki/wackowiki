@@ -287,7 +287,7 @@ class SafeHTML
 	 *
 	 * @return boolean
 	 */
-	protected function writeAttrs($attrs)
+	protected function writeAttrs($attrs): bool
 	{
 		if (is_array($attrs))
 		{
@@ -412,7 +412,7 @@ class SafeHTML
 	 *
 	 * @return boolean
 	 */
-	public function openHandler(&$parser, $name, $attrs)
+	public function openHandler(&$parser, $name, $attrs): bool
 	{
 		$name = strtolower($name);
 
@@ -510,7 +510,7 @@ class SafeHTML
 	 *
 	 * @return boolean
 	 */
-	public function closeHandler(&$parser, $name)
+	public function closeHandler(&$parser, $name): bool
 	{
 		$name = strtolower($name);
 
@@ -552,7 +552,7 @@ class SafeHTML
 	 *
 	 * @return boolean
 	 */
-	protected function closeTag($tag)
+	protected function closeTag($tag): bool
 	{
 		if (!in_array($tag, $this->noClose))
 		{
@@ -582,7 +582,7 @@ class SafeHTML
 	 *
 	 * @return boolean
 	 */
-	public function dataHandler(&$parser, $data)
+	public function dataHandler(&$parser, $data): bool
 	{
 		if (count($this->dcStack) == 0)
 		{
@@ -618,7 +618,7 @@ class SafeHTML
 	 *
 	 * @return void
 	 */
-	public function setAllowTags($tags = [])
+	public function setAllowTags($tags = []): void
 	{
 		if (is_array($tags))
 		{
@@ -631,7 +631,7 @@ class SafeHTML
 	 *
 	 * @return array
 	 */
-	public function getAllowTags()
+	public function getAllowTags(): array
 	{
 		return $this->allowTags;
 	}
@@ -641,7 +641,7 @@ class SafeHTML
 	 *
 	 * @return void
 	 */
-	public function resetAllowTags()
+	public function resetAllowTags(): void
 	{
 		$this->allowTags = [];
 	}
@@ -651,7 +651,7 @@ class SafeHTML
 	 *
 	 * @return string Processed (X)HTML document
 	 */
-	public function getXHTML()
+	public function getXHTML(): string
 	{
 		while ($tag = array_pop($this->stack))
 		{
@@ -666,7 +666,7 @@ class SafeHTML
 	 *
 	 * @return boolean
 	 */
-	public function clear()
+	public function clear(): bool
 	{
 		$this->xhtml = '';
 
@@ -680,7 +680,7 @@ class SafeHTML
 	 *
 	 * @return string Processed (X)HTML document
 	 */
-	public function parse($doc)
+	public function parse($doc): string
 	{
 		$result = '';
 
@@ -716,7 +716,7 @@ class SafeHTML
 	 * @return string Decoded document
 	 * @access private
 	 */
-	function repackUTF7($str)
+	function repackUTF7($str): string
 	{
 		return preg_replace_callback('!\+([a-zA-Z\d/]+)\-!', [$this, 'repackUTF7Callback'], $str);
 	}
@@ -728,7 +728,7 @@ class SafeHTML
 	 * @return string Recoded string
 	 * @access private
 	 */
-	function repackUTF7Callback($str)
+	function repackUTF7Callback($str): string
 	{
 		$str = base64_decode($str[1]);
 		$str = preg_replace_callback('/^((?:\x00.)*)((?:[^\x00].)+)/', [$this, 'repackUTF7Back'], $str);
@@ -743,7 +743,7 @@ class SafeHTML
 	 * @return string Recoded string
 	 * @access private
 	 */
-	function repackUTF7Back($str)
+	function repackUTF7Back($str): string
 	{
 		return $str[1] . '+' . rtrim(base64_encode($str[2]), '=') . '-';
 	}
