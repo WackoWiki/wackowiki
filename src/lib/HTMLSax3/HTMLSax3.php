@@ -371,7 +371,7 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return string
 	 */
-	function scanUntilCharacters($string)
+	function scanUntilCharacters($string): string
 	{
 		$startpos	= $this->position;
 		$length		= strcspn($this->rawtext, $string, $startpos);
@@ -385,7 +385,7 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function ignoreWhitespace()
+	function ignoreWhitespace(): void
 	{
 		$this->position += strspn($this->rawtext, " \n\r\t", $this->position);
 	}
@@ -398,7 +398,7 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function parse($data)
+	function parse($data): void
 	{
 		parent::parse($data);
 	}

@@ -83,7 +83,7 @@ function bb2_blacklist($package) {
 		': ;',			// shellshock
 		':;',			// shellshock
 		'a href=',		// referrer spam
-		"ArchiveBot",	// ignores robots.txt and hammers server
+		'ArchiveBot',	// ignores robots.txt and hammers server
 		'Bad Behavior Test',	// Add this to your user-agent to test BB
 		'compatible ; MSIE',	// misc comment/email spam
 		'compatible-',		// misc comment/email spam
@@ -151,7 +151,7 @@ function bb2_blacklist($package) {
 		'%27--',			// SQL injection
 		'%27 --',			// SQL injection
 		'%27%23',			// SQL injection
-		"%27 %23",			// SQL injection
+		'%27 %23',			// SQL injection
 		'benchmark%28',			// SQL injection probe
 		'insert+into+',			// SQL injection
 		'r3dm0v3',			// SQL injection probe

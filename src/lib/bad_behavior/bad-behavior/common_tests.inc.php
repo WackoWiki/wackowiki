@@ -12,7 +12,7 @@ function bb2_protocol($settings, $package)
 	// Is it claiming to be HTTP/1.1?  Then it shouldn't do HTTP/1.0 things
 	// Blocks some common corporate proxy servers in strict mode
 	if ($settings['strict'] && !strcmp($package['server_protocol'], 'HTTP/1.1')) {
-		if (array_key_exists('Pragma', $package['headers_mixed']) && str_contains($package['headers_mixed']['Pragma'], "no-cache") && !array_key_exists('Cache-Control', $package['headers_mixed'])) {
+		if (array_key_exists('Pragma', $package['headers_mixed']) && str_contains($package['headers_mixed']['Pragma'], 'no-cache') && !array_key_exists('Cache-Control', $package['headers_mixed'])) {
 			return '41feed15';
 		}
 	}
@@ -142,7 +142,7 @@ function bb2_misc_headers($settings, $package)
 		}
 	}
 
-	// "uk" is not a language (ISO 639) nor a country (ISO 3166)
+	// 'uk' is not a language (ISO 639) nor a country (ISO 3166)
 	// oops, yes it is :( Please shoot any Ukrainian spammers you see.
 #	if (preg_match('/\buk\b/', $package['headers_mixed']['Accept-Language'])) {
 #		return '35ea7ffa';

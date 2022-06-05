@@ -8,7 +8,7 @@ function bb2_konqueror($package)
 	// Yahoo! HotJobs. It identifies as Konqueror so we skip these checks.
 	if (stripos($package['headers_mixed']['User-Agent'], 'YahooSeeker/CafeKelsa') === FALSE || match_cidr($package['ip'], '209.73.160.0/19') === FALSE) {
 		if (!array_key_exists('Accept', $package['headers_mixed'])) {
-			return "17566707";
+			return '17566707';
 		}
 	}
 	return false;
@@ -48,7 +48,7 @@ function bb2_msie($package)
 		return '17566707';
 	}
 
-	// MSIE does NOT send "Windows ME" or "Windows XP" in the user agent
+	// MSIE does NOT send 'Windows ME' or 'Windows XP' in the user agent
 	if (str_contains($package['headers_mixed']['User-Agent'], 'Windows ME') || str_contains($package['headers_mixed']['User-Agent'], 'Windows XP') || str_contains($package['headers_mixed']['User-Agent'], 'Windows 2000') || str_contains($package['headers_mixed']['User-Agent'], 'Win32')) {
 		return 'a1084bad';
 	}
