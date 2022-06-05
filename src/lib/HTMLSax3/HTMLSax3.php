@@ -142,7 +142,7 @@ class XML_HTMLSax3_StateParser
 	 * @var int
 	 * @access private
 	 */
-	private int $length;
+	public int $length;
 	/**
 	 * Array of state objects
 	 * @var array
