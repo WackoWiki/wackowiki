@@ -99,8 +99,7 @@ class GD extends PHPThumb
 			case 'GIF':
 				$this->oldImage = imagecreatefromgif($this->fileName);
 				break;
-			case 'JFIF':
-			case 'JPG':
+			case 'JPEG':
 				$this->oldImage = imagecreatefromjpeg($this->fileName);
 				break;
 			case 'PNG':
@@ -551,7 +550,8 @@ class GD extends PHPThumb
 				'R'		=> intval(($this->currentDimensions['width'] - $this->maxWidth)),
 				default	=> intval(($this->currentDimensions['width'] - $this->maxWidth) / 2),
 			};
-		} else if ($this->currentDimensions['height'] > $this->maxHeight)
+		}
+		else if ($this->currentDimensions['height'] > $this->maxHeight)
 		{
 			// Image is portrait
 			$cropY = match ($quadrant) {
@@ -836,7 +836,7 @@ class GD extends PHPThumb
 				}
 				imagegif($this->oldImage);
 				break;
-			case 'JPG':
+			case 'JPEG':
 				if ($rawData === false)
 				{
 					header('Content-type: image/jpeg');
@@ -891,13 +891,13 @@ class GD extends PHPThumb
 	 * \RuntimeException is thrown.
 	 *
 	 * @param string $fileName The full path and filename of the image to save
-	 * @param string|null $format   The format to save the image in (optional, must be one of [GIF,JPG,PNG]
+	 * @param string|null $format   The format to save the image in (optional, must be one of [AVIF, GIF, JPEG, JPG, PNG, WEBP]
 	 * @return GD
 	 */
 	public function save(string $fileName, string $format = null): GD
 	{
-		$validFormats = ['AVIF', 'GIF', 'JPG', 'PNG', 'WEBP'];
-		$format = ($format !== null) ? strtoupper($format) : $this->format;
+		$validFormats	= ['AVIF', 'GIF', 'JPEG', 'JPG', 'PNG', 'WEBP'];
+		$format		= ($format !== null) ? strtoupper($format) : $this->format;
 
 		if (!in_array($format, $validFormats))
 		{
@@ -941,6 +941,7 @@ class GD extends PHPThumb
 			case 'GIF':
 				imagegif($this->oldImage, $fileName);
 				break;
+			case 'JPEG':
 			case 'JPG':
 				imagejpeg($this->oldImage, $fileName, $this->options['jpegQuality']);
 				break;
@@ -1354,7 +1355,7 @@ class GD extends PHPThumb
 		$this->format = match ($mimeType) {
 			'image/avif' => 'AVIF',
 			'image/gif'  => 'GIF',
-			'image/jpeg' => 'JPG',
+			'image/jpeg' => 'JPEG',
 			'image/png'  => 'PNG',
 			'image/webp' => 'WEBP',
 			default      => throw new \Exception('Image format not supported: ' . $mimeType),
@@ -1373,16 +1374,18 @@ class GD extends PHPThumb
 		$isCompatible = match ($this->format) {
 			'AVIF'	=> $gdInfo[$this->format . ' Support'],
 			'GIF'	=> $gdInfo['GIF Create Support'],
-			'JPG'	=> isset($gdInfo['JPG Support']) || isset($gdInfo['JPEG Support']),
+			'JPEG'	=> isset($gdInfo['JPG Support']) || isset($gdInfo['JPEG Support']),
 			'PNG'	=> $gdInfo[$this->format . ' Support'],
 			'WEBP'	=> $gdInfo['WebP Support'],
 			default	=> false,
 		};
 
-		$suffix		= strtolower($this->format);
-		$compiled	= function_exists('image' . $suffix) && function_exists('imagecreatefrom' . $suffix);
+		$suffix = strtolower($this->format);
 
-		$isCompatible = $isCompatible & $compiled;
+		$isCompatible =
+			   function_exists('image' . $suffix)
+			&& function_exists('imagecreatefrom' . $suffix)
+			&& $isCompatible;
 
 		if (!$isCompatible)
 		{

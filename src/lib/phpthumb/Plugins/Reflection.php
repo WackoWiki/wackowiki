@@ -253,7 +253,7 @@ class Reflection implements PluginInterface
 		{
 			$hex = substr($hex, 1);
 		}
-		elseif (str_starts_with($hex, '&H'))
+		else if (str_starts_with($hex, '&H'))
 		{
 			$hex = substr($hex, 2);
 		}
