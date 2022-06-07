@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 //		if you define pages, it must be done for all subforums and topic pages
 
 // define variables
-$_pages		= '';
+$pages		??= '';
 $comment	= null;
 
 if (!isset($noxml))		$noxml = 0;

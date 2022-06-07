@@ -6,7 +6,7 @@ namespace PHPThumb;
  * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
  *
- * Author(s): Ian Selby <ian@gen-x-design.com>
+ * Author(s): Ian Selby <ianrselby@gmail.com>
  *
  * Licensed under the MIT License
  * Redistributions of files must retain the above copyright notice.

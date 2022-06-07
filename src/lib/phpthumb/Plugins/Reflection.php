@@ -10,7 +10,7 @@ use PHPThumb\PluginInterface;
  *
  * This file contains the plugin definition for the GD Reflection Lib for PHP Thumb
  *
- * PHP Version 5.3 with GD 2.0+
+ * PHP Version 7 with GD 2.2+
  * PhpThumb : PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * Copyright (c) 2009, Ian Selby/Gen X Design
  *

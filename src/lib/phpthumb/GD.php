@@ -729,11 +729,9 @@ class GD extends PHPThumb
 
 		$this->workingImage = imagerotate($this->oldImage, $degrees, 0);
 
-		$newWidth							= $this->currentDimensions['height'];
-		$newHeight							= $this->currentDimensions['width'];
 		$this->oldImage						= $this->workingImage;
-		$this->currentDimensions['width']	= $newWidth;
-		$this->currentDimensions['height']	= $newHeight;
+		$this->currentDimensions['width']	= imagesx($this->workingImage);
+		$this->currentDimensions['height']	= imagesy($this->workingImage);
 
 		return $this;
 	}
