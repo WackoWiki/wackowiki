@@ -16,9 +16,9 @@ if (!defined('IN_WACKO'))
 class Feed
 {
 	// VARIABLES
-	var $engine;
-	var $lang;
-	var $charset;
+	public $engine;
+	public $lang;
+	public $charset;
 
 	// CONSTRUCTOR
 	function __construct(&$engine)
@@ -29,14 +29,14 @@ class Feed
 		$this->charset	= $this->engine->get_charset($this->lang);
 	}
 
-	function write_file($name, $body)
+	function write_file($name, $body): void
 	{
-		$file_name = Ut::join_path(XML_DIR, $name . '_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml');
+		$file_name = Ut::join_path(XML_DIR, $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml');
 		@file_put_contents($file_name, $body);
 		@chmod($file_name, CHMOD_FILE);
 	}
 
-	function changes()
+	function changes(): void
 	{
 		$limit	= 30;
 		$name	= 'changes';
@@ -44,22 +44,23 @@ class Feed
 
 		$this->engine->canonical = true;
 
-		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n";
-		$xml .= '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n";
-		$xml .= '<channel>' . "\n";
-		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n";
-		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
-		$xml .= '<description>' . $this->engine->_t('ChangesXML') . $this->engine->db->site_name . '</description>' . "\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
-		$xml .= '<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
-		$xml .= '<image>' . "\n";
-		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n";
-		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
-		$xml .= '<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . '</url>' . "\n";
-		$xml .= '<width>' . $this->engine->db->logo_width . '</width>' . "\n";
-		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
-		$xml .= '</image>' . "\n";
-		$xml .= '<language>' . $this->lang . '</language>' . "\n";
+		$xml =
+			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
+			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n" .
+			'<channel>' . "\n" .
+				'<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n" .
+				'<link>' . $this->engine->db->base_url . '</link>' . "\n" .
+				'<description>' . $this->engine->_t('ChangesXML') . $this->engine->db->site_name . '</description>' . "\n" .
+				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
+				'<language>' . $this->lang . '</language>' . "\n" .
+				'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n" .
+				'<image>' . "\n" .
+					'<title>' . $this->engine->db->site_name . $this->engine->_t('ChangesTitleXML') . '</title>' . "\n" .
+					'<link>' . $this->engine->db->base_url . '</link>' . "\n" .
+					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo)  . '</url>' . "\n" .
+					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
+					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
+				'</image>' . "\n";
 
 		if ([$pages, ] = $this->engine->load_changed())
 		{
@@ -77,18 +78,19 @@ class Feed
 				if ($access && ($count < $limit))
 				{
 					$count++;
-					$xml .= '<item>' . "\n";
-					$xml .= '<title>' . $page['tag'] . '</title>' . "\n";
-					$xml .= '<link>' . $this->engine->href('', $page['tag']) . '</link>' . "\n";
-					$xml .= '<guid>' . $this->engine->href('', $page['tag']) . '</guid>' . "\n";
-					$xml .= '<pubDate>' . date('r', strtotime($page['modified'])) . '</pubDate>' . "\n";
-					$xml .= '<description>' . $page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
-						($page['user_name'] ?: $this->engine->_t('Guest')) .
-						($page['edit_note']
-							? ' [' . $page['edit_note'] . ']'
-							: '') .
-						'</description>' . "\n";
-					$xml .= '</item>' . "\n";
+					$xml .=
+						'<item>' . "\n" .
+							'<title>' . $page['tag'] . '</title>' . "\n" .
+							'<link>' . $this->engine->href('', $page['tag']) . '</link>' . "\n" .
+							'<guid>' . $this->engine->href('', $page['tag']) . '</guid>' . "\n" .
+							'<pubDate>' . date('r', strtotime($page['modified'])) . '</pubDate>' . "\n" .
+							'<description>' . $page['modified'] . ' ' . $this->engine->_t('By') . ' ' .
+							($page['user_name'] ?: $this->engine->_t('Guest')) .
+							($page['edit_note']
+								? ' [' . $page['edit_note'] . ']'
+								: '') .
+							'</description>' . "\n" .
+						'</item>' . "\n";
 				}
 			}
 		}
@@ -100,7 +102,7 @@ class Feed
 		$this->engine->canonical = false;
 	}
 
-	function feed($feed_cluster = '')
+	function feed($feed_cluster = ''): void
 	{
 		$limit			= 10;
 		$name			= 'news';
@@ -137,25 +139,25 @@ class Feed
 		}
 
 		// build output
-		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
-				'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
-				// TODO: atom.css
-				'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> ' . "\n" .
-					'<channel>' . "\n" .
-						'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
-						'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
-						'<description>' . $this->engine->_t('NewsXML') . $this->engine->db->site_name . '</description>' . "\n" .
-						'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
-						'<language>' . $this->lang . '</language>' . "\n" .
-						'<pubDate>' . date('r') . '</pubDate>' . "\n" .
-						'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n";
-		$xml .= '<image>' . "\n";
-		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n";
-		$xml .= '<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n";
-		$xml .= '<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n";
-		$xml .= '<width>' . $this->engine->db->logo_width . '</width>' . "\n";
-		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
-		$xml .= '</image>' . "\n";
+		$xml =
+			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
+			'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
+			'<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"> ' . "\n" .
+			'<channel>' . "\n" .
+				'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
+				'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
+				'<description>' . $this->engine->_t('NewsXML') . $this->engine->db->site_name . '</description>' . "\n" .
+				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
+				'<language>' . $this->lang . '</language>' . "\n" .
+				'<pubDate>' . date('r') . '</pubDate>' . "\n" .
+				'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n" .
+				'<image>' . "\n";
+					'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
+					'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
+					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n" .
+					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
+					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
+				'</image>' . "\n";
 
 		$i = 0;
 
@@ -184,12 +186,13 @@ class Feed
 				$text	= $this->engine->format($page['body_r'], 'post_wacko');
 				$this->engine->current_context--;
 
-				$xml .= '<item>' . "\n" .
-							'<title>' . $title . '</title>' . "\n" .
-							'<link>' . $link . '</link>' . "\n" .
-							'<guid isPermaLink="true">' . $link . '</guid>' . "\n" .
-							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n" .
-							'<pubDate>' . $pdate . '</pubDate>' . "\n";
+				$xml .=
+					'<item>' . "\n" .
+						'<title>' . $title . '</title>' . "\n" .
+						'<link>' . $link . '</link>' . "\n" .
+						'<guid isPermaLink="true">' . $link . '</guid>' . "\n" .
+						'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n" .
+						'<pubDate>' . $pdate . '</pubDate>' . "\n";
 
 				foreach ($categories as $category)
 				{
@@ -207,14 +210,14 @@ class Feed
 			}
 		}
 
-		$xml .= 	'</channel>' . "\n";
+		$xml .=		'</channel>' . "\n";
 		$xml .= '</rss>';
 
 		$this->write_file($name, $xml);
 		$this->engine->canonical = false;
 	}
 
-	function comments()
+	function comments(): void
 	{
 		$limit	= 20;
 		$name	= 'comments';
@@ -224,23 +227,24 @@ class Feed
 		$this->engine->canonical = true;
 
 		// build output
-		$xml = '<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n";
-		$xml .= '<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n";
-		$xml .= '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n";
-		$xml .= '<channel>' . "\n";
-		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . "</title>\n";
-		$xml .= '<link>' . $this->engine->db->base_url . "</link>\n";
-		$xml .= '<description>' . $this->engine->_t('CommentsXML') . $this->engine->db->site_name . "</description>\n";
-		$xml .= '<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n";
-		$xml .= '<lastBuildDate>' . date('r') . "</lastBuildDate>\n";
-		$xml .= '<image>' . "\n";
-		$xml .= '<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . '</title>' . "\n";
-		$xml .= '<link>' . $this->engine->db->base_url . '</link>' . "\n";
-		$xml .= '<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n";
-		$xml .= '<width>' . $this->engine->db->logo_width . '</width>' . "\n";
-		$xml .= '<height>' . $this->engine->db->logo_height . '</height>' . "\n";
-		$xml .= '</image>' . "\n";
-		$xml .= '<language>' . $this->lang . '</language>' . "\n";
+		$xml =
+			'<?xml version="1.0" encoding="' . $this->charset . '"?>' . "\n" .
+			'<?xml-stylesheet type="text/css" href="' . $this->engine->db->theme_url . 'css/wacko.css" media="screen"?>' . "\n" .
+			'<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">' . "\n" .
+			'<channel>' . "\n" .
+				'<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . "</title>\n" .
+				'<link>' . $this->engine->db->base_url . "</link>\n" .
+				'<description>' . $this->engine->_t('CommentsXML') . $this->engine->db->site_name . "</description>\n" .
+				'<copyright>' . $this->engine->href('', $this->engine->db->terms_page) . '</copyright>' . "\n" .
+				'<language>' . $this->lang . '</language>' . "\n" .
+				'<lastBuildDate>' . date('r') . "</lastBuildDate>\n" .
+				'<image>' . "\n" .
+					'<title>' . $this->engine->db->site_name . $this->engine->_t('CommentsTitleXML') . '</title>' . "\n" .
+					'<link>' . $this->engine->db->base_url . '</link>' . "\n" .
+					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n" .
+					'<width>' . $this->engine->db->logo_width . '</width>' . "\n" .
+					'<height>' . $this->engine->db->logo_height . '</height>' . "\n" .
+				'</image>' . "\n";
 
 		if ($comments = $this->engine->load_comment())
 		{
@@ -266,18 +270,18 @@ class Feed
 					$text = $this->engine->format($comment['body_r'], 'post_wacko', ['strip_notypo' => true]);
 					$this->engine->current_context--;
 
-					$xml .= '<item>' . "\n";
-					$xml .= '<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
-						($comment['user_name'] ?: $this->engine->_t('Guest')) .
-						'</title>' . "\n";
-					$xml .= '<link>' . $this->engine->href('', $comment['tag']) . '</link>' . "\n";
-					$xml .= '<guid>' . $this->engine->href('', $comment['tag']) . '</guid>' . "\n";
-					$xml .= '<pubDate>' . date('r', strtotime($comment['created'])) . '</pubDate>' . "\n";
-					$xml .= '<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n";
-
-					$xml .= '<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n";
-					# $xml .= '<content:encoded><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></content:encoded>' . "\n";
-					$xml .= '</item>' . "\n";
+					$xml .=
+						'<item>' . "\n" .
+							'<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
+							($comment['user_name'] ?: $this->engine->_t('Guest')) .
+							'</title>' . "\n";
+							'<link>' . $this->engine->href('', $comment['tag']) . '</link>' . "\n" .
+							'<guid>' . $this->engine->href('', $comment['tag']) . '</guid>' . "\n" .
+							'<pubDate>' . date('r', strtotime($comment['created'])) . '</pubDate>' . "\n" .
+							'<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n" .
+							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n" .
+							#'<content:encoded><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></content:encoded>' . "\n" .
+						'</item>' . "\n";
 				}
 			}
 
@@ -292,7 +296,7 @@ class Feed
 	}
 
 	// Sitemaps XML file: http://www.sitemaps.org
-	function site_map()
+	function site_map(): void
 	{
 		$prefix		= $this->engine->db->table_prefix;
 
@@ -373,18 +377,19 @@ class Feed
 	}
 
 	// OpenSearch XML description file
-	function open_search()
+	function open_search(): void
 	{
 		$this->engine->canonical = true;
 
-		$xml  = '<?xml version="1.0"?>' . "\n";
-		$xml .= '<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">' . "\n";
-		$xml .= '<ShortName>' . $this->engine->db->site_name . '</ShortName>' . "\n";
-		$xml .= '<Description>' /*.  $this->engine->_t('Search') .  ' '*/ . $this->engine->db->site_name . '</Description>' . "\n";
-		$xml .= '<InputEncoding>UTF-8</InputEncoding>' . "\n";
-		$xml .= '<Image height="16" width="16" type="image/x-icon">' . $this->engine->get_favicon() . '</Image>' . "\n";
-		$xml .= '<Url type="text/html" method="get" template="' . $this->engine->href('', $this->engine->db->search_page) . '?phrase={searchTerms}" />' . "\n";
-		$xml .= '</OpenSearchDescription>';
+		$xml =
+			'<?xml version="1.0"?>' . "\n" .
+			'<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">' . "\n" .
+				'<ShortName>' . $this->engine->db->site_name . '</ShortName>' . "\n" .
+				'<Description>' . $this->engine->db->site_name . '</Description>' . "\n" .
+				'<InputEncoding>UTF-8</InputEncoding>' . "\n" .
+				'<Image height="16" width="16" type="image/x-icon">' . $this->engine->get_favicon() . '</Image>' . "\n" .
+				'<Url type="text/html" method="get" template="' . $this->engine->href('', $this->engine->db->search_page) . '?phrase={searchTerms}" />' . "\n" .
+			'</OpenSearchDescription>';
 
 		$file_name = Ut::join_path(XML_DIR, 'opensearch.xml');
 		file_put_contents($file_name, $xml);

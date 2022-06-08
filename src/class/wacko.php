@@ -217,7 +217,7 @@ class Wacko
 		}
 	}
 
-	function get_wacko_version()
+	function get_wacko_version(): string
 	{
 		return WACKO_VERSION;
 	}
@@ -280,7 +280,7 @@ class Wacko
 	 * @param string $file_name File name.
 	 * @return boolean
 	 */
-	function file_extension_check($file_name)
+	function file_extension_check($file_name): bool
 	{
 		$allowed_list	= $this->db->upload_allowed_exts;
 		$banned_list	= $this->db->upload_banned_exts;
@@ -442,7 +442,7 @@ class Wacko
 	}
 
 	// LANG FUNCTIONS
-	function set_translation($lang)
+	function set_translation($lang): void
 	{
 		$this->resource = & $this->translations[$lang];
 	}
@@ -485,7 +485,7 @@ class Wacko
 	}
 
 	// TODO: refactor / normalize # better load_message_set() ?
-	function load_translation($lang)
+	function load_translation($lang): void
 	{
 		if ($lang && !isset($this->translations[$lang]))
 		{
@@ -562,7 +562,7 @@ class Wacko
 	*
 	* @param string $lang Language code
 	*/
-	function load_lang($lang)
+	function load_lang($lang): void
 	{
 		if ($lang && !isset($this->languages[$lang]))
 		{
@@ -590,7 +590,7 @@ class Wacko
 		}
 	}
 
-	function known_language($lang)
+	function known_language($lang): bool
 	{
 		return array_key_exists($lang, $this->http->available_languages());
 	}
@@ -715,7 +715,7 @@ class Wacko
 		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
 	}
 
-	function get_favicon()
+	function get_favicon(): string
 	{
 		return $this->db->site_favicon
 			? $this->db->base_path . Ut::join_path(IMAGE_DIR, $this->db->site_favicon)
@@ -937,10 +937,11 @@ class Wacko
 	* @param array $page Page data
 	* @param boolean $metadata_only Marks that page contains metadata only (all attributes, excepts page body)
 	*/
-	function cache_page($page, $metadata_only = false)
+	function cache_page($page, $metadata_only = false): void
 	{
 		// do not override current page
-		if ((isset($this->page['page_id']) && isset($page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only) || empty($page))
+		if ((isset($this->page['page_id']) && isset($page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only)
+			|| empty($page))
 		{
 			return;
 		}
@@ -953,7 +954,7 @@ class Wacko
 		$this->page_id_cache[$page['tag']] = $page['page_id'];
 	}
 
-	function cache_wanted_page($tag, $page_id = 0, $check = 0)
+	function cache_wanted_page($tag, $page_id = 0, $check = 0): void
 	{
 		if ($check == 0)
 		{
@@ -978,7 +979,7 @@ class Wacko
 	* @param string $tag
 	* @param int $page_id
 	*/
-	function clear_cache_wanted_page($tag, $page_id = 0)
+	function clear_cache_wanted_page($tag, $page_id = 0): void
 	{
 		($page_id != 0
 			? $this->wanted_cache['page_id'][$page_id] = 0
@@ -1055,7 +1056,7 @@ class Wacko
 		}
 	}
 
-	function preload_links($page_ids, $default = false)
+	function preload_links($page_ids, $default = false): void
 	{
 		if (empty($page_ids) && !$default)
 		{
@@ -1202,7 +1203,7 @@ class Wacko
 		}
 	}
 
-	function set_page($page)
+	function set_page($page): void
 	{
 		if (isset($page['deleted']) && $page['deleted'] && !$this->is_admin())
 		{
@@ -1621,7 +1622,7 @@ class Wacko
 	 * @param integer $type_id
 	 * @param boolean $cache
 	 */
-	function preload_categories($object_ids, $type_id = OBJECT_PAGE, $cache = true)
+	function preload_categories($object_ids, $type_id = OBJECT_PAGE, $cache = true): void
 	{
 		if (empty($object_ids))
 		{
@@ -1766,7 +1767,6 @@ class Wacko
 		// check privileges
 		if ( ($this->page && $this->has_access('write', $page_id))
 			|| (!$this->page && $this->has_access('create', '', $user_name, '', $tag))
-				# || $this->is_admin() // XXX: Only for testing - comment out afterwards! (moderate handler)
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
 			|| $user_page)
 		{
@@ -1874,7 +1874,7 @@ class Wacko
 				}
 				else if ($comment_on_id)
 				{
-					// Give comments the same read rights as their parent page
+					// give comments the same read rights as their parent page
 					$read_acl		= $this->load_acl($comment_on_id, 'read');
 					$acl['read']	= $read_acl['list'];
 					$acl['write']	= '';
@@ -1948,12 +1948,7 @@ class Wacko
 				$this->save_acl($page_id, 'upload',		$acl['upload']);
 
 				// log event
-				if ($comment_on_id)
-				{
-					// see add_comment handler
-					// $this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag . ' ' . $this->page['title']));
-				}
-				else
+				if (!$comment_on_id)
 				{
 					// added new page
 					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag . ' ' . $title));
@@ -2026,7 +2021,6 @@ class Wacko
 						"UPDATE " . $this->db->table_prefix . "page SET " .
 							"version_id		= " . (int)($old_page['version_id'] + 1) . ", " .
 							"comment_on_id	= " . (int) $comment_on_id . ", " .
-							# "created		= " . $this->db->q($old_page['created']) . ", " .
 							"modified		= UTC_TIMESTAMP(), " .
 							"owner_id		= " . (int) $owner_id . ", " .
 							"user_id		= " . (int) $user_id . ", " .
@@ -2097,7 +2091,7 @@ class Wacko
 					{
 						if (mb_substr($this->tag, 0, mb_strlen($this->db->news_cluster . '/')) == $this->db->news_cluster . '/')
 						{
-							$xml->feed(); // $this->tag
+							$xml->feed();
 						}
 					}
 				}
@@ -2110,7 +2104,7 @@ class Wacko
 	}
 
 	// create revision of a given page
-	function save_revision($page)
+	function save_revision($page): void
 	{
 		// move revision
 		$this->db->sql_query(
@@ -2147,12 +2141,12 @@ class Wacko
 		$this->update_revisions_count($page['page_id'], $user['user_id'] ?? null);
 	}
 
-	function update_sitemap()
+	function update_sitemap(): void
 	{
 		$this->sess->xml_sitemap_update = 1;
 	}
 
-	function write_sitemap()
+	function write_sitemap(): void
 	{
 		if ((@$this->sess->xml_sitemap_update || $this->db->xml_sitemap_update) && $this->db->xml_sitemap)
 		{
@@ -2237,7 +2231,7 @@ class Wacko
 		return $count? $count['n'] : 0;
 	}
 
-	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = 0, $deleted = 0)
+	function count_revisions($page_id = null, $user_id = null, $hide_minor_edit = 0, $deleted = 0): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(revision_id) AS n " .
@@ -2261,7 +2255,7 @@ class Wacko
 	}
 
 	// COUNTER CACHES
-	function update_comments_count($page_id, $user_id, $last_created = false)
+	function update_comments_count($page_id, $user_id, $last_created = false): void
 	{
 		if ($last_created)
 		{
@@ -2295,7 +2289,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function update_files_count($page_id, $user_id)
+	function update_files_count($page_id, $user_id): void
 	{
 		// per page upload
 		if ($page_id)
@@ -2316,7 +2310,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function update_pages_count($user_id)
+	function update_pages_count($user_id): void
 	{
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .
@@ -2325,7 +2319,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function update_revisions_count($page_id, $user_id = null)
+	function update_revisions_count($page_id, $user_id = null): void
 	{
 		/** cases: incremental recount, total recount, purge (total + incremental)
 		 *
@@ -2352,7 +2346,7 @@ class Wacko
 		}
 	}
 
-	function add_user_page($user_name, $user_lang = null, $mute = true)
+	function add_user_page($user_name, $user_lang = null, $mute = true): void
 	{
 		if (!isset($user_lang))
 		{
@@ -2372,7 +2366,7 @@ class Wacko
 		}
 	}
 
-	function set_account_status($user_id, $account_status)
+	function set_account_status($user_id, $account_status): void
 	{
 		// approved
 		if ($account_status === false)
@@ -2392,14 +2386,12 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function approve_user($user, $account_status)
+	function approve_user($user, $account_status): void
 	{
 		$this->set_account_status($user['user_id'], $account_status);
 
 		if ($account_status === false)
 		{
-			// $this->add_user_page($user['user_name'], $user['user_lang']);
-
 			// send email
 			if ($this->db->enable_email)
 			{
@@ -2413,7 +2405,7 @@ class Wacko
 	// $this->notify_lang sets language in _t() function for notifications
 
 	// user email wrapper
-	function send_user_email($user, $subject, $body, $xtra_headers = [])
+	function send_user_email($user, $subject, $body, $xtra_headers = []): void
 	{
 		if ($user === 'System')
 		{
@@ -2447,7 +2439,7 @@ class Wacko
 		$email->send_mail($email_to, $name_to, $subject, $body, null, $charset, $xtra_headers);
 	}
 
-	function notify_approved_account($user)
+	function notify_approved_account($user): void
 	{
 		$save		= $this->set_language($user['user_lang'], true, true);
 
@@ -2459,7 +2451,7 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_new_account($user)
+	function notify_new_account($user): void
 	{
 		$lang_admin	= $this->db->language;
 		$save		= $this->set_language($lang_admin, true, true);
@@ -2481,7 +2473,7 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_new_owner($user)
+	function notify_new_owner($user): void
 	{
 		$save		= $this->set_language($user['user_lang'], true, true);
 
@@ -2501,7 +2493,7 @@ class Wacko
 	 * @param array		$user		user data array
 	 * @param boolean	$verify		set email_confirm token and add link for email verification
 	 */
-	function notify_user_signup($user, $verify = true)
+	function notify_user_signup($user, $verify = true): void
 	{
 		$save		= $this->set_language($user['user_lang'], true, true);
 
@@ -2521,7 +2513,7 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_password_reset($user, $code)
+	function notify_password_reset($user, $code): void
 	{
 		$save		= $this->set_language($user['user_lang'], true, true);
 
@@ -2535,7 +2527,7 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_pm($user, $subject, $body, $header, $msg_id)
+	function notify_pm($user, $subject, $body, $header, $msg_id): void
 	{
 		$save		= $this->set_language($user['user_lang'], true, true);
 
@@ -2557,38 +2549,38 @@ class Wacko
 		$this->set_language($save, true);
 	}
 
-	function notify_new_page($page_id, $tag, $title, $user_id, $user_name)
+	function notify_new_page($page_id, $tag, $title, $user_id, $user_name): void
 	{
-		$subject[]	=	'NewPageCreatedSubj';
-		$subject[]	=	$title;
+		$subject[]	= 'NewPageCreatedSubj';
+		$subject[]	= $title;
 
-		$body[]		=	'NewPageCreatedBody';
-		$body[]		=	$user_name;
-		$body[]		=	$title;
-		$body[]		=	$this->href('', $tag, null, null, null, null, true, true);
+		$body[]		= 'NewPageCreatedBody';
+		$body[]		= $user_name;
+		$body[]		= $title;
+		$body[]		= $this->href('', $tag, null, null, null, null, true, true);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
 
-	function notify_upload($page_id, $file_id, $tag, $file_name, $user_id, $user_name, $replace)
+	function notify_upload($page_id, $file_id, $tag, $file_name, $user_id, $user_name, $replace): void
 	{
 		if (!$this->db->notify_upload)
 		{
 			return;
 		}
 
-		$subject[]	=	'FileUploadedSubj';
-		$subject[]	=	$file_name;
+		$subject[]	= 'FileUploadedSubj';
+		$subject[]	= $file_name;
 
-		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
-		$body[]		=	$user_name;
-		$body[]		=	$file_name . "\n" . $page_id? $tag : $this->_t('UploadGlobal');
-		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id], null, null, null, true, true);
+		$body[]		= $replace? 'FileReplacedBody' : 'FileUploadedBody';
+		$body[]		= $user_name;
+		$body[]		= $file_name . "\n" . $page_id? $tag : $this->_t('UploadGlobal');
+		$body[]		= $this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id], null, null, null, true, true);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
 
-	function notify_moderator($page_id, $user_id, $subject, $body)
+	function notify_moderator($page_id, $user_id, $subject, $body): void
 	{
 		// subscribe & notify moderators
 		if (isset($this->db->groups['Moderator']) && is_array($this->db->groups['Moderator']))
@@ -2611,8 +2603,7 @@ class Wacko
 
 						$_subject	=	$this->_t($subject[0]) . " '$subject[1]'";
 
-						$_body		=	# $this->_t('EmailModerator') . ".\n\n" .
-										Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n\n" .
+						$_body		=	Ut::perc_replace($this->_t($body[0]), ($body[1] == GUEST ? $this->_t('Guest') : $body[1])) . "\n\n" .
 										"'" . $body[2] . "'" . "\n" .
 										$body[3] . "\n\n";
 
@@ -2633,7 +2624,7 @@ class Wacko
 	/*
 	 * notify watchers on new comment creation or existing page change
 	 */
-	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body, $user_id, $user_name, $minor_edit)
+	function notify_watcher($page_id, $comment_on_id, $tag, $title, $page_body, $user_id, $user_name, $minor_edit): void
 	{
 		if (!$title)
 		{
@@ -2794,7 +2785,7 @@ class Wacko
 	}
 
 	// re-send email confirmation code
-	function notify_email_confirm($user)
+	function notify_email_confirm($user): void
 	{
 		if ($this->db->enable_email)
 		{
@@ -2835,7 +2826,7 @@ class Wacko
 		return $this->href('', $this->db->account_page, ['confirm' => $token], null, null, null, true, true);
 	}
 
-	function user_email_confirm_check($token)
+	function user_email_confirm_check($token): void
 	{
 		$hash = $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash));
 
@@ -3201,7 +3192,7 @@ class Wacko
 	}
 
 	// parse off <img> resizing tags from text: height= / width= / align=, e.g. ((http://example.com/image.png width=500))
-	function parse_img_param($text)
+	function parse_img_param($text): array
 	{
 		$media_class = '';
 		$scale		= '';
@@ -3211,7 +3202,7 @@ class Wacko
 		$trim		= 0;
 
 		$text = preg_replace_callback(
-			'/\s*\b([a-z]+)=([0-9a-z%]+)/i',
+			'/\s*\b([a-z]+)=([a-z\d%]+)/i',
 			function ($mat) use (&$align, &$height, &$width, &$trim)
 			{
 				if ($mat[1] == 'height')
@@ -3827,8 +3818,13 @@ class Wacko
 								}
 
 								// disables linking also for print handler, first and foremost to prevent those links showing up in numerate_links
-								if (! $meta_direct || (isset($this->method) && $this->method == 'print'))
+								if (!$meta_direct || (isset($this->method) && $this->method == 'print'))
 								{
+									if ($caption)
+									{
+										$text = $this->add_caption($text, $caption, $media_class, $clear);
+									}
+
 									return $text;
 								}
 							}
@@ -3862,7 +3858,7 @@ class Wacko
 			unset($file_data);
 		}
 		// user link -> user:UserName
-		else if (preg_match('/^(user)[:](' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(user):(' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3878,7 +3874,7 @@ class Wacko
 			$tpl	= 'userlink';
 		}
 		// group link -> group:UserGroup
-		else if (preg_match('/^(group)[:](' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(group):(' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3894,7 +3890,7 @@ class Wacko
 			$tpl	= 'grouplink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+)[:]([' . $this->language['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+):([' . $this->language['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -4455,7 +4451,7 @@ class Wacko
 			"ORDER BY tag COLLATE utf8mb4_unicode_520_ci");
 	}
 
-	function sanitize_page_tag(&$tag, $normalize = false)
+	function sanitize_page_tag(&$tag, $normalize = false): void
 	{
 		// normalizing tag name
 		$tag = Ut::normalize($tag);
@@ -5150,7 +5146,7 @@ class Wacko
 	}
 
 	// check whether email is already registered as one of user's email
-	function email_exists($email)
+	function email_exists($email): bool
 	{
 		return (bool) $this->db->load_single(
 			"SELECT user_id " .
@@ -5194,7 +5190,7 @@ class Wacko
 	}
 
 	// anonymize user IP address
-	function get_user_ip()
+	function get_user_ip(): string
 	{
 		if ($this->db->anonymize_ip)
 		{
@@ -5464,7 +5460,7 @@ class Wacko
 	// end auth token stuff
 
 	// Increment the failed login count by 1
-	function set_failed_login_count($user_id)
+	function set_failed_login_count($user_id): void
 	{
 		$this->db->sql_query(
 			"UPDATE " . $this->db->user_table . " SET " .
@@ -5532,7 +5528,7 @@ class Wacko
 	}
 
 	// ACCESS CONTROL
-	function is_admin()
+	function is_admin(): int
 	{
 		if (isset($this->sess->admin_it_is))
 		{
@@ -5661,7 +5657,7 @@ class Wacko
 		return null;
 	}
 
-	function set_page_owner($page_id, $user_id)
+	function set_page_owner($page_id, $user_id): void
 	{
 		// check if user exists
 		if (!$this->load_user(0, $user_id))
@@ -5703,7 +5699,7 @@ class Wacko
 		}
 	}
 
-	function save_acl($page_id, $privilege, $list)
+	function save_acl($page_id, $privilege, $list): void
 	{
 		$list = trim(str_replace("\r", '', $list));
 
@@ -5765,7 +5761,7 @@ class Wacko
 	 * @param array $page_ids
 	 * @param array $privileges
 	 */
-	function preload_acl($page_ids, $privileges = ['read'])
+	function preload_acl($page_ids, $privileges = ['read']): void
 	{
 		if (empty($page_ids))
 		{
@@ -6228,7 +6224,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function set_watch($user_id, $page_id)
+	function set_watch($user_id, $page_id): void
 	{
 		// remove old watch first to avoid double watches
 		$this->clear_watch($user_id, $page_id);
@@ -6293,7 +6289,7 @@ class Wacko
 	}
 
 	// MENUS
-	function get_default_menu($lang = '')
+	function get_default_menu($lang = ''): array
 	{
 		if (!$lang)
 		{
@@ -6305,7 +6301,7 @@ class Wacko
 		return $this->get_user_menu($user_id, $lang, true);
 	}
 
-	function get_user_menu($user_id, $lang = '', $public = false)
+	function get_user_menu($user_id, $lang = '', $public = false): array
 	{
 		$user_menu_formatted = [];
 
@@ -6356,7 +6352,7 @@ class Wacko
 		return $user_menu_formatted;
 	}
 
-	function set_menu($set = MENU_AUTO, $update = false)
+	function set_menu($set = MENU_AUTO, $update = false): void
 	{
 		$menu_page_ids	= $this->sess->menu_page_id ?? [];
 		$menu_formatted	= $this->sess->menu ?? [];
@@ -6505,7 +6501,7 @@ class Wacko
 	//	- add parameter for trail size in user settings ?
 	// parse only once, without included pages (avoid call in run function!)
 	//		$size	=
-	function set_user_trail($size = 5)
+	function set_user_trail($size = 5): void
 	{
 		$page_id = $this->page['page_id'];
 
@@ -6592,7 +6588,7 @@ class Wacko
 	}
 
 	// MAINTENANCE
-	function maintenance()
+	function maintenance(): void
 	{
 		$now	= time();
 		$update	= [];
@@ -6704,7 +6700,7 @@ class Wacko
 	}
 
 	// MAIN EXECUTION ROUTINE
-	function run($tag, $method)
+	function run($tag, $method): void
 	{
 		$this->http->cache_promisc();
 
@@ -6957,7 +6953,7 @@ class Wacko
 	}
 
 	// TOC MANIPULATIONS
-	function set_toc_array($toc)
+	function set_toc_array($toc): void
 	{
 		$this->body_toc = '';
 
@@ -7199,7 +7195,7 @@ class Wacko
 	}
 
 	// creates page title from tag: /Path/To/WikiName -> Wiki Name
-	function create_title_from_tag($tag)
+	function create_title_from_tag($tag): string
 	{
 		return $this->add_spaces_title(utf8_trim(mb_substr($tag, mb_strrpos($tag, '/')), '/'));
 	}
@@ -7281,7 +7277,7 @@ class Wacko
 		return true;
 	}
 
-	function delete_acls($page_ids, $dontkeep = 0)
+	function delete_acls($page_ids, $dontkeep = 0): void
 	{
 		if ($dontkeep)
 		{
@@ -7291,7 +7287,7 @@ class Wacko
 		}
 	}
 
-	function delete_pages($pages)
+	function delete_pages($pages): void
 	{
 		$rev	= count($this->page_id_cache) > 1 ? array_flip($this->page_id_cache) : false;
 
@@ -7619,7 +7615,7 @@ class Wacko
 	}
 
 	// removes all files attached to a page
-	function remove_files_perpage($tag, $cluster = false, $dontkeep = 0)
+	function remove_files_perpage($tag, $cluster = false, $dontkeep = 0): bool
 	{
 		if (!$tag)
 		{
@@ -7688,7 +7684,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_file($file_id, $dontkeep = 0)
+	function remove_file($file_id, $dontkeep = 0): bool
 	{
 		$message = '';
 
@@ -7754,7 +7750,7 @@ class Wacko
 	}
 
 	// RESTORE
-	function restore_page($page_id)
+	function restore_page($page_id): bool
 	{
 		if (!$page_id)
 		{
@@ -7770,7 +7766,7 @@ class Wacko
 		return true;
 	}
 
-	function restore_revision($page_id, $revision_id)
+	function restore_revision($page_id, $revision_id): bool
 	{
 		if (!$page_id)
 		{
@@ -7801,7 +7797,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function restore_files_perpage($page_id)
+	function restore_files_perpage($page_id): bool
 	{
 		if (!$page_id)
 		{
@@ -7910,26 +7906,26 @@ class Wacko
 		switch ($char_classes)
 		{
 			case 1:
-				if (   !preg_match('/[\p{N}]+/',				$pwd)
-					|| !preg_match('/[\p{L}]+/u',				$pwd))
+				if (   !preg_match('/\p{N}+/',					$pwd)
+					|| !preg_match('/\p{L}+/u',					$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 2:
-				if (   !preg_match('/[\pN]+/',					$pwd)
-					|| !preg_match('/[\p{Lu}]+/u',				$pwd)
-					|| !preg_match('/[\p{Ll}]+/u',				$pwd))
+				if (   !preg_match('/\pN+/',					$pwd)
+					|| !preg_match('/\p{Lu}+/u',				$pwd)
+					|| !preg_match('/\p{Ll}+/u',				$pwd))
 				{
 					++$error;
 				}
 				break;
 
 			case 3:
-				if (   !preg_match('/[\p{N}]+/',				$pwd)
-					|| !preg_match('/[\p{Lu}]+/u',				$pwd)
-					|| !preg_match('/[\p{Ll}]+/u',				$pwd)
+				if (   !preg_match('/\p{N}+/',					$pwd)
+					|| !preg_match('/\p{Lu}+/u',				$pwd)
+					|| !preg_match('/\p{Ll}+/u',				$pwd)
 					|| !preg_match('/[\p{Z}|\p{S}|\p{P}]+/',	$pwd))
 				{
 					++$error;
@@ -7987,7 +7983,7 @@ class Wacko
 	//		$params		= $_GET parameters to be passed with the page link (as href-formatted array or string)
 	// returns an array with 'text' (navigation) and 'offset' (offset value
 	// for SQL queries) elements.
-	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = '')
+	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = ''): array
 	{
 		$total		= (int) $total;
 		$name		= 'p';
@@ -8139,15 +8135,16 @@ class Wacko
 
 			$this->sess->freecap_shown = 1;
 
-			$out .= $inline ? '' : "<br>\n";
-			$out .= '<label for="captcha">' . $this->_t('Captcha') . ":</label>\n";
-			$out .= $inline ? '' : "<br>\n";
-			// href('', '.freecap') won't work, because mini_href() would strip DOT
-			$out .= '<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n";
-			$out .= '<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">';
-			$out .= '<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n";
-			$out .= '<input type="text" id="captcha" name="captcha" maxlength="6" required>';
-			$out .= $inline ? '' : "<br>\n";
+			$out .=
+				($inline ? '' : "<br>\n") .
+				'<label for="captcha">' . $this->_t('Captcha') . ":</label>\n" .
+				($inline ? '' : "<br>\n") .
+				// href('', '.freecap') won't work, because mini_href() would strip the DOT
+				'<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n" .
+				'<a href="" onclick="this.blur(); new_freecap(); return false;" title="' . $this->_t('CaptchaReload') . '">' .
+				'<img src="' . $this->db->base_path . Ut::join_path(IMAGE_DIR, 'spacer.png') . '" alt="' . $this->_t('CaptchaReload') . '" class="btn-reload"></a>' . "<br>\n" .
+				'<input type="text" id="captcha" name="captcha" maxlength="6" required>' .
+				($inline ? '' : "<br>\n");
 		}
 
 		return $out;
@@ -8189,8 +8186,8 @@ class Wacko
 		{
 			// Use the pattern given by the HTML5 spec for 'email' type form input elements
 			// http://www.w3.org/TR/html5/forms.html#valid-e-mail-address
-			$HTML5_email_pattern = '/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' .
-								'[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/sD';
+			$HTML5_email_pattern = '/^[a-zA-Z\d.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}' .
+								'[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/sD';
 
 			return (boolean) preg_match($HTML5_email_pattern, $email_address);
 		}
@@ -8252,7 +8249,7 @@ class Wacko
 		// check event level: do we have to log it?
 		if (    (int) $this->db->log_level === 0
 			|| ((int) $this->db->log_level !== 7
-			&& $level > (int) $this->db->log_level))
+				&& $level > (int) $this->db->log_level))
 		{
 			return true;
 		}
@@ -8776,7 +8773,7 @@ class Wacko
 
 	// to use by actions to add some inside <head> or above </body>
 	//	e.g. to adding custom CSS or JS
-	function add_html($location, $text)
+	function add_html($location, $text): void
 	{
 		if (! in_array($text, $this->html_addition[$location] ?? []))
 		{
@@ -8784,13 +8781,13 @@ class Wacko
 		}
 	}
 
-	function get_html_addition($location)
+	function get_html_addition($location): string
 	{
 		return implode("\n", $this->html_addition[$location] ?? []);
 	}
 
 	// HANDLER HELPERS
-	function ensure_page($forums = false)
+	function ensure_page($forums = false): void
 	{
 		if (!($p = $this->page))
 		{
@@ -8807,22 +8804,22 @@ class Wacko
 		}
 	}
 
-	function reload_me()
+	function reload_me(): void
 	{
 		$this->http->redirect($this->href($this->method));
 	}
 
-	function show_must_go_on($param = [])
+	function show_must_go_on($param = []): void
 	{
 		$this->http->redirect($this->href('', '', $param));
 	}
 
-	function login_page()
+	function login_page(): void
 	{
 		$this->http->redirect($this->href('', $this->db->login_page, Ut::random_token(4)));
 	}
 
-	function go_back($to)
+	function go_back($to): void
 	{
 		if ($back = @$this->sess->sticky_goback)
 		{
