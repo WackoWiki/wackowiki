@@ -89,7 +89,7 @@ if ($this->has_access('read'))
 			$message = Ut::perc_replace($this->_t('RevisionHint'),
 				$this->href(),
 				$this->tag,
-				$this->get_time_formatted($this->page['modified']),
+				$this->sql_time_formatted($this->page['modified']),
 				$this->user_link($this->page['user_name'], true, false));
 
 			// if this is an old revision, display ReEdit button

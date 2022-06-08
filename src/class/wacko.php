@@ -389,7 +389,7 @@ class Wacko
 	}
 
 	// TODO: make format pattern depended from localization and user preferences?
-	function get_time_formatted($text) : string // STS: rename to sql_time_formatted
+	function sql_time_formatted($text) : string
 	{
 		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format);
 	}
@@ -514,7 +514,7 @@ class Wacko
 			$this->language = &$this->languages[$lang];
 
 			setlocale(LC_CTYPE, $this->language['locale']);
-			setlocale(LC_TIME, $this->language['locale']);	// get_time_formatted()
+			setlocale(LC_TIME, $this->language['locale']);	// sql_time_formatted()
 
 			mb_internal_encoding($this->language['charset']);
 
@@ -1815,7 +1815,6 @@ class Wacko
 		// check privileges
 		if ( ($this->page && $this->has_access('write', $page_id))
 			|| (!$this->page && $this->has_access('create', '', $user_name, '', $tag))
-				# || $this->is_admin() // XXX: Only for testing - comment out afterwards! (moderate handler)
 			|| ($comment_on_id && $this->has_access('comment', $comment_on_id))
 			|| $user_page)
 		{
@@ -1923,7 +1922,7 @@ class Wacko
 				}
 				else if ($comment_on_id)
 				{
-					// Give comments the same read rights as their parent page
+					// give comments the same read rights as their parent page
 					$read_acl		= $this->load_acl($comment_on_id, 'read');
 					$acl['read']	= $read_acl['list'];
 					$acl['write']	= '';
@@ -1997,12 +1996,7 @@ class Wacko
 				$this->save_acl($page_id, 'upload',		$acl['upload']);
 
 				// log event
-				if ($comment_on_id)
-				{
-					// see add_comment handler
-					// $this->log(5, Ut::perc_replace($this->_t('LogCommentPosted', SYSTEM_LANG), 'Comment' . $num, $this->tag . ' ' . $this->page['title']));
-				}
-				else
+				if (!$comment_on_id)
 				{
 					// added new page
 					$this->log(4, Ut::perc_replace($this->_t('LogPageCreated', SYSTEM_LANG), $tag . ' ' . $title));
@@ -2075,7 +2069,6 @@ class Wacko
 						"UPDATE " . $this->db->table_prefix . "page SET " .
 							"version_id		= " . (int)($old_page['version_id'] + 1) . ", " .
 							"comment_on_id	= " . (int) $comment_on_id . ", " .
-							# "created		= " . $this->db->q($old_page['created']) . ", " .
 							"modified		= UTC_TIMESTAMP(), " .
 							"owner_id		= " . (int) $owner_id . ", " .
 							"user_id		= " . (int) $user_id . ", " .
@@ -2604,13 +2597,13 @@ class Wacko
 
 	function notify_new_page($page_id, $tag, $title, $user_id, $user_name): void
 	{
-		$subject[]	=	'NewPageCreatedSubj';
-		$subject[]	=	$title;
+		$subject[]	= 'NewPageCreatedSubj';
+		$subject[]	= $title;
 
-		$body[]		=	'NewPageCreatedBody';
-		$body[]		=	$user_name;
-		$body[]		=	$title;
-		$body[]		=	$this->href('', $tag, null, null, null, null, true, true);
+		$body[]		= 'NewPageCreatedBody';
+		$body[]		= $user_name;
+		$body[]		= $title;
+		$body[]		= $this->href('', $tag, null, null, null, null, true, true);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
@@ -2622,13 +2615,13 @@ class Wacko
 			return;
 		}
 
-		$subject[]	=	'FileUploadedSubj';
-		$subject[]	=	$file_name;
+		$subject[]	= 'FileUploadedSubj';
+		$subject[]	= $file_name;
 
-		$body[]		=	$replace? 'FileReplacedBody' : 'FileUploadedBody';
-		$body[]		=	$user_name;
-		$body[]		=	$file_name . "\n" . $page_id? $tag : $this->_t('UploadGlobal');
-		$body[]		=	$this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id], null, null, null, true, true);
+		$body[]		= $replace? 'FileReplacedBody' : 'FileUploadedBody';
+		$body[]		= $user_name;
+		$body[]		= $file_name . "\n" . $page_id? $tag : $this->_t('UploadGlobal');
+		$body[]		= $this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file_id], null, null, null, true, true);
 
 		$this->notify_moderator($page_id, $user_id, $subject, $body);
 	}
@@ -2986,7 +2979,7 @@ class Wacko
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
 			$this->_t('PostedBy') . ' ' .
 			$this->user_link($user_name, true, true) . ' ' .
-			$this->_t('At') . ' ' . $this->get_time_formatted($modified);
+			$this->_t('At') . ' ' . $this->sql_time_formatted($modified);
 	}
 
 	/**
@@ -4960,7 +4953,7 @@ class Wacko
 					$tpl->filter('time_formatted',
 						function ($value)
 						{
-							return $this->get_time_formatted($value);
+							return $this->sql_time_formatted($value);
 						});
 					$tpl->filter('hide_page',
 						function ($value)

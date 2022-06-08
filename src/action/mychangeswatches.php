@@ -67,7 +67,7 @@ if ($user_id = $this->get_user_id())
 			{
 				$text = $page['tag'];
 
-				$tpl->l_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->get_time_formatted($page['modified']), $this->_t('History'));
+				$tpl->l_time	= $this->compose_link_to_page($page['tag'], 'revisions', $this->sql_time_formatted($page['modified']), $this->_t('History'));
 				$tpl->l_link	= $this->compose_link_to_page($page['tag'], '', $text);
 			}
 		}

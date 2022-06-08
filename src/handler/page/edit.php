@@ -60,7 +60,7 @@ if ($this->has_access('read')
 		$message = Ut::perc_replace($this->_t('RevisionHint'),
 			$this->href(),
 			$this->tag,
-			$this->get_time_formatted($this->page['modified']),
+			$this->sql_time_formatted($this->page['modified']),
 			$this->user_link($this->page['user_name'], true, false));
 		$tpl->message = $this->show_message($message, 'revision-info', false);
 		$tpl->warning = $this->show_message($this->_t('EditingRevisionWarning'), 'warning', false);

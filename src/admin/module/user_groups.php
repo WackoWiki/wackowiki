@@ -677,7 +677,7 @@ function admin_user_groups(&$engine, &$module)
 						'<td>' . $row['members'] . '</td>' .
 						'<td>' . $row['open'] . '</td>' .
 						'<td>' . $row['active'] . '</td>' .
-						'<td><small>' . $engine->get_time_formatted($row['created']) . '</small></td>' .
+						'<td><small>' . $engine->sql_time_formatted($row['created']) . '</small></td>' .
 					'</tr>';
 			}
 		}
