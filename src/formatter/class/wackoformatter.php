@@ -8,25 +8,30 @@
 
 class WackoFormatter
 {
-	var $object;
-	var $page_id;
-	var $table_scope;
-	var $old_indent_level	= 0;
-	var $indent_closers		= [];
-	var $tdold_indent_level	= 0;
-	var $auto_fn			= [];
-	var $tdindent_closers	= [];
-	var $br					= 1;
-	var $intable			= 0;
-	var $intablebr			= 0;
-	var $cols				= 0;
-	var $colors				= [
+	public $object;
+	public $page_id;
+	public $table_scope;
+	public $old_indent_level	= 0;
+	public $indent_closers		= [];
+	public $tdold_indent_level	= 0;
+	public array $auto_fn			= [];
+	public array $tdindent_closers	= [];
+	public $br					= 1;
+	public $intable			= 0;
+	public $intablebr			= 0;
+	public $cols				= 0;
+	public string $LONGREGEXP;
+	public string $MOREREGEXP;
+	public string $NOTLONGREGEXP;
+	private $tdold_indent_type;
+	private $old_indent_type;
+	public array $colors				= [
 		'blue',
 		'green',
 		'red',
 		'yellow',
 	];
-	var $x11_colors			= [
+	public array $x11_colors			= [
 		'aliceblue',
 		'antiquewhite',
 		'aqua',
@@ -290,7 +295,7 @@ class WackoFormatter
 			")/usm";
 	}
 
-	function indent_close()
+	function indent_close(): string
 	{
 		$result = '';
 
@@ -1155,13 +1160,13 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', 1, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+[:][' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
+		else if (preg_match('/^([[:alnum:]]+:[' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];
 		}
 		// wacko links!
-		else if ((!$wacko->_formatter_noautolinks)
+		else if ((!$wacko->noautolinks)
 				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . '+' . $wacko->language['UPPERNUM'] . $wacko->language['ALPHANUM'] . '*)$/us', $thing, $matches)))
 		{
 			if ($matches[1] == '~')

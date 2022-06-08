@@ -8,51 +8,52 @@ if (!defined('IN_WACKO'))
 // engine class
 class Wacko
 {
-	var $charset;
-	var $config;							// @deprecated, but will live for a looong time
-	var $db;								// new config
-	var $http;
-	var $sess;
-	var $dblink;
-	var $page;								// requested page
-	var $tag;
-	var $module;
-	var $method					= '';
-	var $forum					= false;
-	var $canonical				= false;
-	var $categories;
-	var $watch					= [];
-	var $notify_lang			= null;
-	var $is_watched				= false;
-	var $hide_revisions			= false;
-	var $_acl					= [];
-	var $acl_cache				= [];
-	var $category_cache			= [];
-	var $file_cache				= [];
-	var $page_id_cache			= [];
-	var $page_tag_cache			= [];
-	var $context				= [];		// page context, used for correct processing of inclusions
-	var $current_context		= 0;		// current context level
-	var $header_count			= 0;
-	var $page_meta				= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
-	var $first_inclusion		= [];		// for backlinks
-	var $format_safe			= true;		// for htmlspecialchars() in pre_link
-	var $toc_context			= [];
-	var $search_engines			= ['bot', 'rambler', 'yandex', 'bing', 'duckduckgo', 'crawl', 'search', 'archiver', 'slurp', 'aport', 'crawler', 'google', 'baidu', 'spider'];
-	var $language				= null;
-	var $languages				= null;
-	var $user_lang				= null;
-	var $translations			= null;
-	var $wanted_cache			= null;
-	var $page_cache				= null;
-	var $_formatter_noautolinks	= null;
-	var $numerate_links			= null;
-	var $post_wacko_action		= null;
-	var $page_lang		 		= null;
-	var $html_addition			= [];
-	var $hide_article_header	= false;
-	var $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
-	var $paragrafica_styles		= [
+	private array $acl				= [];
+	private array $acl_cache		= [];
+	private array $category_cache	= [];
+	private array $file_cache		= [];
+	private $page_cache				= null;
+	private array $page_id_cache	= [];
+	private array $page_tag_cache	= [];
+	private $wanted_cache			= null;
+	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
+	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
+
+	public $charset;
+	public $config;								// @deprecated, but will live for a looong time
+	public $db;									// new config
+	public $http;
+	public $sess;
+	public $dblink;
+	public $page;								// requested page
+	public $tag;
+	public $module;
+	public $method					= '';
+	public bool $forum				= false;
+	public bool $canonical			= false;
+	public $categories;
+	public $watch					= [];
+	public $notify_lang				= null;
+	public bool $is_watched			= false;
+	public bool $hide_revisions		= false;
+	public array $context			= [];		// page context, used for correct processing of inclusions
+	public $current_context			= 0;		// current context level
+	public $header_count			= 0;
+	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
+	public array $first_inclusion	= [];		// for backlinks
+	public array $toc_context		= [];
+	public $language				= null;
+	public $languages				= null;
+	public $user_lang				= null;
+	public $translations			= null;
+	public $noautolinks				= null;		// formatter
+	public $numerate_links			= null;
+	public $post_wacko_action		= null;
+	public $page_lang				= null;
+	public array $html_addition			= [];
+	public bool $hide_article_header	= false;
+	public bool $no_way_back			= false;	// set to true to prevent saving page as the goback-after-login
+	public array $paragrafica_styles	= [
 		'before'	=> [
 						'_before'	=> '',
 						'_after'	=> '',
@@ -74,13 +75,13 @@ class Wacko
 						'before'	=> '',
 						'after'		=> ''],
 	];
-	var $paragrafica_patches = [
+	public array $paragrafica_patches = [
 		'before'	=> ['before'],
 		'after'		=> ['after'],
 		'right'		=> ['_before'],
 		'left'		=> ['_before'],
 	];
-	var $time_intervals = [
+	public $time_intervals = [
 		365*DAYSECS	=> 'Year',
 		30*DAYSECS	=> 'Month',
 		7*DAYSECS	=> 'Week',
@@ -2359,7 +2360,7 @@ class Wacko
 		$change_summary		= $this->_t('NewUserAccount');
 
 		// add user page
-		if ($this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META) == false)
+		if (!$this->load_page($tag, 0, '', LOAD_CACHE, LOAD_META))
 		{
 			// profile title = user_name
 			$this->save_page($tag, $user_page_template, $user_name, $change_summary, '', '', '', '', $user_lang, $mute, $user_name, true);
@@ -4034,16 +4035,16 @@ class Wacko
 				{
 					$access		= true;
 
-					if ($this->has_access('read', $page_id) == false)
+					if (!$this->has_access('read', $page_id))
 					{
-						$this->_acl['list'] = '';
+						$this->acl['list'] = '';
 					}
 				}
 
-				#Ut::debug_print_r($this->_acl['list']);
-				$acl = explode("\n", $this->_acl['list']);
+				#Ut::debug_print_r($this->acl['list']);
+				$acl = explode("\n", $this->acl['list']);
 
-				if (!$access || $this->_acl['list'] == '')
+				if (!$access || $this->acl['list'] == '')
 				{
 					$class		= 'acl-denied';
 					$rel		= 'nofollow';
@@ -4828,7 +4829,7 @@ class Wacko
 		if ($this->page
 			&& ($ref = @$_SERVER['HTTP_REFERER'])
 			&& !$this->bad_words($ref)
-			&& (stripos($ref, trim($se)) === false) // cast away pointless www.google.[]
+			&& (stripos($ref, $se) === false) // cast away pointless www.google.[]
 			&& filter_var($ref, FILTER_VALIDATE_URL))
 		{
 			$heads		= ['https://', 'http://'];
@@ -5921,7 +5922,7 @@ class Wacko
 		// load acl
 		$acl		= $this->load_acl($page_id, $privilege, 1, 1, $use_parent, $new_tag);
 		// cache
-		$this->_acl	= $acl;
+		$this->acl	= $acl;
 
 		// locked down to read only
 		if ($this->db->acl_lock && $privilege != 'read')
@@ -5933,12 +5934,12 @@ class Wacko
 		if (!in_array($user_name, ['', GUEST])
 			&& ($this->is_owner($page_id) || $this->is_admin()))
 		{
-			#Ut::debug_print_r($this->_acl['list']);
-			$acl = explode("\n", $this->_acl['list']);
+			#Ut::debug_print_r($this->acl['list']);
+			$acl = explode("\n", $this->acl['list']);
 
 			if (!in_array('*', $acl) && !in_array('$', $acl))
 			{
-				$this->_acl['list']	.= (!empty($this->_acl['list']) ? "\n" : '') . $user_name;
+				$this->acl['list']	.= (!empty($this->acl['list']) ? "\n" : '') . $user_name;
 			}
 
 			return true;
@@ -5975,7 +5976,7 @@ class Wacko
 
 		if ($copy_to_this_acl)
 		{
-			$this->_acl['list'] = $acl;
+			$this->acl['list'] = $acl;
 		}
 
 		$acls = "\n" . $acl . "\n";
@@ -6181,10 +6182,10 @@ class Wacko
 			'custom'		=> 'AccessCustom',
 		];
 
-		// load $this->_acl['list'] for specified privilege
+		// load $this->acl['list'] for specified privilege
 		$access		= $this->has_access($privilege, $page_id);
 		$acl		= [];
-		$acl		= explode("\n", $this->_acl['list']);
+		$acl		= explode("\n", $this->acl['list']);
 
 		if (in_array('', $acl))
 		{
