@@ -274,7 +274,7 @@ class Feed
 						'<item>' . "\n" .
 							'<title>' . Ut::html($comment['title']) . ' ' . $this->engine->_t('To') . ' ' . Ut::html($comment['page_title']) . ' ' . $this->engine->_t('From') . ' ' .
 							($comment['user_name'] ?: $this->engine->_t('Guest')) .
-							'</title>' . "\n";
+							'</title>' . "\n" .
 							'<link>' . $this->engine->href('', $comment['tag']) . '</link>' . "\n" .
 							'<guid>' . $this->engine->href('', $comment['tag']) . '</guid>' . "\n" .
 							'<pubDate>' . date('r', strtotime($comment['created'])) . '</pubDate>' . "\n" .
