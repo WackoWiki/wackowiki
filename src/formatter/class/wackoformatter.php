@@ -954,7 +954,7 @@ class WackoFormatter
 					// #18 syntax support
 					if (preg_match('/^\#\d{1,3}$/u', $anchor))
 					{
-						$this->auto_fn['count'] = mb_substr($anchor, 1);
+						$this->auto_fn['count'] = mb_substr($anchor, 1) - 1;
 					}
 
 					// validate and sanitize $anchor
