@@ -137,6 +137,8 @@ class XML_HTMLSax3_ClosingTagState
  */
 class XML_HTMLSax3_OpeningTagState
 {
+	private array $attrs;
+
 	/**
 	 * Handles attributes
 	 * @param string attribute name
@@ -257,9 +259,10 @@ class XML_HTMLSax3_EscapeState
 		{
 			$char = $context->ScanCharacter();
 
+			$context->unscanCharacter();
+
 			if ($char == '-')
 			{
-				$context->unscanCharacter();
 				$context->unscanCharacter();
 				$text = $context->scanUntilString('-->');
 				$text .= $context->scanCharacter();
@@ -267,11 +270,11 @@ class XML_HTMLSax3_EscapeState
 			}
 			else
 			{
-				$context->unscanCharacter();
 				$text = $context->scanUntilString('>');
 			}
 		}
-		else if ($char == '[') {
+		else if ($char == '[')
+		{
 			$context->unscanCharacter();
 			$text = $context->scanUntilString(']>');
 			$text.= $context->scanCharacter();

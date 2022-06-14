@@ -124,7 +124,7 @@ class XML_HTMLSax3_StateParser
 	 * @var array
 	 * @access private
 	 */
-	private array $parser_options = [];
+	public array $parser_options = [];
 	/**
 	 * XML document being parsed
 	 * @var string
