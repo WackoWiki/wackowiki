@@ -41,64 +41,64 @@ class WikiEdit extends ProtoEdit
 		catch (e) {
 		}
 
-		//this.addButton('h1',				lang.Heading1,		'\'==\',\'==\',0,1');
-		this.addButton('h2',				lang.Heading2, '\'===\',\'===\',0,1');
-		this.addButton('h3',				lang.Heading3, '\'====\',\'====\',0,1');
-		this.addButton('h4',				lang.Heading4, '\'=====\',\'=====\',0,1');
-		this.addButton('h5',				lang.Heading5, '\'======\',\'======\',0,1');
-		this.addButton('h6',				lang.Heading6, '\'=======\',\'=======\',0,1');
-		this.addButton('customhtml',		separator);
+		//this.addButton('h1',			lang.Heading1,		'\'==\', \'==\', 0, 1');
+		this.addButton('h2',			lang.Heading2,		'\'===\', \'===\', 0, 1');
+		this.addButton('h3',			lang.Heading3,		'\'====\', \'====\', 0, 1');
+		this.addButton('h4',			lang.Heading4,		'\'=====\', \'=====\', 0, 1');
+		this.addButton('h5',			lang.Heading5,		'\'======\', \'======\', 0, 1');
+		this.addButton('h6',			lang.Heading6,		'\'=======\', \'=======\', 0, 1');
+		this.addButton('customhtml',	separator);
 
-		this.addButton('bold',				lang.Bold, '\'**\',\'**\'');
-		this.addButton('italic',			lang.Italic, '\'//\',\'//\'');
-		this.addButton('underline',			lang.Underline, '\'__\',\'__\'');
-		this.addButton('strike',			lang.Strikethrough, '\'--\',\'--\'');
-		this.addButton('small',				lang.Small, '\'++\',\'++\'');
-		this.addButton('code',				lang.Code, '\'##\',\'##\'');
-		this.addButton('customhtml',		separator);
+		this.addButton('bold',			lang.Bold,			'\'**\', \'**\'');
+		this.addButton('italic',		lang.Italic,		'\'//\', \'//\'');
+		this.addButton('underline',		lang.Underline,		'\'__\', \'__\'');
+		this.addButton('strike',		lang.Strikethrough,	'\'--\', \'--\'');
+		this.addButton('small',			lang.Small,			'\'++\', \'++\'');
+		this.addButton('code',			lang.Code,			'\'##\', \'##\'');
+		this.addButton('customhtml',	separator);
 
-		//this.addButton('superscript',		lang.Superscript,	"'^^','^^'");
-		//this.addButton('subscript',		lang.Subscript,		"'vv','vv'");
-		//this.addButton('customhtml',		separator);
-		this.addButton('ul',				lang.List, '\'  * \',\'\',0,1,1');
-		this.addButton('ol',				lang.NumberedList, '\'  1. \',\'\',0,1,1');
-		this.addButton('customhtml',		separator);
-		//this.addButton('left',			lang.Left,			'\'%%(wacko wrapper=text wrapper_align=left)\',\'%%\',2');
-		this.addButton('center',			lang.Center, '\'%%(wacko wrapper=text wrapper_align=center)\',\'%%\',2');
-		this.addButton('right',				lang.Right, '\'%%(wacko wrapper=text wrapper_align=right)\',\'%%\',2');
-		this.addButton('justify',			lang.Justify, '\'%%(wacko wrapper=text wrapper_align=justify)\',\'%%\',2');
-		this.addButton('customhtml',		separator);
+		//this.addButton('superscript',	lang.Superscript,	"'^^', '^^'");
+		//this.addButton('subscript',	lang.Subscript,		"'vv', 'vv'");
+		//this.addButton('customhtml',	separator);
+		this.addButton('ul',			lang.List,			'\'  * \', \'\', 0, 1, 1');
+		this.addButton('ol',			lang.NumberedList,	'\'  1. \', \'\', 0, 1, 1');
+		this.addButton('customhtml',	separator);
+		//this.addButton('left',		lang.Left,			'\'%%(wacko wrapper=text wrapper_align=left)\', \'%%\', 2');
+		this.addButton('center',		lang.Center,		'\'%%(wacko wrapper=text wrapper_align=center)\', \'%%\', 2');
+		this.addButton('right',			lang.Right,			'\'%%(wacko wrapper=text wrapper_align=right)\', \'%%\', 2');
+		this.addButton('justify',		lang.Justify,		'\'%%(wacko wrapper=text wrapper_align=justify)\', \'%%\', 2');
+		this.addButton('customhtml',	separator);
 
-		this.addButton('outdent',			lang.Outdent, '', 'document.getElementById(\'' + this.id + '\')._owner.unindent');
-		this.addButton('indent',			lang.Indent, '\'  \',\'\',0,1');
-		this.addButton('customhtml',		separator);
+		this.addButton('outdent',		lang.Outdent,		'', 'document.getElementById(\'' + this.id + '\')._owner.unindent');
+		this.addButton('indent',		lang.Indent,		'\'  \', \'\', 0, 1');
+		this.addButton('customhtml',	separator);
 
-		this.addButton('quote',				lang.Quote, '\'<[\',\']>\',2');
-		this.addButton('source',			lang.CodeWrapper, '\'%% \',\' %%\',2');
-		// this.addButton('html',			lang.HTML,			"'<# ',' #>',2");
-		// this.addButton('action',			lang.Action,		"'{{ ',' }}',2");
-		this.addButton('hr',				lang.Line, '\'\',\'\\n----\\n\',2');
-		this.addButton('signature',			lang.Signature, '\'::@::\',\' \',1');
-		this.addButton('textred',			lang.MarkedText, '\'!!\',\'!!\',2');
-		this.addButton('highlight',			lang.HighlightText, '\'??\',\'??\',2');
-		//this.addButton('shade',			lang.Shade,			"'%%(wacko wrapper="shade")','%%',2");
-		this.addButton('createlink',		lang.Hyperlink, '', 'document.getElementById(\'' + this.id + '\')._owner.createLink');
+		this.addButton('quote',			lang.Quote,			'\'<[\', \']>\', 2');
+		this.addButton('source',		lang.CodeWrapper,	'\'%% \', \' %%\', 2');
+		//this.addButton('html',		lang.HTML,			"'<# ', ' #>', 2");
+		//this.addButton('action',		lang.Action,		"'{{ ', ' }}', 2");
+		this.addButton('hr',			lang.Line,			'\'\', \'\\n----\\n\', 2');
+		this.addButton('signature',		lang.Signature,		'\'::@::\', \' \', 1');
+		this.addButton('textred',		lang.MarkedText,	'\'!!\', \'!!\', 2');
+		this.addButton('highlight',		lang.HighlightText,	'\'??\', \'??\', 2');
+		//this.addButton('shade',		lang.Shade,			"'%%(wacko wrapper="shade")', '%%', 2");
+		this.addButton('createlink',	lang.Hyperlink,		'', 'document.getElementById(\'' + this.id + '\')._owner.createLink');
 
 		if (this.autocomplete)
 		{
 			this.autocomplete.addButton();
 		}
 
-		this.addButton('footnote',			lang.Footnote, '\'[[^ \',\']]\',2');
-		this.addButton('createtable',		lang.InsertTable, '\'\',\'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\',2');
-		this.addButton('customhtml',		separator);
-		this.addButton('customhtml', '<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
+		this.addButton('footnote',		lang.Footnote,		'\'[[^ \', \']]\', 2');
+		this.addButton('createtable',	lang.InsertTable,	'\'\', \'\\n#|\\n|| | ||\\n|| | ||\\n|#\\n\', 2');
+		this.addButton('customhtml',	separator);
+		this.addButton('customhtml',	'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
 			+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
 			+ 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.org/doc/' + lang.HelpFormattingPage + '\');" '
 			+ ' title="' + lang.HelpFormattingTip + '">'
 			+ '<img src="' + this.imagesPath + 'spacer.png"' + ' alt="' + lang.HelpFormatting + '" title="' + lang.HelpFormattingTip + '">'
 			+ '</div></li>');
-		this.addButton('about',				lang.HelpAbout, '', 'document.getElementById(\'' + this.id + '\')._owner.help');
+		this.addButton('about',			lang.HelpAbout,		'', 'document.getElementById(\'' + this.id + '\')._owner.help');
 
 		try {
 			var toolbar			= document.createElement('div');
@@ -396,7 +396,8 @@ class WikiEdit extends ProtoEdit
 		// take an autocomplete
 		if (this.autocomplete)
 		{
-			if (this.autocomplete.keyDown(Key, e.shiftKey)) {
+			if (this.autocomplete.keyDown(Key, e.shiftKey))
+			{
 				res = true;
 				Key = -1;
 			}
