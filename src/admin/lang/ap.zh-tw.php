@@ -460,6 +460,8 @@ $ap_translation = [
 		'1'		=> '檔案',
 		'2'		=> 'Database',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> '指示會話終止的原因。',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

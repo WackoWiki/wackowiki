@@ -169,6 +169,7 @@ $config_db['rewrite_mode']					= $config['rewrite_mode'];
 $config_db['root_page']						= $config['root_page'];
 $config_db['search_page']					= $config['search_page'];
 $config_db['session_length']				= $config['session_length'];
+$config_db['session_notice']				= $config['session_notice'];
 $config_db['session_store']					= $config['session_store'];
 $config_db['show_permalink']				= $config['show_permalink'];
 $config_db['show_spaces']					= $config['show_spaces'];

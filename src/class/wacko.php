@@ -110,7 +110,7 @@ class Wacko
 	// DATABASE
 
 	// TODO: throw error for nested arrays
-	function ids_string($ids) : ?string
+	function ids_string($ids): ?string
 	{
 		// sanitize array allow only integer values
 		$ids_string = array_map( 'intval', $ids );
@@ -120,7 +120,7 @@ class Wacko
 	}
 
 	// MISC
-	function get_page_tag($page_id = 0) : ?string
+	function get_page_tag($page_id = 0): ?string
 	{
 		if (!$page_id)
 		{
@@ -150,7 +150,7 @@ class Wacko
 		}
 	}
 
-	function get_page_id($tag = '') : ?int
+	function get_page_id($tag = ''): ?int
 	{
 		if (!$tag)
 		{
@@ -180,7 +180,7 @@ class Wacko
 		}
 	}
 
-	function get_page_depth($tag) : int
+	function get_page_depth($tag): int
 	{
 		if (!$tag)
 		{
@@ -337,7 +337,7 @@ class Wacko
 		return $files['used_quota'];
 	}
 
-	function available_themes() : array
+	function available_themes(): array
 	{
 		$theme_list	= [];
 
@@ -657,7 +657,7 @@ class Wacko
 	}
 
 	// wrapper for get and format message set translation
-	function format_t($name, $lang = '') : string
+	function format_t($name, $lang = ''): string
 	{
 		$string = $this->_t($name, $lang);
 		$this->format_safe = false;
@@ -667,7 +667,7 @@ class Wacko
 		return $string;
 	}
 
-	function determine_lang() : string
+	function determine_lang(): string
 	{
 		if (@$this->method === 'edit' && @$_GET['add'] == 1)
 		{
@@ -686,7 +686,7 @@ class Wacko
 		return $lang;
 	}
 
-	function set_page_lang($lang) : bool
+	function set_page_lang($lang): bool
 	{
 		if (!$lang)
 		{
@@ -698,7 +698,7 @@ class Wacko
 		return true;
 	}
 
-	function get_charset($lang = '') : string
+	function get_charset($lang = ''): string
 	{
 		if (!$lang)
 		{
@@ -711,7 +711,7 @@ class Wacko
 	}
 
 	// shortcut for getting 'dir' for not loaded language
-	function get_direction($lang = '') : string
+	function get_direction($lang = ''): string
 	{
 		return in_array($lang, ['ar', 'fa', 'he', 'ur']) ? 'rtl' : 'ltr';
 	}
@@ -725,7 +725,7 @@ class Wacko
 
 	// PAGES
 
-	function get_keywords() : string
+	function get_keywords(): string
 	{
 		$meta_keywords = '';
 
@@ -761,7 +761,7 @@ class Wacko
 	*
 	* @return array Loaded page
 	*/
-	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0) : ?array
+	function load_page($tag, $page_id = 0, $revision_id = null, $cache = LOAD_CACHE, $metadata_only = LOAD_ALL, $deleted = 0): ?array
 	{
 		$page = [];
 
@@ -808,7 +808,7 @@ class Wacko
 		return $page;
 	}
 
-	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $metadata_only = 0, $deleted = 0) : ?array
+	function _load_page($tag, $page_id = 0, $revision_id = null, $cache = true, $metadata_only = 0, $deleted = 0): ?array
 	{
 		$cached_page	= [];
 		$page			= [];
@@ -1245,7 +1245,7 @@ class Wacko
 	}
 
 	// STANDARD QUERIES
-	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0, $limit = 100) : array
+	function load_revisions($page_id, $hide_minor_edit = 0, $show_deleted = 0, $limit = 100): array
 	{
 		$revisions	= [];
 		$pagination	= [];
@@ -1378,7 +1378,7 @@ class Wacko
 	* @param int $page_id
 	* @return array Array of (link, num)
 	*/
-	function load_external_links($page_ids = null) : ?array
+	function load_external_links($page_ids = null): ?array
 	{
 		return $this->db->load_all(
 			"SELECT " .
@@ -1481,7 +1481,7 @@ class Wacko
 	}
 
 	// used for comment feed
-	function load_comment($limit = 100, $tag = '', $deleted = 0) : array
+	function load_comment($limit = 100, $tag = '', $deleted = 0): array
 	{
 		$pages	= [];
 		$limit	= $this->get_list_count($limit);
@@ -1517,7 +1517,7 @@ class Wacko
 		}
 	}
 
-	function load_deleted_files($limit = 50, $cache = true) : array
+	function load_deleted_files($limit = 50, $cache = true): array
 	{
 		$deleted	= [];
 		$pagination	= [];
@@ -1545,7 +1545,7 @@ class Wacko
 		return [$deleted, $pagination];
 	}
 
-	function load_deleted_pages($limit = 50, $cache = true) : array
+	function load_deleted_pages($limit = 50, $cache = true): array
 	{
 		$deleted	= [];
 		$pagination	= [];
@@ -1574,7 +1574,7 @@ class Wacko
 		return [$deleted, $pagination];
 	}
 
-	function load_deleted_revisions($limit = 50, $cache = true) : array
+	function load_deleted_revisions($limit = 50, $cache = true): array
 	{
 		$deleted	= [];
 		$pagination	= [];
@@ -1603,7 +1603,7 @@ class Wacko
 		return [$deleted, $pagination];
 	}
 
-	function load_categories($object_id = 0, $type_id = OBJECT_PAGE, $cache = false) : array
+	function load_categories($object_id = 0, $type_id = OBJECT_PAGE, $cache = false): array
 	{
 		return $this->category_cache[$object_id][$type_id] ?? $this->db->load_all(
 			"SELECT c.category_id, c.category, c.category_lang " .
@@ -1701,7 +1701,7 @@ class Wacko
 	 *
 	 * @return string	$body_r
 	 */
-	function save_page($tag, $body, $title = '', $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false) : ?string
+	function save_page($tag, $body, $title = '', $edit_note = '', $minor_edit = 0, $reviewed = 0, $comment_on_id = 0, $parent_id = 0, $lang = '', $mute = false, $user_name = '', $user_page = false): ?string
 	{
 		$desc = '';
 
@@ -2175,7 +2175,7 @@ class Wacko
 
 	// COUNTER
 	// recount all comments for a given page
-	function count_comments($page_id, $user_id = null, $deleted = 0) : int
+	function count_comments($page_id, $user_id = null, $deleted = 0): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
@@ -2195,7 +2195,7 @@ class Wacko
 		return $count? $count['n'] : 0;
 	}
 
-	function count_files($page_id = null, $user_id = null, $deleted = 0) : int
+	function count_files($page_id = null, $user_id = null, $deleted = 0): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(file_id) AS n " .
@@ -2215,7 +2215,7 @@ class Wacko
 		return $count? $count['n'] : 0;
 	}
 
-	function count_pages($user_id = null, $deleted = 0) : int
+	function count_pages($user_id = null, $deleted = 0): int
 	{
 		$count = $this->db->load_single(
 			"SELECT COUNT(page_id) AS n " .
@@ -2814,7 +2814,7 @@ class Wacko
 	}
 
 	// generate url for email confirmation, used for registration and email change
-	function user_email_confirm($user_id) : string
+	function user_email_confirm($user_id): string
 	{
 		$token = Ut::random_token(21);
 
@@ -2867,7 +2867,7 @@ class Wacko
 	* @param string $message
 	* @param string $type
 	*/
-	function set_message($message, $type = 'note') : void
+	function set_message($message, $type = 'note'): void
 	{
 		if ($message)
 		{
@@ -2928,7 +2928,7 @@ class Wacko
 		}
 	}
 
-	function msg_is_comment_on($tag, $title, $user_name, $modified) : string
+	function msg_is_comment_on($tag, $title, $user_name, $modified): string
 	{
 		return $this->_t('ThisIsCommentOn') . ' ' .
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
@@ -2955,7 +2955,7 @@ class Wacko
 	 *
 	 * @return string tag with with full path and without leading slash
 	 */
-	function unwrap_link($tag) : string
+	function unwrap_link($tag): string
 	{
 		if ($tag == '/')											// '/'
 		{
@@ -3033,7 +3033,7 @@ class Wacko
 	*
 	* @return string			HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
-	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true, $encode = true, $absolute = false) : string
+	function href($method = '', $tag = '', $params = [], $addpage = false, $anchor = '', $alter = true, $encode = true, $absolute = false): string
 	{
 		if (!is_array($params))
 		{
@@ -3114,7 +3114,7 @@ class Wacko
 	*
 	* @return string tag[/method]
 	*/
-	function mini_href($method = '', $tag = '', $alter = true, $encode = true) : string
+	function mini_href($method = '', $tag = '', $alter = true, $encode = true): string
 	{
 		if (!($tag = trim($tag ?? '')))
 		{
@@ -3144,7 +3144,7 @@ class Wacko
 	* @param string $tag Page tag
 	* @return string
 	*/
-	function underscore_url($tag) : ?string
+	function underscore_url($tag): ?string
 	{
 		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
 		if ($this->db->urls_underscores)
@@ -3172,7 +3172,7 @@ class Wacko
 	* @param string $params additional parameters. Optional, default is ''
 	* @return string
 	*/
-	function compose_link_to_page($tag, $method = '', $text = '', $title = '', $track = false, $params = '') : string
+	function compose_link_to_page($tag, $method = '', $text = '', $title = '', $track = false, $params = ''): string
 	{
 		if (!$text)
 		{
@@ -3285,7 +3285,7 @@ class Wacko
 	}
 
 	// parse off [?|&][caption|clear|direct|nolink|linkonly|right|left|20x50] arguments from file:[/|!/|../]image.png?arg1&arg2=
-	function parse_media_param($file_name) : array
+	function parse_media_param($file_name): array
 	{
 		//split into src and parameters (using the questionmark)
 		$pos = mb_strrpos($file_name, '?');
@@ -3383,7 +3383,7 @@ class Wacko
 	* @param boolean $img_url
 	* @return string Wrapped link
 	*/
-	function pre_link($tag, $text = '', $track = 1, $media_url = 0) : string
+	function pre_link($tag, $text = '', $track = 1, $media_url = 0): string
 	{
 		if (preg_match('/^[\!\.' . $this->language['ALPHANUM_P'] . ']+$/u', $tag))
 		{
@@ -3439,7 +3439,7 @@ class Wacko
 	*
 	* @return string full Href link
 	*/
-	function link($tag, $method = '', $text = '', $title = '', $track = true, $safe = false, $anchor_link = true, $meta_direct = true) : string
+	function link($tag, $method = '', $text = '', $title = '', $track = true, $safe = false, $anchor_link = true, $meta_direct = true): string
 	{
 		$aname		= '';
 		$caption	= '';
@@ -4292,14 +4292,14 @@ class Wacko
 		return $figure;
 	}
 
-	function image_link($src, $class, $id, $title, $alt = null, $scale = null) : string
+	function image_link($src, $class, $id, $title, $alt = null, $scale = null): string
 	{
 		// inline element (paragrafica!)
 		return
 				'<img src="' . $src . '" loading="lazy"' . $id . ' class="' . $class . '" title="' . $title . '" alt="' . $alt . '" ' . $scale . '>';
 	}
 
-	function audio_link($src, $class, $id, $title) : string
+	function audio_link($src, $class, $id, $title): string
 	{
 		// inline element (paragrafica!)
 		$fallback	= '<span>Your browser doesn\'t support HTML5 audio. Here is a <a href="' . $src . '" title="' . $title . '">link to the audio</a> instead.</span>';
@@ -4310,7 +4310,7 @@ class Wacko
 				'</audio>';
 	}
 
-	function video_link($src, $class, $id, $title, $scale = null) : string
+	function video_link($src, $class, $id, $title, $scale = null): string
 	{
 		// inline element (paragrafica!)
 		$fallback	= '<span>Your browser doesn\'t support HTML5 video. Here is a <a href="' . $src . '" title="' . $title . '">link to the video</a> instead.</span>';
@@ -4322,7 +4322,7 @@ class Wacko
 	}
 
 	// creates a link to the user profile
-	function user_link($user_name, $linking = true, $add_icon = true) : string
+	function user_link($user_name, $linking = true, $add_icon = true): string
 	{
 		if (!$user_name)
 		{
@@ -4371,7 +4371,7 @@ class Wacko
 	* @param string $text Text with WikiWords
 	* @return string Text with Wiki Words
 	*/
-	function add_spaces($text) : ?string
+	function add_spaces($text): ?string
 	{
 		if (($user = $this->get_user()) ? $user['show_spaces'] : $this->db->show_spaces)
 		{
@@ -4394,7 +4394,7 @@ class Wacko
 		return $text;
 	}
 
-	function add_nbsps($text) : string
+	function add_nbsps($text): string
 	{
 		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
 		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
@@ -4411,7 +4411,7 @@ class Wacko
 		return $text;
 	}
 
-	function add_spaces_title($text) : string
+	function add_spaces_title($text): string
 	{
 		return preg_replace('/' . NBSP . '/', ' ', $this->add_nbsps($text));
 	}
@@ -4472,7 +4472,7 @@ class Wacko
 
 	// returns error text, or null on OK
 	// if old_tag specified - check also for already-namedness & already-existence
-	function sanitize_new_page_tag(&$tag, $old_tag = false) : ?string
+	function sanitize_new_page_tag(&$tag, $old_tag = false): ?string
 	{
 		$this->sanitize_page_tag($tag);
 
@@ -4511,12 +4511,12 @@ class Wacko
 	 *
 	 * @return string Sanitized string.
 	 */
-	function sanitize_text_field($string, $keep_nl = false) : string
+	function sanitize_text_field($string, $keep_nl = false): string
 	{
 		return Ut::strip_all_tags($string, $keep_nl);
 	}
 
-	function sanitize_username($user_name) : string
+	function sanitize_username($user_name): string
 	{
 		// strip \-\_\'\.\/\\
 		return str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
@@ -4528,7 +4528,7 @@ class Wacko
 	* @param string $text Tested text
 	* @return boolean True if WikiName? else FALSE
 	*/
-	function is_wiki_name($text) : string
+	function is_wiki_name($text): string
 	{
 		return preg_match('/^' . $this->language['UPPER'] . $this->language['LOWER'] . '+' . $this->language['UPPERNUM'] . $this->language['ALPHANUM'] . '*$/u', $text);
 	}
@@ -4542,7 +4542,7 @@ class Wacko
 	* @param integer $link_type [LINK_PAGE|LINK_FILE]
 	*
 	*/
-	function track_link($tag, $link_type) : void
+	function track_link($tag, $link_type): void
 	{
 		if (isset($this->linktable)) // no linktable? we are not tracking!
 		{
@@ -4550,13 +4550,13 @@ class Wacko
 		}
 	}
 
-	function start_link_tracking() : void
+	function start_link_tracking(): void
 	{
 		// STS: why in SESSION? is tracking between page instances possible?
 		$this->sess->linktracking = 1;
 	}
 
-	function stop_link_tracking() : void
+	function stop_link_tracking(): void
 	{
 		$this->sess->linktracking = 0;
 	}
@@ -4571,7 +4571,7 @@ class Wacko
 	*
 	* @param int $from_page_id
 	*/
-	function write_link_table($from_page_id) : void
+	function write_link_table($from_page_id): void
 	{
 		// delete related old links in table
 		$this->db->sql_query(
@@ -4650,7 +4650,7 @@ class Wacko
 		}
 	}
 
-	function update_link_table($page_id, $body_r) : void
+	function update_link_table($page_id, $body_r): void
 	{
 		// now we render it internally so we can write the updated link tables.
 		if (isset($this->linktable))
@@ -4670,7 +4670,7 @@ class Wacko
 	}
 
 	// track breadcrumbs for preload functions
-	function track_breadcrumbs($tag) : void
+	function track_breadcrumbs($tag): void
 	{
 		$page = '';
 
@@ -4747,7 +4747,7 @@ class Wacko
 
 	// FORMS
 	// parameter: named parameter array
-	function form_open($form_name = '', $parameter = []) : string
+	function form_open($form_name = '', $parameter = []): string
 	{
 		$page_method	= '';
 		$form_method	= 'post';
@@ -4795,12 +4795,12 @@ class Wacko
 		return $result;
 	}
 
-	function form_close() : string
+	function form_close(): string
 	{
 		return "</form>\n";
 	}
 
-	function validate_post_token($tag = null) : bool
+	function validate_post_token($tag = null): bool
 	{
 		if ($_POST
 			&& !$this->sess->verify_nonce(@$_POST['_action'], @$_POST['_nonce']))
@@ -4822,7 +4822,7 @@ class Wacko
 	}
 
 	// REFERRERS
-	function log_referrer() : void
+	function log_referrer(): void
 	{
 		$se = 'https://www.google.';
 
@@ -4860,7 +4860,7 @@ class Wacko
 	* @param int $page_id
 	* @return array Array of (referer, num)
 	*/
-	function load_referrers($page_ids = null) : ?array
+	function load_referrers($page_ids = null): ?array
 	{
 		return $this->db->load_all(
 			"SELECT " .
@@ -4978,7 +4978,7 @@ class Wacko
 		}
 	}
 
-	function theme_header($mod = '') : string
+	function theme_header($mod = ''): string
 	{
 		$theme_path		= Ut::join_path(THEME_DIR, $this->db->theme, 'appearance');
 		$error_message	= $this->_t('ThemeCorrupt') . ': ' . $this->db->theme;
@@ -4986,7 +4986,7 @@ class Wacko
 		return $this->include_buffered('header' . $mod . '.php', $error_message, '', $theme_path);
 	}
 
-	function theme_footer($mod = '') : string
+	function theme_footer($mod = ''): string
 	{
 		$theme_path		= Ut::join_path(THEME_DIR, $this->db->theme, 'appearance');
 		$error_message	= $this->_t('ThemeCorrupt') . ': ' . $this->db->theme;
@@ -5003,7 +5003,7 @@ class Wacko
 	* Optional, default value is FALSE.
 	* @return string Result of action
 	*/
-	function action($action, $params = [], $force_link_tracking = 0) : string
+	function action($action, $params = [], $force_link_tracking = 0): string
 	{
 		$action = mb_strtolower(trim($action));
 		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
@@ -5021,7 +5021,7 @@ class Wacko
 		return $result;
 	}
 
-	function method($method) : string
+	function method($method): string
 	{
 		if (!($handler = $this->page['handler'] ?? null))
 		{
@@ -5039,12 +5039,12 @@ class Wacko
 	}
 
 	// wrapper for the next method
-	function format($text, $formatter = 'wiki', $options = []) : string
+	function format($text, $formatter = 'wiki', $options = []): string
 	{
 		return $this->_format($text, $formatter, $options);
 	}
 
-	function _format($text, $formatter, &$options) : string
+	function _format($text, $formatter, &$options): string
 	{
 		$error	= '<em>' . Ut::perc_replace($this->_t('FormatterNotFound'), '<code>' . $formatter . '</code>') . '</em>';
 		$text	= $this->include_buffered(Ut::join_path(FORMATTER_DIR, $formatter . '.php'), $error, compact('text', 'options'));
@@ -5124,7 +5124,7 @@ class Wacko
 
 	// USERS
 	// check whether defined username is already registered.
-	function user_name_exists($user_name) : bool
+	function user_name_exists($user_name): bool
 	{
 		if ($user_name == '')
 		{
@@ -5164,7 +5164,7 @@ class Wacko
 	 *
 	 * @return array
 	 */
-	function load_user($user_name, $user_id = 0) : ?array
+	function load_user($user_name, $user_id = 0): ?array
 	{
 		return $this->db->load_single(
 			"SELECT
@@ -5185,7 +5185,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function get_user_name() : ?string
+	function get_user_name(): ?string
 	{
 		return $this->get_user_setting('user_name');
 	}
@@ -5210,7 +5210,7 @@ class Wacko
 	}
 
 	// insert user data into the session array
-	function set_user($user) : void
+	function set_user($user): void
 	{
 		$this->sess->userprofile = $user;
 
@@ -5239,7 +5239,7 @@ class Wacko
 	// set/update specific element of user session array
 	// !!! BE CAREFUL NOT TO SAVE GUEST VALUES UNDER REGISTERED USER ARRAY !!!
 	// this poses a potential security threat
-	function set_user_setting($setting, $value, $guest = 0) : void
+	function set_user_setting($setting, $value, $guest = 0): void
 	{
 		if ($guest)
 		{
@@ -5263,7 +5263,7 @@ class Wacko
 		}
 	}
 
-	function get_list_count($max) : int
+	function get_list_count($max): int
 	{
 		$user_max = $this->get_user_setting('list_count');
 
@@ -5296,7 +5296,7 @@ class Wacko
 	 * https://paragonie.com/blog/2015/04/secure-authentication-php-with-long-term-persistence,
 	 * re "Proactively Secure Long-Term User Authentication"
 	 */
-	function create_auth_token($user) : void
+	function create_auth_token($user): void
 	{
 		$session_days	= ($user['session_length'] > 0) ? $user['session_length'] : $this->db->session_length;
 		$selector		= Ut::http64_encode(Ut::random_bytes(9));
@@ -5358,7 +5358,7 @@ class Wacko
 		return false;
 	}
 
-	function delete_auth_token($user_id) : void
+	function delete_auth_token($user_id): void
 	{
 		// NB there can be many tokens for one user
 		$this->db->sql_query(
@@ -5368,7 +5368,7 @@ class Wacko
 	}
 
 	// user logs in by explicitly providing password
-	function log_user_in($user, $remember_me = false) : void
+	function log_user_in($user, $remember_me = false): void
 	{
 		$this->soft_login($user);
 
@@ -5397,12 +5397,19 @@ class Wacko
 		$this->set_message(Ut::perc_replace($this->_t('WelcomeBack'), $user['user_name']), 'success');
 	}
 
-	function session_notice($message) : void
+	function session_notice($message): void
 	{
+		if (!$this->db->session_notice)
+		{
+			return;
+		}
+
 		// TODO: pass and use user_lang
 		if ($message == 'ip')
 		{
-			$this->set_message(Ut::perc_replace($this->_t('IPAddressChanged', SYSTEM_LANG), $this->http->ip, implode(', ', array_keys($this->sess->sticky__ip))));
+			$this->set_message(Ut::perc_replace(
+				$this->_t('IPAddressChanged', SYSTEM_LANG),
+				$this->http->ip, implode(', ', array_keys($this->sess->sticky__ip))));
 		}
 		else if ($message && @$this->sess->sticky_login)
 		{
@@ -5424,7 +5431,7 @@ class Wacko
 	}
 
 	// explicitly end user session and free session vars
-	function log_user_out() : void
+	function log_user_out(): void
 	{
 		if ($user = $this->get_user())
 		{
@@ -5444,7 +5451,7 @@ class Wacko
 
 	// here we make all false login attempts last the same amount of time
 	// to avoid timing attacks on valid usernames
-	function log_user_delay($login_delay = 5) : void // STS TODO configure
+	function log_user_delay($login_delay = 5): void // STS TODO configure
 	{
 		$exec_limit = ini_get('max_execution_time');
 		set_time_limit(0);
@@ -5470,7 +5477,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function load_users($enabled = true) : ?array
+	function load_users($enabled = true): ?array
 	{
 		return $this->db->load_all(
 			"SELECT user_id, user_name " .
@@ -5481,7 +5488,7 @@ class Wacko
 			"ORDER BY BINARY user_name");
 	}
 
-	function get_user_id($user_name = '') : int
+	function get_user_id($user_name = ''): int
 	{
 		if ($user_name !== '')
 		{
@@ -5500,13 +5507,13 @@ class Wacko
 	}
 
 	// Returns boolean indicating if the current user is allowed to see comments at all
-	function user_allowed_comments() : bool
+	function user_allowed_comments(): bool
 	{
 		return $this->db->enable_comments != 0 && ($this->db->enable_comments != 2 || $this->get_user());
 	}
 
 	// COMMENTS AND COUNTS
-	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0) : ?array
+	function load_comments($page_id, $limit = 0, $count = 30, $sort = 0, $deleted = 0): ?array
 	{
 		// avoid results if $page_id is 0 (page does not exists)
 		if ($page_id)
@@ -5547,7 +5554,7 @@ class Wacko
 		return $this->sess->admin_it_is = 0;
 	}
 
-	function is_moderator() : bool
+	function is_moderator(): bool
 	{
 		if (!$this->get_user())
 		{
@@ -5565,7 +5572,7 @@ class Wacko
 		return false;
 	}
 
-	function is_reviewer() : bool
+	function is_reviewer(): bool
 	{
 		if (!$this->get_user())
 		{
@@ -5590,7 +5597,7 @@ class Wacko
 	 *
 	 * @return boolean	returns true
 	 */
-	function is_owner($page_id = null) : bool
+	function is_owner($page_id = null): bool
 	{
 		// check if user is logged in
 		if (!$this->get_user())
@@ -5632,7 +5639,7 @@ class Wacko
 		}
 	}
 
-	function get_page_owner_id($page_id = '', $revision_id = '') : ?int
+	function get_page_owner_id($page_id = '', $revision_id = ''): ?int
 	{
 		if (!$page_id)
 		{
@@ -5675,7 +5682,7 @@ class Wacko
 	}
 
 	// check for acl syntax errors
-	function validate_acl_syntax($list) : bool
+	function validate_acl_syntax($list): bool
 	{
 		$error	= null;
 		$lines	= explode("\n", $list);
@@ -5750,7 +5757,7 @@ class Wacko
 	* @param boolean $use_defaults
 	* @param array $acl Access control list
 	*/
-	function cache_acl($page_id, $privilege, $use_defaults, $acl) : void
+	function cache_acl($page_id, $privilege, $use_defaults, $acl): void
 	{
 		// $acl array must reflect acls table row structure
 		$this->acl_cache[$page_id . '#' . $privilege . '#' . $use_defaults] = $acl;
@@ -5810,7 +5817,7 @@ class Wacko
 	*
 	* @return array $acl Access control list
 	*/
-	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = '') : array
+	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = ''): array
 	{
 		$acl = '';
 
@@ -5895,7 +5902,7 @@ class Wacko
 	 *
 	 * @return boolean
 	 */
-	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1, $new_tag = '') : bool
+	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1, $new_tag = ''): bool
 	{
 		if (!$user_name)
 		{
@@ -5957,7 +5964,7 @@ class Wacko
 	 *
 	 * @return boolean
 	 */
-	function check_acl($user_name, $acl_list, $copy_to_this_acl = false) : bool
+	function check_acl($user_name, $acl_list, $copy_to_this_acl = false): bool
 	{
 		if (is_array($user_name))
 		{
@@ -6110,7 +6117,7 @@ class Wacko
 	}
 
 	// check if user has the right to upload files
-	function can_upload($global = false) : bool
+	function can_upload($global = false): bool
 	{
 		if ($this->get_user())
 		{
@@ -6166,7 +6173,7 @@ class Wacko
 		}
 	}
 
-	function show_access_mode($page_id = null, $tag = '',  $privilege = 'read') : string
+	function show_access_mode($page_id = null, $tag = '',  $privilege = 'read'): string
 	{
 		if (!$page_id)	$page_id	= $this->page['page_id']	?? null;
 		if (!$tag)		$tag		= $this->page['tag']		?? null;
@@ -6541,7 +6548,7 @@ class Wacko
 	// user trail navigation
 	//		call this function in your theme header or footer
 	//		$separator	= &gt; »
-	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size = null) : string
+	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size = null): string
 	{
 		// don't call this inside the run function, it will also writes all included pages
 		// in the user trail because the engine parses them before it includes them
@@ -7077,7 +7084,7 @@ class Wacko
 		return $what;
 	}
 
-	function numerate_toc_callback_toc($matches) : string
+	function numerate_toc_callback_toc($matches): string
 	{
 		return '<h' . $matches[2] . ' id="' . $matches[3] . '" class="heading">' .
 			($this->post_wacko_toc_hash[$matches[3]][1] ?? $matches[4]) .
@@ -7085,7 +7092,7 @@ class Wacko
 			'</h' . $matches[2] . '>';
 	}
 
-	function numerate_toc_callback_p($matches) : string
+	function numerate_toc_callback_p($matches): string
 	{
 		if (!($style = $this->paragrafica_styles[$this->post_wacko_action['p']]))
 		{
@@ -7167,7 +7174,7 @@ class Wacko
 	}
 
 	// $page_id is preferred, $tag next
-	function get_page_title($tag = '', $page_id = 0) : string
+	function get_page_title($tag = '', $page_id = 0): string
 	{
 		$tag = utf8_trim($tag, '/');
 
@@ -7258,7 +7265,7 @@ class Wacko
 	}
 
 	// REMOVALS
-	function remove_acls($tag, $cluster = false) : bool
+	function remove_acls($tag, $cluster = false): bool
 	{
 		if (!$tag)
 		{
@@ -7307,7 +7314,7 @@ class Wacko
 			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")");
 	}
 
-	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0) : bool
+	function remove_page($page_id, $comment_on_id = 0, $dontkeep = 0): bool
 	{
 		if (!$page_id || !($page = $this->load_page('', $page_id)))
 		{
@@ -7347,7 +7354,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_revision($page_id, $revision_id, $dontkeep = 0) : bool
+	function remove_revision($page_id, $revision_id, $dontkeep = 0): bool
 	{
 		if (!$page_id)
 		{
@@ -7375,7 +7382,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_revisions($tag, $cluster = false, $dontkeep = 0) : bool
+	function remove_revisions($tag, $cluster = false, $dontkeep = 0): bool
 	{
 		if (!$tag)
 		{
@@ -7405,7 +7412,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_comments($tag, $cluster = false, $dontkeep = 0) : bool
+	function remove_comments($tag, $cluster = false, $dontkeep = 0): bool
 	{
 		if (!$tag)
 		{
@@ -7560,7 +7567,7 @@ class Wacko
 		}
 	}
 
-	function remove_page_categories($tag, $cluster = false) : bool
+	function remove_page_categories($tag, $cluster = false): bool
 	{
 		if (!$tag)
 		{
@@ -7581,7 +7588,7 @@ class Wacko
 		return true;
 	}
 
-	function remove_category_assigments($object_id, $type_id) : bool
+	function remove_category_assigments($object_id, $type_id): bool
 	{
 		if (!$object_id && !$type_id)
 		{
@@ -7814,12 +7821,12 @@ class Wacko
 	}
 
 	// ADDITIONAL METHODS
-	function password_hash($user, $password) : string
+	function password_hash($user, $password): string
 	{
 		return password_hash(base64_encode(hash('sha256', $user['user_name'] . $password, true)), PASSWORD_DEFAULT);
 	}
 
-	function password_verify($user, $password) : bool
+	function password_verify($user, $password): bool
 	{
 		return password_verify(base64_encode(hash('sha256', $user['user_name'] . $password, true)), $user['password']);
 	}
@@ -7832,7 +7839,7 @@ class Wacko
 	 *
 	 * @return string dummy username/email/password fields
 	 */
-	function form_autocomplete_off() : string
+	function form_autocomplete_off(): string
 	{
 		/* REMARKS
 		 *
@@ -7857,7 +7864,7 @@ class Wacko
 
 	// run checks of password complexity under current
 	// config settings; returned error diag, or '' if good
-	function password_complexity($login, $pwd) : string
+	function password_complexity($login, $pwd): string
 	{
 		$unlike_login	= $this->db->pwd_unlike_login;
 		$char_classes	= $this->db->pwd_char_classes;
@@ -7942,9 +7949,9 @@ class Wacko
 		return $out;
 	}
 
-	function show_password_complexity() : string
+	function show_password_complexity(): string
 	{
-		$min_chars		= $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
+		$min_chars = $this->is_admin() ? $this->db->pwd_admin_min_chars : $this->db->pwd_min_chars;
 
 		if ($this->db->pwd_char_classes > 0)
 		{
@@ -8116,7 +8123,7 @@ class Wacko
 		}
 	}
 
-	function shorten_string($string, $maxlen = 80) : string
+	function shorten_string($string, $maxlen = 80): string
 	{
 		return (mb_strlen($string) > $maxlen)?  mb_substr($string, 0, 30) . '[...]' . mb_substr($string, -20) : $string;
 	}
@@ -8124,7 +8131,7 @@ class Wacko
 	// show captcha form on a page. must be incorporated as an input
 	// form component in every page that uses captcha testing
 	//		$inline	= adds <br> between elements
-	function show_captcha($inline = true) : string
+	function show_captcha($inline = true): string
 	{
 		$out = '';
 
@@ -8154,7 +8161,7 @@ class Wacko
 	// checks whether user's captcha solution was right. function
 	// takes no arguments, instead it receives user input from
 	// HTTP-POST variable 'captcha', submitted through webform.
-	function validate_captcha() : bool
+	function validate_captcha(): bool
 	{
 		$word_ok = true;
 
@@ -8181,7 +8188,7 @@ class Wacko
 	 *
 	 * @return boolean email valid or invalid
 	 */
-	function validate_email($email_address) : bool
+	function validate_email($email_address): bool
 	{
 		if ($this->db->email_pattern == 'html5')
 		{
@@ -8422,7 +8429,7 @@ class Wacko
 		}
 	}
 
-	function show_category_form($lang, $object_id = '', $type_id = '', $can_edit = false) : string
+	function show_category_form($lang, $object_id = '', $type_id = '', $can_edit = false): string
 	{
 		$assigned	= [];
 		$selected	= [];
@@ -8550,7 +8557,7 @@ class Wacko
 	// passed through POST global array. returns:
 	//	true	- if something was saved
 	//	false	- if list was empty
-	function save_categories_list($object_id, $type_id, $dryrun = 0) : bool
+	function save_categories_list($object_id, $type_id, $dryrun = 0): bool
 	{
 		$set	= [];
 		$ids	= [];
@@ -8590,7 +8597,7 @@ class Wacko
 		}
 	}
 
-	function show_select_license($name, $license, $label = false) : string
+	function show_select_license($name, $license, $label = false): string
 	{
 		$out		= '';
 		$licenses	= [];
@@ -8630,7 +8637,7 @@ class Wacko
 	 * @param string $lang current language
 	 * @param bool $label display label
 	 */
-	function show_select_lang($name, $lang, $label = false) : string
+	function show_select_lang($name, $lang, $label = false): string
 	{
 		$out		= '';
 		$langs		= [];
@@ -8670,7 +8677,7 @@ class Wacko
 		{
 			if ($prefix === true)
 			{
-				// Decimal prefix
+				// decimal prefix
 				if ($short === true)
 				{
 					// ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
@@ -8686,7 +8693,7 @@ class Wacko
 			}
 			else
 			{
-				// Binary prefix
+				// binary prefix
 				if ($short === true)
 				{
 					// ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
@@ -8728,7 +8735,7 @@ class Wacko
 		}
 	}
 
-	function binary_multiples_factor ($size, $prefix = true) : int
+	function binary_multiples_factor ($size, $prefix = true): int
 	{
 		$count	= 9; // count($norm) -1;
 		$x		= 0;
@@ -8751,7 +8758,7 @@ class Wacko
 		return $x;
 	}
 
-	function delta_formatted($size_delta) : string
+	function delta_formatted($size_delta): string
 	{
 		if ($size_delta > 0)
 		{

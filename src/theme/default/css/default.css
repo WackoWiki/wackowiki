@@ -1025,6 +1025,7 @@ p.preview {
 *.heading:target,
 .layout-box dd:target,
 .footnote *:target,
+p:target,
 a:target {
 	background-color: var(--ww-a-target-bg);
 }

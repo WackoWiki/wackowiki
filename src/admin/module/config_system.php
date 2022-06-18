@@ -46,6 +46,7 @@ function admin_config_system(&$engine, &$module)
 		$config['log_default_show']			= (int) $_POST['log_default_show'];
 		$config['log_purge_time']			= (int) $_POST['log_purge_time'];
 		$config['anonymize_ip']				= (int) $_POST['anonymize_ip'];
+		$config['session_notice']			= (int) $_POST['session_notice'];
 		$config['session_store']			= (int) $_POST['session_store'];
 		$config['rewrite_mode']				= (int) ($_POST['rewrite_mode'] ?? 0);
 		$config['reverse_proxy']			= (int) ($_POST['reverse_proxy'] ?? 0);
@@ -298,7 +299,16 @@ function admin_config_system(&$engine, &$module)
 					</select>
 				</td>
 			</tr>
-
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="session_notice"><strong><?php echo $engine->_t('SessionNotice');?>:</strong><br>
+					<small><?php echo $engine->_t('SessionNoticeInfo');?></small></label>
+				</td>
+				<td>
+					<input type="radio" id="session_notice_on" name="session_notice" value="1"<?php echo ($engine->db->session_notice == 1 ? ' checked' : '');?>><label for="session_notice_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="session_notice_off" name="session_notice" value="0"<?php echo ($engine->db->session_notice == 0 ? ' checked' : '');?>><label for="session_notice_off"><?php echo $engine->_t('Off');?></label>
+				</td>
+			</tr>
 			<tr>
 				<th colspan="2">
 					<br>

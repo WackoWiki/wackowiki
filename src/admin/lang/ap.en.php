@@ -401,7 +401,7 @@ $ap_translation = [
 
 	'DebugModeSection'			=> 'Debug mode',
 	'DebugMode'					=> 'Debug mode',
-	'DebugModeInfo'				=> 'Fixation and the withdrawal of telemetry data on the time of the program. Note: the full detail of the regime imposes high demands on available memory, especially in demanding operations such as backup and restore the database.',
+	'DebugModeInfo'				=> 'Fixing and outputting telemetry data about the programs execution time. Attention: Full detail mode imposes higher requirements to the allocated memory, especially for resource-intensive operations, such as database backup and restore.',
 	'DebugModes'	=> [
 		'0'		=> 'debugging is off',
 		'1'		=> 'only the total execution time',
@@ -460,6 +460,8 @@ $ap_translation = [
 		'1'		=> 'File',
 		'2'		=> 'Database',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'Indicates the cause of the session termination.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

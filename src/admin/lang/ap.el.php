@@ -439,9 +439,9 @@ $ap_translation = [
 									 about this setting, do not have a reverse proxy, or WackoWiki operates in
 									 a shared hosting environment, this setting should remain disabled.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
+	'ReverseProxyHeaderInfo'	=> 'Ορίστε αυτήν την τιμή εάν ο διακομιστής μεσολάβησης στέλνει την IP του πελάτη
+									σε μια κεφαλίδα διαφορετική από την X-Forwarded-For. Η επικεφαλίδα "X-Forwarded-For"
+									είναι μια λίστα διευθύνσεων IP που διαχωρίζεται με κόμμα και κενό, και μόνο η τελευταία (η πιο αριστερή) θα χρησιμοποιηθεί.',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored
@@ -457,6 +457,8 @@ $ap_translation = [
 		'1'		=> 'Αρχείο',
 		'2'		=> 'Βάση δεδομένων',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'Υποδεικνύει την αιτία τερματισμού της συνόδου.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>
