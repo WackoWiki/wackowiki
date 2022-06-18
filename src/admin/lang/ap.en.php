@@ -446,6 +446,8 @@ $ap_translation = [
 		'1'		=> 'File',
 		'2'		=> 'Database',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'Indicates the cause of the session termination.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

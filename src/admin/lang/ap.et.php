@@ -443,6 +443,8 @@ $ap_translation = [
 		'1'		=> 'Fail',
 		'2'		=> 'Andmebaas',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'Näitab sessiooni lõpetamise põhjust.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

@@ -446,6 +446,8 @@ $ap_translation = [
 		'1'		=> 'फ़ाइल',
 		'2'		=> 'डेटाबेस',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'सत्र समाप्ति का कारण बताता है।',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

@@ -446,6 +446,8 @@ $ap_translation = [
 		'1'		=> '파일',
 		'2'		=> '데이터베이스',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> '세션 종료의 원인을 나타냅니다.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

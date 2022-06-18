@@ -440,6 +440,8 @@ $ap_translation = [
 		'1'		=> 'Archivo',
 		'2'		=> 'Base de datos',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'Indica la causa de la finalización de la sesión.',
 
 	'RewriteMode'					=> 'Usar <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'Si su servidor web admite esta función, gire para obtener "hermosas" las direcciones de las páginas.<br>

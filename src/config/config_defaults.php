@@ -257,6 +257,7 @@ $wacko_config_defaults = [
 	'ap_max_login_attempts'			=> 4,
 
 	'session_length'				=> 30,	// cookie_expire_days
+	'session_notice'				=> 0,	// session termination notice
 	'allow_persistent_cookie'		=> 1,
 
 	'enable_security_headers'		=> 1,

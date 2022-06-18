@@ -446,6 +446,8 @@ $ap_translation = [
 		'1'		=> 'ファイル',
 		'2'		=> 'データベース',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'セッション終了の原因を示す。',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

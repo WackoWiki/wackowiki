@@ -443,6 +443,8 @@ $ap_translation = [
 		'1'		=> 'Αρχείο',
 		'2'		=> 'Βάση δεδομένων',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'Υποδεικνύει την αιτία τερματισμού της συνόδου.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

@@ -443,6 +443,8 @@ $ap_translation = [
 		'1'		=> 'Файла',
 		'2'		=> 'База данни',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> 'Посочва причината за прекратяване на сесията.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> 'If your web server supports this feature, turn to get "beautiful" the addresses of pages.<br>

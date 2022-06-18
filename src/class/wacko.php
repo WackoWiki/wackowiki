@@ -4920,7 +4920,7 @@ class Wacko
 	// variables prefixed by __ to not mess with argument extraction from $vars
 	function include_buffered($__filename, $__notfound = '', $__vars = '', $__path = '')
 	{
-		foreach (($__path? explode(':', $__path): ['']) as $__dir)
+		foreach (($__path? explode(':', $__path) : ['']) as $__dir)
 		{
 			$__pathname = Ut::join_path($__dir, $__filename);
 
@@ -5437,10 +5437,17 @@ class Wacko
 
 	function session_notice($message): void
 	{
+		if (!$this->db->session_notice)
+		{
+			return;
+		}
+
 		// TODO: pass and use user_lang
 		if ($message == 'ip')
 		{
-			$this->set_message(Ut::perc_replace($this->_t('IPAddressChanged', SYSTEM_LANG), $this->http->ip, implode(', ', array_keys($this->sess->sticky__ip))));
+			$this->set_message(Ut::perc_replace(
+				$this->_t('IPAddressChanged', SYSTEM_LANG),
+				$this->http->ip, implode(', ', array_keys($this->sess->sticky__ip))));
 		}
 		else if ($message && @$this->sess->sticky_login)
 		{

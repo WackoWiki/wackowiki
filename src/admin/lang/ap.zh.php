@@ -428,6 +428,8 @@ $ap_translation = [
 		'1'		=> '文件',
 		'2'		=> '数据库',
 	],
+	'SessionNotice'					=> 'Session termination notice',
+	'SessionNoticeInfo'				=> '表示会话终止的原因。',
 
 	'RewriteMode'					=> '使用 <code>mod_rewrite</code>',
 	'RewriteModeInfo'				=> '如果您的网络服务器支持此功能，请转而获取“漂亮”的页面地址。<br> <span class="cite">该值可能会在运行时被设置类覆盖，无论是否关闭， 如果 HTTP_MOD_REWRITE 开启。',
