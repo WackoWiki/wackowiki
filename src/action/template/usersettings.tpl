@@ -163,7 +163,7 @@
 						<td>&nbsp;</td>
 						<td>
 							<input type="checkbox" name="noid_pubs" id="noid_pubs"[ ' hidesession | checkbox ' ]>
-							<label for="noid_pubs">[ ' _t: ProfileAnonymousPub ' ]</label>
+							<label for="noid_pubs">[ ' _t: AnonymousPub ' ]</label>
 						</td>
 					</tr>
 				=]
