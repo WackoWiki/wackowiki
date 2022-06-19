@@ -45,7 +45,7 @@ if (($user = $this->get_user()))
 	{
 		$message .= $this->_t('LastVisit') .
 			' <code>' .
-			$this->get_time_formatted($user['last_visit']) .
+			$this->sql_time_formatted($user['last_visit']) .
 			'</code>' . "<br>\n";
 	}
 

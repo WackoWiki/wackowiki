@@ -238,7 +238,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 				$tpl->mime			= $file['mime_type'];
 				$tpl->user			= $this->user_link($file['user_name'], true, false);
-				$tpl->time			= $this->get_time_formatted($file['uploaded_dt']);
+				$tpl->time			= $this->sql_time_formatted($file['uploaded_dt']);
 
 				if ($file['license_id'])
 				{

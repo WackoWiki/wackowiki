@@ -246,7 +246,7 @@ if ($can_view)
 				$path2	= $path1;
 			}
 
-			$dt			= $this->get_time_formatted($file['uploaded_dt']);
+			$dt			= $this->sql_time_formatted($file['uploaded_dt']);
 			$desc		= $this->format($file['file_description'], 'typografica' );
 
 			if ($desc == '')

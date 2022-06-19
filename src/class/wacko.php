@@ -388,7 +388,7 @@ class Wacko
 		return date($this->db->date_format . ' ' . $this->db->time_format_seconds, $local);
 	}
 
-	function get_time_formatted($text, $relative = false) // STS: rename to sql_time_formatted
+	function sql_time_formatted($text, $relative = false)
 	{
 		$local_time = $this->sql2localtime($text);
 
@@ -467,7 +467,7 @@ class Wacko
 			$this->language = &$this->languages[$lang];
 
 			setlocale(LC_CTYPE, $this->language['locale']);
-			setlocale(LC_TIME, $this->language['locale']);	// get_time_formatted()
+			setlocale(LC_TIME, $this->language['locale']);	// sql_time_formatted()
 
 			mb_internal_encoding($this->language['charset']);
 
@@ -2934,7 +2934,7 @@ class Wacko
 			$this->compose_link_to_page($tag, '', $title, $tag) . ', ' .
 			$this->_t('PostedBy') . ' ' .
 			$this->user_link($user_name, true, true) . ' ' .
-			$this->_t('At') . ' ' . $this->get_time_formatted($modified);
+			$this->_t('At') . ' ' . $this->sql_time_formatted($modified);
 	}
 
 	/**
@@ -4920,7 +4920,7 @@ class Wacko
 					$tpl->filter('time_formatted',
 						function ($value)
 						{
-							return $this->get_time_formatted($value);
+							return $this->sql_time_formatted($value);
 						});
 					$tpl->filter('hide_page',
 						function ($value)

@@ -994,8 +994,8 @@ function admin_user_users(&$engine, &$module)
 						<td><small><a href="' . $engine->href('', '', ['user_lang' => $row['user_lang']]) . '">' . $row['user_lang'] . '</a></small></td>
 						<td>' . $row['enabled'] . '</td>
 						<td><a href="' . $engine->href('', '', ['account_status' => $row['account_status']]) . '">' . $status[$row['account_status']] . '</a></td>
-						<td><small>' . $engine->get_time_formatted($row['signup_time']) . '</small></td>
-						<td><small>' . $engine->get_time_formatted($row['last_visit']) . '</small></td>
+						<td><small>' . $engine->sql_time_formatted($row['signup_time']) . '</small></td>
+						<td><small>' . $engine->sql_time_formatted($row['last_visit']) . '</small></td>
 					</tr>';
 			}
 		}
