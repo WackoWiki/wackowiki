@@ -373,7 +373,7 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 */
 	function scanUntilCharacters($string): string
 	{
-		$startpos	= $this->position;
+		$startpos	= $this->position ?? 0;
 		$length		= strcspn($this->rawtext, $string, $startpos);
 		$this->position += $length;
 
