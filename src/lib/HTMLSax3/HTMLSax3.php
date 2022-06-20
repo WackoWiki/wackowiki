@@ -159,15 +159,15 @@ class XML_HTMLSax3_StateParser
 	function __construct (& $htmlsax)
 	{
 		$this->htmlsax = & $htmlsax;
-		$this->State[XML_HTMLSAX3_STATE_START] = new XML_HTMLSax3_StartingState();
+		$this->State[XML_HTMLSAX3_STATE_START]			= new XML_HTMLSax3_StartingState();
 
-		$this->State[XML_HTMLSAX3_STATE_CLOSING_TAG] = new XML_HTMLSax3_ClosingTagState();
-		$this->State[XML_HTMLSAX3_STATE_TAG] = new XML_HTMLSax3_TagState();
-		$this->State[XML_HTMLSAX3_STATE_OPENING_TAG] = new XML_HTMLSax3_OpeningTagState();
+		$this->State[XML_HTMLSAX3_STATE_CLOSING_TAG]	= new XML_HTMLSax3_ClosingTagState();
+		$this->State[XML_HTMLSAX3_STATE_TAG]			= new XML_HTMLSax3_TagState();
+		$this->State[XML_HTMLSAX3_STATE_OPENING_TAG]	= new XML_HTMLSax3_OpeningTagState();
 
-		$this->State[XML_HTMLSAX3_STATE_PI] = new XML_HTMLSax3_PiState();
-		$this->State[XML_HTMLSAX3_STATE_JASP] = new XML_HTMLSax3_JaspState();
-		$this->State[XML_HTMLSAX3_STATE_ESCAPE] = new XML_HTMLSax3_EscapeState();
+		$this->State[XML_HTMLSAX3_STATE_PI]				= new XML_HTMLSax3_PiState();
+		$this->State[XML_HTMLSAX3_STATE_JASP]			= new XML_HTMLSax3_JaspState();
+		$this->State[XML_HTMLSAX3_STATE_ESCAPE]			= new XML_HTMLSax3_EscapeState();
 	}
 
 	/**
