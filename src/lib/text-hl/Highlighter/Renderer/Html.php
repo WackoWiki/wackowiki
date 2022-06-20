@@ -24,7 +24,8 @@
 
 // BC trick : only define constants if Text/Highlighter.php
 // is not yet included
-if (!defined('HL_NUMBERS_LI')) {
+if (!defined('HL_NUMBERS_LI'))
+{
 	/**#@+
 	 * Constant for use with $options['numbers']
 	 */
@@ -241,7 +242,6 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 			&& !empty($this->_options['doclinks']['url'])
 		)
 		{
-
 			$this->_doclinks = $this->_options['doclinks']; // keys: url, target, elements array
 
 			if (empty($this->_options['doclinks']['elements']))
@@ -293,7 +293,6 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 	 */
 	function finalize()
 	{
-
 		// get parent's output
 		parent::finalize();
 		$output = parent::getOutput();
@@ -314,7 +313,6 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 		// loop through each class=>content pair
 		foreach ($output as $token)
 		{
-
 			if ($this->_enumerated)
 			{
 				$key		= false;
