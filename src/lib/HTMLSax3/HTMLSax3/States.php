@@ -137,7 +137,7 @@ class XML_HTMLSax3_ClosingTagState
  */
 class XML_HTMLSax3_OpeningTagState
 {
-	private array $attrs;
+	public array $attrs;
 
 	/**
 	 * Handles attributes

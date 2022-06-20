@@ -2780,7 +2780,7 @@ class Wacko
 					$lang = $user['user_lang'];
 					$save = $this->set_language($lang, true, true);
 
-					$body = ($user_name == GUEST ? $this->_t('Guest'): $user_name);
+					$body = ($user_name == GUEST ? $this->_t('Guest') : $user_name);
 
 					if ($comment_on_id)
 					{
@@ -5437,7 +5437,8 @@ class Wacko
 
 	function session_notice($message): void
 	{
-		if (!$this->db->session_notice)
+		if (    !$this->db->session_notice == 1
+			|| !($this->db->session_notice == 2 && $this->is_admin()))
 		{
 			return;
 		}

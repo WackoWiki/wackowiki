@@ -11,27 +11,27 @@ class WackoFormatter
 	public $object;
 	public $page_id;
 	public $table_scope;
-	public $old_indent_level	= 0;
-	public $indent_closers		= [];
-	public $tdold_indent_level	= 0;
+	public int $old_indent_level	= 0;
+	public array $indent_closers	= [];
+	public int $tdold_indent_level	= 0;
 	public array $auto_fn			= [];
 	public array $tdindent_closers	= [];
-	public $br					= 1;
-	public $intable			= 0;
-	public $intablebr			= 0;
-	public $cols				= 0;
+	public int $br					= 1;
+	public int $intable				= 0;
+	public int $intablebr			= 0;
+	public int $cols				= 0;
 	public string $LONGREGEXP;
 	public string $MOREREGEXP;
 	public string $NOTLONGREGEXP;
 	private $tdold_indent_type;
 	private $old_indent_type;
-	public array $colors				= [
+	public array $colors			= [
 		'blue',
 		'green',
 		'red',
 		'yellow',
 	];
-	public array $x11_colors			= [
+	public array $x11_colors		= [
 		'aliceblue',
 		'antiquewhite',
 		'aqua',
@@ -258,7 +258,7 @@ class WackoFormatter
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
-			"\b[[:alnum:]]+[:][" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
+			"\b[[:alnum:]]+:[" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// wiki links (beside actions)
@@ -1091,7 +1091,7 @@ class WackoFormatter
 			// get new indent level
 			if ($matches[2][0] == ' ')
 			{
-				$new_indent_level = (int) mb_strlen($matches[2]) / 2;
+				$new_indent_level = mb_strlen($matches[2]) / 2;
 			}
 			else
 			{

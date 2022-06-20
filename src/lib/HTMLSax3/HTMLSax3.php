@@ -46,7 +46,7 @@ class XML_HTMLSax3_StateParser
 	 * @var XML_HTMLSax3
 	 * @access private
 	 */
-	private $htmlsax;
+	public $htmlsax;
 	/**
 	 * User defined object for handling elements
 	 * @var object
@@ -130,13 +130,13 @@ class XML_HTMLSax3_StateParser
 	 * @var string
 	 * @access private
 	 */
-	protected string $rawtext;
+	public string $rawtext;
 	/**
 	 * Position in XML document relative to start (0)
 	 * @var int
 	 * @access private
 	 */
-	private int $position;
+	public int $position;
 	/**
 	 * Length of the XML document in characters
 	 * @var int
@@ -148,7 +148,7 @@ class XML_HTMLSax3_StateParser
 	 * @var array
 	 * @access private
 	 */
-	private array $State = [];
+	public array $State = [];
 
 	/**
 	 * Constructs XML_HTMLSax3_StateParser setting up states
@@ -432,7 +432,7 @@ class XML_HTMLSax3
 	 * @var XML_HTMLSax3_StateParser
 	 * @access private
 	 */
-	private $state_parser;
+	public $state_parser;
 
 	/**
 	 * Constructs XML_HTMLSax3 selecting concrete StateParser subclass
