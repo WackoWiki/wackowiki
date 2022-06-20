@@ -1,7 +1,8 @@
 <?php
+
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 7                                                        |
+// | PHP Version 8                                                        |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2002 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -35,13 +36,13 @@ class XML_HTMLSax3_Trim
 	 * @var object
 	 * @access private
 	 */
-	public object $orig_obj;
+	public $orig_obj;
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_method;
+	public $orig_method;
 	/**
 	 * Constructs XML_HTMLSax3_Trim
 	 * @param object handler object being decorated
@@ -59,7 +60,7 @@ class XML_HTMLSax3_Trim
 	 * @param string element data
 	 * @access protected
 	 */
-	function trimData(&$parser, $data): void
+	function trimData(&$parser, $data)
 	{
 		$data = trim($data);
 
@@ -81,19 +82,19 @@ class XML_HTMLSax3_CaseFolding
 	 * @var object
 	 * @access private
 	 */
-	public object $orig_obj;
+	public $orig_obj;
 	/**
 	 * Original open handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_open_method;
+	public $orig_open_method;
 	/**
 	 * Original close handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_close_method;
+	public $orig_close_method;
 	/**
 	 * Constructs XML_HTMLSax3_CaseFolding
 	 * @param object handler object being decorated
@@ -114,7 +115,7 @@ class XML_HTMLSax3_CaseFolding
 	 * @param array tag attributes
 	 * @access protected
 	 */
-	function foldOpen(&$parser, $tag, $attrs= [], $empty = FALSE): void
+	function foldOpen(&$parser, $tag, $attrs= [], $empty = false)
 	{
 		$this->orig_obj->{$this->orig_open_method}($parser, strtoupper($tag), $attrs, $empty);
 	}
@@ -124,7 +125,7 @@ class XML_HTMLSax3_CaseFolding
 	 * @param string tag name
 	 * @access protected
 	 */
-	function foldClose(&$parser, $tag, $empty = FALSE): void
+	function foldClose(&$parser, $tag, $empty = false)
 	{
 		$this->orig_obj->{$this->orig_close_method}($parser, strtoupper($tag), $empty);
 	}
@@ -142,13 +143,13 @@ class XML_HTMLSax3_Linefeed
 	 * @var object
 	 * @access private
 	 */
-	public object $orig_obj;
+	public $orig_obj;
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_method;
+	public $orig_method;
 	/**
 	 * Constructs XML_HTMLSax3_LineFeed
 	 * @param object handler object being decorated
@@ -166,7 +167,7 @@ class XML_HTMLSax3_Linefeed
 	 * @param string element data
 	 * @access protected
 	 */
-	function breakData(&$parser, $data): void
+	function breakData(&$parser, $data)
 	{
 		$data = explode("\n", $data);
 
@@ -189,13 +190,13 @@ class XML_HTMLSax3_Tab
 	 * @var object
 	 * @access private
 	 */
-	public object $orig_obj;
+	public $orig_obj;
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_method;
+	public $orig_method;
 	/**
 	 * Constructs XML_HTMLSax3_Tab
 	 * @param object handler object being decorated
@@ -213,7 +214,7 @@ class XML_HTMLSax3_Tab
 	 * @param string element data
 	 * @access protected
 	 */
-	function breakData(&$parser, $data): void
+	function breakData(&$parser, $data)
 	{
 		$data = explode("\t", $data);
 
@@ -237,13 +238,13 @@ class XML_HTMLSax3_Entities_Parsed
 	 * @var object
 	 * @access private
 	 */
-	public object $orig_obj;
+	public $orig_obj;
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_method;
+	public $orig_method;
 	/**
 	 * Constructs XML_HTMLSax3_Entities_Parsed
 	 * @param object handler object being decorated
@@ -261,7 +262,7 @@ class XML_HTMLSax3_Entities_Parsed
 	 * @param string element data
 	 * @access protected
 	 */
-	function breakData(&$parser, $data): void
+	function breakData(&$parser, $data)
 	{
 		$data = preg_split('/(&.+?;)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
@@ -285,13 +286,13 @@ class XML_HTMLSax3_Entities_Unparsed
 	 * @var object
 	 * @access private
 	 */
-	public object $orig_obj;
+	public $orig_obj;
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_method;
+	public $orig_method;
 	/**
 	 * Constructs XML_HTMLSax3_Entities_Unparsed
 	 * @param object handler object being decorated
@@ -309,7 +310,7 @@ class XML_HTMLSax3_Entities_Unparsed
 	 * @param string element data
 	 * @access protected
 	 */
-	function breakData(&$parser, $data): void
+	function breakData(&$parser, $data)
 	{
 		$data = preg_split('/(&.+?;)/', $data, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
@@ -333,13 +334,13 @@ class XML_HTMLSax3_Escape_Stripper
 	 * @var object
 	 * @access private
 	 */
-	public object $orig_obj;
+	public $orig_obj;
 	/**
 	 * Original handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $orig_method;
+	public $orig_method;
 	/**
 	 * Constructs XML_HTMLSax3_Entities_Unparsed
 	 * @param object handler object being decorated
@@ -357,7 +358,7 @@ class XML_HTMLSax3_Escape_Stripper
 	 * @param string element data
 	 * @access protected
 	 */
-	function strip(&$parser, $data): void
+	function strip(&$parser, $data)
 	{
 		// Check for HTML comments first
 		if (str_starts_with($data, '--'))
@@ -367,8 +368,9 @@ class XML_HTMLSax3_Escape_Stripper
 				'/\-\-$/',				// Closing comment: --
 			];
 			$data = preg_replace($patterns, '', $data);
+
+			// Check for XML CDATA sections (note: don't do both!)
 		}
-		// Check for XML CDATA sections (note: don't do both!)
 		else if (str_starts_with($data, '['))
 		{
 			$patterns = [

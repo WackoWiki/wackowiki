@@ -1,7 +1,8 @@
 <?php
+
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 7                                                        |
+// | PHP Version 8                                                        |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2002 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -74,7 +75,8 @@ class XML_HTMLSax3_TagState
 	 */
 	function parse(&$context)
 	{
-		switch($context->ScanCharacter()) {
+		switch($context->ScanCharacter())
+		{
 			case '/':
 				return XML_HTMLSAX3_STATE_CLOSING_TAG;
 				break;
@@ -124,7 +126,7 @@ class XML_HTMLSax3_ClosingTagState
 			}
 
 			$context->handler_object_element->
-			{$context->handler_method_closing}($context->htmlsax, $tag, FALSE);
+			{$context->handler_method_closing}($context->htmlsax, $tag, false);
 		}
 
 		return XML_HTMLSAX3_STATE_START;
@@ -137,8 +139,6 @@ class XML_HTMLSax3_ClosingTagState
  */
 class XML_HTMLSax3_OpeningTagState
 {
-	public array $attrs;
-
 	/**
 	 * Handles attributes
 	 * @param string attribute name
@@ -207,9 +207,9 @@ class XML_HTMLSax3_OpeningTagState
 
 		if ($tag != '')
 		{
-			$this->attrs	= [];
-			$Attributes		= $this->parseAttributes($context);
-			$char			= $context->scanCharacter();
+			$this->attrs = [];
+			$Attributes = $this->parseAttributes($context);
+			$char = $context->scanCharacter();
 
 			if ($char == '/')
 			{
@@ -338,8 +338,8 @@ class XML_HTMLSax3_PiState
 	 */
 	function parse(&$context)
 	{
-		$target	= $context->scanUntilCharacters(" \n\r\t");
-		$data	= $context->scanUntilString('?>');
+		$target = $context->scanUntilCharacters(" \n\r\t");
+		$data = $context->scanUntilString('?>');
 
 		if ($data != '')
 		{

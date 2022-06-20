@@ -1,7 +1,8 @@
 <?php
+
 //
 // +----------------------------------------------------------------------+
-// | PHP Version 7                                                        |
+// | PHP Version 8                                                        |
 // +----------------------------------------------------------------------+
 // | Copyright (c) 1997-2002 The PHP Group                                |
 // +----------------------------------------------------------------------+
@@ -30,8 +31,8 @@ if (!defined('XML_HTMLSAX3'))
 	define('XML_HTMLSAX3', 'XML/');
 }
 
-require_once(XML_HTMLSAX3 . 'HTMLSax3/States.php');
-require_once(XML_HTMLSAX3 . 'HTMLSax3/Decorators.php');
+require_once XML_HTMLSAX3 . 'HTMLSax3/States.php';
+require_once XML_HTMLSAX3 . 'HTMLSax3/Decorators.php';
 
 /**
  * Base State Parser
@@ -52,103 +53,103 @@ class XML_HTMLSax3_StateParser
 	 * @var object
 	 * @access private
 	 */
-	public object $handler_object_element;
+	public $handler_object_element;
 	/**
 	 * User defined open tag handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $handler_method_opening;
+	public $handler_method_opening;
 	/**
 	 * User defined close tag handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $handler_method_closing;
+	public $handler_method_closing;
 	/**
 	 * User defined object for handling data in elements
 	 * @var object
 	 * @access private
 	 */
-	public object $handler_object_data;
+	public $handler_object_data;
 	/**
 	 * User defined data handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $handler_method_data;
+	public $handler_method_data;
 	/**
 	 * User defined object for handling processing instructions
 	 * @var object
 	 * @access private
 	 */
-	public object $handler_object_pi;
+	public $handler_object_pi;
 	/**
 	 * User defined processing instruction handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $handler_method_pi;
+	public $handler_method_pi;
 	/**
 	 * User defined object for handling JSP/ASP tags
 	 * @var object
 	 * @access private
 	 */
-	public object $handler_object_jasp;
+	public $handler_object_jasp;
 	/**
 	 * User defined JSP/ASP handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $handler_method_jasp;
+	public $handler_method_jasp;
 	/**
 	 * User defined object for handling XML escapes
 	 * @var object
 	 * @access private
 	 */
-	public object $handler_object_escape;
+	public $handler_object_escape;
 	/**
 	 * User defined XML escape handler method
 	 * @var string
 	 * @access private
 	 */
-	public string $handler_method_escape;
+	public $handler_method_escape;
 	/**
 	 * User defined handler object or NullHandler
 	 * @var object
 	 * @access private
 	 */
-	public object $handler_default;
+	public $handler_default;
 	/**
 	 * Parser options determining parsing behavior
 	 * @var array
 	 * @access private
 	 */
-	public array $parser_options = [];
+	public $parser_options = [];
 	/**
 	 * XML document being parsed
 	 * @var string
 	 * @access private
 	 */
-	public string $rawtext;
+	public $rawtext;
 	/**
 	 * Position in XML document relative to start (0)
 	 * @var int
 	 * @access private
 	 */
-	public int $position;
+	public $position;
 	/**
 	 * Length of the XML document in characters
 	 * @var int
 	 * @access private
 	 */
-	public int $length;
+	public $length;
 	/**
 	 * Array of state objects
 	 * @var array
 	 * @access private
 	 */
-	public array $State = [];
+	public $State = [];
 
 	/**
 	 * Constructs XML_HTMLSax3_StateParser setting up states
@@ -158,15 +159,15 @@ class XML_HTMLSax3_StateParser
 	function __construct (& $htmlsax)
 	{
 		$this->htmlsax = & $htmlsax;
-		$this->State[XML_HTMLSAX3_STATE_START]			= new XML_HTMLSax3_StartingState();
+		$this->State[XML_HTMLSAX3_STATE_START] = new XML_HTMLSax3_StartingState();
 
-		$this->State[XML_HTMLSAX3_STATE_CLOSING_TAG]	= new XML_HTMLSax3_ClosingTagState();
-		$this->State[XML_HTMLSAX3_STATE_TAG]			= new XML_HTMLSax3_TagState();
-		$this->State[XML_HTMLSAX3_STATE_OPENING_TAG]	= new XML_HTMLSax3_OpeningTagState();
+		$this->State[XML_HTMLSAX3_STATE_CLOSING_TAG] = new XML_HTMLSax3_ClosingTagState();
+		$this->State[XML_HTMLSAX3_STATE_TAG] = new XML_HTMLSax3_TagState();
+		$this->State[XML_HTMLSAX3_STATE_OPENING_TAG] = new XML_HTMLSax3_OpeningTagState();
 
-		$this->State[XML_HTMLSAX3_STATE_PI]				= new XML_HTMLSax3_PiState();
-		$this->State[XML_HTMLSAX3_STATE_JASP]			= new XML_HTMLSax3_JaspState();
-		$this->State[XML_HTMLSAX3_STATE_ESCAPE]			= new XML_HTMLSax3_EscapeState();
+		$this->State[XML_HTMLSAX3_STATE_PI] = new XML_HTMLSax3_PiState();
+		$this->State[XML_HTMLSAX3_STATE_JASP] = new XML_HTMLSax3_JaspState();
+		$this->State[XML_HTMLSAX3_STATE_ESCAPE] = new XML_HTMLSax3_EscapeState();
 	}
 
 	/**
@@ -174,7 +175,7 @@ class XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function unscanCharacter(): void
+	function unscanCharacter()
 	{
 		$this->position -= 1;
 	}
@@ -184,7 +185,7 @@ class XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function ignoreCharacter(): void
+	function ignoreCharacter()
 	{
 		$this->position += 1;
 	}
@@ -194,7 +195,7 @@ class XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return mixed
 	 */
-	function scanCharacter(): mixed
+	function scanCharacter()
 	{
 		if ($this->position < $this->length)
 		{
@@ -209,7 +210,7 @@ class XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return string
 	 */
-	function scanUntilString($string): string
+	function scanUntilString($string)
 	{
 		$start = $this->position;
 		$this->position = strpos($this->rawtext, $string, $start);
@@ -230,8 +231,7 @@ class XML_HTMLSax3_StateParser
 	 * @return string
 	 * @abstract
 	 */
-	function scanUntilCharacters($string): string
-	{}
+	function scanUntilCharacters($string) {}
 
 	/**
 	 * Moves the position forward past any whitespace characters
@@ -239,8 +239,7 @@ class XML_HTMLSax3_StateParser
 	 * @return void
 	 * @abstract
 	 */
-	function ignoreWhitespace(): void
-	{}
+	function ignoreWhitespace() {}
 
 	/**
 	 * Begins the parsing operation, setting up any decorators, depending on
@@ -249,7 +248,7 @@ class XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function parse($data): void
+	function parse($data)
 	{
 		if ($this->parser_options['XML_OPTION_TRIM_DATA_NODES'] == 1)
 		{
@@ -317,9 +316,9 @@ class XML_HTMLSax3_StateParser
 			$this->handler_method_escape = 'strip';
 		}
 
-		$this->rawtext = $data;
-		$this->length = strlen($data);
-		$this->position = 0;
+		$this->rawtext	= $data;
+		$this->length	= strlen($data);
+		$this->position	= 0;
 		$this->_parse();
 	}
 
@@ -330,7 +329,7 @@ class XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function _parse($state = XML_HTMLSAX3_STATE_START): void
+	function _parse($state = XML_HTMLSAX3_STATE_START)
 	{
 		do {
 			$state = $this->State[$state]->parse($this);
@@ -371,9 +370,9 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return string
 	 */
-	function scanUntilCharacters($string): string
+	function scanUntilCharacters($string)
 	{
-		$startpos	= $this->position ?? 0;
+		$startpos	= $this->position;
 		$length		= strcspn($this->rawtext, $string, $startpos);
 		$this->position += $length;
 
@@ -385,7 +384,7 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function ignoreWhitespace(): void
+	function ignoreWhitespace()
 	{
 		$this->position += strspn($this->rawtext, " \n\r\t", $this->position);
 	}
@@ -398,7 +397,7 @@ class XML_HTMLSax3_StateParser_Gtet430 extends XML_HTMLSax3_StateParser
 	 * @access protected
 	 * @return void
 	 */
-	function parse($data): void
+	function parse($data)
 	{
 		parent::parse($data);
 	}
@@ -416,7 +415,7 @@ class XML_HTMLSax3_NullHandler
 	 * @access protected
 	 * @return void
 	 */
-	function DoNothing(): void
+	function DoNothing()
 	{}
 }
 
@@ -469,9 +468,9 @@ class XML_HTMLSax3
 	 * @access public
 	 * @return mixed
 	 */
-	function set_object(&$object): mixed
+	function set_object(&$object)
 	{
-		if (is_object($object))
+		if ( is_object($object) )
 		{
 			$this->state_parser->handler_default =& $object;
 
@@ -479,7 +478,7 @@ class XML_HTMLSax3
 		}
 		else
 		{
-			require_once('PEAR.php');
+			require_once 'PEAR.php';
 			PEAR::raiseError('XML_HTMLSax3::set_object requires '.
 				'an object instance');
 		}
@@ -512,7 +511,7 @@ class XML_HTMLSax3
 	 * @access public
 	 * @return boolean
 	 */
-	function set_option($name, $value=1): bool
+	function set_option($name, $value=1)
 	{
 		if ( array_key_exists($name,$this->state_parser->parser_options) )
 		{
@@ -522,7 +521,7 @@ class XML_HTMLSax3
 		}
 		else
 		{
-			require_once('PEAR.php');
+			require_once 'PEAR.php';
 			PEAR::raiseError('XML_HTMLSax3::set_option(' . $name . ') illegal');
 		}
 	}
@@ -541,7 +540,7 @@ class XML_HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_data_handler($data_method): void
+	function set_data_handler($data_method)
 	{
 		$this->state_parser->handler_object_data =& $this->state_parser->handler_default;
 		$this->state_parser->handler_method_data = $data_method;
@@ -565,7 +564,7 @@ class XML_HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_element_handler($opening_method, $closing_method): void
+	function set_element_handler($opening_method, $closing_method)
 	{
 		$this->state_parser->handler_object_element =& $this->state_parser->handler_default;
 		$this->state_parser->handler_method_opening = $opening_method;
@@ -585,7 +584,7 @@ class XML_HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_pi_handler($pi_method): void
+	function set_pi_handler($pi_method)
 	{
 		$this->state_parser->handler_object_pi =& $this->state_parser->handler_default;
 		$this->state_parser->handler_method_pi = $pi_method;
@@ -604,7 +603,7 @@ class XML_HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_escape_handler($escape_method): void
+	function set_escape_handler($escape_method)
 	{
 		$this->state_parser->handler_object_escape =& $this->state_parser->handler_default;
 		$this->state_parser->handler_method_escape = $escape_method;
@@ -622,7 +621,7 @@ class XML_HTMLSax3
 	 * @return void
 	 * @see set_object
 	 */
-	function set_jasp_handler ($jasp_method): void
+	function set_jasp_handler ($jasp_method)
 	{
 		$this->state_parser->handler_object_jasp =& $this->state_parser->handler_default;
 		$this->state_parser->handler_method_jasp = $jasp_method;
@@ -642,7 +641,7 @@ class XML_HTMLSax3
 	 * @return int
 	 * @see get_length
 	 */
-	function get_current_position(): int
+	function get_current_position()
 	{
 		return $this->state_parser->position;
 	}
@@ -652,7 +651,7 @@ class XML_HTMLSax3
 	 * @access public
 	 * @return int
 	 */
-	function get_length(): int
+	function get_length()
 	{
 		return $this->state_parser->length;
 	}
@@ -663,7 +662,7 @@ class XML_HTMLSax3
 	 * @access public
 	 * @return void
 	 */
-	function parse($data): void
+	function parse($data)
 	{
 		$this->state_parser->parse($data);
 	}
