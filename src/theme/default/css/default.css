@@ -2030,7 +2030,7 @@ li.m-revisions img {
 	background: url('./../icon/revisions.svg') no-repeat;
 }
 li.m-remove img {
-	background: url('./../icon/page-delete.svg') no-repeat;
+	background: url('./../icon/delete.svg') no-repeat;
 }
 li.m-purge img {
 	background: url('./../icon/purge.svg') no-repeat;
