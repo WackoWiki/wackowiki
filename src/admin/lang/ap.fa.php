@@ -446,7 +446,7 @@ $ap_translation = [
 		'1'		=> 'فایل',
 		'2'		=> 'پایگاه داده',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'نمایش علت خاتمه جلسه',
 	'SessionNoticeInfo'				=> 'دلیل ختم جلسه را نشان می دهد.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

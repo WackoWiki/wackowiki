@@ -441,7 +441,7 @@ $ap_translation = [
 		'1'		=> 'Bestand',
 		'2'		=> 'Database',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Toon sessie beëindiging oorzaak',
 	'SessionNoticeInfo'				=> 'Geeft de oorzaak van de sessiebeëindiging aan.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

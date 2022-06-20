@@ -425,7 +425,7 @@ $ap_translation = [
 		'1'		=> 'Файл',
 		'2'		=> 'База данных',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Показать причину завершения сеанса',
 	'SessionNoticeInfo'				=> 'Указывает причину прекращения сеанса.',
 
 	'RewriteMode'					=> 'Использовать <code>mod_rewrite</code>',

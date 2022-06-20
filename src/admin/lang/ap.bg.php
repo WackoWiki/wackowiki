@@ -443,7 +443,7 @@ $ap_translation = [
 		'1'		=> 'Файла',
 		'2'		=> 'База данни',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Показване на причината за прекратяване на сесията',
 	'SessionNoticeInfo'				=> 'Посочва причината за прекратяване на сесията.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

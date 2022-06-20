@@ -446,7 +446,7 @@ $ap_translation = [
 		'1'		=> '檔案',
 		'2'		=> 'Database',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> '顯示會話終止原因',
 	'SessionNoticeInfo'				=> '指示會話終止的原因。',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

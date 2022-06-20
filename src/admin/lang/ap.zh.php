@@ -428,7 +428,7 @@ $ap_translation = [
 		'1'		=> '文件',
 		'2'		=> '数据库',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> '显示会话终止原因',
 	'SessionNoticeInfo'				=> '表示会话终止的原因。',
 
 	'RewriteMode'					=> '使用 <code>mod_rewrite</code>',

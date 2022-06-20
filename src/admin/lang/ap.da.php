@@ -442,7 +442,7 @@ $ap_translation = [
 		'1'		=> 'Fil',
 		'2'		=> 'Database',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Vis årsagen til afslutning af sessionen',
 	'SessionNoticeInfo'				=> 'Angiver årsagen til, at sessionen er blevet afbrudt.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

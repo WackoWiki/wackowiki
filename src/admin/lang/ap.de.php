@@ -445,7 +445,7 @@ $ap_translation = [
 		'1'		=> 'Datei',
 		'2'		=> 'Datenbank',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Zeige Ursache für Sitzungsabbruch',
 	'SessionNoticeInfo'				=> 'Gibt die Ursache für die Beendigung der Sitzung an.',
 
 	'RewriteMode'					=> 'Verwende <code>mod_rewrite</code>',
