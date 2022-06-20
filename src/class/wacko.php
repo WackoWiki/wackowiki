@@ -1512,9 +1512,9 @@ class Wacko
 			}
 
 			$this->preload_acl($page_ids);
-
-			return $pages;
 		}
+
+		return $pages;
 	}
 
 	function load_deleted_files($limit = 50, $cache = true): array
