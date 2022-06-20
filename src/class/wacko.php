@@ -1528,7 +1528,7 @@ class Wacko
 	}
 
 	// used for comment feed
-	function load_comment($limit = 100, $tag = '', $deleted = 0): array
+	function load_comment($limit = 100, $tag = '', $deleted = 0): ?array
 	{
 		$pages	= [];
 		$limit	= $this->get_list_count($limit);
