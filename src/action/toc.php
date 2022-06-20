@@ -25,6 +25,7 @@ if (!defined('IN_WACKO'))
 if (!isset($page))		$page		= '';
 if (!isset($nomark))	$nomark		= 0;
 if (!isset($numerate))	$numerate	= 0;
+if (!isset($start))		$start		= 0;
 if (!isset($from))		$from		= '';
 if (!isset($to))		$to			= '';
 if (!isset($legend))	$legend		= '';
