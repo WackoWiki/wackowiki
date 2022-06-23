@@ -84,7 +84,7 @@ const SQL_MODE_STRICT				= 'TRADITIONAL,NO_ENGINE_SUBSTITUTION,ONLY_FULL_GROUP_B
 const SQL_MODE_PERMISSIVE			= 'NO_ENGINE_SUBSTITUTION,NO_AUTO_CREATE_USER';
 
 // Do not change these three lines, PLEASE-PLEASE. In fact, don't change anything! Ever!
-const WACKO_VERSION					= '6.0.30';
+const WACKO_VERSION					= '6.0.31';
 const HTML_ENTITIES_CHARSET			= 'UTF-8';
 const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
@@ -97,4 +97,4 @@ const DB_MIN_VERSION				= ['mariadb' => '10.2.2', 'mysql' => '5.7.7'];
 
 const PHP_MIN_VERSION				= '7.3.0';				// minimum required PHP version
 const PHP_MAX_VERSION				= '8.0';				// maximum required PHP version
-const PHP_ERROR_REPORTING			= 6;					// PHP error reporting: 0 - off, 6 - all
+const PHP_ERROR_REPORTING			= 0;					// PHP error reporting: 0 - off, 6 - all
