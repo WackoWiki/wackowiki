@@ -4269,7 +4269,7 @@ class Wacko
 		}
 	}
 
-	function add_caption($text, $caption, $class, $clear = false) : string
+	function add_caption($text, $caption, $class, $clear = false): string
 	{
 		$figure =
 			'<figure class="caption ' . $class . '">' . "\n" .
@@ -7116,7 +7116,7 @@ class Wacko
 	}
 
 	// BREADCRUMBS -- navigation inside WackoClusters
-	function get_page_path($tag = '', $titles = false, $separator = '/', $linking = true, $root_page = false) : string
+	function get_page_path($tag = '', $titles = false, $separator = '/', $linking = true, $root_page = false): string
 	{
 		if (!isset($tag))
 		{

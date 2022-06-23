@@ -129,7 +129,7 @@ class UriRouter
 
 				foreach ($env['match'] as $var => $val)
 				{
-					if (preg_match('#[^\d]#', $var))
+					if (preg_match('#\D#', $var))
 					{
 						[$varname, $varidx] = $this->parse_var($var);
 						$env[$varname][$varidx] = $val;
@@ -158,7 +158,7 @@ class UriRouter
 					// substitute vars into value
 					if (strpos($val, '$') !== false)
 					{
-						$val = preg_replace_callback('#@?(\$[0-9a-j])|@?\$\{([\w&]+)\}|\$\$|\$\@#',
+						$val = preg_replace_callback('#@?(\$[a-j\d])|@?\$\{([\w&]+)\}|\$\$|\$\@#',
 							function ($x) use (&$env)
 							{
 								if ($x[0] == '$$' || $x[0] == '$@')
@@ -250,7 +250,7 @@ class UriRouter
 									$hashids = new Hashids($seed);
 								}
 
-								$ids = $hashids->decode(preg_replace('#[^a-zA-Z0-9]+#', '', $var));
+								$ids = $hashids->decode(preg_replace('#[^a-zA-Z\d]+#', '', $var));
 
 								if (($n = count($ids)) == $exp[1] + 1)
 								{
@@ -393,7 +393,7 @@ class UriRouter
 				$actions = [];
 				foreach (array_slice($line, 1, $nf - 1) as &$one)
 				{
-					if (!preg_match('#^(\$[0-9a-j]|[\w&]+)(:(\w+))?(\?=?|==?|![~=]?|[<>]=|[-=~<>])(.*)$#', $one, $match) ||
+					if (!preg_match('#^(\$[a-j\d]|[\w&]+)(:(\w+))?(\?=?|==?|![~=]?|[<>]=|[-=~<>])(.*)$#', $one, $match) ||
 						(($match[2] == '!' || $match[2] == '-' || $match[2] == '?') && $match[3] !== ''))
 					{
 						$this->aband($prefix . 'invalid action "' . $one . '"');

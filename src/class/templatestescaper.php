@@ -56,7 +56,7 @@ class TemplatestEscaper
 			return $string;
 		}
 
-		$result = preg_replace_callback('/[^a-z0-9,\.\-_]/iSu',
+		$result = preg_replace_callback('/[^a-z\d,\.\-_]/iSu',
 			function ($matches)
 			{
 				$chr = $matches[0];
@@ -122,7 +122,7 @@ class TemplatestEscaper
 			return $string;
 		}
 
-		$result = preg_replace_callback('/[^a-z0-9,\._]/iSu',
+		$result = preg_replace_callback('/[^a-z\d,\._]/iSu',
 			function ($matches)
 			{
 				$chr = $matches[0];
@@ -160,7 +160,7 @@ class TemplatestEscaper
 			return $string;
 		}
 
-		$result = preg_replace_callback('/[^a-z0-9]/iSu',
+		$result = preg_replace_callback('/[^a-z\d]/iSu',
 			function ($matches)
 			{
 				$chr = $matches[0];

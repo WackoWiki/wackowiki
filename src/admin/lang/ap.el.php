@@ -457,7 +457,7 @@ $ap_translation = [
 		'1'		=> 'Αρχείο',
 		'2'		=> 'Βάση δεδομένων',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Εμφάνιση αιτίας τερματισμού συνόδου',
 	'SessionNoticeInfo'				=> 'Υποδεικνύει την αιτία τερματισμού της συνόδου.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

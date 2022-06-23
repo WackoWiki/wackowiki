@@ -46,8 +46,8 @@ echo	'<ignore><aside class="wrapper' . $type_class . $align_class . $col_class .
 				: '') .
 			'<div class="wrapper-content">' . "\n" .
 				$text.
-			"</div>\n" .
-		"</aside></ignore>\n";
+			'</div>' . "\n" .
+		'</aside></ignore>' . "\n";
 
 if ($options['clear'])
 {

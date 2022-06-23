@@ -439,9 +439,9 @@ $ap_translation = [
 									 about this setting, do not have a reverse proxy, or WackoWiki operates in
 									 a shared hosting environment, this setting should remain disabled.',
 	'ReverseProxyHeader'		=> 'Reverse proxy header',
-	'ReverseProxyHeaderInfo'	=> 'Set this value if your proxy server sends the client IP in a header
-									 other than X-Forwarded-For. The "X-Forwarded-For" header is a comma+space separated list of IP
-									 addresses, only the last one (the left-most) will be used.',
+	'ReverseProxyHeaderInfo'	=> 'Задайте тази стойност, ако вашият прокси сървър изпраща IP адреса на клиента в заглавие,
+									различно от X-Forwarded-For. Заглавието "X-Forwarded-For" представлява списък от IP адреси,
+									разделени със запетая + интервал, като ще бъде използван само последният (най-левият).',
 	'ReverseProxyAddresses'		=> 'reverse_proxy accepts an array of IP addresses',
 	'ReverseProxyAddressesInfo'	=> 'Each element of this array is the IP address of any of your reverse
 									 proxies. Filling this array WackoWiki will trust the information stored
@@ -457,7 +457,7 @@ $ap_translation = [
 		'1'		=> 'Файла',
 		'2'		=> 'База данни',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Показване на причината за прекратяване на сесията',
 	'SessionNoticeInfo'				=> 'Посочва причината за прекратяване на сесията.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

@@ -470,7 +470,7 @@ function admin_config_basic(&$engine, &$module)
 				</td>
 				<td>
 					<input type="radio" id="export_handler_on" name="export_handler" value="1"<?php echo ($engine->db->export_handler == 1 ? ' checked' : '');?>><label for="export_handler_on"><?php echo $engine->_t('On');?></label>
-					<input type="radio" id="export_handler_guest" name="export_handler" value="2"<?php echo ($engine->db->export_handler == 2 ? ' checked' : '');?>><label for="export_handler_guest"><?php echo $engine->_t('Registered');?></label>
+					<input type="radio" id="export_handler_user" name="export_handler" value="2"<?php echo ($engine->db->export_handler == 2 ? ' checked' : '');?>><label for="export_handler_user"><?php echo $engine->_t('Registered');?></label>
 					<input type="radio" id="export_handler_off" name="export_handler" value="0"<?php echo ($engine->db->export_handler == 0 ? ' checked' : '');?>><label for="export_handler_off"><?php echo $engine->_t('Off');?></label>
 				</td>
 			</tr>

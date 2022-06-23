@@ -457,7 +457,7 @@ $ap_translation = [
 		'1'		=> 'Fájl',
 		'2'		=> 'Adatbázis',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Munkamenet befejezésének okának megjelenítése',
 	'SessionNoticeInfo'				=> 'A munkamenet befejezésének okát jelzi.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

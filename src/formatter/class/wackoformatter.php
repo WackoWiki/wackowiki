@@ -25,13 +25,13 @@ class WackoFormatter
 	public string $NOTLONGREGEXP;
 	private $tdold_indent_type;
 	private $old_indent_type;
-	public array $colors				= [
+	public array $colors			= [
 		'blue',
 		'green',
 		'red',
 		'yellow',
 	];
-	public array $x11_colors			= [
+	public array $x11_colors		= [
 		'aliceblue',
 		'antiquewhite',
 		'aqua',
@@ -258,7 +258,7 @@ class WackoFormatter
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jp(?:eg|e|g)|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
-			"\b[[:alnum:]]+[:][" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
+			"\b[[:alnum:]]+:[" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// wiki links (beside actions)
@@ -954,11 +954,11 @@ class WackoFormatter
 					// #18 syntax support
 					if (preg_match('/^\#\d{1,3}$/u', $anchor))
 					{
-						$this->auto_fn['count'] = mb_substr($anchor, 1);
+						$this->auto_fn['count'] = mb_substr($anchor, 1) - 1;
 					}
 
 					// validate and sanitize $anchor
-					if (!preg_match('/^([\p{L}\d*†‡§‖])*$/u', $anchor))
+					if (!preg_match('/^([\p{L}\d*†‡§‖¶])*$/u', $anchor))
 					{
 						$anchor = '';
 					}
@@ -1091,7 +1091,7 @@ class WackoFormatter
 			// get new indent level
 			if ($matches[2][0] == ' ')
 			{
-				$new_indent_level = (int) mb_strlen($matches[2]) / 2;
+				$new_indent_level = mb_strlen($matches[2]) / 2;
 			}
 			else
 			{

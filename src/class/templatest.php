@@ -177,7 +177,7 @@ class Templatest
 			{
 				// [ ==== // some text === ] comment
 			}
-			else if (preg_match('/^\h*\[\h*=+\h*([a-z][a-z0-9]*)\h*=+\h*\]\h*$/i', $line, $match))
+			else if (preg_match('/^\h*\[\h*=+\h*([a-z][a-z\d]*)\h*=+\h*\]\h*$/i', $line, $match))
 			{
 				if (!$part && !$level)
 				{
@@ -252,7 +252,7 @@ class Templatest
 					{
 						[$lineno, $line] = $numline;
 
-						if (preg_match('/^(\h*)\[\h*=+\h*([a-z][a-z0-9]*)(\h+(_|[a-z][a-z0-9]*))?\b(.*?)\h*=+\h*$/i', $line, $match))
+						if (preg_match('/^(\h*)\[\h*=+\h*([a-z][a-z\d]*)(\h+(_|[a-z][a-z\d]*))?\b(.*?)\h*=+\h*$/i', $line, $match))
 						{
 							if (isset($match[4]) && ($patname = $match[4]))
 							{

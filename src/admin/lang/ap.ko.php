@@ -460,7 +460,7 @@ $ap_translation = [
 		'1'		=> '파일',
 		'2'		=> '데이터베이스',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> '세션 종료 원인 표시',
 	'SessionNoticeInfo'				=> '세션 종료의 원인을 나타냅니다.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

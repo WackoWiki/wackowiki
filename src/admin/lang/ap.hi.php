@@ -460,7 +460,7 @@ $ap_translation = [
 		'1'		=> 'फ़ाइल',
 		'2'		=> 'डेटाबेस',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'सत्र समाप्ति कारण दिखाएं',
 	'SessionNoticeInfo'				=> 'सत्र समाप्ति का कारण बताता है।',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',

@@ -174,7 +174,7 @@ foreach ($special_keyword2 as $i)
 
 $css = preg_replace('/(\.?)(.*)(\s?\{?)/us', "&nbsp;<span style=\"color: ##ocv##;\">$1$2</span>$3", $css);
 
-$css = preg_replace("/(\#[0-9a-fA-F]+|\d+(px))/u", "<span style=\"color: " . $options['color']['digits'] . ";\">$1</span>", $css);
+$css = preg_replace("/(\#[a-fA-F\d]+|\d+(px))/u", "<span style=\"color: " . $options['color']['digits'] . ";\">$1</span>", $css);
 
 $css = str_replace('\:', '<span style="color: ' . $options['color']['attributes'] . '; font-weight: bold;">:</span>', $css);
 $css = str_replace('{', '<span style="color: ' . $options['color']['attributes'] . '; font-weight: bold;">{</span>', $css);

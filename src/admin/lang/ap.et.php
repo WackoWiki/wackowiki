@@ -457,7 +457,7 @@ $ap_translation = [
 		'1'		=> 'Fail',
 		'2'		=> 'Andmebaas',
 	],
-	'SessionNotice'					=> 'Session termination notice',
+	'SessionNotice'					=> 'Näita seansi lõpetamise põhjust',
 	'SessionNoticeInfo'				=> 'Näitab sessiooni lõpetamise põhjust.',
 
 	'RewriteMode'					=> 'Use <code>mod_rewrite</code>',
