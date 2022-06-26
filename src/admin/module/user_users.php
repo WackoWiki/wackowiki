@@ -121,11 +121,11 @@ function admin_user_users(&$engine, &$module)
 	if (isset($_POST['create']) || isset($_POST['edit']))
 	{
 		// passing vars from user input
-		$user_name		= Ut::strip_spaces($_POST['user_name']);
-		$realname		= (string) $_POST['realname'] ?? '';
-		$email			= Ut::strip_spaces($_POST['email']);
-		$password		= (string) $_POST['password'] ?? '';
-		$conf_password	= (string) $_POST['conf_password'] ?? '';
+		$user_name		= Ut::strip_spaces(($_POST['user_name'] ?? ''));
+		$realname		= (string) ($_POST['realname'] ?? '');
+		$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
+		$password		= (string) ($_POST['password'] ?? '');
+		$conf_password	= (string) ($_POST['conf_password'] ?? '');
 		$user_lang		= $_POST['user_lang'] ?? $engine->db->language;
 		$user_lang		= $engine->known_language($user_lang) ? $user_lang : $engine->db->language;
 		$complexity		= $engine->password_complexity($user_name, $password);
