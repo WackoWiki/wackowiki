@@ -81,59 +81,65 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 
 // 6.0 ############
 
+// acl
+$upgrade['6.1.11'][]	= ['alter',		'acl',				$alter_acl_r6_0_1];
+
 // cache
-$upgrade['6.1.9'][]	= ['alter',		'cache',			$alter_cache_r6_0_1];
+$upgrade['6.1.9'][]		= ['alter',		'cache',			$alter_cache_r6_0_1];
 
 // category
 
 // config
-$upgrade['6.1.3'][]	= ['update',	'config',			$update_config_r6_0_1];
+$upgrade['6.1.3'][]		= ['update',	'config',			$update_config_r6_0_1];
 
 // file
-$upgrade['6.1.5'][]	= ['alter',		'file',				$alter_file_r6_0_1];
-$upgrade['6.1.5'][]	= ['alter',		'file',				$alter_file_r6_0_2];
-$upgrade['6.1.9'][]	= ['alter',		'file',				$alter_file_r6_0_3];
+$upgrade['6.1.5'][]		= ['alter',		'file',				$alter_file_r6_0_1];
+$upgrade['6.1.5'][]		= ['alter',		'file',				$alter_file_r6_0_2];
+$upgrade['6.1.9'][]		= ['alter',		'file',				$alter_file_r6_0_3];
 
 // log
 
 // menu
-$upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_1];
-$upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_2];
-$upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_3];
-$upgrade['6.1.4'][]	= ['alter',		'menu',				$alter_menu_r6_0_4];
+$upgrade['6.1.4'][]		= ['alter',		'menu',				$alter_menu_r6_0_1];
+$upgrade['6.1.4'][]		= ['alter',		'menu',				$alter_menu_r6_0_2];
+$upgrade['6.1.4'][]		= ['alter',		'menu',				$alter_menu_r6_0_3];
+$upgrade['6.1.4'][]		= ['alter',		'menu',				$alter_menu_r6_0_4];
 
 // page
-$upgrade['6.1.2'][]	= ['alter',		'page',				$alter_page_r6_0_1];
+$upgrade['6.1.2'][]		= ['alter',		'page',				$alter_page_r6_0_1];
 
-$upgrade['6.1.9'][]	= ['update',	'page',				$update_page_r6_0_1];
-$upgrade['6.1.9'][]	= ['update',	'page',				$update_page_r6_0_2];
+$upgrade['6.1.9'][]		= ['update',	'page',				$update_page_r6_0_1];
+$upgrade['6.1.9'][]		= ['update',	'page',				$update_page_r6_0_2];
 
 // page link
 
 // poll
-$upgrade['6.1.2'][]	= ['delete',	'poll',				$delete_poll_r6_0_1];
+$upgrade['6.1.2'][]		= ['delete',	'poll',				$delete_poll_r6_0_1];
 
 // rating
-$upgrade['6.1.2'][]	= ['delete',	'rating',			$delete_rating_r6_0_1];
+$upgrade['6.1.2'][]		= ['delete',	'rating',			$delete_rating_r6_0_1];
 
 // referrer
-$upgrade['6.1.9'][]	= ['alter',		'referrer',			$alter_referrer_r6_0_1];
+$upgrade['6.1.9'][]		= ['alter',		'referrer',			$alter_referrer_r6_0_1];
 
 // revision
 
 // user
-$upgrade['6.1.3'][]	= ['alter',		'user',				$alter_user_r6_0_1];
+$upgrade['6.1.3'][]		= ['alter',		'user',				$alter_user_r6_0_1];
 
 // user setting
-$upgrade['6.1.3'][]	= ['alter',		'user_settings',	$alter_user_setting_r6_0_1];
-$upgrade['6.1.3'][]	= ['alter',		'user_settings',	$alter_user_setting_r6_0_2];
-$upgrade['6.1.3'][]	= ['alter',		'user_settings',	$alter_user_setting_r6_0_3];
+$upgrade['6.1.3'][]		= ['alter',		'user_settings',	$alter_user_setting_r6_0_1];
+$upgrade['6.1.3'][]		= ['alter',		'user_settings',	$alter_user_setting_r6_0_2];
+$upgrade['6.1.3'][]		= ['alter',		'user_settings',	$alter_user_setting_r6_0_3];
 
-$upgrade['6.1.3'][]	= ['update',	'user_settings',	$update_user_setting_r6_0_1];
+$upgrade['6.1.3'][]		= ['update',	'user_settings',	$update_user_setting_r6_0_1];
 
 // usergroup
 
+// usergroup member
+$upgrade['6.1.11'][]	= ['alter',		'usergroup_member',	$alter_usergroup_member_r6_0_1];
+
 // watch
-$upgrade['6.1.4'][]	= ['alter',		'watch',	$alter_watch_r6_0_1];
-$upgrade['6.1.4'][]	= ['alter',		'watch',	$alter_watch_r6_0_2];
+$upgrade['6.1.4'][]		= ['alter',		'watch',			$alter_watch_r6_0_1];
+$upgrade['6.1.4'][]		= ['alter',		'watch',			$alter_watch_r6_0_2];
 

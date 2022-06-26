@@ -12,6 +12,7 @@ $collation	= 'COLLATE ' . $config['db_collation'];
 $engine		= 'ENGINE=' . $config['db_engine'];
 
 // ACL
+$alter_acl_r6_0_1 = "ALTER TABLE {$pref}acl ADD acl_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (acl_id)";
 
 // AUTH TOKEN
 
@@ -76,6 +77,9 @@ $alter_user_setting_r6_0_3 = "ALTER TABLE {$pref}user_setting CHANGE timezone ti
 $update_user_setting_r6_0_1 = "UPDATE {$pref}user_setting SET timezone = 'UTC'";
 
 // USERGROUP
+
+// USERGROUP MEMBER
+$alter_usergroup_member_r6_0_1 = "ALTER TABLE {$pref}usergroup_member ADD member_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (member_id)";
 
 // WATCH
 $alter_watch_r6_0_1 = "ALTER TABLE {$pref}watch ADD INDEX idx_user_id (user_id)";

@@ -14,9 +14,11 @@ $engine		= 'ENGINE=' . $config['db_engine'];
 
 $tbl_acl =
 	"CREATE TABLE {$pref}acl (
+		acl_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 		page_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 		privilege VARCHAR(10) NOT NULL DEFAULT '',
 		list TEXT NOT NULL,
+		PRIMARY KEY (acl_id),
 		UNIQUE KEY idx_page_id (page_id, privilege)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
@@ -391,8 +393,10 @@ $tbl_usergroup =
 
 $tbl_usergroup_member =
 	"CREATE TABLE {$pref}usergroup_member (
+		group_member_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 		group_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0',
 		user_id INTEGER(10) UNSIGNED NOT NULL DEFAULT '0',
+		PRIMARY KEY (group_member_id),
 		UNIQUE KEY idx_group_id (group_id, user_id)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
