@@ -24,8 +24,8 @@ $ap_translation = [
 	'RecoveryMode'				=> 'Mode de récupération',
 	'Authorization'				=> 'Autorisation',
 	'AuthorizationTip'			=> 'Merci d’indiquer le mot de passe d’administration (assurez-vous également que les cookies soient autorisés par votre navigateur).',
-	'NoRecoveryPassword'		=> 'le mot de passe d’administration n’est pas spécifié !',
-	'NoRecoveryPasswordTip'		=> 'Note : l’ absence de mot de passe d’administration constitue une menace pour la sécurité ! Saisissez votre mot de passe dans le fichier de configuration et exécutez le programme de nouveau.',
+	'NoRecoveryPassword'		=> 'Le mot de passe d’administration n’est pas spécifié !',
+	'NoRecoveryPasswordTip'		=> 'Note : L’ absence de mot de passe d’administration constitue une menace pour la sécurité ! Saisissez votre mot de passe dans le fichier de configuration et exécutez le programme de nouveau.',
 
 	'ErrorLoadingModule'		=> 'Erreur de chargement du module admin %1 : n\'existe pas.',
 
