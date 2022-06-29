@@ -1,5 +1,5 @@
 /*!
- * ProtoEdit v2.21
+ * ProtoEdit v2.22
  *
  * Licensed BSD © WackoWiki Team
  */

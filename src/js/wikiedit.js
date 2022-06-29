@@ -1,5 +1,5 @@
 /*!
- * WikiEdit v3.21
+ * WikiEdit v3.22
  * https://wackowiki.org/doc/Dev/Projects/WikiEdit
  *
  * Licensed BSD © Roman Ivanov, Evgeny Nedelko, WackoWiki Team
