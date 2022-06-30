@@ -151,7 +151,7 @@ class Feed
 				'<language>' . $this->lang . '</language>' . "\n" .
 				'<pubDate>' . date('r') . '</pubDate>' . "\n" .
 				'<lastBuildDate>' . date('r') . '</lastBuildDate>' . "\n" .
-				'<image>' . "\n";
+				'<image>' . "\n" .
 					'<title>' . $this->engine->db->site_name . $this->engine->_t('NewsTitleXML') . '</title>' . "\n" .
 					'<link>' . $this->engine->db->base_url . str_replace('%2F', '/', rawurlencode($news_cluster)) . '</link>' . "\n" .
 					'<url>' . $this->engine->db->base_url . Ut::join_path(IMAGE_DIR, $this->engine->db->site_logo) . '</url>' . "\n" .
