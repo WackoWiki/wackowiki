@@ -5,8 +5,15 @@
 	--ww-a-normal: #003399;
 	--ww-a-target-bg: #ffeeee;
 	--ww-a-visited: #990000;
+
+	--ww-acl-public:  #008000;
+	--ww-acl-registered: #003399;
+	--ww-acl-custom: #ff8a00;
+	--ww-acl-private: #ff0000;
+
 	--ww-hover-primary: #ccffcc;
 	--ww-hover-secondary: #e7f9ff;
+
 	--ww-font-serif: "Times New Roman", Times, serif;
 	--ww-font-sans-serif: Verdana, Arial, Helvetica, sans-serif;
 	--ww-font-monospace: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, sans-serif;
@@ -2408,6 +2415,28 @@ form.add-topic {
 	text-align: center;
 	text-decoration: none;
 	white-space: nowrap;
+}
+
+/* visibility tag ------------- */
+.acl-public,
+a.acl-public {
+	color: var(--ww-acl-public);
+	border-color: var(--ww-acl-public);
+}
+.acl-registered,
+a.acl-registered {
+	color: var(--ww-acl-registered);
+	border-color: var(--ww-acl-registered);
+}
+.acl-custom,
+a.acl-custom {
+	color: var(--ww-acl-custom);
+	border-color: var(--ww-acl-custom);
+}
+.acl-privat,
+a.acl-privat {
+	color: var(--ww-acl-privat);
+	border-color: var(--ww-acl-privat);
 }
 
 /* system message ------------- */
