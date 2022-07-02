@@ -2433,10 +2433,10 @@ a.acl-custom {
 	color: var(--ww-acl-custom);
 	border-color: var(--ww-acl-custom);
 }
-.acl-privat,
-a.acl-privat {
-	color: var(--ww-acl-privat);
-	border-color: var(--ww-acl-privat);
+.acl-private,
+a.acl-private {
+	color: var(--ww-acl-private);
+	border-color: var(--ww-acl-private);
 }
 
 /* system message ------------- */

@@ -6224,7 +6224,7 @@ class Wacko
 			'denied'		=> 'AccessDenied',
 			'public'		=> 'AccessPublic',
 			'registered'	=> 'AccessRegistered',
-			'privat'		=> 'AccessPrivate',
+			'private'		=> 'AccessPrivate',
 			'custom'		=> 'AccessCustom',
 		];
 
@@ -6247,7 +6247,7 @@ class Wacko
 		}
 		else if(in_array(mb_strtolower($user['user_name']), $acl) && count($acl) == 1)
 		{
-			$mode = 'privat';
+			$mode = 'private';
 		}
 		else
 		{
