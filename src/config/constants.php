@@ -89,7 +89,6 @@ const HTML_ENTITIES_CHARSET			= 'UTF-8';
 const XML_HTMLSAX3					= 'lib/HTMLSax3/';
 
 const WACKO_ENV						= 4;					// Environment: 1 - development, 2 - test, 3 - stage, 4 - production
-const HTML_FILTERING				= null;					// safehtml, htmlpurifier
 
 const ACTION4DIFF					= 'anchor, toc';		// allowed actions in DIFF
 
