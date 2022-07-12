@@ -10,6 +10,7 @@ if (!defined('IN_WACKO'))
 		[page="cluster"]
 		[mode="latest|week|from"]
 		[date="YYYY-MM-DD"]
+		[order="time|tag"]
 		[max=Number]
 		[title=1]
 		[noxml=1]
@@ -23,11 +24,6 @@ $date			??= $_GET['date'] ?? '';
 $tag			= $this->unwrap_link($page);
 $error			= '';
 
-if ($date && !$this->validate_date($date))
-{
-	$date		= '';
-}
-
 if (!empty($tag))
 {
 	if (isset($_GET['category_id']))
@@ -37,6 +33,7 @@ if (!empty($tag))
 	}
 
 	$max	??= 10;
+	$order	??= '';
 	$mode	??= 'latest';
 	$title	??= 1;
 	$noxml	??= 1;
@@ -46,6 +43,14 @@ if (!empty($tag))
 	$prefix				= $this->db->table_prefix;
 	$blog_levels		= '/.+'; // see $this->db->news_levels;
 	$action				= $_POST['_action'] ?? null;
+
+	if ($date && !$this->validate_date($date))
+	{
+		$date			= '';
+	}
+
+							$order_by = "p.created DESC ";
+	if ($order == 'tag')	$order_by = "p.tag DESC";
 
 	// check privilege
 	$access = $this->has_access('create');
@@ -103,7 +108,7 @@ if (!empty($tag))
 			"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ";
 
 	$order_by_mode =
-		"ORDER BY p.created DESC ";
+		"ORDER BY " . $order_by . " ";
 
 	if ($mode == 'latest')
 	{

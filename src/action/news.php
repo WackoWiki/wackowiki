@@ -7,9 +7,10 @@ if (!defined('IN_WACKO'))
 
 /* USAGE:
 	{{news
-		[page=cluster]
-		[mode=latest|week|from]
-		[date=YYYY-MM-DD]
+		[page="cluster"]
+		[mode="latest|week|from"]
+		[date="YYYY-MM-DD"]
+		[order="time|tag"]
 		[max=Number]
 		[title=1]
 		[noxml=1]
@@ -26,6 +27,7 @@ if (!empty($this->db->news_cluster))
 
 	// set defaults
 	$date				??= $_GET['date'] ?? '';
+	$order				??= '';
 	$max				??= 10;
 	$mode				??= 'latest';
 	$title				??= 1;
@@ -43,8 +45,8 @@ if (!empty($this->db->news_cluster))
 		$date			= '';
 	}
 
-	// hide article H1 header
-	$this->hide_article_header = true;
+							$order_by = "p.created DESC ";
+	if ($order == 'tag')	$order_by = "p.tag DESC";
 
 	// check privilege
 	$access = $this->has_access('create');
@@ -110,7 +112,7 @@ if (!empty($this->db->news_cluster))
 			"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ";
 
 	$order_by_mode =
-		"ORDER BY p.created DESC ";
+		"ORDER BY " . $order_by . " ";
 
 	if ($mode == 'latest')
 	{
@@ -204,6 +206,9 @@ if (!empty($this->db->news_cluster))
 
 	if ($title == 1)
 	{
+		// hide article H1 header
+		$this->hide_article_header = true;
+
 		if (isset($category_title))
 		{
 			$_category_title = ' ' . $this->_t('For') . ' ' . $this->_t('Category') . ' «' . $category_title['category'] . '»';
