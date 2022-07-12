@@ -52,6 +52,8 @@ class Paragrafica
 		],
 		[
 			// wronginators-2
+			'!(</dd>)!si',
+			'!(</dt>)!si',
 			'!(</li>)!si',
 		],
 	];
@@ -90,7 +92,9 @@ class Paragrafica
 		],
 		[
 			// wronginators-2
-			'!(<li[^>]*>)!is',
+			'!(<dd[^>]*>)!si',
+			'!(<dt[^>]*>)!si',
+			'!(<li[^>]*>)!si',
 		],
 	];
 
