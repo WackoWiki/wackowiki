@@ -394,7 +394,7 @@ class Wacko
 		return $this->date_format($this->sql2time($text), $this->db->date_format . ' ' . $this->db->time_format);
 	}
 
-	// unix time formatted
+	// unix time formatted (must be passed as UTC time)
 	function date_format($unix_time, $pattern): string
 	{
 		$user	= $this->get_user();

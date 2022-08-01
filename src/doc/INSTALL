@@ -21,7 +21,20 @@ by the web server, at least temporarily.
 WackoWiki can export the RecentChanges list as RSS. Please make sure the xml/
 subdirectory is writable, since this is where the files are stored.
 
-IMPORTANT: for installing or upgrading Wacko, do NOT access any of the files contained
+Adjust the file permissions according to the permission group you're in.
+
+chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
+chmod 666 config/config.php config/lock config/lock_ap
+
+Reset file permissions of the config file after installation.
+chmod 644 config/config.php
+
+Check if the provided path for CACHE_SESSION_DIR in config/constants.php is correct.
+
+  The default value set in constants.php is /tmp but may vary in your environment.
+  You may want to change this to a custom folder (e.g. _cache/session or /var/tmp) 
+
+IMPORTANT: For installing or upgrading Wacko, do NOT access any of the files contained
 in the setup/ subdirectory. They're used by the web-based installer/updater, but you
 should really just access the Wacko directory itself, and it will (or at least should)
 work perfectly.

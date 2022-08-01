@@ -5,51 +5,49 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-echo ADD_NO_DIV . '<article class="page">' . "\n";
-$include_tail = '</article>';
+$this->ensure_page();
 
-// redirect to show method if page don't exists
-if (!$this->page)
+if (!$this->has_access('read'))
 {
-	$this->http->redirect($this->href());
+	// redirect to show handler
+	$this->show_must_go_on();
 }
 
-if ($this->has_access('read'))
+if (!$this->page['latest'])
 {
-	// comment header?
-	if ($this->page['comment_on_id'])
-	{
-		$comment_on = $this->load_page('', $this->page['comment_on_id'], '', '', LOAD_META);
-		$message = $this->msg_is_comment_on(
-			$comment_on['tag'],
-			$comment_on['title'],
-			$this->page['user_name'],
-			$this->page['modified']);
-		$this->show_message($message, 'comment-info');
-	}
-
-	if (!$this->page['latest'])
-	{
-		$message = Ut::perc_replace($this->_t('RevisionHint'),
-			$this->href(),
-			$this->tag,
-			$this->sql_time_formatted($this->page['modified']),
-			$this->user_link($this->page['user_name'], true, false));
-		$this->show_message($message, 'revision-info');
-	}
-
-	// display page
-	$this->context[++$this->current_context] = $this->tag;
-	$data = $this->format($this->page['body'], 'wordprocessor');
-	$data = $this->numerate_toc($data); //  numerate toc if needed
-
-
-	echo $data;
-	$this->current_context--;
+	$tpl->rev_text = Ut::perc_replace($this->_t('RevisionHint'),
+		$this->href(),
+		$this->tag,
+		$this->sql_time_formatted($this->page['modified']),
+		$this->user_link($this->page['user_name'], true, false));
 }
-else
-{
-	$this->http->status(403);
 
-	$this->show_message($this->_t('ReadAccessDenied'), 'error');
+// build html body
+$this->context[++$this->current_context] = $this->tag;
+$data = $this->format($this->page['body'], 'wordprocessor');
+
+// display page
+$tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
+
+$this->current_context--;
+
+// display comments
+if (@$this->sess->show_comments[$this->page['page_id']] || $this->forum)
+{
+	$tpl->enter('c_cmt_');
+
+	foreach ($this->load_comments($this->page['page_id']) as $comment)
+	{
+		if (!$comment['body_r'])
+		{
+			$comment['body_r'] = $this->format($comment['body']);
+		}
+
+		$tpl->user		= $this->user_link($comment['user_name']);
+		$tpl->created	= $comment['created'];
+		$comment['modified'] == $comment['created'] || $tpl->edit_time = $comment['modified'];
+		$tpl->body		= $this->format($comment['body_r'], 'post_wacko');
+	}
+
+	$tpl->leave();
 }

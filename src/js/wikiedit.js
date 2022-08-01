@@ -11,6 +11,8 @@ class WikiEdit extends ProtoEdit
 	{
 		super();
 
+		this.manual			= 'https://wackowiki.org/doc/';
+
 		this.mark			= '##inspoint##';
 		this.begin			= '##startpoint##';
 		this.rbegin			= new RegExp(this.begin);
@@ -94,7 +96,7 @@ class WikiEdit extends ProtoEdit
 		this.addButton('customhtml',	separator);
 		this.addButton('customhtml',	'<li class="we-help"><div id="hilfe_' + this.id + '" onmouseover=\'this.className="btn-hover";\' '
 			+ 'onmouseout=\'this.className="btn-";\' class="btn-" '
-			+ 'onclick="this.className=\'btn-pressed\';window.open(\'https://wackowiki.org/doc/' + lang.HelpFormattingPage + '\');" '
+			+ 'onclick="this.className=\'btn-pressed\';window.open(\'' + this.manual + lang.HelpFormattingPage + '\');" '
 			+ ' title="' + lang.HelpFormattingTip + '">'
 			+ '<img src="' + this.imagesPath + 'spacer.png"' + ' alt="' + lang.HelpFormatting + '" title="' + lang.HelpFormattingTip + '">'
 			+ '</div></li>');
@@ -767,8 +769,8 @@ class WikiEdit extends ProtoEdit
 	{
 		var s = '';
 
-		s = '				WikiEdit 3.21 \n';
-		s += '	© Roman Ivanov, WackoWiki Team 2003-2021	 \n';
+		s = '				WikiEdit 3.22 \n';
+		s += '	© Roman Ivanov, WackoWiki Team 2003-2022	 \n';
 		s += '	https://wackowiki.org/doc/Dev/Projects/WikiEdit \n';
 		s += '\n';
 		s += lang.HelpAboutTip;
