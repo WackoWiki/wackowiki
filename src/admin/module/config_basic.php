@@ -39,12 +39,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['site_desc']					= (string) $site_desc;
 		$config['admin_name']					= (string) $_POST['admin_name'];
 
-		// reset menu in session
-		if ($engine->db->language !== $_POST['language'])
-		{
-			unset($engine->sess->ap_module);
-		}
-
 		$config['language']						= (string) $language;
 		$config['multilanguage']				= (int) ($_POST['multilanguage'] ?? 0);
 

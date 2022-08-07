@@ -645,7 +645,7 @@ class Wacko
 
 	function validate_language($lang): string
 	{
-		return known_language($lang) ? $lang : $this->db->language;
+		return $this->known_language($lang) ? $lang : $this->db->language;
 	}
 
 	function get_user_language()
