@@ -104,7 +104,7 @@ if (!empty($this->db->news_cluster))
 	// heavy lifting here (watch out for REGEXPs!)
 	$select_count =
 		"SELECT COUNT(p.page_id) AS n " .
-			"FROM {$prefix}page p ";
+		"FROM {$prefix}page p ";
 
 	$select_mode =
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .

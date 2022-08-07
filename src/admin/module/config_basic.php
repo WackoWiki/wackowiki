@@ -30,9 +30,13 @@ function admin_config_basic(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
+		$site_name		= $engine->sanitize_text_field($_POST['site_name'], true);
+		$site_desc		= $engine->sanitize_text_field($_POST['site_desc'], true);
+		$language		= $engine->validate_language($_POST['language']);
+
 		#Ut::debug_print_r($_POST);
-		$config['site_name']					= (string) $_POST['site_name'];
-		$config['site_desc']					= (string) $_POST['site_desc'];
+		$config['site_name']					= (string) $site_name;
+		$config['site_desc']					= (string) $site_desc;
 		$config['admin_name']					= (string) $_POST['admin_name'];
 
 		// reset menu in session
@@ -41,7 +45,7 @@ function admin_config_basic(&$engine, &$module)
 			unset($engine->sess->ap_module);
 		}
 
-		$config['language']						= (string) $_POST['language'];
+		$config['language']						= (string) $language;
 		$config['multilanguage']				= (int) ($_POST['multilanguage'] ?? 0);
 
 		if (isset($_POST['allowed_languages']) && is_array($_POST['allowed_languages']))

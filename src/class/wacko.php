@@ -643,6 +643,11 @@ class Wacko
 		return array_key_exists($lang, $this->http->available_languages());
 	}
 
+	function validate_language($lang): string
+	{
+		return known_language($lang) ? $lang : $this->db->language;
+	}
+
 	function get_user_language()
 	{
 		$lang = $this->get_user_setting('user_lang');

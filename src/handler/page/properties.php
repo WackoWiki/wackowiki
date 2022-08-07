@@ -40,9 +40,11 @@ if ($action === 'extended_properties')
 
 if ($action === 'general_properties')
 {
+	$page_lang = $this->validate_language($_POST['page_lang']);
+
 	$this->db->sql_query(
 		"UPDATE " . $this->db->table_prefix . "page SET " .
-			"page_lang			= " . $this->db->q($_POST['page_lang']) . ", " .
+			"page_lang			= " . $this->db->q($page_lang) . ", " .
 			"theme				= " . ($this->db->q(($_POST['theme']) ?? '')) . ", " .
 			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
 			// menu_tag: unused currently, for use in custom theme menus

@@ -305,8 +305,9 @@ function admin_config_system(&$engine, &$module)
 					<small><?php echo $engine->_t('SessionNoticeInfo');?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="session_notice_on" name="session_notice" value="1"<?php echo ($engine->db->session_notice == 1 ? ' checked' : '');?>><label for="session_notice_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="session_notice_off" name="session_notice" value="0"<?php echo ($engine->db->session_notice == 0 ? ' checked' : '');?>><label for="session_notice_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="session_notice_on" name="session_notice" value="1"<?php echo ($engine->db->session_notice == 1 ? ' checked' : '');?>><label for="session_notice_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="session_notice_admin" name="session_notice" value="2"<?php echo ($engine->db->session_notice == 2 ? ' checked' : '');?>><label for="session_notice_admin"><?php echo $engine->_t('Admin');?></label>
 				</td>
 			</tr>
 			<tr>
