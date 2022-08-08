@@ -358,6 +358,11 @@ class Wacko
 		return $theme_list;
 	}
 
+	function validate_theme($theme): string
+	{
+		return in_array($theme, $this->available_themes()) ? $theme : $this->db->theme;
+	}
+
 	// TIME FUNCTIONS
 	function utc2time($utc): int|false
 	{

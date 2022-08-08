@@ -33,8 +33,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 	$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
 	$password		= (string) ($_POST['password'] ?? '');
 	$conf_password	= (string) ($_POST['conf_password'] ?? '');
-	$user_lang		= (string) ($_POST['user_lang'] ?? $this->db->language);
-	$user_lang		= $this->validate_language($user_lang);
+	$user_lang		= $this->validate_language($_POST['user_lang'] ?? '');
 	$complexity		= $this->password_complexity($user_name, $password);
 
 	if (isset($this->sess->registration_delay)

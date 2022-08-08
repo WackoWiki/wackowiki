@@ -120,11 +120,12 @@ else if ($user = $this->get_user())
 	else if ($action == 'user_settings_general')
 	{
 		$user_lang	= $this->validate_language($_POST['user_lang']);
+		$theme		= $this->validate_theme($_POST['theme']);
 		$timezone	= $this->validate_timezone($_POST['timezone']);
 
 		$sql =
 		"user_lang			= " . $this->db->q($user_lang) . ", " .
-		"theme				= " . $this->db->q($_POST['theme']) . ", " .
+		"theme				= " . $this->db->q($theme) . ", " .
 		"timezone			= " . $this->db->q($timezone) . ", " .
 		"sorting_comments	= " . (int) $_POST['sorting_comments'] . ", " .
 		"menu_items			= " . (int) $_POST['menu_items'] . ", " .

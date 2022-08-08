@@ -126,8 +126,8 @@ function admin_user_users(&$engine, &$module)
 		$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
 		$password		= (string) ($_POST['password'] ?? '');
 		$conf_password	= (string) ($_POST['conf_password'] ?? '');
-		$user_lang		= $_POST['user_lang'] ?? $engine->db->language;
-		$user_lang		= $engine->known_language($user_lang) ? $user_lang : $engine->db->language;
+		$user_lang		= $engine->validate_language($_POST['user_lang'] ?? '');
+		$theme			= $engine->validate_theme($_POST['theme'] ?? '');
 		$complexity		= $engine->password_complexity($user_name, $password);
 		$notify_signup	= (int) ($_POST['notify_signup'] ?? 0);
 		$verify_email	= (int) ($_POST['verify_email'] ?? 0);
@@ -321,7 +321,7 @@ function admin_user_users(&$engine, &$module)
 			$engine->db->sql_query(
 				"UPDATE " . $prefix . "user_setting SET " .
 					"user_lang		= " . $engine->db->q($user_lang) . ", " .
-					"theme			= " . $engine->db->q($_POST['theme']) . " " .
+					"theme			= " . $engine->db->q($theme) . " " .
 				"WHERE user_id		= " . (int) $user_id . " " .
 				"LIMIT 1");
 

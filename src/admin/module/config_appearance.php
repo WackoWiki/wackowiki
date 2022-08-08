@@ -32,11 +32,6 @@ function admin_config_appearance(&$engine, &$module)
 	<br>
 	<?php
 	// functions
-	$valid_theme = function ($theme) use ($engine)
-	{
-		return in_array($theme, $engine->available_themes()) ? $theme : $engine->db->theme;
-	};
-
 	$valid_color = function ($color)
 	{
 		if (preg_match('/^(
@@ -219,7 +214,7 @@ function admin_config_appearance(&$engine, &$module)
 
 		$config['logo_display']				= (int) ($_POST['logo_display'] ?? null);
 		$config['theme_color']				= (string) $valid_color(($_POST['theme_color'] ?? null));
-		$config['theme']					= (string) $valid_theme(($_POST['theme'] ?? null));
+		$config['theme']					= (string) $engine->validate_theme(($_POST['theme'] ?? null));
 
 		if (isset($_POST['allow_themes']) && is_array($_POST['allow_themes']))
 		{
