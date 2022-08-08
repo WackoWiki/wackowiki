@@ -65,7 +65,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['footer_comments']				= (int) $_POST['footer_comments'];
 		$config['footer_files']					= (int) $_POST['footer_files'];
 		$config['footer_tags']					= (int) $_POST['footer_tags'];
-		$config['hide_revisions']				= (int) $_POST['hide_revisions'];
 		$config['show_permalink']				= (int) $_POST['show_permalink'];
 		$config['hide_toc']						= (int) $_POST['hide_toc'];
 		$config['hide_index']					= (int) $_POST['hide_index'];
@@ -81,6 +80,14 @@ function admin_config_basic(&$engine, &$module)
 		$config['pages_purge_time']				= (int) $_POST['pages_purge_time'];
 		$config['referrers_purge_time']			= (int) $_POST['referrers_purge_time'];
 		$config['enable_counters']				= (int) ($_POST['enable_counters'] ?? 0);
+
+		$config['hide_revisions']				= (int) $_POST['hide_revisions'];
+		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
+		$config['source_handler']				= (int) $_POST['source_handler'];
+		$config['export_handler']				= (int) $_POST['export_handler'];
+
+		$config['enable_comments']				= (int) $_POST['enable_comments'];
+		$config['sorting_comments']				= (int) $_POST['sorting_comments'];
 		$config['noindex']						= (int) ($_POST['noindex'] ?? 0);
 		$config['opensearch']					= (int) ($_POST['opensearch'] ?? 0);
 
@@ -96,11 +103,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['xml_sitemap_time']				= (int) $_POST['xml_sitemap_time'];
 		$config['enable_feeds']					= (int) ($_POST['enable_feeds'] ?? 0);
 		$config['enable_referrers']				= (int) $_POST['enable_referrers'];
-		$config['attachments_handler']			= (int) $_POST['attachments_handler'];
-		$config['source_handler']				= (int) $_POST['source_handler'];
-		$config['export_handler']				= (int) $_POST['export_handler'];
-		$config['enable_comments']				= (int) $_POST['enable_comments'];
-		$config['sorting_comments']				= (int) $_POST['sorting_comments'];
 
 		$engine->config->_set($config);
 

@@ -46,7 +46,7 @@ if ($action === 'general_properties')
 	$this->db->sql_query(
 		"UPDATE " . $this->db->table_prefix . "page SET " .
 			"page_lang			= " . $this->db->q($page_lang) . ", " .
-			"theme				= " . ($this->db->q($theme) . ", " .
+			"theme				= " . $this->db->q($theme) . ", " .
 			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
 			// menu_tag: unused currently, for use in custom theme menus
 			# "menu_tag			= " . $this->db->q($this->sanitize_text_field($_POST['menu_tag'], true)) . ", " .

@@ -54,10 +54,10 @@ h1 {
 	color: #235e9a;
 }
 h2 { font-size: 20px; margin-top: 20px; margin-bottom: 5px; border-bottom: 3px dotted #ddd; color: #204a87;}
-h3 { font-size: 17px; margin-top: 15px; margin-bottom: 5px; border-bottom: 2px dotted #ddd;}
+h3 { font-size: 18px; margin-top: 15px; margin-bottom: 5px; border-bottom: 2px dotted #ddd;}
 h4 { font-size: 16px; margin-top: 15px; margin-bottom: 5px; border-bottom: 1px #999 solid;}
 h5 { font-size: 14px; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px #bbb solid;}
-h6 { font-size: 12px; }
+h6 { font-size: 14px; margin-top: 10px; margin-bottom: 5px;}
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{ text-align: center;}
