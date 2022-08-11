@@ -4574,7 +4574,7 @@ class Wacko
 	}
 
 	// returns error text, or null on OK
-	function validate_username($user_name): ?string
+	function validate_username($user_name, $create = true): ?string
 	{
 		// check if name is WikiName style
 		if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)
@@ -4600,7 +4600,7 @@ class Wacko
 			return Ut::perc_replace($this->_t('UserReservedWord'), $result);
 		}
 		// if user name already exists
-		else if ($this->user_name_exists($user_name))
+		else if ($this->user_name_exists($user_name) && $create)
 		{
 			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
 
@@ -8248,7 +8248,7 @@ class Wacko
 	}
 
 	// returns error text, or null on OK
-	function validate_email($email): ?string
+	function validate_email($email, $create = true): ?string
 	{
 		// no email given
 		if ($email == '')
@@ -8261,7 +8261,7 @@ class Wacko
 			return $this->_t('NotAEmail') . ' ';
 		}
 		// no email reuse allowed
-		else if (!$this->db->allow_email_reuse && $this->email_exists($email))
+		else if (!$this->db->allow_email_reuse && $this->email_exists($email) && $create)
 		{
 			return $this->_t('EmailTaken') . ' ';
 		}

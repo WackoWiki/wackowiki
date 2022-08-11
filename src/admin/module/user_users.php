@@ -138,7 +138,7 @@ function admin_user_users(&$engine, &$module)
 	if ($action == 'add_user' && $user_name)
 	{
 		// create new account if possible
-		if ($message = $engine->validate_username($user_name))
+		if ($message = $engine->validate_username($user_name, false))
 		{
 			$error .= $message;
 		}
@@ -183,7 +183,6 @@ function admin_user_users(&$engine, &$module)
 			$engine->db->sql_query(
 				"INSERT INTO " . $prefix . "user_setting SET " .
 					"user_id			= " . (int) $_user_id['user_id'] . ", " .
-					"typografica		= " . (int) $engine->db->default_typografica . ", " .
 					"user_lang			= " . $engine->db->q($user_lang) . ", " .
 					"list_count			= " . (int) $engine->db->list_count . ", " .
 					"theme				= " . $engine->db->q($engine->db->theme) . ", " .
@@ -240,11 +239,11 @@ function admin_user_users(&$engine, &$module)
 	// edit user processing
 	else if ($action == 'edit_user' && $user_id && $user_name )
 	{
-		if ($message = $engine->validate_username($user_name))
+		if ($message = $engine->validate_username($user_name, false))
 		{
 			$error .= $message;
 		}
-		else if ($message = $engine->validate_email($email))
+		else if ($message = $engine->validate_email($email, false))
 		{
 			$error .= $message;
 		}
@@ -645,7 +644,8 @@ function admin_user_users(&$engine, &$module)
 		<table class="formation lined">
 		<?php
 
-			echo '<tr>' . "\n" .
+			echo
+				'<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('UserName') . '</th>' .
 					'<td><strong>' . $user['user_name'] . '</strong></td>' .
 				'</tr>' .
