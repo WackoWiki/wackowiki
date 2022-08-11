@@ -113,7 +113,7 @@ class Wacko
 	function ids_string($ids): ?string
 	{
 		// sanitize array allow only integer values
-		$ids_string = array_map( 'intval', $ids );
+		$ids_string = array_map('intval', $ids);
 
 		// implode the array to be used in a SQL statement
 		return implode(', ', $ids_string);

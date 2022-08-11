@@ -34,7 +34,6 @@ function admin_config_basic(&$engine, &$module)
 		$site_desc		= $engine->sanitize_text_field($_POST['site_desc'], true);
 		$language		= $engine->validate_language($_POST['language']);
 
-		#Ut::debug_print_r($_POST);
 		$config['site_name']					= (string) $site_name;
 		$config['site_desc']					= (string) $site_desc;
 		$config['admin_name']					= (string) $_POST['admin_name'];
@@ -44,7 +43,15 @@ function admin_config_basic(&$engine, &$module)
 
 		if (isset($_POST['allowed_languages']) && is_array($_POST['allowed_languages']))
 		{
-			$config['allowed_languages'] = (string) implode(',', $_POST['allowed_languages']);
+			$allowed_languages = array_map(
+				function($lang) use ($engine) {
+					return $engine->validate_language($lang);
+				},
+				$_POST['allowed_languages']
+			);
+			$allowed_languages = array_unique($allowed_languages);
+
+			$config['allowed_languages'] = (string) implode(',', $allowed_languages);
 		}
 		else
 		{
@@ -55,11 +62,13 @@ function admin_config_basic(&$engine, &$module)
 
 		if (is_array($_POST['diff_modes']))
 		{
-			$config['diff_modes'] = (string) implode(',', $_POST['diff_modes']);
+			$_diff_modes			= array_map('intval', $_POST['diff_modes']);
+
+			$config['diff_modes']	= (string) implode(',', $_diff_modes);
 		}
 		else
 		{
-			$config['diff_modes'] = '0,1,2,3,4,5,6';
+			$config['diff_modes'] = '0,1,2,3,4,5,6,7';
 		}
 
 		$config['footer_comments']				= (int) $_POST['footer_comments'];

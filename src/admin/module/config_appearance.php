@@ -218,7 +218,15 @@ function admin_config_appearance(&$engine, &$module)
 
 		if (isset($_POST['allow_themes']) && is_array($_POST['allow_themes']))
 		{
-			$config['allow_themes'] = (string) implode(',', $_POST['allow_themes']);
+			$allow_themes = array_map(
+				function($theme) use ($engine) {
+					return $engine->validate_theme($theme);
+				},
+				$_POST['allow_themes']
+			);
+			$allow_themes = array_unique($allow_themes);
+
+			$config['allow_themes'] = (string) implode(',', $allow_themes);
 		}
 		else
 		{
