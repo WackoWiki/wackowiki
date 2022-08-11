@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Vale parool!',
 	'ConfirmPassword'			=> 'Korda parooli',
 	'Email'						=> 'E-posti aadress',
-	'MustBeWikiName'			=> 'Kasutajanimi peab olema formaadis ((WackoWiki:Doc/English/WikiName WikiNimi))!',
+	'MustBeWikiName'			=> 'Kasutajanimi peab olema formaadis <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiNimi</a>!',
 	'SpecifyEmail'				=> 'Sa pead täpsustama oma e-posti aadressi.',
 	'NotAEmail'					=> 'See ei tundu olema õige aadress.',
 	'EmailTaken'				=> 'Sisestatud e-postiaadress on juba kasutuses.',

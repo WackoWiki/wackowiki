@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Mot de passe incorrect !',
 	'ConfirmPassword'			=> 'Confirmez votre mot de passe ',
 	'Email'						=> 'Adresse de messagerie ',
-	'MustBeWikiName'			=> 'Votre nom d’utilisateur doit prendre la forme d’un ((WackoWiki:Doc/Français/NomWiki NomWiki)) !',
+	'MustBeWikiName'			=> 'Votre nom d’utilisateur doit prendre la forme d’un <a href="https://wackowiki.org/doc/Doc/Français/NomWiki" target="_blank">NomWiki</a> !',
 	'SpecifyEmail'				=> 'Vous devez indiquer une adresse de messagerie.',
 	'NotAEmail'					=> 'Ceci ne ressemble pas vraiment à une adresse de messagerie.',
 	'EmailTaken'				=> 'L’adresse e-mail que vous avez saisie est déjà utilisée.',

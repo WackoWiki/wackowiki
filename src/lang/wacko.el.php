@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Λανθασμένο συνθηματικό!',
 	'ConfirmPassword'			=> 'Επιβεβαίωση συνθηματικού',
 	'Email'						=> 'Διεύθυνση Ηλεκτρονικού Ταχυδρομείου',
-	'MustBeWikiName'			=> 'Το όνομα χρήστη πρέπει να είναι σε ((WackoWiki:Doc/English/WikiName WikiName)) μορφή!',
+	'MustBeWikiName'			=> 'Το όνομα χρήστη πρέπει να είναι σε <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> μορφή!',
 	'SpecifyEmail'				=> 'Πρέπει να ορίσετε μία συγκεκριμένη ηλεκτρονική διεύθυνση.',
 	'NotAEmail'					=> 'Δεν φαίνεται να είναι έγκυρη ηλεκτρονική διεύθυνση',
 	'EmailTaken'				=> 'Η εισαχθείσα διεύθυνση ηλεκτρονικού ταχυδρομείου χρησιμοποιείται ήδη.',

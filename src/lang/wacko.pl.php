@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Nieprawidłowe hasło!',
 	'ConfirmPassword'			=> 'Potwierdź hasło',
 	'Email'						=> 'Adres e-mail',
-	'MustBeWikiName'			=> 'Nazwa użytkownika musi być w formacie ((WackoWiki:Doc/Polish/NazwaWiki NazwyWiki))!',
+	'MustBeWikiName'			=> 'Nazwa użytkownika musi być w formacie <a href="https://wackowiki.org/doc/Doc/Polish/NazwaWiki" target="_blank">NazwyWiki</a>!',
 	'SpecifyEmail'				=> 'Wprowadzenie adresu e-mail jest obowiązkowe.',
 	'NotAEmail'					=> 'Wprowadzony adres e-mail jest nieprawidłowy.',
 	'EmailTaken'				=> 'Wpisany adres e-mail jest już używany.',

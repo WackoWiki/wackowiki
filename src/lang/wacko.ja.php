@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> '間違ったパスワード！',
 	'ConfirmPassword'			=> 'パスワードの確認',
 	'Email'						=> 'メールアドレス',
-	'MustBeWikiName'			=> 'User name must be ((WackoWiki:Doc/English/WikiName WikiName)) formatted!',
+	'MustBeWikiName'			=> 'User name must be <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> formatted!',
 	'SpecifyEmail'				=> 'メールアドレスを指定してください。',
 	'NotAEmail'					=> '有効なメールアドレスではないようです。',
 	'EmailTaken'				=> 'The entered email address is already in use.',

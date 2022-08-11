@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Hibás jelszó!',
 	'ConfirmPassword'			=> 'Jelszó megerősítése',
 	'Email'						=> 'E-mail cím',
-	'MustBeWikiName'			=> 'User name must be ((WackoWiki:Doc/English/WikiName WikiName)) formatted!',
+	'MustBeWikiName'			=> 'User name must be <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> formatted!',
 	'SpecifyEmail'				=> 'Meg kell adnia egy e-mail címet.',
 	'NotAEmail'					=> 'Ez nem úgy néz ki, mint egy érvényes e-mail cím.',
 	'EmailTaken'				=> 'A megadott e-mail cím már használatban van.',

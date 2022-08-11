@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> '密码错误！',
 	'ConfirmPassword'			=> '重输密码',
 	'Email'						=> '邮箱地址',
-	'MustBeWikiName'			=> '用戶名必须符合 ((WackoWiki:Doc/English/WikiName WikiName)) 格式！',
+	'MustBeWikiName'			=> '用戶名必须符合 <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> 格式！',
 	'SpecifyEmail'				=> '您必须提供您的电子邮件地址。',
 	'NotAEmail'					=> '您的邮件地址也许不是有效的。',
 	'EmailTaken'				=> '输入的电子邮件地址已被使用。',

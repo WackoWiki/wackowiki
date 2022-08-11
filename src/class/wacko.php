@@ -4579,7 +4579,7 @@ class Wacko
 		// check if name is WikiName style
 		if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)
 		{
-			return $this->_t('MustBeWikiName') . " ";
+			return $this->_t('MustBeWikiName') . ' ';
 		}
 		else if (mb_strlen($user_name) < $this->db->username_chars_min)
 		{

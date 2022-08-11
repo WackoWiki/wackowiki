@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Forkert password!',
 	'ConfirmPassword'			=> 'Bekræft password',
 	'Email'						=> 'Emailadresse',
-	'MustBeWikiName'			=> 'Brugernavn skal være ((WackoWiki:Doc/English/WikiName WikiNavn)) formateret!',
+	'MustBeWikiName'			=> 'Brugernavn skal være <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiNavn</a> formateret!',
 	'SpecifyEmail'				=> 'Du skal oplyse en emailadresse.',
 	'NotAEmail'					=> 'Det ligner ikke en rigtig adresse.',
 	'EmailTaken'				=> 'Den indtastede emailadresse er allerede i brug.',

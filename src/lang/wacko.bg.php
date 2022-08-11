@@ -498,7 +498,7 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Неправилна парола!',
 	'ConfirmPassword'			=> 'Подтвърждение на паролата',
 	'Email'						=> 'Адрес на електронната поща',
-	'MustBeWikiName'			=> 'Името на потребителя трябва да бъде ((WackoWiki:Doc/Русский/УикиИме УикиИмето)) ',
+	'MustBeWikiName'			=> 'Името на потребителя трябва да бъде <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">УикиИмето</a> ',
 	'SpecifyEmail'				=> 'Вие трябва да посочите адреса на електронната поща.',
 	'NotAEmail'					=> 'Това не е адрес на електронна поща.',
 	'EmailTaken'				=> 'Въведения email адрес вече се използва от друг потребител.',
