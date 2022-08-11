@@ -385,7 +385,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>
 				<tr>
 					<th class="label">
-						<label for="password">' . $engine->_t('RegistrationPassword') . '</label>
+						<label for="password">' . $engine->_t('Password') . '</label>
 					</th>
 					<td>
 						<input type="password" id="password" name="password" size="24" minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html($password) . '" autocomplete="off" required>

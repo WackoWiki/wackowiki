@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Uue kasutaja registreerimine:',
-	'RegistrationPassword'		=> 'Parool',
 	'RegistrationButton'		=> 'Registreerun',
-	'RegistrationUserNameOwned'	=> 'Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.',
+	'UserNameOwned'				=> 'Valitud kasutajanimi on juba kasutusel. Palun vali mõni teine.',
 	'SiteRegistered'			=> 'Olete saidil %1 edukalt registreerunud.',
 	'RegistrationEmailInfo'		=> 'Kehtiv e-posti aadress. Kõik süsteemi e-kirjad saadetakse sellele aadressile. E-posti aadressi ei avalikustata ja seda kasutatakse ainult siis, kui soovite saada uut parooli või soovite saada e-posti teel teatud uudiseid või teatisi.',
 	'SiteEmailConfirm'			=> 'Kinnitage oma e-posti aadress, klõpsates teile saadetud juhendis oleval lingil. <br> Kui te ei kinnita oma e-posti aadressi, ei saa te võimalikku kadunud parooli taastada. Lisaks ei teavitata teid viimastest lehemuutustest ja kommentaaridest.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Registereeri kasutaja',
 	'RegistrationLink'			=> 'Registreerimine',
 	'LoginName'					=> 'Kasutajanimi',
-	'LoginPassword'				=> 'Parool',
+	'Password'					=> 'Parool',
 	'LoginButton'				=> 'Sisse',
 	'LoginLink'					=> 'Logi sisse',
 	'PersistentCookie'			=> 'Pea mind meeles',

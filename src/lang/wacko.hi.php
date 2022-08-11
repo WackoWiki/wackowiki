@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'खाता बनाएँ:',
-	'RegistrationPassword'		=> 'कूटशब्द',
 	'RegistrationButton'		=> 'अपना खाता बनाएँ',
-	'RegistrationUserNameOwned'	=> 'यह यूसर नामे पहल से ही दर्ज़। कृपया दूसरा चुनें।',
+	'UserNameOwned'				=> 'यह यूसर नामे पहल से ही दर्ज़। कृपया दूसरा चुनें।',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. <br>Furthermore you will not be notified of recent page changes and comments.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'नया खाता बनायें',
 	'RegistrationLink'			=> 'खाता बनाएँ',
 	'LoginName'					=> 'प्रयोक्ता का नाम',
-	'LoginPassword'				=> 'कूटशब्द',
+	'Password'					=> 'कूटशब्द',
 	'LoginButton'				=> 'प्रवेश',
 	'LoginLink'					=> 'प्रवेश',
 	'PersistentCookie'			=> 'अंदर बने रहें',

@@ -57,7 +57,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		{
 			$error .= $message;
 		}
-		if ($message = $this->validate_email($email))
+		else if ($message = $this->validate_email($email))
 		{
 			$error .= $message;
 		}

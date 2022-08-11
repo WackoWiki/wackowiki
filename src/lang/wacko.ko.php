@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> '계정 만들기:',
-	'RegistrationPassword'		=> '비밀번호',
 	'RegistrationButton'		=> '계정 만들기',
-	'RegistrationUserNameOwned'	=> '이 사용자 이름은 이미 등록되었습니다. 다른 것을 선택하십시오.',
+	'UserNameOwned'				=> '이 사용자 이름은 이미 등록되었습니다. 다른 것을 선택하십시오.',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. <br>Furthermore you will not be notified of recent page changes and comments.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> '새로운 사용자 계정을 만듭니다.',
 	'RegistrationLink'			=> '계정 만들기',
 	'LoginName'					=> '사용자 이름',
-	'LoginPassword'				=> '비밀번호',
+	'Password'					=> '비밀번호',
 	'LoginButton'				=> '로그인',
 	'LoginLink'					=> '로그인',
 	'PersistentCookie'			=> '로그인 상태를 유지하기',

@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Nieuwe gebruikers registratie:',
-	'RegistrationPassword'		=> 'Wachtwoord',
 	'RegistrationButton'		=> 'Registreer mij!',
-	'RegistrationUserNameOwned'	=> 'Deze naam is al geregistreerd, Kies a.u.b. een andere.',
+	'UserNameOwned'				=> 'Deze naam is al geregistreerd, Kies a.u.b. een andere.',
 	'SiteRegistered'			=> 'U heeft zich met succes geregistreerd op de site %1.',
 	'RegistrationEmailInfo'		=> 'Een geldig e-mailadres. Alle e-mails van het systeem worden naar dit adres gestuurd. Het e-mailadres wordt niet openbaar gemaakt en wordt alleen gebruikt als u een nieuw wachtwoord wilt ontvangen of als u bepaalde nieuwtjes of meldingen per e-mail wilt ontvangen.',
 	'SiteEmailConfirm'			=> 'Bevestig uw E-mail adres door te klikken op de link in de instructies die u zijn toegestuurd. <br>Als u uw e-mailadres niet verifieert, kunt u een mogelijk verloren wachtwoord niet terugvinden. Bovendien wordt u niet op de hoogte gebracht van recente paginawijzigingen en commentaren.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Registreren',
 	'RegistrationLink'			=> 'Registratie',
 	'LoginName'					=> 'Gebruikersnaam',
-	'LoginPassword'				=> 'Wachtwoord',
+	'Password'					=> 'Wachtwoord',
 	'LoginButton'				=> 'Aanmelden',
 	'LoginLink'					=> 'Inloggen',
 	'PersistentCookie'			=> 'Aangemeld blijven',

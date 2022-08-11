@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Új felhasználó regisztráció:',
-	'RegistrationPassword'		=> 'Jelszó',
 	'RegistrationButton'		=> 'Felhasználói fiók létrehozása',
-	'RegistrationUserNameOwned'	=> 'Ez a felhasználónév már regisztrált. Kérjük, válasszon másik.',
+	'UserNameOwned'				=> 'Ez a felhasználónév már regisztrált. Kérjük, válasszon másik.',
 	'SiteRegistered'			=> 'Sikeresen regisztrált a %1 oldalon.',
 	'RegistrationEmailInfo'		=> 'Érvényes e-mail cím. A rendszer összes e-mailt erre a címre küldi el. Az e-mail cím nem kerül nyilvánosságra és csak akkor használható, ha új jelszót szeretne kapni, vagy bizonyos híreket vagy értesítéseket szeretne e-mailben megkapni.',
 	'SiteEmailConfirm'			=> 'Kérjük, erősítse meg e-mail címét az Ön számára elküldött utasításokban található linkre kattintva. <br> Ha nem ellenőrzi az e-mail címét, akkor nem fogja tudni lekérni az esetlegesen elveszett jelszavakat. Ezenkívül nem kap értesítést az oldal legutóbbi változásairól és megjegyzéseiről.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Új fiók létrehozása',
 	'RegistrationLink'			=> 'Regisztráció',
 	'LoginName'					=> 'Szerkesztőneved',
-	'LoginPassword'				=> 'Jelszavad',
+	'Password'					=> 'Jelszavad',
 	'LoginButton'				=> 'Belépés',
 	'LoginLink'					=> 'Bejelentkezés',
 	'PersistentCookie'			=> 'Maradjak bejelentkezve',

@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'アカウント作成:',
-	'RegistrationPassword'		=> 'パスワード',
 	'RegistrationButton'		=> 'アカウントを作成',
-	'RegistrationUserNameOwned'	=> 'This username is already registered. Please choose another.',
+	'UserNameOwned'				=> 'This username is already registered. Please choose another.',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. <br>Furthermore you will not be notified of recent page changes and comments.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'アカウントの作成',
 	'RegistrationLink'			=> 'アカウント作成',
 	'LoginName'					=> 'ユーザー名',
-	'LoginPassword'				=> 'パスワード',
+	'Password'					=> 'パスワード',
 	'LoginButton'				=> 'ログイン',
 	'LoginLink'					=> 'ログイン',
 	'PersistentCookie'			=> 'ログイン状態を保持',

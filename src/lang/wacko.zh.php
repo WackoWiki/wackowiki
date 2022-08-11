@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> '创建账户：',
-	'RegistrationPassword'		=> '密码',
 	'RegistrationButton'		=> '创建账户',
-	'RegistrationUserNameOwned'	=> '用户名已注册，请更换',
+	'UserNameOwned'				=> '用户名已注册，请更换',
 	'SiteRegistered'			=> '您已成功注册网站 %1。',
 	'RegistrationEmailInfo'		=> '有效的电子邮件地址。来自系统的所有电子邮件都将发送到此地址。2该电子邮件地址不公开，仅在您希望接收新密码或希望通过电子邮件接收某些新闻或通知时使用。',
 	'SiteEmailConfirm'			=> '请点击发送给您的说明中的链接确认您的电子邮件地址<br>如果不验证您的电子邮件地址，您将无法检索可能丢失的密码<br>此外，您不会收到最近页面更改和评论的通知。',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> '创建新帐号',
 	'RegistrationLink'			=> '注册',
 	'LoginName'					=> '用户名',
-	'LoginPassword'				=> '密码',
+	'Password'					=> '密码',
 	'LoginButton'				=> '登录',
 	'LoginLink'					=> '登录',
 	'PersistentCookie'			=> '记住我的登录状态',

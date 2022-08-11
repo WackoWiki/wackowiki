@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Rejestracja nowego użytkownika:',
-	'RegistrationPassword'		=> 'Hasło',
 	'RegistrationButton'		=> 'Zarejestruj!',
-	'RegistrationUserNameOwned'	=> 'Przepraszamy! Ta nazwa jest już zajęta. Prosimy o wybranie innej nazwy użytkownika.',
+	'UserNameOwned'				=> 'Przepraszamy! Ta nazwa jest już zajęta. Prosimy o wybranie innej nazwy użytkownika.',
 	'SiteRegistered'			=> 'Udało Ci się zarejestrować na stronie %1.',
 	'RegistrationEmailInfo'		=> 'Poprawny adres e-mail. Wszystkie wiadomości e-mail z systemu zostaną wysłane na ten adres. Adres e-mail nie jest podawany do wiadomości publicznej i będzie używany tylko wtedy, gdy chcesz otrzymać nowe hasło lub chcesz otrzymywać pewne wiadomości lub powiadomienia przez e-mail.',
 	'SiteEmailConfirm'			=> 'Proszę potwierdzić swój adres e-mail klikając na link w wysłanych do Państwa instrukcjach. <br> Jeśli nie sprawdzisz swojego adresu e-mail, nie będziesz w stanie odzyskać ewentualnego zagubionego hasła. Ponadto nie będziesz informowany o ostatnich zmianach na stronie i komentarzach.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'a może potrzebujesz się zarejestrować?',
 	'RegistrationLink'			=> 'Rejestracja',
 	'LoginName'					=> 'Nazwa użytkownika',
-	'LoginPassword'				=> 'Hasło',
+	'Password'					=> 'Hasło',
 	'LoginButton'				=> 'Zaloguj',
 	'LoginLink'					=> 'Zaloguj się',
 	'PersistentCookie'			=> 'Stay signed in',

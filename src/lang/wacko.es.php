@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Nuevo usuario:',
-	'RegistrationPassword'		=> 'Contraseña',
 	'RegistrationButton'		=> 'Regístrate',
-	'RegistrationUserNameOwned'	=> 'Este nombre ya existe. Escoge otro por favor.',
+	'UserNameOwned'				=> 'Este nombre ya existe. Escoge otro por favor.',
 	'SiteRegistered'			=> 'Se registró exitosamente en el sitio %1.',
 	'RegistrationEmailInfo'		=> 'Una dirección de email válida. El sistema enviará todos los emails a esta dirección. No se mostrará la dirección publicamente y se utilizará solamente si desea establecer una nueva contraseña, o para recibir determinados noticias y notificaciones.',
 	'SiteEmailConfirm'			=> 'Por favor confirme su dirección de email seg´un las instrucciones enviados a Usted. <br>Tenga en cuenta que no le será posible obtener su contraseña sin verificar la dirección',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Registrarse',
 	'RegistrationLink'			=> 'Registrarse',
 	'LoginName'					=> 'Nombre de usuario',
-	'LoginPassword'				=> 'Contraseña',
+	'Password'					=> 'Contraseña',
 	'LoginButton'				=> 'Conectar',
 	'LoginLink'					=> 'Conectar',
 	'PersistentCookie'			=> 'No cerrar sesión',

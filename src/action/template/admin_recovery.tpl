@@ -13,7 +13,7 @@
 		[ ' autocomplete ' ]
 		<div class="cssform">
 		<p>
-			<label for="recovery_password">[ ' _t: RegistrationPassword ' ]:</label>
+			<label for="recovery_password">[ ' _t: Password ' ]:</label>
 			<input type="password" id="recovery_password" name="recovery_password" size="24" minlength="[ ' db: pwd_admin_min_chars ' ]" autocomplete="new-password" value="[ ' password | e attr ' ]">
 		</p>
 		<p>

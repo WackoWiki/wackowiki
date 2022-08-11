@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Ny bruger registrering:',
-	'RegistrationPassword'		=> 'Adgangskode',
 	'RegistrationButton'		=> 'Registrer mig!',
-	'RegistrationUserNameOwned'	=> 'Dette brugernavn er allerede i brug. Vælg et andet.',
+	'UserNameOwned'				=> 'Dette brugernavn er allerede i brug. Vælg et andet.',
 	'SiteRegistered'			=> 'Du har med succes registreret dig på siden %1.',
 	'RegistrationEmailInfo'		=> 'En gyldig e-mail-adresse. Alle e-mails fra systemet sendes til denne adresse. E-mail-adressen bliver ikke offentliggjort og bruges kun, hvis du ønsker at modtage en ny adgangskode eller ønsker at modtage visse nyheder eller meddelelser via e-mail.',
 	'SiteEmailConfirm'			=> 'Bekræft din e-mail-adresse ved at klikke på linket i instruktionerne sendt til dig. <br> Hvis du ikke verificerer din e-mail-adresse, vil du ikke kunne hente en mulig mistet adgangskode. Derudover vil du ikke blive underrettet om de seneste sideændringer og kommentarer.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Registrering',
 	'RegistrationLink'			=> 'Registrering',
 	'LoginName'					=> 'Dit brugernavn',
-	'LoginPassword'				=> 'Din adgangskode',
+	'Password'					=> 'Din adgangskode',
 	'LoginButton'				=> 'Log ind',
 	'LoginLink'					=> 'Log på',
 	'PersistentCookie'			=> 'Forbliv logget ind',

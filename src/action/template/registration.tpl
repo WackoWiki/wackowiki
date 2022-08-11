@@ -24,7 +24,7 @@
 			<input type="text" id="user_name" name="user_name" size="25" minlength="[ ' db: username_chars_min ' ]" maxlength="[ ' db: username_chars_max ' ]" value="[ ' username | e attr ' ]" pattern="[ ' pattern | e attr ' ]" title="[ ' only | e attr ' ]" autocomplete="off" required autofocus></p>
 			<p>[ ' only ' ]</p>
 
-			<p><label for="password">[ ' _t: RegistrationPassword ' ]</label>
+			<p><label for="password">[ ' _t: Password ' ]</label>
 			<input type="password" id="password" name="password" size="24" minlength="[ ' db: pwd_min_chars ' ]" value="[ ' password | e attr ' ]" autocomplete="off" required>
 			</p>
 

@@ -4604,7 +4604,7 @@ class Wacko
 		{
 			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
 
-			return $this->_t('RegistrationUserNameOwned');
+			return $this->_t('UserNameOwned');
 		}
 
 		return null; // it's ok :)

@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'ایجاد حساب کاربری:',
-	'RegistrationPassword'		=> 'گذرواژه',
 	'RegistrationButton'		=> 'نام‌نویسی کنید!',
-	'RegistrationUserNameOwned'	=> 'این نام کاربری قبلا انتخاب شده است. لطفا نام دیگری انتخاب کنید.',
+	'UserNameOwned'				=> 'این نام کاربری قبلا انتخاب شده است. لطفا نام دیگری انتخاب کنید.',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'یک آدرس ایمیل معتبر. کلیه ایمیل های سیستم به این آدرس ارسال می شود. آدرس ایمیل عمومی نمی باشد و فقط در صورت تمایل برای دریافت رمز عبور جدید یا برای دریافت اخبار یا اطلاعیه های خاص از طریق ایمیل ، استفاده می شود.',
 	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. <br>Furthermore you will not be notified of recent page changes and comments.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'ایجاد حساب کاربری',
 	'RegistrationLink'			=> 'نام‌نویسی',
 	'LoginName'					=> 'نام کاربری',
-	'LoginPassword'				=> 'گذرواژه',
+	'Password'					=> 'گذرواژه',
 	'LoginButton'				=> 'ورود',
 	'LoginLink'					=> 'ورود',
 	'PersistentCookie'			=> 'وارد سیستم بمانید',
