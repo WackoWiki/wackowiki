@@ -52,7 +52,7 @@ else if ($user = $this->get_user())
 	{
 		$error = '';
 
-		if ($message = $this->validate_email($email))
+		if ($message = $this->validate_email($email, false))
 		{
 			$error .= $message;
 		}
