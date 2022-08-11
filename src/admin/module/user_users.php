@@ -142,7 +142,7 @@ function admin_user_users(&$engine, &$module)
 		{
 			$error .= $message;
 		}
-		if ($message = $engine->validate_email($email))
+		else if ($message = $engine->validate_email($email))
 		{
 			$error .= $message;
 		}
@@ -155,6 +155,12 @@ function admin_user_users(&$engine, &$module)
 		else if ($complexity)
 		{
 			$error .= $complexity;
+		}
+
+		if ($error)
+		{
+			$engine->show_message($error, 'error');
+			$_POST['create']	= 1;
 		}
 		else
 		{
@@ -211,12 +217,6 @@ function admin_user_users(&$engine, &$module)
 			$engine->log(4, Ut::perc_replace($engine->_t('LogUserCreated', SYSTEM_LANG), $user_name));
 			$engine->http->redirect($engine->href('', '', ['user_id' => $_user_id['user_id']]));
 		}
-
-		if ($error)
-		{
-			$engine->show_message($error, 'error');
-			$_POST['create']	= 1;
-		}
 	}
 	// re-confirm email address
 	else if (isset($_POST['confirm']) && $user_id)
@@ -240,23 +240,20 @@ function admin_user_users(&$engine, &$module)
 	// edit user processing
 	else if ($action == 'edit_user' && $user_id && $user_name )
 	{
-		// do we have identical names?
-		if ($engine->db->load_single(
-			"SELECT user_id " .
-			"FROM " . $prefix . "user " .
-			"WHERE user_name = " . $engine->db->q($user_name) . " " .
-				"AND user_id <> " . (int) $user_id . " " .
-			"LIMIT 1"))
+		if ($message = $engine->validate_username($user_name))
 		{
-			$engine->set_message($engine->_t('RegistrationUserNameOwned'));
+			$error .= $message;
+		}
+		else if ($message = $engine->validate_email($email))
+		{
+			$error .= $message;
+		}
+
+		if ($error)
+		{
+			$engine->show_message($error, 'error');
 			$_POST['change']	= (int) $user_id;
 			$_POST['edit']		= 1;
-		}
-		else if (!$engine->validate_email_address($email))
-		{
-			$engine->show_message($engine->_t('NotAEmail'));
-			$_POST['change']	= (int) $user_id;
-			$_POST['edit'] 		= 1;
 		}
 		else
 		{

@@ -66,6 +66,10 @@ function admin_user_groups(&$engine, &$module)
 			"WHERE group_id = " . (int) $group_id . " " .
 			"LIMIT 1");
 
+		/////////////////////////////////////////////
+		//   MEMBERS
+		/////////////////////////////////////////////
+
 		// get group
 		if (isset($_GET['group_id']) || isset($_POST['add_member'])|| isset($_POST['remove_member']))
 		{
@@ -105,7 +109,7 @@ function admin_user_groups(&$engine, &$module)
 			}
 
 			/////////////////////////////////////////////
-			//   edit forms
+			//   edit member forms
 			/////////////////////////////////////////////
 
 			// add member into group
@@ -190,8 +194,11 @@ function admin_user_groups(&$engine, &$module)
 					echo $engine->form_close();
 				}
 			}
-
 		}
+
+		/////////////////////////////////////////////
+		//   GROUPS
+		/////////////////////////////////////////////
 
 		// add group
 		if (isset($_POST['create'])
@@ -290,7 +297,7 @@ function admin_user_groups(&$engine, &$module)
 	}
 
 	/////////////////////////////////////////////
-	//   edit forms
+	//   edit group forms
 	/////////////////////////////////////////////
 
 	// add new group
@@ -476,6 +483,7 @@ function admin_user_groups(&$engine, &$module)
 			}
 		}
 	}
+
 	/////////////////////////////////////////////
 	//   building lists
 	/////////////////////////////////////////////

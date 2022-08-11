@@ -260,7 +260,7 @@ function admin_config_system(&$engine, &$module)
 					<small><?php echo $engine->_t('ReverseProxyHeaderInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo Ut::html($engine->db->reverse_proxy_header);?>">
+					<input type="text" size="50" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo Ut::html($engine->db->reverse_proxy_header);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -272,7 +272,7 @@ function admin_config_system(&$engine, &$module)
 					<small><?php echo $engine->_t('ReverseProxyAddressesInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo Ut::html($engine->db->reverse_proxy_addresses);?>">
+					<input type="text" size="50" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo Ut::html($engine->db->reverse_proxy_addresses);?>">
 				</td>
 			</tr>
 			<tr>

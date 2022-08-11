@@ -141,7 +141,7 @@ function admin_config_basic(&$engine, &$module)
 					<small><?php echo $engine->_t('SiteNameInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="site_name" name="site_name" value="<?php echo Ut::html($engine->db->site_name);?>">
+					<input type="text" size="50" maxlength="255" id="site_name" name="site_name" value="<?php echo Ut::html($engine->db->site_name);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -153,7 +153,7 @@ function admin_config_basic(&$engine, &$module)
 					<small><?php echo $engine->_t('SiteDescInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="site_desc" name="site_desc" value="<?php echo Ut::html($engine->db->site_desc);?>">
+					<input type="text" size="50" maxlength="255" id="site_desc" name="site_desc" value="<?php echo Ut::html($engine->db->site_desc);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -165,7 +165,7 @@ function admin_config_basic(&$engine, &$module)
 					<small><?php echo $engine->_t('AdminNameInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="25" id="admin_name" name="admin_name" value="<?php echo Ut::html($engine->db->admin_name);?>">
+					<input type="text" size="50" maxlength="25" id="admin_name" name="admin_name" value="<?php echo Ut::html($engine->db->admin_name);?>">
 				</td>
 			</tr>
 			<tr>
