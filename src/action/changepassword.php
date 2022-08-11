@@ -74,7 +74,7 @@ if ($action === 'change_password' && $user)
 		}
 	}
 
-	$this->set_message($this->format($error), 'error');
+	$this->set_message($error, 'error');
 }
 
 // guest user, password forgotten, send mail

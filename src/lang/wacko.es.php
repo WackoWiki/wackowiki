@@ -616,7 +616,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Existen páginas similares a %1:',
 
 	'PageReservedWord'			=> 'No puede usar %1 como parte de la dirección porque es una palabra reservada.',
-	'UserReservedWord'			=> 'Nombres de usuario no deben contener ##%1## porque es una palabra reservada.',
+	'UserReservedWord'			=> 'Nombres de usuario no deben contener %1 porque es una palabra reservada.',
 
 	'DontRedirect'				=> 'No autorizar la redirección automática.',
 	'SendWatchEmail'			=> 'Enviar un mail de notificación cuando alguien (excepto tu) cambie la página que vigilas',

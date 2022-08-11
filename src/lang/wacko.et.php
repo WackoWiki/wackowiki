@@ -616,7 +616,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> '%1-ga on sarnaseid lehti:',
 
 	'PageReservedWord'			=> '%1 ei saa aadressi osana kasutada, kuna see on reserveeritud sõna.',
-	'UserReservedWord'			=> 'Kasutajanimed ei tohi sisaldada ##%1##, kuna see on reserveeritud sõna.',
+	'UserReservedWord'			=> 'Kasutajanimed ei tohi sisaldada %1, kuna see on reserveeritud sõna.',
 
 	'DontRedirect'				=> 'Ära võimalda automaatset ümbersuunamist',
 	'SendWatchEmail'			=> 'Saada e-postiga teade, kui keegi (väljaarvatud sa ise) muudab neid lehti mida sa vaatad',

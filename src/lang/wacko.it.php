@@ -616,7 +616,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Esistono pagine simili a %1:',
 
 	'PageReservedWord'			=> 'Non è possibile utilizzare %1 come parte dell\'indirizzo, poiché si tratta di una parola riservata.',
-	'UserReservedWord'			=> 'I nomi utente non possono contenere ##%1## in quanto si tratta di una parola riservata.',
+	'UserReservedWord'			=> 'I nomi utente non possono contenere %1 in quanto si tratta di una parola riservata.',
 
 	'DontRedirect'				=> 'Non consentire il reindirizzo automatico dall\'azione di Reindirizzo.',
 	'SendWatchEmail'			=> 'Spedisci una mail di notifica quando qualcuno (tranne te) modifica una pagina da te  controllata',

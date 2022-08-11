@@ -49,7 +49,7 @@ if ($this->is_admin())
 
 	if ($error)
 	{
-		$this->set_message($this->format($error), 'error');
+		$this->set_message($error, 'error');
 	}
 
 	$tpl->autocomplete	= $this->form_autocomplete_off();

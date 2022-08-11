@@ -616,7 +616,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> '存在与 %1 类似的页面：',
 
 	'PageReservedWord'			=> '您不能使用 %1 作为地址的一部分，因为它是一个保留字。',
-	'UserReservedWord'			=> '用户名不能包含##%1##，因为它是一个保留字。',
+	'UserReservedWord'			=> '用户名不能包含%1，因为它是一个保留字。',
 
 	'DontRedirect'				=> '不允许通过操作 Redirect 进行自动重定向。',
 	'SendWatchEmail'			=> '当有人（您除外）更改您正在观看的任何页面时发送通知电子邮件',

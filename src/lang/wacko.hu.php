@@ -616,7 +616,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Vannak létező hasonló oldalak a %1-hez:',
 
 	'PageReservedWord'			=> 'A %1 nem használható a cím részeként, mivel ez egy fenntartott szó.',
-	'UserReservedWord'			=> 'A felhasználói nevek nem tartalmazhatnak ##%1##, mert ez egy fenntartott szó.',
+	'UserReservedWord'			=> 'A felhasználói nevek nem tartalmazhatnak %1, mert ez egy fenntartott szó.',
 
 	'DontRedirect'				=> 'Ne engedélyezze az automatikus átirányítást az Redirect művelettel.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',

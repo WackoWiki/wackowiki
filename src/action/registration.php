@@ -180,7 +180,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 	$this->sess->r_user_name	= $user_name;
 	$this->sess->r_email		= $email;
 
-	$this->set_message($this->format($error), 'error');
+	$this->set_message($error, 'error');
 }
 
 // enough for POSTs

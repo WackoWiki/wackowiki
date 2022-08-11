@@ -616,7 +616,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Istnieją podobne strony do %1:',
 
 	'PageReservedWord'			=> 'Nie można używać %1 jako części adresu, ponieważ jest to słowo zastrzeżone.',
-	'UserReservedWord'			=> 'Nazwy użytkowników nie mogą zawierać ##%1##, ponieważ jest to słowo zastrzeżone.',
+	'UserReservedWord'			=> 'Nazwy użytkowników nie mogą zawierać %1, ponieważ jest to słowo zastrzeżone.',
 
 	'DontRedirect'				=> 'Wyłącz funkcję automatycznego przekierowania.',
 	'SendWatchEmail'			=> 'Wyślij powiadomienie, gdy ktoś (poza Tobą) zmieni zawartość obserwowanych stron.',

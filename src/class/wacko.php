@@ -4597,7 +4597,7 @@ class Wacko
 		// check if reserved word
 		else if ($result = $this->validate_reserved_words($user_name))
 		{
-			return Ut::perc_replace($this->_t('UserReservedWord'), $result);
+			return Ut::perc_replace($this->_t('UserReservedWord'), '<code>' . $result . '</code>');
 		}
 		// if user name already exists
 		else if ($this->user_name_exists($user_name) && $create)

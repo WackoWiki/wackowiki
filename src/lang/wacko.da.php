@@ -616,7 +616,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Der findes eksisterende lignende sider til %1:',
 
 	'PageReservedWord'			=> 'Du kan ikke bruge %1 som en del af adressen, da det er et reserveret ord.',
-	'UserReservedWord'			=> 'Brugernavne kan ikke indeholde ##%1## da det er et reserveret ord.',
+	'UserReservedWord'			=> 'Brugernavne kan ikke indeholde %1 da det er et reserveret ord.',
 
 	'DontRedirect'				=> 'Tillad ikke viderestilling ved handlingen Viderestil.',
 	'SendWatchEmail'			=> 'Send notifikationsmail når nogen ændrer en side du overvåger.',
