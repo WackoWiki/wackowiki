@@ -299,6 +299,9 @@ function admin_config_system(&$engine, &$module)
 					</select>
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
 			<tr class="hl-setting">
 				<td class="label">
 					<label for="session_notice"><strong><?php echo $engine->_t('SessionNotice');?>:</strong><br>
