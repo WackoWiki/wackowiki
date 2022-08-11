@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> '이메일 주소를 지정해야합니다.',
 	'NotAEmail'					=> '유효한 이메일 주소가 아닌 것 같습니다.',
 	'EmailTaken'				=> 'The entered email address is already in use.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> '비밀번호가 일치하지 않습니다.',
 	'SpacesArentAllowed'		=> '비밀번호에는 공백이 허용되지 않습니다.',
 	'ListMyPages'				=> 'List your pages',

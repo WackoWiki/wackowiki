@@ -248,7 +248,7 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> '更新了基本设置',
 	'LogBasicSettingsUpdated'	=> '更新了基本设置',
 
-	'SiteName'					=> '站点名称',
+	'SiteName'					=> '站点名称：',
 	'SiteNameInfo'				=> '该网站的标题，出现在浏览器标题、主题标题、电子邮件通知等上面。',
 	'SiteDesc'					=> '网站说明：',
 	'SiteDescInfo'				=> '对出现在页面标题中的网站标题的补充，用几句话解释这个网站的内容。',
@@ -481,6 +481,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> '禁用 WikiName 的强制使用。 允许使用传统昵称注册用户，而不是强制 NameSurname。',
 	'AllowEmailReuse'			=> '允许电子邮件地址重复使用',
 	'AllowEmailReuseInfo'		=> '不同的用户可以使用相同的电子邮件地址注册。',
+	'AllowedEmailDomains'		=> 'Allowed email domains',
+	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> '用户名长度',
 	'UsernameLengthInfo'		=> '用户名中的最小和最大字符数。',
 

@@ -248,7 +248,7 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> 'Updated basic settings',
 	'LogBasicSettingsUpdated'	=> 'Updated basic settings',
 
-	'SiteName'					=> 'Site Name',
+	'SiteName'					=> 'Site Name:',
 	'SiteNameInfo'				=> 'The title of this site, appears on browser title, theme header, email-notification, etc.',
 	'SiteDesc'					=> 'Site Description:',
 	'SiteDescInfo'				=> 'Supplement to the title of the site that appears in the pages header to explain in a few words, what this site is about.',
@@ -497,6 +497,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
 	'AllowEmailReuse'			=> 'Allow email address re-use',
 	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'AllowedEmailDomains'		=> 'Allowed email domains',
+	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
 

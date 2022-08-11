@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> '您必须提供您的电子邮件地址。',
 	'NotAEmail'					=> '您的邮件地址也许不是有效的。',
 	'EmailTaken'				=> '输入的电子邮件地址已被使用。',
+	'EmailDomainNotAllowed'		=> '电子邮件%1 不在允许的域名列表.',
 	'PasswordsDidntMatch'		=> '您输入的密码和确认密码不一致。',
 	'SpacesArentAllowed'		=> '密码中不允许有空格。',
 	'ListMyPages'				=> '列出您的页面',

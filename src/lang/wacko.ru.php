@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> 'Нужно указать адрес электронной почты.',
 	'NotAEmail'					=> 'Это не похоже на адрес электронной почты.',
 	'EmailTaken'				=> 'Введенный адрес email уже используется другим пользователем.',
+	'EmailDomainNotAllowed'		=> 'Адрес email %1 не в списке разрешенных доменов.',
 	'PasswordsDidntMatch'		=> 'Пароли не совпадают.',
 	'SpacesArentAllowed'		=> 'Нельзя использовать в пароле пробел.',
 	'ListMyPages'				=> 'Список ваших страниц',

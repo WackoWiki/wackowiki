@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> 'Sa pead täpsustama oma e-posti aadressi.',
 	'NotAEmail'					=> 'See ei tundu olema õige aadress.',
 	'EmailTaken'				=> 'Sisestatud e-postiaadress on juba kasutuses.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> 'Parool ei klapi.',
 	'SpacesArentAllowed'		=> 'Tühikud ei ole paroolis lubatud.',
 	'ListMyPages'				=> 'List your pages',

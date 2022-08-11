@@ -248,9 +248,9 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> 'Grundeinstellungen aktualisiert',
 	'LogBasicSettingsUpdated'	=> 'Grundeinstellungen aktualisiert',
 
-	'SiteName'					=> 'Name der Seite',
+	'SiteName'					=> 'Name der Seite:',
 	'SiteNameInfo'				=> 'Der Seitentitel erscheint in der Titelleiste des Browsers, Theme Header, Email-Benachrichtigung, etc.',
-	'SiteDesc'					=> 'Beschreibung der Seite',
+	'SiteDesc'					=> 'Beschreibung der Seite:',
 	'SiteDescInfo'				=> 'Ergänzung zum Titel der Website, die im Seitenkopf erscheint, um in wenigen Worten zu erklären, worum es in dieser Seite geht.',
 	'AdminName'					=> 'Administrator der Seite',
 	'AdminNameInfo'				=> 'Benutzername, der insgesamt für die Webseite verantwortlich ist. Dieser Name wird nicht verwendet, um Zugriffsrechte zu bestimmen, aber es ist wünschenswert, dass er dem Namen des Hauptadministrators der Webseite entspricht.',
@@ -498,6 +498,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> 'Deaktiviert die die obligatorische Verwendung von WikiNamen. Ermöglicht die Registrierung von Benutzern mit traditionellen Spitznamen, NameVorname ist nicht zwingend.',
 	'AllowEmailReuse'			=> 'Erlaubt die Wiederverwendung von E-Mail-Adressen',
 	'AllowEmailReuseInfo'		=> 'Verschiedene Benutzer können sich mit derselben E-Mail-Adresse registrieren.',
+	'AllowedEmailDomains'		=> 'Allowed email domains',
+	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Länge von Benutzernamen',
 	'UsernameLengthInfo'		=> 'Mindestens erforderliche und maximal zulässige Zeichenanzahl in Benutzernamen.',
 

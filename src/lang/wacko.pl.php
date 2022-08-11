@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> 'Wprowadzenie adresu e-mail jest obowiązkowe.',
 	'NotAEmail'					=> 'Wprowadzony adres e-mail jest nieprawidłowy.',
 	'EmailTaken'				=> 'Wpisany adres e-mail jest już używany.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> 'Wprowadzone hasła nie są identyczne.',
 	'SpacesArentAllowed'		=> 'Hasło nie może zawierać odstępów.',
 	'ListMyPages'				=> 'List your pages',

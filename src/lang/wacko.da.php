@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> 'Du skal oplyse en emailadresse.',
 	'NotAEmail'					=> 'Det ligner ikke en rigtig adresse.',
 	'EmailTaken'				=> 'Den indtastede emailadresse er allerede i brug.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> 'Passwords stemmer ikke.',
 	'SpacesArentAllowed'		=> 'Ingen mellemrum!',
 	'ListMyPages'				=> 'Liste dine sider',

@@ -500,6 +500,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> 'Disable the the mandatory use of WikiName. Allows to register users with traditional nicknames, not forced NameSurname.',
 	'AllowEmailReuse'			=> 'Allow email address re-use',
 	'AllowEmailReuseInfo'		=> 'Different users can register with the same e-mail address.',
+	'AllowedEmailDomains'		=> 'Allowed email domains',
+	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Username length',
 	'UsernameLengthInfo'		=> 'Minimum and maximum number of characters in usernames.',
 

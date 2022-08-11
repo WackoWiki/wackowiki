@@ -248,7 +248,7 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> 'Mise à jour des réglages de base',
 	'LogBasicSettingsUpdated'	=> 'Mise à jour des réglages de base',
 
-	'SiteName'					=> 'Nom du site',
+	'SiteName'					=> 'Nom du site :',
 	'SiteNameInfo'				=> 'Le titre de ce site, apparaît sur le titre du navigateur, l\'en-tête du thème, l\'avis par courriel, etc.',
 	'SiteDesc'					=> 'Description du site:',
 	'SiteDescInfo'				=> 'Complément au titre du site qui apparaît dans l\'en-tête des pages pour expliquer en quelques mots, en quoi consiste ce site.',
@@ -496,6 +496,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> 'Désactivez l\'utilisation obligatoire du NomWiki. Permet d\'enregistrer les utilisateurs avec des surnoms traditionnels, et non forcés NameSurname.',
 	'AllowEmailReuse'			=> 'Autoriser la réutilisation de l\'adresse e-mail',
 	'AllowEmailReuseInfo'		=> 'Différents utilisateurs peuvent s\'inscrire avec la même adresse e-mail.',
+	'AllowedEmailDomains'		=> 'Allowed email domains',
+	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Longueur du nom d\'utilisateur',
 	'UsernameLengthInfo'		=> 'Nombre minimum et maximum de caractères dans les noms d\'utilisateur.',
 

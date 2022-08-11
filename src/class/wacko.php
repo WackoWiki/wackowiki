@@ -8265,9 +8265,9 @@ class Wacko
 		{
 			return $this->_t('EmailTaken') . ' ';
 		}
-		else if (!empty($this->db->allowed_email_domains) && $this->validate_email_domain($email))
+		else if (!empty($this->db->allowed_email_domains) && !$this->validate_email_domain($email))
 		{
-			return Ut::perc_replace($this->_t('LogUserEmailNotAllowed'), $email_address) . ' ';
+			return Ut::perc_replace($this->_t('EmailDomainNotAllowed'), '<code>' . $email . '</code>') . ' ';
 		}
 
 		return null; // it's ok :)
@@ -8307,7 +8307,7 @@ class Wacko
 		// see if we're limited to a set of known domains
 		if(!empty($this->db->allowed_email_domains))
 		{
-			$allowed_domains = preg_split('/[\s,]+/', $this->db->allowed_languages, -1, PREG_SPLIT_NO_EMPTY);
+			$allowed_domains = preg_split('/[\s,]+/', $this->db->allowed_email_domains, -1, PREG_SPLIT_NO_EMPTY);
 
 			foreach($allowed_domains as $email_domain)
 			{

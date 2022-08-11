@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> 'Meg kell adnia egy e-mail címet.',
 	'NotAEmail'					=> 'Ez nem úgy néz ki, mint egy érvényes e-mail cím.',
 	'EmailTaken'				=> 'A megadott e-mail cím már használatban van.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> 'A jelszavak nem egyeztek.',
 	'SpacesArentAllowed'		=> 'A szóközök nem megengedettek a jelszavakban.',
 	'ListMyPages'				=> 'List your pages',

@@ -44,6 +44,7 @@ function admin_config_security(&$engine, &$module)
 		$config['allow_persistent_cookie']		= (int) ($_POST['allow_persistent_cookie'] ?? 0);
 		$config['disable_wikiname']				= (int) ($_POST['disable_wikiname'] ?? 0);
 		$config['allow_email_reuse']			= (int) ($_POST['allow_email_reuse'] ?? 0);
+		$config['allowed_email_domains']		= (string) ($_POST['allowed_email_domains'] ?? '');
 		$config['tls']							= (int) ($_POST['tls'] ?? 0);
 		$config['tls_implicit']					= (int) ($_POST['tls_implicit'] ?? 0);
 		$config['pwd_admin_min_chars']			= (int) $_POST['pwd_admin_min_chars'];
@@ -138,6 +139,18 @@ function admin_config_security(&$engine, &$module)
 				</td>
 				<td>
 					<input type="checkbox" id="allow_email_reuse" name="allow_email_reuse" value="1"<?php echo ($engine->db->allow_email_reuse ? ' checked' : '');?>>
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="allowed_email_domains"><strong><?php echo $engine->_t('AllowedEmailDomains');?>:</strong><br>
+					<small><?php echo $engine->_t('AllowedEmailDomainsInfo');?></small></label>
+				</td>
+				<td>
+					<input type="text" size="50" maxlength="255" id="allowed_email_domains" name="allowed_email_domains" value="<?php echo Ut::html($engine->db->allowed_email_domains);?>">
 				</td>
 			</tr>
 			<tr class="lined">

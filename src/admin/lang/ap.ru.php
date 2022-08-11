@@ -248,7 +248,7 @@ $ap_translation = [
 	'BasicSettingsUpdated'		=> 'Обновлены базовые параметры',
 	'LogBasicSettingsUpdated'	=> 'Обновлены базовые параметры',
 
-	'SiteName'					=> 'Название сайта',
+	'SiteName'					=> 'Название сайта:',
 	'SiteNameInfo'				=> 'Заголовок, отображаемый на страницах сайта, в email-уведомлениях и т.д.',
 	'SiteDesc'					=> 'Описание сайта',
 	'SiteDescInfo'				=> 'Дополнение к заголовку сайта, отображаемое в шапках страниц.',
@@ -479,6 +479,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> 'Отменяет обязательное использование ВикиИмени для регистрации. Позволяет зарегистрироваться с обычными никами.',
 	'AllowEmailReuse'			=> 'Разрешить повторное использование email для регистрации.',
 	'AllowEmailReuseInfo'		=> 'Разные пользователи смогут использовать один и тот же e-mail для регистрации.',
+	'AllowedEmailDomains'		=> 'Allowed email domains',
+	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
 	'UsernameLength'			=> 'Длина имени пользователя',
 	'UsernameLengthInfo'		=> 'Минимальное и максимальное количество букв в имени пользователя.',
 

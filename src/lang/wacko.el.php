@@ -502,6 +502,7 @@ $wacko_translation = [
 	'SpecifyEmail'				=> 'Πρέπει να ορίσετε μία συγκεκριμένη ηλεκτρονική διεύθυνση.',
 	'NotAEmail'					=> 'Δεν φαίνεται να είναι έγκυρη ηλεκτρονική διεύθυνση',
 	'EmailTaken'				=> 'Η εισαχθείσα διεύθυνση ηλεκτρονικού ταχυδρομείου χρησιμοποιείται ήδη.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> 'Τα συνθηματικά δεν ταιριάζουν.',
 	'SpacesArentAllowed'		=> 'Τα κενά δεν επιτρέπονται στα συνθηματικά.',
 	'ListMyPages'				=> 'List your pages',
