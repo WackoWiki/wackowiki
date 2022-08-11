@@ -52,15 +52,9 @@ else if ($user = $this->get_user())
 	{
 		$error = '';
 
-		// no email given
-		if (!$email)
+		if ($message = $this->validate_email($email))
 		{
-			$error = $this->_t('SpecifyEmail');
-		}
-		// invalid email
-		else if (!$this->validate_email($email))
-		{
-			$error = $this->_t('NotAEmail');
+			$error .= $message;
 		}
 
 		// check for errors and store

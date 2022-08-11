@@ -8247,6 +8247,32 @@ class Wacko
 		return $word_ok;
 	}
 
+	// returns error text, or null on OK
+	function validate_email($email): ?string
+	{
+		// no email given
+		if ($email == '')
+		{
+			return $this->_t('SpecifyEmail') . ' ';
+		}
+		// invalid email
+		else if (!$this->validate_email_address($email))
+		{
+			return $this->_t('NotAEmail') . ' ';
+		}
+		// no email reuse allowed
+		else if (!$this->db->allow_email_reuse && $this->email_exists($email))
+		{
+			return $this->_t('EmailTaken') . ' ';
+		}
+		else if (!empty($this->db->allowed_email_domains) && $this->validate_email_domain($email))
+		{
+			return Ut::perc_replace($this->_t('LogUserEmailNotAllowed'), $email_address) . ' ';
+		}
+
+		return null; // it's ok :)
+	}
+
 	/**
 	 * Check for valid email address.
 	 *
@@ -8254,7 +8280,7 @@ class Wacko
 	 *
 	 * @return boolean email valid or invalid
 	 */
-	function validate_email($email_address): bool
+	function validate_email_address($email_address): bool
 	{
 		if ($this->db->email_pattern == 'html5')
 		{
@@ -8274,14 +8300,16 @@ class Wacko
 	}
 
 	// only allow and send email to addresses in the given domain(s)
-	function validate_email_domain($email_address)
+	function validate_email_domain($email_address): ?bool
 	{
 		$domain = substr($email_address, strpos($email_address, '@') + 1);
 
 		// see if we're limited to a set of known domains
 		if(!empty($this->db->allowed_email_domains))
 		{
-			foreach($this->db->allowed_email_domains as $email_domain)
+			$allowed_domains = preg_split('/[\s,]+/', $this->db->allowed_languages, -1, PREG_SPLIT_NO_EMPTY);
+
+			foreach($allowed_domains as $email_domain)
 			{
 				if( 0 == strcasecmp($email_domain, $domain))
 				{

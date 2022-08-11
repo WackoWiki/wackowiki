@@ -57,20 +57,9 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 		{
 			$error .= $message;
 		}
-		// no email given
-		else if ($email == '')
+		if ($message = $this->validate_email($email))
 		{
-			$error .= $this->_t('SpecifyEmail') . ' ';
-		}
-		// invalid email
-		else if (!$this->validate_email($email))
-		{
-			$error .= $this->_t('NotAEmail') . " ";
-		}
-		// no email reuse allowed
-		else if (!$this->db->allow_email_reuse && $this->email_exists($email))
-		{
-			$error .= $this->_t('EmailTaken') . ' ';
+			$error .= $message;
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $password)

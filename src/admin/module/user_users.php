@@ -142,20 +142,9 @@ function admin_user_users(&$engine, &$module)
 		{
 			$error .= $message;
 		}
-		// no email given
-		else if ($email == '')
+		if ($message = $engine->validate_email($email))
 		{
-			$error .= $engine->_t('SpecifyEmail') . " ";
-		}
-		// invalid email
-		else if (!$engine->validate_email($email))
-		{
-			$error .= $engine->_t('NotAEmail') . " ";
-		}
-		// no email reuse allowed
-		else if (!$engine->db->allow_email_reuse && $engine->email_exists($email))
-		{
-			$error .= $engine->_t('EmailTaken') . " ";
+			$error .= $message;
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $password)
@@ -263,7 +252,7 @@ function admin_user_users(&$engine, &$module)
 			$_POST['change']	= (int) $user_id;
 			$_POST['edit']		= 1;
 		}
-		else if (!$engine->validate_email($email))
+		else if (!$engine->validate_email_address($email))
 		{
 			$engine->show_message($engine->_t('NotAEmail'));
 			$_POST['change']	= (int) $user_id;
