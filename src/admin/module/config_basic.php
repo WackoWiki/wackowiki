@@ -32,11 +32,12 @@ function admin_config_basic(&$engine, &$module)
 	{
 		$site_name		= $engine->sanitize_text_field($_POST['site_name'], true);
 		$site_desc		= $engine->sanitize_text_field($_POST['site_desc'], true);
+		$admin_name		= $engine->sanitize_username($_POST['admin_name']);
 		$language		= $engine->validate_language($_POST['language']);
 
 		$config['site_name']					= (string) $site_name;
 		$config['site_desc']					= (string) $site_desc;
-		$config['admin_name']					= (string) $_POST['admin_name'];
+		$config['admin_name']					= (string) $admin_name;
 
 		$config['language']						= (string) $language;
 		$config['multilanguage']				= (int) ($_POST['multilanguage'] ?? 0);

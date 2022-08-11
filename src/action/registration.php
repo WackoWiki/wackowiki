@@ -29,7 +29,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 {
 	// create new account if possible
 	// passing vars from user input
-	$user_name		= Ut::strip_spaces(($_POST['user_name'] ?? ''));
+	$user_name		= $this->sanitize_username(($_POST['user_name'] ?? ''));
 	$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
 	$password		= (string) ($_POST['password'] ?? '');
 	$conf_password	= (string) ($_POST['conf_password'] ?? '');
@@ -53,38 +53,9 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 	if ((!$error) || $this->is_admin() || !$this->db->captcha_registration)
 	{
-		// strip \-\_\'\.\/\\
-		$user_name	= $this->sanitize_username($user_name);
-		$user_name	= Ut::normalize($user_name);
-
-		// check if name is WikiName style
-		if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)
+		if ($message = $this->validate_username($user_name))
 		{
-			$error .= $this->_t('MustBeWikiName') . " ";
-		}
-		else if (mb_strlen($user_name) < $this->db->username_chars_min)
-		{
-			$error .= Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min) . ' ';
-		}
-		else if (mb_strlen($user_name) > $this->db->username_chars_max)
-		{
-			$error .= Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . ' ';
-		}
-		// check if valid user name (and disallow '/')
-		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
-		{
-			$error .= $this->_t('InvalidUserName') . ' ';
-		}
-		// check if reserved word
-		else if ($result = $this->validate_reserved_words($user_name))
-		{
-			$error .= Ut::perc_replace($this->_t('UserReservedWord'), $result);
-		}
-		// if user name already exists
-		else if ($this->user_name_exists($user_name))
-		{
-			$error .= $this->_t('RegistrationUserNameOwned');
-			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
+			$error .= $message;
 		}
 		// no email given
 		else if ($email == '')

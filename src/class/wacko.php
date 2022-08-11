@@ -4566,8 +4566,48 @@ class Wacko
 
 	function sanitize_username($user_name): string
 	{
+		$user_name = Ut::strip_spaces($user_name);
 		// strip \-\_\'\.\/\\
-		return str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
+		$user_name = str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
+
+		return Ut::normalize($user_name);
+	}
+
+	// returns error text, or null on OK
+	function validate_username($user_name): ?string
+	{
+		// check if name is WikiName style
+		if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)
+		{
+			return $this->_t('MustBeWikiName') . " ";
+		}
+		else if (mb_strlen($user_name) < $this->db->username_chars_min)
+		{
+			return Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min) . ' ';
+		}
+		else if (mb_strlen($user_name) > $this->db->username_chars_max)
+		{
+			return Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . ' ';
+		}
+		// check if valid user name (and disallow '/')
+		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
+		{
+			return $this->_t('InvalidUserName') . ' ';
+		}
+		// check if reserved word
+		else if ($result = $this->validate_reserved_words($user_name))
+		{
+			return Ut::perc_replace($this->_t('UserReservedWord'), $result);
+		}
+		// if user name already exists
+		else if ($this->user_name_exists($user_name))
+		{
+			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
+
+			return $this->_t('RegistrationUserNameOwned');
+		}
+
+		return null; // it's ok :)
 	}
 
 	/**

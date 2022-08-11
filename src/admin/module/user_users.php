@@ -121,7 +121,7 @@ function admin_user_users(&$engine, &$module)
 	if (isset($_POST['create']) || isset($_POST['edit']))
 	{
 		// passing vars from user input
-		$user_name		= Ut::strip_spaces(($_POST['user_name'] ?? ''));
+		$user_name		= $engine->sanitize_username(($_POST['user_name'] ?? ''));
 		$realname		= (string) ($_POST['realname'] ?? '');
 		$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
 		$password		= (string) ($_POST['password'] ?? '');
@@ -138,40 +138,9 @@ function admin_user_users(&$engine, &$module)
 	if ($action == 'add_user' && $user_name)
 	{
 		// create new account if possible
-
-		// strip \-\_\'\.\/\\
-		$user_name	= $engine->sanitize_username($user_name);
-
-		// check if name is WikiName style
-		if (!$engine->is_wiki_name($user_name) && $engine->db->disable_wikiname === false)
+		if ($message = $engine->validate_username($user_name))
 		{
-			$error .= $engine->_t('MustBeWikiName') . " ";
-		}
-		else if (mb_strlen($user_name) < $engine->db->username_chars_min)
-		{
-			$error .= Ut::perc_replace($engine->_t('NameTooShort'), 0, $engine->db->username_chars_min) . " ";
-		}
-		else if (mb_strlen($user_name) > $engine->db->username_chars_max)
-		{
-			$error .= Ut::perc_replace($engine->_t('NameTooLong'), 0, $engine->db->username_chars_max) . " ";
-		}
-		// check if valid user name (and disallow '/')
-		else if (!preg_match('/^(' . $engine->language['USER_NAME'] . ')$/u', $user_name))
-		{
-			$error .= $engine->_t('InvalidUserName') . " ";
-		}
-		// check if reserved word
-		else if ($result = $engine->validate_reserved_words($user_name))
-		{
-			$error .= Ut::perc_replace($engine->_t('UserReservedWord'), $result);
-		}
-		// if user name already exists
-		else if ($engine->user_name_exists($user_name))
-		{
-			$error .= $engine->_t('RegistrationUserNameOwned');
-
-			// log event
-			$engine->log(2, Ut::perc_replace($engine->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
+			$error .= $message;
 		}
 		// no email given
 		else if ($email == '')
@@ -202,11 +171,11 @@ function admin_user_users(&$engine, &$module)
 		{
 			$engine->db->sql_query(
 				"INSERT INTO " . $prefix . "user SET " .
-					"signup_time		= UTC_TIMESTAMP(), " .
+					"user_name			= " . $engine->db->q($user_name) . ", " .
 					"email				= " . $engine->db->q($email) . ", " .
 					"password			= " . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ", " .
 					"enabled			= " . (int) $enabled . ", " .
-					"user_name			= " . $engine->db->q($user_name) . " ");
+					"signup_time		= UTC_TIMESTAMP()");
 
 			// get new user_id
 			$_user_id = $engine->db->load_single(

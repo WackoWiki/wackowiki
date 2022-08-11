@@ -197,11 +197,13 @@ function admin_user_groups(&$engine, &$module)
 		if (isset($_POST['create'])
 			&& isset($_POST['new_group_name']))
 		{
+			$group_name	= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+
 			// do we have identical names?
 			if ($engine->db->load_single(
 				"SELECT group_id " .
 				"FROM " . $prefix . "usergroup " .
-				"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " " .
+				"WHERE group_name = " . $engine->db->q($group_name) . " " .
 				"LIMIT 1"))
 			{
 				$engine->show_message($engine->_t('GroupsAlreadyExists'));
@@ -215,7 +217,7 @@ function admin_user_groups(&$engine, &$module)
 						"created		= UTC_TIMESTAMP(), " .
 						"description	= " . $engine->db->q($_POST['description']) . ", " .
 						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
-						"group_name		= " . $engine->db->q($_POST['new_group_name']) . ", " .
+						"group_name		= " . $engine->db->q($group_name) . ", " .
 						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
 						"active			= " . (int) ($_POST['active'] ?? 0));
 
@@ -230,10 +232,12 @@ function admin_user_groups(&$engine, &$module)
 			&&  isset($_POST['group_id'])
 			&& (isset($_POST['new_group_name']) || isset($_POST['moderator_id'])))
 		{
+			$group_name	= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+
 			// do we have identical names?
 			if ($engine->db->load_single(
 				"SELECT group_id FROM " . $prefix . "usergroup " .
-				"WHERE group_name = " . $engine->db->q($_POST['new_group_name']) . " " .
+				"WHERE group_name = " . $engine->db->q($group_name) . " " .
 					"AND group_id <> " . (int) $_POST['group_id'] . " " .
 				"LIMIT 1"))
 			{
@@ -245,7 +249,7 @@ function admin_user_groups(&$engine, &$module)
 			{
 				$engine->db->sql_query(
 					"UPDATE " . $prefix . "usergroup SET " .
-						"group_name		= " . $engine->db->q($_POST['new_group_name']) . ", " .
+						"group_name		= " . $engine->db->q($group_name) . ", " .
 						"description	= " . $engine->db->q($_POST['new_description']) . ", " .
 						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
 						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
