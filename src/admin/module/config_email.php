@@ -80,7 +80,7 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="enable_email"><strong><?php echo $engine->_t('EnableEmail'); ?>:</strong><br>
+					<label for="enable_email"><strong><?php echo $engine->_t('EnableEmail'); ?></strong><br>
 					<small><?php echo $engine->_t('EnableEmailInfo'); ?></small></label>
 				</td>
 				<td>
@@ -93,7 +93,7 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="phpmailer_method"><strong><?php echo $engine->_t('EmailFunctionName'); ?>:</strong><br>
+					<label for="phpmailer_method"><strong><?php echo $engine->_t('EmailFunctionName'); ?></strong><br>
 					<small><?php echo $engine->_t('EmailFunctionNameInfo'); ?><br>
 					<?php echo $engine->_t('UseSmtpInfo'); ?></small></label>
 				</td>
@@ -110,11 +110,11 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="email_from"><strong><?php echo $engine->_t('FromEmailName'); ?>:</strong><br>
+					<label for="email_from"><strong><?php echo $engine->_t('FromEmailName'); ?></strong><br>
 					<small><?php echo $engine->_t('FromEmailNameInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="100" id="email_from" name="email_from" value="<?php echo Ut::html($engine->db->email_from);?>">
+					<input type="text" size="50" maxlength="100" id="email_from" name="email_from" value="<?php echo Ut::html($engine->db->email_from);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -122,11 +122,11 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="noreply_email"><strong><?php echo $engine->_t('NoReplyEmail'); ?>:</strong><br>
+					<label for="noreply_email"><strong><?php echo $engine->_t('NoReplyEmail'); ?></strong><br>
 					<small><?php echo $engine->_t('NoReplyEmailInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="email" maxlength="100" id="noreply_email" name="noreply_email" value="<?php echo Ut::html($engine->db->noreply_email);?>">
+					<input type="email" size="50" maxlength="100" id="noreply_email" name="noreply_email" value="<?php echo Ut::html($engine->db->noreply_email);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -134,11 +134,11 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="admin_email"><strong><?php echo $engine->_t('AdminEmail'); ?>:</strong><br>
+					<label for="admin_email"><strong><?php echo $engine->_t('AdminEmail'); ?></strong><br>
 					<small><?php echo $engine->_t('AdminEmailInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="email" maxlength="100" id="admin_email" name="admin_email" value="<?php echo Ut::html($engine->db->admin_email);?>">
+					<input type="email" size="50" maxlength="100" id="admin_email" name="admin_email" value="<?php echo Ut::html($engine->db->admin_email);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -146,11 +146,11 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="abuse_email"><strong><?php echo $engine->_t('AbuseEmail'); ?>:</strong><br>
+					<label for="abuse_email"><strong><?php echo $engine->_t('AbuseEmail'); ?></strong><br>
 					<small><?php echo $engine->_t('AbuseEmailInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="email" maxlength="100" id="abuse_email" name="abuse_email" value="<?php echo Ut::html($engine->db->abuse_email);?>">
+					<input type="email" size="50" maxlength="100" id="abuse_email" name="abuse_email" value="<?php echo Ut::html($engine->db->abuse_email);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -158,7 +158,7 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="send_test_email"><strong><?php echo $engine->_t('SendTestEmail'); ?>:</strong><br>
+					<label for="send_test_email"><strong><?php echo $engine->_t('SendTestEmail'); ?></strong><br>
 					<small><?php echo $engine->_t('SendTestEmailInfo'); ?></small></label>
 				</td>
 				<td>
@@ -173,11 +173,11 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?>:</strong><br>
+					<label for="smtp_host"><strong><?php echo $engine->_t('SmtpServer'); ?></strong><br>
 					<small><?php echo $engine->_t('SmtpServerInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="smtp_host" name="smtp_host" value="<?php echo Ut::html($engine->db->smtp_host);?>">
+					<input type="text" size="50" maxlength="50" id="smtp_host" name="smtp_host" value="<?php echo Ut::html($engine->db->smtp_host);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -185,7 +185,7 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="smtp_port"><strong><?php echo $engine->_t('SmtpPort'); ?>:</strong><br>
+					<label for="smtp_port"><strong><?php echo $engine->_t('SmtpPort'); ?></strong><br>
 					<small><?php echo $engine->_t('SmtpPortInfo'); ?></small></label>
 				</td>
 				<td>
@@ -197,7 +197,7 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="smtp_connection_mode"><strong><?php echo $engine->_t('SmtpConnectionMode'); ?>:</strong><br>
+					<label for="smtp_connection_mode"><strong><?php echo $engine->_t('SmtpConnectionMode'); ?></strong><br>
 					<small><?php echo $engine->_t('SmtpConnectionModeInfo'); ?>.</small></label>
 				</td>
 				<td>
@@ -213,7 +213,7 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="smtp_auto_tls"><strong><?php echo $engine->_t('SmtpAutoTls'); ?>:</strong><br>
+					<label for="smtp_auto_tls"><strong><?php echo $engine->_t('SmtpAutoTls'); ?></strong><br>
 					<small><?php echo $engine->_t('SmtpAutoTlsInfo'); ?></small></label>
 				</td>
 				<td>
@@ -226,11 +226,11 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="smtp_username"><strong><?php echo $engine->_t('SmtpUsername'); ?>:</strong><br>
+					<label for="smtp_username"><strong><?php echo $engine->_t('SmtpUsername'); ?></strong><br>
 					<small><?php echo $engine->_t('SmtpUsernameInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="255" id="smtp_username" name="smtp_username" value="<?php echo Ut::html($engine->db->smtp_username);?>">
+					<input type="text" size="50" maxlength="255" id="smtp_username" name="smtp_username" value="<?php echo Ut::html($engine->db->smtp_username);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -238,11 +238,11 @@ function admin_config_email(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="smtp_password"><strong><?php echo $engine->_t('SmtpPassword'); ?>:</strong><br>
+					<label for="smtp_password"><strong><?php echo $engine->_t('SmtpPassword'); ?></strong><br>
 					<small><?php echo $engine->_t('SmtpPasswordInfo'); ?></small></label>
 				</td>
 				<td>
-					<input type="password" maxlength="255" id="smtp_password" name="smtp_password" value="<?php echo Ut::html($engine->db->smtp_password);?>">
+					<input type="password" size="50" maxlength="255" id="smtp_password" name="smtp_password" value="<?php echo Ut::html($engine->db->smtp_password);?>">
 				</td>
 			</tr>
 
