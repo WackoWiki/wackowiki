@@ -5770,8 +5770,24 @@ class Wacko
 			"LIMIT 1");
 	}
 
+	function sanitize_acl_syntax($list)
+	{
+		$lines	= explode("\n", $list);
+
+		$_lines = array_map(
+			function($lines) {
+				return $this->sanitize_username($lines);
+			},
+			$lines
+		);
+
+		$_list	= implode("\n", $_lines);
+
+		return $_list;
+	}
+
 	// check for acl syntax errors
-	function validate_acl_syntax($list): bool
+	function validate_acl_syntax($list, $privilege): bool
 	{
 		$error	= null;
 		$lines	= explode("\n", $list);
@@ -5787,7 +5803,7 @@ class Wacko
 
 		if ($error)
 		{
-			$this->set_message($this->_t('AclSyntaxError') . ': <br>' . $error, 'error');
+			$this->set_message($this->_t('AclSyntaxError') . ': <code>' . $privilege . '</code><br>' . $error, 'error');
 			return false;
 		}
 		else
@@ -5799,9 +5815,10 @@ class Wacko
 	function save_acl($page_id, $privilege, $list): void
 	{
 		$list = trim(str_replace("\r", '', $list));
+		$list = $this->sanitize_acl_syntax($list);
 
 		// validate
-		if (!$this->validate_acl_syntax($list))
+		if (!$this->validate_acl_syntax($list, $privilege))
 		{
 			#$this->reload_me();
 			return;
