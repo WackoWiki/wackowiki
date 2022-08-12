@@ -25,7 +25,7 @@ $message = '';
 
 if ($registered
 	&&
-	($this->check_acl($user_name, $this->db->rename_globalacl)
+	($this->check_acl($user_name, $this->db->rename_global_acl)
 		|| $this->get_page_owner_id($this->page['page_id']) == $user_id)
 )
 {
@@ -140,7 +140,7 @@ if ($registered
 					$tpl->checked	= ' checked';
 				}
 
-				if ($this->check_acl($user_name, $this->db->rename_globalacl))
+				if ($this->check_acl($user_name, $this->db->rename_global_acl))
 				{
 					$tpl->global = true;
 				}
@@ -172,7 +172,7 @@ function recursive_move(&$engine, $root, $new_root, $log)
 		exit; // who and where did intend to move root???
 	}
 
-	// FIXME: missing $owner_id -> rename_globalacl || owner
+	// FIXME: missing $owner_id -> rename_global_acl || owner
 	$owner_id	= '';
 	$_root		= $root;
 	$pages		= $engine->db->load_all(
@@ -212,7 +212,7 @@ function move(&$engine, $old_page, $new_tag, $log)
 	$user		= $engine->get_user();
 	$user_id	= $engine->get_user_id();
 
-	if ($engine->check_acl($user['user_name'], $engine->db->rename_globalacl)
+	if ($engine->check_acl($user['user_name'], $engine->db->rename_global_acl)
 	|| $engine->get_page_owner_id($old_page['page_id']) == $user_id)
 	{
 		if (!preg_match('/^([' . $engine->language['TAG_P'] . ']+)$/u', $new_tag))

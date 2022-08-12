@@ -39,7 +39,7 @@ function admin_config_permissions(&$engine, &$module)
 		$comment_acl	= $engine->sanitize_acl_syntax($_POST['default_comment_acl']);
 		$create_acl		= $engine->sanitize_acl_syntax($_POST['default_create_acl']);
 		$upload_acl		= $engine->sanitize_acl_syntax($_POST['default_upload_acl']);
-		$rename_acl		= $engine->sanitize_acl_syntax($_POST['rename_globalacl']);
+		$rename_acl		= $engine->sanitize_acl_syntax($_POST['rename_global_acl']);
 
 		if ($engine->validate_acl_syntax($read_acl, 'read'))
 		{
@@ -68,7 +68,7 @@ function admin_config_permissions(&$engine, &$module)
 
 		if ($engine->validate_acl_syntax($upload_acl, 'rename_global'))
 		{
-			$config['rename_globalacl']		= (string) $rename_acl;
+			$config['rename_global_acl']		= (string) $rename_acl;
 		}
 
 		$config['acl_lock']						= (int) ($_POST['acl_lock'] ?? 0);
@@ -161,11 +161,11 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="rename_globalacl"><strong><?php echo $engine->_t('RenameRights');?></strong><br>
+					<label for="rename_global_acl"><strong><?php echo $engine->_t('RenameRights');?></strong><br>
 					<small><?php echo $engine->_t('RenameRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea class="permissions" id="rename_globalacl" name="rename_globalacl"><?php echo Ut::html($engine->db->rename_globalacl);?></textarea>
+					<textarea class="permissions" id="rename_global_acl" name="rename_global_acl"><?php echo Ut::html($engine->db->rename_global_acl);?></textarea>
 				</td>
 			</tr>
 			<tr class="hl-setting">
