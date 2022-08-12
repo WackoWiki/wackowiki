@@ -136,7 +136,7 @@ function admin_system_log(&$engine, &$module)
 	echo $engine->form_open('systemlog');
 ?>
 		<div>
-			<h4><?php echo $engine->_t('LogFilterTip'); ?>:</h4><br>
+			<h4><?php echo $engine->_t('LogFilterTip'); ?></h4><br>
 			<?php echo $engine->_t('LogLevel'); ?>
 			<select name="level_mod">
 			<?php

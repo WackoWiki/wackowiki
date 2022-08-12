@@ -259,7 +259,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo"><strong><?php echo $engine->_t('SiteLogo');?>:</strong><br>
+				<label for="logo"><strong><?php echo $engine->_t('SiteLogo');?></strong><br>
 				<small><?php echo $engine->_t('SiteLogoInfo');?></small></label>
 			</td>
 			<td>
@@ -281,7 +281,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo_width"><strong><?php echo $engine->_t('LogoDimensions');?>:</strong><br>
+				<label for="logo_width"><strong><?php echo $engine->_t('LogoDimensions');?></strong><br>
 				<small><?php echo $engine->_t('LogoDimensionsInfo');?></small></label>
 			</td>
 			<td>
@@ -297,7 +297,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo_display"><strong><?php echo $engine->_t('LogoDisplayMode');?>:</strong><br>
+				<label for="logo_display"><strong><?php echo $engine->_t('LogoDisplayMode');?></strong><br>
 				<small><?php echo $engine->_t('LogoDisplayModeInfo');?></small></label>
 			</td>
 			<td>
@@ -316,7 +316,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo"><strong><?php echo $engine->_t('SiteFavicon');?>:</strong><br>
+				<label for="logo"><strong><?php echo $engine->_t('SiteFavicon');?></strong><br>
 				<small><?php echo $engine->_t('SiteFaviconInfo');?></small></label>
 			</td>
 			<td>
@@ -333,7 +333,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="theme_color"><strong><?php echo $engine->_t('ThemeColor');?>:</strong><br>
+				<label for="theme_color"><strong><?php echo $engine->_t('ThemeColor');?></strong><br>
 				<small><?php echo $engine->_t('ThemeColorInfo');?></small></label>
 			</td>
 			<td>
@@ -348,7 +348,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="theme"><strong><?php echo $engine->_t('Theme');?>:</strong><br>
+				<label for="theme"><strong><?php echo $engine->_t('Theme');?></strong><br>
 				<small><?php echo $engine->_t('ThemeInfo');?></small></label>
 			</td>
 			<td>
@@ -369,7 +369,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for=""><strong><?php echo $engine->_t('ThemesAllowed');?>:</strong><br>
+				<label for=""><strong><?php echo $engine->_t('ThemesAllowed');?></strong><br>
 				<small><?php echo $engine->_t('ThemesAllowedInfo');?></small></label>
 			</td>
 			<td>
@@ -408,7 +408,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<strong><?php echo $engine->_t('ThemesPerPage');?>:</strong><br>
+				<strong><?php echo $engine->_t('ThemesPerPage');?></strong><br>
 				<small><?php echo $engine->_t('ThemesPerPageInfo');?></small>
 			</td>
 			<td>

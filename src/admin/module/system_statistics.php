@@ -27,7 +27,7 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
 	<br>
-	<?php echo $engine->_t('DbStatSection');?>:
+	<?php echo $engine->_t('DbStatSection');?>
 	<br>
 	<br>
 	<table class="db-stats formation lined">
