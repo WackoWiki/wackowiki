@@ -211,7 +211,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 ?>
 			<table class="backup formation lined">
 				<tr>
-					<th class="t-right"><label for="root"><?php echo $engine->_t('BackupCluster'); ?>:</label></th>
+					<th class="t-right"><label for="root"><?php echo $engine->_t('BackupCluster'); ?></label></th>
 					<th colspan="2"><input type="text" id="root" name="root" size="30" value=""></th>
 				</tr>
 				<tr>
