@@ -175,7 +175,7 @@ function admin_massemail(&$engine, &$module)
 <?php
 	echo '<tr class="hl-setting">
 			<td class="label">
-				<label for="group_id"><strong>' . $engine->_t('SendToGroup') . ':</strong></label>
+				<label for="group_id"><strong>' . $engine->_t('SendToGroup') . '</strong></label>
 			</td>' .
 			'<td>
 				<select id="group_id" name="group_id">
@@ -198,7 +198,7 @@ function admin_massemail(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="mail_subject"><strong><?php echo $engine->_t('MessageSubject'); ?>:</strong><br>
+					<label for="mail_subject"><strong><?php echo $engine->_t('MessageSubject'); ?></strong><br>
 					<small><?php echo $engine->_t('MessageSubjectInfo');?></small></label></td>
 				</td>
 				<td>
@@ -209,7 +209,7 @@ function admin_massemail(&$engine, &$module)
 				<td colspan="2"></td>
 			</tr>
 			<tr class="hl-setting">
-				<td class="label"><label for="mail_body"><strong><?php echo $engine->_t('YourMessage');?>:</strong><br>
+				<td class="label"><label for="mail_body"><strong><?php echo $engine->_t('YourMessage');?></strong><br>
 					<small><?php echo $engine->_t('YourMessageInfo');?></small></label></td>
 				<td><textarea style="width:500px; height:200px;" id="mail_body" name="mail_body" required><?php echo Ut::html($mail_body);?></textarea></td>
 			</tr>

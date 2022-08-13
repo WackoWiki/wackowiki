@@ -59,7 +59,7 @@ function admin_messages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="system_message"><strong><?php echo $engine->_t('SysMsg');?>:</strong><br>
+					<label for="system_message"><strong><?php echo $engine->_t('SysMsg');?></strong><br>
 					<small><?php echo $engine->_t('SysMsgInfo');?></small></label>
 				</td>
 				<td>
@@ -71,7 +71,7 @@ function admin_messages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="system_message_type"><strong><?php echo $engine->_t('SysMsgType');?>:</strong><br>
+					<label for="system_message_type"><strong><?php echo $engine->_t('SysMsgType');?></strong><br>
 					<small><?php echo $engine->_t('SysMsgTypeInfo');?></small></label>
 				</td>
 				<td>
@@ -96,7 +96,7 @@ function admin_messages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<strong><?php echo $engine->_t('EnableSysMsg');?>:</strong><br>
+					<strong><?php echo $engine->_t('EnableSysMsg');?></strong><br>
 					<small><?php echo $engine->_t('EnableSysMsgInfo');?></small></td>
 				<td>
 					<input type="radio" id="sys_message_on" name="enable_system_message" value="1"<?php echo ($engine->db->enable_system_message == 1 ? ' checked' : '');?>><label for="sys_message_on"><?php echo $engine->_t('On');?></label>

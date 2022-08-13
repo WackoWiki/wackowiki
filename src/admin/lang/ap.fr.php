@@ -921,16 +921,16 @@ $ap_translation = [
 	'NoEmailRecipient'			=> 'Vous devez spécifier au moins un utilisateur ou un groupe d\'utilisateurs.',
 
 	'MassemailSection'			=> 'Courriel de masse',
-	'MessageSubject'			=> 'Sujet',
+	'MessageSubject'			=> 'Sujet :',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Votre message',
+	'YourMessage'				=> 'Votre message :',
 	'YourMessageInfo'			=> 'Le message ne doit contenir que du texte brut. Toutes les balises seront automatiquement supprimées.',
 
 	'NoUser'					=> 'Aucun utilisateur',
 	'NoUserGroup'				=> 'Aucun groupe d\'utilisateurs',
 
-	'SendToGroup'				=> 'Envoyer à un groupe d\'utilisateurs',
-	'SendToUser'				=> 'Envoyer à des utilisateurs',
+	'SendToGroup'				=> 'Envoyer à un groupe d\'utilisateurs :',
+	'SendToUser'				=> 'Envoyer à des utilisateurs :',
 	'SendToUserInfo'			=> 'Il n\'envoie que des messages aux utilisateurs qui ont autorisé les administrateurs à leur envoyer des informations par e-mail. Cette option est disponible dans leurs paramètres utilisateur sous notifications.',
 
 	// System message module
@@ -938,12 +938,12 @@ $ap_translation = [
 	'SysMsgUpdated'				=> 'Message système mis à jour',
 
 	'SysMsgSection'				=> 'Message du système',
-	'SysMsg'					=> 'Message du système',
+	'SysMsg'					=> 'Message du système :',
 	'SysMsgInfo'				=> 'Votre texte ici',
 
-	'SysMsgType'				=> 'Type',
+	'SysMsgType'				=> 'Type :',
 	'SysMsgTypeInfo'			=> 'Type de message (CSS).',
-	'EnableSysMsg'				=> 'Activer le message du système',
+	'EnableSysMsg'				=> 'Activer le message du système :',
 	'EnableSysMsgInfo'			=> 'Afficher le message système.',
 
 	// User approval module
@@ -1187,7 +1187,7 @@ $ap_translation = [
 
 	// Bad Behavior module
 	'BbInfo'					=> 'Détecte et bloque les accès Web indésirables, refuse l\'accès aux robots spammeurs automatisés <br>Pour plus d\'informations, veuillez consulter la page d\'accueil %1.',
-	'BbEnable'					=> 'Activer Bad Behavior',
+	'BbEnable'					=> 'Activer Bad Behavior :',
 	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
 	'BbStats'					=> 'Bad Behavior a bloqué %1 tentatives d\'accès au cours des 7 derniers jours.',
 

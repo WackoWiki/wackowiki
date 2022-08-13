@@ -924,16 +924,16 @@ $ap_translation = [
 	'NoEmailRecipient'			=> 'Du musst mindestens einen Benutzer oder eine Benutzergruppe angeben.',
 
 	'MassemailSection'			=> 'Rundmail',
-	'MessageSubject'			=> 'Betreff',
+	'MessageSubject'			=> 'Betreff:',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Deine Nachricht',
+	'YourMessage'				=> 'Deine Nachricht:',
 	'YourMessageInfo'			=> 'Bitte beachte, dass du nur reinen Text verwenden kannst. Alle Auszeichnungen werden vor dem Versand entfernt.',
 
 	'NoUser'					=> 'kein Benutzer',
 	'NoUserGroup'				=> 'keine Benutzergruppe',
 
-	'SendToGroup'				=> 'Sende an Nutzergruppe',
-	'SendToUser'				=> 'Sende an Nutzer',
+	'SendToGroup'				=> 'Sende an Nutzergruppe:',
+	'SendToUser'				=> 'Sende an Nutzer:',
 	'SendToUserInfo'			=> 'Es sendet nur Nachrichten an diejenigen Benutzer, die es Administratoren erlaubt haben, ihnen Informationen per E-Mail zu senden. Diese Option ist in den Benutzereinstellungen unter Benachrichtigungen verfügbar.',
 
 	// System message module
@@ -941,12 +941,12 @@ $ap_translation = [
 	'SysMsgUpdated'				=> 'System-Mitteilung aktualisiert',
 
 	'SysMsgSection'				=> 'System-Mitteilung',
-	'SysMsg'					=> 'System-Mitteilung',
+	'SysMsg'					=> 'System-Mitteilung:',
 	'SysMsgInfo'				=> 'Dein Text hier',
 
-	'SysMsgType'				=> 'Typ',
+	'SysMsgType'				=> 'Typ:',
 	'SysMsgTypeInfo'			=> 'Mitteilungtyp (CSS).',
-	'EnableSysMsg'				=> 'Aktiviere System-Mitteilung',
+	'EnableSysMsg'				=> 'Aktiviere System-Mitteilung:',
 	'EnableSysMsgInfo'			=> 'Zeige System-Mitteilung.',
 
 	// User approval module
@@ -1190,7 +1190,7 @@ $ap_translation = [
 
 	// Bad Behavior module
 	'BbInfo'					=> 'Erkennt und blockiert unerwünschte Webzugriffe, verweigert automatisierten Spambots den Zugriff.<br>Für weitere Informationen besuche die %1 Webseite.',
-	'BbEnable'					=> 'Bad Behavior aktivieren',
+	'BbEnable'					=> 'Bad Behavior aktivieren:',
 	'BbEnableInfo'				=> 'Alle anderen Einstellungen können im Konfigurationsordner geändert werden. %1.',
 	'BbStats'					=> 'Bad Behavior hat in den letzten 7 Tagen %1 Zugriffsversuche blockiert.',
 

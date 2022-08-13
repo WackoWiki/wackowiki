@@ -904,16 +904,16 @@ $ap_translation = [
 	'NoEmailRecipient'			=> '您必须至少指定一个用户或用户组。',
 
 	'MassemailSection'			=> '群发电子邮件',
-	'MessageSubject'			=> '主题',
+	'MessageSubject'			=> '主题：',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> '你的信息',
+	'YourMessage'				=> '你的信息：',
 	'YourMessageInfo'			=> '请注意，您只能输入纯文本。 发送前将删除所有标记。',
 
 	'NoUser'					=> '没有用户',
 	'NoUserGroup'				=> '没有用户组',
 
-	'SendToGroup'				=> '发送到群组',
-	'SendToUser'				=> '发送到个人',
+	'SendToGroup'				=> '发送到群组：',
+	'SendToUser'				=> '发送到个人：',
 	'SendToUserInfo'			=> '它只向那些允许管理员通过电子邮件向他们发送信息的用户发送消息。 此选项在通知下的用户设置中可用。',
 
 	// System message module
@@ -921,12 +921,12 @@ $ap_translation = [
 	'SysMsgUpdated'				=> '更新系统消息',
 
 	'SysMsgSection'				=> '系统消息',
-	'SysMsg'					=> '系统消息',
+	'SysMsg'					=> '系统消息：',
 	'SysMsgInfo'				=> '你的文本文档',
 
-	'SysMsgType'				=> '类型',
+	'SysMsgType'				=> '类型：',
 	'SysMsgTypeInfo'			=> '消息类型 (CSS)。',
-	'EnableSysMsg'				=> '启用系统消息',
+	'EnableSysMsg'				=> '启用系统消息：',
 	'EnableSysMsgInfo'			=> '显示系统消息。',
 
 	// User approval module
@@ -1170,7 +1170,7 @@ $ap_translation = [
 
 	// Bad Behavior module
 	'BbInfo'					=> '检测并阻止不需要的 Web 访问，拒绝自动垃圾邮件程序访问<br>有关详细信息，请访问 %1 主页。',
-	'BbEnable'					=> '启用不良行为',
+	'BbEnable'					=> '启用不良行为：',
 	'BbEnableInfo'				=> '所有其他设置都可以在配置文件夹 %1 中更改。',
 	'BbStats'					=> '不良行为在过去 7 天内阻止了 %1 次访问尝试。',
 
@@ -1213,7 +1213,7 @@ $ap_translation = [
 	'BbSecurity'				=> '安全',
 	'BbStrict'					=> '严格检查',
 	'BbStrictInfo'				=> '阻止更多垃圾邮件，但可能会阻止某些人',
-	'BbOffsiteForms'			=> '允许来自其他网站的表单发布es',
+	'BbOffsiteForms'			=> '允许来自其他网站的表单发布',
 	'BbOffsiteFormsInfo'		=> 'OpenID 需要； 增加收到的垃圾邮件',
 	'BbHttpbl'					=> 'http:BL',
 	'BbHttpblInfo'				=> '要使用 Bad Behavior 的 htt安全p:BL 功能，您必须拥有 %1',

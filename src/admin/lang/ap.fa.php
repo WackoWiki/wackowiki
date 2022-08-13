@@ -927,14 +927,14 @@ $ap_translation = [
 	'MassemailSection'			=> 'Mass email',
 	'MessageSubject'			=> 'موضوع',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Your message',
+	'YourMessage'				=> 'Your message:',
 	'YourMessageInfo'			=> 'Please note that you may enter only plain text. All markup will be removed before sending.',
 
 	'NoUser'					=> 'No user',
 	'NoUserGroup'				=> 'No user group',
 
-	'SendToGroup'				=> 'Send to group',
-	'SendToUser'				=> 'Send to user',
+	'SendToGroup'				=> 'Send to group:',
+	'SendToUser'				=> 'Send to user:',
 	'SendToUserInfo'			=> 'It send only messages to those user who allowed Administrators to email them information. This option is available in their user settings under Notifications.',
 
 	// System message module
@@ -942,12 +942,12 @@ $ap_translation = [
 	'SysMsgUpdated'				=> 'Updated system message',
 
 	'SysMsgSection'				=> 'System message',
-	'SysMsg'					=> 'System message',
+	'SysMsg'					=> 'System message:',
 	'SysMsgInfo'				=> 'Your text here',
 
-	'SysMsgType'				=> 'Type',
+	'SysMsgType'				=> 'Type:',
 	'SysMsgTypeInfo'			=> 'Message type (CSS).',
-	'EnableSysMsg'				=> 'Enable system message',
+	'EnableSysMsg'				=> 'Enable system message:',
 	'EnableSysMsgInfo'			=> 'Show system message.',
 
 	// User approval module
@@ -1191,7 +1191,7 @@ $ap_translation = [
 
 	// Bad Behavior module
 	'BbInfo'					=> 'Detects and blocks unwanted Web accesses, deny automated spambots access<br>For more information please visit the %1 homepage.',
-	'BbEnable'					=> 'Enable Bad Behavior',
+	'BbEnable'					=> 'Enable Bad Behavior:',
 	'BbEnableInfo'				=> 'All other settings can be changed in the config folder %1.',
 	'BbStats'					=> 'Bad Behavior has blocked %1 access attempts in the last 7 days.',
 

@@ -919,16 +919,16 @@ $ap_translation = [
 	'NoEmailRecipient'			=> 'Debe especificar por lo menos un usuario o grupo de usuarios.',
 
 	'MassemailSection'			=> 'Correo electrónico masivo',
-	'MessageSubject'			=> 'Sujeto',
+	'MessageSubject'			=> 'Sujeto:',
 	'MessageSubjectInfo'		=> '',
-	'YourMessage'				=> 'Su mensaje',
+	'YourMessage'				=> 'Su mensaje:',
 	'YourMessageInfo'			=> 'Por favor, ten en cuenta que solo puede insertarse texto plano. Se eliminará cualquier código antes de enviar.',
 
 	'NoUser'					=> 'Sin usuario',
 	'NoUserGroup'				=> 'Sin grupo de usuarios',
 
-	'SendToGroup'				=> 'Enviar a grupo',
-	'SendToUser'				=> 'Enviar a usuario',
+	'SendToGroup'				=> 'Enviar a grupo:',
+	'SendToUser'				=> 'Enviar a usuario:',
 	'SendToUserInfo'			=> 'Envía sólo mensajes a aquellos usuarios que permitieron a los administradores enviarles información por correo electrónico. Esta opción está disponible en sus opciones de usuario en Notificaciones.',
 
 	// System message module
@@ -936,12 +936,12 @@ $ap_translation = [
 	'SysMsgUpdated'				=> 'Mensaje de sistema actualizado',
 
 	'SysMsgSection'				=> 'Mensaje de sistema',
-	'SysMsg'					=> 'Mensaje de sistema',
+	'SysMsg'					=> 'Mensaje de sistema:',
 	'SysMsgInfo'				=> 'Su texto aquí',
 
-	'SysMsgType'				=> 'Tipo',
+	'SysMsgType'				=> 'Tipo:',
 	'SysMsgTypeInfo'			=> 'Tipo de mensaje (CSS).',
-	'EnableSysMsg'				=> 'Habilitar mensaje de sistema',
+	'EnableSysMsg'				=> 'Habilitar mensaje de sistema:',
 	'EnableSysMsgInfo'			=> 'Mostrar mensaje de sistema.',
 
 	// User approval module
@@ -1185,7 +1185,7 @@ $ap_translation = [
 
 	// Bad Behavior module
 	'BbInfo'					=> 'Detecta y bloquea los accesos no deseados a la Web, niega el acceso automatizado de los robots de spam <br>Para más información, por favor visite la página principal de %1.',
-	'BbEnable'					=> 'Activar Bad Behavior',
+	'BbEnable'					=> 'Activar Bad Behavior:',
 	'BbEnableInfo'				=> 'Todas las demás configuraciones se pueden cambiar en la carpeta de configuración %1.',
 	'BbStats'					=> 'Bad Behavior ha bloqueado %1 intentos de acceso en los últimos 7 días.',
 

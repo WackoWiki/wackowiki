@@ -30,7 +30,21 @@ function admin_config_email(&$engine, &$module)
 		<?php echo $engine->_t('EmaiSettingsInfo'); ?>
 	</p>
 	<br>
-<?php
+	<?php
+	// functions
+	$validate_email = function ($email) use ($engine)
+	{
+		if ($engine->validate_email_address($email))
+		{
+			return true;
+		}
+		else
+		{
+			$engine->set_message($engine->_t('NotAEmail'), 'error');
+			return false;
+		}
+
+	};
 
 	// send test email
 	if (isset($_POST['send_test_email']))
@@ -47,18 +61,41 @@ function admin_config_email(&$engine, &$module)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
+		$config['enable_email']					= (int) $_POST['enable_email'];
+
+		if (in_array($_POST['phpmailer_method'], ['mail', 'sendmail', 'smtp']))
+		{
+			$config['phpmailer_method']			= (string) $_POST['phpmailer_method'];
+		}
+
 		$config['email_from']					= (string) $_POST['email_from'];
-		$config['admin_email']					= (string) $_POST['admin_email'];
-		$config['abuse_email']					= (string) $_POST['abuse_email'];
-		$config['noreply_email']				= (string) $_POST['noreply_email'];
+
+		if ($validate_email($_POST['admin_email']))
+		{
+			$config['admin_email']				= (string) $_POST['admin_email'];
+		}
+
+		if ($validate_email($_POST['abuse_email']))
+		{
+			$config['abuse_email']				= (string) $_POST['abuse_email'];
+		}
+
+		if ($validate_email($_POST['noreply_email']))
+		{
+			$config['noreply_email']			= (string) $_POST['noreply_email'];
+		}
+
 		$config['smtp_auto_tls']				= (int) $_POST['smtp_auto_tls'];
-		$config['smtp_connection_mode']			= (string) $_POST['smtp_connection_mode'];
+
+		if (in_array($_POST['smtp_connection_mode'], ['', 'ssl', 'tls']))
+		{
+			$config['smtp_connection_mode']			= (string) $_POST['smtp_connection_mode'];
+		}
+
 		$config['smtp_host']					= (string) $_POST['smtp_host'];
 		$config['smtp_password']				= (string) $_POST['smtp_password'];
 		$config['smtp_port']					= (int) $_POST['smtp_port'];
 		$config['smtp_username']				= (string) $_POST['smtp_username'];
-		$config['enable_email']					= (int) $_POST['enable_email'];
-		$config['phpmailer_method']				= (string) $_POST['phpmailer_method'];
 
 		$engine->config->_set($config);
 
@@ -202,7 +239,7 @@ function admin_config_email(&$engine, &$module)
 				</td>
 				<td>
 					<select id="smtp_connection_mode" name="smtp_connection_mode">
-						<option value="" <?php echo ((string) $engine->db->smtp_connection_mode === '' ? ' selected' : '');?>><?php echo $engine->_t('None'); ?>none</option>
+						<option value="" <?php    echo ((string) $engine->db->smtp_connection_mode === '' ? '    selected' : '');?>><?php echo $engine->_t('None'); ?>none</option>
 						<option value="ssl" <?php echo ((string) $engine->db->smtp_connection_mode === 'ssl' ? ' selected' : '');?>>SSL</option>
 						<option value="tls" <?php echo ((string) $engine->db->smtp_connection_mode === 'tls' ? ' selected' : '');?>>TLS</option>
 					</select>
