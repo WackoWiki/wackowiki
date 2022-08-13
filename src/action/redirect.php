@@ -49,6 +49,6 @@ if ($page = $this->unwrap_link($to))
 	}
 	else
 	{
-		$this->show_message('<em>' . $this->_t('WrongPage4Redirect') . '</em>');
+		$this->show_message($this->_t('WrongPage4Redirect'));
 	}
 }
