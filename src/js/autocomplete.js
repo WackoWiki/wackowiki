@@ -22,10 +22,10 @@ class AutoComplete
 		this.found_patterns_selected	= -1;
 		this.magic_mode					= false;
 
-		this.regexp_LinkLetter			= /[[~\p{Ll}\p{Lu}!\-.(\/0-9]/u;
+		this.regexp_LinkLetter			= /[[~\p{Ll}\p{Lu}!\-.(\/\d]/u;
 
-		this.regexp_LinkWhole			= /^(([(\[]){2})?((!\/)|[\p{Lu}\/])[\p{Ll}\p{Lu}\-.\/0-9]+$/u;
-		this.regexp_LinkCamel			= /[\p{Ll}.0-9][\p{Lu}]/u;
+		this.regexp_LinkWhole			= /^(([(\[]){2})?((!\/)|[\p{Lu}\/])[\p{Ll}\p{Lu}\-.\/\d]+$/u;
+		this.regexp_LinkCamel			= /[\p{Ll}.\d]\p{Lu}/u;
 		this.regexp_LinkStrict			= /^([(\[]){2}.{2,}/;
 		this.regexp_LinkSubpage			= /^!\/.{2,}/;
 	}
@@ -35,7 +35,7 @@ class AutoComplete
 	{
 		var we	= this.wikiedit;
 		this.id	= 'autocomplete_' + this.wikiedit.id;
-		we.addButton('customhtml', 
+		we.addButton('customhtml',
 			  '<li id="' + this.id + '_li" style="display:none;">'
 			+ '<div style="font:bold 12px Arial; margin:0; padding: 3px 3px 4px 4px;" id="' + this.id + '" '
 			+ ' onmouseover=\'this.className="btn-pressed";\' '
@@ -104,7 +104,7 @@ class AutoComplete
 			var div		= '<div id=\'' + this.wikiedit.id + '_item_' + i + '\'' +
 							' onmouseover=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.selectInplace(' + '"' + i + '"' + ');\' ' +
 							' onclick=\'document.getElementById(' + '"' + this.wikiedit.id + '"' + ')._owner.autocomplete.insertFound(' + '"' + pattern + '"' + ');\'>' +
-							'<img align=right src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
+							'<img src=\'' + this.wikiedit.imagesPath + 'spacer.png\'>' + pattern + '  </div>';
 			contents += div;
 		}
 
@@ -509,7 +509,7 @@ class AutoComplete
 
 
 // Ajax "XmlHttpRequest" routine.
-// builds request to server-side, 
+// builds request to server-side,
 var req;
 
 

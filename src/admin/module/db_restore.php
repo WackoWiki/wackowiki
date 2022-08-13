@@ -74,12 +74,12 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 
 					// pack
 					'<td>
-						<table>
+						<table class="restore-meta">
 							<tr>
-								<td class="label a-middle" style="width:10px;">' .
+								<td class="label">' .
 								#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . (in_array($log['pack'], $set) ? ' checked' : '') . '>
 								#</td>' .
-								#'<td style="width:10px;">' .
+								#'<td>' .
 								#	'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 								'</td>
 								<th class="t-left nowrap">' .
@@ -105,7 +105,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					echo '<td><table>';
 						// cluster root
 						echo '<tr><th colspan="3" class="t-left nowrap">' .
-								$engine->_t('BackupCluster') . ': ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+								$engine->_t('BackupCluster') . ' ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 							'</th></tr>' . "\n";
 						// contents
 						echo '<tr>' .
@@ -177,7 +177,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					// end dir check
 						'<tr>
 							<td colspan="2">
-								<strong>' . $engine->_t('RestoreOptions') . ':</strong><br>
+								<strong>' . $engine->_t('RestoreOptions') . '</strong><br>
 								<input type="checkbox" id="ignore_keys" name="ignore_keys" value="1">
 								<label for="ignore_keys"><small>' . $engine->_t('IgnoreDuplicatedKeysNr') . ' *</small></label><br>
 								<input type="checkbox" id="ignore_files" name="ignore_files" value="1">
@@ -235,13 +235,13 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 
 			if ($log[3])
 			{
-				$results .= '<strong>' . $engine->_t('RunSqlQueries') . ':</strong>' . "\n\n";
+				$results .= '<strong>' . $engine->_t('RunSqlQueries') . '</strong>' . "\n\n";
 				$results .= file_get_contents($dir . $pack . '/' . BACKUP_FILE_STRUCTURE) . "\n\n";
 
 				// run
 				$total = put_table($engine, $pack);
 
-				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('CompletedSqlQueries') . ': ' . $total . '</strong>' . "\n\n\n";
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('CompletedSqlQueries') . ' ' . $total . '</strong>' . "\n\n\n";
 			}
 			else
 			{
@@ -283,10 +283,10 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					$total		= put_data($engine, $pack, $table, $mode);
 					$overall	+= $total;
 
-					$results .= "\t\t" . $engine->_t('RestoredRecords') . ':   ' . $total . "\n\n";
+					$results .= "\t\t" . $engine->_t('RestoredRecords') . '   ' . $total . "\n\n";
 				}
 
-				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RecordsRestoreDone') . ': ' . $overall . '</strong>' . "\n\n\n";
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('RecordsRestoreDone') . ' ' . $overall . '</strong>' . "\n\n\n";
 			}
 			else
 			{
@@ -327,16 +327,16 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 					$overall[1]	+= $total[1] ?? null;
 
 					$results .=
-						"\t\t" . $engine->_t('RestoreFile') . ': ' .	(int) array_sum($total) . "\n" .
-						"\t\t" . $engine->_t('Restored') . ': ' .		(int) $total[0] . "\n" .
-						"\t\t" . $engine->_t('Skipped') . ': ' .		(int) $total[1] . "\n\n";
+						"\t\t" . $engine->_t('RestoreFile') . ' ' .		(int) array_sum($total) . "\n" .
+						"\t\t" . $engine->_t('RestoredFiles') . ' ' .	(int) $total[0] . "\n" .
+						"\t\t" . $engine->_t('SkippedFiles') . ' ' .	(int) $total[1] . "\n\n";
 
 				}
 
-				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('FileRestoreDone') . ':' . "\n" .
-					"\t" . $engine->_t('FilesAll') . ': ' .	(int) array_sum($overall) . "\n" .
-					"\t" . $engine->_t('Restored') . ': ' .	(int) $overall[0] . "\n" .
-					"\t" . $engine->_t('Skipped') . ': ' .	(int) $overall[1] . "\n" .
+				$results .= '<strong>' . date('H:i:s') . ' - ' . $engine->_t('FileRestoreDone') . "\n" .
+					"\t" . $engine->_t('FilesAll') . ' ' .		(int) array_sum($overall) . "\n" .
+					"\t" . $engine->_t('RestoredFiles') . ' ' .	(int) $overall[0] . "\n" .
+					"\t" . $engine->_t('SkippedFiles') . ' ' .	(int) $overall[1] . "\n" .
 					'</strong>' . "\n\n";
 			}
 			else
@@ -463,12 +463,12 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 
 						// pack
 						echo '<td>
-								<table>
+								<table class="restore-meta">
 									<tr>' .
-										'<td class="label a-middle" style="width:10px;">' .
+										'<td class="label">' .
 										#	'<input type="checkbox" name="' . $log['pack'] . '" value="id" ' . ( in_array($log['pack'], $set) ? ' checked' : '') . '>
 										#</td>' .
-										#'<td style="width:10px;">' .
+										#'<td>' .
 											'<input type="radio" name="backup_id" value="' . $log['pack'] . '">' .
 										'</td>
 										<th class="t-left nowrap">' .
@@ -500,7 +500,7 @@ function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 						echo '<td><table>';
 							// cluster root
 							echo '<tr><th colspan="3" class="t-left nowrap">' .
-									$engine->_t('BackupCluster') . ': ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
+									$engine->_t('BackupCluster') . ' ' . ($log[2] ?: '<em class="grey">' . $engine->_t('BackupEntireSite') . '</em>' ) .
 								'</th></tr>' . "\n";
 							// contents
 							echo '<tr>' .

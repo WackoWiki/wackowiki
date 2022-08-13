@@ -30,16 +30,47 @@ function admin_config_permissions(&$engine, &$module)
 		<?php echo $engine->_t('PermissionsSettingsInfo');?>
 	</p>
 	<br>
-<?php
+	<?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['default_read_acl']				= (string) $_POST['default_read_acl'];
-		$config['default_write_acl']			= (string) $_POST['default_write_acl'];
-		$config['default_comment_acl']			= (string) $_POST['default_comment_acl'];
-		$config['default_create_acl']			= (string) $_POST['default_create_acl'];
-		$config['default_upload_acl']			= (string) $_POST['default_upload_acl'];
-		$config['rename_globalacl']				= (string) $_POST['rename_globalacl'];
+		$read_acl		= $engine->sanitize_acl_syntax($_POST['default_read_acl']);
+		$write_acl		= $engine->sanitize_acl_syntax($_POST['default_write_acl']);
+		$comment_acl	= $engine->sanitize_acl_syntax($_POST['default_comment_acl']);
+		$create_acl		= $engine->sanitize_acl_syntax($_POST['default_create_acl']);
+		$upload_acl		= $engine->sanitize_acl_syntax($_POST['default_upload_acl']);
+		$rename_acl		= $engine->sanitize_acl_syntax($_POST['rename_global_acl']);
+
+		if ($engine->validate_acl_syntax($read_acl, 'read'))
+		{
+			$config['default_read_acl']			= (string) $read_acl;
+		}
+
+		if ($engine->validate_acl_syntax($write_acl, 'write'))
+		{
+			$config['default_write_acl']		= (string) $write_acl;
+		}
+
+		if ($engine->validate_acl_syntax($comment_acl, 'comment'))
+		{
+			$config['default_comment_acl']		= (string) $comment_acl;
+		}
+
+		if ($engine->validate_acl_syntax($create_acl, 'create'))
+		{
+			$config['default_create_acl']		= (string) $create_acl;
+		}
+
+		if ($engine->validate_acl_syntax($upload_acl, 'upload'))
+		{
+			$config['default_upload_acl']		= (string) $upload_acl;
+		}
+
+		if ($engine->validate_acl_syntax($upload_acl, 'rename_global'))
+		{
+			$config['rename_global_acl']		= (string) $rename_acl;
+		}
+
 		$config['acl_lock']						= (int) ($_POST['acl_lock'] ?? 0);
 		$config['hide_locked']					= (int) ($_POST['hide_locked'] ?? 0);
 		$config['remove_onlyadmins']			= (int) ($_POST['remove_onlyadmins'] ?? 0);
@@ -70,7 +101,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="default_read_acl"><strong><?php echo $engine->_t('ReadRights');?>:</strong><br>
+					<label for="default_read_acl"><strong><?php echo $engine->_t('ReadRights');?></strong><br>
 					<small><?php echo $engine->_t('ReadRightsInfo');?></small></label>
 				</td>
 				<td>
@@ -82,7 +113,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="default_write_acl"><strong><?php echo $engine->_t('WriteRights');?>:</strong><br>
+					<label for="default_write_acl"><strong><?php echo $engine->_t('WriteRights');?></strong><br>
 					<small><?php echo $engine->_t('WriteRightsInfo');?></small></label>
 				</td>
 				<td>
@@ -94,7 +125,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="default_comment_acl"><strong><?php echo $engine->_t('CommentRights');?>:</strong><br>
+					<label for="default_comment_acl"><strong><?php echo $engine->_t('CommentRights');?></strong><br>
 					<small><?php echo $engine->_t('CommentRightsInfo');?></small></label>
 				</td>
 				<td>
@@ -106,7 +137,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="default_create_acl"><strong><?php echo $engine->_t('CreateRights');?>:</strong><br>
+					<label for="default_create_acl"><strong><?php echo $engine->_t('CreateRights');?></strong><br>
 					<small><?php echo $engine->_t('CreateRightsInfo');?></small></label>
 				</td>
 				<td>
@@ -118,7 +149,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="default_upload_acl"><strong><?php echo $engine->_t('UploadRights');?>:</strong><br>
+					<label for="default_upload_acl"><strong><?php echo $engine->_t('UploadRights');?></strong><br>
 					<small><?php echo $engine->_t('UploadRightsInfo');?></small></label>
 				</td>
 				<td>
@@ -130,11 +161,11 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="rename_globalacl"><strong><?php echo $engine->_t('RenameRights');?>:</strong><br>
+					<label for="rename_global_acl"><strong><?php echo $engine->_t('RenameRights');?></strong><br>
 					<small><?php echo $engine->_t('RenameRightsInfo');?></small></label>
 				</td>
 				<td>
-					<textarea class="permissions" id="rename_globalacl" name="rename_globalacl"><?php echo Ut::html($engine->db->rename_globalacl);?></textarea>
+					<textarea class="permissions" id="rename_global_acl" name="rename_global_acl"><?php echo Ut::html($engine->db->rename_global_acl);?></textarea>
 				</td>
 			</tr>
 			<tr class="hl-setting">
@@ -145,7 +176,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="acl_lock"><strong><?php echo $engine->_t('LockAcl');?>:</strong><br>
+					<label for="acl_lock"><strong><?php echo $engine->_t('LockAcl');?></strong><br>
 					<small><span class="cite"><?php echo $engine->_t('LockAclInfo');?></small></label>
 				</td>
 				<td>
@@ -157,7 +188,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="hide_locked"><strong><?php echo $engine->_t('HideLocked');?>:</strong><br>
+					<label for="hide_locked"><strong><?php echo $engine->_t('HideLocked');?></strong><br>
 					<small><?php echo $engine->_t('HideLockedInfo');?></small></label>
 				</td>
 				<td>
@@ -169,7 +200,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="remove_onlyadmins"><strong><?php echo $engine->_t('RemoveOnlyAdmins');?>:</strong><br>
+					<label for="remove_onlyadmins"><strong><?php echo $engine->_t('RemoveOnlyAdmins');?></strong><br>
 					<small><?php echo $engine->_t('RemoveOnlyAdminsInfo');?></small></label>
 				</td>
 				<td>
@@ -181,7 +212,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="owners_can_remove_comments"><strong><?php echo $engine->_t('OwnersRemoveComments');?>:</strong><br>
+					<label for="owners_can_remove_comments"><strong><?php echo $engine->_t('OwnersRemoveComments');?></strong><br>
 					<small><?php echo $engine->_t('OwnersRemoveCommentsInfo');?></small></label>
 				</td>
 				<td>
@@ -193,7 +224,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="categories_handler"><strong><?php echo $engine->_t('OwnersEditCategories');?>:</strong><br>
+					<label for="categories_handler"><strong><?php echo $engine->_t('OwnersEditCategories');?></strong><br>
 					<small><?php echo $engine->_t('OwnersEditCategoriesInfo');?></small></label>
 				</td>
 				<td>
@@ -207,7 +238,7 @@ function admin_config_permissions(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="moders_can_edit"><strong><?php echo $engine->_t('TermHumanModeration');?>:</strong><br>
+					<label for="moders_can_edit"><strong><?php echo $engine->_t('TermHumanModeration');?></strong><br>
 					<small><?php echo $engine->_t('TermHumanModerationInfo');?></small></label>
 				</td>
 				<td>

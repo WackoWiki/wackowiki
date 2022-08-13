@@ -24,19 +24,6 @@
 			=]
 		</section>
 	=]
-	[= n NumeratedLinks =
-		<br>
-		<section id="links">
-			<header class="linksheader">
-				[ ' _t: Links ' ]
-			</header>
-			<ul class="reflink">
-			[= link _ =
-				<li><span>[ ' n ' ]</span> [ ' l ' ]</li>
-			=]
-			</ul>
-		</section>
-	=]
 	</article>
 
 [== CmtEdited ==]

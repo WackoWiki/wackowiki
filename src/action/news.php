@@ -7,9 +7,9 @@ if (!defined('IN_WACKO'))
 
 /* USAGE:
 	{{news
-		[page=cluster]
-		[mode=latest|week|from]
-		[date=YYYY-MM-DD]
+		[page="cluster"]
+		[mode="latest|week|from"]
+		[date="YYYY-MM-DD"]
 		[max=Number]
 		[title=1]
 		[noxml=1]
@@ -103,7 +103,7 @@ if (!empty($this->db->news_cluster))
 	// heavy lifting here (watch out for REGEXPs!)
 	$select_count =
 		"SELECT COUNT(p.page_id) AS n " .
-			"FROM {$prefix}page p ";
+		"FROM {$prefix}page p ";
 
 	$select_mode =
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.created, p.comments, u.user_name AS owner " .
@@ -229,7 +229,7 @@ if (!empty($this->db->news_cluster))
 	// displaying XML icon
 	if (!(int) $noxml)
 	{
-		$tpl->n_xml_href = $this->db->base_path . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+		$tpl->n_xml_href = $this->db->base_path . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
 	// displaying articles

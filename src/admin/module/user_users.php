@@ -121,13 +121,13 @@ function admin_user_users(&$engine, &$module)
 	if (isset($_POST['create']) || isset($_POST['edit']))
 	{
 		// passing vars from user input
-		$user_name		= Ut::strip_spaces(($_POST['user_name'] ?? ''));
+		$user_name		= $engine->sanitize_username(($_POST['user_name'] ?? ''));
 		$realname		= (string) ($_POST['realname'] ?? '');
 		$email			= Ut::strip_spaces(($_POST['email'] ?? ''));
 		$password		= (string) ($_POST['password'] ?? '');
 		$conf_password	= (string) ($_POST['conf_password'] ?? '');
-		$user_lang		= $_POST['user_lang'] ?? $engine->db->language;
-		$user_lang		= $engine->known_language($user_lang) ? $user_lang : $engine->db->language;
+		$user_lang		= $engine->validate_language($_POST['user_lang'] ?? '');
+		$theme			= $engine->validate_theme($_POST['theme'] ?? '');
 		$complexity		= $engine->password_complexity($user_name, $password);
 		$notify_signup	= (int) ($_POST['notify_signup'] ?? 0);
 		$verify_email	= (int) ($_POST['verify_email'] ?? 0);
@@ -138,55 +138,13 @@ function admin_user_users(&$engine, &$module)
 	if ($action == 'add_user' && $user_name)
 	{
 		// create new account if possible
-
-		// strip \-\_\'\.\/\\
-		$user_name	= $engine->sanitize_username($user_name);
-
-		// check if name is WikiName style
-		if (!$engine->is_wiki_name($user_name) && $engine->db->disable_wikiname === false)
+		if ($message = $engine->validate_username($user_name, false))
 		{
-			$error .= $engine->_t('MustBeWikiName') . " ";
+			$error .= $message;
 		}
-		else if (mb_strlen($user_name) < $engine->db->username_chars_min)
+		else if ($message = $engine->validate_email($email))
 		{
-			$error .= Ut::perc_replace($engine->_t('NameTooShort'), 0, $engine->db->username_chars_min) . " ";
-		}
-		else if (mb_strlen($user_name) > $engine->db->username_chars_max)
-		{
-			$error .= Ut::perc_replace($engine->_t('NameTooLong'), 0, $engine->db->username_chars_max) . " ";
-		}
-		// check if valid user name (and disallow '/')
-		else if (!preg_match('/^(' . $engine->language['USER_NAME'] . ')$/u', $user_name))
-		{
-			$error .= $engine->_t('InvalidUserName') . " ";
-		}
-		// check if reserved word
-		else if ($result = $engine->validate_reserved_words($user_name))
-		{
-			$error .= Ut::perc_replace($engine->_t('UserReservedWord'), $result);
-		}
-		// if user name already exists
-		else if ($engine->user_name_exists($user_name))
-		{
-			$error .= $engine->_t('RegistrationUserNameOwned');
-
-			// log event
-			$engine->log(2, Ut::perc_replace($engine->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
-		}
-		// no email given
-		else if ($email == '')
-		{
-			$error .= $engine->_t('SpecifyEmail') . " ";
-		}
-		// invalid email
-		else if (!$engine->validate_email($email))
-		{
-			$error .= $engine->_t('NotAEmail') . " ";
-		}
-		// no email reuse allowed
-		else if (!$engine->db->allow_email_reuse && $engine->email_exists($email))
-		{
-			$error .= $engine->_t('EmailTaken') . " ";
+			$error .= $message;
 		}
 		// confirmed password mismatch
 		else if ($conf_password != $password)
@@ -198,15 +156,21 @@ function admin_user_users(&$engine, &$module)
 		{
 			$error .= $complexity;
 		}
+
+		if ($error)
+		{
+			$engine->show_message($error, 'error');
+			$_POST['create']	= 1;
+		}
 		else
 		{
 			$engine->db->sql_query(
 				"INSERT INTO " . $prefix . "user SET " .
-					"signup_time		= UTC_TIMESTAMP(), " .
+					"user_name			= " . $engine->db->q($user_name) . ", " .
 					"email				= " . $engine->db->q($email) . ", " .
 					"password			= " . $engine->db->q($engine->password_hash(['user_name' => $user_name], $password)) . ", " .
 					"enabled			= " . (int) $enabled . ", " .
-					"user_name			= " . $engine->db->q($user_name) . " ");
+					"signup_time		= UTC_TIMESTAMP()");
 
 			// get new user_id
 			$_user_id = $engine->db->load_single(
@@ -253,12 +217,6 @@ function admin_user_users(&$engine, &$module)
 			$engine->log(4, Ut::perc_replace($engine->_t('LogUserCreated', SYSTEM_LANG), $user_name));
 			$engine->http->redirect($engine->href('', '', ['user_id' => $_user_id['user_id']]));
 		}
-
-		if ($error)
-		{
-			$engine->show_message($error, 'error');
-			$_POST['create']	= 1;
-		}
 	}
 	// re-confirm email address
 	else if (isset($_POST['confirm']) && $user_id)
@@ -282,23 +240,20 @@ function admin_user_users(&$engine, &$module)
 	// edit user processing
 	else if ($action == 'edit_user' && $user_id && $user_name )
 	{
-		// do we have identical names?
-		if ($engine->db->load_single(
-			"SELECT user_id " .
-			"FROM " . $prefix . "user " .
-			"WHERE user_name = " . $engine->db->q($user_name) . " " .
-				"AND user_id <> " . (int) $user_id . " " .
-			"LIMIT 1"))
+		if ($message = $engine->validate_username($user_name, false))
 		{
-			$engine->set_message($engine->_t('RegistrationUserNameOwned'));
+			$error .= $message;
+		}
+		else if ($message = $engine->validate_email($email, false))
+		{
+			$error .= $message;
+		}
+
+		if ($error)
+		{
+			$engine->show_message($error, 'error');
 			$_POST['change']	= (int) $user_id;
 			$_POST['edit']		= 1;
-		}
-		else if (!$engine->validate_email($email))
-		{
-			$engine->show_message($engine->_t('NotAEmail'));
-			$_POST['change']	= (int) $user_id;
-			$_POST['edit'] 		= 1;
 		}
 		else
 		{
@@ -321,7 +276,7 @@ function admin_user_users(&$engine, &$module)
 			$engine->db->sql_query(
 				"UPDATE " . $prefix . "user_setting SET " .
 					"user_lang		= " . $engine->db->q($user_lang) . ", " .
-					"theme			= " . $engine->db->q($_POST['theme']) . " " .
+					"theme			= " . $engine->db->q($theme) . " " .
 				"WHERE user_id		= " . (int) $user_id . " " .
 				"LIMIT 1");
 
@@ -431,7 +386,7 @@ function admin_user_users(&$engine, &$module)
 				</tr>
 				<tr>
 					<th class="label">
-						<label for="password">' . $engine->_t('RegistrationPassword') . '</label>
+						<label for="password">' . $engine->_t('Password') . '</label>
 					</th>
 					<td>
 						<input type="password" id="password" name="password" size="24" minlength="' . $engine->db->pwd_min_chars . '" value="' . Ut::html($password) . '" autocomplete="off" required>
@@ -691,7 +646,8 @@ function admin_user_users(&$engine, &$module)
 		<table class="formation lined">
 		<?php
 
-			echo '<tr>' . "\n" .
+			echo
+				'<tr>' . "\n" .
 					'<th class="label">' . $engine->_t('UserName') . '</th>' .
 					'<td><strong>' . $user['user_name'] . '</strong></td>' .
 				'</tr>' .

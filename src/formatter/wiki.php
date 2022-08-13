@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 $text = $this->format($text, 'wacko');
 
 // by default links and actions are parsed dynamically via show handler
-if (isset($options['diff']))
+if (isset($options['post_wacko']))
 {
 	$options['strip_ignore'] = true;
 

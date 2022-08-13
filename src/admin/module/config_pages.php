@@ -103,7 +103,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="list_count"><strong><?php echo $engine->_t('ListCount');?>:</strong><br>
+					<label for="list_count"><strong><?php echo $engine->_t('ListCount');?></strong><br>
 					<small><?php echo $engine->_t('ListCountInfo');?></small></label>
 				</td>
 				<td>
@@ -115,7 +115,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="comments_count"><strong><?php echo $engine->_t('CommentsCount');?>:</strong><br>
+					<label for="comments_count"><strong><?php echo $engine->_t('CommentsCount');?></strong><br>
 					<small><?php echo $engine->_t('CommentsCountInfo');?></small></label>
 				</td>
 				<td>
@@ -127,7 +127,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="forum_cluster"><strong><?php echo $engine->_t('ForumCluster');?>:</strong><br>
+					<label for="forum_cluster"><strong><?php echo $engine->_t('ForumCluster');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('ForumClusterInfo'), '<code>{{forums}}</code>');?></small></label>
 				</td>
 				<td>
@@ -139,7 +139,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="forum_topics"><strong><?php echo $engine->_t('ForumTopics');?>:</strong><br>
+					<label for="forum_topics"><strong><?php echo $engine->_t('ForumTopics');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('ForumTopicsInfo'), '<code>{{topics}}</code>');?></small></label>
 				</td>
 				<td>
@@ -154,7 +154,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="news_cluster"><strong><?php echo $engine->_t('NewsCluster');?>:</strong><br>
+					<label for="news_cluster"><strong><?php echo $engine->_t('NewsCluster');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('NewsClusterInfo'), '<code>{{news}}</code>');?></small></label>
 				</td>
 				<td>
@@ -166,7 +166,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="news_structure"><strong><?php echo $engine->_t('NewsStructure');?>:</strong><br>
+					<label for="news_structure"><strong><?php echo $engine->_t('NewsStructure');?></strong><br>
 					<small><?php echo $engine->_t('NewsStructureInfo');?></small></label>
 				</td>
 				<td>
@@ -205,7 +205,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<strong><?php echo $engine->_t('EnableLicense');?>:</strong><br>
+					<strong><?php echo $engine->_t('EnableLicense');?></strong><br>
 					<small><?php echo $engine->_t('EnableLicenseInfo');?></small>
 				</td>
 				<td>
@@ -220,7 +220,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="license"><strong><?php echo $engine->_t('DefaultLicense');?>:</strong><br>
+					<label for="license"><strong><?php echo $engine->_t('DefaultLicense');?></strong><br>
 					<small><?php echo $engine->_t('DefaultLicenseInfo');?></small></label>
 				</td>
 				<td>
@@ -235,7 +235,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<strong><?php echo $engine->_t('LicensePerPage');?>:</strong><br>
+					<strong><?php echo $engine->_t('LicensePerPage');?></strong><br>
 					<small><?php echo $engine->_t('LicensePerPageInfo');?></small>
 				</td>
 				<td>
@@ -253,7 +253,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="root_page"><strong><?php echo $engine->_t('RootPage');?>:</strong><br>
+					<label for="root_page"><strong><?php echo $engine->_t('RootPage');?></strong><br>
 					<small><?php echo $engine->_t('RootPageInfo');?></small></label>
 				</td>
 				<td>
@@ -265,7 +265,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="help_page"><strong><?php echo $engine->_t('HelpPage');?>:</strong><br>
+					<label for="help_page"><strong><?php echo $engine->_t('HelpPage');?></strong><br>
 					<small><?php echo $engine->_t('HelpPageInfo');?></small></label>
 				</td>
 				<td>
@@ -277,7 +277,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="privacy_page"><strong><?php echo $engine->_t('PrivacyPage');?>:</strong><br>
+					<label for="privacy_page"><strong><?php echo $engine->_t('PrivacyPage');?></strong><br>
 					<small><?php echo $engine->_t('PrivacyPageInfo');?></small></label>
 				</td>
 				<td>
@@ -289,7 +289,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="terms_page"><strong><?php echo $engine->_t('TermsPage');?>:</strong><br>
+					<label for="terms_page"><strong><?php echo $engine->_t('TermsPage');?></strong><br>
 					<small><?php echo $engine->_t('TermsPageInfo');?></small></label>
 				</td>
 				<td>
@@ -301,7 +301,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="search_page"><strong><?php echo $engine->_t('SearchPage');?>:</strong><br>
+					<label for="search_page"><strong><?php echo $engine->_t('SearchPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('SearchPageInfo'), '<code>{{search}}</code>');?></small></label>
 				</td>
 				<td>
@@ -313,7 +313,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="registration_page"><strong><?php echo $engine->_t('RegistrationPage');?>:</strong><br>
+					<label for="registration_page"><strong><?php echo $engine->_t('RegistrationPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('RegistrationPageInfo'), '<code>{{registration}}</code>');?></small></label>
 				</td>
 				<td>
@@ -325,7 +325,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="login_page"><strong><?php echo $engine->_t('LoginPage');?>:</strong><br>
+					<label for="login_page"><strong><?php echo $engine->_t('LoginPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('LoginPageInfo'), '<code>{{login}}</code>');?></small></label>
 				</td>
 				<td>
@@ -337,7 +337,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="account_page"><strong><?php echo $engine->_t('SettingsPage');?>:</strong><br>
+					<label for="account_page"><strong><?php echo $engine->_t('SettingsPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('SettingsPageInfo'), '<code>{{usersettings}}</code>');?></small></label>
 				</td>
 				<td>
@@ -349,7 +349,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="password_page"><strong><?php echo $engine->_t('PasswordPage');?>:</strong><br>
+					<label for="password_page"><strong><?php echo $engine->_t('PasswordPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('PasswordPageInfo'), '<code>{{changepassword}}</code>');?></small></label>
 				</td>
 				<td>
@@ -361,7 +361,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="users_page"><strong><?php echo $engine->_t('UsersPage');?>:</strong><br>
+					<label for="users_page"><strong><?php echo $engine->_t('UsersPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('UsersPageInfo'), '<code>{{users}}</code>');?></small></label>
 				</td>
 				<td>
@@ -373,7 +373,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="category_page"><strong><?php echo $engine->_t('CategoryPage');?> :</strong><br>
+					<label for="category_page"><strong><?php echo $engine->_t('CategoryPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('CategoryPageInfo'), '<code>{{category}}</code>');?></small></label>
 				</td>
 				<td>
@@ -385,7 +385,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="tag_page"><strong><?php echo $engine->_t('TagPage');?> :</strong><br>
+					<label for="tag_page"><strong><?php echo $engine->_t('TagPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('TagPageInfo'), '<code>{{tag}}</code>');?></small></label>
 				</td>
 				<td>
@@ -397,7 +397,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="groups_page"><strong><?php echo $engine->_t('GroupsPage');?>:</strong><br>
+					<label for="groups_page"><strong><?php echo $engine->_t('GroupsPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('GroupsPageInfo'), '<code>{{usergroups}}</code>');?></small></label>
 				</td>
 				<td>
@@ -409,7 +409,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="changes_page"><strong><?php echo $engine->_t('ChangesPage');?>:</strong><br>
+					<label for="changes_page"><strong><?php echo $engine->_t('ChangesPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('ChangesPageInfo'), '<code>{{changes}}</code>');?></small></label>
 				</td>
 				<td>
@@ -421,7 +421,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="comments_page"><strong><?php echo $engine->_t('CommentsPage');?>:</strong><br>
+					<label for="comments_page"><strong><?php echo $engine->_t('CommentsPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('CommentsPageInfo'), '<code>{{commented}}</code>');?></small></label>
 				</td>
 				<td>
@@ -433,7 +433,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="index_page"><strong><?php echo $engine->_t('IndexPage');?>:</strong><br>
+					<label for="index_page"><strong><?php echo $engine->_t('IndexPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('IndexPageInfo'), '<code>{{pageindex}}</code>');?></small></label>
 				</td>
 				<td>
@@ -445,7 +445,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="random_page"><strong><?php echo $engine->_t('RandomPage');?>:</strong><br>
+					<label for="random_page"><strong><?php echo $engine->_t('RandomPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('RandomPageInfo'), '<code>{{randompage}}</code>');?></small></label>
 				</td>
 				<td>
@@ -457,7 +457,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="removals_page"><strong><?php echo $engine->_t('RemovalsPage');?>:</strong><br>
+					<label for="removals_page"><strong><?php echo $engine->_t('RemovalsPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('RemovalsPageInfo'), '<code>{{deleted}}</code>');?></small></label>
 				</td>
 				<td>
@@ -469,7 +469,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="wanted_page"><strong><?php echo $engine->_t('WantedPage');?>:</strong><br>
+					<label for="wanted_page"><strong><?php echo $engine->_t('WantedPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('WantedPageInfo'), '<code>{{wanted}}</code>');?></small></label>
 				</td>
 				<td>
@@ -481,7 +481,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="orphaned_page"><strong><?php echo $engine->_t('OrphanedPage');?>:</strong><br>
+					<label for="orphaned_page"><strong><?php echo $engine->_t('OrphanedPage');?></strong><br>
 					<small><?php echo Ut::perc_replace($engine->_t('OrphanedPageInfo'), '<code>{{orphaned}}</code>');?></small></label>
 				</td>
 				<td>
@@ -493,7 +493,7 @@ function admin_config_pages(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="sandbox"><strong><?php echo $engine->_t('SandboxPage');?>:</strong><br>
+					<label for="sandbox"><strong><?php echo $engine->_t('SandboxPage');?></strong><br>
 					<small><?php echo $engine->_t('SandboxPageInfo');?></small></label>
 				</td>
 				<td>

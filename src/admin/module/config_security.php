@@ -30,7 +30,7 @@ function admin_config_security(&$engine, &$module)
 		<?php echo $engine->_t('SecuritySettingsInfo');?>
 	</p>
 	<br>
-<?php
+	<?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
@@ -44,6 +44,7 @@ function admin_config_security(&$engine, &$module)
 		$config['allow_persistent_cookie']		= (int) ($_POST['allow_persistent_cookie'] ?? 0);
 		$config['disable_wikiname']				= (int) ($_POST['disable_wikiname'] ?? 0);
 		$config['allow_email_reuse']			= (int) ($_POST['allow_email_reuse'] ?? 0);
+		$config['allowed_email_domains']		= (string) ($_POST['allowed_email_domains'] ?? '');
 		$config['tls']							= (int) ($_POST['tls'] ?? 0);
 		$config['tls_implicit']					= (int) ($_POST['tls_implicit'] ?? 0);
 		$config['pwd_admin_min_chars']			= (int) $_POST['pwd_admin_min_chars'];
@@ -84,7 +85,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="allow_registration"><strong><?php echo $engine->_t('AllowRegistration');?>:</strong><br>
+					<label for="allow_registration"><strong><?php echo $engine->_t('AllowRegistration');?></strong><br>
 					<small><?php echo $engine->_t('AllowRegistrationInfo');?></small></label>
 				</td>
 				<td>
@@ -96,7 +97,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="approve_new_user"><strong><?php echo $engine->_t('ApproveNewUser');?>:</strong><br>
+					<label for="approve_new_user"><strong><?php echo $engine->_t('ApproveNewUser');?></strong><br>
 					<small><?php echo $engine->_t('ApproveNewUserInfo');?></small></label>
 				</td>
 				<td>
@@ -109,7 +110,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="allow_persistent_cookie"><strong><?php echo $engine->_t('PersistentCookies');?>:</strong><br>
+					<label for="allow_persistent_cookie"><strong><?php echo $engine->_t('PersistentCookies');?></strong><br>
 					<small><?php echo $engine->_t('PersistentCookiesInfo');?></small></label>
 				</td>
 				<td>
@@ -121,7 +122,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="disable_wikiname"><strong><?php echo $engine->_t('DisableWikiName');?>:</strong><br>
+					<label for="disable_wikiname"><strong><?php echo $engine->_t('DisableWikiName');?></strong><br>
 					<small><?php echo $engine->_t('DisableWikiNameInfo');?></small></label>
 				</td>
 				<td>
@@ -133,7 +134,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="allow_email_reuse"><strong><?php echo $engine->_t('AllowEmailReuse');?>:</strong><br>
+					<label for="allow_email_reuse"><strong><?php echo $engine->_t('AllowEmailReuse');?></strong><br>
 					<small><?php echo $engine->_t('AllowEmailReuseInfo');?></small></label>
 				</td>
 				<td>
@@ -145,7 +146,19 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="username_chars_min"><strong><?php echo $engine->_t('UsernameLength');?>:</strong><br>
+					<label for="allowed_email_domains"><strong><?php echo $engine->_t('AllowedEmailDomains');?></strong><br>
+					<small><?php echo $engine->_t('AllowedEmailDomainsInfo');?></small></label>
+				</td>
+				<td>
+					<input type="text" size="50" maxlength="255" id="allowed_email_domains" name="allowed_email_domains" value="<?php echo Ut::html($engine->db->allowed_email_domains);?>">
+				</td>
+			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
+			<tr class="hl-setting">
+				<td class="label">
+					<label for="username_chars_min"><strong><?php echo $engine->_t('UsernameLength');?></strong><br>
 					<small><?php echo $engine->_t('UsernameLengthInfo');?></small></label>
 				</td>
 				<td>
@@ -160,7 +173,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="enable_captcha"><strong><?php echo $engine->_t('EnableCaptcha');?>:</strong><br>
+					<label for="enable_captcha"><strong><?php echo $engine->_t('EnableCaptcha');?></strong><br>
 					<small><?php echo $engine->_t('EnableCaptchaInfo');?></small></label>
 				</td>
 				<td>
@@ -173,7 +186,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="captcha_new_comment"><strong><?php echo $engine->_t('CaptchaComment');?>:</strong><br>
+					<label for="captcha_new_comment"><strong><?php echo $engine->_t('CaptchaComment');?></strong><br>
 					<small><?php echo $engine->_t('CaptchaCommentInfo');?></small></label>
 				</td>
 				<td>
@@ -185,7 +198,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="captcha_new_page"><strong><?php echo $engine->_t('CaptchaPage');?>:</strong><br>
+					<label for="captcha_new_page"><strong><?php echo $engine->_t('CaptchaPage');?></strong><br>
 					<small><?php echo $engine->_t('CaptchaPageInfo');?></small></label>
 				</td>
 				<td>
@@ -197,7 +210,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="captcha_edit_page"><strong><?php echo $engine->_t('CaptchaEdit');?>:</strong><br>
+					<label for="captcha_edit_page"><strong><?php echo $engine->_t('CaptchaEdit');?></strong><br>
 					<small><?php echo $engine->_t('CaptchaEditInfo');?></small></label>
 				</td>
 				<td>
@@ -209,7 +222,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="captcha_registration"><strong><?php echo $engine->_t('CaptchaRegistration');?>:</strong><br>
+					<label for="captcha_registration"><strong><?php echo $engine->_t('CaptchaRegistration');?></strong><br>
 					<small><?php echo $engine->_t('CaptchaRegistrationInfo');?></small></label>
 				</td>
 				<td>
@@ -224,7 +237,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="tls"><strong><?php echo $engine->_t('TlsConnection');?>:</strong><br>
+					<label for="tls"><strong><?php echo $engine->_t('TlsConnection');?></strong><br>
 					<small><?php echo $engine->_t('TlsConnectionInfo');?></small></label>
 				</td>
 				<td>
@@ -236,7 +249,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="tls_implicit"><strong><?php echo $engine->_t('TlsImplicit');?>:</strong><br>
+					<label for="tls_implicit"><strong><?php echo $engine->_t('TlsImplicit');?></strong><br>
 					<small><?php echo $engine->_t('TlsImplicitInfo');?></small></label>
 				</td>
 				<td>
@@ -251,7 +264,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="enable_security_headers"><strong><?php echo $engine->_t('EnableSecurityHeaders');?>:</strong><br>
+					<label for="enable_security_headers"><strong><?php echo $engine->_t('EnableSecurityHeaders');?></strong><br>
 					<small><?php echo $engine->_t('EnableSecurityHeadersinfo');?></small></label>
 				</td>
 				<td>
@@ -264,7 +277,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="csp"><strong><?php echo $engine->_t('Csp');?>:</strong><br>
+					<label for="csp"><strong><?php echo $engine->_t('Csp');?></strong><br>
 					<small><?php echo $engine->_t('CspInfo');?></small></label>
 				</td>
 				<td>
@@ -318,7 +331,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="csp"><strong><?php echo $engine->_t('PermissionsPolicy');?>:</strong><br>
+					<label for="csp"><strong><?php echo $engine->_t('PermissionsPolicy');?></strong><br>
 					<small><?php echo $engine->_t('PermissionsPolicyInfo');?></small></label>
 				</td>
 				<td>
@@ -372,7 +385,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="referrer_policy"><strong><?php echo $engine->_t('ReferrerPolicy');?>:</strong><br>
+					<label for="referrer_policy"><strong><?php echo $engine->_t('ReferrerPolicy');?></strong><br>
 					<small><?php echo $engine->_t('ReferrerPolicyInfo');?></small></label>
 				</td>
 				<td>
@@ -396,7 +409,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="pwd_min_chars"><strong><?php echo $engine->_t('PwdMinChars');?>:</strong><br>
+					<label for="pwd_min_chars"><strong><?php echo $engine->_t('PwdMinChars');?></strong><br>
 					<small><?php echo $engine->_t('PwdMinCharsInfo');?></small></label>
 				</td>
 				<td>
@@ -408,7 +421,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="pwd_admin_min_chars"><strong><?php echo $engine->_t('AdminPwdMinChars');?>:</strong><br>
+					<label for="pwd_admin_min_chars"><strong><?php echo $engine->_t('AdminPwdMinChars');?></strong><br>
 					<small><?php echo $engine->_t('AdminPwdMinCharsInfo');?></small></label>
 				</td>
 				<td>
@@ -420,7 +433,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="pwd_char_classes"><strong><?php echo $engine->_t('PwdCharComplexity');?>:</strong></label>
+					<label for="pwd_char_classes"><strong><?php echo $engine->_t('PwdCharComplexity');?></strong></label>
 				</td>
 				<td>
 					<select id="pwd_char_classes" name="pwd_char_classes">
@@ -440,7 +453,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="pwd_unlike_login"><strong><?php echo $engine->_t('PwdUnlikeLogin');?>:</strong></label>
+					<label for="pwd_unlike_login"><strong><?php echo $engine->_t('PwdUnlikeLogin');?></strong></label>
 				</td>
 				<td>
 					<select id="pwd_unlike_login" name="pwd_unlike_login">
@@ -463,7 +476,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="max_login_attempts"><strong><?php echo $engine->_t('MaxLoginAttempts');?>:</strong><br>
+					<label for="max_login_attempts"><strong><?php echo $engine->_t('MaxLoginAttempts');?></strong><br>
 					<small><?php echo $engine->_t('MaxLoginAttemptsInfo');?></small></label>
 				</td>
 				<td>
@@ -475,7 +488,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="ip_login_limit_max"><strong><?php echo $engine->_t('IpLoginLimitMax');?>:</strong><br>
+					<label for="ip_login_limit_max"><strong><?php echo $engine->_t('IpLoginLimitMax');?></strong><br>
 					<small><?php echo $engine->_t('IpLoginLimitMaxInfo');?></small></label>
 				</td>
 				<td>
@@ -490,7 +503,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="form_token_time"><strong><?php echo $engine->_t('FormTokenTime');?>:</strong><br>
+					<label for="form_token_time"><strong><?php echo $engine->_t('FormTokenTime');?></strong><br>
 					<small><?php echo $engine->_t('FormTokenTimeInfo');?></small></label>
 				</td>
 				<td>
@@ -505,7 +518,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="session_length"><strong><?php echo $engine->_t('SessionLength');?>:</strong><br>
+					<label for="session_length"><strong><?php echo $engine->_t('SessionLength');?></strong><br>
 					<small><?php echo $engine->_t('SessionLengthInfo');?></small></label>
 				</td>
 				<td>
@@ -517,7 +530,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="comment_delay"><strong><?php echo $engine->_t('CommentDelay');?>:</strong><br>
+					<label for="comment_delay"><strong><?php echo $engine->_t('CommentDelay');?></strong><br>
 					<small><?php echo $engine->_t('CommentDelayInfo');?></small></label>
 				</td>
 				<td>
@@ -529,7 +542,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="intercom_delay"><strong><?php echo $engine->_t('IntercomDelay');?>:</strong><br>
+					<label for="intercom_delay"><strong><?php echo $engine->_t('IntercomDelay');?></strong><br>
 					<small><?php echo $engine->_t('IntercomDelayInfo');?></small></label>
 				</td>
 				<td>
@@ -541,7 +554,7 @@ function admin_config_security(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="registration_delay"><strong><?php echo $engine->_t('RegistrationDelay');?>:</strong><br>
+					<label for="registration_delay"><strong><?php echo $engine->_t('RegistrationDelay');?></strong><br>
 					<small><?php echo $engine->_t('RegistrationDelayInfo');?></small></label>
 				</td>
 				<td>

@@ -90,8 +90,6 @@ if ($action === 'set_permissions')
 		foreach ($comments as $comment)
 		{
 			$this->save_acl($comment['page_id'], 'read', $_POST['read_acl']);
-			# $this->save_acl($comment['page_id'], 'write', );
-			# $this->save_acl($comment['page_id'], 'comment', );
 
 			// change owner?
 			// TODO: set optional new owner but only if the comment belongs to selected old user

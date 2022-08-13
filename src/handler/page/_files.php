@@ -20,13 +20,14 @@ if ($this->has_access('read'))
 		$show_files = (bool) $_GET['show_files'];
 	}
 
-	if ($user_name = mb_strtolower($this->get_user_name()))
+	if ($this->get_user_name())
 	{
-		$registered = true;
+		$registered	= true;
+		$user_name	= mb_strtolower($this->get_user_name());
 	}
 	else
 	{
-		$user_name = GUEST;
+		$user_name	= GUEST;
 	}
 
 	$tpl->enter('fp_s_');

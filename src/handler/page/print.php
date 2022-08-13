@@ -32,12 +32,11 @@ if (($user = $this->get_user())? $user['numerate_links'] : $this->db->numerate_l
 $this->canonical = true;
 
 // build html body
-$data = $this->format($this->page['body'], 'wacko');
+$data = $this->format($this->page['body'], 'wiki', ['post_wacko' => true]);
 // remove obsolete <ignore> tags
 $data = str_replace(['<ignore>', '</ignore>'], '', $data);
 
 // display page
-$data		= $this->format($data, 'post_wacko', ['strip_notypo' => true]);
 $tpl->body	= $this->numerate_toc($data); //  numerate toc if needed
 
 // display comments

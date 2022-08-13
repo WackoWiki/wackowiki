@@ -210,7 +210,7 @@ if ($page_a && $page_b
 					: $tpl->added_browser	= true;
 				$tpl->added_diff = $source
 					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $added)), 70, "\n", 1) . '</pre>'
-					: $this->format(implode("\n", $added), 'wiki', ['diff' => true]);
+					: $this->format(implode("\n", $added), 'wiki', ['post_wacko' => true]);
 			}
 
 			if ($deleted)
@@ -220,7 +220,7 @@ if ($page_a && $page_b
 					: $tpl->deleted_browser	= true;
 				$tpl->deleted_diff  = $source
 					? '<pre>' . utf8_wordwrap(Ut::html(implode("\n", $deleted)), 70, "\n", 1) . '</pre>'
-					: $this->format(implode("\n", $deleted), 'wiki', ['diff' => true]);
+					: $this->format(implode("\n", $deleted), 'wiki', ['post_wacko' => true]);
 			}
 
 			if (!$added && !$deleted)
@@ -324,7 +324,7 @@ if ($page_a && $page_b
 			$side_b->copy_until_ordinal($count_total_right, $output);
 			$side_b->copy_whitespace($output);
 
-			$tpl->m0_diff = $this->format($output, 'wiki', ['diff' => true]);
+			$tpl->m0_diff = $this->format($output, 'wiki', ['post_wacko' => true]);
 			break;
 
 		case 3:

@@ -52,15 +52,9 @@ else if ($user = $this->get_user())
 	{
 		$error = '';
 
-		// no email given
-		if (!$email)
+		if ($message = $this->validate_email($email, false))
 		{
-			$error = $this->_t('SpecifyEmail');
-		}
-		// invalid email
-		else if (!$this->validate_email($email))
-		{
-			$error = $this->_t('NotAEmail');
+			$error .= $message;
 		}
 
 		// check for errors and store
@@ -119,9 +113,12 @@ else if ($user = $this->get_user())
 	}
 	else if ($action == 'user_settings_general')
 	{
+		$user_lang	= $this->validate_language($_POST['user_lang']);
+		$theme		= $this->validate_theme($_POST['theme']);
+
 		$sql =
-		"user_lang			= " . $this->db->q($_POST['user_lang']) . ", " .
-		"theme				= " . $this->db->q($_POST['theme']) . ", " .
+		"user_lang			= " . $this->db->q($user_lang) . ", " .
+		"theme				= " . $this->db->q($theme) . ", " .
 		"timezone			= '" . (float) $_POST['timezone'] . "', " .
 		"dst				= " . (int) $_POST['dst'] . ", " .
 		"sorting_comments	= " . (int) $_POST['sorting_comments'] . ", " .

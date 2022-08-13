@@ -160,7 +160,7 @@ if (!isset($engine->sess->ap_created))
 				<?php echo $engine->_t('AuthorizationTip'); ?>
 				<br><br>
 				<?php echo $engine->form_open('ap_login', ['tag' => 'admin.php']); ?>
-					<label for="ap_password"><strong><?php echo $engine->_t('LoginPassword'); ?>:</strong></label>
+					<label for="ap_password"><strong><?php echo $engine->_t('Password'); ?>:</strong></label>
 					<?php echo $engine->form_autocomplete_off(); ?>
 					<input type="password" name="ap_password" id="ap_password" autocomplete="off" value="" autofocus>
 					<button type="submit" id="submit"><?php echo $engine->_t('LoginButton'); ?></button>

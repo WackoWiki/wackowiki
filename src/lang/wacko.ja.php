@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'アカウント作成:',
-	'RegistrationPassword'		=> 'パスワード',
 	'RegistrationButton'		=> 'アカウントを作成',
-	'RegistrationUserNameOwned'	=> 'This username is already registered. Please choose another.',
+	'UserNameOwned'				=> 'This username is already registered. Please choose another.',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. <br>Furthermore you will not be notified of recent page changes and comments.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'アカウントの作成',
 	'RegistrationLink'			=> 'アカウント作成',
 	'LoginName'					=> 'ユーザー名',
-	'LoginPassword'				=> 'パスワード',
+	'Password'					=> 'パスワード',
 	'LoginButton'				=> 'ログイン',
 	'LoginLink'					=> 'ログイン',
 	'PersistentCookie'			=> 'ログイン状態を保持',
@@ -500,10 +499,11 @@ $wacko_translation = [
 	'WrongPassword'				=> '間違ったパスワード！',
 	'ConfirmPassword'			=> 'パスワードの確認',
 	'Email'						=> 'メールアドレス',
-	'MustBeWikiName'			=> 'User name must be ((WackoWiki:Doc/English/WikiName WikiName)) formatted!',
+	'MustBeWikiName'			=> 'User name must be <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> formatted!',
 	'SpecifyEmail'				=> 'メールアドレスを指定してください。',
 	'NotAEmail'					=> '有効なメールアドレスではないようです。',
 	'EmailTaken'				=> 'The entered email address is already in use.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> 'Passwords didn\'t match.',
 	'SpacesArentAllowed'		=> 'Spaces aren\'t allowed in passwords.',
 	'ListMyPages'				=> 'List your pages',
@@ -617,7 +617,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'There are existing similar pages to %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'UserReservedWord'			=> 'User names cannot contain %1 as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',

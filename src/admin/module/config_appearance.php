@@ -32,15 +32,10 @@ function admin_config_appearance(&$engine, &$module)
 	<br>
 	<?php
 	// functions
-	$valid_theme = function ($theme) use ($engine)
-	{
-		return in_array($theme, $engine->available_themes()) ? $theme : $engine->db->theme;
-	};
-
 	$valid_color = function ($color)
 	{
 		if (preg_match('/^(
-			(\#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}))|        # color value
+			(\#([a-fA-F\d]{3}|[a-fA-F\d]{6}))|        # color value
 				(rgb\((\d{1,3}%?,){2}\d{1,3}%?\))        # rgb triplet
 			)$/x', $color))
 		{
@@ -219,11 +214,19 @@ function admin_config_appearance(&$engine, &$module)
 
 		$config['logo_display']				= (int) ($_POST['logo_display'] ?? null);
 		$config['theme_color']				= (string) $valid_color(($_POST['theme_color'] ?? null));
-		$config['theme']					= (string) $valid_theme(($_POST['theme'] ?? null));
+		$config['theme']					= (string) $engine->validate_theme(($_POST['theme'] ?? null));
 
 		if (isset($_POST['allow_themes']) && is_array($_POST['allow_themes']))
 		{
-			$config['allow_themes'] = (string) implode(',', $_POST['allow_themes']);
+			$allow_themes = array_map(
+				function($theme) use ($engine) {
+					return $engine->validate_theme($theme);
+				},
+				$_POST['allow_themes']
+			);
+			$allow_themes = array_unique($allow_themes);
+
+			$config['allow_themes'] = (string) implode(',', $allow_themes);
 		}
 		else
 		{
@@ -256,7 +259,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo"><strong><?php echo $engine->_t('SiteLogo');?>:</strong><br>
+				<label for="logo"><strong><?php echo $engine->_t('SiteLogo');?></strong><br>
 				<small><?php echo $engine->_t('SiteLogoInfo');?></small></label>
 			</td>
 			<td>
@@ -278,7 +281,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo_width"><strong><?php echo $engine->_t('LogoDimensions');?>:</strong><br>
+				<label for="logo_width"><strong><?php echo $engine->_t('LogoDimensions');?></strong><br>
 				<small><?php echo $engine->_t('LogoDimensionsInfo');?></small></label>
 			</td>
 			<td>
@@ -294,7 +297,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo_display"><strong><?php echo $engine->_t('LogoDisplayMode');?>:</strong><br>
+				<label for="logo_display"><strong><?php echo $engine->_t('LogoDisplayMode');?></strong><br>
 				<small><?php echo $engine->_t('LogoDisplayModeInfo');?></small></label>
 			</td>
 			<td>
@@ -313,7 +316,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="logo"><strong><?php echo $engine->_t('SiteFavicon');?>:</strong><br>
+				<label for="logo"><strong><?php echo $engine->_t('SiteFavicon');?></strong><br>
 				<small><?php echo $engine->_t('SiteFaviconInfo');?></small></label>
 			</td>
 			<td>
@@ -330,7 +333,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="theme_color"><strong><?php echo $engine->_t('ThemeColor');?>:</strong><br>
+				<label for="theme_color"><strong><?php echo $engine->_t('ThemeColor');?></strong><br>
 				<small><?php echo $engine->_t('ThemeColorInfo');?></small></label>
 			</td>
 			<td>
@@ -345,7 +348,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for="theme"><strong><?php echo $engine->_t('Theme');?>:</strong><br>
+				<label for="theme"><strong><?php echo $engine->_t('Theme');?></strong><br>
 				<small><?php echo $engine->_t('ThemeInfo');?></small></label>
 			</td>
 			<td>
@@ -366,7 +369,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<label for=""><strong><?php echo $engine->_t('ThemesAllowed');?>:</strong><br>
+				<label for=""><strong><?php echo $engine->_t('ThemesAllowed');?></strong><br>
 				<small><?php echo $engine->_t('ThemesAllowedInfo');?></small></label>
 			</td>
 			<td>
@@ -405,7 +408,7 @@ function admin_config_appearance(&$engine, &$module)
 		</tr>
 		<tr class="hl-setting">
 			<td class="label">
-				<strong><?php echo $engine->_t('ThemesPerPage');?>:</strong><br>
+				<strong><?php echo $engine->_t('ThemesPerPage');?></strong><br>
 				<small><?php echo $engine->_t('ThemesPerPageInfo');?></small>
 			</td>
 			<td>

@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Εγγραφή Νέου Χρήστη:',
-	'RegistrationPassword'		=> 'Συνθηματικό',
 	'RegistrationButton'		=> 'Έγγραψέ με!',
-	'RegistrationUserNameOwned'	=> 'Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.',
+	'UserNameOwned'				=> 'Αυτό το όνομα χρήστη είναι ήδη καταχωρημένο. Παρακαλώ επιλέξτε ένα διαφορετικό.',
 	'SiteRegistered'			=> 'Έχετε εγγραφεί με επιτυχία στον ιστότοπο %1.',
 	'RegistrationEmailInfo'		=> 'Μια έγκυρη διεύθυνση email. Όλα τα email από το σύστημα θα σταλούν σε αυτήν τη διεύθυνση. Η διεύθυνση email δεν δημοσιοποιείται και θα χρησιμοποιηθεί μόνο εάν επιθυμείτε να λάβετε νέο κωδικό πρόσβασης ή να λάβετε συγκεκριμένες ειδήσεις ή ειδοποιήσεις μέσω email.',
 	'SiteEmailConfirm'			=> 'Επιβεβαιώστε τη διεύθυνση E-mail σας κάνοντας κλικ στο σύνδεσμο στις οδηγίες που σας έχουν σταλεί. <br> Εάν δεν επαληθεύσετε τη διεύθυνση email σας, δεν θα μπορείτε να ανακτήσετε έναν πιθανό χαμένο κωδικό πρόσβασης. Επιπλέον, δεν θα ειδοποιηθείτε για πρόσφατες αλλαγές σελίδας και σχόλια.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Εγγραφή',
 	'RegistrationLink'			=> 'Εγγραφή',
 	'LoginName'					=> 'Όνομα χρήστη',
-	'LoginPassword'				=> 'Συνθηματικό',
+	'Password'					=> 'Συνθηματικό',
 	'LoginButton'				=> 'Σύνδεση',
 	'LoginLink'					=> 'Σύνδεση',
 	'PersistentCookie'			=> 'Παραμείνετε συνδεδεμένος ',
@@ -500,10 +499,11 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Λανθασμένο συνθηματικό!',
 	'ConfirmPassword'			=> 'Επιβεβαίωση συνθηματικού',
 	'Email'						=> 'Διεύθυνση Ηλεκτρονικού Ταχυδρομείου',
-	'MustBeWikiName'			=> 'Το όνομα χρήστη πρέπει να είναι σε ((WackoWiki:Doc/English/WikiName WikiName)) μορφή!',
+	'MustBeWikiName'			=> 'Το όνομα χρήστη πρέπει να είναι σε <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> μορφή!',
 	'SpecifyEmail'				=> 'Πρέπει να ορίσετε μία συγκεκριμένη ηλεκτρονική διεύθυνση.',
 	'NotAEmail'					=> 'Δεν φαίνεται να είναι έγκυρη ηλεκτρονική διεύθυνση',
 	'EmailTaken'				=> 'Η εισαχθείσα διεύθυνση ηλεκτρονικού ταχυδρομείου χρησιμοποιείται ήδη.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> 'Τα συνθηματικά δεν ταιριάζουν.',
 	'SpacesArentAllowed'		=> 'Τα κενά δεν επιτρέπονται στα συνθηματικά.',
 	'ListMyPages'				=> 'List your pages',
@@ -617,7 +617,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Υπάρχουν υπάρχουσες παρόμοιες σελίδες με το %1:',
 
 	'PageReservedWord'			=> 'Δεν μπορείτε να χρησιμοποιήσετε το %1 ως μέρος της διεύθυνσης, καθώς είναι μια δεσμευμένη λέξη.',
-	'UserReservedWord'			=> 'Τα ονόματα χρηστών δεν μπορούν να περιέχουν ##%1## καθώς είναι μια δεσμευμένη λέξη.',
+	'UserReservedWord'			=> 'Τα ονόματα χρηστών δεν μπορούν να περιέχουν %1 καθώς είναι μια δεσμευμένη λέξη.',
 
 	'DontRedirect'				=> 'Να μην επιτρέπονται αυτόματες ανακατευθύνσεις από ενέργεια Ανακατεύθυνσης.',
 	'SendWatchEmail'			=> 'Απόστειλε ηλεκτρονικό μήνυμα ενημέρωσης όταν κάποιος <br> (εκτός από εσένα) τροποποιεί τις σελίδες που παρακολουθείς',
@@ -1056,7 +1056,7 @@ $wacko_translation = [
 	'ModerateAccept'			=> 'Accept',
 	'ModerateDeleteConfirm'		=> 'Are you sure you want to <strong>remove</strong> the following topics?',
 	'ModerateRenameConfirm'		=> 'Enter a new title for the selected page',
-	'ModerateRenameExists'		=> 'Page same name already exists! Choose a different name.',
+	'ModerateRenameExists'		=> 'Μια σελίδα με το ίδιο όνομα υπάρχει ήδη! Επιλέξτε ένα διαφορετικό όνομα.',
 	'ModerateRename1Only'		=> 'Note: only the first page you selected will be renamed!',
 	'ModerateMovesConfirm'		=> 'Select the target partition to move the forum to',
 	'ModerateMoveConfirm'		=> 'Select the forum or specify the cluster to move these topics. To move a page to the root of the site, type &quot;/&quot;',
@@ -1116,7 +1116,7 @@ $wacko_translation = [
 	'ForumOutsideCluster'		=> 'Ensure that the %1 action is located inside the forum cluster.',
 
 	// password complexity
-	'PwdCplxShort'				=> 'Password is too short.',
+	'PwdCplxShort'				=> 'Το συνθηματικό είναι μικρό.',
 	'PwdCplxEquals'				=> 'Ο κωδικός πρόσβασης περιέχει το όνομα χρήστη.',
 	'PwdCplxWeak'				=> 'Password does not meet complexity requirements.',
 	'PwdCplxDesc1'				=> 'Απαιτήσεις κωδικού πρόσβασης: ',

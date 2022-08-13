@@ -161,7 +161,7 @@ function utf8_ucfirst($str)
 		case 1:
 			return mb_strtoupper($str);
 		default:
-			preg_match('/^(.{1})(.*)$/us', $str, $matches);
+			preg_match('/^(.)(.*)$/us', $str, $matches);
 			return mb_strtoupper($matches[1]) . $matches[2];
 	}
 }

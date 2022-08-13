@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> '创建账户：',
-	'RegistrationPassword'		=> '密码',
 	'RegistrationButton'		=> '创建账户',
-	'RegistrationUserNameOwned'	=> '用户名已注册，请更换',
+	'UserNameOwned'				=> '用户名已注册，请更换',
 	'SiteRegistered'			=> '您已成功注册网站 %1。',
 	'RegistrationEmailInfo'		=> '有效的电子邮件地址。来自系统的所有电子邮件都将发送到此地址。2该电子邮件地址不公开，仅在您希望接收新密码或希望通过电子邮件接收某些新闻或通知时使用。',
 	'SiteEmailConfirm'			=> '请点击发送给您的说明中的链接确认您的电子邮件地址<br>如果不验证您的电子邮件地址，您将无法检索可能丢失的密码<br>此外，您不会收到最近页面更改和评论的通知。',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> '创建新帐号',
 	'RegistrationLink'			=> '注册',
 	'LoginName'					=> '用户名',
-	'LoginPassword'				=> '密码',
+	'Password'					=> '密码',
 	'LoginButton'				=> '登录',
 	'LoginLink'					=> '登录',
 	'PersistentCookie'			=> '记住我的登录状态',
@@ -500,10 +499,11 @@ $wacko_translation = [
 	'WrongPassword'				=> '密码错误！',
 	'ConfirmPassword'			=> '重输密码',
 	'Email'						=> '邮箱地址',
-	'MustBeWikiName'			=> '用戶名必须符合 ((WackoWiki:Doc/English/WikiName WikiName)) 格式！',
+	'MustBeWikiName'			=> '用戶名必须符合 <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> 格式！',
 	'SpecifyEmail'				=> '您必须提供您的电子邮件地址。',
 	'NotAEmail'					=> '您的邮件地址也许不是有效的。',
 	'EmailTaken'				=> '输入的电子邮件地址已被使用。',
+	'EmailDomainNotAllowed'		=> '电子邮件%1 不在允许的域名列表.',
 	'PasswordsDidntMatch'		=> '您输入的密码和确认密码不一致。',
 	'SpacesArentAllowed'		=> '密码中不允许有空格。',
 	'ListMyPages'				=> '列出您的页面',
@@ -617,7 +617,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> '存在与 %1 类似的页面：',
 
 	'PageReservedWord'			=> '您不能使用 %1 作为地址的一部分，因为它是一个保留字。',
-	'UserReservedWord'			=> '用户名不能包含##%1##，因为它是一个保留字。',
+	'UserReservedWord'			=> '用户名不能包含%1，因为它是一个保留字。',
 
 	'DontRedirect'				=> '不允许通过操作 Redirect 进行自动重定向。',
 	'SendWatchEmail'			=> '当有人（您除外）更改您正在观看的任何页面时发送通知电子邮件',

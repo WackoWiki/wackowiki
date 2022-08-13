@@ -39,9 +39,10 @@ ul, ol {
 /** Header related ***********************************************************/
 
 h1, h2, h3, h4, h5, h6 {
-	margin: 0;
+	margin: 0 0 5px;
 	padding: 0;
 	font-weight: normal;
+	line-height: 1.2;
 }
 
 /* SYNTAX ==, ===, ====, =====, ======, ======= */
@@ -49,15 +50,15 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-size: 24px;
 	padding-top: 5px;
-	padding-bottom: 7px;
+	padding-bottom: 2px;
 	line-height: 110%;
 	color: #235e9a;
 }
-h2 { font-size: 20px; margin-top: 20px; margin-bottom: 5px; border-bottom: 3px dotted #ddd; color: #204a87;}
-h3 { font-size: 17px; margin-top: 15px; margin-bottom: 5px; border-bottom: 2px dotted #ddd;}
-h4 { font-size: 16px; margin-top: 15px; margin-bottom: 5px; border-bottom: 1px #999 solid;}
-h5 { font-size: 14px; margin-top: 10px; margin-bottom: 5px; border-bottom: 1px #bbb solid;}
-h6 { font-size: 12px; }
+h2 { font-size: 20px; margin-top: 20px; border-bottom: 3px dotted #ddd; color: #204a87;}
+h3 { font-size: 18px; margin-top: 15px; border-bottom: 2px dotted #ddd;}
+h4 { font-size: 16px; margin-top: 15px; border-bottom: 1px #999 solid;}
+h5 { font-size: 14px; margin-top: 10px; border-bottom: 1px #bbb solid;}
+h6 { font-size: 14px; margin-top: 10px;}
 
 /* Centered text: SYNTAX %%(wacko wrapper=text wrapper_align=center)text%% */
 .center{ text-align: center;}

@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Enregistrement d’un nouvel utilisateur :',
-	'RegistrationPassword'		=> 'Mot de Passe ',
 	'RegistrationButton'		=> 'Enregistrez-moi !',
-	'RegistrationUserNameOwned'	=> 'Ce nom est déjà utilisé. Merci d’en choisir un autre.',
+	'UserNameOwned'				=> 'Ce nom est déjà utilisé. Merci d’en choisir un autre.',
 	'SiteRegistered'			=> 'Vous êtes bien enregistré sur le site %1.',
 	'RegistrationEmailInfo'		=> 'Une adresse courriel valide. Tous les courriels émis par le système seront envoyés à cette adresse. Cette adresse courriel ne sera pas rendue publique et sera utilisée seulement si vous souhaitez recevoir un nouveau mot de passe ou recevoir certaines nouvelles ou notifications par courriel.',
 	'SiteEmailConfirm'			=> 'Merci de confirmer votre adresse courriel en suivant les instructions qui vous ont été envoyées. <br> Notez que sans vérification de cette adresse, vous ne pourrez pas récupérer votre mot de passe !',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Enregistrement',
 	'RegistrationLink'			=> 'Enregistrement',
 	'LoginName'					=> 'Nom d’utilisateur',
-	'LoginPassword'				=> 'Mot de Passe ',
+	'Password'					=> 'Mot de Passe ',
 	'LoginButton'				=> 'Connexion',
 	'LoginLink'					=> 'Connexion',
 	'PersistentCookie'			=> 'Rester connecté',
@@ -500,10 +499,11 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Mot de passe incorrect !',
 	'ConfirmPassword'			=> 'Confirmez votre mot de passe ',
 	'Email'						=> 'Adresse de messagerie ',
-	'MustBeWikiName'			=> 'Votre nom d’utilisateur doit prendre la forme d’un ((WackoWiki:Doc/Français/NomWiki NomWiki)) !',
+	'MustBeWikiName'			=> 'Votre nom d’utilisateur doit prendre la forme d’un <a href="https://wackowiki.org/doc/Doc/Français/NomWiki" target="_blank">NomWiki</a> !',
 	'SpecifyEmail'				=> 'Vous devez indiquer une adresse de messagerie.',
 	'NotAEmail'					=> 'Ceci ne ressemble pas vraiment à une adresse de messagerie.',
 	'EmailTaken'				=> 'L’adresse e-mail que vous avez saisie est déjà utilisée.',
+	'EmailDomainNotAllowed'		=> 'L’adresse e-mail %1 est pas dans la liste des domaines autorisés.',
 	'PasswordsDidntMatch'		=> 'Mots de passe non identiques.',
 	'SpacesArentAllowed'		=> 'Le caractère espace n’est pas autorisé dans les mots de passe.',
 	'ListMyPages'				=> 'Lister vos pages',
@@ -617,7 +617,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Il existe des pages similaires à %1 :',
 
 	'PageReservedWord'			=> 'Vous ne pouvez pas inclure %1 dans l’ adresse car c’est un mot réservé.',
-	'UserReservedWord'			=> 'Les noms d’ utrilisateurs ne pevent pas contenir ##%1## car c’est un mot réservé.',
+	'UserReservedWord'			=> 'Les noms d’ utrilisateurs ne pevent pas contenir %1 car c’est un mot réservé.',
 
 	'DontRedirect'				=> 'Ne pas autoriser la redirection automatique par l’action de redirection {{redirect}} ',
 	'SendWatchEmail'			=> 'Envoyer un courriel de notification quand quelqu’un<br> (à part vous) a modifié une page que vous surveillez ',

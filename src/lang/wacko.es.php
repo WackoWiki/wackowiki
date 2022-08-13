@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Nuevo usuario:',
-	'RegistrationPassword'		=> 'Contraseña',
 	'RegistrationButton'		=> 'Regístrate',
-	'RegistrationUserNameOwned'	=> 'Este nombre ya existe. Escoge otro por favor.',
+	'UserNameOwned'				=> 'Este nombre ya existe. Escoge otro por favor.',
 	'SiteRegistered'			=> 'Se registró exitosamente en el sitio %1.',
 	'RegistrationEmailInfo'		=> 'Una dirección de email válida. El sistema enviará todos los emails a esta dirección. No se mostrará la dirección publicamente y se utilizará solamente si desea establecer una nueva contraseña, o para recibir determinados noticias y notificaciones.',
 	'SiteEmailConfirm'			=> 'Por favor confirme su dirección de email seg´un las instrucciones enviados a Usted. <br>Tenga en cuenta que no le será posible obtener su contraseña sin verificar la dirección',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Registrarse',
 	'RegistrationLink'			=> 'Registrarse',
 	'LoginName'					=> 'Nombre de usuario',
-	'LoginPassword'				=> 'Contraseña',
+	'Password'					=> 'Contraseña',
 	'LoginButton'				=> 'Conectar',
 	'LoginLink'					=> 'Conectar',
 	'PersistentCookie'			=> 'No cerrar sesión',
@@ -500,10 +499,11 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Contraseña erronea!',
 	'ConfirmPassword'			=> 'Confirmar contraseña',
 	'Email'						=> 'Email',
-	'MustBeWikiName'			=> 'El usuario debe tener un formato ((WackoWiki:Doc/English/WikiName WikiName))!',
+	'MustBeWikiName'			=> 'El usuario debe tener un formato <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a>!',
 	'SpecifyEmail'				=> 'Introduce un e-mail.',
 	'NotAEmail'					=> 'Formato de e-mail incorrecto.',
 	'EmailTaken'				=> 'La dirección de email introducida ya está en uso',
+	'EmailDomainNotAllowed'		=> 'El correo electrónico %1 no está en la lista de dominios permitidos.',
 	'PasswordsDidntMatch'		=> 'Las contraseñas no coinciden.',
 	'SpacesArentAllowed'		=> 'No se aceptan espacios en las contraseñas.',
 	'ListMyPages'				=> 'Listar mis páginas',
@@ -617,7 +617,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Existen páginas similares a %1:',
 
 	'PageReservedWord'			=> 'No puede usar %1 como parte de la dirección porque es una palabra reservada.',
-	'UserReservedWord'			=> 'Nombres de usuario no deben contener ##%1## porque es una palabra reservada.',
+	'UserReservedWord'			=> 'Nombres de usuario no deben contener %1 porque es una palabra reservada.',
 
 	'DontRedirect'				=> 'No autorizar la redirección automática.',
 	'SendWatchEmail'			=> 'Enviar un mail de notificación cuando alguien (excepto tu) cambie la página que vigilas',

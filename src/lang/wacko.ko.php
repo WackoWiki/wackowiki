@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> '계정 만들기:',
-	'RegistrationPassword'		=> '비밀번호',
 	'RegistrationButton'		=> '계정 만들기',
-	'RegistrationUserNameOwned'	=> '이 사용자 이름은 이미 등록되었습니다. 다른 것을 선택하십시오.',
+	'UserNameOwned'				=> '이 사용자 이름은 이미 등록되었습니다. 다른 것을 선택하십시오.',
 	'SiteRegistered'			=> 'You have successfully registered on the site %1.',
 	'RegistrationEmailInfo'		=> 'A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.',
 	'SiteEmailConfirm'			=> 'Please confirm your E-mail address by clicking on the link in the instructions sent to you. <br>If you do not verify your email address, you will not be able to retrieve a possible lost password. <br>Furthermore you will not be notified of recent page changes and comments.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> '새로운 사용자 계정을 만듭니다.',
 	'RegistrationLink'			=> '계정 만들기',
 	'LoginName'					=> '사용자 이름',
-	'LoginPassword'				=> '비밀번호',
+	'Password'					=> '비밀번호',
 	'LoginButton'				=> '로그인',
 	'LoginLink'					=> '로그인',
 	'PersistentCookie'			=> '로그인 상태를 유지하기',
@@ -500,10 +499,11 @@ $wacko_translation = [
 	'WrongPassword'				=> '잘못된 비밀번호!',
 	'ConfirmPassword'			=> '비밀번호 확인',
 	'Email'						=> '이메일 주소',
-	'MustBeWikiName'			=> 'User name must be ((WackoWiki:Doc/English/WikiName WikiName)) formatted!',
+	'MustBeWikiName'			=> 'User name must be <a href="https://wackowiki.org/doc/Doc/English/WikiName" target="_blank">WikiName</a> formatted!',
 	'SpecifyEmail'				=> '이메일 주소를 지정해야합니다.',
 	'NotAEmail'					=> '유효한 이메일 주소가 아닌 것 같습니다.',
 	'EmailTaken'				=> 'The entered email address is already in use.',
+	'EmailDomainNotAllowed'		=> 'The entered email address %1 is not in allowed domains list.',
 	'PasswordsDidntMatch'		=> '비밀번호가 일치하지 않습니다.',
 	'SpacesArentAllowed'		=> '비밀번호에는 공백이 허용되지 않습니다.',
 	'ListMyPages'				=> 'List your pages',
@@ -617,7 +617,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'There are existing similar pages to %1:',
 
 	'PageReservedWord'			=> 'You can\'t use %1 as the part of the address as it\'s a reserved word.',
-	'UserReservedWord'			=> 'User names cannot contain ##%1## as it\'s a reserved word.',
+	'UserReservedWord'			=> 'User names cannot contain %1 as it\'s a reserved word.',
 
 	'DontRedirect'				=> 'Do not allow automatic redirection by action Redirect.',
 	'SendWatchEmail'			=> 'Send notifying email when someone (except you) change any page you are watching',

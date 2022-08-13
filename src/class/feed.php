@@ -330,17 +330,18 @@ class Feed
 				$xml .= '<loc>' . $this->engine->href('', $page['tag'], null, null, null, null, false, true) . '</loc>' . "\n";
 				$xml .= '<lastmod>' . substr($page['modified'], 0, 10)  . '</lastmod>' . "\n";
 
-				$days_since_last_changed = (time() - strtotime($page['modified'])) / DAYSECS;
+				// days since last change
+				$days_last_change = (time() - strtotime($page['modified'])) / DAYSECS;
 
-				if ($days_since_last_changed < 15)
+				if ($days_last_change < 15)
 				{
 					$freq = 'daily';
 				}
-				else if ($days_since_last_changed < 30)
+				else if ($days_last_change < 30)
 				{
 					$freq = 'weekly';
 				}
-				else if ($days_since_last_changed < 60)
+				else if ($days_last_change < 60)
 				{
 					$freq = 'monthly';
 				}

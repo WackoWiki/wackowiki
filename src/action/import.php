@@ -19,6 +19,8 @@ if (!defined('IN_WACKO'))
 
 if ($this->is_admin())
 {
+	$cluster = $_POST['_to'] ?? '';
+
 	// show FORM
 	if (empty($_POST['_to']))
 	{
@@ -67,7 +69,7 @@ if ($this->is_admin())
 					return utf8_trim($tag, '/ ');
 				};
 
-				$root_tag	= $sanitize_tag($_POST['_to']);
+				$root_tag	= $sanitize_tag($cluster);
 
 				foreach ($items as $item)
 				{

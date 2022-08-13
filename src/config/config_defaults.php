@@ -172,7 +172,7 @@ $wacko_config_defaults = [
 	'default_create_acl'			=> '$',
 	'default_upload_acl'			=> 'Admins',
 
-	'rename_globalacl'				=> 'Admins',
+	'rename_global_acl'				=> 'Admins',
 	'acl_lock'						=> 0,
 	'categories_handler'			=> 1,
 	'remove_onlyadmins'				=> 0,

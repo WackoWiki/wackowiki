@@ -113,7 +113,7 @@ class Wacko
 	function ids_string($ids): ?string
 	{
 		// sanitize array allow only integer values
-		$ids_string = array_map( 'intval', $ids );
+		$ids_string = array_map('intval', $ids);
 
 		// implode the array to be used in a SQL statement
 		return implode(', ', $ids_string);
@@ -358,6 +358,11 @@ class Wacko
 		return $theme_list;
 	}
 
+	function validate_theme($theme): string
+	{
+		return in_array($theme, $this->available_themes()) ? $theme : $this->db->theme;
+	}
+
 	// TIME FUNCTIONS
 	function utc2localtime($utc)
 	{
@@ -594,6 +599,11 @@ class Wacko
 	function known_language($lang): bool
 	{
 		return array_key_exists($lang, $this->http->available_languages());
+	}
+
+	function validate_language($lang): string
+	{
+		return $this->known_language($lang) ? $lang : $this->db->language;
 	}
 
 	function get_user_language()
@@ -4518,8 +4528,48 @@ class Wacko
 
 	function sanitize_username($user_name): string
 	{
+		$user_name = Ut::strip_spaces($user_name);
 		// strip \-\_\'\.\/\\
-		return str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
+		$user_name = str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
+
+		return Ut::normalize($user_name);
+	}
+
+	// returns error text, or null on OK
+	function validate_username($user_name, $create = true): ?string
+	{
+		// check if name is WikiName style
+		if (!$this->is_wiki_name($user_name) && $this->db->disable_wikiname === false)
+		{
+			return $this->_t('MustBeWikiName') . ' ';
+		}
+		else if (mb_strlen($user_name) < $this->db->username_chars_min)
+		{
+			return Ut::perc_replace($this->_t('NameTooShort'), 0, $this->db->username_chars_min) . ' ';
+		}
+		else if (mb_strlen($user_name) > $this->db->username_chars_max)
+		{
+			return Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . ' ';
+		}
+		// check if valid user name (and disallow '/')
+		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
+		{
+			return $this->_t('InvalidUserName') . ' ';
+		}
+		// check if reserved word
+		else if ($result = $this->validate_reserved_words($user_name))
+		{
+			return Ut::perc_replace($this->_t('UserReservedWord'), '<code>' . $result . '</code>');
+		}
+		// if user name already exists
+		else if ($this->user_name_exists($user_name) && $create)
+		{
+			$this->log(2, Ut::perc_replace($this->_t('LogUserSimilarName', SYSTEM_LANG), $user_name));
+
+			return $this->_t('UserNameOwned');
+		}
+
+		return null; // it's ok :)
 	}
 
 	/**
@@ -5389,7 +5439,7 @@ class Wacko
 			"LIMIT 1");
 	}
 
-	function soft_login($user) : void
+	function soft_login($user): void
 	{
 		$this->sess->restart();
 		$this->sess->sticky_login = 1;
@@ -5399,7 +5449,8 @@ class Wacko
 
 	function session_notice($message): void
 	{
-		if (!$this->db->session_notice)
+		if (    !$this->db->session_notice == 1
+			|| !($this->db->session_notice == 2 && $this->is_admin()))
 		{
 			return;
 		}
@@ -5681,8 +5732,26 @@ class Wacko
 			"LIMIT 1");
 	}
 
+	// ACLS
+
+	function sanitize_acl_syntax($list)
+	{
+		$lines	= explode("\n", $list);
+
+		$_lines = array_map(
+			function($lines) {
+				return $this->sanitize_username($lines);
+			},
+			$lines
+		);
+
+		$_list	= implode("\n", $_lines);
+
+		return $_list;
+	}
+
 	// check for acl syntax errors
-	function validate_acl_syntax($list): bool
+	function validate_acl_syntax($list, $privilege): bool
 	{
 		$error	= null;
 		$lines	= explode("\n", $list);
@@ -5698,7 +5767,7 @@ class Wacko
 
 		if ($error)
 		{
-			$this->set_message($this->_t('AclSyntaxError') . ': <br>' . $error, 'error');
+			$this->set_message($this->_t('AclSyntaxError') . ': <code>' . $privilege . '</code><br>' . $error, 'error');
 			return false;
 		}
 		else
@@ -5710,9 +5779,10 @@ class Wacko
 	function save_acl($page_id, $privilege, $list): void
 	{
 		$list = trim(str_replace("\r", '', $list));
+		$list = $this->sanitize_acl_syntax($list);
 
 		// validate
-		if (!$this->validate_acl_syntax($list))
+		if (!$this->validate_acl_syntax($list, $privilege))
 		{
 			#$this->reload_me();
 			return;
@@ -8181,6 +8251,32 @@ class Wacko
 		return $word_ok;
 	}
 
+	// returns error text, or null on OK
+	function validate_email($email, $create = true): ?string
+	{
+		// no email given
+		if ($email == '')
+		{
+			return $this->_t('SpecifyEmail') . ' ';
+		}
+		// invalid email
+		else if (!$this->validate_email_address($email))
+		{
+			return $this->_t('NotAEmail') . ' ';
+		}
+		// no email reuse allowed
+		else if (!$this->db->allow_email_reuse && $this->email_exists($email) && $create)
+		{
+			return $this->_t('EmailTaken') . ' ';
+		}
+		else if (!empty($this->db->allowed_email_domains) && !$this->validate_email_domain($email))
+		{
+			return Ut::perc_replace($this->_t('EmailDomainNotAllowed'), '<code>' . $email . '</code>') . ' ';
+		}
+
+		return null; // it's ok :)
+	}
+
 	/**
 	 * Check for valid email address.
 	 *
@@ -8188,7 +8284,7 @@ class Wacko
 	 *
 	 * @return boolean email valid or invalid
 	 */
-	function validate_email($email_address): bool
+	function validate_email_address($email_address): bool
 	{
 		if ($this->db->email_pattern == 'html5')
 		{
@@ -8208,14 +8304,16 @@ class Wacko
 	}
 
 	// only allow and send email to addresses in the given domain(s)
-	function validate_email_domain($email_address)
+	function validate_email_domain($email_address): ?bool
 	{
 		$domain = substr($email_address, strpos($email_address, '@') + 1);
 
 		// see if we're limited to a set of known domains
 		if(!empty($this->db->allowed_email_domains))
 		{
-			foreach($this->db->allowed_email_domains as $email_domain)
+			$allowed_domains = preg_split('/[\s,]+/', $this->db->allowed_email_domains, -1, PREG_SPLIT_NO_EMPTY);
+
+			foreach($allowed_domains as $email_domain)
 			{
 				if( 0 == strcasecmp($email_domain, $domain))
 				{

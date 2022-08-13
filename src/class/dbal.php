@@ -48,17 +48,17 @@ abstract class Dbal // need to be extended by Settings to be usable
 		}
 	}
 
-	function quote($string)
+	function quote($string): string
 	{
 		return $this->db->quote($string);
 	}
 
-	function q($data)
+	function q($data): string
 	{
 		return "'" . $this->quote($data) . "'";
 	}
 
-	function date($t = null)
+	function date($t = null): string
 	{
 		Ut::is_empty($t) && $t = time();
 		is_string($t) && $t = strtotime($t);
@@ -66,7 +66,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 		return gmdate(self::SQL_DATE_FORMAT, (int) $t);
 	}
 
-	function is_null_date($t)
+	function is_null_date($t): bool
 	{
 		return Ut::is_empty($t) || !$t || $t === self::SQL_DATE_NULL;
 	}
@@ -179,7 +179,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 	}
 
 	// save serialized sql results
-	private function put_cache($data)
+	private function put_cache($data): void
 	{
 		$data['affected_rows'] = $this->affected_rows;
 		file_put_contents($this->sqlfile, Ut::serialize($data));
@@ -187,7 +187,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 	}
 
 	// Invalidate the SQL cache
-	function invalidate_sql_cache()
+	function invalidate_sql_cache(): void
 	{
 		if ($this->cache_sql)
 		{

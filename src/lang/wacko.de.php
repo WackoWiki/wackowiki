@@ -38,9 +38,8 @@ $wacko_translation = [
 
 	// registration panel
 	'RegistrationWelcome'		=> 'Registrierung eines neuen Benutzers:',
-	'RegistrationPassword'		=> 'Passwort',
 	'RegistrationButton'		=> 'Benutzer registrieren',
-	'RegistrationUserNameOwned'	=> 'Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.',
+	'UserNameOwned'				=> 'Dieser Name ist bereits vergeben. Bitte wähle einen anderen Namen.',
 	'SiteRegistered'			=> 'Du hast dich erfolgreich auf der Website %1 registriert.',
 	'RegistrationEmailInfo'		=> 'Eine gültige E-Mail-Adresse. Alle E-Mails der Website werden an diese Adresse gesendet werden. Die E-Mail-Adresse wird nicht veröffentlicht und wird nur verwendet, wenn ein neues Passwort angefordert wird oder wenn eingestellt wird, bestimmte Informationen oder Benachrichtigungen per E-Mail zu erhalten.',
 	'SiteEmailConfirm'			=> 'Bitte bestätige deine E-Mail-Adresse gemäß der dir zugesanden Anleitung.<br> Beachte, bei unbestätigter E-Mail-Adresse kann das vergessene Passwort nicht zurückgesetzt werden.',
@@ -81,7 +80,7 @@ $wacko_translation = [
 	'CreateAccount'				=> 'Benutzerkonto anlegen',
 	'RegistrationLink'			=> 'Registrierung',
 	'LoginName'					=> 'Benutzer',
-	'LoginPassword'				=> 'Passwort',
+	'Password'					=> 'Passwort',
 	'LoginButton'				=> 'Anmelden',
 	'LoginLink'					=> 'Anmeldung',
 	'PersistentCookie'			=> 'Angemeldet bleiben',
@@ -500,10 +499,11 @@ $wacko_translation = [
 	'WrongPassword'				=> 'Falsches Passwort!',
 	'ConfirmPassword'			=> 'Passwort bestätigen',
 	'Email'						=> 'E-Mailadresse',
-	'MustBeWikiName'			=> 'Benutzername muss im ((WackoWiki:Doc/Deutsch/WikiName WikiName))-Format sein!',
+	'MustBeWikiName'			=> 'Benutzername muss im <a href="https://wackowiki.org/doc/Doc/Deutsch/WikiName" target="_blank">WikiName</a>-Format sein!',
 	'SpecifyEmail'				=> 'Du musst eine E-Mailadresse angeben.',
 	'NotAEmail'					=> 'Das sieht nicht nach einer E-Mailadresse aus.',
 	'EmailTaken'				=> 'Die angegebene E-Mail-Adresse wird bereits verwendet.',
+	'EmailDomainNotAllowed'		=> 'Die E-Mail %1 ist nicht in der Liste der erlaubten Domains.',
 	'PasswordsDidntMatch'		=> 'Passwörter stimmen nicht überein.',
 	'SpacesArentAllowed'		=> 'Leerzeichen sind im Passwort nicht zulässig.',
 	'ListMyPages'				=> 'Liste deiner Seiten',
@@ -617,7 +617,7 @@ $wacko_translation = [
 	'SimilarPagesHint'			=> 'Es gibt bereits ähnliche Seiten zu %1:',
 
 	'PageReservedWord'			=> 'Du kannst %1 als Teil der Adresse nicht verwenden, weil es ein reserviertes Wort ist.',
-	'UserReservedWord'			=> 'Benutzernamen können nicht ##%1## enthalten, da es ein reserviertes Wort ist.',
+	'UserReservedWord'			=> 'Benutzernamen können nicht %1 enthalten, da es ein reserviertes Wort ist.',
 
 	'DontRedirect'				=> 'Keine automatische Weiterleitung erlauben, obwohl eine gesetzt ist.',
 	'SendWatchEmail'			=> 'Bestätigunsmail senden, wenn jemand (außer dir) Seiten verändert, die du beobachtest',

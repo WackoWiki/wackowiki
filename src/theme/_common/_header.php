@@ -66,7 +66,7 @@ if ($this->db->enable_feeds)
 	$tpl->rss_url = $url =
 		[
 			$this->db->base_path . XML_DIR . '/',
-			'_' . preg_replace('/[^0-9a-z]/', '', mb_strtolower($this->db->site_name)) . '.xml'
+			'_' . preg_replace('/[^a-z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml'
 		];
 
 	if ($this->db->news_cluster)

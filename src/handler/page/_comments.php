@@ -42,11 +42,9 @@ if ($this->has_access('read'))
 	}
 
 	// display comments
-	if ($this->page && $this->sess->show_comments[$this->page['page_id']] || $this->forum === true)
+	if ($this->page && $this->sess->show_comments[$this->page['page_id']] || $this->forum)
 	{
 		$user			= $this->get_user();
-		$admin			= $this->is_admin();
-		$moder			= $this->is_moderator();
 		$noid_protect	= $this->get_user_setting('noid_protect');
 
 		// load comments for this page
@@ -77,9 +75,6 @@ if ($this->has_access('read'))
 		// display comments themselves
 		if ($comments)
 		{
-			// TODO: evaluate -> option / array to handle nested comments
-			// display relation as @link to an extra handler which filters / shows only the current tree
-
 			$tpl->enter('ol_l_');
 
 			foreach ($comments as $comment)
@@ -193,7 +188,7 @@ if ($this->has_access('read'))
 			}
 
 			// WikiEdit
-			if ($user = $this->get_user())
+			if ($user)
 			{
 				if ($user['autocomplete'])
 				{
@@ -214,12 +209,9 @@ if ($this->has_access('read'))
 	{
 		$c = $this->page['comments'];
 
-		if ($c < 1)
+		if (($c < 1) && $this->has_access('comment'))
 		{
-			if ($this->has_access('comment'))
-			{
-				$show_comments = $this->_t('Comments0');
-			}
+			$show_comments = $this->_t('Comments0');
 		}
 		else if	($c == 1)
 		{

@@ -375,6 +375,11 @@ table.restore {
 	border-collapse: separate;
 	padding: 4px;
 }
+table.restore-meta td:nth-child(1) {
+	width: 10px;
+	vertical-align: middle;
+}
+
 table.backup {
 	max-width: 350px;
 	border-spacing: 1px;

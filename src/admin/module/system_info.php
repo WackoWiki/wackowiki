@@ -26,7 +26,7 @@ function admin_system_info(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
-	<?php echo $engine->_t('SysInfo');?>:<br>
+	<?php echo $engine->_t('SysInfo');?><br>
 	<br>
 	<table class="sysinfo formation lined">
 		<tr>

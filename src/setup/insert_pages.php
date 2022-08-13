@@ -79,7 +79,7 @@ function insert_pages($insert, $config)
 			$value[2],
 			$value[3],
 			$value[4] ?? false,
-			$value[5] ?? 1, // it won't accept null
+			$value[5] ?? 1 // it won't accept null
 		);
 	}
 }
@@ -101,72 +101,75 @@ function insert_page($tag, $title, $body, $lang, $rights = 'Admins', $critical =
 		// user_id for user 'System'
 		// we specify values for columns body_r (MEDIUMTEXT) and body_toc (TEXT) that don't have defaults
 		// the additional parentheses around $owner_id and $page_id are necessary for the sub-select queries
-		$page_insert	= "INSERT INTO " .
-								$prefix . "page (
-									tag,
-									title,
-									body,
-									body_r,
-									body_toc,
-									user_id,
-									owner_id,
-									created,
-									modified,
-									latest,
-									page_size,
-									page_lang,
-									footer_comments,
-									footer_files,
-									noindex
-								)
-							VALUES (
-								'" . _quote($tag) . "',
-								'" . _quote($title) . "' ,
-								'" . _quote($body) . "',
-								'',
-								'',
-								(" . $owner_id . "),
-								(" . $owner_id . "),
-								UTC_TIMESTAMP(),
-								UTC_TIMESTAMP(),
-								1,
-								" . strlen($body) . ",
-								'" . _quote($lang) . "',
-								0,
-								0,
-								" . (int) $noindex . "
-							)";
+		$page_insert	=
+			"INSERT INTO " .
+				$prefix . "page (
+					tag,
+					title,
+					body,
+					body_r,
+					body_toc,
+					user_id,
+					owner_id,
+					created,
+					modified,
+					latest,
+					page_size,
+					page_lang,
+					footer_comments,
+					footer_files,
+					noindex
+				)
+			VALUES (
+				'" . _quote($tag) . "',
+				'" . _quote($title) . "' ,
+				'" . _quote($body) . "',
+				'',
+				'',
+				(" . $owner_id . "),
+				(" . $owner_id . "),
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				1,
+				" . strlen($body) . ",
+				'" . _quote($lang) . "',
+				0,
+				0,
+				" . (int) $noindex . "
+			)";
 
-		$perm_insert	= "INSERT INTO " .
-								$prefix . "acl (
-									page_id, privilege, list
-								)
-							VALUES
-								((" . $page_id . "), 'read',		'*'),
-								((" . $page_id . "), 'write',		'" . _quote($rights) . "'),
-								((" . $page_id . "), 'comment',		'$'),
-								((" . $page_id . "), 'create',		'$'),
-								((" . $page_id . "), 'upload',		'')";
+		$perm_insert	=
+			"INSERT INTO " .
+				$prefix . "acl (
+					page_id, privilege, list
+				)
+			VALUES
+				((" . $page_id . "), 'read',		'*'),
+				((" . $page_id . "), 'write',		'" . _quote($rights) . "'),
+				((" . $page_id . "), 'comment',		'$'),
+				((" . $page_id . "), 'create',		'$'),
+				((" . $page_id . "), 'upload',		'')";
 
 		$insert_data[]	= [$page_insert,	$lang_global['ErrorInsertPage']];
 		$insert_data[]	= [$perm_insert,	$lang_global['ErrorInsertPagePermission']];
 	}
 
-	$default_menu_item	= "INSERT INTO " .
-								$prefix . "menu (
-									user_id,
-									page_id,
-									menu_lang,
-									menu_title
-								)
-							VALUES (
-								(" . $owner_id . "),
-								(" . $page_id . "),
-								'" . _quote($lang) . "',
-								'" . _quote($menu_title) . "'
-							)
-							ON DUPLICATE KEY UPDATE
-								menu_title = '" . _quote($menu_title) . "'";
+	$default_menu_item	=
+		"INSERT INTO " .
+			$prefix . "menu (
+				user_id,
+				page_id,
+				menu_lang,
+				menu_title
+			)
+		VALUES (
+			(" . $owner_id . "),
+			(" . $page_id . "),
+			'" . _quote($lang) . "',
+			'" . _quote($menu_title) . "'
+		)
+		ON DUPLICATE KEY UPDATE
+			menu_title = '" . _quote($menu_title) . "'";
 
 	if ($set_menu)
 	{

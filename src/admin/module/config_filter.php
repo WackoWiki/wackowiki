@@ -73,7 +73,7 @@ function admin_config_filter(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="spam_filter"><strong><?php echo $engine->_t('SPAMFilter');?>:</strong><br>
+					<label for="spam_filter"><strong><?php echo $engine->_t('SPAMFilter');?></strong><br>
 					<small><?php echo $engine->_t('SPAMFilterInfo');?></small></label>
 				</td>
 				<td>
@@ -86,7 +86,7 @@ function admin_config_filter(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="phrase_list"><strong><?php echo $engine->_t('WordList');?>:</strong><br>
+					<label for="phrase_list"><strong><?php echo $engine->_t('WordList');?></strong><br>
 					<small><?php echo $engine->_t('WordListInfo');?></small></label>
 				</td>
 				<td>

@@ -73,7 +73,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="debug_mode"><strong><?php echo $engine->_t('DebugMode');?>:</strong><br>
+					<label for="debug_mode"><strong><?php echo $engine->_t('DebugMode');?></strong><br>
 					<small><?php echo $engine->_t('DebugModeInfo');?></small></label>
 				</td>
 				<td>
@@ -94,7 +94,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="debug_sql_threshold"><strong><?php echo $engine->_t('DebugSqlThreshold');?>:</strong><br>
+					<label for="debug_sql_threshold"><strong><?php echo $engine->_t('DebugSqlThreshold');?></strong><br>
 					<small><?php echo $engine->_t('DebugSqlThresholdInfo');?></small></label></td>
 				<td>
 					<input type="number" min="0" maxlength="10" id="debug_sql_threshold" name="debug_sql_threshold" value="<?php echo (int) $engine->db->debug_sql_threshold;?>">
@@ -105,7 +105,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="debug_admin_only"><strong><?php echo $engine->_t('DebugAdminOnly');?>:</strong><br>
+					<label for="debug_admin_only"><strong><?php echo $engine->_t('DebugAdminOnly');?></strong><br>
 					<small><?php echo $engine->_t('DebugAdminOnlyInfo');?></small></label>
 				</td>
 				<td>
@@ -120,7 +120,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="cache"><strong><?php echo $engine->_t('Cache');?>:</strong><br>
+					<label for="cache"><strong><?php echo $engine->_t('Cache');?></strong><br>
 					<small><?php echo $engine->_t('CacheInfo');?></small></label>
 				</td>
 				<td>
@@ -132,7 +132,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="cache_ttl"><strong><?php echo $engine->_t('CacheTtl');?>:</strong><br>
+					<label for="cache_ttl"><strong><?php echo $engine->_t('CacheTtl');?></strong><br>
 					<small><?php echo $engine->_t('CacheTtlInfo');?></small></label>
 				</td>
 				<td>
@@ -144,7 +144,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="cache_sql"><strong><?php echo $engine->_t('CacheSql');?>:</strong><br>
+					<label for="cache_sql"><strong><?php echo $engine->_t('CacheSql');?></strong><br>
 					<small><?php echo $engine->_t('CacheSqlInfo');?></small></label>
 				</td>
 				<td>
@@ -156,7 +156,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="cache_sql_ttl"><strong><?php echo $engine->_t('CacheSqlTtl');?>:</strong><br>
+					<label for="cache_sql_ttl"><strong><?php echo $engine->_t('CacheSqlTtl');?></strong><br>
 					<small><?php echo $engine->_t('CacheSqlTtlInfo');?></small></label>
 				</td>
 				<td>
@@ -171,8 +171,8 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="log_level"><strong><?php echo $engine->_t('LogLevelUsage');?>:</strong><br>
-					<small><?php echo $engine->_t('LogLevelInfo');?></small></label>
+					<label for="log_level"><strong><?php echo $engine->_t('LogLevelUsage');?></strong><br>
+					<small><?php echo $engine->_t('LogLevelUsageInfo');?></small></label>
 				</td>
 				<td>
 					<select id="log_level" name="log_level">
@@ -192,7 +192,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="log_default_show"><strong><?php echo $engine->_t('LogDefaultShow');?>:</strong><br>
+					<label for="log_default_show"><strong><?php echo $engine->_t('LogDefaultShow');?></strong><br>
 					<small><?php echo $engine->_t('LogDefaultShowInfo');?></small></label>
 				</td>
 				<td>
@@ -213,7 +213,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="log_purge_time"><strong><?php echo $engine->_t('LogPurgeTime');?>:</strong><br>
+					<label for="log_purge_time"><strong><?php echo $engine->_t('LogPurgeTime');?></strong><br>
 					<small><?php echo $engine->_t('LogPurgeTimeInfo');?></small></label>
 				</td>
 				<td>
@@ -228,7 +228,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="approve_new_user"><strong><?php echo $engine->_t('AnonymizeIp');?>:</strong><br>
+					<label for="approve_new_user"><strong><?php echo $engine->_t('AnonymizeIp');?></strong><br>
 					<small><?php echo $engine->_t('AnonymizeIpInfo');?></small></label>
 				</td>
 				<td>
@@ -244,7 +244,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="reverse_proxy"><strong><?php echo $engine->_t('ReverseProxy');?>:</strong><br>
+					<label for="reverse_proxy"><strong><?php echo $engine->_t('ReverseProxy');?></strong><br>
 					<small><?php echo $engine->_t('ReverseProxyInfo');?></small></label>
 				</td>
 				<td>
@@ -256,11 +256,11 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="reverse_proxy_header"><strong><?php echo $engine->_t('ReverseProxyHeader');?>:</strong><br>
+					<label for="reverse_proxy_header"><strong><?php echo $engine->_t('ReverseProxyHeader');?></strong><br>
 					<small><?php echo $engine->_t('ReverseProxyHeaderInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo Ut::html($engine->db->reverse_proxy_header);?>">
+					<input type="text" size="50" maxlength="50" id="reverse_proxy_header" name="reverse_proxy_header" value="<?php echo Ut::html($engine->db->reverse_proxy_header);?>">
 				</td>
 			</tr>
 			<tr class="lined">
@@ -268,11 +268,11 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="reverse_proxy_addresses"><strong><?php echo $engine->_t('ReverseProxyAddresses');?>:</strong><br>
+					<label for="reverse_proxy_addresses"><strong><?php echo $engine->_t('ReverseProxyAddresses');?></strong><br>
 					<small><?php echo $engine->_t('ReverseProxyAddressesInfo');?></small></label>
 				</td>
 				<td>
-					<input type="text" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo Ut::html($engine->db->reverse_proxy_addresses);?>">
+					<input type="text" size="50" maxlength="50" id="reverse_proxy_addresses" name="reverse_proxy_addresses" value="<?php echo Ut::html($engine->db->reverse_proxy_addresses);?>">
 				</td>
 			</tr>
 			<tr>
@@ -283,7 +283,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="session_store"><strong><?php echo $engine->_t('SessionStorage');?>:</strong><br>
+					<label for="session_store"><strong><?php echo $engine->_t('SessionStorage');?></strong><br>
 					<small><?php echo $engine->_t('SessionStorageInfo');?></small></label>
 				</td>
 				<td>
@@ -299,14 +299,18 @@ function admin_config_system(&$engine, &$module)
 					</select>
 				</td>
 			</tr>
+			<tr class="lined">
+				<td colspan="2"></td>
+			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="session_notice"><strong><?php echo $engine->_t('SessionNotice');?>:</strong><br>
+					<label for="session_notice"><strong><?php echo $engine->_t('SessionNotice');?></strong><br>
 					<small><?php echo $engine->_t('SessionNoticeInfo');?></small></label>
 				</td>
 				<td>
-					<input type="radio" id="session_notice_on" name="session_notice" value="1"<?php echo ($engine->db->session_notice == 1 ? ' checked' : '');?>><label for="session_notice_on"><?php echo $engine->_t('On');?></label>
 					<input type="radio" id="session_notice_off" name="session_notice" value="0"<?php echo ($engine->db->session_notice == 0 ? ' checked' : '');?>><label for="session_notice_off"><?php echo $engine->_t('Off');?></label>
+					<input type="radio" id="session_notice_on" name="session_notice" value="1"<?php echo ($engine->db->session_notice == 1 ? ' checked' : '');?>><label for="session_notice_on"><?php echo $engine->_t('On');?></label>
+					<input type="radio" id="session_notice_admin" name="session_notice" value="2"<?php echo ($engine->db->session_notice == 2 ? ' checked' : '');?>><label for="session_notice_admin"><?php echo $engine->_t('Admin');?></label>
 				</td>
 			</tr>
 			<tr>
@@ -317,7 +321,7 @@ function admin_config_system(&$engine, &$module)
 			</tr>
 			<tr class="hl-setting">
 				<td class="label">
-					<label for="rewrite_mode"><strong><?php echo $engine->_t('RewriteMode');?>:</strong><br>
+					<label for="rewrite_mode"><strong><?php echo $engine->_t('RewriteMode');?></strong><br>
 					<small><?php echo $engine->_t('RewriteModeInfo');?></small></label>
 				</td>
 				<td>
