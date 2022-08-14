@@ -30,7 +30,7 @@ function admin_config_security(&$engine, &$module)
 		<?php echo $engine->_t('SecuritySettingsInfo');?>
 	</p>
 	<br>
-<?php
+	<?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{

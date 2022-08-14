@@ -30,7 +30,7 @@ function admin_config_permissions(&$engine, &$module)
 		<?php echo $engine->_t('PermissionsSettingsInfo');?>
 	</p>
 	<br>
-<?php
+	<?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{

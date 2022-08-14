@@ -26,7 +26,7 @@ function admin_config_basic(&$engine, &$module)
 ?>
 	<h1><?php echo $module['title']; ?></h1>
 	<br>
-<?php
+	<?php
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
@@ -38,7 +38,6 @@ function admin_config_basic(&$engine, &$module)
 		$config['site_name']					= (string) $site_name;
 		$config['site_desc']					= (string) $site_desc;
 		$config['admin_name']					= (string) $admin_name;
-
 		$config['language']						= (string) $language;
 		$config['multilanguage']				= (int) ($_POST['multilanguage'] ?? 0);
 
@@ -63,13 +62,13 @@ function admin_config_basic(&$engine, &$module)
 
 		if (is_array($_POST['diff_modes']))
 		{
-			$_diff_modes			= array_map('intval', $_POST['diff_modes']);
+			$_diff_modes = array_map('intval', $_POST['diff_modes']);
 
-			$config['diff_modes']	= (string) implode(',', $_diff_modes);
+			$config['diff_modes']				= (string) implode(',', $_diff_modes);
 		}
 		else
 		{
-			$config['diff_modes'] = '0,1,2,3,4,5,6,7';
+			$config['diff_modes']				= '0,1,2,3,4,5,6,7';
 		}
 
 		$config['footer_comments']				= (int) $_POST['footer_comments'];

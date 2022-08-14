@@ -5770,6 +5770,8 @@ class Wacko
 			"LIMIT 1");
 	}
 
+	// ACLS
+
 	function sanitize_acl_syntax($list)
 	{
 		$lines	= explode("\n", $list);

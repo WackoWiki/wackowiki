@@ -71,6 +71,12 @@ if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.4', '
 	$config['time_format_seconds']	= 'HH:mm:ss';
 }
 
+if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.13', '<'))
+{
+	// renamed option
+	$config['rename_global_acl']	= $config['rename_globalacl'];
+}
+
 /*
  Setup the tables depending on which database we selected
 
