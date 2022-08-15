@@ -41,7 +41,8 @@ if ($action === 'extended_properties')
 if ($action === 'general_properties')
 {
 	$page_lang	= $this->validate_language($_POST['page_lang']);
-	$theme		= $this->validate_theme($_POST['theme'] ?? '');
+	// accepts also empty theme (uses then global theme)
+	$theme		= $_POST['theme'] ? $this->validate_theme($_POST['theme']) : '';
 
 	$this->db->sql_query(
 		"UPDATE " . $this->db->table_prefix . "page SET " .
