@@ -57,7 +57,12 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 						'<td>' . number_format($table['Rows'], 0, ',', '.') . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Data_length'], false, true, true) . '</td>' .
 						'<td>' . $engine->binary_multiples($table['Index_length'], false, true, true) . '</td>' .
-						'<td>' . $engine->binary_multiples($table['Data_free'], false, true, true) . '</td>' .
+						'<td>' .
+							// for InnoDB, this does not contain the number of overhead bytes but the total free space
+							($engine->db->db_engine !== 'InnoDB'
+								? $engine->binary_multiples($table['Data_free'], false, true, true)
+								: '-') .
+						'</td>' .
 					'</tr>' . "\n";
 
 				$trows	+= $table['Rows'];
@@ -67,14 +72,19 @@ function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 			}
 		}
 	}
-?>
-		<tr>
-			<td class="label"><strong><?php echo $engine->_t('DbTotal');?>:</strong></td>
-			<td><strong><?php echo number_format($trows, 0, ',', '.'); ?></strong></td>
-			<td><strong><?php echo $engine->binary_multiples($tdata, false, true, true); ?></strong></td>
-			<td><strong><?php echo $engine->binary_multiples($tindex, false, true, true); ?></strong></td>
-			<td><strong><?php echo $engine->binary_multiples($tfrag, false, true, true); ?></strong></td>
-		</tr>
+
+	echo
+		'<tr>' .
+			'<td class="label"><strong>' . $engine->_t('DbTotal') . ':</strong></td>' .
+			'<td><strong>' . number_format($trows, 0, ',', '.') . '</strong></td>' .
+			'<td><strong>' . $engine->binary_multiples($tdata, false, true, true) . '</strong></td>' .
+			'<td><strong>' . $engine->binary_multiples($tindex, false, true, true) . '</strong></td>' .
+			'<td><strong>' .
+				($engine->db->db_engine !== 'InnoDB'
+					? $engine->binary_multiples($tfrag, false, true, true)
+					: '-') . '</strong></td>' .
+		'</tr>' . "\n";
+	?>
 	</table>
 	<br>
 	<?php echo $engine->_t('FileStatSection');?>:
