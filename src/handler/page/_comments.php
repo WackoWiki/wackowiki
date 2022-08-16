@@ -32,11 +32,12 @@ if ($this->has_access('read'))
 	{
 		switch ($_GET['show_comments'])
 		{
-			case 0:
-				$this->sess->show_comments[$this->page['page_id']] = 0;
-				break;
 			case 1:
 				$this->sess->show_comments[$this->page['page_id']] = 1;
+				break;
+			case 0:
+			default:
+				$this->sess->show_comments[$this->page['page_id']] = 0;
 				break;
 		}
 	}
