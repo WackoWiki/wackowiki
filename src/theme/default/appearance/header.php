@@ -217,7 +217,7 @@ else
 
 	// rename tab
 	if ($this->is_admin() || ($this->is_owner()
-		&& (!$this->forum || (int) $this->page['comments'] != 0)))
+		&& (!$this->forum || $this->page['comments'])))
 	{
 		$echo_tab('rename', 'RenameTip', 'RenameText', 2, '', '');
 	}

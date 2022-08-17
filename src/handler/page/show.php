@@ -226,7 +226,7 @@ if ($this->has_access('read'))
 
 		// clear new edits for watched page
 		if ($user
-			&& (isset($this->page['latest']) && $this->page['latest'] != 0)
+			&& (isset($this->page['latest']) && $this->page['latest'])
 			&& (isset($this->watch['pending']) && $this->watch['pending'])
 			&& !$noid_protect)
 		{

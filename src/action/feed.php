@@ -207,7 +207,7 @@ else
 				$tpl->m_title	= $xfeed->get_title();
 			}
 
-			if (($time == 1) && ($date != 0))
+			if (($time == 1) && ($date))
 			{
 				$tpl->t_date		= $item->get_date('d.m.Y G:i');
 				$tpl->t_utime		= $item->get_date('U');

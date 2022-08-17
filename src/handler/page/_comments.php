@@ -158,7 +158,9 @@ if ($this->has_access('read'))
 			if ($user)
 			{
 				// publish anonymously
-				if (($this->page && $this->db->publish_anonymously != 0 && $this->has_access('comment', '', GUEST))
+				if (($this->page
+						&& $this->db->publish_anonymously
+						&& $this->has_access('comment', '', GUEST))
 					|| (!$this->page && $this->has_access('create', '', GUEST)))
 				{
 					$tpl->a_pageid	= $this->page['page_id'];

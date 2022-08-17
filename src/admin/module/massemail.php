@@ -101,7 +101,7 @@ function admin_massemail(&$engine, &$module)
 					&& $engine->db->enable_email_notification
 					&& $user['enabled']
 					&& $user['email_confirm'] == ''
-					&& $user['allow_massemail'] != 0)
+					&& $user['allow_massemail'])
 				{
 					$subject	= $mail_subject;
 					$body		= $mail_body . "\n";
