@@ -359,18 +359,18 @@ if ($this->has_access('read')
 
 			// publish anonymously
 			if (($this->page
-					&& $this->db->publish_anonymously != 0
+					&& $this->db->publish_anonymously
 					&& $this->has_access('write', '', GUEST))
 				|| (!$this->page && $this->has_access('create', '', GUEST)))
 			{
 				$tpl->a_pageid	= $this->page['page_id'];
-				$tpl->a_checked	= $this->get_user_setting('noid_pubs') == 1 ? ' checked' : '';
+				$tpl->a_checked	= $this->get_user_setting('noid_pubs') ? ' checked' : '';
 			}
 
 			// watch a page
 			if ($this->page && !$this->is_watched)
 			{
-				$tpl->w_checked = $this->get_user_setting('send_watchmail') == 1 ? ' checked' : '';
+				$tpl->w_checked = $this->get_user_setting('send_watchmail') ? ' checked' : '';
 			}
 		}
 	}
