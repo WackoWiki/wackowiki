@@ -391,7 +391,7 @@ else
 	for ($i = 0 ; $i < $wordlen ; $i++)
 	{
 		// don't allow to start with 'vowel'
-		if ($rand_func(0, 4) >= 2 && $i != 0)
+		if ($rand_func(0, 4) >= 2 && $i)
 		{
 			$word .= $vowels[$rand_func(0, strlen($vowels) - 1)];
 		}
@@ -445,7 +445,7 @@ ImageColorTransparent($im2, $bg2);
 ImageFill($im, 0, 0, $bg);
 ImageFill($im2, 0, 0, $bg2);
 
-if ($bg_type != 0)
+if ($bg_type)
 {
 	// generate noisy background, to be merged with CAPTCHA later
 	// any suggestions on how best to do this much appreciated
@@ -814,7 +814,7 @@ ImageCopy($im, $im2, 0, 0, 0, 0, $width, $height);
 ////// Merge with obfuscated background
 //////////////////////////////////////////////////////
 
-if ($bg_type != 0)
+if ($bg_type)
 {
 	// merge bg image with CAPTCHA image to create smooth background
 

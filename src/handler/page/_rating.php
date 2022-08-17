@@ -5,7 +5,7 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-if ($this->db->footer_rating != 0 && ($this->db->footer_rating != 2 || $this->get_user()))
+if ($this->db->footer_rating && ($this->db->footer_rating != 2 || $this->get_user()))
 {
 	// registering local functions
 	// determine if user has rated a given page

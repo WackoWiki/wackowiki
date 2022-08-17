@@ -159,7 +159,7 @@ if ($this->has_access('read')
 			$body = str_replace("\r", '', $_POST['body']);
 
 			// You're not allowed to have empty comments as they would be kinda pointless.
-			if (!$body && $this->page['comment_on_id'] != 0)
+			if (!$body && $this->page['comment_on_id'])
 			{
 				$this->set_message($this->_t('EmptyComment'), 'error');
 				$error = true;
@@ -310,7 +310,7 @@ if ($this->has_access('read')
 
 	$tpl->buttons = true;
 
-	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] != 0)
+	if (isset($this->page['comment_on_id']) && $this->page['comment_on_id'])
 	{
 		// comment title
 		$tpl->e_title = $title;
@@ -337,7 +337,7 @@ if ($this->has_access('read')
 	if (isset($this->page['comment_on_id']) && !$this->page['comment_on_id'])
 	{
 		// edit note
-		if ($this->db->edit_summary != 0)
+		if ($this->db->edit_summary)
 		{
 			// briefly describe your changes (corrected spelling, fixed grammar, improved formatting)
 			$tpl->n_note = $edit_note;
@@ -346,13 +346,13 @@ if ($this->has_access('read')
 		if ($user)
 		{
 			// minor edit
-			if ($this->page && $this->db->minor_edit != 0)
+			if ($this->page && $this->db->minor_edit)
 			{
 				$tpl->minor = true;
 			}
 
 			// reviewed
-			if ($this->page && $this->db->review != 0 && $this->is_reviewer())
+			if ($this->page && $this->db->review && $this->is_reviewer())
 			{
 				$tpl->reviewed = true;
 			}

@@ -201,7 +201,7 @@ else if ($user = $this->get_user())
 			$tpl->intercom		= $user['allow_intercom'];
 
 			// minor edit
-			if ($this->page && $this->db->minor_edit != 0)
+			if ($this->page && $this->db->minor_edit)
 			{
 				$tpl->m_minor	= $user['notify_minor_edit'];
 			}

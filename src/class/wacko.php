@@ -779,7 +779,7 @@ class Wacko
 		{
 			$cache = false;
 		}
-		else if ($page_id != 0)
+		else if ($page_id)
 		{
 			if ($this->get_cached_wanted_page('', $page_id) == 1)
 			{
@@ -795,7 +795,7 @@ class Wacko
 		}
 
 		// 1. search for page_id (... is preferred, $tag next)
-		if ($page_id != 0)
+		if ($page_id)
 		{
 			$page = $this->_load_page('', $page_id, $revision_id, $cache, $metadata_only, $deleted);
 		}
@@ -809,7 +809,7 @@ class Wacko
 		// 3. still nothing? file under wanted
 		if (!$page)
 		{
-			($page_id != 0
+			($page_id
 				? $this->cache_wanted_page('', $page_id)
 				: $this->cache_wanted_page($tag)
 			);
@@ -865,7 +865,7 @@ class Wacko
 						"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
 						"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 					"WHERE " .
-						($page_id != 0
+						($page_id
 							? "page_id  = " . (int) $page_id . " "
 							: "tag = " . $this->db->q($tag) . " ") .
 						($deleted != 1
@@ -886,7 +886,7 @@ class Wacko
 							"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
 							"LEFT JOIN " . $this->db->table_prefix . "page s ON (p.page_id = s.page_id) " .
 						"WHERE " .
-							($page_id != 0
+							($page_id
 								? "p.page_id	= " . (int) $page_id . " "
 								: "p.tag		= " . $this->db->q($tag) . " ") .
 							($deleted != 1
@@ -925,7 +925,7 @@ class Wacko
 			$page_id = $this->page_id_cache[$tag] ?? 0;
 		}
 
-		if ($page_id != 0)
+		if ($page_id)
 		{
 			if (isset($this->page_cache[$page_id]))
 			{
@@ -969,7 +969,7 @@ class Wacko
 	{
 		if ($check == 0)
 		{
-			($page_id != 0
+			($page_id
 				? $this->wanted_cache['page_id'][$page_id] = 1
 				: $this->wanted_cache['tag'][$tag] = 1
 			);
@@ -977,7 +977,7 @@ class Wacko
 		}
 		else if ($this->_load_page($tag, $page_id, '', 1, 1) == '')
 		{
-			($page_id != 0
+			($page_id
 				? $this->wanted_cache['page_id'][$page_id] = 1
 				: $this->wanted_cache['tag'][$tag] = 1
 			);
@@ -992,7 +992,7 @@ class Wacko
 	*/
 	function clear_cache_wanted_page($tag, $page_id = 0): void
 	{
-		($page_id != 0
+		($page_id
 			? $this->wanted_cache['page_id'][$page_id] = 0
 			: $this->wanted_cache['tag'][$tag] = 0
 		);
@@ -1008,7 +1008,7 @@ class Wacko
 	*/
 	function get_cached_wanted_page($tag, $page_id = 0)
 	{
-		if ($page_id != 0)
+		if ($page_id)
 		{
 			return $this->wanted_cache['page_id'][$page_id] ?? '';
 		}
@@ -1620,7 +1620,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "category c " .
 				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
 			"WHERE ca.object_id  = " . (int) $object_id . " " .
-			($type_id != 0
+			($type_id
 				? "AND ca.object_type_id = " . (int) $type_id . " "
 				: "AND ca.object_type_id = " . (int) $type_id . " ") // TODO: explode array IN
 			, $cache);
@@ -1647,7 +1647,7 @@ class Wacko
 			"FROM " . $this->db->table_prefix . "category c " .
 				"INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id) " .
 			"WHERE ca.object_id IN (" . $this->ids_string($object_ids) . ") " .
-			($type_id != 0
+			($type_id
 				? "AND ca.object_type_id = " . (int) $type_id . " "
 				: "AND ca.object_type_id = " . (int) $type_id . " " ) // TODO: explode array IN
 			, $cache))
@@ -2053,7 +2053,7 @@ class Wacko
 						"LIMIT 1");
 
 					// log event
-					if ($this->page['comment_on_id'] != 0)
+					if ($this->page['comment_on_id'])
 					{
 						// comment modified
 						$this->log(6, Ut::perc_replace($this->_t('LogCommentEdited', SYSTEM_LANG), $tag . ' ' . $title));
@@ -5166,7 +5166,7 @@ class Wacko
 			"SELECT {$fiels_default} " .
 			"FROM " . $this->db->table_prefix . "usergroup g " .
 				"LEFT JOIN " . $this->db->table_prefix . "user u ON (g.moderator_id = u.user_id) " .
-			"WHERE " . ( $group_id != 0
+			"WHERE " . ( $group_id
 				? "g.group_id		= " . (int) $group_id . " "
 				: "g.group_name		= " . $this->db->q($group_name) . " ") .
 			"LIMIT 1");
@@ -5560,7 +5560,7 @@ class Wacko
 	// Returns boolean indicating if the current user is allowed to see comments at all
 	function user_allowed_comments(): bool
 	{
-		return $this->db->enable_comments != 0 && ($this->db->enable_comments != 2 || $this->get_user());
+		return $this->db->enable_comments && ($this->db->enable_comments != 2 || $this->get_user());
 	}
 
 	// COMMENTS AND COUNTS
