@@ -16,7 +16,7 @@ if ($this->has_access('read'))
 	$sort_comment	= $this->get_user_setting('sorting_comments');
 	$sort_comment	??= $this->db->sorting_comments;
 
-	$show_comments	= (int) ($_GET['show_comments'] ?? null);
+	$show_comments	= (int) ($_GET['show_comments'] ?? 0);
 
 	$tpl->enter('cp_s_');
 
@@ -26,8 +26,8 @@ if ($this->has_access('read'))
 	if (isset($show_comments))
 	{
 		$this->sess->show_comments[$this->page['page_id']] = match ($show_comments) {
-			0 => 0,
-			1 => 1,
+			1		=> 1,
+			default	=> 0,
 		};
 	}
 

@@ -359,7 +359,7 @@ if ($this->has_access('read')
 
 			// publish anonymously
 			if (($this->page
-					&& $this->db->publish_anonymously != 0
+					&& $this->db->publish_anonymously
 					&& $this->has_access('write', '', GUEST))
 				|| (!$this->page && $this->has_access('create', '', GUEST)))
 			{
