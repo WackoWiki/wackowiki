@@ -11,7 +11,7 @@
 			<table>
 				<tr>
 					<td>
-						<label for="file_upload">[ ' _t: UploadFor ' ]:&nbsp;</label>
+						<label for="file_upload">[ ' _t: UploadFor ' ]&nbsp;</label>
 					</td>
 					<td class="nowrap">
 						<input type="file" name="file" id="file_upload" [ ' accecpt ' ] required>&nbsp;([ ' _t: UploadMax ' ] [ ' size ' ])
@@ -41,7 +41,7 @@
 					[ ' // not in use ' ]
 					<tr>
 						<td class="t-right">
-							<label for="upload_dest_file">[ ' _t: UploadAsName ' ]:&nbsp;</label>
+							<label for="upload_dest_file">[ ' _t: UploadAsName ' ]&nbsp;</label>
 						</td>
 						<td>
 							<input type="text" name="file_dest_name" id="upload_dest_file" size="60" maxlength="250" value="">
@@ -51,7 +51,7 @@
 				[= desc _ =
 					<tr>
 						<td class="t-right">
-							<label for="upload_desc">[ ' _t: FileDesc ' ]:&nbsp;</label>
+							<label for="upload_desc">[ ' _t: FileDesc ' ]&nbsp;</label>
 						</td>
 						<td>
 							<input type="text" name="file_description" id="upload_desc" size="60" maxlength="250">

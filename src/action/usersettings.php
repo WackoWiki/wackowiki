@@ -61,7 +61,7 @@ else if ($user = $this->get_user())
 		if ($error)
 		{
 			$this->set_message($error, 'error');
-			$this->set_message($this->_t('SettingsNotStored'));
+			$this->set_message($this->_t('SettingsNotStored')); // message set does not exist!
 		}
 		else
 		{
@@ -201,7 +201,7 @@ else if ($user = $this->get_user())
 			$tpl->intercom		= $user['allow_intercom'];
 
 			// minor edit
-			if ($this->page && $this->db->minor_edit != 0)
+			if ($this->page && $this->db->minor_edit)
 			{
 				$tpl->m_minor	= $user['notify_minor_edit'];
 			}

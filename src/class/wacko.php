@@ -8159,7 +8159,7 @@ class Wacko
 			};
 
 			$pagination['offset']	= $perpage * ($page - 1);
-			$navigation				= $this->_t('ToThePage') . ': ';
+			$navigation				= $this->_t('ToThePage') . ' ';
 
 			if ($page > 1)
 			{

@@ -10,36 +10,36 @@
 			[ ' csrf: remove_file ' ]
 			<table class="filemeta tbl-fixed">
 				<tr>
-					<th scope="row">[ ' _t: FileDesc ' ]:</th>
+					<th scope="row">[ ' _t: FileDesc ' ]</th>
 					<td>[ ' file.file_description ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileSize ' ]:</th>
+					<th scope="row">[ ' _t: FileSize ' ]</th>
 					<td>[ ' size ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: UploadBy ' ]:</th>
+					<th scope="row">[ ' _t: UploadBy ' ]</th>
 					<td>[ ' user ' ]</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileAdded ' ]:</th>
+					<th scope="row">[ ' _t: FileAdded ' ]</th>
 					<td>[ ' file.created | time_formatted ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileAttachedTo ' ]:</th>
+					<th scope="row">[ ' _t: FileAttachedTo ' ]</th>
 					<td>[ ' location ' ]</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileUsage ' ]:</th>
+					<th scope="row">[ ' _t: FileUsage ' ]</th>
 					<td>[ ' fileusage ' ]</td>
 				</tr>
 			</table>
@@ -85,7 +85,7 @@
 			=]
 			<table class="filemeta tbl-fixed">
 				<tr>
-					<th scope="row">[ ' _t: FileSyntax ' ]:</th>
+					<th scope="row">[ ' _t: FileSyntax ' ]</th>
 					<td>
 					[= s _ =
 						<code>[ ' syntax ' ]</code><br>
@@ -99,39 +99,39 @@
 					</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileDesc ' ]:</th>
+					<th scope="row">[ ' _t: FileDesc ' ]</th>
 					<td><strong>[ ' desc ' ]</strong></td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileCaption ' ]:</th>
+					<th scope="row">[ ' _t: FileCaption ' ]</th>
 					<td>[ ' caption | nl2br ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileSize ' ]:</th>
+					<th scope="row">[ ' _t: FileSize ' ]</th>
 					<td>[ ' size ' ]</td>
 				</tr>
 				[= p _ =
 					<tr>
-						<th scope="row">[ ' _t: FileDimension ' ]:</th>
+						<th scope="row">[ ' _t: FileDimension ' ]</th>
 						<td>[ ' width | number 0 , . ' ' ] × [ ' height | number 0 , . ' ' ] px</td>
 					</tr>
 				=]
 				<tr>
-					<th scope="row">[ ' _t: MimeType ' ]:</th>
+					<th scope="row">[ ' _t: MimeType ' ]</th>
 					<td>[ ' mime ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: UploadBy ' ]:</th>
+					<th scope="row">[ ' _t: UploadBy ' ]</th>
 					<td>[ ' user ' ]</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileAdded ' ]:</th>
+					<th scope="row">[ ' _t: FileAdded ' ]</th>
 					<td>[ ' created ' ]</td>
 				</tr>
 				<tr>
@@ -139,17 +139,17 @@
 				</tr>
 				[= l _ =
 					<tr>
-						<th scope="row">[ ' _t: License ' ]:</th>
+						<th scope="row">[ ' _t: License ' ]</th>
 						<td>[ ' license ' ]</td>
 					</tr>
 				=]
 				[= a _ =
 					<tr>
-						<th scope="row">[ ' _t: FileAuthor ' ]:</th>
+						<th scope="row">[ ' _t: FileAuthor ' ]</th>
 						<td>[ ' author ' ]</td>
 					</tr>
 					<tr>
-						<th scope="row">[ ' _t: FileSource ' ]:</th>
+						<th scope="row">[ ' _t: FileSource ' ]</th>
 						<td>
 						[= url _ =
 							<a href="[ ' href | e ' ]">
@@ -166,16 +166,16 @@
 					</tr>
 				=]
 				<tr>
-					<th scope="row">[ ' _t: FileAttachedTo ' ]:</th>
+					<th scope="row">[ ' _t: FileAttachedTo ' ]</th>
 					<td>[ ' location ' ]</td>
 				</tr>
 				<tr>
-					<th scope="row">[ ' _t: FileUsage ' ]:</th>
+					<th scope="row">[ ' _t: FileUsage ' ]</th>
 					<td>[ ' fileusage ' ]</td>
 				</tr>
 				[= c _ =
 					<tr>
-						<th scope="row">[ ' _t: Categories ' ]:</th>
+						<th scope="row">[ ' _t: Categories ' ]</th>
 						<td>[ ' categories ' ]</td>
 					</tr>
 				=]
@@ -197,7 +197,7 @@
 				<table class="filemeta">
 					<tr>
 						<th scope="row">
-							<label for="UploadDesc">[ ' _t: FileDesc ' ]:</label>
+							<label for="UploadDesc">[ ' _t: FileDesc ' ]</label>
 						</th>
 						<td>
 							<input type="text" id="UploadDesc" name="file_description" maxlength="250" size="80" value="[ ' desc | e attr ' ]">
@@ -205,7 +205,7 @@
 					</tr>
 					<tr>
 						<th scope="row">
-							<label for="file_caption">[ ' _t: FileCaption ' ]:</label>
+							<label for="file_caption">[ ' _t: FileCaption ' ]</label>
 						</th>
 						<td>
 							<textarea id="file_caption" name="caption" rows="6" cols="70">[ ' caption | pre ' ]</textarea>
