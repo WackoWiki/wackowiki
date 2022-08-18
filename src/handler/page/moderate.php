@@ -16,12 +16,12 @@ $tpl->moderate =  ($this->forum
 	: '');
 
 // local functions
-function moderate_page_exists(&$engine, $tag)
+$moderate_page_exists = function($tag)
 {
-	if ($engine->db->load_single(
+	if ($this->db->load_single(
 		"SELECT page_id " .
-		"FROM " . $engine->db->table_prefix . "page " .
-		"WHERE tag = " . $engine->db->q($tag) . " " .
+		"FROM " . $this->db->table_prefix . "page " .
+		"WHERE tag = " . $this->db->q($tag) . " " .
 		"LIMIT 1"))
 	{
 		return true;
@@ -30,86 +30,85 @@ function moderate_page_exists(&$engine, $tag)
 	{
 		return false;
 	}
-}
+};
 
 // applicable for both topics and comments
-function moderate_delete_page(&$engine, $tag)
+$moderate_delete_page = function($tag)
 {
 	if (!$tag)
 	{
 		return false;
 	}
 
-	$engine->remove_referrers($tag);
-	$engine->remove_links($tag);
-	$engine->remove_acls($tag);
-	$engine->remove_watches($tag);
-	$engine->remove_ratings($tag);
-	$engine->remove_page_categories($tag);
-	$engine->remove_comments($tag);
-	$engine->remove_files_perpage($tag);
-	$engine->remove_page($engine->get_page_id($tag));
+	$this->remove_referrers($tag);
+	$this->remove_links($tag);
+	$this->remove_acls($tag);
+	$this->remove_watches($tag);
+	$this->remove_page_categories($tag);
+	$this->remove_comments($tag);
+	$this->remove_files_perpage($tag);
+	$this->remove_page($this->get_page_id($tag));
 
 	return true;
-}
+};
 
-function moderate_rename_topic(&$engine, $old_tag, $new_tag, $title = '')
+$moderate_rename_topic = function($old_tag, $new_tag, $title = '')
 {
 	// set forum context
-	$forum_context	= $engine->forum;
-	$engine->forum	= true;
+	$forum_context	= $this->forum;
+	$this->forum	= true;
 
 	$tag = $new_tag;
 
-	$engine->rename_page($old_tag, $new_tag, $tag);
-	$engine->remove_referrers($old_tag);
-	$engine->remove_links($old_tag);
-	$engine->clear_cache_wanted_page($new_tag);
-	$engine->clear_cache_wanted_page($tag);
+	$this->rename_page($old_tag, $new_tag, $tag);
+	$this->remove_referrers($old_tag);
+	$this->remove_links($old_tag);
+	$this->clear_cache_wanted_page($new_tag);
+	$this->clear_cache_wanted_page($tag);
 
 	// rerender page and update page_link table in new context
-	$page = $engine->load_page($new_tag);
-	$engine->current_context++;
-	$engine->context[$engine->current_context] = $new_tag;
-	$engine->update_link_table($page['page_id'], $page['body_r']);
-	$engine->current_context--;
+	$page = $this->load_page($new_tag);
+	$this->current_context++;
+	$this->context[$this->current_context] = $new_tag;
+	$this->update_link_table($page['page_id'], $page['body_r']);
+	$this->current_context--;
 
 	// update title in meta and body if needed
 	if ($title != '')
 	{
 		// resave modified page
-		$engine->save_page($new_tag, $page['body'], $title, '', '', '', '', '', '', true, false);
+		$this->save_page($new_tag, $page['body'], $title, '', '', '', '', '', '', true, false);
 	}
 
 	// restore forum context
-	$engine->forum = $forum_context;
+	$this->forum = $forum_context;
 
 	return true;
-}
+};
 
-function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
+$moderate_merge_topics = function($base, $topics, $move_topics = true)
 {
 	// set forum context
-	$forum_context	= $engine->forum;
-	$engine->forum	= true;
+	$forum_context	= $this->forum;
+	$this->forum	= true;
 
 	if (!$topics || !$base)
 	{
 		return false;
 	}
 
-	$base_id = $engine->get_page_id($base);
+	$base_id = $this->get_page_id($base);
 
 	foreach ($topics as $topic)
 	{
 		// we don't really want to touch the base topic
 		if ($topic != $base)
 		{
-			$topic_id = $engine->get_page_id($topic);
+			$topic_id = $this->get_page_id($topic);
 
 			// move comments to the base topic
-			$engine->db->sql_query(
-				"UPDATE " . $engine->db->table_prefix . "page SET " .
+			$this->db->sql_query(
+				"UPDATE " . $this->db->table_prefix . "page SET " .
 					"comment_on_id = " . (int) $base_id . " " .
 				"WHERE comment_on_id = " . (int) $topic_id);
 
@@ -117,41 +116,41 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 			if ($move_topics)
 			{
 				// find latest number
-				$status	= $engine->db->load_all("SHOW TABLE STATUS");
+				$status	= $this->db->load_all("SHOW TABLE STATUS");
 
 				foreach ($status as $row)
 				{
-					if ($row['Name'] == $engine->db->table_prefix . 'page')
+					if ($row['Name'] == $this->db->table_prefix . 'page')
 					{
 						$num = (int) $row['Auto_increment'];
 					}
 				}
 
 				// resave topic body as comment
-				$page = $engine->load_page($topic);
+				$page = $this->load_page($topic);
 
-				$engine->save_page('Comment' . $num, $page['body'], $page['title'], '', '', '', $base_id, '', '', true);
+				$this->save_page('Comment' . $num, $page['body'], $page['title'], '', '', '', $base_id, '', '', true);
 
 				// restore creation date
-				$engine->db->sql_query(
-					"UPDATE " . $engine->db->table_prefix . "page SET " .
-						"modified		= " . $engine->db->q($page['modified']) . ", " .
-						"created		= " . $engine->db->q($page['created']) . ", " .
-						"commented		= " . $engine->db->q($page['commented']) . ", " .
+				$this->db->sql_query(
+					"UPDATE " . $this->db->table_prefix . "page SET " .
+						"modified		= " . $this->db->q($page['modified']) . ", " .
+						"created		= " . $this->db->q($page['created']) . ", " .
+						"commented		= " . $this->db->q($page['commented']) . ", " .
 						"owner_id		= " . (int) $page['owner_id'] . ", " .
 						"user_id		= " . (int) $page['user_id'] . ", " .
-						"ip				= " . $engine->db->q($page['ip']) . " " .
-					"WHERE tag = " . $engine->db->q('Comment' . $num));
+						"ip				= " . $this->db->q($page['ip']) . " " .
+					"WHERE tag = " . $this->db->q('Comment' . $num));
 
 				// remove old page remnants
-				moderate_delete_page($engine, $topic);
+				$moderate_delete_page($topic);
 			}
 		}
 	}
 
 	// update acl
 	// Give comments the same read rights as their parent page
-	$read_acl		= $engine->load_acl($base_id, 'read');
+	$read_acl		= $this->load_acl($base_id, 'read');
 	$read_acl		= $read_acl['list'];
 	$write_acl		= '';
 	$comment_acl	= '';
@@ -159,83 +158,83 @@ function moderate_merge_topics(&$engine, $base, $topics, $move_topics = true)
 	$upload_acl		= '';
 
 	// update page_link table
-	$comments = $engine->db->load_all(
+	$comments = $this->db->load_all(
 		"SELECT page_id, tag, body_r " .
-		"FROM " . $engine->db->table_prefix . "page " .
+		"FROM " . $this->db->table_prefix . "page " .
 		"WHERE comment_on_id = " . (int) $base_id);
 
 	foreach ($comments as $comment)
 	{
-		$engine->context[++$engine->current_context] = $comment['tag'];
-		$engine->update_link_table($comment['page_id'], $comment['body_r']);
-		$engine->current_context--;
+		$this->context[++$this->current_context] = $comment['tag'];
+		$this->update_link_table($comment['page_id'], $comment['body_r']);
+		$this->current_context--;
 
 		// saving acls
-		$engine->save_acl($comment['page_id'], 'write',		$write_acl);
-		$engine->save_acl($comment['page_id'], 'read',		$read_acl);
-		$engine->save_acl($comment['page_id'], 'comment',	$comment_acl);
-		$engine->save_acl($comment['page_id'], 'create',	$create_acl);
-		$engine->save_acl($comment['page_id'], 'upload',	$upload_acl);
+		$this->save_acl($comment['page_id'], 'write',		$write_acl);
+		$this->save_acl($comment['page_id'], 'read',		$read_acl);
+		$this->save_acl($comment['page_id'], 'comment',	$comment_acl);
+		$this->save_acl($comment['page_id'], 'create',	$create_acl);
+		$this->save_acl($comment['page_id'], 'upload',	$upload_acl);
 	}
 
 	// recount comments for the base topic
-	$engine->db->sql_query(
-		"UPDATE " . $engine->db->table_prefix . "page SET " .
-			"comments	= " . (int) $engine->count_comments($base_id) . ", " .
+	$this->db->sql_query(
+		"UPDATE " . $this->db->table_prefix . "page SET " .
+			"comments	= " . (int) $this->count_comments($base_id) . ", " .
 			"commented	= UTC_TIMESTAMP() " .
 		"WHERE page_id = " . (int) $base_id . " " .
 		"LIMIT 1");
 
 	// restore forum context
-	$engine->forum = $forum_context;
+	$this->forum = $forum_context;
 
 	return true;
-}
+};
 
-function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title)
+$moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title)
 {
 	if (is_array($comment_ids) === false)
 	{
 		return false;
 	}
 
-	$old_page_id	= $engine->get_page_id($old_tag);
+	$old_page_id	= $this->get_page_id($old_tag);
 
 	// set forum context
-	$forum_context	= $engine->forum;
-	$engine->forum	= true;
+	$forum_context	= $this->forum;
+	$this->forum	= true;
 
 	// resave first comment as new topic page
 	$first_page_id	= array_shift($comment_ids);
-	$page			= $engine->load_page('', $first_page_id);
+	$page			= $this->load_page('', $first_page_id);
 
 	// temporary unset page context
-	$old_page = $engine->page;
-	unset($engine->page);
+	$old_page = $this->page;
+	unset($this->page);
 
 	// TODO: build title
 	$title = $page['title'];
 
 	// TODO: pass user, else save_page might fail due missing write privilege
 	// resave modified body
-	$engine->save_page($new_tag, $page['body'], $title, '', '', '', 0, '', '', true);
+	$this->save_page($new_tag, $page['body'], $title, '', '', '', 0, '', '', true);
 
 	// set page context back
-	$engine->page	= $old_page;
+	$this->page	= $old_page;
 
-	$new_page_id	= $engine->get_page_id($new_tag);
+	$new_page_id	= $this->get_page_id($new_tag);
 
 	// bug-resistent check: has page been really resaved?
 	if (!$new_page_id)
 	{
-		$engine->forum = $forum_context;
+		$this->forum = $forum_context;
 
 		return false;
 	}
 
 	// update acl
 	// Give comments the same read rights as their parent page
-	$read_acl		= $engine->load_acl($new_page_id, 'read');
+	$read_acl		= $this->load_acl($new_page_id, 'read');
 	$read_acl		= $read_acl['list'];
 	$write_acl		= '';
 	$comment_acl	= '';
@@ -243,60 +242,69 @@ function moderate_split_topic(&$engine, $comment_ids, $old_tag, $new_tag, $title
 	$upload_acl		= '';
 
 	// restore original metadata
-	$engine->db->sql_query(
-		"UPDATE " . $engine->db->table_prefix . "page SET " .
-			"modified		= " . $engine->db->q($page['modified']) . ", " .
-			"created		= " . $engine->db->q($page['created']) . ", " .
+	$this->db->sql_query(
+		"UPDATE " . $this->db->table_prefix . "page SET " .
+			"modified		= " . $this->db->q($page['modified']) . ", " .
+			"created		= " . $this->db->q($page['created']) . ", " .
 			"owner_id		= " . (int) $page['owner_id'] . ", " .
 			"user_id		= " . (int) $page['user_id'] . ", " .
-			"ip				= " . $engine->db->q($page['ip']) . " " .
+			"ip				= " . $this->db->q($page['ip']) . " " .
 		"WHERE page_id = " . (int) $new_page_id);
 
 	// move remaining comments to the new topic
 	foreach ($comment_ids as $comment_id)
 	{
-		$engine->db->sql_query(
-			"UPDATE " . $engine->db->table_prefix . "page SET " .
+		$this->db->sql_query(
+			"UPDATE " . $this->db->table_prefix . "page SET " .
 				"comment_on_id = " . (int) $new_page_id . " " .
 			"WHERE page_id = " . (int) $comment_id);
 
 		// saving acls
-		$engine->save_acl($comment_id, 'write',		$write_acl);
-		$engine->save_acl($comment_id, 'read',		$read_acl);
-		$engine->save_acl($comment_id, 'comment',	$comment_acl);
-		$engine->save_acl($comment_id, 'create',	$create_acl);
-		$engine->save_acl($comment_id, 'upload',	$upload_acl);
+		$this->save_acl($comment_id, 'write',		$write_acl);
+		$this->save_acl($comment_id, 'read',		$read_acl);
+		$this->save_acl($comment_id, 'comment',	$comment_acl);
+		$this->save_acl($comment_id, 'create',	$create_acl);
+		$this->save_acl($comment_id, 'upload',	$upload_acl);
 	}
 
 	// remove old first comment
-	moderate_delete_page($engine, $page['tag']);
+	$moderate_delete_page($page['tag']);
 
 	// update page_link table
-	$page = $engine->load_page('', $new_page_id);
-	$engine->current_context++;
-	$engine->context[$engine->current_context] = $new_tag;
-	$engine->update_link_table($page['page_id'], $page['body_r']);
-	$engine->current_context--;
+	$page = $this->load_page('', $new_page_id);
+	$this->current_context++;
+	$this->context[$this->current_context] = $new_tag;
+	$this->update_link_table($page['page_id'], $page['body_r']);
+	$this->current_context--;
 
 	// recount comments for old and new topics
-	$engine->db->sql_query(
-		"UPDATE " . $engine->db->table_prefix . "page SET " .
-			"comments	= " . (int) $engine->count_comments($new_page_id) . ", " .
+	$this->db->sql_query(
+		"UPDATE " . $this->db->table_prefix . "page SET " .
+			"comments	= " . (int) $this->count_comments($new_page_id) . ", " .
 			"commented	= UTC_TIMESTAMP() " .
 		"WHERE page_id = " . (int) $new_page_id . " " .
 		"LIMIT 1");
 
-	$engine->db->sql_query(
-		"UPDATE " . $engine->db->table_prefix . "page SET " .
-			"comments = " . (int) $engine->count_comments($old_page_id) . " " .
+	$this->db->sql_query(
+		"UPDATE " . $this->db->table_prefix . "page SET " .
+			"comments = " . (int) $this->count_comments($old_page_id) . " " .
 		"WHERE page_id = " . (int) $old_page_id . " " .
 		"LIMIT 1");
 
 	// restore forum context
-	$engine->forum = $forum_context;
+	$this->forum = $forum_context;
 
 	return true;
-}
+};
+
+$write_comment_feed = function()
+{
+	if ($this->db->enable_feeds)
+	{
+		$xml = new Feed($this);
+		$xml->comments();
+	}
+};
 
 // END FUNCTIONS
 
@@ -391,9 +399,6 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	reset($set);
 	unset($n, $page_id);
 
-	// creating rss object
-	$xml = new Feed($this);
-
 	////// BEGIN SUBFORUM MODERATION //////
 	if ($this->forum !== true && $forum_cluster)
 	{
@@ -414,16 +419,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				foreach ($set as $page_id)
 				{
 					$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-					moderate_delete_page($this, $page['tag']);
+					$moderate_delete_page($page['tag']);
 					$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', SYSTEM_LANG), $page['tag'], $page['user_id']));
 				}
 
 				unset($accept_action);
 
-				if ($this->db->enable_feeds)
-				{
-					$xml->comments();
-				}
+				$write_comment_feed();
 
 				$set = [];
 				$this->set_message($this->_t('ModerateTopicsDeleted'), 'success');
@@ -447,7 +449,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$old_tags[] = $this->get_page_tag($page_id);
 					$new_tags[] = $section . mb_substr($old_tags[$i], mb_strrpos($old_tags[$i], '/'));
 
-					if (moderate_page_exists($this, $new_tags[$i++]) === true)
+					if ($moderate_page_exists($new_tags[$i++]) === true)
 					{
 						$error[] = '<span class="underline">«' . $this->get_page_title('', $page_id) . '»</span>';
 					}
@@ -464,17 +466,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					foreach ($set as $page_id)
 					{
-						moderate_rename_topic($this, $old_tags[$i], $new_tags[$i]);
+						$moderate_rename_topic($old_tags[$i], $new_tags[$i]);
 						$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tags[$i], $new_tags[$i]));
 						$i++;
 					}
 
 					unset($accept_action, $i, $old_tags, $new_tags);
 
-					if ($this->db->enable_feeds)
-					{
-						$xml->comments();
-					}
+					$write_comment_feed();
 
 					$set = [];
 					$this->set_message($this->_t('ModerateTopicsRelocated'), 'success');
@@ -500,7 +499,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				// check new tag existence
 				if ($old_tag != $this->tag . '/' . $tag
-					&& moderate_page_exists($this, $this->tag . '/' . $tag) === true)
+					&& $moderate_page_exists($this->tag . '/' . $tag) === true)
 				{
 					$error = $this->_t('ModerateRenameExists');
 				}
@@ -508,14 +507,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// ok, then rename page
 				if ($tag != '' && !$error)
 				{
-					moderate_rename_topic($this, $old_tag, $this->tag . '/' . $tag, $title);
+					$moderate_rename_topic($old_tag, $this->tag . '/' . $tag, $title);
 					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $this->tag . '/' . $tag . ' ' . $title));
 					unset($accept_action, $old_tag, $tag, $title);
 
-					if ($this->db->enable_feeds)
-					{
-						$xml->comments();
-					}
+					$write_comment_feed();
 
 					$set = [];
 					$this->set_message($this->_t('ModerateTopicsRenamed'), 'success');
@@ -543,16 +539,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					$topics[] = $this->get_page_tag($page_id);
 				}
 
-				moderate_merge_topics($this, $base, $topics);
+				$moderate_merge_topics($base, $topics);
 				$this->log(3, Ut::perc_replace($this->_t('LogMergedPages', SYSTEM_LANG),
 							'##' . implode('##, ##', $topics) . '##', $base));
 
 				unset($accept_action, $topics);
 
-				if ($this->db->enable_feeds)
-				{
-					$xml->comments();
-				}
+				$write_comment_feed();
 
 				$set = [];
 				$this->set_message($this->_t('ModerateTopicsMerged'), 'success');
@@ -785,13 +778,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 			if (isset($_POST['accept']))
 			{
 				$this->log(1, Ut::perc_replace($this->_t('LogRemovedPage', SYSTEM_LANG), $this->page['tag'], $this->page['user_id']));
-				moderate_delete_page($this, $this->tag);
+				$moderate_delete_page($this->tag);
 				unset($accept_action);
 
-				if ($this->db->enable_feeds)
-				{
-					$xml->comments();
-				}
+				$write_comment_feed();
 
 				$this->set_message($this->_t('ModerateTopicDeleted'), 'success');
 				$this->http->redirect($this->href('moderate', mb_substr($this->tag, 0, mb_strrpos($this->tag, '/'))));
@@ -824,14 +814,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					if (!empty($cluster) && $cluster != '/')
 					{
-						if (moderate_page_exists($this, $cluster) === false)
+						if ($moderate_page_exists($cluster) === false)
 						{
 							$error = $this->_t('ModerateMoveNotExists') . ' <code>' . Ut::html($cluster) . '</code>';
 						}
 					}
 					else if (!empty($section))
 					{
-						if (moderate_page_exists($this, $new_tag) === true)
+						if ($moderate_page_exists($new_tag) === true)
 						{
 							$error = '<span class="underline">«' . $this->page['title'] . '»</span>';
 						}
@@ -839,7 +829,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 				else if ($cluster != '/')
 				{
-					if (moderate_page_exists($this, $cluster) === false)
+					if ($moderate_page_exists($cluster) === false)
 					{
 						$error = $this->_t('ModerateMoveNotExists');
 					}
@@ -855,14 +845,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				}
 				else
 				{
-					moderate_rename_topic($this, $old_tag, $new_tag);
+					$moderate_rename_topic($old_tag, $new_tag);
 					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $new_tag));
 					unset($accept_action);
 
-					if ($this->db->enable_feeds)
-					{
-						$xml->comments();
-					}
+					$write_comment_feed();
 
 					$this->set_message($this->_t('ModeratePageMoved'), 'success');
 					$this->http->redirect($this->href('moderate', $new_tag));
@@ -889,7 +876,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$new_tag	= ($section ? $section . '/' : '') . $tag;
 
 				// check new tag existence
-				if ($old_tag == $new_tag || moderate_page_exists($this, $new_tag) === true)
+				if ($old_tag == $new_tag || $moderate_page_exists($new_tag) === true)
 				{
 					$error = $this->_t('ModerateRenameExists');
 				}
@@ -897,14 +884,11 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				// ok, then rename page
 				if ($tag != '' && !$error)
 				{
-					moderate_rename_topic($this, $old_tag, $new_tag, $title);
+					$moderate_rename_topic($old_tag, $new_tag, $title);
 					$this->log(3, Ut::perc_replace($this->_t('LogRenamedPage', SYSTEM_LANG), $old_tag, $new_tag . ' ' . $title));
 					unset($accept_action);
 
-					if ($this->db->enable_feeds)
-					{
-						$xml->comments();
-					}
+					$write_comment_feed();
 
 					$this->set_message($this->_t('ModerateTopicRenamed'), 'success');
 					$this->http->redirect($this->href('moderate', $new_tag));
@@ -954,7 +938,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 					foreach ($set as $page_id)
 					{
 						$page = $this->load_page('', $page_id, '', LOAD_NOCACHE, LOAD_META);
-						moderate_delete_page($this, $page['tag']);
+						$moderate_delete_page($page['tag']);
 						$this->log(1, Ut::perc_replace($this->_t('LogRemovedComment', SYSTEM_LANG),
 								$this->get_page_tag($page['comment_on_id']) . ' ' . $this->get_page_title('', $page['comment_on_id']),
 								$page['user_name'],
@@ -971,10 +955,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					unset($accept_action);
 
-					if ($this->db->enable_feeds)
-					{
-						$xml->comments();
-					}
+					$write_comment_feed();
 
 					$set = [];
 					$this->set_message($this->_t('ModerateCommentsDeleted'), 'success');
@@ -1004,7 +985,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				{
 					// check new tag existence
 					if ($old_tag != $section . '/' . $tag
-						&& moderate_page_exists($this, $section . '/' . $tag) === true)
+						&& $moderate_page_exists($section . '/' . $tag) === true)
 					{
 						$error = $this->_t('ModerateRenameExists');
 					}
@@ -1012,7 +993,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				else
 				{
 					// check desired target tag existence
-					if (moderate_page_exists($this, $title) === false)
+					if ($moderate_page_exists($title) === false)
 					{
 						$error = $this->_t('ModerateMoveNotExists');
 					}
@@ -1057,17 +1038,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					if ($forum_cluster)
 					{
-						if (moderate_split_topic($this, $comment_ids, $old_tag, $section . '/' . $tag, $title) === true)
+						if ($moderate_split_topic($comment_ids, $old_tag, $section . '/' . $tag, $title) === true)
 						{
 							$this->log(3, Ut::perc_replace($this->_t('LogSplittedPage', SYSTEM_LANG),
 									$this->tag . ' ' . $this->page['title'],
 									$section . '/' . $tag . ' ' . $title));
 							unset($accept_action);
 
-							if ($this->db->enable_feeds)
-							{
-								$xml->comments();
-							}
+							$write_comment_feed();
 
 							$this->set_message($this->_t('ModerateCommentsSplited'), 'success');
 							$this->http->redirect($this->href('moderate', $section . '/' . $tag));
@@ -1134,10 +1112,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 								$title . ' ' . $this->get_page_title($title)));
 						unset($accept_action);
 
-						if ($this->db->enable_feeds)
-						{
-							$xml->comments();
-						}
+						$write_comment_feed();
 
 						$this->set_message($this->_t('ModerateCommentsMoved'), 'success');
 						$this->http->redirect($this->href('moderate'));
