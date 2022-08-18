@@ -8,7 +8,7 @@
 			<table class="formation">
 				<tr>
 					<td class="label">
-						<label for="search_file">[ ' _t: FileSearch ' ]:</label>
+						<label for="search_file">[ ' _t: FileSearch ' ]</label>
 					</td>
 					<td>
 						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase | e attr ' ]">

@@ -43,7 +43,7 @@
 				<br>
 
 				[= n _ =
-					<label for="edit_note">[ ' _t: EditNote ' ]:</label><br>
+					<label for="edit_note">[ ' _t: EditNote ' ]</label><br>
 					<input type="text" id="edit_note" name="edit_note" class="input-summary" maxlength="200" value="[ ' note | e attr ' ]" size="100">
 					<br>
 				=]
