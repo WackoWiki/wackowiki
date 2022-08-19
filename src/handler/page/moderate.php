@@ -86,7 +86,7 @@ $moderate_rename_topic = function($old_tag, $new_tag, $title = '')
 	return true;
 };
 
-$moderate_merge_topics = function($base, $topics, $move_topics = true)
+$moderate_merge_topics = function($base, $topics, $move_topics = true) use ($moderate_delete_page)
 {
 	// set forum context
 	$forum_context	= $this->forum;
@@ -170,8 +170,8 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true)
 		$this->current_context--;
 
 		// saving acls
-		$this->save_acl($comment['page_id'], 'write',		$write_acl);
-		$this->save_acl($comment['page_id'], 'read',		$read_acl);
+		$this->save_acl($comment['page_id'], 'write',	$write_acl);
+		$this->save_acl($comment['page_id'], 'read',	$read_acl);
 		$this->save_acl($comment['page_id'], 'comment',	$comment_acl);
 		$this->save_acl($comment['page_id'], 'create',	$create_acl);
 		$this->save_acl($comment['page_id'], 'upload',	$upload_acl);
@@ -191,7 +191,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true)
 	return true;
 };
 
-$moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title)
+$moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use ($moderate_delete_page)
 {
 	if (is_array($comment_ids) === false)
 	{
@@ -260,8 +260,8 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title)
 			"WHERE page_id = " . (int) $comment_id);
 
 		// saving acls
-		$this->save_acl($comment_id, 'write',		$write_acl);
-		$this->save_acl($comment_id, 'read',		$read_acl);
+		$this->save_acl($comment_id, 'write',	$write_acl);
+		$this->save_acl($comment_id, 'read',	$read_acl);
 		$this->save_acl($comment_id, 'comment',	$comment_acl);
 		$this->save_acl($comment_id, 'create',	$create_acl);
 		$this->save_acl($comment_id, 'upload',	$upload_acl);
@@ -321,7 +321,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 	$accept_action	= '';
 	$error			= null;
 
-	if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
+	if ($this->db->forum_cluster
+		&& mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 	{
 		$forum_cluster = true;
 	}
@@ -493,7 +494,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 				$tag		= utf8_trim($_POST['new_tag'], " \t");
 				$title		= $tag;
 				$this->sanitize_page_tag($tag);
-				$tag 		= utf8_ucwords($tag);
+				$tag		= utf8_ucwords($tag);
 				$tag		= preg_replace('/[^- \\w]/u', '', $tag);
 				$tag		= str_replace([' ', "\t"], '', $tag);
 
@@ -523,7 +524,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		else if (isset($_POST['merge']) && $set)
 		{
 			$accept_action	= 'merge';
-			$base		= $_POST['base'] ?? '';
+			$base			= $_POST['base'] ?? '';
 			$this->sanitize_page_tag($base);
 
 			if (count($set) < 2)
@@ -1236,7 +1237,12 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$tpl->action	= $accept_action;
 			$tpl->e_text	= $error;
-			$tpl->confirm	= Ut::perc_replace($this->_t('ModerateComDelConfirm'), count($set), (count($set) > 1 ? $this->_t('ModerateComments') : $this->_t('ModerateComment') ));
+			$tpl->confirm	= Ut::perc_replace(
+					$this->_t('ModerateComDelConfirm'),
+					count($set),
+					(count($set) > 1
+						? $this->_t('ModerateComments')
+						: $this->_t('ModerateComment') ));
 
 			$tpl->leave();
 		}
@@ -1262,13 +1268,16 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		$tpl->p			= (int) ($_GET['p'] ?? '');
 		$tpl->body		= $body;
 
-		if ($forum_cluster && $this->has_access('comment', $this->page['page_id'], $this->db->default_comment_acl) === true)
+		if ($forum_cluster)
 		{
-			$tpl->forum_unlocked	= true;
-		}
-		else
-		{
-			$tpl->forum_locked		= true;
+			if ($this->has_access('comment', $this->page['page_id'], $this->db->default_comment_acl) === true)
+			{
+				$tpl->forum_unlocked	= true;
+			}
+			else
+			{
+				$tpl->forum_locked		= true;
+			}
 		}
 
 		if ($this->has_access('comment', $this->page['page_id'], $this->db->default_comment_acl) === false)
