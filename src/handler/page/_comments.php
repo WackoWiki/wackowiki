@@ -11,36 +11,21 @@ $pagination = $this->pagination($this->page['comments'], $this->db->comments_cou
 // comments form output begins
 if ($this->has_access('read'))
 {
-	// sorting comments ASC / DESC
-	$sort_comment	= null;
-	$sort_comment	= $this->get_user_setting('sorting_comments');
-
-	if (!isset($sort_comment))
-	{
-		$sort_comment	= $this->db->sorting_comments;
-	}
-
-	$tpl->enter('cp_s_');
-
-	// store comments display in session
-	if (!isset($this->sess->show_comments[$this->page['page_id']]))
-	{
-		$this->sess->show_comments[$this->page['page_id']] = ($this->get_user_setting('show_comments') ? 1 : 0);
-	}
+	// 'show comments' status are stored in session
+	$show_comments		= &$this->sess->show_comments[$this->page['page_id']];
+	$show_comments		??= (bool) $this->get_user_setting('show_comments');
 
 	if (isset($_GET['show_comments']))
 	{
-		switch ($_GET['show_comments'])
-		{
-			case 1:
-				$this->sess->show_comments[$this->page['page_id']] = 1;
-				break;
-			case 0:
-			default:
-				$this->sess->show_comments[$this->page['page_id']] = 0;
-				break;
-		}
+		$show_comments = (bool)$_GET['show_comments'];
 	}
+
+	// sorting comments ASC / DESC
+	$sort_comment	= null;
+	$sort_comment	= $this->get_user_setting('sorting_comments');
+	$sort_comment	??= $this->db->sorting_comments;
+
+	$tpl->enter('cp_s_');
 
 	// display comments
 	if ($this->page && $this->sess->show_comments[$this->page['page_id']] || $this->forum)
@@ -214,23 +199,23 @@ if ($this->has_access('read'))
 
 		if (($c < 1) && $this->has_access('comment'))
 		{
-			$show_comments = $this->_t('Comments0');
+			$have_comments = $this->_t('Comments0');
 		}
 		else if	($c == 1)
 		{
-			$show_comments = $this->_t('Comments1');
+			$have_comments = $this->_t('Comments1');
 		}
 		else
 		{
-			$show_comments = Ut::perc_replace($this->_t('CommentsN'), $c);
+			$have_comments = Ut::perc_replace($this->_t('CommentsN'), $c);
 		}
 
 		// show link to show comment only if there is one or/and user has the right to add a new one
-		if (!empty($show_comments))
+		if (!empty($have_comments))
 		{
 			$tpl->href		= $this->href('', '', ['show_comments' => 1, '#' => 'header-comments']);
 			$tpl->title		= $this->_t('ShowComments');
-			$tpl->text		= $show_comments;
+			$tpl->text		= $have_comments;
 		}
 		else
 		{
