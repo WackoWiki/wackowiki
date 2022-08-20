@@ -32,7 +32,7 @@ if (@$this->page['tag'] !== $this->db->root_page)
 	$tpl->site_clink		= true;
 }
 
-// if user are logged, shows 'UserName'
+// if user is logged in, shows 'UserName'
 if ($logged_in = $this->get_user())
 {
 	$tpl->uare_link			= $this->link($this->db->users_page . '/' . $this->get_user_name(), '', $this->get_user_name());

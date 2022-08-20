@@ -150,12 +150,16 @@ function admin_maint_resync(&$engine, &$module)
 
 			// write feeds
 			$xml = new Feed($engine);
-			$xml->changes();
-			$xml->comments();
 
-			if ($engine->db->news_cluster)
+			if ($engine->db->enable_feeds)
 			{
-				$xml->feed();
+				$xml->changes();
+				$xml->comments();
+
+				if ($engine->db->news_cluster)
+				{
+					$xml->feed();
+				}
 			}
 
 			// update OpenSearch description file
@@ -167,6 +171,7 @@ function admin_maint_resync(&$engine, &$module)
 			unset($xml);
 
 			$engine->log(1, $engine->_t('LogFeedsUpdated', SYSTEM_LANG));
+			$engine->set_language($engine->user_lang, true);
 			$engine->show_message($engine->_t('FeedsUpdated'), 'success');
 		}
 		else if ($action == 'xml_sitemap')

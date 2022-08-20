@@ -304,7 +304,7 @@ $write_comment_feed = function()
 		$xml = new Feed($this);
 		$xml->comments();
 
-		$this->set_language($this->user_lang, true, true);
+		$this->set_language($this->user_lang, true);
 	}
 };
 
