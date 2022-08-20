@@ -29,7 +29,7 @@
 			</h1>
 		</div>
 		<div id="login-box">
-			[== // if user are logged, shows "You are UserName" ==]
+			[== // if user are logged, shows "UserName ( Account | Admin | Logout )" ==]
 			[= uare _ =
 				<span class="nobr">[ ' link ' ]</span>
 				<small> (

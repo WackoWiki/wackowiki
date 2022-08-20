@@ -145,7 +145,7 @@ if ($this->is_admin()
 					$xml->feed();
 				}
 
-				$this->set_language($this->user_lang, true, true);
+				$this->set_language($this->user_lang, true);
 			}
 		}
 
