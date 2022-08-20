@@ -128,6 +128,8 @@ if ($this->is_admin()
 
 		if ($this->remove_page($this->page['page_id'], $comment_on_id, $dontkeep))
 		{
+			$message[] = $this->_t('PageRemoved');
+
 			if ($this->db->enable_feeds)
 			{
 				$xml = new Feed($this);
@@ -142,9 +144,9 @@ if ($this->is_admin()
 				{
 					$xml->feed();
 				}
-			}
 
-			$message[] = $this->_t('PageRemoved');
+				$this->set_language($this->user_lang, true, true);
+			}
 		}
 
 		// remove ENTIRE cluster
