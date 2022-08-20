@@ -16,8 +16,9 @@ if (!($this->is_owner() || $this->is_admin() || $this->has_access('write', $this
 	$this->show_must_go_on();
 }
 
-$mode 	= '';
-$action	= $_POST['_action'] ?? null;
+$mode			= '';
+$action			= $_POST['_action'] ?? null;
+$custom_menus	= $this->db->custom_menus ?? false;
 
 if ($action === 'extended_properties')
 {
@@ -27,10 +28,11 @@ if ($action === 'extended_properties')
 			"footer_comments	= " . (int) $_POST['footer_comments'] . ", " .
 			"footer_files		= " . (int) $_POST['footer_files'] . ", " .
 			"footer_rating		= " . (int) $_POST['footer_rating'] . ", " .
-
-			"hide_toc			= " . (int) $_POST['hide_toc'] . ", " .
-			"hide_index			= " . (int) $_POST['hide_index'] . ", " .
-			"tree_level			= " . (int) $_POST['tree_level'] . ", " .
+			($custom_menus
+				?	"hide_toc			= " . (int) $_POST['hide_toc'] . ", " .
+					"hide_index			= " . (int) $_POST['hide_index'] . ", " .
+					"tree_level			= " . (int) $_POST['tree_level'] . ", "
+				:	"") .
 			($this->is_admin()
 				?	"allow_rawhtml		= " . (int) $_POST['allow_rawhtml'] . ", " .
 					"disable_safehtml	= " . (int) $_POST['disable_safehtml'] . ", "
@@ -89,9 +91,12 @@ if (isset($_GET['extended']))
 		#}
 
 		// hide_toc, hide_index, tree_level: used in custom theme menus
-		$tpl->hidetoc	= (int) $this->db->hide_toc;
-		$tpl->hideindex	= (int) $this->db->hide_index;
-		$tpl->treelevel	= (int) $this->db->tree_level;
+		if ($custom_menus)
+		{
+			$tpl->custom_hidetoc	= (int) $this->db->hide_toc;
+			$tpl->custom_hideindex	= (int) $this->db->hide_index;
+			$tpl->custom_treelevel	= (int) $this->db->tree_level;
+		}
 
 		$tpl->noindex	= (int) $this->page['noindex'];
 
@@ -101,7 +106,7 @@ if (isset($_GET['extended']))
 			$tpl->html_safe	= (int) $this->db->disable_safehtml;
 		}
 
-		$tpl->leave();
+		$tpl->leave(); // e_x_
 	}
 	else
 	{
@@ -159,7 +164,7 @@ else
 			}
 		}
 
-		$tpl->leave();
+		$tpl->leave(); // g_f_
 	}
 	else
 	{
