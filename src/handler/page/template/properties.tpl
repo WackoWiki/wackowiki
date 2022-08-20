@@ -33,28 +33,30 @@
 							</td>
 						</tr>
 						[= // hide_toc, hide_index, tree_level: used in custom theme menus =]
-						<tr>
-							<th scope="row">[ ' _t: MetaToc ' ]</th>
-							<td>
-								<input type="radio" id="tocOn" name="hide_toc"[ ' hidetoc | check 0 ' ]><label for="tocOn">[ ' _t: On ' ]</label>
-								<input type="radio" id="tocOff" name="hide_toc"[ ' hidetoc | check 1 ' ]><label for="tocOff">[ ' _t: Off ' ]</label>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">[ ' _t: MetaIndex ' ]</th>
-							<td>
-								<input type="radio" id="indexOn" name="hide_index"[ ' hideindex | check 0 ' ]><label for="indexOn">[ ' _t: On ' ]</label>
-								<input type="radio" id="indexOff" name="hide_index"[ ' hideindex | check 1 ' ]><label for="indexOff">[ ' _t: Off ' ]</label>
-							</td>
-						</tr>
-						<tr>
-							<th scope="row">[ ' _t: MetaIndexMode ' ]</th>
-							<td>
-								<input type="radio" id="indexmodeF" name="tree_level"[ ' treelevel | check 0 ' ]><label for="indexmodeF">[ ' _t: MetaIndexFull ' ]</label>
-								<input type="radio" id="indexmodeL" name="tree_level"[ ' treelevel | check 1 ' ]><label for="indexmodeL">[ ' _t: MetaIndexLower ' ]</label>
-								<input type="radio" id="indexmodeU" name="tree_level"[ ' treelevel | check 2 ' ]><label for="indexmodeU">[ ' _t: MetaIndexUpper ' ]</label>
-							</td>
-						</tr>
+						[= custom _ =
+							<tr>
+								<th scope="row">[ ' _t: MetaToc ' ]</th>
+								<td>
+									<input type="radio" id="tocOn" name="hide_toc"[ ' hidetoc | check 0 ' ]><label for="tocOn">[ ' _t: On ' ]</label>
+									<input type="radio" id="tocOff" name="hide_toc"[ ' hidetoc | check 1 ' ]><label for="tocOff">[ ' _t: Off ' ]</label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">[ ' _t: MetaIndex ' ]</th>
+								<td>
+									<input type="radio" id="indexOn" name="hide_index"[ ' hideindex | check 0 ' ]><label for="indexOn">[ ' _t: On ' ]</label>
+									<input type="radio" id="indexOff" name="hide_index"[ ' hideindex | check 1 ' ]><label for="indexOff">[ ' _t: Off ' ]</label>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">[ ' _t: MetaIndexMode ' ]</th>
+								<td>
+									<input type="radio" id="indexmodeF" name="tree_level"[ ' treelevel | check 0 ' ]><label for="indexmodeF">[ ' _t: MetaIndexFull ' ]</label>
+									<input type="radio" id="indexmodeL" name="tree_level"[ ' treelevel | check 1 ' ]><label for="indexmodeL">[ ' _t: MetaIndexLower ' ]</label>
+									<input type="radio" id="indexmodeU" name="tree_level"[ ' treelevel | check 2 ' ]><label for="indexmodeU">[ ' _t: MetaIndexUpper ' ]</label>
+								</td>
+							</tr>
+						=]
 						[= html _ =
 							<tr>
 								<th scope="row">[ ' _t: MetaHtml ' ]</th>
