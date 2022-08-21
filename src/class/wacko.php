@@ -2230,6 +2230,13 @@ class Wacko
 		}
 	}
 
+	function xml_file($name)
+	{
+		return
+			$this->db->base_path . XML_DIR . '/' .
+			$name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+	}
+
 	// COUNTER
 	// recount all comments for a given page
 	function count_comments($page_id, $user_id = null, $deleted = 0): int

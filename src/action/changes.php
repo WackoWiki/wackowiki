@@ -37,7 +37,7 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 
 	if (!$tag && !(int) $noxml)
 	{
-		$tpl->xml_href = $this->db->base_path . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+		$tpl->xml_href = $this->xml_file('changes');
 	}
 
 	$tpl->pagination_text = $pagination['text'];
@@ -58,9 +58,6 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 			}
 
 			$this->page_id_cache[$page['tag']] = $page['page_id'];
-
-			// page_size change
-			$size_delta = $page['page_size'] - $page['parent_size'];
 
 			// print entry
 			$tpl->l_revisions =
@@ -94,6 +91,8 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 				$tpl->l_edit_note = $page['edit_note'];
 			}
 
+			// page_size change
+			# $size_delta = $page['page_size'] - $page['parent_size'];
 			# $tpl->l_delta =  $this->delta_formatted($size_delta); // TODO: looks odd here
 		}
 	}
