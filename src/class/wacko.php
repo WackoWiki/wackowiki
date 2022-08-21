@@ -447,6 +447,13 @@ class Wacko
 		return $out;
 	}
 
+	// check and validate YYYY-MM-DD date
+	function validate_date($date): bool
+	{
+		return preg_match("/^(\d{4})-(\d{1,2})-(\d{1,2})$/", $date, $m)
+			&& checkdate(intval($m[2]), intval($m[3]), intval($m[1]));
+	}
+
 	// LANG FUNCTIONS
 	function set_translation($lang): void
 	{
@@ -2181,6 +2188,13 @@ class Wacko
 			$this->log(7, $this->_t('LogXmlSitemapGenerated', SYSTEM_LANG));
 			$this->sess->xml_sitemap_update = 0;
 		}
+	}
+
+	function xml_file($name)
+	{
+		return
+			$this->db->base_path . XML_DIR . '/' .
+			$name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
 	// COUNTER

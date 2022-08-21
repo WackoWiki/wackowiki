@@ -98,7 +98,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 
 	if (!(int) $noxml)
 	{
-		$tpl->xml_href = $this->db->base_path . XML_DIR . '/changes_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+		$tpl->xml_href = $this->xml_file('changes');
 	}
 
 	$pagination	= $this->pagination(count($pages), @$max, 'n', '', '');

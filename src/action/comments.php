@@ -84,7 +84,7 @@ if ($this->user_allowed_comments())
 
 		if ($tag == '' && !(int) $noxml)
 		{
-			$tpl->xml_href = $this->db->base_path . XML_DIR . '/comments_' . preg_replace('/[^a-zA-Z0-9]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+			$tpl->xml_href = $this->xml_file('comments');
 		}
 
 		$tpl->pagination_text = $pagination['text'];

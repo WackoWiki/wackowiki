@@ -10,6 +10,7 @@ if (!defined('IN_WACKO'))
 		[page="cluster"]
 		[mode="latest|week|from"]
 		[date="YYYY-MM-DD"]
+		[order="time|tag"]
 		[max=Number]
 		[title=1]
 		[noxml=1]
@@ -17,6 +18,7 @@ if (!defined('IN_WACKO'))
 */
 
 if (!isset($page))		$page = '/' . $this->tag;
+if (!isset($date))		$date = $_GET['date'] ?? '';
 
 $tag			= $this->unwrap_link($page);
 $error			= '';
@@ -30,6 +32,7 @@ if (!empty($tag))
 	}
 
 	if (!isset($max))	$max = 10;
+	if (!isset($order))	$order = '';
 	if (!isset($mode))	$mode = 'latest';
 	if (!isset($title))	$title = 1;
 	if (!isset($noxml))	$noxml = 1;
@@ -39,6 +42,14 @@ if (!empty($tag))
 	$prefix				= $this->db->table_prefix;
 	$blog_levels		= '/.+'; // see $this->db->news_levels;
 	$action				= $_POST['_action'] ?? null;
+
+	if ($date && !$this->validate_date($date))
+	{
+		$date			= '';
+	}
+
+							$order_by = "p.created DESC ";
+	if ($order == 'tag')	$order_by = "p.tag DESC";
 
 	// check privilege
 	$access = $this->has_access('create');
@@ -96,7 +107,7 @@ if (!empty($tag))
 			"INNER JOIN {$prefix}user u ON (p.owner_id = u.user_id) ";
 
 	$order_by_mode =
-		"ORDER BY p.created DESC ";
+		"ORDER BY " . $order_by . " ";
 
 	if ($mode == 'latest')
 	{
@@ -210,7 +221,7 @@ if (!empty($tag))
 	// displaying XML icon
 	if (!(int) $noxml)
 	{
-		$tpl->n_xml_href = $this->db->base_path . XML_DIR . '/news_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+		$tpl->n_xml_href = $this->xml_file('news');
 	}
 
 	// displaying articles
