@@ -37,13 +37,14 @@ $theme_translation = [
 ```
 
 The theme config file `wacko.all.php` overrides the default values, 
-it  enables you to set your own config-options as well as overwriting existing ones. 
+it enables you to set your own config-options as well as overwriting existing ones. 
 
 ```PHP
-// theme options =========
-$this->db->revisions_hide_cancel = 1;
-$this->db->site_desc  = 'New Theme for WackoWiki';
-$this->db->footer_inside = 0;
+// theme options ==============
+$this->db->custom_menus				= 0;
+$this->db->footer_inside			= 0;
+$this->db->revisions_hide_cancel	= 1;
+$this->db->site_desc				= 'New Theme for WackoWiki';
 // ============================
 
 $theme_translation = [

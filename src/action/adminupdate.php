@@ -338,26 +338,26 @@ if ($this->is_admin())
 				'================================================</strong>' . "\n";
 
 			$results .=
-				'<strong>' . 'VARCHAR(250): ' . "\n" .
+				'<strong>' . 'VARCHAR(255): ' . "\n" .
 				'Tables:  file, page, page_link and revision:</strong>' . "\n\n";
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}file
-					CHANGE file_name file_name VARCHAR(250) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE file_name file_name VARCHAR(255) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}page
-					CHANGE title title VARCHAR(250) COLLATE {$collation} NOT NULL DEFAULT '',
-					CHANGE tag tag VARCHAR(250) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE title title VARCHAR(255) COLLATE {$collation} NOT NULL DEFAULT '',
+					CHANGE tag tag VARCHAR(255) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}page_link
-					CHANGE to_tag to_tag VARCHAR(250) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE to_tag to_tag VARCHAR(255) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$this->db->sql_query("
 				ALTER TABLE {$prefix}revision
-					CHANGE title title VARCHAR(250) COLLATE {$collation} NOT NULL DEFAULT '',
-					CHANGE tag tag VARCHAR(250) COLLATE {$collation} NOT NULL DEFAULT '';");
+					CHANGE title title VARCHAR(255) COLLATE {$collation} NOT NULL DEFAULT '',
+					CHANGE tag tag VARCHAR(255) COLLATE {$collation} NOT NULL DEFAULT '';");
 
 			$results .=
 				'<strong>' . date('H:i:s') . ' - ' . 'Tables altered.' . "\n" .
