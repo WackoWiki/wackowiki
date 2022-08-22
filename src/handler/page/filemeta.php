@@ -6,10 +6,11 @@ if (!defined('IN_WACKO'))
 }
 
 /* TODO:
- - show for local files relative and absolute syntax (?)
  - move all non GUI code in attachment and upload class
  - thumbnails
  */
+
+// LOCAL FUNCTIONS
 
 $get_file = function ($file_id)
 {
@@ -20,6 +21,15 @@ $get_file = function ($file_id)
 			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
 		"WHERE f.file_id = " . (int) $file_id . " " .
 		"LIMIT 1", true);
+};
+
+$file_access = function ($file)
+{
+	return
+		$this->is_admin()
+		|| ($file['page_id']
+			&& ($this->page['owner_id'] == $this->get_user_id()))
+		|| ($file['user_id'] == $this->get_user_id());
 };
 
 $meta_navigation = function ($can_upload)
@@ -53,22 +63,19 @@ $clean_text = function ($string)
 	return $string;
 };
 
-$message		= '';
-$error			= '';
+// END FUNCTIONS
+
+$this->ensure_page(true);
+
+$action			= $_POST['_action'] ?? null;
 $can_upload		= $this->can_upload();
-
-$this->ensure_page(true); // TODO: upload for forums?
-
-$file = $get_file((int) @$_GET['file_id']);
+$file			= $get_file((int) @$_GET['file_id']);
 
 $mod_selector	= 'm';
 // tab navigation
 $tabs['show']	= 'FileViewProperties';
 
-if ($this->is_admin()
-	|| (isset($file['page_id']) && $file['page_id']
-		&& $this->page['owner_id'] == $this->get_user_id())
-	|| (isset($file['user_id']) && $file['user_id'] == $this->get_user_id()))
+if ($file_access($file))
 {
 	$tabs['edit']	= 'FileEditProperties';
 	$tabs['label']	= 'FileLabel';
@@ -90,92 +97,7 @@ $tpl->mode			= $this->_t($tabs[$mode]);
 $tpl->tabs			= $this->tab_menu($tabs, $mode, 'filemeta', ['file_id' => ($file['file_id'] ?? null)], $mod_selector);
 
 // 1. SHOW FORMS
-if ($mode == 'remove' && isset($file))
-{
-	// 1.a REMOVE FILE CONFIRMATION
-	$tpl->enter('r_');
-
-	if (!empty($file))
-	{
-		if ($this->is_admin()
-			|| ($file['page_id']
-				&& ($this->page['owner_id'] == $this->get_user_id()))
-			|| ($file['user_id'] == $this->get_user_id()))
-		{
-			if ($file['page_id'])
-			{
-				$path = 'file:/' . $file['tag'] . '/';
-			}
-			else
-			{
-				$path = 'file:/';
-			}
-
-			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
-			$tpl->file		= $file; // array -> [ ' file.field ' ]
-			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
-			$tpl->user		= $this->user_link($file['user_name'], true, false);
-
-			$tpl->location	= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
-			$tpl->fileusage	= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1]);
-			$tpl->notice	= $this->show_message($this->_t('FileRemoveConfirm'), 'warning', false);
-
-			if ($this->db->store_deleted_pages && $this->is_admin())
-			{
-				$tpl->dontkeep = true;
-			}
-		}
-		else
-		{
-			$this->set_message($this->_t('FileRemoveDenied'), 'error');
-		}
-	}
-	else
-	{
-		#$this->show_message($this->_t('FileNotFound'));
-	}
-
-	$tpl->leave();
-
-	return true;
-}
-else if ($mode == 'label' && isset($file))
-{
-	// 1.b LABEL FILE
-	$tpl->enter('l_');
-
-	if (!empty($file))
-	{
-		if ($this->is_admin()
-			|| ($file['page_id']
-				&& ($this->page['owner_id'] == $this->get_user_id()))
-			|| ($file['user_id'] == $this->get_user_id()))
-		{
-			if ($file['page_id'])
-			{
-				$path = 'file:/' . $file['tag'] . '/';
-			}
-			else
-			{
-				$path = 'file:/';
-			}
-
-			// !!!!! patch link to not show pictures when not needed
-			$path2 = str_replace('file:/', '_file:/', $path);
-
-			$tpl->link		= $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name']));
-			$tpl->category	= $this->show_category_form($file['file_lang'], $file['file_id'], OBJECT_FILE, false);
-			$tpl->fileid	= $file['file_id'];
-		}
-	}
-	else
-	{
-		#$this->show_message($this->_t('FileNotFound'));
-	}
-
-	$tpl->leave();
-}
-else if (($mode == 'edit' || $mode == 'show') && isset($file))
+if (($mode == 'edit' || $mode == 'show') && isset($file))
 {
 	if (!empty($file))
 	{
@@ -192,7 +114,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 		if ($mode == 'show')
 		{
-			// 1.c SHOW FILE PROPERTIES
+			// 1.a SHOW FILE PROPERTIES
 			$tpl->enter('s_');
 
 			if ($this->has_access('read', $file['page_id']))
@@ -215,7 +137,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				{
 					// relative path
 					$tpl->s_syntax		= 'file:' . $file['file_name'];
-					// absolute path
+					// absolute path (<details>)
 					$tpl->s_d_syntax	= $path . $file['file_name'];
 				}
 				else
@@ -223,7 +145,6 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					// absolute path
 					$tpl->s_syntax		= $path . $file['file_name'];
 				}
-
 
 				$tpl->desc			= $format_desc($file['file_description']);
 				$tpl->caption		= $format_desc($file['caption']);
@@ -238,7 +159,7 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 				$tpl->mime			= $file['mime_type'];
 				$tpl->user			= $this->user_link($file['user_name'], true, false);
-				$tpl->time			= $this->sql_time_formatted($file['uploaded_dt']);
+				$tpl->created			= $this->sql_time_formatted($file['uploaded_dt']);
 
 				if ($file['license_id'])
 				{
@@ -262,29 +183,25 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 					$tpl->leave();
 				}
 
-				$tpl->location		= $file['tag']? $this->link('/' . $file['tag'], '', $file['title'], $file['tag']) : $this->_t('UploadGlobal');
+				$tpl->location		= $file['tag']
+										? $this->link('/' . $file['tag'], '', $file['title'], $file['tag'])
+										: $this->_t('UploadGlobal');
 				$tpl->fileusage		= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1, 'params' => ['file_id' => $file['file_id'], 'm' => 'show']]);
 				$tpl->c_categories	= $this->get_categories($file['file_id'], OBJECT_FILE, 'attachments', '', ['files' => 'all']);
 			}
 
-			$tpl->leave();
+			$tpl->leave(); // s_
 		}
 		else if ($mode == 'edit')
 		{
-			// 1.d EDIT FILE PROPERTIES
+			// 1.b EDIT FILE PROPERTIES
 			$tpl->enter('e_');
 
-			if (   $this->is_admin()
-				|| ($file['page_id']
-					&& ($this->page['owner_id'] == $this->get_user_id()))
-				|| ($file['user_id'] == $this->get_user_id()))
+			if ($file_access($file))
 			{
-				// !!!!! patch link to not show pictures when not needed
-				$path2 = str_replace('file:/', '_file:/', $path);
-
-				$tpl->link			= $this->link($path2 . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
-				$tpl->desc			= $file['file_description'];
-				$tpl->caption		= Ut::html($file['caption']); // -> [ ' caption | pre ' ]
+				$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name'])) . '</h4>';
+				$tpl->desc		= $file['file_description'];
+				$tpl->caption	= Ut::html($file['caption']); // -> [ ' caption | pre ' ]
 
 				$file_license	= $file['license_id'] ?? 0;
 				$tpl->license	= $this->show_select_license('file_license', $file_license, false);
@@ -296,15 +213,15 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 				$file_lang		= $file['file_lang'] ?: $this->db->language;
 				$tpl->lang		= $this->show_select_lang('file_lang', $file_lang, false);
 
-				$tpl->fileid	= (int) $_GET['file_id'];
+				$tpl->fileid	= $file['file_id'];
 			}
 			else
 			{
 				$this->set_message($this->_t('FileEditDenied'));
 			}
-		}
 
-			$tpl->leave();
+			$tpl->leave(); // e_
+		}
 	}
 	else
 	{
@@ -313,68 +230,97 @@ else if (($mode == 'edit' || $mode == 'show') && isset($file))
 
 	return true;
 }
-else
+else if ($mode == 'label' && isset($file))
 {
-	// 2 PROCESS POSTS
+	// 1.c LABEL FILE
+	$tpl->enter('l_');
 
-	if (isset($_POST['remove']))
+	if (!empty($file))
 	{
-		// 2.a DELETE FILE
-		$dontkeep	= (isset($_POST['dontkeep']) && $this->is_admin());
-		$file		= $get_file((int) $_POST['file_id']);
-
-		if (!empty($file))
+		if ($file_access($file))
 		{
-			if ($this->is_admin()
-				|| ($file['page_id']
-					&& ($this->page['owner_id'] == $this->get_user_id()))
-				|| ($file['user_id'] == $this->get_user_id()))
+			if ($file['page_id'])
 			{
-				$this->remove_file($file['file_id'], $dontkeep);
-
-				// log event
-				$this->log(1, Ut::perc_replace($this->_t('LogRemovedFile', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
-
-				$this->db->invalidate_sql_cache(); // TODO: check if sql cache is enabled plus purge page cache
-				$this->http->redirect($this->href('attachments'));
+				$path = 'file:/' . $file['tag'] . '/';
 			}
 			else
 			{
-				$this->set_message($this->_t('FileRemoveDenied'));
+				$path = 'file:/';
+			}
+
+			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
+			$tpl->category	= $this->show_category_form($file['file_lang'], $file['file_id'], OBJECT_FILE, false);
+			$tpl->fileid	= $file['file_id'];
+		}
+	}
+	else
+	{
+		#$this->show_message($this->_t('FileNotFound'));
+	}
+
+	$tpl->leave(); // l_
+}
+else if ($mode == 'remove' && isset($file))
+{
+	// 1.d REMOVE FILE CONFIRMATION
+	$tpl->enter('r_');
+
+	if (!empty($file))
+	{
+		if ($file_access($file))
+		{
+			if ($file['page_id'])
+			{
+				$path = 'file:/' . $file['tag'] . '/';
+			}
+			else
+			{
+				$path = 'file:/';
+			}
+
+			$tpl->link		= $this->link($path . $file['file_name'], '', $this->shorten_string($file['file_name']));
+			$tpl->file		= $file; // array -> [ ' file.field ' ]
+			$tpl->size		= $this->binary_multiples($file['file_size'], false, true, true);
+			$tpl->user		= $this->user_link($file['user_name'], true, false);
+
+			$tpl->location	= $file['tag']
+								? $this->link('/' . $file['tag'], '', $file['title'], $file['tag'])
+								: $this->_t('UploadGlobal');
+			$tpl->fileusage	= $this->action('filelinks', ['file_id' => $file['file_id'], 'nomark' => 1]);
+			$tpl->notice	= $this->show_message($this->_t('FileRemoveConfirm'), 'warning', false);
+
+			if ($this->db->store_deleted_pages && $this->is_admin())
+			{
+				$tpl->dontkeep = true;
 			}
 		}
 		else
 		{
-			$this->set_message($this->_t('FileRemoveNotFound'));
+			$this->set_message($this->_t('FileRemoveDenied'), 'error');
 		}
 	}
-	else if (isset($_POST['label']))
+	else
 	{
-		// update Categories list for the current page
-
-		$file = $get_file((int) $_POST['file_id']);
-		// clear old list
-		$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
-
-		// save new list
-		$this->save_categories_list($file['file_id'], OBJECT_FILE);
-
-		$this->log(4, Ut::perc_replace($this->_t('LogUpdatedFileCategories', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
-		$this->set_message($this->_t('CategoriesUpdated'), 'success');
-		$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
+		#$this->show_message($this->_t('FileNotFound'));
 	}
-	else if (isset($_POST['edit']))
+
+	$tpl->leave(); // r_
+
+	return true;
+}
+else
+{
+	// 2. PROCESS POSTS
+
+	if ($action == 'edit_file')
 	{
-		// 2.b UPDATE FILE PROPERTIES
+		// 2.a UPDATE FILE PROPERTIES
 
 		$file = $get_file((int) $_POST['file_id']);
 
 		if (!empty($file))
 		{
-			if ($this->is_admin()
-				|| ($file['page_id']
-					&& ($this->page['owner_id'] == $this->get_user_id()))
-				|| ($file['user_id'] == $this->get_user_id()))
+			if ($file_access($file))
 			{
 				$description	= mb_substr($_POST['file_description'], 0, 250);
 				$description	= $this->sanitize_text_field((string) $description, true);
@@ -383,7 +329,7 @@ else
 				$source			= $this->sanitize_text_field(mb_substr($_POST['source'], 0, 250), true);
 				$source_url		= filter_var($_POST['source_url'], FILTER_VALIDATE_URL);
 				$license_id		= $_POST['license'] ?? 0;
-				$file_lang		= $_POST['file_lang'] ?? $file['file_lang'];
+				$file_lang		= $this->validate_language($_POST['file_lang'] ?? $file['file_lang']);
 
 				// update file metadata
 				$this->db->sql_query(
@@ -401,8 +347,10 @@ else
 
 				$this->set_message($this->_t('FileEditedMeta'), 'success');
 
-				// log event
-				$this->log(4, Ut::perc_replace($this->_t('LogUpdatedFileMeta', SYSTEM_LANG), $this->tag . ' ' . $this->page['title'], $file['file_name']));
+				$this->log(4, Ut::perc_replace(
+						$this->_t('LogUpdatedFileMeta', SYSTEM_LANG),
+						$this->tag . ' ' . $this->page['title'],
+						$file['file_name']));
 				$this->db->invalidate_sql_cache();
 				$this->http->redirect($this->href('filemeta', '', ['m' => 'show', 'file_id' => (int) $file['file_id']]));
 			}
@@ -414,6 +362,56 @@ else
 		else
 		{
 			$this->set_message($this->_t('FileNotFound'));
+		}
+	}
+	else if ($action == 'assign_categories')
+	{
+		// 2.b UPDATE FILE CATEGORIES ASSIGNMENTS
+
+		$file = $get_file((int) $_POST['file_id']);
+		// clear old list
+		$this->remove_category_assigments($file['file_id'], OBJECT_FILE);
+
+		// save new list
+		$this->save_categories_list($file['file_id'], OBJECT_FILE);
+
+		$this->log(4, Ut::perc_replace(
+				$this->_t('LogUpdatedFileCategories', SYSTEM_LANG),
+				$this->tag . ' ' . $this->page['title'],
+				$file['file_name']));
+		$this->set_message($this->_t('CategoriesUpdated'), 'success');
+
+		$this->http->redirect($this->href('filemeta', '', ['m' => 'label', 'file_id' => (int) $file['file_id']]));
+	}
+	else if ($action == 'remove_file')
+	{
+		// 2.c DELETE FILE
+		$dontkeep	= (isset($_POST['dontkeep']) && $this->is_admin());
+		$file		= $get_file((int) $_POST['file_id']);
+
+		if (!empty($file))
+		{
+			if ($file_access($file))
+			{
+				$this->remove_file($file['file_id'], $dontkeep);
+
+				$this->log(1, Ut::perc_replace(
+						$this->_t('LogRemovedFile', SYSTEM_LANG),
+						$this->tag . ' ' . $this->page['title'],
+						$file['file_name']));
+
+				$this->db->invalidate_sql_cache(); // TODO: check if sql cache is enabled plus purge page cache
+
+				$this->http->redirect($this->href('attachments'));
+			}
+			else
+			{
+				$this->set_message($this->_t('FileRemoveDenied'));
+			}
+		}
+		else
+		{
+			$this->set_message($this->_t('FileRemoveNotFound'));
 		}
 	}
 	else

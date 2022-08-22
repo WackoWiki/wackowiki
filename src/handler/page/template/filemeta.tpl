@@ -3,77 +3,6 @@
 	<h3>[ ' _t: File ' ] » [ ' mode ' ]</h3>
 	[ ' tabs ' ]
 	<br>
-	[= r _ =
-		<div class="file-info">
-			<h4>[ ' link ' ]</h4>
-			<form action="[ ' href: filemeta ' ]" method="post" name="remove_file">
-			[ ' csrf: remove_file ' ]
-			<table class="filemeta tbl-fixed">
-				<tr>
-					<th scope="row">[ ' _t: FileDesc ' ]</th>
-					<td>[ ' file.file_description ' ]</td>
-				</tr>
-				<tr>
-					<td colspan="2">&nbsp;</td>
-				</tr>
-				<tr>
-					<th scope="row">[ ' _t: FileSize ' ]</th>
-					<td>[ ' size ' ]</td>
-				</tr>
-				<tr>
-					<td colspan="2">&nbsp;</td>
-				</tr>
-				<tr>
-					<th scope="row">[ ' _t: UploadBy ' ]</th>
-					<td>[ ' user ' ]</td>
-				</tr>
-				<tr>
-					<th scope="row">[ ' _t: FileAdded ' ]</th>
-					<td>[ ' file.uploaded_dt | time_formatted ' ]</td>
-				</tr>
-				<tr>
-					<td colspan="2">&nbsp;</td>
-				</tr>
-				<tr>
-					<th scope="row">[ ' _t: FileAttachedTo ' ]</th>
-					<td>[ ' location ' ]</td>
-				</tr>
-				<tr>
-					<th scope="row">[ ' _t: FileUsage ' ]</th>
-					<td>[ ' fileusage ' ]</td>
-				</tr>
-			</table>
-			[ ' notice ' ]
-
-			<br>
-			<input type="hidden" name="remove" value="">
-			<input type="hidden" name="file_id" value="[ ' file.file_id | e attr ' ]">
-			[= dontkeep _ =
-				<input type="checkbox" id="dontkeep" name="dontkeep">
-				<label for="dontkeep">[ ' _t: RemoveDontKeepFile ' ]</label><br>
-				<br>
-			=]
-
-			<button type="submit" class="btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button>
-			&nbsp;
-			<a href="[ ' href: ' ]" class="btn-link">
-				<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
-			</a>
-			<br>
-			<br>
-		</form>
-		</div>
-	=]
-	[= l _ =
-		<h4>[ ' link ' ]</h4>
-		
-		<form action="[ ' href: filemeta ' ]" method="post" name="assign_categories">
-			[ ' csrf: assign_categories ' ]
-			[ ' category ' ]
-			<input type="hidden" name="label" value="">
-			<input type="hidden" name="file_id" value="[ ' fileid ' ]">
-		</form>
-	=]
 	[= s _ =
 		<div class="file-info">
 			<h4>[ ' link ' ]</h4>
@@ -132,7 +61,7 @@
 				</tr>
 				<tr>
 					<th scope="row">[ ' _t: FileAdded ' ]</th>
-					<td>[ ' time ' ]</td>
+					<td>[ ' created ' ]</td>
 				</tr>
 				<tr>
 					<td colspan="2">&nbsp;</td>
@@ -194,6 +123,7 @@
 			<h4>[ ' link ' ]</h4>
 			<form action="[ ' href: filemeta ' ]" method="post" name="edit_file">
 				[ ' csrf: edit_file ' ]
+				<input type="hidden" name="file_id" value="[ ' fileid ' ]">
 				<table class="filemeta">
 					<tr>
 						<th scope="row">
@@ -259,8 +189,6 @@
 					</tr>
 				</table>
 				<br>
-				<input type="hidden" name="edit" value="">
-				<input type="hidden" name="file_id" value="[ ' fileid ' ]">
 				<button type="submit" class="btn-ok" name="submit">[ ' _t: SaveButton ' ]</button>
 				&nbsp;
 				<a href="[ ' href: ' ]" class="btn-link">
@@ -271,5 +199,72 @@
 			</form>
 		</div>
 	=]
+	[= l _ =
+		<h4>[ ' link ' ]</h4>
+		<form action="[ ' href: filemeta ' ]" method="post" name="assign_categories">
+			[ ' csrf: assign_categories ' ]
+			[ ' category ' ]
+			<input type="hidden" name="file_id" value="[ ' fileid ' ]">
+		</form>
+	=]
+	[= r _ =
+		<div class="file-info">
+			<h4>[ ' link ' ]</h4>
+			<form action="[ ' href: filemeta ' ]" method="post" name="remove_file">
+			[ ' csrf: remove_file ' ]
+			<input type="hidden" name="file_id" value="[ ' file.file_id | e attr ' ]">
+			<table class="filemeta tbl-fixed">
+				<tr>
+					<th scope="row">[ ' _t: FileDesc ' ]</th>
+					<td>[ ' file.file_description ' ]</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">[ ' _t: FileSize ' ]</th>
+					<td>[ ' size ' ]</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">[ ' _t: UploadBy ' ]</th>
+					<td>[ ' user ' ]</td>
+				</tr>
+				<tr>
+					<th scope="row">[ ' _t: FileAdded ' ]</th>
+					<td>[ ' file.created | time_formatted ' ]</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">[ ' _t: FileAttachedTo ' ]</th>
+					<td>[ ' location ' ]</td>
+				</tr>
+				<tr>
+					<th scope="row">[ ' _t: FileUsage ' ]</th>
+					<td>[ ' fileusage ' ]</td>
+				</tr>
+			</table>
+			[ ' notice ' ]
 
-		
+			<br>
+			[= dontkeep _ =
+				<input type="checkbox" id="dontkeep" name="dontkeep">
+				<label for="dontkeep">[ ' _t: RemoveDontKeepFile ' ]</label><br>
+				<br>
+			=]
+
+			<button type="submit" class="btn-danger" name="submit">[ ' _t: DeleteButton ' ]</button>
+			&nbsp;
+			<a href="[ ' href: ' ]" class="btn-link">
+				<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
+			</a>
+			<br>
+			<br>
+		</form>
+		</div>
+	=]
+
