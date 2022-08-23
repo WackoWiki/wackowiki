@@ -15,9 +15,9 @@ if (!defined('IN_WACKO'))
 */
 
 // set defaults
-$page		??= '';
 $max		??= null;
 $noxml		??= 0;
+$page		??= '';
 $printed	??= [];
 
 if (!$max || $max > 100) $max = 100;

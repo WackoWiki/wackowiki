@@ -18,12 +18,12 @@ if (!defined('IN_WACKO'))
  */
 
 // set defaults
-$page		??= '';
-$title		??= 0;
-$letter		??= '';
-$system		??= 0;
 $lang		??= '';
+$letter		??= '';
 $max		??= null;
+$page		??= '';
+$system		??= 0;
+$title		??= 0;
 
 $system
 	? $user_id		= $this->db->system_user_id

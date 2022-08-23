@@ -28,13 +28,13 @@ if (!defined('IN_WACKO'))
 //   * feed_acl
 
 // set defaults
-$url		??= null;
-$nomark		??= 0;
-$title		??= '';
-$noxml		??= 0;
 $images		??= 1;
 $max		??= 5;
+$nomark		??= 0;
+$noxml		??= 0;
 $time		??= 1;
+$title		??= '';
+$url		??= null;
 
 $error		= null;
 $p_mode		= [];

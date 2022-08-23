@@ -26,22 +26,22 @@ $files		= [];
 $object_ids	= [];
 
 // set defaults
-$nomark		??= 0;
-$form		??= 0;	// show search form
-$order		??= '';
-$cluster	??= 0;	// cluster attachments
-$global		??= 0;	// global attachments
 $all		??= 0;	// all attachments
+$cluster	??= 0;	// cluster attachments
+$deleted	??= 0;
+$form		??= 0;	// show search form
+$global		??= 0;	// global attachments
+$legend		??= '';
 $linked		??= '';	// file link in page
+$max		??= null;
+$media		??= ($picture ?? null); // replaces depreciated picture with media
+$method		??= '';	// for use in page handler
+$nomark		??= 0;
+$order		??= '';
 $owner		??= '';
 $page		??= '';
-$legend		??= '';
-$method		??= '';	// for use in page handler
 $params		??= null;	// for $_GET parameters to be passed with the page link
-$deleted	??= 0;
 $track		??= 0;
-$media		??= ($picture ?? null); // replaces depreciated picture with media
-$max		??= null;
 $type_id	??= null;
 
 $file_name_maxlen	= 80;
@@ -58,7 +58,8 @@ if ($order == 'ext')		$order_by = "file_ext ASC";
 if ($order == 'name_desc')	$order_by = "file_name DESC";
 if ($order == 'size')		$order_by = "file_size ASC";
 if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'time')		$order_by = "created DESC";
+if ($order == 'time')		$order_by = "created ASC";
+if ($order == 'time_desc')	$order_by = "created DESC";
 
 // check against standard_handlers
 #if (! in_array($method, ))

@@ -32,9 +32,9 @@ print page and revisions authors.
 // set defaults
 $add		??= '';
 $add_only	??= 0;
+$cluster	??= 0;
 $license	??= '';
 $license_id	??= null;
-$cluster	??= 0;
 
 $copysign	= '©';
 

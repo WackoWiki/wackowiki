@@ -40,13 +40,13 @@ $category_link = function ($word, $category_id, $type_id, $list, $cluster = '', 
 */
 
 // set defaults
-$page		??= '/';
-$list		??= 1;
-$type_id	??= OBJECT_PAGE;
 $ids		??= null;
-$lang		??= $this->page['page_lang'];
-$nomark		??= 0;
 $info		??= 0;
+$lang		??= $this->page['page_lang'];
+$list		??= 1;
+$nomark		??= 0;
+$page		??= '/';
+$type_id	??= OBJECT_PAGE;
 
 if (isset($_REQUEST['category_lang']))
 {

@@ -6,12 +6,12 @@ if (!defined('IN_WACKO'))
 }
 
 // set defaults
-$page				??= '';
 $date				??= $_GET['date'] ?? '';
 $hide_minor_edit	??= (int) ($_GET['minor_edit'] ?? 0);
-$noxml				??= 0;
-$title				??= 0;
 $max				??= null;
+$noxml				??= 0;
+$page				??= '';
+$title				??= 0;
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();

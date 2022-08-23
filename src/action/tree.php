@@ -27,14 +27,14 @@ if (!defined('IN_WACKO'))
 $limit	= 500;
 
 // set defaults
+$depth		??= '';
+$lang		??= '';
+$legend		??= '';
+$nomark		??= 0;
 $page		??= '/' . $this->page['tag'];
-$title		??= 1;
 $sort		??= '';
 $system		??= 0;
-$lang		??= '';
-$nomark		??= 0;
-$legend		??= '';
-$depth		??= '';
+$title		??= 1;
 
 $system
 	? $user_id		= $this->db->system_user_id

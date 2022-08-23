@@ -279,18 +279,17 @@ $highlight_this = function ($text, $words)
 // --------------------------------------------------------------------------------
 
 // set defaults
-$page		??= '';
-$topic		??= 0;
-$title		??= 0;
-
-$style		??= '';
-$scope		??= '';
-$nomark		??= 0;
-$phrase		??= '';
-$options	??= 1;
 $lang		??= '';
 $max		??= 10;	// (null) 50 -> 10 overwrites system default value!
+$nomark		??= 0;
+$options	??= 1;
 $padding	??= 75;
+$page		??= '';
+$phrase		??= '';
+$scope		??= '';
+$style		??= '';
+$title		??= 0;
+$topic		??= 0;
 
 $lang		= (string) ($_GET['lang'] ?? ($lang ?? ''));
 

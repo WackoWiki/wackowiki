@@ -27,11 +27,11 @@ if (!empty($this->db->news_cluster))
 
 	// set defaults
 	$date				??= $_GET['date'] ?? '';
-	$order				??= '';
 	$max				??= 10;
 	$mode				??= 'latest';
-	$title				??= 1;
 	$noxml				??= 0;
+	$order				??= '';
+	$title				??= 1;
 
 	$pages				= [];
 	$p_mode				= [];

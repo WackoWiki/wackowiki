@@ -23,13 +23,13 @@ if (!defined('IN_WACKO'))
 */
 
 // set defaults
-$page		??= '';
+$from		??= '';
+$legend		??= '';
 $nomark		??= 0;
 $numerate	??= 0;
+$page		??= '';
 $start		??= 0;
-$from		??= '';
 $to			??= '';
-$legend		??= '';
 
 if ($page)
 {
