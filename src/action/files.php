@@ -37,12 +37,15 @@ $max		??= null;
 $media		??= null;
 $method		??= '';	// for use in page handler
 $nomark		??= 0;
-$order		??= '';
+$options	??= 1;
+$order		??= 'name';
 $owner		??= '';
 $page		??= '';
 $params		??= null;	// for $_GET parameters to be passed with the page link
 $track		??= 0;
 $type_id	??= null;
+
+$order		= (string) ($_GET['order'] ?? $order);
 
 $file_name_maxlen	= 80;
 
@@ -207,10 +210,40 @@ if ($can_view)
 	if (($results || $phrase) && $form)
 	{
 		// search
-		$files_filter		= (isset($filter) && in_array($filter, ['all', 'cluster', 'global', 'linked'])) ? $filter : '';
+		$files_filter		= (isset($filter) && in_array($filter, ['all', 'local', 'cluster', 'global', 'linked'])) ? $filter : '';
 
-		$tpl->s_filter		= $files_filter;
-		$tpl->s_phrase		= Ut::html($phrase);
+		$tpl->enter('s_');
+		$tpl->filter		= $files_filter;
+		$tpl->phrase		= Ut::html($phrase);
+
+		// sort & filter
+		if ($options)
+		{
+			$tpl->options		= true;
+
+			$orders = [
+				'ext'			=> 'file_ext ASC',
+				'name'			=> 'file_name ASC',
+				'name_desc'		=> 'file_name DESC',
+				'size'			=> 'file_size ASC',
+				'size_desc'		=> 'file_size DESC',
+				'time'			=> 'created ASC',
+				'time_desc'		=> 'created DESC',
+			];
+
+			foreach ($orders as $value => $_order)
+			{
+				$tpl->options_l_o_value	= $value;
+				$tpl->options_l_o_lang	= $_order;
+
+				if ($value == $order)
+				{
+					$tpl->options_l_o_selected	= ' selected';
+				}
+			}
+		}
+
+		$tpl->leave(); // s_
 	}
 
 	if (!$nomark)
@@ -225,7 +258,7 @@ if ($can_view)
 	{
 		// get context for filter
 		$method_filter		= $this->method == 'show' ? '' : $this->method;
-		$param_filter		= (isset($filter) && in_array($filter, ['all', 'cluster', 'global', 'linked'])) ? ['files' => $filter] : [];
+		$param_filter		= (isset($filter) && in_array($filter, ['all', 'local', 'cluster', 'global', 'linked'])) ? ['files' => $filter] : [];
 
 		$tpl->enter('r_');
 		$tpl->style = $style;

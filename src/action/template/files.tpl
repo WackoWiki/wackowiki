@@ -15,6 +15,20 @@
 						<button type="submit">[ ' _t: SearchButton ' ]</button>
 					</td>
 				</tr>
+				[= options _ =
+					[= l _ =
+					<td class="label">
+						<label for="order">[ ' // _t: SortBy ' ]</label>
+					</td>
+					<td>
+						<select name="order">
+							[= o _ =
+								<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
+							=]
+						</select>
+					</td>
+					=]
+				=]
 			</table>
 			<br />
 		</form>

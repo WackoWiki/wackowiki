@@ -291,7 +291,7 @@ $style		??= '';
 $title		??= 0;
 $topic		??= 0;
 
-$lang		= (string) ($_GET['lang'] ?? ($lang ?? ''));
+$lang		= (string) ($_GET['lang'] ?? $lang);
 
 if ($lang && !$this->known_language($lang))
 {
