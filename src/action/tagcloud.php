@@ -65,15 +65,12 @@ $nomark		??= 0;
 $owner		??= '';
 $page		??= '/';
 
-if (!isset($sort) || !in_array($sort, ['abc', 'number']))
-{
-	$sort = 'abc';
-}
-
 $tag = $this->unwrap_link($page);
 
-if		($sort == 'abc')	$order = 'c.category ASC';
-else if ($sort == 'number')	$order = 'number DESC';
+$order = match($sort) {
+	'number'	=> 'number DESC',
+	default		=> 'c.category ASC',
+};
 
 $sql = "SELECT
 			c.category_id,

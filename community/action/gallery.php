@@ -101,12 +101,15 @@ EOD;
 
 $nav_offset		= (int) ($_GET[$param_token] ?? 1);
 
-							$order_by = "file_name ASC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
-if ($order == 'name_desc')	$order_by = "file_name DESC";
-if ($order == 'size')		$order_by = "file_size ASC";
-if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'time')		$order_by = "created DESC";
+$order_by		= match($order) {
+	'ext'			=> 'file_ext ASC',
+	'name_desc'		=> 'file_name DESC',
+	'size'			=> 'file_size ASC',
+	'size_desc'		=> 'file_size DESC',
+	'time'			=> 'created ASC',
+	'time_desc'		=> 'created DESC',
+	default			=> 'file_name ASC',
+};
 
 // do we allowed to see?
 if (!$global)

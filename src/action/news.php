@@ -45,8 +45,10 @@ if (!empty($this->db->news_cluster))
 		$date			= '';
 	}
 
-							$order_by = "p.created DESC ";
-	if ($order == 'tag')	$order_by = "p.tag DESC";
+	$order_by = match($order) {
+		'tag'		=> 'p.tag DESC',
+		default		=> 'p.created DESC ',
+	};
 
 	// check privilege
 	$access = $this->has_access('create');
