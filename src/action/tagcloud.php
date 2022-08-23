@@ -64,6 +64,7 @@ $lang		??= $this->page['page_lang'];
 $nomark		??= 0;
 $owner		??= '';
 $page		??= '/';
+$sort		??= 'abc';
 
 $tag = $this->unwrap_link($page);
 

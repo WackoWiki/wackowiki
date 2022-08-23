@@ -25,7 +25,7 @@ if (!defined('IN_WACKO'))
 	[nomark		= 1] - hide external border
 	[table		= 1] - pictures in table
 
-	[order		= "time|name_desc|size|size_desc|ext"]
+	[order		= "ext|name_desc|size|size_desc|time|time_desc"]
 	[owner		= "UserName"]
 	[max		= number]
 }}

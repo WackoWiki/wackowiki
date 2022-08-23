@@ -46,6 +46,7 @@ $lang		??= $this->page['page_lang'];
 $list		??= 1;
 $nomark		??= 0;
 $page		??= '/';
+$sort		??= 'abc';
 $type_id	??= OBJECT_PAGE;
 
 if (isset($_REQUEST['category_lang']))
@@ -55,10 +56,6 @@ if (isset($_REQUEST['category_lang']))
 				? $_REQUEST['category_lang']
 				: '')
 			: $lang);
-}
-if (!isset($sort) || !in_array($sort, ['abc', 'date']))
-{
-	$sort = 'abc';
 }
 
 $type_id	= (int) ($_GET['type_id'] ?? OBJECT_PAGE);
@@ -123,14 +120,10 @@ if ($list && ($ids || isset($_GET['category_id'])))
 		}
 	}
 
-	if ($sort == 'abc')
-	{
-		$order = 'title ASC';
-	}
-	else if ($sort == 'date')
-	{
-		$order = 'created DESC';
-	}
+	$order = match($sort) {
+		'date'		=> 'created DESC',
+		default		=> 'title ASC',
+	};
 
 	// get category assignments
 	if ($pages = $this->db->load_all(
