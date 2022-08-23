@@ -18,10 +18,10 @@ if (!defined('IN_WACKO'))
 
 
 // set defaults
-$list		??= 0;
-$type_id	??= OBJECT_PAGE;
 $label		??= true;
+$list		??= 0;
 $nomark		??= 0;
+$type_id	??= OBJECT_PAGE;
 
 if (empty($page))		$page		= $this->db->category_page;
 

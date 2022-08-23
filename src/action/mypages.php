@@ -8,11 +8,11 @@ if (!defined('IN_WACKO'))
 // action/mypages.php
 
 // set defaults
-$title			??= 0;
-$bydate			??= '';
-$profile		??= ''; // user action
-$max			??= null;
 $bychange		??= '';
+$bydate			??= '';
+$max			??= null;
+$profile		??= ''; // user action
+$title			??= 0;
 
 $current_char	= '';
 $title			= (int) $title;

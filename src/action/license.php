@@ -29,9 +29,9 @@ print page or file license.
 */
 
 // set defaults
+$icon		??= 0;
 $intro		??= 1;
 $license	??= '';
-$icon		??= 0;
 
 // check for license_id
 if (empty($license) && !isset($license_id) && $this->db->enable_license)

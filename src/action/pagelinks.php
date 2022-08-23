@@ -8,11 +8,11 @@ if (!defined('IN_WACKO'))
 // {{pagelinks [page="PageName"] [max=Number] [nomark=1] [title=0]}}
 
 // set defaults
-$page		??= '';
-$nomark		??= 0;
-$title		??= '';
-$params		??= null;	// for $_GET parameters to be passed with the page link
 $max		??= null;
+$nomark		??= 0;
+$page		??= '';
+$params		??= null;	// for $_GET parameters to be passed with the page link
+$title		??= '';
 
 $tag = $page ? $this->unwrap_link($page) : $this->tag;
 

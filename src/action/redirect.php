@@ -10,9 +10,9 @@ if (!defined('IN_WACKO'))
 if (isset($page))		$to = $page;
 
 // set defaults
-$to			??= '';
-$temporary	??= 0;
 $mute		??= 0;
+$temporary	??= 0;
+$to			??= '';
 
 $permanent = $temporary ? 0 : 1;
 

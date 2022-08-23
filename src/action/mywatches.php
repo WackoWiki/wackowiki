@@ -8,10 +8,10 @@ if (!defined('IN_WACKO'))
 if ($user_id = $this->get_user_id())
 {
 	// set defaults
-	$profile		??= ''; // user action
-	$max			??= null;
-	$title			??= 0;
 	$current_char	??= '';
+	$max			??= null;
+	$profile		??= ''; // user action
+	$title			??= 0;
 
 	$profile		= ($profile? ['profile' => $profile] : []);
 	$profile_mode	= Ut::html(@$_GET['mode']);

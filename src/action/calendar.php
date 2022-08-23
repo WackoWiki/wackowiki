@@ -24,13 +24,13 @@ if (!defined('IN_WACKO'))
 */
 
 // set defaults
-$year			??= '';
-$month			??= '';
 $days			??= '';
 $daywidth		??= '';
-$range			??= 1;
 $firstday		??= 1;
 $highlight		??= 'today';
+$month			??= '';
+$range			??= 1;
+$year			??= '';
 
 $time			= time();
 $current_year	= date('Y', $time);

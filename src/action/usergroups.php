@@ -8,8 +8,8 @@ if (!defined('IN_WACKO'))
 // You have to be logged in to use this action
 
 // set defaults
-$nomark		??= 0;
 $cols		??= '';
+$nomark		??= 0;
 
 if ($user = $this->get_user())
 {

@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 
 	{{files
 		[page="PageName" or global=1 or all=1]
-		[order="time|FILENAME|size|size_desc|ext"]
+		[order="ext|name_desc|size|size_desc|time|time_desc"]
 		[owner="UserName"]
 		[media=1]
 		[max=number]
@@ -18,7 +18,7 @@ if (!defined('IN_WACKO'))
 */
 
 // TODO:
-// - add option to filter by facets
+// - add option to filter by facets (user, language, type, type class)
 
 $page_id	= '';
 $ppage		= '';
@@ -34,7 +34,7 @@ $global		??= 0;	// global attachments
 $legend		??= '';
 $linked		??= '';	// file link in page
 $max		??= null;
-$media		??= ($picture ?? null); // replaces depreciated picture with media
+$media		??= ($picture ?? null); // replaces deprecated picture with media
 $method		??= '';	// for use in page handler
 $nomark		??= 0;
 $order		??= '';

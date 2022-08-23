@@ -21,13 +21,13 @@ if (!defined('IN_WACKO'))
  */
 
 // set defaults
-$page			??= '';
-$nomark			??= 0;
-$lang			??= '';
-$max			??= null;
-$legend			??= '';
-$title			??= 0;
 $dontrecurse	??= false;
+$lang			??= '';
+$legend			??= '';
+$max			??= null;
+$nomark			??= 0;
+$page			??= '';
+$title			??= 0;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;

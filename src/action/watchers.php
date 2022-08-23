@@ -6,8 +6,8 @@ if (!defined('IN_WACKO'))
 }
 
 // set defaults
-$page		??= '';
 $nomark		??= false;
+$page		??= '';
 
 if ($page)
 {

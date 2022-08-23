@@ -9,10 +9,10 @@ if (!defined('IN_WACKO'))
 
 // set defaults
 $file_id	??= null;
-$nomark		??= 0;
-$title		??= '';
-$params		??= null;	// for $_GET parameters to be passed with the page link
 $max		??= null;
+$nomark		??= 0;
+$params		??= null;	// for $_GET parameters to be passed with the page link
+$title		??= '';
 
 if ($file_id)
 {

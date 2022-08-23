@@ -45,10 +45,10 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 };
 
 // set defaults
+$max	??= null;
+$noxml	??= 0;
 $page	??= '';
 $title	??= 0;
-$noxml	??= 0;
-$max	??= null;
 
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();

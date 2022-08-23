@@ -17,10 +17,10 @@ Random Image Action
  */
 
 // set defaults
+$caption	??= 0;
 $category	??= '';
 $global		??= 0;	// global attachments
 $owner		??= '';
-$caption	??= 0;
 
 if ($caption)	$param[]	= 'caption';
 

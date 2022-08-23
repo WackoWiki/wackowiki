@@ -8,10 +8,10 @@ if (!defined('IN_WACKO'))
 // {{mychanges [max=Number] [bydate=1]}}
 
 // set defaults
-$title		??= 0;
 $bydate		??= '';
-$profile	??= null; // user action
 $max		??= null;
+$profile	??= null; // user action
+$title		??= 0;
 
 $title			= (int) $title;
 $profile		= ($profile? ['profile' => $profile] : []);

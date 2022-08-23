@@ -19,11 +19,11 @@ if (!defined('IN_WACKO'))
 if (!isset($page))			return;
 
 // set defaults
+$first_anchor	??= '';
+$last_anchor	??= '';
 $nomark			??= 0;
 $nowarning		??= 0;
 $revision_id	??= null;
-$first_anchor	??= '';
-$last_anchor	??= '';
 $track			??= 0;
 
 // notoc=1 gets processed via regex in Paragrafica class
