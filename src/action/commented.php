@@ -97,7 +97,7 @@ if ($this->user_allowed_comments())
 
 			if ($tag == '' && !(int) $noxml)
 			{
-				$tpl->xml_href = $this->xml_file('comments');
+				$tpl->xml_href = $this->get_xml_file('comments');
 			}
 
 			$tpl->pagination_text = $pagination['text'];

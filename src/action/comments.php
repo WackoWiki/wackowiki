@@ -84,7 +84,7 @@ if ($this->user_allowed_comments())
 
 		if ($tag == '' && !(int) $noxml)
 		{
-			$tpl->xml_href = $this->xml_file('comments');
+			$tpl->xml_href = $this->get_xml_file('comments');
 		}
 
 		$tpl->pagination_text = $pagination['text'];
@@ -111,7 +111,7 @@ if ($this->user_allowed_comments())
 				// print entry
 				$tpl->l_time = $time;
 				$tpl->l_page = ($title
-					? $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, 0)
+					? $this->link('/' . $page['tag'], '', $page['page_title'], $page['comment_title'], 0, 1, 0)
 					: $this->link('/' . $page['tag'], '', $page['comment_title'], $page['page_title'], 0, 1, 0)
 				);
 

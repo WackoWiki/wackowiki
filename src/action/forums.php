@@ -212,7 +212,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	if (!(int) $noxml)
 	{
-		$tpl->xml_href = $this->xml_file('comments');
+		$tpl->xml_href = $this->get_xml_file('comments');
 	}
 
 	$tpl->leave(); // forum_
