@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> '以下个页面使用本文件：',
 	'NoFileUsage'				=> '没有页面链接本文件',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> '文件名',
+	'FileSortSize'				=> '文件大小',
+	'FileSortTime'				=> '文件添加完毕',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> '附件',
 	'Files1'					=> '显示文件（1个文件）',
 	'FilesN'					=> '显示文件（%1个文件）',

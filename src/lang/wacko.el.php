@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Τα παρακάτω λήμματα συνδέουν σε αυτό το αρχείο:',
 	'NoFileUsage'				=> 'Δεν υπάρχουν σελίδες που συνδέουν σε αυτό το αρχείο.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Δεν υπάρχουν αρχεία σε αυτή την σελίδα.',
 	'Files1'					=> 'Υπάρχει ένα αρχείο σε αυτή την σελίδα.',
 	'FilesN'					=> 'Υπάρχουν %1 αρχεία σε αυτή την σελίδα.',

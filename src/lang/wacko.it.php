@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Le pagine seguenti si collegano a questo file:',
 	'NoFileUsage'				=> 'Nessuna pagina contiene collegamenti al file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Non vi è alcun file in questa pagina.',
 	'Files1'					=> 'Vi è un file in questa pagina.',
 	'FilesN'					=> 'Ci sono %1 files in questa pagina.',

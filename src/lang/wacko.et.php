@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Seda faili kasutab järgmine lehekülg:',
 	'NoFileUsage'				=> 'Sellele pildile ei viita ükski lehekülg.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Sellel lehel ei ole faile.',
 	'Files1'					=> 'Siin lehel on üks fail.',
 	'FilesN'					=> 'Siin lehel on %1 faili.',

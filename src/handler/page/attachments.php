@@ -17,27 +17,30 @@ if ($this->has_access('read')
 	// tab navigation
 	$mod_selector	= 'files';
 	$tabs			= [
-				''			=> 'AttachmentsLinked',
-				'local'		=> 'AttachmentsToPage',
-				/* 'cluster'	=> 'AttachmentsToCluster', */
-				'global'	=> 'AttachmentsGlobal',
-				'all'		=> 'AttachmentsAll',
-			];
+		''			=> 'AttachmentsLinked',
+		'local'		=> 'AttachmentsToPage',
+		#'cluster'	=> 'AttachmentsToCluster',
+		'global'	=> 'AttachmentsGlobal',
+		'all'		=> 'AttachmentsAll',
+	];
 	$mode			= (string) ($_GET[$mod_selector] ?? '');
+	$dir			= (string) ($_GET['dir'] ?? '');
 	$order			= (string) ($_GET['order'] ?? '');
 	$phrase			= (string) ($_GET['phrase'] ?? '');
 
 	$mode			= array_key_exists($mode, $tabs) ? $mode : '';
-	$order			= in_array($order, ['ext', 'name', 'name_desc', 'size', 'size_desc', 'time', 'time_desc']) ? $order : 'name';
+	$dir			= in_array($dir, ['asc', 'desc']) ? $dir : 'asc';
+	$order			= in_array($order, ['ext', 'name', 'size', 'time']) ? $order : 'name';
 
-	$p_order		= $order	? ['order' => $order] : [];
-	$p_phrase		= $phrase	? ['phrase' => $phrase] : [];
+	$p_dir			= $dir		? ['dir'	=> $dir]	: [];
+	$p_order		= $order	? ['order'	=> $order]	: [];
+	$p_phrase		= $phrase	? ['phrase'	=> $phrase]	: [];
 
 	$tpl->enter('a_');
 
 	$tpl->upload	= $this->can_upload();
 	$tpl->header	= $this->_t($tabs[$mode]);
-	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', $p_order + $p_phrase, $mod_selector);
+	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', $p_dir + $p_order + $p_phrase, $mod_selector);
 
 	if ($mode)
 	{

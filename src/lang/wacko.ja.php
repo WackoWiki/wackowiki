@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> '以下の​ ページがこのファイルを使用しています:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'ファイルを添付',
 	'Files1'					=> 'ファイルを表示 (1 ファイル)',
 	'FilesN'					=> 'ファイルを表示 (%1 ファイル)',

@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'De volgende pagina\'s verwijzen naar dit bestand:',
 	'NoFileUsage'				=> 'Geen enkele pagina gebruikt dit bestand.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Geen bestanden op deze pagina.',
 	'Files1'					=> 'E&eacute;n bestand op deze pagina.',
 	'FilesN'					=> '%1 bestanden op deze pagina.',

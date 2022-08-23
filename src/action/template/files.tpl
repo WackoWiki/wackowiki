@@ -18,11 +18,16 @@
 				[= options _ =
 					[= l _ =
 					<td class="label">
-						<label for="order">[ ' // _t: SortBy ' ]</label>
+						<label for="order">[ ' _t: SortBy ' ]</label>
 					</td>
 					<td>
 						<select name="order">
 							[= o _ =
+								<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
+							=]
+						</select>
+						<select name="dir">
+							[= d _ =
 								<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
 							=]
 						</select>

@@ -29,6 +29,7 @@ $object_ids	= [];
 $all		??= 0;	// all attachments
 $cluster	??= 0;	// cluster attachments
 $deleted	??= 0;
+$dir		??= 'asc';
 $form		??= 0;	// show search form
 $global		??= 0;	// global attachments
 $legend		??= '';
@@ -45,7 +46,10 @@ $params		??= null;	// for $_GET parameters to be passed with the page link
 $track		??= 0;
 $type_id	??= null;
 
-$order		= (string) ($_GET['order'] ?? $order);
+$order		= (string) ($_GET['order']	?? $order);
+$dir		= (string) ($_GET['dir']	?? $dir);
+
+$sql_sort	= $order . ($dir == 'desc' ? '_' . $dir : '');
 
 $file_name_maxlen	= 80;
 
@@ -56,8 +60,9 @@ $category_id		= (int)		@$_GET['category_id'];
 $filter				= $_GET['files'] ?? null;
 $file_link			= (int)		$linked;
 
-$order_by = match($order) {
+$order_by = match($sql_sort) {
 	'ext'			=> 'file_ext ASC',
+	'ext_desc'		=> 'file_ext DESC',
 	'name_desc'		=> 'file_name DESC',
 	'size'			=> 'file_size ASC',
 	'size_desc'		=> 'file_size DESC',
@@ -222,23 +227,38 @@ if ($can_view)
 			$tpl->options		= true;
 
 			$orders = [
-				'ext'			=> 'file_ext ASC',
-				'name'			=> 'file_name ASC',
-				'name_desc'		=> 'file_name DESC',
-				'size'			=> 'file_size ASC',
-				'size_desc'		=> 'file_size DESC',
-				'time'			=> 'created ASC',
-				'time_desc'		=> 'created DESC',
+				'ext'	=> 'FileSortExt',
+				'name'	=> 'FileSortName',
+				'size'	=> 'FileSortSize',
+				'time'	=> 'FileSortTime',
 			];
 
+			$dirs = [
+				'asc'	=> 'Ascending',
+				'desc'	=> 'Decending',
+			];
+
+			// select order column
 			foreach ($orders as $value => $_order)
 			{
 				$tpl->options_l_o_value	= $value;
-				$tpl->options_l_o_lang	= $_order;
+				$tpl->options_l_o_lang	= $this->_t($_order);
 
 				if ($value == $order)
 				{
 					$tpl->options_l_o_selected	= ' selected';
+				}
+			}
+
+			// select order direction
+			foreach ($dirs as $value => $_dir)
+			{
+				$tpl->options_l_d_value	= $value;
+				$tpl->options_l_d_lang	= $this->_t($_dir);
+
+				if ($value == $dir)
+				{
+					$tpl->options_l_d_selected	= ' selected';
 				}
 			}
 		}

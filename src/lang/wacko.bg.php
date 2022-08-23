@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'The following pages link to this file:',
 	'NoFileUsage'				=> 'Няма страници, сочещи към файла.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Няма файлове.',
 	'Files1'					=> 'Един файл.',
 	'FilesN'					=> 'Има (%1) файла.',

@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'The following pages link to this file:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'फ़ाइलों को संलग्न करें ',
 	'Files1'					=> 'फ़ाइलें दिखाएँ (1 फ़ाइल)',
 	'FilesN'					=> 'फ़ाइलें दिखाएँ (%1 फ़ाइलें)',

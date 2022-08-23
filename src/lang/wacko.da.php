@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'De følgende sider henviser til denne fil:',
 	'NoFileUsage'				=> 'Der er ingen sider der henviser til denne fil.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Der er ingen filer tilknyttet denne side.',
 	'Files1'					=> 'Der er en fil tilknyttet denne side.',
 	'FilesN'					=> 'Der er %1 filer tilknyttet denne side.',

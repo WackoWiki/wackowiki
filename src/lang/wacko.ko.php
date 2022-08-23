@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> '다음 문서 개가 이 파일을 사용하고 있습니다.:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> '파일을 첨부',
 	'Files1'					=> '파일 표시 (1 개 파일)',
 	'FilesN'					=> '파일 표시 (%1 개 파일)',

@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Az alábbi lap hivatkozik erre a fájlra:',
 	'NoFileUsage'				=> 'Erre a fájlra nem hivatkozik lap.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Fájlok csatolása',
 	'Files1'					=> 'Fájlok mutatása (1 fájl)',
 	'FilesN'					=> 'Fájlok mutatása (%1 fájl)',

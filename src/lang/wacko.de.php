@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Folgenden Seiten verwenden diese Datei:',
 	'NoFileUsage'				=> 'Diese Datei wird auf keiner Seite verwendet.',
 
+	'FileSortExt'				=> 'Erweiterung',
+	'FileSortName'				=> 'Name',
+	'FileSortSize'				=> 'Größe',
+	'FileSortTime'				=> 'Hinzugefügt',
+
+	'SortBy'					=> 'Sortiere nach',
+	'Ascending'					=> 'aufsteigend',
+	'Decending'					=> 'absteigend',
+
 	'Files0'					=> 'Dateien (0)',
 	'Files1'					=> 'Dateien (1)',
 	'FilesN'					=> 'Dateien (%1)',

@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Poniższa strona odwołuje się do tego pliku:',
 	'NoFileUsage'				=> 'Żadna strona nie odwołuje się do tego pliku.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Nie ma plików na tej stronie.',
 	'Files1'					=> 'Jest jeden plik na tej stronie.',
 	'FilesN'					=> 'Liczba plików na tej stronie: %1.',

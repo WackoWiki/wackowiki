@@ -875,6 +875,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Les pages suivantes mentionnent ce fichier :',
 	'NoFileUsage'				=> 'Aucune page n’utilise ce fichier.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Aucun fichier n’est joint à cette page. ',
 	'Files1'					=> 'Un seul fichier est joint à cette page.',
 	'FilesN'					=> '%1 fichiers sont joints à cette page.',

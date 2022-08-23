@@ -877,6 +877,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Страницы, ссылающиеся на этот файл:',
 	'NoFileUsage'				=> 'Нет страниц, ссылающихся на данный файл.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Файлов нет.',
 	'Files1'					=> 'Один файл.',
 	'FilesN'					=> 'Много файлов (%1).',
