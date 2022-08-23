@@ -24,38 +24,28 @@ if ($this->has_access('read')
 				'all'		=> 'AttachmentsAll',
 			];
 	$mode			= (string) ($_GET[$mod_selector] ?? '');
+	$order			= (string) ($_GET['order'] ?? '');
 	$phrase			= (string) ($_GET['phrase'] ?? '');
 
-	if (!array_key_exists($mode, $tabs))
-	{
-		$mode = '';
-	}
+	$mode			= array_key_exists($mode, $tabs) ? $mode : '';
+	$order			= in_array($order, ['ext', 'name', 'name_desc', 'size', 'size_desc', 'time', 'time_desc']) ? $order : 'name';
+
+	$p_order		= $order	? ['order' => $order] : [];
+	$p_phrase		= $phrase	? ['phrase' => $phrase] : [];
 
 	$tpl->enter('a_');
 
 	$tpl->upload	= $this->can_upload();
 	$tpl->header	= $this->_t($tabs[$mode]);
-	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', ['phrase' => $phrase], $mod_selector);
+	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', $p_order + $p_phrase, $mod_selector);
 
-	if ($mode == 'global')
+	if ($mode)
 	{
-		$tpl->files	= $this->action('files', ['global' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'global']]);
+		$tpl->files	= $this->action('files', [$mode => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => $mode]]);
 	}
-	else if ($mode == 'all')
-	{
-		$tpl->files	= $this->action('files', ['all' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'all']]);
-	}
-	else if ($mode == 'local')
-	{
-		$tpl->files	= $this->action('files', ['media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'local']]);
-	}
-	/* else if ($mode == 'cluster')
-	{
-		$tpl->files	= $this->action('files', ['cluster' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1, 'params' => ['files' => 'cluster']]);
-	} */
 	else
 	{
-		// to page
+		// linked to page
 		$tpl->files	= $this->action('files', ['linked' => 1, 'media' => 1, 'nomark' => 1, 'method' => 'attachments', 'form' => 1]);
 	}
 

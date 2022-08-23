@@ -203,7 +203,7 @@ if ($can_view)
 	if (($results || $phrase) && $form)
 	{
 		// search
-		$files_filter		= (isset($filter) && in_array($filter, ['all', 'cluster', 'global', 'linked'])) ? $filter : '';
+		$files_filter		= (isset($filter) && in_array($filter, ['all', 'local', 'cluster', 'global', 'linked'])) ? $filter : '';
 
 		$tpl->s_filter		= $files_filter;
 		$tpl->s_phrase		= Ut::html($phrase);
@@ -219,6 +219,10 @@ if ($can_view)
 
 	if ($results)
 	{
+		// get context for filter
+		$method_filter		= $this->method == 'show' ? '' : $this->method;
+		$param_filter		= (isset($filter) && in_array($filter, ['all', 'local', 'cluster', 'global', 'linked'])) ? ['files' => $filter] : [];
+
 		$tpl->enter('r_');
 		$tpl->style = $style;
 
@@ -273,10 +277,6 @@ if ($can_view)
 
 			if ($media)
 			{
-				// get context for filter
-				$method_filter		= $this->method == 'show' ? '' : $this->method;
-				$param_filter		= (isset($filter) && in_array($filter, ['all', 'cluster', 'global', 'linked'])) ? ['files' => $filter] : [];
-
 				// display picture meta data
 				#$tpl->p_file		= $file; // result array: [ ' file.file_id ' ]
 				$tpl->p_name		= $this->shorten_string($file['file_name'], $file_name_maxlen);
