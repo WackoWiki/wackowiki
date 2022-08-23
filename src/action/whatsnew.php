@@ -99,7 +99,7 @@ if ($pages = array_merge($pages1, $pages2, $files))
 
 	if (!(int) $noxml)
 	{
-		$tpl->xml_href = $this->xml_file('changes');
+		$tpl->xml_href = $this->get_xml_file('changes');
 	}
 
 	$pagination	= $this->pagination(count($pages), @$max, 'n', '', '');

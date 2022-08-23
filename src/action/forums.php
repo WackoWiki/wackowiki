@@ -14,9 +14,8 @@ if (!defined('IN_WACKO'))
 
 // define variables
 $pages		??= '';
+$noxml		??= 0;
 $comment	= null;
-
-if (!isset($noxml))		$noxml = 0;
 
 // ensure that we're executing inside the forum cluster
 if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
@@ -212,7 +211,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	if (!(int) $noxml)
 	{
-		$tpl->xml_href = $this->xml_file('comments');
+		$tpl->xml_href = $this->get_xml_file('comments');
 	}
 
 	$tpl->leave(); // forum_

@@ -37,7 +37,7 @@ if ([$pages, $pagination] = $this->load_changed($max, $tag, $date, $hide_minor_e
 
 	if (!$tag && !(int) $noxml)
 	{
-		$tpl->xml_href = $this->xml_file('changes');
+		$tpl->xml_href = $this->get_xml_file('changes');
 	}
 
 	$tpl->pagination_text = $pagination['text'];

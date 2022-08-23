@@ -1,9 +1,8 @@
 
-WACKO INSTALLATION
+WACKOWIKI INSTALLATION
 
-Not much to it (as long as it works, ahem). Unpack/upload the distribution files
-into a directory that can be accessed via the web. Then go to the corresponding URL.
-A web-based installer will walk you through the rest.
+Unpack/upload the distribution files into a directory that can be accessed via the web.
+Then go to the corresponding URL. A web-based installer will walk you through the rest.
 
 Example:
 
@@ -11,32 +10,47 @@ If your website, say, http://www.example.com, is mapped to the directory /home/j
 and you place the Wacko distribution files into /home/jdoe/www/wacko/, you should go to
 http://www.example.com/wacko/.
 
-Note that Wacko distributions normally unpack into directories that include the version
+Note that WackoWiki distributions normally unpack into directories that include the version
 in their name; you'll probably want to rename those to just "wacko" -- or, if you're
 on a unixoid system, set up a symbolic link.
+
+
+PERMISSIONS:
 
 For configuration purposes, you'll probably want to make config/config.php writable
 by the web server, at least temporarily.
 
-WackoWiki can export the RecentChanges list as RSS. Please make sure the xml/
-subdirectory is writable, since this is where the files are stored.
+Please make sure the following subdirectories are writable, since this is where the files are stored.
 
 Adjust the file permissions according to the permission group you're in.
 
-chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
-chmod 666 config/config.php config/lock config/lock_ap
+  chmod 0755 _cache/config/ _cache/feed/ _cache/page/ _cache/query/ _cache/session/ _cache/template/ file/backup/ file/global/ file/perpage/ file/thumb/ xml/
+  chmod 666 config/config.php config/lock config/lock_ap
 
 Reset file permissions of the config file after installation.
-chmod 644 config/config.php
+
+  chmod 644 config/config.php
+
 
 Check if the provided path for CACHE_SESSION_DIR in config/constants.php is correct.
 
   The default value set in constants.php is /tmp but may vary in your environment.
-  You may want to change this to a custom folder (e.g. _cache/session or /var/tmp) 
+  You may want to change this to a custom folder (e.g. _cache/session or /var/tmp)
 
-IMPORTANT: For installing or upgrading Wacko, do NOT access any of the files contained
+
+IMPORTANT: For installing or upgrading WackoWiki, do NOT access any of the files contained
 in the setup/ subdirectory. They're used by the web-based installer/updater, but you
-should really just access the Wacko directory itself, and it will (or at least should)
+should really just access the WackoWiki directory itself, and it will (or at least should)
 work perfectly.
+
+
+BACKEND:
+
+Create a Recovery-Password to access the Admin panel.
+
+Call the {{admin_recovery}} action as Admin and generate the password hash.
+Add the password hash: 'recovery_password' => 'add hash here' in the config/config.php file.
+Clear the config cache with the {{admincache}} action.
+
 
 Detailed instructions are available at https://wackowiki.org/doc/Doc/English/Installation.

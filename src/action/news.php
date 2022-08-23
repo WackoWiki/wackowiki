@@ -233,7 +233,7 @@ if (!empty($this->db->news_cluster))
 	// displaying XML icon
 	if (!(int) $noxml)
 	{
-		$tpl->n_xml_href = $this->xml_file('news');
+		$tpl->n_xml_href = $this->get_xml_file('news');
 	}
 
 	// displaying articles

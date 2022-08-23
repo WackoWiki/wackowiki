@@ -780,6 +780,13 @@ class Wacko
 			: $this->db->theme_url . 'icon/favicon.ico';
 	}
 
+	function get_xml_file($name): string
+	{
+		return
+			$this->db->base_path . XML_DIR . '/' .
+			$name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
+	}
+
 	// PAGES
 
 	function get_keywords(): string
@@ -2228,13 +2235,6 @@ class Wacko
 			$this->log(7, $this->_t('LogXmlSitemapGenerated', SYSTEM_LANG));
 			$this->sess->xml_sitemap_update = 0;
 		}
-	}
-
-	function xml_file($name)
-	{
-		return
-			$this->db->base_path . XML_DIR . '/' .
-			$name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->db->site_name)) . '.xml';
 	}
 
 	// COUNTER
