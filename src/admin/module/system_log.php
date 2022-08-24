@@ -65,11 +65,11 @@ function admin_system_log(&$engine, &$module)
 	// we make level sorting in reverse order because higher level is denoted
 	// by lower value (e.g. 1 = critical, 2 = highest, and so on)
 	$order = match($_order) {
-		'time_asc'		=> 'ORDER BY l.log_time ASC ',
-		'time_desc'		=> 'ORDER BY l.log_time DESC ',
-		'level_asc'		=> 'ORDER BY l.level DESC ',
-		'level_desc'	=> 'ORDER BY l.level ASC ',
-		default			=> '',
+		'time_asc'		=> 'l.log_time ASC ',
+		'time_desc'		=> 'l.log_time DESC ',
+		'level_asc'		=> 'l.level DESC ',
+		'level_desc'	=> 'l.level ASC ',
+		default			=> 'l.log_id DESC ',
 	};
 
 	// set time ordering
@@ -100,7 +100,6 @@ function admin_system_log(&$engine, &$module)
 	// set default level
 	$level	??= $engine->db->log_default_show;
 	$where	??= '';
-	$order	??= '';
 
 	// collecting data
 	$count = $engine->db->load_single(
@@ -119,7 +118,7 @@ function admin_system_log(&$engine, &$module)
 		"FROM " . $engine->db->table_prefix . "log l " .
 			"LEFT JOIN " . $engine->db->table_prefix . "user u ON (l.user_id = u.user_id) " .
 		($where ?: 'WHERE l.level <= ' . (int) $level . ' ') .
-		($order ?: 'ORDER BY l.log_id DESC ') .
+		"ORDER BY " . $order .
 		$pagination['limit']);
 
 	echo $engine->form_open('systemlog');

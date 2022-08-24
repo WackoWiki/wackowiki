@@ -558,13 +558,13 @@ function admin_user_groups(&$engine, &$module)
 	else
 	{
 		$order = match($_order) {
-			'created_asc'		=> 'ORDER BY g.created ASC ',
-			'created_desc'		=> 'ORDER BY g.created DESC ',
-			'group_asc'			=> 'ORDER BY g.group_name DESC ',
-			'group_desc'		=> 'ORDER BY g.group_name ASC ',
-			'members_asc'		=> 'ORDER BY members DESC ',
-			'members_desc'		=> 'ORDER BY members ASC ',
-			default				=> '',
+			'created_asc'		=> 'g.created ASC ',
+			'created_desc'		=> 'g.created DESC ',
+			'group_asc'			=> 'g.group_name DESC ',
+			'group_desc'		=> 'g.group_name ASC ',
+			'members_asc'		=> 'members DESC ',
+			'members_desc'		=> 'members ASC ',
+			default				=> 'g.group_name ASC ',
 		};
 
 		// set created ordering
@@ -610,7 +610,7 @@ function admin_user_groups(&$engine, &$module)
 				"LEFT JOIN " . $prefix . "usergroup_member m ON (m.group_id = g.group_id) " .
 			($where ?: '') .
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name " .
-			($order ?: 'ORDER BY g.group_name ASC ') .
+			"ORDER BY " . $order .
 			$pagination['limit']);
 
 		/////////////////////////////////////////////

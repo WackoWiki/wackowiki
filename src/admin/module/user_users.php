@@ -703,21 +703,21 @@ function admin_user_users(&$engine, &$module)
 		}
 
 		$order = match($_order) {
-			'signup_asc'			=> 'ORDER BY signup_time ASC ',
-			'signup_desc'			=> 'ORDER BY signup_time DESC ',
-			'last_visit_asc'		=> 'ORDER BY last_visit ASC ',
-			'last_visit_desc'		=> 'ORDER BY last_visit DESC ',
-			'total_pages_asc'		=> 'ORDER BY total_pages ASC ',
-			'total_pages_desc'		=> 'ORDER BY total_pages DESC ',
-			'total_comments_asc'	=> 'ORDER BY total_comments ASC ',
-			'total_comments_desc'	=> 'ORDER BY total_comments DESC ',
-			'total_revisions_asc'	=> 'ORDER BY total_revisions ASC ',
-			'total_revisions_desc'	=> 'ORDER BY total_revisions DESC ',
-			'total_uploads_asc'		=> 'ORDER BY total_uploads ASC ',
-			'total_uploads_desc'	=> 'ORDER BY total_uploads DESC ',
-			'user_asc'				=> 'ORDER BY user_name DESC ',
-			'user_desc'				=> 'ORDER BY user_name ASC ',
-			default					=> '',
+			'signup_asc'			=> 'u.signup_time ASC ',
+			'signup_desc'			=> 'u.signup_time DESC ',
+			'last_visit_asc'		=> 'u.last_visit ASC ',
+			'last_visit_desc'		=> 'u.last_visit DESC ',
+			'total_pages_asc'		=> 'u.total_pages ASC ',
+			'total_pages_desc'		=> 'u.total_pages DESC ',
+			'total_comments_asc'	=> 'u.total_comments ASC ',
+			'total_comments_desc'	=> 'u.total_comments DESC ',
+			'total_revisions_asc'	=> 'u.total_revisions ASC ',
+			'total_revisions_desc'	=> 'u.total_revisions DESC ',
+			'total_uploads_asc'		=> 'u.total_uploads ASC ',
+			'total_uploads_desc'	=> 'u.total_uploads DESC ',
+			'user_asc'				=> 'u.user_name DESC ',
+			'user_desc'				=> 'u.user_name ASC ',
+			default					=> 'u.user_id DESC ',
 		};
 
 		// set signuptime ordering
@@ -797,7 +797,7 @@ function admin_user_users(&$engine, &$module)
 			($where ?: "") .
 			($where ? "AND " : "WHERE ") .
 				"u.account_type = 0 " .
-			($order ?: 'ORDER BY u.user_id DESC ') .
+			"ORDER BY " . $order .
 			$pagination['limit']);
 
 		// user filter form

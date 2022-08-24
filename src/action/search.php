@@ -210,7 +210,6 @@ $get_line_with_phrase = function ($content, $phrase, $padding = 75, $insensitive
 
 		if (($position	= $strpos_array($string, $_keywords)) !== false)
 		{
-			#echo '##' . $position . '<br><br><br>';
 			$result .= $get_context($phrase, $string, $position, $padding);
 
 			$matches++;

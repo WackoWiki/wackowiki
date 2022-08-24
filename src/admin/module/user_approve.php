@@ -193,11 +193,11 @@ function admin_user_approve(&$engine, &$module)
 	}
 
 	$order = match($_order) {
-		'signup_asc'			=> 'ORDER BY signup_time ASC ',
-		'signup_desc'			=> 'ORDER BY signup_time DESC ',
-		'user_asc'				=> 'ORDER BY user_name DESC ',
-		'user_desc'				=> 'ORDER BY user_name ASC ',
-		default					=> '',
+		'signup_asc'			=> 'u.signup_time ASC ',
+		'signup_desc'			=> 'u.signup_time DESC ',
+		'user_asc'				=> 'u.user_name DESC ',
+		'user_desc'				=> 'u.user_name ASC ',
+		default					=> 'u.user_id DESC ',
 	};
 
 	// set signuptime ordering
@@ -255,7 +255,7 @@ function admin_user_approve(&$engine, &$module)
 		($where ? "AND " : "WHERE ") .
 			"u.account_type = 0 " .
 			"AND u.user_name <> " . $engine->db->q($engine->db->admin_name) . " " .
-		($order ?: 'ORDER BY u.user_id DESC ') .
+		"ORDER BY " . $order .
 		$pagination['limit']);
 
 	// count records by status
