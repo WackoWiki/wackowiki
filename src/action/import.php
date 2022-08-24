@@ -33,21 +33,11 @@ if ($this->is_admin())
 			$tpl->f_hint = $this->_t('ImportAttention');
 		}
 	}
-
-	if (!empty($_POST['_to']))
+	else
 	{
-		if ($_FILES['_import']['error'] == 0)
+		if ($_FILES['_import']['error'] == 0
+			&& $fd = fopen($_FILES['_import']['tmp_name'], 'r'))
 		{
-			$fd = fopen($_FILES['_import']['tmp_name'], 'r');
-
-			if (!$fd)
-			{
-				echo '<pre>';
-				print_r($_FILES);
-				print_r($_POST);
-				die('</pre><br>' . $this->_t('ImportFailed'));
-			}
-
 			// check for false and empty strings
 			if (($contents = fread($fd, filesize($_FILES['_import']['tmp_name']))) === '')
 			{
