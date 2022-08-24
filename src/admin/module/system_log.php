@@ -47,8 +47,7 @@ function admin_system_log(&$engine, &$module)
 		$_level		= (int) ($_POST['level']		?? ($_GET['level']		?? ''));
 
 		// level filtering
-		$mod = match ($_level_mod)
-		{
+		$mod = match ($_level_mod) {
 			1 => '<=',	// not_lower
 			2 => '>=',	// not_higher
 			3 => '=',	// equal
@@ -63,37 +62,27 @@ function admin_system_log(&$engine, &$module)
 	$_ip			= (string)	($_GET['ip']		?? '');
 	$_user_id		= (int)		($_GET['user_id']	?? '');
 
+	// we make level sorting in reverse order because higher level is denoted
+	// by lower value (e.g. 1 = critical, 2 = highest, and so on)
+	$order = match($_order) {
+		'time_asc'		=> 'ORDER BY l.log_time ASC ',
+		'time_desc'		=> 'ORDER BY l.log_time DESC ',
+		'level_asc'		=> 'ORDER BY l.level DESC ',
+		'level_desc'	=> 'ORDER BY l.level ASC ',
+		default			=> '',
+	};
+
 	// set time ordering
-	if ($_order == 'time_asc')
-	{
-		$order		= 'ORDER BY l.log_time ASC ';
-		$ordertime	= 'time_desc';
-	}
-	else if ($_order == 'time_desc')
-	{
-		$order		= 'ORDER BY l.log_time DESC ';
-		$ordertime	= 'time_asc';
-	}
-	else
-	{
-		$ordertime	= 'time_asc';
-	}
+	$order_time = match($_order) {
+		'time_asc'		=> 'time_desc',
+		default			=> 'time_asc',
+	};
 
 	// set level ordering
-	if ($_order == 'level_asc')
-	{
-		$order		= 'ORDER BY l.level DESC ';		// we make level sorting
-		$orderlevel	= 'level_desc';					// in reverse orber because
-	}												// higher level is denoted
-	else if ($_order == 'level_desc')				// by lower value (e.g.
-	{												// 1 = critical, 2 = highest,
-		$order		= 'ORDER BY l.level ASC ';		// and so on)
-		$orderlevel	= 'level_asc';
-	}
-	else
-	{
-		$orderlevel	= 'level_desc';
-	}
+	$order_level = match($_order) {
+		'level_asc'		=> 'level_desc',
+		default			=> 'level_asc',
+	};
 
 	// filter by username or user ip
 	if ($_user_id)
@@ -150,7 +139,10 @@ function admin_system_log(&$engine, &$module)
 							: ((int) ($_POST['level_mod'] ?? $_GET['level_mod'] ?? '') == $mode)
 					);
 
-					echo '<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' . $log_filter . '</option>' . "\n";
+					echo
+						'<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' .
+							$log_filter .
+						'</option>' . "\n";
 				}
 			?>
 			</select>
@@ -164,7 +156,10 @@ function admin_system_log(&$engine, &$module)
 						(	!isset($_POST['level']) && (int) $level == $mode)
 						|| ((int) ($_POST['level'] ?? $_GET['level'] ?? '') == $mode);
 
-					echo '<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' . $mode . ': ' . $log_level . '</option>' . "\n";
+					echo
+						'<option value="' . $mode . '" ' . ($selected ? ' selected' : '') . '>' .
+							$mode . ': ' . $log_level .
+						'</option>' . "\n";
 				}
 			?>
 			</select>
@@ -178,8 +173,8 @@ function admin_system_log(&$engine, &$module)
 		<table class="syslog formation lined">
 			<tr>
 				<th>ID</th>
-				<th><a href="<?php echo $engine->href('', '', ['order' => $ordertime]); ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
-				<th><a href="<?php echo $engine->href('', '', ['order' => $orderlevel]); ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
+				<th><a href="<?php echo $engine->href('', '', ['order' => $order_time]); ?>"><?php echo $engine->_t('LogDate'); ?></a></th>
+				<th><a href="<?php echo $engine->href('', '', ['order' => $order_level]); ?>"><?php echo $engine->_t('LogLevel'); ?></a></th>
 				<th><?php echo $engine->_t('LogEvent'); ?></th>
 				<th><?php echo $engine->_t('LogUsername'); ?></th>
 			</tr>

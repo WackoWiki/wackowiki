@@ -557,53 +557,33 @@ function admin_user_groups(&$engine, &$module)
 	}
 	else
 	{
+		$order = match($_order) {
+			'created_asc'		=> 'ORDER BY g.created ASC ',
+			'created_desc'		=> 'ORDER BY g.created DESC ',
+			'group_asc'			=> 'ORDER BY g.group_name DESC ',
+			'group_desc'		=> 'ORDER BY g.group_name ASC ',
+			'members_asc'		=> 'ORDER BY members DESC ',
+			'members_desc'		=> 'ORDER BY members ASC ',
+			default				=> '',
+		};
+
 		// set created ordering
-		if ($_order == 'created_asc')
-		{
-			$order			= 'ORDER BY g.created ASC ';
-			$created		= 'created_desc';
-		}
-		else if ($_order == 'created_desc')
-		{
-			$order			= 'ORDER BY g.created DESC ';
-			$created		= 'created_asc';
-		}
-		else
-		{
-			$created		= 'created_asc';
-		}
+		$created = match($_order) {
+			'created_asc'		=> 'created_desc',
+			default				=> 'created_asc',
+		};
 
 		// set usergroup ordering
-		if ($_order == 'group_asc')
-		{
-			$order			= 'ORDER BY g.group_name DESC ';
-			$order_group	= 'user_desc';
-		}
-		else if ($_order == 'group_desc')
-		{
-			$order			= 'ORDER BY g.group_name ASC ';
-			$order_group	= 'group_asc';
-		}
-		else
-		{
-			$order_group	= 'group_desc';
-		}
+		$order_group = match($_order) {
+			'group_desc'		=> 'group_asc',
+			default				=> 'group_desc',
+		};
 
 		// set members ordering
-		if ($_order == 'members_asc')
-		{
-			$order			= 'ORDER BY members DESC ';
-			$order_members	= 'user_desc';
-		}
-		else if ($_order == 'members_desc')
-		{
-			$order			= 'ORDER BY members ASC ';
-			$order_members	= 'members_asc';
-		}
-		else
-		{
-			$order_members	= 'members_desc';
-		}
+		$order_members = match($_order) {
+			'members_asc'		=> 'members_desc',
+			default				=> 'members_asc',
+		};
 
 		// filter by lang
 		if (isset($_GET['moderator_id']))
@@ -630,7 +610,7 @@ function admin_user_groups(&$engine, &$module)
 				"LEFT JOIN " . $prefix . "usergroup_member m ON (m.group_id = g.group_id) " .
 			($where ?: '') .
 			"GROUP BY g.group_id,g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name " .
-			($order ?: 'ORDER BY group_id DESC ') .
+			($order ?: 'ORDER BY g.group_name ASC ') .
 			$pagination['limit']);
 
 		/////////////////////////////////////////////

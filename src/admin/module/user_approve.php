@@ -191,21 +191,26 @@ function admin_user_approve(&$engine, &$module)
 	{
 		$where			= "WHERE user_name LIKE " . $engine->db->q('%' . $_GET['user'] . '%') . " ";
 	}
+
+	$order = match($_order) {
+		'signup_asc'			=> 'ORDER BY signup_time ASC ',
+		'signup_desc'			=> 'ORDER BY signup_time DESC ',
+		'user_asc'				=> 'ORDER BY user_name DESC ',
+		'user_desc'				=> 'ORDER BY user_name ASC ',
+		default					=> '',
+	};
+
 	// set signuptime ordering
-	else if ($_order == 'signup_asc')
-	{
-		$order			= 'ORDER BY signup_time ASC ';
-		$signup_time	= 'signup_desc';
-	}
-	else if ($_order == 'signup_desc')
-	{
-		$order			= 'ORDER BY signup_time DESC ';
-		$signup_time	= 'signup_asc';
-	}
-	else
-	{
-		$signup_time	= 'signup_asc';
-	}
+	$signup_time = match($_order) {
+		'signup_asc'			=> 'signup_desc',
+		default					=> 'signup_asc',
+	};
+
+	// set user_name ordering
+	$order_user = match($_order) {
+		'user_asc'				=> 'user_desc',
+		default					=> 'user_asc',
+	};
 
 	// filter by account_status
 	if ($account_status != -1)
@@ -215,22 +220,6 @@ function admin_user_approve(&$engine, &$module)
 	else
 	{
 		$where			= "WHERE u.account_status = 1 ";
-	}
-
-	// set user_name ordering
-	if ($_order == 'user_asc')
-	{
-		$order			= 'ORDER BY user_name DESC ';
-		$order_user		= 'user_desc';
-	}
-	else if ($_order == 'user_desc')
-	{
-		$order			= 'ORDER BY user_name ASC ';
-		$order_user		= 'user_asc';
-	}
-	else
-	{
-		$order_user		= 'user_desc';
 	}
 
 	// filter by lang

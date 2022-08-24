@@ -702,118 +702,65 @@ function admin_user_users(&$engine, &$module)
 			$where				= "WHERE user_name LIKE " . $engine->db->q('%' . trim($_GET['user']) . '%') . " ";
 		}
 
+		$order = match($_order) {
+			'signup_asc'			=> 'ORDER BY signup_time ASC ',
+			'signup_desc'			=> 'ORDER BY signup_time DESC ',
+			'last_visit_asc'		=> 'ORDER BY last_visit ASC ',
+			'last_visit_desc'		=> 'ORDER BY last_visit DESC ',
+			'total_pages_asc'		=> 'ORDER BY total_pages ASC ',
+			'total_pages_desc'		=> 'ORDER BY total_pages DESC ',
+			'total_comments_asc'	=> 'ORDER BY total_comments ASC ',
+			'total_comments_desc'	=> 'ORDER BY total_comments DESC ',
+			'total_revisions_asc'	=> 'ORDER BY total_revisions ASC ',
+			'total_revisions_desc'	=> 'ORDER BY total_revisions DESC ',
+			'total_uploads_asc'		=> 'ORDER BY total_uploads ASC ',
+			'total_uploads_desc'	=> 'ORDER BY total_uploads DESC ',
+			'user_asc'				=> 'ORDER BY user_name DESC ',
+			'user_desc'				=> 'ORDER BY user_name ASC ',
+			default					=> '',
+		};
+
 		// set signuptime ordering
-		if ($_order == 'signup_asc')
-		{
-			$order				= 'ORDER BY signup_time ASC ';
-			$signup_time		= 'signup_desc';
-		}
-		else if ($_order == 'signup_desc')
-		{
-			$order				= 'ORDER BY signup_time DESC ';
-			$signup_time		= 'signup_asc';
-		}
-		else
-		{
-			$signup_time		= 'signup_asc';
-		}
+		$signup_time = match($_order) {
+			'signup_asc'			=> 'signup_desc',
+			default					=> 'signup_asc',
+		};
 
 		// set last_visit ordering
-		if ($_order == 'last_visit_asc')
-		{
-			$order				= 'ORDER BY last_visit ASC ';
-			$last_visit			= 'last_visit_desc';
-		}
-		else if ($_order == 'last_visit_desc')
-		{
-			$order				= 'ORDER BY last_visit DESC ';
-			$last_visit			= 'last_visit_asc';
-		}
-		else
-		{
-			$last_visit			= 'last_visit_asc';
-		}
+		$last_visit = match($_order) {
+			'last_visit_asc'		=> 'last_visit_desc',
+			default					=> 'last_visit_asc',
+		};
 
 		// set total_pages ordering
-		if ($_order == 'total_pages_asc')
-		{
-			$order				= 'ORDER BY total_pages ASC ';
-			$order_pages		= 'total_pages_desc';
-		}
-		else if ($_order == 'total_pages_desc')
-		{
-			$order				= 'ORDER BY total_pages DESC ';
-			$order_pages		= 'total_pages_asc';
-		}
-		else
-		{
-			$order_pages		= 'total_pages_asc';
-		}
+		$order_pages = match($_order) {
+			'total_pages_asc'		=> 'total_pages_desc',
+			default					=> 'total_pages_asc',
+		};
 
 		// set total_comments ordering
-		if ($_order == 'total_comments_asc')
-		{
-			$order				= 'ORDER BY total_comments ASC ';
-			$order_comments		= 'total_comments_desc';
-		}
-		else if ($_order == 'total_comments_desc')
-		{
-			$order				= 'ORDER BY total_comments DESC ';
-			$order_comments		= 'total_comments_asc';
-		}
-		else
-		{
-			$order_comments	= 'total_comments_asc';
-		}
+		$order_comments = match($_order) {
+			'total_comments_asc'	=> 'total_comments_desc',
+			default					=> 'total_comments_asc',
+		};
 
 		// set total_revisions ordering
-		if ($_order == 'total_revisions_asc')
-		{
-			$order				= 'ORDER BY total_revisions ASC ';
-			$order_revisions	= 'total_revisions_desc';
-		}
-		else if ($_order == 'total_revisions_desc')
-		{
-			$order				= 'ORDER BY total_revisions DESC ';
-			$order_revisions	= 'total_revisions_asc';
-		}
-		else
-		{
-			$order_revisions	= 'total_revisions_asc';
-		}
+		$order_revisions = match($_order) {
+			'total_revisions_asc'	=> 'total_revisions_desc',
+			default					=> 'total_revisions_asc',
+		};
 
 		// set total_uploads ordering
-		if ($_order == 'total_uploads_asc')
-		{
-			$order				= 'ORDER BY total_uploads ASC ';
-			$order_uploads		= 'total_uploads_desc';
-		}
-		else if ($_order == 'total_uploads_desc')
-		{
-			$order				= 'ORDER BY total_uploads DESC ';
-			$order_uploads		= 'total_uploads_asc';
-		}
-		else
-		{
-			$order_uploads		= 'total_uploads_asc';
-		}
+		$order_uploads = match($_order) {
+			'total_uploads_asc'		=> 'total_uploads_desc',
+			default					=> 'total_uploads_asc',
+		};
 
 		// set user_name ordering
-		if ($_order == 'user_asc')
-		{
-			$order				= 'ORDER BY user_name DESC ';
-			$order_user			= 'user_desc';
-		}
-		else if ($_order == 'user_desc')
-		{
-			$order				= 'ORDER BY user_name ASC ';
-			$order_user			= 'user_asc';
-		}
-		else
-		{
-			$order_user			= 'user_desc';
-		}
-
+		$order_user = match($_order) {
+			'user_asc'				=> 'user_desc',
+			default					=> 'user_asc',
+		};
 
 		// filter by account_status
 		if (isset($_GET['account_status']))
