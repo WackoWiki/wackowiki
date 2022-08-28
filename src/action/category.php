@@ -80,11 +80,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	{
 		$category_ids[]	= (int) $_GET['category_id'];
 
-		if (is_array($category_ids))
-		{
-
-		}
-		else
+		if (!is_array($category_ids))
 		{
 			$filter[]	= (int) $_GET['category_id'];
 		}

@@ -272,6 +272,7 @@ class Wacko
 		}
 
 		$file_name = explode('.', $file_name);
+
 		return array_pop($file_name);
 	}
 
@@ -5759,9 +5760,7 @@ class Wacko
 			$lines
 		);
 
-		$_list	= implode("\n", $_lines);
-
-		return $_list;
+		return implode("\n", $_lines);
 	}
 
 	// check for acl syntax errors
@@ -7429,7 +7428,7 @@ class Wacko
 			$this->delete_pages([$page_id]);
 		}
 
-		// set correct comments count and date of last commented page
+		// update comments count and date of last commented page
 		if ($comment_on_id)
 		{
 			$this->update_comments_count($comment_on_id, null, true);
