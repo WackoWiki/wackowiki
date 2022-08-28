@@ -282,7 +282,7 @@ class Settings extends Dbal implements ArrayAccess
 				? ':' . $_SERVER['SERVER_PORT']
 				: ''
 			);
-		$base_path = (($path = preg_replace('/\/\//', '\/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')))
+		$base_path = (($path = str_replace('//', '/', trim(strtr(dirname($_SERVER['SCRIPT_NAME']), '\\', '/'), '/')))
 				? '/' . $path
 				: ''
 			) . '/';

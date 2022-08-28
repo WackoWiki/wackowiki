@@ -11,6 +11,7 @@ if (!defined('IN_WACKO'))
 	{{files
 		[page="PageName" or global=1 or all=1]
 		[order="ext|name_desc|size|size_desc|time|time_desc"]
+		[options=1]
 		[owner="UserName"]
 		[media=1]
 		[max=number]
