@@ -121,7 +121,7 @@ $wacko_config_defaults = [
 	'numerate_links'				=> 0,
 
 	'allow_x11colors'				=> 0,
-	'default_typografica'			=> 1,
+	'default_typografica'			=> 0,
 	'paragrafica'					=> 1,
 
 	'disable_bracketslinks'			=> 0,
