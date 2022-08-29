@@ -252,7 +252,7 @@ $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['
 			($mode == 'main' || (!$_GET && !$_POST)
 				? "\n<ul>\n" . '<li class="active">'
 				: "\n<ul>\n<li>") .
-			'<a href="' . $engine->href() . '" title="' . $module['main']['title'] . '">' . $module['main']['name'] . '</a>' .
+			'<a href="' . $engine->href() . '" title="' . $engine->_t('main')['title'] . '">' . $engine->_t('main')['name'] . '</a>' .
 			"</li>\n";
 
 $category = $module['main']['cat'];
@@ -264,7 +264,7 @@ foreach ($module as $row)
 	{
 		if ($mode == $row['mode'] || $row['mode'] == 'main')
 		{
-			$title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $row['name'];
+			$title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $engine->_t($row['mode'])['name'];
 		}
 
 		if ($row['mode'] != 'main')
