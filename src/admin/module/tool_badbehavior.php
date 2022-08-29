@@ -14,7 +14,6 @@ $module[$_mode] = [
 		'order'	=> 800,
 		'cat'	=> 'extension',
 		'status'=> !RECOVERY_MODE,
-		'mode'	=> $_mode,
 	];
 
 ##########################################################
