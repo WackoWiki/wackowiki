@@ -258,22 +258,22 @@ $menu = '<ul><li class="text submenu">' . $engine->_t('CategoryArray')[$module['
 $category = $module['main']['cat'];
 
 // append modules to menu
-foreach ($module as $row)
+foreach ($module as $_mode => $row)
 {
 	if ($row['status'] === true) // exclude disabled modules
 	{
-		if ($mode == $row['mode'] || $row['mode'] == 'main')
+		if ($mode == $_mode || $_mode == 'main')
 		{
-			$title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $engine->_t($row['mode'])['name'];
+			$title = $engine->_t('CategoryArray')[$row['cat']] . ' &gt; ' . $engine->_t($_mode)['name'];
 		}
 
-		if ($row['mode'] != 'main')
+		if ($_mode != 'main')
 		{
 			$menu .= ($row['cat'] != $category
 				? "</ul>\n</li>\n" . '<li class="text submenu2">' . $engine->_t('CategoryArray')[$row['cat']] . "<ul>\n"
 				: '');
 
-			if ($mode == $row['mode'])
+			if ($mode == $_mode)
 			{
 				$menu .= '<li class="active">';
 			}
@@ -282,7 +282,7 @@ foreach ($module as $row)
 				$menu .= '<li>';
 			}
 
-			$menu .= '<a href="' . $engine->href('', '', ['mode' => $row['mode']]) . '" title="' . $engine->_t($row['mode'])['title'] . '">' . $engine->_t($row['mode'])['name'] . '</a>';
+			$menu .= '<a href="' . $engine->href('', '', ['mode' => $_mode]) . '" title="' . $engine->_t($_mode)['title'] . '">' . $engine->_t($_mode)['name'] . '</a>';
 			$menu .= "</li>\n";
 		}
 		else
