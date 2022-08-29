@@ -18,7 +18,7 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_user_users(&$engine, &$module)
+function admin_user_users(&$engine, $module)
 {
 	$where		= '';
 	$order		= '';
@@ -28,7 +28,7 @@ function admin_user_users(&$engine, &$module)
 	#Ut::debug_print_r($_POST);
 	#Ut::debug_print_r($_REQUEST);
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('UsersInfo');?>
@@ -785,7 +785,7 @@ function admin_user_users(&$engine, &$module)
 			);
 
 		$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module] + $order_pagination, '', 'admin.php');
 
 		$users = $engine->db->load_all(
 			"SELECT u.user_id, u.user_name, u.email, u.total_pages, u.total_comments, u.total_revisions, u.total_uploads, u.enabled, u.account_status, u.signup_time, u.last_visit, s.user_lang " .
@@ -799,7 +799,7 @@ function admin_user_users(&$engine, &$module)
 
 		// user filter form
 		$search =	$engine->form_open('search_user', ['form_method' => 'get']) .
-					'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
+					'<input type="hidden" name="mode" value="' . $module . '">' .  // required to pass mode module via GET
 					$engine->_t('UsersSearch') . ': </td><td>' .
 					'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(trim(($_GET['user'] ?? ''))) . '"> ' .
 					'<button type="submit" id="submit">' . $engine->_t('SearchButton') . '</button> ' .

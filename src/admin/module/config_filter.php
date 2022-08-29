@@ -18,7 +18,7 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_config_filter(&$engine, &$module)
+function admin_config_filter(&$engine, $module)
 {
 	/*
 	TODO:
@@ -28,7 +28,7 @@ function admin_config_filter(&$engine, &$module)
 	4) add option to select where the filter is applied: edit, tags, registration, referrers
 	*/
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('FilterSettingsInfo');?>

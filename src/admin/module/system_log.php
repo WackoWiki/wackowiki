@@ -18,11 +18,11 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_system_log(&$engine, &$module)
+function admin_system_log(&$engine, $module)
 {
 	# $whois = 'https://www.db.ripe.net/whois?searchtext=';
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 <?php
 	if (isset($_POST['reset']))
 	{
@@ -108,7 +108,7 @@ function admin_system_log(&$engine, &$module)
 	$level_pagination		= !empty($_level)		? ['level' => (int) $_level] : [];
 	$level_mod_pagination	= !empty($_level_mod)	? ['level_mod' => (int) $_level_mod] : [];
 
-	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination + $level_pagination + $level_mod_pagination, '', 'admin.php');
+	$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module] + $order_pagination + $level_pagination + $level_mod_pagination, '', 'admin.php');
 
 	$log = $engine->db->load_all(
 		"SELECT l.log_id, l.log_time, l.level, l.user_id, l.message, u.user_name, l.ip " .

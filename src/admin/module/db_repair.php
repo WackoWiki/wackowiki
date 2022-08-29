@@ -18,11 +18,11 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_db_repair(&$engine, &$module, &$tables)
+function admin_db_repair(&$engine, $module, $tables)
 {
 	$check = '';
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 <?php
 	if (isset($_POST['repair']))

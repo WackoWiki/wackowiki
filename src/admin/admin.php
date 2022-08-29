@@ -376,7 +376,7 @@ if (isset($mode) === true && ($_GET || $_POST))
 
 		// module run
 		$exec = 'admin_' . $mode;
-		$exec($engine, $module[$mode], $tables, $directories);
+		$exec($engine, $mode, $tables, $directories);
 
 		$engine->current_context--;
 	}

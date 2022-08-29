@@ -18,7 +18,7 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_main(&$engine, &$module)
+function admin_main(&$engine, $module)
 {
 	// (un)lock website
 	if (isset($_POST['action']) && $_POST['action'] == 'lock')
@@ -38,7 +38,7 @@ function admin_main(&$engine, &$module)
 
 	}
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<p><?php echo $engine->_t('MainNote');?></p>
 	<br>

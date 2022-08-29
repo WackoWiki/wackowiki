@@ -18,11 +18,11 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_maint_inconsistencies(&$engine, &$module)
+function admin_maint_inconsistencies(&$engine, $module)
 {
 	$prefix		= $engine->db->table_prefix;
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<p><?php echo $engine->_t('InconsistenciesInfo');?></p>
 	<br>

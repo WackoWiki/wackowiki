@@ -18,7 +18,7 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_user_approve(&$engine, &$module)
+function admin_user_approve(&$engine, $module)
 {
 	$where			= '';
 	$order			= '';
@@ -26,7 +26,7 @@ function admin_user_approve(&$engine, &$module)
 	$error			= '';
 	$prefix			= $engine->db->table_prefix;
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('UserApproveInfo'); ?>
@@ -242,7 +242,7 @@ function admin_user_approve(&$engine, &$module)
 
 	$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
 
-	$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination  + ['account_status' => (int) $account_status], '', 'admin.php');
+	$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module] + $order_pagination  + ['account_status' => (int) $account_status], '', 'admin.php');
 
 	$users = $engine->db->load_all(
 		"SELECT u.user_id, u.user_name, u.email, u.user_ip, u.signup_time, u.enabled, u.account_status, s.user_lang " .
@@ -278,7 +278,7 @@ function admin_user_approve(&$engine, &$module)
 
 	// user filter form
 	$search =			$engine->form_open('search_user', ['form_method' => 'get']) .
-						'<input type="hidden" name="mode" value="' . $module['mode'] . '">' .  // required to pass mode module via GET
+						'<input type="hidden" name="mode" value="' . $module . '">' .  // required to pass mode module via GET
 						$engine->_t('UsersSearch') . ': </td><td>' .
 						'<input type="search" name="user" maxchars="40" size="30" value="' . Ut::html(($_GET['user'] ?? '')) . '"> ' .
 						'<button type="submit" id="submit">' . $engine->_t('SearchButton') . '</button> ' .
