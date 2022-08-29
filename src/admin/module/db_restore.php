@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'database',
 		'status'=> true,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Restore
-		'title'	=> $engine->_t($_mode)['title'],	// Restoring backup data
 	];
 
 ##########################################################
@@ -24,7 +22,7 @@ $module[$_mode] = [
 function admin_db_restore(&$engine, &$module, &$tables, &$directories)
 {
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 <?php
 	$logs			= [];

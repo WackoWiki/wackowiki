@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'database',
 		'status'=> true,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Convert
-		'title'	=> $engine->_t($_mode)['title'],	// Converting Tables or Columns
 ];
 
 ##########################################################
@@ -49,7 +47,7 @@ function admin_db_convert(&$engine, &$module, &$tables)
 		}
 	}
 	?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 <?php
 

@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'maintenance',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Data Synchronization
-		'title'	=> $engine->_t($_mode)['title'],	// Synchronizing data
 	];
 
 ##########################################################
@@ -25,7 +23,7 @@ function admin_maint_resync(&$engine, &$module)
 {
 	$prefix		= $engine->db->table_prefix;
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 <?php
 	if (isset($_REQUEST['start']))

@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Polls
-		'title'	=> $engine->_t($_mode)['title'],	// Editing, start and stop polls
 	];
 
 ##########################################################
@@ -27,7 +25,7 @@ function admin_content_polls(&$engine, &$module)
 	$moderation = '';
 
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 <?php
 	// create polls object

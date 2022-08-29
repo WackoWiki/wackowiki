@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'basics',
 		'status'=> true,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Main Menu
-		'title'	=> $engine->_t($_mode)['title'],	// WackoWiki Administration
 	];
 
 ##########################################################
@@ -41,7 +39,7 @@ function admin_main(&$engine, &$module)
 
 	}
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p><?php echo $engine->_t('MainNote');?></p>
 	<br>

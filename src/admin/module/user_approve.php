@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Approve
-		'title'	=> $engine->_t($_mode)['title'],	// User registration approval
 	];
 
 ##########################################################
@@ -29,7 +27,7 @@ function admin_user_approve(&$engine, &$module)
 	$error			= '';
 	$prefix			= $engine->db->table_prefix;
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('UserApproveInfo'); ?>

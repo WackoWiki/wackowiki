@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'basics',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// System log
-		'title'	=> $engine->_t($_mode)['title'],	// Log system events
 	];
 
 ##########################################################
@@ -25,7 +23,7 @@ function admin_system_log(&$engine, &$module)
 {
 	# $whois = 'https://www.db.ripe.net/whois?searchtext=';
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 <?php
 	if (isset($_POST['reset']))
 	{

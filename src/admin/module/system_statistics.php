@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'basics',
 		'status'=> true,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Statistics
-		'title'	=> $engine->_t($_mode)['title'],	// Show statistics
 	];
 
 ##########################################################
@@ -24,7 +22,7 @@ $module[$_mode] = [
 function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
 {
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<br>
 	<?php echo $engine->_t('DbStatSection');?>

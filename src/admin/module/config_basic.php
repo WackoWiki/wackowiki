@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Basic
-		'title'	=> $engine->_t($_mode)['title'],	// Basic parameters
 	];
 
 ##########################################################
@@ -24,7 +22,7 @@ $module[$_mode] = [
 function admin_config_basic(&$engine, &$module)
 {
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<?php
 	// update settings

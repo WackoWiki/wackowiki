@@ -284,7 +284,7 @@ foreach ($module as $row)
 				$menu .= '<li>';
 			}
 
-			$menu .= '<a href="' . $engine->href('', '', ['mode' => $row['mode']]) . '" title="' . $row['title'] . '">' . $row['name'] . '</a>';
+			$menu .= '<a href="' . $engine->href('', '', ['mode' => $row['mode']]) . '" title="' . $engine->_t($row['mode'])['title'] . '">' . $engine->_t($row['mode'])['name'] . '</a>';
 			$menu .= "</li>\n";
 		}
 		else

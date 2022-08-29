@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Filter
-		'title'	=> $engine->_t($_mode)['title'],	// Filter settings
 	];
 
 ##########################################################
@@ -31,7 +29,7 @@ function admin_config_filter(&$engine, &$module)
 	4) add option to select where the filter is applied: edit, tags, registration, referrers
 	*/
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('FilterSettingsInfo');?>

@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'messages',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Mass email
-		'title'	=> $engine->_t($_mode)['title'],	// Mass email
 	];
 
 ##########################################################
@@ -24,7 +22,7 @@ $module[$_mode] = [
 function admin_massemail(&$engine, &$module)
 {
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('MassemailInfo');?>

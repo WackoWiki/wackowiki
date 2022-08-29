@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// System
-		'title'	=> $engine->_t($_mode)['title'],	// System options
 	];
 
 ##########################################################
@@ -24,7 +22,7 @@ $module[$_mode] = [
 function admin_config_system(&$engine, &$module)
 {
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p>
 			<?php echo $engine->_t('SystemSettingsInfo');?>

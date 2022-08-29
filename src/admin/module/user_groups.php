@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Groups
-		'title'	=> $engine->_t($_mode)['title'],	// Group management
 	];
 
 ##########################################################
@@ -37,7 +35,7 @@ function admin_user_groups(&$engine, &$module)
  * These are groups created by you or another admin on this board. You can manage memberships as well as edit group properties or even delete the group.
 */
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('GroupsInfo');?>
