@@ -17,7 +17,7 @@ $module[$_mode] = [
 	];
 
 ##########################################################
-function admin_tool_badbehavior(&$engine, &$module)
+function admin_tool_badbehavior(&$engine, $module)
 {
 	if (!empty($engine->db->ext_bad_behavior))
 	{
@@ -857,7 +857,7 @@ function bb2_options(&$engine)
 
 
 	?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<?php echo Ut::perc_replace($engine->_t('BbInfo'), '<a href="https://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a>');?>
 	<br><br>

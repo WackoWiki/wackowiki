@@ -18,7 +18,7 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_user_groups(&$engine, &$module)
+function admin_user_groups(&$engine, $module)
 {
 	$where		= '';
 	$order		= '';
@@ -34,7 +34,7 @@ function admin_user_groups(&$engine, &$module)
  * These are groups created by you or another admin on this board. You can manage memberships as well as edit group properties or even delete the group.
 */
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('GroupsInfo');?>
@@ -618,7 +618,7 @@ function admin_user_groups(&$engine, &$module)
 			($where ?: ''));
 
 		$order_pagination	= !empty($_order) ? ['order' => Ut::html($_order)] : [];
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module['mode']] + $order_pagination, '', 'admin.php');
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => $module] + $order_pagination, '', 'admin.php');
 
 		$groups = $engine->db->load_all(
 			"SELECT g.group_id, g.group_name, g.description, g.moderator_id, g.open, g.active, g.created, u.user_name, COUNT(m.user_id) AS members " .

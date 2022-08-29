@@ -18,10 +18,10 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_config_formatter(&$engine, &$module)
+function admin_config_formatter(&$engine, $module)
 {
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('FormatterSettingsInfo');?>

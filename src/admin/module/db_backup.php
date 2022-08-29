@@ -18,7 +18,7 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_db_backup(&$engine, &$module, &$tables, &$directories)
+function admin_db_backup(&$engine, $module, $tables, $directories)
 {
 	$scheme			= [];
 
@@ -52,7 +52,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 		}
 	}
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 <?php
 	if (isset($_POST['start']))

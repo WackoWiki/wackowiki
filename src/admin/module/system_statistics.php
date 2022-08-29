@@ -18,10 +18,10 @@ $module[$_mode] = [
 
 ##########################################################
 
-function admin_system_statistics(&$engine, &$module, &$tables, &$directories)
+function admin_system_statistics(&$engine, $module, $tables, $directories)
 {
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<br>
 	<?php echo $engine->_t('DbStatSection');?>
