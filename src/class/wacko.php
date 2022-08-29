@@ -5074,20 +5074,12 @@ class Wacko
 		}
 	}
 
-	function theme_header($mod = ''): string
+	function theme_template($section, $mod = ''): string
 	{
 		$theme_path		= Ut::join_path(THEME_DIR, $this->db->theme, 'appearance');
 		$error_message	= $this->_t('ThemeCorrupt') . ': ' . $this->db->theme;
 
-		return $this->include_buffered('header' . $mod . '.php', $error_message, '', $theme_path);
-	}
-
-	function theme_footer($mod = ''): string
-	{
-		$theme_path		= Ut::join_path(THEME_DIR, $this->db->theme, 'appearance');
-		$error_message	= $this->_t('ThemeCorrupt') . ': ' . $this->db->theme;
-
-		return $this->include_buffered('footer' . $mod . '.php', $error_message, '', $theme_path);
+		return $this->include_buffered($section . $mod . '.php', $error_message, '', $theme_path);
 	}
 
 	/**
@@ -7060,7 +7052,11 @@ class Wacko
 			$this->context[$this->current_context] = $this->tag;
 			$data = $this->method($this->method);
 			$this->current_context--;
-			echo $this->theme_header($mod) . $data . $this->theme_footer($mod);
+
+			echo
+				$this->theme_template('header', $mod) .
+				$data .
+				$this->theme_template('footer', $mod);
 		}
 
 		// goback feature
