@@ -389,7 +389,7 @@ if (isset($mode) === true && ($_GET || $_POST))
 }
 else if (!($_GET && $_POST))
 {
-	admin_main($engine, $module['main']);
+	admin_main($engine, 'main');
 }
 ?>
 	<br>
