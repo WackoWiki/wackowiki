@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Users
-		'title'	=> $engine->_t($_mode)['title'],	// User management
 	];
 
 ##########################################################
@@ -31,7 +29,7 @@ function admin_user_users(&$engine, &$module)
 	#Ut::debug_print_r($_POST);
 	#Ut::debug_print_r($_REQUEST);
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('UsersInfo');?>

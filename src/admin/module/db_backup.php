@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'database',
 		'status'=> true,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Backup
-		'title'	=> $engine->_t($_mode)['title'],	// Backing up data
 	];
 
 ##########################################################
@@ -55,7 +53,7 @@ function admin_db_backup(&$engine, &$module, &$tables, &$directories)
 		}
 	}
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 <?php
 	if (isset($_POST['start']))

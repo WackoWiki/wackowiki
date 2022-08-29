@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'extension',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Bad Behavior
-		'title'	=> $engine->_t($_mode)['title'],	// Bad Behavior
 	];
 
 ##########################################################
@@ -860,7 +858,7 @@ function bb2_options(&$engine)
 
 
 	?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<?php echo Ut::perc_replace($engine->_t('BbInfo'), '<a href="https://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a>');?>
 	<br><br>

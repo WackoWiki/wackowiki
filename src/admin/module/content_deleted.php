@@ -15,8 +15,6 @@ $module[$_mode] = [
 		'cat'	=> 'content',
 		'status'=> !RECOVERY_MODE,
 		'mode'	=> $_mode,
-		'name'	=> $engine->_t($_mode)['name'],		// Deleted
-		'title'	=> $engine->_t($_mode)['title'],	// Newly deleted content
 	];
 
 ##########################################################
@@ -24,7 +22,7 @@ $module[$_mode] = [
 function admin_content_deleted(&$engine, &$module)
 {
 ?>
-	<h1><?php echo $module['title']; ?></h1>
+	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
 	<br>
 	<p>
 		<?php echo $engine->_t('DeletedObjectsInfo');?>
