@@ -411,7 +411,7 @@ else if (!($_GET && $_POST))
 ##                     Page footer                    ##
 ########################################################
 ?>
-	<footer id="footer">System <a href="https://wackowiki.org/">WackoWiki</a></footer>
+	<footer id="footer"><?php echo $engine->_t('System'); ?> <a href="https://wackowiki.org/">WackoWiki</a></footer>
 	<!-- end wrapper -->
 	</div>
 <?php

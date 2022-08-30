@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Hinweis: Es wird empfolen den Zugang zur Site für administrative Wartungsarbeiten zu sperren.',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Grundfunktion',
@@ -43,6 +42,8 @@ $ap_translation = [
 	'SiteClose'					=> 'schließen',
 	'SiteClosed'				=> 'Website geschlossen',
 	'SiteClosedTip'				=> 'Die Website ist geschlossen',
+
+	'System'					=> 'System',
 
 	// Generic
 	'Cancel'					=> 'Abbrechen',
@@ -237,6 +238,8 @@ $ap_translation = [
 	],
 
 	// Main module
+	'MainNote'					=> 'Hinweis: Es wird empfolen den Zugang zur Site für administrative Wartungsarbeiten zu sperren.',
+
 	'PurgeSessions'				=> 'entfernen',
 	'PurgeSessionsTip'			=> 'Entferne alle Sitzungen',
 	'PurgeSessionsConfirm'		=> 'Bist du dir sicher, daß du alle Sitzungen entfernen willst? Dies wird alle Nuzer abmelden.',

@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Observación: Antes de realizar actividades de administración se recomienda bloquear el acceso al sitio!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Funciones básicas',
@@ -43,6 +42,8 @@ $ap_translation = [
 	'SiteClose'					=> 'cerrar',
 	'SiteClosed'				=> 'sitio cerrado',
 	'SiteClosedTip'				=> 'El sitio está cerrado',
+
+	'System'					=> 'System',
 
 	// Generic
 	'Cancel'					=> 'Cancelar',
@@ -237,6 +238,8 @@ $ap_translation = [
 	],
 
 	// Main module
+	'MainNote'					=> 'Observación: Antes de realizar actividades de administración se recomienda bloquear el acceso al sitio!',
+
 	'PurgeSessions'				=> 'Purga',
 	'PurgeSessionsTip'			=> 'Purgar todas las sesiones',
 	'PurgeSessionsConfirm'		=> '¿Estás seguro de que deseas purgar todas las sesiones? Esto cerrará la sesión de todos los usuarios.',

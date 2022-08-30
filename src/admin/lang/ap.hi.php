@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Note: It is recommended that access to the site be temporarily blocked for administrative maintenance.',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
@@ -43,6 +42,8 @@ $ap_translation = [
 	'SiteClose'					=> 'बंद करे',
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
+
+	'System'					=> 'System',
 
 	// Generic
 	'Cancel'					=> 'रद्द करें',
@@ -237,6 +238,8 @@ $ap_translation = [
 	],
 
 	// Main module
+	'MainNote'					=> 'Note: It is recommended that access to the site be temporarily blocked for administrative maintenance.',
+
 	'PurgeSessions'				=> 'Purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',

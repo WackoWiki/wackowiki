@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Attention : Il est fortement recommandé de ne pas accéder au site avant d\'organiser des événements techniques et/ou administratifs !',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Fonctions de base',
@@ -43,6 +42,8 @@ $ap_translation = [
 	'SiteClose'					=> 'Fermer',
 	'SiteClosed'				=> 'site fermé',
 	'SiteClosedTip'				=> 'Le site est fermé',
+
+	'System'					=> 'System',
 
 	// Generic
 	'Cancel'					=> 'Annuler',
@@ -237,6 +238,8 @@ $ap_translation = [
 	],
 
 	// Main module
+	'MainNote'					=> 'Attention : Il est fortement recommandé de ne pas accéder au site avant d\'organiser des événements techniques et/ou administratifs !',
+
 	'PurgeSessions'				=> 'Purger',
 	'PurgeSessionsTip'			=> 'Purger toutes les sessions',
 	'PurgeSessionsConfirm'		=> 'Êtes-vous sûr de vouloir purger toutes les sessions ? Tous les utilisateurs seront déconnectés.',
