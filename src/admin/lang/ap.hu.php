@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
 
 	'CategoryArray'		=> [
 		'basics'		=> 'Basic functions',
@@ -43,6 +42,8 @@ $ap_translation = [
 	'SiteClose'					=> 'Bezár',
 	'SiteClosed'				=> 'site closed',
 	'SiteClosedTip'				=> 'The site is closed',
+
+	'System'					=> 'System',
 
 	// Generic
 	'Cancel'					=> 'Mégse',
@@ -249,6 +250,8 @@ $ap_translation = [
 	],
 
 	// Main module
+	'MainNote'					=> 'Note: Before the administration of technical activities strongly are encouraged to block access to the site!',
+
 	'PurgeSessions'				=> 'Purge',
 	'PurgeSessionsTip'			=> 'Purge all sessions',
 	'PurgeSessionsConfirm'		=> 'Are you sure you wish to purge all sessions? This will log out all users.',

@@ -6,7 +6,6 @@ if (!defined('IN_WACKO'))
 }
 
 $ap_translation = [
-	'MainNote'					=> '建议暂时阻止对该站点的访问以进行管理维护。',
 
 	'CategoryArray'		=> [
 		'basics'		=> '基本功能',
@@ -43,6 +42,8 @@ $ap_translation = [
 	'SiteClose'					=> '关闭',
 	'SiteClosed'				=> '站点已关闭',
 	'SiteClosedTip'				=> '站点已关闭',
+
+	'System'					=> 'System',
 
 	// Generic
 	'Cancel'					=> '取消',
@@ -243,6 +244,8 @@ $ap_translation = [
 	],
 
 	// Main module
+	'MainNote'					=> '建议暂时阻止对该站点的访问以进行管理维护。',
+
 	'PurgeSessions'				=> '清除',
 	'PurgeSessionsTip'			=> '清除所有会话',
 	'PurgeSessionsConfirm'		=> '您确定要清除所有会话吗？ 这将注销所有用户。',
