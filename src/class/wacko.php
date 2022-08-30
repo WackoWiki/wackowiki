@@ -604,14 +604,14 @@ class Wacko
 		}
 	}
 
-	function known_language($lang): bool
+	function known_language($lang, $subset = true): bool
 	{
-		return array_key_exists($lang, $this->http->available_languages());
+		return array_key_exists($lang, $this->http->available_languages($subset));
 	}
 
-	function validate_language($lang): string
+	function validate_language($lang, $subset = true): string
 	{
-		return $this->known_language($lang) ? $lang : $this->db->language;
+		return $this->known_language($lang, $subset) ? $lang : $this->db->language;
 	}
 
 	function get_user_language()

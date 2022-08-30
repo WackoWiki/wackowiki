@@ -29,7 +29,7 @@ function admin_config_basic(&$engine, $module)
 		$site_name		= $engine->sanitize_text_field($_POST['site_name'], true);
 		$site_desc		= $engine->sanitize_text_field($_POST['site_desc'], true);
 		$admin_name		= $engine->sanitize_username($_POST['admin_name']);
-		$language		= $engine->validate_language($_POST['language']);
+		$language		= $engine->validate_language($_POST['language'], false);
 
 		$config['site_name']					= (string) $site_name;
 		$config['site_desc']					= (string) $site_desc;
@@ -41,7 +41,7 @@ function admin_config_basic(&$engine, $module)
 		{
 			$allowed_languages = array_map(
 				function($lang) use ($engine) {
-					return $engine->validate_language($lang);
+					return $engine->validate_language($lang, false);
 				},
 				$_POST['allowed_languages']
 			);
