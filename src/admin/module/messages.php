@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Messages settings									##
 ##########################################################
-$_mode = 'messages';
 
-$module[$_mode] = [
+$module['messages'] = [
 		'order'	=> 710,
 		'cat'	=> 'messages',
 		'status'=> !RECOVERY_MODE,

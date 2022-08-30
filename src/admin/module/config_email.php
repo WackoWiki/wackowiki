@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Email settings										##
 ##########################################################
-$_mode = 'config_email';
 
-$module[$_mode] = [
+$module['config_email'] = [
 		'order'	=> 270,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,

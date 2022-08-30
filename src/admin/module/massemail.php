@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Messages settings									##
 ##########################################################
-$_mode = 'massemail';
 
-$module[$_mode] = [
+$module['massemail'] = [
 		'order'	=> 700,
 		'cat'	=> 'messages',
 		'status'=> !RECOVERY_MODE,

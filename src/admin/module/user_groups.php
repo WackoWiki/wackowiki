@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	User Groups											##
 ##########################################################
-$_mode = 'user_groups';
 
-$module[$_mode] = [
+$module['user_groups'] = [
 		'order'	=> 420,
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,

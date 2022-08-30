@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Pages settings										##
 ##########################################################
-$_mode = 'config_pages';
 
-$module[$_mode] = [
+$module['config_pages'] = [
 		'order'	=> 280,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,

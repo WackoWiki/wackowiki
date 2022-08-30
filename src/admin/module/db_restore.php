@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	DB Restore											##
 ##########################################################
-$_mode = 'db_restore';
 
-$module[$_mode] = [
+$module['db_restore'] = [
 		'order'	=> 510,
 		'cat'	=> 'database',
 		'status'=> true,

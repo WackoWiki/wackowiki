@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Welcome screen and site locking						##
 ##########################################################
-$_mode = 'main';
 
-$module[$_mode] = [
+$module['main'] = [
 		'order'	=> 100,
 		'cat'	=> 'basics',
 		'status'=> true,

@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Menu												##
 ##########################################################
-$_mode = 'content_menu';
 
-$module[$_mode] = [
+$module['content_menu'] = [
 		'order'	=> 320,
 		'cat'	=> 'content',
 		'status'=> !RECOVERY_MODE,

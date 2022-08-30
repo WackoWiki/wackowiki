@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Appearance settings									##
 ##########################################################
-$_mode = 'config_appearance';
 
-$module[$_mode] = [
+$module['config_appearance'] = [
 		'order'	=> 202,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,

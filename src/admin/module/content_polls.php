@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Polls Moderation									##
 ##########################################################
-$_mode = 'content_polls';
 
-$module[$_mode] = [
+$module['content_polls'] = [
 		'order'	=> 330,
 		'cat'	=> 'content',
 		'status'=> (RECOVERY_MODE ? false : true),

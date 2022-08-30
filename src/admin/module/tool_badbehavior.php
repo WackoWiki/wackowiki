@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Bad Behavior										##
 ##########################################################
-$_mode = 'tool_badbehavior';
 
-$module[$_mode] = [
+$module['tool_badbehavior'] = [
 		'order'	=> 800,
 		'cat'	=> 'extension',
 		'status'=> !RECOVERY_MODE,

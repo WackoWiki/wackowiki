@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Security settings									##
 ##########################################################
-$_mode = 'config_security';
 
-$module[$_mode] = [
+$module['config_security'] = [
 		'order'	=> 221,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,

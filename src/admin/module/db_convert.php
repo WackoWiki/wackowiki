@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	DB Engine Conversion								##
 ##########################################################
-$_mode = 'db_convert';
 
-$module[$_mode] = [
+$module['db_convert'] = [
 		'order'	=> 520,
 		'cat'	=> 'database',
 		'status'=> true,

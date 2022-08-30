@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	System Log											##
 ##########################################################
-$_mode = 'system_log';
 
-$module[$_mode] = [
+$module['system_log'] = [
 		'order'	=> 140,
 		'cat'	=> 'basics',
 		'status'=> !RECOVERY_MODE,

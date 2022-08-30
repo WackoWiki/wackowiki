@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Notifications settings								##
 ##########################################################
-$_mode = 'config_notifications';
 
-$module[$_mode] = [
+$module['config_notifications'] = [
 		'order'	=> 271,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,

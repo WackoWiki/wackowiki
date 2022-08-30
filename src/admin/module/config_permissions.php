@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Permissions settings								##
 ##########################################################
-$_mode = 'config_permissions';
 
-$module[$_mode] = [
+$module['config_permissions'] = [
 		'order'	=> 220,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
