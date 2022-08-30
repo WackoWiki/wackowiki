@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['config_upload'] = [
-		'order'	=> 250,
+		'order'	=> 206,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 	];

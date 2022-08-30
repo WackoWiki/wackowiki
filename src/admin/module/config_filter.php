@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['config_filter'] = [
-		'order'	=> 250,
+		'order'	=> 207,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 	];

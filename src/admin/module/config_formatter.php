@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['config_formatter'] = [
-		'order'	=> 230,
+		'order'	=> 205,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 	];

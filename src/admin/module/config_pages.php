@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['config_pages'] = [
-		'order'	=> 280,
+		'order'	=> 210,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 	];

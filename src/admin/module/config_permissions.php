@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['config_permissions'] = [
-		'order'	=> 220,
+		'order'	=> 203,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 	];

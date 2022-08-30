@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['db_repair'] = [
-		'order'	=> 540,
+		'order'	=> 502,
 		'cat'	=> 'database',
 		'status'=> true,
 	];

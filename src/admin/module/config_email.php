@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['config_email'] = [
-		'order'	=> 270,
+		'order'	=> 208,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,
 	];

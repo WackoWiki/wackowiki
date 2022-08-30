@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['system_log'] = [
-		'order'	=> 140,
+		'order'	=> 103,
 		'cat'	=> 'basics',
 		'status'=> !RECOVERY_MODE,
 	];

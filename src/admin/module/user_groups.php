@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['user_groups'] = [
-		'order'	=> 420,
+		'order'	=> 402,
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,
 	];

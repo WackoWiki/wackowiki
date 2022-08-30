@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['messages'] = [
-		'order'	=> 710,
+		'order'	=> 701,
 		'cat'	=> 'messages',
 		'status'=> !RECOVERY_MODE,
 	];

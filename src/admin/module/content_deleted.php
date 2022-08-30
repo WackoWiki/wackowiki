@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['content_deleted'] = [
-		'order'	=> 340,
+		'order'	=> 301,
 		'cat'	=> 'content',
 		'status'=> !RECOVERY_MODE,
 	];

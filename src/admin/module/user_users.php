@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['user_users'] = [
-		'order'	=> 410,
+		'order'	=> 401,
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,
 	];

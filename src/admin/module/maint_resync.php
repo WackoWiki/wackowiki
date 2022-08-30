@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['maint_resync'] = [
-		'order'	=> 620,
+		'order'	=> 601,
 		'cat'	=> 'maintenance',
 		'status'=> !RECOVERY_MODE,
 	];

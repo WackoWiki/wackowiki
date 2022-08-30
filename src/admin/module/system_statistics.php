@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 ##########################################################
 
 $module['system_statistics'] = [
-		'order'	=> 120,
+		'order'	=> 101,
 		'cat'	=> 'basics',
 		'status'=> true,
 	];
