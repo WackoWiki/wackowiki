@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Data Inconsistencies								##
 ##########################################################
-$_mode = 'maint_inconsistencies';
 
-$module[$_mode] = [
+$module['maint_inconsistencies'] = [
 		'order'	=> 600,
 		'cat'	=> 'maintenance',
 		'status'=> !RECOVERY_MODE,

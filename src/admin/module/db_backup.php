@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	DB Backup											##
 ##########################################################
-$_mode = 'db_backup';
 
-$module[$_mode] = [
+$module['db_backup'] = [
 		'order'	=> 500,
 		'cat'	=> 'database',
 		'status'=> true,

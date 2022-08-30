@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	System Information									##
 ##########################################################
-$_mode = 'system_info';
 
-$module[$_mode] = [
+$module['system_info'] = [
 		'order'	=> 130,
 		'cat'	=> 'basics',
 		'status'=> true,

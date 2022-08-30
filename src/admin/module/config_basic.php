@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Basic settings										##
 ##########################################################
-$_mode = 'config_basic';
 
-$module[$_mode] = [
+$module['config_basic'] = [
 		'order'	=> 200,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,

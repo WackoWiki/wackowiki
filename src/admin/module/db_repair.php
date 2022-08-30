@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Database Repair and Optimization Script				##
 ##########################################################
-$_mode = 'db_repair';
 
-$module[$_mode] = [
+$module['db_repair'] = [
 		'order'	=> 540,
 		'cat'	=> 'database',
 		'status'=> true,

@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Users												##
 ##########################################################
-$_mode = 'user_users';
 
-$module[$_mode] = [
+$module['user_users'] = [
 		'order'	=> 410,
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,
@@ -24,9 +23,6 @@ function admin_user_users(&$engine, $module)
 	$order		= '';
 	$error		= '';
 	$prefix		= $engine->db->table_prefix;
-
-	#Ut::debug_print_r($_POST);
-	#Ut::debug_print_r($_REQUEST);
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>

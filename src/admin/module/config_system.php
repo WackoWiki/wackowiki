@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Maintenance setting									##
 ##########################################################
-$_mode = 'config_system';
 
-$module[$_mode] = [
+$module['config_system'] = [
 		'order'	=> 210,
 		'cat'	=> 'preferences',
 		'status'=> !RECOVERY_MODE,

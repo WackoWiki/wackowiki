@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Recently deleted pages controls						##
 ##########################################################
-$_mode = 'content_deleted';
 
-$module[$_mode] = [
+$module['content_deleted'] = [
 		'order'	=> 340,
 		'cat'	=> 'content',
 		'status'=> !RECOVERY_MODE,

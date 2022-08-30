@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Welcome screen and site locking						##
 ##########################################################
-$_mode = 'main';
 
-$module[$_mode] = [
+$module['main'] = [
 		'order'	=> 100,
 		'cat'	=> 'basics',
 		'status'=> true,
@@ -35,7 +34,6 @@ function admin_main(&$engine, $module)
 		$engine->sess->delete_cookie(AUTH_TOKEN);
 		// queries
 		# $engine->config->invalidate_sql_cache();
-
 	}
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>

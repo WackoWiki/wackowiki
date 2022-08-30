@@ -8,9 +8,8 @@ if (!defined('IN_WACKO'))
 ##########################################################
 ##	Approve Users										##
 ##########################################################
-$_mode = 'user_approve';
 
-$module[$_mode] = [
+$module['user_approve'] = [
 		'order'	=> 400,
 		'cat'	=> 'users',
 		'status'=> !RECOVERY_MODE,
