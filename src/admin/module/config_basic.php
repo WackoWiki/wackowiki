@@ -212,9 +212,6 @@ function admin_config_basic(&$engine, $module)
 				</td>
 				<td>
 				<?php
-					// TODO: add $reset option to reset sess->available_languages
-					//		for AP basic module, else the user must logout/login again
-					//		after changing the language set to be available
 					if ($engine->db->multilanguage)
 					{
 						// subset: false
