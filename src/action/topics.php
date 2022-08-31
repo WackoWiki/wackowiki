@@ -15,6 +15,8 @@ if (!defined('IN_WACKO'))
 // set defaults
 $pages		??= '';
 
+$prefix		= $this->db->table_prefix;
+
 // ensure that we're executing inside the forum cluster
 if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)
 {
@@ -99,9 +101,9 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 
 	$selector =
 		($category_id
-			? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = p.page_id) "
+			? "INNER JOIN " . $prefix . "category_assignment AS k ON (k.object_id = p.page_id) "
 			: "") . ", " .
-			$this->db->table_prefix . "acl AS a " .
+			$prefix . "acl AS a " .
 		"WHERE p.page_id = a.page_id " .
 			"AND p.deleted <> 1 " .
 			"AND a.privilege = 'create' AND a.list = '' " .
@@ -125,7 +127,7 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	// make counter query
 	$sql =
 		"SELECT COUNT(p.page_id) AS n " .
-		"FROM " . $this->db->table_prefix . "page AS p " .
+		"FROM " . $prefix . "page AS p " .
 		$selector;
 
 	// count topics and make pagination
@@ -135,9 +137,9 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 	// make collector query
 	$sql =
 		"SELECT p.page_id, p.user_id, p.owner_id, p.tag, p.title, p.ip, p.comments, p.hits, p.created, p.commented, p.description, p.page_lang, u.user_name, o.user_name as owner_name " .
-		"FROM " . $this->db->table_prefix . "page AS p " .
-			"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+		"FROM " . $prefix . "page AS p " .
+			"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
+			"LEFT JOIN " . $prefix . "user o ON (p.owner_id = o.user_id) " .
 		$selector .
 		"ORDER BY p.commented DESC " .
 		$pagination['limit'];
@@ -160,10 +162,10 @@ if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->
 		// load latest topic comment
 		$sql_comments =
 			"SELECT p.tag, p.ip, p.created, p.comment_on_id, p.user_id, p.owner_id, u.user_name, o.user_name AS owner_name " .
-			"FROM " . $this->db->table_prefix . "page p " .
-				"LEFT JOIN " . $this->db->table_prefix . "page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) " .
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+			"FROM " . $prefix . "page p " .
+				"LEFT JOIN " . $prefix . "page p2 ON (p.comment_on_id = p2.comment_on_id AND p.created < p2.created) " .
+				"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
+				"LEFT JOIN " . $prefix . "user o ON (p.owner_id = o.user_id) " .
 			"WHERE p.comment_on_id IN (" . $this->ids_string($page_ids) . ") " .
 				"AND p2.page_id IS NULL " .
 				"AND p.comment_on_id <> 0 " .

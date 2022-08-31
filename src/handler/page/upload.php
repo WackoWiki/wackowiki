@@ -21,10 +21,13 @@ $clean_text = function ($string)
 	return $string;
 };
 
+
+
+$can_upload		= $this->can_upload();
+$error			= '';
 $is_global		= '';
 $is_image		= '';
-$error			= '';
-$can_upload		= $this->can_upload();
+$prefix			= $this->db->table_prefix;
 
 $this->ensure_page(true); // TODO: upload for forums?
 
@@ -38,14 +41,14 @@ if (isset($_POST['upload']) & $can_upload)
 	// TODO: set user used_quota in user table (?)
 	$user_files	= $this->db->load_single(
 		"SELECT SUM(file_size) AS used_user_quota " .
-		"FROM " . $this->db->table_prefix . "file " .
+		"FROM " . $prefix . "file " .
 		"WHERE user_id = " . (int) $user['user_id'] . " " .
 		"LIMIT 1");
 
 	// TODO: set used_quota in config table (?)
 	$files		= $this->db->load_single(
 		"SELECT SUM(file_size) AS used_quota " .
-		"FROM " . $this->db->table_prefix . "file " .
+		"FROM " . $prefix . "file " .
 		"LIMIT 1");
 
 	// Checks
@@ -242,7 +245,7 @@ if (isset($_POST['upload']) & $can_upload)
 						if ($replace)
 						{
 							$this->db->sql_query(
-								"UPDATE " . $this->db->table_prefix . "file SET " .
+								"UPDATE " . $prefix . "file SET " .
 									"user_id			= " . (int) $user['user_id'] . "," .
 									"file_lang			= " . $this->db->q($this->page['page_lang']) . ", " .
 									(!empty($description)
@@ -265,7 +268,7 @@ if (isset($_POST['upload']) & $can_upload)
 						{
 							// insert line into DB
 							$this->db->sql_query(
-								"INSERT INTO " . $this->db->table_prefix . "file SET " .
+								"INSERT INTO " . $prefix . "file SET " .
 									"page_id			= " . (int) $page_id . ", " .
 									"user_id			= " . (int) $user['user_id'] . "," .
 									"file_name			= " . $this->db->q($file_name) . ", " .
@@ -287,7 +290,7 @@ if (isset($_POST['upload']) & $can_upload)
 						// get file_id of uploaded file
 						$file = $this->db->load_single(
 							"SELECT file_id " .
-							"FROM " . $this->db->table_prefix . "file " .
+							"FROM " . $prefix . "file " .
 							"WHERE " .
 								"file_name		= " . $this->db->q($file_name) . " AND " .
 								"page_id		= " . (int) $page_id . " " .

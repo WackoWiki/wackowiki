@@ -6,9 +6,11 @@ if (!defined('IN_WACKO'))
 }
 
 // action args:
-$max		= (int) @$max;
+
 $group_id	= (int) @$group_id;
 $logged_in	= $this->get_user();
+$max		= (int) @$max;
+$prefix		= $this->db->table_prefix;
 $tab_mode	= $_GET['mode'] ?? '';
 
 // display user profile
@@ -298,7 +300,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 
 				$pages = $this->db->load_all(
 					"SELECT page_id, owner_id, user_id, tag, title, created, page_lang " .
-					"FROM " . $this->db->table_prefix . "page " .
+					"FROM " . $prefix . "page " .
 					"WHERE owner_id = " . (int) $user['user_id'] . " " .
 						"AND comment_on_id = 0 " .
 						"AND deleted <> 1 " .
@@ -358,7 +360,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 
 				$pages = $this->db->load_all(
 					"SELECT page_id, owner_id, user_id, tag, title, modified, page_lang, edit_note " .
-					"FROM " . $this->db->table_prefix . "page " .
+					"FROM " . $prefix . "page " .
 					"WHERE user_id = " . (int) $user['user_id'] . " " .
 						"AND comment_on_id = 0 " .
 						"AND deleted <> 1 " .
@@ -432,8 +434,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 
 					$comments = $this->db->load_all(
 						"SELECT c.page_id, c.owner_id, c.user_id, c.tag, c.title, c.created, c.comment_on_id, c.page_lang, p.title AS page_title, p.tag AS page_tag, p.owner_id AS page_owner_id " .
-						"FROM " . $this->db->table_prefix . "page c " .
-							"LEFT JOIN " . $this->db->table_prefix . "page p ON (c.comment_on_id = p.page_id) " .
+						"FROM " . $prefix . "page c " .
+							"LEFT JOIN " . $prefix . "page p ON (c.comment_on_id = p.page_id) " .
 						"WHERE c.owner_id = " . (int) $user['user_id'] . " " .
 							"AND c.comment_on_id <> 0 " .
 							"AND c.deleted <> 1 " .
@@ -496,8 +498,8 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 
 						$files = $this->db->load_all(
 							"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_description, f.created, f.file_size, f.file_lang, p.owner_id, p.tag file_on_page, p.title file_on_title " .
-							"FROM " . $this->db->table_prefix . "file f " .
-								"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+							"FROM " . $prefix . "file f " .
+								"LEFT JOIN " . $prefix . "page p ON (f.page_id = p.page_id) " .
 							"WHERE f.user_id = " . (int) $user['user_id'] . " " .
 								"AND f.deleted <> 1 " .
 							// "AND p.deleted <> 1 " .
@@ -646,7 +648,7 @@ else
 
 	$sql_where =
 		($group_id
-			? "LEFT JOIN " . $this->db->table_prefix . "usergroup_member m ON (u.user_id = m.user_id) "
+			? "LEFT JOIN " . $prefix . "usergroup_member m ON (u.user_id = m.user_id) "
 			: "") .
 		"WHERE u.account_type = 0 " .
 			"AND u.enabled = 1 " .
@@ -686,7 +688,7 @@ else
 	$users = $this->db->load_all(
 		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession " .
 		"FROM " . $this->db->user_table . " u " .
-			"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 		$sql_where .
 		$sql_order .
 		$pagination['limit'], true);

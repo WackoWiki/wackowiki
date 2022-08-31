@@ -35,10 +35,11 @@ $load_user_menu = function ($user_id, $lang = '')
 // set defaults
 $system			??= 0;
 
-$message		= '';
-$user			= [];
 $default_menu	= false;
 $menu_lang		= '';
+$message		= '';
+$prefix			= $this->db->table_prefix;
+$user			= [];
 
 // get default menu items
 if ($this->is_admin() && $system)
@@ -104,7 +105,7 @@ if (isset($_POST['_user_menu']))
 		foreach ($data as $item)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "menu SET " .
+				"UPDATE " . $prefix . "menu SET " .
 					"menu_position	= " . (int) $item['menu_position'] . ", " .
 					"menu_title		= " . $this->db->q(mb_substr(trim($_POST['title_' . $item['menu_id']]), 0, 250)) . " " .
 				"WHERE menu_id		= " . (int) $item['menu_id'] . " " .
@@ -131,7 +132,7 @@ if (isset($_POST['_user_menu']))
 					// check if menu item already exists
 					if ($this->db->load_single(
 						"SELECT menu_id " .
-						"FROM " . $this->db->table_prefix . "menu " .
+						"FROM " . $prefix . "menu " .
 						"WHERE user_id = " . (int) $_user_id . " " .
 							($default_menu
 								? "AND menu_lang = " . $this->db->q($_user_lang) . " "
@@ -146,7 +147,7 @@ if (isset($_POST['_user_menu']))
 						// writing new menu item
 						$_menu_position = $this->db->load_all(
 							"SELECT menu_id " .
-							"FROM " . $this->db->table_prefix . "menu " .
+							"FROM " . $prefix . "menu " .
 							"WHERE user_id = " . (int) $_user_id . " " .
 								($default_menu
 									? "AND menu_lang = " . $this->db->q($_user_lang) . " "
@@ -156,7 +157,7 @@ if (isset($_POST['_user_menu']))
 						$_menu_item_count = count($_menu_position);
 
 						$this->db->sql_query(
-							"INSERT INTO " . $this->db->table_prefix . "menu SET " .
+							"INSERT INTO " . $prefix . "menu SET " .
 								"user_id			= " . (int) $_user_id . ", " .
 								"page_id			= " . (int) $_page_id.", " .
 								"menu_lang			= " . $this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)) . ", " .
@@ -201,7 +202,7 @@ if (isset($_POST['_user_menu']))
 		{
 			$this->db->sql_query(
 				"DELETE " .
-				"FROM " . $this->db->table_prefix . "menu " .
+				"FROM " . $prefix . "menu " .
 				"WHERE menu_id IN (" . $this->ids_string($menu_ids) . ")");
 		}
 	}

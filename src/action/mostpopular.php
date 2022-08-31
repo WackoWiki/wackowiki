@@ -33,6 +33,8 @@ $page			??= '';
 $system			??= 1;
 $title			??= 0;
 
+$prefix			= $this->db->table_prefix;
+
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;
 
@@ -56,7 +58,7 @@ $system
 if (!$page)
 {
 	$selector =
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $prefix . "page " .
 		"WHERE  comment_on_id = 0 " .
 		"AND deleted = 0 " .
 		($user_id
@@ -87,9 +89,9 @@ else
 		: $recurse = false;
 
 	$selector =
-		"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
-			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
+		"FROM " . $prefix . "page a, " . $prefix . "page_link l " .
+			"INNER JOIN " . $prefix . "page b ON (l.from_page_id = b.page_id) " .
+			"INNER JOIN " . $prefix . "page c ON (l.to_page_id = c.page_id) " .
 		"WHERE a.comment_on_id = 0 " .
 			"AND a.deleted = 0 " .
 			"AND a.tag <> " . $this->db->q($tag) . " " .
