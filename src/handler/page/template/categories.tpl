@@ -34,8 +34,8 @@
 							<input type="radio" id="group0" name="group" value="0">
 							<label for="group0">[ ' _t: CategoriesAddGroupedNo ' ]</label><br><br>
 						=]
-						<button type="submit" id="submit" name="create">[ ' _t: SubmitButton ' ]</button>
-						<a href="[ ' href: categories ' ]" class="btn-link">
+						<button type="submit" id="submit_create" name="create">[ ' _t: SubmitButton ' ]</button>
+						<a href="[ ' href: categories edit ' ]" class="btn-link">
 							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
 						</a>
 					</td>
@@ -47,7 +47,7 @@
 		[ '' header '' ]
 		<form action="[ ' href: categories ' ]" method="post" name="rename_category">
 			[ ' csrf: rename_category ' ]
-			<input type="hidden" name="category_id" value="[ ' changeid | e attr ' ]">
+			<input type="hidden" name="category_id" value="[ ' categoryid | e attr ' ]">
 			<table class="formation">
 				<tr>
 					<td>
@@ -68,8 +68,8 @@
 				<tr>
 					<td colspan="2">
 						<small>[ ' _t: CategoriesRenameInfo ' ]</small><br>
-						<button type="submit" name="rename" id="submit_new_name">[ ' _t: SubmitButton ' ]</button>
-						<a href="[ ' href: categories ' ]" class="btn-link">
+						<button type="submit" id="submit_new_name" name="rename">[ ' _t: SubmitButton ' ]</button>
+						<a href="[ ' href: categories edit ' ]" class="btn-link">
 							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
 						</a>
 					</td>
@@ -81,7 +81,7 @@
 		[ '' header '' ]
 		<form action="[ ' href: categories ' ]" method="post" name="group_categories">
 			[ ' csrf: group_categories ' ]
-			<input type="hidden" name="category_id" value="[ ' changeid | e attr ' ]">
+			<input type="hidden" name="category_id" value="[ ' categoryid | e attr ' ]">
 			<table class="formation">
 				<tr>
 					<td>
@@ -92,8 +92,8 @@
 								<option value="[ ' id ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category | e ' ]</option>
 							=]
 						</select>
-						<button type="submit" id="submit" name="ungroup">[ ' _t: SubmitButton ' ]</button>
-						<a href="[ ' href: categories ' ]" class="btn-link">
+						<button type="submit" id="submit_ungroup" name="ungroup">[ ' _t: SubmitButton ' ]</button>
+						<a href="[ ' href: categories edit ' ]" class="btn-link">
 							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
 						</a>
 						<br><small>[ ' _t: CategoriesGroupInfo ' ]</small>
@@ -106,13 +106,13 @@
 		[ '' header '' ]
 		<form action="[ ' href: categories ' ]" method="post" name="remove_category">
 			[ ' csrf: remove_category ' ]
-			<input type="hidden" name="category_id" value="[ ' changeid | e attr ' ]">
+			<input type="hidden" name="category_id" value="[ ' categoryid | e attr ' ]">
 			<table class="formation">
 				<tr>
 					<td>
 						<label for="">[ ' category ' ]</label> 
 						<button type="submit" id="submit_delete" name="delete">[ ' _t: DeleteText ' ]</button>
-						<a href="[ ' href: categories ' ]" class="btn-link">
+						<a href="[ ' href: categories edit ' ]" class="btn-link">
 							<button type="button" class="btn-cancel">[ ' _t: CancelButton ' ]</button>
 						</a>
 						<br><small>[ ' _t: CategoriesDeleteInfo ' ]</small>

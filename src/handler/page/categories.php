@@ -36,7 +36,7 @@ if (   $this->is_owner()
 
 	if (isset($_POST))
 	{
-		$change_id				= (int) ($_POST['change_id'] ?? null);
+		$action					= $_POST['_action'] ?? null;
 		$parent_id				= (int) ($_POST['parent_id'] ?? null);
 		$category_id			= (int) ($_POST['category_id'] ?? null);
 		$category				= $this->sanitize_text_field(($_POST['category'] ?? ''), true);
@@ -73,7 +73,7 @@ if (   $this->is_owner()
 			}
 
 			// add item
-			if (isset($_POST['create']) && $category)
+			if ($action == 'add_category' && $category)
 			{
 				// do we have identical name for this language?
 				if ($this->db->load_single(
@@ -83,9 +83,7 @@ if (   $this->is_owner()
 						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 					"LIMIT 1"))
 				{
-					$this->set_message($this->_t('CategoriesAlreadyExists'));
-					$_POST['change_id']	= $category_id;
-					$_POST['create']	= 1;
+					$this->set_message(Ut::perc_replace($this->_t('CategoriesAlreadyExists'), '<code>' . $category . '</code>'));
 				}
 				else
 				{
@@ -104,13 +102,12 @@ if (   $this->is_owner()
 
 					$this->set_message(Ut::perc_replace($this->_t('CategoriesAdded'), '<code>' . $category . '</code>'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryCreated', SYSTEM_LANG), $category));
-					unset($_POST['create']);
-				}
 
-				$this->http->redirect($this->href('categories', '', 'edit'));
+					$this->http->redirect($this->href('categories', '', 'edit'));
+				}
 			}
 			// rename item
-			else if (isset($_POST['rename']) && $category && $category_id)
+			else if ($action == 'rename_category' && $category && $category_id)
 			{
 				// do we have identical name for this language?
 				if ($this->db->load_single(
@@ -121,9 +118,7 @@ if (   $this->is_owner()
 						"AND category_id <> " . (int) $category_id . " " .
 					"LIMIT 1"))
 				{
-					$this->set_message($this->_t('CategoriesAlreadyExists'));
-					$_POST['change_id']	= $category_id;
-					$_POST['rename']	= 1;
+					$this->set_message(Ut::perc_replace($this->_t('CategoriesAlreadyExists'), '<code>' . $category . '</code>'));
 				}
 				else
 				{
@@ -136,12 +131,12 @@ if (   $this->is_owner()
 
 					$this->set_message($this->_t('CategoriesRenamed'), 'success');
 					$this->log(4, Ut::perc_replace($this->_t('LogCategoryRenamed', SYSTEM_LANG), $word['category'], $category));
-				}
 
-				$this->http->redirect($this->href('categories', '', 'edit'));
+					$this->http->redirect($this->href('categories', '', 'edit'));
+				}
 			}
 			// (un)group item
-			else if (isset($_POST['ungroup']) && $parent_id && $category_id)
+			else if ($action == 'group_categories' && isset($parent_id) && $category_id)
 			{
 				// in or out?
 				if ($parent_id == 0)
@@ -188,7 +183,7 @@ if (   $this->is_owner()
 				$this->http->redirect($this->href('categories', '', 'edit'));
 			}
 			// delete item
-			else if (isset($_POST['delete']) && $category_id)
+			else if ($action == 'remove_category' && $category_id)
 			{
 				$this->db->sql_query(
 					"DELETE FROM " . $this->db->table_prefix . "category " .
@@ -208,23 +203,21 @@ if (   $this->is_owner()
 
 				$this->http->redirect($this->href('categories', '', 'edit'));
 			}
-		}
 
-		/////////////////////////////////////////////
-		//   edit forms
-		/////////////////////////////////////////////
 
-		if ($this->is_admin() || ($this->is_owner() && $this->db->categories_handler))
-		{
+			/////////////////////////////////////////////
+			//   edit forms
+			/////////////////////////////////////////////
+
 			// add new item
 			if (isset($_POST['create']))
 			{
-				if ($change_id || $category_id)
+				if ($category_id || $category_id)
 				{
 					$word = $this->db->load_single(
 						"SELECT category_id, parent_id, category " .
 						"FROM " . $this->db->table_prefix . "category " .
-						"WHERE category_id = " . (int) $change_id . " " .
+						"WHERE category_id = " . (int) $category_id . " " .
 						"LIMIT 1");
 
 					$parent_id = ($word['parent_id'] == 0 ? $word['category_id'] : $parent_id = $word['parent_id']);
@@ -240,28 +233,28 @@ if (   $this->is_owner()
 				}
 			}
 			// rename item
-			else if (isset($_POST['rename']) && $change_id)
+			else if (isset($_POST['rename']) && $category_id)
 			{
 				if ($word = $this->db->load_single(
 					"SELECT category, category_description
 					FROM " . $this->db->table_prefix . "category
-					WHERE category_id = " . (int) $change_id . "
+					WHERE category_id = " . (int) $category_id . "
 					LIMIT 1"))
 				{
 					$tpl->r_header		= true;
-					$tpl->r_changeid	= (int) $change_id;
+					$tpl->r_categoryid	= (int) $category_id;
 					$tpl->r_newname		= Ut::perc_replace($this->_t('CategoriesRename'), '<code>' . Ut::html($word['category']) . '</code>');
-					$tpl->r_category	= ($category ?? $word['category']);
-					$tpl->r_description	= ($category_description ?? $word['category_description']);
+					$tpl->r_category	= ($category ?: $word['category']);
+					$tpl->r_description	= ($category_description ?: $word['category_description']);
 				}
 			}
 			// (un)group item
-			else if (isset($_POST['ungroup']) && $change_id)
+			else if (isset($_POST['ungroup']) && $category_id)
 			{
 				if ($word = $this->db->load_single(
 					"SELECT category_id, parent_id, category, category_lang
 					FROM " . $this->db->table_prefix . "category
-					WHERE category_id = " . (int) $change_id . "
+					WHERE category_id = " . (int) $category_id . "
 					LIMIT 1"))
 				{
 					$parents = $this->db->load_all(
@@ -273,7 +266,7 @@ if (   $this->is_owner()
 						"ORDER BY category ASC");
 
 					$tpl->g_header		= true;
-					$tpl->g_changeid	= (int) $change_id;
+					$tpl->g_categoryid	= (int) $category_id;
 					$tpl->g_group		=  Ut::perc_replace($this->_t('CategoriesGroup'), '<code>' . Ut::html($word['category']) . '</code>');
 
 					foreach ($parents as $parent)
@@ -286,24 +279,24 @@ if (   $this->is_owner()
 			}
 
 			// delete item
-			else if (isset($_POST['delete']) && $change_id)
+			else if (isset($_POST['delete']) && $category_id)
 			{
 				if ($word = $this->db->load_single(
 					"SELECT category
 					FROM " . $this->db->table_prefix . "category
-					WHERE category_id = " . (int) $change_id . "
+					WHERE category_id = " . (int) $category_id . "
 					LIMIT 1"))
 				{
 					$tpl->d_header		= true;
-					$tpl->d_changeid	= (int) $change_id;
+					$tpl->d_categoryid	= (int) $category_id;
 					$tpl->d_category	= Ut::perc_replace($this->_t('CategoriesDelete'), '<code>' . Ut::html($word['category']) . '</code>');
 				}
 			}
-			else if (@$_POST && !$change_id)
+			else if (@$_POST && !$category_id)
 			{
 				// no record selected
 				$this->set_message($this->_t('NoCategorySelected'));
-				$this->http->redirect($this->href('categories', '', 'edit'));
+				#$this->http->redirect($this->href('categories', '', 'edit'));
 			}
 		}
 	}
