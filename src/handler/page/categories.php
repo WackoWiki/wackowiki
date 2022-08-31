@@ -296,7 +296,7 @@ if (   $this->is_owner()
 			{
 				// no record selected
 				$this->set_message($this->_t('NoCategorySelected'));
-				#$this->http->redirect($this->href('categories', '', 'edit'));
+				$this->http->redirect($this->href('categories', '', 'edit'));
 			}
 		}
 	}
