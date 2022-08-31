@@ -8,6 +8,7 @@ if (!defined('IN_WACKO'))
 $load_recent_comments = function ($tag, $limit, $deleted = 0)
 {
 	$pagination	= [];
+	$prefix		= $this->db->table_prefix;
 
 	$selector =
 		"WHERE " .
@@ -21,8 +22,8 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 	// count pages
 	$count = $this->db->load_single(
 		"SELECT COUNT(a.page_id) AS n " .
-		"FROM " . $this->db->table_prefix . "page a " .
-			"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
+		"FROM " . $prefix . "page a " .
+			"INNER JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
 		$selector
 		, true);
 
@@ -33,9 +34,9 @@ $load_recent_comments = function ($tag, $limit, $deleted = 0)
 		$comments = $this->db->load_all(
 			"SELECT a.page_id, a.owner_id, a.user_id, a.tag, b.tag AS comment_on_tag, b.title AS page_title, b.page_lang,
 				a.title AS comment_title, u.user_name AS comment_user, a.modified AS comment_time, a.comment_on_id, b.owner_id AS page_owner_id " .
-			"FROM " . $this->db->table_prefix . "page a " .
-				"INNER JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) " .
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (a.user_id = u.user_id) " .
+			"FROM " . $prefix . "page a " .
+				"INNER JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) " .
+				"LEFT JOIN " . $prefix . "user u ON (a.user_id = u.user_id) " .
 			$selector .
 			"ORDER BY a.modified DESC " .
 			$pagination['limit']);

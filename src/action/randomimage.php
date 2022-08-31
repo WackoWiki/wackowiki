@@ -23,14 +23,15 @@ if (!isset($caption))	$caption	= 0;
 
 if ($caption)	$param[]	= 'caption';
 
-$track	= false;
+$track		= false;
+$prefix		= $this->db->table_prefix;
 
 $selector =
 	($category
-		? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = f.file_id) " .
-		  "LEFT JOIN " . $this->db->table_prefix . "category c ON (k.category_id = c.category_id) "
+		? "INNER JOIN " . $prefix . "category_assignment AS k ON (k.object_id = f.file_id) " .
+		  "LEFT JOIN " . $prefix . "category c ON (k.category_id = c.category_id) "
 		: "") . " " .
-		"WHERE ".
+		"WHERE " .
 			"(f.picture_w <> 0 OR f.file_ext = 'svg') " .
 		"AND f.deleted <> 1 " .
 	($owner
@@ -49,16 +50,16 @@ $selector =
 
 $count = $this->db->load_single(
 	"SELECT COUNT(f.file_id) AS n " .
-	"FROM " . $this->db->table_prefix . "file f " .
+	"FROM " . $prefix . "file f " .
 	$selector, true);
 
 if ($count['n'])
 {
 	$file = $this->db->load_single(
 		"SELECT f.file_id, f.page_id, f.file_name, p.tag " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"FROM " . $prefix . "file f " .
+			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
 		$selector .
 		"LIMIT " . Ut::rand(0, $count['n'] - 1) . ", 1"
 		, true);
@@ -70,7 +71,6 @@ if ($count['n'])
 	{
 		// absolute file path: file:/path/
 		$path2	= $path1 . $file['tag'] . '/';
-		$page	= $file['tag'];
 	}
 	else
 	{

@@ -316,7 +316,8 @@ if (!$this->page || $this->page['comment_on_id'])
 	$this->http->redirect($this->href());
 }
 
-$forum_cluster = '';
+$forum_cluster	= '';
+$prefix			= $this->db->table_prefix;
 
 if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 {
@@ -602,8 +603,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make counter query
 		$sql =
 			"SELECT COUNT(p.page_id) AS n " .
-			"FROM " . $this->db->table_prefix . "page AS p, " .
-					  $this->db->table_prefix . "acl AS a " .
+			"FROM " . $prefix . "page AS p, " .
+					  $prefix . "acl AS a " .
 			$selector .
 			"LIMIT 1";
 
@@ -614,10 +615,10 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make collector query
 		$sql =
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.owner_id, p.user_id, p.ip, p.comments, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
-			"FROM " . $this->db->table_prefix . "page AS p " .
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id), " .
-				$this->db->table_prefix . "acl AS a " .
+			"FROM " . $prefix . "page AS p " .
+				"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
+				"LEFT JOIN " . $prefix . "user o ON (p.owner_id = o.user_id), " .
+				$prefix . "acl AS a " .
 			$selector .
 			"ORDER BY commented DESC " .
 			$pagination['limit'];
@@ -668,8 +669,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 			$sections = $this->db->load_all(
 				"SELECT p.tag, p.title " .
-				"FROM " . $this->db->table_prefix . "page AS p, " .
-						  $this->db->table_prefix . "acl AS a " .
+				"FROM " . $prefix . "page AS p, " .
+						  $prefix . "acl AS a " .
 				"WHERE p.page_id = a.page_id " .
 					"AND a.privilege = 'comment' " .
 					"AND a.list = '' " .
@@ -950,7 +951,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 					// recount comments for current topic
 					$this->db->sql_query(
-						"UPDATE " . $this->db->table_prefix . "page SET " .
+						"UPDATE " . $prefix . "page SET " .
 							"comments	= " . (int) $this->count_comments($this->page['page_id']) . ", " .
 							"commented	= UTC_TIMESTAMP() " .
 						"WHERE page_id = " . (int) $this->page['page_id'] . " " .
@@ -1022,7 +1023,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 						$first_comment	= $this->load_page('', $_set[0]);
 						$_comments		= $this->db->load_all(
 							"SELECT page_id " .
-							"FROM " . $this->db->table_prefix . "page " .
+							"FROM " . $prefix . "page " .
 							"WHERE comment_on_id = " . (int) $first_comment['comment_on_id'] . " " .
 								"AND comment_on_id <> 0 " .
 								"AND created >= " . $this->db->q($first_comment['created']) . " " .
@@ -1072,14 +1073,14 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 						// move
 						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "page SET " .
+							"UPDATE " . $prefix . "page SET " .
 								"comment_on_id = " . (int) $page_id . " " .
 							"WHERE page_id IN (" . $this->ids_string($comment_ids) . ")");
 
 						// update page_link table
 						$comments = $this->db->load_all(
 							"SELECT page_id, tag, body_r " .
-							"FROM " . $this->db->table_prefix . "page " .
+							"FROM " . $prefix . "page " .
 							"WHERE page_id IN (" . $this->ids_string($comment_ids) . ")");
 
 						foreach ($comments as $comment)
@@ -1098,13 +1099,13 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 						// recount comments for the old and new page
 						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "page SET " .
+							"UPDATE " . $prefix . "page SET " .
 								"comments = " . (int) $this->count_comments($this->page['page_id']) . " " .
 							"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 							"LIMIT 1");
 
 						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "page SET " .
+							"UPDATE " . $prefix . "page SET " .
 								"comments	= " . (int) $this->count_comments($page_id) . ", " .
 								"commented	= UTC_TIMESTAMP() " .
 							"WHERE page_id = " . (int) $page_id . " " .
@@ -1133,7 +1134,7 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make counter query
 		$sql =
 			"SELECT COUNT(p.page_id) AS n " .
-			"FROM " . $this->db->table_prefix . "page p " .
+			"FROM " . $prefix . "page p " .
 			$selector .
 			"LIMIT 1";
 
@@ -1144,9 +1145,9 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 		// make collector query
 		$sql =
 			"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.user_id, p.owner_id, ip, LEFT(body, 500) AS body, p.created, p.page_lang, u.user_name, o.user_name as owner_name " .
-			"FROM " . $this->db->table_prefix . "page p " .
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
-				"LEFT JOIN " . $this->db->table_prefix . "user o ON (p.owner_id = o.user_id) " .
+			"FROM " . $prefix . "page p " .
+				"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
+				"LEFT JOIN " . $prefix . "user o ON (p.owner_id = o.user_id) " .
 			$selector .
 			"ORDER BY created ASC " .
 			$pagination['limit'];
@@ -1192,8 +1193,8 @@ if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 
 				$sections = $this->db->load_all(
 					"SELECT p.tag, p.title " .
-					"FROM " . $this->db->table_prefix . "page AS p, " .
-							  $this->db->table_prefix . "acl AS a " .
+					"FROM " . $prefix . "page AS p, " .
+							  $prefix . "acl AS a " .
 					"WHERE p.page_id = a.page_id " .
 						"AND a.privilege = 'comment' " .
 						"AND a.list = '' " .

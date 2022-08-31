@@ -21,6 +21,7 @@ if (!isset($printed))	$printed	= [];
 
 if (!$max || $max > 100) $max = 100;
 
+$prefix	= $this->db->table_prefix;
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 
@@ -35,9 +36,9 @@ if (isset($_GET['markread']) && $user)
 // loading new pages/comments
 $pages1 = $this->db->load_all(
 	"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.created AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, u.user_name, 1 AS ctype, p.deleted " .
-	"FROM " . $this->db->table_prefix . "page p " .
-		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
-		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.owner_id = u.user_id) " .
+	"FROM " . $prefix . "page p " .
+		"LEFT JOIN " . $prefix . "page c ON (p.comment_on_id = c.page_id) " .
+		"LEFT JOIN " . $prefix . "user u ON (p.owner_id = u.user_id) " .
 	"WHERE (u.account_type = 0 OR p.user_id = 0) " .
 		($tag
 			? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -48,9 +49,9 @@ $pages1 = $this->db->load_all(
 // loading revisions
 $pages2 = $this->db->load_all(
 	"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.created, p.modified, p.title, p.comment_on_id, p.ip, p.modified AS date, p.edit_note, p.page_lang, c.page_lang AS cf_lang, c.tag AS comment_on_page, c.title AS title_on_page, u.user_name, 1 AS ctype, p.deleted " .
-	"FROM " . $this->db->table_prefix . "page p " .
-		"LEFT JOIN " . $this->db->table_prefix . "page c ON (p.comment_on_id = c.page_id) " .
-		"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+	"FROM " . $prefix . "page p " .
+		"LEFT JOIN " . $prefix . "page c ON (p.comment_on_id = c.page_id) " .
+		"LEFT JOIN " . $prefix . "user u ON (p.user_id = u.user_id) " .
 	"WHERE p.comment_on_id = 0 " .
 		($tag
 			? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -63,9 +64,9 @@ $pages2 = $this->db->load_all(
 // loading uloads
 $files = $this->db->load_all(
 	"SELECT f.page_id, p.owner_id, p.user_id, p.tag, f.uploaded_dt AS created, f.uploaded_dt AS modified, f.file_name AS title, f.file_id AS comment_on_id, 0 AS ip, f.uploaded_dt AS date, f.file_description AS edit_note, p.page_lang, f.file_lang AS cf_lang, p.tag AS comment_on_page, p.title AS title_on_page, u.user_name, 2 AS ctype, f.deleted " .
-	"FROM " . $this->db->table_prefix . "file f " .
-		"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-		"LEFT JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+	"FROM " . $prefix . "file f " .
+		"LEFT JOIN " . $prefix . "page p ON (f.page_id = p.page_id) " .
+		"LEFT JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
 	"WHERE u.account_type = 0 " .
 		($tag
 			? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -131,9 +132,9 @@ if ($pages = array_merge($pages1, $pages2, $files))
 	{
 		if ($files = $this->db->load_all(
 			"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, 0 AS hits, p.tag, u.user_name " .
-			"FROM " . $this->db->table_prefix . "file f " .
-				"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-				"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+			"FROM " . $prefix . "file f " .
+				"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
+				"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
 			"WHERE f.file_id IN (" . $this->ids_string($file_ids) . ") "
 			))
 		{
