@@ -393,7 +393,7 @@ if ($this->is_admin())
 
 	$users = $this->db->load_all(
 		"SELECT user_id, user_name, LENGTH(password) AS password, email, email_confirm, signup_time, last_visit, total_pages, total_revisions, total_comments, total_uploads " .
-		"FROM " . $this->db->user_table . " " .
+		"FROM " . $this->db->table_prefix . "user " .
 		"WHERE  LENGTH(password) = 32 OR LENGTH(password) = 64");
 
 	if ($users)

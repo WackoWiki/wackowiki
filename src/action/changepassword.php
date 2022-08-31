@@ -10,11 +10,13 @@ $this->no_way_back = true; // prevent goback'ing that page
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
+$prefix		= $this->db->table_prefix;
+
 if ($code = (string) ($_REQUEST['secret_code'] ?? null))
 {
 	$user = $this->db->load_single(
 		"SELECT user_id, user_name " .
-		"FROM " . $this->db->user_table . " " .
+		"FROM " . $prefix . "user " .
 		"WHERE change_password = " . $this->db->q(hash_hmac('sha256', $code, $this->db->system_seed_hash)) . " " .
 		"LIMIT 1");
 
@@ -57,7 +59,7 @@ if ($action === 'change_password' && $user)
 		else
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $prefix . "user SET " .
 					"change_password	= '', " .
 					"password = " . $this->db->q($this->password_hash($user, $new_password)) . " " .
 				"WHERE user_id = " . (int) $user['user_id'] . " " .
@@ -84,8 +86,8 @@ if ($action === 'forgot_password')
 	$email		= Ut::strip_spaces($_POST['email']);
 	$user		= $this->db->load_single(
 					"SELECT u.user_id, u.user_name, u.email, u.email_confirm, s.user_lang " .
-					"FROM " . $this->db->user_table . " u " .
-						"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+					"FROM " . $prefix . "user u " .
+						"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 					"WHERE u.user_name = " . $this->db->q($user_name) . " " .
 						"AND u.email = " . $this->db->q($email) . " " .
 					"LIMIT 1");
@@ -105,7 +107,7 @@ if ($action === 'forgot_password')
 
 		// update table
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $prefix . "user SET " .
 				"password_request_count	= password_request_count + 1, ". // value unused
 				"change_password		= " . $this->db->q($code_hash) . " " .
 			"WHERE user_id = " . (int) $user['user_id'] . " " .

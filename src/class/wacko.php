@@ -2349,7 +2349,7 @@ class Wacko
 
 		// update user comments count
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"total_comments = " . (int) $this->count_comments(null, $user_id) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2370,7 +2370,7 @@ class Wacko
 
 		// update user uploads count
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"total_uploads = " . (int) $this->count_files(null, $user_id) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2379,7 +2379,7 @@ class Wacko
 	function update_pages_count($user_id): void
 	{
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"total_pages = " . (int) $this->count_pages($user_id) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2405,7 +2405,7 @@ class Wacko
 		if ($user_id)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $this->db->table_prefix . "user SET " .
 					"total_revisions = " . (int) $this->count_revisions(null, $user_id) . " " .
 				"WHERE user_id = " . (int) $user_id . " " .
 				"LIMIT 1");
@@ -2443,7 +2443,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"enabled		= " . (int) $enabled . ", " .
 				"account_status	= " . (int) $account_status . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
@@ -2882,7 +2882,7 @@ class Wacko
 		$token = Ut::random_token(21);
 
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"email_confirm = " . $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash)) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2896,12 +2896,12 @@ class Wacko
 
 		if ($user = $this->db->load_single(
 			"SELECT user_name, email " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 			"WHERE email_confirm = " . $hash . " " .
 			"LIMIT 1"))
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $this->db->table_prefix . "user SET " .
 					"email_confirm = '' " .
 				"WHERE email_confirm = " . $hash . " " .
 				"LIMIT 1");
@@ -5222,7 +5222,7 @@ class Wacko
 		// checking for identical name
 		if ($this->db->load_single(
 			"SELECT user_id " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 			"WHERE user_name = " . $this->db->q($user_name) . " " .
 			"LIMIT 1"))
 		{
@@ -5239,7 +5239,7 @@ class Wacko
 	{
 		return (bool) $this->db->load_single(
 			"SELECT user_id " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 			"WHERE email = " . $this->db->q($email) . " " .
 			"LIMIT 1");
 	}
@@ -5264,7 +5264,7 @@ class Wacko
 				s.autocomplete, s.numerate_links, s.diff_mode, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
 				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
 				s.session_length, s.timezone, s.sorting_comments " .
-			"FROM " . $this->db->user_table . " u " .
+			"FROM " . $this->db->table_prefix . "user u " .
 				"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE " . ($user_id
 					? "u.user_id		= " . (int) $user_id . " "
@@ -5344,7 +5344,7 @@ class Wacko
 		if ($user['user_id'])
 		{
 			return $this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $this->db->table_prefix . "user SET " .
 					"last_mark = UTC_TIMESTAMP() " .
 				"WHERE user_id = " . (int) $user['user_id'] . " " .
 				"LIMIT 1");
@@ -5420,7 +5420,7 @@ class Wacko
 			if ($token && $token['token'] === hash('sha256', Ut::http64_decode($authenticator)))
 			{
 				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " SET " .
+					"UPDATE " . $this->db->table_prefix . "user SET " .
 						"last_visit = UTC_TIMESTAMP() " .
 					"WHERE " .
 						"user_id = " . (int) $token['user_id'] . " " .
@@ -5466,7 +5466,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"last_visit					= UTC_TIMESTAMP(), " .
 				"change_password			= '', " .
 				"login_count				= login_count + 1, " .
@@ -5560,7 +5560,7 @@ class Wacko
 	function set_failed_login_count($user_id): void
 	{
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"failed_login_count = failed_login_count + 1 " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -5570,7 +5570,7 @@ class Wacko
 	{
 		return $this->db->load_all(
 			"SELECT user_id, user_name " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 				($enabled
 					? "WHERE enabled = 1 "
 					: "") .

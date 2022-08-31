@@ -21,8 +21,6 @@ $clean_text = function ($string)
 	return $string;
 };
 
-
-
 $can_upload		= $this->can_upload();
 $error			= '';
 $is_global		= '';

@@ -91,7 +91,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// INSERT user
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->user_table . " " .
+				"INSERT INTO " . $this->db->table_prefix . "user " .
 				"SET " .
 					"signup_time		= UTC_TIMESTAMP(), " .
 					"user_name			= " . $this->db->q($user_name) . ", " .

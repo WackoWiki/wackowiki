@@ -27,14 +27,15 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 {
 	$category_id	= null;
 	$lang			= null;
+	$prefix			= $this->db->table_prefix;
 	extract($filter, EXTR_IF_EXISTS);
 
 	$selector =
 		($category_id
-			? "LEFT JOIN " . $this->db->table_prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
+			? "LEFT JOIN " . $prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
 			: "") .
 		($tag
-			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
+			? "LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "") .
 		"WHERE ((MATCH
 					(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) " .
@@ -65,7 +66,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(a.page_id) AS n " .
-		"FROM " . $this->db->table_prefix . "page a " .
+		"FROM " . $prefix . "page a " .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase, 'lang' => $lang]);
@@ -75,9 +76,9 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.body, a.comment_on_id, a.page_lang, a.page_size, a.comments,
 			MATCH(a.body) AGAINST(" . $this->db->q($phrase) . " IN BOOLEAN MODE) AS score,
 			u.user_name, o.user_name as owner_name " .
-		"FROM " . $this->db->table_prefix . "page a " .
-			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) " .
+		"FROM " . $prefix . "page a " .
+			"LEFT JOIN " . $prefix . "user u ON (a.user_id = u.user_id) " .
+			"LEFT JOIN " . $prefix . "user o ON (a.owner_id = o.user_id) " .
 		$selector .
 		"ORDER BY score DESC " .
 		$pagination['limit']);
@@ -102,14 +103,15 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 {
 	$category_id	= null;
 	$lang			= null;
+	$prefix			= $this->db->table_prefix;
 	extract($filter, EXTR_IF_EXISTS);
 
 	$selector =
 		($category_id
-			? "LEFT JOIN " . $this->db->table_prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
+			? "LEFT JOIN " . $prefix . "category_assignment ca ON (a.page_id = ca.object_id) "
 			: "") .
 		($tag
-			? "LEFT JOIN " . $this->db->table_prefix . "page b ON (a.comment_on_id = b.page_id) "
+			? "LEFT JOIN " . $prefix . "page b ON (a.comment_on_id = b.page_id) "
 			: "") .
 		"WHERE ( lower(a.tag) LIKE binary lower(" . $this->db->q('%' . $phrase . '%') . ") " .
 			"OR lower(a.title) LIKE lower(" . $this->db->q('%' . $phrase . '%') . ")) " .
@@ -134,7 +136,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(a.page_id) AS n " .
-		"FROM " . $this->db->table_prefix . "page a " .
+		"FROM " . $prefix . "page a " .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase, 'lang' => $lang]);
@@ -143,9 +145,9 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 	$results = $this->db->load_all(
 		"SELECT a.page_id, a.owner_id, a.user_id, a.tag, a.title, a.created, a.modified, a.comment_on_id, a.page_lang, a.page_size, comments,
 			u.user_name, o.user_name as owner_name " .
-		"FROM " . $this->db->table_prefix . "page a " .
-			"LEFT JOIN " . $this->db->user_table . " u ON (a.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->user_table . " o ON (a.owner_id = o.user_id) " .
+		"FROM " . $prefix . "page a " .
+			"LEFT JOIN " . $prefix . "user u ON (a.user_id = u.user_id) " .
+			"LEFT JOIN " . $prefix . "user o ON (a.owner_id = o.user_id) " .
 		$selector .
 		"ORDER BY a.tag COLLATE utf8mb4_unicode_520_ci " .
 		$pagination['limit']);

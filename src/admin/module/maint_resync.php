@@ -31,17 +31,17 @@ function admin_maint_resync(&$engine, $module)
 		if ($action == 'userstats')
 		{
 			// reset stats
-			$sql[] = "UPDATE " . $engine->db->user_table . " SET
+			$sql[] = "UPDATE " . $prefix . "user SET
 						total_comments	= 0,
 						total_uploads	= 0,
 						total_revisions	= 0,
 						total_pages		= 0";
 
 			// set total comments posted
-			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT p.owner_id as user_id, COUNT(p.tag) AS n
-						FROM " . $prefix . "page AS p,
-							{$engine->db->user_table} AS o
+						FROM " . $prefix . "page p,
+							{$prefix} user o
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id <> 0
 							AND p.deleted <> 1
@@ -51,10 +51,10 @@ function admin_maint_resync(&$engine, $module)
 					WHERE u.user_id = s.user_id";
 
 			// set total pages in ownership
-			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT o.user_id, COUNT(p.tag) AS n
-						FROM " . $prefix . "page AS p,
-							{$engine->db->user_table} AS o
+						FROM " . $prefix . "page p,
+							{$prefix} user o
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id = 0
 							AND p.deleted <> 1
@@ -64,10 +64,10 @@ function admin_maint_resync(&$engine, $module)
 					WHERE u.user_id = s.user_id";
 
 			// set total revisions made
-			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT r.user_id, COUNT(r.page_id) AS n
-						FROM " . $prefix . "revision AS r,
-							{$engine->db->user_table} AS o
+						FROM " . $prefix . "revision r,
+							{$prefix} user o
 						WHERE r.owner_id = o.user_id
 							AND r.comment_on_id = 0
 						GROUP BY r.user_id) AS s
@@ -76,10 +76,10 @@ function admin_maint_resync(&$engine, $module)
 					WHERE u.user_id = s.user_id";
 
 			// set total files uploaded
-			$sql[] = "UPDATE " . $engine->db->user_table . " AS u,
+			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT o.user_id, COUNT(f.file_id) AS n
 						FROM " . $prefix . "file f,
-							{$engine->db->user_table} AS o
+							{$prefix} user o
 						WHERE f.user_id = o.user_id
 							AND f.deleted <> 1
 						GROUP BY f.user_id) AS s
@@ -103,9 +103,9 @@ function admin_maint_resync(&$engine, $module)
 						files		= 0,
 						revisions	= 0";
 			// set comments
-			$sql[] = "UPDATE " . $prefix . "page AS p,
+			$sql[] = "UPDATE " . $prefix . "page p,
 						(SELECT e.page_id, COUNT( c.page_id ) AS n
-						FROM " . $prefix . "page AS c
+						FROM " . $prefix . "page c
 							RIGHT JOIN " . $prefix . "page AS e ON c.comment_on_id = e.page_id
 						WHERE c.deleted <> 1
 						GROUP BY e.page_id) AS s
@@ -113,7 +113,7 @@ function admin_maint_resync(&$engine, $module)
 						p.comments = s.n
 					WHERE p.page_id = s.page_id";
 			// set files
-			$sql[] = "UPDATE " . $prefix . "page AS p,
+			$sql[] = "UPDATE " . $prefix . "page p,
 						(SELECT page_id, COUNT(file_id) AS files
 						FROM " . $prefix . "file
 						WHERE page_id <> 0
@@ -122,7 +122,7 @@ function admin_maint_resync(&$engine, $module)
 						p.files = f.files
 					WHERE p.page_id = f.page_id";
 			// set revisions
-			$sql[] = "UPDATE " . $prefix . "page AS p,
+			$sql[] = "UPDATE " . $prefix . "page p,
 						(SELECT page_id, COUNT(page_id) AS revisions
 						FROM " . $prefix . "revision
 						GROUP BY page_id) AS r

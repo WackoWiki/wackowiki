@@ -19,6 +19,7 @@ $module['massemail'] = [
 
 function admin_massemail(&$engine, $module)
 {
+	$prefix		= $engine->db->table_prefix;
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
@@ -78,10 +79,10 @@ function admin_massemail(&$engine, $module)
 				u.email_confirm,
 				us.allow_massemail
 			FROM
-				" . $engine->db->table_prefix . "user u
-					INNER JOIN " . $engine->db->table_prefix . "usergroup_member gm
+				" . $prefix . "user u
+					INNER JOIN " . $prefix . "usergroup_member gm
 						ON (u.user_id = gm.user_id)
-					INNER JOIN " . $engine->db->table_prefix . "user_setting us
+					INNER JOIN " . $prefix . "user_setting us
 						ON (u.user_id = us.user_id)
 			WHERE
 				u.account_type = 0
@@ -119,7 +120,7 @@ function admin_massemail(&$engine, $module)
 
 	$available_groups = $engine->db->load_all(
 		"SELECT group_id, group_name " .
-		"FROM " . $engine->db->table_prefix . "usergroup " .
+		"FROM " . $prefix . "usergroup " .
 		"WHERE active = 1 " .
 		"ORDER BY BINARY group_name", true);
 
@@ -147,8 +148,8 @@ function admin_massemail(&$engine, $module)
 <?php
 			$users = $engine->db->load_all(
 				"SELECT u.user_id, u.user_name, u.email_confirm, us.user_lang, us.allow_massemail " .
-				"FROM " . $engine->db->user_table . " u " .
-					"INNER JOIN " . $engine->db->table_prefix . "user_setting us ON (u.user_id = us.user_id) " .
+				"FROM " . $prefix . "user u " .
+					"INNER JOIN " . $prefix . "user_setting us ON (u.user_id = us.user_id) " .
 				"WHERE u.enabled = 1 " .
 					"AND u.email_confirm = '' " .
 					"AND us.allow_massemail <> 0 " .

@@ -659,7 +659,7 @@ else
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(u.user_name) AS n " .
-		"FROM " . $this->db->user_table . " u " .
+		"FROM " . $prefix . "user u " .
 		$sql_where, true);
 
 	$tpl->enter('l_');
@@ -687,7 +687,7 @@ else
 	// collect data
 	$users = $this->db->load_all(
 		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession " .
-		"FROM " . $this->db->user_table . " u " .
+		"FROM " . $prefix . "user u " .
 			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 		$sql_where .
 		$sql_order .

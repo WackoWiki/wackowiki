@@ -18,6 +18,7 @@ $action			= $_POST['_action'] ?? null;
 // check if upload is allowed for user
 $upload			= $this->db->upload;
 $upload_allowed	= ($upload === true || $upload == 1 || $this->check_acl($this->get_user_name(), $upload));
+$prefix			= $this->db->table_prefix;
 
 if ($action === 'set_permissions')
 {
@@ -28,8 +29,8 @@ if ($action === 'set_permissions')
 			// admin can benefit to any possible user
 			$new_owner = $this->db->load_single(
 				"SELECT u.user_id, u.user_name, u.email, u.email_confirm, u.enabled, s.user_lang " .
-				"FROM " . $this->db->user_table . " u " .
-					"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
+				"FROM " . $prefix . "user u " .
+					"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 				"WHERE u.user_id = " . (int) $user_id . " " .
 				"LIMIT 1");
 		}
@@ -83,7 +84,7 @@ if ($action === 'set_permissions')
 		// TODO: need to rethink/redo
 		$comments = $this->db->load_all(
 			"SELECT page_id " .
-			"FROM " . $this->db->table_prefix . "page " .
+			"FROM " . $prefix . "page " .
 			"WHERE comment_on_id = " . (int) $page_id . " " .
 				"AND owner_id = " . (int) $user_id); // STS ?? for admin too?
 
@@ -106,20 +107,20 @@ if ($action === 'set_permissions')
 		{
 			// update user statistics
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $prefix . "user SET " .
 					"total_pages	= total_pages - 1 " .
 				"WHERE user_id		= " . (int) $former_id . " " .
 				"LIMIT 1");
 
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $prefix . "user SET " .
 					"total_pages	= total_pages + 1 " .
 				"WHERE user_id		= " . (int) $new_id." " .
 				"LIMIT 1");
 
 			// set new owner
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "page SET " .
+				"UPDATE " . $prefix . "page SET " .
 					"owner_id		= " . (int) $new_id . " " .
 				"WHERE page_id		= " . (int) $page_id . " " .
 				"LIMIT 1");
@@ -143,7 +144,7 @@ if ($action === 'set_permissions')
 	{
 		$pages = $this->db->load_all(
 			"SELECT page_id, tag, title, owner_id " .
-			"FROM " . $this->db->table_prefix . "page " .
+			"FROM " . $prefix . "page " .
 			"WHERE (tag = " . $this->db->q($this->tag) .
 				" OR tag LIKE " . $this->db->q($this->tag . '/%') .
 				") " .
