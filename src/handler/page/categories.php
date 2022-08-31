@@ -13,6 +13,7 @@ if (!defined('IN_WACKO'))
 //	- split in functions and move into new class -> tagging for attachments
 
 $parent_id	= '';
+$prefix		= $this->db->table_prefix;
 
 // redirect to show method if page don't exists
 if (!$this->page)
@@ -55,8 +56,9 @@ if (   $this->is_owner()
 			// save new list
 			$this->save_categories_list($this->page['page_id'], OBJECT_PAGE);
 
-			$this->log(4, Ut::perc_replace($this->_t('LogCategoriesUpdated', SYSTEM_LANG), $this->tag . ' ' . $this->page['title']));
 			$this->set_message($this->_t('CategoriesUpdated'), 'success');
+			$this->log(4, Ut::perc_replace($this->_t('LogCategoriesUpdated', SYSTEM_LANG), $this->tag . ' ' . $this->page['title']));
+
 			$this->http->redirect($this->href('properties'));
 		}
 		else if ($this->is_admin() || ($this->is_owner() && $this->db->categories_handler))
@@ -66,7 +68,7 @@ if (   $this->is_owner()
 			{
 				$word = $this->db->load_single(
 					"SELECT category_id, parent_id, category " .
-					"FROM " . $this->db->table_prefix . "category " .
+					"FROM " . $prefix . "category " .
 					"WHERE category_id = " . (int) $category_id . " " .
 						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 					"LIMIT 1");
@@ -78,7 +80,7 @@ if (   $this->is_owner()
 				// do we have identical name for this language?
 				if ($this->db->load_single(
 					"SELECT category_id " .
-					"FROM " . $this->db->table_prefix . "category " .
+					"FROM " . $prefix . "category " .
 					"WHERE category = " . $this->db->q($category) . " " .
 						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 					"LIMIT 1"))
@@ -89,7 +91,7 @@ if (   $this->is_owner()
 				{
 					// save item
 					$this->db->sql_query(
-						"INSERT INTO " . $this->db->table_prefix . "category SET " .
+						"INSERT INTO " . $prefix . "category SET " .
 							($category_id && $_POST['group'] == 1
 								? "parent_id = " . ((int) $word['parent_id'] != 0
 									? (int) $word['parent_id']
@@ -112,7 +114,7 @@ if (   $this->is_owner()
 				// do we have identical name for this language?
 				if ($this->db->load_single(
 					"SELECT category_id " .
-					"FROM " . $this->db->table_prefix . "category " .
+					"FROM " . $prefix . "category " .
 					"WHERE category = " . $this->db->q($category) . " " .
 						"AND category_lang = " . $this->db->q($this->page['page_lang']) . " " .
 						"AND category_id <> " . (int) $category_id . " " .
@@ -123,7 +125,7 @@ if (   $this->is_owner()
 				else
 				{
 					$this->db->sql_query(
-						"UPDATE " . $this->db->table_prefix . "category SET " .
+						"UPDATE " . $prefix . "category SET " .
 							"category				= " . $this->db->q($category) . ", " .
 							"category_description	= " . $this->db->q($category_description) . " " .
 						"WHERE category_id = " . (int) $category_id . " " .
@@ -142,7 +144,7 @@ if (   $this->is_owner()
 				if ($parent_id == 0)
 				{
 					$this->db->sql_query(
-						"UPDATE " . $this->db->table_prefix . "category SET " .
+						"UPDATE " . $prefix . "category SET " .
 							"parent_id = 0 " .
 						"WHERE category_id = " . (int) $category_id . " " .
 						"LIMIT 1");
@@ -154,20 +156,20 @@ if (   $this->is_owner()
 				{
 					$parent = $this->db->load_single(
 						"SELECT parent_id, category " .
-						"FROM " . $this->db->table_prefix . "category " .
+						"FROM " . $prefix . "category " .
 						"WHERE category_id = " . (int) $parent_id . " " .
 						"LIMIT 1");
 
 					if ($parent['parent_id'] == 0)
 					{
 						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "category SET " .
+							"UPDATE " . $prefix . "category SET " .
 								"parent_id = " . (int) $parent_id . " " .
 							"WHERE category_id = " . (int) $category_id . " " .
 							"LIMIT 1");
 
 						$this->db->sql_query(
-							"UPDATE " . $this->db->table_prefix . "category SET " .
+							"UPDATE " . $prefix . "category SET " .
 								"parent_id = 0 " .
 							"WHERE parent_id = " . (int) $category_id);
 
@@ -186,15 +188,15 @@ if (   $this->is_owner()
 			else if ($action == 'remove_category' && $category_id)
 			{
 				$this->db->sql_query(
-					"DELETE FROM " . $this->db->table_prefix . "category " .
+					"DELETE FROM " . $prefix . "category " .
 					"WHERE category_id = " . (int) $category_id);
 
 				$this->db->sql_query(
-					"DELETE FROM " . $this->db->table_prefix . "category_assignment " .
+					"DELETE FROM " . $prefix . "category_assignment " .
 					"WHERE category_id = " . (int) $category_id);
 
 				$this->db->sql_query(
-					"UPDATE " . $this->db->table_prefix . "category SET " .
+					"UPDATE " . $prefix . "category SET " .
 						"parent_id = 0 " .
 					"WHERE parent_id = " . (int) $category_id);
 
@@ -212,15 +214,15 @@ if (   $this->is_owner()
 			// add new item
 			if (isset($_POST['create']))
 			{
-				if ($category_id || $category_id)
+				if ($category_id)
 				{
 					$word = $this->db->load_single(
 						"SELECT category_id, parent_id, category " .
-						"FROM " . $this->db->table_prefix . "category " .
+						"FROM " . $prefix . "category " .
 						"WHERE category_id = " . (int) $category_id . " " .
 						"LIMIT 1");
 
-					$parent_id = ($word['parent_id'] == 0 ? $word['category_id'] : $parent_id = $word['parent_id']);
+					$parent_id = ($word['parent_id'] ?: $word['category_id']);
 				}
 
 				$tpl->n_header		= true;
@@ -237,7 +239,7 @@ if (   $this->is_owner()
 			{
 				if ($word = $this->db->load_single(
 					"SELECT category, category_description
-					FROM " . $this->db->table_prefix . "category
+					FROM " . $prefix . "category
 					WHERE category_id = " . (int) $category_id . "
 					LIMIT 1"))
 				{
@@ -253,13 +255,13 @@ if (   $this->is_owner()
 			{
 				if ($word = $this->db->load_single(
 					"SELECT category_id, parent_id, category, category_lang
-					FROM " . $this->db->table_prefix . "category
+					FROM " . $prefix . "category
 					WHERE category_id = " . (int) $category_id . "
 					LIMIT 1"))
 				{
 					$parents = $this->db->load_all(
 						"SELECT category_id, category " .
-						"FROM " . $this->db->table_prefix . "category " .
+						"FROM " . $prefix . "category " .
 						"WHERE parent_id = 0 " .
 							"AND category_lang = " . $this->db->q($word['category_lang']) . " " .
 							"AND category_id <> " . (int) $word['category_id'] . " " .
@@ -283,7 +285,7 @@ if (   $this->is_owner()
 			{
 				if ($word = $this->db->load_single(
 					"SELECT category
-					FROM " . $this->db->table_prefix . "category
+					FROM " . $prefix . "category
 					WHERE category_id = " . (int) $category_id . "
 					LIMIT 1"))
 				{
@@ -296,6 +298,7 @@ if (   $this->is_owner()
 			{
 				// no record selected
 				$this->set_message($this->_t('NoCategorySelected'));
+
 				$this->http->redirect($this->href('categories', '', 'edit'));
 			}
 		}
