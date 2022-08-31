@@ -8580,7 +8580,7 @@ class Wacko
 			{
 				$out .= '<li>' . "\n\t";
 				$out .= ($can_edit
-							? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '">'
+							? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">'
 							: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '> ' . "\n\t") .
 						'<label for="category' . $category_id . '"><strong>' . Ut::html($word['category']) . '</strong></label>' . "\n";
 
@@ -8595,7 +8595,7 @@ class Wacko
 
 						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
 									($can_edit
-										? '<input type="radio" id="category' . $category_id . '" name="change_id" value="' . $category_id . '">' . "\n\t\t\t"
+										? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">' . "\n\t\t\t"
 										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
 									'<label for="category' . $category_id . '">' . Ut::html($word['category']) . '</label>' . "\n\t\t" .
 								'</li>' . "\n";
