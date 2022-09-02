@@ -121,7 +121,7 @@ function admin_user_groups(&$engine, $module)
 
 				$available_users = $engine->db->load_all(
 					"SELECT user_id, user_name " .
-					"FROM " . $engine->db->user_table." " .
+					"FROM " . $prefix . "user " .
 					"WHERE user_id NOT IN (" . $subqery_members.") " .
 						"AND account_type = 0 " .
 						"AND enabled = 1 " .

@@ -535,7 +535,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 									$file_description = ' <span class="editnote">[' . $file_description . ']</span>';
 								}
 
-								preg_match('/^[^\/]+/u', $file['file_on_page'], $sub_tag);
+								preg_match('/^[^\/]+/u', ($file['file_on_page'] ?? ''), $sub_tag);
 
 								// TODO needs to be redone, moving to tpl
 								if ($file['page_id']) // !$global
@@ -659,7 +659,7 @@ else
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(u.user_name) AS n " .
-		"FROM " . $this->db->user_table . " u " .
+		"FROM " . $prefix . "user u " .
 		$sql_where, true);
 
 	$tpl->enter('l_');
@@ -687,7 +687,7 @@ else
 	// collect data
 	$users = $this->db->load_all(
 		"SELECT u.user_name, u.signup_time, u.last_visit, u.total_pages, u.total_revisions, u.total_comments, u.total_uploads, s.hide_lastsession " .
-		"FROM " . $this->db->user_table . " u " .
+		"FROM " . $prefix . "user u " .
 			"LEFT JOIN " . $prefix . "user_setting s ON (u.user_id = s.user_id) " .
 		$sql_where .
 		$sql_order .

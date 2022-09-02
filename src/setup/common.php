@@ -79,8 +79,16 @@ function available_languages()
 // TODO: same function as in wacko class
 function sanitize_page_tag(&$tag, $normalize = false)
 {
+	if (!$tag)
+	{
+		return;
+	}
+
 	// normalizing tag name
 	$tag = Ut::normalize($tag);
+
+	// remove invalid characters
+	$tag = preg_replace('/[^\p{L}\p{M}\p{Nd}\.\-\/]/u', '', $tag);
 
 	// remove starting/trailing slashes, spaces, and minimize multi-slashes
 	$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
@@ -89,10 +97,28 @@ function sanitize_page_tag(&$tag, $normalize = false)
 			return @$x[1]? '/' : '';
 		}, $tag);
 
-	$tag = preg_replace('/[^\p{L}\p{M}\p{Nd}\.\-\/]/u', '', $tag);
+	$cluster = [];
 
-	// strip full stop and hyphen-minus from the beginning and end of the string
-	$tag = utf8_trim($tag, '.-');
+	// parent-tags (cluster recursive)
+	foreach (explode('/', $tag) as $string)
+	{
+		// strip full stop and hyphen-minus from the beginning and end of the string
+		$string = utf8_trim($string, '.-');
+
+		// remove multi full stop and hyphen-minus
+		$string = preg_replace('/(-{2,})/u', '-', $string);
+		$string = preg_replace('/(\.{2,})/u', '.', $string);
+
+		// remove consecutive occurences (.- / -.)
+		$string = str_replace(['.-', '-.'], '', $string);
+
+		if ($string)
+		{
+			$cluster[] = $string;
+		}
+	}
+
+	$tag = implode('/', $cluster);
 }
 
 // database install
@@ -123,7 +149,7 @@ function test_mysqli($text, $query, $errorText = '')
 	{
 		test($text, @mysqli_query($dblink, $query), $errorText);
 	}
-	catch (\mysqli_sql_exception $e)
+	catch (mysqli_sql_exception $e)
 	{
 		test($text, false, $errorText . '<br>' . $e->getMessage());
 	}

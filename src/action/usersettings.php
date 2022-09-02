@@ -61,7 +61,7 @@ else if ($user = $this->get_user())
 		if ($error)
 		{
 			$this->set_message($error, 'error');
-			$this->set_message($this->_t('SettingsNotStored'));
+			$this->set_message($this->_t('SettingsNotStored')); // message set does not exist!
 		}
 		else
 		{
@@ -72,7 +72,7 @@ else if ($user = $this->get_user())
 			{
 				// update users table
 				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " SET " .
+					"UPDATE " . $this->db->table_prefix . "user SET " .
 						"real_name		= " . $this->db->q(trim($realname)) . ", " .
 						"email			= " . $this->db->q($email) . " " .
 					"WHERE user_id = " . (int) $user['user_id'] . " " .
@@ -253,7 +253,7 @@ else if ($user = $this->get_user())
 
 		$code = $this->db->load_single(
 			"SELECT email_confirm " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 			"WHERE user_id = " . (int) $user['user_id'] . " " .
 			"LIMIT 1");
 

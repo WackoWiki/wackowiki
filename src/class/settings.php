@@ -134,7 +134,6 @@ class Settings extends Dbal implements ArrayAccess
 				$prefix .= substr(base64_encode(hash('sha1', $this->base_url . $this->system_seed_hash, true)), 1, 6);
 
 				$this->cookie_prefix		= preg_replace('/[^a-z\d]+/i', '', $prefix);
-				$this->user_table			= $this->table_prefix . 'user';
 				$this->config['base_path']	= $this->get_base_url($this->canonical);
 
 				// cache to file

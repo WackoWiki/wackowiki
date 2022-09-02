@@ -10,12 +10,8 @@ class Wacko
 {
 	private array $acl				= [];
 	private array $acl_cache		= [];
-	private array $category_cache	= [];
 	private array $file_cache		= [];
-	private $page_cache				= null;
-	private array $page_id_cache	= [];
-	private array $page_tag_cache	= [];
-	private $wanted_cache			= null;
+	private array $page_cache		= [];
 	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
 	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
@@ -42,6 +38,12 @@ class Wacko
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
+
+	public array $category_cache	= [];
+	public array $page_id_cache		= [];
+	public array $page_tag_cache	= [];
+	public array $wanted_cache		= [];
+
 	public $language				= null;
 	public $languages				= null;
 	public $user_lang				= null;
@@ -2309,7 +2311,7 @@ class Wacko
 
 		// update user comments count
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"total_comments = " . (int) $this->count_comments(null, $user_id) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2330,7 +2332,7 @@ class Wacko
 
 		// update user uploads count
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"total_uploads = " . (int) $this->count_files(null, $user_id) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2339,7 +2341,7 @@ class Wacko
 	function update_pages_count($user_id): void
 	{
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"total_pages = " . (int) $this->count_pages($user_id) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2365,7 +2367,7 @@ class Wacko
 		if ($user_id)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $this->db->table_prefix . "user SET " .
 					"total_revisions = " . (int) $this->count_revisions(null, $user_id) . " " .
 				"WHERE user_id = " . (int) $user_id . " " .
 				"LIMIT 1");
@@ -2405,7 +2407,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"enabled		= " . (int) $enabled . ", " .
 				"account_status	= " . (int) $account_status . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
@@ -2844,7 +2846,7 @@ class Wacko
 		$token = Ut::random_token(21);
 
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"email_confirm = " . $this->db->q(hash_hmac('sha256', $token, $this->db->system_seed_hash)) . " " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -2858,12 +2860,12 @@ class Wacko
 
 		if ($user = $this->db->load_single(
 			"SELECT user_name, email " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 			"WHERE email_confirm = " . $hash . " " .
 			"LIMIT 1"))
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $this->db->table_prefix . "user SET " .
 					"email_confirm = '' " .
 				"WHERE email_confirm = " . $hash . " " .
 				"LIMIT 1");
@@ -4119,17 +4121,24 @@ class Wacko
 					$icon	= '';
 				}
 
+				$templates = [
+					'{aname}'		=> $aname,
+					'{rel}'			=> $rel,
+					'{icon}'		=> $icon,
+					'{accicon}'		=> $accicon,
+					'{class}'		=> $class,
+					'{title}'		=> $title,
+					'{pagelink}'	=> $page_link,
+					'{pagepath}'	=> $page_path,
+					'{page}'		=> $page,
+					'{text}'		=> $text,
+				];
+
 				// process template for internal link
-				$res		= str_replace('{aname}',	$aname,		$res);
-				$res		= str_replace('{rel}',		$rel,		$res);
-				$res		= str_replace('{icon}',		$icon,		$res);
-				$res		= str_replace('{accicon}',	$accicon,	$res);
-				$res		= str_replace('{class}',	$class,		$res);
-				$res		= str_replace('{title}',	$title,		$res);
-				$res		= str_replace('{pagelink}',	$page_link,	$res);
-				$res		= str_replace('{pagepath}',	$page_path,	$res);
-				$res		= str_replace('{page}',		$page,		$res);
-				$res		= str_replace('{text}',		$text,		$res);
+				foreach ($templates as $template => $element)
+				{
+					$res = str_replace($template, $element, $res);
+				}
 
 				if (!$text)
 				{
@@ -4233,15 +4242,22 @@ class Wacko
 					$icon	= '';
 				}
 
+				$templates = [
+					'{aname}'		=> $aname,
+					'{target}'		=> $target,
+					'{rel}'			=> $rel,
+					'{icon}'		=> $icon,
+					'{class}'		=> $class,
+					'{title}'		=> $title,
+					'{href}'		=> $href,
+					'{text}'		=> $text,
+				];
+
 				// process template for external link
-				$res		= str_replace('{aname}',	$aname,		$res);
-				$res		= str_replace('{target}',	$target,	$res);
-				$res		= str_replace('{rel}',		$rel,		$res);
-				$res		= str_replace('{icon}',		$icon,		$res);
-				$res		= str_replace('{class}',	$class,		$res);
-				$res		= str_replace('{title}',	$title,		$res);
-				$res		= str_replace('{href}',		$href,		$res);
-				$res		= str_replace('{text}',		$text,		$res);
+				foreach ($templates as $template => $element)
+				{
+					$res = str_replace($template, $element, $res);
+				}
 
 				// numerated outer links and file links
 				if ($href != $text && $href != '404' && $href != '403')
@@ -4479,8 +4495,16 @@ class Wacko
 
 	function sanitize_page_tag(&$tag, $normalize = false): void
 	{
+		if (!$tag)
+		{
+			return;
+		}
+
 		// normalizing tag name
 		$tag = Ut::normalize($tag);
+
+		// remove invalid characters
+		$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
 
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes
 		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
@@ -4489,10 +4513,28 @@ class Wacko
 				return @$x[1]? '/' : '';
 			}, $tag);
 
-		$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
+		$cluster = [];
 
-		// strip full stop and hyphen-minus from the beginning and end of the string
-		$tag = utf8_trim($tag, '.-');
+		// parent-tags (cluster recursive)
+		foreach (explode('/', $tag) as $string)
+		{
+			// strip full stop and hyphen-minus from the beginning and end of the string
+			$string = utf8_trim($string, '.-');
+
+			// remove multi full stop and hyphen-minus
+			$string = preg_replace('/(-{2,})/u', '-', $string);
+			$string = preg_replace('/(\.{2,})/u', '.', $string);
+
+			// remove consecutive occurences (.- / -.)
+			$string = str_replace(['.-', '-.'], '', $string);
+
+			if ($string)
+			{
+				$cluster[] = $string;
+			}
+		}
+
+		$tag = implode('/', $cluster);
 	}
 
 	// returns error text, or null on OK
@@ -5191,7 +5233,7 @@ class Wacko
 		// checking for identical name
 		if ($this->db->load_single(
 			"SELECT user_id " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 			"WHERE user_name = " . $this->db->q($user_name) . " " .
 			"LIMIT 1"))
 		{
@@ -5208,7 +5250,7 @@ class Wacko
 	{
 		return (bool) $this->db->load_single(
 			"SELECT user_id " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 			"WHERE email = " . $this->db->q($email) . " " .
 			"LIMIT 1");
 	}
@@ -5233,7 +5275,7 @@ class Wacko
 				s.theme, s.autocomplete, s.numerate_links, s.diff_mode, s.notify_minor_edit, s.notify_page, s.notify_comment, s.dont_redirect,
 				s.send_watchmail, s.show_files, s.allow_intercom, s.allow_massemail, s.hide_lastsession, s.validate_ip, s.noid_pubs,
 				s.session_length, s.timezone, s.dst, s.sorting_comments " .
-			"FROM " . $this->db->user_table . " u " .
+			"FROM " . $this->db->table_prefix . "user u " .
 				"LEFT JOIN " . $this->db->table_prefix . "user_setting s ON (u.user_id = s.user_id) " .
 			"WHERE " . ($user_id
 					? "u.user_id		= " . (int) $user_id . " "
@@ -5313,7 +5355,7 @@ class Wacko
 		if ($user['user_id'])
 		{
 			return $this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " SET " .
+				"UPDATE " . $this->db->table_prefix . "user SET " .
 					"last_mark = UTC_TIMESTAMP() " .
 				"WHERE user_id = " . (int) $user['user_id'] . " " .
 				"LIMIT 1");
@@ -5389,7 +5431,7 @@ class Wacko
 			if ($token && $token['token'] === hash('sha256', Ut::http64_decode($authenticator)))
 			{
 				$this->db->sql_query(
-					"UPDATE " . $this->db->user_table . " SET " .
+					"UPDATE " . $this->db->table_prefix . "user SET " .
 						"last_visit = UTC_TIMESTAMP() " .
 					"WHERE " .
 						"user_id = " . (int) $token['user_id'] . " " .
@@ -5435,7 +5477,7 @@ class Wacko
 		}
 
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"last_visit						= UTC_TIMESTAMP(), " .
 				"change_password				= '', " .
 				"login_count					= login_count + 1, " .
@@ -5529,7 +5571,7 @@ class Wacko
 	function set_failed_login_count($user_id): void
 	{
 		$this->db->sql_query(
-			"UPDATE " . $this->db->user_table . " SET " .
+			"UPDATE " . $this->db->table_prefix . "user SET " .
 				"failed_login_count = failed_login_count + 1 " .
 			"WHERE user_id = " . (int) $user_id . " " .
 			"LIMIT 1");
@@ -5539,7 +5581,7 @@ class Wacko
 	{
 		return $this->db->load_all(
 			"SELECT user_id, user_name " .
-			"FROM " . $this->db->user_table . " " .
+			"FROM " . $this->db->table_prefix . "user " .
 				($enabled
 					? "WHERE enabled = 1 "
 					: "") .

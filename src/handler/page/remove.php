@@ -191,7 +191,7 @@ if ($this->is_admin()
 		if ($owner_id = $this->page['owner_id'])
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->user_table . " " .
+				"UPDATE " . $this->db->table_prefix . "user " .
 				($comment_on_id
 					? "SET total_comments	= total_comments	- 1 "
 					: "SET total_pages		= total_pages		- 1 "
