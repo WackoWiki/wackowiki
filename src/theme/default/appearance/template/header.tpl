@@ -100,7 +100,7 @@
 							<span>[ '' t TabTitle | trim '' ]</span>
 						=]
 						[= out _ =
-							<a href="[ ' method ' ]" title="[ ' hint ' ]" [ ' key | e attr | enclose ' accesskey="' '"' ' ][ ' params ' ]>
+							<a href="[ ' method ' ]" title="[ ' hint ' ]" [ ' key | e attr | enclose ' accesskey="' '"' ' ][ ' attr ' ]>
 								[ '' t TabTitle | trim '' ]</a>
 						=]
 					</li>

@@ -102,7 +102,7 @@ if ($logged_in)
 //		0 text only,
 //		1 image only,
 //		2 image and text
-$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $params = null) use (&$tpl)
+$echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_key = '', $attr = null, $params = null) use (&$tpl)
 {
 	$tpl->class = $tab_class ?: ('m-' . $method);
 
@@ -114,9 +114,9 @@ $echo_tab = function ($method, $hint, $title, $image, $tab_class = '', $access_k
 	else
 	{
 		$tpl->enter('out_');
-		$tpl->method	= ($method == 'show' ? $this->href() : $this->href($method));
+		$tpl->method	= ($method == 'show' ? $this->href() : $this->href($method, '', $params));
 		$tpl->hint		= $this->_t($hint);
-		$tpl->params	= $params;
+		$tpl->attr		= $attr;
 
 		if ($access_key !== '')
 		{
@@ -186,7 +186,8 @@ else
 	// print tab
 	if ($readable)
 	{
-		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank" rel="noopener"');
+		$params = $this->page['revision_id'] ? ['revision_id' => $this->page['revision_id']] : null;
+		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank" rel="noopener"', $params);
 	}
 
 	// create tab
