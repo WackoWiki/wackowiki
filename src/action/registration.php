@@ -229,7 +229,7 @@ else
 
 	$tpl->autocomplete	= $this->form_autocomplete_off();
 	$tpl->username		= $user_name;
-	$tpl->pattern		= $this->language['USER_NAME'];
+	$tpl->pattern		= $this->lang['USER_NAME'];
 	$tpl->password 		= $password;
 	$tpl->confpassword	= $conf_password;
 	$tpl->only			=

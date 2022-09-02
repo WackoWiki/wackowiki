@@ -155,7 +155,7 @@ if ($user)
 else
 {
 	$tpl->f_form			= $this->href();
-	$tpl->f_pattern			= $this->language['USER_NAME'];
+	$tpl->f_pattern			= $this->lang['USER_NAME'];
 	$tpl->f_only			=
 		Ut::perc_replace($this->_t($this->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'),
 			$this->db->username_chars_min,

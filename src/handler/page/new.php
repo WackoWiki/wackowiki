@@ -29,7 +29,7 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 
 	$this->sanitize_page_tag($new_tag);
 
-	if (!preg_match('/^([' . $this->language['TAG_P'] . ']+)$/u', $new_tag))
+	if (!preg_match('/^([' . $this->lang['TAG_P'] . ']+)$/u', $new_tag))
 	{
 		$this->set_message($this->_t('InvalidWikiName'));
 	}
@@ -83,7 +83,7 @@ if ($this->has_access('create', $this->get_page_id($this->tag)))
 	{
 		$tpl->p_f_base		= (mb_strlen($this->tag) > 50 ? '...' . mb_substr($this->tag, -50) : $this->tag);
 		$tpl->p_f_tag		= ($option === 1 ? $new_tag : '');
-		#$tpl->p_f_pattern	= $this->language['TAG'] . '+';
+		#$tpl->p_f_pattern	= $this->lang['TAG'] . '+';
 	}
 	else
 	{
@@ -110,7 +110,7 @@ if (mb_substr_count($this->tag, '/') > 0)
 		{
 			$tpl->c_f_base		= (mb_strlen($parent) > 50 ? '...' . mb_substr($parent, -50) : $parent);
 			$tpl->c_f_tag		= ($option === 2 ? $new_tag : '');
-			#$tpl->c_f_pattern	= $this->language['TAG'] . '+';
+			#$tpl->c_f_pattern	= $this->lang['TAG'] . '+';
 		}
 	}
 	else
@@ -122,4 +122,4 @@ if (mb_substr_count($this->tag, '/') > 0)
 
 // create a random page
 $tpl->tag	= ($option === 3 ? $new_tag : '');
-#$tpl->pattern		= $this->language['TAG'] . '+';
+#$tpl->pattern		= $this->lang['TAG'] . '+';

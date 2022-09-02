@@ -101,7 +101,7 @@ if (isset($_POST['upload']) & $can_upload)
 			$name	= preg_replace('/[\r\n\t -]+/u', '_', $name);
 			$name	= utf8_trim($name, ' .-_');
 			$name	= Ut::normalize($name);
-			$name	= preg_replace('/[^' . $this->language['ALPHANUM_P'] . '\.]/u', '', $name);
+			$name	= preg_replace('/[^' . $this->lang['ALPHANUM_P'] . '\.]/u', '', $name);
 
 			// here would be place for transliteration
 			if ($this->db->upload_translit)

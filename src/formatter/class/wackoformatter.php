@@ -210,7 +210,7 @@ class WackoFormatter
 			"\?\?\S\?\?|" .
 			"\?\?(\S.*?\S)\?\?|" .
 			// \\\\...
-			"\\\\\\\\[" . $object->language['ALPHANUM_P'] . "\-\_\\\!\.]+|" .
+			"\\\\\\\\[" . $object->lang['ALPHANUM_P'] . "\-\_\\\!\.]+|" .
 			// bold text **...**
 			"\*\*[^\n]*?\*\*|" .
 			// code ##...##
@@ -258,13 +258,13 @@ class WackoFormatter
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
-			"\b[[:alnum:]]+:[" . $object->language['ALPHANUM_P'] . "\!\.][" . $object->language['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
+			"\b[[:alnum:]]+:[" . $object->lang['ALPHANUM_P'] . "\!\.][" . $object->lang['ALPHANUM_P'] . "\(\)\-\_\.\+\&\=\#]+|" .
 			// disabled WikiNames
 			"~([^ \t\n]+)|" .
 			// wiki links (beside actions)
 			($this->object->db->disable_wikilinks
 				? ''
-				: "(~?)(?<=[^\." . $object->language['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->language['UPPER'] . $object->language['LOWER'] . "+" . $object->language['UPPERNUM'] . $object->language['ALPHANUM'] . "*)\b|") .
+				: "(~?)(?<=[^\." . $object->lang['ALPHANUM_P'] . "]|^)(((\.\.|!)?\/)?" . $object->lang['UPPER'] . $object->lang['LOWER'] . "+" . $object->lang['UPPERNUM'] . $object->lang['ALPHANUM'] . "*)\b|") .
 				# "(~?)(?<=[^\.[[:alpha:]][[:digit:]]\_\-\/]|^)(((\.\.|!)?\/)?[[:upper:][:lower:]\/]+[[:upper:][:digit:]][[:alpha:][:digit:]\_\-\/]*)\b|") .
 			"\n)/usm";
 
@@ -784,7 +784,7 @@ class WackoFormatter
 			}
 		}
 		// lan path
-		else if (preg_match('/^\\\\\\\\([' . $wacko->language['ALPHANUM_P'] . '\\\!\.\-\_]+)$/u', $thing, $matches))
+		else if (preg_match('/^\\\\\\\\([' . $wacko->lang['ALPHANUM_P'] . '\\\!\.\-\_]+)$/u', $thing, $matches))
 		{
 			return '<a href="file://///' . str_replace('\\', '/', $matches[1]) . '">\\\\' . $matches[1] . '</a>';
 		}
@@ -1160,14 +1160,14 @@ class WackoFormatter
 			return $wacko->pre_link($thing, '', 1, $caption);
 		}
 		// interwiki links
-		else if (preg_match('/^([[:alnum:]]+:[' . $wacko->language['ALPHANUM_P'] . '\!\.][' . $wacko->language['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
+		else if (preg_match('/^([[:alnum:]]+:[' . $wacko->lang['ALPHANUM_P'] . '\!\.][' . $wacko->lang['ALPHANUM_P'] . '\(\)\-\_\.\+\&\=\#]+?)([^[:alnum:]^\/\(\)\-\_\=]?)$/us', $thing, $matches))
 		{
 			#Diag::dbg('GOLD', ' ::iw:: ' . $thing . ' => ' . $matches[1] . ' -> ' . $matches[2]);
 			return $wacko->pre_link($matches[1]) . $matches[2];
 		}
 		// wacko links!
 		else if ((!$wacko->noautolinks)
-				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->language['UPPER'] . $wacko->language['LOWER'] . '+' . $wacko->language['UPPERNUM'] . $wacko->language['ALPHANUM'] . '*)$/us', $thing, $matches)))
+				&& (preg_match('/^(((\.\.)|!)?\/?|~)?(' . $wacko->lang['UPPER'] . $wacko->lang['LOWER'] . '+' . $wacko->lang['UPPERNUM'] . $wacko->lang['ALPHANUM'] . '*)$/us', $thing, $matches)))
 		{
 			if ($matches[1] == '~')
 			{
