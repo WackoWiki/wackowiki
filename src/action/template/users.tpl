@@ -229,8 +229,8 @@ first really BIG template written
 			<table class="formation">
 				<tr>
 					<td class="label">
-						<label for="search_user">[ ' _t: UsersSearch ' ]:</label>
-						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" required> ['' '']
+						<label for="search_user" class="visuallyhidden">[ ' _t: UsersSearch ' ]</label>
+						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" placeholder="[ ' _t: UsersSearch ' ]" required> ['' '']
 						<button type="submit" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
 					</td>
 				</tr>

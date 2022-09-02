@@ -23,8 +23,6 @@ function admin_tool_badbehavior(&$engine, $module)
 		require_once 'lib/bad_behavior/bad-behavior/responses.inc.php';
 	}
 
-	#Ut::debug_print_r($_POST);
-
 	function bb2_httpbl_lookup(&$engine, $ip)
 	{
 		// NB: Many of these are defunct
@@ -207,18 +205,26 @@ function admin_tool_badbehavior(&$engine, $module)
 
 		$where			= '';
 
+		$g_key				= ($_GET['status_key']		?? '');
+		$g_blocked			= ($_GET['blocked']			?? '');
+		$g_permitted		= ($_GET['permitted']		?? '');
+		$g_ip				= ($_GET['ip']				?? '');
+		$g_user_agent		= ($_GET['user_agent']		?? '');
+		$g_request_method	= ($_GET['request_method']	?? '');
+		$g_request_uri		= ($_GET['request_uri']		?? '');
+
 		// entries to display
 		$limit = 100;
 
 		// Get query variables desired by the user with input validation
-		if (!empty($_GET['status_key']))			$where .= "AND `status_key`			= " . $engine->db->q($_GET['status_key']) . " ";
-		if (!empty($_GET['blocked']))				$where .= "AND `status_key` 		!= '00000000' ";
-		else if (!empty($_GET['permitted']))		$where .= "AND `status_key`			= '00000000' ";
+		if (!empty($g_key))					$where .= "AND `status_key`			= " . $engine->db->q($g_key) . " ";
+		if (!empty($g_blocked))				$where .= "AND `status_key` 		!= '00000000' ";
+		else if (!empty($g_permitted))		$where .= "AND `status_key`			= '00000000' ";
 
-		if (!empty($_GET['ip']))					$where .= "AND `ip` 				= " . $engine->db->q($_GET['ip']) . " ";
-		if (!empty($_GET['user_agent']))			$where .= "AND `user_agent_hash`	= " . $engine->db->q($_GET['user_agent']) . " ";
-		if (!empty($_GET['request_method']))		$where .= "AND `request_method`		= " . $engine->db->q($_GET['request_method']) . " ";
-		if (!empty($_GET['request_uri']))			$where .= "AND `request_uri_hash`	= " . $engine->db->q($_GET['request_uri']) . " ";
+		if (!empty($g_ip))					$where .= "AND `ip` 				= " . $engine->db->q($g_ip) . " ";
+		if (!empty($g_user_agent))			$where .= "AND `user_agent_hash`	= " . $engine->db->q($g_user_agent) . " ";
+		if (!empty($g_request_method))		$where .= "AND `request_method`		= " . $engine->db->q($g_request_method) . " ";
+		if (!empty($g_request_uri))			$where .= "AND `request_uri_hash`	= " . $engine->db->q($g_request_uri) . " ";
 
 		// collecting data
 		$count = $engine->db->load_single(
@@ -226,22 +232,16 @@ function admin_tool_badbehavior(&$engine, $module)
 			"FROM " . $engine->db->table_prefix . "bad_behavior l " .
 			"WHERE 1=1 " . ( $where ?: '' ));
 
-		$key_pagination				= ($_GET['status_key']		?? '');
-		$blocked_pagination			= ($_GET['blocked']			?? '');
-		$permitted_pagination		= ($_GET['permitted']		?? '');
-		$ip_pagination				= ($_GET['ip']				?? '');
-		$user_agent_pagination		= ($_GET['user_agent']		?? '');
-		$request_method_pagination	= ($_GET['request_method']	?? '');
-		$request_uri_pagination		= ($_GET['request_uri']		?? '');
 
-		$pagination				= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'tool_badbehavior', 'setting' => 'bb2_manage']
-									+ (!empty($blocked_pagination)			? ['blocked'		=> Ut::html($blocked_pagination)] : [])
-									+ (!empty($permitted_pagination)		? ['permitted'		=> Ut::html($permitted_pagination)] : [])
-									+ (!empty($key_pagination)				? ['status_key'		=> Ut::html($key_pagination)] : [])
-									+ (!empty($ip_pagination)				? ['ip'				=> Ut::html($ip_pagination)] : [])
-									+ (!empty($request_method_pagination)	? ['request_method'	=> Ut::html($request_method_pagination)] : [])
-									+ (!empty($request_uri_pagination)		? ['request_uri'	=> Ut::html($request_uri_pagination)] : [])
-									+ (!empty($user_agent_pagination)		? ['user_agent'		=> Ut::html($user_agent_pagination)] : []), '', 'admin.php');
+
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'tool_badbehavior', 'setting' => 'bb2_manage']
+								+ (!empty($g_blocked)			? ['blocked'		=> Ut::html($g_blocked)] : [])
+								+ (!empty($g_permitted)			? ['permitted'		=> Ut::html($g_permitted)] : [])
+								+ (!empty($g_key)				? ['status_key'		=> Ut::html($g_key)] : [])
+								+ (!empty($g_ip)				? ['ip'				=> Ut::html($g_ip)] : [])
+								+ (!empty($g_request_method)	? ['request_method'	=> Ut::html($g_request_method)] : [])
+								+ (!empty($g_request_uri)		? ['request_uri'	=> Ut::html($g_request_uri)] : [])
+								+ (!empty($g_user_agent)		? ['user_agent'		=> Ut::html($g_user_agent)] : []), '', 'admin.php');
 
 		// Query the DB based on variables selected
 
@@ -271,13 +271,13 @@ function admin_tool_badbehavior(&$engine, $module)
 		{
 			$link = '[<a href="' .	$engine->href('', '', ['setting' => 'bb2_manage']) . '">X</a>]';
 
-			if (!empty($_GET['status_key']))		echo '<strong>' . $engine->_t('BbStatus')		. '</strong> ' . $link . ' ';
-			if (!empty($_GET['blocked']))			echo '<strong>' . $engine->_t('BbBlocked')		. '</strong> ' . $link . ' ';
-			if (!empty($_GET['permitted']))			echo '<strong>' . $engine->_t('BbPermitted')	. '</strong> ' . $link . ' ';
-			if (!empty($_GET['ip']))				echo '<strong>' . $engine->_t('BbIp')			. '</strong> ' . $link . ' ';
-			if (!empty($_GET['user_agent']))		echo '<strong>' . $engine->_t('BbUserAgent')	. '</strong> ' . $link . ' ';
-			if (!empty($_GET['request_method']))	echo '<strong>' . $engine->_t('BbGetPost')		. '</strong> ' . $link . ' ';
-			if (!empty($_GET['request_uri']))		echo '<strong>' . $engine->_t('BbUri')			. '</strong> ' . $link . ' ';
+			if (!empty($g_key))				echo '<strong>' . $engine->_t('BbStatus')		. '</strong> ' . $link . ' ';
+			if (!empty($g_blocked))			echo '<strong>' . $engine->_t('BbBlocked')		. '</strong> ' . $link . ' ';
+			if (!empty($g_permitted))		echo '<strong>' . $engine->_t('BbPermitted')	. '</strong> ' . $link . ' ';
+			if (!empty($g_ip))				echo '<strong>' . $engine->_t('BbIp')			. '</strong> ' . $link . ' ';
+			if (!empty($g_user_agent))		echo '<strong>' . $engine->_t('BbUserAgent')	. '</strong> ' . $link . ' ';
+			if (!empty($g_request_method))	echo '<strong>' . $engine->_t('BbGetPost')		. '</strong> ' . $link . ' ';
+			if (!empty($g_request_uri))		echo '<strong>' . $engine->_t('BbUri')			. '</strong> ' . $link . ' ';
 		}
 
 		if (!isset($_GET['status_key']))

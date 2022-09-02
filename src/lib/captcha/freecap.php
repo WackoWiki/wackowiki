@@ -34,7 +34,7 @@ if (!defined('IN_WACKO'))
 //////////////////////////////////////////////////////
 
 // try to avoid the 'free p*rn' method of CAPTCHA circumvention
-// see www.wikipedia.com/captcha for more info
+// see en.wikipedia.org/captcha for more info
 // $site_tags[0] = "To avoid spam, please do NOT enter the text if";
 // $site_tags[1] = "this site is not example.com";
 // or more simply:
@@ -426,8 +426,8 @@ $tag_col		= ImageColorAllocate($im, 10, 10, 10);
 $site_tag_col2	= ImageColorAllocate($im2, 0, 0, 0);
 
 // set debug colours (text colours are set later)
-$debug			= ImageColorAllocate($im, 255, 0, 0);
-$debug2			= ImageColorAllocate($im2, 255, 0, 0);
+#$debug			= ImageColorAllocate($im, 255, 0, 0);
+#$debug2		= ImageColorAllocate($im2, 255, 0, 0);
 
 // set background colour (can change to any colour not in possible $text_col range)
 // it doesn't matter as it'll be transparent or coloured over.
@@ -773,7 +773,7 @@ if ($output != 'jpg' && $bg_type == 0)
 //////////////////////////////////////////////////////
 ////// Try to avoid 'free p*rn' style CAPTCHA re-use
 //////////////////////////////////////////////////////
-// ('*'ed to stop my site coming up for certain keyword searches on google)
+// ('*'ed to stop my site coming up for certain keyword searches on Google)
 
 // can obscure CAPTCHA word in some cases..
 
@@ -782,7 +782,7 @@ ImageFilledRectangle($im2, 0, 0, $width, $height, $bg2);
 
 if (is_array($site_tags))
 {
-	for($i = 0; $i < count($site_tags); $i++)
+	for ($i = 0; $i < count($site_tags); $i++)
 	{
 		// ensure tags are centered
 		$tag_width = strlen($site_tags[$i]) * 6;

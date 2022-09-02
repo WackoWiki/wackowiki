@@ -355,7 +355,7 @@ if (!$group_id && ($profile = @$_REQUEST['profile'])) // not GET so personal mes
 			if ($user['total_revisions'])
 			{
 				$sort_modified	= (isset($_GET['sort']) && $_GET['sort'] == 'modified');
-				$pagination	= $this->pagination($user['total_pages'], 10, 'e',
+				$pagination		= $this->pagination($user['total_pages'], 10, 'e',
 					$profile + ['sort' => ($sort_modified? 'modified' : ''), '#' => 'changes']);
 
 				$pages = $this->db->load_all(

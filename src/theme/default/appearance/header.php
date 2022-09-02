@@ -192,7 +192,7 @@ else
 	// print tab
 	if ($readable)
 	{
-		$params = $this->page['revision_id'] ? ['revision_id' => $this->page['revision_id']] : null;
+		$params = isset($this->page['revision_id']) ? ['revision_id' => $this->page['revision_id']] : null;
 		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank" rel="noopener"', $params);
 	}
 

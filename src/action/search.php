@@ -69,7 +69,8 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 		"FROM " . $prefix . "page a " .
 		$selector, true);
 
-	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase, 'lang' => $lang]);
+	$pagination = $this->pagination($count['n'], $limit, 'p', ['phrase' => $phrase]
+		+ (!empty($lang)			? ['lang'			=> $lang]			: []));
 
 	// load search results
 	$results = $this->db->load_all(
