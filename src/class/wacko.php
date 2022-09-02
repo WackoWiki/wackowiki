@@ -10,12 +10,8 @@ class Wacko
 {
 	private array $acl				= [];
 	private array $acl_cache		= [];
-	private array $category_cache	= [];
 	private array $file_cache		= [];
-	private $page_cache				= null;
-	private array $page_id_cache	= [];
-	private array $page_tag_cache	= [];
-	private $wanted_cache			= null;
+	private array $page_cache		= [];
 	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
 	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
@@ -42,6 +38,12 @@ class Wacko
 	public string $page_meta		= 'page_id, owner_id, user_id, tag, created, modified, edit_note, minor_edit, latest, handler, comment_on_id, page_lang, title, keywords, description';
 	public array $first_inclusion	= [];		// for backlinks
 	public array $toc_context		= [];
+
+	public array $category_cache	= [];
+	public array $page_id_cache		= [];
+	public array $page_tag_cache	= [];
+	public array $wanted_cache		= [];
+
 	public $language				= null;
 	public $languages				= null;
 	public $user_lang				= null;
@@ -4154,17 +4156,24 @@ class Wacko
 					$icon	= '';
 				}
 
+				$templates = [
+					'{aname}'		=> $aname,
+					'{rel}'			=> $rel,
+					'{icon}'		=> $icon,
+					'{accicon}'		=> $accicon,
+					'{class}'		=> $class,
+					'{title}'		=> $title,
+					'{pagelink}'	=> $page_link,
+					'{pagepath}'	=> $page_path,
+					'{page}'		=> $page,
+					'{text}'		=> $text,
+				];
+
 				// process template for internal link
-				$res		= str_replace('{aname}',	$aname,		$res);
-				$res		= str_replace('{rel}',		$rel,		$res);
-				$res		= str_replace('{icon}',		$icon,		$res);
-				$res		= str_replace('{accicon}',	$accicon,	$res);
-				$res		= str_replace('{class}',	$class,		$res);
-				$res		= str_replace('{title}',	$title,		$res);
-				$res		= str_replace('{pagelink}',	$page_link,	$res);
-				$res		= str_replace('{pagepath}',	$page_path,	$res);
-				$res		= str_replace('{page}',		$page,		$res);
-				$res		= str_replace('{text}',		$text,		$res);
+				foreach ($templates as $template => $element)
+				{
+					$res = str_replace($template, $element, $res);
+				}
 
 				if (!$text)
 				{
@@ -4268,15 +4277,22 @@ class Wacko
 					$icon	= '';
 				}
 
+				$templates = [
+					'{aname}'		=> $aname,
+					'{target}'		=> $target,
+					'{rel}'			=> $rel,
+					'{icon}'		=> $icon,
+					'{class}'		=> $class,
+					'{title}'		=> $title,
+					'{href}'		=> $href,
+					'{text}'		=> $text,
+				];
+
 				// process template for external link
-				$res		= str_replace('{aname}',	$aname,		$res);
-				$res		= str_replace('{target}',	$target,	$res);
-				$res		= str_replace('{rel}',		$rel,		$res);
-				$res		= str_replace('{icon}',		$icon,		$res);
-				$res		= str_replace('{class}',	$class,		$res);
-				$res		= str_replace('{title}',	$title,		$res);
-				$res		= str_replace('{href}',		$href,		$res);
-				$res		= str_replace('{text}',		$text,		$res);
+				foreach ($templates as $template => $element)
+				{
+					$res = str_replace($template, $element, $res);
+				}
 
 				// numerated outer links and file links
 				if ($href != $text && $href != '404' && $href != '403')
@@ -4510,8 +4526,16 @@ class Wacko
 
 	function sanitize_page_tag(&$tag, $normalize = false): void
 	{
+		if (!$tag)
+		{
+			return;
+		}
+
 		// normalizing tag name
 		$tag = Ut::normalize($tag);
+
+		// remove invalid characters
+		$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
 
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes
 		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
@@ -4520,10 +4544,28 @@ class Wacko
 				return @$x[1]? '/' : '';
 			}, $tag);
 
-		$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
+		$cluster = [];
 
-		// strip full stop and hyphen-minus from the beginning and end of the string
-		$tag = utf8_trim($tag, '.-');
+		// parent-tags (cluster recursive)
+		foreach (explode('/', $tag) as $string)
+		{
+			// strip full stop and hyphen-minus from the beginning and end of the string
+			$string = utf8_trim($string, '.-');
+
+			// remove multi full stop and hyphen-minus
+			$string = preg_replace('/(-{2,})/u', '-', $string);
+			$string = preg_replace('/(\.{2,})/u', '.', $string);
+
+			// remove consecutive occurences (.- / -.)
+			$string = str_replace(['.-', '-.'], '', $string);
+
+			if ($string)
+			{
+				$cluster[] = $string;
+			}
+		}
+
+		$tag = implode('/', $cluster);
 	}
 
 	// returns error text, or null on OK
