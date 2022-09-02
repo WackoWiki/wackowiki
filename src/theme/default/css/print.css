@@ -43,6 +43,10 @@ header h1 {
 	font-weight:		bold;
 }
 
+article header h1 {
+	font-size:			1.25rem;
+}
+
 footer {
 	border-top:			1px dotted #000;
 	font-size:			0.75em;
@@ -467,13 +471,19 @@ div .wrapper-content {
 	display:			none !important;
 }
 
+#mainwrapper > header,
+#section-files,
+#section-comments,
+#credits,
 .footer,
-.breadcrumb,
-.menu-main,
 .pagination {
 	display:			none !important;
 }
 
+/* browser print */
+main {
+	box-shadow:			none;
+}
 
 /* Page Breaks ***************************************************************/
 
