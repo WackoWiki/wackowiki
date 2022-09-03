@@ -220,15 +220,11 @@ if (isset($_POST['upload']) & $can_upload)
 						if ($is_global)
 						{
 							$file_name		= $result_name;
-							$path			= 'file:/';
-							$syntax_file	= 'file:/' . $file_name;
 						}
 						else
 						{
 							$small_name		= explode('@', $result_name);
 							$file_name		= $small_name[count($small_name) - 1];
-							$path			= 'file:/' . $this->page['tag'] . '/';
-							$syntax_file	= 'file:' . $file_name;
 						}
 
 						$file_size_ft	= $this->binary_multiples($file_size, false, true, true);
