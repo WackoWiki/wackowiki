@@ -44,7 +44,7 @@ class Wacko
 	public array $page_tag_cache	= [];
 	public array $wanted_cache		= [];
 
-	public $language				= null;
+	public $lang					= null;
 	public $languages				= null;
 	public $user_lang				= null;
 	public $translations			= null;
@@ -464,7 +464,7 @@ class Wacko
 	}
 
 	/**
-	 * sets language $this->language
+	 * sets language $this->lang
 	 *
 	 * @param string $lang
 	 * @param boolean $set_translation
@@ -474,24 +474,24 @@ class Wacko
 	 */
 	function set_language($lang, $set_translation = false, $get_translation = false)
 	{
-		$old_lang	= $this->language['LANG'] ?? null;
+		$old_lang	= $this->lang['LANG'] ?? null;
 
 		if ($old_lang != $lang && $this->known_language($lang))
 		{
 			$this->load_translation($lang);
-			$this->language = &$this->languages[$lang];
+			$this->lang = &$this->languages[$lang];
 
-			setlocale(LC_CTYPE, $this->language['locale']);
-			setlocale(LC_TIME, $this->language['locale']);	// sql_time_formatted()
+			setlocale(LC_CTYPE, $this->lang['locale']);
+			setlocale(LC_TIME, $this->lang['locale']);	// sql_time_formatted()
 
-			mb_internal_encoding($this->language['charset']);
+			mb_internal_encoding($this->lang['charset']);
 
-			$this->language['locale'] = setlocale(LC_CTYPE, 0);
+			$this->lang['locale'] = setlocale(LC_CTYPE, 0);
 		}
 
 		if ($set_translation)
 		{
-			$this->set_translation($this->language['LANG']);
+			$this->set_translation($this->lang['LANG']);
 		}
 
 		// substitutes $this->user_lang in _t() function
@@ -874,7 +874,7 @@ class Wacko
 							'u.user_name, o.user_name AS owner_name';
 			}
 
-			if ($page_id || !preg_match('/[^' . $this->language['TAG_P'] . ']/u', $tag))
+			if ($page_id || !preg_match('/[^' . $this->lang['TAG_P'] . ']/u', $tag))
 			{
 				$page = $this->db->load_single(
 					"SELECT " . $what_p . " " .
@@ -3176,12 +3176,12 @@ class Wacko
 		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
 		if ($this->db->urls_underscores)
 		{
-			$tag = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶' . $this->language['UPPERNUM'] . ')/u', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPER'] . ')¶(?=' . $this->language['UPPER'] . '¶\/)/u', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->language['UPPERNUM'] . ')¶(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $tag);
-			$tag = preg_replace('/\/¶(' . $this->language['UPPERNUM'] . ')/u', '/\\1', $tag);
+			$tag = preg_replace('/(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
+			$tag = preg_replace('/(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶' . $this->lang['UPPERNUM'] . ')/u', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶\/)/u', '\\1', $tag);
+			$tag = preg_replace('/(' . $this->lang['UPPERNUM'] . ')¶(' . $this->lang['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $tag);
+			$tag = preg_replace('/\/¶(' . $this->lang['UPPERNUM'] . ')/u', '/\\1', $tag);
 			$tag = str_replace('¶', '_', $tag);
 		}
 
@@ -3412,7 +3412,7 @@ class Wacko
 	*/
 	function pre_link($tag, $text = '', $track = 1, $media_url = 0): string
 	{
-		if (preg_match('/^[\!\.' . $this->language['ALPHANUM_P'] . ']+$/u', $tag))
+		if (preg_match('/^[\!\.' . $this->lang['ALPHANUM_P'] . ']+$/u', $tag))
 		{
 			if ($track && $this->link_tracking())
 			{
@@ -3886,7 +3886,7 @@ class Wacko
 			unset($file_data);
 		}
 		// user link -> user:UserName
-		else if (preg_match('/^(user):(' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(user):(' . $this->lang['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3902,7 +3902,7 @@ class Wacko
 			$tpl	= 'userlink';
 		}
 		// group link -> group:UserGroup
-		else if (preg_match('/^(group):(' . $this->language['USER_NAME'] . ')?$/u', $tag, $matches))
+		else if (preg_match('/^(group):(' . $this->lang['USER_NAME'] . ')?$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3918,7 +3918,7 @@ class Wacko
 			$tpl	= 'grouplink';
 		}
 		// interwiki -> wiki:page
-		else if (preg_match('/^([[:alnum:]]+):([' . $this->language['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
+		else if (preg_match('/^([[:alnum:]]+):([' . $this->lang['ALPHANUM_P'] . '\(\)\.\+\&\=\#]*)$/u', $tag, $matches))
 		{
 			$parts	= explode('/', $matches[2]);
 
@@ -3933,7 +3933,7 @@ class Wacko
 			$tpl	= 'interwiki';
 		}
 		// wiki link
-		else if (preg_match('/^([\!\.' . $this->language['ALPHANUM_P'] . ']+)(\#[' . $this->language['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
+		else if (preg_match('/^([\!\.' . $this->lang['ALPHANUM_P'] . ']+)(\#[' . $this->lang['ALPHANUM_P'] . ']+)?$/u', $tag, $matches))
 		{
 			$aname			= '';
 			$match			= '';
@@ -4437,17 +4437,17 @@ class Wacko
 
 	function add_nbsps($text): string
 	{
-		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')(' . $this->language['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->language['ALPHANUM'] . ')\//u', '\\1' . NBSP . '/', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . NBSP . $this->language['UPPERNUM'] . ')/u', '\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPER'] . ')' . NBSP . '(?=' . $this->language['UPPER'] . NBSP . '\/)/u', '\\1', $text);
-		$text = preg_replace('/\/(' . $this->language['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
-		$text = preg_replace('/(' . $this->language['UPPERNUM'] . ')' . NBSP . '(' . $this->language['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
-		$text = preg_replace('/(\d)(' . $this->language['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->language['ALPHA'] . ')(\d)/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->lang['ALPHANUM'] . ')\//u', '\\1' . NBSP . '/', $text);
+		$text = preg_replace('/(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . $this->lang['UPPERNUM'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . '\/)/u', '\\1', $text);
+		$text = preg_replace('/\/(' . $this->lang['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
+		$text = preg_replace('/(' . $this->lang['UPPERNUM'] . ')' . NBSP . '(' . $this->lang['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
+		$text = preg_replace('/(\d)(' . $this->lang['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
+		$text = preg_replace('/(' . $this->lang['ALPHA'] . ')(\d)/u', '\\1' . NBSP . '\\2', $text);
 		// $text = preg_replace('/(\d)' . NBSP . '(?=\d)/u', '\\1', $text);
-		$text = preg_replace('/(\d)' . NBSP . '(?!' . $this->language['ALPHA'] . ')/u', '\\1', $text);
+		$text = preg_replace('/(\d)' . NBSP . '(?!' . $this->lang['ALPHA'] . ')/u', '\\1', $text);
 
 		return $text;
 	}
@@ -4504,7 +4504,7 @@ class Wacko
 		$tag = Ut::normalize($tag);
 
 		// remove invalid characters
-		$tag = preg_replace('/[^' . $this->language['TAG_P'] . ']/u', '', $tag);
+		$tag = preg_replace('/[^' . $this->lang['TAG_P'] . ']/u', '', $tag);
 
 		// remove starting/trailing slashes, spaces, and minimize multi-slashes
 		$tag = preg_replace_callback('#^/+|/+$|(/{2,})|\s+#u',
@@ -4544,7 +4544,7 @@ class Wacko
 		$this->sanitize_page_tag($tag);
 
 		// - / ' _ .
-		if (!preg_match('/^([' . $this->language['TAG_P'] . ']+)$/u', $tag))
+		if (!preg_match('/^([' . $this->lang['TAG_P'] . ']+)$/u', $tag))
 		{
 			return $this->_t('InvalidWikiName');
 		}
@@ -4609,7 +4609,7 @@ class Wacko
 			return Ut::perc_replace($this->_t('NameTooLong'), 0, $this->db->username_chars_max) . ' ';
 		}
 		// check if valid user name (and disallow '/')
-		else if (!preg_match('/^(' . $this->language['USER_NAME'] . ')$/u', $user_name))
+		else if (!preg_match('/^(' . $this->lang['USER_NAME'] . ')$/u', $user_name))
 		{
 			return $this->_t('InvalidUserName') . ' ';
 		}
@@ -4637,7 +4637,7 @@ class Wacko
 	*/
 	function is_wiki_name($text): string
 	{
-		return preg_match('/^' . $this->language['UPPER'] . $this->language['LOWER'] . '+' . $this->language['UPPERNUM'] . $this->language['ALPHANUM'] . '*$/u', $text);
+		return preg_match('/^' . $this->lang['UPPER'] . $this->lang['LOWER'] . '+' . $this->lang['UPPERNUM'] . $this->lang['ALPHANUM'] . '*$/u', $text);
 	}
 
 	// TRACK LINKS
@@ -5805,7 +5805,7 @@ class Wacko
 
 		foreach ($lines as $line)
 		{
-			if (!( preg_match('/^([(\!)?' . $this->language['USER_NAME_P'] . ']*)$/u', $line)
+			if (!( preg_match('/^([(\!)?' . $this->lang['USER_NAME_P'] . ']*)$/u', $line)
 				|| preg_match('/^((\!)?[(\*|\$)])$/u', $line) ))
 			{
 				$error	.= '<code>' . $line . '</code><br>';
@@ -8411,12 +8411,12 @@ class Wacko
 			return true;
 		}
 
-		// TODO: set default lang if !isset($this->language) -> forced logout -> missing format()
+		// TODO: set default lang if !isset($this->lang) -> forced logout -> missing format()
 		//		##value## -> <code>value</code>
 
 		$html			= $this->db->allow_rawhtml;
 		$this->db->allow_rawhtml = 0;
-		$message		= (isset($this->language) ? $this->format($message, 'wacko') : $message);
+		$message		= (isset($this->lang) ? $this->format($message, 'wacko') : $message);
 		$user_id		= $this->get_user_id();
 		$this->db->allow_rawhtml = $html;
 

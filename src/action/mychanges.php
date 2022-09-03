@@ -76,7 +76,7 @@ if ($user_id = $this->get_user_id())
 
 				$first_char = mb_strtoupper(mb_substr($page['tag'], 0, 1));
 
-				if (!preg_match('/' . $this->language['ALPHA'] . '/u', $first_char))
+				if (!preg_match('/' . $this->lang['ALPHA'] . '/u', $first_char))
 				{
 					$first_char = '#';
 				}
