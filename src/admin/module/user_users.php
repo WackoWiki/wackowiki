@@ -131,7 +131,7 @@ function admin_user_users(&$engine, $module)
 	if ($action == 'add_user' && $user_name)
 	{
 		// create new account if possible
-		if ($message = $engine->validate_username($user_name, false))
+		if ($message = $engine->validate_username($user_name))
 		{
 			$error .= $message;
 		}
@@ -371,7 +371,7 @@ function admin_user_users(&$engine, $module)
 						<label for="user_name">' . $engine->_t('UserName') . '</label>
 					</th>
 					<td>
-						<input type="text" id="user_name" name="user_name" value="' . Ut::html($user_name) . '" pattern="' . $engine->lang['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required>
+						<input type="text" id="user_name" name="user_name" value="' . Ut::html($user_name) . '" pattern="' . $engine->lang['USER_NAME'] . '" size="20" minlength="' . $engine->db->username_chars_min . '" maxlength="' . $engine->db->username_chars_max . '" required autofocus>
 						<p>' . Ut::perc_replace($engine->_t($engine->db->disable_wikiname? 'NameAlphanumOnly' : 'NameCamelCaseOnly'), $engine->db->username_chars_min, $engine->db->username_chars_max) . '</p>
 					</td>
 				</tr>

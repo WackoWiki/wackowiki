@@ -4544,6 +4544,10 @@ class Wacko
 				return @$x[1]? '/' : '';
 			}, $tag);
 
+		// allow full stop and hyphen-minus as part of the page tag,
+		// but ONLY as single character AND only between alphanumeric characters
+		// to not mess with the wiki syntax as well as the wiki link path
+		// e.g. page/sub-page/6.1/details
 		$cluster = [];
 
 		// parent-tags (cluster recursive)
@@ -5261,7 +5265,7 @@ class Wacko
 			return false;
 		}
 
-		// checking for identical name
+		// checking for identical name (case insensitive, not BINARY)
 		if ($this->db->load_single(
 			"SELECT user_id " .
 			"FROM " . $this->db->table_prefix . "user " .
