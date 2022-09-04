@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Kategóriák szerkesztése',
 	'CategoriesText'			=> 'Kategóriák',
 	'CategoriesUpdated'			=> 'Kategóriák frissítve',
-	'CategoriesAlreadyExists'	=> 'Ez a kategória már létezik.',
+	'CategoriesAlreadyExists'	=> 'Ez a kategória %1 már létezik.',
 	'CategoriesAdded'			=> 'A kategória %1 sikeresen hozzáadva.',
 	'CategoriesRenamed'			=> 'A kategória sikeres átnevezése.',
 	'CategoriesUngrouped'		=> 'Kategória debundled sikeresen.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Létrehozás',
 	'CreateNewPageTip'			=> 'Új oldal létrehozása',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'Nem rendelkezik a szükséges hozzáférési jogokkal.',
 	'CreatePageDeniedAddress'	=> 'Nincs joga arra, hogy ezen az oldalon hozzon létre oldalt.',
 	'PageAlreadyExists'			=> 'A megadott cím szerint az %1 már létezik.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Generálja a jelszó hash-ot a <code>recovery_password</code> számára',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-fájl importálásra',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'XML-fájl importálásra:',
 	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Sikeresen importált.',
 	'ImportFailed'				=> 'Az importálás sikertelen.',
 	'ImportHint'				=> 'Kérjük, adjon meg egy fürtöt, amelybe importálni szeretne, nincs relatív cím.',
 	'ImportAttention'			=> 'Figyelem: Ugyanazokat az oldalakat írja felül a fürtben.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Csökkenő sorrend]',
 	'UsersSessionNA'			=> '[nem rögzített]',
 	'UsersSessionHidden'		=> '[rejtett]',
-	'UsersIntercomSubject'		=> 'Téma',
-	'UsersIntercomMessage'		=> 'Üzenet',
+	'UsersIntercomSubject'		=> 'Téma:',
+	'UsersIntercomMessage'		=> 'Üzenet:',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sajnáljuk, de nem akar vagy nem tud személyes üzeneteket fogadni.',
 	'UsersIntercomHint'			=> 'Kérjük, először jelentkezzen be, és kövesse újra a linket, ha válaszolni szeretne a kapott személyes üzenetre.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Az alábbi lap hivatkozik erre a fájlra:',
 	'NoFileUsage'				=> 'Erre a fájlra nem hivatkozik lap.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Fájlok csatolása',
 	'Files1'					=> 'Fájlok mutatása (1 fájl)',
 	'FilesN'					=> 'Fájlok mutatása (%1 fájl)',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'Hát',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Hírek',
-	'NewsName'					=> 'Cím',
+	'NewsName'					=> 'Cím:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'Nincs elérhető hír.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Nincs megjeleníthető hozzászólás.',
 	'ForumNoTopics'				=> 'A fórum nem tartalmaz témákat, illetve hozzászólásokat.',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Téma neve',
+	'ForumTopicName'			=> 'Téma neve:',
 	'ForumTopicSubmit'			=> 'Küldje téma',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Kategorien bearbeiten',
 	'CategoriesText'			=> 'Kategorien',
 	'CategoriesUpdated'			=> 'Kategorien aktualisiert',
-	'CategoriesAlreadyExists'	=> 'Die Kategorie gibt es bereits.',
+	'CategoriesAlreadyExists'	=> 'Die Kategorie %1 gibt es bereits.',
 	'CategoriesAdded'			=> 'Kategorie %1 erfolgreich hinzugefügt.',
 	'CategoriesRenamed'			=> 'Kategorie erfolgreich umbenannt.',
 	'CategoriesUngrouped'		=> 'Kategorie erfolgreich degruppiert.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Erstellen',
 	'CreateNewPageTip'			=> 'Neue Seite erstellen',
 
-	'CreateRandomPage'			=> 'Beliebige Seite',
-	'CreateSubPage'				=> 'Unterseite in diesem Cluster',
-	'CreatePageParentCluster'	=> 'Seite im übergeordneten Cluster',
+	'CreateRandomPage'			=> 'Beliebige Seite:',
+	'CreateSubPage'				=> 'Unterseite in diesem Cluster:',
+	'CreatePageParentCluster'	=> 'Seite im übergeordneten Cluster:',
 	'CreatePageDenied'			=> 'Du verfügst nicht über die erforderlichen Zugriffsrechte.',
 	'CreatePageDeniedAddress'	=> 'Du hast nicht das Recht, um die Seite unter dieser Adresse zu erstellen.',
 	'PageAlreadyExists'			=> 'Die Seite %1 ist unter der Adresse bereits vorhanden.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Generiere den Passwort-Hash für dein <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Import in Cluster',
-	'ImportWhat'				=> 'XML-Datei die importiert werden soll',
+	'ImportTo'					=> 'Import in Cluster:',
+	'ImportWhat'				=> 'XML-Datei die importiert werden soll:',
 	'ImportButton'				=> 'Importieren',
 	'ImportSuccess'				=> 'Erfolgreich importiert.',
 	'ImportFailed'				=> 'Import fehlgeschlagen.',
 	'ImportHint'				=> 'Bitte gib einen Cluster an, in den du importieren möchtest, keine relative Adressierung.',
 	'ImportAttention'			=> 'Achtung! Überschreibt die gleichen Seiten im Cluster.',
+	'ImportNote'				=> 'Importierte Seite',
 
 	// mywatches action
 	'WatchedPages'				=> 'Liste aller Seiten, die du auf Änderungen beobachtest',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Sortiere absteigend]',
 	'UsersSessionNA'			=> '[nicht aufgezeichnet]',
 	'UsersSessionHidden'		=> '[verborgen]',
-	'UsersIntercomSubject'		=> 'Betreff',
-	'UsersIntercomMessage'		=> 'Nachricht',
+	'UsersIntercomSubject'		=> 'Betreff:',
+	'UsersIntercomMessage'		=> 'Nachricht:',
 	'UsersIntercomSubjectN'		=> '[Beginne ein neues Thema]',
 	'UsersIntercomDisabled'		=> 'Du möchtest oder kannst keine privaten Nachrichten empfangen.',
 	'UsersIntercomHint'			=> 'Bitte melde dich zuerst an und folge dem Link erneut, wenn du die persönliche Nachricht beantworten möchtest, die du erhalten hast.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Folgenden Seiten verwenden diese Datei:',
 	'NoFileUsage'				=> 'Diese Datei wird auf keiner Seite verwendet.',
 
+	'FileSortExt'				=> 'Erweiterung',
+	'FileSortName'				=> 'Name',
+	'FileSortSize'				=> 'Größe',
+	'FileSortTime'				=> 'Hinzugefügt',
+
+	'SortBy'					=> 'Sortiere nach',
+	'Ascending'					=> 'aufsteigend',
+	'Decending'					=> 'absteigend',
+
 	'Files0'					=> 'Dateien (0)',
 	'Files1'					=> 'Dateien (1)',
 	'FilesN'					=> 'Dateien (%1)',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'zurück',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Alle',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Nachrichten',
-	'NewsName'					=> 'Titel',
+	'NewsName'					=> 'Titel:',
 	'NewsNoName'				=> 'Du habst vergessen eine Schlagzeile hinzuzufügen.',
 	'NewsNotAvailable'			=> 'Keine Nachrichten verfügbar.',
 	'NewsNoClusterDefined'		=> 'Kein Nachrichten-Cluster definiert.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Keine Kommentare',
 	'ForumNoTopics'				=> 'In diesem Forum gibt es keine Themen oder Beiträge.',
 	'ForumNewTopic'				=> 'Beginne eine neue Diskussion',
-	'ForumTopicName'			=> 'Neues Thema',
+	'ForumTopicName'			=> 'Neues Thema:',
 	'ForumTopicSubmit'			=> 'Thema erstellen',
 	'ForumNoTopicName'			=> 'Gib einen Namen für die neue Seite an.',
 	'ForumNewPosts'				=> 'neuer Beitrag',

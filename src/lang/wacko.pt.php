@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Editar categorias',
 	'CategoriesText'			=> 'Categorias',
 	'CategoriesUpdated'			=> 'Categorias atualizadas',
-	'CategoriesAlreadyExists'	=> 'Esta categoria já está lá.',
+	'CategoriesAlreadyExists'	=> 'Esta categoria %1 já está lá.',
 	'CategoriesAdded'			=> 'Categoria %1 adicionada com sucesso.',
 	'CategoriesRenamed'			=> 'Categoria renomeada com sucesso.',
 	'CategoriesUngrouped'		=> 'Categoria desmembrada com sucesso.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Criar',
 	'CreateNewPageTip'			=> 'Criar uma nova página.',
 
-	'CreateRandomPage'			=> 'Criar uma página aleatória',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Criar uma página aleatória:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'Você não tem os direitos de acesso necessários.',
 	'CreatePageDeniedAddress'	=> 'Não tem o direito de criar a página neste endereço.',
 	'PageAlreadyExists'			=> 'De acordo com a morada fornecida, a página %1 já existe.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Gere o hash de senha para sua <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'Ficheiro XML para importação',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'Ficheiro XML para importação:',
 	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'A importação falhou.',
 	'ImportHint'				=> 'Por favor, forneça um cluster para o qual pretende importar, sem endereçamento relativo.',
 	'ImportAttention'			=> 'Atenção: Sobrescreve as mesmas páginas do cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Ordenar por ordem descendente]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[oculto]',
-	'UsersIntercomSubject'		=> 'Sujeito',
-	'UsersIntercomMessage'		=> 'Mensagem',
+	'UsersIntercomSubject'		=> 'Sujeito:',
+	'UsersIntercomMessage'		=> 'Mensagem:',
 	'UsersIntercomSubjectN'		=> '[iniciar um novo tópico]',
 	'UsersIntercomDisabled'		=> 'Desculpe, você não quer ou não pode receber mensagens pessoais.',
 	'UsersIntercomHint'			=> 'Faça login primeiro e siga o link novamente, se quiser responder à mensagem pessoal que recebeu.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'A seguinte página aponta para este ficheiro:',
 	'NoFileUsage'				=> 'Nenhuma página contém ligação para este ficheiro.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Não existem ficheiros neste página.',
 	'Files1'					=> 'Há um ficheiro nesta página.',
 	'FilesN'					=> 'Existem %1 ficheiros nesta página.',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'Costas',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Notícia',
-	'NewsName'					=> 'Título',
+	'NewsName'					=> 'Título:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Não existem comentários.',
 	'ForumNoTopics'				=> 'Não há mensagens ou tópicos neste fórum.',
 	'ForumNewTopic'				=> 'Iniciar uma nova discussão',
-	'ForumTopicName'			=> 'Nome do tópico',
+	'ForumTopicName'			=> 'Nome do tópico:',
 	'ForumTopicSubmit'			=> 'Enviar tópico',
 	'ForumNoTopicName'			=> 'Especificar um nome para a nova página.',
 	'ForumNewPosts'				=> 'new post',

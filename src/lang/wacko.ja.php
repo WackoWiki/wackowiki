@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edit categories',
 	'CategoriesText'			=> 'カテゴリー',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> 'このカテゴリはすでに存在しています。',
+	'CategoriesAlreadyExists'	=> '%1 このカテゴリはすでに存在しています。',
 	'CategoriesAdded'			=> 'Category %1 added successfully.',
 	'CategoriesRenamed'			=> 'Category successfully renamed.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> '作成',
 	'CreateNewPageTip'			=> '新しいページを作成する',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
 	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
 	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> 'インポート',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[降順に並べ替え]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[非表示]',
-	'UsersIntercomSubject'		=> '件名',
-	'UsersIntercomMessage'		=> '本文',
+	'UsersIntercomSubject'		=> '件名:',
+	'UsersIntercomMessage'		=> '本文:',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> '以下の​ ページがこのファイルを使用しています:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'ファイルを添付',
 	'Files1'					=> 'ファイルを表示 (1 ファイル)',
 	'FilesN'					=> 'ファイルを表示 (%1 ファイル)',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> '戻る',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'すべて',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'ニュース',
-	'NewsName'					=> 'タイトル',
+	'NewsName'					=> 'タイトル:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'コメントはありません。',
 	'ForumNoTopics'				=> 'フォーラムに投稿されたトピックはありません',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'トピック名',
+	'ForumTopicName'			=> 'トピック名:',
 	'ForumTopicSubmit'			=> 'トピックを送信',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> '新しい記事',

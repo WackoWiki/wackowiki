@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edit categories',
 	'CategoriesText'			=> 'Categories',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> 'This category already exists.',
+	'CategoriesAlreadyExists'	=> 'Category %1 already exists.',
 	'CategoriesAdded'			=> 'Category %1 added successfully.',
 	'CategoriesRenamed'			=> 'Category successfully renamed.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Create',
 	'CreateNewPageTip'			=> 'Create a new page',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
 	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
 	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Sort descending]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[hidden]',
-	'UsersIntercomSubject'		=> 'Subject',
-	'UsersIntercomMessage'		=> 'Message',
+	'UsersIntercomSubject'		=> 'Subject:',
+	'UsersIntercomMessage'		=> 'Message:',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -873,7 +874,7 @@ $wacko_translation = [
 	'FileRemoveDenied'			=> 'You are not allowed to remove this file',
 	'FileNotFound'				=> 'File not found.',
 
-	'FileSearch'				=> 'Find File:',
+	'FileSearch'				=> 'Find File',
 	'UploadBy'					=> 'Uploaded by:',
 	'FileAdded'					=> 'Added:',
 	'FileModified'				=> 'Modified:',
@@ -892,6 +893,15 @@ $wacko_translation = [
 	'FileUsage'					=> 'File usage:',
 	'FileUsageText'				=> 'The following pages link to this file:',
 	'NoFileUsage'				=> 'No pages link to this file.',
+
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
 
 	'Files0'					=> 'Attach Files',
 	'Files1'					=> 'Show Files (1 file)',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'Back',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'News',
-	'NewsName'					=> 'Title',
+	'NewsName'					=> 'Title:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'No comments',
 	'ForumNoTopics'				=> 'There are no topics or posts in this forum.',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumTopicName'			=> 'Topic name:',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

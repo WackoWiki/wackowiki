@@ -29,7 +29,7 @@
 					[ ' csrf: add_topic ' ]
 					<table class="formation">
 						<tr>
-							<td class="label"><label for="news-title">[ ' _t: NewsName ' ]:</label></td>
+							<td class="label"><label for="news-title">[ ' _t: NewsName ' ]</label></td>
 							<td>
 								<input type="text" id="news-title" name="title" size="50" maxlength="250" value="">
 								<button type="submit" id="submit">[ ' _t: CreateButton ' ]</button>

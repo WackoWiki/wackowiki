@@ -99,7 +99,7 @@ first really BIG template written
 						[= ic _ =
 							<tr>
 								<td colspan="2">
-									<label for="mail_subject">[ ' _t: UsersIntercomSubject ' ]:</label><br>
+									<label for="mail_subject">[ ' _t: UsersIntercomSubject ' ]</label><br>
 									<input type="text" id="mail_subject" name="mail_subject" value="[ ' subj | e attr ' ]" size="60" maxlength="200" required>
 									[= ref _ =
 										&nbsp;&nbsp; <a href="[ ' href ' ]">[ ' _t: UsersIntercomSubjectN ' ]</a>
@@ -108,7 +108,7 @@ first really BIG template written
 							</tr>
 							<tr>
 								<td colspan="2">
-									<label for="mail_body" class="visuallyhidden">[ ' _t: UsersIntercomMessage ' ]:</label>
+									<label for="mail_body" class="visuallyhidden">[ ' _t: UsersIntercomMessage ' ]</label>
 									<textarea id="mail_body" name="mail_body" cols="80" rows="15" required>[ ' body | e ' ]</textarea>
 								</td>
 							</tr>
@@ -229,8 +229,8 @@ first really BIG template written
 			<table class="formation">
 				<tr>
 					<td class="label">
-						<label for="search_user">[ ' _t: UsersSearch ' ]:</label>
-						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" required> ['' '']
+						<label for="search_user" class="visuallyhidden">[ ' _t: UsersSearch ' ]</label>
+						<input type="search" id="search_user" name="user" maxchars="40" size="40" value="[ ' user | e attr ' ]" placeholder="[ ' _t: UsersSearch ' ]" required> ['' '']
 						<button type="submit" id="submit">[ ' _t: SearchButton ' ]</button> ['' '']
 					</td>
 				</tr>

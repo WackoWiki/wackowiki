@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Modifica categorie',
 	'CategoriesText'			=> 'Categorie',
 	'CategoriesUpdated'			=> 'Categorie aggiornate',
-	'CategoriesAlreadyExists'	=> 'Questa categoria è già lì.',
+	'CategoriesAlreadyExists'	=> 'Questa categoria %1 è già lì.',
 	'CategoriesAdded'			=> 'Categoria %1 aggiunta con successo.',
 	'CategoriesRenamed'			=> 'Categoria rinominata con successo.',
 	'CategoriesUngrouped'		=> 'La categoria è stata disaggregata con successo.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Creare',
 	'CreateNewPageTip'			=> 'Crea una nuova pagina.',
 
-	'CreateRandomPage'			=> 'Creare una pagina casuale',
-	'CreateSubPage'				=> 'Creare una sottopagina nel cluster',
-	'CreatePageParentCluster'	=> 'Creare una pagina nel cluster genitore',
+	'CreateRandomPage'			=> 'Creare una pagina casuale:',
+	'CreateSubPage'				=> 'Creare una sottopagina nel cluster:',
+	'CreatePageParentCluster'	=> 'Creare una pagina nel cluster genitore:',
 	'CreatePageDenied'			=> 'Non avete il diritto di accesso necessari.',
 	'CreatePageDeniedAddress'	=> 'Non avete il diritto di creare la pagina a questo indirizzo.',
 	'PageAlreadyExists'			=> 'Secondo l\'indirizzo della pagina %1 già esistente.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Genera l\'hash della password per <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Importa in cluster',
-	'ImportWhat'				=> 'File XML per l\'importazione',
+	'ImportTo'					=> 'Importa in cluster:',
+	'ImportWhat'				=> 'File XML per l\'importazione:',
 	'ImportButton'				=> 'Importare',
 	'ImportSuccess'				=> 'Importato con successo.',
 	'ImportFailed'				=> 'Importazione fallita.',
 	'ImportHint'				=> 'Si prega di fornire un cluster che si desidera importare, nessun indirizzo relativo.',
 	'ImportAttention'			=> 'Attenzione: Sovrascrive le stesse pagine del cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Ordinamento decrescente]',
 	'UsersSessionNA'			=> '[non registrato]',
 	'UsersSessionHidden'		=> '[nascosto]',
-	'UsersIntercomSubject'		=> 'Soggetto',
-	'UsersIntercomMessage'		=> 'Messaggio',
+	'UsersIntercomSubject'		=> 'Soggetto:',
+	'UsersIntercomMessage'		=> 'Messaggio:',
 	'UsersIntercomSubjectN'		=> '[inizia un nuovo argomento]',
 	'UsersIntercomDisabled'		=> 'Spiacente, non vuoi o non puoi ricevere messaggi personali.',
 	'UsersIntercomHint'			=> 'Effettua il login per primo e segui di nuovo il link, se vuoi rispondere al messaggio personale che hai ricevuto.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Le pagine seguenti si collegano a questo file:',
 	'NoFileUsage'				=> 'Nessuna pagina contiene collegamenti al file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Non vi è alcun file in questa pagina.',
 	'Files1'					=> 'Vi è un file in questa pagina.',
 	'FilesN'					=> 'Ci sono %1 files in questa pagina.',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'Indietro',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Notizie',
-	'NewsName'					=> 'Titolo',
+	'NewsName'					=> 'Titolo:',
 	'NewsNoName'				=> 'Hai dimenticato di aggiungere il titolo delle notizie.',
 	'NewsNotAvailable'			=> 'Nessuna notizia disponibile.',
 	'NewsNoClusterDefined'		=> 'Nessun cluster di notizie definito.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Non ci sono commenti',
 	'ForumNoTopics'				=> 'Non ci sono argomenti o messaggi in questo forum.',
 	'ForumNewTopic'				=> 'Inizia una nuova discussione',
-	'ForumTopicName'			=> 'Nome dell\'argomento',
+	'ForumTopicName'			=> 'Nome dell\'argomento:',
 	'ForumTopicSubmit'			=> 'Invia argomento',
 	'ForumNoTopicName'			=> 'Specificare un nome per la nuova pagina.',
 	'ForumNewPosts'				=> 'nuovo post',

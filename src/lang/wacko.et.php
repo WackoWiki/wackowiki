@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Muuda kategooriaid',
 	'CategoriesText'			=> 'Kategooriad',
 	'CategoriesUpdated'			=> 'Kategooriad uuendatud',
-	'CategoriesAlreadyExists'	=> 'See kategooria on juba olemas.',
+	'CategoriesAlreadyExists'	=> 'See kategooria %1 on juba olemas.',
 	'CategoriesAdded'			=> 'Kategooria %1 lisatud edukalt.',
 	'CategoriesRenamed'			=> 'Kategooria edukalt ümbernimetatud.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Loo',
 	'CreateNewPageTip'			=> 'Loo uus leht.',
 
-	'CreateRandomPage'			=> 'Looge juhuslik lehekülg',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Looge juhuslik lehekülg:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'Teil pole vajalikke juurdepääsuõigusi.',
 	'CreatePageDeniedAddress'	=> 'Teil pole õigust sellel aadressil lehte luua.',
 	'PageAlreadyExists'			=> 'Vastavalt esitatud aadressile on leht %1 juba olemas.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Genereerige oma <code>recovery_password</code> jaoks paroolirästas',
 
 	// import action
-	'ImportTo'					=> 'Import klastrisse',
-	'ImportWhat'				=> 'XML-fail impordiks',
+	'ImportTo'					=> 'Import klastrisse:',
+	'ImportWhat'				=> 'XML-fail impordiks:',
 	'ImportButton'				=> 'Impordi',
 	'ImportSuccess'				=> 'Importimine õnnestus.',
 	'ImportFailed'				=> 'Importimine ebaõnnestus.',
 	'ImportHint'				=> 'Esitage klaster, kuhu soovite importida, ilma suhtelise aadressita.',
 	'ImportAttention'			=> 'Tähelepanu: kirjutab klastris üle samad lehed.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Järjesta laskuvalt]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[peidetud]',
-	'UsersIntercomSubject'		=> 'Teema',
-	'UsersIntercomMessage'		=> 'Sõnum',
+	'UsersIntercomSubject'		=> 'Teema:',
+	'UsersIntercomMessage'		=> 'Sõnum:',
 	'UsersIntercomSubjectN'		=> '[alustada uut teemat]',
 	'UsersIntercomDisabled'		=> 'Vabandust, te ei soovi või ei saa saada isiklikke sõnumeid.',
 	'UsersIntercomHint'			=> 'Palun logige kõigepealt sisse ja järgige uuesti linki, kui soovite vastata saadud isiklikule sõnumile.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Seda faili kasutab järgmine lehekülg:',
 	'NoFileUsage'				=> 'Sellele pildile ei viita ükski lehekülg.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Sellel lehel ei ole faile.',
 	'Files1'					=> 'Siin lehel on üks fail.',
 	'FilesN'					=> 'Siin lehel on %1 faili.',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'tagasi',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Uudised',
-	'NewsName'					=> 'Pealkiri',
+	'NewsName'					=> 'Pealkiri:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'No comments',
 	'ForumNoTopics'				=> 'Siin foorumis pole teemasid või postitusi.',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumTopicName'			=> 'Topic name:',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

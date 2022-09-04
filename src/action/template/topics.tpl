@@ -90,7 +90,7 @@
 					<table id="newtopic" class="formation">
 						<tr>
 							<td class="label">
-								<label for="topictitle">[ ' _t: ForumTopicName ' ]:</label>
+								<label for="topictitle">[ ' _t: ForumTopicName ' ]</label>
 							</td>
 							<td>
 								<input type="text" id="topictitle" name="title" size="50" maxlength="250" value="">

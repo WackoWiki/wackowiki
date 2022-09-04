@@ -52,7 +52,7 @@
 		<input type="hidden" name="_user_menu" value="yes">
 		<input type="hidden" name="menu_lang" value="[ ' menulang ' ]">
 		<br><br>
-		<label for="add_menu_item">[ ' _t: BookmarksAddPage ' ]:</label><br>
+		<label for="add_menu_item">[ ' _t: BookmarksAddPage ' ]</label><br>
 		<input type="text" id="add_menu_item" name="tag" value="" size="60" maxlength="255">
 		[= lang _ =
 			[ ' select ' ]

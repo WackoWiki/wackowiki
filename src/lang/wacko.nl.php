@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Categorieën bewerken',
 	'CategoriesText'			=> 'Categorieën',
 	'CategoriesUpdated'			=> 'Categorieën bijgewerkt',
-	'CategoriesAlreadyExists'	=> 'Deze categorie is er al.',
+	'CategoriesAlreadyExists'	=> 'Deze categorie %1 is er al.',
 	'CategoriesAdded'			=> 'Categorie %1 succesvol toegevoegd.',
 	'CategoriesRenamed'			=> 'Categorie met succes hernoemd.',
 	'CategoriesUngrouped'		=> 'Categorie met succes gedebundeld.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Maak',
 	'CreateNewPageTip'			=> 'Maak een nieuwe pagina.',
 
-	'CreateRandomPage'			=> 'Maak een willekeurige pagina',
+	'CreateRandomPage'			=> 'Maak een willekeurige pagina:',
 	'CreateSubPage'				=> 'Maak een subpagina aan in het cluster:',
-	'CreatePageParentCluster'	=> 'Maak een pagina aan in het bovenliggende cluster',
+	'CreatePageParentCluster'	=> 'Maak een pagina aan in het bovenliggende cluster:',
 	'CreatePageDenied'			=> 'U hebt niet de nodige toegangsrechten.',
 	'CreatePageDeniedAddress'	=> 'U heeft niet het recht om de pagina op dit adres aan te maken.',
 	'PageAlreadyExists'			=> 'Volgens het opgegeven adres bestaat de pagina %1 al.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Genereer de wachtwoordhash voor uw <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Importeer in cluster',
-	'ImportWhat'				=> 'Te importeren XML-bestand',
+	'ImportTo'					=> 'Importeer in cluster:',
+	'ImportWhat'				=> 'Te importeren XML-bestand:',
 	'ImportButton'				=> 'Importeren',
 	'ImportSuccess'				=> 'Het importeren is gelukt.',
 	'ImportFailed'				=> 'De invoer is mislukt.',
 	'ImportHint'				=> 'Geef a.u.b. een cluster op waarin u wilt importeren, geen relatieve adressering.',
 	'ImportAttention'			=> 'Attentie: Overschrijft dezelfde pagina\'s in de cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Aflopend sorteren]',
 	'UsersSessionNA'			=> '[niet opgenomen]',
 	'UsersSessionHidden'		=> '[verborgen]',
-	'UsersIntercomSubject'		=> 'Onderwerp',
-	'UsersIntercomMessage'		=> 'Bericht',
+	'UsersIntercomSubject'		=> 'Onderwerp:',
+	'UsersIntercomMessage'		=> 'Bericht:',
 	'UsersIntercomSubjectN'		=> '[een nieuw onderwerp starten]',
 	'UsersIntercomDisabled'		=> 'Sorry, u wilt of kunt geen persoonlijke berichten ontvangen.',
 	'UsersIntercomHint'			=> 'Log eerst in en volg de link opnieuw, als je het persoonlijke bericht dat je hebt ontvangen wilt beantwoorden.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'De volgende pagina\'s verwijzen naar dit bestand:',
 	'NoFileUsage'				=> 'Geen enkele pagina gebruikt dit bestand.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Geen bestanden op deze pagina.',
 	'Files1'					=> 'E&eacute;n bestand op deze pagina.',
 	'FilesN'					=> '%1 bestanden op deze pagina.',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'Terug',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Nieuws',
-	'NewsName'					=> 'Title',
+	'NewsName'					=> 'Title:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Geen opmerkingen',
 	'ForumNoTopics'				=> 'Er zijn geen onderwerpen of berichten in dit forum.',
 	'ForumNewTopic'				=> 'Start een nieuwe discussie',
-	'ForumTopicName'			=> 'Onderwerpnaam',
+	'ForumTopicName'			=> 'Onderwerpnaam:',
 	'ForumTopicSubmit'			=> 'Onderwerp indienen',
 	'ForumNoTopicName'			=> 'Geef een naam op voor de nieuwe pagina.',
 	'ForumNewPosts'				=> 'new post',

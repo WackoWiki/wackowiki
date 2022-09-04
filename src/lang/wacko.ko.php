@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> '카테고리 수정',
 	'CategoriesText'			=> '카테고리',
 	'CategoriesUpdated'			=> '카테고리 업데이트',
-	'CategoriesAlreadyExists'	=> '이 카테고리는 이미 있습니다.',
+	'CategoriesAlreadyExists'	=> '%1 이 카테고리는 이미 있습니다.',
 	'CategoriesAdded'			=> '카테고리가 성공적으로 추가되었습니다.',
 	'CategoriesRenamed'			=> '카테고리가 성공적으로 이름이 변경.',
 	'CategoriesUngrouped'		=> '카테고리가 성공적으로 분리되었습니다.',
@@ -603,7 +603,7 @@ $wacko_translation = [
 	'CreateNewPageText'			=> '새로 추가',
 	'CreateNewPageTip'			=> '새 페이지 만들기',
 
-	'CreateRandomPage'			=> '페이지 만들기',
+	'CreateRandomPage'			=> '페이지 만들기:',
 	'CreateSubPage'				=> '클러스터에 하위 페이지를 만듭니다',
 	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
 	'CreatePageDenied'			=> '필요한 접근 권한이 없습니다.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> '<code>recovery_password</code> 에 대한 비밀번호 해시 생성',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> '가져오기',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> '가져오기 실패.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[내림차순 정렬]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[숨김]',
-	'UsersIntercomSubject'		=> '제목',
-	'UsersIntercomMessage'		=> '내용',
+	'UsersIntercomSubject'		=> '제목:',
+	'UsersIntercomMessage'		=> '내용:',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> '다음 문서 개가 이 파일을 사용하고 있습니다.:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> '파일을 첨부',
 	'Files1'					=> '파일 표시 (1 개 파일)',
 	'FilesN'					=> '파일 표시 (%1 개 파일)',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> '뒤로',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> '모두',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> '뉴스',
-	'NewsName'					=> '제목',
+	'NewsName'					=> '제목:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> '댓글이 없습니다.',
 	'ForumNoTopics'				=> '이 포럼에는 주제나 게시물이 없습니다.',
 	'ForumNewTopic'				=> '새로운 토론 시작',
-	'ForumTopicName'			=> '주제 이름',
+	'ForumTopicName'			=> '주제 이름:',
 	'ForumTopicSubmit'			=> '주제 제출',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

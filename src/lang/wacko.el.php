@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Επεξεργασία κατηγοριών',
 	'CategoriesText'			=> 'Κατηγορίες',
 	'CategoriesUpdated'			=> 'Κατηγορίες ενημέρωση',
-	'CategoriesAlreadyExists'	=> 'Αυτή η κατηγορία είναι ήδη εκεί.',
+	'CategoriesAlreadyExists'	=> 'Αυτή η κατηγορία %1 είναι ήδη εκεί.',
 	'CategoriesAdded'			=> 'Η κατηγορία %1 προστέθηκε επιτυχώς.',
 	'CategoriesRenamed'			=> 'Η κατηγορία μετονομάστηκε με επιτυχία.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Δημιουργώ',
 	'CreateNewPageTip'			=> 'Δημιουργήστε μια νέα σελίδα.',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'Δεν έχετε τα απαραίτητα δικαιώματα πρόσβασης.',
 	'CreatePageDeniedAddress'	=> 'Δεν έχετε το δικαίωμα να δημιουργήσετε τη σελίδα σε αυτήν τη διεύθυνση.',
 	'PageAlreadyExists'			=> 'Σύμφωνα με την παρεχόμενη διεύθυνση, η σελίδα %1 υπάρχει ήδη.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Δημιουργήστε το hash κωδικού πρόσβασης για το <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Εισαγωγή στο cluster',
-	'ImportWhat'				=> 'Αρχείο XML για εισαγωγή',
+	'ImportTo'					=> 'Εισαγωγή στο cluster:',
+	'ImportWhat'				=> 'Αρχείο XML για εισαγωγή:',
 	'ImportButton'				=> 'Εισαγωγή',
 	'ImportSuccess'				=> 'Επιτυχής εισαγωγή.',
 	'ImportFailed'				=> 'Η εισαγωγή απέτυχε.',
 	'ImportHint'				=> 'Καταχωρίστε ένα σύμπλεγμα στο οποίο θέλετε να εισαγάγετε, χωρίς σχετική διεύθυνση.',
 	'ImportAttention'			=> 'Προσοχή: Αντικαθιστά τις ίδιες σελίδες στο σύμπλεγμα.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -737,8 +738,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Φθίνουσα ταξινόμηση]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[κρυμμένο]',
-	'UsersIntercomSubject'		=> 'Θέμα',
-	'UsersIntercomMessage'		=> 'Μήνυμα',
+	'UsersIntercomSubject'		=> 'Θέμα:',
+	'UsersIntercomMessage'		=> 'Μήνυμα:',
 	'UsersIntercomSubjectN'		=> '[Ξεκινήστε νέο θέμα]',
 	'UsersIntercomDisabled'		=> 'Δεν θέλετε ή δεν μπορείτε να λαμβάνετε προσωπικά μηνύματα.',
 	'UsersIntercomHint'			=> 'Παρακαλούμε συνδεθείτε πρώτα και ακολουθήστε ξανά τον σύνδεσμο αν θέλετε να απαντήσετε στο προσωπικό μήνυμα που λάβατε.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Τα παρακάτω λήμματα συνδέουν σε αυτό το αρχείο:',
 	'NoFileUsage'				=> 'Δεν υπάρχουν σελίδες που συνδέουν σε αυτό το αρχείο.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Δεν υπάρχουν αρχεία σε αυτή την σελίδα.',
 	'Files1'					=> 'Υπάρχει ένα αρχείο σε αυτή την σελίδα.',
 	'FilesN'					=> 'Υπάρχουν %1 αρχεία σε αυτή την σελίδα.',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'Πίσω',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1017,7 +1028,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Ειδήσεις',
-	'NewsName'					=> 'Τίτλος',
+	'NewsName'					=> 'Τίτλος:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'Δεν υπάρχουν νέα.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'No comments',
 	'ForumNoTopics'				=> 'Δεν υπάρχουν θέματα ή δημοσιεύσεις σε αυτή τη Δ. Συζήτηση.',
 	'ForumNewTopic'				=> 'Ξεκινήστε νέα συζήτηση',
-	'ForumTopicName'			=> 'Όνομα θέματος',
+	'ForumTopicName'			=> 'Όνομα θέματος:',
 	'ForumTopicSubmit'			=> 'Υποβολή θέματος',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

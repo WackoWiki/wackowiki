@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Изменить категории',
 	'CategoriesText'			=> 'Категории',
 	'CategoriesUpdated'			=> 'Ключевые слова документа обновлены.',
-	'CategoriesAlreadyExists'	=> 'Такое ключевое слово уже существует.',
+	'CategoriesAlreadyExists'	=> 'Такое ключевое %1 слово уже существует.',
 	'CategoriesAdded'			=> 'Ключевое слово %1 успешно добавлено.',
 	'CategoriesRenamed'			=> 'Ключевое слово успешно переименовано.',
 	'CategoriesUngrouped'		=> 'Ключевое слово успешно разгруппировано.',
@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Создать',
 	'CreateNewPageTip'			=> 'Создать новую страницу',
 
-	'CreateRandomPage'			=> 'Создать произвольную страницу',
-	'CreateSubPage'				=> 'Создать вложенную страницу в кластере',
-	'CreatePageParentCluster'	=> 'Создать страницу в родительском кластере',
+	'CreateRandomPage'			=> 'Создать произвольную страницу:',
+	'CreateSubPage'				=> 'Создать вложенную страницу в кластере:',
+	'CreatePageParentCluster'	=> 'Создать страницу в родительском кластере:',
 	'CreatePageDenied'			=> 'Недостаточно прав доступа.',
 	'CreatePageDeniedAddress'	=> 'Недостаточно прав для создания страницы по этому адресу.',
 	'PageAlreadyExists'			=> 'По этому адресу уже есть страница %1.',
@@ -671,13 +671,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Создайте хэш пароля для вашего пароля <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Импортировать в',
-	'ImportWhat'				=> 'Файл для импорта',
+	'ImportTo'					=> 'Импортировать в:',
+	'ImportWhat'				=> 'Файл для импорта:',
 	'ImportButton'				=> 'Импортировать',
 	'ImportSuccess'				=> 'Импортировано успешно.',
 	'ImportFailed'				=> 'Импорт провалился.',
 	'ImportHint'				=> 'Пожалуйста, укажите кластер, в который вы хотите импортировать, без относительной адресации.',
 	'ImportAttention'			=> 'Внимание: Перезаписывает те же самые страницы в кластере.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'Список всех страниц, за изменениями которых вы следите',
@@ -739,8 +740,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Упорядочить по убыванию]',
 	'UsersSessionNA'			=> '[не зафиксировано]',
 	'UsersSessionHidden'		=> '[скрыто]',
-	'UsersIntercomSubject'		=> 'Тема письма',
-	'UsersIntercomMessage'		=> 'Сообщение',
+	'UsersIntercomSubject'		=> 'Тема письма:',
+	'UsersIntercomMessage'		=> 'Сообщение:',
 	'UsersIntercomSubjectN'		=> '[начать новую тему]',
 	'UsersIntercomDisabled'		=> 'Извините, пользователь не хочет или не может принимать личные сообщения.',
 	'UsersIntercomHint'			=> 'Пожалуйста, войдите в систему сначала и перейдите по ссылке еще раз, если хотите ответить на полученное личное сообщение.',
@@ -895,6 +896,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'Страницы, ссылающиеся на этот файл:',
 	'NoFileUsage'				=> 'Нет страниц, ссылающихся на данный файл.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'Файлов нет.',
 	'Files1'					=> 'Один файл.',
 	'FilesN'					=> 'Много файлов (%1).',
@@ -941,6 +951,7 @@ $wacko_translation = [
 	'Back'						=> 'Назад',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Любой',
 
 	// My Groups
@@ -1019,7 +1030,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Новости',
-	'NewsName'					=> 'Заголовок',
+	'NewsName'					=> 'Заголовок:',
 	'NewsNoName'				=> 'Вы забыли указать заголовок добавляемой новости.',
 	'NewsNotAvailable'			=> 'Новостей нет.',
 	'NewsNoClusterDefined'		=> 'Кластер новостей не задан.',
@@ -1108,7 +1119,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Сообщений нет',
 	'ForumNoTopics'				=> 'В этом форуме нет тем и сообщений.',
 	'ForumNewTopic'				=> 'Начать новое обсуждение',
-	'ForumTopicName'			=> 'Название темы',
+	'ForumTopicName'			=> 'Название темы:',
 	'ForumTopicSubmit'			=> 'создать тему',
 	'ForumNoTopicName'			=> 'Укажите название новой страницы.',
 	'ForumNewPosts'				=> 'поступили новые сообщения',

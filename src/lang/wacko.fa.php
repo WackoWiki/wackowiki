@@ -603,9 +603,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'ایجاد',
 	'CreateNewPageTip'			=> 'Create a new page',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
 	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
 	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
@@ -669,13 +669,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'هش رمز عبور را برای <code>recovery_password</code> خود ایجاد کنید',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> 'وارد کردن',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -738,7 +739,7 @@ $wacko_translation = [
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[hidden]',
 	'UsersIntercomSubject'		=> 'موضوع',
-	'UsersIntercomMessage'		=> 'Message',
+	'UsersIntercomMessage'		=> 'Message:',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -893,6 +894,15 @@ $wacko_translation = [
 	'FileUsageText'				=> 'The following pages link to this file:',
 	'NoFileUsage'				=> 'No pages link to this file.',
 
+	'FileSortExt'				=> 'extension',
+	'FileSortName'				=> 'name',
+	'FileSortSize'				=> 'size',
+	'FileSortTime'				=> 'created',
+
+	'SortBy'					=> 'Sort by',
+	'Ascending'					=> 'ascending',
+	'Decending'					=> 'decending',
+
 	'Files0'					=> 'فایل ها را ضمیمه کنید',
 	'Files1'					=> 'نمایش فایلها (1 فایل)',
 	'FilesN'					=> 'نمایش فایلها (%1 فایل)',
@@ -939,6 +949,7 @@ $wacko_translation = [
 	'Back'						=> 'برگشت',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'هر',
 
 	// My Groups
@@ -1106,7 +1117,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'No comments',
 	'ForumNoTopics'				=> 'هیچ موضوع و یا پستی در این انجمن موجود نیست.',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumTopicName'			=> 'Topic name:',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',
