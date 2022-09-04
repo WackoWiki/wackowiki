@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edit categories',
 	'CategoriesText'			=> '分類目錄',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> '此類別已存在。',
+	'CategoriesAlreadyExists'	=> '此類別 %1 已存在。',
 	'CategoriesAdded'			=> '類別 %1 添加成功。',
 	'CategoriesRenamed'			=> 'Category successfully renamed.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -602,9 +602,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> '建立',
 	'CreateNewPageTip'			=> '創建一個新頁面',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page：',
+	'CreateSubPage'				=> 'Create a sub page in the cluster：',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster：',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
 	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
 	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
@@ -668,13 +668,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> '匯入',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -736,8 +737,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[降冪排序]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[隱藏]',
-	'UsersIntercomSubject'		=> '標題',
-	'UsersIntercomMessage'		=> '訊息',
+	'UsersIntercomSubject'		=> '標題：',
+	'UsersIntercomMessage'		=> '訊息：',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -930,6 +931,7 @@ $wacko_translation = [
 	'Back'						=> '返回',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1008,7 +1010,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> '新聞動態',
-	'NewsName'					=> '標題',
+	'NewsName'					=> '標題：',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1097,7 +1099,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> '沒有最新的評論。',
 	'ForumNoTopics'				=> '這個版面還沒有主題或文章。',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumTopicName'			=> 'Topic name：',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

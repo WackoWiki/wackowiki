@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> '编辑分类',
 	'CategoriesText'			=> '类别',
 	'CategoriesUpdated'			=> '分类更新',
-	'CategoriesAlreadyExists'	=> '这个类别已经存在。',
+	'CategoriesAlreadyExists'	=> '这个类%1别已经存在。',
 	'CategoriesAdded'			=> '分类%1添加成功',
 	'CategoriesRenamed'			=> '分类重命名成功',
 	'CategoriesUngrouped'		=> '类别解绑成功。',
@@ -602,9 +602,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> '创建',
 	'CreateNewPageTip'			=> '创建一个新的页面',
 
-	'CreateRandomPage'			=> '创建一个随机页面',
-	'CreateSubPage'				=> '在当前集群创建一个子页面',
-	'CreatePageParentCluster'	=> '在上级集创建一个子页面',
+	'CreateRandomPage'			=> '创建一个随机页面：',
+	'CreateSubPage'				=> '在当前集群创建一个子页面：',
+	'CreatePageParentCluster'	=> '在上级集创建一个子页面：',
 	'CreatePageDenied'			=> '您没有访问权限。',
 	'CreatePageDeniedAddress'	=> '您无权在此地址创建页面。',
 	'PageAlreadyExists'			=> '根据提供的地址，页面 %1 已经存在。',
@@ -668,13 +668,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> '为您的 <code>recovery_password</code> 生成密码哈希',
 
 	// import action
-	'ImportTo'					=> '导入集群',
-	'ImportWhat'				=> '用于导入的 XML 文件',
+	'ImportTo'					=> '导入集群：',
+	'ImportWhat'				=> '用于导入的 XML 文件：',
 	'ImportButton'				=> '导入',
 	'ImportSuccess'				=> '导入成功。',
 	'ImportFailed'				=> '导入失败。',
 	'ImportHint'				=> '请提供您要导入的集群，不要提供相对地址。',
 	'ImportAttention'			=> '注意：覆盖集群中的相同页面。',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> '您为更改而关注的所有页面的列表 ',
@@ -736,8 +737,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[降序排列]',
 	'UsersSessionNA'			=> '[未记录]',
 	'UsersSessionHidden'		=> '[隐藏]',
-	'UsersIntercomSubject'		=> '主题',
-	'UsersIntercomMessage'		=> '消息',
+	'UsersIntercomSubject'		=> '主题：',
+	'UsersIntercomMessage'		=> '消息：',
 	'UsersIntercomSubjectN'		=> '[发新贴]',
 	'UsersIntercomDisabled'		=> '抱歉，您不想要或无法接收个人消息。',
 	'UsersIntercomHint'			=> '如果你想回复你收到的个人消息，请先登录并再次点击链接。',
@@ -930,6 +931,7 @@ $wacko_translation = [
 	'Back'						=> '返回',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> '所有',
 
 	// My Groups
@@ -1008,7 +1010,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> '新闻动态',
-	'NewsName'					=> '标题',
+	'NewsName'					=> '标题：',
 	'NewsNoName'				=> '您忘记添加新闻标题。',
 	'NewsNotAvailable'			=> '没有可用的新闻。',
 	'NewsNoClusterDefined'		=> '未定义新闻集群。',
@@ -1097,7 +1099,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> '没有评论。',
 	'ForumNoTopics'				=> '暂无新内容。',
 	'ForumNewTopic'				=> '发起新讨论',
-	'ForumTopicName'			=> '标题',
+	'ForumTopicName'			=> '标题：',
 	'ForumTopicSubmit'			=> '发布',
 	'ForumNoTopicName'			=> '指定新页面的名称。',
 	'ForumNewPosts'				=> '新帖',

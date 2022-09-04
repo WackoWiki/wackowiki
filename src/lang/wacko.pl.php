@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edytuj kategorie',
 	'CategoriesText'			=> 'Kategoria',
 	'CategoriesUpdated'			=> 'Kategorie zaktualizowane',
-	'CategoriesAlreadyExists'	=> 'Ta kategoria już tam jest.',
+	'CategoriesAlreadyExists'	=> 'Ta kategoria %1 już tam jest.',
 	'CategoriesAdded'			=> 'Kategoria %1 dodana pomyślnie.',
 	'CategoriesRenamed'			=> 'Zmieniono nazwę kategorii.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -602,9 +602,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Utwórz',
 	'CreateNewPageTip'			=> 'Utwórz nową stronę.',
 
-	'CreateRandomPage'			=> 'Utwórz losową stronę',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Utwórz losową stronę:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'Nie masz niezbędnych praw dostępu.',
 	'CreatePageDeniedAddress'	=> 'Nie masz prawa do tworzenia strony pod tym adresem.',
 	'PageAlreadyExists'			=> 'Zgodnie z podanym adresem strona %1 już istnieje.',
@@ -668,13 +668,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Wygeneruj hash hasła dla hasła <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Import w klastrze',
-	'ImportWhat'				=> 'Plik XML do importu',
+	'ImportTo'					=> 'Import w klastrze:',
+	'ImportWhat'				=> 'Plik XML do importu:',
 	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Importowany z powodzeniem.',
 	'ImportFailed'				=> 'Import nie powiódł się.',
 	'ImportHint'				=> 'Proszę podać klaster, do którego chcesz zaimportować, bez adresowania względnego.',
 	'ImportAttention'			=> 'Uwaga: Nadpisuje te same strony w klastrze.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -736,8 +737,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Sortuj malejąco]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[ukryty]',
-	'UsersIntercomSubject'		=> 'Temat',
-	'UsersIntercomMessage'		=> 'Wiadomość',
+	'UsersIntercomSubject'		=> 'Temat:',
+	'UsersIntercomMessage'		=> 'Wiadomość:',
 	'UsersIntercomSubjectN'		=> '[rozpocznij nowy temat]',
 	'UsersIntercomDisabled'		=> 'Przepraszamy, nie chcesz lub nie możesz otrzymywać wiadomości osobistych.',
 	'UsersIntercomHint'			=> 'Zaloguj się najpierw i kliknij ponownie na link, jeśli chcesz odpowiedzieć na otrzymaną osobistą wiadomość.',
@@ -930,6 +931,7 @@ $wacko_translation = [
 	'Back'						=> 'Plecy',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1008,7 +1010,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Aktualności',
-	'NewsName'					=> 'Tytuł',
+	'NewsName'					=> 'Tytuł:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1097,7 +1099,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Brak komentarzy',
 	'ForumNoTopics'				=> 'Na tym forum nie ma żadnych tematów ani postów.',
 	'ForumNewTopic'				=> 'Rozpocznij nową dyskusję',
-	'ForumTopicName'			=> 'Nazwa tematu',
+	'ForumTopicName'			=> 'Nazwa tematu:',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

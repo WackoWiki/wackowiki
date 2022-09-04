@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Rediger kategorier',
 	'CategoriesText'			=> 'Kategorier',
 	'CategoriesUpdated'			=> 'Kategorier opdateret',
-	'CategoriesAlreadyExists'	=> 'Denne kategori er der allerede.',
+	'CategoriesAlreadyExists'	=> 'Denne kategori %1 er der allerede.',
 	'CategoriesAdded'			=> 'Kategori %1 tilføjet.',
 	'CategoriesRenamed'			=> 'Kategori held omdøbt.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -602,9 +602,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Opret',
 	'CreateNewPageTip'			=> 'Opret en ny side.',
 
-	'CreateRandomPage'			=> 'Opret en tilfældig side',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Opret en tilfældig side:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'Du har ikke de nødvendige adgangsrettigheder.',
 	'CreatePageDeniedAddress'	=> 'Du har ikke ret til at oprette siden på denne adresse.',
 	'PageAlreadyExists'			=> 'I henhold til den angivne adresse findes siden %1 allerede.',
@@ -668,13 +668,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Generer kodeordets hash for dit <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Importer til dette område',
-	'ImportWhat'				=> 'XML-fil til import',
+	'ImportTo'					=> 'Importer til dette område:',
+	'ImportWhat'				=> 'XML-fil til import:',
 	'ImportButton'				=> 'Importer',
 	'ImportSuccess'				=> 'Importen lykkedes.',
 	'ImportFailed'				=> 'Import mislykkedes.',
 	'ImportHint'				=> 'Angiv en klynge, du vil importere til, uden relativ adressering.',
 	'ImportAttention'			=> 'OBS: Overskriver de samme sider i klyngen.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -736,8 +737,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Sortér faldende]',
 	'UsersSessionNA'			=> '[ikke optaget]',
 	'UsersSessionHidden'		=> '[skjult]',
-	'UsersIntercomSubject'		=> 'Emne',
-	'UsersIntercomMessage'		=> 'Besked',
+	'UsersIntercomSubject'		=> 'Emne:',
+	'UsersIntercomMessage'		=> 'Besked:',
 	'UsersIntercomSubjectN'		=> '[Start et nyt emne]',
 	'UsersIntercomDisabled'		=> 'Beklager, du ønsker ikke eller kan ikke modtage personlige beskeder.',
 	'UsersIntercomHint'			=> 'Du skal først logge ind og følge linket igen, hvis du vil svare på den personlige besked, du har modtaget.',
@@ -930,6 +931,7 @@ $wacko_translation = [
 	'Back'						=> 'Tilbage',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Nogen',
 
 	// My Groups
@@ -1008,7 +1010,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Nyheder',
-	'NewsName'					=> 'Titel',
+	'NewsName'					=> 'Titel:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'Ingen nyheder til rådighed.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1097,7 +1099,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Ingen kommentarer',
 	'ForumNoTopics'				=> 'Der er ingen emner eller indlæg i dette forum.',
 	'ForumNewTopic'				=> 'Start en ny diskussion',
-	'ForumTopicName'			=> 'Emne navn',
+	'ForumTopicName'			=> 'Emne navn:',
 	'ForumTopicSubmit'			=> 'Indsend emne',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

@@ -13,7 +13,7 @@
 				[= current _ =
 					<p>
 						<label for="password">[ ' _t: CurrentPassword ' ]</label>
-						<input type="password" id="password" name="password" size="24">
+						<input type="password" id="password" name="password" size="24" required>
 					</p>
 				=]
 				<p>

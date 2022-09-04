@@ -8278,7 +8278,7 @@ class Wacko
 
 			$out .=
 				($inline ? '' : "<br>\n") .
-				'<label for="captcha">' . $this->_t('Captcha') . ":</label>\n" .
+				'<label for="captcha">' . $this->_t('Captcha') . "</label>\n" .
 				($inline ? '' : "<br>\n") .
 				// href('', '.freecap') won't work, because mini_href() would strip the DOT
 				'<img src="' . $this->db->base_path . ($this->db->rewrite_mode ? '' : '?page=') . '.freecap" id="freecap" alt="' . $this->_t('Captcha') . '">' . "\n" .

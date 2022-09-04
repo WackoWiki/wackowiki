@@ -14,12 +14,17 @@ if (!defined('IN_WACKO'))
 */
 
 // TODO:
+//	logs event as XML page import as well as new created page in save_page function,
+//	maybe we log the import event only once as such and not for every imported page
 //	add a step for warning / confirmation (do you want overwrite? / Will add Import under ... [submit] [cancel])
 //	add better description
 
 if ($this->is_admin())
 {
-	$cluster = $_POST['_to'] ?? '';
+	// set defaults
+	$mute		??= 1;
+
+	$cluster	= $_POST['_to'] ?? '';
 
 	// show FORM
 	if (empty($_POST['_to']))
@@ -71,7 +76,7 @@ if ($this->is_admin())
 					$title		= html_entity_decode(Ut::untag($item, 'title'), ENT_COMPAT | ENT_HTML5, HTML_ENTITIES_CHARSET);
 
 					// save imported page
-					$body_r		= $this->save_page($tag, $body, $title);
+					$body_r		= $this->save_page($tag, $body, $title, $this->_t('ImportNote'), '', '', '', '', '', $mute);
 					$page_id	= $this->get_page_id($tag);
 
 					// now we render it internally in the context of imported
@@ -84,7 +89,7 @@ if ($this->is_admin())
 					$tpl->i_l_page = $this->link('/' . $tag, '', '', '', 0);
 
 					// log import
-					$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag));
+					$this->log(4, Ut::perc_replace($this->_t('LogPageImported', SYSTEM_LANG), $tag . ' ' . $title));
 				}
 			}
 		}

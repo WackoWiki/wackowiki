@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Редактиране на категории',
 	'CategoriesText'			=> 'Категории',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> 'Тази категория вече съществува.',
+	'CategoriesAlreadyExists'	=> 'Тази категория %1 вече съществува.',
 	'CategoriesAdded'			=> 'Категорията %1 е добавена успешно.',
 	'CategoriesRenamed'			=> 'Категорията успешно е преименувана.',
 	'CategoriesUngrouped'		=> 'Категорията се дебютира успешно.',
@@ -602,9 +602,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Създаване',
 	'CreateNewPageTip'			=> 'Създайте нова страница.',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'Нямате необходимите права за достъп.',
 	'CreatePageDeniedAddress'	=> 'Нямате право да създавате страницата на този адрес.',
 	'PageAlreadyExists'			=> 'Според предоставения адрес страницата %1 вече съществува.',
@@ -668,13 +668,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Generate the password hash for your <code>recovery_password</code>',
 
 	// import action
-	'ImportTo'					=> 'Импортировать под адресом',
-	'ImportWhat'				=> 'Файл для импорта',
+	'ImportTo'					=> 'Импортировать под адресом:',
+	'ImportWhat'				=> 'Файл для импорта:',
 	'ImportButton'				=> 'Импортировать',
 	'ImportSuccess'				=> 'Импортировано успешно.',
 	'ImportFailed'				=> 'Импортирането не бе успешно.',
 	'ImportHint'				=> 'Моля, предоставете клъстер, в който искате да импортирате, без относително адресиране.',
 	'ImportAttention'			=> 'Внимание: Презаписва същите страници в клъстера.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -736,8 +737,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Низходящо сортиране]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[скрит]',
-	'UsersIntercomSubject'		=> 'Заглавие',
-	'UsersIntercomMessage'		=> 'Съобщение',
+	'UsersIntercomSubject'		=> 'Заглавие:',
+	'UsersIntercomMessage'		=> 'Съобщение:',
 	'UsersIntercomSubjectN'		=> '[start a new topic]',
 	'UsersIntercomDisabled'		=> 'Съжаляваме, но не искате или не можете да получавате лични съобщения.',
 	'UsersIntercomHint'			=> 'Ако искате да отговорите на полученото лично съобщение, моля, влезте първо в профила си и последвайте връзката отново.',
@@ -930,6 +931,7 @@ $wacko_translation = [
 	'Back'						=> 'Обратно',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Any',
 
 	// My Groups
@@ -1008,7 +1010,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Новини',
-	'NewsName'					=> 'Title',
+	'NewsName'					=> 'Title:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1097,7 +1099,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'No comments',
 	'ForumNoTopics'				=> 'Няма теми или мнения в този форум.',
 	'ForumNewTopic'				=> 'Start a new discussion',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumTopicName'			=> 'Topic name:',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

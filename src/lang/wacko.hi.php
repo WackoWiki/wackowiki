@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Edit categories',
 	'CategoriesText'			=> 'श्रेणियाँ',
 	'CategoriesUpdated'			=> 'Categories updated',
-	'CategoriesAlreadyExists'	=> 'यह श्रेणी पहले से मौजूद है।',
+	'CategoriesAlreadyExists'	=> '%1 यह श्रेणी पहले से मौजूद है।',
 	'CategoriesAdded'			=> 'Category %1 added successfully.',
 	'CategoriesRenamed'			=> 'Category successfully renamed.',
 	'CategoriesUngrouped'		=> 'Category debundled successfully.',
@@ -602,9 +602,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'बनाएँ',
 	'CreateNewPageTip'			=> 'एक नया पेज बनाएं',
 
-	'CreateRandomPage'			=> 'Create a random page',
-	'CreateSubPage'				=> 'Create a sub page in the cluster',
-	'CreatePageParentCluster'	=> 'Create a page in the parent cluster',
+	'CreateRandomPage'			=> 'Create a random page:',
+	'CreateSubPage'				=> 'Create a sub page in the cluster:',
+	'CreatePageParentCluster'	=> 'Create a page in the parent cluster:',
 	'CreatePageDenied'			=> 'You do not have the necessary access rights.',
 	'CreatePageDeniedAddress'	=> 'You do not have the right to create the page at this address.',
 	'PageAlreadyExists'			=> 'According to the address provided the page %1 already exists.',
@@ -668,13 +668,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'अपने <code>recovery_password</code> के लिए पासवर्ड हैश जेनरेट करें',
 
 	// import action
-	'ImportTo'					=> 'Import in cluster',
-	'ImportWhat'				=> 'XML-file for import',
+	'ImportTo'					=> 'Import in cluster:',
+	'ImportWhat'				=> 'XML-file for import:',
 	'ImportButton'				=> 'Import',
 	'ImportSuccess'				=> 'Imported successfully.',
 	'ImportFailed'				=> 'IMPORT failed.',
 	'ImportHint'				=> 'Please provide a cluster you want to import to, no relative addressing.',
 	'ImportAttention'			=> 'Attention: Overwrites the same pages in the cluster.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'List of all pages you follow for changes ',
@@ -736,8 +737,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[उतरते क्रम में क्रमबद्ध करें]',
 	'UsersSessionNA'			=> '[not recorded]',
 	'UsersSessionHidden'		=> '[hidden]',
-	'UsersIntercomSubject'		=> 'विषय',
-	'UsersIntercomMessage'		=> 'संदेश',
+	'UsersIntercomSubject'		=> 'विषय:',
+	'UsersIntercomMessage'		=> 'संदेश:',
 	'UsersIntercomSubjectN'		=> '[एक नया विषय शुरू करें]',
 	'UsersIntercomDisabled'		=> 'Sorry, you do not want or can not receive personal messages.',
 	'UsersIntercomHint'			=> 'Please log in first and follow the link again, if you  want answer the personal message you have received.',
@@ -930,6 +931,7 @@ $wacko_translation = [
 	'Back'						=> 'वापस',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'कोईभी',
 
 	// My Groups
@@ -1008,7 +1010,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'समाचार',
-	'NewsName'					=> 'शीर्षक',
+	'NewsName'					=> 'शीर्षक:',
 	'NewsNoName'				=> 'You forgot to add news headline.',
 	'NewsNotAvailable'			=> 'No News available.',
 	'NewsNoClusterDefined'		=> 'No News cluster defined.',
@@ -1097,7 +1099,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'कोई कमेन्ट',
 	'ForumNoTopics'				=> 'इस फ़ोरम में कोई विषय या पोस्ट नहीं है।',
 	'ForumNewTopic'				=> 'एक नई चर्चा शुरू करें',
-	'ForumTopicName'			=> 'Topic name',
+	'ForumTopicName'			=> 'Topic name:',
 	'ForumTopicSubmit'			=> 'Submit topic',
 	'ForumNoTopicName'			=> 'Specify a name for the new page.',
 	'ForumNewPosts'				=> 'new post',

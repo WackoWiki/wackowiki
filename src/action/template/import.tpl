@@ -5,11 +5,11 @@
 			[ ' csrf: import_xml ' ]
 			<div class="cssform">
 				<p>
-					<label for="importto">[ ' _t: ImportTo ' ]:</label>
+					<label for="importto">[ ' _t: ImportTo ' ]</label>
 					<input type="text" id="importto" name="_to" size="40" value="" required>
 				</p>
 				<p>
-					<label for="importwhat">[ ' _t: ImportWhat ' ]:</label>
+					<label for="importwhat">[ ' _t: ImportWhat ' ]</label>
 					<input type="file" id="importwhat" name="_import" accept=".xml,text/xml" required>
 				</p>
 				<p>

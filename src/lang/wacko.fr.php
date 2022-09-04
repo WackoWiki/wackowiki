@@ -270,7 +270,7 @@ $wacko_translation = [
 	'CategoriesTip'				=> 'Cliquer pour éditer les mots clefs',
 	'CategoriesText'			=> 'Catégories',
 	'CategoriesUpdated'			=> 'Catégories mises à jour',
-	'CategoriesAlreadyExists'	=> 'Ce mot clef est déjà là.',
+	'CategoriesAlreadyExists'	=> 'Ce mot clef %1 est déjà là.',
 	'CategoriesAdded'			=> 'Ajout du mot clef %1 réussi.',
 	'CategoriesRenamed'			=> 'Changement du mot clef réussi.',
 	'CategoriesUngrouped'		=> 'Dégroupage du mot clef réussi.',
@@ -602,9 +602,9 @@ $wacko_translation = [
 	'CreateNewPageText'			=> 'Créer',
 	'CreateNewPageTip'			=> 'Cliquer pour créer une page.',
 
-	'CreateRandomPage'			=> 'Créer une page au hasard',
-	'CreateSubPage'				=> 'Créer une sous-page dans le groupe',
-	'CreatePageParentCluster'	=> 'Créer une page dans le groupe parent',
+	'CreateRandomPage'			=> 'Créer une page au hasard :',
+	'CreateSubPage'				=> 'Créer une sous-page dans le groupe :',
+	'CreatePageParentCluster'	=> 'Créer une page dans le groupe parent :',
 	'CreatePageDenied'			=> 'Vous n’avez pas les droits d’accès nécessaires.',
 	'CreatePageDeniedAddress'	=> 'Vous n’avez pas le droit de créer une page à cette adresse.',
 	'PageAlreadyExists'			=> 'Selon l’adresse fournie la page %1 existe déjà.',
@@ -668,13 +668,14 @@ $wacko_translation = [
 	'GenerateRecoveryHash'		=> 'Générez le hachage de mot de passe pour <code>mot de passe de récupération</code>',
 
 	// import action
-	'ImportTo'					=> 'Importation groupée',
-	'ImportWhat'				=> 'Fichier XML pour l’importation',
+	'ImportTo'					=> 'Importation groupée :',
+	'ImportWhat'				=> 'Fichier XML pour l’importation :',
 	'ImportButton'				=> 'Importer',
 	'ImportSuccess'				=> 'Importation réussie.',
 	'ImportFailed'				=> 'Importation échouée.',
 	'ImportHint'				=> 'Veuillez fournir un cluster vers lequel vous souhaitez importer, pas d\'adresse relative.',
 	'ImportAttention'			=> 'Attention : Remplace les mêmes pages dans le groupe.',
+	'ImportNote'				=> 'Imported page',
 
 	// mywatches action
 	'WatchedPages'				=> 'Liste de toutes les pages que vous surveillez',
@@ -736,8 +737,8 @@ $wacko_translation = [
 	'UsersChangesSortDesc'		=> '[Tri décroissant]',
 	'UsersSessionNA'			=> '[non enregistré]',
 	'UsersSessionHidden'		=> '[caché]',
-	'UsersIntercomSubject'		=> 'Sujet',
-	'UsersIntercomMessage'		=> 'Message',
+	'UsersIntercomSubject'		=> 'Sujet :',
+	'UsersIntercomMessage'		=> 'Message :',
 	'UsersIntercomSubjectN'		=> '[commencer un nouveau sujet]',
 	'UsersIntercomDisabled'		=> 'Désolé, vous ne souhaitez pas ou ne pouvez pas recevoir de messages privés.',
 	'UsersIntercomHint'			=> 'Veuillez d\'abord vous connecter et suivre le lien à nouveau, si vous voulez répondre au message personnel que vous avez reçu.',
@@ -930,6 +931,7 @@ $wacko_translation = [
 	'Back'						=> 'Arrière',
 
 	// filter
+	'Filter'					=> 'Filter',
 	'Any'						=> 'Tout',
 
 	// My Groups
@@ -1008,7 +1010,7 @@ $wacko_translation = [
 
 	// news
 	'News'						=> 'Nouvelles',
-	'NewsName'					=> 'Titre',
+	'NewsName'					=> 'Titre :',
 	'NewsNoName'				=> 'Vous avez oublié d’ajouter la manchette des nouvelles.',
 	'NewsNotAvailable'			=> 'Pas de nouvelles disponibles.',
 	'NewsNoClusterDefined'		=> 'Pas de groupes de nouvelles définis.',
@@ -1097,7 +1099,7 @@ $wacko_translation = [
 	'ForumNoComments'			=> 'Pas de commentaire',
 	'ForumNoTopics'				=> 'Aucun sujet n’a été publié dans ce forum.',
 	'ForumNewTopic'				=> 'Démarrer une nouvelle discussion',
-	'ForumTopicName'			=> 'Nom du sujet',
+	'ForumTopicName'			=> 'Nom du sujet :',
 	'ForumTopicSubmit'			=> 'Soumettre le sujet',
 	'ForumNoTopicName'			=> 'Spécifier un nom pour la nouvelle page.',
 	'ForumNewPosts'				=> 'nouveau message',
