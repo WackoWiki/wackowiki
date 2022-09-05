@@ -571,7 +571,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Du ejer ikke siden og kan ikke omdøbe den',
 	'NeedRedirect'				=> 'Lav automatisk omstilling for siden',
 	'RedirectCreated'			=> 'Siden %1 omstiller den den nye',
-	'RenameCharsetConflict'		=> 'Change your user language  %1 to the same language as this page %2 to avoid a charset conflict when renaming. Otherwise, the links to this page may no longer be valid and the page may become inaccessible.',
 	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
 	'UserSettings'				=> 'Brugerindstillinger',

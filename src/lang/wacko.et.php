@@ -571,7 +571,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Sa ei ole selle lehe omanik, seetõttu ei saa sa seda ümber nimetada!',
 	'NeedRedirect'				=> 'Loo ümbersuunamine vanalt lehelt uuele lehele',
 	'RedirectCreated'			=> 'Lehel %1 loodi ümbersuunamine uuele lehele',
-	'RenameCharsetConflict'		=> 'Change your user language %1 to the same language as this page %2 to avoid a charset conflict when renaming. Otherwise, the links to this page may no longer be valid and the page may become inaccessible.',
 	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
 	'UserSettings'				=> 'Kasutaja seaded',

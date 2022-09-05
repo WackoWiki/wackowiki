@@ -571,7 +571,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Przepraszamy. Tylko autor strony może zmienić jej nazwę.',
 	'NeedRedirect'				=> 'Utwórz przekierowanie ze starej do nowej strony',
 	'RedirectCreated'			=> 'Na poprzedniej stronie %1 utworzono przekierowanie do nowej nazwy.',
-	'RenameCharsetConflict'		=> 'Zmień język użytkownika %1 na ten sam język, co na tej stronie %2, aby uniknąć konfliktu charsetów podczas zmiany nazwy. W przeciwnym razie linki do tej strony mogą nie być już ważne, a strona może stać się niedostępna.',
 	'SkipCharsetConflict'		=> 'Strona %1 bez zmiany nazwy, inny zestaw znaków %2.',
 
 	'UserSettings'				=> 'Ustawienia użytkownika',

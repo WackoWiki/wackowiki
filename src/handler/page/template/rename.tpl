@@ -3,9 +3,6 @@
 		<span class="page-properties" title="[ ' language ' ] ([ ' charset ' ])">[ ' lang ' ]</span>
 	=]
 	<h3>[ ' _t: RenamePage ' ] [ ' page ' ]</h3><br>
-	[= m _ =
-		<div class="msg warning">[ ' warning ' ]</div>
-	=]
 	[= f _ =
 		<form action="[ ' href: rename ' ]" method="post" name="rename_page">
 			[ ' csrf: rename_page ' ]

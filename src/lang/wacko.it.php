@@ -571,7 +571,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> ' Questa pagina non è tua, non puoi rimuoverla ',
 	'NeedRedirect'				=> 'Crea sulla vecchia pagina il reindirizzo alla nuova pagina',
 	'RedirectCreated'			=> ' Creato nella pagina %1 il reindirizzo ad una nuova pagina',
-	'RenameCharsetConflict'		=> 'Cambia la lingua dell\'utente %1 nella stessa lingua di questa pagina %2 per evitare un conflitto di caratteri quando si rinomina. In caso contrario, i link a questa pagina potrebbero non essere più validi e la pagina potrebbe diventare inaccessibile.',
 	'SkipCharsetConflict'		=> 'Pagina %1 non rinominata, diverso set di caratteri %2.',
 
 	'UserSettings'				=> 'Impostazioni utente',

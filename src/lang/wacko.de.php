@@ -571,7 +571,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Du bist nicht der Besitzer dieser Seite und kannst sie daher nicht umbenennen.',
 	'NeedRedirect'				=> 'Weiterleitung von der alten zur neuen Seite einrichten.',
 	'RedirectCreated'			=> 'Weiterleitung von der Seite %1 zur neuen Seite eingerichtet.',
-	'RenameCharsetConflict'		=> 'Wechsel deine Nutzersprache %1 zu der selben Sprache wie diese Seite %2 um beim Umbenennen einen Konflikt mit der Zeichenkodierung zu vermeiden. Anderenfalls werden die Links zu dieser Seite möglicherweise nicht mehr gültig sein und die Seite so unerreichbar.',
 	'SkipCharsetConflict'		=> 'Seite %1 nicht umbenannt, andere Zeichenkodierung %2.',
 
 	'UserSettings'				=> 'Benutzereinstellungen',

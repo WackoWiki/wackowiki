@@ -571,7 +571,6 @@ $wacko_translation = [
 	'NotOwnerCantRename'		=> 'Вие не сте собственика на тази страница и не можете да я преименувате',
 	'NeedRedirect'				=> 'Създай редирект до тази от старата страница',
 	'RedirectCreated'			=> 'На страница %1 е създаден редирект към новата',
-	'RenameCharsetConflict'		=> 'Change your user language %1 to the same language as this page %2 to avoid a charset conflict when renaming. Otherwise, the links to this page may no longer be valid and the page may become inaccessible.',
 	'SkipCharsetConflict'		=> 'Page %1 not renamed, other charset %2.',
 
 	'UserSettings'				=> 'Потребителски настройки',
