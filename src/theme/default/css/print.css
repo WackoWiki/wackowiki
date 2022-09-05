@@ -79,6 +79,7 @@ a img {
 }
 
 /* Hide all buttons */
+button,
 input {
 	display:			none;
 }
