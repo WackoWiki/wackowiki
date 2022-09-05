@@ -123,36 +123,29 @@ if ($registered
 
 			$user_lang			= $user['user_lang'] ?: $this->db->language;
 
-			// avoid charset conflict
-			if ($this->get_charset($this->page['page_lang']) != $this->get_charset($user_lang))
+			$tpl->enter('f_');
+
+			// show rename form
+			$tpl->tag	= $this->tag;
+
+			if ($this->db->default_rename_redirect == 1)
 			{
-				$tpl->m_warning		= Ut::perc_replace($this->_t('RenameCharsetConflict'), '[<code>' . $user_lang . '</code>]', '[<code>' . $this->page['page_lang'] . '</code>]');
+				$tpl->checked	= ' checked';
 			}
-			else
+
+			if ($this->check_acl($user_name, $this->db->rename_global_acl))
 			{
-				$tpl->enter('f_');
-
-				// show rename form
-				$tpl->tag	= $this->tag;
-
-				if ($this->db->default_rename_redirect == 1)
-				{
-					$tpl->checked	= ' checked';
-				}
-
-				if ($this->check_acl($user_name, $this->db->rename_global_acl))
-				{
-					$tpl->global = true;
-				}
-
-				// show backlinks
-				$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
-
-				// show sub-pages
-				$tpl->tree		= $this->action('tree', ['depth' => 3]);
-
-				$tpl->leave();	// f_
+				$tpl->global = true;
 			}
+
+			// show backlinks
+			$tpl->backlinks	= $this->action('backlinks', ['nomark' => 0]);
+
+			// show sub-pages
+			$tpl->tree		= $this->action('tree', ['depth' => 3]);
+
+			$tpl->leave();	// f_
+
 		}
 	}
 }
