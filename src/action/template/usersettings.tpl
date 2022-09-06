@@ -309,7 +309,7 @@
 							<label for="menu_items">[ ' _t: MenuItemsShown ' ]</label>
 						</th>
 						<td>
-							<input type="number" id="menu_items" name="menu_items" value="[ ' menuitems ' ]" size="40" min="0" max="20">
+							<input type="number" id="menu_items" name="menu_items" value="[ ' menuitems ' ]" size="2" min="0" max="20">
 						</td>
 					</tr>
 					<tr>
