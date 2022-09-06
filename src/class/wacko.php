@@ -4560,7 +4560,7 @@ class Wacko
 			$string = preg_replace('/(-{2,})/u', '-', $string);
 			$string = preg_replace('/(\.{2,})/u', '.', $string);
 
-			// remove consecutive occurences (.- / -.)
+			// remove consecutive occurrences (.- / -.)
 			$string = str_replace(['.-', '-.'], '', $string);
 
 			if ($string)

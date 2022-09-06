@@ -3,7 +3,7 @@
 	[= mark _ =
 		<div class="layout-box">
 			<p>
-				<span>[ ' _t: LinkedPages ' ]:</span>
+				<span>[ ' _t: LinkedPages ' ]</span>
 			</p>
 	=]
 	[= nolinks _ =

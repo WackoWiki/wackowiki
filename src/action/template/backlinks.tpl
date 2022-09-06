@@ -3,7 +3,7 @@
 	[= mark _ =
 		<div class="layout-box">
 			<p>
-				<span>[ ' _t: ReferringPages ' ]:</span>
+				<span>[ ' _t: ReferringPages ' ]</span>
 			</p>
 	=]
 	[= nobacklinks _ =
