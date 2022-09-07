@@ -144,6 +144,8 @@ if (!$this->page)
 else
 {
 	$readable = $this->has_access('read');
+	// to pass as $params in $echo_tab()
+	$revision = isset($this->page['revision_id']) ? ['revision_id' => $this->page['revision_id']] : null;
 
 	// edit or source tab
 	if ($this->is_admin()
@@ -158,7 +160,7 @@ else
 		||		$this->db->source_handler == 1)
 	)
 	{
-		$echo_tab('source', 'SourceTip', 'SourceText', 1, '', 'e');
+		$echo_tab('source', 'SourceTip', 'SourceText', 1, '', 'e', '', $revision);
 	}
 
 	if (!$this->page['revisions'])
@@ -186,8 +188,7 @@ else
 	// print tab
 	if ($readable)
 	{
-		$params = isset($this->page['revision_id']) ? ['revision_id' => $this->page['revision_id']] : null;
-		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank" rel="noopener"', $params);
+		$echo_tab('print', 'PrintVersion', 'PrintText', 2, '', 'v', ' target="_blank" rel="noopener"', $revision);
 	}
 
 	// create tab
