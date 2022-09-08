@@ -33,9 +33,8 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 	{
 		$this->set_message($this->_t('InvalidWikiName'));
 	}
-
 	// check reserved word
-	if ($result = $this->validate_reserved_words($new_tag))
+	else if ($result = $this->validate_reserved_words($new_tag))
 	{
 		$this->set_message(Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>'));
 	}
@@ -94,7 +93,7 @@ if ($this->has_access('create', $this->get_page_id($this->tag)))
 }
 else
 {
-	$message			= '<em>' . $this->_t('CreatePageDenied') . '</em>';
+	$message			= $this->_t('CreatePageDenied');
 	$tpl->p_d_message	= $this->show_message($message, 'note', false);
 }
 
@@ -115,7 +114,7 @@ if (mb_substr_count($this->tag, '/') > 0)
 	}
 	else
 	{
-		$message			= '<em>' . $this->_t('CreatePageDenied') . '</em>';
+		$message			= $this->_t('CreatePageDenied');
 		$tpl->c_d_message	= $this->show_message($message, 'note', false);
 	}
 }

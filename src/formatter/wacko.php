@@ -63,7 +63,7 @@ if (!empty($parser->auto_fn['content']))
 	// write the footnotes
 	$text .=	'<br><br>' .
 				'<div class="layout-box" id="footnotes">
-					<p><span>' . $this->_t('Footnotes') . ":</span></p>\n" .
+					<p><span>' . $this->_t('Footnotes') . "</span></p>\n" .
 					"<dl>\n" .
 						$footnotes.
 					"</dl>\n" .

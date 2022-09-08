@@ -190,8 +190,9 @@ write_config_hidden_nodes($config_parameters);
 		End of checks, are we ready to install?
 	*/
 
-	$btn_try_again	= '<button type="button" class="next" onClick="window.location.reload( true );">' . $lang['TryAgain'] . '</button>';
-	$btn_continue	= '<button type="submit" class="next">' . $lang['Continue'] . '</button>';
+	$permissions_notice	= '<p class="warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
+	$btn_try_again		= '<button type="button" class="next" onClick="window.location.reload( true );">' . $lang['TryAgain'] . '</button>';
+	$btn_continue		= '<button type="submit" class="next">' . $lang['Continue'] . '</button>';
 	?>
 <h2><?php echo $lang['ReadyToInstall']; ?></h2>
 <?php
@@ -201,7 +202,7 @@ write_config_hidden_nodes($config_parameters);
 		&& $file_permissions_result)
 	{
 		echo '<p>' . $lang['Ready'] . '</p>';
-		echo '<p class="warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
+		echo $permissions_notice;
 		echo $btn_continue;
 	}
 	else if (!$php_version_result)
@@ -227,7 +228,7 @@ write_config_hidden_nodes($config_parameters);
 	}
 	else if (!$file_permissions_result)
 	{
-		echo '<p class="warning">' . Ut::perc_replace($lang['NotePermissions'], '<code>' . CONFIG_FILE . '</code>') . '</p>';
+		echo $permissions_notice;
 		echo '<p class="security">' . $lang['ErrorPermissions'] . '</p>';
 		echo $btn_try_again;
 		echo $btn_continue;

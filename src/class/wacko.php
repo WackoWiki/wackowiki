@@ -330,12 +330,12 @@ class Wacko
 	{
 		// get used upload quota
 		$files	= $this->db->load_single(
-				"SELECT SUM(file_size) AS used_quota " .
-				"FROM " . $this->db->table_prefix . "file " .
-					($user_id
-						? "WHERE user_id = " . (int) $user_id . " "
-						: "") .
-				"LIMIT 1");
+			"SELECT SUM(file_size) AS used_quota " .
+			"FROM " . $this->db->table_prefix . "file " .
+				($user_id
+					? "WHERE user_id = " . (int) $user_id . " "
+					: "") .
+			"LIMIT 1");
 
 		return $files['used_quota'];
 	}
