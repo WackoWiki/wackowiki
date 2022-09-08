@@ -330,12 +330,12 @@ class Wacko
 	{
 		// get used upload quota
 		$files	= $this->db->load_single(
-				"SELECT SUM(file_size) AS used_quota " .
-				"FROM " . $this->db->table_prefix . "file " .
-					($user_id
-						? "WHERE user_id = " . (int) $user_id . " "
-						: "") .
-				"LIMIT 1");
+			"SELECT SUM(file_size) AS used_quota " .
+			"FROM " . $this->db->table_prefix . "file " .
+				($user_id
+					? "WHERE user_id = " . (int) $user_id . " "
+					: "") .
+			"LIMIT 1");
 
 		return $files['used_quota'];
 	}
@@ -4529,7 +4529,7 @@ class Wacko
 			$string = preg_replace('/(-{2,})/u', '-', $string);
 			$string = preg_replace('/(\.{2,})/u', '.', $string);
 
-			// remove consecutive occurences (.- / -.)
+			// remove consecutive occurrences (.- / -.)
 			$string = str_replace(['.-', '-.'], '', $string);
 
 			if ($string)
@@ -8803,16 +8803,10 @@ class Wacko
 
 		$out .= '<select id="' . $name . '" name="' . $name . '">' . "\n";
 
-		$languages = $this->_t('LanguageArray');
-
-		if ($this->db->multilanguage)
-		{
-			$langs = $this->http->available_languages();
-		}
-		else
-		{
-			$langs = [$this->db->language];
-		}
+		$languages	= $this->_t('LanguageArray');
+		$langs		= $this->db->multilanguage
+						? $this->http->available_languages()
+						: [$this->db->language];
 
 		foreach ($langs as $_lang)
 		{

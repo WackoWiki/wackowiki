@@ -38,9 +38,8 @@ if (isset($_POST['tag']) && $new_tag = utf8_trim($_POST['tag'], '.-/ '))
 	{
 		$this->set_message($this->_t('InvalidWikiName'));
 	}
-
 	// check reserved word
-	if ($result = $this->validate_reserved_words($new_tag))
+	else if ($result = $this->validate_reserved_words($new_tag))
 	{
 		$this->set_message(Ut::perc_replace($this->_t('PageReservedWord'), '<code>' . $result . '</code>'));
 	}
