@@ -11,7 +11,7 @@ if (isset($this->page['latest']) && $this->page['comment_on_id'] && !$this->page
 	// count previous comments
 	$count = $this->db->load_single(
 		"SELECT COUNT(tag) AS n " .
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $this->prefix . "page " .
 		"WHERE comment_on_id = " . (int) $this->page['comment_on_id'] . " " .
 			"AND created <= " . $this->db->q($this->page['created']) . " " .
 			"AND deleted <> 1 " .
@@ -215,7 +215,7 @@ if ($this->has_access('read'))
 			&& ($this->get_user_id() != $this->page['owner_id']))
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "page SET " .
+				"UPDATE " . $this->prefix . "page SET " .
 					"hits = hits + 1 " .
 				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 				"LIMIT 1");

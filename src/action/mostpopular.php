@@ -32,7 +32,7 @@ if (!isset($title))			$title = 0;
 if (!isset($dontrecurse))	$dontrecurse = false;
 if (!isset($counter))		$counter = 1;
 
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;

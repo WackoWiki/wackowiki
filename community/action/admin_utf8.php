@@ -32,7 +32,7 @@ if (!defined('IN_WACKO'))
  * currently it uses only the Mysqli API to update the cross charset records
  */
 
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 $charset		= 'utf8mb4';
 $collation		= 'utf8mb4_unicode_520_ci';		// Unicode (UCA 5.2.0), case-insensitive, https://dev.mysql.com/doc/refman/8.0/en/charset-collation-names.html
 

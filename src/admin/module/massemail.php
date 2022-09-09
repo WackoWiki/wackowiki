@@ -19,7 +19,7 @@ $module['massemail'] = [
 
 function admin_massemail(&$engine, $module)
 {
-	$prefix		= $engine->db->table_prefix;
+	$prefix		= $engine->prefix;
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>

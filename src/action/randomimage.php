@@ -24,7 +24,7 @@ if (!isset($caption))	$caption	= 0;
 if ($caption)	$param[]	= 'caption';
 
 $track		= false;
-$prefix		= $this->db->table_prefix;
+$prefix		= $this->prefix;
 
 $selector =
 	($category

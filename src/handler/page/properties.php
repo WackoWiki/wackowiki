@@ -24,7 +24,7 @@ if ($action === 'extended_properties')
 {
 	$mode = 'extended';
 	$this->db->sql_query(
-		"UPDATE " . $this->db->table_prefix . "page SET " .
+		"UPDATE " . $this->prefix . "page SET " .
 			"footer_comments	= " . (int) $_POST['footer_comments'] . ", " .
 			"footer_files		= " . (int) $_POST['footer_files'] . ", " .
 			"footer_rating		= " . (int) $_POST['footer_rating'] . ", " .
@@ -49,7 +49,7 @@ if ($action === 'general_properties')
 	$theme		= $_POST['theme'] ? $this->validate_theme($_POST['theme']) : '';
 
 	$this->db->sql_query(
-		"UPDATE " . $this->db->table_prefix . "page SET " .
+		"UPDATE " . $this->prefix . "page SET " .
 			"page_lang			= " . $this->db->q($page_lang) . ", " .
 			"theme				= " . $this->db->q($theme) . ", " .
 			"license_id			= " . (int) ($_POST['license'] ?? '') . ", " .
@@ -181,7 +181,7 @@ $tpl->version	= $this->page['version_id'];
 
 $watchers = $this->db->load_single(
 		"SELECT COUNT(page_id) AS n " .
-		"FROM " . $this->db->table_prefix . "watch " .
+		"FROM " . $this->prefix . "watch " .
 		"WHERE page_id = {$this->page['page_id']} " .
 		"LIMIT 1", true);
 
@@ -192,7 +192,7 @@ if ($this->db->footer_rating)
 	// load rating
 	$rating = $this->db->load_single(
 		"SELECT page_id, value, voters " .
-		"FROM " . $this->db->table_prefix . "rating " .
+		"FROM " . $this->prefix . "rating " .
 		"WHERE page_id = {$this->page['page_id']} " .
 		"LIMIT 1", true);
 

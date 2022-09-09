@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 $load_orphaned_pages = function ($tag, $limit, $deleted = 0)
 {
 	$pagination	= [];
-	$pref		= $this->db->table_prefix;
+	$pref		= $this->prefix;
 
 	$selector =
 		"FROM " . $pref . "page p " .

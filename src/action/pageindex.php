@@ -68,7 +68,7 @@ if (!isset($letters)
 
 	$pages = $this->db->load_all(
 		"SELECT tag, title " .
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $this->prefix . "page " .
 		"WHERE comment_on_id = 0 " .
 			"AND deleted = 0 " .
 			($page
@@ -106,7 +106,7 @@ if (!isset($letters)
 
 // get index pages
 $selector =
-	"FROM " . $this->db->table_prefix . "page " .
+	"FROM " . $this->prefix . "page " .
 	"WHERE comment_on_id = 0 " .
 		"AND deleted = 0 " .
 		($page

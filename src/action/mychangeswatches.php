@@ -15,7 +15,7 @@ if ($user_id = $this->get_user_id())
 	$tpl->enter('user_');
 
 	$profile	= ($profile? ['profile' => $profile] : []);
-	$pref		= $this->db->table_prefix;
+	$pref		= $this->prefix;
 
 	$tpl->href	= $this->href('', '', $profile + ['mode' => 'mychangeswatches', 'reset' => 1, '#' => 'list']);
 
@@ -46,7 +46,7 @@ if ($user_id = $this->get_user_id())
 		foreach ($pages as $page)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "watch SET " .
+				"UPDATE " . $this->prefix . "watch SET " .
 					"watch_time = UTC_TIMESTAMP() " .
 				"WHERE page_id = " . (int) $page['page_id'] . " " .
 					"AND user_id = " . (int) $user_id);

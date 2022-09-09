@@ -25,7 +25,7 @@ $can_upload		= $this->can_upload();
 $error			= '';
 $is_global		= '';
 $is_image		= '';
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 
 $this->ensure_page(true); // TODO: upload for forums?
 

@@ -23,8 +23,8 @@ $load_user_menu = function ($user_id, $lang = '')
 {
 	return $this->db->load_all(
 		"SELECT p.tag, p.title, m.menu_id, m.user_id, m.menu_title, m.menu_lang, m.menu_position " .
-		"FROM " . $this->db->table_prefix . "menu m " .
-			"LEFT JOIN " . $this->db->table_prefix . "page p ON (m.page_id = p.page_id) " .
+		"FROM " . $this->prefix . "menu m " .
+			"LEFT JOIN " . $this->prefix . "page p ON (m.page_id = p.page_id) " .
 		"WHERE m.user_id = " . (int) $user_id . " " .
 			($lang
 				? "AND m.menu_lang = " . $this->db->q($lang) . " "
@@ -40,7 +40,7 @@ if (!isset($system))
 $default_menu	= false;
 $menu_lang		= '';
 $message		= '';
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 $user			= [];
 
 // get default menu items

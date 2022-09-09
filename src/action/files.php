@@ -110,10 +110,10 @@ if ($can_view)
 
 	$selector =
 		($category_id
-			? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = f.file_id) "
+			? "INNER JOIN " . $this->prefix . "category_assignment AS k ON (k.object_id = f.file_id) "
 			: "") . " " .
 		($file_link
-			? "INNER JOIN " . $this->db->table_prefix . "file_link AS l ON (f.file_id = l.file_id) "
+			? "INNER JOIN " . $this->prefix . "file_link AS l ON (f.file_id = l.file_id) "
 			: "") . " " .
 			"WHERE ".
 		($all || $file_link
@@ -148,9 +148,9 @@ if ($can_view)
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"FROM " . $this->prefix . "file f " .
+			"LEFT JOIN  " . $this->prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
 		$selector, true);
 
 	$pagination = $this->pagination($count['n'], $max, 'f', $params, $method);
@@ -158,9 +158,9 @@ if ($can_view)
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.uploaded_dt, p.owner_id, p.tag, u.user_name " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"FROM " . $this->prefix . "file f " .
+			"LEFT JOIN  " . $this->prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);

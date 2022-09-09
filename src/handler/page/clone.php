@@ -50,7 +50,7 @@ if (@$_POST['_action'] === 'clone_page')
 
 		$pages = $this->db->load_all(
 			"SELECT page_id, tag " .
-			"FROM " . $this->db->table_prefix . "page " .
+			"FROM " . $this->prefix . "page " .
 			"WHERE (tag LIKE " . $this->db->q($from . '/%') . " " .
 				"OR tag = " . $this->db->q($from) . ") " .
 				"AND comment_on_id = 0");
@@ -122,7 +122,7 @@ if ($this->check_acl($this->get_user_name(), $this->db->rename_global_acl))
 {
 	$klusterwerks = $this->db->load_single(
 		"SELECT COUNT(*) AS n " .
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $this->prefix . "page " .
 		"WHERE (tag LIKE " . $this->db->q($from . '/%') . ") " .
 			"AND comment_on_id = 0");
 

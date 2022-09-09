@@ -119,8 +119,8 @@ if ($can_view)
 	}
 
 	$selector =
-		"FROM " . $this->db->table_prefix . "file f " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"FROM " . $this->prefix . "file f " .
+			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
 		"WHERE f.page_id = " . ($global ? 0 : (int) $filepage['page_id']) . " " .
 			"AND f.picture_w <> 0 " .
 			($owner

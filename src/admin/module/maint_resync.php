@@ -19,7 +19,7 @@ $module['maint_resync'] = [
 
 function admin_maint_resync(&$engine, $module)
 {
-	$prefix		= $engine->db->table_prefix;
+	$prefix		= $engine->prefix;
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>

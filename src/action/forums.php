@@ -15,7 +15,7 @@ if (!defined('IN_WACKO'))
 // define variables
 $pages		= '';
 $comment	= null;
-$prefix		= $this->db->table_prefix;
+$prefix		= $this->prefix;
 
 if (!isset($noxml))		$noxml = 0;
 

@@ -74,12 +74,12 @@ else
 		// delelte dublicate images
 		if (count($this->db->load_single(
 			"SELECT upload_id " .
-			"FROM " . $this->db->table_prefix . "file " .
+			"FROM " . $this->prefix . "file " .
 			"WHERE page_id		= " . (int) $this->get_page_id() . " " .
 			"AND file_name		= " . $this->db->q($gname . '.png') . "")) > 0)
 		{
 			$this->db->sql_query(
-				"DELETE FROM " . $this->db->table_prefix . "file " .
+				"DELETE FROM " . $this->prefix . "file " .
 				"WHERE page_id		= " . (int) $this->get_page_id() . " " .
 				"AND file_name		= " . $this->db->q($gname . '.png'));
 		}
@@ -88,7 +88,7 @@ else
 		$imagesize	= getimagesize ($fname . '.png');
 
 		$this->db->sql_query(
-			"INSERT INTO " . $this->db->table_prefix . "file SET " .
+			"INSERT INTO " . $this->prefix . "file SET " .
 				"page_id			= " . (int) $this->get_page_id() . ", " .
 				"user_id			= " . (int) $user_id . ", " .
 				"file_name			= " . $this->db->q($gname . '.png') ."', " .

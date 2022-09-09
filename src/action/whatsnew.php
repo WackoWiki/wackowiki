@@ -21,7 +21,7 @@ if (!isset($printed))	$printed	= [];
 
 if (!$max || $max > 100) $max = 100;
 
-$prefix	= $this->db->table_prefix;
+$prefix	= $this->prefix;
 $tag	= $this->unwrap_link($page);
 $user	= $this->get_user();
 

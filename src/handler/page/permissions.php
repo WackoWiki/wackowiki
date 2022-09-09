@@ -18,7 +18,7 @@ $action			= $_POST['_action'] ?? null;
 // check if upload is allowed for user
 $upload			= $this->db->upload;
 $upload_allowed	= ($upload === true || $upload == 1 || $this->check_acl($this->get_user_name(), $upload));
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 
 if ($action === 'set_permissions')
 {

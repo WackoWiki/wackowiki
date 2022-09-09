@@ -88,7 +88,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 
 	$_words = $this->db->load_all(
 		"SELECT category, category_lang " .
-		"FROM " . $this->db->table_prefix . "category " .
+		"FROM " . $this->prefix . "category " .
 		"WHERE category_id IN (" . $this->ids_string($category_ids) . ")", true);
 
 	if ($nomark != 2)
@@ -129,8 +129,8 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	// get category assignments
 	if ($pages = $this->db->load_all(
 		"SELECT p.page_id, p.tag, p.title, p.created, p.page_lang " .
-		"FROM " . $this->db->table_prefix . "category_assignment AS k " .
-			"INNER JOIN " . $this->db->table_prefix . "page AS p ON (k.object_id = p.page_id) " .
+		"FROM " . $this->prefix . "category_assignment AS k " .
+			"INNER JOIN " . $this->prefix . "page AS p ON (k.object_id = p.page_id) " .
 		"WHERE k.category_id IN (" . $this->ids_string($category_ids) . ") " .
 			"AND k.object_type_id = 1 " .
 			"AND p.deleted <> 1 " .
@@ -142,7 +142,7 @@ if ($list && ($ids || isset($_GET['category_id'])))
 	{
 		if ($_words = $this->db->load_all(
 			"SELECT category, category_description, category_lang " .
-			"FROM " . $this->db->table_prefix . "category " .
+			"FROM " . $this->prefix . "category " .
 			"WHERE category_id IN (" . $this->ids_string($category_ids) . ")", true))
 		{
 			if ($info)

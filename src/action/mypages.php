@@ -45,7 +45,7 @@ if ($user_id = $this->get_user_id())
 	// print navigation
 	$tpl->tabs	= $this->tab_menu($tabs, $mode, '', $profile + ['mode' => $profile_mode, '#' => 'list'], $mod_selector);
 
-	$prefix		= $this->db->table_prefix;
+	$prefix		= $this->prefix;
 
 	if ($mode == 'bydate' || $bydate)
 	{

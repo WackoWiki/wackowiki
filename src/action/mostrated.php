@@ -20,7 +20,7 @@ if (isset($top))
 	$pages = $this->db->load_all(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang, MAX(r.value) AS rate, " .
 			"r.voters AS votes, (r.value / r.voters) AS ratio " .
-		"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->table_prefix . "rating AS r " .
+		"FROM " . $this->prefix . "page AS p, " . $this->prefix . "rating AS r " .
 		"WHERE p.deleted <> 1 " .
 			"AND p.page_id = r.page_id " .
 			"AND r.voters >= " . (int) $min . " " .
@@ -76,7 +76,7 @@ if (isset($bottom))
 	$pages = $this->db->load_all(
 		"SELECT p.page_id, p.owner_id, p.user_id, p.tag, p.title, p.page_lang, MAX(r.value) AS rate, " .
 			"r.voters AS votes, (r.value / r.voters) AS ratio " .
-		"FROM " . $this->db->table_prefix . "page AS p, " . $this->db->table_prefix . "rating AS r " .
+		"FROM " . $this->prefix . "page AS p, " . $this->prefix . "rating AS r " .
 		"WHERE p.deleted <> 1 " .
 			"AND p.page_id = r.page_id " .
 			"AND r.voters >= " . (int) $min . " " .

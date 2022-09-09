@@ -80,11 +80,11 @@ $sql = "SELECT
 			c.category,
 			COUNT(c.category_id) AS number
 		FROM
-			" . $this->db->table_prefix . "category c
-			INNER JOIN " . $this->db->table_prefix . "category_assignment ca ON (c.category_id = ca.category_id)
-			INNER JOIN " . $this->db->table_prefix . "page p ON (ca.object_id = p.page_id) " .
+			" . $this->prefix . "category c
+			INNER JOIN " . $this->prefix . "category_assignment ca ON (c.category_id = ca.category_id)
+			INNER JOIN " . $this->prefix . "page p ON (ca.object_id = p.page_id) " .
 			($owner
-				? "INNER JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) "
+				? "INNER JOIN " . $this->prefix . "user u ON (p.user_id = u.user_id) "
 				: '' ) .
 		"WHERE c.category_lang = " . $this->db->q($lang) . " " .
 			"AND ca.object_type_id = 1 " .

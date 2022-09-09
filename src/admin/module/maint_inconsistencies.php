@@ -19,7 +19,7 @@ $module['maint_inconsistencies'] = [
 
 function admin_maint_inconsistencies(&$engine, $module)
 {
-	$prefix		= $engine->db->table_prefix;
+	$prefix		= $engine->prefix;
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
@@ -773,7 +773,7 @@ function admin_maint_inconsistencies(&$engine, $module)
 			// 1. get db records
 			$files = $engine->db->load_all(
 				"SELECT f.file_id, f.page_id, f.file_ext, f.file_name " .
-				"FROM " . $engine->db->table_prefix . "file f ");
+				"FROM " . $engine->prefix . "file f ");
 
 			$db_files			= [];
 

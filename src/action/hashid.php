@@ -22,7 +22,7 @@ if ($this->db->show_permalink == 1 || ($this->db->show_permalink == 2 && $this->
 	{
 		$old_version = $this->db->load_single(
 			"SELECT version_id " .
-			"FROM " . $this->db->table_prefix . "revision " .
+			"FROM " . $this->prefix . "revision " .
 			"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 			"ORDER BY version_id DESC " .
 			"LIMIT 1");

@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 // we really want this up to date
 if (!isset($tables, $directories))
 {
-	$prefix	= $engine->db->table_prefix;
+	$prefix	= $engine->prefix;
 	$tables	= [
 		$prefix . 'acl' => [
 			'name'	=> $prefix . 'acl',
@@ -380,7 +380,7 @@ function get_data(&$engine, $tables, $pack, $table, $root = '')
 			$_root = $root;
 			$pages = $engine->db->load_all(
 				"SELECT page_id " .
-				"FROM " . $engine->db->table_prefix . "page " .
+				"FROM " . $engine->prefix . "page " .
 				"WHERE tag LIKE " . $engine->db->q($_root . '/%') . " " .
 					"OR tag = " . $engine->db->q($_root) . " ");
 
@@ -399,7 +399,7 @@ function get_data(&$engine, $tables, $pack, $table, $root = '')
 			$cluster_pages[$root]	= $result;
 		}
 
-		if ($table != $engine->db->table_prefix . 'page')	// not page table
+		if ($table != $engine->prefix . 'page')	// not page table
 		{
 			$where = "WHERE {$tables[$table]['where']} IN (" . $cluster_pages[$root] . ") ";
 		}
@@ -415,7 +415,7 @@ function get_data(&$engine, $tables, $pack, $table, $root = '')
 	$limit = "LIMIT %1, {$tables[$table]['limit']} ";
 
 	// tweak
-	if ($table == $engine->db->table_prefix . 'page')
+	if ($table == $engine->prefix . 'page')
 	{
 		$tweak = true;
 	}

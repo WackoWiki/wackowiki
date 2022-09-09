@@ -63,8 +63,8 @@ $load_diff_page = function ($revision_id)
 	{
 		return $this->db->load_single(
 			"SELECT r.page_id, r.version_id, r.revision_id, r.modified, r.body, r.edit_note, r.minor_edit, r.page_size, r.page_lang, u.user_name " .
-			"FROM " . $this->db->table_prefix . "revision r " .
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (r.user_id = u.user_id) " .
+			"FROM " . $this->prefix . "revision r " .
+				"LEFT JOIN " . $this->prefix . "user u ON (r.user_id = u.user_id) " .
 			"WHERE r.revision_id = " . (int) $revision_id . " " .
 			"LIMIT 1");
 	}
@@ -72,8 +72,8 @@ $load_diff_page = function ($revision_id)
 	{
 		return $this->db->load_single(
 			"SELECT p.page_id, p.version_id, 0 AS revision_id, p.modified, p.body, p.edit_note, p.minor_edit, p.page_size, p.page_lang, u.user_name " .
-			"FROM " . $this->db->table_prefix . "page p " .
-				"LEFT JOIN " . $this->db->table_prefix . "user u ON (p.user_id = u.user_id) " .
+			"FROM " . $this->prefix . "page p " .
+				"LEFT JOIN " . $this->prefix . "user u ON (p.user_id = u.user_id) " .
 			"WHERE p.page_id = " . (int) $this->get_page_id() . " " .
 			"LIMIT 1");
 	}

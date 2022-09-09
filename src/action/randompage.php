@@ -22,7 +22,7 @@ if (!isset($page))		$page		= '';
 $tag = $this->unwrap_link($page);
 
 $query =
-	"FROM ". $this->db->table_prefix . "page p, ". $this->db->table_prefix . "acl a " .
+	"FROM ". $this->prefix . "page p, ". $this->prefix . "acl a " .
 	"WHERE p.owner_id != " . (int) $this->db->system_user_id . " " .
 		($tag
 			? "AND p.tag LIKE " . $this->db->q($tag . '/%') . " "

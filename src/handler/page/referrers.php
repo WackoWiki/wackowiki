@@ -53,7 +53,7 @@ if ($mode)
 		$purge_time);
 }
 
-$px = $this->db->table_prefix;
+$px = $this->prefix;
 
 if ($mode == 'perpage')
 {

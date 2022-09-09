@@ -9,7 +9,7 @@ $load_commented = function ($tag, $limit, $deleted = 0)
 {
 	$comments	= [];
 	$pagination	= [];
-	$prefix		= $this->db->table_prefix;
+	$prefix		= $this->prefix;
 
 	// going around the limitations of GROUP BY when used along with ORDER BY
 	// http://dev.mysql.com/doc/refman/5.5/en/example-maximum-column-group-row.html

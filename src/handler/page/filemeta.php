@@ -16,9 +16,9 @@ $get_file = function ($file_id)
 {
 	return $this->db->load_single(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_name, f.file_lang, f.file_size, f.file_description, f.caption, f.author, f.source, f.source_url, f.license_id, f.uploaded_dt, f.modified_dt, f.picture_w, f.picture_h, f.file_ext, f.mime_type, u.user_name, p.tag, p.title " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+		"FROM " . $this->prefix . "file f " .
+			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->prefix . "page p ON (f.page_id = p.page_id) " .
 		"WHERE f.file_id = " . (int) $file_id . " " .
 		"LIMIT 1", true);
 };
@@ -116,7 +116,7 @@ if ($action && !empty($file))
 
 			// update file metadata
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "file SET " .
+				"UPDATE " . $this->prefix . "file SET " .
 					"file_lang			= " . $this->db->q($file_lang) . ", " .
 					"file_description	= " . $this->db->q($description) . ", " .
 					"caption			= " . $this->db->q($caption) . ", " .
