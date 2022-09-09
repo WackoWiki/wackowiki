@@ -29,7 +29,7 @@ function admin_main(&$engine, $module)
 	// purge sessions
 	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
 	{
-		# $sql = "TRUNCATE " . $engine->db->table_prefix . "auth_token";
+		# $sql = "TRUNCATE " . $engine->prefix . "auth_token";
 		# $engine->db->sql_query($sql);
 		$engine->sess->delete_cookie(AUTH_TOKEN);
 		// queries

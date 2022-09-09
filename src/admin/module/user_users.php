@@ -22,7 +22,7 @@ function admin_user_users(&$engine, $module)
 	$where		= '';
 	$order		= '';
 	$error		= '';
-	$prefix		= $engine->db->table_prefix;
+	$prefix		= $engine->prefix;
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>

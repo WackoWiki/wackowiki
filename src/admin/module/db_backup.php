@@ -114,9 +114,9 @@ function admin_db_backup(&$engine, $module, $tables, $directories)
 				}
 
 				// ...and for these specific tables
-				if ($table == $engine->db->table_prefix . 'cache'
-				||  $table == $engine->db->table_prefix . 'referrer'
-				||  $table == $engine->db->table_prefix . 'log')
+				if ($table == $engine->prefix . 'cache'
+				||  $table == $engine->prefix . 'referrer'
+				||  $table == $engine->prefix . 'log')
 				{
 					$drop = 1;
 				}

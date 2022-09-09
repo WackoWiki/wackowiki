@@ -170,7 +170,7 @@ function recursive_move(&$engine, $root, $new_root, $log)
 	$_root		= $root;
 	$pages		= $engine->db->load_all(
 					"SELECT page_id, tag, page_lang " .
-					"FROM " . $engine->db->table_prefix . "page " .
+					"FROM " . $engine->prefix . "page " .
 					"WHERE (tag LIKE " . $engine->db->q($_root . '/%') . " " .
 						" OR tag = " . $engine->db->q($_root) . ") " .
 					($owner_id

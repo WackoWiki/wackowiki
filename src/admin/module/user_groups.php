@@ -23,7 +23,7 @@ function admin_user_groups(&$engine, $module)
 	$order		= '';
 	$usergroup	= [];
 	$orderuser	= '';
-	$prefix		= $engine->db->table_prefix;
+	$prefix		= $engine->prefix;
 
 /*	TODO:
  * Pre-defined groups

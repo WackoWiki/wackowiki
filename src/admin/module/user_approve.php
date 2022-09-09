@@ -23,7 +23,7 @@ function admin_user_approve(&$engine, $module)
 	$order			= '';
 	$signup_time	= '';
 	$error			= '';
-	$prefix			= $engine->db->table_prefix;
+	$prefix			= $engine->prefix;
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>

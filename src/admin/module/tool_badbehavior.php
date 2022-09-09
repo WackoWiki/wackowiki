@@ -142,7 +142,7 @@ function admin_tool_badbehavior(&$engine, $module)
 			// Query the DB based on variables selected
 			$results = $engine->db->load_all(
 				"SELECT BINARY {$argument} as group_type, {$additional_fields} COUNT({$argument}) AS n " .
-				"FROM " . $engine->db->table_prefix . "bad_behavior " .
+				"FROM " . $engine->prefix . "bad_behavior " .
 				"GROUP BY BINARY {$argument} " .
 				"ORDER BY n DESC " .
 				"LIMIT 10", true);
@@ -200,7 +200,7 @@ function admin_tool_badbehavior(&$engine, $module)
 
 	function bb2_manage(&$engine)
 	{
-		$bb_table		= $engine->db->table_prefix . 'bad_behavior';
+		$bb_table		= $engine->prefix . 'bad_behavior';
 		$settings		= bb2_read_settings();
 
 		$where			= '';
@@ -229,7 +229,7 @@ function admin_tool_badbehavior(&$engine, $module)
 		// collecting data
 		$count = $engine->db->load_single(
 			"SELECT COUNT(log_id) AS n " .
-			"FROM " . $engine->db->table_prefix . "bad_behavior l " .
+			"FROM " . $engine->prefix . "bad_behavior l " .
 			"WHERE 1=1 " . ( $where ?: '' ));
 
 
@@ -247,7 +247,7 @@ function admin_tool_badbehavior(&$engine, $module)
 
 		$totalcount		= $engine->db->load_single(
 			"SELECT COUNT(log_id) AS n " .
-			"FROM " . $engine->db->table_prefix . "bad_behavior l ");
+			"FROM " . $engine->prefix . "bad_behavior l ");
 
 		$results		= $engine->db->load_all(
 			"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key " .
@@ -328,7 +328,7 @@ function admin_tool_badbehavior(&$engine, $module)
 				{
 					$host = @gethostbyaddr($result['ip']);
 					$engine->db->sql_query(
-						"UPDATE " . $engine->db->table_prefix . "bad_behavior SET " .
+						"UPDATE " . $engine->prefix . "bad_behavior SET " .
 							"host		= " . $engine->db->q($host) . " " .
 						"WHERE log_id	= " . (int) $result['log_id'] . " " .
 						"LIMIT 1");
@@ -844,7 +844,7 @@ function bb2_options(&$engine)
 
 	if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
 	{
-		$sql = "TRUNCATE " . $engine->db->table_prefix . "badbehavior";
+		$sql = "TRUNCATE " . $engine->prefix . "badbehavior";
 		$engine->db->sql_query($sql);
 
 		// queries
