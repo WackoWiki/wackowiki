@@ -314,6 +314,12 @@ function admin_db_restore(&$engine, $module, $tables, $directories)
 
 				foreach ($list as $sub_dir)
 				{
+					// process only allowed directories
+					if (!in_array($sub_dir, $directories))
+					{
+						continue;
+					}
+
 					$results .= "\t" . '<strong>' . date('H:i:s') . ' - ' . $sub_dir . "\n" .
 						"\t" . '==========================</strong>' . "\n";
 
