@@ -40,7 +40,7 @@ if ($this->has_access('read'))
 		if ($user && $comments && isset($this->watch['comment_id']) && $this->watch['comment_id'] && !$noid_protect)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "watch SET " .
+				"UPDATE " . $this->prefix . "watch SET " .
 					"comment_id = 0 " .
 				"WHERE page_id = " . (int) $this->page['page_id'] . " " .
 					"AND user_id = " . (int) $user['user_id']);

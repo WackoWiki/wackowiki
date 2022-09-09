@@ -33,7 +33,7 @@ $page			??= '';
 $system			??= 1;
 $title			??= 0;
 
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 
 if (!$max)				$max = 25;
 if ($max > 500)			$max = 500;

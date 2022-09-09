@@ -16,13 +16,13 @@ if ($user_id = $this->get_user_id())
 	$tpl->enter('user_');
 
 	$profile	= ($profile? ['profile' => $profile] : []);
-	$pref		= $this->db->table_prefix;
+	$prefix		= $this->prefix;
 
 	$tpl->href	= $this->href('', '', $profile + ['mode' => 'mychangeswatches', 'reset' => 1, '#' => 'list']);
 
 	$count	= $this->db->load_single(
 			"SELECT COUNT(p.page_id) AS n " .
-			"FROM {$pref}page AS p, {$pref}watch AS w " .
+			"FROM {$prefix}page AS p, {$pref}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .
 				"AND w.user_id = " . (int) $user_id . " " .
@@ -33,7 +33,7 @@ if ($user_id = $this->get_user_id())
 
 	$pages = $this->db->load_all(
 			"SELECT p.page_id, p.tag, p.modified, w.user_id " .
-			"FROM {$pref}page AS p, {$pref}watch AS w " .
+			"FROM {$prefix}page AS p, {$pref}watch AS w " .
 			"WHERE p.page_id = w.page_id " .
 				"AND p.modified > w.watch_time " .
 				"AND w.user_id = " . (int) $user_id . " " .
@@ -47,7 +47,7 @@ if ($user_id = $this->get_user_id())
 		foreach ($pages as $page)
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "watch SET " .
+				"UPDATE " . $prefix . "watch SET " .
 					"watch_time = UTC_TIMESTAMP() " .
 				"WHERE page_id = " . (int) $page['page_id'] . " " .
 					"AND user_id = " . (int) $user_id);

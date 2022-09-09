@@ -13,7 +13,7 @@ if (!defined('IN_WACKO'))
 //	- split in functions and move into new class -> tagging for attachments
 
 $parent_id	= '';
-$prefix		= $this->db->table_prefix;
+$prefix		= $this->prefix;
 
 // redirect to show method if page don't exists
 if (!$this->page)

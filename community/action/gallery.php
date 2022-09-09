@@ -18,7 +18,7 @@ if (!defined('IN_WACKO'))
 
 	[page		= "page_tag"] - call image from another page
 	[global		= 0|1] - call global images
-	[perrow		= <Number of images per rows> (default = 3)]
+	[perrow		= <Number of images per rows> (default = 5)]
 	[caption	= 1|2] - 1 show file description, 2 show file caption
 	[title		= "Gallery"] - album title
 	[target		= 1|2] - show large images without page (if = 2 in new browser window)
@@ -157,9 +157,9 @@ if ($can_view)
 	}
 
 	$selector =
-		"FROM " . $this->db->table_prefix . "file f " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
-			"LEFT JOIN " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
+		"FROM " . $this->prefix . "file f " .
+			"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
+			"LEFT JOIN " . $this->prefix . "page p ON (f.page_id = p.page_id) " .
 		"WHERE f.page_id = '" . (int) ($global ? 0 : $file_page['page_id']) . "' " .
 			"AND f.picture_w <> 0 " .
 			"AND f.deleted <> 1 " .

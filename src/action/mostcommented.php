@@ -48,7 +48,7 @@ else
 if (!$page)
 {
 	$selector =
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $this->prefix . "page " .
 		"WHERE comments >= 1 " .
 			"AND comment_on_id = 0 " .
 			"AND deleted = 0 " .
@@ -77,9 +77,9 @@ else
 		: $recurse = false;
 
 	$selector =
-		"FROM " . $this->db->table_prefix . "page a, " . $this->db->table_prefix . "page_link l " .
-			"INNER JOIN " . $this->db->table_prefix . "page b ON (l.from_page_id = b.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "page c ON (l.to_page_id = c.page_id) " .
+		"FROM " . $this->prefix . "page a, " . $this->prefix . "page_link l " .
+			"INNER JOIN " . $this->prefix . "page b ON (l.from_page_id = b.page_id) " .
+			"INNER JOIN " . $this->prefix . "page c ON (l.to_page_id = c.page_id) " .
 		"WHERE a.tag <> " . $this->db->q($tag) . " " .
 			"AND a.tag = c.tag " .
 			($recurse

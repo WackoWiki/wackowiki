@@ -10,7 +10,7 @@ $this->no_way_back = true; // prevent goback'ing that page
 // reconnect securely in tls mode
 $this->http->ensure_tls($this->href());
 
-$prefix		= $this->db->table_prefix;
+$prefix		= $this->prefix;
 
 if ($code = (string) ($_REQUEST['secret_code'] ?? null))
 {

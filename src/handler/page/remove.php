@@ -166,7 +166,7 @@ if ($this->is_admin()
 			// get list of pages in the cluster
 			if ($list = $this->db->load_all(
 			"SELECT page_id " .
-			"FROM " . $this->db->table_prefix . "page " .
+			"FROM " . $this->prefix . "page " .
 			"WHERE tag LIKE " . $this->db->q($this->tag . '/%') . " "))
 			{
 				// remove by one page at a time
@@ -185,7 +185,7 @@ if ($this->is_admin()
 		if ($owner_id = $this->page['owner_id'])
 		{
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "user " .
+				"UPDATE " . $this->prefix . "user " .
 				($comment_on_id
 					? "SET total_comments	= total_comments	- 1 "
 					: "SET total_pages		= total_pages		- 1 "

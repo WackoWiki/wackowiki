@@ -25,14 +25,17 @@ if ($this->has_access('read')
 	];
 	$mode			= (string) ($_GET[$mod_selector] ?? '');
 	$dir			= (string) ($_GET['dir'] ?? '');
+	$lang			= (string) ($_GET['lang'] ?? '');
 	$order			= (string) ($_GET['order'] ?? '');
 	$phrase			= (string) ($_GET['phrase'] ?? '');
 
 	$mode			= array_key_exists($mode, $tabs) ? $mode : '';
 	$dir			= in_array($dir, ['asc', 'desc']) ? $dir : 'asc';
+	$lang			= $this->known_language($lang) ? $lang : '';
 	$order			= in_array($order, ['ext', 'name', 'size', 'time']) ? $order : 'name';
 
 	$p_dir			= $dir		? ['dir'	=> $dir]	: [];
+	$p_lang			= $lang		? ['lang'	=> $lang]	: [];
 	$p_order		= $order	? ['order'	=> $order]	: [];
 	$p_phrase		= $phrase	? ['phrase'	=> $phrase]	: [];
 
@@ -40,7 +43,7 @@ if ($this->has_access('read')
 
 	$tpl->upload	= $this->can_upload();
 	$tpl->header	= $this->_t($tabs[$mode]);
-	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', $p_dir + $p_order + $p_phrase, $mod_selector);
+	$tpl->tabs		= $this->tab_menu($tabs, $mode, 'attachments', $p_dir + $p_lang + $p_order + $p_phrase, $mod_selector);
 
 	if ($mode)
 	{

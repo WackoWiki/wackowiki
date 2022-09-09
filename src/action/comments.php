@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 $load_recent_comments = function ($tag, $limit, $deleted = 0)
 {
 	$pagination	= [];
-	$prefix		= $this->db->table_prefix;
+	$prefix		= $this->prefix;
 
 	$selector =
 		"WHERE " .

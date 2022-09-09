@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 $load_wanted = function ($cluster, $limit, $deleted = 0)
 {
 	$pagination	= [];
-	$pref		= $this->db->table_prefix;
+	$pref		= $this->prefix;
 
 	$selector =
 		"SELECT DISTINCT l.to_tag AS wanted_tag " .

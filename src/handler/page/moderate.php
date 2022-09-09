@@ -20,7 +20,7 @@ $moderate_page_exists = function($tag)
 {
 	if ($this->db->load_single(
 		"SELECT page_id " .
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $this->prefix . "page " .
 		"WHERE tag = " . $this->db->q($tag) . " " .
 		"LIMIT 1"))
 	{
@@ -108,7 +108,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 
 			// move comments to the base topic
 			$this->db->sql_query(
-				"UPDATE " . $this->db->table_prefix . "page SET " .
+				"UPDATE " . $this->prefix . "page SET " .
 					"comment_on_id = " . (int) $base_id . " " .
 				"WHERE comment_on_id = " . (int) $topic_id);
 
@@ -120,7 +120,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 
 				foreach ($status as $row)
 				{
-					if ($row['Name'] == $this->db->table_prefix . 'page')
+					if ($row['Name'] == $this->prefix . 'page')
 					{
 						$num = (int) $row['Auto_increment'];
 					}
@@ -133,7 +133,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 
 				// restore creation date
 				$this->db->sql_query(
-					"UPDATE " . $this->db->table_prefix . "page SET " .
+					"UPDATE " . $this->prefix . "page SET " .
 						"modified		= " . $this->db->q($page['modified']) . ", " .
 						"created		= " . $this->db->q($page['created']) . ", " .
 						"commented		= " . $this->db->q($page['commented']) . ", " .
@@ -160,7 +160,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 	// update page_link table
 	$comments = $this->db->load_all(
 		"SELECT page_id, tag, body_r " .
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $this->prefix . "page " .
 		"WHERE comment_on_id = " . (int) $base_id);
 
 	foreach ($comments as $comment)
@@ -179,7 +179,7 @@ $moderate_merge_topics = function($base, $topics, $move_topics = true) use ($mod
 
 	// recount comments for the base topic
 	$this->db->sql_query(
-		"UPDATE " . $this->db->table_prefix . "page SET " .
+		"UPDATE " . $this->prefix . "page SET " .
 			"comments	= " . (int) $this->count_comments($base_id) . ", " .
 			"commented	= UTC_TIMESTAMP() " .
 		"WHERE page_id = " . (int) $base_id . " " .
@@ -243,7 +243,7 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 
 	// restore original metadata
 	$this->db->sql_query(
-		"UPDATE " . $this->db->table_prefix . "page SET " .
+		"UPDATE " . $this->prefix . "page SET " .
 			"modified		= " . $this->db->q($page['modified']) . ", " .
 			"created		= " . $this->db->q($page['created']) . ", " .
 			"owner_id		= " . (int) $page['owner_id'] . ", " .
@@ -255,7 +255,7 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 	foreach ($comment_ids as $comment_id)
 	{
 		$this->db->sql_query(
-			"UPDATE " . $this->db->table_prefix . "page SET " .
+			"UPDATE " . $this->prefix . "page SET " .
 				"comment_on_id = " . (int) $new_page_id . " " .
 			"WHERE page_id = " . (int) $comment_id);
 
@@ -279,14 +279,14 @@ $moderate_split_topic = function($comment_ids, $old_tag, $new_tag, $title) use (
 
 	// recount comments for old and new topics
 	$this->db->sql_query(
-		"UPDATE " . $this->db->table_prefix . "page SET " .
+		"UPDATE " . $this->prefix . "page SET " .
 			"comments	= " . (int) $this->count_comments($new_page_id) . ", " .
 			"commented	= UTC_TIMESTAMP() " .
 		"WHERE page_id = " . (int) $new_page_id . " " .
 		"LIMIT 1");
 
 	$this->db->sql_query(
-		"UPDATE " . $this->db->table_prefix . "page SET " .
+		"UPDATE " . $this->prefix . "page SET " .
 			"comments = " . (int) $this->count_comments($old_page_id) . " " .
 		"WHERE page_id = " . (int) $old_page_id . " " .
 		"LIMIT 1");
@@ -317,7 +317,7 @@ if (!$this->page || $this->page['comment_on_id'])
 }
 
 $forum_cluster	= '';
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 
 if (($this->is_moderator() && $this->has_access('read')) || $this->is_admin())
 {

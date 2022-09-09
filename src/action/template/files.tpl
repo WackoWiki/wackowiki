@@ -1,43 +1,87 @@
 [ === main === ]
-	[ '' pagination '' ]
 	[= s =
-		<form action="[ ' href: attachments ' ]" method="get" name="file_search">
+		<form action="[ ' href ' ]" method="get" name="file_search">
 			[ ' csrf: file_search ' ]
 			[ ' href: attachments | hide_page ' ]
 			<input type="hidden" name="files" value="[ ' filter | e attr ' ]">
 			<table class="formation">
 				<tr>
-					<td class="label">
-						<label for="search_file">[ ' _t: FileSearch ' ]</label>
-					</td>
 					<td>
-						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase | e attr ' ]">
+						<label for="search_file" class="visuallyhidden">[ ' _t: FileSearch ' ]</label>
+						<input type="search" name="phrase" id="search_file" size="40" value="[ ' phrase | e attr ' ]" title="[ ' _t: FileSearch ' ]" placeholder="[ ' _t: FileSearch ' ]">
 						<button type="submit">[ ' _t: SearchButton ' ]</button>
 					</td>
 				</tr>
 				[= options _ =
-					[= l _ =
-					<td class="label">
-						<label for="order">[ ' _t: SortBy ' ]</label>
-					</td>
+				<tr>
 					<td>
-						<select name="order">
-							[= o _ =
-								<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
-							=]
-						</select>
-						<select name="dir">
-							[= d _ =
-								<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
-							=]
-						</select>
+						<table>
+							<tr>
+								[= l _ =
+								<td colspan=2>
+									<label for="order">[ ' _t: SortBy ' ]</label><br>
+									<select name="order">
+										[= o _ =
+											<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
+										=]
+									</select>
+									<select name="dir">
+										[= d _ =
+											<option value="[ ' value ' ]"[ ' selected ' ]>[ ' lang ' ]</option>
+										=]
+									</select>
+								</td>
+								=]
+							</tr>
+							<tr>
+								[= lang _ =
+									<td>
+										<label for="file_lang">[ ' _t: Language ' ]</label><br>
+										<select id="file_lang" name="lang">
+											<option value="">[ ' _t: Any ' ]</option>
+											[= o _ =
+												<option value="[ ' lang ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' name ' ] ([ ' lang ' ])</option>
+											=]
+										</select>
+									</td>
+								=]
+								<td>
+									<label for="owner">[ ' _t: Owner ' ]</label><br>
+									<select id="owner" name="user_id">
+										<option value="">[ ' _t: Any ' ]</option>
+										[= u _ =
+											<option value="[ ' user.user_id | e attr ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' user.user_name | e ' ]</option>
+										=]
+									</select>
+								</td>
+								<td>
+									<label for="mime_type">[ ' _t: MimeType ' ]</label><br>
+									<select id="mime_type" name="mime">
+										<option value="">[ ' _t: Any ' ]</option>
+										[= m _ =
+											<option value="[ ' mime.mime_type | e attr ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' mime.mime_type | e ' ]</option>
+										=]
+									</select>
+								</td>
+								<td>
+									<label for="category">[ ' _t: Category ' ]</label><br>
+									<select id="category" name="category_id">
+										<option value="">[ ' _t: Any ' ]</option>
+										[= c _ =
+											<option value="[ ' category.category_id | e attr ' ]" [ ' sel | list "" 'selected ' ' ]>[ ' category.category | e ' ]</option>
+										=]
+									</select>
+								</td>
+							</tr>
+						</table>
 					</td>
-					=]
+				</tr>
 				=]
 			</table>
 			<br />
 		</form>
 	=]
+	[ '' pagination '' ]
 	[= mark =
 		<div class="layout-box">
 			<p><span>[ ' results ' ]: </span></p>

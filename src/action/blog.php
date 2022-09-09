@@ -40,7 +40,7 @@ if (!empty($tag))
 
 	$pages				= [];
 	$p_mode				= [];
-	$prefix				= $this->db->table_prefix;
+	$prefix				= $this->prefix;
 	$blog_levels		= '/.+'; // see $this->db->news_levels;
 	$action				= $_POST['_action'] ?? null;
 

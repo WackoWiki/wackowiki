@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
 //
 // for testing and improvement - thought as upgrade routine for the installer
 
-$prefix			= $this->db->table_prefix;
+$prefix			= $this->prefix;
 $charset		= 'utf8mb4';
 $collation		= 'utf8mb4_unicode_520_ci';		// Unicode (UCA 5.2.0), case-insensitive, https://dev.mysql.com/doc/refman/8.0/en/charset-collation-names.html
 
@@ -393,7 +393,7 @@ if ($this->is_admin())
 
 	$users = $this->db->load_all(
 		"SELECT user_id, user_name, LENGTH(password) AS password, email, email_confirm, signup_time, last_visit, total_pages, total_revisions, total_comments, total_uploads " .
-		"FROM " . $this->db->table_prefix . "user " .
+		"FROM " . $prefix . "user " .
 		"WHERE  LENGTH(password) = 32 OR LENGTH(password) = 64");
 
 	if ($users)
@@ -434,7 +434,7 @@ if ($this->is_admin())
 
 				// update database with the new password hash
 				$this->db->sql_query(
-					"UPDATE " . $this->db->table_prefix . "user SET " .
+					"UPDATE " . $prefix . "user SET " .
 						"password	= " . $this->db->q($hash) . " " .
 					"WHERE user_id = " . (int) $user['user_id']);
 			}
@@ -464,7 +464,7 @@ if ($this->is_admin())
 		{
 			// remove obsolete salt field
 			$this->db->sql_query(
-				"ALTER TABLE " . $this->db->table_prefix . "user DROP salt");
+				"ALTER TABLE " . $prefix . "user DROP salt");
 		}
 		else
 		{

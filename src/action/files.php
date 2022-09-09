@@ -5,12 +5,27 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
+$load_mime = function ()
+{
+	return $this->db->load_all(
+		"SELECT DISTINCT mime_type " .
+		"FROM " . $this->prefix . "file", true);
+};
+
+$load_categories = function ()
+{
+	return $this->db->load_all(
+		"SELECT category_id, category, category_lang " .
+		"FROM " . $this->prefix . "category", true);
+};
+
 /*
 	Showing uploaded by {{upload}} files
 
 	{{files
 		[page="PageName" or global=1 or all=1]
 		[order="ext|name_desc|size|size_desc|time|time_desc"]
+		[form=1]
 		[options=1]
 		[owner="UserName"]
 		[media=1]
@@ -19,12 +34,15 @@ if (!defined('IN_WACKO'))
 */
 
 // TODO:
-// - add option to filter by facets (user, language, type, type class)
+// - add option to filter by facets (user, language, category, type, type class, license)
+// - add reset button
 
-$page_id	= '';
-$ppage		= '';
+$file_name_maxlen	= 80;
 $files		= [];
 $object_ids	= [];
+$page_id	= '';
+$prefix		= $this->prefix;
+$ppage		= '';
 
 // set defaults
 $all		??= 0;	// all attachments
@@ -33,32 +51,45 @@ $deleted	??= 0;
 $dir		??= 'asc';
 $form		??= 0;	// show search form
 $global		??= 0;	// global attachments
+$lang		??= '';
 $legend		??= '';
 $linked		??= '';	// file link in page
 $max		??= null;
 $media		??= null;
 $method		??= '';	// for use in page handler
+$mime		??= '';
 $nomark		??= 0;
-$options	??= 1;
+$options	??= 0;
 $order		??= 'name';
 $owner		??= '';
 $page		??= '';
 $params		??= null;	// for $_GET parameters to be passed with the page link
 $track		??= 0;
 $type_id	??= null;
+$user_id	??= null;
 
-$order		= (string) ($_GET['order']	?? $order);
-$dir		= (string) ($_GET['dir']	?? $dir);
+// filter
+$category_id	= (int)		@$_GET['category_id'];
+$dir			= (string)	($_GET['dir']		?? $dir);
+$filter			= $_GET['files'] ?? null;
+$lang			= (string)	($_GET['lang']		?? $lang);
+$media			= (int)		($_GET['media']		?? $media);
+$mime			= (string)	($_GET['mime']		?? $mime);
+$options		= (int)		($_GET['options']	?? $options);
+$order			= (string)	($_GET['order']		?? $order);
+$phrase			= (string)	($_GET['phrase']	?? '');
+$type_id		= (int)		($_GET['type_id']	?? $type_id);
+$user_id		= (int)		($_GET['user_id']	?? $user_id);
+
+if ($lang && !$this->known_language($lang))
+{
+	$lang = '';
+	$this->set_message($this->_t('FilterLangNotAvailable'));
+}
 
 $sql_sort	= $order . ($dir == 'desc' ? '_' . $dir : '');
 
-$file_name_maxlen	= 80;
 
-// filter categories
-$phrase				= (string)	($_GET['phrase'] ?? '');
-$type_id			= (int)		($_GET['type_id'] ?? $type_id);
-$category_id		= (int)		@$_GET['category_id'];
-$filter				= $_GET['files'] ?? null;
 $file_link			= (int)		$linked;
 
 $order_by = match($sql_sort) {
@@ -123,10 +154,10 @@ if ($can_view)
 
 	$selector =
 		($category_id
-			? "INNER JOIN " . $this->db->table_prefix . "category_assignment AS k ON (k.object_id = f.file_id) "
+			? "INNER JOIN " . $prefix . "category_assignment AS k ON (k.object_id = f.file_id) "
 			: "") . " " .
 		($file_link
-			? "INNER JOIN " . $this->db->table_prefix . "file_link AS l ON (f.file_id = l.file_id) "
+			? "INNER JOIN " . $prefix . "file_link AS l ON (f.file_id = l.file_id) "
 			: "") . " " .
 			"WHERE ".
 		($all || $file_link
@@ -144,6 +175,15 @@ if ($can_view)
 		($owner
 			? "AND u.user_name = " . $this->db->q($owner) . " "
 			: '') .
+		($mime
+			? "AND f.mime_type = " . $this->db->q($mime) . " "
+			: '') .
+		($user_id
+			? "AND f.user_id = " . (int) $user_id . " "
+			: '') .
+		($lang
+			? "AND f.file_lang = " . $this->db->q($lang) . " "
+			: "") .
 		($deleted != 1
 			? "AND f.deleted <> 1 "
 			: "");
@@ -161,19 +201,27 @@ if ($can_view)
 
 	$count = $this->db->load_single(
 		"SELECT COUNT(f.file_id) AS n " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"FROM " . $prefix . "file f " .
+			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
 		$selector, true);
 
-	$pagination = $this->pagination($count['n'], $max, 'f', $params, $method);
+	$pagination = $this->pagination($count['n'], $max, 'f',
+		  (!empty($params)			? $params								: [])
+		+ (!empty($category_id)		? ['category_id'	=> $category_id]	: [])
+		+ (!empty($dir)				? ['dir'			=> $dir]			: [])
+		+ (!empty($lang)			? ['lang'			=> $lang]			: [])
+		+ (!empty($mime)			? ['mime'			=> $mime]			: [])
+		+ (!empty($order)			? ['order'			=> $order]			: [])
+		+ (!empty($user_id)			? ['user_id'		=> $user_id]		: [])
+		, $method);
 
 	// load files list
 	$files = $this->db->load_all(
 		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.created, p.owner_id, p.tag, u.user_name " .
-		"FROM " . $this->db->table_prefix . "file f " .
-			"LEFT JOIN  " . $this->db->table_prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $this->db->table_prefix . "user u ON (f.user_id = u.user_id) " .
+		"FROM " . $prefix . "file f " .
+			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
 		$selector .
 		"ORDER BY f." . $order_by . " " .
 		$pagination['limit']);
@@ -220,13 +268,15 @@ if ($can_view)
 
 		$tpl->enter('s_');
 		$tpl->filter		= $files_filter;
+		$tpl->href			= $this->href($this->method);
 		$tpl->phrase		= Ut::html($phrase);
 
 		// sort & filter
 		if ($options)
 		{
-			$tpl->options		= true;
+			$tpl->enter('options_');
 
+			// SORT
 			$orders = [
 				'ext'	=> 'FileSortExt',
 				'name'	=> 'FileSortName',
@@ -242,26 +292,73 @@ if ($can_view)
 			// select order column
 			foreach ($orders as $value => $_order)
 			{
-				$tpl->options_l_o_value	= $value;
-				$tpl->options_l_o_lang	= $this->_t($_order);
+				$tpl->l_o_value	= $value;
+				$tpl->l_o_lang	= $this->_t($_order);
 
 				if ($value == $order)
 				{
-					$tpl->options_l_o_selected	= ' selected';
+					$tpl->l_o_selected	= ' selected';
 				}
 			}
 
 			// select order direction
 			foreach ($dirs as $value => $_dir)
 			{
-				$tpl->options_l_d_value	= $value;
-				$tpl->options_l_d_lang	= $this->_t($_dir);
+				$tpl->l_d_value	= $value;
+				$tpl->l_d_lang	= $this->_t($_dir);
 
 				if ($value == $dir)
 				{
-					$tpl->options_l_d_selected	= ' selected';
+					$tpl->l_d_selected	= ' selected';
 				}
 			}
+
+			// FILTER
+			// language
+			if ($this->db->multilanguage)
+			{
+				$langs		= $this->http->available_languages();
+				$languages	= $this->_t('LanguageArray');
+
+				foreach ($langs as $_lang)
+				{
+					$tpl->lang_o_lang	= $_lang;
+					$tpl->lang_o_name	= $languages[$_lang];
+					$tpl->lang_o_sel	= (int) ($lang == $_lang);
+				}
+			}
+
+			// user
+			if ($users = $this->load_users())
+			{
+				foreach ($users as $user)
+				{
+					$tpl->u_user	= $user;
+					$tpl->u_sel		= (int) ($user_id == $user['user_id']);
+				}
+			}
+
+			// MIME
+			if ($mime_types = $load_mime())
+			{
+				foreach ($mime_types as $value)
+				{
+					$tpl->m_mime	= $value;
+					$tpl->m_sel		= (int) ($mime == $value['mime_type']);
+				}
+			}
+
+			// categories
+			if ($categories = $load_categories())
+			{
+				foreach ($categories as $value)
+				{
+					$tpl->c_category	= $value;
+					$tpl->c_sel			= (int) ($category_id == $value['category_id']);
+				}
+			}
+
+			$tpl->leave(); // options_
 		}
 
 		$tpl->leave(); // s_

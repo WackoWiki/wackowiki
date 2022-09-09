@@ -65,7 +65,7 @@ else
 // collect pages
 if ($pages = $this->db->load_all(
 	"SELECT page_id, tag, title, page_lang " .
-	"FROM " . $this->db->table_prefix . "page " .
+	"FROM " . $this->prefix . "page " .
 	"WHERE comment_on_id = 0 " .
 		($tag
 			? "AND tag LIKE " . $this->db->q($tag . '/%') . " "
@@ -112,7 +112,7 @@ if ($pages = $this->db->load_all(
 		// cache links
 		if ($links = $this->db->load_all(
 			"SELECT {$this->page_meta} " .
-			"FROM " . $this->db->table_prefix . "page " .
+			"FROM " . $this->prefix . "page " .
 			"WHERE page_id IN (" . $this->ids_string($page_ids) . ")", true))
 		{
 			foreach ($links as $link)

@@ -18,7 +18,7 @@ if ($page)
 
 	$rs = $this->db->load_single(
 		"SELECT hits " .
-		"FROM " . $this->db->table_prefix . "page " .
+		"FROM " . $this->prefix . "page " .
 		"WHERE tag = " . $this->db->q($tag) . " " .
 		"LIMIT 1");
 

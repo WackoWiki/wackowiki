@@ -68,7 +68,7 @@ else
 	// search and process co-authors
 	if ($this->page && !$add_only)
 	{
-		$prefix		= $this->db->table_prefix;
+		$prefix		= $this->prefix;
 
 		// load overall authors data from revision and page table
 		if ($_authors = $this->db->load_all(

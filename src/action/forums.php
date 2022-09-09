@@ -17,7 +17,7 @@ $pages		??= '';
 $noxml		??= 0;
 
 $comment	= null;
-$prefix		= $this->db->table_prefix;
+$prefix		= $this->prefix;
 
 // ensure that we're executing inside the forum cluster
 if (mb_substr($this->tag, 0, mb_strlen($this->db->forum_cluster)) == $this->db->forum_cluster)

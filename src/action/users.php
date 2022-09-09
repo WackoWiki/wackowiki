@@ -10,7 +10,7 @@ if (!defined('IN_WACKO'))
 $group_id	= (int) @$group_id;
 $logged_in	= $this->get_user();
 $max		= (int) @$max;
-$prefix		= $this->db->table_prefix;
+$prefix		= $this->prefix;
 $tab_mode	= $_GET['mode'] ?? '';
 
 // display user profile

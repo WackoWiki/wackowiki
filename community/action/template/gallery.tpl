@@ -31,7 +31,7 @@
 			</a>
 			[= caption _ =
 				<figcaption>
-					<span>[ ' caption ' ]</span>
+					<span>[ ' caption | truncate 80 ' ]</span>
 				</figcaption>
 			=]
 		</figure>

@@ -83,7 +83,7 @@ $limit	= 10;
 
 $pages1 = $this->db->load_all(
 	"SELECT page_id, tag " .
-	"FROM " . $this->db->table_prefix . "page " .
+	"FROM " . $this->prefix . "page " .
 	"WHERE tag LIKE " . $this->db->q($tag1 . '%') . " " .
 		"AND comment_on_id = 0 " .
 	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .
@@ -91,7 +91,7 @@ $pages1 = $this->db->load_all(
 
 $pages2 = $this->db->load_all(
 	"SELECT page_id, tag " .
-	"FROM " . $this->db->table_prefix . "page " .
+	"FROM " . $this->prefix . "page " .
 	"WHERE tag LIKE " . $this->db->q($tag2 . '%') . " " .
 		"AND comment_on_id = 0 " .
 	"ORDER BY tag COLLATE utf8mb4_unicode_520_ci ASC " .

@@ -27,7 +27,7 @@ $full_text_search = function ($phrase, $tag, $limit, $scope, $filter = [], $dele
 {
 	$category_id	= null;
 	$lang			= null;
-	$prefix			= $this->db->table_prefix;
+	$prefix			= $this->prefix;
 	extract($filter, EXTR_IF_EXISTS);
 
 	$selector =
@@ -104,7 +104,7 @@ $tag_search = function ($phrase, $tag, $limit, $scope, $filter = [], $deleted = 
 {
 	$category_id	= null;
 	$lang			= null;
-	$prefix			= $this->db->table_prefix;
+	$prefix			= $this->prefix;
 	extract($filter, EXTR_IF_EXISTS);
 
 	$selector =

@@ -35,7 +35,7 @@ if (!empty($this->db->news_cluster))
 
 	$pages				= [];
 	$p_mode				= [];
-	$prefix				= $this->db->table_prefix;
+	$prefix				= $this->prefix;
 	$news_cluster		= $this->db->news_cluster;
 	$news_levels		= $this->db->news_levels;
 	$action				= $_POST['_action'] ?? null;

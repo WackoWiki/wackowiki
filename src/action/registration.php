@@ -91,7 +91,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// INSERT user
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->table_prefix . "user " .
+				"INSERT INTO " . $this->prefix . "user " .
 				"SET " .
 					"signup_time		= UTC_TIMESTAMP(), " .
 					"user_name			= " . $this->db->q($user_name) . ", " .
@@ -104,7 +104,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 			// get new user_id
 			$_user_id = $this->db->load_single(
 				"SELECT user_id " .
-				"FROM " . $this->db->table_prefix . "user " .
+				"FROM " . $this->prefix . "user " .
 				"WHERE user_name = " . $this->db->q($user_name) . " " .
 				"LIMIT 1");
 
@@ -112,7 +112,7 @@ if (@$_POST['_action'] === 'register' && ($this->db->allow_registration || $this
 
 			// INSERT user settings
 			$this->db->sql_query(
-				"INSERT INTO " . $this->db->table_prefix . "user_setting " .
+				"INSERT INTO " . $this->prefix . "user_setting " .
 				"SET " .
 					"user_id			= " . (int) $user_id . ", " .
 					"user_lang			= " . $this->db->q($user_lang) . ", " .
