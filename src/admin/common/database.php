@@ -142,6 +142,8 @@ if (!isset($tables, $directories))
 		// CACHE_FEED_DIR,
 		// CACHE_PAGE_DIR,
 		// CACHE_SQL_DIR,
+		// CACHE_TEMPLATE_DIR,
+		// THUMB_DIR,
 		UPLOAD_GLOBAL_DIR,
 		UPLOAD_PER_PAGE_DIR
 	];
@@ -175,7 +177,7 @@ function set_pack_dir($time)
 	return $dir . '/';
 }
 
-// TODO: modify and move to UT class?
+// TODO: modify and move to Ut class?
 // https://stackoverflow.com/a/21409562
 function get_directory_size($path)
 {
@@ -348,7 +350,7 @@ function get_table(&$engine, $table, $drop = true)
 
 // extract and compress table dump into the out file
 // $tables var is a tables definition array
-function get_data(&$engine, &$tables, $pack, $table, $root = '')
+function get_data(&$engine, $tables, $pack, $table, $root = '')
 {
 	$where = '';
 	$tweak = '';
@@ -468,11 +470,17 @@ function get_data(&$engine, &$tables, $pack, $table, $root = '')
 }
 
 // store compressed WackoWiki data files into the backup pack
-function get_files(&$engine, $pack, $dir, $root)
+function get_files(&$engine, $directories, $pack, $dir, $root)
 {
 	$cluster	= '';
 	$error		= '';
 	$matches	= [];
+
+	// process only allowed directories
+	if (!in_array($dir, $directories))
+	{
+		return false;
+	}
 
 	// set file mask for cluster backup
 	if ($root && $dir == UPLOAD_PER_PAGE_DIR)

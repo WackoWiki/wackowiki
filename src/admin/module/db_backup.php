@@ -87,7 +87,7 @@ function admin_db_backup(&$engine, $module, $tables, $directories)
 			else if ($key == 'files' && $val)
 			{
 				$files[] = $val;
-				get_files($engine, $pack, $val, $root);
+				get_files($engine, $directories, $pack, $val, $root);
 			}
 		}
 
@@ -140,8 +140,8 @@ function admin_db_backup(&$engine, $module, $tables, $directories)
 			// open file with write access
 			$file = fopen($filename, 'w');
 
-			// write data (strip last semicolon
-			// off the sql) and close file
+			// write data (strip last semicolon off the sql)
+			// and close file
 			fwrite($file, $sql); // see array_pop($sql); on database.php
 			fclose($file);
 			chmod($filename, CHMOD_FILE);
@@ -248,7 +248,7 @@ function admin_db_backup(&$engine, $module, $tables, $directories)
 				$i++;
 				$check = false;
 
-				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR))
+				//if ($dir != (CACHE_FEED_DIR || CACHE_PAGE_DIR || CACHE_SQL_DIR || CACHE_TEMPLATE_DIR))
 				//{
 					$check = true;
 				//}
