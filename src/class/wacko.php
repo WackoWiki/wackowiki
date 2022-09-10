@@ -472,16 +472,17 @@ class Wacko
 	 * @param string $lang
 	 * @param boolean $set_translation
 	 * @param boolean $get_translation sets $this->notify_lang
+	 * @param boolean $update reload for theme per page lang files
 	 *
 	 * @return string previous language for reset
 	 */
-	function set_language($lang, $set_translation = false, $get_translation = false)
+	function set_language($lang, $set_translation = false, $get_translation = false, $update = false)
 	{
 		$old_lang	= $this->lang['LANG'] ?? null;
 
-		if ($old_lang != $lang && $this->known_language($lang))
+		if (($old_lang != $lang || $update) && $this->known_language($lang))
 		{
-			$this->load_translation($lang);
+			$this->load_translation($lang, $update);
 			$this->lang = &$this->languages[$lang];
 
 			setlocale(LC_CTYPE, $this->lang['locale']);
@@ -504,9 +505,9 @@ class Wacko
 	}
 
 	// TODO: refactor / normalize # better load_message_set() ?
-	function load_translation($lang): void
+	function load_translation($lang, $update = false): void
 	{
-		if ($lang && !isset($this->translations[$lang]))
+		if ($lang && (!isset($this->translations[$lang]) || $update))
 		{
 			// wacko.xy.php $wacko_translation[]
 			$wacko_translation = [];
@@ -544,7 +545,6 @@ class Wacko
 			}
 			else
 			{
-				// TODO: only default and users theme's language loaded... need to fix for themes_per_page sites w/ nonempty theme lang files
 				// theme lang files $theme_translation[]
 				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.' . $lang . '.php');
 
@@ -6322,15 +6322,15 @@ class Wacko
 		{
 			$mode = 'denied';
 		}
-		else if(in_array('*', $acl))
+		else if (in_array('*', $acl))
 		{
 			$mode = 'public';
 		}
-		else if(in_array('$', $acl))
+		else if (in_array('$', $acl))
 		{
 			$mode = 'registered';
 		}
-		else if(in_array(mb_strtolower($user['user_name']), $acl) && count($acl) == 1)
+		else if (in_array(mb_strtolower($user['user_name']), $acl) && count($acl) == 1)
 		{
 			$mode = 'private';
 		}
@@ -7001,8 +7001,12 @@ class Wacko
 				}
 			}
 
-			// TODO: ['themes_per_page'] load themes language files
-			$this->db->theme_url = $this->db->base_path . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
+			if ($this->page['theme'])
+			{
+				$this->db->theme_url = $this->db->base_path . Ut::join_path(THEME_DIR, $this->db->theme) . '/';
+				// reload theme language files
+				$this->set_language($this->user_lang, true, false, true);
+			}
 
 			// set page categories. this defines $categories (array) object property
 			$categories = $this->load_categories($this->page['page_id'], OBJECT_PAGE);
