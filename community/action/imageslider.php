@@ -44,12 +44,15 @@ else
 	$limit	= 50;
 }
 
-							$order_by = "file_name ASC";
-if ($order == 'ext')		$order_by = "file_ext ASC";
-if ($order == 'name_desc')	$order_by = "file_name DESC";
-if ($order == 'size')		$order_by = "file_size ASC";
-if ($order == 'size_desc')	$order_by = "file_size DESC";
-if ($order == 'time')		$order_by = "created DESC";
+$order_by		= match($order) {
+	'ext'			=> 'file_ext ASC',
+	'name_desc'		=> 'file_name DESC',
+	'size'			=> 'file_size ASC',
+	'size_desc'		=> 'file_size DESC',
+	'time'			=> 'created ASC',
+	'time_desc'		=> 'created DESC',
+	default			=> 'file_name ASC',
+};
 
 $width_settings			= '100%'; // 100%, 300px, etc.
 $files					= [];
@@ -331,12 +334,12 @@ if ($can_view)
 	}
 	else
 	{
-		echo '<em>' . $this->_t('FileNotFound') . '</em>';
+		echo $this->_t('FileNotFound');
 	}
 
 	unset($files);
 }
 else
 {
-	echo '<em>' . $this->_t('ActionDenied') . '</em>';
+	echo $this->_t('ActionDenied');
 }

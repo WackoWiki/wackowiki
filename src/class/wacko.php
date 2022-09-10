@@ -21,7 +21,7 @@ class Wacko
 	public $http;
 	public $sess;
 	public $dblink;
-	public $prefix;
+	public $prefix;								// alias for table prefix
 	public $page;								// requested page
 	public $tag;
 	public $module;
