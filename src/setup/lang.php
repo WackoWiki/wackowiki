@@ -44,7 +44,7 @@ else
 
 echo '<input type="hidden" value="' . $config['is_update'] . '" name="config[is_update]">';
 
-echo '<p>' . $lang['LangDesc']; . "</p>\n";
+echo '<p>' . $lang['LangDesc'] . "</p>\n";
 
 $n = 1;
 
