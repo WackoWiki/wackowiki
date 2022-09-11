@@ -1,4 +1,6 @@
-<?php if (!defined('BB2_CORE')) die('I said no cheating!');
+<?php
+
+if (!defined('BB2_CORE')) die('I said no cheating!');
 
 // Analyze requests claiming to be from CloudFlare
 

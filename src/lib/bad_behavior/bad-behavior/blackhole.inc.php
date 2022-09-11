@@ -1,4 +1,6 @@
-<?php if (!defined('BB2_CORE')) die('I said no cheating!');
+<?php
+
+if (!defined('BB2_CORE')) die('I said no cheating!');
 
 // Look up address on various blackhole lists.
 // These should not be used for GET requests under any circumstances!

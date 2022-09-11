@@ -1,4 +1,6 @@
-<?php if (!defined('BB2_CORE')) die('I said no cheating!');
+<?php
+
+if (!defined('BB2_CORE')) die('I said no cheating!');
 
 // Functions called when a request has been denied
 // This part can be gawd-awful slow, doesn't matter :)

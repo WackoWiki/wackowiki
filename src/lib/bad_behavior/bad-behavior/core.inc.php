@@ -1,4 +1,7 @@
-<?php if (!defined('BB2_CWD')) die('I said no cheating!');
+<?php
+
+if (!defined('BB2_CWD')) die('I said no cheating!');
+
 const BB2_VERSION = '2.2.24';
 
 // Bad Behavior entry point is bb2_start()
