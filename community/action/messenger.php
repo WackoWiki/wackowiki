@@ -32,7 +32,9 @@ $create_table = function() use ($prefix)
 			status TEXT NOT NULL,
 			datesent DATETIME NULL DEFAULT NULL,
 			viewrecipient TINYINT(1) DEFAULT '1',
-		PRIMARY KEY (message_id)
+		PRIMARY KEY (message_id),
+		KEY idx_user_to_id (user_to_id),
+		KEY idx_user_from_id (user_from_id)
 	);");
 
 	$this->db->sql_query(
@@ -42,7 +44,8 @@ $create_table = function() use ($prefix)
 			type TINYTEXT NOT NULL,
 			info TINYTEXT NOT NULL,
 			notes TINYTEXT,
-		PRIMARY KEY (msg_info_id)
+		PRIMARY KEY (msg_info_id),
+		KEY idx_owner_id (owner_id)
 	);");
 };
 
@@ -156,7 +159,7 @@ if ($user_id = $this->get_user_id())
 
 		foreach ($result as $row )
 		{
-			// setzt Zeichen für Status der Nachricht (wichtig/gelesen/beantwortet)
+			// sets mark for status of message (important/read/answered)
 			if ($row['status'] == 'pending')
 			{
 				$status = '<a title="' . $this->_t('MessageNotRead') . '"><span class="cite">*</span></a>';
@@ -213,7 +216,7 @@ if ($user_id = $this->get_user_id())
 
 		if ($count['n'] == 0)
 		{
-			echo '<br>' . $this->_t('NoMessagesInbox') . '<br><br>';
+			$tpl->none = true;
 		}
 
 		$tpl->leave(); // b_
@@ -259,7 +262,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // c_
 	}
 
-	// [D] Antwort an den Absender einer Nachricht schicken
+	// [D] Send reply to the sender of a message
 	else if ($action == 'reply')
 	{
 		$row = $this->db->load_single(
@@ -287,7 +290,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // d_
 	}
 
-	// [E] Nachricht weiterleiten
+	// [E] Forward message
 	else if ($action == 'forward' && $message_id != '')
 	{
 		$row = $this->db->load_single(
@@ -338,7 +341,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // e_
 	}
 
-	// [F] schreibt versendete Nachrichten (original/weitergeleitet) in die Datenbank
+	// [F] writes sent messages (original/forwarded) to the database
 	if ($action == 'store')
 	{
 		$urgent		= (int) ($_POST['urgent'] ?? null);
@@ -351,7 +354,7 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('f_');
 
-		// prüft ob der Nutzer existiert und versendet die Nachricht
+		// checks if the user exists and sends the message
 		if ($subject == '' || $message == '' || $to == '')
 		{
 			$tpl->x_hrefcompose	= $this->href('', '', ['action' => 'compose']);
@@ -405,7 +408,7 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->leave(); // f_
 	}
-	// [G] zeigt den Ordner "versendete Nachrichten"
+	// [G] shows the "sent messages" folder
 	else if ($action == 'sent')
 	{
 		// needed for pagination of sent box
@@ -474,7 +477,7 @@ if ($user_id = $this->get_user_id())
 				AND viewrecipient = '1'
 			ORDER BY datesent DESC");
 
-		//needed for pagination of sent box
+		// needed for pagination of sent box
 		$limit = 10;
 
 		$selector =
@@ -639,7 +642,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // j_
 	}
 
-	// [K] Nachrichten löschen (geändert - Nachrichten werden jetzt komplett aus Datenbank entfernt)
+	// [K] Delete messages (changed - messages are now completely removed from database)
 	else if ($action == 'delete')
 	{
 		if ($_POST['delete_message'])
@@ -658,7 +661,7 @@ if ($user_id = $this->get_user_id())
 		}
 	}
 
-	// [L] Kontaktliste verwalten
+	// [L] Manage contacts list
 	else if ($action == 'contacts')
 	{
 		$add_contact	= $_GET['contact'] ?? '';
@@ -669,6 +672,7 @@ if ($user_id = $this->get_user_id())
 		else {$insert = '';}
 		$field2_value	= $_POST['field2_value'] ?? null;
 		$category		= 'contact';
+		$in_list		= [];
 
 		if ($insert)
 		{
@@ -718,7 +722,7 @@ if ($user_id = $this->get_user_id())
 
 		foreach ($contacts as $contact)
 		{
-			$in_list[] 				= $contact['info'];
+			$in_list[]				= $contact['info'];
 			$tpl->c_username		= $contact['user_name'];
 			$tpl->c_notes			= strip_tags($contact['notes']);
 			$tpl->c_hrefcompose		= $this->href('', '', ['action' => 'compose', 'to' => $contact['info']]);
@@ -742,7 +746,7 @@ if ($user_id = $this->get_user_id())
 		$tpl->leave(); // l_
 	}
 
-	// [M] Ordner verwalten
+	// [M] Manage folders
 	else if ($action == 'folders')
 	{
 		$delete_folder	= $_GET['delete_folder'] ?? null;

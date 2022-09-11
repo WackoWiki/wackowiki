@@ -8654,12 +8654,13 @@ class Wacko
 							$out .= "\t<ul>\n";
 						}
 
-						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
-									($can_edit
-										? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">' . "\n\t\t\t"
-										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
-									'<label for="category' . $category_id . '">' . Ut::html($word['category']) . '</label>' . "\n\t\t" .
-								'</li>' . "\n";
+						$out .= "\t\t" .
+							'<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
+								($can_edit
+									? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">' . "\n\t\t\t"
+									: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
+								'<label for="category' . $category_id . '">' . Ut::html($word['category']) . '</label>' . "\n\t\t" .
+							'</li>' . "\n";
 					}
 				}
 
@@ -8692,7 +8693,9 @@ class Wacko
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<button type="submit" id="submit" name="save">' . $this->_t('CategoriesStoreButton') . '</button> ' .
-						'<a href="' . $this->href('') . '" class="btn-link"><button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button></a>' . "<br>\n" .
+						'<a href="' . $this->href('') . '" class="btn-link">' .
+							'<button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button>' .
+						'</a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}
@@ -8704,7 +8707,10 @@ class Wacko
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button></a>' . "\n";
+				$out .=
+					'<a href="' . $this->href('') . '" class="btn-link">' .
+						'<button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button>' .
+					'</a>' . "\n";
 			}
 		}
 

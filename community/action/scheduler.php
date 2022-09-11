@@ -264,15 +264,15 @@ else if ($mode == 'month')
 
 		if ($tag == $todaydate)
 		{
-			$style1 = '<span style="color: #FF0000"><b>';
-			$style2 = '</b></span>';
-			$token = 'yes';
+			$style1	= '<span style="color: #FF0000"><b>';
+			$style2	= '</b></span>';
+			$token	= true;
 		}
 		else
 		{
-			$style1 = '';
-			$style2 = '';
-			$token = 'no';
+			$style1	= '';
+			$style2	= '';
+			$token	= false;
 		}
 
 		// code to determine what data should be entered into each cell
@@ -293,7 +293,7 @@ else if ($mode == 'month')
 		// replace <newline> with <br>
 		$dayoutput	= str_replace("\n", "<br>", $dayoutput);
 
-		if ($token == 'yes')
+		if ($token)
 		{
 			# $printme = '<a href="' . $this->href('', '', ['mode' => $mode_day, 'day' => $day, 'month' => $month, 'year' => $year, '#' => 'entry-box']) . '"><small>[Print Day]</small></a>';
 		}
@@ -330,7 +330,7 @@ else if ($mode == 'month')
 	$tpl->dlabel		= $username . ' ' . $this->_t('SchedDayLabel') . ' ' . $display_date;
 
 	$tpl->hrefform		= $this->href('', '', ['mode' => $mode_month, 'month' => $month, 'day' => $today, 'year' => $year]);
-	$tpl->schedule	= $schedule;
+	$tpl->schedule		= $schedule;
 
 	$tpl->leave(); // month_
 }
@@ -422,7 +422,7 @@ else if ($mode == 'default')
 	$tpl->nextday		= $href_next_day;
 
 	$tpl->hrefform		= $this->href('', '', ['mode' => $mode_default, 'month' => $month, 'day' => $today, 'year' => $year]);
-	$tpl->schedule	= $schedule;
+	$tpl->schedule		= $schedule;
 
 	$tpl->leave(); // f_
 	$tpl->leave(); // default_
