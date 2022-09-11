@@ -5,12 +5,15 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-/* messenger action:
+/*
+ * messenger action:
  * https://wackowiki.org/doc/Dev/PatchesHacks/WikiMessenger
  * modify the script for your needs, please conribute your improvements
+ *
+ * {{messenger}} (without parameters)
+ *
+ * requires messenger & messenger_info table in MySQL-Database
  */
-
-// Aufrufen: {{messenger}} (ohne parameter). Benötigt: 2 Tabellen in MYSQL-Datenbank & sowie diese Datei, welche in den Ordner "action" eingefügt werden muss.
 
 $prefix = $this->prefix;
 
