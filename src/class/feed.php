@@ -31,15 +31,20 @@ class Feed
 
 	function write_file($name, $body): void
 	{
-		$file_name = Ut::join_path(XML_DIR, $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml');
+		$file_name = Ut::join_path(XML_DIR, $name);
 		@file_put_contents($file_name, $body);
 		@chmod($file_name, CHMOD_FILE);
+	}
+
+	function xml_name($name)
+	{
+		return $name . '_' . preg_replace('/[^a-zA-Z\d]/', '', mb_strtolower($this->engine->db->site_name)) . '.xml';
 	}
 
 	function changes(): void
 	{
 		$limit	= 30;
-		$name	= 'changes';
+		$name	= $this->xml_name('changes');
 		$count	= '';
 
 		$this->engine->canonical = true;
@@ -105,7 +110,7 @@ class Feed
 	function feed($feed_cluster = ''): void
 	{
 		$limit			= 10;
-		$name			= 'news';
+		$name			= $this->xml_name('news');
 		$news_cluster	= empty($feed_cluster) ? $this->engine->db->news_cluster : $feed_cluster;
 		$news_levels	= $this->engine->db->news_levels;
 		$prefix			= $this->engine->db->table_prefix;
@@ -220,7 +225,7 @@ class Feed
 	function comments(): void
 	{
 		$limit	= 20;
-		$name	= 'comments';
+		$name	= $this->xml_name('comments');
 		$count	= '';
 		$access	= '';
 
@@ -280,7 +285,6 @@ class Feed
 							'<pubDate>' . date('r', strtotime($comment['created'])) . '</pubDate>' . "\n" .
 							'<dc:creator>' . $comment['user_name'] . '</dc:creator>' . "\n" .
 							'<description><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></description>' . "\n" .
-							#'<content:encoded><![CDATA[' . str_replace(']]>', ']]&gt;', $text) . ']]></content:encoded>' . "\n" .
 						'</item>' . "\n";
 				}
 			}
@@ -325,11 +329,6 @@ class Feed
 				// for href()
 				$this->engine->cache_page($page, true);
 
-				$xml .= '<url>' . "\n";
-
-				$xml .= '<loc>' . $this->engine->href('', $page['tag'], null, null, null, null, false, true) . '</loc>' . "\n";
-				$xml .= '<lastmod>' . substr($page['modified'], 0, 10)  . '</lastmod>' . "\n";
-
 				// days since last change
 				$days_last_change = (time() - strtotime($page['modified'])) / DAYSECS;
 
@@ -350,12 +349,12 @@ class Feed
 					$freq = 'yearly';
 				}
 
-				$xml .= '<changefreq>' . $freq . '</changefreq>' . "\n";
-
-				// TODO: The only thing I'm not sure about how to handle dynamically...
-				# $xml .= '<priority>0.8</priority>' . "\n";
-
-				$xml .= '</url>' . "\n";
+				$xml .=
+					'<url>' . "\n" .
+						'<loc>' . $this->engine->href('', $page['tag'], null, null, null, null, false, true) . '</loc>' . "\n" .
+						'<lastmod>' . substr($page['modified'], 0, 10)  . '</lastmod>' . "\n" .
+						'<changefreq>' . $freq . '</changefreq>' . "\n" .
+					'</url>' . "\n";
 			}
 		}
 
@@ -367,14 +366,12 @@ class Feed
 			$file		= gzopen($file_name, 'wb' . BACKUP_COMPRESSION_RATE);
 			gzwrite($file, $xml);
 			gzclose($file);
+			@chmod($file_name, CHMOD_FILE);
 		}
 		else
 		{
-			$file_name	= Ut::join_path(XML_DIR, SITEMAP_XML);
-			file_put_contents($file_name, $xml);
+			$this->write_file(SITEMAP_XML, $xml);
 		}
-
-		@chmod($file_name, CHMOD_FILE);
 	}
 
 	// OpenSearch XML description file
@@ -392,9 +389,7 @@ class Feed
 				'<Url type="text/html" method="get" template="' . $this->engine->href('', $this->engine->db->search_page) . '?phrase={searchTerms}" />' . "\n" .
 			'</OpenSearchDescription>';
 
-		$file_name = Ut::join_path(XML_DIR, 'opensearch.xml');
-		file_put_contents($file_name, $xml);
-		@chmod('opensearch.xml', CHMOD_FILE);
+		$this->write_file('opensearch.xml', $xml);
 		$this->engine->canonical = false;
 	}
 }

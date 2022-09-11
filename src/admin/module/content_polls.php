@@ -23,7 +23,7 @@ function admin_content_polls(&$engine, &$module)
 	$moderation = '';
 
 ?>
-	<h1><?php echo $engine->_t($module['mode'])['title']; ?></h1>
+	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 <?php
 	// create polls object
@@ -31,7 +31,7 @@ function admin_content_polls(&$engine, &$module)
 
 	// define context
 	$admin		= true; #$engine->is_admin();
-	$mode		= $module['mode'];
+	$mode		= $module;
 	$mode_http	= '';
 
 	// processing input
