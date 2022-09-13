@@ -110,18 +110,18 @@ if (!array_key_exists($mode, $tabs))
 $tpl->tabs		= $this->tab_menu($tabs, $mode, '', ['month' => $month, 'day' => $today, 'year' => $year], $mod_selector);
 $tpl->mode		= $mode;
 
-// $monthname = $month;
-$lastday		= $get_last_day_of_month($month, $year);
+// $month_name = $month;
+$last_day		= $get_last_day_of_month($month, $year);
 $tmpd			= getdate(mktime(0, 0, 0, $month, 1, $year));
-#$monthname		= $tmpd['month'];
-$firstwday		= $tmpd['wday'];
+#$month_name		= $tmpd['month'];
+$firstw_day		= $tmpd['wday'];
 
 	$month_loc		= $months();
-	$monthname		= $month_loc[(int) $month - 1];
+	$month_name		= $month_loc[(int) $month - 1];
 
-	$display_date	= $today . '. ' . $monthname . ' ' . $year . ':';
+	$display_date	= $today . '. ' . $month_name . ' ' . $year . ':';
 
-$username		= $this->get_user_name();
+$user_name		= $this->get_user_name();
 $user_id		= $this->get_user_id();
 
 $schedule		= $_POST['schedule'] ?? '';
@@ -190,8 +190,8 @@ $result = $this->db->load_single(
 
 $schedule	= $result['schedule'] ?? '';
 
-$href_prev_day		= $this->href('', '', ['mode' => $mode, 'day' => (($today - 1) < 1) ? $lastday : $today - 1, 'year' => $year, 'month' => $month]);
-$href_next_day		= $this->href('', '', ['mode' => $mode, 'day' => (($today + 1) > $lastday) ? 1 : $today + 1, 'year' => $year, 'month' => $month]);
+$href_prev_day		= $this->href('', '', ['mode' => $mode, 'day' => (($today - 1) < 1) ? $last_day : $today - 1, 'year' => $year, 'month' => $month]);
+$href_next_day		= $this->href('', '', ['mode' => $mode, 'day' => (($today + 1) > $last_day) ? 1 : $today + 1, 'year' => $year, 'month' => $month]);
 $href_prev_month	= $this->href('', '', ['mode' => $mode, 'month' => (($month - 1) < 1) ? 12 : $month - 1, 'year' => (($month - 1) < 1) ? $year - 1 : $year]);
 $href_next_month	= $this->href('', '', ['mode' => $mode, 'month' => (($month + 1) > 12) ? 1 : $month + 1, 'year' => (($month + 1) > 12) ? $year + 1 : $year]);
 
@@ -203,11 +203,11 @@ else if ($mode == 'day')
 {
 	$tpl->enter('day_');
 	$printout		= str_replace("\n", '<hr></td></tr><tr align="left"><td>', $schedule);
-	$printowner		= $username . ' ' . $this->_t('SchedLabel');
+	$print_owner	= $user_name . ' ' . $this->_t('SchedLabel');
 
 	$tpl->prevday	= $href_prev_day;
 	$tpl->nextday	= $href_next_day;
-	$tpl->label		= $printowner . ' ' . $display_date;
+	$tpl->label		= $print_owner . ' ' . $display_date;
 
 	if ($user = $this->get_user())
 	{
@@ -224,7 +224,7 @@ else if ($mode == 'month')
 
 	$tpl->prevmonth	= $href_prev_month;
 	$tpl->nextmonth	= $href_next_month;
-	$tpl->label		= $username . ' ' . $this->_t('SchedCalendarLabel') . ' ' . $monthname . ' ' . $year;
+	$tpl->label		= $user_name . ' ' . $this->_t('SchedCalendarLabel') . ' ' . $month_name . ' ' . $year;
 
 	foreach ($weekdays() as $weekday)
 	{
@@ -232,40 +232,53 @@ else if ($mode == 'month')
 	}
 
 	//shift one left circular, now we calculate with 1..7
-	if ($firstwday == 0)
+	if ($firstw_day == 0)
 	{
-		$firstwday = 7;
+		$firstw_day = 7;
 	}
 
-	//$firstwday = (($firstwday + 7) % 7);
-	$wday			= $firstwday;
-	$firstweek		= true;
+	//$firstw_day = (($firstw_day + 7) % 7);
+	$wday			= $firstw_day;
+	$first_week		= true;
 	$day			= 1;
+	$today_date		= date('Y:m:d', time());
+
+	// code to determine what data should be entered into each cell
+	$results = $this->db->load_all(
+		"SELECT day, schedule
+		FROM {$prefix}scheduler
+		WHERE user_id	= '" . (int) $user_id . "'
+			AND month	= '" . (int) $month . "'
+			AND year	= '" . (int) $year . "'");
+
+	foreach ($results as $record)
+	{
+		$result[$record['day']] = $record['schedule'];
+	}
 
 	$tpl->enter('d_');
 
 	// loop through all the days of the month
-	while ($day <= $lastday)
+	while ($day <= $last_day)
 	{
 		// set up blank days for first week
-		if ($firstweek)
+		if ($first_week)
 		{
 			$tpl->first = true;
 
-			// firstwday contains the starting day of the current month
-			for ($i = 1; $i < $firstwday; $i++)
+			// firstw_day contains the starting day of the current month
+			for ($i = 1; $i < $firstw_day; $i++)
 			{
 				$tpl->first_b_n = true;
 			}
 
-			$firstweek = false;
+			$first_week = false;
 		}
 
 		// check for event
 		$tag		= $year . ':' . $month . ':' . $day;
-		$todaydate	= date('Y:m:d', time());
 
-		if ($tag == $todaydate)
+		if ($tag == $today_date)
 		{
 			$style1	= '<span style="color: #FF0000"><b>';
 			$style2	= '</b></span>';
@@ -279,15 +292,15 @@ else if ($mode == 'month')
 		}
 
 		// code to determine what data should be entered into each cell
-		$result = $this->db->load_single(
+		/* $result = $this->db->load_single(
 			"SELECT schedule
 			FROM {$prefix}scheduler
 			WHERE user_id	= '" . (int) $user_id . "'
 				AND day		= '" . (int) $day . "'
 				AND month	= '" . (int) $month . "'
-				AND year	= '" . (int) $year . "'");
+				AND year	= '" . (int) $year . "'"); */
 
-		$dayoutput	= $result['schedule'] ?? '';
+		$dayoutput	= $result[$day] ?? '';
 		// replace <some text>@...\n with <some text> \n
 		$dayoutput	= preg_replace("/(.*?\w+?.*?)@(.*?)\n+?/", "$1\n", $dayoutput);
 		// replace @...\n with nothing
@@ -330,7 +343,7 @@ else if ($mode == 'month')
 
 	$tpl->prevday		= $href_prev_day;
 	$tpl->nextday		= $href_next_day;
-	$tpl->dlabel		= $username . ' ' . $this->_t('SchedDayLabel') . ' ' . $display_date;
+	$tpl->dlabel		= $user_name . ' ' . $this->_t('SchedDayLabel') . ' ' . $display_date;
 
 	$tpl->form_href		= $this->href('', '', ['mode' => $mode_month, 'month' => $month, 'day' => $today, 'year' => $year]);
 	$tpl->form_schedule	= $schedule;
@@ -343,7 +356,7 @@ else if ($mode == 'default')
 {
 	$tpl->enter('default_');
 
-	$tpl->month		= $monthname . ' ' . $year;
+	$tpl->month		= $month_name . ' ' . $year;
 	$tpl->prevmonth	= $href_prev_month;
 	$tpl->nextmonth	= $href_next_month;
 
@@ -354,38 +367,38 @@ else if ($mode == 'default')
 
 
 	//shift one left circular, now we calculate with 1..7
-	if ($firstwday == 0)
+	if ($firstw_day == 0)
 	{
-		$firstwday = 7;
+		$firstw_day = 7;
 	}
 
-	$wday			= $firstwday;
-	$firstweek		= true;
+	$wday			= $firstw_day;
+	$first_week		= true;
 	$day			= 1;
+	$today_date		= date('Y:m:d', time());
 
 	$tpl->enter('d_');
 
 	// loop through all the days of the month
-	while ($day <= $lastday)
+	while ($day <= $last_day)
 	{
 		// set up blank days for first week
-		if ($firstweek)
+		if ($first_week)
 		{
 			$tpl->first = true;
 
-			for ($i = 1; $i < $firstwday; $i++)
+			for ($i = 1; $i < $firstw_day; $i++)
 			{
 				$tpl->first_b_n = true;
 			}
 
-			$firstweek = false;
+			$first_week = false;
 		}
 
 		// check for event
 		$tag		= $year . ':' . $month . ':' . $day;
-		$todaydate	= date('Y:m:d', time());
 
-		if ($tag == $todaydate)
+		if ($tag == $today_date)
 		{
 			$style1 = '<span style="color: #FF0000"><b>';
 			$style2 = '</b></span>';
@@ -420,9 +433,9 @@ else if ($mode == 'default')
 	$tpl->enter('f_');
 
 	// title over textarea box
-	$printowner			= $username . ' ' . $this->_t('SchedLabel');
+	$print_owner		= $user_name . ' ' . $this->_t('SchedLabel');
 
-	$tpl->label			= $printowner . ' ' . $display_date;
+	$tpl->label			= $print_owner . ' ' . $display_date;
 	$tpl->prevday		= $href_prev_day;
 	$tpl->nextday		= $href_next_day;
 

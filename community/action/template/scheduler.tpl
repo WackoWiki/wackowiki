@@ -18,7 +18,7 @@
 				<b>[ ' label ' ]</b>
 				<a href="[ ' nextday ' ]">>></a>
 
-				<table class='box' width='600' border='1' cellspacing='1' cellpadding='7' bgcolor='#ddccbb'>
+				<table class="box media-center" width="600" border="1" cellspacing='1' cellpadding='7' bgcolor='#ddccbb'>
 					<tr>
 						<td>
 							<p></p>
