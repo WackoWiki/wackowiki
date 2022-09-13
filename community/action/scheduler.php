@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -11,12 +10,12 @@
  * requires scheduler table in MySQL-Database
  */
 
-$prefix			= $this->prefix;
+$prefix = $this->prefix;
 
 $create_table = function() use ($prefix)
 {
 	$this->db->sql_query(
-		"CREATE TABLE wacko_scheduler (
+		"CREATE TABLE IF NOT EXISTS {$prefix}scheduler (
 			scheduler_id INT(10) NOT NULL AUTO_INCREMENT,
 			user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
 			day TINYINT(2) NOT NULL DEFAULT '0',
@@ -196,7 +195,11 @@ $href_next_day		= $this->href('', '', ['mode' => $mode, 'day' => (($today + 1) >
 $href_prev_month	= $this->href('', '', ['mode' => $mode, 'month' => (($month - 1) < 1) ? 12 : $month - 1, 'year' => (($month - 1) < 1) ? $year - 1 : $year]);
 $href_next_month	= $this->href('', '', ['mode' => $mode, 'month' => (($month + 1) > 12) ? 1 : $month + 1, 'year' => (($month + 1) > 12) ? $year + 1 : $year]);
 
-if ($mode == 'day')
+if(!$user_id)
+{
+	$tpl->mustlogin = true;
+}
+else if ($mode == 'day')
 {
 	$tpl->enter('day_');
 	$printout		= str_replace("\n", '<hr></td></tr><tr align="left"><td>', $schedule);
@@ -305,7 +308,7 @@ else if ($mode == 'month')
 		$tpl->href			= $this->href('', '', ['day' => $day, 'month' => $month, 'year' => $year, '#' => 'entry-box']);
 		$tpl->day			= $style1 . $day . $style2 ;
 		$tpl->print			= $printme;
-		$tpl->schedule	= $dayoutput;
+		$tpl->schedule		= $dayoutput;
 
 		// nn Monday (0) start a new row
 		if ($wday == 1)
@@ -329,8 +332,10 @@ else if ($mode == 'month')
 	$tpl->nextday		= $href_next_day;
 	$tpl->dlabel		= $username . ' ' . $this->_t('SchedDayLabel') . ' ' . $display_date;
 
-	$tpl->hrefform		= $this->href('', '', ['mode' => $mode_month, 'month' => $month, 'day' => $today, 'year' => $year]);
-	$tpl->schedule		= $schedule;
+	$tpl->form_href		= $this->href('', '', ['mode' => $mode_month, 'month' => $month, 'day' => $today, 'year' => $year]);
+	$tpl->form_schedule	= $schedule;
+	$tpl->form_cols		= 90;
+	$tpl->form_rows		= 10;
 
 	$tpl->leave(); // month_
 }
@@ -421,14 +426,11 @@ else if ($mode == 'default')
 	$tpl->prevday		= $href_prev_day;
 	$tpl->nextday		= $href_next_day;
 
-	$tpl->hrefform		= $this->href('', '', ['mode' => $mode_default, 'month' => $month, 'day' => $today, 'year' => $year]);
-	$tpl->schedule		= $schedule;
+	$tpl->form_href		= $this->href('', '', ['mode' => $mode_default, 'month' => $month, 'day' => $today, 'year' => $year]);
+	$tpl->form_schedule	= $schedule;
+	$tpl->form_cols		= 65;
+	$tpl->form_rows		= 12;
 
 	$tpl->leave(); // f_
 	$tpl->leave(); // default_
 }
-else
-{
-	$tpl->mustlogin = true;
-}
-

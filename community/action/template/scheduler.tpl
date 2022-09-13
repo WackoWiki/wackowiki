@@ -6,14 +6,14 @@
 [= mustlogin _ =
 	<em>[ ' _t: SchedMustLogin ' ]</em>
 =]
-<div align="center">
+<div class="t-center">
 	<table border=0 width=100%>
 	<tr>
 		<td>
-			<div align="center">
+			<div class="t-center">
 
 		[= day _ =
-			<div align="center">
+			<div class="t-center">
 				<a href="[ ' prevday ' ]"><<</a>
 				<b>[ ' label ' ]</b>
 				<a href="[ ' nextday ' ]">>></a>
@@ -45,7 +45,7 @@
 									<table cellpadding="0" cellspacing="0" border="0" width="100%">
 										<tr>
 											<td width="20"><a href="[ ' prevmonth ' ]"><<<</a></td>
-											<td align="center"><strong>[ ' label ' ]</strong></td>
+											<td class="t-center"><strong>[ ' label ' ]</strong></td>
 											<td width="20"><a href="[ ' nextmonth ' ]">>>></a></td>
 										</tr>
 									</table>
@@ -94,18 +94,13 @@
 		<td widht=500>
 			<p></p>
 
-			<div align="center">
+			<div class="t-center">
 				<a name="entry-box"></a>
 				<a href="[ ' prevday ' ]"><<</a>
 				<b>[ ' dlabel ' ]</b>
 				<a href="[ ' nextday ' ]">>></a>
 				<br><em><small>[ ' _t: SchedCommentsNote ' ]</small></em>
-				<form action="[ ' hrefform ' ]" method="post" name="day_schedule">
-					[ ' csrf: day_schedule ' ]
-					<input type="hidden" name="save" value="true" />
-					<textarea cols="90" rows="10" name="schedule">[ ' schedule ' ]</textarea><br>
-					<button type="submit">[ ' _t: SubmitButton ' ]</button>
-				</form>
+				[ '' form '' ]
 			</div>
 		=]
 		[= default _ =
@@ -119,7 +114,7 @@
 									<table cellpadding="0" cellspacing="0" border="0" width="100%">
 										<tr bgcolor="#ffffff">
 											<td width="20"><a href="[ ' prevmonth ' ]"><<<</a></td>
-											<td align="center">[ ' month ' ]</td>
+											<td class="t-center">[ ' month ' ]</td>
 											<td width="20"><a href="[ ' nextmonth ' ]">>>></a></td>
 										</tr>
 									</table>
@@ -163,13 +158,7 @@
 			<a href="[ ' prevday ' ]"><<</a>
 			<b>[ ' label ' ]</b>
 			<a href="[ ' nextday ' ]">>></a>
-
-			<form action="[ ' hrefform ' ]" method="post" name="day_schedule">
-				[ ' csrf: day_schedule ' ]
-				<input type="hidden" name="save" value="true">
-				<textarea cols="65" rows="12" name="schedule">[ ' schedule ' ]</textarea>
-				<button type="submit">[ ' _t: SubmitButton ' ]</button>
-			</form>
+			[ '' form '' ]
 		=]
 	=]
 
@@ -177,3 +166,11 @@
 	</tr>
 </table>
 </div>
+
+[= form =]
+<form action="[ ' href ' ]" method="post" name="day_schedule">
+	[ ' csrf: day_schedule ' ]
+	<input type="hidden" name="save" value="true">
+	<textarea cols="[ ' cols ' ]" rows="[ ' rows ' ]" name="schedule">[ ' schedule ' ]</textarea><br>
+	<button type="submit">[ ' _t: SubmitButton ' ]</button>
+</form>
