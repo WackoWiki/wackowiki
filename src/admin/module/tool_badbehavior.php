@@ -23,7 +23,7 @@ function admin_tool_badbehavior(&$engine, $module)
 		require_once 'lib/bad_behavior/bad-behavior/responses.inc.php';
 	}
 
-	#Ut::debug_print_r($_POST);
+	$action = $_POST['_action'] ?? null;
 
 	function bb2_httpbl_lookup(&$engine, $ip)
 	{
@@ -650,8 +650,6 @@ function bb2_options(&$engine)
 <?php
 	echo $engine->form_open('bb2_options', ['form_more' => 'setting=bb2_options']);
 ?>
-	<input type="hidden" name="action" value="bb2_options">
-
 	<table class="setting formation">
 		<colgroup>
 			<col span="1">
@@ -831,7 +829,7 @@ function bb2_options(&$engine)
 	}
 
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'bb2_options')
+	if ($action == 'bb2_options')
 	{
 		$config['ext_bad_behavior'] = (int) $_POST['ext_bad_behavior'];
 
@@ -842,7 +840,7 @@ function bb2_options(&$engine)
 		$engine->http->redirect($engine->href());
 	}
 
-	if (isset($_POST['action']) && $_POST['action'] == 'purge_badbehavior')
+	if ($action == 'purge_badbehavior')
 	{
 		$sql = "TRUNCATE " . $engine->prefix . "badbehavior";
 		$engine->db->sql_query($sql);

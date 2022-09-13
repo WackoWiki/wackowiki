@@ -27,11 +27,11 @@ function admin_config_upload(&$engine, $module)
 	</p>
 	<br>
 <?php
-
+	$action = $_POST['_action'] ?? null;
 	$binary_factor = ['0' => 1, '1' => 1024, '2' => (1024 * 1024), '3' => (1024 * 1024 * 1024)];
 
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'upload')
 	{
 		$config['upload']					= (string) $_POST['upload'];
 		$config['upload_images_only']		= (int) ($_POST['upload_images_only'] ?? 0);
@@ -52,7 +52,6 @@ function admin_config_upload(&$engine, $module)
 
 	echo $engine->form_open('upload');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

@@ -27,8 +27,10 @@ function admin_config_security(&$engine, $module)
 	</p>
 	<br>
 	<?php
+	$action = $_POST['_action'] ?? null;
+
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'security')
 	{
 		$config['allow_registration']			= (int) ($_POST['allow_registration'] ?? 0);
 		$config['approve_new_user']				= (int) $_POST['approve_new_user'];
@@ -70,7 +72,6 @@ function admin_config_security(&$engine, $module)
 
 	echo $engine->form_open('security');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

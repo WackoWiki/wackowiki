@@ -27,8 +27,10 @@ function admin_messages(&$engine, $module)
 	</p>
 	<br>
 <?php
+	$action = $_POST['_action'] ?? null;
+
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'messages')
 	{
 		$config['system_message']			= (string) $_POST['system_message'];
 		$config['system_message']			= $engine->format($config['system_message'], 'wiki');
@@ -44,7 +46,6 @@ function admin_messages(&$engine, $module)
 
 	echo $engine->form_open('messages');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

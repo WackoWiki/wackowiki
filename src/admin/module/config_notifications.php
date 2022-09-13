@@ -27,8 +27,10 @@ function admin_config_notifications(&$engine, $module)
 	</p>
 	<br>
 <?php
+	$action = $_POST['_action'] ?? null;
+
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'notifications')
 	{
 		$config['enable_email_notification']	= (int) $_POST['enable_email_notification'];
 		$config['autosubscribe']				= (int) $_POST['autosubscribe'];
@@ -50,7 +52,6 @@ function admin_config_notifications(&$engine, $module)
 
 	echo $engine->form_open('notifications');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

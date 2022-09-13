@@ -28,12 +28,13 @@ function admin_massemail(&$engine, $module)
 	</p>
 	<br>
 	<?php
+	$action			= $_POST['_action'] ?? null;
 	$mail_subject	= (string) ($_POST['mail_subject'] ?? '');
 	$mail_body		= (string) ($_POST['mail_body'] ?? '');
 	$error			= false;
 
 	// send massmail
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'massemail')
 	{
 		$group_id		= (int) $_POST['group_id'];
 		$user_ids		= [];
@@ -128,7 +129,6 @@ function admin_massemail(&$engine, $module)
 
 	echo $engine->form_open('massemail');
 ?>
-	<input type="hidden" name="action" value="update">
 	<table class="setting formation">
 		<colgroup>
 			<col span="1">

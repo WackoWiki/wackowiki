@@ -27,6 +27,8 @@ function admin_config_email(&$engine, $module)
 	</p>
 	<br>
 	<?php
+	$action = $_POST['_action'] ?? null;
+
 	// functions
 	$validate_email = function ($email) use ($engine)
 	{
@@ -55,7 +57,7 @@ function admin_config_email(&$engine, $module)
 	}
 
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'email')
 	{
 		$config['enable_email']					= (int) $_POST['enable_email'];
 
@@ -102,7 +104,6 @@ function admin_config_email(&$engine, $module)
 
 	echo $engine->form_open('email');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

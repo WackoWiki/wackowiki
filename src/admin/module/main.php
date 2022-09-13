@@ -19,22 +19,23 @@ $module['main'] = [
 
 function admin_main(&$engine, $module)
 {
+	$action = $_POST['_action'] ?? null;
+
 	// (un)lock website
-	if (isset($_POST['action']) && $_POST['action'] == 'lock')
+	if ($action == 'lock')
 	{
 		$engine->config->lock();
 
 		$engine->http->redirect($engine->href());
 	}
 	// purge sessions
-	else if (isset($_POST['action']) && $_POST['action'] == 'purge_sessions')
+	else if ($action == 'purge_sessions')
 	{
 		# $sql = "TRUNCATE " . $engine->prefix . "auth_token";
 		# $engine->db->sql_query($sql);
 		$engine->sess->delete_cookie(AUTH_TOKEN);
 		// queries
 		# $engine->config->invalidate_sql_cache();
-
 	}
 ?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
@@ -44,7 +45,6 @@ function admin_main(&$engine, $module)
 	<?php
 	echo $engine->form_open('lock');
 	?>
-	<input type="hidden" name="action" value="lock">
 	<table style="max-width: 200px;" class="formation">
 		<tr class="hl-setting">
 			<td class="label" style="white-space: nowrap;">
@@ -63,14 +63,13 @@ function admin_main(&$engine, $module)
 	echo $engine->form_open('purge_sessions');
 ?>
 		<input type="hidden" name="mode" value="main">
-		<input type="hidden" name="action" value="purge_sessions">
 		<table style="max-width: 200px;" class="formation">
 			<tr class="hl-setting">
 				<td class="label nowrap">
 					<?php echo $engine->_t('PurgeSessionsTip');?>
 					<br><?php #echo $engine->_t('PurgeSessionsExplain');?></td>
 				<td class="t-center">
-					<?php echo (isset($_POST['action']) && $_POST['action'] == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<button type="submit" id="submit">' . $engine->_t('PurgeSessions') . '</button>');?>
+					<?php echo ($action == 'purge_sessions' ? $engine->_t('PurgeSessionsDone') : '<button type="submit" id="submit">' . $engine->_t('PurgeSessions') . '</button>');?>
 				</td>
 			</tr>
 		</table>
@@ -78,5 +77,4 @@ function admin_main(&$engine, $module)
 	echo $engine->form_close();
 	echo '<br><br>';
 	echo $engine->action('admincache');
-
 }

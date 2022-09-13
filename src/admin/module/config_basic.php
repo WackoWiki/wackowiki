@@ -23,8 +23,10 @@ function admin_config_basic(&$engine, $module)
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<?php
+	$action = $_POST['_action'] ?? null;
+
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'basic')
 	{
 		$site_name		= $engine->sanitize_text_field($_POST['site_name'], true);
 		$site_desc		= $engine->sanitize_text_field($_POST['site_desc'], true);
@@ -119,7 +121,6 @@ function admin_config_basic(&$engine, $module)
 
 	echo $engine->form_open('basic');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">
@@ -213,9 +214,6 @@ function admin_config_basic(&$engine, $module)
 				</td>
 				<td>
 				<?php
-					// TODO: add $reset option to reset sess->available_languages
-					//		for AP basic module, else the user must logout/login again
-					//		after changing the language set to be available
 					if ($engine->db->multilanguage)
 					{
 						// subset: false
