@@ -27,9 +27,10 @@ function admin_config_formatter(&$engine, $module)
 	</p>
 	<br>
 <?php
-	// update settings
+	$action = $_POST['_action'] ?? null;
 
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	// update settings
+	if ($action == 'formatter')
 	{
 		$timezone = $engine->validate_timezone($_POST['timezone']);
 
@@ -64,7 +65,6 @@ function admin_config_formatter(&$engine, $module)
 
 	echo $engine->form_open('formatter');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

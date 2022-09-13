@@ -27,6 +27,8 @@ function admin_config_pages(&$engine, $module)
 	</p>
 	<br>
 <?php
+	$action = $_POST['_action'] ?? null;
+
 	$sanitize_tag = function ($tag) use ($engine)
 	{
 		$engine->sanitize_page_tag($tag);
@@ -45,7 +47,7 @@ function admin_config_pages(&$engine, $module)
 	};
 
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'pages')
 	{
 		$config['list_count']				= (int) $_POST['list_count'];
 		$config['forum_cluster']			= (string) $sanitize_tag($_POST['forum_cluster']);
@@ -88,7 +90,6 @@ function admin_config_pages(&$engine, $module)
 
 	echo $engine->form_open('pages');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

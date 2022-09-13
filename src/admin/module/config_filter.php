@@ -34,9 +34,11 @@ function admin_config_filter(&$engine, $module)
 	</p>
 	<br>
 <?php
+	$action = $_POST['_action'] ?? null;
 	$file_name = Ut::join_path(CONFIG_DIR, 'antispam.conf');
+
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'filter')
 	{
 		// update secondary config
 		$config['spam_filter']					= (string) $_POST['spam_filter'];
@@ -58,7 +60,6 @@ function admin_config_filter(&$engine, $module)
 
 	echo $engine->form_open('filter');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

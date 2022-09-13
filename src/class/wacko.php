@@ -1011,7 +1011,9 @@ class Wacko
 	function cache_page($page, $metadata_only = false): void
 	{
 		// do not override current page
-		if ((isset($this->page['page_id']) && isset($page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only)
+		if ((isset($this->page['page_id']) && isset($page['page_id'])
+			&& $this->page['page_id'] == $page['page_id']
+			&& $metadata_only)
 			|| empty($page))
 		{
 			return;
@@ -4148,7 +4150,7 @@ class Wacko
 					$class	= ' class="' . $class . '"';
 				}
 
-				// sets only 'nofollow' as link type to internal links to protected pages
+				// sets only 'nofollow' as link type to internal links for protected pages
 				if ($rel)
 				{
 					$rel	= ' rel="' . $rel . '"';
@@ -5717,12 +5719,10 @@ class Wacko
 			return false;
 		}
 
-		if (isset($this->db->groups['Reviewer']) && is_array($this->db->groups['Reviewer']))
+		if (isset($this->db->groups['Reviewer']) && is_array($this->db->groups['Reviewer'])
+			&& in_array($this->get_user_id(), $this->db->groups['Reviewer']))
 		{
-			if (in_array($this->get_user_id(), $this->db->groups['Reviewer']))
-			{
-				return true;
-			}
+			return true;
 		}
 
 		return false;

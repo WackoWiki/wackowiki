@@ -23,8 +23,10 @@ function admin_config_basic(&$engine, $module)
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
 	<?php
+	$action = $_POST['_action'] ?? null;
+
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'basic')
 	{
 		$site_name		= $engine->sanitize_text_field($_POST['site_name'], true);
 		$site_desc		= $engine->sanitize_text_field($_POST['site_desc'], true);
@@ -118,7 +120,6 @@ function admin_config_basic(&$engine, $module)
 
 	echo $engine->form_open('basic');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

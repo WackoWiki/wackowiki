@@ -27,8 +27,10 @@ function admin_config_permissions(&$engine, $module)
 	</p>
 	<br>
 	<?php
+	$action = $_POST['_action'] ?? null;
+
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'permissions')
 	{
 		$read_acl		= $engine->sanitize_acl_syntax($_POST['default_read_acl']);
 		$write_acl		= $engine->sanitize_acl_syntax($_POST['default_write_acl']);
@@ -83,7 +85,6 @@ function admin_config_permissions(&$engine, $module)
 
 	echo $engine->form_open('permissions');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

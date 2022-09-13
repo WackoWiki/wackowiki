@@ -27,9 +27,10 @@ function admin_config_system(&$engine, $module)
 	</p>
 	<br>
 <?php
-	// update settings
+	$action = $_POST['_action'] ?? null;
 
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	// update settings
+	if ($action == 'system')
 	{
 		$config['debug']					= (int) $_POST['debug'];
 		$config['debug_sql_threshold']		= (float)$_POST['debug_sql_threshold'];
@@ -58,7 +59,6 @@ function admin_config_system(&$engine, $module)
 
 	echo $engine->form_open('system');
 ?>
-		<input type="hidden" name="action" value="update">
 		<table class="setting formation">
 			<colgroup>
 				<col span="1">

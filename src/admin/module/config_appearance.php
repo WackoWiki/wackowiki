@@ -27,6 +27,8 @@ function admin_config_appearance(&$engine, $module)
 	</p>
 	<br>
 	<?php
+	$action = $_POST['_action'] ?? null;
+
 	// functions
 	$valid_color = function ($color)
 	{
@@ -191,7 +193,7 @@ function admin_config_appearance(&$engine, $module)
 	}
 
 	// update settings
-	if (isset($_POST['action']) && $_POST['action'] == 'update')
+	if ($action == 'appearance')
 	{
 		if (isset($_FILES['logo']['tmp_name']) && is_uploaded_file($_FILES['logo']['tmp_name']))
 		{
@@ -238,10 +240,9 @@ function admin_config_appearance(&$engine, $module)
 		$engine->http->redirect($engine->href());
 	}
 
-	echo $engine->form_open('basic', ['form_more' => ' enctype="multipart/form-data" ']);
+	echo $engine->form_open('appearance', ['form_more' => ' enctype="multipart/form-data" ']);
 
 	?>
-	<input type="hidden" name="action" value="update">
 	<table class="setting formation">
 		<colgroup>
 			<col span="1">
