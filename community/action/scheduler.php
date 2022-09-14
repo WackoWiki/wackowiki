@@ -93,6 +93,8 @@ $year			= $_GET['year']			?? date('Y', time());
 $month			= $_GET['month']		?? date('m', time());
 $today			= $_GET['day']			?? date('d', time());
 
+// check for table
+# $create_table();
 
 // navigation
 $tabs	= [
@@ -290,15 +292,6 @@ else if ($mode == 'month')
 			$style2	= '';
 			$token	= false;
 		}
-
-		// code to determine what data should be entered into each cell
-		/* $result = $this->db->load_single(
-			"SELECT schedule
-			FROM {$prefix}scheduler
-			WHERE user_id	= '" . (int) $user_id . "'
-				AND day		= '" . (int) $day . "'
-				AND month	= '" . (int) $month . "'
-				AND year	= '" . (int) $year . "'"); */
 
 		$dayoutput	= $result[$day] ?? '';
 		// replace <some text>@...\n with <some text> \n

@@ -51,6 +51,8 @@ $create_table = function() use ($prefix)
 
 if ($user_id = $this->get_user_id())
 {
+	# $create_table();
+
 	$folder			= $_GET['folder'] ?? null;
 	$which			= $_REQUEST['whichfolder'] ?? null;
 	if (!$folder) {$folder = $which;}
@@ -58,6 +60,8 @@ if ($user_id = $this->get_user_id())
 	$move2folder	= $_REQUEST['move2folder'] ?? null;
 	$action			= $_GET['action'] ?? null;
 	$to				= (int) ($_GET['to'] ?? null);
+
+	$tpl->enter('x_');
 
 	// table
 	$tpl->hrefinbox		= $this->href('', '', ['action' => 'inbox']);
@@ -104,6 +108,8 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->folder = '<br><b>' . $this->_t('Folder') . ': </b>' . $which2;
 	}
+
+	$tpl->leave(); // x_
 
 	// [A] code for moving messages to folders
 	if ($move2folder)
@@ -636,7 +642,7 @@ if ($user_id = $this->get_user_id())
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->format($row['user_name']);
 			$tpl->message		= strip_tags($row['message']);
-			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_from_id']]);
+			$tpl->hrefcontact	= $this->href('', '', ['action' => 'contacts', 'contact' => $row['user_to_id']]);
 		}
 
 		$tpl->leave(); // j_

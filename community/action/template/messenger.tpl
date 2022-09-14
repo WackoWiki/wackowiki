@@ -1,40 +1,41 @@
 [ === main === ]
-
-	<script>
-	<!-- Begin
-	function textCounter(field, countfield, maxlimit)
-	{
-		if (field.value.length> maxlimit)		// if too long...trim it!
-			field.value = field.value.substring(0, maxlimit);
-				else							// otherwise, update 'characters left' counter
-			countfield.value = maxlimit - field.value.length;
-	}
-	// End -->
-	</script>
-
-	<table>
-		<tr>
-			<td> <a href="[ ' hrefinbox ' ]">[ ' _t: Inbox ' ]</a> </td>
-			<td> | <a href="[ ' hrefcompose ' ]">[ ' _t: Compose ' ]</a> </td>
-			<td> | <b>[ ' _t: Folder ' ]</b></td>
-			<td>
-				<form action="[ ' href: ' ]" method="post" name="message_folder">
-					[ ' csrf: message_folder ' ]
-					<select name="whichfolder">
-					[= o _ =
-						<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>
-					=]
-					</select>
-					<button type="submit">[ ' _t: View ' ]</button>
-				</form>
-			</td>
-			<td> | <a href="[ ' hrefsend ' ]">[ ' _t: SentItems ' ]</a> </td>
-			<td> | <b>[ ' _t: Manage ' ]: </b><a href="[ ' hreffolders ' ]">[ ' _t: Folders ' ]</a> | <a href="[ ' hrefcontacts ' ]">[ ' _t: Contacts ' ]</a> </td>
-			<td> | <a href="[ ' hrefusers ' ]">[ ' _t: Users ' ]</a></td>
-			<td> | <a href="[ ' hrefhelp ' ]">[ ' _t: Help ' ]</a></td>
-		</tr>
-	</table>
-	[ ' folder ' ]<br>
+	[= x _ =
+		<script>
+		<!-- Begin
+		function textCounter(field, countfield, maxlimit)
+		{
+			if (field.value.length> maxlimit)		// if too long...trim it!
+				field.value = field.value.substring(0, maxlimit);
+					else							// otherwise, update 'characters left' counter
+				countfield.value = maxlimit - field.value.length;
+		}
+		// End -->
+		</script>
+	
+		<table>
+			<tr>
+				<td> <a href="[ ' hrefinbox ' ]">[ ' _t: Inbox ' ]</a> </td>
+				<td> | <a href="[ ' hrefcompose ' ]">[ ' _t: Compose ' ]</a> </td>
+				<td> | <b>[ ' _t: Folder ' ]</b></td>
+				<td>
+					<form action="[ ' href: ' ]" method="post" name="message_folder">
+						[ ' csrf: message_folder ' ]
+						<select name="whichfolder">
+						[= o _ =
+							<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>
+						=]
+						</select>
+						<button type="submit">[ ' _t: View ' ]</button>
+					</form>
+				</td>
+				<td> | <a href="[ ' hrefsend ' ]">[ ' _t: SentItems ' ]</a> </td>
+				<td> | <b>[ ' _t: Manage ' ]: </b><a href="[ ' hreffolders ' ]">[ ' _t: Folders ' ]</a> | <a href="[ ' hrefcontacts ' ]">[ ' _t: Contacts ' ]</a> </td>
+				<td> | <a href="[ ' hrefusers ' ]">[ ' _t: Users ' ]</a></td>
+				<td> | <a href="[ ' hrefhelp ' ]">[ ' _t: Help ' ]</a></td>
+			</tr>
+		</table>
+		[ ' folder ' ]<br>
+	=]
 	[ ' forbidden ' ]
 	[= a _ =
 		[ ' message ' ]
@@ -47,11 +48,11 @@
 				</td>
 			</tr>
 			<tr bgcolor=#93B2DD>
-				<td width="400"><b>[ ' _t: Subject ' ]</b></td>
-				<td width=""><b>[ ' _t: Date ' ]</b></td>
-				<td width="100"><b>[ ' _t: Sender ' ]</b></td>
-				<td width="250"><b>[ ' _t: MoveToFolder ' ]</b></td>
-				<td width="80"><b>[ ' _t: Delete ' ]</b></td>
+				<th width="400">[ ' _t: Subject ' ]</th>
+				<th width="">[ ' _t: Date ' ]</th>
+				<th width="100">[ ' _t: Sender ' ]</th>
+				<th width="250">[ ' _t: MoveToFolder ' ]</th>
+				<th width="80">[ ' _t: Delete ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
@@ -74,6 +75,11 @@
 					</td>
 				</tr>
 			=]
+			[= none _ =
+				<tr>
+					<td colspan="5"><br>[ ' _t: NoMessagesInbox ' ]<br><br></td>
+				</tr>
+			=]
 		</table>
 	=]
 	[= c _ =
@@ -85,11 +91,11 @@
 						[ ' csrf: message_store ' ]
 						<table>
 							<tr>
-								<td>[ ' _t: Subject ' ]:</td>
+								<th>[ ' _t: Subject ' ]:</th>
 								<td><input type="text" name="subject" maxlength="65" size="30" value="" required></td>
 							</tr>
 							<tr>
-								<td>[ ' _t: Recipient ' ]:</td>
+								<th>[ ' _t: Recipient ' ]:</th>
 								<td>
 									<select name="to" required>
 										<option value="">[ ' _t: ChooseRecipient ' ]</option>
@@ -100,7 +106,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>[ ' _t: Message ' ]:</td>
+								<th>[ ' _t: Message ' ]:</th>
 								<td>
 									<textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2000);" onKeyUp="textCounter(this.form.message,this.form.remLen,2000);"></textarea><br>
 									<input readonly type="text" name="remLen" size="4" maxlength="4" value="2000"> [ ' _t: CharactersLeft ' ]
@@ -129,11 +135,11 @@
 			[ ' csrf: message_reply ' ]
 			<table width="400">
 				<tr>
-					<td>[ ' _t: Subject ' ]:</td>
+					<th>[ ' _t: Subject ' ]:</th>
 					<td><input readonly type="text" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
 				</tr>
 				<tr>
-					<td>[ ' _t: Recipient ' ]:</td>
+					<th>[ ' _t: Recipient ' ]:</th>
 					<td>
 						<select name="to" readonly required>
 							<option value="[ ' userid ' ]">[ ' username ' ]</option>
@@ -141,7 +147,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td>[ ' _t: Message ' ]:</td>
+					<th>[ ' _t: Message ' ]:</th>
 					<td><textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2000);" onKeyUp="textCounter(this.form.message,this.form.remLen,2000);">[ ' origmsg | pre ' ]</textarea><br>
 						<input readonly type="text" name="remLen" size="4" maxlength="4" value="2000"> [ ' _t: CharactersLeft ' ]
 					</td>
@@ -162,11 +168,11 @@
 						[ ' csrf: message_forward ' ]
 						<table>
 							<tr>
-								<td>[ ' _t: Subject ' ]:</td>
+								<th>[ ' _t: Subject ' ]:</th>
 								<td><input type="text" name="subject" maxlength="65" size="30" value="[ ' subject ' ]" required></td>
 							</tr>
 							<tr>
-								<td>[ ' _t: Recipient ' ]:</td>
+								<th>[ ' _t: Recipient ' ]:</th>
 								<td>
 									<select name="to" required>
 										<option value="">[ ' _t: ChooseRecipient ' ]</option>
@@ -203,11 +209,11 @@
 	[= f _ =
 		[= x _ =
 			<br><center><span class="cite">Ein Feld wurde nicht ausgefüllt. Es müssen alle Felder ausgefüllt sein!</span></center><br><br>
-			<a href="[ ' hrefcompose ' ]">Zurück</a>
+			<a href="[ ' hrefcompose ' ]">[ ' _t: Back ' ]</a>
 		=]
 		[= e _ =
 			<br><span class="cite">Die Nachricht konnte nicht versendet werden, da der eingetragende Empfänger kein registrierter Benutzer ist.</span><br><br>
-			<a href="[ ' hrefcompose ' ]">Zurück</a>
+			<a href="[ ' hrefcompose ' ]">[ ' _t: Back ' ]Zurück</a>
 		=]
 		[ ' sendto ' ]
 	=]
@@ -219,10 +225,10 @@
 				</td>
 			</tr>
 			<tr bgcolor=#93B2DD>
-				<td width="400"><b>[ ' _t: Subject ' ]</b></td>
-				<td width=""><b>[ ' _t: Date ' ]</b></td>
-				<td width="100"><b>[ ' _t: Recipient ' ]</b></td>
-				<td width="75"><b>[ ' _t: Read ' ]</b></td>
+				<th width="400">[ ' _t: Subject ' ]</th>
+				<th width="">[ ' _t: Date ' ]</th>
+				<th width="100">[ ' _t: Recipient ' ]</th>
+				<th width="75">[ ' _t: Read ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
@@ -243,17 +249,10 @@
 				</td>
 			</tr>
 			<tr bgcolor="#93B2DD">
-				<td>
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-						<tr>
-							<td width="400"><b> [ ' _t: Subject ' ]:</b></td>
-							<td align="right"></td>
-						</tr>
-					</table>
-				</td>
-				<td width="100"><b> [ ' _t: Sender ' ]</b></td>
-				<td width="250"><b> [ ' _t: MoveToFolder ' ]</b></td>
-				<td width="80"><b> [ ' _t: Delete ' ]</b></td>
+				<th width="400"> [ ' _t: Subject ' ]:</th>
+				<th width="100"> [ ' _t: Sender ' ]</th>
+				<th width="250"> [ ' _t: MoveToFolder ' ]</th>
+				<th width="80"> [ ' _t: Delete ' ]</th>
 			</tr>
 			[= n _ =
 				<tr>
@@ -284,9 +283,9 @@
 		[ ' forbidden ' ]
 		<table border="1" bordercolor="#666699" width="600">
 			<tr>
-				<td width="350"><strong> [ ' _t: Subject ' ]: </strong>[ ' subject ' ]</td>
+				<th width="350"> [ ' _t: Subject ' ]: </th><td>[ ' subject ' ]</td>
 				<td></td>
-				<td><strong> Von: </strong>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+				<th><strong> [ ' _t: From ' ]: </th><td>[ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 			</tr>
 			<tr>
 				<td colspan="3"><strong> [ ' _t: Message ' ]:</strong><br>[ ' message ' ]</td>
@@ -305,16 +304,16 @@
 	[= j _ =
 		<table border="1" width="600">
 			<tr>
-				<td colspan="2"><strong>[ ' _t: Subject ' ]:</strong> [ ' subject ' ]</td>
+				<th>[ ' _t: Subject ' ]: </th><td>[ ' subject ' ]</td>
 			</tr>
 			<tr>
-				<td colspan="2"><strong>[ ' _t: Recipient ' ]:</strong> [ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
+				<th>[ ' _t: Recipient ' ]: </th><td> [ ' username ' ]<small> [<a href="[ ' hrefcontact ' ]">-></a>]</small></td>
 			</tr>
 			<tr>
-				<td colspan="2"><strong>[ ' _t: Message ' ]: </strong>[ ' message ' ]</td>
+				<th>[ ' _t: Message ' ]: </th><td>[ ' message ' ]</td>
 			</tr>
 			<tr>
-				<td colspan="2"><small><strong>[ ' _t: Date ' ]: </strong>[ ' time | time_formatted ' ]</small></td>
+				<th>[ ' _t: Date ' ]: </th><td>[ ' time | time_formatted ' ]</td>
 			</tr>
 		</table>
 	=]
@@ -333,8 +332,8 @@
 			<input type="hidden" name="insert" value="1">
 			<table border="1" cellspacing="0" width="70%" align="left">
 				<tr>
-					<td><strong>[ ' _t: ContactNames ' ]</strong></td>
-					<td><strong>[ ' _t: Notes ' ]</strong></td>
+					<th>[ ' _t: ContactNames ' ]</th>
+					<th>[ ' _t: Notes ' ]</th>
 					<td> </td>
 				</tr>
 				<tr>
@@ -377,8 +376,8 @@
 			<input type="hidden" name="insert" value="1">
 			<table border="1" cellspacing='0' width="65%" align="left">
 				<tr>
-					<td><strong>[ ' _t: Folder ' ]</strong></td>
-					<td><strong>[ ' _t: Notes ' ]</strong></td>
+					<th>[ ' _t: Folder ' ]</th>
+					<th>[ ' _t: Notes ' ]</th>
 					<td> </td>
 				</tr>
 				<tr>
