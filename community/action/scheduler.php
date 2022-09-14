@@ -8,6 +8,7 @@
  * {{scheduler mode="[day|month|default]"]}}
  *
  * requires scheduler table in MySQL-Database
+ * uses 2022-01-01 format
  */
 
 $prefix = $this->prefix;
@@ -18,12 +19,12 @@ $create_table = function() use ($prefix)
 		"CREATE TABLE IF NOT EXISTS {$prefix}scheduler (
 			scheduler_id INT(10) NOT NULL AUTO_INCREMENT,
 			user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-			day TINYINT(2) NOT NULL DEFAULT '0',
-			month TINYINT(2) NOT NULL DEFAULT '0',
-			year MEDIUMINT(4) NOT NULL DEFAULT '0',
+			date VARCHAR(10) NOT NULL DEFAULT '',
 			schedule TEXT,
 		PRIMARY KEY (scheduler_id),
-		KEY idx_user_id (user_id)
+		KEY idx_user_id (user_id),
+		KEY idx_date (date)
+		UNIQUE KEY idx_time (user_id, date);
 	);");
 };
 
@@ -89,9 +90,17 @@ $mode_default	= 'default';
 $mod_selector	= 'mode';
 
 $mode			= $_GET[$mod_selector]	?? $mode_default;
-$year			= $_GET['year']			?? date('Y', time());
-$month			= $_GET['month']		?? date('m', time());
-$today			= $_GET['day']			?? date('d', time());
+$date			= $_GET['date']			?? date('Y-m-d', time());
+
+if ($date && !$this->validate_date($date))
+{
+	$date = date('Y-m-d', time());
+}
+
+$_date 			= explode('-', $date);
+$year			= $_date[0];
+$month			= $_date[1];
+$today			= $_date[2];
 
 // check for table
 # $create_table();
@@ -109,7 +118,7 @@ if (!array_key_exists($mode, $tabs))
 }
 
 // print navigation
-$tpl->tabs		= $this->tab_menu($tabs, $mode, '', ['month' => $month, 'day' => $today, 'year' => $year], $mod_selector);
+$tpl->tabs		= $this->tab_menu($tabs, $mode, '', ['date' => $date], $mod_selector);
 $tpl->mode		= $mode;
 
 // $month_name = $month;
@@ -130,54 +139,28 @@ $schedule		= $_POST['schedule'] ?? '';
 
 if (isset($_POST['save']))
 {
-	$update			= 0;
-
-	$result = $this->db->load_single(
-		"SELECT scheduler_id
-		FROM {$prefix}scheduler
-		WHERE user_id	= '" . (int) $user_id . "'
-			AND day		= '" . (int) $today . "'
-			AND month	= '" . (int) $month . "'
-			AND year	= '" . (int) $year . "'");
-
 	// added to delete the empty schedule
 	$this->db->sql_query(
 		"DELETE
 		FROM {$prefix}scheduler
 		WHERE schedule = ''");
 
-	if (!empty($result['scheduler_id']))
-	{
-		$update			= 1;
-		$scheduler_id	= $result['scheduler_id'];
-	}
-
-	if ($update)
-	{
-		$this->db->sql_query(
-			"UPDATE {$prefix}scheduler SET
-				schedule = " . $this->db->q($schedule) . "
-			WHERE user_id = '" . (int) $user_id . "'
-				AND scheduler_id = '" . (int) $scheduler_id . "'");
-	}
-	else
-	{
-		$this->db->sql_query(
-			"INSERT INTO {$prefix}scheduler (
-				user_id,
-				schedule,
-				month,
-				day,
-				year
-			)
-			VALUES (" .
-				(int) $user_id . ", " .
-				$this->db->q($schedule) . ", " .
-				(int) $month . ", " .
-				(int) $today . ", " .
-				(int) $year . "
-			)");
-	}
+	// insert / update
+	$this->db->sql_query(
+		"INSERT INTO {$prefix}scheduler (
+			user_id,
+			schedule,
+			date
+		)
+		VALUES (" .
+			(int) $user_id . ", " .
+			$this->db->q($schedule) . ", " .
+			$this->db->q($date) . "
+		)
+		ON DUPLICATE KEY UPDATE
+			user_id		= VALUES(user_id),
+			date		= VALUES(date),
+			schedule	= VALUES(schedule)");
 }
 // end
 
@@ -186,16 +169,19 @@ $result = $this->db->load_single(
 	"SELECT schedule
 	FROM {$prefix}scheduler
 	WHERE user_id	= '" . (int) $user_id . "'
-		AND day		= '" . (int) $today . "'
-		AND month	= '" . (int) $month . "'
-		AND year	= '" . (int) $year . "'");
+		AND date	= " . $this->db->q($date) . "");
 
 $schedule	= $result['schedule'] ?? '';
+// TODO: add missing 0 for month and day after
+$prev_day		= $year . '-' . $month . '-' . ((($today - 1) < 1) ? $last_day : $today - 1);
+$next_day		= $year . '-' . $month . '-' . ((($today + 1) > $last_day) ? 1 : $today + 1);
+$prev_month		= ((($month - 1) <  1) ? $year - 1 : $year) . '-' . ((($month - 1) <  1) ? 12 : $month - 1) . '-' . $today;
+$next_month		= ((($month + 1) > 12) ? $year + 1 : $year) . '-' . ((($month + 1) > 12) ?  1 : $month + 1) . '-' . $today;
 
-$href_prev_day		= $this->href('', '', ['mode' => $mode, 'day' => (($today - 1) < 1) ? $last_day : $today - 1, 'year' => $year, 'month' => $month]);
-$href_next_day		= $this->href('', '', ['mode' => $mode, 'day' => (($today + 1) > $last_day) ? 1 : $today + 1, 'year' => $year, 'month' => $month]);
-$href_prev_month	= $this->href('', '', ['mode' => $mode, 'month' => (($month - 1) < 1) ? 12 : $month - 1, 'year' => (($month - 1) < 1) ? $year - 1 : $year]);
-$href_next_month	= $this->href('', '', ['mode' => $mode, 'month' => (($month + 1) > 12) ? 1 : $month + 1, 'year' => (($month + 1) > 12) ? $year + 1 : $year]);
+$href_prev_day		= $this->href('', '', ['mode' => $mode, 'date' => $prev_day]);
+$href_next_day		= $this->href('', '', ['mode' => $mode, 'date' => $next_day]);
+$href_prev_month	= $this->href('', '', ['mode' => $mode, 'date' => $prev_month]);
+$href_next_month	= $this->href('', '', ['mode' => $mode, 'date' => $next_month]);
 
 if(!$user_id)
 {
@@ -233,7 +219,7 @@ else if ($mode == 'month')
 		$tpl->n_weekday	= $weekday;
 	}
 
-	//shift one left circular, now we calculate with 1..7
+	// shift one left circular, now we calculate with 1..7
 	if ($firstw_day == 0)
 	{
 		$firstw_day = 7;
@@ -243,19 +229,19 @@ else if ($mode == 'month')
 	$wday			= $firstw_day;
 	$first_week		= true;
 	$day			= 1;
-	$today_date		= date('Y:m:d', time());
+	$today_date		= date('Y-m-d', time());
 
 	// code to determine what data should be entered into each cell
 	$results = $this->db->load_all(
-		"SELECT day, schedule
+		"SELECT date, schedule
 		FROM {$prefix}scheduler
 		WHERE user_id	= '" . (int) $user_id . "'
-			AND month	= '" . (int) $month . "'
-			AND year	= '" . (int) $year . "'");
+			AND date	>= " . $this->db->q($year . '-' . $month .     '-' . '01') . "
+			AND date	<  " . $this->db->q($year . '-' . $month + 1 . '-' . '01') . " ");
 
 	foreach ($results as $record)
 	{
-		$result[$record['day']] = $record['schedule'];
+		$result[$record['date']] = $record['schedule'];
 	}
 
 	$tpl->enter('d_');
@@ -278,7 +264,7 @@ else if ($mode == 'month')
 		}
 
 		// check for event
-		$tag		= $year . ':' . $month . ':' . $day;
+		$tag		= $year . '-' . $month . '-' . $day;
 
 		if ($tag == $today_date)
 		{
@@ -293,7 +279,7 @@ else if ($mode == 'month')
 			$token	= false;
 		}
 
-		$dayoutput	= $result[$day] ?? '';
+		$dayoutput	= $result[$tag] ?? '';
 		// replace <some text>@...\n with <some text> \n
 		$dayoutput	= preg_replace("/(.*?\w+?.*?)@(.*?)\n+?/", "$1\n", $dayoutput);
 		// replace @...\n with nothing
@@ -304,14 +290,14 @@ else if ($mode == 'month')
 
 		if ($token)
 		{
-			# $printme = '<a href="' . $this->href('', '', ['mode' => $mode_day, 'day' => $day, 'month' => $month, 'year' => $year, '#' => 'entry-box']) . '"><small>[Print Day]</small></a>';
+			# $printme = '<a href="' . $this->href('', '', ['mode' => $mode_day, 'date' => $date, '#' => 'entry-box']) . '"><small>[Print Day]</small></a>';
 		}
 		else
 		{
 			$printme = '';
 		}
 
-		$tpl->href			= $this->href('', '', ['day' => $day, 'month' => $month, 'year' => $year, '#' => 'entry-box']);
+		$tpl->href			= $this->href('', '', ['date' => $date, '#' => 'entry-box']);
 		$tpl->day			= $style1 . $day . $style2 ;
 		$tpl->print			= $printme;
 		$tpl->schedule		= $dayoutput;
@@ -338,7 +324,7 @@ else if ($mode == 'month')
 	$tpl->nextday		= $href_next_day;
 	$tpl->dlabel		= $user_name . ' ' . $this->_t('SchedDayLabel') . ' ' . $display_date;
 
-	$tpl->form_href		= $this->href('', '', ['mode' => $mode_month, 'month' => $month, 'day' => $today, 'year' => $year]);
+	$tpl->form_href		= $this->href('', '', ['mode' => $mode_month, 'date' => $date]);
 	$tpl->form_schedule	= $schedule;
 	$tpl->form_cols		= 90;
 	$tpl->form_rows		= 10;
@@ -359,7 +345,7 @@ else if ($mode == 'default')
 	}
 
 
-	//shift one left circular, now we calculate with 1..7
+	// shift one left circular, now we calculate with 1..7
 	if ($firstw_day == 0)
 	{
 		$firstw_day = 7;
@@ -368,7 +354,7 @@ else if ($mode == 'default')
 	$wday			= $firstw_day;
 	$first_week		= true;
 	$day			= 1;
-	$today_date		= date('Y:m:d', time());
+	$today_date		= date('Y-m-d', time());
 
 	$tpl->enter('d_');
 
@@ -389,7 +375,7 @@ else if ($mode == 'default')
 		}
 
 		// check for event
-		$tag		= $year . ':' . $month . ':' . $day;
+		$tag		= $year . '-' . $month . '-' . $day;
 
 		if ($tag == $today_date)
 		{
@@ -402,7 +388,7 @@ else if ($mode == 'default')
 			$style2 = '';
 		}
 
-		$tpl->href		= $this->href('', '', ['day' => $day, 'month' => $month, 'year' => $year]);
+		$tpl->href		= $this->href('', '', ['date' => $year . '-' . $month . '-' . $day]);
 		$tpl->day		= $style1 . $day . $style2;
 
 		// Sunday start week with <tr>
@@ -432,7 +418,7 @@ else if ($mode == 'default')
 	$tpl->prevday		= $href_prev_day;
 	$tpl->nextday		= $href_next_day;
 
-	$tpl->form_href		= $this->href('', '', ['mode' => $mode_default, 'month' => $month, 'day' => $today, 'year' => $year]);
+	$tpl->form_href		= $this->href('', '', ['mode' => $mode_default, 'date' => $date]);
 	$tpl->form_schedule	= $schedule;
 	$tpl->form_cols		= 65;
 	$tpl->form_rows		= 12;

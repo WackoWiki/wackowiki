@@ -171,6 +171,6 @@
 <form action="[ ' href ' ]" method="post" name="day_schedule">
 	[ ' csrf: day_schedule ' ]
 	<input type="hidden" name="save" value="true">
-	<textarea cols="[ ' cols ' ]" rows="[ ' rows ' ]" name="schedule">[ ' schedule ' ]</textarea><br>
+	<textarea cols="[ ' cols ' ]" rows="[ ' rows ' ]" name="schedule">[ ' schedule | pre ' ]</textarea><br>
 	<button type="submit">[ ' _t: SubmitButton ' ]</button>
 </form>
