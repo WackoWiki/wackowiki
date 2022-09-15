@@ -28,6 +28,16 @@ $create_table = function() use ($prefix)
 	);");
 };
 
+// FIXME: leading zero patch
+$zero_prefix = function($string)
+{
+	return
+		(in_array($string, range(1, 9))
+			? '0'
+			: '') .
+		$string;
+};
+
 $weekdays = function($pattern = 'EEEE'): array
 {
 	$formatter = new IntlDateFormatter(
@@ -88,6 +98,7 @@ $mode_month		= 'month';
 $mode_day		= 'day';
 $mode_default	= 'default';
 $mod_selector	= 'mode';
+$today_date		= date('Y-m-d', time());
 
 $mode			= $_GET[$mod_selector]	?? $mode_default;
 $date			= $_GET['date']			?? date('Y-m-d', time());
@@ -97,20 +108,18 @@ if ($date && !$this->validate_date($date))
 	$date = date('Y-m-d', time());
 }
 
-$_date 			= explode('-', $date);
-$year			= $_date[0];
-$month			= $_date[1];
-$today			= $_date[2];
+[$year, $month, $day] = explode('-', $date);
 
 // check for table
 # $create_table();
 
 // navigation
 $tabs	= [
-			'default'	=> 'SchedMonthlyView',
-			'day'		=> 'SchedDailyView',
-			'month'		=> 'SchedMonthlyCalendar',
-		];
+	'default'	=> 'SchedMonthlyView',
+	'day'		=> 'SchedDailyView',
+	'week'		=> 'SchedWeeklyView',
+	'month'		=> 'SchedMonthlyCalendar',
+];
 
 if (!array_key_exists($mode, $tabs))
 {
@@ -130,7 +139,7 @@ $firstw_day		= $tmpd['wday'];
 	$month_loc		= $months();
 	$month_name		= $month_loc[(int) $month - 1];
 
-	$display_date	= $today . '. ' . $month_name . ' ' . $year . ':';
+	$display_date	= $day . '. ' . $month_name . ' ' . $year . ':';
 
 $user_name		= $this->get_user_name();
 $user_id		= $this->get_user_id();
@@ -172,14 +181,24 @@ $result = $this->db->load_single(
 		AND date	= " . $this->db->q($date) . "");
 
 $schedule	= $result['schedule'] ?? '';
-// TODO: add missing 0 for month and day after
-$prev_day		= $year . '-' . $month . '-' . ((($today - 1) < 1) ? $last_day : $today - 1);
-$next_day		= $year . '-' . $month . '-' . ((($today + 1) > $last_day) ? 1 : $today + 1);
-$prev_month		= ((($month - 1) <  1) ? $year - 1 : $year) . '-' . ((($month - 1) <  1) ? 12 : $month - 1) . '-' . $today;
-$next_month		= ((($month + 1) > 12) ? $year + 1 : $year) . '-' . ((($month + 1) > 12) ?  1 : $month + 1) . '-' . $today;
 
+// dates
+$prev_day		= $year . '-' . $month . '-' . $zero_prefix(((($day - 1) < 1) ? $last_day : $day - 1));
+$next_day		= $year . '-' . $month . '-' . $zero_prefix(((($day + 1) > $last_day) ? 1 : $day + 1));
+
+$prev_week		= $year . '-' . $month . '-' . $zero_prefix(((($day - 1) < 1) ? $last_day : $day - 7));
+$next_week		= $year . '-' . $month . '-' . $zero_prefix(((($day + 1) > $last_day) ? 1 : $day + 7));
+
+$prev_month		= ((($month - 1) <  1) ? $year - 1 : $year) . '-' . $zero_prefix(((($month - 1) <  1) ? 12 : $month - 1)) . '-' . $day;
+$next_month		= ((($month + 1) > 12) ? $year + 1 : $year) . '-' . $zero_prefix(((($month + 1) > 12) ?  1 : $month + 1)) . '-' . $day;
+
+// href
 $href_prev_day		= $this->href('', '', ['mode' => $mode, 'date' => $prev_day]);
 $href_next_day		= $this->href('', '', ['mode' => $mode, 'date' => $next_day]);
+
+$href_prev_week		= $this->href('', '', ['mode' => $mode, 'date' => $prev_week]);
+$href_next_week		= $this->href('', '', ['mode' => $mode, 'date' => $next_week]);
+
 $href_prev_month	= $this->href('', '', ['mode' => $mode, 'date' => $prev_month]);
 $href_next_month	= $this->href('', '', ['mode' => $mode, 'date' => $next_month]);
 
@@ -204,6 +223,7 @@ else if ($mode == 'day')
 
 	$tpl->leave(); // day_
 }
+// TODO: add week mode & tab
 else if ($mode == 'month')
 {
 	$tpl->enter('month_');
@@ -228,8 +248,7 @@ else if ($mode == 'month')
 	//$firstw_day = (($firstw_day + 7) % 7);
 	$wday			= $firstw_day;
 	$first_week		= true;
-	$day			= 1;
-	$today_date		= date('Y-m-d', time());
+	$_day			= 1;
 
 	// code to determine what data should be entered into each cell
 	$results = $this->db->load_all(
@@ -237,7 +256,7 @@ else if ($mode == 'month')
 		FROM {$prefix}scheduler
 		WHERE user_id	= '" . (int) $user_id . "'
 			AND date	>= " . $this->db->q($year . '-' . $month .     '-' . '01') . "
-			AND date	<  " . $this->db->q($year . '-' . $month + 1 . '-' . '01') . " ");
+			AND date	<  " . $this->db->q($year . '-' . $zero_prefix($month + 1) . '-' . '01') . " ");
 
 	foreach ($results as $record)
 	{
@@ -247,7 +266,7 @@ else if ($mode == 'month')
 	$tpl->enter('d_');
 
 	// loop through all the days of the month
-	while ($day <= $last_day)
+	while ($_day <= $last_day)
 	{
 		// set up blank days for first week
 		if ($first_week)
@@ -264,7 +283,7 @@ else if ($mode == 'month')
 		}
 
 		// check for event
-		$tag		= $year . '-' . $month . '-' . $day;
+		$tag		= $year . '-' . $month . '-' . $_day;
 
 		if ($tag == $today_date)
 		{
@@ -298,7 +317,7 @@ else if ($mode == 'month')
 		}
 
 		$tpl->href			= $this->href('', '', ['date' => $date, '#' => 'entry-box']);
-		$tpl->day			= $style1 . $day . $style2 ;
+		$tpl->day			= $style1 . $_day . $style2 ;
 		$tpl->print			= $printme;
 		$tpl->schedule		= $dayoutput;
 
@@ -315,7 +334,7 @@ else if ($mode == 'month')
 		}
 
 		$wday = ($wday % 7) + 1;
-		$day++;
+		$_day++;
 	}
 
 	$tpl->leave(); // d_
@@ -344,7 +363,6 @@ else if ($mode == 'default')
 		$tpl->n_weekday	= $weekday;
 	}
 
-
 	// shift one left circular, now we calculate with 1..7
 	if ($firstw_day == 0)
 	{
@@ -353,13 +371,12 @@ else if ($mode == 'default')
 
 	$wday			= $firstw_day;
 	$first_week		= true;
-	$day			= 1;
-	$today_date		= date('Y-m-d', time());
+	$_day			= 1;
 
 	$tpl->enter('d_');
 
 	// loop through all the days of the month
-	while ($day <= $last_day)
+	while ($_day <= $last_day)
 	{
 		// set up blank days for first week
 		if ($first_week)
@@ -375,7 +392,7 @@ else if ($mode == 'default')
 		}
 
 		// check for event
-		$tag		= $year . '-' . $month . '-' . $day;
+		$tag		= $year . '-' . $month . '-' . $_day;
 
 		if ($tag == $today_date)
 		{
@@ -388,8 +405,8 @@ else if ($mode == 'default')
 			$style2 = '';
 		}
 
-		$tpl->href		= $this->href('', '', ['date' => $year . '-' . $month . '-' . $day]);
-		$tpl->day		= $style1 . $day . $style2;
+		$tpl->href		= $this->href('', '', ['date' => $year . '-' . $month . '-' . $_day]);
+		$tpl->day		= $style1 . $_day . $style2;
 
 		// Sunday start week with <tr>
 		if ($wday == 1)
@@ -404,7 +421,7 @@ else if ($mode == 'default')
 		}
 
 		$wday = ($wday % 7) + 1;
-		$day++;
+		$_day++;
 	}
 
 	$tpl->leave(); // d_
