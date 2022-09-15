@@ -9,7 +9,7 @@ if (!defined('IN_WACKO'))
  *
  * gallery action:
  * https://wackowiki.org/doc/Dev/PatchesHacks/Gallery
- * modify the script for your needs, please conribute your improvements
+ * modify the script for your needs, please contribute your improvements
  *
  * requires PHP Thumb Library <https://github.com/PHPThumb/PHPThumb>
  * optional PhotoSwipe <https://photoswipe.com/>

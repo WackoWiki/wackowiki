@@ -8,7 +8,7 @@ if (!defined('IN_WACKO'))
 /*
  * messenger action:
  * https://wackowiki.org/doc/Dev/PatchesHacks/WikiMessenger
- * modify the script for your needs, please conribute your improvements
+ * modify the script for your needs, please contribute your improvements
  *
  * {{messenger}} (without parameters)
  *

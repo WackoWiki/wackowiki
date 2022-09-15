@@ -3,7 +3,7 @@
 /*
  * scheduler action:
  * https://wackowiki.org/doc/Dev/PatchesHacks/Scheduler
- * modify the script for your needs, please conribute your improvements
+ * modify the script for your needs, please contribute your improvements
  *
  * {{scheduler mode="[day|month|default]"]}}
  *
