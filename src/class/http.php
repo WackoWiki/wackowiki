@@ -440,7 +440,7 @@ class Http
 	/**
 	 * disable caching
 	 *
-	 * @param boolean $client_only - Disables only client-side caching. Optional, default is TRUE
+	 * @param bool $client_only - Disables only client-side caching. Optional, default is TRUE
 	 */
 	function no_cache($client_only = true)
 	{

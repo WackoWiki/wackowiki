@@ -117,7 +117,7 @@
 					</form>
 				</td>
 				<td width="200">
-					Um einen User zu Deiner Kontaktliste hinzuzufügen bitte <a href="[ ' hrefusers ' ]">hier</a> klicken!<br><br>
+					<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
 					<b>[ ' _t: ContactList ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
 					[= u _ =
 						<a href="[ ' hrefcompose ' ]">[ ' username ' ]</a><br>
@@ -193,7 +193,7 @@
 					</form>
 				</td>
 				<td width="200">
-					Um einen User zu Deiner Kontaktliste hinzuzufügen bitte <a href="[ ' hrefusers ' ]">hier</a> klicken!<br><br>
+					<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
 					<b>[ ' _t: ContactList ' ]:</b><br><small>([ ' _t: ClickName ' ])</small><br><br>
 					[= u _ =
 						<a href="[ ' hrefforward ' ]">[ ' username ' ]</a><br>
@@ -209,7 +209,7 @@
 		=]
 		[= e _ =
 			<br><span class="cite">Die Nachricht konnte nicht versendet werden, da der eingetragende Empfänger kein registrierter Benutzer ist.</span><br><br>
-			<a href="[ ' hrefcompose ' ]">[ ' _t: Back ' ]Zurück</a>
+			<a href="[ ' hrefcompose ' ]">[ ' _t: Back ' ]</a>
 		=]
 		[ ' sendto ' ]
 	=]
@@ -360,7 +360,7 @@
 				<td width="25"></td>
 				<td width="150">
 					<span class="cite">[ ' _t: ClickContact ' ]</span><br><br>
-					Um einen Benutzer zu Deiner Kontaktliste hinzuzufügen bitte <a href="[ ' hrefusers ' ]">hier</a> klicken!<br><br>
+					<a href="[ ' hrefusers ' ]">[ ' _t: AddUserToList ' ]</a><br><br>
 				</td>
 			</table>
 		</form>
@@ -400,9 +400,8 @@
 				<tr>
 					<td width="25"></td>
 					<td width="200">
-						<span class="cite">[ ' _t: ClickFolder ' ]</span><br><br><b>Ordner erstellen:</b><br><br>
-						Gib in das leere Feld unter <b>Ordner:</b> den Namen für den neuen Ordner ein.<br><br>In das Feld <b>Beschreibung:</b> kannst Du eine Beschreibung für den Ordner eingeben.<br><br>
-						Nun noch ein Klick auf <b>Hinzufügen</b> und der neue Ordner steht Dir zur Verfügung.
+						<span class="cite">[ ' _t: ClickFolder ' ]</span><br><br><b>[ ' _t: CreateFolder ' ]</b><br><br>
+						[ ' _t: CreateFolderHelp ' ]
 					</td>
 				</tr>
 			</table>

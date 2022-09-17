@@ -31,8 +31,8 @@ if (!defined('IN_WACKO'))
 }}
 
 TODO: config settings
-	- image_processing (boolean)
-	- thumbnails (boolean)
+	- image_processing (bool)
+	- thumbnails (bool)
 
 	- split local and global tumbs -> read access
 	- add filter for categories cat="one,two"
