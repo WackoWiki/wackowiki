@@ -12,28 +12,26 @@
 		// End -->
 		</script>
 	
-		<table>
-			<tr>
-				<td> <a href="[ ' hrefinbox ' ]">[ ' _t: Inbox ' ]</a> </td>
-				<td> | <a href="[ ' hrefcompose ' ]">[ ' _t: Compose ' ]</a> </td>
-				<td> | <b>[ ' _t: Folder ' ]</b></td>
-				<td>
-					<form action="[ ' href: ' ]" method="post" name="message_folder">
-						[ ' csrf: message_folder ' ]
-						<select name="whichfolder">
-						[= o _ =
-							<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>
-						=]
-						</select>
-						<button type="submit">[ ' _t: View ' ]</button>
-					</form>
-				</td>
-				<td> | <a href="[ ' hrefsend ' ]">[ ' _t: SentItems ' ]</a> </td>
-				<td> | <b>[ ' _t: Manage ' ]: </b><a href="[ ' hreffolders ' ]">[ ' _t: Folders ' ]</a> | <a href="[ ' hrefcontacts ' ]">[ ' _t: Contacts ' ]</a> </td>
-				<td> | <a href="[ ' hrefusers ' ]">[ ' _t: Users ' ]</a></td>
-				<td> | <a href="[ ' hrefhelp ' ]">[ ' _t: Help ' ]</a></td>
-			</tr>
-		</table>
+		<ul class="menu">
+			<li> <a href="[ ' hrefinbox ' ]">[ ' _t: Inbox ' ]</a> </li>
+			<li> <a href="[ ' hrefcompose ' ]">[ ' _t: Compose ' ]</a> </li>
+			<li> <b>[ ' _t: Folder ' ]</b><form action="[ ' href: ' ]" method="post" name="message_folder">
+					[ ' csrf: message_folder ' ]
+					<select name="whichfolder">
+					[= o _ =
+						<option value="[ ' info ' ]"[ ' selected ' ]>[ ' info ' ]</option>
+					=]
+					</select>
+					<button type="submit">[ ' _t: View ' ]</button>
+				</form>
+			</li>
+			<li> <a href="[ ' hrefsend ' ]">[ ' _t: SentItems ' ]</a> </li>
+			<li> <b>[ ' _t: Manage ' ]: </b><a href="[ ' hreffolders ' ]">[ ' _t: Folders ' ]</a> </li>
+			<li><a href="[ ' hrefcontacts ' ]">[ ' _t: Contacts ' ]</a> </li>
+			<li> <a href="[ ' hrefusers ' ]">[ ' _t: Users ' ]</a></li>
+			<li> <a href="[ ' hrefhelp ' ]">[ ' _t: Help ' ]</a></li>
+		</ul>
+
 		[ ' folder ' ]<br>
 	=]
 	[ ' forbidden ' ]
@@ -108,8 +106,7 @@
 							<tr>
 								<th>[ ' _t: Message ' ]:</th>
 								<td>
-									<textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2000);" onKeyUp="textCounter(this.form.message,this.form.remLen,2000);"></textarea><br>
-									<input readonly type="text" name="remLen" size="4" maxlength="4" value="2000"> [ ' _t: CharactersLeft ' ]
+									[ '' textarea '' ]
 								</td>
 							</tr>
 							<tr>
@@ -148,8 +145,8 @@
 				</tr>
 				<tr>
 					<th>[ ' _t: Message ' ]:</th>
-					<td><textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2000);" onKeyUp="textCounter(this.form.message,this.form.remLen,2000);">[ ' origmsg | pre ' ]</textarea><br>
-						<input readonly type="text" name="remLen" size="4" maxlength="4" value="2000"> [ ' _t: CharactersLeft ' ]
+					<td>
+						[ '' textarea '' ]
 					</td>
 				</tr>
 				<tr>
@@ -185,8 +182,7 @@
 							<tr>
 								<td>[ ' _t: Message ' ]:</td>
 								<td>
-									<textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
-									<input readonly type="text" name="remLen" size="4" maxlength="4" value="2500"> [ ' _t: CharactersLeft ' ]
+									[ '' textarea '' ]
 								</td>
 							</tr>
 							<tr>
@@ -515,3 +511,8 @@
 
 [= pagination =]
 <nav class="pagination">[ ' text ' ]</nav>
+
+[= textarea =]
+<textarea rows="16" cols="45" name="message" onKeyDown="textCounter(this.form.message,this.form.remLen,2500);" onKeyUp="textCounter(this.form.message,this.form.remLen,2500);">[ ' origmsg | pre ' ]</textarea><br>
+<input readonly type="text" name="remLen" size="4" maxlength="4" value="2500"> [ ' _t: CharactersLeft ' ]
+

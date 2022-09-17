@@ -29,7 +29,7 @@ $create_table = function() use ($prefix)
 			urgent TINYINT(1) DEFAULT NULL,
 			subject MEDIUMTEXT NOT NULL,
 			message LONGTEXT NOT NULL,
-			status TEXT NOT NULL,
+			status TINYINT(1) DEFAULT '0',
 			datesent DATETIME NULL DEFAULT NULL,
 			viewrecipient TINYINT(1) DEFAULT '1',
 		PRIMARY KEY (message_id),
@@ -166,9 +166,9 @@ if ($user_id = $this->get_user_id())
 		foreach ($result as $row )
 		{
 			// sets mark for status of message (important/read/answered)
-			if ($row['status'] == 'pending')
+			if ($row['status'] == '1')
 			{
-				$status = '<a title="' . $this->_t('MessageNotRead') . '"><span class="cite">*</span></a>';
+				$status = '<span class="cite" title="' . $this->_t('MessageNotRead') . '">*</span>';
 			}
 			else
 			{
@@ -177,7 +177,7 @@ if ($user_id = $this->get_user_id())
 
 			if ($row['urgent'] == 1)
 			{
-				$urgent_flag = '<a title="' . $this->_t('UrgentMessage') . '"><span class="cite"><strong>!</strong></span></a>';
+				$urgent_flag = '<span class="cite" title="' . $this->_t('UrgentMessage') . '"><strong>!</strong></span>';
 			}
 			else
 			{
@@ -186,7 +186,7 @@ if ($user_id = $this->get_user_id())
 
 			if ($row['repliedto'] == 1)
 			{
-				$replied = '<a title="' . $this->_t('MessageReplied') . '"><font color="grey"><strong> beantwortet am: </strong></grey></a>';
+				$replied = '<span title="' . $this->_t('MessageReplied') . '" style="color: grey;"><strong> ' . $this->_t('RespondedAt') . ' </strong></span>';
 			}
 			else
 			{
@@ -194,7 +194,7 @@ if ($user_id = $this->get_user_id())
 			}
 
 			$tpl->time			= $row['datesent'];
-			$tpl->status		= $status;
+			$tpl->status		= $this->_t('MessageStatus')[$status];
 			$tpl->urgent		= $urgent_flag;
 			$tpl->replied		= $replied;
 			$tpl->subject		= strip_tags($row['subject']);
@@ -239,6 +239,8 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->hrefform		= $this->href('', '', ['action' => 'store']);
 		$tpl->hrefusers		= $this->href('', '', ['action' => 'users']);
+
+		$tpl->textarea		= true;
 
 		foreach ($users as $user)
 		{
@@ -285,13 +287,13 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('d_');
 
-		$tpl->subject	= $row['subject'];
-		$tpl->userid	= $user['user_id'];
-		$tpl->username	= $user['user_name'];
-		$tpl->hrefform	= $this->href('', '', ['action' => 'store', 'replyto' => $message_id]);
-		$tpl->origmsg	= 	"\n\n++++++++++ " . $this->_t('OriginalMessage') . " ++++++++++\n" .
-							strip_tags($row['message']) .
-							"\n+++++++++++++++++++++++++++++++++";
+		$tpl->subject			= $this->_t('Re') . ' ' . $row['subject'];
+		$tpl->userid			= $user['user_id'];
+		$tpl->username			= $user['user_name'];
+		$tpl->hrefform			= $this->href('', '', ['action' => 'store', 'replyto' => $message_id]);
+		$tpl->textarea_origmsg	=	"\n\n++++++++++ " . $this->_t('OriginalMessage') . " ++++++++++\n" .
+									strip_tags($row['message']) .
+									"\n+++++++++++++++++++++++++++++++++\n";
 
 		$tpl->leave(); // d_
 	}
@@ -312,12 +314,12 @@ if ($user_id = $this->get_user_id())
 
 		$tpl->enter('e_');
 
-		$tpl->subject	= 'FWD: ' . $row['subject'];
-		$tpl->hrefusers	= $this->href('', '', ['action' => 'users']);
-		$tpl->hrefform	= $this->href('', '', ['action' => 'store']);
-		$tpl->origmsg	=	"\n\n++++++++++++ " . $this->_t('Forward') . " ++++++++++++++\n" .
-							strip_tags($row['message']) .
-							"\n+++++++++++++++++++++++++++++++++";
+		$tpl->subject			= $this->_t('Fwd') . ' ' . $row['subject'];
+		$tpl->hrefusers			= $this->href('', '', ['action' => 'users']);
+		$tpl->hrefform			= $this->href('', '', ['action' => 'store']);
+		$tpl->textarea_origmsg	=	"\n\n++++++++++++ " . $this->_t('Forward') . " ++++++++++++++\n" .
+									strip_tags($row['message']) .
+									"\n+++++++++++++++++++++++++++++++++\n";
 
 		foreach ($users as $user)
 		{
@@ -449,7 +451,7 @@ if ($user_id = $this->get_user_id())
 		foreach ($result as $row)
 		{
 			$tpl->time			= $row['datesent'];
-			$tpl->status		= $row['status'];
+			$tpl->status		= $this->_t('MessageStatus')[$row['status']];
 			$tpl->subject		= strip_tags($row['subject']);
 			$tpl->username		= $this->format($row['user_name']);
 			$tpl->hrefview2		= $this->href('', '', ['action' => 'view2', 'message_id' => $row['message_id'], 'page' => 'view2']);
@@ -516,7 +518,7 @@ if ($user_id = $this->get_user_id())
 
 		foreach ($result as $row)
 		{
-			if ($row['status'] == 'unread')
+			if ($row['status'] == '1')
 			{
 				$status = '<a title="' . $this->_t('MessageNotRead') . '"><span class="cite">*</span></a>';
 			}
@@ -544,7 +546,7 @@ if ($user_id = $this->get_user_id())
 			}
 
 			$tpl->time			= $row['datesent'];
-			$tpl->status		= $status;
+			$tpl->status		= $this->_t('MessageStatus')[$status];
 			$tpl->urgent		= $urgent_flag;
 			$tpl->replied		= $replied;
 			$tpl->subject		= strip_tags($row['subject']);
@@ -613,12 +615,12 @@ if ($user_id = $this->get_user_id())
 
 			$rs = $this->db->sql_query(
 				"UPDATE {$prefix}messenger SET
-					status = 'gelesen'
+					status = '2'
 				WHERE message_id = " . (int) $message_id);
 		}
 		else
 		{
-			$tpl->forbidden = 'Das ist nicht Deine Post!';
+			$tpl->forbidden = $this->_t('NotYourPost');
 		}
 
 		$tpl->leave(); // i_
@@ -651,7 +653,7 @@ if ($user_id = $this->get_user_id())
 	// [K] Delete messages (changed - messages are now completely removed from database)
 	else if ($action == 'delete')
 	{
-		if ($_POST['delete_message'])
+		if ($_POST['_action'] == 'delete_message')
 		{
 			$rs = $this->db->sql_query(
 				"DELETE FROM {$prefix}messenger
