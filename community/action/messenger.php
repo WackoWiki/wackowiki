@@ -186,7 +186,7 @@ if ($user_id = $this->get_user_id())
 
 			if ($row['repliedto'] == 1)
 			{
-				$replied = '<span title="' . $this->_t('MessageReplied') . '" style="color: grey;"><strong> ' . $this->_t('RespondedAt') . ' </strong></span>';
+				$replied = '<span title="' . $this->_t('MessageReplied') . '" style="color: grey;"><strong>' . $this->_t('RepliedTo') . '</strong></span>';
 			}
 			else
 			{
@@ -520,7 +520,7 @@ if ($user_id = $this->get_user_id())
 		{
 			if ($row['status'] == '1')
 			{
-				$status = '<a title="' . $this->_t('MessageNotRead') . '"><span class="cite">*</span></a>';
+				$status = '<span class="cite" title="' . $this->_t('MessageNotRead') . '">*</span>';
 			}
 			else
 			{
@@ -529,7 +529,7 @@ if ($user_id = $this->get_user_id())
 
 			if ($row['urgent'] == 1)
 			{
-				$urgent_flag = '<a title="' . $this->_t('UrgentMessage') . '"><span class="cite"><strong>!</strong></span></a>';
+				$urgent_flag = '<span class="cite" title="' . $this->_t('UrgentMessage') . '"><strong>!</strong></span>';
 			}
 			else
 			{
@@ -538,7 +538,7 @@ if ($user_id = $this->get_user_id())
 
 			if ($row['repliedto'] == 1)
 			{
-				$replied = '<a title="' . $this->_t('MessageReplied') . '"><strong>+</strong></a>';
+				$replied = '<span title="' . $this->_t('MessageReplied') . '"><strong>+</strong></span>';
 			}
 			else
 			{
@@ -591,7 +591,7 @@ if ($user_id = $this->get_user_id())
 
 		if ($row['repliedto'] == 1)
 		{
-			$replied = '<a title="' . $this->_t('MessageReplied') . '"><small>replied to<small></a>';
+			$replied = '<span title="' . $this->_t('MessageReplied') . '"><small>' . $this->_t('RepliedTo') . '<small></span>';
 		}
 		else
 		{
@@ -824,12 +824,28 @@ if ($user_id = $this->get_user_id())
 	// [N] code to display user list
 	else if ($action == 'users')
 	{
+		$tpl->enter('n_');
+
+		$sql_where =
+			"WHERE account_type = 0 " .
+				"AND enabled = 1 ";
+
+		$count = $this->db->load_single(
+			"SELECT COUNT(u.user_name) AS n " .
+			"FROM {$prefix}user u " .
+			$sql_where, true);
+
+		$pagination = $this->pagination($count['n'], null, 'u', ['action' => 'users']);
+		$tpl->pagination_text = $pagination['text'];
+
 		$users = $this->db->load_all(
 			"SELECT user_id, user_name
-			FROM {$prefix}user
-			ORDER BY user_name ASC");
+			FROM {$prefix}user " .
+			$sql_where . "
+			ORDER BY user_name ASC " .
+			$pagination['limit']);
 
-		$tpl->enter('n_');
+
 
 		foreach ($users as $user)
 		{

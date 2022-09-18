@@ -408,6 +408,7 @@
 		</form>
 	=]
 	[= n _ =
+		['' pagination '']
 		<table width="650">
 			<tr>
 				<td>
@@ -418,6 +419,7 @@
 				</td>
 			</tr>
 		</table>
+		['' pagination '']
 		<span class="cite"><br><br>[ ' _t: ClickContact2 ' ]</span><br><br>
 	=]
 

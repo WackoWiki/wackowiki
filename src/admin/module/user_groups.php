@@ -177,7 +177,8 @@ function admin_user_groups(&$engine, $module)
 					echo '<h2>' . $engine->_t('GroupRemoveMember') . '</h2>';
 					echo $engine->form_open('remove_group_member');
 
-					echo '<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
+					echo
+						'<input type="hidden" name="group_id" value="' . (int) $group_id . '">' .
 						'<input type="hidden" name="member_id" value="' . (int) $member['user_id'] . '">' . "\n" .
 					'<table class="formation">' .
 						'<tr>
@@ -202,7 +203,8 @@ function admin_user_groups(&$engine, $module)
 		if ($action == 'add_group'
 			&& isset($_POST['new_group_name']))
 		{
-			$group_name	= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$group_name		= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$description	= $engine->sanitize_text_field(($_POST['description'] ?? ''));
 
 			// do we have identical names?
 			if ($engine->db->load_single(
@@ -219,10 +221,10 @@ function admin_user_groups(&$engine, $module)
 			{
 				$engine->db->sql_query(
 					"INSERT INTO " . $prefix . "usergroup SET " .
-						"created		= UTC_TIMESTAMP(), " .
-						"description	= " . $engine->db->q($_POST['description']) . ", " .
-						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
 						"group_name		= " . $engine->db->q($group_name) . ", " .
+						"description	= " . $engine->db->q($description) . ", " .
+						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
+						"created		= UTC_TIMESTAMP(), " .
 						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
 						"active			= " . (int) ($_POST['active'] ?? 0));
 
@@ -237,7 +239,8 @@ function admin_user_groups(&$engine, $module)
 			&&  $p_group_id
 			&& (isset($_POST['new_group_name']) || isset($_POST['moderator_id'])))
 		{
-			$group_name	= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$group_name		= $engine->sanitize_username(($_POST['new_group_name'] ?? ''));
+			$description	= $engine->sanitize_text_field(($_POST['description'] ?? ''));
 
 			// do we have identical names?
 			if ($engine->db->load_single(
@@ -255,7 +258,7 @@ function admin_user_groups(&$engine, $module)
 				$engine->db->sql_query(
 					"UPDATE " . $prefix . "usergroup SET " .
 						"group_name		= " . $engine->db->q($group_name) . ", " .
-						"description	= " . $engine->db->q($_POST['new_description']) . ", " .
+						"description	= " . $engine->db->q($description) . ", " .
 						"moderator_id	= " . (int) $_POST['moderator_id'] . ", " .
 						"open			= " . (int) ($_POST['open'] ?? 0) . ", " .
 						"active			= " . (int) ($_POST['active'] ?? 0) . " " .

@@ -104,10 +104,13 @@ if (isset($_POST['_user_menu']))
 		// save
 		foreach ($data as $item)
 		{
+			$menu_title		= $this->sanitize_text_field($_POST['title_' . $item['menu_id']], true);
+			$menu_title		= mb_substr(trim($menu_title), 0, 250);
+
 			$this->db->sql_query(
 				"UPDATE " . $prefix . "menu SET " .
 					"menu_position	= " . (int) $item['menu_position'] . ", " .
-					"menu_title		= " . $this->db->q(mb_substr(trim($_POST['title_' . $item['menu_id']]), 0, 250)) . " " .
+					"menu_title		= " . $this->db->q($menu_title) . " " .
 				"WHERE menu_id		= " . (int) $item['menu_id'] . " " .
 				"LIMIT 1");
 		}
@@ -154,13 +157,16 @@ if (isset($_POST['_user_menu']))
 									: "")
 								, false);
 
-						$_menu_item_count = count($_menu_position);
+						$_menu_lang			= (($_user_lang != $page['page_lang']) && $default_menu === false
+												? $page['page_lang']
+												: $_user_lang);
+						$_menu_item_count	= count($_menu_position);
 
 						$this->db->sql_query(
 							"INSERT INTO " . $prefix . "menu SET " .
 								"user_id			= " . (int) $_user_id . ", " .
 								"page_id			= " . (int) $_page_id.", " .
-								"menu_lang			= " . $this->db->q((($_user_lang != $page['page_lang']) && $default_menu === false ? $page['page_lang'] : $_user_lang)) . ", " .
+								"menu_lang			= " . $this->db->q($_menu_lang) . ", " .
 								"menu_position		= " . (int)($_menu_item_count + 1));
 
 						#$message .= $this->_t('MenuItemAdded'); // TODO: msg set

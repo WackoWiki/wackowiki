@@ -40,7 +40,7 @@ else if ($user = $this->get_user())
 	$email_changed	= false;
 	$user			= $this->load_user(0, $user['user_id']);
 	$action			= $_POST['_action'] ?? null;
-	$realname		= $_POST['real_name'] ?? '';
+	$real_name		= $this->sanitize_text_field(($_POST['real_name'] ?? ''), true);
 	$email			= $_POST['email'] ?? '';
 	$resend_code	= (int) ($_GET['resend_code'] ?? null);
 	$sql			= '';
@@ -68,12 +68,12 @@ else if ($user = $this->get_user())
 			$email_changed = ($user['email'] != $email);
 
 			// store if email hasn't been changed otherwise request authorization
-			if ($email_changed || $realname)
+			if ($email_changed || $real_name)
 			{
 				// update users table
 				$this->db->sql_query(
 					"UPDATE " . $this->prefix . "user SET " .
-						"real_name		= " . $this->db->q(trim($realname)) . ", " .
+						"real_name		= " . $this->db->q(trim($real_name)) . ", " .
 						"email			= " . $this->db->q($email) . " " .
 					"WHERE user_id = " . (int) $user['user_id'] . " " .
 					"LIMIT 1");

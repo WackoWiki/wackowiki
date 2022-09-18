@@ -611,35 +611,28 @@ else
 	}
 
 	$_sort		= $_GET['sort'] ?? null;
-	$sort_modes	=
-	[
+	$sort_mode	= match($_sort) {
 		'name'			=> 'user_name',
-		'pages'			=> 'total_pages',
 		'comments'		=> 'total_comments',
 		'uploads'		=> 'total_uploads',
 		'revisions'		=> 'total_revisions',
 		'signup'		=> 'signup_time',
-		'last_visit'	=> 'last_visit'
-	];
+		'last_visit'	=> 'last_visit',
+		default			=> 'total_pages',
+	};
 
-	if (isset($sort_modes[$_sort]))
+	if (isset($_sort))
 	{
-		$_order			= $_GET['order'] ?? null;
-		$order_modes	=
-		[
-			'asc'	=> 'ASC',
-			'desc'	=> 'DESC'
-		];
-
-		if (!isset($order_modes[$_order]))
-		{
-			$_order = 'asc';
-		}
+		$_order		= $_GET['order'] ?? null;
+		$order_mode	= match($_order) {
+			'desc'	=> 'DESC',
+			default	=> 'ASC',
+		};
 
 		$params['sort']		= $_sort;
 		$params['order']	= $_order;
 
-		$sql_order = 'ORDER BY u.' . $sort_modes[$_sort] . ' ' . $order_modes[$_order] . ' ';
+		$sql_order = 'ORDER BY u.' . $sort_mode . ' ' . $order_mode . ' ';
 	}
 	else
 	{

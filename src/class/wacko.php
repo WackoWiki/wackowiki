@@ -1884,6 +1884,7 @@ class Wacko
 			$body_r			= $this->compile_body($body, $page_id, $paragrafica, false);
 			$body_toc		= $this->body_toc ?? null;
 
+			$title			= $this->sanitize_text_field($title, true);
 			$edit_note		= $this->sanitize_text_field($edit_note, true);
 
 			// review
@@ -2019,7 +2020,7 @@ class Wacko
 						"depth			= " . (int) $depth . ", " .
 						"owner_id		= " . (int) $owner_id . ", " .
 						"user_id		= " . (int) $user_id . ", " .
-						"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
+						"title			= " . $this->db->q($title) . ", " .
 						"tag			= " . $this->db->q($tag) . ", " .
 						"body			= " . $this->db->q($body) . ", " .
 						"body_r			= " . $this->db->q($body_r) . ", " .
@@ -2123,7 +2124,7 @@ class Wacko
 							"modified		= UTC_TIMESTAMP(), " .
 							"owner_id		= " . (int) $owner_id . ", " .
 							"user_id		= " . (int) $user_id . ", " .
-							"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
+							"title			= " . $this->db->q($title) . ", " .
 							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc)) . ", " .
 							"body			= " . $this->db->q($body) . ", " .
 							"body_r			= " . $this->db->q($body_r) . ", " .
@@ -4645,8 +4646,8 @@ class Wacko
 	/**
 	 * Sanitize a string
 	 *
-	 * @param string $string String to sanitize.
-	 * @param bool $keep_nl optional Whether to keep newlines. Default: false.
+	 * @param string	$string		String to sanitize.
+	 * @param bool		$keep_nl	optional Whether to keep newlines. Default: false.
 	 *
 	 * @return string Sanitized string.
 	 */
