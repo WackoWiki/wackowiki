@@ -13,7 +13,6 @@ $title			= '';
 
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
-	#		|| $this->is_admin() // XXX: Only for testing - comment out afterwards!
 	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_owner())
 	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_admin())
 	|| (!$this->page && $this->has_access('create'))))
@@ -94,7 +93,6 @@ if ($this->has_access('read')
 			&& $user
 			&& !$this->is_watched)
 		{
-			#$this->set_message('watch page');
 			$this->set_watch($user['user_id'], $this->page['page_id']);
 			$this->is_watched = true;
 		}
@@ -114,8 +112,6 @@ if ($this->has_access('read')
 				$this->set_message($message , 'error');
 				$error = true;
 			}
-
-			// TODO: if captcha .. else
 
 			// check for overwriting
 			if ($this->page && $this->page['modified'] != $_POST['previous'])

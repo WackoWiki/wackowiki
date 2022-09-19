@@ -5233,7 +5233,7 @@ class Wacko
 	/**
 	 * compile body
 	 *
-	 * renders body with [wacko|..] formatter
+	 * renders body with [wacko|...] formatter
 	 *
 	 * @param string	$body
 	 * @param int		$page_id
@@ -5929,7 +5929,7 @@ class Wacko
 	* Get ACL for tag from cache
 	*
 	* @param int		$page_id
-	* @param string		$privilege ACL privilege: read, write, comment, create, upload
+	* @param string		$privilege		ACL privilege: read, write, comment, create, upload
 	* @param bool		$use_defaults
 	*
 	* @return array ACL
@@ -5942,10 +5942,10 @@ class Wacko
 	/**
 	* Add ACL to cache
 	*
-	* @param int	$page_id
-	* @param string	$privilege		ACL privilege: read, write, comment, create, upload
-	* @param bool	$use_defaults
-	* @param array	$acl			Access control list
+	* @param int		$page_id
+	* @param string		$privilege		ACL privilege: read, write, comment, create, upload
+	* @param bool		$use_defaults
+	* @param array		$acl			Access control list
 	*/
 	function cache_acl($page_id, $privilege, $use_defaults, $acl): void
 	{
@@ -6084,11 +6084,11 @@ class Wacko
 	/**
 	 * check access privilege
 	 *
-	 * @param string $privilege
-	 * @param string $page_id
-	 * @param string $user_name
-	 * @param int $use_parent
-	 * @param string $new_tag
+	 * @param string	$privilege
+	 * @param string	$page_id
+	 * @param string	$user_name
+	 * @param int		$use_parent
+	 * @param string	$new_tag
 	 *
 	 * @return bool
 	 */
@@ -6193,43 +6193,43 @@ class Wacko
 			return false;
 		}
 
-		$upos	= mb_strpos($acls, "\n" . $user_name . "\n");
-		$aupos	= mb_strpos($acls, "\n!" . $user_name . "\n");
-		$spos	= mb_strpos($acls, '*');
-		$bpos	= mb_strpos($acls, '$');
+		$u_pos	= mb_strpos($acls, "\n" . $user_name . "\n");
+		$au_pos	= mb_strpos($acls, "\n!" . $user_name . "\n");
+		$s_pos	= mb_strpos($acls, '*');
+		$b_pos	= mb_strpos($acls, '$');
 
-		if ($aupos !== false)
+		if ($au_pos !== false)
 		{
 			return false;
 		}
 
-		if ($upos !== false)
+		if ($u_pos !== false)
 		{
 			return true;
 		}
 
-		if ($spos !== false)
+		if ($s_pos !== false)
 		{
-			if ($acls[$spos - 1] == '!')
+			if ($acls[$s_pos - 1] == '!')
 			{
 				return false;
 			}
 		}
 
-		if ($bpos !== false)
+		if ($b_pos !== false)
 		{
-			if ($acls[$bpos - 1] == '!')
+			if ($acls[$b_pos - 1] == '!')
 			{
 				return false;
 			}
 		}
 
-		if ($spos !== false)
+		if ($s_pos !== false)
 		{
 			return true;
 		}
 
-		if ($bpos !== false)
+		if ($b_pos !== false)
 		{
 			if ($user_name == GUEST || $user_name == '')
 			{
@@ -6267,24 +6267,24 @@ class Wacko
 
 			foreach ($lines as $line)
 			{
-				$linel = $line;
+				$line_lo = $line;
 
 				// check for inversion character "!"
 				if (preg_match('/^\!(.*)$/u', $line, $matches))
 				{
 					$negate	= 1;
-					$linel	= $matches[1];
+					$line_lo	= $matches[1];
 				}
 				else
 				{
 					$negate = 0;
 				}
 
-				$linel = mb_strtolower(trim($linel));
+				$line_lo = mb_strtolower(trim($line_lo));
 
-				if (isset($aliases[$linel]))
+				if (isset($aliases[$line_lo]))
 				{
-					foreach (explode("\\n", $aliases[$linel]) as $item)
+					foreach (explode("\\n", $aliases[$line_lo]) as $item)
 					{
 						$item	= trim($item);
 						$list[]	= ($negate ? '!' . $item : $item);
@@ -6647,8 +6647,9 @@ class Wacko
 		if (@$_GET['removebookmark'] && $user && !$this->sess->menu_default)
 		{
 			unset($_GET['removebookmark']);
+
 			// rewriting menu table except containing current page tag
-			$prev = $menu_formatted;
+			$prev			= $menu_formatted;
 			$menu_page_ids	= [];
 			$menu_formatted	= [];
 

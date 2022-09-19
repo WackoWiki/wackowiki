@@ -12,17 +12,18 @@ define('WACKO_STARTED', microtime(1));
 require_once 'config/constants.php';
 
 // setting PHP error reporting
-switch (PHP_ERROR_REPORTING)
-{
-	case 0:		error_reporting(0); break;
-	case 1:		error_reporting(E_ERROR | E_WARNING | E_PARSE); break;
-	case 2:		error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE); break;
-	case 3:		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING)); break;
-	case 4:		error_reporting(E_ALL ^ E_NOTICE); break;
-	case 5:		error_reporting(E_ALL); break;
-	case 6:		error_reporting(-1); break; // uber all
-	default:	error_reporting(E_ALL);
-}
+$mode = match(PHP_ERROR_REPORTING) {
+	0		=> 0,
+	1		=> E_ERROR | E_WARNING | E_PARSE,
+	2		=> E_ERROR | E_WARNING | E_PARSE | E_NOTICE,
+	3		=> E_ALL ^ (E_NOTICE | E_WARNING),
+	4		=> E_ALL ^ E_NOTICE,
+	5		=> E_ALL,
+	6		=> -1, // uber all
+	default	=> E_ALL,
+};
+
+error_reporting($mode);
 
 // set the timezone to whatever date_default_timezone_get() returns.
 date_default_timezone_set(@date_default_timezone_get());
