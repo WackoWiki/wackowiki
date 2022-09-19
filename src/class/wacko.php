@@ -234,10 +234,9 @@ class Wacko
 	* Check if file with file name exists. Checks only DB entry,
 	* not file in FS
 	*
-	* @param string $file_name File name
-	* @param integer $page_id Optional. If not set,
-	*  then check if file exists in global space
-	* @param boolean $deleted
+	* @param string		$file_name	File name
+	* @param int		$page_id	Optional. If not set, then check if file exists in global space.
+	* @param bool		$deleted
 	*
 	* @return array File description array
 	*/
@@ -284,8 +283,9 @@ class Wacko
 	/**
 	 * File extension check
 	 *
-	 * @param string $file_name File name.
-	 * @return boolean
+	 * @param string $file_name		File name.
+	 *
+	 * @return bool
 	 */
 	function file_extension_check($file_name): bool
 	{
@@ -469,12 +469,12 @@ class Wacko
 	/**
 	 * sets language $this->lang
 	 *
-	 * @param string $lang
-	 * @param boolean $set_translation
-	 * @param boolean $get_translation sets $this->notify_lang
-	 * @param boolean $update reload for theme per page lang files
+	 * @param string	$lang
+	 * @param bool		$set_translation
+	 * @param bool		$get_translation	sets $this->notify_lang
+	 * @param bool		$update				reload for theme per page lang files
 	 *
-	 * @return string previous language for reset
+	 * @return string	previous language for reset
 	 */
 	function set_language($lang, $set_translation = false, $get_translation = false, $update = false)
 	{
@@ -634,10 +634,10 @@ class Wacko
 	/**
 	 * Get translation of available message set
 	 *
-	 * @param string $name Name of message set
-	 * @param string $lang Language code
+	 * @param string	$name	Name of message set
+	 * @param string	$lang	Language code
 	 *
-	 * @return string Message set
+	 * @return string	Message set
 	 */
 	function _t($name, $lang = '')
 	{
@@ -682,10 +682,11 @@ class Wacko
 	// wrapper for get and format message set translation
 	function format_t($name, $lang = ''): string
 	{
-		$string = $this->_t($name, $lang);
-		$this->format_safe = false;
-		$string = $this->format($string);
-		$this->format_safe = true;
+		$string				= $this->_t($name, $lang);
+		$this->format_safe	= false;
+
+		$string				= $this->format($string);
+		$this->format_safe	= true;
 
 		return $string;
 	}
@@ -782,12 +783,12 @@ class Wacko
 	/**
 	* Loads page-data from DB
 	*
-	* @param string $tag Page tag
-	* @param int $page_id
-	* @param int $revision_id
-	* @param int $cache If LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
-	* @param int $metadata_only If LOAD_ALL loads all page fields including page body, if LOAD_META - only page_meta fields.
-	* @param boolean $deleted
+	* @param string		$tag			Page tag
+	* @param int		$page_id
+	* @param int		$revision_id
+	* @param int		$cache If		LOAD_CACHE then tries to load page from cache, if LOAD_NOCACHE - then doesn't.
+	* @param int		$metadata_only	If LOAD_ALL loads all page fields including page body, if LOAD_META - only page_meta fields.
+	* @param bool		$deleted
 	*
 	* @return array Loaded page
 	*/
@@ -932,9 +933,9 @@ class Wacko
 	/**
 	* Get page from cache
 	*
-	* @param string $tag Page tag
-	* @param int $page_id
-	* @param boolean $metadata_only Returns only page with equal metadata_only marker. Default value is 0.
+	* @param string		$tag			Page tag
+	* @param int		$page_id
+	* @param bool		$metadata_only	Returns only page with equal metadata_only marker. Default value is 0.
 	*
 	* @return mixed Page from cache or FALSE if not found
 	*/
@@ -965,13 +966,15 @@ class Wacko
 	/**
 	* Put page in page cache.
 	*
-	* @param array $page Page data
-	* @param boolean $metadata_only Marks that page contains metadata only (all attributes, excepts page body)
+	* @param array	$page			Page data
+	* @param bool	$metadata_only	Marks that page contains metadata only (all attributes, excepts page body)
 	*/
 	function cache_page($page, $metadata_only = false): void
 	{
 		// do not override current page
-		if ((isset($this->page['page_id']) && isset($page['page_id']) && $this->page['page_id'] == $page['page_id'] && $metadata_only)
+		if ((isset($this->page['page_id']) && isset($page['page_id'])
+			&& $this->page['page_id'] == $page['page_id']
+			&& $metadata_only)
 			|| empty($page))
 		{
 			return;
@@ -1007,8 +1010,8 @@ class Wacko
 	/**
 	* Clear Wanted cache from tag
 	*
-	* @param string $tag
-	* @param int $page_id
+	* @param string		$tag
+	* @param int		$page_id
 	*/
 	function clear_cache_wanted_page($tag, $page_id = 0): void
 	{
@@ -1021,10 +1024,10 @@ class Wacko
 	/**
 	* Check if page is in cache
 	*
-	* @param string $tag
-	* @param int $page_id
+	* @param string		$tag
+	* @param int		$page_id
 	*
-	* @return boolean  Return TRUE if tag in Wanted cache and FALSE if not
+	* @return bool		Return TRUE if tag in Wanted cache and FALSE if not
 	*/
 	function get_cached_wanted_page($tag, $page_id = 0)
 	{
@@ -1649,9 +1652,9 @@ class Wacko
 	/**
 	 * loads related categories at once in obj-cache
 	 *
-	 * @param array $object_ids
-	 * @param integer $type_id
-	 * @param boolean $cache
+	 * @param array	$object_ids
+	 * @param int	$type_id
+	 * @param bool	$cache
 	 */
 	function preload_categories($object_ids, $type_id = OBJECT_PAGE, $cache = true): void
 	{
@@ -1720,14 +1723,14 @@ class Wacko
 	 * @param string	$title			page name (metadata)
 	 * @param string	$body			page body (plain text)
 	 * @param string	$edit_note		edit summary
-	 * @param integer	$minor_edit		minor edit
-	 * @param integer	$reviewed
-	 * @param integer	$comment_on_id	commented page_id
-	 * @param integer	$parent_id		page_id of related comment or parent page
+	 * @param int		$minor_edit		minor edit
+	 * @param int		$reviewed
+	 * @param int		$comment_on_id	commented page_id
+	 * @param int		$parent_id		page_id of related comment or parent page
 	 * @param string	$lang			page language
-	 * @param boolean	$mute			suppress email reminders and xml rss recompilation
+	 * @param bool		$mute			suppress email reminders and xml rss recompilation
 	 * @param string	$user_name		attach guest pseudonym
-	 * @param boolean	$user_page		user is page owner
+	 * @param bool		$user_page		user is page owner
 	 *
 	 * @return string	$body_r
 	 */
@@ -1816,6 +1819,7 @@ class Wacko
 			$body_r			= $this->compile_body($body, $page_id, $paragrafica, false);
 			$body_toc		= $this->body_toc ?? null;
 
+			$title			= $this->sanitize_text_field($title, true);
 			$edit_note		= $this->sanitize_text_field($edit_note, true);
 
 			// review
@@ -1951,7 +1955,7 @@ class Wacko
 						"depth			= " . (int) $depth . ", " .
 						"owner_id		= " . (int) $owner_id . ", " .
 						"user_id		= " . (int) $user_id . ", " .
-						"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
+						"title			= " . $this->db->q($title) . ", " .
 						"tag			= " . $this->db->q($tag) . ", " .
 						"body			= " . $this->db->q($body) . ", " .
 						"body_r			= " . $this->db->q($body_r) . ", " .
@@ -2055,7 +2059,7 @@ class Wacko
 							"modified		= UTC_TIMESTAMP(), " .
 							"owner_id		= " . (int) $owner_id . ", " .
 							"user_id		= " . (int) $user_id . ", " .
-							"title			= " . $this->db->q($this->sanitize_text_field($title, true)) . ", " .
+							"title			= " . $this->db->q($title) . ", " .
 							"description	= " . $this->db->q(($old_page['comment_on_id'] || $old_page['description'] ? $old_page['description'] : $desc)) . ", " .
 							"body			= " . $this->db->q($body) . ", " .
 							"body_r			= " . $this->db->q($body_r) . ", " .
@@ -2522,7 +2526,7 @@ class Wacko
 	 * send signup email to user
 	 *
 	 * @param array		$user		user data array
-	 * @param boolean	$verify		set email_confirm token and add link for email verification
+	 * @param bool		$verify		set email_confirm token and add link for email verification
 	 */
 	function notify_user_signup($user, $verify = true): void
 	{
@@ -3052,14 +3056,15 @@ class Wacko
 	/**
 	* Returns the full URL for a page/method, including any additional URL-parameters and anchor
 	*
-	* @param string $method		Optional Wacko method (default 'show' method added in run() function)
-	* @param string $tag		Optional tag. Returns current-page tag if empty
-	* @param mixed $params		Optional URL parameters in HTTP name=value[&name=value][...] format (or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
-	* @param boolean $addpage	Optional
-	* @param string $anchor		Optional HTTP anchor-fragment
-	* @param boolean $alter		Optional uses underscore_url (turn off for e.g. addpage or hashid routing)
-	* @param boolean $encode	Optional - percent-encode the non-ASCII bytes (rfc3986)
-	* @param boolean $absolute	Optional - uses absolute URL
+	* @param string		$method		Optional Wacko method (default 'show' method added in run() function)
+	* @param string		$tag		Optional tag. Returns current-page tag if empty
+	* @param mixed		$params		Optional URL parameters in HTTP name=value[&name=value][...] format
+	* 								(or as list ['a=1', 'b=2'] or ['a' => 1, 'b' => 2])
+	* @param bool		$addpage	Optional
+	* @param string		$anchor		Optional HTTP anchor-fragment
+	* @param bool		$alter		Optional uses underscore_url (turn off for e.g. addpage or hashid routing)
+	* @param bool		$encode		Optional - percent-encode the non-ASCII bytes (rfc3986)
+	* @param bool		$absolute	Optional - uses absolute URL
 	*
 	* @return string			HREF string adjusted for Apache rewrite_method setting (i.e. Wacko 'rewrite_method' config-parameter)
 	*/
@@ -3137,10 +3142,10 @@ class Wacko
 	/**
 	* Returns value for page 'wacko' parameter, in tag[/method][#anchor] format
 	*
-	* @param string $method Optional Wacko method (default 'show' method added in run() function)
-	* @param string $tag Optional tag - returns current-page tag if empty
-	* @param boolean $alter Optional
-	* @param boolean $encode Optional - percent-encode the non-ASCII bytes (rfc3986)
+	* @param string		$method		Optional Wacko method (default 'show' method added in run() function)
+	* @param string		$tag		Optional tag - returns current-page tag if empty
+	* @param bool		$alter		Optional
+	* @param bool		$encode		Optional - percent-encode the non-ASCII bytes (rfc3986)
 	*
 	* @return string tag[/method]
 	*/
@@ -3172,6 +3177,7 @@ class Wacko
 	* Convert WikiWord to Wiki_Word in URLs if config value urls_underscores is 1
 	*
 	* @param string $tag Page tag
+	*
 	* @return string
 	*/
 	function underscore_url($tag): ?string
@@ -3194,12 +3200,13 @@ class Wacko
 	/**
 	* Add spaces and wraps page href into <a> </a>
 	*
-	* @param string $tag Page tag.
-	* @param string $method Wacko method. Optional, default 'show' method added in run() function.
-	* @param string $text Href text. Optinonal, default is $tag value
-	* @param boolean $track Track this link. Optional, default is TRUE
-	* @param string $title link title. Optional, default is ''
-	* @param string $params additional parameters. Optional, default is ''
+	* @param string		$tag		Page tag.
+	* @param string		$method		Wacko method. Optional, default 'show' method added in run() function.
+	* @param string		$text 		Href text. Optinonal, default is $tag value
+	* @param bool		$track		Track this link. Optional, default is TRUE
+	* @param string		$title		link title. Optional, default is ''
+	* @param string		$params		additional parameters. Optional, default is ''
+	*
 	* @return string
 	*/
 	function compose_link_to_page($tag, $method = '', $text = '', $title = '', $track = false, $params = ''): string
@@ -3407,11 +3414,12 @@ class Wacko
 	* Wraps links in special symbols <!--link:begin-->Link ==Text<!--link:end--> for
 	* detection in future (invoking from WackoFormatter).
 	*
-	* @param string $tag Link
-	* @param string $text Link text
-	* @param boolean $track Track this link. Optional, default is TRUE
-	* @param boolean $img_url
-	* @return string Wrapped link
+	* @param string		$tag		Link
+	* @param string		$text		Link text
+	* @param bool		$track		Track this link. Optional, default is TRUE
+	* @param bool		$img_url
+	*
+	* @return string	Wrapped link
 	*/
 	function pre_link($tag, $text = '', $track = 1, $media_url = 0): string
 	{
@@ -3455,17 +3463,19 @@ class Wacko
 	/**
 	* Returns full <a href=".."> or <img ...> HTML for Tag
 	*
-	* @param string $tag Link content - may be Wacko tag, interwiki wikiname:page tag,
-	*	http/file/ftp/https/mailto/xmpp URL, local or remote audio/image/video-file for <audio>/<img>/<video> link, or local or
-	*	remote doc-file; if pagetag is for an external link but not protocol is specified, http:// is prepended
-	* @param string $method Optional Wacko method (default 'show' method added in run() function)
-	* @param string $text Optional text or image-file for HREF link (defaults to same as pagetag)
-	* @param string $title
-	* @param boolean $track Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINK table).
-	*	Optional, default is TRUE
-	* @param boolean $safe If false, then sanitize $text, else no.
-	* @param boolean $anchor_link Optional sets <a id="a-154" ...> once for link at the first appearance
-	* @param boolean $meta_direct Links attached files to filemeta handler if TRUE
+	* @param string		$tag			Link content - may be Wacko tag, interwiki wikiname:page tag,
+	*									http/file/ftp/https/mailto/xmpp URL,
+	*									local or remote audio/image/video-file for <audio>/<img>/<video> link,
+	*									or local or remote doc-file;
+	*									if pagetag is for an external link but not protocol is specified, http:// is prepended
+	* @param string		$method			Optional Wacko method (default 'show' method added in run() function)
+	* @param string		$text			Optional text or image-file for HREF link (defaults to same as pagetag)
+	* @param string		$title
+	* @param bool		$track			Link-tracking used by Wacko's internal link-tracking (inter-page cross-references in LINK table).
+	*									Optional, default is TRUE
+	* @param bool		$safe			If false, then sanitize $text, else no.
+	* @param bool		$anchor_link	Optional sets <a id="a-154" ...> once for link at the first appearance
+	* @param bool		$meta_direct	Links attached files to filemeta handler if TRUE
 	*
 	* @return string full Href link
 	*/
@@ -4113,7 +4123,7 @@ class Wacko
 					$class	= ' class="' . $class . '"';
 				}
 
-				// sets only 'nofollow' as link type to internal links to protected pages
+				// sets only 'nofollow' as link type to internal links for protected pages
 				if ($rel)
 				{
 					$rel	= ' rel="' . $rel . '"';
@@ -4580,8 +4590,8 @@ class Wacko
 	/**
 	 * Sanitize a string
 	 *
-	 * @param string $string String to sanitize.
-	 * @param bool $keep_nl optional Whether to keep newlines. Default: false.
+	 * @param string	$string		String to sanitize.
+	 * @param bool		$keep_nl	optional Whether to keep newlines. Default: false.
 	 *
 	 * @return string Sanitized string.
 	 */
@@ -4640,7 +4650,8 @@ class Wacko
 	* Check if text is WikiName
 	*
 	* @param string $text Tested text
-	* @return boolean True if WikiName? else FALSE
+	*
+	* @return bool
 	*/
 	function is_wiki_name($text): string
 	{
@@ -4652,8 +4663,8 @@ class Wacko
 	/**
 	* Link-tracking used to collect all links in processed text.
 	*
-	* @param string $tag
-	* @param integer $link_type [LINK_PAGE|LINK_FILE]
+	* @param string		$tag
+	* @param int		$link_type	[LINK_PAGE|LINK_FILE]
 	*
 	*/
 	function track_link($tag, $link_type): void
@@ -5103,11 +5114,11 @@ class Wacko
 	/**
 	* Invokes Action and returns its output.
 	*
-	* @param string $action Action name
-	* @param array $params Action parameters
-	* @param boolean $force_link_tracking If value is TRUE then all links in the action will be tracked in the links_* tables.
-	* Optional, default value is FALSE.
-	* @return string Result of action
+	* @param string		$action					Action name
+	* @param array		$params					Action parameters
+	* @param bool		$force_link_tracking	If value is TRUE then all links in the action will be tracked in the links_* tables.
+	* 											Optional, default value is FALSE.
+	* @return string	Result of action
 	*/
 	function action($action, $params = [], $force_link_tracking = 0): string
 	{
@@ -5166,12 +5177,13 @@ class Wacko
 	/**
 	 * compile body
 	 *
-	 * renders body with [wacko|..] formatter
+	 * renders body with [wacko|...] formatter
 	 *
-	 * @param string $body
-	 * @param int $page_id
-	 * @param boolean $paragrafica disable paragrafica for comments and include action
-	 * @param boolean $store stores rendered body in database
+	 * @param string	$body
+	 * @param int		$page_id
+	 * @param bool		$paragrafica	disable paragrafica for comments and include action
+	 * @param bool		$store			stores rendered body in database
+	 *
 	 * @return void|string
 	 */
 	function compile_body($body, $page_id = 0, $paragrafica = false, $store = false)
@@ -5686,12 +5698,10 @@ class Wacko
 			return false;
 		}
 
-		if (isset($this->db->groups['Reviewer']) && is_array($this->db->groups['Reviewer']))
+		if (isset($this->db->groups['Reviewer']) && is_array($this->db->groups['Reviewer'])
+			&& in_array($this->get_user_id(), $this->db->groups['Reviewer']))
 		{
-			if (in_array($this->get_user_id(), $this->db->groups['Reviewer']))
-			{
-				return true;
-			}
+			return true;
 		}
 
 		return false;
@@ -5700,9 +5710,9 @@ class Wacko
 	/**
 	 * checks if user is owner of the current page, or a page specified via $page_id
 	 *
-	 * @param int $page_id
+	 * @param int	$page_id
 	 *
-	 * @return boolean	returns true
+	 * @return bool	returns true
 	 */
 	function is_owner($page_id = null): bool
 	{
@@ -5863,8 +5873,8 @@ class Wacko
 	* Get ACL for tag from cache
 	*
 	* @param int		$page_id
-	* @param string 	$privilege ACL privilege: read, write, comment, create, upload
-	* @param boolean	$use_defaults
+	* @param string		$privilege		ACL privilege: read, write, comment, create, upload
+	* @param bool		$use_defaults
 	*
 	* @return array ACL
 	*/
@@ -5876,10 +5886,10 @@ class Wacko
 	/**
 	* Add ACL to cache
 	*
-	* @param int $page_id
-	* @param string $privilege ACL privilege: read, write, comment, create, upload
-	* @param boolean $use_defaults
-	* @param array $acl Access control list
+	* @param int		$page_id
+	* @param string		$privilege		ACL privilege: read, write, comment, create, upload
+	* @param bool		$use_defaults
+	* @param array		$acl			Access control list
 	*/
 	function cache_acl($page_id, $privilege, $use_defaults, $acl): void
 	{
@@ -5932,14 +5942,14 @@ class Wacko
 	/**
 	* Load ACL
 	*
-	* @param int $page_id
-	* @param string $privilege ACL privilege: read, write, comment, create, upload
-	* @param boolean $use_defaults
-	* @param boolean $use_cache
-	* @param boolean $use_parent
-	* @param string $new_tag
+	* @param int		$page_id
+	* @param string		$privilege		ACL privilege: read, write, comment, create, upload
+	* @param bool		$use_defaults
+	* @param bool		$use_cache
+	* @param bool		$use_parent
+	* @param string		$new_tag
 	*
-	* @return array $acl Access control list
+	* @return array		$acl			Access control list
 	*/
 	function load_acl($page_id, $privilege, $use_defaults = 1, $use_cache = 1, $use_parent = 1, $new_tag = ''): array
 	{
@@ -6018,13 +6028,13 @@ class Wacko
 	/**
 	 * check access privilege
 	 *
-	 * @param string $privilege
-	 * @param string $page_id
-	 * @param string $user_name
-	 * @param int $use_parent
-	 * @param string $new_tag
+	 * @param string	$privilege
+	 * @param string	$page_id
+	 * @param string	$user_name
+	 * @param int		$use_parent
+	 * @param string	$new_tag
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	function has_access($privilege, $page_id = '', $user_name = '', $use_parent = 1, $new_tag = ''): bool
 	{
@@ -6082,11 +6092,11 @@ class Wacko
 
 	/**
 	 *
-	 * @param string $user_name
-	 * @param string $acl_list
-	 * @param boolean $copy_to_this_acl
+	 * @param string	$user_name
+	 * @param string	$acl_list
+	 * @param bool		$copy_to_this_acl
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	function check_acl($user_name, $acl_list, $copy_to_this_acl = false): bool
 	{
@@ -6127,43 +6137,43 @@ class Wacko
 			return false;
 		}
 
-		$upos	= mb_strpos($acls, "\n" . $user_name . "\n");
-		$aupos	= mb_strpos($acls, "\n!" . $user_name . "\n");
-		$spos	= mb_strpos($acls, '*');
-		$bpos	= mb_strpos($acls, '$');
+		$u_pos	= mb_strpos($acls, "\n" . $user_name . "\n");
+		$au_pos	= mb_strpos($acls, "\n!" . $user_name . "\n");
+		$s_pos	= mb_strpos($acls, '*');
+		$b_pos	= mb_strpos($acls, '$');
 
-		if ($aupos !== false)
+		if ($au_pos !== false)
 		{
 			return false;
 		}
 
-		if ($upos !== false)
+		if ($u_pos !== false)
 		{
 			return true;
 		}
 
-		if ($spos !== false)
+		if ($s_pos !== false)
 		{
-			if ($acls[$spos - 1] == '!')
+			if ($acls[$s_pos - 1] == '!')
 			{
 				return false;
 			}
 		}
 
-		if ($bpos !== false)
+		if ($b_pos !== false)
 		{
-			if ($acls[$bpos - 1] == '!')
+			if ($acls[$b_pos - 1] == '!')
 			{
 				return false;
 			}
 		}
 
-		if ($spos !== false)
+		if ($s_pos !== false)
 		{
 			return true;
 		}
 
-		if ($bpos !== false)
+		if ($b_pos !== false)
 		{
 			if ($user_name == GUEST || $user_name == '')
 			{
@@ -6201,24 +6211,24 @@ class Wacko
 
 			foreach ($lines as $line)
 			{
-				$linel = $line;
+				$line_lo = $line;
 
 				// check for inversion character "!"
 				if (preg_match('/^\!(.*)$/u', $line, $matches))
 				{
 					$negate	= 1;
-					$linel	= $matches[1];
+					$line_lo	= $matches[1];
 				}
 				else
 				{
 					$negate = 0;
 				}
 
-				$linel = mb_strtolower(trim($linel));
+				$line_lo = mb_strtolower(trim($line_lo));
 
-				if (isset($aliases[$linel]))
+				if (isset($aliases[$line_lo]))
 				{
-					foreach (explode("\\n", $aliases[$linel]) as $item)
+					foreach (explode("\\n", $aliases[$line_lo]) as $item)
 					{
 						$item	= trim($item);
 						$list[]	= ($negate ? '!' . $item : $item);
@@ -6412,7 +6422,6 @@ class Wacko
 					"reviewer_id	= " . (int) $reviewer_id . " " .
 				"WHERE page_id = " . (int) $page_id . " " .
 				"LIMIT 1");
-
 		}
 		else
 		{
@@ -6582,8 +6591,9 @@ class Wacko
 		if (@$_GET['removebookmark'] && $user && !$this->sess->menu_default)
 		{
 			unset($_GET['removebookmark']);
+
 			// rewriting menu table except containing current page tag
-			$prev = $menu_formatted;
+			$prev			= $menu_formatted;
 			$menu_page_ids	= [];
 			$menu_formatted	= [];
 
@@ -8116,13 +8126,18 @@ class Wacko
 				: '');
 	}
 
-	// pages listing/navigation for multipage lists.
-	//		$total		= total elements in the list
-	//		$perpage	= total elements on a page
-	//		$name		= page number variable in $_GET
-	//		$params		= $_GET parameters to be passed with the page link (as href-formatted array or string)
-	// returns an array with 'text' (navigation) and 'offset' (offset value
-	// for SQL queries) elements.
+	/**
+	 * pages listing/navigation for multipage lists.
+	 *
+	 * @param int			$total		total elements in the list
+	 * @param int			$perpage	total elements on a page
+	 * @param string		$_name		page number variable in $_GET
+	 * @param array|string	$params		$_GET parameters to be passed with the page link (as href-formatted array or string)
+	 * @param string		$method
+	 * @param bool			$tag
+	 *
+	 * @return array					array with 'text' (navigation) and 'offset' (offset value for SQL queries) elements.
+	 */
 	function pagination($total, $perpage = null, $_name = 'p', $params = '', $method = '', $tag = ''): array
 	{
 		$total		= (int) $total;
@@ -8342,9 +8357,9 @@ class Wacko
 	/**
 	 * Check for valid email address.
 	 *
-	 * @param string $email_address = email address to check
+	 * @param string	$email_address = email address to check
 	 *
-	 * @return boolean email valid or invalid
+	 * @return bool		email valid or invalid
 	 */
 	function validate_email_address($email_address): bool
 	{
@@ -8355,13 +8370,13 @@ class Wacko
 			$HTML5_email_pattern = '/^[a-zA-Z\d.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}' .
 								'[a-zA-Z\d])?(?:\.[a-zA-Z\d](?:[a-zA-Z\d-]{0,61}[a-zA-Z\d])?)*$/sD';
 
-			return (boolean) preg_match($HTML5_email_pattern, $email_address);
+			return (bool) preg_match($HTML5_email_pattern, $email_address);
 		}
 		else
 		{
 			// Use PHP built-in FILTER_VALIDATE_EMAIL, does not allow 'dotless' domains;
 			// http://php.net/filter.filters.validate
-			return (boolean) filter_var($email_address, FILTER_VALIDATE_EMAIL);
+			return (bool) filter_var($email_address, FILTER_VALIDATE_EMAIL);
 		}
 	}
 
@@ -8389,23 +8404,26 @@ class Wacko
 		}
 	}
 
-	// log event into the system journal. $message may use wiki
-	// syntax, however if used before locale translations registration,
-	// will be saved in plain text only.
-	// $level denotes event priority with 1 = highest.
-	// event classes are:
-	//		1. critical	- admin action, object deletion, suspected
-	//					  hacking attempt
-	//		2. highest	- locking, acl change, unsuccessful user login
-	//		3. high		- page renaming/moving/splitting/merging,
-	//					  user password change/reminder, successful
-	//					  user login
-	//		4. medium	- page creation (settings change), poll action,
-	//					  file upload, pm sending, user registration and
-	//					  email activation, page ownership claim
-	//		5. low		- comment posting, user logout
-	//		6. lowest	- page edit, user settings update
-	//		7. debugging- everything, where logging is necessary
+	/**
+	 * log event into the system journal
+	 *
+	 * event classes are:
+	 * 	1. critical		- admin action, object deletion, suspected hacking attempt
+	 * 	2. highest		- locking, acl change, unsuccessful user login
+	 * 	3. high			- page renaming/moving/splitting/merging,
+	 * 					  user password change/reminder, successful user login
+	 * 	4. medium		- page creation (settings change), file upload, pm sending,
+	 * 					  user registration and email activation, page ownership claim
+	 * 	5. low			- comment posting, user logout
+	 * 	6. lowest		- page edit, user settings update
+	 * 	7. debugging	- everything, where logging is necessary
+	 *
+	 * @param int		$level		denotes event priority with 1 = highest
+	 * @param string	$message	may use wiki syntax, however if used before locale translations registration,
+	 * 								will be saved in plain text only
+	 *
+	 * @return array					array with 'text' (navigation) and 'offset' (offset value for SQL queries) elements.
+	 */
 	function log($level, $message)
 	{
 		// check input
@@ -8443,12 +8461,13 @@ class Wacko
 	/**
 	 * creates tab menu
 	 *
-	 * @param array $tabs
-	 * @param string $active
-	 * @param string $handler
-	 * @param array $params
-	 * @param string $mod_selector
-	 * @return string|boolean
+	 * @param array		$tabs
+	 * @param string	$active
+	 * @param string	$handler
+	 * @param array		$params
+	 * @param string	$mod_selector
+	 *
+	 * @return string|bool
 	 */
 	function tab_menu($tabs, $active, $handler = '', $params = [], $mod_selector = 'm')
 	{
@@ -8646,12 +8665,13 @@ class Wacko
 							$out .= "\t<ul>\n";
 						}
 
-						$out .= "\t\t" . '<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
-									($can_edit
-										? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">' . "\n\t\t\t"
-										: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
-									'<label for="category' . $category_id . '">' . Ut::html($word['category']) . '</label>' . "\n\t\t" .
-								'</li>' . "\n";
+						$out .= "\t\t" .
+							'<li>' . "\n\t\t\t" . // TODO: CSS white-space: nowrap;
+								($can_edit
+									? '<input type="radio" id="category' . $category_id . '" name="category_id" value="' . $category_id . '">' . "\n\t\t\t"
+									: '<input type="checkbox" id="category' . $category_id . '" name="category' . $category_id . '" value="set"' . (is_array($selected) ? (in_array($category_id, $selected) ? ' checked' : '') : '') . '>' . "\n\t\t\t") .
+								'<label for="category' . $category_id . '">' . Ut::html($word['category']) . '</label>' . "\n\t\t" .
+							'</li>' . "\n";
 					}
 				}
 
@@ -8684,7 +8704,9 @@ class Wacko
 			if (!($can_edit || $this->method == 'edit'))
 			{
 				$out .= '<button type="submit" id="submit" name="save">' . $this->_t('CategoriesStoreButton') . '</button> ' .
-						'<a href="' . $this->href('') . '" class="btn-link"><button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button></a>' . "<br>\n" .
+						'<a href="' . $this->href('') . '" class="btn-link">' .
+							'<button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button>' .
+						'</a>' . "<br>\n" .
 						'<small>' . $this->_t('CategoriesStoreInfo') . '</small>' . "\n";
 			}
 		}
@@ -8696,7 +8718,10 @@ class Wacko
 
 			if (!$this->method == 'edit')
 			{
-				$out .=  '<a href="' . $this->href('') . '" class="btn-link"><button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button></a>' . "\n";
+				$out .=
+					'<a href="' . $this->href('') . '" class="btn-link">' .
+						'<button type="button" class="btn-cancel">' . $this->_t('CancelButton') . '</button>' .
+					'</a>' . "\n";
 			}
 		}
 
@@ -8793,9 +8818,9 @@ class Wacko
 	/**
 	 * show select for available languages
 	 *
-	 * @param string $name name for select
-	 * @param string $lang current language
-	 * @param bool $label display label
+	 * @param string	$name	name for select
+	 * @param string	$lang	current language
+	 * @param bool		$label	display label
 	 */
 	function show_select_lang($name, $lang, $label = false): string
 	{

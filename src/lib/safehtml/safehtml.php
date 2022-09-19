@@ -285,7 +285,7 @@ class SafeHTML
 	 *
 	 * @param array $attrs array of attributes $name => $value
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function writeAttrs($attrs)
 	{
@@ -410,7 +410,7 @@ class SafeHTML
 	 * @param string $name	tag name
 	 * @param array  $attrs   tag attributes
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function openHandler(&$parser, $name, $attrs)
 	{
@@ -508,7 +508,7 @@ class SafeHTML
 	 * @param object &$parser HTML parser
 	 * @param string $name	tag name
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function closeHandler(&$parser, $name)
 	{
@@ -550,7 +550,7 @@ class SafeHTML
 	 *
 	 * @param string $tag tag name
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	protected function closeTag($tag)
 	{
@@ -580,7 +580,7 @@ class SafeHTML
 	 * @param object &$parser HTML parser
 	 * @param string $data	textual data
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function dataHandler(&$parser, $data)
 	{
@@ -598,7 +598,7 @@ class SafeHTML
 	 * @param object &$parser HTML parser
 	 * @param string $data	comments or other type of data
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function escapeHandler(&$parser, $data)
 	{
@@ -664,7 +664,7 @@ class SafeHTML
 	/**
 	 * Clears current document data
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function clear()
 	{

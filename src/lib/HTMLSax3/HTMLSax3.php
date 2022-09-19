@@ -470,7 +470,7 @@ class XML_HTMLSax3 {
 	 * @param string name of parser option
 	 * @param int (optional) 1 to switch on, 0 for off
 	 * @access public
-	 * @return boolean
+	 * @return bool
 	 */
 	function set_option($name, $value=1) {
 		if ( array_key_exists($name,$this->state_parser->parser_options) ) {
