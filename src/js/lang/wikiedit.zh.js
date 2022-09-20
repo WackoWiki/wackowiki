@@ -57,8 +57,8 @@ lang = {
 							' Ctrl+Shift+1 .. 4 - 标题 1..4\n'+
 							' Alt+I 或 Ctrl+T - 缩进\n'+
 							' Alt+U 或 Ctrl+Shift+T - 取消缩进\n'+
-							' Ctrl+J - MarkUp (!!)\n'+
-							' Ctrl+H - MarkUp (??)\n'+
+							' Ctrl+J - 标记 (!!)\n'+
+							' Ctrl+H - 标记 (??)\n'+
 							' Alt+L - 链接\n'+
 							' Ctrl+L - 带描述的链接\n'+
 							' Ctrl+Shift+L - 无序列表\n'+
