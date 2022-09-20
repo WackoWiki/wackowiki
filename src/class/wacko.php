@@ -4478,8 +4478,9 @@ class Wacko
 	* Add spaces to WikiWords (if config parameter show_spaces = 1) and replace
 	* relative  path (/ !/ ../) to icons RootLinkIcon, SubLinkIcon, UpLinkIcon
 	*
-	* @param string $text Text with WikiWords
-	* @return string Text with Wiki Words
+	* @param	string		$text Text with WikiWords
+	*
+	* @return	string		Text with Wiki Words
 	*/
 	function add_spaces($text): ?string
 	{
@@ -6693,8 +6694,8 @@ class Wacko
 		return (!isset($this->sess->menu_default)) || $this->sess->menu_default;
 	}
 
-	// TODO: do not add
-	//	- comments, system pages, methodes,
+	// TODO:
+	//	- comments, system pages, methods (?)
 	//	- url arguments ?profile= ['page_id', 'arguments']
 	//	- add parameter for trail size in user settings ?
 	// parse only once, without included pages (avoid call in run function!)
@@ -6709,23 +6710,25 @@ class Wacko
 			{
 				$count = count($this->sess->user_trail);
 
-				if (isset($this->sess->user_trail[$count - 1][0])
-					&&    $this->sess->user_trail[$count - 1][0] == $page_id)
+				if (!(isset($this->sess->user_trail[$count - 1][0])
+					&&      $this->sess->user_trail[$count - 1][0] == $page_id))
 				{
-					// nothing
-				}
-				else
-				{
-					if (count($this->sess->user_trail) > $size)
+					// this is about navigation, remove double entries
+					foreach ($this->sess->user_trail as $link)
 					{
-						$this->sess->user_trail	= array_slice($this->sess->user_trail, -$size);
+						if ($page_id != $link[0])
+						{
+							$trail[] = $link;
+						}
 					}
 
-					$_user_trail[-1]	= [$page_id, $this->page['tag'], $this->page['title']];
-					$user_trail			= $this->sess->user_trail + $_user_trail;
-					$user_trail			= array_values($user_trail);
+					if (count($trail) > $size)
+					{
+						$trail	= array_slice($trail, -$size);
+					}
 
-					$this->sess->user_trail = $user_trail;
+					$trail[-1]					= [$page_id, $this->page['tag'], $this->page['title']];
+					$this->sess->user_trail		= $trail;
 				}
 			}
 			else
@@ -6738,7 +6741,7 @@ class Wacko
 	// user trail navigation
 	//		call this function in your theme header or footer
 	//		$separator	= &gt; »
-	function get_user_trail($titles = false, $separator = ' &gt; ', $linking = true, $size = null): string
+	function get_user_trail($title = false, $separator = ' &gt; ', $linking = true, $size = null): string
 	{
 		// don't call this inside the run function, it will also writes all included pages
 		// in the user trail because the engine parses them before it includes them
@@ -6746,16 +6749,15 @@ class Wacko
 
 		if (isset($this->sess->user_trail))
 		{
-			$links		= $this->sess->user_trail;
 			$result		= '';
 			$size		= (int) $size;
 			$i			= 0;
 
-			foreach ($links as $link)
+			foreach ($this->sess->user_trail as $link)
 			{
 				if ($i < $size && $this->page['page_id'] != $link[0])
 				{
-					if (!$titles)
+					if (!$title)
 					{
 						$result .= $this->link($link[1], '', $link[1]) . $separator;
 					}
@@ -6772,14 +6774,7 @@ class Wacko
 				$i++;
 			}
 
-			if (!$titles)
-			{
-				$result .= $this->page['tag'];
-			}
-			else
-			{
-				$result .= $this->page['title'];
-			}
+			$result .= $title ? $this->page['title'] : $this->page['tag'];
 
 			return $result;
 		}
@@ -7350,13 +7345,15 @@ class Wacko
 					continue;
 				}
 
+				$item = $titles? $this->get_page_title($link) : $step;
+
 				if ($linking && $link != $this->tag)
 				{
-					$item = $this->link($link, '', ($titles? $this->get_page_title($link) : $step));
+					$item = $this->link($link, '', $item);
 				}
 				else
 				{
-					$item = $titles? $this->get_page_title($link) : $step;
+					$item = $this->add_spaces($item);
 				}
 
 				$result[] = '<bdi>' . $item . '</bdi>';
