@@ -41,7 +41,7 @@ function admin_maint_resync(&$engine, $module)
 			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT p.owner_id as user_id, COUNT(p.tag) AS n
 						FROM " . $prefix . "page p,
-							{$prefix} user o
+							{$prefix}user o
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id <> 0
 							AND p.deleted <> 1
@@ -54,7 +54,7 @@ function admin_maint_resync(&$engine, $module)
 			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT o.user_id, COUNT(p.tag) AS n
 						FROM " . $prefix . "page p,
-							{$prefix} user o
+							{$prefix}user o
 						WHERE p.owner_id = o.user_id
 							AND p.comment_on_id = 0
 							AND p.deleted <> 1
@@ -67,7 +67,7 @@ function admin_maint_resync(&$engine, $module)
 			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT r.user_id, COUNT(r.page_id) AS n
 						FROM " . $prefix . "revision r,
-							{$prefix} user o
+							{$prefix}user o
 						WHERE r.owner_id = o.user_id
 							AND r.comment_on_id = 0
 						GROUP BY r.user_id) AS s
@@ -79,7 +79,7 @@ function admin_maint_resync(&$engine, $module)
 			$sql[] = "UPDATE " . $prefix . "user u,
 						(SELECT o.user_id, COUNT(f.file_id) AS n
 						FROM " . $prefix . "file f,
-							{$prefix} user o
+							{$prefix}user o
 						WHERE f.user_id = o.user_id
 							AND f.deleted <> 1
 						GROUP BY f.user_id) AS s
