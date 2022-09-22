@@ -13,7 +13,7 @@ class Wacko
 	private array $file_cache		= [];
 	private array $page_cache		= [];
 	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
-	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
+	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
 	public $charset;
 	public $config;								// @deprecated, but will live for a looong time
