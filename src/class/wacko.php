@@ -3361,22 +3361,12 @@ class Wacko
 		// get alignment type
 		if ($align)
 		{
-			if(preg_match('/center/i', $align))
-			{
-				$e_align = 'center';
-			}
-			else if(preg_match('/right/i', $align))
-			{
-				$e_align = 'right';
-			}
-			else if(preg_match('/left/i', $align))
-			{
-				$e_align = 'left';
-			}
-			else
-			{
-				$e_align = 'default';
-			}
+			$e_align = match(1){
+				preg_match('/center/i', $align)	=> 'center',
+				preg_match('/right/i', $align)	=> 'right',
+				preg_match('/left/i', $align)	=> 'left',
+				default							=> 'default',
+			};
 
 			$media_class = 'media-' . $e_align;
 		}
@@ -3414,40 +3404,20 @@ class Wacko
 		}
 
 		// get alignment type
-		if(preg_match('/center/i', $param))
-		{
-			$align = 'center';
-		}
-		else if(preg_match('/right/i', $param))
-		{
-			$align = 'right';
-		}
-		else if(preg_match('/left/i', $param))
-		{
-			$align = 'left';
-		}
-		else
-		{
-			$align = 'default';
-		}
+		$align = match(1){
+			preg_match('/center/i', $param, $m)	=> 'center',
+			preg_match('/right/i', $param, $m)	=> 'right',
+			preg_match('/left/i', $param, $m)	=> 'left',
+			default								=> 'default',
+		};
 
 		// get linking type
-		if(preg_match('/nolink/i', $param))
-		{
-			$linking = 'nolink';
-		}
-		else if(preg_match('/direct/i', $param))
-		{
-			$linking = 'direct';
-		}
-		else if(preg_match('/linkonly/i', $param))
-		{
-			$linking = 'linkonly';
-		}
-		else
-		{
-			$linking = 'meta';
-		}
+		$linking = match(1){
+			preg_match('/nolink/i', $param)		=> 'nolink',
+			preg_match('/direct/i', $param)		=> 'direct',
+			preg_match('/linkonly/i', $param)	=> 'linkonly',
+			default								=> 'meta',
+		};
 
 		//get caption command
 		if (preg_match('/(caption)/i', $param))
