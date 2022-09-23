@@ -3334,23 +3334,15 @@ class Wacko
 
 		if ($width || $height)
 		{
-			if (!$width)
-			{
-				$width = 'auto';
-			}
-			else if (preg_match('/^\d+$/', $width))
-			{
-				$width .= 'px';
-			}
+			$width = match(1){
+				preg_match('/^\d+$/', $width)	=> 'px',
+				default							=> 'auto',
+			};
 
-			if (!$height)
-			{
-				$height = 'auto';
-			}
-			else if (preg_match('/^\d+$/', $height))
-			{
-				$height .= 'px';
-			}
+			$height = match(1){
+				preg_match('/^\d+$/', $height)	=> 'px',
+				default							=> 'auto',
+			};
 
 			// uses width="50" height="50", no units allowed - assumes px
 			#$scale	= ' width="' . (int) $_width . '" height="' . (int) $_height . '"';
