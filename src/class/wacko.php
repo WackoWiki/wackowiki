@@ -3248,13 +3248,20 @@ class Wacko
 		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
 		if ($this->db->urls_underscores)
 		{
-			$tag = preg_replace('/(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶' . $this->lang['UPPERNUM'] . ')/u', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶\/)/u', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPERNUM'] . ')¶(' . $this->lang['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $tag);
-			$tag = preg_replace('/\/¶(' . $this->lang['UPPERNUM'] . ')/u', '/\\1', $tag);
-			$tag = str_replace('¶', '_', $tag);
+			$patterns =[
+				['(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')', 									'\\1¶\\2'],
+				['(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')',									'\\1¶\\2'],
+				['(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶' . $this->lang['UPPERNUM'] . ')',		'\\1'],
+				['(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶\/)',									'\\1'],
+				['(' . $this->lang['UPPERNUM'] . ')¶(' . $this->lang['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
+				['\/¶(' . $this->lang['UPPERNUM'] . ')',																'/\\1'],
+				['¶',																									'_'],
+			];
+
+			foreach ($patterns as $pattern)
+			{
+				$tag = preg_replace('/' . $pattern[0] . '/u', $pattern[1], $tag);
+			}
 		}
 
 		return $tag;
@@ -3397,9 +3404,9 @@ class Wacko
 
 		// get alignment type
 		$align = match(1){
-			preg_match('/center/i', $param, $m)	=> 'center',
-			preg_match('/right/i', $param, $m)	=> 'right',
-			preg_match('/left/i', $param, $m)	=> 'left',
+			preg_match('/center/i', $param)		=> 'center',
+			preg_match('/right/i', $param)		=> 'right',
+			preg_match('/left/i', $param)		=> 'left',
 			default								=> 'default',
 		};
 
@@ -4469,17 +4476,24 @@ class Wacko
 
 	function add_nbsps($text): string
 	{
-		$text = preg_replace('/(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->lang['ALPHANUM'] . ')\//u', '\\1' . NBSP . '/', $text);
-		$text = preg_replace('/(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . $this->lang['UPPERNUM'] . ')/u', '\\1', $text);
-		$text = preg_replace('/(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . '\/)/u', '\\1', $text);
-		$text = preg_replace('/\/(' . $this->lang['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
-		$text = preg_replace('/(' . $this->lang['UPPERNUM'] . ')' . NBSP . '(' . $this->lang['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
-		$text = preg_replace('/(\d)(' . $this->lang['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->lang['ALPHA'] . ')(\d)/u', '\\1' . NBSP . '\\2', $text);
-		// $text = preg_replace('/(\d)' . NBSP . '(?=\d)/u', '\\1', $text);
-		$text = preg_replace('/(\d)' . NBSP . '(?!' . $this->lang['ALPHA'] . ')/u', '\\1', $text);
+		$patterns =[
+			['(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')', 												'\\1' . NBSP . '\\2'],
+			['(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')',												'\\1' . NBSP . '\\2'],
+			['(' . $this->lang['ALPHANUM'] . ')\/',																				'\\1' . NBSP . '/'],
+			['(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . $this->lang['UPPERNUM'] . ')',		'\\1'],
+			['(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . '\/)',								'\\1'],
+			['\/(' . $this->lang['ALPHANUM'] . ')',																				'\\1'],
+			['(' . $this->lang['UPPERNUM'] . ')' . NBSP . '(' . $this->lang['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
+			['(\d)(' . $this->lang['ALPHA'] . ')',																				'\\2'],
+			['(' . $this->lang['ALPHA'] . ')(\d)',																				'\\2'],
+			# ['(\d)' . NBSP . '(?=\d)',																						'\\1'],
+			['(\d)' . NBSP . '(?!' . $this->lang['ALPHA'] . ')',																'\\1'],
+		];
+
+		foreach ($patterns as $pattern)
+		{
+			$text = preg_replace('/' . $pattern[0] . '/u', $pattern[1], $text);
+		}
 
 		return $text;
 	}
