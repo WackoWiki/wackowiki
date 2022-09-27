@@ -53,17 +53,9 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 			<h1><?php echo $lang['Title'];?><span class="white"> : </span><?php echo $lang[$install_action]; ?></h1>
 			<ul class="menu">
 			<?php
-				$actions = [
-					'lang',
-					'version-check',
-					'config-site',
-					'config-database',
-					'install-database',
-					'write-config'
-				];
 				$next = '';
 
-				foreach ($actions as $i => $action)
+				foreach (ACTIONS as $i => $action)
 				{
 					if ($i > 0)
 					{

@@ -7,6 +7,7 @@ if (!defined('IN_WACKO'))
 
 const SET_MENU			= 1;
 const SET_MENU_ONLY		= 2;
+const ACTIONS			= ['lang', 'version-check', 'config-site', 'config-database', 'install-database', 'write-config'];
 
 class Installer
 {
@@ -22,7 +23,7 @@ class Installer
 		$install_action = trim((string) ($_REQUEST['installAction'] ?? ''));
 
 		// call installer
-		if (!$install_action)
+		if (!$install_action || !in_array($install_action, ACTIONS))
 		{
 			$install_action = 'lang';
 		}
