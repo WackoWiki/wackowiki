@@ -32,7 +32,7 @@ if ($this->has_access('read')
 	foreach ($pages as $num => $page)
 	{
 		// check ACLS
-		if (!$this->has_access('write', $page['page_id']))
+		if (!$this->has_access('read', $page['page_id']))
 		{
 			continue;
 		}
