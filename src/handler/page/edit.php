@@ -13,8 +13,7 @@ $title			= '';
 
 if ($this->has_access('read')
 	&& (($this->page && $this->has_access('write'))
-	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_owner())
-	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && $this->is_admin())
+	|| (isset($this->page['comment_on_id']) && $this->page['comment_on_id'] && ($this->is_owner() || $this->is_admin()))
 	|| (!$this->page && $this->has_access('create'))))
 {
 	// check for reserved word

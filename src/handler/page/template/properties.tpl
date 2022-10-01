@@ -298,11 +298,13 @@
 			<li class="m-referrers"><a href="[ ' href: referrers ' ]">[ ' i Icon ' ][ ' _t: SettingsReferrers ' ]</a></li>
 			<li class="[ ' watched | list watch-on watch-off ' ]"><a href="[ ' href: watch ' ]">[ ' i Icon ' ][ ' watched | list WatchText UnwatchText | _t ' ]</a></li>
 			<li class="m-print"><a href="[ ' href: print ' ]">[ ' i Icon ' ][ ' _t: SettingsPrint ' ]</a></li>
+			[= export _ =
+				<li class="m-xml"><a href="[ ' href: export.xml ' ]">[ ' i Icon ' ][ ' _t: SettingsXML ' ]</a></li>
+			=]
 			[== CommentedOut _ =
 				<li class="m-languages"><a href="[ ' href: languages ' ]">[ ' i Icon ' ][ ' _t: SettingsLanguages ' ]</a></li>
 				<li class="m-word"><a href="[ ' href: wordprocessor ' ]">[ ' i Icon ' ][ ' _t: SettingsWordprocessor ' ]</a></li>
 				<li class="m-latex"><a href="[ ' href: latex ' ]">[ ' i Icon ' ][ ' _t: SettingsLatex ' ]</a></li>
-				<li class="m-xml"><a href="[ ' href: export.xml ' ]">[ ' i Icon ' ][ ' _t: SettingsXML ' ]</a></li>
 			==]
 		</ul>
 	</aside>

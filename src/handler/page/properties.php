@@ -188,7 +188,7 @@ $tpl->wat_number	= $watchers['n'];
 
 $tpl->i = true; // turn on icon
 
-// Rename link (shows only if owner is current user or Admin)
+// rename link (shows only if owner is current user or Admin)
 // ACL link (shows only if owner is current user or Admin)
 if ($this->is_owner() || $this->is_admin())
 {
@@ -196,16 +196,22 @@ if ($this->is_owner() || $this->is_admin())
 	$tpl->perm_i	= true;
 }
 
-// Remove link (shows only for page owner if allowed or Admin)
+// remove link (shows only for page owner if allowed or Admin)
 if (($this->is_owner() && !$this->db->remove_onlyadmins) || $this->is_admin())
 {
 	$tpl->remove_i = true;
 }
 
-// Moderate link (shows only if current user is Moderator or Admin)
+// moderate link (shows only if current user is Moderator or Admin)
 if ($this->is_moderator() || $this->is_admin())
 {
 	$tpl->moder_i = true;
+}
+
+if (((	$this->db->export_handler == 2 && $this->get_user())
+	||	$this->db->export_handler == 1))
+{
+	$tpl->export_i = true;
 }
 
 $tpl->watched = (int) $this->is_watched;
