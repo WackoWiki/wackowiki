@@ -18,7 +18,7 @@ class WackoFormatter
 	public array $tdindent_closers	= [];
 	public int $br					= 1;
 	public int $intable				= 0;
-	public int $intablebr			= 0;
+	public int $intable_br			= 0;
 	public int $cols				= 0;
 	public string $LONGREGEXP;
 	public string $MOREREGEXP;
@@ -405,7 +405,7 @@ class WackoFormatter
 		{
 			$this->br			= 0;
 			$this->cols			= 0;
-			$this->intablebr	= true;
+			$this->intable_br	= true;
 			$this->table_scope	= true;
 
 			return '<table class="dtable">';
@@ -414,7 +414,7 @@ class WackoFormatter
 		{
 			$this->br			= 0;
 			$this->cols			= 0;
-			$this->intablebr	= true;
+			$this->intable_br	= true;
 			$this->table_scope	= true;
 
 			return '<table class="usertable">';
@@ -423,7 +423,7 @@ class WackoFormatter
 		else if (($thing == '|#' || $thing == '||#') && $this->table_scope)
 		{
 			$this->br			= 0;
-			$this->intablebr	= false;
+			$this->intable_br	= false;
 			$this->table_scope	= false;
 
 			return '</table>';
@@ -433,7 +433,7 @@ class WackoFormatter
 		{
 			$this->br			= 1;
 			$this->intable		= true;
-			$this->intablebr	= false;
+			$this->intable_br	= false;
 
 			$output		= '<tr class="userrow">';
 			$cells		= preg_split('/\|/', $matches[1]);
@@ -490,8 +490,8 @@ class WackoFormatter
 				$this->cols	= $count;
 			}
 
-			$this->intablebr	= true;
 			$this->intable		= false;
+			$this->intable_br	= true;
 
 			return $output;
 		}
@@ -500,7 +500,7 @@ class WackoFormatter
 		{
 			$this->br			= 1;
 			$this->intable		= true;
-			$this->intablebr	= false;
+			$this->intable_br	= false;
 
 			$output		= '<tr class="userrow">';
 			$cells		= preg_split('/\|/', $matches[1]);
@@ -557,8 +557,8 @@ class WackoFormatter
 				$this->cols = $count;
 			}
 
-			$this->intablebr	= true;
 			$this->intable		= false;
+			$this->intable_br	= true;
 
 			return $output;
 		}
@@ -689,7 +689,7 @@ class WackoFormatter
 			$result = preg_replace('/^(<br>)+/i', '', $result );
 			$result = preg_replace('/(<br>)+$/i', '', $result );
 
-			return $result; // '<blockquote>' . $result . '</blockquote>';
+			return $result;
 		}
 		// super
 		else if (preg_match('/^\^\^(.*)\^\^$/u', $thing, $matches))
@@ -963,8 +963,8 @@ class WackoFormatter
 			}
 			else
 			{
-				$opener		= '<ol type="' . $new_indent_type . '"><li' .
-							  ($start ? ' value="' . $start . '"' : '') . '>';
+				$opener		= '<ol type="' . $new_indent_type . '">' .
+							  '<li' . ($start ? ' value="' . $start . '"' : '') . '>';
 				$closer		= '</li></ol>' . "\n";
 				$new_type	= 1;
 				$li			= 1;
@@ -1013,7 +1013,7 @@ class WackoFormatter
 			return $result;
 		}
 		// new lines
-		else if ($thing == "\n" && !$this->intablebr)
+		else if ($thing == "\n" && !$this->intable_br)
 		{
 			// if we got here, there was no tab in the next line;
 			// this means that we can close all open indents.
