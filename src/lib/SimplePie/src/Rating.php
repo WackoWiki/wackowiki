@@ -41,88 +41,86 @@
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
+namespace SimplePie;
 
 /**
- * PSR-4 implementation for SimplePie.
+ * Handles `<media:rating>` or `<itunes:explicit>` tags as defined in Media RSS and iTunes RSS respectively
  *
- * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the \SimplePie\SimplePie class
- * from /src/SimplePie.php:
+ * Used by {@see \SimplePie\Enclosure::get_rating()} and {@see \SimplePie\Enclosure::get_ratings()}
  *
- *      new \SimplePie\SimplePie();
- *
- * @param string $class The fully-qualified class name.
- * @return void
- */
-spl_autoload_register(function ($class) {
-
-    // project-specific namespace prefix
-    $prefix = 'SimplePie\\';
-
-    // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/src/';
-
-    // does the class use the namespace prefix?
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        // no, move to the next registered autoloader
-        return;
-    }
-
-    // get the relative class name
-    $relative_class = substr($class, $len);
-
-    // replace the namespace prefix with the base directory, replace namespace
-    // separators with directory separators in the relative class name, append
-    // with .php
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-    // if the file exists, require it
-    if (file_exists($file)) {
-        require $file;
-    }
-});
-
-// autoloader
-spl_autoload_register(array(new SimplePie_Autoloader(), 'autoload'));
-
-if (!class_exists('SimplePie'))
-{
-	trigger_error('Autoloader not registered properly', E_USER_ERROR);
-}
-
-/**
- * Autoloader class
+ * This class can be overloaded with {@see \SimplePie\SimplePie::set_rating_class()}
  *
  * @package SimplePie
  * @subpackage API
  */
-class SimplePie_Autoloader
+class Rating
 {
-	protected $path;
+    /**
+     * Rating scheme
+     *
+     * @var string
+     * @see get_scheme()
+     */
+    public $scheme;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'library';
-	}
+    /**
+     * Rating value
+     *
+     * @var string
+     * @see get_value()
+     */
+    public $value;
 
-	/**
-	 * Autoloader
-	 *
-	 * @param string $class The name of the class to attempt to load.
-	 */
-	public function autoload($class)
-	{
-		// Only load the class if it starts with "SimplePie"
-		if (strpos($class, 'SimplePie') !== 0)
-		{
-			return;
-		}
+    /**
+     * Constructor, used to input the data
+     *
+     * For documentation on all the parameters, see the corresponding
+     * properties and their accessors
+     */
+    public function __construct($scheme = null, $value = null)
+    {
+        $this->scheme = $scheme;
+        $this->value = $value;
+    }
 
-		$filename = $this->path . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-		include $filename;
-	}
+    /**
+     * String-ified version
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        // There is no $this->data here
+        return md5(serialize($this));
+    }
+
+    /**
+     * Get the organizational scheme for the rating
+     *
+     * @return string|null
+     */
+    public function get_scheme()
+    {
+        if ($this->scheme !== null) {
+            return $this->scheme;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the value of the rating
+     *
+     * @return string|null
+     */
+    public function get_value()
+    {
+        if ($this->value !== null) {
+            return $this->value;
+        }
+
+        return null;
+    }
 }
+
+class_alias('SimplePie\Rating', 'SimplePie_Rating');

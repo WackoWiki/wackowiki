@@ -41,88 +41,109 @@
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
+namespace SimplePie;
 
 /**
- * PSR-4 implementation for SimplePie.
+ * Handles `<media:credit>` as defined in Media RSS
  *
- * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the \SimplePie\SimplePie class
- * from /src/SimplePie.php:
+ * Used by {@see \SimplePie\Enclosure::get_credit()} and {@see \SimplePie\Enclosure::get_credits()}
  *
- *      new \SimplePie\SimplePie();
- *
- * @param string $class The fully-qualified class name.
- * @return void
- */
-spl_autoload_register(function ($class) {
-
-    // project-specific namespace prefix
-    $prefix = 'SimplePie\\';
-
-    // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/src/';
-
-    // does the class use the namespace prefix?
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        // no, move to the next registered autoloader
-        return;
-    }
-
-    // get the relative class name
-    $relative_class = substr($class, $len);
-
-    // replace the namespace prefix with the base directory, replace namespace
-    // separators with directory separators in the relative class name, append
-    // with .php
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-    // if the file exists, require it
-    if (file_exists($file)) {
-        require $file;
-    }
-});
-
-// autoloader
-spl_autoload_register(array(new SimplePie_Autoloader(), 'autoload'));
-
-if (!class_exists('SimplePie'))
-{
-	trigger_error('Autoloader not registered properly', E_USER_ERROR);
-}
-
-/**
- * Autoloader class
+ * This class can be overloaded with {@see \SimplePie\SimplePie::set_credit_class()}
  *
  * @package SimplePie
  * @subpackage API
  */
-class SimplePie_Autoloader
+class Credit
 {
-	protected $path;
+    /**
+     * Credited role
+     *
+     * @var string
+     * @see get_role()
+     */
+    public $role;
 
-	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		$this->path = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'library';
-	}
+    /**
+     * Organizational scheme
+     *
+     * @var string
+     * @see get_scheme()
+     */
+    public $scheme;
 
-	/**
-	 * Autoloader
-	 *
-	 * @param string $class The name of the class to attempt to load.
-	 */
-	public function autoload($class)
-	{
-		// Only load the class if it starts with "SimplePie"
-		if (strpos($class, 'SimplePie') !== 0)
-		{
-			return;
-		}
+    /**
+     * Credited name
+     *
+     * @var string
+     * @see get_name()
+     */
+    public $name;
 
-		$filename = $this->path . DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-		include $filename;
-	}
+    /**
+     * Constructor, used to input the data
+     *
+     * For documentation on all the parameters, see the corresponding
+     * properties and their accessors
+     */
+    public function __construct($role = null, $scheme = null, $name = null)
+    {
+        $this->role = $role;
+        $this->scheme = $scheme;
+        $this->name = $name;
+    }
+
+    /**
+     * String-ified version
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        // There is no $this->data here
+        return md5(serialize($this));
+    }
+
+    /**
+     * Get the role of the person receiving credit
+     *
+     * @return string|null
+     */
+    public function get_role()
+    {
+        if ($this->role !== null) {
+            return $this->role;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the organizational scheme
+     *
+     * @return string|null
+     */
+    public function get_scheme()
+    {
+        if ($this->scheme !== null) {
+            return $this->scheme;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the credited person/entity's name
+     *
+     * @return string|null
+     */
+    public function get_name()
+    {
+        if ($this->name !== null) {
+            return $this->name;
+        }
+
+        return null;
+    }
 }
+
+class_alias('SimplePie\Credit', 'SimplePie_Credit');

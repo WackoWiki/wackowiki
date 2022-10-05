@@ -16,7 +16,7 @@ The version and status of each is summarized below:
 | phpmailer			| PHPMailer			| 6.6.4		| unpatched |
 | phpthumb			| PhpThumb			| 2.2.1		| patched: various, see repo |
 | safehtml			| SafeHTML			| 1.3.12	| patched: various, see repo |
-| simplepie			| SimplePie			| 1.6.0		| unpatched |
+| simplepie			| SimplePie			| 1.7.0		| unpatched |
 | text-hl			| Text_Highlighter	| 0.8.0		| patched: various, see repo |
 
 ## JavaScript libraries
