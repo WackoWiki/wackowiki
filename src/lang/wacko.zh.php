@@ -169,7 +169,7 @@ $wacko_translation = [
 	'HideComments'				=> '隐藏评论/表单',
 	'AddComment'				=> '请发布评论：',
 	'AddCommentTitle'			=> '评论标题：',
-	'CommentTitleRe'			=> 'Re:',
+	'CommentTitleRe'			=> '回复:',
 	'AddCommentButton'			=> '添加评论',
 	'HereLink'					=> '这里',
 	'PageHandlerMoreTip'		=> '更多',
@@ -674,7 +674,7 @@ $wacko_translation = [
 	'ImportFailed'				=> '导入失败。',
 	'ImportHint'				=> '请提供您要导入的集群，不要提供相对地址。',
 	'ImportAttention'			=> '注意：覆盖集群中的相同页面。',
-	'ImportNote'				=> 'Imported page',
+	'ImportNote'				=> '已导入页面',
 
 	// mywatches action
 	'WatchedPages'				=> '您为更改而关注的所有页面的列表 ',
@@ -875,14 +875,14 @@ $wacko_translation = [
 	'FileUsageText'				=> '以下个页面使用本文件：',
 	'NoFileUsage'				=> '没有页面链接本文件',
 
-	'FileSortExt'				=> 'extension',
+	'FileSortExt'				=> '扩展',
 	'FileSortName'				=> '文件名',
 	'FileSortSize'				=> '文件大小',
 	'FileSortTime'				=> '文件添加完毕',
 
-	'SortBy'					=> 'Sort by',
-	'Ascending'					=> 'ascending',
-	'Decending'					=> 'decending',
+	'SortBy'					=> '排序：',
+	'Ascending'					=> '升序',
+	'Decending'					=> '降序',
 
 	'Files0'					=> '附件',
 	'Files1'					=> '显示文件（1个文件）',
@@ -906,7 +906,7 @@ $wacko_translation = [
 
 	'BookmarkDeleteSelected'	=> '删除选中的',
 	'BookmarkMark'				=> '标记',
-	'BookmarkNumber'			=> 'No.',
+	'BookmarkNumber'			=> '第',
 	'BookmarkNone'				=> '您没有收藏。',
 	'BookmarkTitle'				=> '书签标题',
 	'BookmarkPage'				=> '页面',
@@ -930,7 +930,7 @@ $wacko_translation = [
 	'Back'						=> '返回',
 
 	// filter
-	'Filter'					=> 'Filter',
+	'Filter'					=> '筛选',
 	'Any'						=> '所有',
 
 	// My Groups
