@@ -69,7 +69,7 @@ else
 
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE)
 	// Thus all configs will be same for all RSS-feeds
-	$feed = new SimplePie();
+	$feed = new \SimplePie\SimplePie();
 	$feed->set_feed_url($urlset);
 	// Set where the cache files should be stored.
 	$feed->set_cache_location('./' . CACHE_FEED_DIR);
