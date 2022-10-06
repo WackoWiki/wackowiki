@@ -41,44 +41,77 @@
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
+namespace SimplePie\Cache;
 
 /**
- * PSR-4 implementation for SimplePie.
+ * Base for cache objects
  *
- * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the \SimplePie\SimplePie class
- * from /src/SimplePie.php:
+ * Classes to be used with {@see \SimplePie\Cache::register()} are expected
+ * to implement this interface.
  *
- *      new \SimplePie\SimplePie();
- *
- * @param string $class The fully-qualified class name.
- * @return void
+ * @package SimplePie
+ * @subpackage Caching
  */
-spl_autoload_register(function ($class) {
+interface Base
+{
+    /**
+     * Feed cache type
+     *
+     * @var string
+     */
+    const TYPE_FEED = 'spc';
 
-    // project-specific namespace prefix
-    $prefix = 'SimplePie\\';
+    /**
+     * Image cache type
+     *
+     * @var string
+     */
+    const TYPE_IMAGE = 'spi';
 
-    // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/src/';
+    /**
+     * Create a new cache object
+     *
+     * @param string $location Location string (from SimplePie::$cache_location)
+     * @param string $name Unique ID for the cache
+     * @param string $type Either TYPE_FEED for SimplePie data, or TYPE_IMAGE for image data
+     */
+    public function __construct($location, $name, $type);
 
-    // does the class use the namespace prefix?
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        // no, move to the next registered autoloader
-        return;
-    }
+    /**
+     * Save data to the cache
+     *
+     * @param array|SimplePie $data Data to store in the cache. If passed a SimplePie object, only cache the $data property
+     * @return bool Successfulness
+     */
+    public function save($data);
 
-    // get the relative class name
-    $relative_class = substr($class, $len);
+    /**
+     * Retrieve the data saved to the cache
+     *
+     * @return array Data for SimplePie::$data
+     */
+    public function load();
 
-    // replace the namespace prefix with the base directory, replace namespace
-    // separators with directory separators in the relative class name, append
-    // with .php
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+    /**
+     * Retrieve the last modified time for the cache
+     *
+     * @return int Timestamp
+     */
+    public function mtime();
 
-    // if the file exists, require it
-    if (file_exists($file)) {
-        require $file;
-    }
-});
+    /**
+     * Set the last modified time to the current time
+     *
+     * @return bool Success status
+     */
+    public function touch();
+
+    /**
+     * Remove the cache
+     *
+     * @return bool Success status
+     */
+    public function unlink();
+}
+
+class_alias('SimplePie\Cache\Base', 'SimplePie_Cache_Base');

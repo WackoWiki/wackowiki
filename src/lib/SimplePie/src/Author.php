@@ -41,44 +41,110 @@
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
+namespace SimplePie;
 
 /**
- * PSR-4 implementation for SimplePie.
+ * Manages all author-related data
  *
- * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the \SimplePie\SimplePie class
- * from /src/SimplePie.php:
+ * Used by {@see Item::get_author()} and {@see SimplePie::get_authors()}
  *
- *      new \SimplePie\SimplePie();
+ * This class can be overloaded with {@see SimplePie::set_author_class()}
  *
- * @param string $class The fully-qualified class name.
- * @return void
+ * @package SimplePie
+ * @subpackage API
  */
-spl_autoload_register(function ($class) {
+class Author
+{
+    /**
+     * Author's name
+     *
+     * @var string
+     * @see get_name()
+     */
+    public $name;
 
-    // project-specific namespace prefix
-    $prefix = 'SimplePie\\';
+    /**
+     * Author's link
+     *
+     * @var string
+     * @see get_link()
+     */
+    public $link;
 
-    // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/src/';
+    /**
+     * Author's email address
+     *
+     * @var string
+     * @see get_email()
+     */
+    public $email;
 
-    // does the class use the namespace prefix?
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        // no, move to the next registered autoloader
-        return;
+    /**
+     * Constructor, used to input the data
+     *
+     * @param string $name
+     * @param string $link
+     * @param string $email
+     */
+    public function __construct($name = null, $link = null, $email = null)
+    {
+        $this->name = $name;
+        $this->link = $link;
+        $this->email = $email;
     }
 
-    // get the relative class name
-    $relative_class = substr($class, $len);
-
-    // replace the namespace prefix with the base directory, replace namespace
-    // separators with directory separators in the relative class name, append
-    // with .php
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-    // if the file exists, require it
-    if (file_exists($file)) {
-        require $file;
+    /**
+     * String-ified version
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        // There is no $this->data here
+        return md5(serialize($this));
     }
-});
+
+    /**
+     * Author's name
+     *
+     * @return string|null
+     */
+    public function get_name()
+    {
+        if ($this->name !== null) {
+            return $this->name;
+        }
+
+        return null;
+    }
+
+    /**
+     * Author's link
+     *
+     * @return string|null
+     */
+    public function get_link()
+    {
+        if ($this->link !== null) {
+            return $this->link;
+        }
+
+        return null;
+    }
+
+    /**
+     * Author's email address
+     *
+     * @return string|null
+     */
+    public function get_email()
+    {
+        if ($this->email !== null) {
+            return $this->email;
+        }
+
+        return null;
+    }
+}
+
+class_alias('SimplePie\Author', 'SimplePie_Author');

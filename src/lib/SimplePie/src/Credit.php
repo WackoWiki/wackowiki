@@ -41,44 +41,109 @@
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
  */
 
+namespace SimplePie;
 
 /**
- * PSR-4 implementation for SimplePie.
+ * Handles `<media:credit>` as defined in Media RSS
  *
- * After registering this autoload function with SPL, the following line
- * would cause the function to attempt to load the \SimplePie\SimplePie class
- * from /src/SimplePie.php:
+ * Used by {@see \SimplePie\Enclosure::get_credit()} and {@see \SimplePie\Enclosure::get_credits()}
  *
- *      new \SimplePie\SimplePie();
+ * This class can be overloaded with {@see \SimplePie\SimplePie::set_credit_class()}
  *
- * @param string $class The fully-qualified class name.
- * @return void
+ * @package SimplePie
+ * @subpackage API
  */
-spl_autoload_register(function ($class) {
+class Credit
+{
+    /**
+     * Credited role
+     *
+     * @var string
+     * @see get_role()
+     */
+    public $role;
 
-    // project-specific namespace prefix
-    $prefix = 'SimplePie\\';
+    /**
+     * Organizational scheme
+     *
+     * @var string
+     * @see get_scheme()
+     */
+    public $scheme;
 
-    // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/src/';
+    /**
+     * Credited name
+     *
+     * @var string
+     * @see get_name()
+     */
+    public $name;
 
-    // does the class use the namespace prefix?
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        // no, move to the next registered autoloader
-        return;
+    /**
+     * Constructor, used to input the data
+     *
+     * For documentation on all the parameters, see the corresponding
+     * properties and their accessors
+     */
+    public function __construct($role = null, $scheme = null, $name = null)
+    {
+        $this->role = $role;
+        $this->scheme = $scheme;
+        $this->name = $name;
     }
 
-    // get the relative class name
-    $relative_class = substr($class, $len);
-
-    // replace the namespace prefix with the base directory, replace namespace
-    // separators with directory separators in the relative class name, append
-    // with .php
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-    // if the file exists, require it
-    if (file_exists($file)) {
-        require $file;
+    /**
+     * String-ified version
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        // There is no $this->data here
+        return md5(serialize($this));
     }
-});
+
+    /**
+     * Get the role of the person receiving credit
+     *
+     * @return string|null
+     */
+    public function get_role()
+    {
+        if ($this->role !== null) {
+            return $this->role;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the organizational scheme
+     *
+     * @return string|null
+     */
+    public function get_scheme()
+    {
+        if ($this->scheme !== null) {
+            return $this->scheme;
+        }
+
+        return null;
+    }
+
+    /**
+     * Get the credited person/entity's name
+     *
+     * @return string|null
+     */
+    public function get_name()
+    {
+        if ($this->name !== null) {
+            return $this->name;
+        }
+
+        return null;
+    }
+}
+
+class_alias('SimplePie\Credit', 'SimplePie_Credit');
