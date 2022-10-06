@@ -491,12 +491,10 @@ if ($this->is_admin())
 
 	// load files list
 	$files = $this->db->load_all(
-		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.created, p.owner_id, p.tag, u.user_name " .
-		"FROM " . $prefix . "file f " .
-			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
-			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
-		"WHERE f.mime_type = ''" .
-		"ORDER BY f.file_name ASC ");
+		"SELECT file_id, page_id, user_id, file_size, file_ext, file_name, created " .
+		"FROM " . $prefix . "file " .
+		"WHERE mime_type = '' " .
+		"ORDER BY file_name ASC ");
 
 	if ($files)
 	{
