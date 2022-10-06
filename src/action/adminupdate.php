@@ -393,26 +393,25 @@ if ($this->is_admin())
 
 	$users = $this->db->load_all(
 		"SELECT user_id, user_name, LENGTH(password) AS password, email, email_confirm, signup_time, last_visit, total_pages, total_revisions, total_comments, total_uploads " .
-		"FROM " . $this->prefix . "user " .
+		"FROM " . $prefix . "user " .
 		"WHERE  LENGTH(password) = 32 OR LENGTH(password) = 64");
 
 	if ($users)
 	{
-		echo '<table class="usertable">' . "\n";
-		echo
-			'<tr class="userrow">
-				<th>user_id</th>
-				<th>user_name</th>
-				<th>algo</th>
-				<th>email</th>
-				<th>email_confirm</th>
-				<th>signup_time</th>
-				<th>last_visit</th>
-				<th>pages</th>
-				<th>revisions</th>
-				<th>comments</th>
-				<th>uploads</th>
-			</tr>' . "\n";
+		echo '<table class="usertable">' . "\n" .
+				'<tr class="userrow">
+					<th>user_id</th>
+					<th>user_name</th>
+					<th>algo</th>
+					<th>email</th>
+					<th>email_confirm</th>
+					<th>signup_time</th>
+					<th>last_visit</th>
+					<th>pages</th>
+					<th>revisions</th>
+					<th>comments</th>
+					<th>uploads</th>
+				</tr>' . "\n";
 
 		foreach ($users as $user)
 		{
@@ -434,7 +433,7 @@ if ($this->is_admin())
 
 				// update database with the new password hash
 				$this->db->sql_query(
-					"UPDATE " . $this->prefix . "user SET " .
+					"UPDATE " . $prefix . "user SET " .
 						"password	= " . $this->db->q($hash) . " " .
 					"WHERE user_id = " . (int) $user['user_id']);
 			}
@@ -464,7 +463,7 @@ if ($this->is_admin())
 		{
 			// remove obsolete salt field
 			$this->db->sql_query(
-				"ALTER TABLE " . $this->prefix . "user DROP salt");
+				"ALTER TABLE " . $prefix . "user DROP salt");
 		}
 		else
 		{
@@ -476,6 +475,89 @@ if ($this->is_admin())
 	else
 	{
 		echo 'All good. No legacy password hashes found.';
+	}
+
+	########################################################
+	##            Set missing MIME type for files         ##
+	########################################################
+
+	echo '<h4>2. Set missing MIME type for legacy records in file table</h4>';
+
+	/* The MIME type was added with R5.5 to the file table
+	 *
+	 * This only affects wikis that were already in use before R5.5.
+	 * This mainly serves the purpose that these MIME types are available for filtering in the files action.
+	 */
+
+	// load files list
+	$files = $this->db->load_all(
+		"SELECT f.file_id, f.page_id, f.user_id, f.file_size, f.picture_w, f.picture_h, f.file_ext, f.file_lang, f.file_name, f.file_description, f.created, p.owner_id, p.tag, u.user_name " .
+		"FROM " . $prefix . "file f " .
+			"LEFT JOIN  " . $prefix . "page p ON (f.page_id = p.page_id) " .
+			"INNER JOIN " . $prefix . "user u ON (f.user_id = u.user_id) " .
+		"WHERE f.mime_type = ''" .
+		"ORDER BY f.file_name ASC ");
+
+	if ($files)
+	{
+		echo '<table class="usertable">' . "\n" .
+				'<tr class="userrow">
+					<th>file_id</th>
+					<th>file_name</th>
+					<th>file_path</th>
+					<th>page_id</th>
+					<th>created</th>
+					<th>file_ext</th>
+					<th>mime_type</th>
+				</tr>' . "\n";
+
+		foreach ($files as $file)
+		{
+			$file_path = Ut::join_path(
+					($file['page_id']? UPLOAD_PER_PAGE_DIR : UPLOAD_GLOBAL_DIR),
+					($file['page_id']
+						? '@' . $file['page_id'] . '@'
+						: '') .
+					$file['file_name']);
+
+			$mime_type = mime_content_type($file_path);
+
+			if (isset($_POST['set_mime_type']))
+			{
+				// update database with the new password hash
+				$this->db->sql_query(
+					"UPDATE " . $prefix . "file SET " .
+						"mime_type	= " . $this->db->q($mime_type) . " " .
+					"WHERE file_id = " . (int) $file['file_id']);
+			}
+			else
+			{
+				// show affected users
+				echo
+					'<tr class="userrow">
+						<td>' . $file['file_id'] .	'</td>
+						<td>' . $file['file_name'] . '</td>
+						<td>' . $file_path . '</td>
+						<td>' . $file['page_id'] . '</td>
+						<td>' . $file['created'] . '</td>
+						<td>' . $file['file_ext'] . '</td>
+						<td>' . $mime_type . '</td>
+					</tr>' . "\n";
+			}
+		}
+
+		echo '</table>' . "\n";
+
+		if (!isset($_POST['set_mime_type']))
+		{
+			echo $this->form_open('set_mime_type');
+			echo '<button type="submit" name="set_mime_type">' . $this->_t('UpdateButton') . '</button>' . "\n";
+			echo $this->form_close();
+		}
+	}
+	else
+	{
+		echo 'All good. No records with missing MIME type found.';
 	}
 
 	########################################################
