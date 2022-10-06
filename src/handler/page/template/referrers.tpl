@@ -2,7 +2,7 @@
 	<h3>[ ' _t: ReferrersText ' ] » [ ' header ' ]</h3>
 	[ ' menu ' ]
 	[= b _ =
-		<strong>[ ' _t: ReferringPages ' ]:</strong><br><br>
+		<strong>[ ' _t: ReferringPages ' ]</strong><br><br>
 		[ ' links ' ]
 		<p></p>
 	=]

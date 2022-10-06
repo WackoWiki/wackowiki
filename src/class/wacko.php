@@ -13,7 +13,7 @@ class Wacko
 	private array $file_cache		= [];
 	private array $page_cache		= [];
 	private bool $format_safe		= true;		// for htmlspecialchars() in pre_link
-	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'crawler', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
+	private array $search_engines	= ['aport', 'archiver', 'baidu', 'bing', 'bot', 'crawl', 'duckduckgo', 'google', 'rambler', 'search', 'slurp', 'spider', 'yandex'];
 
 	public $charset;
 	public $config;								// @deprecated, but will live for a looong time
@@ -504,12 +504,27 @@ class Wacko
 		return $old_lang;
 	}
 
+	/**
+	 * loads translation files
+	 *
+	 * 1. lang/wacko.xy.php
+	 * 2. lang/wacko.all.php
+	 * 3. lang/custom.xy.php
+	 * 4. admin/lang/ap.xy.php
+	 * 5. theme/lang/xyz/wacko.xy.php
+	 * 6. theme/lang/xyz/wacko.all.php
+	 *
+	 * @param string	$lang
+	 * @param bool		$update
+	 *
+	 * @return void
+	 */
 	// TODO: refactor / normalize # better load_message_set() ?
 	function load_translation($lang, $update = false): void
 	{
 		if ($lang && (!isset($this->translations[$lang]) || $update))
 		{
-			// wacko.xy.php $wacko_translation[]
+			// 1. wacko.xy.php $wacko_translation[]
 			$wacko_translation = [];
 			$lang_file = Ut::join_path(LANG_DIR, 'wacko.' . $lang . '.php');
 
@@ -518,7 +533,7 @@ class Wacko
 				include $lang_file;
 			}
 
-			// wacko.all.php $wacko_all_resource[]
+			// 2. wacko.all.php $wacko_all_resource[]
 			if (!isset($this->translations['all']))
 			{
 				$wacko_all_resource = [];
@@ -534,18 +549,27 @@ class Wacko
 				$this->translations['all'] = & $wacko_all_resource;
 			}
 
+			// 3. custom.xy.php $custom_translation[]
+			$custom_translation = [];
+			$lang_file = Ut::join_path(LANG_DIR, 'custom.' . $lang . '.php');
+
+			if (@file_exists($lang_file))
+			{
+				include $lang_file;
+			}
+
 			$ap_translation		= [];
 			$theme_translation	= [];
 			$theme_translation0	= [];
 
 			if ($this->db->ap_mode)
 			{
-				// ap.xy.php $ap_translation[]
+				// 4. ap.xy.php $ap_translation[]
 				$lang_file = 'admin/lang/ap.' . $lang . '.php';
 			}
 			else
 			{
-				// theme lang files $theme_translation[]
+				// 5. theme lang files $theme_translation[]
 				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.' . $lang . '.php');
 
 				if (@file_exists($lang_file))
@@ -555,7 +579,7 @@ class Wacko
 
 				$theme_translation0 = $theme_translation;
 
-				// wacko.all theme
+				// 6. wacko.all theme
 				$theme_translation = [];
 				$lang_file = Ut::join_path(THEME_DIR, $this->db->theme, 'lang/wacko.all.php');
 			}
@@ -568,6 +592,7 @@ class Wacko
 			$this->translations[$lang] = array_merge(
 				$wacko_translation,
 				$this->translations['all'],
+				$custom_translation,
 				$ap_translation,
 				$theme_translation0,
 				$theme_translation);
@@ -3185,13 +3210,20 @@ class Wacko
 		// TODO: - is now allowed in tags, but we do not want Wiki-_Word
 		if ($this->db->urls_underscores)
 		{
-			$tag = preg_replace('/(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1¶\\2', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶' . $this->lang['UPPERNUM'] . ')/u', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶\/)/u', '\\1', $tag);
-			$tag = preg_replace('/(' . $this->lang['UPPERNUM'] . ')¶(' . $this->lang['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $tag);
-			$tag = preg_replace('/\/¶(' . $this->lang['UPPERNUM'] . ')/u', '/\\1', $tag);
-			$tag = str_replace('¶', '_', $tag);
+			$patterns =[
+				['(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')', 									'\\1¶\\2'],
+				['(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')',									'\\1¶\\2'],
+				['(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶' . $this->lang['UPPERNUM'] . ')',		'\\1'],
+				['(' . $this->lang['UPPER'] . ')¶(?=' . $this->lang['UPPER'] . '¶\/)',									'\\1'],
+				['(' . $this->lang['UPPERNUM'] . ')¶(' . $this->lang['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
+				['\/¶(' . $this->lang['UPPERNUM'] . ')',																'/\\1'],
+				['¶',																									'_'],
+			];
+
+			foreach ($patterns as $pattern)
+			{
+				$tag = preg_replace('/' . $pattern[0] . '/u', $pattern[1], $tag);
+			}
 		}
 
 		return $tag;
@@ -3399,13 +3431,13 @@ class Wacko
 		}
 
 		return [
-			'src'		=> $src ?? null,
+			'align'		=> $align,
 			'caption'	=> $caption ?? null,
 			'clear'		=> $clear ?? null,
-			'align'		=> $align,
-			'width'		=> $w,
 			'height'	=> $h,
 			'linking'	=> $linking,
+			'src'		=> $src ?? null,
+			'width'		=> $w,
 		];
 	}
 
@@ -4451,17 +4483,24 @@ class Wacko
 
 	function add_nbsps($text): string
 	{
-		$text = preg_replace('/(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->lang['ALPHANUM'] . ')\//u', '\\1' . NBSP . '/', $text);
-		$text = preg_replace('/(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . $this->lang['UPPERNUM'] . ')/u', '\\1', $text);
-		$text = preg_replace('/(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . '\/)/u', '\\1', $text);
-		$text = preg_replace('/\/(' . $this->lang['ALPHANUM'] . ')/u', '/' . NBSP . '\\1', $text);
-		$text = preg_replace('/(' . $this->lang['UPPERNUM'] . ')' . NBSP . '(' . $this->lang['UPPERNUM'] . ')($|\b)/u', '\\1\\2', $text);
-		$text = preg_replace('/(\d)(' . $this->lang['ALPHA'] . ')/u', '\\1' . NBSP . '\\2', $text);
-		$text = preg_replace('/(' . $this->lang['ALPHA'] . ')(\d)/u', '\\1' . NBSP . '\\2', $text);
-		// $text = preg_replace('/(\d)' . NBSP . '(?=\d)/u', '\\1', $text);
-		$text = preg_replace('/(\d)' . NBSP . '(?!' . $this->lang['ALPHA'] . ')/u', '\\1', $text);
+		$patterns =[
+			['(' . $this->lang['ALPHANUM'] . ')(' . $this->lang['UPPERNUM'] . ')', 												'\\1' . NBSP . '\\2'],
+			['(' . $this->lang['UPPERNUM'] . ')(' . $this->lang['UPPERNUM'] . ')',												'\\1' . NBSP . '\\2'],
+			['(' . $this->lang['ALPHANUM'] . ')\/',																				'\\1' . NBSP . '/'],
+			['(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . $this->lang['UPPERNUM'] . ')',		'\\1'],
+			['(' . $this->lang['UPPER'] . ')' . NBSP . '(?=' . $this->lang['UPPER'] . NBSP . '\/)',								'\\1'],
+			['\/(' . $this->lang['ALPHANUM'] . ')',																				'\\1'],
+			['(' . $this->lang['UPPERNUM'] . ')' . NBSP . '(' . $this->lang['UPPERNUM'] . ')($|\b)',							'\\1\\2'],
+			['(\d)(' . $this->lang['ALPHA'] . ')',																				'\\2'],
+			['(' . $this->lang['ALPHA'] . ')(\d)',																				'\\2'],
+			# ['(\d)' . NBSP . '(?=\d)',																						'\\1'],
+			['(\d)' . NBSP . '(?!' . $this->lang['ALPHA'] . ')',																'\\1'],
+		];
+
+		foreach ($patterns as $pattern)
+		{
+			$text = preg_replace('/' . $pattern[0] . '/u', $pattern[1], $text);
+		}
 
 		return $text;
 	}

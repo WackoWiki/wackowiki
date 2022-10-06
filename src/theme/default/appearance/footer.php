@@ -19,7 +19,7 @@ if ($this->page && $this->has_access('read'))
 {
 	if ($mtime = $this->page['modified'])
 	{
-		// Revisions link
+		// revisions link
 		if ($this->hide_revisions)
 		{
 			$tpl->modHide_time = $mtime;
@@ -31,7 +31,7 @@ if ($this->page && $this->has_access('read'))
 		}
 	}
 
-	// Show Owner of this page
+	// show owner of this page
 	if ($owner = $this->get_page_owner())
 	{
 		if ($owner == 'System')
@@ -55,7 +55,7 @@ if ($this->page && $this->has_access('read'))
 		}
 	}
 
-	// Permalink
+	// permalink
 	$tpl->perma_link = $this->action('hashid');
 }
 

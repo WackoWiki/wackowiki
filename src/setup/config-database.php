@@ -101,7 +101,7 @@ foreach ($drivers as $k => $driver)
 <?php
 /*
  Each time a new database charset is supported it needs to be added to this list
- https://dev.mysql.com/doc/refman/5.6/en/charset-charsets.html
+ https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html
 
  [0]   :  database charset name
  [1]   :  database charset name to be stored in the config file

@@ -6,10 +6,10 @@ if (!defined('IN_WACKO'))
 }
 
 // action/feed.php - WackoWiki Action to integrate RSS/Atom Feeds
-// requires SimplePie: http://simplepie.org
+// requires SimplePie: https://simplepie.org
 /* USAGE:
 	{{feed
-		url="http://...[|http://...|http://...]"
+		url="https://...[|https://...|https://...]"
 		[title="News feed title|no"]
 			"text" - displayed as title
 			"no" - means show no title
@@ -38,10 +38,8 @@ if (!isset($time))		$time	= 1;
 $error				= null;
 $p_mode				= [];
 
-// Include SimplePie
+// load SimplePie classes
 include_once 'lib/SimplePie/autoloader.php';
-// see autoload.conf
-// include_once 'lib/SimplePie/simplepie.class.php';
 
 if (!$url)
 {
@@ -70,7 +68,7 @@ else
 
 	// Initialize SimplePie (ONLY ONCE PER ACTION!!!! DO NOT WRITE IT AGAIN PLEASE)
 	// Thus all configs will be same for all RSS-feeds
-	$feed = new SimplePie();
+	$feed = new \SimplePie\SimplePie();
 	$feed->set_feed_url($urlset);
 	// Set where the cache files should be stored.
 	$feed->set_cache_location('./' . CACHE_FEED_DIR);
@@ -131,7 +129,6 @@ else
 				{
 					$tpl->header	= $this->_t('FeedMulti');
 				}
-
 			}
 			// default
 			else
