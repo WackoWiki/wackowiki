@@ -481,7 +481,7 @@ if ($this->is_admin())
 	##            Set missing MIME type for files         ##
 	########################################################
 
-	echo '<h4>2. Set missing MIME type for legacy records in file table</h4>';
+	echo '<h4>3. Set missing MIME type for legacy records in file table</h4>';
 
 	/* The MIME type was added with R5.5 to the file table
 	 *

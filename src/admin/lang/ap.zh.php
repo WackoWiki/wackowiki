@@ -43,7 +43,7 @@ $ap_translation = [
 	'SiteClosed'				=> '站点已关闭',
 	'SiteClosedTip'				=> '站点已关闭',
 
-	'System'					=> 'System',
+	'System'					=> '系统',
 
 	// Generic
 	'Cancel'					=> '取消',
@@ -513,8 +513,8 @@ $ap_translation = [
 	'DisableWikiNameInfo'		=> '禁用 WikiName 的强制使用。 允许使用传统昵称注册用户，而不是强制 NameSurname。',
 	'AllowEmailReuse'			=> '允许电子邮件地址重复使用：',
 	'AllowEmailReuseInfo'		=> '不同的用户可以使用相同的电子邮件地址注册。',
-	'AllowedEmailDomains'		=> 'Allowed email domains:',
-	'AllowedEmailDomainsInfo'	=> 'Allowed email domains comma separated, e.g. <code>example.com, local.lan</code> etc., other wise all email domains are allowed.',
+	'AllowedEmailDomains'		=> '允许的电子邮件域名',
+	'AllowedEmailDomainsInfo'	=> '允许用逗号分隔的电子邮件域名，例如： <code>example.com, local.lan</code> 等等，允许所有电子邮件域。',
 	'UsernameLength'			=> '用户名长度：',
 	'UsernameLengthInfo'		=> '用户名中的最小和最大字符数。',
 
@@ -805,7 +805,7 @@ $ap_translation = [
 	'EnableEmail'				=> '启用电子邮件：',
 	'EnableEmailInfo'			=> '启用电子邮件',
 
-	'FromEmailName'				=> 'From Name:',
+	'FromEmailName'				=> '发件人名称：',
 	'FromEmailNameInfo'			=> '发件人姓名，电子邮件中 <code>From:</code> 标头的一部分，用于从站点发送的所有电子邮件通知。',
 	'NoReplyEmail'				=> 'No-reply 地址：',
 	'NoReplyEmailInfo'			=> '这个地址，例如 <code>noreply@example.com</code>，将出现在您从该站点发送的所有电子邮件通知的 <code>From:</code> 电子邮件地址字段中。',
