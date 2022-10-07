@@ -43,7 +43,7 @@ $ap_translation = [
 	'SiteClosed'				=> '站点已关闭',
 	'SiteClosedTip'				=> '站点已关闭',
 
-	'System'					=> 'System',
+	'System'					=> '系统',
 
 	// Generic
 	'Cancel'					=> '取消',
@@ -815,7 +815,7 @@ $ap_translation = [
 	'EnableEmail'				=> '启用电子邮件：',
 	'EnableEmailInfo'			=> '启用电子邮件',
 
-	'FromEmailName'				=> 'From Name:',
+	'FromEmailName'				=> '发件人名称：',
 	'FromEmailNameInfo'			=> '发件人姓名，电子邮件中 <code>From:</code> 标头的一部分，用于从站点发送的所有电子邮件通知。',
 	'NoReplyEmail'				=> 'No-reply 地址：',
 	'NoReplyEmailInfo'			=> '这个地址，例如 <code>noreply@example.com</code>，将出现在您从该站点发送的所有电子邮件通知的 <code>From:</code> 电子邮件地址字段中。',
