@@ -7335,7 +7335,9 @@ class Wacko
 
 				$item = $titles? $this->get_page_title($link) : $step;
 
-				if ($linking && $link != $this->tag)
+				if ($linking
+					&& (    $link != $this->tag
+						|| ($link == $this->tag && $this->method != 'show')))
 				{
 					$item = $this->link($link, '', $item);
 				}
