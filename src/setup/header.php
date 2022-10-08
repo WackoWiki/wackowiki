@@ -44,6 +44,7 @@ header('Content-Type: text/html; charset=' . $lang['Charset']);
 	<head>
 		<meta charset="<?php echo $lang['Charset']; ?>">
 		<title><?php echo $lang['Title'] . ': ' . WACKO_VERSION . ' - ' . $lang[$install_action]; ?></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="robots" content="noindex, nofollow, noarchive">
 		<link rel="stylesheet" href="<?php echo my_location() ?>setup/css/installer.css">
 		<link rel="shortcut icon" href="<?php echo my_location() ?>setup/images/favicon.ico" type="image/x-icon">

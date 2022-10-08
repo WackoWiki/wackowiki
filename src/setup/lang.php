@@ -48,12 +48,12 @@ echo '<p>' . $lang['LangDesc'] . "</p>\n";
 
 $n = 1;
 
-echo '<br><table class="checkbox_input">' . "\n\t<tr>\n";
+echo '<br><ul class="checkbox_input column-3">' . "\n";
 
 // available languages
 foreach($lang['LanguageArray'] as $key => $value)
 {
-	echo "\t\t<td>\n\t\t\t";
+	echo "\t<li>\n\t\t";
 	echo '<input type="radio" id="lang_' . $key . '" name="config[language]" value="' . $key . '"';
 
 	// default or selected language
@@ -66,18 +66,10 @@ foreach($lang['LanguageArray'] as $key => $value)
 
 	echo " onClick=\"this.form.action='?installAction=lang'; submit(); \"";
 	echo ' class="input_lang"><label for="lang_' . $key . '" class="label_lang">' . $value . ' (' . $key . ")</label>";
-	echo "\n\t\t</td>\n";
-
-	// modulus operator: every third loop add a break
-	if ($n % 3 == 0)
-	{
-		echo "\t</tr>\n\t<tr>\n";
-	}
-
-	$n++;
+	echo "\n\t</li>\n";
 }
 
-echo "\t</tr>\n</table>\n<br>\n";
+echo "\n</ul>\n<br>\n";
 
 if (isset($config['is_update']))
 {
