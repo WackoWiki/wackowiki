@@ -32,7 +32,8 @@ if (   $this->db->logo_display == 0
 	$tpl->site_title		= true;
 }
 
-if (@$this->page['tag'] !== $this->db->root_page)
+if (    @$this->page['tag'] !== $this->db->root_page
+	|| (@$this->page['tag']  == $this->db->root_page && $this->method != 'show'))
 {
 	$tpl->site_link			= true;
 	$tpl->site_clink		= true;
