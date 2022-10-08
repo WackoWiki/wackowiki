@@ -3362,8 +3362,8 @@ class Wacko
 		{
 			$e_align = match(1){
 				preg_match('/center/i', $align)	=> 'center',
-				preg_match('/right/i', $align)	=> 'right',
 				preg_match('/left/i', $align)	=> 'left',
+				preg_match('/right/i', $align)	=> 'right',
 				default							=> 'default',
 			};
 
@@ -3405,16 +3405,17 @@ class Wacko
 		// get alignment type
 		$align = match(1){
 			preg_match('/center/i', $param)		=> 'center',
-			preg_match('/right/i', $param)		=> 'right',
 			preg_match('/left/i', $param)		=> 'left',
+			preg_match('/right/i', $param)		=> 'right',
 			default								=> 'default',
 		};
 
 		// get linking type
 		$linking = match(1){
-			preg_match('/nolink/i', $param)		=> 'nolink',
 			preg_match('/direct/i', $param)		=> 'direct',
+			preg_match('/lightbox/i', $param)	=> 'lightbox',
 			preg_match('/linkonly/i', $param)	=> 'linkonly',
+			preg_match('/nolink/i', $param)		=> 'nolink',
 			default								=> 'meta',
 		};
 
@@ -3431,13 +3432,13 @@ class Wacko
 		}
 
 		return [
-			'src'		=> $src ?? null,
+			'align'		=> $align,
 			'caption'	=> $caption ?? null,
 			'clear'		=> $clear ?? null,
-			'align'		=> $align,
-			'width'		=> $w,
 			'height'	=> $h,
 			'linking'	=> $linking,
+			'src'		=> $src ?? null,
+			'width'		=> $w,
 		];
 	}
 
@@ -7323,7 +7324,9 @@ class Wacko
 
 				$item = $titles? $this->get_page_title($link) : $step;
 
-				if ($linking && $link != $this->tag)
+				if ($linking
+					&& (    $link != $this->tag
+						|| ($link == $this->tag && $this->method != 'show')))
 				{
 					$item = $this->link($link, '', $item);
 				}
