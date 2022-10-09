@@ -1,6 +1,4 @@
-<?php
-
-if (!defined('BB2_CORE')) die('I said no cheating!');
+<?php if (!defined('BB2_CORE')) die('I said no cheating!');
 
 function bb2_blacklist($package) {
 
@@ -169,30 +167,39 @@ function bb2_blacklist($package) {
 	$ua = $package['headers_mixed']['User-Agent'] ?? '';
 	$uri = $package['request_uri'] ?? '';
 
-	foreach ($bb2_spambots_0 as $spambot) {
+	foreach ($bb2_spambots_0 as $spambot)
+	{
 		$pos = strpos($ua, $spambot);
-		if ($pos !== FALSE && $pos == 0) {
+
+		if ($pos !== false && $pos == 0)
+		{
 			return '17f4e8c8';
 		}
 	}
 
-	foreach ($bb2_spambots as $spambot) {
-		if (str_contains($ua, $spambot)) {
+	foreach ($bb2_spambots as $spambot)
+	{
+		if (str_contains($ua, $spambot))
+		{
 			return '17f4e8c8';
 		}
 	}
 
-	foreach ($bb2_spambots_regex as $spambot) {
-		if (preg_match($spambot, $ua)) {
+	foreach ($bb2_spambots_regex as $spambot)
+	{
+		if (preg_match($spambot, $ua))
+		{
 			return '17f4e8c8';
 		}
 	}
 
-	foreach ($bb2_spambots_url as $spambot) {
-		if (stripos($uri, $spambot) !== FALSE) {
+	foreach ($bb2_spambots_url as $spambot)
+	{
+		if (stripos($uri, $spambot) !== false)
+		{
 			return '96c0bd29';
 		}
 	}
 
-	return FALSE;
+	return false;
 }

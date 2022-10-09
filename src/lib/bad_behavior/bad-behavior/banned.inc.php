@@ -1,6 +1,4 @@
-<?php
-
-if (!defined('BB2_CORE')) die('I said no cheating!');
+<?php if (!defined('BB2_CORE')) die('I said no cheating!');
 
 // Functions called when a request has been denied
 // This part can be gawd-awful slow, doesn't matter :)
@@ -16,7 +14,8 @@ function bb2_housekeeping($settings, $package)
 	bb2_db_query($query);
 
 	// Waste a bunch more of the spammer's time, sometimes.
-	if (rand(1,1000) == 1) {
+	if (rand(1,1000) == 1)
+	{
 		$query = "OPTIMIZE TABLE `" . $settings['log_table'] . "`";
 		bb2_db_query($query);
 	}
@@ -25,16 +24,23 @@ function bb2_housekeeping($settings, $package)
 function bb2_display_denial($settings, $package, $key, $previous_key = false)
 {
 	define('DONOTCACHEPAGE', true);	// WP Super Cache
+
 	if (!$previous_key) $previous_key = $key;
-	if ($key == 'e87553e1') {
+
+	if ($key == 'e87553e1')
+	{
 		// FIXME: lookup the real key
 	}
+
 	// Create support key
-	$ip = explode('.', $package['ip']);
-	$ip_hex = '';
-	foreach ($ip as $octet) {
+	$ip		= explode('.', $package['ip']);
+	$ip_hex	= '';
+
+	foreach ($ip as $octet)
+	{
 		$ip_hex .= str_pad(dechex((int) $octet), 2, 0, STR_PAD_LEFT);
 	}
+
 	$support_key = implode('-', str_split("$ip_hex$key", 4));
 
 	// Get response data
@@ -42,6 +48,7 @@ function bb2_display_denial($settings, $package, $key, $previous_key = false)
 	header('HTTP/1.1 ' . $response['response'] . ' Bad Behavior');
 	header('Status: ' . $response['response'] . ' Bad Behavior');
 	$request_uri = $_SERVER['REQUEST_URI'];
+
 	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -63,5 +70,6 @@ function bb2_display_denial($settings, $package, $key, $previous_key = false)
 function bb2_log_denial($settings, $package, $key, $previous_key=false)
 {
 	if (!$settings['logging']) return;
+
 	bb2_db_query(bb2_insert($settings, $package, $key));
 }
