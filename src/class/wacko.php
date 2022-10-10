@@ -6727,7 +6727,7 @@ class Wacko
 		if (isset($this->sess->user_trail))
 		{
 			$result		= [];
-			$size		= (int) $size;
+			$size		= (int) $size + 1;
 			$i			= 0;
 
 			foreach ($this->sess->user_trail as $link)
