@@ -6726,34 +6726,30 @@ class Wacko
 
 		if (isset($this->sess->user_trail))
 		{
-			$result		= '';
+			$result		= [];
 			$size		= (int) $size;
 			$i			= 0;
 
 			foreach ($this->sess->user_trail as $link)
 			{
-				$text = $title ? $link[2] : $link[1];
-
-				if ($linking
-					&& (    $this->page['page_id'] != $link[0]
-						|| ($this->page['page_id'] == $link[0]) && $this->method != 'show'))
-				{
-					$result .= $this->link($link[1], '', $text);
-				}
-				else
-				{
-					$result .= $text;
-				}
-
 				if ($i < $size)
 				{
-					$result .= $separator;
+					$item = $title ? $link[2] : $link[1];
+
+					if ($linking
+						&& (    $this->page['page_id'] != $link[0]
+							|| ($this->page['page_id'] == $link[0]) && $this->method != 'show'))
+					{
+						$item = $this->link($link[1], '', $item);
+					}
+
+					$result[] = '<bdi>' . $item . '</bdi>';
 				}
 
 				$i++;
 			}
 
-			return $result;
+			return implode($separator, $result);
 		}
 	}
 
