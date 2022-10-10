@@ -6726,40 +6726,36 @@ class Wacko
 	//		$separator	= &gt; »
 	function get_user_trail($title = false, $separator = ' &gt; ', $linking = true, $size = null): string
 	{
-		// don't call this inside the run function, it will also writes all included pages
+		// don't call this inside the run function, it will also write all included pages
 		// in the user trail because the engine parses them before it includes them
 		$this->set_user_trail($size);
 
 		if (isset($this->sess->user_trail))
 		{
-			$result		= '';
+			$result		= [];
 			$size		= (int) $size;
 			$i			= 0;
 
 			foreach ($this->sess->user_trail as $link)
 			{
-				if ($i < $size && $this->page['page_id'] != $link[0])
+				if ($i < $size)
 				{
-					if (!$title)
+					$item = $title ? $link[2] : $link[1];
+
+					if ($linking
+						&& (    $this->page['page_id'] != $link[0]
+							|| ($this->page['page_id'] == $link[0]) && $this->method != 'show'))
 					{
-						$result .= $this->link($link[1], '', $link[1]) . $separator;
+						$item = $this->link($link[1], '', $item);
 					}
-					else if ($linking)
-					{
-						$result .= $this->link($link[1], '', $link[2]) . $separator;
-					}
-					else
-					{
-						$result .= $link[2] . ' ' . $separator . ' ';
-					}
+
+					$result[] = '<bdi>' . $item . '</bdi>';
 				}
 
 				$i++;
 			}
 
-			$result .= $title ? $this->page['title'] : $this->page['tag'];
-
-			return $result;
+			return implode($separator, $result);
 		}
 	}
 
