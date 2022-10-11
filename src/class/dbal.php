@@ -217,7 +217,7 @@ abstract class Dbal // need to be extended by Settings to be usable
 	}
 
 	// low level stuff:
-	// used (exclusively, as of 20160705) by lib/bad_behavior/bad-behavior-wackowiki.php
+	// used (exclusively, as of 20160705) by lib/bad_behaviour/bad-behaviour-wackowiki.php
 	function ll_query($query)
 	{
 		return $this->db->query($query);

@@ -1,9 +1,9 @@
 <?php
 /*
-Bad Behavior - detects and blocks unwanted Web accesses
+Bad Behaviour - detects and blocks unwanted Web accesses
 Copyright (C) 2005,2006,2007,2008,2009,2010,2011,2012 Michael Hampton
 
-Bad Behavior is free software; you can redistribute it and/or modify it under
+Bad Behaviour is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free
 Software Foundation; either version 3 of the License, or (at your option) any
 later version.
@@ -20,14 +20,14 @@ https://github.com/Bad-Behaviour/badbehaviour
 
 WackoWiki implementation, 2022 WackoWiki Team
 Version 0.8
-https://wackowiki.org/doc/Dev/PatchesHacks/BadBehavior
+https://wackowiki.org/doc/Dev/PatchesHacks/BadBehaviour
 
 */
 
 ###############################################################################
 ###############################################################################
 
-// This file is the entry point for Bad Behavior.
+// This file is the entry point for Bad Behaviour.
 if (!defined('IN_WACKO'))
 {
 	die('I said no cheating!');
@@ -37,12 +37,12 @@ $bb2_timer_start = microtime(1);
 
 const BB2_CWD = __DIR__;
 
-// Settings you can adjust for Bad Behavior.
+// Settings you can adjust for Bad Behaviour.
 // Most of these are unused in non-database mode.
 // DO NOT EDIT HERE; instead make changes in bb_settings.conf.
 // These settings are used when bb_settings.conf is not present.
 $bb2_settings_defaults = [
-	'log_table'					=> $db->table_prefix . 'bad_behavior',
+	'log_table'					=> $db->table_prefix . 'bad_behaviour',
 	'display_stats'				=> false,
 	'strict'					=> false,
 	'verbose'					=> false,
@@ -56,7 +56,7 @@ $bb2_settings_defaults = [
 	'reverse_proxy_addresses'	=> [],
 ];
 
-// Bad Behavior callback functions.
+// Bad Behaviour callback functions.
 // Our log table structure
 function bb2_table_structure($name)
 {
@@ -156,7 +156,7 @@ function bb2_db_num_rows($result)
 
 // Run a query and return the results, if any.
 // Should return FALSE if an error occurred.
-// Bad Behavior will use the return value here in other callbacks.
+// Bad Behaviour will use the return value here in other callbacks.
 function bb2_db_query($query)
 {
 	global $db;
@@ -230,7 +230,7 @@ function bb2_timer()
 {
 	global $bb2_timer_total;
 
-	return '<!-- Bad Behavior ' . BB2_VERSION . ' run time: ' . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n";
+	return '<!-- Bad Behaviour ' . BB2_VERSION . ' run time: ' . number_format(1000 * $bb2_timer_total, 3) . " ms -->\n";
 }
 
 // Display stats? This is optional.
@@ -251,7 +251,7 @@ function bb2_insert_stats($force = false)
 }
 
 // Calls inward to Bad Behavor itself.
-require_once BB2_CWD . '/bad-behavior/core.inc.php';
+require_once BB2_CWD . '/bad-behaviour/core.inc.php';
 bb2_install();	// FIXME: see above
 
 bb2_start(bb2_read_settings());

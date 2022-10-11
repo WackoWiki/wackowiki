@@ -1,6 +1,6 @@
 <?php if (!defined('BB2_CORE')) die('I said no cheating!');
 
-// Defines the responses which Bad Behavior might return.
+// Defines the responses which Bad Behaviour might return.
 
 function bb2_get_response($key)
 {

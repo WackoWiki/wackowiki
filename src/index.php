@@ -6,9 +6,9 @@ include 'class/init.php';
 
 $db = new Settings;
 
-if ($db->ext_bad_behavior)
+if ($db->ext_bad_behaviour)
 {
-	include 'lib/bad_behavior/bad-behavior-wackowiki.php'; // uses $db
+	include 'lib/bad_behaviour/bad-behaviour-wackowiki.php'; // uses $db
 }
 
 $http	= new Http($db);

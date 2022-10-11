@@ -213,8 +213,8 @@ $ap_translation = [
 		'title'		=> 'Mostrar estadísticas',
 	],
 
-	// Bad Behavior module
-	'tool_badbehavior'		=> [
+	// Bad Behaviour module
+	'tool_badbehaviour'		=> [
 		'name'		=> 'Mal comportamiento',
 		'title'		=> 'Mal comportamiento',
 	],
@@ -1186,11 +1186,11 @@ $ap_translation = [
 	'Check'						=> 'Verificar',
 	'Solve'						=> 'Resolver',
 
-	// Bad Behavior module
+	// Bad Behaviour module
 	'BbInfo'					=> 'Detecta y bloquea los accesos no deseados a la Web, niega el acceso automatizado de los robots de spam <br>Para más información, por favor visite la página principal de %1.',
-	'BbEnable'					=> 'Activar Bad Behavior:',
+	'BbEnable'					=> 'Activar Bad Behaviour:',
 	'BbEnableInfo'				=> 'Todas las demás configuraciones se pueden cambiar en la carpeta de configuración %1.',
-	'BbStats'					=> 'Bad Behavior ha bloqueado %1 intentos de acceso en los últimos 7 días.',
+	'BbStats'					=> 'Bad Behaviour ha bloqueado %1 intentos de acceso en los últimos 7 días.',
 
 	'BbSummary'					=> 'Resumen',
 	'BbLog'						=> 'Log',
@@ -1240,7 +1240,7 @@ $ap_translation = [
 	'BbHttpblMaxage'			=> 'Antigüedad máxima de los datos (se recomienda 30)',
 	'BbReverseProxy'			=> 'Proxy inverso/equilibrador de carga',
 	'BbReverseProxyInfo'		=> 'Si utiliza un comportamiento incorrecto detrás de un proxy inverso, equilibrador de carga, acelerador HTTP, caché de contenido o tecnología similar, habilite la opción Proxy inverso.<br>' .
-									'Si tiene una cadena de dos o más proxies inversos entre su servidor y la Internet pública, debe especificar <em>todos</em> los rangos de direcciones IP (en formato CIDR) de todos sus servidores proxy, balanceadores de carga, etc. De lo contrario, es posible que Bad Behavior no pueda determinar la verdadera dirección IP del cliente<br>' .
+									'Si tiene una cadena de dos o más proxies inversos entre su servidor y la Internet pública, debe especificar <em>todos</em> los rangos de direcciones IP (en formato CIDR) de todos sus servidores proxy, balanceadores de carga, etc. De lo contrario, es posible que Bad Behaviour no pueda determinar la verdadera dirección IP del cliente<br>' .
 									'Además, sus servidores proxy inversos deben establecer la dirección IP del cliente de Internet desde el que recibieron la solicitud en un encabezado HTTP. Si no especifica un encabezado, se usará %1. La mayoría de los servidores proxy ya son compatibles con X-Fordered-For y solo necesitará asegurarse de que esté habilitado en sus servidores proxy. Algunos otros nombres de encabezados de uso común incluyen %2 y %3.',
 	'BbReverseProxyEnable'		=> 'Habilitar proxy inverso',
 	'BbReverseProxyHeader'		=> 'Encabezado que contiene la dirección IP de los clientes de Internet',

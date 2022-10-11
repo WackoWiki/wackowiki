@@ -8,7 +8,7 @@ The version and status of each is summarized below:
 
 | directory			| project			| version	| status |
 | ----------------- | ----------------- | --------- | --------- |
-| bad_behavior		| Bad Behaviour		| 2.2.25	| patched: various, see repo |
+| bad_behaviour		| Bad Behaviour		| 2.2.25	| patched: various, see repo |
 | captcha			| freeCap			| 1.4.4		| patched: various, see repo |
 | hashids			| Hashids			| 4.1.0		| unpatched |
 | htmlsax3			| HTMLSAX3			| 3.0.0		| patched: various, see repo |
@@ -28,7 +28,7 @@ The version and status of each is summarized below:
 
 Upstream projects
 -----------------
-- bad_behavior		- https://github.com/Bad-Behaviour/badbehaviour
+- bad_behaviour		- https://github.com/Bad-Behaviour/badbehaviour
 - clipboard.js		- https://github.com/zenorocha/clipboard.js
 - freecap			- https://wackowiki.org/doc/Dev/Components/Lib/Captcha
 - hashids			- https://hashids.org/php/

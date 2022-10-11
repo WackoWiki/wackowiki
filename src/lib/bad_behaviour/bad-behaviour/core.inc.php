@@ -1,9 +1,9 @@
 <?php if (!defined('BB2_CWD')) die('I said no cheating!');
 const BB2_VERSION = '2.2.25';
 
-// Bad Behavior entry point is bb2_start()
+// Bad Behaviour entry point is bb2_start()
 // If you're reading this, you are probably lost.
-// Go read the bad-behavior-generic.php file.
+// Go read the bad-behaviour-generic.php file.
 
 const BB2_CORE = __DIR__;
 
@@ -143,8 +143,8 @@ function bb2_start($settings)
 
 	if ($settings['reverse_proxy'] && $ip = bb2_reverse_proxy($settings, $headers_mixed))
 	{
-		$headers['X-Bad-Behavior-Remote-Address']		= $_SERVER['REMOTE_ADDR'];
-		$headers_mixed['X-Bad-Behavior-Remote-Address']	= $_SERVER['REMOTE_ADDR'];
+		$headers['X-Bad-Behaviour-Remote-Address']		= $_SERVER['REMOTE_ADDR'];
+		$headers_mixed['X-Bad-Behaviour-Remote-Address']	= $_SERVER['REMOTE_ADDR'];
 	}
 	else
 	{

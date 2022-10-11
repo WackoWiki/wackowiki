@@ -213,8 +213,8 @@ $ap_translation = [
 		'title'		=> '显示统计数据',
 	],
 
-	// Bad Behavior module
-	'tool_badbehavior'		=> [
+	// Bad Behaviour module
+	'tool_badbehaviour'		=> [
 		'name'		=> '不良行为',
 		'title'		=> '不良行为',
 	],
@@ -1171,7 +1171,7 @@ $ap_translation = [
 	'Check'						=> '检查',
 	'Solve'						=> '解决',
 
-	// Bad Behavior module
+	// Bad Behaviour module
 	'BbInfo'					=> '检测并阻止不需要的 Web 访问，拒绝自动垃圾邮件程序访问<br>有关详细信息，请访问 %1 主页。',
 	'BbEnable'					=> '启用不良行为：',
 	'BbEnableInfo'				=> '所有其他设置都可以在配置文件夹 %1 中更改。',
@@ -1219,13 +1219,13 @@ $ap_translation = [
 	'BbOffsiteForms'			=> '允许来自其他网站的表单发布',
 	'BbOffsiteFormsInfo'		=> 'OpenID 需要； 增加收到的垃圾邮件',
 	'BbHttpbl'					=> 'http:BL',
-	'BbHttpblInfo'				=> '要使用 Bad Behavior 的 htt安全p:BL 功能，您必须拥有 %1',
+	'BbHttpblInfo'				=> '要使用 Bad Behaviour 的 htt安全p:BL 功能，您必须拥有 %1',
 	'BbHttpblKey'				=> 'http:BL 访问密钥',
 	'BbHttpblThreat'			=> '最低威胁等级（推荐 25）',
 	'BbHttpblMaxage'			=> '数据的最大年龄（建议 30）',
 	'BbReverseProxy'			=> '反向代理/负载均衡器',
 	'BbReverseProxyInfo'		=> '如果您在反向代理、负载平衡器、HTTP 加速器、内容缓存或类似技术后面使用不良行为，请启用反向代理选项。<br>' .
-									'如果您的服务器和公共 Internet 之间有两个或多个反向代理链，您必须指定所有代理服务器、负载平衡器的<em>所有</em> IP 地址范围（以 CIDR 格式） 等。否则，Bad Behavior 可能无法确定客户端的真实 IP 地址。<br>' .
+									'如果您的服务器和公共 Internet 之间有两个或多个反向代理链，您必须指定所有代理服务器、负载平衡器的<em>所有</em> IP 地址范围（以 CIDR 格式） 等。否则，Bad Behaviour 可能无法确定客户端的真实 IP 地址。<br>' .
 									'此外，您的反向代理服务器必须在 HTTP 标头中设置从其接收请求的 Internet 客户端的 IP 地址。 如果您不指定标头，将使用 %1。 大多数代理服务器已经支持 X-Forwarded-For，然后您只需确保在您的代理服务器上启用它。 其他一些常用的标头名称包括 %2 和 %3。',
 	'BbReverseProxyEnable'		=> '启用反向代理',
 	'BbReverseProxyHeader'		=> '包含 Internet 客户端 IP 地址的标头',

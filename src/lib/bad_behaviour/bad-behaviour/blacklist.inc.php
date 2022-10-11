@@ -84,7 +84,7 @@ function bb2_blacklist($package) {
 		':;',			// shellshock
 		'a href=',		// referrer spam
 		'ArchiveBot',	// ignores robots.txt and hammers server
-		'Bad Behavior Test',	// Add this to your user-agent to test BB
+		'Bad Behaviour Test',	// Add this to your user-agent to test BB
 		'compatible ; MSIE',	// misc comment/email spam
 		'compatible-',		// misc comment/email spam
 		'DTS Agent',		// misc comment/email spam

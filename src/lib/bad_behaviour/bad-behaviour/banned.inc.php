@@ -45,8 +45,8 @@ function bb2_display_denial($settings, $package, $key, $previous_key = false)
 
 	// Get response data
 	$response = bb2_get_response($previous_key);
-	header('HTTP/1.1 ' . $response['response'] . ' Bad Behavior');
-	header('Status: ' . $response['response'] . ' Bad Behavior');
+	header('HTTP/1.1 ' . $response['response'] . ' Bad Behaviour');
+	header('Status: ' . $response['response'] . ' Bad Behaviour');
 	$request_uri = $_SERVER['REQUEST_URI'];
 
 	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS

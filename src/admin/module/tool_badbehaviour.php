@@ -6,21 +6,21 @@ if (!defined('IN_WACKO'))
 }
 
 ##########################################################
-##	Bad Behavior										##
+##	Bad Behaviour										##
 ##########################################################
 
-$module['tool_badbehavior'] = [
+$module['tool_badbehaviour'] = [
 		'order'	=> 800,
 		'cat'	=> 'extension',
 		'status'=> !RECOVERY_MODE,
 	];
 
 ##########################################################
-function admin_tool_badbehavior(&$engine, $module)
+function admin_tool_badbehaviour(&$engine, $module)
 {
-	if (!empty($engine->db->ext_bad_behavior))
+	if (!empty($engine->db->ext_bad_behaviour))
 	{
-		require_once 'lib/bad_behavior/bad-behavior/responses.inc.php';
+		require_once 'lib/bad_behaviour/bad-behaviour/responses.inc.php';
 	}
 
 	$action = $_POST['_action'] ?? null;
@@ -144,7 +144,7 @@ function admin_tool_badbehavior(&$engine, $module)
 			// Query the DB based on variables selected
 			$results = $engine->db->load_all(
 				"SELECT BINARY {$argument} as group_type, {$additional_fields} COUNT({$argument}) AS n " .
-				"FROM " . $engine->prefix . "bad_behavior " .
+				"FROM " . $engine->prefix . "bad_behaviour " .
 				"GROUP BY BINARY {$argument} " .
 				"ORDER BY n DESC " .
 				"LIMIT 10", true);
@@ -202,7 +202,7 @@ function admin_tool_badbehavior(&$engine, $module)
 
 	function bb2_manage(&$engine)
 	{
-		$bb_table		= $engine->prefix . 'bad_behavior';
+		$bb_table		= $engine->prefix . 'bad_behaviour';
 		$settings		= bb2_read_settings();
 
 		$where			= '';
@@ -231,12 +231,12 @@ function admin_tool_badbehavior(&$engine, $module)
 		// collecting data
 		$count = $engine->db->load_single(
 			"SELECT COUNT(log_id) AS n " .
-			"FROM " . $engine->prefix . "bad_behavior l " .
+			"FROM " . $engine->prefix . "bad_behaviour l " .
 			"WHERE 1=1 " . ( $where ?: '' ));
 
 
 
-		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'tool_badbehavior', 'setting' => 'bb2_manage']
+		$pagination			= $engine->pagination($count['n'], $limit, 'p', ['mode' => 'tool_badbehaviour', 'setting' => 'bb2_manage']
 								+ (!empty($g_blocked)			? ['blocked'		=> Ut::html($g_blocked)] : [])
 								+ (!empty($g_permitted)			? ['permitted'		=> Ut::html($g_permitted)] : [])
 								+ (!empty($g_key)				? ['status_key'		=> Ut::html($g_key)] : [])
@@ -249,7 +249,7 @@ function admin_tool_badbehavior(&$engine, $module)
 
 		$totalcount		= $engine->db->load_single(
 			"SELECT COUNT(log_id) AS n " .
-			"FROM " . $engine->prefix . "bad_behavior l ");
+			"FROM " . $engine->prefix . "bad_behaviour l ");
 
 		$results		= $engine->db->load_all(
 			"SELECT log_id, ip, host, date, request_method, request_uri, server_protocol, http_headers, user_agent, user_agent_hash, request_entity, status_key " .
@@ -330,7 +330,7 @@ function admin_tool_badbehavior(&$engine, $module)
 				{
 					$host = @gethostbyaddr($result['ip']);
 					$engine->db->sql_query(
-						"UPDATE " . $engine->prefix . "bad_behavior SET " .
+						"UPDATE " . $engine->prefix . "bad_behaviour SET " .
 							"host		= " . $engine->db->q($host) . " " .
 						"WHERE log_id	= " . (int) $result['log_id'] . " " .
 						"LIMIT 1");
@@ -432,7 +432,7 @@ function admin_tool_badbehavior(&$engine, $module)
 				$whitelists['useragent'] = [];
 			}
 
-			#update_option('bad_behavior_whitelist', $whitelists);
+			#update_option('bad_behaviour_whitelist', $whitelists);
 		?>
 		<div id="message" class="updated fade"><p><strong><?php echo $engine->_t('BbOptionsSaved');?></strong></p></div>
 		<?php
@@ -501,7 +501,7 @@ function bb2_options(&$engine)
 	// update settings
 	if (isset($_POST['action']) && $_POST['action'] == 'update')
 	{
-		$config['ext_bad_behavior']				= (int) $_POST['ext_bad_behavior'];
+		$config['ext_bad_behaviour']				= (int) $_POST['ext_bad_behaviour'];
 
 		/*
 		$config['display_stats']				= (string) $_POST['display_stats'];
@@ -664,10 +664,10 @@ function bb2_options(&$engine)
 			<td class="label"><strong><?php echo $engine->_t('BbEnable');?></strong><br>
 				<small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_settings.conf</code>');?></small></td>
 			<td>
-				<input type="radio" id="enable_bad-behavior_on" name="enable_bad-behavior" value="1"<?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>>
-				<label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-				<input type="radio" id="enable_bad-behavior_off" name="enable_bad-behavior" value="0"<?php echo ( !$engine->db->ext_bad_behavior ? ' checked' : '');?>>
-				<label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+				<input type="radio" id="enable_bad-behaviour_on" name="enable_bad-behaviour" value="1"<?php echo ($engine->db->ext_bad_behaviour ? ' checked' : '');?>>
+				<label for="enable_bad-behaviour_on"><?php echo $engine->_t('On');?></label>
+				<input type="radio" id="enable_bad-behaviour_off" name="enable_bad-behaviour" value="0"<?php echo ( !$engine->db->ext_bad_behaviour ? ' checked' : '');?>>
+				<label for="enable_bad-behaviour_off"><?php echo $engine->_t('Off');?></label>
 			</td>
 		</tr>
 		<tr>
@@ -833,7 +833,7 @@ function bb2_options(&$engine)
 	// update settings
 	if ($action == 'bb2_options')
 	{
-		$config['ext_bad_behavior'] = (int) $_POST['ext_bad_behavior'];
+		$config['ext_bad_behaviour'] = (int) $_POST['ext_bad_behaviour'];
 
 		$engine->config->_set($config);
 
@@ -842,9 +842,9 @@ function bb2_options(&$engine)
 		$engine->http->redirect($engine->href());
 	}
 
-	if ($action == 'purge_badbehavior')
+	if ($action == 'purge_badbehaviour')
 	{
-		$sql = "TRUNCATE " . $engine->prefix . "badbehavior";
+		$sql = "TRUNCATE " . $engine->prefix . "badbehaviour";
 		$engine->db->sql_query($sql);
 
 		// queries
@@ -858,7 +858,7 @@ function bb2_options(&$engine)
 	?>
 	<h1><?php echo $engine->_t($module)['title']; ?></h1>
 	<br>
-	<?php echo Ut::perc_replace($engine->_t('BbInfo'), '<a href="https://bad-behavior.ioerror.us/" rel="noreferrer">Bad Behavior</a>');?>
+	<?php echo Ut::perc_replace($engine->_t('BbInfo'), '<a href="https://github.com/Bad-Behaviour/badbehaviour" rel="noreferrer">Bad Behaviour</a>');?>
 	<br><br>
 	<?php
 	$mode_selector	= 'setting';
@@ -880,7 +880,7 @@ function bb2_options(&$engine)
 	echo '<h2>' . $engine->_t($tabs[$mode]) . "</h2>";
 	echo '<p>' . $engine->tab_menu($tabs, $mode, '', [], $mode_selector) . '</p><br>';
 
-	if (!empty($engine->db->ext_bad_behavior))
+	if (!empty($engine->db->ext_bad_behaviour))
 	{
 		if (isset($_GET['setting']) && $_GET['setting'] == 'bb2_options')
 		{
@@ -918,10 +918,10 @@ function bb2_options(&$engine)
 						<small><?php echo Ut::perc_replace($engine->_t('BbEnableInfo'), '<code>bb_settings.conf</code>');?></small>
 					</th>
 					<td>
-						<input type="radio" id="enable_bad-behavior_on" name="ext_bad_behavior" value="1" <?php echo ($engine->db->ext_bad_behavior ? ' checked' : '');?>>
-						<label for="enable_bad-behavior_on"><?php echo $engine->_t('On');?></label>
-						<input type="radio" id="enable_bad-behavior_off" name="ext_bad_behavior" value="0" <?php echo (!$engine->db->ext_bad_behavior ? ' checked' : '');?>>
-						<label for="enable_bad-behavior_off"><?php echo $engine->_t('Off');?></label>
+						<input type="radio" id="enable_bad-behaviour_on" name="ext_bad_behaviour" value="1" <?php echo ($engine->db->ext_bad_behaviour ? ' checked' : '');?>>
+						<label for="enable_bad-behaviour_on"><?php echo $engine->_t('On');?></label>
+						<input type="radio" id="enable_bad-behaviour_off" name="ext_bad_behaviour" value="0" <?php echo (!$engine->db->ext_bad_behaviour ? ' checked' : '');?>>
+						<label for="enable_bad-behaviour_off"><?php echo $engine->_t('Off');?></label>
 					</td>
 				</tr>
 			</tbody>

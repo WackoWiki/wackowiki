@@ -297,5 +297,5 @@ $wacko_config_defaults = [
 	'enable_counters'				=> 1,
 
 	// enable extensions
-	'ext_bad_behavior'				=> 0,
+	'ext_bad_behaviour'				=> 0,
 ];

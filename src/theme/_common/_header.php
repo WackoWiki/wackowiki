@@ -81,8 +81,8 @@ if ($this->db->enable_feeds)
 	}
 }
 
-// display Bad Behavior timer
-if (!empty($this->db->ext_bad_behavior))
+// display Bad Behaviour timer
+if (!empty($this->db->ext_bad_behaviour))
 {
 	$tpl->bb2 = bb2_timer();
 }
