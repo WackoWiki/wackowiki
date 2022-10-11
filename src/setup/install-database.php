@@ -77,6 +77,12 @@ if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.13', 
 	$config['rename_global_acl']	= $config['rename_globalacl'];
 }
 
+if ($config['is_update'] && version_compare($config['wacko_version'], '6.1.14', '<'))
+{
+	// renamed option
+	$config['ext_bad_behaviour']	= $config['ext_bad_behavior'];
+}
+
 /*
  Setup the tables depending on which database we selected
 
