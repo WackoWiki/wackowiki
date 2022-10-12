@@ -24,12 +24,11 @@ if (!preg_match('/^([' . $this->lang['ALPHANUM_P'] . '\.]+)$/u', $file_name))
 $page_id = isset($_GET['global'])? 0 : $this->page['page_id'];
 
 $file = $this->db->load_single(
-	"SELECT u.user_name AS user, f.user_id, f.file_id, f.file_name, f.file_ext, f.file_size, f.file_description " .
-	"FROM " . $this->prefix . "file f " .
-		"INNER JOIN " . $this->prefix . "user u ON (f.user_id = u.user_id) " .
-	"WHERE f.page_id = " . (int) $page_id . " " .
-		"AND f.file_name = " . $this->db->q($file_name) . " " .
-		"AND f.deleted <> 1 " .
+	"SELECT file_id, user_id, file_name " .
+	"FROM " . $this->prefix . "file " .
+	"WHERE page_id = " . (int) $page_id . " " .
+		"AND file_name = " . $this->db->q($file_name) . " " .
+		"AND deleted <> 1 " .
 	"LIMIT 1");
 
 if (!$file)
