@@ -1,4 +1,10 @@
 <?php
+
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
 	{{Hidden Content Wrapper
 
@@ -16,10 +22,6 @@
 	}}
 	*/
 
-if (!defined('IN_WACKO'))
-{
-	exit;
-}
 
 // set defaults
 $usergroup	??= '';

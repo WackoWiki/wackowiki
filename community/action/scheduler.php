@@ -1,5 +1,10 @@
 <?php
 
+if (!defined('IN_WACKO'))
+{
+	exit;
+}
+
 /*
  * scheduler action:
  * https://wackowiki.org/doc/Dev/PatchesHacks/Scheduler
