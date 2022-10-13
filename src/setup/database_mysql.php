@@ -287,33 +287,6 @@ $tbl_revision =
 		KEY idx_comment_on_id (comment_on_id)
 	) {$engine} COMMENT='' {$charset} {$collation}";
 
-$tbl_tag =
-	"CREATE TABLE {$pref}tag (
-		tag_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-		user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		tag_lang VARCHAR(5) NOT NULL DEFAULT '',
-		tag_name VARCHAR(100) NOT NULL DEFAULT '',
-		date_created DATETIME NULL DEFAULT NULL,
-		date_updated DATETIME NULL DEFAULT NULL,
-		PRIMARY KEY (tag_id),
-		KEY idx_tag_name (tag_name)
-	) {$engine} COMMENT='' {$charset} {$collation}";
-
-$tbl_tag_assignment =
-	"CREATE TABLE {$pref}tag_assignment (
-		assignment_id INTEGER(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-		tag_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		user_id INT(10) UNSIGNED NOT NULL DEFAULT '0',
-		date_attached DATETIME NULL DEFAULT NULL,
-		object_type_id INT(10) unsigned NOT NULL DEFAULT 0,
-		object_id INT(10) unsigned NOT NULL DEFAULT 0,
-		PRIMARY KEY (assignment_id),
-		KEY idx_tag_id (tag_id),
-		KEY idx_object_id (object_id),
-		KEY idx_object_type_id (object_type_id),
-		UNIQUE KEY idx_assignment (tag_id, object_type_id, object_id)
-	) {$engine} COMMENT='' {$charset} {$collation}";
-
 $tbl_user =
 	"CREATE TABLE {$pref}user (
 		user_id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -440,8 +413,6 @@ $tbl_page_drop					= "DROP TABLE IF EXISTS {$pref}page";
 $tbl_page_link_drop				= "DROP TABLE IF EXISTS {$pref}page_link";
 $tbl_referrer_drop				= "DROP TABLE IF EXISTS {$pref}referrer";
 $tbl_revision_drop				= "DROP TABLE IF EXISTS {$pref}revision";
-$tbl_tag_drop					= "DROP TABLE IF EXISTS {$pref}tag";
-$tbl_tag_assignment_drop		= "DROP TABLE IF EXISTS {$pref}tag_assignment";
 $tbl_user_drop					= "DROP TABLE IF EXISTS {$pref}user";
 $tbl_user_setting_drop			= "DROP TABLE IF EXISTS {$pref}user_setting";
 $tbl_usergroup_drop				= "DROP TABLE IF EXISTS {$pref}usergroup";
