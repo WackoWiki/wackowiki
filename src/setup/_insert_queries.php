@@ -84,6 +84,9 @@ $insert_records[]		= [$lang['InstallReviewerGroup'],		$insert_reviewer_group,			
 // acl
 $upgrade['6.1.11'][]	= ['alter',		'acl',				$alter_acl_r6_0_1];
 
+// bad behaviour
+$upgrade['6.1.13'][]	= ['delete',	'bad_behavior',		$delete_bad_behavior_r6_1_0];
+
 // cache
 $upgrade['6.1.9'][]		= ['alter',		'cache',			$alter_cache_r6_0_1];
 
