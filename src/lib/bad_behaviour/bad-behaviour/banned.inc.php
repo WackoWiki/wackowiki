@@ -3,7 +3,7 @@
 // Functions called when a request has been denied
 // This part can be gawd-awful slow, doesn't matter :)
 
-require_once(BB2_CORE . '/responses.inc.php');
+require_once BB2_CORE . '/responses.inc.php';
 
 function bb2_housekeeping($settings, $package)
 {
@@ -51,8 +51,8 @@ function bb2_display_denial($settings, $package, $key, $previous_key = false)
 
 	if (!$request_uri) $request_uri = $_SERVER['SCRIPT_NAME'];	# IIS
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--< html xmlns="http://www.w3.org/1999/xhtml">-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <title>HTTP Error <?php echo $response['response']; ?></title>
 </head>

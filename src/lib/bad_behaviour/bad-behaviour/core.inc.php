@@ -7,7 +7,7 @@ const BB2_VERSION = '2.2.25';
 
 const BB2_CORE = __DIR__;
 
-require_once(BB2_CORE . '/functions.inc.php');
+require_once BB2_CORE . '/functions.inc.php';
 
 // Kill 'em all!
 function bb2_banned($settings, $package, $key, $previous_key = false)
@@ -15,7 +15,7 @@ function bb2_banned($settings, $package, $key, $previous_key = false)
 	// Some spambots hit too hard. Slow them down a bit.
 	sleep(2);
 
-	require_once(BB2_CORE . '/banned.inc.php');
+	require_once BB2_CORE . '/banned.inc.php';
 	bb2_display_denial($settings, $package, $key, $previous_key);
 	bb2_log_denial($settings, $package, $key, $previous_key);
 
@@ -143,7 +143,7 @@ function bb2_start($settings)
 
 	if ($settings['reverse_proxy'] && $ip = bb2_reverse_proxy($settings, $headers_mixed))
 	{
-		$headers['X-Bad-Behaviour-Remote-Address']		= $_SERVER['REMOTE_ADDR'];
+		$headers['X-Bad-Behaviour-Remote-Address']			= $_SERVER['REMOTE_ADDR'];
 		$headers_mixed['X-Bad-Behaviour-Remote-Address']	= $_SERVER['REMOTE_ADDR'];
 	}
 	else
@@ -179,24 +179,27 @@ function bb2_screen($settings, $package)
 	// Thanks to butchs at Simple Machines
 	if (array_key_exists('Cf-Connecting-Ip', $package['headers_mixed']))
 	{
-		require_once(BB2_CORE . '/cloudflare.inc.php');
+		require_once BB2_CORE . '/cloudflare.inc.php';
 		$r = bb2_cloudflare($package);
 
-		if ($r !== false && $r != $package['ip']) return $r;
+		if ($r !== false && $r != $package['ip'])
+		{
+			return $r;
+		}
 	}
 
 	// First check the whitelist
-	require_once(BB2_CORE . '/whitelist.inc.php');
+	require_once BB2_CORE . '/whitelist.inc.php';
 
 	if (!bb2_run_whitelist($package))
 	{
 		// Now check the blacklist
-		require_once(BB2_CORE . '/blacklist.inc.php');
+		require_once BB2_CORE . '/blacklist.inc.php';
 
 		if ($r = bb2_blacklist($package)) return $r;
 
 		// Check the http:BL
-		require_once(BB2_CORE . '/blackhole.inc.php');
+		require_once BB2_CORE . '/blackhole.inc.php';
 
 		if ($r = bb2_httpbl($settings, $package))
 		{
@@ -206,7 +209,7 @@ function bb2_screen($settings, $package)
 		}
 
 		// Check for common stuff
-		require_once(BB2_CORE . '/common_tests.inc.php');
+		require_once BB2_CORE . '/common_tests.inc.php';
 
 		if ($r = bb2_protocol($settings, $package)) return $r;
 		if ($r = bb2_cookies($settings, $package)) return $r;
@@ -220,7 +223,7 @@ function bb2_screen($settings, $package)
 			|| stripos($ua, 'msnbot') !== false
 			|| stripos($ua, 'MS Search') !== false)
 		{
-			require_once(BB2_CORE . '/searchengine.inc.php');
+			require_once BB2_CORE . '/searchengine.inc.php';
 
 			if ($r = bb2_msnbot($package))
 			{
@@ -235,7 +238,7 @@ function bb2_screen($settings, $package)
 			||   stripos($ua, 'Mediapartners-Google') !== false
 			||   stripos($ua, 'Google Web Preview') !== false)
 		{
-			require_once(BB2_CORE . '/searchengine.inc.php');
+			require_once BB2_CORE . '/searchengine.inc.php';
 
 			if ($r = bb2_google($package))
 			{
@@ -249,7 +252,7 @@ function bb2_screen($settings, $package)
 		else if (stripos($ua, 'Yahoo! Slurp') !== false
 			||   stripos($ua, 'Yahoo! SearchMonkey') !== false)
 		{
-			require_once(BB2_CORE . '/searchengine.inc.php');
+			require_once BB2_CORE . '/searchengine.inc.php';
 
 			if ($r = bb2_yahoo($package))
 			{
@@ -262,7 +265,7 @@ function bb2_screen($settings, $package)
 		}
 		elseif (stripos($ua, 'Baidu') !== false)
 		{
-			require_once(BB2_CORE . '/searchengine.inc.php');
+			require_once BB2_CORE . '/searchengine.inc.php';
 
 			if ($r = bb2_baidu($package))
 			{
@@ -278,7 +281,7 @@ function bb2_screen($settings, $package)
 		if (stripos($ua, '; MSIE') !== false)
 		{
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . '/browser.inc.php');
+			require_once BB2_CORE . '/browser.inc.php';
 
 			if (stripos($ua, 'Opera') !== false)
 			{
@@ -292,41 +295,41 @@ function bb2_screen($settings, $package)
 		else if (stripos($ua, 'Konqueror') !== false)
 		{
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . '/browser.inc.php');
+			require_once BB2_CORE . '/browser.inc.php';
 
 			if ($r = bb2_konqueror($package)) return $r;
 		}
 		else if (stripos($ua, 'Opera') !== false)
 		{
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . '/browser.inc.php');
+			require_once BB2_CORE . '/browser.inc.php';
 
 			if ($r = bb2_opera($package)) return $r;
 		}
 		else if (stripos($ua, 'Safari') !== false)
 		{
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . '/browser.inc.php');
+			require_once BB2_CORE . '/browser.inc.php';
 
 			if ($r = bb2_safari($package)) return $r;
 		}
 		else if (stripos($ua, 'Lynx') !== false)
 		{
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . '/browser.inc.php');
+			require_once BB2_CORE . '/browser.inc.php';
 
 			if ($r = bb2_lynx($package)) return $r;
 		}
 		else if (stripos($ua, 'MovableType') !== false)
 		{
-			require_once(BB2_CORE . '/movabletype.inc.php');
+			require_once BB2_CORE . '/movabletype.inc.php';
 
 			if ($r = bb2_movabletype($package)) return $r;
 		}
 		else if (stripos($ua, 'Mozilla') !== false && stripos($ua, 'Mozilla') == 0)
 		{
 			$package['is_browser'] = true;
-			require_once(BB2_CORE . '/browser.inc.php');
+			require_once BB2_CORE . '/browser.inc.php';
 
 			if ($r = bb2_mozilla($package)) return $r;
 		}
@@ -334,7 +337,7 @@ function bb2_screen($settings, $package)
 		// More intensive screening applies to POST requests
 		if (!strcasecmp('POST', $package['request_method']))
 		{
-			require_once(BB2_CORE . '/post.inc.php');
+			require_once BB2_CORE . '/post.inc.php';
 
 			if ($r = bb2_post($settings, $package)) return $r;
 		}

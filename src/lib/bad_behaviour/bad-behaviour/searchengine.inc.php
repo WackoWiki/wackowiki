@@ -1,6 +1,6 @@
 <?php if (!defined('BB2_CORE')) die('I said no cheating!');
 
-require_once(BB2_CORE . '/roundtripdns.inc.php');
+require_once BB2_CORE . '/roundtripdns.inc.php';
 
 // Analyze user agents claiming to be Googlebot
 

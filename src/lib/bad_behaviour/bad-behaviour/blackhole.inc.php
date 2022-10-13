@@ -14,9 +14,9 @@ function bb2_blackhole($package)
 	// Only conservative lists
 	$bb2_blackhole_lists = [
 		'sbl-xbl.spamhaus.org',	// All around nasties
-//		'dnsbl.sorbs.net',	// Old useless data.
-//		'list.dsbl.org',	// Old useless data.
-//		'dnsbl.ioerror.us',	// Bad Behaviour Blackhole
+//		'dnsbl.sorbs.net',		// Old useless data.
+//		'list.dsbl.org',		// Old useless data.
+//		'dnsbl.ioerror.us',		// Bad Behaviour Blackhole
 	];
 
 	// Things that shouldn't be blocked, from aggregate lists
