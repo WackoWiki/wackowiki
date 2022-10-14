@@ -560,7 +560,6 @@ function admin_user_groups(&$engine, $module)
 			'created_asc'		=> 'g.created ASC ',
 			'created_desc'		=> 'g.created DESC ',
 			'group_asc'			=> 'g.group_name DESC ',
-			'group_desc'		=> 'g.group_name ASC ',
 			'members_asc'		=> 'members DESC ',
 			'members_desc'		=> 'members ASC ',
 			default				=> 'g.group_name ASC ',

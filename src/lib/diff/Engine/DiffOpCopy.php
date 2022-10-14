@@ -2,7 +2,7 @@
 
 class DiffOp_Copy extends DiffOp
 {
-	var $type = 'copy';
+	public $type = 'copy';
 
 	function __construct($orig, $final = false)
 	{

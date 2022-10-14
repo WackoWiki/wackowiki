@@ -330,7 +330,7 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 			$decorated_output = $this->_decorate($content, $key);
 
 
-			if ($numbers_li == true)
+			if ($numbers_li)
 			{
 				// end span tags before end of li, and re-open on next line
 				$lastSpanTag = str_replace("%s</span>", "", $span);
@@ -347,7 +347,7 @@ class Text_Highlighter_Renderer_Html extends Text_Highlighter_Renderer_Array
 		}
 
 		// format lists
-		if (!empty($this->_numbers) && $numbers_li == true)
+		if (!empty($this->_numbers) && $numbers_li)
 		{
 			// additional whitespace for browsers that do not display
 			// empty list items correctly

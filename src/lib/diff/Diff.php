@@ -43,7 +43,7 @@ if (!defined('IN_WACKO'))
  */
 class Diff2
 {
-	var $edits;
+	public $edits;
 
 	/**
 	 * Constructor.

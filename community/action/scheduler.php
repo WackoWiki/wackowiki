@@ -54,14 +54,12 @@ $weekdays = function($pattern = 'EEEE'): array
 		$pattern
 	);
 
-	$days = array_map(
+	return array_map(
 		function($dow) use ($formatter) {
 			return $formatter->format(strtotime('next Sunday +' . $dow . ' days'));
 		},
 		[2, 3, 4, 5, 6, 7, 1] #range(1, 7)
 	);
-
-	return $days;
 };
 
 $months = function($pattern = 'MMMM')
@@ -75,14 +73,12 @@ $months = function($pattern = 'MMMM')
 		$pattern
 	);
 
-	$months = array_map(
+	return array_map(
 		function($m) use ($formatter){
 			return $formatter->format(mktime(0, 0, 0, $m, 2, 1970));
 		},
 		range(1, 12)
 	);
-
-	return $months;
 };
 
 // get the last day of the month

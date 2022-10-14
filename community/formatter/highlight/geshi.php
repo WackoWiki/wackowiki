@@ -45,7 +45,7 @@ if ($options['_default'])
 
 	#/*
 	// get the stylesheet -> geshi.css
-	echo '<style type="text/css">';
+	echo '<style>';
 	echo $geshi->get_stylesheet(false);
 	echo '</style>';
 	#*/

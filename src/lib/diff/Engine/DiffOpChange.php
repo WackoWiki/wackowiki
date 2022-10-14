@@ -2,7 +2,7 @@
 
 class DiffOp_Change extends DiffOp
 {
-	var $type = 'change';
+	public $type = 'change';
 
 	function __construct($orig, $final)
 	{

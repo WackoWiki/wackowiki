@@ -23,20 +23,20 @@ if (!defined('IN_WACKO'))
 class GPG
 {
 	// VARIABLES
-	var $engine;
-	var $UID		= null;		// pubkey user ID
-	var $key_id		= null;		// pubkey ID
-	var $finger		= null;		// pubkey fingerprint
-	var $secret		= '';		// secret protection value
-	var $context	= '';		// keyring context
-	var $override	= '';		// override global command line and config parameters
-	var $baseurl;				// server ip with a proper protocol
-	var $homedir;				// gpg homedir
-	var $tempdir;				// temporary data dir
-	var $sessdir;				// user session dir
-	var $stfile;				// gpg status file
-	var $srfile;				// gpg stderr file
-	var $sid;					// session id
+	public $engine;
+	public $UID			= null;		// pubkey user ID
+	public $key_id		= null;		// pubkey ID
+	public $finger		= null;		// pubkey fingerprint
+	public $secret		= '';		// secret protection value
+	public $context		= '';		// keyring context
+	public $override	= '';		// override global command line and config parameters
+	public $baseurl;				// server ip with a proper protocol
+	public $homedir;				// gpg homedir
+	public $tempdir;				// temporary data dir
+	public $sessdir;				// user session dir
+	public $stfile;					// gpg status file
+	public $srfile;					// gpg stderr file
+	public $sid;					// session id
 
 	// CONSTRUCTOR
 	function __construct(&$engine)
