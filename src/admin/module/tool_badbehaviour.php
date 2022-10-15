@@ -20,7 +20,7 @@ function admin_tool_badbehaviour(&$engine, $module)
 {
 	if (!empty($engine->db->ext_bad_behaviour))
 	{
-		require_once 'lib/bad_behaviour/bad-behaviour/responses.inc.php';
+		require_once 'lib/bad_behaviour/src/responses.inc.php';
 	}
 
 	$action = $_POST['_action'] ?? null;
