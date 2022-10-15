@@ -608,6 +608,9 @@ function put_data(&$engine, $pack, $table, $mode)
 		$data	= explode("\n", $data);
 		$i		= 0;
 
+		// setting the SQL Mode, disable possible Strict SQL Mode
+		$engine->db->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
+
 		// processing...
 		foreach ($data as $row)
 		{
@@ -641,9 +644,6 @@ function put_data(&$engine, $pack, $table, $mode)
 					$row[$j++] = $engine->db->q($cell);
 				}
 			}
-
-			// setting the SQL Mode, disable possible Strict SQL Mode
-			$engine->db->sql_query("SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION';");
 
 			// run and count sql query
 			$engine->db->sql_query("$mode INTO $table VALUES ( " . implode(', ', $row) . " )");
