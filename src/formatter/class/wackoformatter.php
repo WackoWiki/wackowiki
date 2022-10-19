@@ -136,7 +136,7 @@ class WackoFormatter
 			"--\S--|" .
 			"--(\S.*?[^- \t\n\r])--|" .
 			// list including multilevel
-			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]|(\d{1,3}))[\.\)](\#\d{1,3})?)?|" .
+			"\n(\t+|([ ]{2})+)(-|\*|([a-zA-Z]{1,3}|[ivIV]+|(\d{1,3}))[\.\)](\#\d{1,3})?)?|" .
 			// media links
 			"file:((\.\.|!)?\/)?[\p{L}\p{Nd}][\p{L}\p{Nd}\/\-\_\.]+\.(mp4|ogv|webm|m4a|mp3|ogg|opus|avif|gif|jp(?:eg|e|g)|jxl|png|svg|webp)(\?[[:alnum:]\&]+)?|" .
 			// interwiki links
@@ -912,7 +912,7 @@ class WackoFormatter
 			return '';
 		}
 		// indented text
-		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]|\d{1,3})[\.\)](\#\d{1,3})?)?(\n|$)/us', $thing, $matches))
+		else if (preg_match('/(\n)(\t+|(?:[ ]{2})+)(-|\*|([a-zA-Z]{1,3}|[ivIV]+|\d{1,3})[\.\)](\#\d{1,3})?)?(\n|$)/us', $thing, $matches))
 		{
 			// new line
 			$result .= ($this->br ? "<br>\n" : "\n");
@@ -945,7 +945,20 @@ class WackoFormatter
 			}
 
 			// find out which indent type we want
-			$new_indent_type = $matches[3][0] ?? '';
+			$indent_type = $matches[3][0] ?? '';
+
+			// TODO: set list-style-type via predefined CSS class, e.g. for 'lower-greek'
+
+			// the order matters for Roman numerals
+			$new_indent_type = match(1){
+				preg_match('/[*-]/',	$indent_type)	=> '*',
+				preg_match('/\d/',		$indent_type)	=> '1',	// numbers
+				preg_match('/[iv]/',	$indent_type)	=> 'i',	// lowercase Roman numerals
+				preg_match('/[IV]/',	$indent_type)	=> 'I',	// uppercase Roman numerals
+				preg_match('/[a-z]/',	$indent_type)	=> 'a',	// lowercase letters
+				preg_match('/[A-Z]/',	$indent_type)	=> 'A',	// uppercase letters
+				default									=> '',
+			};
 
 			if (!$new_indent_type)
 			{
@@ -954,7 +967,7 @@ class WackoFormatter
 				$this->br	= 1;
 				$new_type	= 'i';
 			}
-			else if ($new_indent_type == '-' || $new_indent_type == '*')
+			else if ($new_indent_type == '*')
 			{
 				$opener		= '<ul><li>';
 				$closer		= '</li></ul>' . "\n";
