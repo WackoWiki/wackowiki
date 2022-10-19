@@ -17,7 +17,7 @@
 /**
  * This package requires HTMLSax3 package
  */
-require_once(XML_HTMLSAX3 . 'HTMLSax3.php');
+require_once XML_HTMLSAX3 . 'HTMLSax3.php';
 
 /**
  * HTML_Safe Parser
@@ -429,7 +429,7 @@ class SafeHTML
 			return true;
 		}
 
-		if (in_array($name, $this->deleteTags)
+		if (    in_array($name, $this->deleteTags)
 			&& !in_array($name, $this->allowTags)
 		)
 		{

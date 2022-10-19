@@ -10,7 +10,8 @@ if (!defined('IN_WACKO'))
 // import the Hashids class into the global namespace
 use Hashids\Hashids;
 
-if ($this->db->show_permalink == 1 || ($this->db->show_permalink == 2 && $this->get_user()) )
+if (    $this->db->show_permalink == 1
+	|| ($this->db->show_permalink == 2 && $this->get_user()) )
 {
 	$hashids = new Hashids($this->db->hashid_seed);
 
