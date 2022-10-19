@@ -220,7 +220,7 @@ class UriRouter
 						break;	// fail - unset var
 					}
 
-					// pre-comaprison func
+					// pre-comparison func
 					switch ($func)
 					{
 						case 'int':
