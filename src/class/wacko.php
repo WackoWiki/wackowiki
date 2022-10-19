@@ -3181,7 +3181,15 @@ class Wacko
 			{
 				if (is_string($i))
 				{
-					$param = Ut::qencode($i, $param);
+					// skip rfc3986 encode for 'page' -> allows IRI format for tag (rewrite_mode off)
+					if ($i == 'page')
+					{
+						$param = $i . '=' . $param;
+					}
+					else
+					{
+						$param = Ut::qencode($i, $param);
+					}
 				}
 				else if (($j = strpos($param, '#')) !== false)
 				{
