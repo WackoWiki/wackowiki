@@ -44,5 +44,6 @@ if (    $this->db->show_permalink == 1
 
 	// dbg('hashiding', $ids, '=>', $id);
 
-	$tpl->url = $this->href('', $id, '', '', '', false);
+	$tpl->title	= $this->_t($version ? 'PermaLinkTip' : 'PermaLink0Tip');
+	$tpl->url	= $this->href('', $id, '', '', '', false);
 }
