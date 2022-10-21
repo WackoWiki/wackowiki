@@ -5,7 +5,10 @@ if (!defined('IN_WACKO'))
 	exit;
 }
 
-// {{hashid}}
+// {{hashid version=0|1}}
+
+// set defaults
+$version ??= 1;
 
 // import the Hashids class into the global namespace
 use Hashids\Hashids;
@@ -15,7 +18,11 @@ if (    $this->db->show_permalink == 1
 {
 	$hashids = new Hashids($this->db->hashid_seed);
 
-	if (isset($this->page['version_id']))
+	if (!$version)
+	{
+		$version_id = 0;
+	}
+	else if (isset($this->page['version_id']))
 	{
 		$version_id = $this->page['version_id'];
 	}
