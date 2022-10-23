@@ -197,7 +197,7 @@ if ($this->has_access('read'))
 					$tpl->class		= $class;
 					$tpl->version	= $r['version_id'];
 					$tpl->modified	= $r['modified'];
-					$tpl->username	= $r['user_name'];
+					$tpl->username	= $r['user_name'] ?: $this->_t('Guest');
 					$tpl->editnote	= $r['edit_note'] ?: null;
 				}
 
