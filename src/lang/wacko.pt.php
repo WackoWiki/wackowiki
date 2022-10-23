@@ -143,6 +143,7 @@ $wacko_translation = [
 	'JabberLink'				=> 'Chat via XMPP (Jabber client launch)',
 	'PermaLink'					=> 'Hiperligação permanente',
 	'PermaLinkTip'				=> 'Hiperligação permanente para esta revisão da página',
+	'PermaLink0Tip'				=> 'Hiperligação permanente desta página',
 
 	'ShowTip'					=> 'Clique para voltar ao modo ver',
 	'ShowText'					=> 'Ver',
