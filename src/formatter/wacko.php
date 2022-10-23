@@ -12,7 +12,7 @@ $parser	= new WackoFormatter($this);
 
 $this->header_count = 0;
 
-$text	= preg_replace_callback($parser->NOTLONGREGEXP, [&$parser, 'wacko_preprocess'], $text);
+$text	= preg_replace_callback($parser->PRE_REGEX, [&$parser, 'wacko_preprocess'], $text);
 $texts	= explode('<!--escaped-->', $text);
 $wtext	= $texts[0];
 
@@ -21,8 +21,8 @@ for ($i = 2; $i < count($texts); $i = $i + 2)
 	$wtext = $wtext . "\u{00FE}\u{00A6}" . $texts[$i];
 }
 
-$wtext	= preg_replace_callback($parser->MOREREGEXP, [&$parser, 'wacko_middleprocess'], $wtext);
-$wtext	= preg_replace_callback($parser->LONGREGEXP, [&$parser, 'wacko_callback'], $wtext);
+$wtext	= preg_replace_callback($parser->MIDDLE_REGEX, [&$parser, 'wacko_middleprocess'], $wtext);
+$wtext	= preg_replace_callback($parser->LONG_REGEX, [&$parser, 'wacko_callback'], $wtext);
 $wtexts	= explode("\u{00FE}\u{00A6}", $wtext);
 $text	= '';
 
@@ -55,7 +55,7 @@ if (!empty($parser->auto_fn['content']))
 
 	foreach ($parser->auto_fn['content'] as $fn_no => $fn)
 	{
-		$footnote	 =	preg_replace_callback($parser->LONGREGEXP, [&$parser, 'wacko_callback'], $fn);
+		$footnote	 =	preg_replace_callback($parser->LONG_REGEX, [&$parser, 'wacko_callback'], $fn);
 		$footnotes	.=	'<dt>[<a title="footnote ' . $fn_no . ' ref" href="#footnote-' . $fn_no . '-ref">' . $fn_no . "</a>]</dt>\n" .
 							'<dd id="footnote-' . $fn_no . '">' . $footnote . "</dd>\n";
 	}
