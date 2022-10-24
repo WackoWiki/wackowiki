@@ -40,7 +40,7 @@ if ($this->has_access('read'))
 	{
 		$this->http->status(404);
 
-		$message = $this->_t('DoesNotExists') . ' ' . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', 1)) : '');
+		$message = $this->_t('DoesNotExists') . ' ' . ( $this->has_access('create') ?  Ut::perc_replace($this->_t('PromptCreate'), $this->href('edit', '', '', true)) : '');
 		$tpl->n_message = $this->show_message($message, 'notice', false);
 	}
 	else
@@ -160,8 +160,8 @@ if ($this->has_access('read'))
 
 				if (array_key_exists($key + 1, $revisions))
 				{
-					$tpl->prev_href	= $this->href('', '', ['revision_id' => $revisions[$key + 1]['revision_id']]);
-					$tpl->prev_diff	= $this->href('diff', '', ['a' => $revisions[$key + 1]['revision_id'], 'b' => $this->page['revision_id'], 'diffmode' => $diffmode]);
+					$tpl->prev_href		= $this->href('', '', ['revision_id' => $revisions[$key + 1]['revision_id']]);
+					$tpl->prev_diff		= $this->href('diff', '', ['a' => $revisions[$key + 1]['revision_id'], 'b' => $this->page['revision_id'], 'diffmode' => $diffmode]);
 				}
 
 				if (array_key_exists($key, $revisions))
@@ -172,8 +172,8 @@ if ($this->has_access('read'))
 
 				if (array_key_exists($key - 1, $revisions))
 				{
-					$tpl->next_href	= $this->href('', '', ['revision_id' => $revisions[$key - 1]['revision_id']]);
-					$tpl->next_diff	= $this->href('diff', '', ['a' => $this->page['revision_id'], 'b' => $revisions[$key - 1]['revision_id'], 'diffmode' => $diffmode]);
+					$tpl->next_href		= $this->href('', '', ['revision_id' => $revisions[$key - 1]['revision_id']]);
+					$tpl->next_diff		= $this->href('diff', '', ['a' => $this->page['revision_id'], 'b' => $revisions[$key - 1]['revision_id'], 'diffmode' => $diffmode]);
 				}
 
 				// dropdown navigation
@@ -282,8 +282,9 @@ else
 
 // show category tags
 if ($this->forum
-	|| ($this->has_access('read') && $this->page && $this->db->footer_tags == 1
-	|| ($this->db->footer_tags == 2 && $this->get_user())))
+	|| ($this->has_access('read') && $this->page
+		&&  $this->db->footer_tags == 1
+		|| ($this->db->footer_tags == 2 && $this->get_user())))
 {
 	if ($categories = $this->action('categories', ['list' => 0, 'nomark' => 1, 'label' => 0], 1))
 	{
@@ -318,13 +319,16 @@ if ($this->method == 'show' && (isset($this->page['latest']) && $this->page['lat
 	if (!isset($this->db->footer_inside))
 	{
 		// files code starts
-		if ($this->db->footer_files == 1 || ($this->db->footer_files == 2 && $this->get_user()))
+		if (    $this->db->footer_files == 1
+			|| ($this->db->footer_files == 2 && $this->get_user()))
 		{
 			require_once Ut::join_path(HANDLER_DIR, 'page/_files.php');
 		}
 
 		// comments form output starts
-		if (($this->db->footer_comments == 1 || ($this->db->footer_comments == 2 && $this->get_user()) ) && $this->user_allowed_comments())
+		if ((   $this->db->footer_comments == 1
+			|| ($this->db->footer_comments == 2 && $this->get_user()) )
+			&& $this->user_allowed_comments())
 		{
 			require_once Ut::join_path(HANDLER_DIR, 'page/_comments.php');
 		}
