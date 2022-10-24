@@ -3364,7 +3364,7 @@ class Wacko
 	// parse off [?|&][caption|clear|direct|nolink|linkonly|right|left|20x50] arguments from file:[/|!/|../]image.png?arg1&arg2=
 	function parse_media_param($file_name): array
 	{
-		//split into src and parameters (using the questionmark)
+		// split into src and parameters (using the questionmark)
 		$pos = mb_strrpos($file_name, '?');
 
 		if($pos !== false)
@@ -3426,13 +3426,13 @@ class Wacko
 			$linking = 'meta';
 		}
 
-		//get caption command
+		// get caption command
 		if (preg_match('/(caption)/i', $param))
 		{
 			$caption = 'caption'; // true / caption + license
 		}
 
-		//get clear command
+		// get clear command
 		if (preg_match('/(clear)/i', $param))
 		{
 			$clear = 'clear'; // true / clear float
@@ -3457,11 +3457,11 @@ class Wacko
 	* @param string		$tag		Link
 	* @param string		$text		Link text
 	* @param bool		$track		Track this link. Optional, default is TRUE
-	* @param bool		$img_url
+	* @param int		$media_url
 	*
 	* @return string	Wrapped link
 	*/
-	function pre_link($tag, $text = '', $track = 1, $media_url = 0): string
+	function pre_link($tag, $text = '', $track = true, $media_url = 0): string
 	{
 		if (preg_match('/^[\!\.' . $this->lang['ALPHANUM_P'] . ']+$/u', $tag))
 		{
@@ -7604,13 +7604,13 @@ class Wacko
 		}
 
 		if ($comments = $this->db->load_all(
-		"SELECT a.page_id " .
-		"FROM " . $this->prefix . "page a " .
-			"INNER JOIN " . $this->prefix . "page b ON (a.comment_on_id = b.page_id) " .
-		"WHERE b.tag = " . $this->db->q($tag) . " " .
-			($cluster === true
-				? "OR b.tag LIKE " . $this->db->q($tag . '/%') . " "
-				: "") )
+			"SELECT a.page_id " .
+			"FROM " . $this->prefix . "page a " .
+				"INNER JOIN " . $this->prefix . "page b ON (a.comment_on_id = b.page_id) " .
+			"WHERE b.tag = " . $this->db->q($tag) . " " .
+				($cluster === true
+					? "OR b.tag LIKE " . $this->db->q($tag . '/%') . " "
+					: "") )
 			)
 		{
 			foreach ($comments as $comment)
@@ -8244,13 +8244,14 @@ class Wacko
 				{
 					$list .= ' ';
 
-					if ($p != $page)
-					{
-						$list .= $make_link($p);
-					}
-					else // don't make link for the current page
+					// don't make link for the current page
+					if ($p == $page)
 					{
 						$list .= '<strong>' . $p . '</strong>';
+					}
+					else
+					{
+						$list .= $make_link($p);
 					}
 
 					if ($p != $pages)

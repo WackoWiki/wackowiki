@@ -189,9 +189,8 @@ if ($this->has_access('read'))
 
 			$tpl->wikiedit = $this->db->base_path . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 
-			$tpl->leave();
+			$tpl->leave(); // end comment form
 		}
-		// end comment form
 	}
 	else
 	{
@@ -205,7 +204,7 @@ if ($this->has_access('read'))
 		{
 			$have_comments = $this->_t('Comments1');
 		}
-		else
+		else if ($c > 1)
 		{
 			$have_comments = Ut::perc_replace($this->_t('CommentsN'), $c);
 		}

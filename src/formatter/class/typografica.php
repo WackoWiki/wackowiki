@@ -14,11 +14,11 @@ class Typografica
 	public $p_prefix	= '<p class="typo">';
 	public $p_postfix	= '</p>';
 	public $asoft		= true;
-	public $indent1	= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
-	public $indent2	= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
+	public $indent1		= 'image/spacer.png" width=25 height=1 border=0 alt="">'; // <->
+	public $indent2		= 'image/spacer.png" width=50 height=1 border=0 alt="">'; // <-->
 	public $fixed_size	= 80; // maximum width
 	public $ignore		= '/(<!--notypo-->.*?<!--\/notypo-->)/usi'; // regex to be ignored
-	public $de_nobr	= true;
+	public $de_nobr		= true;
 
 	public $phonemasks	= [
 							[
