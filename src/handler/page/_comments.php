@@ -205,7 +205,7 @@ if ($this->has_access('read'))
 		{
 			$have_comments = $this->_t('Comments1');
 		}
-		else
+		else if ($c > 1)
 		{
 			$have_comments = Ut::perc_replace($this->_t('CommentsN'), $c);
 		}
