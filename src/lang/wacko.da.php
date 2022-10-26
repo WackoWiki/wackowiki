@@ -155,6 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'En kommentar til denne side.',
 	'CommentsN'					=> 'Der er %1 kommentarer til denne side.',
 	'Comments'					=> 'Kommentarer',
+	'CommentHint'				=> 'Log ind eller opret en konto for at skrive en kommentar.',
 	'CommentEdited'				=> 'redigeret',
 	'Links'						=> 'Links',
 	'Version'					=> 'Version',

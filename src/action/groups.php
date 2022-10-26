@@ -9,11 +9,8 @@ if (!defined('IN_WACKO'))
 $max			= (int) @$max;
 $logged_in		= $this->get_user();
 
-$order			= '';
 $param			= [];
 $groups			= '';
-$usergroups		= '';
-$error			= '';
 
 // display usergroup profile
 if ($group = @$_GET['profile'])
@@ -163,7 +160,7 @@ else
 		foreach ($groups as $usergroup)
 		{
 			$tpl->profile	= $this->href('', '', ['profile' => $usergroup['group_name']]);
-			$tpl->group	= $usergroup;
+			$tpl->group		= $usergroup;
 
 			if ($this->get_user())
 			{

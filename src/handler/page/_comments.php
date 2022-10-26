@@ -189,9 +189,12 @@ if ($this->has_access('read'))
 
 			$tpl->wikiedit = $this->db->base_path . Ut::join_path(IMAGE_DIR, 'wikiedit') . '/';
 
-			$tpl->leave();
+			$tpl->leave(); // end comment form
 		}
-		// end comment form
+		else if ($this->forum)
+		{
+			#$tpl->h_hint = $this->show_message($this->_t('CommentHint'), 'notice', false);
+		}
 	}
 	else
 	{

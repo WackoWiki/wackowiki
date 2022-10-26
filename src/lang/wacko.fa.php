@@ -155,6 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'خواندن نظر (1 نظر)',
 	'CommentsN'					=> 'خواندن نظرات (%1 نظر)',
 	'Comments'					=> 'دیدگاه',
+	'CommentHint'				=> 'Log in or create an account to post a comment.',
 	'CommentEdited'				=> 'ویرایش شده',
 	'Links'						=> 'پیوندها',
 	'Version'					=> 'نسخه',

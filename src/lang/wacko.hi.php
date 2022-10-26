@@ -155,6 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'टिप्पणी पढ़ें (1 टिप्पणी)',
 	'CommentsN'					=> 'टिप्पणियाँ पढ़ें  (%1 टिप्पणियाँ)',
 	'Comments'					=> 'टिप्पणियाँ',
+	'CommentHint'				=> 'Log in or create an account to post a comment.',
 	'CommentEdited'				=> 'edited',
 	'Links'						=> 'लिंक',
 	'Version'					=> 'संस्करण',

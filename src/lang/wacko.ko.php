@@ -155,6 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> '댓글 읽기 (댓글 1 개)',
 	'CommentsN'					=> '댓글 읽기 (%1 개의 댓글)',
 	'Comments'					=> '댓글',
+	'CommentHint'				=> 'Log in or create an account to post a comment.',
 	'CommentEdited'				=> '수정됨',
 	'Links'						=> '링크',
 	'Version'					=> '버전',
