@@ -3166,7 +3166,10 @@ class Wacko
 		}
 		else
 		{
-			$params['page'] = $this->mini_href($method, $tag, $alter, $encode);
+			$params['page']	= $this->mini_href($method, $tag, $alter, $encode);
+
+			// reverse order to have 'page' always as first parameter
+			$params			= array_reverse($params);
 		}
 
 		if ($params)
