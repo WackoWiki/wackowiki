@@ -155,7 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'Er is één reactie op deze pagina.',
 	'CommentsN'					=> 'Er zijn %1 reacties op deze pagina.',
 	'Comments'					=> 'Reacties',
-	'CommentHint'				=> 'Log in of maak een account aan om een reactie te plaatsen.',
+	'CommentHint'				=> '<a href="%1">Log in</a> of <a href="%2">maak een account</a> aan om een reactie te plaatsen.',
 	'CommentEdited'				=> 'bewerkte',
 	'Links'						=> 'Links',
 	'Version'					=> 'Versie',

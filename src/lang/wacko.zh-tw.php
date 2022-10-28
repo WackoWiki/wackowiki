@@ -155,7 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> '閱讀評論（1則評論）',
 	'CommentsN'					=> '閱讀評論（%1則評論）',
 	'Comments'					=> '回應',
-	'CommentHint'				=> 'Log in or create an account to post a comment.',
+	'CommentHint'				=> '<a href="%1">登錄</a>或<a href="%2">創建帳戶</a>發表評論。',
 	'CommentEdited'				=> '編輯',
 	'Links'						=> '連接',
 	'Version'					=> '版本',

@@ -155,7 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'C\'è un commento per questa pagina.',
 	'CommentsN'					=> 'Ci sono %1 commenti su questa pagina.',
 	'Comments'					=> 'Commenti',
-	'CommentHint'				=> 'Effettuare il login o creare un account per inviare un commento.',
+	'CommentHint'				=> '<a href="%1">Effettuare il login</a> o <a href="%2">creare un account</a> per inviare un commento.',
 	'CommentEdited'				=> 'modificato',
 	'Links'						=> 'Links',
 	'Version'					=> 'Versione',

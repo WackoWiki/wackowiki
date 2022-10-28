@@ -155,7 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> '查看评论 （1 评论）',
 	'CommentsN'					=> '查看评论 （%1 评论）',
 	'Comments'					=> '评论',
-	'CommentHint'				=> '登录或创建一个账户来发表评论。',
+	'CommentHint'				=> '<a href="%1">登录</a>或<a href="%2">创建一个帐户</a>以发表评论。',
 	'CommentEdited'				=> '编辑',
 	'Links'						=> '链接',
 	'Version'					=> '版本',

@@ -155,7 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'Sellel lehel on üks kommentaar.',
 	'CommentsN'					=> 'Sellel lehel on %1 kommentaare.',
 	'Comments'					=> 'Kommentaarid',
-	'CommentHint'				=> 'Kommentaaride postitamiseks logige sisse või looge konto.',
+	'CommentHint'				=> '<a href="%1">Logi sisse</a> või <a href="%2">Loo konto</a>, et kommenteerida.',
 	'CommentEdited'				=> 'toimetatud',
 	'Links'						=> 'Links',
 	'Version'					=> 'Versioon',
