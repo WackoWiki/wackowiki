@@ -155,6 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'Megjegyzés olvasása (1 megjegyzés)',
 	'CommentsN'					=> 'Megjegyzések olvasása (%1 megjegyzés)',
 	'Comments'					=> 'Hozzászólások',
+	'CommentHint'				=> '<a href="%1">Bejelentkezés</a> vagy <a href="%2">Fiók létrehozása</a> a hozzászóláshoz.',
 	'CommentEdited'				=> 'szerkesztette',
 	'Links'						=> 'Hivatkozások',
 	'Version'					=> 'Verzió',

@@ -3128,7 +3128,10 @@ class Wacko
 		}
 		else
 		{
-			$params['page'] = $this->mini_href($method, $tag, $alter, $encode);
+			$params['page']	= $this->mini_href($method, $tag, $alter, $encode);
+
+			// reverse order to have 'page' always as first parameter
+			$params			= array_reverse($params);
 		}
 
 		if ($params)
@@ -5164,16 +5167,16 @@ class Wacko
 	*
 	* @param string		$action					Action name
 	* @param array		$params					Action parameters
-	* @param bool		$force_link_tracking	If value is TRUE then all links in the action will be tracked in the links_* tables.
+	* @param bool		$link_tracking			If value is TRUE then all links in the action will be tracked in the links_* tables.
 	* 											Optional, default value is FALSE.
 	* @return string	Result of action
 	*/
-	function action($action, $params = [], $force_link_tracking = 0): string
+	function action($action, $params = [], $link_tracking = 0): string
 	{
 		$action = mb_strtolower(trim($action));
 		$errmsg = '<em>' . $this->_t('UnknownAction') . ' <code>' . $action . '</code></em>';
 
-		if (!$force_link_tracking)
+		if (!$link_tracking)
 		{
 			$this->stop_link_tracking();
 		}

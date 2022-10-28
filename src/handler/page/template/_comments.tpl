@@ -42,6 +42,11 @@
 				</ol>
 			=]
 			[ '' pagination '' ]
+			[= h _ =
+				<div class="commentform" id="commenthint">
+				[ ' hint ' ]
+				</div>
+			=]
 			[= f _ =
 				<div class="commentform" id="commentform">
 					[= p _ =

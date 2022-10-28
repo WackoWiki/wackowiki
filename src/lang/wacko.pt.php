@@ -155,6 +155,7 @@ $wacko_translation = [
 	'Comments1'					=> 'Página com UM comentário.',
 	'CommentsN'					=> 'Há %1 comentários nesta página.',
 	'Comments'					=> 'Comentários',
+	'CommentHint'				=> '<a href="%1">Inicie sessão</a> ou <a href="%2">crie uma conta</a> para publicar um comentário.',
 	'CommentEdited'				=> 'editado',
 	'Links'						=> 'Links',
 	'Version'					=> 'Versão',

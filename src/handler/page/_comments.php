@@ -191,6 +191,14 @@ if ($this->has_access('read'))
 
 			$tpl->leave(); // end comment form
 		}
+		else if ($this->forum)
+		{
+			$message = Ut::perc_replace($this->_t('CommentHint'),
+				$this->href('', $this->db->login_page),
+				$this->href('', $this->db->registration_page)
+			);
+			$tpl->h_hint = $this->show_message($message, 'notice', false);
+		}
 	}
 	else
 	{

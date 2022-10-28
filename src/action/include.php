@@ -16,7 +16,10 @@ if (!defined('IN_WACKO'))
 	}}
 */
 
-if (!isset($page))			return;
+if (!isset($page))
+{
+	return;
+}
 
 if (!isset($nomark))		$nomark			= 0;
 if (!isset($nowarning))		$nowarning		= 0;
@@ -69,7 +72,7 @@ else
 		else
 		{
 			// recompile body, build HTML body
-			$body = $this->compile_body($inc_page['body'], null, false, false);
+			$body = $this->compile_body($inc_page['body'], null, false, false) ?? '';
 		}
 
 		// cleaning up

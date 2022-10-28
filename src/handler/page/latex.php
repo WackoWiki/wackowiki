@@ -46,7 +46,6 @@ if ($this->has_access('read'))
 		echo '<pre class="code">' . $data . '</pre>';
 
 		$this->current_context--;
-
 	}
 }
 else
