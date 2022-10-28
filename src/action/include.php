@@ -16,7 +16,10 @@ if (!defined('IN_WACKO'))
 	}}
 */
 
-if (!isset($page))			return;
+if (!isset($page))
+{
+	return;
+}
 
 // set defaults
 $first_anchor	??= '';
