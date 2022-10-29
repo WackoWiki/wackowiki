@@ -15,6 +15,10 @@ if (isset($options['post_wacko']))
 	// parsing links and actions
 	include Ut::join_path(FORMATTER_DIR, 'post_wacko.php');
 }
+else if (isset($options['tpl']))
+{
+	return $text;
+}
 else
 {
 	echo $text;

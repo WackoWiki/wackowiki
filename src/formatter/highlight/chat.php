@@ -37,28 +37,22 @@ foreach($matches as $match)
 	}
 }
 
-// HTML output:
+$type = match($options['type']){
+	'div'	=> 'd',
+	'table'	=> 't',
+};
+
+$tpl->enter($type . '_n_');
+
 foreach($matches as $log)
 {
-	if ($options['type'] == 'div')
-	{
-		$output .=
-			'<div class="chat-u'. $names[$log[3]] .'">' .
-				'<span class="chat-time">[' . $log[1] . ']</span> ' .
-				'<span class="chat-user">' . $log[3] . '</span> ' .
-				'<span class="chat-text">' . $log[5] . '</span>' .
-			'</div>';
-	}
-	else if ($options['type'] == 'table')
-	{
-		$output .=
-			'<tr class="chat-u'. $names[$log[3]] .'">' .
-				'<td class="chat-user">' . $log[3] . '</td>' .
-				'<td class="chat-text">' . $log[5] . '</td>' .
-				'<td class="chat-time">' . $log[1] . '</td>' .
-			'</tr>';
-	}
+	$tpl->name	= $names[$log[3]];
+	$tpl->log1	= $log[1];
+	$tpl->log3	= $log[3];
+	$tpl->log5	= $log[5];
 }
+
+$tpl->leave(); // d_ / t_
 
 // replace \n to <br> to keep multiline messages
 $output = str_replace("\n", '<br>', $output);
@@ -74,15 +68,5 @@ if ($options['user'])
 		$people .= $name . ', ';
 	}
 
-	echo '<p><b>' . trim($people, ', ') . ':</b></p>';
+	$tpl->u_people = trim($people, ', ');
 }
-
-if ($options['type'] == 'div')
-{
-	echo '<div class="chat">' . $output . '</div>';
-}
-else if ($options['type'] == 'table')
-{
-	echo '<div><table class="chat">' . $output . '</table></div>';
-}
-

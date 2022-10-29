@@ -4648,7 +4648,7 @@ class Wacko
 	function sanitize_username($user_name): string
 	{
 		$user_name = Ut::strip_spaces($user_name);
-		// strip \-\_\'\.\/\\
+		// strip -_'./\
 		$user_name = str_replace(['-', '.', '/', "'", '\\', '_'], '', $user_name);
 
 		return Ut::normalize($user_name);
@@ -7083,7 +7083,7 @@ class Wacko
 		$this->hide_revisions =
 			($this->page
 			&& !$this->is_admin()
-			&& ((   $this->db->hide_revisions == 1 && !$this->get_user())
+			&& (   ($this->db->hide_revisions == 1 && !$this->get_user())
 				|| ($this->db->hide_revisions == 2 && !$this->is_owner())));
 
 		// forum page
